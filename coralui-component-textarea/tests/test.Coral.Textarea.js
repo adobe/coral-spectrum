@@ -25,7 +25,7 @@ describe('Coral.Textarea', function() {
     var el;
 
     beforeEach(function() {
-      el = helpers.build(new Coral.Textarea());
+      el = new Coral.Textarea();
     });
 
     afterEach(function() {
@@ -59,6 +59,7 @@ describe('Coral.Textarea', function() {
       });
 
       it('should increase the height automatically if variant=quiet', function() {
+        helpers.build(el);
         el.variant = Coral.Textarea.variant.QUIET;
         var initialHeight = el.getBoundingClientRect().height;
 
@@ -70,6 +71,7 @@ describe('Coral.Textarea', function() {
       });
 
       it('should decrease the height automatically if variant=quiet', function() {
+        helpers.build(el);
         el.variant = Coral.Textarea.variant.QUIET;
         el.value = '\n\n\n';
         el.trigger('input');

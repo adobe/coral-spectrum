@@ -58,9 +58,10 @@ const CLASSNAME = 'coral3-ButtonGroup';
 /**
  @class Coral.ButtonGroup
  @classdesc A ButtonGroup component
- @extends Coral.Component
- @extends Coral.mixin.formField
  @htmltag coral-buttongroup
+ @extends HTMLElement
+ @extends Coral.mixin.component
+ @extends Coral.mixin.formField
  */
 class ButtonGroup extends FormField(Component(HTMLElement)) {
   constructor() {

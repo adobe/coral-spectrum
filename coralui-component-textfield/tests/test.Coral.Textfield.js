@@ -25,7 +25,7 @@ describe('Coral.Textfield', function() {
     var el;
 
     beforeEach(function() {
-      el = helpers.build(new Coral.Textfield());
+      el = new Coral.Textfield();
     });
 
     afterEach(function() {

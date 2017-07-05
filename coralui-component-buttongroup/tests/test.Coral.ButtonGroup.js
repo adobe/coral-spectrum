@@ -69,7 +69,7 @@ describe('Coral.ButtonGroup', function() {
     describe('#items', function() {
       
       beforeEach(function() {
-        el = helpers.build(getSimpleButtonGroupElement());
+        el = getSimpleButtonGroupElement();
       });
       
       afterEach(function() {
@@ -96,6 +96,7 @@ describe('Coral.ButtonGroup', function() {
       });
       
       it('should remove all the items with clear()', function() {
+        helpers.build(el);
         // we remove all the items
         el.items.clear();
         
@@ -182,7 +183,6 @@ describe('Coral.ButtonGroup', function() {
       
       beforeEach(function() {
         el = getSimpleButtonGroupElement();
-        helpers.target.appendChild(el);
       });
       
       afterEach(function() {
@@ -205,18 +205,15 @@ describe('Coral.ButtonGroup', function() {
         expect(el._elements.nativeSelect.options.length).to.equal(3);
         el.selectionMode = 'none';
         
-        
         // checks what still has the selected attribute
         var selectedButtons = el.querySelectorAll('button[is=coral-button][selected]');
         
         expect(el._elements.nativeSelect.options.length).to.equal(0);
         expect(selectedButtons.length).to.equal(0);
-        
       });
       
       it('should clear the entire selection when selectionMode is set back to none', function() {
         el.selectionMode = 'multiple';
-        
         
         expect(el._elements.nativeSelect.options.length).to.equal(3);
         
@@ -226,13 +223,11 @@ describe('Coral.ButtonGroup', function() {
           item.selected = true;
         });
         
-        
         // we make sure all the buttons were selected
         expect(el.values).to.deep.equal(['item1', 'item2', 'item3']);
         
         // we clear the selection. this should cause all buttons to be deselected
         el.selectionMode = 'none';
-        
         
         // querries the dom for buttons with the selected attribute
         var selectedButtons = el.querySelectorAll('button[is=coral-button][selected]');
@@ -240,7 +235,6 @@ describe('Coral.ButtonGroup', function() {
         
         // all options must have been removed
         expect(el._elements.nativeSelect.options.length).to.equal(0);
-        
       });
     });
     
@@ -293,7 +287,6 @@ describe('Coral.ButtonGroup', function() {
       });
       
       it('should submit nothing when selectionMode = none', function() {
-        
         el.name = 'buttongroup';
         item2.setAttribute('selected', '');
         expect(el.selectionMode).to.equal(Coral.ButtonGroup.selectionMode.NONE);
@@ -356,7 +349,6 @@ describe('Coral.ButtonGroup', function() {
         // we set the name and the selection mode
         el.selectionMode = Coral.ButtonGroup.selectionMode.SINGLE;
         el.name = 'test';
-        
         
         expect(el._elements.nativeSelect.options.length).to.equal(3);
         
@@ -447,7 +439,6 @@ describe('Coral.ButtonGroup', function() {
     describe('#disabled', function() {
       beforeEach(function() {
         el = getSimpleButtonGroupElement();
-        helpers.target.appendChild(el);
       });
       
       it('should disable the component and items as well', function() {
@@ -463,7 +454,6 @@ describe('Coral.ButtonGroup', function() {
     describe('#readOnly', function() {
       beforeEach(function() {
         el = getSimpleButtonGroupElement();
-        helpers.target.appendChild(el);
       });
       
       afterEach(function() {
@@ -522,7 +512,6 @@ describe('Coral.ButtonGroup', function() {
       
       beforeEach(function() {
         el = getSimpleButtonGroupElement();
-        helpers.target.appendChild(el);
       });
       
       afterEach(function() {
@@ -703,7 +692,6 @@ describe('Coral.ButtonGroup', function() {
       
       beforeEach(function() {
         el = getSimpleButtonGroupElement();
-        helpers.target.appendChild(el);
       });
       
       afterEach(function() {
@@ -764,13 +752,11 @@ describe('Coral.ButtonGroup', function() {
       
       beforeEach(function() {
         el = getSimpleButtonGroupElement();
-        helpers.target.appendChild(el);
       });
       
       afterEach(function() {
         el = item1 = item2 = item3 = null;
       });
-      
       
       it('should default to an empty array', function() {
         expect(el.selectedItems).to.deep.equal([]);
@@ -1083,7 +1069,6 @@ describe('Coral.ButtonGroup', function() {
       var items = el.items.getAll();
       items[2].click();
       
-      
       expect(el.value).to.equal('');
       expect(el.selectedItems.length).to.equal(0);
       expect(items[2].hasAttribute('selected')).to.be.false;
@@ -1093,7 +1078,6 @@ describe('Coral.ButtonGroup', function() {
       const el = helpers.build(window.__html__['Coral.ButtonGroup.selectionMode.single.html']);
       var items = el.items.getAll();
       items[2].click();
-      
       
       expect(el.value).to.equal('item3');
       expect(el.selectedItems.length).to.equal(1);
@@ -1208,7 +1192,6 @@ describe('Coral.ButtonGroup', function() {
         return !button.disabled;
       });
       
-      
       buttons[0].focus();
       expect(buttons[0].selected).to.be.true;
       expect(buttons[0].getAttribute('aria-checked')).to.equal('true');
@@ -1241,7 +1224,6 @@ describe('Coral.ButtonGroup', function() {
         return !button.disabled;
       });
       var button;
-      
       
       button = el.items._getFirstSelectable();
       button.focus();

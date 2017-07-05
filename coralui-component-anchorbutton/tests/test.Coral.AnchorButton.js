@@ -342,20 +342,20 @@ describe('Coral.AnchorButton', function() {
     describe('#icon', function() {
 
       it('should default to null', function() {
-        var button = helpers.build(new Coral.AnchorButton());
+        var button = new Coral.AnchorButton();
         expect(button.icon).to.equal('');
         expect(button._getIconElement().parentNode).to.be.null;
       });
 
       it('should set the new icon', function() {
-        var button = helpers.build(new Coral.AnchorButton());
+        var button = new Coral.AnchorButton();
         button.icon = 'add';
         expect(button.hasAttribute('icon')).to.be.false;
         expect(button._getIconElement().classList.contains('coral-Icon--add')).to.be.true;
       });
 
       it('should convert everything to string', function() {
-        var button = helpers.build(new Coral.AnchorButton());
+        var button = new Coral.AnchorButton();
         button.icon = 5;
         expect(button.icon).to.equal('5');
         button.icon = false;
@@ -368,7 +368,7 @@ describe('Coral.AnchorButton', function() {
       });
 
       it('should remove the icon with empty string', function() {
-        var button = helpers.build(new Coral.AnchorButton());
+        var button = new Coral.AnchorButton();
         button.icon = 'add';
         expect(button._getIconElement().icon).to.equal('add');
         button.icon = '';
@@ -377,7 +377,7 @@ describe('Coral.AnchorButton', function() {
       });
 
       it('should remove the icon with null', function() {
-        var button = helpers.build(new Coral.AnchorButton());
+        var button = new Coral.AnchorButton();
         button.icon = 'add';
         expect(button._getIconElement().icon).to.equal('add');
         button.icon = null;
@@ -386,7 +386,7 @@ describe('Coral.AnchorButton', function() {
       });
 
       it('should remove the icon with undefined', function() {
-        var button = helpers.build(new Coral.AnchorButton());
+        var button = new Coral.AnchorButton();
         button.icon = 'add';
         
         expect(button._getIconElement().icon).to.equal('add');
@@ -399,14 +399,14 @@ describe('Coral.AnchorButton', function() {
     describe('#iconSize', function() {
 
       it('should default to Coral.Icon.size.SMALL', function() {
-        var button = helpers.build(new Coral.AnchorButton());
+        var button = new Coral.AnchorButton();
         button.icon = 'add';
         expect(button.iconSize).to.equal(Coral.Icon.size.SMALL);
         expect(button._getIconElement().size).to.equal(Coral.Icon.size.SMALL);
       });
 
       it('should sync the iconSize correctly', function() {
-        var button = helpers.build(new Coral.AnchorButton());
+        var button = new Coral.AnchorButton();
         button.iconSize = Coral.Icon.size.LARGE;
         button.icon = 'add';
         
@@ -415,14 +415,14 @@ describe('Coral.AnchorButton', function() {
       });
 
       it('should set the new size even if icon is not set', function() {
-        var button = helpers.build(new Coral.AnchorButton());
+        var button = new Coral.AnchorButton();
 
         button.iconSize = Coral.Icon.size.LARGE;
         expect(button.iconSize).to.equal(Coral.Icon.size.LARGE);
       });
 
       it('should set the new size', function() {
-        var button = helpers.build(new Coral.AnchorButton());
+        var button = new Coral.AnchorButton();
 
         button.icon = 'add';
         button.iconSize = Coral.Icon.size.LARGE;
@@ -431,7 +431,7 @@ describe('Coral.AnchorButton', function() {
       });
 
       it('should accept lowercase values', function() {
-        var button = helpers.build(new Coral.AnchorButton());
+        var button = new Coral.AnchorButton();
 
         button.icon = 'add';
         button.iconSize = Coral.Icon.size.LARGE.toLowerCase();
@@ -441,7 +441,7 @@ describe('Coral.AnchorButton', function() {
       });
 
       it('should be set with an attribute', function() {
-        var button = helpers.build(new Coral.AnchorButton());
+        var button = new Coral.AnchorButton();
 
         button.icon = 'add';
 
@@ -452,7 +452,7 @@ describe('Coral.AnchorButton', function() {
       });
 
       it('should discard values not part of the enum', function() {
-        var button = helpers.build(new Coral.AnchorButton());
+        var button = new Coral.AnchorButton();
 
         // this value will be accepted
         button.iconSize = 'XS';
@@ -464,14 +464,14 @@ describe('Coral.AnchorButton', function() {
       });
 
       it('should discard unknonwn attribute', function() {
-        var button = helpers.build(new Coral.AnchorButton());
+        var button = new Coral.AnchorButton();
 
         button.setAttribute('size', 'megalarge');
         expect(button.iconSize).to.equal(Coral.Icon.size.SMALL);
       });
 
       it('should keep the size after the icon is changed', function() {
-        var button = helpers.build(new Coral.AnchorButton());
+        var button = new Coral.AnchorButton();
 
         button.icon = 'add';
         button.iconSize = 'L';

@@ -147,10 +147,15 @@ commons.swapKeysAndValues = function(obj) {
  @function
  @param {Function} callback
  The callback to execute.
+ @deprecated
  */
-commons.nextFrame = (window.requestAnimationFrame || window.webkitRequestAnimationFrame ||
-window.mozRequestAnimationFrame || window.msRequestAnimationFrame ||
-function(callback) {'use strict'; return window.setTimeout(callback, 1000 / 60); }).bind(window);
+commons.nextFrame = function() {
+  console.warn('Coral.commons.nextFrame has been deprecated. Please use window.requestAnimationFrame instead.');
+  
+  return (window.requestAnimationFrame || window.webkitRequestAnimationFrame ||
+  window.mozRequestAnimationFrame || window.msRequestAnimationFrame ||
+  function(callback) {'use strict'; return window.setTimeout(callback, 1000 / 60); }).bind(window);
+};
 
 
 /**
@@ -293,6 +298,7 @@ commons.transitionEnd = function(element, callback) {
    The element that should be watched for ready events.
    @param {Coral.commons~readyCallback} callback
    The callback to call when all components are ready.
+   @deprecated
    */
   commons.ready = function(element, callback) {
     console.warn('Coral.commons.ready has been deprecated. Please use window.customElements.whenDefined(tagName) instead.');

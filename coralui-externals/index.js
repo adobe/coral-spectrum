@@ -3,6 +3,7 @@ import './polyfills/element.closest.js';
 import './polyfills/element.matches.js';
 import './polyfills/element.remove.js';
 import './polyfills/classList-partial-shim.js';
+import './polyfills/requestAnimationFrame.js';
 // Positioning
 import PopperJS from 'popper.js';
 // Eventing

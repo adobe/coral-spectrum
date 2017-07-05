@@ -1,17 +1,19 @@
 import AnchorButton from 'coralui-component-anchorbutton';
 import Button from 'coralui-component-button';
 import ButtonGroup from 'coralui-component-buttongroup';
-import Wait from 'coralui-component-wait';
+import Checkbox from 'coralui-component-checkbox';
 import Icon from 'coralui-component-icon';
-import Textfield from 'coralui-component-textfield';
 import Textarea from 'coralui-component-textarea';
+import Textfield from 'coralui-component-textfield';
+import Wait from 'coralui-component-wait';
 
 export {
   AnchorButton,
   Button,
   ButtonGroup,
-  Wait,
+  Checkbox,
   Icon,
+  Textarea,
   Textfield,
-  Textarea
+  Wait
 }

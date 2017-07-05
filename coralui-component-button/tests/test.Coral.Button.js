@@ -476,20 +476,20 @@ describe('Coral.Button', function() {
     describe('#icon', function() {
 
       it('should default to empty string', function() {
-        var button = helpers.build(new Coral.Button());
+        var button = new Coral.Button();
         expect(button.icon).to.equal('');
         expect(button._getIconElement().parentNode).to.be.null;
       });
 
       it('should set the new icon', function() {
-        var button = helpers.build(new Coral.Button());
+        var button = new Coral.Button();
         button.icon = 'add';
         expect(button.hasAttribute('icon')).to.be.false;
         expect(button._getIconElement().classList.contains('coral-Icon--add')).to.be.true;
       });
 
       it('should convert everything to string', function() {
-        var button = helpers.build(new Coral.Button());
+        var button = new Coral.Button();
         button.icon = 5;
         expect(button.icon).to.equal('5');
 
@@ -504,7 +504,7 @@ describe('Coral.Button', function() {
       });
 
       it('should remove the icon with empty string', function() {
-        var button = helpers.build(new Coral.Button());
+        var button = new Coral.Button();
         button.icon = 'add';
         expect(button._getIconElement().icon).to.equal('add');
 
@@ -514,7 +514,7 @@ describe('Coral.Button', function() {
       });
 
       it('should remove the icon with null', function() {
-        var button = helpers.build(new Coral.Button());
+        var button = new Coral.Button();
         button.icon = 'add';
         expect(button._getIconElement().icon).to.equal('add');
 
@@ -524,7 +524,7 @@ describe('Coral.Button', function() {
       });
 
       it('should remove the icon with undefined', function() {
-        var button = helpers.build(new Coral.Button());
+        var button = new Coral.Button();
         button.icon = 'add';
         expect(button._getIconElement().icon).to.equal('add');
 
@@ -537,14 +537,14 @@ describe('Coral.Button', function() {
     describe('#iconSize', function() {
 
       it('should default to Coral.Icon.size.SMALL', function() {
-        var button = helpers.build(new Coral.Button());
+        var button = new Coral.Button();
         button.icon = 'add';
         expect(button.iconSize).to.equal(Coral.Icon.size.SMALL);
         expect(button._getIconElement().size).to.equal(Coral.Icon.size.SMALL);
       });
 
       it('should sync the iconSize correctly', function() {
-        var button = helpers.build(new Coral.Button());
+        var button = new Coral.Button();
         button.iconSize = Coral.Icon.size.LARGE;
         button.icon = 'add';
         expect(button._getIconElement().size).to.equal(Coral.Icon.size.LARGE);
@@ -552,13 +552,13 @@ describe('Coral.Button', function() {
       });
 
       it('should set the new size even if icon is not set', function() {
-        var button = helpers.build(new Coral.Button());
+        var button = new Coral.Button();
         button.iconSize = Coral.Icon.size.LARGE;
         expect(button.iconSize).to.equal(Coral.Icon.size.LARGE);
       });
 
       it('should set the new size', function() {
-        var button = helpers.build(new Coral.Button());
+        var button = new Coral.Button();
         button.icon = 'add';
         button.iconSize = Coral.Icon.size.LARGE;
         expect(button.iconSize).to.equal(Coral.Icon.size.LARGE);
@@ -566,7 +566,7 @@ describe('Coral.Button', function() {
       });
 
       it('should accept lowercase values', function() {
-        var button = helpers.build(new Coral.Button());
+        var button = new Coral.Button();
         button.icon = 'add';
         button.iconSize = Coral.Icon.size.LARGE.toLowerCase();
         expect(button.iconSize).to.equal(Coral.Icon.size.LARGE);
@@ -575,7 +575,7 @@ describe('Coral.Button', function() {
       });
 
       it('should be set with an attribute', function() {
-        var button = helpers.build(new Coral.Button());
+        var button = new Coral.Button();
         button.icon = 'add';
         button.setAttribute('iconsize', Coral.Icon.size.LARGE);
         expect(button.iconSize).to.equal(Coral.Icon.size.LARGE);
@@ -584,7 +584,7 @@ describe('Coral.Button', function() {
       });
 
       it('should discard values not part of the enum', function() {
-        var button = helpers.build(new Coral.Button());
+        var button = new Coral.Button();
         // this value will be accepted
         button.iconSize = 'XS';
         // all these will be discarded
@@ -595,13 +595,13 @@ describe('Coral.Button', function() {
       });
 
       it('should discard unknonwn attribute', function() {
-        var button = helpers.build(new Coral.Button());
+        var button = new Coral.Button();
         button.setAttribute('size', 'megalarge');
         expect(button.iconSize).to.equal(Coral.Icon.size.SMALL);
       });
 
       it('should keep the size after the icon is changed', function() {
-        var button = helpers.build(new Coral.Button());
+        var button = new Coral.Button();
 
         button.icon = 'add';
         button.iconSize = 'L';
@@ -621,7 +621,7 @@ describe('Coral.Button', function() {
 
     describe('#iconPosition', function() {
       it('should default to left', function() {
-        var button = helpers.build(new Coral.Button());
+        var button = new Coral.Button();
         expect(button.iconPosition).to.equal(Coral.Button.iconPosition.LEFT);
       });
     });
@@ -629,14 +629,14 @@ describe('Coral.Button', function() {
     describe('#selected', function() {
 
       it('should default to false', function() {
-        var button = helpers.build(new Coral.Button());
+        var button = new Coral.Button();
         expect(button.selected).to.be.false;
         expect(button.classList.contains('is-selected')).to.be.false;
         expect(button.hasAttribute('selected')).to.be.false;
       });
 
       it('should be settable', function() {
-        var button = helpers.build(new Coral.Button());
+        var button = new Coral.Button();
         button.selected = true;
         expect(button.selected).to.be.true;
         expect(button.hasAttribute('selected')).to.be.true;

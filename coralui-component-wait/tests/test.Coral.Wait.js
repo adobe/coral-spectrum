@@ -142,56 +142,46 @@ describe('Coral.Wait', function() {
   describe('API', function() {
     describe('#centered', function() {
       it('should default to false', function() {
-        var wait = helpers.build(new Coral.Wait());
+        var wait = new Coral.Wait();
         
         expect(wait.centered).to.be.false;
-        expect(wait.className).to.equal('coral3-Wait');
-        expect(wait.classList.contains('coral3-Wait--centered')).to.be.false;
-        expect(wait.classList.contains('coral3-Wait')).to.be.true;
       });
       
       it('should be centered', function() {
-        var wait = helpers.build(new Coral.Wait());
+        var wait = new Coral.Wait();
         wait.centered = true;
         
         expect(wait.classList.contains('coral3-Wait--centered')).to.be.true;
-        expect(wait.classList.contains('coral3-Wait')).to.be.true;
       });
     });
     
     describe('#size', function() {
       it('should default to small', function() {
-        var wait = helpers.build(new Coral.Wait());
+        var wait = new Coral.Wait();
         
         expect(wait.size).to.equal(Coral.Wait.size.SMALL);
-        expect(wait.className).to.equal('coral3-Wait');
-        expect(wait.classList.contains('coral3-Wait--large')).to.be.false;
-        expect(wait.classList.contains('coral3-Wait--medium')).to.be.false;
-        expect(wait.classList.contains('coral3-Wait')).to.be.true;
       });
       
       it('can be set to large', function() {
-        var wait = helpers.build(new Coral.Wait());
+        var wait = new Coral.Wait();
         wait.size = Coral.Wait.size.LARGE;
         
         expect(wait.classList.contains('coral3-Wait--large')).to.be.true;
         expect(wait.classList.contains('coral3-Wait--medium')).to.be.false;
-        expect(wait.classList.contains('coral3-Wait')).to.be.true;
       });
       
-      it('can be set to large', function() {
-        var wait = helpers.build(new Coral.Wait());
+      it('can be set to medium', function() {
+        var wait = new Coral.Wait();
         wait.size = Coral.Wait.size.MEDIUM;
         
         expect(wait.classList.contains('coral3-Wait--large')).to.be.false;
         expect(wait.classList.contains('coral3-Wait--medium')).to.be.true;
-        expect(wait.classList.contains('coral3-Wait')).to.be.true;
       });
     });
     
     describe('#hidden', function() {
       it('should default to false', function() {
-        var wait = helpers.build(new Coral.Wait());
+        var wait = new Coral.Wait();
         
         expect(wait.hidden).to.be.false;
         expect(wait.hasAttribute('hidden')).to.be.false;
@@ -208,7 +198,7 @@ describe('Coral.Wait', function() {
     });
     
     it('should be able to set large and centered at the same time', function() {
-      var wait = helpers.build(new Coral.Wait());
+      var wait = new Coral.Wait();
       wait.size = Coral.Wait.size.LARGE;
       wait.centered = true;
       
@@ -216,11 +206,10 @@ describe('Coral.Wait', function() {
       expect(wait.centered).to.be.true;
       expect(wait.classList.contains('coral3-Wait--centered')).to.be.true;
       expect(wait.classList.contains('coral3-Wait--large')).to.be.true;
-      expect(wait.classList.contains('coral3-Wait')).to.be.true;
     });
     
     it('should be able to set medium and centered at the same time', function() {
-      var wait = helpers.build(new Coral.Wait());
+      var wait = new Coral.Wait();
       wait.size = Coral.Wait.size.MEDIUM;
       wait.centered = true;
       
@@ -228,7 +217,6 @@ describe('Coral.Wait', function() {
       expect(wait.centered).to.be.true;
       expect(wait.classList.contains('coral3-Wait--centered')).to.be.true;
       expect(wait.classList.contains('coral3-Wait--medium')).to.be.true;
-      expect(wait.classList.contains('coral3-Wait')).to.be.true;
     });
   });
 });

@@ -363,7 +363,8 @@ class Button extends Component(HTMLButtonElement) {
       'selected',
       'block',
       'variant',
-      'value'];
+      'value'
+    ];
   }
   
   attributeChangedCallback(name, oldValue, value) {

@@ -28,14 +28,12 @@ afterEach(function() {
 });
 
 /**
-  It behaves like {@link Coral.commons.nextFrame} with the difference that the timeout is longer for tests.
+  Shorthand for window.requestAnimationFrame.
 
   @param {Function} callback
     The callback to execute.
 */
-helpers.next = (window.requestAnimationFrame || window.webkitRequestAnimationFrame ||
-  window.mozRequestAnimationFrame || window.msRequestAnimationFrame ||
-  function(cb) {'use strict'; return window.setTimeout(cb, 100); }).bind(window);
+helpers.next = window.requestAnimationFrame.bind(window);
 
 /**
   Build and return an instance ready to be used

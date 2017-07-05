@@ -31,29 +31,6 @@ helpers.cloneComponent = function(element, options) {
       
       // Do the clone
       elClone = helpers.target.appendChild(el.cloneNode(options.deepClone));
-      
-      // helpers.build(markup, function(_el) {
-      //   el = _el;
-      //
-      //   // Do the clone
-      //   elClone = getCloneComponent(el, options.deepClone);
-      //
-      //   if (!elClone) {
-      //     console.warn('Something wrong with the clone of ', el);
-      //   }
-      //
-      //   helpers.target.appendChild(elClone);
-      //
-      //   // Wait until the clone is ready
-      //   Coral.commons.ready(elClone, function() {
-      //     // The sync methods won't be called until the frame after that
-      //     // Wait until sync methods have been called
-      //     helpers.next(function() {
-      //       // Pass the instance along
-      //       done();
-      //     });
-      //   });
-      // });
     });
 
     afterEach(function() {
