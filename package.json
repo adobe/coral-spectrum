@@ -13,6 +13,7 @@
     "coralui-component-charactercount": "file:coralui-component-charactercount",
     "coralui-component-checkbox": "file:coralui-component-checkbox",
     "coralui-component-icon": "file:coralui-component-icon",
+    "coralui-component-radio": "file:coralui-component-radio",
     "coralui-component-switch": "file:coralui-component-switch",
     "coralui-component-textarea": "file:coralui-component-textarea",
     "coralui-component-textfield": "file:coralui-component-textfield",

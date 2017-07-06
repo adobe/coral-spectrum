@@ -1,0 +1,57 @@
+script.
+  if (typeof Coral.Configurator === 'function') {
+    var configurator = new Coral.Configurator().set({
+      component: Coral.Radio,
+      useInnerElements: true,
+      innerElements: [
+        {
+          tagName: 'coral-radio-label',
+          properties: {
+            'label.innerHTML': 'innerHTML'
+          }
+        }
+      ],
+      mainContentZone: 'coral-radio-label',
+      fields: [
+        {
+          label: 'Label',
+          prop: 'label.innerHTML',
+          type: 'text',
+          value: 'Option One'
+        },
+        {
+          label: 'Name',
+          prop: 'name',
+          type: 'text',
+          value: 'RadioOptions'
+        },
+        {
+          label: 'Value',
+          prop: 'value',
+          type: 'text',
+          value: 'option1'
+        },
+        {
+          label: 'is checked',
+          prop: 'checked',
+          type: 'checkbox',
+          value: false
+        },
+        {
+          label: 'is disabled',
+          prop: 'disabled',
+          type: 'checkbox',
+          value: false
+        },
+        {
+          label: 'is required',
+          prop: 'required',
+          type: 'checkbox',
+          value: false
+        }
+      ],
+      componentEvents: [
+        'change'
+      ]
+    }).insertAfterLastScript();
+  }
