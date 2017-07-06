@@ -1,6 +1,7 @@
 import AnchorButton from 'coralui-component-anchorbutton';
 import Button from 'coralui-component-button';
 import ButtonGroup from 'coralui-component-buttongroup';
+import CharacterCount from 'coralui-component-charactercount';
 import Checkbox from 'coralui-component-checkbox';
 import Icon from 'coralui-component-icon';
 import Switch from 'coralui-component-switch';
@@ -12,6 +13,7 @@ export {
   AnchorButton,
   Button,
   ButtonGroup,
+  CharacterCount,
   Checkbox,
   Icon,
   Switch,

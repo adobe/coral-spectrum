@@ -10,6 +10,7 @@
     "coralui-component-anchorbutton": "file:coralui-component-anchorbutton",
     "coralui-component-button": "file:coralui-component-button",
     "coralui-component-buttongroup": "file:coralui-component-buttongroup",
+    "coralui-component-charactercount": "file:coralui-component-charactercount",
     "coralui-component-checkbox": "file:coralui-component-checkbox",
     "coralui-component-icon": "file:coralui-component-icon",
     "coralui-component-switch": "file:coralui-component-switch",

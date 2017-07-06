@@ -120,7 +120,7 @@ transform.reflect = function(element, attributeName, value) {
     }
   }
   else {
-    if (element.getAttribute(attributeName) !== value) {
+    if (element.getAttribute(attributeName) !== String(value)) {
       element.setAttribute(attributeName, value);
     }
   }
