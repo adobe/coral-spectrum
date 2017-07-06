@@ -149,10 +149,6 @@ class Wait extends Component(HTMLElement) {
     return ['size', 'centered', 'variant'];
   }
   
-  attributeChangedCallback(name, oldValue, value) {
-    this[name] = value;
-  }
-  
   connectedCallback() {
     this.classList.add(CLASSNAME);
   }

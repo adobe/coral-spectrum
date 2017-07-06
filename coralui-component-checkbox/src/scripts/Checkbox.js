@@ -268,7 +268,6 @@ class Checkbox extends FormField(Component(HTMLElement)) {
   // For backwards compatibility + Torq
   get defaultContentZone() {return this.label;}
   set defaultContentZone(value) {this.label = value;}
-  get _attributes() {return {labelledby: 'labelledBy', readonly: 'readOnly'};}
   get _contentZones() {return {'coral-checkbox-label': 'label'};}
   
   // Expose enumerations
@@ -277,23 +276,7 @@ class Checkbox extends FormField(Component(HTMLElement)) {
   static get iconPosition() {return iconPosition;}
   
   static get observedAttributes() {
-    return [
-      'labelledby',
-      'labelledBy',
-      'invalid',
-      'readonly',
-      'readOnly',
-      'name',
-      'value',
-      'disabled',
-      'required',
-      'indeterminate',
-      'checked'
-    ];
-  }
-  
-  attributeChangedCallback(name, oldValue, value) {
-    this[this._attributes[name] || name] = value;
+    return super.observedAttributes.concat(['indeterminate', 'checked']);
   }
   
   connectedCallback() {

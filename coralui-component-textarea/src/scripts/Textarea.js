@@ -111,18 +111,11 @@ class Textarea extends FormField(Component(HTMLTextAreaElement)) {
     }
   }
   
-  // For backwards compat
-  get _attributes() {return {labelledby: 'labelledBy'};}
-  
   // Expose enumerations
   static get variant() {return variant;}
   
   static get observedAttributes() {
-    return ['labelledby', 'labelledBy', 'invalid', 'variant'];
-  }
-  
-  attributeChangedCallback(name, oldValue, value) {
-    this[this._attributes[name] || name] = value;
+    return super.nativeObservedAttributes.concat(['variant']);
   }
   
   connectedCallback() {

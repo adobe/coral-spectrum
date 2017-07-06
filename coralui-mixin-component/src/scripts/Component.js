@@ -520,6 +520,13 @@ const Component = (superClass) => class extends superClass {
     return this;
   }
   
+  // Used to map properties with attributes
+  get _attributes() {return {};}
+  
+  attributeChangedCallback(name, oldValue, value) {
+    this[this._attributes[name] || name] = value;
+  }
+  
   disconnectedCallback() {
     // A component that isn't in the DOM should not be responding to global events
     undelegateGlobalEvents.call(this);

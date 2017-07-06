@@ -367,10 +367,6 @@ class Button extends Component(HTMLButtonElement) {
     ];
   }
   
-  attributeChangedCallback(name, oldValue, value) {
-    this[this._attributes[name] || name] = value;
-  }
-  
   connectedCallback() {
     this.classList.add(CLASSNAME);
     

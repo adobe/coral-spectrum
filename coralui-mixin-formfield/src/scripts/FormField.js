@@ -306,6 +306,31 @@ const FormField = (superClass) => class extends superClass {
     // component has support for values, this method needs to be overwritten
     this.value = transform.string(this.getAttribute('value'));
   }
+  
+  get _attributes() {return {labelledby: 'labelledBy', readonly: 'readOnly'};}
+  
+  // We don't want to watch existing attributes for components that extend native HTML elements
+  static get nativeObservedAttributes() {
+    return [
+      'labelledby',
+      'labelledBy',
+      'invalid'
+    ];
+  }
+  
+  static get observedAttributes() {
+    return [
+      'labelledby',
+      'labelledBy',
+      'invalid',
+      'readonly',
+      'readOnly',
+      'name',
+      'value',
+      'disabled',
+      'required'
+    ];
+  }
 };
 
 export default FormField;
