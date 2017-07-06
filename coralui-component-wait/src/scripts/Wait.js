@@ -150,6 +150,8 @@ class Wait extends Component(HTMLElement) {
   }
   
   connectedCallback() {
+    super.connectedCallback();
+    
     this.classList.add(CLASSNAME);
   }
 }

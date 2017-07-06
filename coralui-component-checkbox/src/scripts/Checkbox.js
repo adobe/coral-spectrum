@@ -270,16 +270,13 @@ class Checkbox extends FormField(Component(HTMLElement)) {
   set defaultContentZone(value) {this.label = value;}
   get _contentZones() {return {'coral-checkbox-label': 'label'};}
   
-  // Expose enumerations
-  static get size() {return size;}
-  static get variant() {return variant;}
-  static get iconPosition() {return iconPosition;}
-  
   static get observedAttributes() {
     return super.observedAttributes.concat(['indeterminate', 'checked']);
   }
   
   connectedCallback() {
+    super.connectedCallback();
+    
     this.classList.add(CLASSNAME);
   
     // Create a temporary fragment

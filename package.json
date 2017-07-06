@@ -12,6 +12,7 @@
     "coralui-component-buttongroup": "file:coralui-component-buttongroup",
     "coralui-component-checkbox": "file:coralui-component-checkbox",
     "coralui-component-icon": "file:coralui-component-icon",
+    "coralui-component-switch": "file:coralui-component-switch",
     "coralui-component-textarea": "file:coralui-component-textarea",
     "coralui-component-textfield": "file:coralui-component-textfield",
     "coralui-component-wait": "file:coralui-component-wait",

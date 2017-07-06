@@ -30,10 +30,10 @@ const FormField = (superClass) => class extends superClass {
   constructor() {
     super();
     
-    this._events = commons.extend(this._events || {}, {
+    this._events = {
       'capture:change input': '_onTargetInputChange',
       'global:reset': '_onFormReset'
-    });
+    };
   }
   
   /**
@@ -310,7 +310,7 @@ const FormField = (superClass) => class extends superClass {
   get _attributes() {return {labelledby: 'labelledBy', readonly: 'readOnly'};}
   
   // We don't want to watch existing attributes for components that extend native HTML elements
-  static get nativeObservedAttributes() {
+  static get _nativeObservedAttributes() {
     return [
       'labelledby',
       'labelledBy',

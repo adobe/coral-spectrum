@@ -131,6 +131,8 @@ class AnchorButton extends Component(HTMLAnchorElement) {
   }
   
   connectedCallback() {
+    super.connectedCallback();
+    
     this.classList.add(CLASSNAME);
   
     // Default reflected attributes

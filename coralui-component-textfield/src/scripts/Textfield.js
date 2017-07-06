@@ -87,10 +87,12 @@ class Textfield extends FormField(Component(HTMLInputElement)) {
   static get variant() {return variant;}
   
   static get observedAttributes() {
-    return super.nativeObservedAttributes.concat(['variant']);
+    return super._nativeObservedAttributes.concat(['variant']);
   }
   
   connectedCallback() {
+    super.connectedCallback();
+    
     this.classList.add(CLASSNAME);
   
     // Default reflected attributes

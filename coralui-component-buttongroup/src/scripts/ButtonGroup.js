@@ -820,6 +820,8 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
   }
   
   connectedCallback() {
+    super.connectedCallback();
+    
     this.classList.add(CLASSNAME);
     
     // Create a temporary fragment

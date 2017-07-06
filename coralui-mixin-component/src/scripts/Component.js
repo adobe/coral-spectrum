@@ -231,10 +231,11 @@ const getConstructorName = function(constructor) {
 const Component = (superClass) => class extends superClass {
   constructor() {
     super();
-    
+  
+    // @legacy
     // Attach Vent
-    this._vent = this._vent || new Vent(this);
-    this._events = this._events || {};
+    this._vent = new Vent(this);
+    this._events = {};
   }
   
   // @legacy
@@ -324,6 +325,8 @@ const Component = (superClass) => class extends superClass {
   }
   
   /**
+   @legacy
+   
    Add an event listener.
    @param {String|Object} eventNameOrEvents
    The event name or events to listen for.
@@ -348,6 +351,8 @@ const Component = (superClass) => class extends superClass {
   }
   
   /**
+   @legacy
+   
    Remove an event listener.
    @param {String} eventName
    The event name to stop listening for.
@@ -365,6 +370,8 @@ const Component = (superClass) => class extends superClass {
   }
   
   /**
+   @legacy
+   
    Trigger an event.
    @param {String} eventName
    The event name to trigger.
@@ -383,8 +390,6 @@ const Component = (superClass) => class extends superClass {
     // When 'cancelable' is not set, then default to true:
     cancelable = cancelable || cancelable === undefined;
     
-    // CustomEvent is polyfilled for IE via Polymer:
-    // https://github.com/Polymer/CustomElements/blob/master/src/boot.js#L84-L93
     var event = new CustomEvent(eventName, {
       bubbles: bubbles,
       cancelable: cancelable,
@@ -424,6 +429,8 @@ const Component = (superClass) => class extends superClass {
   }
   
   /**
+   @legacy
+   
    Set multiple properties.
    
    @name Coral.Component#set
@@ -489,6 +496,7 @@ const Component = (superClass) => class extends superClass {
     return this;
   }
   
+  // @legacy
   // @deprecated
   get(property) {
     console.warn('Coral.Component.get has been deprecated. Please use the property accessor instead.');
@@ -496,6 +504,7 @@ const Component = (superClass) => class extends superClass {
     return this[property];
   }
   
+  // @legacy
   // @deprecated
   show() {
     console.warn('Coral.Component.show has been deprecated. Please use the hidden attribute instead.');
@@ -508,6 +517,7 @@ const Component = (superClass) => class extends superClass {
     return this;
   }
   
+  // @legacy
   // @deprecated
   hide() {
     console.warn('Coral.Component.hide has been deprecated. Please use the hidden attribute instead.');
@@ -520,12 +530,16 @@ const Component = (superClass) => class extends superClass {
     return this;
   }
   
-  // Used to map properties with attributes
+  // @legacy
+  // Used to map properties with attributes. To be extended.
   get _attributes() {return {};}
   
   attributeChangedCallback(name, oldValue, value) {
+    // Use the attribute/property mapping
     this[this._attributes[name] || name] = value;
   }
+  
+  connectedCallback() {}
   
   disconnectedCallback() {
     // A component that isn't in the DOM should not be responding to global events

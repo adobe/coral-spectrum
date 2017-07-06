@@ -368,6 +368,8 @@ class Button extends Component(HTMLButtonElement) {
   }
   
   connectedCallback() {
+    super.connectedCallback();
+    
     this.classList.add(CLASSNAME);
     
     // Default reflected attributes

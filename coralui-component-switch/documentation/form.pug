@@ -1,0 +1,59 @@
++document-section('Form Examples')
+  +document-subsection('Vertical Layout')
+    +markup-example('u-columnSmall').
+      <form class="coral-Form coral-Form--vertical">
+        <section class="coral-Form-fieldset">
+
+          <div class="coral-Form-fieldwrapper">
+            <label id="label-vertical-0" class="coral-Form-fieldlabel">Label</label>
+            <coral-switch class="coral-Form-field" labelledby="label-vertical-0">
+            </coral-switch>
+          </div>
+
+          <div class="coral-Form-fieldwrapper">
+            <label id="label-vertical-1" class="coral-Form-fieldlabel">Required</label>
+            <coral-switch class="coral-Form-field" labelledby="label-vertical-1" required>
+            </coral-switch>
+            <coral-icon class="coral-Form-fieldinfo" icon="infoCircle" size="S" id="coral-Form-Vertical-Switch-fieldinfo"></coral-icon>
+            <coral-tooltip variant="info" placement="right" target="#coral-Form-Vertical-Switch-fieldinfo">Required Information</coral-tooltip>
+          </div>
+
+          <div class="coral-Form-fieldwrapper">
+            <label id="label-vertical-2" class="coral-Form-fieldlabel">Invalid</label>
+            <coral-switch class="coral-Form-field" labelledby="label-vertical-2" required>
+            </coral-switch>
+            <coral-icon class="coral-Form-fielderror" icon="infoCircle" size="S" id="coral-Form-Vertical-Switch-fielderror"></coral-icon>
+            <coral-tooltip variant="error" placement="right" target="#coral-Form-Vertical-Switch-fielderror">Error Message</coral-tooltip>
+          </div>
+
+        </section>
+      </form>
+  +document-subsection('Aligned Layout')
+    +markup-example('u-columnSmall').
+      <form class="coral-Form coral-Form--aligned">
+        <section class="coral-Form-fieldset">
+
+          <div class="coral-Form-fieldwrapper">
+            <label id="label-aligned-0" class="coral-Form-fieldlabel">Label</label>
+            <coral-switch class="coral-Form-field" labelledby="label-aligned-0">
+            </coral-switch>
+          </div>
+
+          <div class="coral-Form-fieldwrapper">
+            <label id="label-aligned-1" class="coral-Form-fieldlabel">Required</label>
+            <coral-switch class="coral-Form-field" labelledby="label-aligned-1">
+            </coral-switch>
+            <coral-icon class="coral-Form-fieldinfo" icon="infoCircle" size="S" id="coral-Form-Aligned-Switch-fieldinfo"></coral-icon>
+            <coral-tooltip variant="info" placement="right" target="#coral-Form-Aligned-Switch-fieldinfo">Required Information</coral-tooltip>
+          </div>
+
+          <div class="coral-Form-fieldwrapper">
+            <label id="label-aligned-2" class="coral-Form-fieldlabel">Invalid</label>
+            <coral-switch class="coral-Form-field" labelledby="label-aligned-2">
+            </coral-switch>
+            <coral-icon class="coral-Form-fielderror" icon="infoCircle" size="S" id="coral-Form-Aligned-Switch-fielderror"></coral-icon>
+            <coral-tooltip variant="error" placement="right" target="#coral-Form-Aligned-Switch-fielderror">Error Message</coral-tooltip>
+          </div>
+
+        </section>
+      </form>

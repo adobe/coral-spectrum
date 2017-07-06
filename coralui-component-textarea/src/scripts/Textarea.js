@@ -115,10 +115,12 @@ class Textarea extends FormField(Component(HTMLTextAreaElement)) {
   static get variant() {return variant;}
   
   static get observedAttributes() {
-    return super.nativeObservedAttributes.concat(['variant']);
+    return super._nativeObservedAttributes.concat(['variant']);
   }
   
   connectedCallback() {
+    super.connectedCallback();
+    
     this.classList.add(CLASSNAME);
     this.classList.add(`${CLASSNAME}--multiline`);
     
