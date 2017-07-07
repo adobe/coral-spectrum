@@ -1,0 +1,54 @@
++document-section('Forms')
+  +document-subsection('Vertical Layout')
+    +markup-example().
+      <form class="coral-Form coral-Form--vertical">
+        <section class="coral-Form-fieldset">
+
+          <div class="coral-Form-fieldwrapper">
+            <label class="coral-Form-fieldlabel" id="label-vertical-search-0">Label</label>
+            <coral-search class="coral-Form-field" placeholder="Enter your text" name="name" value="" labelledby="label-vertical-search-0"></coral-search>
+          </div>
+
+          <div class="coral-Form-fieldwrapper">
+            <label class="coral-Form-fieldlabel" id="label-vertical-search-1">Required</label>
+            <coral-search  class="coral-Form-field" placeholder="Enter your text" name="name" value="" labelledby="label-vertical-search-1"></coral-search>
+            <coral-icon class="coral-Form-fieldinfo" icon="infoCircle" size="S" id="coral-form-vertical-search-fieldinfo"></coral-icon>
+            <coral-tooltip variant="info" placement="right" target="#coral-form-vertical-search-fieldinfo">Required Information</coral-tooltip>
+          </div>
+
+          <div class="coral-Form-fieldwrapper">
+            <label class="coral-Form-fieldlabel" id="label-vertical-search-2">Invalid</label>
+            <coral-search class="coral-Form-field" placeholder="Enter your text" name="name" value="" labelledby="label-vertical-search-2"></coral-search>
+            <coral-icon class="coral-Form-fielderror" icon="infoCircle" size="S" id="coral-form-vertical-search-fielderror"></coral-icon>
+            <coral-tooltip variant="error" placement="right" target="#coral-form-vertical-search-fielderror">Error Message</coral-tooltip>
+          </div>
+
+        </section>
+      </form>
+
+  +document-subsection('Aligned Layout')
+    +markup-example().
+      <form class="coral-Form coral-Form--aligned u-columnLarge">
+        <section class="coral-Form-fieldset">
+
+          <div class="coral-Form-fieldwrapper">
+            <label class="coral-Form-fieldlabel" id="label-aligned-search-0">Label</label>
+            <coral-search class="coral-Form-field" placeholder="Enter your text" name="name" value="" labelledby="label-aligned-search-0"></coral-search>
+          </div>
+
+          <div class="coral-Form-fieldwrapper">
+            <label class="coral-Form-fieldlabel" id="label-aligned-search-1">Required</label>
+            <coral-search class="coral-Form-field" placeholder="Enter your text" name="name" value="" labelledby="label-aligned-search-1"></coral-search>
+            <coral-icon class="coral-Form-fieldinfo" icon="infoCircle" size="S" id="coral-form-aligned-search-fieldinfo"></coral-icon>
+            <coral-tooltip variant="info" placement="right" target="#coral-form-aligned-search-fieldinfo">Required Information</coral-tooltip>
+          </div>
+
+          <div class="coral-Form-fieldwrapper">
+            <label class="coral-Form-fieldlabel" id="label-aligned-search-2">Invalid</label>
+            <coral-search class="coral-Form-field" placeholder="Enter your text" name="name" value="" labelledby="label-aligned-search-2"></coral-search>
+            <coral-icon class="coral-Form-fielderror" icon="infoCircle" size="S" id="coral-form-aligned-search-fielderror"></coral-icon>
+            <coral-tooltip variant="error" placement="right" target="#coral-form-aligned-search-fielderror">Error Message</coral-tooltip>
+          </div>
+
+        </section>
+      </form>

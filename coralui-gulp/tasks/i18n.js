@@ -98,7 +98,7 @@ module.exports = function(gulp) {
       var documentPropertiesAdded = false;
       
       for (var i=0; i < extractDirs.length; i++) {
-        extractDirs[i] += '/**/*.*';
+        extractDirs[i] += `src/${extractDirs[i]}/**/*.*`;
       }
       
       console.log('extract', extractDirs);

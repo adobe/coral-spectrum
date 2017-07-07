@@ -1,0 +1,35 @@
+{
+  "it-IT": {
+    "Clear search": "Azzera ricerca"
+  },
+  "ja-JP": {
+    "Clear search": "検索をクリア"
+  },
+  "es-ES": {
+    "Clear search": "Borrar búsqueda"
+  },
+  "ko-KR": {
+    "Clear search": "검색 지우기"
+  },
+  "zh-CN": {
+    "Clear search": "清除搜索"
+  },
+  "zh-TW": {
+    "Clear search": "清除搜尋"
+  },
+  "pt-BR": {
+    "Clear search": "Limpar busca"
+  },
+  "nl-NL": {
+    "Clear search": "Zoekopdracht wissen"
+  },
+  "en-US": {
+    "Clear search": "Clear search"
+  },
+  "de-DE": {
+    "Clear search": "Suche löschen"
+  },
+  "fr-FR": {
+    "Clear search": "Effacer la recherche"
+  }
+}
