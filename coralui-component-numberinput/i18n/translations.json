@@ -1,0 +1,46 @@
+{
+  "en-US": {
+    "Decrement": "Decrement",
+    "Increment": "Increment"
+  },
+  "fr-FR": {
+    "Decrement": "Décrémenter",
+    "Increment": "Incrémenter"
+  },
+  "de-DE": {
+    "Decrement": "Reduzieren",
+    "Increment": "Erhöhen"
+  },
+  "it-IT": {
+    "Decrement": "Decrementare",
+    "Increment": "Incrementare"
+  },
+  "es-ES": {
+    "Decrement": "Reducir",
+    "Increment": "Aumentar"
+  },
+  "pt-BR": {
+    "Decrement": "Decrementar",
+    "Increment": "Incrementar"
+  },
+  "ja-JP": {
+    "Decrement": "減らす",
+    "Increment": "増やす"
+  },
+  "ko-KR": {
+    "Decrement": "감소",
+    "Increment": "증가"
+  },
+  "zh-CN": {
+    "Decrement": "减量",
+    "Increment": "增量"
+  },
+  "zh-TW": {
+    "Decrement": "減量",
+    "Increment": "增量"
+  },
+  "nl-NL": {
+    "Decrement": "Verlagen",
+    "Increment": "Verhogen"
+  }
+}

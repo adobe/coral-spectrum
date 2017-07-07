@@ -100,8 +100,8 @@ class Search extends FormField(Component(HTMLElement)) {
     this.setAttribute('aria-disabled', this._disabled);
     
     this.classList.toggle('is-disabled', this._disabled);
-    this._elements.input.disabled = this.disabled;
-    this._elements.clearButton.disabled = this.disabled;
+    this._elements.input.disabled = this._disabled;
+    this._elements.clearButton.disabled = this._disabled;
   }
   
   // JSDoc inherited
@@ -127,10 +127,23 @@ class Search extends FormField(Component(HTMLElement)) {
     this._elements.clearButton.disabled = this._readOnly;
   }
   
+  // JSDoc inherited
+  get invalid() {
+    return super.invalid;
+  }
   set invalid(value) {
     super.invalid = value;
-    this._elements.input.classList.toggle('is-invalid', this._invalid);
-    this._elements.input.setAttribute('aria-invalid', this._invalid);
+    this._elements.input.invalid = this._invalid;
+  }
+  
+  // JSDoc inherited
+  get labelledBy() {
+    return super.labelledBy;
+  }
+  set labelledBy(value) {
+    super.labelledBy = value;
+    // in case the user focuses the buttons, he will still get a notion of the usage of the component
+    this[this.labelledBy ? 'setAttribute' : 'removeAttribute']('aria-labelledby', this.labelledBy);
   }
   
   /**
@@ -182,7 +195,7 @@ class Search extends FormField(Component(HTMLElement)) {
    @memberof Coral.Search#
    */
   get variant() {
-    return this._variant || variant.DEFAULT;
+    return this._variant || variant.DEFAULT;
   }
   set variant(value) {
     value = transform.string(value).toLowerCase();
@@ -260,6 +273,18 @@ class Search extends FormField(Component(HTMLElement)) {
    */
   _getLabellableElement() {
     return this._elements.input;
+  }
+  
+  // overrides the behavior from mixin-formfield
+  reset() {
+    // since there is an internal value, this one handles the reset
+    this._elements.input.reset();
+  }
+  
+  // overrides the behavior from mixin-formfield
+  clear() {
+    // since there is an internal value, this one handles the clear
+    this._elements.input.clear();
   }
   
   // Expose enumerations

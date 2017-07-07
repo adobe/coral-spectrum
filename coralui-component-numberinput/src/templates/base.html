@@ -1,0 +1,9 @@
+<js>
+  data.uid = Coral.commons.getUID();
+</js>
+<span class="coral-InputGroup-button" role="presentation" handle="presentation">
+  <button class="coral3-NumberInput-stepUp" type="button" is="coral-button" handle="stepUp" title="{{Coral.i18n.get('Increment')}}" aria-label="{{Coral.i18n.get('Increment')}}" icon="chevronUp" iconsize="XS" tabindex="-1" aria-controls="{{data.uid}}"></button>
+  <button class="coral3-NumberInput-stepDown" type="button" is="coral-button" handle="stepDown" title="{{Coral.i18n.get('Decrement')}}" aria-label="{{Coral.i18n.get('Decrement')}}" icon="chevronDown" iconsize="XS" tabindex="-1" aria-controls="{{data.uid}}"></button>
+  <span role="presentation" handle="liveregion" aria-live="assertive" aria-atomic="true" aria-relevant="additions text" class="u-coral-screenReaderOnly" aria-hidden="true"></span>
+</span>
+<input is="coral-textfield" handle="input" type="number" class="coral3-NumberInput-input coral-InputGroup-input" id="{{data.uid}}" step="1" aria-valuenow="" aria-valuetext="">

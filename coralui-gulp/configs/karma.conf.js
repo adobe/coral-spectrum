@@ -102,6 +102,14 @@ module.exports = function(config) {
       
       // Load the theme
       `${CWD}/build/css/coral.css`,
+  
+      {
+        // Load the resources
+        pattern: `${CWD}/build/resources/**/*`,
+        watched: false,
+        included: false,
+        served: true
+      },
       
       {
         // Tests that will be included as executable JS

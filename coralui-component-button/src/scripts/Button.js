@@ -334,7 +334,7 @@ class Button extends Component(HTMLButtonElement) {
     const target = event.matchedTarget;
     
     // Wait a frame or button won't receive focus in Safari.
-    requestAnimationFrame(function() {
+    window.requestAnimationFrame(function() {
       if (target !== document.activeElement) {
         target.focus();
       }
