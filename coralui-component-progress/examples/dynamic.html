@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+  <title>Progress</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/coral.js"></script>
+
+  <script>
+    function copyContent(source, dest, childSelector, cb) {
+      dest = document.querySelector(dest);
+      source = document.querySelector(source);
+      dest.innerHTML = source.innerHTML;
+
+      if (childSelector && cb) {
+        Array.prototype.forEach.call(dest.querySelectorAll(childSelector), cb);
+      }
+
+      return dest;
+    }
+  </script>
+  <style>
+    label {
+      display: block;
+    }
+    #progressContainer {
+      margin: 16px;
+    }
+    #controls {
+      position: fixed;
+      right: 8px;
+      top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div id="progressContainer">
+    <coral-progress id="progress"></coral-progress>
+  </div>
+
+  <div id="controls" aria-hidden="true">
+    <label>
+      Value
+      <input type="range" min="0" max="100" value="0" onchange="progress.value=this.value"></label>
+
+    <label>
+      Size
+      <select onchange="progress.size=this.value">
+        <option>s</option>
+        <option selected>m</option>
+        <option>l</option>
+      </select>
+    </label>
+
+    <label>
+      Indeterminate
+      <input type="checkbox" onchange="progress.indeterminate=this.checked"></label>
+
+    <label>
+      Label Position
+      <select onchange="progress.labelPosition=this.value">
+        <option>left</option>
+        <option selected>right</option>
+        <option>bottom</option>
+      </select>
+    </label>
+
+    <label>
+      Label Text
+      <input onchange='progress.label.innerHTML=this.value' value='Some Text'>
+    </label>
+
+    <label>
+      Show Percent
+      <input type="checkbox" onchange="progress.showPercent=this.checked">
+    </label>
+  </div>
+</body>
+</html>

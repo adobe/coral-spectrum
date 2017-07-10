@@ -6,6 +6,7 @@ import Checkbox from 'coralui-component-checkbox';
 import Drawer from 'coralui-component-drawer';
 import Icon from 'coralui-component-icon';
 import NumberInput from 'coralui-component-numberinput';
+import Progress from 'coralui-component-progress';
 import Radio from 'coralui-component-radio';
 import Search from 'coralui-component-search';
 import Switch from 'coralui-component-switch';
@@ -21,6 +22,7 @@ export {
   Checkbox,
   Drawer,
   Icon,
+  Progress,
   NumberInput,
   Radio,
   Search,

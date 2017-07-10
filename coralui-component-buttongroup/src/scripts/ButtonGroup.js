@@ -124,6 +124,7 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
    @type {String}
    @default Coral.ButtonGroup.selectionMode.NONE
    @htmlattribute selectionmode
+   @htmlattributereflected
    @memberof Coral.ButtonGroup#
    */
   get selectionMode() {
@@ -823,6 +824,9 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
     super.connectedCallback();
     
     this.classList.add(CLASSNAME);
+  
+    // Default reflected attributes
+    if (!this._selectionMode) {this.selectionMode = selectionMode.NONE;}
     
     // Create a temporary fragment
     const frag = document.createDocumentFragment();

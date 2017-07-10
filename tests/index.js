@@ -5,6 +5,7 @@ import 'coralui-component-charactercount/tests';
 import 'coralui-component-checkbox/tests';
 import 'coralui-component-drawer/tests';
 import 'coralui-component-icon/tests';
+import 'coralui-component-progress/tests';
 import 'coralui-component-numberinput/tests';
 import 'coralui-component-radio/tests';
 import 'coralui-component-search/tests';

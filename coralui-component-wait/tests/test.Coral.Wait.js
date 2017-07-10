@@ -24,8 +24,8 @@ describe('Coral.Wait', function() {
       
       expect(wait.classList.contains('coral3-Wait')).to.be.true;
       expect(wait.hasAttribute('centered')).to.be.false;
-      expect(wait.hasAttribute('variant')).to.be.false;
-      expect(wait.hasAttribute('size')).to.be.false;
+      expect(wait.hasAttribute('variant')).to.be.true;
+      expect(wait.hasAttribute('size')).to.be.true;
       expect(wait.classList.contains('coral3-Wait--centered')).to.be.false;
       expect(wait.classList.contains('coral3-Wait--large')).to.be.false;
       expect(wait.classList.contains('coral3-Wait--medium')).to.be.false;
@@ -98,7 +98,7 @@ describe('Coral.Wait', function() {
         var el = helpers.build('<coral-wait></coral-wait>');
         
         expect(el.variant).to.equal(Coral.Wait.variant.DEFAULT);
-        expect(el.hasAttribute('variant')).to.be.false;
+        expect(el.getAttribute('variant')).to.equal(Coral.Wait.variant.DEFAULT);
         expect(el.classList.contains('coral3-Wait')).to.be.true;
       });
       
@@ -116,7 +116,7 @@ describe('Coral.Wait', function() {
         var el = helpers.build('<coral-wait variant=""></coral-wait>');
   
         expect(el.variant).to.equal(Coral.Wait.variant.DEFAULT);
-        expect(el.getAttribute('variant')).to.equal('');
+        expect(el.getAttribute('variant')).to.equal(Coral.Wait.variant.DEFAULT);
         expect(el.classList.contains('coral3-Wait')).to.be.true;
       });
       
@@ -124,7 +124,7 @@ describe('Coral.Wait', function() {
         var el = helpers.build('<coral-wait variant="invalidvariant"></coral-wait>');
         
         expect(el.variant).to.equal(Coral.Wait.variant.DEFAULT);
-        expect(el.getAttribute('variant')).to.equal('invalidvariant');
+        expect(el.getAttribute('variant')).to.equal(Coral.Wait.variant.DEFAULT);
         expect(el.classList.contains('coral3-Wait')).to.be.true;
       });
       

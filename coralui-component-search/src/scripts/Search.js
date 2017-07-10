@@ -192,6 +192,7 @@ class Search extends FormField(Component(HTMLElement)) {
    @type {Coral.Search.variant}
    @default Coral.Search.variant.DEFAULT
    @htmlattribute variant
+   @htmlattributereflected
    @memberof Coral.Search#
    */
   get variant() {
@@ -202,6 +203,7 @@ class Search extends FormField(Component(HTMLElement)) {
   
     if (validate.enumeration(variant)(value)) {
       this._variant = value;
+      transform.reflect(this, 'variant', this._variant);
       this._elements.input.variant = value;
     }
   }
@@ -302,7 +304,7 @@ class Search extends FormField(Component(HTMLElement)) {
   
     // Default reflected attributes
     if (!this._icon) {this.icon = 'search';}
-    if (!this._variant) {this.size = variant.DEFAULT;}
+    if (!this._variant) {this.variant = variant.DEFAULT;}
   
     this.appendChild(this._elements.icon);
     this.appendChild(this._elements.input);

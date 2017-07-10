@@ -73,6 +73,7 @@ class Wait extends Component(HTMLElement) {
    @type {Coral.Wait.size}
    @default Coral.Wait.size.SMALL
    @htmlattribute size
+   @htmlattributereflected
    @memberof Coral.Wait#
    */
   get size() {
@@ -83,6 +84,7 @@ class Wait extends Component(HTMLElement) {
     
     if (validate.enumeration(size)(value)) {
       this._size = value;
+      transform.reflect(this, 'size', this._size);
   
       // large css change
       this.classList.toggle(`${CLASSNAME}--large`, this.size === size.LARGE);
@@ -106,14 +108,8 @@ class Wait extends Component(HTMLElement) {
   }
   set centered(value) {
     this._centered = transform.booleanAttr(value);
+    transform.reflect(this, 'centered', this._centered);
     this.classList.toggle(CLASSNAME + '--centered', this.centered);
-    
-    if (this._centered) {
-      transform.reflect(this, 'centered', this._centered);
-    }
-    else {
-      this.removeAttribute('centered');
-    }
   }
   
   /**
@@ -121,6 +117,7 @@ class Wait extends Component(HTMLElement) {
    @type {Coral.Wait.variant}
    @default Coral.Wait.variant.DEFAULT
    @htmlattribute variant
+   @htmlattributereflected
    @memberof Coral.Wait#
    */
   get variant() {
@@ -131,6 +128,7 @@ class Wait extends Component(HTMLElement) {
     
     if (validate.enumeration(variant)(value)) {
       this._variant = value;
+      transform.reflect(this, 'variant', this._variant);
   
       // removes every existing variant
       this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
@@ -151,6 +149,10 @@ class Wait extends Component(HTMLElement) {
   
   connectedCallback() {
     super.connectedCallback();
+  
+    // Default reflected attributes
+    if (!this._size) {this.size = size.SMALL;}
+    if (!this._variant) {this.variant = variant.DEFAULT;}
     
     this.classList.add(CLASSNAME);
   }
