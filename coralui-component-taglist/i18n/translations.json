@@ -1,0 +1,35 @@
+{
+  "en-US": {
+    "Remove": "Remove"
+  },
+  "fr-FR": {
+    "Remove": "Supprimer"
+  },
+  "de-DE": {
+    "Remove": "Entfernen"
+  },
+  "it-IT": {
+    "Remove": "Rimuovi"
+  },
+  "es-ES": {
+    "Remove": "Eliminar"
+  },
+  "pt-BR": {
+    "Remove": "Remover"
+  },
+  "ja-JP": {
+    "Remove": "削除"
+  },
+  "ko-KR": {
+    "Remove": "제거"
+  },
+  "zh-CN": {
+    "Remove": "删除"
+  },
+  "zh-TW": {
+    "Remove": "移除"
+  },
+  "nl-NL": {
+    "Remove": "Verwijderen"
+  }
+}

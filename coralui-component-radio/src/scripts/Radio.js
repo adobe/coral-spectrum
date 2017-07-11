@@ -41,9 +41,20 @@ class Radio extends FormField(Component(HTMLElement)) {
     
     // Prepare templates
     this._elements = {
-      label: document.createElement('coral-radio-label')
+      // Try to find the label content zone
+      label: this.querySelector('coral-radio-label') || document.createElement('coral-radio-label')
     };
     base.call(this._elements);
+  
+    // Check if the label is empty whenever we get a mutation
+    this._observer = new MutationObserver(this._hideLabelIfEmpty.bind(this));
+  
+    // Watch for changes to the label element's children
+    this._observer.observe(this._elements.labelWrapper, {
+      childList: true, // Catch changes to childList
+      characterData: true, // Catch changes to textContent
+      subtree: true // Monitor any child node
+    });
   }
   
   /**
@@ -256,9 +267,8 @@ class Radio extends FormField(Component(HTMLElement)) {
     frag.appendChild(this._elements.input);
     frag.appendChild(this._elements.checkmark);
     frag.appendChild(this._elements.labelWrapper);
-  
-    // Try to find the label content zone
-    const label = this.querySelector('coral-radio-label') || this._elements.label;
+    
+    const label = this._elements.label;
   
     // Remove it so we can process children
     if (label && label.parentNode) {
@@ -286,16 +296,6 @@ class Radio extends FormField(Component(HTMLElement)) {
   
     // Assign the content zones, moving them into place in the process
     this.label = label;
-  
-    // Check if the label is empty whenever we get a mutation
-    this._observer = new MutationObserver(this._hideLabelIfEmpty.bind(this));
-  
-    // Watch for changes to the label element's children
-    this._observer.observe(this._elements.labelWrapper, {
-      childList: true, // Catch changes to childList
-      characterData: true, // Catch changes to textContent
-      subtree: true // Monitor any child node
-    });
   
     // Cache the initial checked state of the radio button (in order to implement reset)
     this._initialCheckedState = this.checked;

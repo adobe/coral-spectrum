@@ -149,12 +149,14 @@ commons.swapKeysAndValues = function(obj) {
  The callback to execute.
  @deprecated
  */
-commons.nextFrame = function() {
+commons.nextFrame = function(callback) {
   console.warn('Coral.commons.nextFrame has been deprecated. Please use window.requestAnimationFrame instead.');
   
-  return (window.requestAnimationFrame || window.webkitRequestAnimationFrame ||
-  window.mozRequestAnimationFrame || window.msRequestAnimationFrame ||
-  function(callback) {'use strict'; return window.setTimeout(callback, 1000 / 60); }).bind(window);
+  return window.requestAnimationFrame(function() {
+    if (typeof callback === 'function') {
+      callback();
+    }
+  })
 };
 
 
@@ -242,46 +244,6 @@ commons.transitionEnd = function(element, callback) {
 (function() {
   'use strict';
   
-  // Array used to tracked pending inits while waiting for the WebComponentsReady event.
-  var initQueue = [];
-  
-  // Track whether web components are ready
-  var webComponentsReady = false;
-  
-  window.addEventListener('WebComponentsReady', function handleWebComponentsReady() {
-    webComponentsReady = true;
-    
-    var entry;
-    for (var i = 0, initQueueCount = initQueue.length; i < initQueueCount; i++) {
-      entry = initQueue[i];
-      initElement(entry.element, entry.callback);
-    }
-    
-    // we make sure no items are referenced
-    initQueue.splice(0, initQueueCount);
-    
-    window.removeEventListener('WebComponentsReady', handleWebComponentsReady);
-  });
-  
-  /**
-   Forces the given element to be upgraded and then calls the callback.
-   
-   @param {HTMLElement} element
-   The element to initialize.
-   @param {Function} callback
-   The callback to execute once it is initialized.
-   */
-  function initElement(element, callback) {
-    window.CustomElements.upgradeAll(element);
-    
-    // As the createdCallbacks of inner web components are not called synchronously by CustomElements.upgradeAll(...) we
-    // have to wait until all createdCallbacks of sub components have been called. see test: it('should be possible to
-    // check child components using Coral.commons.ready() method inside of _initialize() method', ...)
-    commons.nextFrame(function(){
-      callback(element);
-    });
-  }
-  
   /**
    Execute the callback once a component and sub-components are [ready]{@link Coral.commons.ready}.
    
@@ -305,20 +267,11 @@ commons.transitionEnd = function(element, callback) {
     
     if (typeof element === 'function') {
       callback = element;
-      element = window;
     }
     
-    // if the webcomponents are ready we call the callback immediatelly
-    if (webComponentsReady) {
-      initElement(element, callback);
-    }
-    // otherwise we queue the rest to make sure that the WebComponentsReady has been triggered
-    else {
-      initQueue.push({
-        element: element,
-        callback: callback
-      });
-    }
+    setTimeout(() => {
+      callback();
+    });
   };
 }());
 

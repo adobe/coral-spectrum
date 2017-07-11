@@ -55,7 +55,7 @@ class Drawer extends Component(HTMLElement) {
     
     // Templates
     this._elements = {
-      content: document.createElement('coral-drawer-content')
+      content: this.querySelector('coral-drawer-content') || document.createElement('coral-drawer-content')
     };
     base.call(this._elements);
     
@@ -237,7 +237,7 @@ class Drawer extends Component(HTMLElement) {
     fragment.appendChild(this._elements.toggle);
   
     // Fetch or create the content content zone element
-    const content = this.querySelector('coral-drawer-content') || this._elements.content;
+    const content =  this._elements.content;
   
     // Move any remaining elements into the content sub-component
     while (this.firstChild) {

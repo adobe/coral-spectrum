@@ -1,0 +1,9 @@
+mixin component-markup-tag(options)
+    - options = options || {};
+    - options.label = options.label ? options.label : "Tag";
+    - options.disabled = options.disabled ? " disabled='" + options.disabled + "'" : "";
+    - options.readonly = options.readonly ? " readonly='" + options.readonly + "'" : "";
+    - options.quiet = options.quiet ? " quiet='" + options.quiet + "'": "";
+    - options.multiline = options.multiline !== undefined ? " multiline" : "";
+    - options.value = options.value ? " value='" + options.value + "'" : "";
+    | <coral-tag#{options.disabled}#{options.readonly}#{options.quiet}#{options.multiline}#{options.value}>#{options.label}</coral-tag>

@@ -1,0 +1,46 @@
++document-section('JavaScript Examples')
+  p.
+    The following examples demonstrates how to use event listeners from the Collection API <code>coral-collection:add</code>
+    and <code>coral-collection:remove</code> with #{component.displayName}.
+
+  #eventsExample.
+    <script>
+    $(document).ready(function() {
+      var tagList = new Coral.TagList();
+
+      tagList.on('coral-collection:add', function(event) {
+        console.log('Added tag: ' + event.detail.item.label.innerHTML);
+      });
+
+      tagList.on('coral-collection:remove', function(event) {
+        console.log('Removed tag: ' + event.detail.item.label.innerHTML);
+      });
+
+      document.getElementById('eventsExample').appendChild(tagList);
+
+      var tag1 = new Coral.Tag().set({
+        value: 'tag1',
+        label: {
+          innerHTML: 'Tag 1'
+        }
+      });
+
+      var tag2 = new Coral.Tag().set({
+        value: 'tag2',
+        label: {
+          innerHTML: 'Tag 2'
+        }
+      });
+
+      tagList.items.add(tag1);
+      tagList.items.add(tag2);
+
+      tagList.items.remove(tag1);
+    })
+    </script>
+
+  p.
+    The following JavaScript manually initializes the component on page
+    initialization and attaches listener to detect tags that are added and removed from #{component.displayName}.
+
+  +example-pre-only("eventsExample")

@@ -10,6 +10,7 @@ import 'coralui-component-numberinput/tests';
 import 'coralui-component-radio/tests';
 import 'coralui-component-search/tests';
 import 'coralui-component-switch/tests';
+import 'coralui-component-taglist/tests';
 import 'coralui-component-textarea/tests';
 import 'coralui-component-textfield/tests';
 import 'coralui-component-wait/tests';

@@ -1,0 +1,47 @@
+script.
+  if (typeof Coral.Configurator === 'function') {
+    var configurator = new Coral.Configurator().set({
+      component: Coral.TagList,
+      fields: [
+        {
+          label: 'Value',
+          prop: 'value',
+          type: 'text',
+          value: ''
+        },
+        {
+          label: 'Name',
+          prop: 'name',
+          type: 'text',
+          value: ''
+        },
+        {
+          label: 'is read-only',
+          prop: 'readOnly',
+          value: false,
+          type: 'checkbox'
+        },
+        {
+          label: 'is disabled',
+          prop: 'disabled',
+          value: false,
+          type: 'checkbox'
+        }
+      ],
+      items: [
+        {
+          value: 'tag1',
+          label: {
+            innerHTML: 'Tag 1 label.'
+          }
+        },
+        {
+          value: 'tag2',
+          label: {
+            innerHTML: 'Tag 2 label.'
+          }
+        }
+      ],
+      itemsMainContentZone: 'coral-tag-label',
+    }).insertAfterLastScript();
+  }

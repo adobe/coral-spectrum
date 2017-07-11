@@ -177,6 +177,32 @@ describe('Coral.ButtonGroup', function() {
           done();
         });
       });
+  
+      it('should allow adding a selected button using appendChild', function(done) {
+        el.selectionMode = Coral.ButtonGroup.selectionMode.SINGLE;
+    
+        // makes sure the selectionMode handled the item selection
+        expect(el.value).to.equal('item1');
+    
+        var item = new Coral.Button();
+        item.setAttribute('value', 'item4');
+        item.setAttribute('selected', '');
+        item.label.textContent = 'Item 4';
+    
+        el.appendChild(item);
+    
+        helpers.next(function() {
+          // the new value should match the added item
+          expect(el.value).to.equal('item4');
+          expect(el.values).to.deep.equal(['item4']);
+      
+          var items = el.items.getAll();
+          expect(items[0].hasAttribute('selected')).to.be.false;
+          expect(items[3].hasAttribute('selected')).to.be.true;
+      
+          done();
+        });
+      });
     });
     
     describe('#selectionMode', function() {

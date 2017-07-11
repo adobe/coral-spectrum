@@ -85,9 +85,18 @@ class Progress extends Component(HTMLElement) {
     
     // Prepare templates
     this._elements = {
-      label: document.createElement('coral-progress-label')
+      // Fetch or create the content content zone element
+      label: this.querySelector('coral-progress-label') || document.createElement('coral-progress-label')
     };
     base.call(this._elements);
+  
+    // Watch for label changes
+    this._observer = new MutationObserver(this._toggleLabelBasedOnContent.bind(this));
+    this._observer.observe(this._elements.label, {
+      characterData: true,
+      childList: true,
+      subtree: true
+    });
   }
   
   /**
@@ -362,9 +371,8 @@ class Progress extends Component(HTMLElement) {
     
     // Render the template
     fragment.appendChild(this._elements.bar);
-  
-    // Fetch or create the content content zone element
-    const label = this.querySelector('coral-progress-label') || this._elements.label;
+    
+    const label = this._elements.label;
   
     // Remove it so we can process children
     if (label.parentNode) {
@@ -399,14 +407,6 @@ class Progress extends Component(HTMLElement) {
     this.setAttribute('aria-valuenow', '0');
     this.setAttribute('aria-valuemin', '0');
     this.setAttribute('aria-valuemax', '100');
-  
-    // Watch for label changes
-    this._observer = new MutationObserver(this._toggleLabelBasedOnContent.bind(this));
-    this._observer.observe(this._elements.label, {
-      characterData: true,
-      childList: true,
-      subtree: true
-    });
   }
   
   /**

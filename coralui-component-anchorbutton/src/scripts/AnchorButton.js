@@ -41,10 +41,13 @@ class AnchorButton extends Component(HTMLAnchorElement) {
   constructor() {
     super();
   
+    // Templates
     this._elements = {
-      label: document.createElement('coral-anchorbutton-label')
+      // Create or fetch the label element.
+      label: this.querySelector('coral-anchorbutton-label') || document.createElement('coral-anchorbutton-label')
     };
   
+    // Events
     this.on({
       'mousedown': '_onMouseDown',
       'keydown': '_onKeyDown',
@@ -53,6 +56,16 @@ class AnchorButton extends Component(HTMLAnchorElement) {
     
     // cannot use the events hash because events on disabled items are not reported
     this.addEventListener('click', this._onClick.bind(this));
+  
+    // Listen for mutations
+    this._observer = new MutationObserver(this._makeAccessible.bind(this));
+  
+    // Watch for changes to the label element
+    this._observer.observe(this._elements.label, {
+      childList: true, // Catch changes to childList
+      characterData: true, // Catch changes to textContent
+      subtree: true // Monitor any child node
+    });
   }
   
   /**
@@ -141,9 +154,8 @@ class AnchorButton extends Component(HTMLAnchorElement) {
   
     // Create a temporary fragment
     const fragment = document.createDocumentFragment();
-  
-    // Create or fetch the label element.
-    const label = this.querySelector('coral-anchorbutton-label') || this._elements.label;
+    
+    const label = this._elements.label;
   
     // Remove it so we can process children
     if (label.parentNode) {
@@ -190,16 +202,6 @@ class AnchorButton extends Component(HTMLAnchorElement) {
     }
     this.setAttribute('role', 'button');
     this._makeAccessible();
-  
-    // Listen for mutations
-    this._observer = new MutationObserver(this._makeAccessible.bind(this));
-  
-    // Watch for changes to the label element
-    this._observer.observe(this.label, {
-      childList: true, // Catch changes to childList
-      characterData: true, // Catch changes to textContent
-      subtree: true // Monitor any child node
-    });
   }
 }
 

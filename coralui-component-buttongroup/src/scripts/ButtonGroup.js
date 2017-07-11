@@ -91,6 +91,9 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
       'coral-button:_valuechanged button[is="coral-button"]': '_onButtonValueChanged',
       'coral-button:_selectedchanged button[is="coral-button"]': '_onButtonSelectedChanged',
     });
+    
+    // Init the mutation observer but we don't handle the initial items in the constructor
+    this.items._startHandlingItems(true);
   }
   
   /**
@@ -532,9 +535,15 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
     }
   
     this._addItemOption(item);
-    
-    // See if this affects our selection (we might require a selection when an item is available):
-    this._validateSelection(item.hasAttribute('selected') ? item : null);
+   
+    // Handle the case where we might have multiple items selected while single selection mode is on
+    if (this.selectionMode === selectionMode.SINGLE) {
+      const selectedItems = this.items._getAllSelected();
+      // The last added item will stay selected
+      if (selectedItems.length > 1 && item.hasAttribute('selected')) {
+        item.removeAttribute('selected');
+      }
+    }
   }
   
   /** @private */
@@ -854,7 +863,7 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
     // Need to store and set the initially selected values in the native select so that it can reset
     this._setInitialValues();
   
-    // tells the collection to handle the addition and removal automatically
+    // Call onItemAdded and onCollectionChange on the existing items
     this.items._startHandlingItems();
   }
 }

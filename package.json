@@ -19,6 +19,7 @@
     "coralui-component-radio": "file:coralui-component-radio",
     "coralui-component-search": "file:coralui-component-search",
     "coralui-component-switch": "file:coralui-component-switch",
+    "coralui-component-taglist": "file:coralui-component-taglist",
     "coralui-component-textarea": "file:coralui-component-textarea",
     "coralui-component-textfield": "file:coralui-component-textfield",
     "coralui-component-wait": "file:coralui-component-wait",

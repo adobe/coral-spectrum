@@ -539,10 +539,17 @@ const Component = (superClass) => class extends superClass {
     this[this._attributes[name] || name] = value;
   }
   
-  connectedCallback() {}
+  connectedCallback() {
+    // A component that is reattached should respond to global events again
+    if (this._disconnected) {
+      delegateEvents.call(this);
+      this._disconnected = undefined;
+    }
+  }
   
   disconnectedCallback() {
     // A component that isn't in the DOM should not be responding to global events
+    this._disconnected = true;
     undelegateGlobalEvents.call(this);
   }
 };

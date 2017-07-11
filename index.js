@@ -10,6 +10,7 @@ import Progress from 'coralui-component-progress';
 import Radio from 'coralui-component-radio';
 import Search from 'coralui-component-search';
 import Switch from 'coralui-component-switch';
+import {Tag, TagList} from 'coralui-component-taglist';
 import Textarea from 'coralui-component-textarea';
 import Textfield from 'coralui-component-textfield';
 import Wait from 'coralui-component-wait';
@@ -27,6 +28,8 @@ export {
   Radio,
   Search,
   Switch,
+  Tag,
+  TagList,
   Textarea,
   Textfield,
   Wait
