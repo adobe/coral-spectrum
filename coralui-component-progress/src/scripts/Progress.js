@@ -247,7 +247,6 @@ class Progress extends Component(HTMLElement) {
     this._setContentZone('label', value, {
       handle: 'label',
       tagName: 'coral-progress-label',
-      defaultContentZone: true,
       insert: function(label) {
         this.appendChild(label);
       }

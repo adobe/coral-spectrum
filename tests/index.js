@@ -1,3 +1,4 @@
+import 'coralui-component-alert/tests';
 import 'coralui-component-anchorbutton/tests';
 import 'coralui-component-button/tests';
 import 'coralui-component-buttongroup/tests';

@@ -15,16 +15,16 @@
  * from Adobe Systems Incorporated.
  */
 
-const CLASSNAME = 'coral3-Progress-label';
+const CLASSNAME = 'coral3-Alert-header';
 
 /**
- @class Coral.Progress.Label
- @classdesc The Progress label content
- @htmltag coral-progress-label
+ @class Coral.Alert.Header
+ @classdesc The Alert header content
+ @htmltag coral-alert-header
  @extends HTMLElement
  @private
  */
-class ProgressLabel extends HTMLElement {
+class AlertHeader extends HTMLElement {
   constructor() {
     super();
   }
@@ -34,4 +34,4 @@ class ProgressLabel extends HTMLElement {
   }
 }
 
-export default ProgressLabel;
+export default AlertHeader;

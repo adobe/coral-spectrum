@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <title>Alert Examples</title>
+    <link rel="stylesheet" href="../build/css/coral.css">
+    <script src="../build/js/coral.js"></script>
+    <style>
+    body {
+      padding-left: 30px;
+    }
+
+    h3 {
+      margin-bottom: 20px;
+    }
+
+    section {
+      border-top: 1px solid #C8C8C8;
+      margin-bottom: 40px;
+    }
+
+    .col {
+      float: left;
+      margin-right: 12px;
+      width: 400px;
+    }
+
+    label {
+      margin-right: 1rem;
+    }
+    </style>
+  </head>
+
+  <body class="coral--light u-coral-clearFix">
+    <div class="col">
+      <section>
+        <h3 class="coral-Heading coral-Heading--3">Alerts</h3>
+        <coral-alert variant="error">
+          <coral-alert-header>Error</coral-alert-header>
+          <coral-alert-content>There is something borked!</coral-alert-content>
+        </coral-alert>
+        <coral-alert variant="warning">
+          <coral-alert-header>Warning</coral-alert-header>
+          <coral-alert-content>Something is about to go wrong!</coral-alert-content>
+        </coral-alert>
+        <coral-alert variant="success">
+          <coral-alert-header>Success</coral-alert-header>
+          <coral-alert-content>Everything went better than expected.</coral-alert-content>
+        </coral-alert>
+        <coral-alert variant="help">
+          <coral-alert-header>Help</coral-alert-header>
+          <coral-alert-content>
+            If you are struggling, read <a class="coral-Link coral-Link--subtle" href="#">the manual</a>.
+          </coral-alert-content>
+        </coral-alert>
+        <coral-alert variant="info">
+          <coral-alert-header>Info</coral-alert-header>
+          <coral-alert-content>For great success, configure the whozit.</coral-alert-content>
+        </coral-alert>
+        <coral-alert variant="error">
+          <coral-alert-header>ERROR</coral-alert-header>
+          <coral-alert-content>There may be something borked! It may in fact be the whozit, or <a href="#moo" class="coral-Link coral-Link--subtle">maybe the widget</a>, but we can't quite be certain.</coral-alert-content>
+        </coral-alert>
+        <coral-alert variant="error">
+          <coral-alert-header>Huge header goes here and causes problems?</coral-alert-header>
+          <coral-alert-content>There may be something borked! It may in fact be the whozit, or <a href="#moo" class="coral-Link coral-Link--subtle">maybe the widget</a>, but we can't quite be certain.</coral-alert-content>
+        </coral-alert>
+      </section>
+    </div>
+    <div class="col">
+      <section>
+        <h3 class="coral-Heading coral-Heading--3">Large Alerts</h3>
+        <coral-alert size="l" variant="error">
+          <coral-alert-header>Error</coral-alert-header>
+          <coral-alert-content>There is something borked!</coral-alert-content>
+        </coral-alert>
+        <coral-alert size="l" variant="warning">
+          <coral-alert-header>Warning</coral-alert-header>
+          <coral-alert-content>Something is about to go wrong!</coral-alert-content>
+        </coral-alert>
+        <coral-alert size="l" variant="success">
+          <coral-alert-header>Success</coral-alert-header>
+          <coral-alert-content>Everything went better than expected.</coral-alert-content>
+        </coral-alert>
+        <coral-alert size="l" variant="help">
+          <coral-alert-header>Help</coral-alert-header>
+          <coral-alert-content>
+            If you are struggling, read <a class="coral-Link coral-Link--subtle" href="#">the manual</a>.
+          </coral-alert-content>
+        </coral-alert>
+        <coral-alert size="l" variant="info">
+          <coral-alert-header>Info</coral-alert-header>
+          <coral-alert-content>For great success, configure the whozit.</coral-alert-content>
+        </coral-alert>
+        <coral-alert size="l" variant="error">
+          <coral-alert-header>Huge header goes here and causes problems?</coral-alert-header>
+          <coral-alert-content>
+            You must create a folder with a new name. You are about to lower your storage capacity and you won’t have enough room for all your uploaded files. You may want to delete some files before continuing.
+          </coral-alert-content>
+        </coral-alert>
+        <coral-alert size="l" variant="error" style="width: 250px">
+          <coral-alert-header>How about an even huger header that makes things wrap?</coral-alert-header>
+          <coral-alert-content>There is something borked!</coral-alert-content>
+        </coral-alert>
+      </section>
+    </div>
+    <div class="col">
+      <h2>Without heading (elements)</h2>
+      <coral-alert variant="info">
+        <coral-alert-header></coral-alert-header>
+        <coral-alert-content>Look ma, no heading!</coral-alert-content>
+      </coral-alert>
+      <coral-alert variant="info">
+        <coral-alert-content>This is an alert with no heading but a really really long content which causes it to be multiline</coral-alert-content>
+      </coral-alert>
+      <coral-alert variant="info" size="l">
+        <coral-alert-content>This is a large alert without a heading. It looks really ugly, but there is nothing I can do.</coral-alert-content>
+      </coral-alert>
+      <h2>Not-dismissable</h2>
+      <coral-alert variant="warning" nodismiss>
+        <coral-alert-header>IMPORTANT WARNING</coral-alert-header>
+        <coral-alert-content>Things aren't looking too good.</coral-alert-content>
+      </coral-alert>
+      <h2>With sub-elements</h2>
+      <coral-alert variant="error">
+        <coral-alert-header>FATAL ERROR</coral-alert-header>
+        <coral-alert-content>All life has stopped.</coral-alert-content>
+      </coral-alert>
+      <h2>Large</h2>
+      <coral-alert size="l" variant="error">
+        <coral-alert-header>Fatal Error</coral-alert-header>
+        <coral-alert-content>All life has stopped.</coral-alert-content>
+      </coral-alert>
+    </div>
+  </body>
+
+</html>

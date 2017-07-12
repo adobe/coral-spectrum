@@ -1,86 +1,88 @@
 script.
   if (typeof Coral.Configurator === 'function') {
     var configurator = new Coral.Configurator().set({
-      component: Coral.Button,useInnerElements: true,
+      component: Coral.Progress,
+      useInnerElements: true,
       innerElements: [
         {
-          tagName: 'coral-button-label',
+          tagName: 'coral-progress-label',
           properties: {
             'label.innerHTML': 'innerHTML'
           }
-        },
+        }
       ],
-      mainContentZone: 'coral-button-label',
-      skipProperty: function(prop) {
-        return prop === 'icon' && configurator.instance.icon === '';
+      skipInnerElement: function(tagName) {
+        // Skip label if showPercent is set
+        return tagName === 'coral-progress-label' && configurator.instance.showPercent;
       },
+      skipProperty: function(prop) {
+        // Skip label if showPercent is set
+        return prop === 'label.innerHTML' && configurator.instance.showPercent;
+      },
+      mainContentZone: 'coral-progress-label',
       fields: [
         {
-          label: 'Label Text',
-          prop: 'label.innerHTML',
-          type: 'text',
-          value: 'CoralUI Rocks'
-        },
-        {
-          label: 'Variant',
-          prop: 'variant',
-          type: 'select',
-          value: 'default',
-          options: {
-            'CTA': 'cta',
-            'Secondary': 'secondary',
-            'Primary': 'primary',
-            'Quiet': 'quiet',
-            'Warning': 'warning',
-            'Minimal': 'minimal'
-          }
-        },
-        {
-          label: 'Icon',
-          prop: 'icon',
-          type: 'text',
-          value: 'checkCircle'
-        },
-        {
-          label: 'Icon Size',
-          prop: 'iconSize',
-          type: 'select',
-          value: 'S',
-          options: {
-            'Extra Small': 'XS',
-            'Small': 'S',
-            'Medium': 'M',
-            'Large': 'L'
-          }
-        },
-        {
-          label: 'Button Size',
+          label: 'Size',
           prop: 'size',
           type: 'select',
-          value: 'M',
+          value: 'm',
           options: {
-            'Medium (default)': 'M',
-            'Large': 'L'
+            'Small': 's',
+            'Medium': 'm',
+            'Large': 'l',
           }
         },
         {
-          label: 'is selected',
-          prop: 'selected',
+          label: 'Label',
+          prop: 'label.innerHTML',
+          type: 'text',
+          value: ''
+        },
+        {
+          label: 'Label Position',
+          prop: 'labelPosition',
+          type: 'select',
+          value: 'right',
+          options: {
+            'Left': 'left',
+            'Right': 'right',
+            'Bottom': 'bottom',
+          }
+        },
+        {
+          prop: 'value',
+          label: 'Value',
+          type: 'spinner',
+          value: 50,
+          min: 0,
+          max: 100
+        },
+        {
+          label: 'is indeterminate',
+          prop: 'indeterminate',
           type: 'checkbox',
           value: false
         },
         {
-          label: 'is block',
-          prop: 'block',
+          label: 'Show Percent',
+          prop: 'showPercent',
           type: 'checkbox',
           value: false
-        },
-        {
-          label: 'is disabled',
-          prop: 'disabled',
-          type: 'checkbox',
-          value: false
-        },
+        }
+      ],
+      componentEvents: [
+        'coral-progress:change'
       ]
     }).insertAfterLastScript();
+
+    configurator.on('coral-configurator:propchange', function(event) {
+      if (event.detail.prop === 'showPercent') {
+        // Blow away the innerHTML that showPercent put right away
+        // Normally, this would happen on the next animation frame, but the configurator will pick it up
+        configurator.instance.label.innerHTML = '';
+
+        // Force configurator to re-draw HTML
+        configurator._updateCodeFromInstance();
+      }
+    });
   }

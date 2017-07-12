@@ -1,3 +1,4 @@
+import Alert from 'coralui-component-alert';
 import AnchorButton from 'coralui-component-anchorbutton';
 import Button from 'coralui-component-button';
 import ButtonGroup from 'coralui-component-buttongroup';
@@ -16,6 +17,7 @@ import Textfield from 'coralui-component-textfield';
 import Wait from 'coralui-component-wait';
 
 export {
+  Alert,
   AnchorButton,
   Button,
   ButtonGroup,

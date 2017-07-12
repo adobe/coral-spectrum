@@ -303,7 +303,7 @@ class Checkbox extends FormField(Component(HTMLElement)) {
     const label = this._elements.label;
   
     // Remove it so we can process children
-    if (label && label.parentNode) {
+    if (label.parentNode) {
       label.parentNode.removeChild(label);
     }
   

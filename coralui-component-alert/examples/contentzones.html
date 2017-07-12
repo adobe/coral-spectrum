@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <title>Alert Examples</title>
+    <link rel="stylesheet" href="../build/css/coral.css">
+    <script src="../build/js/coral.js"></script>
+    <style>
+    body {
+      padding-left: 30px;
+    }
+
+    h3 {
+      margin-bottom: 20px;
+    }
+
+    section {
+      border-top: 1px solid #C8C8C8;
+      margin-bottom: 40px;
+    }
+
+    .col {
+      float: left;
+      margin-right: 12px;
+      width: 400px;
+    }
+
+    label {
+      margin-right: 1rem;
+    }
+    </style>
+  </head>
+
+  <body class="coral--light u-coral-clearFix">
+    <div class="col">
+      <section>
+        <h3 class="coral-Heading coral-Heading--3">Both content zones</h3>
+        <coral-alert variant="error">
+          <coral-alert-header>Error</coral-alert-header>
+          <coral-alert-content>There is something borked!</coral-alert-content>
+        </coral-alert>
+        <h3 class="coral-Heading coral-Heading--3">No main content zone</h3>
+        <coral-alert variant="error">
+          <coral-alert-header>Error</coral-alert-header>
+          There is something borked!
+        </coral-alert>
+        <h3 class="coral-Heading coral-Heading--3">No content zones</h3>
+        <coral-alert variant="error">
+          There is something borked!
+        </coral-alert>
+      </section>
+    </div>
+  </body>
+
+</html>
