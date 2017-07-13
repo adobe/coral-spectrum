@@ -579,7 +579,7 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
     event.stopImmediatePropagation();
   
     const button = event.target;
-    const isSelected = event.detail.value;
+    const isSelected = button.hasAttribute('selected');
 
     // when in single mode, we need to make sure the current selection is valid
     if (this.selectionMode === selectionMode.SINGLE) {

@@ -3,7 +3,7 @@ import CharacterCount from './src/scripts/CharacterCount';
 
 window.customElements.define('coral-charactercount', CharacterCount);
 
-// Expose Textfield on the Coral namespace
+// Expose component on the Coral namespace
 window.Coral = window.Coral || {};
 window.Coral.CharacterCount = CharacterCount;
 

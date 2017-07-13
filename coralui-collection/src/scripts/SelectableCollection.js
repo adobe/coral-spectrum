@@ -77,6 +77,56 @@ class SelectableCollection extends Collection {
   }
   
   /**
+   Returns the previous selectable item.
+ 
+   @param {HTMLElement} item
+   The reference item.
+   
+   @returns {HTMLElement}
+   an item whose selection could be toggled.
+   
+   @protected
+   */
+  _getPreviousSelectable(item) {
+    let sibling = item.previousElementSibling;
+    while (sibling) {
+      if (sibling.matches(this._selectableItemSelector)) {
+        break;
+      }
+      else {
+        sibling = sibling.previousElementSibling;
+      }
+    }
+    
+    return sibling || item;
+  }
+  
+  /**
+   Returns the net selectable item.
+   
+   @param {HTMLElement} item
+   The reference item.
+   
+   @returns {HTMLElement}
+   an item whose selection could be toggled.
+   
+   @protected
+   */
+  _getNextSelectable(item) {
+    let sibling = item.nextElementSibling;
+    while (sibling) {
+      if (sibling.matches(this._selectableItemSelector)) {
+        break;
+      }
+      else {
+        sibling = sibling.nextElementSibling;
+      }
+    }
+    
+    return sibling || item;
+  }
+  
+  /**
    Returns the first item that is selected in the Collection. It allows to configure the attribute used for selection
    so that components that use 'selected' and 'active' can share the same implementation.
    

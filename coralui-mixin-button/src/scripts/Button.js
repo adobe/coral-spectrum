@@ -214,18 +214,12 @@ const Button = (superClass) => class extends superClass {
     return this._selected || false;
   }
   set selected(value) {
-    const oldValue = this._selected;
-    
     this._selected = transform.booleanAttr(value);
-  
     transform.reflect(this, 'selected', this._selected);
     
     this.classList.toggle('is-selected', this._selected);
     
-    this.trigger('coral-button:_selectedchanged', {
-      oldValue: oldValue,
-      value: this._selected
-    });
+    this.trigger('coral-button:_selectedchanged');
   }
   
   // We just reflect it but we also trigger an event to be used by button group
@@ -233,14 +227,9 @@ const Button = (superClass) => class extends superClass {
     return this.getAttribute('value');
   }
   set value(value) {
-    const oldValue = this.value;
-    
     transform.reflect(this, 'value', value);
   
-    this.trigger('coral-button:_valuechanged', {
-      oldValue: oldValue,
-      value: value
-    });
+    this.trigger('coral-button:_valuechanged');
   }
   
   /**

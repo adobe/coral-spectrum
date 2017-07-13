@@ -3,7 +3,7 @@ import Drawer from './src/scripts/Drawer';
 
 window.customElements.define('coral-drawer', Drawer);
 
-// Expose Drawer on the Coral namespace
+// Expose component on the Coral namespace
 window.Coral = window.Coral || {};
 window.Coral.Drawer = Drawer;
 window.Coral.Drawer.Content = function() {

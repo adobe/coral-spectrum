@@ -7,6 +7,7 @@
     "url": "https://git.corp.adobe.com/Coral/coralui"
   },
   "devDependencies": {
+    "coralui-component-accordion": "file:coralui-component-accordion",
     "coralui-component-alert": "file:coralui-component-alert",
     "coralui-component-anchorbutton": "file:coralui-component-anchorbutton",
     "coralui-component-button": "file:coralui-component-button",

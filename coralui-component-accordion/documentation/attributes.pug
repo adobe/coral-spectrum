@@ -1,0 +1,50 @@
++document-section('Coral.Accordion.Item Attributes')
+  +document-subsection('selected')
+    p.
+      Sets an item as expanded.
+
+    +markup-example()
+      coral-accordion
+        coral-accordion-item
+          coral-accordion-item-label Item A
+          coral-accordion-item-content Item A content.
+        coral-accordion-item(selected=true)
+          coral-accordion-item-label Item B
+          coral-accordion-item-content Item B content.
+
+  +document-subsection('disabled')
+    p.
+      Disables the an item so it cannot be expanded.
+
+    +markup-example()
+      coral-accordion
+        coral-accordion-item
+          coral-accordion-item-label Item A
+          coral-accordion-item-content Item A content.
+        coral-accordion-item(disabled=true)
+          coral-accordion-item-label Item B
+          coral-accordion-item-content Item B content.
+        coral-accordion-item
+          coral-accordion-item-label Item C
+          coral-accordion-item-content Item C content.
+
+  +document-subsection('coral-interactive')
+      p.
+        Mark an element and its children as being interactive. If an element or one of its parents has the coral-interactive attribute and is clicked, then the toggling of the accordion item will not occur.
+
+      +markup-example()
+        coral-accordion
+          coral-accordion-item
+            coral-accordion-item-label
+              span Item A
+              coral-checkbox(coral-interactive)
+            coral-accordion-item-content Item A content.
+          coral-accordion-item(disabled=true)
+            coral-accordion-item-label Item B
+              div(coral-interactive)
+                button(is=coral-button) Action 1
+                button(is=coral-button) Action 2
+            coral-accordion-item-content Item B content.
+          coral-accordion-item
+            coral-accordion-item-label Item C
+            coral-accordion-item-content Item C content.

@@ -10,7 +10,7 @@ commons.extend(strings, {
 
 window.customElements.define('coral-numberinput', NumberInput);
 
-// Expose NumberInput on the Coral namespace
+// Expose component on the Coral namespace
 window.Coral = window.Coral || {};
 window.Coral.NumberInput = NumberInput;
 

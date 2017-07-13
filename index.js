@@ -1,3 +1,4 @@
+import {Accordion, AccordionItem} from 'coralui-component-accordion';
 import Alert from 'coralui-component-alert';
 import AnchorButton from 'coralui-component-anchorbutton';
 import Button from 'coralui-component-button';
@@ -18,6 +19,8 @@ import Textfield from 'coralui-component-textfield';
 import Wait from 'coralui-component-wait';
 
 export {
+  Accordion,
+  AccordionItem,
   Alert,
   AnchorButton,
   AnchorList,

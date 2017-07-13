@@ -15,7 +15,7 @@ window.customElements.define('coral-anchorlist-item', AnchorListItem, {extends: 
 window.customElements.define('coral-buttonlist', ButtonList);
 window.customElements.define('coral-buttonlist-item', ButtonListItem, {extends: 'button'});
 
-// Expose List, AnchorList and ButtonList on the Coral namespace
+// Expose component on the Coral namespace
 window.Coral = window.Coral || {};
 window.Coral.List = List;
 window.Coral.List.Item = ListItem;

@@ -9,7 +9,7 @@ window.customElements.define('coral-alert-header', AlertHeader);
 window.customElements.define('coral-alert-content', AlertContent);
 window.customElements.define('coral-alert-footer', AlertFooter);
 
-// Expose Alert on the Coral namespace
+// Expose component on the Coral namespace
 window.Coral = window.Coral || {};
 window.Coral.Alert = Alert;
 window.Coral.AlertHeader = AlertHeader;

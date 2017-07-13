@@ -34,7 +34,7 @@ module.exports = function(gulp) {
     return gulp.src('./')
       .pipe(server({
         port: 9001,
-        livereload: true,
+        livereload: false,
         directoryListing: true
       }));
   });

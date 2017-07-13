@@ -10,7 +10,7 @@ commons.extend(strings, {
 
 window.customElements.define('coral-search', Search);
 
-// Expose Search on the Coral namespace
+// Expose component on the Coral namespace
 window.Coral = window.Coral || {};
 window.Coral.Search = Search;
 

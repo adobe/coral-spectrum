@@ -12,7 +12,7 @@ commons.extend(strings, {
 window.customElements.define('coral-tag', Tag);
 window.customElements.define('coral-taglist', TagList);
 
-// Expose TagList and Tag on the Coral namespace
+// Expose component on the Coral namespace
 window.Coral = window.Coral || {};
 window.Coral.Tag = Tag;
 window.Coral.Tag.Label = function() {
