@@ -15,15 +15,16 @@
  * from Adobe Systems Incorporated.
  */
 
-const CLASSNAME = 'coral3-Alert-content';
+const CLASSNAME = 'coral3-BasicList-item-content';
 
 /**
- @class Coral.Alert.Content
- @classdesc The Alert default content
- @htmltag coral-alert-content
+ @class Coral.List.Item.Content
+ @classdesc The List item content
+ @htmltag coral-list-item-content
  @extends HTMLElement
+ @private
  */
-class AlertContent extends HTMLElement {
+class ListItemContent extends HTMLElement {
   constructor() {
     super();
   }
@@ -33,4 +34,4 @@ class AlertContent extends HTMLElement {
   }
 }
 
-export default AlertContent;
+export default ListItemContent;

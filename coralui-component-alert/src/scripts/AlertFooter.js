@@ -22,7 +22,6 @@ const CLASSNAME = 'coral3-Alert-footer';
  @classdesc The Alert footer content
  @htmltag coral-alert-footer
  @extends HTMLElement
- @private
  */
 class AlertFooter extends HTMLElement {
   constructor() {

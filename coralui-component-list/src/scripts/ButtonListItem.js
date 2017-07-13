@@ -15,22 +15,29 @@
  * from Adobe Systems Incorporated.
  */
 
-const CLASSNAME = 'coral3-Alert-content';
+import Component from 'coralui-mixin-component';
+import {ListItem} from 'coralui-mixin-list';
+
+const CLASSNAME = 'coral3-ButtonList-item';
 
 /**
- @class Coral.Alert.Content
- @classdesc The Alert default content
- @htmltag coral-alert-content
- @extends HTMLElement
+ @class Coral.ButtonList.Item
+ @classdesc An ButtonList item component
+ @htmltag coral-buttonlist-item
+ @extends HTMLButtonElement
+ @extends Coral.mixin.component
+ @extends Coral.mixin.list.item
  */
-class AlertContent extends HTMLElement {
+class ButtonListItem extends ListItem(Component(HTMLButtonElement)) {
   constructor() {
     super();
   }
   
   connectedCallback() {
+    super.connectedCallback();
+    
     this.classList.add(CLASSNAME);
   }
 }
 
-export default AlertContent;
+export default ButtonListItem;

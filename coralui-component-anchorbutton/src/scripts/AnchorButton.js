@@ -16,18 +16,11 @@
  */
 
 import Component from 'coralui-mixin-component';
-import Button from 'coralui-component-button';
-import {transform} from 'coralui-util';
-
-// Use the button class name
-const CLASSNAME = 'coral-Button';
+import ButtonMixin from 'coralui-mixin-button';
+import {transform, commons} from 'coralui-util';
 
 // Key code
 const SPACE = 32;
-
-// AnchorButton also observes the disabled attribute in addition to the observed attributes from Button
-let observedAttributes = Button.observedAttributes;
-observedAttributes.push('disabled');
 
 /**
  @class Coral.AnchorButton
@@ -36,56 +29,20 @@ observedAttributes.push('disabled');
  @htmlbasetag a
  @extends HTMLAnchorElement
  @extends Coral.mixin.component
+ @extends Coral.mixin.button
  */
-class AnchorButton extends Component(HTMLAnchorElement) {
+class AnchorButton extends ButtonMixin(Component(HTMLAnchorElement)) {
   constructor() {
     super();
-  
-    // Templates
-    this._elements = {
-      // Create or fetch the label element.
-      label: this.querySelector('coral-anchorbutton-label') || document.createElement('coral-anchorbutton-label')
-    };
-  
+    
     // Events
-    this.on({
-      'mousedown': '_onMouseDown',
+    this.on(commons.extend(this._events, {
       'keydown': '_onKeyDown',
       'keyup': '_onKeyUp'
-    });
+    }));
     
     // cannot use the events hash because events on disabled items are not reported
     this.addEventListener('click', this._onClick.bind(this));
-  
-    // Listen for mutations
-    this._observer = new MutationObserver(this._makeAccessible.bind(this));
-  
-    // Watch for changes to the label element
-    this._observer.observe(this._elements.label, {
-      childList: true, // Catch changes to childList
-      characterData: true, // Catch changes to textContent
-      subtree: true // Monitor any child node
-    });
-  }
-  
-  /**
-   The label of the button.
-   
-   @type {HTMLElement}
-   @contentzone
-   @memberof Coral.Button#
-   */
-  get label() {
-    return this._getContentZone(this._elements.label);
-  }
-  set label(value) {
-    this._setContentZone('label', value, {
-      handle: 'label',
-      tagName: 'coral-anchorbutton-label',
-      insert: function(label) {
-        this.appendChild(label);
-      }
-    });
   }
   
   /**
@@ -139,80 +96,24 @@ class AnchorButton extends Component(HTMLAnchorElement) {
     }
   }
   
+  // Override content zone name
+  get _contentZones() {return {'coral-anchorbutton-label': 'label'};}
+  
   static get observedAttributes() {
-    return observedAttributes;
+    return super.observedAttributes.concat(['disabled']);
   }
   
   connectedCallback() {
     super.connectedCallback();
     
-    this.classList.add(CLASSNAME);
-  
-    // Default reflected attributes
-    if (!this._variant) {this.variant = Button.variant.SECONDARY;}
-    if (!this._size) {this.size = Button.size.MEDIUM;}
-  
-    // Create a temporary fragment
-    const fragment = document.createDocumentFragment();
-    
-    const label = this._elements.label;
-  
-    // Remove it so we can process children
-    if (label.parentNode) {
-      this.removeChild(label);
-    }
-  
-    let iconAdded = false;
-    // Process remaining elements as necessary
-    while (this.firstChild) {
-      const child = this.firstChild;
-    
-      if (child.tagName === 'CORAL-ICON') {
-        // Don't add duplicated icons
-        if (iconAdded) {
-          this.removeChild(child);
-        }
-        else {
-          // Conserve existing icon element to content
-          this._elements.icon = child;
-          fragment.appendChild(child);
-          iconAdded = true;
-        }
-      }
-      else {
-        // Move anything else into the label
-        label.appendChild(child);
-      }
-    }
-  
-    // Add the frag to the component
-    this.appendChild(fragment);
-  
-    // Assign the content zones, moving them into place in the process
-    this.label = label;
-  
-    // Make sure the icon is well positioned
-    this._updateIcon(this.icon);
-  
     // a11y
-    // Force tabindex and aria-disabled attribute reflection
+    this.setAttribute('role', 'button');
     if (!this.disabled) {
+      // Force tabindex and aria-disabled attribute reflection
       this.setAttribute('tabindex', '0');
       this.setAttribute('aria-disabled', 'false');
     }
-    this.setAttribute('role', 'button');
-    this._makeAccessible();
   }
 }
-
-// Copy properties from Button
-const target = AnchorButton.prototype;
-const source = Button.prototype;
-
-Object.getOwnPropertyNames(source).forEach(function (name) {
-  if (name !== "constructor" && name !== 'connectedCallback' && name !== 'label') {
-    Object.defineProperty(target, name, Object.getOwnPropertyDescriptor(source, name));
-  }
-});
 
 export default AnchorButton;

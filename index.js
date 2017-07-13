@@ -6,6 +6,7 @@ import CharacterCount from 'coralui-component-charactercount';
 import Checkbox from 'coralui-component-checkbox';
 import Drawer from 'coralui-component-drawer';
 import Icon from 'coralui-component-icon';
+import {List, AnchorList, ButtonList} from 'coralui-component-list';
 import NumberInput from 'coralui-component-numberinput';
 import Progress from 'coralui-component-progress';
 import Radio from 'coralui-component-radio';
@@ -19,12 +20,15 @@ import Wait from 'coralui-component-wait';
 export {
   Alert,
   AnchorButton,
+  AnchorList,
   Button,
   ButtonGroup,
+  ButtonList,
   CharacterCount,
   Checkbox,
   Drawer,
   Icon,
+  List,
   Progress,
   NumberInput,
   Radio,

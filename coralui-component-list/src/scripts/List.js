@@ -15,22 +15,24 @@
  * from Adobe Systems Incorporated.
  */
 
-const CLASSNAME = 'coral3-Alert-content';
+import Component from 'coralui-mixin-component';
+import {List as ListMixin} from 'coralui-mixin-list';
 
 /**
- @class Coral.Alert.Content
- @classdesc The Alert default content
- @htmltag coral-alert-content
+ @class Coral.List
+ @classdesc A List component
+ @htmltag coral-list
  @extends HTMLElement
+ @extends Coral.mixin.component
+ @extends Coral.mixin.list
  */
-class AlertContent extends HTMLElement {
+class List extends ListMixin(Component(HTMLElement)) {
   constructor() {
     super();
-  }
-  
-  connectedCallback() {
-    this.classList.add(CLASSNAME);
+    
+    // Events
+    this.on(this._events);
   }
 }
 
-export default AlertContent;
+export default List;

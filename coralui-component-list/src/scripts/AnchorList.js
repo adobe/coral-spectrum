@@ -15,22 +15,44 @@
  * from Adobe Systems Incorporated.
  */
 
-const CLASSNAME = 'coral3-Alert-content';
+import Component from 'coralui-mixin-component';
+import {List} from 'coralui-mixin-list';
+
+const CLASSNAME = 'coral3-AnchorList';
 
 /**
- @class Coral.Alert.Content
- @classdesc The Alert default content
- @htmltag coral-alert-content
+ @class Coral.AnchorList
+ @classdesc An AnchorList component
+ @htmltag coral-anchorlist
  @extends HTMLElement
+ @extends Coral.mixin.component
+ @extends Coral.mixin.list
  */
-class AlertContent extends HTMLElement {
+class AnchorList extends List(Component(HTMLElement)) {
   constructor() {
     super();
+  
+    // Events
+    this.on(this._events);
+  }
+  
+  /** @private */
+  get _itemTagName() {
+    // Used for Collection
+    return 'coral-anchorlist-item';
+  }
+  
+  /** @private */
+  get _itemBaseTagName() {
+    // Used for Collection
+    return 'a';
   }
   
   connectedCallback() {
+    super.connectedCallback();
+    
     this.classList.add(CLASSNAME);
   }
 }
 
-export default AlertContent;
+export default AnchorList;
