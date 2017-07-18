@@ -40,7 +40,9 @@ describe('Coral.Accordion', function() {
       expect(Coral.Accordion.variant.LARGE).to.equal('large');
       expect(Object.keys(Coral.Accordion.variant).length).to.equal(3);
     });
+  });
   
+  describe('Instantiation', function() {
     it('should be possible to clone using markup', function() {
       helpers.cloneComponent(window.__html__['Coral.Accordion.base.html']);
     });
@@ -334,8 +336,20 @@ describe('Coral.Accordion', function() {
         el.items.first().selected = true;
         
         expect(changeSpy.callCount).to.equal(1);
-        expect(changeSpy.args[0][0].detail.selection).to.deep.equal(el.selectedItems);
-        expect(changeSpy.args[0][0].detail.oldSelection).to.deep.equal([]);
+        expect(changeSpy.args[0][0].detail.selection).to.equal(el.selectedItem);
+        expect(changeSpy.args[0][0].detail.oldSelection).to.equal(null);
+      });
+  
+      it('should return an array for selection and oldSelection if multiple=true', function() {
+        const el = helpers.build(window.__html__['Coral.Accordion.selected.first.html']);
+        el.multiple = true;
+        let changeSpy = sinon.spy();
+        el.on('coral-accordion:change', changeSpy);
+        el.items.last().selected = true;
+    
+        expect(changeSpy.callCount).to.equal(1);
+        expect(changeSpy.args[0][0].detail.selection).to.deep.equal([el.items.first(), el.items.last()]);
+        expect(changeSpy.args[0][0].detail.oldSelection).to.deep.equal([el.items.first()]);
       });
   
       it('should trigger on multiple change', function() {
@@ -346,9 +360,9 @@ describe('Coral.Accordion', function() {
         let changeSpy = sinon.spy();
         el.on('coral-accordion:change', changeSpy);
         el.multiple = false;
-    
+  
         expect(changeSpy.callCount).to.equal(1);
-        expect(changeSpy.args[0][0].detail.selection).to.deep.equal(el.selectedItems);
+        expect(changeSpy.args[0][0].detail.selection).to.equal(el.items.last());
         expect(changeSpy.args[0][0].detail.oldSelection).to.deep.equal([el.items.first(), el.items.last()]);
       });
     });

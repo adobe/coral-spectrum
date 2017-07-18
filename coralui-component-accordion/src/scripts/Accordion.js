@@ -313,7 +313,8 @@ class Accordion extends Component(HTMLElement) {
     let selectedItems = this.selectedItems;
     
     if (!this.multiple) {
-      item = item || selectedItems[0];
+      // Last selected item wins if multiple selection while not allowed
+      item = item || selectedItems[selectedItems.length - 1];
       
       if (item && item.hasAttribute('selected') && selectedItems.length > 1) {
         selectedItems.forEach(function(selectedItem) {
@@ -340,10 +341,20 @@ class Accordion extends Component(HTMLElement) {
     const oldSelection = this._oldSelection;
     
     if (!this._preventTriggeringEvents && this._arraysAreDifferent(selectedItems, oldSelection)) {
-      this.trigger('coral-accordion:change', {
-        oldSelection: oldSelection,
-        selection: selectedItems
-      });
+      // We differentiate whether multiple is on or off and return an array or HTMLElement respectively
+      if (this.multiple) {
+        this.trigger('coral-accordion:change', {
+          oldSelection: oldSelection,
+          selection: selectedItems
+        });
+      }
+      else {
+        // Return all items if we just switched from multiple=true to multiple=false and we had >1 selected items
+        this.trigger('coral-accordion:change', {
+          oldSelection: oldSelection.length > 1 ? oldSelection : (oldSelection[0] || null),
+          selection: selectedItems[0] || null
+        });
+      }
     
       this._oldSelection = selectedItems;
     }
@@ -412,11 +423,18 @@ class Accordion extends Component(HTMLElement) {
     super.connectedCallback();
     
     this.classList.add(CLASSNAME);
+  
+    // Default reflected attributes
+    if (!this._variant) {this.variant = variant.DEFAULT;}
     
     this.setAttribute('role', 'tablist');
     this.setAttribute('aria-multiselectable', this.multiple);
     
+    // Don't trigger events once connected
+    this._preventTriggeringEvents = true;
     this._validateSelection();
+    this._preventTriggeringEvents = false;
+    
     this._oldSelection = this.selectedItems;
   }
   

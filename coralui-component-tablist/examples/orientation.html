@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Coral3 | Coral.TabList</title>
+    <link rel="stylesheet" href="../build/css/coral.css">
+    <script src="../build/js/coral.js"></script>
+    <style>
+    .col {
+      float: left;
+      margin-right: 12px;
+      width: 650px;
+    }
+
+    .col > section {
+      padding: 10px;
+    }
+    </style>
+  </head>
+
+  <body class="coral--light u-coral-padding">
+    <div class="col">
+      <section>
+        <h2 class="coral-Heading coral-Heading--2">Orientation: vertical</h2>
+        <coral-tablist orientation="vertical">
+          <coral-tab icon="add" target="#panel_10">Tab 1</coral-tab>
+          <coral-tab icon="checkCircle" target="#panel_20" disabled>Tab 2</coral-tab>
+          <coral-tab icon="delete" target="#panel_30">Tab 3</coral-tab>
+        </coral-tablist>
+        <h2 class="coral-Heading coral-Heading--2">Orientation: vertical &amp; Size: L &amp; Icon + Text</h2>
+        <coral-tablist orientation="vertical" size="L">
+          <coral-tab icon="compass" target="#panel_10">Navigation</coral-tab>
+          <coral-tab icon="add" target="#panel_20">Create</coral-tab>
+          <coral-tab icon="clock" target="#panel_30">Recent</coral-tab>
+          <coral-tab icon="starFill" target="#panel_40">Favorites</coral-tab>
+          <coral-tab icon="wrench" target="#panel_50" disabled>Tools</coral-tab>
+        </coral-tablist>
+        <h2 class="coral-Heading coral-Heading--2">Orientation: vertical &amp; Size: L &amp; Icon only</h2>
+        <coral-tablist orientation="vertical" size="L">
+          <coral-tab icon="compass" target="#panel_10"></coral-tab>
+          <coral-tab icon="add" target="#panel_20"></coral-tab>
+          <coral-tab icon="clock" target="#panel_30"></coral-tab>
+          <coral-tab icon="starFill" target="#panel_40"></coral-tab>
+          <coral-tab icon="wrench" target="#panel_50" disabled></coral-tab>
+        </coral-tablist>
+        <h2 class="coral-Heading coral-Heading--2">Orientation: vertical &amp; Size: L &amp; Text only</h2>
+        <coral-tablist orientation="vertical" size="L">
+          <coral-tab target="#panel_10">Navigation</coral-tab>
+          <coral-tab target="#panel_20">Create</coral-tab>
+          <coral-tab target="#panel_30">Recent</coral-tab>
+          <coral-tab target="#panel_40">Favorites</coral-tab>
+          <coral-tab target="#panel_50" disabled>Tools</coral-tab>
+        </coral-tablist>
+      </section>
+    </div>
+    <div class="col">
+      <section class="coral--dark">
+        <h2 class="coral-Heading coral-Heading--2">Orientation: vertical</h2>
+        <coral-tablist orientation="vertical">
+          <coral-tab icon="add" target="#panel_10">Tab 1</coral-tab>
+          <coral-tab icon="checkCircle" target="#panel_20" disabled>Tab 2</coral-tab>
+          <coral-tab icon="delete" target="#panel_30">Tab 3</coral-tab>
+        </coral-tablist>
+        <h2 class="coral-Heading coral-Heading--2">Orientation: vertical &amp; Size: L</h2>
+        <coral-tablist orientation="vertical" size="L">
+          <coral-tab icon="add" target="#panel_10">Tab 1</coral-tab>
+          <coral-tab icon="checkCircle" target="#panel_20" invalid>Tab 2</coral-tab>
+          <coral-tab icon="delete" target="#panel_30" disabled>Tab 3</coral-tab>
+        </coral-tablist>
+      </section>
+    </div>
+  </body>
+
+</html>

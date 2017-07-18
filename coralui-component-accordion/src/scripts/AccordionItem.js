@@ -165,6 +165,8 @@ class AccordionItem extends Component(HTMLElement) {
     this.classList.toggle('is-disabled', this.disabled);
     this.removeAttribute('aria-disabled');
     this._elements.acHeader.setAttribute('aria-disabled', this.disabled);
+  
+    this.selected = this.selected;
   }
   
   /** @private **/

@@ -60,7 +60,7 @@ const getListenerFromMethodNameOrFunction = function(obj, eventName, methodNameO
  Add local event and key combo listeners for this component, store global event/key combo listeners for later.
  @ignore
  */
-const delegateEvents = function() {
+const delegateEvents = function(globalsOnly) {
   /*
    Add listeners to new event
    - Include in hash
@@ -155,6 +155,11 @@ const delegateEvents = function() {
         }
       }
       else {
+        // We don't want to attach non global events again
+        if (globalsOnly) {
+          continue;
+        }
+        
         // Events on the element itself
         if (isKey) {
           // Create the keys instance only if its needed
@@ -253,7 +258,7 @@ const Component = (superClass) => class extends superClass {
   // Returns the content zone if the component is connected and contains the content zone else null
   // Ideally content zones will be replaced by shadow dom and <slot> elements
   _getContentZone(contentZone) {
-    if (this.parentNode) {
+    if (document.contains(this)) {
       return (this.contains(contentZone) && contentZone) || null;
     }
     // Return the content zone by default
@@ -542,7 +547,7 @@ const Component = (superClass) => class extends superClass {
   connectedCallback() {
     // A component that is reattached should respond to global events again
     if (this._disconnected) {
-      delegateEvents.call(this);
+      delegateEvents.call(this, true);
       this._disconnected = undefined;
     }
   }
