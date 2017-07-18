@@ -120,7 +120,7 @@ class Accordion extends Component(HTMLElement) {
    
    @type {Coral.Collection}
    @readonly
-   @memberof Coral.TagList#
+   @memberof Coral.Accordion#
    */
   get items() {
     // just init on demand

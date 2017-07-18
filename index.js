@@ -9,6 +9,7 @@ import Drawer from 'coralui-component-drawer';
 import Icon from 'coralui-component-icon';
 import {List, AnchorList, ButtonList} from 'coralui-component-list';
 import NumberInput from 'coralui-component-numberinput';
+import {Panel, PanelStack} from 'coralui-component-panelstack';
 import Progress from 'coralui-component-progress';
 import Radio from 'coralui-component-radio';
 import Search from 'coralui-component-search';
@@ -33,6 +34,8 @@ export {
   Drawer,
   Icon,
   List,
+  Panel,
+  PanelStack,
   Progress,
   NumberInput,
   Radio,

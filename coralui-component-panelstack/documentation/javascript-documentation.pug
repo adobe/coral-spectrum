@@ -1,0 +1,59 @@
++document-section('JavaScript Examples')
+
+  +document-subsection('Programmatic Interaction')
+    p.
+      The following shows how to interaction with the selecteditem in the PanelStack
+      component. Below is a PanelStack that applies the coral-Well style to its items.
+      Neat, isn't it?
+
+    +markup-example().
+      <coral-panelstack id="select_rotation_example">
+        <coral-panel selected class="coral-Well">
+          Panel 0: I am Panel 0.
+        </coral-panel>
+        <coral-panel class="coral-Well">
+          Panel 1: Haha, Panel 1 here.
+        </coral-panel>
+        <coral-panel class="coral-Well">
+          Panel 2: Wait for it ! Panel 3 comes next.
+        </coral-panel>
+        <coral-panel class="coral-Well">
+          Panel 3: I will not go away, only if you click on "Cycle"
+        </coral-panel>
+        <coral-panel class="coral-Well">
+          Panel 4: Last, but not least.
+        </coral-panel>
+      </coral-panelstack>
+      <h4 id='selectedIndexLabel'>Selected Index: 0</h4>
+
+    p.
+      Click this cycle button to interact with the PanelStack
+
+    button(is="coral-button" id="cycleActive").
+      Cycle Selected
+
+    p.
+      The following JavaScript shows how to set the selected attribute
+
+    +example-pre-only().
+      <script>
+      $(document).ready(function()
+      {
+        var panelList = document.querySelector('#select_rotation_example');
+
+        $('#cycleActive').on('click', function()
+        {
+          var next = $(panelList.selectedItem).nextAll('coral-panel').first();
+
+          if (!next.length)
+          {
+            next = $(panelList).children('coral-panel').first();
+          }
+
+          next.attr('selected', '');
+
+          $('#selectedIndexLabel').text('Selected Index: ' + panelList.items.getAll().indexOf(next[0]));
+        });
+      });
+      </script>
+

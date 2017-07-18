@@ -18,6 +18,7 @@
     "coralui-component-icon": "file:coralui-component-icon",
     "coralui-component-list": "file:coralui-component-list",
     "coralui-component-numberinput": "file:coralui-component-numberinput",
+    "coralui-component-panelstack": "file:coralui-component-panelstack",
     "coralui-component-progress": "file:coralui-component-progress",
     "coralui-component-radio": "file:coralui-component-radio",
     "coralui-component-search": "file:coralui-component-search",

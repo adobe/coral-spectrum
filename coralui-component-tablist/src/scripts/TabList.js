@@ -91,7 +91,7 @@ class TabList extends Component(HTMLElement) {
    
    @type {Coral.Collection}
    @readonly
-   @memberof Coral.TagList#
+   @memberof Coral.TabList#
    */
   get items() {
     // just init on demand
