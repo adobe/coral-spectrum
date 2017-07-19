@@ -81,6 +81,19 @@ describe('Coral.Search', function() {
         expect(Coral.Search.variant.DEFAULT).to.equal(Coral.Textfield.variant.DEFAULT);
       });
     });
+  
+    describe('#maxlength', function() {
+      it('should return maxlength from the input', function() {
+        expect(el.maxLength).to.equal(-1);
+        expect(el.hasAttribute('maxlength')).to.be.false;
+      });
+      
+      it('should set field maxlength to 10', function() {
+        el.maxLength = 10;
+        expect(el._elements.input.getAttribute('maxlength')).to.equal('10');
+        expect(el.getAttribute('maxlength')).to.equal('10');
+      });
+    });
   });
 
   describe('clearInput', function() {

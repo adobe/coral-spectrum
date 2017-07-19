@@ -20,7 +20,7 @@ import FormField from 'coralui-mixin-formfield';
 import 'coralui-component-textfield';
 import 'coralui-component-button';
 import base from '../templates/base';
-import {transform, validate} from 'coralui-util';
+import {transform, validate, commons} from 'coralui-util';
 
 const CLASSNAME = 'coral3-Search';
 
@@ -166,6 +166,21 @@ class Search extends FormField(Component(HTMLElement)) {
   }
   
   /**
+   Max length for the Input field.
+   @type {Long}
+   @htmlattribute maxlength
+   @htmlattributereflected
+   @memberof Coral.Search#
+   */
+  get maxLength() {
+    return this._elements.input.maxLength;
+  }
+  set maxLength(value) {
+    this._elements.input.maxLength = value;
+    transform.reflect(this, 'maxlength', this.maxLength);
+  }
+  
+  /**
    This sets the left icon on the search component.
    
    @type {String}
@@ -292,8 +307,11 @@ class Search extends FormField(Component(HTMLElement)) {
   // Expose enumerations
   static get variant() {return variant;}
   
+  // Used to map properties with attributes
+  get _attributes() {return commons.extend({maxlength: 'maxLength'}, super._attributes);}
+  
   static get observedAttributes() {
-    return super.observedAttributes.concat(['placeholder', 'icon', 'variant']);
+    return super.observedAttributes.concat(['placeholder', 'icon', 'variant', 'maxlength', 'maxLength']);
   }
   
   connectedCallback() {
