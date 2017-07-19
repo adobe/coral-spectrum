@@ -58,6 +58,8 @@ class PanelStack extends Component(HTMLElement) {
       this._items = new SelectableCollection({
         host: this,
         itemTagName: 'coral-panel',
+        // allows panels to be nested
+        itemSelector: ':scope > coral-panel',
         onItemAdded: this._validateSelection,
         onItemRemoved: this._validateSelection,
       });

@@ -24,6 +24,7 @@
     "coralui-component-search": "file:coralui-component-search",
     "coralui-component-switch": "file:coralui-component-switch",
     "coralui-component-tablist": "file:coralui-component-tablist",
+    "coralui-component-tabview": "file:coralui-component-tabview",
     "coralui-component-taglist": "file:coralui-component-taglist",
     "coralui-component-textarea": "file:coralui-component-textarea",
     "coralui-component-textfield": "file:coralui-component-textfield",

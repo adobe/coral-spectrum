@@ -1,0 +1,14 @@
++document-section-simple-example()
+  p.
+    A <code>Coral.TabView</code> is used with a
+    <a href="Coral.TabList.html" class="coral-Link">Coral.TabList</a> and a
+    <a href="Coral.PanelStack.html" class="coral-Link">Coral.PanelStack</a> to create a 'tabs' UI pattern.
+
+  .docs-Example-simpleExampleMarkup
+    coral-tabview
+      coral-tablist(target="fragement-tabview-panel")
+        coral-tab Tab 1
+        coral-tab Tab 2
+      coral-panelstack(class="coral-Well", id="fragment-tabview-panel")
+        coral-panel Tab1: Lorem ipsum dolor sit amet.
+        coral-panel Tab2: Aenean faucibus ornare laoreet. Cras luctus purus.

@@ -1,0 +1,17 @@
+{
+  "name": "coralui-component-tabview",
+  "version": "2.0.0",
+  "description": "TabView component",
+  "dependencies": {
+    "@coralui/coralui-theme-cloudui": "^9.3.0",
+    "coralui-component-panelstack": "file:../coralui-component-panelstack",
+    "coralui-component-tablist": "file:../coralui-component-tablist",
+    "coralui-mixin-component": "file:../coralui-mixin-component",
+    "coralui-externals": "file:../coralui-externals",
+    "coralui-util": "file:../coralui-util"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "coralui-gulp": "file:../coralui-gulp"
+  }
+}

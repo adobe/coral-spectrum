@@ -156,21 +156,15 @@ describe('Coral.PanelStack', function() {
 
       item1.selected = true;
       expect(spy.callCount).to.equal(1);
-      // expect(spy.getCall(0).calledWithMatch({
-      //   detail: {
-      //     oldSelection: null,
-      //     selection: item1
-      //   }
-      // })).to.be.true;
-
+      expect(spy.args[0][0].detail.selection).to.equal(item1);
+      expect(spy.args[0][0].detail.oldSelection).to.equal(null);
+  
+      spy = sinon.spy();
+      el.on('coral-panelstack:change', spy);
       item2.selected = true;
-      expect(spy.callCount).to.equal(2);
-      // expect(spy.getCall(1).calledWithMatch({
-      //   detail: {
-      //     oldSelection: item1,
-      //     selection: item2
-      //   }
-      // })).to.be.true;
+      expect(spy.callCount).to.equal(1);
+      expect(spy.args[0][0].detail.selection).to.equal(item2);
+      expect(spy.args[0][0].detail.oldSelection).to.equal(item1);
     });
   });
   

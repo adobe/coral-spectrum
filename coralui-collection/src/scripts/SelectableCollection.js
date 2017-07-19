@@ -42,8 +42,8 @@ class SelectableCollection extends Collection {
     }
   
     // disabled items will not be a selection candicate although hidden items might
-    this._selectableItemSelector = this._itemSelector + ':not([disabled])';
-    this._selectedItemSelector = this._itemSelector + '[selected]';
+    this._selectableItemSelector = this._allItemsSelector + ':not([disabled])';
+    this._selectedItemSelector = this._allItemsSelector + '[selected]';
     this._deselectAllExceptSelector = this._selectedItemSelector;
   }
   

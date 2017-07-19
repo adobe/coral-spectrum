@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Coral3 | Coral.TabView</title>
+    <link rel="stylesheet" href="../build/css/coral.css">
+    <script src="../build/js/coral.js"></script>
+  </head>
+
+  <body class="coral--light u-coral-padding">
+    <h1 class="coral-Heading coral-Heading--1">coral-TabView</h1>
+    <h2 class="coral-Heading coral-Heading--2">Orientation: horizontal</h2>
+    <coral-tabview>
+      <coral-tablist>
+        <coral-tab>Tab 1</coral-tab>
+        <coral-tab>Tab 2</coral-tab>
+        <coral-tab selected>Tab 3</coral-tab>
+      </coral-tablist>
+      <coral-panelstack class="coral-Well">
+        <coral-panel>Lorem ipsum dolor
+          <button>Click me!</button> sit amet.
+        </coral-panel>
+        <coral-panel>This will not be shown as the corresponding tab is disabled.</coral-panel>
+        <coral-panel>Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+      </coral-panelstack>
+    </coral-tabview>
+    <h2 class="coral-Heading coral-Heading--2">Orientation: vertical</h2>
+    <coral-tabview orientation="vertical">
+      <coral-tablist>
+        <coral-tab>Tab 1</coral-tab>
+        <coral-tab selected>Tab 2</coral-tab>
+        <coral-tab>Tab 3</coral-tab>
+      </coral-tablist>
+      <coral-panelstack class="coral-Well">
+        <coral-panel>Lorem ipsum dolor
+          <button>Click me!</button> sit amet.
+        </coral-panel>
+        <coral-panel>This will not be shown as the corresponding tab is disabled.</coral-panel>
+        <coral-panel>Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+      </coral-panelstack>
+    </coral-tabview>
+  </body>
+
+</html>

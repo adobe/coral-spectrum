@@ -333,7 +333,7 @@ class TabList extends Component(HTMLElement) {
         }
       }
       // Selected item
-      else if (item.hasAttribute('selected') && selectedItems.length) {
+      else if (item.hasAttribute('selected') && selectedItems.length > 1) {
         selectedItems.forEach(function(selectedItem) {
           if (selectedItem !== item) {
             // Don't trigger change events

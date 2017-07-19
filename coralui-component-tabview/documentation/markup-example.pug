@@ -1,0 +1,92 @@
++document-section("Using a TabView")
+  p.
+    A <code>Coral.TabView</code> is the wrapping container used to create a
+    tabbed UI element.  This is intended to be used with a <code>Coral.TabList</code>
+    and a <code>Coral.PanelStack</code> to create the typical 'Tabs' pattern.
+
+  +document-subsection('Markup Example')
+  p.
+    Here is an example of how create tabs in CoralUI. This requires a <code>Coral.TabView</code>
+    container, which holds a <code>Coral.TabList</code> and a <code>Coral.PanelStack</code>.
+
+  +markup-example().
+    <coral-tabview>
+      <coral-tablist target="coral-demo-panel-1">
+        <coral-tab>Tab 1</coral-tab>
+        <coral-tab>Tab 2</coral-tab>
+        <coral-tab>Tab 3</coral-tab>
+        <coral-tab>Tab 4</coral-tab>
+      </coral-tablist>
+      <coral-panelstack id="coral-demo-panel-1">
+        <coral-panel class="coral-Well">
+          Tab 1 Content
+        </coral-panel>
+        <coral-panel class="coral-Well">
+          Tab 2 Content
+        </coral-panel>
+        <coral-panel class="coral-Well">
+          Tab 3 Content
+        </coral-panel>
+        <coral-panel class="coral-Well">
+          Tab 4 Content
+        </coral-panel>
+      </coral-panelstack>
+    </coral-tabview>
+
+  +document-subsection('JavaScript Example')
+  p.
+    You can also initialize a tabbed UI directly in JavaScript. First, the
+    <code>Coral.TabList</code> and <code>Coral.PanelStack</code> are created.
+    Finally, a <code>Coral.TabView</code> is created to contain the first two elements.
+
+  +example-pre-only()
+    |   // new Coral.TabList()
+    |   var tablist = new Coral.TabList().set({
+    |     target: 'coral-demo-panel-3'
+    |   });
+    |   tablist.items.add({
+    |     label: {
+    |       innerHTML: 'Tab 1'
+    |     }
+    |     selected: true
+    |   });
+    |   tablist.items.add({
+    |     label: {
+    |       innerHTML: 'Tab 2'
+    |     }
+    |   });
+    |   tablist.items.add({
+    |     label: {
+    |       innerHTML: 'Tab 3'
+    |     }
+    |   });
+    |   tablist.items.add({
+    |     label: {
+    |       innerHTML: 'Tab 4 (disabled)'
+    |     }
+    |     disabled: true
+    |   });
+    |   // new Coral.PanelStack()
+    |   var panelstack = new Coral.PanelStack().set({
+    |     id: 'coral-demo-panel-3'
+    |   });
+    |   panelstack.items.add({
+    |     content.innerHTML: 'Tab 1 Content.'
+    |   });
+    |   panelstack.items.add({
+    |     content.innerHTML: 'Tab 2 Content.'
+    |   });
+    |   panelstack.items.add({
+    |     content.innerHTML: 'Tab 3 Content.'
+    |   });
+    |   panelstack.items.add({
+    |     content.innerHTML: 'Tab 4 Content.'
+    |   });
+    |   // new Coral.TabView()
+    |   var tabview = new Coral.TabView().set({
+    |     panelStack: panelstack,
+    |     tabList: tablist
+    |   });
+
+p.
+  Also see <a href="Coral.TabList.html" class="coral-Link">Coral.TabList</a> and <a href="Coral.PanelStack.html" class="coral-Link">Coral.PanelStack</a> for more details.
