@@ -102,7 +102,7 @@ class TagList extends FormField(Component(HTMLElement)) {
   }
   
   /**
-   The Collection Interface that allows interacting with the Coral.Tag items that the component contains.
+   The Collection Interface that allows interacting with the items that the component contains.
    See {@link Coral.Collection} for more details.
    
    @type {Coral.Collection}

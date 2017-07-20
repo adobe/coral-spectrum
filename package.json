@@ -22,6 +22,7 @@
     "coralui-component-progress": "file:coralui-component-progress",
     "coralui-component-radio": "file:coralui-component-radio",
     "coralui-component-search": "file:coralui-component-search",
+    "coralui-component-selectlist": "file:coralui-component-selectlist",
     "coralui-component-switch": "file:coralui-component-switch",
     "coralui-component-tablist": "file:coralui-component-tablist",
     "coralui-component-tabview": "file:coralui-component-tabview",

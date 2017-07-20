@@ -12,6 +12,7 @@ import NumberInput from 'coralui-component-numberinput';
 import {Panel, PanelStack} from 'coralui-component-panelstack';
 import Progress from 'coralui-component-progress';
 import Radio from 'coralui-component-radio';
+import {SelectList, SelectListGroup, SelectListItem} from 'coralui-component-selectlist';
 import Search from 'coralui-component-search';
 import Switch from 'coralui-component-switch';
 import {Tab, TabList} from 'coralui-component-tablist';
@@ -41,9 +42,13 @@ export {
   NumberInput,
   Radio,
   Search,
+  SelectList,
+  SelectListGroup,
+  SelectListItem,
   Switch,
   Tab,
   TabList,
+  TabView,
   Tag,
   TagList,
   Textarea,

@@ -55,7 +55,7 @@ const List = (superClass) => class extends superClass {
   }
   
   /**
-   The item collection.
+   The Collection Interface that allows interacting with the items that the component contains.
    See {@link Coral.Collection} for more details.
    
    @type {Coral.Collection}

@@ -1,0 +1,64 @@
++document-section('Markup Examples', true)
+
+  +document-subsection('Simple SelectList')
+    +markup-example().
+      <coral-selectlist>
+        <coral-selectlist-item>Africa</coral-selectlist-item>
+        <coral-selectlist-item selected>America</coral-selectlist-item>
+        <coral-selectlist-item>Asia</coral-selectlist-item>
+        <coral-selectlist-item>Europe</coral-selectlist-item>
+        <coral-selectlist-item>Oceania</coral-selectlist-item>
+      </coral-selectlist>
+
+  +document-subsection('Grouped SelectList')
+    +markup-example().
+      <coral-selectlist>
+        <coral-selectlist-group label="Group 1">
+          <coral-selectlist-item>Expression 1</coral-selectlist-item>
+          <coral-selectlist-item>Expression 2</coral-selectlist-item>
+          <coral-selectlist-item>Expression 3</coral-selectlist-item>
+        </coral-selectlist-group>
+        <coral-selectlist-group label="Group 2">
+          <coral-selectlist-item>Expression 4</coral-selectlist-item>
+          <coral-selectlist-item>Expression 5</coral-selectlist-item>
+        </coral-selectlist-group>
+      </coral-selectlist>
+
+  +document-subsection('SelectList with Icons')
+    +markup-example().
+      <coral-selectlist>
+        <coral-selectlist-item value="adjust">
+          <coral-icon icon="adjust"></coral-icon> Adjust
+        </coral-selectlist-item>
+        <coral-selectlist-item value="alert">
+          <coral-icon icon="alert"></coral-icon> Alert
+        </coral-selectlist-item>
+        <coral-selectlist-item value="alert-add">
+          <coral-icon icon="alertAdd"></coral-icon> Alert-Add
+        </coral-selectlist-item>
+        <coral-selectlist-item value="alias">
+          <coral-icon icon="alias"></coral-icon> Alias
+        </coral-selectlist-item>
+        <coral-selectlist-item value="anchor">
+          <coral-icon icon="anchor"></coral-icon> Anchor
+        </coral-selectlist-item>
+      </coral-selectlist>
+
+  +document-subsection('SelectList with disabled Options')
+    +markup-example().
+      <coral-selectlist>
+        <coral-selectlist-item value="john">John Lennon</coral-selectlist-item>
+        <coral-selectlist-item value="george" disabled>George Harrison</coral-selectlist-item>
+        <coral-selectlist-item value="paul">Paul McCartney</coral-selectlist-item>
+        <coral-selectlist-item value="ringo">Ringo Starr</coral-selectlist-item>
+      </coral-selectlist>
+
+  +document-subsection('SelectList with multiple selection')
+    +markup-example().
+      <coral-selectlist multiple>
+        <coral-selectlist-item>Africa</coral-selectlist-item>
+        <coral-selectlist-item>America</coral-selectlist-item>
+        <coral-selectlist-item>Asia</coral-selectlist-item>
+        <coral-selectlist-item>Europe</coral-selectlist-item>
+        <coral-selectlist-item>Oceania</coral-selectlist-item>
+      </coral-selectlist>

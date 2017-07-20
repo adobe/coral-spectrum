@@ -15,6 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
+import listToArray from './listToArray';
+
 /**
  Unique id used to idenfity the collection.
  
@@ -39,15 +41,6 @@ const SCOPE_SELECTOR = ':scope > ';
 /** @private */
 function getTagSelector(tag, nativeTag) {
   return nativeTag ? (nativeTag + '[is="' + tag + '"]') : tag;
-}
-
-/** @private */
-function listToArray(list) {
-  const res = [];
-  for (let i = 0, listCount = res.length = list.length; i < listCount; i++) {
-    res[i] = list[i];
-  }
-  return res;
 }
 
 /**

@@ -16,15 +16,7 @@
  */
 
 import Collection from './Collection';
-
-/** @private */
-function listToArray(list) {
-  const res = [];
-  for (let i = 0, listCount = res.length = list.length; i < listCount; i++) {
-    res[i] = list[i];
-  }
-  return res;
-}
+import listToArray from './listToArray';
 
 /**
  Private Collection capable of handling non-nested items with a selected attribute. It is useful to manage the
@@ -45,6 +37,20 @@ class SelectableCollection extends Collection {
     this._selectableItemSelector = this._allItemsSelector + ':not([disabled])';
     this._selectedItemSelector = this._allItemsSelector + '[selected]';
     this._deselectAllExceptSelector = this._selectedItemSelector;
+  }
+  
+  /**
+   Returns the selectable items. Items that are disabled quality for selection. On the other hand, hidden items
+   can be selected as this is the default behavior in HTML. Please note that an already selected item could be
+   returned, since the selection could be toggled.
+   
+   @returns {Array.<HTMLElement>}
+   an array of items whose selection could be toggled.
+   
+   @protected
+   */
+  _getSelectableItems() {
+    return listToArray(this._host.querySelectorAll(this._selectableItemSelector));
   }
   
   /**
