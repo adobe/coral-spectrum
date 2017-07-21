@@ -145,18 +145,15 @@ class Icon extends Component(HTMLElement) {
   }
   set size(value) {
     value = transform.string(value).toUpperCase();
+    this._size = validate.enumeration(size)(value) && value || size.SMALL;
+    transform.reflect(this, 'size', this._size);
     
-    if (validate.enumeration(size)(value)) {
-      this._size = value;
-      transform.reflect(this, 'size', this._size);
-      
-      // removes all the existing sizes
-      this.classList.remove.apply(this.classList, ALL_SIZE_CLASSES);
-      // adds the new size
-      this.classList.add(`${CLASSNAME}--size${this._size}`);
-      
-      this._updateAltText();
-    }
+    // removes all the existing sizes
+    this.classList.remove.apply(this.classList, ALL_SIZE_CLASSES);
+    // adds the new size
+    this.classList.add(`${CLASSNAME}--size${this._size}`);
+    
+    this._updateAltText();
   }
   
   // private

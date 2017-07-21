@@ -68,18 +68,14 @@ class Textfield extends FormField(Component(HTMLInputElement)) {
   }
   set variant(value) {
     value = transform.string(value).toLowerCase();
+    this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
+    transform.reflect(this, 'variant', this._variant);
     
-    if (validate.enumeration(variant)(value)) {
-      this._variant = value;
-      
-      transform.reflect(this, 'variant', value);
-      
-      // removes every existing variant
-      this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
-  
-      if (this._variant !== variant.DEFAULT) {
-        this.classList.add(`${CLASSNAME}--${this._variant}`);
-      }
+    // removes every existing variant
+    this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
+
+    if (this._variant !== variant.DEFAULT) {
+      this.classList.add(`${CLASSNAME}--${this._variant}`);
     }
   }
   

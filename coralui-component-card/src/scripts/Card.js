@@ -287,19 +287,16 @@ class Card extends Component(HTMLElement) {
   }
   set variant(value) {
     value = transform.string(value).toLowerCase();
-    
-    if (validate.enumeration(variant)(value)) {
-      this._variant = value;
-      transform.reflect(this, 'variant', this._variant);
-  
-      this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
-  
-      if (this._variant !== variant.DEFAULT) {
-        this.classList.add(`${CLASSNAME}--${this._variant}`);
-      }
-      
-      this.assetHeight = this.assetHeight;
+    this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
+    transform.reflect(this, 'variant', this._variant);
+
+    this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
+
+    if (this._variant !== variant.DEFAULT) {
+      this.classList.add(`${CLASSNAME}--${this._variant}`);
     }
+    
+    this.assetHeight = this.assetHeight;
   }
   
   /** @ignore */

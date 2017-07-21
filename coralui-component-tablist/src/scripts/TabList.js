@@ -196,16 +196,12 @@ class TabList extends Component(HTMLElement) {
   get size() {
     return this._size || size.MEDIUM;
   }
-  
   set size(value) {
     value = transform.string(value).toUpperCase();
+    this._size = validate.enumeration(size)(value) && value || size.MEDIUM;
+    transform.reflect(this, 'size', this._size);
     
-    if (validate.enumeration(size)(value)) {
-      this._size = value;
-      transform.reflect(this, 'size', this._size);
-      
-      this.classList[this._size === size.LARGE ? 'add' : 'remove'](`${CLASSNAME}--large`);
-    }
+    this.classList[this._size === size.LARGE ? 'add' : 'remove'](`${CLASSNAME}--large`);
   }
   
   /**
@@ -220,16 +216,12 @@ class TabList extends Component(HTMLElement) {
   get orientation() {
     return this._orientation || orientation.HORIZONTAL;
   }
-  
   set orientation(value) {
     value = transform.string(value).toLowerCase();
+    this._orientation = validate.enumeration(orientation)(value) && value || orientation.HORIZONTAL;
+    transform.reflect(this, 'orientation', this._orientation);
     
-    if (validate.enumeration(orientation)(value)) {
-      this._orientation = value;
-      transform.reflect(this, 'orientation', this._orientation);
-      
-      this.classList[this._orientation === orientation.VERTICAL ? 'add' : 'remove'](`${CLASSNAME}--vertical`);
-    }
+    this.classList[this._orientation === orientation.VERTICAL ? 'add' : 'remove'](`${CLASSNAME}--vertical`);
   }
   
   /** @private */

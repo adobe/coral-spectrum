@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Coral3</title>
+
+  <link rel="stylesheet" href="../build/css/coral.css">
+  <style>
+    .example-List {
+      width:250px;
+    }
+
+    .example-Preview {
+      width: calc(100% - 250px);
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      border: 0;
+    }
+  </style>
+  <script src="../build/js/coral.js"></script>
+</head>
+<body class="coral--light">
+  <div class="example-List">
+    <coral-anchorlist id="example-list"></coral-anchorlist>
+  </div>
+  <iframe class="example-Preview" id="example-preview"></iframe>
+
+  <script>
+    const components = [
+      'coralui-component-accordion',
+      'coralui-component-alert',
+      'coralui-component-anchorbutton',
+      'coralui-component-button',
+      'coralui-component-buttongroup',
+      'coralui-component-card',
+      'coralui-component-charactercount',
+      'coralui-component-checkbox',
+      'coralui-component-drawer',
+      'coralui-component-icon',
+      'coralui-component-list',
+      'coralui-component-numberinput',
+      'coralui-component-panelstack',
+      'coralui-component-progress',
+      'coralui-component-radio',
+      'coralui-component-search',
+      'coralui-component-selectlist',
+      'coralui-component-switch',
+      'coralui-component-tablist',
+      'coralui-component-tabview',
+      'coralui-component-taglist',
+      'coralui-component-textarea',
+      'coralui-component-textfield',
+      'coralui-component-wait'
+    ];
+
+    const list = document.getElementById('example-list');
+    const preview = document.getElementById('example-preview');
+
+    components.forEach(function(component) {
+       list.items.add({
+         href: '../' + component + '/examples/index.html',
+         content: {
+           textContent: component
+         }
+       });
+    });
+
+    preview.style.height = document.body.scrollHeight + 'px';
+
+    preview.onload = function() {
+      document.title = preview.contentDocument.title;
+    };
+
+    list.on('click', 'a', function(event) {
+      event.preventDefault();
+
+      const XMLHttpRequest = new window.XMLHttpRequest();
+      XMLHttpRequest.onreadystatechange = function() {
+        if (XMLHttpRequest.readyState == 4 && XMLHttpRequest.status == 200) {
+          preview.srcdoc = this.responseText;
+        }
+      };
+      XMLHttpRequest.open('GET', event.matchedTarget.href, true);
+      XMLHttpRequest.send();
+    });
+  </script>
+</body>
+</html>

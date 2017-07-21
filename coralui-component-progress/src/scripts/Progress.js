@@ -193,14 +193,11 @@ class Progress extends Component(HTMLElement) {
   }
   set size(value) {
     value = transform.string(value).toUpperCase();
-    
-    if (validate.enumeration(size)(value)) {
-      this._size = value;
-      transform.reflect(this, 'size', this._size);
+    this._size = validate.enumeration(size)(value) && value || size.MEDIUM;
+    transform.reflect(this, 'size', this._size);
   
-      this.classList.remove.apply(this.classList, ALL_SIZE_CLASSES);
-      this.classList.add(`${CLASSNAME}--${SIZE_CLASSES[this.size]}`);
-    }
+    this.classList.remove.apply(this.classList, ALL_SIZE_CLASSES);
+    this.classList.add(`${CLASSNAME}--${SIZE_CLASSES[this._size]}`);
   }
   
   /**
@@ -267,15 +264,12 @@ class Progress extends Component(HTMLElement) {
   }
   set labelPosition(value) {
     value = transform.string(value).toLowerCase();
-    
-    if (validate.enumeration(labelPosition)(value)) {
-      this._labelPosition = value;
-      transform.reflect(this, 'labelposition', this._labelPosition);
+    this._labelPosition = validate.enumeration(labelPosition)(value) && value || labelPosition.RIGHT;
+    transform.reflect(this, 'labelposition', this._labelPosition);
   
-      this.classList.remove.apply(this.classList, ALL_LABEL_POSITION_CLASSES);
-      if (this._elements.label.textContent.length > 0) {
-        this.classList.add(`${CLASSNAME}--${this._labelPosition}Label`);
-      }
+    this.classList.remove.apply(this.classList, ALL_LABEL_POSITION_CLASSES);
+    if (this._elements.label.textContent.length > 0) {
+      this.classList.add(`${CLASSNAME}--${this._labelPosition}Label`);
     }
   }
   

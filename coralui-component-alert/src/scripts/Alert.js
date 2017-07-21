@@ -120,20 +120,17 @@ class Alert extends Component(HTMLElement) {
   }
   set variant(value) {
     value = transform.string(value).toLowerCase();
+    this._variant = validate.enumeration(variant)(value) && value || variant.INFO;
+    transform.reflect(this, 'variant', this._variant);
     
-    if (validate.enumeration(variant)(value)) {
-      this._variant = value;
-      transform.reflect(this, 'variant', this._variant);
-      
-      this._elements.icon.icon = iconMap[this._variant];
-      // Remove all variant classes
-      this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
-  
-      // Set new variant class
-      // Don't use this._className; use the constant
-      // This lets popover get our styles for free
-      this.classList.add(`${CLASSNAME}--${this._variant}`);
-    }
+    this._elements.icon.icon = iconMap[this._variant];
+    // Remove all variant classes
+    this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
+
+    // Set new variant class
+    // Don't use this._className; use the constant
+    // This lets popover get our styles for free
+    this.classList.add(`${CLASSNAME}--${this._variant}`);
   }
   
   /**
@@ -150,15 +147,12 @@ class Alert extends Component(HTMLElement) {
   }
   set size(value) {
     value = transform.string(value).toUpperCase();
-    
-    if (validate.enumeration(size)(value)) {
-      this._size = value;
-      transform.reflect(this, 'size', this._size);
+    this._size = validate.enumeration(size)(value) && value || size.SMALL;
+    transform.reflect(this, 'size', this._size);
   
-      // Remove all variant classes and adds the new one
-      this.classList.remove.apply(this.classList, ALL_SIZE_CLASSES);
-      this.classList.add(`${CLASSNAME}--${SIZE_CLASSES[this._size]}`);
-    }
+    // Remove all variant classes and adds the new one
+    this.classList.remove.apply(this.classList, ALL_SIZE_CLASSES);
+    this.classList.add(`${CLASSNAME}--${SIZE_CLASSES[this._size]}`);
   }
   
   /**

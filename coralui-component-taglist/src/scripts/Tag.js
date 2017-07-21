@@ -250,15 +250,12 @@ class Tag extends Component(HTMLElement) {
     return this._size || size.LARGE;
   }
   set size(value) {
-   value = transform.string(value).toUpperCase();
-   
-   if (validate.enumeration(size)(value)) {
-     this._size = value;
-     transform.reflect(this, 'size', this._size);
+    value = transform.string(value).toUpperCase();
+    this._size = validate.enumeration(size)(value) && value || size.LARGE;
+    transform.reflect(this, 'size', this._size);
   
-     this.classList.remove.apply(this.classList, ALL_SIZE_CLASSES);
-     this.classList.add(`${CLASSNAME}--${SIZE_CLASSES[this.size]}`);
-   }
+    this.classList.remove.apply(this.classList, ALL_SIZE_CLASSES);
+    this.classList.add(`${CLASSNAME}--${SIZE_CLASSES[this._size]}`);
   }
   
   /**
@@ -274,17 +271,14 @@ class Tag extends Component(HTMLElement) {
   }
   set color(value) {
     value = transform.string(value).toLowerCase();
-    
-    if (validate.enumeration(color)(value)) {
-      this._color = value;
-      transform.reflect(this, 'color', this._color);
+    this._color = validate.enumeration(color)(value) && value || color.DEFAULT;
+    transform.reflect(this, 'color', this._color);
   
-      // removes every existing color
-      this.classList.remove.apply(this.classList, ALL_COLOR_CLASSES);
-  
-      if (this.color !== Coral.Tag.color.DEFAULT) {
-        this.classList.add(`${CLASSNAME}--${this._color}`);
-      }
+    // removes every existing color
+    this.classList.remove.apply(this.classList, ALL_COLOR_CLASSES);
+
+    if (this.color !== Coral.Tag.color.DEFAULT) {
+      this.classList.add(`${CLASSNAME}--${this._color}`);
     }
   }
   

@@ -136,16 +136,11 @@ const Button = (superClass) => class extends superClass {
     return this._iconPosition || iconPosition.LEFT;
   }
   set iconPosition(value) {
-    // If value is null null, it means the attribute was removed
-    value = value === null ? iconPosition.LEFT : transform.string(value).toLowerCase();
-  
-    if (validate.enumeration(iconPosition)(value)) {
-      this._iconPosition = value;
-      
-      transform.reflect(this, 'iconposition', value);
-      
-      this._updateIcon(this.icon);
-    }
+    value = transform.string(value).toLowerCase();
+    this._iconPosition = validate.enumeration(iconPosition)(value) && value || iconPosition.LEFT;
+    transform.reflect(this, 'iconposition', this._iconPosition);
+    
+    this._updateIcon(this.icon);
   }
   
   /**
@@ -192,14 +187,10 @@ const Button = (superClass) => class extends superClass {
   }
   set size(value) {
     value = transform.string(value).toUpperCase();
+    this._size = validate.enumeration(size)(value) && value || size.MEDIUM;
+    transform.reflect(this, 'size', this._size);
   
-    if (validate.enumeration(size)(value)) {
-      this._size = value;
-  
-      transform.reflect(this, 'size', value);
-  
-      this.classList.toggle(`${CLASSNAME}--large`, this.size === size.LARGE);
-    }
+    this.classList.toggle(`${CLASSNAME}--large`, this._size === size.LARGE);
   }
   
   /**
@@ -264,17 +255,13 @@ const Button = (superClass) => class extends superClass {
   }
   set variant(value) {
     value = transform.string(value).toLowerCase();
+    this._variant = validate.enumeration(variant)(value) && value || variant.SECONDARY;
+    transform.reflect(this, 'variant', this._variant);
     
-    if (validate.enumeration(variant)(value)) {
-      this._variant = value;
-  
-      transform.reflect(this, 'variant', this._variant);
-      
-      // removes every existing variant
-      this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
-  
-      this.classList.add(`${CLASSNAME}--${this._variant}`);
-    }
+    // removes every existing variant
+    this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
+
+    this.classList.add(`${CLASSNAME}--${this._variant}`);
   }
   
   /** @ignore */

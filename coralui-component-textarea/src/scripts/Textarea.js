@@ -71,30 +71,26 @@ class Textarea extends FormField(Component(HTMLTextAreaElement)) {
   }
   set variant(value) {
     value = transform.string(value).toLowerCase();
-    
-    if (validate.enumeration(variant)(value)) {
-      this._variant = value;
-      
-      transform.reflect(this, 'variant', value);
+    this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
+    transform.reflect(this, 'variant', this._variant);
   
-      // removes every existing variant
-      this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
-  
-      if (this._variant !== variant.DEFAULT) {
-        this.classList.add(`${CLASSNAME}--${this._variant}`);
-      }
-      
-      // Restore the original height
-      if (this._variant === variant.QUIET) {
-        this._defaultHeight = this._defaultHeight || this.style.height;
-      }
-      else {
-        this.style.height = this._defaultHeight;
-        this._defaultHeight = undefined;
-      }
+    // removes every existing variant
+    this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
 
-      this._onInput();
+    if (this._variant !== variant.DEFAULT) {
+      this.classList.add(`${CLASSNAME}--${this._variant}`);
     }
+    
+    // Restore the original height
+    if (this._variant === variant.QUIET) {
+      this._defaultHeight = this._defaultHeight || this.style.height;
+    }
+    else {
+      this.style.height = this._defaultHeight;
+      this._defaultHeight = undefined;
+    }
+
+    this._onInput();
   }
   
   // JSDoc inherited from FormField mixin

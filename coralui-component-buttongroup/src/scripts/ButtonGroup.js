@@ -135,39 +135,35 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
   }
   set selectionMode(value) {
     value = transform.string(value).toLowerCase();
-  
-    if (validate.enumeration(selectionMode)(value)) {
-      this._selectionMode = value;
-    
-      transform.reflect(this, 'selectionmode', value);
-  
-      // update select element if multiple
-      // this is required while appplying default selection
-      // if selection mode is single first elem gets selected but for multiple its not
-      this._elements.nativeSelect.multiple = this._selectionMode === selectionMode.MULTIPLE;
-  
-      // Sync
-      if (this._selectionMode === selectionMode.SINGLE) {
-        this.setAttribute('role', 'radiogroup');
+    this._selectionMode = validate.enumeration(selectionMode)(value) && value || selectionMode.NONE;
+    transform.reflect(this, 'selectionmode', this._selectionMode);
 
-        // makes sure the internal options are properly initialized
-        this._syncItemOptions();
+    // update select element if multiple
+    // this is required while appplying default selection
+    // if selection mode is single first elem gets selected but for multiple its not
+    this._elements.nativeSelect.multiple = this._selectionMode === selectionMode.MULTIPLE;
 
-        // we make sure the selection is valid by explicitly finding a candidate or making sure just 1 item is
-        // selected
-        this._validateSelection();
-      }
-      else if (this._selectionMode === selectionMode.MULTIPLE) {
-        this.setAttribute('role', 'group');
+    // Sync
+    if (this._selectionMode === selectionMode.SINGLE) {
+      this.setAttribute('role', 'radiogroup');
 
-        // makes sure the internal options are properly initialized
-        this._syncItemOptions();
-      }
-      else {
-        this.setAttribute('role', 'group');
+      // makes sure the internal options are properly initialized
+      this._syncItemOptions();
 
-        this._removeItemOptions();
-      }
+      // we make sure the selection is valid by explicitly finding a candidate or making sure just 1 item is
+      // selected
+      this._validateSelection();
+    }
+    else if (this._selectionMode === selectionMode.MULTIPLE) {
+      this.setAttribute('role', 'group');
+
+      // makes sure the internal options are properly initialized
+      this._syncItemOptions();
+    }
+    else {
+      this.setAttribute('role', 'group');
+
+      this._removeItemOptions();
     }
   }
   

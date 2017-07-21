@@ -583,7 +583,8 @@ describe('Coral.Button', function() {
         button.iconSize = 'megalarge';
         button.iconSize = null;
         button.iconSize = -1;
-        expect(button.iconSize).to.equal(Coral.Icon.size.EXTRA_SMALL);
+        // Fallbacks to default enum which is SMALL
+        expect(button.iconSize).to.equal(Coral.Icon.size.SMALL);
       });
 
       it('should discard unknonwn attribute', function() {

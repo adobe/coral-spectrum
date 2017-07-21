@@ -327,21 +327,20 @@ describe('Coral.Icon', function() {
         icon.size = 'megalarge';
         icon.size = null;
         icon.size = -1;
-        expect(icon.size).to.equal(Coral.Icon.size.EXTRA_SMALL);
-
-        expect(icon.classList.contains('coral-Icon--sizeXS')).to.be.true;
+        // Fallbacks to default enum which is SMALL
+        expect(icon.size).to.equal(Coral.Icon.size.SMALL);
+        expect(icon.classList.contains('coral-Icon--sizeS')).to.be.true;
       });
 
-      it('should discard unknonwn attribute', function() {
+      it('should discard unknown attribute', function() {
         var icon = new Coral.Icon();
 
         icon.setAttribute('size', 'megalarge');
-        expect(icon.size).to.equal(Coral.Icon.size.SMALL);
-
-        expect(icon.getAttribute('size')).to.equal('megalarge');
+        // Fallbacks to default enum which is SMALL
+        expect(icon.getAttribute('size')).to.equal(Coral.Icon.size.SMALL);
       });
 
-      it('should not remove unknonwn size classes', function() {
+      it('should not remove unknown size classes', function() {
         var icon = new Coral.Icon();
         icon.classList.add('coral-Icon--sizeME');
 

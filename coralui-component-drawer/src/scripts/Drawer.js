@@ -121,16 +121,13 @@ class Drawer extends Component(HTMLElement) {
   }
   set direction(value) {
     value = transform.string(value).toLowerCase();
+    this._direction = validate.enumeration(direction)(value) && value || direction.DOWN;
+    transform.reflect(this, 'direction', this._direction);
   
-    if (validate.enumeration(direction)(value)) {
-      this._direction = value;
-      transform.reflect(this, 'direction', this._direction);
-  
-      this.classList.remove.apply(this.classList, ALL_DIRECTION_CLASSES);
-      this.classList.add(`${CLASSNAME}--${this.direction}`);
-  
-      this._updateIcon();
-    }
+    this.classList.remove.apply(this.classList, ALL_DIRECTION_CLASSES);
+    this.classList.add(`${CLASSNAME}--${this._direction}`);
+
+    this._updateIcon();
   }
   
   /**

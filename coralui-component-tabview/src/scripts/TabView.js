@@ -78,6 +78,7 @@ class TabView extends Component(HTMLElement) {
     return this._elements.tabList.getAttribute('orientation') || orientation.HORIZONTAL;
   }
   set orientation(value) {
+    // We rely on the tablist orientation enum so don't need to double check enums
     this._elements.tabList.setAttribute('orientation', value);
     transform.reflect(this, 'orientation', this.orientation);
   

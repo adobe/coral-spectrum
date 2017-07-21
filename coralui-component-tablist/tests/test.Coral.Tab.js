@@ -45,17 +45,17 @@ describe('Coral.Tab', function() {
     
     describe('#selected', function() {
       it('should default to false', function() {
-        expect(item.selected).to.be.false;
-        expect(item.hasAttribute('selected')).to.be.false;
+        expect(item2.selected).to.be.false;
+        expect(item2.hasAttribute('selected')).to.be.false;
       });
   
       it('should be settable to truthy', function() {
-        item.selected = true;
+        item2.selected = true;
         
-        expect(item.selected).to.be.true;
-        expect(item.hasAttribute('selected')).to.be.true;
-        expect(item.classList.contains('is-selected')).to.be.true;
-        expect(item.getAttribute('tabindex')).to.equal('0');
+        expect(item2.selected).to.be.true;
+        expect(item2.hasAttribute('selected')).to.be.true;
+        expect(item2.classList.contains('is-selected')).to.be.true;
+        expect(item2.getAttribute('tabindex')).to.equal('0');
       });
   
       it('selecting a disabled item should make it unselected', function() {
