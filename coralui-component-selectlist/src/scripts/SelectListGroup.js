@@ -47,7 +47,7 @@ class SelectListGroup extends Component(HTMLElement) {
   }
   set label(value) {
     this._label = transform.string(value);
-    transform.reflect(this, 'label', this._label);
+    this._reflectAttribute('label', this._label);
   
     this.setAttribute('aria-label', this._label);
   }

@@ -121,7 +121,7 @@ class Alert extends Component(HTMLElement) {
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.INFO;
-    transform.reflect(this, 'variant', this._variant);
+    this._reflectAttribute('variant', this._variant);
     
     this._elements.icon.icon = iconMap[this._variant];
     // Remove all variant classes
@@ -148,7 +148,7 @@ class Alert extends Component(HTMLElement) {
   set size(value) {
     value = transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) && value || size.SMALL;
-    transform.reflect(this, 'size', this._size);
+    this._reflectAttribute('size', this._size);
   
     // Remove all variant classes and adds the new one
     this.classList.remove.apply(this.classList, ALL_SIZE_CLASSES);

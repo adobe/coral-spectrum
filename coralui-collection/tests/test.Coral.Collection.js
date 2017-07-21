@@ -78,7 +78,7 @@ describe('Coral.Collection', function() {
       
       set title(value) {
         this._title = Coral.transform.string(value);
-        Coral.transform.reflect(this, 'title', value);
+        this._reflectAttribute('title', this._title);
       }
       
       static get observedAttributes() {

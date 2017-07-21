@@ -82,7 +82,7 @@ class Wait extends Component(HTMLElement) {
   set size(value) {
     value = transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) && value || size.SMALL;
-    transform.reflect(this, 'size', this._size);
+    this._reflectAttribute('size', this._size);
 
     // large css change
     this.classList.toggle(`${CLASSNAME}--large`, this._size === size.LARGE);
@@ -105,8 +105,9 @@ class Wait extends Component(HTMLElement) {
   }
   set centered(value) {
     this._centered = transform.booleanAttr(value);
-    transform.reflect(this, 'centered', this._centered);
-    this.classList.toggle(CLASSNAME + '--centered', this.centered);
+    this._reflectAttribute('centered', this._centered);
+    
+    this.classList.toggle(`${CLASSNAME}--centered`, this._centered);
   }
   
   /**
@@ -123,7 +124,7 @@ class Wait extends Component(HTMLElement) {
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
-    transform.reflect(this, 'variant', this._variant);
+    this._reflectAttribute('variant', this._variant);
 
     // removes every existing variant
     this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);

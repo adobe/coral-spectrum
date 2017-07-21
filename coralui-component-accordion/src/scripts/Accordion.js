@@ -102,7 +102,7 @@ class Accordion extends Component(HTMLElement) {
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
-    transform.reflect(this, 'variant', this._variant);
+    this._reflectAttribute('variant', this._variant);
 
     this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
 
@@ -145,7 +145,7 @@ class Accordion extends Component(HTMLElement) {
   }
   set multiple(value) {
     this._multiple = transform.booleanAttr(value);
-    transform.reflect(this, 'multiple', this._multiple);
+    this._reflectAttribute('multiple', this._multiple);
     
     this.setAttribute('aria-multiselectable', this._multiple);
     

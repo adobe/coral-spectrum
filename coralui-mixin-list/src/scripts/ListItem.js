@@ -71,7 +71,7 @@ const ListItem = (superClass) => class extends superClass {
   }
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
-    transform.reflect(this, 'disabled', this._disabled);
+    this._reflectAttribute('disabled', this._disabled);
   
     this.setAttribute('aria-disabled', this._disabled);
   }

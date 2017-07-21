@@ -104,7 +104,7 @@ class Tab extends Component(HTMLElement) {
   }
   set invalid(value) {
     this._invalid = transform.booleanAttr(value);
-    transform.reflect(this, 'invalid', this._invalid);
+    this._reflectAttribute('invalid', this._invalid);
     
     this.classList.toggle('is-invalid', this._invalid);
     this.setAttribute('aria-invalid', this._invalid);
@@ -125,7 +125,7 @@ class Tab extends Component(HTMLElement) {
   }
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
-    transform.reflect(this, 'disabled', this._disabled);
+    this._reflectAttribute('disabled', this._disabled);
   
     this.classList.toggle('is-disabled', this.disabled);
     this.setAttribute('aria-disabled', this.disabled);
@@ -156,7 +156,7 @@ class Tab extends Component(HTMLElement) {
     
     if (!value || value && !this.disabled) {
       this._selected = value;
-      transform.reflect(this, 'selected', this.disabled ? false : this._selected);
+      this._reflectAttribute('selected', this.disabled ? false : this._selected);
   
       this.classList.toggle('is-selected', this._selected);
       this.setAttribute('tabindex', this._selected ? '0' : '-1');

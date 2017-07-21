@@ -100,7 +100,7 @@ class Icon extends Component(HTMLElement) {
   }
   set icon(value) {
     this._icon = transform.string(value).trim();
-    transform.reflect(this, 'icon', this._icon);
+    this._reflectAttribute('icon', this._icon);
     
     // removes the old class.
     this.className = this.className.replace(ICON_REGEX, '').trim();
@@ -146,7 +146,7 @@ class Icon extends Component(HTMLElement) {
   set size(value) {
     value = transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) && value || size.SMALL;
-    transform.reflect(this, 'size', this._size);
+    this._reflectAttribute('size', this._size);
     
     // removes all the existing sizes
     this.classList.remove.apply(this.classList, ALL_SIZE_CLASSES);

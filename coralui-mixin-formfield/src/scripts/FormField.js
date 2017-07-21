@@ -96,7 +96,7 @@ const FormField = (superClass) => class extends superClass {
   }
   set invalid(value) {
     this._invalid = transform.booleanAttr(value);
-    transform.reflect(this, 'invalid', this._invalid);
+    this._reflectAttribute('invalid', this._invalid);
     
     this.setAttribute('aria-invalid', this._invalid);
     this.classList.toggle('is-invalid', this._invalid);

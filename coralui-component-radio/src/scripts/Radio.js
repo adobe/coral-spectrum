@@ -73,7 +73,8 @@ class Radio extends FormField(Component(HTMLElement)) {
   }
   set checked(value) {
     this._checked = transform.booleanAttr(value);
-    transform.reflect(this, 'checked', this._checked);
+    this._reflectAttribute('checked', this._checked);
+    
     this._elements.input.checked = this._checked;
   
     // handles related radios
@@ -105,7 +106,8 @@ class Radio extends FormField(Component(HTMLElement)) {
     return this._elements.input.name;
   }
   set name(value) {
-    transform.reflect(this, 'name', value);
+    this._reflectAttribute('name', value);
+    
     this._elements.input.name = value;
   }
   
@@ -130,9 +132,9 @@ class Radio extends FormField(Component(HTMLElement)) {
   }
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
-    transform.reflect(this, 'disabled', this._disabled);
-    this.setAttribute('aria-disabled', this._disabled);
+    this._reflectAttribute('disabled', this._disabled);
     
+    this.setAttribute('aria-disabled', this._disabled);
     this.classList.toggle('is-disabled', this._disabled);
     this._elements.input.disabled = this._disabled;
   }
@@ -143,7 +145,8 @@ class Radio extends FormField(Component(HTMLElement)) {
   }
   set required(value) {
     this._required = transform.booleanAttr(value);
-    transform.reflect(this, 'required', this._required);
+    this._reflectAttribute('required', this._required);
+    
     this.setAttribute('aria-required', this._required);
     this._elements.input.required = this._required;
   }
@@ -154,7 +157,8 @@ class Radio extends FormField(Component(HTMLElement)) {
   }
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
-    transform.reflect(this, 'readonly', this._readOnly);
+    this._reflectAttribute('readonly', this._readOnly);
+    
     this.setAttribute('aria-readonly', this._readOnly);
   }
   

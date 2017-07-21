@@ -126,7 +126,7 @@ class TagList extends FormField(Component(HTMLElement)) {
   }
   set name(value) {
     this._name = transform.string(value);
-    transform.reflect(this, 'name', value);
+    this._reflectAttribute('name', value);
   
     this.items.getAll().forEach(function(item) {
       if (item._input) {
@@ -163,7 +163,7 @@ class TagList extends FormField(Component(HTMLElement)) {
   }
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
-    transform.reflect(this, 'disabled', this._disabled);
+    this._reflectAttribute('disabled', this._disabled);
     
     this.classList.toggle('is-disabled', this._disabled);
     this.items.getAll().forEach(function(item) {
@@ -183,7 +183,7 @@ class TagList extends FormField(Component(HTMLElement)) {
   }
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
-    transform.reflect(this, 'readonly', this._readOnly);
+    this._reflectAttribute('readonly', this._readOnly);
     
     this.items.getAll().forEach(function(item) {
       item.closable = !this._readOnly;
@@ -199,7 +199,7 @@ class TagList extends FormField(Component(HTMLElement)) {
   }
   set required(value) {
     this._required = transform.booleanAttr(value);
-    transform.reflect(this, 'required', this._required);
+    this._reflectAttribute('required', this._required);
     
     // a11y
     this.setAttribute('aria-required', this._required);

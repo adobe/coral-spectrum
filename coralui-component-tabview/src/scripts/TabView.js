@@ -80,7 +80,7 @@ class TabView extends Component(HTMLElement) {
   set orientation(value) {
     // We rely on the tablist orientation enum so don't need to double check enums
     this._elements.tabList.setAttribute('orientation', value);
-    transform.reflect(this, 'orientation', this.orientation);
+    this._reflectAttribute('orientation', this.orientation);
   
     this.classList[this.orientation === orientation.VERTICAL ? 'add' : 'remove'](`${CLASSNAME}--vertical`);
   }

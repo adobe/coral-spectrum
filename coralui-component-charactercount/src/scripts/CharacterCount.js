@@ -105,7 +105,8 @@ class CharacterCount extends Component(HTMLElement) {
   }
   set maxLength(value) {
     this._maxLength = transform.number(value);
-    transform.reflect(this, 'maxlength', this._maxLength);
+    this._reflectAttribute('maxlength', this._maxLength);
+    
     this._refreshCharCount();
   }
   

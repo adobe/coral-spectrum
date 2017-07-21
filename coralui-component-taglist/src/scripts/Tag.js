@@ -170,7 +170,7 @@ class Tag extends Component(HTMLElement) {
   }
   set closable(value) {
     this._closable = transform.booleanAttr(value);
-    transform.reflect(this, 'closable', this._closable);
+    this._reflectAttribute('closable', this._closable);
   
     // Insert the button if it was not added to the DOM
     if (this.closable && !this.contains(this._elements.button)) {
@@ -194,7 +194,7 @@ class Tag extends Component(HTMLElement) {
   }
   set value(value) {
     this._value = transform.string(value);
-    transform.reflect(this, 'value', this._value);
+    this._reflectAttribute('value', this._value);
     
     this.trigger('coral-tag:_valuechanged');
   }
@@ -213,7 +213,7 @@ class Tag extends Component(HTMLElement) {
   }
   set quiet(value) {
     this._quiet = transform.booleanAttr(value);
-    transform.reflect(this, 'quiet', this._quiet);
+    this._reflectAttribute('quiet', this._quiet);
   
     this.classList.toggle(QUIET_CLASSNAME, this._quiet);
   }
@@ -232,7 +232,7 @@ class Tag extends Component(HTMLElement) {
   }
   set multiline(value) {
     this._multiline = transform.booleanAttr(value);
-    transform.reflect(this, 'multiline', this._multiline);
+    this._reflectAttribute('multiline', this._multiline);
   
     this.classList.toggle(MULTILINE_CLASSNAME, this._multiline);
   }
@@ -252,7 +252,7 @@ class Tag extends Component(HTMLElement) {
   set size(value) {
     value = transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) && value || size.LARGE;
-    transform.reflect(this, 'size', this._size);
+    this._reflectAttribute('size', this._size);
   
     this.classList.remove.apply(this.classList, ALL_SIZE_CLASSES);
     this.classList.add(`${CLASSNAME}--${SIZE_CLASSES[this._size]}`);
@@ -272,7 +272,7 @@ class Tag extends Component(HTMLElement) {
   set color(value) {
     value = transform.string(value).toLowerCase();
     this._color = validate.enumeration(color)(value) && value || color.DEFAULT;
-    transform.reflect(this, 'color', this._color);
+    this._reflectAttribute('color', this._color);
   
     // removes every existing color
     this.classList.remove.apply(this.classList, ALL_COLOR_CLASSES);

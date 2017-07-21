@@ -101,7 +101,7 @@ class AccordionItem extends Component(HTMLElement) {
   }
   set selected(value) {
     this._selected = transform.booleanAttr(value);
-    transform.reflect(this, 'selected', this.disabled ? false : this._selected);
+    this._reflectAttribute('selected', this.disabled ? false : this._selected);
     
     this.classList.toggle('is-selected', this._selected);
     this.removeAttribute('aria-selected');
@@ -160,7 +160,7 @@ class AccordionItem extends Component(HTMLElement) {
   }
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
-    transform.reflect(this, 'disabled', this._disabled);
+    this._reflectAttribute('disabled', this._disabled);
   
     this.classList.toggle('is-disabled', this.disabled);
     this.removeAttribute('aria-disabled');

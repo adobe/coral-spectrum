@@ -230,7 +230,7 @@ class Card extends Component(HTMLElement) {
   }
   set fixedWidth(value) {
     this._fixedWidth = transform.booleanAttr(value);
-    transform.reflect(this, 'fixedwidth', this._fixedWidth);
+    this._reflectAttribute('fixedwidth', this._fixedWidth);
   
     this.classList.toggle(`${CLASSNAME}--fixedWidth`, this._fixedWidth);
   }
@@ -269,7 +269,7 @@ class Card extends Component(HTMLElement) {
   }
   set stacked(value) {
     this._stacked = transform.booleanAttr(value);
-    transform.reflect(this, 'stacked', this._stacked);
+    this._reflectAttribute('stacked', this._stacked);
   
     this.classList.toggle(`${CLASSNAME}--stacked`, this._stacked);
   }
@@ -288,7 +288,7 @@ class Card extends Component(HTMLElement) {
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
-    transform.reflect(this, 'variant', this._variant);
+    this._reflectAttribute('variant', this._variant);
 
     this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
 

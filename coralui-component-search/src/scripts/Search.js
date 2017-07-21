@@ -71,7 +71,8 @@ class Search extends FormField(Component(HTMLElement)) {
     return this._elements.input.name;
   }
   set name(value) {
-    transform.reflect(this, 'name', value);
+    this._reflectAttribute('name', value);
+    
     this._elements.input.name = value;
   }
   
@@ -96,9 +97,9 @@ class Search extends FormField(Component(HTMLElement)) {
   }
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
-    transform.reflect(this, 'disabled', this._disabled);
-    this.setAttribute('aria-disabled', this._disabled);
+    this._reflectAttribute('disabled', this._disabled);
     
+    this.setAttribute('aria-disabled', this._disabled);
     this.classList.toggle('is-disabled', this._disabled);
     this._elements.input.disabled = this._disabled;
     this._elements.clearButton.disabled = this._disabled;
@@ -110,7 +111,8 @@ class Search extends FormField(Component(HTMLElement)) {
   }
   set required(value) {
     this._required = transform.booleanAttr(value);
-    transform.reflect(this, 'required', this._required);
+    this._reflectAttribute('required', this._required);
+    
     this.setAttribute('aria-required', this._required);
     this._elements.input.required = this._required;
   }
@@ -121,7 +123,8 @@ class Search extends FormField(Component(HTMLElement)) {
   }
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
-    transform.reflect(this, 'readonly', this._readOnly);
+    this._reflectAttribute('readonly', this._readOnly);
+    
     this.setAttribute('aria-readonly', this._readOnly);
     this._elements.input.readOnly = this._readOnly;
     this._elements.clearButton.disabled = this._readOnly;
@@ -160,7 +163,7 @@ class Search extends FormField(Component(HTMLElement)) {
   }
   set placeholder(value) {
     value = transform.string(value);
-    transform.reflect(this, 'placeholder', value);
+    this._reflectAttribute('placeholder', value);
   
     this._elements.input.placeholder = value;
   }
@@ -177,7 +180,7 @@ class Search extends FormField(Component(HTMLElement)) {
   }
   set maxLength(value) {
     this._elements.input.maxLength = value;
-    transform.reflect(this, 'maxlength', this.maxLength);
+    this._reflectAttribute('maxlength', this.maxLength);
   }
   
   /**
@@ -195,7 +198,7 @@ class Search extends FormField(Component(HTMLElement)) {
   set icon(value) {
     this._elements.icon.icon = value;
     if (this._elements.icon.icon) {
-      transform.reflect(this, 'icon', this._elements.icon.icon);
+      this._reflectAttribute('icon', this._elements.icon.icon);
     }
     // Hide if no icon provided
     this._elements.icon.hidden = !this._elements.icon.icon;
@@ -215,12 +218,10 @@ class Search extends FormField(Component(HTMLElement)) {
   }
   set variant(value) {
     value = transform.string(value).toLowerCase();
-  
-    if (validate.enumeration(variant)(value)) {
-      this._variant = value;
-      transform.reflect(this, 'variant', this._variant);
-      this._elements.input.variant = value;
-    }
+    this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
+    this._reflectAttribute('variant', this._variant);
+    
+    this._elements.input.variant = value;
   }
   
   /** @ignore */

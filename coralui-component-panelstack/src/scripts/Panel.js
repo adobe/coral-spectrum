@@ -73,7 +73,7 @@ class Panel extends Component(HTMLElement) {
   }
   set selected(value) {
     this._selected = transform.booleanAttr(value);
-    transform.reflect(this, 'selected', this._selected);
+    this._reflectAttribute('selected', this._selected);
     
     this.classList.toggle('is-selected', this._selected);
     this.setAttribute('aria-selected', this._selected);

@@ -250,11 +250,6 @@ const Component = (superClass) => class extends superClass {
   get _properties() {return {};}
   
   // @legacy
-  toString() {
-    return `Coral.${this._componentName}`;
-  }
-  
-  // @legacy
   // Returns the content zone if the component is connected and contains the content zone else null
   // Ideally content zones will be replaced by shadow dom and <slot> elements
   _getContentZone(contentZone) {
@@ -327,6 +322,34 @@ const Component = (superClass) => class extends superClass {
     if (typeof additionalSetter === 'function') {
       additionalSetter.call(this, value);
     }
+  }
+  
+  // Handles the reflection of properties by using a flag to prevent setting the property by changing the attribute
+  _reflectAttribute(attributeName, value) {
+    if (typeof value === 'boolean') {
+      if (value && !this.hasAttribute(attributeName)) {
+        this._reflectedAttribute = true;
+        this.setAttribute(attributeName, '');
+        this._reflectedAttribute = false;
+      }
+      else if (!value && this.hasAttributes(attributeName)) {
+        this._reflectedAttribute = true;
+        this.removeAttribute(attributeName);
+        this._reflectedAttribute = false;
+      }
+    }
+    else {
+      if (this.getAttribute(attributeName) !== String(value)) {
+        this._reflectedAttribute = true;
+        this.setAttribute(attributeName, value);
+        this._reflectedAttribute = false;
+      }
+    }
+  }
+  
+  // @legacy
+  toString() {
+    return `Coral.${this._componentName}`;
   }
   
   /**
@@ -540,8 +563,10 @@ const Component = (superClass) => class extends superClass {
   get _attributes() {return {};}
   
   attributeChangedCallback(name, oldValue, value) {
-    // Use the attribute/property mapping
-    this[this._attributes[name] || name] = value;
+    if (!this._reflectedAttribute) {
+      // Use the attribute/property mapping
+      this[this._attributes[name] || name] = value;
+    }
   }
   
   connectedCallback() {

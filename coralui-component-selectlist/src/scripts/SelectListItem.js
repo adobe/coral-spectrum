@@ -52,7 +52,7 @@ class SelectListItem extends Component(HTMLElement) {
   }
   set value(value) {
     this._value = transform.string(value);
-    transform.reflect(this, 'value', this._value);
+    this._reflectAttribute('value', this._value);
   }
   
   /**
@@ -98,7 +98,7 @@ class SelectListItem extends Component(HTMLElement) {
   }
   set selected(value) {
     this._selected = transform.booleanAttr(value);
-    transform.reflect(this, 'selected', this.disabled ? false : this._selected);
+    this._reflectAttribute('selected', this.disabled ? false : this._selected);
     
     this.classList.toggle('is-selected', this._selected);
     this.setAttribute('aria-selected', this._selected);
@@ -120,7 +120,7 @@ class SelectListItem extends Component(HTMLElement) {
   }
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
-    transform.reflect(this, 'disabled', this._disabled);
+    this._reflectAttribute('disabled', this._disabled);
     
     this.classList.toggle('is-disabled', this._disabled);
     this.setAttribute('aria-disabled', this._disabled);

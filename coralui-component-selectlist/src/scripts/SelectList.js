@@ -182,7 +182,7 @@ class SelectList extends Component(HTMLElement) {
   }
   set multiple(value) {
     this._multiple = transform.booleanAttr(value);
-    transform.reflect(this, 'multiple', this._multiple);
+    this._reflectAttribute('multiple', this._multiple);
     
     this.setAttribute('aria-multiselectable', this._multiple);
     
@@ -203,7 +203,7 @@ class SelectList extends Component(HTMLElement) {
   }
   set loading(value) {
     this._loading = transform.booleanAttr(value);
-    transform.reflect(this, 'loading', this._loading);
+    this._reflectAttribute('loading', this._loading);
   
     const loadIndicator = this._elements.loadIndicator;
   

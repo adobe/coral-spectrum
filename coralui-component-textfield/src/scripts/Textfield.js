@@ -69,7 +69,7 @@ class Textfield extends FormField(Component(HTMLInputElement)) {
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
-    transform.reflect(this, 'variant', this._variant);
+    this._reflectAttribute('variant', this._variant);
     
     // removes every existing variant
     this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);

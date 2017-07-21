@@ -59,8 +59,7 @@ class AnchorButton extends ButtonMixin(Component(HTMLAnchorElement)) {
   }
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
-    
-    transform.reflect(this, 'disabled', this._disabled);
+    this._reflectAttribute('disabled', this._disabled);
     
     this.classList.toggle('is-disabled', this._disabled);
     this.setAttribute('tabindex', this._disabled ? '-1' : '0');

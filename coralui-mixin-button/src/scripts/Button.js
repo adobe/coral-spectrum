@@ -138,7 +138,7 @@ const Button = (superClass) => class extends superClass {
   set iconPosition(value) {
     value = transform.string(value).toLowerCase();
     this._iconPosition = validate.enumeration(iconPosition)(value) && value || iconPosition.LEFT;
-    transform.reflect(this, 'iconposition', this._iconPosition);
+    this._reflectAttribute('iconposition', this._iconPosition);
     
     this._updateIcon(this.icon);
   }
@@ -188,7 +188,7 @@ const Button = (superClass) => class extends superClass {
   set size(value) {
     value = transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) && value || size.MEDIUM;
-    transform.reflect(this, 'size', this._size);
+    this._reflectAttribute('size', this._size);
   
     this.classList.toggle(`${CLASSNAME}--large`, this._size === size.LARGE);
   }
@@ -206,7 +206,7 @@ const Button = (superClass) => class extends superClass {
   }
   set selected(value) {
     this._selected = transform.booleanAttr(value);
-    transform.reflect(this, 'selected', this._selected);
+    this._reflectAttribute('selected', this._selected);
     
     this.classList.toggle('is-selected', this._selected);
     
@@ -218,7 +218,7 @@ const Button = (superClass) => class extends superClass {
     return this.getAttribute('value');
   }
   set value(value) {
-    transform.reflect(this, 'value', value);
+    this._reflectAttribute('value', value);
   
     this.trigger('coral-button:_valuechanged');
   }
@@ -236,8 +236,7 @@ const Button = (superClass) => class extends superClass {
   }
   set block(value) {
     this._block = transform.booleanAttr(value);
-  
-    transform.reflect(this, 'block', this._block);
+    this._reflectAttribute('block', this._block);
   
     this.classList.toggle(`${CLASSNAME}--block`, this._block);
   }
@@ -256,7 +255,7 @@ const Button = (superClass) => class extends superClass {
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.SECONDARY;
-    transform.reflect(this, 'variant', this._variant);
+    this._reflectAttribute('variant', this._variant);
     
     // removes every existing variant
     this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);

@@ -199,7 +199,7 @@ class TabList extends Component(HTMLElement) {
   set size(value) {
     value = transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) && value || size.MEDIUM;
-    transform.reflect(this, 'size', this._size);
+    this._reflectAttribute('size', this._size);
     
     this.classList[this._size === size.LARGE ? 'add' : 'remove'](`${CLASSNAME}--large`);
   }
@@ -219,7 +219,7 @@ class TabList extends Component(HTMLElement) {
   set orientation(value) {
     value = transform.string(value).toLowerCase();
     this._orientation = validate.enumeration(orientation)(value) && value || orientation.HORIZONTAL;
-    transform.reflect(this, 'orientation', this._orientation);
+    this._reflectAttribute('orientation', this._orientation);
     
     this.classList[this._orientation === orientation.VERTICAL ? 'add' : 'remove'](`${CLASSNAME}--vertical`);
   }

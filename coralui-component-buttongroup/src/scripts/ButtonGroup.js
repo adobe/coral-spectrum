@@ -136,7 +136,7 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
   set selectionMode(value) {
     value = transform.string(value).toLowerCase();
     this._selectionMode = validate.enumeration(selectionMode)(value) && value || selectionMode.NONE;
-    transform.reflect(this, 'selectionmode', this._selectionMode);
+    this._reflectAttribute('selectionmode', this._selectionMode);
 
     // update select element if multiple
     // this is required while appplying default selection
@@ -172,7 +172,7 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
     return this._elements.nativeSelect.name;
   }
   set name(value) {
-    transform.reflect(this, 'name', value);
+    this._reflectAttribute('name', value);
     
     this._elements.nativeSelect.name = value;
   }
@@ -256,7 +256,7 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
   }
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
-    transform.reflect(this, 'disabled', this._disabled);
+    this._reflectAttribute('disabled', this._disabled);
   
     const isDisabled = this.disabled || this.readOnly;
     this._elements.nativeSelect.disabled = isDisabled;
@@ -273,7 +273,7 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
   }
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
-    transform.reflect(this, 'readonly', this._readOnly);
+    this._reflectAttribute('readonly', this._readOnly);
   
     const self = this;
     this._elements.nativeSelect.disabled = this.readOnly || this.disabled;
@@ -297,7 +297,7 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
   }
   set required(value) {
     this._required = transform.booleanAttr(value);
-    transform.reflect(this, 'required', this._required);
+    this._reflectAttribute('required', this._required);
   
     this._elements.nativeSelect.required = this.required;
     // aria-required is permitted on elements with role="radiogroup" but not with role="group"

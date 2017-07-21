@@ -124,7 +124,7 @@ class Progress extends Component(HTMLElement) {
     }
     
     this._value = value;
-    transform.reflect(this, 'value', this._value);
+    this._reflectAttribute('value', this._value);
   
     this._elements.status.style.width = this.value + '%';
   
@@ -156,7 +156,7 @@ class Progress extends Component(HTMLElement) {
   }
   set indeterminate(value) {
     this._indeterminate = transform.booleanAttr(value);
-    transform.reflect(this, 'indeterminate', this._indeterminate);
+    this._reflectAttribute('indeterminate', this._indeterminate);
   
     if (this._indeterminate) {
       this.classList.add(`${CLASSNAME}--indeterminate`);
@@ -194,7 +194,7 @@ class Progress extends Component(HTMLElement) {
   set size(value) {
     value = transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) && value || size.MEDIUM;
-    transform.reflect(this, 'size', this._size);
+    this._reflectAttribute('size', this._size);
   
     this.classList.remove.apply(this.classList, ALL_SIZE_CLASSES);
     this.classList.add(`${CLASSNAME}--${SIZE_CLASSES[this._size]}`);
@@ -214,7 +214,7 @@ class Progress extends Component(HTMLElement) {
   }
   set showPercent(value) {
     this._showPercent = transform.booleanAttr(value);
-    transform.reflect(this, 'showpercent', this._showPercent);
+    this._reflectAttribute('showpercent', this._showPercent);
   
     if (this._showPercent) {
       const content = this.indeterminate ? '' : this.value + '%';
@@ -265,7 +265,7 @@ class Progress extends Component(HTMLElement) {
   set labelPosition(value) {
     value = transform.string(value).toLowerCase();
     this._labelPosition = validate.enumeration(labelPosition)(value) && value || labelPosition.RIGHT;
-    transform.reflect(this, 'labelposition', this._labelPosition);
+    this._reflectAttribute('labelposition', this._labelPosition);
   
     this.classList.remove.apply(this.classList, ALL_LABEL_POSITION_CLASSES);
     if (this._elements.label.textContent.length > 0) {

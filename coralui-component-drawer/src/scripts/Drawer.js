@@ -79,7 +79,7 @@ class Drawer extends Component(HTMLElement) {
   }
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
-    transform.reflect(this, 'disabled', this._disabled);
+    this._reflectAttribute('disabled', this._disabled);
   
     this.setAttribute('aria-disabled', this._disabled);
     this.classList.toggle('is-disabled', this._disabled);
@@ -122,7 +122,7 @@ class Drawer extends Component(HTMLElement) {
   set direction(value) {
     value = transform.string(value).toLowerCase();
     this._direction = validate.enumeration(direction)(value) && value || direction.DOWN;
-    transform.reflect(this, 'direction', this._direction);
+    this._reflectAttribute('direction', this._direction);
   
     this.classList.remove.apply(this.classList, ALL_DIRECTION_CLASSES);
     this.classList.add(`${CLASSNAME}--${this._direction}`);
@@ -144,7 +144,7 @@ class Drawer extends Component(HTMLElement) {
   }
   set open(value) {
     this._open = transform.booleanAttr(value);
-    transform.reflect(this, 'open', this._open);
+    this._reflectAttribute('open', this._open);
   
     this.setAttribute('aria-expanded', this._open);
     this._updateIcon();

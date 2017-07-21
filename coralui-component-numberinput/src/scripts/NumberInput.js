@@ -143,13 +143,13 @@ class NumberInput extends FormField(Component(HTMLElement)) {
     this._min = isNaN(value) ? null : value;
     
     if (this._min === null) {
-      transform.reflect(this, 'min', false);
+      this._reflectAttribute('min', false);
       
       this._elements.input.removeAttribute('aria-valuemin');
       this._elements.input.removeAttribute('min');
     }
     else {
-      transform.reflect(this, 'min', this._min);
+      this._reflectAttribute('min', this._min);
       // sets the min in the input so that keyboard handles this component
       this._elements.input.setAttribute('aria-valuemin', this._min);
       this._elements.input.min = this._min;
@@ -179,13 +179,13 @@ class NumberInput extends FormField(Component(HTMLElement)) {
     this._max = isNaN(value) ? null : value;
   
     if (this.max === null) {
-      transform.reflect(this, 'max', false);
+      this._reflectAttribute('max', false);
       
       this._elements.input.removeAttribute('aria-valuemax');
       this._elements.input.removeAttribute('max');
     }
     else {
-      transform.reflect(this, 'max', this._max);
+      this._reflectAttribute('max', this._max);
       // sets the max in the input so that keyboard handles this component
       this._elements.input.setAttribute('aria-valuemax', this._max);
       this._elements.input.max = this._max;
@@ -212,7 +212,7 @@ class NumberInput extends FormField(Component(HTMLElement)) {
   set step(value) {
     if (value !== null && (value > 0 || value === 'any' )) {
       this._step = value === 'any' ? value : transform.number(value);
-      transform.reflect(this, 'step', this._step);
+      this._reflectAttribute('step', this._step);
   
       this._elements.input.step = this._step;
     }
@@ -223,7 +223,8 @@ class NumberInput extends FormField(Component(HTMLElement)) {
     return this._elements.input.name;
   }
   set name(value) {
-    transform.reflect(this, 'name', value);
+    this._reflectAttribute('name', value);
+    
     this._elements.input.name = value;
   }
   
@@ -233,11 +234,12 @@ class NumberInput extends FormField(Component(HTMLElement)) {
   }
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
-    transform.reflect(this, 'disabled', this._disabled);
+    this._reflectAttribute('disabled', this._disabled);
+    
     this.setAttribute('aria-disabled', this._disabled);
     this.classList.toggle('is-disabled', this._disabled);
-    
     this._elements.input.disabled = this._disabled;
+    
     this._setButtonState();
   }
 
@@ -247,7 +249,8 @@ class NumberInput extends FormField(Component(HTMLElement)) {
   }
   set required(value) {
     this._required = transform.booleanAttr(value);
-    transform.reflect(this, 'required', this._required);
+    this._reflectAttribute('required', this._required);
+    
     this.setAttribute('aria-required', this._required);
     this._elements.input.required = this._required;
   }
@@ -258,7 +261,7 @@ class NumberInput extends FormField(Component(HTMLElement)) {
   }
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
-    transform.reflect(this, 'readonly', this._readOnly);
+    this._reflectAttribute('readonly', this._readOnly);
     this.setAttribute('aria-readonly', this._readOnly);
     this._elements.input.readOnly = this._readOnly;
     this._setButtonState();
@@ -297,7 +300,7 @@ class NumberInput extends FormField(Component(HTMLElement)) {
   }
   set placeholder(value) {
     value = transform.string(value);
-    transform.reflect(this, 'placeholder', value);
+    this._reflectAttribute('placeholder', value);
 
     this._elements.input.placeholder = value;
   }
