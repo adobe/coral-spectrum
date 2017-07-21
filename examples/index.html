@@ -17,6 +17,16 @@
       right: 0;
       border: 0;
     }
+
+    .example-Heading {
+      position: fixed;
+      top: 50%;
+      height: 30px;
+      margin-top: -15px;
+      right: 0;
+      width: calc(100% - 250px);
+      text-align: center;
+    }
   </style>
   <script src="../build/js/coral.js"></script>
 </head>
@@ -25,7 +35,7 @@
     <coral-anchorlist id="example-list"></coral-anchorlist>
   </div>
   <iframe class="example-Preview" id="example-preview"></iframe>
-
+  <h1 class="example-Heading coral-Heading coral-Heading--1" id="example-heading">Choose a component</h1>
   <script>
     const components = [
       'coralui-component-accordion',
@@ -51,11 +61,13 @@
       'coralui-component-taglist',
       'coralui-component-textarea',
       'coralui-component-textfield',
-      'coralui-component-wait'
+      'coralui-component-wait',
+      'coralui-dragaction'
     ];
 
     const list = document.getElementById('example-list');
     const preview = document.getElementById('example-preview');
+    const heading = document.getElementById('example-heading');
 
     components.forEach(function(component) {
        list.items.add({
@@ -74,6 +86,8 @@
 
     list.on('click', 'a', function(event) {
       event.preventDefault();
+
+      heading.hidden = true;
 
       const XMLHttpRequest = new window.XMLHttpRequest();
       XMLHttpRequest.onreadystatechange = function() {

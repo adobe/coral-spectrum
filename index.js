@@ -6,6 +6,7 @@ import ButtonGroup from 'coralui-component-buttongroup';
 import {Card, CardProperty, CardTitle, CardContext, CardDescription} from 'coralui-component-card';
 import CharacterCount from 'coralui-component-charactercount';
 import Checkbox from 'coralui-component-checkbox';
+import DragAction from 'coralui-dragaction';
 import Drawer from 'coralui-component-drawer';
 import Icon from 'coralui-component-icon';
 import {List, AnchorList, ButtonList} from 'coralui-component-list';
@@ -39,6 +40,7 @@ export {
   CardDescription,
   CharacterCount,
   Checkbox,
+  DragAction,
   Drawer,
   Icon,
   List,

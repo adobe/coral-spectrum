@@ -1,0 +1,11 @@
+mixin component-markup(options)
+    - options = options || {};
+    - options.label = options.label ? options.label : "You can drag me around";
+    - options.dragElement = options.dragElement ? " coral-dragaction" : "";
+    - options.dropZones = options.dropZones ? " coral-dragaction-dropzone='" + options.dropZones + "'": "";
+    - options.axis = options.axis ? " coral-dragaction-axis='" + options.axis + "'": "";
+    - options.scroll = options.scroll ? " coral-dragaction-scroll": "";
+    - options.containment = options.containment ? " coral-dragaction-containment": "";
+    | <span#{options.dragElement}#{options.dropZones}#{options.axis}#{options.scroll}#{options.containment}>
+    |   #{options.label}
+    | </span>

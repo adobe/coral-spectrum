@@ -1,0 +1,14 @@
+{
+  "name": "coralui-dragaction",
+  "version": "1.0.0",
+  "description": "DragAction helper",
+  "dependencies": {
+    "@coralui/coralui-theme-cloudui": "^9.3.0",
+    "coralui-util": "file:../coralui-util",
+    "coralui-externals": "file:../coralui-externals"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "coralui-gulp": "file:../coralui-gulp"
+  }
+}
