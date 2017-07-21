@@ -336,15 +336,7 @@ describe('Coral.Button', function() {
         button.iconPosition = 'LEFT';
         expect(button.firstElementChild.tagName).to.equal('CORAL-ICON');
       });
-    });
-
-    describe('#iconposition', function() {
-      it('should move icon on the left iconposition is changed on runtime', function() {
-        const button = helpers.build('<button is="coral-button" icon="add" iconposition="right"></button>');
-        button.iconPosition = Coral.Button.iconPosition.LEFT;
-        expect(button.firstElementChild.tagName).to.equal('CORAL-ICON');
-      });
-
+  
       it('should default to "left" when the attribute is removed', function() {
         const button = helpers.build('<button is="coral-button" icon="add" iconposition="right"></button>');
         button.removeAttribute('iconposition');

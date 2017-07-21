@@ -3,6 +3,7 @@ import Alert from 'coralui-component-alert';
 import AnchorButton from 'coralui-component-anchorbutton';
 import Button from 'coralui-component-button';
 import ButtonGroup from 'coralui-component-buttongroup';
+import {Card, CardProperty, CardTitle, CardContext, CardDescription} from 'coralui-component-card';
 import CharacterCount from 'coralui-component-charactercount';
 import Checkbox from 'coralui-component-checkbox';
 import Drawer from 'coralui-component-drawer';
@@ -31,6 +32,11 @@ export {
   Button,
   ButtonGroup,
   ButtonList,
+  Card,
+  CardProperty,
+  CardTitle,
+  CardContext,
+  CardDescription,
   CharacterCount,
   Checkbox,
   Drawer,

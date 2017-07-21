@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Coral3 | Coral.Card</title>
+    <link rel="stylesheet" href="../build/css/coral.css">
+    <link rel="stylesheet" href="grid.css">
+    <style>
+      /* Used to show that cards can grow. */
+      coral-card {
+        width: 400px;
+      }
+    </style>
+    <script src="../build/js/coral.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+
+  <body class="coral--light u-coral-padding">
+    <section>
+      <coral-card assetwidth="400" assetheight="600" colorhint="#ff0000">
+        <coral-card-asset>
+          <img src="http://lorempixel.com/400/600/people/9">
+        </coral-card-asset>
+      </coral-card>
+      <coral-card assetwidth="200" assetheight="300">
+        <coral-card-asset>
+          <img src="http://lorempixel.com/200/300/people/6">
+        </coral-card-asset>
+      </coral-card>
+      <coral-card>
+        <coral-card-asset>
+          <img src="http://lorempixel.com/400/400/people/1">
+        </coral-card-asset>
+      </coral-card>
+      <coral-card stacked>
+        <coral-card-asset>
+          <img src="http://lorempixel.com/400/400/people/1">
+        </coral-card-asset>
+        <coral-card-overlay>
+          <div class="u-coral-padding">
+            <coral-card-context>Downloads</coral-card-context>
+          </div>
+        </coral-card-overlay>
+        <coral-card-content>
+          <coral-card-title>Girl's eye</coral-card-title>
+          <coral-card-propertylist>
+            <coral-card-property icon="comment">2</coral-card-property>
+          </coral-card-propertylist>
+          <coral-card-propertylist>
+            <coral-card-property>2 weeks ago</coral-card-property>
+          </coral-card-propertylist>
+        </coral-card-content>
+      </coral-card>
+      <coral-card>
+        <coral-card-asset>
+          <img src="http://lorempixel.com/400/600/people/5">
+        </coral-card-asset>
+        <coral-card-overlay>
+          <div class="u-coral-padding">
+            <coral-card-context>OVERLAY Only</coral-card-context>
+          </div>
+        </coral-card-overlay>
+      </coral-card>
+      <coral-card>
+        <coral-card-asset>
+          <img src="http://lorempixel.com/400/600/people/1">
+        </coral-card-asset>
+        <coral-card-overlay>
+          <div class="u-coral-padding">
+            <coral-card-context>Downloads</coral-card-context>
+          </div>
+        </coral-card-overlay>
+        <coral-card-content>
+          <coral-card-title>Girl's eye</coral-card-title>
+          <coral-card-propertylist>
+            <coral-card-property icon="comment">2</coral-card-property>
+          </coral-card-propertylist>
+          <coral-card-propertylist>
+            <coral-card-property>2 weeks ago</coral-card-property>
+          </coral-card-propertylist>
+        </coral-card-content>
+      </coral-card>
+      <coral-card stacked>
+        <coral-card-asset>
+          <img src="http://lorempixel.com/400/400/sports/3">
+        </coral-card-asset>
+      </coral-card>
+      <a href="#">
+        <coral-card stacked>
+          <coral-card-asset>
+            <img src="http://lorempixel.com/400/400/sports/4">
+          </coral-card-asset>
+        </coral-card>
+      </a>
+      <!-- General Cards -->
+      <coral-card>
+        <coral-card-asset>
+          <img src="http://lorempixel.com/400/400/sports/1">
+        </coral-card-asset>
+        <coral-card-overlay>
+          <div class="u-coral-padding">
+            <coral-card-context>Downloads</coral-card-context>
+          </div>
+        </coral-card-overlay>
+        <coral-card-content>
+          <coral-card-context>context</coral-card-context>
+          <coral-card-title>Card Title</coral-card-title>
+          <coral-card-propertylist>
+            <coral-card-property icon="viewOff"></coral-card-property>
+            <coral-card-property icon="lockOn"></coral-card-property>
+            <coral-card-property icon="comment">3</coral-card-property>
+          </coral-card-propertylist>
+          <coral-card-propertylist>
+            <coral-card-property>2 days ago</coral-card-property>
+          </coral-card-propertylist>
+        </coral-card-content>
+      </coral-card>
+      <a class="coral3-Card-linkWrapper" href="http://www.adobe.com">
+        <coral-card stacked>
+        <coral-card-asset>
+          <img src="http://lorempixel.com/807/595/sports/9">
+        </coral-card-asset>
+          <coral-card-content>
+            <coral-card-context>Card with surrounding link</coral-card-context>
+            <coral-card-title>Card Title</coral-card-title>
+            <coral-card-propertylist>
+              <coral-card-property>IMAGE</coral-card-property>
+              <coral-card-property>807 x 595</coral-card-property>
+              <coral-card-property>45.7 KB</coral-card-property>
+            </coral-card-propertylist>
+            <coral-card-propertylist>
+              <coral-card-property icon="viewOff"></coral-card-property>
+              <coral-card-property icon="lockOn"></coral-card-property>
+              <coral-card-property icon="comment">3</coral-card-property>
+            </coral-card-propertylist>
+          </coral-card-content>
+        </coral-card>
+      </a>
+      <a class="coral3-Card-linkWrapper" href="http://www.adobe.com">
+        <coral-card stacked>
+          <coral-card-asset>
+            <img src="http://lorempixel.com/400/595/people/3">
+          </coral-card-asset>
+          <coral-card-overlay>
+            <div class="u-coral-padding">
+              <coral-card-context>Downloads</coral-card-context>
+            </div>
+          </coral-card-overlay>
+          <coral-card-content>
+            <coral-card-title>Card without context</coral-card-title>
+          </coral-card-content>
+        </coral-card>
+      </a>
+      <coral-card stacked>
+        <coral-card-asset>
+          <div style="background-color: purple;">
+            <img src="assets/Heartbeat_white.svg" width="100%">
+          </div>
+        </coral-card-asset>
+        <coral-card-content>
+          <coral-card-context>Card with SVG content</coral-card-context>
+          <coral-card-title>Card Title</coral-card-title>
+          <coral-card-description>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor justo vitae luctus commodo. Cras dolor erat, pulvinar eget vehicula non, consectetur vel sem. Nam pharetra scelerisque pharetra. Vestibulum id hendrerit tortor.</coral-card-description>
+        </coral-card-content>
+      </coral-card>
+      <coral-card stacked>
+        <coral-card-content>
+          <coral-card-context>Empty Card</coral-card-context>
+          <coral-card-title>Card Title</coral-card-title>
+        </coral-card-content>
+      </coral-card>
+      <coral-card stacked>
+        <coral-card-asset>
+          <div class="u-coral-clearFix" style="background: #7cae4a; display: table;">
+            <div style="width: 65%; display: table-cell; vertical-align: middle; background: #7cae4a;">
+              <img src="assets/Heartbeat_white.svg" width="100%">
+            </div>
+            <div class="" style="width: 20%; display: table-cell; vertical-align: middle; background: #7cae4a">
+              <img src="assets/Alert_16_white.svg" width="100%">
+            </div>
+          </div>
+        </coral-card-asset>
+        <coral-card-content>
+          <coral-card-context>Card with two assets</coral-card-context>
+          <coral-card-title>Card Title</coral-card-title>
+        </coral-card-content>
+      </coral-card>
+      <coral-card stacked>
+        <coral-card-asset>
+          <img src="http://lorempixel.com/300/300/sports/2">
+        </coral-card-asset>
+        <coral-card-content>
+          <coral-card-context>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum viverra ut urna at dignissim.</coral-card-context>
+          <coral-card-title>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum viverra ut urna at dignissim. Duis sed sem accumsan, consectetur lectus sed, dapibus purus. Pellentesque sed felis sed nisi faucibus gravida.</coral-card-title>
+          <coral-card-propertylist>
+            <coral-card-property icon="viewOff"></coral-card-property>
+            <coral-card-property icon="lockOn"></coral-card-property>
+            <coral-card-property icon="comment">3</coral-card-property>
+            <coral-card-property icon="viewOff"></coral-card-property>
+            <coral-card-property icon="lockOn"></coral-card-property>
+            <coral-card-property icon="comment">3</coral-card-property>
+            <coral-card-property icon="viewOff"></coral-card-property>
+            <coral-card-property icon="lockOn"></coral-card-property>
+            <coral-card-property icon="comment">3</coral-card-property>
+            <coral-card-property icon="viewOff"></coral-card-property>
+            <coral-card-property icon="lockOn"></coral-card-property>
+            <coral-card-property icon="comment">3</coral-card-property>
+            <coral-card-property icon="viewOff"></coral-card-property>
+            <coral-card-property icon="lockOn"></coral-card-property>
+            <coral-card-property icon="comment">3</coral-card-property>
+          </coral-card-propertylist>
+        </coral-card-content>
+      </coral-card>
+      <coral-card stacked>
+        <coral-card-asset>
+          <img src="http://lorempixel.com/200/300/sports/3">
+        </coral-card-asset>
+        <coral-card-content>
+          <coral-card-context>Page description</coral-card-context>
+          <coral-card-title>Page Title</coral-card-title>
+          <coral-card-propertylist>
+            <coral-card-property icon="viewOff"></coral-card-property>
+            <coral-card-property icon="lockOn"></coral-card-property>
+            <coral-card-property icon="comment">3</coral-card-property>
+          </coral-card-propertylist>
+        </coral-card-content>
+      </coral-card>
+      <coral-card stacked>
+        <coral-card-asset>
+          <img src="http://lorempixel.com/400/400/sports/4">
+        </coral-card-asset>
+        <coral-card-content>
+          <coral-card-context>Page description</coral-card-context>
+          <coral-card-title>Page Title</coral-card-title>
+          <coral-card-propertylist>
+            <coral-card-property icon="viewOff"></coral-card-property>
+            <coral-card-property icon="lockOn"></coral-card-property>
+            <coral-card-property icon="comment">3</coral-card-property>
+          </coral-card-propertylist>
+        </coral-card-content>
+      </coral-card>
+      <coral-card></coral-card>
+        <coral-card-asset>
+          <img src="http://lorempixel.com/150/150/sports/7">
+        </coral-card-asset>
+      <coral-card stacked>
+        <coral-card-asset>
+          <img src="http://lorempixel.com/60/60/sports/5">
+        </coral-card-asset>
+        <coral-card-content>
+          <coral-card-context>Asset description</coral-card-context>
+          <coral-card-title>Asset Name (low resolution)</coral-card-title>
+        </coral-card-content>
+      </coral-card>
+      <coral-card>
+        <coral-card-asset>
+          <img src="http://lorempixel.com/600/100/sports/5">
+        </coral-card-asset>
+        <coral-card-content>
+          <coral-card-context>Wide asset</coral-card-context>
+          <coral-card-title>Asset Name (low resolution)</coral-card-title>
+        </coral-card-content>
+      </coral-card>
+      <coral-card stacked>
+        <coral-card-asset>
+          <img src="http://lorempixel.com/60/250/sports/5">
+        </coral-card-asset>
+        <coral-card-content>
+          <coral-card-context>Asset description</coral-card-context>
+          <coral-card-title>Asset Name (low resolution)</coral-card-title>
+        </coral-card-content>
+      </coral-card>
+      <coral-card stacked>
+        <coral-card-asset>
+          <img src="http://lorempixel.com/250/250/sports/5">
+        </coral-card-asset>
+        <coral-card-content>
+          <coral-card-context>Asset description</coral-card-context>
+          <coral-card-title>Asset Name (low resolution)</coral-card-title>
+        </coral-card-content>
+      </coral-card>
+      <coral-card stacked>
+        <coral-card-asset>
+          <img src="http://lorempixel.com/400/400/sports/6">
+        </coral-card-asset>
+        <coral-card-content>
+          <coral-card-context>Page description</coral-card-context>
+          <coral-card-title>Page title</coral-card-title>
+        </coral-card-content>
+      </coral-card>
+      <coral-card stacked>
+        <coral-card-asset>
+          <img src="http://lorempixel.com/400/400/sports/7">
+        </coral-card-asset>
+        <coral-card-content>
+          <coral-card-context>Page description</coral-card-context>
+          <coral-card-title><a href="#">Page title (link)</a></coral-card-title>
+          <coral-card-propertylist>
+            <coral-card-property icon="viewOff"></coral-card-property>
+            <coral-card-property icon="lockOn"></coral-card-property>
+            <coral-card-property icon="comment">3</coral-card-property>
+          </coral-card-propertylist>
+        </coral-card-content>
+      </coral-card>
+      <!-- Collections -->
+      <coral-card variant="condensed" stacked>
+          <coral-card-asset>
+            <img src="http://lorempixel.com/400/400/sports/8">
+          </coral-card-asset>
+        <coral-card-content>
+          <coral-card-context>Collection</coral-card-context>
+          <coral-card-title>Running</coral-card-title>
+          <coral-card-propertylist>
+            <coral-card-property icon="viewOff"></coral-card-property>
+            <coral-card-property icon="lockOn"></coral-card-property>
+            <coral-card-property icon="comment">3</coral-card-property>
+          </coral-card-propertylist>
+        </coral-card-content>
+      </coral-card>
+      <coral-card variant="condensed" stacked>
+        <coral-card-asset>
+        </coral-card-asset>
+        <coral-card-content>
+          <coral-card-context>Empty Card</coral-card-context>
+          <coral-card-title>Card Title</coral-card-title>
+        </coral-card-content>
+      </coral-card>
+      <coral-card variant="condensed" stacked>
+        <coral-card-asset>
+          <div style="background-color: purple;">
+            <img src="assets/Heartbeat_white.svg" width="100%">
+          </div>
+        </coral-card-asset>
+        <coral-card-content>
+          <coral-card-context>Card with SVG content</coral-card-context>
+          <coral-card-title>Card Title</coral-card-title>
+        </coral-card-content>
+      </coral-card>
+      <coral-card variant="condensed" stacked>
+        <coral-card-asset>
+          <div class="u-coral-clearFix" style="background: #7cae4a; display: table;">
+            <div style="width: 65%; display: table-cell; vertical-align: middle; background: #7cae4a;">
+              <img src="assets/Heartbeat_white.svg" width="100%">
+            </div>
+            <div class="" style="width: 20%; display: table-cell; vertical-align: middle; background: #7cae4a">
+              <img src="assets/Alert_16_white.svg" width="100%">
+            </div>
+          </div>
+        </coral-card-asset>
+        <coral-card-content>
+          <coral-card-context>Card with two assets</coral-card-context>
+          <coral-card-title>Card title</coral-card-title>
+        </coral-card-content>
+      </coral-card>
+      <coral-card variant="condensed" stacked>
+        <coral-card-asset>
+          <img src="http://lorempixel.com/400/400/sports/9">
+        </coral-card-asset>
+        <coral-card-content>
+          <coral-card-context>VIDEO SET</coral-card-context>
+          <coral-card-title>Running</coral-card-title>
+        </coral-card-content>
+      </coral-card>
+      <coral-card variant="condensed">
+        <coral-card-asset>
+          <img src="http://lorempixel.com/300/100/sports/2">
+        </coral-card-asset>
+        <coral-card-content>
+          <coral-card-title>Running</coral-card-title>
+        </coral-card-content>
+      </coral-card>
+      <coral-card variant="condensed">
+        <coral-card-asset>
+          <img src="http://lorempixel.com/300/100/sports/">
+        </coral-card-asset>
+        <coral-card-content>
+          <coral-card-title>Running (Low resolution)</coral-card-title>
+        </coral-card-content>
+      </coral-card>
+      <coral-card variant="condensed">
+        <coral-card-asset>
+          <img src="http://lorempixel.com/60/250/sports/">
+        </coral-card-asset>
+        <coral-card-content>
+          <coral-card-title>Running (Low resolution)</coral-card-title>
+        </coral-card-content>
+      </coral-card>
+      <coral-card variant="condensed">
+        <coral-card-asset>
+          <img src="http://lorempixel.com/400/400/sports/">
+        </coral-card-asset>
+        <coral-card-content>
+          <coral-card-title>Running (Low resolution)</coral-card-title>
+        </coral-card-content>
+      </coral-card>
+      <!-- Folders -->
+      <coral-card variant="inverted">
+        <coral-card-asset>
+          <img src="http://lorempixel.com/400/400/sports/10">
+        </coral-card-asset>
+        <coral-card-content>
+          <coral-card-context>FOLDER</coral-card-context>
+          <coral-card-title>Folder Name</coral-card-title>
+          <coral-card-propertylist>
+            <coral-card-property icon="viewOff"></coral-card-property>
+            <coral-card-property icon="lockOn"></coral-card-property>
+            <coral-card-property icon="comment">3</coral-card-property>
+          </coral-card-propertylist>
+        </coral-card-content>
+      </coral-card>
+      <coral-card variant="inverted" stacked>
+        <coral-card-asset>
+          <img src="http://lorempixel.com/400/400/sports/2">
+        </coral-card-asset>
+        <coral-card-content>
+          <coral-card-context>FOLDER</coral-card-context>
+          <coral-card-title>Folder Name</coral-card-title>
+          <coral-card-propertylist>
+            <coral-card-property icon="viewOff"></coral-card-property>
+            <coral-card-property icon="lockOn"></coral-card-property>
+            <coral-card-property icon="comment">3</coral-card-property>
+          </coral-card-propertylist>
+        </coral-card-content>
+      </coral-card>
+      <coral-card variant="inverted" stacked>
+        <coral-card-asset>
+          <img src="http://lorempixel.com/400/400/sports/4">
+        </coral-card-asset>
+        <coral-card-content>
+          <coral-card-context>FOLDER</coral-card-context>
+          <coral-card-title>Folder Name</coral-card-title>
+        </coral-card-content>
+      </coral-card>
+      <coral-card variant="inverted" stacked>
+        <coral-card-asset>
+          <img src="http://lorempixel.com/400/400/sports/7">
+        </coral-card-asset>
+        <coral-card-content>
+          <coral-card-context>FOLDER</coral-card-context>
+          <coral-card-title>Folder Name</coral-card-title>
+        </coral-card-content>
+      </coral-card>
+      <coral-card variant="inverted">
+        <coral-card-asset>
+          <img src="http://lorempixel.com/400/400/sports/1">
+        </coral-card-asset>
+        <coral-card-content>
+          <coral-card-title>Folder Name</coral-card-title>
+        </coral-card-content>
+      </coral-card>
+      <!-- Projects -->
+      <coral-card variant="inverted" stacked>
+        <coral-card-asset>
+          <img src="http://lorempixel.com/400/400/sports/3">
+        </coral-card-asset>
+        <coral-card-content>
+          <coral-card-context>PUBLICATIONS</coral-card-context>
+          <coral-card-title>Boating</coral-card-title>
+          <coral-card-propertylist>
+            <coral-card-property icon="viewOff"></coral-card-property>
+            <coral-card-property icon="lockOn"></coral-card-property>
+            <coral-card-property icon="comment">3</coral-card-property>
+          </coral-card-propertylist>
+        </coral-card-content>
+      </coral-card>
+      <coral-card variant="inverted" stacked>
+        <coral-card-asset>
+          <img src="http://lorempixel.com/400/400/nightlife/2">
+        </coral-card-asset>
+        <coral-card-content>
+          <coral-card-context>PUBLICATIONS</coral-card-context>
+          <coral-card-title>Mountains</coral-card-title>
+        </coral-card-content>
+      </coral-card>
+      <coral-card variant="inverted">
+        <coral-card-asset>
+          <img src="http://lorempixel.com/400/600/sports/1">
+        </coral-card-asset>
+        <coral-card-content>
+          <coral-card-title>Mountains</coral-card-title>
+        </coral-card-content>
+      </coral-card>
+    </section>
+  </body>
+
+</html>
