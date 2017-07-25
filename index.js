@@ -22,6 +22,7 @@ import TabView from 'coralui-component-tabview';
 import {Tag, TagList} from 'coralui-component-taglist';
 import Textarea from 'coralui-component-textarea';
 import Textfield from 'coralui-component-textfield';
+import {Tree, TreeItem} from 'coralui-component-tree';
 import Wait from 'coralui-component-wait';
 
 export {
@@ -61,5 +62,7 @@ export {
   TagList,
   Textarea,
   Textfield,
+  Tree,
+  TreeItem,
   Wait
 }

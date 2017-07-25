@@ -1,0 +1,36 @@
+script.
+  if (typeof Coral.Configurator === 'function') {
+    var configurator = new Coral.Configurator().set({
+      component: Coral.Tree,
+      fields: [
+        {
+          label: 'is multiple',
+          prop: 'multiple',
+          type: 'checkbox',
+          value: false
+        }
+      ],
+      items: [
+        {
+          content: {
+            textContent: 'Item 1'
+          }
+        },
+        {
+          content: {
+            textContent: 'Item 2'
+          }
+        },
+        {
+          content: {
+            textContent: 'Item 3'
+          }
+        }
+      ],
+      componentEvents: [
+        'coral-tree:change',
+        'coral-collection:add',
+        'coral-collection:remove'
+      ]
+    }).insertAfterLastScript();
+  }

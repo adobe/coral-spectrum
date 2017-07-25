@@ -30,6 +30,7 @@
     "coralui-component-taglist": "file:coralui-component-taglist",
     "coralui-component-textarea": "file:coralui-component-textarea",
     "coralui-component-textfield": "file:coralui-component-textfield",
+    "coralui-component-tree": "file:coralui-component-tree",
     "coralui-component-wait": "file:coralui-component-wait",
     "coralui-dragaction": "file:coralui-dragaction",
     "@coralui/coralui-theme-cloudui": "^9.3.0",

@@ -125,6 +125,8 @@ class Accordion extends Component(HTMLElement) {
       this._items = new SelectableCollection({
         host: this,
         itemTagName: 'coral-accordion-item',
+        // allows accordions to be nested
+        itemSelector: ':scope > coral-accordion-item',
         onItemAdded: this._validateSelection,
         onItemRemoved: this._validateSelection,
       });

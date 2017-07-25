@@ -212,7 +212,7 @@ class Icon extends Component(HTMLElement) {
       this._updateAltText(value);
     }
     else {
-      this[name] = value;
+      super.attributeChangedCallback(name, oldValue, value);
     }
   }
   
