@@ -8,6 +8,7 @@ import CharacterCount from 'coralui-component-charactercount';
 import Checkbox from 'coralui-component-checkbox';
 import DragAction from 'coralui-dragaction';
 import Drawer from 'coralui-component-drawer';
+import {FileUpload, FileUploadItem} from 'coralui-component-fileupload';
 import Icon from 'coralui-component-icon';
 import {List, AnchorList, ButtonList} from 'coralui-component-list';
 import NumberInput from 'coralui-component-numberinput';
@@ -43,6 +44,8 @@ export {
   Checkbox,
   DragAction,
   Drawer,
+  FileUpload,
+  FileUploadItem,
   Icon,
   List,
   Panel,

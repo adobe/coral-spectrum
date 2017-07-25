@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Coral3 | Coral.FileUpload</title>
+  <link rel="stylesheet" href="../build/css/coral.css">
+  <script src="../build/js/coral.js"></script>
+</head>
+
+<body class="coral--light u-coral-padding">
+  <div class="col">
+    <section>
+      <h2 class="coral-Heading coral-Heading--2">File Upload</h2>
+      <ul>
+        <li>Uploads a single file only</li>
+        <li>Starts immediately</li>
+        <li>Looks like a normal button</li>
+      </ul>
+      <div class="buttons">
+        <button is="coral-button" variant="quiet" icon="select">Select</button>
+        <coral-fileupload id="fileUpload" action="/upload" autostart>
+          <button coral-fileupload-select is="coral-button" variant="quiet" icon="upload">Upload Assets</button>
+        </coral-fileupload>
+        <button is="coral-button" variant="quiet" icon="folderAdd">Create Folder</button>
+      </div>
+    </section>
+  </div>
+</body>
+
+</html>

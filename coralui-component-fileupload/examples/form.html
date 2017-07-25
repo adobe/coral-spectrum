@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Coral3 | Coral.FileUpload</title>
+  <link rel="stylesheet" href="../build/css/coral.css">
+  <script src="../build/js/coral.js"></script>
+</head>
+
+<body class="coral--light u-coral-padding">
+  <h2 class="coral-Heading coral-Heading--2">File Upload</h2>
+  <ul>
+    <li>Lets you select a file inside of a form or drag/drop</li>
+    <li>Is not submitted asynchronously</li>
+    <li>Looks like a normal button</li>
+  </ul>
+  <form class="coral-Form coral-Form--aligned" style="width: 500px;" method="post" enctype="multipart/form-data" action="http://localhost/~ringel/singlefileupload.php">
+    <section class="coral-Form-fieldset">
+      <h3 class="coral-Form-fieldset-legend">Information</h3>
+      <label class="coral-Form-fieldlabel" for="name">Name</label>
+      <input class="coral-Form-field coral3-Textfield" type="text" id="name" name="name" placeholder="Your Name">
+      <label class="coral-Form-fieldlabel" for="email">E-mail</label>
+      <input class="coral-Form-field coral3-Textfield" type="email" id="email" name="email" placeholder="your@name.com">
+      <label class="coral-Form-fieldlabel" id="profile-picture-label">Profile Picture</label>
+      <coral-fileupload name="file" class="coral-Form-field" labelledby="profile-picture-label" block>
+        <button type="button" coral-fileupload-select coral-fileupload-dropzone is="coral-button" variant="secondary" >Select file...</button>
+      </coral-fileupload>
+      <label class="coral-Form-fieldlabel">&nbsp;</label>
+      <button class="coral-Form-field" type="submit" is="coral-button" variant="primary">Submit</button>
+    </section>
+  </form>
+</body>
+
+</html>

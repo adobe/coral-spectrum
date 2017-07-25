@@ -1,0 +1,61 @@
++document-section('Forms')
+  +document-subsection('Vertical Layout')
+    +markup-example().
+      <form class="coral-Form coral-Form--vertical u-columnSmall">
+        <section class="coral-Form-fieldset">
+          <div class="coral-Form-fieldwrapper">
+            <label id="label-vertical-0" class="coral-Form-fieldlabel">Label</label>
+            <coral-fileupload class="coral-Form-field" name="name" labelledby="label-vertical-0" action="/upload">
+              <button is="coral-button" coral-fileupload-select icon="upload">Upload Files</button>
+            </coral-fileupload action="/upload">
+          </div>
+
+          <div class="coral-Form-fieldwrapper">
+            <label id="label-vertical-1" class="coral-Form-fieldlabel">Required</label>
+            <coral-fileupload class="coral-Form-field" name="name" labelledby="label-vertical-1" action="/upload" required>
+              <button is="coral-button" coral-fileupload-select icon="upload">Upload Files</button>
+            </coral-fileupload action="/upload">
+            <coral-icon class="coral-Form-fieldinfo" icon="infoCircle" size="S" id="coral-form-vertical-fileupload-fieldinfo"></coral-icon>
+            <coral-tooltip variant="info" placement="right" target="#coral-form-vertical-fileupload-fieldinfo">Required Information</coral-tooltip>
+          </div>
+
+          <div class="coral-Form-fieldwrapper">
+            <label id="label-vertical-2" class="coral-Form-fieldlabel">Invalid</label>
+            <coral-fileupload class="coral-Form-field" name="name" labelledby="label-vertical-2" action="/upload" invalid>
+              <button is="coral-button" coral-fileupload-select icon="upload">Upload Files</button>
+            </coral-fileupload action="/upload">
+            <coral-icon class="coral-Form-fielderror" icon="infoCircle" size="S" id="coral-form-vertical-fileupload-fielderror"></coral-icon>
+            <coral-tooltip variant="error" placement="right" target="#coral-form-vertical-fileupload-fielderror">Error Message</coral-tooltip>
+          </div>
+        </section>
+      </form>
+  +document-subsection('Aligned Layout')
+    +markup-example().
+      <form class="coral-Form coral-Form--aligned u-columnLarge">
+        <section class="coral-Form-fieldset">
+          <div class="coral-Form-fieldwrapper">
+            <label id="label-aligned-0" class="coral-Form-fieldlabel">Label</label>
+            <coral-fileupload class="coral-Form-field" name="name" labelledby="label-aligned-0" action="/upload">
+              <button is="coral-button" coral-fileupload-select icon="upload">Upload Files</button>
+            </coral-fileupload action="/upload">
+          </div>
+
+          <div class="coral-Form-fieldwrapper">
+            <label id="label-aligned-1" class="coral-Form-fieldlabel">Required</label>
+            <coral-fileupload class="coral-Form-field" name="name" labelledby="label-aligned-1" required action="/upload">
+              <button is="coral-button" coral-fileupload-select icon="upload">Upload Files</button>
+            </coral-fileupload action="/upload">
+            <coral-icon class="coral-Form-fieldinfo" icon="infoCircle" size="S" id="coral-form-aligned-fileupload-fieldinfo"></coral-icon>
+            <coral-tooltip variant="info" placement="right" target="#coral-form-aligned-fileupload-fieldinfo">Required Information</coral-tooltip>
+          </div>
+
+          <div class="coral-Form-fieldwrapper">
+            <label id="label-aligned-2" class="coral-Form-fieldlabel">Invalid</label>
+            <coral-fileupload class="coral-Form-field" name="name" labelledby="label-aligned-2" invalid action="/upload">
+              <button is="coral-button" coral-fileupload-select icon="upload">Upload Files</button>
+            </coral-fileupload action="/upload">
+            <coral-icon class="coral-Form-fielderror" icon="infoCircle" size="S" id="coral-form-aligned-fileupload-fielderror"></coral-icon>
+            <coral-tooltip variant="error" placement="right" target="#coral-form-aligned-fileupload-fielderror">Error Message</coral-tooltip>
+          </div>
+        </section>
+      </form>

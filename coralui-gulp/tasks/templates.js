@@ -20,7 +20,7 @@ module.exports = function(gulp) {
   const defineModule = require('gulp-define-module');
   
   gulp.task('templates', function() {
-    return gulp.src('src/templates/*.html')
+    return gulp.src(['src/templates/*.html', 'node_modules/coralui-*/src/templates/*.html'])
       .pipe(plumber())
       .pipe(domly({
         compilerOptions: {
@@ -32,6 +32,8 @@ module.exports = function(gulp) {
       .pipe(defineModule('es6', {
         wrapper: 'template; let template = <%= contents %>'
       }))
-      .pipe(gulp.dest('src/templates'));
+      .pipe(gulp.dest(function (file) {
+        return file.base;
+      }));
   });
 };

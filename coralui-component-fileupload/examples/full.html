@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Coral3 | Coral.FileUpload</title>
+  <link rel="stylesheet" href="../build/css/coral.css">
+  <script src="../build/js/coral.js"></script>
+</head>
+
+<body class="coral--light u-coral-padding">
+<h1 class="coral-Heading coral-Heading--1">coral-FileUpload</h1>
+<div class="col">
+  <section>
+    <h2 class="coral-Heading coral-Heading--2" id="basic-label">Basic example</h2>
+    <coral-fileupload action="http://localhost/~ringel/singlefileupload.php" labelledby="basic-label">
+      <button is="coral-button" coral-fileupload-select>Upload</button>
+    </coral-fileupload>
+    <h2 class="coral-Heading coral-Heading--2" id="disabled-label">Disabled example</h2>
+    <coral-fileupload disabled labelledby="disabled-label">
+      <button is="coral-button" coral-fileupload-select>Upload</button>
+    </coral-fileupload>
+    <h2 class="coral-Heading coral-Heading--2" id="styled-label">Styled upload button</h2>
+    <coral-fileupload action="http://localhost/~ringel/singlefileupload.php" labelledby="styled-label">
+      <button is="coral-button" variant="primary" icon="add" coral-fileupload-select>Upload</button>
+    </coral-fileupload>
+  </section>
+</div>
+<div class="col">
+  <section class="coral--dark">
+    <h2 class="coral-Heading coral-Heading--2" id="basic-label-dark">Basic example</h2>
+    <coral-fileupload action="http://localhost/~ringel/singlefileupload.php" labelledby="basic-label-dark">
+      <button is="coral-button" coral-fileupload-select>Upload</button>
+    </coral-fileupload>
+    <h2 class="coral-Heading coral-Heading--2" id="disabled-label-dark">Disabled example</h2>
+    <coral-fileupload disabled labelledby="disabled-label">
+      <button is="coral-button" coral-fileupload-select>Upload</button>
+    </coral-fileupload>
+    <h2 class="coral-Heading coral-Heading--2" id="styled-label-dark">Styled upload button</h2>
+    <coral-fileupload action="http://localhost/~ringel/singlefileupload.php" labelledby="styled-label">
+      <button is="coral-button" variant="primary" icon="add" coral-fileupload-select>Upload</button>
+    </coral-fileupload>
+  </section>
+</div>
+<div class="col">
+  <section>
+    <h2 class="coral-Heading coral-Heading--2" id="autostart-label">File will be uploaded automatically when file is selected</h2>
+    <coral-fileupload autostart name="file" action="http://localhost/~ringel/singlefileupload.php" labelledby="autostart-label">
+      <button is="coral-button" coral-fileupload-select>Upload</button>
+    </coral-fileupload>
+  </section>
+  <section>
+    <h2 class="coral-Heading coral-Heading--2" id="multiple-label">Multiple file select</h2>
+    <coral-fileupload autostart name="file" multiple action="http://localhost/~ringel/multiplefileupload.php" labelledby="multiple-label">
+      <button is="coral-button" coral-fileupload-select>Upload</button>
+    </coral-fileupload>
+  </section>
+  <section>
+    <h2 class="coral-Heading coral-Heading--2" >Instantiated with JS constructor</h2>
+    <div id="fileuploadFromConstructorContainer"></div>
+  </section>
+  <section>
+    <h2 class="coral-Heading coral-Heading--2" id="mimetype-label">MimeType support</h2>
+    <coral-fileupload action="http://localhost/~ringel/singlefileupload.php" accept="image/*, *.txt" labelledby="mimetype-label">
+      <button is="coral-button" coral-fileupload-select>Only images and .txt files</button>
+    </coral-fileupload>
+  </section>
+  <section>
+    <h2 class="coral-Heading coral-Heading--2" id="filesize-label">File size support</h2>
+    <coral-fileupload id="fileuploadSizeLimit" action="http://localhost/~ringel/singlefileupload.php" sizelimit="1000000" labelledby="filesize-label">
+      <button is="coral-button" coral-fileupload-select>Only files &lt; 1mb</button>
+    </coral-fileupload>
+  </section>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+
+    var fileuploadSizeLimit = document.getElementById('fileuploadSizeLimit');
+    var fileuploadFromConstructorContainer = document.getElementById('fileuploadFromConstructorContainer');
+
+    var fileuploadFromConstructor = new Coral.FileUpload().set({
+      action: '#',
+      labelledBy: 'fileuploadFromConstructor'
+    });
+
+    var button = document.createElement('button', {is: 'coral-button'});
+    (button.label || button).textContent = 'created from JS';
+    button.setAttribute('coral-fileupload-select', '');
+    fileuploadFromConstructor.appendChild(button);
+    fileuploadFromConstructorContainer.appendChild(fileuploadFromConstructor);
+
+
+    fileuploadSizeLimit.on('coral-fileupload:filesizeexceeded', function(event) {
+      var item = event.detail.item;
+      alert(item.file.name + ' rejected. File size : ' + item.file.size + ' bytes');
+    });
+  });
+</script>
+</body>
+
+</html>

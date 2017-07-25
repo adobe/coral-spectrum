@@ -14,6 +14,9 @@
  * is strictly forbidden unless prior written permission is obtained
  * from Adobe Systems Incorporated.
  */
+
+import resizer from '../templates/resizer';
+
 /**
  The Coral utility belt.
  @namespace
@@ -537,7 +540,7 @@ commons.getSubProperty = function(root, path) {
   var resizeListenerObject;
   function getResizeListenerObject() {
     if (!resizeListenerObject) {
-      resizeListenerObject = Coral.templates.commons.resizeListener.call();
+      resizeListenerObject = resizer().firstElementChild;
     }
     return resizeListenerObject.cloneNode(true);
   }

@@ -7,6 +7,7 @@ import 'coralui-component-card/tests';
 import 'coralui-component-charactercount/tests';
 import 'coralui-component-checkbox/tests';
 import 'coralui-component-drawer/tests';
+import 'coralui-component-fileupload/tests';
 import 'coralui-component-icon/tests';
 import 'coralui-component-list/tests';
 import 'coralui-component-panelstack/tests';
