@@ -1,7 +1,7 @@
 describe('Coral.Icon', function() {
   'use strict';
   
-  describe('namespace', function() {
+  describe('Namespace', function() {
     it('should be defined', function() {
       expect(Coral).to.have.property('Icon');
     });
@@ -19,7 +19,7 @@ describe('Coral.Icon', function() {
     });
   });
   
-  describe('instantiation', function() {
+  describe('Instantiation', function() {
     it('should be possible using new', function() {
       var icon = helpers.build(new Coral.Icon());
       expect(icon.classList.contains('coral-Icon')).to.be.true;
@@ -56,7 +56,7 @@ describe('Coral.Icon', function() {
     });
   });
 
-  describe('markup', function() {
+  describe('Markup', function() {
 
     describe('#icon', function() {
 

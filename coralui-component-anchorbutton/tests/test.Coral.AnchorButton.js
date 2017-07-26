@@ -1,14 +1,14 @@
 describe('Coral.AnchorButton', function() {
   'use strict';
   
-  describe('namespace', function() {
+  describe('Namespace', function() {
     it('should be defined', function() {
       expect(Coral).to.have.property('AnchorButton');
       expect(Coral.AnchorButton).to.have.property('Label');
     });
   });
 
-  describe('instantiation', function() {
+  describe('Instantiation', function() {
     it('should be possible using new', function() {
       var button = helpers.build(new Coral.AnchorButton());
       expect(button.classList.contains('coral-Button')).to.be.true;
@@ -66,18 +66,9 @@ describe('Coral.AnchorButton', function() {
     });
   });
 
-  describe('markup', function() {
+  describe('Markup', function() {
 
-    describe('hidden attribute', function() {
-
-      it('should hide component on false', function() {
-        const button = helpers.build('<a is="coral-anchorbutton" href="#" hidden></a>');
-        expect(window.getComputedStyle(button).display).to.equal('none');
-        expect(button.hasAttribute('hidden')).to.be.true;
-      });
-    });
-
-    describe('label property from content in tag body', function() {
+    describe('#label', function() {
 
       it('should be initially empty', function() {
         const button = helpers.build('<a is="coral-anchorbutton" href="#" hidden></a>');
@@ -143,7 +134,7 @@ describe('Coral.AnchorButton', function() {
       }); // end it
     }); // end describe label
 
-    describe('icon property', function() {
+    describe('#icon', function() {
 
       it('should be initially empty', function() {
         const button = helpers.build('<a is="coral-anchorbutton" href="#">Test</a>');
@@ -205,7 +196,7 @@ describe('Coral.AnchorButton', function() {
       });
     }); // end describe icon
 
-    describe('iconsize property', function() {
+    describe('#iconsize', function() {
 
       it('should be initially the default', function() {
         const button = helpers.build('<a is="coral-anchorbutton" href="#"></a>');

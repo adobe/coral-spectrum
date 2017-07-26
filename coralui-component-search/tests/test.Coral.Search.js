@@ -35,6 +35,14 @@ describe('Coral.Search', function() {
       var ni = helpers.build('<coral-search></coral-search>');
       testInstance(ni);
     });
+  
+    it('should be possible to clone the element using markup', function() {
+      helpers.cloneComponent(window.__html__['Coral.Search.html']);
+    });
+  
+    it('should be possible to clone using js', function() {
+      helpers.cloneComponent(new Coral.Search());
+    });
   });
 
   describe('API', function() {

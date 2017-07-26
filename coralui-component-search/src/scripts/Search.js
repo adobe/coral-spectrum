@@ -325,9 +325,32 @@ class Search extends FormField(Component(HTMLElement)) {
     if (!this._icon) {this.icon = 'search';}
     if (!this._variant) {this.variant = variant.DEFAULT;}
   
-    this.appendChild(this._elements.icon);
-    this.appendChild(this._elements.input);
-    this.appendChild(this._elements.clearButton);
+    // Create a temporary fragment
+    const fragment = document.createDocumentFragment();
+  
+    const templateHandleNames = ['icon', 'input', 'clearButton'];
+  
+    // Render the main template
+    fragment.appendChild(this._elements.icon);
+    fragment.appendChild(this._elements.input);
+    fragment.appendChild(this._elements.clearButton);
+    
+    // Process remaining elements as necessary
+    while (this.firstChild) {
+      const child = this.firstChild;
+      if (child.nodeType === Node.TEXT_NODE ||
+        templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
+        // Add non-template elements to the fragment
+        fragment.appendChild(child);
+      }
+      else {
+        // Remove anything else
+        this.removeChild(child);
+      }
+    }
+  
+    // Add the frag to the component
+    this.appendChild(fragment);
   
     this._updateClearButton();
   }

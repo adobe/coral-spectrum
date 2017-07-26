@@ -23,6 +23,18 @@ describe('Coral.Multifield', function() {
       expect(Coral.Multifield.Item).to.have.property('Content');
     });
   });
+  
+  describe('Instantation', function() {
+    it('should be possible to clone the element using markup', function() {
+      helpers.cloneComponent(window.__html__['Coral.Multifield.nested.html']);
+    });
+  
+    it('should be possible to clone using js', function() {
+      var el = new Coral.Multifield();
+      el.items.add();
+      helpers.cloneComponent(el);
+    });
+  });
 
   describe('API', function() {
     describe('#items', function() {});

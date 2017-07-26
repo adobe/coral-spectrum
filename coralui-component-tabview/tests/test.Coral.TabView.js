@@ -1,7 +1,7 @@
 describe('Coral.TabView', function() {
   'use strict';
 
-  describe('namespace', function() {
+  describe('Namespace', function() {
     it('should be defined', function() {
       expect(Coral).to.have.property('TabView');
     });
@@ -15,7 +15,7 @@ describe('Coral.TabView', function() {
     expect(el.hasAttribute('orientation')).to.be.true;
   }
 
-  describe('instantiation', function() {
+  describe('Instantiation', function() {
     it('should be possible using new', function() {
       var el = helpers.build(new Coral.TabView());
       testDefaultInstance(el);

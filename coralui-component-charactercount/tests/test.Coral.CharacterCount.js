@@ -3,7 +3,7 @@ describe('Coral.CharacterCount', function() {
 
   var input, characterCount;
 
-  describe('instantiation', function() {
+  describe('Instantiation', function() {
     it('should be possible using new', function() {
       var defaultCharacterCount = helpers.build(new Coral.CharacterCount());
       expect(defaultCharacterCount.classList.contains('coral3-CharacterCount')).to.be.true;
@@ -40,7 +40,7 @@ describe('Coral.CharacterCount', function() {
     });
   });
 
-  describe('behavior', function() {
+  describe('Implementation Details', function() {
 
     var typeValue = function(value){
       input.value = value;

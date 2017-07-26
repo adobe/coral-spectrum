@@ -1,7 +1,7 @@
 describe('Coral.Wait', function() {
   'use strict';
   
-  describe('namespace', function() {
+  describe('Namespace', function() {
     it('should define the variants in an enum', function() {
       expect(Coral.Wait.variant).to.exist;
       expect(Coral.Wait.variant.DEFAULT).to.equal('default');
@@ -18,7 +18,7 @@ describe('Coral.Wait', function() {
     });
   });
   
-  describe('instantiation', function() {
+  describe('Instantiation', function() {
     it('should be possible using new', function() {
       var wait = helpers.build(new Coral.Wait());
       
@@ -32,9 +32,9 @@ describe('Coral.Wait', function() {
     });
   });
   
-  describe('markup', function() {
+  describe('Markup', function() {
     
-    describe('centered attribute', function() {
+    describe('#centered', function() {
       
       it('should be initially false', function() {
         var wait = helpers.build('<coral-wait></coral-wait>');
@@ -62,7 +62,7 @@ describe('Coral.Wait', function() {
       });
     });
     
-    describe('size attribute', function() {
+    describe('#size', function() {
       
       it('should default to size small', function() {
         var wait = helpers.build('<coral-wait></coral-wait>');
