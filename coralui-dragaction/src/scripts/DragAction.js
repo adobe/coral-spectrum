@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import {events, validate, transform} from 'coralui-util';
+import {events, validate, transform, commons} from 'coralui-util';
 
 // Attributes
 const DROP_ZONE_ATTRIBUTE = 'coral-dragaction-dropzone';
@@ -186,7 +186,7 @@ class DragAction {
       }
     }
   
-    this._id = Coral.commons.getUID();
+    this._id = commons.getUID();
     this._dragElementValue = dragElement;
     this._dragElement = el;
   
@@ -348,7 +348,7 @@ class DragAction {
     return this._axis;
   }
   set axis(value) {
-    value = Coral.transform.string(value);
+    value = transform.string(value);
     this._axis = validate.enumeration(axis)(value) && value || axis.FREE;
   }
   
@@ -387,7 +387,7 @@ class DragAction {
   /** @private */
   _dragStart(event) {
     // Container
-    this._container = getViewContainer(this._dragElement);
+    this._container = getViewContainer(this._dragElement) || document.body;
     
     // Prevent dragging ghost image
     if (event.target.tagName === 'IMG') {

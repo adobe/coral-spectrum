@@ -15,6 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
+import commons from './commons';
+
 let keys = {};
 let Keys = function() {};
 
@@ -439,7 +441,7 @@ let Keys = function() {};
             
             // This allows us to match when the delegation selector includes context
             if (listener.needsContext) {
-              doc.id = doc.id || Coral.commons.getUID();
+              doc.id = doc.id || commons.getUID();
               selector = '#' + doc.id + ' ';
             }
             

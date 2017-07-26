@@ -253,7 +253,7 @@ const Component = (superClass) => class extends superClass {
   // Returns the content zone if the component is connected and contains the content zone else null
   // Ideally content zones will be replaced by shadow dom and <slot> elements
   _getContentZone(contentZone) {
-    if (document.contains(this)) {
+    if (document.documentElement.contains(this)) {
       return (this.contains(contentZone) && contentZone) || null;
     }
     // Return the content zone by default

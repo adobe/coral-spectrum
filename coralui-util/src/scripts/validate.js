@@ -14,6 +14,9 @@
  * is strictly forbidden unless prior written permission is obtained
  * from Adobe Systems Incorporated.
  */
+
+import commons from './commons';
+
 /**
  Property value validators
  @namespace
@@ -70,7 +73,7 @@ validate.enumeration = function(enumeration) {
   'use strict';
   
   // Reverses the enumeration, so that we can check that the variable new value exists inside
-  var enumReversed = Coral.commons.swapKeysAndValues(enumeration);
+  var enumReversed = commons.swapKeysAndValues(enumeration);
   
   // Returns a new function that matches the newValue, oldValue signature
   return function(newValue, oldValue) {

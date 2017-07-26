@@ -17,7 +17,7 @@
 
 import Component from 'coralui-mixin-component';
 import {SelectableCollection} from 'coralui-collection';
-import {transform, validate} from 'coralui-util';
+import {transform, validate, Keys} from 'coralui-util';
 
 // Key codes
 const PAGE_UP = 33;
@@ -222,7 +222,7 @@ class Accordion extends Component(HTMLElement) {
       case UP_ARROW:
       case LEFT_ARROW:
         // Set focus on the tab button for the currently displayed tab.
-        if ((event.metaKey || event.ctrlKey) && Coral.Keys.filterInputs(event)) {
+        if ((event.metaKey || event.ctrlKey) && Keys.filterInputs(event)) {
           event.preventDefault();
           event.stopPropagation();
           

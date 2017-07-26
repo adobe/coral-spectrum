@@ -396,7 +396,7 @@ let i18n = {};
     
     // Fetch the string
     var str = key;
-    for (var component in Coral.strings) {
+    for (var component in strings) {
       if (typeof strings[component] !== 'undefined' &&
         typeof strings[component][this._locale] !== 'undefined') {
         str = strings[component][this._locale][key] || str;

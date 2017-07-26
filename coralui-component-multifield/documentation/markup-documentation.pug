@@ -1,0 +1,46 @@
++document-section('Markup Examples')
+
+  +document-subsection('Pre-filled items')
+    p.
+      A Multifield item can have a pre-filled content different from the Multifield template. But added items will always
+      be generated based on the template.
+    p.
+      Child elements of <code>&lt;coral-multifield&gt;</code> can be given a special attribute to enable functionality.
+    ul
+      li.
+        <code>[coral-multifield-add]</code> - Click to add an item
+
+    +markup-example().
+      <coral-multifield>
+        <coral-multifield-item>
+          <input is="coral-textfield" type="text" value="Basel">
+        </coral-multifield-item>
+        <button coral-multifield-add type="button" is="coral-button">Add a field</button>
+        <template coral-multifield-template>
+          <input is="coral-textfield" type="text">
+        </template>
+      </coral-multifield>
+
+  +document-subsection('IE11 template limitation')
+    p.
+      Multifield partially supports the <code>template</code> element on IE11. If adding/removing items in the template
+      is required, <code>template.content</code> should be used.
+
+    #constructorExample.
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          var multifield = new Coral.Multifield();
+          // Use template.content to be able to specify the template content dynamically on IE11.
+          multifield.template.content.appendChild(new Coral.Textfield());
+
+          var add = new Coral.Button();
+          add.label.textContent = 'Add a field';
+          add.setAttribute('coral-multifield-add', '');
+          multifield.appendChild(add);
+
+          var constructorExample = document.getElementById('constructorExample');
+          constructorExample.appendChild(multifield);
+        });
+      </script>
+
+    +example-pre-only('constructorExample')

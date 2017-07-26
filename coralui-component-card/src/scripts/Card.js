@@ -129,8 +129,7 @@ class Card extends Component(HTMLElement) {
         }
         else {
           // for non-low resolution images, condensed and inverted cards do not require the height to be set
-          if (this.variant !== Coral.Card.variant.CONDENSED &&
-            this.variant !== Coral.Card.variant.INVERTED) {
+          if (this.variant !== variant.CONDENSED && this.variant !== variant.INVERTED) {
             this._elements.asset.style.height = (ratio * this._assetHeight) + 'px';
           }
         }

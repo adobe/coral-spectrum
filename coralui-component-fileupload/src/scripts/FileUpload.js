@@ -17,6 +17,7 @@
 
 import Component from 'coralui-mixin-component';
 import FormField from 'coralui-mixin-formfield';
+import FileUploadItem from './FileUploadItem';
 import base from '../templates/base';
 import {transform, commons, validate} from 'coralui-util';
 
@@ -633,7 +634,7 @@ class FileUpload extends FormField(Component(HTMLElement)) {
     
     // Initialize items
     for (let i = 0; i < files.length; i++) {
-      items.push(new Coral.FileUpload.Item(files[i]));
+      items.push(new FileUploadItem(files[i]));
     }
     
     // Verify if file is allowed to be uploaded and trigger events accordingly

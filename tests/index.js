@@ -12,6 +12,7 @@ import 'coralui-component-icon/tests';
 import 'coralui-component-list/tests';
 import 'coralui-component-panelstack/tests';
 import 'coralui-component-progress/tests';
+import 'coralui-component-multifield/tests';
 import 'coralui-component-numberinput/tests';
 import 'coralui-component-radio/tests';
 import 'coralui-component-search/tests';
