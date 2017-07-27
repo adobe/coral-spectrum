@@ -423,6 +423,11 @@ const Component = (superClass) => class extends superClass {
       cancelable: cancelable,
       detail: props
     });
+  
+    // Don't trigger the event if silenced
+    if (this._silenced) {
+      return event;
+    }
     
     // default value in case the dispatching fails
     var defaultPrevented = false;
@@ -498,7 +503,9 @@ const Component = (superClass) => class extends superClass {
         updateContentZone(property, value);
       }
       else {
-        this[silent ? `_${property}` : property] = value;
+        this._silenced = silent;
+        this[property] = value;
+        this._silenced = false;
       }
     }.bind(this);
     

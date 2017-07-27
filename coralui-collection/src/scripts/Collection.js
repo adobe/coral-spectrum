@@ -175,10 +175,10 @@ class Collection {
       if (!(item instanceof HTMLElement)) {
         // creates an instance of an item from the object
         if (this._itemBaseTagName) {
-          item = document.createElement(this._itemBaseTagName, {is: this._itemTagName}).set(item);
+          item = document.createElement(this._itemBaseTagName, {is: this._itemTagName}).set(item, true);
         }
         else {
-          item = document.createElement(this._itemTagName).set(item);
+          item = document.createElement(this._itemTagName).set(item, true);
         }
       }
     

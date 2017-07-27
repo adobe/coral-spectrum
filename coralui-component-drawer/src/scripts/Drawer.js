@@ -143,6 +143,8 @@ class Drawer extends Component(HTMLElement) {
     return this._open || false;
   }
   set open(value) {
+    const silenced = this._silenced;
+    
     this._open = transform.booleanAttr(value);
     this._reflectAttribute('open', this._open);
   
@@ -154,6 +156,9 @@ class Drawer extends Component(HTMLElement) {
     // Don't animate on initialization
     if (this._animate) {
       commons.transitionEnd(slider, function() {
+        // Keep it silenced
+        this._silenced = silenced;
+        
         // Remove height as we want the drawer to naturally grow if content is added later
         if (this._open) {
           slider.style.height = '';
@@ -161,6 +166,7 @@ class Drawer extends Component(HTMLElement) {
       
         // Trigger once transition is finished
         this.trigger(`coral-drawer:${(this._open ? 'open' : 'close')}`);
+        this._silenced = false;
       }.bind(this));
     
       if (!this._open) {

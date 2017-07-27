@@ -186,6 +186,22 @@ describe('Coral.Drawer', function () {
   });
 
   describe('Events', function() {
+    const transition = 100;
+    let transitionEnd = Coral.commons.transitionEnd;
+    
+    beforeEach(function() {
+      // Simulate transition ended after 100 ms
+      Coral.commons.transitionEnd = function(el, cb) {
+        window.setTimeout(function() {
+          cb();
+        }, transition);
+      };
+    });
+    
+    afterEach(function() {
+      Coral.commons.transitionEnd = transitionEnd;
+    });
+    
     it('should trigger coral-drawer:open', function(done) {
       var drawer = helpers.build(window.__html__['Coral.Drawer.default.html']);
       drawer.on('coral-drawer:open', function() {
@@ -193,6 +209,19 @@ describe('Coral.Drawer', function () {
         done();
       });
       drawer.open = true;
+    });
+  
+    it('should not trigger coral-drawer:open if silenced', function(done) {
+      var drawer = helpers.build(window.__html__['Coral.Drawer.default.html']);
+      var openSpy = sinon.spy();
+      drawer.on('coral-drawer:open', openSpy);
+      drawer.set('open', true, true);
+      
+      setTimeout(function() {
+        expect(openSpy.callCount).to.equal(0);
+        
+        done();
+      }, transition + 1);
     });
 
     it('should trigger coral-drawer:close', function(done) {
