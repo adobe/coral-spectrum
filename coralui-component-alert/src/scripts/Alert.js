@@ -101,7 +101,7 @@ class Alert extends Component(HTMLElement) {
     icon.call(this._elements);
     
     // Events
-    this.on({
+    this._delegateEvents({
       'click [coral-close]': '_onCloseClick'
     });
   }

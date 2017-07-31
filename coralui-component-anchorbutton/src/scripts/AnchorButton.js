@@ -36,7 +36,7 @@ class AnchorButton extends ButtonMixin(Component(HTMLAnchorElement)) {
     super();
     
     // Events
-    this.on(commons.extend(this._events, {
+    this._delegateEvents(commons.extend(this._events, {
       'keydown': '_onKeyDown',
       'keyup': '_onKeyUp'
     }));

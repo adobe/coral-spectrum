@@ -60,7 +60,7 @@ const getListenerFromMethodNameOrFunction = function(obj, eventName, methodNameO
  Add local event and key combo listeners for this component, store global event/key combo listeners for later.
  @ignore
  */
-const delegateEvents = function(globalsOnly) {
+const delegateEvents = function() {
   /*
    Add listeners to new event
    - Include in hash
@@ -149,17 +149,9 @@ const delegateEvents = function(globalsOnly) {
             listener: listener,
             isCapture: isCapture
           });
-          
-          // Listen to global events
-          events.on(eventName, selector, listener, isCapture);
         }
       }
       else {
-        // We don't want to attach non global events again
-        if (globalsOnly) {
-          continue;
-        }
-        
         // Events on the element itself
         if (isKey) {
           // Create the keys instance only if its needed
@@ -186,6 +178,29 @@ const delegateEvents = function(globalsOnly) {
           this._vent.on(eventName, selector, listener, isCapture);
         }
       }
+    }
+  }
+};
+
+/**
+ Attach global event listeners for this component.
+ @ignore
+ */
+const delegateGlobalEvents = function() {
+  var i;
+  if (this._globalEvents) {
+    // Remove global event listeners
+    for (i = 0; i < this._globalEvents.length; i++) {
+      var event = this._globalEvents[i];
+      events.on(event.eventName, event.selector, event.listener, event.isCapture);
+    }
+  }
+  
+  if (this._globalKeys) {
+    // Remove global key listeners
+    for (i = 0; i < this._globalKeys.length; i++) {
+      var key = this._globalKeys[i];
+      keys.on(key.keyCombo, key.selector, key.listener);
     }
   }
 };
@@ -248,6 +263,14 @@ const Component = (superClass) => class extends superClass {
   
   // @legacy
   get _properties() {return {};}
+  
+  // @legacy
+  // Attach event listeners including global ones
+  _delegateEvents(eventMap) {
+    this._events = commons.extend(this._events, eventMap);
+    delegateEvents.call(this);
+    delegateGlobalEvents.call(this);
+  }
   
   // @legacy
   // Returns the content zone if the component is connected and contains the content zone else null
@@ -356,8 +379,9 @@ const Component = (superClass) => class extends superClass {
    @legacy
    
    Add an event listener.
-   @param {String|Object} eventNameOrEvents
-   The event name or events to listen for.
+ 
+   @param {String} eventName
+   The event name to listen for.
    @param {String} [selector]
    The selector to use for event delegation.
    @param {Function} func
@@ -366,15 +390,8 @@ const Component = (superClass) => class extends superClass {
    Whether or not to listen during the capturing or bubbling phase.
    @returns {Coral.Component} this, chainable.
    */
-  on(eventNameOrEvents, selector, func, useCapture) {
-    if (typeof eventNameOrEvents === 'string') {
-      this._vent.on(eventNameOrEvents, selector, func, useCapture);
-    }
-    else {
-      this._events = commons.extend(this._events, eventNameOrEvents);
-      delegateEvents.call(this);
-    }
-    
+  on(eventName, selector, func, useCapture) {
+    this._vent.on(eventName, selector, func, useCapture);
     return this;
   }
   
@@ -531,36 +548,38 @@ const Component = (superClass) => class extends superClass {
     return this;
   }
   
-  // @legacy
-  // @deprecated
+  /**
+   Get the value of a property.
+   @param {String} property
+   The name of the property to fetch the value of.
+   @returns {*} Property value.
+   */
   get(property) {
-    console.warn('Coral.Component.get has been deprecated. Please use the property accessor instead.');
-    
     return this[property];
   }
   
-  // @legacy
-  // @deprecated
+  /**
+   Show this component.
+   @returns {Coral.Component} this, chainable
+   */
   show() {
-    console.warn('Coral.Component.show has been deprecated. Please use the hidden attribute instead.');
-    
     if (!this.hidden) {
       return this;
     }
-    
+  
     this.hidden = false;
     return this;
   }
   
-  // @legacy
-  // @deprecated
+  /**
+   Hide this component.
+   @returns {Coral.Component} this, chainable
+   */
   hide() {
-    console.warn('Coral.Component.hide has been deprecated. Please use the hidden attribute instead.');
-    
     if (this.hidden) {
       return this;
     }
-    
+  
     this.hidden = true;
     return this;
   }
@@ -579,8 +598,8 @@ const Component = (superClass) => class extends superClass {
   connectedCallback() {
     // A component that is reattached should respond to global events again
     if (this._disconnected) {
-      delegateEvents.call(this, true);
-      this._disconnected = undefined;
+      delegateGlobalEvents.call(this);
+      this._disconnected = false;
     }
   }
   

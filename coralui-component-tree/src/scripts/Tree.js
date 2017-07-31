@@ -33,7 +33,7 @@ class Tree extends Component(HTMLElement) {
     super();
     
     // Attach events
-    this.on({
+    this._delegateEvents({
       'click .coral3-Tree-header': '_onItemClick',
       'click .coral3-Tree-collapseExpand': '_onExpandCollapseClick',
       'coral-collection:add coral-tree-item': '_onCollectionChange',

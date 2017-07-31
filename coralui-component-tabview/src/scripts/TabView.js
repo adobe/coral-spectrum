@@ -55,7 +55,7 @@ class TabView extends Component(HTMLElement) {
     };
     
     // Events
-    this.on({
+    this._delegateEvents({
       'coral-tablist:change > coral-tablist': '_onTabListChange',
       'coral-panelstack:change > coral-panelstack': '_onPanelStackChange',
       'coral-collection:add > coral-tablist': '_syncTabListAndPanelStack',

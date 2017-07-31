@@ -78,8 +78,8 @@ helpers.cloneComponent = function(element, options) {
 
       it('should have matching classnames', function() {
         for (var i = 0; i < elCloneChildren.length; i++) {
-          var elChildrenClassNameArray = elChildren[i].className.split(' ');
-          var elCloneChildrenClassNameArray = elCloneChildren[i].className.split(' ');
+          var elChildrenClassNameArray = elChildren[i].className.trim().split(' ');
+          var elCloneChildrenClassNameArray = elCloneChildren[i].className.trim().split(' ');
           expect(elCloneChildrenClassNameArray).to.have.members(elChildrenClassNameArray,
             'clone child className vs new child className');
           expect(elCloneChildrenClassNameArray.length).to.equal(elChildrenClassNameArray.length,

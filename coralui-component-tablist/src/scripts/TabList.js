@@ -61,7 +61,7 @@ class TabList extends Component(HTMLElement) {
     super();
     
     // Attach events
-    this.on({
+    this._delegateEvents({
       'click > coral-tab': '_onTabClick',
       'key:home > coral-tab': '_onHomeKey',
       'key:end > coral-tab': '_onEndKey',

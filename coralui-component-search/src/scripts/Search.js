@@ -49,7 +49,7 @@ class Search extends FormField(Component(HTMLElement)) {
   constructor() {
     super();
     
-    this.on({
+    this._delegateEvents({
       // @todo use Coral.keys when key combos don't interfere with single key execution
       'keydown [handle=input]': '_onEnterKey',
       'keyup [handle=input]': '_onKeyUp',

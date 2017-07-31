@@ -17,6 +17,7 @@
 
 import base from '../templates/base';
 import {validate, transform, commons} from 'coralui-util';
+import {trapFocus, returnFocus, focusOnShow, FADETIME} from './enums';
 
 // The tab capture element that lives at the top of the body
 let topTabCaptureEl;
@@ -30,48 +31,6 @@ let startZIndex = 10000;
 
 // Tab keycode
 const TAB_KEY = 9;
-
-// The time it should take for overlays to fade in milliseconds
-// Important: This should be greater than or equal to the CSS transition time
-const FADETIME = 350;
-
-/**
- Focus trap options.
- @memberof Coral.mixin.overlay
- @enum {String}
- */
-const trapFocus = {
-  /** Focus is trapped such that the use cannot focus outside of the overlay. */
-  ON: 'on',
-  /** The user can focus outside the overlay as normal. */
-  OFF: 'off'
-};
-
-/**
- Return focus options.
- 
- @memberof Coral.mixin.overlay
- @enum {String}
- */
-const returnFocus = {
-  /** When the overlay is closed, the element that was focused before the it was shown will be focused again. */
-  ON: 'on',
-  /** Nothing will be focused when the overlay is closed. */
-  OFF: 'off'
-};
-
-/**
- Focus behavior options.
- 
- @memberof Coral.mixin.overlay
- @enum {String}
- */
-const focusOnShow = {
-  /** When the overlay is opened, it will be focused. */
-  ON: 'on',
-  /** The overlay will not focus itself when opened. */
-  OFF: 'off'
-};
 
 // A stack interface for overlays
 const _overlays = [];
@@ -809,7 +768,6 @@ const Overlay = (superClass) => class extends superClass {
    @memberof Coral.mixin.overlay#
    */
   show() {
-    console.warn('Coral.mixin.overlay.show has been deprecated. Please use the open property/attribute instead.');
     this.open = true;
     
     return this;
@@ -822,7 +780,6 @@ const Overlay = (superClass) => class extends superClass {
    @memberof Coral.mixin.overlay#
    */
   hide() {
-    console.warn('Coral.mixin.overlay.hide has been deprecated. Please use the open property/attribute instead.');
     this.open = false;
   
     return this;
@@ -870,6 +827,15 @@ const Overlay = (superClass) => class extends superClass {
     return this;
   }
   
+  // Map attributes with properties
+  get _attributes() {
+    return {
+      trapfocus: 'trapFocus',
+      returnfocus: 'returnFocus',
+      focusonshow: 'focusOnShow'
+    };
+  }
+  
   // Expose enums
   static get trapFocus() {return trapFocus;}
   static get returnFocus() {return returnFocus;}
@@ -877,7 +843,7 @@ const Overlay = (superClass) => class extends superClass {
   // Expose const
   static get FADETIME() {return FADETIME;}
   
-  attributeChangedCallback() {
+  static get observedAttributes() {
     return [
       'trapfocus',
       'trapFocus',
@@ -887,14 +853,6 @@ const Overlay = (superClass) => class extends superClass {
       'focusOnShow',
       'open'
     ];
-  }
-  
-  get _attributes() {
-    return {
-      trapfocus: 'trapFocus',
-      returnfocus: 'returnFocus',
-      focusonshow: 'focusOnShow'
-    };
   }
   
   connectedCallback() {

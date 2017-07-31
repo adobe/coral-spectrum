@@ -75,7 +75,7 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
     this._initalSelectedValues = [];
     
     // Attach events
-    this.on({
+    this._delegateEvents({
       'click button[is="coral-button"]': '_onButtonClick',
   
       'capture:focus button[is="coral-button"]': '_onButtonFocus',

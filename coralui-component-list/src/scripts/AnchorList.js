@@ -33,7 +33,7 @@ class AnchorList extends List(Component(HTMLElement)) {
     super();
   
     // Events
-    this.on(this._events);
+    this._delegateEvents(this._events);
   }
   
   /** @private */

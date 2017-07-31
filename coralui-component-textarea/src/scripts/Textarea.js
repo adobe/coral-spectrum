@@ -53,7 +53,7 @@ class Textarea extends FormField(Component(HTMLTextAreaElement)) {
   constructor() {
     super();
     
-    this.on({
+    this._delegateEvents({
       'input': '_onInput'
     });
   }

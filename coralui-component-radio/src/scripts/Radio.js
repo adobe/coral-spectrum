@@ -34,7 +34,7 @@ class Radio extends FormField(Component(HTMLElement)) {
   constructor() {
     super();
     
-    this.on({
+    this._delegateEvents({
       'click': '_onClick',
       'mousedown': '_onMouseDown'
     });

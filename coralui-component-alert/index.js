@@ -12,8 +12,8 @@ window.customElements.define('coral-alert-footer', AlertFooter);
 // Expose component on the Coral namespace
 window.Coral = window.Coral || {};
 window.Coral.Alert = Alert;
-window.Coral.AlertHeader = AlertHeader;
-window.Coral.AlertContent = AlertContent;
-window.Coral.AlertFooter = AlertFooter;
+window.Coral.Alert.Header = AlertHeader;
+window.Coral.Alert.Content = AlertContent;
+window.Coral.Alert.Footer = AlertFooter;
 
-export default Alert;
+export {Alert, AlertHeader, AlertContent, AlertFooter};

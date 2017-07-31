@@ -37,7 +37,7 @@ class Multifield extends Component(HTMLElement) {
     super();
     
     // Attach events
-    this.on({
+    this._delegateEvents({
       'coral-dragaction:dragstart coral-multifield-item': '_onDragStart',
       'coral-dragaction:drag coral-multifield-item': '_onDrag',
       'coral-dragaction:dragend coral-multifield-item': '_onDragEnd',

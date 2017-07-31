@@ -50,7 +50,7 @@ class TagList extends FormField(Component(HTMLElement)) {
     super();
     
     // Attach events
-    this.on({
+    this._delegateEvents({
       'capture:focus coral-tag': '_onItemFocus',
       'capture:blur coral-tag': '_onItemBlur',
       'key:right coral-tag': '_onNextItemFocus',

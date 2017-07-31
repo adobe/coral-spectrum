@@ -119,7 +119,7 @@ class Tag extends Component(HTMLElement) {
     super();
     
     // Attach events
-    this.on({
+    this._delegateEvents({
       'click': '_onClick',
       'key:backspace': '_onRemoveButtonClick',
       'key:delete': '_onRemoveButtonClick',

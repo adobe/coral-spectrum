@@ -53,7 +53,7 @@ class FileUpload extends FormField(Component(HTMLElement)) {
     super();
     
     // Events
-    this.on(commons.extend(this._events, {
+    this._delegateEvents(commons.extend(this._events, {
       // Clickable hooks
       'click [coral-fileupload-submit]': '_onSubmitButtonClick',
       'click [coral-fileupload-clear]': 'clear',

@@ -1,11 +1,12 @@
 import {Accordion, AccordionItem} from 'coralui-component-accordion';
-import Alert from 'coralui-component-alert';
+import {Alert, AlertHeader, AlertContent, AlertFooter} from 'coralui-component-alert';
 import AnchorButton from 'coralui-component-anchorbutton';
 import Button from 'coralui-component-button';
 import ButtonGroup from 'coralui-component-buttongroup';
 import {Card, CardProperty, CardTitle, CardContext, CardDescription} from 'coralui-component-card';
 import CharacterCount from 'coralui-component-charactercount';
 import Checkbox from 'coralui-component-checkbox';
+import {Dialog, DialogHeader, DialogContent, DialogFooter} from 'coralui-component-dialog';
 import DragAction from 'coralui-dragaction';
 import Drawer from 'coralui-component-drawer';
 import {FileUpload, FileUploadItem} from 'coralui-component-fileupload';
@@ -31,6 +32,9 @@ export {
   Accordion,
   AccordionItem,
   Alert,
+  AlertHeader,
+  AlertContent,
+  AlertFooter,
   AnchorButton,
   AnchorList,
   Button,
@@ -43,6 +47,10 @@ export {
   CardDescription,
   CharacterCount,
   Checkbox,
+  Dialog,
+  DialogHeader,
+  DialogContent,
+  DialogFooter,
   DragAction,
   Drawer,
   FileUpload,

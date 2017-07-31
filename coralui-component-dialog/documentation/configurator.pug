@@ -1,0 +1,122 @@
+script.
+  if (typeof Coral.Configurator === 'function') {
+    function showDemoDialog() {
+      var dialog = document.querySelector('#demoDialog');
+      dialog.show();
+    }
+    var configurator = new Coral.Configurator().set({
+      before: '<button is="coral-button" id="demoButton" onclick="showDemoDialog()">Show Dialog</button>',
+      component: Coral.Dialog,
+      useInnerElements: true,
+      innerElements: [
+        {
+          tagName: 'coral-dialog-header',
+          properties: {
+            'header.innerHTML': 'innerHTML'
+          }
+        },
+        {
+          tagName: 'coral-dialog-content',
+          properties: {
+            'content.innerHTML': 'innerHTML'
+          }
+        },
+        {
+          tagName: 'coral-dialog-footer',
+          properties: {
+            'footer.innerHTML': 'innerHTML'
+          }
+        }
+      ],
+      fields: [
+        {
+          label: 'Id',
+          prop: 'id',
+          type: 'text',
+          value: 'demoDialog'
+        },
+        {
+          label: 'Header',
+          prop: 'header.innerHTML',
+          type: 'text',
+          value: 'Dialog Header'
+        },
+        {
+          label: 'Content',
+          prop: 'content.innerHTML',
+          type: 'text',
+          value: 'This is the dialog\'s content'
+        },
+        {
+          label: 'Footer',
+          prop: 'footer.innerHTML',
+          type: 'text',
+          value: '<button is="coral-button" variant="primary" coral-close>Ok</button>'
+        },
+        {
+          label: 'Backdrop',
+          prop: 'backdrop',
+          type: 'select',
+          value: 'modal',
+          options: {
+            NONE: 'none',
+            MODAL: 'modal',
+            STATIC: 'static'
+          }
+        },
+        {
+          label: 'Variant',
+          prop: 'variant',
+          type: 'select',
+          value: 'default',
+          options: {
+            DEFAULT: 'default',
+            ERROR: 'error',
+            WARNING: 'warning',
+            SUCCESS: 'success',
+            HELP: 'help',
+            INFO: 'info'
+          }
+        },
+        {
+          label: 'Closable',
+          prop: 'closable',
+          type: 'select',
+          value: 'off',
+          options: {
+            OFF: 'off',
+            ON: 'on'
+          }
+        },
+        {
+          label: 'Interaction',
+          prop: 'interaction',
+          type: 'select',
+          value: 'on',
+          options: {
+            OFF: 'off',
+            ON: 'on'
+          }
+        },
+        {
+          label: 'is fullscreen',
+          prop: 'fullscreen',
+          value: false,
+          type: 'checkbox'
+        },
+        {
+          label: 'is movable',
+          prop: 'movable',
+          value: false,
+          type: 'checkbox'
+        }
+      ],
+      componentEvents: [
+        'coral-overlay:beforeopen',
+        'coral-overlay:open',
+        'coral-overlay:beforeclose',
+        'coral-overlay:close'
+      ]
+    }).insertAfterLastScript();
+  }
+

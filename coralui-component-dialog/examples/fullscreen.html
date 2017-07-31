@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Dialog</title>
+
+  <link rel="stylesheet" href="../build/css/coral.css">
+  <script src="../build/js/coral.js"></script>
+
+</head>
+
+<body class="coral--light">
+
+  <coral-dialog id="dialog" open fullscreen>
+    <coral-dialog-header id="content_title">Fullscreen Dialog</coral-dialog-header>
+    <coral-dialog-content>
+      <p id="content_fullscreen">This is a fullscreen dialog. The footer is moved above, so buttons are on the top right of the dialog above content.</p>
+      <p id="content_normal" hidden>This is a normal dialog. The footer remains below, so buttons are beneath content.</p>
+
+      <p>Vivamus quis maximus enim. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut efficitur, nibh id luctus porttitor, quam nibh malesuada dui, at mattis mauris risus eget nibh. Suspendisse nec nisl eu felis ullamcorper lobortis. Nullam vulputate in mi vitae vehicula. Cras molestie urna id est faucibus tincidunt. Curabitur fermentum dui eget porta hendrerit. Nam lacinia, neque non iaculis blandit, risus ipsum accumsan velit, eu consectetur sapien magna ac enim. Aenean at augue vestibulum dolor faucibus pellentesque at vel justo. Aenean justo velit, bibendum et lectus id, efficitur accumsan diam. Sed tempus posuere justo, ultrices placerat magna aliquet in. Integer rhoncus sapien diam, eu iaculis urna porttitor quis. Vivamus volutpat tellus a scelerisque lacinia. Ut vel velit neque. Proin id augue tempus, vestibulum diam vel, pharetra erat. Integer id tellus id lorem sollicitudin pulvinar sit amet vel erat.</p>
+    </coral-dialog-content>
+    <coral-dialog-footer>
+      <button id="switchVariant" is="coral-button" variant="quiet">Switch Variant</button><button id="switchMode" is="coral-button" variant="primary">Switch Mode</button>
+    </coral-dialog-footer>
+  </coral-dialog>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('switchMode').addEventListener('click', function() {
+        dialog.fullscreen = !dialog.fullscreen;
+
+        document.querySelector('#content_fullscreen').hidden = dialog.fullscreen === false;
+        document.querySelector('#content_normal').hidden = dialog.fullscreen === true;
+        document.querySelector('#content_title').innerHTML = dialog.fullscreen ? 'Fullscreen Dialog' : 'Normal Dialog';
+      });
+
+      var variants = Object.keys(Coral.Dialog.variant);
+      variants.currentVariant = 0;
+
+      document.getElementById('switchVariant').addEventListener('click', function() {
+        variants.currentVariant++;
+        if (variants.currentVariant > variants.length) {
+          variants.currentVariant = 0;
+        }
+        dialog.variant = Coral.Dialog.variant[variants[variants.currentVariant]];
+      });
+    });
+  </script>
+
+</body>
+</html>

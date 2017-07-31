@@ -42,7 +42,7 @@ class NumberInput extends FormField(Component(HTMLElement)) {
   constructor() {
     super();
     
-    this.on({
+    this._delegateEvents({
       'key:up': '_onKeyUp',
       'key:pageup': '_onKeyUp',
       'key:down': '_onKeyDown',

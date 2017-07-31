@@ -32,7 +32,7 @@ class SelectListItem extends Component(HTMLElement) {
     super();
     
     // Events
-    this.on({
+    this._delegateEvents({
       'focus': '_onFocus',
       'blur': '_onBlur'
     });

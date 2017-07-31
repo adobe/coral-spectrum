@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Dialog</title>
+
+  <link rel="stylesheet" href="../build/css/coral.css">
+  <script src="../build/js/coral.js"></script>
+</head>
+
+<body class="coral--light u-coral-padding">
+  <script>
+  function showDialog(id) {
+    var dialog = document.getElementById(id);
+    dialog.show();
+  }
+  </script>
+
+  <coral-dialog id="no_content_zones">
+    <meta name="name" content="content">
+    I have no content zones predefined
+  </coral-dialog>
+
+  <coral-dialog id="no_wrapper">
+    <coral-dialog-header>Normal dialog</coral-dialog-header>
+    <coral-dialog-content>I have no wrapper</coral-dialog-content>
+    <coral-dialog-footer><button is="coral-button" variant="primary" coral-close>Submit</button></coral-dialog-footer>
+  </coral-dialog>
+
+  <coral-dialog id="single_wrapper">
+    <coral-wizardview>
+        <coral-dialog-header>Dialog with a Single wrapper</coral-dialog-header>
+        <coral-dialog-content>This dialog is wrapped by a <code>&lt;coral-wizardview&gt;</code> tag.</coral-dialog-content>
+        <coral-dialog-footer><button is="coral-button" variant="primary" coral-close>Submit</button></coral-dialog-footer>
+    </coral-wizardview>
+  </coral-dialog>
+
+  <coral-dialog id="single_wrapper_with_content">
+    <form>
+      <input type="hidden" value="">
+      <coral-dialog-header>Dialog with a Single wrapper</coral-dialog-header>
+      <coral-dialog-content>This dialog is wrapped by a <code>&lt;form&gt;</code> tag with hidden inputs.</coral-dialog-content>
+      <coral-dialog-footer><button is="coral-button" variant="primary" coral-close>Submit</button></coral-dialog-footer>
+    </form>
+  </coral-dialog>
+
+  <coral-dialog id="multi_wrapper">
+    <div>
+      <coral-fileupload>
+        <form action="/submit" method="post">
+          <coral-dialog-header>Dialog with a Multiple wrappers</coral-dialog-header>
+          <coral-dialog-content>I have 3 wrappers</coral-dialog-content>
+          <coral-dialog-footer><button is="coral-button" variant="primary" coral-close>Submit</button></coral-dialog-footer>
+        </form>
+      </coral-fileupload>
+    </div>
+  </coral-dialog>
+
+  <button is="coral-button" onclick="showDialog('no_content_zones')">No Content Zones Dialog</button>
+  <button is="coral-button" onclick="showDialog('no_wrapper')">No Wrapper Dialog</button>
+  <button is="coral-button" onclick="showDialog('single_wrapper')">Single Wrapper Dialog</button>
+  <button is="coral-button" onclick="showDialog('single_wrapper_with_content')">Single Wrapper With Hidden Content Dialog</button>
+  <button is="coral-button" onclick="showDialog('multi_wrapper')">Multi Wrapper Dialog</button>
+</body>
+</html>

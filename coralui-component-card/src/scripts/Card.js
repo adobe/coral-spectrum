@@ -70,7 +70,7 @@ class Card extends Component(HTMLElement) {
     base.call(this._elements);
   
     // Events
-    this.on({
+    this._delegateEvents({
       'capture:load coral-card-asset img': '_onLoad'
     });
   }

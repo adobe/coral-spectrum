@@ -35,7 +35,7 @@ class Switch extends FormField(Component(HTMLElement)) {
     super();
     
     // Make sure the events from the FormField are attached
-    this.on(this._events);
+    this._delegateEvents(this._events);
     
     // Prepare templates
     this._elements = {};

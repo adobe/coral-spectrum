@@ -32,7 +32,7 @@ class PanelStack extends Component(HTMLElement) {
     super();
     
     // Attach events
-    this.on({
+    this._delegateEvents({
       // private
       'coral-panel:_selectedchanged': '_onItemSelectedChanged'
     });

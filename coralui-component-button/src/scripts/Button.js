@@ -33,7 +33,7 @@ class Button extends ButtonMixin(Component(HTMLButtonElement)) {
     super();
     
     // Events
-    this.on(this._events);
+    this._delegateEvents(this._events);
   }
 }
 

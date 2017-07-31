@@ -61,7 +61,7 @@ class SelectList extends Component(HTMLElement) {
     super();
     
     // Attach events
-    this.on({
+    this._delegateEvents({
       'scroll': '_onScroll',
       'capture:focus': '_onFocus',
       'capture:blur': '_onBlur',

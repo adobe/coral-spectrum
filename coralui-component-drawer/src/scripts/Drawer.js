@@ -60,7 +60,7 @@ class Drawer extends Component(HTMLElement) {
     base.call(this._elements);
     
     // Events
-    this.on({
+    this._delegateEvents({
       'click .coral3-Drawer-toggleButton:not(:disabled)': '_onClick'
     });
   }

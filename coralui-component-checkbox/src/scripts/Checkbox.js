@@ -38,7 +38,7 @@ class Checkbox extends FormField(Component(HTMLElement)) {
     super();
   
     // @polyfill ie
-    this.on({
+    this._delegateEvents({
       'click': '_onClick',
       'mousedown': '_onMouseDown'
     });

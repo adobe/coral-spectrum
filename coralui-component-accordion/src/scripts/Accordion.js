@@ -61,7 +61,7 @@ class Accordion extends Component(HTMLElement) {
     super();
     
     // Attach events
-    this.on({
+    this._delegateEvents({
       'click coral-accordion-item:not([disabled]) [handle="acHeader"]': '_onItemClick',
   
       'key:space [handle="acHeader"]': '_onToggleItemKey',
