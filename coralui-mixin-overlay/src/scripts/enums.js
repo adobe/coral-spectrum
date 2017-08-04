@@ -36,8 +36,14 @@ const focusOnShow = {
   OFF: 'off'
 };
 
-// The time it should take for overlays to fade in milliseconds
-// Important: This should be greater than or equal to the CSS transition time
+
+/**
+ The time it should take for overlays to fade in milliseconds.
+ Important: This should be greater than or equal to the CSS transition time.
+ 
+ @memberof Coral.mixin.overlay
+ @type {Number}
+ */
 const FADETIME = 350;
 
 export {trapFocus, returnFocus, focusOnShow, FADETIME};

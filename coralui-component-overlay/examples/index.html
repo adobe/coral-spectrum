@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+  <title>Coral.Overlay</title>
+
+  <link rel="stylesheet" href="../build/css/coral.css">
+  <script src="../build/js/coral.js"></script>
+
+  <style>
+    .example-button {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+    }
+    .example-box {
+      color: white;
+      padding: 7px;
+      border: 1px solid black;
+      background: rgba(0,0,0,0.5);
+    }
+    label {
+      display: block;
+    }
+  </style>
+</head>
+<body class="coral--light">
+  <h2>Overlay</h2>
+
+  <label>
+    Placement:
+    <select id="placement">
+      <option>right</option>
+      <option>bottom</option>
+      <option>left</option>
+      <option>top</option>
+    </select>
+  </label>
+
+  <label>
+    Inner:
+    <input id="inner" type="checkbox">
+  </label>
+
+  <label>
+    Length offset:
+    <input type="text" value="0px" id="lengthOffset">
+  </label>
+
+  <label>
+    Breadth offset:
+    <input type="text" value="0px" id="breadthOffset">
+  </label>
+
+  <label>
+    Collision:
+    <select id="collision">
+      <option value="flip">flip</option>
+      <option value="fit">fit</option>
+      <option value="none">none</option>
+    </select>
+  </label>
+
+  <label>
+    Interaction:
+    <select id="interaction">
+      <option value="on">on</option>
+      <option value="off">off</option>
+    </select>
+  </label>
+
+  <button class="coral-Button example-button" onclick="overlay.open = !overlay.open;">Open</button>
+
+  <coral-overlay id="overlay" target="_prev" placement="right" open>
+    <div class="example-box">
+      Hello!
+    </div>
+  </coral-overlay>
+
+  <script>
+    Coral.events.on('change', function(event) {
+      var target = event.target;
+      overlay[target.id] = target.type === 'checkbox' ? target.checked : event.target.value;
+    });
+
+    document.getElementById('overlay').addEventListener('coral-overlay:positioned', function(e) {
+      console.log(e);
+    });
+  </script>
+
+</body>
+</html>

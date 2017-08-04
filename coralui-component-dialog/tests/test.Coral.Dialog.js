@@ -1,6 +1,9 @@
 describe('Coral.Dialog', function() {
   'use strict';
   
+  // We don't need this in our test cases
+  Coral.Dialog.prototype._moveToDocumentBody = function() {};
+  
   /**
    To mock the dragging part
    */

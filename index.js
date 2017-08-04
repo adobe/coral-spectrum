@@ -14,6 +14,7 @@ import Icon from 'coralui-component-icon';
 import {List, AnchorList, ButtonList} from 'coralui-component-list';
 import {Multifield, MultifieldItem} from 'coralui-component-multifield';
 import NumberInput from 'coralui-component-numberinput';
+import Overlay from 'coralui-component-overlay';
 import {Panel, PanelStack} from 'coralui-component-panelstack';
 import Progress from 'coralui-component-progress';
 import Radio from 'coralui-component-radio';
@@ -57,12 +58,13 @@ export {
   FileUploadItem,
   Icon,
   List,
-  Panel,
-  PanelStack,
-  Progress,
   Multifield,
   MultifieldItem,
   NumberInput,
+  Overlay,
+  Panel,
+  PanelStack,
+  Progress,
   Radio,
   Search,
   SelectList,

@@ -1,0 +1,71 @@
++document-section('Example')
+  p!= 'Change the menus to see how the overlay positions itself.'
+    div.docs-Example-markup.u-columnMedium.
+      <style>
+        .example-button {
+          margin: 20px;
+        }
+        .example-box {
+          color: white;
+          padding: 7px;
+          border: 1px solid black;
+          background: rgba(0,0,0,0.5);
+        }
+        .example-configuratorLabel {
+          display: block;
+        }
+      </style>
+      <label class="example-configuratorLabel">
+        alignMy:
+        <select id="alignMy1_menu" onchange="setAlignMy()">
+          <option>left</option>
+          <option>center</option>
+          <option>right</option>
+        </select>
+
+        <select id="alignMy2_menu" onchange="setAlignMy()">
+          <option>top</option>
+          <option>center</option>
+          <option>bottom</option>
+        </select>
+      </label>
+
+      <label class="example-configuratorLabel">
+        alignAt:
+        <select id="alignAt1_menu" onchange="setAlignAt()">
+          <option>left</option>
+          <option>center</option>
+          <option>right</option>
+        </select>
+
+        <select id="alignAt2_menu" onchange="setAlignAt()">
+          <option>top</option>
+          <option>center</option>
+          <option>bottom</option>
+        </select>
+      </label>
+
+      <button class="coral-Button example-button" onclick="exampleOverlay.open = !exampleOverlay.open;">Open</button>
+
+      <coral-overlay id="exampleOverlay" target="_prev" placement="right" alignmy="left top" alignat="left bottom" open>
+        <div class="example-box">
+          Hello!
+        </div>
+      </coral-overlay>
+
+      <script>
+        function setAlignMy() {
+          exampleOverlay.alignMy = alignMy1_menu.value +' '+ alignMy2_menu.value;
+        }
+        function setAlignAt() {
+          exampleOverlay.alignAt = alignAt1_menu.value +' '+ alignAt2_menu.value;
+        }
+
+        var alignMyParts = exampleOverlay.alignMy.split(' ');
+        alignMy1_menu.value = alignMyParts[0];
+        alignMy2_menu.value = alignMyParts[1];
+
+        var alignAtParts = exampleOverlay.alignAt.split(' ');
+        alignAt1_menu.value = alignAtParts[0];
+        alignAt2_menu.value = alignAtParts[1];
+      </script>

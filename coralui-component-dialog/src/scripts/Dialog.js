@@ -357,6 +357,10 @@ class Dialog extends Overlay(Component(HTMLElement)) {
   
     // Ensure we're in the DOM
     if (this.open && this.parentNode) {
+      
+      // If not child of document.body, we have to move it there
+      this._moveToDocumentBody();
+      
       // Center immediately during sync method. Don't invoke center() directly, as that would wait a frame
       this._center();
     
@@ -505,6 +509,13 @@ class Dialog extends Overlay(Component(HTMLElement)) {
     // When we're modal, we close when our outer area (over the backdrop) is clicked
     if (event.target === this && this.backdrop === backdrop.MODAL && this._isTopOverlay()) {
       this.open = false;
+    }
+  }
+  
+  /** @ignore */
+  _moveToDocumentBody() {
+    if (this.parentNode !== document.body) {
+      document.body.insertBefore(this, document.body.lastElementChild);
     }
   }
   
