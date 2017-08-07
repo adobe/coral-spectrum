@@ -34,6 +34,7 @@
     "coralui-component-taglist": "file:coralui-component-taglist",
     "coralui-component-textarea": "file:coralui-component-textarea",
     "coralui-component-textfield": "file:coralui-component-textfield",
+    "coralui-component-tooltip": "file:coralui-component-tooltip",
     "coralui-component-tree": "file:coralui-component-tree",
     "coralui-component-wait": "file:coralui-component-wait",
     "coralui-dragaction": "file:coralui-dragaction",

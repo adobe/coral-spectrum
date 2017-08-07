@@ -1,0 +1,15 @@
+{
+  "name": "coralui-component-tooltip",
+  "version": "4.0.0",
+  "description": "Tooltip component",
+  "dependencies": {
+    "@coralui/coralui-theme-cloudui": "^9.3.0",
+    "coralui-component-overlay": "file:../coralui-component-overlay",
+    "coralui-externals": "file:../coralui-externals",
+    "coralui-util": "file:../coralui-util"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "coralui-gulp": "file:../coralui-gulp"
+  }
+}

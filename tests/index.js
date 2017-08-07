@@ -25,6 +25,7 @@ import 'coralui-component-tabview/tests';
 import 'coralui-component-taglist/tests';
 import 'coralui-component-textarea/tests';
 import 'coralui-component-textfield/tests';
+import 'coralui-component-tooltip/tests';
 import 'coralui-component-tree/tests';
 import 'coralui-component-wait/tests';
 import 'coralui-dragaction/tests';

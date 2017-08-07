@@ -1,0 +1,29 @@
++document-section("JavaScript Examples")
+
+  p.
+    Show a #{component.displayName} with a different trigger
+
+  #triggerExample.
+    <div class="coralDocs-TooltipTarget" id="anotherTooltipTarget">Target</div>
+
+    <button class="coral-Button coralDocs-TooltipButton" id="tooltipTrigger">Toggle Tooltip</button>
+
+    <script>
+      var tooltip = new Coral.Tooltip().set({
+        content: {
+          innerHTML: 'Tooltip'
+        },
+        variant: 'success',
+        target: '#anotherTooltipTarget',
+        placement: 'left',
+         // Don't show or hide automatically
+        interaction: 'off'
+      });
+      document.body.appendChild(tooltip);
+
+      document.querySelector('#tooltipTrigger').addEventListener('click', function() {
+        // Toggle the open property
+        tooltip.open = !tooltip.open;
+      });
+    </script>
+  +example-pre-only('triggerExample')
