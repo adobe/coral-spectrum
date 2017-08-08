@@ -126,22 +126,6 @@ describe('Coral.Overlay', function() {
         overlay.target = null;
         expect(overlay._getTarget()).to.equal(null);
       });
-  
-      it('should warn if invalid', function() {
-        let warnCalled = 0;
-        const warn = console.warn;
-        // Override console.warn to detect if it was called
-        console.warn = function() {
-          warnCalled++;
-        };
-  
-        overlay.target = '#invalid';
-  
-        expect(warnCalled).to.equal(1);
-  
-        // Restore console.warn
-        console.warn = warn;
-      });
       
       it('should be reflected in popper', function() {
         overlay.target = targetOther;

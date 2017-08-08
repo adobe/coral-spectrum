@@ -24,6 +24,7 @@
     "coralui-component-numberinput": "file:coralui-component-numberinput",
     "coralui-component-overlay": "file:coralui-component-overlay",
     "coralui-component-panelstack": "file:coralui-component-panelstack",
+    "coralui-component-popover": "file:coralui-component-popover",
     "coralui-component-progress": "file:coralui-component-progress",
     "coralui-component-radio": "file:coralui-component-radio",
     "coralui-component-search": "file:coralui-component-search",

@@ -172,9 +172,6 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
         // Make sure popper options modifiers are up to date
         this.reposition();
       }
-      else {
-        console.warn('Coral.Overlay target is invalid or not in the document yet.');
-      }
     }
   }
   

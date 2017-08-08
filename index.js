@@ -16,6 +16,7 @@ import {Multifield, MultifieldItem} from 'coralui-component-multifield';
 import NumberInput from 'coralui-component-numberinput';
 import Overlay from 'coralui-component-overlay';
 import {Panel, PanelStack} from 'coralui-component-panelstack';
+import {Popover, PopoverSeparator} from 'coralui-component-popover';
 import Progress from 'coralui-component-progress';
 import Radio from 'coralui-component-radio';
 import {SelectList, SelectListGroup, SelectListItem} from 'coralui-component-selectlist';
@@ -65,6 +66,8 @@ export {
   Overlay,
   Panel,
   PanelStack,
+  Popover,
+  PopoverSeparator,
   Progress,
   Radio,
   Search,

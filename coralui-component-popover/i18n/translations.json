@@ -1,0 +1,35 @@
+{
+  "en-US": {
+    "Close": "Close"
+  },
+  "de-DE": {
+    "Close": "Schließen"
+  },
+  "fr-FR": {
+    "Close": "Fermer"
+  },
+  "it-IT": {
+    "Close": "Chiudi"
+  },
+  "ja-JP": {
+    "Close": "閉じる"
+  },
+  "es-ES": {
+    "Close": "Cerrar"
+  },
+  "ko-KR": {
+    "Close": "닫기"
+  },
+  "zh-CN": {
+    "Close": "关闭"
+  },
+  "zh-TW": {
+    "Close": "關閉"
+  },
+  "pt-BR": {
+    "Close": "Fechar"
+  },
+  "nl-NL": {
+    "Close": "Sluiten"
+  }
+}

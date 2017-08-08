@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Popover</title>
+
+  <link rel="stylesheet" href="../build/css/coral.css">
+  <script src="../build/js/coral.js"></script>
+
+  <style>
+
+    .block {
+      margin: 10px;
+      padding: 20px;
+    }
+
+    .grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+
+      text-align: center;
+    }
+
+    .grid-center {
+      width: 10rem;
+      height: 10rem;
+    }
+
+    .box {
+      width: 10rem;
+      height: 10rem;
+      border: 1px dashed #333;
+    }
+
+    .controls {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      opacity: 0.75;
+    }
+
+  </style>
+</head>
+<body class="coral--light">
+
+  <table class="grid">
+    <tr>
+      <td><button class="box" id="target_1">Target 1</button></td>
+      <td></td>
+      <td><button class="box" id="target_2">Target 2</button></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td class="grid-center"><button class="box" id="target_3">Target 3</button></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><button class="box" id="target_4">Target 4</button></td>
+      <td></td>
+      <td><button class="box" id="target_5">Target 5</button></td>
+    </tr>
+  </table>
+
+  <coral-popover open id="popover" target="#target_1">
+    <coral-popover-header>Test</coral-popover-header>
+    <coral-popover-content class="u-coral-padding">
+      This is typical popover content.<br>
+      There may be multiple lines and various items in the content.<br>
+      See the <a href="http://www.adobe.com">Adobe homepage</a> or <a href="https://www.adobe.com/solutions/digital-marketing.html">Digital Marketing</a> page.
+    </coral-popover-content>
+  </coral-popover>
+
+
+  <coral-popover open id="popover" target="#target_2">
+    <coral-popover-content class="u-coral-padding">
+      This is typical popover content.<br>
+      There may be multiple lines and various items in the content.<br>
+      See the <a href="http://www.adobe.com">Adobe homepage</a> or <a href="https://www.adobe.com/solutions/digital-marketing.html">Digital Marketing</a> page.
+    </coral-popover-content>
+  </coral-popover>
+
+</body>
+</html>
