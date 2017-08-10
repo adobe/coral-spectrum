@@ -21,6 +21,7 @@ import Progress from 'coralui-component-progress';
 import Radio from 'coralui-component-radio';
 import {SelectList, SelectListGroup, SelectListItem} from 'coralui-component-selectlist';
 import Search from 'coralui-component-search';
+import {Slider, SliderItem, RangedSlider} from 'coralui-component-slider';
 import Switch from 'coralui-component-switch';
 import {Tab, TabList} from 'coralui-component-tablist';
 import TabView from 'coralui-component-tabview';
@@ -74,6 +75,9 @@ export {
   SelectList,
   SelectListGroup,
   SelectListItem,
+  Slider,
+  SliderItem,
+  RangedSlider,
   Switch,
   Tab,
   TabList,

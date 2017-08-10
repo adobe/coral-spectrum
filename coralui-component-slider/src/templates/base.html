@@ -1,0 +1,10 @@
+<js>data.uid = Coral.commons.getUID();</js>
+<div class="coral3-Slider-bar" handle="bar">
+  <div handle="fillHandle" class="coral3-Slider-fill is-hidden" role="presentation"></div>
+</div>
+<div handle="handleContainer">
+  <div handle="leftHandle" class="coral3-Slider-handle">
+    <input handle="leftInput" value="1" type="range" id="{{data.uid}}" class="coral3-Slider-input">
+    <coral-tooltip variant="inspect" id="{{data.uid}}-tooltip" for="{{data.uid}}" interaction="off"></coral-tooltip>
+  </div>
+</div>

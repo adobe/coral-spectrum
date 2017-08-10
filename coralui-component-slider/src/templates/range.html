@@ -1,0 +1,19 @@
+<js>
+  data.uidMin = Coral.commons.getUID();
+  data.uidMax = Coral.commons.getUID();
+</js>
+<div class="coral3-Slider-bar" handle="bar">
+  <div handle="fillHandle" class="coral3-Slider-fill is-hidden" role="presentation"></div>
+</div>
+<div handle="handleContainer">
+  <div handle="leftHandle" class="coral3-Slider-handle">
+    <label handle="leftLabel" class="u-coral-screenReaderOnly" id="{{data.uidMin}}-label" for="{{data.uidMin}}" aria-hidden="true">Minimum</label>
+    <input handle="leftInput" value="1" type="range" id="{{data.uidMin}}" class="coral3-Slider-input">
+    <coral-tooltip variant="inspect" id="{{data.uidMin}}-tooltip" for="{{data.uidMin}}" interaction="off"></coral-tooltip>
+  </div>
+  <div handle="rightHandle" class="coral3-Slider-handle">
+    <label handle="rightLabel" class="u-coral-screenReaderOnly" id="{{data.uidMax}}-label" for="{{data.uidMax}}" aria-hidden="true">Maximum</label>
+    <input handle="rightInput" value="100" type="range" id="{{data.uidMax}}" class="coral3-Slider-input">
+    <coral-tooltip variant="inspect" id="{{data.uidMax}}-tooltip" for="{{data.uidMax}}" interaction="off"></coral-tooltip>
+  </div>
+</div>

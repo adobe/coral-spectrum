@@ -1,0 +1,57 @@
+script.
+  if (typeof Coral.Configurator === 'function') {
+    var configurator = new Coral.Configurator().set({
+      component: Coral.Slider,
+      fields: [
+        {
+          label: 'Step',
+          prop: 'step',
+          type: 'text',
+          value: '2'
+        },
+        {
+          label: 'Min',
+          prop: 'min',
+          type: 'text',
+          value: '10'
+        },
+        {
+          label: 'Max',
+          prop: 'max',
+          type: 'text',
+          value: '20'
+        },
+        {
+          label: 'Value',
+          prop: 'value',
+          type: 'text',
+          value: '14'
+        },
+        {
+          label: 'Orientation',
+          prop: 'orientation',
+          type: 'select',
+          value: 'horizontal',
+          options: {
+            'Horizontal': 'horizontal',
+            'Vertical': 'vertical'
+          }
+        },
+        {
+          label: 'is disabled',
+          prop: 'disabled',
+          type: 'checkbox',
+          value: false
+        },
+        {
+          label: 'is filled',
+          prop: 'filled',
+          type: 'checkbox',
+          value: false
+        }
+      ],
+      componentEvents: [
+        'change'
+      ]
+    }).insertAfterLastScript();
+  }

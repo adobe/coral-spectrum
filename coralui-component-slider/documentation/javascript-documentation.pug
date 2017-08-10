@@ -1,0 +1,44 @@
++document-section('JavaScript Examples')
+
+  +document-subsection('JS Class Initialization - Slider', 'The following is an example of creating a Slider.</code>')
+    +markup-example('u-columnLarge').
+      <div id="sliderContainer"></div>
+
+    #constructorExample1.
+       <script>
+        var slider = new Coral.Slider();
+        slider.set({
+          min: 0,
+          max: 50,
+          step: 2,
+          value: 10,
+          tooltips: true,
+          id: 'slider'
+        });
+
+        document.querySelector('#sliderContainer').appendChild(slider);
+       </script>
+    p The following JavaScript manually initializes the component on page initialization.
+    +example-pre-only("constructorExample1")
+
+  +document-subsection('JS Class Initialization - Ranged Slider', 'The following is an example of creating a ranged Slider. Note this is accomplished by providing <code>startValue</code> and <code>endValue</code>')
+    +markup-example('u-columnLarge').
+      <div id="rangedSliderContainer"></div>
+
+    #constructorExample2.
+       <script>
+        var rangedSlider = new Coral.RangedSlider();
+        rangedSlider.set({
+          min: 0,
+          max: 50,
+          step: 2,
+          startValue: 10,
+          endValue: 20,
+          tooltips: true,
+          id: 'rangedSlider'
+        });
+
+        document.querySelector('#rangedSliderContainer').appendChild(rangedSlider);
+       </script>
+    p The following JavaScript manually initializes the component on page initialization.
+    +example-pre-only("constructorExample2")
