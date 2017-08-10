@@ -339,7 +339,7 @@ class Search extends FormField(Component(HTMLElement)) {
     while (this.firstChild) {
       const child = this.firstChild;
       if (child.nodeType === Node.TEXT_NODE ||
-        templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
+        (child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1)) {
         // Add non-template elements to the fragment
         fragment.appendChild(child);
       }

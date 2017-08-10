@@ -379,7 +379,7 @@ const Button = (superClass) => class extends superClass {
     while (this.firstChild) {
       const child = this.firstChild;
     
-      if (child.tagName === 'CORAL-ICON') {
+      if (child.nodeName === 'CORAL-ICON') {
         // Don't add duplicated icons
         if (iconAdded) {
           this.removeChild(child);

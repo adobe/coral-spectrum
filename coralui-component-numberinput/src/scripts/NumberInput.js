@@ -707,14 +707,6 @@ class NumberInput extends FormField(Component(HTMLElement)) {
 
     // Default reflected attributes
     if (!this._step) {this.step = 1;}
-    
-    // clean up
-    while (this.firstChild) {
-      this.removeChild(this.firstChild);
-    }
-    
-    this.appendChild(this._elements.presentation);
-    this.appendChild(this._elements.input);
   
     // a11y
     this.setAttribute('role', 'group');
@@ -726,6 +718,29 @@ class NumberInput extends FormField(Component(HTMLElement)) {
     // sets the very initial aria values, in case the 'value' property is never set
     this._elements.input.setAttribute('aria-valuenow', '');
     this._elements.input.setAttribute('aria-valuetext', '');
+    
+    const frag = document.createDocumentFragment();
+  
+    const templateHandleNames = ['presentation', 'input'];
+    
+    // Render main template
+    frag.appendChild(this._elements.presentation);
+    frag.appendChild(this._elements.input);
+  
+    while (this.firstChild) {
+      const child = this.firstChild;
+      if (child.nodeType === Node.TEXT_NODE ||
+        (child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1)) {
+        // Add non-template elements to the frag
+        frag.appendChild(child);
+      }
+      else {
+        // Remove anything else
+        this.removeChild(child);
+      }
+    }
+    
+    this.appendChild(frag);
   }
 }
 

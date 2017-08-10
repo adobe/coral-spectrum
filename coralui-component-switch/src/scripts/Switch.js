@@ -160,6 +160,8 @@ class Switch extends FormField(Component(HTMLElement)) {
   
     // Create a temporary fragment
     const frag = document.createDocumentFragment();
+    
+    const templateHandleNames = ['input', 'label'];
   
     // Render the template
     frag.appendChild(this._elements.input);
@@ -169,7 +171,8 @@ class Switch extends FormField(Component(HTMLElement)) {
     while (this.firstChild) {
       const child = this.firstChild;
       // Only works if all root template elements have a handle attribute
-      if (child.nodeType === Node.TEXT_NODE || (child.hasAttribute && !child.hasAttribute('handle'))) {
+      if (child.nodeType === Node.TEXT_NODE ||
+        (child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1)) {
         // Add non-template elements to the content
         frag.appendChild(child);
       }

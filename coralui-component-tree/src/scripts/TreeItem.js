@@ -390,7 +390,8 @@ class TreeItem extends Component(HTMLElement) {
         // Add tree items to the sub tree container
         subTreeContainer.appendChild(child);
       }
-      else if (child.nodeType === Node.TEXT_NODE || templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
+      else if (child.nodeType === Node.TEXT_NODE ||
+        (child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1)) {
         // Add non-template elements to the content
         content.appendChild(child);
       }

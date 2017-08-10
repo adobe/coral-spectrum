@@ -935,8 +935,9 @@ class Slider extends FormField(Component(HTMLElement)) {
     while (this.firstChild) {
       const child = this.firstChild;
       
-      if (child.nodeType === Node.TEXT_NODE || templateHandleNames.indexOf(child.getAttribute('handle')) === -1
-        || child.nodeName === 'CORAL-SLIDER-ITEM') {
+      if (child.nodeType === Node.TEXT_NODE ||
+        (child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1) ||
+        child.nodeName === 'CORAL-SLIDER-ITEM') {
         // Add non-template elements to the fragment
         frag.appendChild(child);
       }

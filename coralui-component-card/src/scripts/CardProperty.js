@@ -116,7 +116,8 @@ class CardProperty extends Component(HTMLElement) {
   
     while (this.firstChild) {
       const child = this.firstChild;
-      if (child.nodeType === Node.TEXT_NODE || child.getAttribute('handle') !== 'icon') {
+      if (child.nodeType === Node.TEXT_NODE ||
+        (child.nodeType === Node.ELEMENT_NODE && child.getAttribute('handle') !== 'icon')) {
         // Add non-template elements to the label
         content.appendChild(child);
       }
