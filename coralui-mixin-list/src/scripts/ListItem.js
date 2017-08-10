@@ -125,9 +125,9 @@ const ListItem = (superClass) => class extends superClass {
     // Cleanup template elements (supporting cloneNode)
     Array.prototype.filter.call(this.children, function(child) {
       return (child.hasAttribute('handle'));
-    }).forEach(function(handleItem) {
+    }).forEach((handleItem) => {
       this.removeChild(handleItem);
-    }.bind(this));
+    }, this);
   
     // Move any remaining elements into the content sub-component
     while (this.firstChild) {

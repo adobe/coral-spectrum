@@ -303,9 +303,9 @@ class Multifield extends Component(HTMLElement) {
     this.template = this._elements.template;
   
     // Prepare items content based on the given template
-    this.items.getAll().forEach(function(item) {
+    this.items.getAll().forEach((item) => {
       this._renderTemplate(item);
-    }.bind(this));
+    }, this);
   }
   
   /**

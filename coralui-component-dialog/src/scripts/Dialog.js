@@ -655,9 +655,9 @@ class Dialog extends Overlay(Component(HTMLElement)) {
       // Remove tab captures
       Array.prototype.filter.call(this.children, function(child) {
         return (child.hasAttribute('coral-tabcapture'));
-      }).forEach(function(tabCapture) {
+      }).forEach((tabCapture) => {
         this.removeChild(tabCapture);
-      }.bind(this));
+      }, this);
 
       // Assign internal elements
       this._elements.headerWrapper = this.querySelector('.coral3-Dialog-header');

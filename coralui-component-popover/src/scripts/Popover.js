@@ -427,9 +427,9 @@ class Popover extends Overlay {
     // Remove tab captures
     Array.prototype.filter.call(this.children, function(child) {
       return (child.hasAttribute('coral-tabcapture'));
-    }).forEach(function(tabCapture) {
+    }).forEach((tabCapture) => {
       this.removeChild(tabCapture);
-    }.bind(this));
+    }, this);
   
     while (this.firstChild) {
       const child = this.firstChild;

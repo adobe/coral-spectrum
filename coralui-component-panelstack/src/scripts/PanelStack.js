@@ -93,13 +93,13 @@ class PanelStack extends Component(HTMLElement) {
     item = item || selectedItems[selectedItems.length - 1];
 
     if (item && item.hasAttribute('selected') && selectedItems.length > 1) {
-      selectedItems.forEach(function(selectedItem) {
+      selectedItems.forEach((selectedItem) => {
         if (selectedItem !== item) {
           // Don't trigger change events
           this._preventTriggeringEvents = true;
           selectedItem.removeAttribute('selected');
         }
-      }.bind(this));
+      }, this);
   
       // We can trigger change events again
       this._preventTriggeringEvents = false;

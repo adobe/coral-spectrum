@@ -124,10 +124,10 @@ class Slider extends FormField(Component(HTMLElement)) {
       this._reflectAttribute('step', this._step);
   
       this.setAttribute('aria-valuestep', this._step);
-      this._elements.inputs.forEach(function(input) {
+      this._elements.inputs.forEach((input) => {
         input.setAttribute('step', this._step);
         input.setAttribute('aria-valuestep', this._step);
-      }.bind(this));
+      }, this);
     }
   }
   
@@ -148,10 +148,10 @@ class Slider extends FormField(Component(HTMLElement)) {
     this._reflectAttribute('min', this._min);
   
     this.setAttribute('aria-valuemin', this._min);
-    this._elements.inputs.forEach(function(input) {
+    this._elements.inputs.forEach((input) => {
       input.setAttribute('min', this._min);
       input.setAttribute('aria-valuemin', this._min);
-    }.bind(this));
+    }, this);
   }
   
   /**
@@ -171,10 +171,10 @@ class Slider extends FormField(Component(HTMLElement)) {
     this._reflectAttribute('max', this._max);
   
     this.setAttribute('aria-valuemax', this._max);
-    this._elements.inputs.forEach(function(input) {
+    this._elements.inputs.forEach((input) => {
       input.setAttribute('max', this._max);
       input.setAttribute('aria-valuemax', this._max);
-    }.bind(this));
+    }, this);
   }
   
   /**
@@ -215,9 +215,9 @@ class Slider extends FormField(Component(HTMLElement)) {
     
     this.classList.toggle(`${CLASSNAME}--vertical`, isVertical);
     this.setAttribute('aria-orientation', this._orientation);
-    this._elements.inputs.forEach(function(input) {
+    this._elements.inputs.forEach((input) => {
       input.setAttribute('aria-orientation', this._orientation);
-    }.bind(this));
+    }, this);
   
     this._moveHandles();
   
@@ -267,9 +267,9 @@ class Slider extends FormField(Component(HTMLElement)) {
   set name(value) {
     this._reflectAttribute('name', value);
     
-    this._elements.inputs.forEach(function(input) {
+    this._elements.inputs.forEach((input) => {
       input.name = this.getAttribute('name');
-    }.bind(this));
+    }, this);
   }
   
   // JSDoc inherited
@@ -309,9 +309,9 @@ class Slider extends FormField(Component(HTMLElement)) {
     this._reflectAttribute('disabled', this._disabled);
     
     this.setAttribute('aria-disabled', this._disabled);
-    this._elements.inputs.forEach(function(input) {
+    this._elements.inputs.forEach((input) => {
       input.disabled = this._disabled;
-    }.bind(this));
+    }, this);
   }
   
   // JSDoc inherited
@@ -323,9 +323,9 @@ class Slider extends FormField(Component(HTMLElement)) {
     this._reflectAttribute('required', this._required);
     
     this.setAttribute('aria-required', this._required);
-    this._elements.inputs.forEach(function(input) {
+    this._elements.inputs.forEach((input) => {
       input.required = this._required;
-    }.bind(this));
+    }, this);
   }
   
   // JSDoc inherited
@@ -337,9 +337,9 @@ class Slider extends FormField(Component(HTMLElement)) {
     this._reflectAttribute('readonly', this._readOnly);
     
     this.setAttribute('aria-readonly', this._readOnly);
-    this._elements.inputs.forEach(function(input) {
+    this._elements.inputs.forEach((input) => {
       input.readOnly = this._readOnly;
-    }.bind(this));
+    }, this);
   }
   
   // JSDoc inherited
@@ -354,10 +354,10 @@ class Slider extends FormField(Component(HTMLElement)) {
       this._updateForAttributes(this.labelledBy, this._elements.inputs[0].id, true);
       this.removeAttribute('aria-labelledby');
     
-      this._elements.handles.forEach(function(handle, i) {
+      this._elements.handles.forEach((handle, i) => {
         handle.removeAttribute('aria-labelledby');
         this._elements.inputs[i].removeAttribute('aria-labelledby');
-      }.bind(this));
+      }, this);
     }
     // Adding labels
     else {
@@ -368,12 +368,12 @@ class Slider extends FormField(Component(HTMLElement)) {
       else {
         this.setAttribute('aria-labelledby', this._labelledBy);
     
-        this._elements.handles.forEach(function(handle, i) {
+        this._elements.handles.forEach((handle, i) => {
           const label = `${this._labelledBy} ${handle.querySelector('label').id}`;
       
           handle.setAttribute('aria-labelledby', label);
           this._elements.inputs[i].setAttribute('aria-labelledby', label);
-        }.bind(this));
+        }, this);
       }
       
       this._updateForAttributes(this._labelledBy, this._elements.inputs[0].id);
@@ -388,13 +388,13 @@ class Slider extends FormField(Component(HTMLElement)) {
   }
   set _values(values) {
     if (values && values.length === this._elements.handles.length) {
-      this._elements.inputs.forEach(function(input, i) {
+      this._elements.inputs.forEach((input, i) => {
         const value = values[i] = this._snapValueToStep(values[i], this.min, this.max, this.step);
       
         input.value = value;
         input.setAttribute('aria-valuenow', value);
         input.setAttribute('aria-valuetext', this._getLabel(value));
-      }.bind(this));
+      }, this);
     
       this._moveHandles();
     }
@@ -575,7 +575,7 @@ class Slider extends FormField(Component(HTMLElement)) {
     }.bind(this);
     
     // Set the handle position as a percentage based on the stored values
-    this._elements.handles.forEach(function(handle, index) {
+    this._elements.handles.forEach((handle, index) => {
       const percent = calculatePercent(this._values[index]);
       
       if (this.orientation === orientation.VERTICAL) {
@@ -588,7 +588,7 @@ class Slider extends FormField(Component(HTMLElement)) {
       }
       
       this._updateTooltip(handle, this._getLabel(this._values[index]));
-    }.bind(this));
+    }, this);
   }
   
   /**

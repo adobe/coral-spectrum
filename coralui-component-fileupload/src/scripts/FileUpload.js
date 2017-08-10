@@ -259,14 +259,14 @@ class FileUpload extends FormField(Component(HTMLElement)) {
         });
     
         // Add extra parameters
-        this.parameters.forEach(function(param) {
+        this.parameters.forEach((param) => {
           const input = document.createElement('input');
           input.type = 'hidden';
           input.name = param.name;
           input.value = param.value;
       
           this.appendChild(input);
-        }.bind(this));
+        }, this);
       }
     }
   }
@@ -696,20 +696,20 @@ class FileUpload extends FormField(Component(HTMLElement)) {
       '[coral-fileupload-abortfile],' +
       '[coral-fileupload-removefile],' +
       '[coral-fileupload-uploadfile]'
-    ), function(item) {
+    ), (item) => {
       item.classList.toggle('is-invalid', this.invalid);
       item.classList.toggle('is-disabled', this.disabled);
       item.classList.toggle('is-required', this.required);
       item.classList.toggle('is-readOnly', this.readOnly);
       item[(this.disabled || this.readOnly) ? 'setAttribute' : 'removeAttribute']('disabled', '');
-    }.bind(this));
+    }, this);
   }
   
   /** @private */
   _clearQueue() {
-    this._uploadQueue.slice().forEach(function(item) {
+    this._uploadQueue.slice().forEach((item) => {
       this._clearFile(item.file.name);
-    }.bind(this));
+    }, this);
   }
   
   /**

@@ -86,7 +86,7 @@ class TagList extends FormField(Component(HTMLElement)) {
     if (Array.isArray(values)) {
       this.items.clear();
       
-      values.forEach(function(value) {
+      values.forEach((value) => {
         const item = new Coral.Tag().set({
           'label': {
             innerHTML: value
@@ -97,7 +97,7 @@ class TagList extends FormField(Component(HTMLElement)) {
         this._attachInputToItem(item);
     
         this.items.add(item);
-      }.bind(this));
+      }, this);
     }
   }
   
@@ -128,11 +128,11 @@ class TagList extends FormField(Component(HTMLElement)) {
     this._name = transform.string(value);
     this._reflectAttribute('name', value);
   
-    this.items.getAll().forEach(function(item) {
+    this.items.getAll().forEach((item) => {
       if (item._input) {
         item._input.name = this._name;
       }
-    }.bind(this));
+    }, this);
   }
   
   // JSDoc inherited
@@ -166,12 +166,12 @@ class TagList extends FormField(Component(HTMLElement)) {
     this._reflectAttribute('disabled', this._disabled);
     
     this.classList.toggle('is-disabled', this._disabled);
-    this.items.getAll().forEach(function(item) {
+    this.items.getAll().forEach((item) => {
       item[this._disabled ? 'setAttribute' : 'removeAttribute']('disabled', '');
       if (item._input) {
         item._input.disabled = this._disabled;
       }
-    }.bind(this));
+    }, this);
     
     // a11y
     this.setAttribute('aria-disabled', this._disabled);
@@ -185,9 +185,9 @@ class TagList extends FormField(Component(HTMLElement)) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
     
-    this.items.getAll().forEach(function(item) {
+    this.items.getAll().forEach((item) => {
       item.closable = !this._readOnly;
-    }.bind(this));
+    }, this);
   
     // a11y
     this.setAttribute('aria-readonly', this._readOnly);

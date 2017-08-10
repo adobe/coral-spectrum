@@ -478,7 +478,7 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
       
       this._popper.options.placement = this.placement;
   
-      this._popper.modifiers.forEach(function(modifier){
+      this._popper.modifiers.forEach((modifier) => {
         if (modifier.name === 'offset') {
           modifier.offset = `${this.breadthOffset}, ${this.lengthOffset}`;
         }
@@ -493,7 +493,7 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
           
           modifier.boundariesElement = this.within;
         }
-      }.bind(this));
+      }, this);
   
       if (this.open) {
         this._popper.update();

@@ -326,13 +326,13 @@ class TabList extends Component(HTMLElement) {
       }
       // Selected item
       else if (item.hasAttribute('selected') && selectedItems.length > 1) {
-        selectedItems.forEach(function(selectedItem) {
+        selectedItems.forEach((selectedItem) => {
           if (selectedItem !== item) {
             // Don't trigger change events
             this._preventTriggeringEvents = true;
             selectedItem.removeAttribute('selected');
           }
-        }.bind(this));
+        }, this);
   
         // We can trigger change events again
         this._preventTriggeringEvents = false;
@@ -342,13 +342,13 @@ class TabList extends Component(HTMLElement) {
       // If multiple items are selected, the last one wins
       item = selectedItems[selectedItems.length - 1];
       
-      selectedItems.forEach(function(selectedItem) {
+      selectedItems.forEach((selectedItem) => {
         if (selectedItem !== item) {
           // Don't trigger change events
           this._preventTriggeringEvents = true;
           selectedItem.removeAttribute('selected');
         }
-      }.bind(this));
+      }, this);
   
       // We can trigger change events again
       this._preventTriggeringEvents = false;
