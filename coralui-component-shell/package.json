@@ -1,0 +1,16 @@
+{
+  "name": "coralui-component-shell",
+  "version": "5.0.0",
+  "description": "Shell component",
+  "dependencies": {
+    "@coralui/coralui-theme-cloudui": "^9.3.0",
+    "coralui-mixin-component": "file:../coralui-mixin-component",
+    "coralui-collection": "file:../coralui-collection",
+    "coralui-externals": "file:../coralui-externals",
+    "coralui-util": "file:../coralui-util"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "coralui-gulp": "file:../coralui-gulp"
+  }
+}
