@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Overlay from 'coralui-component-overlay';
+import {Overlay} from 'coralui-component-overlay';
 import base from '../templates/base';
 import {commons, transform, validate} from 'coralui-util';
 

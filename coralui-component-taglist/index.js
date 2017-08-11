@@ -2,6 +2,7 @@ import 'coralui-externals';
 import translations from './i18n/translations.json';
 import {commons, strings} from 'coralui-util';
 import Tag from './src/scripts/Tag';
+import TagLabel from './src/scripts/TagLabel';
 import TagList from './src/scripts/TagList';
 
 // i18n
@@ -15,9 +16,7 @@ window.customElements.define('coral-taglist', TagList);
 // Expose component on the Coral namespace
 window.Coral = window.Coral || {};
 window.Coral.Tag = Tag;
-window.Coral.Tag.Label = function() {
-  return document.createElement('coral-tag-label');
-};
+window.Coral.Tag.Label = TagLabel;
 window.Coral.TagList = TagList;
 
-export {Tag, TagList};
+export {Tag, TagLabel, TagList};

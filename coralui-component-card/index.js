@@ -4,6 +4,12 @@ import CardProperty from './src/scripts/CardProperty';
 import CardTitle from './src/scripts/CardTitle';
 import CardContext from './src/scripts/CardContext';
 import CardDescription from './src/scripts/CardDescription';
+import CardAsset from './src/scripts/CardAsset';
+import CardOverlay from './src/scripts/CardOverlay';
+import CardInfo from './src/scripts/CardInfo';
+import CardContent from './src/scripts/CardContent';
+import CardPropertyList from './src/scripts/CardPropertyList';
+import CardPropertyContent from './src/scripts/CardPropertyContent';
 
 window.customElements.define('coral-card', Card);
 window.customElements.define('coral-card-property', CardProperty);
@@ -18,23 +24,22 @@ window.Coral.Card.Property = CardProperty;
 window.Coral.Card.Title = CardTitle;
 window.Coral.Card.Context = CardContext;
 window.Coral.Card.Description = CardDescription;
-window.Coral.Card.Asset = function() {
-  return document.createElement('coral-card-asset');
-};
-window.Coral.Card.Overlay = function() {
-  return document.createElement('coral-card-overlay');
-};
-window.Coral.Card.Info = function() {
-  return document.createElement('coral-card-info');
-};
-window.Coral.Card.Content = function() {
-  return document.createElement('coral-card-content');
-};
-window.Coral.Card.PropertyList = function() {
-  return document.createElement('coral-card-propertylist');
-};
-window.Coral.Card.Property.Content = function() {
-  return document.createElement('coral-card-property-content');
-};
+window.Coral.Card.Asset = CardAsset;
+window.Coral.Card.Overlay = CardOverlay;
+window.Coral.Card.Info = CardInfo;
+window.Coral.Card.Content = CardContent;
+window.Coral.Card.PropertyList = CardPropertyList;
+window.Coral.Card.Property.Content = CardPropertyContent;
 
-export {Card, CardProperty, CardTitle, CardContext, CardDescription};
+export {
+  Card,
+  CardProperty,
+  CardTitle,
+  CardContext,
+  CardDescription,
+  CardAsset,
+  CardContent,
+  CardOverlay,
+  CardPropertyContent,
+  CardPropertyList,
+};

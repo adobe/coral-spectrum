@@ -7,4 +7,4 @@ window.customElements.define('coral-textarea', Textarea, {extends: 'textarea'});
 window.Coral = window.Coral || {};
 window.Coral.Textarea = Textarea;
 
-export default Textarea;
+export {Textarea};

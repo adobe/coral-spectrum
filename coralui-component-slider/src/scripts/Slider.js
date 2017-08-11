@@ -18,7 +18,7 @@
 import Component from 'coralui-mixin-component';
 import FormField from 'coralui-mixin-formfield';
 import {Collection} from 'coralui-collection';
-import Tooltip from 'coralui-component-tooltip';
+import {Tooltip} from 'coralui-component-tooltip';
 import base from '../templates/base';
 import {transform, validate, events, Keys} from 'coralui-util';
 

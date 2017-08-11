@@ -17,7 +17,7 @@
 
 import Component from 'coralui-mixin-component';
 import Overlay from 'coralui-mixin-overlay';
-import DragAction from 'coralui-dragaction';
+import {DragAction} from 'coralui-dragaction';
 import base from '../templates/base';
 import {commons, transform, validate} from 'coralui-util';
 import 'coralui-component-button';

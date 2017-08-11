@@ -7,4 +7,4 @@ window.customElements.define('coral-icon', Icon);
 window.Coral = window.Coral || {};
 window.Coral.Icon = Icon;
 
-export default Icon;
+export {Icon};

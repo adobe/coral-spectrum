@@ -7,4 +7,4 @@ window.customElements.define('coral-textfield', Textfield, {extends: 'input'});
 window.Coral = window.Coral || {};
 window.Coral.Textfield = Textfield;
 
-export default Textfield;
+export {Textfield};

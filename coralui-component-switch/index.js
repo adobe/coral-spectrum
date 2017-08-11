@@ -7,4 +7,4 @@ window.customElements.define('coral-switch', Switch);
 window.Coral = window.Coral || {};
 window.Coral.Switch = Switch;
 
-export default Switch;
+export {Switch};

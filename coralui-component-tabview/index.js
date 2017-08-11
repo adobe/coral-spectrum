@@ -7,4 +7,4 @@ window.customElements.define('coral-tabview', TabView);
 window.Coral = window.Coral || {};
 window.Coral.TabView = TabView;
 
-export default TabView;
+export {TabView};

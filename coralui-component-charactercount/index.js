@@ -7,4 +7,4 @@ window.customElements.define('coral-charactercount', CharacterCount);
 window.Coral = window.Coral || {};
 window.Coral.CharacterCount = CharacterCount;
 
-export default CharacterCount;
+export {CharacterCount};

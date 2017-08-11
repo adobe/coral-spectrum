@@ -7,4 +7,4 @@ window.customElements.define('coral-buttongroup', ButtonGroup);
 window.Coral = window.Coral || {};
 window.Coral.ButtonGroup = ButtonGroup;
 
-export default ButtonGroup;
+export {ButtonGroup};

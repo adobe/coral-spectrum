@@ -16,7 +16,7 @@
  */
 
 import Component from 'coralui-mixin-component';
-import Icon from 'coralui-component-icon';
+import {Icon} from 'coralui-component-icon';
 
 const CLASSNAME = 'coral3-Shell-homeAnchor';
 

@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Icon from 'coralui-component-icon';
+import {Icon} from 'coralui-component-icon';
 import {transform, validate} from 'coralui-util';
 
 /**

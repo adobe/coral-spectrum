@@ -1,6 +1,7 @@
 import 'coralui-externals';
 import Tree from './src/scripts/Tree';
 import TreeItem from './src/scripts/TreeItem';
+import TreeItemContent from './src/scripts/TreeItemContent';
 
 window.customElements.define('coral-tree', Tree);
 window.customElements.define('coral-tree-item', TreeItem);
@@ -9,8 +10,6 @@ window.customElements.define('coral-tree-item', TreeItem);
 window.Coral = window.Coral || {};
 window.Coral.Tree = Tree;
 window.Coral.Tree.Item = TreeItem;
-window.Coral.Tree.Item.Content = function() {
-  return document.createElement('coral-tree-item-content');
-};
+window.Coral.Tree.Item.Content = TreeItemContent;
 
-export {Tree, TreeItem};
+export {Tree, TreeItem, TreeItemContent};

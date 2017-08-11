@@ -14,4 +14,4 @@ window.customElements.define('coral-numberinput', NumberInput);
 window.Coral = window.Coral || {};
 window.Coral.NumberInput = NumberInput;
 
-export default NumberInput;
+export {NumberInput};

@@ -1,13 +1,12 @@
 import 'coralui-externals';
 import Drawer from './src/scripts/Drawer';
+import DrawerContent from './src/scripts/DrawerContent';
 
 window.customElements.define('coral-drawer', Drawer);
 
 // Expose component on the Coral namespace
 window.Coral = window.Coral || {};
 window.Coral.Drawer = Drawer;
-window.Coral.Drawer.Content = function() {
-  return document.createElement('coral-drawer-content');
-};
+window.Coral.Drawer.Content = DrawerContent;
 
-export default Drawer;
+export {Drawer, DrawerContent};

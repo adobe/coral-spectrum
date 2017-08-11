@@ -7,4 +7,4 @@ window.customElements.define('coral-overlay', Overlay);
 window.Coral = window.Coral || {};
 window.Coral.Overlay = Overlay;
 
-export default Overlay;
+export {Overlay};

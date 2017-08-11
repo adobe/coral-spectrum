@@ -13,4 +13,4 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-export default DragAction;
+export {DragAction};

@@ -14,4 +14,4 @@ window.customElements.define('coral-search', Search);
 window.Coral = window.Coral || {};
 window.Coral.Search = Search;
 
-export default Search;
+export {Search};

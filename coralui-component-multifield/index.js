@@ -1,6 +1,7 @@
 import 'coralui-externals';
 import Multifield from './src/scripts/Multifield';
 import MultifieldItem from './src/scripts/MultifieldItem';
+import MultifieldItemContent from './src/scripts/MultifieldItemContent';
 
 window.customElements.define('coral-multifield', Multifield);
 window.customElements.define('coral-multifield-item', MultifieldItem);
@@ -9,8 +10,6 @@ window.customElements.define('coral-multifield-item', MultifieldItem);
 window.Coral = window.Coral || {};
 window.Coral.Multifield = Multifield;
 window.Coral.Multifield.Item = MultifieldItem;
-window.Coral.Multifield.Item.Content = function() {
-  return document.createElement('coral-multifield-item-content');
-};
+window.Coral.Multifield.Item.Content = MultifieldItemContent;
 
-export {Multifield, MultifieldItem};
+export {Multifield, MultifieldItem, MultifieldItemContent};

@@ -7,4 +7,4 @@ window.customElements.define('coral-wait', Wait);
 window.Coral = window.Coral || {};
 window.Coral.Wait = Wait;
 
-export default Wait;
+export {Wait};

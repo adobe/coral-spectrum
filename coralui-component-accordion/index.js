@@ -1,6 +1,8 @@
 import 'coralui-externals';
 import Accordion from './src/scripts/Accordion';
 import AccordionItem from './src/scripts/AccordionItem';
+import AccordionItemLabel from './src/scripts/AccordionItemLabel';
+import AccordionItemContent from './src/scripts/AccordionItemContent';
 
 window.customElements.define('coral-accordion', Accordion);
 window.customElements.define('coral-accordion-item', AccordionItem);
@@ -9,11 +11,7 @@ window.customElements.define('coral-accordion-item', AccordionItem);
 window.Coral = window.Coral || {};
 window.Coral.Accordion = Accordion;
 window.Coral.Accordion.Item = AccordionItem;
-window.Coral.Accordion.Item.Label = function() {
-  return document.createElement('coral-accordion-item-label');
-};
-window.Coral.Accordion.Item.Content = function() {
-  return document.createElement('coral-accordion-item-content');
-};
+window.Coral.Accordion.Item.Label = AccordionItemLabel;
+window.Coral.Accordion.Item.Content = AccordionItemContent;
 
-export {Accordion, AccordionItem};
+export {Accordion, AccordionItem, AccordionItemLabel, AccordionItemContent};

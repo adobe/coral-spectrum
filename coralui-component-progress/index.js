@@ -10,4 +10,4 @@ window.Coral = window.Coral || {};
 window.Coral.Progress = Progress;
 window.Coral.Progress.Label = ProgressLabel;
 
-export default Progress;
+export {Progress, ProgressLabel};
