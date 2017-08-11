@@ -547,7 +547,8 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
     // Hidden by default
     this.style.display = 'none';
   
-    // In case it was opened but not in the DOM yet
+    // In case it was not added to the DOM, make sure popper is initialized by setting target and opened if necessary
+    this.target = this.target;
     this.open = this.open;
   }
   

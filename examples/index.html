@@ -5,8 +5,15 @@
 
   <link rel="stylesheet" href="../build/css/coral.css">
   <style>
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
     .example-List {
-      width:250px;
+      width: 250px;
+      height: 100%;
+      overflow: scroll;
     }
 
     .example-Preview {
@@ -61,6 +68,7 @@
       'coralui-component-search',
       'coralui-component-selectlist',
       'coralui-component-slider',
+      'coralui-component-steplist',
       'coralui-component-switch',
       'coralui-component-tablist',
       'coralui-component-tabview',
@@ -85,8 +93,6 @@
          }
        });
     });
-
-    preview.style.height = document.body.scrollHeight + 'px';
 
     preview.onload = function() {
       document.title = preview.contentDocument.title;

@@ -21,6 +21,7 @@ import 'coralui-component-radio/tests';
 import 'coralui-component-search/tests';
 import 'coralui-component-selectlist/tests';
 import 'coralui-component-slider/tests';
+import 'coralui-component-steplist/tests';
 import 'coralui-component-switch/tests';
 import 'coralui-component-tablist/tests';
 import 'coralui-component-tabview/tests';

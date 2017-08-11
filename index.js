@@ -22,6 +22,7 @@ import Radio from 'coralui-component-radio';
 import {SelectList, SelectListGroup, SelectListItem} from 'coralui-component-selectlist';
 import Search from 'coralui-component-search';
 import {Slider, SliderItem, RangedSlider} from 'coralui-component-slider';
+import {StepList, Step, StepLabel} from 'coralui-component-steplist';
 import Switch from 'coralui-component-switch';
 import {Tab, TabList} from 'coralui-component-tablist';
 import TabView from 'coralui-component-tabview';
@@ -78,6 +79,9 @@ export {
   Slider,
   SliderItem,
   RangedSlider,
+  StepList,
+  Step,
+  StepLabel,
   Switch,
   Tab,
   TabList,
