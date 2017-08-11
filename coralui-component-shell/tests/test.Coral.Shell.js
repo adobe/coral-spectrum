@@ -6,6 +6,16 @@ describe('Coral.Shell', function() {
       expect(Coral).to.have.property('Shell');
     });
   });
+  
+  describe('Instantiation', function() {
+    it('should be possible to clone using markup', function() {
+      helpers.cloneComponent(window.__html__['Coral.Shell.base.html']);
+    });
+  
+    it('should be possible to clone using js', function() {
+      helpers.cloneComponent(new Coral.Shell());
+    });
+  });
 
   describe('API', function() {
     var el;
