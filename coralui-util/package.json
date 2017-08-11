@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "Helpers",
   "dependencies": {
-    "@coralui/vent": "^1.0.0"
+    "coralui-externals": "file:../coralui-externals"
   },
   "devDependencies": {
-    "coralui-gulp": "file:../coralui-gulp",
-    "gulp": "^3.9.1"
+    "gulp": "^3.9.1",
+    "coralui-gulp": "file:../coralui-gulp"
   }
 }

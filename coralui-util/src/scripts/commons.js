@@ -266,14 +266,15 @@ commons.transitionEnd = function(element, callback) {
    @deprecated
    */
   commons.ready = function(element, callback) {
-    console.warn('Coral.commons.ready has been deprecated. Please use window.customElements.whenDefined(tagName) instead.');
+    console.warn('Coral.commons.ready has been deprecated. Please use window.customElements.whenDefined(name) instead.');
     
     if (typeof element === 'function') {
       callback = element;
     }
     
-    setTimeout(() => {
-      callback();
+    // @todo use ':not(:defined)' once supported to detect coral not yet defined custom elements
+    window.setTimeout(() => {
+      callback((element instanceof HTMLElement && element) || this);
     });
   };
 }());

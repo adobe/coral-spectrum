@@ -19,7 +19,7 @@
  @namespace
  */
 
-import Vent from '@coralui/vent';
+import {Vent} from 'coralui-externals';
 
 const events = new Vent(window);
 export default events;
