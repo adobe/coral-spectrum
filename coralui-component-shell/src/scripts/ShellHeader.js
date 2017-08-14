@@ -100,7 +100,7 @@ class ShellHeader extends Component(HTMLElement) {
   }
   set actions(value) {
     this._setContentZone('actions', value, {
-      handle: 'content',
+      handle: 'actions',
       tagName: 'coral-shell-header-actions',
       insert: function(content) {
         this.appendChild(content);

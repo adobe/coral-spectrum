@@ -1,0 +1,79 @@
+{
+  "en-US": {
+    "Search for Help": "Search for Help",
+    "Searching Help…": "Searching Help…",
+    "Error fetching results": "Error fetching results",
+    "No results found": "No results found",
+    "See all {0} results": "See all {0} results"
+  },
+  "fr-FR": {
+    "Search for Help": "Rechercher de l’aide",
+    "Searching Help…": "Recherche dans l’aide…",
+    "Error fetching results": "Erreur lors de la récupération des résultats",
+    "No results found": "Aucun résultat trouvé",
+    "See all {0} results": "Voir les {0} résultats"
+  },
+  "de-DE": {
+    "Search for Help": "Nach Hilfe suchen",
+    "Searching Help…": "Suche nach Hilfe …",
+    "Error fetching results": "Fehler beim Abruf von Ergebnissen",
+    "No results found": "Keine Ergebnisse gefunden",
+    "See all {0} results": "Alle {0} Ergebnisse anzeigen"
+  },
+  "it-IT": {
+    "Search for Help": "Cerca informazioni nell'Aiuto",
+    "Searching Help…": "Ricerca aiuto…",
+    "Error fetching results": "Errore durante il recupero dei risultati",
+    "No results found": "Nessun risultato trovato",
+    "See all {0} results": "Visualizza tutti i {0} risultati"
+  },
+  "es-ES": {
+    "Search for Help": "Buscar ayuda",
+    "Searching Help…": "Buscando ayuda…",
+    "Error fetching results": "Error al obtener los resultados",
+    "No results found": "No se han encontrado resultados",
+    "See all {0} results": "Ver los {0} resultados"
+  },
+  "pt-BR": {
+    "Search for Help": "Procurar nas seções de Ajuda",
+    "Searching Help…": "Pesquisando ajuda…",
+    "Error fetching results": "Erro ao obter resultados",
+    "No results found": "Nenhum resultado encontrado",
+    "See all {0} results": "Ver todos os resultados de {0}"
+  },
+  "ja-JP": {
+    "Search for Help": "ヘルプを検索",
+    "Searching Help…": "ヘルプを検索中…",
+    "Error fetching results": "結果を取得中にエラーが発生しました",
+    "No results found": "結果が見つかりませんでした",
+    "See all {0} results": "すべての {0} 結果を確認"
+  },
+  "ko-KR": {
+    "Search for Help": "도움말 검색",
+    "Searching Help…": "도움말 검색 중…",
+    "Error fetching results": "결과를 가져오는 중 오류 발생",
+    "No results found": "결과를 찾을 수 없습니다",
+    "See all {0} results": "총 {0}개 결과 보기"
+  },
+  "zh-CN": {
+    "Search for Help": "搜索帮助",
+    "Searching Help…": "正在搜索帮助…",
+    "Error fetching results": "获取结果时出错",
+    "No results found": "找不到任何结果",
+    "See all {0} results": "查看全部 {0} 个结果"
+  },
+  "zh-TW": {
+    "Search for Help": "搜尋說明",
+    "Searching Help…": "正在搜尋說明…",
+    "Error fetching results": "擷取結果時發生錯誤",
+    "No results found": "找不到結果",
+    "See all {0} results": "查看全部 {0} 個結果"
+  },
+  "nl-NL": {
+    "Search for Help": "Zoeken naar hulp",
+    "Searching Help…": "Hulp zoeken…",
+    "Error fetching results": "Fout bij ophalen resultaten",
+    "No results found": "Geen resultaten gevonden",
+    "See all {0} results": "Alle {0} resultaten bekijken"
+  }
+}

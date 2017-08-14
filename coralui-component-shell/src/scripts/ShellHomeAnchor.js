@@ -16,7 +16,8 @@
  */
 
 import Component from 'coralui-mixin-component';
-import {Icon} from 'coralui-component-icon';
+import 'coralui-component-icon';
+import homeAnchorIcon from '../templates/homeAnchorIcon';
 
 const CLASSNAME = 'coral3-Shell-homeAnchor';
 
@@ -37,6 +38,9 @@ class ShellHomeAnchor extends Component(HTMLAnchorElement) {
       // Fetch or create the content zone elements
       label: this.querySelector('coral-shell-homeanchor-label') || document.createElement('coral-shell-homeanchor-label')
     };
+  
+    // Create icon by default
+    homeAnchorIcon.call(this._elements);
   }
   
   /**
@@ -88,6 +92,8 @@ class ShellHomeAnchor extends Component(HTMLAnchorElement) {
   set defaultContentZone(value) {this.content = value;}
   get _contentZones() {return {'coral-shell-content': 'content'};}
   
+  static get observedAttributes() {return ['icon'];}
+  
   connectedCallback() {
     super.connectedCallback();
     
@@ -120,16 +126,6 @@ class ShellHomeAnchor extends Component(HTMLAnchorElement) {
         // Remove anything else
         this.removeChild(child);
       }
-    }
-    
-    // Create icon if not provided
-    if (!this._elements.icon) {
-      // creates the icon. it is not added to the DOM
-      this._elements.icon = new Icon();
-      // all icons are medium by default
-      this._elements.icon.size = Icon.size.MEDIUM;
-      // add className, that is owned by this component
-      this._elements.icon.classList.add('coral3-Shell-homeAnchor-icon');
     }
     
     // Add fragment back
