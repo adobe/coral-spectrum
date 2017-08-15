@@ -549,7 +549,11 @@ const Overlay = (superClass) => class extends superClass {
           // The default style should be display: none for overlays
           // Show ourselves first for centering calculations etc
           self.style.display = 'block';
-          self.classList.add('is-open');
+  
+          // Do it in the next frame to make the animation happen
+          window.requestAnimationFrame(() => {
+            self.classList.add('is-open');
+          });
   
           const openComplete = () => {
             if (self.open) {

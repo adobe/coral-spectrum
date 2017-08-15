@@ -29,9 +29,9 @@ import noHelpResults from '../templates/noHelpResults';
 const CLASSNAMES = ['coral3-BasicList', 'coral3-AnchorList', 'coral3-Shell-help'];
 
 /**
- @class Coral.Shell
- @classdesc A Shell component
- @htmltag coral-shell
+ @class Coral.Shell.Help
+ @classdesc A Shell Help component
+ @htmltag coral-shell-help
  @extends HTMLElement
  @extends Coral.mixin.component
  */

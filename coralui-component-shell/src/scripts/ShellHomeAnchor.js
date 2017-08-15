@@ -22,7 +22,7 @@ import homeAnchorIcon from '../templates/homeAnchorIcon';
 const CLASSNAME = 'coral3-Shell-homeAnchor';
 
 /**
- @class Coral.Shell.
+ @class Coral.Shell.HomeAnchor
  @classdesc A Shell Home Anchor component
  @htmltag coral-shell-homeanchor
  @htmlbasetag a

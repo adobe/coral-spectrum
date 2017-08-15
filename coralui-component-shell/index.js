@@ -16,6 +16,10 @@ import ShellHomeAnchorLabel from './src/scripts/ShellHomeAnchorLabel';
 import ShellHelp from './src/scripts/ShellHelp';
 import ShellHelpItem from './src/scripts/ShellHelpItem';
 
+import ShellMenu from './src/scripts/ShellMenu';
+import ShellMenuBar from './src/scripts/ShellMenuBar';
+import ShellMenuBarItem from './src/scripts/ShellMenuBarItem';
+
 window.customElements.define('coral-shell', Shell);
 
 window.customElements.define('coral-shell-header', ShellHeader);
@@ -23,6 +27,10 @@ window.customElements.define('coral-shell-homeanchor', ShellHomeAnchor, {extends
 
 window.customElements.define('coral-shell-help', ShellHelp);
 window.customElements.define('coral-shell-help-item', ShellHelpItem, {extends: 'a'});
+
+window.customElements.define('coral-shell-menu', ShellMenu);
+window.customElements.define('coral-shell-menubar', ShellMenuBar);
+window.customElements.define('coral-shell-menubar-item', ShellMenuBarItem);
 
 // Expose component on the Coral namespace
 window.Coral = window.Coral || {};
@@ -36,6 +44,10 @@ window.Coral.Shell.HomeAnchor.Label = ShellHomeAnchorLabel;
 window.Coral.Shell.Help = ShellHelp;
 window.Coral.Shell.Help.Item = ShellHelpItem;
 
+window.Coral.Shell.Menu = ShellMenu;
+window.Coral.Shell.MenuBar = ShellMenuBar;
+window.Coral.Shell.MenuBar.Item = ShellMenuBarItem;
+
 export {
   Shell,
   ShellContent,
@@ -43,5 +55,8 @@ export {
   ShellHomeAnchor,
   ShellHomeAnchorLabel,
   ShellHelp,
-  ShellHelpItem
+  ShellHelpItem,
+  ShellMenu,
+  ShellMenuBar,
+  ShellMenuBarItem
 };

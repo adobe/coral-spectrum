@@ -9,6 +9,8 @@
     "coralui-component-search": "file:../coralui-component-search",
     "coralui-component-list": "file:../coralui-component-list",
     "coralui-component-wait": "file:../coralui-component-wait",
+    "coralui-mixin-overlay": "file:../coralui-mixin-overlay",
+    "coralui-component-button": "file:../coralui-component-button",
     "coralui-collection": "file:../coralui-collection",
     "coralui-externals": "file:../coralui-externals",
     "coralui-util": "file:../coralui-util"
