@@ -228,20 +228,76 @@ const undelegateGlobalEvents = function() {
   }
 };
 
+// Used to find upper case characters
+const REG_EXP_UPPERCASE = /[A-Z]/g;
+
 /**
- Returns the constructor name and if not available tries to read it (IE11 polyfill)
+ Returns the constructor namespace
  @ignore
  */
 const getConstructorName = function(constructor) {
-  if (constructor.name) {
-    return constructor.name;
+  // Will contain the namespace of the constructor in reversed order
+  const constructorName = [];
+  // Keep a reference on the passed constructor
+  const originalConstructor = constructor;
+  
+  // Traverses Coral constructors if not already done to set the namespace
+  if (!constructor._namespace) {
+  
+    // Set namespace on Coral constructors until 'constructor' is found
+    const find = (obj, constructor) => {
+      let found = false;
+      const type = typeof obj;
+    
+      if (obj && type === 'object' || type === 'function')	{
+        const keys = Object.keys(obj);
+      
+        for (let i = 0; i < keys.length; i++) {
+          const key = keys[i];
+        
+          // Components are capitalized
+          if (key[0].match(REG_EXP_UPPERCASE) !== null) {
+          
+            // Keep a reference of the constructor name and its parent
+            obj[key]._namespace = {
+              parent: obj,
+              value: key
+            };
+          
+            found = obj[key] === constructor;
+          
+            if (found) {
+              break;
+            }
+            else {
+              found = find(obj[key], constructor);
+            }
+          }
+        }
+      }
+    
+      return found;
+    };
+  
+    // Look for the constructor in the Coral namespace
+    find(window.Coral, constructor);
   }
   
-  // @polyfill IE11. Caution: minifiers risk to rename the function
-  let name = constructor.toString();
-  name = name.substr('function '.length);
-  name = name.substr(0, name.indexOf('('));
-  return name;
+  // Climb up the constructor namespace
+  while (constructor) {
+    if (constructor._namespace) {
+      constructorName.push(constructor._namespace.value);
+      constructor = constructor._namespace.parent;
+    }
+    else {
+      constructor = false;
+    }
+  }
+  
+  // Build the full namespace string and save it for reuse
+  originalConstructor._componentName = constructorName.reverse().join('.');
+  
+  return originalConstructor._componentName;
 };
 
 /**
@@ -259,7 +315,7 @@ const Component = (superClass) => class extends superClass {
   }
   
   // @legacy
-  get _componentName() {return getConstructorName(this.constructor);}
+  get _componentName() {return this.constructor._componentName || getConstructorName(this.constructor);}
   
   // @legacy
   get _properties() {return {};}
