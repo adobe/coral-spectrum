@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CoralUI 3 Shell</title>
+  <link rel="stylesheet" href="../build/css/coral.css">
+  <script src="../build/js/coral.js"></script>
+
+  <style>
+    .menu {
+      position: absolute;
+      top: 0;
+      right: 0;
+      border: 2px solid rgb(220, 220, 220);
+      border-top: none;
+      border-right: none;
+
+      border-bottom-left-radius: 5px;
+
+      overflow: auto;
+    }
+  </style>
+</head>
+<body class="coral--light">
+
+  <div class="menu">
+    <coral-shell-user avatar="http://wwwimages.adobe.com/content/dam/Adobe/en/leaders/images/138x138/adobe-leaders-shantanu-narayen-138x138.jpg">
+      <coral-shell-user-name>Shantanu Narayen</coral-shell-user-name>
+      <coral-shell-user-heading>CEO</coral-shell-user-heading>
+      <coral-shell-user-subheading>Adobe Systems, Inc.</coral-shell-user-subheading>
+      <coral-shell-user-content>Extra goodies go here</coral-shell-user-content>
+      <coral-shell-user-footer>
+        <a is="coral-anchorbutton" variant="minimal" href="/signout">Sign Out</a>
+        <a is="coral-anchorbutton" variant="minimal" href="/profile">Profile</a>
+      </coral-shell-user-footer>
+    </coral-shell-user>
+  </div>
+
+</body>
+</html>

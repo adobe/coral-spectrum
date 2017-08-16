@@ -20,6 +20,13 @@ import ShellMenu from './src/scripts/ShellMenu';
 import ShellMenuBar from './src/scripts/ShellMenuBar';
 import ShellMenuBarItem from './src/scripts/ShellMenuBarItem';
 
+import ShellUser from './src/scripts/ShellUser';
+import ShellUserContent from './src/scripts/ShellUserContent';
+import ShellUserFooter from './src/scripts/ShellUserFooter';
+import ShellUserHeading from './src/scripts/ShellUserHeading';
+import ShellUserName from './src/scripts/ShellUserName';
+import ShellUserSubheading from './src/scripts/ShellUserSubheading';
+
 window.customElements.define('coral-shell', Shell);
 
 window.customElements.define('coral-shell-header', ShellHeader);
@@ -31,6 +38,8 @@ window.customElements.define('coral-shell-help-item', ShellHelpItem, {extends: '
 window.customElements.define('coral-shell-menu', ShellMenu);
 window.customElements.define('coral-shell-menubar', ShellMenuBar);
 window.customElements.define('coral-shell-menubar-item', ShellMenuBarItem);
+
+window.customElements.define('coral-shell-user', ShellUser);
 
 // Expose component on the Coral namespace
 window.Coral = window.Coral || {};
@@ -48,6 +57,13 @@ window.Coral.Shell.Menu = ShellMenu;
 window.Coral.Shell.MenuBar = ShellMenuBar;
 window.Coral.Shell.MenuBar.Item = ShellMenuBarItem;
 
+window.Coral.Shell.User = ShellUser;
+window.Coral.Shell.User.Content = ShellUserContent;
+window.Coral.Shell.User.Footer = ShellUserFooter;
+window.Coral.Shell.User.Heading = ShellUserHeading;
+window.Coral.Shell.User.Name = ShellUserName;
+window.Coral.Shell.User.Subheading = ShellUserSubheading;
+
 export {
   Shell,
   ShellContent,
@@ -58,5 +74,11 @@ export {
   ShellHelpItem,
   ShellMenu,
   ShellMenuBar,
-  ShellMenuBarItem
+  ShellMenuBarItem,
+  ShellUser,
+  ShellUserContent,
+  ShellUserFooter,
+  ShellUserHeading,
+  ShellUserName,
+  ShellUserSubheading
 };
