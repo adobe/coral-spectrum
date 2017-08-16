@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CoralUI 3 Shell Workspaces</title>
+  <link rel="stylesheet" href="../build/css/coral.css">
+  <script src="../build/js/coral.js"></script>
+
+  <style>
+
+    .example-shell {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+    }
+
+    .example-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+
+      box-sizing: border-box;
+      padding: 0.4375rem;
+      height: 3.25rem;
+
+      background: black;
+    }
+  </style>
+</head>
+<body>
+
+<div class="example-shell">
+
+  <div class="coral--dark example-header">
+    <coral-shell-workspaces>
+      <a is="coral-shell-workspace" href="#workspace1" selected>Workspace 1</a>
+      <a is="coral-shell-workspace" href="#workspace2">Workspace 2</a>
+      <a is="coral-shell-workspace" href="#workspace3">Workspace 3</a>
+    </coral-shell-workspaces>
+  </div>
+
+</div>
+
+</body>
+</html>

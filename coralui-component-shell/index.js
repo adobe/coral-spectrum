@@ -27,6 +27,9 @@ import ShellUserHeading from './src/scripts/ShellUserHeading';
 import ShellUserName from './src/scripts/ShellUserName';
 import ShellUserSubheading from './src/scripts/ShellUserSubheading';
 
+import ShellWorkspaces from './src/scripts/ShellWorkspaces';
+import ShellWorkspace from './src/scripts/ShellWorkspace';
+
 window.customElements.define('coral-shell', Shell);
 
 window.customElements.define('coral-shell-header', ShellHeader);
@@ -40,6 +43,9 @@ window.customElements.define('coral-shell-menubar', ShellMenuBar);
 window.customElements.define('coral-shell-menubar-item', ShellMenuBarItem);
 
 window.customElements.define('coral-shell-user', ShellUser);
+
+window.customElements.define('coral-shell-workspaces', ShellWorkspaces);
+window.customElements.define('coral-shell-workspace', ShellWorkspace, {extends: 'a'});
 
 // Expose component on the Coral namespace
 window.Coral = window.Coral || {};
@@ -64,6 +70,9 @@ window.Coral.Shell.User.Heading = ShellUserHeading;
 window.Coral.Shell.User.Name = ShellUserName;
 window.Coral.Shell.User.Subheading = ShellUserSubheading;
 
+window.Coral.Shell.Workspaces = ShellWorkspaces;
+window.Coral.Shell.Workspace = ShellWorkspace;
+
 export {
   Shell,
   ShellContent,
@@ -80,5 +89,7 @@ export {
   ShellUserFooter,
   ShellUserHeading,
   ShellUserName,
-  ShellUserSubheading
+  ShellUserSubheading,
+  ShellWorkspaces,
+  ShellWorkspace
 };
