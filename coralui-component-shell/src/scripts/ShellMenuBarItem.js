@@ -277,7 +277,7 @@ class ShellMenuBarItem extends Component(HTMLElement) {
     
     if (button) {
       this._elements.shellMenuButton = button;
-      this._elements.shellMenuButtonLabel = this.querySelector('coral-button-label[handle="shellMenuButtonLabel"]');
+      this._elements.shellMenuButtonLabel = this.querySelector('coral-button-label');
     }
     else {
       while (this.firstChild) {
