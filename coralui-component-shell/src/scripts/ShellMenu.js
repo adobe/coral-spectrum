@@ -252,8 +252,8 @@ class ShellMenu extends Overlay(Component(HTMLElement)) {
     this.classList.add(CLASSNAME);
     
     // Default reflected attributes
-    if (!this._placement) {this.placement = placement.RIGHT};
-    if (!this._from) {this.from = from.TOP};
+    if (!this._placement) {this.placement = placement.RIGHT;}
+    if (!this._from) {this.from = from.TOP;}
   }
 }
 

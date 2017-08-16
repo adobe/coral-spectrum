@@ -30,6 +30,11 @@ import ShellUserSubheading from './src/scripts/ShellUserSubheading';
 import ShellWorkspaces from './src/scripts/ShellWorkspaces';
 import ShellWorkspace from './src/scripts/ShellWorkspace';
 
+import ShellSolutionSwitcher from './src/scripts/ShellSolutionSwitcher';
+import ShellSolutions from './src/scripts/ShellSolutions';
+import ShellSolution from './src/scripts/ShellSolution';
+import ShellSolutionLabel from './src/scripts/ShellSolutionLabel';
+
 window.customElements.define('coral-shell', Shell);
 
 window.customElements.define('coral-shell-header', ShellHeader);
@@ -46,6 +51,10 @@ window.customElements.define('coral-shell-user', ShellUser);
 
 window.customElements.define('coral-shell-workspaces', ShellWorkspaces);
 window.customElements.define('coral-shell-workspace', ShellWorkspace, {extends: 'a'});
+
+window.customElements.define('coral-shell-solutionswitcher', ShellSolutionSwitcher);
+window.customElements.define('coral-shell-solutions', ShellSolutions);
+window.customElements.define('coral-shell-solution', ShellSolution, {extends: 'a'});
 
 // Expose component on the Coral namespace
 window.Coral = window.Coral || {};
@@ -73,6 +82,11 @@ window.Coral.Shell.User.Subheading = ShellUserSubheading;
 window.Coral.Shell.Workspaces = ShellWorkspaces;
 window.Coral.Shell.Workspace = ShellWorkspace;
 
+window.Coral.Shell.SolutionSwitcher = ShellSolutionSwitcher;
+window.Coral.Shell.Solutions = ShellSolutions;
+window.Coral.Shell.Solution = ShellSolution;
+window.Coral.Shell.SolutionLabel = ShellSolutionLabel;
+
 export {
   Shell,
   ShellContent,
@@ -91,5 +105,9 @@ export {
   ShellUserName,
   ShellUserSubheading,
   ShellWorkspaces,
-  ShellWorkspace
+  ShellWorkspace,
+  ShellSolutionSwitcher,
+  ShellSolutions,
+  ShellSolution,
+  ShellSolutionLabel
 };
