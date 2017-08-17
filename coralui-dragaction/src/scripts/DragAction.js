@@ -152,7 +152,7 @@ function within(scrollingElement, a, b) {
   
   const al = aBoundingClientRect.left + documentScrollLeft;
   const ar = al + aBoundingClientRect.width;
-  const bl = bBoundingClientRect + documentScrollLeft;
+  const bl = bBoundingClientRect.left + documentScrollLeft;
   const br = bl + bBoundingClientRect.width;
   
   const at = aBoundingClientRect.top + documentScrollTop;
