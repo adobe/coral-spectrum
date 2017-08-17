@@ -41,8 +41,7 @@ class ShellHeader extends Component(HTMLElement) {
     // Events
     this._delegateEvents({
       'global:coral-overlay:beforeopen': '_handleMenuBeforeOpenOrClose',
-      'global:coral-overlay:beforeclose': '_handleMenuBeforeOpenOrClose',
-      'global:coral-overlay:close': '_handleMenuClose'
+      'global:coral-overlay:beforeclose': '_handleMenuBeforeOpenOrClose'
     });
   }
   
@@ -123,20 +122,6 @@ class ShellHeader extends Component(HTMLElement) {
       window.requestAnimationFrame(function() {
         this.style.zIndex = parseInt(target.style.zIndex, 10) + 100;
       }.bind(this));
-    }
-  }
-  
-  /**
-   After an overlay is closed, we return the zIndex to the initial value.
-   
-   @ignore
-   */
-  _handleMenuClose(event) {
-    const target = event.target;
-    
-    if (target.tagName === 'CORAL-SHELL-MENU') {
-      // resets the zIndex to the initial value
-      this.style.zIndex = 'auto';
     }
   }
   
