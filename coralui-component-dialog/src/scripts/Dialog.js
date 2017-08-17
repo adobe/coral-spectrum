@@ -368,9 +368,9 @@ class Dialog extends Overlay(Component(HTMLElement)) {
       if (this.backdrop !== backdrop.NONE) {
         this._showBackdrop();
       }
-    
-      // Focus on the top of the dialog. Pressing the tab key will then focus on the close button/content/footer
-      this.focus();
+      
+      // Handles what to focus based on focusOnShow
+      this._handleFocus();
     }
   }
   
@@ -597,6 +597,20 @@ class Dialog extends Overlay(Component(HTMLElement)) {
     this._centered = false;
   
     return this;
+  }
+  
+  /** @private */
+  _handleFocus() {
+    const focusOnShow = this.focusOnShow;
+    if (focusOnShow === this.constructor.focusOnShow.ON) {
+      this.focus();
+    }
+    else if (focusOnShow instanceof HTMLElement) {
+      focusOnShow.focus();
+    }
+    else if (typeof focusOnShow === 'string' && focusOnShow !== this.constructor.focusOnShow.OFF) {
+      this.querySelector(focusOnShow).focus();
+    }
   }
   
   // For backwards compatibility + Torq

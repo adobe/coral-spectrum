@@ -266,6 +266,18 @@ describe('Coral.Dialog', function() {
         expect(dialog._elements.icon.icon).to.equal('');
       });
     });
+  
+    describe('#focusOnShow', function() {
+      it('should focus the focusOnShow element when opened', function(done) {
+        const el = helpers.build(window.__html__['Coral.Dialog.focusOnShow.html']);
+        
+        // Wait for the dialog to open
+        helpers.next(function() {
+          expect(document.activeElement).to.equal(el.querySelector(el.focusOnShow));
+          done();
+        });
+      });
+    });
     
     describe('#movable', function() {
       let dialog;
