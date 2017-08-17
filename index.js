@@ -19,6 +19,7 @@ import {Panel, PanelStack, PanelContent} from 'coralui-component-panelstack';
 import {Popover, PopoverHeader, PopoverContent, PopoverSeparator} from 'coralui-component-popover';
 import {Progress, ProgressLabel} from 'coralui-component-progress';
 import {Radio, RadioLabel} from 'coralui-component-radio';
+import {Shell, ShellContent, ShellHeader, ShellHomeAnchor, ShellHomeAnchorLabel, ShellHelp, ShellHelpItem, ShellMenu, ShellMenuBar, ShellMenuBarItem, ShellUser, ShellUserContent, ShellUserFooter, ShellUserHeading, ShellUserName, ShellUserSubheading, ShellWorkspaces, ShellWorkspace, ShellSolutionSwitcher, ShellSolutions, ShellSolution, ShellSolutionLabel, ShellOrgSwitcher, ShellOrganization, ShellSuborganization, ShellOrgSwitcherFooter} from 'coralui-component-shell';
 import {SelectList, SelectListGroup, SelectListItem} from 'coralui-component-selectlist';
 import {Search} from 'coralui-component-search';
 import {Slider, SliderItem, RangedSlider} from 'coralui-component-slider';
@@ -93,6 +94,32 @@ export {
   SelectList,
   SelectListGroup,
   SelectListItem,
+  Shell,
+  ShellContent,
+  ShellHeader,
+  ShellHomeAnchor,
+  ShellHomeAnchorLabel,
+  ShellHelp,
+  ShellHelpItem,
+  ShellMenu,
+  ShellMenuBar,
+  ShellMenuBarItem,
+  ShellUser,
+  ShellUserContent,
+  ShellUserFooter,
+  ShellUserHeading,
+  ShellUserName,
+  ShellUserSubheading,
+  ShellWorkspaces,
+  ShellWorkspace,
+  ShellSolutionSwitcher,
+  ShellSolutions,
+  ShellSolution,
+  ShellSolutionLabel,
+  ShellOrgSwitcher,
+  ShellOrganization,
+  ShellSuborganization,
+  ShellOrgSwitcherFooter,
   Slider,
   SliderItem,
   RangedSlider,

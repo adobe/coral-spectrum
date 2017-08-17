@@ -6,7 +6,7 @@ describe('Coral.Shell.SolutionSwitcher', function() {
       expect(Coral.Shell).to.have.property('SolutionSwitcher');
       expect(Coral.Shell).to.have.property('Solutions');
       expect(Coral.Shell).to.have.property('Solution');
-      expect(Coral.Shell).to.have.property('SolutionLabel');
+      expect(Coral.Shell.Solution).to.have.property('Label');
     });
   });
   

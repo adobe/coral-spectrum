@@ -10,3 +10,4 @@ import './test.Coral.Shell.MenuBar.Item';
 import './test.Coral.Shell.User';
 import './test.Coral.Shell.Workspaces';
 import './test.Coral.Shell.SolutionSwitcher';
+import './test.Coral.Shell.OrgSwitcher';

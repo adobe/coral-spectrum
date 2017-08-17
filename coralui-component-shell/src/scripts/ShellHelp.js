@@ -229,6 +229,7 @@ class Shell extends Component(HTMLElement) {
       ['search', 'result', 'items', 'results', 'resultMessage', 'loading'].forEach((handle) => {
         this._elements[handle] = this.querySelector(`[handle="${handle}"]`);
       }, this);
+      this._items._container = this._elements.items;
     }
     else {
       this.appendChild(this._elements.contentWrapper);

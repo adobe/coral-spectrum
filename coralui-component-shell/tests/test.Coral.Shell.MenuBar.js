@@ -12,6 +12,14 @@ describe('Coral.Shell.MenuBar', function() {
       const el = helpers.build('<coral-shell-menubar>');
       expect(el).to.be.an.instanceof(Coral.Shell.MenuBar);
     });
+  
+    it('should be possible to clone using markup', function() {
+      helpers.cloneComponent('<coral-shell-menubar></coral-shell-menubar>');
+    });
+  
+    it('should be possible to clone using js', function() {
+      helpers.cloneComponent(new Coral.Shell.MenuBar());
+    });
   });
 
   describe('API', function() {

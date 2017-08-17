@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>CoralUI 3 Shell</title>
+    <link rel="stylesheet" href="../build/css/coral.css">
+    <script src="../build/js/coral.js"></script>
+    <style>
+    .menu {
+      position: absolute;
+      top: 0;
+      right: 0;
+      border: 2px solid rgb(220, 220, 220);
+      border-top: none;
+      border-right: none;
+      border-bottom-left-radius: 5px;
+      overflow: auto;
+    }
+    </style>
+  </head>
+
+  <body class="coral--light">
+    <div class="menu">
+      <coral-shell-orgswitcher>
+        <coral-shell-organization name="facebook" icon="facebookColor">Facebook, Inc.</coral-shell-organization>
+        <coral-shell-organization name="flickr" icon="flickrColor">Flickr, Inc.</coral-shell-organization>
+        <coral-shell-organization name="newsgator" icon="newsgatorColor">Newsgator, Inc.</coral-shell-organization>
+        <coral-shell-organization name="microsoft" icon="windowsColor">
+          Microsoft
+          <coral-shell-suborganization name="microsoftjapan" icon="adobeTarget" selected>Microsoft Japan</coral-shell-suborganization>
+          <coral-shell-suborganization name="microsoftusa" icon="adobeTarget">Microsoft USA</coral-shell-suborganization>
+          <coral-shell-suborganization name="microsoftsouthamerica" icon="adobeTarget">Microsoft South America</coral-shell-suborganization>
+        </coral-shell-organization>
+        <coral-shell-orgswitcher-footer>
+          <button is="coral-button" class="coral-Button coral-Button--minimal" variant="minimal">Manage Organizations</button>
+        </coral-shell-orgswitcher-footer>
+      </coral-shell-orgswitcher>
+    </div>
+    <output></output>
+    <script>
+    var output = document.querySelector('output');
+    var switcher = document.querySelector('coral-shell-orgswitcher');
+    switcher.on('coral-shell-orgswitcher:change', function(event) {
+      output.innerHTML += 'Org switched to ' + event.detail.selection.name + '<br>';
+    });
+    </script>
+  </body>
+
+</html>

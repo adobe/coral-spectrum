@@ -1,0 +1,46 @@
+{
+  "en-US": {
+    "Search Organizations": "Search Organizations",
+    "No organizations found&period;": "No organizations found."
+  },
+  "fr-FR": {
+    "Search Organizations": "Rechercher des organisations",
+    "No organizations found&period;": "Aucune organisation trouvée."
+  },
+  "de-DE": {
+    "Search Organizations": "Organisationen durchsuchen",
+    "No organizations found&period;": "Keine Organisationen gefunden."
+  },
+  "it-IT": {
+    "Search Organizations": "Cerca organizzazioni",
+    "No organizations found&period;": "Nessuna organizzazione trovata."
+  },
+  "es-ES": {
+    "Search Organizations": "Buscar organizaciones",
+    "No organizations found&period;": "No se ha encontrado ninguna organización."
+  },
+  "pt-BR": {
+    "Search Organizations": "Procurar organizações",
+    "No organizations found&period;": "Nenhuma organização encontrada."
+  },
+  "ja-JP": {
+    "Search Organizations": "組織を検索",
+    "No organizations found&period;": "組織が見つかりませんでした。"
+  },
+  "ko-KR": {
+    "Search Organizations": "조직 검색",
+    "No organizations found&period;": "조직을 찾을 수 없습니다."
+  },
+  "zh-CN": {
+    "Search Organizations": "搜索组织",
+    "No organizations found&period;": "找不到任何组织。"
+  },
+  "zh-TW": {
+    "Search Organizations": "搜尋組織",
+    "No organizations found&period;": "找不到組織。"
+  },
+  "nl-NL": {
+    "Search Organizations": "Organisaties zoeken",
+    "No organizations found&period;": "Geen organisaties gevonden."
+  }
+}

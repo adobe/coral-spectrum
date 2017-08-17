@@ -17,7 +17,7 @@
 
 import Component from 'coralui-mixin-component';
 import {Collection} from 'coralui-collection';
-import solutionSwitcherContainer from '../templates/solutionSwitcherContainer';
+import solutionSwitcher from '../templates/solutionSwitcher';
 
 const CLASSNAME = 'coral3-Shell-solutionSwitcher';
 
@@ -34,7 +34,7 @@ class ShellSolutionSwitcher extends Component(HTMLElement) {
   
     // Template
     this._elements = {};
-    solutionSwitcherContainer.call(this._elements);
+    solutionSwitcher.call(this._elements);
     
     // Listen for mutations
     const observer = new MutationObserver(function(mutations) {
