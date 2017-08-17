@@ -231,8 +231,8 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
     const values = [];
 
     // uses the nativeSelect since it holds the truth of what will be submitted with the form
-    const selectedOptions = this._elements.nativeSelect.selectedOptions;
-    for (var i = 0, selectedOptionsCount = selectedOptions.length; i < selectedOptionsCount; i++) {
+    const selectedOptions = this._elements.nativeSelect.querySelectorAll(':checked');
+    for (let i = 0, selectedOptionsCount = selectedOptions.length; i < selectedOptionsCount; i++) {
       values.push(selectedOptions[i].value);
     }
 
