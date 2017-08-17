@@ -1152,6 +1152,42 @@ describe('Coral.NumberInput', function() {
   });
 
   describe('Implementation Details', function() {
+    describe('#decimals', function() {
+      it('should not return fancy decimal value when increasing the actual value', function() {
+        var el = new Coral.NumberInput();
+        el.value = 65.814;
+        el.step = 1.567;
+        el.stepUp();
+        expect(el.value).to.equal('67.381');
+      });
+  
+      it('should not return fancy decimal value when decreasing the actual value', function() {
+        var el = new Coral.NumberInput();
+        el.value = 32.907;
+        el.step = 1.567;
+        el.stepDown();
+        expect(el.value).to.equal('31.34');
+      });
+  
+      it('should still work with integers', function() {
+        var el = new Coral.NumberInput();
+        el.value = 32;
+        el.step = 1.567;
+        el.stepDown();
+        expect(el.value).to.equal('30.433');
+        el.stepUp();
+        expect(el.value).to.equal('32');
+      });
+  
+      it('should not return fancy decimal due to multiplier', function() {
+        var el = new Coral.NumberInput();
+        el.value = 2.01;
+        el.step = 1.01;
+        el.stepDown();
+        expect(el.value).to.equal('1');
+      });
+    });
+    
     describe('#formField', function() {
       helpers.testFormField(window.__html__['Coral.NumberInput.value.html'], {
         value: '5'

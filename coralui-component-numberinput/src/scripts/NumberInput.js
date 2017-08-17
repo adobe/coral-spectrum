@@ -29,6 +29,30 @@ const MSPOINTER_TYPE_MOUSE = 0x00000004;
 let flagTouchStart = false;
 let flagStepButtonClick = false;
 
+function handleDecimalOperation(operator, value1, value2) {
+  let result = operator === '+' ? value1 + value2 : value1 - value2;
+  
+  // Check if we have decimals
+  if (value1 % 1 !== 0 || value2 % 1 !== 0) {
+    const value1Decimal = value1.toString().split('.');
+    const value2Decimal = value2.toString().split('.');
+    const value1DecimalLength = (value1Decimal[1] && value1Decimal[1].length) || 0;
+    const value2DecimalLength = (value2Decimal[1] && value2Decimal[1].length) || 0;
+    const multiplier = Math.pow(10, Math.max(value1DecimalLength, value2DecimalLength));
+    
+    // Transform the decimals to integers based on the multiplier
+    value1 = Math.round(value1 * multiplier);
+    value2 = Math.round(value2 * multiplier);
+    
+    // Perform the operation on integers values to make sure we don't get a fancy decimal value
+    result = operator === '+' ? value1 + value2 : value1 - value2;
+    
+    // Transform the integer result back to decimal
+    result /= multiplier;
+  }
+  
+  return result;
+}
 
 /**
  @class Coral.NumberInput
@@ -329,7 +353,9 @@ class NumberInput extends FormField(Component(HTMLElement)) {
       this.value = this.max !== null ? Math.min(step, this.max) : step;
     }
     else {
-      this.value = this.max !== null ? Math.min(value + step, this.max) : value + step;
+      const newValue = handleDecimalOperation('+', value, step);
+  
+      this.value = this.max !== null ? Math.min(newValue, this.max) : newValue;
     }
   }
   
@@ -345,7 +371,9 @@ class NumberInput extends FormField(Component(HTMLElement)) {
       this.value = this.min !== null ? Math.max(-step, this.min) : -step;
     }
     else {
-      this.value = this.min !== null ? Math.max(value - step, this.min) : value - step;
+      const newValue = handleDecimalOperation('-', value, step);
+  
+      this.value = this.min !== null ? Math.max(newValue, this.min) : newValue;
     }
   }
   
