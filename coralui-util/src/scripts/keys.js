@@ -717,20 +717,27 @@ let Keys = function() {};
      called.
      
      @function init
+     @param {Boolean} globalsOnly
+      Whether only global listeners should be added
      @memberof Coral.Keys#
      
      @returns {Coral.Keys} this, chainable.
      */
-    function init() {
-      // Reset all variable states
-      currentKeys = [];
-      currentKeyCombo = '';
-      keyListeners = {};
-      keySequences = [];
+    function init(globalsOnly) {
+      if (!globalsOnly) {
+        // Reset all variable states
+        currentKeys = [];
+        currentKeyCombo = '';
+        keyListeners = {};
+        keySequences = [];
+  
+        el.addEventListener('keydown', handleKeyDown);
+      }
       
-      el.addEventListener('keydown', handleKeyDown);
       // Watching on capture so it is immune to stopPropagation(). It's very important this event
       // is handled so key entries previously added on keydown can be cleared out.
+      // If multiple identical EventListeners are registered on the same EventTarget with the same parameters the
+      // duplicate instances are discarded. They do not cause the EventListener to be called twice.
       window.addEventListener('keyup', handleKeyUp, true);
       window.addEventListener('focus', reset);
       
@@ -741,14 +748,20 @@ let Keys = function() {};
      Destroy this instance. This removes all event listeners, references, and state.
      
      @function destroy
+     @param {Boolean} globalsOnly
+      Whether only global listeners should be removed
      @memberof Coral.Keys#
      
      @returns {Coral.Keys} this, chainable.
      */
-    function destroy() {
-      keyListeners = null;
-      currentKeys = null;
-      currentKeyCombo = null;
+    function destroy(globalsOnly) {
+      if (!globalsOnly) {
+        keyListeners = null;
+        currentKeys = null;
+        currentKeyCombo = null;
+  
+        el.removeEventListener('keydown', handleKeyDown);
+      }
       
       el.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp, true);

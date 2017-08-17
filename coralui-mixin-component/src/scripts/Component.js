@@ -203,6 +203,10 @@ const delegateGlobalEvents = function() {
       keys.on(key.keyCombo, key.selector, key.listener);
     }
   }
+  
+  if (this._keys) {
+    this._keys.init(true);
+  }
 };
 
 /**
@@ -225,6 +229,10 @@ const undelegateGlobalEvents = function() {
       var key = this._globalKeys[i];
       keys.off(key.keyCombo, key.selector, key.listener);
     }
+  }
+  
+  if (this._keys) {
+    this._keys.destroy(true);
   }
 };
 
