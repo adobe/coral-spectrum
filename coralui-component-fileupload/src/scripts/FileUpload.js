@@ -1057,8 +1057,11 @@ class FileUpload extends FormField(Component(HTMLElement)) {
     // Add the input to the component
     this.appendChild(this._elements.input);
   
-    // Handles the repositioning of the input to allow dropping files
-    commons.addResizeListener(this, this._positionInputOnDropZone);
+    // IE11 requires one more frame or the resize listener <object> will appear as an overlaying white box
+    window.requestAnimationFrame(function() {
+      // Handles the repositioning of the input to allow dropping files
+      commons.addResizeListener(this, this._positionInputOnDropZone);
+    }.bind(this));
   }
 }
 
