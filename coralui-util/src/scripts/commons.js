@@ -162,79 +162,120 @@ commons.nextFrame = function(callback) {
   })
 };
 
-
-/**
- Execute the callback once a CSS transition has ended.
- 
- @callback Coral.commons~transitionEndCallback
- @param event
- The event passed to the callback.
- @param {HTMLElement} event.target
- The DOM element that was affected by the CSS transition.
- @param {Boolean} event.cssTransitionSupported
- Whether CSS transitions are supported by the browser.
- @param {Boolean} event.transitionStoppedByTimeout
- Whether the CSS transition has been ended by a timeout (should only happen as a fallback).
- */
-
-/**
- Execute the provided callback once a CSS transition has ended. This method listens for the next transitionEnd event on
- the given DOM element. It cannot be used to listen continuously on transitionEnd events.
- 
- @param {HTMLElement} element
- The DOM element that is affected by the CSS transition.
- @param {Coral.commons~transitionEndCallback} callback
- The callback to execute.
- */
-commons.transitionEnd = function(element, callback) {
+(function() {
   'use strict';
   
-  var propertyName;
-  var hasTransitionEnded = false;
-  var transitionEndEventName = null;
-  var transitions = {
-    'transition': 'transitionend',
-    'WebkitTransition': 'webkitTransitionEnd',
-    'MozTransition': 'transitionend',
-    'MSTransition': 'msTransitionEnd'
-  };
-  var transitionEndTimeout = null;
-  var onTransitionEnd = function(event) {
-    var transitionStoppedByTimeout = (typeof event === 'undefined');
-    
-    if (!hasTransitionEnded) {
-      hasTransitionEnded = true;
-      
-      clearTimeout(transitionEndTimeout);
-      
-      // Remove event listener (if any was used by the current browser)
-      element.removeEventListener(transitionEndEventName, onTransitionEnd);
-      
-      // Call callback with specified element
-      callback({
-        target: element,
-        cssTransitionSupported: true,
-        transitionStoppedByTimeout: transitionStoppedByTimeout
-      });
-    }
-  };
+  // Threshold time in milliseconds that the setTimeout will wait for the transitionEnd event to be triggered.
+  var TRANSITION_DURATION_THRESHOLD = 100;
   
-  // Find transitionEnd event name used by browser
-  for (propertyName in transitions) {
-    if (element.style[propertyName] !== undefined) {
-      transitionEndEventName = transitions[propertyName];
-      break;
+  /**
+   Converts CSS time to milliseconds. It supports both s and ms units. If the provided value has an unrecogenized unit,
+   zero will be returned.
+   @param {String} time
+   The time string to convert to milliseconds.
+   @returns {Number} the time in milliseconds.
+   */
+  function cssTimeToMilliseconds(time) {
+    var num = parseFloat(time, 10);
+    var unit = time.match(/m?s/);
+    
+    if (unit) {
+      unit = unit[0];
     }
+    
+    if (unit === 's') {
+      return num * 1000;
+    }
+    else if (unit === 'ms') {
+      return num;
+    }
+    
+    // unrecognized unit, so we return 0
+    return 0;
   }
   
-  if (transitionEndEventName !== null) {
-    // Register on transitionEnd event
-    element.addEventListener(transitionEndEventName, onTransitionEnd);
+  /**
+   Execute the callback once a CSS transition has ended.
+   @callback Coral.commons~transitionEndCallback
+   @param event
+   The event passed to the callback.
+   @param {HTMLElement} event.target
+   The DOM element that was affected by the CSS transition.
+   @param {Boolean} event.cssTransitionSupported
+   Whether CSS transitions are supported by the browser.
+   @param {Boolean} event.transitionStoppedByTimeout
+   Whether the CSS transition has been ended by a timeout (should only happen as a fallback).
+   */
+  /**
+   Execute the provided callback once a CSS transition has ended. This method listens for the next transitionEnd event
+   on the given DOM element. In case the provided element does not have a transition defined, the callback will be
+   called in the next macrotask to allow a normal application execution flow. It cannot be used to listen continuously
+   on transitionEnd events.
+   @param {HTMLElement} element
+   The DOM element that is affected by the CSS transition.
+   @param {Coral.commons~transitionEndCallback} callback
+   The callback to execute.
+   */
+  commons.transitionEnd = function(element, callback) {
+    var propertyName;
+    var hasTransitionEnded = false;
+    var transitionEndEventName = null;
+    var transitions = {
+      'transition': 'transitionend',
+      'WebkitTransition': 'webkitTransitionEnd',
+      'MozTransition': 'transitionend',
+      'MSTransition': 'msTransitionEnd'
+    };
     
-    // Catch IE 10/11 sometimes not performing the transition at all => set timeout for this case
-    transitionEndTimeout = setTimeout(onTransitionEnd, parseFloat(element.style.transitionDuration || 0) + 100);
-  }
-};
+    var transitionEndTimeout = null;
+    var onTransitionEnd = function(event) {
+      var transitionStoppedByTimeout = (typeof event === 'undefined');
+      
+      if (!hasTransitionEnded) {
+        hasTransitionEnded = true;
+        
+        clearTimeout(transitionEndTimeout);
+        
+        // Remove event listener (if any was used by the current browser)
+        element.removeEventListener(transitionEndEventName, onTransitionEnd);
+        
+        // Call callback with specified element
+        callback({
+          target: element,
+          cssTransitionSupported: true,
+          transitionStoppedByTimeout: transitionStoppedByTimeout
+        });
+      }
+    };
+    
+    // Find transitionEnd event name used by browser
+    for (propertyName in transitions) {
+      if (element.style[propertyName] !== undefined) {
+        transitionEndEventName = transitions[propertyName];
+        break;
+      }
+    }
+    
+    if (transitionEndEventName !== null) {
+      var timeoutDelay = 0;
+      // Gets the animation time (in milliseconds) using the computed style
+      var transitionDuration = cssTimeToMilliseconds(window.getComputedStyle(element).transitionDuration);
+      
+      // We only setup the event listener if there is a valid transition
+      if (transitionDuration !== 0) {
+        // Register on transitionEnd event
+        element.addEventListener(transitionEndEventName, onTransitionEnd);
+        
+        // As a fallback we use the transitionDuration plus a threshold. This can happen in IE10/11 where
+        // transitionEnd events are sometimes skipped
+        timeoutDelay = transitionDuration + TRANSITION_DURATION_THRESHOLD;
+      }
+      
+      // Fallback in case the event does not trigger (IE10/11) or if the element does not have a valid transition
+      transitionEndTimeout = setTimeout(onTransitionEnd, timeoutDelay);
+    }
+  };
+}());
 
 /**
  Execute the provided callback when all web components are ready.
