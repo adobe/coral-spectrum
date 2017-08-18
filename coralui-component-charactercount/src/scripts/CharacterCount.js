@@ -131,8 +131,6 @@ class CharacterCount extends Component(HTMLElement) {
     }
   }
   
-  get _attributes() {return {maxlength: 'maxLength'};}
-  
   // Expose enumerations
   static get target() {return target;}
   

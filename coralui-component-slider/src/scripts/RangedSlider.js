@@ -17,7 +17,7 @@
 
 import Slider from './Slider';
 import range from '../templates/range';
-import {transform, commons} from 'coralui-util';
+import {transform} from 'coralui-util';
 
 const CLASSNAME = 'coral3-Slider';
 
@@ -203,14 +203,6 @@ class RangedSlider extends Slider {
     
     this.startValue = transform.string(initialStartValue);
     this.endValue = transform.string(initialEndValue);
-  }
-  
-  // Map properties with attributes
-  get _attributes() {
-    return commons.extend(super._attributes, {
-      startvalue: 'startValue',
-      endvalue: 'endValue'
-    });
   }
   
   static get observedAttributes() {

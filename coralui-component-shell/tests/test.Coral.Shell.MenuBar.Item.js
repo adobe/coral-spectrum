@@ -111,6 +111,7 @@ describe('Coral.Shell.MenuBar.Item', function() {
       it('should open the menu when open = true', function(done) {
         // binds the menu and the item together
         el.menu = menu;
+        menu._overlayAnimationTime = 0;
   
         expect(menu.offsetParent).to.equal(null);
         
@@ -270,8 +271,8 @@ describe('Coral.Shell.MenuBar.Item', function() {
     it('should close the menu if key:escape is pressed', function(done) {
       const el = helpers.build(window.__html__['Coral.Shell.MenuBar.base.html']);
       // since the snippet has a div as the parent we need to search for the item
-      // var item = el.querySelector('coral-shell-menubar-item');
       var menu = el.querySelector('coral-shell-menu');
+      menu._overlayAnimationTime = 0;
 
       el.addEventListener('coral-overlay:open', function() {
         helpers.keypress('escape');
@@ -293,6 +294,7 @@ describe('Coral.Shell.MenuBar.Item', function() {
       // since the snippet has a div as the parent we need to search for the item
       var menubar = el.querySelector('coral-shell-menubar');
       var menu = el.querySelector('coral-shell-menu');
+      menu._overlayAnimationTime = 0;
 
       el.addEventListener('coral-overlay:open', function() {
 

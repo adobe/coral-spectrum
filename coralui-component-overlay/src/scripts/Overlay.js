@@ -18,7 +18,7 @@
 import Component from 'coralui-mixin-component';
 import OverlayMixin from 'coralui-mixin-overlay';
 import {PopperJS} from 'coralui-externals';
-import {commons, transform, validate} from 'coralui-util';
+import {transform, validate} from 'coralui-util';
 
 const DEPRECATED_ALIGN = 'Coral.Overlay: alignAt and alignMy have been deprecated. Please use the offset, inner and placement properties instead.';
 const DEPRECATED_FLIP_FIT = 'Coral.Overlay.collision.FLIP_FIT has been deprecated. Please use Coral.Overlay.collision.FLIP instead.';
@@ -499,17 +499,6 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
         this._popper.update();
       }
     }
-  }
-  
-  // Map attributes with properties
-  get _attributes() {
-    return commons.extend(super._attributes, {
-      trapfocus: 'trapFocus',
-      returnfocus: 'returnFocus',
-      focusonshow: 'focusOnShow',
-      lengthoffset: 'lengthOffset',
-      breadthoffset: 'breadthOffset'
-    });
   }
   
   // Expose enumerations

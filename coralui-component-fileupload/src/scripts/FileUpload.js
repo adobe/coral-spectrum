@@ -995,13 +995,6 @@ class FileUpload extends FormField(Component(HTMLElement)) {
     }
   }
   
-  get _attributes() {
-    return commons.extend({
-      sizelimit: 'sizeLimit',
-      autostart: 'autoStart',
-    }, super._attributes);
-  }
-  
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'async',

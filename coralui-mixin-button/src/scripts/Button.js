@@ -332,7 +332,6 @@ const Button = (superClass) => class extends superClass {
   // For backwards compatibility + Torq
   get defaultContentZone() {return this.label;}
   set defaultContentZone(value) {this.label = value;}
-  get _attributes() {return {iconposition: 'iconPosition', iconsize: 'iconSize'};}
   get _contentZones() {return {'coral-button-label': 'label'};}
   
   // Expose enumerations

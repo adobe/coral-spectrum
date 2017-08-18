@@ -322,14 +322,6 @@ class Card extends Component(HTMLElement) {
       'coral-card-overlay': 'overlay'
     };
   }
-  get _attributes() {
-    return {
-      assetwidth: 'assetWidth',
-      assetheight: 'assetHeight',
-      fixedwidth: 'fixedWidth',
-      colorhint: 'colorHint'
-    };
-  }
   
   // Expose enumerations
   static get variant() {return variant;}

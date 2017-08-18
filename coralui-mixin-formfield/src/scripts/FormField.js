@@ -307,8 +307,6 @@ const FormField = (superClass) => class extends superClass {
     this.value = transform.string(this.getAttribute('value'));
   }
   
-  get _attributes() {return {labelledby: 'labelledBy', readonly: 'readOnly'};}
-  
   // We don't want to watch existing attributes for components that extend native HTML elements
   static get _nativeObservedAttributes() {
     return [

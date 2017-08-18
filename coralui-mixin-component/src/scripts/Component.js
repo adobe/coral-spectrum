@@ -309,6 +309,32 @@ const getConstructorName = function(constructor) {
 };
 
 /**
+ Builds and returns an attribute/property map based on observed attributes
+ @ignore
+ */
+const getAttributePropertyMap = function(constructor) {
+  const observedAttributes = constructor.observedAttributes;
+  
+  if (!observedAttributes) {
+    return {};
+  }
+  else {
+    const attributePropertyMap = {};
+    
+    observedAttributes.forEach((attribute) => {
+      // We assume if the attribute contains uppercase char, it's a property and can be mapped
+      if (attribute.match(REG_EXP_UPPERCASE)) {
+        attributePropertyMap[attribute.toLowerCase()] = attribute;
+      }
+    });
+    
+    constructor._attributePropertyMap = attributePropertyMap;
+  }
+  
+  return constructor._attributePropertyMap;
+};
+
+/**
  @mixin Component
  @classdesc The base element for all Coral components
  */
@@ -327,6 +353,9 @@ const Component = (superClass) => class extends superClass {
   
   // @legacy
   get _properties() {return {};}
+  
+  // @legacy
+  get _attributes() {return this.constructor._attributePropertyMap || getAttributePropertyMap(this.constructor);}
   
   // @legacy
   // Attach event listeners including global ones
@@ -647,10 +676,6 @@ const Component = (superClass) => class extends superClass {
     this.hidden = true;
     return this;
   }
-  
-  // @legacy
-  // Used to map properties with attributes. To be extended.
-  get _attributes() {return {};}
   
   attributeChangedCallback(name, oldValue, value) {
     if (!this._reflectedAttribute) {

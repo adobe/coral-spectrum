@@ -16,7 +16,7 @@
  */
 
 import Component from 'coralui-mixin-component';
-import {transform, validate, commons} from 'coralui-util';
+import {transform, validate} from 'coralui-util';
 import 'coralui-component-icon';
 import 'coralui-component-button';
 import menuBarItem from '../templates/menuBarItem';
@@ -248,9 +248,6 @@ class ShellMenuBarItem extends Component(HTMLElement) {
   get defaultContentZone() {return this.label;}
   set defaultContentZone(value) {this.label = value;}
   get _contentZones() {return {'coral-button-label': 'label'};}
-  
-  // Map properties with attributes
-  get _attributes() {return {iconsize: 'iconSize', iconvariant: 'iconVariant'};}
   
   // Expose enums
   static get iconVariant() {return iconVariant;}

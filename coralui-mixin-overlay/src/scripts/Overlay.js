@@ -831,15 +831,6 @@ const Overlay = (superClass) => class extends superClass {
     return this;
   }
   
-  // Map attributes with properties
-  get _attributes() {
-    return {
-      trapfocus: 'trapFocus',
-      returnfocus: 'returnFocus',
-      focusonshow: 'focusOnShow'
-    };
-  }
-  
   // Expose enums
   static get trapFocus() {return trapFocus;}
   static get returnFocus() {return returnFocus;}

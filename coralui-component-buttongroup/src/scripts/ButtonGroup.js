@@ -20,7 +20,7 @@ import FormField from 'coralui-mixin-formfield';
 import 'coralui-component-button';
 import {SelectableCollection} from 'coralui-collection';
 import base from '../templates/base';
-import {transform, validate, commons} from 'coralui-util';
+import {transform, validate} from 'coralui-util';
 
 /**
  Enumeration representing buttongroup selection modes.
@@ -812,8 +812,6 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
   _getLabellableElement() {
     return this;
   }
-  
-  get _attributes() {return commons.extend({selectionmode: 'selectionMode'}, super._attributes);}
   
   // Expose enumerations
   static get selectionMode() {return selectionMode;}

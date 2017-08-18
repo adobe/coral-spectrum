@@ -321,7 +321,6 @@ class Progress extends Component(HTMLElement) {
   // For backwards compatibility + Torq
   get defaultContentZone() {return this.label;}
   set defaultContentZone(value) {this.label = value;}
-  get _attributes() {return {showpercent: 'showPercent', labelposition: 'labelPosition'};}
   get _contentZones() {return {'coral-progress-label': 'label'};}
   
   // Expose enumerations
