@@ -18,7 +18,7 @@
 import Component from 'coralui-mixin-component';
 import FormField from 'coralui-mixin-formfield';
 import {Collection} from 'coralui-collection';
-import {transform} from 'coralui-util';
+import {transform, commons} from 'coralui-util';
 
 const CLASSNAME = 'coral3-TagList';
 // Collection
@@ -50,7 +50,7 @@ class TagList extends FormField(Component(HTMLElement)) {
     super();
     
     // Attach events
-    this._delegateEvents({
+    this._delegateEvents(commons.extend(this._events, {
       'capture:focus coral-tag': '_onItemFocus',
       'capture:blur coral-tag': '_onItemBlur',
       'key:right coral-tag': '_onNextItemFocus',
@@ -65,7 +65,7 @@ class TagList extends FormField(Component(HTMLElement)) {
       // Private
       'coral-tag:_valuechanged': '_onTagValueChanged',
       'coral-tag:_connected': '_onTagConnected'
-    });
+    }));
   
     this._itemToFocusAfterDelete = null;
   }

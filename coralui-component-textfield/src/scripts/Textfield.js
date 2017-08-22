@@ -53,6 +53,8 @@ for (const variantValue in variant) {
 class Textfield extends FormField(Component(HTMLInputElement)) {
   constructor() {
     super();
+  
+    this._delegateEvents(this._events);
   }
   
   /**

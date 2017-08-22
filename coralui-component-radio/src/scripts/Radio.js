@@ -18,7 +18,7 @@
 import Component from 'coralui-mixin-component';
 import FormField from 'coralui-mixin-formfield';
 import base from '../templates/base';
-import {transform} from 'coralui-util';
+import {transform, commons} from 'coralui-util';
 
 const CLASSNAME = 'coral3-Radio';
 
@@ -33,11 +33,11 @@ const CLASSNAME = 'coral3-Radio';
 class Radio extends FormField(Component(HTMLElement)) {
   constructor() {
     super();
-    
-    this._delegateEvents({
+  
+    this._delegateEvents(commons.extend(this._events, {
       'click': '_onClick',
       'mousedown': '_onMouseDown'
-    });
+    }));
     
     // Prepare templates
     this._elements = {

@@ -20,7 +20,7 @@ import FormField from 'coralui-mixin-formfield';
 import {Collection} from 'coralui-collection';
 import {Tooltip} from 'coralui-component-tooltip';
 import base from '../templates/base';
-import {transform, validate, events, Keys} from 'coralui-util';
+import {transform, validate, events, commons, Keys} from 'coralui-util';
 
 const CLASSNAME = 'coral3-Slider';
 const CLASSNAME_HANDLE = 'coral3-Slider-handle';
@@ -50,8 +50,8 @@ const orientation = {
 class Slider extends FormField(Component(HTMLElement)) {
   constructor() {
     super();
-    
-    this._delegateEvents({
+  
+    this._delegateEvents(commons.extend(this._events, {
       'key:up .coral3-Slider-handle': '_handleKey',
       'key:right .coral3-Slider-handle': '_handleKey',
       'key:down .coral3-Slider-handle': '_handleKey',
@@ -71,7 +71,7 @@ class Slider extends FormField(Component(HTMLElement)) {
   
       'capture:focus': '_focus',
       'capture:blur': '_blur'
-    });
+    }));
     
     // Prepare templates
     this._elements = {};

@@ -20,7 +20,7 @@ import FormField from 'coralui-mixin-formfield';
 import 'coralui-component-textfield';
 import 'coralui-component-button';
 import base from '../templates/base';
-import {transform, validate} from 'coralui-util';
+import {transform, validate, commons} from 'coralui-util';
 
 const CLASSNAME = 'coral3-Search';
 
@@ -48,8 +48,8 @@ const variant = {
 class Search extends FormField(Component(HTMLElement)) {
   constructor() {
     super();
-    
-    this._delegateEvents({
+  
+    this._delegateEvents(commons.extend(this._events, {
       // @todo use Coral.keys when key combos don't interfere with single key execution
       'keydown [handle=input]': '_onEnterKey',
       'keyup [handle=input]': '_onKeyUp',
@@ -59,7 +59,7 @@ class Search extends FormField(Component(HTMLElement)) {
   
       'key:escape [handle=input]': '_clearInput',
       'click [handle=clearButton]:not(:disabled)': '_clearInput'
-    });
+    }));
     
     // Prepare templates
     this._elements = {};

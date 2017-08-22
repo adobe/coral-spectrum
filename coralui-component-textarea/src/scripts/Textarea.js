@@ -17,7 +17,7 @@
 
 import Component from 'coralui-mixin-component';
 import FormField from 'coralui-mixin-formfield';
-import {transform, validate} from 'coralui-util';
+import {transform, validate, commons} from 'coralui-util';
 
 const CLASSNAME = 'coral3-Textfield';
 
@@ -52,10 +52,10 @@ for (const variantValue in variant) {
 class Textarea extends FormField(Component(HTMLTextAreaElement)) {
   constructor() {
     super();
-    
-    this._delegateEvents({
+  
+    this._delegateEvents(commons.extend(this._events, {
       'input': '_onInput'
-    });
+    }));
   }
   
   /**

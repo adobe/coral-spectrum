@@ -20,7 +20,7 @@ import FormField from 'coralui-mixin-formfield';
 import 'coralui-component-button';
 import {SelectableCollection} from 'coralui-collection';
 import base from '../templates/base';
-import {transform, validate} from 'coralui-util';
+import {transform, validate, commons} from 'coralui-util';
 
 /**
  Enumeration representing buttongroup selection modes.
@@ -75,7 +75,7 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
     this._initalSelectedValues = [];
     
     // Attach events
-    this._delegateEvents({
+    this._delegateEvents(commons.extend(this._events, {
       'click button[is="coral-button"]': '_onButtonClick',
   
       'capture:focus button[is="coral-button"]': '_onButtonFocus',
@@ -90,7 +90,7 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
       
       'coral-button:_valuechanged button[is="coral-button"]': '_onButtonValueChanged',
       'coral-button:_selectedchanged button[is="coral-button"]': '_onButtonSelectedChanged',
-    });
+    }));
     
     // Init the mutation observer but we don't handle the initial items in the constructor
     this.items._startHandlingItems(true);

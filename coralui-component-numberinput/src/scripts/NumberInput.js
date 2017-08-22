@@ -65,8 +65,8 @@ function handleDecimalOperation(operator, value1, value2) {
 class NumberInput extends FormField(Component(HTMLElement)) {
   constructor() {
     super();
-    
-    this._delegateEvents({
+  
+    this._delegateEvents(commons.extend(this._events, {
       'key:up': '_onKeyUp',
       'key:pageup': '_onKeyUp',
       'key:down': '_onKeyDown',
@@ -86,7 +86,7 @@ class NumberInput extends FormField(Component(HTMLElement)) {
   
       'capture:focus': '_onFocus',
       'capture:blur': '_onBlur'
-    });
+    }));
     
     // Prepare templates
     this._elements = {};

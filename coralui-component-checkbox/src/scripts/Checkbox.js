@@ -18,7 +18,7 @@
 import Component from 'coralui-mixin-component';
 import FormField from 'coralui-mixin-formfield';
 import base from '../templates/base';
-import {transform} from 'coralui-util';
+import {transform, commons} from 'coralui-util';
 
 const IS_IE_OR_EDGE = navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0 ||
   window.navigator.userAgent.indexOf('Edge') !== -1;
@@ -38,10 +38,10 @@ class Checkbox extends FormField(Component(HTMLElement)) {
     super();
   
     // @polyfill ie
-    this._delegateEvents({
+    this._delegateEvents(commons.extend(this._events, {
       'click': '_onClick',
       'mousedown': '_onMouseDown'
-    });
+    }));
   
     // Prepare templates
     this._elements = {
