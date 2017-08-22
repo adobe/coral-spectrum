@@ -1,0 +1,47 @@
+<table handle="table" role="presentation">
+  <thead role="presentation">
+    <tr role="row">
+      <foreach data.dayNames,columnNumber>
+        <th role="columnheader" scope="col">
+          <abbr class="coral3-Calendar-dayOfWeek" title="{{data.dayFullName}}">{{data.dayAbbr}}</abbr>
+        </th>
+      </foreach>
+    </tr>
+  </thead>
+  <tbody role="presentation">
+    <foreach data.weeks,rowNumber>
+      <tr role="row">
+        <foreach data,columnNumber>
+          <js>
+            var calendarTitle;
+            var calendarDate = data.dateLabel + ', ' + data.formattedDate;
+            if (data.isToday) {
+              if (data.ariaSelected) {
+                calendarTitle = Coral.i18n.get('Today, {0} selected', calendarDate, 'date');
+              }
+              else {
+                calendarTitle = Coral.i18n.get('Today, {0}', calendarDate, 'date');
+              }
+            }
+            else {
+              if (data.ariaSelected) {
+                calendarTitle = Coral.i18n.get('{0} selected', calendarDate, 'date');
+              }
+              else {
+                calendarTitle = calendarTitle = calendarDate;
+              }
+            }
+          </js>
+          <td role="gridcell" id="{{Coral.commons.getUID()}}-row{{rowNumber}}-col{{columnNumber}}" class="{{data.cssClass}}" aria-selected="{{data.ariaSelected}}" if-data.isDisabled='aria-disabled="true"' if-data.ariaInvalid='aria-invalid="true"' if-data.formattedDate='title="{{calendarTitle}}"'>
+            <if data.dateAttr>
+                <a role="presentation" class="coral3-Calendar-date" data-date="{{data.dateAttr}}">{{data.dateText}}</a>
+              <else>
+                <span role="presentation" class="coral3-Calendar-secondaryDate">{{data.dateText}}</span>
+            </if>
+          </td>
+        </foreach>
+      </tr>
+    </foreach>
+  </tbody>
+  <caption class="u-coral-screenReaderOnly" aria-live="assertive" aria-atomic="true"></caption>
+</table>

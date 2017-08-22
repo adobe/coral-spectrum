@@ -69,6 +69,20 @@ module.exports = function(config) {
     
     // list of files / patterns to load in the browser
     files: [
+      // Load the theme
+      `${CWD}/build/css/coral.css`,
+      
+      // Load momentJS for date time components
+      `${CWD}/node_modules/moment/moment.js`,
+  
+      {
+        // Load the resources
+        pattern: `${CWD}/build/resources/**/*`,
+        watched: false,
+        included: false,
+        served: true
+      },
+      
       {
         // Files to be available as window.__html__['FILENAME.html']
         pattern: `${CWD}/tests/snippets/**/*.html`,
@@ -98,17 +112,6 @@ module.exports = function(config) {
         watched: true,
         served: true,
         included: true // Include testing helpers
-      },
-      
-      // Load the theme
-      `${CWD}/build/css/coral.css`,
-  
-      {
-        // Load the resources
-        pattern: `${CWD}/build/resources/**/*`,
-        watched: false,
-        included: false,
-        served: true
       },
       
       {

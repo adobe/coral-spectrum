@@ -1,0 +1,80 @@
+script.
+  if (typeof Coral.Configurator === 'function') {
+    var configurator = new Coral.Configurator().set({
+      component: Coral.Calendar,
+      fields: [
+        {
+          label: 'Header Format',
+          prop: 'headerFormat',
+          type: 'text',
+          value: 'MMMM YYYY'
+        },
+        {
+          label: 'Max',
+          prop: 'max',
+          type: 'text',
+          value: ''
+        },
+        {
+          label: 'Min',
+          prop: 'min',
+          type: 'text',
+          value: ''
+        },
+        {
+          label: 'Name',
+          prop: 'name',
+          type: 'text',
+          value: 'field'
+        },
+        {
+          label: 'Value',
+          prop: 'value',
+          type: 'text',
+          value: 'today'
+        },
+        {
+          label: 'Value Format',
+          prop: 'valueFormat',
+          type: 'text',
+          value: 'YYYY-MM-DD[T]HH:mmZ'
+        },
+        {
+          label: 'Start Day',
+          prop: 'startDay',
+          type: 'spinner',
+          min: 0,
+          max: 6,
+          value: '0'
+        },
+        {
+          label: 'is disabled',
+          prop: 'disabled',
+          type: 'checkbox',
+          value: false
+        },
+        {
+          label: 'is invalid',
+          prop: 'invalid',
+          type: 'checkbox',
+          value: false
+        },
+        {
+          label: 'is read-only',
+          prop: 'readOnly',
+          type: 'checkbox',
+          value: false
+        },
+        {
+          label: 'is required',
+          prop: 'required',
+          type: 'checkbox',
+          value: false
+        }
+      ],
+      componentEvents: [
+        'change'
+      ],
+      itemInnerHTMLProp: 'content'
+    }).insertAfterLastScript();
+  }

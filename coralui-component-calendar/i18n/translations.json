@@ -1,0 +1,79 @@
+{
+  "en-US": {
+    "Previous": "Previous",
+    "Next": "Next",
+    "Today, {0} selected/[translation hint:date]": "Today, {0} selected",
+    "Today, {0}/[translation hint:date]": "Today, {0}",
+    "{0} selected/[translation hint:date]": "{0} selected"
+  },
+  "fr-FR": {
+    "Previous": "Précédent",
+    "Next": "Suivant",
+    "Today, {0} selected/[translation hint:date]": "Aujourd’hui, sélection de {0}",
+    "Today, {0}/[translation hint:date]": "Aujourd’hui, {0}",
+    "{0} selected/[translation hint:date]": "Sélection de {0}"
+  },
+  "de-DE": {
+    "Previous": "Zurück",
+    "Next": "Weiter",
+    "Today, {0} selected/[translation hint:date]": "Heute, {0} ausgewählt",
+    "Today, {0}/[translation hint:date]": "Heute, {0}",
+    "{0} selected/[translation hint:date]": "{0} ausgewählt"
+  },
+  "it-IT": {
+    "Previous": "Precedente",
+    "Next": "Successivo",
+    "Today, {0} selected/[translation hint:date]": "Oggi, {0} selezionati",
+    "Today, {0}/[translation hint:date]": "Oggi, {0}",
+    "{0} selected/[translation hint:date]": "{0} selezionati"
+  },
+  "es-ES": {
+    "Previous": "Anterior",
+    "Next": "Siguiente",
+    "Today, {0} selected/[translation hint:date]": "Hoy, {0} seleccionados",
+    "Today, {0}/[translation hint:date]": "Hoy, {0}",
+    "{0} selected/[translation hint:date]": "{0} seleccionados"
+  },
+  "pt-BR": {
+    "Previous": "Anterior",
+    "Next": "Próximo",
+    "Today, {0} selected/[translation hint:date]": "Hoje, {0} selecionados",
+    "Today, {0}/[translation hint:date]": "Hoje, {0}",
+    "{0} selected/[translation hint:date]": "{0} selecionados"
+  },
+  "ja-JP": {
+    "Previous": "前へ",
+    "Next": "次へ",
+    "Today, {0} selected/[translation hint:date]": "今日、{0} が選択されました",
+    "Today, {0}/[translation hint:date]": "今日、{0}",
+    "{0} selected/[translation hint:date]": "{0} が選択されました"
+  },
+  "ko-KR": {
+    "Previous": "이전으로",
+    "Next": "다음",
+    "Today, {0} selected/[translation hint:date]": "현재 {0}이(가) 선택됨",
+    "Today, {0}/[translation hint:date]": "현재 {0}",
+    "{0} selected/[translation hint:date]": "{0}이(가) 선택됨"
+  },
+  "zh-CN": {
+    "Previous": "上一步",
+    "Next": "下一步",
+    "Today, {0} selected/[translation hint:date]": "已选定今天 {0}",
+    "Today, {0}/[translation hint:date]": "今天 {0}",
+    "{0} selected/[translation hint:date]": "已选定 {0}"
+  },
+  "zh-TW": {
+    "Previous": "上一頁",
+    "Next": "下一頁",
+    "Today, {0} selected/[translation hint:date]": "今天，已選取 {0}",
+    "Today, {0}/[translation hint:date]": "今天，{0}",
+    "{0} selected/[translation hint:date]": "已選取 {0} "
+  },
+  "nl-NL": {
+    "Previous": "Vorige",
+    "Next": "Volgende",
+    "Today, {0} selected/[translation hint:date]": "Vandaag {0} geselecteerd",
+    "Today, {0}/[translation hint:date]": "Vandaag {0} ",
+    "{0} selected/[translation hint:date]": "{0} geselecteerd"
+  }
+}

@@ -303,7 +303,7 @@ const Button = (superClass) => class extends superClass {
   /** @ignore */
   _getIconElement() {
     if (!this._elements.icon) {
-      this._elements.icon = document.createElement('coral-icon');
+      this._elements.icon = new Icon();
     }
     return this._elements.icon;
   }
