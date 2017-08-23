@@ -33,4 +33,5 @@ import 'coralui-component-textfield/tests';
 import 'coralui-component-tooltip/tests';
 import 'coralui-component-tree/tests';
 import 'coralui-component-wait/tests';
+import 'coralui-component-wizardview/tests';
 import 'coralui-dragaction/tests';

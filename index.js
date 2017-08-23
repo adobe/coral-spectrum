@@ -34,6 +34,7 @@ import {Textfield} from 'coralui-component-textfield';
 import {Tooltip, TooltipContent} from 'coralui-component-tooltip';
 import {Tree, TreeItem, TreeItemContent} from 'coralui-component-tree';
 import {Wait} from 'coralui-component-wait';
+import {WizardView} from 'coralui-component-wizardview';
 
 export {
   Accordion,
@@ -143,5 +144,6 @@ export {
   Tree,
   TreeItem,
   TreeItemContent,
-  Wait
+  Wait,
+  WizardView
 }

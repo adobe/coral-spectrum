@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Coral3 | Coral.WizardView</title>
+    <link rel="stylesheet" href="../build/css/coral.css">
+    <script src="../build/js/coral.js"></script>
+  </head>
+
+  <body class="coral--light u-coral-padding">
+    <h1 class="coral-Heading coral-Heading--1">coral-WizardView</h1>
+
+    <coral-wizardview>
+
+      <coral-panelstack coral-wizardview-panelstack>
+        <coral-panel>
+          <button is="coral-button">Cancel</button>
+          <button is="coral-button" variant="primary" coral-wizardview-next>Next</button>
+        </coral-panel>
+        <coral-panel>
+          <button is="coral-button" coral-wizardview-previous>Previous</button>
+          <button is="coral-button" variant="primary" coral-wizardview-next>Next</button>
+        </coral-panel>
+        <coral-panel>
+          <button is="coral-button" coral-wizardview-previous>Previous</button>
+          <button is="coral-button" variant="primary">Done</button>
+        </coral-panel>
+      </coral-panelstack>
+
+      <coral-steplist interaction="on" coral-wizardview-steplist>
+        <coral-step>Step 1</coral-step>
+        <coral-step selected>Step 2</coral-step>
+        <coral-step>Step 3</coral-step>
+      </coral-steplist>
+
+      <coral-panelstack coral-wizardview-panelstack>
+        <coral-panel>
+          <p>Lorem ipsum dolor sit amet.</p>
+        </coral-panel>
+        <coral-panel>
+          <p>Aenean faucibus ornare laoreet.</p>
+        </coral-panel>
+        <coral-panel>
+          <p>Cras luctus purus.</p>
+        </coral-panel>
+      </coral-panelstack>
+
+      <coral-steplist interaction="on" size="S" coral-wizardview-steplist>
+        <coral-step>Step 1</coral-step>
+        <coral-step>Step 2</coral-step>
+        <coral-step>Step 3</coral-step>
+      </coral-steplist>
+
+    </coral-wizardview>
+
+  </body>
+
+</html>

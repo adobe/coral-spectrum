@@ -42,6 +42,7 @@
     "coralui-component-tooltip": "file:coralui-component-tooltip",
     "coralui-component-tree": "file:coralui-component-tree",
     "coralui-component-wait": "file:coralui-component-wait",
+    "coralui-component-wizardview": "file:coralui-component-wizardview",
     "coralui-dragaction": "file:coralui-dragaction",
     "@coralui/coralui-theme-cloudui": "^9.3.0",
     "coralui-gulp": "file:coralui-gulp",
