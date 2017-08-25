@@ -18,6 +18,7 @@ import 'coralui-component-overlay/tests';
 import 'coralui-component-panelstack/tests';
 import 'coralui-component-popover/tests';
 import 'coralui-component-progress/tests';
+import 'coralui-component-quickactions/tests';
 import 'coralui-component-radio/tests';
 import 'coralui-component-search/tests';
 import 'coralui-component-selectlist/tests';

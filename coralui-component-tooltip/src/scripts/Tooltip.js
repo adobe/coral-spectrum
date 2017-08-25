@@ -87,9 +87,9 @@ class Tooltip extends Overlay {
     this._overlayAnimationTime = Overlay.FADETIME;
   
     // Fetch or create the content zone element
-    this._elements = {
+    this._elements = commons.extend(this._elements, {
       content: this.querySelector('coral-tooltip-content') || document.createElement('coral-tooltip-content')
-    };
+    });
   
     // Used for events
     this._id = commons.getUID();

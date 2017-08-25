@@ -27,6 +27,7 @@
     "coralui-component-panelstack": "file:coralui-component-panelstack",
     "coralui-component-popover": "file:coralui-component-popover",
     "coralui-component-progress": "file:coralui-component-progress",
+    "coralui-component-quickactions": "file:coralui-component-quickactions",
     "coralui-component-radio": "file:coralui-component-radio",
     "coralui-component-search": "file:coralui-component-search",
     "coralui-component-selectlist": "file:coralui-component-selectlist",

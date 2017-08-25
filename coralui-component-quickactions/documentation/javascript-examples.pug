@@ -1,0 +1,101 @@
++document-section('JavaScript Examples')
+  +document-subsection('JS Class Initialization', 'The following JavaScript manually generates a QuickActions component and sets up some properties.')
+    +markup-example().
+      <table class="coral-Table" id="quickActionsTarget">
+          <thead>
+            <tr class="coral-Table-row">
+              <th class="coral-Table-headerCell">Profession</th>
+              <th class="coral-Table-headerCell">Preferred transport</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="coral-Table-row">
+              <td class="coral-Table-cell">Witch</td>
+              <td class="coral-Table-cell">Broomstick</td>
+            </tr>
+            <tr class="coral-Table-row">
+              <td class="coral-Table-cell">Alien</td>
+              <td class="coral-Table-cell">UFO</td>
+            </tr>
+          </tbody>
+      </table>
+    +example-pre-only().
+      <script>
+        var quickActions = new Coral.QuickActions();
+
+        quickActions.id = 'quickActions';
+
+        quickActions.target = '_prev'; // Let's use the previous element as target
+        quickActions.threshold = '2'; // .. and limit the number of Items we show before collapse
+        quickActions.placement = 'bottom'; // .. and place at the bottom of the target.
+
+        var target = document.getElementById('quickActionsTarget');
+        target.parentNode.insertBefore(quickActions, target.nextSibling); // Add to the DOM
+      </script>
+
+  p.
+    The QuickActions implement the Collection API as a way of manipulating the action Items. It provides add(), remove(), clear(),
+    and getAll(), as well as their corresponding events to keep track of the Items. Check
+    <a class='coral-Link' href='Coral.Collection.html'>Coral.Collection</a> for more information.
+
+  +document-subsection('Manually add Items to the QuickActions', 'Below we use the Coral.Collection API via the items property to add some actions to the example.')
+    +example-pre-only().
+      <script>
+        jQuery(function ($) {
+          var quickActions = document.querySelector('#quickActions');
+          var item1 = {
+            icon: 'download',
+            content: {
+              textContent: 'Download this table'
+            },
+            type: 'anchor',
+            href: '#'
+          };
+          var item2 = {
+            icon: 'copy',
+            content: {
+              textContent: 'Copy this table'
+            }
+          };
+          var item3 = {
+            icon: 'share',
+            content: {
+              textContent: 'Share this table'
+            }
+          };
+
+          quickActions.items.add(item1);
+          quickActions.items.add(item2);
+          quickActions.items.add(item3);
+        });
+      </script>
+
+  +document-subsection('Handling click of an action item', 'The following shows how to respond to user clicks on a QuickActions item. Click action items in the example and view the log output below.')
+    +example-pre-only().
+      <script>
+        jQuery(function ($) {
+          var console = $('#quickActionsLog');
+          var quickActions = document.querySelector('#quickActions');
+          quickActions.addEventListener('click', function(event) {
+            if (event.target.tagName.toLowerCase() === 'coral-quickactions-item') {
+              console.log('item: ' + event.target + ' textContent: ' + event.target.content.textContent);
+            }
+          });
+        });
+      </script>
+
+  +log('quickActionsLog')
+
+  +document-subsection('Preventing hide on action item click', 'Use event.preventDefault() in the click event handler to suppress the hide of the QuickActions. Note that if the mouse exits the target, the QuickActions will still hide even if default is prevented.')
+    +example-pre-only().
+      <script>
+        jQuery(function ($) {
+          var quickActions = document.querySelector('#exampleQuickActions');
+          quickActions.addEventListener('click', function(event) {
+            if (event.target.tagName.toLowerCase() === 'coral-quickactions-item') {
+              event.preventDefault();
+              // QuickActions stay shown.
+            }
+          });
+        });
+      </script>

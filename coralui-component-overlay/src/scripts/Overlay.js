@@ -139,8 +139,6 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
   /**
    The element the overlay should position relative to. It accepts values from {@link Coral.Overlay.target}, as
    well as a DOM element or a CSS selector. If a CSS selector is provided, the first matching element will be used.
-   If a target is not specified, the overlay will not respect {@link Coral.Overlay#alignMy},
-   {@link Coral.Overlay#alignAt}, or {@link Coral.Overlay#collision}.
    
    @type {Coral.Overlay.target|?HTMLElement|String}
    @default null
@@ -291,7 +289,7 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
   }
   
   /**
-   The placement of the overlay. This property sets {@link Coral.Overlay#alignMy} and {@link Coral.Overlay#alignAt}.
+   The placement of the overlay.
    
    @type {Coral.Overlay.placement}
    @default Coral.Overlay.placement.RIGHT
