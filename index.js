@@ -7,6 +7,7 @@ import {Calendar} from 'coralui-component-calendar';
 import {Card, CardProperty, CardTitle, CardContext, CardDescription, CardAsset, CardContent, CardOverlay, CardPropertyContent, CardPropertyList} from 'coralui-component-card';
 import {CharacterCount} from 'coralui-component-charactercount';
 import {Checkbox, CheckboxLabel} from 'coralui-component-checkbox';
+import {CycleButton, CycleButtonItem, CycleButtonAction} from 'coralui-component-cyclebutton';
 import {Dialog, DialogHeader, DialogContent, DialogFooter} from 'coralui-component-dialog';
 import {DragAction} from 'coralui-dragaction';
 import {Drawer, DrawerContent} from 'coralui-component-drawer';
@@ -67,6 +68,9 @@ export {
   CharacterCount,
   Checkbox,
   CheckboxLabel,
+  CycleButton,
+  CycleButtonItem,
+  CycleButtonAction,
   Dialog,
   DialogHeader,
   DialogContent,

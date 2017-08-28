@@ -16,6 +16,7 @@
     "coralui-component-card": "file:coralui-component-card",
     "coralui-component-charactercount": "file:coralui-component-charactercount",
     "coralui-component-checkbox": "file:coralui-component-checkbox",
+    "coralui-component-cyclebutton": "file:coralui-component-cyclebutton",
     "coralui-component-dialog": "file:coralui-component-dialog",
     "coralui-component-drawer": "file:coralui-component-drawer",
     "coralui-component-fileupload": "file:coralui-component-fileupload",

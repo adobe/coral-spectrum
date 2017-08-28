@@ -1,0 +1,60 @@
+script.
+  if (typeof Coral.Configurator === 'function') {
+    var configurator = new Coral.Configurator().set({
+      component: Coral.CycleButton,
+      fields: [
+        {
+          label: 'Threshold',
+          prop: 'threshold',
+          type: 'spinner',
+          min: 0,
+          value: 3
+        },
+        {
+          label: 'Icon',
+          prop: 'icon',
+          type: 'text',
+          value: 'checkCircle'
+        },
+        {
+          label: 'Display Mode',
+          prop: 'displayMode',
+          type: 'select',
+          value: 'icon',
+          options: {
+            'Icon': 'icon',
+            'Text': 'text',
+            'Icon and Text': 'icontext'
+          }
+        }
+      ],
+      componentEvents: [
+        'coral-cyclebutton:change'
+      ],
+      items: [
+        {
+          content: {
+            innerHTML: 'View User'
+          },
+          icon: 'user'
+        },
+        {
+          content: {
+            innerHTML: 'View System'
+          },
+          icon: 'gear'
+        },
+        {
+          content: {
+            innerHTML: 'View Email'
+          },
+          icon: 'email'
+        },
+        {
+          content: {
+            innerHTML: 'Text Only'
+          }
+        }
+      ]
+    }).insertAfterLastScript();
+  }

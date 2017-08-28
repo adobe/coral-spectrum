@@ -176,6 +176,7 @@ class QuickActions extends Overlay {
    @type {Number}
    @default 4
    @htmlattribute threshold
+   @htmlattributereflected
    @memberof Coral.QuickActions#
    */
   get threshold() {
@@ -1091,24 +1092,21 @@ class QuickActions extends Overlay {
     this.setAttribute('tabIndex', '-1');
     this.setAttribute('role', 'menu');
     
+    ['moreButton', 'overlay'].forEach((handleName) => {
+      const handle = this.querySelector(`[handle="${handleName}"]`);
+      if (handle) {
+        handle.remove();
+      }
+    }, this);
+  
     const frag = document.createDocumentFragment();
     
-    // Support cloneNode
-    while (this.firstChild) {
-      const child = this.firstChild;
-      if (child.nodeType === Node.TEXT_NODE || child.nodeName === 'CORAL-QUICKACTIONS-ITEM') {
-        frag.appendChild(child);
-      }
-      else {
-        this.removeChild(child);
-      }
-    }
-  
     // Render the base layout
     frag.appendChild(this._elements.moreButton);
     frag.appendChild(this._elements.overlay);
     
-    this.insertBefore(frag, this.firstElementChild);
+    // Inserting the template before the items
+    this.insertBefore(frag, this.firstChild);
   
     // We make sure the items are shadowed
     const items = this.items.getAll();
