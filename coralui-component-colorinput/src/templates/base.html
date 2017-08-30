@@ -1,0 +1,33 @@
+<div handle="defaultPalette">
+  <coral-colorinput-item value=""></coral-colorinput-item>
+  <coral-colorinput-item value="#001F3F"></coral-colorinput-item>
+  <coral-colorinput-item value="#0074D9"></coral-colorinput-item>
+  <coral-colorinput-item value="#7FDBFF"></coral-colorinput-item>
+  <coral-colorinput-item value="#39CCCC"></coral-colorinput-item>
+  <coral-colorinput-item value="#3D9970"></coral-colorinput-item>
+  <coral-colorinput-item value="#2ECC40"></coral-colorinput-item>
+  <coral-colorinput-item value="#01FF70"></coral-colorinput-item>
+  <coral-colorinput-item value="#FFDC00"></coral-colorinput-item>
+  <coral-colorinput-item value="#FF851B"></coral-colorinput-item>
+  <coral-colorinput-item value="#FF4136"></coral-colorinput-item>
+  <coral-colorinput-item value="#85144B"></coral-colorinput-item>
+  <coral-colorinput-item value="#F012BE"></coral-colorinput-item>
+  <coral-colorinput-item value="#B10DC9"></coral-colorinput-item>
+  <coral-colorinput-item value="#111111"></coral-colorinput-item>
+  <coral-colorinput-item value="#AAAAAA"></coral-colorinput-item>
+  <coral-colorinput-item value="#DDDDDD"></coral-colorinput-item>
+</div>
+<js>var uid = Coral.commons.getUID();</js>
+<input handle="input" is="coral-textfield" class="coral3-ColorInput-input" type="text" value="">
+<div class="coral3-ColorInput-buttonWrapper" handle="buttonWrapper" role="presentation">
+  <button handle="colorPreview" is="coral-button" variant="default" class="coral3-ColorInput-button coral3-ColorInput-preview" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="{{uid}}"></button>
+  <js>
+    this.colorPreview.label.classList.add('u-coral-screenReaderOnly');
+    this.colorPreview.label.innerText = Coral.i18n.get('Color Picker');
+    this.id = uid + '-coral-button-label';
+  </js>
+</div>
+<coral-overlay role="dialog" focusonshow="on" trapfocus="on" handle="overlay" breadthoffset="+50%r - 50%p" lengthoffset="5px" placement="bottom" id="{{uid}}" aria-label="{{Coral.i18n.get('Color Picker')}}">
+  <coral-colorinput-colorproperties handle="propertiesView"></coral-colorinput-colorproperties>
+  <coral-colorinput-swatches handle="swatchesView"></coral-colorinput-swatches>
+</coral-overlay>

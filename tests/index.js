@@ -7,6 +7,7 @@ import 'coralui-component-calendar/tests';
 import 'coralui-component-card/tests';
 import 'coralui-component-charactercount/tests';
 import 'coralui-component-checkbox/tests';
+import 'coralui-component-colorinput/tests';
 import 'coralui-component-cyclebutton/tests';
 import 'coralui-component-dialog/tests';
 import 'coralui-component-drawer/tests';

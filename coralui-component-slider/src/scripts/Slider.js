@@ -723,11 +723,11 @@ class Slider extends FormField(Component(HTMLElement)) {
     
     if (this.orientation === orientation.VERTICAL) {
       const elementHeight = boundingClientRect.height;
-      percent = ((this.offsetTop + elementHeight) - posY) / elementHeight;
+      percent = ((boundingClientRect.top + elementHeight) - posY) / elementHeight;
     }
     else {
       const elementWidth = boundingClientRect.width;
-      percent = ((posX - this.offsetLeft) / elementWidth);
+      percent = ((posX - boundingClientRect.left) / elementWidth);
     }
     
     // if the bounds are restricted, as with _handleClick, we shouldn't change the value.

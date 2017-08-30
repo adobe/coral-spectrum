@@ -1,0 +1,21 @@
+{
+  "name": "coralui-component-colorinput",
+  "version": "3.0.0",
+  "description": "ColorInput component",
+  "dependencies": {
+    "@coralui/coralui-theme-cloudui": "^9.3.0",
+    "coralui-mixin-component": "file:../coralui-mixin-component",
+    "coralui-mixin-formfield": "file:../coralui-mixin-formfield",
+    "coralui-component-button": "file:../coralui-component-button",
+    "coralui-component-tooltip": "file:../coralui-component-tooltip",
+    "coralui-component-slider": "file:../coralui-component-slider",
+    "coralui-component-textfield": "file:../coralui-component-textfield",
+    "coralui-component-overlay": "file:../coralui-component-overlay",
+    "coralui-externals": "file:../coralui-externals",
+    "coralui-util": "file:../coralui-util"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "coralui-gulp": "file:../coralui-gulp"
+  }
+}
