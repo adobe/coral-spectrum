@@ -15,6 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
+import {Promise} from 'coralui-externals';
 import resizer from '../templates/resizer';
 
 /**
@@ -297,26 +298,52 @@ commons.nextFrame = function(callback) {
    */
   
   /**
-   Checks, if a Coral components and all nested components are ready, which means their
-   <code>_initialize</code> and <code>_render</code> methods have been called. If so, the provided callback function is executed
+   Checks if a Coral components and all nested Coral components are defined as Custom Elements.
    
    @param {HTMLElement} element
-   The element that should be watched for ready events.
+   The element that should be watched.
    @param {Coral.commons~readyCallback} callback
    The callback to call when all components are ready.
-   @deprecated
    */
   commons.ready = function(element, callback) {
-    console.warn('Coral.commons.ready has been deprecated. Please use window.customElements.whenDefined(name) instead.');
+    const self = this;
+    let root = element;
     
     if (typeof element === 'function') {
       callback = element;
+      root = document.body;
     }
     
+    // Holds promises that resolve when the elements is defined
+    const promises = [];
+    
     // @todo use ':not(:defined)' once supported to detect coral not yet defined custom elements
-    window.setTimeout(() => {
-      callback((element instanceof HTMLElement && element) || this);
-    });
+    const elements = root.querySelectorAll('*');
+    
+    // Finds the custom elements name and adds it to the promises
+    const addName = function(el) {
+      if (el.toString().indexOf('Coral') === 0) {
+        const name = root.toString().split('.').map((item) => item.toLowerCase()).join('-');
+        promises.push(window.customElements.whenDefined(name));
+      }
+    };
+    
+    // Don't forget to check root
+    addName(root);
+    
+    // Check all descending elements
+    for (let i = 0; i < elements.length; i++) {
+      addName(elements[i]);
+    }
+    
+    // Call callback once all defined
+    Promise.all(promises)
+      .then(() => {
+        callback((element instanceof HTMLElement && element) || self);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 }());
 
