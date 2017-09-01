@@ -24,6 +24,7 @@ import {Progress, ProgressLabel} from 'coralui-component-progress';
 import {QuickActions, QuickActionsItem} from 'coralui-component-quickactions';
 import {Radio, RadioLabel} from 'coralui-component-radio';
 import {Shell, ShellContent, ShellHeader, ShellHomeAnchor, ShellHomeAnchorLabel, ShellHelp, ShellHelpItem, ShellMenu, ShellMenuBar, ShellMenuBarItem, ShellUser, ShellUserContent, ShellUserFooter, ShellUserHeading, ShellUserName, ShellUserSubheading, ShellWorkspaces, ShellWorkspace, ShellSolutionSwitcher, ShellSolutions, ShellSolution, ShellSolutionLabel, ShellOrgSwitcher, ShellOrganization, ShellSuborganization, ShellOrgSwitcherFooter} from 'coralui-component-shell';
+import {Select, SelectItem} from 'coralui-component-select';
 import {SelectList, SelectListGroup, SelectListItem} from 'coralui-component-selectlist';
 import {Search} from 'coralui-component-search';
 import {Slider, SliderItem, RangedSlider} from 'coralui-component-slider';
@@ -109,6 +110,8 @@ export {
   Radio,
   RadioLabel,
   Search,
+  Select,
+  SelectItem,
   SelectList,
   SelectListGroup,
   SelectListItem,

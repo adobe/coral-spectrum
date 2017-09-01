@@ -1,0 +1,103 @@
+script.
+  if (typeof Coral.Configurator === 'function') {
+    var configurator = new Coral.Configurator().set({
+      component: Coral.Select,
+      fields: [
+        {
+          label: 'Name',
+          prop: 'name',
+          type: 'text',
+          value: 'Select'
+        },
+        {
+          label: 'Placeholder',
+          prop: 'placeholder',
+          type: 'text',
+          value: 'Choose an item'
+        },
+        {
+          label: 'Variant',
+          prop: 'variant',
+          type: 'select',
+          value: 'default',
+          options: {
+            'Default': 'default',
+            'Quiet': 'quiet'
+          }
+        },
+        {
+          label: 'is disabled',
+          prop: 'disabled',
+          value: false,
+          type: 'checkbox'
+        },
+        {
+          label: 'is invalid',
+          prop: 'invalid',
+          value: false,
+          type: 'checkbox'
+        },
+        {
+          label: 'is loading',
+          prop: 'loading',
+          type: 'checkbox',
+          value: false
+        },
+        {
+          label: 'is multiple',
+          prop: 'multiple',
+          type: 'checkbox',
+          value: false
+        },
+        {
+          label: 'is readonly',
+          prop: 'readOnly',
+          value: false,
+          type: 'checkbox'
+        },
+        {
+          label: 'is required',
+          prop: 'required',
+          type: 'checkbox',
+          value: false
+        }
+      ],
+      items: [
+        {
+          content: {
+            textContent: 'Africa'
+          },
+          disabled: false
+        },
+        {
+          content: {
+            textContent: 'America'
+          },
+          disabled: false
+        },
+        {
+          content: {
+            textContent: 'Asia'
+          },
+          disabled: false
+        },
+        {
+          content: {
+            textContent: 'Europe'
+          },
+          disabled: false
+        },
+        {
+          content: {
+            textContent: 'Oceania'
+          },
+          disabled: false
+        }
+      ],
+      componentEvents: [
+        'change',
+        'coral-select:hideitems',
+        'coral-select:showitems'
+      ]
+    }).insertAfterLastScript();
+  }

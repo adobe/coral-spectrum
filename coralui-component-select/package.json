@@ -1,0 +1,22 @@
+{
+  "name": "coralui-component-select",
+  "version": "5.0.0",
+  "description": "Select component",
+  "dependencies": {
+    "@coralui/coralui-theme-cloudui": "^9.3.0",
+    "coralui-mixin-component": "file:../coralui-mixin-component",
+    "coralui-mixin-formfield": "file:../coralui-mixin-formfield",
+    "coralui-component-button": "file:../coralui-component-button",
+    "coralui-component-icon": "file:../coralui-component-icon",
+    "coralui-component-overlay": "file:../coralui-component-overlay",
+    "coralui-component-selectlist": "file:../coralui-component-selectlist",
+    "coralui-component-taglist": "file:../coralui-component-taglist",
+    "coralui-collection": "file:../coralui-collection",
+    "coralui-externals": "file:../coralui-externals",
+    "coralui-util": "file:../coralui-util"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "coralui-gulp": "file:../coralui-gulp"
+  }
+}

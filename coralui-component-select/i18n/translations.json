@@ -1,0 +1,35 @@
+{
+  "en-US": {
+    "Select": "Select"
+  },
+  "fr-FR": {
+    "Select": "Sélectionner"
+  },
+  "de-DE": {
+    "Select": "Auswählen"
+  },
+  "it-IT": {
+    "Select": "Seleziona"
+  },
+  "es-ES": {
+    "Select": "Seleccionar"
+  },
+  "pt-BR": {
+    "Select": "Selecionar"
+  },
+  "ja-JP": {
+    "Select": "選択"
+  },
+  "ko-KR": {
+    "Select": "선택"
+  },
+  "zh-CN": {
+    "Select": "选择"
+  },
+  "zh-TW": {
+    "Select": "選取"
+  },
+  "nl-NL": {
+    "Select": "Selecteren"
+  }
+}

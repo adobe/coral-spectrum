@@ -941,8 +941,6 @@ class QuickActions extends Overlay {
   
   /** @ignore */
   _onOverlayPositioned(event) {
-    this.style.maxWidth = 'none';
-    
     if (event.target === this._elements.overlay) {
       // do not allow internal Overlay events to escape QuickActions
       event.stopImmediatePropagation();
@@ -1085,6 +1083,9 @@ class QuickActions extends Overlay {
   
   connectedCallback() {
     super.connectedCallback();
+  
+    // @todo move to theme
+    this.style.maxWidth = 'none';
     
     this.classList.add(CLASSNAME);
     
@@ -1107,12 +1108,6 @@ class QuickActions extends Overlay {
     
     // Inserting the template before the items
     this.insertBefore(frag, this.firstChild);
-  
-    // We make sure the items are shadowed
-    const items = this.items.getAll();
-    for (let i = 0, itemCount = items.length; i < itemCount; i++) {
-      this._attachItem(items[i], i);
-    }
   }
 }
 

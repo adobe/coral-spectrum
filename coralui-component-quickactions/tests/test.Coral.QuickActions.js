@@ -243,15 +243,15 @@ describe('Coral.QuickActions', function() {
       const el = helpers.build(window.__html__['Coral.QuickActions.base.html']);
       el.target = targetElement;
       var spy = sinon.spy();
-
-      // Open the quickActions
-      el.open = true;
-      
+  
       el.on('coral-overlay:beforeopen', spy);
       el.on('coral-overlay:beforeclose', spy);
       el.on('coral-overlay:open', spy);
       el.on('coral-overlay:close', spy);
       el.on('coral-overlay:positioned', spy);
+      
+      // Open the quickActions
+      el.open = true;
 
       // Open and close the overlay to trigger Coral.Overlay events
       el._elements.overlay.open = true;
@@ -260,7 +260,7 @@ describe('Coral.QuickActions', function() {
         el._elements.overlay.open = false;
   
         helpers.next(function() {
-          expect(spy.callCount).to.equal(2, 'Only coral-overlay:beforeopen and coral-overlay:open should propagate');
+          expect(spy.callCount).to.equal(2, 'Only coral-overlay:beforeopen and coral-overlay:open from coral-quickactions should propagate');
           done();
         });
       });
@@ -640,16 +640,9 @@ describe('Coral.QuickActions', function() {
       });
     });
 
-    it('should override the inline max-width applied by extended Coral.Overlay to prevent collapse', function(done) {
+    it('should override the inline max-width applied by extended Coral.Overlay to prevent collapse', function() {
       const el = helpers.build(window.__html__['Coral.QuickActions.empty.html']);
-      el.target = targetElement;
-      el.open = true;
-  
-      // Wait for quickactions to be open to read layout
-      helpers.next(function() {
-        expect(el.style.maxWidth === 'none').to.equal(true, 'max-width is correctly overridden');
-        done();
-      });
+      expect(el.style.maxWidth === 'none').to.equal(true, 'max-width is correctly overridden');
     });
   });
 });

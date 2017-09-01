@@ -1,0 +1,25 @@
+<js>
+  var buttonId = Coral.commons.getUID();
+  var listId = Coral.commons.getUID();
+</js>
+<button handle="button" type="button" is="coral-button" block role="combobox" aria-expanded="false" aria-haspopup="true" id="{{buttonId}}" aria-controls="{{listId}}" aria-owns="{{listId}}" class="coral3-Select-button">
+  <span handle="label" class="coral3-Select-label"></span>
+  <!-- @todo add margin-left override to theme -->
+  <coral-button-label style="margin-left:0" handle="buttonLabel"></coral-button-label>
+  <coral-icon handle="icon" icon="chevronDown" size="xxs" class="coral3-Select-openIcon"></coral-icon>
+</button>
+<js>
+  // Since we don't have a mutation observer anymore to replace content zones magically, we have to do it manually.
+  this.button._elements.label = this.buttonLabel;
+</js>
+<input handle="input" type="hidden">
+<select handle="nativeSelect" class="coral3-Select-select" tabindex="-1"></select>
+<coral-taglist handle="taglist" class="coral3-Select-tagList"></coral-taglist>
+<coral-overlay handle="overlay" class="coral3-Select-overlay" placement="bottom" collision="fit" trapfocus="on" focusonshow="on" target="#{{buttonId}}" role="presentation">
+  <js>
+    // Constrains the size of the list to 6 items.
+    // @todo move this to theme
+    var maxHeight = 'max-height:' + (42 * 6) + 'px';
+  </js>
+  <coral-selectlist style="{{maxHeight}}" handle="list" class="coral3-Select-selectList" role="listbox" id="{{listId}}"></coral-selectlist>
+</coral-overlay>

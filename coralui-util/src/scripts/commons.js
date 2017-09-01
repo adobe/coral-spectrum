@@ -314,16 +314,20 @@ commons.nextFrame = function(callback) {
       root = document.body;
     }
     
-    // Holds promises that resolve when the elements is defined
-    const promises = [];
+    if (!root) {
+      root = document.body;
+    }
     
     // @todo use ':not(:defined)' once supported to detect coral not yet defined custom elements
     const elements = root.querySelectorAll('*');
+  
+    // Holds promises that resolve when the elements is defined
+    const promises = [];
     
     // Finds the custom elements name and adds it to the promises
     const addName = function(el) {
       if (el.toString().indexOf('Coral') === 0) {
-        const name = root.toString().split('.').map((item) => item.toLowerCase()).join('-');
+        const name = el.toString().split('.').map((item) => item.toLowerCase()).join('-');
         promises.push(window.customElements.whenDefined(name));
       }
     };

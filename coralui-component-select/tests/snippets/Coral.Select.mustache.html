@@ -1,0 +1,5 @@
+<coral-select id="payment-method">
+  {{#each paymentMethods}}
+    <coral-select-item {{#is id viewState}} selected{{/is}} value={{id}}> {{{label}}} </coral-select-item>
+  {{/each}}
+</coral-select>

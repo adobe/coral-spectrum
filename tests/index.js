@@ -23,6 +23,7 @@ import 'coralui-component-progress/tests';
 import 'coralui-component-quickactions/tests';
 import 'coralui-component-radio/tests';
 import 'coralui-component-search/tests';
+import 'coralui-component-select/tests';
 import 'coralui-component-selectlist/tests';
 import 'coralui-component-shell/tests';
 import 'coralui-component-slider/tests';
