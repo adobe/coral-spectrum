@@ -1,0 +1,79 @@
+{
+  "en-US": {
+    "am": "am",
+    "pm": "pm",
+    "Hours": "Hours",
+    "Minutes": "Minutes",
+    "AM/PM": "AM/PM"
+  },
+  "de-DE": {
+    "am": "vormittags",
+    "pm": "nachmittags",
+    "Hours": "Stunden",
+    "Minutes": "Minuten",
+    "AM/PM": "AM/PM"
+  },
+  "fr-FR": {
+    "am": "matin",
+    "pm": "après-midi",
+    "Hours": "Heures",
+    "Minutes": "Minutes",
+    "AM/PM": "AM/PM"
+  },
+  "ja-JP": {
+    "am": "午前",
+    "pm": "午後",
+    "Hours": "時間",
+    "Minutes": "分",
+    "AM/PM": "午前 / 午後"
+  },
+  "es-ES": {
+    "am": "a. m.",
+    "pm": "p. m.",
+    "Hours": "Horas",
+    "Minutes": "Minutos",
+    "AM/PM": "a. m./p. m."
+  },
+  "ko-KR": {
+    "am": "오전",
+    "pm": "오후",
+    "Hours": "시간",
+    "Minutes": "분",
+    "AM/PM": "오전/오후"
+  },
+  "zh-CN": {
+    "am": "上午",
+    "pm": "下午",
+    "Hours": "小时",
+    "Minutes": "分钟",
+    "AM/PM": "上午/下午"
+  },
+  "zh-TW": {
+    "am": "上午",
+    "pm": "下午",
+    "Hours": "小時",
+    "Minutes": "分鐘",
+    "AM/PM": "上午/下午"
+  },
+  "pt-BR": {
+    "am": "am",
+    "pm": "pm",
+    "Hours": "Horas",
+    "Minutes": "Minutos",
+    "AM/PM": "AM/PM"
+  },
+  "it-IT": {
+    "am": "am",
+    "pm": "pm",
+    "Hours": "Ore",
+    "Minutes": "Minuti",
+    "AM/PM": "AM/PM"
+  },
+  "nl-NL": {
+    "am": "am",
+    "pm": "pm",
+    "Hours": "Uren",
+    "Minutes": "Minuten",
+    "AM/PM": "AM/PM"
+  }
+}

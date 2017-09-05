@@ -23,15 +23,8 @@ let globalLocale = document.documentElement.lang || window.navigator.language ||
 
 // Uses Intl.DateTimeFormat to return a formatted date string
 const dateTimeFormat = function(locale, options, date) {
-  let formattedDateString = '';
-  try {
-    formattedDateString = new window.Intl.DateTimeFormat(locale, options).format(date);
-  }
-  catch (e) {
-    console.warn(e.message);
-  }
-  
-  return formattedDateString;
+  // We might want to use new window.Intl.DateTimeFormat(locale, options).format(date); if perf is indeed better
+  return date.toLocaleTimeString(locale, options);
 };
 
 /**
@@ -59,8 +52,25 @@ class DateTime {
         this._date = value.length ? new Date(value[0], value[1] || 0, value[2] || 1) : new Date();
       }
       else {
-        // Create a Date instance from the value or use current day if value is missing
-        this._date = this._value ? new Date(this._value) : new Date();
+        if (typeof value === 'string') {
+          const isTime = value.indexOf(':') === 2;
+          
+          // For time, we only need to set hours and minutes using current date
+          if (isTime) {
+            const time = value.split(':');
+            this._date = new Date();
+            this._date.setHours(time[0]);
+            this._date.setMinutes(time[1]);
+          }
+          else {
+            // If string is invalid, the date will be invalid too
+            this._date = new Date(this._value);
+          }
+        }
+        else {
+          // Create a Date instance from the value or use current day if value is missing
+          this._date = this._value ? new Date(this._value) : new Date();
+        }
       }
     }
   }
@@ -119,6 +129,23 @@ class DateTime {
     else if (format === 'dddd') {
       formattedDateString += dateTimeFormat(this._locale, {weekday: 'long'}, this._date);
     }
+    else if (format === 'HH:mm') {
+      formattedDateString += dateTimeFormat(this._locale, {hour: '2-digit', hour12: false}, this._date);
+      formattedDateString += ':';
+      // 2-digit is ignored for minutes so we fix it manually
+      let minutes = dateTimeFormat(this._locale, {minute: '2-digit'}, this._date);
+      minutes = minutes.length === 1 ? `0${minutes}` : minutes;
+      formattedDateString += minutes;
+    }
+    else if (format === 'HH') {
+      formattedDateString += dateTimeFormat(this._locale, {hour: '2-digit', hour12: false}, this._date);
+    }
+    else if (format === 'mm') {
+      // 2-digit is ignored for minutes so we fix it manually
+      let minutes = dateTimeFormat(this._locale, {minute: '2-digit'}, this._date);
+      minutes = minutes.length === 1 ? `0${minutes}` : minutes;
+      formattedDateString += minutes;
+    }
     else {
       format = typeof format === 'object' ? format : {};
       formattedDateString = dateTimeFormat(this._locale, format, this._date);
@@ -156,6 +183,30 @@ class DateTime {
     }
     else {
       return this._date.getDay();
+    }
+  }
+  
+  // See https://momentjs.com/docs/#/get-set/hour/
+  hours(hours) {
+    if (typeof hours === 'number') {
+      this._date.setHours(hours);
+      
+      return this;
+    }
+    else {
+      return this._date.getHours();
+    }
+  }
+  
+  // See https://momentjs.com/docs/#/get-set/minute/
+  minutes(minutes) {
+    if (typeof minutes === 'number') {
+      this._date.setMinutes(minutes);
+  
+      return this;
+    }
+    else {
+      this._date.getMinutes();
     }
   }
   

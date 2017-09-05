@@ -7,6 +7,7 @@ import {Calendar} from 'coralui-component-calendar';
 import {Card, CardProperty, CardTitle, CardContext, CardDescription, CardAsset, CardContent, CardOverlay, CardPropertyContent, CardPropertyList} from 'coralui-component-card';
 import {CharacterCount} from 'coralui-component-charactercount';
 import {Checkbox, CheckboxLabel} from 'coralui-component-checkbox';
+import {Clock} from 'coralui-component-clock';
 import {Color, ColorInput, ColorInputItem, ColorInputSwatches, ColorInputSwatch, ColorInputSlider, ColorInputColorProperties} from 'coralui-component-colorinput';
 import {CycleButton, CycleButtonItem, CycleButtonAction} from 'coralui-component-cyclebutton';
 import {Dialog, DialogHeader, DialogContent, DialogFooter} from 'coralui-component-dialog';
@@ -70,6 +71,7 @@ export {
   CharacterCount,
   Checkbox,
   CheckboxLabel,
+  Clock,
   Color,
   ColorInput,
   ColorInputItem,
