@@ -19,6 +19,7 @@
     "coralui-component-clock": "file:coralui-component-clock",
     "coralui-component-colorinput": "file:coralui-component-colorinput",
     "coralui-component-cyclebutton": "file:coralui-component-cyclebutton",
+    "coralui-component-datepicker": "file:coralui-component-datepicker",
     "coralui-component-dialog": "file:coralui-component-dialog",
     "coralui-component-drawer": "file:coralui-component-drawer",
     "coralui-component-fileupload": "file:coralui-component-fileupload",

@@ -23,8 +23,6 @@ import 'coralui-component-select';
 import base from '../templates/base';
 import {transform, commons, validate, i18n} from 'coralui-util';
 
-const Moment = window.moment || DateTime;
-
 // Default for display and value format
 const DEFAULT_HOUR_FORMAT = 'HH';
 const DEFAULT_MINUTE_FORMAT = 'mm';
@@ -69,6 +67,9 @@ for (const variantValue in variant) {
 class Clock extends FormField(Component(HTMLElement)) {
   constructor() {
     super();
+  
+    // Default value
+    this._value = '';
     
     // Events
     this._delegateEvents(commons.extend(this._events, {
@@ -78,15 +79,12 @@ class Clock extends FormField(Component(HTMLElement)) {
     // Prepare templates
     this._elements = {};
     base.call(this._elements);
-    
-    // Default value
-    this._value = '';
   }
   
   /**
    The format used to display the selected time to the user. If the user manually types a time, this format
-   will be used to parse the value. See http://momentjs.com/docs/#/displaying/ for valid format string
-   options.
+   will be used to parse the value. 'HH:mm' is supported by default. Include momentjs to support additional format
+   string options see http://momentjs.com/docs/#/displaying/.
    
    @type {String}
    @default "HH:mm"
@@ -107,7 +105,8 @@ class Clock extends FormField(Component(HTMLElement)) {
   /**
    The format to use on expressing the time as a string on the <code>value</code> attribute. The value
    will be sent to the server using this format. If an empty string is provided, then the default value per type
-   will be used. See http://momentjs.com/docs/#/displaying/ for valid format string options.
+   will be used. 'HH:mm' is supported by default. Include momentjs to support additional format string options
+   see http://momentjs.com/docs/#/displaying/.
    
    @type {String}
    @default "HH:mm"
@@ -146,7 +145,7 @@ class Clock extends FormField(Component(HTMLElement)) {
     return this._value ? new Date(this._value.toDate().getTime()) : null;
   }
   set valueAsDate(value) {
-    this.value = (value instanceof Date) ? new Moment(value, null, true).format(this.valueFormat) : '';
+    this.value = (value instanceof Date) ? new DateTime.Moment(value, null, true).format(this.valueFormat) : '';
   }
   
   /**
@@ -251,11 +250,12 @@ class Clock extends FormField(Component(HTMLElement)) {
     return this._getValueAsString(this._value, this.valueFormat);
   }
   set value(value) {
+    value = typeof value === 'string' ? value : '';
     // This is used to change the value if valueformat is also set but afterwards
     this._originalValue = value;
     
     // we do strict conversion of the values
-    const time = new Moment(transform.string(value), this.valueFormat, true);
+    const time = new DateTime.Moment(value, this.valueFormat, true);
     this._value = time.isValid() ? time : '';
     this._elements.input.value = this.value;
   
@@ -420,7 +420,7 @@ class Clock extends FormField(Component(HTMLElement)) {
     // stops the event from leaving the component
     event.stopImmediatePropagation();
     
-    let newTime = new Moment();
+    let newTime = new DateTime.Moment();
     const oldTime = this._value;
     
     let hours = parseInt(this._elements.hours.value, 10);

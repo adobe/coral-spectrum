@@ -1,0 +1,46 @@
+{
+  "en-US": {
+    "Time": "Time",
+    "Calendar": "Calendar"
+  },
+  "de-DE": {
+    "Time": "Zeit",
+    "Calendar": "Kalender"
+  },
+  "fr-FR": {
+    "Time": "Heure",
+    "Calendar": "Calendrier"
+  },
+  "it-IT": {
+    "Time": "Ora",
+    "Calendar": "Calendario"
+  },
+  "ja-JP": {
+    "Time": "時間",
+    "Calendar": "カレンダー"
+  },
+  "es-ES": {
+    "Time": "Hora",
+    "Calendar": "Calendario"
+  },
+  "ko-KR": {
+    "Time": "시간",
+    "Calendar": "달력"
+  },
+  "zh-CN": {
+    "Time": "时间",
+    "Calendar": "日历"
+  },
+  "zh-TW": {
+    "Time": "時間",
+    "Calendar": "日曆"
+  },
+  "pt-BR": {
+    "Time": "Hora",
+    "Calendar": "Calendário"
+  },
+  "nl-NL": {
+    "Time": "Tijd",
+    "Calendar": "Kalender"
+  }
+}

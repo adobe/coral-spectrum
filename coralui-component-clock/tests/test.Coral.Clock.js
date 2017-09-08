@@ -44,20 +44,21 @@ describe('Coral.Clock', function() {
     });
   });
   
-  let Moment = window.moment;
-  const momentJS = window.moment;
-  
   // Run tests once with moment fallback and once with moment
   for (let useMomentJS = 0; useMomentJS < 2; useMomentJS++) {
+  
+    const momentJS = window.moment;
     
-    if (!useMomentJS) {
-      window.moment = undefined;
-      Moment = DateTime;
-    }
-    else {
-      window.moment = momentJS;
-      Moment = momentJS;
-    }
+    beforeEach(function() {
+      // Make sure Clock and tests use momentJS fallback
+      if (!useMomentJS) {
+        window.moment = undefined;
+      }
+      // Make sure Clock and tests use momentJS
+      else {
+        window.moment = momentJS;
+      }
+    });
   
     describe('API', function() {
       var el;
@@ -200,7 +201,7 @@ describe('Coral.Clock', function() {
         it('should reset value if a moment object is given', function() {
           el.value = '05:15';
   
-          el.value = new Moment();
+          el.value = new DateTime.Moment();
           expect(el.value).to.equal('');
           expect(el._elements.minutes.value).to.equal('');
           expect(el._elements.hours.value).to.equal('');
@@ -251,8 +252,9 @@ describe('Coral.Clock', function() {
         it('should accept dates', function() {
           var newDate = new Date();
           el.valueAsDate = newDate;
-          expect(new Moment(newDate).isSame(el.valueAsDate, 'hour')).to.be.true;
-          expect(new Moment(newDate).isSame(el.valueAsDate, 'minute')).to.be.true;
+          const time = new DateTime.Moment(newDate).toDate();
+          expect(el.valueAsDate.getHours()).to.equal(time.getHours());
+          expect(el.valueAsDate.getMinutes()).to.equal(time.getMinutes());
         });
   
         it('should reject date strings', function() {
@@ -274,7 +276,7 @@ describe('Coral.Clock', function() {
         });
   
         it('should not accept moment values', function() {
-          el.valueAsDate = new Moment();
+          el.valueAsDate = new DateTime.Moment();
   
           expect(el.value).to.equal('');
           expect(el._elements.minutes.value).to.equal('');
@@ -288,22 +290,22 @@ describe('Coral.Clock', function() {
         });
   
         it('should support different formats', function() {
-          el.value = '00:05';
-          el.valueFormat = 'H m';
-          expect(el.value).to.equal('0 5');
+          if (useMomentJS) {
+            el.value = '00:05';
+            el.valueFormat = 'H m';
+            expect(el.value).to.equal('0 5');
   
-          el.value = '15 15';
-          el.valueFormat = 'h';
-          expect(el.value).to.equal('3');
+            el.value = '15 15';
+            el.valueFormat = 'h';
+            expect(el.value).to.equal('3');
   
-          el.valueFormat = 'm';
-          expect(el.value).to.equal('15');
+            el.valueFormat = 'm';
+            expect(el.value).to.equal('15');
+          }
         });
   
         it('should reset to default when setting to empty string', function() {
           el.value = '08:03';
-          el.valueFormat = 'h-m';
-          expect(el.value).to.equal('8-3');
   
           el.valueFormat = '';
           expect(el.valueFormat).to.equal('HH:mm');
@@ -311,33 +313,34 @@ describe('Coral.Clock', function() {
         });
   
         it('should support AM/PM', function() {
-          el.value = '15:15';
-          el.valueFormat = 'hh-mm a';
-          expect(el.value).to.equal('03-15 pm');
+          if (useMomentJS) {
+            el.value = '15:15';
+            el.valueFormat = 'hh-mm a';
+            expect(el.value).to.equal('03-15 pm');
   
-          el.valueFormat = '';
-          el.value = '03:15';
-          el.valueFormat = 'hh-mm A';
-          expect(el.value).to.equal('03-15 AM');
+            el.valueFormat = '';
+            el.value = '03:15';
+            el.valueFormat = 'hh-mm A';
+            expect(el.value).to.equal('03-15 AM');
   
-          el.valueFormat = 'a hh:mm';
-          expect(el.value).to.equal('am 03:15');
+            el.valueFormat = 'a hh:mm';
+            expect(el.value).to.equal('am 03:15');
+          }
         });
       });
   
       describe('#displayFormat', function() {
         it('should update textContent of _elements.valueAsText element', function() {
           el.value = '15:15';
-          
           expect(el._elements.valueAsText.textContent).to.equal('15:15');
   
-          el.displayFormat = 'hh:mm a';
+          if (useMomentJS) {
+            el.displayFormat = 'hh:mm a';
+            expect(el._elements.valueAsText.textContent).to.equal('03:15 pm');
   
-          expect(el._elements.valueAsText.textContent).to.equal('03:15 pm');
-  
-          el.displayFormat = 'h:mm A';
-  
-          expect(el._elements.valueAsText.textContent).to.equal('3:15 PM');
+            el.displayFormat = 'h:mm A';
+            expect(el._elements.valueAsText.textContent).to.equal('3:15 PM');
+          }
         });
       });
   
@@ -444,37 +447,46 @@ describe('Coral.Clock', function() {
         });
   
         it('should support different formats (1)', function() {
-          const el = helpers.build(window.__html__['Coral.Clock.base.html']);
-          el.value = '00:05';
-          el.displayFormat = 'H m';
-          
-          expect(el._elements.hours.value).to.equal('0');
-          expect(el._elements.minutes.value).to.equal('5');
-          expect(el._elements.valueAsText.textContent).to.equal('0 5');
+          if (useMomentJS) {
+            const el = helpers.build(window.__html__['Coral.Clock.base.html']);
+            el.value = '00:05';
+            el.displayFormat = 'H m';
+  
+            expect(el._elements.hours.value).to.equal('0');
+            expect(el._elements.minutes.value).to.equal('5');
+            expect(el._elements.valueAsText.textContent).to.equal('0 5');
+          }
         });
   
         it('should support different formats (2)', function() {
-          const el = helpers.build(window.__html__['Coral.Clock.base.html']);
-          el.value = '15:15';
-          el.displayFormat = 'h';
-          
-          expect(el._elements.hours.value).to.equal('3');
-          expect(el._elements.valueAsText.textContent).to.equal('3');
+          if (useMomentJS) {
+            const el = helpers.build(window.__html__['Coral.Clock.base.html']);
+            el.value = '15:15';
+            el.displayFormat = 'h';
+  
+            expect(el._elements.hours.value).to.equal('3');
+            expect(el._elements.valueAsText.textContent).to.equal('3');
+          }
         });
   
         it('should support different formats (3)', function() {
-          const el = helpers.build(window.__html__['Coral.Clock.base.html']);
-          el.value = '15:15';
-          el.displayFormat = 'm';
-          
-          expect(el._elements.minutes.value).to.equal('15');
-          expect(el._elements.valueAsText.textContent).to.equal('15');
+          if (useMomentJS) {
+            const el = helpers.build(window.__html__['Coral.Clock.base.html']);
+            el.value = '15:15';
+            el.displayFormat = 'm';
+  
+            expect(el._elements.minutes.value).to.equal('15');
+            expect(el._elements.valueAsText.textContent).to.equal('15');
+          }
         });
   
         it('should reset to default when setting to empty string', function() {
           const el = helpers.build(window.__html__['Coral.Clock.displayformat.html']);
-          expect(el._elements.hours.value).to.equal('2');
-          expect(el._elements.minutes.value).to.equal('2');
+          
+          if (useMomentJS) {
+            expect(el._elements.hours.value).to.equal('2');
+            expect(el._elements.minutes.value).to.equal('2');
+          }
   
           el.displayFormat = '';
           
@@ -485,117 +497,143 @@ describe('Coral.Clock', function() {
         });
   
         it('should show the AM/PM selector', function() {
-          const el = helpers.build(window.__html__['Coral.Clock.periodpm.html']);
-          expect(el._elements.hours.value).to.equal('02');
-          expect(el._elements.minutes.value).to.equal('02');
+          if (useMomentJS) {
+            const el = helpers.build(window.__html__['Coral.Clock.periodpm.html']);
+            expect(el._elements.hours.value).to.equal('02');
+            expect(el._elements.minutes.value).to.equal('02');
   
-          expect(el._elements.period.hidden).to.be.false;
-          expect(el._elements.period.value).to.equal('pm');
-          expect(el._elements.valueAsText.textContent).to.equal('02:02 PM');
+            expect(el._elements.period.hidden).to.be.false;
+            expect(el._elements.period.value).to.equal('pm');
+            expect(el._elements.valueAsText.textContent).to.equal('02:02 PM');
+          }
         });
   
         it('should switch from PM to AM', function(done) {
-          const el = helpers.build(window.__html__['Coral.Clock.periodpm.html']);
-          // Open coral-select overlay
-          el.querySelector('button').click();
+          if (useMomentJS) {
+            const el = helpers.build(window.__html__['Coral.Clock.periodpm.html']);
+            // Open coral-select overlay
+            el.querySelector('button').click();
   
-          el.on('coral-overlay:open', function() {
-            // Select AM
-            el.querySelector('coral-selectlist-item:first-child').click();
-            
-            expect(el.value).to.equal('02:02');
-            expect(el._elements.hours.value).to.equal('02');
-            expect(el._elements.minutes.value).to.equal('02');
-            expect(el._elements.valueAsText.textContent).to.equal('02:02 AM');
-            
+            el.on('coral-overlay:open', function() {
+              // Select AM
+              el.querySelector('coral-selectlist-item:first-child').click();
+    
+              expect(el.value).to.equal('02:02');
+              expect(el._elements.hours.value).to.equal('02');
+              expect(el._elements.minutes.value).to.equal('02');
+              expect(el._elements.valueAsText.textContent).to.equal('02:02 AM');
+    
+              done();
+            });
+          }
+          else {
             done();
-          });
+          }
         });
   
         it('should switch from AM to PM', function(done) {
-          const el = helpers.build(window.__html__['Coral.Clock.periodam.html']);
-          // Open coral-select overlay
-          el.querySelector('button').click();
+          if (useMomentJS) {
+            const el = helpers.build(window.__html__['Coral.Clock.periodam.html']);
+            // Open coral-select overlay
+            el.querySelector('button').click();
   
-          el.on('coral-overlay:open', function() {
-            // Select PM
-            el.querySelector('coral-selectlist-item:last-child').click();
-            
-            expect(el.value).to.equal('14:02');
-            expect(el._elements.hours.value).to.equal('02');
-            expect(el._elements.minutes.value).to.equal('02');
-            expect(el._elements.valueAsText.textContent).to.equal('02:02 PM');
-  
+            el.on('coral-overlay:open', function() {
+              // Select PM
+              el.querySelector('coral-selectlist-item:last-child').click();
+    
+              expect(el.value).to.equal('14:02');
+              expect(el._elements.hours.value).to.equal('02');
+              expect(el._elements.minutes.value).to.equal('02');
+              expect(el._elements.valueAsText.textContent).to.equal('02:02 PM');
+    
+              done();
+            });
+          }
+          else {
             done();
-          });
+          }
         });
   
         it('should allow AM/PM lowercase and uppercase format', function() {
-          const el = helpers.build(window.__html__['Coral.Clock.periodpm.html']);
-          var items = el._elements.period.items.getAll();
-          var am = Coral.i18n.get('am');
-          var pm = Coral.i18n.get('pm');
-    
-          expect(items[0].textContent).to.equal(am.toUpperCase());
-          expect(items[1].textContent).to.equal(pm.toUpperCase());
-    
-          el.displayFormat = 'hh:mm a';
-    
-          expect(items[0].textContent).to.equal(am);
-          expect(items[1].textContent).to.equal(pm);
-          expect(el._elements.valueAsText.textContent).to.equal('02:02 pm');
+          if (useMomentJS) {
+            const el = helpers.build(window.__html__['Coral.Clock.periodpm.html']);
+            var items = el._elements.period.items.getAll();
+            var am = Coral.i18n.get('am');
+            var pm = Coral.i18n.get('pm');
+  
+            expect(items[0].textContent).to.equal(am.toUpperCase());
+            expect(items[1].textContent).to.equal(pm.toUpperCase());
+  
+            el.displayFormat = 'hh:mm a';
+  
+            expect(items[0].textContent).to.equal(am);
+            expect(items[1].textContent).to.equal(pm);
+            expect(el._elements.valueAsText.textContent).to.equal('02:02 pm');
+          }
         });
   
         it('should support changing the value with AM/PM set', function() {
-          const el = helpers.build(window.__html__['Coral.Clock.periodpm.html']);
-          el._elements.hours.value = '03';
-          el._elements.hours.dispatchEvent(new Event('change', {
-            'bubbles': true
-          }));
-          
-          expect(el._elements.hours.value).to.equal('03');
-          expect(el.value).to.equal('15:02');
-          expect(el._elements.valueAsText.textContent).to.equal('03:02 PM');
+          if (useMomentJS) {
+            const el = helpers.build(window.__html__['Coral.Clock.periodpm.html']);
+            el._elements.hours.value = '03';
+            el._elements.hours.dispatchEvent(new Event('change', {
+              'bubbles': true
+            }));
+  
+            expect(el._elements.hours.value).to.equal('03');
+            expect(el.value).to.equal('15:02');
+            expect(el._elements.valueAsText.textContent).to.equal('03:02 PM');
+          }
         });
   
         it('should stay empty when value is empty and AM/PM is set', function(done) {
-          const el = helpers.build(window.__html__['Coral.Clock.periodam.html']);
-          el.value = '';
+          if (useMomentJS) {
+            const el = helpers.build(window.__html__['Coral.Clock.periodam.html']);
+            el.value = '';
   
-          // Open coral-select overlay
-          el.querySelector('button').click();
-          
-          el.on('coral-overlay:open', function() {
-            // Select PM
-            el.querySelector('coral-selectlist-item:last-child').click();
-            
-            expect(el.value).to.equal('');
-            expect(el._elements.hours.value).to.equal('');
-            expect(el._elements.minutes.value).to.equal('');
-            expect(el._elements.valueAsText.textContent).to.equal('');
+            // Open coral-select overlay
+            el.querySelector('button').click();
   
+            el.on('coral-overlay:open', function() {
+              // Select PM
+              el.querySelector('coral-selectlist-item:last-child').click();
+    
+              expect(el.value).to.equal('');
+              expect(el._elements.hours.value).to.equal('');
+              expect(el._elements.minutes.value).to.equal('');
+              expect(el._elements.valueAsText.textContent).to.equal('');
+    
+              done();
+            });
+          }
+          else {
             done();
-          });
+          }
         });
   
         it('should not change display nor value if AM/PM is set but hours format is 24 hours clock', function(done) {
-          const el = helpers.build(window.__html__['Coral.Clock.value.html']);
-          el.displayFormat = 'HH:mm A';
+          if (useMomentJS) {
+            const el = helpers.build(window.__html__['Coral.Clock.value.html']);
+            el.displayFormat = 'HH:mm A';
   
-          // Open coral-select overlay
-          el.querySelector('button').click();
+            // Open coral-select overlay
+            el.querySelector('button').click();
   
-          el.on('coral-overlay:open', function() {
-            // Select PM
-            el.querySelector('coral-selectlist-item:last-child').click();
-          
-            expect(el.value).to.equal('11:32');
-            expect(el._elements.hours.value).to.equal('11');
-            expect(el._elements.minutes.value).to.equal('32');
-            expect(el._elements.valueAsText.textContent).to.equal('11:32 AM');
-  
+            el.on('coral-overlay:open', function() {
+              // Select PM
+              el.querySelector('coral-selectlist-item:last-child').click();
+    
+              expect(el.value).to.equal('11:32');
+              expect(el._elements.hours.value).to.equal('11');
+              expect(el._elements.minutes.value).to.equal('32');
+              expect(el._elements.valueAsText.textContent).to.equal('11:32 AM');
+    
+              done();
+            });
+          }
+          else {
             done();
-          });
+          }
         });
       });
   

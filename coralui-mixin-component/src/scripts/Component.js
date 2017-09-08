@@ -156,6 +156,8 @@ const delegateEvents = function() {
         if (isKey) {
           // Create the keys instance only if its needed
           this._keys = this._keys || new Keys(this, {
+              // The filter function for keyboard events.
+              filter: this._filterKeys,
               // Execute key listeners in the context of the element
               context: this
             });
@@ -356,6 +358,12 @@ const Component = (superClass) => class extends superClass {
   
   // @legacy
   get _attributes() {return this.constructor._attributePropertyMap || getAttributePropertyMap(this.constructor);}
+  
+  // @legacy
+  // The filter function for keyboard events. By default, any child element can trigger keyboard events.
+  // You can pass {@link Coral.Keys.filterInputs} to avoid listening to key events triggered from within
+  // inputs.
+  _filterKeys() {return true;}
   
   // @legacy
   // Attach event listeners including global ones

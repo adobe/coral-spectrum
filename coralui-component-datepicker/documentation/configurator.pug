@@ -1,0 +1,110 @@
+script.
+  if (typeof Coral.Configurator === 'function') {
+    var configurator = new Coral.Configurator().set({
+      component: Coral.Datepicker,
+      skipProperty: function(prop) {
+        return (prop === 'min' && configurator.instance.min === '') || (prop === 'max' && configurator.instance.max === '');
+      },
+      fields: [
+        {
+          label: 'Placeholder',
+          prop: 'placeholder',
+          type: 'text',
+          value: 'Choose a date'
+        },
+        {
+          label: 'Type',
+          prop: 'type',
+          type: 'select',
+          value: 'date',
+          options: {
+            'Date': 'date',
+            'Datetime': 'datetime',
+            'Time': 'time'
+          }
+        },
+        {
+          label: 'Min',
+          prop: 'min',
+          type: 'text',
+          value: ''
+        },
+        {
+          label: 'Max',
+          prop: 'max',
+          type: 'text',
+          value: ''
+        },
+        {
+          label: 'Name',
+          prop: 'name',
+          type: 'text',
+          value: 'field'
+        },
+        {
+          label: 'Variant',
+          prop: 'variant',
+          type: 'select',
+          value: 'default',
+          options: {
+            'DEFAULT': 'default',
+            'QUIET': 'quiet'
+          }
+        },
+        {
+          label: 'Value',
+          prop: 'value',
+          type: 'text',
+          value: '2015-01-15'
+        },
+        {
+          label: 'Value Format',
+          prop: 'valueFormat',
+          type: 'text',
+          value: ''
+        },
+        {
+          label: 'Display Format',
+          prop: 'displayFormat',
+          type: 'text',
+          value: ''
+        },
+        {
+          label: 'Start Day',
+          prop: 'startDay',
+          type: 'select',
+          value: '0',
+          options: {
+            'Sunday': '0',
+            'Monday': '1',
+            'Tuesday': '2',
+            'Wednesday': '3',
+            'Thursday': '4',
+            'Friday': '5',
+            'Saturday': '6'
+          }
+        },
+        {
+          label: 'is disabled',
+          prop: 'disabled',
+          type: 'checkbox',
+          value: false
+        },
+        {
+          label: 'is read-only',
+          prop: 'readOnly',
+          type: 'checkbox',
+          value: false
+        },
+        {
+          label: 'is required',
+          prop: 'required',
+          type: 'checkbox',
+          value: false
+        }
+      ],
+      componentEvents: [
+        'change'
+      ]
+    }).insertAfterLastScript();
+  }

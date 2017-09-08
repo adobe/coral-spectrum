@@ -1,0 +1,22 @@
+{
+  "name": "coralui-component-datepicker",
+  "version": "2.0.0",
+  "description": "Dialog component",
+  "dependencies": {
+    "@coralui/coralui-theme-cloudui": "^9.3.0",
+    "coralui-mixin-component": "file:../coralui-mixin-component",
+    "coralui-mixin-formfield": "file:../coralui-mixin-formfield",
+    "coralui-component-button": "file:../coralui-component-button",
+    "coralui-component-clock": "file:../coralui-component-clock",
+    "coralui-component-calendar": "file:../coralui-component-calendar",
+    "coralui-component-popover": "file:../coralui-component-popover",
+    "coralui-component-textfield": "file:../coralui-component-textfield",
+    "coralui-datetime": "file:../coralui-datetime",
+    "coralui-externals": "file:../coralui-externals",
+    "coralui-util": "file:../coralui-util"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "coralui-gulp": "file:../coralui-gulp"
+  }
+}

@@ -24,10 +24,12 @@ import container from '../templates/container';
 import table from '../templates/table';
 import {transform, commons, i18n} from 'coralui-util';
 
-const Moment = window.moment || DateTime;
-
 /** @ignore */
 function isDateInRange(date, startDate, endDate) {
+  if (!date) {
+    return false;
+  }
+  
   if (startDate === null && endDate === null) {
     return true;
   }
@@ -45,14 +47,14 @@ function isDateInRange(date, startDate, endDate) {
 /** @ignore */
 function toMoment(value, format) {
   if (value === 'today') {
-    return new Moment().startOf('day');
+    return new DateTime.Moment().startOf('day');
   }
-  else if (Moment.isMoment(value)) {
+  else if (DateTime.Moment.isMoment(value)) {
     return value.isValid() ? value.clone() : null;
   }
   else {
     // if the value provided is a date it does not make sense to provide a format to parse the date
-    const result = new Moment(value, value instanceof Date ? null : format);
+    const result = new DateTime.Moment(value, value instanceof Date ? null : format);
     return result.isValid() ? result.startOf('day') : null;
   }
 }
@@ -63,7 +65,7 @@ function validateAsChangedAndValidMoment(newValue, oldValue) {
   newValue = newValue || null;
   oldValue = oldValue || null;
   
-  if (newValue !== oldValue && !(new Moment(newValue).isSame(oldValue, 'day'))) {
+  if (newValue !== oldValue && !(new DateTime.Moment(newValue).isSame(oldValue, 'day'))) {
     return newValue === null || newValue.isValid();
   }
   
@@ -188,6 +190,9 @@ class Calendar extends FormField(Component(HTMLElement)) {
   constructor() {
     super();
     
+    // Default value
+    this._value = null;
+    
     this._delegateEvents(commons.extend(this._events, {
       'click .coral3-Calendar-nextMonth,.coral3-Calendar-prevMonth': '_onNextOrPreviousMonthClick',
       'click .coral3-Calendar-calendarBody .coral3-Calendar-date': '_onDayClick',
@@ -236,8 +241,8 @@ class Calendar extends FormField(Component(HTMLElement)) {
       return this._startDay;
     }
     
-    if (typeof Moment.localeData().firstDayOfWeek !== 'undefined') {
-      return Moment.localeData(i18n.locale).firstDayOfWeek();
+    if (typeof DateTime.Moment.localeData().firstDayOfWeek !== 'undefined') {
+      return DateTime.Moment.localeData(i18n.locale).firstDayOfWeek();
     }
     
     return 0;
@@ -353,8 +358,14 @@ class Calendar extends FormField(Component(HTMLElement)) {
     return this._value ? this._value.toDate() : null;
   }
   set valueAsDate(value) {
-    this._valueAsDate = (value instanceof Date) ? new Moment(value) : '';
-    this.value = this._valueAsDate;
+    if (value instanceof Date) {
+      this._valueAsDate = new DateTime.Moment(value);
+      this.value = this._valueAsDate;
+    }
+    else {
+      this._valueAsDate = null;
+      this.value = '';
+    }
   }
   
   /**
@@ -454,7 +465,7 @@ class Calendar extends FormField(Component(HTMLElement)) {
     const displayMonth = cursor.month();
     const oldTable = this._animator.oldTable;
     
-    this._elements.heading.innerHTML = new Moment([displayYear, displayMonth, 1]).format(this.headerFormat);
+    this._elements.heading.innerHTML = new DateTime.Moment([displayYear, displayMonth, 1]).format(this.headerFormat);
     
     const newTable = this._renderTable(displayYear, displayMonth + 1);
     
@@ -485,7 +496,7 @@ class Calendar extends FormField(Component(HTMLElement)) {
    @ignore
    */
   _isBeforeMin(currentMoment) {
-    const min = this.min ? new Moment(this.min) : null;
+    const min = this.min ? new DateTime.Moment(this.min) : null;
     return min && currentMoment.isBefore(min);
   }
   
@@ -500,7 +511,7 @@ class Calendar extends FormField(Component(HTMLElement)) {
    @ignore
    */
   _isAfterMax(currentMoment) {
-    const max = this.max ? new Moment(this.max) : null;
+    const max = this.max ? new DateTime.Moment(this.max) : null;
     return max && currentMoment.isAfter(max);
   }
   
@@ -607,7 +618,7 @@ class Calendar extends FormField(Component(HTMLElement)) {
   
   /** @ignore */
   _renderTable(year, month) {
-    const firstDate = new Moment([year, month - 1, 1]);
+    const firstDate = new DateTime.Moment([year, month - 1, 1]);
     let monthStartsAt = (firstDate.day() - this.startDay) % 7;
     const dateLocal = this._value ? this._value.clone().startOf('day') : null;
     
@@ -619,7 +630,7 @@ class Calendar extends FormField(Component(HTMLElement)) {
       
       dayNames: ARRAYOF7.map(
         function(_, index, days) {
-          const dayMoment = new Moment().day((index + this.startDay) % 7);
+          const dayMoment = new DateTime.Moment().day((index + this.startDay) % 7);
           return {
             dayAbbr: dayMoment.format('dd'),
             dayFullName: dayMoment.format('dddd')
@@ -636,13 +647,13 @@ class Calendar extends FormField(Component(HTMLElement)) {
               let ariaSelected = false;
               let ariaInvalid = false;
               const day = (weekIndex * 7 + dayIndex) - monthStartsAt;
-              const cursor = new Moment([year, month - 1]);
+              const cursor = new DateTime.Moment([year, month - 1]);
               // we use add() since 'day' could be a negative value
               cursor.add(day, 'days');
   
               const isCurrentMonth = (cursor.month() + 1) === parseFloat(month);
-              const dayOfWeek = new Moment().day((dayIndex + this.startDay) % 7).format('dddd');
-              const isToday = cursor.isSame(new Moment(), 'day');
+              const dayOfWeek = new DateTime.Moment().day((dayIndex + this.startDay) % 7).format('dddd');
+              const isToday = cursor.isSame(new DateTime.Moment(), 'day');
   
               const cursorLocal = cursor.clone().startOf('day');
               
@@ -696,7 +707,7 @@ class Calendar extends FormField(Component(HTMLElement)) {
     let cursor = this._cursor;
     if (!cursor || !cursor.isValid()) {
       // When its unknown what month we should be showing, use the set date. If that is not available, use 'today'
-      cursor = (this._value ? this._value.clone().startOf('day') : new Moment()).startOf('month');
+      cursor = (this._value ? this._value.clone().startOf('day') : new DateTime.Moment()).startOf('month');
       this._cursor = cursor;
     }
     
@@ -724,12 +735,12 @@ class Calendar extends FormField(Component(HTMLElement)) {
     
     if (el) {
       currentActive = el.dataset.date;
-      currentMoment = new Moment(currentActive);
+      currentMoment = new DateTime.Moment(currentActive);
       newMoment = currentMoment[operator](1, unit);
       
       // make sure new moment is in range before transitioning
       if (this._isInRange(newMoment)) {
-        difference = Math.abs(new Moment(currentActive).diff(newMoment, 'days'));
+        difference = Math.abs(new DateTime.Moment(currentActive).diff(newMoment, 'days'));
         this._getToNewMoment(null, direction, operator, difference);
         this._setActiveDescendant();
       }
@@ -747,7 +758,7 @@ class Calendar extends FormField(Component(HTMLElement)) {
         else if (this._isAfterMax(this._cursor)) {
           newMoment = this.max;
         }
-        newMoment = new Moment(newMoment);
+        newMoment = new DateTime.Moment(newMoment);
         difference = Math.abs(this._cursor.diff(newMoment, 'days'));
         this._getToNewMoment(null, direction, operator, difference);
         this._setActiveDescendant();
@@ -794,7 +805,7 @@ class Calendar extends FormField(Component(HTMLElement)) {
       currentActive = this._cursor.format(INTERNAL_FORMAT);
     }
     
-    const currentMoment = new Moment(currentActive);
+    const currentMoment = new DateTime.Moment(currentActive);
     const currentMonth = currentMoment.month();
     const currentYear = currentMoment.year();
     const newMoment = currentMoment[operator](difference, 'days');
@@ -834,7 +845,7 @@ class Calendar extends FormField(Component(HTMLElement)) {
     
     this._elements.body.focus();
     
-    const date = new Moment(event.target.dataset.date, INTERNAL_FORMAT);
+    const date = new DateTime.Moment(event.target.dataset.date, INTERNAL_FORMAT);
     let dateLocal;
     
     // Carry over any user set time info
@@ -906,7 +917,7 @@ class Calendar extends FormField(Component(HTMLElement)) {
     
     if (el) {
       const currentActive = el.dataset.date;
-      const currentMoment = new Moment(currentActive);
+      const currentMoment = new DateTime.Moment(currentActive);
       const difference = isHome ? currentMoment.date() - 1 : currentMoment.daysInMonth() - currentMoment.date();
       this._getToNewMoment(event, direction, operator, difference);
       this._setActiveDescendant();
@@ -962,9 +973,7 @@ class Calendar extends FormField(Component(HTMLElement)) {
       'min',
       'max',
       'valueformat',
-      'valueFormat',
-      'valueasdate',
-      'valueAsDate'
+      'valueFormat'
     ]);
   }
   

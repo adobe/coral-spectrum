@@ -15,16 +15,40 @@
  * from Adobe Systems Incorporated.
  */
 
+// Used to store DateTimeFormat
+const dateTimeFormats = {};
+
 // Default supported format
 const DEFAULT_FORMAT = 'YYYY-MM-DD';
+
+const transform2digit = (value) => {
+  const s = value.toString();
+  return s.length === 1 ? `0${s}` : s;
+};
 
 // Default locale
 let globalLocale = document.documentElement.lang || window.navigator.language || 'en-US';
 
 // Uses Intl.DateTimeFormat to return a formatted date string
-const dateTimeFormat = function(locale, options, date) {
-  // We might want to use new window.Intl.DateTimeFormat(locale, options).format(date); if perf is indeed better
-  return date.toLocaleTimeString(locale, options);
+const formatDate = function(date, locale, options) {
+  let formattedDateString = '';
+  try {
+    const key = `${JSON.stringify(locale)}${JSON.stringify(options)}`;
+    let dateTimeFormat = dateTimeFormats[key];
+  
+    // Use existing DateTimeFormat or create new one
+    if (!dateTimeFormat) {
+      dateTimeFormats[key] = new window.Intl.DateTimeFormat(locale, options);
+    }
+  
+    // Format to string
+    formattedDateString = dateTimeFormats[key].format(date);
+  }
+  catch (e) {
+    console.warn(e.message);
+  }
+  
+  return formattedDateString;
 };
 
 /**
@@ -32,8 +56,6 @@ const dateTimeFormat = function(locale, options, date) {
  
  @param {DateTime|Date|Array<Number>|String} value
  The initial date value. If none provided, the current day is used instead.
- 
- @private
  */
 class DateTime {
   constructor(value) {
@@ -58,9 +80,17 @@ class DateTime {
           // For time, we only need to set hours and minutes using current date
           if (isTime) {
             const time = value.split(':');
-            this._date = new Date();
-            this._date.setHours(time[0]);
-            this._date.setMinutes(time[1]);
+            const hours = parseInt(time[0]);
+            const minutes = parseInt(time[1]);
+            
+            if ((hours >= 0 && hours <= 23) && (minutes >= 0 && minutes <= 59)) {
+              this._date = new Date();
+              this._date.setHours(time[0]);
+              this._date.setMinutes(time[1]);
+            }
+            else {
+              this._date = new Date('Invalid Date');
+            }
           }
           else {
             // If string is invalid, the date will be invalid too
@@ -68,8 +98,13 @@ class DateTime {
           }
         }
         else {
-          // Create a Date instance from the value or use current day if value is missing
-          this._date = this._value ? new Date(this._value) : new Date();
+          if (this._value === null) {
+            this._date = new Date('Invalid Date');
+          }
+          else {
+            // Create a Date instance from the value or use current day if value is missing
+            this._date = this._value ? new Date(this._value) : new Date();
+          }
         }
       }
     }
@@ -105,50 +140,63 @@ class DateTime {
     }
     
     if (format === DEFAULT_FORMAT) {
-      formattedDateString += dateTimeFormat(this._locale, {year: 'numeric'}, this._date);
+      formattedDateString += this._date.getFullYear();
       formattedDateString += '-';
-      formattedDateString += dateTimeFormat(this._locale, {month: '2-digit'}, this._date);
+      formattedDateString += transform2digit((this._date.getMonth() + 1));
       formattedDateString += '-';
-      formattedDateString += dateTimeFormat(this._locale, {day: '2-digit'}, this._date);
+      formattedDateString += transform2digit(this._date.getDate());
     }
     else if (format === 'MMMM YYYY') {
-      formattedDateString += dateTimeFormat(this._locale, {month: 'long'}, this._date);
+      formattedDateString += formatDate(this._date, this._locale, {month: 'long'});
       formattedDateString += ' ';
-      formattedDateString += dateTimeFormat(this._locale, {year: 'numeric'}, this._date);
+      formattedDateString += this._date.getFullYear();
     }
     else if (format === 'LL') {
-      formattedDateString += dateTimeFormat(this._locale, {
+      formattedDateString += formatDate(this._date, this._locale, {
         month: 'long',
         year: 'numeric',
         day: '2-digit'
-      }, this._date);
+      });
     }
     else if (format === 'dd') {
-      formattedDateString += dateTimeFormat(this._locale, {weekday: 'short'}, this._date);
+      formattedDateString += formatDate(this._date, this._locale, {weekday: 'short'});
     }
     else if (format === 'dddd') {
-      formattedDateString += dateTimeFormat(this._locale, {weekday: 'long'}, this._date);
+      formattedDateString += formatDate(this._date, this._locale, {weekday: 'long'});
     }
     else if (format === 'HH:mm') {
-      formattedDateString += dateTimeFormat(this._locale, {hour: '2-digit', hour12: false}, this._date);
+      formattedDateString += transform2digit(this._date.getHours());
       formattedDateString += ':';
-      // 2-digit is ignored for minutes so we fix it manually
-      let minutes = dateTimeFormat(this._locale, {minute: '2-digit'}, this._date);
-      minutes = minutes.length === 1 ? `0${minutes}` : minutes;
-      formattedDateString += minutes;
+      formattedDateString += transform2digit(this._date.getHours());
     }
     else if (format === 'HH') {
-      formattedDateString += dateTimeFormat(this._locale, {hour: '2-digit', hour12: false}, this._date);
+      formattedDateString += transform2digit(this._date.getHours());
     }
     else if (format === 'mm') {
-      // 2-digit is ignored for minutes so we fix it manually
-      let minutes = dateTimeFormat(this._locale, {minute: '2-digit'}, this._date);
-      minutes = minutes.length === 1 ? `0${minutes}` : minutes;
-      formattedDateString += minutes;
+      formattedDateString += transform2digit(this._date.getHours());
+    }
+    else if (format === 'YYYY-MM-DD[T]HH:mmZ') {
+      formattedDateString += this._date.getFullYear();
+      formattedDateString += '-';
+      formattedDateString += transform2digit((this._date.getMonth() + 1));
+      formattedDateString += '-';
+      formattedDateString += transform2digit(this._date.getDate());
+      
+      formattedDateString += 'T';
+  
+      formattedDateString += transform2digit(this._date.getHours());
+      formattedDateString += ':';
+      formattedDateString += transform2digit(this._date.getHours());
+  
+      const timezone = -(this._date.getTimezoneOffset()/60);
+      let abs = Math.abs(timezone);
+      abs = abs < 10 ? `0${abs}` : abs.toString();
+      
+      formattedDateString += (timezone < 0 ? `-${abs}:00` : `+${abs}:00`);
     }
     else {
       format = typeof format === 'object' ? format : {};
-      formattedDateString = dateTimeFormat(this._locale, format, this._date);
+      formattedDateString = formatDate(this._date, this._locale, format);
     }
     
     return formattedDateString;
@@ -287,8 +335,19 @@ class DateTime {
   }
   
   // See https://momentjs.com/docs/#/query/is-same/
-  isSame(obj) {
-    return obj && obj.clone().startOf('day')._date.getTime() === this.clone().startOf('day')._date.getTime();
+  isSame(obj, type) {
+    if (type === 'hour') {
+      return obj && obj.clone()._date.getHours() === this.clone()._date.getHours();
+    }
+    else if (type === 'minute') {
+      return obj && obj.clone()._date.getMinutes() === this.clone()._date.getMinutes();
+    }
+    else if (type === 'day') {
+      return obj && obj.clone().startOf('day')._date.getTime() === this.clone().startOf('day')._date.getTime();
+    }
+    else {
+      return obj && obj.clone()._date.getTime() === this.clone()._date.getTime();
+    }
   }
   
   // See https://momentjs.com/docs/#/parsing/is-valid/
@@ -313,6 +372,11 @@ class DateTime {
   // See https://momentjs.com/docs/#/query/is-a-moment/
   static isMoment(obj) {
     return obj instanceof this;
+  }
+  
+  // Expose moment JS if loaded
+  static get Moment() {
+    return window.moment || this;
   }
 }
 

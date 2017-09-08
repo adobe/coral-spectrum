@@ -1,0 +1,49 @@
++document-section('Forms')
+  +document-subsection('Vertical Layout')
+    +markup-example().
+      <form class="coral-Form coral-Form--vertical u-columnMedium">
+        <section class="coral-Form-fieldset">
+          <div class="coral-Form-fieldwrapper">
+            <label id="label-vertical-0" class="coral-Form-fieldlabel">Label</label>
+            <coral-datepicker class="coral-Form-field" placeholder="Choose a date" name="name" labelledby="label-vertical-0"></coral-datepicker>
+          </div>
+
+          <div class="coral-Form-fieldwrapper">
+            <label id="label-vertical-1" class="coral-Form-fieldlabel">Required</label>
+            <coral-datepicker class="coral-Form-field" placeholder="Choose a date" name="name" labelledby="label-vertical-1" required></coral-datepicker>
+            <coral-icon class="coral-Form-fieldinfo" icon="infoCircle" size="S" id="coral-form-vertical-datepicker-fieldinfo"></coral-icon>
+            <coral-tooltip variant="info" placement="right" target="#coral-form-vertical-datepicker-fieldinfo">Required Information</coral-tooltip>
+          </div>
+
+          <div class="coral-Form-fieldwrapper">
+            <label id="label-vertical-2" class="coral-Form-fieldlabel">Invalid</label>
+            <coral-datepicker class="coral-Form-field" placeholder="Choose a date" name="name" labelledby="label-vertical-2" invalid></coral-datepicker>
+            <coral-icon class="coral-Form-fielderror" icon="infoCircle" size="S" id="coral-form-vertical-datepicker-fielderror"></coral-icon>
+            <coral-tooltip variant="error" placement="right" target="#coral-form-vertical-datepicker-fielderror">Error Message</coral-tooltip>
+          </div>
+        </section>
+      </form>
+  +document-subsection('Aligned Layout')
+    +markup-example().
+      <form class="coral-Form coral-Form--aligned u-columnLarge">
+        <section class="coral-Form-fieldset">
+          <div class="coral-Form-fieldwrapper">
+            <label id="label-aligned-0" class="coral-Form-fieldlabel">Label</label>
+            <coral-datepicker class="coral-Form-field" placeholder="Choose a date" name="name" labelledby="label-aligned-0"></coral-datepicker>
+          </div>
+
+          <div class="coral-Form-fieldwrapper">
+            <label id="label-aligned-1" class="coral-Form-fieldlabel">Required</label>
+            <coral-datepicker class="coral-Form-field" placeholder="Choose a date" name="name" labelledby="label-aligned-1" required></coral-datepicker>
+            <coral-icon class="coral-Form-fieldinfo" icon="infoCircle" size="S" id="coral-form-aligned-datepicker-fieldinfo"></coral-icon>
+            <coral-tooltip variant="info" placement="right" target="#coral-form-aligned-datepicker-fieldinfo">Required Information</coral-tooltip>
+          </div>
+
+          <div class="coral-Form-fieldwrapper">
+            <label id="label-aligned-2" class="coral-Form-fieldlabel">Invalid</label>
+            <coral-datepicker class="coral-Form-field" placeholder="Choose a date" name="name" labelledby="label-aligned-2" invalid></coral-datepicker>
+            <coral-icon class="coral-Form-fielderror" icon="infoCircle" size="S" id="coral-form-aligned-datepicker-fielderror"></coral-icon>
+            <coral-tooltip variant="error" placement="right" target="#coral-form-aligned-datepicker-fielderror">Error Message</coral-tooltip>
+          </div>
+        </section>
+      </form>

@@ -10,6 +10,7 @@ import {Checkbox, CheckboxLabel} from 'coralui-component-checkbox';
 import {Clock} from 'coralui-component-clock';
 import {Color, ColorInput, ColorInputItem, ColorInputSwatches, ColorInputSwatch, ColorInputSlider, ColorInputColorProperties} from 'coralui-component-colorinput';
 import {CycleButton, CycleButtonItem, CycleButtonAction} from 'coralui-component-cyclebutton';
+import {Datepicker} from 'coralui-component-datepicker';
 import {Dialog, DialogHeader, DialogContent, DialogFooter} from 'coralui-component-dialog';
 import {DragAction} from 'coralui-dragaction';
 import {Drawer, DrawerContent} from 'coralui-component-drawer';
@@ -82,6 +83,7 @@ export {
   CycleButton,
   CycleButtonItem,
   CycleButtonAction,
+  Datepicker,
   Dialog,
   DialogHeader,
   DialogContent,

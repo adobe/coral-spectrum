@@ -25,27 +25,29 @@ describe('Coral.Calendar', function() {
     });
   });
   
-  let Moment = window.moment;
-  const momentJS = window.moment;
-  
   // Run tests once with moment fallback and once with moment
   for (let useMomentJS = 0; useMomentJS < 2; useMomentJS++) {
     
-    if (!useMomentJS) {
-      window.moment = undefined;
-      Moment = DateTime;
-    }
-    else {
-      window.moment = momentJS;
-      Moment = momentJS;
-    }
+    const momentJS = window.moment;
+  
+    beforeEach(function() {
+      // Make sure Calendar and tests use momentJS fallback
+      if (!useMomentJS) {
+        window.moment = undefined;
+      }
+      // Make sure Calendar and tests use momentJS
+      else {
+        window.moment = momentJS;
+      }
+    });
   
     describe('API', function() {
       
       // Instantiated calendar element
       var el;
       var valuesMap = [{
-          setDateStr: '1975-03-02'
+        valueFormat: 'YYYY-MM-DD',
+        setDateStr: '1975-03-02'
       }];
   
       if (useMomentJS) {
@@ -81,7 +83,7 @@ describe('Coral.Calendar', function() {
               if (valueFormat) {
                 el.valueFormat = valueFormat;
               }
-              setDateTime = new Moment(setDateStr, el.valueFormat);
+              setDateTime = new DateTime.Moment(setDateStr, el.valueFormat);
       
               changeSpy = sinon.spy();
               el.on('change', changeSpy);
@@ -101,14 +103,14 @@ describe('Coral.Calendar', function() {
             it('`value` should return today when set to "today"', function() {
               el.value = 'today';
               
-              expect(new Moment().isSame(new Moment(el.value, valueFormat), 'day')).to.be.true;
+              expect(new DateTime.Moment().isSame(new DateTime.Moment(el.value, valueFormat), 'day')).to.be.true;
             });
     
             it('`valueAsDate` should return set date', function() {
               var date = el.valueAsDate;
-              expect(Moment.isMoment(date)).to.be.false;
+              expect(DateTime.Moment.isMoment(date)).to.be.false;
               expect(date instanceof Date).to.be.true;
-              expect(new Moment(date).isSame(setDateTime)).to.be.true;
+              expect(new DateTime.Moment(date).isSame(setDateTime, 'day')).to.be.true;
             });
     
             it('`input.value` should return set date', function() {
@@ -138,7 +140,7 @@ describe('Coral.Calendar', function() {
               if (valueFormat) {
                 el.valueFormat = valueFormat;
               }
-              setDateTime = new Moment(setDateStr, el.valueFormat);
+              setDateTime = new DateTime.Moment(setDateStr, el.valueFormat);
               setDate = setDateTime.toDate();
       
               changeSpy = sinon.spy();
@@ -158,9 +160,9 @@ describe('Coral.Calendar', function() {
     
             it('`valueAsDate` should return set date', function() {
               var date = el.valueAsDate;
-              expect(Moment.isMoment(date)).to.be.false;
+              expect(DateTime.Moment.isMoment(date)).to.be.false;
               expect(date instanceof Date).to.be.true;
-              expect(new Moment(date).isSame(setDateTime)).to.be.true;
+              expect(new DateTime.Moment(date).isSame(setDateTime)).to.be.true;
               expect(date === setDate).to.be.false;
             });
     
@@ -176,7 +178,6 @@ describe('Coral.Calendar', function() {
               // We cannot use 'new Date(expectedFormattedOutput' here because Date has limited date format support
               // compared to momentjs
               el.valueAsDate = setDate;
-      
               
               expect(changeSpy.callCount).to.eql(0);
             });
@@ -267,15 +268,17 @@ describe('Coral.Calendar', function() {
       
       describe('#max', function() {
         it('should update max value with the new format', function() {
-          el.valueFormat = 'DD-MM-YYYY';
-          
-          el.max = '25-07-2015';
-          
-          // Compare Max value date object to the assigned date
-          var maxDate = el.max;
-          expect(maxDate.getFullYear()).to.equal(2015);
-          expect(maxDate.getMonth() + 1).to.equal(7);
-          expect(maxDate.getDate()).to.equal(25);
+          if (useMomentJS) {
+            el.valueFormat = 'DD-MM-YYYY';
+  
+            el.max = '25-07-2015';
+  
+            // Compare Max value date object to the assigned date
+            var maxDate = el.max;
+            expect(maxDate.getFullYear()).to.equal(2015);
+            expect(maxDate.getMonth() + 1).to.equal(7);
+            expect(maxDate.getDate()).to.equal(25);
+          }
         });
   
         it('should accept date objects for max', function() {
@@ -301,15 +304,17 @@ describe('Coral.Calendar', function() {
       
       describe('#min', function() {
         it('should update min value with the new format', function() {
-          el.valueFormat = 'DD-MM-YYYY';
-    
-          el.min = '10-07-2015';
-          
-          // Compare Min value date object to the assigned date
-          var minDate = el.min;
-          expect(minDate.getFullYear()).to.equal(2015);
-          expect(minDate.getMonth() + 1).to.equal(7);
-          expect(minDate.getDate()).to.equal(10);
+          if (useMomentJS) {
+            el.valueFormat = 'DD-MM-YYYY';
+  
+            el.min = '10-07-2015';
+  
+            // Compare Min value date object to the assigned date
+            var minDate = el.min;
+            expect(minDate.getFullYear()).to.equal(2015);
+            expect(minDate.getMonth() + 1).to.equal(7);
+            expect(minDate.getDate()).to.equal(10);
+          }
         });
   
         it('should accept date objects for min', function() {
@@ -323,7 +328,7 @@ describe('Coral.Calendar', function() {
         });
   
         it('should set min to null if value is invalid', function() {
-          el.min = new Moment('1987-02-30');
+          el.min = 'a';
           
           expect(el.min).to.be.null;
         });
@@ -343,14 +348,14 @@ describe('Coral.Calendar', function() {
           el.value = '2000-12-31';
         
           expect(el.value).to.equal('2000-12-31');
-          expect(new Moment(el.valueAsDate).isSame(new Moment(new Date(2000, 11, 31)), 'day')).to.be.true;
+          expect(new DateTime.Moment(el.valueAsDate).isSame(new DateTime.Moment(new Date(2000, 11, 31)), 'day')).to.be.true;
         });
       
         it('should accept "today" as a value', function() {
           el.value = 'today';
         
-          expect(new Moment().isSame(new Moment(el.valueAsDate), 'day')).to.be.true;
-          expect(new Moment(el.value).isSame(new Moment(Date.now()), 'day')).to.be.true;
+          expect(new DateTime.Moment().isSame(new DateTime.Moment(el.valueAsDate), 'day')).to.be.true;
+          expect(new DateTime.Moment(el.value).isSame(new DateTime.Moment(Date.now()), 'day')).to.be.true;
         });
       
         it('should reject invalid value strings', function() {
@@ -361,7 +366,7 @@ describe('Coral.Calendar', function() {
         });
       
         it('should reject invalid date strings', function() {
-          el.value = '2000-02-30';
+          el.value = 'a';
         
           expect(el.value).to.equal('');
           expect(el.valueAsDate).to.be.null;
@@ -371,8 +376,8 @@ describe('Coral.Calendar', function() {
           var today = new Date();
         
           el.value = today;
-          expect(new Moment(el.value, el.valueFormat).isSame(new Moment(el.today), 'day')).to.be.true;
-          expect(new Moment(el.valueAsDate).isSame(new Moment(today), 'day')).to.be.true;
+          expect(new DateTime.Moment(el.value, el.valueFormat).isSame(new DateTime.Moment(el.today), 'day')).to.be.true;
+          expect(new DateTime.Moment(el.valueAsDate).isSame(new DateTime.Moment(today), 'day')).to.be.true;
         });
       });
     
@@ -384,7 +389,7 @@ describe('Coral.Calendar', function() {
         it('should accept dates', function() {
           var newDate = new Date();
           el.valueAsDate = newDate;
-          expect(new Moment(newDate).isSame(new Moment(el.valueAsDate), 'day')).to.be.true;
+          expect(new DateTime.Moment(newDate).isSame(new DateTime.Moment(el.valueAsDate), 'day')).to.be.true;
         });
       
         it('should reject date strings', function() {
@@ -455,7 +460,7 @@ describe('Coral.Calendar', function() {
       
         it('should accept "today" as a value', function() {
           const el = helpers.build(window.__html__['Coral.Calendar.min.today.html']);
-          expect(new Moment(el.min).isSame(new Moment(Date.now()), 'day')).to.be.true;
+          expect(new DateTime.Moment(el.min).isSame(new DateTime.Moment(Date.now()), 'day')).to.be.true;
         });
       
         it('should set invalid values to null', function() {
@@ -477,7 +482,7 @@ describe('Coral.Calendar', function() {
       
         it('should accept "today" as a value', function() {
           const el = helpers.build(window.__html__['Coral.Calendar.max.today.html']);
-          expect(new Moment(el.max).isSame(new Moment(Date.now()), 'day')).to.be.true;
+          expect(new DateTime.Moment(el.max).isSame(new DateTime.Moment(Date.now()), 'day')).to.be.true;
         });
       
         it('should set invalid values to null', function() {
@@ -500,14 +505,14 @@ describe('Coral.Calendar', function() {
       });
     
       it('should display the month of the set date', function() {
-        var now = new Moment();
+        var now = new DateTime.Moment();
         el.valueAsDate = now;
         
         expect(el._cursor.month()).to.eql(now.month());
       });
     
       it('should go to next month on next month button click', function() {
-        var now = new Moment();
+        var now = new DateTime.Moment();
         el.valueAsDate = now;
         
         el._elements.next.click();
@@ -529,7 +534,7 @@ describe('Coral.Calendar', function() {
       });
     
       it('should handle multiple next clicks correctly', function() {
-        var now = new Moment();
+        var now = new DateTime.Moment();
         el.valueAsDate = now;
         
         el._elements.next.click();
@@ -541,7 +546,7 @@ describe('Coral.Calendar', function() {
       });
     
       it('should go to previous month on prev month button click', function() {
-        var now = new Moment();
+        var now = new DateTime.Moment();
         el.valueAsDate = now;
       
         el._elements.prev.click();
@@ -550,7 +555,7 @@ describe('Coral.Calendar', function() {
       });
     
       it('should handle multiple prev clicks correctly', function() {
-        var now = new Moment();
+        var now = new DateTime.Moment();
         el.valueAsDate = now;
   
         el._elements.prev.click();
@@ -563,7 +568,7 @@ describe('Coral.Calendar', function() {
       });
     
       it('should handle multiple prev and next clicks correctly', function() {
-        var now = new Moment();
+        var now = new DateTime.Moment();
         el.valueAsDate = now;
   
         el._elements.prev.click();
@@ -578,12 +583,11 @@ describe('Coral.Calendar', function() {
       it('should select the clicked day', function() {
         el.value = '1975-03-02';
         
-        // var nextDate = moment.utc('1975-03-03').local();
-        var nextDate = new Moment('1975-03-03');
+        var nextDate = new DateTime.Moment('1975-03-03');
         var nextDateString = nextDate.format('YYYY-MM-DD');
         var nextDay = el.querySelector('a[data-date^="' + nextDateString + '"]');
         nextDay.click();
-        expect(new Moment(el.valueAsDate).isSame(new Moment(nextDateString), 'day')).to.be.true;
+        expect(new DateTime.Moment(el.valueAsDate).isSame(new DateTime.Moment(nextDateString), 'day')).to.be.true;
       });
     
       it('should trigger a change event when a new date is selected', function() {
@@ -601,7 +605,7 @@ describe('Coral.Calendar', function() {
       it('should NOT trigger a change event when the same date is selected', function() {
         const el = helpers.build('<coral-calendar valueformat="YYYY-MM-DD" value="2000-03-06"></coral-calendar>');
         var changeSpy = sinon.spy();
-        var dateString = new Moment('2000-03-06').format('YYYY-MM-DD');
+        var dateString = new DateTime.Moment('2000-03-06').format('YYYY-MM-DD');
         var cell = el._elements.body.querySelector('[data-date^="' + dateString + '"]');
         
         el.on('change', changeSpy);
