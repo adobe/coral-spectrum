@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "coralui-component-accordion": "file:coralui-component-accordion",
+    "coralui-component-actionbar": "file:coralui-component-actionbar",
     "coralui-component-alert": "file:coralui-component-alert",
     "coralui-component-anchorbutton": "file:coralui-component-anchorbutton",
     "coralui-component-button": "file:coralui-component-button",

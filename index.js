@@ -1,4 +1,5 @@
 import {Accordion, AccordionItem, AccordionItemContent, AccordionItemLabel} from 'coralui-component-accordion';
+import {ActionBar, ActionBarItem, ActionBarPrimary, ActionBarSecondary, ActionBarContainer} from 'coralui-component-actionbar';
 import {Alert, AlertHeader, AlertContent, AlertFooter} from 'coralui-component-alert';
 import {AnchorButton, AnchorButtonLabel} from 'coralui-component-anchorbutton';
 import {Button, ButtonLabel} from 'coralui-component-button';
@@ -47,6 +48,11 @@ export {
   AccordionItem,
   AccordionItemContent,
   AccordionItemLabel,
+  ActionBar,
+  ActionBarItem,
+  ActionBarPrimary,
+  ActionBarSecondary,
+  ActionBarContainer,
   Alert,
   AlertHeader,
   AlertContent,

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>Coral3 | Coral.ActionBar</title>
+    <link rel="stylesheet" href="../../css/coral.css">
+    <script src="../../js/libs/jquery.js"></script>
+    <script src="../../js/coral.js"></script>
+    <style type="text/css">
+    body > h2 {
+      margin-top: 20px;
+    }
+
+    .wf-loading {
+      visibility: hidden;
+    }
+    </style>
+  </head>
+
+  <body class="coral--light u-coral-padding">
+  <h3>Legacy container version</h3>
+  <coral-actionbar>
+    <coral-actionbar-container threshold="-1">
+      <coral-actionbar-item>
+        <button is="coral-button">Default</button>
+      </coral-actionbar-item>
+      <coral-actionbar-item>
+        <button is="coral-button" disabled>Disabled</button>
+      </coral-actionbar-item>
+      <coral-actionbar-item>
+        <button is="coral-button" icon="share" disabled>Disabled</button>
+      </coral-actionbar-item>
+      <coral-actionbar-item>
+        <button is="coral-button" icon="home" title="Home"></button>
+      </coral-actionbar-item>
+      <coral-actionbar-item>
+        <button is="coral-button" icon="home">With Icon</button>
+      </coral-actionbar-item>
+      <coral-actionbar-item>
+        <button is="coral-button" icon="add" title="Add">Add</button>
+      </coral-actionbar-item>
+      <coral-actionbar-item>
+        <button is="coral-button" icon="delete" title="Delete">Delete</button>
+      </coral-actionbar-item>
+      <coral-actionbar-item>
+        <button is="coral-button" icon="checkCircle" title="Check">Check</button>
+      </coral-actionbar-item>
+    </coral-actionbar-container>
+    <coral-actionbar-container threshold="-1">
+      <coral-actionbar-item>
+        <button is="coral-button" icon="delete" title="Delete"></button>
+      </coral-actionbar-item>
+      <coral-actionbar-item>
+        <button is="coral-button" icon="home">With Icon</button>
+      </coral-actionbar-item>
+      <coral-actionbar-item>
+        <button is="coral-button" icon="checkCircle" title="Check"></button>
+      </coral-actionbar-item>
+      <coral-actionbar-item>
+        <button is="coral-button" icon="delete" iconposition="right" title="Delete">Delete</button>
+      </coral-actionbar-item>
+      <coral-actionbar-item>
+        <button is="coral-button" icon="home" iconposition="right">With Icon</button>
+      </coral-actionbar-item>
+    </coral-actionbar-container>
+  </coral-actionbar>
+
+
+  <h3>New primary / secondary version</h3>
+    <coral-actionbar>
+      <coral-actionbar-primary threshold="-1">
+        <coral-actionbar-item>
+          <button is="coral-button">Default</button>
+        </coral-actionbar-item>
+        <coral-actionbar-item>
+          <button is="coral-button" disabled>Disabled</button>
+        </coral-actionbar-item>
+        <coral-actionbar-item>
+          <button is="coral-button" icon="share" disabled>Disabled</button>
+        </coral-actionbar-item>
+        <coral-actionbar-item>
+          <button is="coral-button" icon="home" title="Home"></button>
+        </coral-actionbar-item>
+        <coral-actionbar-item>
+          <button is="coral-button" icon="home">With Icon</button>
+        </coral-actionbar-item>
+        <coral-actionbar-item>
+          <button is="coral-button" icon="add" title="Add">Add</button>
+        </coral-actionbar-item>
+        <coral-actionbar-item>
+          <button is="coral-button" icon="delete" title="Delete">Delete</button>
+        </coral-actionbar-item>
+        <coral-actionbar-item>
+          <button is="coral-button" icon="checkCircle" title="Check">Check</button>
+        </coral-actionbar-item>
+      </coral-actionbar-primary>
+      <coral-actionbar-secondary threshold="-1">
+        <coral-actionbar-item>
+          <button is="coral-button" icon="delete" title="Delete"></button>
+        </coral-actionbar-item>
+        <coral-actionbar-item>
+          <button is="coral-button" icon="home">With Icon</button>
+        </coral-actionbar-item>
+        <coral-actionbar-item>
+          <button is="coral-button" icon="checkCircle" title="Check"></button>
+        </coral-actionbar-item>
+        <coral-actionbar-item>
+          <button is="coral-button" icon="delete" iconposition="right" title="Delete">Delete</button>
+        </coral-actionbar-item>
+        <coral-actionbar-item>
+          <button is="coral-button" icon="home" iconposition="right">With Icon</button>
+        </coral-actionbar-item>
+      </coral-actionbar-secondary>
+    </coral-actionbar>
+
+    <h3>If you resize the browser window ActionBarItems that don't have enough space to show get hidden in Popovers </h3>
+    <h3>You can navigate inside an actionBar and popovers using the keyboard</h3>
+    <ul>
+      <li>arrowLeft or arrowUp: focus previous ActionBarItem</li>
+      <li>arrowRight or arrowDown: focus next ActionBarItem</li>
+      <li>space or return: click item</li>
+      <li>escape: close popover</li>
+    </ul>
+  </body>
+
+</html>

@@ -1,0 +1,30 @@
++document-section('JavaScript Examples')
+
+  +document-subsection('Fill ActionBar via Javascript', 'The following example is filled and configured via javascript')
+    +markup-example('u-columnExtraLarge').
+      <coral-actionbar id="jsbar"></coral-actionbar>
+    p The following Javascript manually adds content to the ActionBar component on page initialization and configures the containers
+    +example-pre-only().
+      <script>
+        $(document).ready(function() {
+
+          var actionBar = document.getElementById('jsbar');
+
+          //wait till the actionbar is ready
+          Coral.commons.ready(actionBar, function() {
+            // configure the primary/secondary containers
+            actionBar.primary.moreButtonText = actionBar.secondary.moreButtonText = 'More JS';
+            actionBar.primary.threshold = actionBar.secondary.threshold = 3;
+
+            // e.g.: create like actionbar items like this
+            var leftItems = actionBar.primary.items;
+            var rightItems = actionBar.secondary.items;
+            for (var i = 0; i < 5; i++) {
+
+              leftItems.add({}).appendChild(new Coral.Button()).set({label: {innerHTML: 'Left' + i}});
+              rightItems.add({}).appendChild(new Coral.Button()).set({label: {innerHTML: 'Right' + i}});
+            }
+          });
+
+        });
+      </script>

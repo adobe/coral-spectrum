@@ -1,0 +1,69 @@
++document-section('Markup Examples', true)
+
+  +document-subsection('ActionBar with prefilled buttons on left and right side')
+    +markup-example('u-columnExtraLarge').
+      <coral-actionbar>
+        <coral-actionbar-container>
+          <coral-actionbar-item>
+            <button is="coral-button">Left 1</button>
+          </coral-actionbar-item>
+          <coral-actionbar-item>
+            <button is="coral-button">Left 2</button>
+          </coral-actionbar-item>
+          <coral-actionbar-item>
+            <button is="coral-button">Left 3</button>
+          </coral-actionbar-item>
+        </coral-actionbar-container>
+        <coral-actionbar-container>
+          <coral-actionbar-item>
+            <button is="coral-button">Right 1</button>
+          </coral-actionbar-item>
+          <coral-actionbar-item>
+            <button is="coral-button">Right 2</button>
+          </coral-actionbar-item>
+          <coral-actionbar-item>
+            <button is="coral-button">Right 3</button>
+          </coral-actionbar-item>
+        </coral-actionbar-container>
+      </coral-actionbar>
+
+  +document-subsection('Left/Right wrappers can also be configured using attributes')
+    +markup-example('u-columnExtraLarge').
+      <coral-actionbar>
+        <coral-actionbar-container threshold="-1" morebuttontext="Left More">
+          <coral-actionbar-item>
+            <button is="coral-button" variant="quiet">Left 1</button>
+          </coral-actionbar-item>
+          <coral-actionbar-item>
+            <button is="coral-button" variant="quiet">Left 2</button>
+          </coral-actionbar-item>
+          <coral-actionbar-item>
+            <button is="coral-button" variant="quiet">Left 3</button>
+          </coral-actionbar-item>
+        </coral-actionbar-container>
+        <coral-actionbar-container threshold="2" morebuttontext="Right More">
+          <coral-actionbar-item>
+            <button is="coral-button" variant="quiet">Right 1</button>
+          </coral-actionbar-item>
+          <coral-actionbar-item>
+            <button is="coral-button" variant="quiet">Right 2</button>
+          </coral-actionbar-item>
+          <coral-actionbar-item>
+            <button is="coral-button" variant="quiet">Right 3</button>
+          </coral-actionbar-item>
+        </coral-actionbar-container>
+      </coral-actionbar>
+
+  +document-subsection('Generate ActionBar with prefilled items on left side only (wrappers are automatically generated)')
+    +markup-example('u-columnExtraLarge').
+      <coral-actionbar>
+        <coral-actionbar-item>
+          <button is="coral-button" variant="quiet">Left 1</button>
+        </coral-actionbar-item>
+        <coral-actionbar-item>
+          <button is="coral-button" variant="quiet">Left 2</button>
+        </coral-actionbar-item>
+        <coral-actionbar-item>
+          <button is="coral-button" variant="quiet">Left 3</button>
+        </coral-actionbar-item>
+      </coral-actionbar>

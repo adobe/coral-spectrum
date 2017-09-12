@@ -1,0 +1,49 @@
+<div style="width:10000px;">
+  <coral-actionbar id="switchBar1">
+    <coral-actionbar-primary>
+      <coral-actionbar-item>
+        <button id="switchBar1Button" is="coral-button" variant="quiet" icon="search">Switch To</button>
+      </coral-actionbar-item>
+      <coral-actionbar-item>
+        <button is="coral-button" variant="quiet" icon="copy">Copy</button>
+      </coral-actionbar-item>
+      <coral-actionbar-item>
+        <button is="coral-button" variant="quiet" icon="move">Move</button>
+      </coral-actionbar-item>
+      <coral-actionbar-item>
+        <button is="coral-button" variant="quiet" icon="globe">Publish</button>
+      </coral-actionbar-item>
+      <coral-actionbar-item>
+        <button id="switchBar1OpenPopover" is="coral-button" icon="search" title="Delete">Open Popover</button>
+        <coral-popover target="#switchBar1OpenPopover" placement="bottom">
+          <coral-popover-content>
+            <div><button is="coral-button" variant="quiet" icon="copy">Copy</button></div>
+            <div><button is="coral-button" variant="quiet" icon="copy">Copy 2</button></div>
+          </coral-popover-content>
+        </coral-popover>
+      </coral-actionbar-item>
+      <coral-actionbar-item>
+        <button is="coral-button" variant="quiet" icon="globeRemove">Unpublish</button>
+      </coral-actionbar-item>
+      <coral-actionbar-item>
+        <button is="coral-button" variant="quiet" icon="delete">Delete</button>
+      </coral-actionbar-item>
+    </coral-actionbar-primary>
+    <coral-actionbar-secondary>
+      <coral-actionbar-item>
+        <button is="coral-button" icon="closeCircle">Exit</button>
+      </coral-actionbar-item>
+      <coral-actionbar-item>
+        <button is="coral-button" icon="closeCircle">Exit</button>
+      </coral-actionbar-item>
+      <coral-actionbar-item>
+        <button is="coral-button" icon="closeCircle">Exit</button>
+      </coral-actionbar-item>
+    </coral-actionbar-secondary>
+  </coral-actionbar>
+  <coral-actionbar id="switchBar2" hidden>
+    <coral-actionbar-item>
+      <button id="switchBar2Button" is="coral-button" variant="quiet" icon="viewCard">Switch Back</button>
+    </coral-actionbar-item>
+  </coral-actionbar>
+</div>

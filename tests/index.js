@@ -1,4 +1,5 @@
 import 'coralui-component-accordion/tests';
+import 'coralui-component-actionbar/tests';
 import 'coralui-component-alert/tests';
 import 'coralui-component-anchorbutton/tests';
 import 'coralui-component-button/tests';
