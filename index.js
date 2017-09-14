@@ -10,6 +10,7 @@ import {CharacterCount} from 'coralui-component-charactercount';
 import {Checkbox, CheckboxLabel} from 'coralui-component-checkbox';
 import {Clock} from 'coralui-component-clock';
 import {Color, ColorInput, ColorInputItem, ColorInputSwatches, ColorInputSwatch, ColorInputSlider, ColorInputColorProperties} from 'coralui-component-colorinput';
+import {ColumnView, ColumnViewColumn, ColumnViewColumnContent, ColumnViewItem, ColumnViewItemContent, ColumnViewItemThumbnail, ColumnViewPreview, ColumnViewPreviewAsset, ColumnViewPreviewContent, ColumnViewPreviewLabel, ColumnViewPreviewSeparator, ColumnViewPreviewValue} from 'coralui-component-columnview';
 import {CycleButton, CycleButtonItem, CycleButtonAction} from 'coralui-component-cyclebutton';
 import {Datepicker} from 'coralui-component-datepicker';
 import {Dialog, DialogHeader, DialogContent, DialogFooter} from 'coralui-component-dialog';
@@ -86,6 +87,18 @@ export {
   ColorInputSwatch,
   ColorInputSlider,
   ColorInputColorProperties,
+  ColumnView,
+  ColumnViewColumn,
+  ColumnViewColumnContent,
+  ColumnViewItem,
+  ColumnViewItemContent,
+  ColumnViewItemThumbnail,
+  ColumnViewPreview,
+  ColumnViewPreviewAsset,
+  ColumnViewPreviewContent,
+  ColumnViewPreviewLabel,
+  ColumnViewPreviewSeparator,
+  ColumnViewPreviewValue,
   CycleButton,
   CycleButtonItem,
   CycleButtonAction,

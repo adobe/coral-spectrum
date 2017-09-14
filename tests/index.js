@@ -10,6 +10,7 @@ import 'coralui-component-charactercount/tests';
 import 'coralui-component-checkbox/tests';
 import 'coralui-component-clock/tests';
 import 'coralui-component-colorinput/tests';
+import 'coralui-component-columnview/tests';
 import 'coralui-component-cyclebutton/tests';
 import 'coralui-component-datepicker/tests';
 import 'coralui-component-dialog/tests';
