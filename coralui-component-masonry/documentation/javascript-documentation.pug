@@ -1,0 +1,44 @@
++document-section('JavaScript Examples')
+
+  +document-subsection('Filtering Items',
+      'The following example shows how items can be filtered with JavaScript.')
+
+    +markup-example()
+      input(id="filter" class="coral3-Textfield" placeholder="Filter")
+      coral-masonry(id="masonry_filter_example" layout="variable" spacing="20" columnwidth="100")
+        coral-masonry-item Lorem ipsum dolor sit amet, corpora postulant ocurreret in mel.
+        coral-masonry-item His illum augue causae ut, vim ne magna prodesset, est ad nemore quodsi alienum.
+        coral-masonry-item Ei noluisse expetenda qui. Mei in iusto convenire torquatos.
+
+    +example-pre-only().
+      <script>
+        $('#filter').on('input', function(e) {
+          var filterText = e.target.value.toLowerCase();
+
+          $('#masonry_filter_example')[0].items.getAll().forEach(function (item) {
+            var itemText = item.textContent.toLowerCase();
+            if (itemText.indexOf(filterText) !== -1) {
+              item.show();
+            } else {
+              item.hide();
+            }
+           });
+        });
+      </script>
+
+  +document-subsection('Selecting Items',
+      'The following example shows one possibility how selection can be implemented.')
+
+    +markup-example()
+      p Click on items to select/unselect them:
+      coral-masonry(id="masonry_selection_example" layout="variable" spacing="20" columnwidth="100")
+        coral-masonry-item Lorem ipsum dolor sit amet, corpora postulant ocurreret in mel.
+        coral-masonry-item His illum augue causae ut, vim ne magna prodesset, est ad nemore quodsi alienum.
+        coral-masonry-item Ei noluisse expetenda qui. Mei in iusto convenire torquatos.
+
+    +example-pre-only().
+      <script>
+        $('#masonry_selection_example').on('click', 'coral-masonry-item', function(e) {
+          this.selected = !this.selected;
+        });
+      </script>

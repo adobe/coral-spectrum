@@ -1,0 +1,81 @@
++document-section('Markup Examples')
+
+  +document-subsection('Layout Types')
+  div.LayoutExamples
+    style.
+      .LayoutExamples coral-masonry {
+        border: 1px dashed black;
+      }
+      .LayoutExamples coral-masonry-item {
+        border: 1px dashed black;
+        font-size: 0.5em;
+        padding: 0.5em;
+      }
+
+    mixin fourTextItems()
+      coral-masonry-item Lorem ipsum dolor sit amet, corpora postulant ocurreret in mel.
+      coral-masonry-item His illum augue causae ut, vim ne magna prodesset, est ad nemore quodsi alienum. Eos ne case mazim nominavi, ea est malorum sapientem.
+      coral-masonry-item Ei noluisse expetenda qui. Mei in iusto convenire torquatos. At vix iusto corpora indoctum, nam choro apeirian eu.
+      coral-masonry-item Et summo volumus sed, sea sale maiorum dignissim te.
+
+    +document-subsection('Fixed-spread')
+    p.
+      All items have the same fixed width. The remaining space is equally distributed between the container and items.
+      If the first row is not filled, then the items are left aligned.
+
+    +markup-example()
+      coral-masonry(layout="fixed-spread",spacing="20",columnwidth="80")
+        +fourTextItems()
+
+
+    +document-subsection('Fixed-centered')
+    p.
+      All items have the same fixed width. They are centered in the middle of the container with the defined spacing
+      between each other.
+
+    +markup-example()
+      coral-masonry(layout="fixed-centered",spacing="20",columnwidth="80")
+        +fourTextItems()
+
+    +document-subsection('Variable')
+    p.
+      The <code>columnwidth</code> defines the minimum width for the item. If there is remaining space, then it is
+      distributed equally between all items.
+
+    +markup-example()
+      coral-masonry(layout="variable",spacing="20",columnwidth="80")
+        +fourTextItems()
+
+    +document-subsection('Dashboard')
+    p.
+      Similar to the <code>variable</code> layout; however, remaining vertical space will be filled by expanding items.
+
+    +markup-example()
+      coral-masonry(layout="dashboard",spacing="20",columnwidth="80")
+        +fourTextItems()
+
+  +document-subsection('Orderable')
+    +markup-example().
+      <coral-masonry layout="fixed-spread" spacing="20" columnwidth="100" orderable>
+        <coral-masonry-item>
+          <span coral-masonry-draghandle>⠿</span>
+          Lorem ipsum dolor sit amet, corpora postulant ocurreret in mel.
+        </coral-masonry-item>
+        <coral-masonry-item>
+          <span coral-masonry-draghandle>⠿</span>
+          His illum augue causae ut, vim ne magna prodesset, est ad nemore quodsi alienum.
+        </coral-masonry-item>
+        <coral-masonry-item>
+          <span coral-masonry-draghandle>⠿</span>
+          Ei noluisse expetenda qui. Mei in iusto convenire torquatos.
+        </coral-masonry-item>
+      </coral-masonry>
+
+  +document-subsection('Multi-column Items')
+    +markup-example().
+      <coral-masonry layout="fixed-spread" spacing="20" columnwidth="100">
+        <coral-masonry-item>Lorem ipsum dolor sit amet, corpora postulant ocurreret in mel.</coral-masonry-item>
+        <coral-masonry-item colspan="2">His illum augue causae ut, vim ne magna prodesset, est ad nemore quodsi alienum.</coral-masonry-item>
+        <coral-masonry-item>Ei noluisse expetenda qui. Mei in iusto convenire torquatos.</coral-masonry-item>
+        <coral-masonry-item>Et summo volumus sed, sea sale maiorum dignissim te.</coral-masonry-item>
+      </coral-masonry>

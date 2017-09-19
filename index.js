@@ -19,6 +19,7 @@ import {Drawer, DrawerContent} from 'coralui-component-drawer';
 import {FileUpload, FileUploadItem} from 'coralui-component-fileupload';
 import {Icon} from 'coralui-component-icon';
 import {List, AnchorList, ButtonList} from 'coralui-component-list';
+import {Masonry, MasonryItem, MasonryLayout} from 'coralui-component-masonry';
 import {Multifield, MultifieldItem, MultifieldItemContent} from 'coralui-component-multifield';
 import {NumberInput} from 'coralui-component-numberinput';
 import {Overlay} from 'coralui-component-overlay';
@@ -114,6 +115,9 @@ export {
   FileUploadItem,
   Icon,
   List,
+  Masonry,
+  MasonryItem,
+  MasonryLayout,
   Multifield,
   MultifieldItem,
   MultifieldItemContent,

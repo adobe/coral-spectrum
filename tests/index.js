@@ -18,6 +18,7 @@ import 'coralui-component-drawer/tests';
 import 'coralui-component-fileupload/tests';
 import 'coralui-component-icon/tests';
 import 'coralui-component-list/tests';
+import 'coralui-component-masonry/tests';
 import 'coralui-component-multifield/tests';
 import 'coralui-component-numberinput/tests';
 import 'coralui-component-overlay/tests';

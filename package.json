@@ -27,6 +27,7 @@
     "coralui-component-fileupload": "file:coralui-component-fileupload",
     "coralui-component-icon": "file:coralui-component-icon",
     "coralui-component-list": "file:coralui-component-list",
+    "coralui-component-masonry": "file:coralui-component-masonry",
     "coralui-component-multifield": "file:coralui-component-multifield",
     "coralui-component-numberinput": "file:coralui-component-numberinput",
     "coralui-component-overlay": "file:coralui-component-overlay",
