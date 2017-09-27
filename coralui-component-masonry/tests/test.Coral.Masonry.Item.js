@@ -75,9 +75,8 @@ describe('Coral.Masonry.Item', function() {
     });
     
     describe('#_removing', function() {
-      it('should be reflected', function(done) {
-        item._removing = true;
-        expect(item.hasAttribute('_removing')).to.be.true;
+      it('should add is-removing class', function(done) {
+        item.setAttribute('_removing', '');
         
         // Added in next frame for transition animation to be visible
         helpers.next(function() {
@@ -88,7 +87,7 @@ describe('Coral.Masonry.Item', function() {
       
       it('should temporarily add the item again but flag it as being removed', function() {
         el.removeChild(item);
-        expect(item._removing).to.be.true;
+        expect(item.hasAttribute('_removing')).to.be.true;
         expect(item.parentNode).to.equal(el);
       });
   
@@ -105,20 +104,6 @@ describe('Coral.Masonry.Item', function() {
       
           done();
         }, 100);
-      });
-    });
-  
-    describe('#_orderable', function() {
-      it('should be reflected', function() {
-        item._orderable = true;
-        expect(item.hasAttribute('_orderable')).to.be.true;
-      });
-    });
-    
-    describe('#_placeholder', function() {
-      it('should be reflected', function() {
-        item._placeholder = true;
-        expect(item.hasAttribute('_placeholder')).to.be.true;
       });
     });
     

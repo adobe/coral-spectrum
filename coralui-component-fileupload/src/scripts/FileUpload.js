@@ -1043,8 +1043,8 @@ class FileUpload extends FormField(Component(HTMLElement)) {
   
     // Remove the object if it's already there
     const object = this.querySelector('object');
-    if (object) {
-      object.parentNode.removeChild(object);
+    if (object && object.parentNode === this) {
+      this.removeChild(object);
     }
   
     // Add the input to the component

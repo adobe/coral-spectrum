@@ -456,7 +456,7 @@ const Component = (superClass) => class extends superClass {
         this.setAttribute(attributeName, '');
         this._reflectedAttribute = false;
       }
-      else if (!value && this.hasAttributes(attributeName)) {
+      else if (!value && this.hasAttribute(attributeName)) {
         this._reflectedAttribute = true;
         this.removeAttribute(attributeName);
         this._reflectedAttribute = false;

@@ -77,40 +77,6 @@ class MasonryItem extends Component(HTMLElement) {
     this.classList.toggle('is-selected', this._selected);
   }
   
-  /** @private */
-  get _removing() {
-    return this.__removing || false;
-  }
-  set _removing(value) {
-    this.__removing = transform.booleanAttr(value);
-    this._reflectAttribute('_removing', this.__removing);
-    
-    // Do it in the next frame so that the removing animation is visible
-    window.requestAnimationFrame(function() {
-      this.classList.toggle('is-removing', this.__removing);
-    }.bind(this));
-  }
-  
-  /** @private */
-  get _orderable() {
-    return this.__orderable || false;
-  }
-  set _orderable(value) {
-    this.__orderable = transform.booleanAttr(value);
-    this._reflectAttribute('_orderable', this.__orderable);
-    
-    this._updateDragAction(this.__orderable);
-  }
-  
-  /** @private */
-  get _placeholder() {
-    return this.__placeholder || false;
-  }
-  set _placeholder(value) {
-    this.__placeholder = transform.booleanAttr(value);
-    this._reflectAttribute('_placeholder', this.__placeholder);
-  }
-  
   /**
    Animates the insertion of the item.
    
@@ -162,7 +128,22 @@ class MasonryItem extends Component(HTMLElement) {
     }
   }
 
-  static get observedAttributes() {return ['selected', '_removing', '_orderable', '_placeholder'];}
+  static get observedAttributes() {return ['selected', '_removing', '_orderable'];}
+  
+  attributeChangedCallback(name, oldValue, value) {
+    if (name === '_removing') {
+      // Do it in the next frame so that the removing animation is visible
+      window.requestAnimationFrame(function() {
+        this.classList.toggle('is-removing', value !== null);
+      }.bind(this));
+    }
+    else if (name === '_orderable') {
+      this._updateDragAction(value !== null);
+    }
+    else {
+      super.attributeChangedCallback(name, oldValue, value);
+    }
+  }
   
   connectedCallback() {
     super.connectedCallback();

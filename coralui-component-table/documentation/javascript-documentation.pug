@@ -1,0 +1,91 @@
++document-section('JavaScript Examples')
+
+  +document-subsection('Custom sorting')
+    p.
+      If setting <code>sortabletype</code> to <code>custom</code>, columns won't sort based on the default table sorting.
+      Instead, a custom sorting can be performed when triggered by user interaction. This can be defined by listening to
+      the <code>coral-table:beforecolumnsort</code> event.
+
+    +markup-example().
+      <table is="coral-table" id="table_custom_sort" >
+        <colgroup>
+          <col is="coral-table-column" sortable sortabletype="custom" sortabledirection="ascending">
+        </colgroup>
+        <thead is="coral-table-head">
+          <tr is="coral-table-row">
+            <th is="coral-table-headercell">Activities</th>
+          </tr>
+        </thead>
+        <tbody is="coral-table-body"></tbody>
+      </table>
+
+    +example-pre-only().
+      <script>
+        // Table content
+        var activities = ['Beta', 'Alpha', 'Charlie', 'Echo', 'Delta', 'Golf', 'Hotel', 'Foxtrot'];
+
+        // Use table.items.add() to append rows to the table
+        function appendActivity (table, activity) {
+          var row = table.items.add({});
+          row.appendChild(new Coral.Table.Cell().set({
+            content: {
+              textContent : activity
+            }
+          }));
+        }
+
+        // Perform custom sorting
+        function customSort(table, newDirection) {
+          table.items.clear();
+          var data = activities.slice();
+          if (newDirection === Coral.Table.Column.sortableDirection.DEFAULT) {
+            data.slice(0,4).forEach(function(activity) {
+              appendActivity(table, activity);
+            });
+          }
+          else if (newDirection === Coral.Table.Column.sortableDirection.ASCENDING) {
+            data.sort().slice(0,4).forEach(function(activity) {
+              appendActivity(table, activity);
+            });
+          }
+          else if (newDirection === Coral.Table.Column.sortableDirection.DESCENDING) {
+            data.sort().reverse().slice(0,4).forEach(function(activity) {
+              appendActivity(table, activity);
+            });
+          }
+        };
+
+        Coral.commons.ready(table_custom_sort, function(table) {
+          // Perform custom sorting on table initialization
+          customSort(table, table.querySelector('col[is="coral-table-column"]:first-child').sortableDirection);
+
+          // Perform custom sorting on user interaction
+          table_custom_sort.on('coral-table:beforecolumnsort', function(event) {
+            customSort(table, event.detail.direction);
+          });
+        });
+      </script>
+
+    +example-pre-only().
+      <script>
+        var $document = $(document);
+        var $eventLog = $('#eventLog');
+        [
+          'coral-table:change',
+          'coral-table:beforecolumnsort',
+          'coral-table:columnsort',
+          'coral-table:beforecolumndrag',
+          'coral-table:columndrag',
+          'coral-table:rowchange',
+          'coral-table:rowlock',
+          'coral-table:rowunlock',
+          'coral-table:roworder',
+          'coral-table:beforeroworder',
+        ]
+        .forEach(function(eventName) {
+          $document.on(eventName, '.table-example', function(e) {
+            $('#eventLog').log(e.type);
+          });
+        });
+      </script>
+    +log('eventLog')

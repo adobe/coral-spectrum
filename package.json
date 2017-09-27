@@ -43,6 +43,7 @@
     "coralui-component-slider": "file:coralui-component-slider",
     "coralui-component-steplist": "file:coralui-component-steplist",
     "coralui-component-switch": "file:coralui-component-switch",
+    "coralui-component-table": "file:coralui-component-table",
     "coralui-component-tablist": "file:coralui-component-tablist",
     "coralui-component-tabview": "file:coralui-component-tabview",
     "coralui-component-taglist": "file:coralui-component-taglist",

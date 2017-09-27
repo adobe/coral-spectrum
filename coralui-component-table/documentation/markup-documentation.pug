@@ -1,0 +1,466 @@
++document-section('Markup Examples')
+
+  +document-subsection('Content only')
+    +markup-example().
+      <table is="coral-table">
+        <tbody is="coral-table-body">
+          <tr is="coral-table-row">
+            <td is="coral-table-cell" style="text-align:center">
+              <p>There are no saved activities in your account yet.</p>
+              <p>Get started now.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    +document-subsection('Cell divider')
+      +markup-example().
+        <table is="coral-table">
+          <thead is="coral-table-head">
+            <tr is="coral-table-row">
+              <th is="coral-table-headercell"></th>
+              <th is="coral-table-headercell">Activities</th>
+              <th is="coral-table-headercell">Numbers</th>
+              <th is="coral-table-headercell">Date</th>
+              <th is="coral-table-headercell"></th>
+            </tr>
+          </thead>
+          <tbody is="coral-table-body" divider="cell">
+            <tr is="coral-table-row">
+              <th is="coral-table-headercell">Left Label</th>
+              <td is="coral-table-cell">Alpha</td>
+              <td is="coral-table-cell">23,857</td>
+              <td is="coral-table-cell">January 28, 2012</td>
+              <th is="coral-table-headercell">Right Label</th>
+            </tr>
+            <tr is="coral-table-row">
+              <th is="coral-table-headercell">Left Label</th>
+              <td is="coral-table-cell">Beta</td>
+              <td is="coral-table-cell">20,398</td>
+              <td is="coral-table-cell">December 1, 2011</td>
+              <th is="coral-table-headercell">Right Label</th>
+            </tr>
+            <tr is="coral-table-row">
+              <th is="coral-table-headercell">Left Label</th>
+              <td is="coral-table-cell">Charlie</td>
+              <td is="coral-table-cell">3,498</td>
+              <td is="coral-table-cell">February 15, 2012</td>
+              <th is="coral-table-headercell">Right Label</th>
+            </tr>
+          </tbody>
+        </table>
+
+    +document-subsection('Scrollable table with a sticky head')
+      +markup-example().
+        <table is="coral-table" style="height:200px">
+          <thead is="coral-table-head" sticky>
+            <tr is="coral-table-row">
+              <th is="coral-table-headercell">Activities</th>
+              <th is="coral-table-headercell">Numbers</th>
+              <th is="coral-table-headercell">Date</th>
+            </tr>
+          </thead>
+          <tbody is="coral-table-body">
+            <tr is="coral-table-row">
+              <td is="coral-table-cell">Alpha</td>
+              <td is="coral-table-cell">23,857</td>
+              <td is="coral-table-cell">January 28, 2012</td>
+            </tr>
+            <tr is="coral-table-row">
+              <td is="coral-table-cell">Beta</td>
+              <td is="coral-table-cell">20,398</td>
+              <td is="coral-table-cell">December 1, 2011</td>
+            </tr>
+            <tr is="coral-table-row">
+              <td is="coral-table-cell">Charlie</td>
+              <td is="coral-table-cell">3,498</td>
+              <td is="coral-table-cell">February 15, 2012</td>
+            </tr>
+            <tr is="coral-table-row">
+              <td is="coral-table-cell">Delta</td>
+              <td is="coral-table-cell">20,398</td>
+              <td is="coral-table-cell">May 16, 2014</td>
+            </tr>
+            <tr is="coral-table-row">
+              <td is="coral-table-cell">Echo</td>
+              <td is="coral-table-cell">1,247</td>
+              <td is="coral-table-cell">August 12, 2010</td>
+            </tr>
+            <tr is="coral-table-row">
+              <td is="coral-table-cell">Foxtrot</td>
+              <td is="coral-table-cell">90,034</td>
+              <td is="coral-table-cell">September 15, 2000</td>
+            </tr>
+          </tbody>
+        </table>
+
+      p.
+        Table exposes the <code>coral-table-scroll</code> attribute that allows in sticky mode to define the table
+        scrolling container max-height. This is particularly useful if the table contains dynamic content.
+
+      +document-subsection('Sortable table columns')
+        p.
+          In this example, the cell <code>value</code> property is used to compare cells during a column sort. If
+          not set, the sorting will be performed on the cell content. The content will be parse accordingly based
+          on the column's <code>sortabletype</code> property.
+        p.
+          Sorting columns triggers the
+          <a class="coral-Link" href="#Coral.Table:coral-table:beforecolumnsort">coral-table:beforecolumnsort</a> and
+          <a class="coral-Link" href="#Coral.Table:coral-table:columnsort">coral-table:columnsort</a> events.
+
+        +markup-example().
+          <table is="coral-table" class="table-example">
+            <colgroup>
+              <col is="coral-table-column" sortable sortabledirection="ascending">
+              <col is="coral-table-column" sortable sortabletype="number">
+              <col is="coral-table-column" sortable sortabletype="date">
+            </colgroup>
+            <thead is="coral-table-head">
+              <tr is="coral-table-row">
+                <th is="coral-table-headercell">Activities</th>
+                <th is="coral-table-headercell">Numbers</th>
+                <th is="coral-table-headercell">Date</th>
+              </tr>
+            </thead>
+            <tbody is="coral-table-body">
+              <tr is="coral-table-row">
+                <td is="coral-table-cell">Alpha</td>
+                <td is="coral-table-cell" value="23857">23,857</td>
+                <td is="coral-table-cell" value="1327705200000">January 28, 2012</td>
+              </tr>
+              <tr is="coral-table-row">
+                <td is="coral-table-cell">Beta</td>
+                <td is="coral-table-cell" value="20398">20,398</td>
+                <td is="coral-table-cell" value="1322694000000">December 1, 2011</td>
+              </tr>
+              <tr is="coral-table-row">
+                <td is="coral-table-cell">Charlie</td>
+                <td is="coral-table-cell" value="3498">3,498</td>
+                <td is="coral-table-cell" value="1329260400000">February 15, 2012</td>
+              </tr>
+              <tr is="coral-table-row">
+                <td is="coral-table-cell">Delta</td>
+                <td is="coral-table-cell" value="20398">20,398</td>
+                <td is="coral-table-cell" value="1337119200000">May 16, 2012</td>
+              </tr>
+            </tbody>
+          </table>
+
+      +document-subsection('Lockable rows')
+        p.
+          If rows are locked, they float to the top of the table and aren't affected by column sorting.
+        p.
+          Locking and unlocking rows triggers the
+          <a class="coral-Link" href="#Coral.Table:coral-table:rowlock">coral-table:rowlock</a> and
+          <a class="coral-Link" href="#Coral.Table:coral-table:rowunlock">coral-table:rowunlock</a> events.
+
+        +markup-example().
+          <table is="coral-table" lockable class="table-example">
+            <colgroup>
+              <col is="coral-table-column" sortable sortabledirection="ascending">
+              <col is="coral-table-column">
+              <col is="coral-table-column">
+              <col is="coral-table-column">
+            </colgroup>
+            <thead is="coral-table-head">
+              <tr is="coral-table-row">
+                <th is="coral-table-headercell" sortable>Activities</th>
+                <th is="coral-table-headercell">Numbers</th>
+                <th is="coral-table-headercell">Date</th>
+                <th is="coral-table-headercell"></th>
+              </tr>
+            </thead>
+            <tbody is="coral-table-body">
+              <tr is="coral-table-row">
+                <td is="coral-table-cell">Beta</td>
+                <td is="coral-table-cell">23,857</td>
+                <td is="coral-table-cell">January 28, 2012</td>
+                <td is="coral-table-cell">
+                  <button is="coral-button" type="button" icon="lockOn" variant="minimal" coral-table-rowlock></button>
+                </td>
+              </tr>
+              <tr is="coral-table-row">
+                <td is="coral-table-cell">Alpha</td>
+                <td is="coral-table-cell">20,398</td>
+                <td is="coral-table-cell">December 1, 2011</td>
+                <td is="coral-table-cell">
+                  <button is="coral-button" type="button" icon="lockOn" variant="minimal" coral-table-rowlock></button>
+                 </td>
+              </tr>
+              <tr is="coral-table-row">
+                <td is="coral-table-cell">Charlie</td>
+                <td is="coral-table-cell">3,498</td>
+                <td is="coral-table-cell">February 15, 2012</td>
+                <td is="coral-table-cell">
+                  <button is="coral-button" type="button" icon="lockOn" variant="minimal" coral-table-rowlock></button>
+                 </td>
+              </tr>
+              <tr is="coral-table-row">
+                <td is="coral-table-cell">Delta</td>
+                <td is="coral-table-cell">20,398</td>
+                <td is="coral-table-cell">May 16, 2012</td>
+                <td is="coral-table-cell">
+                  <button is="coral-button" type="button" icon="lockOn" variant="minimal" coral-table-rowlock></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+      +document-subsection('Selectable row')
+        p.
+          Selecting and deselecting rows triggers the
+          <a class="coral-Link" href="#Coral.Table:coral-table:change">coral-table:change</a> event.
+
+        +markup-example().
+          <table is="coral-table" selectable class="table-example">
+            <thead is="coral-table-head">
+              <tr is="coral-table-row">
+                <th is="coral-table-headercell">Activities</th>
+                <th is="coral-table-headercell">Numbers</th>
+                <th is="coral-table-headercell">Date</th>
+              </tr>
+            </thead>
+            <tbody is="coral-table-body">
+              <tr is="coral-table-row">
+                <td is="coral-table-cell">Alpha</td>
+                <td is="coral-table-cell">23,857</td>
+                <td is="coral-table-cell">January 28, 2012</td>
+              </tr>
+              <tr is="coral-table-row">
+                <td is="coral-table-cell">Beta</td>
+                <td is="coral-table-cell">20,398</td>
+                <td is="coral-table-cell">December 1, 2011</td>
+              </tr>
+              <tr is="coral-table-row">
+                <td is="coral-table-cell">Charlie</td>
+                <td is="coral-table-cell">3,498</td>
+                <td is="coral-table-cell">February 15, 2012</td>
+              </tr>
+              <tr is="coral-table-row">
+                <td is="coral-table-cell">Delta</td>
+                <td is="coral-table-cell">20,398</td>
+                <td is="coral-table-cell">May 16, 2012</td>
+              </tr>
+            </tbody>
+          </table>
+
+      +document-subsection('Selectable cells')
+        p.
+          Selecting and deselecting cells triggers the
+          <a class="coral-Link" href="#Coral.Table:coral-table:rowchange">coral-table:rowchange</a> event.
+
+        +markup-example().
+          <table is="coral-table" class="table-example">
+            <thead is="coral-table-head">
+              <tr is="coral-table-row">
+                <th is="coral-table-headercell">Activities</th>
+                <th is="coral-table-headercell">Numbers</th>
+                <th is="coral-table-headercell">Date</th>
+              </tr>
+            </thead>
+            <tbody is="coral-table-body">
+              <tr is="coral-table-row" selectable multiple>
+                <td is="coral-table-cell">Alpha</td>
+                <td is="coral-table-cell">23,857</td>
+                <td is="coral-table-cell">January 28, 2012</td>
+              </tr>
+              <tr is="coral-table-row" selectable>
+                <td is="coral-table-cell">Beta</td>
+                <td is="coral-table-cell">20,398</td>
+                <td is="coral-table-cell">December 1, 2011</td>
+              </tr>
+              <tr is="coral-table-row" selectable multiple>
+                <td is="coral-table-cell">Charlie</td>
+                <td is="coral-table-cell">3,498</td>
+                <td is="coral-table-cell">February 15, 2012</td>
+              </tr>
+              <tr is="coral-table-row" selectable>
+                <td is="coral-table-cell">Delta</td>
+                <td is="coral-table-cell">20,398</td>
+                <td is="coral-table-cell">May 16, 2012</td>
+              </tr>
+            </tbody>
+          </table>
+
+      +document-subsection('Orderable columns and orderable rows')
+        p.
+          Rows can't be ordered if the table is in a sorted state.
+        p.
+          Rearranging rows triggers the
+          <a class="coral-Link" href="#Coral.Table:coral-table:beforeroworder">coral-table:beforeroworder</a> and
+          <a class="coral-Link" href="#Coral.Table:coral-table:roworder">coral-table:roworder</a> events.
+
+        p.
+          Rearranging columns triggers the
+          <a class="coral-Link" href="#Coral.Table:coral-table:beforecolumndrag">coral-table:beforecolumndrag</a> and
+          <a class="coral-Link" href="#Coral.Table:coral-table:columndrag">coral-table:columndrag</a> events.
+
+        +markup-example().
+          <table is="coral-table" orderable class="table-example">
+            <colgroup>
+              <col is="coral-table-column" sortable sortabledirection="descending" orderable>
+              <col is="coral-table-column" orderable>
+              <col is="coral-table-column" orderable>
+              <col is="coral-table-column">
+            </colgroup>
+            <thead is="coral-table-head">
+              <tr is="coral-table-row">
+                <th is="coral-table-headercell">Activities</th>
+                <th is="coral-table-headercell">Numbers</th>
+                <th is="coral-table-headercell">Date</th>
+                <th is="coral-table-headercell"></th>
+              </tr>
+            </thead>
+            <tbody is="coral-table-body">
+              <tr is="coral-table-row">
+                <td is="coral-table-cell">Alpha</td>
+                <td is="coral-table-cell">23,857</td>
+                <td is="coral-table-cell">January 28, 2012</td>
+                <td is="coral-table-cell">
+                  <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
+                </td>
+              </tr>
+              <tr is="coral-table-row">
+                <td is="coral-table-cell">Beta</td>
+                <td is="coral-table-cell">20,398</td>
+                <td is="coral-table-cell">December 1, 2011</td>
+                <td is="coral-table-cell">
+                  <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
+                </td>
+              </tr>
+              <tr is="coral-table-row">
+                <td is="coral-table-cell">Charlie</td>
+                <td is="coral-table-cell">3,498</td>
+                <td is="coral-table-cell">February 15, 2012</td>
+                <td is="coral-table-cell">
+                  <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
+                </td>
+              </tr>
+              <tr is="coral-table-row">
+                <td is="coral-table-cell">Delta</td>
+                <td is="coral-table-cell">20,398</td>
+                <td is="coral-table-cell">May 16, 2012</td>
+                <td is="coral-table-cell">
+                  <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+      +document-subsection('Hidden columns')
+        +markup-example().
+          <table is="coral-table">
+            <colgroup>
+              <col is="coral-table-column">
+              <col is="coral-table-column" hidden>
+              <col is="coral-table-column">
+            </colgroup>
+            <thead is="coral-table-head">
+              <tr is="coral-table-row">
+                <th is="coral-table-headercell">Activities</th>
+                <th is="coral-table-headercell">Numbers</th>
+                <th is="coral-table-headercell">Date</th>
+              </tr>
+            </thead>
+            <tbody is="coral-table-body">
+              <tr is="coral-table-row">
+                <td is="coral-table-cell">Alpha</td>
+                <td is="coral-table-cell">23,857</td>
+                <td is="coral-table-cell">January 28, 2012</td>
+              </tr>
+              <tr is="coral-table-row">
+                <td is="coral-table-cell">Beta</td>
+                <td is="coral-table-cell">20,398</td>
+                <td is="coral-table-cell">December 1, 2011</td>
+              </tr>
+              <tr is="coral-table-row">
+                <td is="coral-table-cell">Charlie</td>
+                <td is="coral-table-cell">3,498</td>
+                <td is="coral-table-cell">February 15, 2012</td>
+              </tr>
+              <tr is="coral-table-row">
+                <td is="coral-table-cell">Delta</td>
+                <td is="coral-table-cell">20,398</td>
+                <td is="coral-table-cell">May 16, 2012</td>
+              </tr>
+            </tbody>
+          </table>
+
+      +document-subsection('Handles')
+        p.
+          To define table actions on specific elements, handles can be used.
+          A handle is given a special attribute :
+
+        ul
+          li.
+            <code>[coral-table-select]</code> - Select/unselect all table items.
+          li.
+            <code>[coral-table-rowselect]</code> - Select/unselect the table item.
+          li.
+            <code>[coral-table-roworder]</code> - Drag to order the table item.
+          li
+            <code>[coral-table-rowlock]</code> - Lock/unlock the table item.
+
+        +markup-example().
+          <table is="coral-table" selectable multiple orderable>
+            <colgroup>
+              <col is="coral-table-column" fixedwidth>
+              <col is="coral-table-column">
+              <col is="coral-table-column">
+              <col is="coral-table-column" fixedwidth>
+            </colgroup>
+            <thead is="coral-table-head">
+              <tr is="coral-table-row">
+                <th is="coral-table-headercell">
+                  <coral-checkbox coral-table-select></coral-checkbox>
+                </th>
+                <th is="coral-table-headercell">Activities</th>
+                <th is="coral-table-headercell">Date</th>
+                <th is="coral-table-headercell"></th>
+              </tr>
+            </thead>
+            <tbody is="coral-table-body">
+              <!-- Example of default handles -->
+              <tr is="coral-table-row">
+                <td is="coral-table-cell">
+                  <coral-checkbox coral-table-rowselect></coral-checkbox>
+                </td>
+                <td is="coral-table-cell">Alpha</td>
+                <td is="coral-table-cell">January 28, 2012</td>
+                <td is="coral-table-cell">
+                  <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
+                </td>
+              </tr>
+              <tr is="coral-table-row">
+                <td is="coral-table-cell">
+                  <coral-checkbox coral-table-rowselect></coral-checkbox>
+                </td>
+                <td is="coral-table-cell">Beta</td>
+                <td is="coral-table-cell">December 1, 2011</td>
+                <td is="coral-table-cell">
+                  <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
+                </td>
+              </tr>
+              <tr is="coral-table-row">
+                <td is="coral-table-cell">
+                  <coral-checkbox coral-table-rowselect></coral-checkbox>
+                </td>
+                <td is="coral-table-cell">Charlie</td>
+                <td is="coral-table-cell">February 15, 2012</td>
+                <td is="coral-table-cell">
+                  <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
+                </td>
+              </tr>
+              <!-- Example of defined handles -->
+              <tr is="coral-table-row">
+                <td is="coral-table-cell">
+                  <coral-checkbox coral-table-rowselect/>
+                </td>
+                <td is="coral-table-cell">Delta</td>
+                <td is="coral-table-cell">May 16, 2012</td>
+                <td is="coral-table-cell">
+                  <button is="coral-button" type="button" variant="minimal" icon="apps" coral-table-roworder></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>

@@ -34,6 +34,7 @@ import 'coralui-component-shell/tests';
 import 'coralui-component-slider/tests';
 import 'coralui-component-steplist/tests';
 import 'coralui-component-switch/tests';
+import 'coralui-component-table/tests';
 import 'coralui-component-tablist/tests';
 import 'coralui-component-tabview/tests';
 import 'coralui-component-taglist/tests';

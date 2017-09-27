@@ -399,11 +399,11 @@ class DragAction {
       event.preventDefault();
     });
     
-    document.body._overflow = getComputedStyle(document.body).overflow;
+    document.body._overflow = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = 'hidden';
     
     if (!this._container.matches('body')) {
-      this._container._overflow = getComputedStyle(this._container).overflow;
+      this._container._overflow = window.getComputedStyle(this._container).overflow;
       this._container.style.overflow = this.scroll ? 'scroll' : 'hidden';
     }
     
@@ -424,7 +424,11 @@ class DragAction {
       this._dragElement.classList.remove(OPEN_HAND_CLASS);
     }
     this._dragElement.classList.add(IS_DRAGGING_CLASS);
-    this._dragElement.style.position = 'relative';
+    
+    // Apply relative position by default
+    if (window.getComputedStyle(this._dragElement).position === 'static') {
+      this._dragElement.style.position = 'relative';
+    }
     
     this._dragEvents.dispatch('coral-dragaction:dragstart', {
       detail: {

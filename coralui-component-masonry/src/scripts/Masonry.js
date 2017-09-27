@@ -54,11 +54,11 @@ document.addEventListener('error', function(event) {
 
 const itemFilter = (element) => {
   // Ignore children which are being removed
-  return element && element.tagName === 'CORAL-MASONRY-ITEM' && !element._removing;
+  return element && element.tagName === 'CORAL-MASONRY-ITEM' && !element.hasAttribute('_removing');
 };
 
 const isRemovingOrRemoved = (item) => {
-  return item._removing || !item.parentNode;
+  return item.hasAttribute('_removing') || !item.parentNode;
 };
 
 /**
@@ -414,7 +414,7 @@ class Masonry extends Component(HTMLElement) {
     const item = event.target;
   
     // check if just moving
-    if (!item._removing && this !== item._masonry && !item._placeholder) {
+    if (!item.hasAttribute('_removing') && this !== item._masonry && !item.hasAttribute('_placeholder')) {
       item._masonry = this;
 
       // Insert animation start style. This is separated from _insert because otherwise we would have to enforce a
@@ -435,16 +435,16 @@ class Masonry extends Component(HTMLElement) {
       return;
     }
     
-    if (!item._removing) {
+    if (!item.hasAttribute('_removing')) {
       // Attach again for remove transition
-      item._removing = true;
+      item.setAttribute('_removing', '');
       this.appendChild(item);
       commons.transitionEnd(item, function() {
         item.remove();
       });
     }
     else { // remove transition completed
-      item._removing = false;
+      item.removeAttribute('_removing');
       item._masonry = null;
       
       this._onItemRemoved(item);
@@ -528,7 +528,7 @@ class Masonry extends Component(HTMLElement) {
       item._oldBefore = getPreviousItem(item);
       
       const placeholder = item._dropPlaceholder = new MasonryItem();
-      placeholder._placeholder = true;
+      placeholder.setAttribute('_placeholder', '');
       
       // Add a content div with the right dimension instead of setting the dimension on the item directly. This is
       // necessary because some layouts modify the dimensions as well.
@@ -641,7 +641,7 @@ class Masonry extends Component(HTMLElement) {
     
     // Support cloneNode
     const object = this.querySelector('object');
-    if (object) {object.remove();}
+    if (object && object.parentNode === this) {this.removeChild(object);}
     
     // Default reflected attributes
     if (!this._layout) {this.layout = layouts.FIXED_CENTERED;}
