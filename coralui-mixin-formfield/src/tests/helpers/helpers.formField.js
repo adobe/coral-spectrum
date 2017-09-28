@@ -2,14 +2,6 @@ var helpers = helpers || {};
 
 var LABELLABLE_ELEMENTS_SELECTOR = 'button,input:not([type=hidden]),keygen,meter,output,progress,select,textarea';
 
-function dispatchChangeEvent(element) {
-  'use strict';
-  
-  var event = document.createEvent('HTMLEvents');
-  event.initEvent('change', true, true);
-  element.dispatchEvent(event);
-}
-
 /**
  Helper used to transform submittable form elements into an array of name/value pair.
  
@@ -469,7 +461,7 @@ helpers.testFormField = function(markup, options) {
             
             internalInput.value = options.value;
             
-            dispatchChangeEvent(internalInput);
+            helpers.event('change', internalInput);
             
             expect(changeSpy.callCount).to.equal(1);
             

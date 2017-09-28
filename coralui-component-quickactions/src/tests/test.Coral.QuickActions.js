@@ -288,9 +288,7 @@ describe('Coral.QuickActions', function() {
 
       el.target = targetElement;
 
-      var event = document.createEvent('Event');
-      event.initEvent('mouseenter', true, false);
-      targetElement.dispatchEvent(event);
+      helpers.mouseEvent('mouseenter', targetElement);
 
       expect(el.open).to.equal(true, 'QuickActions opened after the mouse enters the target');
     });
@@ -302,12 +300,9 @@ describe('Coral.QuickActions', function() {
       el.show();
 
       expect(el.open).to.equal(true, 'QuickActions successfully shown');
-
-      // Create and dispatch the event
-      var event = document.createEvent('Event');
-      event.initEvent('mouseleave', true, false);
-      targetElement.dispatchEvent(event);
-
+      
+      helpers.mouseEvent('mouseleave', targetElement);
+      
       expect(el.open).to.equal(false, 'QuickActions closed after mouse leaves target');
     });
 

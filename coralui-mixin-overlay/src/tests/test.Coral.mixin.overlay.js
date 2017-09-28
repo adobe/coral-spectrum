@@ -1,6 +1,23 @@
 import Component from 'coralui-mixin-component';
 import Overlay from '../scripts/Overlay';
 
+/**
+ Get the zIndex of an element
+ 
+ @param {HTMLElement} element  The element to get the Zindex of
+ 
+ @returns {Number} The element's zIndex
+ */
+const zIndex = (element) => {
+  const elZIndex = element.style.zIndex;
+  if (elZIndex === '') {
+    return -1;
+  }
+  else {
+    return parseFloat(elZIndex);
+  }
+};
+
 describe('Coral.mixin.overlay', function() {
   'use strict';
 
@@ -103,15 +120,6 @@ describe('Coral.mixin.overlay', function() {
   function backdropOpen(element) {
     return element.style.display !== 'none' && element._isOpen;
   }
-
-  /**
-    Dispatch an Event
-  */
-  function dispatchEvent(type, target) {
-    var e = document.createEvent('HTMLEvents');
-    e.initEvent(type, true, true);
-    target.dispatchEvent(e);
-  }
   
   it('should focus on previously focused element when hidden', function(done) {
     overlay = new OverlayDummy2();
@@ -192,7 +200,7 @@ describe('Coral.mixin.overlay', function() {
         expect(document.activeElement).to.equal(div,'returnFocusTo receives focus when the overlay closes');
         
         // Dispatch a blur event from returnFocusTo element
-        dispatchEvent('blur', div);
+        helpers.event('blur', div);
         
         helpers.next(function() {
           
@@ -304,7 +312,7 @@ describe('Coral.mixin.overlay', function() {
     
     overlay.querySelector('[coral-tabcapture]').focus();
     // for FF
-    overlay.querySelector('[coral-tabcapture]').dispatchEvent(new Event('focus'));
+    helpers.event('focus', overlay.querySelector('[coral-tabcapture]'));
     expect(document.activeElement).to.equal(button2);
   });
   
@@ -320,7 +328,7 @@ describe('Coral.mixin.overlay', function() {
     
     overlay.querySelectorAll('[coral-tabcapture]')[1].focus();
     // for FF
-    overlay.querySelectorAll('[coral-tabcapture]')[1].dispatchEvent(new Event('focus'));
+    helpers.event('focus', overlay.querySelectorAll('[coral-tabcapture]')[1]);
     expect(document.activeElement).to.equal(button1);
   });
   
@@ -336,7 +344,7 @@ describe('Coral.mixin.overlay', function() {
     
     overlay.querySelectorAll('[coral-tabcapture]')[2].focus();
     // for FF
-    overlay.querySelectorAll('[coral-tabcapture]')[2].dispatchEvent(new Event('focus'));
+    helpers.event('focus', overlay.querySelectorAll('[coral-tabcapture]')[2]);
     expect(document.activeElement).to.equal(button2);
   });
   
@@ -418,13 +426,13 @@ describe('Coral.mixin.overlay', function() {
       expect(backdrop).to.not.be.null;
       
       // Make sure the top overlay is above the bottom overlay
-      expect(helpers.zIndex(overlay2)).to.be.greaterThan(helpers.zIndex(overlay1));
+      expect(zIndex(overlay2)).to.be.greaterThan(zIndex(overlay1));
       
       // Make sure the backdrop is positioned under the top overlay
-      expect(helpers.zIndex(backdrop)).to.be.lessThan(helpers.zIndex(overlay2), 'backdrop zIndex as compared to top overlay when both visible');
+      expect(zIndex(backdrop)).to.be.lessThan(zIndex(overlay2), 'backdrop zIndex as compared to top overlay when both visible');
       
       // Make sure the backdrop is positioned above the bottom overlay
-      expect(helpers.zIndex(backdrop)).to.be.greaterThan(helpers.zIndex(overlay1), 'backdrop zIndex as compared to bottom overlay when both visible');
+      expect(zIndex(backdrop)).to.be.greaterThan(zIndex(overlay1), 'backdrop zIndex as compared to bottom overlay when both visible');
       
       // Clean up
       overlay1.open = false;
@@ -508,10 +516,10 @@ describe('Coral.mixin.overlay', function() {
       expect(backdropOpen(backdrop)).to.equal(true, 'backdrop visibility when both overlays visible');
       
       // Make sure the backdrop positioned under the top overlay
-      expect(helpers.zIndex(backdrop)).to.be.lessThan(helpers.zIndex(overlay2), 'backdrop zIndex as compared to top overlay when both visible');
+      expect(zIndex(backdrop)).to.be.lessThan(zIndex(overlay2), 'backdrop zIndex as compared to top overlay when both visible');
       
       // Make sure the backdrop positioned above the bottom overlay
-      expect(helpers.zIndex(backdrop)).to.be.greaterThan(helpers.zIndex(overlay1), 'backdrop zIndex as compared to bottom overlay when both visible');
+      expect(zIndex(backdrop)).to.be.greaterThan(zIndex(overlay1), 'backdrop zIndex as compared to bottom overlay when both visible');
       
       // Hide top overlay
       overlay2.open = false;
@@ -521,7 +529,7 @@ describe('Coral.mixin.overlay', function() {
         expect(backdropOpen(backdrop)).to.equal(true, 'backdrop visibility when top overlay hidden');
         
         // Make sure it's positioned under the bottom overlay
-        expect(helpers.zIndex(backdrop)).to.be.lessThan(helpers.zIndex(overlay1), 'backdrop zIndex as compared to bottom overlay when top overlay closed');
+        expect(zIndex(backdrop)).to.be.lessThan(zIndex(overlay1), 'backdrop zIndex as compared to bottom overlay when top overlay closed');
         
         // Hide the bottom overlay
         overlay1.open = false;
@@ -531,7 +539,7 @@ describe('Coral.mixin.overlay', function() {
           expect(backdropOpen(backdrop)).to.equal(false, 'backdrop visibility when both overlays hidden');
           
           // Make sure it's positioned under the bottom overlay
-          expect(helpers.zIndex(backdrop)).to.be.lessThan(helpers.zIndex(overlay1), 'backdrop zIndex as compared to bottom overlay when both overlays closed');
+          expect(zIndex(backdrop)).to.be.lessThan(zIndex(overlay1), 'backdrop zIndex as compared to bottom overlay when both overlays closed');
           
           done();
         });
@@ -607,13 +615,13 @@ describe('Coral.mixin.overlay', function() {
       expect(backdropOpen(backdrop)).to.equal(true, 'backdrop visibility initially');
       
       // Make sure it's positioned under the top overlay
-      expect(helpers.zIndex(backdrop)).to.be.lessThan(helpers.zIndex(overlay3), 'backdrop zIndex as compared to top overlay');
+      expect(zIndex(backdrop)).to.be.lessThan(zIndex(overlay3), 'backdrop zIndex as compared to top overlay');
       
       // Make sure it's positioned above the middle overlay
-      expect(helpers.zIndex(backdrop)).to.be.greaterThan(helpers.zIndex(overlay2), 'backdrop zIndex as compared to middle overlay');
+      expect(zIndex(backdrop)).to.be.greaterThan(zIndex(overlay2), 'backdrop zIndex as compared to middle overlay');
       
       // Make sure it's positioned above the bottom overlay
-      expect(helpers.zIndex(backdrop)).to.be.greaterThan(helpers.zIndex(overlay1), 'backdrop zIndex as compared to bottom overlay');
+      expect(zIndex(backdrop)).to.be.greaterThan(zIndex(overlay1), 'backdrop zIndex as compared to bottom overlay');
       
       // Hide middle overlay
       overlay2.open = false;
@@ -623,10 +631,10 @@ describe('Coral.mixin.overlay', function() {
         expect(backdropOpen(backdrop)).to.equal(true, 'backdrop visibility when middle overlay hidden');
         
         // Make sure it's positioned under the top overlay
-        expect(helpers.zIndex(backdrop)).to.be.lessThan(helpers.zIndex(overlay3), 'backdrop zIndex as compared to top overlay');
+        expect(zIndex(backdrop)).to.be.lessThan(zIndex(overlay3), 'backdrop zIndex as compared to top overlay');
         
         // Make sure it's positioned above the bottom overlay
-        expect(helpers.zIndex(backdrop)).to.be.greaterThan(helpers.zIndex(overlay1), 'backdrop zIndex as compared to bottom overlay');
+        expect(zIndex(backdrop)).to.be.greaterThan(zIndex(overlay1), 'backdrop zIndex as compared to bottom overlay');
         
         // Hide the bottom overlay
         overlay1.open = false;
@@ -636,7 +644,7 @@ describe('Coral.mixin.overlay', function() {
           expect(backdropOpen(backdrop)).to.equal(true, 'backdrop visibility when bottom overlay hidden');
           
           // Make sure it's positioned under the top overlay
-          expect(helpers.zIndex(backdrop)).to.be.lessThan(helpers.zIndex(overlay3), 'backdrop zIndex as compared to top overlay');
+          expect(zIndex(backdrop)).to.be.lessThan(zIndex(overlay3), 'backdrop zIndex as compared to top overlay');
           
           // Hide the top overlay
           overlay3.open = false;
@@ -673,12 +681,12 @@ describe('Coral.mixin.overlay', function() {
       // Make sure the backdrop is visible
       expect(backdropOpen(backdrop)).to.equal(true, 'backdrop visibility initially');
       
-      expect(helpers.zIndex(backdrop)).to.equal(helpers.zIndex(overlay1) - 1, 'backdrop should be behind the modal dialog 1');
+      expect(zIndex(backdrop)).to.equal(zIndex(overlay1) - 1, 'backdrop should be behind the modal dialog 1');
       
       overlay3.open = false;
       
       helpers.next(function() {
-        expect(helpers.zIndex(backdrop)).to.equal(helpers.zIndex(overlay1) - 1, 'backdrop shouldstill be behind the modal dialog 1');
+        expect(zIndex(backdrop)).to.equal(zIndex(overlay1) - 1, 'backdrop shouldstill be behind the modal dialog 1');
         done();
       });
       
@@ -734,7 +742,7 @@ describe('Coral.mixin.overlay', function() {
       
       helpers.next(function() {
         // It should now be on top
-        expect(helpers.zIndex(overlay2)).to.be.greaterThan(helpers.zIndex(overlay1));
+        expect(zIndex(overlay2)).to.be.greaterThan(zIndex(overlay1));
         
         overlay2.open = false;
         
@@ -742,7 +750,7 @@ describe('Coral.mixin.overlay', function() {
           var backdrop = document.querySelector('.coral3-Backdrop');
           expect(backdrop).to.not.be.null;
           
-          expect(helpers.zIndex(overlay1)).to.be.greaterThan(helpers.zIndex(backdrop));
+          expect(zIndex(overlay1)).to.be.greaterThan(zIndex(backdrop));
           
           // Clean up
           overlay1.open = false;

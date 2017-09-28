@@ -1,11 +1,5 @@
 describe('Coral.NumberInput', function() {
   'use strict';
-  
-  function dispatchChangeEvent(element) {
-    var event = document.createEvent('HTMLEvents');
-    event.initEvent('change', true, true);
-    element.dispatchEvent(event);
-  }
 
   function testInstance(instance) {
     expect(instance.getAttribute('role')).to.equal('group');
@@ -30,7 +24,6 @@ describe('Coral.NumberInput', function() {
     expect(instance.getAttribute('required')).to.be.null;
     expect(instance.getAttribute('placeholder')).to.be.null;
     expect(instance.getAttribute('value')).to.be.null;
-    expect(helpers.classCount(instance)).to.equal(2);
   }
 
   describe('Namespace', function() {
@@ -93,7 +86,7 @@ describe('Coral.NumberInput', function() {
         const el = helpers.build(window.__html__['Coral.NumberInput.invalid.html']);
 
         el._elements.input.value = '7';
-        dispatchChangeEvent(el._elements.input);
+        helpers.event('change',  el._elements.input);
 
         expect(el.value).to.equal('7');
         expect(el.invalid).to.be.false;
@@ -787,7 +780,7 @@ describe('Coral.NumberInput', function() {
         el.on('change', changeSpy);
 
         el._elements.input.value = '5';
-        dispatchChangeEvent(el._elements.input);
+        helpers.event('change', el._elements.input);
 
         expect(changeSpy.callCount).to.equal(1);
       });
@@ -1118,7 +1111,7 @@ describe('Coral.NumberInput', function() {
       el.value = '5';
 
       el._elements.input.value = 'asdf';
-      dispatchChangeEvent(el._elements.input);
+      helpers.event('change', el._elements.input);
 
       // value should default empty string
       expect(el.value).to.equal('');

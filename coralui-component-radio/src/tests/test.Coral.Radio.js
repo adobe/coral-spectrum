@@ -16,7 +16,6 @@ describe('Coral.Radio', function() {
         expect(radio.hasAttribute(attr)).to.be.false;
       });
       expect(radio.classList.contains('coral3-Radio')).to.be.true;
-      expect(helpers.classCount(radio)).to.equal(1);
     });
     
     it('should be possible to clone the element using markup', function() {

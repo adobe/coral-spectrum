@@ -1,12 +1,6 @@
 describe('Coral.Autocomplete', function() {
   'use strict';
 
-  function dispatchInputEvent(element) {
-    var event = document.createEvent('HTMLEvents');
-    event.initEvent('input', true, true);
-    element.dispatchEvent(event);
-  }
-
   describe('Namespace', function() {
     it('should be defined', function() {
       expect(Coral).to.have.property('Autocomplete');
@@ -337,7 +331,7 @@ describe('Coral.Autocomplete', function() {
 
         // Trigger input event
         el._elements.input.value = 'sa';
-        dispatchInputEvent(el._elements.input);
+        helpers.event('input', el._elements.input);
 
         expect(spy.callCount).to.equal(1, 'spy should be called');
         expect(el._elements.selectList.items.length).to.equal(1, 'should have a single SelectList item');
@@ -361,7 +355,7 @@ describe('Coral.Autocomplete', function() {
 
         // Trigger input event
         el._elements.input.value = 'sa';
-        dispatchInputEvent(el._elements.input);
+        helpers.event('input', el._elements.input);
 
         // Click the suggestion
         el._elements.selectList.items.getAll()[0].click();
@@ -402,7 +396,7 @@ describe('Coral.Autocomplete', function() {
 
         // Trigger input event
         el._elements.input.value = 'Chrome';
-        dispatchInputEvent(el._elements.input);
+        helpers.event('input', el._elements.input);
 
         // Select first item
         helpers.keydown('down', el._elements.input);
@@ -444,7 +438,7 @@ describe('Coral.Autocomplete', function() {
         helpers.next(function() {
           // Trigger input event
           el._elements.input.value = 'fi';
-          dispatchInputEvent(el._elements.input);
+          helpers.event('input', el._elements.input);
 
           // Click the suggestion
           el._elements.selectList.items.getAll()[0].click();
@@ -527,7 +521,7 @@ describe('Coral.Autocomplete', function() {
 
           // Clear the input text and trigger events
           el._elements.input.value = '';
-          dispatchInputEvent(el._elements.input);
+          helpers.event('input', el._elements.input);
           el._handleInput({preventDefault:function(){}}); // Fake call..
           el._onInputChange({stopPropagation:function(){}}); // Fake call..;
 
@@ -865,7 +859,7 @@ describe('Coral.Autocomplete', function() {
       helpers.next(function() {
         // Trigger input event
         el._elements.input.value = 'Fi';
-        dispatchInputEvent(el._elements.input);
+        helpers.event('input', el._elements.input);
 
         // Click the suggestion
         el._elements.selectList.items.getAll()[0].click();
@@ -906,7 +900,7 @@ describe('Coral.Autocomplete', function() {
       helpers.next(function() {
         // Trigger input event
         el._elements.input.value = 'Fi';
-        dispatchInputEvent(el._elements.input);
+        helpers.event('input', el._elements.input);
 
         // Click the suggestion
         el._elements.selectList.items.getAll()[0].click();
@@ -918,7 +912,7 @@ describe('Coral.Autocomplete', function() {
         // Set an incomplete text and fire input event
         // As on input change is somehow not called by triggering the 'input' event we fake the call..
         el._elements.input.value = 'Firef';
-        dispatchInputEvent(el._elements.input);
+        helpers.event('input', el._elements.input);
         el._handleInput({preventDefault:function(){}}); // Fake call..
         el._onInputChange({stopPropagation:function(){}}); // Fake call..
 
@@ -963,7 +957,7 @@ describe('Coral.Autocomplete', function() {
       helpers.next(function() {
         // Trigger input event
         el._elements.input.value = 'Fi';
-        dispatchInputEvent(el._elements.input);
+        helpers.event('input', el._elements.input);
 
         // Click the suggestion
         el._elements.selectList.items.getAll()[0].click();
@@ -975,7 +969,7 @@ describe('Coral.Autocomplete', function() {
         // Set an incomplete text and fire input event
         // As on input change is somehow not called by triggering the 'input' event we fake the call..
         el._elements.input.value = 'Firef';
-        dispatchInputEvent(el._elements.input);
+        helpers.event('input', el._elements.input);
         el._handleInput({preventDefault:function(){}}); // Fake call..
         el._onInputChange({stopPropagation:function(){}}); // Fake call..
 
@@ -1019,7 +1013,7 @@ describe('Coral.Autocomplete', function() {
       helpers.next(function() {
         // Trigger input event
         el._elements.input.value = 'Fi';
-        dispatchInputEvent(el._elements.input);
+        helpers.event('input', el._elements.input);
 
         // Click the suggestion
         el._elements.selectList.items.getAll()[0].click();
@@ -1031,7 +1025,7 @@ describe('Coral.Autocomplete', function() {
         // Set an incomplete text and fire input event
         // As on input change is somehow not called by triggering the 'input' event we fake the call..
         el._elements.input.value = '';
-        dispatchInputEvent(el._elements.input);
+        helpers.event('input', el._elements.input);
         el._handleInput({preventDefault:function(){}}); // Fake call..
         el._onInputChange({stopPropagation:function(){}}); // Fake call..
 
@@ -1259,8 +1253,7 @@ describe('Coral.Autocomplete', function() {
         expect(document.activeElement === el._elements.input).to.be.true;
 
         // Mousedown on trigger
-        event.initEvent('mousedown', true, true);
-        el._elements.trigger.dispatchEvent(event);
+        helpers.mouseEvent('mousedown', el._elements.trigger);
         
         // Trigger should receive focus on mousedown
         expect(document.activeElement === el._elements.trigger).to.be.true;
@@ -1269,8 +1262,8 @@ describe('Coral.Autocomplete', function() {
         expect(el._elements.overlay.open).to.be.true;
 
         // Mouseup on trigger
+        helpers.mouseEvent('mouseup', el._elements.trigger);
         event.initEvent('mouseup', true, true);
-        el._elements.trigger.dispatchEvent(event);
 
         // Click trigger to close selectList overlay
         el._elements.trigger.click();
@@ -1415,7 +1408,7 @@ describe('Coral.Autocomplete', function() {
       helpers.next(function() {
         // Trigger input event
         el._elements.input.value = '&';
-        dispatchInputEvent(el._elements.input);
+        helpers.event('input', el._elements.input);
 
         // Click the suggestion
         el._elements.selectList.items.getAll()[0].click();
@@ -1446,7 +1439,7 @@ describe('Coral.Autocomplete', function() {
       helpers.next(function() {
         // Trigger input event
         el._elements.input.value = '&';
-        dispatchInputEvent(el._elements.input);
+        helpers.event('input', el._elements.input);
 
         // Hit enter
         helpers.keypress('enter', el._elements.selectList.items.getAll()[0]);
@@ -1519,7 +1512,7 @@ describe('Coral.Autocomplete', function() {
 
         el._elements.input.value = 'Chrome';
         
-        dispatchInputEvent(el._elements.input);
+        helpers.event('input', el._elements.input);
 
         // test with delay
         setTimeout(function() {
@@ -1533,7 +1526,7 @@ describe('Coral.Autocomplete', function() {
           // clear value
           el._elements.input.value = '';
           el._elements.input;
-          dispatchInputEvent(el._elements.input);
+          helpers.event('input', el._elements.input);
 
           // force open selectList
           el._elements.trigger.click();
@@ -1546,7 +1539,7 @@ describe('Coral.Autocomplete', function() {
           // search for items containing the letter 'i'
           el._elements.input.value = 'i';
           el._elements.input;
-          dispatchInputEvent(el._elements.input);
+          helpers.event('input', el._elements.input);
 
           // force open selectList
           el._elements.trigger.click();
@@ -1608,7 +1601,7 @@ describe('Coral.Autocomplete', function() {
         done();
       });
 
-      dispatchInputEvent(el._elements.input);
+      helpers.event('input', el._elements.input);
     });
 
     it('should select the best matching option when an item is selected inside of the SelectList', function(done) {
@@ -1644,7 +1637,7 @@ describe('Coral.Autocomplete', function() {
       });
 
       el._elements.input.value = 'c';
-      dispatchInputEvent(el._elements.input);
+      helpers.event('input', el._elements.input);
     });
   
     it('should suggest the best matching option supporting html entities', function(done) {
@@ -1675,7 +1668,7 @@ describe('Coral.Autocomplete', function() {
       });
     
       el._elements.input.value = 'Internet & Explorer';
-      dispatchInputEvent(el._elements.input);
+      helpers.event('input', el._elements.input);
     });
   
     describe('#formField (single select)', function() {

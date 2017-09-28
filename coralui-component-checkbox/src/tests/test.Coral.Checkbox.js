@@ -16,7 +16,6 @@ describe('Coral.Checkbox', function() {
         expect(checkbox.hasAttribute(attr)).to.be.false;
       });
       expect(checkbox.classList.contains('coral3-Checkbox')).to.be.true;
-      expect(helpers.classCount(checkbox)).to.equal(1);
     });
 
     it('should be possible to clone the element using markup', function() {

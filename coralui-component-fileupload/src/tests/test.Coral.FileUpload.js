@@ -792,11 +792,7 @@ describe('Coral.FileUpload', function() {
       input.value = 'test';
 
       // we simulate user interaction
-      var event = new CustomEvent('change', {
-        bubbles: true,
-        cancelable: true
-      });
-      input.dispatchEvent(event);
+      helpers.event('change', input);
 
       expect(changeSpy.callCount).to.equal(1, 'Propagation is not stopped on unrelated inputs.');
       expect(changeSpy.getCall(0).args[0].target).to.equal(input, 'Target should be the input and not the component');

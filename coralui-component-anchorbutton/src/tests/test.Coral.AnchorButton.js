@@ -22,11 +22,11 @@ describe('Coral.AnchorButton', function() {
     it('should be possible using createElement', function() {
       var button = helpers.build(document.createElement('a', 'coral-anchorbutton'));
       expect(button.classList.contains('coral-Button')).to.be.true;
+      expect(button.classList.contains('coral-Button--secondary')).to.be.true;
       expect(button.hasAttribute('variant')).to.be.true;
       expect(button.hasAttribute('block')).to.be.false;
       expect(button.hasAttribute('label')).to.be.false;
       expect(button.hasAttribute('icon')).to.be.false;
-      expect(helpers.classCount(button)).to.equal(2);
     });
 
     it('should be possible to clone using markup', function() {

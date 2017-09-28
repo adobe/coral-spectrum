@@ -473,7 +473,9 @@ describe('Coral.DragAction', function() {
       var dragAction = new Coral.DragAction(dragElement);
       dragAction.handle = [];
       dragElement.addEventListener('coral-dragaction:dragstart', eventSpy);
-      dragElement.dispatchEvent(new MouseEvent('mousedown'));
+  
+      helpers.mouseEvent('mousedown', dragElement);
+      
       expect(eventSpy.callCount).to.equal(1);
     });
     

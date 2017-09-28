@@ -2,12 +2,6 @@ describe('Coral.Select', function() {
   // @todo: test reordering the options
   'use strict';
 
-  function dispatchChangeEvent(element) {
-    var event = document.createEvent('HTMLEvents');
-    event.initEvent('change', true, true);
-    element.dispatchEvent(event);
-  }
-
   describe('Namespace', function() {
     it('should be defined', function() {
       expect(Coral).to.have.property('Select');
@@ -1527,7 +1521,7 @@ describe('Coral.Select', function() {
         var callback = function() {
           if (!el._useNativeInput) {
             expect(el._elements.overlay.open).to.be.true;
-            expect(helpers.visible(el._elements.overlay)).to.be.true;
+            expect(el._elements.overlay.offsetParent).to.not.equal(null);
           }
 
           expect(changeSpy.callCount).to.equal(0);
@@ -1677,7 +1671,7 @@ describe('Coral.Select', function() {
         var options = el._elements.nativeSelect.options;
         options[2].selected = true;
 
-        dispatchChangeEvent(el._elements.nativeSelect);
+        helpers.event('change', el._elements.nativeSelect);
 
         expect(changeSpy.callCount).to.equal(1);
         expect(changeSpy.getCall(0).args[0].target).to.equal(el, 'change event must be reparented');
@@ -1703,7 +1697,7 @@ describe('Coral.Select', function() {
         var options = el._elements.nativeSelect.options;
 
         options[2].selected = true;
-        dispatchChangeEvent(el._elements.nativeSelect);
+        helpers.event('change', el._elements.nativeSelect);
 
         expect(changeSpy.callCount).to.equal(1);
         expect(changeSpy.getCall(0).args[0].target).to.equal(el);
@@ -1711,14 +1705,14 @@ describe('Coral.Select', function() {
         expect(changeSpy.getCall(0).args[0].target.selectedItems).to.deep.equal([items[2]]);
 
         options[4].selected = true;
-        dispatchChangeEvent(el._elements.nativeSelect);
+        helpers.event('change', el._elements.nativeSelect);
 
         expect(changeSpy.callCount).to.equal(2);
         expect(changeSpy.getCall(1).args[0].target.values).to.deep.equal([items[2].value, items[4].value]);
         expect(changeSpy.getCall(1).args[0].target.selectedItems).to.deep.equal([items[2], items[4]]);
 
         options[2].selected = false;
-        dispatchChangeEvent(el._elements.nativeSelect);
+        helpers.event('change', el._elements.nativeSelect);
         expect(changeSpy.callCount).to.equal(3);
         expect(changeSpy.getCall(2).args[0].target.values).to.deep.equal([items[4].value]);
         expect(changeSpy.getCall(2).args[0].target.selectedItems).to.deep.equal([items[4]]);
@@ -2044,7 +2038,7 @@ describe('Coral.Select', function() {
       var options = el._elements.nativeSelect.options;
       options[2].selected = true;
 
-      dispatchChangeEvent(el._elements.nativeSelect);
+      helpers.event('change', el._elements.nativeSelect);
 
       // Wait next frame for button to be focused
       helpers.next(function() {

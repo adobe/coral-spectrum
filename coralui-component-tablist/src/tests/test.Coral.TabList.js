@@ -235,8 +235,8 @@ describe('Coral.TabList', function() {
 
       it('should set the new icon', function() {
         const el = helpers.build(defaultMarkup);
-        var items = el.items.getAll(),
-          tabPanelItem = items[0];
+        var items = el.items.getAll();
+        var tabPanelItem = items[0];
   
         tabPanelItem.icon = 'gear';
         

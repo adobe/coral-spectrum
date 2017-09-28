@@ -2,24 +2,6 @@ import {DateTime} from 'coralui-datetime';
 
 describe('Coral.Clock', function() {
   'use strict';
-  
-  function keyPress(key, el) {
-    var code = Coral.Keys.keyToCode(key);
-
-    var event = document.createEvent('Event');
-    event.initEvent('keypress', true, true);
-    event.keyCode = code;
-    event.charCode = key;
-    event.view = window;
-    event.altKey = false;
-    event.ctrlKey = false;
-    event.shiftKey = false;
-    event.metaKey = false;
-
-    el.dispatchEvent(event);
-
-    return event;
-  }
 
   describe('Namespace', function() {
     it('should be defined', function() {
@@ -576,9 +558,8 @@ describe('Coral.Clock', function() {
           if (useMomentJS) {
             const el = helpers.build(window.__html__['Coral.Clock.periodpm.html']);
             el._elements.hours.value = '03';
-            el._elements.hours.dispatchEvent(new Event('change', {
-              'bubbles': true
-            }));
+            
+            helpers.event('change', el._elements.hours);
   
             expect(el._elements.hours.value).to.equal('03');
             expect(el.value).to.equal('15:02');
@@ -792,11 +773,9 @@ describe('Coral.Clock', function() {
         expect(el.value).to.equal('');
   
         // this key will be stopped and never make it to the input
-        var event = keyPress('1', el._elements.hours);
+        helpers.keypress('1', el._elements.hours);
   
         expect(el.value).to.equal('');
-  
-        expect(event.defaultPrevented).to.be.false;
       });
     });
   }

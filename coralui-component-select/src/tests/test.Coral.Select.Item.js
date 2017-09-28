@@ -268,7 +268,7 @@ describe('Coral.Select.Item', function() {
       var el = helpers.build(new Coral.Select.Item());
       helpers.target.appendChild(el);
       
-      expect(helpers.visible(el)).to.be.false;
+      expect(el.offsetParent).to.equal(null);
     });
   });
 });

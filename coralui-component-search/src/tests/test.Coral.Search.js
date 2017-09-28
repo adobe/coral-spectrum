@@ -3,6 +3,7 @@ describe('Coral.Search', function() {
 
   function testInstance(instance) {
     expect(instance.classList.contains('coral-DecoratedTextfield')).to.be.true;
+    expect(instance.classList.contains('coral3-Search')).to.be.true;
     expect(instance._elements.input).to.exist;
     expect(instance.getAttribute('icon')).to.equal('search');
     expect(instance.hasAttribute('disabled')).to.be.false;
@@ -11,7 +12,6 @@ describe('Coral.Search', function() {
     expect(instance.hasAttribute('required')).to.be.false;
     expect(instance.hasAttribute('placeholder')).to.be.false;
     expect(instance.hasAttribute('value')).to.be.false;
-    expect(helpers.classCount(instance)).to.equal(2);
   }
 
   describe('Namespace', function() {

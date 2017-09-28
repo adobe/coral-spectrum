@@ -45,9 +45,7 @@ describe('Coral.CharacterCount', function() {
     var typeValue = function(value){
       input.value = value;
 
-      var event = document.createEvent('Event');
-      event.initEvent('input', true, true);
-      input.dispatchEvent(event);
+      helpers.event('input', input);
     };
 
     beforeEach(function(){

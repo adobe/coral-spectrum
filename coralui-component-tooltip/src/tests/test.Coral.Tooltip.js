@@ -53,7 +53,8 @@ describe('Coral.Tooltip', function() {
     
         expect(tooltip.open).to.equal(false, 'tooltip closed initially');
     
-        target.dispatchEvent(new Event('mouseenter'));
+        helpers.mouseEvent('mouseenter', target);
+        
         expect(tooltip.open).to.equal(true, 'tooltip open after focusing on target');
       });
   
@@ -70,8 +71,8 @@ describe('Coral.Tooltip', function() {
         expect(tooltip.open).to.be.false;
     
         // trigger twice to check that timeout is cleared.
-        target.dispatchEvent(new Event('mouseenter'));
-        target.dispatchEvent(new Event('mouseenter'));
+        helpers.mouseEvent('mouseenter', target);
+        helpers.mouseEvent('mouseenter', target);
         expect(tooltip.open).to.be.true;
       });
     });
@@ -95,7 +96,7 @@ describe('Coral.Tooltip', function() {
         expect(tooltip.open).to.equal(false, 'tooltip closed initially');
     
         // Show via focus
-        target.dispatchEvent(new Event('mouseenter'));
+        helpers.mouseEvent('mouseenter', target);
     
         expect(tooltip.open).to.equal(true, 'tooltip open after focusing on target');
     
@@ -108,12 +109,12 @@ describe('Coral.Tooltip', function() {
         tooltip.target = newTarget;
     
         // Try to show via focus on the old target
-        target.dispatchEvent(new Event('mouseenter'));
+        helpers.mouseEvent('mouseenter', target);
     
         expect(tooltip.open).to.equal(false, 'tooltip stays closed after clicking old target after target changed');
     
         // Show by focusing on the new target
-        newTarget.dispatchEvent(new Event('mouseenter'));
+        helpers.mouseEvent('mouseenter', newTarget);
     
         expect(tooltip.open).to.equal(true, 'tooltip open after clicking new target');
       });
@@ -133,8 +134,8 @@ describe('Coral.Tooltip', function() {
         tooltip.show();
 
         expect(tooltip.open).to.be.true;
-
-        target.dispatchEvent(new Event('mouseleave'));
+  
+        helpers.mouseEvent('mouseleave', target);
 
         helpers.next(function() {
           expect(tooltip.open).to.be.false;
@@ -157,8 +158,8 @@ describe('Coral.Tooltip', function() {
         tooltip.show();
     
         expect(tooltip.open).to.be.true;
-        target.dispatchEvent(new Event('mouseenter'));
-        target.dispatchEvent(new Event('mouseleave'));
+        helpers.mouseEvent('mouseenter', target);
+        helpers.mouseEvent('mouseleave', target);
         
         helpers.next(function() {
           expect(tooltip.open).to.be.false;
@@ -183,8 +184,9 @@ describe('Coral.Tooltip', function() {
         helpers.target.appendChild(tooltip);
     
         expect(tooltip.open).to.equal(false, 'tooltip closed initially');
-    
-        target.dispatchEvent(new Event('mouseenter'));
+  
+        helpers.mouseEvent('mouseenter', target);
+        
         expect(tooltip.open).to.equal(false, 'tooltip still closed after mouseenter on target');
       });
     });
@@ -204,14 +206,16 @@ describe('Coral.Tooltip', function() {
       helpers.target.appendChild(tooltip);
     
       expect(tooltip.open).to.equal(false, 'tooltip closed initially');
-    
-      target.dispatchEvent(new Event('mouseenter'));
+  
+      helpers.mouseEvent('mouseenter', target);
+      
       expect(tooltip.open).to.equal(true, 'tooltip open after mouseenter on target');
     
       tooltip.open = false;
       tooltip.interaction = 'off';
-    
-      target.dispatchEvent(new Event('mouseenter'));
+  
+      helpers.mouseEvent('mouseenter', target);
+      
       expect(tooltip.open).to.equal(false, 'tooltip still closed after mouseenter on target');
     });
   });
@@ -242,8 +246,9 @@ describe('Coral.Tooltip', function() {
     
       expect(tooltipTop.open).to.equal(false, 'tooltipTop closed initially');
       expect(tooltipBottom.open).to.equal(false, 'tooltipBottom closed initially');
-    
-      target.dispatchEvent(new Event('mouseenter'));
+  
+      helpers.mouseEvent('mouseenter', target);
+      
       expect(tooltipTop.open).to.equal(true, 'tooltipTop open after focusing on target');
       expect(tooltipBottom.open).to.equal(true, 'tooltipBottom open after focusing on target');
     });
