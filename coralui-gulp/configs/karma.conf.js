@@ -26,13 +26,13 @@ module.exports = function(config) {
   const preprocessors = {};
   
   // Rollup pre-process
-  preprocessors[`${CWD}/tests/index.js`] = ['rollup'];
+  preprocessors[`${CWD}/src/tests/index.js`] = ['rollup'];
   
   // Pre-process HTML snippets
-  preprocessors[`${CWD}/tests/snippets/**/*.html`] = ['html2js'];
+  preprocessors[`${CWD}/src/tests/snippets/**/*.html`] = ['html2js'];
   
   // Pre-process snippets of dependencies
-  preprocessors[`${CWD}/node_modules/coralui-*/tests/snippets/**/*.html`] = ['html2js'];
+  preprocessors[`${CWD}/node_modules/coralui-*/src/tests/snippets/**/*.html`] = ['html2js'];
   
   // The package.json of the tested module (usually a component)
   const modulePackageJson = require(`${CWD}/package.json`);
@@ -85,14 +85,14 @@ module.exports = function(config) {
       
       {
         // Files to be available as window.__html__['FILENAME.html']
-        pattern: `${CWD}/tests/snippets/**/*.html`,
+        pattern: `${CWD}/src/tests/snippets/**/*.html`,
         watched: true,
         served: true,
         included: true // Include HTML snippets so they are preprocessed
       },
       {
         // Test helpers that will be included as executable JS
-        pattern: `${CWD}/node_modules/coralui-*/tests/helpers/*.js`,
+        pattern: `${CWD}/node_modules/coralui-*/src/tests/helpers/*.js`,
         watched: true,
         served: true,
         included: true // Include testing helpers
@@ -100,7 +100,7 @@ module.exports = function(config) {
   
       {
         // Files to be available as window.__html__['FILENAME.html']
-        pattern: `${CWD}/node_modules/coralui-*/tests/snippets/**/*.html`,
+        pattern: `${CWD}/node_modules/coralui-*/src/tests/snippets/**/*.html`,
         watched: true,
         served: true,
         included: true // Include HTML snippets so they are preprocessed
@@ -108,7 +108,7 @@ module.exports = function(config) {
   
       {
         // Test helpers that will be included as executable JS
-        pattern: `${CWD}/tests/helpers/*.js`,
+        pattern: `${CWD}/src/tests/helpers/*.js`,
         watched: true,
         served: true,
         included: true // Include testing helpers
@@ -116,7 +116,7 @@ module.exports = function(config) {
       
       {
         // Tests that will be included as executable JS
-        pattern: `${CWD}/tests/index.js`,
+        pattern: `${CWD}/src/tests/index.js`,
         watched: true,
         served: true,
         included: true // Include testing helpers
