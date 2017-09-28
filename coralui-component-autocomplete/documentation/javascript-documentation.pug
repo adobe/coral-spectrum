@@ -1,0 +1,99 @@
++document-section('JavaScript Examples')
+  script.
+    // Mocked server interaction
+    (function() {
+      // A set of suggestions our "server" will return
+      var serverSuggestions = [
+        {
+          value: 'ch',
+          content: 'Chrome'
+        },
+        {
+          value: 'fi',
+          content: 'Firefox'
+        },
+        {
+          value: 'ie',
+          content: 'Internet Explorer'
+        },
+        {
+          value: 'op',
+          content: 'Opera'
+        },
+        {
+          value: 'sa',
+          content: 'Safari'
+        }
+      ];
+
+      // Check if a suggetion matches the input
+      function matches(suggestion, input) {
+        return suggestion.value.toLowerCase().indexOf(input) !== -1 || suggestion.content.toLowerCase().indexOf(input) !== -1;
+      }
+
+      // "Send" a "request"
+      window.fakejax = function(url, data, callback) {
+        var requestTimeout = setTimeout(function() {
+          // Filter the suggestions according to the user input
+          // This would run on the server, effectively
+          var suggestions = serverSuggestions.filter(function(suggestion) {
+            return matches(suggestion, data.query);
+          });
+
+          callback(suggestions);
+        }, 500);
+
+        return {
+          abort: function() {
+            // Stop previous request
+            clearTimeout(requestTimeout);
+          }
+        };
+      }
+    }());
+
+  +document-subsection('Remote Suggestions')
+    p.
+      Listen to the <code>coral-autocomplete:showsuggestions</code> event and call <code>event.preventDefault()</code>
+      to stop the default behavior of searching items for suggestions. Then, use <code>event.detail.value</code> to
+      request suggestions from the server. Once you have suggestions, pass an array of suggestion objects to
+      <code>autocomplete.addSuggestions()</code> to show suggestions. Listen to the
+      <code>coral-autocomplete:hidesuggestions</code> event and abort any requests you've made to avoid showing
+      suggestions when the user hidden them.
+
+    +markup-example().
+      <coral-autocomplete id="remoteAutocomplete"></coral-autocomplete>
+
+    +code-snippet().
+      <script>
+        var autocomplete = document.querySelector('#remoteAutocomplete');
+
+        var request;
+        Coral.commons.ready(autocomplete, function() {
+          autocomplete.on('coral-autocomplete:showsuggestions', function(event) {
+          if (request) {
+            // Stop any previous requests
+            request.abort();
+          }
+
+          // Don't show suggestions from existing items
+          // This shows a loading icon until we call addSuggestions
+          event.preventDefault();
+
+          // Make a request and show the resulting suggestions
+          request = fakejax('/api/suggestions', { query: event.detail.value }, function(suggestions) {
+            // suggestions is an array of objects:
+            // [ { value: 'we', content: 'Whatever' } ]
+            autocomplete.addSuggestions(suggestions);
+          });
+        });
+
+          // Optional: Abort requests when the user hides suggestions
+          autocomplete.on('coral-autocomplete:hidesuggestions', function() {
+            // If the suggestions were hidden, abort the request
+            if (request) {
+              request.abort();
+            }
+          });
+        });
+      </script>

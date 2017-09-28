@@ -1,0 +1,88 @@
+script.
+  if (typeof Coral.Configurator === 'function') {
+    var configurator = new Coral.Configurator().set({
+      component: Coral.Autocomplete,
+      fields: [
+        {
+          label: 'Placeholder',
+          prop: 'placeholder',
+          type: 'text',
+          value: 'Enter a word'
+        },
+        {
+          label: 'Match',
+          prop: 'match',
+          type: 'select',
+          value: 'startswith',
+          options: {
+            'startswith': 'startswith',
+            'contains': 'contains'
+          }
+        },
+        {
+          label: 'Icon',
+          prop: 'icon',
+          type: 'select',
+          value: '',
+          options: {
+            'None': '',
+            'Check Circle': 'checkCircle',
+            'Share': 'share',
+            'Delete': 'delete',
+            'Lightbulb': 'lightbulb'
+          }
+        },
+        {
+          label: 'is disabled',
+          prop: 'disabled',
+          type: 'checkbox',
+          value: false
+        },
+        {
+          label: 'is invalid',
+          prop: 'invalid',
+          type: 'checkbox',
+          value: false
+        },
+        {
+          label: 'is loading',
+          prop: 'loading',
+          type: 'checkbox',
+          value: false
+        },
+        {
+          label: 'is multiple',
+          prop: 'multiple',
+          type: 'checkbox',
+          value: false
+        }
+      ],
+      items: [
+        {
+          value: 'ch',
+          content: {
+            innerHTML: 'Chrome'
+          }
+        },
+        {
+          value: 'fi',
+          content: {
+            innerHTML: 'Firefox'
+          }
+        },
+        {
+          value: 'ie',
+          content: {
+            innerHTML: 'Internet Explorer'
+          }
+        },
+        {
+          value: 'sa',
+          content: {
+            innerHTML: 'Safari'
+          }
+        }
+      ]
+    }).insertAfterLastScript();
+  }
+

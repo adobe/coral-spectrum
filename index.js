@@ -2,6 +2,7 @@ import {Accordion, AccordionItem, AccordionItemContent, AccordionItemLabel} from
 import {ActionBar, ActionBarItem, ActionBarPrimary, ActionBarSecondary, ActionBarContainer} from 'coralui-component-actionbar';
 import {Alert, AlertHeader, AlertContent, AlertFooter} from 'coralui-component-alert';
 import {AnchorButton, AnchorButtonLabel} from 'coralui-component-anchorbutton';
+import {Autocomplete, AutocompleteItem} from 'coralui-component-autocomplete';
 import {Button, ButtonLabel} from 'coralui-component-button';
 import {ButtonGroup} from 'coralui-component-buttongroup';
 import {Calendar} from 'coralui-component-calendar';
@@ -63,6 +64,8 @@ export {
   AnchorButton,
   AnchorButtonLabel,
   AnchorList,
+  Autocomplete,
+  AutocompleteItem,
   Button,
   ButtonLabel,
   ButtonGroup,

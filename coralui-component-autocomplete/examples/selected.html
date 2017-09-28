@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Autocomplete</title>
+
+  <link rel="stylesheet" href="../build/css/coral.css">
+  <script src="../build/js/coral.js"></script>
+
+</head>
+<body class="coral--light">
+  <h1 class="coral-Heading coral-Heading--1">selected</h1>
+
+  <form action="/formtest">
+
+    <label id="browserLabel">Browser</label>
+    <coral-autocomplete labelledby="browserLabel" icon="search" name="browser">
+      <coral-autocomplete-item value="ch" selected>Chrome</coral-autocomplete-item>
+      <coral-autocomplete-item value="fi">Firefox</coral-autocomplete-item>
+      <coral-autocomplete-item value="ie">Internet Explorer</coral-autocomplete-item>
+      <coral-autocomplete-item value="op">Opera</coral-autocomplete-item>
+      <coral-autocomplete-item value="sa">Safari</coral-autocomplete-item>
+    </coral-autocomplete>
+
+    <button class="coral-Button" type="submit">Submit</button>
+  </form>
+</body>
+</html>

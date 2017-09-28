@@ -2,6 +2,7 @@ import 'coralui-component-accordion/tests';
 import 'coralui-component-actionbar/tests';
 import 'coralui-component-alert/tests';
 import 'coralui-component-anchorbutton/tests';
+import 'coralui-component-autocomplete/tests';
 import 'coralui-component-button/tests';
 import 'coralui-component-buttongroup/tests';
 import 'coralui-component-calendar/tests';

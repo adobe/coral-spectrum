@@ -11,6 +11,7 @@
     "coralui-component-actionbar": "file:coralui-component-actionbar",
     "coralui-component-alert": "file:coralui-component-alert",
     "coralui-component-anchorbutton": "file:coralui-component-anchorbutton",
+    "coralui-component-autocomplete": "file:coralui-component-autocomplete",
     "coralui-component-button": "file:coralui-component-button",
     "coralui-component-buttongroup": "file:coralui-component-buttongroup",
     "coralui-component-calendar": "file:coralui-component-calendar",

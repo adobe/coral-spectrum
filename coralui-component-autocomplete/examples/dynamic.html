@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Autocomplete</title>
+
+  <link rel="stylesheet" href="../build/css/coral.css">
+  <script src="../build/js/coral.js"></script>
+
+</head>
+<body class="coral--light">
+  <h1 class="coral-Heading coral-Heading--1">multiple</h1>
+
+  <form action="/formtest">
+
+    <label id="browserLabel">Browser</label>
+    <coral-autocomplete multiple labelledby="browserLabel" id="autocompleteID" icon="search" name="browser">
+    </coral-autocomplete>
+
+    <button class="coral-Button" type="submit">Submit</button>
+  </form>
+  <script>
+    var element = document.getElementById("autocompleteID");
+
+    element.on("change", function() {
+      event.preventDefault();
+      console.log(element.values);
+    });
+
+    element.on("coral-autocomplete:showsuggestions", function(event) {
+      var suggestions = [{
+        value: "ch",
+        content: "Chrome"
+      },
+        {
+          value: "fi",
+          content: "Firefox"
+        },
+        {
+          value: "ie",
+          content: "Internet Explorer"
+        },
+        {
+          value: "sa",
+          content: "Safari"
+        }];
+      element.addSuggestions(suggestions, true);
+    });
+  </script>
+</body>
+</html>
