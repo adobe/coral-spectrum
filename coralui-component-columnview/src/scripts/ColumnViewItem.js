@@ -203,6 +203,16 @@ class ColumnViewItem extends Component(HTMLElement) {
     this.trigger('coral-columnview-item:_activechanged');
   }
   
+  // For backwards compatibility + Torq
+  get defaultContentZone() {return this.content;}
+  set defaultContentZone(value) {this.content = value;}
+  get _contentZones() {
+    return {
+      'coral-columnview-item-content': 'content',
+      'coral-columnview-item-thumbnail': 'thumbnail'
+    };
+  }
+  
   // Expose enums
   static get variant() {return variant;}
   

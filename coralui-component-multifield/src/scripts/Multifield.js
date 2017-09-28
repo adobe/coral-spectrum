@@ -291,6 +291,9 @@ class Multifield extends Component(HTMLElement) {
     }
   }
   
+  // For backwards compatibility + Torq
+  get _contentZones() {return {'template': 'template'};}
+  
   connectedCallback() {
     super.connectedCallback();
     

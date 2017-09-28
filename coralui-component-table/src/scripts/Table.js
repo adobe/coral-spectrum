@@ -2361,6 +2361,18 @@ class Table extends Component(HTMLTableElement) {
     this._resetLayout();
   }
   
+  // For backwards compatibility + Torq
+  get defaultContentZone() {return this.body;}
+  set defaultContentZone(value) {this.body = value;}
+  get _contentZones() {
+    return {
+      'tbody': 'body',
+      'thead': 'head',
+      'tfoot': 'foot',
+      'colgroup': 'columns'
+    };
+  }
+  
   // Expose enums
   static get variant() {return variant;}
   static get divider() {return divider;}

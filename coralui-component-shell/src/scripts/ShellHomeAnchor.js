@@ -88,9 +88,9 @@ class ShellHomeAnchor extends Component(HTMLAnchorElement) {
   }
   
   // For backwards compatibility + Torq
-  get defaultContentZone() {return this.content;}
-  set defaultContentZone(value) {this.content = value;}
-  get _contentZones() {return {'coral-shell-content': 'content'};}
+  get defaultContentZone() {return this.label;}
+  set defaultContentZone(value) {this.label = value;}
+  get _contentZones() {return {'coral-shell-homeanchor-label': 'label'};}
   
   static get observedAttributes() {return ['icon'];}
   

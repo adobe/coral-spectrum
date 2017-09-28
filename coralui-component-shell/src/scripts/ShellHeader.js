@@ -134,7 +134,13 @@ class ShellHeader extends Component(HTMLElement) {
   // For backwards compatibility + Torq
   get defaultContentZone() {return this.content;}
   set defaultContentZone(value) {this.content = value;}
-  get _contentZones() {return {'coral-shell-header-content': 'content'};}
+  get _contentZones() {
+    return {
+    'coral-shell-header-home': 'home',
+    'coral-shell-header-content': 'content',
+    'coral-shell-header-actions': 'actions'
+    };
+  }
   
   connectedCallback() {
     super.connectedCallback();
