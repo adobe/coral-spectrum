@@ -161,6 +161,11 @@ let Keys = function() {};
    @returns {Boolean} True, if event.target is not editable and event.target.tagname is not restricted
    */
   function filterInputs(event) {
+    // Escape keycode doesn't have to be filtered
+    if (event.keyCode === specialKeyCodes.escape) {
+      return true;
+    }
+    
     var target = event.target;
     var tagName = target.tagName;
     var isContentEditable = target.isContentEditable;
@@ -733,6 +738,9 @@ let Keys = function() {};
   
         el.addEventListener('keydown', handleKeyDown);
       }
+  
+      // Remove window event listeners first to avoid memory leak
+      destroy(true);
       
       // Watching on capture so it is immune to stopPropagation(). It's very important this event
       // is handled so key entries previously added on keydown can be cleared out.
@@ -763,7 +771,6 @@ let Keys = function() {};
         el.removeEventListener('keydown', handleKeyDown);
       }
       
-      el.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp, true);
       window.removeEventListener('focus', reset);
       
@@ -775,7 +782,6 @@ let Keys = function() {};
       // Initialize immediately if new keyword used
       init();
     }
-    
     
     return {
       on: on,

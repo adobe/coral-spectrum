@@ -1,3 +1,5 @@
+import 'coralui-externals';
+
 import commons from './src/scripts/commons';
 import events from './src/scripts/events';
 import i18n from './src/scripts/i18n';

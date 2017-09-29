@@ -306,7 +306,6 @@ commons.nextFrame = function(callback) {
    The callback to call when all components are ready.
    */
   commons.ready = function(element, callback) {
-    const self = this;
     let root = element;
     
     if (typeof element === 'function') {
@@ -326,9 +325,19 @@ commons.nextFrame = function(callback) {
     
     // Finds the custom elements name and adds it to the promises
     const addName = function(el) {
-      if (el.toString().indexOf('Coral') === 0) {
-        const name = el.toString().split('.').map((item) => item.toLowerCase()).join('-');
+      let name = el.nodeName.toLowerCase();
+  
+      // Check nodename
+      if (name.indexOf('coral') === 0) {
         promises.push(window.customElements.whenDefined(name));
+      }
+      else {
+        // Fallback to is attribute
+        name = String(el.getAttribute('is')).toLowerCase();
+  
+        if (name.indexOf('coral') === 0) {
+          promises.push(window.customElements.whenDefined(name));
+        }
       }
     };
     
@@ -343,7 +352,7 @@ commons.nextFrame = function(callback) {
     // Call callback once all defined
     Promise.all(promises)
       .then(() => {
-        callback((element instanceof HTMLElement && element) || self);
+        callback((element instanceof HTMLElement && element) || window);
       })
       .catch((err) => {
         console.error(err);
@@ -514,8 +523,7 @@ commons.getSubProperty = function(root, path) {
 (function() {
   'use strict';
   
-  function noop() {
-  }
+  function noop() {}
   
   function returnFirst(first, second) {
     return function returnFirst() {
@@ -780,7 +788,7 @@ commons.getSubProperty = function(root, path) {
    */
   commons.FOCUSABLE_ELEMENT_SELECTOR = focusableElements.join(',');
   
-  focusableElements.push('[tabindex]');
+  focusableElements.push('[tabindex]:not([tabindex="-1"])');
   
   /**
    Tabbable elements are defined by https://www.w3.org/TR/html5/editing.html#sequential-focus-navigation-and-the-tabindex-attribute.
