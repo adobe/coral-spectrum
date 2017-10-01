@@ -21,4 +21,10 @@
  @htmltag coral-shell-content
  @extends HTMLElement
  */
-export default () => document.createElement('coral-shell-content');
+class ShellContent extends HTMLElement {
+  constructor() {
+    super();
+  }
+}
+
+export default ShellContent;

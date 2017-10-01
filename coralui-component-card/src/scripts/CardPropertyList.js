@@ -21,4 +21,10 @@
  @htmltag coral-card-propertylist
  @extends HTMLElement
  */
-export default () => document.createElement('coral-card-propertylist');
+class CardPropertyList extends HTMLElement {
+  constructor() {
+    super();
+  }
+}
+
+export default CardPropertyList;

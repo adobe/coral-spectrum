@@ -21,4 +21,10 @@
  @htmltag coral-button-label
  @extends HTMLElement
  */
-export default () => document.createElement('coral-button-label');
+class ButtonLabel extends HTMLElement {
+  constructor() {
+    super();
+  }
+}
+
+export default ButtonLabel;

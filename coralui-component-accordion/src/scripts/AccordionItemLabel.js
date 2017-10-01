@@ -21,4 +21,10 @@
  @htmltag coral-accordion-item-label
  @extends HTMLElement
  */
-export default () => document.createElement('coral-accordion-item-label');
+class AccordionItemLabel extends HTMLElement {
+  constructor() {
+    super();
+  }
+}
+
+export default AccordionItemLabel;

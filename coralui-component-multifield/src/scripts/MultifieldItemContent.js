@@ -21,4 +21,10 @@
  @htmltag coral-multifield-item-content
  @extends HTMLElement
  */
-export default () => document.createElement('coral-multifield-item-content');
+class MultifieldItemContent extends HTMLElement {
+  constructor() {
+    super();
+  }
+}
+
+export default MultifieldItemContent;

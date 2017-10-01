@@ -3,6 +3,7 @@ import Tooltip from './src/scripts/Tooltip';
 import TooltipContent from './src/scripts/TooltipContent';
 
 window.customElements.define('coral-tooltip', Tooltip);
+window.customElements.define('coral-tooltip-content', TooltipContent);
 
 // Expose component on the Coral namespace
 window.Coral = window.Coral || {};

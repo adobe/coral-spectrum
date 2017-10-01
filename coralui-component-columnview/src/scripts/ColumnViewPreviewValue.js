@@ -21,4 +21,10 @@
  @htmltag coral-columnview-preview-value
  @extends HTMLElement
  */
-export default () => document.createElement('coral-columnview-preview-value');
+class ColumnViewPreviewValue extends HTMLElement {
+  constructor() {
+    super();
+  }
+}
+
+export default ColumnViewPreviewValue;

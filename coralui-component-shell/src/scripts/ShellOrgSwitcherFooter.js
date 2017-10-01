@@ -21,4 +21,10 @@
  @htmltag coral-shell-orgswitcher-footer
  @extends HTMLElement
  */
-export default () => document.createElement('coral-shell-orgswitcher-footer');
+class ShellOrgSwitcherFooter extends HTMLElement {
+  constructor() {
+    super();
+  }
+}
+
+export default ShellOrgSwitcherFooter;

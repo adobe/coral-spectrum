@@ -21,4 +21,10 @@
  @htmltag coral-tab-label
  @extends HTMLElement
  */
-export default () => document.createElement('coral-tab-label');
+class TabLabel extends HTMLElement {
+  constructor() {
+    super();
+  }
+}
+
+export default TabLabel;

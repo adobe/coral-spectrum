@@ -21,4 +21,10 @@
  @htmltag coral-tooltip-content
  @extends HTMLElement
  */
-export default () => document.createElement('coral-tooltip-content');
+class TooltipContent extends HTMLElement {
+  constructor() {
+    super();
+  }
+}
+
+export default TooltipContent;

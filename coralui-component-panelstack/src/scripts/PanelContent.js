@@ -21,4 +21,10 @@
  @htmltag coral-panel-content
  @extends HTMLElement
  */
-export default () => document.createElement('coral-panel-content');
+class PanelContent extends HTMLElement {
+  constructor() {
+    super();
+  }
+}
+
+export default PanelContent;

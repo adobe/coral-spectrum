@@ -21,4 +21,10 @@
  @htmltag coral-tree-item-content
  @extends HTMLElement
  */
-export default () => document.createElement('coral-tree-item-content');
+class TreeItemContent extends HTMLElement {
+  constructor() {
+    super();
+  }
+}
+
+export default TreeItemContent;

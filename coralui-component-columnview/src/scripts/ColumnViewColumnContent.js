@@ -21,4 +21,10 @@
  @htmltag coral-columnview-column-content
  @extends HTMLElement
  */
-export default () => document.createElement('coral-columnview-column-content');
+class ColumnViewColumnContent extends HTMLElement {
+  constructor() {
+    super();
+  }
+}
+
+export default ColumnViewColumnContent;

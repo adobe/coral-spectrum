@@ -5,6 +5,7 @@ import TreeItemContent from './src/scripts/TreeItemContent';
 
 window.customElements.define('coral-tree', Tree);
 window.customElements.define('coral-tree-item', TreeItem);
+window.customElements.define('coral-tree-item-content', TreeItemContent);
 
 // Expose component on the Coral namespace
 window.Coral = window.Coral || {};

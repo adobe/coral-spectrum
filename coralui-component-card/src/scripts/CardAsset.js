@@ -21,4 +21,11 @@
  @htmltag coral-card-asset
  @extends HTMLElement
  */
-export default () => document.createElement('coral-card-asset');
+class CardAsset extends HTMLElement {
+  constructor() {
+    super();
+  }
+}
+
+export default CardAsset;
+

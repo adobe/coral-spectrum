@@ -21,4 +21,10 @@
  @htmltag coral-table-headercell-content
  @extends HTMLElement
  */
-export default () => document.createElement('coral-table-headercell-content');
+class TableHeaderCellContent extends HTMLElement {
+  constructor() {
+    super();
+  }
+}
+
+export default TableHeaderCellContent;

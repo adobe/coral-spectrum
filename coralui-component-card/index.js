@@ -13,9 +13,15 @@ import CardPropertyContent from './src/scripts/CardPropertyContent';
 
 window.customElements.define('coral-card', Card);
 window.customElements.define('coral-card-property', CardProperty);
+window.customElements.define('coral-card-property-content', CardPropertyContent);
+window.customElements.define('coral-card-propertylist', CardPropertyList);
 window.customElements.define('coral-card-title', CardTitle);
 window.customElements.define('coral-card-context', CardContext);
 window.customElements.define('coral-card-description', CardDescription);
+window.customElements.define('coral-card-asset', CardAsset);
+window.customElements.define('coral-card-content', CardContent);
+window.customElements.define('coral-card-info', CardInfo);
+window.customElements.define('coral-card-overlay', CardOverlay);
 
 // Expose component on the Coral namespace
 window.Coral = window.Coral || {};

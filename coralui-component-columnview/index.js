@@ -15,8 +15,16 @@ import ColumnViewPreviewValue from './src/scripts/ColumnViewPreviewValue';
 
 window.customElements.define('coral-columnview', ColumnView);
 window.customElements.define('coral-columnview-column', ColumnViewColumn);
+window.customElements.define('coral-columnview-column-content', ColumnViewColumnContent);
 window.customElements.define('coral-columnview-item', ColumnViewItem);
+window.customElements.define('coral-columnview-item-content', ColumnViewItemContent);
+window.customElements.define('coral-columnview-item-thumbnail', ColumnViewItemThumbnail);
 window.customElements.define('coral-columnview-preview', ColumnViewPreview);
+window.customElements.define('coral-columnview-preview-asset', ColumnViewPreviewAsset);
+window.customElements.define('coral-columnview-preview-content', ColumnViewPreviewContent);
+window.customElements.define('coral-columnview-preview-label', ColumnViewPreviewLabel);
+window.customElements.define('coral-columnview-preview-separator', ColumnViewPreviewSeparator);
+window.customElements.define('coral-columnview-preview-value', ColumnViewPreviewValue);
 
 // Expose component on the Coral namespace
 window.Coral = window.Coral || {};

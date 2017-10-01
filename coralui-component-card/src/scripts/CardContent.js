@@ -21,4 +21,10 @@
  @htmltag coral-card-content
  @extends HTMLElement
  */
-export default () => document.createElement('coral-card-content');
+class CardContent extends HTMLElement {
+  constructor() {
+    super();
+  }
+}
+
+export default CardContent;

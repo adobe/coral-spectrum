@@ -21,4 +21,10 @@
  @htmltag coral-shell-user-footer
  @extends HTMLElement
  */
-export default () => document.createElement('coral-shell-user-footer');
+class ShellUserFooter extends HTMLElement {
+  constructor() {
+    super();
+  }
+}
+
+export default ShellUserFooter;

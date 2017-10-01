@@ -21,4 +21,10 @@
  @htmltag coral-shell-user-heading
  @extends HTMLElement
  */
-export default () => document.createElement('coral-shell-user-heading');
+class ShellUserHeading extends HTMLElement {
+  constructor() {
+    super();
+  }
+}
+
+export default ShellUserHeading;

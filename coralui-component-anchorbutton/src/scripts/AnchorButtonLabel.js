@@ -21,5 +21,11 @@
  @htmltag coral-anchorbutton-label
  @extends HTMLElement
  */
-export default () => document.createElement('coral-anchorbutton-label');
+class AnchorButtonLabel extends HTMLElement {
+  constructor() {
+    super();
+  }
+}
+
+export default AnchorButtonLabel;
 
