@@ -493,5 +493,28 @@ describe('Coral.Radio', function() {
       expect(el.checked).to.be.true;
       expect(changeSpy.callCount).to.equal(1);
     });
+  
+    it('should be possible to change the checked radio', function(done) {
+      var changeSpy = sinon.spy();
+      document.addEventListener('change', changeSpy);
+    
+      helpers.target.innerHTML = window.__html__['Coral.Radio.Group.checked.html'];
+    
+      var radio1 = helpers.target.querySelector('coral-radio');
+      var radio2 = radio1.nextElementSibling;
+    
+      expect(radio1.hasAttribute('checked')).to.be.true;
+      expect(radio2.hasAttribute('checked')).to.be.false;
+    
+      Coral.commons.ready(radio2, function() {
+        radio2.checked = true;
+        
+        expect(radio1.hasAttribute('checked')).to.be.false;
+        expect(radio2.hasAttribute('checked')).to.be.true;
+        expect(changeSpy.callCount).to.equal(0);
+        
+        done();
+      });
+    });
   });
 });
