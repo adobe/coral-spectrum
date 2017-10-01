@@ -1,3 +1,5 @@
+import 'coralui-externals';
+
 import FormField from './src/scripts/FormField';
 import {mixin} from 'coralui-util';
 

@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "description": "Form field mixin",
   "dependencies": {
+    "coralui-mixin-component": "file:../coralui-mixin-component",
     "coralui-externals": "file:../coralui-externals",
     "coralui-util": "file:../coralui-util"
   },
