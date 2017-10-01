@@ -42,5 +42,37 @@
   "nl-NL": {
     "Time": "Tijd",
     "Calendar": "Kalender"
+  },
+  "da-DK": {
+    "Time": "Tid",
+    "Calendar": "Kalender"
+  },
+  "fi-FI": {
+    "Time": "Aika",
+    "Calendar": "Kalenteri"
+  },
+  "nb-NO": {
+    "Time": "Klokkeslett",
+    "Calendar": "Kalender"
+  },
+  "sv-SE": {
+    "Time": "Tid",
+    "Calendar": "Kalender"
+  },
+  "cs-CZ": {
+    "Time": "Čas",
+    "Calendar": "Kalendář"
+  },
+  "pl-PL": {
+    "Time": "Czas",
+    "Calendar": "Kalendarz"
+  },
+  "ru-RU": {
+    "Time": "Время",
+    "Calendar": "Календарь"
+  },
+  "tr-TR": {
+    "Time": "Zaman",
+    "Calendar": "Takvim"
   }
 }

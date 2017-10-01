@@ -42,5 +42,37 @@
   "nl-NL": {
     "Search Organizations": "Organisaties zoeken",
     "No organizations found&period;": "Geen organisaties gevonden."
+  },
+  "da-DK": {
+    "Search Organizations": "Søg i virksomheder",
+    "No organizations found&period;": "Ingen virksomheder fundet."
+  },
+  "fi-FI": {
+    "Search Organizations": "Hae organisaatioita",
+    "No organizations found&period;": "Organisaatioita ei löytynyt."
+  },
+  "nb-NO": {
+    "Search Organizations": "Søk etter organisasjoner",
+    "No organizations found&period;": "Finner ingen organisasjoner."
+  },
+  "sv-SE": {
+    "Search Organizations": "Sökorganisationer",
+    "No organizations found&period;": "Inga organisationer funna."
+  },
+  "cs-CZ": {
+    "Search Organizations": "Hledat ve společnostech",
+    "No organizations found&period;": "Nebyly nalezeny žádné společnosti."
+  },
+  "pl-PL": {
+    "Search Organizations": "Wyszukaj organizacje",
+    "No organizations found&period;": "Nie znaleziono żadnych organizacji."
+  },
+  "ru-RU": {
+    "Search Organizations": "Искать организации",
+    "No organizations found&period;": "Организации не найдены."
+  },
+  "tr-TR": {
+    "Search Organizations": "Kuruluşları ara",
+    "No organizations found&period;": "Kuruluş bulunamadı."
   }
 }

@@ -42,5 +42,37 @@
   "nl-NL": {
     "Decrement": "Verlagen",
     "Increment": "Verhogen"
+  },
+  "da-DK": {
+    "Decrement": "Reduktion",
+    "Increment": "Dataændring"
+  },
+  "fi-FI": {
+    "Decrement": "Vähennys",
+    "Increment": "Lisäys"
+  },
+  "nb-NO": {
+    "Decrement": "Reduser",
+    "Increment": "Øk"
+  },
+  "sv-SE": {
+    "Decrement": "Minskning",
+    "Increment": "Ökning"
+  },
+  "cs-CZ": {
+    "Decrement": "Odpočet",
+    "Increment": "Přírůstek"
+  },
+  "pl-PL": {
+    "Decrement": "Zmniejsz",
+    "Increment": "Zwiększ"
+  },
+  "ru-RU": {
+    "Decrement": "Снижение",
+    "Increment": "Прирост"
+  },
+  "tr-TR": {
+    "Decrement": "Azaltma",
+    "Increment": "Artırma"
   }
 }

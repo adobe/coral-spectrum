@@ -75,5 +75,61 @@
     "Hours": "Uren",
     "Minutes": "Minuten",
     "AM/PM": "AM/PM"
+  },
+  "da-DK": {
+    "am": "am",
+    "pm": "pm",
+    "Hours": "Timer",
+    "Minutes": "Minutter",
+    "AM/PM": "AM/PM"
+  },
+  "fi-FI": {
+    "am": "ap.",
+    "pm": "ip.",
+    "Hours": "Tunnit",
+    "Minutes": "Minuutit",
+    "AM/PM": "ap./ip."
+  },
+  "nb-NO": {
+    "am": "am",
+    "pm": "pm",
+    "Hours": "Timer",
+    "Minutes": "Minutter",
+    "AM/PM": "AM/PM"
+  },
+  "sv-SE": {
+    "am": "am",
+    "pm": "pm",
+    "Hours": "Timmar",
+    "Minutes": "Minuter",
+    "AM/PM": "AM/PM"
+  },
+  "cs-CZ": {
+    "am": "am",
+    "pm": "pm",
+    "Hours": "hodin",
+    "Minutes": "minut",
+    "AM/PM": "AM/PM"
+  },
+  "pl-PL": {
+    "am": "przed południem",
+    "pm": "po południu",
+    "Hours": "Godz.",
+    "Minutes": "Min",
+    "AM/PM": "Przed południem / Po południu"
+  },
+  "ru-RU": {
+    "am": "дп",
+    "pm": "пп",
+    "Hours": "ч.",
+    "Minutes": "мин.",
+    "AM/PM": "ДП/ПП"
+  },
+  "tr-TR": {
+    "am": "öö",
+    "pm": "ös",
+    "Hours": "Saat",
+    "Minutes": "Dakika",
+    "AM/PM": "ÖÖ/ÖS"
   }
 }

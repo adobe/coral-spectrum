@@ -31,5 +31,29 @@
   },
   "nl-NL": {
     "Close": "Sluiten"
+  },
+  "da-DK": {
+    "Close": "Luk"
+  },
+  "fi-FI": {
+    "Close": "Sulje"
+  },
+  "nb-NO": {
+    "Close": "Lukk"
+  },
+  "sv-SE": {
+    "Close": "Stäng"
+  },
+  "cs-CZ": {
+    "Close": "Zavřít"
+  },
+  "pl-PL": {
+    "Close": "Zamknij"
+  },
+  "ru-RU": {
+    "Close": "Закрыть"
+  },
+  "tr-TR": {
+    "Close": "Kapat"
   }
 }

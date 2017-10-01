@@ -31,5 +31,29 @@
   },
   "fr-FR": {
     "Clear search": "Effacer la recherche"
+  },
+  "da-DK": {
+    "Clear search": "Slet søgning"
+  },
+  "fi-FI": {
+    "Clear search": "Tyhjennä haku"
+  },
+  "nb-NO": {
+    "Clear search": "Fjern søk"
+  },
+  "sv-SE": {
+    "Clear search": "Rensa sökningen"
+  },
+  "cs-CZ": {
+    "Clear search": "Vymazat hledání"
+  },
+  "pl-PL": {
+    "Clear search": "Wyczyść wyniki wyszukiwania"
+  },
+  "ru-RU": {
+    "Clear search": "Очистить поиск"
+  },
+  "tr-TR": {
+    "Clear search": "Aramayı temizle"
   }
 }

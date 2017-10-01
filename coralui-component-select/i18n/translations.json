@@ -31,5 +31,29 @@
   },
   "nl-NL": {
     "Select": "Selecteren"
+  },
+  "da-DK": {
+    "Select": "Vælg"
+  },
+  "fi-FI": {
+    "Select": "Valitse"
+  },
+  "nb-NO": {
+    "Select": "Velg"
+  },
+  "sv-SE": {
+    "Select": "Välj"
+  },
+  "cs-CZ": {
+    "Select": "Vybrat"
+  },
+  "pl-PL": {
+    "Select": "Wybierz"
+  },
+  "ru-RU": {
+    "Select": "Выберите"
+  },
+  "tr-TR": {
+    "Select": "Seç"
   }
 }

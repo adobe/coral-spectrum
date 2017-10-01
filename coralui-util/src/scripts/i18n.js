@@ -32,6 +32,14 @@ let i18n = {};
     'en': 'en-US',
     /** English (U.S.)*/
     'en-us': 'en-US',
+    /** Czech (Czechia) */
+    'cs': 'cs-CZ',
+    /** Czech (Czechia) */
+    'cs-cz': 'cs-CZ',
+    /** Danish (Denmark)*/
+    'da': 'da-DK',
+    /** Danish (Denmark)*/
+    'da-dk': 'da-DK',
     /** German (Germany)*/
     'de': 'de-DE',
     /** German (Germany)*/
@@ -40,6 +48,10 @@ let i18n = {};
     'es': 'es-ES',
     /** Spanish (Spain)*/
     'es-es': 'es-ES',
+    /** Finnish (Finland) */
+    'fi': 'fi-FI',
+    /** Finnish (Finland) */
+    'fi-fi': 'fi-FI',
     /** French (France)*/
     'fr': 'fr-FR',
     /** French (France)*/
@@ -56,14 +68,34 @@ let i18n = {};
     'ko': 'ko-KR',
     /** Korean (Korea)*/
     'ko-kr': 'ko-KR',
+    /** Norwegian Bokmål (Norway) */
+    'nb': 'nb-NO',
+    /** Norwegian Bokmål (Norway) */
+    'nb-no': 'nb-NO',
     /** Dutch (Netherlands)*/
     'nl': 'nl-NL',
+    /** Polish (Poland) */
+    'pl': 'pl-PL',
+    /** Polish (Poland) */
+    'pl-pl': 'pl-PL',
     /** Dutch (Netherlands)*/
     'nl-nl': 'nl-NL',
     /** Portuguese (Brazil) */
     'pt': 'pt-BR',
     /** Portuguese (Brazil) */
     'pt-br': 'pt-BR',
+    /** Russian (Russia) */
+    'ru': 'ru-RU',
+    /** Russian (Russia) */
+    'ru-ru': 'ru-RU',
+    /** Swedish (Sweden) */
+    'sv': 'sv-SE',
+    /** Swedish (Sweden) */
+    'sv-se': 'sv-SE',
+    /** Turkish (Turkey) */
+    'tr': 'tr-TR',
+    /** Turkish (Turkey) */
+    'tr-tr': 'tr-TR',
     /** Simplified Chinese */
     'zh-cn': 'zh-CN',
     /** Simplified Chinese */

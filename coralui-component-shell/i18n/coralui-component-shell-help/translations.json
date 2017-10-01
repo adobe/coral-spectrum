@@ -36,7 +36,7 @@
   },
   "pt-BR": {
     "Search for Help": "Procurar nas seções de Ajuda",
-    "Searching Help…": "Pesquisando ajuda…",
+    "Searching Help…": "Procurando ajuda…",
     "Error fetching results": "Erro ao obter resultados",
     "No results found": "Nenhum resultado encontrado",
     "See all {0} results": "Ver todos os resultados de {0}"
@@ -75,5 +75,61 @@
     "Error fetching results": "Fout bij ophalen resultaten",
     "No results found": "Geen resultaten gevonden",
     "See all {0} results": "Alle {0} resultaten bekijken"
+  },
+  "da-DK": {
+    "Search for Help": "Søg efter Hjælp...",
+    "Searching Help…": "Søger i Hjælp...",
+    "Error fetching results": "Fejl ved hentning af resultater",
+    "No results found": "Ingen resultater fundet",
+    "See all {0} results": "Se alle {0} resultater"
+  },
+  "fi-FI": {
+    "Search for Help": "Hae ohjeita",
+    "Searching Help…": "Haun ohje…",
+    "Error fetching results": "Tuloksia haettaessa tapahtui virhe.",
+    "No results found": "Tuloksia ei löytynyt.",
+    "See all {0} results": "Näytä kaikki {0} tulosta"
+  },
+  "nb-NO": {
+    "Search for Help": "Søk etter hjelp",
+    "Searching Help…": "Søker i Hjelp …",
+    "Error fetching results": "Kan ikke hente resultater",
+    "No results found": "Finner ingen resultater",
+    "See all {0} results": "Vis alle de {0} resultatene"
+  },
+  "sv-SE": {
+    "Search for Help": "Sök efter hjälp",
+    "Searching Help…": "Sökhjälp…",
+    "Error fetching results": "Det gick inte att hämta resultat",
+    "No results found": "Inga resultat funna",
+    "See all {0} results": "Se alla {0} resultat"
+  },
+  "cs-CZ": {
+    "Search for Help": "Vyhledat nápovědu",
+    "Searching Help…": "Nápověda hledání…",
+    "Error fetching results": "Při shromažďování výsledků došlo k chybě",
+    "No results found": "Nebyly nalezeny žádné výsledky",
+    "See all {0} results": "Zobrazit všechny výsledky: {0}"
+  },
+  "pl-PL": {
+    "Search for Help": "Szukaj pomocy",
+    "Searching Help…": "Trwa przeszukiwanie Pomocy...",
+    "Error fetching results": "Błąd pobierania wyników",
+    "No results found": "Nie znaleziono żadnych wyników",
+    "See all {0} results": "Zobacz wszystkie {0} wyników"
+  },
+  "ru-RU": {
+    "Search for Help": "Поиск справки",
+    "Searching Help…": "Поиск по справке…",
+    "Error fetching results": "Ошибка получения результатов",
+    "No results found": "Результаты не найдены",
+    "See all {0} results": "Посмотреть все результаты ({0})"
+  },
+  "tr-TR": {
+    "Search for Help": "Yardım Ara",
+    "Searching Help…": "Yardım Aranıyor...",
+    "Error fetching results": "Sonuçlar alınırken hata oluştu",
+    "No results found": "Sonuç bulunamadı",
+    "See all {0} results": "Tüm {0} sonuçlarını gör"
   }
 }

@@ -31,5 +31,29 @@
   },
   "nl-NL": {
     "Remove": "Verwijderen"
+  },
+  "da-DK": {
+    "Remove": "Fjern"
+  },
+  "fi-FI": {
+    "Remove": "Poista"
+  },
+  "nb-NO": {
+    "Remove": "Fjern"
+  },
+  "sv-SE": {
+    "Remove": "Ta bort"
+  },
+  "cs-CZ": {
+    "Remove": "Odebrat"
+  },
+  "pl-PL": {
+    "Remove": "Usuń"
+  },
+  "ru-RU": {
+    "Remove": "Удалить"
+  },
+  "tr-TR": {
+    "Remove": "Kaldır"
   }
 }
