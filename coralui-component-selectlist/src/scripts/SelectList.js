@@ -87,6 +87,8 @@ class SelectList extends Component(HTMLElement) {
       'coral-selectlist-item:_selectedchanged': '_onItemSelectedChanged'
     });
     
+    this._keypressTimeoutDuration = KEYPRESS_TIMEOUT_DURATION;
+    
     // Templates
     this._elements = {};
     loadIndicator.call(this._elements);
@@ -371,13 +373,13 @@ class SelectList extends Component(HTMLElement) {
     // Set a timeout so that _keypressSearchString is cleared after 1 second
     this._keypressTimeoutID = window.setTimeout(function() {
       self._keypressSearchString = '';
-    }, KEYPRESS_TIMEOUT_DURATION);
+    }, this._keypressTimeoutDuration);
     
     // Search within selectable items
     const selectableItems = this.items._getSelectableItems();
     
     // Remember the index of the focused item within the array of selectable items
-    const currentIndex = selectableItems.index(this._tabTarget);
+    const currentIndex = selectableItems.indexOf(this._tabTarget);
     
     this._keypressSearchString = this._keypressSearchString.trim().toLowerCase();
     
@@ -402,7 +404,7 @@ class SelectList extends Component(HTMLElement) {
     // Compare _keypressSearchString against item text until a match is found
     for (let i = start; i < selectableItems.length; i++) {
       item = selectableItems[i];
-      comparison = item.text().trim().toLowerCase();
+      comparison = item.textContent.trim().toLowerCase();
       if (comparison.indexOf(this._keypressSearchString) === 0) {
         newFocusItem = item;
         break;
@@ -412,8 +414,8 @@ class SelectList extends Component(HTMLElement) {
     // If no match is found, continue searching for a match starting from the top
     if (!newFocusItem) {
       for (let j = 0; j < start; j++) {
-        item = selectableItems[i];
-        comparison = item.text().trim().toLowerCase();
+        item = selectableItems[j];
+        comparison = item.textContent.trim().toLowerCase();
         if (comparison.indexOf(this._keypressSearchString) === 0) {
           newFocusItem = item;
           break;

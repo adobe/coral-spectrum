@@ -393,6 +393,20 @@ describe('Coral.SelectList', function() {
   });
 
   describe('User Interaction', function() {
+    it('should focus the item which contains text starting with the letter O', function(done) {
+      const el = helpers.build(window.__html__['Coral.SelectList.base.html']);
+      el._keypressTimeoutDuration = 0;
+      
+      const lastItem = el.items.last();
+      el._onKeyPress({which: 'O'.charCodeAt(0)});
+      
+      // Key press search is implemented with a 1 sec timeout but we override it with 0
+      window.setTimeout(function() {
+        expect(lastItem.getAttribute('tabindex')).to.equal('0');
+        expect(document.activeElement).to.equal(lastItem);
+        done();
+      }, 0);
+    });
     // @todo: test focus of initial state
     // @todo: test focus of an empty list
     // @todo: test focus of a list with a selected item
