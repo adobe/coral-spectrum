@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import {Collection} from 'coralui-collection';
+import {SelectableCollection} from 'coralui-collection';
 import {transform, validate} from 'coralui-util';
 
 const CLASSNAME = 'coral3-BasicList';
@@ -65,7 +65,7 @@ const List = (superClass) => class extends superClass {
   get items() {
     // Construct the collection on first request:
     if (!this._items) {
-      this._items = new Collection({
+      this._items = new SelectableCollection({
         itemTagName: this._itemTagName,
         itemBaseTagName: this._itemBaseTagName,
         itemSelector: '[coral-list-item]',
@@ -197,9 +197,18 @@ const List = (superClass) => class extends superClass {
   
   /** @private */
   _getSelectableItems() {
-    return this.items.getAll().filter(function(item) {
-      return !item.hasAttribute('hidden') && !item.hasAttribute('disabled');
-    });
+    // Also checks if item is visible
+    return this.items._getSelectableItems().filter(item => !item.hasAttribute('hidden') && item.offsetParent);
+  }
+  
+  /** @ignore */
+  focus() {
+    if (!this.contains(document.activeElement)) {
+      const items = this._getSelectableItems();
+      if (items.length > 0) {
+        items[0].focus();
+      }
+    }
   }
   
   // Expose enumerations

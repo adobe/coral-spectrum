@@ -31,4 +31,30 @@ describe('Coral.List', function() {
       helpers.cloneComponent(window.__html__['Coral.List.mixed.html']);
     });
   });
+  
+  describe('API', function() {
+    describe('#interaction', function() {});
+    
+    describe('#focus', function() {
+      it('should focus on the first selectable element, thus ignoring the hidden elements', function() {
+        const el = helpers.build(window.__html__['Coral.List.hidden.html']);
+        const expectedFocusedElement = document.getElementById('firstSelectableElement');
+      
+        el.focus();
+      
+        expect(expectedFocusedElement).to.equal(document.activeElement);
+      });
+    
+      it('should move focus on the last selectable element, thus ignoring the hidden elements', function() {
+        const el = helpers.build(window.__html__['Coral.List.hidden.html']);
+        const expectedFocusedElement = document.getElementById('lastSelectableElement');
+      
+        el.focus();
+      
+        helpers.keypress('up', document.activeElement);
+      
+        expect(expectedFocusedElement).to.equal(document.activeElement);
+      });
+    });
+  });
 });
