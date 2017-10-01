@@ -247,6 +247,40 @@ describe('Coral.SelectList', function() {
         expect(groups.length).to.equal(0);
       });
     });
+  
+    describe('#focus()', function() {
+      it('should focus the first item when no selection is available', function() {
+        const el = helpers.build(window.__html__['Coral.SelectList.base.html']);
+        expect(document.activeElement).not.to.equal(el);
+        
+        el.focus();
+  
+        expect(document.activeElement).to.equal(el.items.first(), 'Focus should move to the first item');
+      });
+    
+      it('should not shift focus if already inside the component', function() {
+        const el = helpers.build(window.__html__['Coral.SelectList.base.html']);
+        expect(document.activeElement).not.to.equal(el);
+        
+        // we focus the last item to shift focus into the component
+        el.items.last().focus();
+        
+        expect(document.activeElement).to.equal(el.items.last(), 'Focus should move inside the component');
+      
+        el.focus();
+        
+        expect(document.activeElement).to.equal(el.items.last(), 'Focus should not be reset');
+      });
+    
+      it('should should move the focus to the selected item', function() {
+        const el = helpers.build(window.__html__['Coral.SelectList.selected.html']);
+        expect(document.activeElement).not.to.equal(el);
+        
+        el.focus();
+        
+        expect(document.activeElement).to.equal(el.selectedItem, 'Focus should move to the selected item');
+      });
+    });
   });
 
   describe('Events', function() {

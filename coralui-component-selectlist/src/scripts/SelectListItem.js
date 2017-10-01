@@ -75,15 +75,6 @@ class SelectListItem extends Component(HTMLElement) {
     }
   }
   
-  /** @private **/
-  get _isTabTarget() {
-    return this.__isTabTarget || false;
-  }
-  set _isTabTarget(value) {
-    this.__isTabTarget = value;
-    this.setAttribute('tabindex', this.__isTabTarget ? 0 : -1);
-  }
-  
   /**
    Whether the item is selected.
    

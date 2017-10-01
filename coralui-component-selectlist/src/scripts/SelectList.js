@@ -97,6 +97,9 @@ class SelectList extends Component(HTMLElement) {
     // Used for interaction
     this._keypressTimeoutID = null;
     this._keypressSearchString = '';
+  
+    // we correctly bind the scroll event
+    this._onDebouncedScroll = this._onDebouncedScroll.bind(this);
     
     // Init the collection mutation observer
     this.items._startHandlingItems(true);
@@ -233,7 +236,7 @@ class SelectList extends Component(HTMLElement) {
     
     // Set all but the current set _tabTarget to not be a tab target:
     this.items.getAll().forEach(function(item) {
-      item._isTabTarget = item === value;
+      item.setAttribute('tabindex', item === value ? 0 : -1);
     });
   }
   
@@ -432,19 +435,8 @@ class SelectList extends Component(HTMLElement) {
    @private
    */
   _resetTabTarget() {
-    if (!this._resetTabTargetScheduled) {
-      this._resetTabTargetScheduled = true;
-    
-      window.requestAnimationFrame(function() {
-        this._resetTabTargetScheduled = false;
-      
-        // since hidden items cannot have focus, we need to make sure the tabTarget is not hidden
-        const selectedItems = this.items.getAll().filter(function(item) {
-          return item.hasAttribute('selected') && !item.hasAttribute('disabled') && !item.hasAttribute('hidden');
-        });
-        this._tabTarget = selectedItems.length ? selectedItems[0] : this.items._getFirstSelectable();
-      }.bind(this));
-    }
+    const selectedItems = this.items._getAllSelected().filter(item => !item.hasAttribute('hidden'));
+    this._tabTarget = selectedItems.length ? selectedItems[0] : this.items._getSelectableItems().filter(item => !item.hasAttribute('hidden'))[0];
   }
   
   /** @private */
@@ -537,12 +529,13 @@ class SelectList extends Component(HTMLElement) {
     return oldSelection.length !== selection.length || diff.length !== 0;
   }
   
-  /** @private */
+  /** @ignore */
   focus() {
-    // we reset the focus tab and set focus on the right item. This is required in the case that the user had already
-    // focus on the an item and he comes back, the focus should be recalculated.
-    this._resetTabTarget();
-    this._focusItem(this._tabTarget);
+    // Avoids moving the focus once it is already inside the component
+    if (!this.contains(document.activeElement)) {
+      this._resetTabTarget();
+      this._focusItem(this._tabTarget);
+    }
   }
   
   static get observedAttributes() {
@@ -556,8 +549,6 @@ class SelectList extends Component(HTMLElement) {
     
     // adds the role to support accessibility
     this.setAttribute('role', 'listbox');
-    // we correctly bind the scroll event
-    this._onDebouncedScroll = this._onDebouncedScroll.bind(this);
     
     // Don't trigger events once connected
     this._preventTriggeringEvents = true;
