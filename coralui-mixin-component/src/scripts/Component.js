@@ -18,7 +18,6 @@
 import {Vent} from 'coralui-externals';
 import {commons, Keys, keys, events} from 'coralui-util';
 
-
 // Used to split events by type/target
 const delegateEventSplitter = /^(\S+)\s*(.*)$/;
 

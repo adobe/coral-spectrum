@@ -1,3 +1,5 @@
+import 'coralui-externals';
+
 import Component from './src/scripts/Component';
 import {mixin} from 'coralui-util';
 
