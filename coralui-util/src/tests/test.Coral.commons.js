@@ -346,66 +346,65 @@ describe('Coral.commons', function() {
 
   describe('#ready', function() {
     // Define custom element parent
-    window.customElements.define('x-element', class extends HTMLElement {
+    window.customElements.define('coral-element', class extends HTMLElement {
       constructor() {
         super();
       }
-    
+  
       connectedCallback() {
-        this.appendChild(document.createElement('x-element-item'));
+        this.appendChild(document.createElement('coral-element-item'));
       }
     });
-    
+
     // Define custom element item
-    window.customElements.define('x-element-item', class extends HTMLElement {
+    window.customElements.define('coral-element-item', class extends HTMLElement {
       constructor() {
         super();
       }
     });
 
     // Define custom element extended button
-    window.customElements.define('x-button', class extends HTMLButtonElement {
+    window.customElements.define('coral-element-button', class extends HTMLButtonElement {
       constructor() {
         super();
       }
     }, {extends: 'button'});
     
-
     it('should call the callback when all components are ready', function(done) {
-      const el = helpers.build(document.createElement('x-element'));
+      const el = helpers.build(document.createElement('coral-element'));
       
       Coral.commons.ready(() => {
-        expect(el.contains(el.querySelector('x-element-item')));
-        expect(window.customElements.get('x-element')).to.not.equal(undefined);
-        expect(window.customElements.get('x-element-item')).to.not.equal(undefined);
+        expect(el.contains(el.querySelector('coral-element-item')));
+        expect(window.customElements.get('coral-element')).to.not.equal(undefined);
+        expect(window.customElements.get('coral-element-item')).to.not.equal(undefined);
         
         done();
       });
     });
 
     it('should call the callback when all subcomponents components are ready (recursively)', function(done) {
-      const el = helpers.build(document.createElement('x-element'));
+      const el = helpers.build(document.createElement('coral-element'));
   
       Coral.commons.ready(el, () => {
-        expect(el.contains(el.querySelector('x-element-item')));
-        expect(window.customElements.get('x-element')).to.not.equal(undefined);
-        expect(window.customElements.get('x-element-item')).to.not.equal(undefined);
+        expect(el.contains(el.querySelector('coral-element-item')));
+        expect(window.customElements.get('coral-element')).to.not.equal(undefined);
+        expect(window.customElements.get('coral-element-item')).to.not.equal(undefined);
         
         done();
       });
     });
 
     it('should work with custom elements that use is=""', function(done) {
-      const el = document.createElement('button', {is: 'x-button'});
+      const el = document.createElement('button', {is: 'coral-element-button'});
   
       Coral.commons.ready(el, () => {
-        expect(window.customElements.get('x-button')).to.not.equal(undefined);
+        expect(window.customElements.get('coral-element-button')).to.not.equal(undefined);
         done();
       });
     });
 
     it('should pass the element to the callback', function(done) {
-      const el = document.createElement('button', {is: 'x-button'});
+      const el = document.createElement('button', {is: 'coral-element-button'});
   
       Coral.commons.ready(el, (passedEl) => {
         expect(el).to.equal(passedEl);
@@ -414,7 +413,7 @@ describe('Coral.commons', function() {
     });
 
     it('should pass window to the callback when no element is passed', function(done) {
-      const el = helpers.build(document.createElement('button', {is: 'x-button'}));
+      const el = helpers.build(document.createElement('button', {is: 'coral-element-button'}));
   
       Coral.commons.ready((passedEl) => {
         expect(window).to.equal(passedEl);
@@ -423,13 +422,13 @@ describe('Coral.commons', function() {
     });
     
     it('should work with normal custom elements and some that use is="..."', function(done) {
-      helpers.target.appendChild(document.createElement('x-element'));
-      helpers.target.appendChild(document.createElement('x-button'), {is:'x-button'});
+      helpers.target.appendChild(document.createElement('coral-element'));
+      helpers.target.appendChild(document.createElement('coral-element-button'), {is:'coral-element-button'});
   
       Coral.commons.ready(() => {
-        expect(window.customElements.get('x-element')).to.not.equal(undefined);
-        expect(window.customElements.get('x-element-item')).to.not.equal(undefined);
-        expect(window.customElements.get('x-button')).to.not.equal(undefined);
+        expect(window.customElements.get('coral-element')).to.not.equal(undefined);
+        expect(window.customElements.get('coral-element-item')).to.not.equal(undefined);
+        expect(window.customElements.get('coral-element-button')).to.not.equal(undefined);
         
         done();
       });

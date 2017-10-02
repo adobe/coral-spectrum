@@ -3,31 +3,29 @@ import Component from 'coralui-mixin-component';
 describe('Coral.SelectableCollection', function() {
   'use strict';
   
-  before(function() {
-    // test collection container
-    window.customElements.define('coral-selectablecollection-container', class extends Component(HTMLElement) {
-      constructor() {
-        super();
+  // test collection container
+  window.customElements.define('coral-selectablecollection-container', class extends Component(HTMLElement) {
+    constructor() {
+      super();
+    }
+    
+    get items() {
+      // we do lazy initialization of the collection
+      if (!this._items) {
+        this._items = new Coral.SelectableCollection({
+          host: this,
+          itemTagName: 'coral-selectablecollection-item'
+        });
       }
       
-      get items() {
-        // we do lazy initialization of the collection
-        if (!this._items) {
-          this._items = new Coral.SelectableCollection({
-            host: this,
-            itemTagName: 'coral-selectablecollection-item'
-          });
-        }
-        
-        return this._items;
-      }
-    });
-    
-    window.customElements.define('coral-selectablecollection-item', class extends Component(HTMLElement) {
-      constructor() {
-        super();
-      }
-    });
+      return this._items;
+    }
+  });
+  
+  window.customElements.define('coral-selectablecollection-item', class extends Component(HTMLElement) {
+    constructor() {
+      super();
+    }
   });
   
   describe('Namespace', function() {
@@ -384,6 +382,8 @@ describe('Coral.SelectableCollection', function() {
       
       // we create a collection with a filter to see if it warns in the console
       new Coral.SelectableCollection({
+        host: this,
+        itemTagName: 'coral-selectablecollection-item',
         // filter is not supported by this collection
         filter: function(element) {
           return !element.hasAttribute('excluded');

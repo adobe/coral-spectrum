@@ -11,7 +11,7 @@ describe('Coral.mixin.formField', function() {
       super();
       
       this._delegateEvents(this._events);
-  
+      
       this._elements = {
         input: document.createElement('input')
       };
@@ -24,7 +24,7 @@ describe('Coral.mixin.formField', function() {
       this._elements.input.disabled = transform.booleanAttr(value);
       this._reflectAttribute('disabled', this.disabled);
     }
-  
+    
     get required() {
       return this._elements.input.required;
     }
@@ -32,7 +32,7 @@ describe('Coral.mixin.formField', function() {
       this._elements.input.required = transform.booleanAttr(value);
       this._reflectAttribute('required', this.required);
     }
-  
+    
     get readOnly() {
       return this._elements.input.readOnly;
     }
@@ -40,7 +40,7 @@ describe('Coral.mixin.formField', function() {
       this._elements.input.readOnly = transform.booleanAttr(value);
       this._reflectAttribute('readonly', this.readOnly);
     }
-  
+    
     get name() {
       return this._elements.input.name;
     }
@@ -48,7 +48,7 @@ describe('Coral.mixin.formField', function() {
       this._elements.input.name = value;
       this._reflectAttribute('name', this.name);
     }
-  
+    
     get value() {
       return this._elements.input.value;
     }
@@ -63,13 +63,13 @@ describe('Coral.mixin.formField', function() {
     }
   }
   
-  window.customElements.define('x-element', Element);
+  window.customElements.define('coral-formfield-element', Element);
   
   describe('API', function() {
     let el;
     
     beforeEach(function() {
-      el = document.createElement('x-element');
+      el = document.createElement('coral-formfield-element');
     });
     
     afterEach(function() {
@@ -117,7 +117,7 @@ describe('Coral.mixin.formField', function() {
     describe('#labelledBy', function() {
       it('should remove old for assignments', function() {
         const label = document.createElement('label');
-        const example = document.createElement('x-element');
+        const example = document.createElement('coral-formfield-element');
     
         label.id = commons.getUID();
         label.textContent = 'label';
@@ -172,7 +172,7 @@ describe('Coral.mixin.formField', function() {
     describe('#change', function() {
       it('should fire change when input triggers change', function() {
         const spy = sinon.spy();
-        const el = document.createElement('x-element');
+        const el = document.createElement('coral-formfield-element');
         
         helpers.target.appendChild(el);
         
@@ -190,7 +190,7 @@ describe('Coral.mixin.formField', function() {
   });
   
   describe('Implementation Details', function() {
-    helpers.testFormField('<x-element></x-element>', {
+    helpers.testFormField('<coral-formfield-element></coral-formfield-element>', {
       value: 'testValue'
     });
   });

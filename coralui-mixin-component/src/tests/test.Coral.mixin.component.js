@@ -87,8 +87,14 @@ describe('Coral.mixin.component', function() {
   
   window.customElements.define('x-element', Element);
   
-  window.Coral = window.Coral || {};
-  window.Coral.Element = Element;
+  before(function() {
+    window.Coral = window.Coral || {};
+    window.Coral.Element = Element;
+  });
+  
+  after(function() {
+    window.Coral.Element = undefined;
+  });
   
   describe('API', function() {
     let el;

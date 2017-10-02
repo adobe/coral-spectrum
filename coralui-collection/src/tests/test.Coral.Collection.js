@@ -14,84 +14,82 @@ describe('Coral.Collection', function() {
     return !element.hasAttribute('excluded');
   };
   
-  before(function() {
-    // test collection container
-    window.customElements.define('coral-collection-test', class extends Component(HTMLElement) {
-      constructor() {
-        super();
-      }
-      
-      get items() {
-        // we do lazy initialization of the collection
-        if (!this._items) {
-          this._items = new Coral.Collection({
-            host: this,
-            filter: filter,
-            itemTagName: 'coral-collection-test-item',
-            onItemAdded: onItemAddedSpy,
-            onItemRemoved: onItemRemovedSpy,
-            onCollectionChange: onCollectionChangedSpy
-          });
-        }
-        
-        return this._items;
-      }
-    });
+  // test collection container
+  window.customElements.define('coral-collection-test', class extends Component(HTMLElement) {
+    constructor() {
+      super();
+    }
     
-    // test nested collection container
-    window.customElements.define('coral-collection-nested-test', class extends Component(HTMLElement) {
-      constructor() {
-        super();
+    get items() {
+      // we do lazy initialization of the collection
+      if (!this._items) {
+        this._items = new Coral.Collection({
+          host: this,
+          filter: filter,
+          itemTagName: 'coral-collection-test-item',
+          onItemAdded: onItemAddedSpy,
+          onItemRemoved: onItemRemovedSpy,
+          onCollectionChange: onCollectionChangedSpy
+        });
       }
       
-      get items() {
-        // we do lazy initialization of the collection
-        if (!this._items) {
-          this._items = new Coral.Collection({
-            host: this,
-            itemTagName: 'coral-collection-test-item',
-            itemSelector: ':scope > coral-collection-test-item',
-            filter: filter,
-            onItemAdded: onItemAddedNestedSpy,
-            onItemRemoved: onItemRemovedNestedSpy,
-            onCollectionChange: onNestedCollectionChangedSpy
-          });
-        }
-        
-        return this._items;
-      }
-      
-      connectedCallback() {
-        // handles collection events automatically
-        this.items._startHandlingItems();
-      }
-    });
-    
-    window.customElements.define('coral-collection-test-item', class extends Component(HTMLElement) {
-      constructor() {
-        super();
-      }
-      
-      get title() {
-        return this._title || this.getAttribute('title');
-      }
-      
-      set title(value) {
-        this._title = Coral.transform.string(value);
-        this._reflectAttribute('title', this._title);
-      }
-      
-      static get observedAttributes() {
-        return ['title'];
-      }
-    });
-    
-    window.customElements.define('coral-collection-test-button-item', class extends Component(HTMLButtonElement) {
-      constructor() {
-        super();
-      }
-    }, {extends: 'button'});
+      return this._items;
+    }
   });
+  
+  // test nested collection container
+  window.customElements.define('coral-collection-nested-test', class extends Component(HTMLElement) {
+    constructor() {
+      super();
+    }
+    
+    get items() {
+      // we do lazy initialization of the collection
+      if (!this._items) {
+        this._items = new Coral.Collection({
+          host: this,
+          itemTagName: 'coral-collection-test-item',
+          itemSelector: ':scope > coral-collection-test-item',
+          filter: filter,
+          onItemAdded: onItemAddedNestedSpy,
+          onItemRemoved: onItemRemovedNestedSpy,
+          onCollectionChange: onNestedCollectionChangedSpy
+        });
+      }
+      
+      return this._items;
+    }
+    
+    connectedCallback() {
+      // handles collection events automatically
+      this.items._startHandlingItems();
+    }
+  });
+  
+  window.customElements.define('coral-collection-test-item', class extends Component(HTMLElement) {
+    constructor() {
+      super();
+    }
+    
+    get title() {
+      return this._title || this.getAttribute('title');
+    }
+    
+    set title(value) {
+      this._title = Coral.transform.string(value);
+      this._reflectAttribute('title', this._title);
+    }
+    
+    static get observedAttributes() {
+      return ['title'];
+    }
+  });
+  
+  window.customElements.define('coral-collection-test-button-item', class extends Component(HTMLButtonElement) {
+    constructor() {
+      super();
+    }
+  }, {extends: 'button'});
   
   // we need to reset all the spies
   afterEach(function() {

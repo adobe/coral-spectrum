@@ -1,3 +1,9 @@
+import 'coralui-collection/src/tests';
+import 'coralui-dragaction/src/tests';
+import 'coralui-mixin-component/src/tests';
+import 'coralui-mixin-formfield/src/tests';
+import 'coralui-mixin-overlay/src/tests';
+
 import 'coralui-component-accordion/src/tests';
 import 'coralui-component-actionbar/src/tests';
 import 'coralui-component-alert/src/tests';
@@ -45,4 +51,3 @@ import 'coralui-component-tooltip/src/tests';
 import 'coralui-component-tree/src/tests';
 import 'coralui-component-wait/src/tests';
 import 'coralui-component-wizardview/src/tests';
-import 'coralui-dragaction/src/tests';
