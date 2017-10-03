@@ -2052,16 +2052,12 @@ describe('Coral.Select', function() {
     it('should close the overlay using esc key', function(done) {
       const el = helpers.build(window.__html__['Coral.Select.base.html']);
       el.on('coral-overlay:open', function() {
-        expect(el._elements.button.classList.contains('is-selected')).to.be.true;
-
         // pressing escape should close the overlay
         helpers.keypress('esc', helpers.target);
       }, true);
 
       el.on('coral-overlay:close', function() {
         expect(el._elements.overlay.open).to.equal(false, 'overlay should be closed');
-        expect(el._elements.button.classList.contains('is-selected')).to.be.false;
-
         expect(document.activeElement).to.equal(el._elements.button, 'focus should return to the button');
 
         done();

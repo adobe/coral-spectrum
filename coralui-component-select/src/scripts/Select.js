@@ -134,12 +134,12 @@ class Select extends FormField(Component(HTMLElement)) {
       'key:down > .coral3-Select-button': '_onSpaceKey',
       'key:tab coral-selectlist-item': '_onTabKey',
       'key:tab+shift coral-selectlist-item': '_onTabKey',
-
-      'coral-overlay:beforeclose': '_onOverlayBeforeClose',
+      
       'coral-overlay:close': '_onOverlayToggle',
       'coral-overlay:open': '_onOverlayToggle',
       'coral-overlay:positioned': '_onOverlayPositioned',
       'coral-overlay:beforeopen': '_onInternalEvent',
+      'coral-overlay:beforeclose': '_onInternalEvent',
 
       'global:click': '_onGlobalClick',
       'global:touchstart': '_onGlobalClick'
@@ -148,7 +148,7 @@ class Select extends FormField(Component(HTMLElement)) {
     // Templates
     this._elements = {};
     base.call(this._elements);
-
+    
     // default value of inner flag to process events
     this._bulkSelectionChange = false;
 
@@ -158,6 +158,9 @@ class Select extends FormField(Component(HTMLElement)) {
     // since reseting a form will call the reset on every component, we need to kill the behavior of the taglist
     // otherwise the state will not be accurate
     this._elements.taglist.reset = function() {};
+  
+    // handles the focus allocation every time the overlay closes
+    this._elements.overlay.returnFocusTo(this._elements.button);
 
     this._initialValues = [];
 
@@ -939,22 +942,8 @@ class Select extends FormField(Component(HTMLElement)) {
       else {
         // event should be triggered based on the contents
         this._showOptions(true);
-        
-        // once the overlay is open, we focus the list.
-        this._focusSelectList();
       }
     }
-  }
-  
-  /** @private */
-  _focusSelectList() {
-    const list = this._elements.list;
-    // Safari seems to need another frame for this to work.
-    window.requestAnimationFrame(function() {
-      if (!list.contains(document.activeElement)) {
-        list.focus();
-      }
-    });
   }
   
   /** @private */
@@ -991,18 +980,6 @@ class Select extends FormField(Component(HTMLElement)) {
   }
   
   /** @private */
-  _onOverlayBeforeClose(event) {
-    // stops propagation cause the event is internal to the component
-    event.stopImmediatePropagation();
-    
-    const button = this._elements.button;
-    // we return the focus to the button to allow the user to continue interacting with the component
-    window.requestAnimationFrame(function() {
-      button.focus();
-    });
-  }
-  
-  /** @private */
   _onOverlayToggle(event) {
     // stops propagation cause the event is internal to the component
     event.stopImmediatePropagation();
@@ -1015,6 +992,9 @@ class Select extends FormField(Component(HTMLElement)) {
     if (!event.target.open) {
       this.classList.remove.apply(this.classList, ['is-openAbove', 'is-openBelow']);
     }
+  
+    // handles the focus allocation every time the overlay closes
+    this._elements.overlay.returnFocusTo(this._elements.button);
   }
   
   /** @private */
