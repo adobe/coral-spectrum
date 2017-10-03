@@ -204,6 +204,16 @@ describe('Coral.FileUpload.Item', function() {
         expect(item._isMimeTypeAllowed('audio/*')).to.be.false;
         expect(item._isMimeTypeAllowed('video/*')).to.be.false;
       });
+  
+      it('should allow multiple mimetypes for a single file extension', function() {
+        var item1 = new Coral.FileUpload.Item({type: 'text/csv'});
+        var item2 = new Coral.FileUpload.Item({type: 'application/vnd.ms-excel'});
+        var item3 = new Coral.FileUpload.Item({type: 'application/ms-excel'});
+    
+        expect(item1._isMimeTypeAllowed('.csv')).to.be.true;
+        expect(item2._isMimeTypeAllowed('.csv')).to.be.true;
+        expect(item3._isMimeTypeAllowed('.csv')).to.be.false;
+      });
     });
   });
 });

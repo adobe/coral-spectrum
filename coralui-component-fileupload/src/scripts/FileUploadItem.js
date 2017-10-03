@@ -262,8 +262,17 @@ class FileUploadItem {
         }
       }
       else if (allowedMimeType.match(FILE_EXTENSION_REGEXP)) {
-        // File extension case: map extension to proper mime type and then compare
-        isAllowed = (fileType === MIME_TYPES[allowedMimeType]);
+        // File extension case
+        const allowedMimeTypes = MIME_TYPES[allowedMimeType];
+  
+        // Depending on OS and browser, a file extension can map to different mime types
+        // e.g .csv maps to "text/csv" on Mac OS and to "application/vnd.ms-excel" on Windows
+        if (Array.isArray(allowedMimeTypes)) {
+          isAllowed = allowedMimeTypes.some((mimeType) => fileType === mimeType);
+        }
+        else {
+          isAllowed = (fileType === MIME_TYPES[allowedMimeType]);
+        }
       }
       else if (allowedMimeType.match(SHORTCUT_REGEXP)) {
         // "Shortcut" case: only compare first part of the file mime type with the shortcut
