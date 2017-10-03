@@ -1,41 +1,85 @@
 describe('Coral.Overlay', function() {
   'use strict';
   
-  function findPopperModifier(name) {
-    return overlay._popper.modifiers.filter(modifier => modifier.name === name)[0];
-  }
+  let overlay;
+  let targetOther;
+  let targetNext;
+  let targetPrev;
   
-  var overlay, targetOther, targetNext, targetPrev;
-
+  const findPopperModifier = (name) => {
+    return overlay._popper.modifiers.filter(modifier => modifier.name === name)[0];
+  };
+  
   // Setup tests
   beforeEach(function() {
     // Create a target after the the overlay
     targetPrev = helpers.overlay.createStaticTarget();
-
+    
     // Create a new overlay
     overlay = helpers.build(new Coral.Overlay());
     overlay.target = targetPrev;
-
+    
     // Create a target before the overlay
     targetNext = helpers.overlay.createStaticTarget();
-
+    
     // Create a target elsewhere
     targetOther = helpers.overlay.createFloatingTarget();
     targetOther.setAttribute('id', 'overlay-targetOther');
   });
-
+  
   afterEach(function() {
     overlay = targetOther = targetNext = targetPrev = null;
   });
   
   describe('Namespace', function() {
-    it('should be defined', function() {
+    it('should be defined in the Coral namespace', function() {
       expect(Coral).to.have.property('Overlay');
-      expect(Coral.Overlay).to.have.property('align');
-      expect(Coral.Overlay).to.have.property('collision');
-      expect(Coral.Overlay).to.have.property('target');
-      expect(Coral.Overlay).to.have.property('placement');
-      expect(Coral.Overlay).to.have.property('interaction');
+    });
+  
+    it('should define the align in an enum', function() {
+      expect(Coral.Overlay.align).to.exist;
+      expect(Coral.Overlay.align.LEFT_TOP).to.equal('left top');
+      expect(Coral.Overlay.align.LEFT_CENTER).to.equal('left center');
+      expect(Coral.Overlay.align.LEFT_BOTTOM).to.equal('left bottom');
+      expect(Coral.Overlay.align.CENTER_TOP).to.equal('center top');
+      expect(Coral.Overlay.align.CENTER_CENTER).to.equal('center center');
+      expect(Coral.Overlay.align.CENTER_BOTTOM).to.equal('center bottom');
+      expect(Coral.Overlay.align.RIGHT_TOP).to.equal('right top');
+      expect(Coral.Overlay.align.RIGHT_CENTER).to.equal('right center');
+      expect(Coral.Overlay.align.RIGHT_BOTTOM).to.equal('right bottom');
+      expect(Object.keys(Coral.Overlay.align).length).to.equal(9);
+    });
+  
+    it('should define the collision in an enum', function() {
+      expect(Coral.Overlay.collision).to.exist;
+      expect(Coral.Overlay.collision.FLIP).to.equal('flip');
+      expect(Coral.Overlay.collision.FIT).to.equal('fit');
+      expect(Coral.Overlay.collision.FLIP_FIT).to.equal('flipfit');
+      expect(Coral.Overlay.collision.NONE).to.equal('none');
+      expect(Object.keys(Coral.Overlay.collision).length).to.equal(4);
+    });
+  
+    it('should define the target in an enum', function() {
+      expect(Coral.Overlay.target).to.exist;
+      expect(Coral.Overlay.target.PREVIOUS).to.equal('_prev');
+      expect(Coral.Overlay.target.NEXT).to.equal('_next');
+      expect(Object.keys(Coral.Overlay.target).length).to.equal(2);
+    });
+  
+    it('should define the placement in an enum', function() {
+      expect(Coral.Overlay.placement).to.exist;
+      expect(Coral.Overlay.placement.LEFT).to.equal('left');
+      expect(Coral.Overlay.placement.RIGHT).to.equal('right');
+      expect(Coral.Overlay.placement.BOTTOM).to.equal('bottom');
+      expect(Coral.Overlay.placement.TOP).to.equal('top');
+      expect(Object.keys(Coral.Overlay.placement).length).to.equal(4);
+    });
+  
+    it('should define the interaction in an enum', function() {
+      expect(Coral.Overlay.interaction).to.exist;
+      expect(Coral.Overlay.interaction.ON).to.equal('on');
+      expect(Coral.Overlay.interaction.OFF).to.equal('off');
+      expect(Object.keys(Coral.Overlay.interaction).length).to.equal(2);
     });
   });
   
@@ -50,6 +94,12 @@ describe('Coral.Overlay', function() {
   });
   
   describe('API', function() {
+    describe('#focusOnShow', function() {
+      it('should default to ON', function() {
+        expect(overlay.focusOnShow).to.equal(Coral.mixin.overlay.focusOnShow.ON);
+      });
+    });
+    
     describe('#alignMy', function() {
       it('should be deprecated', function() {
         let warnCalled = 0;
@@ -241,57 +291,95 @@ describe('Coral.Overlay', function() {
     });
   });
   
-  describe('Events', function() {
+  describe('Markup', function() {
+    afterEach(function() {
+      // we hide any existing overlay if available
+      var overlay = helpers.target.querySelector('coral-overlay');
+      if (overlay) {
+        overlay.open = false;
+      }
+    });
     
+    describe('#focusOnShow', function() {
+      it('should try to focus the overlay', function(done) {
+        const el = helpers.build(window.__html__['Coral.Overlay.base.html']);
+        
+        var spy = sinon.spy(el, 'focus');
+        
+        el.on('coral-overlay:open', function() {
+          expect(spy.callCount).to.equal(1);
+          expect(document.activeElement).to.equal(document.body, 'Focus remains in the body, as the component is not focusable');
+          
+          done();
+        });
+        
+        el.show();
+      });
+      
+      it('should focus the overlay when no element is focusable (trapfocus=on)', function(done) {
+        const el = helpers.build(window.__html__['Coral.Overlay.trapFocus.on.html']);
+        
+        el.on('coral-overlay:open', function() {
+          expect(document.activeElement).to.equal(el, 'Overlay itself should be focused');
+          
+          done();
+        });
+        
+        el.show();
+      });
+      
+      it('should focus the focussable descendent', function() {
+        const el = helpers.build(window.__html__['Coral.Overlay.coral-close.html']);
+        el.show();
+        
+        expect(el.open).to.equal(true, 'open before close clicked');
+        el.querySelector('#closeButton').click();
+        expect(el.open).to.equal(false, 'open after close clicked');
+      });
+    });
+    
+    // @todo maybe this test should be part of a mixin
+    describe('#[coral-close]', function() {
+      it('should hide when any element with [coral-close] clicked', function() {
+        const el = helpers.build(window.__html__['Coral.Overlay.coral-close.html']);
+        el.show();
+        
+        expect(el.open).to.equal(true, 'open before close clicked');
+        el.querySelector('#closeButton').click();
+        expect(el.open).to.equal(false, 'open after close clicked');
+      });
+      
+      it('should only hide if selector matches value of [coral-close], should not let events bubble', function() {
+        const el = helpers.build(window.__html__['Coral.Overlay.coral-close.id.html']);
+        el.show();
+        
+        var spy = sinon.spy();
+        helpers.target.addEventListener('click', spy);
+        
+        expect(el.open).to.equal(true, 'open before close clicked');
+        
+        // Click the button that should do nothing
+        el.querySelector('#closeOtherOverlay').click();
+        expect(el.open).to.equal(true, 'open after close clicked');
+        expect(spy.callCount).to.equal(1, 'click event bubble count');
+        
+        spy.reset();
+        
+        // Click the button that should close the overlay
+        el.querySelector('#closeMyOverlay').click();
+        expect(el.open).to.equal(false, 'open after close clicked');
+        expect(spy.callCount).to.equal(0, 'click event bubble count');
+      });
+    });
+  });
+  
+  describe('Events', function() {
     describe('#coral-overlay:positioned', function() {
       it('should trigger when the overlay is opened', function(done) {
         overlay.open = true;
         overlay.on('coral-overlay:positioned', () => {
           done();
         });
-      });
-    });
-  });
-  
-  describe('Implementation Details', function() {
-    
-    describe('#[coral-close]', function() {
-      // @todo maybe this test should be part of a mixin
-      it('should hide when any element with [coral-close] clicked', function() {
-        overlay.show();
-    
-        expect(overlay.open).to.equal(true, 'open before close clicked');
-    
-        overlay.innerHTML = '<button coral-close id="closeButton">Close me!</button>';
-    
-        overlay.querySelector('#closeButton').click();
-    
-        expect(overlay.open).to.equal(false, 'open after close clicked');
-      });
-  
-      // @todo maybe this test should be part of a mixin
-      it('should only hide if selector matches value of [coral-close], should not let events bubble', function() {
-        overlay.show();
-    
-        var spy = sinon.spy();
-        helpers.target.addEventListener('click', spy);
-    
-        overlay.id = 'myOverlay';
-        expect(overlay.open).to.equal(true, 'open before close clicked');
-    
-        overlay.innerHTML = '<button coral-close="#myOverlay" id="closeMyOverlay">Close me!</button><button coral-close="#otherOverlay" id="closeOtherOverlay">Close someone else!</button>';
-    
-        // Click the button that should do nothing
-        overlay.querySelector('#closeOtherOverlay').click();
-        expect(overlay.open).to.equal(true, 'open after close clicked');
-        expect(spy.callCount).to.equal(1, 'click event bubble count');
-    
-        spy.reset();
-    
-        // Click the button that should close the overlay
-        overlay.querySelector('#closeMyOverlay').click();
-        expect(overlay.open).to.equal(false, 'open after close clicked');
-        expect(spy.callCount).to.equal(0, 'click event bubble count');
       });
     });
   });
