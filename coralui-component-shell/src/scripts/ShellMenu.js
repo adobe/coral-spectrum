@@ -181,12 +181,6 @@ class ShellMenu extends Overlay(Component(HTMLElement)) {
       // Be higher than the next highest overlay
       this.style.zIndex = parseInt(this.style.zIndex, 10) + 20;
     }
-  
-    if (this.open && this.focusOnShow === this.constructor.focusOnShow.ON) {
-      commons.transitionEnd(this, function() {
-        (this.querySelector(commons.FOCUSABLE_ELEMENT_SELECTOR) || this).focus();
-      }.bind(this));
-    }
   }
   
   /** @ignore */
