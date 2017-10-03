@@ -1152,14 +1152,14 @@ describe('Coral.Select', function() {
       });
 
       it('should not shift focus if already inside the component ', function(done) {
-        el.on('coral-overlay:open', function(event) {
+        el.on('coral-overlay:open', function() {
           expect(document.activeElement).not.to.equal(el._elements.button);
           // we focus the component
           el.focus();
           expect(document.activeElement).not.to.equal(el._elements.button, 'focus should not be in the button');
 
           done();
-        });
+        }, true);
 
         // opens the overlay
         el._elements.button.click();
@@ -1554,7 +1554,7 @@ describe('Coral.Select', function() {
 
         if (!el._useNativeInput) {
           // Overlay does not open immediately any longer
-          el.on('coral-overlay:open', callback);
+          el.on('coral-overlay:open', callback, true);
 
           // opens the overlay (forces a change event to be triggered on next select)
           el._elements.button.click();
@@ -1595,7 +1595,7 @@ describe('Coral.Select', function() {
           }
 
           openEventCount++;
-        });
+        }, true);
 
         // opens the overlay the first time
         el._elements.button.click();
@@ -1616,7 +1616,7 @@ describe('Coral.Select', function() {
           expect(changeCallbackCount).to.equal(1);
 
           done();
-        });
+        }, true);
 
         // opens the overlay
         el._elements.button.click();
@@ -1760,7 +1760,7 @@ describe('Coral.Select', function() {
 
             done();
           });
-        });
+        }, true);
 
         // opens the list
         el._elements.button.click();
@@ -1826,7 +1826,7 @@ describe('Coral.Select', function() {
           expect(el._elements.label.innerHTML).to.equal(items[1].content.innerHTML);
 
           done()
-        });
+        }, true);
 
         // opens the list
         el._elements.button.click();
@@ -1866,7 +1866,7 @@ describe('Coral.Select', function() {
           });
   
           done();
-        });
+        }, true);
 
         // opens the list
         el._elements.button.click();
@@ -1922,7 +1922,7 @@ describe('Coral.Select', function() {
 
           done();
         });
-      });
+      }, true);
 
       // opens the overlay
       el._elements.button.click();
@@ -1942,7 +1942,7 @@ describe('Coral.Select', function() {
 
           done();
         });
-      });
+      }, true);
 
       // we select first an item
       el.items.getAll()[2].selected = true;
@@ -1964,7 +1964,7 @@ describe('Coral.Select', function() {
 
           done();
         });
-      });
+      }, true);
 
       // opens the overlay
       el._elements.button.click();
@@ -1983,7 +1983,7 @@ describe('Coral.Select', function() {
 
           done();
         });
-      });
+      }, true);
 
       // opens the overlay
       el._elements.button.click();
@@ -2001,7 +2001,7 @@ describe('Coral.Select', function() {
 
           done();
         });
-      });
+      }, true);
 
       // opens the overlay
       el._elements.button.click();
@@ -2025,7 +2025,8 @@ describe('Coral.Select', function() {
           expect(document.activeElement).to.equal(el._elements.button, 'button should get focus when it is the last item');
 
           done();
-        });
+        // we use capture since the propagation of the event is stopped
+        }, true);
       });
     });
 
@@ -2055,7 +2056,7 @@ describe('Coral.Select', function() {
 
         // pressing escape should close the overlay
         helpers.keypress('esc', helpers.target);
-      });
+      }, true);
 
       el.on('coral-overlay:close', function() {
         expect(el._elements.overlay.open).to.equal(false, 'overlay should be closed');
@@ -2064,7 +2065,7 @@ describe('Coral.Select', function() {
         expect(document.activeElement).to.equal(el._elements.button, 'focus should return to the button');
 
         done();
-      });
+      }, true);
 
       // opens the overlay
       el._elements.button.click();

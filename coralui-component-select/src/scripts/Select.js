@@ -108,11 +108,11 @@ class Select extends FormField(Component(HTMLElement)) {
 
     // Attach events
     this._delegateEvents(commons.extend(this._events, {
-      'coral-collection:add coral-taglist': '_onInnerComponentCollectionEvent',
+      'coral-collection:add coral-taglist': '_onInternalEvent',
       'coral-collection:add coral-selectlist': '_onSelectListItemAdd',
 
-      'coral-collection:remove coral-taglist': '_onInnerComponentCollectionEvent',
-      'coral-collection:remove coral-selectlist': '_onInnerComponentCollectionEvent',
+      'coral-collection:remove coral-taglist': '_onInternalEvent',
+      'coral-collection:remove coral-selectlist': '_onInternalEvent',
 
       // item events
       'coral-select-item:_valuechanged coral-select-item': '_onItemValueChange',
@@ -139,6 +139,7 @@ class Select extends FormField(Component(HTMLElement)) {
       'coral-overlay:close': '_onOverlayToggle',
       'coral-overlay:open': '_onOverlayToggle',
       'coral-overlay:positioned': '_onOverlayPositioned',
+      'coral-overlay:beforeopen': '_onInternalEvent',
 
       'global:click': '_onGlobalClick',
       'global:touchstart': '_onGlobalClick'
@@ -642,7 +643,7 @@ class Select extends FormField(Component(HTMLElement)) {
   }
   
   /** @private */
-  _onInnerComponentCollectionEvent(event) {
+  _onInternalEvent(event) {
     // stops propagation cause the event is internal to the component
     event.stopImmediatePropagation();
   }
@@ -900,6 +901,9 @@ class Select extends FormField(Component(HTMLElement)) {
   
   /** @private */
   _onSelectListScrollBottom(event) {
+    // stops propagation cause the event is internal to the component
+    event.stopImmediatePropagation();
+    
     if (this._elements.overlay.open) {
       // Checking if the overlay is open guards against debounced scroll events being handled after an overlay has
       // already been closed (e.g. clicking the last element in a selectlist always reopened the overlay emediately
@@ -988,6 +992,9 @@ class Select extends FormField(Component(HTMLElement)) {
   
   /** @private */
   _onOverlayBeforeClose(event) {
+    // stops propagation cause the event is internal to the component
+    event.stopImmediatePropagation();
+    
     const button = this._elements.button;
     // we return the focus to the button to allow the user to continue interacting with the component
     window.requestAnimationFrame(function() {
@@ -997,6 +1004,9 @@ class Select extends FormField(Component(HTMLElement)) {
   
   /** @private */
   _onOverlayToggle(event) {
+    // stops propagation cause the event is internal to the component
+    event.stopImmediatePropagation();
+    
     this._elements.button.classList.toggle('is-selected', event.target.open);
     
     // @a11y
@@ -1009,13 +1019,16 @@ class Select extends FormField(Component(HTMLElement)) {
   
   /** @private */
   _onOverlayPositioned(event) {
+    // stops propagation cause the event is internal to the component
+    event.stopImmediatePropagation();
+    
     this.classList.add(event.detail.vertical === 'top' ? 'is-openBelow' : 'is-openAbove');
     this._elements.overlay.style.minWidth = this.offsetWidth + 'px';
   }
   
   // @todo: while the select is multiple, if everything is deselected no change event will be triggered.
   _onNativeSelectChange(event) {
-    // we do not bubble native select events, this behavior is consistant with every component that mixes formField
+    // stops propagation cause the event is internal to the component
     event.stopImmediatePropagation();
     
     // avoids triggering unnecessary changes in the selectist because selecting items programatically will trigger
