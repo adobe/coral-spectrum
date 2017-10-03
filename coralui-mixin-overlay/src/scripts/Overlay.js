@@ -446,19 +446,17 @@ const Overlay = (superClass) => class extends superClass {
   }
   
   /**
-   Whether to focus the overlay, when opened or not (default=['off']{@link Coral.mixin.overlay.focusOnShow}).
-   
-   If set to ['on']{@link Coral.mixin.overlay.focusOnShow}, the overlay itself will get focus.
-   This property also accepts an instance of HTMLElement or a selector like ':first-child' or 'button:last-of-type'
-   and will focus the first element found inside the overlay instead of the overlay itself.
+   Whether to focus the overlay, when opened or not. By default the overlay itself will get the focus. It also accepts
+   an instance of HTMLElement or a selector like ':first-child' or 'button:last-of-type'. If the selector returns
+   multiple elements, it will focus the first element inside the overlay that matches the selector.
    
    @type {Coral.mixin.overlay.focusOnShow|HTMLElement|String}
-   @default [Coral.mixin.overlay.focusOnShow.OFF]{@link Coral.mixin.overlay.focusOnShow}
+   @default [Coral.mixin.overlay.focusOnShow.ON]
    @htmlattribute focusonshow
    @memberof Coral.mixin.overlay#
    */
   get focusOnShow() {
-    return this._focusOnShow || focusOnShow.OFF;
+    return this._focusOnShow || focusOnShow.ON;
   }
   set focusOnShow(value) {
     if (typeof value === 'string' || value instanceof HTMLElement) {
@@ -507,20 +505,18 @@ const Overlay = (superClass) => class extends superClass {
           self._pushOverlay();
       
           if (self.returnFocus === returnFocus.ON) {
-            // Store the element that currently has focus, or the element that was passed to returnFocusTo()
-            self._elementToFocusWhenHidden = self._elementToFocusWhenHidden || (document.activeElement === document.body ? null : document.activeElement);
+            this._elementToFocusWhenHidden =
+              // cached element
+              this._elementToFocusWhenHidden ||
+              // element passed via returnFocusTo()
+              this._returnFocusToElement ||
+              // element that had focus before opening the overlay
+              (document.activeElement === document.body ? null : document.activeElement);
           }
         }
         else {
           // Release zIndex
           self._popOverlay();
-      
-          if (self.returnFocus === returnFocus.ON && self._elementToFocusWhenHidden) {
-            // Return focus, ignoring tab capture if it's an overlay
-            self._elementToFocusWhenHidden._ignoreTabCapture = true;
-            self._elementToFocusWhenHidden.focus();
-            self._elementToFocusWhenHidden._ignoreTabCapture = false;
-          }
         }
       }
       
@@ -558,6 +554,10 @@ const Overlay = (superClass) => class extends superClass {
           const openComplete = () => {
             if (self.open) {
               self._debounce(() => {
+  
+                // handles the focus behavior based on accessibility recommendations
+                self._handleFocus();
+                
                 self.trigger('coral-overlay:open');
                 self._silenced = false;
               });
@@ -572,18 +572,6 @@ const Overlay = (superClass) => class extends superClass {
             // Execute immediately
             openComplete();
           }
-    
-          // Focus on the overlay itself, announcing it
-          // Pressing the tab key will then focus on the next focusable element inside of it
-          if (self.focusOnShow === focusOnShow.ON) {
-            self.focus();
-          }
-          else if (self.focusOnShow !== focusOnShow.OFF) {
-            const selectedElement = (self.focusOnShow instanceof HTMLElement) ? self.focusOnShow : self.querySelector(self.focusOnShow);
-            if (selectedElement) {
-              selectedElement.focus();
-            }
-          }
         }
         else {
           // Fade out
@@ -593,6 +581,9 @@ const Overlay = (superClass) => class extends superClass {
             if (!self.open) {
               // Hide self
               self.style.display = 'none';
+  
+              // makes sure the focus is returned per accessibility recommendations
+              self._handleReturnFocus();
               
               self._debounce(function() {
                 self.trigger('coral-overlay:close');
@@ -743,6 +734,56 @@ const Overlay = (superClass) => class extends superClass {
   }
   
   /**
+   Handles the focus behavior. When "on" is specified it would try to find the first tababble descendent in the
+   content and if there are no valid candidates it will focus the element itself.
+   
+   @protected
+   @memberof Coral.mixin.overlay#
+   */
+  _handleFocus() {
+    // ON handles the focusing per accessibility recommendations
+    if (this.focusOnShow === focusOnShow.ON) {
+      this._focusOn('first');
+    }
+    else if (this.focusOnShow instanceof HTMLElement) {
+      this.focusOnShow.focus();
+    }
+    else if (typeof this.focusOnShow === 'string' && this.focusOnShow !== focusOnShow.OFF) {
+      // we need to add :not([coral-tabcapture]) to avoid selecting the tab captures
+      const selectedElement = this.querySelector(this.focusOnShow + ':not([coral-tabcapture])');
+      
+      if (selectedElement) {
+        selectedElement.focus();
+      }
+      // in case the selector does not match, it should fallback to the default behavior
+      else {
+        this._focusOn('first');
+      }
+    }
+  }
+  
+  /**
+   @protected
+   @memberof Coral.mixin.overlay#
+   */
+  _handleReturnFocus() {
+    if (this.returnFocus === returnFocus.ON && this._elementToFocusWhenHidden) {
+      if (document.activeElement && !this.contains(document.activeElement)) {
+        // Don't return focus if the user focused outside of the overlay
+        return;
+      }
+      
+      // Return focus, ignoring tab capture if it is an overlay
+      this._elementToFocusWhenHidden._ignoreTabCapture = true;
+      this._elementToFocusWhenHidden.focus();
+      this._elementToFocusWhenHidden._ignoreTabCapture = false;
+      
+      // Drop the reference to avoid memory leaks
+      this._elementToFocusWhenHidden = null;
+    }
+  }
+  
+  /**
    Focus on the first or last element.
    
    @param {String} which
@@ -752,14 +793,16 @@ const Overlay = (superClass) => class extends superClass {
   _focusOn(which) {
     let tabTarget;
     if (which === 'first' || which === 'last') {
-      tabTarget = Array.prototype.filter.call(this.querySelectorAll(commons.TABBABLE_ELEMENT_SELECTOR), function(item) {
-        return item.offsetParent !== null && !item.hasAttribute('coral-tabcapture');
-      })[which === 'first' ? 'shift' : 'pop']();
-      
-      if (tabTarget) {
-        tabTarget.focus();
-      }
+      // @todo: shall this be focusable or tabbable?
+      const tabbableElements = Array.prototype.filter.call(this.querySelectorAll(commons.TABBABLE_ELEMENT_SELECTOR), item => item.offsetParent !== null && !item.hasAttribute('coral-tabcapture'));
+      tabTarget = tabbableElements[which === 'first' ? 'shift' : 'pop']();
     }
+    
+    // if we found a focusing target we focus it
+    if (tabTarget) {
+      tabTarget.focus();
+    }
+    // otherwise the element itself should get focus
     else {
       this.focus();
     }
@@ -827,7 +870,7 @@ const Overlay = (superClass) => class extends superClass {
       }, true);
     }
   
-    this._elementToFocusWhenHidden = element;
+    this._returnFocusToElement = element;
     return this;
   }
   
