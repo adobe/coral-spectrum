@@ -64,9 +64,17 @@ function getViewContainer(element) {
     if (p.matches('body')) {
       return p;
     }
-    
-    const overflow = window.getComputedStyle(p).overflow;
-    if (overflow === 'hidden' || overflow === 'auto' || overflow === 'scroll') {
+  
+    const computedStyle = window.getComputedStyle(p);
+    const overflow = computedStyle.overflow;
+  
+    // IE11 can return a value for overflow even if it was not set compared to other browsers so we check for X and Y.
+    const overflowX = computedStyle.overflowX;
+    const overflowY = computedStyle.overflowY;
+  
+    if ((overflow === 'hidden' || overflow === 'auto' || overflow === 'scroll') &&
+      // @polyfill IE11
+      overflow === overflowX && overflow === overflowY) {
       return p;
     }
     
