@@ -375,11 +375,12 @@ describe('Coral.Popover', function() {
     it('should focus the focusOnShow element when opened', function(done) {
       el = helpers.build(window.__html__['Coral.Popover.focusOnShow.html']);
       
-      // We need 1 more frame before the elements gets focused
-      helpers.next(function() {
+      el.on('coral-overlay:open', function() {
         expect(document.activeElement).to.equal(el.querySelector(el.focusOnShow));
         done();
       });
+      
+      el.show();
     });
   });
 });

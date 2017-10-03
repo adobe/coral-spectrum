@@ -93,6 +93,7 @@ class Popover extends Overlay {
     });
     
     // Override defaults from Overlay
+    this._focusOnShow = this.constructor.focusOnShow.ON;
     this._trapFocus = this.constructor.trapFocus.ON;
     this._returnFocus = this.constructor.returnFocus.ON;
     this._overlayAnimationTime = this.constructor.FADETIME;
@@ -235,11 +236,6 @@ class Popover extends Overlay {
   set open(value) {
     super.open = value;
   
-    if (this.open && this.focusOnShow !== this.constructor.focusOnShow.OFF) {
-      // Announce when opened
-      this._handleFocus();
-    }
-  
     const target = this._getTarget();
     if (target) {
       if (this.open) {
@@ -256,23 +252,6 @@ class Popover extends Overlay {
         // When closed, only remove the class if the target didn't have it before
         target.classList.remove('is-selected');
       }
-    }
-  }
-  
-  // JSDoc inherited
-  get target() {
-    return super.target;
-  }
-  set target(value) {
-    super.target = value;
-    
-    if (this.target && this.open && this.focusOnShow !== this.constructor.focusOnShow.OFF) {
-      // Make sure the element was positioned correctly before focusing it. This is to prevent scrolling to
-      // the element while not fully repositioned.
-      window.requestAnimationFrame(function() {
-        // Announce again when target changed
-        this._handleFocus();
-      }.bind(this));
     }
   }
   
@@ -315,20 +294,6 @@ class Popover extends Overlay {
       
       // Reposition as the height has changed
       this.reposition();
-    }
-  }
-  
-  /** @private */
-  _handleFocus() {
-    const focusOnShow = this.focusOnShow;
-    if (focusOnShow === this.constructor.focusOnShow.ON) {
-      this.focus();
-    }
-    else if (focusOnShow instanceof HTMLElement) {
-      focusOnShow.focus();
-    }
-    else if (typeof focusOnShow === 'string') {
-      this.querySelector(focusOnShow).focus();
     }
   }
   
