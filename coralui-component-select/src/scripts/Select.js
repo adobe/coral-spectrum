@@ -205,18 +205,32 @@ class Select extends FormField(Component(HTMLElement)) {
   set multiple(value) {
     this._multiple = transform.booleanAttr(value);
     this._reflectAttribute('multiple', this._multiple);
-    
-    // @a11y
-    this.setAttribute('aria-mutiselectable', this._multiple);
+  
+    // taglist should not be in DOM if multiple === false
+    if (!this._multiple) {
+      this.removeChild(this._elements.taglist);
+    }
+    else {
+      this.appendChild(this._elements.taglist);
+    }
     
     // we need to remove and re-add the native select to loose the selection
-    this._elements.nativeSelect.remove();
+    if (this._nativeInput) {
+      this.removeChild(this._elements.nativeSelect);
+    }
     this._elements.nativeSelect.multiple = this._multiple;
     this._elements.nativeSelect.selectedIndex = -1;
     
-    // We might not be rendered yet
-    if (this._elements.nativeSelect.parentNode) {
-      this.insertBefore(this._elements.nativeSelect, this._elements.taglist);
+    if (this._nativeInput) {
+      if (this._multiple) {
+        // We might not be rendered yet
+        if (this._elements.nativeSelect.parentNode) {
+          this.insertBefore(this._elements.nativeSelect, this._elements.taglist);
+        }
+      }
+      else {
+        this.appendChild(this._elements.nativeSelect);
+      }
     }
     
     this._elements.list.multiple = value;
@@ -455,6 +469,23 @@ class Select extends FormField(Component(HTMLElement)) {
     this._elements.input.readOnly = this._readOnly || isDisabled;
     this._elements.taglist.readOnly = this._readOnly || isDisabled;
     this._elements.taglist.disabled = this._readOnly || isDisabled;
+  }
+  
+  // JSDocs inherited
+  get labelledBy() {
+    return super.labelledBy;
+  }
+  set labelledBy(value) {
+    super.labelledBy = value;
+  
+    if (this.labelledBy) {
+      this._elements.nativeSelect.setAttribute('aria-labelledby', this.labelledBy);
+    }
+    else {
+      this._elements.nativeSelect.removeAttribute('aria-labelledby');
+    }
+    
+    this._elements.taglist.labelledBy = this.labelledBy;
   }
   
   /**
@@ -1292,6 +1323,10 @@ class Select extends FormField(Component(HTMLElement)) {
     if (!this._variant) {this.variant = variant.DEFAULT;}
     
     this.classList.toggle('coral3-Select--native', this._useNativeInput);
+  
+    if (!this._useNativeInput && this.contains(this._elements.nativeSelect)) {
+      this.removeChild(this._elements.nativeSelect);
+    }
     
     // handles the initial selection
     this._setStateFromDOM();

@@ -388,6 +388,7 @@
             <coral-select-item value="answer">Answer</coral-select-item>
           </coral-select>
           <button type="reset" class="coral-Button coral-Button--quiet">Reset</button>
+          <button type="submit" class="coral-Button coral-Button--primary" hidden>Submit</button>
         </form>
       </div>
       <div class="col">
@@ -510,19 +511,22 @@
             <coral-select-item value="answer">Answer</coral-select-item>
           </coral-select>
           <button type="reset" class="coral-Button coral-Button--quiet">Reset</button>
+          <button type="submit" class="coral-Button coral-Button--primary" hidden>Submit</button>
         </form>
       </div>
     </section>
     <section>
       <h2 class="coral-Heading coral-Heading--2">Programatic Selection</h2>
-      <coral-select id="animals">
+      <label id="label-m-ps-0" class="u-coral-screenReaderOnly">Animals</label>
+      <coral-select id="animals" labelledby="label-m-ps-0">
         <coral-select-item value="ki" selected>Kitten</coral-select-item>
         <coral-select-item value="pu">Puppy</coral-select-item>
         <coral-select-item value="fr">Frog</coral-select-item>
         <coral-select-item value="mk">Monkey</coral-select-item>
         <coral-select-item value="cw">Cow</coral-select-item>
       </coral-select>
-      <coral-select id="sounds">
+      <label id="label-m-ps-1" class="u-coral-screenReaderOnly">Animals</label>
+      <coral-select id="sounds" labelledby="label-m-ps-1">
         <coral-select-item value="ki" selected>Mew Mew</coral-select-item>
         <coral-select-item value="pu">Arf Arf</coral-select-item>
         <coral-select-item value="fr">Ribbit Ribbit</coral-select-item>

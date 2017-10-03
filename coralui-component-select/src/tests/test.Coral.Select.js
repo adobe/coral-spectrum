@@ -1667,6 +1667,7 @@ describe('Coral.Select', function() {
         // we fake the native input
         el._useNativeInput = true;
         el.classList.add('coral3-Select--native');
+        el.appendChild(el._elements.nativeSelect);
 
         var options = el._elements.nativeSelect.options;
         options[2].selected = true;
@@ -1693,6 +1694,7 @@ describe('Coral.Select', function() {
         // we fake the native input
         el._useNativeInput = true;
         el.classList.add('coral3-Select--native');
+        el.appendChild(el._elements.nativeSelect);
 
         var options = el._elements.nativeSelect.options;
 
@@ -2035,6 +2037,7 @@ describe('Coral.Select', function() {
       // we fake the native input
       el._useNativeInput = true;
       el.classList.add('coral3-Select--native');
+      el.appendChild(el._elements.nativeSelect);
 
       var options = el._elements.nativeSelect.options;
       options[2].selected = true;
