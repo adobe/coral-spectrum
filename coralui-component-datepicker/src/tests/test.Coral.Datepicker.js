@@ -846,7 +846,9 @@ describe('Coral.Datepicker', function() {
         
           // trigger ESC key down event on hours input
           helpers.keydown(Coral.Keys.keyToCode('esc'), el._elements.clock._elements.hours);
+        });
         
+        el.on('coral-overlay:close', function() {
           // focus should return to toggle button
           expect(document.activeElement).to.equal(el._elements.toggle);
           done();
