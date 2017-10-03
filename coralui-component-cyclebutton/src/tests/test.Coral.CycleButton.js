@@ -606,14 +606,11 @@ describe('Coral.CycleButton', function() {
       expect(el._elements.button.getAttribute('aria-expanded')).to.equal('true', 'aria-expanded attribute was not set to \'true\' when overlay is closed');
       
       // Wait for list to be populated
-      helpers.next(function() {
+      el.on('coral-overlay:open', () => {
         expect(el._elements.overlay.open).to.be.true;
+        expect(el._elements.selectList.items.first()).to.equal(document.activeElement);
         
-        // Wait for overlay to be opened
-        helpers.next(function() {
-          expect(el._elements.selectList.items.first()).to.equal(document.activeElement);
-          done();
-        });
+        done();
       });
     });
 
@@ -643,21 +640,28 @@ describe('Coral.CycleButton', function() {
       });
     });
 
-    it('should close the overlay, update the selected item and focus the button when an item is clicked', function() {
+    it('should close the overlay, update the selected item and focus the button when an item is clicked', function(done) {
       const el = helpers.build(SNIPPET_THREEITEMS);
+  
       el.querySelector('#btn1').click();
       
-      el._elements.selectList.children[1].click();
+      el.on('coral-overlay:open', () => {
+        el._elements.selectList.children[1].click();
+      });
       
-      var labelString = stripWhitespace(el.selectedItem.textContent);
-      expect(el.selectedItem.id).to.equal('btn2', 'Second item not selected, when clicked on element in popover');
-      expect(el._elements.overlay.open).to.be.false;
-      expect(document.activeElement).to.exist;
-      expect(document.activeElement.id).to.equal(el._elements.button.id, 'Button didn\'t get focus automatically');
-      if (el.icon) {
-        expect(el._elements.button.getAttribute('aria-label')).to.equal(labelString, 'aria-label attribute on button does not match the updated selected item label');
-        expect(el._elements.button.getAttribute('title')).to.equal(labelString, 'title attribute on button does not match the updated selected item label');
-      }
+      el.on('coral-overlay:close', () => {
+        var labelString = stripWhitespace(el.selectedItem.textContent);
+        expect(el.selectedItem.id).to.equal('btn2', 'Second item not selected, when clicked on element in popover');
+        expect(el._elements.overlay.open).to.be.false;
+        expect(document.activeElement).to.exist;
+        expect(document.activeElement.id).to.equal(el._elements.button.id, 'Button didn\'t get focus automatically');
+        if (el.icon) {
+          expect(el._elements.button.getAttribute('aria-label')).to.equal(labelString, 'aria-label attribute on button does not match the updated selected item label');
+          expect(el._elements.button.getAttribute('title')).to.equal(labelString, 'title attribute on button does not match the updated selected item label');
+        }
+        
+        done();
+      });
     });
 
     it('should close the overlay, when there is a global click outside of the overlay', function(done) {
