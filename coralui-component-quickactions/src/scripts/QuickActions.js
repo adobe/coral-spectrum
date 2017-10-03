@@ -1066,9 +1066,11 @@ class QuickActions extends Overlay {
   
   /** @ignore */
   focus() {
-    const firstFocusableButton = this._getFirstFocusableButton();
-    if (firstFocusableButton) {
-      firstFocusableButton.focus();
+    if (this.open && !this.contains(document.activeElement)) {
+      const firstFocusableButton = this._getFirstFocusableButton();
+      if (firstFocusableButton) {
+        firstFocusableButton.focus();
+      }
     }
   }
   

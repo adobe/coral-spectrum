@@ -188,6 +188,54 @@ describe('Coral.QuickActions', function() {
         });
       });
     });
+    
+    describe('#focus', function() {
+      it('should move the focus inside the component', function(done) {
+        const el = helpers.build(window.__html__['Coral.QuickActions.base.html']);
+        el.on('coral-overlay:open', function() {
+          expect(document.activeElement).not.to.equal(el);
+        
+          var buttons = el.querySelectorAll(BUTTON_SELECTOR);
+          // we focus the component
+          el.focus();
+        
+          // expect(el.contains(document.activeElement)).to.equal()
+          expect(document.activeElement).to.equal(buttons[0], 'The first button should be focused');
+          done();
+        });
+      
+        el.show();
+      });
+  
+      it('should not shift focus if already inside the component', function(done) {
+        const el = helpers.build(window.__html__['Coral.QuickActions.base.html']);
+        el.on('coral-overlay:open', function() {
+          expect(el.contains(document.activeElement)).to.equal(true, 'Focus should be inside the component');
+        
+          var buttons = el.querySelectorAll(BUTTON_SELECTOR);
+          // we move focus to the 3rd item
+          buttons[3].focus();
+        
+          // we focus the component
+          el.focus();
+          expect(document.activeElement).to.equal(buttons[3], 'Focus should not be moved');
+        
+          done();
+        });
+      
+        el.show();
+      });
+  
+      it('should not focus the component if not shown', function() {
+        const el = helpers.build(window.__html__['Coral.QuickActions.base.html']);
+        expect(document.activeElement).not.to.equal(el);
+      
+        // we focus the component
+        el.focus();
+      
+        expect(el.contains(document.activeElement)).to.equal(false, 'Should not change the focus');
+      });
+    });
   });
 
   describe('Events', function() {
@@ -460,14 +508,14 @@ describe('Coral.QuickActions', function() {
       event.shiftKey = true;
       targetElement.dispatchEvent(event);
       
-      helpers.next(function() {
-        expect(document.activeElement).to.equal(el.querySelector(BUTTON_SELECTOR));
+      el.on('coral-overlay:open', function() {
+        expect(document.activeElement === el.target).to.equal(false, 'Focus is internal to the QuickActions');
         el.open = false;
-        
-        helpers.next(function() {
-          expect(document.activeElement === el.target).to.equal(true, 'Focus is returned to the target on close');
-          done();
-        });
+      });
+      
+      el.on('coral-overlay:close', function() {
+        expect(document.activeElement === el.target).to.equal(true, 'Focus is returned to the target on close');
+        done();
       });
     });
 
