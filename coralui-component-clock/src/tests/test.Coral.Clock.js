@@ -506,7 +506,7 @@ describe('Coral.Clock', function() {
               expect(el._elements.valueAsText.textContent).to.equal('02:02 AM');
     
               done();
-            });
+            }, true);
           }
           else {
             done();
@@ -529,7 +529,7 @@ describe('Coral.Clock', function() {
               expect(el._elements.valueAsText.textContent).to.equal('02:02 PM');
     
               done();
-            });
+            }, true);
           }
           else {
             done();
@@ -585,7 +585,7 @@ describe('Coral.Clock', function() {
               expect(el._elements.valueAsText.textContent).to.equal('');
     
               done();
-            });
+            }, true);
           }
           else {
             done();
@@ -610,7 +610,7 @@ describe('Coral.Clock', function() {
               expect(el._elements.valueAsText.textContent).to.equal('11:32 AM');
     
               done();
-            });
+            }, true);
           }
           else {
             done();
@@ -755,7 +755,7 @@ describe('Coral.Clock', function() {
             expect(changeSpy.callCount).to.equal(1);
   
             done();
-          });
+          }, true);
         });
       });
     });
