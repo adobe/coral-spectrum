@@ -31,7 +31,7 @@ import 'coralui-component-button';
 const closable = {
   /** Show a close button on the dialog and close the dialog when clicked. */
   ON: 'on',
-  /** Do not show a close button. Elements with the <code>coral-close</code> attributes will stil close the dialog. */
+  /** Do not show a close button. Elements with the <code>coral-close</code> attribute will still close the dialog. */
   OFF: 'off'
 };
 
@@ -597,20 +597,6 @@ class Dialog extends Overlay(Component(HTMLElement)) {
     this._centered = false;
   
     return this;
-  }
-  
-  /** @private */
-  _handleFocus() {
-    const focusOnShow = this.focusOnShow;
-    if (focusOnShow === this.constructor.focusOnShow.ON) {
-      this.focus();
-    }
-    else if (focusOnShow instanceof HTMLElement) {
-      focusOnShow.focus();
-    }
-    else if (typeof focusOnShow === 'string' && focusOnShow !== this.constructor.focusOnShow.OFF) {
-      this.querySelector(focusOnShow).focus();
-    }
   }
   
   // For backwards compatibility + Torq

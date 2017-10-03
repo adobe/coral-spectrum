@@ -7,22 +7,13 @@
   <script src="../build/js/coral.js"></script>
 
   <style type="text/css">
-    body {
-      padding: 10px;
-    }
-
     section {
       padding: 12px;
     }
-/*
-    .wf-loading {
-       display: none;
-    }*/
-
   </style>
 </head>
 
-<body class="coral--light">
+<body class="coral--light u-coral-padding">
 
   <section>
     <h2 class="coral-Heading coral-Heading--2">Markup Initialization</h2>
@@ -32,7 +23,7 @@
       <coral-dialog-content>This dialog was created from markup with child elements.</coral-dialog-content>
       <coral-dialog-footer>
         <button is="coral-button" coral-close>Cancel</button>
-        <button is="coral-button" variant="primary" coral-close>Ok</button>
+        <button is="coral-button" variant="primary" coral-close>Done</button>
       </coral-dialog-footer>
     </coral-dialog>
 
@@ -74,7 +65,7 @@
         <p>Sed quis mauris semper, dictum nibh ac, pellentesque lorem. Aliquam vestibulum erat id purus pretium, sit amet pretium sapien scelerisque. Morbi pharetra est orci, sit amet feugiat elit accumsan aliquam. Vestibulum a fermentum lorem. Suspendisse vel auctor nisl. Integer condimentum semper enim, vel posuere urna pretium et. Pellentesque at justo vestibulum, rhoncus metus quis, imperdiet dui. Integer ac mauris felis. In ac felis quam. Donec luctus tristique tellus vel molestie. Nulla suscipit, lacus sit amet tincidunt malesuada, dui est elementum est, nec mattis diam arcu sed mauris.</p>
 
       </coral-dialog-content>
-      <coral-dialog-footer><button is="coral-button" variant="primary" coral-close>Ok</button></coral-dialog-footer>
+      <coral-dialog-footer><button is="coral-button" variant="primary" coral-close>Done</button></coral-dialog-footer>
     </coral-dialog>
 
     <button is="coral-button" onclick="document.getElementById('scrollingDialog').open = true">Scrolling Dialog</button>
@@ -87,7 +78,7 @@
         <p>Vivamus quis maximus enim. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut efficitur, nibh id luctus porttitor, quam nibh malesuada dui, at mattis mauris risus eget nibh. Suspendisse nec nisl eu felis ullamcorper lobortis. Nullam vulputate in mi vitae vehicula. Cras molestie urna id est faucibus tincidunt. Curabitur fermentum dui eget porta hendrerit. Nam lacinia, neque non iaculis blandit, risus ipsum accumsan velit, eu consectetur sapien magna ac enim. Aenean at augue vestibulum dolor faucibus pellentesque at vel justo. Aenean justo velit, bibendum et lectus id, efficitur accumsan diam. Sed tempus posuere justo, ultrices placerat magna aliquet in. Integer rhoncus sapien diam, eu iaculis urna porttitor quis. Vivamus volutpat tellus a scelerisque lacinia. Ut vel velit neque. Proin id augue tempus, vestibulum diam vel, pharetra erat. Integer id tellus id lorem sollicitudin pulvinar sit amet vel erat.</p>
 
       </coral-dialog-content>
-      <coral-dialog-footer><button is="coral-button" variant="primary" coral-close>Ok</button></coral-dialog-footer>
+      <coral-dialog-footer><button is="coral-button" variant="primary" coral-close>Done</button></coral-dialog-footer>
     </coral-dialog>
 
     <button is="coral-button" onclick="document.getElementById('fullscreenDialog').open = true">Fullscreen Dialog</button>
@@ -135,7 +126,7 @@
           Testing a fake little overlay.
         </div>
       </coral-dialog-content>
-      <coral-dialog-footer><button is="coral-button" variant="primary" coral-close>Ok</button></coral-dialog-footer>
+      <coral-dialog-footer><button is="coral-button" variant="primary" coral-close>Done</button></coral-dialog-footer>
     </coral-dialog>
 
     <button is="coral-button" onclick="document.getElementById('scrollingFullscreenDialog').open = true">Scrolling fullscreen Dialog</button>
@@ -178,7 +169,7 @@
             innerHTML: 'This dialog was created with <code>variant: "'+variant+'"</code>.'
           },
           footer: {
-            innerHTML: '<button is="coral-button" variant="primary" coral-close>Ok</button>'
+            innerHTML: '<button is="coral-button" variant="primary" coral-close>Done</button>'
           },
           variant: variant
         });
@@ -219,13 +210,13 @@
         <p>Vivamus quis maximus enim. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut efficitur, nibh id luctus porttitor, quam nibh malesuada dui, at mattis mauris risus eget nibh. Suspendisse nec nisl eu felis ullamcorper lobortis. Nullam vulputate in mi vitae vehicula. Cras molestie urna id est faucibus tincidunt. Curabitur fermentum dui eget porta hendrerit. Nam lacinia, neque non iaculis blandit, risus ipsum accumsan velit, eu consectetur sapien magna ac enim. Aenean at augue vestibulum dolor faucibus pellentesque at vel justo. Aenean justo velit, bibendum et lectus id, efficitur accumsan diam. Sed tempus posuere justo, ultrices placerat magna aliquet in. Integer rhoncus sapien diam, eu iaculis urna porttitor quis. Vivamus volutpat tellus a scelerisque lacinia. Ut vel velit neque. Proin id augue tempus, vestibulum diam vel, pharetra erat. Integer id tellus id lorem sollicitudin pulvinar sit amet vel erat.</p>
 
       </coral-dialog-content>
-      <coral-dialog-footer><button is="coral-button" variant="primary" coral-close>Ok</button></coral-dialog-footer>
+      <coral-dialog-footer><button is="coral-button" variant="primary" coral-close>Done</button></coral-dialog-footer>
     </coral-dialog>
 
     <button is="coral-button" onclick="document.getElementById('fullscreenDialogDark').open = true">Fullscreen Dialog</button>
 
     <coral-dialog class="coral--dark" id='defaultCloseButtonDialogDark' closable='on'>
-      <coral-dialog-header>OK</coral-dialog-header>
+      <coral-dialog-header>Done</coral-dialog-header>
       <coral-dialog-content>You can close this now.</coral-dialog-content>
     </coral-dialog>
     <button is='coral-button' onclick="document.getElementById('defaultCloseButtonDialogDark').open = true">Closable</button>
@@ -247,7 +238,7 @@
               innerHTML: 'This is dialog number '+(i+1)+'.'
             },
             footer: {
-              innerHTML: '<button is="coral-button" variant="primary" coral-close>Ok</button>'
+              innerHTML: '<button is="coral-button" variant="primary" coral-close>Done</button>'
             }
           });
 
@@ -279,7 +270,7 @@
               innerHTML: 'This is dialog number '+(i+1)+'.'
             },
             footer: {
-              innerHTML: '<button is="coral-button" variant="primary" coral-close>Ok</button>'
+              innerHTML: '<button is="coral-button" variant="primary" coral-close>Done</button>'
             }
           });
 
@@ -308,7 +299,7 @@
           innerHTML: 'This dialog will still close when you click outside of it, and you will not be able to click on items under it, but it has no backdrop.'
         },
         footer: {
-          innerHTML: '<button is="coral-button" variant="primary" coral-close>Ok</button>'
+          innerHTML: '<button is="coral-button" variant="primary" coral-close>Done</button>'
         }
       });
 
@@ -341,7 +332,7 @@
           innerHTML: 'The anchor you clicked will get focus when this dialog is closed.'
         },
         footer: {
-          innerHTML: '<button is="coral-button" variant="primary" coral-close>Ok</button>'
+          innerHTML: '<button is="coral-button" variant="primary" coral-close>Done</button>'
         }
       });
 
@@ -359,13 +350,13 @@
   </section>
 
   <section>
-    <h2 class="coral-Heading coral-Heading--2">Closeable</h2>
-    <p>By default closeable is "off", so all the other examples include a close button.  You can add the closeable attribute and set it to "on" to use the template provided close button.</p>
+    <h2 class="coral-Heading coral-Heading--2">Closable</h2>
+    <p>By default closable is "off", so all the other examples include a close button.  You can add the closable attribute and set it to "on" to use the template provided close button.</p>
     <coral-dialog id='defaultCloseButtonDialog' closable='on'>
-      <coral-dialog-header>OK</coral-dialog-header>
+      <coral-dialog-header>Done</coral-dialog-header>
       <coral-dialog-content>You can close this now.</coral-dialog-content>
     </coral-dialog>
-    <button is='coral-button' onclick="document.getElementById('defaultCloseButtonDialog').open = true">Closeable On</button>
+    <button is='coral-button' onclick="document.getElementById('defaultCloseButtonDialog').open = true">Closable On</button>
   </section>
 
 </body>
