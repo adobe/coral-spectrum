@@ -1,6 +1,4 @@
 describe('Coral.Table.Cell', function() {
-  'use strict';
-
   describe('Namespace', function() {
     it('should be defined', function() {
       expect(Coral.Table).to.have.property('Cell');

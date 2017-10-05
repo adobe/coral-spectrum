@@ -1,6 +1,4 @@
 describe('Coral.ActionBar.Secondary', function() {
-  'use strict';
-
   describe('Namespace', function() {
     it('should be defined', function() {
       expect(Coral.ActionBar).to.have.property('Secondary');

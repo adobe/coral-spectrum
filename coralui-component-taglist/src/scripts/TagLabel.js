@@ -21,10 +21,6 @@
  @htmltag coral-tag-label
  @extends HTMLElement
  */
-class TagLabel extends HTMLElement {
-  constructor() {
-    super();
-  }
-}
+class TagLabel extends HTMLElement {}
 
 export default TagLabel;

@@ -65,7 +65,7 @@ class Card extends Component(HTMLElement) {
       asset: this.querySelector('coral-card-asset') || document.createElement('coral-card-asset'),
       content: this.querySelector('coral-card-content') || document.createElement('coral-card-content'),
       info: this.querySelector('coral-card-info') || document.createElement('coral-card-info'),
-      overlay: this.querySelector('coral-card-overlay') || document.createElement('coral-card-overlay'),
+      overlay: this.querySelector('coral-card-overlay') || document.createElement('coral-card-overlay')
     };
     base.call(this._elements);
   
@@ -111,30 +111,29 @@ class Card extends Component(HTMLElement) {
   set assetHeight(value) {
     this._assetHeight = transform.number(value);
   
+    const self = this;
     // Avoid a forced reflow by executing following in the next frame
-    window.requestAnimationFrame(function() {
+    window.requestAnimationFrame(() => {
       // both hint dimensions need to be set in order to use this feature
-      if (!this._loaded && this._elements.asset && this.assetWidth && this._assetHeight) {
+      if (!self._loaded && self._elements.asset && self.assetWidth && self._assetHeight) {
         // gets the width without the border of the card
-        const clientRect = this.getBoundingClientRect();
+        const clientRect = self.getBoundingClientRect();
         const width = clientRect.right - clientRect.left;
         // calculates the image ratio used to resize the height
-        const ratio = width / this.assetWidth;
+        const ratio = width / self.assetWidth;
     
         // the image is considered "low resolution"
         // @todo: check this after removal of lowResolution
         if (ratio > 1) {
           // 32 = $card-asset-lowResolution-padding * 2
-          this._elements.asset.style.height = (this._assetHeight + 32) + 'px';
+          self._elements.asset.style.height = `${self._assetHeight + 32}px`;
         }
-        else {
-          // for non-low resolution images, condensed and inverted cards do not require the height to be set
-          if (this.variant !== variant.CONDENSED && this.variant !== variant.INVERTED) {
-            this._elements.asset.style.height = (ratio * this._assetHeight) + 'px';
-          }
+        // for non-low resolution images, condensed and inverted cards do not require the height to be set
+        else if (self.variant !== variant.CONDENSED && self.variant !== variant.INVERTED) {
+          self._elements.asset.style.height = `${ratio * self._assetHeight}px`;
         }
       }
-    }.bind(this));
+    });
   }
   
   /**
@@ -289,7 +288,7 @@ class Card extends Component(HTMLElement) {
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
 
-    this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
+    this.classList.remove(...ALL_VARIANT_CLASSES);
 
     if (this._variant !== variant.DEFAULT) {
       this.classList.add(`${CLASSNAME}--${this._variant}`);
@@ -311,9 +310,8 @@ class Card extends Component(HTMLElement) {
     event.target.classList.remove('is-loading');
   }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.content;}
-  set defaultContentZone(value) {this.content = value;}
+  get defaultContentZone() { return this.content; }
+  set defaultContentZone(value) { this.content = value; }
   get _contentZones() {
     return {
       'coral-card-asset': 'asset',
@@ -324,7 +322,7 @@ class Card extends Component(HTMLElement) {
   }
   
   // Expose enumerations
-  static get variant() {return variant;}
+  static get variant() { return variant; }
   
   static get observedAttributes() {
     return [
@@ -347,7 +345,7 @@ class Card extends Component(HTMLElement) {
     this.classList.add(CLASSNAME);
     
     // Default reflected attributes
-    if (!this._variant) {this.variant = variant.DEFAULT;}
+    if (!this._variant) { this.variant = variant.DEFAULT; }
   
     const content = this._elements.content;
     const asset = this._elements.asset;
@@ -374,8 +372,8 @@ class Card extends Component(HTMLElement) {
     while (this.firstChild) {
       const child = this.firstChild;
       // Removes the empty spaces
-      if ((child.nodeType === Node.TEXT_NODE && child.textContent.trim() !== '') ||
-        (child.nodeType === Node.ELEMENT_NODE && child.getAttribute('handle') !== 'wrapper')) {
+      if (child.nodeType === Node.TEXT_NODE && child.textContent.trim() !== '' ||
+        child.nodeType === Node.ELEMENT_NODE && child.getAttribute('handle') !== 'wrapper') {
         // Add non-template elements to the content
         content.appendChild(child);
       }

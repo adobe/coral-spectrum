@@ -1,6 +1,4 @@
 describe('Coral.FileUpload', function() {
-  'use strict';
-  
   //Fake event to be used on a change event of the file input: _onInputChange(event)
   var event = {
     stopPropagation: function() {},

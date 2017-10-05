@@ -38,7 +38,7 @@ const colorSpace = {
  @ignore
  */
 function _hex(x) {
-  return ('0' + x.toString(16)).slice(-2);
+  return `0${x.toString(16)}`.slice(-2);
 }
 
 /** @ignore */
@@ -85,11 +85,7 @@ function _parseRGB(rgbStr) {
     return null;
   }
   
-  return {
-    r: r,
-    g: g,
-    b: b
-  };
+  return {r, g, b};
 }
 
 /**
@@ -103,7 +99,7 @@ function _parseRGB(rgbStr) {
  */
 function _serializeRGB(rgb) {
   if (rgb) {
-    return 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
+    return `rgb(${rgb.r},${rgb.g},${rgb.b})`;
   }
   
   return '';
@@ -142,12 +138,7 @@ function _parseRGBA(rgbaStr) {
     return null;
   }
   
-  return {
-    r: r,
-    g: g,
-    b: b,
-    a: a
-  };
+  return {r, g, b, a};
 }
 
 
@@ -162,7 +153,7 @@ function _parseRGBA(rgbaStr) {
  */
 function _serializeRGBA(rgba) {
   if (rgba) {
-    return 'rgba(' + rgba.r + ',' + rgba.g + ',' + rgba.b + ',' + rgba.a + ')';
+    return `rgba(${rgba.r},${rgba.g},${rgba.b},${rgba.a})`;
   }
   return '';
 }
@@ -199,12 +190,7 @@ function _parseCMYK(cmykStr) {
     return null;
   }
   
-  return {
-    c: c,
-    m: m,
-    y: y,
-    k: k
-  };
+  return {c, m, y, k};
 }
 
 /**
@@ -225,7 +211,7 @@ function _serializeCMYK(cmyk) {
     const y = parseFloat(cmyk.y.toFixed(2));
     const k = parseFloat(cmyk.k.toFixed(2));
     
-    return 'cmyk(' + c + ',' + m + ',' + y + ',' + k + ')';
+    return `cmyk(${c},${m},${y},${k})`;
   }
   return '';
 }
@@ -258,25 +244,6 @@ function _parseHex(hexStr) {
 }
 
 /**
- Serialize a hex number into a string.
- 
- @static
- @param {Number}
- @return {String}
- @ignore
- */
-function _serializeHex(hex) {
-  
-  // explicitly test null (0 is valid)
-  if (hex !== null) {
-    const rgb = _hexToRgb(hex);
-    return '#' + _hex(rgb.r) + _hex(rgb.g) + _hex(rgb.b);
-  }
-  
-  return '';
-}
-
-/**
  Transforms a hex color into RGB representation.
  
  @static
@@ -291,11 +258,32 @@ function _hexToRgb(hex) {
   if (hex !== null) {
     return {
       r: hex >> 16,
+      // eslint-disable-next-line no-extra-parens
       g: (hex & 0x00FF00) >> 8,
+      // eslint-disable-next-line no-extra-parens
       b: (hex & 0x0000FF)
     };
   }
   return null;
+}
+
+/**
+ Serialize a hex number into a string.
+ 
+ @static
+ @param {Number}
+ @return {String}
+ @ignore
+ */
+function _serializeHex(hex) {
+  
+  // explicitly test null (0 is valid)
+  if (hex !== null) {
+    const rgb = _hexToRgb(hex);
+    return `#${_hex(rgb.r) + _hex(rgb.g) + _hex(rgb.b)}`;
+  }
+  
+  return '';
 }
 
 /**
@@ -424,11 +412,7 @@ function _parseHSB(hsbStr) {
     return null;
   }
   
-  return {
-    h: h,
-    s: s,
-    b: b
-  };
+  return {h, s, b};
 }
 
 /**
@@ -448,7 +432,7 @@ function _serializeHSB(hsb) {
     const s = parseFloat(hsb.s.toFixed(2));
     const b = parseFloat(hsb.b.toFixed(2));
     
-    return 'hsb(' + h + ',' + s + ',' + b + ')';
+    return `hsb(${h},${s},${b})`;
   }
   
   return '';
@@ -475,12 +459,12 @@ function _hsbToRgb(hsb) {
   const s = hsb.s / 100;
   const v = hsb.b / 100;
   
-  let r, g, b, i, f, p, q, t;
-  i = Math.floor(h * 6);
-  f = h * 6 - i;
-  p = v * (1 - s);
-  q = v * (1 - f * s);
-  t = v * (1 - (1 - f) * s);
+  let r, g, b;
+  const i = Math.floor(h * 6);
+  const f = h * 6 - i;
+  const p = v * (1 - s);
+  const q = v * (1 - f * s);
+  const t = v * (1 - (1 - f) * s);
   switch (i % 6) {
     case 0:
       r = v;
@@ -541,7 +525,7 @@ function _rgbToHsb(rgb) {
   const min = Math.min(r, g, b);
   const d = max - min;
   let h;
-  const s = (max === 0 ? 0 : d / max);
+  const s = max === 0 ? 0 : d / max;
   const v = max / 255;
   
   switch (max) {
@@ -549,15 +533,15 @@ function _rgbToHsb(rgb) {
       h = 0;
       break;
     case r:
-      h = (g - b) + d * (g < b ? 6 : 0);
+      h = g - b + d * (g < b ? 6 : 0);
       h /= 6 * d;
       break;
     case g:
-      h = (b - r) + d * 2;
+      h = b - r + d * 2;
       h /= 6 * d;
       break;
     case b:
-      h = (r - g) + d * 4;
+      h = r - g + d * 4;
       h /= 6 * d;
       break;
   }
@@ -600,11 +584,7 @@ function _parseHSL(hslStr) {
     return null;
   }
   
-  return {
-    h: h,
-    s: s,
-    l: l
-  };
+  return {h, s, l};
 }
 
 /**
@@ -624,7 +604,7 @@ function _serializeHSL(hsl) {
     const s = parseFloat(hsl.s.toFixed(2));
     const l = parseFloat(hsl.l.toFixed(2));
     
-    return 'hsl(' + h + ',' + s + '%,' + l + '%)';
+    return `hsl(${h},${s}%,${l}%)`;
   }
   
   return '';
@@ -656,10 +636,11 @@ function _hslToRgb(hsl) {
   let b;
   
   if (s === 0) {
-    r = g = b = l; // achromatic
+    // achromatic
+    r = g = b = l;
   }
   else {
-    const hue2rgb = function hue2rgb(p, q, t) {
+    const hue2rgb = (p, q, t) => {
       if (t < 0) {
         t += 1;
       }
@@ -678,11 +659,11 @@ function _hslToRgb(hsl) {
       return p;
     };
     
-    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-    const p = 2 * l - q;
-    r = hue2rgb(p, q, h + 1 / 3);
-    g = hue2rgb(p, q, h);
-    b = hue2rgb(p, q, h - 1 / 3);
+    const qValue = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    const pValue = 2 * l - qValue;
+    r = hue2rgb(pValue, qValue, h + 1 / 3);
+    g = hue2rgb(pValue, qValue, h);
+    b = hue2rgb(pValue, qValue, h - 1 / 3);
   }
   
   
@@ -776,12 +757,7 @@ function _parseHSLA(hslaStr) {
     return null;
   }
   
-  return {
-    h: h,
-    s: s,
-    l: l,
-    a: a
-  };
+  return {h, s, l, a};
 }
 
 /**
@@ -802,7 +778,7 @@ function _serializeHSLA(hsla) {
     const l = parseFloat(hsla.l.toFixed(2));
     const a = parseFloat(hsla.a.toFixed(2));
     
-    return 'hsla(' + h + ',' + s + '%,' + l + '%,' + a + ')';
+    return `hsla(${h},${s}%,${l}%,${a})`;
   }
   
   return '';
@@ -906,7 +882,7 @@ class Color {
     if (isNaN(value) || value < 0 || value > 1) {
       return;
     }
-    this._alpha = Coral.transform.number(value);
+    this._alpha = transform.number(value);
   }
   
   /**
@@ -1324,7 +1300,7 @@ class Color {
       let tintFactor = 1;
       
       for (let i = 1; i <= amount; i++) {
-        tintFactor = (i / (amount + 1));
+        tintFactor = i / (amount + 1);
         tintColor = this.clone();
         // alpha value kept from original
         tintColor.rgb = {
@@ -1362,7 +1338,7 @@ class Color {
       let shadeFactor = 1;
       
       for (let i = 1; i <= amount; i++) {
-        shadeFactor = (i / (amount + 1));
+        shadeFactor = i / (amount + 1);
         shadeColor = this.clone();
         // alpha value kept from original
         shadeColor.rgb = {

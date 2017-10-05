@@ -21,10 +21,6 @@
  @htmltag coral-tree-item-content
  @extends HTMLElement
  */
-class TreeItemContent extends HTMLElement {
-  constructor() {
-    super();
-  }
-}
+class TreeItemContent extends HTMLElement {}
 
 export default TreeItemContent;

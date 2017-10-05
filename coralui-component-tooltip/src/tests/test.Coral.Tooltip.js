@@ -1,6 +1,4 @@
 describe('Coral.Tooltip', function() {
-  'use strict';
-
   describe('Namespace', function() {
     it('should be defined in Coral namespace', function() {
       expect(Coral).to.have.property('Tooltip');

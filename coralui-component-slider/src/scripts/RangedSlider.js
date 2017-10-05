@@ -28,10 +28,6 @@ const CLASSNAME = 'coral3-Slider';
  @extends Coral.Slider
  */
 class RangedSlider extends Slider {
-  constructor() {
-    super();
-  }
-  
   /**
    Ranged sliders are always filled.
    
@@ -173,13 +169,14 @@ class RangedSlider extends Slider {
     const percent = (this._getLowestValue() - this.min) * deltaMaxMinBase;
     const percentDiff = (this._getHighestValue() - this.min) * deltaMaxMinBase - percent;
   
-    if (this.orientation === Coral.Slider.orientation.VERTICAL) {
-      this._elements.fillHandle.style.bottom = percent + '%';
-      this._elements.fillHandle.style.height = percentDiff + '%';
+    if (this.orientation === this.constructor.orientation.VERTICAL) {
+      this._elements.fillHandle.style.bottom = `${percent}%`;
+      this._elements.fillHandle.style.height = `${percentDiff}%`;
     }
-    else { // Horizontal
-      this._elements.fillHandle.style.left = percent + '%';
-      this._elements.fillHandle.style.width = percentDiff + '%';
+    // Horizontal
+    else {
+      this._elements.fillHandle.style.left = `${percent}%`;
+      this._elements.fillHandle.style.width = `${percentDiff}%`;
     }
   }
   

@@ -26,10 +26,6 @@ const CLASSNAME = 'coral3-Slider-item';
  @extends HTMLElement
  */
 class SliderItem extends HTMLElement {
-  constructor() {
-    super();
-  }
-  
   /**
    The slider's item value.
    This should contain a number formatted as a string (e.g.: "10") or an empty string.

@@ -3,8 +3,6 @@ import FormField from '../scripts/FormField';
 import {commons, transform} from 'coralui-util';
 
 describe('Coral.mixin.formField', function() {
-  'use strict';
-  
   // Dummy custom element
   class Element extends FormField(Component(HTMLElement)) {
     constructor() {

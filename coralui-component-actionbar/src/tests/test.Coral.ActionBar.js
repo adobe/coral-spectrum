@@ -1,6 +1,17 @@
 describe('Coral.ActionBar', function() {
-  'use strict';
-
+  let warn = console.warn;
+  
+  before(() => {
+    console.warn = () => {
+      // Override it to prevent spamming the console
+    };
+  });
+  
+  after(() => {
+    // Restore warn
+    console.warn = warn;
+  });
+  
   describe('Namespace', function() {
     it('should be defined', function() {
       expect(Coral).to.have.property('ActionBar');

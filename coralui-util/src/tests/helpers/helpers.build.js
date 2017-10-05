@@ -1,13 +1,11 @@
 var helpers = helpers || {};
 
 before(function() {
-  'use strict';
   // Add coral--light to the body
   document.body.classList.add('coral--light');
 });
 
 beforeEach(function() {
-  'use strict';
   if (helpers.target && helpers.target.parentNode) {
     helpers.target.parentNode.removeChild(helpers.target);
   }
@@ -20,7 +18,6 @@ beforeEach(function() {
 });
 
 afterEach(function() {
-  'use strict';
   // Empty target
   helpers.target.innerHTML = '';
   // Reset pressed keys
@@ -42,8 +39,6 @@ helpers.next = window.requestAnimationFrame.bind(window);
     The markup or HTML element to prepare. The markup only contain a single root tag.
 */
 helpers.build = function(element) {
-  'use strict';
-  
   if (element instanceof HTMLElement) {
     // Add the element to the DOM
     return helpers.target.appendChild(element);

@@ -35,8 +35,8 @@ class Radio extends FormField(Component(HTMLElement)) {
     super();
   
     this._delegateEvents(commons.extend(this._events, {
-      'click': '_onClick',
-      'mousedown': '_onMouseDown'
+      click: '_onClick',
+      mousedown: '_onMouseDown'
     }));
     
     // Prepare templates
@@ -51,9 +51,12 @@ class Radio extends FormField(Component(HTMLElement)) {
   
     // Watch for changes to the label element's children
     this._observer.observe(this._elements.labelWrapper, {
-      childList: true, // Catch changes to childList
-      characterData: true, // Catch changes to textContent
-      subtree: true // Monitor any child node
+      // Catch changes to childList
+      childList: true,
+      // Catch changes to textContent
+      characterData: true,
+      // Monitor any child node
+      subtree: true
     });
   }
   
@@ -167,14 +170,14 @@ class Radio extends FormField(Component(HTMLElement)) {
    
    @protected
    */
-  get _componentTargetProperty() {return 'checked';}
+  get _componentTargetProperty() { return 'checked'; }
   
   /*
    Indicates to the formField that the 'checked' property has to be extracted from the event.
    
    @protected
    */
-  get _eventTargetProperty() {return 'checked';}
+  get _eventTargetProperty() { return 'checked'; }
   
   /**
    Takes care of keeping the checked property up to date, by unchecking every radio that has the same name. This is
@@ -187,8 +190,8 @@ class Radio extends FormField(Component(HTMLElement)) {
     // are not checked.
     if (this.parentNode !== null && this.name && this.checked) {
       // queries the document for all the coral-radios with the same name
-      const items = document.querySelectorAll(this.tagName + '[name=' + JSON.stringify(this.name) + ']');
-      const  itemCount = items.length;
+      const items = document.querySelectorAll(`${this.tagName}[name=${JSON.stringify(this.name)}]`);
+      const itemCount = items.length;
     
       for (let i = 0; i < itemCount; i++) {
         if (items[i] !== this) {
@@ -248,10 +251,9 @@ class Radio extends FormField(Component(HTMLElement)) {
     this.checked = this._initialCheckedState;
   }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.label;}
-  set defaultContentZone(value) {this.label = value;}
-  get _contentZones() {return {'coral-radio-label': 'label'};}
+  get defaultContentZone() { return this.label; }
+  set defaultContentZone(value) { this.label = value; }
+  get _contentZones() { return {'coral-radio-label': 'label'}; }
   
   static get observedAttributes() {
     return super.observedAttributes.concat(['checked']);
@@ -262,7 +264,7 @@ class Radio extends FormField(Component(HTMLElement)) {
     
     this.classList.add(CLASSNAME);
   
-    // Create a temporary fragment
+    // Create a fragment
     const frag = document.createDocumentFragment();
   
     const templateHandleNames = ['input', 'checkmark', 'labelWrapper'];
@@ -285,7 +287,7 @@ class Radio extends FormField(Component(HTMLElement)) {
     while (this.firstChild) {
       const child = this.firstChild;
       if (child.nodeType === Node.TEXT_NODE ||
-        (child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1)) {
+        child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
         // Add non-template elements to the label
         label.appendChild(child);
       }

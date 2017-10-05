@@ -20,10 +20,10 @@ import {Vent} from 'coralui-externals';
 import {transform, validate, commons} from 'coralui-util';
 
 const arrowMap = {
-  'left': 'Left',
-  'right': 'Right',
-  'top': 'Up',
-  'bottom': 'Down'
+  left: 'Left',
+  right: 'Right',
+  top: 'Up',
+  bottom: 'Down'
 };
 
 const CLASSNAME = 'coral3-Tooltip';
@@ -53,7 +53,7 @@ const variant = {
 // A string of all possible variant classnames
 const ALL_VARIANT_CLASSES = [];
 for (const variantName in variant) {
-  ALL_VARIANT_CLASSES.push(CLASSNAME + '--' + variant[variantName]);
+  ALL_VARIANT_CLASSES.push(`${CLASSNAME}--${variant[variantName]}`);
 }
 
 // A string of all position placement classnames
@@ -115,7 +115,7 @@ class Tooltip extends Overlay {
     this._variant = validate.enumeration(variant)(value) && value || variant.INFO;
     this._reflectAttribute('variant', this._variant);
   
-    this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
+    this.classList.remove(...ALL_VARIANT_CLASSES);
     this.classList.add(`${CLASSNAME}--${this._variant}`);
   }
   
@@ -203,21 +203,22 @@ class Tooltip extends Overlay {
   /** @ignore */
   _onPositioned(event) {
     // Set arrow placement
-    this.classList.remove.apply(this.classList, ALL_PLACEMENT_CLASSES);
+    this.classList.remove(ALL_PLACEMENT_CLASSES);
     this.classList.add(placementClassMap[event.detail.placement]);
   }
   
   /** @ignore */
   _handleFocusOut() {
+    const self = this;
     // The item that should have focus will get it on the next frame
-    window.requestAnimationFrame(function() {
-      const targetIsFocused = document.activeElement === this._getTarget();
-      const tooltipIsFocused = this.contains(document.activeElement);
-      if (!targetIsFocused && !tooltipIsFocused) {
-        this._cancelShow();
-        this.open = false;
+    window.requestAnimationFrame(() => {
+      const targetIsFocused = document.activeElement === self._getTarget();
+      
+      if (!targetIsFocused) {
+        self._cancelShow();
+        self.open = false;
       }
-    }.bind(this));
+    });
   }
   
   /** @ignore */
@@ -237,9 +238,10 @@ class Tooltip extends Overlay {
       this._handleFocusOut();
     }
     else {
-      this._hideTimeout = setTimeout(function() {
-        this._handleFocusOut();
-      }.bind(this), this.delay);
+      const self = this;
+      this._hideTimeout = window.setTimeout(() => {
+        self._handleFocusOut();
+      }, this.delay);
     }
   }
   
@@ -271,7 +273,7 @@ class Tooltip extends Overlay {
     // Use Vent to bind events on the target
     self._targetEvents = new Vent(target);
   
-    self._targetEvents.on(`mouseenter.CoralTooltip${self._id} focusin.CoralTooltip${self._id}`, function() {
+    self._targetEvents.on(`mouseenter.CoralTooltip${self._id} focusin.CoralTooltip${self._id}`, () => {
       // Don't let the tooltip hide
       self._cancelHide();
       
@@ -283,20 +285,20 @@ class Tooltip extends Overlay {
           self.show();
         }
         else {
-          self._showTimeout = window.setTimeout(function() {
+          self._showTimeout = window.setTimeout(() => {
             self.show();
           }, self.delay);
         }
       }
     });
   
-    self._targetEvents.on(`mouseleave.CoralTooltip${self._id}`, function() {
+    self._targetEvents.on(`mouseleave.CoralTooltip${self._id}`, () => {
       if (self.interaction === self.constructor.interaction.ON) {
         self._startHide();
       }
     });
   
-    self._targetEvents.on(`focusout.CoralTooltip${self._id}`, function() {
+    self._targetEvents.on(`focusout.CoralTooltip${self._id}`, () => {
       if (self.interaction === self.constructor.interaction.ON) {
         self._handleFocusOut();
       }
@@ -313,13 +315,12 @@ class Tooltip extends Overlay {
     target[`_hasCoralTooltipListeners${this._id}`] = false;
   }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.content;}
-  set defaultContentZone(value) {this.content = value;}
-  get _contentZones() {return {'coral-tooltip-content': 'content'};}
+  get defaultContentZone() { return this.content; }
+  set defaultContentZone(value) { this.content = value; }
+  get _contentZones() { return {'coral-tooltip-content': 'content'}; }
   
   // Expose enumerations
-  static get variant() {return variant;}
+  static get variant() { return variant; }
   
   static get observedAttributes() {
     return super.observedAttributes.concat(['variant', 'delay']);
@@ -337,7 +338,7 @@ class Tooltip extends Overlay {
     this.setAttribute('tabindex', '-1');
   
     // Default reflected attributes
-    if (!this._variant) {this.variant = variant.INFO;}
+    if (!this._variant) { this.variant = variant.INFO; }
   
     const content = this._elements.content;
     

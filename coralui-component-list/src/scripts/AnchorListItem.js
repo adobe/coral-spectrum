@@ -34,7 +34,7 @@ class AnchorListItem extends ListItem(Component(HTMLAnchorElement)) {
     
     // Events
     this._delegateEvents({
-      'click': '_onClick'
+      click: '_onClick'
     });
   }
   

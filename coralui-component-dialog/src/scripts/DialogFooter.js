@@ -24,10 +24,6 @@ const CLASSNAME = 'coral3-Dialog-footer';
  @extends HTMLElement
  */
 class DialogFooter extends HTMLElement {
-  constructor() {
-    super();
-  }
-  
   connectedCallback() {
     this.classList.add(CLASSNAME);
   }

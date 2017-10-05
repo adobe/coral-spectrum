@@ -61,10 +61,6 @@ const sortableType = {
  @extends Coral.mixin.component
  */
 class TableColumn extends Component(HTMLTableColElement) {
-  constructor() {
-    super();
-  }
-  
   /**
    Whether the column has a fixed width.
    
@@ -120,9 +116,10 @@ class TableColumn extends Component(HTMLTableColElement) {
     this._orderable = transform.booleanAttr(value);
     this._reflectAttribute('orderable', this._orderable);
     
-    window.requestAnimationFrame(function() {
-      this.trigger('coral-table-column:_orderablechanged');
-    }.bind(this));
+    const self = this;
+    window.requestAnimationFrame(() => {
+      self.trigger('coral-table-column:_orderablechanged');
+    });
   }
   
   /**
@@ -141,9 +138,10 @@ class TableColumn extends Component(HTMLTableColElement) {
     this._sortable = transform.booleanAttr(value);
     this._reflectAttribute('sortable', this._sortable);
     
-    window.requestAnimationFrame(function() {
-      this.trigger('coral-table-column:_sortablechanged');
-    }.bind(this));
+    const self = this;
+    window.requestAnimationFrame(() => {
+      self.trigger('coral-table-column:_sortablechanged');
+    });
   }
   
   /**
@@ -203,23 +201,17 @@ class TableColumn extends Component(HTMLTableColElement) {
       newSortableDirection = sortableDirection.DEFAULT;
     }
     
-    this.trigger('coral-table-column:_beforecolumnsort', {
-      newSortableDirection: newSortableDirection
-    });
+    this.trigger('coral-table-column:_beforecolumnsort', {newSortableDirection});
   }
   
   /** @private */
   _doSort(onInitialization) {
-    this.trigger('coral-table-column:_sort', {
-      onInitialization: onInitialization,
-      sortableDirection: sortableDirection,
-      sortableType: sortableType
-    });
+    this.trigger('coral-table-column:_sort', {onInitialization, sortableDirection, sortableType});
   }
   
   // Expose enums
-  static get sortableDirection() {return sortableDirection;}
-  static get sortableType() {return sortableType;}
+  static get sortableDirection() { return sortableDirection; }
+  static get sortableType() { return sortableType; }
   
   static get observedAttributes() {
     return [
@@ -241,8 +233,8 @@ class TableColumn extends Component(HTMLTableColElement) {
     this.classList.add(CLASSNAME);
     
     // Default reflected attributes
-    if (!this._sortableType) {this.sortableType = sortableType.ALPHANUMERIC;}
-    if (!this._sortableDirection) {this.sortableDirection = sortableDirection.DEFAULT;}
+    if (!this._sortableType) { this.sortableType = sortableType.ALPHANUMERIC; }
+    if (!this._sortableDirection) { this.sortableDirection = sortableDirection.DEFAULT; }
   }
   
   /**

@@ -33,7 +33,7 @@ class Panel extends Component(HTMLElement) {
     
     // Templates
     this._elements = {
-      content : this.querySelector('coral-panel-content') || document.createElement('coral-panel-content')
+      content: this.querySelector('coral-panel-content') || document.createElement('coral-panel-content')
     };
   }
   
@@ -82,10 +82,9 @@ class Panel extends Component(HTMLElement) {
     this.trigger('coral-panel:_selectedchanged');
   }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.content;}
-  set defaultContentZone(value) {this.content = value;}
-  get _contentZones() {return {'coral-panel-content': 'content'};}
+  get defaultContentZone() { return this.content; }
+  set defaultContentZone(value) { this.content = value; }
+  get _contentZones() { return {'coral-panel-content': 'content'}; }
   
   static get observedAttributes() {
     return ['selected'];

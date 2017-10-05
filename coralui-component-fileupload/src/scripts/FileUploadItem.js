@@ -37,9 +37,12 @@ const responseType = {
   JSON: 'json'
 };
 
-const MIME_TYPE_REGEXP = /(.+)\/(.+)$/; // eg text/plain
-const FILE_EXTENSION_REGEXP = /\.(.+)$/; // eg .txt
-const SHORTCUT_REGEXP = /.*/; // eg text
+// eg text/plain
+const MIME_TYPE_REGEXP = /(.+)\/(.+)$/;
+// eg .txt
+const FILE_EXTENSION_REGEXP = /\.(.+)$/;
+// eg text
+const SHORTCUT_REGEXP = /.*/;
 const MIME_TYPE_AUDIO = 'audio/*';
 const MIME_TYPE_IMAGE = 'image/*';
 const MIME_TYPE_VIDEO = 'video/*';
@@ -81,9 +84,7 @@ class FileUploadItem {
     return this._parameters || [];
   }
   set parameters(value) {
-    const isValid = Array.isArray(value) && value.every(function(el) {
-        return el && el.name;
-      });
+    const isValid = Array.isArray(value) && value.every((el) => el && el.name);
   
     if (isValid) {
       this._parameters = value;
@@ -155,7 +156,7 @@ class FileUploadItem {
    @memberof Coral.FileUpload.Item#
    */
   get readyState() {
-    return this._xhr ? this._xhr.readyState : (this._readyState || 0);
+    return this._xhr ? this._xhr.readyState : this._readyState || 0;
   }
   
   /**
@@ -168,7 +169,7 @@ class FileUploadItem {
    @memberof Coral.FileUpload.Item#
    */
   get response() {
-    return this._xhr ? this._xhr.response : (this._response || '');
+    return this._xhr ? this._xhr.response : this._response || '';
   }
   
   /**
@@ -181,7 +182,7 @@ class FileUploadItem {
    @memberof Coral.FileUpload.Item#
    */
   get responseText() {
-    return this._xhr ? this._xhr.responseText : (this._responseText || '');
+    return this._xhr ? this._xhr.responseText : this._responseText || '';
   }
   
   /**
@@ -194,7 +195,7 @@ class FileUploadItem {
    @memberof Coral.FileUpload.Item#
    */
   get responseXML() {
-    return this._xhr ? this._xhr.responseXML : (this._responseXML || null);
+    return this._xhr ? this._xhr.responseXML : this._responseXML || null;
   }
   
   /**
@@ -207,7 +208,7 @@ class FileUploadItem {
    @memberof Coral.FileUpload.Item#
    */
   get status() {
-    return this._xhr ? this._xhr.status : (this._status || 0);
+    return this._xhr ? this._xhr.status : this._status || 0;
   }
   
   /**
@@ -220,7 +221,7 @@ class FileUploadItem {
    @memberof Coral.FileUpload.Item#
    */
   get statusText() {
-    return this._xhr ? this._xhr.statusText : (this._statusText || '');
+    return this._xhr ? this._xhr.statusText : this._statusText || '';
   }
   
   /** @private */
@@ -235,7 +236,7 @@ class FileUploadItem {
       return false;
     }
     
-    return acceptedMimeTypes.split(',').some(function(allowedMimeType) {
+    return acceptedMimeTypes.split(',').some((allowedMimeType) => {
       allowedMimeType = allowedMimeType.trim();
       
       if (allowedMimeType === '*' ||
@@ -248,17 +249,17 @@ class FileUploadItem {
       }
       else if (allowedMimeType.match(MIME_TYPE_REGEXP)) {
         if (allowedMimeType === MIME_TYPE_AUDIO) {
-          isAllowed = (fileType.indexOf(MIME_TYPE_AUDIO.slice(0, -1)) === 0);
+          isAllowed = fileType.indexOf(MIME_TYPE_AUDIO.slice(0, -1)) === 0;
         }
         else if (allowedMimeType === MIME_TYPE_IMAGE) {
-          isAllowed = (fileType.indexOf(MIME_TYPE_IMAGE.slice(0, -1)) === 0);
+          isAllowed = fileType.indexOf(MIME_TYPE_IMAGE.slice(0, -1)) === 0;
         }
         else if (allowedMimeType === MIME_TYPE_VIDEO) {
-          isAllowed = (fileType.indexOf(MIME_TYPE_VIDEO.slice(0, -1)) === 0);
+          isAllowed = fileType.indexOf(MIME_TYPE_VIDEO.slice(0, -1)) === 0;
         }
         else {
           // Proper mime type case: directly compare with file mime type
-          isAllowed = (fileType === allowedMimeType);
+          isAllowed = fileType === allowedMimeType;
         }
       }
       else if (allowedMimeType.match(FILE_EXTENSION_REGEXP)) {
@@ -271,12 +272,12 @@ class FileUploadItem {
           isAllowed = allowedMimeTypes.some((mimeType) => fileType === mimeType);
         }
         else {
-          isAllowed = (fileType === MIME_TYPES[allowedMimeType]);
+          isAllowed = fileType === MIME_TYPES[allowedMimeType];
         }
       }
       else if (allowedMimeType.match(SHORTCUT_REGEXP)) {
         // "Shortcut" case: only compare first part of the file mime type with the shortcut
-        isAllowed = (fileType.split('/')[0] === allowedMimeType);
+        isAllowed = fileType.split('/')[0] === allowedMimeType;
       }
       
       // Break the loop if file mime type is allowed
@@ -285,7 +286,7 @@ class FileUploadItem {
   }
   
   // Expose enum
-  static get responseType() {return responseType;}
+  static get responseType() { return responseType; }
 }
 
 export default FileUploadItem;

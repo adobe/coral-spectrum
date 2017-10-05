@@ -27,10 +27,6 @@ import {transform} from 'coralui-util';
  @extends Coral.mixin.component
  */
 class ColorInputItem extends Component(HTMLElement) {
-  constructor() {
-    super();
-  }
-  
   /**
    The value of the color. This value can be set in different formats (HEX, RGB, RGBA, HSB, HSL, HSLA and CMYK).
    Corrects a hex value, if it is represented by 3 or 6 characters with or without '#'.

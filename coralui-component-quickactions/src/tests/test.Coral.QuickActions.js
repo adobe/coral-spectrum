@@ -1,6 +1,4 @@
 describe('Coral.QuickActions', function() {
-  'use strict';
-
   var BUTTON_SELECTOR = '.coral3-QuickActions-button:not([handle="moreButton"])';
 
   var itemObject = {
@@ -291,27 +289,29 @@ describe('Coral.QuickActions', function() {
       const el = helpers.build(window.__html__['Coral.QuickActions.base.html']);
       el.target = targetElement;
       var spy = sinon.spy();
+      
+      el.on('coral-overlay:open', () => {
+        el.on('coral-overlay:beforeopen', spy);
+        el.on('coral-overlay:beforeclose', spy);
+        el.on('coral-overlay:open', spy);
+        el.on('coral-overlay:close', spy);
+        el.on('coral-overlay:positioned', spy);
   
-      el.on('coral-overlay:beforeopen', spy);
-      el.on('coral-overlay:beforeclose', spy);
-      el.on('coral-overlay:open', spy);
-      el.on('coral-overlay:close', spy);
-      el.on('coral-overlay:positioned', spy);
+        // Open and close the overlay to trigger Coral.Overlay events
+        el._elements.overlay.open = true;
+  
+        helpers.next(function() {
+          el._elements.overlay.open = false;
+    
+          helpers.next(function() {
+            expect(spy.callCount).to.equal(0, 'no events propagated for internal Coral.Overlay');
+            done();
+          });
+        });
+      });
       
       // Open the quickActions
       el.open = true;
-
-      // Open and close the overlay to trigger Coral.Overlay events
-      el._elements.overlay.open = true;
-
-      helpers.next(function() {
-        el._elements.overlay.open = false;
-  
-        helpers.next(function() {
-          expect(spy.callCount).to.equal(2, 'Only coral-overlay:beforeopen and coral-overlay:open from coral-quickactions should propagate');
-          done();
-        });
-      });
     });
   });
 
@@ -496,6 +496,7 @@ describe('Coral.QuickActions', function() {
 
     it('should return focus to the target when launched via keyboard', function(done) {
       const el = helpers.build(window.__html__['Coral.QuickActions.base.html']);
+      el._overlayAnimationTime = 0;
       
       el.target = targetElement;
       el.target.focus();

@@ -1,6 +1,4 @@
 describe('Coral.ButtonGroup', function() {
-  'use strict';
-  
   var el;
   var item1;
   var item2;

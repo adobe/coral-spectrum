@@ -19,8 +19,6 @@ const zIndex = (element) => {
 };
 
 describe('Coral.mixin.overlay', function() {
-  'use strict';
-  
   var transitionEnd;
   
   // Non Modal overlay

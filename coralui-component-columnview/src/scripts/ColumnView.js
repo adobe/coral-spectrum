@@ -22,7 +22,7 @@ import {transform, validate, commons} from 'coralui-util';
 
 const CLASSNAME = 'coral3-ColumnView';
 
-const scrollTo = (element, to, duration, callback) => {
+const scrollTo = (element, to, duration, scrollCallback) => {
   if (duration <= 0) {
     return;
   }
@@ -30,11 +30,11 @@ const scrollTo = (element, to, duration, callback) => {
   const difference = to - element.scrollLeft;
   const perTick = difference / duration * 10;
   
-  window.setTimeout(function() {
+  window.setTimeout(() => {
     element.scrollLeft = element.scrollLeft + perTick;
     if (element.scrollLeft === to) {
-      if (callback) {
-        callback();
+      if (scrollCallback) {
+        scrollCallback();
       }
     }
     else {
@@ -148,7 +148,7 @@ class ColumnView extends Component(HTMLElement) {
     this._reflectAttribute('selectionmode', this._selectionMode);
   
     // propagates the selection mode to the columns
-    this.columns.getAll().forEach(function(item) {
+    this.columns.getAll().forEach((item) => {
       item.setAttribute('_selectionmode', this._selectionMode);
     }, this);
   
@@ -279,7 +279,7 @@ class ColumnView extends Component(HTMLElement) {
     
     this._bulkSelectionChange = true;
     // we need to deselect any other selection that is not part of the same column
-    this._oldSelection.forEach(function(el) {
+    this._oldSelection.forEach((el) => {
       if (event.detail.selection.indexOf(el) === -1) {
         el.removeAttribute('selected');
       }
@@ -368,8 +368,8 @@ class ColumnView extends Component(HTMLElement) {
     // stores the reference and direction to be able to perform the multiple selection correctly
     this._lastSelected = {
       item: selectedItem,
-      direction: (lastSelected && lastSelected.direction) ? lastSelected.direction : 'up',
-      firstSelectedItem: (lastSelected && lastSelected.firstSelectedItem) ?
+      direction: lastSelected && lastSelected.direction ? lastSelected.direction : 'up',
+      firstSelectedItem: lastSelected && lastSelected.firstSelectedItem ?
         lastSelected.firstSelectedItem :
         selectedItem.nextElementSibling
     };
@@ -439,8 +439,8 @@ class ColumnView extends Component(HTMLElement) {
     // stores the reference and direction to be able to perform the multiple selection correctly
     this._lastSelected = {
       item: selectedItem,
-      direction: (lastSelected && lastSelected.direction) ? lastSelected.direction : 'down',
-      firstSelectedItem: (lastSelected && lastSelected.firstSelectedItem) ?
+      direction: lastSelected && lastSelected.direction ? lastSelected.direction : 'down',
+      firstSelectedItem: lastSelected && lastSelected.firstSelectedItem ?
         lastSelected.firstSelectedItem :
         selectedItem.previousElementSibling
     };
@@ -465,15 +465,13 @@ class ColumnView extends Component(HTMLElement) {
         item = selectedItem;
       }
     }
+    // when there is no active item to select, we get the last item of the column. this way users can interact with
+    // the column view when there is nothing selected or activated
+    else if (this._oldActiveItem === null) {
+      item = this.items._getLastSelectable();
+    }
     else {
-      // when there is no active item to select, we get the last item of the column. this way users can interact with
-      // the column view when there is nothing selected or activated
-      if (this._oldActiveItem === null) {
-        item = this.items._getLastSelectable();
-      }
-      else {
-        item = this._oldActiveItem.previousElementSibling;
-      }
+      item = this._oldActiveItem.previousElementSibling;
     }
     
     // we use click instead of selected to force the deselection of the other items
@@ -499,15 +497,13 @@ class ColumnView extends Component(HTMLElement) {
         item = selectedItem;
       }
     }
+    // when there is no active item to select, we get the first item of the column. this way users can interact with
+    // the column view when there is nothing selected or activated
+    else if (this._oldActiveItem === null) {
+      item = this.items._getFirstSelectable();
+    }
     else {
-      // when there is no active item to select, we get the first item of the column. this way users can interact with
-      // the column view when there is nothing selected or activated
-      if (this._oldActiveItem === null) {
-        item = this.items._getFirstSelectable();
-      }
-      else {
-        item = this._oldActiveItem.nextElementSibling;
-      }
+      item = this._oldActiveItem.nextElementSibling;
     }
     
     // we use click instead of selected to force the deselection of the other items
@@ -588,9 +584,7 @@ class ColumnView extends Component(HTMLElement) {
     let diff = [];
     
     if (oldSelection.length === selection.length) {
-      diff = oldSelection.filter(function(item) {
-        return selection.indexOf(item) === -1;
-      });
+      diff = oldSelection.filter((item) => selection.indexOf(item) === -1);
     }
     
     // since we guarantee that they are arrays, we can start by comparing their size
@@ -623,7 +617,7 @@ class ColumnView extends Component(HTMLElement) {
    
    @private
    */
-    // @todo: improve animation effect when key is kept press
+  // @todo: improve animation effect when key is kept press
   _scrollColumnIntoView(column, clearEmptyColumns, triggerEvent) {
     let left = 0;
     let duration;
@@ -650,7 +644,7 @@ class ColumnView extends Component(HTMLElement) {
       }
       
       left = this.scrollWidth - this.offsetWidth;
-      duration = (left - this.scrollLeft);
+      duration = left - this.scrollLeft;
       scrollTo(this, left, duration, completeCallback);
     }
     else if (clearEmptyColumns) {
@@ -703,12 +697,12 @@ class ColumnView extends Component(HTMLElement) {
     // fade width of empty items to 0 before removing the columns (for better usability while navigating)
     const emptyColumns = Array.prototype.filter.call(this.querySelectorAll('coral-columnview-column, coral-columnview-preview'), el => !el.firstChild);
     
-    emptyColumns.forEach(function(column, i) {
+    emptyColumns.forEach((column, i) => {
       column.style.visibility = 'hidden';
       column.classList.add('is-collapsing');
-      commons.transitionEnd(column, function() {
+      commons.transitionEnd(column, () => {
         column.remove();
-        if (i === (emptyColumns.length - 1) && triggerEvent) {
+        if (i === emptyColumns.length - 1 && triggerEvent) {
           self._validateNavigation(self.columns.last());
         }
       });
@@ -725,9 +719,7 @@ class ColumnView extends Component(HTMLElement) {
       if (item.tagName === 'CORAL-COLUMNVIEW-COLUMN') {
         // we use the property since the item may not be ready
         item.setAttribute('_selectionmode', this.selectionMode);
-        this.trigger('coral-collection:add', {
-          item: item
-        });
+        this.trigger('coral-collection:add', {item});
       }
     }
     
@@ -737,9 +729,7 @@ class ColumnView extends Component(HTMLElement) {
       item = removedNodes[j];
       // @todo: should I handle it specially if it was selected? should a selection and active event be triggered?
       if (item.tagName === 'CORAL-COLUMNVIEW-COLUMN') {
-        this.trigger('coral-collection:remove', {
-          item: item
-        });
+        this.trigger('coral-collection:remove', {item});
       }
     }
   }
@@ -779,10 +769,7 @@ class ColumnView extends Component(HTMLElement) {
     
     // same column events are only triggered if the active item changed, otherwise they are ignored
     if (activeItem !== oldActiveItem) {
-      this.trigger('coral-columnview:activeitemchange', {
-        activeItem: activeItem,
-        oldActiveItem: oldActiveItem
-      });
+      this.trigger('coral-columnview:activeitemchange', {activeItem, oldActiveItem});
       
       // we cache the old active item to be able to report correct change events
       this._oldActiveItem = activeItem;
@@ -798,9 +785,7 @@ class ColumnView extends Component(HTMLElement) {
     const oldSelection = this._oldSelection || [];
     
     // use first newly selected item for new selection
-    const newSelectedItems = newSelection.filter(function(item) {
-      return oldSelection.indexOf(item) === -1;
-    });
+    const newSelectedItems = newSelection.filter((item) => oldSelection.indexOf(item) === -1);
     this._handleKeyboardMultiselect(newSelectedItems.length > 0 ? newSelectedItems[0] : null);
     
     if (this._arraysAreDifferent(newSelection, oldSelection)) {
@@ -895,7 +880,7 @@ class ColumnView extends Component(HTMLElement) {
   }
   
   // Expose enums
-  static get selectionMode() {return selectionMode;}
+  static get selectionMode() { return selectionMode; }
   
   static get observedAttributes() {
     return [
@@ -913,7 +898,7 @@ class ColumnView extends Component(HTMLElement) {
     this.setAttribute('tabindex', '0');
     
     // Default reflect attributes
-    if (!this._selectionMode) {this._selectionMode = selectionMode.NONE;}
+    if (!this._selectionMode) { this._selectionMode = selectionMode.NONE; }
   
     // no need to wait for the mutation observers
     this._setStateFromDOM();

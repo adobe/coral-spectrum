@@ -37,7 +37,7 @@ const variant = {
 // changes
 const ALL_VARIANT_CLASSES = [];
 for (const variantValue in variant) {
-  ALL_VARIANT_CLASSES.push(CLASSNAME + '--' + variant[variantValue]);
+  ALL_VARIANT_CLASSES.push(`${CLASSNAME}--${variant[variantValue]}`);
 }
 
 /**
@@ -54,7 +54,7 @@ class Textarea extends FormField(Component(HTMLTextAreaElement)) {
     super();
   
     this._delegateEvents(commons.extend(this._events, {
-      'input': '_onInput'
+      input: '_onInput'
     }));
   }
   
@@ -75,7 +75,7 @@ class Textarea extends FormField(Component(HTMLTextAreaElement)) {
     this._reflectAttribute('variant', this._variant);
   
     // removes every existing variant
-    this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
+    this.classList.remove(...ALL_VARIANT_CLASSES);
 
     if (this._variant !== variant.DEFAULT) {
       this.classList.add(`${CLASSNAME}--${this._variant}`);
@@ -103,12 +103,12 @@ class Textarea extends FormField(Component(HTMLTextAreaElement)) {
   _onInput() {
     if (this.variant === variant.QUIET) {
       this.style.height = 'auto';
-      this.style.height = this.scrollHeight + 'px';
+      this.style.height = `${this.scrollHeight}px`;
     }
   }
   
   // Expose enumerations
-  static get variant() {return variant;}
+  static get variant() { return variant; }
   
   static get observedAttributes() {
     return super._nativeObservedAttributes.concat(['variant']);
@@ -121,7 +121,7 @@ class Textarea extends FormField(Component(HTMLTextAreaElement)) {
     this.classList.add(`${CLASSNAME}--multiline`);
     
     // Default reflected attributes
-    if (!this._variant) {this.variant = variant.DEFAULT;}
+    if (!this._variant) { this.variant = variant.DEFAULT; }
   }
 }
 

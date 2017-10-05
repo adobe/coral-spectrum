@@ -118,7 +118,7 @@ class ShellMenuBarItem extends Component(HTMLElement) {
     this._iconVariant = validate.enumeration(iconVariant)(value) && value || iconVariant.DEFAULT;
   
     // removes all the existing variants
-    this.classList.remove.apply(this.classList, ALL_ICON_VARIANT_CLASSES);
+    this.classList.remove(...ALL_ICON_VARIANT_CLASSES);
     // adds the new variant
     if (this.variant !== iconVariant.DEFAULT) {
       this.classList.add(`${CLASSNAME}--${this._iconVariant}`);
@@ -139,7 +139,7 @@ class ShellMenuBarItem extends Component(HTMLElement) {
   set badge(value) {
     // Non-truthy values shouldn't show
     // null, empty string, 0, etc
-    this._elements.shellMenuButton[(!value || value === '0') ? 'removeAttribute' : 'setAttribute']('badge', value);
+    this._elements.shellMenuButton[!value || value === '0' ? 'removeAttribute' : 'setAttribute']('badge', value);
   }
   
   /**
@@ -244,13 +244,12 @@ class ShellMenuBarItem extends Component(HTMLElement) {
     return newTarget;
   }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.label;}
-  set defaultContentZone(value) {this.label = value;}
-  get _contentZones() {return {'coral-button-label': 'label'};}
+  get defaultContentZone() { return this.label; }
+  set defaultContentZone(value) { this.label = value; }
+  get _contentZones() { return {'coral-button-label': 'label'}; }
   
   // Expose enums
-  static get iconVariant() {return iconVariant;}
+  static get iconVariant() { return iconVariant; }
   
   static get observedAttributes() {
     return [

@@ -19,12 +19,12 @@ import Component from 'coralui-mixin-component';
 import FormField from 'coralui-mixin-formfield';
 import {SelectableCollection} from 'coralui-collection';
 import {Button} from 'coralui-component-button';
+import {Tag} from 'coralui-component-taglist';
+import {SelectListItem} from 'coralui-component-selectlist';
 import 'coralui-component-icon';
-import 'coralui-component-taglist';
 import 'coralui-component-overlay';
-import 'coralui-component-selectlist';
 import base from '../templates/base';
-import {transform, validate, commons, i18n} from 'coralui-util';
+import {transform, validate, commons, i18n, Keys} from 'coralui-util';
 
 /**
  Enum for Select variant values.
@@ -45,8 +45,8 @@ const variant = {
  @private
  */
 const overlayOffset = {
-  'default': -1,
-  'quiet': 4
+  default: -1,
+  quiet: 4
 };
 
 const CLASSNAME = 'coral3-Select';
@@ -55,7 +55,7 @@ const CLASSNAME = 'coral3-Select';
 // classnames when the variant changes.
 const ALL_VARIANT_CLASSES = [];
 for (const variantKey in variant) {
-  ALL_VARIANT_CLASSES.push(CLASSNAME + '--' + variant[variantKey]);
+  ALL_VARIANT_CLASSES.push(`${CLASSNAME}--${variant[variantKey]}`);
 }
 
 // used in 'auto' mode to determine if the client is on mobile.
@@ -87,11 +87,7 @@ const itemValueFromDOM = function(item) {
  the difference between the arrays.
  */
 const arrayDiff = function(a, b) {
-  return a.filter(function(item) {
-    return !b.some(function(item2) {
-      return item === item2;
-    });
-  });
+  return a.filter((item) => !b.some((item2) => item === item2));
 };
 
 /**
@@ -154,10 +150,11 @@ class Select extends FormField(Component(HTMLElement)) {
 
     // we only have AUTO mode.
     this._useNativeInput = IS_MOBILE_DEVICE;
-
-    // since reseting a form will call the reset on every component, we need to kill the behavior of the taglist
-    // otherwise the state will not be accurate
-    this._elements.taglist.reset = function() {};
+    
+    this._elements.taglist.reset = () => {
+      // since reseting a form will call the reset on every component, we need to kill the behavior of the taglist
+      // otherwise the state will not be accurate
+    };
   
     // handles the focus allocation every time the overlay closes
     this._elements.overlay.returnFocusTo(this._elements.button);
@@ -242,7 +239,7 @@ class Select extends FormField(Component(HTMLElement)) {
     this._setStateFromDOM();
     
     // everytime multiple changes, the state of the selectlist and taglist need to be updated
-    this.items.getAll().forEach(function(item) {
+    this.items.getAll().forEach((item) => {
       if (this._multiple && item.hasAttribute('selected')) {
         if (item._selectListItem) {
           item._selectListItem.setAttribute('hidden', '');
@@ -355,10 +352,9 @@ class Select extends FormField(Component(HTMLElement)) {
     if (this.multiple) {
       return this._elements.taglist.values;
     }
-    else {
-      // if there is a selection, we return whatever value it has assigned
-      return this.selectedItem ? [this._elements.input.value] : [];
-    }
+    
+    // if there is a selection, we return whatever value it has assigned
+    return this.selectedItem ? [this._elements.input.value] : [];
   }
   set values(values) {
     if (Array.isArray(values)) {
@@ -373,7 +369,7 @@ class Select extends FormField(Component(HTMLElement)) {
       let itemValue;
       // if multiple, we need to explicitely set the selection state of every item
       if (this.multiple) {
-        items.forEach(function(item) {
+        items.forEach((item) => {
           // we use DOM API instead of properties in case the item is not yet initialized
           itemValue = itemValueFromDOM(item);
           // if the value is located inside the values array, then we set the item as selected
@@ -387,7 +383,7 @@ class Select extends FormField(Component(HTMLElement)) {
         // since multiple = false, there is only 1 value value
         const value = values[0] || '';
         
-        items.forEach(function(item) {
+        items.forEach((item) => {
           // small optimization to avoid calculating the value from every item
           if (!targetItem) {
             itemValue = itemValueFromDOM(item);
@@ -434,7 +430,7 @@ class Select extends FormField(Component(HTMLElement)) {
   
   // JSDoc inherited
   get invalid() {
-    return super.invalid
+    return super.invalid;
   }
   set invalid(value) {
     super.invalid = value;
@@ -511,10 +507,9 @@ class Select extends FormField(Component(HTMLElement)) {
     if (this.hasAttribute('multiple')) {
       return this.items._getAllSelected();
     }
-    else {
-      const item = this.selectedItem;
-      return item ? [item] : [];
-    }
+    
+    const item = this.selectedItem;
+    return item ? [item] : [];
   }
   
   /**
@@ -556,7 +551,7 @@ class Select extends FormField(Component(HTMLElement)) {
       Button.variant.DEFAULT :
       Button.variant.QUIET;
     
-    this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
+    this.classList.remove(...ALL_VARIANT_CLASSES);
     
     if (this._variant !== variant.DEFAULT) {
       this.classList.add(`${CLASSNAME}--${this._variant}`);
@@ -601,7 +596,7 @@ class Select extends FormField(Component(HTMLElement)) {
           let height = el.offsetHeight;
           const style = getComputedStyle(el);
           
-          height += parseInt(style.marginTop) + parseInt(style.marginBottom);
+          height += parseInt(style.marginTop, 10) + parseInt(style.marginBottom, 10);
           return height;
         };
         
@@ -672,7 +667,7 @@ class Select extends FormField(Component(HTMLElement)) {
     
     if (height < maxHeight) {
       // Make it scrollable
-      this._elements.list.style.height = height - 1 + 'px';
+      this._elements.list.style.height = `${height - 1}px`;
     }
   }
   
@@ -686,7 +681,7 @@ class Select extends FormField(Component(HTMLElement)) {
   _onItemAdded(item) {
     const selectListItemParent = this._elements.list;
   
-    const selectListItem = item._selectListItem || new Coral.SelectList.Item();
+    const selectListItem = item._selectListItem || new SelectListItem();
     
     // @todo: Make sure it is added at the right index.
     selectListItemParent.appendChild(selectListItem);
@@ -722,11 +717,9 @@ class Select extends FormField(Component(HTMLElement)) {
         this._addTagToTagList(item);
       }
     }
-    else {
-      // Make sure the input value is set to the selected item
-      if (item.selected) {
-        this._elements.input.value = item.value;
-      }
+    // Make sure the input value is set to the selected item
+    else if (item.selected) {
+      this._elements.input.value = item.value;
     }
     
     item._selectListItem = selectListItem;
@@ -837,7 +830,7 @@ class Select extends FormField(Component(HTMLElement)) {
       
       // we deselect first the ones that have to go
       const diff = arrayDiff(oldSelection, selection);
-      diff.forEach(function(listItem) {
+      diff.forEach((listItem) => {
         // selectlist will report on removed items
         if (listItem._selectItem) {
           listItem._selectItem.removeAttribute('selected');
@@ -846,7 +839,7 @@ class Select extends FormField(Component(HTMLElement)) {
       
       // we only sync the items that changed
       const newSelection = arrayDiff(selection, oldSelection);
-      newSelection.forEach(function(listItem) {
+      newSelection.forEach((listItem) => {
         if (listItem._selectItem) {
           listItem._selectItem.setAttribute('selected', '');
         }
@@ -890,7 +883,7 @@ class Select extends FormField(Component(HTMLElement)) {
     const values = event.target.values;
     // we use the selected items, because they are the only possible items that may change
     let itemValue;
-    this.items._getAllSelected().forEach(function(item) {
+    this.items._getAllSelected().forEach((item) => {
       // we use DOM API instead of properties in case the item is not yet initialized
       itemValue = itemValueFromDOM(item);
       // if the item is inside the values array, then it has to be selected
@@ -911,7 +904,7 @@ class Select extends FormField(Component(HTMLElement)) {
   /** @private */
   _addTagToTagList(item) {
     // we prepare the tag
-    item._tag = item._tag || new Coral.Tag();
+    item._tag = item._tag || new Tag();
     item._tag.set({
       value: item.value,
       multiline: true,
@@ -978,7 +971,7 @@ class Select extends FormField(Component(HTMLElement)) {
   }
   
   /** @private */
-  _onNativeSelectClick(event) {
+  _onNativeSelectClick() {
     this._showOptions(false);
   }
   
@@ -994,10 +987,8 @@ class Select extends FormField(Component(HTMLElement)) {
       // we try to open the native select
       this._elements.nativeSelect.dispatchEvent(new MouseEvent('mousedown'));
     }
-    else {
-      if (!this._elements.overlay.open || event.keyCode === Coral.Keys.keyToCode('space')) {
-        this._elements.button.click();
-      }
+    else if (!this._elements.overlay.open || event.keyCode === Keys.keyToCode('space')) {
+      this._elements.button.click();
     }
   }
   
@@ -1021,7 +1012,7 @@ class Select extends FormField(Component(HTMLElement)) {
     this._elements.button.setAttribute('aria-expanded', event.target.open);
     
     if (!event.target.open) {
-      this.classList.remove.apply(this.classList, ['is-openAbove', 'is-openBelow']);
+      this.classList.remove(...['is-openAbove', 'is-openBelow']);
     }
   
     // handles the focus allocation every time the overlay closes
@@ -1034,7 +1025,7 @@ class Select extends FormField(Component(HTMLElement)) {
     event.stopImmediatePropagation();
     
     this.classList.add(event.detail.vertical === 'top' ? 'is-openBelow' : 'is-openAbove');
-    this._elements.overlay.style.minWidth = this.offsetWidth + 'px';
+    this._elements.overlay.style.minWidth = `${this.offsetWidth}px`;
   }
   
   // @todo: while the select is multiple, if everything is deselected no change event will be triggered.
@@ -1051,21 +1042,19 @@ class Select extends FormField(Component(HTMLElement)) {
     this._bulkSelectionChange = true;
     // extracts the native options for the selected items. We use the selected options, instead of the complete
     // options to make the diff since it will normally be a smaller set
-    const oldSelectedOptions = this.selectedItems.map(function(element) {
-      return element._nativeOption;
-    });
+    const oldSelectedOptions = this.selectedItems.map((element) => element._nativeOption);
     
     // we convert the HTMLCollection to an array
     const selectedOptions = Array.prototype.slice.call(event.target.querySelectorAll(':checked'));
     
     const diff = arrayDiff(oldSelectedOptions, selectedOptions);
-    diff.forEach(function(item) {
+    diff.forEach((item) => {
       item._selectItem.selected = false;
     });
     
     // we only sync the items that changed
     const newSelection = arrayDiff(selectedOptions, oldSelectedOptions);
-    newSelection.forEach(function(item) {
+    newSelection.forEach((item) => {
       item._selectItem.selected = true;
     });
     
@@ -1171,7 +1160,6 @@ class Select extends FormField(Component(HTMLElement)) {
    */
   _validateInitialState(nodes) {
     let item;
-    let value;
     let index;
     
     // we iterate over all the nodes, checking if they matched the initial value
@@ -1180,7 +1168,6 @@ class Select extends FormField(Component(HTMLElement)) {
       // value from the textContent
       item = nodes[i];
       
-      value = itemValueFromDOM(item);
       index = this._initialValues.indexOf(item.value);
       
       if (index !== -1) {
@@ -1190,6 +1177,7 @@ class Select extends FormField(Component(HTMLElement)) {
   }
   
   /** @private */
+  // eslint-disable-next-line no-unused-vars
   _onCollectionChange(addedNodes, removedNodes) {
     // we make sure that items that were part of the initial selection are removed from the internal representation
     this._validateInitialState(removedNodes);
@@ -1308,7 +1296,7 @@ class Select extends FormField(Component(HTMLElement)) {
   }
   
   // Expose enums
-  static get variant() {return variant;}
+  static get variant() { return variant; }
   
   static get observedAttributes() {
     return super.observedAttributes.concat(['variant', 'multiple', 'placeholder', 'loading']);
@@ -1320,7 +1308,7 @@ class Select extends FormField(Component(HTMLElement)) {
     this.classList.add(CLASSNAME);
   
     // Default reflected attributes
-    if (!this._variant) {this.variant = variant.DEFAULT;}
+    if (!this._variant) { this.variant = variant.DEFAULT; }
     
     this.classList.toggle('coral3-Select--native', this._useNativeInput);
   
@@ -1333,7 +1321,7 @@ class Select extends FormField(Component(HTMLElement)) {
     
     // we need to keep a state of the initial items to be able to reset the component. values is not reliable during
     // initialization since items are not yet initialized
-    this.selectedItems.forEach(function(item) {
+    this.selectedItems.forEach((item) => {
       // we use DOM API instead of properties in case the item is not yet initialized
       this._initialValues.push(itemValueFromDOM(item));
     }, this);

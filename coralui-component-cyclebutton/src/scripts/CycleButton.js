@@ -116,7 +116,7 @@ class CycleButton extends Component(HTMLElement) {
         host: this,
         itemTagName: 'coral-cyclebutton-item',
         onItemAdded: this._onItemAdded,
-        onItemRemoved: this._onItemRemoved,
+        onItemRemoved: this._onItemRemoved
       });
     }
     return this._items;
@@ -267,7 +267,7 @@ class CycleButton extends Component(HTMLElement) {
   
   /** @private */
   _validateSelection(item) {
-    let selectedItems = this.items._getAllSelected();
+    const selectedItems = this.items._getAllSelected();
     
     if (item) {
       // Deselected item
@@ -333,7 +333,7 @@ class CycleButton extends Component(HTMLElement) {
   }
   
   /** @ignore */
-  _onEscapeKey(event) {
+  _onEscapeKey() {
     // When escape is pressed, hide ourselves
     if (this._elements.overlay._isTopOverlay()) {
       this._hideOverlay();
@@ -477,7 +477,7 @@ class CycleButton extends Component(HTMLElement) {
   /** @private */
   _isExtended() {
     const hasActions = this.actions.getAll().length > 0;
-    return (this.threshold > 0 && this.items.getAll().length >= this.threshold) || hasActions;
+    return this.threshold > 0 && this.items.getAll().length >= this.threshold || hasActions;
   }
   
   /** @private */
@@ -514,10 +514,11 @@ class CycleButton extends Component(HTMLElement) {
     this._elements.button.setAttribute('aria-expanded', false);
     this._elements.overlay.hide();
   
+    const self = this;
     // Make sure the button is focused once closed
-    window.requestAnimationFrame(function() {
-      this._elements.button.focus();
-    }.bind(this));
+    window.requestAnimationFrame(() => {
+      self._elements.button.focus();
+    });
   }
   
   /** @ignore */
@@ -616,14 +617,15 @@ class CycleButton extends Component(HTMLElement) {
     
     this._populateLists();
     
+    const self = this;
     // Wait for list to be populated before showing the overlay
-    window.requestAnimationFrame(function() {
-      this._elements.overlay.show();
-    }.bind(this));
+    window.requestAnimationFrame(() => {
+      self._elements.overlay.show();
+    });
   }
   
   // Expose enums
-  static get displayMode() {return displayMode;}
+  static get displayMode() { return displayMode; }
   
   static get observedAttributes() {
     return ['icon', 'threshold', 'displaymode', 'displayMode'];
@@ -635,8 +637,8 @@ class CycleButton extends Component(HTMLElement) {
     this.classList.add(CLASSNAME);
     
     // Default reflected attributes
-    if (!this._threshold) {this.threshold = 3;}
-    if (!this._displayMode) {this.displayMode = displayMode.ICON;}
+    if (!this._threshold) { this.threshold = 3; }
+    if (!this._displayMode) { this.displayMode = displayMode.ICON; }
     
     // adds the role to support accessibility
     this.setAttribute('role', 'presentation');

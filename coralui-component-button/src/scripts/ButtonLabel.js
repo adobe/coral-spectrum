@@ -21,10 +21,6 @@
  @htmltag coral-button-label
  @extends HTMLElement
  */
-class ButtonLabel extends HTMLElement {
-  constructor() {
-    super();
-  }
-}
+class ButtonLabel extends HTMLElement {}
 
 export default ButtonLabel;

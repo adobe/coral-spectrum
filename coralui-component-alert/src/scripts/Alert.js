@@ -22,11 +22,11 @@ import {transform, validate} from 'coralui-util';
 
 // A map of types to icon names
 const iconMap = {
-  'success': 'checkCircle',
-  'info': 'infoCircle',
-  'error': 'alert',
-  'warning': 'alert',
-  'help': 'helpCircle'
+  success: 'checkCircle',
+  info: 'infoCircle',
+  error: 'alert',
+  warning: 'alert',
+  help: 'helpCircle'
 };
 
 /**
@@ -65,19 +65,19 @@ const CLASSNAME = 'coral3-Alert';
 
 // size mapping
 const SIZE_CLASSES = {
-  'S': 'small',
-  'L': 'large'
+  S: 'small',
+  L: 'large'
 };
 
 // An array of all possible variant classnames
 const ALL_VARIANT_CLASSES = [];
 for (const variantValue in variant) {
-  ALL_VARIANT_CLASSES.push(CLASSNAME + '--' + variant[variantValue]);
+  ALL_VARIANT_CLASSES.push(`${CLASSNAME}--${variant[variantValue]}`);
 }
 // An array of all possible size classnames
 const ALL_SIZE_CLASSES = [];
 for (const sizeValue in size) {
-  ALL_SIZE_CLASSES.push(CLASSNAME + '--' + SIZE_CLASSES[size[sizeValue]]);
+  ALL_SIZE_CLASSES.push(`${CLASSNAME}--${SIZE_CLASSES[size[sizeValue]]}`);
 }
 
 /**
@@ -125,7 +125,7 @@ class Alert extends Component(HTMLElement) {
     
     this._elements.icon.icon = iconMap[this._variant];
     // Remove all variant classes
-    this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
+    this.classList.remove(...ALL_VARIANT_CLASSES);
 
     // Set new variant class
     // Don't use this._className; use the constant
@@ -134,7 +134,7 @@ class Alert extends Component(HTMLElement) {
     
     // Set the role attribute to alert or status depending on
     // the variant so that the element turns into a live region
-    this.setAttribute('role', (this._variant === variant.ERROR || this._variant === variant.WARNING) ? 'alert' : 'status');
+    this.setAttribute('role', this._variant === variant.ERROR || this._variant === variant.WARNING ? 'alert' : 'status');
   }
   
   /**
@@ -155,7 +155,7 @@ class Alert extends Component(HTMLElement) {
     this._reflectAttribute('size', this._size);
   
     // Remove all variant classes and adds the new one
-    this.classList.remove.apply(this.classList, ALL_SIZE_CLASSES);
+    this.classList.remove(...ALL_SIZE_CLASSES);
     this.classList.add(`${CLASSNAME}--${SIZE_CLASSES[this._size]}`);
   }
   
@@ -194,7 +194,7 @@ class Alert extends Component(HTMLElement) {
     this._setContentZone('content', value, {
       handle: 'content',
       tagName: 'coral-alert-content',
-      insert : function(content) {
+      insert: function(content) {
         // After the header
         this.insertBefore(content, this.header.nextElementSibling);
       }
@@ -215,7 +215,7 @@ class Alert extends Component(HTMLElement) {
     this._setContentZone('footer', value, {
       handle: 'footer',
       tagName: 'coral-alert-footer',
-      insert : function(footer) {
+      insert: function(footer) {
         // After the content
         this.insertBefore(footer, this.content.nextElementSibling);
       }
@@ -235,9 +235,8 @@ class Alert extends Component(HTMLElement) {
     }
   }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.content;}
-  set defaultContentZone(value) {this.content = value;}
+  get defaultContentZone() { return this.content; }
+  set defaultContentZone(value) { this.content = value; }
   get _contentZones() {
     return {
       'coral-alert-header': 'header',
@@ -247,10 +246,10 @@ class Alert extends Component(HTMLElement) {
   }
   
   // Expose enumerations
-  static get variant() {return variant;}
-  static get size() {return size;}
+  static get variant() { return variant; }
+  static get size() { return size; }
   
-  static get observedAttributes() {return ['variant', 'size'];}
+  static get observedAttributes() { return ['variant', 'size']; }
   
   connectedCallback() {
     super.connectedCallback();
@@ -258,8 +257,8 @@ class Alert extends Component(HTMLElement) {
     this.classList.add(CLASSNAME);
     
     // Default reflected attributes
-    if (!this._variant) {this.variant = variant.INFO;}
-    if (!this._size) {this.size = size.SMALL;}
+    if (!this._variant) { this.variant = variant.INFO; }
+    if (!this._size) { this.size = size.SMALL; }
     
     for (const contentZone in this._contentZones) {
       const element = this._elements[this._contentZones[contentZone]];
@@ -272,7 +271,7 @@ class Alert extends Component(HTMLElement) {
     while (this.firstChild) {
       const child = this.firstChild;
       if (child.nodeType === Node.TEXT_NODE ||
-        (child.nodeType === Node.ELEMENT_NODE && child.getAttribute('handle') !== 'icon')) {
+        child.nodeType === Node.ELEMENT_NODE && child.getAttribute('handle') !== 'icon') {
         // Add non-template elements to the content
         this._elements.content.appendChild(child);
       }
@@ -282,14 +281,14 @@ class Alert extends Component(HTMLElement) {
       }
     }
   
-    const icon = this.querySelector('coral-icon');
-    if (icon === null) {
+    const iconElement = this.querySelector('coral-icon');
+    if (iconElement === null) {
       // Create the icon and add the reference to _elements
       this.appendChild(this._elements.icon);
     }
     else {
       // Add the reference to _elements
-      this._elements.icon = icon;
+      this._elements.icon = iconElement;
     }
   
     // Assign the content zones so the insert functions will be called

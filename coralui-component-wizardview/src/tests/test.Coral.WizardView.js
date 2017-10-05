@@ -1,6 +1,4 @@
 describe('Coral.WizardView', function() {
-  'use strict';
-
   function testDefaultInstance(el) {
     expect(el.classList.contains('coral3-WizardView')).to.be.true;
   }

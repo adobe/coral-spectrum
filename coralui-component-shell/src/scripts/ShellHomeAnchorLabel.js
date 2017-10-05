@@ -21,10 +21,6 @@
  @htmltag coral-shell-homeanchor-label
  @extends HTMLElement
  */
-class ShellHomeAnchorLabel extends HTMLElement {
-  constructor() {
-    super();
-  }
-}
+class ShellHomeAnchorLabel extends HTMLElement {}
 
 export default ShellHomeAnchorLabel;

@@ -19,7 +19,8 @@ import Component from 'coralui-mixin-component';
 import getFirstSelectableWrappedItem from './getFirstSelectableWrappedItem';
 import ActionBarContainerCollection from './ActionBarContainerCollection';
 import ActionBarContainerMixin from './ActionBarContainerMixin';
-import {transform, commons, i18n} from 'coralui-util';
+import popoverContent from '../templates/popoverContent';
+import {transform, i18n} from 'coralui-util';
 
 const CLASSNAME = 'coral3-ActionBar-container';
 
@@ -162,9 +163,9 @@ class ActionBarContainer extends ActionBarContainerMixin(Component(HTMLElement))
     this._elements.popover.hidden = false;
     
     // render popover content
-    const popoverContent = this._elements.popover.content;
-    popoverContent.innerHTML = '';
-    popoverContent.appendChild(Coral.templates.ActionBar.popovercontent(this._itemsInPopover));
+    const content = this._elements.popover.content;
+    content.innerHTML = '';
+    content.appendChild(popoverContent.call(this._itemsInPopover));
     
     // focus first item (nextFrame needed as popover must be visible and initialized with items)
     const self = this;
@@ -223,7 +224,7 @@ class ActionBarContainer extends ActionBarContainerMixin(Component(HTMLElement))
     this._itemsInPopover = [];
     
     // we need to check if item has 'hasAttribute' because it is not present on the document
-    const isFocusedItemInsideActionBar = (this.parentNode !== focusedItem && this.parentNode.contains(focusedItem));
+    const isFocusedItemInsideActionBar = this.parentNode !== focusedItem && this.parentNode.contains(focusedItem);
     
     const isFocusedItemOffscreen = focusedItem.hasAttribute && focusedItem.hasAttribute('coral-actionbar-offscreen');
     if (isFocusedItemInsideActionBar && isFocusedItemOffscreen) {
@@ -281,7 +282,7 @@ class ActionBarContainer extends ActionBarContainerMixin(Component(HTMLElement))
   }
   
   // Expose enums
-  static get position() {return position;}
+  static get position() { return position; }
   
   connectedCallback() {
     super.connectedCallback();

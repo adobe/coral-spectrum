@@ -1,6 +1,4 @@
 describe('Coral.Search', function() {
-  'use strict';
-
   function testInstance(instance) {
     expect(instance.classList.contains('coral-DecoratedTextfield')).to.be.true;
     expect(instance.classList.contains('coral3-Search')).to.be.true;

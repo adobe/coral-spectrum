@@ -59,15 +59,16 @@ class TableHead extends TableSection(Component(HTMLTableSectionElement)) {
     this._sticky = transform.booleanAttr(value);
     this._reflectAttribute('sticky', this._sticky);
     
+    const self = this;
     // Delay execution for better performance
-    window.requestAnimationFrame(function() {
-      this.trigger('coral-table-head:_stickychanged');
-    }.bind(this));
+    window.requestAnimationFrame(() => {
+      self.trigger('coral-table-head:_stickychanged');
+    });
   }
   
   /** @private */
   _handleMutations(mutations) {
-    mutations.forEach(function(mutation) {
+    mutations.forEach((mutation) => {
       this.trigger('coral-table-head:_contentchanged', {
         addedNodes: mutation.addedNodes,
         removedNodes: mutation.removedNodes

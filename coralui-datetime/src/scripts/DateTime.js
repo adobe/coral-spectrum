@@ -34,7 +34,7 @@ const formatDate = function(date, locale, options) {
   let formattedDateString = '';
   try {
     const key = `${JSON.stringify(locale)}${JSON.stringify(options)}`;
-    let dateTimeFormat = dateTimeFormats[key];
+    const dateTimeFormat = dateTimeFormats[key];
   
     // Use existing DateTimeFormat or create new one
     if (!dateTimeFormat) {
@@ -73,39 +73,35 @@ class DateTime {
       if (Array.isArray(value)) {
         this._date = value.length ? new Date(value[0], value[1] || 0, value[2] || 1) : new Date();
       }
-      else {
-        if (typeof value === 'string') {
-          const isTime = value.indexOf(':') === 2;
-          
-          // For time, we only need to set hours and minutes using current date
-          if (isTime) {
-            const time = value.split(':');
-            const hours = parseInt(time[0]);
-            const minutes = parseInt(time[1]);
-            
-            if ((hours >= 0 && hours <= 23) && (minutes >= 0 && minutes <= 59)) {
-              this._date = new Date();
-              this._date.setHours(time[0]);
-              this._date.setMinutes(time[1]);
-            }
-            else {
-              this._date = new Date('Invalid Date');
-            }
+      else if (typeof value === 'string') {
+        const isTime = value.indexOf(':') === 2;
+  
+        // For time, we only need to set hours and minutes using current date
+        if (isTime) {
+          const time = value.split(':');
+          const hours = parseInt(time[0], 10);
+          const minutes = parseInt(time[1], 10);
+    
+          if (hours >= 0 && hours <= 23 && minutes >= 0 && minutes <= 59) {
+            this._date = new Date();
+            this._date.setHours(time[0]);
+            this._date.setMinutes(time[1]);
           }
           else {
-            // If string is invalid, the date will be invalid too
-            this._date = new Date(this._value);
+            this._date = new Date('Invalid Date');
           }
         }
         else {
-          if (this._value === null) {
-            this._date = new Date('Invalid Date');
-          }
-          else {
-            // Create a Date instance from the value or use current day if value is missing
-            this._date = this._value ? new Date(this._value) : new Date();
-          }
+          // If string is invalid, the date will be invalid too
+          this._date = new Date(this._value);
         }
+      }
+      else if (this._value === null) {
+        this._date = new Date('Invalid Date');
+      }
+      else {
+        // Create a Date instance from the value or use current day if value is missing
+        this._date = this._value ? new Date(this._value) : new Date();
       }
     }
   }
@@ -142,7 +138,7 @@ class DateTime {
     if (format === DEFAULT_FORMAT) {
       formattedDateString += this._date.getFullYear();
       formattedDateString += '-';
-      formattedDateString += transform2digit((this._date.getMonth() + 1));
+      formattedDateString += transform2digit(this._date.getMonth() + 1);
       formattedDateString += '-';
       formattedDateString += transform2digit(this._date.getDate());
     }
@@ -178,7 +174,7 @@ class DateTime {
     else if (format === 'YYYY-MM-DD[T]HH:mmZ') {
       formattedDateString += this._date.getFullYear();
       formattedDateString += '-';
-      formattedDateString += transform2digit((this._date.getMonth() + 1));
+      formattedDateString += transform2digit(this._date.getMonth() + 1);
       formattedDateString += '-';
       formattedDateString += transform2digit(this._date.getDate());
       
@@ -188,11 +184,11 @@ class DateTime {
       formattedDateString += ':';
       formattedDateString += transform2digit(this._date.getHours());
   
-      const timezone = -(this._date.getTimezoneOffset()/60);
+      const timezone = -1 * (this._date.getTimezoneOffset() / 60);
       let abs = Math.abs(timezone);
       abs = abs < 10 ? `0${abs}` : abs.toString();
       
-      formattedDateString += (timezone < 0 ? `-${abs}:00` : `+${abs}:00`);
+      formattedDateString += timezone < 0 ? `-${abs}:00` : `+${abs}:00`;
     }
     else {
       format = typeof format === 'object' ? format : {};
@@ -218,8 +214,8 @@ class DateTime {
     const date = new Date(Date.UTC(this._date.getFullYear(), this._date.getMonth(), this._date.getDate()));
     const dayNum = date.getUTCDay() || 7;
     date.setUTCDate(date.getUTCDate() + 4 - dayNum);
-    const yearStart = new Date(Date.UTC(date.getUTCFullYear(),0,1));
-    return Math.ceil((((date - yearStart) / 86400000) + 1)/7)
+    const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+    return Math.ceil(((date - yearStart) / 86400000 + 1) / 7);
   }
   
   // See https://momentjs.com/docs/#/get-set/day/
@@ -229,9 +225,8 @@ class DateTime {
       
       return this;
     }
-    else {
-      return this._date.getDay();
-    }
+    
+    return this._date.getDay();
   }
   
   // See https://momentjs.com/docs/#/get-set/hour/
@@ -241,9 +236,8 @@ class DateTime {
       
       return this;
     }
-    else {
-      return this._date.getHours();
-    }
+    
+    return this._date.getHours();
   }
   
   // See https://momentjs.com/docs/#/get-set/minute/
@@ -253,9 +247,8 @@ class DateTime {
   
       return this;
     }
-    else {
-      this._date.getMinutes();
-    }
+    
+    return this._date.getMinutes();
   }
   
   // See https://momentjs.com/docs/#/get-set/date/
@@ -317,9 +310,8 @@ class DateTime {
     if (date) {
       return date > this._date;
     }
-    else {
-      return false;
-    }
+    
+    return false;
   }
   
   // See https://momentjs.com/docs/#/query/is-after/
@@ -329,9 +321,8 @@ class DateTime {
     if (date) {
       return date < this._date;
     }
-    else {
-      return false;
-    }
+    
+    return false;
   }
   
   // See https://momentjs.com/docs/#/query/is-same/
@@ -345,9 +336,8 @@ class DateTime {
     else if (type === 'day') {
       return obj && obj.clone().startOf('day')._date.getTime() === this.clone().startOf('day')._date.getTime();
     }
-    else {
-      return obj && obj.clone()._date.getTime() === this.clone()._date.getTime();
-    }
+    
+    return obj && obj.clone()._date.getTime() === this.clone()._date.getTime();
   }
   
   // See https://momentjs.com/docs/#/parsing/is-valid/

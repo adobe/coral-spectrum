@@ -30,10 +30,6 @@ const CLASSNAME = 'coral-Table-foot';
  @extends Coral.mixin.tableSection
  */
 class TableFoot extends TableSection(Component(HTMLTableSectionElement)) {
-  constructor() {
-    super();
-  }
-  
   connectedCallback() {
     super.connectedCallback();
     

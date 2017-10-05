@@ -3,7 +3,6 @@ var helpers = helpers || {};
 helpers.overlay = {};
 
 helpers.overlay.createFloatingTarget = function() {
-  'use strict';
   var target = document.createElement('div');
   target.textContent = 'Floating overlay target';
   target.style.position = 'fixed';
@@ -17,7 +16,6 @@ helpers.overlay.createFloatingTarget = function() {
 };
 
 helpers.overlay.createStaticTarget = function() {
-  'use strict';
   var target = document.createElement('div');
   target.textContent = 'Static overlay target';
 

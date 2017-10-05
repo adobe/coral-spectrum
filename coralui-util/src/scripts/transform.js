@@ -28,10 +28,7 @@ const transform = {};
  
  @returns {Boolean} The corresponding boolean value.
  */
-transform.boolean = function(value) {
-  'use strict';
-  return !!value;
-};
+transform.boolean = (value) => !!value;
 
 /**
  Transform the provided value into a boolean. Follows the behavior of the HTML specification, in which the existence of
@@ -43,10 +40,7 @@ transform.boolean = function(value) {
  
  @returns {Boolean} The corresponding boolean value.
  */
-transform.booleanAttr = function(value) {
-  'use strict';
-  return typeof value === 'boolean' ? value : !(value === null || typeof value === 'undefined');
-};
+transform.booleanAttr = (value) => typeof value === 'boolean' ? value : !(value === null || typeof value === 'undefined');
 
 /**
  Transforms the provided value into a floating point number.
@@ -56,9 +50,7 @@ transform.booleanAttr = function(value) {
  
  @returns {?Number} The corresponding number or <code>null</code> if the passed value cannot be converted to a number.
  */
-transform.number = function(value) {
-  'use strict';
-  
+transform.number = (value) => {
   value = parseFloat(value);
   return isNaN(value) ? null : value;
 };
@@ -73,10 +65,8 @@ transform.number = function(value) {
  
  @retuns {?Number} The corresponding number or <code>null</code> if the passed value cannot be converted to number.
  */
-transform.float = function(value) {
-  'use strict';
-  
-  if (/^(\-|\+)?([0-9]+(\.[0-9]+)?|Infinity)$/.test(value)) {
+transform.float = (value) => {
+  if (/^(-|\+)?([0-9]+(\.[0-9]+)?|Infinity)$/.test(value)) {
     return Number(value);
   }
   
@@ -92,11 +82,11 @@ transform.float = function(value) {
  
  @returns {String} The corresponding string value.
  */
-transform.string = function(value) {
-  'use strict';
+transform.string = (value) => {
   if (value === null || typeof value === 'undefined') {
     return '';
   }
+  
   return typeof value === 'string' ? value : String(value);
 };
 

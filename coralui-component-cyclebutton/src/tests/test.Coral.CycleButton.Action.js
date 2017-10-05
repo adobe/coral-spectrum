@@ -1,6 +1,4 @@
 describe('Coral.CycleButton.Action', function() {
-  'use strict';
-
   var action;
 
   beforeEach(function() {

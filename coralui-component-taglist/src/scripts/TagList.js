@@ -17,6 +17,7 @@
 
 import Component from 'coralui-mixin-component';
 import FormField from 'coralui-mixin-formfield';
+import Tag from './Tag';
 import {Collection} from 'coralui-collection';
 import {transform, commons} from 'coralui-util';
 
@@ -78,20 +79,18 @@ class TagList extends FormField(Component(HTMLElement)) {
    @fires Coral.mixin.formField#change
    */
   get values() {
-    return this.items.getAll().map(function(item) {
-      return item.value;
-    });
+    return this.items.getAll().map((item) => item.value);
   }
   set values(values) {
     if (Array.isArray(values)) {
       this.items.clear();
       
       values.forEach((value) => {
-        const item = new Coral.Tag().set({
-          'label': {
+        const item = new Tag().set({
+          label: {
             innerHTML: value
           },
-          'value': value
+          value: value
         });
     
         this._attachInputToItem(item);
@@ -144,11 +143,11 @@ class TagList extends FormField(Component(HTMLElement)) {
     this.items.clear();
   
     if (value) {
-      const item = new Coral.Tag().set({
-        'label': {
+      const item = new Tag().set({
+        label: {
           innerHTML: value
         },
-        'value': value
+        value: value
       });
       
       this._attachInputToItem(item);
@@ -231,11 +230,13 @@ class TagList extends FormField(Component(HTMLElement)) {
     const items = self.items.getAll();
     
     // Prevents to add duplicates based on the tag value
-    const duplicate = items.some(function(tag) {
+    const duplicate = items.some((tag) => {
       if (itemValueFromDOM(tag) === itemValueFromDOM(attachedItem) && tag !== attachedItem) {
         (items.indexOf(tag) < items.indexOf(attachedItem) ? attachedItem : tag).remove();
         return true;
       }
+      
+      return false;
     });
     
     if (duplicate) {
@@ -295,7 +296,7 @@ class TagList extends FormField(Component(HTMLElement)) {
       tag.setAttribute('aria-selected', true);
       
       // add tabindex to first item and remove from previous focused item
-      this.items.getAll().forEach(function(item) {
+      this.items.getAll().forEach((item) => {
         if (item !== tag) {
           item.setAttribute('tabindex', '-1');
         }
@@ -389,9 +390,8 @@ class TagList extends FormField(Component(HTMLElement)) {
         this._itemToFocusAfterDelete = itemToFocusAfterDelete;
         return;
       }
-      else {
-        itemToFocusAfterDelete = itemToFocusAfterDelete.nextElementSibling;
-      }
+      
+      itemToFocusAfterDelete = itemToFocusAfterDelete.nextElementSibling;
     }
     
     itemToFocusAfterDelete = tag.previousElementSibling;
@@ -406,11 +406,12 @@ class TagList extends FormField(Component(HTMLElement)) {
       }
     }
     
-    window.requestAnimationFrame(function() {
-      if (tag.parentElement !== null && !this.contains(document.activeElement)) {
+    const self = this;
+    window.requestAnimationFrame(() => {
+      if (tag.parentElement !== null && !self.contains(document.activeElement)) {
         itemToFocusAfterDelete = undefined;
       }
-    }.bind(this));
+    });
   }
   
   // JSDoc inherited
@@ -462,9 +463,7 @@ class TagList extends FormField(Component(HTMLElement)) {
       self._initialValues = [self.getAttribute('value')];
     }
     else {
-      self._initialValues = self.items.getAll().map((item) => {
-        return itemValueFromDOM(item);
-      });
+      self._initialValues = self.items.getAll().map((item) => itemValueFromDOM(item));
     }
     
     // Prepare items

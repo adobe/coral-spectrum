@@ -241,11 +241,9 @@ class TableRow extends Component(HTMLTableRowElement) {
     if (orderable) {
       this._setHandle('coral-table-roworder');
     }
-    else {
-      // Remove DragAction instance
-      if (this.dragAction) {
-        this.dragAction.destroy();
-      }
+    // Remove DragAction instance
+    else if (this.dragAction) {
+      this.dragAction.destroy();
     }
   }
   
@@ -259,14 +257,14 @@ class TableRow extends Component(HTMLTableRowElement) {
   /** @private */
   _setHandle(handle) {
     // Specify handle directly on the row if none found
-    if (!this.querySelector('[' + handle + ']')) {
+    if (!this.querySelector(`[${handle}]`)) {
       this.setAttribute(handle, '');
     }
   }
   
   /** @private */
   _handleMutations(mutations) {
-    mutations.forEach(function(mutation) {
+    mutations.forEach((mutation) => {
       // Sync added nodes
       this.trigger('coral-table-row:_contentchanged', {
         addedNodes: mutation.addedNodes,

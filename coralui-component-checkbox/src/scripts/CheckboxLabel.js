@@ -21,10 +21,6 @@
  @htmltag coral-checkbox-label
  @extends HTMLElement
  */
-class CheckboxLabel extends HTMLElement {
-  constructor() {
-    super();
-  }
-}
+class CheckboxLabel extends HTMLElement {}
 
 export default CheckboxLabel;

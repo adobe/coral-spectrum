@@ -21,10 +21,6 @@
  @htmltag coral-popover-header
  @extends HTMLElement
  */
-class PopoverHeader extends HTMLElement {
-  constructor() {
-    super();
-  }
-}
+class PopoverHeader extends HTMLElement {}
 
 export default PopoverHeader;

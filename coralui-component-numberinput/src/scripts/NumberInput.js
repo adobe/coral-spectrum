@@ -36,8 +36,8 @@ function handleDecimalOperation(operator, value1, value2) {
   if (value1 % 1 !== 0 || value2 % 1 !== 0) {
     const value1Decimal = value1.toString().split('.');
     const value2Decimal = value2.toString().split('.');
-    const value1DecimalLength = (value1Decimal[1] && value1Decimal[1].length) || 0;
-    const value2DecimalLength = (value2Decimal[1] && value2Decimal[1].length) || 0;
+    const value1DecimalLength = value1Decimal[1] && value1Decimal[1].length || 0;
+    const value2DecimalLength = value2Decimal[1] && value2Decimal[1].length || 0;
     const multiplier = Math.pow(10, Math.max(value1DecimalLength, value2DecimalLength));
     
     // Transform the decimals to integers based on the multiplier
@@ -119,7 +119,8 @@ class NumberInput extends FormField(Component(HTMLElement)) {
     if (flagStepButtonClick || !!window.chrome) {
       this._updateLiveRegion(this.value);
       // Otherwise, clear the live region.
-    } else {
+    }
+    else {
       this._updateLiveRegion();
     }
   
@@ -234,7 +235,7 @@ class NumberInput extends FormField(Component(HTMLElement)) {
     return this._step || 1;
   }
   set step(value) {
-    if (value !== null && (value > 0 || value === 'any' )) {
+    if (value !== null && (value > 0 || value === 'any')) {
       this._step = value === 'any' ? value : transform.number(value);
       this._reflectAttribute('step', this._step);
   
@@ -319,7 +320,7 @@ class NumberInput extends FormField(Component(HTMLElement)) {
    @htmlattributereflected
    @memberof Coral.NumberInput#
    */
-  get placeholder(){
+  get placeholder() {
     return this._elements.input.placeholder || '';
   }
   set placeholder(value) {
@@ -407,8 +408,8 @@ class NumberInput extends FormField(Component(HTMLElement)) {
    @ignore
    */
   _setButtonState() {
-    this._elements.stepUp.disabled = this.disabled || (this.max !== null && this.value >= this.max) || this.readOnly;
-    this._elements.stepDown.disabled = this.disabled || (this.min !== null && this.value <= this.min) || this.readOnly;
+    this._elements.stepUp.disabled = this.disabled || this.max !== null && this.value >= this.max || this.readOnly;
+    this._elements.stepDown.disabled = this.disabled || this.min !== null && this.value <= this.min || this.readOnly;
   }
   
   /**
@@ -437,9 +438,7 @@ class NumberInput extends FormField(Component(HTMLElement)) {
    @ignore
    */
   _onTouchStart(event) {
-    if (event.type === 'touchstart' ||
-      (event.pointerType !== 'mouse' &&
-      event.pointerType !== MSPOINTER_TYPE_MOUSE)) {
+    if (event.type === 'touchstart' || event.pointerType !== 'mouse' && event.pointerType !== MSPOINTER_TYPE_MOUSE) {
       flagTouchStart = true;
     }
   }
@@ -622,7 +621,7 @@ class NumberInput extends FormField(Component(HTMLElement)) {
     // stores the old value to calculate the change
     const oldValue = this.value;
     
-    const delta = Math.max(-1, Math.min(1, (event.wheelDelta || -event.detail || event.deltaY)));
+    const delta = Math.max(-1, Math.min(1, event.wheelDelta || -event.detail || event.deltaY));
     if (delta < 0) {
       this.stepDown();
     }
@@ -660,7 +659,7 @@ class NumberInput extends FormField(Component(HTMLElement)) {
    
    @ignore
    */
-  _onFocus(event) {
+  _onFocus() {
     this.classList.add('is-focused');
     this._elements.input.classList.add('is-focused');
     this._elements.liveregion.removeAttribute('role');
@@ -672,7 +671,7 @@ class NumberInput extends FormField(Component(HTMLElement)) {
    
    @ignore
    */
-  _onBlur(event) {
+  _onBlur() {
     this.classList.remove('is-focused');
     this._elements.input.classList.remove('is-focused');
     
@@ -710,7 +709,7 @@ class NumberInput extends FormField(Component(HTMLElement)) {
     
     if (value && value !== '') {
       textNode = document.createTextNode(value);
-      window.requestAnimationFrame(function() {
+      window.requestAnimationFrame(() => {
         self._elements.liveregion.appendChild(textNode);
         clearLiveRegionTimeout = setTimeout(self._clearLiveRegion.bind(self),
           LIVEREGION_TIMEOUT_DELAY);
@@ -734,7 +733,7 @@ class NumberInput extends FormField(Component(HTMLElement)) {
     this.classList.add('coral-InputGroup');
 
     // Default reflected attributes
-    if (!this._step) {this.step = 1;}
+    if (!this._step) { this.step = 1; }
   
     // a11y
     this.setAttribute('role', 'group');
@@ -758,7 +757,7 @@ class NumberInput extends FormField(Component(HTMLElement)) {
     while (this.firstChild) {
       const child = this.firstChild;
       if (child.nodeType === Node.TEXT_NODE ||
-        (child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1)) {
+        child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
         // Add non-template elements to the frag
         frag.appendChild(child);
       }

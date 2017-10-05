@@ -21,10 +21,6 @@
  @htmltag coral-columnview-preview-label
  @extends HTMLElement
  */
-class ColumnViewPreviewLabel extends HTMLElement {
-  constructor() {
-    super();
-  }
-}
+class ColumnViewPreviewLabel extends HTMLElement {}
 
 export default ColumnViewPreviewLabel;

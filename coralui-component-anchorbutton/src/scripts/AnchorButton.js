@@ -37,8 +37,8 @@ class AnchorButton extends ButtonMixin(Component(HTMLAnchorElement)) {
     
     // Events
     this._delegateEvents(commons.extend(this._events, {
-      'keydown': '_onKeyDown',
-      'keyup': '_onKeyUp'
+      keydown: '_onKeyDown',
+      keyup: '_onKeyUp'
     }));
     
     // cannot use the events hash because events on disabled items are not reported
@@ -96,7 +96,7 @@ class AnchorButton extends ButtonMixin(Component(HTMLAnchorElement)) {
   }
   
   // Override content zone name
-  get _contentZones() {return {'coral-anchorbutton-label': 'label'};}
+  get _contentZones() { return {'coral-anchorbutton-label': 'label'}; }
   
   static get observedAttributes() {
     return super.observedAttributes.concat(['disabled']);

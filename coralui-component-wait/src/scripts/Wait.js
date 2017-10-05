@@ -50,8 +50,8 @@ const CLASSNAME = 'coral3-Wait';
 // builds a string containing all possible variant classnames. this will be used to remove classnames when the variant
 // changes
 const ALL_VARIANT_CLASSES = [];
-for (let variantValue in variant) {
-  ALL_VARIANT_CLASSES.push(CLASSNAME + '--' + variant[variantValue]);
+for (const variantValue in variant) {
+  ALL_VARIANT_CLASSES.push(`${CLASSNAME}--${variant[variantValue]}`);
 }
 
 
@@ -63,10 +63,6 @@ for (let variantValue in variant) {
  @extends Coral.mixin.component
  */
 class Wait extends Component(HTMLElement) {
-  constructor() {
-    super();
-  }
-  
   /**
    The size of the wait indicator. Currently 'S' (the default), 'M' and 'L' are available.
    See {@link Coral.Wait.size}
@@ -127,7 +123,7 @@ class Wait extends Component(HTMLElement) {
     this._reflectAttribute('variant', this._variant);
 
     // removes every existing variant
-    this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
+    this.classList.remove(...ALL_VARIANT_CLASSES);
 
     if (this._variant !== variant.DEFAULT) {
       this.classList.add(`${CLASSNAME}--${this._variant}`);
@@ -135,8 +131,8 @@ class Wait extends Component(HTMLElement) {
   }
   
   // expose enumerations
-  static get size() {return size;}
-  static get variant() {return variant;}
+  static get size() { return size; }
+  static get variant() { return variant; }
   
   static get observedAttributes() {
     return ['size', 'centered', 'variant'];
@@ -146,8 +142,8 @@ class Wait extends Component(HTMLElement) {
     super.connectedCallback();
   
     // Default reflected attributes
-    if (!this._size) {this.size = size.SMALL;}
-    if (!this._variant) {this.variant = variant.DEFAULT;}
+    if (!this._size) { this.size = size.SMALL; }
+    if (!this._variant) { this.variant = variant.DEFAULT; }
     
     this.classList.add(CLASSNAME);
   }

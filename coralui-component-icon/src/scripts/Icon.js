@@ -68,7 +68,7 @@ const CLASSNAME = 'coral-Icon';
 // builds an array containing all possible size classnames. this will be used to remove classnames when the size
 // changes
 const ALL_SIZE_CLASSES = [];
-for (let sizeValue in size) {
+for (const sizeValue in size) {
   ALL_SIZE_CLASSES.push(`${CLASSNAME}--size${size[sizeValue]}`);
 }
 
@@ -149,7 +149,7 @@ class Icon extends Component(HTMLElement) {
     this._reflectAttribute('size', this._size);
     
     // removes all the existing sizes
-    this.classList.remove.apply(this.classList, ALL_SIZE_CLASSES);
+    this.classList.remove(...ALL_SIZE_CLASSES);
     // adds the new size
     this.classList.add(`${CLASSNAME}--size${this._size}`);
     
@@ -157,10 +157,10 @@ class Icon extends Component(HTMLElement) {
   }
   
   // private
-  get title() {return this.getAttribute('title');}
-  set title(value) {this.setAttribute('title', value);}
-  get alt() {return this.getAttribute('alt');}
-  set alt(value) {this.setAttribute('alt', value);}
+  get title() { return this.getAttribute('title'); }
+  set title(value) { this.setAttribute('title', value); }
+  get alt() { return this.getAttribute('alt'); }
+  set alt(value) { this.setAttribute('alt', value); }
   
   /**
    Updates the aria-label or img alt attribute depending on value of alt, title or icon.
@@ -174,12 +174,21 @@ class Icon extends Component(HTMLElement) {
   _updateAltText(value) {
     const isImage = this.classList.contains('is-image');
     
-    const altText = typeof value === 'string' ? value : (isImage ? '' : this.icon.replace(SPLIT_CAMELCASE_REGEX, '$1 $2').toLowerCase());
+    let altText;
+    if (typeof value === 'string') {
+      altText = value;
+    }
+    else if (isImage) {
+      altText = '';
+    }
+    else {
+      altText = this.icon.replace(SPLIT_CAMELCASE_REGEX, '$1 $2').toLowerCase();
+    }
   
     // If no other role has been set, provide the appropriate
     // role depending on whether or not the icon is an arbitrary image URL.
     const role = this.getAttribute('role');
-    const roleOverride = (role && (role !== 'presentation' && role !== 'img'));
+    const roleOverride = role && (role !== 'presentation' && role !== 'img');
     if (!roleOverride) {
       this.setAttribute('role', isImage ? 'presentation' : 'img');
     }
@@ -201,7 +210,7 @@ class Icon extends Component(HTMLElement) {
   }
   
   // expose enumerations
-  static get size() {return size;}
+  static get size() { return size; }
   
   static get observedAttributes() {
     return ['icon', 'size', 'alt', 'title'];

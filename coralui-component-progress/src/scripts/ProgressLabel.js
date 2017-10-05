@@ -25,10 +25,6 @@ const CLASSNAME = 'coral3-Progress-label';
  @private
  */
 class ProgressLabel extends HTMLElement {
-  constructor() {
-    super();
-  }
-  
   connectedCallback() {
     this.classList.add(CLASSNAME);
   }

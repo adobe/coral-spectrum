@@ -1,6 +1,4 @@
 describe('Coral.Drawer', function () {
-  'use strict';
-  
   describe('Namespace', function() {
     it('should be defined', function() {
       expect(Coral).to.have.property('Drawer');
@@ -78,8 +76,8 @@ describe('Coral.Drawer', function () {
         drawer.open = true;
     
         expect(drawer.getAttribute('aria-expanded')).to.equal('true');
-        // Transition needs an extra frame to complete
-        helpers.next(function() {
+        // Transition happens in the next task
+        window.setTimeout(function() {
           expect(drawer._elements.slider.style.height).to.not.equal('0px');
           done();
         });
@@ -90,8 +88,8 @@ describe('Coral.Drawer', function () {
         drawer.open = false;
     
         expect(drawer.getAttribute('aria-expanded')).to.equal('false');
-        // Transition needs an extra frame to complete
-        helpers.next(function() {
+        // Transition happens in the next task
+        window.setTimeout(function() {
           expect(drawer._elements.slider.style.height).to.equal('0px');
           done();
         });

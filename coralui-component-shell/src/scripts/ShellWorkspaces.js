@@ -154,7 +154,7 @@ class ShellWorkspaces extends Component(HTMLElement) {
     const target = event.target;
     const listItem = event.matchedTarget;
   
-    const isAtTarget = (target === listItem);
+    const isAtTarget = target === listItem;
   
     if (isAtTarget) {
       // Don't let arrow keys etc scroll the page

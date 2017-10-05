@@ -33,7 +33,9 @@ class ShellWorkspace extends Component(HTMLAnchorElement) {
     super();
     
     // Events
-    this._delegateEvents({'click': '_onClick'});
+    this._delegateEvents({
+      click: '_onClick'
+    });
   }
   
   /**
@@ -65,7 +67,7 @@ class ShellWorkspace extends Component(HTMLAnchorElement) {
     }
   }
   
-  static get observedAttributes() {return ['selected'];}
+  static get observedAttributes() { return ['selected']; }
   
   connectedCallback() {
     super.connectedCallback();

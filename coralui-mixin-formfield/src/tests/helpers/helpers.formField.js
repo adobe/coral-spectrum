@@ -9,8 +9,6 @@ var LABELLABLE_ELEMENTS_SELECTOR = 'button,input:not([type=hidden]),keygen,meter
  The form element that contains the submittable elements
  */
 helpers.serializeArray = function(form) {
-  'use strict';
-  
   var arr = [];
   
   if (form && form.tagName !== 'FORM') {
@@ -57,8 +55,6 @@ helpers.serializeArray = function(form) {
  Default value of the component. If not provided empty string is used.
  */
 helpers.testFormField = function(markup, options) {
-  'use strict';
-  
   // sets the default to empty string since this is the normal value
   options.default = options.default || '';
   

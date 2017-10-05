@@ -173,9 +173,8 @@ class ShellUser extends Component(HTMLElement) {
     });
   }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.content;}
-  set defaultContentZone(value) {this.content = value;}
+  get defaultContentZone() { return this.content; }
+  set defaultContentZone(value) { this.content = value; }
   get _contentZones() {
     return {
       'coral-shell-user-name': 'name',
@@ -186,10 +185,10 @@ class ShellUser extends Component(HTMLElement) {
     };
   }
   
-  static get observedAttributes() {return ['avatar'];}
+  static get observedAttributes() { return ['avatar']; }
   
   // Expose enums
-  static get avatar() {return avatar;}
+  static get avatar() { return avatar; }
   
   connectedCallback() {
     super.connectedCallback();
@@ -212,7 +211,7 @@ class ShellUser extends Component(HTMLElement) {
     while (this.firstChild) {
       const child = this.firstChild;
       if (child.nodeType === Node.TEXT_NODE ||
-        (child.nodeType === Node.ELEMENT_NODE && child.getAttribute('handle') !== 'container')) {
+        child.nodeType === Node.ELEMENT_NODE && child.getAttribute('handle') !== 'container') {
         // Add non-template elements to the content
         this._elements.content.appendChild(child);
       }

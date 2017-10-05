@@ -21,10 +21,6 @@
  @htmltag coral-dialog-header
  @extends HTMLElement
  */
-class DialogHeader extends HTMLElement {
-  constructor() {
-    super();
-  }
-}
+class DialogHeader extends HTMLElement {}
 
 export default DialogHeader;

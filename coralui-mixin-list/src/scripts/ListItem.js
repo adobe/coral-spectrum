@@ -96,12 +96,11 @@ const ListItem = (superClass) => class extends superClass {
     this._elements.icon.hidden = this._elements.icon.icon === '';
   }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.content;}
-  set defaultContentZone(value) {this.content = value;}
-  get _contentZones() {return {'coral-list-item-content': 'content'};}
+  get defaultContentZone() { return this.content; }
+  set defaultContentZone(value) { this.content = value; }
+  get _contentZones() { return {'coral-list-item-content': 'content'}; }
 
-  static get observedAttributes() {return ['disabled', 'icon'];}
+  static get observedAttributes() { return ['disabled', 'icon']; }
   
   connectedCallback() {
     super.connectedCallback();
@@ -112,7 +111,7 @@ const ListItem = (superClass) => class extends superClass {
     // This is also used for event delegation
     this.setAttribute('coral-list-item', '');
   
-    // Create a temporary fragment
+    // Create a fragment
     const fragment = document.createDocumentFragment();
   
     // Render the template
@@ -123,9 +122,7 @@ const ListItem = (superClass) => class extends superClass {
     const content = this._elements.content;
   
     // Cleanup template elements (supporting cloneNode)
-    Array.prototype.filter.call(this.children, function(child) {
-      return (child.hasAttribute('handle'));
-    }).forEach((handleItem) => {
+    Array.prototype.filter.call(this.children, (child) => child.hasAttribute('handle')).forEach((handleItem) => {
       this.removeChild(handleItem);
     }, this);
   

@@ -24,6 +24,19 @@ const CLASSNAME = 'coral3-Popover';
 const OFFSET = 5;
 
 /**
+ Map of variant -> icon class names
+ 
+ @ignore
+ */
+const ICON_CLASSES = {
+  error: 'alert',
+  warning: 'alert',
+  success: 'checkCircle',
+  help: 'helpCircle',
+  info: 'infoCircle'
+};
+
+/**
  Boolean enumeration for popover closable state.
  
  @memberof Coral.Popover
@@ -173,7 +186,7 @@ class Popover extends Overlay {
     this._reflectAttribute('variant', this._variant);
     
     // Remove all variant classes
-    this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
+    this.classList.remove(...ALL_VARIANT_CLASSES);
     
     if (this._variant === variant.DEFAULT) {
       this._elements.icon.icon = '';
@@ -260,9 +273,12 @@ class Popover extends Overlay {
     if (this._headerObserver) {
       this._headerObserver.disconnect();
       this._headerObserver.observe(this._elements.header, {
-        childList: true, // Catch changes to childList
-        characterData: true, // Catch changes to textContent
-        subtree: true // Monitor any child node
+        // Catch changes to childList
+        childList: true,
+        // Catch changes to textContent
+        characterData: true,
+        // Monitor any child node
+        subtree: true
       });
     }
   }
@@ -339,9 +355,8 @@ class Popover extends Overlay {
     }
   }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.content;}
-  set defaultContentZone(value) {this.content = value;}
+  get defaultContentZone() { return this.content; }
+  set defaultContentZone(value) { this.content = value; }
   get _contentZones() {
     return {
       'coral-popover-header': 'header',
@@ -350,8 +365,8 @@ class Popover extends Overlay {
   }
   
   // Expose enumerations
-  static get variant() {return variant;}
-  static get closable() {return closable;}
+  static get variant() { return variant; }
+  static get closable() { return closable; }
   
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -366,15 +381,16 @@ class Popover extends Overlay {
     
     // ARIA
     this.setAttribute('role', 'dialog');
-    this.setAttribute('aria-live', 'assertive'); // This helped annoucements in certian screen readers
+    // This helped announcements in certain screen readers
+    this.setAttribute('aria-live', 'assertive');
     
     // Default reflected attributes
-    if (!this._variant) {this.variant = variant.DEFAULT;}
-    if (!this._closable) {this.closable = closable.OFF;}
+    if (!this._variant) { this.variant = variant.DEFAULT; }
+    if (!this._closable) { this.closable = closable.OFF; }
   
     const templateHandleNames = ['headerWrapper', 'contentWrapper'];
   
-    // Create a temporary fragment
+    // Create a fragment
     const frag = document.createDocumentFragment();
     
     // Render the main template
@@ -386,13 +402,11 @@ class Popover extends Overlay {
     const content = this._elements.content;
     
     // Remove content zones so we can process children
-    if (header.parentNode) {header.remove();}
-    if (content.parentNode) {content.remove();}
+    if (header.parentNode) { header.remove(); }
+    if (content.parentNode) { content.remove(); }
   
     // Remove tab captures
-    Array.prototype.filter.call(this.children, function(child) {
-      return (child.hasAttribute('coral-tabcapture'));
-    }).forEach((tabCapture) => {
+    Array.prototype.filter.call(this.children, (child) => child.hasAttribute('coral-tabcapture')).forEach((tabCapture) => {
       this.removeChild(tabCapture);
     }, this);
   

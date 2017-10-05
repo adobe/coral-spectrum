@@ -29,10 +29,6 @@ import {getFirstRowFilledColumns} from './MasonryLayoutUtil';
  @extends Coral.Masonry.ColumnLayout
  */
 class MasonryFixedSpreadLayout extends MasonryColumnLayout {
-  constructor(masonry) {
-    super(masonry);
-  }
-  
   /** @inheritdoc */
   _writeStyles(items) {
     const columns = this._columns;

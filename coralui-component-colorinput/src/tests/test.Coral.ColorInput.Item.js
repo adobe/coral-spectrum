@@ -1,6 +1,4 @@
 describe('Coral.ColorInput.Item', function() {
-  'use strict';
-
   describe('Namespace', function() {
     it('should be defined', function() {
       expect(Coral.ColorInput).to.have.property('Item');

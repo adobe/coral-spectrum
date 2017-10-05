@@ -143,8 +143,8 @@ class WizardView extends Component(HTMLElement) {
     this._selectStep(index);
     
     this.trigger('coral-wizardview:change', {
-      'selection': event.detail.selection,
-      'oldSelection': event.detail.oldSelection
+      selection: event.detail.selection,
+      oldSelection: event.detail.oldSelection
     });
   }
   
@@ -196,16 +196,14 @@ class WizardView extends Component(HTMLElement) {
       // Get the corresponding item
       item = component.items.getAll()[index];
     }
-    else {
-      // Resort to querying manually on immediately children
-      if (component.tagName === 'CORAL-STEPLIST') {
-        // @polyfill IE - we use id since :scope is not supported
-        item = component.querySelectorAll('#' + component.id + ' > coral-step')[index];
-      }
-      else if (component.tagName === 'CORAL-PANELSTACK') {
-        // @polyfill IE - we use id since :scope is not supported
-        item = component.querySelectorAll('#' + component.id + ' > coral-panel')[index];
-      }
+    // Resort to querying manually on immediately children
+    else if (component.tagName === 'CORAL-STEPLIST') {
+      // @polyfill IE - we use id since :scope is not supported
+      item = component.querySelectorAll(`#${component.id} > coral-step`)[index];
+    }
+    else if (component.tagName === 'CORAL-PANELSTACK') {
+      // @polyfill IE - we use id since :scope is not supported
+      item = component.querySelectorAll(`#${component.id} > coral-panel`)[index];
     }
     
     if (item) {
@@ -220,11 +218,11 @@ class WizardView extends Component(HTMLElement) {
       // we use the component id to be able to find direct children
       if (component.tagName === 'CORAL-STEPLIST') {
         // @polyfill IE - we use id since :scope is not supported
-        item = component.querySelector('#' + component.id + ' > coral-step[selected]');
+        item = component.querySelector(`#${component.id} > coral-step[selected]`);
       }
       else if (component.tagName === 'CORAL-PANELSTACK') {
         // @polyfill IE - we use id since :scope is not supported
-        item = component.querySelector('#' + component.id + ' > coral-panel[selected]');
+        item = component.querySelector(`#${component.id} > coral-panel[selected]`);
       }
       
       if (item) {
@@ -236,12 +234,12 @@ class WizardView extends Component(HTMLElement) {
   /** @private */
   _selectStep(index) {
     // we apply the selection to all available steplists
-    this.stepLists.getAll().forEach(function(stepList) {
+    this.stepLists.getAll().forEach((stepList) => {
       this._selectItemByIndex(stepList, index);
     }, this);
     
     // we apply the selection to all available panelstacks
-    this.panelStacks.getAll().forEach(function(panelStack) {
+    this.panelStacks.getAll().forEach((panelStack) => {
       this._selectItemByIndex(panelStack, index);
     }, this);
   }
@@ -265,7 +263,7 @@ class WizardView extends Component(HTMLElement) {
       }
     }
     
-    this.panelStacks.getAll().forEach(function(panelStack) {
+    this.panelStacks.getAll().forEach((panelStack) => {
       this._selectItemByIndex(panelStack, index);
     }, this);
   }
@@ -289,7 +287,7 @@ class WizardView extends Component(HTMLElement) {
       }
     }
     
-    this.stepLists.getAll().forEach(function(stepList) {
+    this.stepLists.getAll().forEach((stepList) => {
       this._selectItemByIndex(stepList, index);
     }, this);
   }

@@ -1,6 +1,4 @@
 describe('Coral.ColumnView', function() {
-  'use strict';
-
   // handles the loading and annotating of the columns so that content can be loaded remotely
   var onLoadEvent = function(event) {
     var cv = event.target;

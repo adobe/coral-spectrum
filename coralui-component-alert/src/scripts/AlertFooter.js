@@ -24,10 +24,6 @@ const CLASSNAME = 'coral3-Alert-footer';
  @extends HTMLElement
  */
 class AlertFooter extends HTMLElement {
-  constructor() {
-    super();
-  }
-  
   connectedCallback() {
     this.classList.add(CLASSNAME);
   }

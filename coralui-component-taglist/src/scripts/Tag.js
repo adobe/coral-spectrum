@@ -65,9 +65,9 @@ const color = {
 
 // size mappings
 const SIZE_CLASSES = {
-  'S': 'small',
-  'M': 'medium',
-  'L': 'large'
+  S: 'small',
+  M: 'medium',
+  L: 'large'
 };
 
 // builds a string containing all possible size classnames. this will be used to remove classnames when the size
@@ -91,7 +91,7 @@ const MULTILINE_CLASSNAME = `${CLASSNAME}--multiline`;
 let bullsEye = null;
 
 // Utility method to detect center point of an element.
-const getOffsetCenter = function(element) {
+const getOffsetCenter = (element) => {
   const rect = element.getBoundingClientRect();
   const body = document.body;
   const documentElement = document.documentElement;
@@ -254,7 +254,7 @@ class Tag extends Component(HTMLElement) {
     this._size = validate.enumeration(size)(value) && value || size.LARGE;
     this._reflectAttribute('size', this._size);
   
-    this.classList.remove.apply(this.classList, ALL_SIZE_CLASSES);
+    this.classList.remove(...ALL_SIZE_CLASSES);
     this.classList.add(`${CLASSNAME}--${SIZE_CLASSES[this._size]}`);
   }
   
@@ -275,9 +275,9 @@ class Tag extends Component(HTMLElement) {
     this._reflectAttribute('color', this._color);
   
     // removes every existing color
-    this.classList.remove.apply(this.classList, ALL_COLOR_CLASSES);
+    this.classList.remove(...ALL_COLOR_CLASSES);
 
-    if (this.color !== Coral.Tag.color.DEFAULT) {
+    if (this.color !== color.DEFAULT) {
       this.classList.add(`${CLASSNAME}--${this._color}`);
     }
   }
@@ -310,7 +310,7 @@ class Tag extends Component(HTMLElement) {
       this._elements.button.contains(event.target) ||
       bullsEye !== null ||
       /* Detects virtual cursor or Narrator on Windows */
-      (event.clientX <= 0 && event.clientY <= 0)) {
+      event.clientX <= 0 && event.clientY <= 0) {
       this._onRemoveButtonClick(event);
       bullsEye = null;
     }
@@ -393,14 +393,13 @@ class Tag extends Component(HTMLElement) {
     }
   }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.label;}
-  set defaultContentZone(value) {this.label = value;}
-  get _contentZones() {return {'coral-tag-label': 'label'};}
+  get defaultContentZone() { return this.label; }
+  set defaultContentZone(value) { this.label = value; }
+  get _contentZones() { return {'coral-tag-label': 'label'}; }
   
   // expose enumerations
-  static get size() {return size;}
-  static get color() {return color;}
+  static get size() { return size; }
+  static get color() { return color; }
   
   static get observedAttributes() {
     return [
@@ -430,10 +429,10 @@ class Tag extends Component(HTMLElement) {
     this.classList.add(CLASSNAME);
   
     // Default reflected attributes
-    if (!this._size) {this.size = size.LARGE;}
-    if (!this._color) {this.color = color.DEFAULT;}
+    if (!this._size) { this.size = size.LARGE; }
+    if (!this._color) { this.color = color.DEFAULT; }
   
-    // Create a temporary fragment
+    // Create a fragment
     const fragment = document.createDocumentFragment();
   
     const templateHandleNames = ['input', 'button'];

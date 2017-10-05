@@ -1,6 +1,4 @@
 describe('Coral.FileUpload.Item', function() {
-  'use strict';
-
   //Fake file
   var file = {
     name: 'file.png',

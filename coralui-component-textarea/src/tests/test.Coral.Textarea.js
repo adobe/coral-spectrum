@@ -1,6 +1,4 @@
 describe('Coral.Textarea', function() {
-  'use strict';
-
   describe('Namespace', function() {
     it('should be defined', function() {
       expect(Coral).to.have.property('Textarea');

@@ -22,7 +22,7 @@ import 'coralui-component-button';
 import calendar from '../templates/calendar';
 import container from '../templates/container';
 import table from '../templates/table';
-import {transform, commons, i18n} from 'coralui-util';
+import {transform, commons, i18n, Keys} from 'coralui-util';
 
 /** @ignore */
 function isDateInRange(date, startDate, endDate) {
@@ -39,9 +39,8 @@ function isDateInRange(date, startDate, endDate) {
   else if (endDate === null) {
     return date.toDate() >= startDate;
   }
-  else {
-    return startDate <= date.toDate() && date.toDate() <= endDate;
-  }
+  
+  return startDate <= date.toDate() && date.toDate() <= endDate;
 }
 
 /** @ignore */
@@ -52,11 +51,10 @@ function toMoment(value, format) {
   else if (DateTime.Moment.isMoment(value)) {
     return value.isValid() ? value.clone() : null;
   }
-  else {
-    // if the value provided is a date it does not make sense to provide a format to parse the date
-    const result = new DateTime.Moment(value, value instanceof Date ? null : format);
-    return result.isValid() ? result.startOf('day') : null;
-  }
+  
+  // if the value provided is a date it does not make sense to provide a format to parse the date
+  const result = new DateTime.Moment(value, value instanceof Date ? null : format);
+  return result.isValid() ? result.startOf('day') : null;
 }
 
 /** @ignore */
@@ -65,7 +63,7 @@ function validateAsChangedAndValidMoment(newValue, oldValue) {
   newValue = newValue || null;
   oldValue = oldValue || null;
   
-  if (newValue !== oldValue && !(new DateTime.Moment(newValue).isSame(oldValue, 'day'))) {
+  if (newValue !== oldValue && !new DateTime.Moment(newValue).isSame(oldValue, 'day')) {
     return newValue === null || newValue.isValid();
   }
   
@@ -80,31 +78,31 @@ function validateAsChangedAndValidMoment(newValue, oldValue) {
 function TableAnimator(host) {
   this.host = host;
   
-  this._addContainerIfNotPresent = function(width, height) {
+  this._addContainerIfNotPresent = (width, height) => {
     if (!this.container) {
       // Get a fresh container for the animation:
       container.call(
         this,
         {
-          width: width,
-          height: height
+          width,
+          height
         }
       );
       this.host.appendChild(this.container);
     }
   };
   
-  this._removeContainerIfEmpty = function() {
+  this._removeContainerIfEmpty = () => {
     if (this.container && this.container.children.length === 0) {
       this.host.removeChild(this.container);
       this.container = null;
     }
   };
   
-  this.slide = function(newTable, direction) {
+  this.slide = (newTable, direction) => {
+    const self = this;
     const replace = direction === undefined;
     const isLeft = direction === 'left';
-    
     const oldTable = this.oldTable;
     
     // Should the replace flag be raised, or no old table be present, then do a non-transitioned (re)place and exit
@@ -129,30 +127,30 @@ function TableAnimator(host) {
     // Set the existing table to start from being in full view, and mark it to transition on `left` changing
     oldTable.classList.add('coral3-Calendar-table--transit');
     
-    commons.transitionEnd(oldTable, function() {
+    commons.transitionEnd(oldTable, () => {
       oldTable.parentNode.removeChild(oldTable);
-      this._removeContainerIfEmpty();
-    }.bind(this));
+      self._removeContainerIfEmpty();
+    });
     
     // Set the new table to start out of view (either left or right depending on the direction of the slide), and mark
     // it to transition on `left` changing
     newTable.classList.add('coral3-Calendar-table--transit');
-    newTable.style.left = (isLeft ? width : -width) + 'px';
+    newTable.style.left = `${isLeft ? width : -width}px`;
     
     // When the transition is done, have the transition class lifted
-    commons.transitionEnd(newTable, function() {
+    commons.transitionEnd(newTable, () => {
       newTable.classList.remove('coral3-Calendar-table--transit');
-      this.host.appendChild(newTable);
-      this._removeContainerIfEmpty();
-    }.bind(this));
+      self.host.appendChild(newTable);
+      self._removeContainerIfEmpty();
+    });
     
     // Force a redraw by querying the browser for its offsetWidth. Without this, the re-positioning code later on
     // would not lead to a transition. Note that there's no significance to the resulting value being assigned to
-    // 'height' -- this is merely so to keep jshint from complaining
+    // 'height'
     height = this.container.offsetWidth;
     
     // Set the `left` positions to transition to:
-    oldTable.style.left = (isLeft ? -width : width) + 'px';
+    oldTable.style.left = `${isLeft ? -width : width}px`;
     newTable.style.left = 0;
     
     this.oldTable = newTable;
@@ -170,10 +168,10 @@ const INTERNAL_FORMAT = 'YYYY-MM-DD';
 
 /** @ignore */
 const timeUnit = {
-  'YEAR': 'year',
-  'MONTH': 'month',
-  'WEEK': 'week',
-  'DAY': 'day'
+  YEAR: 'year',
+  MONTH: 'month',
+  WEEK: 'week',
+  DAY: 'day'
 };
 
 const CLASSNAME = 'coral3-Calendar';
@@ -206,10 +204,14 @@ class Calendar extends FormField(Component(HTMLElement)) {
       'key:pageup': '_onPageUpKey',
       'key:pagedown': '_onPageDownKey',
   
-      'key:meta+pageup': '_onCtrlPageUpKey', // On OSX we use Command+Page Up
-      'key:meta+pagedown': '_onCtrlPageDownKey', // On OSX we use Command+Page Down
-      'key:ctrl+pageup': '_onCtrlPageUpKey', // On Windows, we use CTRL+Page Up
-      'key:ctrl+pagedown': '_onCtrlPageDownKey', // On Windows, we use CTRL+Page Down
+      // On OSX we use Command+Page Up
+      'key:meta+pageup': '_onCtrlPageUpKey',
+      // On OSX we use Command+Page Down
+      'key:meta+pagedown': '_onCtrlPageDownKey',
+      // On Windows, we use CTRL+Page Up
+      'key:ctrl+pageup': '_onCtrlPageUpKey',
+      // On Windows, we use CTRL+Page Down
+      'key:ctrl+pagedown': '_onCtrlPageDownKey',
   
       'key:enter .coral3-Calendar-calendarBody': '_onEnterKey',
       'key:space .coral3-Calendar-calendarBody': '_onEnterKey'
@@ -470,9 +472,10 @@ class Calendar extends FormField(Component(HTMLElement)) {
     const newTable = this._renderTable(displayYear, displayMonth + 1);
     
     if (oldTable) {
-      commons.transitionEnd(newTable, function() {
-        this._setActiveDescendant();
-      }.bind(this));
+      const self = this;
+      commons.transitionEnd(newTable, () => {
+        self._setActiveDescendant();
+      });
     }
     
     this._animator.slide(newTable, slide);
@@ -538,7 +541,7 @@ class Calendar extends FormField(Component(HTMLElement)) {
   _setActiveDescendant() {
     let el;
     
-    if (!this._activeDescendant || !this._elements.body.querySelector('#' + this._activeDescendant + ' [data-date]')) {
+    if (!this._activeDescendant || !this._elements.body.querySelector(`#${this._activeDescendant} [data-date]`)) {
       this._activeDescendant = null;
       
       el = this._elements.body.querySelector('.is-selected');
@@ -551,9 +554,7 @@ class Calendar extends FormField(Component(HTMLElement)) {
       
       this._activeDescendant = selectedId || todayId;
       
-      if (!this._activeDescendant ||
-        !this._elements.body.querySelector('#' + this._activeDescendant + ' [data-date]')
-      ) {
+      if (!this._activeDescendant || !this._elements.body.querySelector(`#${this._activeDescendant} [data-date]`)) {
         const currentMoment = this._value;
         
         if (currentMoment) {
@@ -610,7 +611,7 @@ class Calendar extends FormField(Component(HTMLElement)) {
       caption.removeChild(caption.firstChild);
     }
     if (this._activeDescendant) {
-      const activeDescendant = this._elements.body.querySelector('#' + this._activeDescendant);
+      const activeDescendant = this._elements.body.querySelector(`#${this._activeDescendant}`);
       const captionText = document.createTextNode(activeDescendant.getAttribute('title'));
       caption.appendChild(captionText);
     }
@@ -627,73 +628,68 @@ class Calendar extends FormField(Component(HTMLElement)) {
     }
     
     const data = {
-      
-      dayNames: ARRAYOF7.map(
-        function(_, index, days) {
-          const dayMoment = new DateTime.Moment().day((index + this.startDay) % 7);
-          return {
-            dayAbbr: dayMoment.format('dd'),
-            dayFullName: dayMoment.format('dddd')
-          };
-        },
-        this),
-      
-      weeks: ARRAYOF6.map(
-        function(_, weekIndex) {
-          return ARRAYOF7.map(
-            function(_, dayIndex) {
-              const result = {};
-              const cssClass = this.disabled ? ['is-disabled'] : [];
-              let ariaSelected = false;
-              let ariaInvalid = false;
-              const day = (weekIndex * 7 + dayIndex) - monthStartsAt;
-              const cursor = new DateTime.Moment([year, month - 1]);
-              // we use add() since 'day' could be a negative value
-              cursor.add(day, 'days');
+      // eslint-disable-next-line no-unused-vars
+      dayNames: ARRAYOF7.map((currentIndex, index) => {
+        const dayMoment = new DateTime.Moment().day((index + this.startDay) % 7);
+        return {
+          dayAbbr: dayMoment.format('dd'),
+          dayFullName: dayMoment.format('dddd')
+        };
+      }, this),
   
-              const isCurrentMonth = (cursor.month() + 1) === parseFloat(month);
-              const dayOfWeek = new DateTime.Moment().day((dayIndex + this.startDay) % 7).format('dddd');
-              const isToday = cursor.isSame(new DateTime.Moment(), 'day');
-  
-              const cursorLocal = cursor.clone().startOf('day');
-              
-              if (isToday) {
-                cssClass.push('is-today');
-              }
-              
-              if (dateLocal && cursorLocal.isSame(dateLocal, 'day')) {
-                ariaSelected = true;
-                cssClass.push('is-selected');
-                if (this.invalid) {
-                  ariaInvalid = true;
-                  cssClass.push('is-invalid');
-                }
-              }
-              
-              if (isCurrentMonth) {
-                cssClass.push('is-currentMonth');
-                if (!this.disabled && isDateInRange(cursor, this.min, this.max)) {
-                  result.dateAttr = cursorLocal.format(INTERNAL_FORMAT);
-                  result.weekIndex = cursor.week();
-                  result.formattedDate = cursor.format('LL');
-                }
-              }
-              
-              result.isDisabled = this.disabled || !result.dateAttr;
-              result.dateText = cursor.date();
-              result.cssClass = cssClass.join(' ');
-              result.isToday = isToday;
-              result.ariaSelected = ariaSelected;
-              result.ariaInvalid = ariaInvalid;
-              result.dateLabel = dayOfWeek;
+      // eslint-disable-next-line no-unused-vars, arrow-body-style
+      weeks: ARRAYOF6.map((currentWeekIndex, weekIndex) => {
+        // eslint-disable-next-line no-unused-vars
+        return ARRAYOF7.map((currentDayIndex, dayIndex) => {
+          const result = {};
+          const cssClass = this.disabled ? ['is-disabled'] : [];
+          let ariaSelected = false;
+          let ariaInvalid = false;
+          const day = weekIndex * 7 + dayIndex - monthStartsAt;
+          const cursor = new DateTime.Moment([year, month - 1]);
+          // we use add() since 'day' could be a negative value
+          cursor.add(day, 'days');
+    
+          const isCurrentMonth = cursor.month() + 1 === parseFloat(month);
+          const dayOfWeek = new DateTime.Moment().day((dayIndex + this.startDay) % 7).format('dddd');
+          const isToday = cursor.isSame(new DateTime.Moment(), 'day');
+    
+          const cursorLocal = cursor.clone().startOf('day');
+    
+          if (isToday) {
+            cssClass.push('is-today');
+          }
+    
+          if (dateLocal && cursorLocal.isSame(dateLocal, 'day')) {
+            ariaSelected = true;
+            cssClass.push('is-selected');
+            if (this.invalid) {
+              ariaInvalid = true;
+              cssClass.push('is-invalid');
+            }
+          }
+    
+          if (isCurrentMonth) {
+            cssClass.push('is-currentMonth');
+            if (!this.disabled && isDateInRange(cursor, this.min, this.max)) {
+              result.dateAttr = cursorLocal.format(INTERNAL_FORMAT);
               result.weekIndex = cursor.week();
-              
-              return result;
-            },
-            this
-          );
-        },
-        this)
+              result.formattedDate = cursor.format('LL');
+            }
+          }
+    
+          result.isDisabled = this.disabled || !result.dateAttr;
+          result.dateText = cursor.date();
+          result.cssClass = cssClass.join(' ');
+          result.isToday = isToday;
+          result.ariaSelected = ariaSelected;
+          result.ariaInvalid = ariaInvalid;
+          result.dateLabel = dayOfWeek;
+          result.weekIndex = cursor.week();
+    
+          return result;
+        }, this);
+      }, this)
     };
     
     const handles = {};
@@ -741,7 +737,7 @@ class Calendar extends FormField(Component(HTMLElement)) {
       // make sure new moment is in range before transitioning
       if (this._isInRange(newMoment)) {
         difference = Math.abs(new DateTime.Moment(currentActive).diff(newMoment, 'days'));
-        this._getToNewMoment(null, direction, operator, difference);
+        this._getToNewMoment(direction, operator, difference);
         this._setActiveDescendant();
       }
     }
@@ -760,7 +756,7 @@ class Calendar extends FormField(Component(HTMLElement)) {
         }
         newMoment = new DateTime.Moment(newMoment);
         difference = Math.abs(this._cursor.diff(newMoment, 'days'));
-        this._getToNewMoment(null, direction, operator, difference);
+        this._getToNewMoment(direction, operator, difference);
         this._setActiveDescendant();
         return;
       }
@@ -793,7 +789,7 @@ class Calendar extends FormField(Component(HTMLElement)) {
   }
   
   /** @ignore */
-  _getToNewMoment(event, direction, operator, difference) {
+  _getToNewMoment(direction, operator, difference) {
     const el = this._elements.body.querySelector('td.is-focused .coral3-Calendar-date');
     let currentActive;
     
@@ -824,7 +820,7 @@ class Calendar extends FormField(Component(HTMLElement)) {
       this._renderCalendar(direction);
     }
   
-    const dateQuery = '.coral3-Calendar-date[data-date^=' + JSON.stringify(newMomentValue) + ']';
+    const dateQuery = `.coral3-Calendar-date[data-date^=${JSON.stringify(newMomentValue)}]`;
     const newDescendant = this._elements.body.querySelector(dateQuery);
     if (newDescendant) {
       this._activeDescendant = newDescendant.parentNode.getAttribute('id');
@@ -910,7 +906,7 @@ class Calendar extends FormField(Component(HTMLElement)) {
   /** @ignore */
   _onHomeOrEndKey(event) {
     event.preventDefault();
-    const isHome = event.keyCode === Coral.Keys.keyToCode('home');
+    const isHome = event.keyCode === Keys.keyToCode('home');
     const direction = '';
     const operator = isHome ? 'subtract' : 'add';
     const el = this._elements.body.querySelector('td.is-focused .coral3-Calendar-date');
@@ -919,7 +915,7 @@ class Calendar extends FormField(Component(HTMLElement)) {
       const currentActive = el.dataset.date;
       const currentMoment = new DateTime.Moment(currentActive);
       const difference = isHome ? currentMoment.date() - 1 : currentMoment.daysInMonth() - currentMoment.date();
-      this._getToNewMoment(event, direction, operator, difference);
+      this._getToNewMoment(direction, operator, difference);
       this._setActiveDescendant();
     }
     
@@ -985,7 +981,7 @@ class Calendar extends FormField(Component(HTMLElement)) {
     this.setAttribute('role', 'region');
     
     // Default reflected attribute
-    if (!this._valueFormat) {this.valueFormat = INTERNAL_FORMAT;}
+    if (!this._valueFormat) { this.valueFormat = INTERNAL_FORMAT; }
     
     const frag = document.createDocumentFragment();
     

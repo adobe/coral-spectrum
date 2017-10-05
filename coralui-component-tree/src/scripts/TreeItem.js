@@ -18,7 +18,7 @@
 import Component from 'coralui-mixin-component';
 import {Collection} from 'coralui-collection';
 import 'coralui-component-icon';
-import item from '../templates/item';
+import treeItem from '../templates/treeItem';
 import spacer from '../templates/spacer';
 import {transform, commons, validate} from 'coralui-util';
 
@@ -26,8 +26,8 @@ const CLASSNAME = 'coral3-Tree-item';
 
 // Chevron classes for expanded/collapse states
 const CHEVRON_CLASSES = {
-  'true': 'chevronDown',
-  'false': 'chevronRight'
+  true: 'chevronDown',
+  false: 'chevronRight'
 };
 
 const variant = {
@@ -40,9 +40,7 @@ const variant = {
 const ALL_VARIANT_CLASSES = [];
 
 for (const variantValue in variant) {
-  if (variant.hasOwnProperty(variantValue)) {
-    ALL_VARIANT_CLASSES.push(`${CLASSNAME}--${variant[variantValue]}`);
-  }
+  ALL_VARIANT_CLASSES.push(`${CLASSNAME}--${variant[variantValue]}`);
 }
 
 const addTreeItemSpacer = function(item) {
@@ -74,7 +72,7 @@ class TreeItem extends Component(HTMLElement) {
       // Create or fetch the content zones
       content: this.querySelector('coral-tree-item-content') || document.createElement('coral-tree-item-content')
     };
-    item.call(this._elements);
+    treeItem.call(this._elements);
   
     // Tells the collection to automatically detect the items and handle the events
     this.items._startHandlingItems();
@@ -167,26 +165,25 @@ class TreeItem extends Component(HTMLElement) {
     chevron.icon = CHEVRON_CLASSES[this._expanded];
     
     this.trigger('coral-tree-item:_expandedchanged');
-    
+  
+    const self = this;
     // Do animation in next frame to avoid a forced reflow
-    window.requestAnimationFrame(function() {
+    window.requestAnimationFrame(() => {
       // Don't animate on initialization
-      if (this._animate) {
-        let offsetHeight;
-        
+      if (self._animate) {
         // Remove height as we want the drawer to naturally grow if content is added later
-        commons.transitionEnd(subTreeContainer, function() {
-          if (this.expanded) {
+        commons.transitionEnd(subTreeContainer, () => {
+          if (self.expanded) {
             subTreeContainer.style.height = '';
           }
           else {
             subTreeContainer.hidden = true;
           }
-        }.bind(this));
+        });
     
         // Force height to enable transition
-        if (!this.expanded) {
-          subTreeContainer.style.height = subTreeContainer.scrollHeight + 'px';
+        if (!self.expanded) {
+          subTreeContainer.style.height = `${subTreeContainer.scrollHeight}px`;
         }
         else {
           subTreeContainer.hidden = false;
@@ -194,26 +191,27 @@ class TreeItem extends Component(HTMLElement) {
   
         // We read the offset height to force a reflow, this is needed to start the transition between absolute values
         // https://blog.alexmaccaw.com/css-transitions under Redrawing
-        offsetHeight = subTreeContainer.offsetHeight;
+        // eslint-disable-next-line no-unused-vars
+        const offsetHeight = subTreeContainer.offsetHeight;
         
-        subTreeContainer.style.height = this.expanded ? subTreeContainer.scrollHeight + 'px' : 0;
+        subTreeContainer.style.height = self.expanded ? `${subTreeContainer.scrollHeight}px` : 0;
       
         // Trigger once the animation is over to inform coral-tree
         if (triggerEvent) {
-          this.trigger('coral-tree-item:_afterexpandedchanged');
+          self.trigger('coral-tree-item:_afterexpandedchanged');
         }
       }
       else {
         // Make sure it's animated next time
-        this._animate = true;
+        self._animate = true;
     
         // Hide it on initialization if closed
-        if (!this.expanded) {
+        if (!self.expanded) {
           subTreeContainer.style.height = 0;
           subTreeContainer.hidden = true;
         }
       }
-    }.bind(this));
+    });
   }
   
   /**
@@ -233,7 +231,7 @@ class TreeItem extends Component(HTMLElement) {
     this._variant = validate.enumeration(variant, value) && value || variant.DRILLDOWN;
   
     // removes every existing variant
-    this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
+    this.classList.remove(...ALL_VARIANT_CLASSES);
     this.classList.add(`${CLASSNAME}--${this._variant}`);
   }
   
@@ -299,7 +297,7 @@ class TreeItem extends Component(HTMLElement) {
     // Handle nesting check for parent tree item
     // Use parentNode for added items
     // Use _parent for removed items
-    return (item.parentNode && item.parentNode.parentNode === this) || (item._parent === this);
+    return item.parentNode && item.parentNode.parentNode === this || item._parent === this;
   }
   
   /** @private */
@@ -323,12 +321,11 @@ class TreeItem extends Component(HTMLElement) {
   }
   
   // Expose enum
-  static get variant() {return variant;}
+  static get variant() { return variant; }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.content;}
-  set defaultContentZone(value) {this.content = value;}
-  get _contentZones() {return {'coral-tree-item-content': 'content'};}
+  get defaultContentZone() { return this.content; }
+  set defaultContentZone(value) { this.content = value; }
+  get _contentZones() { return {'coral-tree-item-content': 'content'}; }
   
   static get observedAttributes() {
     return ['selected', 'disabled', 'variant', 'expanded', 'hidden'];
@@ -346,7 +343,7 @@ class TreeItem extends Component(HTMLElement) {
     this._elements.subTreeContainer.setAttribute('aria-labelledby', this._elements.header.id);
   
     // Default reflected attributes
-    if (!this._variant) {this.variant = variant.DRILLDOWN;}
+    if (!this._variant) { this.variant = variant.DRILLDOWN; }
     this.expanded = this.expanded;
     
     // Render the template and set element references
@@ -355,17 +352,17 @@ class TreeItem extends Component(HTMLElement) {
     const templateHandleNames = ['header', 'icon', 'contentContainer', 'subTreeContainer'];
     
     // Support cloning nested structures by moving spacers into the header and existing tree items into the sub tree
-    let header = this.querySelector('.coral3-Tree-header');
+    const header = this.querySelector('.coral3-Tree-header');
     if (header) {
-      let spacers = header.querySelectorAll('.coral3-Tree-item-spacer');
+      const spacers = header.querySelectorAll('.coral3-Tree-item-spacer');
       for (let i = 0; i < spacers.length; i++) {
         this._elements.header.insertBefore(spacers[i], this._elements.header.firstChild);
       }
     }
     
-    let subTree = this.querySelector('.coral3-Tree-subTree');
+    const subTree = this.querySelector('.coral3-Tree-subTree');
     if (subTree) {
-      let items = subTree.querySelectorAll('coral-tree-item');
+      const items = subTree.querySelectorAll('coral-tree-item');
       for (let i = 0; i < items.length; i++) {
         this._elements.subTreeContainer.appendChild(items[i]);
       }
@@ -391,7 +388,7 @@ class TreeItem extends Component(HTMLElement) {
         subTreeContainer.appendChild(child);
       }
       else if (child.nodeType === Node.TEXT_NODE ||
-        (child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1)) {
+        child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
         // Add non-template elements to the content
         content.appendChild(child);
       }

@@ -41,10 +41,6 @@ const target = {
  @extends Coral.mixin.component
  */
 class CharacterCount extends Component(HTMLElement) {
-  constructor() {
-    super();
-  }
-  
   /**
    The target Textfield or Textarea for this component. It accepts values from {@link Coral.CharacterCount.target},
    as well as any DOM element or CSS selector.
@@ -117,7 +113,7 @@ class CharacterCount extends Component(HTMLElement) {
       elementLength = this._targetEl.value.length;
     }
     
-    return this._maxLength ? (this._maxLength - elementLength) : elementLength;
+    return this._maxLength ? this._maxLength - elementLength : elementLength;
   }
   
   /** @ignore */
@@ -132,7 +128,7 @@ class CharacterCount extends Component(HTMLElement) {
   }
   
   // Expose enumerations
-  static get target() {return target;}
+  static get target() { return target; }
   
   static get observedAttributes() {
     return ['target', 'maxlength', 'maxLength'];
@@ -145,7 +141,7 @@ class CharacterCount extends Component(HTMLElement) {
     
     // Set defaults
     this.target = this.target;
-    if (!this._maxLength) {this.maxLength = this._maxLength;}
+    if (!this._maxLength) { this.maxLength = this._maxLength; }
   }
 }
 

@@ -1,6 +1,4 @@
 describe('Coral.CycleButton', function() {
-  'use strict';
-
   var SNIPPET_MIXEDITEMS = window.__html__['Coral.CycleButton.mixedItems.html'];
   var SNIPPET_TWOITEMS = window.__html__['Coral.CycleButton.twoItems.html'];
   var SNIPPET_THREEITEMS = window.__html__['Coral.CycleButton.threeItems.html'];

@@ -29,10 +29,6 @@ const CLASSNAME = 'coral3-Shell-solutions';
  @extends Coral.mixin.component
  */
 class ShellSolutions extends Component(HTMLElement) {
-  constructor() {
-    super();
-  }
-  
   /**
    The item collection.
    See {@link Coral.Collection} for more details.
@@ -73,7 +69,7 @@ class ShellSolutions extends Component(HTMLElement) {
     this.classList.toggle(`${CLASSNAME}--secondary`, this._secondary);
   }
 
-  static get observedAttributes() {return ['secondary'];}
+  static get observedAttributes() { return ['secondary']; }
   
   connectedCallback() {
     super.connectedCallback();

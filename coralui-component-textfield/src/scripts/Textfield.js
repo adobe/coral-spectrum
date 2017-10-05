@@ -38,7 +38,7 @@ const CLASSNAME = 'coral3-Textfield';
 // changes
 const ALL_VARIANT_CLASSES = [];
 for (const variantValue in variant) {
-  ALL_VARIANT_CLASSES.push(CLASSNAME + '--' + variant[variantValue]);
+  ALL_VARIANT_CLASSES.push(`${CLASSNAME}--${variant[variantValue]}`);
 }
 
 /**
@@ -74,7 +74,7 @@ class Textfield extends FormField(Component(HTMLInputElement)) {
     this._reflectAttribute('variant', this._variant);
     
     // removes every existing variant
-    this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
+    this.classList.remove(...ALL_VARIANT_CLASSES);
 
     if (this._variant !== variant.DEFAULT) {
       this.classList.add(`${CLASSNAME}--${this._variant}`);
@@ -82,7 +82,7 @@ class Textfield extends FormField(Component(HTMLInputElement)) {
   }
   
   // Expose enumerations
-  static get variant() {return variant;}
+  static get variant() { return variant; }
   
   static get observedAttributes() {
     return super._nativeObservedAttributes.concat(['variant']);
@@ -94,7 +94,7 @@ class Textfield extends FormField(Component(HTMLInputElement)) {
     this.classList.add(CLASSNAME);
   
     // Default reflected attributes
-    if (!this._variant) {this.variant = variant.DEFAULT;}
+    if (!this._variant) { this.variant = variant.DEFAULT; }
   }
 }
 

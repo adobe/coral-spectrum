@@ -25,10 +25,6 @@ const CLASSNAME = 'coral3-BasicList-item-content';
  @private
  */
 class ListItemContent extends HTMLElement {
-  constructor() {
-    super();
-  }
-  
   connectedCallback() {
     this.classList.add(CLASSNAME);
   }

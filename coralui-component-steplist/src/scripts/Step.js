@@ -16,7 +16,6 @@
  */
 
 import Component from 'coralui-mixin-component';
-import StepList from './StepList';
 import 'coralui-component-tooltip';
 import step from '../templates/step';
 import {transform, commons} from 'coralui-util';
@@ -140,12 +139,11 @@ class Step extends Component(HTMLElement) {
     }
   }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.label;}
-  set defaultContentZone(value) {this.label = value;}
-  get _contentZones() {return {'coral-step-label': 'label'};}
+  get defaultContentZone() { return this.label; }
+  set defaultContentZone(value) { this.label = value; }
+  get _contentZones() { return {'coral-step-label': 'label'}; }
   
-  static get observedAttributes() {return ['selected', 'target'];}
+  static get observedAttributes() { return ['selected', 'target']; }
   
   connectedCallback() {
     super.connectedCallback();
@@ -182,7 +180,7 @@ class Step extends Component(HTMLElement) {
       const child = this.firstChild;
       
       if (child.nodeType === Node.TEXT_NODE ||
-        (child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1)) {
+        child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
         label.appendChild(child);
       }
       else {

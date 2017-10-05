@@ -28,10 +28,6 @@ import MasonryColumnLayout from './MasonryColumnLayout';
  @extends Coral.Masonry.ColumnLayout
  */
 class MasonryVariableLayout extends MasonryColumnLayout {
-  constructor(masonry) {
-    super(masonry);
-  }
-  
   /** @inheritdoc */
   _getItemWidth(colspan) {
     return this._masonryAvailableWidth / this._columns.length * colspan - this._horSpacing;

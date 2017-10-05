@@ -125,7 +125,7 @@ class SelectList extends Component(HTMLElement) {
         host: this,
         itemTagName: GROUP_TAG_NAME,
         onItemAdded: this._validateSelection,
-        onItemRemoved: this._validateSelection,
+        onItemRemoved: this._validateSelection
       });
     }
     return this._groups;
@@ -146,7 +146,7 @@ class SelectList extends Component(HTMLElement) {
         host: this,
         itemTagName: ITEM_TAG_NAME,
         onItemAdded: this._validateSelection,
-        onItemRemoved: this._validateSelection,
+        onItemRemoved: this._validateSelection
       });
     }
     return this._items;
@@ -210,14 +210,14 @@ class SelectList extends Component(HTMLElement) {
     this._loading = transform.booleanAttr(value);
     this._reflectAttribute('loading', this._loading);
   
-    const loadIndicator = this._elements.loadIndicator;
+    const load = this._elements.loadIndicator;
   
     if (this.loading) {
       // we decide first if we need to scroll to the bottom since adding the load will change the dimentions
       const scrollToBottom = this.scrollTop >= this.scrollHeight - this.clientHeight;
     
       // inserts the item at the end
-      this.appendChild(loadIndicator);
+      this.appendChild(load);
     
       // we make the load indicator visible
       if (scrollToBottom) {
@@ -225,7 +225,7 @@ class SelectList extends Component(HTMLElement) {
       }
     }
     else {
-      loadIndicator.remove();
+      load.remove();
     }
   }
   
@@ -237,7 +237,7 @@ class SelectList extends Component(HTMLElement) {
     this.__tabTarget = value;
     
     // Set all but the current set _tabTarget to not be a tab target:
-    this.items.getAll().forEach(function(item) {
+    this.items.getAll().forEach((item) => {
       item.setAttribute('tabindex', item === value ? 0 : -1);
     });
   }
@@ -245,9 +245,7 @@ class SelectList extends Component(HTMLElement) {
   /** @private */
   _toggleItemSelection(item) {
     if (item) {
-      const beforeChangeEvent = this.trigger('coral-selectlist:beforechange', {
-        item: item
-      });
+      const beforeChangeEvent = this.trigger('coral-selectlist:beforechange', {item});
   
       if (!beforeChangeEvent.defaultPrevented) {
         item[item.hasAttribute('selected') ? 'removeAttribute' : 'setAttribute']('selected', '');
@@ -371,7 +369,7 @@ class SelectList extends Component(HTMLElement) {
     }
     
     // Set a timeout so that _keypressSearchString is cleared after 1 second
-    this._keypressTimeoutID = window.setTimeout(function() {
+    this._keypressTimeoutID = window.setTimeout(() => {
       self._keypressSearchString = '';
     }, this._keypressTimeoutDuration);
     
@@ -467,7 +465,7 @@ class SelectList extends Component(HTMLElement) {
   
   /** @private */
   _validateSelection(item) {
-    let selectedItems = this.selectedItems;
+    const selectedItems = this.selectedItems;
     
     if (!this.multiple) {
       // Last selected item wins if multiple selection while not allowed
@@ -508,7 +506,7 @@ class SelectList extends Component(HTMLElement) {
       else {
         // Return all items if we just switched from multiple=true to multiple=false and we had >1 selected items
         this.trigger('coral-selectlist:change', {
-          oldSelection: oldSelection.length > 1 ? oldSelection : (oldSelection[0] || null),
+          oldSelection: oldSelection.length > 1 ? oldSelection : oldSelection[0] || null,
           selection: selectedItems[0] || null
         });
       }
@@ -522,9 +520,7 @@ class SelectList extends Component(HTMLElement) {
     let diff = [];
     
     if (oldSelection.length === selection.length) {
-      diff = oldSelection.filter(function(item) {
-        return selection.indexOf(item) === -1;
-      });
+      diff = oldSelection.filter((item) => selection.indexOf(item) === -1);
     }
     
     // since we guarantee that they are arrays, we can start by comparing their size

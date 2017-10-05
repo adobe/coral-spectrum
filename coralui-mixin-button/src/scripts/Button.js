@@ -47,7 +47,7 @@ const CLASSNAME = 'coral-Button';
 // changes
 const ALL_VARIANT_CLASSES = [];
 for (const variantValue in variant) {
-  ALL_VARIANT_CLASSES.push(CLASSNAME + '--' + variant[variantValue]);
+  ALL_VARIANT_CLASSES.push(`${CLASSNAME}--${variant[variantValue]}`);
 }
 
 /**
@@ -90,7 +90,7 @@ const Button = (superClass) => class extends superClass {
     
     // Events
     this._events = {
-      'mousedown': '_onMouseDown'
+      mousedown: '_onMouseDown'
     };
   
     // Listen for mutations
@@ -98,9 +98,12 @@ const Button = (superClass) => class extends superClass {
     
     // Watch for changes to the label element
     this._observer.observe(this._elements.label, {
-      childList: true, // Catch changes to childList
-      characterData: true, // Catch changes to textContent
-      subtree: true // Monitor any child node
+      // Catch changes to childList
+      childList: true,
+      // Catch changes to textContent
+      characterData: true,
+      // Monitor any child node
+      subtree: true
     });
   }
   
@@ -152,7 +155,7 @@ const Button = (superClass) => class extends superClass {
    @see {@link Coral.Icon}
    */
   get icon() {
-    return (this._elements.icon && this._elements.icon.icon) || '';
+    return this._elements.icon && this._elements.icon.icon || '';
   }
   set icon(value) {
     this._updateIcon(value);
@@ -167,7 +170,7 @@ const Button = (superClass) => class extends superClass {
    @see {@link Coral.Icon#size}
    */
   get iconSize() {
-    return (this._elements.icon && this._elements.icon.size) || Icon.size.SMALL;
+    return this._elements.icon && this._elements.icon.size || Icon.size.SMALL;
   }
   set iconSize(value) {
     this._getIconElement().size = value;
@@ -258,7 +261,7 @@ const Button = (superClass) => class extends superClass {
     this._reflectAttribute('variant', this._variant);
     
     // removes every existing variant
-    this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
+    this.classList.remove(...ALL_VARIANT_CLASSES);
 
     this.classList.add(`${CLASSNAME}--${this._variant}`);
   }
@@ -293,10 +296,8 @@ const Button = (superClass) => class extends superClass {
     if (this.icon !== '' && hasLabel) {
       this._elements.icon.alt = '';
     }
-    else {
-      if (this._elements.icon) {
-        this._elements.icon._updateAltText();
-      }
+    else if (this._elements.icon) {
+      this._elements.icon._updateAltText();
     }
   }
   
@@ -317,7 +318,7 @@ const Button = (superClass) => class extends superClass {
     const target = event.matchedTarget;
     
     // Wait a frame or button won't receive focus in Safari.
-    window.requestAnimationFrame(function() {
+    window.requestAnimationFrame(() => {
       if (target !== document.activeElement) {
         target.focus();
       }
@@ -329,15 +330,14 @@ const Button = (superClass) => class extends superClass {
     return Object.keys(this._contentZones)[0];
   }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.label;}
-  set defaultContentZone(value) {this.label = value;}
-  get _contentZones() {return {'coral-button-label': 'label'};}
+  get defaultContentZone() { return this.label; }
+  set defaultContentZone(value) { this.label = value; }
+  get _contentZones() { return {'coral-button-label': 'label'}; }
   
   // Expose enumerations
-  static get size() {return size;}
-  static get variant() {return variant;}
-  static get iconPosition() {return iconPosition;}
+  static get size() { return size; }
+  static get variant() { return variant; }
+  static get iconPosition() { return iconPosition; }
   
   static get observedAttributes() {
     return [
@@ -360,10 +360,10 @@ const Button = (superClass) => class extends superClass {
     this.classList.add(CLASSNAME);
     
     // Default reflected attributes
-    if (!this._variant) {this.variant = variant.SECONDARY;}
-    if (!this._size) {this.size = size.MEDIUM;}
+    if (!this._variant) { this.variant = variant.SECONDARY; }
+    if (!this._size) { this.size = size.MEDIUM; }
     
-    // Create a temporary fragment
+    // Create a fragment
     const fragment = document.createDocumentFragment();
     
     const label = this._elements.label;

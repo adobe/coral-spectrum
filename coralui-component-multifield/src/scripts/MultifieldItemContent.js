@@ -21,10 +21,6 @@
  @htmltag coral-multifield-item-content
  @extends HTMLElement
  */
-class MultifieldItemContent extends HTMLElement {
-  constructor() {
-    super();
-  }
-}
+class MultifieldItemContent extends HTMLElement {}
 
 export default MultifieldItemContent;

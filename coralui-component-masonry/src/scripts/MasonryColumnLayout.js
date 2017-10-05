@@ -56,7 +56,10 @@ class MasonryColumnLayout extends MasonryLayout {
    @param item
    @private
    */
-  _resetItem(item) {}
+  // eslint-disable-next-line no-unused-vars
+  _resetItem(item) {
+    // To override
+  }
   
   /**
    Initialize layout variables.
@@ -69,7 +72,8 @@ class MasonryColumnLayout extends MasonryLayout {
     this._columnWidth = getPositiveNumberProperty(masonry, 'columnWidth', 'columnwidth', 200);
     
     this._zeroOffsetLeft = -csspx(firstItem, 'marginLeft');
-    this._masonryInnerWidth = masonry.clientWidth; // with padding
+    // with padding
+    this._masonryInnerWidth = masonry.clientWidth;
     
     const spacing = this._masonry.spacing;
     if (typeof spacing === 'number') {
@@ -127,7 +131,7 @@ class MasonryColumnLayout extends MasonryLayout {
       // Update width
       const itemWidth = Math.round(this._getItemWidth(layoutData.colspan));
       if (layoutData.width !== itemWidth) {
-        item.style.width = itemWidth + 'px';
+        item.style.width = `${itemWidth}px`;
         layoutData.width = itemWidth;
       }
       this._writeItemStyle(item);
@@ -139,7 +143,10 @@ class MasonryColumnLayout extends MasonryLayout {
    @return the width of the item for the given colspan
    @private
    */
-  _getItemWidth(colspan) {}
+  // eslint-disable-next-line no-unused-vars
+  _getItemWidth(colspan) {
+    // To override
+  }
   
   /**
    Hook to execute layout specific item preparation.
@@ -147,7 +154,10 @@ class MasonryColumnLayout extends MasonryLayout {
    @param item
    @private
    */
-  _writeItemStyle(item) {}
+  // eslint-disable-next-line no-unused-vars
+  _writeItemStyle(item) {
+    // To override
+  }
   
   /**
    Reads the dimension of all items.
@@ -177,7 +187,8 @@ class MasonryColumnLayout extends MasonryLayout {
     for (let i = 0; i < items.length; i++) {
       const item = items[i];
       const layoutData = item._layoutData;
-      if (layoutData.ignored) { // Skip ignored items
+      // Skip ignored items
+      if (layoutData.ignored) {
         continue;
       }
       
@@ -186,7 +197,8 @@ class MasonryColumnLayout extends MasonryLayout {
       let minColumnIndex = -1;
       let minColumnHeight;
       for (j = 0; j < maxLength; j++) {
-        let columnHeight = this._offsetTop; // can be negative if set spacing < item css margin
+        // can be negative if set spacing < item css margin
+        let columnHeight = this._offsetTop;
         for (let y = 0; y < layoutData.colspan; y++) {
           columnHeight = Math.max(columnHeight, this._columns[j + y].height);
         }
@@ -206,7 +218,7 @@ class MasonryColumnLayout extends MasonryLayout {
         layoutData.left = left;
         layoutData.top = top;
         
-        setTransform(item, 'translate(' + left + 'px, ' + top + 'px)');
+        setTransform(item, `translate(${left}px, ${top}px)`);
       }
       
       // Remember new column height to position all other items
@@ -224,16 +236,17 @@ class MasonryColumnLayout extends MasonryLayout {
    @return the left position for the given column index
    @private
    */
-  _getItemLeft(columnIndex) {}
+  // eslint-disable-next-line no-unused-vars
+  _getItemLeft(columnIndex) {
+    // To override
+  }
   
   /**
    @returns {number} the height of the content (independent of the current gird container height)
    @private
    */
   _getContentHeight() {
-    return this._columns.reduce(function(height, column) {
-        return Math.max(height, column.height);
-      }, 0) - this._offsetTop;
+    return this._columns.reduce((height, column) => Math.max(height, column.height), 0) - this._offsetTop;
   }
   
   /**
@@ -242,7 +255,10 @@ class MasonryColumnLayout extends MasonryLayout {
    @param contentHeight
    @private
    */
-  _postLayout(contentHeight) {}
+  // eslint-disable-next-line no-unused-vars
+  _postLayout(contentHeight) {
+    // To override
+  }
   
   /**
    Moves the focus vertically.
@@ -261,7 +277,8 @@ class MasonryColumnLayout extends MasonryLayout {
     
     if (nextItem) {
       nextItem.focus();
-      event.preventDefault(); // prevent scrolling at the same time
+      // prevent scrolling at the same time
+      event.preventDefault();
     }
   }
   
@@ -295,7 +312,8 @@ class MasonryColumnLayout extends MasonryLayout {
         if (currentLayoutData.top <= itemBottom && currentItemBottom >= layoutData.top) {
           // Calculate the overlapping height
           const itemOverlap = (currentLayoutData.height - Math.max(0, layoutData.top - currentLayoutData.top) -
-            Math.max(0, currentItemBottom - itemBottom)) / layoutData.height; // relative overlap with current item
+            // relative overlap with current item
+            Math.max(0, currentItemBottom - itemBottom)) / layoutData.height;
           if (itemOverlap > nextItemOverlap) {
             nextItemOverlap = itemOverlap;
             nextItem = item;
@@ -310,7 +328,8 @@ class MasonryColumnLayout extends MasonryLayout {
     
     if (nextItem) {
       nextItem.focus();
-      event.preventDefault(); // prevent scrolling at the same time
+      // prevent scrolling at the same time
+      event.preventDefault();
     }
   }
   
@@ -370,7 +389,7 @@ class MasonryColumnLayout extends MasonryLayout {
     
     // Update the height of the masonry (otherwise it has a height of 0px due to the absolutely positioned items)
     const contentHeight = this._getContentHeight();
-    masonry.style.height = (contentHeight - this._verSpacing + this._verPadding) + 'px';
+    masonry.style.height = `${contentHeight - this._verSpacing + this._verPadding}px`;
     
     // Check if the masonry has changed its width due to the changed height (can happen because of appearing/disappearing scrollbars)
     if (!secondTry && this._masonryInnerWidth !== masonry.clientWidth) {
@@ -406,7 +425,8 @@ class MasonryColumnLayout extends MasonryLayout {
     layoutData.detached = false;
     
     const rect = item.getBoundingClientRect();
-    setTransition(item, 'none'); // Disable transition while repositioning
+    // Disable transition while repositioning
+    setTransition(item, 'none');
     item.style.left = '';
     item.style.top = '';
     setTransform(item, '');
@@ -414,9 +434,11 @@ class MasonryColumnLayout extends MasonryLayout {
     const nullRect = item.getBoundingClientRect();
     layoutData.left = rect.left - nullRect.left;
     layoutData.top = rect.top - nullRect.top;
-    setTransform(item, 'translate(' + layoutData.left + 'px, ' + layoutData.top + 'px)');
-    item.getBoundingClientRect(); // Enforce position
-    setTransition(item, ''); // Enable transition again
+    setTransform(item, `translate(${layoutData.left}px, ${layoutData.top}px)`);
+    // Enforce position
+    item.getBoundingClientRect();
+    // Enable transition again
+    setTransition(item, '');
   }
   
   /** @inheritdoc */

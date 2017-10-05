@@ -1,5 +1,4 @@
 /* global Typekit */
-/* jshint -W033,-W116 */
 (function() {
   "use strict"
   

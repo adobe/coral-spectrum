@@ -1,6 +1,4 @@
 describe('Coral.CharacterCount', function() {
-  'use strict';
-
   var input, characterCount;
 
   describe('Instantiation', function() {

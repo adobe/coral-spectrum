@@ -29,10 +29,6 @@ const CLASSNAME = 'coral3-ActionBar-primary';
  @extends Coral.mixin.component
  */
 class ActionBarPrimary extends ActionBarContainer(Component(HTMLElement)) {
-  constructor() {
-    super();
-  }
-  
   /** @ignore */
   _returnElementsFromPopover() {
     let item = null;

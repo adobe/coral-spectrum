@@ -1,6 +1,4 @@
 describe('Coral.Autocomplete.Item', function() {
-  'use strict';
-
   describe('Namespace', function() {
     it('should be defined', function() {
       expect(Coral.Autocomplete).to.have.property('Item');

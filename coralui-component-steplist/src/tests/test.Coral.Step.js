@@ -1,6 +1,4 @@
 describe('Coral.Step', function() {
-  'use strict';
-
   var el;
   var item;
   var item2;

@@ -1,6 +1,4 @@
 describe('Coral.SelectList.Group', function() {
-  'use strict';
-  
   describe('Namespace', function() {
     it('should be defined', function() {
       expect(Coral.SelectList).to.have.property('Group');

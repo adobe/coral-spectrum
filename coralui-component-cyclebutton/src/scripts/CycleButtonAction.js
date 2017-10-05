@@ -26,10 +26,6 @@ import {transform} from 'coralui-util';
  @extends Coral.mixin.component
  */
 class CycleButtonAction extends Component(HTMLElement) {
-  constructor() {
-    super();
-  }
-  
   /**
    The Action's icon. See {@link Coral.Icon} for valid icon names.
    

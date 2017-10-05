@@ -29,10 +29,6 @@ const CLASSNAME = 'coral3-SelectList-group';
  @extends Coral.mixin.component
  */
 class SelectListGroup extends Component(HTMLElement) {
-  constructor() {
-    super();
-  }
-  
   /**
    The label of the group. It reflects the <code>label</code> attribute to the DOM.
    

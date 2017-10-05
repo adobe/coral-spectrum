@@ -148,15 +148,15 @@ class QuickActionsItem extends Component(HTMLElement) {
   }
   
   // Expose enums
-  static get type() {return type;}
+  static get type() { return type; }
   
-  static get observedAttributes() {return ['href', 'icon', 'type'];}
+  static get observedAttributes() { return ['href', 'icon', 'type']; }
   
   connectedCallback() {
     super.connectedCallback();
     
     // Default reflected attributes
-    if (!this._type) {this.type = type.BUTTON;}
+    if (!this._type) { this.type = type.BUTTON; }
   }
   
   /**

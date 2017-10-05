@@ -16,7 +16,7 @@
  */
 
 import Component from 'coralui-mixin-component';
-import ColorInputAbstractSubview from './ColorInputAbstractSubview'
+import ColorInputAbstractSubview from './ColorInputAbstractSubview';
 import Color from './Color';
 import 'coralui-component-button';
 import colorButton from '../templates/colorButton';
@@ -65,7 +65,7 @@ class ColorInputSwatch extends ColorInputAbstractSubview(Component(HTMLElement))
       this.classList.toggle('is-selected', this._selected);
       this.setAttribute('aria-selected', this._selected);
   
-      this._elements.colorButton[this._selected ? 'setAttribute': 'removeAttribute']('aria-label',
+      this._elements.colorButton[this._selected ? 'setAttribute' : 'removeAttribute']('aria-label',
         `${i18n.get('checked')} ${this._elements.colorButton.label.textContent}`);
       
       this.trigger('coral-colorinput-swatch:_selectedchanged');
@@ -170,9 +170,9 @@ class ColorInputSwatch extends ColorInputAbstractSubview(Component(HTMLElement))
     this.setAttribute('role', 'option');
     
     // Support cloneNode
-    const colorButton = this.querySelector('[handle="colorButton"]');
-    if (colorButton) {
-      colorButton.remove();
+    const button = this.querySelector('[handle="colorButton"]');
+    if (button) {
+      button.remove();
     }
   
     this.appendChild(this._elements.colorButton);

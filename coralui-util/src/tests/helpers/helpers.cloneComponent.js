@@ -8,9 +8,6 @@ var helpers = helpers || {};
   @param {Boolean} [options.deepClone=true] - deepClone the component. True, if not provided.
 */
 helpers.cloneComponent = function(element, options) {
-
-  'use strict';
-
   // sets the default if component should be deep cloned
   options = options || {};
   options.deepClone = options.deepClone || true;

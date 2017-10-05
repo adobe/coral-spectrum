@@ -1,6 +1,4 @@
 describe('Coral.transform', function() {
-  'use strict';
-
   it('should have transform under Coral', function() {
     expect(Coral).to.have.property('transform');
   });

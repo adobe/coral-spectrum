@@ -24,8 +24,8 @@ const CLASSNAME = 'coral3-Accordion-item';
 
 // Chevron classes for selected states
 const CHEVRON_CLASSES = {
-  'true': 'chevronDown',
-  'false': 'chevronRight'
+  true: 'chevronDown',
+  false: 'chevronRight'
 };
 
 /**
@@ -112,6 +112,7 @@ class AccordionItem extends Component(HTMLElement) {
   
     const animateElement = this._elements.acContent;
   
+    // eslint-disable-next-line no-unused-vars
     let offsetHeight;
     if (!this._animate) {
       this._animate = true;
@@ -127,10 +128,10 @@ class AccordionItem extends Component(HTMLElement) {
       if (this._selected) {
         animateElement.classList.remove('is-closed');
         animateElement.classList.add('is-collapsing');
-        animateElement.style.height = animateElement.scrollHeight + 'px';
+        animateElement.style.height = `${animateElement.scrollHeight}px`;
       }
       else {
-        animateElement.style.height = animateElement.scrollHeight + 'px';
+        animateElement.style.height = `${animateElement.scrollHeight}px`;
         // We read the offset height to force a reflow, this is needed to start the transition between absolute values
         // https://blog.alexmaccaw.com/css-transitions under Redrawing
         offsetHeight = animateElement.offsetHeight;
@@ -139,9 +140,10 @@ class AccordionItem extends Component(HTMLElement) {
         animateElement.style.height = 0;
       }
     
-      commons.transitionEnd(animateElement, function() {
-        this._onCollapsed();
-      }.bind(this));
+      const self = this;
+      commons.transitionEnd(animateElement, () => {
+        self._onCollapsed();
+      });
   
       this.trigger('coral-accordion-item:_selectedchanged');
     }
@@ -210,10 +212,9 @@ class AccordionItem extends Component(HTMLElement) {
     this._elements.acHeader.focus();
   }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.content;}
-  set defaultContentZone(value) {this.content = value;}
-  get _contentZones() {return {'coral-accordion-item-label': 'label', 'coral-accordion-item-content': 'content'};}
+  get defaultContentZone() { return this.content; }
+  set defaultContentZone(value) { this.content = value; }
+  get _contentZones() { return {'coral-accordion-item-label': 'label', 'coral-accordion-item-content': 'content'}; }
   
   static get observedAttributes() {
     return ['selected', 'disabled'];
@@ -253,7 +254,7 @@ class AccordionItem extends Component(HTMLElement) {
     while (this.firstChild) {
       const child = this.firstChild;
       if (child.nodeType === Node.TEXT_NODE ||
-        (child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1)) {
+        child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
         // Add non-template elements to the content
         content.appendChild(child);
       }

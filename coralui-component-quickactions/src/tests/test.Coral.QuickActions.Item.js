@@ -1,6 +1,4 @@
 describe('Coral.QuickActions.Item', function() {
-  'use strict';
-
   var item;
 
   beforeEach(function() {

@@ -21,10 +21,6 @@
  @htmltag coral-card-overlay
  @extends HTMLElement
  */
-class CardOverlay extends HTMLElement {
-  constructor() {
-    super();
-  }
-}
+class CardOverlay extends HTMLElement {}
 
 export default CardOverlay;

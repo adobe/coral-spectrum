@@ -27,10 +27,6 @@ const CLASSNAME = 'coral3-Card-context';
  @extends Coral.mixin.component
  */
 class CardContext extends Component(HTMLElement) {
-  constructor() {
-    super();
-  }
-  
   /**
    The context's content zone.
    

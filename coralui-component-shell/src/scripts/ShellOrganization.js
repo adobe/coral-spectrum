@@ -113,7 +113,7 @@ class ShellOrganization extends ListItem {
     
       if (!this._selected && selectedItem) {
         // Always de-select children when de-selected
-        selectedItem.removeAttribute('selected')
+        selectedItem.removeAttribute('selected');
       }
     }
     
@@ -129,7 +129,7 @@ class ShellOrganization extends ListItem {
    @htmlattributereflected
    @memberof Shell.Organization#
    */
-  get name (){
+  get name() {
     return this._name || '';
   }
   set name(value) {
@@ -201,7 +201,7 @@ class ShellOrganization extends ListItem {
   
   /** @private */
   _moveItems() {
-    Array.prototype.forEach.call(this.querySelectorAll('coral-shell-suborganization'), function(item) {
+    Array.prototype.forEach.call(this.querySelectorAll('coral-shell-suborganization'), (item) => {
       if (!this._elements.items.contains(item)) {
         this._elements.items.appendChild(item);
       }
@@ -235,7 +235,7 @@ class ShellOrganization extends ListItem {
     this.selected = true;
   }
   
-  static get observedAttributes() {return super.observedAttributes.concat(['name', 'selected']);}
+  static get observedAttributes() { return super.observedAttributes.concat(['name', 'selected']); }
   
   connectedCallback() {
     this.classList.add(...CLASSNAMES);

@@ -21,10 +21,6 @@
  @htmltag coral-drawer-content
  @extends HTMLElement
  */
-class DrawerContent extends HTMLElement {
-  constructor() {
-    super();
-  }
-}
+class DrawerContent extends HTMLElement {}
 
 export default DrawerContent;

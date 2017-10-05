@@ -33,11 +33,11 @@ const XHR_EVENT_NAMES = ['loadstart', 'progress', 'load', 'error', 'loadend', 'r
  */
 const method = {
   /** Send a POST request. Used when creating a resource. */
-  'POST': 'POST',
+  POST: 'POST',
   /** Send a PUT request. Used when replacing a resource. */
-  'PUT': 'PUT',
+  PUT: 'PUT',
   /** Send a PATCH request. Used when partially updating a resource. */
-  'PATCH': 'PATCH'
+  PATCH: 'PATCH'
 };
 
 /**
@@ -109,10 +109,10 @@ class FileUpload extends FormField(Component(HTMLElement)) {
   
   // JSDoc inherited
   get value() {
-    const item = (this._uploadQueue) ? this._getQueueItem(0) : null;
+    const item = this._uploadQueue ? this._getQueueItem(0) : null;
   
     // The first selected filename, or the empty string if no files are selected.
-    return (item) ? 'C:\\fakepath\\' + item.file.name : '';
+    return item ? `C:\\fakepath\\${item.file.name}` : '';
   }
   set value(value) {
     if (value === '' || value === null) {
@@ -183,9 +183,7 @@ class FileUpload extends FormField(Component(HTMLElement)) {
    @memberof Coral.FileUpload#
    */
   get values() {
-    let values = this._uploadQueue.map(function(item) {
-      return `C:\\fakepath\\${item.file.name}`;
-    });
+    let values = this._uploadQueue.map((item) => `C:\\fakepath\\${item.file.name}`);
   
     if (values.length && !this.multiple) {
       values = [values[0]];
@@ -246,15 +244,13 @@ class FileUpload extends FormField(Component(HTMLElement)) {
   }
   set parameters(values) {
     // Verify that every item has a name
-    const isValid = Array.isArray(values) && values.every(function(el) {
-        return el && el.name;
-      });
+    const isValid = Array.isArray(values) && values.every((el) => el && el.name);
     
     if (isValid) {
       this._parameters = values;
   
       if (!this.async) {
-        Array.prototype.forEach.call(this.querySelectorAll('input[type="hidden"]'), function(input) {
+        Array.prototype.forEach.call(this.querySelectorAll('input[type="hidden"]'), (input) => {
           input.parentNode.removeChild(input);
         });
     
@@ -445,7 +441,7 @@ class FileUpload extends FormField(Component(HTMLElement)) {
     button.parentNode.insertBefore(input, button.nextElementSibling);
     
     // Make sure the input gets focused on FF
-    window.setTimeout(function() {
+    window.setTimeout(() => {
       input.focus();
     }, 100);
   }
@@ -472,7 +468,7 @@ class FileUpload extends FormField(Component(HTMLElement)) {
     button.classList.remove('is-focused');
     
     // Wait a frame so that shifting focus backwards with screen reader doesn't create a focus trap
-    window.requestAnimationFrame(function() {
+    window.requestAnimationFrame(() => {
       button.tabIndex = 0;
       // @a11y: aria-hidden is removed to prevent focus trap when navigating backwards using a screen reader's
       // virtual cursor
@@ -530,7 +526,7 @@ class FileUpload extends FormField(Component(HTMLElement)) {
       this._removeDragClass();
     }
     
-    this.trigger('coral-fileupload:' + event.type);
+    this.trigger(`coral-fileupload:${event.type}`);
   }
   
   /** @private */
@@ -638,30 +634,24 @@ class FileUpload extends FormField(Component(HTMLElement)) {
     }
     
     // Verify if file is allowed to be uploaded and trigger events accordingly
-    items.forEach(function(item) {
+    items.forEach((item) => {
       
       // If file is not found in uploadQueue using filename
       if (!self._getQueueItemByFilename(item.file.name)) {
         
         // Check file size
         if (self.sizeLimit && item.file.size > self.sizeLimit) {
-          self.trigger('coral-fileupload:filesizeexceeded', {
-            item: item
-          });
+          self.trigger('coral-fileupload:filesizeexceeded', {item});
         }
         // Check mime type
         else if (self.accept && !item._isMimeTypeAllowed(self.accept)) {
-          self.trigger('coral-fileupload:filemimetyperejected', {
-            item: item
-          });
+          self.trigger('coral-fileupload:filemimetyperejected', {item});
         }
         else {
           // Add item to queue
           self._uploadQueue.push(item);
           
-          self.trigger('coral-fileupload:fileadded', {
-            item: item
-          });
+          self.trigger('coral-fileupload:fileadded', {item});
         }
       }
     });
@@ -701,7 +691,7 @@ class FileUpload extends FormField(Component(HTMLElement)) {
       item.classList.toggle('is-disabled', this.disabled);
       item.classList.toggle('is-required', this.required);
       item.classList.toggle('is-readOnly', this.readOnly);
-      item[(this.disabled || this.readOnly) ? 'setAttribute' : 'removeAttribute']('disabled', '');
+      item[this.disabled || this.readOnly ? 'setAttribute' : 'removeAttribute']('disabled', '');
     }, this);
   }
   
@@ -738,9 +728,7 @@ class FileUpload extends FormField(Component(HTMLElement)) {
       // Remove file from queue
       this._uploadQueue.splice(this._getQueueIndex(filename), 1);
       
-      this.trigger('coral-fileupload:fileremoved', {
-        item: item
-      });
+      this.trigger('coral-fileupload:fileremoved', {item});
     }
   }
   
@@ -763,7 +751,7 @@ class FileUpload extends FormField(Component(HTMLElement)) {
   }
   
   /** @private */
-  _showFileDialog(event) {
+  _showFileDialog() {
     // Show the dialog
     // This ONLY works when the call stack traces back to another click event!
     this._elements.input.click();
@@ -802,7 +790,7 @@ class FileUpload extends FormField(Component(HTMLElement)) {
     
     const formData = new FormData();
     
-    parameters.forEach(function(additionalParameter) {
+    parameters.forEach((additionalParameter) => {
       formData.append(additionalParameter.name, additionalParameter.value);
     });
     
@@ -820,11 +808,11 @@ class FileUpload extends FormField(Component(HTMLElement)) {
     item._xhr.responseType = item.responseType;
     item._xhr.withCredentials = item.withCredentials;
     
-    XHR_EVENT_NAMES.forEach(function(name) {
+    XHR_EVENT_NAMES.forEach((name) => {
       // Progress event is the only event among other ProgressEvents that can trigger multiple times.
       // Hence it's the only one that gives away usable progress information.
-      const isProgressEvent = (name === 'progress');
-      (isProgressEvent ? item._xhr.upload : item._xhr).addEventListener(name, function(event) {
+      const isProgressEvent = name === 'progress';
+      (isProgressEvent ? item._xhr.upload : item._xhr).addEventListener(name, (event) => {
         const detail = {
           item: item,
           action: action,
@@ -837,7 +825,7 @@ class FileUpload extends FormField(Component(HTMLElement)) {
           detail.total = event.total;
         }
         
-        self.trigger('coral-fileupload:' + name, detail);
+        self.trigger(`coral-fileupload:${name}`, detail);
       });
     });
     
@@ -862,11 +850,13 @@ class FileUpload extends FormField(Component(HTMLElement)) {
   /** @private */
   _getQueueIndex(filename) {
     let index = -1;
-    this._uploadQueue.some(function(item, i) {
+    this._uploadQueue.some((item, i) => {
       if (item.file.name === filename) {
         index = i;
         return true;
       }
+      
+      return false;
     });
     return index;
   }
@@ -884,10 +874,10 @@ class FileUpload extends FormField(Component(HTMLElement)) {
     if (dropZone) {
       const size = dropZone.getBoundingClientRect();
       
-      input.style.top = parseInt(dropZone.offsetTop, 10) + 'px';
-      input.style.left = parseInt(dropZone.offsetLeft, 10) + 'px';
-      input.style.width = parseInt(size.width, 10) + 'px';
-      input.style.height = parseInt(size.height, 10) + 'px';
+      input.style.top = `${parseInt(dropZone.offsetTop, 10)}px`;
+      input.style.left = `${parseInt(dropZone.offsetLeft, 10)}px`;
+      input.style.width = `${parseInt(size.width, 10)}px`;
+      input.style.height = `${parseInt(size.height, 10)}px`;
     }
     else {
       input.style.width = '0';
@@ -918,8 +908,8 @@ class FileUpload extends FormField(Component(HTMLElement)) {
         
         form.appendChild(this._elements.input);
         
-        Array.prototype.forEach.call(this.querySelectorAll('input[type="hidden"]'), function(input) {
-          form.appendChild(input);
+        Array.prototype.forEach.call(this.querySelectorAll('input[type="hidden"]'), (hiddenInput) => {
+          form.appendChild(hiddenInput);
         });
         
         // Make sure the form is connected before submission
@@ -933,17 +923,14 @@ class FileUpload extends FormField(Component(HTMLElement)) {
       
       form.submit();
     }
+    else if (typeof filename === 'string') {
+      this._uploadFile(filename);
+    }
     else {
-      if (typeof filename === 'string') {
-        this._uploadFile(filename);
-      }
-      else {
-        const self = this;
-        self._uploadQueue.forEach(function(item) {
-          self._abortFile(item.file.name);
-          self._ajaxUpload(item);
-        });
-      }
+      this._uploadQueue.forEach((item) => {
+        this._abortFile(item.file.name);
+        this._ajaxUpload(item);
+      }, this);
     }
   }
   
@@ -961,13 +948,11 @@ class FileUpload extends FormField(Component(HTMLElement)) {
       this._clearQueue();
       this._clearFileInputValue();
     }
+    else if (typeof filename === 'string') {
+      this._clearFile(filename);
+    }
     else {
-      if (typeof filename === 'string') {
-        this._clearFile(filename);
-      }
-      else {
-        this._clearQueue();
-      }
+      this._clearQueue();
     }
   }
   
@@ -988,10 +973,9 @@ class FileUpload extends FormField(Component(HTMLElement)) {
     }
     else {
       // Abort all files
-      const self = this;
-      self._uploadQueue.forEach(function(item) {
-        self._abortFile(item.file.name);
-      });
+      this._uploadQueue.forEach((item) => {
+        this._abortFile(item.file.name);
+      }, this);
     }
   }
   
@@ -1026,7 +1010,7 @@ class FileUpload extends FormField(Component(HTMLElement)) {
     
     // Fetch additional parameters if any
     const parameters = [];
-    Array.prototype.forEach.call(this.querySelectorAll('input[type="hidden"]'), function(input) {
+    Array.prototype.forEach.call(this.querySelectorAll('input[type="hidden"]'), (input) => {
       parameters.push({
         name: input.name,
         value: input.value
@@ -1036,9 +1020,9 @@ class FileUpload extends FormField(Component(HTMLElement)) {
   
     // Remove the input if it's already there
     // A fresh input is preferred to value = '' as it may not work in all browsers
-    const input = this.querySelector('[handle="input"]');
-    if (input) {
-      input.parentNode.removeChild(input);
+    const inputElement = this.querySelector('[handle="input"]');
+    if (inputElement) {
+      inputElement.parentNode.removeChild(inputElement);
     }
   
     // Remove the object if it's already there
@@ -1050,11 +1034,12 @@ class FileUpload extends FormField(Component(HTMLElement)) {
     // Add the input to the component
     this.appendChild(this._elements.input);
   
+    const self = this;
     // IE11 requires one more frame or the resize listener <object> will appear as an overlaying white box
-    window.requestAnimationFrame(function() {
+    window.requestAnimationFrame(() => {
       // Handles the repositioning of the input to allow dropping files
-      commons.addResizeListener(this, this._positionInputOnDropZone);
-    }.bind(this));
+      commons.addResizeListener(self, self._positionInputOnDropZone);
+    });
   }
 }
 

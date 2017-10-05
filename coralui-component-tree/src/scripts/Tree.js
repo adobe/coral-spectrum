@@ -65,8 +65,8 @@ class Tree extends Component(HTMLElement) {
   
     // Listen for mutations for Torq compatibility
     const self = this;
-    const observer = new MutationObserver(function(mutations) {
-      mutations.forEach(function(mutation) {
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
         for (let i = 0; i < mutation.addedNodes.length; i++) {
           const addedNode = mutation.addedNodes[i];
           if (addedNode.tagName === 'CORAL-TREE-ITEM') {
@@ -154,7 +154,7 @@ class Tree extends Component(HTMLElement) {
   
   /** @private */
   _validateSelection(item) {
-    let selectedItems = this.selectedItems;
+    const selectedItems = this.selectedItems;
     
     if (!this.multiple) {
       // Last selected item wins if multiple selection while not allowed
@@ -193,7 +193,7 @@ class Tree extends Component(HTMLElement) {
       else {
         // Return all items if we just switched from multiple=true to multiple=false and we had >1 selected items
         this.trigger('coral-tree:change', {
-          oldSelection: oldSelection.length > 1 ? oldSelection : (oldSelection[0] || null),
+          oldSelection: oldSelection.length > 1 ? oldSelection : oldSelection[0] || null,
           selection: selectedItems[0] || null
         });
       }
@@ -207,9 +207,7 @@ class Tree extends Component(HTMLElement) {
     let diff = [];
     
     if (oldSelection.length === selection.length) {
-      diff = oldSelection.filter(function(item) {
-        return selection.indexOf(item) === -1;
-      });
+      diff = oldSelection.filter((item) => selection.indexOf(item) === -1);
     }
     
     // since we guarantee that they are arrays, we can start by comparing their size
@@ -298,11 +296,11 @@ class Tree extends Component(HTMLElement) {
       if (siblingItem.parentNode.closest('coral-tree-item.is-collapsed')) {
         if (next) {
           index++;
-          siblingItem = (index > focusableItems.length - 1) ? item : null;
+          siblingItem = index > focusableItems.length - 1 ? item : null;
         }
         else {
           index--;
-          siblingItem = (index < 0) ? item : null;
+          siblingItem = index < 0 ? item : null;
         }
       }
     }
@@ -334,7 +332,7 @@ class Tree extends Component(HTMLElement) {
   
   /** @private */
   _onFocusNextItem(event) {
-  event.preventDefault();
+    event.preventDefault();
     event.stopPropagation();
   
     const item = event.target.closest('coral-tree-item');
@@ -385,9 +383,7 @@ class Tree extends Component(HTMLElement) {
     event.stopImmediatePropagation();
     
     const item = event.target;
-    this.trigger('coral-tree:item' + (item.expanded ? 'expand' : 'collapse'), {
-      item: item
-    });
+    this.trigger(`coral-tree:item${item.expanded ? 'expand' : 'collapse'}`, {item});
   }
   
   /** @private */
@@ -397,9 +393,7 @@ class Tree extends Component(HTMLElement) {
   
   /** @private */
   _getFocusableItems() {
-    return this.items.getAll().filter(function(item) {
-      return !item.closest('coral-tree-item[disabled]') && !item.closest('coral-tree-item[hidden]');
-    });
+    return this.items.getAll().filter((item) => !item.closest('coral-tree-item[disabled]') && !item.closest('coral-tree-item[hidden]'));
   }
   
   /** @private */
@@ -461,11 +455,12 @@ class Tree extends Component(HTMLElement) {
     this.setAttribute('role', 'tree');
     this.setAttribute('aria-multiselectable', this.multiple);
     
+    const self = this;
     // Requires tree item API to be defined
-    window.customElements.whenDefined('coral-tree-item').then(function() {
+    window.customElements.whenDefined('coral-tree-item').then(() => {
       // Enable keyboard interaction
-      this._resetFocusableItem();
-    }.bind(this));
+      self._resetFocusableItem();
+    });
     
     // Don't trigger events once connected
     this._preventTriggeringEvents = true;

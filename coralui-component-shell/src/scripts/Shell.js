@@ -57,10 +57,9 @@ class Shell extends Component(HTMLElement) {
     });
   }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.content;}
-  set defaultContentZone(value) {this.content = value;}
-  get _contentZones() {return {'coral-shell-content': 'content'};}
+  get defaultContentZone() { return this.content; }
+  set defaultContentZone(value) { this.content = value; }
+  get _contentZones() { return {'coral-shell-content': 'content'}; }
   
   connectedCallback() {
     super.connectedCallback();

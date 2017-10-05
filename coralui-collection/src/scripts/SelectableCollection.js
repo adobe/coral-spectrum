@@ -147,7 +147,7 @@ class SelectableCollection extends Collection {
     let selector = this._selectedItemSelector;
   
     if (typeof selectedAttribute === 'string') {
-      selector = selector.replace('[selected]', '[' + selectedAttribute + ']');
+      selector = selector.replace('[selected]', `[${selectedAttribute}]`);
     }
   
     return this._host.querySelector(selector) || null;
@@ -168,7 +168,7 @@ class SelectableCollection extends Collection {
     let selector = this._selectedItemSelector;
   
     if (typeof selectedAttribute === 'string') {
-      selector = selector.replace('[selected]', '[' + selectedAttribute + ']');
+      selector = selector.replace('[selected]', `[${selectedAttribute}]`);
     }
   
     // last-of-type did not work so we need to query all
@@ -190,7 +190,7 @@ class SelectableCollection extends Collection {
     let selector = this._selectedItemSelector;
   
     if (typeof selectedAttribute === 'string') {
-      selector = selector.replace('[selected]', '[' + selectedAttribute + ']');
+      selector = selector.replace('[selected]', `[${selectedAttribute}]`);
     }
   
     return listToArray(this._host.querySelectorAll(selector));
@@ -211,7 +211,7 @@ class SelectableCollection extends Collection {
     const attributeToRemove = selectedAttribute || 'selected';
   
     if (typeof selectedAttribute === 'string') {
-      selector = selector.replace('[selected]', '[' + selectedAttribute + ']');
+      selector = selector.replace('[selected]', `[${selectedAttribute}]`);
     }
   
     // we select all the selected attributes except the last one
@@ -239,7 +239,7 @@ class SelectableCollection extends Collection {
     const attributeToRemove = selectedAttribute || 'selected';
   
     if (typeof selectedAttribute === 'string') {
-      selector = selector.replace('[selected]', '[' + selectedAttribute + ']');
+      selector = selector.replace('[selected]', `[${selectedAttribute}]`);
     }
   
     // we query for all matching items with the given attribute
@@ -279,14 +279,14 @@ class SelectableCollection extends Collection {
     if (typeof itemOrSelectedAttribute === 'string') {
       item = null;
       attributeToRemove = itemOrSelectedAttribute || 'selected';
-      selector = selector.replace('[selected]', '[' + attributeToRemove + ']');
+      selector = selector.replace('[selected]', `[${attributeToRemove}]`);
     }
     else {
       item = itemOrSelectedAttribute;
       attributeToRemove = selectedAttribute || 'selected';
     
       if (typeof selectedAttribute === 'string') {
-        selector = selector.replace('[selected]', '[' + attributeToRemove + ']');
+        selector = selector.replace('[selected]', `[${attributeToRemove}]`);
       }
     }
   

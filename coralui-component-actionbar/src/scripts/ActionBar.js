@@ -106,9 +106,10 @@ class ActionBar extends Component(HTMLElement) {
     // http://www.backalleycoder.com/2013/03/18/cross-browser-event-based-element-resize-detection/
     
     // relayout any time the dom changes
-    this._observer = new MutationObserver(function() {
-      this._debounceOnLayout();
-    }.bind(this));
+    const self = this;
+    this._observer = new MutationObserver(() => {
+      self._debounceOnLayout();
+    });
     
     // Watch for changes
     this._observer.observe(this, {
@@ -184,8 +185,8 @@ class ActionBar extends Component(HTMLElement) {
     let itemLeft = null;
     let itemRight = null;
     const widthCache = this._newWidthCache();
-    const leftMoreButtonWidth = (leftItems.length > 0) ? widthCache.getOuterWidth(this.primary._elements.moreButton) : 0;
-    const rightMoreButtonWidth = (rightItems.length > 0) ? widthCache.getOuterWidth(this.secondary._elements.moreButton) : 0;
+    const leftMoreButtonWidth = leftItems.length > 0 ? widthCache.getOuterWidth(this.primary._elements.moreButton) : 0;
+    const rightMoreButtonWidth = rightItems.length > 0 ? widthCache.getOuterWidth(this.secondary._elements.moreButton) : 0;
     
     // Make it possible to set left/right padding to the containers
     const borderWidthLeftContainer = this.primary.offsetWidth - this.primary.getBoundingClientRect().width;
@@ -205,8 +206,8 @@ class ActionBar extends Component(HTMLElement) {
     let itemWidth = 0;
     
     for (let i = 0; i < leftItems.length || i < rightItems.length; i++) {
-      itemLeft = (i < leftItems.length) ? leftItems[i] : null;
-      itemRight = (i < rightItems.length) ? rightItems[i] : null;
+      itemLeft = i < leftItems.length ? leftItems[i] : null;
+      itemRight = i < rightItems.length ? rightItems[i] : null;
       
       // first calculate visibility of left item
       showItem = false;
@@ -285,7 +286,7 @@ class ActionBar extends Component(HTMLElement) {
           }
           
           // enable tab for 'first' right item
-          this._makeItemTabEnabled(itemRight, showItem && (i === rightItems.length - 1));
+          this._makeItemTabEnabled(itemRight, showItem && i === rightItems.length - 1);
           
           if (showItem) {
             rightVisibleItems += 1;
@@ -367,7 +368,7 @@ class ActionBar extends Component(HTMLElement) {
     
     if (this.primary._elements.popover.open === true || this.secondary._elements.popover.open === true) {
       // if popover is open only items in popover can be selected
-      const popoverItems = (this.primary._elements.popover.open === true) ? this.primary._itemsInPopover :
+      const popoverItems = this.primary._elements.popover.open === true ? this.primary._itemsInPopover :
         this.secondary._itemsInPopover;
       let item = null;
       
@@ -430,7 +431,7 @@ class ActionBar extends Component(HTMLElement) {
     if (isWebkit && el.style.display !== 'none') {
       el.style.display = 'none';
       
-      // no need to store this anywhere, the reference would be enough (just saved to silence jshint)
+      // no need to store this anywhere, the reference would be enough
       this._cachedOffsetHeight = el.offsetHeight;
       
       el.style.display = '';
@@ -487,7 +488,7 @@ class ActionBar extends Component(HTMLElement) {
       window.clearTimeout(self._timeout);
     }
     
-    self._timeout = window.setTimeout(function() {
+    self._timeout = window.setTimeout(() => {
       self._timeout = null;
       self._onLayout();
     }, self._wait);
@@ -506,9 +507,8 @@ class ActionBar extends Component(HTMLElement) {
     this._elements.primary.appendChild(frag);
   }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.primary;}
-  set defaultContentZone(value) {this.primary = value;}
+  get defaultContentZone() { return this.primary; }
+  set defaultContentZone(value) { this.primary = value; }
   get _contentZones() {
     return {
       'coral-actionbar-primary': 'primary',

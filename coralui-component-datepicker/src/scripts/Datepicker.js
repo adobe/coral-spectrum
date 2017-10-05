@@ -46,7 +46,7 @@ const CLASSNAME = 'coral-InputGroup';
 // classnames when the variant changes.
 const ALL_VARIANT_CLASSES = [];
 for (const variantKey in variant) {
-  ALL_VARIANT_CLASSES.push(CLASSNAME + '--' + variant[variantKey]);
+  ALL_VARIANT_CLASSES.push(`${CLASSNAME}--${variant[variantKey]}`);
 }
 
 /** @ignore */
@@ -57,11 +57,10 @@ function toMoment(value, format) {
   else if (DateTime.Moment.isMoment(value)) {
     return value.isValid() ? value.clone() : null;
   }
-  else {
-    // if the value provided is a date it does not make sense to provide a format to parse the date
-    const result = new DateTime.Moment(value, value instanceof Date ? null : format);
-    return result.isValid() ? result : null;
-  }
+  
+  // if the value provided is a date it does not make sense to provide a format to parse the date
+  const result = new DateTime.Moment(value, value instanceof Date ? null : format);
+  return result.isValid() ? result : null;
 }
 
 /**
@@ -90,7 +89,7 @@ const NATIVE_FORMATS = {
 
 const isNativeFormat = (format) => {
   let res = false;
-  for (let key in NATIVE_FORMATS) {
+  for (const key in NATIVE_FORMATS) {
     if (format === NATIVE_FORMATS[key]) {
       res = true;
     }
@@ -170,8 +169,8 @@ class Datetime extends FormField(Component(HTMLElement)) {
     this._elements.calendar.setAttribute('aria-hidden', isTime);
     
     // Change format if we have a native format set
-    if (isNativeFormat(this.valueFormat)) {this.valueFormat = format;}
-    if (isNativeFormat(this.displayFormat)) {this.displayFormat = format;}
+    if (isNativeFormat(this.valueFormat)) { this.valueFormat = format; }
+    if (isNativeFormat(this.displayFormat)) { this.displayFormat = format; }
     
     this._useNativeInput = this._useNativeInput;
   
@@ -197,9 +196,8 @@ class Datetime extends FormField(Component(HTMLElement)) {
     if (this._useNativeInput && this.type !== type.DATETIME) {
       return NATIVE_FORMATS[this.type];
     }
-    else {
-      return typeof this._displayFormat === 'undefined' ? NATIVE_FORMATS[this.type] : this._displayFormat;
-    }
+    
+    return typeof this._displayFormat === 'undefined' ? NATIVE_FORMATS[this.type] : this._displayFormat;
   }
   set displayFormat(value) {
     value = transform.string(value).trim();
@@ -278,7 +276,7 @@ class Datetime extends FormField(Component(HTMLElement)) {
     return value ? value.toDate() : null;
   }
   set valueAsDate(value) {
-    this._valueAsDate = (value instanceof Date) ? new DateTime.Moment(value) : '';
+    this._valueAsDate = value instanceof Date ? new DateTime.Moment(value) : '';
   
     this.value = this._valueAsDate;
   }
@@ -421,7 +419,7 @@ class Datetime extends FormField(Component(HTMLElement)) {
     this._elements.input.variant = this._variant;
   
     // removes every existing variant
-    this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
+    this.classList.remove(...ALL_VARIANT_CLASSES);
   
     if (this._variant !== variant.DEFAULT) {
       this.classList.add(`${CLASSNAME}--${this._variant}`);
@@ -688,8 +686,8 @@ class Datetime extends FormField(Component(HTMLElement)) {
   }
   
   // Expose enums
-  static get variant() {return variant;}
-  static get type() {return type;}
+  static get variant() { return variant; }
+  static get type() { return type; }
   
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -719,9 +717,9 @@ class Datetime extends FormField(Component(HTMLElement)) {
     this.setAttribute('role', 'datepicker');
     
     // Default reflected attributes
-    if (!this._variant) {this.variant = variant.DEFAULT;}
+    if (!this._variant) { this.variant = variant.DEFAULT; }
     // "type" takes care of reflecting "displayFormat" and "valueFormat"
-    if (!this._type) {this.type = type.DATE;}
+    if (!this._type) { this.type = type.DATE; }
     
     // clean up to be able to clone it
     while (this.firstChild) {

@@ -21,10 +21,6 @@
  @htmltag coral-panel-content
  @extends HTMLElement
  */
-class PanelContent extends HTMLElement {
-  constructor() {
-    super();
-  }
-}
+class PanelContent extends HTMLElement {}
 
 export default PanelContent;

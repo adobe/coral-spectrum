@@ -1,6 +1,4 @@
 describe('Coral.Select.Collection', function() {
-  'use strict';
-
   describe('API', function() {
     describe('#_getFirstSelectable()', function() {
       it('should return the first valid item for selection', function() {

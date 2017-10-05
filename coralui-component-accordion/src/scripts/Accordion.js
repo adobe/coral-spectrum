@@ -46,7 +46,7 @@ const CLASSNAME = 'coral3-Accordion';
 // builds a string with all the possible class names to be able to handle variant changes
 const ALL_VARIANT_CLASSES = [];
 for (const variantValue in variant) {
-  ALL_VARIANT_CLASSES.push(CLASSNAME + '--' + variant[variantValue]);
+  ALL_VARIANT_CLASSES.push(`${CLASSNAME}--${variant[variantValue]}`);
 }
 
 /**
@@ -104,7 +104,7 @@ class Accordion extends Component(HTMLElement) {
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
 
-    this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
+    this.classList.remove(...ALL_VARIANT_CLASSES);
 
     if (this._variant !== variant.DEFAULT) {
       this.classList.add(`${CLASSNAME}--${this._variant}`);
@@ -128,7 +128,7 @@ class Accordion extends Component(HTMLElement) {
         // allows accordions to be nested
         itemSelector: ':scope > coral-accordion-item',
         onItemAdded: this._validateSelection,
-        onItemRemoved: this._validateSelection,
+        onItemRemoved: this._validateSelection
       });
     }
     return this._items;
@@ -183,7 +183,7 @@ class Accordion extends Component(HTMLElement) {
     this.__tabTarget = value;
     
     // Set all but the current set _tabTarget to not be a tab target:
-    this.items.getAll().forEach(function(item) {
+    this.items.getAll().forEach((item) => {
       item._isTabTarget = item === value;
     });
   }
@@ -309,7 +309,7 @@ class Accordion extends Component(HTMLElement) {
   
   /** @private */
   _validateSelection(item) {
-    let selectedItems = this.selectedItems;
+    const selectedItems = this.selectedItems;
     
     if (!this.multiple) {
       // Last selected item wins if multiple selection while not allowed
@@ -350,7 +350,7 @@ class Accordion extends Component(HTMLElement) {
       else {
         // Return all items if we just switched from multiple=true to multiple=false and we had >1 selected items
         this.trigger('coral-accordion:change', {
-          oldSelection: oldSelection.length > 1 ? oldSelection : (oldSelection[0] || null),
+          oldSelection: oldSelection.length > 1 ? oldSelection : oldSelection[0] || null,
           selection: selectedItems[0] || null
         });
       }
@@ -364,9 +364,7 @@ class Accordion extends Component(HTMLElement) {
     let diff = [];
   
     if (oldSelection.length === selection.length) {
-      diff = oldSelection.filter(function(item) {
-        return selection.indexOf(item) === -1;
-      });
+      diff = oldSelection.filter((item) => selection.indexOf(item) === -1);
     }
   
     // since we guarantee that they are arrays, we can start by comparing their size
@@ -384,14 +382,15 @@ class Accordion extends Component(HTMLElement) {
     if (!this._resetTabTargetScheduled) {
       this._resetTabTargetScheduled = true;
       
-      window.requestAnimationFrame(function() {
-        this._resetTabTargetScheduled = false;
+      const self = this;
+      window.requestAnimationFrame(() => {
+        self._resetTabTargetScheduled = false;
         
         // since hidden items cannot have focus, we need to make sure the tabTarget is not hidden
-        const selectedItems = this.items._getAllSelected();
-        
-        this._tabTarget = selectedItems.length ? selectedItems[0] : this.items._getFirstSelectable();
-      }.bind(this));
+        const selectedItems = self.items._getAllSelected();
+  
+        self._tabTarget = selectedItems.length ? selectedItems[0] : self.items._getFirstSelectable();
+      });
     }
   }
   
@@ -412,7 +411,7 @@ class Accordion extends Component(HTMLElement) {
   }
   
   // Expose enum
-  static get variant() {return variant;}
+  static get variant() { return variant; }
 
   static get observedAttributes() {
     return ['variant', 'multiple'];
@@ -424,7 +423,7 @@ class Accordion extends Component(HTMLElement) {
     this.classList.add(CLASSNAME);
   
     // Default reflected attributes
-    if (!this._variant) {this.variant = variant.DEFAULT;}
+    if (!this._variant) { this.variant = variant.DEFAULT; }
     
     this.setAttribute('role', 'tablist');
     this.setAttribute('aria-multiselectable', this.multiple);

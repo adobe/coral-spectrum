@@ -21,10 +21,6 @@
  @htmltag coral-card-content
  @extends HTMLElement
  */
-class CardContent extends HTMLElement {
-  constructor() {
-    super();
-  }
-}
+class CardContent extends HTMLElement {}
 
 export default CardContent;

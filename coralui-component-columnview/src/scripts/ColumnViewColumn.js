@@ -178,7 +178,7 @@ class ColumnViewColumn extends Component(HTMLElement) {
     return this.__selectionMode;
   }
   set _selectionMode(value) {
-    value  = transform.string(value).toLowerCase();
+    value = transform.string(value).toLowerCase();
     this.__selectionMode = validate.enumeration(selectionMode)(value) && value || null;
     this._reflectAttribute('selectionmode', this.__selectionMode);
   
@@ -288,7 +288,7 @@ class ColumnViewColumn extends Component(HTMLElement) {
     const self = this;
     // we use setTimeout instead of nextFrame because macrotasks allow for more flexibility since they are less
     // aggressive in executing the code
-    window.setTimeout(function() {
+    window.setTimeout(() => {
       // trigger 'coral-columnview:loaditems' asynchronously in order to be sure the application is done
       // adding/removing elements. Also make sure that only one event is triggered at once
       
@@ -299,7 +299,7 @@ class ColumnViewColumn extends Component(HTMLElement) {
   }
   
   /** @private */
-  _onContentScroll(event) {
+  _onContentScroll() {
     window.clearTimeout(this._scrollTimeout);
     this._scrollTimeout = window.setTimeout(this._onDebouncedScroll, SCROLL_DEBOUNCE);
   }
@@ -343,13 +343,8 @@ class ColumnViewColumn extends Component(HTMLElement) {
   _arraysAreDifferent(selection, oldSelection) {
     let diff = [];
     
-    if (!oldSelection) {
-      debugger;
-    }
     if (oldSelection.length === selection.length) {
-      diff = oldSelection.filter(function(item) {
-        return selection.indexOf(item) === -1;
-      });
+      diff = oldSelection.filter((item) => selection.indexOf(item) === -1);
     }
     
     // since we guarantee that they are arrays, we can start by comparing their size
@@ -471,9 +466,7 @@ class ColumnViewColumn extends Component(HTMLElement) {
     for (let i = 0; i < addedNodesCount; i++) {
       item = addedNodes[i];
       if (item.tagName === 'CORAL-COLUMNVIEW-ITEM') {
-        this.trigger('coral-collection:add', {
-          item: item
-        });
+        this.trigger('coral-collection:add', {item});
       }
     }
     
@@ -481,17 +474,14 @@ class ColumnViewColumn extends Component(HTMLElement) {
     for (let j = 0; j < removedNodesCount; j++) {
       item = removedNodes[j];
       if (item.tagName === 'CORAL-COLUMNVIEW-ITEM') {
-        this.trigger('coral-collection:remove', {
-          item: item
-        });
+        this.trigger('coral-collection:remove', {item});
       }
     }
   }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.content;}
-  set defaultContentZone(value) {this.content = value;}
-  get _contentZones() {return {'coral-columnview-column-content': 'content'};}
+  get defaultContentZone() { return this.content; }
+  set defaultContentZone(value) { this.content = value; }
+  get _contentZones() { return {'coral-columnview-column-content': 'content'}; }
   
   static get observedAttributes() {
     return [
@@ -534,9 +524,10 @@ class ColumnViewColumn extends Component(HTMLElement) {
     
     // instead of being super aggressive on requesting data, we use setTimeout so it is scheduled after all the code
     // has been executed (macrotask), this way events can be added before
-    window.setTimeout(function() {
-      this._loadFittingAdditionalItems();
-    }.bind(this));
+    const self = this;
+    window.setTimeout(() => {
+      self._loadFittingAdditionalItems();
+    });
   }
 }
 

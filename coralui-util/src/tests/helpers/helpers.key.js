@@ -4,8 +4,6 @@ var helpers = helpers || {};
   Note: these helpers are implicitly tested by test.Coral.keys.js
 */
 (function() {
-  'use strict';
-
   var modifierEventProperties = {
     16: 'shiftKey',
     17: 'ctrlKey',

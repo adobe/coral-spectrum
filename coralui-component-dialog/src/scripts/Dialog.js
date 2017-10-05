@@ -90,23 +90,23 @@ const backdrop = {
  @ignore
  */
 const ICON_CLASSES = {
-  'error': 'alert',
-  'warning': 'alert',
-  'success': 'checkCircle',
-  'help': 'helpCircle',
-  'info': 'infoCircle'
+  error: 'alert',
+  warning: 'alert',
+  success: 'checkCircle',
+  help: 'helpCircle',
+  info: 'infoCircle'
 };
 
 // The dialog's base classname
 const CLASSNAME = 'coral3-Dialog';
 // Modifier classnames
-const FULLSCREEN_CLASSNAME = CLASSNAME + '--fullscreen';
-const EMPTY_BACKDROP_CLASSNAME = CLASSNAME + '--backdropNone';
+const FULLSCREEN_CLASSNAME = `${CLASSNAME}--fullscreen`;
+const EMPTY_BACKDROP_CLASSNAME = `${CLASSNAME}--backdropNone`;
 
 // A string of all possible variant classnames
 const ALL_VARIANT_CLASSES = [];
 for (const variantValue in variant) {
-  ALL_VARIANT_CLASSES.push(CLASSNAME + '--' + variant[variantValue]);
+  ALL_VARIANT_CLASSES.push(`${CLASSNAME}--${variant[variantValue]}`);
 }
 
 /**
@@ -192,7 +192,7 @@ class Dialog extends Overlay(Component(HTMLElement)) {
       insert: function(header) {
         this._elements.headerContent.appendChild(header);
       },
-      set: function(value) {
+      set: function() {
         // Stop observing the old header and observe the new one
         this._observeHeader();
     
@@ -216,7 +216,7 @@ class Dialog extends Overlay(Component(HTMLElement)) {
     this._setContentZone('content', value, {
       handle: 'content',
       tagName: 'coral-dialog-content',
-      insert : function(content) {
+      insert: function(content) {
         // The content should always be before footer
         this._elements.contentZoneTarget.insertBefore(content, this.footer);
       }
@@ -237,7 +237,7 @@ class Dialog extends Overlay(Component(HTMLElement)) {
     this._setContentZone('footer', value, {
       handle: 'footer',
       tagName: 'coral-dialog-footer',
-      insert : function(footer) {
+      insert: function(footer) {
         // The footer should always be after content
         this._elements.contentZoneTarget.appendChild(footer);
       }
@@ -259,7 +259,7 @@ class Dialog extends Overlay(Component(HTMLElement)) {
     value = transform.string(value).toLowerCase();
     this._backdrop = validate.enumeration(backdrop)(value) && value || backdrop.MODAL;
   
-    const showBackdrop = (this._backdrop !== backdrop.NONE);
+    const showBackdrop = this._backdrop !== backdrop.NONE;
   
     // We're visible now, so hide or show the modal accordingly
     if (this.open && showBackdrop) {
@@ -287,7 +287,7 @@ class Dialog extends Overlay(Component(HTMLElement)) {
     this._reflectAttribute('variant', this._variant);
   
     // Remove all variant classes
-    this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
+    this.classList.remove(...ALL_VARIANT_CLASSES);
   
     if (this._variant === variant.DEFAULT) {
       this._elements.icon.icon = '';
@@ -455,9 +455,12 @@ class Dialog extends Overlay(Component(HTMLElement)) {
     if (this._headerObserver) {
       this._headerObserver.disconnect();
       this._headerObserver.observe(this._elements.header, {
-        childList: true, // Catch changes to childList
-        characterData: true, // Catch changes to textContent
-        subtree: true // Monitor any child node
+        // Catch changes to childList
+        childList: true,
+        // Catch changes to textContent
+        characterData: true,
+        // Monitor any child node
+        subtree: true
       });
     }
   }
@@ -547,7 +550,7 @@ class Dialog extends Overlay(Component(HTMLElement)) {
     if (height < window.innerHeight - 20) {
       // Set position
       wrapper.style.top = '50%';
-      wrapper.style.marginTop = -(height / 2) + 'px';
+      wrapper.style.marginTop = `${-(height / 2)}px`;
     }
     else {
       // Allow vertical scroll
@@ -561,13 +564,13 @@ class Dialog extends Overlay(Component(HTMLElement)) {
       wrapper.style.left = '';
     }
     else {
-      wrapper.style.marginLeft = -(width / 2) + 'px';
+      wrapper.style.marginLeft = `${-(width / 2)}px`;
       wrapper.style.left = '50%';
     }
     
     if (this.movable) {
       // Allows the dialog to moved outside of the right window side
-      wrapper.style.width = wrapper.getBoundingClientRect().width + 'px';
+      wrapper.style.width = `${wrapper.getBoundingClientRect().width}px`;
     }
   
     // Reset display to previous style
@@ -599,9 +602,8 @@ class Dialog extends Overlay(Component(HTMLElement)) {
     return this;
   }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.content;}
-  set defaultContentZone(value) {this.content = value;}
+  get defaultContentZone() { return this.content; }
+  set defaultContentZone(value) { this.content = value; }
   get _contentZones() {
     return {
       'coral-dialog-header': 'header',
@@ -611,10 +613,10 @@ class Dialog extends Overlay(Component(HTMLElement)) {
   }
   
   // Expose enumerations
-  static get variant() {return variant;}
-  static get backdrop() {return backdrop;}
-  static get closable() {return closable;}
-  static get interaction() {return interaction;}
+  static get variant() { return variant; }
+  static get backdrop() { return backdrop; }
+  static get closable() { return closable; }
+  static get interaction() { return interaction; }
   
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -634,10 +636,10 @@ class Dialog extends Overlay(Component(HTMLElement)) {
     this.style.display = 'none';
 
     // Default reflected attributes
-    if (!this._variant) {this.variant = variant.DEFAULT;}
-    if (!this._backdrop) {this.backdrop = backdrop.MODAL;}
-    if (!this._closable) {this.closable = closable.OFF;}
-    if (!this._interaction) {this.interaction = interaction.ON;}
+    if (!this._variant) { this.variant = variant.DEFAULT; }
+    if (!this._backdrop) { this.backdrop = backdrop.MODAL; }
+    if (!this._closable) { this.closable = closable.OFF; }
+    if (!this._interaction) { this.interaction = interaction.ON; }
 
     // Fetch the content zones
     const header = this._elements.header;
@@ -653,9 +655,7 @@ class Dialog extends Overlay(Component(HTMLElement)) {
     // Case where the dialog was rendered already - cloneNode support
     if (wrapper) {
       // Remove tab captures
-      Array.prototype.filter.call(this.children, function(child) {
-        return (child.hasAttribute('coral-tabcapture'));
-      }).forEach((tabCapture) => {
+      Array.prototype.filter.call(this.children, (child) => child.hasAttribute('coral-tabcapture')).forEach((tabCapture) => {
         this.removeChild(tabCapture);
       }, this);
 

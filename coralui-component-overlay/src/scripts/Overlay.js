@@ -156,16 +156,16 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
     if (value === null || typeof value === 'string' || value instanceof Node) {
       this._target = value;
   
-      const target = this._getTarget();
+      const targetElement = this._getTarget();
       
-      if (target) {
+      if (targetElement) {
         // To make it return focus to the right item, change the target
         if (this._returnFocus === this.constructor.returnFocus.ON) {
-          this.returnFocusTo(target);
+          this.returnFocusTo(targetElement);
         }
         
         // Initialize popper only if we have a target
-        this._popper = this._popper || new PopperJS(target, this, {onUpdate: this._onUpdate.bind(this)});
+        this._popper = this._popper || new PopperJS(targetElement, this, {onUpdate: this._onUpdate.bind(this)});
         
         // Make sure popper options modifiers are up to date
         this.reposition();
@@ -370,10 +370,11 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
   set open(value) {
     super.open = value;
     
+    const self = this;
     // We need an additional frame to help popper read the correct offsets
-    window.requestAnimationFrame(function() {
-      this.reposition();
-    }.bind(this));
+    window.requestAnimationFrame(() => {
+      self.reposition();
+    });
   }
   
   /** @ignore */
@@ -382,10 +383,11 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
     if (!this._oldPosition) {
       this._oldPosition = data.styles.transform;
       
+      const self = this;
       // Do it in the next frame to avoid triggering the event too early
-      window.requestAnimationFrame(function() {
-        this.trigger('coral-overlay:positioned', data);
-      }.bind(this));
+      window.requestAnimationFrame(() => {
+        self.trigger('coral-overlay:positioned', data);
+      });
     }
     // Trigger again only if position changed
     else {
@@ -464,14 +466,16 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
    
    @function
    @memberof Coral.Overlay#
+   @param {Boolean} forceReposition
+   Whether to force repositioning even if closed.
    */
-  reposition() {
+  reposition(forceReposition) {
     if (this._popper) {
-      const target = this._getTarget();
+      const targetElement = this._getTarget();
       
       // Update target only if valid
-      if (target) {
-        this._popper.reference = target;
+      if (targetElement) {
+        this._popper.reference = targetElement;
       }
       
       this._popper.options.placement = this.placement;
@@ -493,18 +497,18 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
         }
       }, this);
   
-      if (this.open) {
+      if (this.open || forceReposition) {
         this._popper.update();
       }
     }
   }
   
   // Expose enumerations
-  static get align() {return align;}
-  static get collision() {return collision;}
-  static get target() {return target;}
-  static get placement() {return placement;}
-  static get interaction() {return interaction;}
+  static get align() { return align; }
+  static get collision() { return collision; }
+  static get target() { return target; }
+  static get placement() { return placement; }
+  static get interaction() { return interaction; }
 
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -534,8 +538,15 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
     // Hidden by default
     this.style.display = 'none';
   
-    // In case it was not added to the DOM, make sure popper is initialized by setting target and reposition
+    // In case it was not added to the DOM, make sure popper is initialized by setting target
     this.target = this.target;
+  
+    const self = this;
+    // We need an additional frame to help popper read the correct offsets
+    window.requestAnimationFrame(() => {
+      // Force repositioning
+      self.reposition(true);
+    });
   }
   
   /**

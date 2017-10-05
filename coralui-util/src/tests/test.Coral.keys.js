@@ -1,6 +1,4 @@
 describe('Coral.keys', function() {
-  'use strict';
-  
   it('should have a numeric keycode', function() {
     var spy = sinon.spy();
     Coral.keys.on('a', spy);

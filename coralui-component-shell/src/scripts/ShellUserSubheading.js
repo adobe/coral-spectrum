@@ -21,10 +21,6 @@
  @htmltag coral-shell-user-subheading
  @extends HTMLElement
  */
-class ShellUserSubheading extends HTMLElement {
-  constructor() {
-    super();
-  }
-}
+class ShellUserSubheading extends HTMLElement {}
 
 export default ShellUserSubheading;

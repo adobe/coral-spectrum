@@ -1,6 +1,4 @@
 describe('Coral.Tree', function() {
-  'use strict';
-  
   // Assert whether an item is properly active or inactive.
   var assertActiveness = function(item, isSelected, isExpanded) {
     

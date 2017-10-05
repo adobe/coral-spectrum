@@ -1,8 +1,6 @@
 import {DateTime} from 'coralui-datetime';
 
 describe('Coral.Datepicker', function() {
-  'use strict';
-
   // @todo: add tests for mobile
   describe('Namespace', function() {
     it('should be defined', function() {
@@ -835,7 +833,8 @@ describe('Coral.Datepicker', function() {
       
       it('should restore focus to toggle when closed using ESC key', function(done) {
         const el = helpers.build(window.__html__['Coral.Datepicker.type.time.html']);
-      
+        el._elements.popover._overlayAnimationTime = 0;
+        
         // explicitly set focus to toggle button
         el._elements.toggle.focus();
       

@@ -117,7 +117,7 @@ class ColumnViewItem extends Component(HTMLElement) {
     this._reflectAttribute('variant', this._variant);
     
     // removes every existing variant
-    this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
+    this.classList.remove(...ALL_VARIANT_CLASSES);
   
     if (this._variant !== variant.DEFAULT) {
       this.classList.add(`${CLASSNAME}--${this._variant}`);
@@ -203,9 +203,8 @@ class ColumnViewItem extends Component(HTMLElement) {
     this.trigger('coral-columnview-item:_activechanged');
   }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.content;}
-  set defaultContentZone(value) {this.content = value;}
+  get defaultContentZone() { return this.content; }
+  set defaultContentZone(value) { this.content = value; }
   get _contentZones() {
     return {
       'coral-columnview-item-content': 'content',
@@ -214,7 +213,7 @@ class ColumnViewItem extends Component(HTMLElement) {
   }
   
   // Expose enums
-  static get variant() {return variant;}
+  static get variant() { return variant; }
   
   static get observedAttributes() {
     return [
@@ -234,14 +233,14 @@ class ColumnViewItem extends Component(HTMLElement) {
     this.setAttribute('role', 'treeitem');
     
     // Default reflected attributes
-    if (!this._variant) {this.variant = variant.DEFAULT;}
+    if (!this._variant) { this.variant = variant.DEFAULT; }
     
     const thumbnail = this._elements.thumbnail;
     const content = this._elements.content;
     
     // Remove content zones so we can process children
-    if (content.parentNode) {content.remove();}
-    if (thumbnail.parentNode) {thumbnail.remove();}
+    if (content.parentNode) { content.remove(); }
+    if (thumbnail.parentNode) { thumbnail.remove(); }
   
     // move the contents of the item into the content zone
     while (this.firstChild) {

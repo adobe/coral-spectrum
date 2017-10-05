@@ -43,10 +43,6 @@ const displayMode = {
  @extends Coral.mixin.component
  */
 class CycleButtonItem extends Component(HTMLElement) {
-  constructor() {
-    super();
-  }
-  
   /**
    The Item's icon. See {@link Coral.Icon} for valid icon names.
    
@@ -154,15 +150,15 @@ class CycleButtonItem extends Component(HTMLElement) {
     return this._displayMode || displayMode.INHERIT;
   }
   set displayMode(value) {
-    value  = transform.string(value).toLowerCase();
+    value = transform.string(value).toLowerCase();
     this._displayMode = validate.enumeration(displayMode)(value) && value || displayMode.INHERIT;
     this._reflectAttribute('displaymode', this._displayMode);
     
-    this.trigger('coral-cyclebutton-item:_displaymodechanged')
+    this.trigger('coral-cyclebutton-item:_displaymodechanged');
   }
   
   // Expose enums
-  static get displayMode() {return displayMode;}
+  static get displayMode() { return displayMode; }
   
   static get observedAttributes() {
     return ['selected', 'disabled', 'icon', 'displayMode', 'displaymode'];
@@ -175,7 +171,7 @@ class CycleButtonItem extends Component(HTMLElement) {
     this.setAttribute('role', 'option');
   
     // Default reflected attributes
-    if (!this._displayMode) {this.displayMode = displayMode.INHERIT;}
+    if (!this._displayMode) { this.displayMode = displayMode.INHERIT; }
   }
 }
 

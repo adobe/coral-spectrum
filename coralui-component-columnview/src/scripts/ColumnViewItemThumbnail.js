@@ -21,10 +21,6 @@
  @htmltag coral-columnview-item-thumbnail
  @extends HTMLElement
  */
-class ColumnViewItemThumbnail extends HTMLElement {
-  constructor() {
-    super();
-  }
-}
+class ColumnViewItemThumbnail extends HTMLElement {}
 
 export default ColumnViewItemThumbnail;

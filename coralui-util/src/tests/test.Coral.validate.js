@@ -1,6 +1,4 @@
 describe('Coral.validate', function() {
-  'use strict';
-
   it('should have validate under Coral', function() {
     expect(Coral).to.have.property('validate');
   });

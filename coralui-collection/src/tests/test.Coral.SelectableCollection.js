@@ -1,8 +1,6 @@
 import Component from 'coralui-mixin-component';
 
 describe('Coral.SelectableCollection', function() {
-  'use strict';
-  
   // test collection container
   window.customElements.define('coral-selectablecollection-container', class extends Component(HTMLElement) {
     constructor() {

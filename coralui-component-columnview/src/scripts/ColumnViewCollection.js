@@ -23,14 +23,10 @@ import {SelectableCollection} from 'coralui-collection';
  @extends Coral.SelectableCollection
  */
 class ColumnViewCollection extends SelectableCollection {
-  constructor(options) {
-    super(options);
-  }
-  
   _deselectAndDeactivateAllExcept(item) {
     this
       .getAll()
-      .forEach(function(el) {
+      .forEach((el) => {
         if (el.hasAttribute('selected') || el.hasAttribute('active')) {
           el.removeAttribute('selected');
           if (el !== item) {

@@ -18,7 +18,7 @@
 import Component from 'coralui-mixin-component';
 import 'coralui-component-panelstack';
 import 'coralui-component-tablist';
-import {transform, commons} from 'coralui-util';
+import {commons} from 'coralui-util';
 
 /**
  TabView orientations.
@@ -132,8 +132,8 @@ class TabView extends Component(HTMLElement) {
    */
   _onTabListChange(event) {
     this.trigger('coral-tabview:change', {
-      'selection': event.detail.selection,
-      'oldSelection': event.detail.oldSelection
+      selection: event.detail.selection,
+      oldSelection: event.detail.oldSelection
     });
   }
   
@@ -157,7 +157,6 @@ class TabView extends Component(HTMLElement) {
     this._elements.tabList.target = this._elements.tabList.target;
   }
   
-  // For backwards compatibility + Torq
   get _contentZones() {
     return {
       'coral-tablist': 'tabList',
@@ -166,9 +165,9 @@ class TabView extends Component(HTMLElement) {
   }
   
   // Expose enumerations
-  static get orientation() {return orientation;}
+  static get orientation() { return orientation; }
   
-  static get observedAttributes() {return ['orientation'];}
+  static get observedAttributes() { return ['orientation']; }
   
   connectedCallback() {
     super.connectedCallback();
@@ -176,7 +175,7 @@ class TabView extends Component(HTMLElement) {
     this.classList.add(CLASSNAME);
     
     // Default reflected attributes
-    if (!this._orientation) {this.orientation = this.orientation;}
+    if (!this._orientation) { this.orientation = this.orientation; }
   
     // Fetch or create the content zone elements
     const tabs = this._elements.tabList;
@@ -184,7 +183,7 @@ class TabView extends Component(HTMLElement) {
   
     // Bind the tablist and panel stack together, using the panel id
     panels.id = panels.id || commons.getUID();
-    tabs.setAttribute('target', '#' + panels.id);
+    tabs.setAttribute('target', `#${panels.id}`);
   
     // Assign the content zones.
     this.panelStack = panels;

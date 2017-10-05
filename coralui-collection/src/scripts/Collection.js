@@ -40,7 +40,7 @@ const SCOPE_SELECTOR = ':scope > ';
 
 /** @private */
 function getTagSelector(tag, nativeTag) {
-  return nativeTag ? (nativeTag + '[is="' + tag + '"]') : tag;
+  return nativeTag ? `${nativeTag}[is="${tag}"]` : tag;
 }
 
 /**
@@ -115,10 +115,10 @@ class Collection {
   
     // we provide support for the :scope selector and swap it for an id
     if (this._itemSelector && this._itemSelector.indexOf(SCOPE_SELECTOR) === 0) {
-      this._container.id = this._container.id || (COLLECTION_ID + this._id);
+      this._container.id = this._container.id || COLLECTION_ID + this._id;
       // we create a special selector to make sure that the items are direct children of the container. given that
       // :scope is not fully supported by all browsers, we use an id to query
-      this._allItemsSelector = this._itemSelector.replace(SCOPE_SELECTOR, '#' + this._container.id + ' > ');
+      this._allItemsSelector = this._itemSelector.replace(SCOPE_SELECTOR, `#${this._container.id} > `);
     
       // we remove the :scope from the selector to be able to use it to determine if the item matches the collection
       this._itemSelector = this._itemSelector.replace(SCOPE_SELECTOR, '');
@@ -204,7 +204,7 @@ class Collection {
   clear() {
     const items = this.getAll();
   
-    let removed = [];
+    const removed = [];
   
     for (let i = items.length - 1; i > -1; i--) {
       removed.push(this.remove(items[i]));
@@ -319,9 +319,7 @@ class Collection {
     }
   
     // the usage of trigger assumes that the host is a coral component
-    this._host.trigger('coral-collection:add', {
-      item: item
-    });
+    this._host.trigger('coral-collection:add', {item});
   }
   
   /**
@@ -341,9 +339,7 @@ class Collection {
     }
   
     // the usage of trigger assumes that the host is a coral component
-    this._host.trigger('coral-collection:remove', {
-      item: item
-    });
+    this._host.trigger('coral-collection:remove', {item});
   }
   
   /**
@@ -436,7 +432,7 @@ class Collection {
     const validRemovedNodes = [];
   
     // we need to count every addition and removal to notify the component that the collection changed
-    var itemChanges = 0;
+    let itemChanges = 0;
     for (let i = 0; i < mutationsCount; i++) {
       mutation = mutations[i];
     

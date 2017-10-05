@@ -69,10 +69,9 @@ class TableHeaderCell extends Component(HTMLTableCellElement) {
     this.trigger('coral-table-headercell:_contentchanged');
   }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.content;}
-  set defaultContentZone(value) {this.content = value;}
-  get _contentZones() {return {'coral-table-headercell-content': 'content'};}
+  get defaultContentZone() { return this.content; }
+  set defaultContentZone(value) { this.content = value; }
+  get _contentZones() { return {'coral-table-headercell-content': 'content'}; }
   
   connectedCallback() {
     super.connectedCallback();

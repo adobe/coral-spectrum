@@ -1,7 +1,5 @@
 describe('Coral.Select', function() {
   // @todo: test reordering the options
-  'use strict';
-
   describe('Namespace', function() {
     it('should be defined', function() {
       expect(Coral).to.have.property('Select');

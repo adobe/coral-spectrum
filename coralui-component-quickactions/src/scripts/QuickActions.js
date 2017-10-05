@@ -25,7 +25,8 @@ import QuickActionsItem from './QuickActionsItem';
 import base from '../templates/base';
 import {transform, validate} from 'coralui-util';
 
-const BUTTON_GAP = 10; // MUST be kept in sync with quickactions.styl $coral-quickactions-button-gap
+// MUST be kept in sync with quickactions.styl $coral-quickactions-button-gap
+const BUTTON_GAP = 10;
 const BUTTON_FOCUSABLE_SELECTOR = '.coral3-QuickActions-button:not([disabled]):not([hidden])';
 
 /**
@@ -236,17 +237,17 @@ class QuickActions extends Overlay {
   set target(value) {
     super.target = value;
   
-    const target = this._getTarget(value);
-    const targetHasChanged = (target !== this._previousTarget);
+    const targetElement = this._getTarget(value);
+    const targetHasChanged = targetElement !== this._previousTarget;
   
-    if (target && targetHasChanged) {
+    if (targetElement && targetHasChanged) {
       // Remove listeners from the previous target
       if (this._previousTarget) {
         const previousTarget = this._getTarget(this._previousTarget);
         if (previousTarget) {
           this._removeTargetEventListeners(previousTarget);
-          target.removeAttribute('aria-haspopup');
-          target.removeAttribute('aria-owns');
+          targetElement.removeAttribute('aria-haspopup');
+          targetElement.removeAttribute('aria-owns');
         }
       }
 
@@ -254,13 +255,13 @@ class QuickActions extends Overlay {
       this._addTargetEventListeners();
 
       // Mark the target as owning a popup
-      target.setAttribute('aria-haspopup', 'true');
-      let ariaOwns = target.getAttribute('aria-owns');
-      ariaOwns = (ariaOwns && ariaOwns.length) ? ariaOwns.trim() + ' ' + this.id : this.id;
-      target.setAttribute('aria-owns', ariaOwns);
+      targetElement.setAttribute('aria-haspopup', 'true');
+      let ariaOwns = targetElement.getAttribute('aria-owns');
+      ariaOwns = ariaOwns && ariaOwns.length ? `${ariaOwns.trim()}  ${this.id}` : this.id;
+      targetElement.setAttribute('aria-owns', ariaOwns);
 
       // Cache for use as previous target
-      this._previousTarget = target;
+      this._previousTarget = targetElement;
     }
   }
   
@@ -271,33 +272,34 @@ class QuickActions extends Overlay {
   set open(value) {
     super.open = value;
     
+    const self = this;
     // Position once we can read items layout in the next frame
-    window.requestAnimationFrame(function() {
-      if (this.open && !this._openedBefore) {
+    window.requestAnimationFrame(() => {
+      if (self.open && !self._openedBefore) {
         // we iterate over all the items initializing them in the correct order
-        const items = this.items.getAll();
+        const items = self.items.getAll();
         for (let i = 0, itemCount = items.length; i < itemCount; i++) {
-          this._attachItem(items[i], i);
+          self._attachItem(items[i], i);
         }
-    
-        this._openedBefore = true;
+  
+        self._openedBefore = true;
       }
   
-      if (this.open) {
-        this._layout();
+      if (self.open) {
+        self._layout();
         
         // The QuickActions must be visible for us to be able to focus them,
         // this may not be the case if we initially open them, due to the FOUC handling.
-        this.style.visibility = 'visible';
-        this.focus();
+        self.style.visibility = 'visible';
+        self.focus();
       }
   
       // we toggle "is-selected" on the target to indicate that the over is open
-      const target = this._getTarget();
-      if (target) {
-        target.classList.toggle('is-selected', this.open);
+      const targetElement = self._getTarget();
+      if (targetElement) {
+        targetElement.classList.toggle('is-selected', self.open);
       }
-    }.bind(this));
+    });
   }
   
   /** @ignore */
@@ -326,8 +328,8 @@ class QuickActions extends Overlay {
   }
   
   /** @ignore */
-  _addTargetEventListeners(target) {
-    const targetElement = (target) ? target : this._getTarget();
+  _addTargetEventListeners(targetElement) {
+    targetElement = targetElement || this._getTarget();
     
     if (!targetElement) {
       return;
@@ -344,8 +346,8 @@ class QuickActions extends Overlay {
   }
   
   /** @ignore */
-  _removeTargetEventListeners(target) {
-    const targetElement = (target) ? target : this._getTarget();
+  _removeTargetEventListeners(targetElement) {
+    targetElement = targetElement || this._getTarget();
     
     if (!targetElement) {
       return;
@@ -404,11 +406,9 @@ class QuickActions extends Overlay {
           return focusableButtons[index + 1];
         }
       }
-      else {
-        // Pick the previous focusable button
-        if (index !== 0) {
-          return focusableButtons[index - 1];
-        }
+      // Pick the previous focusable button
+      else if (index !== 0) {
+        return focusableButtons[index - 1];
       }
     }
   }
@@ -425,7 +425,7 @@ class QuickActions extends Overlay {
    */
   _getButtons(excludeMore) {
     let buttonSelector = '.coral3-QuickActions-button';
-    buttonSelector = (excludeMore) ? buttonSelector + ':not([handle="moreButton"])' : buttonSelector;
+    buttonSelector = excludeMore ? `${buttonSelector}:not([handle="moreButton"])` : buttonSelector;
     
     return this.querySelectorAll(buttonSelector);
   }
@@ -587,13 +587,24 @@ class QuickActions extends Overlay {
     }
     
     const handleThreshold = this.threshold > 0;
-    const moreButtonsThanThreshold = handleThreshold && (buttons.length > this.threshold);
+    const moreButtonsThanThreshold = handleThreshold && buttons.length > this.threshold;
     const collapse = buttons.length > totalFittingButtons || moreButtonsThanThreshold;
     
     // +1 to account for the more button
-    const collapseToThreshold = collapse && handleThreshold && (this.threshold + 1 < totalFittingButtons);
-    const totalButtons = (collapse) ?
-      ((collapseToThreshold) ? this.threshold + 1 : totalFittingButtons) : buttons.length;
+    const collapseToThreshold = collapse && handleThreshold && this.threshold + 1 < totalFittingButtons;
+    
+    let totalButtons;
+    if (collapse) {
+      if (collapseToThreshold) {
+        totalButtons = this.threshold + 1;
+      }
+      else {
+        totalButtons = totalFittingButtons;
+      }
+    }
+    else {
+      totalButtons = buttons.length;
+    }
     
     // Show all Buttons and ButtonList Items
     for (let i = 0; i < buttons.length; i++) {
@@ -636,7 +647,7 @@ class QuickActions extends Overlay {
     // Center the buttons horizontally
     const totalButtonWidth = totalButtons * buttonOuterWidth;
     const shift = Math.round((totalAvailableWidth - totalButtonWidth) / 2);
-    this.style['paddingLeft'] = shift + 'px';
+    this.style.paddingLeft = `${shift}px`;
     
     // Reset the QuickActions display if necessary
     if (temporarilyShown) {
@@ -655,10 +666,10 @@ class QuickActions extends Overlay {
    @ignore
    */
   _setWidth() {
-    const target = this._getTarget();
+    const targetElement = this._getTarget();
     
-    if (target) {
-      this.style.width = target.offsetWidth + 'px';
+    if (targetElement) {
+      this.style.width = `${targetElement.offsetWidth}px`;
     }
   }
   
@@ -674,15 +685,15 @@ class QuickActions extends Overlay {
     
     if (height < maxHeight) {
       // Make it scrollable
-      this._elements.buttonList.style.height = height - 1 + 'px';
+      this._elements.buttonList.style.height = `${height - 1}px`;
     }
   }
   
   /** @ignore */
   _isInternalToComponent(element) {
-    const target = this._getTarget();
+    const targetElement = this._getTarget();
     
-    return element && (this.contains(element) || (target && target.contains(element)));
+    return element && (this.contains(element) || targetElement && targetElement.contains(element));
   }
   
   /** @ignore */
@@ -707,20 +718,19 @@ class QuickActions extends Overlay {
     if (this.interaction === interaction.ON) {
       // In FF toElement is not available to us so we test the newly-focused element
       if (!toElement) {
+        const self = this;
         // The active element is not ready until the next frame
-        window.requestAnimationFrame(function() {
+        window.requestAnimationFrame(() => {
           toElement = document.activeElement;
           
-          if (!this._isInternalToComponent(toElement)) {
-            this.hide();
+          if (!self._isInternalToComponent(toElement)) {
+            self.hide();
           }
-        }.bind(this));
+        });
       }
-      else {
-        // Hide if we focus out to any element external to the component and its target
-        if (!this._isInternalToComponent(toElement)) {
-          this.hide();
-        }
+      // Hide if we focus out to any element external to the component and its target
+      else if (!this._isInternalToComponent(toElement)) {
+        this.hide();
       }
     }
   }
@@ -777,7 +787,7 @@ class QuickActions extends Overlay {
   }
   
   /** @ignore */
-  _onEscapeKeypress(event) {
+  _onEscapeKeypress() {
     if (this.interaction !== interaction.ON) {
       return;
     }
@@ -852,8 +862,9 @@ class QuickActions extends Overlay {
     this._proxyClick(item);
     
     // Prevent double click or alternate selection during animation
-    window.setTimeout(function() {
-      this._preventClick = false;
+    const self = this;
+    window.setTimeout(() => {
+      self._preventClick = false;
     }, this._overlayAnimationTime);
     
     this._preventClick = true;
@@ -901,15 +912,14 @@ class QuickActions extends Overlay {
       // do not allow internal Overlay events to escape QuickActions
       event.stopImmediatePropagation();
       
-      window.requestAnimationFrame(function() {
-        const focusableItems = this._elements.buttonList.items.getAll().filter(function(item) {
-          return !item.hasAttribute('hidden') && !item.hasAttribute('disabled');
-        });
+      const self = this;
+      window.requestAnimationFrame(() => {
+        const focusableItems = self._elements.buttonList.items.getAll().filter((item) => !item.hasAttribute('hidden') && !item.hasAttribute('disabled'));
         
         if (focusableItems.length > 0) {
           focusableItems[0].focus();
         }
-      }.bind(this));
+      });
     }
   }
   
@@ -918,20 +928,21 @@ class QuickActions extends Overlay {
     if (event.target === this) {
       this._elements.overlay.open = false;
       
+      const self = this;
       // Return the trapFocus and returnFocus properties to their state before open.
       // Handles the keyboard launch and interaction enabled case, which implies focus trap and focus return.
       // Wait a frame as this is called before the 'open' property sync. Otherwise, returnFocus is set prematurely.
-      window.requestAnimationFrame(function() {
-        if (this._previousTrapFocus) {
-          this.trapFocus = this._previousTrapFocus;
-          this._previousTrapFocus = undefined;
+      window.requestAnimationFrame(() => {
+        if (self._previousTrapFocus) {
+          self.trapFocus = self._previousTrapFocus;
+          self._previousTrapFocus = undefined;
         }
         
-        if (this._previousReturnFocus) {
-          this.returnFocus = this._previousReturnFocus;
-          this._previousReturnFocus = undefined;
+        if (self._previousReturnFocus) {
+          self.returnFocus = self._previousReturnFocus;
+          self._previousReturnFocus = undefined;
         }
-      }.bind(this));
+      });
     }
     else if (event.target === this._elements.overlay) {
       // do not allow internal Overlay events to escape QuickActions
@@ -968,7 +979,7 @@ class QuickActions extends Overlay {
   }
   
   /** @ignore */
-  _onCollectionChange(addedNodes, removeNodes) {
+  _onCollectionChange(addedNodes) {
     // Delay the item initialization if the component has not been opened before
     if (!this._openedBefore) {
       return;
@@ -1049,10 +1060,8 @@ class QuickActions extends Overlay {
         this._placement = Overlay.placement.RIGHT;
       }
     }
-    else {
-      if (this._placement === Overlay.placement.RIGHT) {
-        this._placement = placement.CENTER;
-      }
+    else if (this._placement === Overlay.placement.RIGHT) {
+      this._placement = placement.CENTER;
     }
   }
   
@@ -1076,8 +1085,8 @@ class QuickActions extends Overlay {
   
   // Expose enumerations
   // Override placement and target
-  static get placement() {return placement;}
-  static get target() {return target;}
+  static get placement() { return placement; }
+  static get target() { return target; }
   
   static get observedAttributes() {
     return super.observedAttributes.concat(['threshold']);

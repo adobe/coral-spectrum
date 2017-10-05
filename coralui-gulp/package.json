@@ -5,7 +5,7 @@
   "dependencies": {
     "@coralui/coralui-guide-resources": "^5.0.3",
     "babel-plugin-external-helpers": "^6.22.0",
-    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-env": "^1.6.0",
     "chai": "^4.0.2",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
@@ -26,7 +26,6 @@
     "gulp-util": "^3.0.8",
     "inquirer": "^3.1.1",
     "install": "^0.10.1",
-    "jshint": "^2.9.5",
     "karma": "^1.7.0",
     "karma-benchmark": "^0.7.1",
     "karma-benchmark-reporter": "^0.1.1",

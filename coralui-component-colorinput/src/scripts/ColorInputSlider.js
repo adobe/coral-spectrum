@@ -29,10 +29,6 @@ const CLASSNAMES = ['coral3-ColorInput-slider', 'coral3-Slider'];
  @extends Coral.Slider
  */
 class ColorInputSlider extends Slider {
-  constructor() {
-    super();
-  }
-  
   /**
    The gradient shown as slider background as space separated values (at least 2 values needed).
    e.g: #ff0000 #ffff00 #00ff00 #00ffff #0000ff #ff00ff #ff0000
@@ -64,15 +60,15 @@ class ColorInputSlider extends Slider {
     
     let partialGradientStr = '';
     for (let i = 0; i < amountStops; i++) {
-      partialGradientStr += ', ' + stops[i] + ' ' + Math.abs(i * 100 / (amountStops - 1)) + '%';
+      partialGradientStr += `, ${stops[i]} ${Math.abs(i * 100 / (amountStops - 1))}%`;
     }
   
-    barStyle.backgroundImage = '-moz-linear-gradient(right' + partialGradientStr + ')';
-    barStyle.backgroundImage = '-ms-linear-gradient(right' + partialGradientStr + ')';
-    barStyle.backgroundImage = '-o-linear-gradient(right' + partialGradientStr + ')';
-    barStyle.backgroundImage = '-webkit-linear-gradient(left' + partialGradientStr + ')';
-    barStyle.backgroundImage = 'linear-gradient(to right' + partialGradientStr + ')';
-    barStyle.filter = 'progid:DXImageTransform.Microsoft.gradient(startColorstr=\'' + stops[0] + '\', endColorstr=\'' + stops[1] + '\', gradientType=1)';
+    barStyle.backgroundImage = `-moz-linear-gradient(to right${partialGradientStr})`;
+    barStyle.backgroundImage = `-ms-linear-gradient(to right${partialGradientStr})`;
+    barStyle.backgroundImage = `-o-linear-gradient(to right${partialGradientStr})`;
+    barStyle.backgroundImage = `-webkit-linear-gradient(to right${partialGradientStr})`;
+    barStyle.backgroundImage = `linear-gradient(to right${partialGradientStr})`;
+    barStyle.filter = `progid:DXImageTransform.Microsoft.gradient(startColorstr='${stops[0]}', endColorstr='${stops[1]}', gradientType=1)`;
   }
   
   // JSDoc inherited

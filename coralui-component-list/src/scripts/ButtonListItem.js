@@ -29,10 +29,6 @@ const CLASSNAME = 'coral3-ButtonList-item';
  @extends Coral.mixin.list.item
  */
 class ButtonListItem extends ListItem(Component(HTMLButtonElement)) {
-  constructor() {
-    super();
-  }
-  
   connectedCallback() {
     super.connectedCallback();
     

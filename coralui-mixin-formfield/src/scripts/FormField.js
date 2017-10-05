@@ -271,7 +271,7 @@ const FormField = (superClass) => class extends superClass {
     // labelledby contains whitespace sparated items, so we need to separate each individual id
     const labelIds = labelledBy.split(/\s+/);
     // we update the 'for' attribute for every id.
-    labelIds.forEach(function(currentValue) {
+    labelIds.forEach((currentValue) => {
       const labelElement = document.getElementById(currentValue);
       if (labelElement && labelElement.tagName === 'LABEL') {
         const forAttribute = labelElement.getAttribute('for');

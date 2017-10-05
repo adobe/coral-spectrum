@@ -46,16 +46,15 @@ const getSiblingsOf = (el, selector, type) => {
     
     // All following siblings of el up to but not including the element matched by the selector
     if (type.indexOf('Until') !== -1) {
-      const matches = function () {
+      const matches = function() {
         if (typeof selector === 'string') {
           return el[direction].matches(selector);
         }
-        else {
-          return el[direction] === selector;
-        }
+        
+        return el[direction] === selector;
       };
       
-      while (el[direction] && !matches() ) {
+      while (el[direction] && !matches()) {
         stack.push(el = el[direction]);
       }
     }
@@ -86,7 +85,7 @@ const watchForWebFontLoad = () => {
   // And table and table section (<coral-table-head>, <coral-table-row> etc.) are not capturing the size change.
   const root = document.documentElement;
   if (root.className.indexOf('wf-inactive') !== -1 || root.className.indexOf('wf-loading') !== -1) {
-    const webFontLoadObserver = new MutationObserver(function() {
+    const webFontLoadObserver = new MutationObserver(() => {
       if (root.className.indexOf('wf-active') !== -1) {
         webFontLoadObserver.disconnect();
         events.dispatch('coral-commons:_webfontload');
@@ -109,9 +108,7 @@ const listToArray = (list) => {
   return res;
 };
 
-const getColumns = (colgroup) => {
-  return listToArray(colgroup.querySelectorAll('col[is="coral-table-column"]'));
-};
+const getColumns = (colgroup) => listToArray(colgroup.querySelectorAll('col[is="coral-table-column"]'));
 
 const getRows = (sections) => {
   let rows = [];
@@ -125,21 +122,13 @@ const getRows = (sections) => {
   return rows;
 };
 
-const getCells = (row) => {
-  return listToArray(row.querySelectorAll('td[is="coral-table-cell"], th[is="coral-table-headercell"]'));
-};
+const getCells = (row) => listToArray(row.querySelectorAll('td[is="coral-table-cell"], th[is="coral-table-headercell"]'));
 
-const getContentCells = (row) => {
-  return listToArray(row.querySelectorAll('td[is="coral-table-cell"]'));
-};
+const getContentCells = (row) => listToArray(row.querySelectorAll('td[is="coral-table-cell"]'));
 
-const getHeaderCells = (row) => {
-  return listToArray(row.querySelectorAll('th[is="coral-table-headercell"]'));
-};
+const getHeaderCells = (row) => listToArray(row.querySelectorAll('th[is="coral-table-headercell"]'));
 
-const getCellByIndex = (row, index) => {
-  return getCells(row).filter(cell => getIndexOf(cell) === index)[0] || null;
-};
+const getCellByIndex = (row, index) => getCells(row).filter(cell => getIndexOf(cell) === index)[0] || null;
 
 /**
  Enum for divider values.

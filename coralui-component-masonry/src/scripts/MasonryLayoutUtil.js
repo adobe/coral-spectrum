@@ -22,9 +22,7 @@ const getFirstRowFilledColumns = (columns, items) => {
   return filledColumns;
 };
 
-const csspx = (el, property) => {
-  return parseFloat(window.getComputedStyle(el)[property], 10);
-};
+const csspx = (el, property) => parseFloat(window.getComputedStyle(el)[property], 10);
 
 // TODO if the property changes, it will not automatically relayout the masonry
 // TODO test columnWidth and colspan property and default values

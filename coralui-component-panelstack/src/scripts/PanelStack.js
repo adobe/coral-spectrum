@@ -61,7 +61,7 @@ class PanelStack extends Component(HTMLElement) {
         // allows panels to be nested
         itemSelector: ':scope > coral-panel',
         onItemAdded: this._validateSelection,
-        onItemRemoved: this._validateSelection,
+        onItemRemoved: this._validateSelection
       });
     }
     return this._items;
@@ -87,7 +87,7 @@ class PanelStack extends Component(HTMLElement) {
   
   /** @private */
   _validateSelection(item) {
-    let selectedItems = this.items._getAllSelected();
+    const selectedItems = this.items._getAllSelected();
     
     // Last selected item wins if multiple selection while not allowed
     item = item || selectedItems[selectedItems.length - 1];

@@ -24,10 +24,6 @@ const CLASSNAME = 'coral3-Dialog-content';
  @extends HTMLElement
  */
 class DialogContent extends HTMLElement {
-  constructor() {
-    super();
-  }
-  
   connectedCallback() {
     this.classList.add(CLASSNAME);
   }

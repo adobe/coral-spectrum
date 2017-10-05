@@ -1,6 +1,4 @@
 describe('Coral.Popover', function() {
-  'use strict';
-
   var el;
   var targetElement;
   var targetChild;

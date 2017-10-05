@@ -27,10 +27,6 @@ const CLASSNAME = 'coral3-ActionBar-item';
  @extends Coral.mixin.component
  */
 class ActionBarItem extends Component(HTMLElement) {
-  constructor() {
-    super();
-  }
-  
   /**
    Item content element.
    

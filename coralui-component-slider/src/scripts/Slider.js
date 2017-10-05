@@ -82,6 +82,9 @@ class Slider extends FormField(Component(HTMLElement)) {
     this._elements.handles = Array.prototype.slice.call(handleContainer.querySelectorAll(`.${CLASSNAME_HANDLE}`));
     this._elements.inputs = Array.prototype.slice.call(handleContainer.querySelectorAll(`.${CLASSNAME_INPUT}`));
   
+    // Binding
+    this._onInteraction = this._onInteraction.bind(this);
+    
     // Init the collection mutation observer
     this.items._startHandlingItems(true);
   }
@@ -344,7 +347,7 @@ class Slider extends FormField(Component(HTMLElement)) {
   
   // JSDoc inherited
   get labelledBy() {
-    return (this._elements.handles.length === 1) ? this._elements.inputs[0].getAttribute('aria-labelledby') : this.getAttribute('aria-labelledby');
+    return this._elements.handles.length === 1 ? this._elements.inputs[0].getAttribute('aria-labelledby') : this.getAttribute('aria-labelledby');
   }
   set labelledBy(value) {
     this._labelledBy = transform.string(value);
@@ -382,9 +385,7 @@ class Slider extends FormField(Component(HTMLElement)) {
   
   /** @private */
   get _values() {
-    return this._elements.inputs.map(function(input) {
-      return String(parseInt(input.value, 10));
-    });
+    return this._elements.inputs.map((input) => String(parseInt(input.value, 10)));
   }
   set _values(values) {
     if (values && values.length === this._elements.handles.length) {
@@ -410,9 +411,8 @@ class Slider extends FormField(Component(HTMLElement)) {
     else if (this.hasAttribute(name)) {
       return parseFloat(this.getAttribute(name));
     }
-    else {
-      return defaultValue;
-    }
+    
+    return defaultValue;
   }
   
   /**
@@ -471,14 +471,11 @@ class Slider extends FormField(Component(HTMLElement)) {
     if (event.changedTouches && event.changedTouches.length > 0) {
       return event.changedTouches[0];
     }
-    else {
-      if (event.touches && event.touches.length > 0) {
-        return event.touches[0];
-      }
-      else {
-        return event;
-      }
+    else if (event.touches && event.touches.length > 0) {
+      return event.touches[0];
     }
+    
+    return event;
   }
   
   /**
@@ -506,24 +503,25 @@ class Slider extends FormField(Component(HTMLElement)) {
     const handle = event.matchedTarget;
     const idx = this._elements.handles.indexOf(handle);
     let v = parseInt(this._values[idx], 10);
-    
+  
+    // increase
     if (event.keyCode === Keys.keyToCode('up') ||
       event.keyCode === Keys.keyToCode('right') ||
-      event.keyCode === Keys.keyToCode('pageUp')) { // increase
+      event.keyCode === Keys.keyToCode('pageUp')) {
       v += this.step;
-      
     }
+    // decrease
     else if (event.keyCode === Keys.keyToCode('down') ||
       event.keyCode === Keys.keyToCode('left') ||
-      event.keyCode === Keys.keyToCode('pageDown')) { // decrease
+      event.keyCode === Keys.keyToCode('pageDown')) {
       v -= this.step;
-      
     }
-    else if (event.keyCode === Keys.keyToCode('home')) { // min
+    // min
+    else if (event.keyCode === Keys.keyToCode('home')) {
       v = this.min;
-      
     }
-    else if (event.keyCode === Keys.keyToCode('end')) { // max
+    // max
+    else if (event.keyCode === Keys.keyToCode('end')) {
       v = this.max;
     }
     
@@ -539,19 +537,18 @@ class Slider extends FormField(Component(HTMLElement)) {
     let closestDistance = Infinity;
     let closestHandle;
     
-    function calculateDistance(elem, mouseX, mouseY) {
+    function calculateDistance(elem, x, y) {
       const box = elem.getBoundingClientRect(),
         top = box.top + window.pageYOffset,
         left = box.left + window.pageXOffset;
       
       return Math.floor(
-        Math.sqrt(Math.pow(mouseX - (left + (box.width / 2)), 2) +
-          Math.pow(mouseY - (top + (box.height / 2)), 2))
+        Math.sqrt(Math.pow(x - (left + box.width / 2), 2) + Math.pow(y - (top + box.height / 2), 2))
       );
     }
     
     // Find the nearest handle
-    this._elements.handles.forEach(function(handle) {
+    this._elements.handles.forEach((handle) => {
       const distance = calculateDistance(handle, mouseX, mouseY);
       
       if (distance < closestDistance) {
@@ -570,20 +567,20 @@ class Slider extends FormField(Component(HTMLElement)) {
    @private
    */
   _moveHandles() {
-    const calculatePercent = function(value) {
-      return (value - this.min) / (this.max - this.min) * 100;
-    }.bind(this);
+    const self = this;
+    const calculatePercent = (value) => (value - self.min) / (self.max - self.min) * 100;
     
     // Set the handle position as a percentage based on the stored values
     this._elements.handles.forEach((handle, index) => {
       const percent = calculatePercent(this._values[index]);
       
       if (this.orientation === orientation.VERTICAL) {
-        handle.style.bottom = percent + '%';
+        handle.style.bottom = `${percent}%`;
         handle.style.left = '';
       }
-      else { // Horizontal
-        handle.style.left = percent + '%';
+      // Horizontal
+      else {
+        handle.style.left = `${percent}%`;
         handle.style.bottom = '';
       }
       
@@ -599,7 +596,7 @@ class Slider extends FormField(Component(HTMLElement)) {
    @private
    */
   _onInputChange(event) {
-    if (typeof (event.target.oninput) === 'undefined') {
+    if (typeof event.target.oninput === 'undefined') {
       this._onInputChangeHandler(event);
     }
   }
@@ -647,15 +644,20 @@ class Slider extends FormField(Component(HTMLElement)) {
       this._openTooltip(handle, this._getLabel(this._values[index]));
     }
     
-    const eventHandler = function(event) {
-      if (!this.contains(event.target)) {
-        return;
-      }
-      event.target.blur();
-    }.bind(this);
-    
-    events.on('touchstart.CoralSlider', eventHandler);
-    events.on('mousedown.CoralSlider', eventHandler);
+    events.on('touchstart.CoralSlider', this._onInteraction);
+    events.on('mousedown.CoralSlider', this._onInteraction);
+  }
+  
+  /**
+   Handles the blur
+   
+   @private
+   */
+  _onInteraction(event) {
+    if (!this.contains(event.target)) {
+      return;
+    }
+    event.target.blur();
   }
   
   /**
@@ -723,11 +725,11 @@ class Slider extends FormField(Component(HTMLElement)) {
     
     if (this.orientation === orientation.VERTICAL) {
       const elementHeight = boundingClientRect.height;
-      percent = ((boundingClientRect.top + elementHeight) - posY) / elementHeight;
+      percent = (boundingClientRect.top + elementHeight - posY) / elementHeight;
     }
     else {
       const elementWidth = boundingClientRect.width;
-      percent = ((posX - boundingClientRect.left) / elementWidth);
+      percent = (posX - boundingClientRect.left) / elementWidth;
     }
     
     // if the bounds are restricted, as with _handleClick, we shouldn't change the value.
@@ -735,7 +737,7 @@ class Slider extends FormField(Component(HTMLElement)) {
       return NaN;
     }
     
-    const rawValue = this.min + ((this.max - this.min) * percent);
+    const rawValue = this.min + (this.max - this.min) * percent;
     
     // Snap value to nearest step
     return this._snapValueToStep(rawValue, this.min, this.max, this.step);
@@ -744,13 +746,13 @@ class Slider extends FormField(Component(HTMLElement)) {
   /** @private */
   _snapValueToStep(rawValue, min, max, step) {
     step = parseFloat(step);
-    const remainder = ((rawValue - min) % step);
+    const remainder = (rawValue - min) % step;
     const floatString = step.toString().replace(/^(?:\d+)(?:\.(\d+))?$/g, '$1');
     const precision = floatString.length;
     let snappedValue;
     
     if (Math.abs(remainder) * 2 >= step) {
-      snappedValue = (rawValue - Math.abs(remainder)) + step;
+      snappedValue = rawValue - Math.abs(remainder) + step;
     }
     else {
       snappedValue = rawValue - remainder;
@@ -818,15 +820,15 @@ class Slider extends FormField(Component(HTMLElement)) {
    @protected
    */
   _updateFill() {
-    const percent = ((this._values[0] - this.min) / (this.max - this.min)) * 100;
+    const percent = (this._values[0] - this.min) / (this.max - this.min) * 100;
     
     if (this.orientation === orientation.VERTICAL) {
-      this._elements.fillHandle.style.height = percent + '%';
+      this._elements.fillHandle.style.height = `${percent}%`;
       this._elements.fillHandle.style.width = '';
     }
     else {
       this._elements.fillHandle.style.height = '';
-      this._elements.fillHandle.style.width = percent + '%';
+      this._elements.fillHandle.style.width = `${percent}%`;
     }
   }
   
@@ -895,7 +897,7 @@ class Slider extends FormField(Component(HTMLElement)) {
   }
   
   // Expose enumerations
-  static get orientation() {return orientation;}
+  static get orientation() { return orientation; }
   
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -914,15 +916,15 @@ class Slider extends FormField(Component(HTMLElement)) {
     this.classList.add(CLASSNAME);
   
     // Default reflected attributes
-    if (!this._min) {this.min = this.min;}
-    if (!this._max) {this.max = this.max;}
-    if (!this._step) {this.step = this.step;}
-    if (!this._orientation) {this.orientation = orientation.HORIZONTAL;}
+    if (!this._min) { this.min = this.min; }
+    if (!this._max) { this.max = this.max; }
+    if (!this._step) { this.step = this.step; }
+    if (!this._orientation) { this.orientation = orientation.HORIZONTAL; }
     
     // A11y
     this.setAttribute('role', 'presentation');
     
-    // Create a temporary fragment
+    // Create a fragment
     const frag = document.createDocumentFragment();
     
     const templateHandleNames = ['bar', 'handleContainer'];
@@ -936,7 +938,7 @@ class Slider extends FormField(Component(HTMLElement)) {
       const child = this.firstChild;
       
       if (child.nodeType === Node.TEXT_NODE ||
-        (child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1) ||
+        child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1 ||
         child.nodeName === 'CORAL-SLIDER-ITEM') {
         // Add non-template elements to the fragment
         frag.appendChild(child);

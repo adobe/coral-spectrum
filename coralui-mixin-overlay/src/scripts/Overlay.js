@@ -16,6 +16,7 @@
  */
 
 import base from '../templates/base';
+import {Vent} from 'coralui-externals';
 import {validate, transform, commons} from 'coralui-util';
 import {trapFocus, returnFocus, focusOnShow, FADETIME} from './enums';
 
@@ -27,14 +28,80 @@ let bottomTabCaptureEl;
 let backdropEl;
 
 // The starting zIndex for overlays
-let startZIndex = 10000;
+const startZIndex = 10000;
 
 // Tab keycode
 const TAB_KEY = 9;
 
 // A stack interface for overlays
 const _overlays = [];
-const overlays = {
+let overlays = {};
+
+/**
+ Cancel the backdrop hide mid-animation.
+ */
+let fadeTimeout;
+function cancelBackdropHide() {
+  window.clearTimeout(fadeTimeout);
+}
+
+/**
+ Set aria-hidden on every immediate child except the one passed, which should not be hidden.
+ */
+function hideEverythingBut(instance) {
+  // ARIA: Hide all the things
+  const children = document.body.children;
+  for (let i = 0; i < children.length; i++) {
+    const child = children[i];
+    
+    // If it's not a parent of or not the instance itself, it needs to be hidden
+    if (child !== instance && !child.contains(instance)) {
+      const currentAriaHidden = child.getAttribute('aria-hidden');
+      if (currentAriaHidden) {
+        // Store the previous value of aria-hidden if present
+        // Don't blow away the previously stored value
+        child._previousAriaHidden = child._previousAriaHidden || currentAriaHidden;
+        if (currentAriaHidden === 'true') {
+          // It's already true, don't bother setting
+          continue;
+        }
+      }
+      else {
+        // Nothing is hidden by default, store that
+        child._previousAriaHidden = 'false';
+      }
+      
+      // Hide it
+      child.setAttribute('aria-hidden', 'true');
+    }
+  }
+  
+  // Always show ourselves
+  instance.setAttribute('aria-hidden', 'false');
+}
+
+/**
+ Actually reposition the backdrop to be under the topmost overlay.
+ */
+function doRepositionBackdrop() {
+  // Position under the topmost overlay
+  const top = overlays.top();
+  
+  if (top) {
+    // The backdrop, if shown, should be positioned under the topmost overlay that does have a backdrop
+    for (let i = _overlays.length - 1; i > -1; i--) {
+      if (_overlays[i].backdrop) {
+        backdropEl.style.zIndex = _overlays[i].zIndex - 1;
+        break;
+      }
+    }
+    
+    // ARIA: Set hidden properly
+    hideEverythingBut(top.instance);
+  }
+}
+
+overlays = {
   pop: function(instance) {
     // Get overlay index
     const index = this.indexOf(instance);
@@ -55,9 +122,7 @@ const overlays = {
   
   push: function(instance) {
     // Pop overlay
-    const overlay = this.pop(instance) || {
-        instance: instance
-      };
+    const overlay = this.pop(instance) || {instance};
     
     // Get the new highest zIndex
     const zIndex = this.getHighestZIndex() + 10;
@@ -110,196 +175,14 @@ const overlays = {
     return overlay ? overlay.zIndex : startZIndex;
   },
   
-  some: function() {
-    return _overlays.some.apply(_overlays, arguments);
+  some: function(...args) {
+    return _overlays.some(...args);
   },
   
-  forEach: function() {
-    return _overlays.forEach.apply(_overlays, arguments);
+  forEach: function(...args) {
+    return _overlays.forEach(...args);
   }
 };
-
-/**
- Hide the backdrop if no overlays are using it.
- */
-function hideOrRepositionBackdrop() {
-  if (!backdropEl || !backdropEl._isOpen) {
-    // Do nothing if the backdrop isn't shown
-    return;
-  }
-  
-  // Loop over all overlays
-  const keepBackdrop = overlays.some(function(overlay) {
-    // Check for backdrop usage
-    if (overlay.backdrop) {
-      return true;
-    }
-  });
-  
-  if (!keepBackdrop) {
-    // Hide the backdrop
-    doBackdropHide();
-  }
-  else {
-    // Reposition the backdrop
-    doRepositionBackdrop();
-  }
-  
-  // Hide/create the document-level tab capture element as necessary
-  // This only applies to modal overlays (those that have backdrops)
-  const top = overlays.top();
-  if (!top || !(top.instance.trapFocus === trapFocus.ON && top.instance._requestedBackdrop)) {
-    hideDocumentTabCaptureEls();
-  }
-  else if (top && top.instance.trapFocus === trapFocus.ON && top.instance._requestedBackdrop) {
-    createDocumentTabCaptureEls();
-  }
-}
-
-/**
- Actually reposition the backdrop to be under the topmost overlay.
- */
-function doRepositionBackdrop() {
-  // Position under the topmost overlay
-  const top = overlays.top();
-  
-  if (top) {
-    // The backdrop, if shown, should be positioned under the topmost overlay that does have a backdrop
-    for (let i = _overlays.length - 1; i > -1; i--) {
-      if (_overlays[i].backdrop) {
-        backdropEl.style.zIndex = _overlays[i].zIndex - 1;
-        break;
-      }
-    }
-    
-    // ARIA: Set hidden properly
-    hideEverythingBut(top.instance);
-  }
-}
-
-/**
- Cancel the backdrop hide mid-animation.
- */
-let fadeTimeout;
-function cancelBackdropHide() {
-  window.clearTimeout(fadeTimeout);
-}
-
-/**
- Actually hide the backdrop.
- */
-function doBackdropHide() {
-  document.body.classList.remove('u-coral-noscroll');
-  
-  // Start animation
-  window.requestAnimationFrame(function() {
-    backdropEl.classList.remove('is-open');
-    
-    cancelBackdropHide();
-    fadeTimeout = window.setTimeout(function() {
-      backdropEl.style.display = 'none';
-    }, FADETIME);
-  });
-  
-  // Set flag for testing
-  backdropEl._isOpen = false;
-  
-  // Wait for animation to complete
-  showEverything();
-}
-
-/**
- Actually show the backdrop.
- */
-function doBackdropShow(zIndex, instance) {
-  document.body.classList.add('u-coral-noscroll');
-  
-  if (!backdropEl) {
-    backdropEl = document.createElement('div');
-    backdropEl.className = 'coral3-Backdrop';
-    document.body.appendChild(backdropEl);
-    
-    backdropEl.addEventListener('click', handleBackdropClick);
-  }
-  
-  // Show just under the provided zIndex
-  // Since we always increment by 10, this will never collide
-  backdropEl.style.zIndex = zIndex - 1;
-  
-  // Set flag for testing
-  backdropEl._isOpen = true;
-  
-  // Start animation
-  backdropEl.style.display = '';
-  window.requestAnimationFrame(function() {
-    // Add the class on the next animation frame so backdrop has time to exist
-    // Otherwise, the animation for opacity will not work.
-    backdropEl.classList.add('is-open');
-    
-    cancelBackdropHide();
-  });
-  
-  hideEverythingBut(instance);
-}
-
-/**
- Handles clicks to the backdrop, calling backdropClickedCallback for every overlay
- */
-function handleBackdropClick(event) {
-  overlays.forEach(function(overlay) {
-    if (typeof overlay.instance.backdropClickedCallback === 'function') {
-      overlay.instance.backdropClickedCallback(event);
-    }
-  });
-}
-
-/**
- Set aria-hidden on every immediate child except the one passed, which should not be hidden.
- */
-function hideEverythingBut(instance) {
-  // ARIA: Hide all the things
-  const children = document.body.children;
-  for (let i = 0; i < children.length; i++) {
-    const child = children[i];
-    
-    // If it's not a parent of or not the instance itself, it needs to be hidden
-    if (child !== instance && !child.contains(instance)) {
-      const currentAriaHidden = child.getAttribute('aria-hidden');
-      if (currentAriaHidden) {
-        // Store the previous value of aria-hidden if present
-        // Don't blow away the previously stored value
-        child._previousAriaHidden = child._previousAriaHidden || currentAriaHidden;
-        if (currentAriaHidden === 'true') {
-          // It's already true, don't bother setting
-          continue;
-        }
-      }
-      else {
-        // Nothing is hidden by default, store that
-        child._previousAriaHidden = 'false';
-      }
-      
-      // Hide it
-      child.setAttribute('aria-hidden', 'true');
-    }
-  }
-  
-  // Always show ourselves
-  instance.setAttribute('aria-hidden', 'false');
-}
-
-/**
- Show or restore the aria-hidden state of every child of body.
- */
-function showEverything() {
-  // ARIA: Show all the things
-  const children = document.body.children;
-  for (let i = 0; i < children.length; i++) {
-    const child = children[i];
-    // Restore the previous aria-hidden value
-    child.setAttribute('aria-hidden', child._previousAriaHidden || 'false');
-  }
-}
 
 /**
  Create the global tab capture element.
@@ -310,15 +193,17 @@ function createDocumentTabCaptureEls() {
     topTabCaptureEl.setAttribute('coral-tabcapture', '');
     topTabCaptureEl.tabIndex = 0;
     document.body.insertBefore(topTabCaptureEl, document.body.firstChild);
-    topTabCaptureEl.addEventListener('focus', function(event) {
+    topTabCaptureEl.addEventListener('focus', () => {
       const top = overlays.top();
       if (top && top.instance.trapFocus === trapFocus.ON) {
         // Focus on the first tabbable element of the top overlay
-        Array.prototype.some.forEach.call(top.instance.querySelectorAll(commons.TABBABLE_ELEMENT_SELECTOR), function(item) {
+        Array.prototype.some.forEach.call(top.instance.querySelectorAll(commons.TABBABLE_ELEMENT_SELECTOR), (item) => {
           if (item.offsetParent !== null && !item.hasAttribute('coral-tabcapture')) {
             item.focus();
             return true;
           }
+          
+          return false;
         });
       }
     });
@@ -327,12 +212,10 @@ function createDocumentTabCaptureEls() {
     bottomTabCaptureEl.setAttribute('coral-tabcapture', '');
     bottomTabCaptureEl.tabIndex = 0;
     document.body.appendChild(bottomTabCaptureEl);
-    bottomTabCaptureEl.addEventListener('focus', function(event) {
+    bottomTabCaptureEl.addEventListener('focus', () => {
       const top = overlays.top();
       if (top && top.instance.trapFocus === trapFocus.ON) {
-        const tabbableElement = Array.prototype.filter.call(top.instance.querySelectorAll(commons.TABBABLE_ELEMENT_SELECTOR), function(item) {
-          return item.offsetParent !== null && !item.hasAttribute('coral-tabcapture');
-        }).pop();
+        const tabbableElement = Array.prototype.filter.call(top.instance.querySelectorAll(commons.TABBABLE_ELEMENT_SELECTOR), (item) => item.offsetParent !== null && !item.hasAttribute('coral-tabcapture')).pop();
         
         // Focus on the last tabbable element of the top overlay
         if (tabbableElement) {
@@ -366,6 +249,126 @@ function hideDocumentTabCaptureEls() {
     topTabCaptureEl.style.display = 'none';
     bottomTabCaptureEl.style.display = 'none';
   }
+}
+
+/**
+ Show or restore the aria-hidden state of every child of body.
+ */
+function showEverything() {
+  // ARIA: Show all the things
+  const children = document.body.children;
+  for (let i = 0; i < children.length; i++) {
+    const child = children[i];
+    // Restore the previous aria-hidden value
+    child.setAttribute('aria-hidden', child._previousAriaHidden || 'false');
+  }
+}
+
+/**
+ Actually hide the backdrop.
+ */
+function doBackdropHide() {
+  document.body.classList.remove('u-coral-noscroll');
+  
+  // Start animation
+  window.requestAnimationFrame(() => {
+    backdropEl.classList.remove('is-open');
+    
+    cancelBackdropHide();
+    fadeTimeout = window.setTimeout(() => {
+      backdropEl.style.display = 'none';
+    }, FADETIME);
+  });
+  
+  // Set flag for testing
+  backdropEl._isOpen = false;
+  
+  // Wait for animation to complete
+  showEverything();
+}
+
+/**
+ Hide the backdrop if no overlays are using it.
+ */
+function hideOrRepositionBackdrop() {
+  if (!backdropEl || !backdropEl._isOpen) {
+    // Do nothing if the backdrop isn't shown
+    return;
+  }
+  
+  // Loop over all overlays
+  const keepBackdrop = overlays.some((overlay) => {
+    // Check for backdrop usage
+    if (overlay.backdrop) {
+      return true;
+    }
+    
+    return false;
+  });
+  
+  if (!keepBackdrop) {
+    // Hide the backdrop
+    doBackdropHide();
+  }
+  else {
+    // Reposition the backdrop
+    doRepositionBackdrop();
+  }
+  
+  // Hide/create the document-level tab capture element as necessary
+  // This only applies to modal overlays (those that have backdrops)
+  const top = overlays.top();
+  if (!top || !(top.instance.trapFocus === trapFocus.ON && top.instance._requestedBackdrop)) {
+    hideDocumentTabCaptureEls();
+  }
+  else if (top && top.instance.trapFocus === trapFocus.ON && top.instance._requestedBackdrop) {
+    createDocumentTabCaptureEls();
+  }
+}
+
+/**
+ Handles clicks to the backdrop, calling backdropClickedCallback for every overlay
+ */
+function handleBackdropClick(event) {
+  overlays.forEach((overlay) => {
+    if (typeof overlay.instance.backdropClickedCallback === 'function') {
+      overlay.instance.backdropClickedCallback(event);
+    }
+  });
+}
+
+/**
+ Actually show the backdrop.
+ */
+function doBackdropShow(zIndex, instance) {
+  document.body.classList.add('u-coral-noscroll');
+  
+  if (!backdropEl) {
+    backdropEl = document.createElement('div');
+    backdropEl.className = 'coral3-Backdrop';
+    document.body.appendChild(backdropEl);
+    
+    backdropEl.addEventListener('click', handleBackdropClick);
+  }
+  
+  // Show just under the provided zIndex
+  // Since we always increment by 10, this will never collide
+  backdropEl.style.zIndex = zIndex - 1;
+  
+  // Set flag for testing
+  backdropEl._isOpen = true;
+  
+  // Start animation
+  backdropEl.style.display = '';
+  window.requestAnimationFrame(() => {
+    // Add the class on the next animation frame so backdrop has time to exist
+    // Otherwise, the animation for opacity will not work.
+    backdropEl.classList.add('is-open');
+    
+    cancelBackdropHide();
+  });
+  
+  hideEverythingBut(instance);
 }
 
 /**
@@ -413,19 +416,17 @@ const Overlay = (superClass) => class extends superClass {
       this._vent.on('keydown', this._handleRootKeypress);
       this._vent.on('focus', '[coral-tabcapture]', this._handleTabCaptureFocus);
     }
-    else {
-      // Don't just put this in an else, check if we currently have it disabled
-      // so we only attempt to remove elements if we were previously capturing tabs
-      if (this._trapFocus === trapFocus.ON) {
-        // Remove elements
-        this.removeChild(this._elements.topTabCapture);
-        this.removeChild(this._elements.intermediateTabCapture);
-        this.removeChild(this._elements.bottomTabCapture);
-        
-        // Remove listeners
-        this._vent.off('keydown', this._handleRootKeypress);
-        this._vent.off('focus', '[coral-tabcapture]', this._handleTabCaptureFocus);
-      }
+    // Don't just put this in an else, check if we currently have it disabled
+    // so we only attempt to remove elements if we were previously capturing tabs
+    else if (this._trapFocus === trapFocus.ON) {
+      // Remove elements
+      this.removeChild(this._elements.topTabCapture);
+      this.removeChild(this._elements.intermediateTabCapture);
+      this.removeChild(this._elements.bottomTabCapture);
+  
+      // Remove listeners
+      this._vent.off('keydown', this._handleRootKeypress);
+      this._vent.off('focus', '[coral-tabcapture]', this._handleTabCaptureFocus);
     }
   }
   
@@ -531,10 +532,10 @@ const Overlay = (superClass) => class extends superClass {
             // Make sure tab capture elements are positioned correctly
             if (
               // Tab capture elements are no longer at the bottom
-            self._elements.topTabCapture !== self.firstElementChild ||
-            self._elements.bottomTabCapture !== self.lastElementChild ||
-            // Tab capture elements have been separated
-            self._elements.bottomTabCapture.previousElementSibling !== self._elements.intermediateTabCapture
+              self._elements.topTabCapture !== self.firstElementChild ||
+              self._elements.bottomTabCapture !== self.lastElementChild ||
+              // Tab capture elements have been separated
+              self._elements.bottomTabCapture.previousElementSibling !== self._elements.intermediateTabCapture
             ) {
               self.insertBefore(self._elements.intermediateTabCapture, self.firstElementChild);
               self.appendChild(self._elements.intermediateTabCapture);
@@ -585,7 +586,7 @@ const Overlay = (superClass) => class extends superClass {
               // makes sure the focus is returned per accessibility recommendations
               self._handleReturnFocus();
               
-              self._debounce(function() {
+              self._debounce(() => {
                 self.trigger('coral-overlay:close');
                 self._silenced = false;
               });
@@ -609,8 +610,8 @@ const Overlay = (superClass) => class extends superClass {
   _debounce(f) {
     // Used to avoid triggering open/close event continuously
     window.clearTimeout(this._debounceId);
-    this._debounceId = window.setTimeout(function() {
-      f()
+    this._debounceId = window.setTimeout(() => {
+      f();
     }, 10);
   }
   
@@ -728,7 +729,7 @@ const Overlay = (superClass) => class extends superClass {
     
     // Focus on the correct tabbable element
     const target = event.target;
-    const which = (target === this._elements.intermediateTabCapture ? 'first' : 'last');
+    const which = target === this._elements.intermediateTabCapture ? 'first' : 'last';
     
     this._focusOn(which);
   }
@@ -750,7 +751,7 @@ const Overlay = (superClass) => class extends superClass {
     }
     else if (typeof this.focusOnShow === 'string' && this.focusOnShow !== focusOnShow.OFF) {
       // we need to add :not([coral-tabcapture]) to avoid selecting the tab captures
-      const selectedElement = this.querySelector(this.focusOnShow + ':not([coral-tabcapture])');
+      const selectedElement = this.querySelector(`${this.focusOnShow}:not([coral-tabcapture])`);
       
       if (selectedElement) {
         selectedElement.focus();
@@ -855,10 +856,9 @@ const Overlay = (superClass) => class extends superClass {
     
       // On blur, restore element to its prior, not-focusable state
       const tempVent = new Vent(element);
-      tempVent.on('blur.afterFocus', function(event) {
-      
+      tempVent.on('blur.afterFocus', (event) => {
         // Wait a frame before testing whether focus has moved to an open overlay or to some other element.
-        window.requestAnimationFrame(function() {
+        window.requestAnimationFrame(() => {
           // If overlay remains open, don't remove tabindex event handler until after it has been closed
           const top = overlays.top();
           if (top && top.instance.contains(document.activeElement)) {
@@ -875,11 +875,11 @@ const Overlay = (superClass) => class extends superClass {
   }
   
   // Expose enums
-  static get trapFocus() {return trapFocus;}
-  static get returnFocus() {return returnFocus;}
-  static get focusOnShow() {return focusOnShow;}
+  static get trapFocus() { return trapFocus; }
+  static get returnFocus() { return returnFocus; }
+  static get focusOnShow() { return focusOnShow; }
   // Expose const
-  static get FADETIME() {return FADETIME;}
+  static get FADETIME() { return FADETIME; }
   
   static get observedAttributes() {
     return [
@@ -896,9 +896,9 @@ const Overlay = (superClass) => class extends superClass {
   connectedCallback() {
     super.connectedCallback();
     
-    if (!this.hasAttribute('trapfocus')) {this.trapFocus = this.trapFocus;}
-    if (!this.hasAttribute('returnfocus')) {this.returnFocus = this.returnFocus;}
-    if (!this.hasAttribute('focusonshow')) {this.focusOnShow = this.focusOnShow;}
+    if (!this.hasAttribute('trapfocus')) { this.trapFocus = this.trapFocus; }
+    if (!this.hasAttribute('returnfocus')) { this.returnFocus = this.returnFocus; }
+    if (!this.hasAttribute('focusonshow')) { this.focusOnShow = this.focusOnShow; }
     
     if (this.open) {
       this._pushOverlay();

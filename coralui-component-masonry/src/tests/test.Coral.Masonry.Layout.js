@@ -1,6 +1,4 @@
 describe('Coral.Masonry.Layout', function() {
-  'use strict';
-  
   describe('Namespace', function() {
     it('should be defined', function() {
       expect(Coral.Masonry).to.have.property('Layout');

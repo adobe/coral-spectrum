@@ -21,10 +21,6 @@
  @htmltag coral-shell-solution-label
  @extends HTMLElement
  */
-class ShellSolutionLabel extends HTMLElement {
-  constructor() {
-    super();
-  }
-}
+class ShellSolutionLabel extends HTMLElement {}
 
 export default ShellSolutionLabel;

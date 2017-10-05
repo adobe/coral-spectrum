@@ -28,10 +28,6 @@ import MasonryVariableLayout from './MasonryVariableLayout';
  @extends Coral.Masonry.VariableLayout
  */
 class MasonryDashboardLayout extends MasonryVariableLayout {
-  constructor(masonry) {
-    super(masonry);
-  }
-  
   /** @inheritdoc */
   _writeItemStyle(item) {
     // Reset height because otherwise getBoundingClientRect() will not return the real height
@@ -50,7 +46,7 @@ class MasonryDashboardLayout extends MasonryVariableLayout {
         const layoutData = item._layoutData;
         if (layoutData.columnIndex === columnIndex) {
           const expandedHeight = nextItemTop - layoutData.top - this._verSpacing;
-          item.style.height = expandedHeight + 'px';
+          item.style.height = `${expandedHeight}px`;
         }
         nextItemTop = layoutData.top;
       }

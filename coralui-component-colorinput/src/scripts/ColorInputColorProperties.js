@@ -71,7 +71,9 @@ class ColorInputColorProperties extends ColorInputAbstractSubview(Component(HTML
       // update the colorPreview background color, state, and label
       colorPreview.style.backgroundColor = newColor.rgbValue;
       colorPreview.setAttribute('aria-pressed', 'false');
-      colorPreview.setAttribute('aria-label', i18n.get('{value}, Color', {value: (parseFloat(rgba.a) === 1 ? newColor.value : newColor.rgbaValue)}));
+      colorPreview.setAttribute('aria-label', i18n.get('{value}, Color', {
+        value: parseFloat(rgba.a) === 1 ? newColor.value : newColor.rgbaValue
+      }));
     
       // update the Hex input value
       this._elements.hexInput.value = newColor.hexValue.substr(1);
@@ -95,11 +97,19 @@ class ColorInputColorProperties extends ColorInputAbstractSubview(Component(HTML
     
       // with new color, get appropriate RGBA value
       if (newColor) {
-        val = !rgba ? '' : isAlpha ? parseInt(rgba[abbr] * 100, 10) : rgba[abbr];
+        if (!rgba) {
+          val = '';
+        }
+        else if (isAlpha) {
+          val = parseInt(rgba[abbr] * 100, 10);
+        }
+        else {
+          val = rgba[abbr];
+        }
       }
     
       // update the slider and input values
-      this._elements[prefix + 'Slider'].value = this._elements[prefix + 'Input'].value = val;
+      this._elements[`${prefix}Slider`].value = this._elements[`${prefix}Input`].value = val;
     }
   
     if (colorPreview === document.activeElement) {
@@ -107,7 +117,7 @@ class ColorInputColorProperties extends ColorInputAbstractSubview(Component(HTML
       colorPreview.blur();
     
       // delay focus by 100ms so that screen reader has time to adjust to label with updated color value
-      window.setTimeout(function() {
+      window.setTimeout(() => {
         colorPreview.focus();
       }, 100);
     }
@@ -140,8 +150,9 @@ class ColorInputColorProperties extends ColorInputAbstractSubview(Component(HTML
   /** @ignore */
   _onChangeHex(event) {
     event.stopPropagation();
-    
-    const value = '#' + this._elements.hexInput.value; //Value of hexInput field is without '#'.
+  
+    //Value of hexInput field is without '#'.
+    const value = `#${this._elements.hexInput.value}`;
     const color = new Color();
     color.value = value;
     
@@ -195,7 +206,7 @@ class ColorInputColorProperties extends ColorInputAbstractSubview(Component(HTML
         r: r,
         g: g,
         b: b,
-        a: (a / 100)
+        a: a / 100
       };
       this._colorinput._setActiveColor(color);
     }
@@ -207,9 +218,9 @@ class ColorInputColorProperties extends ColorInputAbstractSubview(Component(HTML
     this.classList.add(CLASSNAME);
   
     // Support cloneNode
-    const propertiesSubview = this.querySelector('.coral3-ColorInput-propertiesSubview');
-    if (propertiesSubview) {
-      propertiesSubview.remove();
+    const subview = this.querySelector('.coral3-ColorInput-propertiesSubview');
+    if (subview) {
+      subview.remove();
     }
     
     this.appendChild(this._elements.propertiesSubview);

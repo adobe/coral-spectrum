@@ -21,10 +21,6 @@
  @htmltag coral-shell-user-footer
  @extends HTMLElement
  */
-class ShellUserFooter extends HTMLElement {
-  constructor() {
-    super();
-  }
-}
+class ShellUserFooter extends HTMLElement {}
 
 export default ShellUserFooter;

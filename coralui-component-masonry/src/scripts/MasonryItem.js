@@ -86,9 +86,11 @@ class MasonryItem extends Component(HTMLElement) {
     if (this.classList.contains('is-beforeInserting')) {
       this.classList.remove('is-beforeInserting');
       this.classList.add('is-inserting');
-      commons.transitionEnd(this, function() {
-        this.classList.remove('is-inserting');
-      }.bind(this));
+      
+      const self = this;
+      commons.transitionEnd(this, () => {
+        self.classList.remove('is-inserting');
+      });
     }
   }
   
@@ -108,7 +110,8 @@ class MasonryItem extends Component(HTMLElement) {
       else {
         handle = this.querySelector('[coral-masonry-draghandle]');
         if (!handle) {
-          enabled = false; // Disable drag&drop if handle wasn't found
+          // Disable drag&drop if handle wasn't found
+          enabled = false;
         }
       }
     }
@@ -120,22 +123,21 @@ class MasonryItem extends Component(HTMLElement) {
       }
       this._dragAction.handle = handle;
     }
-    else {
-      if (this._dragAction) {
-        this._dragAction.destroy();
-        this._dragAction = null;
-      }
+    else if (this._dragAction) {
+      this._dragAction.destroy();
+      this._dragAction = null;
     }
   }
 
-  static get observedAttributes() {return ['selected', '_removing', '_orderable'];}
+  static get observedAttributes() { return ['selected', '_removing', '_orderable']; }
   
   attributeChangedCallback(name, oldValue, value) {
     if (name === '_removing') {
+      const self = this;
       // Do it in the next frame so that the removing animation is visible
-      window.requestAnimationFrame(function() {
-        this.classList.toggle('is-removing', value !== null);
-      }.bind(this));
+      window.requestAnimationFrame(() => {
+        self.classList.toggle('is-removing', value !== null);
+      });
     }
     else if (name === '_orderable') {
       this._updateDragAction(value !== null);

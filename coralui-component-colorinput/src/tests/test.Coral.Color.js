@@ -1,6 +1,4 @@
 describe('Coral.Color', function() {
-  'use strict';
-
   describe('namespace', function() {
     it('should be defined', function() {
       expect(Coral).to.have.property('Color');

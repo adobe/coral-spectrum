@@ -122,7 +122,7 @@ class ColorInput extends FormField(Component(HTMLElement)) {
       'key:enter input': '_onKeyEsc',
   
       // private
-      'coral-colorinput-item:_selectedchanged': '_onItemSelectedChanged',
+      'coral-colorinput-item:_selectedchanged': '_onItemSelectedChanged'
     }));
     
     // Prepare templates
@@ -151,7 +151,7 @@ class ColorInput extends FormField(Component(HTMLElement)) {
         host: this,
         itemTagName: 'coral-colorinput-item',
         onItemAdded: this._onItemAdded,
-        onItemRemoved: this._onItemRemoved,
+        onItemRemoved: this._onItemRemoved
       });
     }
     return this._items;
@@ -420,7 +420,7 @@ class ColorInput extends FormField(Component(HTMLElement)) {
   
   // JSDoc inherited
   get invalid() {
-    return super.invalid
+    return super.invalid;
   }
   set invalid(value) {
     super.invalid = value;
@@ -503,7 +503,7 @@ class ColorInput extends FormField(Component(HTMLElement)) {
   
   /** @private */
   _validateSelection(item) {
-    let selectedItems = this.items._getAllSelected();
+    const selectedItems = this.items._getAllSelected();
     
     // Last selected item wins
     item = item || selectedItems[selectedItems.length - 1];
@@ -547,7 +547,7 @@ class ColorInput extends FormField(Component(HTMLElement)) {
   /** @ignore */
   _onColorPreviewClick(event) {
     // restore focus to appropriate element when overlay closes
-    this._elements.overlay.returnFocusTo((this.variant === variant.SWATCH ? event.matchedTarget : this._elements.input));
+    this._elements.overlay.returnFocusTo(this.variant === variant.SWATCH ? event.matchedTarget : this._elements.input);
     
     this._elements.overlay.open = !this._elements.overlay.open;
   }
@@ -586,7 +586,7 @@ class ColorInput extends FormField(Component(HTMLElement)) {
     event.stopPropagation();
     
     // restore focus to appropriate element when overlay closes
-    this._elements.overlay.returnFocusTo((this.variant === variant.SWATCH ? event.matchedTarget : this._elements.input));
+    this._elements.overlay.returnFocusTo(this.variant === variant.SWATCH ? event.matchedTarget : this._elements.input);
     
     this._elements.overlay.open = true;
   }
@@ -681,7 +681,7 @@ class ColorInput extends FormField(Component(HTMLElement)) {
         color = new Color();
         color.value = colorEl.value;
         
-        generatedColors = (this.autoGenerateColors === autoGenerateColors.TINTS) ? color.calculateTintColors(5) : color.calculateShadeColors(5);
+        generatedColors = this.autoGenerateColors === autoGenerateColors.TINTS ? color.calculateTintColors(5) : color.calculateShadeColors(5);
         
         for (generatedIndex = generatedColors.length - 1; generatedIndex >= 0; generatedIndex--) {
           generatedColorEl = new ColorInputItem();
@@ -698,7 +698,7 @@ class ColorInput extends FormField(Component(HTMLElement)) {
   _syncColorPreviewIcon() {
     const colorPreview = this._elements.colorPreview;
     
-    colorPreview.icon = (this.disabled && this.variant === variant.SWATCH) ? 'lockOn' : '';
+    colorPreview.icon = this.disabled && this.variant === variant.SWATCH ? 'lockOn' : '';
     colorPreview.iconSize = Icon.size.SMALL;
   }
   
@@ -777,11 +777,11 @@ class ColorInput extends FormField(Component(HTMLElement)) {
   }
   
   // Expose enums
-  static get variant() {return variant;}
-  static get autoGenerateColors() {return autoGenerateColors;}
-  static get showSwatches() {return showSwatches;}
-  static get showDefaultColors() {return showDefaultColors;}
-  static get showProperties() {return showProperties;}
+  static get variant() { return variant; }
+  static get autoGenerateColors() { return autoGenerateColors; }
+  static get showSwatches() { return showSwatches; }
+  static get showDefaultColors() { return showDefaultColors; }
+  static get showProperties() { return showProperties; }
   
   static get observedAttributes() {
     return super.observedAttributes.concat([

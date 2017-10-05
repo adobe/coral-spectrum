@@ -62,10 +62,9 @@ class MultifieldItem extends Component(HTMLElement) {
     });
   }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.content;}
-  set defaultContentZone(value) {this.content = value;}
-  get _contentZones() {return {'coral-multifield-item-content': 'content'};}
+  get defaultContentZone() { return this.content; }
+  set defaultContentZone(value) { this.content = value; }
+  get _contentZones() { return {'coral-multifield-item-content': 'content'}; }
   
   connectedCallback() {
     super.connectedCallback();
@@ -75,7 +74,7 @@ class MultifieldItem extends Component(HTMLElement) {
     // a11y
     this.setAttribute('role', 'listitem');
   
-    // Create a temporary fragment
+    // Create a fragment
     const fragment = document.createDocumentFragment();
   
     const templateHandleNames = ['move', 'remove'];
@@ -95,7 +94,7 @@ class MultifieldItem extends Component(HTMLElement) {
     while (this.firstChild) {
       const child = this.firstChild;
       if (child.nodeType === Node.TEXT_NODE ||
-        (child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1)) {
+        child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
         // Add non-template elements to the label
         content.appendChild(child);
       }

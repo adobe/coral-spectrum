@@ -1,6 +1,4 @@
 describe('Coral.NumberInput', function() {
-  'use strict';
-
   function testInstance(instance) {
     expect(instance.getAttribute('role')).to.equal('group');
     expect(instance.classList.contains('coral3-NumberInput')).to.be.true;

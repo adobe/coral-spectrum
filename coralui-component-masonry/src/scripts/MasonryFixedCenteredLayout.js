@@ -29,10 +29,6 @@ import {getFirstRowFilledColumns} from './MasonryLayoutUtil';
  @extends Coral.Masonry.ColumnLayout
  */
 class MasonryFixedCenteredLayout extends MasonryColumnLayout {
-  constructor(masonry) {
-    super(masonry);
-  }
-  
   /** @inheritdoc */
   _writeStyles(items) {
     this._outerColumnWidth = this._columnWidth + this._horSpacing;
@@ -51,7 +47,7 @@ class MasonryFixedCenteredLayout extends MasonryColumnLayout {
   
   /** @inheritdoc */
   _getItemLeft(columnIndex) {
-    return this._offsetLeft + (this._outerColumnWidth * columnIndex);
+    return this._offsetLeft + this._outerColumnWidth * columnIndex;
   }
 }
 

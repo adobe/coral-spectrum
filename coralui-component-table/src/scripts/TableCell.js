@@ -29,10 +29,6 @@ const CLASSNAME = 'coral-Table-cell';
  @extends Coral.mixin.component
  */
 class TableCell extends Component(HTMLTableCellElement) {
-  constructor() {
-    super();
-  }
-  
   /**
    The cell's content.
    
@@ -95,7 +91,7 @@ class TableCell extends Component(HTMLTableCellElement) {
   /** @private */
   _setHandle(handle) {
     // Specify handle directly on the cell if none found
-    if (!this.querySelector('[' + handle + ']')) {
+    if (!this.querySelector(`[${handle}]`)) {
       this.setAttribute(handle, '');
     }
   }

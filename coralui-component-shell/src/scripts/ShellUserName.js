@@ -21,10 +21,6 @@
  @htmltag coral-shell-user-name
  @extends HTMLElement
  */
-class ShellUserName extends HTMLElement {
-  constructor() {
-    super();
-  }
-}
+class ShellUserName extends HTMLElement {}
 
 export default ShellUserName;

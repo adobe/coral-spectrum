@@ -58,8 +58,8 @@ class Multifield extends Component(HTMLElement) {
     
     // Template support: move nodes added to the <template> to its content fragment
     const self = this;
-    self._observer = new MutationObserver(function(mutations) {
-      mutations.forEach(function(mutation) {
+    self._observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
         for (let i = 0; i < mutation.addedNodes.length; i++) {
           const addedNode = mutation.addedNodes[i];
           const template = self.template;
@@ -128,9 +128,9 @@ class Multifield extends Component(HTMLElement) {
       insert: function(template) {
         this.appendChild(template);
       },
-      set: function(value) {
+      set: function(content) {
         // Additionally add support for template
-        this._handleTemplateSupport(value);
+        this._handleTemplateSupport(content);
       }
     });
   }
@@ -152,10 +152,11 @@ class Multifield extends Component(HTMLElement) {
     if (event.matchedTarget.closest('coral-multifield') === this) {
       this.items.add(document.createElement('coral-multifield-item'));
   
+      const self = this;
       // Wait for MO to render item template
-      window.requestAnimationFrame(function() {
-        this.trigger('change');
-      }.bind(this));
+      window.requestAnimationFrame(() => {
+        self.trigger('change');
+      });
     }
   }
   
@@ -179,7 +180,7 @@ class Multifield extends Component(HTMLElement) {
       const dragElementIndex = items.indexOf(dragElement);
     
       dragElement.classList.add(IS_DRAGGING_CLASS);
-      items.forEach(function(item, i) {
+      items.forEach((item, i) => {
         if (i < dragElementIndex) {
           item.classList.add(IS_BEFORE_CLASS);
         }
@@ -200,14 +201,16 @@ class Multifield extends Component(HTMLElement) {
         marginBottom = parseFloat(window.getComputedStyle(items[0]).marginBottom);
       }
       
-      items.forEach(function(item) {
+      items.forEach((item) => {
         if (!item.classList.contains(IS_DRAGGING_CLASS)) {
           const dragElement = event.detail.dragElement;
           const dragElementBoundingClientRect = dragElement.getBoundingClientRect();
           const itemBoundingClientRect = item.getBoundingClientRect();
-          const itemOffsetTop = itemBoundingClientRect.top + document.body.scrollTop;
-          const isAfter = event.detail.pageY < (itemOffsetTop + itemBoundingClientRect.height / 2);
-          const itemReorderedTop = dragElementBoundingClientRect.height + marginBottom + 'px';
+          const dragElementOffsetTop = dragElementBoundingClientRect.top;
+          const itemOffsetTop = itemBoundingClientRect.top;
+          
+          const isAfter = dragElementOffsetTop < itemOffsetTop;
+          const itemReorderedTop = `${dragElementBoundingClientRect.height + marginBottom}px`;
           
           item.classList.toggle(IS_AFTER_CLASS, isAfter);
           item.classList.toggle(IS_BEFORE_CLASS, !isAfter);
@@ -218,7 +221,7 @@ class Multifield extends Component(HTMLElement) {
           
           if (item.classList.contains(IS_BEFORE_CLASS)) {
             const afterDragElement = items.indexOf(item) > items.indexOf(dragElement);
-            item.style.top = afterDragElement ? '-' + itemReorderedTop : '';
+            item.style.top = afterDragElement ? `-${itemReorderedTop}` : '';
           }
         }
       });
@@ -233,7 +236,7 @@ class Multifield extends Component(HTMLElement) {
       const beforeArr = [];
       const afterArr = [];
       
-      items.forEach(function(item) {
+      items.forEach((item) => {
         if (item.classList.contains(IS_AFTER_CLASS)) {
           afterArr.push(item);
         }
@@ -279,7 +282,7 @@ class Multifield extends Component(HTMLElement) {
         // Before cloning, put the nested templates content back in the DOM
         const nestedTemplates = this.template.content.querySelectorAll('template[coral-multifield-template]');
         
-        Array.prototype.forEach.call(nestedTemplates, function(template) {
+        Array.prototype.forEach.call(nestedTemplates, (template) => {
           while (template.content.firstChild) {
             template.appendChild(template.content.firstChild);
           }
@@ -291,8 +294,7 @@ class Multifield extends Component(HTMLElement) {
     }
   }
   
-  // For backwards compatibility + Torq
-  get _contentZones() {return {'template': 'template'};}
+  get _contentZones() { return {template: 'template'}; }
   
   connectedCallback() {
     super.connectedCallback();

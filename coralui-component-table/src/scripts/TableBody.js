@@ -45,7 +45,7 @@ class TableBody extends TableSection(Component(HTMLTableSectionElement)) {
   
   /** @private */
   _handleMutations(mutations) {
-    mutations.forEach(function(mutation) {
+    mutations.forEach((mutation) => {
       this.trigger('coral-table-body:_contentchanged', {
         addedNodes: mutation.addedNodes,
         removedNodes: mutation.removedNodes

@@ -1,6 +1,4 @@
 describe('Coral.i18n', function() {
-  'use strict';
-
   before(function() {
     // Define test strings
 

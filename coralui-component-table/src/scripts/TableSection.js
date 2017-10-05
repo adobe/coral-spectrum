@@ -16,7 +16,6 @@
  */
 
 import {divider} from './TableUtil';
-import {Collection} from 'coralui-collection';
 import {transform, validate} from 'coralui-util';
 
 // Builds a string containing all possible divider classnames. This will be used to remove classnames when the
@@ -31,10 +30,6 @@ for (const dividerValue in divider) {
  @classdesc The base element for table sections
  */
 const TableSection = (superClass) => class extends superClass {
-  constructor() {
-    super();
-  }
-  
   /**
    The table section divider.
    
@@ -52,11 +47,11 @@ const TableSection = (superClass) => class extends superClass {
     this._divider = validate.enumeration(divider)(value) && value || divider.ROW;
     this._reflectAttribute('divider', this._divider);
   
-    this.classList.remove.apply(this.classList, ALL_DIVIDER_CLASSES);
+    this.classList.remove(...ALL_DIVIDER_CLASSES);
     this.classList.add(`coral-Table-divider--${this.divider}`);
   }
   
-  static get observedAttributes() {return ['divider'];}
+  static get observedAttributes() { return ['divider']; }
   
   connectedCallback() {
     super.connectedCallback();
@@ -65,7 +60,7 @@ const TableSection = (superClass) => class extends superClass {
     this.setAttribute('role', 'rowgroup');
     
     // Default reflected attributes
-    if (!this._divider) {this.divider = divider.ROW;}
+    if (!this._divider) { this.divider = divider.ROW; }
   }
 };
 

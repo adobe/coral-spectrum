@@ -17,7 +17,7 @@
 
 import Component from 'coralui-mixin-component';
 import Overlay from 'coralui-mixin-overlay';
-import {transform, validate, commons} from 'coralui-util';
+import {transform, validate} from 'coralui-util';
 
 const CLASSNAME = 'coral3-Shell-menu';
 
@@ -55,16 +55,6 @@ const from = {
 const ALL_FROM_CLASSES = [];
 for (const fromValue in from) {
   ALL_FROM_CLASSES.push(`${CLASSNAME}--${from[fromValue]}`);
-}
-
-/**
- Lowercase the passed string if it's a string, passthrough if not.
- 
- @ignore
- */
-function transformLowercase(alignment) {
-  // Just pass through non-strings
-  return typeof alignment === 'string' ? alignment.toLowerCase() : alignment;
 }
 
 /**
@@ -109,7 +99,7 @@ class ShellMenu extends Overlay(Component(HTMLElement)) {
     this._placement = validate.enumeration(placement)(value) && value || placement.RIGHT;
     this._reflectAttribute('placement', this._placement);
     
-    this.classList.remove.apply(this.classList, ALL_PLACEMENT_CLASSES);
+    this.classList.remove(...ALL_PLACEMENT_CLASSES);
     this.classList.add(`${CLASSNAME}--placement-${this._placement}`);
   }
   
@@ -130,7 +120,7 @@ class ShellMenu extends Overlay(Component(HTMLElement)) {
     this._from = validate.enumeration(from)(value) && value || from.TOP;
     this._reflectAttribute('from', this._from);
   
-    this.classList.remove.apply(this.classList, ALL_FROM_CLASSES);
+    this.classList.remove(...ALL_FROM_CLASSES);
     this.classList.add(`${CLASSNAME}--from-${this._from}`);
   }
   
@@ -218,18 +208,17 @@ class ShellMenu extends Overlay(Component(HTMLElement)) {
     const item = eventTarget.closest('coral-shell-menubar-item');
   
     // in case the target was clicked, we need to ignore the event
-    if (item && this === item._getMenu()) {
-      return;
-    }
-    else if (this.open && !this.contains(eventTarget)) {
-      // Close if we are open and the click was outside of the target and outside of the popover
-      this.hide();
+    if (!(item && this === item._getMenu())) {
+      if (this.open && !this.contains(eventTarget)) {
+        // Close if we are open and the click was outside of the target and outside of the popover
+        this.hide();
+      }
     }
   }
   
   // Expose enums
-  static get placement() {return placement;}
-  static get from() {return from;}
+  static get placement() { return placement; }
+  static get from() { return from; }
   
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -246,8 +235,8 @@ class ShellMenu extends Overlay(Component(HTMLElement)) {
     this.classList.add(CLASSNAME);
     
     // Default reflected attributes
-    if (!this._placement) {this.placement = placement.RIGHT;}
-    if (!this._from) {this.from = from.TOP;}
+    if (!this._placement) { this.placement = placement.RIGHT; }
+    if (!this._from) { this.from = from.TOP; }
   }
 }
 

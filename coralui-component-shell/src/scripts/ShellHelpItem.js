@@ -26,10 +26,6 @@ const CLASSNAME = ['coral3-BasicList-item', 'coral3-AnchorList-item', 'coral3-Sh
  @extends Coral.AnchorList.Item
  */
 class ShellHelpItem extends AnchorListItem {
-  constructor() {
-    super();
-  }
-  
   connectedCallback() {
     super.connectedCallback();
     

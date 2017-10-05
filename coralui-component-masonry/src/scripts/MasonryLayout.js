@@ -47,12 +47,16 @@ class MasonryLayout {
   /**
    Lays out the masonry items according to the implementation.
    */
-  layout() {}
+  layout() {
+    // To override
+  }
   
   /**
    Removes all layout-specific attributes, style, data and event listeners from the masonry and its items.
    */
-  destroy() {}
+  destroy() {
+    // To override
+  }
   
   /**
    Removes the item from the control of the layout. This can be used to position the item differently,
@@ -61,7 +65,10 @@ class MasonryLayout {
    @param {Coral.Masonry.Item} item
    @see #reattach
    */
-  detach(item) {}
+  // eslint-disable-next-line no-unused-vars
+  detach(item) {
+    // To override
+  }
   
   /**
    Adds the item to the control of the layout again. The layout has to ensure that the item will be transitioned to
@@ -70,7 +77,10 @@ class MasonryLayout {
    @param {Coral.Masonry.Item} item
    @see #detach
    */
-  reattach(item) {}
+  // eslint-disable-next-line no-unused-vars
+  reattach(item) {
+    // To override
+  }
   
   /**
    Returns the item at the given position. The position coordinates are relative to the masonry.
@@ -82,7 +92,10 @@ class MasonryLayout {
    @param {number} y
    @return {?Coral.Masonry.Item}
    */
-  itemAt(x, y) {}
+  // eslint-disable-next-line no-unused-vars
+  itemAt(x, y) {
+    // To override
+  }
   
   /**
    Defines the name of the Layout

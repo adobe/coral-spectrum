@@ -213,9 +213,9 @@ const ActionBarContainer = (superClass) => class extends superClass {
     }
   
     // Cleanup 'More' button
-    const moreButton = this.querySelector('[coral-actionbar-more]');
-    if (moreButton) {
-      this.removeChild(moreButton);
+    const more = this.querySelector('[coral-actionbar-more]');
+    if (more) {
+      this.removeChild(more);
     }
   
     // Cleanup 'More' popover

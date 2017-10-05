@@ -39,7 +39,7 @@ const CLASSNAME = 'coral3-Drawer';
 // A string of all possible direction classnames
 const ALL_DIRECTION_CLASSES = [];
 for (const directionValue in direction) {
-  ALL_DIRECTION_CLASSES.push(CLASSNAME + '--' + direction[directionValue]);
+  ALL_DIRECTION_CLASSES.push(`${CLASSNAME}--${direction[directionValue]}`);
 }
 
 /**
@@ -124,7 +124,7 @@ class Drawer extends Component(HTMLElement) {
     this._direction = validate.enumeration(direction)(value) && value || direction.DOWN;
     this._reflectAttribute('direction', this._direction);
   
-    this.classList.remove.apply(this.classList, ALL_DIRECTION_CLASSES);
+    this.classList.remove(...ALL_DIRECTION_CLASSES);
     this.classList.add(`${CLASSNAME}--${this._direction}`);
 
     this._updateIcon();
@@ -144,6 +144,7 @@ class Drawer extends Component(HTMLElement) {
   }
   set open(value) {
     const silenced = this._silenced;
+    const self = this;
     
     this._open = transform.booleanAttr(value);
     this._reflectAttribute('open', this._open);
@@ -151,33 +152,37 @@ class Drawer extends Component(HTMLElement) {
     this.setAttribute('aria-expanded', this._open);
     this._updateIcon();
   
+    // eslint-disable-next-line no-unused-vars
+    let offsetHeight;
+    
     // Handle slider animation
     const slider = this._elements.slider;
+    
     // Don't animate on initialization
     if (this._animate) {
-      commons.transitionEnd(slider, function() {
+      commons.transitionEnd(slider, () => {
         // Keep it silenced
-        this._silenced = silenced;
+        self._silenced = silenced;
         
         // Remove height as we want the drawer to naturally grow if content is added later
-        if (this._open) {
+        if (self._open) {
           slider.style.height = '';
         }
       
         // Trigger once transition is finished
-        this.trigger(`coral-drawer:${(this._open ? 'open' : 'close')}`);
-        this._silenced = false;
-      }.bind(this));
+        self.trigger(`coral-drawer:${(self._open ? 'open' : 'close')}`);
+        self._silenced = false;
+      });
     
       if (!this._open) {
         // Force height to enable transition
-        slider.style.height = slider.scrollHeight + 'px';
+        slider.style.height = `${slider.scrollHeight}px`;
       }
-
-      // Do transition in next frame as browser might batch up the height property change before painting
-      window.requestAnimationFrame(function() {
-        slider.style.height = this._open ? slider.scrollHeight + 'px' : 0;
-      }.bind(this));
+      
+      // Do transition in next task as browser might batch up the height property change before painting
+      window.setTimeout(() => {
+        slider.style.height = self._open ? `${slider.scrollHeight}px` : 0;
+      });
     }
     else {
       // Make sure it's animated next time
@@ -205,13 +210,12 @@ class Drawer extends Component(HTMLElement) {
     }
   }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.content;}
-  set defaultContentZone(value) {this.content = value;}
-  get _contentZones() {return {'coral-drawer-content': 'content'};}
+  get defaultContentZone() { return this.content; }
+  set defaultContentZone(value) { this.content = value; }
+  get _contentZones() { return {'coral-drawer-content': 'content'}; }
   
   // Expose enumerations
-  static get direction() {return direction;}
+  static get direction() { return direction; }
   
   static get observedAttributes() {
     return [
@@ -227,10 +231,10 @@ class Drawer extends Component(HTMLElement) {
     this.classList.add(CLASSNAME);
     
     // Default reflected attributes
-    if (!this._direction) {this.direction = direction.DOWN;}
-    if (!this._open) {this.open = false;}
+    if (!this._direction) { this.direction = direction.DOWN; }
+    if (!this._open) { this.open = false; }
   
-    // Create a temporary fragment
+    // Create a fragment
     const fragment = document.createDocumentFragment();
   
     const templateHandleNames = ['slider', 'toggle'];
@@ -240,13 +244,13 @@ class Drawer extends Component(HTMLElement) {
     fragment.appendChild(this._elements.toggle);
   
     // Fetch or create the content content zone element
-    const content =  this._elements.content;
+    const content = this._elements.content;
   
     // Move any remaining elements into the content sub-component
     while (this.firstChild) {
       const child = this.firstChild;
       if (child.nodeType === Node.TEXT_NODE ||
-        (child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1)) {
+        child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
         // Add non-template elements to the label
         content.appendChild(child);
       }

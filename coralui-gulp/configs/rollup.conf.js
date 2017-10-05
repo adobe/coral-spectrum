@@ -13,7 +13,7 @@ module.exports = {
     babel({
       presets: [
         [
-          'babel-preset-es2015',
+          'env',
           {
             modules: false
           }

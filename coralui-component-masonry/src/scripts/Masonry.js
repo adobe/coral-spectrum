@@ -45,21 +45,18 @@ const DEBUG = 0;
 // IE does not set the complete property to true if an image cannot be loaded. This code must be outside of the
 // masonry to make sure that the listener catches images which fail loading before the masonry is initalized.
 // @polyfill ie11
-document.addEventListener('error', function(event) {
+document.addEventListener('error', (event) => {
   const target = event.target;
   if (target && target.tagName === 'IMG') {
     target._loadError = true;
   }
 }, true);
 
-const itemFilter = (element) => {
-  // Ignore children which are being removed
-  return element && element.tagName === 'CORAL-MASONRY-ITEM' && !element.hasAttribute('_removing');
-};
+// Ignore children which are being removed
+const itemFilter = (element) => element && element.tagName === 'CORAL-MASONRY-ITEM' && !element.hasAttribute('_removing');
 
-const isRemovingOrRemoved = (item) => {
-  return item.hasAttribute('_removing') || !item.parentNode;
-};
+// Filter out items being removed
+const isRemovingOrRemoved = (item) => item.hasAttribute('_removing') || !item.parentNode;
 
 /**
  * Returns the position of the second element relative to the first element.
@@ -73,9 +70,7 @@ const relativePosition = (el1, el2) => {
   };
 };
 
-const weightedDistance = (x1, y1, x2, y2, unitWidth, unitHeight) => {
-  return Math.sqrt(Math.pow((x2 - x1) / unitWidth, 2) + Math.pow((y2 - y1) / unitHeight, 2));
-};
+const weightedDistance = (x1, y1, x2, y2, unitWidth, unitHeight) => Math.sqrt(Math.pow((x2 - x1) / unitWidth, 2) + Math.pow((y2 - y1) / unitHeight, 2));
 
 const getPreviousItem = (item) => {
   const previousItem = item.previousElementSibling;
@@ -168,15 +163,15 @@ class Masonry extends Component(HTMLElement) {
   }
   set layout(value) {
     value = transform.string(value);
-    const layouts = this.constructor._layouts;
+    const layoutEnum = this.constructor._layouts;
     
     if (value === '') {
       // Default is first registered layout which is "fixed-centered"
-      value = Object.keys(layouts)[0];
+      value = Object.keys(layoutEnum)[0];
     }
   
     if (value !== this._layout) {
-      if (layouts[value]) {
+      if (layoutEnum[value]) {
         this._layout = value;
         this._reflectAttribute('layout', this._layout);
         
@@ -271,32 +266,35 @@ class Masonry extends Component(HTMLElement) {
    @param reason just for debugging purposes
    @private
    */
-  _scheduleLayout(reason) {
+  _scheduleLayout() {
     if (!this._forceDebounce && !this._layoutScheduled) {
-      window.requestAnimationFrame(function() {
+      const self = this;
+      window.requestAnimationFrame(() => {
         // Skip layout if a layout was forced in between
-        if (this._layoutScheduled) {
-          this._doLayout(reason);
+        if (self._layoutScheduled) {
+          self._doLayout();
           // Cancel potentially scheduled layout if the current layout was enforced by calling doLayout directly
-          this._layoutScheduled = false;
+          self._layoutScheduled = false;
         }
-      }.bind(this));
+      });
       
       this._layoutScheduled = true;
     }
   }
   
   /** @private */
-  _scheduleDebouncedLayout(reason, force) {
+  _scheduleDebouncedLayout(force) {
     // Do not force debounce if the masonry isn't layouted yet. Safari sometimes triggers resize events while loading.
     if (force && this._layouted) {
       this._forceDebounce = true;
     }
     window.clearTimeout(this._debounceId);
-    this._debounceId = window.setTimeout(function() {
-      this._forceDebounce = false;
-      this._scheduleLayout('window resize');
-    }.bind(this), 500);
+    
+    const self = this;
+    this._debounceId = window.setTimeout(() => {
+      self._forceDebounce = false;
+      self._scheduleLayout('window resize');
+    }, 500);
   }
   
   /**
@@ -310,13 +308,13 @@ class Masonry extends Component(HTMLElement) {
       this._doLayout('became visible');
     }
     else {
-      this._scheduleDebouncedLayout('resize', false);
+      this._scheduleDebouncedLayout(false);
     }
   }
   
   /** @private */
   _onWindowResize() {
-    this._scheduleDebouncedLayout('window resize', true);
+    this._scheduleDebouncedLayout(true);
   }
   
   /**
@@ -324,7 +322,7 @@ class Masonry extends Component(HTMLElement) {
    
    @private
    */
-  _doLayout(reason) {
+  _doLayout() {
     const visible = !!this.offsetParent;
     const LayoutClass = this.constructor._layouts[this.layout];
     if (this._forceDebounce || !LayoutClass || !visible) {
@@ -361,7 +359,8 @@ class Masonry extends Component(HTMLElement) {
     for (i = 0; i < newItems.length; i++) {
       newItems[i].classList.add('is-managed');
     }
-    newItems.length = 0; // clear
+    // clear
+    newItems.length = 0;
     
     // Update loaded class. Cannot be done in _updateLoaded because it has to happen after the positioning.
     this.classList.toggle('is-loaded', this._loaded);
@@ -404,7 +403,8 @@ class Masonry extends Component(HTMLElement) {
       }
       this._loaded = loaded;
     }
-    this._scheduleLayout(); // A loaded image might have made an item bigger
+    // A loaded image might have made an item bigger
+    this._scheduleLayout();
   }
   
   /** @private */
@@ -422,9 +422,10 @@ class Masonry extends Component(HTMLElement) {
       item.classList.add('is-beforeInserting');
   
       // Do it in the next frame so that the inserting animation is visible
-      window.requestAnimationFrame(function() {
-        this._onItemAdded(item);
-      }.bind(this));
+      const self = this;
+      window.requestAnimationFrame(() => {
+        self._onItemAdded(item);
+      });
     }
   }
   
@@ -439,11 +440,12 @@ class Masonry extends Component(HTMLElement) {
       // Attach again for remove transition
       item.setAttribute('_removing', '');
       this.appendChild(item);
-      commons.transitionEnd(item, function() {
+      commons.transitionEnd(item, () => {
         item.remove();
       });
     }
-    else { // remove transition completed
+    // remove transition completed
+    else {
       item.removeAttribute('_removing');
       item._masonry = null;
       
@@ -462,9 +464,7 @@ class Masonry extends Component(HTMLElement) {
     }
     
     // Collection event
-    this.trigger('coral-collection:add', {
-      item: item
-    });
+    this.trigger('coral-collection:add', {item});
   }
   
   /** @private */
@@ -473,9 +473,7 @@ class Masonry extends Component(HTMLElement) {
     item.classList.remove('is-managed');
     
     // Collection event
-    this.trigger('coral-collection:remove', {
-      item: item
-    });
+    this.trigger('coral-collection:remove', {item});
   }
   
   /** @private */
@@ -533,8 +531,8 @@ class Masonry extends Component(HTMLElement) {
       // Add a content div with the right dimension instead of setting the dimension on the item directly. This is
       // necessary because some layouts modify the dimensions as well.
       const contentDiv = document.createElement('div');
-      contentDiv.style.width = item.clientWidth + 'px';
-      contentDiv.style.height = item.clientHeight + 'px';
+      contentDiv.style.width = `${item.clientWidth}px`;
+      contentDiv.style.height = `${item.clientHeight}px`;
       placeholder.appendChild(contentDiv);
       
       // Insert placeholder before dragged item
@@ -593,7 +591,7 @@ class Masonry extends Component(HTMLElement) {
       // // Drop transition
       this._layoutInstance.reattach(item);
       item.classList.add('is-dropping');
-      commons.transitionEnd(item, function() {
+      commons.transitionEnd(item, () => {
         item.classList.remove('is-dropping');
       });
     }
@@ -630,9 +628,9 @@ class Masonry extends Component(HTMLElement) {
   }
   
   // Expose enums
-  static get layouts() {return layouts;}
+  static get layouts() { return layouts; }
   
-  static get observedAttributes() {return ['layout', 'spacing', 'orderable'];}
+  static get observedAttributes() { return ['layout', 'spacing', 'orderable']; }
   
   connectedCallback() {
     super.connectedCallback();
@@ -641,21 +639,23 @@ class Masonry extends Component(HTMLElement) {
     
     // Support cloneNode
     const object = this.querySelector('object');
-    if (object && object.parentNode === this) {this.removeChild(object);}
+    if (object && object.parentNode === this) { this.removeChild(object); }
     
     // Default reflected attributes
-    if (!this._layout) {this.layout = layouts.FIXED_CENTERED;}
+    if (!this._layout) { this.layout = layouts.FIXED_CENTERED; }
   
     // Handles the resizing of the masonry
     commons.addResizeListener(this, this._onResize.bind(this));
 
     // This indicates that the initial items are being attached
     this._attaching = true;
-    window.requestAnimationFrame(function() {
-      this._attaching = false;
+    
+    const self = this;
+    window.requestAnimationFrame(() => {
+      self._attaching = false;
       // Update loaded after all items have been attached
-      this._updateLoaded();
-    }.bind(this));
+      self._updateLoaded();
+    });
   }
   
   /**

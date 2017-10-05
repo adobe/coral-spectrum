@@ -89,7 +89,7 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
       'key:end button[is="coral-button"]': '_onButtonKeyEnd',
       
       'coral-button:_valuechanged button[is="coral-button"]': '_onButtonValueChanged',
-      'coral-button:_selectedchanged button[is="coral-button"]': '_onButtonSelectedChanged',
+      'coral-button:_selectedchanged button[is="coral-button"]': '_onButtonSelectedChanged'
     }));
     
     // Init the mutation observer but we don't handle the initial items in the constructor
@@ -201,10 +201,9 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
     if (this.selectionMode === selectionMode.MULTIPLE) {
       return this.items._getAllSelected();
     }
-    else {
-      const item = this.selectedItem;
-      return item ? [item] : [];
-    }
+    
+    const item = this.selectedItem;
+    return item ? [item] : [];
   }
   
   /**
@@ -261,7 +260,7 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
     const isDisabled = this.disabled || this.readOnly;
     this._elements.nativeSelect.disabled = isDisabled;
     // Also update for all the items the disabled property so it matches the native select.
-    this.items.getAll().forEach(function(item) {
+    this.items.getAll().forEach((item) => {
       item.disabled = isDisabled;
     });
     this.setAttribute('aria-disabled', isDisabled);
@@ -278,8 +277,8 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
     const self = this;
     this._elements.nativeSelect.disabled = this.readOnly || this.disabled;
     // Also update for all the items the disabled property so it matches the native select.
-    this.items.getAll().forEach(function(item) {
-      item.disabled = self.disabled || (self.readOnly && !item.hasAttribute('selected'));
+    this.items.getAll().forEach((item) => {
+      item.disabled = self.disabled || self.readOnly && !item.hasAttribute('selected');
       if (self.readOnly) {
         item.setAttribute('aria-disabled', true);
       }
@@ -401,12 +400,12 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
       else if (this.selectionMode === selectionMode.MULTIPLE) {
         tabindex =
           // if no items are selected, first item should be tabbable
-          (!selectedItemsLength && i === 0) ||
+          !selectedItemsLength && i === 0 ||
           // if the element losing focus is selected, it should be tabbable
-          (isSelected && button === item) ||
+          isSelected && button === item ||
           // if the element losing focus is not selected, the last selected item should be tabbable
-          (!item.hasAttribute('selected') &&
-          button === (this.selectedItems[selectedItemsLength - 1] || firstSelectable)) ? 0 : -1;
+          !item.hasAttribute('selected') &&
+          button === (this.selectedItems[selectedItemsLength - 1] || firstSelectable) ? 0 : -1;
       }
       else {
         // first item should be tabbable
@@ -521,7 +520,7 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
       item.removeAttribute('role');
     }
   
-    item.disabled = this.disabled || (this.readOnly && !item.hasAttribute('selected'));
+    item.disabled = this.disabled || this.readOnly && !item.hasAttribute('selected');
   
     if (this.readOnly) {
       item.setAttribute('aria-disabled', true);
@@ -565,7 +564,7 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
   }
   
   /** @private */
-  _onCollectionChange(addedNodes, removedNodes) {
+  _onCollectionChange() {
     // we need to make sure that the state of the selectionMode is valid
     this._validateSelection();
   }
@@ -743,8 +742,15 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
     const buttons = this.items.getAll();
     const buttonsCount = buttons.length;
     let i = 0;
-    const role = this.selectionMode === selectionMode.SINGLE ?
-      'radio' : (this.selectionMode === selectionMode.MULTIPLE ? 'checkbox' : null);
+    
+    let role = null;
+    if (this.selectionMode === selectionMode.SINGLE) {
+      role = 'radio';
+    }
+    else if (this.selectionMode === selectionMode.MULTIPLE) {
+      role = 'checkbox';
+    }
+    
     let button;
     let isSelected = false;
     
@@ -814,7 +820,7 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
   }
   
   // Expose enumerations
-  static get selectionMode() {return selectionMode;}
+  static get selectionMode() { return selectionMode; }
   
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -829,9 +835,9 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
     this.classList.add(CLASSNAME);
   
     // Default reflected attributes
-    if (!this._selectionMode) {this.selectionMode = selectionMode.NONE;}
+    if (!this._selectionMode) { this.selectionMode = selectionMode.NONE; }
     
-    // Create a temporary fragment
+    // Create a fragment
     const frag = document.createDocumentFragment();
   
     // Render the template

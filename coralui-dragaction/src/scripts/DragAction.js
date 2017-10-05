@@ -55,7 +55,7 @@ const axis = {
  First parent element with overflow [hidden|scroll|auto]
  */
 function getViewContainer(element) {
-  while (true) {
+  while (element) {
     const p = element.parentNode;
     
     if (!p) {
@@ -124,27 +124,6 @@ function getPagePosition(event) {
 
 /**
  @ignore
- @param {Coral.DragAction} self
- Coral.DragAction instance
- @returns {HTMLElement}
- The dropzone that is being hovered by the dragged element or null if none
- */
-function isOverDropZone(self) {
-  let el = null;
-  if (self._dropZones && self._dropZones.length) {
-    self._dropZones.some(function(dropZone) {
-      if (within(self._scrollingElement, self._dragElement, dropZone)) {
-        el = dropZone;
-        return true;
-      }
-    });
-  }
-  
-  return el;
-}
-
-/**
- @ignore
  @param {HTMLElement} scrollingElement
  element that scrolls the document
  @param {HTMLElement} a
@@ -168,7 +147,30 @@ function within(scrollingElement, a, b) {
   const bt = bBoundingClientRect.top + documentScrollTop;
   const bb = bt + bBoundingClientRect.height;
   
-  return !((bl > ar || br < al) || (bt > ab || bb < at));
+  return !(bl > ar || br < al || (bt > ab || bb < at));
+}
+
+/**
+ @ignore
+ @param {Coral.DragAction} self
+ Coral.DragAction instance
+ @returns {HTMLElement}
+ The dropzone that is being hovered by the dragged element or null if none
+ */
+function isOverDropZone(self) {
+  let el = null;
+  if (self._dropZones && self._dropZones.length) {
+    self._dropZones.some((dropZone) => {
+      if (within(self._scrollingElement, self._dragElement, dropZone)) {
+        el = dropZone;
+        return true;
+      }
+      
+      return false;
+    });
+  }
+  
+  return el;
 }
 
 /**
@@ -225,18 +227,18 @@ class DragAction {
     this.axis = this._dragElement.getAttribute(AXIS_ATTRIBUTE);
   
     // Scroll options
-    this.scroll = this._dragElement.matches('[' + SCROLL_ATTRIBUTE + ']');
+    this.scroll = this._dragElement.matches(`[${SCROLL_ATTRIBUTE}]`);
   
     // Restriction to container
-    this.containment = this._dragElement.matches('[' + CONTAINMENT_ATTRIBUTE + ']');
+    this.containment = this._dragElement.matches(`[${CONTAINMENT_ATTRIBUTE}]`);
   
     this._drag = this._drag.bind(this);
     this._dragEnd = this._dragEnd.bind(this);
   
-    events.on('touchmove.CoralDragAction' + this._id, this._drag);
-    events.on('mousemove.CoralDragAction' + this._id, this._drag);
-    events.on('touchend.CoralDragAction' + this._id, this._dragEnd);
-    events.on('mouseup.CoralDragAction' + this._id, this._dragEnd);
+    events.on(`touchmove.CoralDragAction${this._id}`, this._drag);
+    events.on(`mousemove.CoralDragAction${this._id}`, this._drag);
+    events.on(`touchend.CoralDragAction${this._id}`, this._dragEnd);
+    events.on(`mouseup.CoralDragAction${this._id}`, this._dragEnd);
   
     // Store reference on dragElement
     this._dragElement.dragAction = this;
@@ -277,7 +279,7 @@ class DragAction {
     document.body.classList.remove(CLOSE_HAND_CLASS);
     this._dragElement.classList.remove(IS_DRAGGING_CLASS);
     if (this._handles && this._handles.length) {
-      this._handles.forEach(function(handle) {
+      this._handles.forEach((handle) => {
         handle._dragEvents.off('.CoralDragAction');
         handle.classList.remove(OPEN_HAND_CLASS);
       });
@@ -295,7 +297,7 @@ class DragAction {
       // Bind events
       if (this._handles && this._handles.length) {
         const self = this;
-        this._handles.forEach(function(handle) {
+        this._handles.forEach((handle) => {
           handle._dragEvents = handle._dragEvents || new window.Vent(handle);
           handle._dragEvents.on('mousedown.CoralDragAction', self._dragStart.bind(self));
           handle._dragEvents.on('touchstart.CoralDragAction', self._dragStart.bind(self));
@@ -403,8 +405,8 @@ class DragAction {
     }
     
     // Prevent touchscreen windows to scroll while dragging
-    events.on('touchmove.CoralDragAction', function(event) {
-      event.preventDefault();
+    events.on('touchmove.CoralDragAction', (e) => {
+      e.preventDefault();
     });
     
     document.body._overflow = window.getComputedStyle(document.body).overflow;
@@ -424,7 +426,7 @@ class DragAction {
     // Handle classes
     document.body.classList.add(CLOSE_HAND_CLASS);
     if (this._handles && this._handles.length) {
-      this._handles.forEach(function(handle) {
+      this._handles.forEach((handle) => {
         handle.classList.remove(OPEN_HAND_CLASS);
       });
     }
@@ -555,15 +557,13 @@ class DragAction {
           if (top >= containerPosition.top && top + dragElementHeight <= containerPosition.top + containerHeight) {
             newPosition.top = top;
           }
-          else {
-            // put the drag element to the container's top
-            if (pagePosition.y <= containerPosition.top) {
-              newPosition.top = containerPosition.top;
-            }
-            // put the drag element to the container's bottom
-            else if (pagePosition.y >= containerPosition.top + containerHeight) {
-              newPosition.top = containerPosition.top + containerHeight - dragElementHeight;
-            }
+          // put the drag element to the container's top
+          else if (pagePosition.y <= containerPosition.top) {
+            newPosition.top = containerPosition.top;
+          }
+          // put the drag element to the container's bottom
+          else if (pagePosition.y >= containerPosition.top + containerHeight) {
+            newPosition.top = containerPosition.top + containerHeight - dragElementHeight;
           }
         }
         else {
@@ -578,15 +578,13 @@ class DragAction {
           if (left >= containerPosition.left && left + dragElementWidth <= containerPosition.left + containerWidth) {
             newPosition.left = left;
           }
-          else {
-            // put the drag element to the container's left
-            if (pagePosition.x <= containerPosition.left) {
-              newPosition.left = containerPosition.left;
-            }
-            // put the drag element to the container's right
-            else if (pagePosition.x >= containerPosition.left + containerWidth) {
-              newPosition.left = containerPosition.left + containerWidth - dragElementWidth;
-            }
+          // put the drag element to the container's left
+          else if (pagePosition.x <= containerPosition.left) {
+            newPosition.left = containerPosition.left;
+          }
+          // put the drag element to the container's right
+          else if (pagePosition.x >= containerPosition.left + containerWidth) {
+            newPosition.left = containerPosition.left + containerWidth - dragElementWidth;
           }
         }
         else {
@@ -595,8 +593,8 @@ class DragAction {
       }
       
       // Set the new position
-      this._dragElement.style.top = newPosition.top - dragElementPosition.top + dragElementCSSPosition.top + 'px';
-      this._dragElement.style.left = newPosition.left - dragElementPosition.left + dragElementCSSPosition.left + 'px';
+      this._dragElement.style.top = `${newPosition.top - dragElementPosition.top + dragElementCSSPosition.top}px`;
+      this._dragElement.style.left = `${newPosition.left - dragElementPosition.left + dragElementCSSPosition.left}px`;
       
       // Trigger dropzone related events
       const dropZone = isOverDropZone(self);
@@ -623,18 +621,16 @@ class DragAction {
           }
         });
       }
-      else {
-        if (self._dropZoneEntered) {
-          self._dragEvents.dispatch('coral-dragaction:dragleave', {
-            detail: {
-              dragElement: self._dragElement,
-              pageX: pagePosition.x,
-              pageY: pagePosition.y,
-              dropElement: self._dropElement
-            }
-          });
-          self._dropZoneEntered = false;
-        }
+      else if (self._dropZoneEntered) {
+        self._dragEvents.dispatch('coral-dragaction:dragleave', {
+          detail: {
+            dragElement: self._dragElement,
+            pageX: pagePosition.x,
+            pageY: pagePosition.y,
+            dropElement: self._dropElement
+          }
+        });
+        self._dropZoneEntered = false;
       }
     }
   }
@@ -657,7 +653,7 @@ class DragAction {
       this._dragElement.classList.remove(IS_DRAGGING_CLASS);
       
       if (this._handles && this._handles.length) {
-        this._handles.forEach(function(handle) {
+        this._handles.forEach((handle) => {
           handle.classList.add(OPEN_HAND_CLASS);
         });
       }
@@ -703,7 +699,7 @@ class DragAction {
     document.body.classList.remove(CLOSE_HAND_CLASS);
     this._dragElement.classList.remove(IS_DRAGGING_CLASS);
     if (this._handles && this._handles.length) {
-      this._handles.forEach(function(handle) {
+      this._handles.forEach((handle) => {
         handle._dragEvents.off('.CoralDragAction');
         handle.classList.remove(OPEN_HAND_CLASS);
       });
@@ -713,7 +709,7 @@ class DragAction {
       this._dragElement.classList.remove(OPEN_HAND_CLASS);
     }
   
-    events.off('.CoralDragAction' + this._id);
+    events.off(`.CoralDragAction${this._id}`);
   
     // Restore overflow
     if (document.body._overflow) {
@@ -741,7 +737,7 @@ class DragAction {
   }
   
   // Expose enum
-  static get axis() {return axis;}
+  static get axis() { return axis; }
   
   /** @private */
   get _scrollingElement() {

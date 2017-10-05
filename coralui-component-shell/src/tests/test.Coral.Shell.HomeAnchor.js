@@ -1,6 +1,4 @@
 describe('Coral.Shell.HomeAnchor', function() {
-  'use strict';
-
   describe('Namespace', function() {
     it('should be defined in the Coral.Shell namespace', function() {
       expect(Coral.Shell).to.have.property('HomeAnchor');

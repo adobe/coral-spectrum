@@ -21,10 +21,6 @@
  @htmltag coral-columnview-column-content
  @extends HTMLElement
  */
-class ColumnViewColumnContent extends HTMLElement {
-  constructor() {
-    super();
-  }
-}
+class ColumnViewColumnContent extends HTMLElement {}
 
 export default ColumnViewColumnContent;

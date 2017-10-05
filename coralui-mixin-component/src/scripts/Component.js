@@ -32,15 +32,15 @@ const getListenerFromMethodNameOrFunction = function(obj, eventName, methodNameO
   }
   else if (typeof methodNameOrFunction === 'string') {
     if (!obj[methodNameOrFunction]) {
-      throw new Error('Coral.Component: Unable to add ' + eventName + ' listener for ' + obj.toString() +
-        ', method ' + methodNameOrFunction + ' not found');
+      throw new Error(`Coral.Component: Unable to add ${eventName} listener for ${obj.toString()}, method
+      ${methodNameOrFunction} not found`);
     }
     
     const listener = obj[methodNameOrFunction];
     
     if (typeof listener !== 'function') {
-      throw new Error('Coral.Component: Unable to add ' + eventName + ' listener for ' + obj.toString() +
-        ', listener is a ' + (typeof listener) + ' but should be a function');
+      throw new Error(`Coral.Component: Unable to add ${eventName} listener for ${obj.toString()}, listener is a
+      ${(typeof listener)} but should be a function`);
     }
     
     return listener;
@@ -48,8 +48,8 @@ const getListenerFromMethodNameOrFunction = function(obj, eventName, methodNameO
   else if (methodNameOrFunction) {
     // If we're passed something that's truthy (like an object), but it's not a valid method name or a function, get
     // angry
-    throw new Error('Coral.Component: Unable to add ' + eventName + ' listener for ' + obj.toString() + ', ' +
-      methodNameOrFunction + ' is neither a method name or a function');
+    throw new Error(`Coral.Component: Unable to add ${eventName} listener for ${obj.toString()}, ${methodNameOrFunction}
+    is neither a method name or a function`);
   }
   
   return null;
@@ -68,23 +68,23 @@ const delegateEvents = function() {
    Remove existing event
    - Pass null
    */
-  var match;
-  var eventName;
-  var eventInfo;
-  var listener;
-  var selector;
-  var elements;
-  var isGlobal;
-  var isKey;
-  var isResize;
-  var isCapture;
+  let match;
+  let eventName;
+  let eventInfo;
+  let listener;
+  let selector;
+  let elements;
+  let isGlobal;
+  let isKey;
+  let isResize;
+  let isCapture;
   
   for (eventInfo in this._events) {
     listener = this._events[eventInfo];
     
     // Extract the event name and the selector
     match = eventInfo.match(delegateEventSplitter);
-    eventName = match[1] + '.CoralComponent';
+    eventName = `${match[1]}.CoralComponent`;
     selector = match[2];
     
     if (selector === '') {
@@ -142,42 +142,35 @@ const delegateEvents = function() {
         }
         else {
           this._globalEvents = this._globalEvents || [];
-          this._globalEvents.push({
-            eventName: eventName,
-            selector: selector,
-            listener: listener,
-            isCapture: isCapture
-          });
+          this._globalEvents.push({eventName, selector, listener, isCapture});
         }
       }
-      else {
-        // Events on the element itself
-        if (isKey) {
-          // Create the keys instance only if its needed
-          this._keys = this._keys || new Keys(this, {
-              // The filter function for keyboard events.
-              filter: this._filterKeys,
-              // Execute key listeners in the context of the element
-              context: this
-            });
-          
-          // Add listener locally
-          this._keys.on(eventName, selector, listener);
-        }
-        else if (isResize) {
-          if (selector) {
-            elements = document.querySelectorAll(selector);
-            for (var i = 0; i < elements.length; ++i) {
-              commons.addResizeListener(elements[i], listener);
-            }
-          }
-          else {
-            commons.addResizeListener(this, listener);
+      // Events on the element itself
+      else if (isKey) {
+        // Create the keys instance only if its needed
+        this._keys = this._keys || new Keys(this, {
+          // The filter function for keyboard events.
+          filter: this._filterKeys,
+          // Execute key listeners in the context of the element
+          context: this
+        });
+    
+        // Add listener locally
+        this._keys.on(eventName, selector, listener);
+      }
+      else if (isResize) {
+        if (selector) {
+          elements = document.querySelectorAll(selector);
+          for (let i = 0; i < elements.length; ++i) {
+            commons.addResizeListener(elements[i], listener);
           }
         }
         else {
-          this._vent.on(eventName, selector, listener, isCapture);
+          commons.addResizeListener(this, listener);
         }
+      }
+      else {
+        this._vent.on(eventName, selector, listener, isCapture);
       }
     }
   }
@@ -188,11 +181,11 @@ const delegateEvents = function() {
  @ignore
  */
 const delegateGlobalEvents = function() {
-  var i;
+  let i;
   if (this._globalEvents) {
     // Remove global event listeners
     for (i = 0; i < this._globalEvents.length; i++) {
-      var event = this._globalEvents[i];
+      const event = this._globalEvents[i];
       events.on(event.eventName, event.selector, event.listener, event.isCapture);
     }
   }
@@ -200,7 +193,7 @@ const delegateGlobalEvents = function() {
   if (this._globalKeys) {
     // Remove global key listeners
     for (i = 0; i < this._globalKeys.length; i++) {
-      var key = this._globalKeys[i];
+      const key = this._globalKeys[i];
       keys.on(key.keyCombo, key.selector, key.listener);
     }
   }
@@ -215,11 +208,11 @@ const delegateGlobalEvents = function() {
  @ignore
  */
 const undelegateGlobalEvents = function() {
-  var i;
+  let i;
   if (this._globalEvents) {
     // Remove global event listeners
     for (i = 0; i < this._globalEvents.length; i++) {
-      var event = this._globalEvents[i];
+      const event = this._globalEvents[i];
       events.off(event.eventName, event.selector, event.listener, event.isCapture);
     }
   }
@@ -227,7 +220,7 @@ const undelegateGlobalEvents = function() {
   if (this._globalKeys) {
     // Remove global key listeners
     for (i = 0; i < this._globalKeys.length; i++) {
-      var key = this._globalKeys[i];
+      const key = this._globalKeys[i];
       keys.off(key.keyCombo, key.selector, key.listener);
     }
   }
@@ -254,15 +247,15 @@ const getConstructorName = function(constructor) {
   if (!constructor._namespace) {
   
     // Set namespace on Coral constructors until 'constructor' is found
-    const find = (obj, constructor) => {
+    const find = (obj, constructorToFind) => {
       let found = false;
       const type = typeof obj;
     
       if (obj && type === 'object' || type === 'function')	{
-        const keys = Object.keys(obj);
+        const subObj = Object.keys(obj);
       
-        for (let i = 0; i < keys.length; i++) {
-          const key = keys[i];
+        for (let i = 0; i < subObj.length; i++) {
+          const key = subObj[i];
         
           // Components are capitalized
           if (key[0].match(REG_EXP_UPPERCASE) !== null) {
@@ -273,13 +266,13 @@ const getConstructorName = function(constructor) {
               value: key
             };
           
-            found = obj[key] === constructor;
+            found = obj[key] === constructorToFind;
           
             if (found) {
               break;
             }
             else {
-              found = find(obj[key], constructor);
+              found = find(obj[key], constructorToFind);
             }
           }
         }
@@ -319,18 +312,17 @@ const getAttributePropertyMap = function(constructor) {
   if (!observedAttributes) {
     return {};
   }
-  else {
-    const attributePropertyMap = {};
-    
-    observedAttributes.forEach((attribute) => {
-      // We assume if the attribute contains uppercase char, it's a property and can be mapped
-      if (attribute.match(REG_EXP_UPPERCASE)) {
-        attributePropertyMap[attribute.toLowerCase()] = attribute;
-      }
-    });
-    
-    constructor._attributePropertyMap = attributePropertyMap;
-  }
+
+  const attributePropertyMap = {};
+  
+  observedAttributes.forEach((attribute) => {
+    // We assume if the attribute contains uppercase char, it's a property and can be mapped
+    if (attribute.match(REG_EXP_UPPERCASE)) {
+      attributePropertyMap[attribute.toLowerCase()] = attribute;
+    }
+  });
+  
+  constructor._attributePropertyMap = attributePropertyMap;
   
   return constructor._attributePropertyMap;
 };
@@ -350,19 +342,19 @@ const Component = (superClass) => class extends superClass {
   }
   
   // @legacy
-  get _componentName() {return this.constructor._componentName || getConstructorName(this.constructor);}
+  get _componentName() { return this.constructor._componentName || getConstructorName(this.constructor); }
   
   // @legacy
-  get _properties() {return {};}
+  get _properties() { return {}; }
   
   // @legacy
-  get _attributes() {return this.constructor._attributePropertyMap || getAttributePropertyMap(this.constructor);}
+  get _attributes() { return this.constructor._attributePropertyMap || getAttributePropertyMap(this.constructor); }
   
   // @legacy
   // The filter function for keyboard events. By default, any child element can trigger keyboard events.
   // You can pass {@link Coral.Keys.filterInputs} to avoid listening to key events triggered from within
   // inputs.
-  _filterKeys() {return true;}
+  _filterKeys() { return true; }
   
   // @legacy
   // Attach event listeners including global ones
@@ -377,7 +369,7 @@ const Component = (superClass) => class extends superClass {
   // Ideally content zones will be replaced by shadow dom and <slot> elements
   _getContentZone(contentZone) {
     if (document.documentElement.contains(this)) {
-      return (this.contains(contentZone) && contentZone) || null;
+      return this.contains(contentZone) && contentZone || null;
     }
     // Return the content zone by default
     return contentZone;
@@ -387,23 +379,22 @@ const Component = (superClass) => class extends superClass {
   // Sets the value as content zone for the property given the specified options
   // Ideally content zones will be replaced by shadow dom and <slot> elements
   _setContentZone(property, value, options) {
-    let handle = options.handle;
-    let expectedTagName = options.tagName;
-    let additionalSetter = options.set;
-    let insert = options.insert;
+    const handle = options.handle;
+    const expectedTagName = options.tagName;
+    const additionalSetter = options.set;
+    const insert = options.insert;
     
     let oldNode;
     
-    if (!!value) {
+    if (value) {
       if (!(value instanceof HTMLElement)) {
-        throw new Error('DOMException: Failed to set the "' + property + '" property on "' + this.toString() +
-          '": The provided value is not of type "HTMLElement".');
+        throw new Error(`DOMException: Failed to set the "${property}" property on "${this.toString()}":
+        The provided value is not of type "HTMLElement".`);
       }
       
       if (expectedTagName && value.tagName.toLowerCase() !== expectedTagName) {
-        throw new Error('DOMException: Failed to set the "' + property + '" property on "' + this.toString() +
-          '": The new ' + property + ' element is of type "' + value.tagName + '". It must be a "' +
-          expectedTagName.toUpperCase() + '" element.');
+        throw new Error(`DOMException: Failed to set the "${property}" property on "${this.toString()}": The new
+        ${property} element is of type "${value.tagName}". It must be a "${expectedTagName.toUpperCase()}" element.`);
       }
       
       oldNode = this._elements[handle];
@@ -417,17 +408,15 @@ const Component = (superClass) => class extends superClass {
         // Insert new node
         insert.call(this, value);
       }
+      else if (oldNode && oldNode.parentNode) {
+        console.warn(`${this._componentName} does not define an insert method for content zone ${handle}, falling back to replace.`);
+        // Old way -- assume we have an old node
+        this._elements[handle].parentNode.replaceChild(value, this._elements[handle]);
+      }
       else {
-        if (oldNode && oldNode.parentNode) {
-          console.warn(this._componentName + ' does not define an insert method for content zone ' + handle + ', falling back to replace.');
-          // Old way -- assume we have an old node
-          this._elements[handle].parentNode.replaceChild(value, this._elements[handle]);
-        }
-        else {
-          console.error(this._componentName + ' does not define an insert method for content zone ' + handle + ', falling back to append.');
-          // Just append, which may introduce bugs, but at least doesn't crazy
-          this.appendChild(value);
-        }
+        console.error(`${this._componentName} does not define an insert method for content zone ${handle}, falling back to append.`);
+        // Just append, which may introduce bugs, but at least doesn't crazy
+        this.appendChild(value);
       }
     }
     else {
@@ -461,12 +450,10 @@ const Component = (superClass) => class extends superClass {
         this._reflectedAttribute = false;
       }
     }
-    else {
-      if (this.getAttribute(attributeName) !== String(value)) {
-        this._reflectedAttribute = true;
-        this.setAttribute(attributeName, value);
-        this._reflectedAttribute = false;
-      }
+    else if (this.getAttribute(attributeName) !== String(value)) {
+      this._reflectedAttribute = true;
+      this.setAttribute(attributeName, value);
+      this._reflectedAttribute = false;
     }
   }
   
@@ -535,7 +522,7 @@ const Component = (superClass) => class extends superClass {
     // When 'cancelable' is not set, then default to true:
     cancelable = cancelable || cancelable === undefined;
     
-    var event = new CustomEvent(eventName, {
+    const event = new CustomEvent(eventName, {
       bubbles: bubbles,
       cancelable: cancelable,
       detail: props
@@ -547,13 +534,15 @@ const Component = (superClass) => class extends superClass {
     }
     
     // default value in case the dispatching fails
-    var defaultPrevented = false;
+    let defaultPrevented = false;
     
     try {
       // leads to NS_ERROR_UNEXPECTED in Firefox
       // https://bugzilla.mozilla.org/show_bug.cgi?id=329509
       defaultPrevented = !this.dispatchEvent(event);
-    } catch (e) {}
+    }
+    // eslint-disable-next-line no-empty
+    catch (e) {}
     
     // Check if the defaultPrevented status was correctly stored back to the event object
     if (defaultPrevented !== event.defaultPrevented) {
@@ -563,7 +552,7 @@ const Component = (superClass) => class extends superClass {
       // We need to work around this such that (patchedEvent instanceof Event) === true
       // First, we'll create an object that uses the event as its prototype
       // This gives us an object we can modify that is still technically an instanceof Event
-      var patchedEvent = Object.create(event);
+      const patchedEvent = Object.create(event);
       
       // Next, we set the correct value for defaultPrevented on the new object
       // We cannot simply assign defaultPrevented, it causes a "Invalid Calling Object" error in IE 9
@@ -594,37 +583,37 @@ const Component = (superClass) => class extends superClass {
    @returns {Coral.Component} this, chainable.
    */
   set(propertyOrProperties, valueOrSilent, silent) {
+    const self = this;
+    
     let property;
     let properties;
     let value;
     
-    const isContentZone = function(property) {
-      return this._contentZones && commons.swapKeysAndValues(this._contentZones)[property];
-    }.bind(this);
+    const isContentZone = (prop) => self._contentZones && commons.swapKeysAndValues(self._contentZones)[prop];
     
-    const updateContentZone = function(property, value) {
+    const updateContentZone = (prop, val) => {
       // If content zone exists and we only want to update properties on the content zone
-      if (this[property] instanceof HTMLElement && !(value instanceof HTMLElement)) {
-        for (let contentZoneProperty in value) {
-          this[property][contentZoneProperty] = value[contentZoneProperty];
+      if (self[prop] instanceof HTMLElement && !(val instanceof HTMLElement)) {
+        for (const contentZoneProperty in val) {
+          self[prop][contentZoneProperty] = val[contentZoneProperty];
         }
       }
       // Else assign the new value to the content zone
       else {
-        this[property] = value;
+        self[prop] = val;
       }
-    }.bind(this);
+    };
     
-    const setProperty = function(property, value) {
-      if (isContentZone(property)) {
-        updateContentZone(property, value);
+    const setProperty = (prop, val) => {
+      if (isContentZone(prop)) {
+        updateContentZone(prop, val);
       }
       else {
-        this._silenced = silent;
-        this[property] = value;
-        this._silenced = false;
+        self._silenced = silent;
+        self[prop] = val;
+        self._silenced = false;
       }
-    }.bind(this);
+    };
     
     if (typeof propertyOrProperties === 'string') {
       // Set a single property
@@ -684,6 +673,7 @@ const Component = (superClass) => class extends superClass {
     return this;
   }
   
+  // eslint-disable-next-line no-unused-vars
   attributeChangedCallback(name, oldValue, value) {
     if (!this._reflectedAttribute) {
       // Use the attribute/property mapping

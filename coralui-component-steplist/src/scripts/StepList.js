@@ -143,14 +143,15 @@ class StepList extends Component(HTMLElement) {
     if (value === null || typeof value === 'string' || value instanceof Node) {
       this._target = value;
   
+      const self = this;
       // we do this in the sync in case the target was not yet in the DOM
-      window.requestAnimationFrame(function() {
-        const realTarget = getTarget(this._target);
+      window.requestAnimationFrame(() => {
+        const realTarget = getTarget(self._target);
   
         // we add proper accessibility if available
         if (realTarget) {
-          const stepItems = this.items.getAll();
-          const panelItems = (realTarget.items ? realTarget.items.getAll() : realTarget.children);
+          const stepItems = self.items.getAll();
+          const panelItems = realTarget.items ? realTarget.items.getAll() : realTarget.children;
     
           // we need to add a11y to all components, regardless of whether they can be perfectly paired
           const maxItems = Math.max(stepItems.length, panelItems.length);
@@ -186,7 +187,7 @@ class StepList extends Component(HTMLElement) {
             }
           }
         }
-      }.bind(this));
+      });
     }
   }
   
@@ -324,7 +325,7 @@ class StepList extends Component(HTMLElement) {
   /** @private */
   _setStateClasses() {
     let selectedItemIndex = Infinity;
-    this.items.getAll().forEach(function(item, index) {
+    this.items.getAll().forEach((item, index) => {
       // Use attribute instead of property as items might not be initialized
       if (item.hasAttribute('selected')) {
         // Mark which one is selected
@@ -485,10 +486,10 @@ class StepList extends Component(HTMLElement) {
   }
   
   // Expose enumerations
-  static get size() {return size;}
-  static get interaction() {return interaction;}
+  static get size() { return size; }
+  static get interaction() { return interaction; }
   
-  static get observedAttributes() {return ['target', 'size', 'interaction'];}
+  static get observedAttributes() { return ['target', 'size', 'interaction']; }
   
   connectedCallback() {
     super.connectedCallback();
@@ -496,8 +497,8 @@ class StepList extends Component(HTMLElement) {
     this.classList.add(CLASSNAME);
     
     // Default reflected attributes
-    if (!this._interaction) {this.interaction = interaction.OFF;}
-    if (!this._size) {this.size = size.LARGE;}
+    if (!this._interaction) { this.interaction = interaction.OFF; }
+    if (!this._size) { this.size = size.LARGE; }
     
     // A11y
     this.setAttribute('role', 'tablist');
@@ -510,11 +511,12 @@ class StepList extends Component(HTMLElement) {
   
     this._oldSelection = this.selectedItem;
     
-    window.customElements.whenDefined('coral-step').then(function() {
-      this._allChildrenAdded = true;
+    const self = this;
+    window.customElements.whenDefined('coral-step').then(() => {
+      self._allChildrenAdded = true;
       // Force label update
-      this._updateLabels();
-    }.bind(this));
+      self._updateLabels();
+    });
   }
   
   /**

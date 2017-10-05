@@ -21,10 +21,6 @@
  @htmltag coral-radio-label
  @extends HTMLElement
  */
-class RadioLabel extends HTMLElement {
-  constructor() {
-    super();
-  }
-}
+class RadioLabel extends HTMLElement {}
 
 export default RadioLabel;

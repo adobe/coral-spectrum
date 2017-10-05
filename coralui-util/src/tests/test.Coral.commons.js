@@ -1,6 +1,4 @@
 describe('Coral.commons', function() {
-  'use strict';
-
   describe('#extend', function() {
     it('should combine properties', function() {
       var obj1 = {

@@ -18,10 +18,6 @@
 import {Collection} from 'coralui-collection';
 
 class MultifieldCollection extends Collection {
-  constructor(options) {
-    super(options);
-  }
-  
   add(item, insertBefore) {
     // _container and _itemTagName are the minimum options that need to be provided to automatically handle this function
     if (this._container && this._itemTagName) {

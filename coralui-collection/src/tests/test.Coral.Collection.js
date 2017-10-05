@@ -1,8 +1,6 @@
 import Component from 'coralui-mixin-component';
 
 describe('Coral.Collection', function() {
-  'use strict';
-  
   var onItemAddedSpy = sinon.spy();
   var onItemRemovedSpy = sinon.spy();
   var onItemAddedNestedSpy = sinon.spy();

@@ -145,7 +145,7 @@ class Clock extends FormField(Component(HTMLElement)) {
     return this._value ? new Date(this._value.toDate().getTime()) : null;
   }
   set valueAsDate(value) {
-    this.value = (value instanceof Date) ? new DateTime.Moment(value, null, true).format(this.valueFormat) : '';
+    this.value = value instanceof Date ? new DateTime.Moment(value, null, true).format(this.valueFormat) : '';
   }
   
   /**
@@ -171,9 +171,9 @@ class Clock extends FormField(Component(HTMLElement)) {
     this._elements.period.variant = this._variant;
   
     // removes every existing variant
-    this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
+    this.classList.remove(...ALL_VARIANT_CLASSES);
   
-    if (this._variant !== Coral.Clock.variant.DEFAULT) {
+    if (this._variant !== variant.DEFAULT) {
       this.classList.add(`${CLASSNAME}--${this._variant}`);
     }
   }
@@ -497,7 +497,7 @@ class Clock extends FormField(Component(HTMLElement)) {
   }
   
   // Expose enums
-  static get variant() {return variant;}
+  static get variant() { return variant; }
   
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -518,9 +518,9 @@ class Clock extends FormField(Component(HTMLElement)) {
     this.setAttribute('role', 'group');
     
     // Default reflected attributes
-    if (!this._variant) {this.variant = variant.DEFAULT;}
-    if (!this._valueFormat) {this.valueFormat = DEFAULT_TIME_FORMAT;}
-    if (!this._displayFormat) {this.displayFormat = DEFAULT_TIME_FORMAT;}
+    if (!this._variant) { this.variant = variant.DEFAULT; }
+    if (!this._valueFormat) { this.valueFormat = DEFAULT_TIME_FORMAT; }
+    if (!this._displayFormat) { this.displayFormat = DEFAULT_TIME_FORMAT; }
   
     // clean up to be able to clone it
     while (this.firstChild) {

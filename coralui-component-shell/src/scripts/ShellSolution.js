@@ -96,12 +96,11 @@ class ShellSolution extends Component(HTMLAnchorElement) {
     this.classList.toggle(`${CLASSNAME}--linked`, this._linked);
   }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.label;}
-  set defaultContentZone(value) {this.label = value;}
-  get _contentZones() {return {'coral-shell-solution-label': 'label'};}
+  get defaultContentZone() { return this.label; }
+  set defaultContentZone(value) { this.label = value; }
+  get _contentZones() { return {'coral-shell-solution-label': 'label'}; }
   
-  static get observedAttributes() {return ['icon', 'linked'];}
+  static get observedAttributes() { return ['icon', 'linked']; }
   
   connectedCallback() {
     super.connectedCallback();
@@ -116,14 +115,14 @@ class ShellSolution extends Component(HTMLAnchorElement) {
     const label = this._elements.label;
     
     // Remove it so we can process children
-    if (label) {label.remove();}
+    if (label) { label.remove(); }
   
     // Move any remaining elements into the content sub-component
     while (this.firstChild) {
       const child = this.firstChild;
       
       if (child.nodeType === Node.TEXT_NODE ||
-        (child.nodeType === Node.ELEMENT_NODE && child.getAttribute('handle') !== 'icon')) {
+        child.nodeType === Node.ELEMENT_NODE && child.getAttribute('handle') !== 'icon') {
         label.appendChild(child);
       }
       else {

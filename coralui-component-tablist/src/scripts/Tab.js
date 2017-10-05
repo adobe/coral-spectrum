@@ -180,7 +180,7 @@ class Tab extends Component(HTMLElement) {
    @memberof Coral.Tab#
    */
   get target() {
-    return typeof this._target === 'string' ? this._target : (this._target || null);
+    return typeof this._target === 'string' ? this._target : this._target || null;
   }
   set target(value) {
     if (value === null || typeof value === 'string' || value instanceof Node) {
@@ -231,10 +231,9 @@ class Tab extends Component(HTMLElement) {
     }
   }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.label;}
-  set defaultContentZone(value) {this.label = value;}
-  get _contentZones() {return {'coral-tab-label': 'label'};}
+  get defaultContentZone() { return this.label; }
+  set defaultContentZone(value) { this.label = value; }
+  get _contentZones() { return {'coral-tab-label': 'label'}; }
   
   static get observedAttributes() {
     return ['selected', 'disabled', 'icon', 'invalid', 'target'];
@@ -252,7 +251,7 @@ class Tab extends Component(HTMLElement) {
     // This will be used for accessibility purposes
     this.id = this.id || commons.getUID();
   
-    // Create a temporary fragment
+    // Create a fragment
     const frag = document.createDocumentFragment();
     
     // Render the main template
@@ -270,7 +269,7 @@ class Tab extends Component(HTMLElement) {
     while (this.firstChild) {
       const child = this.firstChild;
       if (child.nodeType === Node.TEXT_NODE ||
-        (child.nodeType === Node.ELEMENT_NODE && child.getAttribute('handle') !== 'icon')) {
+        child.nodeType === Node.ELEMENT_NODE && child.getAttribute('handle') !== 'icon') {
         // Add non-template elements to the label
         label.appendChild(child);
       }

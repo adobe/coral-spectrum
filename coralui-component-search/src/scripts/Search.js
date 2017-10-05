@@ -158,7 +158,7 @@ class Search extends FormField(Component(HTMLElement)) {
    @htmlattributereflected
    @memberof Coral.Search#
    */
-  get placeholder(){
+  get placeholder() {
     return this._elements.input.placeholder || '';
   }
   set placeholder(value) {
@@ -252,7 +252,7 @@ class Search extends FormField(Component(HTMLElement)) {
    
    @ignore
    */
-  _onKeyUp(event) {
+  _onKeyUp() {
     this._updateClearButton();
   }
   
@@ -275,7 +275,7 @@ class Search extends FormField(Component(HTMLElement)) {
    
    @ignore
    */
-  _clearInput(event) {
+  _clearInput() {
     this._elements.input.value = '';
     this._updateClearButton();
     this._elements.input.focus();
@@ -306,7 +306,7 @@ class Search extends FormField(Component(HTMLElement)) {
   }
   
   // Expose enumerations
-  static get variant() {return variant;}
+  static get variant() { return variant; }
   
   static get observedAttributes() {
     return super.observedAttributes.concat(['placeholder', 'icon', 'variant', 'maxlength', 'maxLength']);
@@ -319,10 +319,10 @@ class Search extends FormField(Component(HTMLElement)) {
     this.classList.add('coral-DecoratedTextfield');
   
     // Default reflected attributes
-    if (!this._icon) {this.icon = 'search';}
-    if (!this._variant) {this.variant = variant.DEFAULT;}
+    if (!this._icon) { this.icon = 'search'; }
+    if (!this._variant) { this.variant = variant.DEFAULT; }
   
-    // Create a temporary fragment
+    // Create a fragment
     const fragment = document.createDocumentFragment();
   
     const templateHandleNames = ['icon', 'input', 'clearButton'];
@@ -336,7 +336,7 @@ class Search extends FormField(Component(HTMLElement)) {
     while (this.firstChild) {
       const child = this.firstChild;
       if (child.nodeType === Node.TEXT_NODE ||
-        (child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1)) {
+        child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
         // Add non-template elements to the fragment
         fragment.appendChild(child);
       }

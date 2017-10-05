@@ -118,7 +118,7 @@ const List = (superClass) => class extends superClass {
     const target = event.target;
     const listItem = event.matchedTarget;
   
-    const isAtTarget = (target === listItem);
+    const isAtTarget = target === listItem;
     
     if (isAtTarget) {
       // Don't let arrow keys etc scroll the page
@@ -212,9 +212,9 @@ const List = (superClass) => class extends superClass {
   }
   
   // Expose enumerations
-  static get interaction() {return interaction;}
+  static get interaction() { return interaction; }
   
-  static get observedAttributes() {return ['interaction'];}
+  static get observedAttributes() { return ['interaction']; }
   
   connectedCallback() {
     super.connectedCallback();
@@ -222,7 +222,7 @@ const List = (superClass) => class extends superClass {
     this.classList.add(CLASSNAME);
     
     // Default reflected attributes
-    if (!this._interaction) {this.interaction = interaction.ON;}
+    if (!this._interaction) { this.interaction = interaction.ON; }
   }
 };
 

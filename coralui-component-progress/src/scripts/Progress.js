@@ -55,9 +55,9 @@ const CLASSNAME = 'coral3-Progress';
 
 // size mapping
 const SIZE_CLASSES = {
-  'S': 'small',
-  'M': 'medium',
-  'L': 'large'
+  S: 'small',
+  M: 'medium',
+  L: 'large'
 };
 
 // A string of all possible size classnames
@@ -110,7 +110,7 @@ class Progress extends Component(HTMLElement) {
    @memberof Coral.Progress#
    */
   get value() {
-    return this.indeterminate ? 0 : (this._value || 0);
+    return this.indeterminate ? 0 : this._value || 0;
   }
   set value(value) {
     value = transform.number(value) || 0;
@@ -126,7 +126,7 @@ class Progress extends Component(HTMLElement) {
     this._value = value;
     this._reflectAttribute('value', this._value);
   
-    this._elements.status.style.width = this.value + '%';
+    this._elements.status.style.width = `${this.value}%`;
   
     if (!this.indeterminate) {
       // ARIA: Reflect value for screenreaders
@@ -134,7 +134,7 @@ class Progress extends Component(HTMLElement) {
     
       if (this.showPercent === true) {
         // Only update label text in percent mode
-        this._setLabelContent(this._value + '%');
+        this._setLabelContent(`${this._value}%`);
       }
     }
     
@@ -196,7 +196,7 @@ class Progress extends Component(HTMLElement) {
     this._size = validate.enumeration(size)(value) && value || size.MEDIUM;
     this._reflectAttribute('size', this._size);
   
-    this.classList.remove.apply(this.classList, ALL_SIZE_CLASSES);
+    this.classList.remove(...ALL_SIZE_CLASSES);
     this.classList.add(`${CLASSNAME}--${SIZE_CLASSES[this._size]}`);
   }
   
@@ -217,7 +217,7 @@ class Progress extends Component(HTMLElement) {
     this._reflectAttribute('showpercent', this._showPercent);
   
     if (this._showPercent) {
-      const content = this.indeterminate ? '' : this.value + '%';
+      const content = this.indeterminate ? '' : `${this.value}%`;
       this._setLabelContent(content);
       this._showLabel();
     }
@@ -267,7 +267,7 @@ class Progress extends Component(HTMLElement) {
     this._labelPosition = validate.enumeration(labelPosition)(value) && value || labelPosition.RIGHT;
     this._reflectAttribute('labelposition', this._labelPosition);
   
-    this.classList.remove.apply(this.classList, ALL_LABEL_POSITION_CLASSES);
+    this.classList.remove(...ALL_LABEL_POSITION_CLASSES);
     if (this._elements.label.textContent.length > 0) {
       this.classList.add(`${CLASSNAME}--${this._labelPosition}Label`);
     }
@@ -286,7 +286,7 @@ class Progress extends Component(HTMLElement) {
   /** @ignore */
   _hideLabel() {
     this._elements.label.hidden = true;
-    this.classList.remove.apply(this.classList, ALL_LABEL_POSITION_CLASSES);
+    this.classList.remove(...ALL_LABEL_POSITION_CLASSES);
     this.classList.add(`${CLASSNAME}--noLabel`);
     
     // Remove the value for accessibility so the screenreader knows we're unlabelled
@@ -318,14 +318,13 @@ class Progress extends Component(HTMLElement) {
     }
   }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.label;}
-  set defaultContentZone(value) {this.label = value;}
-  get _contentZones() {return {'coral-progress-label': 'label'};}
+  get defaultContentZone() { return this.label; }
+  set defaultContentZone(value) { this.label = value; }
+  get _contentZones() { return {'coral-progress-label': 'label'}; }
   
   // Expose enumerations
-  static get labelPosition() {return labelPosition;}
-  static get size() {return size;}
+  static get labelPosition() { return labelPosition; }
+  static get size() { return size; }
   
   static get observedAttributes() {
     return [
@@ -336,7 +335,7 @@ class Progress extends Component(HTMLElement) {
       'showPercent',
       'labelposition',
       'labelPosition'
-    ]
+    ];
   }
   
   attributeChangedCallback(name, oldValue, value) {
@@ -354,11 +353,11 @@ class Progress extends Component(HTMLElement) {
     this.classList.add(CLASSNAME);
     
     // Default reflected attributes
-    if (!this._value) {this.value = this.value;}
-    if (!this._size) {this.size = size.MEDIUM;}
-    if (!this._labelPosition) {this.labelPosition = labelPosition.RIGHT;}
+    if (!this._value) { this.value = this.value; }
+    if (!this._size) { this.size = size.MEDIUM; }
+    if (!this._labelPosition) { this.labelPosition = labelPosition.RIGHT; }
   
-    // Create a temporary fragment
+    // Create a fragment
     const fragment = document.createDocumentFragment();
     
     // Render the template

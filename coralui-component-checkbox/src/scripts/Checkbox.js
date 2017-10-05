@@ -39,8 +39,8 @@ class Checkbox extends FormField(Component(HTMLElement)) {
   
     // @polyfill ie
     this._delegateEvents(commons.extend(this._events, {
-      'click': '_onClick',
-      'mousedown': '_onMouseDown'
+      click: '_onClick',
+      mousedown: '_onMouseDown'
     }));
   
     // Prepare templates
@@ -55,9 +55,12 @@ class Checkbox extends FormField(Component(HTMLElement)) {
   
     // Watch for changes to the label element's children
     this._observer.observe(this._elements.labelWrapper, {
-      childList: true, // Catch changes to childList
-      characterData: true, // Catch changes to textContent
-      subtree: true // Monitor any child node
+      // Catch changes to childList
+      childList: true,
+      // Catch changes to textContent
+      characterData: true,
+      // Monitor any child node
+      subtree: true
     });
   }
   
@@ -187,14 +190,14 @@ class Checkbox extends FormField(Component(HTMLElement)) {
    
    @protected
    */
-  get _componentTargetProperty() {return 'checked';}
+  get _componentTargetProperty() { return 'checked'; }
   
   /*
    Indicates to the formField that the 'checked' property has to be extracted from the event.
    
    @protected
    */
-  get _eventTargetProperty() {return 'checked';}
+  get _eventTargetProperty() { return 'checked'; }
   
   /** @private */
   _onInputChange(event) {
@@ -210,10 +213,11 @@ class Checkbox extends FormField(Component(HTMLElement)) {
     if (this._triggerChangeEvent) {
       // @polyfill ie/edge
       if (IS_IE_OR_EDGE) {
+        const self = this;
         // We need 1 additional frame in case the indeterminate state is set manually on change event
-        window.requestAnimationFrame(function() {
-          this.trigger('change');
-        }.bind(this));
+        window.requestAnimationFrame(() => {
+          self.trigger('change');
+        });
       }
       else {
         this.trigger('change');
@@ -247,7 +251,7 @@ class Checkbox extends FormField(Component(HTMLElement)) {
    */
   _onMouseDown() {
     const target = this._elements.input;
-    window.requestAnimationFrame(function() {
+    window.requestAnimationFrame(() => {
       if (target !== document.activeElement) {
         target.focus();
       }
@@ -280,10 +284,9 @@ class Checkbox extends FormField(Component(HTMLElement)) {
     this.checked = this._initialCheckedState;
   }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.label;}
-  set defaultContentZone(value) {this.label = value;}
-  get _contentZones() {return {'coral-checkbox-label': 'label'};}
+  get defaultContentZone() { return this.label; }
+  set defaultContentZone(value) { this.label = value; }
+  get _contentZones() { return {'coral-checkbox-label': 'label'}; }
   
   static get observedAttributes() {
     return super.observedAttributes.concat(['indeterminate', 'checked']);
@@ -294,7 +297,7 @@ class Checkbox extends FormField(Component(HTMLElement)) {
     
     this.classList.add(CLASSNAME);
   
-    // Create a temporary fragment
+    // Create a fragment
     const frag = document.createDocumentFragment();
   
     const templateHandleNames = ['input', 'checkbox', 'labelWrapper'];
@@ -317,7 +320,7 @@ class Checkbox extends FormField(Component(HTMLElement)) {
     while (this.firstChild) {
       const child = this.firstChild;
       if (child.nodeType === Node.TEXT_NODE ||
-        (child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1)) {
+        child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
         // Add non-template elements to the label
         label.appendChild(child);
       }

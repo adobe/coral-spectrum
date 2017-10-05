@@ -24,10 +24,6 @@ const CLASSNAME = 'coral3-Alert-content';
  @extends HTMLElement
  */
 class AlertContent extends HTMLElement {
-  constructor() {
-    super();
-  }
-  
   connectedCallback() {
     this.classList.add(CLASSNAME);
   }

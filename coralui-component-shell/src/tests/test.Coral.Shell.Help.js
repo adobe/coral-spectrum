@@ -1,6 +1,4 @@
 describe('Coral.Shell.Help', function() {
-  'use strict';
-
   var htmlSnippet = '<coral-shell-help></coral-shell-help>';
 
   describe('Namespace', function() {

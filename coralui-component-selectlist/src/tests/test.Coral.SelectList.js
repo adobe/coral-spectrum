@@ -1,6 +1,4 @@
 describe('Coral.SelectList', function() {
-  'use strict';
-
   describe('Namespace', function() {
     it('should be defined', function() {
       expect(Coral).to.have.property('SelectList');
@@ -400,12 +398,12 @@ describe('Coral.SelectList', function() {
       const lastItem = el.items.last();
       el._onKeyPress({which: 'O'.charCodeAt(0)});
       
-      // Key press search is implemented with a 1 sec timeout but we override it with 0
+      // Key press search is implemented with a 1 sec timeout but we override it
       window.setTimeout(function() {
         expect(lastItem.getAttribute('tabindex')).to.equal('0');
         expect(document.activeElement).to.equal(lastItem);
         done();
-      }, 0);
+      });
     });
     // @todo: test focus of initial state
     // @todo: test focus of an empty list

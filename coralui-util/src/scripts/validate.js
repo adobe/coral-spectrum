@@ -47,13 +47,9 @@ const validate = {};
  
  @returns {Boolean} <code>true</code> if the values are different.
  */
-validate.valueMustChange = function(newValue, oldValue) {
-  'use strict';
-  
-  // We can use exact equality here as validation functions are called after transform. Thus, the input value will be
-  // converted to the same type as a stored value
-  return newValue !== oldValue;
-};
+// We can use exact equality here as validation functions are called after transform. Thus, the input value will be
+// converted to the same type as a stored value
+validate.valueMustChange = (newValue, oldValue) => newValue !== oldValue;
 
 /**
  Ensures that the new value is within the enumeration. The enumeration can be given as an array of values or as a
@@ -69,16 +65,12 @@ validate.valueMustChange = function(newValue, oldValue) {
  @returns {Coral.validate~validationFunction}
  a validation function that ensures that the given value is within the enumeration.
  */
-validate.enumeration = function(enumeration) {
-  'use strict';
-  
+validate.enumeration = (enumeration) => {
   // Reverses the enumeration, so that we can check that the variable new value exists inside
-  var enumReversed = commons.swapKeysAndValues(enumeration);
+  const enumReversed = commons.swapKeysAndValues(enumeration);
   
   // Returns a new function that matches the newValue, oldValue signature
-  return function(newValue, oldValue) {
-    return typeof enumReversed[newValue] !== 'undefined';
-  };
+  return (newValue) => typeof enumReversed[newValue] !== 'undefined';
 };
 
 export default validate;

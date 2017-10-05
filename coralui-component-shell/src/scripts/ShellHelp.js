@@ -18,9 +18,9 @@
 import Component from 'coralui-mixin-component';
 import {Collection} from 'coralui-collection';
 import 'coralui-component-search';
-import 'coralui-component-list';
+import {AnchorListItem} from 'coralui-component-list';
 import 'coralui-component-wait';
-import {commons} from 'coralui-util';
+import {commons, i18n} from 'coralui-util';
 import help from '../templates/help';
 import helpResult from '../templates/helpResult';
 import helpSearchError from '../templates/helpSearchError';
@@ -172,12 +172,12 @@ class Shell extends Component(HTMLElement) {
       // Clear existing results
       this._elements.results.innerHTML = '';
       // Populate results
-      results.forEach(function(result) {
+      results.forEach((result) => {
         // Tweak: make the space between bullets larger with a non-breaking space
         const separator = ' & ';
         const description = result.tags.join(separator);
         
-        const item = new Coral.AnchorList.Item().set({
+        const item = new AnchorListItem().set({
           href: result.href,
           target: result.target
         });
@@ -195,10 +195,10 @@ class Shell extends Component(HTMLElement) {
       
       // Show total
       if (total > 1) {
-        const seeAllItem = new Coral.AnchorList.Item().set({
+        const seeAllItem = new AnchorListItem().set({
           href: allResultsURL,
           content: {
-            innerHTML: Coral.i18n.get('See all {0} results', total)
+            innerHTML: i18n.get('See all {0} results', total)
           },
           target: '_blank'
         });
@@ -210,7 +210,7 @@ class Shell extends Component(HTMLElement) {
     }
   }
   
-  static get observedAttributes() {return ['placeholder'];}
+  static get observedAttributes() { return ['placeholder']; }
   
   connectedCallback() {
     super.connectedCallback();

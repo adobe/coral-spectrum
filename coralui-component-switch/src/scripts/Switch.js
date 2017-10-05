@@ -129,14 +129,14 @@ class Switch extends FormField(Component(HTMLElement)) {
    
    @protected
    */
-  get _componentTargetProperty() {return 'checked';}
+  get _componentTargetProperty() { return 'checked'; }
   
   /*
    Indicates to the formField that the 'checked' property has to be extracted from the event.
    
    @protected
    */
-  get _eventTargetProperty() {return 'checked';}
+  get _eventTargetProperty() { return 'checked'; }
   
   
   // JSDoc inherited
@@ -158,7 +158,7 @@ class Switch extends FormField(Component(HTMLElement)) {
     
     this.classList.add(CLASSNAME);
   
-    // Create a temporary fragment
+    // Create a fragment
     const frag = document.createDocumentFragment();
     
     const templateHandleNames = ['input', 'label'];
@@ -172,7 +172,7 @@ class Switch extends FormField(Component(HTMLElement)) {
       const child = this.firstChild;
       // Only works if all root template elements have a handle attribute
       if (child.nodeType === Node.TEXT_NODE ||
-        (child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1)) {
+        child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
         // Add non-template elements to the content
         frag.appendChild(child);
       }

@@ -80,26 +80,23 @@ class CardProperty extends Component(HTMLElement) {
     if (this.icon === '') {
       this._elements.icon.remove();
     }
-    else {
-      if (!this._elements.icon.parentNode) {
-        this.insertBefore(this._elements.icon, this.firstChild);
-      }
+    else if (!this._elements.icon.parentNode) {
+      this.insertBefore(this._elements.icon, this.firstChild);
     }
   }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.content;}
-  set defaultContentZone(value) {this.content = value;}
-  get _contentZones() {return {'coral-card-property-content': 'content'};}
+  get defaultContentZone() { return this.content; }
+  set defaultContentZone(value) { this.content = value; }
+  get _contentZones() { return {'coral-card-property-content': 'content'}; }
   
-  static get observedAttributes() {return ['icon'];}
+  static get observedAttributes() { return ['icon']; }
   
   connectedCallback() {
     super.connectedCallback();
     
     this.classList.add(CLASSNAME);
   
-    // Create a temporary fragment
+    // Create a fragment
     const frag = document.createDocumentFragment();
   
     // Render the main template
@@ -117,7 +114,7 @@ class CardProperty extends Component(HTMLElement) {
     while (this.firstChild) {
       const child = this.firstChild;
       if (child.nodeType === Node.TEXT_NODE ||
-        (child.nodeType === Node.ELEMENT_NODE && child.getAttribute('handle') !== 'icon')) {
+        child.nodeType === Node.ELEMENT_NODE && child.getAttribute('handle') !== 'icon') {
         // Add non-template elements to the label
         content.appendChild(child);
       }

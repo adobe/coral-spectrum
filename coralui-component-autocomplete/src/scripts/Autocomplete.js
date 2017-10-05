@@ -48,7 +48,7 @@ const SCROLL_BOTTOM_THRESHOLD = 50;
 const SCROLL_DEBOUNCE = 100;
 
 // @temp - Enable debug messages when writing tests
-let DEBUG = 0;
+const DEBUG = 0;
 
 /**
  Enumeration of match values.
@@ -79,8 +79,9 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
     this._elements = {};
     base.call(this._elements);
     
-    // Kill inner tagList reset so it doesn't interfer with the autocomplete reset
-    this._elements.tagList.reset = function() {};
+    this._elements.tagList.reset = () => {
+      // Kill inner tagList reset so it doesn't interfer with the autocomplete reset
+    };
     
     // Events
     this._delegateEvents({
@@ -114,7 +115,8 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
       'change [handle="tagList"]': '_preventTagListChangeEvent',
   
       // SelectList
-      'key:enter button[is="coral-buttonlist-item"]': '_handleSelect', // Needed for ButtonList
+      // Needed for ButtonList
+      'key:enter button[is="coral-buttonlist-item"]': '_handleSelect',
       'click button[is="coral-buttonlist-item"]': '_handleSelect',
       'capture:scroll [handle="overlay"]': '_onScroll',
       'capture:mousewheel [handle="overlay"]': '_onMouseWheel',
@@ -363,10 +365,8 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
         overlay.scrollTop = overlay.scrollHeight;
       }
     }
-    else {
-      if (load && load.parentNode) {
-        this._elements.overlay.removeChild(load);
-      }
+    else if (load && load.parentNode) {
+      this._elements.overlay.removeChild(load);
     }
   }
   
@@ -427,7 +427,7 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
     if (Array.isArray(values)) {
       // if value was set to empty string
       if (values.length === 1 && values[0] === '') {
-        values = []
+        values = [];
       }
       
       let i;
@@ -560,9 +560,8 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
     if (this.multiple) {
       return this._elements.tagList.name;
     }
-    else {
-      return this._elements.field.name;
-    }
+    
+    return this._elements.field.name;
   }
   
   /**
@@ -744,14 +743,12 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
         this.value = last.getAttribute('value');
       }
     }
+    // Use this.hasAttribute('multiple') instead of this.multiple here, as this method is called from _render and element might not be ready
+    else if (this.hasAttribute('multiple')) {
+      this._resetValues();
+    }
     else {
-      // Use this.hasAttribute('multiple') instead of this.multiple here, as this method is called from _render and element might not be ready
-      if (this.hasAttribute('multiple')) {
-        this._resetValues();
-      }
-      else {
-        this.value = '';
-      }
+      this.value = '';
     }
   }
   
@@ -805,10 +802,8 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
     if (index === -1) {
       this._values.push(value);
     }
-    else {
-      if (DEBUG) {
-        console.warn('Coral.Autocomplete: Tried to add value that was already present');
-      }
+    else if (DEBUG) {
+      console.warn('Coral.Autocomplete: Tried to add value that was already present');
     }
     
     const labelContent = {};
@@ -851,12 +846,11 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
       // Get out if we don't have the value
       return;
     }
-    else {
-      this._values.splice(index, 1);
-    }
+    
+    this._values.splice(index, 1);
     
     // Select autocomplete item
-    const item = this.querySelector('coral-autocomplete-item[value=' + JSON.stringify(value) + ']');
+    const item = this.querySelector(`coral-autocomplete-item[value=${JSON.stringify(value)}]`);
     
     if (item) {
       if (item.hasAttribute('selected')) {
@@ -865,10 +859,8 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
         this._startObserving();
       }
     }
-    else {
-      if (DEBUG) {
-        console.warn('Coral.Autocomplete: Tried to remove value without corresponding item');
-      }
+    else if (DEBUG) {
+      console.warn('Coral.Autocomplete: Tried to remove value without corresponding item');
     }
     
     // Look up the tag by value
@@ -943,7 +935,7 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
       item = items[0];
     }
     
-    window.requestAnimationFrame(function() {
+    window.requestAnimationFrame(() => {
       if (item) {
         if (currentItem) {
           currentItem.classList.remove('is-focused');
@@ -980,7 +972,7 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
       item = items[items.length - 1];
     }
     
-    window.requestAnimationFrame(function() {
+    window.requestAnimationFrame(() => {
       if (item) {
         self._scrollItemIntoView(item);
         item.classList.add('is-focused');
@@ -1004,7 +996,8 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
     const event = this.trigger('coral-autocomplete:showsuggestions', {
       // Pass user input
       value: inputValue,
-      start: 0 // Started at zero here, always
+      // Started at zero here, always
+      start: 0
     });
     
     // Flag to indicate that the private method is called before public showSuggestions method
@@ -1035,7 +1028,7 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
     const overlay = this._elements.overlay;
     // If scrolling with mouse wheel and if it has hit the top or bottom boundary
     // `SCROLL_BOTTOM_THRESHOLD` is ignored when hitting scroll bottom to allow debounced loading
-    if ((event.deltaY < 0 && overlay.scrollTop === 0) || (event.deltaY > 0 && overlay.scrollTop >= overlay.scrollHeight - overlay.clientHeight)) {
+    if (event.deltaY < 0 && overlay.scrollTop === 0 || event.deltaY > 0 && overlay.scrollTop >= overlay.scrollHeight - overlay.clientHeight) {
       event.preventDefault();
     }
   }
@@ -1077,7 +1070,7 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
     
     // This is to hack around the fact that you cannot determine which element gets focus in a blur event
     // Firefox doesn't support focusout/focusin, so we're left doing awful things
-    this._blurTimeout = setTimeout(function() {
+    this._blurTimeout = window.setTimeout(() => {
       const relatedTarget = document.activeElement;
       const focusOutside = !self.contains(relatedTarget);
       
@@ -1085,17 +1078,12 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
       if (inputBlur && focusOutside && !self.multiple) {
         self._handleInput(event);
       }
-      else if (
-        // Nothing was focused
-      !relatedTarget ||
-      (
-        (inputBlur || relatedTarget !== document.body) &&
+      // Nothing was focused
+      else if (!relatedTarget || ((inputBlur || relatedTarget !== document.body) &&
         // Focus is now outside of the autocomplete component
         focusOutside ||
         // Focus has shifted from the selectList to another element inside of the autocomplete component
-        selectList.contains(target) && !selectList.contains(relatedTarget)
-      )
-      ) {
+        selectList.contains(target) && !selectList.contains(relatedTarget))) {
         self.hideSuggestions();
       }
     }, 0);
@@ -1107,7 +1095,7 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
   }
   
   /** @private */
-  _handleInputGroupFocusOut(event) {
+  _handleInputGroupFocusOut() {
     this.classList.remove('is-focused');
   }
   
@@ -1136,7 +1124,7 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
   }
   
   /** @private */
-  _hideSuggestionsAndFocus(event) {
+  _hideSuggestionsAndFocus() {
     // Hide the menu and focus on the input
     this.hideSuggestions();
     this._elements.input.focus();
@@ -1206,10 +1194,10 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
       // If there are no matches in _options,
       // Check for matches in list, which could have been added after mounting the element
       const buttons = this._elements.selectList.items.getAll();
-      for (let i = 0 ; i < buttons.length ; i++) {
+      for (let i = 0; i < buttons.length; i++) {
         const option = {
-          value : buttons[i].value,
-          content : buttons[i].textContent.trim()
+          value: buttons[i].value,
+          content: buttons[i].textContent.trim()
         };
         if (optionMatchesValue(option, value)) {
           matches.push(option);
@@ -1222,13 +1210,14 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
   
   /** @private */
   _handleInputKeypressEnter(event) {
-    if (event.which === 13) { // Sigh, CUI-3973 Hitting enter quickly after typing causes form to submit
+    // Sigh, CUI-3973 Hitting enter quickly after typing causes form to submit
+    if (event.which === 13) {
       this._handleInput(event);
     }
   }
   
   /** @private */
-  _handleInputEvent(e) {
+  _handleInputEvent() {
     // Any input makes this valid again
     this.invalid = false;
     
@@ -1264,13 +1253,11 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
     let isChange = false;
     
     // Get all exact matches
-    const exactMatches = this._getMatches(value, this._optionEqualsValue); // Find exact matches
+    const exactMatches = this._getMatches(value, this._optionEqualsValue);
     
     if (exactMatches.length) {
       // Find perfect case sensitive match else defaults to first one
-      const exactMatch = exactMatches.filter(function(option) {
-          return option.content === value;
-        })[0] || exactMatches[0];
+      const exactMatch = exactMatches.filter((option) => option.content === value)[0] || exactMatches[0];
       
       isChange = this.value !== exactMatch.value;
       
@@ -1301,42 +1288,40 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
         this.trigger('change');
       }
     }
-    else {
-      if (this.forceSelection) {
-        // Invalid
-        if (this.multiple) {
-          this.invalid = value !== '' || ((this.values.length === 1 && this.values[0] === '') || this.values.length === 0);
-        }
-        else {
-          this.invalid = true;
-        }
-        // Leave suggestions open if nothing matches
+    else if (this.forceSelection) {
+      // Invalid
+      if (this.multiple) {
+        this.invalid = value !== '' || (this.values.length === 1 && this.values[0] === '' || this.values.length === 0);
       }
       else {
-        // DO NOT select the corresponding item, as this would add an item
-        // This would result in adding items that match what the user typed, resulting in selections
-        // this._selectItem(value);
-        
-        isChange = this.value !== value;
-        
-        if (this.multiple) {
-          if (value.trim()) {
-            // Add tag for non-empty values
-            this._addValue(value, null, false);
-          }
+        this.invalid = true;
+      }
+      // Leave suggestions open if nothing matches
+    }
+    else {
+      // DO NOT select the corresponding item, as this would add an item
+      // This would result in adding items that match what the user typed, resulting in selections
+      // this._selectItem(value);
+  
+      isChange = this.value !== value;
+  
+      if (this.multiple) {
+        if (value.trim()) {
+          // Add tag for non-empty values
+          this._addValue(value, null, false);
         }
-        else {
-          // Set value
-          this.value = value;
-        }
-        
-        // Hide the suggestions so the result can be seen
-        this.hideSuggestions();
-        
-        // Emit the change event when arbitrary data is entered
-        if (isChange === true) {
-          this.trigger('change');
-        }
+      }
+      else {
+        // Set value
+        this.value = value;
+      }
+  
+      // Hide the suggestions so the result can be seen
+      this.hideSuggestions();
+  
+      // Emit the change event when arbitrary data is entered
+      if (isChange === true) {
+        this.trigger('change');
       }
     }
     
@@ -1353,7 +1338,7 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
     this._stopObserving();
     
     // Select autocomplete item if it's there
-    const item = this.querySelector('coral-autocomplete-item[value=' + JSON.stringify(value) + ']');
+    const item = this.querySelector(`coral-autocomplete-item[value=${JSON.stringify(value)}]`);
     if (item) {
       // Select the existing item
       item.setAttribute('selected', '');
@@ -1454,9 +1439,10 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
     
     // Focus on the input element
     // We have to wait a frame here because the item steals focus when selected
-    window.requestAnimationFrame(function() {
-      this._elements.input.focus();
-    }.bind(this));
+    const self = this;
+    window.requestAnimationFrame(() => {
+      self._elements.input.focus();
+    });
     
     // Hide the options when option is selected in all cases
     this.hideSuggestions();
@@ -1547,29 +1533,26 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
     if (this.multiple) {
       this[selected ? '_addValue' : '_removeValue'](target.value, target.content.innerHTML, true);
     }
-    else {
-      if (selected) {
-        // Set the input text accordingly
-        this._elements.input.value = target.content.textContent.replace(/\s{2,}/g, ' ').trim();
-        // Set the value accordingly
-        this.value = target.value;
-        this.invalid = false; // value can't be invalid as an item is selected
-        
-        // Deselect the other elements if selected programatically changed
-        this._deselectExcept(target);
-      }
-      else {
-        // Remove values if deselected
-        // Only do this if we're the current value
-        // If the selected item was changed, this.value will be different
-        if (this.value === target.value) {
-          this.value = '';
-          
-          // CUI-5533 Since checks inside of _handleInput will assume the value hasn't change,
-          // We need to trigger here
-          this.trigger('change');
-        }
-      }
+    else if (selected) {
+      // Set the input text accordingly
+      this._elements.input.value = target.content.textContent.replace(/\s{2,}/g, ' ').trim();
+      // Set the value accordingly
+      this.value = target.value;
+      // value can't be invalid as an item is selected
+      this.invalid = false;
+  
+      // Deselect the other elements if selected programatically changed
+      this._deselectExcept(target);
+    }
+    // Remove values if deselected
+    // Only do this if we're the current value
+    // If the selected item was changed, this.value will be different
+    else if (this.value === target.value) {
+      this.value = '';
+      
+      // CUI-5533 Since checks inside of _handleInput will assume the value hasn't change,
+      // We need to trigger here
+      this.trigger('change');
     }
   }
   
@@ -1745,7 +1728,7 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
     
     if (height < maxHeight) {
       // Make it scrollable
-      this._elements.selectList.style.height = height - 1 + 'px';
+      this._elements.selectList.style.height = `${height - 1}px`;
     }
   }
   
@@ -1761,7 +1744,7 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
     }
     
     // @todo make sure this doesn't cause recalculate
-    this._elements.overlay.style.minWidth = this.offsetWidth + 'px';
+    this._elements.overlay.style.minWidth = `${this.offsetWidth}px`;
     
     if (this._elements.overlay.open) {
       // Reposition as the length of the list may have changed
@@ -1800,7 +1783,7 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
   }
   
   // Expose enums
-  static get match() {return match;}
+  static get match() { return match; }
   
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -1835,7 +1818,7 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
     this._elements.trigger.setAttribute('aria-haspopup', 'true');
     this._elements.trigger.setAttribute('aria-controls', this._elements.selectList.id);
   
-    // Create a temporary fragment
+    // Create a fragment
     const frag = document.createDocumentFragment();
   
     // Render the template
@@ -1850,7 +1833,7 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
     while (this.firstChild) {
       const child = this.firstChild;
       // Only works if all root template elements have a handle attribute
-      if (child.nodeType === Node.TEXT_NODE || (child.hasAttribute && !child.hasAttribute('handle'))) {
+      if (child.nodeType === Node.TEXT_NODE || child.hasAttribute && !child.hasAttribute('handle')) {
         // Add non-template elements to the content
         frag.appendChild(child);
       }

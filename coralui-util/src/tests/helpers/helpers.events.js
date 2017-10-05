@@ -1,8 +1,6 @@
 var helpers = helpers || {};
 
 (function() {
-  'use strict';
-
   /**
     Creates a native event
 

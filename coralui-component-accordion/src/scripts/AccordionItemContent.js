@@ -21,10 +21,6 @@
  @htmltag coral-accordion-item-content
  @extends HTMLElement
  */
-class AccordionItemContent extends HTMLElement {
-  constructor() {
-    super();
-  }
-}
+class AccordionItemContent extends HTMLElement {}
 
 export default AccordionItemContent;

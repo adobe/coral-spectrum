@@ -1,8 +1,6 @@
 import Component from '../scripts/Component';
 
 describe('Coral.mixin.component', function() {
-  'use strict';
-  
   // Dummy custom element
   class Element extends Component(HTMLElement) {
     constructor() {

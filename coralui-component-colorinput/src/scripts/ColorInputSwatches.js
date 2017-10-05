@@ -98,7 +98,7 @@ class ColorInputSwatches extends ColorInputAbstractSubview(Component(HTMLElement
   
   /** @private */
   _validateSelection(item) {
-    let selectedItems = this.items._getAllSelected();
+    const selectedItems = this.items._getAllSelected();
     
     // Last selected item wins
     item = item || selectedItems[selectedItems.length - 1];
@@ -250,22 +250,27 @@ class ColorInputSwatches extends ColorInputAbstractSubview(Component(HTMLElement
     let newIndex = currentIndex;
     
     switch (event.which) {
-      case 13: //return
+      //return
+      case 13:
         // Wait a frame before closing so that focus is restored correctly
-        window.requestAnimationFrame(function() {
+        window.requestAnimationFrame(() => {
           overlay.open = false;
         });
         break;
-      case 37: //left arrow
+      //left arrow
+      case 37:
         newIndex -= 1;
         break;
-      case 38: //up arrow
+      //up arrow
+      case 38:
         newIndex -= 4;
         break;
-      case 39: //right arrow
+      //right arrow
+      case 39:
         newIndex += 1;
         break;
-      case 40: //down arrow
+      //down arrow
+      case 40:
         newIndex += 4;
         break;
       default:

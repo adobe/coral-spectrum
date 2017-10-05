@@ -1,6 +1,4 @@
 describe('Coral.DragAction', function() {
-  'use strict';
-  
   // Mock for dragging
   function dragTo(dragAction, x, y) {
     var action = function(type, x, y) {

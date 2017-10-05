@@ -43,8 +43,6 @@ const dragRowTo = (row, direction) => {
 };
 
 describe('Coral.Table', function() {
-  'use strict';
-
   describe('Namespace', function() {
     it('should be defined', function() {
       expect(Coral).to.have.property('Table');

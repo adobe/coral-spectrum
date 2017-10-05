@@ -27,10 +27,6 @@ const CLASSNAME = 'coral3-Card-description';
  @extends Coral.mixin.component
  */
 class CardDescription extends Component(HTMLElement) {
-  constructor() {
-    super();
-  }
-  
   /**
    The description's content zone.
    

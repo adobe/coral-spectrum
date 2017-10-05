@@ -24,10 +24,6 @@ import getFirstSelectableWrappedItem from './getFirstSelectableWrappedItem';
  @extends Coral.SelectableCollection
  */
 class ActionBarContainerCollection extends SelectableCollection {
-  constructor(options) {
-    super(options);
-  }
-  
   add(item, before) {
     // in the left actionBar container always insert elements before the 'more' button in right actionBar always append
     // at the end

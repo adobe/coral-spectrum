@@ -1,6 +1,4 @@
 describe('Coral.Shell.MenuBar.Item', function() {
-  'use strict';
-
   describe('Namespace', function() {
     it('should be defined', function() {
       expect(Coral.Shell.MenuBar).to.have.property('Item');
@@ -129,6 +127,7 @@ describe('Coral.Shell.MenuBar.Item', function() {
       it('should update open when menu is open programmatically', function(done) {
         // binds the menu and the item together
         el.menu = menu;
+        menu._overlayAnimationTime = 0;
 
         expect(el.open).to.be.false;
 

@@ -118,10 +118,11 @@ class ShellHeader extends Component(HTMLElement) {
   
     // header only changes zIndex due to menus
     if (target.tagName === 'CORAL-SHELL-MENU') {
+      const self = this;
       // we need one frame to make sure the zIndex is already set
-      window.requestAnimationFrame(function() {
-        this.style.zIndex = parseInt(target.style.zIndex, 10) + 100;
-      }.bind(this));
+      window.requestAnimationFrame(() => {
+        self.style.zIndex = parseInt(target.style.zIndex, 10) + 100;
+      });
     }
   }
   
@@ -131,14 +132,13 @@ class ShellHeader extends Component(HTMLElement) {
     home.setAttribute('aria-level', '2');
   }
   
-  // For backwards compatibility + Torq
-  get defaultContentZone() {return this.content;}
-  set defaultContentZone(value) {this.content = value;}
+  get defaultContentZone() { return this.content; }
+  set defaultContentZone(value) { this.content = value; }
   get _contentZones() {
     return {
-    'coral-shell-header-home': 'home',
-    'coral-shell-header-content': 'content',
-    'coral-shell-header-actions': 'actions'
+      'coral-shell-header-home': 'home',
+      'coral-shell-header-content': 'content',
+      'coral-shell-header-actions': 'actions'
     };
   }
   
@@ -154,9 +154,9 @@ class ShellHeader extends Component(HTMLElement) {
     const content = this._elements.content;
     
     // Remove them so we can process children
-    if (home.parentNode) {home.remove();}
-    if (actions.parentNode) {actions.remove();}
-    if (content.parentNode) {content.remove();}
+    if (home.parentNode) { home.remove(); }
+    if (actions.parentNode) { actions.remove(); }
+    if (content.parentNode) { content.remove(); }
     
     // moves everything to the main content zone
     while (this.firstChild) {

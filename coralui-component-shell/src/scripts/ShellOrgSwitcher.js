@@ -81,7 +81,7 @@ class ShellOrgSwitcher extends List {
         itemSelector: 'coral-shell-organization, coral-shell-suborganization',
         container: this._elements.items,
         onItemAdded: this._onCollectionChange,
-        onItemRemoved: this._onCollectionChange,
+        onItemRemoved: this._onCollectionChange
       });
     }
   
@@ -145,10 +145,10 @@ class ShellOrgSwitcher extends List {
     
     // If a sub organization is selected, deselect all selected organization items
     if (item.hasAttribute('selected')) {
-      this.items._getAllSelected().forEach((item) => {
-        if (item.tagName === 'CORAL-SHELL-ORGANIZATION') {
+      this.items._getAllSelected().forEach((itemElement) => {
+        if (itemElement.tagName === 'CORAL-SHELL-ORGANIZATION') {
           this._preventTriggeringEvents = true;
-          item.removeAttribute('selected');
+          itemElement.removeAttribute('selected');
         }
       });
   
@@ -226,13 +226,13 @@ class ShellOrgSwitcher extends List {
     this._elements.resultMessage.hidden = true;
   
     // Show all items
-    this.items.getAll().forEach(function(item) {
+    this.items.getAll().forEach((item) => {
       item.hidden = false;
     
       if (item.items) {
         // Show all sub-items
-        item.items.getAll().forEach(function(item) {
-          item.hidden = false;
+        item.items.getAll().forEach((itemElement) => {
+          itemElement.hidden = false;
         });
       }
     });
@@ -249,16 +249,16 @@ class ShellOrgSwitcher extends List {
     // Hide items that don't match
     let resultCount = 0;
     
-    this.items.getAll().forEach(function(item) {
+    this.items.getAll().forEach((item) => {
       let matched = item.content.textContent.toLowerCase().indexOf(searchTerm) !== -1;
       
       let childMatched = false;
       if (item.items) {
-        item.items.getAll().forEach(function(item) {
-          const matched = item.content.textContent.toLowerCase().indexOf(searchTerm) !== -1;
-          childMatched = childMatched || matched;
-          
-          item.hidden = !matched;
+        item.items.getAll().forEach((itemElement) => {
+          const elementMatch = itemElement.content.textContent.toLowerCase().indexOf(searchTerm) !== -1;
+          childMatched = childMatched || elementMatch;
+  
+          itemElement.hidden = !elementMatch;
         });
       }
       
@@ -278,7 +278,7 @@ class ShellOrgSwitcher extends List {
   /** @private */
   _moveItems() {
     this.id = this.id || commons.getUID();
-    Array.prototype.forEach.call(this.querySelectorAll(`#${this.id} > coral-shell-organization`), function(item) {
+    Array.prototype.forEach.call(this.querySelectorAll(`#${this.id} > coral-shell-organization`), (item) => {
       this._elements.items.appendChild(item);
     }, this);
   }
@@ -300,10 +300,9 @@ class ShellOrgSwitcher extends List {
     }
   }
   
-  // For backwards compatibility + Torq
-  get _contentZones() {return {'coral-shell-orgswitcher-footer': 'footer'};}
+  get _contentZones() { return {'coral-shell-orgswitcher-footer': 'footer'}; }
   
-  static get observedAttributes() {return super.observedAttributes.concat(['placeholder']);}
+  static get observedAttributes() { return super.observedAttributes.concat(['placeholder']); }
   
   connectedCallback() {
     super.connectedCallback();

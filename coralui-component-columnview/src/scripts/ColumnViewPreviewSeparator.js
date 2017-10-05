@@ -21,10 +21,6 @@
  @htmltag coral-columnview-preview-separator
  @extends HTMLElement
  */
-class ColumnViewPreviewSeparator extends HTMLElement {
-  constructor() {
-    super();
-  }
-}
+class ColumnViewPreviewSeparator extends HTMLElement {}
 
 export default ColumnViewPreviewSeparator;

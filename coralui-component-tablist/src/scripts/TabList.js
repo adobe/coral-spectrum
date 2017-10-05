@@ -100,7 +100,7 @@ class TabList extends Component(HTMLElement) {
         host: this,
         itemTagName: 'coral-tab',
         onItemAdded: this._onItemAdded,
-        onItemRemoved: this._onItemRemoved,
+        onItemRemoved: this._onItemRemoved
       });
     }
     return this._items;
@@ -128,20 +128,21 @@ class TabList extends Component(HTMLElement) {
    @memberof Coral.TabList#
    */
   get target() {
-    return typeof this._target === 'string' ? this._target : (this._target || null);
+    return typeof this._target === 'string' ? this._target : this._target || null;
   }
   set target(value) {
     if (value === null || typeof value === 'string' || value instanceof Node) {
       this._target = value;
       
+      const self = this;
       // we do in case the target was not yet in the DOM
-      window.requestAnimationFrame(function() {
-        const realTarget = getTarget(this._target);
+      window.requestAnimationFrame(() => {
+        const realTarget = getTarget(self._target);
   
         // we add proper accessibility if available
         if (realTarget) {
     
-          const tabItems = this.items.getAll();
+          const tabItems = self.items.getAll();
           const panelItems = realTarget.items ? realTarget.items.getAll() : realTarget.children;
     
           // we need to add a11y to all component, no matter if they can be perfectly paired
@@ -179,7 +180,7 @@ class TabList extends Component(HTMLElement) {
             }
           }
         }
-      }.bind(this));
+      });
     }
   }
   
@@ -313,7 +314,7 @@ class TabList extends Component(HTMLElement) {
   
   /** @private */
   _validateSelection(item) {
-    let selectedItems = this.items._getAllSelected();
+    const selectedItems = this.items._getAllSelected();
     
     if (item) {
       // Deselected item
@@ -395,8 +396,8 @@ class TabList extends Component(HTMLElement) {
     this.classList.add(CLASSNAME);
     
     // Default reflected attributes
-    if (!this._size) {this.size = size.MEDIUM;}
-    if (!this._orientation) {this.orientation = orientation.HORIZONTAL;}
+    if (!this._size) { this.size = size.MEDIUM; }
+    if (!this._orientation) { this.orientation = orientation.HORIZONTAL; }
     
     // adds the role to support accessibility
     this.setAttribute('role', 'tablist');

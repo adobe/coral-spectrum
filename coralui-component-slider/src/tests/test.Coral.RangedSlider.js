@@ -1,6 +1,4 @@
 describe('Coral.RangedSlider', function() {
-  'use strict';
-
   describe('Namespace', function() {
     it('should be defined', function() {
       expect(Coral).to.have.property('RangedSlider');
@@ -39,10 +37,19 @@ describe('Coral.RangedSlider', function() {
       });
 
       it('should not be settable', function() {
+        let warn = console.warn;
+        
+        console.warn = () => {
+          // Override it to prevent spamming the console
+        };
+        
         el.filled = false;
         
         expect(el.filled).to.be.true;
         expect(el._elements.fillHandle.classList.contains('is-hidden')).to.be.false;
+  
+        // Restore warn
+        console.warn = warn;
       });
     });
 

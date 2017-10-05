@@ -1,6 +1,4 @@
 describe('Coral.Overlay', function() {
-  'use strict';
-  
   let overlay;
   let targetOther;
   let targetNext;

@@ -21,10 +21,6 @@
  @htmltag coral-shell-user-content
  @extends HTMLElement
  */
-class ShellUserContent extends HTMLElement {
-  constructor() {
-    super();
-  }
-}
+class ShellUserContent extends HTMLElement {}
 
 export default ShellUserContent;

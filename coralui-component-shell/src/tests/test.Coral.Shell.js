@@ -1,6 +1,4 @@
 describe('Coral.Shell', function() {
-  'use strict';
-
   describe('Namespace', function() {
     it('should be defined', function() {
       expect(Coral).to.have.property('Shell');

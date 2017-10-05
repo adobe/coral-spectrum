@@ -1,6 +1,4 @@
 describe('Coral.Wait', function() {
-  'use strict';
-  
   describe('Namespace', function() {
     it('should define the variants in an enum', function() {
       expect(Coral.Wait.variant).to.exist;

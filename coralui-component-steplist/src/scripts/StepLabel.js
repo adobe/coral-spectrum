@@ -24,10 +24,6 @@ const CLASSNAME = 'coral3-Step-label';
  @extends HTMLElement
  */
 class StepLabel extends HTMLElement {
-  constructor() {
-    super();
-  }
-  
   connectedCallback() {
     this.classList.add(CLASSNAME);
   }
