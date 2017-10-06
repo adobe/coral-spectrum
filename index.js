@@ -47,6 +47,9 @@ import {Tree, TreeItem, TreeItemContent} from 'coralui-component-tree';
 import {Wait} from 'coralui-component-wait';
 import {WizardView} from 'coralui-component-wizardview';
 
+// For Coral3 custom elements registration support
+import 'coralui-compat';
+
 export {
   Accordion,
   AccordionItem,

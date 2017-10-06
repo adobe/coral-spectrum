@@ -57,6 +57,7 @@
     "coralui-component-wait": "file:coralui-component-wait",
     "coralui-component-wizardview": "file:coralui-component-wizardview",
     "coralui-dragaction": "file:coralui-dragaction",
+    "coralui-compat": "file:coralui-compat",
     "coralui-gulp": "file:coralui-gulp",
     "gulp": "^3.9.1"
   },

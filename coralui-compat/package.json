@@ -1,0 +1,12 @@
+{
+  "name": "coralui-compat",
+  "version": "1.0.0",
+  "description": "Compat package",
+  "dependencies": {
+    "document-register-element": "^1.7.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "coralui-gulp": "file:../coralui-gulp"
+  }
+}
