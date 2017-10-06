@@ -588,7 +588,7 @@ function ResizeEventTrigger() {
 let resizeListenerObject;
 function getResizeListenerObject() {
   if (!resizeListenerObject) {
-    resizeListenerObject = resizer().firstElementChild;
+    resizeListenerObject = resizer().querySelector('object');
   }
   return resizeListenerObject.cloneNode(true);
 }

@@ -379,7 +379,7 @@ class Card extends Component(HTMLElement) {
       }
       // Remove anything else element
       else {
-        child.remove();
+        this.removeChild(child);
       }
     }
   

@@ -27,8 +27,9 @@ class MultifieldCollection extends Collection {
       }
     
       if (!insertBefore) {
-        insertBefore = this._container.querySelector(`#${this._container.id} > ${this._itemTagName}:last-of-type`);
+        insertBefore = this.last();
         if (insertBefore) {
+          // Insert before the last item
           insertBefore = insertBefore.nextElementSibling;
         }
       }

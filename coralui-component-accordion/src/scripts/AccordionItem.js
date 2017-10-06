@@ -100,8 +100,8 @@ class AccordionItem extends Component(HTMLElement) {
     return this._selected || false;
   }
   set selected(value) {
-    this._selected = transform.booleanAttr(value);
-    this._reflectAttribute('selected', this.disabled ? false : this._selected);
+    this._selected = this.disabled ? false : transform.booleanAttr(value);
+    this._reflectAttribute('selected', this._selected);
     
     this.classList.toggle('is-selected', this._selected);
     this.removeAttribute('aria-selected');

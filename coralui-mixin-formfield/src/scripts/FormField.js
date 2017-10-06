@@ -18,7 +18,40 @@
 import {transform, commons} from 'coralui-util';
 
 // https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories
-const LABELLABLE_ELEMENTS_SELECTOR = 'button,input:not([type=hidden]),keygen,meter,output,progress,select,textarea';
+let LABELLABLE_ELEMENTS_SELECTOR = 'button,input:not([type=hidden]),keygen,meter,output,progress,select,textarea';
+// @polyfill ie11
+// IE11 throws syntax error because of the "not()" in the selector for some reason in ColorInputColorProperties
+if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0) {
+  LABELLABLE_ELEMENTS_SELECTOR = 'button,keygen,meter,output,progress,select,textarea,';
+  
+  // Since we can't use :not() we have to indicate all input types
+  [
+    'text',
+    'password',
+    'submit',
+    'reset',
+    'radio',
+    'checkbox',
+    'button',
+    'color',
+    'date',
+    'datetime-local',
+    'email',
+    'month',
+    'number',
+    'range',
+    'search',
+    'tel',
+    'time',
+    'url',
+    'week'
+  ].forEach((type) => {
+    LABELLABLE_ELEMENTS_SELECTOR += `input[type=${type}],`;
+  });
+  
+  // Remove last ","
+  LABELLABLE_ELEMENTS_SELECTOR = LABELLABLE_ELEMENTS_SELECTOR.slice(0, -1);
+}
 // _onInputChange is only triggered on non-hidden inputs
 const TARGET_INPUT_SELECTOR = 'input:not([type=hidden])';
 

@@ -138,7 +138,7 @@ class Multifield extends Component(HTMLElement) {
   /** @ignore */
   _handleTemplateSupport(template) {
     // @polyfill IE
-    if (!TEMPLATE_SUPPORT) {
+    if (!TEMPLATE_SUPPORT && !template.content) {
       const frag = document.createDocumentFragment();
       while (template.firstChild) {
         frag.appendChild(template.firstChild);

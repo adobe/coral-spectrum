@@ -182,7 +182,7 @@ class Drawer extends Component(HTMLElement) {
       // Do transition in next task as browser might batch up the height property change before painting
       window.setTimeout(() => {
         slider.style.height = self._open ? `${slider.scrollHeight}px` : 0;
-      });
+      }, 10);
     }
     else {
       // Make sure it's animated next time

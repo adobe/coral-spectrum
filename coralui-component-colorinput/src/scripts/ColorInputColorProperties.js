@@ -19,6 +19,7 @@ import Component from 'coralui-mixin-component';
 import ColorInputAbstractSubview from './ColorInputAbstractSubview';
 import Color from './Color';
 import 'coralui-component-button';
+import 'coralui-component-textfield';
 import './ColorInputSlider';
 import propertiesSubview from '../templates/colorProperties';
 import {commons, i18n} from 'coralui-util';

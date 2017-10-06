@@ -80,7 +80,7 @@ describe('Coral.Drawer', function () {
         window.setTimeout(function() {
           expect(drawer._elements.slider.style.height).to.not.equal('0px');
           done();
-        });
+        }, 10);
       });
   
       it('should close the drawer if open is set to false', function(done) {
@@ -92,7 +92,7 @@ describe('Coral.Drawer', function () {
         window.setTimeout(function() {
           expect(drawer._elements.slider.style.height).to.equal('0px');
           done();
-        });
+        }, 10);
       });
     });
     

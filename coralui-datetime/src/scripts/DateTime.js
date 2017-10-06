@@ -93,7 +93,8 @@ class DateTime {
         }
         else {
           // If string is invalid, the date will be invalid too
-          this._date = new Date(this._value);
+          // "replace" fixes the one day off issue
+          this._date = new Date(this._value.replace(/-/g, '\/').replace(/T.+/, ''));
         }
       }
       else if (this._value === null) {
@@ -163,13 +164,13 @@ class DateTime {
     else if (format === 'HH:mm') {
       formattedDateString += transform2digit(this._date.getHours());
       formattedDateString += ':';
-      formattedDateString += transform2digit(this._date.getHours());
+      formattedDateString += transform2digit(this._date.getMinutes());
     }
     else if (format === 'HH') {
       formattedDateString += transform2digit(this._date.getHours());
     }
     else if (format === 'mm') {
-      formattedDateString += transform2digit(this._date.getHours());
+      formattedDateString += transform2digit(this._date.getMinutes());
     }
     else if (format === 'YYYY-MM-DD[T]HH:mmZ') {
       formattedDateString += this._date.getFullYear();
@@ -182,7 +183,7 @@ class DateTime {
   
       formattedDateString += transform2digit(this._date.getHours());
       formattedDateString += ':';
-      formattedDateString += transform2digit(this._date.getHours());
+      formattedDateString += transform2digit(this._date.getMinutes());
   
       const timezone = -1 * (this._date.getTimezoneOffset() / 60);
       let abs = Math.abs(timezone);
