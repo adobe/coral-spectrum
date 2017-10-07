@@ -82,7 +82,7 @@ class ShellHomeAnchor extends Component(HTMLAnchorElement) {
       this._elements.icon.remove();
     }
     // adds the icon back since it was blown away by textContent
-    else if (!this._elements.icon.parentNode) {
+    else if (!this.contains(this._elements.icon)) {
       this.insertBefore(this._elements.icon, this.firstChild);
     }
   }
@@ -116,10 +116,16 @@ class ShellHomeAnchor extends Component(HTMLAnchorElement) {
         // Move text elements to the label
         label.appendChild(child);
       }
-      else if (child.nodeType === Node.ELEMENT_NODE && child.tagName === 'CORAL-ICON') {
-        // Conserve existing icon element to content
-        this._elements.icon = child;
-        fragment.appendChild(child);
+      else if (child.nodeName === 'CORAL-ICON') {
+        if (!fragment.childNodes.length) {
+          // Conserve existing icon element to content
+          this._elements.icon = child;
+          fragment.appendChild(child);
+        }
+        else {
+          // Remove cloned icon
+          this.removeChild(child);
+        }
       }
       else {
         // Remove anything else
