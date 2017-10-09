@@ -43,8 +43,8 @@
   },
   "LEFT_TOP LEFT_BOTTOM": {
     "placement": "left",
-    "lengthOffset": "-100%",
-    "breadthOffset": "100%",
+    "lengthOffset": "-100%p",
+    "breadthOffset": "100%p",
     "inner": false
   },
   "RIGHT_TOP RIGHT_BOTTOM": {
