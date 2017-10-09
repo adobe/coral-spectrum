@@ -1104,6 +1104,7 @@ class QuickActions extends Overlay {
     this.setAttribute('tabIndex', '-1');
     this.setAttribute('role', 'menu');
     
+    // Support cloneNode
     ['moreButton', 'overlay'].forEach((handleName) => {
       const handle = this.querySelector(`[handle="${handleName}"]`);
       if (handle) {
@@ -1111,14 +1112,14 @@ class QuickActions extends Overlay {
       }
     }, this);
   
-    const frag = document.createDocumentFragment();
-    
-    // Render the base layout
-    frag.appendChild(this._elements.moreButton);
-    frag.appendChild(this._elements.overlay);
-    
-    // Inserting the template before the items
-    this.insertBefore(frag, this.firstChild);
+    // Inserting the overlay before the items
+    this.insertBefore(this._elements.overlay, this.firstChild);
+  
+    // Inserting the moreButton after the items
+    this.appendChild(this._elements.moreButton);
+  
+    // Link target
+    this._elements.overlay.target = this._elements.moreButton;
   }
 }
 
