@@ -110,7 +110,7 @@ describe('Coral.Overlay', function() {
         overlay.alignMy = Coral.Overlay.align.LEFT_TOP;
         expect(overlay.alignMy).to.equal(Coral.Overlay.align.LEFT_TOP);
   
-        expect(warnCalled).to.equal(2);
+        expect(warnCalled).to.equal(1);
   
         // Restore console.warn
         console.warn = warn;
@@ -129,7 +129,7 @@ describe('Coral.Overlay', function() {
         overlay.alignAt = Coral.Overlay.align.LEFT_TOP;
         expect(overlay.alignAt).to.equal(Coral.Overlay.align.LEFT_TOP);
   
-        expect(warnCalled).to.equal(2);
+        expect(warnCalled).to.equal(1);
   
         // Restore console.warn
         console.warn = warn;
@@ -379,6 +379,18 @@ describe('Coral.Overlay', function() {
           done();
         });
       });
+    });
+  });
+  
+  describe('Implementation Details', function() {
+    it('should support most common alignMy and alignAt combinations', function() {
+      overlay.alignMy = Coral.Overlay.align.RIGHT_CENTER;
+      overlay.alignAt = Coral.Overlay.align.LEFT_CENTER;
+      
+      expect(overlay.placement).to.equal(Coral.Overlay.placement.LEFT);
+      expect(overlay.lengthOffset).to.equal('0px');
+      expect(overlay.breadthOffset).to.equal('0px');
+      expect(overlay.inner).to.be.false
     });
   });
 });
