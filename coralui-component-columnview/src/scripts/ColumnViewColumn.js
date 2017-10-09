@@ -133,7 +133,7 @@ class ColumnViewColumn extends Component(HTMLElement) {
     if (!this._items) {
       this._items = new ColumnViewCollection({
         host: this,
-        target: this.content,
+        container: this.content,
         itemTagName: 'coral-columnview-item'
       });
     }
