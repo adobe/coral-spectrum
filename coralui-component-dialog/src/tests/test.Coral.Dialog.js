@@ -165,8 +165,6 @@ describe('Coral.Dialog', function() {
         
           var width = dragElement.getBoundingClientRect().width;
         
-          expect(el._elements.wrapper.style.width).to.equal(width + 'px');
-        
           el.dispatchEvent(dummyMouseEvent('mousedown'));
           el.dispatchEvent(dummyMouseEvent('mousemove', 10, 20));
         
@@ -180,7 +178,11 @@ describe('Coral.Dialog', function() {
           expect(dragElement.offsetLeft).to.equal(offset.left + 10);
           expect(dragElement.offsetTop).to.equal(offset.top + 20);
         
-          done();
+          // The fixed width is set only once all dialog items are defined
+          helpers.next(function() {
+            expect(el._elements.wrapper.style.width).to.equal(width + 'px');
+            done();
+          });
         });
       });
     

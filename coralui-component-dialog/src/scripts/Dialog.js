@@ -356,7 +356,8 @@ class Dialog extends Overlay(Component(HTMLElement)) {
     super.open = value;
   
     // Ensure we're in the DOM
-    if (this.open && this.parentNode) {
+    if (this.open && document.body.contains(this)) {
+      this._openInDOM = true;
       
       // If not child of document.body, we have to move it there
       this._moveToDocumentBody();
@@ -569,8 +570,11 @@ class Dialog extends Overlay(Component(HTMLElement)) {
     }
     
     if (this.movable) {
-      // Allows the dialog to moved outside of the right window side
-      wrapper.style.width = `${wrapper.getBoundingClientRect().width}px`;
+      // Make sure all components in the dialog are defined before setting a fix width
+      commons.ready(this, () => {
+        // Prevents the dialog from overflowing horizontally
+        wrapper.style.width = `${wrapper.getBoundingClientRect().width}px`;
+      });
     }
   
     // Reset display to previous style
@@ -726,7 +730,9 @@ class Dialog extends Overlay(Component(HTMLElement)) {
     super.connectedCallback();
   
     // In case it was opened but not in the DOM yet
-    this.open = this.open;
+    if (this.open && !this._openInDOM) {
+      this.open = this.open;
+    }
   }
 }
 
