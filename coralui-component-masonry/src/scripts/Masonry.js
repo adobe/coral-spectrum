@@ -410,6 +410,11 @@ class Masonry extends Component(HTMLElement) {
   /** @private */
   _onItemConnected(event) {
     event.stopImmediatePropagation();
+  
+    // We don't care about transitions if the masonry is not in the body
+    if (!document.body.contains(this)) {
+      return;
+    }
     
     const item = event.target;
   
@@ -431,6 +436,11 @@ class Masonry extends Component(HTMLElement) {
   
   /** @private */
   _onItemDisconnected(item) {
+    // We don't care about transitions if the masonry is not in the body
+    if (!document.body.contains(this)) {
+      return;
+    }
+    
     // Ignore the item being dropped after ordering
     if (item._dropping) {
       return;

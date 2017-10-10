@@ -599,6 +599,12 @@ ResizeEventTrigger.prototype._addTriggerElement = (element, listenerFunction) =>
   }
   
   const obj = getResizeListenerObject();
+  
+  // Remove the old one before adding the new one
+  if (element._resizeTriggerElement) {
+    element._resizeTriggerElement.remove();
+  }
+  
   element._resizeTriggerElement = obj;
   
   // eslint-disable-next-line func-names
@@ -675,8 +681,9 @@ ResizeEventTrigger.prototype.addResizeListener = function(element, onResize) {
   // The array may still exist, so we check its length too
   if (!element._resizeListeners || element._resizeListeners.length === 0) {
     element._resizeListeners = [];
-    this._addTriggerElement(element, this._fireResizeListeners.bind(this));
   }
+  
+  this._addTriggerElement(element, this._fireResizeListeners.bind(this));
   
   element._resizeListeners.push(onResize);
 };
