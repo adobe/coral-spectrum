@@ -431,6 +431,22 @@ describe('Coral.commons', function() {
         done();
       });
     });
+    
+    it('should not be blocking', function(done) {
+      const warn = console.warn;
+      let called = 0;
+  
+      console.warn = function() {
+        called++;
+      };
+      
+      Coral.commons.ready(10, () => {
+        expect(called).to.equal(1, 'it should warn that passed element is not an HTMLElement');
+        console.warn = warn;
+    
+        done();
+      });
+    });
   });
 
   describe('#transitionEnd', function() {

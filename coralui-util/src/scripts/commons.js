@@ -307,6 +307,13 @@ commons.ready = (element, onDefined) => {
     root = document.body;
   }
   
+  if (!(root instanceof HTMLElement)) {
+    console.warn('Coral.commons.ready: passed element was not an HTMLElement.');
+    // commons.ready should not be blocking by default
+    onDefined(root);
+    return;
+  }
+  
   // @todo use ':not(:defined)' once supported to detect coral not yet defined custom elements
   const elements = root.querySelectorAll('*');
 
