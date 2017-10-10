@@ -1012,7 +1012,7 @@ class Select extends FormField(Component(HTMLElement)) {
     this._elements.button.setAttribute('aria-expanded', event.target.open);
     
     if (!event.target.open) {
-      this.classList.remove(...['is-openAbove', 'is-openBelow']);
+      this.classList.remove('is-openAbove', 'is-openBelow');
     }
   
     // handles the focus allocation every time the overlay closes

@@ -203,7 +203,7 @@ class Tooltip extends Overlay {
   /** @ignore */
   _onPositioned(event) {
     // Set arrow placement
-    this.classList.remove(ALL_PLACEMENT_CLASSES);
+    this.classList.remove(...ALL_PLACEMENT_CLASSES);
     this.classList.add(placementClassMap[event.detail.placement]);
   }
   
