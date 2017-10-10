@@ -613,6 +613,8 @@ class Select extends FormField(Component(HTMLElement)) {
     if (!this._useNativeInput) {
       // Show the overlay
       this._elements.overlay.open = true;
+      // Force overlay repositioning to adapt overlay width to the select width
+      this._elements.overlay.reposition();
     }
     
     // Trigger an event
