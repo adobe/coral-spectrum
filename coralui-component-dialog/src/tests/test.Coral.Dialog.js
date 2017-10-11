@@ -179,7 +179,7 @@ describe('Coral.Dialog', function() {
           expect(dragElement.offsetTop).to.equal(offset.top + 20);
         
           // The fixed width is set only once all dialog items are defined
-          helpers.next(function() {
+          Coral.commons.ready(el, function() {
             expect(el._elements.wrapper.style.width).to.equal(width + 'px');
             done();
           });
