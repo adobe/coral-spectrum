@@ -4,6 +4,7 @@ import 'coralui-dragaction/src/tests';
 import 'coralui-mixin-component/src/tests';
 import 'coralui-mixin-formfield/src/tests';
 import 'coralui-mixin-overlay/src/tests';
+import 'coralui-compat/src/tests';
 
 import 'coralui-component-accordion/src/tests';
 import 'coralui-component-actionbar/src/tests';
