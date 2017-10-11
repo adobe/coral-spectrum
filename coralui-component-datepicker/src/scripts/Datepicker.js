@@ -108,26 +108,26 @@ const isNativeFormat = (format) => {
 class Datetime extends FormField(Component(HTMLElement)) {
   constructor() {
     super();
-    
-    // Events
-    this._delegateEvents(commons.extend(this._events, {
-      'click coral-calendar': '_onCalendarDayClick',
-      'change coral-calendar,coral-clock': '_onChange',
   
-      'coral-overlay:beforeopen [handle="popover"]': '_onPopoverBeforeOpen',
-      'coral-overlay:open [handle="popover"]': '_onPopoverOpenOrClose',
-      'coral-overlay:close [handle="popover"]': '_onPopoverOpenOrClose',
-  
-      'key:esc coral-clock input[is=coral-textfield]': '_onEscapeKey',
-      'key:alt+down [handle="input"],[handle="toggle"]': '_onAltDownKey',
-      'key:down [handle="toggle"]': '_onAltDownKey'
-    }));
-    
     // Prepare templates
     this._elements = {};
     base.call(this._elements);
     // Creates and stores the contents of the popover separately
     this._calendarFragment = popoverContent.call(this._elements);
+  
+    const popoverId = this._elements.popover.id;
+    const events = {};
+    events[`global:click #${popoverId} coral-calendar`] = '_onCalendarDayClick';
+    events[`global:capture:change #${popoverId}`] = '_onChange';
+    events[`global:capture:coral-overlay:beforeopen #${popoverId}`] = '_onPopoverBeforeOpen';
+    events[`global:capture:coral-overlay:open #${popoverId}`] = '_onPopoverOpenOrClose';
+    events[`global:capture:coral-overlay:close #${popoverId}`] = '_onPopoverOpenOrClose';
+    events[`global:key:esc #${popoverId} coral-clock input[is=coral-textfield]`] = '_onEscapeKey';
+    events['key:alt+down [handle="input"],[handle="toggle"]'] = '_onAltDownKey';
+    events['key:down [handle="toggle"]'] = '_onAltDownKey';
+    
+    // Events
+    this._delegateEvents(commons.extend(this._events, events));
   }
   
   /**
@@ -596,15 +596,17 @@ class Datetime extends FormField(Component(HTMLElement)) {
   
   /** @ignore */
   _onChange(event) {
-    event.stopPropagation();
-    
-    // we create the new value using both calendar and clock controls
-    // datepicker should set the current time as default when no time is set, but a date was chosen (if in datetime
-    // mode)
-    this.value = this._mergeCalendarAndClockDates(true);
-    this._validateValue();
-    
-    this.trigger('change');
+    if (event.target.tagName === 'CORAL-CALENDAR' || event.target.tagName === 'CORAL-CLOCK') {
+      event.stopPropagation();
+  
+      // we create the new value using both calendar and clock controls
+      // datepicker should set the current time as default when no time is set, but a date was chosen (if in datetime
+      // mode)
+      this.value = this._mergeCalendarAndClockDates(true);
+      this._validateValue();
+  
+      this.trigger('change');
+    }
   }
   
   /** @ignore */
@@ -738,6 +740,15 @@ class Datetime extends FormField(Component(HTMLElement)) {
   
     // Point at the button from the bottom
     this._elements.popover.target = this._elements.toggle;
+  }
+  
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    
+    // In case it was moved out don't forget to remove it
+    if (!this.contains(this._elements.popover)) {
+      this._elements.popover.remove();
+    }
   }
 }
 

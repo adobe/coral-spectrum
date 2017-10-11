@@ -367,6 +367,20 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
     this._interaction = validate.enumeration(interaction)(value) && value || interaction.ON;
   }
   
+  /**
+   Whether the overlay is allowed to change its DOM position for better positioning based on its context.
+   
+   @type {Boolean}
+   @default false
+   @memberof Coral.Overlay#
+   */
+  get smart() {
+    return this._smart || false;
+  }
+  set smart(value) {
+    this._smart = transform.booleanAttr(value);
+  }
+  
   // JSDoc inherited
   get open() {
     return super.open;
@@ -374,11 +388,41 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
   set open(value) {
     super.open = value;
     
+    if (this.open && this.smart) {
+      this._validateParentOverflow();
+    }
+    
     const self = this;
     // We need an additional frame to help popper read the correct offsets
     window.requestAnimationFrame(() => {
       self.reposition();
     });
+  }
+  
+  /** @ignore */
+  _validateParentOverflow() {
+    let reposition = false;
+    
+    // Check parents if they potentially truncate the overlay
+    let parent = this.parentElement;
+    while (!reposition && parent) {
+      if (parent !== document.body) {
+        const computedStyle = window.getComputedStyle(parent);
+        if (computedStyle.overflow === 'auto' || computedStyle.overflow === 'hidden') {
+          reposition = true;
+        }
+        
+        parent = parent.parentElement;
+      }
+      else {
+        parent = null;
+      }
+    }
+  
+    // If it's the case then we move the overlay to make sure it's not truncated
+    if (reposition) {
+      document.body.appendChild(this);
+    }
   }
   
   /** @ignore */
@@ -538,7 +582,8 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
       'collision',
       'interaction',
       'target',
-      'inner'
+      'inner',
+      'smart'
     ]);
   }
   

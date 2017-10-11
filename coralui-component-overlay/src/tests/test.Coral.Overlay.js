@@ -92,6 +92,12 @@ describe('Coral.Overlay', function() {
   });
   
   describe('API', function() {
+    describe('#smart', function() {
+      it('should default to false', function() {
+        expect(overlay.smart).to.be.false;
+      });
+    });
+    
     describe('#focusOnShow', function() {
       it('should default to ON', function() {
         expect(overlay.focusOnShow).to.equal(Coral.mixin.overlay.focusOnShow.ON);
@@ -296,6 +302,19 @@ describe('Coral.Overlay', function() {
       if (overlay) {
         overlay.open = false;
       }
+    });
+    
+    describe('#smart', function() {
+      it('should move outside of its parent when opened', function() {
+        const dom = helpers.build(window.__html__['Coral.Overlay.smart.html']);
+        const el = dom.querySelector('coral-overlay');
+        expect(dom.contains(el)).to.be.true;
+        el.open = true;
+        expect(dom.contains(el)).to.be.false;
+        expect(el.parentNode).to.equal(document.body);
+        // Don't forget to remove it
+        el.remove();
+      });
     });
     
     describe('#focusOnShow', function() {
