@@ -325,14 +325,14 @@ commons.ready = (element, onDefined) => {
     let name = el.nodeName.toLowerCase();
 
     // Check nodename
-    if (name.indexOf('coral') === 0) {
+    if (name.indexOf('coral') === 0 && el instanceof HTMLUnknownElement) {
       promises.push(window.customElements.whenDefined(name));
     }
     else {
       // Fallback to is attribute
       name = String(el.getAttribute('is')).toLowerCase();
 
-      if (name.indexOf('coral') === 0) {
+      if (name.indexOf('coral') === 0 && el instanceof HTMLUnknownElement) {
         promises.push(window.customElements.whenDefined(name));
       }
     }
@@ -347,13 +347,19 @@ commons.ready = (element, onDefined) => {
   }
   
   // Call callback once all defined
-  Promise.all(promises)
-    .then(() => {
-      onDefined(element instanceof HTMLElement && element || window);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+  if (promises.length) {
+    Promise.all(promises)
+      .then(() => {
+        onDefined(element instanceof HTMLElement && element || window);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+  else {
+    // Call callback by default if all defined already
+    onDefined(element instanceof HTMLElement && element || window);
+  }
 };
 
 /**
