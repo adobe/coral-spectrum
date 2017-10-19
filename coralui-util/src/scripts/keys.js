@@ -430,6 +430,9 @@ function makeComboHandler(elOrSelector, options) {
         
         // Add matchedTarget
         event.matchedTarget = target;
+  
+        // Add keys that triggered the event
+        event.keys = listener.originalString;
         
         listener.listener.call(context || doc, event);
       }
@@ -596,6 +599,8 @@ function makeComboHandler(elOrSelector, options) {
       });
     }
     else {
+      const originalString = keyCombo.toString();
+      
       // It's a key combo!
       keyCombo = keyComboToCodeString(keyCombo);
       
@@ -603,6 +608,7 @@ function makeComboHandler(elOrSelector, options) {
       
       // Store the listener and associated information in the list for this keyCombo
       listeners.push({
+        originalString: originalString,
         // Determine if this selector needs context when evaluating event delegation
         // A selector needs context when it includes things like >, ~, :first-child, etc
         needsContext: selector ? needsContextRE.test(selector) : false,

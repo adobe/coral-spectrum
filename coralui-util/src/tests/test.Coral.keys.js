@@ -616,6 +616,28 @@ describe('Coral.keys', function() {
     helpers.keypress('a', document.getElementById('delegateDiv'));
     expect(spy.callCount).to.equal(1);
   });
+  
+  it('should set original keys that triggered the event', function() {
+    var spy = sinon.spy();
+    Coral.keys.on('c-s', spy);
+    Coral.keys.on('t', spy);
+    Coral.keys.on('shift+q', spy);
+    
+    helpers.keypress('c');
+    helpers.keypress('s');
+    expect(spy.callCount).to.equal(1);
+    expect(spy.args[0][0].keys).to.equal('c-s');
+    
+    spy.reset();
+    helpers.keypress('t');
+    expect(spy.callCount).to.equal(1);
+    expect(spy.args[0][0].keys).to.equal('t');
+  
+    spy.reset();
+    helpers.keydown('q', null, ['shift']);
+    expect(spy.callCount).to.equal(1);
+    expect(spy.args[0][0].keys).to.equal('shift+q');
+  });
 
   it('should set event.matchedTarget correctly', function() {
     var spy = sinon.spy();
