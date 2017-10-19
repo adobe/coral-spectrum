@@ -383,7 +383,7 @@ class Tree extends Component(HTMLElement) {
     event.stopImmediatePropagation();
     
     const item = event.target;
-    this.trigger(`coral-tree:item${item.expanded ? 'expand' : 'collapse'}`, {item});
+    this.trigger(`coral-tree:${item.expanded ? 'expand' : 'collapse'}`, {item});
   }
   
   /** @private */
@@ -486,7 +486,7 @@ class Tree extends Component(HTMLElement) {
   /**
    Triggered when an item expanded.
    
-   @event Coral.Tree#coral-tree:itemexpand.
+   @event Coral.Tree#coral-tree:expand
    
    @param {Object} event
    Event object
@@ -497,7 +497,7 @@ class Tree extends Component(HTMLElement) {
   /**
    Triggered when an item collapsed.
    
-   @event Coral.Tree#coral-tree:itemcollapse.
+   @event Coral.Tree#coral-tree:collapse
    
    @param {Object} event
    Event object

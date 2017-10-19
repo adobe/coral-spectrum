@@ -653,11 +653,11 @@ describe('Coral.Tree', function() {
       });
     });
     
-    describe('#coral-tree:itemexpand', function() {
+    describe('#coral-tree:expand', function() {
       it('should trigger the event if an item is expanded', function(done) {
         const el = helpers.build(window.__html__['Coral.Tree.nested.html']);
         var spy = sinon.spy();
-        el.on('coral-tree:itemexpand', spy);
+        el.on('coral-tree:expand', spy);
         var item = el.items.first();
         item.expanded = true;
         
@@ -669,11 +669,11 @@ describe('Coral.Tree', function() {
       });
     });
     
-    describe('#coral-tree:itemcollapse', function() {
+    describe('#coral-tree:collapse', function() {
       it('should trigger the event if an item is collapsed', function(done) {
         const el = helpers.build(window.__html__['Coral.Tree.items.html']);
         var spy = sinon.spy();
-        el.on('coral-tree:itemcollapse', spy);
+        el.on('coral-tree:collapse', spy);
         var item = el.items.getAll()[1];
         item.expanded = false;
         

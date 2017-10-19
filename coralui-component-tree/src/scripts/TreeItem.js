@@ -179,6 +179,11 @@ class TreeItem extends Component(HTMLElement) {
           else {
             subTreeContainer.hidden = true;
           }
+  
+          // Trigger once the animation is over to inform coral-tree
+          if (triggerEvent) {
+            self.trigger('coral-tree-item:_afterexpandedchanged');
+          }
         });
     
         // Force height to enable transition
@@ -195,11 +200,6 @@ class TreeItem extends Component(HTMLElement) {
         const offsetHeight = subTreeContainer.offsetHeight;
         
         subTreeContainer.style.height = self.expanded ? `${subTreeContainer.scrollHeight}px` : 0;
-      
-        // Trigger once the animation is over to inform coral-tree
-        if (triggerEvent) {
-          self.trigger('coral-tree-item:_afterexpandedchanged');
-        }
       }
       else {
         // Make sure it's animated next time
