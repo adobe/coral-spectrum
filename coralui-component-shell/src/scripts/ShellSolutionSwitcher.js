@@ -84,7 +84,7 @@ class ShellSolutionSwitcher extends Component(HTMLElement) {
     // force dark theme
     this.classList.add('coral--dark');
     
-    const container = this.querySelector('.coral-Shell-solutions-container') || this._elements.container;
+    const container = this.querySelector('.coral3-Shell-solutions-container') || this._elements.container;
     
     // Remove it so we can process solutions
     if (container.parentNode) {
