@@ -17,11 +17,19 @@
 module.exports = function(gulp) {
   const plumber = require('gulp-plumber');
   const eslint = require('gulp-eslint');
+  const config = require(`${__dirname}/../configs/eslint.conf.json`);
+  
+  let src = 'src/scripts/**/*.js';
+  
+  // Lint all components if we're in the top level builder
+  if (process.cwd().slice(-7) === 'coralui') {
+    src = `coralui-*/${src}`;
+  }
   
   gulp.task('lint', function() {
-    return gulp.src('src/scripts/**/*.js')
+    return gulp.src(src)
       .pipe(plumber())
-      .pipe(eslint())
+      .pipe(eslint(config))
       .pipe(eslint.format())
   });
 };
