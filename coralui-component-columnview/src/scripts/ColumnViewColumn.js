@@ -208,6 +208,11 @@ class ColumnViewColumn extends Component(HTMLElement) {
       
       // toggles the selection of the item
       const isSelected = item.hasAttribute('selected');
+      
+      if (!isSelected && this._selectionMode === selectionMode.SINGLE) {
+        item.setAttribute('active', '');
+      }
+      
       item[isSelected ? 'removeAttribute' : 'setAttribute']('selected', '');
     }
   }
