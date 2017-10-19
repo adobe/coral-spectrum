@@ -41,11 +41,7 @@ describe('Coral.Shell.User', function() {
       it('should default to avatar.DEFAULT', function() {
         var user = helpers.build(new Coral.Shell.User());
         expect(user.avatar).to.equal(Coral.Shell.User.avatar.DEFAULT);
-        expect(user._elements.avatar.classList.contains('coral-Icon')).to.be.true;
         expect(user._elements.avatar.classList.contains('coral3-Shell-user-avatar')).to.be.true;
-        expect(user._elements.avatar.classList.contains('coral-Icon--')).to.be.false;
-        expect(user._elements.avatar.classList.contains('coral-Icon--null')).to.be.false;
-        expect(user._elements.avatar.classList.contains('coral-Icon--undefined')).to.be.false;
       });
       
       it('should set the new avatar', function() {
@@ -57,14 +53,10 @@ describe('Coral.Shell.User', function() {
       it('should set the avatar back to default', function() {
         var user = helpers.build(new Coral.Shell.User());
         user.avatar = 'image.png';
-  
-        expect(user._elements.avatar.classList.contains('coral-Icon')).to.be.true;
+        
         user.avatar = Coral.Shell.User.avatar.DEFAULT;
   
         expect(user.avatar).to.equal(Coral.Shell.User.avatar.DEFAULT);
-        expect(user._elements.avatar.classList.contains('coral-Icon--')).to.be.false;
-        expect(user._elements.avatar.classList.contains('coral-Icon--null')).to.be.false;
-        expect(user._elements.avatar.classList.contains('coral-Icon--undefined')).to.be.false;
       });
       
       it('should set the avatar to empty string when the attribute is removed', function() {
