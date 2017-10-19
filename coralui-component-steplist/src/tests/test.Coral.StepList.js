@@ -215,6 +215,24 @@ describe('Coral.StepList', function() {
           done();
         });
       });
+  
+      it('should center the one long label', function(done) {
+        const el = helpers.build(window.__html__['Coral.StepList.longlabel.html']);
+        // Wait 1 more frame until long label is positioned
+        helpers.next(() => {
+          expect(el.selectedItem.label.style.marginLeft).to.equal('120px');
+          done();
+        });
+      });
+  
+      it('should set index to be picked up by CSS', function(done) {
+        const el = helpers.build(window.__html__['Coral.StepList.longlabel.html']);
+        // Wait 1 more frame until long label is positioned
+        helpers.next(() => {
+          expect(el.selectedItem.label.getAttribute('data-coral-step-index')).to.equal(' (2/5)');
+          done();
+        });
+      });
 
       it('should switch all non selected step labels to hidden when new step with long label is added', function(done) {
         const el = helpers.build(window.__html__['Coral.StepList.selectedItem.html']);

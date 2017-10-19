@@ -430,9 +430,29 @@ class StepList extends Component(HTMLElement) {
   }
   
   /** @private */
+  _setHybridLabel(item) {
+    if (this._isHybridMode) {
+      const items = this.items.getAll();
+      const itemIndex = items.indexOf(item);
+      const middle = items.length / 2;
+      const stepSize = 120;
+  
+      // Position item label
+      const marginLeft = (middle - itemIndex) * stepSize - (stepSize / 2);
+      item.label.style.marginLeft = `${marginLeft}px`;
+  
+      // Indicate item index
+      item.label.dataset.coralStepIndex = ` (${(itemIndex + 1)}/${items.length})`;
+    }
+  }
+  
+  /** @private */
   _updateLabels() {
     let hasOversizedLabel = false;
+    const hybridClass = `${CLASSNAME}--hybrid`;
+    
     this._isHybridMode = false;
+    this.classList.remove(hybridClass);
   
     // when the steplist is small no check is needed
     if (this.size === size.SMALL) {
@@ -448,6 +468,8 @@ class StepList extends Component(HTMLElement) {
       if (steps[actualStep]._labelIsHidden) {
         hasOversizedLabel = true;
         this._isHybridMode = true;
+        this.classList.add(hybridClass);
+        
         break;
       }
     }
@@ -457,6 +479,8 @@ class StepList extends Component(HTMLElement) {
         steps[actualStep].label.hidden = !(steps[actualStep].hasAttribute('selected') || !hasOversizedLabel);
       }
     }
+    
+    this._setHybridLabel(this.selectedItem);
   }
   
   /**
