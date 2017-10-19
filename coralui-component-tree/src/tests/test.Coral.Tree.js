@@ -656,32 +656,26 @@ describe('Coral.Tree', function() {
     describe('#coral-tree:expand', function() {
       it('should trigger the event if an item is expanded', function(done) {
         const el = helpers.build(window.__html__['Coral.Tree.nested.html']);
-        var spy = sinon.spy();
-        el.on('coral-tree:expand', spy);
-        var item = el.items.first();
-        item.expanded = true;
-        
-        helpers.next(() => {
-          expect(spy.callCount).to.equal(1);
-          expect(spy.getCall(0).args[0].detail.item).to.equal(item);
+        el.on('coral-tree:expand', (event) => {
+          expect(event.detail.item).to.equal(item);
           done();
         });
+        
+        var item = el.items.first();
+        item.expanded = true;
       });
     });
     
     describe('#coral-tree:collapse', function() {
       it('should trigger the event if an item is collapsed', function(done) {
         const el = helpers.build(window.__html__['Coral.Tree.items.html']);
-        var spy = sinon.spy();
-        el.on('coral-tree:collapse', spy);
-        var item = el.items.getAll()[1];
-        item.expanded = false;
-        
-        helpers.next(() => {
-          expect(spy.callCount).to.equal(1);
-          expect(spy.getCall(0).args[0].detail.item).to.equal(item);
+        el.on('coral-tree:collapse', (event) => {
+          expect(event.detail.item).to.equal(item);
           done();
         });
+        
+        var item = el.items.getAll()[1];
+        item.expanded = false;
       });
     });
   });
