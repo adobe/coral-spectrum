@@ -517,6 +517,24 @@ describe('Coral.Calendar', function() {
         
         expect(el._cursor.month()).to.eql(now.add(1, 'month').month());
       });
+  
+      it('should go to next month on next month button click when max is set', function() {
+        el.value = '2017-07-31';
+        el.max = '2017-08-17';
+        
+        el._elements.next.click();
+        
+        expect(el._cursor.month()).to.eql(moment(el.valueAsDate).add(1, 'month').month());
+      });
+  
+      it('should go to previous month on previous month button click when min is set', function() {
+        el.value = '2017-07-31';
+        el.min = '2017-06-17';
+        
+        el._elements.prev.click();
+        
+        expect(el._cursor.month()).to.eql(moment(el.valueAsDate).subtract(1, 'month').month());
+      });
     
       it('should calculate invalid only once the user interacted with the component', function() {
         el.value = '2000-01-01';

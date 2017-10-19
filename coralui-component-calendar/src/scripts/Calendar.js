@@ -729,7 +729,7 @@ class Calendar extends FormField(Component(HTMLElement)) {
     let newMoment;
     let difference;
     
-    if (el) {
+    if (unit !== timeUnit.MONTH && el) {
       currentActive = el.dataset.date;
       currentMoment = new DateTime.Moment(currentActive);
       newMoment = currentMoment[operator](1, unit);
