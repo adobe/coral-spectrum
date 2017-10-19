@@ -7,7 +7,6 @@
     "url": "https://git.corp.adobe.com/Coral/coralui"
   },
   "devDependencies": {
-    "@adobe/eslint-config-adobe-js": "0.0.2",
     "@coralui/coralui-theme-cloudui": "^9.3.0",
     "coralui-component-accordion": "file:coralui-component-accordion",
     "coralui-component-actionbar": "file:coralui-component-actionbar",

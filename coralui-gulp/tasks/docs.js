@@ -15,47 +15,10 @@
  * from Adobe Systems Incorporated.
  */
 module.exports = function(gulp) {
-  var path = require('path');
-  var runSequence = require('run-sequence').use(gulp);
-  var jsdoc = require('gulp-jsdoc3');
-  
-  var resourcesPath = path.resolve(path.join('node_modules', '@coralui', 'coralui-guide-resources'));
-  var templatePath = path.join(resourcesPath, 'jsdoc-templates');
-  
-  var config = {
-    opts: {
-      template: templatePath,
-      destination: 'build/documentation/',
-      'private': false
-    },
-    plugins: [],
-    tags: {
-      allowUnknownTags: true
-    }
-  };
-  
-  gulp.task('docs-copy-css', function() {
-    return gulp.src(resourcesPath + '/css/**/*')
-      .pipe(gulp.dest('build/documentation/styles/'));
-  });
-  
-  gulp.task('docs-copy-js', function() {
-    return gulp.src(resourcesPath + '/js/**/*')
-      .pipe(gulp.dest('build/documentation/scripts/'));
-  });
-  
-  gulp.task('docs-jsdoc', function() {
-    return gulp.src([
-      './src/scripts/**/*.js',
-      './node_modules/coralui-*/src/**/*.js'
-    ], {read: false})
-      .pipe(jsdoc(config));
-  });
-  
+  const exec = require('child_process').exec;
+
+  // @todo due to https://github.com/nanopx/gulp-esdoc/issues/19, we can't use gulp-esdoc
   gulp.task('docs', function() {
-    runSequence(
-      ['docs-copy-css', 'docs-copy-js'],
-      'docs-jsdoc'
-    );
+    return exec('node_modules/.bin/esdoc -c node_modules/coralui-gulp/configs/esdoc.conf.json');
   });
 };

@@ -1,0 +1,20 @@
+{
+  "source": "./src/scripts",
+  "destination": "./build/documentation",
+  "plugins": [
+    {
+      "name": "esdoc-standard-plugin"
+    },
+    {
+      "name": "esdoc-member-plugin"
+    },
+    {
+      "name": "esdoc-accessor-plugin",
+      "option": {
+        "access": [
+          "public"
+        ]
+      }
+    }
+  ]
+}

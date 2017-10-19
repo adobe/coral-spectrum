@@ -17,7 +17,6 @@
 module.exports = function(gulp) {
   const plumber = require('gulp-plumber');
   const eslint = require('gulp-eslint');
-  const config = require(`${__dirname}/../configs/eslint.conf.json`);
   
   let src = 'src/scripts/**/*.js';
   
@@ -29,7 +28,7 @@ module.exports = function(gulp) {
   gulp.task('lint', function() {
     return gulp.src(src)
       .pipe(plumber())
-      .pipe(eslint(config))
+      .pipe(eslint())
       .pipe(eslint.format())
   });
 };

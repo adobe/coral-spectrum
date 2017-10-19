@@ -438,7 +438,7 @@ class StepList extends Component(HTMLElement) {
       const stepSize = 120;
   
       // Position item label
-      const marginLeft = (middle - itemIndex) * stepSize - (stepSize / 2);
+      const marginLeft = (middle - itemIndex) * stepSize - stepSize / 2;
       item.label.style.marginLeft = `${marginLeft}px`;
   
       // Indicate item index
