@@ -20,26 +20,26 @@ describe('Coral.Icon', function() {
   describe('Instantiation', function() {
     it('should be possible using new', function() {
       var icon = helpers.build(new Coral.Icon());
-      expect(icon.classList.contains('coral-Icon')).to.be.true;
-      expect(icon.classList.contains('coral-Icon--sizeS')).to.be.true;
-      expect(icon.classList.contains('coral-Icon--null')).to.be.false;
-      expect(icon.classList.contains('coral-Icon--undefined')).to.be.false;
+      expect(icon.classList.contains('coral3-Icon')).to.be.true;
+      expect(icon.classList.contains('coral3-Icon--sizeS')).to.be.true;
+      expect(icon.classList.contains('coral3-Icon--null')).to.be.false;
+      expect(icon.classList.contains('coral3-Icon--undefined')).to.be.false;
     });
 
     it('should be possible using createElement', function() {
       var icon = helpers.build(document.createElement('coral-icon'));
-      expect(icon.classList.contains('coral-Icon')).to.be.true;
-      expect(icon.classList.contains('coral-Icon--sizeS')).to.be.true;
-      expect(icon.classList.contains('coral-Icon--null')).to.be.false;
-      expect(icon.classList.contains('coral-Icon--undefined')).to.be.false;
+      expect(icon.classList.contains('coral3-Icon')).to.be.true;
+      expect(icon.classList.contains('coral3-Icon--sizeS')).to.be.true;
+      expect(icon.classList.contains('coral3-Icon--null')).to.be.false;
+      expect(icon.classList.contains('coral3-Icon--undefined')).to.be.false;
     });
 
     it('should be possible using markup', function() {
       var icon = helpers.build('<coral-icon></coral-icon>');
-      expect(icon.classList.contains('coral-Icon')).to.be.true;
-      expect(icon.classList.contains('coral-Icon--sizeS')).to.be.true;
-      expect(icon.classList.contains('coral-Icon--null')).to.be.false;
-      expect(icon.classList.contains('coral-Icon--undefined')).to.be.false;
+      expect(icon.classList.contains('coral3-Icon')).to.be.true;
+      expect(icon.classList.contains('coral3-Icon--sizeS')).to.be.true;
+      expect(icon.classList.contains('coral3-Icon--null')).to.be.false;
+      expect(icon.classList.contains('coral3-Icon--undefined')).to.be.false;
     });
 
     it('should be possible to clone using markup', function() {
@@ -60,8 +60,8 @@ describe('Coral.Icon', function() {
 
       it('should be empty string initially', function() {
         var icon = helpers.build('<coral-icon></coral-icon>');
-        expect(icon.classList.contains('coral-Icon')).to.be.true;
-        expect(icon.classList.contains('coral-Icon--sizeS')).to.be.true;
+        expect(icon.classList.contains('coral3-Icon')).to.be.true;
+        expect(icon.classList.contains('coral3-Icon--sizeS')).to.be.true;
         expect(icon.icon).to.equal('');
       });
 
@@ -70,7 +70,7 @@ describe('Coral.Icon', function() {
         expect(icon.icon).to.equal('add');
         expect(icon.getAttribute('icon')).to.equal('add');
         expect(icon.size).to.equal(Coral.Icon.size.SMALL);
-        expect(icon.classList.contains('coral-Icon--add')).to.be.true;
+        expect(icon.classList.contains('coral3-Icon--add')).to.be.true;
       });
 
       it('should not have class for empty icon', function() {
@@ -78,7 +78,7 @@ describe('Coral.Icon', function() {
         expect(icon.icon).to.equal('');
         expect(icon.getAttribute('icon')).to.equal('');
         expect(icon.size).to.equal(Coral.Icon.size.SMALL);
-        expect(icon.classList.contains('coral-Icon--')).to.be.false;
+        expect(icon.classList.contains('coral3-Icon--')).to.be.false;
       });
 
       it('should support arbitrary relative URLs', function() {
@@ -123,27 +123,27 @@ describe('Coral.Icon', function() {
         expect(icon.size).to.equal('M');
         expect(icon.size).to.equal(Coral.Icon.size.MEDIUM);
         expect(icon.getAttribute('size')).to.equal('M');
-        expect(icon.classList.contains('coral-Icon--sizeM')).to.be.true;
+        expect(icon.classList.contains('coral3-Icon--sizeM')).to.be.true;
       });
 
       it('should default empty to default', function() {
         var icon = helpers.build('<coral-icon size=""></coral-icon>');
         expect(icon.size).to.equal(Coral.Icon.size.SMALL);
-        expect(icon.classList.contains('coral-Icon--sizeS')).to.be.true;
+        expect(icon.classList.contains('coral3-Icon--sizeS')).to.be.true;
       });
 
       it('should default invalid values to default', function() {
         var icon = helpers.build('<coral-icon size="megalarge"></coral-icon>');
         expect(icon.size).to.equal(Coral.Icon.size.SMALL);
         expect(icon.getAttribute('size')).to.equal(Coral.Icon.size.SMALL);
-        expect(icon.classList.contains('coral-Icon--sizeS')).to.be.true;
+        expect(icon.classList.contains('coral3-Icon--sizeS')).to.be.true;
       });
 
       it('should accept lowercase values', function() {
         var icon = helpers.build('<coral-icon size="l"></coral-icon>');
         expect(icon.size).to.equal(Coral.Icon.size.LARGE);
         expect(icon.getAttribute('size')).to.equal(Coral.Icon.size.LARGE);
-        expect(icon.classList.contains('coral-Icon--sizeL')).to.be.true;
+        expect(icon.classList.contains('coral3-Icon--sizeL')).to.be.true;
       });
     });
 
@@ -162,11 +162,11 @@ describe('Coral.Icon', function() {
       it('should default to null', function() {
         var icon = helpers.build(new Coral.Icon());
         expect(icon.icon).to.equal('');
-        expect(icon.classList.contains('coral-Icon')).to.be.true;
-        expect(icon.classList.contains('coral-Icon--sizeS')).to.be.true;
-        expect(icon.classList.contains('coral-Icon--')).to.be.false;
-        expect(icon.classList.contains('coral-Icon--null')).to.be.false;
-        expect(icon.classList.contains('coral-Icon--undefined')).to.be.false;
+        expect(icon.classList.contains('coral3-Icon')).to.be.true;
+        expect(icon.classList.contains('coral3-Icon--sizeS')).to.be.true;
+        expect(icon.classList.contains('coral3-Icon--')).to.be.false;
+        expect(icon.classList.contains('coral3-Icon--null')).to.be.false;
+        expect(icon.classList.contains('coral3-Icon--undefined')).to.be.false;
       });
 
       it('should set the new icon', function() {
@@ -175,7 +175,7 @@ describe('Coral.Icon', function() {
         icon.icon = 'add';
 
         expect(icon.hasAttribute('icon')).to.be.true;
-        expect(icon.classList.contains('coral-Icon--add')).to.be.true;
+        expect(icon.classList.contains('coral3-Icon--add')).to.be.true;
       });
 
       it('should trim the value', function() {
@@ -184,7 +184,7 @@ describe('Coral.Icon', function() {
         icon.icon = ' add ';
 
         expect(icon.hasAttribute('icon')).to.be.true;
-        expect(icon.classList.contains('coral-Icon--add')).to.be.true;
+        expect(icon.classList.contains('coral3-Icon--add')).to.be.true;
       });
 
       it('should convert everything to a string', function() {
@@ -197,7 +197,7 @@ describe('Coral.Icon', function() {
         expect(icon.icon).to.equal('true');
 
         expect(icon.hasAttribute('icon')).to.be.true;
-        expect(icon.classList.contains('coral-Icon--true')).to.be.true;
+        expect(icon.classList.contains('coral3-Icon--true')).to.be.true;
       });
 
       it('should set with an attribute', function() {
@@ -206,59 +206,59 @@ describe('Coral.Icon', function() {
         icon.setAttribute('icon', 'add');
 
         expect(icon.getAttribute('icon')).to.equal('add');
-        expect(icon.classList.contains('coral-Icon--add')).to.be.true;
+        expect(icon.classList.contains('coral3-Icon--add')).to.be.true;
       });
 
       it('should not leave class traces', function() {
         var icon = new Coral.Icon();
-        icon.classList.add('coral-Icon--test');
-        expect(icon.classList.contains('coral-Icon--test')).to.be.true;
+        icon.classList.add('coral3-Icon--test');
+        expect(icon.classList.contains('coral3-Icon--test')).to.be.true;
 
         icon.icon = 'adobeSocial';
         icon.icon = 'add';
 
-        expect(icon.classList.contains('coral-Icon--add')).to.be.true;
+        expect(icon.classList.contains('coral3-Icon--add')).to.be.true;
       });
 
       it('should remove the icon with null', function() {
         var icon = new Coral.Icon();
         icon.icon = 'add';
 
-        expect(icon.classList.contains('coral-Icon--add')).to.be.true;
+        expect(icon.classList.contains('coral3-Icon--add')).to.be.true;
 
         icon.icon = null;
 
         expect(icon.icon).to.equal('');
-        expect(icon.classList.contains('coral-Icon--')).to.be.false;
-        expect(icon.classList.contains('coral-Icon--null')).to.be.false;
-        expect(icon.classList.contains('coral-Icon--undefined')).to.be.false;
+        expect(icon.classList.contains('coral3-Icon--')).to.be.false;
+        expect(icon.classList.contains('coral3-Icon--null')).to.be.false;
+        expect(icon.classList.contains('coral3-Icon--undefined')).to.be.false;
       });
 
       it('should remove the icon with undefined', function() {
         var icon = new Coral.Icon();
         icon.icon = 'add';
 
-        expect(icon.classList.contains('coral-Icon--add')).to.be.true;
+        expect(icon.classList.contains('coral3-Icon--add')).to.be.true;
 
         icon.icon = undefined;
 
         expect(icon.icon).to.equal('');
-        expect(icon.classList.contains('coral-Icon--null')).to.be.false;
-        expect(icon.classList.contains('coral-Icon--undefined')).to.be.false;
+        expect(icon.classList.contains('coral3-Icon--null')).to.be.false;
+        expect(icon.classList.contains('coral3-Icon--undefined')).to.be.false;
       });
 
       it('should remove the icon with empty string', function() {
         var icon = new Coral.Icon();
         icon.icon = 'add';
 
-        expect(icon.classList.contains('coral-Icon--add')).to.be.true;
+        expect(icon.classList.contains('coral3-Icon--add')).to.be.true;
 
         icon.icon = '';
 
         expect(icon.icon).to.equal('');
-        expect(icon.classList.contains('coral-Icon--')).to.be.false;
-        expect(icon.classList.contains('coral-Icon--null')).to.be.false;
-        expect(icon.classList.contains('coral-Icon--undefined')).to.be.false;
+        expect(icon.classList.contains('coral3-Icon--')).to.be.false;
+        expect(icon.classList.contains('coral3-Icon--null')).to.be.false;
+        expect(icon.classList.contains('coral3-Icon--undefined')).to.be.false;
       });
 
       it('should remove the icon when the attribute is removed', function() {
@@ -266,7 +266,7 @@ describe('Coral.Icon', function() {
         icon.setAttribute('icon', 'add');
 
         expect(icon.getAttribute('icon')).to.equal('add');
-        expect(icon.classList.contains('coral-Icon--add')).to.be.true;
+        expect(icon.classList.contains('coral3-Icon--add')).to.be.true;
 
         icon.removeAttribute('icon');
 
@@ -287,7 +287,7 @@ describe('Coral.Icon', function() {
         icon.size = Coral.Icon.size.LARGE;
         expect(icon.size).to.equal(Coral.Icon.size.LARGE);
 
-        expect(icon.classList.contains('coral-Icon--sizeL')).to.be.true;
+        expect(icon.classList.contains('coral3-Icon--sizeL')).to.be.true;
       });
 
       it('should accept lowercase values', function() {
@@ -296,7 +296,7 @@ describe('Coral.Icon', function() {
         icon.size = Coral.Icon.size.LARGE.toLowerCase();
         expect(icon.size).to.equal(Coral.Icon.size.LARGE);
 
-        expect(icon.classList.contains('coral-Icon--sizeL')).to.be.true;
+        expect(icon.classList.contains('coral3-Icon--sizeL')).to.be.true;
       });
       
       it('should be set with an attribute', function() {
@@ -306,7 +306,7 @@ describe('Coral.Icon', function() {
         expect(icon.size).to.equal(Coral.Icon.size.LARGE);
 
         expect(icon.getAttribute('size')).to.equal('L');
-        expect(icon.classList.contains('coral-Icon--sizeL')).to.be.true;
+        expect(icon.classList.contains('coral3-Icon--sizeL')).to.be.true;
       });
 
       it('should discard values not part of the enum', function() {
@@ -320,7 +320,7 @@ describe('Coral.Icon', function() {
         icon.size = -1;
         // Fallbacks to default enum which is SMALL
         expect(icon.size).to.equal(Coral.Icon.size.SMALL);
-        expect(icon.classList.contains('coral-Icon--sizeS')).to.be.true;
+        expect(icon.classList.contains('coral3-Icon--sizeS')).to.be.true;
       });
 
       it('should discard unknown attribute', function() {
@@ -333,13 +333,13 @@ describe('Coral.Icon', function() {
 
       it('should not remove unknown size classes', function() {
         var icon = new Coral.Icon();
-        icon.classList.add('coral-Icon--sizeME');
+        icon.classList.add('coral3-Icon--sizeME');
 
         icon.size = 'XS';
         expect(icon.size).to.equal(Coral.Icon.size.EXTRA_SMALL);
 
-        expect(icon.classList.contains('coral-Icon--sizeXS')).to.be.true;
-        expect(icon.classList.contains('coral-Icon--sizeME')).to.be.true;
+        expect(icon.classList.contains('coral3-Icon--sizeXS')).to.be.true;
+        expect(icon.classList.contains('coral3-Icon--sizeME')).to.be.true;
       });
     });
   });

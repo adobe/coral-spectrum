@@ -1205,7 +1205,7 @@ describe('Coral.Select', function() {
         
         expect(el.classList.contains('coral3-Select--default')).to.be.false;
         expect(el.classList.contains('coral3-Select--quiet')).to.be.false;
-        expect(el._elements.button.classList.contains('coral-Button--quiet')).to.be.false;
+        expect(el._elements.button.variant).to.not.equal(Coral.Button.variant.QUIET);
       });
     });
 

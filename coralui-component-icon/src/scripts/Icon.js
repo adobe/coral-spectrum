@@ -22,7 +22,7 @@ import {transform, validate} from 'coralui-util';
  
  @ignore
  */
-const ICON_REGEX = /[\s?]coral-Icon--(?!size(XXS|XS|S|M|L))\w+/g;
+const ICON_REGEX = /[\s?]coral3-Icon--(?!size(XXS|XS|S|M|L))\w+/g;
 
 /**
  Regex used to match URLs. Assume it's a URL if it has a slash, colon, or dot.
@@ -63,7 +63,7 @@ const size = {
 };
 
 // icon's base classname
-const CLASSNAME = 'coral-Icon';
+const CLASSNAME = 'coral3-Icon';
 
 // builds an array containing all possible size classnames. this will be used to remove classnames when the size
 // changes

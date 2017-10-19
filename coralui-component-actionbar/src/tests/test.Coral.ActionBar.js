@@ -122,8 +122,8 @@ describe('Coral.ActionBar', function() {
     it('should generate 2 more buttons that are "hidden" (offscreen) by default', function() {
       const bar = helpers.build(window.__html__['Coral.ActionBar.empty.html']);
       
-      var leftButton = bar.primary.querySelectorAll('.coral-Button[coral-actionbar-more]');
-      var rightButton = bar.secondary.querySelectorAll('.coral-Button[coral-actionbar-more]');
+      var leftButton = bar.primary.querySelectorAll('button[is="coral-button"][coral-actionbar-more]');
+      var rightButton = bar.secondary.querySelectorAll('button[is="coral-button"][coral-actionbar-more]');
 
       expect(leftButton.length).to.equal(1);
       expect(rightButton.length).to.equal(1);

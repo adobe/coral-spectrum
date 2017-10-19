@@ -9,18 +9,18 @@ describe('Coral.AnchorButton', function() {
   describe('Instantiation', function() {
     it('should be possible using new', function() {
       var button = helpers.build(new Coral.AnchorButton());
-      expect(button.classList.contains('coral-Button')).to.be.true;
+      expect(button.classList.contains('coral3-Button')).to.be.true;
       expect(button.hasAttribute('variant')).to.be.true;
       expect(button.hasAttribute('block')).to.be.false;
       expect(button.hasAttribute('label')).to.be.false;
       expect(button.hasAttribute('icon')).to.be.false;
-      expect(button.classList.contains('coral-Button')).to.be.true;
+      expect(button.classList.contains('coral3-Button')).to.be.true;
     });
 
     it('should be possible using createElement', function() {
       var button = helpers.build(document.createElement('a', 'coral-anchorbutton'));
-      expect(button.classList.contains('coral-Button')).to.be.true;
-      expect(button.classList.contains('coral-Button--secondary')).to.be.true;
+      expect(button.classList.contains('coral3-Button')).to.be.true;
+      expect(button.classList.contains('coral3-Button--secondary')).to.be.true;
       expect(button.hasAttribute('variant')).to.be.true;
       expect(button.hasAttribute('block')).to.be.false;
       expect(button.hasAttribute('label')).to.be.false;
@@ -73,7 +73,7 @@ describe('Coral.AnchorButton', function() {
         expect(button.label.innerHTML).to.equal('');
         expect(button.hasAttribute('label')).to.be.false;
         expect(button.textContent).to.equal('');
-        expect(button.classList.contains('coral-Button')).to.be.true;
+        expect(button.classList.contains('coral3-Button')).to.be.true;
       });
 
       it('should use the textContent as the initial value', function() {
@@ -82,7 +82,7 @@ describe('Coral.AnchorButton', function() {
 
         expect(button.hasAttribute('label')).to.be.false;
         expect(button.textContent).to.equal('Button');
-        expect(button.classList.contains('coral-Button')).to.be.true;
+        expect(button.classList.contains('coral3-Button')).to.be.true;
       });
 
       it('should resync the icon once the label is modified', function() {
@@ -97,7 +97,7 @@ describe('Coral.AnchorButton', function() {
         button.label.innerHTML = 'Hello';
         expect(button.label.innerHTML).to.equal('Hello');
         expect(button.textContent).to.equal('Hello');
-        expect(button.classList.contains('coral-Button')).to.be.true;
+        expect(button.classList.contains('coral3-Button')).to.be.true;
       }); // end it
   
       it('should change to square if the label is removed', function() {
@@ -112,7 +112,7 @@ describe('Coral.AnchorButton', function() {
         button.label.textContent = '';
     
         expect(button.textContent).to.equal('');
-        expect(button.classList.contains('coral-Button')).to.be.true;
+        expect(button.classList.contains('coral3-Button')).to.be.true;
         expect(button.icon).to.equal('add');
       }); // end it
   
@@ -127,7 +127,7 @@ describe('Coral.AnchorButton', function() {
         button.label.textContent = 'Add';
     
         expect(button.textContent).to.equal('Add');
-        expect(button.classList.contains('coral-Button')).to.be.true;
+        expect(button.classList.contains('coral3-Button')).to.be.true;
         expect(button.icon).to.equal('add');
       }); // end it
     }); // end describe label
@@ -139,7 +139,7 @@ describe('Coral.AnchorButton', function() {
         expect(button.icon).to.equal('');
         expect(button._getIconElement().parentNode).to.be.null;
         expect(button.hasAttribute('icon')).to.be.false;
-        expect(button.classList.contains('coral-Button')).to.be.true;
+        expect(button.classList.contains('coral3-Button')).to.be.true;
       });
 
       it('should set the new icon', function() {
@@ -150,7 +150,7 @@ describe('Coral.AnchorButton', function() {
         
         expect(button._getIconElement()).to.exist;
         expect(button._getIconElement().icon).to.equal('add');
-        expect(button.classList.contains('coral-Button')).to.be.true;
+        expect(button.classList.contains('coral3-Button')).to.be.true;
       });
 
       it('should not be square when there is a label', function() {
@@ -161,7 +161,7 @@ describe('Coral.AnchorButton', function() {
         expect(button.textContent).to.equal('Add');
         expect(button._getIconElement()).to.exist;
         expect(button._getIconElement().icon).to.equal('add');
-        expect(button.classList.contains('coral-Button')).to.be.true;
+        expect(button.classList.contains('coral3-Button')).to.be.true;
       });
 
       it('should not create a new icon if the value is updated', function() {
@@ -176,7 +176,7 @@ describe('Coral.AnchorButton', function() {
         
         expect(button._getIconElement()).to.exist;
         expect(button._getIconElement().icon).to.equal('share');
-        expect(button.classList.contains('coral-Button')).to.be.true;
+        expect(button.classList.contains('coral3-Button')).to.be.true;
       });
 
       it('should hide the icon element once the icon is set to empty string', function() {
@@ -190,7 +190,7 @@ describe('Coral.AnchorButton', function() {
         expect(button._getIconElement()).to.exist;
         expect(button._getIconElement().icon).to.equal('');
         expect(button._getIconElement().parentNode).to.be.null;
-        expect(button.classList.contains('coral-Button')).to.be.true;
+        expect(button.classList.contains('coral3-Button')).to.be.true;
       });
     }); // end describe icon
 
@@ -226,15 +226,15 @@ describe('Coral.AnchorButton', function() {
       it('should default to medium', function() {
         const button = helpers.build('<a is="coral-anchorbutton" href="#"></a>');
         expect(button.size).to.equal(Coral.AnchorButton.size.MEDIUM);
-        expect(button.classList.contains('coral-Button--large')).to.be.false;
-        expect(button.classList.contains('coral-Button')).to.be.true;
+        expect(button.classList.contains('coral3-Button--large')).to.be.false;
+        expect(button.classList.contains('coral3-Button')).to.be.true;
       });
 
       it('should set the size modifier', function() {
         const button = helpers.build('<a is="coral-anchorbutton" size="L" href="#"></a>');
         expect(button.size).to.equal(Coral.AnchorButton.size.LARGE);
-        expect(button.classList.contains('coral-Button--large')).to.be.true;
-        expect(button.classList.contains('coral-Button')).to.be.true;
+        expect(button.classList.contains('coral3-Button--large')).to.be.true;
+        expect(button.classList.contains('coral3-Button')).to.be.true;
       });
     });
 
@@ -244,24 +244,24 @@ describe('Coral.AnchorButton', function() {
         const button = helpers.build('<a is="coral-anchorbutton" href="#"></a>');
         expect(button.block).to.be.false;
         expect(button.hasAttribute('block')).to.be.false;
-        expect(button.classList.contains('coral-Button--block')).to.be.false;
-        expect(button.classList.contains('coral-Button')).to.be.true;
+        expect(button.classList.contains('coral3-Button--block')).to.be.false;
+        expect(button.classList.contains('coral3-Button')).to.be.true;
       });
 
       it('should set the size modifier', function() {
         const button = helpers.build('<a is="coral-anchorbutton" href="#" block></a>');
         expect(button.block).to.be.true;
         expect(button.hasAttribute('block')).to.be.true;
-        expect(button.classList.contains('coral-Button--block')).to.be.true;
-        expect(button.classList.contains('coral-Button')).to.be.true;
+        expect(button.classList.contains('coral3-Button--block')).to.be.true;
+        expect(button.classList.contains('coral3-Button')).to.be.true;
       });
 
       it('should behave like an attribute boolean', function() {
         const button = helpers.build('<a is="coral-anchorbutton" href="#" block="false"></a>');
         expect(button.block).to.be.true;
         expect(button.hasAttribute('block')).to.be.true;
-        expect(button.classList.contains('coral-Button--block')).to.be.true;
-        expect(button.classList.contains('coral-Button')).to.be.true;
+        expect(button.classList.contains('coral3-Button--block')).to.be.true;
+        expect(button.classList.contains('coral3-Button')).to.be.true;
       });
     });
 
@@ -271,7 +271,7 @@ describe('Coral.AnchorButton', function() {
         const button = helpers.build('<a is="coral-anchorbutton" href="#"></a>');
         expect(button.variant).to.equal(Coral.AnchorButton.variant.DEFAULT);
         expect(button.hasAttribute('variant')).to.be.true;
-        expect(button.classList.contains('coral-Button')).to.be.true;
+        expect(button.classList.contains('coral3-Button')).to.be.true;
       });
 
       it('should set the new variant', function() {
@@ -279,32 +279,32 @@ describe('Coral.AnchorButton', function() {
         expect(button.variant).to.equal('primary');
         expect(button.variant).to.equal(Coral.AnchorButton.variant.PRIMARY);
         expect(button.getAttribute('variant')).to.equal('primary');
-        expect(button.classList.contains('coral-Button--primary')).to.be.true;
-        expect(button.classList.contains('coral-Button')).to.be.true;
+        expect(button.classList.contains('coral3-Button--primary')).to.be.true;
+        expect(button.classList.contains('coral3-Button')).to.be.true;
       });
 
       it('should fall back to default variant on empty variant', function() {
         const button = helpers.build('<a is="coral-anchorbutton" href="#" variant=""></a>');
         expect(button.variant).to.equal(Coral.AnchorButton.variant.DEFAULT);
         expect(button.getAttribute('variant')).to.equal(Coral.AnchorButton.variant.DEFAULT);
-        expect(button.classList.contains('coral-Button')).to.be.true;
+        expect(button.classList.contains('coral3-Button')).to.be.true;
       });
 
       it('should fall back to default variant for invalid variant', function() {
         const button = helpers.build('<a is="coral-anchorbutton" href="#" variant="invalidvariant"></a>');
         expect(button.variant).to.equal(Coral.AnchorButton.variant.DEFAULT);
         expect(button.getAttribute('variant')).to.equal(Coral.AnchorButton.variant.DEFAULT);
-        expect(button.classList.contains('coral-Button')).to.be.true;
+        expect(button.classList.contains('coral3-Button')).to.be.true;
       });
 
       it('should remove variant classnames when variant changes', function() {
         const button = helpers.build('<a is="coral-anchorbutton" href="#" variant="primary"></a>');
         expect(button.variant).to.equal(Coral.AnchorButton.variant.PRIMARY);
-        expect(button.classList.contains('coral-Button--primary')).to.be.true;
+        expect(button.classList.contains('coral3-Button--primary')).to.be.true;
 
         button.variant = Coral.AnchorButton.variant.WARNING;
-        expect(button.classList.contains('coral-Button--warning')).to.be.true;
-        expect(button.classList.contains('coral-Button--primary')).to.be.false;
+        expect(button.classList.contains('coral3-Button--warning')).to.be.true;
+        expect(button.classList.contains('coral3-Button--primary')).to.be.false;
       });
     });
   
@@ -316,13 +316,13 @@ describe('Coral.AnchorButton', function() {
       expect(button.variant).to.equal(Coral.AnchorButton.variant.PRIMARY);
       expect(button.icon, 'icon value').to.equal('share');
       expect(button.label.innerHTML, 'innerHTML').to.equal('Share');
-      expect(button.classList.contains('coral-Button--large')).to.be.true;
-      expect(button.classList.contains('coral-Button--block')).to.be.true;
-      expect(button.classList.contains('coral-Button--primary')).to.be.true;
+      expect(button.classList.contains('coral3-Button--large')).to.be.true;
+      expect(button.classList.contains('coral3-Button--block')).to.be.true;
+      expect(button.classList.contains('coral3-Button--primary')).to.be.true;
       expect(button._getIconElement()).to.exist;
       expect(button._getIconElement().icon, 'elements.icon.icon').to.equal('share');
       expect(button.textContent, 'text content').to.equal('Share');
-      expect(button.classList.contains('coral-Button')).to.be.true;
+      expect(button.classList.contains('coral3-Button')).to.be.true;
     }); // end variant
   }); // end describe markup
 
@@ -340,7 +340,7 @@ describe('Coral.AnchorButton', function() {
         var button = new Coral.AnchorButton();
         button.icon = 'add';
         expect(button.hasAttribute('icon')).to.be.false;
-        expect(button._getIconElement().classList.contains('coral-Icon--add')).to.be.true;
+        expect(button._getIconElement().classList.contains('coral3-Icon--add')).to.be.true;
       });
 
       it('should convert everything to string', function() {
@@ -400,7 +400,7 @@ describe('Coral.AnchorButton', function() {
         button.icon = 'add';
         
         expect(button._getIconElement().size).to.equal(Coral.Icon.size.LARGE);
-        expect(button._getIconElement().classList.contains('coral-Icon--sizeL')).to.be.true;
+        expect(button._getIconElement().classList.contains('coral3-Icon--sizeL')).to.be.true;
       });
 
       it('should set the new size even if icon is not set', function() {
@@ -426,7 +426,7 @@ describe('Coral.AnchorButton', function() {
         button.iconSize = Coral.Icon.size.LARGE.toLowerCase();
         expect(button.iconSize).to.equal(Coral.Icon.size.LARGE);
         expect(button._getIconElement().size).to.equal(Coral.Icon.size.LARGE);
-        expect(button._getIconElement().classList.contains('coral-Icon--sizeL')).to.be.true;
+        expect(button._getIconElement().classList.contains('coral3-Icon--sizeL')).to.be.true;
       });
 
       it('should be set with an attribute', function() {
@@ -473,7 +473,7 @@ describe('Coral.AnchorButton', function() {
         expect(button.iconSize).to.equal('L');
         expect(button._getIconElement().size).to.equal('L');
         expect(button._getIconElement().icon).to.equal('delete');
-        expect(button._getIconElement().classList.contains('coral-Icon--sizeL')).to.be.true;
+        expect(button._getIconElement().classList.contains('coral3-Icon--sizeL')).to.be.true;
       });
     });
   });
@@ -498,7 +498,7 @@ describe('Coral.AnchorButton', function() {
     it('should set is-select on keyDown', function() {
       var button = helpers.build(new Coral.AnchorButton());
       
-      expect(button.classList.contains('coral-Button')).to.be.true;
+      expect(button.classList.contains('coral3-Button')).to.be.true;
       expect(button.classList.contains('is-selected')).to.be.false;
 
       helpers.keydown('space', button);
