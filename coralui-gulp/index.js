@@ -7,6 +7,7 @@ module.exports = function(gulp) {
   require('./tasks/clean.js')(gulp);
   require('./tasks/lint.js')(gulp);
   require('./tasks/i18n.js')(gulp);
+  require('./tasks/examples.js')(gulp);
   require('./tasks/docs.js')(gulp);
   require('./tasks/templates.js')(gulp);
   require('./tasks/styles.js')(gulp);
@@ -18,14 +19,46 @@ module.exports = function(gulp) {
   require('./tasks/watch.js')(gulp);
   
   gulp.task('build', function() {
-    runSequence('clean', 'styles', 'theme', 'resources', 'templates', 'scripts');
+    runSequence(
+      'clean',
+      'styles',
+      'theme',
+      'resources',
+      'templates',
+      'scripts'
+    );
   });
   
   gulp.task('dev', function() {
-    runSequence('clean', 'lint', 'docs', 'styles', 'theme', 'resources', 'templates', 'scripts', 'minify', 'tests-watch', 'watch');
+    runSequence(
+      'clean',
+      'lint',
+      'styles',
+      'theme',
+      'resources',
+      'templates',
+      'scripts',
+      'tests-watch',
+      'watch',
+      'minify',
+      'examples',
+      'docs'
+    );
   });
   
   gulp.task('default', function() {
-    runSequence('clean', 'lint', 'docs', 'styles', 'theme', 'resources', 'templates', 'scripts', 'minify', 'tests');
+    runSequence(
+      'clean',
+      'lint',
+      'styles',
+      'theme',
+      'resources',
+      'templates',
+      'scripts',
+      'tests',
+      'minify',
+      'examples',
+      'docs'
+    );
   });
 };
