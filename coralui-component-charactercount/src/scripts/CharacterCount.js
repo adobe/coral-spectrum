@@ -15,21 +15,23 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {transform} from 'coralui-util';
 
 const CLASSNAME = 'coral3-CharacterCount';
 
 /**
- Enumeration representing the possible targets for the CharacterCount.
+ Enumeration for {@link CharacterCount} targets.
  
- @enum {String}
- @memberof Coral.CharacterCount
+ @typedef {Object} CharacterCountTargetEnum
+ 
+ @property {String} PREVIOUS
+ Relates the CharacterCount to the previous sibling.
+ @property {String} NEXT
+ Relates the CharacterCount to the next sibling.
  */
 const target = {
-  /** Relates the CharacterCount to the previous sibling. */
   PREVIOUS: '_prev',
-  /** Relates the CharacterCount to the next sibling. */
   NEXT: '_next'
 };
 
@@ -37,18 +39,17 @@ const target = {
  @class Coral.CharacterCount
  @classdesc A CharacterCount component
  @htmltag coral-charactercount
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class CharacterCount extends Component(HTMLElement) {
+class CharacterCount extends ComponentMixin(HTMLElement) {
   /**
-   The target Textfield or Textarea for this component. It accepts values from {@link Coral.CharacterCount.target},
+   The target Textfield or Textarea for this component. It accepts values from {@link CharacterCountTargetEnum},
    as well as any DOM element or CSS selector.
    
-   @type {Coral.CharacterCount.target|HTMLElement|String}
-   @default Coral.CharacterCount.target.PREVIOUS
+   @type {HTMLElement|String}
+   @default CharacterCountTargetEnum.PREVIOUS
    @htmlattribute target
-   @memberof Coral.CharacterCount#
    */
   get target() {
     return this._target || target.PREVIOUS;
@@ -94,7 +95,6 @@ class CharacterCount extends Component(HTMLElement) {
    @default null
    @htmlattribute maxlength
    @htmlattributereflected
-   @memberof Coral.CharacterCount#
    */
   get maxLength() {
     return this._maxLength || null;
@@ -127,13 +127,19 @@ class CharacterCount extends Component(HTMLElement) {
     }
   }
   
-  // Expose enumerations
+  /**
+   Returns {@link CharacterCount} target options.
+   
+   @return {CharacterCountTargetEnum}
+   */
   static get target() { return target; }
   
+  /** @ignore */
   static get observedAttributes() {
     return ['target', 'maxlength', 'maxLength'];
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

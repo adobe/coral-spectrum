@@ -1,9 +1,9 @@
 import 'coralui-externals';
 
-import FormField from './src/scripts/FormField';
+import FormFieldMixin from './src/scripts/FormFieldMixin';
 import {mixin} from 'coralui-util';
 
 // Expose mixin on Coral namespace
-mixin.formField = FormField;
+mixin._formField = FormFieldMixin;
 
-export default FormField;
+export {FormFieldMixin};

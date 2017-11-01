@@ -134,7 +134,7 @@ describe('Coral.Dialog', function() {
   
     describe('#focusOnShow', function() {
       it('should default to ON', function() {
-        expect(el.focusOnShow).to.equal(Coral.mixin.overlay.focusOnShow.ON);
+        expect(el.focusOnShow).to.equal(Coral.mixin._overlay.focusOnShow.ON);
       });
     });
   

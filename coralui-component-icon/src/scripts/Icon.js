@@ -14,7 +14,7 @@
  * is strictly forbidden unless prior written permission is obtained
  * from Adobe Systems Incorporated.
  */
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {transform, validate} from 'coralui-util';
 
 /**
@@ -39,26 +39,32 @@ const URL_REGEX = /\/|:|\./g;
 const SPLIT_CAMELCASE_REGEX = /([a-z0-9])([A-Z])/g;
 
 /**
- Icons can be rendered in different sizes. It follows the shirt sizing naming convention to help you remember them
- easily.
+ Enumeration for {@link Icon} sizes.
  
- @enum {String}
- @memberof Coral.Icon
+ @typedef {Object} IconSizeEnum
+ 
+ @property {String} EXTRA_EXTRA_SMALL
+ Extra extra small size icon, typically 9px size.
+ @property {String} EXTRA_SMALL
+ Extra small size icon, typically 12px size.
+ @property {String} SMALL
+ Small size icon, typically 18px size. This is the default size.
+ @property {String} MEDIUM
+ Medium size icon, typically 24px size.
+ @property {String} LARGE
+ Large icon, typically 36px size.
+ @property {String} EXTRA_LARGE
+ Extra large icon, typically 48px size.
+ @property {String} EXTRA_EXTRA_LARGE
+ Extra extra large icon, typically 72px size.
  */
 const size = {
-  /** Extra extra small size icon, typically 9px size. */
   EXTRA_EXTRA_SMALL: 'XXS',
-  /** Extra small size icon, typically 12px size. */
   EXTRA_SMALL: 'XS',
-  /** Small size icon, typically 18px size. This is the default size. */
   SMALL: 'S',
-  /** Medium size icon, typically 24px size. */
   MEDIUM: 'M',
-  /** Large icon, typically 36px size. */
   LARGE: 'L',
-  /** Extra large icon, typically 48px size. */
   EXTRA_LARGE: 'XL',
-  /** Extra extra large icon, typically 72px size. */
   EXTRA_EXTRA_LARGE: 'XXL'
 };
 
@@ -76,10 +82,11 @@ for (const sizeValue in size) {
  @class Coral.Icon
  @classdesc An Icon component
  @htmltag coral-icon
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class Icon extends Component(HTMLElement) {
+class Icon extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -93,7 +100,6 @@ class Icon extends Component(HTMLElement) {
    @default ""
    @htmlattribute icon
    @htmlattributereflected
-   @memberof Coral.Icon#
    */
   get icon() {
     return this._icon || '';
@@ -132,13 +138,12 @@ class Icon extends Component(HTMLElement) {
   }
   
   /**
-   Size of the icon. It accepts both lower and upper case sizes.
+   Size of the icon. It accepts both lower and upper case sizes. See {@link IconSizeEnum}.
    
-   @type {Coral.Icon.size}
-   @default Coral.Icon.size.SMALL
+   @type {String}
+   @default IconSizeEnum.SMALL
    @htmlattribute size
    @htmlattributereflected
-   @memberof Coral.Icon#
    */
   get size() {
     return this._size || size.SMALL;
@@ -209,13 +214,19 @@ class Icon extends Component(HTMLElement) {
     }
   }
   
-  // expose enumerations
+  /**
+   Returns {@link Icon} sizes.
+   
+   @return {IconSizeEnum}
+   */
   static get size() { return size; }
   
+  /** @ignore */
   static get observedAttributes() {
     return ['icon', 'size', 'alt', 'title'];
   }
   
+  /** @ignore */
   attributeChangedCallback(name, oldValue, value) {
     if (name === 'alt' || name === 'title') {
       this._updateAltText(value);
@@ -225,6 +236,7 @@ class Icon extends Component(HTMLElement) {
     }
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

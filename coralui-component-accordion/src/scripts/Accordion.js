@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {SelectableCollection} from 'coralui-collection';
 import {transform, validate, Keys} from 'coralui-util';
 
@@ -26,17 +26,20 @@ const LEFT_ARROW = 37;
 const UP_ARROW = 38;
 
 /**
- Enum for Accordion variant values.
+ Enumeration for {@link Accordion} variants.
  
- @enum {String}
- @memberof Coral.Accordion
+ @typedef {Object} AccordionVariantEnum
+ 
+ @property {String} DEFAULT
+ Default look and feel.
+ @property {String} QUIET
+ Quiet variant with minimal borders.
+ @property {String} LARGE
+ Large variant, typically used inside a navigation rail since it does not have borders on the sides.
  */
 const variant = {
-  /** Default Tabpanel look and feel. */
   DEFAULT: 'default',
-  /** Quiet variant with minimal borders. */
   QUIET: 'quiet',
-  /** Large variant, typically used inside a navigation rail since it does not have borders on the sides. */
   LARGE: 'large'
 };
 
@@ -53,10 +56,11 @@ for (const variantValue in variant) {
  @class Coral.Accordion
  @classdesc An Accordion component
  @htmltag coral-accordion
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class Accordion extends Component(HTMLElement) {
+class Accordion extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -88,13 +92,12 @@ class Accordion extends Component(HTMLElement) {
   }
   
   /**
-   The Accordion's variant.
+   The Accordion's variant. See {@link AccordionVariantEnum}.
    
-   @type {Coral.Accordion.variant}
-   @default Coral.Accordion.variant.DEFAULT
+   @type {String}
+   @default AccordionVariantEnum.DEFAULT
    @htmlattribute variant
    @htmlattributereflected
-   @memberof Coral.Accordion#
    */
   get variant() {
     return this._variant || variant.DEFAULT;
@@ -113,11 +116,9 @@ class Accordion extends Component(HTMLElement) {
   
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   See {@link Coral.Collection} for more details.
    
-   @type {Coral.Collection}
+   @type {Collection}
    @readonly
-   @memberof Coral.Accordion#
    */
   get items() {
     // just init on demand
@@ -140,7 +141,6 @@ class Accordion extends Component(HTMLElement) {
    @default false
    @htmlattribute multiple
    @htmlattributereflected
-   @memberof Coral.Accordion#
    */
   get multiple() {
     return this._multiple || false;
@@ -156,9 +156,8 @@ class Accordion extends Component(HTMLElement) {
   
   /**
    Returns an Array containing the set selected items.
-   @type {Array.<HTMLElement>}
+   @type {Array.<AccordionItem>}
    @readonly
-   @memberof Coral.Accordion#
    */
   get selectedItems() {
     return this.items._getAllSelected();
@@ -167,9 +166,8 @@ class Accordion extends Component(HTMLElement) {
   /**
    Returns the first selected item in the Accordion. The value <code>null</code> is returned if no element is
    selected.
-   @type {?HTMLElement}
+   @type {AccordionItem}
    @readonly
-   @memberof Coral.Accordion#
    */
   get selectedItem() {
     return this.items._getAllSelected()[0] || null;
@@ -410,13 +408,19 @@ class Accordion extends Component(HTMLElement) {
     this._tabTarget = item;
   }
   
-  // Expose enum
+  /**
+   Returns {@link Accordion} variants.
+   
+   @return {AccordionVariantEnum}
+   */
   static get variant() { return variant; }
 
+  /** @ignore */
   static get observedAttributes() {
     return ['variant', 'multiple'];
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -437,15 +441,13 @@ class Accordion extends Component(HTMLElement) {
   }
   
   /**
-   Triggered when the selected item has changed.
+   Triggered when {@link Accordion} selected item has changed.
    
-   @event Coral.Accordion#coral-accordion:change
+   @typedef {CustomEvent} coral-accordion:change
    
-   @param {Object} event Event object
-   @param {Object} event.detail
-   @param {HTMLElement} event.detail.oldSelection
+   @property {AccordionItem} detail.oldSelection
    The prior selected item(s).
-   @param {HTMLElement} event.detail.selection
+   @property {AccordionItem} detail.selection
    The newly selected item(s).
    */
 }

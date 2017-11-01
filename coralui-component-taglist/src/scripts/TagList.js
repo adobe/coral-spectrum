@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import FormField from 'coralui-mixin-formfield';
+import {ComponentMixin} from 'coralui-mixin-component';
+import {FormFieldMixin} from 'coralui-mixin-formfield';
 import Tag from './Tag';
 import {Collection} from 'coralui-collection';
 import {transform, commons} from 'coralui-util';
@@ -42,11 +42,12 @@ const itemValueFromDOM = function(item) {
  @class Coral.TagList
  @classdesc A TagList component
  @htmltag coral-taglist
- @extends HTMLElement
- @extends Coral.mixin.component
- @extends Coral.mixin.formField
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
+ @extends {FormFieldMixin}
  */
-class TagList extends FormField(Component(HTMLElement)) {
+class TagList extends FormFieldMixin(ComponentMixin(HTMLElement)) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -75,8 +76,7 @@ class TagList extends FormField(Component(HTMLElement)) {
    Changing the values will redefine the component's items.
    
    @type {Array.<String>}
-   @memberof Coral.TagList#
-   @fires Coral.mixin.formField#change
+   @emits {change}
    */
   get values() {
     return this.items.getAll().map((item) => item.value);
@@ -102,11 +102,9 @@ class TagList extends FormField(Component(HTMLElement)) {
   
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   See {@link Coral.Collection} for more details.
    
-   @type {Coral.Collection}
+   @type {Collection}
    @readonly
-   @memberof Coral.TagList#
    */
   get items() {
     // just init on demand
@@ -118,8 +116,14 @@ class TagList extends FormField(Component(HTMLElement)) {
     }
     return this._items;
   }
-
-  // JSDoc inherited
+  
+  /**
+   Name used to submit the data in a form.
+   @type {String}
+   @default ""
+   @htmlattribute name
+   @htmlattributereflected
+   */
   get name() {
     return this._name || '';
   }
@@ -134,7 +138,12 @@ class TagList extends FormField(Component(HTMLElement)) {
     }, this);
   }
   
-  // JSDoc inherited
+  /**
+   This field's current value.
+   @type {String}
+   @default ""
+   @htmlattribute value
+   */
   get value() {
     const all = this.items.getAll();
     return all.length ? all[0].value : '';
@@ -156,7 +165,13 @@ class TagList extends FormField(Component(HTMLElement)) {
     }
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is disabled or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute disabled
+   @htmlattributereflected
+   */
   get disabled() {
     return this._disabled || false;
   }
@@ -176,7 +191,13 @@ class TagList extends FormField(Component(HTMLElement)) {
     this.setAttribute('aria-disabled', this._disabled);
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
+   @type {Boolean}
+   @default false
+   @htmlattribute readonly
+   @htmlattributereflected
+   */
   get readOnly() {
     return this._readOnly || false;
   }
@@ -192,7 +213,13 @@ class TagList extends FormField(Component(HTMLElement)) {
     this.setAttribute('aria-readonly', this._readOnly);
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is required or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute required
+   @htmlattributereflected
+   */
   get required() {
     return this._required || false;
   }
@@ -414,7 +441,7 @@ class TagList extends FormField(Component(HTMLElement)) {
     });
   }
   
-  // JSDoc inherited
+  // Inherited
   _getLabellableElement() {
     return this;
   }
@@ -433,6 +460,7 @@ class TagList extends FormField(Component(HTMLElement)) {
     this.values = this._initialValues;
   }
   
+  /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'closable',
@@ -444,6 +472,7 @@ class TagList extends FormField(Component(HTMLElement)) {
     ]);
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

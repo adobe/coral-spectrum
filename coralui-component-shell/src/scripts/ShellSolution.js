@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {transform} from 'coralui-util';
 import solutionIcon from '../templates/solutionIcon';
 
@@ -25,10 +25,11 @@ const CLASSNAME = 'coral3-Shell-solution';
  @class Coral.Shell.Solution
  @classdesc A Shell Solution component
  @htmltag coral-shell-solution
- @extends HTMLAnchorElement
- @extends Coral.mixin.component
+ @extends {HTMLAnchorElement}
+ @extends {ComponentMixin}
  */
-class ShellSolution extends Component(HTMLAnchorElement) {
+class ShellSolution extends ComponentMixin(HTMLAnchorElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -41,14 +42,11 @@ class ShellSolution extends Component(HTMLAnchorElement) {
   }
   
   /**
-   Specifies the icon name used inside the button.
+   Specifies the icon name used inside the button. See {@link Icon} for valid icon names.
    
    @type {String}
    @default ""
    @htmlattribute icon
-   @memberof Coral.Shell.Solution#
-   
-   @see {@link Coral.Icon}
    */
   get icon() {
     return this._elements.icon.icon;
@@ -62,7 +60,6 @@ class ShellSolution extends Component(HTMLAnchorElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Shell.Solution#
    */
   get label() {
     return this._getContentZone(this._elements.label);
@@ -84,7 +81,6 @@ class ShellSolution extends Component(HTMLAnchorElement) {
    @default false
    @htmlattribute linked
    @htmlattributereflected
-   @memberof Coral.Shell.Solution#
    */
   get linked() {
     return this._linked || false;
@@ -96,12 +92,21 @@ class ShellSolution extends Component(HTMLAnchorElement) {
     this.classList.toggle(`${CLASSNAME}--linked`, this._linked);
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.label; }
   set defaultContentZone(value) { this.label = value; }
+  
   get _contentZones() { return {'coral-shell-solution-label': 'label'}; }
   
+  /** @ignore */
   static get observedAttributes() { return ['icon', 'linked']; }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

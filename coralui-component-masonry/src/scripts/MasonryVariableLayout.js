@@ -25,7 +25,7 @@ import MasonryColumnLayout from './MasonryColumnLayout';
  <coral-masonry layout="dashboard" columnwidth="300">
  
  @class Coral.Masonry.VariableLayout
- @extends Coral.Masonry.ColumnLayout
+ @extends {MasonryColumnLayout}
  */
 class MasonryVariableLayout extends MasonryColumnLayout {
   /** @inheritdoc */

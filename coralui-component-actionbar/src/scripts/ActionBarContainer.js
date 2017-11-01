@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import getFirstSelectableWrappedItem from './getFirstSelectableWrappedItem';
 import ActionBarContainerCollection from './ActionBarContainerCollection';
 import ActionBarContainerMixin from './ActionBarContainerMixin';
@@ -25,18 +25,20 @@ import {transform, i18n} from 'coralui-util';
 const CLASSNAME = 'coral3-ActionBar-container';
 
 /**
- Enum for container position.
+ Enumeration for {@link ActionBarContainer} positions.
  
- @private
- @enum {String}
- @memberof Coral.ActionBar.Container
+ @typedef {Object} ActionBarContainerPositionEnum
+ 
+ @property {String} PRIMARY
+ Primary (left) ActionBar container.
+ @property {String} SECONDARY
+ Secondary (right) ActionBar container.
+ @property {String} INVALID
+ Invalid ActionBar container.
  */
 const position = {
-  /** Primary (left) ActionBar container */
   PRIMARY: 'primary',
-  /** Secondary (right) ActionBar container */
   SECONDARY: 'secondary',
-  /** Invalid ActionBar container */
   INVALID: 'invalid'
 };
 
@@ -44,12 +46,13 @@ const position = {
  @class Coral.ActionBar.Container
  @classdesc An ActionBar container component
  @htmltag coral-actionbar-container
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  
  @deprecated
  */
-class ActionBarContainer extends ActionBarContainerMixin(Component(HTMLElement)) {
+class ActionBarContainer extends ActionBarContainerMixin(ComponentMixin(HTMLElement)) {
+  /** @ignore */
   constructor() {
     super();
   
@@ -58,12 +61,10 @@ class ActionBarContainer extends ActionBarContainerMixin(Component(HTMLElement))
   }
   
   /**
-   The Collection Interface that allows interacting with the items that the component contains. See
-   {@link Coral.Collection} for more details.
+   The Collection Interface that allows interacting with the items that the component contains.
    
-   @type {Coral.Collection}
+   @type {ActionBarContainerCollection}
    @readonly
-   @memberof Coral.ActionBar.Container#
    */
   get items() {
     // Construct the collection on first request:
@@ -85,7 +86,6 @@ class ActionBarContainer extends ActionBarContainerMixin(Component(HTMLElement))
    @default -1
    @htmlattribute threshold
    @htmlattributereflected
-   @memberof Coral.ActionBar.Container#
    */
   get threshold() {
     return typeof this._threshold === 'number' ? this._threshold : -1;
@@ -102,7 +102,6 @@ class ActionBarContainer extends ActionBarContainerMixin(Component(HTMLElement))
    @type {String}
    @default ""
    @htmlattribute morebuttontext
-   @memberof Coral.ActionBar.Container#
    */
   get moreButtonText() {
     return this._moreButtonText || '';
@@ -122,10 +121,9 @@ class ActionBarContainer extends ActionBarContainerMixin(Component(HTMLElement))
    The container position inside the actionbar.
    
    @private
-   @type {Coral.ActionBar.Container.position}
+   @type {String}
    @readonly
-   @default Coral.ActionBar.Container.position.INVALID
-   @memberof Coral.ActionBar.Container#
+   @default ActionBarContainerPositionEnum.INVALID
    */
   get _position() {
     if (this.parentNode) {
@@ -281,9 +279,14 @@ class ActionBarContainer extends ActionBarContainerMixin(Component(HTMLElement))
     }
   }
   
-  // Expose enums
+  /**
+   Returns {@link ActionBarContainer} positions.
+   
+   @return {ActionBarContainerPositionEnum}
+   */
   static get position() { return position; }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

@@ -15,17 +15,18 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {transform} from 'coralui-util';
 
 /**
  @class Coral.Autocomplete.Item
  @classdesc The Autocomplete Item
  @htmltag coral-autocomplete-item
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class AutocompleteItem extends Component(HTMLElement) {
+class AutocompleteItem extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
   
@@ -44,7 +45,6 @@ class AutocompleteItem extends Component(HTMLElement) {
    @default ""
    @htmlattribute value
    @htmlattributereflected
-   @memberof Coral.Autocomplete.Item#
    */
   get value() {
     // keep spaces to only 1 max and trim to mimic native select option behavior
@@ -62,7 +62,6 @@ class AutocompleteItem extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Autocomplete.Item#
    */
   get content() {
     return this;
@@ -83,7 +82,6 @@ class AutocompleteItem extends Component(HTMLElement) {
    @default false
    @htmlattribute selected
    @htmlattributereflected
-   @memberof Coral.Autocomplete.Item#
    */
   get selected() {
     return this._selected || false;
@@ -102,7 +100,6 @@ class AutocompleteItem extends Component(HTMLElement) {
    @default false
    @htmlattribute disabled
    @htmlattributereflected
-   @memberof Coral.Autocomplete.Item#
    */
   get disabled() {
     return this._disabled || false;
@@ -119,6 +116,7 @@ class AutocompleteItem extends Component(HTMLElement) {
     });
   }
   
+  /** @ignore */
   static get observedAttributes() {
     return ['selected', 'disabled', 'value'];
   }

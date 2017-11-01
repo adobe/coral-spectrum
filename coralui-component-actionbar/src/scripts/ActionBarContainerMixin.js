@@ -29,6 +29,7 @@ import {transform, i18n} from 'coralui-util';
  @classdesc The base element for action bar containers
  */
 const ActionBarContainer = (superClass) => class extends superClass {
+  /** @ignore */
   constructor() {
     super();
     
@@ -50,12 +51,10 @@ const ActionBarContainer = (superClass) => class extends superClass {
   }
   
   /**
-   The Collection Interface that allows interacting with the items that the component contains. See
-   {@link Coral.Collection} for more details.
+   The Collection Interface that allows interacting with the items that the component contains.
    
-   @type {Coral.Collection}
+   @type {ActionBarContainerCollection}
    @readonly
-   @memberof Coral.mixin.actionBarContainer
    */
   get items() {
     // Construct the collection on first request:
@@ -77,7 +76,6 @@ const ActionBarContainer = (superClass) => class extends superClass {
    @default -1
    @htmlattribute threshold
    @htmlattributereflected
-   @memberof Coral.mixin.actionBarContainer
    */
   get threshold() {
     return typeof this._threshold === 'number' ? this._threshold : -1;
@@ -94,7 +92,6 @@ const ActionBarContainer = (superClass) => class extends superClass {
    @type {String}
    @default ""
    @htmlattribute morebuttontext
-   @memberof Coral.mixin.actionBarContainer
    */
   get moreButtonText() {
     return this._moreButtonText || '';
@@ -196,10 +193,12 @@ const ActionBarContainer = (superClass) => class extends superClass {
     }
   }
   
+  /** @ignore */
   static get observedAttributes() {
     return ['moreButtonText', 'morebuttontext', 'threshold'];
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
   

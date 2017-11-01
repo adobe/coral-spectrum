@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import 'coralui-component-icon';
 import item from '../templates/item';
 import {transform, commons} from 'coralui-util';
@@ -32,10 +32,11 @@ const CHEVRON_CLASSES = {
  @class Coral.Accordion.Item
  @classdesc A Accordion item component
  @htmltag coral-accordion-item
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class AccordionItem extends Component(HTMLElement) {
+class AccordionItem extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -53,7 +54,6 @@ class AccordionItem extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Accordion.Item#
    */
   get label() {
     return this._getContentZone(this._elements.label);
@@ -73,7 +73,6 @@ class AccordionItem extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Accordion.Item#
    */
   get content() {
     return this._getContentZone(this._elements.content);
@@ -94,7 +93,6 @@ class AccordionItem extends Component(HTMLElement) {
    @default false
    @htmlattribute selected
    @htmlattributereflected
-   @memberof Coral.Accordion.Item#
    */
   get selected() {
     return this._selected || false;
@@ -155,7 +153,6 @@ class AccordionItem extends Component(HTMLElement) {
    @default false
    @htmlattribute disabled
    @htmlattributereflected
-   @memberof Coral.Accordion.Item#
    */
   get disabled() {
     return this._disabled || false;
@@ -212,14 +209,23 @@ class AccordionItem extends Component(HTMLElement) {
     this._elements.acHeader.focus();
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.content; }
   set defaultContentZone(value) { this.content = value; }
+  
   get _contentZones() { return {'coral-accordion-item-label': 'label', 'coral-accordion-item-content': 'content'}; }
   
+  /** @ignore */
   static get observedAttributes() {
     return ['selected', 'disabled'];
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

@@ -15,26 +15,30 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import base from '../templates/base';
 import {transform, validate} from 'coralui-util';
 
 const COLOR_HINT_REG_EXP = /^#[0-9A-F]{6}$/i;
 
 /**
- Enum for Card variant values.
+ Enumeration for {@link Card} variants.
  
- @enum {String}
- @memberof Coral.Card
+ @typedef {Object} CardVariantEnum
+ 
+ @property {String} DEFAULT
+ Default card variant that shows the asset, overlay and content in their default positions.
+ @property {String} CONDENSED
+ Condensed card variant where the overlay is hidden and the content is shown over the image.
+ @property {String} INVERTED
+ Condensed card variant where the overlay is hidden and the content is shown over the image with a dark style.
+ @property {String} ASSET
+ Card variant where only the asset is shown.
  */
 const variant = {
-  /** Default card variant that shows the asset, overlay and content in their default positions. */
   DEFAULT: 'default',
-  /** Condensed card variant where the overlay is hidden and the content is shown over the image. */
   CONDENSED: 'condensed',
-  /** Condensed card variant where the overlay is hidden and the content is shown over the image with a dark style. */
   INVERTED: 'inverted',
-  /** Card variant where only the asset is shown. */
   ASSET: 'asset'
 };
 
@@ -52,10 +56,11 @@ for (const variantValue in variant) {
  @class Coral.Card
  @classdesc A Card component
  @htmltag coral-card
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class Card extends Component(HTMLElement) {
+class Card extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -80,7 +85,6 @@ class Card extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Card#
    */
   get asset() {
     return this._getContentZone(this._elements.asset);
@@ -103,7 +107,6 @@ class Card extends Component(HTMLElement) {
    @type {String}
    @default ""
    @htmlattribute assetheight
-   @memberof Coral.Card#
    */
   get assetHeight() {
     return this._assetHeight || '';
@@ -144,7 +147,6 @@ class Card extends Component(HTMLElement) {
    @type {String}
    @default ""
    @htmlattribute assetwidth
-   @memberof Coral.Card#
    */
   get assetWidth() {
     return this._assetWidth || '';
@@ -157,7 +159,6 @@ class Card extends Component(HTMLElement) {
    @type {String}
    @default ""
    @htmlattribute colorhint
-   @memberof Coral.Card#
    */
   get colorHint() {
     return this._colorHint || '';
@@ -178,7 +179,6 @@ class Card extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Card#
    */
   get content() {
     return this._getContentZone(this._elements.content);
@@ -198,7 +198,6 @@ class Card extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Card#
    */
   get info() {
     return this._getContentZone(this._elements.info);
@@ -221,7 +220,6 @@ class Card extends Component(HTMLElement) {
    @default false
    @htmlattribute fixedwidth
    @htmlattributereflected
-   @memberof Coral.Card#
    */
   get fixedWidth() {
     return this._fixedWidth || false;
@@ -238,7 +236,6 @@ class Card extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Card#
    */
   get overlay() {
     return this._getContentZone(this._elements.overlay);
@@ -260,7 +257,6 @@ class Card extends Component(HTMLElement) {
    @default false
    @htmlattribute stacked
    @htmlattributereflected
-   @memberof Coral.Card#
    */
   get stacked() {
     return this._stacked || false;
@@ -274,11 +270,11 @@ class Card extends Component(HTMLElement) {
   
   /**
    The card's variant. It determines which sections of the Card and in which position they are shown.
+   See {@link CardVariantEnum}.
    
-   @type {Coral.Card.variant}
-   @default Coral.Card.variant.DEFAULT
+   @type {String}
+   @default CardVariantEnum.DEFAULT
    @htmlattribute variant
-   @memberof Coral.Card#
    */
   get variant() {
     return this._variant || variant.DEFAULT;
@@ -310,8 +306,15 @@ class Card extends Component(HTMLElement) {
     event.target.classList.remove('is-loading');
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.content; }
   set defaultContentZone(value) { this.content = value; }
+  
   get _contentZones() {
     return {
       'coral-card-asset': 'asset',
@@ -321,9 +324,14 @@ class Card extends Component(HTMLElement) {
     };
   }
   
-  // Expose enumerations
+  /**
+   Returns {@link Card} variants.
+   
+   @return {CardVariantEnum}
+   */
   static get variant() { return variant; }
   
+  /** @ignore */
   static get observedAttributes() {
     return [
       'assetwidth',
@@ -339,6 +347,7 @@ class Card extends Component(HTMLElement) {
     ];
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

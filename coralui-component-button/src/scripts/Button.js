@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import ButtonMixin from 'coralui-mixin-button';
+import {ComponentMixin} from 'coralui-mixin-component';
+import {ButtonMixin} from 'coralui-mixin-button';
 
 
 /**
@@ -25,10 +25,11 @@ import ButtonMixin from 'coralui-mixin-button';
  @htmltag coral-button
  @htmlbasetag button
  @extends HTMLButtonElement
- @extends Coral.mixin.component
- @extends Coral.mixin.button
+ @extends {ComponentMixin}
+ @extends {ButtonMixin}
  */
-class Button extends ButtonMixin(Component(HTMLButtonElement)) {
+class Button extends ButtonMixin(ComponentMixin(HTMLButtonElement)) {
+  /** @ignore */
   constructor() {
     super();
     

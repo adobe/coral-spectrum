@@ -19,7 +19,7 @@
  @class Coral.Tooltip.Content
  @classdesc Tooltip's content component
  @htmltag coral-tooltip-content
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class TooltipContent extends HTMLElement {}
 

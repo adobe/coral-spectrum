@@ -32,21 +32,26 @@ const CLASSNAME = 'coral3-Tooltip';
 const TOOLTIP_ARROW_SIZE = 12;
 
 /**
- Tooltip variants.
+ Enumeration for {@link Tooltip} variants.
  
- @enum {String}
- @memberof Coral.Tooltip
+ @typedef {Object} TooltipVariantEnum
+ 
+ @property {String} INFO
+ A blue tooltip that informs the user of non-critical information.
+ @property {String} ERROR
+ A red tooltip that indicates an error has occurred.
+ @property {String} WARNING
+ An orange tooltip that notifies the user of something important.
+ @property {String} SUCCESS
+ A green tooltip that indicates an operation was successful.
+ @property {String} INSPECT
+ A dark gray tooltip that provides additional information for a chart item.
  */
 const variant = {
-  /** A blue tooltip that informs the user of non-critical information. */
   INFO: 'info',
-  /** A red tooltip that indicates an error has occurred. */
   ERROR: 'error',
-  /** An orange tooltip that notifies the user of something important. */
   WARNING: 'warning',
-  /** A green tooltip that indicates an operation was successful. */
   SUCCESS: 'success',
-  /** A dark gray tooltip that provides additional information for a chart item. */
   INSPECT: 'inspect'
 };
 
@@ -76,9 +81,10 @@ for (const key in Overlay.placement) {
  @class Coral.Tooltip
  @classdesc A Tooltip component
  @htmltag coral-tooltip
- @extends Coral.Overlay
+ @extends {Overlay}
  */
 class Tooltip extends Overlay {
+  /** @ignore */
   constructor() {
     super();
   
@@ -99,13 +105,12 @@ class Tooltip extends Overlay {
   }
   
   /**
-   The variant of tooltip.
+   The variant of tooltip. See {@link TooltipVariantEnum}.
    
-   @type {Coral.Tooltip.variant}
-   @default Coral.Tooltip.variant.INFO
+   @type {String}
+   @default TooltipVariantEnum.INFO
    @htmlattribute variant
    @htmlattributereflected
-   @memberof Coral.Tooltip#
    */
   get variant() {
     return this._variant || variant.INFO;
@@ -125,7 +130,6 @@ class Tooltip extends Overlay {
    @type {Number}
    @default 500
    @htmlattribute delay
-   @memberof Coral.Tooltip#
    */
   get delay() {
     return typeof this._delay === 'number' ? this._delay : 500;
@@ -139,7 +143,6 @@ class Tooltip extends Overlay {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Tooltip#
    */
   get content() {
     return this._getContentZone(this._elements.content);
@@ -154,7 +157,9 @@ class Tooltip extends Overlay {
     });
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link Overlay#open}.
+   */
   get open() {
     return super.open;
   }
@@ -167,7 +172,9 @@ class Tooltip extends Overlay {
     }
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link Overlay#target}.
+   */
   get target() {
     return super.target;
   }
@@ -181,7 +188,9 @@ class Tooltip extends Overlay {
     }
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link Overlay#interaction}.
+   */
   get interaction() {
     return super.interaction;
   }
@@ -315,17 +324,30 @@ class Tooltip extends Overlay {
     target[`_hasCoralTooltipListeners${this._id}`] = false;
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.content; }
   set defaultContentZone(value) { this.content = value; }
+  
   get _contentZones() { return {'coral-tooltip-content': 'content'}; }
   
-  // Expose enumerations
+  /**
+   Returns {@link Tooltip} variants.
+   
+   @return {TooltipVariantEnum}
+   */
   static get variant() { return variant; }
   
+  /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['variant', 'delay']);
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

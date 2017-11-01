@@ -21,23 +21,26 @@ import {transform, validate} from 'coralui-util';
 const CLASSNAME = 'coral3-BasicList';
 
 /**
- Boolean enumeration for List keyboard interaction state.
+ Enumeration for {@link List}, {@link AnchorList}, {@link ButtonList} interactions.
  
- @enum {String}
- @memberof Coral.List#
+ @typedef {Object} ListInteractionEnum
+ 
+ @property {String} ON
+ Keyboard interaction is enabled.
+ @property {String} OFF
+ Keyboard interaction is disabled.
  */
 const interaction = {
-  /** Keyboard interaction is enabled. */
   ON: 'on',
-  /** Keyboard interaction is disabled. */
   OFF: 'off'
 };
 
 /**
- @mixin List
+ @mixin ListMixin
  @classdesc The base element for list components
  */
-const List = (superClass) => class extends superClass {
+const ListMixin = (superClass) => class extends superClass {
+  /** @ignore */
   constructor() {
     super();
   
@@ -56,11 +59,9 @@ const List = (superClass) => class extends superClass {
   
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   See {@link Coral.Collection} for more details.
    
-   @type {Coral.Collection}
+   @type {SelectableCollection}
    @readonly
-   @memberof Coral.List#
    */
   get items() {
     // Construct the collection on first request:
@@ -83,13 +84,12 @@ const List = (superClass) => class extends superClass {
   }
   
   /**
-   Whether interaction with the component is enabled.
+   Whether interaction with the component is enabled. See {@link ListInteractionEnum}.
    
-   @type {Coral.List.interaction}
-   @default Coral.List.interaction.ON
+   @type {String}
+   @default ListInteractionEnum.ON
    @htmlattribute interaction
    @htmlattributereflected
-   @memberof Coral.List#
    */
   get interaction() {
     return this._interaction || interaction.ON;
@@ -111,7 +111,6 @@ const List = (superClass) => class extends superClass {
   /**
    Returns true if the event is at the matched target.
    
-   @todo this should be moved to Coral.Component
    @private
    */
   _eventIsAtTarget(event) {
@@ -211,11 +210,17 @@ const List = (superClass) => class extends superClass {
     }
   }
   
-  // Expose enumerations
+  /**
+   Returns {@link List} interaction options.
+   
+   @return {ListInteractionEnum}
+   */
   static get interaction() { return interaction; }
   
+  /** @ignore */
   static get observedAttributes() { return ['interaction']; }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -226,4 +231,4 @@ const List = (superClass) => class extends superClass {
   }
 };
 
-export default List;
+export default ListMixin;

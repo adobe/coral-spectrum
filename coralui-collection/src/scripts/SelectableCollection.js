@@ -19,11 +19,8 @@ import Collection from './Collection';
 import listToArray from './listToArray';
 
 /**
- Private Collection capable of handling non-nested items with a selected attribute. It is useful to manage the
+ Collection capable of handling non-nested items with a selected attribute. It is useful to manage the
  internal state of selection. It currently does not support options.filter for the selection related functions.
- 
- @extends Coral.Collection
- @protected
  */
 class SelectableCollection extends Collection {
   constructor(options) {

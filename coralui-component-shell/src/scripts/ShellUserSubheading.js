@@ -19,7 +19,7 @@
  @class Coral.Shell.User.Subheading
  @classdesc Shell's User subheading component
  @htmltag coral-shell-user-subheading
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class ShellUserSubheading extends HTMLElement {}
 

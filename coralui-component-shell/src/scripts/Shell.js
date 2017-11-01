@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 
 const CLASSNAME = 'coral3-Shell';
 
@@ -23,10 +23,11 @@ const CLASSNAME = 'coral3-Shell';
  @class Coral.Shell
  @classdesc A Shell component
  @htmltag coral-shell
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class Shell extends Component(HTMLElement) {
+class Shell extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -42,7 +43,6 @@ class Shell extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Shell#
    */
   get content() {
     return this._getContentZone(this._elements.content);
@@ -57,10 +57,18 @@ class Shell extends Component(HTMLElement) {
     });
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.content; }
   set defaultContentZone(value) { this.content = value; }
+  
   get _contentZones() { return {'coral-shell-content': 'content'}; }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

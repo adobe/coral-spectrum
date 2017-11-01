@@ -19,7 +19,7 @@
  @class Coral.Shell.Solution.Label
  @classdesc Shell's Solution label component
  @htmltag coral-shell-solution-label
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class ShellSolutionLabel extends HTMLElement {}
 

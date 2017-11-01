@@ -19,7 +19,7 @@
  @class Coral.Shell.OrgSwitcher.Footer
  @classdesc Shell's OrgSwitcher footer component
  @htmltag coral-shell-orgswitcher-footer
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class ShellOrgSwitcherFooter extends HTMLElement {}
 

@@ -1,5 +1,5 @@
-import Component from 'coralui-mixin-component';
-import Overlay from '../scripts/Overlay';
+import {ComponentMixin} from 'coralui-mixin-component';
+import OverlayMixin from '../scripts/OverlayMixin';
 
 /**
  Get the zIndex of an element
@@ -18,12 +18,11 @@ const zIndex = (element) => {
   }
 };
 
-describe('Coral.mixin.overlay', function() {
+describe('Coral.mixin._overlay', function() {
   var transitionEnd;
   
   // Non Modal overlay
-  // Non Modal overlay
-  class OverlayDummy1 extends Overlay(Component(HTMLElement)) {
+  class OverlayDummy1 extends OverlayMixin(ComponentMixin(HTMLElement)) {
     constructor() {
       super();
       
@@ -127,30 +126,25 @@ describe('Coral.mixin.overlay', function() {
   });
   
   describe('Namespace', function() {
-    it('should be defined', function() {
-      expect(Coral).to.have.property('mixin');
-      expect(Coral.mixin).to.have.property('overlay');
-    });
-  
     it('should define the trapFocus in an enum', function() {
-      expect(Coral.mixin.overlay.trapFocus).to.exist;
-      expect(Coral.mixin.overlay.trapFocus.ON).to.equal('on');
-      expect(Coral.mixin.overlay.trapFocus.OFF).to.equal('off');
-      expect(Object.keys(Coral.mixin.overlay.trapFocus).length).to.equal(2);
+      expect(Coral.mixin._overlay.trapFocus).to.exist;
+      expect(Coral.mixin._overlay.trapFocus.ON).to.equal('on');
+      expect(Coral.mixin._overlay.trapFocus.OFF).to.equal('off');
+      expect(Object.keys(Coral.mixin._overlay.trapFocus).length).to.equal(2);
     });
   
     it('should define the returnFocus in an enum', function() {
-      expect(Coral.mixin.overlay.returnFocus).to.exist;
-      expect(Coral.mixin.overlay.returnFocus.ON).to.equal('on');
-      expect(Coral.mixin.overlay.returnFocus.OFF).to.equal('off');
-      expect(Object.keys(Coral.mixin.overlay.returnFocus).length).to.equal(2);
+      expect(Coral.mixin._overlay.returnFocus).to.exist;
+      expect(Coral.mixin._overlay.returnFocus.ON).to.equal('on');
+      expect(Coral.mixin._overlay.returnFocus.OFF).to.equal('off');
+      expect(Object.keys(Coral.mixin._overlay.returnFocus).length).to.equal(2);
     });
   
     it('should define the focusOnShow in an enum', function() {
-      expect(Coral.mixin.overlay.focusOnShow).to.exist;
-      expect(Coral.mixin.overlay.focusOnShow.ON).to.equal('on');
-      expect(Coral.mixin.overlay.focusOnShow.OFF).to.equal('off');
-      expect(Object.keys(Coral.mixin.overlay.focusOnShow).length).to.equal(2);
+      expect(Coral.mixin._overlay.focusOnShow).to.exist;
+      expect(Coral.mixin._overlay.focusOnShow.ON).to.equal('on');
+      expect(Coral.mixin._overlay.focusOnShow.OFF).to.equal('off');
+      expect(Object.keys(Coral.mixin._overlay.focusOnShow).length).to.equal(2);
     });
   });
   
@@ -214,7 +208,7 @@ describe('Coral.mixin.overlay', function() {
     
     describe('#focusOnShow', function() {
       it('should default to ON', function() {
-        expect(overlay.focusOnShow).to.equal(Coral.mixin.overlay.focusOnShow.ON);
+        expect(overlay.focusOnShow).to.equal(Coral.mixin._overlay.focusOnShow.ON);
       });
   
       it('should focus the overlay when no content is focusable', function(done) {
@@ -228,7 +222,7 @@ describe('Coral.mixin.overlay', function() {
       });
   
       it('should focus the first tababble descendent when available', function(done) {
-        overlay.content.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin.overlay.someButtons.html']);
+        overlay.content.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin._overlay.someButtons.html']);
     
         overlay.on('coral-overlay:open', function() {
           expect(document.activeElement.id).to.equal('button1', 'The first focusable element should get the focus');
@@ -240,7 +234,7 @@ describe('Coral.mixin.overlay', function() {
       });
   
       it('should accept an HTMLElement to focus', function(done) {
-        overlay.content.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin.overlay.threeButtons.html']);
+        overlay.content.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin._overlay.threeButtons.html']);
     
         var button2 = overlay.content.querySelector('#button2');
     
@@ -256,7 +250,7 @@ describe('Coral.mixin.overlay', function() {
       });
   
       it('should fallback to the document body when the provided element is not focusable', function(done) {
-        overlay.content.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin.overlay.threeButtons.html']);
+        overlay.content.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin._overlay.threeButtons.html']);
     
         var div = overlay.content.querySelector('div');
     
@@ -272,7 +266,7 @@ describe('Coral.mixin.overlay', function() {
       });
   
       it('should focus the first item that matches a selector', function(done) {
-        overlay.content.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin.overlay.threeButtons.html']);
+        overlay.content.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin._overlay.threeButtons.html']);
     
         overlay.focusOnShow = '.demo-content button';
     
@@ -286,7 +280,7 @@ describe('Coral.mixin.overlay', function() {
       });
   
       it('should default to the first tababble descendent when the selector is invalid', function(done) {
-        overlay.content.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin.overlay.threeButtons.html']);
+        overlay.content.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin._overlay.threeButtons.html']);
     
         overlay.focusOnShow = '#input';
     
@@ -300,7 +294,7 @@ describe('Coral.mixin.overlay', function() {
       });
   
       it('should not focus the contents if the selector matches a non focusable item', function(done) {
-        overlay.content.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin.overlay.threeButtons.html']);
+        overlay.content.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin._overlay.threeButtons.html']);
         overlay.focusOnShow = 'div';
     
         overlay.on('coral-overlay:open', function() {
@@ -313,7 +307,7 @@ describe('Coral.mixin.overlay', function() {
       });
   
       it('should default to the overlay when the selector is invalid (and no tabbable element is available)', function(done) {
-        overlay.content.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin.overlay.nonTabbableContent.html']);
+        overlay.content.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin._overlay.nonTabbableContent.html']);
     
         overlay.focusOnShow = '#input';
     
@@ -327,7 +321,7 @@ describe('Coral.mixin.overlay', function() {
       });
   
       it('should accept :first-child as a selector', function(done) {
-        overlay.content.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin.overlay.someButtons.html']);
+        overlay.content.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin._overlay.someButtons.html']);
         overlay.focusOnShow = ':first-child';
     
         overlay.on('coral-overlay:open', function() {
@@ -340,7 +334,7 @@ describe('Coral.mixin.overlay', function() {
       });
       
       it('should focus on the last-of-type item when shown', function(done) {
-        overlay.content.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin.overlay.someButtons.html']);
+        overlay.content.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin._overlay.someButtons.html']);
         overlay.focusOnShow = 'button:last-of-type';
   
         overlay.on('coral-overlay:open', function() {
@@ -353,8 +347,8 @@ describe('Coral.mixin.overlay', function() {
       });
   
       it('should not move focus when OFF', function(done) {
-        overlay.content.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin.overlay.someButtons.html']);
-        overlay.focusOnShow = Coral.mixin.overlay.focusOnShow.OFF;
+        overlay.content.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin._overlay.someButtons.html']);
+        overlay.focusOnShow = Coral.mixin._overlay.focusOnShow.OFF;
     
         overlay.on('coral-overlay:open', function() {
           expect(document.activeElement).to.equal(document.body, 'Focus should remain on the body');
@@ -676,7 +670,7 @@ describe('Coral.mixin.overlay', function() {
   describe('Implementation Details', function() {
     describe('focus()', function() {
       it('should keep focus on the container when focused', function(done) {
-        overlay.content.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin.overlay.someButtons.html']);
+        overlay.content.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin._overlay.someButtons.html']);
       
         overlay.on('coral-overlay:open', function() {
           overlay.focus();
@@ -691,7 +685,7 @@ describe('Coral.mixin.overlay', function() {
     
     describe('tabcapture', function() {
       it('should focus on the last focusable element when top tab capture focused', function() {
-        overlay.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin.overlay.someButtons.html']);
+        overlay.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin._overlay.someButtons.html']);
     
         var button2 = overlay.querySelector('#button2');
     
@@ -704,7 +698,7 @@ describe('Coral.mixin.overlay', function() {
       });
   
       it('should focus on the first focusable element when intermediate tab capture focused', function() {
-        overlay.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin.overlay.someButtons.html']);
+        overlay.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin._overlay.someButtons.html']);
     
         var button1 = overlay.querySelector('#button1');
     
@@ -720,7 +714,7 @@ describe('Coral.mixin.overlay', function() {
         overlay = new OverlayDummy2();
         helpers.target.appendChild(overlay);
   
-        overlay.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin.overlay.someButtons.html']);
+        overlay.insertAdjacentHTML('afterbegin', window.__html__['Coral.mixin._overlay.someButtons.html']);
     
         var button2 = overlay.querySelector('#button2');
     
@@ -955,7 +949,7 @@ describe('Coral.mixin.overlay', function() {
                 expect(backdropOpen(backdrop)).to.equal(true, 'backdrop visibility when non-modal overlay hidden');
               
                 done();
-              }, Coral.mixin.overlay.FADETIME + 50);
+              }, Coral.mixin._overlay.FADETIME + 50);
             });
           });
         });
@@ -1134,8 +1128,8 @@ describe('Coral.mixin.overlay', function() {
     
       it('should hide when done closing', function(done) {
         // Temporarily change the fade time to 1ms
-        var FADETIME = Coral.mixin.overlay.FADETIME;
-        Coral.mixin.overlay.FADETIME = 0;
+        var FADETIME = Coral.mixin._overlay.FADETIME;
+        Coral.mixin._overlay.FADETIME = 0;
       
         overlay = new OverlayDummy2();
         helpers.target.appendChild(overlay);
@@ -1151,7 +1145,7 @@ describe('Coral.mixin.overlay', function() {
               expect(overlay.style.display).to.equal('none');
             
               // Restore fade time
-              Coral.mixin.overlay.FADETIME = FADETIME;
+              Coral.mixin._overlay.FADETIME = FADETIME;
               helpers.next(function() {
                 // Wait for clean up to be complete
                 done();

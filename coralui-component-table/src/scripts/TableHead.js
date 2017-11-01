@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import TableSection from './TableSection';
+import {ComponentMixin} from 'coralui-mixin-component';
+import TableSectionMixin from './TableSectionMixin';
 import {transform} from 'coralui-util';
 
 const CLASSNAME = 'coral-Table-head';
@@ -26,11 +26,12 @@ const CLASSNAME = 'coral-Table-head';
  @classdesc A Table head component
  @htmltag coral-table-head
  @htmlbasetag thead
- @extends HTMLTableSectionElement
- @extends Coral.mixin.component
- @extends Coral.mixin.tableSection
+ @extends {HTMLTableSectionElement}
+ @extends {ComponentMixin}
+ @extends {TableSectionMixin}
  */
-class TableHead extends TableSection(Component(HTMLTableSectionElement)) {
+class TableHead extends TableSectionMixin(ComponentMixin(HTMLTableSectionElement)) {
+  /** @ignore */
   constructor() {
     super();
   
@@ -50,7 +51,6 @@ class TableHead extends TableSection(Component(HTMLTableSectionElement)) {
    @default false
    @htmlattribute sticky
    @htmlattributereflected
-   @memberof Coral.Table.Head#
    */
   get sticky() {
     return this._sticky || false;
@@ -76,10 +76,12 @@ class TableHead extends TableSection(Component(HTMLTableSectionElement)) {
     }, this);
   }
   
+  /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['sticky']);
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -87,20 +89,18 @@ class TableHead extends TableSection(Component(HTMLTableSectionElement)) {
   }
   
   /**
-   Triggered when the content changed.
+   Triggered when the {@link TableHead} content changed.
+ 
+   @typedef {CustomEvent} coral-table-head:_contentchanged
    
-   @event Coral.Table.Head#coral-table-head:_contentchanged
-   
-   @param {Object} event Event object
    @private
    */
   
   /**
-   Triggered when {@link Coral.Table.Head#sticky} changed.
+   Triggered when {@link TableHead#sticky} changed.
+ 
+   @typedef {CustomEvent} coral-table-head:_stickychanged
    
-   @event Coral.Table.Head#coral-table-head:_stickychanged
-   
-   @param {Object} event Event object
    @private
    */
 }

@@ -23,7 +23,7 @@ const CLASSNAME = 'coral3-Slider-item';
  @class Coral.Slider.Item
  @classdesc The Slider item
  @htmltag coral-slider-item
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class SliderItem extends HTMLElement {
   /**
@@ -34,7 +34,6 @@ class SliderItem extends HTMLElement {
    @default ""
    @htmlattribute value
    @htmlattributereflected
-   @memberof Coral.Slider.Item#
    */
   get value() {
     return this.getAttribute('value');
@@ -48,7 +47,6 @@ class SliderItem extends HTMLElement {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Select.Item#
    */
   get content() {
     return this;
@@ -59,6 +57,7 @@ class SliderItem extends HTMLElement {
     }
   }
   
+  /** @ignore */
   connectedCallback() {
     this.classList.add(CLASSNAME);
   }

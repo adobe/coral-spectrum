@@ -19,7 +19,7 @@
  @class Coral.Shell.Content
  @classdesc Shell's content component
  @htmltag coral-shell-content
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class ShellContent extends HTMLElement {}
 

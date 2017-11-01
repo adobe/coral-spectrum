@@ -15,22 +15,24 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {Icon} from 'coralui-component-icon';
 import {transform, validate} from 'coralui-util';
 
 const CLASSNAME = 'coral3-ColumnView-item';
 
 /**
- Enum for item variants.
+ Enumeration for {@link ColumnViewItem} variants.
  
- @enum {String}
- @memberof Coral.ColumnView.Item
+ @typedef {Object} ColumnViewItemVariantEnum
+ 
+ @property {String} DEFAULT
+ Default item variant. Contains no special decorations.
+ @property {String} DRILLDOWN
+ An item with a right arrow indicating that the navigation will go one level down.
  */
 const variant = {
-  /** Default item variant. Contains no special decorations. */
   DEFAULT: 'default',
-  /** An item with a right arrow indicating that the navigation will go one level down. */
   DRILLDOWN: 'drilldown'
 };
 
@@ -45,10 +47,11 @@ for (const variantValue in variant) {
  @class Coral.ColumnView.Item
  @classdesc A ColumnView Item component
  @htmltag coral-columnview-item
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class ColumnViewItem extends Component(HTMLElement) {
+class ColumnViewItem extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
   
@@ -64,7 +67,6 @@ class ColumnViewItem extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.ColumnView.Item#
    */
   get content() {
     return this._getContentZone(this._elements.content);
@@ -84,7 +86,6 @@ class ColumnViewItem extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.ColumnView.Item#
    */
   get thumbnail() {
     return this._getContentZone(this._elements.thumbnail);
@@ -100,13 +101,12 @@ class ColumnViewItem extends Component(HTMLElement) {
   }
   
   /**
-   The item's variant.
+   The item's variant. See {@link ColumnViewItemVariantEnum}.
    
-   @type {Coral.ColumnView.Item.variant}
-   @default Coral.ColumnView.Item.variant.DEFAULT
+   @type {String}
+   @default ColumnViewItemVariantEnum.DEFAULT
    @htmlattribute variant
    @htmlattributereflected
-   @memberof Coral.ColumnView.Item#
    */
   get variant() {
     return this._variant || variant.DEFAULT;
@@ -132,7 +132,6 @@ class ColumnViewItem extends Component(HTMLElement) {
    @default ""
    @htmlattribute icon
    @htmlattributereflected
-   @memberof Coral.ColumnView.Item#
    */
   get icon() {
     return this._icon || '';
@@ -166,7 +165,6 @@ class ColumnViewItem extends Component(HTMLElement) {
    @default false
    @htmlattribute selected
    @htmlattributereflected
-   @memberof Coral.ColumnView.Item#
    */
   get selected() {
     return this._selected || false;
@@ -188,7 +186,6 @@ class ColumnViewItem extends Component(HTMLElement) {
    @default false
    @htmlattribut active
    @htmlattributereflected
-   @memberof Coral.ColumnView.Item#
    */
   get active() {
     return this._active || false;
@@ -203,8 +200,15 @@ class ColumnViewItem extends Component(HTMLElement) {
     this.trigger('coral-columnview-item:_activechanged');
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.content; }
   set defaultContentZone(value) { this.content = value; }
+  
   get _contentZones() {
     return {
       'coral-columnview-item-content': 'content',
@@ -212,9 +216,14 @@ class ColumnViewItem extends Component(HTMLElement) {
     };
   }
   
-  // Expose enums
+  /**
+   Returns {@link ColumnViewItem} variants.
+   
+   @return {ColumnViewItemVariantEnum}
+   */
   static get variant() { return variant; }
   
+  /** @ignore */
   static get observedAttributes() {
     return [
       'variant',
@@ -224,6 +233,7 @@ class ColumnViewItem extends Component(HTMLElement) {
     ];
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

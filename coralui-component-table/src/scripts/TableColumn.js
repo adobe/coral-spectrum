@@ -15,40 +15,47 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {transform, validate} from 'coralui-util';
 
 const CLASSNAME = 'coral-Table-column';
 
 /**
- Enum for cell sortable directions.
+ Enumeration for {@link TableColumn} sortable direction options.
  
- @enum {String}
- @memberof Coral.Table.Column
+ @typedef {Object} TableColumnSortableDirectionEnum
+ 
+ @property {String} DEFAULT
+ Default. No sorting applied.
+ @property {String} ASCENDING
+ Ascending sort.
+ @property {String} DESCENDING
+ Descending sort.
  */
 const sortableDirection = {
-  /** Default. */
   DEFAULT: 'default',
-  /** Ascending sort. */
   ASCENDING: 'ascending',
-  /** Descending sort. */
   DESCENDING: 'descending'
 };
 
 /**
- Enum for sortable type values.
+ Enumeration for {@link TableColumn} sortable type options.
  
- @enum {String}
- @memberof Coral.Table.Column
+ @typedef {Object} TableColumnSortableTypeEnum
+ 
+ @property {String} ALPHANUMERIC
+ Alphanumeric type. If sorting is based on {@link TableCell#value}, use {String}.
+ @property {String} NUMBER
+ Number type. If sorting is based on {@link TableCell#value}, use {Number}.
+ @property {String} DATE
+ Date type. If sorting is based on {@link TableCell#value}, use {Date} in milliseconds.
+ @property {String} CUSTOM
+ Custom type. Sorting is based on user defined sorting.
  */
 const sortableType = {
-  /** Alphanumeric type. If sorting is based on {@link Coral.Table.Cell#value}, use JavaScript String. */
   ALPHANUMERIC: 'alphanumeric',
-  /** Number type. If sorting is based on {@link Coral.Table.Cell#value}, use JavaScript Numbers */
   NUMBER: 'number',
-  /** Date type. If sorting is based on {@link Coral.Table.Cell#value}, use the date numeric value in milliseconds. */
   DATE: 'date',
-  /** Custom type. Sorting is based on user defined sorting. */
   CUSTOM: 'custom'
 };
 
@@ -57,10 +64,10 @@ const sortableType = {
  @classdesc A Table column component
  @htmltag coral-table-column
  @htmlbasetag col
- @extends HTMLTableColElement
- @extends Coral.mixin.component
+ @extends {HTMLTableColElement}
+ @extends {ComponentMixin}
  */
-class TableColumn extends Component(HTMLTableColElement) {
+class TableColumn extends ComponentMixin(HTMLTableColElement) {
   /**
    Whether the column has a fixed width.
    
@@ -68,7 +75,6 @@ class TableColumn extends Component(HTMLTableColElement) {
    @default false
    @htmlattribute fixedwidth
    @htmlattributereflected
-   @memberof Coral.Table.Column#
    */
   get fixedWidth() {
     return this._fixedWidth || false;
@@ -87,7 +93,6 @@ class TableColumn extends Component(HTMLTableColElement) {
    @default false
    @htmlattribute hidden
    @htmlattributereflected
-   @memberof Coral.Table.Column#
    */
   get hidden() {
     return this._hidden || false;
@@ -107,7 +112,6 @@ class TableColumn extends Component(HTMLTableColElement) {
    @default false
    @htmlattribute orderable
    @htmlattributereflected
-   @memberof Coral.Table.Column#
    */
   get orderable() {
     return this._orderable || false;
@@ -129,7 +133,6 @@ class TableColumn extends Component(HTMLTableColElement) {
    @default false
    @htmlattribute sortable
    @htmlattributereflected
-   @memberof Coral.Table.Column#
    */
   get sortable() {
     return this._sortable || false;
@@ -145,13 +148,12 @@ class TableColumn extends Component(HTMLTableColElement) {
   }
   
   /**
-   The sorting type.
+   The sorting type. See {@link TableColumnSortableTypeEnum}.
    
-   @type {Coral.Table.Column.sortableType}
-   @default {Coral.Table.Column.sortableType.ALPHANUMERIC}
+   @type {String}
+   @default TableColumnSortableTypeEnum.ALPHANUMERIC
    @htmlattribute sortabletype
    @htmlattributereflected
-   @memberof Coral.Table.Column#
    */
   get sortableType() {
     return this._sortableType || sortableType.ALPHANUMERIC;
@@ -163,14 +165,13 @@ class TableColumn extends Component(HTMLTableColElement) {
   }
   
   /**
-   The sorting direction. Sorts the column cells based on {@link Coral.Table.Cell#value}.
-   If not present, the sort is based on the cell text content.
+   The sorting direction. Sorts the column cells based on {@link TableCell#value}.
+   If not present, the sort is based on the cell text content. See {@link TableColumnSortableDirectionEnum}.
    
-   @type {Coral.Table.Column.sortableDirection}
-   @default {Coral.Table.Column.sortableDirection.DEFAULT}
+   @type {String}
+   @default TableColumnSortableDirectionEnum.DEFAULT
    @htmlattribute sortabledirection
    @htmlattributereflected
-   @memberof Coral.Table.Column#
    */
   get sortableDirection() {
     return this._sortableDirection || sortableDirection.DEFAULT;
@@ -209,10 +210,21 @@ class TableColumn extends Component(HTMLTableColElement) {
     this.trigger('coral-table-column:_sort', {onInitialization, sortableDirection, sortableType});
   }
   
-  // Expose enums
+  /**
+   Returns {@link TableColumn} sortable direction options.
+   
+   @return {TableColumnSortableDirectionEnum}
+   */
   static get sortableDirection() { return sortableDirection; }
+  
+  /**
+   Returns {@link TableColumn} sortable type options.
+   
+   @return {TableColumnSortableTypeEnum}
+   */
   static get sortableType() { return sortableType; }
   
+  /** @ignore */
   static get observedAttributes() {
     return [
       'fixedwidth',
@@ -227,6 +239,7 @@ class TableColumn extends Component(HTMLTableColElement) {
     ];
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -238,65 +251,58 @@ class TableColumn extends Component(HTMLTableColElement) {
   }
   
   /**
-   Triggered when {@link Coral.Table.Column#fixedWidth} changed.
+   Triggered when {@link TableColumn#fixedWidth} changed.
    
-   @event Coral.Table.Column#coral-table-column:_fixedwidthchanged
+   @typedef {CustomEvent} coral-table-column:_fixedwidthchanged
    
-   @param {Object} event Event object
    @private
    */
   
   /**
-   Triggered when {@link Coral.Table.Column#orderable} changed.
+   Triggered when {@link TableColumn#orderable} changed.
+ 
+   @typedef {CustomEvent} coral-table-column:_orderablechanged
    
-   @event Coral.Table.Column#coral-table-column:_orderablechanged
-   
-   @param {Object} event Event object
    @private
    */
   
   /**
-   Triggered when {@link Coral.Table.Column#sortable} changed.
+   Triggered when {@link TableColumn#sortable} changed.
+ 
+   @typedef {CustomEvent} coral-table-column:_sortablechanged
    
-   @event Coral.Table.Column#coral-table-column:_sortablechanged
-   
-   @param {Object} event Event object
    @private
    */
   
   /**
-   Triggered when {@link Coral.Table.Column#sortableDirection} changed.
+   Triggered when {@link TableColumn#sortableDirection} changed.
+ 
+   @typedef {CustomEvent} coral-table-column:_sortabledirectionchanged
    
-   @event Coral.Table.Column#coral-table-column:_sortabledirectionchanged
-   
-   @param {Object} event Event object
    @private
    */
   
   /**
-   Triggered when {@link Coral.Table.Column#hidden} changed.
+   Triggered when {@link TableColumn#hidden} changed.
+ 
+   @typedef {CustomEvent} coral-table-column:_hiddenchanged
    
-   @event Coral.Table.Column#coral-table-column:_hiddenchanged
-   
-   @param {Object} event Event object
    @private
    */
   
   /**
-   Triggered before {@link Coral.Table.Column#sortableDirection} changed.
+   Triggered before {@link TableColumn#sortableDirection} changed.
+ 
+   @typedef {CustomEvent} coral-table-column:_beforecolumnsort
    
-   @event Coral.Table.Column#coral-table-column:_beforecolumnsort
-   
-   @param {Object} event Event object
    @private
    */
   
   /**
-   Triggered when {@link Coral.Table.Column#sortableDirection} changed.
+   Triggered when {@link TableColumn#sortableDirection} changed.
+ 
+   @typedef {CustomEvent} coral-table-column:_sort
    
-   @event Coral.Table.Column#coral-table-column:_sort
-   
-   @param {Object} event Event object
    @private
    */
 }

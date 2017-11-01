@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import MasonryItem from './MasonryItem';
 import {SelectableCollection} from 'coralui-collection';
 import {transform, commons} from 'coralui-util';
@@ -23,19 +23,23 @@ import {transform, commons} from 'coralui-util';
 const CLASSNAME = 'coral3-Masonry';
 
 /**
- Enumeration of available default layouts.
+ Enumeration for {@link Masonry} layouts.
  
- @memberof Coral.Masonry
- @enum {String}
+ @typedef {Object} MasonryLayoutsEnum
+ 
+ @property {String} FIXED_CENTERED
+ A Layout with fixed width centered items.
+ @property {String} FIXED_SPREAD
+ A layout with fixed width and evenly spread items.
+ @property {String} VARIABLE
+ A layout with variable width items.
+ @property {String} DASHBOARD
+ A layout with variable width items which are expanded in their height to fill gaps.
  */
 const layouts = {
-  /** A Layout with fixed width centered items. */
   FIXED_CENTERED: 'fixed-centered',
-  /** A layout with fixed width and evenly spread items. */
   FIXED_SPREAD: 'fixed-spread',
-  /** A layout with variable width items. */
   VARIABLE: 'variable',
-  /** A layout with variable width items which are expanded in their height to fill gaps. */
   DASHBOARD: 'dashboard'
 };
 
@@ -81,10 +85,11 @@ const getPreviousItem = (item) => {
  @class Coral.Masonry
  @classdesc A Masonry component
  @htmltag coral-masonry
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class Masonry extends Component(HTMLElement) {
+class Masonry extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
   
@@ -130,11 +135,10 @@ class Masonry extends Component(HTMLElement) {
   }
   
   /**
-   {@link Coral.Collection} which allows to interact with the masonry items.
+   Allows to interact with the masonry items.
    
-   @type {Coral.Collection}
+   @type {SelectableCollection}
    @readonly
-   @memberof Coral.Masonry#
    */
   get items() {
     if (!this._items) {
@@ -151,12 +155,12 @@ class Masonry extends Component(HTMLElement) {
   
   /**
    The layout name for this masonry. Must be one of {@link Coral.Masonry.layouts}.
+   See {@link MasonryLayoutsEnum}.
    
-   @type {Coral.Masonry.layouts}
-   @default Coral.Masonry.layouts.FIXED_CENTERED
+   @type {String}
+   @default MasonryLayoutsEnum.FIXED_CENTERED
    @htmlattribute layout
    @htmlattributereflected
-   @memberof Coral.Masonry#
    */
   get layout() {
     return this._layout || layouts.FIXED_CENTERED;
@@ -189,9 +193,8 @@ class Masonry extends Component(HTMLElement) {
   /**
    The first selected item or <code>null</code> if no item is selected.
    
-   @type {Coral.Masonry.Item}
+   @type {MasonryItem}
    @readonly
-   @memberof Coral.Masonry#
    */
   get selectedItem() {
     return this.items._getFirstSelected();
@@ -200,9 +203,8 @@ class Masonry extends Component(HTMLElement) {
   /**
    An array of all selected items.
    
-   @type {Array.<Coral.Masonry.Item>}
+   @type {Array.<MasonryItem>}
    @readonly
-   @memberof Coral.Masonry#
    */
   get selectedItems() {
     return this.items._getAllSelected();
@@ -216,7 +218,6 @@ class Masonry extends Component(HTMLElement) {
    @type {?Number}
    @default null
    @htmlattribute spacing
-   @memberof Coral.Masonry#
    */
   get spacing() {
     return this._spacing || null;
@@ -234,7 +235,6 @@ class Masonry extends Component(HTMLElement) {
    @type {Boolean}
    @default false
    @htmlattribute orderable
-   @memberof Coral.Masonry.Item#
    */
   get orderable() {
     return this._orderable || false;
@@ -263,7 +263,6 @@ class Masonry extends Component(HTMLElement) {
   /**
    Schedules a layout for the next animation frame. Even if called many times, the layout happens still just once.
    
-   @param reason just for debugging purposes
    @private
    */
   _scheduleLayout() {
@@ -637,11 +636,17 @@ class Masonry extends Component(HTMLElement) {
     this._layouts[name] = Layout;
   }
   
-  // Expose enums
+  /**
+   Returns {@link Masonry} layouts.
+   
+   @return {MasonryLayoutsEnum}
+   */
   static get layouts() { return layouts; }
   
+  /** @ignore */
   static get observedAttributes() { return ['layout', 'spacing', 'orderable']; }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -669,17 +674,15 @@ class Masonry extends Component(HTMLElement) {
   }
   
   /**
-   Triggered when an item is reordered.
+   Triggered when a {@link Masonry} item is reordered.
    
-   @event Coral.Masonry#coral-masonry:order
+   @typedef {CustomEvent} coral-masonry:order
    
-   @param {Object} event
-   Event object
-   @param {Coral.Masonry.Item} event.detail.item
+   @property {MasonryItem} detail.item
    The reordered item
-   @param {?Coral.Masonry.Item} event.detail.oldBefore
+   @property {?MasonryItem} detail.oldBefore
    The previous item before the reordering.
-   @param {?Coral.Masonry.Item} event.detail.before
+   @property {?MasonryItem} detail.before
    The previous item after the reordering.
    */
 }

@@ -19,24 +19,32 @@ import {Icon} from 'coralui-component-icon';
 import {transform, validate} from 'coralui-util';
 
 /**
- Enum for button variant values.
- @enum {String}
- @memberof Coral.Button
+ Enumeration for {@link Button}, {@link AnchorButton} variants.
+ 
+ @typedef {Object} ButtonVariantEnum
+ 
+ @property {String} CTA
+ A button that is meant to grab the user's attention.
+ @property {String} PRIMARY
+ A button that indicates that the button's action is the primary action.
+ @property {String} SECONDARY
+ An alias to secondary, included for backwards compatibility.
+ @property {String} DEFAULT
+ A default, gray button.
+ @property {String} QUIET
+ A button with no border or background.
+ @property {String} WARNING
+ A button that indicates that the button's action is dangerous.
+ @property {String} MINIMAL
+ A minimal button with no background or border.
  */
 const variant = {
-  /** A button that is meant to grab the user's attention. */
   CTA: 'cta',
-  /** A button that indicates that the button's action is the primary action. */
   PRIMARY: 'primary',
-  /** A default, gray button */
   SECONDARY: 'secondary',
-  /** An alias to secondary, included for backwards compatibility. */
   DEFAULT: 'secondary',
-  /** A button with no border or background. */
   QUIET: 'quiet',
-  /** A button that indicates that the button's action is dangerous. */
   WARNING: 'warning',
-  /** A minimal button with no background or border. */
   MINIMAL: 'minimal'
 };
 
@@ -51,34 +59,41 @@ for (const variantValue in variant) {
 }
 
 /**
- Enumeration representing button sizes.
- @memberof Coral.Button
- @enum {String}
+ Enumeration for {@link Button}, {@link AnchorButton} sizes.
+ 
+ @typedef {Object} ButtonSizeEnum
+ 
+ @property {String} MEDIUM
+ A medium button is the default, normal sized button.
+ @property {String} LARGE
+ A large button, which is larger than a medium button.
  */
 const size = {
-  /** A medium button is the default, normal sized button. */
   MEDIUM: 'M',
-  /** A large button, which is larger than a medium button. */
   LARGE: 'L'
 };
 
 /**
- Enumeration representing the icon position inside the button.
- @memberof Coral.Button
- @enum {String}
+ Enumeration for {@link Button}, {@link AnchorButton} icon position options.
+ 
+ @typedef {Object} ButtonIconPositionEnum
+ 
+ @property {String} RIGHT
+ Position should be right of the button label.
+ @property {String} LEFT
+ Position should be left of the button label.
  */
 const iconPosition = {
-  /** Position should be right of the button label. */
   RIGHT: 'right',
-  /** Position should be left of the button label. */
   LEFT: 'left'
 };
 
 /**
- @mixin Button
+ @mixin ButtonMixin
  @classdesc The base element for button components
  */
-const Button = (superClass) => class extends superClass {
+const ButtonMixin = (superClass) => class extends superClass {
+  /** @ignore */
   constructor() {
     super();
     
@@ -111,7 +126,6 @@ const Button = (superClass) => class extends superClass {
    The label of the button.
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Button#
    */
   get label() {
     return this._getContentZone(this._elements.label);
@@ -129,11 +143,12 @@ const Button = (superClass) => class extends superClass {
   /**
    Position of the icon relative to the label. If no <code>iconPosition</code> is provided, it will be set on the
    left side by default.
-   @type {Coral.Button.iconPosition}
-   @default Coral.Button.iconPosition.LEFT
+   See {@link ButtonIconPositionEnum}.
+   
+   @type {String}
+   @default ButtonIconPositionEnum.LEFT
    @htmlattribute iconposition
    @htmlattributereflected
-   @memberof Coral.Button#
    */
   get iconPosition() {
     return this._iconPosition || iconPosition.LEFT;
@@ -147,12 +162,11 @@ const Button = (superClass) => class extends superClass {
   }
   
   /**
-   Specifies the icon name used inside the button. See {@link Coral.Icon} for valid icon names.
+   Specifies the icon name used inside the button. See {@link Icon} for valid icon names.
+   
    @type {String}
    @default ""
    @htmlattribute icon
-   @memberof Coral.Button#
-   @see {@link Coral.Icon}
    */
   get icon() {
     return this._elements.icon && this._elements.icon.icon || '';
@@ -162,12 +176,11 @@ const Button = (superClass) => class extends superClass {
   }
   
   /**
-   Size of the icon. It accepts both lower and upper case sizes.
-   @type {Coral.Icon.size}
-   @default Coral.Icon.size.SMALL
+   Size of the icon. It accepts both lower and upper case sizes. See {@link IconSizeEnum}.
+   
+   @type {String}
+   @default IconSizeEnum.SMALL
    @htmlattribute iconsize
-   @memberof Coral.Button#
-   @see {@link Coral.Icon#size}
    */
   get iconSize() {
     return this._elements.icon && this._elements.icon.size || Icon.size.SMALL;
@@ -179,11 +192,12 @@ const Button = (superClass) => class extends superClass {
   /**
    The size of the button. It accepts both lower and upper case sizes. Currently only "M" (the default) and "L"
    are available.
-   @type {Coral.Button.size}
-   @default Coral.Button.size.MEDIUM
+   See {@link ButtonSizeEnum}.
+   
+   @type {String}
+   @default ButtonSizeEnum.MEDIUM
    @htmlattribute size
    @htmlattributereflected
-   @memberof Coral.Button#
    */
   get size() {
     return this._size || size.MEDIUM;
@@ -198,11 +212,11 @@ const Button = (superClass) => class extends superClass {
   
   /**
    Whether the button is selected.
+   
    @type {Boolean}
    @default false
    @htmlattribute selected
    @htmlattributereflected
-   @memberof Coral.Button#
    */
   get selected() {
     return this._selected || false;
@@ -228,11 +242,11 @@ const Button = (superClass) => class extends superClass {
   
   /**
    Expands the button to the full width of the parent.
+   
    @type {Boolean}
    @default false
    @htmlattribute block
    @htmlattributereflected
-   @memberof Coral.Button#
    */
   get block() {
     return this._block || false;
@@ -245,12 +259,12 @@ const Button = (superClass) => class extends superClass {
   }
   
   /**
-   The button's variant.
-   @type {Coral.Button.variant}
-   @default Coral.Button.variant.SECONDARY
+   The button's variant. See {@link ButtonVariantEnum}.
+   
+   @type {String}
+   @default ButtonVariantEnum.SECONDARY
    @htmlattribute variant
    @htmlattributereflected
-   @memberof Coral.Button#
    */
   get variant() {
     return this._variant || variant.SECONDARY;
@@ -330,15 +344,39 @@ const Button = (superClass) => class extends superClass {
     return Object.keys(this._contentZones)[0];
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.label; }
   set defaultContentZone(value) { this.label = value; }
+  
   get _contentZones() { return {'coral-button-label': 'label'}; }
   
-  // Expose enumerations
+  /**
+   Returns {@link Button} sizes.
+   
+   @return {ButtonSizeEnum}
+   */
   static get size() { return size; }
+  
+  /**
+   Returns {@link Button} variants.
+   
+   @return {ButtonVariantEnum}
+   */
   static get variant() { return variant; }
+  
+  /**
+   Returns {@link Button} icon positions.
+   
+   @return {ButtonIconPositionEnum}
+   */
   static get iconPosition() { return iconPosition; }
   
+  /** @ignore */
   static get observedAttributes() {
     return [
       'iconposition',
@@ -354,6 +392,7 @@ const Button = (superClass) => class extends superClass {
     ];
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -410,18 +449,20 @@ const Button = (superClass) => class extends superClass {
   }
   
   /**
-   Triggered when {@link Coral.Button#selected} changed.
-   @event Coral.Button#coral-button:_selectedchanged
-   @param {Object} event Event object
+   Triggered when {@link Button#selected} changed.
+   
+   @typedef {CustomEvent} coral-button:_selectedchanged
+   
    @private
    */
   
   /**
-   Triggered when {@link Coral.Button#value} changed.
-   @event Coral.Button#coral-button:_valuechanged
-   @param {Object} event Event object
+   Triggered when {@link Button#value} changed.
+   
+   @typedef {CustomEvent} coral-button:_valuechanged
+   
    @private
    */
 };
 
-export default Button;
+export default ButtonMixin;

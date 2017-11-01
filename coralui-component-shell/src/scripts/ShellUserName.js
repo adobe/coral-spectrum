@@ -19,7 +19,7 @@
  @class Coral.Shell.User.Name
  @classdesc Shell's User name component
  @htmltag coral-shell-user-name
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class ShellUserName extends HTMLElement {}
 

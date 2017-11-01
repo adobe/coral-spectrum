@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 
 const CLASSNAME = 'coral-Table-headerCell';
 
@@ -24,10 +24,11 @@ const CLASSNAME = 'coral-Table-headerCell';
  @classdesc A Table header cell component
  @htmltag coral-table-headercell
  @htmlbasetag th
- @extends HTMLTableCellElement
- @extends Coral.mixin.component
+ @extends {HTMLTableCellElement}
+ @extends {ComponentMixin}
  */
-class TableHeaderCell extends Component(HTMLTableCellElement) {
+class TableHeaderCell extends ComponentMixin(HTMLTableCellElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -49,7 +50,6 @@ class TableHeaderCell extends Component(HTMLTableCellElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Table.HeaderCell#
    */
   get content() {
     return this._getContentZone(this._elements.content);
@@ -69,10 +69,18 @@ class TableHeaderCell extends Component(HTMLTableCellElement) {
     this.trigger('coral-table-headercell:_contentchanged');
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.content; }
   set defaultContentZone(value) { this.content = value; }
+  
   get _contentZones() { return {'coral-table-headercell-content': 'content'}; }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -93,11 +101,10 @@ class TableHeaderCell extends Component(HTMLTableCellElement) {
   }
   
   /**
-   Triggered when the content changed.
+   Triggered when the {@link TableHeaderCell} content changed.
+ 
+   @typedef {CustomEvent} coral-table-headercell:_contentchanged
    
-   @event Coral.Table.HeaderCell#coral-table-headercell:_contentchanged
-   
-   @param {Object} event Event object
    @private
    */
 }

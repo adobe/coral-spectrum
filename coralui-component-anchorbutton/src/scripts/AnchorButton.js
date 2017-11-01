@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import ButtonMixin from 'coralui-mixin-button';
+import {ComponentMixin} from 'coralui-mixin-component';
+import {ButtonMixin} from 'coralui-mixin-button';
 import {transform, commons} from 'coralui-util';
 
 // Key code
@@ -27,11 +27,12 @@ const SPACE = 32;
  @classdesc A Link component rendering as a button.
  @htmltag coral-anchorbutton
  @htmlbasetag a
- @extends HTMLAnchorElement
- @extends Coral.mixin.component
- @extends Coral.mixin.button
+ @extends {HTMLAnchorElement}
+ @extends {ComponentMixin}
+ @extends {ButtonMixin}
  */
-class AnchorButton extends ButtonMixin(Component(HTMLAnchorElement)) {
+class AnchorButton extends ButtonMixin(ComponentMixin(HTMLAnchorElement)) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -52,7 +53,6 @@ class AnchorButton extends ButtonMixin(Component(HTMLAnchorElement)) {
    @default false
    @htmlattribute disabled
    @htmlattributereflected
-   @memberof Coral.AnchorButton#
    */
   get disabled() {
     return this._disabled || false;
@@ -98,10 +98,12 @@ class AnchorButton extends ButtonMixin(Component(HTMLAnchorElement)) {
   // Override content zone name
   get _contentZones() { return {'coral-anchorbutton-label': 'label'}; }
   
+  /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['disabled']);
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

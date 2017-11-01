@@ -19,7 +19,7 @@
  @class Coral.Shell.User.Content
  @classdesc Shell's User content component
  @htmltag coral-shell-user-content
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class ShellUserContent extends HTMLElement {}
 

@@ -15,23 +15,27 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {transform, validate} from 'coralui-util';
 
 /**
- Enum for CycleButton.Item displayMode values.
+ Enum for {CycleButtonItem} display options.
  
- @enum {String}
- @memberof Coral.CycleButton.Item
+ @typedef {Object} CycleButtonItemDisplayModeEnum
+ 
+ @property {String} ICON
+ Icon display mode.
+ @property {String} TEXT
+ Text display mode.
+ @property {String} ICON_TEXT
+ Icon and text display mode.
+ @property {String} INHERIT
+ Inherit display mode.
  */
 const displayMode = {
-  /** Icon display mode **/
   ICON: 'icon',
-  /** Text display mode **/
   TEXT: 'text',
-  /** Icon and text display mode **/
   ICON_TEXT: 'icontext',
-  /** Inherit display mode **/
   INHERIT: 'inherit'
 };
 
@@ -39,10 +43,10 @@ const displayMode = {
  @class Coral.CycleButton.Item
  @classdesc A CycleButton Item component
  @htmltag coral-cyclebutton-item
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class CycleButtonItem extends Component(HTMLElement) {
+class CycleButtonItem extends ComponentMixin(HTMLElement) {
   /**
    The Item's icon. See {@link Coral.Icon} for valid icon names.
    
@@ -50,7 +54,6 @@ class CycleButtonItem extends Component(HTMLElement) {
    @default ""
    @htmlattribute icon
    @htmlattributereflected
-   @memberof Coral.CycleButton.Item#
    */
   get icon() {
     return this._icon || '';
@@ -67,7 +70,6 @@ class CycleButtonItem extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.CycleButton.Item#
    */
   get content() {
     return this;
@@ -88,7 +90,6 @@ class CycleButtonItem extends Component(HTMLElement) {
    @default false
    @htmlattribute disabled
    @htmlattributereflected
-   @memberof Coral.CycleButton.Item#
    */
   get disabled() {
     return this._disabled || false;
@@ -116,7 +117,6 @@ class CycleButtonItem extends Component(HTMLElement) {
    @default false
    @htmlattribute selected
    @htmlattributereflected
-   @memberof Coral.CycleButton.Item#
    */
   get selected() {
     return this._selected || false;
@@ -140,11 +140,12 @@ class CycleButtonItem extends Component(HTMLElement) {
    it will defer to the component level displayMode. If the selected item does not have the necessary icon or text
    information, then fallback to show whichever is available. The appearance of collapsed items in the popover are
    not affected by this property.
+   See {@link CycleButtonItemDisplayModeEnum}.
    
-   @type {Coral.CycleButton.Item.displayMode}
-   @default Coral.CycleButton.Item.displayMode.INHERIT
+   @type {String}
+   @default CycleButtonItemDisplayModeEnum.INHERIT
    @htmlattribute displaymode
-   @memberof Coral.CycleButton.Item#
+   @htmlattributereflected
    */
   get displayMode() {
     return this._displayMode || displayMode.INHERIT;
@@ -157,13 +158,19 @@ class CycleButtonItem extends Component(HTMLElement) {
     this.trigger('coral-cyclebutton-item:_displaymodechanged');
   }
   
-  // Expose enums
+  /**
+   Returns {@link CycleButtonItem} display options.
+   
+   @return {CycleButtonItemDisplayModeEnum}
+   */
   static get displayMode() { return displayMode; }
   
+  /** @ignore */
   static get observedAttributes() {
     return ['selected', 'disabled', 'icon', 'displayMode', 'displaymode'];
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

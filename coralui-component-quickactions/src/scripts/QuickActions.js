@@ -30,45 +30,53 @@ const BUTTON_GAP = 10;
 const BUTTON_FOCUSABLE_SELECTOR = '.coral3-QuickActions-button:not([disabled]):not([hidden])';
 
 /**
- QuickActions interaction values.
+ Enumeration for {@link QuickActions} interaction options.
  
- @enum {String}
- @memberof Coral.QuickActions
+ @typedef {Object} QuickActionsInteractionEnum
+ 
+ @property {String} ON
+ Show when the target is hovered or focused and hide when the mouse is moved out or focus is lost.
+ @property {String} OFF
+ Do not show or hide automatically.
  */
 const interaction = {
-  /** Show when the target is hovered or focused and hide when the mouse is moved out or focus is lost. */
   ON: 'on',
-  /** Do not show or hide automatically. */
   OFF: 'off'
 };
 
 /**
- QuickActions anchored overlay targets.
+ Enumeration for {@link QuickActions} anchored overlay target options.
  
- @enum {String}
- @memberof Coral.QuickActions
+ @typedef {Object} QuickActionsTargetEnum
+ 
+ @property {String} PARENT
+ Use the parent element in the DOM.
+ @property {String} PREVIOUS
+ Use the previous sibling element in the DOM.
+ @property {String} NEXT
+ Use the next sibling element in the DOM.
  */
 const target = {
-  /** Use the parent element in the DOM. */
   PARENT: '_parent',
-  /** Use the previous sibling element in the DOM. */
   PREVIOUS: '_prev',
-  /** Use the next sibling element in the DOM. */
   NEXT: '_next'
 };
 
 /**
- QuickActions placement values.
+ Enumeration for {@link QuickActions} placement options.
  
- @enum {String}
- @memberof Coral.QuickActions
+ @typedef {Object} QuickActionsPlacementEnum
+ 
+ @property {String} TOP
+ QuickActions inset to the top of the target.
+ @property {String} CENTER
+ QuickActions inset to the center of the target.
+ @property {String} BOTTOM
+ QuickActions inset to the bottom the target.
  */
 const placement = {
-  /** QuickActions inset to the top of the target. */
   TOP: 'top',
-  /** QuickActions inset to the center of the target. */
   CENTER: 'center',
-  /** QuickActions inset to the bottom the target. */
   BOTTOM: 'bottom'
 };
 
@@ -80,9 +88,10 @@ const CLASSNAME = 'coral3-QuickActions';
  @class Coral.QuickActions
  @classdesc A QuickActions component
  @htmltag coral-quickactions
- @extends Coral.Overlay
+ @extends {Overlay}
  */
 class QuickActions extends Overlay {
+  /** @ignore */
   constructor() {
     super();
     
@@ -149,11 +158,9 @@ class QuickActions extends Overlay {
   
   /**
    The Item collection.
-   See {@link Coral.Collection} for more details.
    
-   @type {Coral.Collection}
+   @type {Collection}
    @readonly
-   @memberof Coral.QuickActions#
    */
   get items() {
     // we do lazy initialization of the collection
@@ -178,7 +185,6 @@ class QuickActions extends Overlay {
    @default 4
    @htmlattribute threshold
    @htmlattributereflected
-   @memberof Coral.QuickActions#
    */
   get threshold() {
     return typeof this._threshold === 'number' ? this._threshold : 4;
@@ -191,11 +197,11 @@ class QuickActions extends Overlay {
   /**
    The placement of the QuickActions. The value may be one of 'top', 'center' and 'bottom' and indicates the vertical
    alignment of the QuickActions relative to their container.
+   See {@link OverlayPlacementEnum}.
    
-   @type {Coral.Overlay.placement}
-   @default Coral.Overlay.placement.TOP
+   @type {String}
+   @default OverlayPlacementEnum.TOP
    @htmlattribute placement
-   @memberof Coral.QuickActions#
    */
   get placement() {
     return super.placement;
@@ -208,13 +214,12 @@ class QuickActions extends Overlay {
   }
   
   /**
-   Whether the QuickActions should show when the target is interacted with.
+   Whether the QuickActions should show when the target is interacted with. See {@link QuickActionsInteractionEnum}.
    
-   @type {Coral.QuickActions.interaction}
-   @default Coral.QuickActions.interaction.ON
+   @type {String}
+   @default QuickActionsInteractionEnum.ON
    @name interaction
    @htmlattribute interaction
-   @memberof Coral.QuickActions#
    */
   get interaction() {
     return super.interaction;
@@ -230,7 +235,9 @@ class QuickActions extends Overlay {
     }
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link Overlay#target}.
+   */
   get target() {
     return super.target;
   }
@@ -265,7 +272,9 @@ class QuickActions extends Overlay {
     }
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link Overlay#open}.
+   */
   get open() {
     return super.open;
   }
@@ -1065,7 +1074,7 @@ class QuickActions extends Overlay {
     }
   }
   
-  // JSDoc inherited
+  /** @ignore */
   reposition() {
     // Override to support placement.CENTER
     this._toggleCenterPlacement(true);
@@ -1083,15 +1092,27 @@ class QuickActions extends Overlay {
     }
   }
   
-  // Expose enumerations
   // Override placement and target
+  /**
+   Returns {@link QuickActions} placement options.
+   
+   @return {QuickActionsPlacementEnum}
+   */
   static get placement() { return placement; }
+  
+  /**
+   Returns {@link QuickActions} target options.
+   
+   @return {QuickActionsTargetEnum}
+   */
   static get target() { return target; }
   
+  /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['threshold']);
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
   

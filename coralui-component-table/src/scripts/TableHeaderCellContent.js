@@ -19,7 +19,7 @@
  @class Coral.Table.HeaderCell.Content
  @classdesc The Table HeaderCell content
  @htmltag coral-table-headercell-content
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class TableHeaderCellContent extends HTMLElement {}
 

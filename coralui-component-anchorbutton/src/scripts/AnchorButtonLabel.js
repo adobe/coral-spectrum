@@ -19,7 +19,7 @@
  @class Coral.AnchorButton.Label
  @classdesc The AnchorButton label content
  @htmltag coral-anchorbutton-label
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class AnchorButtonLabel extends HTMLElement {}
 

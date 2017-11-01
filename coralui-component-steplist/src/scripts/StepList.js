@@ -15,35 +15,40 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {SelectableCollection} from 'coralui-collection';
 import {transform, validate, commons} from 'coralui-util';
 import getTarget from './getTarget';
 
 /**
- Enumeration representing StepList interaction patterns.
+ Enumeration for {@link StepList} interaction options.
  
  @todo support "click only past steps" mode
- @enum {String}
- @memberof Coral.StepList
+ 
+ @typedef {Object} StepListInteractionEnum
+ 
+ @property {String} ON
+ Steps can be clicked to visit them.
+ @property {String} OFF
+ Steps cannot be clicked.
  */
 const interaction = {
-  /** Steps can be clicked to visit them. */
   ON: 'on',
-  /** Steps cannot be clicked. */
   OFF: 'off'
 };
 
 /**
- Enumeration representing the StepList size.
+ Enumeration for {@link StepList} sizes.
  
- @enum {String}
- @memberof Coral.StepList
+ @typedef {Object} StepListSizeEnum
+ 
+ @property {String} SMALL
+ A small-sized StepList.
+ @property {String} LARGE
+ A large-sized StepList.
  */
 const size = {
-  /** A small-sized StepList. */
   SMALL: 'S',
-  /** A large-sized StepList. */
   LARGE: 'L'
 };
 
@@ -54,10 +59,11 @@ const CLASSNAME = 'coral3-StepList';
  @class Coral.StepList
  @classdesc A StepList component
  @htmltag coral-steplist
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class StepList extends Component(HTMLElement) {
+class StepList extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -94,12 +100,10 @@ class StepList extends Component(HTMLElement) {
   }
   
   /**
-   The Collection Interface that allows interacting with the items that the component contains. See
-   {@link Coral.Collection} for more details.
+   The Collection Interface that allows interacting with the items that the component contains.
    
-   @type {Coral.Collection}
+   @type {SelectableCollection}
    @readonly
-   @memberof Coral.StepList#
    */
   get items() {
     // we do lazy initialization of the collection
@@ -120,7 +124,6 @@ class StepList extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @readonly
-   @memberof Coral.SelectList#
    */
   get selectedItem() {
     return this.items._getLastSelected();
@@ -134,7 +137,6 @@ class StepList extends Component(HTMLElement) {
    @type {?HTMLElement|String}
    @default null
    @htmlattribute target
-   @memberof Coral.StepList#
    */
   get target() {
     return this._target || null;
@@ -194,12 +196,12 @@ class StepList extends Component(HTMLElement) {
   /**
    The size of the StepList. It accepts both lower and upper case sizes. Currently only "S" and "L" (the default)
    are available.
+   See {@link StepListSizeEnum}.
    
-   @type {Coral.StepList.size}
-   @default Coral.StepList.size.LARGE
+   @type {String}
+   @default StepListSizeEnum.LARGE
    @htmlattribute size
    @htmlattributereflected
-   @memberof Coral.StepList#
    */
   get size() {
     return this._size || size.LARGE;
@@ -214,12 +216,12 @@ class StepList extends Component(HTMLElement) {
   
   /**
    Whether Steps should be interactive or not. When interactive, a Step can be clicked to jump to it.
+   See {@link StepListInteractionEnum}.
    
-   @type {Coral.StepList.interaction}
-   @default Coral.StepList.interaction.OFF
+   @type {String}
+   @default StepListInteractionEnum.OFF
    @htmlattribute interaction
    @htmlattributereflected
-   @memberof Coral.StepList#
    */
   get interaction() {
     return this._interaction || interaction.OFF;
@@ -486,7 +488,7 @@ class StepList extends Component(HTMLElement) {
   /**
    Show the next Step.
    
-   @fires Coral.StepList#coral-steplist:change
+   @emits {coral-steplist:change}
    */
   next() {
     let item = this.selectedItem;
@@ -499,7 +501,7 @@ class StepList extends Component(HTMLElement) {
   /**
    Show the previous Step.
    
-   @fires Coral.StepList#coral-steplist:change
+   @emits {coral-steplist:change}
    */
   previous() {
     let item = this.selectedItem;
@@ -509,12 +511,24 @@ class StepList extends Component(HTMLElement) {
     }
   }
   
-  // Expose enumerations
+  /**
+   Returns {@link StepList} sizes.
+   
+   @return {StepListSizeEnum}
+   */
   static get size() { return size; }
+  
+  /**
+   Returns {@link StepList} interaction options.
+   
+   @return {StepListInteractionEnum}
+   */
   static get interaction() { return interaction; }
   
+  /** @ignore */
   static get observedAttributes() { return ['target', 'size', 'interaction']; }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -544,15 +558,13 @@ class StepList extends Component(HTMLElement) {
   }
   
   /**
-   Triggered when the selected Step has changed.
+   Triggered when the {@link StepList} selected {@link Step} has changed.
    
-   @event Coral.StepList#coral-steplist:change
+   @typedef {CustomEvent} coral-steplist:change
    
-   @param {Object} event
-   Event object.
-   @param {HTMLElement} event.detail.selection
+   @property {Step} detail.selection
    The newly selected Step.
-   @param {HTMLElement} event.detail.oldSelection
+   @property {Step} detail.oldSelection
    The previously selected Step.
    */
 }

@@ -19,7 +19,7 @@
  @class Coral.Card.Overlay
  @classdesc The Card Overlay
  @htmltag coral-card-overlay
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class CardOverlay extends HTMLElement {}
 

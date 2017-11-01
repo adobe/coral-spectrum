@@ -1,9 +1,9 @@
 import 'coralui-externals';
 
-import Component from './src/scripts/Component';
+import ComponentMixin from './src/scripts/ComponentMixin';
 import {mixin} from 'coralui-util';
 
 // Expose mixin on Coral namespace
-mixin.component = Component;
+mixin._component = ComponentMixin;
 
-export default Component;
+export {ComponentMixin};

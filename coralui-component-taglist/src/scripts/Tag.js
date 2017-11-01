@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import 'coralui-component-button';
 import base from '../templates/base';
 import {transform, validate, events} from 'coralui-util';
@@ -23,25 +23,45 @@ import {transform, validate, events} from 'coralui-util';
 const CLASSNAME = 'coral3-Tag';
 
 /**
- Enum for tag size values.
+ Enumeration for {@link Tag} sizes.
  
- @enum {String}
- @memberof Coral.Tag
+ @typedef {Object} TagSizeEnum
+ 
+ @property {String} SMALL
+ A default tag (non-interactive), height 20px without closable button.
+ @property {String} MEDIUM
+ A default tag (non-interactive), height 28px without closable button.
+ @property {String} LARGE
+ A default tag (interactive), height 32px without closable button.
  */
 const size = {
-  /** A default tag (non-interactive), height 20px without closable button. */
   SMALL: 'S',
-  /** A default tag (non-interactive), height 28px without closable button. */
   MEDIUM: 'M',
-  /** A default tag (interactive), height 32px without closable button. */
   LARGE: 'L'
 };
 
 /**
- Color of the tag. By default they are semi-transparent unless otherwise stated.
+ Enumeration for {@link Tag} colors. By default they are semi-transparent unless otherwise stated.
  
- @enum {String}
- @memberof Coral.Tag
+ @typedef {Object} TagColorEnum
+ 
+ @property {String} DEFAULT
+ @property {String} GREY
+ @property {String} BLUE
+ @property {String} LIGHT_BLUE
+ @property {String} PERIWINKLE
+ @property {String} PLUM
+ @property {String} FUCHSIA
+ @property {String} MAGENTA
+ @property {String} RED
+ @property {String} ORANGE
+ @property {String} TANGERINE
+ @property {String} YELLOW
+ @property {String} CHARTREUSE
+ @property {String} GREEN
+ @property {String} KELLY_GREEN
+ @property {String} SEA_FOAM
+ @property {String} CYAN
  */
 const color = {
   DEFAULT: '',
@@ -111,10 +131,11 @@ const getOffsetCenter = (element) => {
  @class Coral.Tag
  @classdesc A Tag component
  @htmltag coral-tag
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class Tag extends Component(HTMLElement) {
+class Tag extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -140,7 +161,6 @@ class Tag extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Tag#
    */
   get label() {
     return this._getContentZone(this._elements.label);
@@ -163,7 +183,6 @@ class Tag extends Component(HTMLElement) {
    @default false
    @htmlattribute closable
    @htmlattributereflected
-   @memberof Coral.Tag#
    */
   get closable() {
     return this._closable || false;
@@ -187,7 +206,6 @@ class Tag extends Component(HTMLElement) {
    @default ""
    @htmlattribute value
    @htmlattributereflected
-   @memberof Coral.Tag#
    */
   get value() {
     return typeof this._value === 'string' ? this._value : this.textContent.replace(/\s{2,}/g, ' ').trim();
@@ -206,7 +224,6 @@ class Tag extends Component(HTMLElement) {
    @default false
    @htmlattribute quiet
    @htmlattributereflected
-   @memberof Coral.Tag#
    */
   get quiet() {
     return this._quiet || false;
@@ -225,7 +242,6 @@ class Tag extends Component(HTMLElement) {
    @default false
    @htmlattribute multiline
    @htmlattributereflected
-   @memberof Coral.Tag#
    */
   get multiline() {
     return this._multiline || false;
@@ -238,13 +254,12 @@ class Tag extends Component(HTMLElement) {
   }
   
   /**
-   The tag's size.
+   The tag's size. See {@link {TagSizeEnum}.
    
-   @type {Coral.Tag.size}
-   @default Coral.Tag.size.LARGE
+   @type {String}
+   @default TagSizeEnum.LARGE
    @htmlattribute size
    @htmlattributereflected
-   @memberof Coral.Tag#
    */
   get size() {
     return this._size || size.LARGE;
@@ -259,12 +274,11 @@ class Tag extends Component(HTMLElement) {
   }
   
   /**
-   The tags's color.
+   The tags's color. See {@link TagColorEnum}.
    
-   @type {Coral.Tag.color}
+   @type {String}
    @default Coral.Tag.color.DEFAULT
    @htmlattribute color
-   @memberof Coral.Tag#
    */
   get color() {
     return this._color || color.DEFAULT;
@@ -349,8 +363,7 @@ class Tag extends Component(HTMLElement) {
   /**
    Updates the aria-label property from the button and label elements.
    
-   @memberof Coral.Tag#
-   @ignore
+      @ignore
    */
   _updateAriaLabel() {
     const button = this._elements.button;
@@ -393,14 +406,32 @@ class Tag extends Component(HTMLElement) {
     }
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.label; }
   set defaultContentZone(value) { this.label = value; }
+  
   get _contentZones() { return {'coral-tag-label': 'label'}; }
   
-  // expose enumerations
+  /**
+   Returns {@link Tag} sizes.
+   
+   @return {TagSizeEnum}
+   */
   static get size() { return size; }
+  
+  /**
+   Returns {@link Tag} colors.
+   
+   @return {TagColorEnum}
+   */
   static get color() { return color; }
   
+  /** @ignore */
   static get observedAttributes() {
     return [
       'closable',
@@ -413,6 +444,7 @@ class Tag extends Component(HTMLElement) {
     ];
   }
   
+  /** @ignore */
   attributeChangedCallback(name, oldValue, value) {
     // This is required by TagList but we don't need to expose disabled publicly as API
     if (name === 'disabled') {
@@ -423,6 +455,7 @@ class Tag extends Component(HTMLElement) {
     }
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -468,6 +501,7 @@ class Tag extends Component(HTMLElement) {
     this.trigger('coral-tag:_connected');
   }
   
+  /** @ignore */
   disconnectedCallback() {
     super.disconnectedCallback();
     
@@ -478,20 +512,18 @@ class Tag extends Component(HTMLElement) {
   }
   
   /**
-   Triggered when the value is changed.
+   Triggered when the {@link Tag} value is changed.
+ 
+   @typedef {CustomEvent} coral-tag:_valuechanged
    
-   @event Coral.Tag#coral-tag:_valuechanged
-   
-   @param {Object} event Event object
    @private
    */
   
   /**
-   Triggered when the tag is added to the document.
+   Triggered when the {@link Tag} is added to the document.
+ 
+   @typedef {CustomEvent} coral-tag:_connected
    
-   @event Coral.Tag#coral-tag:_connected
-   
-   @param {Object} event Event object
    @private
    */
 }

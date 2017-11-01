@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import getFirstSelectableWrappedItem from './getFirstSelectableWrappedItem';
 import {commons} from 'coralui-util';
 
@@ -25,10 +25,11 @@ const CLASSNAME = 'coral3-ActionBar';
  @class Coral.ActionBar
  @classdesc An ActionBar component
  @htmltag coral-actionbar
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class ActionBar extends Component(HTMLElement) {
+class ActionBar extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -64,7 +65,6 @@ class ActionBar extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.ActionBar#
    */
   get primary() {
     return this._getContentZone(this._elements.primary);
@@ -85,7 +85,6 @@ class ActionBar extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.ActionBar#
    */
   get secondary() {
     return this._getContentZone(this._elements.secondary);
@@ -507,8 +506,15 @@ class ActionBar extends Component(HTMLElement) {
     this._elements.primary.appendChild(frag);
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.primary; }
   set defaultContentZone(value) { this.primary = value; }
+  
   get _contentZones() {
     return {
       'coral-actionbar-primary': 'primary',
@@ -516,6 +522,7 @@ class ActionBar extends Component(HTMLElement) {
     };
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

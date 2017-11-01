@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import ColumnViewCollection from './ColumnViewCollection';
 import selectionMode from './selectionMode';
 import {transform, validate, commons} from 'coralui-util';
@@ -47,10 +47,11 @@ const scrollTo = (element, to, duration, scrollCallback) => {
  @class Coral.ColumnView
  @classdesc A ColumnView component
  @htmltag coral-columnview
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class ColumnView extends Component(HTMLElement) {
+class ColumnView extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -90,11 +91,10 @@ class ColumnView extends Component(HTMLElement) {
   }
   
   /**
-   Collection that holds all the columns inside the ColumnView. See {@link Coral.Collection} for more details.
+   Collection that holds all the columns inside the ColumnView.
    
-   @type {Coral.Collection}
+   @type {ColumnViewCollection}
    @readonly
-   @memberof Coral.ColumnView#
    */
   get columns() {
     // constructs the collection on first request
@@ -109,12 +109,10 @@ class ColumnView extends Component(HTMLElement) {
   }
   
   /**
-   Collection used to represent the coral-columnview-item across all columns. See {@link Coral.Collection} for more
-   details.
+   Collection used to represent the coral-columnview-item across all columns.
    
-   @type {Coral.Collection}
+   @type {ColumnViewCollection}
    @readonly
-   @memberof Coral.ColumnView#
    
    @private
    */
@@ -131,13 +129,12 @@ class ColumnView extends Component(HTMLElement) {
   }
   
   /**
-   Selection mode of the ColumnView.
+   Selection mode of the ColumnView. See {@link ColumnViewSelectionModeEnum}.
    
-   @type {Coral.ColumnView.selectionMode}
-   @default Coral.ColumnView.selectionMode.NONE
+   @type {String}
+   @default ColumnViewSelectionModeEnum.NONE
    @htmlattribute selectionmode
    @htmlattributereflected
-   @memberof Coral.ColumnView#
    */
   get selectionMode() {
     return this._selectionMode || selectionMode.NONE;
@@ -167,7 +164,6 @@ class ColumnView extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @readonly
-   @memberof Coral.ColumnView#
    */
   get selectedItem() {
     return this.selectionMode !== selectionMode.NONE ? this.items._getFirstSelected() : null;
@@ -179,7 +175,6 @@ class ColumnView extends Component(HTMLElement) {
    
    @type {Array.<HTMLElement>}
    @readonly
-   @memberof Coral.ColumnView#
    */
   get selectedItems() {
     return this.selectionMode !== selectionMode.NONE ? this.items._getAllSelected() : [];
@@ -188,10 +183,8 @@ class ColumnView extends Component(HTMLElement) {
   /**
    Active Item that corresponds to the last item in the path.
    
-   
    @type {HTMLElement}
    @readonly
-   @memberof Coral.ColumnView#
    */
   get activeItem() {
     return this.items._getAllActive().pop() || null;
@@ -244,14 +237,7 @@ class ColumnView extends Component(HTMLElement) {
   /**
    Requests external data to be loaded.
    
-   @fires Coral.ColumnView#coral-columnview:loaditems
-   
-   @param {HTMLElement} column
-   The column that is requesting more data to be loaded.
-   @param {Number} start
-   The amount of items inside the column.
-   @param {HTMLElement} [item]
-   Item that activated the load.
+   @emits {coral-columnview:loaditems}
    
    @private
    */
@@ -614,11 +600,12 @@ class ColumnView extends Component(HTMLElement) {
    The column that needs to be scrolled into view.
    @param {Boolean} clearEmptyColumns
    Remove empty columns once animation is done.
+   @param {Boolean} triggerEvent
    
    @private
    */
-  // @todo: improve animation effect when key is kept press
   _scrollColumnIntoView(column, clearEmptyColumns, triggerEvent) {
+    // @todo: improve animation effect when key is kept press
     let left = 0;
     let duration;
     
@@ -807,7 +794,7 @@ class ColumnView extends Component(HTMLElement) {
    @param {HTMLElement} column
    Last column of the ColumnView.
    
-   @fires Coral.ColumnView#coral-columnview:navigate
+   @emits {coral-columnview:navigate}
    
    @private
    */
@@ -845,7 +832,7 @@ class ColumnView extends Component(HTMLElement) {
    @param {Boolean} [scrollToColumn = true]
    Whether the columnview show scroll to have the <code>newColumn</code> visible.
    
-   @fires Coral.ColumnView#coral-columnview:navigate
+   @emits {coral-columnview:navigate}
    */
   setNextColumn(newColumn, referenceColumn, scrollToColumn) {
     scrollToColumn = typeof scrollToColumn === 'undefined' || scrollToColumn;
@@ -879,9 +866,14 @@ class ColumnView extends Component(HTMLElement) {
     this._validateNavigation(newColumn);
   }
   
-  // Expose enums
+  /**
+   Returns {@link ColumnView} selection options.
+   
+   @return {ColumnViewSelectionModeEnum}
+   */
   static get selectionMode() { return selectionMode; }
   
+  /** @ignore */
   static get observedAttributes() {
     return [
       'selectionmode',
@@ -889,6 +881,7 @@ class ColumnView extends Component(HTMLElement) {
     ];
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -905,69 +898,61 @@ class ColumnView extends Component(HTMLElement) {
   }
   
   /**
-   Triggered when additional items can be loaded into the ColumnView. This will happen when the current column can
+   Triggered when additional items can be loaded into the {@link ColumnView}. This will happen when the current column can
    still hold more items, when the user scrolls down the current column or when a new column needs to be loaded. If
    <code>preventDefault()</code> is called, then a loading indicator will be shown.
-   {@link Coral.ColumnView.Column#loading} should be set to false to indicate that the data has been successfully
+   {@link ColumnViewColumn#loading} should be set to false to indicate that the data has been successfully
    loaded.
    
-   @event Coral.ColumnView#coral-columnview:loaditems
+   @typedef {CustomEvent} coral-columnview:loaditems
    
-   @param {Object} event
-   Event object.
-   @param {HTMLElement} event.detail.column
+   @property {ColumnViewColumn} detail.column
    The column that is requesting more items. While doing pagination, it will become the target of the loaded items.
-   @param {Number} event.detail.start
+   @property {Number} detail.start
    Indicates the current amount of items in the <code>column</code> to do pagination. If <code>item</code> is
    available, start will be 0 to denote that the column should be loaded from the start.
-   @param {HTMLElement} event.detail.item
-   The item that ininitialized the load. If item is provided, it means that a new column needs to be added after
+   @property {ColumnViewItem} detail.item
+   The item that initialized the load. If item is provided, it means that a new column needs to be added after
    the load is performed. In this scenario, <code>column</code> will be refer to the column that holds the item.
    */
   
   /**
-   Triggered when the selection inside the column change. In case both the selection and the active item change,
+   Triggered when the selection inside the {@link ColumnViewColumn} changes. In case both the selection and the active item change,
    the <code>coral-columnview:activeitemchange</code> will be triggered first.
    
-   @event Coral.ColumnView#coral-columnview:change
+   @typedef {CustomEvent} coral-columnview:change
    
-   @param {Object} event
-   Event object.
-   @param {HTMLElement} event.detail.column
+   @property {ColumnViewColumn} detail.column
    The column whose selection changed.
-   @param {HTMLElement|Array.<HTMLElement>} event.detail.selection
+   @property {ColumnViewItem|Array.<ColumnViewItem>} detail.selection
    The new selection of the Column.
-   @param {HTMLElement|Array.<HTMLElement>} event.detail.oldSelection
+   @property {ColumnViewItem|Array.<ColumnViewItem>} detail.oldSelection
    The old selection of the Column.
    */
   
   /**
-   Triggered when the active item of the column changes.
+   Triggered when the active item of the {@link ColumnViewColumn} changes.
    
-   @event Coral.ColumnView#coral-columnview:activeitemchange
+   @typedef {CustomEvent} coral-columnview:activeitemchange
    
-   @param {Object} event
-   Event object.
-   @param {HTMLElement} event.detail.column
+   @property {ColumnViewColumn} detail.column
    The column whose active item has changed.
-   @param {HTMLElement} event.detail.activeItem
+   @property {ColumnViewItem} detail.activeItem
    The currently active item of the column.
-   @param {HTMLElement} event.detail.oldActiveItem
+   @property {ColumnViewItem} detail.oldActiveItem
    The item of the column that was active before.
    */
   
   /**
-   Triggered when the navigation is complete and the new columns are ready.
+   Triggered when the {@link ColumnView} navigation is complete and the new columns are ready.
    
-   @event Coral.ColumnView#coral-columnview:navigate
+   @typedef {CustomEvent} coral-columnview:navigate
    
-   @param {Object} event
-   Event object.
-   @param {HTMLElement} event.detail.column
+   @property {ColumnViewColumn} detail.column
    The last Column of the ColumnView that is used to determine the path. If the navigate was triggered because a
-   new <code>Coral.ColumnView.Column</code> was added, then it will match that column. In case the path was
+   new {@link ColumnViewColumn} was added, then it will match that column. In case the path was
    reduced, the column will match the last column.
-   @param {HTMLElement} event.detail.activeItem
+   @property {ColumnViewItem} detail.activeItem
    The currently active item of the ColumnView.
    */
 }

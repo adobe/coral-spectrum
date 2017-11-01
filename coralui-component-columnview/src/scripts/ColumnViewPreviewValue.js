@@ -19,7 +19,7 @@
  @class Coral.ColumnView.Preview.Value
  @classdesc ColumnView's preview value component
  @htmltag coral-columnview-preview-value
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class ColumnViewPreviewValue extends HTMLElement {}
 

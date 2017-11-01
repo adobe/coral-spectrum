@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {SelectableCollection} from 'coralui-collection';
 import {transform} from 'coralui-util';
 
@@ -25,10 +25,10 @@ const CLASSNAME = 'coral3-SelectList-group';
  @class Coral.SelectList.Group
  @classdesc A SelectList group component
  @htmltag coral-selectlist-group
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class SelectListGroup extends Component(HTMLElement) {
+class SelectListGroup extends ComponentMixin(HTMLElement) {
   /**
    The label of the group. It reflects the <code>label</code> attribute to the DOM.
    
@@ -36,7 +36,6 @@ class SelectListGroup extends Component(HTMLElement) {
    @default ""
    @htmlattribute label
    @htmlattributereflected
-   @memberof Coral.SelectList.Group#
    */
   get label() {
     return this._label || '';
@@ -59,10 +58,12 @@ class SelectListGroup extends Component(HTMLElement) {
     return this._items;
   }
   
+  /** @ignore */
   static get observedAttributes() {
     return ['label'];
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

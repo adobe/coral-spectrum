@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {Collection} from 'coralui-collection';
 import {transform} from 'coralui-util';
 
@@ -25,17 +25,15 @@ const CLASSNAME = 'coral3-Shell-solutions';
  @class Coral.Shell.Solutions
  @classdesc A Shell Solutions component
  @htmltag coral-shell-solutions
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class ShellSolutions extends Component(HTMLElement) {
+class ShellSolutions extends ComponentMixin(HTMLElement) {
   /**
    The item collection.
-   See {@link Coral.Collection} for more details.
    
-   @type {Coral.Collection}
+   @type {Collection}
    @readonly
-   @memberof Coral.Shell.Solutions#
    */
   get items() {
     // Construct the collection on first request:
@@ -57,7 +55,6 @@ class ShellSolutions extends Component(HTMLElement) {
    @default false
    @htmlattribute secondary
    @htmlattributereflected
-   @memberof Coral.Shell.Solutions#
    */
   get secondary() {
     return this._secondary || false;
@@ -68,9 +65,11 @@ class ShellSolutions extends Component(HTMLElement) {
   
     this.classList.toggle(`${CLASSNAME}--secondary`, this._secondary);
   }
-
+  
+  /** @ignore */
   static get observedAttributes() { return ['secondary']; }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

@@ -15,22 +15,24 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import Overlay from 'coralui-mixin-overlay';
+import {ComponentMixin} from 'coralui-mixin-component';
+import {OverlayMixin} from 'coralui-mixin-overlay';
 import {transform, validate} from 'coralui-util';
 
 const CLASSNAME = 'coral3-Shell-menu';
 
 /**
- Overlay placement values.
+ Enumeration for {@link ShellMenu} placement options.
  
- @enum {Object}
- @memberof Coral.Shell.Menu
+ @typedef {Object} ShellMenuPlacementEnum
+ 
+ @property {String} RIGHT
+ Anchor to the right of the page.
+ @property {String} TOP
+ Anchor at the top of the page.
  */
 const placement = {
-  /** Anchor to the right of the page. */
   RIGHT: 'right',
-  /** Anchor at the top of the page. */
   TOP: 'top'
 };
 
@@ -40,15 +42,17 @@ for (const placementValue in placement) {
 }
 
 /**
- Overlay animation directions.
+ Enumeration for {@link ShellMenu} overlay animation options.
  
- @enum {Object}
- @memberof Coral.Shell.Menu
+ @typedef {Object} ShellMenuFromEnum
+ 
+ @property {String} RIGHT
+ Animate in from the right.
+ @property {String} TOP
+ Animate in from the top.
  */
 const from = {
-  /** Animate in from the right. */
   RIGHT: 'right',
-  /** Animate in from the top. */
   TOP: 'top'
 };
 
@@ -61,11 +65,12 @@ for (const fromValue in from) {
  @class Coral.Shell.Menu
  @classdesc A Shell Menu component
  @htmltag coral-shell-menu
- @extends HTMLElement
- @extends Coral.mixin.component
- @extends Coral.mixin.overlay
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
+ @extends {OverlayMixin}
  */
-class ShellMenu extends Overlay(Component(HTMLElement)) {
+class ShellMenu extends OverlayMixin(ComponentMixin(HTMLElement)) {
+  /** @ignore */
   constructor() {
     super();
   
@@ -83,13 +88,12 @@ class ShellMenu extends Overlay(Component(HTMLElement)) {
   }
   
   /**
-   The side of the page the overlay should be anchored to.
+   The side of the page the overlay should be anchored to. See {@link ShellMenuPlacementEnum}.
    
-   @type {Coral.Shell.Menu.placement}
-   @default Coral.Shell.Menu.placement.RIGHT
+   @type {String}
+   @default ShellMenuPlacementEnum.RIGHT
    @htmlattribute placement
    @htmlattributereflected
-   @memberof Coral.Shell.Menu#
    */
   get placement() {
     return this._placement || placement.RIGHT;
@@ -104,13 +108,12 @@ class ShellMenu extends Overlay(Component(HTMLElement)) {
   }
   
   /**
-   The direction the overlay should animate from.
+   The direction the overlay should animate from. See {@link ShellMenuFromEnum}.
    
-   @type {Coral.Shell.Menu.from}
-   @default Coral.Shell.Menu.from.TOP
+   @type {String}
+   @default ShellMenuFromEnum.TOP
    @htmlattribute from
    @htmlattributereflected
-   @memberof Coral.Shell.Menu#
    */
   get from() {
     return this._from || from.TOP;
@@ -131,7 +134,6 @@ class ShellMenu extends Overlay(Component(HTMLElement)) {
    @default false
    @htmlattribute full
    @htmlattributereflected
-   @memberof Coral.Shell.Menu#
    */
   get full() {
     return this._full || false;
@@ -150,7 +152,6 @@ class ShellMenu extends Overlay(Component(HTMLElement)) {
    @default false
    @htmlattribute top
    @htmlattributereflected
-   @memberof Coral.Shell.Menu#
    */
   get top() {
     return this._top || false;
@@ -160,7 +161,9 @@ class ShellMenu extends Overlay(Component(HTMLElement)) {
     this._reflectAttribute('top', this._top);
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link OverlayMixin#open}.
+   */
   get open() {
     return super.open;
   }
@@ -216,10 +219,21 @@ class ShellMenu extends Overlay(Component(HTMLElement)) {
     }
   }
   
-  // Expose enums
+  /**
+   Returns {@link ShellMenu} placement options.
+   
+   @return {ShellMenuPlacementEnum}
+   */
   static get placement() { return placement; }
+  
+  /**
+   Returns {@link ShellMenu} overlay animation options.
+   
+   @return {ShellMenuFromEnum}
+   */
   static get from() { return from; }
   
+  /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'placement',
@@ -228,7 +242,8 @@ class ShellMenu extends Overlay(Component(HTMLElement)) {
       'top'
     ]);
   }
-
+  
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

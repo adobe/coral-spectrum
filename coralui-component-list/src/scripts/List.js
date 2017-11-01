@@ -15,18 +15,19 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import {List as ListMixin} from 'coralui-mixin-list';
+import {ComponentMixin} from 'coralui-mixin-component';
+import {ListMixin} from 'coralui-mixin-list';
 
 /**
  @class Coral.List
  @classdesc A List component
  @htmltag coral-list
- @extends HTMLElement
- @extends Coral.mixin.component
- @extends Coral.mixin.list
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
+ @extends {ListMixin}
  */
-class List extends ListMixin(Component(HTMLElement)) {
+class List extends ListMixin(ComponentMixin(HTMLElement)) {
+  /** @ignore */
   constructor() {
     super();
     

@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import {ListItem} from 'coralui-mixin-list';
+import {ComponentMixin} from 'coralui-mixin-component';
+import {ListItemMixin} from 'coralui-mixin-list';
 
 const CLASSNAME = 'coral3-AnchorList-item';
 
@@ -25,10 +25,11 @@ const CLASSNAME = 'coral3-AnchorList-item';
  @classdesc An AnchorList item component
  @htmltag coral-anchorlist-item
  @extends HTMLAnchorElement
- @extends Coral.mixin.component
- @extends Coral.mixin.list.item
+ @extends {ComponentMixin}
+ @extends {ListItemMixin}
  */
-class AnchorListItem extends ListItem(Component(HTMLAnchorElement)) {
+class AnchorListItem extends ListItemMixin(ComponentMixin(HTMLAnchorElement)) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -38,7 +39,13 @@ class AnchorListItem extends ListItem(Component(HTMLAnchorElement)) {
     });
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is disabled or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute disabled
+   @htmlattributereflected
+   */
   get disabled() {
     return super.disabled;
   }
@@ -63,6 +70,7 @@ class AnchorListItem extends ListItem(Component(HTMLAnchorElement)) {
     }
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

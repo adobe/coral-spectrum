@@ -22,10 +22,11 @@ import {transform} from 'coralui-util';
 const CLASSNAME = 'coral3-BasicList-item';
 
 /**
- @mixin List item
+ @mixin ListItemMixin
  @classdesc The base element for list item components
  */
-const ListItem = (superClass) => class extends superClass {
+const ListItemMixin = (superClass) => class extends superClass {
+  /** @ignore */
   constructor() {
     super();
     
@@ -42,7 +43,6 @@ const ListItem = (superClass) => class extends superClass {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.List.Item#
    */
   get content() {
     return this._getContentZone(this._elements.content);
@@ -64,7 +64,6 @@ const ListItem = (superClass) => class extends superClass {
    @type {Boolean}
    @htmlattribute disabled
    @htmlattributereflected
-   @memberof Coral.AnchorList.Item#
    */
   get disabled() {
     return this._disabled || false;
@@ -77,14 +76,11 @@ const ListItem = (superClass) => class extends superClass {
   }
   
   /**
-   The icon to display.
+   The icon to display. See {@link Icon}.
    
    @type {String}
    @default ""
    @htmlattribute icon
-   @memberof Coral.Button#
-   
-   @see {@link Coral.Icon}
    */
   get icon() {
     return this._elements.icon.icon;
@@ -96,12 +92,21 @@ const ListItem = (superClass) => class extends superClass {
     this._elements.icon.hidden = this._elements.icon.icon === '';
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.content; }
   set defaultContentZone(value) { this.content = value; }
+  
   get _contentZones() { return {'coral-list-item-content': 'content'}; }
-
+  
+  /** @ignore */
   static get observedAttributes() { return ['disabled', 'icon']; }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -139,4 +144,4 @@ const ListItem = (superClass) => class extends superClass {
   }
 };
 
-export default ListItem;
+export default ListItemMixin;

@@ -19,7 +19,7 @@
  @class Coral.Accordion.Item.Label
  @classdesc Accordion item's label component
  @htmltag coral-accordion-item-label
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class AccordionItemLabel extends HTMLElement {}
 

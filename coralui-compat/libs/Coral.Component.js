@@ -63,7 +63,7 @@
   /**
    @class Coral.Component
    @classdesc The base element for all Coral components
-   @extends HTMLElement
+   @extends {HTMLElement}
    */
   Coral.Component = function() {
     throw new Error('Coral.Component is not meant to be invoked directly. Inherit from its prototype instead.');

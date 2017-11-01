@@ -61,40 +61,39 @@ function filterItem(item, filter) {
 }
 
 /**
- The Collection API as used as an interface to manipulate item collections within the components.
- 
- @param {HTMLElement} options.host
- The element that hosts the collection.
- @param {String} options.itemTagName
- The tag name of the elements that constitute a collection item.
- @param {String} options.itemBaseTagName
- The optional base tag name of the elements that constitute a collection item. This is required for elements that
- extend native elements, like Button.
- @param {String} [options.itemSelector]
- Optional, derived from itemTagName and itemBaseTagName by default. Used to query the host element for its
- collection items.
- @param {HTMLElement} [options.container]
- Optional element that wraps the collection. Defines where the new items will be added when <code>add</code> method
- is called. Is the same as options.host by default.
- @param {Coral.Collection~filter} [options.filter]
- Optional function used to filter the results.
- @param {Coral.Collection~onItemAdded} [options.onItemAdded]
- Function called once an item is added to the DOM. If the Collection has been configured to handle the items
- automatically, the callback will be called once the collection detects that the item has been added to the DOM and
- not synchronously with <code>add()</code>.
- @param {Coral.Collection~onItemRemoved} [options.onItemRemoved]
- Function called once an item is removed from the DOM. If the Collection has been configured to handle the items
- automatically, the callback will be called once the collection detects that the item has been removed from the DOM
- not synchronously with <code>add()</code>.
- @param {Coral.Collection~onCollectionChange} [options.onCollectionChange]
- Function called after there has been a change in the collection. This allows components to handle state changes
- after an item(s) has been added or removed. This callback will only be called if the Collection is configured to
- handle the items automatically.
- is <code>true</code>.
- 
- @interface
+ The Collection API to manipulate item collections within the components.
  */
 class Collection {
+  /**
+   @param {HTMLElement} options.host
+   The element that hosts the collection.
+   @param {String} options.itemTagName
+   The tag name of the elements that constitute a collection item.
+   @param {String} options.itemBaseTagName
+   The optional base tag name of the elements that constitute a collection item. This is required for elements that
+   extend native elements, like Button.
+   @param {String} [options.itemSelector]
+   Optional, derived from itemTagName and itemBaseTagName by default. Used to query the host element for its
+   collection items.
+   @param {HTMLElement} [options.container]
+   Optional element that wraps the collection. Defines where the new items will be added when <code>add</code> method
+   is called. Is the same as options.host by default.
+   @param {CollectionFilter} [options.filter]
+   Optional function used to filter the results.
+   @param {CollectionOnItemAdded} [options.onItemAdded]
+   Function called once an item is added to the DOM. If the Collection has been configured to handle the items
+   automatically, the callback will be called once the collection detects that the item has been added to the DOM and
+   not synchronously with <code>add()</code>.
+   @param {CollectionOnItemRemoved} [options.onItemRemoved]
+   Function called once an item is removed from the DOM. If the Collection has been configured to handle the items
+   automatically, the callback will be called once the collection detects that the item has been removed from the DOM
+   not synchronously with <code>add()</code>.
+   @param {CollectionOnChange} [options.onCollectionChange]
+   Function called after there has been a change in the collection. This allows components to handle state changes
+   after an item(s) has been added or removed. This callback will only be called if the Collection is configured to
+   handle the items automatically.
+   is <code>true</code>.
+   */
   constructor(options) {
     options = options || {};
   
@@ -148,7 +147,6 @@ class Collection {
    
    @type {Number}
    @default 0
-   @memberof Coral.Collection#
    */
   get length() {
     return this.getAll().length;
@@ -165,7 +163,7 @@ class Collection {
    Existing item used as a reference to insert the new item before. If the value is <code>null</code>, then the new
    item will be added at the end.
    
-   @fires Coral.Collection#coral-collection:add
+   @emits {coral-collection:add}
    
    @returns {HTMLElement} the item added.
    */
@@ -244,7 +242,7 @@ class Collection {
    @param {HTMLElement} item
    The item to add to the Collection.
    
-   @fires Coral.Collection#coral-collection:remove
+   @emits {coral-collection:remove}
    
    @returns {HTMLElement} the item removed.
    */
@@ -307,8 +305,8 @@ class Collection {
    
    @param {HTMLElement} item
    The item that was attached to the collection.
-   
-   @fires Coral.Collection#coral-collection:add
+ 
+   @emits {coral-collection:add}
    
    @protected
    */
@@ -328,7 +326,7 @@ class Collection {
    @param {HTMLElement} item
    The item that was detached of the collection
    
-   @fires Coral.Collection#coral-collection:remove
+   @emits {coral-collection:remove}
    
    @protected
    */
@@ -471,34 +469,30 @@ class Collection {
   }
   
   /**
-   Triggered when an item is added to the Collection. Collection events are not synchronous so the DOM may reflect
-   a different reality although every addition or removal will be reported.
+   Triggered when an item is added to the {@link Collection}. {@link Collection} events are not synchronous so the DOM
+   may reflect a different reality although every addition or removal will be reported.
    
-   @event Coral.Collection#coral-collection:add
+   @typedef {CustomEvent} coral-collection:add
    
-   @param {Object} event
-   Event object.
-   @param {HTMLElement} event.detail.item
+   @property {HTMLElement} detail.item
    The item that was added.
    */
   
   /**
-   Triggered when an item is removed from a Collection. Collection events are not synchronous so the DOM may reflect
-   a different reality although every addition or removal will be reported.
+   Triggered when an item is removed from a {@link Collection}. {@link Collection} events are not synchronous so the DOM
+   may reflect a different reality although every addition or removal will be reported.
    
-   @event Coral.Collection#coral-collection:remove
+   @typedef {CustomEvent} coral-collection:remove
    
-   @param {Object} event
-   Event object.
-   @param {HTMLElement} event.detail.item
+   @property {HTMLElement} detail.item
    The item that was removed.
    */
   
   /**
-   Signature of the function called to determine if an element should be included in the collection. If the function
+   Signature of the function called to determine if an element should be included in the {@link Collection}. If the function
    returns <code>true</code> for the given element it will be part of the collection, otherwise it will be excluded.
    
-   @callback Coral.Collection~filter
+   @typedef {function} CollectionFilter
    
    @param {HTMLElement} element
    The item to check whether it should be part of the collection.
@@ -507,28 +501,28 @@ class Collection {
    */
   
   /**
-   Signature of the function called when ever an item is added to the collection.
+   Signature of the function called when ever an item is added to the {@link Collection}.
    
-   @callback Coral.Collection~onItemAdded
-   
-   @param {HTMLElement} item
-   The item that was added to the collection.
-   */
-  
-  /**
-   Signature of the function called when ever an item is removed from the collection.
-   
-   @callback Coral.Collection~onItemRemoved
+   @typedef {function} CollectionOnItemAdded
    
    @param {HTMLElement} item
    The item that was added to the collection.
    */
   
   /**
-   Signature of the function called when there is a change in the collection. The items that where added and removed
+   Signature of the function called when ever an item is removed from the {@link Collection}.
+ 
+   @typedef {function} CollectionOnItemRemoved
+   
+   @param {HTMLElement} item
+   The item that was added to the collection.
+   */
+  
+  /**
+   Signature of the function called when there is a change in the {@link Collection}. The items that where added and removed
    will be provided.
-   
-   @callback Coral.Collection~onCollectionChange
+ 
+   @typedef {function} CollectionOnChange
    
    @param {Array.<HTMLElement>} addedNodes
    An array that contains the items that were added to the collection.

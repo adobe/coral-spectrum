@@ -1,8 +1,8 @@
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 
 describe('Coral.SelectableCollection', function() {
   // test collection container
-  window.customElements.define('coral-selectablecollection-container', class extends Component(HTMLElement) {
+  window.customElements.define('coral-selectablecollection-container', class extends ComponentMixin(HTMLElement) {
     constructor() {
       super();
     }
@@ -20,7 +20,7 @@ describe('Coral.SelectableCollection', function() {
     }
   });
   
-  window.customElements.define('coral-selectablecollection-item', class extends Component(HTMLElement) {
+  window.customElements.define('coral-selectablecollection-item', class extends ComponentMixin(HTMLElement) {
     constructor() {
       super();
     }

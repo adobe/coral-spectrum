@@ -15,25 +15,30 @@
  * from Adobe Systems Incorporated.
  */
 
-import MIME_TYPES from './mimetypes.json';
+import MIME_TYPES from '../data/mimetypes.json';
 import {transform, validate} from 'coralui-util';
 
 /**
- Response types.
+ Enumeration for {@link FileUploadItem} response types.
  
- @enum {String}
- @memberof Coral.FileUpload.Item
+ @typedef {Object} FileUploadItemResponseTypeEnum
+ 
+ @property {String} TEXT
+ String type.
+ @property {String} ARRAY_BUFFER
+ Array buffer type.
+ @property {String} BLOB
+ Blob type.
+ @property {String} DOCUMENT
+ Document type.
+ @property {String} JSON
+ JavaScript object, parsed from a JSON string returned by the server.
  */
 const responseType = {
-  /** String type. */
   TEXT: 'text',
-  /** Array buffer type. */
   ARRAY_BUFFER: 'arraybuffer',
-  /** Blob type. */
   BLOB: 'blob',
-  /** Document type. */
   DOCUMENT: 'document',
-  /** JavaScript object, parsed from a JSON string returned by the server. */
   JSON: 'json'
 };
 
@@ -54,6 +59,11 @@ const MIME_TYPE_VIDEO = 'video/*';
  The file element.
  */
 class FileUploadItem {
+  /**
+   Takes a {File} as argument.
+   
+   @param {File} file
+   */
   constructor(file) {
     this._originalFile = file;
     this._xhr = null;
@@ -65,7 +75,6 @@ class FileUploadItem {
    @name file
    @readonly
    @type {File}
-   @memberof Coral.FileUpload.Item#
    */
   get file() {
     return this._originalFile;
@@ -78,7 +87,6 @@ class FileUploadItem {
    @name parameters
    @type {Array.<Object>}
    @default []
-   @memberof Coral.FileUpload.Item#
    */
   get parameters() {
     return this._parameters || [];
@@ -97,7 +105,6 @@ class FileUploadItem {
    @name withCredentials
    @type {Boolean}
    @default false
-   @memberof Coral.FileUpload.Item#
    */
   get withCredentials() {
     return this._withCredentials || false;
@@ -112,7 +119,6 @@ class FileUploadItem {
    @name timeout
    @type {Number}
    @default 0
-   @memberof Coral.FileUpload.Item#
    */
   get timeout() {
     return this._timeout || 0;
@@ -128,12 +134,11 @@ class FileUploadItem {
   }
   
   /**
-   The item xhr <code>responseType</code> property.
+   The item xhr <code>responseType</code> property. See {@link FileUploadItemResponseTypeEnum}.
    
    @name responseType
-   @default {Coral.FileUpload.Item.responseType.TEXT}
-   @type {Coral.FileUpload.Item.responseType}
-   @memberof Coral.FileUpload.Item#
+   @default {FileUploadItemResponseTypeEnum.TEXT}
+   @type {String}
    */
   get responseType() {
     return this._responseType || responseType.TEXT;
@@ -153,7 +158,6 @@ class FileUploadItem {
    @readonly
    @default 0
    @type {Number}
-   @memberof Coral.FileUpload.Item#
    */
   get readyState() {
     return this._xhr ? this._xhr.readyState : this._readyState || 0;
@@ -166,7 +170,6 @@ class FileUploadItem {
    @readonly
    @default ""
    @type {String|ArrayBuffer|Blob|Document}
-   @memberof Coral.FileUpload.Item#
    */
   get response() {
     return this._xhr ? this._xhr.response : this._response || '';
@@ -179,7 +182,6 @@ class FileUploadItem {
    @readonly
    @default ""
    @type {String}
-   @memberof Coral.FileUpload.Item#
    */
   get responseText() {
     return this._xhr ? this._xhr.responseText : this._responseText || '';
@@ -192,7 +194,6 @@ class FileUploadItem {
    @readonly
    @default null
    @type {HTMLElement}
-   @memberof Coral.FileUpload.Item#
    */
   get responseXML() {
     return this._xhr ? this._xhr.responseXML : this._responseXML || null;
@@ -205,7 +206,6 @@ class FileUploadItem {
    @readonly
    @default 0
    @type {Number}
-   @memberof Coral.FileUpload.Item#
    */
   get status() {
     return this._xhr ? this._xhr.status : this._status || 0;
@@ -218,7 +218,6 @@ class FileUploadItem {
    @readonly
    @default ""
    @type {String}
-   @memberof Coral.FileUpload.Item#
    */
   get statusText() {
     return this._xhr ? this._xhr.statusText : this._statusText || '';
@@ -285,7 +284,11 @@ class FileUploadItem {
     });
   }
   
-  // Expose enum
+  /**
+   Returns {@link FileUploadItem} response types.
+   
+   @return {FileUploadItemResponseTypeEnum}
+   */
   static get responseType() { return responseType; }
 }
 

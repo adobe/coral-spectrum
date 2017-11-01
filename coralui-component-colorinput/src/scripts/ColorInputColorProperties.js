@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import ColorInputAbstractSubview from './ColorInputAbstractSubview';
+import {ComponentMixin} from 'coralui-mixin-component';
+import ColorInputAbstractSubviewMixin from './ColorInputAbstractSubviewMixin';
 import Color from './Color';
 import 'coralui-component-button';
 import 'coralui-component-textfield';
@@ -30,11 +30,12 @@ const CLASSNAME = 'coral3-ColorInput-colorProperties';
  @class Coral.ColorInput.ColorProperties
  @classdesc A ColorInput Color properties component
  @htmltag coral-colorinput-colorproperties
- @extends HTMLElement
- @extends Coral.mixin.component
- @extends Coral.mixin.colorInputAbstractSubview
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
+ @extends {ColorInputAbstractSubviewMixin}
  */
-class ColorInputColorProperties extends ColorInputAbstractSubview(Component(HTMLElement)) {
+class ColorInputColorProperties extends ColorInputAbstractSubviewMixin(ComponentMixin(HTMLElement)) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -213,6 +214,7 @@ class ColorInputColorProperties extends ColorInputAbstractSubview(Component(HTML
     }
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

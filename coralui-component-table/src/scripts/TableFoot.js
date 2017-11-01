@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import TableSection from './TableSection';
+import {ComponentMixin} from 'coralui-mixin-component';
+import TableSectionMixin from './TableSectionMixin';
 
 const CLASSNAME = 'coral-Table-foot';
 
@@ -25,11 +25,12 @@ const CLASSNAME = 'coral-Table-foot';
  @classdesc A Table foot component
  @htmltag coral-table-foot
  @htmlbasetag tfoot
- @extends HTMLTableSectionElement
- @extends Coral.mixin.component
- @extends Coral.mixin.tableSection
+ @extends {HTMLTableSectionElement}
+ @extends {ComponentMixin}
+ @extends {TableSectionMixin}
  */
-class TableFoot extends TableSection(Component(HTMLTableSectionElement)) {
+class TableFoot extends TableSectionMixin(ComponentMixin(HTMLTableSectionElement)) {
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

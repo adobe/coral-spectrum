@@ -34,9 +34,10 @@ const SEARCH_VISIBILITY_THRESHOLD = 6;
  @class Coral.Shell.OrgSwitcher
  @classdesc A Shell OrgSwitcher component
  @htmltag coral-shell-orgswitcher
- @extends Coral.List
+ @extends {List}
  */
 class ShellOrgSwitcher extends List {
+  /** @ignore */
   constructor() {
     super();
     
@@ -66,11 +67,9 @@ class ShellOrgSwitcher extends List {
   
   /**
    The item collection.
-   See {@link Coral.Collection} for more details.
    
-   @type {Coral.Collection}
+   @type {SelectableCollection}
    @readonly
-   @memberof Coral.Shell.OrgSwitcher#
    */
   get items() {
     // Construct the collection on first request:
@@ -94,7 +93,6 @@ class ShellOrgSwitcher extends List {
    @default ''
    @type {String}
    @htmlattribute placeholder
-   @memberof Coral.Shell.OrgSwitcher#
    */
   get placeholder() {
     return this._elements.search.placeholder;
@@ -108,7 +106,6 @@ class ShellOrgSwitcher extends List {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Shell.OrgSwitcher#
    */
   get footer() {
     return this._getContentZone(this._elements.footer);
@@ -166,7 +163,6 @@ class ShellOrgSwitcher extends List {
    
    @type {HTMLElement}
    @readonly
-   @memberof Coral.Shell.OrgSwitcher#
    */
   get selectedItem() {
     return this.items._getLastSelected();
@@ -302,8 +298,10 @@ class ShellOrgSwitcher extends List {
   
   get _contentZones() { return {'coral-shell-orgswitcher-footer': 'footer'}; }
   
+  /** @ignore */
   static get observedAttributes() { return super.observedAttributes.concat(['placeholder']); }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -338,15 +336,13 @@ class ShellOrgSwitcher extends List {
   }
   
   /**
-   Triggered when the selected organization has changed.
+   Triggered when the {@link ShellOrgSwitcher} selected organization has changed.
    
-   @event Coral.Shell.OrgSwitcher#coral-shell-orgswitcher:change
+   @typedef {CustomEvent} coral-shell-orgswitcher:change
    
-   @param {Object} event Event object
-   @param {Object} event.detail
-   @param {HTMLElement} event.detail.oldSelection
+   @property {HTMLElement} detail.oldSelection
    The prior selected organization item.
-   @param {HTMLElement} event.detail.selection
+   @property {HTMLElement} detail.selection
    The newly selected organization item.
    */
 }

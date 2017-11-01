@@ -15,32 +15,39 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {transform, validate} from 'coralui-util';
 
 /**
- Enum for wait variant values.
- @enum {String}
- @memberof Coral.Wait
+ Enumeration for {@link Wait} variants.
+ 
+ @typedef {Object} WaitVariantEnum
+ 
+ @property {String} DEFAULT
+ The default variant.
+ @property {String} DOTS
+ A dot styled wait.
  */
 const variant = {
-  /** The default variant. */
   DEFAULT: 'default',
-  /** A dot styled wait. */
   DOTS: 'dots'
 };
 
 /**
- Enumeration representing wait indicator sizes.
- @memberof Coral.Wait
- @enum {String}
+ Enumeration for {@link Wait} sizes.
+ 
+ @typedef {Object} WaitSizeEnum
+ 
+ @property {String} SMALL
+ A small wait indicator. This is the default size.
+ @property {String} MEDIUM
+ A medium wait indicator.
+ @property {String} LARGE
+ A large wait indicator.
  */
 const size = {
-  /** A small wait indicator. This is the default size. */
   SMALL: 'S',
-  /** A medium wait indicator. */
   MEDIUM: 'M',
-  /** A large wait indicator. */
   LARGE: 'L'
 };
 
@@ -59,18 +66,18 @@ for (const variantValue in variant) {
  @class Coral.Wait
  @classdesc A Wait component
  @htmltag coral-wait
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class Wait extends Component(HTMLElement) {
+class Wait extends ComponentMixin(HTMLElement) {
   /**
    The size of the wait indicator. Currently 'S' (the default), 'M' and 'L' are available.
-   See {@link Coral.Wait.size}
-   @type {Coral.Wait.size}
-   @default Coral.Wait.size.SMALL
+   See {@link WaitSizeEnum}.
+   
+   @type {String}
+   @default WaitSizeEnum.SMALL
    @htmlattribute size
    @htmlattributereflected
-   @memberof Coral.Wait#
    */
   get size() {
     return this._size || size.SMALL;
@@ -94,7 +101,6 @@ class Wait extends Component(HTMLElement) {
    @default false
    @htmlattribute centered
    @htmlattributereflected
-   @memberof Coral.Wait#
    */
   get centered() {
     return this._centered || false;
@@ -107,12 +113,12 @@ class Wait extends Component(HTMLElement) {
   }
   
   /**
-   The wait's variant.
-   @type {Coral.Wait.variant}
-   @default Coral.Wait.variant.DEFAULT
+   The wait's variant. See {@link WaitVariantEnum}.
+   
+   @type {String}
+   @default WaitVariantEnum.DEFAULT
    @htmlattribute variant
    @htmlattributereflected
-   @memberof Coral.Wait#
    */
   get variant() {
     return this._variant || variant.DEFAULT;
@@ -130,14 +136,26 @@ class Wait extends Component(HTMLElement) {
     }
   }
   
-  // expose enumerations
+  /**
+   Returns {@link Wait} sizes.
+   
+   @return {WaitSizeEnum}
+   */
   static get size() { return size; }
+  
+  /**
+   Returns {@link Wait} variants.
+   
+   @return {WaitVariantEnum}
+   */
   static get variant() { return variant; }
   
+  /** @ignore */
   static get observedAttributes() {
     return ['size', 'centered', 'variant'];
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
   

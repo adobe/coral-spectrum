@@ -15,17 +15,17 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {transform} from 'coralui-util';
 
 /**
  @class Coral.CycleButton.Action
  @classdesc A CycleButton Action component
  @htmltag coral-cyclebutton-action
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class CycleButtonAction extends Component(HTMLElement) {
+class CycleButtonAction extends ComponentMixin(HTMLElement) {
   /**
    The Action's icon. See {@link Coral.Icon} for valid icon names.
    
@@ -33,7 +33,6 @@ class CycleButtonAction extends Component(HTMLElement) {
    @default ""
    @htmlattribute icon
    @htmlattributereflected
-   @memberof Coral.CycleButton.Action#
    */
   get icon() {
     return this._icon || '';
@@ -48,7 +47,6 @@ class CycleButtonAction extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.CycleButton.Action#
    */
   get content() {
     return this;

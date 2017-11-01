@@ -15,25 +15,28 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import FormField from 'coralui-mixin-formfield';
+import {ComponentMixin} from 'coralui-mixin-component';
+import {FormFieldMixin} from 'coralui-mixin-formfield';
 import 'coralui-component-button';
 import {SelectableCollection} from 'coralui-collection';
 import base from '../templates/base';
 import {transform, validate, commons} from 'coralui-util';
 
 /**
- Enumeration representing buttongroup selection modes.
+ Enumeration for {@link ButtonGroup} selection options.
  
- @memberof Coral.ButtonGroup
- @enum {String}
+ @typedef {Object} ButtonGroupSelectionModeEnum
+ 
+ @property {String} NONE
+ None is default, selection of buttons doesn't happen based on click.
+ @property {String} SINGLE
+ Single selection mode, button group behaves like radio input elements.
+ @property {String} MULTIPLE
+ Multiple selection mode, button group behaves like checkbox input elements.
  */
 const selectionMode = {
-  /** None is default, selection of buttons doesn't happen based on click */
   NONE: 'none',
-  /** Single selection mode, button group behaves like radio input elements */
   SINGLE: 'single',
-  /** Multiple selection mode, button group behaves like checkbox input elements */
   MULTIPLE: 'multiple'
 };
 
@@ -59,11 +62,12 @@ const CLASSNAME = 'coral3-ButtonGroup';
  @class Coral.ButtonGroup
  @classdesc A ButtonGroup component
  @htmltag coral-buttongroup
- @extends HTMLElement
- @extends Coral.mixin.component
- @extends Coral.mixin.formField
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
+ @extends {FormFieldMixin}
  */
-class ButtonGroup extends FormField(Component(HTMLElement)) {
+class ButtonGroup extends FormFieldMixin(ComponentMixin(HTMLElement)) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -97,12 +101,10 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
   }
   
   /**
-   The Collection Interface that allows interacting with the items that the component contains. See
-   {@link Coral.Collection} for more details.
+   The Collection Interface that allows interacting with the items that the component contains.
    
-   @type {Coral.Collection}
+   @type {SelectableCollection}
    @readonly
-   @memberof Coral.ButtonGroup#
    */
   get items() {
     // we do lazy initialization of the collection
@@ -128,7 +130,6 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
    @default Coral.ButtonGroup.selectionMode.NONE
    @htmlattribute selectionmode
    @htmlattributereflected
-   @memberof Coral.ButtonGroup#
    */
   get selectionMode() {
     return this._selectionMode || selectionMode.NONE;
@@ -167,7 +168,13 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
     }
   }
   
-  // JSDoc inherited
+  /**
+   Name used to submit the data in a form.
+   @type {String}
+   @default ""
+   @htmlattribute name
+   @htmlattributereflected
+   */
   get name() {
     return this._elements.nativeSelect.name;
   }
@@ -177,7 +184,12 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
     this._elements.nativeSelect.name = value;
   }
   
-  // JSDoc inherited
+  /**
+   This field's current value.
+   @type {String}
+   @default ""
+   @htmlattribute value
+   */
   get value() {
     return this._elements.nativeSelect.value;
   }
@@ -195,7 +207,6 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
    
    @type {Array.<HTMLElement>}
    @readonly
-   @memberof Coral.ButtonGroup#
    */
   get selectedItems() {
     if (this.selectionMode === selectionMode.MULTIPLE) {
@@ -212,7 +223,6 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
    
    @type {HTMLElement}
    @readonly
-   @memberof Coral.ButtonGroup#
    */
   get selectedItem() {
     return this.selectionMode === selectionMode.MULTIPLE ?
@@ -224,7 +234,6 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
    Current selected values as submitted during form submission.
    
    @type {Array.<String>}
-   @memberof Coral.ButtonGroup#
    */
   get values() {
     const values = [];
@@ -249,7 +258,13 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
     }
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is disabled or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute disabled
+   @htmlattributereflected
+   */
   get disabled() {
     return this._disabled || false;
   }
@@ -266,7 +281,13 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
     this.setAttribute('aria-disabled', isDisabled);
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
+   @type {Boolean}
+   @default false
+   @htmlattribute readonly
+   @htmlattributereflected
+   */
   get readOnly() {
     return this._readOnly || false;
   }
@@ -290,7 +311,13 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
     this.removeAttribute('aria-readonly');
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is required or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute required
+   @htmlattributereflected
+   */
   get required() {
     return this._required || false;
   }
@@ -305,7 +332,9 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
     }
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link FormFieldMixin#labelledBy}.
+   */
   get labelledBy() {
     return super.labelledBy;
   }
@@ -819,9 +848,14 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
     return this;
   }
   
-  // Expose enumerations
+  /**
+   Returns {@link ButtonGroup} selection options.
+   
+   @return {ButtonGroupSelectionModeEnum}
+   */
   static get selectionMode() { return selectionMode; }
   
+  /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'selectionmode',
@@ -829,6 +863,7 @@ class ButtonGroup extends FormField(Component(HTMLElement)) {
     ]);
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

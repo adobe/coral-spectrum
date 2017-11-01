@@ -45,7 +45,7 @@
        @default false
        @htmlattribute disabled
        @htmlattributereflected
-       @memberof Coral.Drawer#
+       @memberof Coral.Element#
        */
       'disabled': {
         default: false,

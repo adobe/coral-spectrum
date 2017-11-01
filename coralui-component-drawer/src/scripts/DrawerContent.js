@@ -19,7 +19,7 @@
  @class Coral.Drawer.Content
  @classdesc Drawer content component
  @htmltag coral-drawer-content
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class DrawerContent extends HTMLElement {}
 

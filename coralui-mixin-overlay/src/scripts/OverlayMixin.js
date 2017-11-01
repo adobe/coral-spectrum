@@ -372,10 +372,11 @@ function doBackdropShow(zIndex, instance) {
 }
 
 /**
- @mixin Overlay
+ @mixin OverlayMixin
  @classdesc The base element for overlay components
  */
-const Overlay = (superClass) => class extends superClass {
+const OverlayMixin = (superClass) => class extends superClass {
+  /** @ignore */
   constructor() {
     super();
     
@@ -385,12 +386,11 @@ const Overlay = (superClass) => class extends superClass {
   }
   
   /**
-   Whether to trap tabs and keep them within the overlay.
+   Whether to trap tabs and keep them within the overlay. See {@link OverlayTrapFocusEnum}.
    
-   @type {Coral.mixin.overlay.trapFocus}
-   @default Coral.mixin.overlay.trapFocus.OFF
+   @type {String}
+   @default OverlayTrapFocusEnum.OFF
    @htmlattribute trapfocus
-   @memberof Coral.mixin.overlay#
    */
   get trapFocus() {
     return this._trapFocus || trapFocus.OFF;
@@ -431,12 +431,11 @@ const Overlay = (superClass) => class extends superClass {
   }
   
   /**
-   Whether to return focus to the previously focused element when closed.
+   Whether to return focus to the previously focused element when closed. See {@link OverlayReturnFocusEnum}.
    
-   @type {Coral.mixin.overlay.returnFocus}
-   @default Coral.mixin.overlay.returnFocus.OFF
+   @type {String}
+   @default OverlayReturnFocusEnum.OFF
    @htmlattribute returnfocus
-   @memberof Coral.mixin.overlay#
    */
   get returnFocus() {
     return this._returnFocus || returnFocus.OFF;
@@ -450,11 +449,11 @@ const Overlay = (superClass) => class extends superClass {
    Whether to focus the overlay, when opened or not. By default the overlay itself will get the focus. It also accepts
    an instance of HTMLElement or a selector like ':first-child' or 'button:last-of-type'. If the selector returns
    multiple elements, it will focus the first element inside the overlay that matches the selector.
+   See {@link OverlayFocusOnShowEnum}.
    
-   @type {Coral.mixin.overlay.focusOnShow|HTMLElement|String}
-   @default [Coral.mixin.overlay.focusOnShow.ON]
+   @type {HTMLElement|String}
+   @default OverlayFocusOnShowEnum.ON
    @htmlattribute focusonshow
-   @memberof Coral.mixin.overlay#
    */
   get focusOnShow() {
     return this._focusOnShow || focusOnShow.ON;
@@ -472,11 +471,10 @@ const Overlay = (superClass) => class extends superClass {
    @default false
    @htmlattribute open
    @htmlattributereflected
-   @memberof Coral.mixin.overlay#
-   @fires Coral.mixin.overlay#coral-overlay:open
-   @fires Coral.mixin.overlay#coral-overlay:close
-   @fires Coral.mixin.overlay#coral-overlay:beforeopen
-   @fires Coral.mixin.overlay#coral-overlay:beforeclose
+   @emits {coral-overlay:open}
+   @emits {coral-overlay:close}
+   @emits {coral-overlay:beforeopen}
+   @emits {coral-overlay:beforeclose}
    */
   get open() {
     return this._open || false;
@@ -619,7 +617,6 @@ const Overlay = (superClass) => class extends superClass {
    Check if this overlay is the topmost.
    
    @protected
-   @memberof Coral.mixin.overlay#
    */
   _isTopOverlay() {
     const top = overlays.top();
@@ -630,7 +627,6 @@ const Overlay = (superClass) => class extends superClass {
    Push the overlay to the top of the stack.
    
    @protected
-   @memberof Coral.mixin.overlay#
    */
   _pushOverlay() {
     overlays.push(this);
@@ -640,7 +636,6 @@ const Overlay = (superClass) => class extends superClass {
    Remove the overlay from the stack.
    
    @protected
-   @memberof Coral.mixin.overlay#
    */
   _popOverlay() {
     overlays.pop(this);
@@ -653,7 +648,6 @@ const Overlay = (superClass) => class extends superClass {
    Show the backdrop.
    
    @protected
-   @memberof Coral.mixin.overlay#
    */
   _showBackdrop() {
     const overlay = overlays.get(this);
@@ -683,7 +677,6 @@ const Overlay = (superClass) => class extends superClass {
    Show the backdrop.
    
    @protected
-   @memberof Coral.mixin.overlay#
    */
   _hideBackdrop() {
     const overlay = overlays.get(this);
@@ -718,7 +711,6 @@ const Overlay = (superClass) => class extends superClass {
    Handles focus events on tab capture elements.
    
    @protected
-   @memberof Coral.mixin.overlay#
    */
   _handleTabCaptureFocus(event) {
     // Avoid moving around if we're trying to focus on coral-tabcapture
@@ -739,7 +731,6 @@ const Overlay = (superClass) => class extends superClass {
    content and if there are no valid candidates it will focus the element itself.
    
    @protected
-   @memberof Coral.mixin.overlay#
    */
   _handleFocus() {
     // ON handles the focusing per accessibility recommendations
@@ -765,7 +756,6 @@ const Overlay = (superClass) => class extends superClass {
   
   /**
    @protected
-   @memberof Coral.mixin.overlay#
    */
   _handleReturnFocus() {
     if (this.returnFocus === returnFocus.ON && this._elementToFocusWhenHidden) {
@@ -812,8 +802,7 @@ const Overlay = (superClass) => class extends superClass {
   /**
    Open the overlay and set the z-index accordingly.
    
-   @returns {Coral.Component} this, chainable
-   @memberof Coral.mixin.overlay#
+   @returns {ComponentMixin} this, chainable
    */
   show() {
     this.open = true;
@@ -824,8 +813,7 @@ const Overlay = (superClass) => class extends superClass {
   /**
    Close the overlay.
    
-   @returns {Coral.Component} this, chainable
-   @memberof Coral.mixin.overlay#
+   @returns {ComponentMixin} this, chainable
    */
   hide() {
     this.open = false;
@@ -839,8 +827,7 @@ const Overlay = (superClass) => class extends superClass {
    @param {HTMLElement} element
    The element to return focus to. This must be a DOM element, not a jQuery object or selector.
    
-   @returns {Coral.Component} this, chainable
-   @memberof Coral.mixin.overlay#
+   @returns {ComponentMixin} this, chainable
    */
   returnFocusTo(element) {
     if (this.returnFocus === returnFocus.OFF) {
@@ -874,13 +861,35 @@ const Overlay = (superClass) => class extends superClass {
     return this;
   }
   
-  // Expose enums
+  /**
+   Returns {@link Overlay} trap focus options.
+   
+   @return {OverlayTrapFocusEnum}
+   */
   static get trapFocus() { return trapFocus; }
+  
+  /**
+   Returns {@link Overlay} return focus options.
+   
+   @return {OverlayReturnFocusEnum}
+   */
   static get returnFocus() { return returnFocus; }
+  
+  /**
+   Returns {@link Overlay} focus on show options.
+   
+   @return {OverlayFocusOnShowEnum}
+   */
   static get focusOnShow() { return focusOnShow; }
-  // Expose const
+  
+  /**
+   Returns {@link Overlay} fadetime in milliseconds.
+   
+   @return {Number}
+   */
   static get FADETIME() { return FADETIME; }
   
+  /** @ignore */
   static get observedAttributes() {
     return [
       'trapfocus',
@@ -893,6 +902,7 @@ const Overlay = (superClass) => class extends superClass {
     ];
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -910,6 +920,7 @@ const Overlay = (superClass) => class extends superClass {
     }
   }
   
+  /** @ignore */
   disconnectedCallback() {
     super.disconnectedCallback();
   
@@ -926,52 +937,41 @@ const Overlay = (superClass) => class extends superClass {
   }
   
   /**
-   Called when the overlay is clicked.
+   Called when the {@link Overlay} is clicked.
    
    @function backdropClickedCallback
-   @memberof Coral.mixin.overlay#
    @protected
    */
   
   /**
-   Triggerred before the component is opened with <code>show()</code> or <code>instance.open = true</code>.
+   Triggered before the {@link Overlay} is opened with <code>show()</code> or <code>instance.open = true</code>.
+ 
+   @typedef {CustomEvent} coral-overlay:beforeopen
    
-   @event Coral.mixin.overlay#coral-overlay:beforeopen
-   
-   @param {Object} event
-   Event object.
-   @param {Function} event.preventDefault
+   @property {function} preventDefault
    Call to stop the overlay from opening.
    */
   
   /**
-   Triggerred after the overlay is opened with <code>show()</code> or <code>instance.open = true</code>
-   
-   @event Coral.mixin.overlay#coral-overlay:open
-   
-   @param {Object} event
-   Event object.
+   Triggered after the {@link Overlay} is opened with <code>show()</code> or <code>instance.open = true</code>
+ 
+   @typedef {CustomEvent} coral-overlay:open
    */
   
   /**
-   Triggerred before the component is closed with <code>hide()</code> or <code>instance.open = false</code>.
+   Triggered before the {@link Overlay} is closed with <code>hide()</code> or <code>instance.open = false</code>.
+ 
+   @typedef {CustomEvent} coral-overlay:beforeclose
    
-   @event Coral.mixin.overlay#coral-overlay:beforeclose
-   
-   @param {Object} event
-   Event object.
-   @param {Function} event.preventDefault
+   @property {function} preventDefault
    Call to stop the overlay from closing.
    */
   
   /**
-   Triggerred after the component is closed with <code>hide()</code> or <code>instance.open = false</code>
-   
-   @event Coral.mixin.overlay#coral-overlay:close
-   
-   @param {Object} event
-   Event object.
+   Triggered after the {@link Overlay} is closed with <code>hide()</code> or <code>instance.open = false</code>
+ 
+   @typedef {CustomEvent} coral-overlay:close
    */
 };
 
-export default Overlay;
+export default OverlayMixin;

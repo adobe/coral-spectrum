@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import FormField from 'coralui-mixin-formfield';
+import {ComponentMixin} from 'coralui-mixin-component';
+import {FormFieldMixin} from 'coralui-mixin-formfield';
 import 'coralui-component-textfield';
 import 'coralui-component-button';
 import base from '../templates/base';
@@ -25,15 +25,17 @@ import {transform, validate, commons} from 'coralui-util';
 const CLASSNAME = 'coral3-Search';
 
 /**
- Enum for search variant values.
+ Enumeration for {@link Search} variants.
  
- @enum {String}
- @memberof Coral.Search
+ @typedef {Object} SearchVariantEnum
+ 
+ @property {String} DEFAULT
+ A default, gray search input.
+ @property {String} QUIET
+ A search with no border, no background, no glow.
  */
 const variant = {
-  /** A default, gray search input */
   DEFAULT: 'default',
-  /** A search with no border, no background, no glow */
   QUIET: 'quiet'
 };
 
@@ -41,11 +43,12 @@ const variant = {
  @class Coral.Search
  @classdesc A Search component
  @htmltag coral-search
- @extends HTMLElement
- @extends Coral.mixin.component
- @extends Coral.mixin.formField
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
+ @extends {FormFieldMixin}
  */
-class Search extends FormField(Component(HTMLElement)) {
+class Search extends FormFieldMixin(ComponentMixin(HTMLElement)) {
+  /** @ignore */
   constructor() {
     super();
   
@@ -66,7 +69,13 @@ class Search extends FormField(Component(HTMLElement)) {
     base.call(this._elements);
   }
   
-  // JSDoc inherited
+  /**
+   Name used to submit the data in a form.
+   @type {String}
+   @default ""
+   @htmlattribute name
+   @htmlattributereflected
+   */
   get name() {
     return this._elements.input.name;
   }
@@ -82,7 +91,6 @@ class Search extends FormField(Component(HTMLElement)) {
    @type {String}
    @default "on"
    @htmlattribute value
-   @memberof Coral.Radio#
    */
   get value() {
     return this._elements.input.value || 'on';
@@ -91,7 +99,13 @@ class Search extends FormField(Component(HTMLElement)) {
     this._elements.input.value = value;
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is disabled or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute disabled
+   @htmlattributereflected
+   */
   get disabled() {
     return this._disabled || false;
   }
@@ -105,7 +119,13 @@ class Search extends FormField(Component(HTMLElement)) {
     this._elements.clearButton.disabled = this._disabled;
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is required or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute required
+   @htmlattributereflected
+   */
   get required() {
     return this._required || false;
   }
@@ -117,7 +137,13 @@ class Search extends FormField(Component(HTMLElement)) {
     this._elements.input.required = this._required;
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
+   @type {Boolean}
+   @default false
+   @htmlattribute readonly
+   @htmlattributereflected
+   */
   get readOnly() {
     return this._readOnly || false;
   }
@@ -130,7 +156,9 @@ class Search extends FormField(Component(HTMLElement)) {
     this._elements.clearButton.disabled = this._readOnly;
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link FormFieldMixin#invalid}.
+   */
   get invalid() {
     return super.invalid;
   }
@@ -139,7 +167,9 @@ class Search extends FormField(Component(HTMLElement)) {
     this._elements.input.invalid = this._invalid;
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link FormFieldMixin#labelledBy}.
+   */
   get labelledBy() {
     return super.labelledBy;
   }
@@ -156,7 +186,6 @@ class Search extends FormField(Component(HTMLElement)) {
    @default ""
    @htmlattribute placeholder
    @htmlattributereflected
-   @memberof Coral.Search#
    */
   get placeholder() {
     return this._elements.input.placeholder || '';
@@ -170,10 +199,9 @@ class Search extends FormField(Component(HTMLElement)) {
   
   /**
    Max length for the Input field.
-   @type {Long}
+   @type {Number}
    @htmlattribute maxlength
    @htmlattributereflected
-   @memberof Coral.Search#
    */
   get maxLength() {
     return this._elements.input.maxLength;
@@ -190,7 +218,6 @@ class Search extends FormField(Component(HTMLElement)) {
    @default "search"
    @htmlattribute icon
    @htmlattributereflected
-   @memberof Coral.Search#
    */
   get icon() {
     return this._elements.icon.icon || 'search';
@@ -205,13 +232,12 @@ class Search extends FormField(Component(HTMLElement)) {
   }
   
   /**
-   The search's variant.
+   The search's variant. See {@link SearchVariantEnum}.
    
-   @type {Coral.Search.variant}
-   @default Coral.Search.variant.DEFAULT
+   @type {String}
+   @default SearchVariantEnum.DEFAULT
    @htmlattribute variant
    @htmlattributereflected
-   @memberof Coral.Search#
    */
   get variant() {
     return this._variant || variant.DEFAULT;
@@ -305,13 +331,19 @@ class Search extends FormField(Component(HTMLElement)) {
     this._elements.input.clear();
   }
   
-  // Expose enumerations
+  /**
+   Returns {@link Search} variants.
+   
+   @return {SearchVariantEnum}
+   */
   static get variant() { return variant; }
   
+  /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['placeholder', 'icon', 'variant', 'maxlength', 'maxLength']);
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -353,30 +385,21 @@ class Search extends FormField(Component(HTMLElement)) {
   }
   
   /**
-   Triggered when input is given.
+   Triggered when {@link Search} input is given.
    
-   @event Coral.Search#coral-search:input
-   
-   @param {Object} event
-   Event object.
+   @typedef {CustomEvent} coral-search:input
    */
   
   /**
-   Triggered when the user presses enter.
+   Triggered when the user presses {@link Search} enter.
    
-   @event Coral.Search#coral-search:submit
-   
-   @param {Object} event
-   Event object.
+   @typedef {CustomEvent} coral-search:submit
    */
   
   /**
-   Triggered when the search is cleared.
+   Triggered when the {@link Search} is cleared.
    
-   @event Coral.Search#coral-search:clear
-   
-   @param {Object} event
-   Event object.
+   @typedef {CustomEvent} coral-search:clear
    */
 }
 

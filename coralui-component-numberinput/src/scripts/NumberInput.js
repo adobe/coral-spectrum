@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import FormField from 'coralui-mixin-formfield';
+import {ComponentMixin} from 'coralui-mixin-component';
+import {FormFieldMixin} from 'coralui-mixin-formfield';
 import 'coralui-component-button';
 import 'coralui-component-textfield';
 import base from '../templates/base';
@@ -58,11 +58,12 @@ function handleDecimalOperation(operator, value1, value2) {
  @class Coral.NumberInput
  @classdesc A NumberInput component
  @htmltag coral-numberinput
- @extends HTMLElement
- @extends Coral.mixin.component
- @extends Coral.mixin.formField
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
+ @extends {FormFieldMixin}
  */
-class NumberInput extends FormField(Component(HTMLElement)) {
+class NumberInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
+  /** @ignore */
   constructor() {
     super();
   
@@ -96,7 +97,12 @@ class NumberInput extends FormField(Component(HTMLElement)) {
     this._min = this._max = null;
   }
   
-  // JSDoc inherited
+  /**
+   This field's current value.
+   @type {String}
+   @default ""
+   @htmlattribute value
+   */
   get value() {
     return this._elements.input.value;
   }
@@ -135,7 +141,6 @@ class NumberInput extends FormField(Component(HTMLElement)) {
    
    @type {Number}
    @default NaN
-   @memberof Coral.NumberInput#
    */
   get valueAsNumber() {
     return this._valueAsNumber || transform.float(this.value) || window.NaN;
@@ -157,7 +162,6 @@ class NumberInput extends FormField(Component(HTMLElement)) {
    @default null
    @htmlattribute min
    @htmlattributereflected
-   @memberof Coral.NumberInput#
    */
   get min() {
     return this._min;
@@ -193,7 +197,6 @@ class NumberInput extends FormField(Component(HTMLElement)) {
    @default null
    @htmlattribute max
    @htmlattributereflected
-   @memberof Coral.NumberInput#
    */
   get max() {
     return this._max;
@@ -229,7 +232,6 @@ class NumberInput extends FormField(Component(HTMLElement)) {
    @default 1
    @htmlattribute step
    @htmlattributereflected
-   @memberof Coral.NumberInput#
    */
   get step() {
     return this._step || 1;
@@ -243,7 +245,13 @@ class NumberInput extends FormField(Component(HTMLElement)) {
     }
   }
   
-  // JSDoc inherited
+  /**
+   Name used to submit the data in a form.
+   @type {String}
+   @default ""
+   @htmlattribute name
+   @htmlattributereflected
+   */
   get name() {
     return this._elements.input.name;
   }
@@ -253,7 +261,13 @@ class NumberInput extends FormField(Component(HTMLElement)) {
     this._elements.input.name = value;
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is disabled or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute disabled
+   @htmlattributereflected
+   */
   get disabled() {
     return this._disabled || false;
   }
@@ -267,8 +281,14 @@ class NumberInput extends FormField(Component(HTMLElement)) {
     
     this._setButtonState();
   }
-
-  // JSDoc inherited
+  
+  /**
+   Whether this field is required or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute required
+   @htmlattributereflected
+   */
   get required() {
     return this._required || false;
   }
@@ -279,8 +299,14 @@ class NumberInput extends FormField(Component(HTMLElement)) {
     this.setAttribute('aria-required', this._required);
     this._elements.input.required = this._required;
   }
-
-  // JSDoc inherited
+  
+  /**
+   Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
+   @type {Boolean}
+   @default false
+   @htmlattribute readonly
+   @htmlattributereflected
+   */
   get readOnly() {
     return this._readOnly || false;
   }
@@ -292,7 +318,9 @@ class NumberInput extends FormField(Component(HTMLElement)) {
     this._setButtonState();
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link FormFieldMixin#invalid}.
+   */
   get invalid() {
     return super.invalid;
   }
@@ -318,7 +346,6 @@ class NumberInput extends FormField(Component(HTMLElement)) {
    @default ""
    @htmlattribute placeholder
    @htmlattributereflected
-   @memberof Coral.NumberInput#
    */
   get placeholder() {
     return this._elements.input.placeholder || '';
@@ -462,7 +489,7 @@ class NumberInput extends FormField(Component(HTMLElement)) {
    Handles the click on the step up button. It causes the NumberInput to step up its value and returns the focus back
    to the input. This way the clicked button does not get focus.
  
-   @fires Coral.mixin.formField#change
+   @emits {change}
    @ignore
    */
   _onStepUpButtonClick(event) {
@@ -488,7 +515,7 @@ class NumberInput extends FormField(Component(HTMLElement)) {
    Handles the click on the step down button. It causes the NumberInput to step down its value and returns the focus
    back to the input. This way the clicked button does not get focus.
  
-   @fires Coral.mixin.formField#change
+   @emits {change}
    @ignore
    */
   _onStepDownButtonClick(event) {
@@ -717,6 +744,7 @@ class NumberInput extends FormField(Component(HTMLElement)) {
     }
   }
   
+  /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'min',
@@ -725,7 +753,8 @@ class NumberInput extends FormField(Component(HTMLElement)) {
       'placeholder'
     ]);
   }
-
+  
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
 

@@ -21,9 +21,10 @@ const CLASSNAME = 'coral3-Popover-separator';
  @class Coral.Popover.Separator
  @classdesc The Popover separator
  @htmltag coral-popover-separator
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class PopoverSeparator extends HTMLElement {
+  /** @ignore */
   connectedCallback() {
     this.classList.add(CLASSNAME);
   }

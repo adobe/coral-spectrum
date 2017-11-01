@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {DragAction} from 'coralui-dragaction';
 import TableColumn from './TableColumn';
 import TableCell from './TableCell';
@@ -37,15 +37,17 @@ watchForWebFontLoad();
 const CLASSNAME = 'coral-Table-wrapper';
 
 /**
- Enum for table variant values.
+ Enumeration for {@link Table} variants
  
- @enum {String}
- @memberof Coral.Table
+ @typedef {Object} TableVariantEnum
+ 
+ @property {String} DEFAULT
+ A default table.
+ @property {String} LIST
+ A list table using thumbnails as selectable checkboxes.
  */
 const variant = {
-  /** A default table. */
   DEFAULT: 'default',
-  /** A list table using thumbnails as selectable checkboxes. */
   LIST: 'list'
 };
 
@@ -73,10 +75,11 @@ const KEY_SPACE = Keys.keyToCode('space');
  @classdesc A Table component
  @htmltag coral-table
  @htmlbasetag table
- @extends HTMLTableElement
- @extends Coral.mixin.component
+ @extends {HTMLTableElement}
+ @extends {ComponentMixin}
  */
-class Table extends Component(HTMLTableElement) {
+class Table extends ComponentMixin(HTMLTableElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -187,7 +190,6 @@ class Table extends Component(HTMLTableElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Table#
    */
   get head() {
     return this._getContentZone(this._elements.head);
@@ -208,7 +210,6 @@ class Table extends Component(HTMLTableElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Table#
    */
   get body() {
     return this._getContentZone(this._elements.body);
@@ -228,7 +229,6 @@ class Table extends Component(HTMLTableElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Table#
    */
   get foot() {
     return this._getContentZone(this._elements.foot);
@@ -249,7 +249,6 @@ class Table extends Component(HTMLTableElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Table#
    */
   get columns() {
     return this._getContentZone(this._elements.columns);
@@ -265,13 +264,12 @@ class Table extends Component(HTMLTableElement) {
   }
   
   /**
-   The table's variant.
+   The table's variant. See {@link TableVariantEnum}.
    
-   @type {Coral.Table.variant}
-   @default Coral.Table.variant.DEFAULT
+   @type {String}
+   @default TableVariantEnum.DEFAULT
    @htmlattribute variant
    @htmlattributereflected
-   @memberof Coral.Table#
    */
   get variant() {
     return this._variant || variant.DEFAULT;
@@ -292,7 +290,6 @@ class Table extends Component(HTMLTableElement) {
    @default false
    @htmlattribute selectable
    @htmlattributereflected
-   @memberof Coral.Table#
    */
   get selectable() {
     return this._selectable || false;
@@ -335,7 +332,6 @@ class Table extends Component(HTMLTableElement) {
    @default false
    @htmlattribute orderable
    @htmlattributereflected
-   @memberof Coral.Table#
    */
   get orderable() {
     return this._orderable || false;
@@ -359,7 +355,6 @@ class Table extends Component(HTMLTableElement) {
    @default false
    @htmlattribute multiple
    @htmlattributereflected
-   @memberof Coral.Table#
    */
   get multiple() {
     return this._multiple || false;
@@ -410,7 +405,6 @@ class Table extends Component(HTMLTableElement) {
    @default false
    @htmlattribute lockable
    @htmlattributereflected
-   @memberof Coral.Table#
    */
   get lockable() {
     return this._lockable || false;
@@ -432,7 +426,6 @@ class Table extends Component(HTMLTableElement) {
    
    @type {Array.<HTMLElement>}
    @readonly
-   @memberof Coral.Table#
    */
   get selectedItems() {
     return this.items._getAllSelected();
@@ -444,19 +437,16 @@ class Table extends Component(HTMLTableElement) {
    
    @type {HTMLElement}
    @readonly
-   @memberof Coral.Table#
    */
   get selectedItem() {
     return this.items._getFirstSelected();
   }
   
   /**
-   The Collection Interface that allows interacting with the items that the component contains. See
-   {@link Coral.Collection} for more details.
+   The Collection Interface that allows interacting with the items that the component contains.
    
-   @type {Coral.Collection}
+   @type {SelectableCollection}
    @readonly
-   @memberof Coral.Table#
    */
   get items() {
     // Construct the collection on first request
@@ -2346,8 +2336,15 @@ class Table extends Component(HTMLTableElement) {
     this._resetLayout();
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.body; }
   set defaultContentZone(value) { this.body = value; }
+  
   get _contentZones() {
     return {
       tbody: 'body',
@@ -2357,14 +2354,26 @@ class Table extends Component(HTMLTableElement) {
     };
   }
   
-  // Expose enums
+  /**
+   Returns {@link Table} variants.
+   
+   @return {TableVariantEnum}
+   */
   static get variant() { return variant; }
+  
+  /**
+   Returns divider options for {@link TableHead}, {@link TableBody} and {@link TableFoot}.
+   
+   @return {TableSectionDividerEnum}
+   */
   static get divider() { return divider; }
   
+  /** @ignore */
   static get observedAttributes() {
     return ['variant', 'selectable', 'orderable', 'multiple', 'lockable'];
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -2466,140 +2475,120 @@ class Table extends Component(HTMLTableElement) {
   }
   
   /**
-   Triggered before a column gets sorted by user interaction. Can be used to cancel column sorting and define
+   Triggered before a {@link Table} column gets sorted by user interaction. Can be used to cancel column sorting and define
    custom sorting.
    
-   @event Coral.Table#coral-table:beforecolumnsort
+   @typedef {CustomEvent} coral-table:beforecolumnsort
    
-   @param {Object} event
-   Event object
-   @param {Coral.Table.Column} event.detail.column
+   @property {TableColumn} detail.column
    The column to be sorted.
-   @param {Coral.Table.Column.sortableDirection} event.detail.direction
+   @property {String} detail.direction
    The requested sorting direction for the column.
    */
   
   /**
-   Triggered when a column is sorted.
+   Triggered when a {@link Table} column is sorted.
    
-   @event Coral.Table#coral-table:columnsort
+   @typedef {CustomEvent} coral-table:columnsort
    
-   @param {Object} event
-   Event object
-   @param {Coral.Table.Column} event.detail.column
+   @param {TableColumn} detail.column
    The sorted column.
    */
   
   /**
-   Triggered before a column is dragged. Can be used to cancel column dragging.
+   Triggered before a {@link Table} column is dragged. Can be used to cancel column dragging.
    
-   @event Coral.Table#coral-table:beforecolumndrag
+   @typedef {CustomEvent} coral-table:beforecolumndrag
    
-   @param {Object} event
-   Event object
-   @param {Coral.Table.Column} event.detail.column
+   @property {TableColumn} detail.column
    The dragged column.
-   @param {Coral.Table.Column} event.detail.before
+   @property {TableColumn} detail.before
    The column will be inserted before this sibling column.
    If <code>null</code>, the column is inserted at the end.
    */
   
   /**
-   Triggered when a column is dragged.
+   Triggered when a {@link Table} column is dragged.
    
-   @event Coral.Table#coral-table:columndrag
+   @typedef {CustomEvent} coral-table:columndrag
    
-   @param {Object} event
-   Event object
-   @param {Coral.Table.Column} event.detail.column
+   @property {TableColumn} detail.column
    The dragged column.
-   @param {Coral.Table.Column} event.detail.oldBefore
+   @property {TableColumn} detail.oldBefore
    The column next sibling before the swap.
    If <code>null</code>, the column was the last item.
-   @param {Coral.Table.Column} event.detail.before
+   @property {TableColumn} detail.before
    The column is inserted before this sibling column.
    If <code>null</code>, the column is inserted at the end.
    */
   
   /**
-   Triggered before a row is ordered. Can be used to cancel row ordering.
+   Triggered before a {@link Table} row is ordered. Can be used to cancel row ordering.
    
-   @event Coral.Table#coral-table:beforeroworder
+   @typedef {CustomEvent} coral-table:beforeroworder
    
-   @param {Object} event
-   Event object
-   @param {Coral.Table.Row} event.detail.row
+   @property {TableRow} detail.row
    The row to be ordered.
-   @param {Coral.Table.Row} event.detail.before
+   @property {TableRow} detail.before
    The row will be inserted before this sibling row.
    If <code>null</code>, the row is inserted at the end.
    */
   
   /**
-   Triggered when a row is ordered.
+   Triggered when a {@link Table} row is ordered.
    
-   @event Coral.Table#coral-table:roworder
+   @typedef {CustomEvent} coral-table:roworder
    
-   @param {Object} event
-   Event object
-   @param {Coral.Table.Row} event.detail.row
+   @property {TableRow} detail.row
    The ordered row.
-   @param {Coral.Table.Row} event.detail.oldBefore
+   @property {TableRow} detail.oldBefore
    The row next sibling before the swap.
    If <code>null</code>, the row was the last item.
-   @param {Coral.Table.Row} event.detail.before
+   @param {TableRow} detail.before
    The row is inserted before this sibling row.
    If <code>null</code>, the row is inserted at the end.
    */
   
   /**
-   Triggered when a row is locked.
+   Triggered when a {@linked Table} row is locked.
    
-   @event Coral.Table#coral-table:rowlock
+   @typedef {CustomEvent} coral-table:rowlock
    
-   @param {Object} event
-   Event object
-   @param {Coral.Table.Row} event.detail.row
+   @property {TableRow} detail.row
    The locked row.
    */
   
   /**
-   Triggered when a row is locked.
+   Triggered when {@link Table} a row is locked.
    
-   @event Coral.Table#coral-table:rowunlock
+   @typedef {CustomEvent} coral-table:rowunlock
    
-   @param {Object} event
-   Event object
-   @param {Coral.Table.Row} event.detail.row
+   @property {TableRow} detail.row
    The unlocked row.
    */
   
   /**
-   Triggered when a table row selection changed.
+   Triggered when a {@link Table} row selection changed.
    
-   @event Coral.Table#coral-table:rowchange
+   @typedef {CustomEvent} coral-table:rowchange
    
-   @param {Object} event
-   Event object
-   @param {Array.<HTMLElement>} event.detail.oldSelection
-   The old item selection. When {@link Coral.Table.Row#multiple}, it includes an Array.
-   @param {Array.<HTMLElement>} event.detail.selection
+   @property {Array.<TableCell>} detail.oldSelection
+   The old item selection. When {@link TableRow#multiple}, it includes an Array.
+   @property {Array.<TableCell>} detail.selection
    The item selection. When {@link Coral.Table.Row#multiple}, it includes an Array.
-   @param {HTMLElement} event.detail.row
+   @property {TableRow} detail.row
    The targeted row.
    */
   
   /**
-   Triggered when the selection changed.
+   Triggered when the {@link Table} selection changed.
    
-   @event Coral.Table#coral-table:change
+   @typedef {CustomEvent} coral-table:change
    
-   @param {Object} event
-   Event object
-   @param {Array.<HTMLElement>} event.detail.oldSelection
-   The old item selection. When {@link Coral.Table#multiple}, it includes an Array.
-   @param {Array.<HTMLElement>} event.detail.selection
-   The item selection. When {@link Coral.Table#multiple}, it includes an Array.
+   @property {Array.<TableRow>} detail.oldSelection
+   The old item selection. When {@link Table#multiple}, it includes an Array.
+   @property {Array.<TableRow>} detail.selection
+   The item selection. When {@link Table#multiple}, it includes an Array.
    */
 }
 

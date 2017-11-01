@@ -28,9 +28,10 @@ const CLASSNAMES = ['coral3-BasicList-item', 'coral3-Shell-orgSwitcher-item'];
  @class Coral.Shell.Organization
  @classdesc A Shell Organization component
  @htmltag coral-shell-organization
- @extends Coral.List.Item
+ @extends {ListItem}
  */
 class ShellOrganization extends ListItem {
+  /** @ignore */
   constructor() {
     super();
     
@@ -54,11 +55,9 @@ class ShellOrganization extends ListItem {
   
   /**
    The item collection.
-   See {@link Coral.Collection} for more details.
    
-   @type {Coral.Collection}
+   @type {SelectableCollection}
    @readonly
-   @memberof Coral.Shell.Organization#
    */
   get items() {
     // Construct the collection on first request:
@@ -80,7 +79,6 @@ class ShellOrganization extends ListItem {
    
    @type {HTMLElement}
    @readonly
-   @memberof Coral.Shell.Organization#
    */
   get selectedItem() {
     return this.items._getLastSelected();
@@ -93,7 +91,6 @@ class ShellOrganization extends ListItem {
    @default false
    @htmlattribute selected
    @htmlattributereflected
-   @memberof Shell.Organization#
    */
   get selected() {
     return this._selected || false;
@@ -127,7 +124,6 @@ class ShellOrganization extends ListItem {
    @default ""
    @htmlattribute name
    @htmlattributereflected
-   @memberof Shell.Organization#
    */
   get name() {
     return this._name || '';
@@ -235,8 +231,10 @@ class ShellOrganization extends ListItem {
     this.selected = true;
   }
   
+  /** @ignore */
   static get observedAttributes() { return super.observedAttributes.concat(['name', 'selected']); }
   
+  /** @ignore */
   connectedCallback() {
     this.classList.add(...CLASSNAMES);
   
@@ -277,11 +275,10 @@ class ShellOrganization extends ListItem {
   }
   
   /**
-   Triggered when an organization selection changed.
+   Triggered when a {@link ShellOrganization} selection changed.
    
-   @event Coral.Shell.Organization#coral-shell-organization:_selectedchanged
+   @typedef {CustomEvent} coral-shell-organization:_selectedchanged
    
-   @param {Object} event Event object
    @private
    */
 }

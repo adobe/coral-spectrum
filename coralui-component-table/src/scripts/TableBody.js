@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import TableSection from './TableSection';
+import {ComponentMixin} from 'coralui-mixin-component';
+import TableSectionMixin from './TableSectionMixin';
 import {getRows} from './TableUtil';
 
 const CLASSNAME = 'coral-Table-body';
@@ -26,11 +26,12 @@ const CLASSNAME = 'coral-Table-body';
  @classdesc A Table body component
  @htmltag coral-table-body
  @htmlbasetag tbody
- @extends HTMLTableSectionElement
- @extends Coral.mixin.component
- @extends Coral.mixin.tableSection
+ @extends {HTMLTableSectionElement}
+ @extends {ComponentMixin}
+ @extends {TableSectionMixin}
  */
-class TableBody extends TableSection(Component(HTMLTableSectionElement)) {
+class TableBody extends TableSectionMixin(ComponentMixin(HTMLTableSectionElement)) {
+  /** @ignore */
   constructor() {
     super();
   
@@ -53,6 +54,7 @@ class TableBody extends TableSection(Component(HTMLTableSectionElement)) {
     }, this);
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -64,20 +66,18 @@ class TableBody extends TableSection(Component(HTMLTableSectionElement)) {
   }
   
   /**
-   Triggered when the content changed.
+   Triggered when the {@link TableBody} content changed.
    
-   @event Coral.Table.Body#coral-table-body:_contentchanged
+   @typedef {CustomEvent} coral-table-body:_contentchanged
    
-   @param {Object} event Event object
    @private
    */
   
   /**
-   Triggered when the body is initialized without rows.
+   Triggered when the {@link TableBody} is initialized without rows.
    
-   @event Coral.Table.Body#coral-table-body:_empty
+   @typedef {CustomEvent} coral-table-body:_empty
    
-   @param {Object} event Event object
    @private
    */
 }

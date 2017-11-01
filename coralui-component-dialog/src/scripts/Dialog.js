@@ -15,72 +15,85 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import Overlay from 'coralui-mixin-overlay';
+import {ComponentMixin} from 'coralui-mixin-component';
+import {OverlayMixin} from 'coralui-mixin-overlay';
 import {DragAction} from 'coralui-dragaction';
 import base from '../templates/base';
 import {commons, transform, validate} from 'coralui-util';
 import 'coralui-component-button';
 
 /**
- Boolean enumeration for dialog closable state.
+ Enumeration for {@link Dialog} closable options.
  
- @enum {String}
- @memberof Coral.Dialog
+ @typedef {Object} DialogClosableEnum
+ 
+ @property {String} ON
+ Show a close button on the dialog and close the dialog when clicked.
+ @property {String} OFF
+ Do not show a close button. Elements with the <code>coral-close</code> attribute will still close the dialog.
  */
 const closable = {
-  /** Show a close button on the dialog and close the dialog when clicked. */
   ON: 'on',
-  /** Do not show a close button. Elements with the <code>coral-close</code> attribute will still close the dialog. */
   OFF: 'off'
 };
 
 /**
- Boolean enumeration for dialog keyboard interaction state.
+ Enumeration for {@link Dialog} keyboard interaction options.
  
- @enum {String}
- @memberof Coral.Dialog
+ @typedef {Object} DialogInteractionEnum
+ 
+ @property {String} ON
+ Keyboard interaction is enabled.
+ @property {String} OFF
+ Keyboard interaction is disabled.
  */
 const interaction = {
-  /** Keyboard interaction is enabled. */
   ON: 'on',
-  /** Keyboard interaction is disabled. */
   OFF: 'off'
 };
 
 /**
- Dialog variants.
+ Enumeration for {@link Dialog} variants.
  
- @enum {String}
- @memberof Coral.Dialog
+ @typedef {Object} DialogVariantEnum
+ 
+ @property {String} DEFAULT
+ A dialog with the default, gray header and no icon.
+ @property {String} ERROR
+ A dialog with a red header and warning icon, indicating that an error has occurred.
+ @property {String} WARNING
+ A dialog with an orange header and warning icon, notifying the user of something important.
+ @property {String} SUCCESS
+ A dialog with a green header and checkmark icon, indicates to the user that an operation was successful.
+ @property {String} HELP
+ A dialog with a blue header and question mark icon, provides the user with help.
+ @property {String} INFO
+ A dialog with a blue header and info icon, informs the user of non-critical information.
  */
 const variant = {
-  /** A dialog with the default, gray header and no icon. */
   DEFAULT: 'default',
-  /** A dialog with a red header and warning icon, indicating that an error has occurred. */
   ERROR: 'error',
-  /** A dialog with an orange header and warning icon, notifying the user of something important. */
   WARNING: 'warning',
-  /** A dialog with a green header and checkmark icon, indicates to the user that an operation was successful. */
   SUCCESS: 'success',
-  /** A dialog with a blue header and question mark icon, provides the user with help. */
   HELP: 'help',
-  /** A dialog with a blue header and info icon, informs the user of non-critical information. */
   INFO: 'info'
 };
 
 /**
- Dialog backdrop types.
+ Enumeration for {@link Dialog} backdrops.
  
- @enum {String}
- @memberof Coral.Dialog
+ @typedef {Object} DialogBackdropEnum
+ 
+ @property {String} NONE
+ No backdrop.
+ @property {String} MODAL
+ A backdrop that hides the dialog when clicked.
+ @property {String} STATIC
+ A backdrop that does not hide the dialog when clicked.
  */
 const backdrop = {
-  /** No backdrop. */
   NONE: 'none',
-  /** A backdrop that hides the dialog when clicked. */
   MODAL: 'modal',
-  /** A backdrop that does not hide the dialog when clicked. */
   STATIC: 'static'
 };
 
@@ -113,11 +126,12 @@ for (const variantValue in variant) {
  @class Coral.Dialog
  @classdesc A Dialog component
  @htmltag coral-dialog
- @extends HTMLElement
- @extends Coral.mixin.component
- @extends Coral.mixin.overlay
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
+ @extends {OverlayMixin}
  */
-class Dialog extends Overlay(Component(HTMLElement)) {
+class Dialog extends OverlayMixin(ComponentMixin(HTMLElement)) {
+  /** @ignore */
   constructor() {
     super();
 
@@ -161,11 +175,10 @@ class Dialog extends Overlay(Component(HTMLElement)) {
   }
   
   /**
-   Whether keyboard interaction is enabled.
+   Whether keyboard interaction is enabled. See {@link DialogInteractionEnum}.
    
-   @type {Coral.Dialog.interaction}
-   @default Coral.Dialog.interaction.ON
-   @memberof Coral.Dialog#
+   @type {DialogInteractionEnum}
+   @default DialogInteractionEnum.ON
    */
   get interaction() {
     return this._interaction || interaction.ON;
@@ -180,7 +193,6 @@ class Dialog extends Overlay(Component(HTMLElement)) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Dialog#
    */
   get header() {
     return this._getContentZone(this._elements.header);
@@ -207,7 +219,6 @@ class Dialog extends Overlay(Component(HTMLElement)) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Dialog#
    */
   get content() {
     return this._getContentZone(this._elements.content);
@@ -228,7 +239,6 @@ class Dialog extends Overlay(Component(HTMLElement)) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Dialog#
    */
   get footer() {
     return this._getContentZone(this._elements.footer);
@@ -245,12 +255,11 @@ class Dialog extends Overlay(Component(HTMLElement)) {
   }
   
   /**
-   The backdrop configuration for this dialog.
+   The backdrop configuration for this dialog. See {@link DialogBackdropEnum}.
    
-   @type {Coral.Dialog.backdrop}
-   @default Coral.Dialog.backdrop.MODAL
+   @type {String}
+   @default DialogBackdropEnum.MODAL
    @htmlattribute backdrop
-   @memberof Coral.Dialog#
    */
   get backdrop() {
     return this._backdrop || backdrop.MODAL;
@@ -270,13 +279,12 @@ class Dialog extends Overlay(Component(HTMLElement)) {
   }
   
   /**
-   The dialog's variant.
+   The dialog's variant. See {@link DialogVariantEnum}.
    
-   @type {Coral.Dialog.variant}
-   @default Coral.Dialog.variant.DEFAULT
+   @type {String}
+   @default DialogVariantEnum.DEFAULT
    @htmlattribute variant
    @htmlattributereflected
-   @memberof Coral.Dialog#
    */
   get variant() {
     return this._variant || variant.DEFAULT;
@@ -315,7 +323,6 @@ class Dialog extends Overlay(Component(HTMLElement)) {
    @default false
    @htmlattribute fullscreen
    @htmlattributereflected
-   @memberof Coral.Dialog#
    */
   get fullscreen() {
     return this._fullscreen || false;
@@ -348,7 +355,9 @@ class Dialog extends Overlay(Component(HTMLElement)) {
     }
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link OverlayMixin#open}.
+   */
   get open() {
     return super.open;
   }
@@ -381,7 +390,6 @@ class Dialog extends Overlay(Component(HTMLElement)) {
    @type {String}
    @default ""
    @htmlattribute icon
-   @memberof Coral.Dialog#
    */
   get icon() {
     return this._elements.icon;
@@ -391,13 +399,12 @@ class Dialog extends Overlay(Component(HTMLElement)) {
   }
   
   /**
-   Whether the dialog should have a close button.
+   Whether the dialog should have a close button. See {@link DialogClosableEnum}.
    
-   @type {Coral.Dialog.closable}
-   @default Coral.Dialog.closable.OFF
+   @type {String}
+   @default DialogClosableEnum.OFF
    @htmlattribute closable
    @htmlattributereflected
-   @memberof Coral.Dialog#
    */
   get closable() {
     return this._closable || closable.OFF;
@@ -418,7 +425,6 @@ class Dialog extends Overlay(Component(HTMLElement)) {
    @default false
    @htmlattribute movable
    @htmlattributereflected
-   @memberof Coral.Dialog#
    */
   get movable() {
     return this._movable || false;
@@ -587,7 +593,7 @@ class Dialog extends Overlay(Component(HTMLElement)) {
   /**
    Centers the dialog in the middle of the screen.
    
-   @returns {Coral.Dialog} this, chainable.
+   @returns {Dialog} this, chainable.
    */
   center() {
     // We're already centered in fullscreen mode
@@ -606,8 +612,15 @@ class Dialog extends Overlay(Component(HTMLElement)) {
     return this;
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.content; }
   set defaultContentZone(value) { this.content = value; }
+  
   get _contentZones() {
     return {
       'coral-dialog-header': 'header',
@@ -616,12 +629,35 @@ class Dialog extends Overlay(Component(HTMLElement)) {
     };
   }
   
-  // Expose enumerations
+  /**
+   Returns {@link Dialog} variants.
+   
+   @return {DialogVariantEnum}
+   */
   static get variant() { return variant; }
+  
+  /**
+   Returns {@link Dialog} backdrops.
+   
+   @return {DialogBackdropEnum}
+   */
   static get backdrop() { return backdrop; }
+  
+  /**
+   Returns {@link Dialog} close options.
+   
+   @return {DialogClosableEnum}
+   */
   static get closable() { return closable; }
+  
+  /**
+   Returns {@link Dialog} interaction options.
+   
+   @return {DialogInteractionEnum}
+   */
   static get interaction() { return interaction; }
   
+  /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'interaction',
@@ -633,7 +669,8 @@ class Dialog extends Overlay(Component(HTMLElement)) {
       'movable'
     ]);
   }
-
+  
+  /** @ignore */
   connectedCallback() {
     this.classList.add(CLASSNAME);
 

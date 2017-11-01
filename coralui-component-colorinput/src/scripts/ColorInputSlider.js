@@ -26,7 +26,7 @@ const CLASSNAMES = ['coral3-ColorInput-slider', 'coral3-Slider'];
  @class Coral.ColorInput.Slider
  @classdesc A ColorInput Slider component
  @htmltag coral-colorinput-slider
- @extends Coral.Slider
+ @extends {Slider}
  */
 class ColorInputSlider extends Slider {
   /**
@@ -36,7 +36,6 @@ class ColorInputSlider extends Slider {
    @type {String}
    @default ""
    @htmlattribute gradient
-   @memberof Coral.ColorInput.Slider#
    */
   get gradient() {
     return this._gradient || '';
@@ -71,7 +70,9 @@ class ColorInputSlider extends Slider {
     barStyle.filter = `progid:DXImageTransform.Microsoft.gradient(startColorstr='${stops[0]}', endColorstr='${stops[1]}', gradientType=1)`;
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link FormFieldMixin#labelledBy}.
+   */
   get labelledBy() {
     return super.labelledBy;
   }
@@ -88,10 +89,12 @@ class ColorInputSlider extends Slider {
     return sliderBase;
   }
   
+  /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['gradient']);
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

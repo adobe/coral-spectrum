@@ -15,17 +15,18 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {transform} from 'coralui-util';
 
 /**
  @class Coral.Select.Item
  @classdesc A Select item component
  @htmltag coral-select-item
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class SelectItem extends Component(HTMLElement) {
+class SelectItem extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -42,7 +43,6 @@ class SelectItem extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Select.Item#
    */
   get content() {
     return this;
@@ -64,7 +64,6 @@ class SelectItem extends Component(HTMLElement) {
    @default false
    @htmlattribute disabled
    @htmlattributereflected
-   @memberof Coral.Select.Item#
    */
   get disabled() {
     return this._disabled || false;
@@ -83,7 +82,6 @@ class SelectItem extends Component(HTMLElement) {
    @default false
    @htmlattribute selected
    @htmlattributereflected
-   @memberof Coral.Select.Item#
    */
   get selected() {
     return this._selected || false;
@@ -102,7 +100,6 @@ class SelectItem extends Component(HTMLElement) {
    @default ""
    @htmlattribute value
    @htmlattributereflected
-   @memberof Coral.Select.Item#
    */
   get value() {
     // keep spaces to only 1 max and trim to mimic native select option behavior
@@ -121,7 +118,8 @@ class SelectItem extends Component(HTMLElement) {
       content: this.textContent
     });
   }
-
+  
+  /** @ignore */
   static get observedAttributes() {
     return ['selected', 'disabled', 'value'];
   }

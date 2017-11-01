@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 
 const CLASSNAME = 'coral3-ColumnView-column';
 
@@ -23,10 +23,11 @@ const CLASSNAME = 'coral3-ColumnView-column';
  @class Coral.ColumnView.Preview
  @classdesc A ColumnView Preview component
  @htmltag coral-columnview-preview
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class ColumnViewPreview extends Component(HTMLElement) {
+class ColumnViewPreview extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -41,7 +42,6 @@ class ColumnViewPreview extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.ColumnView.Preview#
    */
   get content() {
     return this._getContentZone(this._elements.content);
@@ -56,10 +56,18 @@ class ColumnViewPreview extends Component(HTMLElement) {
     });
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.content; }
   set defaultContentZone(value) { this.content = value; }
+  
   get _contentZones() { return {'coral-columnview-preview-content': 'content'}; }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

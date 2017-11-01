@@ -1,8 +1,8 @@
-import Component from '../scripts/Component';
+import ComponentMixin from '../scripts/ComponentMixin';
 
-describe('Coral.mixin.component', function() {
+describe('Coral.mixin._component', function() {
   // Dummy custom element
-  class Element extends Component(HTMLElement) {
+  class Element extends ComponentMixin(HTMLElement) {
     constructor() {
       super();
       

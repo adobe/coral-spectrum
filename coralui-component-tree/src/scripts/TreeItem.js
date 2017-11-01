@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {Collection} from 'coralui-collection';
 import 'coralui-component-icon';
 import treeItem from '../templates/treeItem';
@@ -60,10 +60,11 @@ const addTreeItemSpacer = function(item) {
  @class Coral.Tree.Item
  @classdesc A Tree item component
  @htmltag coral-tree-item
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class TreeItem extends Component(HTMLElement) {
+class TreeItem extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -83,7 +84,6 @@ class TreeItem extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @readonly
-   @memberof Coral.Tree.Item#
    */
   get parent() {
     return this._parent || null;
@@ -94,7 +94,6 @@ class TreeItem extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Tree.Item#
    */
   get content() {
     return this._getContentZone(this._elements.content);
@@ -110,12 +109,10 @@ class TreeItem extends Component(HTMLElement) {
   }
   
   /**
-   The Collection Interface that allows interacting with the items that the component contains. See
-   {@link Coral.Collection} for more details.
+   The Collection Interface that allows interacting with the items that the component contains.
    
-   @type {Coral.Collection}
+   @type {Collection}
    @readonly
-   @memberof Coral.Tree.Item#
    */
   get items() {
     // Construct the collection on first request
@@ -141,7 +138,6 @@ class TreeItem extends Component(HTMLElement) {
    @default false
    @htmlattribute expanded
    @htmlattributereflected
-   @memberof Coral.Tree.Item#
    */
   get expanded() {
     return this._expanded || false;
@@ -215,13 +211,12 @@ class TreeItem extends Component(HTMLElement) {
   }
   
   /**
-   The item's variant.
+   The item's variant. See {@link TreeItemVariant}.
    
-   @type {Coral.Tree.Item.variant}
-   @default Coral.Tree.Item.variant.DRILLDOWN
+   @type {String}
+   @default TreeItemVariant.DRILLDOWN
    @htmlattribute variant
    @htmlattributereflected
-   @memberof Coral.Tree.Item#
    */
   get variant() {
     return this._variant || variant.DRILLDOWN;
@@ -242,7 +237,6 @@ class TreeItem extends Component(HTMLElement) {
    @default false
    @htmlattribute selected
    @htmlattributereflected
-   @memberof Coral.Tree.Item#
    */
   get selected() {
     return this._selected || false;
@@ -264,7 +258,6 @@ class TreeItem extends Component(HTMLElement) {
    @default false
    @htmlattribute disabled
    @htmlattributereflected
-   @memberof Coral.Tree.Item#
    */
   get disabled() {
     return this._disabled || false;
@@ -320,17 +313,30 @@ class TreeItem extends Component(HTMLElement) {
     this._elements.header.focus();
   }
   
-  // Expose enum
+  /**
+   Returns {@link TreeItem} variants.
+   
+   @return {TreeItemVariant}
+   */
   static get variant() { return variant; }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.content; }
   set defaultContentZone(value) { this.content = value; }
+  
   get _contentZones() { return {'coral-tree-item-content': 'content'}; }
   
+  /** @ignore */
   static get observedAttributes() {
     return ['selected', 'disabled', 'variant', 'expanded', 'hidden'];
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -403,34 +409,34 @@ class TreeItem extends Component(HTMLElement) {
   }
   
   /**
-   Triggered when {@link Coral.Tree.Item#selected} changed.
+   Triggered when {@link TreeItem#selected} changed.
+ 
+   @typedef {CustomEvent} coral-tree-item:_selectedchanged
    
-   @event Coral.Tree.Item#coral-tree-item:_selectedchanged
-   @param {Object} event Event object
    @private
    */
   
   /**
-   Triggered when {@link Coral.Tree.Item#expanded} changed.
+   Triggered when {@link TreeItem#expanded} changed.
+ 
+   @typedef {CustomEvent} coral-tree-item:_expandedchanged
    
-   @event Coral.Tree.Item#coral-tree-item:_expandedchanged
-   @param {Object} event Event object
    @private
    */
   
   /**
-   Triggered when {@link Coral.Tree.Item#hidden} changed.
+   Triggered when {@link TreeItem#hidden} changed.
+ 
+   @typedef {CustomEvent} coral-tree-item:_hiddenchanged
    
-   @event Coral.Tree.Item#coral-tree-item:_hiddenchanged
-   @param {Object} event Event object
    @private
    */
   
   /**
-   Triggered when {@link Coral.Tree.Item#disabled} changed.
+   Triggered when {@link TreeItem#disabled} changed.
+ 
+   @typedef {CustomEvent} coral-tree-item:_disabledchanged
    
-   @event Coral.Tree.Item#coral-tree-item:_disabledchanged
-   @param {Object} event Event object
    @private
    */
 }

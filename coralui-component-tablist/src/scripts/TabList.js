@@ -15,34 +15,38 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {SelectableCollection} from 'coralui-collection';
 import {transform, validate, commons} from 'coralui-util';
 import getTarget from './getTarget';
 
 /**
- Enumeration representing the TabList size.
+ Enumeration for {@link TabList} sizes.
  
- @memberof Coral.TabList
- @enum {String}
+ @typedef {Object} TabListSizeEnum
+ 
+ @property {String} MEDIUM
+ A medium-sized tablist. This is the default.
+ @property {String} LARGE
+ A large-sized tablist, typically used for headers.
  */
 const size = {
-  /** A medium-sized tablist. This is the default. */
   MEDIUM: 'M',
-  /** A large-sized tablist, typically used for headers. */
   LARGE: 'L'
 };
 
 /**
- TabList orientations.
+ Enumeration for {@link TabList} orientations.
  
- @enum {String}
- @memberof Coral.TabList
+ @typedef {Object} TabListOrientationEnum
+ 
+ @property {String} HORIZONTAL
+ Horizontal TabList, this is the default value.
+ @property {String} VERTICAL
+ Vertical TabList.
  */
 const orientation = {
-  /** Horizontal TabList, this is the default value. */
   HORIZONTAL: 'horizontal',
-  /** Vertical TabList. */
   VERTICAL: 'vertical'
 };
 
@@ -53,10 +57,11 @@ const CLASSNAME = 'coral3-TabList';
  @class Coral.TabList
  @classdesc A TabList component
  @htmltag coral-tablist
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class TabList extends Component(HTMLElement) {
+class TabList extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -87,11 +92,9 @@ class TabList extends Component(HTMLElement) {
   
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   See {@link Coral.Collection} for more details.
    
-   @type {Coral.Collection}
+   @type {SelectableCollection}
    @readonly
-   @memberof Coral.TabList#
    */
   get items() {
     // just init on demand
@@ -111,7 +114,6 @@ class TabList extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @readonly
-   @memberof Coral.TabList#
    */
   get selectedItem() {
     return this.items._getLastSelected();
@@ -125,7 +127,6 @@ class TabList extends Component(HTMLElement) {
    @type {?HTMLElement|String}
    @default null
    @htmlattribute target
-   @memberof Coral.TabList#
    */
   get target() {
     return typeof this._target === 'string' ? this._target : this._target || null;
@@ -187,12 +188,12 @@ class TabList extends Component(HTMLElement) {
   /**
    The size of the TabList. It accepts both lower and upper case sizes. Currently only "M" (the default) and "L"
    are available.
+   See {@link TabListSizeEnum}.
    
-   @type {Coral.TabList.size}
-   @default Coral.TabList.size.MEDIUM
+   @type {String}
+   @default TabListSizeEnum.MEDIUM
    @htmlattribute size
    @htmlattributereflected
-   @memberof Coral.TabList#
    */
   get size() {
     return this._size || size.MEDIUM;
@@ -206,13 +207,12 @@ class TabList extends Component(HTMLElement) {
   }
   
   /**
-   Orientation of the TabList.
+   Orientation of the TabList. See {@link TabListOrientationEnum}.
    
-   @type {Coral.TabList.orientation}
-   @default Coral.TabList.orientation.HORIZONTAL
+   @type {String}
+   @default TabListOrientationEnum.HORIZONTAL
    @htmlattribute orientation
    @htmlattributereflected
-   @memberof Coral.TabList#
    */
   get orientation() {
     return this._orientation || orientation.HORIZONTAL;
@@ -377,19 +377,30 @@ class TabList extends Component(HTMLElement) {
     }
   }
   
-  // Expose enums
+  /**
+   Returns {@link TabList} sizes.
+   
+   @return {TabListSizeEnum}
+   */
   static get size() {
     return size;
   }
   
+  /**
+   Returns {@link TabList} orientation options.
+   
+   @return {TabListOrientationEnum}
+   */
   static get orientation() {
     return orientation;
   }
   
+  /** @ignore */
   static get observedAttributes() {
     return ['target', 'size', 'orientation'];
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -412,15 +423,13 @@ class TabList extends Component(HTMLElement) {
   }
   
   /**
-   Triggered when the selected item has changed.
+   Triggered when the {@link TabList} selected item has changed.
+ 
+   @typedef {CustomEvent} coral-tablist:change
    
-   @event Coral.TabList#coral-tablist:change
-   
-   @param {Object} event Event object
-   @param {Object} event.detail
-   @param {HTMLElement} event.detail.oldSelection
+   @property {Tab} event.detail.oldSelection
    The prior selected item(s).
-   @param {HTMLElement} event.detail.selection
+   @property {Tab} event.detail.selection
    The newly selected item(s).
    */
 }

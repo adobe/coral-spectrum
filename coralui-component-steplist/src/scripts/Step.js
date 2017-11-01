@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import 'coralui-component-tooltip';
 import step from '../templates/step';
 import {transform, commons} from 'coralui-util';
@@ -27,10 +27,11 @@ const CLASSNAME = 'coral3-Step';
  @class Coral.Step
  @classdesc A Step component
  @htmltag coral-step
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class Step extends Component(HTMLElement) {
+class Step extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -46,7 +47,6 @@ class Step extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Step#
    */
   get label() {
     return this._getContentZone(this._elements.label);
@@ -69,7 +69,6 @@ class Step extends Component(HTMLElement) {
    @default false
    @htmlattribute selected
    @htmlattributereflected
-   @memberof Coral.Step#
    */
   get selected() {
     return this._selected || false;
@@ -120,7 +119,6 @@ class Step extends Component(HTMLElement) {
    @type {?HTMLElement|String}
    @default null
    @htmlattribute target
-   @memberof Coral.Step#
    */
   get target() {
     return this._target || null;
@@ -139,12 +137,21 @@ class Step extends Component(HTMLElement) {
     }
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.label; }
   set defaultContentZone(value) { this.label = value; }
+  
   get _contentZones() { return {'coral-step-label': 'label'}; }
   
+  /** @ignore */
   static get observedAttributes() { return ['selected', 'target']; }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

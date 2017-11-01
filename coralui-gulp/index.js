@@ -18,7 +18,7 @@ module.exports = function(gulp) {
   require('./tasks/watch.js')(gulp);
   
   gulp.task('build', function() {
-    runSequence('clean', 'lint', 'docs', 'styles', 'theme', 'resources', 'templates', 'scripts', 'minify');
+    runSequence('clean', 'styles', 'theme', 'resources', 'templates', 'scripts');
   });
   
   gulp.task('dev', function() {

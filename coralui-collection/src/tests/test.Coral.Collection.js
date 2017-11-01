@@ -1,4 +1,4 @@
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 
 describe('Coral.Collection', function() {
   var onItemAddedSpy = sinon.spy();
@@ -13,7 +13,7 @@ describe('Coral.Collection', function() {
   };
   
   // test collection container
-  window.customElements.define('coral-collection-test', class extends Component(HTMLElement) {
+  window.customElements.define('coral-collection-test', class extends ComponentMixin(HTMLElement) {
     constructor() {
       super();
     }
@@ -36,7 +36,7 @@ describe('Coral.Collection', function() {
   });
   
   // test nested collection container
-  window.customElements.define('coral-collection-nested-test', class extends Component(HTMLElement) {
+  window.customElements.define('coral-collection-nested-test', class extends ComponentMixin(HTMLElement) {
     constructor() {
       super();
     }
@@ -64,7 +64,7 @@ describe('Coral.Collection', function() {
     }
   });
   
-  window.customElements.define('coral-collection-test-item', class extends Component(HTMLElement) {
+  window.customElements.define('coral-collection-test-item', class extends ComponentMixin(HTMLElement) {
     constructor() {
       super();
     }
@@ -83,7 +83,7 @@ describe('Coral.Collection', function() {
     }
   });
   
-  window.customElements.define('coral-collection-test-button-item', class extends Component(HTMLButtonElement) {
+  window.customElements.define('coral-collection-test-button-item', class extends ComponentMixin(HTMLButtonElement) {
     constructor() {
       super();
     }

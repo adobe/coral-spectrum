@@ -15,37 +15,43 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import base from '../templates/base';
 import {transform, validate} from 'coralui-util';
 
 /**
- Enumeration representing progress bar sizes.
+ Enumeration for {@link Progress} sizes.
  
- @enum {String}
- @memberof Coral.Progress
+ @typedef {Object} ProgressSizeEnum
+ 
+ @property {String} SMALL
+ A small progress bar.
+ @property {String} MEDIUM
+ A medium progress bar.
+ @property {String} LARGE
+ A large progress bar.
  */
 const size = {
-  /** A small progress bar. */
   SMALL: 'S',
-  /** A medium progress bar. */
   MEDIUM: 'M',
-  /** A large progress bar. */
   LARGE: 'L'
 };
 
 /**
- Enumeration representing progress bar label positions.
+ Enumeration for {@link Progress} label positions.
  
- @enum {String}
- @memberof Coral.Progress
+ @typedef {Object} ProgressLabelPositionEnum
+ 
+ @property {String} LEFT
+ Show the label to the left of the bar.
+ @property {String} RIGHT
+ Show the label to the right of the bar.
+ @property {String} LARGE
+ Show the label below the bar.
  */
 const labelPosition = {
-  /** Show the label to the left of the bar. */
   LEFT: 'left',
-  /** Show the label to the right of the bar. */
   RIGHT: 'right',
-  /** Show the label below the bar. */
   BOTTOM: 'bottom'
 };
 
@@ -76,10 +82,11 @@ for (const position in labelPosition) {
  @class Coral.Progress
  @classdesc A Progress component
  @htmltag coral-progress
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class Progress extends Component(HTMLElement) {
+class Progress extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -104,10 +111,9 @@ class Progress extends Component(HTMLElement) {
    
    @type {Number}
    @default 0
-   @fires Coral.Progress.coral-progress:changed
+   @emits {coral-progress:change}
    @htmlattribute value
    @htmlattributereflected
-   @memberof Coral.Progress#
    */
   get value() {
     return this.indeterminate ? 0 : this._value || 0;
@@ -149,7 +155,6 @@ class Progress extends Component(HTMLElement) {
    @default false
    @htmlattribute indeterminate
    @htmlattributereflected
-   @memberof Coral.Progress#
    */
   get indeterminate() {
     return this._indeterminate || false;
@@ -181,12 +186,12 @@ class Progress extends Component(HTMLElement) {
   
   /**
    The vertical and text size of this progress bar. To adjust the width, simply set the CSS width property.
+   See {@link ProgressSizeEnum}.
    
-   @type {Coral.Progress.size}
-   @default Coral.Progress.size.MEDIUM
+   @type {String}
+   @default ProgressSizeEnum.MEDIUM
    @htmlattribute size
    @htmlattributereflected size
-   @memberof Coral.Progress#
    */
   get size() {
     return this._size || size.MEDIUM;
@@ -207,7 +212,6 @@ class Progress extends Component(HTMLElement) {
    @type {Boolean}
    @default false
    @htmlattribute showpercent
-   @memberof Coral.Progress#
    */
   get showPercent() {
     return this._showPercent || false;
@@ -235,7 +239,6 @@ class Progress extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Progress#
    */
   get label() {
     return this._getContentZone(this._elements.label);
@@ -251,13 +254,12 @@ class Progress extends Component(HTMLElement) {
   }
   
   /**
-   Label position.
+   Label position. See {@link ProgressLabelPositionEnum}.
    
-   @type {Coral.Progress.labelPosition}
-   @default Coral.Progress.labelPosition.RIGHT
+   @type {String}
+   @default ProgressLabelPositionEnum.RIGHT
    @htmlattribute labelposition
    @htmlattributereflected
-   @memberof Coral.Progress#
    */
   get labelPosition() {
     return this._labelPosition || labelPosition.RIGHT;
@@ -318,14 +320,32 @@ class Progress extends Component(HTMLElement) {
     }
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.label; }
   set defaultContentZone(value) { this.label = value; }
+  
   get _contentZones() { return {'coral-progress-label': 'label'}; }
   
-  // Expose enumerations
+  /**
+   Returns {@link Progress} label position options.
+   
+   @return {ProgressLabelPositionEnum}
+   */
   static get labelPosition() { return labelPosition; }
+  
+  /**
+   Returns {@link Progress} sizes.
+   
+   @return {ProgressSizeEnum}
+   */
   static get size() { return size; }
   
+  /** @ignore */
   static get observedAttributes() {
     return [
       'value',
@@ -338,6 +358,7 @@ class Progress extends Component(HTMLElement) {
     ];
   }
   
+  /** @ignore */
   attributeChangedCallback(name, oldValue, value) {
     if (name === 'indeterminate' && transform.booleanAttr(value)) {
       // Remember current value in case indeterminate is toggled
@@ -347,6 +368,7 @@ class Progress extends Component(HTMLElement) {
     super.attributeChangedCallback(name, oldValue, value);
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -401,16 +423,9 @@ class Progress extends Component(HTMLElement) {
   }
   
   /**
-   Triggered when the progress value is changed.
+   Triggered when the {@link Progress} value is changed.
    
-   @event Coral.Progress#coral-progress:change
-   
-   @param {Object} event
-   Event object.
-   @param {Object} event.detail.value
-   The current progress value in percent.
-   @param {Object} event.detail.oldValue
-   The previous progress value in percent.
+   @typedef {CustomEvent} coral-progress:change
    */
 }
 

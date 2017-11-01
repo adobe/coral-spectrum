@@ -20,7 +20,7 @@ import {SelectableCollection} from 'coralui-collection';
 /**
  @class Coral.ColumnView.Collection
  @classdesc The ColumnView collection
- @extends Coral.SelectableCollection
+ @extends {SelectableCollection}
  */
 class ColumnViewCollection extends SelectableCollection {
   _deselectAndDeactivateAllExcept(item) {

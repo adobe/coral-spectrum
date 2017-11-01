@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {transform} from 'coralui-util';
 
 const CLASSNAME = 'coral3-Shell-workspaces-workspace';
@@ -25,10 +25,11 @@ const CLASSNAME = 'coral3-Shell-workspaces-workspace';
  @classdesc A Shell Workspace component
  @htmltag coral-shell-workspace
  @htmlbasetag a
- @extends HTMLAnchorElement
- @extends Coral.mixin.component
+ @extends {HTMLAnchorElement}
+ @extends {ComponentMixin}
  */
-class ShellWorkspace extends Component(HTMLAnchorElement) {
+class ShellWorkspace extends ComponentMixin(HTMLAnchorElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -45,7 +46,6 @@ class ShellWorkspace extends Component(HTMLAnchorElement) {
    @default false
    @htmlattribute selected
    @htmlattributereflected
-   @memberof Coral.Shell.Workspace#
    */
   get selected() {
     return this._selected || false;
@@ -67,8 +67,10 @@ class ShellWorkspace extends Component(HTMLAnchorElement) {
     }
   }
   
+  /** @ignore */
   static get observedAttributes() { return ['selected']; }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -76,11 +78,10 @@ class ShellWorkspace extends Component(HTMLAnchorElement) {
   }
   
   /**
-   Triggered when a workspace selection changed.
+   Triggered when a {@link ShellWorkspace} selection changed.
    
-   @event Coral.Shell.Workspace#coral-shell-workspace:_selectedchanged
+   @typedef {CustomEvent} coral-shell-workspace:_selectedchanged
    
-   @param {Object} event Event object
    @private
    */
 }

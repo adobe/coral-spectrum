@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 
 const CLASSNAME = 'coral3-Shell-header';
 
@@ -23,10 +23,11 @@ const CLASSNAME = 'coral3-Shell-header';
  @class Coral.Shell.Header
  @classdesc A Shell Header component
  @htmltag coral-shell-header
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class ShellHeader extends Component(HTMLElement) {
+class ShellHeader extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -50,7 +51,6 @@ class ShellHeader extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Shell.Header#
    */
   get home() {
     return this._getContentZone(this._elements.home);
@@ -72,7 +72,6 @@ class ShellHeader extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Shell.Header#
    */
   get content() {
     return this._getContentZone(this._elements.content);
@@ -92,7 +91,6 @@ class ShellHeader extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Shell.Header#
    */
   get actions() {
     return this._getContentZone(this._elements.actions);
@@ -132,8 +130,15 @@ class ShellHeader extends Component(HTMLElement) {
     home.setAttribute('aria-level', '2');
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.content; }
   set defaultContentZone(value) { this.content = value; }
+  
   get _contentZones() {
     return {
       'coral-shell-header-home': 'home',
@@ -142,6 +147,7 @@ class ShellHeader extends Component(HTMLElement) {
     };
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

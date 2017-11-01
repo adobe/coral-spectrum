@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import FormField from 'coralui-mixin-formfield';
+import {ComponentMixin} from 'coralui-mixin-component';
+import {FormFieldMixin} from 'coralui-mixin-formfield';
 import base from '../templates/base';
 import {transform} from 'coralui-util';
 
@@ -26,11 +26,12 @@ const CLASSNAME = 'coral3-Switch';
  @class Coral.Switch
  @classdesc A Switch component
  @htmltag coral-switch
- @extends HTMLElement
- @extends Coral.mixin.component
- @extends Coral.mixin.formField
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
+ @extends {FormFieldMixin}
  */
-class Switch extends FormField(Component(HTMLElement)) {
+class Switch extends FormFieldMixin(ComponentMixin(HTMLElement)) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -50,8 +51,7 @@ class Switch extends FormField(Component(HTMLElement)) {
    @default false
    @htmlattribute checked
    @htmlattributereflected
-   @fires Coral.mixin.formField#change
-   @memberof Coral.Switch#
+   @emits {change}
    */
   get checked() {
     return this._checked || false;
@@ -63,7 +63,13 @@ class Switch extends FormField(Component(HTMLElement)) {
     this._elements.input.checked = this._checked;
   }
   
-  // JSDoc inherited
+  /**
+   Name used to submit the data in a form.
+   @type {String}
+   @default ""
+   @htmlattribute name
+   @htmlattributereflected
+   */
   get name() {
     return this._elements.input.name;
   }
@@ -79,7 +85,6 @@ class Switch extends FormField(Component(HTMLElement)) {
    @type {String}
    @default "on"
    @htmlattribute value
-   @memberof Coral.Checkbox#
    */
   get value() {
     return this._elements.input.value || 'on';
@@ -88,7 +93,13 @@ class Switch extends FormField(Component(HTMLElement)) {
     this._elements.input.value = value;
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is disabled or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute disabled
+   @htmlattributereflected
+   */
   get disabled() {
     return this._disabled || false;
   }
@@ -101,7 +112,13 @@ class Switch extends FormField(Component(HTMLElement)) {
     this._elements.input.disabled = this._disabled;
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is required or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute required
+   @htmlattributereflected
+   */
   get required() {
     return this._required || false;
   }
@@ -113,7 +130,13 @@ class Switch extends FormField(Component(HTMLElement)) {
     this._elements.input.required = this._required;
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
+   @type {Boolean}
+   @default false
+   @htmlattribute readonly
+   @htmlattributereflected
+   */
   get readOnly() {
     return this._readOnly || false;
   }
@@ -139,20 +162,26 @@ class Switch extends FormField(Component(HTMLElement)) {
   get _eventTargetProperty() { return 'checked'; }
   
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link FormFieldMixin#clear}.
+   */
   clear() {
     this.checked = false;
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link FormFieldMixin#reset}.
+   */
   reset() {
     this.checked = this._initialCheckedState;
   }
   
+  /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['checked']);
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

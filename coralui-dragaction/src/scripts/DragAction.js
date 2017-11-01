@@ -34,17 +34,20 @@ const DEFAULT_SCROLL_OFFSET = 20;
 const DEFAULT_SCROLL_BY = 10;
 
 /**
- Enum for DragAction axis restriction values.
+ Enumeration for {@link DragAction} axis restrictions.
  
- @enum {String}
- @memberof Coral.DragAction
+ @typedef {Object} DragActionAxisEnum
+ 
+ @property {String} FREE
+ Allows vertically and horizontally dragging.
+ @property {String} VERTICAL
+ Allows vertically dragging only.
+ @property {String} HORIZONTAL
+ Allows horizontally dragging only.
  */
 const axis = {
-  /** Allows vertically and horizontally dragging. */
   FREE: 'free',
-  /** Allows vertically dragging only. */
   VERTICAL: 'vertical',
-  /** Allows horizontally dragging only. */
   HORIZONTAL: 'horizontal'
 };
 
@@ -152,7 +155,7 @@ function within(scrollingElement, a, b) {
 
 /**
  @ignore
- @param {Coral.DragAction} self
+ @param {DragAction} self
  Coral.DragAction instance
  @returns {HTMLElement}
  The dropzone that is being hovered by the dragged element or null if none
@@ -180,6 +183,11 @@ function isOverDropZone(self) {
  The draggable element.
  */
 class DragAction {
+  /**
+   Takes the {HTMLElement} to be dragged as argument.
+   
+   @param {HTMLElement} dragElement
+   */
   constructor(dragElement) {
     if (!dragElement) {
       throw new Error('Coral.DragAction: dragElement is missing');
@@ -251,7 +259,6 @@ class DragAction {
    @readonly
    @type {String|HTMLElement}
    @htmlattribute coral-dragaction
-   @memberof Coral.DragAction#
    */
   get dragElement() {
     return this._dragElementValue;
@@ -263,7 +270,6 @@ class DragAction {
    @name handle
    @type {String|HTMLElement}
    @htmlattribute coral-dragaction-handle
-   @memberof Coral.DragAction#
    */
   get handle() {
     return this._handle;
@@ -325,7 +331,6 @@ class DragAction {
    @name dropZone
    @type {String|HTMLElement}
    @htmlattribute coral-dragaction-dropzone
-   @memberof Coral.DragAction#
    */
   get dropZone() {
     return this._dropZone;
@@ -346,13 +351,12 @@ class DragAction {
   }
   
   /**
-   The axis to constrain drag movement.
+   The axis to constrain drag movement. See {@link DragActionAxisEnum}.
    
    @name axis
-   @type {Coral.DragAction.axis}
-   @default Coral.DragAction.axis.FREE
+   @type {String}
+   @default DragActionAxisEnum.FREE
    @htmlattribute coral-dragaction-axis
-   @memberof Coral.DragAction#
    */
   get axis() {
     return this._axis;
@@ -369,7 +373,6 @@ class DragAction {
    @default false
    @type {Boolean}
    @htmlattribute coral-dragaction-scroll
-   @memberof Coral.DragAction#
    */
   get scroll() {
     return this._scroll;
@@ -385,7 +388,6 @@ class DragAction {
    @default false
    @type {Boolean}
    @htmlattribute coral-dragaction-containment
-   @memberof Coral.DragAction#
    */
   get containment() {
     return this._containment;
@@ -692,7 +694,6 @@ class DragAction {
    @function destroy
    @param {Boolean} restorePosition
    Whether to restore the draggable element to its initial position
-   @memberof Coral.DragAction
    */
   destroy(restorePosition) {
     // Unbind events and remove classes
@@ -736,7 +737,11 @@ class DragAction {
     this._dragElement.dragAction = undefined;
   }
   
-  // Expose enum
+  /**
+   Returns {@link DragAction} axis restrictions.
+   
+   @return {DragActionAxisEnum}
+   */
   static get axis() { return axis; }
   
   /** @private */
@@ -747,101 +752,101 @@ class DragAction {
   }
   
   /**
-   Triggered when the drag element starts to be dragged.
+   Triggered when the {@link DragAction#dragElement} starts to be dragged.
+ 
+   @typedef {CustomEvent} coral-dragaction:dragstart
    
-   @event Coral.DragAction#coral-dragaction:dragstart
-   
-   @param {HTMLElement} dragElement
+   @property {HTMLElement} dragElement
    The dragged element
-   @param {Number} pageX
+   @property {Number} pageX
    The mouse position relative to the left edge of the document.
-   @param {Number} pageY
+   @property {Number} pageY
    The mouse position relative to the top edge of the document.
    */
   
   /**
-   Triggered when the drag element is being dragged.
+   Triggered when the {@link DragAction#dragElement} is being dragged.
+ 
+   @typedef {CustomEvent} coral-dragaction:drag
    
-   @event Coral.DragAction#coral-dragaction:drag
-   
-   @param {HTMLElement} dragElement
+   @property {HTMLElement} dragElement
    The dragged element
-   @param {Number} pageX
+   @property {Number} pageX
    The mouse position relative to the left edge of the document.
-   @param {Number} pageY
+   @property {Number} pageY
    The mouse position relative to the top edge of the document.
    */
   
   /**
-   Triggered when the drag element stops to be dragged.
+   Triggered when the {@link DragAction#dragElement} stops to be dragged.
+ 
+   @typedef {CustomEvent} coral-dragaction:dragend
    
-   @event Coral.DragAction#coral-dragaction:dragend
-   
-   @param {HTMLElement} dragElement
+   @property {HTMLElement} dragElement
    The dragged element
-   @param {Number} pageX
+   @property {Number} pageX
    The mouse position relative to the left edge of the document.
-   @param {Number} pageY
+   @property {Number} pageY
    The mouse position relative to the top edge of the document.
    */
   
   /**
-   Triggered when the drag element enters a drop element.
+   Triggered when the {@link DragAction#dragElement} enters a drop element.
+ 
+   @typedef {CustomEvent} coral-dragaction:dragenter
    
-   @event Coral.DragAction#coral-dragaction:dragenter
-   
-   @param {HTMLElement} dragElement
+   @property {HTMLElement} dragElement
    The dragged element
-   @param {HTMLElement} dropElement
+   @property {HTMLElement} dropElement
    The drop element
-   @param {Number} pageX
+   @property {Number} pageX
    The mouse position relative to the left edge of the document.
-   @param {Number} pageY
+   @property {Number} pageY
    The mouse position relative to the top edge of the document.
    */
   
   /**
-   Triggered when the drag element is over a drop element.
+   Triggered when the {@link DragAction#dragElement} is over a drop element.
+ 
+   @typedef {CustomEvent} coral-dragaction:dragover
    
-   @event Coral.DragAction#coral-dragaction:dragover
-   
-   @param {HTMLElement} dragElement
+   @property {HTMLElement} dragElement
    The dragged element
-   @param {HTMLElement} dropElement
+   @property {HTMLElement} dropElement
    The drop element
-   @param {Number} pageX
+   @property {Number} pageX
    The mouse position relative to the left edge of the document.
-   @param {Number} pageY
+   @property {Number} pageY
    The mouse position relative to the top edge of the document.
    */
   
   /**
-   Triggered when the drag element leaves a drop element.
+   Triggered when the {@link DragAction#dragElement} leaves a drop element.
+ 
+   @typedef {CustomEvent} coral-dragaction:dragleave
    
-   @event Coral.DragAction#coral-dragaction:dragleave
-   
-   @param {HTMLElement} dragElement
+   @property {HTMLElement} dragElement
    The dragged element
-   @param {HTMLElement} dropElement
+   @property {HTMLElement} dropElement
    The drop element
-   @param {Number} pageX
+   @property {Number} pageX
    The mouse position relative to the left edge of the document.
-   @param {Number} pageY
+   @property {Number} pageY
    The mouse position relative to the top edge of the document.
    */
   
   /**
-   Triggered when the drag element is dropped on a drop element.
+   Triggered when the {@link DragAction#dragElement} is dropped on a drop element.
+ 
+   @typedef {CustomEvent} coral-dragaction:drop
    
-   @event Coral.DragAction#coral-dragaction:drop
-   
-   @param {HTMLElement} dragElement
+   @property {HTMLElement} dragElement
    The dragged element
-   @param {HTMLElement} dropElement
+   @property {HTMLElement} dropElement
    The drop element
-   @param {Number} pageX
+   @property {Number} pageX
    The mouse position relative to the left edge of the document.
-   @param {Number} pageY
+   @property {Number} pageY
    The mouse position relative to the top edge of the document.
    */
 }

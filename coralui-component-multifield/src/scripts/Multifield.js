@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import MultifieldCollection from './MultifieldCollection';
 import {commons} from 'coralui-util';
 
@@ -29,10 +29,11 @@ const TEMPLATE_SUPPORT = 'content' in document.createElement('template');
  @class Coral.Multifield
  @classdesc A Multifield component
  @htmltag coral-multifield
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class Multifield extends Component(HTMLElement) {
+class Multifield extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -88,11 +89,9 @@ class Multifield extends Component(HTMLElement) {
   
   /**
    The Collection Interface that allows interacting with the Coral.Multifield items that the component contains.
-   See {@link Coral.Collection} for more details.
    
-   @type {Coral.Collection}
+   @type {MultifieldCollection}
    @readonly
-   @memberof Coral.Multifield#
    */
   get items() {
     // just init on demand
@@ -116,7 +115,6 @@ class Multifield extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Multifield#
    */
   get template() {
     return this._getContentZone(this._elements.template);
@@ -296,6 +294,7 @@ class Multifield extends Component(HTMLElement) {
   
   get _contentZones() { return {template: 'template'}; }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -312,15 +311,6 @@ class Multifield extends Component(HTMLElement) {
       this._renderTemplate(item);
     }, this);
   }
-  
-  /**
-   Triggered when the items are reordered/added/removed and when item fields are updated.
-   
-   @event Coral.Multifield#change
-   
-   @param {Object} event
-   Event object
-   */
 }
 
 export default Multifield;

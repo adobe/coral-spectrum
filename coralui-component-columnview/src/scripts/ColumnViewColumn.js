@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import ColumnViewCollection from './ColumnViewCollection';
 import selectionMode from './selectionMode';
 import {transform, validate} from 'coralui-util';
@@ -41,10 +41,11 @@ const ITEM_HEIGHT = 48;
  @class Coral.ColumnView.Column
  @classdesc A ColumnView Column component
  @htmltag coral-columnview-column
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class ColumnViewColumn extends Component(HTMLElement) {
+class ColumnViewColumn extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -93,7 +94,6 @@ class ColumnViewColumn extends Component(HTMLElement) {
    @type {HTMLElement}
    @readonly
    @default null
-   @memberof Coral.ColumnView.Column#
    */
   get activeItem() {
     return this.items._getAllActive()[0] || null;
@@ -105,7 +105,6 @@ class ColumnViewColumn extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.ColumnView.Column#
    */
   get content() {
     return this._getContentZone(this._elements.content);
@@ -121,12 +120,10 @@ class ColumnViewColumn extends Component(HTMLElement) {
   }
   
   /**
-   The Collection Interface that allows interacting with the items that the component contains. See
-   {@link Coral.Collection} for more details.
+   The Collection Interface that allows interacting with the items that the component contains.
    
-   @type {Coral.Collection}
+   @type {ColumnViewCollection}
    @readonly
-   @memberof Coral.ColumnView.Column#
    */
   get items() {
     // we do lazy initialization of the collection
@@ -147,7 +144,6 @@ class ColumnViewColumn extends Component(HTMLElement) {
    
    @type {?HTMLElement}
    @readonly
-   @memberof Coral.ColumnView.Column#
    */
   get selectedItem() {
     return this._selectionMode !== selectionMode.NONE ? this.items._getFirstSelected() : null;
@@ -158,7 +154,6 @@ class ColumnViewColumn extends Component(HTMLElement) {
    
    @type {Array.<HTMLElement>}
    @readonly
-   @memberof Coral.ColumnView.Column#
    */
   get selectedItems() {
     return this._selectionMode !== selectionMode.NONE ? this.items._getAllSelected() : [];
@@ -167,9 +162,9 @@ class ColumnViewColumn extends Component(HTMLElement) {
   /**
    Private property that indicates the selection mode. If the <code>Coral.ColumnView.Column</code> is not inside
    a <code>Coral.ColumnView</code> this value will be <code>undefined</code>.
+   See {@link ColumnViewSelectionModeEnum}.
    
-   @type {Coral.ColumnView.selectionMode}
-   @memberof Coral.ColumnView.Column#
+   @type {String}
    @htmlattribute selectionmode
    @htmlattributereflected
    @private
@@ -484,10 +479,18 @@ class ColumnViewColumn extends Component(HTMLElement) {
     }
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.content; }
   set defaultContentZone(value) { this.content = value; }
+  
   get _contentZones() { return {'coral-columnview-column-content': 'content'}; }
   
+  /** @ignore */
   static get observedAttributes() {
     return [
       '_selectionmode',
@@ -495,6 +498,7 @@ class ColumnViewColumn extends Component(HTMLElement) {
     ];
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

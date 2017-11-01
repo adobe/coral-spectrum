@@ -397,32 +397,19 @@ describe('Coral.keys', function() {
     expect(spy.callCount).to.equal(4, 'Call count after ESC keypress in contenteditable');
   });
 
-  it('should initialize itself only when called with new', function() {
+  it('should initialize itself when called with new', function() {
     var noop = function() {};
-
-    var keysNoInit = Coral.Keys(window);
-    expect(function() {
-      keysNoInit.on('a', noop);
-    }).to.throw(Error, null, 'Instance created without new should throw');
 
     var keysWithNew = new Coral.Keys(window);
     expect(function() {
       keysWithNew.on('a', noop);
     }).to.not.throw(Error, null, 'Instance created with new should not throw');
 
-    var keysWithInit = Coral.Keys(window);
-    keysWithInit.init();
-    expect(function() {
-      keysWithInit.on('a', noop);
-    }).to.not.throw(Error, null, 'Instance created without new but with init called should not throw');
-
     // Clean up
     keysWithNew.destroy();
-    keysWithInit.destroy();
   });
 
   it('should throw when not passed element to scope', function() {
-
     expect(function() {
       Coral.Keys();
     }).to.throw(Error, null);
@@ -444,7 +431,7 @@ describe('Coral.keys', function() {
   });
 
   it('should be chainable', function() {
-    var keys = Coral.Keys(document.documentElement);
+    var keys = new Coral.Keys(document.documentElement);
     var noop = function() {};
 
     expect(keys.init()).to.equal(keys);

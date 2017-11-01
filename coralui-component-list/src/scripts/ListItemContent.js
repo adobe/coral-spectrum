@@ -21,10 +21,11 @@ const CLASSNAME = 'coral3-BasicList-item-content';
  @class Coral.List.Item.Content
  @classdesc The List item content
  @htmltag coral-list-item-content
- @extends HTMLElement
+ @extends {HTMLElement}
  @private
  */
 class ListItemContent extends HTMLElement {
+  /** @ignore */
   connectedCallback() {
     this.classList.add(CLASSNAME);
   }

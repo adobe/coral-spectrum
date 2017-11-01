@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 
 const CLASSNAME = 'coral3-ActionBar-item';
 
@@ -23,16 +23,15 @@ const CLASSNAME = 'coral3-ActionBar-item';
  @class Coral.ActionBar.Item
  @classdesc An ActionBar item component
  @htmltag coral-actionbar-item
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class ActionBarItem extends Component(HTMLElement) {
+class ActionBarItem extends ComponentMixin(HTMLElement) {
   /**
    Item content element.
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.ActionBar.Item#
    */
   get content() {
     return this;
@@ -46,6 +45,7 @@ class ActionBarItem extends Component(HTMLElement) {
     }
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

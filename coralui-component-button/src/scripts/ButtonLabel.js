@@ -19,7 +19,7 @@
  @class Coral.Button.Label
  @classdesc The Button label content
  @htmltag coral-button-label
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class ButtonLabel extends HTMLElement {}
 

@@ -26,7 +26,7 @@ import {getFirstRowFilledColumns} from './MasonryLayoutUtil';
  <coral-masonry layout="fixed-spread" columnwidth="300">
  
  @class Coral.Masonry.FixedSpreadLayout
- @extends Coral.Masonry.ColumnLayout
+ @extends {MasonryColumnLayout}
  */
 class MasonryFixedSpreadLayout extends MasonryColumnLayout {
   /** @inheritdoc */

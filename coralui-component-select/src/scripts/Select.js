@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import FormField from 'coralui-mixin-formfield';
+import {ComponentMixin} from 'coralui-mixin-component';
+import {FormFieldMixin} from 'coralui-mixin-formfield';
 import {SelectableCollection} from 'coralui-collection';
 import {Button} from 'coralui-component-button';
 import {Tag} from 'coralui-component-taglist';
@@ -27,15 +27,17 @@ import base from '../templates/base';
 import {transform, validate, commons, i18n, Keys} from 'coralui-util';
 
 /**
- Enum for Select variant values.
+ Enumeration for {@link Select} variants.
  
- @enum {String}
- @memberof Coral.Select
+ @typedef {Object} SelectVariantEnum
+ 
+ @property {String} DEFAULT
+ A default, gray Select.
+ @property {String} QUIET
+ A Select with no border or background.
  */
 const variant = {
-  /** A default, gray Select. */
   DEFAULT: 'default',
-  /** A Select with no border or background. */
   QUIET: 'quiet'
 };
 
@@ -94,11 +96,12 @@ const arrayDiff = function(a, b) {
  @class Coral.Select
  @classdesc A Select component
  @htmltag coral-select
- @extends HTMLElement
- @extends Coral.mixin.component
- @extends Coral.mixin.formField
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
+ @extends {FormFieldMixin}
  */
-class Select extends FormField(Component(HTMLElement)) {
+class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
+  /** @ignore */
   constructor() {
     super();
 
@@ -167,11 +170,9 @@ class Select extends FormField(Component(HTMLElement)) {
   
   /**
    The item collection.
-   See {@link Coral.Collection} for more details.
    
-   @type {Coral.Collection}
+   @type {SelectableCollection}
    @readonly
-   @memberof Coral.Select#
    */
   get items() {
     // we do lazy initialization of the collection
@@ -194,7 +195,6 @@ class Select extends FormField(Component(HTMLElement)) {
    @default false
    @htmlattribute multiple
    @htmlattributereflected
-   @memberof Coral.Select#
    */
   get multiple() {
     return this._multiple || false;
@@ -269,7 +269,6 @@ class Select extends FormField(Component(HTMLElement)) {
    @default ""
    @htmlattribute placeholder
    @htmlattributereflected
-   @memberof Coral.Select#
    */
   // p = placeholder, m = multiple, se = selected
   // case 1:  p +  m +  se = p
@@ -321,7 +320,13 @@ class Select extends FormField(Component(HTMLElement)) {
     }
   }
   
-  // JSDocs inherited
+  /**
+   Name used to submit the data in a form.
+   @type {String}
+   @default ""
+   @htmlattribute name
+   @htmlattributereflected
+   */
   get name() {
     return this.multiple ? this._elements.taglist.name : this._elements.input.name;
   }
@@ -330,7 +335,12 @@ class Select extends FormField(Component(HTMLElement)) {
     this._reflectAttribute('name', this.name);
   }
   
-  // JSDocs inherited
+  /**
+   This field's current value.
+   @type {String}
+   @default ""
+   @htmlattribute value
+   */
   get value() {
     // we leverage the internal elements to know the value, this way we are always sure that the server submission
     // will be correct
@@ -346,7 +356,6 @@ class Select extends FormField(Component(HTMLElement)) {
    <code>false</code>, this will be an array of length 1.
    
    @type {Array.<String>}
-   @memberof Coral.Select#
    */
   get values() {
     if (this.multiple) {
@@ -411,7 +420,13 @@ class Select extends FormField(Component(HTMLElement)) {
     }
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is disabled or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute disabled
+   @htmlattributereflected
+   */
   get disabled() {
     return this._disabled || false;
   }
@@ -428,7 +443,9 @@ class Select extends FormField(Component(HTMLElement)) {
     this._elements.taglist.disabled = this._disabled || isReadOnly;
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link FormFieldMixin#invalid}.
+   */
   get invalid() {
     return super.invalid;
   }
@@ -438,7 +455,13 @@ class Select extends FormField(Component(HTMLElement)) {
     this.classList.toggle('is-invalid', this.invalid);
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is required or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute required
+   @htmlattributereflected
+   */
   get required() {
     return this._required || false;
   }
@@ -451,7 +474,13 @@ class Select extends FormField(Component(HTMLElement)) {
     this._elements.taglist.required = this._required;
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
+   @type {Boolean}
+   @default false
+   @htmlattribute readonly
+   @htmlattributereflected
+   */
   get readOnly() {
     return this._readOnly || false;
   }
@@ -490,7 +519,6 @@ class Select extends FormField(Component(HTMLElement)) {
    
    @type {?HTMLElement}
    @readonly
-   @memberof Coral.Select#
    */
   get selectedItem() {
     return this.hasAttribute('multiple') ? this.items._getFirstSelected() : this.items._getLastSelected();
@@ -501,7 +529,6 @@ class Select extends FormField(Component(HTMLElement)) {
    
    @type {Array.<HTMLElement>}
    @readonly
-   @memberof Coral.Select#
    */
   get selectedItems() {
     if (this.hasAttribute('multiple')) {
@@ -518,7 +545,6 @@ class Select extends FormField(Component(HTMLElement)) {
    @type {Boolean}
    @default false
    @htmlattribute loading
-   @memberof Coral.Select#
    */
   get loading() {
     return this._elements.list.loading;
@@ -529,13 +555,12 @@ class Select extends FormField(Component(HTMLElement)) {
   }
   
   /**
-   The Select's variant.
+   The Select's variant. See {@link SelectVariantEnum}.
    
-   @type {Coral.Select.variant}
-   @default Coral.Select.variant.DEFAULT
+   @type {SelectVariantEnum}
+   @default SelectVariantEnum.DEFAULT
    @htmlattribute variant
    @htmlattributereflected
-   @memberof Coral.Select#
    */
   get variant() {
     return this._variant || variant.DEFAULT;
@@ -1297,13 +1322,19 @@ class Select extends FormField(Component(HTMLElement)) {
     this.values = this._initialValues;
   }
   
-  // Expose enums
+  /**
+   Returns {@link Select} variants.
+   
+   @return {SelectVariantEnum}
+   */
   static get variant() { return variant; }
   
+  /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['variant', 'multiple', 'placeholder', 'loading']);
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -1349,27 +1380,21 @@ class Select extends FormField(Component(HTMLElement)) {
   }
   
   /**
-   Triggered when the select could accept external data to be loaded by the user. If <code>preventDefault()</code> is
-   called, then a loading indicator will be shown. {@link Coral.Select#loading} should be set to false to indicate
+   Triggered when the {@link Select} could accept external data to be loaded by the user. If <code>preventDefault()</code> is
+   called, then a loading indicator will be shown. {@link Select#loading} should be set to false to indicate
    that the data has been successfully loaded.
    
-   @event Coral.Select#coral-select:showitems
+   @typedef {CustomEvent} coral-select:showitems
    
-   @param {Object} event
-   Event object.
-   @param {Object} event.detail
-   Detail object.
-   @param {Number} event.detail.start
+   @property {Number} detail.start
    The count of existing items, which is the index where new items should start.
    */
   
   /**
-   Triggered when the select hides the UI used to select items. This is typipically used to cancel a load request
+   Triggered when the {@link Select} hides the UI used to select items. This is typically used to cancel a load request
    because the items will not be shown anymore.
    
-   @event Coral.Select#coral-select:hideitems
-   @param {Object} event
-   Event object.
+   @typedef {CustomEvent} coral-select:hideitems
    */
 }
 

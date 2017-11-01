@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import FormField from 'coralui-mixin-formfield';
+import {ComponentMixin} from 'coralui-mixin-component';
+import {FormFieldMixin} from 'coralui-mixin-formfield';
 import Color from './Color';
 import ColorInputItem from './ColorInputItem';
 import {SelectableCollection} from 'coralui-collection';
@@ -32,69 +32,80 @@ import {validate, transform, commons, i18n} from 'coralui-util';
 const CLASSNAME = 'coral3-ColorInput';
 
 /**
- Enumeration for colorinput variant.
+ Enumeration for {@link ColorInput} variants.
  
- @memberof Coral.ColorInput
- @enum {String}
+ @typedef {Object} ColorInputVariantEnum
+ 
+ @property {String} DEFAULT
+ Use ColorInput as a formfield (default).
+ @property {String} SWATCH
+ Use a simple swatch as ColorInput.
  */
 const variant = {
-  /** Use ColorInput as a formfield (default)*/
   DEFAULT: 'default',
-  /** Use a simple swatch as ColorInput */
   SWATCH: 'swatch'
 };
 
 /**
- Enumeration for auto generated colors state.
+ Enumeration for {@link ColorInput} auto generated colors options.
  
- @memberof Coral.ColorInput
- @enum {String}
+ @typedef {Object} ColorInputAutoGenerateColorsEnum
+ 
+ @property {String} OFF
+ Disable auto generation.
+ @property {String} SHADES
+ Automatically generate shades (darker colors) of all colors.
+ @property {String} TINTS
+ Automatically generate tints (lighter colors) of all colors.
  */
 const autoGenerateColors = {
-  /** Disable auto generation */
   OFF: 'off',
-  /** Automatically generate shades (darker colors) of all colors */
   SHADES: 'shades',
-  /** Automatically generate tints (lighter colors) of all colors */
   TINTS: 'tints'
 };
 
 /**
- Whether swatches view should be displayed.
+ Enumeration for {@link ColorInput} swatches display options.
  
- @memberof Coral.ColorInput
- @enum {String}
+ @typedef {Object} ColorInputShowSwatchesEnum
+ 
+ @property {String} ON
+ Display swatches view (default).
+ @property {String} OFF
+ Hide swatches view.
  */
 const showSwatches = {
-  /** Display swatches view (default). */
   ON: 'on',
-  /** Hide swatches view. */
   OFF: 'off'
 };
 
 /**
- Whether color properties view should be displayed.
+ Enumeration for {@link ColorInput} color properties display options.
  
- @memberof Coral.ColorInput
- @enum {String}
+ @typedef {Object} ColorInputShowPropertiesEnum
+ 
+ @property {String} ON
+ Display color properties view (default).
+ @property {String} OFF
+ Hide color properties view.
  */
 const showProperties = {
-  /** Display color properties view (default). */
   ON: 'on',
-  /** Hide color properties view. */
   OFF: 'off'
 };
 
 /**
- Whether default colors should be displayed.
+ Enumeration for {@link ColorInput} default colors display options.
  
- @memberof Coral.ColorInput
- @enum {String}
+ @typedef {Object} ColorInputShowDefaultColorsEnum
+ 
+ @property {String} ON
+ Display default colors (default).
+ @property {String} OFF
+ Hide default colors.
  */
 const showDefaultColors = {
-  /** Display default colors (default). */
   ON: 'on',
-  /** Hide default colors. */
   OFF: 'off'
 };
 
@@ -102,11 +113,12 @@ const showDefaultColors = {
  @class Coral.ColorInput
  @classdesc A ColorInput component
  @htmltag coral-colorinput
- @extends HTMLElement
- @extends Coral.mixin.component
- @extends Coral.mixin.formField
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
+ @extends {FormFieldMixin}
  */
-class ColorInput extends FormField(Component(HTMLElement)) {
+class ColorInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -138,11 +150,9 @@ class ColorInput extends FormField(Component(HTMLElement)) {
   
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   See {@link Coral.Collection} for more details.
    
-   @type {Coral.Collection}
+   @type {SelectableCollection}
    @readonly
-   @memberof Coral.ColorInput#
    */
   get items() {
     // just init on demand
@@ -162,20 +172,18 @@ class ColorInput extends FormField(Component(HTMLElement)) {
    
    @type {HTMLElement}
    @readonly
-   @memberof Coral.ColorInput#
    */
   get selectedItem() {
     return this.items._getLastSelected();
   }
   
   /**
-   Variant how the colorinput should be displayed.
+   The ColorInput variant. See {@link ColorInputVariantEnum}.
    
-   @default Coral.ColorInput.variant.DEFAULT
-   @type {Coral.ColorInput.variant}
+   @default ColorInputVariantEnum.DEFAULT
+   @type {String}
    @htmlattribute variant
    @htmlattributereflected
-   @memberof Coral.ColorInput#
    */
   get variant() {
     return this._variant || variant.DEFAULT;
@@ -203,8 +211,7 @@ class ColorInput extends FormField(Component(HTMLElement)) {
    Convenient property to get/set the the current color. If the value is no valid color it will return
    <code>null</code> (The getter will return a copy of the current selected color).
    
-   @type {Coral.Color}
-   @memberof Coral.ColorInput#
+   @type {Color}
    */
   get valueAsColor() {
     if (!this._color) {
@@ -251,11 +258,11 @@ class ColorInput extends FormField(Component(HTMLElement)) {
   
   /**
    Should shades (darker colors) or tints (lighter colors) automatically be generated.
+   See {@link ColorInputAutoGenerateColorsEnum}.
    
    @default Coral.ColorInput.autoGenerateColors.OFF
-   @type {Coral.ColorInput.autoGenerateColors}
+   @type {String}
    @htmlattribute autogeneratecolors
-   @memberof Coral.ColorInput#
    */
   get autoGenerateColors() {
     return this._autoGenerateColors || autoGenerateColors.OFF;
@@ -268,12 +275,11 @@ class ColorInput extends FormField(Component(HTMLElement)) {
   }
 
   /**
-   Whether swatches view should be displayed.
+   Whether swatches view should be displayed. See {@link ColorInputSwatches}.
    
-   @default Coral.ColorInput.showSwatches.ON
-   @type {Coral.ColorInput.swatches}
+   @default ColorInputShowSwatchesEnum.ON
+   @type {ColorInputSwatches}
    @htmlattribute showswatches
-   @memberof Coral.ColorInput#
    */
   get showSwatches() {
     return this._showSwatches || showSwatches.ON;
@@ -286,12 +292,11 @@ class ColorInput extends FormField(Component(HTMLElement)) {
   }
 
   /**
-   Whether properties view should be displayed.
+   Whether properties view should be displayed. See {@link ColorInputColorProperties}.
    
-   @default Coral.ColorInput.showProperties.ON
-   @type {Coral.ColorInput.colorProperties}
+   @default ColorInputShowPropertiesEnum.ON
+   @type {String}
    @htmlattribute showproperties
-   @memberof Coral.ColorInput#
    */
   get showProperties() {
     return this._showProperties || showProperties.ON;
@@ -304,12 +309,11 @@ class ColorInput extends FormField(Component(HTMLElement)) {
   }
 
   /**
-   Whether default colors should be displayed.
+   Whether default colors should be displayed. Link {@link ColorInputShowDefaultColorsEnum}.
    
-   @default Coral.ColorInput.showDefaultColors.ON
-   @type {Coral.ColorInput.showDefaultColors}
+   @default ColorInputShowDefaultColorsEnum.ON
+   @type {String}
    @htmlattribute showdefaultcolors
-   @memberof Coral.ColorInput#
    */
   get showDefaultColors() {
     return this._showDefaultColors || showDefaultColors.ON;
@@ -338,7 +342,6 @@ class ColorInput extends FormField(Component(HTMLElement)) {
    @default ""
    @htmlattribute placeholder
    @htmlattributereflected
-   @memberof Coral.ColorInput#
    */
   get placeholder() {
     return this._elements.input.placeholder;
@@ -362,8 +365,6 @@ class ColorInput extends FormField(Component(HTMLElement)) {
    @type {String}
    @default ""
    @htmlattribute value
-   @fires Coral.mixin.formField#change
-   @memberof Coral.ColorInput#
    */
   get value() {
     return this._value || '';
@@ -391,7 +392,13 @@ class ColorInput extends FormField(Component(HTMLElement)) {
     this._updateColorPreview();
   }
   
-  // JSDocs inherited
+  /**
+   Name used to submit the data in a form.
+   @type {String}
+   @default ""
+   @htmlattribute name
+   @htmlattributereflected
+   */
   get name() {
     return this._elements.input.name;
   }
@@ -401,7 +408,13 @@ class ColorInput extends FormField(Component(HTMLElement)) {
     this._elements.input.name = value;
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is disabled or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute disabled
+   @htmlattributereflected
+   */
   get disabled() {
     return this._disabled || false;
   }
@@ -418,7 +431,9 @@ class ColorInput extends FormField(Component(HTMLElement)) {
     this._syncColorPreviewIcon();
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link FormFieldMixin#invalid}.
+   */
   get invalid() {
     return super.invalid;
   }
@@ -428,7 +443,13 @@ class ColorInput extends FormField(Component(HTMLElement)) {
     this._elements.input.invalid = this.invalid;
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is required or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute required
+   @htmlattributereflected
+   */
   get required() {
     return this._required || false;
   }
@@ -440,7 +461,13 @@ class ColorInput extends FormField(Component(HTMLElement)) {
     this._elements.input.required = this._required;
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
+   @type {Boolean}
+   @default false
+   @htmlattribute readonly
+   @htmlattributereflected
+   */
   get readOnly() {
     return this._readOnly || false;
   }
@@ -453,7 +480,9 @@ class ColorInput extends FormField(Component(HTMLElement)) {
     this._elements.colorPreview.disabled = this.disabled || this._readOnly;
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link FormFieldMixin#labelledBy}.
+   */
   get labelledBy() {
     return super.labelledBy;
   }
@@ -776,13 +805,42 @@ class ColorInput extends FormField(Component(HTMLElement)) {
     this.classList.toggle('coral3-ColorInput--novalue', this.value === '');
   }
   
-  // Expose enums
+  /**
+   Returns {@link ColorInput} variants.
+   
+   @return {ColorInputVariantEnum}
+   */
   static get variant() { return variant; }
+  
+  /**
+   Returns {@link ColorInput} auto generated colors options.
+   
+   @return {ColorInputAutoGenerateColorsEnum}
+   */
   static get autoGenerateColors() { return autoGenerateColors; }
+  
+  /**
+   Returns {@link ColorInput} swatches display options.
+   
+   @return {ColorInputShowSwatchesEnum}
+   */
   static get showSwatches() { return showSwatches; }
+  
+  /**
+   Returns {@link ColorInput} color properties display options.
+   
+   @return {ColorInputShowDefaultColorsEnum}
+   */
   static get showDefaultColors() { return showDefaultColors; }
+  
+  /**
+   Returns {@link ColorInput} default colors display options.
+   
+   @return {ColorInputShowPropertiesEnum}
+   */
   static get showProperties() { return showProperties; }
   
+  /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'variant',
@@ -798,6 +856,7 @@ class ColorInput extends FormField(Component(HTMLElement)) {
     ]);
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
   

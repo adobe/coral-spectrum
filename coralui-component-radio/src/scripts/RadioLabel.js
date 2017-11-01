@@ -19,7 +19,7 @@
  @class Coral.Radio.Label
  @classdesc The Radio label
  @htmltag coral-radio-label
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class RadioLabel extends HTMLElement {}
 

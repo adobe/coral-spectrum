@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import FormField from 'coralui-mixin-formfield';
+import {ComponentMixin} from 'coralui-mixin-component';
+import {FormFieldMixin} from 'coralui-mixin-formfield';
 import {Tag} from 'coralui-component-taglist';
 import {SelectableCollection} from 'coralui-collection';
 import AutocompleteItem from './AutocompleteItem';
@@ -51,15 +51,17 @@ const SCROLL_DEBOUNCE = 100;
 const DEBUG = 0;
 
 /**
- Enumeration of match values.
+ Enumeration for {@link Autocomplete} match options.
  
- @enum {String}
- @memberof Coral.Autocomplete
+ @typedef {Object} AutocompleteMatchEnum
+ 
+ @property {String} STARTSWITH
+ Include only matches that start with the user provided value.
+ @property {String} CONTAINS
+ Include only matches that contain the user provided value.
  */
 const match = {
-  /** Include only matches that start with the user provided value. */
   STARTSWITH: 'startswith',
-  /** Include only matches that contain the user provided value. */
   CONTAINS: 'contains'
 };
 
@@ -67,11 +69,12 @@ const match = {
  @class Coral.Autocomplete
  @classdesc An Autocomplete component
  @htmltag coral-autocomplete
- @extends HTMLElement
- @extends Coral.mixin.component
- @extends Coral.mixin.formField
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
+ @extends {FormFieldMixin)
  */
-class Autocomplete extends FormField(Component(HTMLElement)) {
+class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -157,11 +160,9 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
   
   /**
    The item collection.
-   See {@link Coral.Collection} for more details.
    
-   @type {Coral.Collection}
+   @type {SelectableCollection}
    @readonly
-   @memberof Coral.Autocomplete#
    */
   get items() {
     // Construct the collection on first request:
@@ -183,7 +184,6 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
    @default false
    @htmlattribute multiple
    @htmlattributereflected
-   @memberof Coral.Autocomplete#
    */
   get multiple() {
     return this._multiple || false;
@@ -211,7 +211,6 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
    @type {Number}
    @default 200
    @htmlattribute delay
-   @memberof Coral.Autocomplete#
    */
   get delay() {
     return typeof this._delay === 'number' ? this._delay : 200;
@@ -235,7 +234,6 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
    @default false
    @htmlattribute forceselection
    @htmlattributereflected
-   @memberof Coral.Autocomplete#
    */
   get forceSelection() {
     return this._forceSelection || false;
@@ -256,7 +254,6 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
    @default ""
    @htmlattribute placeholder
    @htmlattributereflected
-   @memberof Coral.Autocomplete#
    */
   get placeholder() {
     return this._elements.input.placeholder;
@@ -269,10 +266,9 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
   /**
    Max length for the Input field
    
-   @type {Long}
+   @type {Number}
    @htmlattribute maxlength
    @htmlattributereflected
-   @memberof Coral.Autocomplete#
    */
   get maxLength() {
     return this._elements.input.maxLength;
@@ -289,7 +285,6 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
    @default ""
    @htmlattribute icon
    @htmlattributereflected
-   @memberof Coral.Autocomplete#
    */
   get icon() {
     return this._elements.icon.icon;
@@ -302,12 +297,11 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
   }
   
   /**
-   The match mode.
+   The match mode. See {@link AutocompleteMatchEnum}.
  
-   @type {Coral.Autocomplete.match}
-   @default Coral.Autocomplete.match.CONTAINS
+   @type {String}
+   @default AutocompleteMatchEnum.CONTAINS
    @htmlattribute match
-   @memberof Coral.Autocomplete#
    */
   get match() {
     return this._match || match.CONTAINS;
@@ -336,7 +330,6 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
    @type {Boolean}
    @default false
    @htmlattribute loading
-   @memberof Coral.Autocomplete#
    */
   get loading() {
     return this._loading || false;
@@ -374,7 +367,6 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
    Returns an Array containing the set selected items.
    @type {Array.<HTMLElement>}
    @readonly
-   @memberof Coral.Autocomplete#
    */
   get selectedItems() {
     return this.items._getAllSelected();
@@ -385,7 +377,6 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
    selected.
    @type {?HTMLElement}
    @readonly
-   @memberof Coral.Autocomplete#
    */
   get selectedItem() {
     return this.items._getAllSelected()[0] || null;
@@ -398,7 +389,6 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
    @type {String}
    @default ""
    @htmlattribute value
-   @memberof Coral.Autocomplete#
    */
   get value() {
     // Get the first value (or empty string)
@@ -414,7 +404,6 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
    When {@link Coral.Autocomplete#multiple} is <code>false</code>, this will be an array of length 1.
    
    @type {Array.<String>}
-   @memberof Coral.Autocomplete#
    */
   get values() {
     return this._values;
@@ -477,7 +466,13 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
     }
   }
   
-  // JSDoc inherited
+  /**
+   Name used to submit the data in a form.
+   @type {String}
+   @default ""
+   @htmlattribute name
+   @htmlattributereflected
+   */
   get name() {
     return this._getName();
   }
@@ -487,7 +482,9 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
     this._setName(value);
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link FormFieldMixin#invalid}.
+   */
   get invalid() {
     return super.invalid;
   }
@@ -499,7 +496,13 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
     this._elements.input.classList.toggle('is-invalid', this.invalid);
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is disabled or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute disabled
+   @htmlattributereflected
+   */
   get disabled() {
     return this._disabled || false;
   }
@@ -515,7 +518,13 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
     this._elements.tagList.disabled = this._disabled || this.readOnly;
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
+   @type {Boolean}
+   @default false
+   @htmlattribute readonly
+   @htmlattributereflected
+   */
   get readOnly() {
     return this._readOnly || false;
   }
@@ -528,7 +537,13 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
     this._elements.trigger.disabled = this._readOnly || this.disabled;
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is required or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute required
+   @htmlattributereflected
+   */
   get required() {
     return this._required || false;
   }
@@ -540,7 +555,9 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
     this._elements.input.required = this._required;
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link FormFieldMixin#labelledBy}.
+   */
   get labelledBy() {
     return super.labelledBy;
   }
@@ -1651,7 +1668,7 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
   /**
    A suggestion object.
    
-   @typedef {Object} Coral.Autocomplete~suggestion
+   @typedef {Object} AutocompleteSuggestion
    
    @property {String} value
    The form submission value to use when this suggestion is selected.
@@ -1662,7 +1679,7 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
   /**
    Add the provided list of suggestions and clear loading status.
    
-   @param {Array.<Coral.Autocomplete~suggestion>} suggestions
+   @param {Array.<AutocompleteSuggestion>} suggestions
    The list of suggestions to show.
    @param {Boolean} clear
    If true, existing suggestions will be cleared.
@@ -1782,9 +1799,14 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
     this.values = this._initialSelectedValues;
   }
   
-  // Expose enums
+  /**
+   Returns {@link Autocomplete} match options.
+   
+   @return {AutocompleteMatchEnum}
+   */
   static get match() { return match; }
   
+  /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'multiple',
@@ -1799,7 +1821,8 @@ class Autocomplete extends FormField(Component(HTMLElement)) {
       'loading'
     ]);
   }
-
+  
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

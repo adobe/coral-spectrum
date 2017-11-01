@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {Collection} from 'coralui-collection';
 
 const CLASSNAME = 'coral3-Shell-menubar';
@@ -24,10 +24,11 @@ const CLASSNAME = 'coral3-Shell-menubar';
  @class Coral.Shell.MenuBar
  @classdesc A Shell MenuBar component
  @htmltag coral-shell-menubar
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class ShellMenuBar extends Component(HTMLElement) {
+class ShellMenuBar extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -37,11 +38,8 @@ class ShellMenuBar extends Component(HTMLElement) {
   /**
    The item collection.
    
-   See {@link Coral.Collection} for more details.
-   
-   @type {Coral.Collection}
+   @type {Collection}
    @readonly
-   @memberof Coral.Shell.MenuBar#
    */
   get items() {
     // Construct the collection on first request:
@@ -54,7 +52,8 @@ class ShellMenuBar extends Component(HTMLElement) {
   
     return this._items;
   }
-
+  
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

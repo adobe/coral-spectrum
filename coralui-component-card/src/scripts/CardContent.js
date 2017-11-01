@@ -19,7 +19,7 @@
  @class Coral.Card.Content
  @classdesc The Card Content
  @htmltag coral-card-content
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class CardContent extends HTMLElement {}
 

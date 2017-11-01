@@ -56,10 +56,11 @@ if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('
 const TARGET_INPUT_SELECTOR = 'input:not([type=hidden])';
 
 /**
- @mixin FormField
+ @mixin FormFieldMixin
  @classdesc The base element for all Form Field components
  */
-const FormField = (superClass) => class extends superClass {
+const FormFieldMixin = (superClass) => class extends superClass {
+  /** @ignore */
   constructor() {
     super();
     
@@ -70,59 +71,12 @@ const FormField = (superClass) => class extends superClass {
   }
   
   /**
-   Name used to submit the data in a form.
-   @type {String}
-   @default ""
-   @htmlattribute name
-   @htmlattributereflected
-   @memberof Coral.mixin.formField#
-   */
-  
-  /**
-   This field's current value.
-   @type {String}
-   @default ""
-   @htmlattribute value
-   @memberof Coral.mixin.formField#
-   @fires Coral.mixin.formField#change
-   */
-  
-  /**
-   Whether this field is disabled or not.
-   @type {Boolean}
-   @default false
-   @htmlattribute disabled
-   @htmlattributereflected
-   @memberof Coral.mixin.formField#
-   */
-  
-  /**
-   Whether this field is required or not.
-   @type {Boolean}
-   @default false
-   @htmlattribute required
-   @htmlattributereflected
-   @memberof Coral.mixin.formField#
-   */
-  
-  /**
-   Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
-   This is ignored for checkbox, radio or fileupload.
-   @type {Boolean}
-   @default false
-   @htmlattribute readonly
-   @htmlattributereflected
-   @memberof Coral.mixin.formField#
-   */
-  
-  /**
    Whether the current value of this field is invalid or not.
    
    @type {Boolean}
    @default false
    @htmlattribute invalid
    @htmlattributereflected
-   @memberof Coral.mixin.formField#
    */
   get invalid() {
     return this._invalid || false;
@@ -143,7 +97,6 @@ const FormField = (superClass) => class extends superClass {
    @type {?String}
    @default null
    @htmlattribute labelledby
-   @memberof Coral.mixin.formField#
    */
   get labelledBy() {
     return this._getLabellableElement().getAttribute('aria-labelledby');
@@ -181,7 +134,6 @@ const FormField = (superClass) => class extends superClass {
    @type {String}
    @default "value"
    @protected
-   @memberof Coral.mixin.formField#
    */
   get _componentTargetProperty() {
     return 'value';
@@ -193,7 +145,6 @@ const FormField = (superClass) => class extends superClass {
    @type {String}
    @default "value"
    @protected
-   @memberof Coral.mixin.formField#
    */
   get _eventTargetProperty() {
     return 'value';
@@ -204,7 +155,6 @@ const FormField = (superClass) => class extends superClass {
    @type {Boolean}
    @default true
    @protected
-   @memberof Coral.mixin.formField#
    */
   get _triggerChangeEvent() {
     return true;
@@ -214,7 +164,6 @@ const FormField = (superClass) => class extends superClass {
    Gets the element that should get the label. In case none of the valid labelelable items are found, the component
    will be labelled instead.
    @protected
-   @memberof Coral.mixin.formField#
    @returns {HTMLElement} the labellable element.
    */
   _getLabellableElement() {
@@ -230,7 +179,6 @@ const FormField = (superClass) => class extends superClass {
    different implementation. In case the value is <code>null</code>, the change event will be handled no matter
    the input that produced it.
    @protected
-   @memberof Coral.mixin.formField#
    @return {HTMLElement} the input to watch for changes.
    */
   _getTargetChangeInput() {
@@ -246,7 +194,6 @@ const FormField = (superClass) => class extends superClass {
    internally to determine if the input belongs to the component. If the component decides to override this function,
    the default from the mixin will not be called.
    @protected
-   @memberof Coral.mixin.formField#
    */
   _onInputChange(event) {
     // stops the current event
@@ -263,7 +210,6 @@ const FormField = (superClass) => class extends superClass {
   /**
    Resets the formField when a reset is triggered on the parent form.
    @protected
-   @memberof Coral.mixin.formField#
    */
   _onFormReset(event) {
     if (event.target.contains(this)) {
@@ -275,7 +221,6 @@ const FormField = (superClass) => class extends superClass {
    We capture every input change and validate that it belongs to our target input. If this is the case,
    <code>_onInputChange</code> will be called with the same event.
    @protected
-   @memberof Coral.mixin.formField#
    */
   _onTargetInputChange(event) {
     const targetInput = this._getTargetChangeInput();
@@ -298,7 +243,6 @@ const FormField = (superClass) => class extends superClass {
    @param {Boolean} remove
    Whether the existing <code>for</code> attributes should be removed.
    @protected
-   @memberof Coral.mixin.formField#
    */
   _updateForAttributes(labelledBy, elementId, remove) {
     // labelledby contains whitespace sparated items, so we need to separate each individual id
@@ -349,6 +293,7 @@ const FormField = (superClass) => class extends superClass {
     ];
   }
   
+  /** @ignore */
   static get observedAttributes() {
     return [
       'labelledby',
@@ -364,4 +309,4 @@ const FormField = (superClass) => class extends superClass {
   }
 };
 
-export default FormField;
+export default FormFieldMixin;

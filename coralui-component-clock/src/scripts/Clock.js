@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import FormField from 'coralui-mixin-formfield';
+import {ComponentMixin} from 'coralui-mixin-component';
+import {FormFieldMixin} from 'coralui-mixin-formfield';
 import {DateTime} from 'coralui-datetime';
 import 'coralui-component-textfield';
 import 'coralui-component-select';
@@ -35,15 +35,17 @@ const HOUR_REG_EXP = new RegExp('h{1,2}|H{1,2}|k{1,2}');
 const MIN_REG_EXP = new RegExp('m{1,2}');
 
 /**
- Enum for Clock variant values.
+ Enumeration for {@link Clock} variants.
  
- @enum {String}
- @memberof Coral.Clock
+ @typedef {Object} ClockVariantEnum
+ 
+ @property {String} DEFAULT
+ A default, gray Clock.
+ @property {String} QUIET
+ A Clock with no border or background.
  */
 const variant = {
-  /** A default, gray Clock. */
   DEFAULT: 'default',
-  /** A Clock with no border or background. */
   QUIET: 'quiet'
 };
 
@@ -60,11 +62,12 @@ for (const variantValue in variant) {
  @class Coral.Clock
  @classdesc A Clock component
  @htmltag coral-clock
- @extends HTMLElement
- @extends Coral.mixin.component
- @extends Coral.mixin.formField
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
+ @extends {FormFieldMixin}
  */
-class Clock extends FormField(Component(HTMLElement)) {
+class Clock extends FormFieldMixin(ComponentMixin(HTMLElement)) {
+  /** @ignore */
   constructor() {
     super();
   
@@ -90,7 +93,6 @@ class Clock extends FormField(Component(HTMLElement)) {
    @default "HH:mm"
    @htmlattribute displayformat
    @htmlattributereflected
-   @memberof Coral.Clock#
    */
   get displayFormat() {
     return this._displayFormat || DEFAULT_TIME_FORMAT;
@@ -112,7 +114,6 @@ class Clock extends FormField(Component(HTMLElement)) {
    @default "HH:mm"
    @htmlattribute valueformat
    @htmlattributereflected
-   @memberof Coral.Clock#
    */
   get valueFormat() {
     return this._valueFormat || DEFAULT_TIME_FORMAT;
@@ -139,7 +140,6 @@ class Clock extends FormField(Component(HTMLElement)) {
    
    @type {Date}
    @default null
-   @memberof Coral.Clock#
    */
   get valueAsDate() {
     return this._value ? new Date(this._value.toDate().getTime()) : null;
@@ -149,13 +149,12 @@ class Clock extends FormField(Component(HTMLElement)) {
   }
   
   /**
-   The clock's variant.
+   The clock's variant. See {@link ClockVariantEnum}.
    
-   @type {Coral.Clock.variant}
-   @default Coral.Clock.variant.DEFAULT
+   @type {String}
+   @default ClockVariantEnum.DEFAULT
    @htmlattribute variant
    @htmlattributereflected
-   @memberof Coral.Clock#
    */
   get variant() {
     return this._variant || variant.DEFAULT;
@@ -178,7 +177,13 @@ class Clock extends FormField(Component(HTMLElement)) {
     }
   }
   
-  // JSDoc inherited
+  /**
+   Name used to submit the data in a form.
+   @type {String}
+   @default ""
+   @htmlattribute name
+   @htmlattributereflected
+   */
   get name() {
     return this._elements.input.name;
   }
@@ -188,7 +193,13 @@ class Clock extends FormField(Component(HTMLElement)) {
     this._elements.input.name = value;
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is disabled or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute disabled
+   @htmlattributereflected
+   */
   get disabled() {
     return this._disabled || false;
   }
@@ -205,7 +216,9 @@ class Clock extends FormField(Component(HTMLElement)) {
     this._elements.input.disabled = this._disabled;
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link FormFieldMixin#invalid}.
+   */
   get invalid() {
     return super.invalid;
   }
@@ -216,7 +229,13 @@ class Clock extends FormField(Component(HTMLElement)) {
     this._elements.minutes.invalid = this._invalid;
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is required or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute required
+   @htmlattributereflected
+   */
   get required() {
     return this._required || false;
   }
@@ -231,7 +250,13 @@ class Clock extends FormField(Component(HTMLElement)) {
     this._elements.input.required = this._required;
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
+   @type {Boolean}
+   @default false
+   @htmlattribute readonly
+   @htmlattributereflected
+   */
   get readOnly() {
     return this._readOnly || false;
   }
@@ -245,7 +270,12 @@ class Clock extends FormField(Component(HTMLElement)) {
     this._elements.input.readOnly = this._readOnly;
   }
   
-  // JSDoc inherited
+  /**
+   This field's current value.
+   @type {String}
+   @default ""
+   @htmlattribute value
+   */
   get value() {
     return this._getValueAsString(this._value, this.valueFormat);
   }
@@ -263,7 +293,9 @@ class Clock extends FormField(Component(HTMLElement)) {
     this._syncDisplay();
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link FormFieldMixin#labelledBy}.
+   */
   get labelledBy() {
     // Get current aria-labelledby attribute on the labellable element.
     let labelledBy = this._getLabellableElement().getAttribute('aria-labelledby');
@@ -496,9 +528,14 @@ class Clock extends FormField(Component(HTMLElement)) {
     }
   }
   
-  // Expose enums
+  /**
+   Returns {@link Clock} variants.
+   
+   @return {ClockVariantEnum}
+   */
   static get variant() { return variant; }
   
+  /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'displayformat',
@@ -509,6 +546,7 @@ class Clock extends FormField(Component(HTMLElement)) {
     ]);
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

@@ -17,8 +17,6 @@
 
 import commons from './commons';
 
-let Keys;
-
 /**
  A map of modifier names to their corresponding keycodes.
  @ignore
@@ -153,38 +151,20 @@ const restrictedTagNames = {
 };
 
 /**
- The default keycombo event filter function. Ignores key combos triggered on input, select, and textarea.
- 
- @function Coral.Keys.filterInputs
- 
- @param event
- The event passed
- 
- @returns {Boolean} True, if event.target is not editable and event.target.tagname is not restricted
+ Normalize duplicate codes.
+ @ignore
  */
-function filterInputs(event) {
-  // Escape keycode doesn't have to be filtered
-  if (event.keyCode === specialKeyCodes.escape) {
-    return true;
-  }
-  
-  const target = event.target;
-  const tagName = target.tagName;
-  const isContentEditable = target.isContentEditable;
-  const isRestrictedTag = restrictedTagNames[tagName];
-  return !isContentEditable && !isRestrictedTag;
+function normalizeCode(code) {
+  return normalizedCodes[code] || code;
 }
 
 /**
  Convert a key to its character code representation.
  
- @function Coral.Keys.keyToCode
+ @ignore
  
- @param {String} key
- The key character that needs to be converted. If the String contains more than one character, an error will be
- produced.
- 
- @returns {Number} The character code of the given String.
+ @param key
+ @return {*|Number}
  */
 function keyToCode(key) {
   key = key.toLowerCase();
@@ -201,115 +181,97 @@ function keyToCode(key) {
 }
 
 /**
- Normalize duplicate codes.
- @ignore
- */
-function normalizeCode(code) {
-  return normalizedCodes[code] || code;
-}
-
-/**
- Convert a combination of keys separated by + into the corresponding code string.
- @ignore
- */
-function keyComboToCodeString(keyCombo) {
-  return keyCombo
-  // Convert to string so numbers are supported
-    .toString()
-    .split('+')
-    .map(keyToCode)
-    // Sort keys for easy comparison
-    .sort()
-    .join('+');
-}
-
-/**
  Handle key combination events.
- 
- @class Coral.Keys
- @param {*} elOrSelector
- The selector or element to listen for keyboard events on. This should be the common parent of all
- elements you wish to listen for events on.
- @param {Object} [options]
- Options for this combo handler.
- @param {Function} [options.context]
- The desired value of the <code>this</code> keyword context when executing listeners. Defaults to the element on
- which the event is listened for.
- @param {Function} [options.preventDefault=false]
- Whether to prevent the default behavior when a key combo is matched.
- @param {Function} [options.stopPropagation=false]
- Whether to stop propagation when a key combo is matched.
- @param {Function} [options.filter={@link Coral.Keys.filterInputs}]
- The filter function for keyboard events. This can be used to stop events from being triggered when they originate
- from specific elements.
  */
-function makeComboHandler(elOrSelector, options) {
-  options = options || {};
+class Keys {
+  /**
+   @param {*} elOrSelector
+   The selector or element to listen for keyboard events on. This should be the common parent of all
+   elements you wish to listen for events on.
+   @param {Object} [options]
+   Options for this combo handler.
+   @param {Function} [options.context]
+   The desired value of the <code>this</code> keyword context when executing listeners. Defaults to the element on
+   which the event is listened for.
+   @param {Function} [options.preventDefault=false]
+   Whether to prevent the default behavior when a key combo is matched.
+   @param {Function} [options.stopPropagation=false]
+   Whether to stop propagation when a key combo is matched.
+   @param {Function} [options.filter]
+   The filter function for keyboard events. This can be used to stop events from being triggered when they originate
+   from specific elements. Defaults to {@link Keys.filterInputs}.
+   */
+  constructor(elOrSelector, options) {
+    options = options || {};
   
-  if (typeof elOrSelector === 'undefined') {
-    throw new Error(`Coral.Keys: Cannot create a combo handler for ${elOrSelector}`);
+    if (typeof elOrSelector === 'undefined') {
+      throw new Error(`Coral.Keys: Cannot create a combo handler for ${elOrSelector}`);
+    }
+  
+    // Cache the element object
+    this._el = typeof elOrSelector === 'string' ? document.querySelector(elOrSelector) : elOrSelector;
+  
+    // Use provided context
+    this._context = options.context;
+  
+    /**
+     The filter function to use when evaluating keypresses
+     */
+    this._filter = options.filter || this.constructor.filterInputs;
+  
+    /**
+     Whether to prevent default
+     */
+    this._preventDefault = options.preventDefault || false;
+  
+    /**
+     Whether to stop propagation and prevent default
+     */
+    this._stopPropagation = options.stopPropagation || false;
+  
+    /**
+     A map of key code combinations to arrays of listener functions
+     */
+    this._keyListeners;
+  
+    /**
+     A an array of key sequences objects
+     */
+    this._keySequences;
+  
+    /**
+     The sorted array of currently pressed keycodes
+     */
+    this._currentKeys;
+  
+    /**
+     The joined string representation of currently pressed keycodes
+     */
+    this._currentKeyCombo;
+  
+    /**
+     The timeout that corresponds to sequences
+     */
+    this._sequenceTimeout;
+    
+    this._handleKeyDown = this._handleKeyDown.bind(this);
+    this._handleKeyUp = this._handleKeyUp.bind(this);
+    this._resetSequence = this._resetSequence.bind(this);
+    this.reset = this.reset.bind(this);
+    
+    // Initialize immediately
+    this.init();
   }
   
-  // Cache the element object
-  const el = typeof elOrSelector === 'string' ? document.querySelector(elOrSelector) : elOrSelector;
-  
-  // Use provided context
-  const context = options.context;
-  
-  /**
-   The filter function to use when evaluating keypresses
-   */
-  const filter = options.filter || filterInputs;
-  
-  /**
-   Whether to prevent default
-   */
-  const preventDefault = options.preventDefault || false;
-  
-  /**
-   Whether to stop propagation and prevent default
-   */
-  const stopPropagation = options.stopPropagation || false;
-  
-  /**
-   A map of key code combinations to arrays of listener functions
-   @ignore
-   */
-  let keyListeners;
-  
-  /**
-   A an array of key sequences objects
-   @ignore
-   */
-  let keySequences;
-  
-  /**
-   The sorted array of currently pressed keycodes
-   @ignore
-   */
-  let currentKeys;
-  
-  /**
-   The joined string representation of currently pressed keycodes
-   @ignore
-   */
-  let currentKeyCombo;
-  
-  /**
-   The timeout that cooresponds to sequences
-   @ignore
-   */
-  let sequenceTimeout;
-  
-  function resetSequence() {
-    clearTimeout(sequenceTimeout);
-    keySequences.forEach((sequence) => {
+  _resetSequence() {
+    window.clearTimeout(this._sequenceTimeout);
+    this._keySequences.forEach((sequence) => {
       // Reset each sequence
       sequence.currentPart = 0;
     });
   }
   
-  function setCurrentKeyCombo(event) {
+  _setCurrentKeyCombo(event) {
     // Build string for modifiers
     const currentModifiers = [];
     for (let i = 0; i < modifierEventPropertyNames.length; i++) {
@@ -321,32 +283,32 @@ function makeComboHandler(elOrSelector, options) {
     }
     
     // Store current key combo
-    currentKeyCombo = currentKeys.concat(currentModifiers).sort().join('+');
+    this._currentKeyCombo = this._currentKeys.concat(currentModifiers).sort().join('+');
   }
   
   /**
    Reset the state of this instance. This resets the currently pressed keys.
    
    @function reset
-   @memberof Coral.Keys#
    
-   @returns {Coral.Keys} this, chainable.
+   @returns {Keys} this, chainable.
    */
-  function reset() {
+  reset() {
     // Only reset variables related to currently pressed keys
     // Don't mess with sequences
-    currentKeys = [];
-    currentKeyCombo = '';
+    this._currentKeys = [];
+    this._currentKeyCombo = '';
     
     return this;
   }
   
-  function processSequences() {
+  _processSequences() {
     const activeSequenceListeners = [];
     
+    const self = this;
     // Check each sequence's state
-    keySequences.forEach((sequence) => {
-      if (sequence.parts[sequence.currentPart] === currentKeyCombo) {
+    this._keySequences.forEach((sequence) => {
+      if (sequence.parts[sequence.currentPart] === self._currentKeyCombo) {
         // If the current key combo in the sequence was pressed, increment the pointer
         sequence.currentPart++;
       }
@@ -367,30 +329,30 @@ function makeComboHandler(elOrSelector, options) {
     return activeSequenceListeners;
   }
   
-  function executeListeners(event, keyup) {
+  _executeListeners(event, keyup) {
     // Don't do anything if we don't have any keys pressed
-    if (!currentKeyCombo) {
+    if (!this._currentKeyCombo) {
       return;
     }
     
     // Evaluate whether we should filter this keypress
-    if (!filter(event)) {
+    if (!this._filter(event)) {
       return;
     }
     
     const target = event.target || event.srcElement;
-    const doc = Object.prototype.toString.call(this) === '[object Window]' ? this.document : this;
+    const doc = Object.prototype.toString.call(event.currentTarget) === '[object Window]' ? event.currentTarget.document : event.currentTarget;
     
     let listeners = [];
     
     // Execute listeners associated with the current key combination
-    const comboListeners = keyListeners[currentKeyCombo];
+    const comboListeners = this._keyListeners[this._currentKeyCombo];
     
     let sequenceListeners;
     if (!keyup) {
       // Process sequences and get listeners associated with the current sequence
       // Don't do this on keyup as this breaks sequences with modifiers
-      sequenceListeners = processSequences();
+      sequenceListeners = this._processSequences();
     }
     
     if (comboListeners && comboListeners.length) {
@@ -430,26 +392,26 @@ function makeComboHandler(elOrSelector, options) {
         
         // Add matchedTarget
         event.matchedTarget = target;
-  
+        
         // Add keys that triggered the event
         event.keys = listener.originalString;
         
-        listener.listener.call(context || doc, event);
+        listener.listener.call(this._context || doc, event);
       }
       
       // Don't do the default thing
-      if (preventDefault) {
+      if (this._preventDefault) {
         event.preventDefault();
       }
-      if (stopPropagation) {
+      if (this._stopPropagation) {
         event.stopPropagation();
       }
     }
   }
   
-  function handleKeyDown(event) {
-    clearTimeout(sequenceTimeout);
-    sequenceTimeout = setTimeout(resetSequence, Keys.sequenceTime);
+  _handleKeyDown(event) {
+    window.clearTimeout(this._sequenceTimeout);
+    this._sequenceTimeout = window.setTimeout(this._resetSequence, this.constructor.sequenceTime);
     
     // Store pressed key in array
     const key = normalizeCode(event.keyCode);
@@ -459,26 +421,26 @@ function makeComboHandler(elOrSelector, options) {
       return;
     }
     
-    if (currentKeys.indexOf(key) === -1) {
-      currentKeys.push(key);
+    if (this._currentKeys.indexOf(key) === -1) {
+      this._currentKeys.push(key);
       
-      setCurrentKeyCombo(event);
+      this._setCurrentKeyCombo(event);
     }
     
-    executeListeners.call(this, event);
+    this._executeListeners.call(this, event);
     
     // Workaround: keyup events are never triggered while the command key is down, so reset the list of keys
     if (event.metaKey) {
-      reset();
+      this.reset();
     }
     
     if (!event.target.parentNode) {
       // Workaround: keyup events are never triggered if the element does not have a parent node
-      reset();
+      this.reset();
     }
   }
   
-  function handleKeyUp(event) {
+  _handleKeyUp(event) {
     const key = normalizeCode(event.keyCode);
     
     if (modifierCodeMap[key]) {
@@ -488,7 +450,7 @@ function makeComboHandler(elOrSelector, options) {
       // triggered. This also prevents handlers for related key combos to be triggered
       // Test: comment this out, press Control, press Alt, press A, press S, release Alt, release S -- Control+A is
       // triggered
-      reset();
+      this.reset();
       
       // We don't ever want to execute handlers when a modifier is released, and we can't since they don't end up in
       // currentKeys. If we weren't doing the index check below, that could result in key combo handlers for ctrl+r to
@@ -498,25 +460,24 @@ function makeComboHandler(elOrSelector, options) {
     }
     
     // Remove key from array
-    const index = currentKeys.indexOf(key);
+    const index = this._currentKeys.indexOf(key);
     if (index !== -1) {
-      currentKeys.splice(index, 1);
+      this._currentKeys.splice(index, 1);
       
       // If too many keys are pressed, then one is removed, make sure to check for a match
-      setCurrentKeyCombo(event);
-      executeListeners.call(this, event, true);
+      this._setCurrentKeyCombo(event);
+      this._executeListeners.call(this, event, true);
     }
   }
   
-  function keySequenceStringToArray(keyCombo) {
-    return keyCombo.toString().split('-').map(keyComboToCodeString);
+  _keySequenceStringToArray(keyCombo) {
+    return keyCombo.toString().split('-').map(this._keyComboToCodeString);
   }
   
   /**
    Add a key combo listener.
    
    @function on
-   @memberof Coral.Keys#
    @param {String} keyCombo
    The key combination to listen for, such as <code>'ctrl-f'</code>.
    @param {String} [selector]
@@ -527,9 +488,9 @@ function makeComboHandler(elOrSelector, options) {
    The listener to execute when this key combination is pressed. Executes on keydown, or, if too many keys are
    pressed and one is released, resulting in the correct key combination, executes on keyup.
    
-   @returns {Coral.Keys} this, chainable.
+   @returns {Keys} this, chainable.
    */
-  function on(keyCombo, selector, data, listener) {
+  on(keyCombo, selector, data, listener) {
     // keyCombo can be a map of keyCombos to handlers
     if (typeof keyCombo === 'object') {
       // ( keyCombo-Object, selector, data )
@@ -584,10 +545,10 @@ function makeComboHandler(elOrSelector, options) {
       // It's a sequence!
       
       // Divide it into its parts and convert to a code string
-      const sequenceParts = keySequenceStringToArray(keyCombo);
+      const sequenceParts = this._keySequenceStringToArray(keyCombo);
       
       // Store the listener and associated information in the list for this sequence
-      keySequences.push({
+      this._keySequences.push({
         originalString: keyCombo,
         currentPart: 0,
         parts: sequenceParts,
@@ -602,9 +563,9 @@ function makeComboHandler(elOrSelector, options) {
       const originalString = keyCombo.toString();
       
       // It's a key combo!
-      keyCombo = keyComboToCodeString(keyCombo);
+      keyCombo = this._keyComboToCodeString(keyCombo);
       
-      const listeners = keyListeners[keyCombo] = keyListeners[keyCombo] || [];
+      const listeners = this._keyListeners[keyCombo] = this._keyListeners[keyCombo] || [];
       
       // Store the listener and associated information in the list for this keyCombo
       listeners.push({
@@ -622,9 +583,9 @@ function makeComboHandler(elOrSelector, options) {
     return this;
   }
   
-  function offByKeyComboString(keyComboString, namespace, selector, listener) {
+  _offByKeyComboString(keyComboString, namespace, selector, listener) {
     let i;
-    const listeners = keyListeners[keyComboString];
+    const listeners = this._keyListeners[keyComboString];
     
     if (listeners && listeners.length) {
       if (typeof selector === 'undefined' && typeof listener === 'undefined' && typeof namespace === 'undefined') {
@@ -659,7 +620,6 @@ function makeComboHandler(elOrSelector, options) {
    Remove a key combo listener.
    
    @function off
-   @memberof Coral.Keys#
    @param {String} keyCombo
    The key combination to listen for, such as <code>'ctrl-f'</code>.
    @param {String} [selector]
@@ -667,9 +627,9 @@ function makeComboHandler(elOrSelector, options) {
    @param {Function} listener
    The listener that was passed to on.
    
-   @returns {Coral.Keys} this, chainable.
+   @returns {Keys} this, chainable.
    */
-  function off(keyCombo, selector, listener) {
+  off(keyCombo, selector, listener) {
     if (typeof listener === 'undefined') {
       listener = selector;
       selector = undefined;
@@ -685,14 +645,14 @@ function makeComboHandler(elOrSelector, options) {
     
     if (keyCombo === '' && namespace !== undefined) {
       // If we have a namespace by no keyCombo, remove all events of the namespace for each key combo
-      for (keyCombo in keyListeners) {
-        offByKeyComboString(keyCombo, namespace, selector, listener);
+      for (keyCombo in this._keyListeners) {
+        this._offByKeyComboString(keyCombo, namespace, selector, listener);
       }
       
       // Remove sequences
-      for (i = 0; i < keySequences.length; i++) {
-        if (keySequences[i].namespace === namespace) {
-          keySequences.splice(i, 1);
+      for (i = 0; i < this._keySequences.length; i++) {
+        if (this._keySequences[i].namespace === namespace) {
+          this._keySequences.splice(i, 1);
           i--;
         }
       }
@@ -702,22 +662,22 @@ function makeComboHandler(elOrSelector, options) {
     
     if (keyCombo.indexOf('-') !== -1) {
       // Unbind a specific key sequence listener, optionally on a specific selector and specific namespace
-      for (i = 0; i < keySequences.length; i++) {
+      for (i = 0; i < this._keySequences.length; i++) {
         if (
-          (keyCombo === undefined || keySequences[i].originalString === keyCombo) &&
-          (listener === undefined || keySequences[i].listener === listener) &&
-          (selector === undefined || keySequences[i].selector === selector) &&
-          (namespace === undefined || keySequences[i].namespace === namespace)
+          (keyCombo === undefined || this._keySequences[i].originalString === keyCombo) &&
+          (listener === undefined || this._keySequences[i].listener === listener) &&
+          (selector === undefined || this._keySequences[i].selector === selector) &&
+          (namespace === undefined || this._keySequences[i].namespace === namespace)
         ) {
-          keySequences.splice(i, 1);
+          this._keySequences.splice(i, 1);
           i--;
         }
       }
     }
     else {
-      keyCombo = keyComboToCodeString(keyCombo);
+      keyCombo = this._keyComboToCodeString(keyCombo);
       
-      offByKeyComboString(keyCombo, namespace, selector, listener);
+      this._offByKeyComboString(keyCombo, namespace, selector, listener);
     }
     
     return this;
@@ -729,88 +689,121 @@ function makeComboHandler(elOrSelector, options) {
    @function destroy
    @param {Boolean} globalsOnly
    Whether only global listeners should be removed
-   @memberof Coral.Keys#
    
-   @returns {Coral.Keys} this, chainable.
+   @returns {Keys} this, chainable.
    */
-  function destroy(globalsOnly) {
+  destroy(globalsOnly) {
     if (!globalsOnly) {
-      keyListeners = null;
-      currentKeys = null;
-      currentKeyCombo = null;
+      this._keyListeners = null;
+      this._currentKeys = null;
+      this._currentKeyCombo = null;
       
-      el.removeEventListener('keydown', handleKeyDown);
+      this._el.removeEventListener('keydown', this._handleKeyDown);
     }
     
-    window.removeEventListener('keyup', handleKeyUp, true);
-    window.removeEventListener('focus', reset);
+    window.removeEventListener('keyup', this._handleKeyUp, true);
+    window.removeEventListener('focus', this.reset);
     
     return this;
   }
   
   /**
    Initialize an instance created without the <code>new</code> keyword or revive a destroyed instance. This method
-   will be called automatically if an instance is created with <code>new Coral.keys</code>, but otherwise will not be
-   called.
+   will be called automatically if an instance is created with <code>new Coral.keys</code>.
    
    @function init
    @param {Boolean} globalsOnly
-    Whether only global listeners should be added
-   @memberof Coral.Keys#
+   Whether only global listeners should be added
    
-   @returns {Coral.Keys} this, chainable.
+   @returns {Keys} this, chainable.
    */
-  function init(globalsOnly) {
+  init(globalsOnly) {
     if (!globalsOnly) {
       // Reset all variable states
-      currentKeys = [];
-      currentKeyCombo = '';
-      keyListeners = {};
-      keySequences = [];
-
-      el.addEventListener('keydown', handleKeyDown);
+      this._currentKeys = [];
+      this._currentKeyCombo = '';
+      this._keyListeners = {};
+      this._keySequences = [];
+  
+      this._el.addEventListener('keydown', this._handleKeyDown);
     }
-
+    
     // Remove window event listeners first to avoid memory leak
-    destroy(true);
+    this.destroy(true);
     
     // Watching on capture so it is immune to stopPropagation(). It's very important this event
     // is handled so key entries previously added on keydown can be cleared out.
     // If multiple identical EventListeners are registered on the same EventTarget with the same parameters the
     // duplicate instances are discarded. They do not cause the EventListener to be called twice.
-    window.addEventListener('keyup', handleKeyUp, true);
-    window.addEventListener('focus', reset);
+    window.addEventListener('keyup', this._handleKeyUp, true);
+    window.addEventListener('focus', this.reset);
     
     return this;
   }
   
-  // @todo is this insane?
-  if (this instanceof makeComboHandler) {
-    // Initialize immediately if new keyword used
-    init();
+  /**
+   The default keycombo event filter function. Ignores key combos triggered on input, select, and textarea.
+   
+   @param event
+   The event passed
+   
+   @returns {Boolean} True, if event.target is not editable and event.target.tagname is not restricted
+   */
+  static filterInputs(event) {
+    // Escape keycode doesn't have to be filtered
+    if (event.keyCode === specialKeyCodes.escape) {
+      return true;
+    }
+  
+    const target = event.target;
+    const tagName = target.tagName;
+    const isContentEditable = target.isContentEditable;
+    const isRestrictedTag = restrictedTagNames[tagName];
+    return !isContentEditable && !isRestrictedTag;
   }
   
-  return {on, off, reset, init, destroy};
+  /**
+   Convert a key to its character code representation.
+   
+   @param {String} key
+   The key character that needs to be converted. If the String contains more than one character, an error will be
+   produced.
+   
+   @returns {Number} The character code of the given String.
+   */
+  static keyToCode(key) {
+    return keyToCode(key);
+  }
+  
+  /**
+   The time allowed between keypresses for a sequence in miliseconds
+   @type {Number}
+   @default 1500
+   */
+  static get sequenceTime() {
+    return 1500;
+  }
+  
+  /**
+   Convert a combination of keys separated by + into the corresponding code string.
+   @ignore
+   */
+  _keyComboToCodeString(keyCombo) {
+    return keyCombo
+    // Convert to string so numbers are supported
+      .toString()
+      .split('+')
+      .map(keyToCode)
+      // Sort keys for easy comparison
+      .sort()
+      .join('+');
+  }
 }
-
-Keys = makeComboHandler;
-
-Keys.filterInputs = filterInputs;
-
-Keys.keyToCode = keyToCode;
-
-/**
- The time allowed between keypresses for a sequence in miliseconds
- @type Number
- @default 1500
- */
-Keys.sequenceTime = 1500;
 
 /**
  A key listener for global hotkeys.
  
- @static
- @type Coral.keys
+ @type {Keys}
  */
 // Register against the documentElement, <html>, so event delegation works
 const keys = new Keys(document.documentElement, {

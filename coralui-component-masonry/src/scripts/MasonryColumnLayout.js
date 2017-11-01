@@ -24,9 +24,14 @@ import {Keys} from 'coralui-util';
  
  @class Coral.Masonry.ColumnLayout
  @classdesc A Masonry Column layout
- @extends Coral.Masonry.Layout
+ @extends {MasonryLayout}
  */
 class MasonryColumnLayout extends MasonryLayout {
+  /**
+   Takes a {Masonry} instance as argument.
+   
+   @param {Masonry} masonry
+   */
   constructor(masonry) {
     super(masonry);
   

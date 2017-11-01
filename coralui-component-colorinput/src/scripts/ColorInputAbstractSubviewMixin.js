@@ -16,10 +16,11 @@
  */
 
 /**
- @mixin ColorInputAbstractSubview
+ @mixin ColorInputAbstractSubviewMixin
  @classdesc An abstract subview class that other subviews should extend.
  */
-const ColorInputAbstractSubview = (superClass) => class extends superClass {
+const ColorInputAbstractSubviewMixin = (superClass) => class extends superClass {
+  /** @ignore */
   constructor() {
     super();
     
@@ -52,6 +53,7 @@ const ColorInputAbstractSubview = (superClass) => class extends superClass {
     // overwrite callback in subclass if needed
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
   
@@ -72,6 +74,7 @@ const ColorInputAbstractSubview = (superClass) => class extends superClass {
     }
   }
   
+  /** @ignore */
   disconnectedCallback() {
     super.disconnectedCallback();
   
@@ -84,4 +87,4 @@ const ColorInputAbstractSubview = (superClass) => class extends superClass {
   }
 };
 
-export default ColorInputAbstractSubview;
+export default ColorInputAbstractSubviewMixin;

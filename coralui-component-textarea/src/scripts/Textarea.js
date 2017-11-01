@@ -15,21 +15,24 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import FormField from 'coralui-mixin-formfield';
+import {ComponentMixin} from 'coralui-mixin-component';
+import {FormFieldMixin} from 'coralui-mixin-formfield';
 import {transform, validate, commons} from 'coralui-util';
 
 const CLASSNAME = 'coral3-Textfield';
 
 /**
- Enum for textarea variant values.
- @enum {String}
- @memberof Coral.Textarea
+ Enumeration for {@link Textarea} variants.
+ 
+ @typedef {Object} TextareaVariantEnum
+ 
+ @property {String} DEFAULT
+ A default textarea.
+ @property {String} QUIET
+ A textarea with no border or background.
  */
 const variant = {
-  /** A default textarea */
   DEFAULT: 'default',
-  /** A textarea with no border or background. */
   QUIET: 'quiet'
 };
 
@@ -45,11 +48,12 @@ for (const variantValue in variant) {
  @classdesc A Textarea component
  @htmltag coral-textarea
  @htmlbasetag textarea
- @extends HTMLTextAreaElement
- @extends Coral.mixin.component
- @extends Coral.mixin.formField
+ @extends {HTMLTextAreaElement}
+ @extends {ComponentMixin}
+ @extends {FormFieldMixin}
  */
-class Textarea extends FormField(Component(HTMLTextAreaElement)) {
+class Textarea extends FormFieldMixin(ComponentMixin(HTMLTextAreaElement)) {
+  /** @ignore */
   constructor() {
     super();
   
@@ -59,12 +63,12 @@ class Textarea extends FormField(Component(HTMLTextAreaElement)) {
   }
   
   /**
-   The textarea's variant.
-   @type {Coral.Textarea.variant}
-   @default Coral.Textarea.variant.DEFAULT
+   The textarea's variant. See {@link TextareaVariantEnum}.
+   
+   @type {String}
+   @default TextareaVariantEnum.DEFAULT
    @htmlattribute variant
    @htmlattributereflected
-   @memberof Coral.Textarea#
    */
   get variant() {
     return this._variant || variant.DEFAULT;
@@ -93,7 +97,9 @@ class Textarea extends FormField(Component(HTMLTextAreaElement)) {
     this._onInput();
   }
   
-  // JSDoc inherited from FormField mixin
+  /**
+   Inherited from {@link FormFieldMixin#reset}.
+   */
   reset() {
     // the textarea uses the textContent to save the old value and not the value attribute
     this.value = this.textContent;
@@ -107,13 +113,19 @@ class Textarea extends FormField(Component(HTMLTextAreaElement)) {
     }
   }
   
-  // Expose enumerations
+  /**
+   Returns {@link Textarea} variants.
+   
+   @return {TextareaVariantEnum}
+   */
   static get variant() { return variant; }
   
+  /** @ignore */
   static get observedAttributes() {
     return super._nativeObservedAttributes.concat(['variant']);
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

@@ -24,9 +24,10 @@ const CLASSNAME = `coral3-BasicList-item, coral3-Shell-orgSwitcher-subitem `;
  @class Coral.Shell.Suborganization
  @classdesc A Shell Sub organization component
  @htmltag coral-shell-suborganization
- @extends Coral.Shell.Organization
+ @extends {ShellOrganization}
  */
 class ShellSuborganization extends ShellOrganization {
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import base from '../templates/base';
 import {transform, commons} from 'coralui-util';
 import 'coralui-component-icon';
@@ -28,10 +28,11 @@ const CLASSNAME = 'coral3-Tab';
  @class Coral.Tab
  @classdesc A Tab component
  @htmltag coral-tab
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class Tab extends Component(HTMLElement) {
+class Tab extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -47,7 +48,6 @@ class Tab extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Tab#
    */
   get label() {
     return this._getContentZone(this._elements.label);
@@ -63,14 +63,11 @@ class Tab extends Component(HTMLElement) {
   }
   
   /**
-   Specifies the name of the icon used inside the Tab. See {@link Coral.Icon} for valid icon names.
+   Specifies the name of the icon used inside the Tab. See {@link Icon} for valid icon names.
    
    @type {String}
    @default ""
    @htmlattribute icon
-   @memberof Coral.Tab#
-   
-   @see {@link Coral.Icon}
    */
   get icon() {
     const iconElement = this._elements.icon;
@@ -97,7 +94,6 @@ class Tab extends Component(HTMLElement) {
    @default false
    @htmlattribute invalid
    @htmlattributereflected
-   @memberof Coral.Tab#
    */
   get invalid() {
     return this._invalid || false;
@@ -118,7 +114,6 @@ class Tab extends Component(HTMLElement) {
    @default false
    @htmlattribute disabled
    @htmlattributereflected
-   @memberof Coral.Tab#
    */
   get disabled() {
     return this._disabled || false;
@@ -146,7 +141,6 @@ class Tab extends Component(HTMLElement) {
    @default false
    @htmlattribute selected
    @htmlattributereflected
-   @memberof Coral.Tab#
    */
   get selected() {
     return this._selected || false;
@@ -177,7 +171,6 @@ class Tab extends Component(HTMLElement) {
    @type {?HTMLElement|String}
    @default null
    @htmlattribute target
-   @memberof Coral.Tab#
    */
   get target() {
     return typeof this._target === 'string' ? this._target : this._target || null;
@@ -231,14 +224,23 @@ class Tab extends Component(HTMLElement) {
     }
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.label; }
   set defaultContentZone(value) { this.label = value; }
+  
   get _contentZones() { return {'coral-tab-label': 'label'}; }
   
+  /** @ignore */
   static get observedAttributes() {
     return ['selected', 'disabled', 'icon', 'invalid', 'target'];
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import 'coralui-component-icon';
 import homeAnchorIcon from '../templates/homeAnchorIcon';
 
@@ -27,9 +27,10 @@ const CLASSNAME = 'coral3-Shell-homeAnchor';
  @htmltag coral-shell-homeanchor
  @htmlbasetag a
  @extends HTMLAnchorElement
- @extends Coral.mixin.component
+ @extends {ComponentMixin}
  */
-class ShellHomeAnchor extends Component(HTMLAnchorElement) {
+class ShellHomeAnchor extends ComponentMixin(HTMLAnchorElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -48,7 +49,6 @@ class ShellHomeAnchor extends Component(HTMLAnchorElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Shell.HomeAnchor#
    */
   get label() {
     return this._getContentZone(this._elements.label);
@@ -69,7 +69,6 @@ class ShellHomeAnchor extends Component(HTMLAnchorElement) {
    @type {String}
    @default ""
    @htmlattribute icon
-   @memberof Coral.Shell.HomeAnchor#
    */
   get icon() {
     return this._elements.icon.icon;
@@ -87,12 +86,21 @@ class ShellHomeAnchor extends Component(HTMLAnchorElement) {
     }
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.label; }
   set defaultContentZone(value) { this.label = value; }
+  
   get _contentZones() { return {'coral-shell-homeanchor-label': 'label'}; }
   
+  /** @ignore */
   static get observedAttributes() { return ['icon']; }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

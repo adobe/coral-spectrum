@@ -15,10 +15,22 @@
  * from Adobe Systems Incorporated.
  */
 module.exports = function(gulp) {
+  const fs = require('fs');
   const exec = require('child_process').exec;
-
+  
   // @todo due to https://github.com/nanopx/gulp-esdoc/issues/19, we can't use gulp-esdoc
-  gulp.task('docs', function() {
-    return exec('node_modules/.bin/esdoc -c node_modules/coralui-gulp/configs/esdoc.conf.json');
+  gulp.task('docs', function(cb) {
+    
+    // todo due to https://github.com/esdoc/esdoc/issues/432, we have to manually create a fake README.md
+    try {
+      fs.writeFileSync('README.md', '', { flag: 'wx' });
+    }
+    catch (e) {}
+    
+    const p = exec('node_modules/.bin/esdoc -c node_modules/coralui-gulp/configs/esdoc.conf.js', (err) => {
+      cb(err);
+    });
+  
+    p.stdout.pipe(process.stdout);
   });
 };

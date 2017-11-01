@@ -21,10 +21,11 @@ const CLASSNAME = 'coral3-Progress-label';
  @class Coral.Progress.Label
  @classdesc The Progress label content
  @htmltag coral-progress-label
- @extends HTMLElement
+ @extends {HTMLElement}
  @private
  */
 class ProgressLabel extends HTMLElement {
+  /** @ignore */
   connectedCallback() {
     this.classList.add(CLASSNAME);
   }

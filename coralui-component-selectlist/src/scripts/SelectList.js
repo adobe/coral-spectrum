@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {SelectableCollection} from 'coralui-collection';
 import 'coralui-component-wait';
 import loadIndicator from '../templates/loadIndicator';
@@ -53,10 +53,11 @@ const CLASSNAME = 'coral3-SelectList';
  @class Coral.SelectList
  @classdesc A SelectList component
  @htmltag coral-selectlist
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class SelectList extends Component(HTMLElement) {
+class SelectList extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -108,15 +109,12 @@ class SelectList extends Component(HTMLElement) {
   }
   
   /**
-   The Collection Interface that allows interacting with the {@link Coral.SelectList.Group} elements that the
+   The Collection Interface that allows interacting with the {@link SelectListGroup} elements that the
    SelectList contains. This includes items nested inside groups. To manage items contained within a specific
-   group, see {@link Coral.SelectList.Group#items}.
+   group, see {@link SelectListGroup#items}.
    
-   See {@link Coral.Collection} for more details regarding collection APIs.
-   
-   @type {Coral.Collection}
+   @type {SelectableCollection}
    @readonly
-   @memberof Coral.SelectList#
    */
   get groups() {
     // just init on demand
@@ -133,11 +131,9 @@ class SelectList extends Component(HTMLElement) {
   
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   See {@link Coral.Collection} for more details.
    
-   @type {Coral.Collection}
+   @type {SelectableCollection}
    @readonly
-   @memberof Coral.SelectList#
    */
   get items() {
     // just init on demand
@@ -157,7 +153,6 @@ class SelectList extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @readonly
-   @memberof Coral.SelectList#
    */
   get selectedItem() {
     return this.items._getAllSelected()[0] || null;
@@ -168,7 +163,6 @@ class SelectList extends Component(HTMLElement) {
    
    @type {Array.<HTMLElement>}
    @readonly
-   @memberof Coral.SelectList#
    */
   get selectedItems() {
     return this.items._getAllSelected();
@@ -180,7 +174,6 @@ class SelectList extends Component(HTMLElement) {
    @default false
    @htmlattribute multiple
    @htmlattributereflected
-   @memberof Coral.SelectList#
    */
   get multiple() {
     return this._multiple || false;
@@ -201,7 +194,6 @@ class SelectList extends Component(HTMLElement) {
    @type {Boolean}
    @htmlattribute loading
    @htmlattributereflected
-   @memberof Coral.SelectList#
    */
   get loading() {
     return this._loading || false;
@@ -446,7 +438,7 @@ class SelectList extends Component(HTMLElement) {
   }
   
   /**
-   @fires Coral.SelectList#coral-selectlist:scrollbottom
+   @emits {coral-selectlist:scrollbottom}
    
    @private
    */
@@ -536,10 +528,12 @@ class SelectList extends Component(HTMLElement) {
     }
   }
   
+  /** @ignore */
   static get observedAttributes() {
     return ['loading', 'multiple'];
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -557,36 +551,29 @@ class SelectList extends Component(HTMLElement) {
   }
   
   /**
-   Triggered when the user scrolls to near the bottom of the list. This can be useful for when additional items can
+   Triggered when the user scrolls to near the bottom of the {@link SelectList}. This can be useful for when additional items can
    be loaded asynchronously (i.e., infinite scrolling).
    
-   @event Coral.SelectList#coral-selectlist:scrollbottom
-   
-   @param {Object} event
-   Event object.
+   @typedef {CustomEvent} coral-selectlist:scrollbottom
    */
   
   /**
-   Triggered before the selected item is changed on user interaction. Can be used to cancel selection.
+   Triggered before the {@link SelectList} selected item is changed on user interaction. Can be used to cancel selection.
    
-   @event Coral.TabList#coral-selectlist:change
+   @typedef {CustomEvent} coral-selectlist:change
    
-   @param {Object} event Event object
-   @param {Object} event.detail
-   @param {HTMLElement} event.detail.item
+   @property {SelectListItem} event.detail.item
    The selected item.
    */
   
   /**
-   Triggered when the selected item has changed.
+   Triggered when the {@link SelectList} selected item has changed.
    
-   @event Coral.TabList#coral-selectlist:change
+   @typedef {CustomEvent} coral-selectlist:change
    
-   @param {Object} event Event object
-   @param {Object} event.detail
-   @param {HTMLElement} event.detail.oldSelection
+   @property {SelectListItem} detail.oldSelection
    The prior selected item(s).
-   @param {HTMLElement} event.detail.selection
+   @property {SelectListItem} detail.selection
    The newly selected item(s).
    */
 }

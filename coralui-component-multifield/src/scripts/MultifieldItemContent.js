@@ -19,7 +19,7 @@
  @class Coral.Multifield.Item.Content
  @classdesc The Multifield item content
  @htmltag coral-multifield-item-content
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class MultifieldItemContent extends HTMLElement {}
 

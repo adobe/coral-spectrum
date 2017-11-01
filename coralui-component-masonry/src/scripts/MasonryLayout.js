@@ -28,6 +28,11 @@
  @class Coral.Masonry.Layout
  */
 class MasonryLayout {
+  /**
+   * this is constructor description.
+   * @param {number} arg1 this is arg1 description.
+   * @param {string[]} arg2 this is arg2 description.
+   */
   constructor(masonry) {
     this._masonry = masonry;
   }
@@ -62,8 +67,7 @@ class MasonryLayout {
    Removes the item from the control of the layout. This can be used to position the item differently,
    for example for drag&drop.
    
-   @param {Coral.Masonry.Item} item
-   @see #reattach
+   @param {MasonryItem} item
    */
   // eslint-disable-next-line no-unused-vars
   detach(item) {
@@ -74,8 +78,7 @@ class MasonryLayout {
    Adds the item to the control of the layout again. The layout has to ensure that the item will be transitioned to
    its normal position flawlessly.
    
-   @param {Coral.Masonry.Item} item
-   @see #detach
+   @param {MasonryItem} item
    */
   // eslint-disable-next-line no-unused-vars
   reattach(item) {

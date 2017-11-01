@@ -26,18 +26,17 @@ for (const dividerValue in divider) {
 }
 
 /**
- @mixin Coral.mixin.tableSection
+ @mixin TableSectionMixin
  @classdesc The base element for table sections
  */
-const TableSection = (superClass) => class extends superClass {
+const TableSectionMixin = (superClass) => class extends superClass {
   /**
-   The table section divider.
+   The table section divider. See {@link TableSectionDividerEnum}.
    
-   @type {Coral.Table.divider}
-   @default Coral.Table.divider.ROW
+   @type {String}
+   @default TableSectionDividerEnum.ROW
    @htmlattributereflected
    @htmlattribute divider
-   @memberof Coral.mixin.tableSection#
    */
   get divider() {
     return this._divider || divider.ROW;
@@ -51,8 +50,10 @@ const TableSection = (superClass) => class extends superClass {
     this.classList.add(`coral-Table-divider--${this.divider}`);
   }
   
+  /** @ignore */
   static get observedAttributes() { return ['divider']; }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
   
@@ -64,4 +65,4 @@ const TableSection = (superClass) => class extends superClass {
   }
 };
 
-export default TableSection;
+export default TableSectionMixin;

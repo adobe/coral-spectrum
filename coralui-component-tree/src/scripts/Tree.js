@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {SelectableCollection} from 'coralui-collection';
 import {transform} from 'coralui-util';
 
@@ -25,10 +25,11 @@ const CLASSNAME = 'coral3-Tree';
  @class Coral.Tree
  @classdesc A Tree component
  @htmltag coral-tree
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class Tree extends Component(HTMLElement) {
+class Tree extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -87,11 +88,9 @@ class Tree extends Component(HTMLElement) {
   
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   See {@link Coral.Collection} for more details.
    
-   @type {Coral.Collection}
+   @type {SelectableCollection}
    @readonly
-   @memberof Coral.Tree#
    */
   get items() {
     // just init on demand
@@ -110,7 +109,6 @@ class Tree extends Component(HTMLElement) {
    @default false
    @htmlattribute multiple
    @htmlattributereflected
-   @memberof Coral.Tree#
    */
   get multiple() {
     return this._multiple || false;
@@ -128,7 +126,6 @@ class Tree extends Component(HTMLElement) {
    Returns an Array containing the set selected items.
    @type {Array.<HTMLElement>}
    @readonly
-   @memberof Coral.Tree#
    */
   get selectedItems() {
     return this.items._getAllSelected();
@@ -139,7 +136,6 @@ class Tree extends Component(HTMLElement) {
    selected.
    @type {?HTMLElement}
    @readonly
-   @memberof Coral.Tree#
    */
   get selectedItem() {
     return this.items._getAllSelected()[0] || null;
@@ -441,11 +437,13 @@ class Tree extends Component(HTMLElement) {
   collapseAll() {
     this._expandCollapseAll(false);
   }
-
+  
+  /** @ignore */
   static get observedAttributes() {
     return ['multiple'];
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -471,37 +469,31 @@ class Tree extends Component(HTMLElement) {
   }
   
   /**
-   Triggered when the selection changed.
+   Triggered when the {@link Tree} selection changed.
+ 
+   @typedef {CustomEvent} coral-tree:change
    
-   @event Coral.Tree#coral-tree:change
-   
-   @param {Object} event
-   Event object
-   @param {Array.<HTMLElement>} event.detail.oldSelection
+   @property {Array.<TreeItem>} detail.oldSelection
    The old selected item.
-   @param {Array.<HTMLElement>} event.detail.selection
+   @property {Array.<TreeItem>} detail.selection
    The selected items.
    */
   
   /**
-   Triggered when an item expanded.
+   Triggered when a {@link Tree} item expanded.
+ 
+   @typedef {CustomEvent} coral-tree:expand
    
-   @event Coral.Tree#coral-tree:expand
-   
-   @param {Object} event
-   Event object
-   @param {HTMLElement} event.detail.item
+   @property {TreeItem} detail.item
    The expanded item.
    */
   
   /**
-   Triggered when an item collapsed.
+   Triggered when a {@link Tree} item collapsed.
+ 
+   @typedef {CustomEvent} coral-tree:collapse
    
-   @event Coral.Tree#coral-tree:collapse
-   
-   @param {Object} event
-   Event object
-   @param {HTMLElement} event.detail.item
+   @property {TreeItem} detail.item
    The collapsed item.
    */
 }

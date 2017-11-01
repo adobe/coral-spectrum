@@ -19,7 +19,7 @@
  @class Coral.Dialog.Header
  @classdesc The Dialog header content
  @htmltag coral-dialog-header
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class DialogHeader extends HTMLElement {}
 

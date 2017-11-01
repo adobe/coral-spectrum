@@ -15,41 +15,49 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import OverlayMixin from 'coralui-mixin-overlay';
+import {ComponentMixin} from 'coralui-mixin-component';
+import {OverlayMixin} from 'coralui-mixin-overlay';
 import {PopperJS} from 'coralui-externals';
-import ALIGN_MAP from './alignMapping.json';
+import ALIGN_MAP from '../data/alignMapping.json';
 import {transform, validate, commons} from 'coralui-util';
 
 const DEPRECATED_ALIGN = 'Coral.Overlay: alignAt and alignMy have been deprecated. Please use the offset, inner and placement properties instead.';
 const DEPRECATED_FLIP_FIT = 'Coral.Overlay.collision.FLIP_FIT has been deprecated. Please use Coral.Overlay.collision.FLIP instead.';
 
 /**
- Valid alignment pairs.
- 
- @enum {Object}
- @memberof Coral.Overlay
- 
+ Enumeration for {@link Overlay} alignment pairs.
  @deprecated
+ 
+ @typedef {Object} OverlayAlignEnum
+ 
+ @property {String} LEFT_TOP
+ Use the top of the left side as an anchor point.
+ @property {String} LEFT_CENTER
+ Use the center of the left side as an anchor point.
+ @property {String} LEFT_BOTTOM
+ Use the bottom of the left side as an anchor point.
+ @property {String} CENTER_TOP
+ Use the center of the top side as an anchor point.
+ @property {String} CENTER_CENTER
+ Use the center as an anchor point.
+ @property {String} CENTER_BOTTOM
+ Use the center of the bottom side as an anchor point.
+ @property {String} RIGHT_TOP
+ Use the top of the right side as an anchor point.
+ @property {String} RIGHT_CENTER
+ Use the center of the right side as an anchor point.
+ @property {String} RIGHT_BOTTOM
+ Use the bottom of the right side as an anchor point.
  */
 const align = {
-  /** Use the top of the left side as an anchor point. */
   LEFT_TOP: 'left top',
-  /** Use the center of the left side as an anchor point. */
   LEFT_CENTER: 'left center',
-  /** Use the bottom of the left side as an anchor point. */
   LEFT_BOTTOM: 'left bottom',
-  /** Use the center of the top side as an anchor point. */
   CENTER_TOP: 'center top',
-  /** Use the center as an anchor point. */
   CENTER_CENTER: 'center center',
-  /** Use the center of the bottom side as an anchor point. */
   CENTER_BOTTOM: 'center bottom',
-  /** Use the top of the right side as an anchor point. */
   RIGHT_TOP: 'right top',
-  /** Use the center of the right side as an anchor point. */
   RIGHT_CENTER: 'right center',
-  /** Use the bottom of the right side as an anchor point. */
   RIGHT_BOTTOM: 'right bottom'
 };
 
@@ -57,62 +65,74 @@ const align = {
 const alignSwapped = commons.swapKeysAndValues(align);
 
 /**
- Collision detection strategies.
+ Enumeration for {@link Overlay} collision detection strategies.
  
- @enum {String}
- @memberof Coral.Overlay
+ @typedef {Object} OverlayCollisionEnum
+ 
+ @property {String} FLIP
+ Flips the element to the opposite side of the target and the collision detection is run again to see if it will fit. Whichever side allows more of the element to be visible will be used.
+ @property {String} FIT
+ Shift the element away from the edge of the window.
+ @property {String} FLIP_FIT
+ Deprecated. First applies the flip logic, placing the element on whichever side allows more of the element to be visible. Then the fit logic is applied to ensure as much of the element is visible as possible.
+ @property {String} NONE
+ Does not apply any collision detection.
  */
 const collision = {
-  /** Flips the element to the opposite side of the target and the collision detection is run again to see if it will fit. Whichever side allows more of the element to be visible will be used. */
   FLIP: 'flip',
-  /** Shift the element away from the edge of the window. */
   FIT: 'fit',
-  /** Deprecated. First applies the flip logic, placing the element on whichever side allows more of the element to be visible. Then the fit logic is applied to ensure as much of the element is visible as possible. */
   FLIP_FIT: 'flipfit',
-  /** Does not apply any collision detection. */
   NONE: 'none'
 };
 
 /**
- Anchored overlay targets.
+ Enumeration for {@link Overlay} anchored overlay targets.
  
- @enum {String}
- @memberof Coral.Overlay
+ @typedef {Object} OverlayTargetEnum
+ 
+ @property {String} PREVIOUS
+ Use the previous sibling element in the DOM.
+ @property {String} NEXT
+ Use the next sibling element in the DOM.
  */
 const target = {
-  /** Use the previous sibling element in the DOM. */
   PREVIOUS: '_prev',
-  /** Use the next sibling element in the DOM. */
   NEXT: '_next'
 };
 
 /**
- Overlay placement values.
+ Enumeration for {@link Overlay} overlay placement values.
  
- @enum {Object}
- @memberof Coral.Overlay
+ @typedef {Object} OverlayPlacementEnum
+ 
+ @property {String} LEFT
+ An overlay anchored to the left of the target.
+ @property {String} RIGHT
+ An overlay anchored to the right of the target.
+ @property {String} BOTTOM
+ An overlay anchored at the bottom the target.
+ @property {String} TOP
+ An overlay anchored at the top target.
  */
 const placement = {
-  /** An overlay anchored to the left of the target. */
   LEFT: 'left',
-  /** An overlay anchored to the right of the target. */
   RIGHT: 'right',
-  /** An overlay anchored at the bottom the target. */
   BOTTOM: 'bottom',
-  /** An overlay anchored at the top target. */
   TOP: 'top'
 };
 
 /**
- Boolean enumeration for interaction values.
+ Enumeration for {@link Overlay} interaction values.
  
- @enum {String}
- @memberof Coral.Overlay
+ @typedef {Object} OverlayInteractionEnum
+ 
+ @property {String} ON
+ Keyboard interaction is enabled.
+ @property {String} OFF
+ Keyboard interaction is disabled.
  */
 const interaction = {
-  /** Keyboard interaction is enabled. */
   ON: 'on',
-  /** Keyboard interaction is disabled. */
   OFF: 'off'
 };
 
@@ -122,11 +142,12 @@ const CLASSNAME = 'coral3-Overlay';
  @class Coral.Overlay
  @classdesc An Overlay component
  @htmltag coral-overlay
- @extends HTMLElement
- @extends Coral.mixin.component
- @extends Coral.mixin.overlay
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
+ @extends {OverlayMixin}
  */
-class Overlay extends OverlayMixin(Component(HTMLElement)) {
+class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
+  /** @ignore */
   constructor() {
     super();
   
@@ -141,13 +162,11 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
   }
   
   /**
-   The element the overlay should position relative to. It accepts values from {@link Coral.Overlay.target}, as
+   The element the overlay should position relative to. It accepts values from {@link OverlayTargetEnum}, as
    well as a DOM element or a CSS selector. If a CSS selector is provided, the first matching element will be used.
    
-   @type {Coral.Overlay.target|?HTMLElement|String}
+   @type {?HTMLElement|String}
    @default null
-   @htmlattribute target
-   @memberof Coral.Overlay#
    */
   get target() {
     return this._target || null;
@@ -178,13 +197,12 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
   }
   
   /**
-   The point on the overlay we should anchor from when positioning.
+   The point on the overlay we should anchor from when positioning. See {@link OverlayAlignEnum}.
    
-   @type {Coral.Overlay.align}
-   @default Coral.Overlay.align.CENTER_CENTER
+   @type {String}
+   @default OverlayAlignEnum.CENTER_CENTER
    @htmlattribute alignmy
-   @memberof Coral.Overlay#
- 
+   
    @deprecated
    */
   get alignMy() {
@@ -200,12 +218,11 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
   }
   
   /**
-   The point on the target we should anchor to when positioning.
+   The point on the target we should anchor to when positioning. See {@link OverlayAlignEnum}.
    
-   @type {Coral.Overlay.align}
+   @type {String}
    @default Coral.Overlay.align.CENTER_CENTER
    @htmlattribute alignat
-   @memberof Coral.Overlay#
    
    @deprecated
    */
@@ -227,7 +244,6 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
    @type {Number}
    @default 0
    @htmlattribute offset
-   @memberof Coral.Overlay#
    */
   get offset() {
     return transform.number(this.lengthOffset);
@@ -247,7 +263,6 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
    @type {Boolean}
    @default false
    @htmlattribute inner
-   @memberof Coral.Overlay#
    */
   get inner() {
     return this._inner || false;
@@ -264,7 +279,6 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
    @type {String}
    @default '0px'
    @htmlattribute lengthoffset
-   @memberof Coral.Overlay#
    */
   get lengthOffset() {
     return this._lengthOffset || '0px';
@@ -281,7 +295,6 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
    @type {String}
    @default '0px'
    @htmlattribute breadthoffset
-   @memberof Coral.Overlay#
    */
   get breadthOffset() {
     return this._breadthOffset || '0px';
@@ -293,12 +306,11 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
   }
   
   /**
-   The placement of the overlay.
+   The placement of the overlay. See {@link OverlayPlacementEnum}.
    
-   @type {Coral.Overlay.placement}
-   @default Coral.Overlay.placement.RIGHT
+   @type {String}
+   @default OverlayPlacementEnum.RIGHT
    @htmlattribute placement
-   @memberof Coral.Overlay#
    */
   get placement() {
     return this._placement || placement.RIGHT;
@@ -317,7 +329,6 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
    
    @type {HTMLElement|String}
    @default 'scrollParent'
-   @memberof Coral.Overlay#
    */
   get within() {
     return this._within || 'scrollParent';
@@ -331,12 +342,11 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
   }
   
   /**
-   The collision handling strategy when positioning the overlay relative to a target.
+   The collision handling strategy when positioning the overlay relative to a target. See {@link OverlayCollisionEnum}.
    
-   @type {Coral.Overlay.collision}
-   @default Coral.Overlay.collision.FLIP
+   @type {String}
+   @default OverlayCollisionEnum.FLIP
    @htmlattribute collision
-   @memberof Coral.Overlay#
    */
   get collision() {
     return this._collision || collision.FLIP;
@@ -353,11 +363,10 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
   }
   
   /**
-   Whether keyboard interaction is enabled.
+   Whether keyboard interaction is enabled. See {@link OverlayInteractionEnum}.
    
-   @type {Coral.Overlay.interaction}
-   @default Coral.Overlay.interaction.ON
-   @memberof Coral.Overlay#
+   @type {String}
+   @default OverlayInteractionEnum.ON
    */
   get interaction() {
     return this._interaction || interaction.ON;
@@ -372,7 +381,6 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
    
    @type {Boolean}
    @default false
-   @memberof Coral.Overlay#
    */
   get smart() {
     return this._smart || false;
@@ -381,7 +389,9 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
     this._smart = transform.booleanAttr(value);
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link OverlayMixin#open}.
+   */
   get open() {
     return super.open;
   }
@@ -480,7 +490,6 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
    @param {HTMLElement|String} [target]
    A specific target value to use.
    If not provided, the current value of the {@link Coral.Overlay#target} property will be used.
-   @memberof Coral.Overlay#
    @returns {HTMLElement|null}
    */
   _getTarget(targetValue) {
@@ -521,7 +530,6 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
    Re-position the overlay if it's currently open.
    
    @function
-   @memberof Coral.Overlay#
    @param {Boolean} forceReposition
    Whether to force repositioning even if closed.
    */
@@ -559,13 +567,44 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
     }
   }
   
-  // Expose enumerations
+  /**
+   @deprecated
+   
+   Returns {@link Overlay} align options.
+   
+   @return {OverlayAlignEnum}
+   */
   static get align() { return align; }
+  
+  /**
+   Returns {@link Overlay} collision options.
+   
+   @return {OverlayCollisionEnum}
+   */
   static get collision() { return collision; }
+  
+  /**
+   Returns {@link Overlay} target options.
+   
+   @return {OverlayTargetEnum}
+   */
   static get target() { return target; }
+  
+  /**
+   Returns {@link Overlay} placement options.
+   
+   @return {OverlayPlacementEnum}
+   */
   static get placement() { return placement; }
+  
+  /**
+   Returns {@link Overlay} interaction options.
+   
+   @return {OverlayInteractionEnum}
+   */
   static get interaction() { return interaction; }
-
+  
+  /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'alignmy',
@@ -587,6 +626,7 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
     ]);
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -607,12 +647,9 @@ class Overlay extends OverlayMixin(Component(HTMLElement)) {
   }
   
   /**
-   Triggered after the overlay is positioned.
+   Triggered after the {@link Overlay} is positioned.
    
-   @event Coral.Overlay#coral-overlay:positioned
-   
-   @param {Object} event
-   Event object.
+   @typedef {CustomEvent} coral-overlay:positioned
    */
 }
 

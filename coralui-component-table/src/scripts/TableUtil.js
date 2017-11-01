@@ -17,6 +17,7 @@
 
 import {events} from 'coralui-util';
 
+/** @ignore */
 const getIndexOf = (el) => {
   const parent = el.parentNode;
   if (!parent) {
@@ -26,6 +27,7 @@ const getIndexOf = (el) => {
   return Array.prototype.indexOf.call(parent.children, el);
 };
 
+/** @ignore */
 const getSiblingsOf = (el, selector, type) => {
   const stack = [];
   
@@ -77,6 +79,7 @@ const getSiblingsOf = (el, selector, type) => {
   return stack;
 };
 
+/** @ignore */
 const watchForWebFontLoad = () => {
   // Background: sticky header cell size is calculated based on the non sticky header cell size.
   // On initialization, the size might be calculated before the Typekit font is loaded. In result, the calculated size
@@ -100,6 +103,7 @@ const watchForWebFontLoad = () => {
   }
 };
 
+/** @ignore */
 const listToArray = (list) => {
   const res = [];
   for (let i = 0, listCount = res.length = list.length; i < listCount; i++) {
@@ -108,8 +112,10 @@ const listToArray = (list) => {
   return res;
 };
 
+/** @ignore */
 const getColumns = (colgroup) => listToArray(colgroup.querySelectorAll('col[is="coral-table-column"]'));
 
+/** @ignore */
 const getRows = (sections) => {
   let rows = [];
   
@@ -122,28 +128,36 @@ const getRows = (sections) => {
   return rows;
 };
 
+/** @ignore */
 const getCells = (row) => listToArray(row.querySelectorAll('td[is="coral-table-cell"], th[is="coral-table-headercell"]'));
 
+/** @ignore */
 const getContentCells = (row) => listToArray(row.querySelectorAll('td[is="coral-table-cell"]'));
 
+/** @ignore */
 const getHeaderCells = (row) => listToArray(row.querySelectorAll('th[is="coral-table-headercell"]'));
 
+/** @ignore */
 const getCellByIndex = (row, index) => getCells(row).filter(cell => getIndexOf(cell) === index)[0] || null;
 
 /**
- Enum for divider values.
+ Enumeration for {@link TableHead}, {@link TableBody} and {@link TableFoot} divider values.
  
- @enum {String}
- @memberof Coral.mixin.tableSection
+ @typedef {Object} TableSectionDividerEnum
+ 
+ @property {String} NONE
+ No divider.
+ @property {String} ROW
+ Row divider.
+ @property {String} COLUMN
+ Column divider.
+ @property {String} CELL
+ Row and Column divider.
  */
 const divider = {
-  /** No divider. */
   NONE: 'none',
-  /** Row divider. */
   ROW: 'row',
-  /** Column divider. */
   COLUMN: 'column',
-  /** Row and Column divider. */
   CELL: 'cell'
 };
 

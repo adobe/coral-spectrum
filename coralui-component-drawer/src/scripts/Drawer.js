@@ -15,21 +15,23 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import 'coralui-component-button';
 import base from '../templates/base';
 import {commons, transform, validate} from 'coralui-util';
 
 /**
- Drawer directions.
+ Enumeration for {@link Drawer} directions.
  
- @enum {String}
- @memberof Coral.Drawer
+ @typedef {Object} DrawerDirectionEnum
+ 
+ @property {String} DOWN
+ A drawer with a toggle button on the bottom.
+ @property {String} UP
+ A drawer with a toggle button on top.
  */
 const direction = {
-  /** A drawer with a toggle button on the bottom. */
   DOWN: 'down',
-  /** A drawer with a toggle button on top. */
   UP: 'up'
 };
 
@@ -46,10 +48,11 @@ for (const directionValue in direction) {
  @class Coral.Drawer
  @classdesc A Drawer component
  @htmltag coral-drawer
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class Drawer extends Component(HTMLElement) {
+class Drawer extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -72,7 +75,6 @@ class Drawer extends Component(HTMLElement) {
    @default false
    @htmlattribute disabled
    @htmlattributereflected
-   @memberof Coral.Drawer#
    */
   get disabled() {
     return this._disabled || false;
@@ -92,7 +94,6 @@ class Drawer extends Component(HTMLElement) {
    @type {HTMLElement}
    @htmlttribute content
    @contentzone
-   @memberof Coral.Drawer#
    */
   get content() {
     return this._getContentZone(this._elements.content);
@@ -108,13 +109,12 @@ class Drawer extends Component(HTMLElement) {
   }
   
   /**
-   The drawer's direction.
+   The drawer's direction. See {@link DrawerDirectionEnum}.
    
-   @type {Coral.Drawer.direction}
-   @default Coral.Drawer.direction.DOWN
+   @type {String}
+   @default DrawerDirectionEnum.DOWN
    @htmlattribute direction
    @htmlattributereflected
-   @memberof Coral.Drawer#
    */
   get direction() {
     return this._direction || direction.DOWN;
@@ -137,7 +137,6 @@ class Drawer extends Component(HTMLElement) {
    @default false
    @htmlattribute open
    @htmlattributereflected
-   @memberof Coral.Drawer#
    */
   get open() {
     return this._open || false;
@@ -210,13 +209,25 @@ class Drawer extends Component(HTMLElement) {
     }
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.content; }
   set defaultContentZone(value) { this.content = value; }
+  
   get _contentZones() { return {'coral-drawer-content': 'content'}; }
   
-  // Expose enumerations
+  /**
+   Returns {@link Drawer} direction options.
+   
+   @return {DrawerDirectionEnum}
+   */
   static get direction() { return direction; }
   
+  /** @ignore */
   static get observedAttributes() {
     return [
       'disabled',
@@ -225,6 +236,7 @@ class Drawer extends Component(HTMLElement) {
     ];
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -268,21 +280,15 @@ class Drawer extends Component(HTMLElement) {
   }
   
   /**
-   Triggered when the drawer is opened
+   Triggered when the {@link Drawer} is opened.
    
-   @event Coral.Drawer#coral-drawer:open
-   
-   @param {Object} event
-   Event object
+   @typedef {CustomEvent} coral-drawer:open
    */
   
   /**
-   Triggered when the drawer is closed
+   Triggered when the {@link Drawer} is closed.
    
-   @event Coral.Drawer#coral-drawer:close
-   
-   @param {Object} event
-   Event object
+   @typedef {CustomEvent} coral-drawer:close
    */
 }
 

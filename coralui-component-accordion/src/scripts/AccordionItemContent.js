@@ -19,7 +19,7 @@
  @class Coral.Accordion.Item.Content
  @classdesc Accordion item's content component
  @htmltag coral-accordion-item-content
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class AccordionItemContent extends HTMLElement {}
 

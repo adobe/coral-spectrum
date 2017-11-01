@@ -19,7 +19,7 @@
  @class Coral.ColumnView.Item.Thumbnail
  @classdesc ColumnView's Item thumbnail component
  @htmltag coral-columnview-item-thumbnail
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class ColumnViewItemThumbnail extends HTMLElement {}
 

@@ -328,10 +328,11 @@ const getAttributePropertyMap = function(constructor) {
 };
 
 /**
- @mixin Component
+ @mixin ComponentMixin
  @classdesc The base element for all Coral components
  */
-const Component = (superClass) => class extends superClass {
+const ComponentMixin = (superClass) => class extends superClass {
+  /** @ignore */
   constructor() {
     super();
   
@@ -475,7 +476,7 @@ const Component = (superClass) => class extends superClass {
    The function that will be called when the event is triggered.
    @param {Boolean} [useCapture=false]
    Whether or not to listen during the capturing or bubbling phase.
-   @returns {Coral.Component} this, chainable.
+   @returns {ComponentMixin} this, chainable.
    */
   on(eventName, selector, func, useCapture) {
     this._vent.on(eventName, selector, func, useCapture);
@@ -494,7 +495,7 @@ const Component = (superClass) => class extends superClass {
    The function that was passed to <code>on()</code>.
    @param {Boolean} [useCapture]
    Only remove listeners with <code>useCapture</code> set to the value passed in.
-   @returns {Coral.Component} this, chainable.
+   @returns {ComponentMixin} this, chainable.
    */
   off(eventName, selector, func, useCapture) {
     this._vent.off(eventName, selector, func, useCapture);
@@ -572,7 +573,7 @@ const Component = (superClass) => class extends superClass {
    
    Set multiple properties.
    
-   @name Coral.Component#set
+   @name ComponentMixin#set
    @function
    
    @param {Object.<String, *>} properties
@@ -580,7 +581,7 @@ const Component = (superClass) => class extends superClass {
    @param {Boolean} silent
    If true, events should not be triggered as a result of this set.
    
-   @returns {Coral.Component} this, chainable.
+   @returns {ComponentMixin} this, chainable.
    */
   set(propertyOrProperties, valueOrSilent, silent) {
     const self = this;
@@ -649,7 +650,7 @@ const Component = (superClass) => class extends superClass {
   
   /**
    Show this component.
-   @returns {Coral.Component} this, chainable
+   @returns {ComponentMixin} this, chainable
    */
   show() {
     if (!this.hidden) {
@@ -662,7 +663,7 @@ const Component = (superClass) => class extends superClass {
   
   /**
    Hide this component.
-   @returns {Coral.Component} this, chainable
+   @returns {ComponentMixin} this, chainable
    */
   hide() {
     if (this.hidden) {
@@ -673,6 +674,7 @@ const Component = (superClass) => class extends superClass {
     return this;
   }
   
+  /** @ignore */
   // eslint-disable-next-line no-unused-vars
   attributeChangedCallback(name, oldValue, value) {
     if (!this._reflectedAttribute) {
@@ -681,6 +683,7 @@ const Component = (superClass) => class extends superClass {
     }
   }
   
+  /** @ignore */
   connectedCallback() {
     // A component that is reattached should respond to global events again
     if (this._disconnected) {
@@ -689,6 +692,7 @@ const Component = (superClass) => class extends superClass {
     }
   }
   
+  /** @ignore */
   disconnectedCallback() {
     // A component that isn't in the DOM should not be responding to global events
     this._disconnected = true;
@@ -696,4 +700,4 @@ const Component = (superClass) => class extends superClass {
   }
 };
 
-export default Component;
+export default ComponentMixin;

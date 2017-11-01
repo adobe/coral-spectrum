@@ -37,39 +37,45 @@ const ICON_CLASSES = {
 };
 
 /**
- Boolean enumeration for popover closable state.
+ Enumeration for {@link Popover} closable state.
  
- @memberof Coral.Popover
- @enum {String}
+ @typedef {Object} PopoverClosableEnum
+ 
+ @property {String} ON
+ Show a close button on the popover and close the popover when clicked.
+ @property {String} OFF
+ Do not show a close button. Elements with the <code>coral-close</code> attributes will still close the
+ popover.
  */
 const closable = {
-  /** Show a close button on the popover and close the popover when clicked. */
   ON: 'on',
-  /**
-   Do not show a close button. Elements with the <code>coral-close</code> attributes will still close the
-   popover.
-   */
   OFF: 'off'
 };
 
 /**
- Popover variants.
+ Enumeration for {@link Popover} variants.
  
- @memberof Coral.Popover
- @enum {String}
+ @typedef {Object} PopoverVariantEnum
+ 
+ @property {String} DEFAULT
+ A popover with the default, gray header and no icon.
+ @property {String} ERROR
+ A popover with a red header and warning icon, indicating that an error has occurred.
+ @property {String} WARNING
+ A popover with an orange header and warning icon, notifying the user of something important.
+ @property {String} SUCCESS
+ A popover with a green header and checkmark icon, indicates to the user that an operation was successful.
+ @property {String} HELP
+ A popover with a blue header and question mark icon, provides the user with help.
+ @property {String} INFO
+ A popover with a blue header and info icon, informs the user of non-critical information.
  */
 const variant = {
-  /** A popover with the default, gray header and no icon. */
   DEFAULT: 'default',
-  /** A popover with a red header and warning icon, indicating that an error has occurred. */
   ERROR: 'error',
-  /** A popover with an orange header and warning icon, notifying the user of something important. */
   WARNING: 'warning',
-  /** A popover with a green header and checkmark icon, indicates to the user that an operation was successful. */
   SUCCESS: 'success',
-  /** A popover with a blue header and question mark icon, provides the user with help. */
   HELP: 'help',
-  /** A popover with a blue header and info icon, informs the user of non-critical information. */
   INFO: 'info'
 };
 
@@ -83,11 +89,10 @@ for (const variantValue in variant) {
  @class Coral.Popover
  @classdesc A Popover component
  @htmltag coral-popover
- @extends HTMLElement
- @extends Coral.mixin.component
- @extends Coral.mixin.overlay
+ @extends {Overlay}
  */
 class Popover extends Overlay {
+  /** @ignore */
   constructor() {
     super();
     
@@ -125,7 +130,6 @@ class Popover extends Overlay {
    @contentzone
    @name content
    @type {HTMLElement}
-   @memberof Coral.Popover#
    */
   get content() {
     return this._getContentZone(this._elements.content);
@@ -146,7 +150,6 @@ class Popover extends Overlay {
    @contentzone
    @name header
    @type {HTMLElement}
-   @memberof Coral.Popover#
    */
   get header() {
     return this._getContentZone(this._elements.header);
@@ -169,13 +172,12 @@ class Popover extends Overlay {
   }
   
   /**
-   The popover's variant.
+   The popover's variant. See {@link PopoverVariantEnum}.
    
-   @type {Coral.Popover.variant}
-   @default Coral.Popover.variant.DEFAULT
+   @type {String}
+   @default PopoverVariantEnum.DEFAULT
    @htmlattribute variant
    @htmlattributereflected
-   @memberof Coral.Popover#
    */
   get variant() {
     return this._variant || variant.DEFAULT;
@@ -208,13 +210,12 @@ class Popover extends Overlay {
   }
   
   /**
-   Whether the popover should have a close button.
+   Whether the popover should have a close button. See {@link PopoverClosableEnum}.
    
-   @type {Coral.Popover.closable}
-   @default Coral.Popover.closable.OFF
+   @type {String}
+   @default PopoverClosableEnum.OFF
    @htmlattribute closable
    @htmlattributereflected
-   @memberof Coral.Popover#
    */
   get closable() {
     return this._closable || closable.OFF;
@@ -233,7 +234,6 @@ class Popover extends Overlay {
    @type {String}
    @default ""
    @htmlattribute icon
-   @memberof Coral.Popover#
    */
   get icon() {
     return this._elements.icon;
@@ -242,7 +242,9 @@ class Popover extends Overlay {
     this._elements.icon = value;
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link Overlay#open}.
+   */
   get open() {
     return super.open;
   }
@@ -355,8 +357,15 @@ class Popover extends Overlay {
     }
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.content; }
   set defaultContentZone(value) { this.content = value; }
+  
   get _contentZones() {
     return {
       'coral-popover-header': 'header',
@@ -364,10 +373,21 @@ class Popover extends Overlay {
     };
   }
   
-  // Expose enumerations
+  /**
+   Returns {@link Popover} variants.
+   
+   @return {PopoverVariantEnum}
+   */
   static get variant() { return variant; }
+  
+  /**
+   Returns {@link Popover} close options.
+   
+   @return {PopoverClosableEnum}
+   */
   static get closable() { return closable; }
   
+  /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'closable',
@@ -376,6 +396,7 @@ class Popover extends Overlay {
     ]);
   }
   
+  /** @ignore */
   connectedCallback() {
     this.classList.add(CLASSNAME);
     

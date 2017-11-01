@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import 'coralui-component-icon';
 import icon from '../templates/icon';
 import {transform, validate} from 'coralui-util';
@@ -30,34 +30,41 @@ const iconMap = {
 };
 
 /**
- Enumeration representing alert variants.
+ Enumeration for {@link Alert} variants.
  
- @memberof Coral.Alert
- @enum {String}
+ @typedef {Object} AlertVariantEnum
+ 
+ @property {String} ERROR
+ An alert with a red header and warning icon, indicating that an error has occurred.
+ @property {String} WARNING
+ An alert with an orange header and warning icon, notifying the user of something important.
+ @property {String} SUCCESS
+ An alert with a blue header and question mark icon, provides the user with help.
+ @property {String} HELP
+ An alert with a blue header and info icon, informs the user of non-critical information.
+ @property {String} INFO
+ An alert with a blue header and info icon, informs the user of non-critical information.
  */
 const variant = {
-  /** An alert with a red header and warning icon, indicating that an error has occurred. */
   ERROR: 'error',
-  /** An alert with an orange header and warning icon, notifying the user of something important. */
   WARNING: 'warning',
-  /** An alert with a green header and checkmark icon, indicates to the user that an operation was successful. */
   SUCCESS: 'success',
-  /** An alert with a blue header and question mark icon, provides the user with help. */
   HELP: 'help',
-  /** An alert with a blue header and info icon, informs the user of non-critical information. */
   INFO: 'info'
 };
 
 /**
- Enumeration representing alert sizes.
+ Enumeration for {@link Alert} sizes.
  
- @memberof Coral.Alert
- @enum {String}
+ @typedef {Object} AlertSizeEnum
+ 
+ @property {String} SMALL
+ A small alert, usually employed for single line alerts without headers.
+ @property {String} LARGE
+ A large alert, usually employed for multi-line alerts with headers.
  */
 const size = {
-  /** A small alert, usually employed for single line alerts without headers. */
   SMALL: 'S',
-  /** A large alert, usually employed for multi-line alerts with headers. */
   LARGE: 'L'
 };
 
@@ -84,10 +91,11 @@ for (const sizeValue in size) {
  @class Coral.Alert
  @classdesc An Alert component
  @htmltag coral-alert
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class Alert extends Component(HTMLElement) {
+class Alert extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -107,13 +115,12 @@ class Alert extends Component(HTMLElement) {
   }
   
   /**
-   The alert variant style to use.
+   The alert variant style to use. See {@link AlertVariantEnum}.
    
-   @type {Coral.Alert.variant}
-   @default Coral.Alert.variant.INFO
+   @type {String}
+   @default AlertVariantEnum.INFO
    @htmlattribute variant
    @htmlattributereflected
-   @memberof Coral.Alert#
    */
   get variant() {
     return this._variant || variant.INFO;
@@ -138,13 +145,12 @@ class Alert extends Component(HTMLElement) {
   }
   
   /**
-   The size of the alert. It accepts both lower and upper case sizes.
+   The size of the alert. It accepts both lower and upper case sizes. See {@link AlertVariantEnum}.
    
-   @type {Coral.Alert.size}
-   @default Coral.Alert.size.SMALL
+   @type {String}
+   @default AlertSizeEnum.SMALL
    @htmlattribute size
    @htmlattributereflected
-   @memberof Coral.Alert#
    */
   get size() {
     return this._size || size.SMALL;
@@ -164,7 +170,6 @@ class Alert extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Alert#
    */
   get header() {
     return this._getContentZone(this._elements.header);
@@ -185,7 +190,6 @@ class Alert extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Alert#
    */
   get content() {
     return this._getContentZone(this._elements.content);
@@ -206,7 +210,6 @@ class Alert extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Alert#
    */
   get footer() {
     return this._getContentZone(this._elements.footer);
@@ -235,8 +238,15 @@ class Alert extends Component(HTMLElement) {
     }
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.content; }
   set defaultContentZone(value) { this.content = value; }
+  
   get _contentZones() {
     return {
       'coral-alert-header': 'header',
@@ -245,12 +255,24 @@ class Alert extends Component(HTMLElement) {
     };
   }
   
-  // Expose enumerations
+  /**
+   Returns {@link Alert} variants.
+   
+   @return {AlertVariantEnum}
+   */
   static get variant() { return variant; }
+  
+  /**
+   Returns {@link Alert} sizes.
+   
+   @return {AlertSizeEnum}
+   */
   static get size() { return size; }
   
+  /** @ignore */
   static get observedAttributes() { return ['variant', 'size']; }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

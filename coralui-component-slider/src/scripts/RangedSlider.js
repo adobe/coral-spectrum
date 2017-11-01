@@ -25,7 +25,7 @@ const CLASSNAME = 'coral3-Slider';
  @class Coral.RangedSlider
  @classdesc The Ranged Slider
  @htmltag coral-rangedslider
- @extends Coral.Slider
+ @extends {Slider}
  */
 class RangedSlider extends Slider {
   /**
@@ -35,7 +35,6 @@ class RangedSlider extends Slider {
    @default true
    @htmlattribute filled
    @htmlattributereflected
-   @memberof Coral.RangedSlider#
    */
   get filled() {
     return true;
@@ -47,7 +46,12 @@ class RangedSlider extends Slider {
     super.filled = true;
   }
   
-  // JSDoc inherited
+  /**
+   This field's current value.
+   @type {String}
+   @default ""
+   @htmlattribute value
+   */
   get value() {
     return this.startValue;
   }
@@ -60,8 +64,7 @@ class RangedSlider extends Slider {
    
    @type {String}
    @default '1'
-   @fires Coral.mixin.formField#change
-   @memberof Coral.RangedSlider#
+   @emits {change}
    @htmlattribute startValue
    */
   get startValue() {
@@ -86,8 +89,7 @@ class RangedSlider extends Slider {
    
    @type {String}
    @default '100'
-   @fires Coral.mixin.formField#change
-   @memberof Coral.RangedSlider#
+   @emits {change}
    @htmlattribute endValue
    */
   get endValue() {
@@ -112,8 +114,7 @@ class RangedSlider extends Slider {
    
    @type {Array.<String>}
    @default [{@link Coral.RangedSlider#startValue},{@link Coral.RangedSlider#endValue}]
-   @fires Coral.mixin.formField#change
-   @memberof Coral.RangedSlider#
+   @emits {change}
    */
   get values() {
     return this._values;
@@ -202,6 +203,7 @@ class RangedSlider extends Slider {
     this.endValue = transform.string(initialEndValue);
   }
   
+  /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'startvalue',
@@ -211,6 +213,7 @@ class RangedSlider extends Slider {
     ]);
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

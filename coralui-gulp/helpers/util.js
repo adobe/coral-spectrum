@@ -15,7 +15,11 @@
  * from Adobe Systems Incorporated.
  */
 
-const strings = {
-  generic: {}
+const path = require('path');
+const packageJSON = require(path.join(process.cwd(), 'package.json'));
+
+module.exports = {
+  isTLB: function() {
+    return packageJSON.name === '@coralui/coralui';
+  }
 };
-export default strings;

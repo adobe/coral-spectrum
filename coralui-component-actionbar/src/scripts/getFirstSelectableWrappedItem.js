@@ -1,5 +1,6 @@
 import {commons} from 'coralui-util';
 
+/** @ignore */
 export default function getFirstSelectableWrappedItem(wrapperItem) {
   // util method to get first selectable item inside a wrapper item
   if (!wrapperItem) {

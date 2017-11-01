@@ -21,9 +21,10 @@ const CLASSNAME = 'coral3-Step-label';
  @class Coral.Step.Label
  @classdesc A Step Label
  @htmltag coral-step-label
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class StepLabel extends HTMLElement {
+  /** @ignore */
   connectedCallback() {
     this.classList.add(CLASSNAME);
   }

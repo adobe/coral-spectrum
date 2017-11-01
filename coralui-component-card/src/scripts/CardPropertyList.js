@@ -19,7 +19,7 @@
  @class Coral.Card.PropertyList
  @classdesc The Card PropertyList component
  @htmltag coral-card-propertylist
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class CardPropertyList extends HTMLElement {}
 

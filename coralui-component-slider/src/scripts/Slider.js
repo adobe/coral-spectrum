@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import FormField from 'coralui-mixin-formfield';
+import {ComponentMixin} from 'coralui-mixin-component';
+import {FormFieldMixin} from 'coralui-mixin-formfield';
 import {Collection} from 'coralui-collection';
 import {Tooltip} from 'coralui-component-tooltip';
 import base from '../templates/base';
@@ -27,15 +27,17 @@ const CLASSNAME_HANDLE = 'coral3-Slider-handle';
 const CLASSNAME_INPUT = 'coral3-Slider-input';
 
 /**
- Slider orientations.
+ Enumeration for {@link Slider} orientations.
  
- @enum {String}
- @memberof Coral.Slider
+ @typedef {Object} SliderOrientationEnum
+ 
+ @property {String} HORIZONTAL
+ Horizontal slider.
+ @property {String} VERTICAL
+ Vertical slider.
  */
 const orientation = {
-  /** Horizontal slider. */
   HORIZONTAL: 'horizontal',
-  /** Vertical slider. */
   VERTICAL: 'vertical'
 };
 
@@ -43,11 +45,12 @@ const orientation = {
  @class Coral.Slider
  @classdesc A Slider component
  @htmltag coral-slider
- @extends HTMLElement
- @extends Coral.mixin.component
- @extends Coral.mixin.formField
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
+ @extends {FormFieldMixin}
  */
-class Slider extends FormField(Component(HTMLElement)) {
+class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
+  /** @ignore */
   constructor() {
     super();
   
@@ -90,12 +93,10 @@ class Slider extends FormField(Component(HTMLElement)) {
   }
   
   /**
-   The Collection Interface that allows interacting with the items that the component contains. See
-   {@link Coral.Collection} for more details.
+   The Collection Interface that allows interacting with the items that the component contains.
    
-   @type {Coral.Collection}
+   @type {Collection}
    @readonly
-   @memberof Coral.Slider#
    */
   get items() {
     // just init on demand
@@ -115,7 +116,6 @@ class Slider extends FormField(Component(HTMLElement)) {
    @default 1
    @htmlattribute step
    @htmlattributereflected
-   @memberof Coral.Slider#
    */
   get step() {
     return this._getValueOf('step', 1);
@@ -141,7 +141,6 @@ class Slider extends FormField(Component(HTMLElement)) {
    @default 1
    @htmlattribute min
    @htmlattributereflected
-   @memberof Coral.Slider#
    */
   get min() {
     return this._getValueOf('min', 1);
@@ -164,7 +163,6 @@ class Slider extends FormField(Component(HTMLElement)) {
    @default 100
    @htmlattribute max
    @htmlattributereflected
-   @memberof Coral.Slider#
    */
   get max() {
     return this._getValueOf('max', 100);
@@ -187,7 +185,6 @@ class Slider extends FormField(Component(HTMLElement)) {
    @default false
    @htmlattribute tooltips
    @htmlattributereflected
-   @memberof Coral.Slider#
    */
   get tooltips() {
     return this._tooltips || false;
@@ -198,13 +195,12 @@ class Slider extends FormField(Component(HTMLElement)) {
   }
   
   /**
-   Orientation of the slider, which can be VERTICAL or HORIZONTAL.
+   Orientation of the slider, which can be VERTICAL or HORIZONTAL. See {@link SliderOrientationEnum}.
    
-   @type {Coral.Slider.orientation}
-   @default Coral.Slider.orientation.HORIZONTAL
+   @type {String}
+   @default SliderOrientationEnum.HORIZONTAL
    @htmlattribute orientation
    @htmlattributereflected
-   @memberof Coral.Slider#
    */
   get orientation() {
     return this._orientation || orientation.HORIZONTAL;
@@ -234,7 +230,6 @@ class Slider extends FormField(Component(HTMLElement)) {
    @default false
    @htmlattribute filled
    @htmlattributereflected
-   @memberof Coral.Slider#
    */
   get filled() {
     return this._filled || false;
@@ -254,7 +249,6 @@ class Slider extends FormField(Component(HTMLElement)) {
    
    @type {Number}
    @default NaN
-   @memberof Coral.Slider#
    */
   get valueAsNumber() {
     return parseFloat(this.value);
@@ -263,7 +257,13 @@ class Slider extends FormField(Component(HTMLElement)) {
     this.value = transform.float(value);
   }
   
-  // JSDoc inherited
+  /**
+   Name used to submit the data in a form.
+   @type {String}
+   @default ""
+   @htmlattribute name
+   @htmlattributereflected
+   */
   get name() {
     return this._elements.inputs[0].name;
   }
@@ -275,7 +275,12 @@ class Slider extends FormField(Component(HTMLElement)) {
     }, this);
   }
   
-  // JSDoc inherited
+  /**
+   This field's current value.
+   @type {String}
+   @default ""
+   @htmlattribute value
+   */
   get value() {
     return this._elements.inputs[0].value;
   }
@@ -303,7 +308,13 @@ class Slider extends FormField(Component(HTMLElement)) {
     this._updateFill();
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is disabled or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute disabled
+   @htmlattributereflected
+   */
   get disabled() {
     return this._disabled || false;
   }
@@ -317,7 +328,13 @@ class Slider extends FormField(Component(HTMLElement)) {
     }, this);
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is required or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute required
+   @htmlattributereflected
+   */
   get required() {
     return this._required || false;
   }
@@ -331,7 +348,13 @@ class Slider extends FormField(Component(HTMLElement)) {
     }, this);
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
+   @type {Boolean}
+   @default false
+   @htmlattribute readonly
+   @htmlattributereflected
+   */
   get readOnly() {
     return this._readOnly || false;
   }
@@ -345,7 +368,9 @@ class Slider extends FormField(Component(HTMLElement)) {
     }, this);
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link FormFieldMixin#labelledBy}.
+   */
   get labelledBy() {
     return this._elements.handles.length === 1 ? this._elements.inputs[0].getAttribute('aria-labelledby') : this.getAttribute('aria-labelledby');
   }
@@ -896,9 +921,14 @@ class Slider extends FormField(Component(HTMLElement)) {
     return base;
   }
   
-  // Expose enumerations
+  /**
+   Returns {@link Slider} orientation options.
+   
+   @return {SliderOrientationEnum}
+   */
   static get orientation() { return orientation; }
   
+  /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'step',
@@ -910,6 +940,7 @@ class Slider extends FormField(Component(HTMLElement)) {
     ]);
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

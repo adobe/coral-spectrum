@@ -1,15 +1,18 @@
 /**
- Enumeration representing the ColumnView selection modes.
+ Enumeration for {@link ColumnView} selection options.
  
- @memberof Coral.ColumnView
- @enum {String}
+ @typedef {Object} ColumnViewSelectionModeEnum
+ 
+ @property {String} NONE
+ None is default, selection of items does not happen based on click.
+ @property {String} SINGLE
+ Single selection mode, only one item per column can be selected.
+ @property {String} MULTIPLE
+ Multiple selection mode, multiple items per column can be selected.
  */
 const selectionMode = {
-  /** None is default, selection of items does not happen based on click */
   NONE: 'none',
-  /** Single selection mode, only one item per column can be selected. */
   SINGLE: 'single',
-  /** Multiple selection mode, multiple items per column can be selected. */
   MULTIPLE: 'multiple'
 };
 

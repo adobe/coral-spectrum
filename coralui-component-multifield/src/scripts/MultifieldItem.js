@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import 'coralui-component-button';
 import item from '../templates/item';
 import {DragAction} from 'coralui-dragaction';
@@ -26,10 +26,11 @@ const CLASSNAME = 'coral3-Multifield-item';
  @class Coral.Multifield.Item
  @classdesc A Multifield item component
  @htmltag coral-multifield-item
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class MultifieldItem extends Component(HTMLElement) {
+class MultifieldItem extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -46,7 +47,6 @@ class MultifieldItem extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Multifield.Item#
    */
   get content() {
     return this._getContentZone(this._elements.content);
@@ -62,10 +62,18 @@ class MultifieldItem extends Component(HTMLElement) {
     });
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.content; }
   set defaultContentZone(value) { this.content = value; }
+  
   get _contentZones() { return {'coral-multifield-item-content': 'content'}; }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

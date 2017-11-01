@@ -21,9 +21,10 @@ const CLASSNAME = 'coral3-Alert-content';
  @class Coral.Alert.Content
  @classdesc The Alert default content
  @htmltag coral-alert-content
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class AlertContent extends HTMLElement {
+  /** @ignore */
   connectedCallback() {
     this.classList.add(CLASSNAME);
   }

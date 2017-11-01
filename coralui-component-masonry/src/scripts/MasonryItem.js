@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {DragAction} from 'coralui-dragaction';
 import {transform, commons} from 'coralui-util';
 
@@ -25,10 +25,11 @@ const CLASSNAME = 'coral3-Masonry-item';
  @class Coral.Masonry.Item
  @classdesc A Masonry Item component
  @htmltag coral-masonry-item
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class MasonryItem extends Component(HTMLElement) {
+class MasonryItem extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
   
@@ -44,7 +45,6 @@ class MasonryItem extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Masonry.Item#
    */
   get content() {
     return this;
@@ -65,7 +65,6 @@ class MasonryItem extends Component(HTMLElement) {
    @default false
    @htmlattribute selected
    @htmlattributereflected
-   @memberof Coral.Masonry.Item#
    */
   get selected() {
     return this._selected || false;
@@ -128,9 +127,11 @@ class MasonryItem extends Component(HTMLElement) {
       this._dragAction = null;
     }
   }
-
+  
+  /** @ignore */
   static get observedAttributes() { return ['selected', '_removing', '_orderable']; }
   
+  /** @ignore */
   attributeChangedCallback(name, oldValue, value) {
     if (name === '_removing') {
       const self = this;
@@ -147,6 +148,7 @@ class MasonryItem extends Component(HTMLElement) {
     }
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -159,6 +161,7 @@ class MasonryItem extends Component(HTMLElement) {
     this.trigger('coral-masonry-item:_connected');
   }
   
+  /** @ignore */
   disconnectedCallback() {
     super.disconnectedCallback();
   

@@ -19,7 +19,7 @@
  @class Coral.Shell.User.Heading
  @classdesc Shell's User heading component
  @htmltag coral-shell-user-heading
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class ShellUserHeading extends HTMLElement {}
 

@@ -19,7 +19,7 @@
  @class Coral.Shell.HomeAnchor.Label
  @classdesc Shell HomeAnchor's label component
  @htmltag coral-shell-homeanchor-label
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class ShellHomeAnchorLabel extends HTMLElement {}
 

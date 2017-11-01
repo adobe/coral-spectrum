@@ -38,13 +38,15 @@ describe('Coral.DragAction', function() {
       
       var dragElementEvents = dragAction._dragEvents;
       var dragElementEventCount = dragElementEvents._allListeners.length;
-      var windowEventCount = Coral.events._allListeners.length;
+      // @todo don't use private _vent instance
+      var windowEventCount = Coral.events._vent._allListeners.length;
       
       dragAction.destroy();
       // mousestart, touchstart
       expect(dragElementEvents._allListeners.length).to.equal(dragElementEventCount - 2);
       // touchmove, mousemove, touchend, mouseend
-      expect(Coral.events._allListeners.length).to.equal(windowEventCount - 4);
+      // @todo don't use private _vent instance
+      expect(Coral.events._vent._allListeners.length).to.equal(windowEventCount - 4);
     });
     
     it('should destroy the Coral.DragAction instance and restore the dragElement position', function() {

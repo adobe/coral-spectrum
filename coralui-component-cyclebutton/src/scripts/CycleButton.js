@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import 'coralui-component-overlay';
 import 'coralui-component-button';
 import CycleButtonItem from './CycleButtonItem';
@@ -27,17 +27,20 @@ import base from '../templates/base';
 import {transform, validate} from 'coralui-util';
 
 /**
- Enum for CycleButton displayMode values.
+ Enumeration for {@link CycleButton} display options.
  
- @enum {String}
- @memberof Coral.CycleButton
+ @typedef {Object} CycleButtonDisplayModeEnum
+ 
+ @property {String} ICON
+ Icon display mode.
+ @property {String} TEXT
+ Text display mode.
+ @property {String} ICON_TEXT
+ Icon and text display mode.
  */
 const displayMode = {
-  /** Icon display mode **/
   ICON: 'icon',
-  /** Text display mode **/
   TEXT: 'text',
-  /** Icon and text display mode **/
   ICON_TEXT: 'icontext'
 };
 
@@ -60,10 +63,11 @@ const CLASSNAME = 'coral3-CycleButton';
  @class Coral.CycleButton
  @classdesc A CycleButton component
  @htmltag coral-cyclebutton
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class CycleButton extends Component(HTMLElement) {
+class CycleButton extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -103,11 +107,9 @@ class CycleButton extends Component(HTMLElement) {
   
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   See {@link Coral.Collection} for more details.
    
-   @type {Coral.Collection}
+   @type {SelectableCollection}
    @readonly
-   @memberof Coral.CycleButton#
    */
   get items() {
     // just init on demand
@@ -127,7 +129,6 @@ class CycleButton extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @readonly
-   @memberof Coral.CycleButton#
    */
   get selectedItem() {
     return this.items._getLastSelected();
@@ -141,7 +142,6 @@ class CycleButton extends Component(HTMLElement) {
    @default ""
    @htmlattribute icon
    @htmlattributereflected
-   @memberof Coral.CycleButton#
    */
   get icon() {
     return this._icon || '';
@@ -164,7 +164,6 @@ class CycleButton extends Component(HTMLElement) {
    @default 3
    @htmlattribute threshold
    @htmlattributereflected
-   @memberof Coral.CycleButton#
    */
   get threshold() {
     return typeof this._threshold === 'number' ? this._threshold : 3;
@@ -178,12 +177,10 @@ class CycleButton extends Component(HTMLElement) {
   }
   
   /**
-   The Collection Interface that allows interaction with the {@link Coral.CycleButton.Action} elements.
-   See {@link Coral.Collection} for more details regarding Collection APIs.
+   The Collection Interface that allows interaction with the {@link CycleButtonAction} elements.
    
-   @type {Coral.Collection}
+   @type {SelectableCollection}
    @readonly
-   @memberof Coral.CycleButton#
    */
   get actions() {
     if (!this._actions) {
@@ -201,12 +198,12 @@ class CycleButton extends Component(HTMLElement) {
    have the necessary icon or text information then fallback to show whichever is available. The appearance of
    collapsed items in the popover are not affected by this property. The displayMode property can be set on an
    item to override the component level value when that item is selected.
+   See {@link CycleButtonDisplayModeEnum}.
    
-   @type {Coral.CycleButton.displayMode}
-   @default Coral.CycleButton.displayMode.ICON
+   @type {String}
+   @default CycleButtonDisplayModeEnum.ICON
    @htmlattribute displaymode
    @htmlattributereflected
-   @memberof Coral.CycleButton#
    */
   get displayMode() {
     return this._displayMode || displayMode.ICON;
@@ -624,13 +621,19 @@ class CycleButton extends Component(HTMLElement) {
     });
   }
   
-  // Expose enums
+  /**
+   Returns {@link CycleButton} display options.
+   
+   @return {CycleButtonDisplayModeEnum}
+   */
   static get displayMode() { return displayMode; }
   
+  /** @ignore */
   static get observedAttributes() {
     return ['icon', 'threshold', 'displaymode', 'displayMode'];
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -670,15 +673,13 @@ class CycleButton extends Component(HTMLElement) {
   }
   
   /**
-   Triggered when the selected item has changed.
+   Triggered when the {@link CycleButton} selected item has changed.
    
-   @event Coral.CycleButton#coral-cyclebutton:change
+   @typedef {CustomEvent} coral-cyclebutton:change
    
-   @param {Object} event Event object
-   @param {Object} event.detail
-   @param {HTMLElement} event.detail.oldSelection
+   @property {CycleButtonItem} detail.oldSelection
    The prior selected item(s).
-   @param {HTMLElement} event.detail.selection
+   @property {CycleButtonItem} detail.selection
    The newly selected item(s).
    */
 }

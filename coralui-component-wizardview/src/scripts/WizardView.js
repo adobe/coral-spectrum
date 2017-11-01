@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {Collection} from 'coralui-collection';
 import 'coralui-component-steplist';
 import 'coralui-component-panelstack';
@@ -27,10 +27,11 @@ const CLASSNAME = 'coral3-WizardView';
  @class Coral.WizardView
  @classdesc A WizardView component
  @htmltag coral-wizardview
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class WizardView extends Component(HTMLElement) {
+class WizardView extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
   
@@ -46,14 +47,10 @@ class WizardView extends Component(HTMLElement) {
   }
   
   /**
-   The set of controlled PanelStacks. Each PanelStack must have the
-   <code>coral-wizardview-panelstack</code> attribute.
+   The set of controlled PanelStacks. Each PanelStack must have the <code>coral-wizardview-panelstack</code> attribute.
    
-   See {@link Coral.Collection} for more details regarding collection APIs.
-   
-   @type {Coral.Collection}
+   @type {Collection}
    @readonly
-   @memberof Coral.WizardView#
    */
   get panelStacks() {
     // Construct the collection on first request:
@@ -73,11 +70,8 @@ class WizardView extends Component(HTMLElement) {
   /**
    The set of controlling StepLists. Each StepList must have the <code>coral-wizardview-steplist</code> attribute.
    
-   See {@link Coral.Collection} for more details regarding collection APIs.
-   
-   @type {Coral.Collection}
+   @type {Collection}
    @readonly
-   @memberof Coral.WizardView#
    */
   get stepLists() {
     // Construct the collection on first request:
@@ -295,7 +289,7 @@ class WizardView extends Component(HTMLElement) {
   /**
    Shows the next step. If the WizardView is already in the last step nothing will happen.
    
-   @fires Coral.WizardView#coral-wizardview:change
+   @emits {coral-wizardview:change}
    */
   next() {
     const stepList = this.stepLists.first();
@@ -313,7 +307,7 @@ class WizardView extends Component(HTMLElement) {
   /**
    Shows the previous step. If the WizardView is already in the first step nothing will happen.
    
-   @fires Coral.WizardView#coral-wizardview:change
+   @emits {coral-wizardview:change}
    */
   previous() {
     const stepList = this.stepLists.first();
@@ -328,6 +322,7 @@ class WizardView extends Component(HTMLElement) {
     this._selectStep(stepList.items.getAll().indexOf(stepList.selectedItem));
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -338,15 +333,13 @@ class WizardView extends Component(HTMLElement) {
   }
   
   /**
-   Triggered when the selected step list item has changed.
+   Triggered when the {@link WizardView} selected step list item has changed.
+ 
+   @typedef {CustomEvent} coral-wizardview:change
    
-   @event Coral.WizardView#coral-wizardview:change
-   
-   @param {Object} event
-   Event object.
-   @param {HTMLElement} event.detail.selection
+   @property {Step} event.detail.selection
    The new selected step list item.
-   @param {HTMLElement} event.detail.oldSelection
+   @property {Step} event.detail.oldSelection
    The prior selected step list item.
    */
 }

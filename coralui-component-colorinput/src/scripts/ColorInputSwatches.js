@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import ColorInputAbstractSubview from './ColorInputAbstractSubview';
+import {ComponentMixin} from 'coralui-mixin-component';
+import ColorInputAbstractSubviewMixin from './ColorInputAbstractSubviewMixin';
 import ColorInputSwatch from './ColorInputSwatch';
 import Color from './Color';
 import {SelectableCollection} from 'coralui-collection';
@@ -29,11 +29,12 @@ const CLASSNAME = 'coral3-ColorInput-swatches';
  @class Coral.ColorInput.Swatches
  @classdesc A ColorInput Swatches component
  @htmltag coral-colorinput-swatches
- @extends HTMLElement
- @extends Coral.mixin.component
- @extends Coral.mixin.colorInputAbstractSubview
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
+ @extends {ColorInputAbstractSubviewMixin}
  */
-class ColorInputSwatches extends ColorInputAbstractSubview(Component(HTMLElement)) {
+class ColorInputSwatches extends ColorInputAbstractSubviewMixin(ComponentMixin(HTMLElement)) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -60,11 +61,9 @@ class ColorInputSwatches extends ColorInputAbstractSubview(Component(HTMLElement
   
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   See {@link Coral.Collection} for more details.
    
-   @type {Coral.Collection}
+   @type {SelectableCollection}
    @readonly
-   @memberof Coral.ColorInput.Swatches#
    */
   get items() {
     // just init on demand
@@ -83,7 +82,6 @@ class ColorInputSwatches extends ColorInputAbstractSubview(Component(HTMLElement
    
    @type {HTMLElement}
    @readonly
-   @memberof Coral.ColorInput.Swatches#
    */
   get selectedItem() {
     return this.items._getLastSelected();
@@ -315,6 +313,7 @@ class ColorInputSwatches extends ColorInputAbstractSubview(Component(HTMLElement
     event.matchedTarget.tabIndex = 0;
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import FormField from 'coralui-mixin-formfield';
+import {ComponentMixin} from 'coralui-mixin-component';
+import {FormFieldMixin} from 'coralui-mixin-formfield';
 import FileUploadItem from './FileUploadItem';
 import base from '../templates/base';
 import {transform, commons, validate} from 'coralui-util';
@@ -26,17 +26,20 @@ const CLASSNAME = 'coral3-FileUpload';
 const XHR_EVENT_NAMES = ['loadstart', 'progress', 'load', 'error', 'loadend', 'readystatechange', 'abort', 'timeout'];
 
 /**
- Enumeration representing HTTP methods that can be used to upload files.
+ Enumeration for {@link FileUpload} HTTP methods that can be used to upload files.
  
- @memberof Coral.FileUpload
- @enum {String}
+ @typedef {Object} FileUploadMethodEnum
+ 
+ @property {String} POST
+ Send a POST request. Used when creating a resource.
+ @property {String} PUT
+ Send a PUT request. Used when replacing a resource.
+ @property {String} PATCH
+ Send a PATCH request. Used when partially updating a resource.
  */
 const method = {
-  /** Send a POST request. Used when creating a resource. */
   POST: 'POST',
-  /** Send a PUT request. Used when replacing a resource. */
   PUT: 'PUT',
-  /** Send a PATCH request. Used when partially updating a resource. */
   PATCH: 'PATCH'
 };
 
@@ -44,11 +47,12 @@ const method = {
  @class Coral.FileUpload
  @classdesc A FileUpload component
  @htmltag coral-fileupload
- @extends HTMLElement
- @extends Coral.mixin.component
- @extends Coral.mixin.formField
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
+ @extends {FormFieldMixin}
  */
-class FileUpload extends FormField(Component(HTMLElement)) {
+class FileUpload extends FormFieldMixin(ComponentMixin(HTMLElement)) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -97,7 +101,13 @@ class FileUpload extends FormField(Component(HTMLElement)) {
     });
   }
   
-  // JSDoc inherited
+  /**
+   Name used to submit the data in a form.
+   @type {String}
+   @default ""
+   @htmlattribute name
+   @htmlattributereflected
+   */
   get name() {
     return this._elements.input.name;
   }
@@ -107,7 +117,12 @@ class FileUpload extends FormField(Component(HTMLElement)) {
     this._elements.input.name = value;
   }
   
-  // JSDoc inherited
+  /**
+   This field's current value.
+   @type {String}
+   @default ""
+   @htmlattribute value
+   */
   get value() {
     const item = this._uploadQueue ? this._getQueueItem(0) : null;
   
@@ -125,7 +140,13 @@ class FileUpload extends FormField(Component(HTMLElement)) {
     }
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is disabled or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute disabled
+   @htmlattributereflected
+   */
   get disabled() {
     return this._elements.input.disabled;
   }
@@ -137,7 +158,9 @@ class FileUpload extends FormField(Component(HTMLElement)) {
     this._setElementState();
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link FormFieldMixin#invalid}.
+   */
   get invalid() {
     return super.invalid;
   }
@@ -148,7 +171,13 @@ class FileUpload extends FormField(Component(HTMLElement)) {
     this._setElementState();
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is required or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute required
+   @htmlattributereflected
+   */
   get required() {
     return this._elements.input.required;
   }
@@ -161,7 +190,13 @@ class FileUpload extends FormField(Component(HTMLElement)) {
     this._setElementState();
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
+   @type {Boolean}
+   @default false
+   @htmlattribute readonly
+   @htmlattributereflected
+   */
   get readOnly() {
     return this._readOnly || false;
   }
@@ -180,7 +215,6 @@ class FileUpload extends FormField(Component(HTMLElement)) {
    When {@link Coral.FileUpload#multiple} is <code>false</code>, this will be an array of length 1.
    
    @type {Array.<String>}
-   @memberof Coral.FileUpload#
    */
   get values() {
     let values = this._uploadQueue.map((item) => `C:\\fakepath\\${item.file.name}`);
@@ -202,7 +236,9 @@ class FileUpload extends FormField(Component(HTMLElement)) {
     }
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link FormFieldMixin#labelledBy}.
+   */
   get labelledBy() {
     return super.labelledBy;
   }
@@ -237,7 +273,6 @@ class FileUpload extends FormField(Component(HTMLElement)) {
    
    @type {Array.<Object>}
    @default []
-   @memberof Coral.FileUpload#
    */
   get parameters() {
     return this._parameters || [];
@@ -276,7 +311,6 @@ class FileUpload extends FormField(Component(HTMLElement)) {
    @default false
    @htmlattribute async
    @htmlattributereflected
-   @memberof Coral.FileUpload#
    */
   get async() {
     return this._async || false;
@@ -308,7 +342,6 @@ class FileUpload extends FormField(Component(HTMLElement)) {
    @default ""
    @htmlattribute action
    @htmlattributereflected
-   @memberof Coral.FileUpload#
    */
   get action() {
     return this._action || '';
@@ -325,14 +358,14 @@ class FileUpload extends FormField(Component(HTMLElement)) {
    The HTTP method to use when uploading files asynchronously. When used within a <code>&lt;form&gt;</code> tag to
    upload synchronously, the method of the form is used. If an element is clicked that has a
    <code>[coral-fileupload-submit]</code> attribute as well as a <code>[formmethod]</code> attribute, the method of
-   the clicked element will be used. Set this property before calling {@link Coral.FileUpload#upload} to reset the
+   the clicked element will be used. Set this property before calling {@link FileUpload#upload} to reset the
    method set by a click.
+   See {@link FileUploadMethodEnum}.
    
-   @type {Coral.FileUpload.method}
-   @default Coral.FileUpload.method.POST
+   @type {String}
+   @default FileUploadMethodEnum.POST
    @htmlattribute method
    @htmlattributereflected
-   @memberof Coral.FileUpload#
    */
   get method() {
     return this._method || method.POST;
@@ -353,7 +386,6 @@ class FileUpload extends FormField(Component(HTMLElement)) {
    @default false
    @htmlattribute multiple
    @htmlattributereflected
-   @memberof Coral.FileUpload#
    */
   get multiple() {
     return this._elements.input.multiple;
@@ -370,7 +402,6 @@ class FileUpload extends FormField(Component(HTMLElement)) {
    @htmlattribute sizelimit
    @htmlattributereflected
    @default 0
-   @memberof Coral.FileUpload#
    */
   get sizeLimit() {
     return this._sizeLimit || 0;
@@ -389,7 +420,6 @@ class FileUpload extends FormField(Component(HTMLElement)) {
    @default ""
    @htmlattribute accept
    @htmlattributereflected
-   @memberof Coral.FileUpload#
    */
   get accept() {
     return this._elements.input.accept;
@@ -406,7 +436,6 @@ class FileUpload extends FormField(Component(HTMLElement)) {
    @default false
    @htmlattribute autostart
    @htmlattributereflected
-   @memberof Coral.FileUpload#
    */
   get autoStart() {
     return this._autoStart || false;
@@ -422,7 +451,6 @@ class FileUpload extends FormField(Component(HTMLElement)) {
    @readonly
    @default []
    @type {Array.<Object>}
-   @memberof Coral.FileUpload#
    */
   get uploadQueue() {
     return this._uploadQueue;
@@ -737,8 +765,6 @@ class FileUpload extends FormField(Component(HTMLElement)) {
    
    @param filename {String}
    The name of the file to upload.
-   @param {Array.<Object>} [parameters]
-   The filename of the file to upload.
    
    @private
    */
@@ -979,6 +1005,7 @@ class FileUpload extends FormField(Component(HTMLElement)) {
     }
   }
   
+  /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'async',
@@ -993,6 +1020,7 @@ class FileUpload extends FormField(Component(HTMLElement)) {
     ]);
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

@@ -15,19 +15,21 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import user from '../templates/user';
 
 const CLASSNAME = 'coral3-Shell-user';
 
 /**
- Avatar assets should use one of those provided, when no asset is set
+ Enumeration for {@link ShellUser} avatar options. Avatar assets should use one of those provided, when no asset is set
  
- @enum {String}
- @memberof Coral.Shell.User#
+ @typedef {Object} ShellUserAvatarEnum
+ 
+ @property {String} DEFAULT
+ Default avatar, show user icon from icon font.
  */
 const avatar = {
-  /** Default avatar, show user icon from icon font. */
+  
   DEFAULT: 'user'
 };
 
@@ -35,10 +37,11 @@ const avatar = {
  @class Coral.Shell.User
  @classdesc A Shell User component
  @htmltag coral-shell-user
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class ShellUser extends Component(HTMLElement) {
+class ShellUser extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -57,14 +60,11 @@ class ShellUser extends Component(HTMLElement) {
   
   /**
    Specifies the asset used inside the avatar view.
-   See {@link Coral.Icon} for valid usage and icon names.
+   See {@link Icon} for valid usage and icon names.
    
    @type {String}
    @default user (Shows a placeholder user icon from the icon font)
-   @memberof Coral.Shell.User#
    @htmlattribute avatar
-   
-   @see {@link Coral.Icon}
    */
   get avatar() {
     return this._elements.avatar.icon;
@@ -78,7 +78,6 @@ class ShellUser extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Shell.User#
    */
   get name() {
     return this._getContentZone(this._elements.name);
@@ -98,7 +97,6 @@ class ShellUser extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Shell.User#
    */
   get heading() {
     return this._getContentZone(this._elements.heading);
@@ -118,7 +116,6 @@ class ShellUser extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Shell.User#
    */
   get subheading() {
     return this._getContentZone(this._elements.subheading);
@@ -138,7 +135,6 @@ class ShellUser extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Shell.User#
    */
   get content() {
     return this._getContentZone(this._elements.content);
@@ -158,7 +154,6 @@ class ShellUser extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Shell.User#
    */
   get footer() {
     return this._getContentZone(this._elements.content);
@@ -173,8 +168,15 @@ class ShellUser extends Component(HTMLElement) {
     });
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.content; }
   set defaultContentZone(value) { this.content = value; }
+  
   get _contentZones() {
     return {
       'coral-shell-user-name': 'name',
@@ -187,9 +189,14 @@ class ShellUser extends Component(HTMLElement) {
   
   static get observedAttributes() { return ['avatar']; }
   
-  // Expose enums
+  /**
+   Returns {@link ShellUser} avatar options.
+   
+   @return {ShellUserAvatarEnum}
+   */
   static get avatar() { return avatar; }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

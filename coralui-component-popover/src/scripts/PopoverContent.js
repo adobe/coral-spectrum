@@ -19,7 +19,7 @@
  @class Coral.Popover.Content
  @classdesc A Popover Content component
  @htmltag coral-popover-content
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class PopoverContent extends HTMLElement {}
 

@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {Collection} from 'coralui-collection';
 import solutionSwitcher from '../templates/solutionSwitcher';
 
@@ -25,10 +25,11 @@ const CLASSNAME = 'coral3-Shell-solutionSwitcher';
  @class Coral.Shell.SolutionSwitcher
  @classdesc A Shell Solution Switcher component
  @htmltag coral-shell-solutionswitcher
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class ShellSolutionSwitcher extends Component(HTMLElement) {
+class ShellSolutionSwitcher extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
   
@@ -58,11 +59,9 @@ class ShellSolutionSwitcher extends Component(HTMLElement) {
   
   /**
    The item collection.
-   See {@link Coral.Collection} for more details.
    
-   @type {Coral.Collection}
+   @type {Collection}
    @readonly
-   @memberof Coral.Shell.SolutionsSwitcher#
    */
   get items() {
     // Construct the collection on first request
@@ -76,6 +75,7 @@ class ShellSolutionSwitcher extends Component(HTMLElement) {
     return this._items;
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

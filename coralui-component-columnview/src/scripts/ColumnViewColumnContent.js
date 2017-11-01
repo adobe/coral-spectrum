@@ -19,7 +19,7 @@
  @class Coral.ColumnView.Column.Content
  @classdesc ColumnView's Column content component
  @htmltag coral-columnview-column-content
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class ColumnViewColumnContent extends HTMLElement {}
 

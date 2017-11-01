@@ -19,7 +19,7 @@
  @class Coral.Tab.Label
  @classdesc Tab's label component
  @htmltag coral-tab-label
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class TabLabel extends HTMLElement {}
 

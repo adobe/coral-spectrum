@@ -58,6 +58,7 @@ const formatDate = function(date, locale, options) {
  The initial date value. If none provided, the current day is used instead.
  */
 class DateTime {
+  // See https://momentjs.com/docs/#/parsing/now/
   constructor(value) {
     if (value instanceof this.constructor) {
       // Copy properties

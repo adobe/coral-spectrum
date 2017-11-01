@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import getFirstSelectableWrappedItem from './getFirstSelectableWrappedItem';
 import ActionBarContainer from './ActionBarContainerMixin';
 
@@ -25,10 +25,10 @@ const CLASSNAME = 'coral3-ActionBar-primary';
  @class Coral.ActionBar.Primary
  @classdesc An ActionBar primary component
  @htmltag coral-actionbar-primary
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class ActionBarPrimary extends ActionBarContainer(Component(HTMLElement)) {
+class ActionBarPrimary extends ActionBarContainer(ComponentMixin(HTMLElement)) {
   /** @ignore */
   _returnElementsFromPopover() {
     let item = null;
@@ -53,6 +53,7 @@ class ActionBarPrimary extends ActionBarContainer(Component(HTMLElement)) {
     this.appendChild(this._elements.moreButton);
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import Color from './Color';
 import {transform} from 'coralui-util';
 
@@ -23,10 +23,10 @@ import {transform} from 'coralui-util';
  @class Coral.ColorInput.Item
  @classdesc A ColorInput Item component
  @htmltag coral-colorinput-item
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class ColorInputItem extends Component(HTMLElement) {
+class ColorInputItem extends ComponentMixin(HTMLElement) {
   /**
    The value of the color. This value can be set in different formats (HEX, RGB, RGBA, HSB, HSL, HSLA and CMYK).
    Corrects a hex value, if it is represented by 3 or 6 characters with or without '#'.
@@ -44,7 +44,6 @@ class ColorInputItem extends Component(HTMLElement) {
    @default ""
    @htmlattribute value
    @htmlattributereflected
-   @memberof Coral.ColorInput.Item#
    */
   get value() {
     return this._value || '';
@@ -65,7 +64,6 @@ class ColorInputItem extends Component(HTMLElement) {
    @default false
    @htmlattribute selected
    @htmlattributereflected
-   @memberof Coral.ColorInput.Item#
    */
   get selected() {
     return this._selected || false;
@@ -82,10 +80,12 @@ class ColorInputItem extends Component(HTMLElement) {
     this.trigger('coral-colorinput-item:_selectedchanged');
   }
   
+  /** @ignore */
   static get observedAttributes() {
     return ['selected', 'value'];
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

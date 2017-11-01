@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {transform} from 'coralui-util';
 
 const CLASSNAME = 'coral-Table-cell';
@@ -25,16 +25,15 @@ const CLASSNAME = 'coral-Table-cell';
  @classdesc A Table cell component
  @htmltag coral-table-cell
  @htmlbasetag td
- @extends HTMLTableCellElement
- @extends Coral.mixin.component
+ @extends {HTMLTableCellElement}
+ @extends {ComponentMixin}
  */
-class TableCell extends Component(HTMLTableCellElement) {
+class TableCell extends ComponentMixin(HTMLTableCellElement) {
   /**
    The cell's content.
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Table.Cell#
    */
   get content() {
     return this;
@@ -55,7 +54,6 @@ class TableCell extends Component(HTMLTableCellElement) {
    @default false
    @htmlattribute selected
    @htmlattributereflected
-   @memberof Coral.Table.Cell#
    */
   get selected() {
     return this._selected || false;
@@ -79,7 +77,6 @@ class TableCell extends Component(HTMLTableCellElement) {
    @default ""
    @htmlattribute value
    @htmlattributereflected
-   @memberof Coral.Table.Cell#
    */
   get value() {
     return this.getAttribute('value') || '';
@@ -128,10 +125,12 @@ class TableCell extends Component(HTMLTableCellElement) {
     }
   }
   
+  /** @ignore */
   static get observedAttributes() {
     return ['selected', '_selectable'];
   }
   
+  /** @ignore */
   attributeChangedCallback(name, oldValue, value) {
     if (name === '_selectable') {
       this._toggleSelectable(value !== null);
@@ -140,7 +139,8 @@ class TableCell extends Component(HTMLTableCellElement) {
       super.attributeChangedCallback(name, oldValue, value);
     }
   }
-
+  
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
 
@@ -151,20 +151,18 @@ class TableCell extends Component(HTMLTableCellElement) {
   }
   
   /**
-   Triggered before {@link Coral.Table.Cell#selected} is changed.
+   Triggered before {@link TableCell#selected} is changed.
    
-   @event Coral.Table.Row#coral-table-cell:_beforeselectedchanged
+   @typedef {CustomEvent} coral-table-cell:_beforeselectedchanged
    
-   @param {Object} event Event object
    @private
    */
   
   /**
-   Triggered when {@link Coral.Table.Cell#selected} changed.
+   Triggered when {@link TableCell#selected} changed.
    
-   @event Coral.Table.Row#coral-table-cell:_selectedchanged
+   @typedef {CustomEvent} coral-table-cell:_selectedchanged
    
-   @param {Object} event Event object
    @private
    */
 }

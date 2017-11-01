@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 
 const CLASSNAME = 'coral3-Card-title';
 
@@ -23,16 +23,15 @@ const CLASSNAME = 'coral3-Card-title';
  @class Coral.Card.Title
  @classdesc A Card title component
  @htmltag coral-card-title
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class CardTitle extends Component(HTMLElement) {
+class CardTitle extends ComponentMixin(HTMLElement) {
   /**
    The title's content zone.
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Card.Title#
    */
   get content() {
     return this;
@@ -46,6 +45,7 @@ class CardTitle extends Component(HTMLElement) {
     }
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

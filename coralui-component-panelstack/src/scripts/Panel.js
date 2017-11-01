@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {transform} from 'coralui-util';
 
 const CLASSNAME = 'coral3-Panel';
@@ -24,10 +24,11 @@ const CLASSNAME = 'coral3-Panel';
  @class Coral.Panel
  @classdesc A Panel component
  @htmltag coral-panel
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class Panel extends Component(HTMLElement) {
+class Panel extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -42,7 +43,6 @@ class Panel extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Panel#
    */
   get content() {
     return this._getContentZone(this._elements.content);
@@ -66,7 +66,6 @@ class Panel extends Component(HTMLElement) {
    @default false
    @htmlattribute selected
    @htmlattributereflected
-   @memberof Coral.Panel#
    */
   get selected() {
     return this._selected || false;
@@ -82,14 +81,23 @@ class Panel extends Component(HTMLElement) {
     this.trigger('coral-panel:_selectedchanged');
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.content; }
   set defaultContentZone(value) { this.content = value; }
+  
   get _contentZones() { return {'coral-panel-content': 'content'}; }
   
+  /** @ignore */
   static get observedAttributes() {
     return ['selected'];
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

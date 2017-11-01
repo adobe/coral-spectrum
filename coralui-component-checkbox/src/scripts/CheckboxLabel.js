@@ -19,7 +19,7 @@
  @class Coral.Checkbox.Label
  @classdesc The Checkbox label
  @htmltag coral-checkbox-label
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class CheckboxLabel extends HTMLElement {}
 

@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {Collection} from 'coralui-collection';
 import 'coralui-component-search';
 import {AnchorListItem} from 'coralui-component-list';
@@ -32,10 +32,11 @@ const CLASSNAMES = ['coral3-BasicList', 'coral3-AnchorList', 'coral3-Shell-help'
  @class Coral.Shell.Help
  @classdesc A Shell Help component
  @htmltag coral-shell-help
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class Shell extends Component(HTMLElement) {
+class Shell extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -55,11 +56,9 @@ class Shell extends Component(HTMLElement) {
   
   /**
    The item collection.
-   See {@link Coral.Collection} for more details.
    
-   @type {Coral.Collection}
+   @type {Collection}
    @readonly
-   @memberof Coral.Shell.Help#
    */
   get items() {
     // Construct the collection on first request:
@@ -81,7 +80,6 @@ class Shell extends Component(HTMLElement) {
    @type {String}
    @default ""
    @htmlattribute placeholder
-   @memberof Coral.Shell.Help#
    */
   get placeholder() {
     return this._elements.search.placeholder;
@@ -149,7 +147,7 @@ class Shell extends Component(HTMLElement) {
   /**
    Show a set of search results.
    
-   @param {Array.<Coral.Shell.Help~result>} results
+   @param {Array.<ShellHelpResult>} results
    A set of search result objects.
    @param {Number} total
    The total number of results.
@@ -210,8 +208,10 @@ class Shell extends Component(HTMLElement) {
     }
   }
   
+  /** @ignore */
   static get observedAttributes() { return ['placeholder']; }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -239,7 +239,7 @@ class Shell extends Component(HTMLElement) {
   /**
    A search result object.
    
-   @typedef {Object} Coral.Shell.Help~result
+   @typedef {Object} ShellHelpResult
    
    @property {String} title
    The title of the search result.

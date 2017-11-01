@@ -19,7 +19,7 @@
  @class Coral.Card.Info
  @classdesc The Card Info
  @htmltag coral-card-info
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class CardInfo extends HTMLElement {}
 

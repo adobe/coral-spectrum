@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import FormField from 'coralui-mixin-formfield';
+import {ComponentMixin} from 'coralui-mixin-component';
+import {FormFieldMixin} from 'coralui-mixin-formfield';
 import {DateTime} from 'coralui-datetime';
 import {Button} from 'coralui-component-button';
 import 'coralui-component-clock';
@@ -28,15 +28,17 @@ import popoverContent from '../templates/popoverContent';
 import {transform, commons, validate, i18n} from 'coralui-util';
 
 /**
- Enum for Datepicker variant values.
+ Enum for {@link Datepicker} variant values.
  
- @enum {String}
- @memberof Coral.Datepicker
+ @typedef {Object} DatepickerVariantEnum
+ 
+ @property {String} DEFAULT
+ A default, gray Datepicker.
+ @property {String} QUIET
+ A Datepicker with no border or background.
  */
 const variant = {
-  /** A default, gray Datepicker. */
   DEFAULT: 'default',
-  /** A Datepicker with no border or background. */
   QUIET: 'quiet'
 };
 
@@ -64,17 +66,20 @@ function toMoment(value, format) {
 }
 
 /**
- Datepicker types.
+ Enumeration for {@link Datepicker} variants.
  
- @enum {String}
- @memberof Coral.Datepicker
+ @typedef {Object} DatepickerTypeEnum
+ 
+ @property {String} DATE
+ The selection overlay contains only a calendar.
+ @property {String} DATETIME
+ Provides both calendar and time controls in the selection overlay.
+ @property {String} TIME
+ The selection overlay provides only time controls.
  */
 const type = {
-  /** The selection overlay contains only a calendar. */
   DATE: 'date',
-  /** Provides both calendar and time controls in the selection overlay. */
   DATETIME: 'datetime',
-  /** The selection overlay provides only time controls */
   TIME: 'time'
 };
 
@@ -101,11 +106,12 @@ const isNativeFormat = (format) => {
  @class Coral.Datetime
  @classdesc A Datetime component
  @htmltag coral-datetime
- @extends HTMLElement
- @extends Coral.mixin.component
- @extends Coral.mixin.formField
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
+ @extends {FormFieldMixin}
  */
-class Datetime extends FormField(Component(HTMLElement)) {
+class Datetime extends FormFieldMixin(ComponentMixin(HTMLElement)) {
+  /** @ignore */
   constructor() {
     super();
   
@@ -131,15 +137,12 @@ class Datetime extends FormField(Component(HTMLElement)) {
   }
   
   /**
-   The type of datepicker to show to the user.
+   The type of datepicker to show to the user. See {@link DatepickerTypeEnum}.
    
-   See {@link Coral.Datepicker.type}
-   
-   @type {Coral.Datepicker.type}
-   @default Coral.Datepicker.type.DATE
+   @type {DatepickerTypeEnum}
+   @default DatepickerTypeEnum.DATE
    @htmlattribute type
    @htmlattributereflected
-   @memberof Coral.Datepicker#
    */
   get type() {
     return this._type || type.DATE;
@@ -189,7 +192,6 @@ class Datetime extends FormField(Component(HTMLElement)) {
    @default "YYYY-MM-DD"
    @htmlattribute displayformat
    @htmlattributereflected
-   @memberof Coral.Datepicker#
    */
   get displayFormat() {
     // we ignore _useNativeInput when the type is datetime because it is not supported by mobile libraries
@@ -226,7 +228,6 @@ class Datetime extends FormField(Component(HTMLElement)) {
    @default "YYYY-MM-DD"
    @htmlattribute valueformat
    @htmlattributereflected
-   @memberof Coral.Datepicker#
    */
   get valueFormat() {
     return typeof this._valueFormat === 'undefined' ? NATIVE_FORMATS[this.type] : this._valueFormat;
@@ -263,7 +264,6 @@ class Datetime extends FormField(Component(HTMLElement)) {
    
    @type {Date}
    @default null
-   @memberof Coral.Datepicker#
    */
   get valueAsDate() {
     let value = this._value;
@@ -290,7 +290,6 @@ class Datetime extends FormField(Component(HTMLElement)) {
    @type {String|Date}
    @default null
    @htmlattribute min
-   @memberof Coral.Datepicker#
    */
   get min() {
     return this._elements.calendar.min;
@@ -308,7 +307,6 @@ class Datetime extends FormField(Component(HTMLElement)) {
    @type {String|Date}
    @default null
    @htmlattribute max
-   @memberof Coral.Datepicker#
    */
   get max() {
     return this._elements.calendar.max;
@@ -327,7 +325,6 @@ class Datetime extends FormField(Component(HTMLElement)) {
    @type {String}
    @default "MMMM YYYY"
    @htmlattribute headerformat
-   @memberof Coral.Datepicker#
    */
   get headerFormat() {
     return this._elements.calendar.headerFormat;
@@ -344,7 +341,6 @@ class Datetime extends FormField(Component(HTMLElement)) {
    @type {Number}
    @default 0
    @htmlattribute startday
-   @memberof Coral.Datepicker#
    */
   get startDay() {
     return this._elements.calendar.startDay;
@@ -361,9 +357,7 @@ class Datetime extends FormField(Component(HTMLElement)) {
    
    @type {String}
    @default ""
-   @fires Coral.mixin.formField#change
    @htmlattribute value
-   @memberof Coral.Datepicker#
    */
   get value() {
     return this._getValueAsString(this._value, this.valueFormat);
@@ -387,7 +381,6 @@ class Datetime extends FormField(Component(HTMLElement)) {
    @default ""
    @htmlattribute placeholder
    @htmlattributereflected
-   @memberof Coral.Datepicker#
    */
   get placeholder() {
     return this._elements.input.placeholder;
@@ -398,13 +391,12 @@ class Datetime extends FormField(Component(HTMLElement)) {
   }
   
   /**
-   The datepicker's variant.
+   The datepicker's variant. See {@link DatepickerVariantEnum}.
    
-   @type {Coral.Datepicker.variant}
-   @default Coral.Datepicker.variant.DEFAULT
+   @type {DatepickerVariantEnum}
+   @default DatepickerVariantEnum.DEFAULT
    @htmlattribute variant
    @htmlattributereflected
-   @memberof Coral.Datepicker#
    */
   get variant() {
     return this._variant || variant.DEFAULT;
@@ -426,7 +418,13 @@ class Datetime extends FormField(Component(HTMLElement)) {
     }
   }
   
-  // JSDoc inherited
+  /**
+   Name used to submit the data in a form.
+   @type {String}
+   @default ""
+   @htmlattribute name
+   @htmlattributereflected
+   */
   get name() {
     return this._elements.hiddenInput.name;
   }
@@ -436,7 +434,13 @@ class Datetime extends FormField(Component(HTMLElement)) {
     this._elements.hiddenInput.name = value;
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is disabled or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute disabled
+   @htmlattributereflected
+   */
   get disabled() {
     return this._disabled || false;
   }
@@ -452,7 +456,9 @@ class Datetime extends FormField(Component(HTMLElement)) {
     this._elements.toggle.disabled = this._disabled || this.readOnly;
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link FormFieldMixin#invalid}.
+   */
   get invalid() {
     return super.invalid;
   }
@@ -464,7 +470,13 @@ class Datetime extends FormField(Component(HTMLElement)) {
     this._elements.input.setAttribute('aria-invalid', this.invalid);
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is required or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute required
+   @htmlattributereflected
+   */
   get required() {
     return this._required || false;
   }
@@ -477,7 +489,13 @@ class Datetime extends FormField(Component(HTMLElement)) {
     this._elements.input.required = this._required;
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
+   @type {Boolean}
+   @default false
+   @htmlattribute readonly
+   @htmlattributereflected
+   */
   get readOnly() {
     return this._readOnly || false;
   }
@@ -490,7 +508,9 @@ class Datetime extends FormField(Component(HTMLElement)) {
     this._elements.toggle.disabled = this._readOnly || this.disabled;
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link FormFieldMixin#labelledBy}.
+   */
   get labelledBy() {
     return super.labelledBy;
   }
@@ -687,10 +707,21 @@ class Datetime extends FormField(Component(HTMLElement)) {
     }
   }
   
-  // Expose enums
+  /**
+   Returns {@link Datepicker} variants.
+   
+   @return {DatepickerVariantEnum}
+   */
   static get variant() { return variant; }
+  
+  /**
+   Returns {@link Datepicker} types.
+   
+   @return {DatepickerTypeEnum}
+   */
   static get type() { return type; }
   
+  /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'min',
@@ -709,6 +740,7 @@ class Datetime extends FormField(Component(HTMLElement)) {
     ]);
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -742,6 +774,7 @@ class Datetime extends FormField(Component(HTMLElement)) {
     this._elements.popover.target = this._elements.toggle;
   }
   
+  /** @ignore */
   disconnectedCallback() {
     super.disconnectedCallback();
     

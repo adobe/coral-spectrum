@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import 'coralui-component-icon';
 import icon from '../templates/icon';
 
@@ -25,10 +25,11 @@ const CLASSNAME = 'coral3-Card-property';
  @class Coral.Card.Property
  @classdesc A Card property component
  @htmltag coral-card-property
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class CardProperty extends Component(HTMLElement) {
+class CardProperty extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -44,7 +45,6 @@ class CardProperty extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Card.Property#
    */
   get content() {
     return this._getContentZone(this._elements.content);
@@ -60,14 +60,11 @@ class CardProperty extends Component(HTMLElement) {
   }
   
   /**
-   Specifies the icon name used inside the property. See {@link Coral.Icon} for valid icon names.
+   Specifies the icon name used inside the property. See {@link Icon} for valid icon names.
    
    @type {String}
    @default ""
    @htmlattribute icon
-   @memberof Coral.Card.Property#
-   
-   @see {@link Coral.Icon}
    */
   get icon() {
     return this._elements.icon.icon;
@@ -85,12 +82,21 @@ class CardProperty extends Component(HTMLElement) {
     }
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.content; }
   set defaultContentZone(value) { this.content = value; }
+  
   get _contentZones() { return {'coral-card-property-content': 'content'}; }
   
+  /** @ignore */
   static get observedAttributes() { return ['icon']; }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

@@ -100,7 +100,7 @@ describe('Coral.Overlay', function() {
     
     describe('#focusOnShow', function() {
       it('should default to ON', function() {
-        expect(overlay.focusOnShow).to.equal(Coral.mixin.overlay.focusOnShow.ON);
+        expect(overlay.focusOnShow).to.equal(Coral.mixin._overlay.focusOnShow.ON);
       });
     });
     

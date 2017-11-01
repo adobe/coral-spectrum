@@ -1,7 +1,7 @@
-import Button from './src/scripts/Button';
+import ButtonMixin from './src/scripts/ButtonMixin';
 import {mixin} from 'coralui-util';
 
 // Expose mixin on Coral namespace
-mixin.button = Button;
+mixin._button = ButtonMixin;
 
-export default Button;
+export {ButtonMixin};

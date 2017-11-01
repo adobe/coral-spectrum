@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import ColorInputAbstractSubview from './ColorInputAbstractSubview';
+import {ComponentMixin} from 'coralui-mixin-component';
+import ColorInputAbstractSubviewMixin from './ColorInputAbstractSubviewMixin';
 import Color from './Color';
 import 'coralui-component-button';
 import colorButton from '../templates/colorButton';
@@ -28,11 +28,12 @@ const CLASSNAME = 'coral3-ColorInput-swatch';
  @class Coral.ColorInput.Swatch
  @classdesc A ColorInput Swatch component
  @htmltag coral-colorinput-swatch
- @extends HTMLElement
- @extends Coral.mixin.component
- @extends Coral.mixin.colorInputAbstractSubview
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
+ @extends {ColorInputAbstractSubviewMixin}
  */
-class ColorInputSwatch extends ColorInputAbstractSubview(Component(HTMLElement)) {
+class ColorInputSwatch extends ColorInputAbstractSubviewMixin(ComponentMixin(HTMLElement)) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -50,7 +51,6 @@ class ColorInputSwatch extends ColorInputAbstractSubview(Component(HTMLElement))
    @default false
    @htmlattribute selected
    @htmlattributereflected
-   @memberof Coral.ColorInput.Swatch#
    */
   get selected() {
     return this._selected || false;
@@ -79,7 +79,6 @@ class ColorInputSwatch extends ColorInputAbstractSubview(Component(HTMLElement))
    @type {HTMLElement|String}
    @default null
    @htmlattribute targetcolor
-   @memberof Coral.ColorInput.Swatch#
    */
   get targetColor() {
     return this._targetColor || null;
@@ -122,7 +121,6 @@ class ColorInputSwatch extends ColorInputAbstractSubview(Component(HTMLElement))
    @default false
    @htmlattribute disabled
    @htmlattributereflected
-   @memberof Coral.ColorInput.Swatch#
    */
   get disabled() {
     return this._elements.colorButton.disabled;
@@ -139,7 +137,6 @@ class ColorInputSwatch extends ColorInputAbstractSubview(Component(HTMLElement))
    @default 0
    @htmlattribute tabindex
    @htmlattributereflected
-   @memberof Coral.ColorInput.Swatch#
    */
   get tabIndex() {
     return this._elements.colorButton.tabIndex;
@@ -157,10 +154,12 @@ class ColorInputSwatch extends ColorInputAbstractSubview(Component(HTMLElement))
     }
   }
   
+  /** @ignore */
   static get observedAttributes() {
     return ['selected', 'tabindex', 'tabIndex', 'disabled', 'targetColor', 'targetcolor'];
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

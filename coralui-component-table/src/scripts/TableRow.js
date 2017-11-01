@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {SelectableCollection} from 'coralui-collection';
 import {transform} from 'coralui-util';
 
@@ -26,10 +26,11 @@ const CLASSNAME = 'coral-Table-row';
  @classdesc A Table row component
  @htmltag coral-table-row
  @htmlbasetag tr
- @extends HTMLTableRowElement
- @extends Coral.mixin.component
+ @extends {HTMLTableRowElement}
+ @extends {ComponentMixin}
  */
-class TableRow extends Component(HTMLTableRowElement) {
+class TableRow extends ComponentMixin(HTMLTableRowElement) {
+  /** @ignore */
   constructor() {
     super();
   
@@ -57,7 +58,6 @@ class TableRow extends Component(HTMLTableRowElement) {
    @default false
    @htmlattribute locked
    @htmlattributereflected
-   @memberof Coral.Table.Row#
    */
   get locked() {
     return this._locked || false;
@@ -76,7 +76,6 @@ class TableRow extends Component(HTMLTableRowElement) {
    @default false
    @htmlattribute selected
    @htmlattributereflected
-   @memberof Coral.Table.Row#
    */
   get selected() {
     return this._selected || false;
@@ -100,7 +99,6 @@ class TableRow extends Component(HTMLTableRowElement) {
    @default false
    @htmlattribute selectable
    @htmlattributereflected
-   @memberof Coral.Table.Row#
    */
   get selectable() {
     return this._selectable || false;
@@ -121,7 +119,6 @@ class TableRow extends Component(HTMLTableRowElement) {
    @default false
    @htmlattribute multiple
    @htmlattributereflected
-   @memberof Coral.Table.Row#
    */
   get multiple() {
     return this._multiple || false;
@@ -138,7 +135,6 @@ class TableRow extends Component(HTMLTableRowElement) {
    
    @type {Array.<HTMLElement>}
    @readonly
-   @memberof Coral.Table.Row#
    */
   get selectedItems() {
     return this.items._getAllSelected();
@@ -150,19 +146,16 @@ class TableRow extends Component(HTMLTableRowElement) {
    
    @type {HTMLElement}
    @readonly
-   @memberof Coral.Table.Row#
    */
   get selectedItem() {
     return this.items._getFirstSelected();
   }
   
   /**
-   The Collection Interface that allows interacting with the items that the component contains. See
-   {@link Coral.Collection} for more details.
+   The Collection Interface that allows interacting with the items that the component contains.
    
-   @type {Coral.Collection}
+   @type {SelectableCollection}
    @readonly
-   @memberof Coral.Table.Row#
    */
   get items() {
     // Construct the collection on first request
@@ -273,10 +266,12 @@ class TableRow extends Component(HTMLTableRowElement) {
     }, this);
   }
   
+  /** @ignore */
   static get observedAttributes() {
     return ['locked', 'selected', 'multiple', 'selectable', '_selectable', '_orderable', '_lockable'];
   }
   
+  /** @ignore */
   attributeChangedCallback(name, oldValue, value) {
     if (name === '_selectable') {
       this._toggleSelectable(value !== null);
@@ -292,6 +287,7 @@ class TableRow extends Component(HTMLTableRowElement) {
     }
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -302,53 +298,48 @@ class TableRow extends Component(HTMLTableRowElement) {
   }
   
   /**
-   Triggered before {@link Coral.Table.Row#selected} is changed.
+   Triggered before {@link TableRow#selected} is changed.
+ 
+   @typedef {CustomEvent} coral-table-row:_beforeselectedchanged
    
-   @event Coral.Table.Row#coral-table-row:_beforeselectedchanged
-   
-   @param {Object} event Event object
    @private
    */
   
   /**
-   Triggered when {@link Coral.Table.Row#selected} changed.
+   Triggered when {@link TableRow#selected} changed.
+ 
+   @typedef {CustomEvent} coral-table-row:_selectedchanged
    
-   @event Coral.Table.Row#coral-table-row:_selectedchanged
-   
-   @param {Object} event Event object
    @private
    */
   
   /**
-   Triggered when {@link Coral.Table.Row#locked} changed.
+   Triggered when {@link TableRow#locked} changed.
+ 
+   @typedef {CustomEvent} coral-table-row:_lockedchanged
    
-   @event Coral.Table.Row#coral-table-row:_lockedchanged
-   
-   @param {Object} event Event object
    @private
    */
   
   
   /**
-   Triggered when {@link Coral.Table.Row#multiple} changed.
+   Triggered when {@link TableRow#multiple} changed.
    
-   @event Coral.Table.Row#coral-table-row:_multiplechanged
+   @typedef {CustomEvent} coral-table-row:_multiplechanged
    
-   @param {Object} event Event object
    @private
    */
   
   /**
-   Triggered when the selection changed.
+   Triggered when the {@link TableRow} selection changed.
+ 
+   @typedef {CustomEvent} coral-table-row:_change
    
-   @event Coral.Table.Row#coral-table-row:_change
+   @property {Array.<TableCell>} detail.oldSelection
+   The old item selection. When {@link TableRow#multiple}, it includes an Array.
+   @property {Array.<TableCell>} event.detail.selection
+   The item selection. When {@link TableRow#multiple}, it includes an Array.
    
-   @param {Object} event
-   Event object
-   @param {Array.<HTMLElement>} event.detail.oldSelection
-   The old item selection. When {@link Coral.Table.Row#multiple}, it includes an Array.
-   @param {Array.<HTMLElement>} event.detail.selection
-   The item selection. When {@link Coral.Table.Row#multiple}, it includes an Array.
    @private
    */
 }

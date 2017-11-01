@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {SelectableCollection} from 'coralui-collection';
 
 const CLASSNAME = 'coral3-Shell-workspaces';
@@ -24,10 +24,11 @@ const CLASSNAME = 'coral3-Shell-workspaces';
  @class Coral.Shell.Workspaces
  @classdesc A Shell Workspaces component
  @htmltag coral-shell-workspaces
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class ShellWorkspaces extends Component(HTMLElement) {
+class ShellWorkspaces extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -54,11 +55,9 @@ class ShellWorkspaces extends Component(HTMLElement) {
   
   /**
    The item collection.
-   See {@link Coral.Collection} for more details.
    
-   @type {Coral.Collection}
+   @type {SelectableCollection}
    @readonly
-   @memberof Coral.Shell.Workspaces#
    */
   get items() {
     // Construct the collection on first request:
@@ -80,7 +79,6 @@ class ShellWorkspaces extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @readonly
-   @memberof Coral.Shell.Workspaces#
    */
   get selectedItem() {
     return this.items._getLastSelected();
@@ -146,7 +144,6 @@ class ShellWorkspaces extends Component(HTMLElement) {
   
   /**
    Returns true if the event is at the matched target.
-   @todo this should be moved to Coral.Component
    
    @private
    */
@@ -213,6 +210,7 @@ class ShellWorkspaces extends Component(HTMLElement) {
     this.items.last().focus();
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

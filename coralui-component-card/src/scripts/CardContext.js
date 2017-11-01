@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 
 const CLASSNAME = 'coral3-Card-context';
 
@@ -23,16 +23,15 @@ const CLASSNAME = 'coral3-Card-context';
  @class Coral.Card.Context
  @classdesc A Card context component
  @htmltag coral-card-context
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class CardContext extends Component(HTMLElement) {
+class CardContext extends ComponentMixin(HTMLElement) {
   /**
    The context's content zone.
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Card.Context#
    */
   get content() {
     return this;
@@ -46,6 +45,7 @@ class CardContext extends Component(HTMLElement) {
     }
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

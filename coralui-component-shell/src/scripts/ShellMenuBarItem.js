@@ -15,21 +15,24 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {transform, validate} from 'coralui-util';
 import 'coralui-component-icon';
 import 'coralui-component-button';
 import menuBarItem from '../templates/menuBarItem';
 
 /**
- Enum for menubar item iconVariant.
- @enum {String}
- @memberof Coral.Shell.MenuBar.Item
+ Enumeration for {@link ShellMenuBarItem} icon variants.
+ 
+ @typedef {Object} ShellMenuBarItemIconVariantEnum
+ 
+ @property {String} DEFAULT
+ A default menubar item.
+ @property {String} CIRCLE
+ A round image as menubar item.
  */
 const iconVariant = {
-  /** A default menubar item */
   DEFAULT: 'default',
-  /** A round image as menubar item */
   CIRCLE: 'circle'
 };
 
@@ -47,10 +50,11 @@ for (const variantValue in iconVariant) {
  @class Coral.Shell.MenuBar.Item
  @classdesc A Shell MenuBar Item component
  @htmltag coral-shell-menubar-item
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class ShellMenuBarItem extends Component(HTMLElement) {
+class ShellMenuBarItem extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -70,14 +74,11 @@ class ShellMenuBarItem extends Component(HTMLElement) {
   
   /**
    Specifies the icon name used inside the menu item.
-   See {@link Coral.Icon} for valid icon names.
+   See {@link Icon} for valid icon names.
    
    @type {String}
    @default ""
    @htmlattribute icon
-   @memberof Coral.Shell.MenuBar.Item#
-   
-   @see {@link Coral.Icon}
    */
   get icon() {
     return this._elements.shellMenuButton.icon;
@@ -87,14 +88,11 @@ class ShellMenuBarItem extends Component(HTMLElement) {
   }
   
   /**
-   Size of the icon. It accepts both lower and upper case sizes.
+   Size of the icon. It accepts both lower and upper case sizes. See {@link IconSizeEnum}.
    
-   @type {Coral.Icon.size}
-   @default Coral.Icon.size.SMALL
+   @type {String}
+   @default IconSizeEnum.SMALL
    @htmlattribute iconsize
-   @memberof Coral.Shell.MenuBar.Item#
-   
-   @see {@link Coral.Icon#size}
    */
   get iconSize() {
     return this._elements.shellMenuButton.iconSize;
@@ -104,11 +102,11 @@ class ShellMenuBarItem extends Component(HTMLElement) {
   }
   
   /**
-   The menubar item's iconVariant.
-   @type {Coral.Shell.MenuBar.Item.iconVariant}
-   @default Coral.Shell.MenuBar.Item.iconVariant.DEFAULT
+   The menubar item's iconVariant. See {@link ShellMenuBarItemIconVariantEnum}.
+   
+   @type {String}
+   @default ShellMenuBarItemIconVariantEnum.DEFAULT
    @htmlattribute iconvariant
-   @memberof Coral.Shell.MenuBar.Item#
    */
   get iconVariant() {
     return this._iconVariant || iconVariant.DEFAULT;
@@ -131,7 +129,6 @@ class ShellMenuBarItem extends Component(HTMLElement) {
    @type {String}
    @default ""
    @htmlattribute badge
-   @memberof Coral.Shell.MenuBar.Item#
    */
   get badge() {
     return this._elements.shellMenuButton.getAttribute('badge') || '';
@@ -149,10 +146,9 @@ class ShellMenuBarItem extends Component(HTMLElement) {
    @default false
    @htmlattribute open
    @htmlattributereflected
-   @memberof Coral.Shell.MenuBar.Item#
    
-   @fires Coral.Shell.MenuBar.Item#coral-shell-menubar-item:open
-   @fires Coral.Shell.MenuBar.Item#coral-shell-menubar-item:close
+   @emits {coral-shell-menubar-item:open}
+   @emits {coral-shell-menubar-item:close}
    */
   get open() {
     return this._open || false;
@@ -179,7 +175,6 @@ class ShellMenuBarItem extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Shell.MenuBar.Item#
    */
   get label() {
     return this._getContentZone(this._elements.shellMenuButtonLabel);
@@ -201,7 +196,6 @@ class ShellMenuBarItem extends Component(HTMLElement) {
    @type {?HTMLElement|String}
    @default null
    @htmlattribute menu
-   @memberof Coral.Shell.MenuBar.Item#
    */
   get menu() {
     return this._menu || null;
@@ -244,13 +238,25 @@ class ShellMenuBarItem extends Component(HTMLElement) {
     return newTarget;
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.label; }
   set defaultContentZone(value) { this.label = value; }
+  
   get _contentZones() { return {'coral-button-label': 'label'}; }
   
-  // Expose enums
+  /**
+   Returns {@link ShellMenuBarItem} icon variants.
+   
+   @return {ShellMenuBarItemIconVariantEnum}
+   */
   static get iconVariant() { return iconVariant; }
   
+  /** @ignore */
   static get observedAttributes() {
     return [
       'icon',
@@ -264,6 +270,7 @@ class ShellMenuBarItem extends Component(HTMLElement) {
     ];
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -287,21 +294,15 @@ class ShellMenuBarItem extends Component(HTMLElement) {
   }
   
   /**
-   Triggerred after the overlay is opened with <code>show()</code> or <code>instance.open = true</code>
+   Triggered after the {@link ShellMenuBarItem} is opened with <code>show()</code> or <code>instance.open = true</code>
    
-   @event Coral.Shell.MenuBar.Item#coral-shell-menubar-item:open
-   
-   @param {Object} event
-   Event object.
+   @typedef {CustomEvent} coral-shell-menubar-item:open
    */
   
   /**
-   Triggerred after the component is closed with <code>hide()</code> or <code>instance.open = false</code>
+   Triggered after the {@link ShellMenuBarItem} is closed with <code>hide()</code> or <code>instance.open = false</code>
    
-   @event Coral.Shell.MenuBar.Item#coral-shell-menubar-item:close
-   
-   @param {Object} event
-   Event object.
+   @typedef {CustomEvent} coral-shell-menubar-item:close
    */
 }
 

@@ -19,7 +19,7 @@
  @class Coral.Panel.Content
  @classdesc A PanelStack Item Content component
  @htmltag coral-panel-content
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class PanelContent extends HTMLElement {}
 

@@ -26,25 +26,25 @@
     <h1 class="coral-Heading coral-Heading--1">Popover</h1>
     <h2 class="coral-Heading coral-Heading--2">Tab Capture</h2>
 
-    <button id="button-popover_capture" class="coral-Button">Open</button>
+    <button id="button-popover_capture" is="coral-button">Open</button>
 
     <coral-popover id="popover_capture" placement="bottom" target="#button-popover_capture">
       <coral-popover-content class="u-coral-padding">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.
         </p>
-        <button class="coral-Button" onclick="popover_capture.hide()">Cancel</button>
-        <button class="coral-Button coral-Button--primary" onclick="popover_capture.hide()">Ok</button>
+        <button is="coral-button" onclick="popover_capture.hide()">Cancel</button>
+        <button is="coral-button" variant="primary" onclick="popover_capture.hide()">Ok</button>
       </coral-popover-content>
     </coral-popover>
 
     <div>
       <h2 class="coral-Heading coral-Heading--2">Explicit Positioning</h2>
       <p>Specified via placement property.</p>
-      <button id="popover-top-button" style="margin-right:15px;" class="coral-Button">Top</button>
-      <button id="popover-right-button" style="margin-right:15px;" class="coral-Button">Right</button>
-      <button id="popover-bottom-button" style="margin-right:15px;" class="coral-Button">Bottom</button>
-      <button id="popover-left-button" class="coral-Button">Left</button>
+      <button id="popover-top-button" style="margin-right:15px;" is="coral-button">Top</button>
+      <button id="popover-right-button" style="margin-right:15px;" is="coral-button">Right</button>
+      <button id="popover-bottom-button" style="margin-right:15px;" is="coral-button">Bottom</button>
+      <button id="popover-left-button" is="coral-button">Left</button>
 
       <coral-popover target="#popover-left-button" placement="left">
         <coral-popover-content class="u-coral-padding">Lorem ipsum</coral-popover-content>
@@ -71,7 +71,7 @@
 
     <h2 class="coral-Heading coral-Heading--2">Content Separators</h2>
     <p>The element coral-popover-separator adds a line from side to side inside the popover.</p>
-    <button id="popover-separator-button" class="coral-Button">Separator</button>
+    <button id="popover-separator-button" is="coral-button">Separator</button>
 
     <coral-popover target="#popover-separator-button">
       <coral-popover-header>Popover Header</coral-popover-header>
@@ -102,7 +102,7 @@
     </coral-popover>
 
     <h2 class="coral-Heading coral-Heading--2">JS Class Initialization</h2>
-    <button id="popover-button-fromjs" class="coral-Button">From JS</button>
+    <button id="popover-button-fromjs" is="coral-button">From JS</button>
     <script>
     var Popover = new Coral.Popover();
     Popover.set({
@@ -126,7 +126,7 @@
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
-      <button id="button-popover_scroll" class="coral-Button">Open</button>
+      <button id="button-popover_scroll" is="coral-button">Open</button>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
@@ -154,7 +154,7 @@
     </div>
 
     <h2 class="coral-Heading coral-Heading--2">In a Dialog</h2>
-    <button onclick="defaultDialog.show();" class="coral-Button">Open</button>
+    <button onclick="defaultDialog.show();" is="coral-button">Open</button>
 
     <coral-dialog id="defaultDialog">
       <coral-dialog-header>Dialog</coral-dialog-header>
@@ -164,7 +164,7 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
 
-        <button id="button-popover_indialog" class="coral-Button">Open</button>
+        <button id="button-popover_indialog" is="coral-button">Open</button>
 
         <coral-popover id="popover_indialog" placement="bottom" target="#button-popover_indialog">
           <coral-popover-content class="u-coral-padding">
@@ -182,7 +182,7 @@
 
 
     <h2 class="coral-Heading coral-Heading--2">In a Fullscreen Dialog</h2>
-    <button onclick="fullscreenDialog.show();" class="coral-Button">Open</button>
+    <button onclick="fullscreenDialog.show();" is="coral-button">Open</button>
 
     <coral-dialog id="fullscreenDialog" fullscreen>
       <coral-dialog-header>Fullscreen Dialog</coral-dialog-header>
@@ -208,7 +208,7 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
 
-        <button id="button-popover_infullscreendialog" class="coral-Button">Open</button>
+        <button id="button-popover_infullscreendialog" is="coral-button">Open</button>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>

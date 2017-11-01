@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {transform} from 'coralui-util';
 
 const CLASSNAME = 'coral3-SelectList-item';
@@ -24,10 +24,11 @@ const CLASSNAME = 'coral3-SelectList-item';
  @class Coral.SelectList.Item
  @classdesc A SelectList item component
  @htmltag coral-selectlist-item
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class SelectListItem extends Component(HTMLElement) {
+class SelectListItem extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -45,7 +46,6 @@ class SelectListItem extends Component(HTMLElement) {
    @default ""
    @htmlattribute value
    @htmlattributereflected
-   @memberof Coral.SelectList.Item#
    */
   get value() {
     return typeof this._value === 'string' ? this._value : this.textContent.replace(/\s{2,}/g, ' ').trim();
@@ -61,7 +61,6 @@ class SelectListItem extends Component(HTMLElement) {
    @type {HTMLElement}
    @contentzone
    @readonly
-   @memberof Coral.SelectList.Item#
    */
   get content() {
     return this;
@@ -82,7 +81,6 @@ class SelectListItem extends Component(HTMLElement) {
    @default false
    @htmlattribute selected
    @htmlattributereflected
-   @memberof Coral.SelectList.Item#
    */
   get selected() {
     return this._selected || false;
@@ -104,7 +102,6 @@ class SelectListItem extends Component(HTMLElement) {
    @default false
    @htmlattribute disabled
    @htmlattributereflected
-   @memberof Coral.SelectList.Item#
    */
   get disabled() {
     return this._disabled || false;
@@ -129,10 +126,12 @@ class SelectListItem extends Component(HTMLElement) {
     this.classList.remove('is-highlighted');
   }
   
+  /** @ignore */
   static get observedAttributes() {
     return ['selected', 'disabled'];
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

@@ -19,7 +19,7 @@
  @class Coral.ColumnView.Preview.Content
  @classdesc ColumnView's preview content component
  @htmltag coral-columnview-preview-content
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class ColumnViewPreviewContent extends HTMLElement {}
 

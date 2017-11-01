@@ -15,21 +15,24 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import 'coralui-component-panelstack';
 import 'coralui-component-tablist';
 import {commons} from 'coralui-util';
 
 /**
- TabView orientations.
+ Enumeration for {@link TabView} orientations.
  
- @enum {String}
- @memberof Coral.TabView
+ @typedef {Object} TabViewOrientationEnum
+ 
+ @property {String} HORIZONTAL
+ Tabs on top of the panels. This is the default.
+ @property {String} VERTICAL
+ Tabs are rendered on the side and match the height of the panels.
  */
+
 const orientation = {
-  /** Tabs on top of the panels. This is the default. */
   HORIZONTAL: 'horizontal',
-  /** Tabs are rendered on the side and match the height of the panels. */
   VERTICAL: 'vertical'
 };
 
@@ -40,10 +43,11 @@ const CLASSNAME = 'coral3-TabView';
  @class Coral.TabView
  @classdesc A TabView component
  @htmltag coral-tabview
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class TabView extends Component(HTMLElement) {
+class TabView extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -66,13 +70,12 @@ class TabView extends Component(HTMLElement) {
   }
   
   /**
-   The TabView's orientation.
+   The TabView's orientation. See {@link TabViewOrientationEnum}.
    
-   @type {Coral.TabView.orientation}
-   @default Coral.TabView.orientation.HORIZONTAL
+   @type {String}
+   @default TabViewOrientationEnum.HORIZONTAL
    @htmlattribute orientation
    @htmlattributereflected
-   @memberof Coral.TabView#
    */
   get orientation() {
     return this._elements.tabList.getAttribute('orientation') || orientation.HORIZONTAL;
@@ -90,7 +93,6 @@ class TabView extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.TabView#
    */
   get tabList() {
     return this._getContentZone(this._elements.tabList);
@@ -110,7 +112,6 @@ class TabView extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.TabView#
    */
   get panelStack() {
     return this._getContentZone(this._elements.panelStack);
@@ -164,11 +165,17 @@ class TabView extends Component(HTMLElement) {
     };
   }
   
-  // Expose enumerations
+  /**
+   Returns {@link TabView} orientation options.
+   
+   @return {TabViewOrientationEnum}
+   */
   static get orientation() { return orientation; }
   
+  /** @ignore */
   static get observedAttributes() { return ['orientation']; }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -191,15 +198,13 @@ class TabView extends Component(HTMLElement) {
   }
   
   /**
-   Triggered when the selected tab panel item has changed.
+   Triggered when the {@link TabView} selected tab panel item has changed.
+ 
+   @typedef {CustomEvent} coral-tabview:change
    
-   @event Coral.TabView#coral-tabview:change
-   
-   @param {Object} event
-   Event object.
-   @param {HTMLElement} event.detail.selection
+   @property {Tab} event.detail.selection
    The new selected tab panel item.
-   @param {HTMLElement} event.detail.oldSelection
+   @param {Tab} event.detail.oldSelection
    The prior selected tab panel item.
    */
 }

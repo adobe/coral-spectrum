@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import {List} from 'coralui-mixin-list';
+import {ComponentMixin} from 'coralui-mixin-component';
+import {ListMixin} from 'coralui-mixin-list';
 
 const CLASSNAME = 'coral3-ButtonList';
 
@@ -24,11 +24,12 @@ const CLASSNAME = 'coral3-ButtonList';
  @class Coral.ButtonList
  @classdesc An ButtonList component
  @htmltag coral-buttonlist
- @extends HTMLElement
- @extends Coral.mixin.component
- @extends Coral.mixin.list
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
+ @extends {ListMixin}
  */
-class ButtonList extends List(Component(HTMLElement)) {
+class ButtonList extends ListMixin(ComponentMixin(HTMLElement)) {
+  /** @ignore */
   constructor() {
     super();
   
@@ -48,6 +49,7 @@ class ButtonList extends List(Component(HTMLElement)) {
     return 'button';
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import FormField from 'coralui-mixin-formfield';
+import {ComponentMixin} from 'coralui-mixin-component';
+import {FormFieldMixin} from 'coralui-mixin-formfield';
 import {DateTime} from 'coralui-datetime';
 import 'coralui-component-button';
 import calendar from '../templates/calendar';
@@ -180,11 +180,12 @@ const CLASSNAME = 'coral3-Calendar';
  @class Coral.Calendar
  @classdesc A Calendar component
  @htmltag coral-calendar
- @extends HTMLElement
- @extends Coral.mixin.component
- @extends Coral.mixin.formField
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
+ @extends {FormFieldMixin}
  */
-class Calendar extends FormField(Component(HTMLElement)) {
+class Calendar extends FormFieldMixin(ComponentMixin(HTMLElement)) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -236,7 +237,6 @@ class Calendar extends FormField(Component(HTMLElement)) {
    @type {Number}
    @default 0
    @htmlattribute startday
-   @memberof Coral.Calendar#
    */
   get startDay() {
     if (this._startDay) {
@@ -265,7 +265,6 @@ class Calendar extends FormField(Component(HTMLElement)) {
    @type {String}
    @default "MMMM YYYY"
    @htmlattribute headerformat
-   @memberof Coral.Calendar#
    */
   get headerFormat() {
     return this._headerFormat || 'MMMM YYYY';
@@ -281,7 +280,6 @@ class Calendar extends FormField(Component(HTMLElement)) {
    @type {String|Date}
    @default null
    @htmlattribute min
-   @memberof Coral.Calendar#
    */
   get min() {
     return this._min ? this._min.toDate() : null;
@@ -302,7 +300,6 @@ class Calendar extends FormField(Component(HTMLElement)) {
    @type {String|Date}
    @default null
    @htmlattribute max
-   @memberof Coral.Calendar#
    */
   get max() {
     return this._max ? this._max.toDate() : null;
@@ -325,7 +322,6 @@ class Calendar extends FormField(Component(HTMLElement)) {
    @default "YYYY-MM-DD"
    @htmlattribute valueformat
    @htmlattributereflected
-   @memberof Coral.Calendar#
    */
   get valueFormat() {
     return this._valueFormat || INTERNAL_FORMAT;
@@ -354,7 +350,6 @@ class Calendar extends FormField(Component(HTMLElement)) {
    
    @type {Date}
    @default null
-   @memberof Coral.Calendar#
    */
   get valueAsDate() {
     return this._value ? this._value.toDate() : null;
@@ -376,9 +371,7 @@ class Calendar extends FormField(Component(HTMLElement)) {
    
    @type {String}
    @default ""
-   @fires Coral.mixin.formField#change
    @htmlattribute value
-   @memberof Coral.Calendar#
    */
   get value() {
     return this._value ? this._value.format(this.valueFormat) : '';
@@ -401,7 +394,13 @@ class Calendar extends FormField(Component(HTMLElement)) {
     }
   }
   
-  // JSDoc inherited
+  /**
+   Name used to submit the data in a form.
+   @type {String}
+   @default ""
+   @htmlattribute name
+   @htmlattributereflected
+   */
   get name() {
     return this._elements.input.name;
   }
@@ -411,7 +410,13 @@ class Calendar extends FormField(Component(HTMLElement)) {
     this._elements.input.name = value;
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is required or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute required
+   @htmlattributereflected
+   */
   get required() {
     return this._required || false;
   }
@@ -423,7 +428,13 @@ class Calendar extends FormField(Component(HTMLElement)) {
     this.classList.toggle('is-required', this._required && this._value === null);
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is disabled or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute disabled
+   @htmlattributereflected
+   */
   get disabled() {
     return this._disabled || false;
   }
@@ -440,7 +451,9 @@ class Calendar extends FormField(Component(HTMLElement)) {
     this._renderCalendar();
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link FormFieldMixin#invalid}.
+   */
   get invalid() {
     return super.invalid;
   }
@@ -450,7 +463,13 @@ class Calendar extends FormField(Component(HTMLElement)) {
     this._renderCalendar();
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
+   @type {Boolean}
+   @default false
+   @htmlattribute readonly
+   @htmlattributereflected
+   */
   get readOnly() {
     return this._readOnly || false;
   }
@@ -960,6 +979,7 @@ class Calendar extends FormField(Component(HTMLElement)) {
     }
   }
   
+  /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'startday',
@@ -973,6 +993,7 @@ class Calendar extends FormField(Component(HTMLElement)) {
     ]);
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

@@ -21,9 +21,10 @@ const CLASSNAME = 'coral3-Dialog-content';
  @class Coral.Dialog.Content
  @classdesc The Dialog default content
  @htmltag coral-dialog-content
- @extends HTMLElement
+ @extends {HTMLElement}
  */
 class DialogContent extends HTMLElement {
+  /** @ignore */
   connectedCallback() {
     this.classList.add(CLASSNAME);
   }

@@ -15,19 +15,22 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import FormField from 'coralui-mixin-formfield';
+import {ComponentMixin} from 'coralui-mixin-component';
+import {FormFieldMixin} from 'coralui-mixin-formfield';
 import {transform, validate} from 'coralui-util';
 
 /**
- Enum for textfield variant values.
- @enum {String}
- @memberof Coral.Textfield
+ Enumeration for {@link Textfield} variants.
+ 
+ @typedef {Object} TextfieldVariantEnum
+ 
+ @property {String} DEFAULT
+ A default textfield.
+ @property {String} QUIET
+ A textfield with no border or background.
  */
 const variant = {
-  /** A default textfield */
   DEFAULT: 'default',
-  /** A textfield with no border or background. */
   QUIET: 'quiet'
 };
 
@@ -46,11 +49,12 @@ for (const variantValue in variant) {
  @classdesc A Textfield component
  @htmltag coral-textfield
  @htmlbasetag input
- @extends HTMLInputElement
- @extends Coral.mixin.component
- @extends Coral.mixin.formField
+ @extends {HTMLInputElement}
+ @extends {ComponentMixin}
+ @extends {FormFieldMixin}
  */
-class Textfield extends FormField(Component(HTMLInputElement)) {
+class Textfield extends FormFieldMixin(ComponentMixin(HTMLInputElement)) {
+  /** @ignore */
   constructor() {
     super();
   
@@ -58,12 +62,12 @@ class Textfield extends FormField(Component(HTMLInputElement)) {
   }
   
   /**
-   The textfield's variant.
-   @type {Coral.Textfield.variant}
-   @default Coral.Textfield.variant.DEFAULT
+   The textfield's variant. See {@link TextfieldVariantEnum}.
+   
+   @type {String}
+   @default TextfieldVariantEnum.DEFAULT
    @htmlattribute variant
    @htmlattributereflected
-   @memberof Coral.Textfield#
    */
   get variant() {
     return this._variant || variant.DEFAULT;
@@ -81,13 +85,19 @@ class Textfield extends FormField(Component(HTMLInputElement)) {
     }
   }
   
-  // Expose enumerations
+  /**
+   Returns {@link Textfield} variants.
+   
+   @return {TextfieldVariantEnum}
+   */
   static get variant() { return variant; }
   
+  /** @ignore */
   static get observedAttributes() {
     return super._nativeObservedAttributes.concat(['variant']);
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     

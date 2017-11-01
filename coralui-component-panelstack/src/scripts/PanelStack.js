@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
+import {ComponentMixin} from 'coralui-mixin-component';
 import {SelectableCollection} from 'coralui-collection';
 
 const CLASSNAME = 'coral3-PanelStack';
@@ -24,10 +24,11 @@ const CLASSNAME = 'coral3-PanelStack';
  @class Coral.PanelStack
  @classdesc An PanelStack component
  @htmltag coral-panelstack
- @extends HTMLElement
- @extends Coral.mixin.component
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class PanelStack extends Component(HTMLElement) {
+class PanelStack extends ComponentMixin(HTMLElement) {
+  /** @ignore */
   constructor() {
     super();
     
@@ -46,11 +47,9 @@ class PanelStack extends Component(HTMLElement) {
   
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   See {@link Coral.Collection} for more details.
    
-   @type {Coral.Collection}
+   @type {SelectableCollection}
    @readonly
-   @memberof Coral.PanelStack#
    */
   get items() {
     // just init on demand
@@ -72,7 +71,6 @@ class PanelStack extends Component(HTMLElement) {
    
    @type {HTMLElement}
    @readonly
-   @memberof Coral.PanelStack#
    */
   get selectedItem() {
     return this.items._getLastSelected();
@@ -123,6 +121,7 @@ class PanelStack extends Component(HTMLElement) {
     }
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -139,15 +138,13 @@ class PanelStack extends Component(HTMLElement) {
   }
   
   /**
-   Triggered when the selected panel has changed.
+   Triggered when {@link PanelStack} selected panel has changed.
    
-   @event Coral.PanelStack#coral-panelstack:change
+   @typedef {CustomEvent} coral-panelstack:change
    
-   @param {Object} event
-   Event object.
-   @param {HTMLElement} event.detail.selection
+   @property {Panel} detail.selection
    The new selected panel.
-   @param {HTMLElement} event.detail.oldSelection
+   @property {Panel} detail.oldSelection
    The prior selected panel.
    */
 }

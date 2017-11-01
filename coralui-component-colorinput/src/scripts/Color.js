@@ -93,7 +93,7 @@ function _parseRGB(rgbStr) {
  e.g.: {r:0, g:0, b:0} => 'rgb(0,0,0)'
  
  @static
- @param {Object} {r, g, b}
+ @param {Object} rgb
  @return {String} rgbStr The string representing the rgb value
  @ignore
  */
@@ -147,7 +147,7 @@ function _parseRGBA(rgbaStr) {
  e.g.: {r:0, g:0, b:0, a:0.5} => 'rgb(0,0,0,0.5)'
  
  @static
- @param {Object} {r, g, b, a}
+ @param {Object} rgba
  @return {String} rgbaStr The string representing the rgba value
  @ignore
  */
@@ -198,7 +198,7 @@ function _parseCMYK(cmykStr) {
  e.g.: {c:0, m:100, y:50, k:0} => 'cmyk(0, 100, 50, 0)'
  
  @static
- @param {Object} {c, m, y, k}
+ @param {Object} cmyk
  @return {String} cmykStr The string representing the cmyk value
  @ignore
  */
@@ -271,7 +271,7 @@ function _hexToRgb(hex) {
  Serialize a hex number into a string.
  
  @static
- @param {Number}
+ @param {Number} hex
  @return {String}
  @ignore
  */
@@ -290,7 +290,7 @@ function _serializeHex(hex) {
  Transforms a RGB color into HEX representation.
  
  @static
- @param {Object} {r, g, b}
+ @param {Object} rgb
  @return {Number} hex The color hex representation
  @ignore
  */
@@ -306,7 +306,7 @@ function _rgbToHex(rgb) {
  spaces are not absolute and there will be some round-off error in the conversion process.
  
  @static
- @param {Object} {c, m, y, k}
+ @param {Object} cmyk
  @return {Object} {r, g, b}
  @ignore
  */
@@ -342,7 +342,7 @@ function _cmykToRgb(cmyk) {
  spaces are not absolute and there will be some round-off error in the conversion process.
  
  @static
- @param {Object} {r, g, b}
+ @param {Object} rgb
  @return {Object} {c, m, y, k}
  @ignore
  */
@@ -420,7 +420,7 @@ function _parseHSB(hsbStr) {
  e.g.: {h:0, s:0, b:0} => 'hsb(0,0,0)'
  
  @static
- @param {Object} {h, s, b}
+ @param {Object} hsb
  @return {String} hsb The string representing the hsb value
  @ignore
  */
@@ -446,7 +446,7 @@ function _serializeHSB(hsb) {
  b (brightness has a value between 0-100 percent)
  
  @static
- @param {Object} {h, s, b}
+ @param {Object} hsb
  @return {Object} {r, g, b}
  @ignore
  */
@@ -508,7 +508,7 @@ function _hsbToRgb(hsb) {
  Transforms a RGB color into HSB (same as HSV) representation.
  
  @static
- @param {Object} {r, g, b}
+ @param {Object} rgb
  @return {Object} {h, s, b}
  @ignore
  */
@@ -592,7 +592,7 @@ function _parseHSL(hslStr) {
  e.g.: {h:0, s:0, l:0} => 'hsl(0,0%,0%)'
  
  @static
- @param {Object} {h, s, l}
+ @param {Object} hsl
  @return {String} hsb The string representing the hsb value
  @ignore
  */
@@ -618,7 +618,7 @@ function _serializeHSL(hsl) {
  l (lightness has a value between 0-100 percent)
  
  @static
- @param {Object} {h, s, l}
+ @param {Object} hsl
  @return {Object} {r, g, b}
  @ignore
  */
@@ -678,7 +678,7 @@ function _hslToRgb(hsl) {
  Transforms an RGB color into HSL representation.
  
  @static
- @param {Object} {r, g, b}
+ @param {Object} rgb
  @return {Object} {h, s, l}
  @ignore
  */
@@ -730,7 +730,7 @@ function _rgbToHsl(rgb) {
  e.g.: 'hsla(360,100%,0%,0.5)' => {h:360, s:100, l:0, 0.5}
  
  @static
- @param {String} hslStr
+ @param {String} hslaStr
  The string representing the hsl value.
  
  @return {Object} {h, s, l, a} Returns null if string could not be parsed
@@ -765,7 +765,7 @@ function _parseHSLA(hslaStr) {
  e.g.: {h:0, s:0, l:0, a:0.5} => 'hsl(0,0%,0%,0.5)'
  
  @static
- @param {Object} {h, s, l}
+ @param {Object} hsla
  @return {String} hsb The string representing the hsb value
  @ignore
  */
@@ -788,6 +788,7 @@ function _serializeHSLA(hsla) {
  Coral.Color is used to get a color in different color spaces, calculate tints and shades ...
  */
 class Color {
+  /** @ignore */
   constructor() {
     // Set defaults
     this._colorSpace = colorSpace.HEX;
@@ -810,7 +811,6 @@ class Color {
    
    @type {String}
    @default ""
-   @memberof Coral.Color#
    */
   get value() {
     return this._value;
@@ -873,7 +873,6 @@ class Color {
    
    @type {Number}
    @default 1
-   @memberof Coral.Color#
    */
   get alpha() {
     return this._alpha;
@@ -891,7 +890,6 @@ class Color {
    
    @type {Object}
    @default null
-   @memberof Coral.Color#
    */
   get rgb() {
     let rgb = null;
@@ -926,7 +924,6 @@ class Color {
    
    @type {String}
    @default ""
-   @memberof Coral.Color#
    */
   get rgbValue() {
     return _serializeRGB(this.rgb);
@@ -941,7 +938,6 @@ class Color {
    
    @type {Object}
    @default null
-   @memberof Coral.Color#
    */
   get rgba() {
     const rgb = this.rgb;
@@ -966,7 +962,6 @@ class Color {
    
    @type {String}
    @default ""
-   @memberof Coral.Color#
    */
   get rgbaValue() {
     return _serializeRGBA(this.rgba);
@@ -980,7 +975,6 @@ class Color {
    
    @type {Number}
    @default null
-   @memberof Coral.Color#
    */
   get hex() {
     // as hex color space is essentially just the same as rgb and there is no loss in conversion, we can do it this way
@@ -996,7 +990,6 @@ class Color {
    
    @type {String}
    @default ""
-   @memberof Coral.Color#
    */
   get hexValue() {
     return _serializeHex(this.hex);
@@ -1011,7 +1004,6 @@ class Color {
    
    @type {Object}
    @default null
-   @memberof Coral.Color#
    */
   get cmyk() {
     let cmyk = null;
@@ -1050,7 +1042,6 @@ class Color {
    
    @type {String}
    @default ""
-   @memberof Coral.Color#
    */
   get cmykValue() {
     return _serializeCMYK(this.cmyk);
@@ -1067,7 +1058,6 @@ class Color {
    
    @type {Object}
    @default null
-   @memberof Coral.Color#
    */
   get hsb() {
     let hsb = null;
@@ -1106,7 +1096,6 @@ class Color {
    
    @type {String}
    @default ""
-   @memberof Coral.Color#
    */
   get hsbValue() {
     return _serializeHSB(this.hsb);
@@ -1123,7 +1112,6 @@ class Color {
    
    @type {Object}
    @default null
-   @memberof Coral.Color#
    */
   get hsl() {
     let hsl = null;
@@ -1162,7 +1150,6 @@ class Color {
    
    @type {String}
    @default ""
-   @memberof Coral.Color#
    */
   get hslValue() {
     return _serializeHSL(this.hsl);
@@ -1180,7 +1167,6 @@ class Color {
    
    @type {Object}
    @default null
-   @memberof Coral.Color#
    */
   get hsla() {
     const hsl = this.hsl;
@@ -1209,7 +1195,6 @@ class Color {
    
    @type {String}
    @default ""
-   @memberof Coral.Color#
    */
   get hslaValue() {
     return _serializeHSLA(this.hsla);
@@ -1221,8 +1206,7 @@ class Color {
   /**
    Clone this color.
    
-   @type {Coral.Color}
-   @memberof Coral.Color#
+   @type {Color}
    */
   clone() {
     const clone = new this.constructor();
@@ -1235,14 +1219,13 @@ class Color {
    Test if this Color is similar to another color.
    
    @type {Boolean}
-   @param {Coral.Color} compareColor
+   @param {Color} compareColor
    The color to compare this color too.
    
    @param {Boolean} [allowSlightColorDifference=true]
    While converting between color spaces slight loses might happen => we should normally consider colors equal,
    even if they are minimally different.
-   
-   @memberof Coral.Color#
+ 
    */
   isSimilarTo(compareColor, allowSlightColorDifference) {
     if (this.rgb === null && (!compareColor || compareColor.rgb === null)) {
@@ -1284,8 +1267,7 @@ class Color {
    @type {Array<Coral.Color>}
    @param {Number} amount
    Amount of tint colors to generate.
-   
-   @memberof Coral.Color#
+ 
    */
   calculateTintColors(amount) {
     const tintColors = [];
@@ -1322,8 +1304,7 @@ class Color {
    @type {Array<Coral.Color>}
    @param {Number} amount
    Amount of shade colors to generate.
-   
-   @memberof Coral.Color#
+ 
    */
   calculateShadeColors(amount) {
     const shadeColors = [];

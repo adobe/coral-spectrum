@@ -21,7 +21,7 @@ import getFirstSelectableWrappedItem from './getFirstSelectableWrappedItem';
 /**
  @class Coral.ActionBar.Container.Collection
  @classdesc The ActionBar container collection
- @extends Coral.SelectableCollection
+ @extends {SelectableCollection}
  */
 class ActionBarContainerCollection extends SelectableCollection {
   add(item, before) {

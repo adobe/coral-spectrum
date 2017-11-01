@@ -17,11 +17,12 @@
 module.exports = function(gulp) {
   const plumber = require('gulp-plumber');
   const eslint = require('gulp-eslint');
+  const util = require('../helpers/util');
   
   let src = 'src/scripts/**/*.js';
   
   // Lint all components if we're in the top level builder
-  if (process.cwd().slice(-7) === 'coralui') {
+  if (util.isTLB()) {
     src = `coralui-*/${src}`;
   }
   

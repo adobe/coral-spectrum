@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import Component from 'coralui-mixin-component';
-import FormField from 'coralui-mixin-formfield';
+import {ComponentMixin} from 'coralui-mixin-component';
+import {FormFieldMixin} from 'coralui-mixin-formfield';
 import base from '../templates/base';
 import {transform, commons} from 'coralui-util';
 
@@ -26,11 +26,12 @@ const CLASSNAME = 'coral3-Radio';
  @class Coral.Radio
  @classdesc A Radio component
  @htmltag coral-radio
- @extends HTMLElement
- @extends Coral.mixin.component
- @extends Coral.mixin.formField
+ @extends {HTMLElement}
+ @extends {ComponentMixin}
+ @extends {FormFieldMixin}
  */
-class Radio extends FormField(Component(HTMLElement)) {
+class Radio extends FormFieldMixin(ComponentMixin(HTMLElement)) {
+  /** @ignore */
   constructor() {
     super();
   
@@ -68,8 +69,7 @@ class Radio extends FormField(Component(HTMLElement)) {
    @default false
    @htmlattribute checked
    @htmlattributereflected
-   @fires Coral.mixin.formField#change
-   @memberof Coral.Radio#
+   @emits {change}
    */
   get checked() {
     return this._checked || false;
@@ -89,7 +89,6 @@ class Radio extends FormField(Component(HTMLElement)) {
    
    @type {HTMLElement}
    @contentzone
-   @memberof Coral.Radio#
    */
   get label() {
     return this._getContentZone(this._elements.label);
@@ -104,7 +103,13 @@ class Radio extends FormField(Component(HTMLElement)) {
     });
   }
   
-  // JSDoc inherited
+  /**
+   Name used to submit the data in a form.
+   @type {String}
+   @default ""
+   @htmlattribute name
+   @htmlattributereflected
+   */
   get name() {
     return this._elements.input.name;
   }
@@ -120,7 +125,6 @@ class Radio extends FormField(Component(HTMLElement)) {
    @type {String}
    @default "on"
    @htmlattribute value
-   @memberof Coral.Radio#
    */
   get value() {
     return this._elements.input.value || 'on';
@@ -129,7 +133,13 @@ class Radio extends FormField(Component(HTMLElement)) {
     this._elements.input.value = value;
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is disabled or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute disabled
+   @htmlattributereflected
+   */
   get disabled() {
     return this._disabled || false;
   }
@@ -142,7 +152,13 @@ class Radio extends FormField(Component(HTMLElement)) {
     this._elements.input.disabled = this._disabled;
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is required or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute required
+   @htmlattributereflected
+   */
   get required() {
     return this._required || false;
   }
@@ -154,7 +170,13 @@ class Radio extends FormField(Component(HTMLElement)) {
     this._elements.input.required = this._required;
   }
   
-  // JSDoc inherited
+  /**
+   Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
+   @type {Boolean}
+   @default false
+   @htmlattribute readonly
+   @htmlattributereflected
+   */
   get readOnly() {
     return this._readOnly || false;
   }
@@ -241,24 +263,37 @@ class Radio extends FormField(Component(HTMLElement)) {
     });
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link FormFieldMixin#clear}.
+   */
   clear() {
     this.checked = false;
   }
   
-  // JSDoc inherited
+  /**
+   Inherited from {@link FormFieldMixin#reset}.
+   */
   reset() {
     this.checked = this._initialCheckedState;
   }
   
+  /**
+   The default content zone.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
   get defaultContentZone() { return this.label; }
   set defaultContentZone(value) { this.label = value; }
+  
   get _contentZones() { return {'coral-radio-label': 'label'}; }
   
+  /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['checked']);
   }
   
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
