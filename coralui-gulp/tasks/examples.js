@@ -15,13 +15,39 @@
  * from Adobe Systems Incorporated.
  */
 module.exports = function(gulp) {
+  const modifyFile = require('gulp-modify-file');
+  const plumber = require('gulp-plumber');
+  const rename = require('gulp-rename');
+  const regExp = /\.\.\/build/g;
+  
   gulp.task('examples', function() {
     return gulp.src([
-      'coralui-*/examples/index.html', 'examples/index.html',
-      'build/js/*',
-      'build/css/*',
-      'build/resources/**/*'
+      'node_modules/coralui-*/examples/index.html', 'examples/index.html'
     ], {base: './'})
-      .pipe(gulp.dest('build/example'));
+      .pipe(plumber())
+      .pipe(modifyFile((content, path) => {
+        // Replace coralui.js and coralui.css paths
+        if (path.split('/').pop() === 'index.html') {
+          content = `${content.replace(regExp, '../..')}`;
+        }
+        
+        // Replace component example path
+        if (path.indexOf('coralui/examples/index.html')) {
+          content = `${content.replace("'../' + component + '/examples/index.html'", "component + '.html'")}`;
+        }
+        
+        return `${content}`;
+      }))
+      .pipe(rename(function(file) {
+        // Rename example file using component name
+        if (file.dirname.indexOf('node_modules') === 0) {
+          const path = file.dirname.split('/');
+          file.basename = path[1];
+        }
+        
+        // Put all examples under /examples
+        file.dirname = './build/examples';
+      }))
+      .pipe(gulp.dest('./'));
   });
 };
