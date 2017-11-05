@@ -18,7 +18,7 @@
 import {Vent} from 'coralui-externals';
 
 /**
- Coral events helper.
+ Events helper.
  */
 class Events {
   /**

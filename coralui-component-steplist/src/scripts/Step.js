@@ -159,7 +159,7 @@ class Step extends ComponentMixin(HTMLElement) {
   
     // Generate a unique ID for the Step panel if one isn't already present
     // This will be used for accessibility purposes
-    this.id = this.id || commons.getUID();
+    this.setAttribute('id', this.id || commons.getUID());
     
     // A11y
     this.setAttribute('role', 'tab');

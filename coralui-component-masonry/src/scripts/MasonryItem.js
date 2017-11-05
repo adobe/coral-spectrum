@@ -53,6 +53,7 @@ class MasonryItem extends ComponentMixin(HTMLElement) {
     // Support configs
     if (typeof value === 'object') {
       for (const prop in value) {
+        /** @ignore */
         this[prop] = value[prop];
       }
     }

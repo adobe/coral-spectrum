@@ -80,10 +80,11 @@ for (const sizeValue in size) {
 
 /**
  @class Coral.Icon
- @classdesc An Icon component
+ @classdesc An Icon component. CoralUI ships with a set of monochrome icons.
  @htmltag coral-icon
  @extends {HTMLElement}
  @extends {ComponentMixin}
+ @see http://icons.corp.adobe.com/
  */
 class Icon extends ComponentMixin(HTMLElement) {
   /** @ignore */
@@ -108,7 +109,8 @@ class Icon extends ComponentMixin(HTMLElement) {
     this._icon = transform.string(value).trim();
     this._reflectAttribute('icon', this._icon);
     
-    // removes the old class.
+    // removes the old classes
+    /** @ignore */
     this.className = this.className.replace(ICON_REGEX, '').trim();
   
     // sets the desired icon
@@ -161,9 +163,11 @@ class Icon extends ComponentMixin(HTMLElement) {
     this._updateAltText();
   }
   
-  // private
+  /** @private */
   get title() { return this.getAttribute('title'); }
   set title(value) { this.setAttribute('title', value); }
+  
+  /** @private */
   get alt() { return this.getAttribute('alt'); }
   set alt(value) { this.setAttribute('alt', value); }
   

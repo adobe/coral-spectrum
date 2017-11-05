@@ -22,7 +22,7 @@ const CLASSNAME = 'coral3-AnchorList';
 
 /**
  @class Coral.AnchorList
- @classdesc An AnchorList component
+ @classdesc An AnchorList component that supports multi-line text, icons, and text wrapping with ellipsis.
  @htmltag coral-anchorlist
  @extends {HTMLElement}
  @extends {ComponentMixin}

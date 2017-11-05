@@ -103,14 +103,15 @@ const isNativeFormat = (format) => {
 };
 
 /**
- @class Coral.Datetime
- @classdesc A Datetime component
- @htmltag coral-datetime
+ @class Coral.Datepicker
+ @classdesc A Datepicker component that can be used as a date and time selection form field. Leverages {@link momentJS}
+ if loaded on the page.
+ @htmltag coral-datepicker
  @extends {HTMLElement}
  @extends {ComponentMixin}
  @extends {FormFieldMixin}
  */
-class Datetime extends FormFieldMixin(ComponentMixin(HTMLElement)) {
+class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -785,4 +786,4 @@ class Datetime extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
 }
 
-export default Datetime;
+export default Datepicker;

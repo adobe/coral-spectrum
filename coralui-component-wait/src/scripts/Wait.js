@@ -61,10 +61,10 @@ for (const variantValue in variant) {
   ALL_VARIANT_CLASSES.push(`${CLASSNAME}--${variant[variantValue]}`);
 }
 
-
 /**
  @class Coral.Wait
- @classdesc A Wait component
+ @classdesc A Wait component to be used to indicate a process that is in-progress for an indefinite amount of time.
+ When the time is known, {@link Progress} should be used instead.
  @htmltag coral-wait
  @extends {HTMLElement}
  @extends {ComponentMixin}

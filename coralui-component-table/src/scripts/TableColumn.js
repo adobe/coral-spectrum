@@ -148,7 +148,10 @@ class TableColumn extends ComponentMixin(HTMLTableColElement) {
   }
   
   /**
-   The sorting type. See {@link TableColumnSortableTypeEnum}.
+   The sorting type. See {@link TableColumnSortableTypeEnum}. If setting to <code>custom</code>, columns won't sort
+   based on the default table sorting.
+   Instead, a custom sorting can be performed when triggered by user interaction. This can be defined by listening to
+   the {@link coral-table:beforecolumnsort} event.
    
    @type {String}
    @default TableColumnSortableTypeEnum.ALPHANUMERIC

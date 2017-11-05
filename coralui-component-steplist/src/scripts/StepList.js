@@ -57,7 +57,7 @@ const CLASSNAME = 'coral3-StepList';
 
 /**
  @class Coral.StepList
- @classdesc A StepList component
+ @classdesc A StepList component that holds a collection of steps.
  @htmltag coral-steplist
  @extends {HTMLElement}
  @extends {ComponentMixin}

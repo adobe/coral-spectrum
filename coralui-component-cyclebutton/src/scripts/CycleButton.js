@@ -61,7 +61,8 @@ const CLASSNAME = 'coral3-CycleButton';
 
 /**
  @class Coral.CycleButton
- @classdesc A CycleButton component
+ @classdesc A CycleButton component is a simple multi-state toggle button that toggles between the possible items below
+ a certain threshold, and shows them in a popover selector when above.
  @htmltag coral-cyclebutton
  @extends {HTMLElement}
  @extends {ComponentMixin}

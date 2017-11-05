@@ -45,7 +45,8 @@ const scrollTo = (element, to, duration, scrollCallback) => {
 
 /**
  @class Coral.ColumnView
- @classdesc A ColumnView component
+ @classdesc A ColumnView component to display and allow users to browse and select items in a dynamic tree structure
+ (e.g. a filesystem or multi-level navigation).
  @htmltag coral-columnview
  @extends {HTMLElement}
  @extends {ComponentMixin}

@@ -21,9 +21,9 @@ module.exports = function(gulp) {
   // @todo due to https://github.com/nanopx/gulp-esdoc/issues/19, we can't use gulp-esdoc
   gulp.task('docs', function(cb) {
     
-    // todo due to https://github.com/esdoc/esdoc/issues/432, we have to manually create a fake README.md
+    // todo due to https://github.com/esdoc/esdoc/issues/432, we have to manually create a fake README
     try {
-      fs.writeFileSync('README.md', '', { flag: 'wx' });
+      fs.writeFileSync('index.md', '', { flag: 'wx' });
     }
     catch (e) {}
     

@@ -45,7 +45,17 @@ const method = {
 
 /**
  @class Coral.FileUpload
- @classdesc A FileUpload component
+ @classdesc A FileUpload component that manages the upload process of multiple files. Child elements of FileUpload can
+ be given special attributes to enable functionality:
+ * <code>[coral-fileupload-select]</code> - Click to choose file(s), replacing existing files.
+ * <code>[coral-fileupload-dropzone]</code> - Drag &amp; drop files to choose file(s), replacing existing files.
+ * <code>[coral-fileupload-clear]</code> - Click to remove all files from the queue.
+ * <code>[coral-fileupload-submit]</code> - Click to start uploading.
+ * <code>[coral-fileupload-abort]</code> - Click to abort all uploads.
+ * <code>[coral-fileupload-abortfile="filename.txt"]</code> - Click to abort a specific file, leaving it in the queue.
+ * <code>[coral-fileupload-removefile="filename.txt"]</code> - Click to remove a specific file from the queue.
+ * <code>[coral-fileupload-uploadfile="filename.txt"]</code> - Click to start uploading a specific file.
+ 
  @htmltag coral-fileupload
  @extends {HTMLElement}
  @extends {ComponentMixin}

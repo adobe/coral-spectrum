@@ -46,6 +46,8 @@ class TableHead extends TableSectionMixin(ComponentMixin(HTMLTableSectionElement
   /**
    Whether the table head is sticky. The table content becomes automatically scrollable if the table wrapper height
    is smaller than its content.
+   Table exposes the <code>coral-table-scroll</code> attribute that allows in sticky mode to define the table
+   scrolling container max-height. This is particularly useful if the table contains dynamic content.
    
    @type {Boolean}
    @default false

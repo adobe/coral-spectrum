@@ -46,7 +46,7 @@ for (const directionValue in direction) {
 
 /**
  @class Coral.Drawer
- @classdesc A Drawer component
+ @classdesc A Drawer component to display content that can be opened and closed with a sliding animation.
  @htmltag coral-drawer
  @extends {HTMLElement}
  @extends {ComponentMixin}

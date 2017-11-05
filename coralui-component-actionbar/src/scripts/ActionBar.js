@@ -23,7 +23,8 @@ const CLASSNAME = 'coral3-ActionBar';
 
 /**
  @class Coral.ActionBar
- @classdesc An ActionBar component
+ @classdesc An ActionBar component containing arbitrary items. An item can either be added to the left or the right side
+ of the bar. All items that do not fit into the bar are hidden but still accessible.
  @htmltag coral-actionbar
  @extends {HTMLElement}
  @extends {ComponentMixin}

@@ -41,7 +41,7 @@ const variant = {
 
 /**
  @class Coral.Search
- @classdesc A Search component
+ @classdesc A Search component is a search styled form field.
  @htmltag coral-search
  @extends {HTMLElement}
  @extends {ComponentMixin}

@@ -23,7 +23,7 @@ const CLASSNAME = 'coral3-Slider';
 
 /**
  @class Coral.RangedSlider
- @classdesc The Ranged Slider
+ @classdesc A Ranged Slider
  @htmltag coral-rangedslider
  @extends {Slider}
  */

@@ -100,7 +100,7 @@ function isFunction(object) {
 }
 
 /**
- Coral utility belt.
+ Utility belt.
  */
 class Commons {
   /** @ignore */

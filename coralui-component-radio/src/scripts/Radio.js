@@ -24,7 +24,7 @@ const CLASSNAME = 'coral3-Radio';
 
 /**
  @class Coral.Radio
- @classdesc A Radio component
+ @classdesc A Radio component to be used as a form field.
  @htmltag coral-radio
  @extends {HTMLElement}
  @extends {ComponentMixin}

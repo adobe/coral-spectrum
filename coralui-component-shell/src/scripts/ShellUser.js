@@ -187,6 +187,7 @@ class ShellUser extends ComponentMixin(HTMLElement) {
     };
   }
   
+  /** @ignore */
   static get observedAttributes() { return ['avatar']; }
   
   /**
@@ -234,7 +235,8 @@ class ShellUser extends ComponentMixin(HTMLElement) {
     for (const contentZone in this._contentZones) {
       const contentZoneName = this._contentZones[contentZone];
       const element = this._elements[this._contentZones[contentZone]];
-    
+  
+      /** @ignore */
       this[contentZoneName] = element;
     }
   }

@@ -59,20 +59,21 @@ if (util.isTLB()) {
   config.includes = ['^.external-ecmascript.js', '^coralui-[a-z]+-[a-z]+/src/scripts', '^coralui-[a-z]+/src/scripts'];
   config.excludes = ['^node_modules', '^build'];
   
-  // config.plugins.find(plugin => plugin.name === 'esdoc-standard-plugin').option.manual = {
-  //   index: `${CWD}/README.md`,
-  //   globalIndex: true,
-  //   asset: `${CWD}/node_modules/coralui-guide/assets`,
-  //   'files': [
-  //     `${CWD}/README.md`,
-  //     `${CWD}/node_modules/coralui-guide/manual/usage.md`,
-  //     `${CWD}/node_modules/coralui-guide/manual/feature.md`,
-  //     `${CWD}/node_modules/coralui-guide/manual/config.md`,
-  //     `${CWD}/node_modules/coralui-guide/manual/api.md`,
-  //     `${CWD}/node_modules/coralui-guide/manual/faq.md`,
-  //     `${CWD}/node_modules/coralui-guide/manual/migration.md`
-  //   ]
-  // };
+  config.plugins.find(plugin => plugin.name === 'esdoc-standard-plugin').option.manual = {
+    index: `${CWD}/index.md`,
+    globalIndex: true,
+    asset: `${CWD}/node_modules/coralui-guide/assets`,
+    'files': [
+      `${CWD}/README.md`,
+      `${CWD}/node_modules/coralui-guide/manual/overview.md`,
+      `${CWD}/node_modules/coralui-guide/manual/manual.md`,
+      `${CWD}/node_modules/coralui-guide/manual/styles.md`,
+      `${CWD}/node_modules/coralui-guide/manual/frameworks.md`,
+      `${CWD}/node_modules/coralui-guide/manual/architecture.md`,
+      `${CWD}/node_modules/coralui-guide/manual/examples.md`,
+      `${CWD}/node_modules/coralui-guide/manual/contribution.md`
+    ]
+  };
 }
 
 module.exports = config;

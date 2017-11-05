@@ -35,7 +35,7 @@ const CLASSNAMES = ['coral3-BasicList', 'coral3-AnchorList', 'coral3-Shell-help'
  @extends {HTMLElement}
  @extends {ComponentMixin}
  */
-class Shell extends ComponentMixin(HTMLElement) {
+class ShellHelp extends ComponentMixin(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -90,7 +90,7 @@ class Shell extends ComponentMixin(HTMLElement) {
   
   /** @private */
   _moveItems() {
-    this.id = this.id || commons.getUID();
+    this.setAttribute('id', this.id || commons.getUID());
     Array.prototype.forEach.call(this.querySelectorAll(`#${this.id} > a[is="coral-shell-help-item"]`), (item) => {
       this._elements.items.appendChild(item);
     }, this);
@@ -263,4 +263,4 @@ class Shell extends ComponentMixin(HTMLElement) {
    */
 }
 
-export default Shell;
+export default ShellHelp;

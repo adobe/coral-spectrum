@@ -89,7 +89,9 @@ for (const sizeValue in size) {
 
 /**
  @class Coral.Alert
- @classdesc An Alert component
+ @classdesc An Alert component used as static indicators of an operation's result, or as messages to highlight
+ information to the user. It does not include a close button by default, but you can add it manually by adding the
+ <code>coral-close</code> attribute on an element contained by the Alert.
  @htmltag coral-alert
  @extends {HTMLElement}
  @extends {ComponentMixin}
@@ -317,7 +319,8 @@ class Alert extends ComponentMixin(HTMLElement) {
     for (const contentZone in this._contentZones) {
       const contentZoneName = this._contentZones[contentZone];
       const element = this._elements[this._contentZones[contentZone]];
-      
+  
+      /** @ignore */
       this[contentZoneName] = element;
     }
   }

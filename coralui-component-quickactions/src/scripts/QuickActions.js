@@ -86,7 +86,9 @@ const CLASSNAME = 'coral3-QuickActions';
 
 /**
  @class Coral.QuickActions
- @classdesc A QuickActions component
+ @classdesc A QuickActions component is an overlay component that reveals actions when interacting with a container.
+ Hovering the target will display the QuickActions. They can also be launched by pressing the shift + F10 key combination
+ when the target is focused.
  @htmltag coral-quickactions
  @extends {Overlay}
  */

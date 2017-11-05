@@ -41,7 +41,8 @@ const CLASSNAME = 'coral3-TabView';
 
 /**
  @class Coral.TabView
- @classdesc A TabView component
+ @classdesc A TabView component is the wrapping container used to create the typical Tabbed pattern.
+ This is intended to be used with a {@link TabList} and {@link PanelStack}.
  @htmltag coral-tabview
  @extends {HTMLElement}
  @extends {ComponentMixin}

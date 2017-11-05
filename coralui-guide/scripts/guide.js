@@ -39,6 +39,18 @@
       content.hidden = true;
     }
     
+    // Remove README link
+    var manualRootCard = content.querySelector('.manual-card-wrap');
+    if (manualRootCard) {
+      manualRootCard.parentNode.removeChild(manualRootCard);
+    }
+  
+    // Remove README card
+    var manualRootLink = nav.querySelector('.manual-toc-root [data-ice="manual"]:first-child');
+    if (manualRootLink) {
+      manualRootLink.parentNode.removeChild(manualRootLink);
+    }
+    
     var search = document.querySelector('.search-box');
     var result = document.querySelector('.search-result');
     var input = document.querySelector('.search-input');

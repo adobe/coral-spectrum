@@ -47,6 +47,12 @@ class SelectListGroup extends ComponentMixin(HTMLElement) {
     this.setAttribute('aria-label', this._label);
   }
   
+  /**
+   The Collection Interface that allows interacting with the items that the component contains.
+   
+   @type {SelectableCollection}
+   @readonly
+   */
   get items() {
     // just init on demand
     if (!this._items) {

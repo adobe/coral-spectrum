@@ -25,7 +25,8 @@ const CLASSNAME = 'coral3-WizardView';
 
 /**
  @class Coral.WizardView
- @classdesc A WizardView component
+ @classdesc A WizardView component is the wrapping container used to create the typical Wizard pattern. This is intended
+ to be used with a {@link StepList} and a {@link PanelStack}.
  @htmltag coral-wizardview
  @extends {HTMLElement}
  @extends {ComponentMixin}

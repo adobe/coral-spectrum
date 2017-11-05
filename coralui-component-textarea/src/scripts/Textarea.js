@@ -45,7 +45,7 @@ for (const variantValue in variant) {
 
 /**
  @class Coral.Textarea
- @classdesc A Textarea component
+ @classdesc A Textarea component is the default multi-line text form field.
  @htmltag coral-textarea
  @htmlbasetag textarea
  @extends {HTMLTextAreaElement}
@@ -102,6 +102,7 @@ class Textarea extends FormFieldMixin(ComponentMixin(HTMLTextAreaElement)) {
    */
   reset() {
     // the textarea uses the textContent to save the old value and not the value attribute
+    /** @ignore */
     this.value = this.textContent;
   }
   

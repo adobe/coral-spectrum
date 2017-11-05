@@ -22,7 +22,7 @@ const CLASSNAME = 'coral3-ButtonList';
 
 /**
  @class Coral.ButtonList
- @classdesc An ButtonList component
+ @classdesc A ButtonList component that supports multi-line text, icons, and text wrapping with ellipsis.
  @htmltag coral-buttonlist
  @extends {HTMLElement}
  @extends {ComponentMixin}

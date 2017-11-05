@@ -72,7 +72,13 @@ const KEY_SPACE = Keys.keyToCode('space');
 
 /**
  @class Coral.Table
- @classdesc A Table component
+ @classdesc A Table component is a container component to display and manipulate data in two dimensions.
+ To define table actions on specific elements, handles can be used.
+ A handle is given a special attribute :
+ * <code>[coral-table-select]</code> - Select/unselect all table items.
+ * <code>[coral-table-rowselect]</code> - Select/unselect the table item.
+ * <code>[coral-table-roworder]</code> - Drag to order the table item.
+ * <code>[coral-table-rowlock]</code> - Lock/unlock the table item.
  @htmltag coral-table
  @htmlbasetag table
  @extends {HTMLTableElement}
@@ -399,7 +405,8 @@ class Table extends ComponentMixin(HTMLTableElement) {
   }
   
   /**
-   Whether the table rows can be locked/unlocked.
+   Whether the table rows can be locked/unlocked. If rows are locked, they float to the top of the table and aren't
+   affected by column sorting.
    
    @type {Boolean}
    @default false

@@ -21,7 +21,8 @@ const CLASSNAME = 'coral3-Shell';
 
 /**
  @class Coral.Shell
- @classdesc A Shell component
+ @classdesc The Shell base component to be used with its family for console like applications. See examples for how to
+ integrate all Shell sub components.
  @htmltag coral-shell
  @extends {HTMLElement}
  @extends {ComponentMixin}

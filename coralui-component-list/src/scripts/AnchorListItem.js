@@ -54,11 +54,11 @@ class AnchorListItem extends ListItemMixin(ComponentMixin(HTMLAnchorElement)) {
     
     if (this.disabled) {
       // It's not tabbable anymore
-      this.tabIndex = -1;
+      this.setAttribute('tabindex', '-1');
     }
     else {
       // Now it's tabbable
-      this.tabIndex = 0;
+      this.setAttribute('tabindex', '0');
     }
   }
   

@@ -56,7 +56,9 @@ function handleDecimalOperation(operator, value1, value2) {
 
 /**
  @class Coral.NumberInput
- @classdesc A NumberInput component
+ @classdesc A NumberInput component is a numeric control form field. It follows the ARIA specification for spinbutton.
+ This means the following keys are valid for interacting with it: <code>up</code>, <code>down</code>, <code>left</code>,
+ <code>right</code>, <code>pageup</code>, <code>pagedown</code>, <code>home</code>, <code>end</code> and the Mouse Wheel.
  @htmltag coral-numberinput
  @extends {HTMLElement}
  @extends {ComponentMixin}

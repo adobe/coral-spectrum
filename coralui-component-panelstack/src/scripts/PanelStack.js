@@ -22,7 +22,7 @@ const CLASSNAME = 'coral3-PanelStack';
 
 /**
  @class Coral.PanelStack
- @classdesc An PanelStack component
+ @classdesc A PanelStack component holding a collection of panels. It wraps content, keeping only the selected panel in view.
  @htmltag coral-panelstack
  @extends {HTMLElement}
  @extends {ComponentMixin}

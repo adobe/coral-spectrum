@@ -79,7 +79,8 @@ for (const key in Overlay.placement) {
 
 /**
  @class Coral.Tooltip
- @classdesc A Tooltip component
+ @classdesc A Tooltip component that can be attached to any element and may be displayed immediately or on hovering the
+ target element.
  @htmltag coral-tooltip
  @extends {Overlay}
  */

@@ -61,7 +61,7 @@ function filterItem(item, filter) {
 }
 
 /**
- The Collection API to manipulate item collections within the components.
+ Collection provides a standardized way to manipulate items in a component.
  */
 class Collection {
   /**

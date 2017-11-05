@@ -43,7 +43,7 @@ const orientation = {
 
 /**
  @class Coral.Slider
- @classdesc A Slider component
+ @classdesc A Slider component is a form field that can be used to set a number within a range.
  @htmltag coral-slider
  @extends {HTMLElement}
  @extends {ComponentMixin}

@@ -1,5 +1,0 @@
-mixin tooltip-markup(options)
-  - options = options || {};
-  - options.target = options.target || '#' + options.id + '_target';
-  coral-tooltip(id=(options.id ? options.id : false), variant=(options.variant ? options.variant : false), target=(options.target ? options.target : false), placement=(options.placement ? options.placement : false))
-    | I'm a tooltip

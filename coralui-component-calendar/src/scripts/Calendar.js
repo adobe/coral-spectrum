@@ -178,7 +178,8 @@ const CLASSNAME = 'coral3-Calendar';
 
 /**
  @class Coral.Calendar
- @classdesc A Calendar component
+ @classdesc A Calendar component that can be used as a date selection form field. Leverages {@link momentJS} if loaded
+ on the page.
  @htmltag coral-calendar
  @extends {HTMLElement}
  @extends {ComponentMixin}

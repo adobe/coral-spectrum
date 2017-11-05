@@ -16,18 +16,9 @@
  */
 
 /**
- Used to store i18n strings
- 
- @private
- */
-const strings = {
-  generic: {}
-};
-
-/**
  Enumeration for {@link i18n} locales.
  
- @typedef {Object} i18nLocalesEnum
+ @typedef {Object} I18nLocalesEnum
  
  @property {String} en
  English (U.S.)
@@ -154,7 +145,17 @@ const locales = {
 };
 
 /**
- Coral I18n service to get/set localized strings.
+ Used to store i18n strings.
+ 
+ @type {Object}
+ @property {String} strings.generic
+ */
+const strings = {
+  generic: {}
+};
+
+/**
+ I18n service to get/set localized strings.
  */
 class I18nProvider {
   /**
@@ -467,7 +468,7 @@ class I18nProvider {
   }
   
   /**
-   Coral.i18n current locale value. See {@link i18nLocalesEnum};
+   I18n current locale value. See {@link I18nLocalesEnum}.
    @type {String}
    */
   get locale() {

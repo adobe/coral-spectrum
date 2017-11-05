@@ -54,7 +54,7 @@ for (const variantValue in variant) {
 
 /**
  @class Coral.Accordion
- @classdesc An Accordion component
+ @classdesc An Accordion component consisting of multiple collapsible items.
  @htmltag coral-accordion
  @extends {HTMLElement}
  @extends {ComponentMixin}

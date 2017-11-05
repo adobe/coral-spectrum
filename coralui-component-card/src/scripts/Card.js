@@ -54,7 +54,7 @@ for (const variantValue in variant) {
 
 /**
  @class Coral.Card
- @classdesc A Card component
+ @classdesc A Card component to display content in different variations.
  @htmltag coral-card
  @extends {HTMLElement}
  @extends {ComponentMixin}

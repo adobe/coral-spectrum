@@ -1,5 +1,0 @@
-mixin progress-markup(options)
-  - options = options || {};
-  - options.value = options.value === undefined ? 70 : options.value;
-
-  coral-progress(id=(options.id ? options.id : false), value=options.value, label=(options.label !== undefined ? options.label : null), labelposition=(options.labelPosition !== undefined ? options.labelPosition : null),size=(options.size !== undefined ? options.size : null), indeterminate=(options.indeterminate !== undefined ? options.indeterminate : null))

@@ -83,7 +83,7 @@ const getPreviousItem = (item) => {
 
 /**
  @class Coral.Masonry
- @classdesc A Masonry component
+ @classdesc A Masonry component that allows to lay out items in a masonry grid.
  @htmltag coral-masonry
  @extends {HTMLElement}
  @extends {ComponentMixin}

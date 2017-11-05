@@ -140,7 +140,7 @@ const CLASSNAME = 'coral3-Overlay';
 
 /**
  @class Coral.Overlay
- @classdesc An Overlay component
+ @classdesc A generic Overlay component.
  @htmltag coral-overlay
  @extends {HTMLElement}
  @extends {ComponentMixin}

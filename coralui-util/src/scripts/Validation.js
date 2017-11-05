@@ -18,7 +18,7 @@
 import commons from './commons';
 
 /**
- Property value validators.
+ Set of property value validation functions.
  */
 class Validation {
   /**

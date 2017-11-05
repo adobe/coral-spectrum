@@ -785,7 +785,7 @@ function _serializeHSLA(hsla) {
 }
 
 /**
- Coral.Color is used to get a color in different color spaces, calculate tints and shades ...
+ Color is used to get a color in different color spaces, calculate tints and shades etc.
  */
 class Color {
   /** @ignore */

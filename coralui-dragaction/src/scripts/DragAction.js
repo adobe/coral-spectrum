@@ -178,7 +178,17 @@ function isOverDropZone(self) {
 
 /**
  @class Coral.DragAction
- @classdesc This a decorator which adds draggable functionality to DOM elements
+ @classdesc This a decorator which adds draggable functionality to elements.
+ To define draggable actions on specific elements, handles can be used.
+ A handle is given a special attribute :
+ * <code>coral-dragaction</code> attribute adds draggable functionality to the corresponding element.
+ * <code>coral-dragaction-handle</code> attribute allows dragging only by dragging the specified handle.
+ * <code>coral-dragaction-dropzone</code> attribute is used to indicate possible dropzones making it possible
+ to build drag-and-drop enabled interfaces in conjunction with <code>DragAction</code> events.
+ * <code>coral-dragaction-axis</code> and setting it to either <code>horizontal</code> or <code>vertical</code>,
+ it is possible to restrict the drag'n'drop to a single axis.
+ * <code>coral-dragaction-scroll</code> attribute will scroll the container when the draggable is moved beyond the viewport.
+ * <code>coral-dragaction-containment</code>, the draggable element will be constrained to its container.
  @param {String|HTMLElement} dragElement
  The draggable element.
  */

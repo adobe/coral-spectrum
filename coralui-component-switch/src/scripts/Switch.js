@@ -24,7 +24,7 @@ const CLASSNAME = 'coral3-Switch';
 
 /**
  @class Coral.Switch
- @classdesc A Switch component
+ @classdesc A Switch component is a toggle form field similar to a Checkbox component.
  @htmltag coral-switch
  @extends {HTMLElement}
  @extends {ComponentMixin}

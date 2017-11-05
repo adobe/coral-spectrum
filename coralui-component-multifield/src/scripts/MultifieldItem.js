@@ -24,7 +24,8 @@ const CLASSNAME = 'coral3-Multifield-item';
 
 /**
  @class Coral.Multifield.Item
- @classdesc A Multifield item component
+ @classdesc A Multifield item component. It can have a pre-filled content different from the Multifield template but
+ added items will always be rendered based on the template.
  @htmltag coral-multifield-item
  @extends {HTMLElement}
  @extends {ComponentMixin}

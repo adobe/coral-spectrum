@@ -40,7 +40,7 @@ const itemValueFromDOM = function(item) {
 
 /**
  @class Coral.TagList
- @classdesc A TagList component
+ @classdesc A TagList component is a form field container to manipulate tags.
  @htmltag coral-taglist
  @extends {HTMLElement}
  @extends {ComponentMixin}

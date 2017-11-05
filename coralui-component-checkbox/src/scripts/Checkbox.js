@@ -27,7 +27,7 @@ const CLASSNAME = 'coral3-Checkbox';
 
 /**
  @class Coral.Checkbox
- @classdesc A Checkbox component
+ @classdesc A Checkbox component to be used as a form field.
  @htmltag coral-checkbox
  @extends {HTMLElement}
  @extends {ComponentMixin}
@@ -225,6 +225,7 @@ class Checkbox extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // stops the current event
     event.stopPropagation();
   
+    /** @ignore */
     this[this._componentTargetProperty] = event.target[this._eventTargetProperty];
   
     // resets the indeterminate state after user interaction

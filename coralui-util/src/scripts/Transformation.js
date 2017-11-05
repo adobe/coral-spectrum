@@ -16,7 +16,7 @@
  */
 
 /**
- Property value transform functions.
+ Set of property value transformation functions.
  */
 class Transformation {
   /**

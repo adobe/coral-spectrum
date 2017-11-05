@@ -20,7 +20,7 @@ import {ListMixin} from 'coralui-mixin-list';
 
 /**
  @class Coral.List
- @classdesc A List component
+ @classdesc A List component that supports multi-line text, icons, and text wrapping with ellipsis.
  @htmltag coral-list
  @extends {HTMLElement}
  @extends {ComponentMixin}

@@ -23,7 +23,9 @@ const CLASSNAME = 'coral3-Tree';
 
 /**
  @class Coral.Tree
- @classdesc A Tree component
+ @classdesc A Tree component is a container component to display collapsible content.
+ Tree items don't expand by default. It's the developer's responsibility to handle it by listening to the
+ {@link coral-collection:add} and {@link coral-collection:remove} events.
  @htmltag coral-tree
  @extends {HTMLElement}
  @extends {ComponentMixin}

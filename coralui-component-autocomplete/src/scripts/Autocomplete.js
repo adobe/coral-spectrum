@@ -67,7 +67,7 @@ const match = {
 
 /**
  @class Coral.Autocomplete
- @classdesc An Autocomplete component
+ @classdesc An Autocomplete component that allows users to search and select from a list of options.
  @htmltag coral-autocomplete
  @extends {HTMLElement}
  @extends {ComponentMixin}
@@ -1240,8 +1240,8 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     if (this.delay) {
       // Wait until the use has stopped typing for delay milliseconds before getting suggestions
-      window.clearTimeout(this.timeout);
-      this.timeout = setTimeout(this._showSuggestions.bind(this), this.delay);
+      window.clearTimeout(this._timeout);
+      this._timeout = window.setTimeout(this._showSuggestions.bind(this), this.delay);
     }
     else {
       // Immediately get suggestions
@@ -1787,7 +1787,7 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._elements.input.removeAttribute('aria-activedescendant');
     
     // Don't let the suggestions show
-    clearTimeout(this.timeout);
+    window.clearTimeout(this._timeout);
     
     // Trigger an event
     this.trigger('coral-autocomplete:hidesuggestions');

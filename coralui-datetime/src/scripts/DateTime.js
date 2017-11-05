@@ -52,13 +52,15 @@ const formatDate = function(date, locale, options) {
 };
 
 /**
- The DateTime API is used as fallback to momentJS.
+ The DateTime API is used as fallback to {@link momentJS}.
  
  @param {DateTime|Date|Array<Number>|String} value
  The initial date value. If none provided, the current day is used instead.
  */
 class DateTime {
-  // See https://momentjs.com/docs/#/parsing/now/
+  /**
+  @see https://momentjs.com/docs/#/parsing/now/
+  */
   constructor(value) {
     if (value instanceof this.constructor) {
       // Copy properties
@@ -108,7 +110,9 @@ class DateTime {
     }
   }
   
-  // See https://momentjs.com/docs/#/i18n/instance-locale/
+  /**
+   @see https://momentjs.com/docs/#/i18n/instance-locale/
+   */
   locale(value) {
     if (value) {
       this._locale = value;
@@ -117,19 +121,25 @@ class DateTime {
     return this._locale;
   }
   
-  // See https://momentjs.com/docs/#/displaying/as-javascript-date/
+  /**
+   @see https://momentjs.com/docs/#/displaying/as-javascript-date/
+   */
   toDate() {
     return this._date;
   }
   
-  // See https://momentjs.com/docs/#/parsing/moment-clone/
+  /**
+   @see https://momentjs.com/docs/#/parsing/moment-clone/
+   */
   clone() {
     const clone = new this.constructor(this._value);
     clone._date = this._date;
     return clone;
   }
   
-  // See https://momentjs.com/docs/#/displaying/format/
+  /**
+   @see https://momentjs.com/docs/#/displaying/format/
+   */
   format(format) {
     let formattedDateString = '';
     
@@ -200,17 +210,23 @@ class DateTime {
     return formattedDateString;
   }
   
-  // See https://momentjs.com/docs/#/get-set/year/
+  /**
+   @see https://momentjs.com/docs/#/get-set/year/
+   */
   year() {
     return this._date.getFullYear();
   }
   
-  // See https://momentjs.com/docs/#/get-set/month/
+  /**
+   @see https://momentjs.com/docs/#/get-set/month/
+   */
   month() {
     return this._date.getMonth();
   }
   
-  // See https://momentjs.com/docs/#/get-set/week/
+  /**
+   @see https://momentjs.com/docs/#/get-set/week/
+   */
   week() {
     // Source : https://stackoverflow.com/questions/6117814/get-week-of-year-in-javascript-like-in-php
     const date = new Date(Date.UTC(this._date.getFullYear(), this._date.getMonth(), this._date.getDate()));
@@ -220,7 +236,9 @@ class DateTime {
     return Math.ceil(((date - yearStart) / 86400000 + 1) / 7);
   }
   
-  // See https://momentjs.com/docs/#/get-set/day/
+  /**
+   @see https://momentjs.com/docs/#/get-set/day/
+   */
   day(day) {
     if (typeof day === 'number') {
       this._date.setDate(this._date.getDate() - (this._date.getDay() || 7) + day);
@@ -231,7 +249,9 @@ class DateTime {
     return this._date.getDay();
   }
   
-  // See https://momentjs.com/docs/#/get-set/hour/
+  /**
+   @see https://momentjs.com/docs/#/get-set/hour/
+   */
   hours(hours) {
     if (typeof hours === 'number') {
       this._date.setHours(hours);
@@ -242,7 +262,9 @@ class DateTime {
     return this._date.getHours();
   }
   
-  // See https://momentjs.com/docs/#/get-set/minute/
+  /**
+   @see https://momentjs.com/docs/#/get-set/minute/
+   */
   minutes(minutes) {
     if (typeof minutes === 'number') {
       this._date.setMinutes(minutes);
@@ -253,12 +275,16 @@ class DateTime {
     return this._date.getMinutes();
   }
   
-  // See https://momentjs.com/docs/#/get-set/date/
+  /**
+   @see https://momentjs.com/docs/#/get-set/date/
+   */
   date() {
     return this._date.getDate();
   }
   
-  // See https://momentjs.com/docs/#/manipulating/add/
+  /**
+   @see https://momentjs.com/docs/#/manipulating/add/
+   */
   add(value, type) {
     if (type.indexOf('month') === 0) {
       this._date.setMonth(this._date.getMonth() + value);
@@ -270,7 +296,9 @@ class DateTime {
     return this;
   }
   
-  // See https://momentjs.com/docs/#/manipulating/subtract/
+  /**
+   @see https://momentjs.com/docs/#/manipulating/subtract/
+   */
   subtract(value, type) {
     if (type.indexOf('month') === 0) {
       this._date.setMonth(this._date.getMonth() - value);
@@ -282,14 +310,18 @@ class DateTime {
     return this;
   }
   
-  // See https://momentjs.com/docs/#/displaying/difference/
+  /**
+   @see https://momentjs.com/docs/#/displaying/difference/
+   */
   diff(obj) {
     const diff = this._date.getTime() - obj._date.getTime();
     
     return diff / 86400000;
   }
   
-  // See https://momentjs.com/docs/#/manipulating/start-of/
+  /**
+   @see https://momentjs.com/docs/#/manipulating/start-of/
+   */
   startOf(value) {
     if (value === 'day') {
       // Today
@@ -305,7 +337,9 @@ class DateTime {
     return this;
   }
   
-  // See https://momentjs.com/docs/#/query/is-before/
+  /**
+   @see https://momentjs.com/docs/#/query/is-before/
+   */
   isBefore(coralDate) {
     const date = coralDate && coralDate._date;
     
@@ -316,7 +350,9 @@ class DateTime {
     return false;
   }
   
-  // See https://momentjs.com/docs/#/query/is-after/
+  /**
+   @see https://momentjs.com/docs/#/query/is-after/
+   */
   isAfter(coralDate) {
     const date = coralDate && coralDate._date;
     
@@ -327,7 +363,9 @@ class DateTime {
     return false;
   }
   
-  // See https://momentjs.com/docs/#/query/is-same/
+  /**
+   @see https://momentjs.com/docs/#/query/is-same/
+   */
   isSame(obj, type) {
     if (type === 'hour') {
       return obj && obj.clone()._date.getHours() === this.clone()._date.getHours();
@@ -342,17 +380,24 @@ class DateTime {
     return obj && obj.clone()._date.getTime() === this.clone()._date.getTime();
   }
   
-  // See https://momentjs.com/docs/#/parsing/is-valid/
+  /**
+   @see https://momentjs.com/docs/#/parsing/is-valid/
+   */
   isValid() {
     return this._date.toString() !== 'Invalid Date';
   }
   
-  // Not supported so we return an empty object
+  /**
+   @ignore
+   Not supported so we return an empty object
+   */
   static localeData() {
     return {};
   }
   
-  // See https://momentjs.com/docs/#/i18n/changing-locale/
+  /**
+   @see https://momentjs.com/docs/#/i18n/changing-locale/
+   */
   static locale(value) {
     if (value) {
       globalLocale = value;
@@ -361,12 +406,16 @@ class DateTime {
     return globalLocale;
   }
   
-  // See https://momentjs.com/docs/#/query/is-a-moment/
+  /**
+   @see https://momentjs.com/docs/#/query/is-a-moment/
+   */
   static isMoment(obj) {
     return obj instanceof this;
   }
   
-  // Expose moment JS if loaded
+  /**
+   @return {momentJS|DateTime}
+   */
   static get Moment() {
     return window.moment || this;
   }

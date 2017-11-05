@@ -55,7 +55,7 @@ const CLASSNAME = 'coral3-TabList';
 
 /**
  @class Coral.TabList
- @classdesc A TabList component
+ @classdesc A TabList component holds a collection of tabs.
  @htmltag coral-tablist
  @extends {HTMLElement}
  @extends {ComponentMixin}

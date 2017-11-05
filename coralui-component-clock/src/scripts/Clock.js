@@ -60,7 +60,8 @@ for (const variantValue in variant) {
 
 /**
  @class Coral.Clock
- @classdesc A Clock component
+ @classdesc A Clock component that can be used as a time selection form field. Leverages {@link momentJS} if loaded
+ on the page.
  @htmltag coral-clock
  @extends {HTMLElement}
  @extends {ComponentMixin}

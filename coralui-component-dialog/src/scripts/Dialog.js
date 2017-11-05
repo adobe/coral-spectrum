@@ -124,7 +124,7 @@ for (const variantValue in variant) {
 
 /**
  @class Coral.Dialog
- @classdesc A Dialog component
+ @classdesc A Dialog component that supports various use cases with custom content.
  @htmltag coral-dialog
  @extends {HTMLElement}
  @extends {ComponentMixin}

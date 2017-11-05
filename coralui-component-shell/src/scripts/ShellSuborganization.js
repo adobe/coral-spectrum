@@ -32,6 +32,7 @@ class ShellSuborganization extends ShellOrganization {
     super.connectedCallback();
     
     // Has to be first to override padding from .coral3-Shell-orgSwitcher-item
+    /** @ignore */
     this.className = CLASSNAME + this.className;
   
     // Set the icon size

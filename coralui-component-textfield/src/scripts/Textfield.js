@@ -46,7 +46,7 @@ for (const variantValue in variant) {
 
 /**
  @class Coral.Textfield
- @classdesc A Textfield component
+ @classdesc A Textfield component is the default single line text form field.
  @htmltag coral-textfield
  @htmlbasetag input
  @extends {HTMLInputElement}

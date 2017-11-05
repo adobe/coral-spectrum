@@ -53,6 +53,7 @@ class SliderItem extends HTMLElement {
   }
   set content(value) {
     if (value instanceof HTMLElement) {
+      /** @ignore */
       this.innerHTML = value.innerHTML;
     }
   }

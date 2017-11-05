@@ -273,7 +273,7 @@ class ShellOrgSwitcher extends List {
   
   /** @private */
   _moveItems() {
-    this.id = this.id || commons.getUID();
+    this.setAttribute('id', this.id || commons.getUID());
     Array.prototype.forEach.call(this.querySelectorAll(`#${this.id} > coral-shell-organization`), (item) => {
       this._elements.items.appendChild(item);
     }, this);

@@ -27,7 +27,11 @@ const TEMPLATE_SUPPORT = 'content' in document.createElement('template');
 
 /**
  @class Coral.Multifield
- @classdesc A Multifield component
+ @classdesc A Multifield component that enables adding, reordering, and removing multiple instances of a component.
+ Multifield partially supports the <code>template</code> element in IE 11. If adding/removing items in the template
+ is required, <code>template.content</code> should be used.
+ Child elements can be given a special attribute to enable functionality:
+ * <code>[coral-multifield-add]</code> - Click to add an item.
  @htmltag coral-multifield
  @extends {HTMLElement}
  @extends {ComponentMixin}
@@ -48,7 +52,7 @@ class Multifield extends ComponentMixin(HTMLElement) {
     });
     
     // Templates
-    this.id = this.id || commons.getUID();
+    this.setAttribute('id', this.id || commons.getUID());
     this._elements = {
       template: this.querySelector(`#${this.id} > template[coral-multifield-template]`) || document.createElement('template')
     };

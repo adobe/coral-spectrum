@@ -80,7 +80,7 @@ for (const position in labelPosition) {
 
 /**
  @class Coral.Progress
- @classdesc A Progress component
+ @classdesc A Progress component to indicate progress of processes.
  @htmltag coral-progress
  @extends {HTMLElement}
  @extends {ComponentMixin}

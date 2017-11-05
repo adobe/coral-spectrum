@@ -88,7 +88,9 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
   }
   
   /**
-   Whether the item is selected.
+   Whether the item is selected. If the item has an element with the `coral-interactive` attribute and is clicked,
+   then the toggling of the accordion item will not occur.
+   
    @type {Boolean}
    @default false
    @htmlattribute selected

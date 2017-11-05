@@ -51,7 +51,7 @@ const CLASSNAME = 'coral3-SelectList';
 
 /**
  @class Coral.SelectList
- @classdesc A SelectList component
+ @classdesc A SelectList component is a selectable list of items.
  @htmltag coral-selectlist
  @extends {HTMLElement}
  @extends {ComponentMixin}
@@ -213,6 +213,7 @@ class SelectList extends ComponentMixin(HTMLElement) {
     
       // we make the load indicator visible
       if (scrollToBottom) {
+        /** @ignore */
         this.scrollTop = this.scrollHeight;
       }
     }

@@ -42,6 +42,7 @@ class TableCell extends ComponentMixin(HTMLTableCellElement) {
     // Support configs
     if (typeof value === 'object') {
       for (const prop in value) {
+        /** @ignore */
         this[prop] = value[prop];
       }
     }
@@ -71,7 +72,8 @@ class TableCell extends ComponentMixin(HTMLTableCellElement) {
   }
   
   /**
-   The cell's value.
+   The cell's value. It is used to compare cells during a column sort. If not set, the sorting will be performed on the
+   cell content. The content will be parse accordingly based on the column's <code>sortabletype</code> property.
    
    @type {String}
    @default ""

@@ -60,7 +60,7 @@ const CLASSNAME = 'coral3-ButtonGroup';
 
 /**
  @class Coral.ButtonGroup
- @classdesc A ButtonGroup component
+ @classdesc A ButtonGroup component that can be used as a selection form field.
  @htmltag coral-buttongroup
  @extends {HTMLElement}
  @extends {ComponentMixin}

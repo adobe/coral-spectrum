@@ -87,7 +87,7 @@ for (const variantValue in variant) {
 
 /**
  @class Coral.Popover
- @classdesc A Popover component
+ @classdesc A Popover component for small overlay content.
  @htmltag coral-popover
  @extends {Overlay}
  */

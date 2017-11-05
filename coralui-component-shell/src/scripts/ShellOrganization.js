@@ -243,8 +243,8 @@ class ShellOrganization extends ListItem {
   
     // Move items before calling the voracious ListItem render to support cloneNode
     super.connectedCallback();
-    
-    this.id = this.id || commons.getUID();
+  
+    this.setAttribute('id', this.id || commons.getUID());
     const items = this.querySelector(`#${this.id} > .coral3-Shell-orgSwitcher-subitems`);
     
     if (items) {

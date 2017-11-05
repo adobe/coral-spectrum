@@ -17,6 +17,7 @@ class Enhancer {
       if (doc.unknown) {
         let isEnhanced = [];
         let baseTag;
+        let tag;
         
         doc.unknown.forEach((item) => {
           if (item.tagName === '@class') {
@@ -29,10 +30,7 @@ class Enhancer {
           }
           
           if (item.tagName === '@htmltag') {
-            doc.examples = doc.examples || [];
-            const markup = baseTag ? `<${baseTag} is="${item.tagValue}"></${baseTag}>` : `<${item.tagValue}></${item.tagValue}>`;
-            doc.examples.unshift(`<caption>Markup</caption>\n${markup}`);
-            baseTag = null;
+            tag = item.tagValue;
           }
           
           if (item.tagName === '@classdesc') {
@@ -55,6 +53,12 @@ class Enhancer {
             isEnhanced.push('<code>content-zone</code>');
           }
         });
+  
+        if (tag) {
+          doc.examples = doc.examples || [];
+          const markup = baseTag ? `<${baseTag} is="${tag}"></${baseTag}>` : `<${tag}></${tag}>`;
+          doc.examples.unshift(`<caption>Markup</caption>\n${markup}`);
+        }
         
         if (isEnhanced.length) {
           doc.description = doc.description + '\n<ul><li>'+ isEnhanced.join('</li><li>') +'</li></ul>';

@@ -801,7 +801,7 @@ class Keys {
 }
 
 /**
- A key listener for global hotkeys.
+ A key listener for global hotkeys is exposed for document eventing handling.
  
  @type {Keys}
  */

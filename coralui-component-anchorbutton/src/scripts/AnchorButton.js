@@ -24,7 +24,10 @@ const SPACE = 32;
 
 /**
  @class Coral.AnchorButton
- @classdesc A Link component rendering as a button.
+ @classdesc A Link component rendering as a button allowing us to style an anchor element that both looks and behaves
+ like a button rather than a link. It can receive keyboard focus regardless of whether or not it has an <code>href</code>
+ attribute, can be activated using either the <code>SPACE</code> key or the <code>ENTER</code> key, and is identified to
+ assistive technology as a button element.
  @htmltag coral-anchorbutton
  @htmlbasetag a
  @extends {HTMLAnchorElement}

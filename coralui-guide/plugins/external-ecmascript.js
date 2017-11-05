@@ -237,3 +237,9 @@
 /**
  * @external {HTMLInputElement} https://developer.mozilla.org/en/docs/Web/API/HTMLInputElement
  */
+
+// External Libraries
+
+/**
+ * @external {momentJS} https://momentjs.com/
+ */

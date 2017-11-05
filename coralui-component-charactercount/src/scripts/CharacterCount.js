@@ -37,7 +37,7 @@ const target = {
 
 /**
  @class Coral.CharacterCount
- @classdesc A CharacterCount component
+ @classdesc A CharacterCount component that indicates the remaining characters in a Textfield or Textarea.
  @htmltag coral-charactercount
  @extends {HTMLElement}
  @extends {ComponentMixin}
@@ -119,6 +119,7 @@ class CharacterCount extends ComponentMixin(HTMLElement) {
   /** @ignore */
   _refreshCharCount() {
     const currentCount = this._getCharCount();
+    /** @ignore */
     this.innerHTML = currentCount;
     const isMaxExceeded = currentCount < 0;
     if (this._targetEl) {

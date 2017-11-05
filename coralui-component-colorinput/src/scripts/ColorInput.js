@@ -111,7 +111,7 @@ const showDefaultColors = {
 
 /**
  @class Coral.ColorInput
- @classdesc A ColorInput component
+ @classdesc A ColorInput component than can be used as a form field to select from a list of color options.
  @htmltag coral-colorinput
  @extends {HTMLElement}
  @extends {ComponentMixin}
