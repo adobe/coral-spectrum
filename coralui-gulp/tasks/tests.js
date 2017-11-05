@@ -22,12 +22,12 @@ module.exports = function(gulp) {
     new KarmaServer({
       configFile: configFile,
       singleRun: true
-    }, done).start();
+    }, done()).start();
   });
   
   gulp.task('tests-watch', function(done) {
     new KarmaServer({
       configFile: configFile
-    }, done).start();
+    }, done()).start();
   })
 };

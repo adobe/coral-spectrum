@@ -191,9 +191,9 @@ describe('Coral.ColumnView', function() {
           // calculate if there is more space and more items should be loaded
           var itemsHeight = 0;
           column.items.getAll().forEach(function(item) {
-            itemsHeight += item.offsetHeight;
+            itemsHeight += item.offsetHeight + parseFloat(getComputedStyle(item).marginTop);
           });
-
+          
           if (itemsHeight >= columnView.offsetHeight) {
             done();
           }
@@ -201,10 +201,6 @@ describe('Coral.ColumnView', function() {
 
         helpers.target.appendChild(columnView);
         columnView.appendChild(column);
-      });
-
-      it('should fire a "coral-columnview:loaditems" event until there is no more space on screen', function(done) {
-        done();
       });
     });
 

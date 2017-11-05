@@ -7,7 +7,8 @@
     "url": "https://git.corp.adobe.com/Coral/coralui"
   },
   "devDependencies": {
-    "@coralui/coralui-theme-cloudui": "^9.3.0",
+    "@coralui/coralui-theme-spectrum": "^2.3.7",
+    "coralui-compat": "file:coralui-compat",
     "coralui-component-accordion": "file:coralui-component-accordion",
     "coralui-component-actionbar": "file:coralui-component-actionbar",
     "coralui-component-alert": "file:coralui-component-alert",
@@ -56,7 +57,6 @@
     "coralui-component-wait": "file:coralui-component-wait",
     "coralui-component-wizardview": "file:coralui-component-wizardview",
     "coralui-dragaction": "file:coralui-dragaction",
-    "coralui-compat": "file:coralui-compat",
     "coralui-gulp": "file:coralui-gulp",
     "gulp": "^3.9.1"
   },

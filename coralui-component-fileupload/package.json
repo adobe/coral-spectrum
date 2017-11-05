@@ -3,7 +3,7 @@
   "version": "5.0.0",
   "description": "FileUpload component",
   "dependencies": {
-    "@coralui/coralui-theme-cloudui": "^9.3.0",
+    "@coralui/coralui-theme-spectrum": "^2.3.7",
     "coralui-mixin-component": "file:../coralui-mixin-component",
     "coralui-mixin-formfield": "file:../coralui-mixin-formfield",
     "coralui-externals": "file:../coralui-externals",

@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "Icon component",
   "dependencies": {
-    "@coralui/coralui-theme-cloudui": "^9.3.0",
+    "@coralui/coralui-theme-spectrum": "^2.3.7",
     "coralui-mixin-component": "file:../coralui-mixin-component",
     "coralui-externals": "file:../coralui-externals",
     "coralui-util": "file:../coralui-util"

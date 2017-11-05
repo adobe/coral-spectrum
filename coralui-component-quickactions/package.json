@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "Quickactions component",
   "dependencies": {
-    "@coralui/coralui-theme-cloudui": "^9.3.0",
+    "@coralui/coralui-theme-spectrum": "^2.3.7",
     "coralui-mixin-component": "file:../coralui-mixin-component",
     "coralui-collection": "file:../coralui-collection",
     "coralui-component-overlay": "file:../coralui-component-overlay",

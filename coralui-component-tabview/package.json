@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "TabView component",
   "dependencies": {
-    "@coralui/coralui-theme-cloudui": "^9.3.0",
+    "@coralui/coralui-theme-spectrum": "^2.3.7",
     "coralui-component-panelstack": "file:../coralui-component-panelstack",
     "coralui-component-tablist": "file:../coralui-component-tablist",
     "coralui-mixin-component": "file:../coralui-mixin-component",

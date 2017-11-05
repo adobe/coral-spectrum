@@ -156,14 +156,14 @@ describe('Coral.Dialog', function() {
       
         // Make sure the dialog is positioned
         helpers.next(function() {
+          expect(el._elements.wrapper.style.width).to.equal('');
+          
           el.movable = true;
         
           var offset = {
             left: dragElement.offsetLeft,
             top: dragElement.offsetTop
           };
-        
-          var width = dragElement.getBoundingClientRect().width;
         
           el.dispatchEvent(dummyMouseEvent('mousedown'));
           el.dispatchEvent(dummyMouseEvent('mousemove', 10, 20));
@@ -180,7 +180,7 @@ describe('Coral.Dialog', function() {
         
           // The fixed width is set only once all dialog items are defined
           Coral.commons.ready(el, function() {
-            expect(el._elements.wrapper.style.width).to.equal(width + 'px');
+            expect(el._elements.wrapper.style.width).to.not.equal('');
             done();
           });
         });
