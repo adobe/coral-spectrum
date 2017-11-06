@@ -19,8 +19,6 @@
  @class Coral.Tab.Label
  @classdesc Tab's label component
  @htmltag coral-tab-label
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class TabLabel extends HTMLElement {}
-
-export default TabLabel;
+export default () => document.createElement('coral-tab-label');

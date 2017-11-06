@@ -19,8 +19,6 @@
  @class Coral.Tooltip.Content
  @classdesc Tooltip's content component
  @htmltag coral-tooltip-content
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class TooltipContent extends HTMLElement {}
-
-export default TooltipContent;
+export default () => document.createElement('coral-tooltip-content');

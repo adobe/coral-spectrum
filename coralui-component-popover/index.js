@@ -13,8 +13,6 @@ commons.extend(strings, {
 
 window.customElements.define('coral-popover', Popover);
 window.customElements.define('coral-popover-separator', PopoverSeparator);
-window.customElements.define('coral-popover-content', PopoverContent);
-window.customElements.define('coral-popover-header', PopoverHeader);
 
 // Expose component on the Coral namespace
 window.Coral = window.Coral || {};

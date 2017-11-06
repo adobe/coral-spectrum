@@ -19,8 +19,6 @@
  @class Coral.Button.Label
  @classdesc The Button label content
  @htmltag coral-button-label
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class ButtonLabel extends HTMLElement {}
-
-export default ButtonLabel;
+export default () => document.createElement('coral-button-label');

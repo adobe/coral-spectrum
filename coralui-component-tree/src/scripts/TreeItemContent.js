@@ -19,8 +19,6 @@
  @class Coral.Tree.Item.Content
  @classdesc Tree item's content component
  @htmltag coral-tree-item-content
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class TreeItemContent extends HTMLElement {}
-
-export default TreeItemContent;
+export default () => document.createElement('coral-tree-item-content');

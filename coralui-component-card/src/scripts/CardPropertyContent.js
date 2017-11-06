@@ -19,8 +19,6 @@
  @class Coral.Card.Property.Content
  @classdesc A Card Property Content component
  @htmltag coral-card-property-content
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class CardPropertyContent extends HTMLElement {}
-
-export default CardPropertyContent;
+export default () => document.createElement('coral-card-property-content');

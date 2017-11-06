@@ -12,7 +12,6 @@ import TableFoot from './src/scripts/TableFoot';
 window.customElements.define('coral-table-column', TableColumn, {extends: 'col'});
 window.customElements.define('coral-table-cell', TableCell, {extends: 'td'});
 window.customElements.define('coral-table-headercell', TableHeaderCell, {extends: 'th'});
-window.customElements.define('coral-table-headercell-content', TableHeaderCellContent);
 window.customElements.define('coral-table-row', TableRow, {extends: 'tr'});
 window.customElements.define('coral-table-head', TableHead, {extends: 'thead'});
 window.customElements.define('coral-table-body', TableBody, {extends: 'tbody'});

@@ -19,8 +19,6 @@
  @class Coral.Shell.User.Subheading
  @classdesc Shell's User subheading component
  @htmltag coral-shell-user-subheading
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class ShellUserSubheading extends HTMLElement {}
-
-export default ShellUserSubheading;
+export default () => document.createElement('coral-shell-user-subheading');

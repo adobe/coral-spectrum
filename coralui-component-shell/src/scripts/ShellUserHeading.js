@@ -19,8 +19,6 @@
  @class Coral.Shell.User.Heading
  @classdesc Shell's User heading component
  @htmltag coral-shell-user-heading
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class ShellUserHeading extends HTMLElement {}
-
-export default ShellUserHeading;
+export default () => document.createElement('coral-shell-user-heading');

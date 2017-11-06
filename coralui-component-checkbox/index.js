@@ -3,7 +3,6 @@ import Checkbox from './src/scripts/Checkbox';
 import CheckboxLabel from './src/scripts/CheckboxLabel';
 
 window.customElements.define('coral-checkbox', Checkbox);
-window.customElements.define('coral-checkbox-label', CheckboxLabel);
 
 // Expose component on the Coral namespace
 window.Coral = window.Coral || {};

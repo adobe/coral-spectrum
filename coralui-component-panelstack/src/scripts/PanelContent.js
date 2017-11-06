@@ -19,8 +19,6 @@
  @class Coral.Panel.Content
  @classdesc A PanelStack Item Content component
  @htmltag coral-panel-content
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class PanelContent extends HTMLElement {}
-
-export default PanelContent;
+export default () => document.createElement('coral-panel-content');

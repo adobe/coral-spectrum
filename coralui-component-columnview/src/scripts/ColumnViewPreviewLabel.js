@@ -19,8 +19,6 @@
  @class Coral.ColumnView.Preview.Label
  @classdesc ColumnView's preview label component
  @htmltag coral-columnview-preview-label
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class ColumnViewPreviewLabel extends HTMLElement {}
-
-export default ColumnViewPreviewLabel;
+export default () => document.createElement('coral-columnview-preview-label');

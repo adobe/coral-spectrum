@@ -41,6 +41,27 @@ const FOCUSABLE_ELEMENTS = [
   '[contenteditable]'
 ];
 
+// @polyfill IE11
+// Content zone names to support Coral.commons.ready + lightweight tags
+const contentZoneNames = [
+  'label',
+  'content',
+  'propertylist',
+  'asset',
+  'info',
+  'overlay',
+  'thumbnail',
+  'separator',
+  'value',
+  'header',
+  'footer',
+  'name',
+  'subheading'
+];
+
+// @polyfill IE11
+const isIE = navigator.userAgent.match(/Trident/) || navigator.userAgent.match(/Edge/);
+
 /**
  Converts CSS time to milliseconds. It supports both s and ms units. If the provided value has an unrecogenized unit,
  zero will be returned.
@@ -97,6 +118,26 @@ function returnFirst(first, second) {
  */
 function isFunction(object) {
   return typeof object === 'function';
+}
+
+/**
+ Check if the provided object is a function
+ 
+ @ignore
+ @polyfill IE11
+ 
+ @param {String} name
+ The node name to validate
+ 
+ @returns {Boolean} Whether the content zone should be validated against Coral.commons.ready
+ */
+function isHTMLUnknownElementIE(name) {
+  if (isIE) {
+    const names = name.split('-');
+    return names.length > 2 && contentZoneNames.indexOf(names.pop()) === -1;
+  }
+  
+  return false;
 }
 
 /**
@@ -324,20 +365,25 @@ class Commons {
     
     // Holds promises that resolve when the elements is defined
     const promises = [];
+  
+    // Holds node names that require validation
+    const nodeNames = [];
     
     // Finds the custom elements name and adds it to the promises
     const addName = function(el) {
       let name = el.nodeName.toLowerCase();
       
       // Check nodename
-      if (name.indexOf('coral') === 0 && el instanceof HTMLUnknownElement) {
+      if (name.indexOf('coral') === 0 && el instanceof HTMLUnknownElement && isHTMLUnknownElementIE(name) && nodeNames.indexOf(name) === -1) {
+        nodeNames.push(name);
         promises.push(window.customElements.whenDefined(name));
       }
       else {
         // Fallback to is attribute
         name = String(el.getAttribute('is')).toLowerCase();
         
-        if (name.indexOf('coral') === 0 && el instanceof HTMLUnknownElement) {
+        if (name.indexOf('coral') === 0 && el instanceof HTMLUnknownElement && isHTMLUnknownElementIE(name) && nodeNames.indexOf(name) === -1) {
+          nodeNames.push(name);
           promises.push(window.customElements.whenDefined(name));
         }
       }

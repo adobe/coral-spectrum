@@ -19,8 +19,6 @@
  @class Coral.Tag.Label
  @classdesc Tag's label component
  @htmltag coral-tag-label
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class TagLabel extends HTMLElement {}
-
-export default TagLabel;
+export default () => document.createElement('coral-tag-label');

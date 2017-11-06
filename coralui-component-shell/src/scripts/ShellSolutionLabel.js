@@ -19,8 +19,6 @@
  @class Coral.Shell.Solution.Label
  @classdesc Shell's Solution label component
  @htmltag coral-shell-solution-label
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class ShellSolutionLabel extends HTMLElement {}
-
-export default ShellSolutionLabel;
+export default () => document.createElement('coral-shell-solution-label');

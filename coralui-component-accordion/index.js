@@ -6,8 +6,6 @@ import AccordionItemContent from './src/scripts/AccordionItemContent';
 
 window.customElements.define('coral-accordion', Accordion);
 window.customElements.define('coral-accordion-item', AccordionItem);
-window.customElements.define('coral-accordion-item-content', AccordionItemContent);
-window.customElements.define('coral-accordion-item-label', AccordionItemLabel);
 
 // Expose component on the Coral namespace
 window.Coral = window.Coral || {};

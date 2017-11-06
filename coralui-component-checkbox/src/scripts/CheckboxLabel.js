@@ -19,8 +19,6 @@
  @class Coral.Checkbox.Label
  @classdesc The Checkbox label
  @htmltag coral-checkbox-label
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class CheckboxLabel extends HTMLElement {}
-
-export default CheckboxLabel;
+export default () => document.createElement('coral-checkbox-label');

@@ -5,7 +5,6 @@ import PanelContent from './src/scripts/PanelContent';
 
 window.customElements.define('coral-panelstack', PanelStack);
 window.customElements.define('coral-panel', Panel);
-window.customElements.define('coral-panel-content', PanelContent);
 
 // Expose component on the Coral namespace
 window.Coral = window.Coral || {};

@@ -454,12 +454,8 @@ describe('Coral.commons', function() {
     it('should call the provided callback (even if the browser does not support transitions)', function(done) {
       var el = helpers.target.appendChild(document.createElement('div'));
       el.textContent = 'onTransitionEnd Test';
-      el.setAttribute('style', '-webkit-transition: all 300ms ease; -moz-transition: all 300ms ease; -o-transition: all 300ms ease; transition: all 300ms ease;');
-
-      var animate = function() {
-        el.style.marginTop = '100px';
-      };
-
+      el.setAttribute('style', '-webkit-transition: all 100ms ease; -moz-transition: all 100ms ease; -o-transition: all 100ms ease; transition: all 100ms ease;');
+      
       Coral.commons.transitionEnd(el, function(event) {
         expect(el).to.equal(event.target);
 
@@ -469,10 +465,8 @@ describe('Coral.commons', function() {
 
         done();
       });
-
-
-      // Wait a moment after the append before triggering the animation otherwise transitionend event doesn't fire
-      setTimeout(animate, 1);
+  
+      el.style.marginTop = '100px';
     });
 
     it('should call the provided callback even if no transition was configured', function(done) {

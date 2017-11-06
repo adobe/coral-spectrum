@@ -19,8 +19,6 @@
  @class Coral.Radio.Label
  @classdesc The Radio label
  @htmltag coral-radio-label
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class RadioLabel extends HTMLElement {}
-
-export default RadioLabel;
+export default () => document.createElement('coral-radio-label');

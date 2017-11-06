@@ -19,8 +19,6 @@
  @class Coral.Popover.Content
  @classdesc A Popover Content component
  @htmltag coral-popover-content
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class PopoverContent extends HTMLElement {}
-
-export default PopoverContent;
+export default () => document.createElement('coral-popover-content');

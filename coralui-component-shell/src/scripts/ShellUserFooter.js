@@ -19,8 +19,6 @@
  @class Coral.Shell.User.Footer
  @classdesc Shell's User footer component
  @htmltag coral-shell-user-footer
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class ShellUserFooter extends HTMLElement {}
-
-export default ShellUserFooter;
+export default () => document.createElement('coral-shell-user-footer');

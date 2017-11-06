@@ -19,8 +19,6 @@
  @class Coral.ColumnView.Preview.Separator
  @classdesc ColumnView's preview separator component
  @htmltag coral-columnview-preview-separator
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class ColumnViewPreviewSeparator extends HTMLElement {}
-
-export default ColumnViewPreviewSeparator;
+export default () => document.createElement('coral-columnview-preview-separator');

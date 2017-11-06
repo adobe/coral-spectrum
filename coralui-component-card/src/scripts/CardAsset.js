@@ -19,9 +19,7 @@
  @class Coral.Card.Asset
  @classdesc The Card Asset
  @htmltag coral-card-asset
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class CardAsset extends HTMLElement {}
-
-export default CardAsset;
+export default () => document.createElement('coral-card-asset');
 

@@ -19,8 +19,6 @@
  @class Coral.ColumnView.Preview.Asset
  @classdesc ColumnView's preview asset component
  @htmltag coral-columnview-preview-asset
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class ColumnViewPreviewAsset extends HTMLElement {}
-
-export default ColumnViewPreviewAsset;
+export default () => document.createElement('coral-columnview-preview-asset');

@@ -19,8 +19,6 @@
  @class Coral.Card.Overlay
  @classdesc The Card Overlay
  @htmltag coral-card-overlay
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class CardOverlay extends HTMLElement {}
-
-export default CardOverlay;
+export default () => document.createElement('coral-card-overlay');

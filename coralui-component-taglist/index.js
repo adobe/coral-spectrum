@@ -11,7 +11,6 @@ commons.extend(strings, {
 });
 
 window.customElements.define('coral-tag', Tag);
-window.customElements.define('coral-tag-label', TagLabel);
 window.customElements.define('coral-taglist', TagList);
 
 // Expose component on the Coral namespace

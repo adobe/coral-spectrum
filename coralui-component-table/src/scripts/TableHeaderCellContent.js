@@ -19,8 +19,6 @@
  @class Coral.Table.HeaderCell.Content
  @classdesc The Table HeaderCell content
  @htmltag coral-table-headercell-content
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class TableHeaderCellContent extends HTMLElement {}
-
-export default TableHeaderCellContent;
+export default () => document.createElement('coral-table-headercell-content');

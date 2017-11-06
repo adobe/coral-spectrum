@@ -43,11 +43,9 @@ import ShellOrganization from './src/scripts/ShellOrganization';
 import ShellSuborganization from './src/scripts/ShellSuborganization';
 
 window.customElements.define('coral-shell', Shell);
-window.customElements.define('coral-shell-content', ShellContent);
 
 window.customElements.define('coral-shell-header', ShellHeader);
 window.customElements.define('coral-shell-homeanchor', ShellHomeAnchor, {extends: 'a'});
-window.customElements.define('coral-shell-homeanchor-label', ShellHomeAnchorLabel);
 
 window.customElements.define('coral-shell-help', ShellHelp);
 window.customElements.define('coral-shell-help-item', ShellHelpItem, {extends: 'a'});
@@ -57,11 +55,6 @@ window.customElements.define('coral-shell-menubar', ShellMenuBar);
 window.customElements.define('coral-shell-menubar-item', ShellMenuBarItem);
 
 window.customElements.define('coral-shell-user', ShellUser);
-window.customElements.define('coral-shell-user-content', ShellUserContent);
-window.customElements.define('coral-shell-user-footer', ShellUserFooter);
-window.customElements.define('coral-shell-user-header', ShellUserHeading);
-window.customElements.define('coral-shell-user-name', ShellUserName);
-window.customElements.define('coral-shell-user-subheading', ShellUserSubheading);
 
 window.customElements.define('coral-shell-workspaces', ShellWorkspaces);
 window.customElements.define('coral-shell-workspace', ShellWorkspace, {extends: 'a'});
@@ -69,10 +62,8 @@ window.customElements.define('coral-shell-workspace', ShellWorkspace, {extends: 
 window.customElements.define('coral-shell-solutionswitcher', ShellSolutionSwitcher);
 window.customElements.define('coral-shell-solutions', ShellSolutions);
 window.customElements.define('coral-shell-solution', ShellSolution, {extends: 'a'});
-window.customElements.define('coral-shell-solution-label', ShellSolutionLabel);
 
 window.customElements.define('coral-shell-orgswitcher', ShellOrgSwitcher);
-window.customElements.define('coral-shell-orgswitcher-footer', ShellOrgSwitcherFooter);
 window.customElements.define('coral-shell-organization', ShellOrganization);
 window.customElements.define('coral-shell-suborganization', ShellSuborganization);
 

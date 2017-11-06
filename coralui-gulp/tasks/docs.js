@@ -23,7 +23,7 @@ module.exports = function(gulp) {
     
     // todo due to https://github.com/esdoc/esdoc/issues/432, we have to manually create a fake README
     try {
-      fs.writeFileSync('index.md', '', { flag: 'wx' });
+      fs.writeFileSync('README.md', '', { flag: 'wx' });
     }
     catch (e) {}
     

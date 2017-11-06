@@ -5,7 +5,6 @@ import MultifieldItemContent from './src/scripts/MultifieldItemContent';
 
 window.customElements.define('coral-multifield', Multifield);
 window.customElements.define('coral-multifield-item', MultifieldItem);
-window.customElements.define('coral-multifield-item-content', MultifieldItemContent);
 
 // Expose component on the Coral namespace
 window.Coral = window.Coral || {};

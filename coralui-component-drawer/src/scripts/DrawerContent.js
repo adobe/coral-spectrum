@@ -19,8 +19,6 @@
  @class Coral.Drawer.Content
  @classdesc Drawer content component
  @htmltag coral-drawer-content
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class DrawerContent extends HTMLElement {}
-
-export default DrawerContent;
+export default () => document.createElement('coral-drawer-content');

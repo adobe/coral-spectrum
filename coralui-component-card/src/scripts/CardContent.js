@@ -19,8 +19,6 @@
  @class Coral.Card.Content
  @classdesc The Card Content
  @htmltag coral-card-content
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class CardContent extends HTMLElement {}
-
-export default CardContent;
+export default () => document.createElement('coral-card-content');

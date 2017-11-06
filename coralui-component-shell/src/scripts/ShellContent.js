@@ -19,8 +19,6 @@
  @class Coral.Shell.Content
  @classdesc Shell's content component
  @htmltag coral-shell-content
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class ShellContent extends HTMLElement {}
-
-export default ShellContent;
+export default () => document.createElement('coral-shell-content');

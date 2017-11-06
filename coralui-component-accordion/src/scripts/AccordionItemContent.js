@@ -19,8 +19,6 @@
  @class Coral.Accordion.Item.Content
  @classdesc Accordion item's content component
  @htmltag coral-accordion-item-content
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class AccordionItemContent extends HTMLElement {}
-
-export default AccordionItemContent;
+export default () => document.createElement('coral-accordion-item-content');

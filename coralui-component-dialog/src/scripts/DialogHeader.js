@@ -19,8 +19,6 @@
  @class Coral.Dialog.Header
  @classdesc The Dialog header content
  @htmltag coral-dialog-header
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class DialogHeader extends HTMLElement {}
-
-export default DialogHeader;
+export default () => document.createElement('coral-dialog-header');

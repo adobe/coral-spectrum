@@ -19,8 +19,6 @@
  @class Coral.Shell.User.Name
  @classdesc Shell's User name component
  @htmltag coral-shell-user-name
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class ShellUserName extends HTMLElement {}
-
-export default ShellUserName;
+export default () => document.createElement('coral-shell-user-name');

@@ -19,8 +19,6 @@
  @class Coral.Card.Info
  @classdesc The Card Info
  @htmltag coral-card-info
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class CardInfo extends HTMLElement {}
-
-export default CardInfo;
+export default () => document.createElement('coral-card-info');

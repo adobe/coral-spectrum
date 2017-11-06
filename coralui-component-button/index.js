@@ -3,7 +3,6 @@ import Button from './src/scripts/Button';
 import ButtonLabel from './src/scripts/ButtonLabel';
 
 window.customElements.define('coral-button', Button, {extends: 'button'});
-window.customElements.define('coral-button-label', ButtonLabel);
 
 // Expose component on the Coral namespace
 window.Coral = window.Coral || {};

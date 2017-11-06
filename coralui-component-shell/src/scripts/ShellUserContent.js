@@ -19,8 +19,6 @@
  @class Coral.Shell.User.Content
  @classdesc Shell's User content component
  @htmltag coral-shell-user-content
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class ShellUserContent extends HTMLElement {}
-
-export default ShellUserContent;
+export default () => document.createElement('coral-shell-user-content');

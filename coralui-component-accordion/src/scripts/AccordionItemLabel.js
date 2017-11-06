@@ -19,8 +19,6 @@
  @class Coral.Accordion.Item.Label
  @classdesc Accordion item's label component
  @htmltag coral-accordion-item-label
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class AccordionItemLabel extends HTMLElement {}
-
-export default AccordionItemLabel;
+export default () => document.createElement('coral-accordion-item-label');

@@ -19,8 +19,6 @@
  @class Coral.Popover.Header
  @classdesc A Popover Header component
  @htmltag coral-popover-header
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class PopoverHeader extends HTMLElement {}
-
-export default PopoverHeader;
+export default () => document.createElement('coral-popover-header');

@@ -19,9 +19,7 @@
  @class Coral.AnchorButton.Label
  @classdesc The AnchorButton label content
  @htmltag coral-anchorbutton-label
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class AnchorButtonLabel extends HTMLElement {}
-
-export default AnchorButtonLabel;
+export default () => document.createElement('coral-anchorbutton-label');
 

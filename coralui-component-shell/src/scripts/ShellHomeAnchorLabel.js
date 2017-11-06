@@ -19,8 +19,6 @@
  @class Coral.Shell.HomeAnchor.Label
  @classdesc Shell HomeAnchor's label component
  @htmltag coral-shell-homeanchor-label
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class ShellHomeAnchorLabel extends HTMLElement {}
-
-export default ShellHomeAnchorLabel;
+export default () => document.createElement('coral-shell-homeanchor-label');

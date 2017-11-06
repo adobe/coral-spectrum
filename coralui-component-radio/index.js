@@ -3,7 +3,6 @@ import Radio from './src/scripts/Radio';
 import RadioLabel from './src/scripts/RadioLabel';
 
 window.customElements.define('coral-radio', Radio);
-window.customElements.define('coral-radio-label', RadioLabel);
 
 // Expose component on the Coral namespace
 window.Coral = window.Coral || {};
