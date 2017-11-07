@@ -71,7 +71,7 @@ const match = {
  @htmltag coral-autocomplete
  @extends {HTMLElement}
  @extends {ComponentMixin}
- @extends {FormFieldMixin)
+ @extends {FormFieldMixin}
  */
 class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   /** @ignore */
