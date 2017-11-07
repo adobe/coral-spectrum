@@ -1,7 +1,7 @@
 {
   "name": "@coralui/coralui",
   "description": "CoralUI is a modular library of touch-first web components for creating beautiful experiences.",
-  "version": "4.0.0-beta.1",
+  "version": "4.0.0-beta.2",
   "repository": {
     "type": "git",
     "url": "https://git.corp.adobe.com/Coral/coralui"
