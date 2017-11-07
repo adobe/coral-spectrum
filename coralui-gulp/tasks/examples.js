@@ -28,7 +28,7 @@ module.exports = function(gulp) {
       .pipe(modifyFile((content, path) => {
         // Replace coralui.js and coralui.css paths
         if (path.split('/').pop() === 'index.html') {
-          content = `${content.replace(regExp, '../..')}`;
+          content = `${content.replace(regExp, '..')}`;
         }
         
         // Replace component example path
