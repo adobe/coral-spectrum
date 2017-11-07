@@ -21,4 +21,4 @@
 
 ### Where is the CoralUI (3.x) documentation ?
 
-You'll find the 3.x documentation at http://coralui3.corp.adobe.com
+You'll find the 3.x documentation at http://coralui.corp.adobe.com/3.x
