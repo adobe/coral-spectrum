@@ -32,7 +32,7 @@ module.exports = {
     return theme;
   },
   addTheme: function() {
-    return `import '@coralui/coralui-theme-${theme}/build/css/coral.css';\n`;
+    return `import '@coralui/coralui-theme-${theme}/build/css/coral.css';`;
   },
   getIndex: function() {
     return theme ? `index-${theme}` : 'index';

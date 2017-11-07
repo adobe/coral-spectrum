@@ -41,7 +41,8 @@ Then you can install coralui npm packages :
 npm install @coralui/coralui
 ```
 
-If your project uses ES6 imports/exports, you can import only required components :
+If your project uses a module bundler (e.g. Webpack) and a ES6/7 to ES5 transpiler (e.g. Babel), 
+you can bundle only needed components :
 
 ```
 import {Button, Textfield} from '@coralui/coralui';  
@@ -54,7 +55,7 @@ We'll show you how to customize a build :
 1. Fork the [repository](https://git.corp.adobe.com/Coral/coralui) on GitHub
 2. Open `index.js` and remove components you would like excluded from the build. Repeat for `src/tests/index.js`.
 3. Run `npm install`. Optionally you can also add additional components to `package.json`.
-4. Run `gulp`. This will generate the build.
+4. Run `gulp`. This will generate the build and run the tests.
    
 ## Development
    
@@ -63,6 +64,6 @@ First run `npm i` then you can use below Gulp tasks to work on CoralUI component
 * `gulp minify` to generate a minified version of the JS/CSS files.
 * `gulp tests` to run the tests.
 * `gulp docs` to build the documentation.
-* `gulp watch` to run the examples under `localhost:9001/examples/` and update JS/CSS files on the fly.
+* `gulp watch` to run the examples under `localhost:9001/examples/` and watch changes in the src folder.
 * `gulp` to generate the JS/CSS files and minified files, run the tests and generate the docs.
 

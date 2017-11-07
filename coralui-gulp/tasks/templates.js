@@ -17,7 +17,7 @@
 module.exports = function(gulp) {
   const plumber = require('gulp-plumber');
   const domly = require('gulp-domly');
-  const defineModule = require('gulp-define-module');
+  const modifyFile = require('gulp-modify-file');
   
   gulp.task('templates', function() {
     return gulp.src(['src/templates/*.html', 'node_modules/coralui-*/src/templates/*.html'])
@@ -29,8 +29,8 @@ module.exports = function(gulp) {
           appendClassNames: true // Do className += 'whatever' instead of overwriting it
         }
       }))
-      .pipe(defineModule('es6', {
-        wrapper: 'template; let template = <%= contents %>'
+      .pipe(modifyFile((content) => {
+        return `const template = ${content};\nexport default template;`;
       }))
       .pipe(gulp.dest(function (file) {
         return file.base;

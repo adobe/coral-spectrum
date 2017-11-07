@@ -17,7 +17,7 @@
 module.exports = function(gulp) {
   const plumber = require('gulp-plumber');
   const rename = require('gulp-rename');
-  const header = require('gulp-header');
+  const modifyFile = require('gulp-modify-file');
   const themeHelper = require('../helpers/theme');
   
   gulp.task('theme', function() {
@@ -25,7 +25,9 @@ module.exports = function(gulp) {
     if (theme) {
       return gulp.src('index.js')
         .pipe(plumber())
-        .pipe(header(themeHelper.addTheme()))
+        .pipe(modifyFile((content) => {
+          return `${themeHelper.addTheme()}\n${content}`;
+        }))
         .pipe(rename({
           basename: themeHelper.getIndex()
         }))
@@ -35,5 +37,4 @@ module.exports = function(gulp) {
       return gulp.src('index.js')
     }
   });
-  
 };
