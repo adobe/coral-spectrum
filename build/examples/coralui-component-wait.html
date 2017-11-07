@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Coral.Wait</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+  <script src="../../js/coral.js"></script>
+
+  <style>
+    html {
+      width: 100%;
+      height: 100%;
+    }
+    body {
+      display: table;
+      width: 100%;
+      height: 100%;
+    }
+    .title {
+      max-width: 80px;
+    }
+    .col {
+      display: table-cell;
+      padding: 8px;
+    }
+    .centerTest {
+      width: 100%;
+      border: 1px solid gray;
+      position: relative;
+      height: 100px;
+    }
+  </style>
+
+  <script>
+    function copyContent(source, dest, childSelector, cb) {
+      dest = document.querySelector(dest);
+      source = document.querySelector(source);
+      dest.innerHTML = source.innerHTML;
+      if (childSelector && cb) {
+        Array.prototype.forEach.call(dest.querySelectorAll(childSelector), cb);
+      }
+      return dest;
+    }
+  </script>
+</head>
+<body class="coral--light">
+<coral-wait centered></coral-wait>
+
+<section class="col title">
+  <h1 class="coral-Heading coral-Heading--1">Coral.Wait</h1>
+  <p style="font-size: 18px; line-height:1; font-weight: 100;">
+    Wait is used as to indicate a process that is in-progress for an indefinite amount of time.
+  </p>
+</section>
+<section class="col" id="example_light">
+  <h2>Wait</h2>
+  <coral-wait></coral-wait>
+  <coral-wait variant="dots"></coral-wait>
+  <h2>Centered Wait</h2>
+  <div class="centerTest">
+    <coral-wait centered></coral-wait>
+  </div>
+  <div class="centerTest">
+    <coral-wait centered variant="dots"></coral-wait>
+  </div>
+  <h2>Large wait</h2>
+  <coral-wait size="L"></coral-wait>
+  <coral-wait size="L" variant="dots"></coral-wait>
+  <h2>Centered large wait</h2>
+  <div class="centerTest">
+    <coral-wait size="L" centered></coral-wait>
+  </div>
+  <div class="centerTest">
+    <coral-wait size="L" variant="dots" centered></coral-wait>
+  </div>
+</section>
+<section class="coral--dark col" id="example_dark"></section>
+<script>copyContent('#example_light', '#example_dark');</script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Autocomplete</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+  <script src="../../js/coral.js"></script>
+
+  <style>
+    body {
+      padding: 15px;
+    }
+  </style>
+
+</head>
+<body class="coral--light">
+
+  <h1 class="coral-Heading coral-Heading--1">default</h1>
+  <form action="/formtest" class="coral-Form coral-Form--vertical u-columnMedium">
+    <label id="browserLabel0" class="coral-Form-fieldlabel">Browser</label>
+    <coral-autocomplete labelledby="browserLabel0" name="browser">
+      <coral-autocomplete-item value="ch">
+        Chrome
+      </coral-autocomplete-item>
+      <coral-autocomplete-item value="fi">
+        Firefox
+      </coral-autocomplete-item>
+      <coral-autocomplete-item value="ie">
+        Internet Explorer
+      </coral-autocomplete-item>
+      <coral-autocomplete-item value="op">
+        Opera
+      </coral-autocomplete-item>
+      <coral-autocomplete-item value="sa">
+        Safari
+      </coral-autocomplete-item>
+    </coral-autocomplete>
+    <button is="coral-button" type="submit">Submit</button>
+  </form>
+
+  <h1 class="coral-Heading coral-Heading--1">forceSelection</h1>
+  <form action="/formtest" class="coral-Form coral-Form--vertical u-columnMedium">
+    <label id="browserLabel1" class="coral-Form-fieldlabel">Browser</label>
+    <coral-autocomplete forceselection labelledby="browserLabel1" icon="search" name="browser">
+      <coral-autocomplete-item value="ch">Chrome</coral-autocomplete-item>
+      <coral-autocomplete-item value="fi">Firefox</coral-autocomplete-item>
+      <coral-autocomplete-item value="ie">Internet Explorer</coral-autocomplete-item>
+      <coral-autocomplete-item value="op">Opera</coral-autocomplete-item>
+      <coral-autocomplete-item value="sa">Safari</coral-autocomplete-item>
+    </coral-autocomplete>
+    <button is="coral-button" type="submit">Submit</button>
+  </form>
+
+  <h1 class="coral-Heading coral-Heading--1">multiple</h1>
+  <form action="/formtest" class="coral-Form coral-Form--vertical u-columnMedium">
+    <label id="browserLabel2" class="coral-Form-fieldlabel">Browser</label>
+    <coral-autocomplete multiple labelledby="browserLabel2" icon="search" name="browser">
+      <coral-autocomplete-item value="ch">Chrome</coral-autocomplete-item>
+      <coral-autocomplete-item value="fi">Firefox</coral-autocomplete-item>
+      <coral-autocomplete-item value="ie">Internet Explorer</coral-autocomplete-item>
+      <coral-autocomplete-item value="op">Opera</coral-autocomplete-item>
+      <coral-autocomplete-item value="sa">Safari</coral-autocomplete-item>
+    </coral-autocomplete>
+    <button is="coral-button" type="submit">Submit</button>
+  </form>
+
+  <h1 class="coral-Heading coral-Heading--1">multiple + forceSelection</h1>
+  <form action="/formtest" class="coral-Form coral-Form--vertical u-columnMedium">
+    <label id="browserLabel3" class="coral-Form-fieldlabel">Browser</label>
+    <coral-autocomplete multiple forceselection labelledby="browserLabel3" icon="search" name="browser">
+      <coral-autocomplete-item value="ch">Chrome</coral-autocomplete-item>
+      <coral-autocomplete-item value="fi">Firefox</coral-autocomplete-item>
+      <coral-autocomplete-item value="ie">Internet Explorer</coral-autocomplete-item>
+      <coral-autocomplete-item value="op">Opera</coral-autocomplete-item>
+      <coral-autocomplete-item value="sa">Safari</coral-autocomplete-item>
+    </coral-autocomplete>
+    <button is="coral-button" type="submit">Submit</button>
+  </form>
+
+  <hr>
+
+  <h1 class="coral-Heading coral-Heading--1">default + selected</h1>
+  <form action="/formtest" class="coral-Form coral-Form--vertical u-columnMedium">
+    <label id="browserLabel4" class="coral-Form-fieldlabel">Browser</label>
+    <coral-autocomplete labelledby="browserLabel4" icon="search" name="browser">
+      <coral-autocomplete-item selected value="ch">Chrome</coral-autocomplete-item>
+      <coral-autocomplete-item value="fi">Firefox</coral-autocomplete-item>
+      <coral-autocomplete-item value="ie">Internet Explorer</coral-autocomplete-item>
+      <coral-autocomplete-item value="op">Opera</coral-autocomplete-item>
+      <coral-autocomplete-item value="sa">Safari</coral-autocomplete-item>
+    </coral-autocomplete>
+    <button is="coral-button" type="submit">Submit</button>
+  </form>
+
+
+  <h1 class="coral-Heading coral-Heading--1">multiple + selected</h1>
+  <form action="/formtest" class="coral-Form coral-Form--vertical u-columnMedium">
+    <label id="browserLabel5" class="coral-Form-fieldlabel">Browser</label>
+    <coral-autocomplete multiple labelledby="browserLabel5" icon="search" name="browser">
+      <coral-autocomplete-item selected value="ch">Chrome</coral-autocomplete-item>
+      <coral-autocomplete-item selected value="fi">Firefox</coral-autocomplete-item>
+      <coral-autocomplete-item value="ie">Internet Explorer</coral-autocomplete-item>
+      <coral-autocomplete-item value="op">Opera</coral-autocomplete-item>
+      <coral-autocomplete-item selected value="sa">Safari</coral-autocomplete-item>
+    </coral-autocomplete>
+    <button is="coral-button" type="submit">Submit</button>
+  </form>
+
+  <hr>
+
+  <h1 class="coral-Heading coral-Heading--1">disabled</h1>
+  <form action="/formtest" class="coral-Form coral-Form--vertical u-columnMedium">
+    <label id="browserLabel6" class="coral-Form-fieldlabel">Browser</label>
+    <coral-autocomplete disabled labelledby="browserLabel6" icon="search" name="browser">
+      <coral-autocomplete-item value="ch">Chrome</coral-autocomplete-item>
+      <coral-autocomplete-item value="fi">Firefox</coral-autocomplete-item>
+      <coral-autocomplete-item value="ie">Internet Explorer</coral-autocomplete-item>
+      <coral-autocomplete-item value="op">Opera</coral-autocomplete-item>
+      <coral-autocomplete-item value="sa">Safari</coral-autocomplete-item>
+    </coral-autocomplete>
+    <button is="coral-button" type="submit">Submit</button>
+  </form>
+
+  <h1 class="coral-Heading coral-Heading--1">invalid</h1>
+  <form action="/formtest" class="coral-Form coral-Form--vertical u-columnMedium">
+    <label id="browserLabel7" class="coral-Form-fieldlabel">Browser</label>
+    <coral-autocomplete invalid labelledby="browserLabel7" icon="search" name="browser">
+      <coral-autocomplete-item value="ch">Chrome</coral-autocomplete-item>
+      <coral-autocomplete-item value="fi">Firefox</coral-autocomplete-item>
+      <coral-autocomplete-item value="ie">Internet Explorer</coral-autocomplete-item>
+      <coral-autocomplete-item value="op">Opera</coral-autocomplete-item>
+      <coral-autocomplete-item value="sa">Safari</coral-autocomplete-item>
+    </coral-autocomplete>
+    <button is="coral-button" type="submit">Submit</button>
+  </form>
+
+    <h1 class="coral-Heading coral-Heading--1">maxlength</h1>
+    <form action="/formtest" class="coral-Form coral-Form--vertical u-columnMedium">
+      <label id="browserLabel8" class="coral-Form-fieldlabel">Browser</label>
+      <coral-autocomplete labelledby="browserLabel8" icon="search" name="browser" maxlength="10">
+        <coral-autocomplete-item value="ch">Chrome</coral-autocomplete-item>
+        <coral-autocomplete-item value="fi">Firefox</coral-autocomplete-item>
+        <coral-autocomplete-item value="ie">Internet Explorer</coral-autocomplete-item>
+        <coral-autocomplete-item value="op">Opera</coral-autocomplete-item>
+        <coral-autocomplete-item value="sa">Safari</coral-autocomplete-item>
+      </coral-autocomplete>
+      <button is="coral-button" type="submit">Submit</button>
+    </form>
+
+</body>
+</html>

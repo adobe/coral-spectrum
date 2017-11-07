@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Coral.PanelStack</title>
+    <link rel="stylesheet" href="../../css/coral.css">
+    <script src="../../js/coral.js"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var panelList = document.getElementById('panelList');
+        var addPanel = document.getElementById('addPanel');
+        var cycleActive = document.getElementById('cycleActive');
+        var selectedIndexLabel = document.getElementById('selectedIndexLabel');
+
+        Coral.events.on('click', 'a[data-remove-panel]', function(e) {
+          e.target.closest('coral-panel').remove();
+        });
+
+        addPanel.addEventListener('click', function() {
+          var panel = document.createElement('coral-panel');
+          panel.content.innerHTML = 'New Panel. <a href="#" data-remove-panel>Remove me.</a>';
+
+          panelList.items.add(panel);
+          panel.selected = true;
+
+          selectedIndexLabel.textContent = 'Selected Index: ' + panelList.items.getAll().indexOf(panel);
+        });
+
+        cycleActive.addEventListener('click', function() {
+          var next = panelList.selectedItem && panelList.selectedItem.nextElementSibling || panelList.querySelector('coral-panel');
+
+          next.setAttribute('selected', '');
+
+          selectedIndexLabel.textContent = 'Selected Index: ' + panelList.items.getAll().indexOf(next);
+        });
+      });
+    </script>
+    <style>
+    .col {
+      float: left;
+      margin-right: 12px;
+      width: 650px;
+    }
+
+    .col > section {
+      padding: 10px;
+    }
+    </style>
+  </head>
+
+  <body class="coral--light u-coral-padding">
+    <h1 class="coral-Heading coral-Heading--1">coral-PanelStack</h1>
+    <div class="col">
+      <section>
+        <h2 class="coral-Heading coral-Heading--2">Default Example</h2>
+        <h4 id='selectedIndexLabel'>Selected Index: 0</h4>
+        <button is="coral-button" id="cycleActive">Cycle Selected</button>
+        <button is="coral-button" id="addPanel">Add Panel</button>
+        <coral-panelstack id="panelList">
+          <coral-panel selected>Panel 0: Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+          <coral-panel>Panel 1: Lorem ipsum dolor sit amet.</coral-panel>
+          <coral-panel> Panel 2: Sed eget eros sit amet nulla ultricies.</coral-panel>
+          <coral-panel>
+            Panel 3: Fusce nec ante non nibh mollis mollis mollis vitae dui. Vivamus tristique nunc lacus, a placerat orci dapibus vel. Sed eget eros sit amet nulla ultricies scelerisque.
+          </coral-panel>
+          <coral-panel>Panel 4: Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+        </coral-panelstack>
+      </section>
+      <section>
+        <h2 class="coral-Heading coral-Heading--2">Using Wells</h2>
+        <coral-panelstack>
+          <coral-panel selected class="coral-Well">Panel 0: Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+          <coral-panel selected class="coral-Well">Panel 1: Lorem ipsum dolor sit amet.</coral-panel>
+          <coral-panel class="coral-Well"> Panel 2: Sed eget eros sit amet nulla ultricies.</coral-panel>
+          <coral-panel class="coral-Well">
+            Panel 3: Fusce nec ante non nibh mollis mollis mollis vitae dui. Vivamus tristique nunc lacus, a placerat orci dapibus vel. Sed eget eros sit amet nulla ultricies scelerisque.
+          </coral-panel>
+          <coral-panel class="coral-Well">Panel 4: Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+        </coral-panelstack>
+      </section>
+    </div>
+    <div class="col coral--dark">
+      <section>
+        <h2 class="coral-Heading coral-Heading--2">Default Example</h2>
+        <coral-panelstack>
+          <coral-panel selected class="coral-Well">Panel 0: Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+          <coral-panel class="coral-Well">Panel 1: Lorem ipsum dolor sit amet.</coral-panel>
+          <coral-panel class="coral-Well"> Panel 2: Sed eget eros sit amet nulla ultricies.</coral-panel>
+          <coral-panel class="coral-Well">
+            Panel 3: Fusce nec ante non nibh mollis mollis mollis vitae dui. Vivamus tristique nunc lacus, a placerat orci dapibus vel. Sed eget eros sit amet nulla ultricies scelerisque.
+          </coral-panel>
+          <coral-panel class="coral-Well">Panel 4: Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+        </coral-panelstack>
+      </section>
+      <section>
+        <h2 class="coral-Heading coral-Heading--2">Using Wells</h2>
+        <coral-panelstack>
+          <coral-panel selected class="coral-Well">Panel 0: Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+          <coral-panel class="coral-Well">Panel 1: Lorem ipsum dolor sit amet.</coral-panel>
+          <coral-panel class="coral-Well"> Panel 2: Sed eget eros sit amet nulla ultricies.</coral-panel>
+          <coral-panel class="coral-Well">
+            Panel 3: Fusce nec ante non nibh mollis mollis mollis vitae dui. Vivamus tristique nunc lacus, a placerat orci dapibus vel. Sed eget eros sit amet nulla ultricies scelerisque.
+          </coral-panel>
+          <coral-panel class="coral-Well">Panel 4: Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+        </coral-panelstack>
+      </section>
+    </div>
+  </body>
+
+</html>

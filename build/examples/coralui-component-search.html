@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Search</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+  <script src="../../js/coral.js"></script>
+
+  <style>
+    .row {
+      display: table;
+      width: 100%;
+    }
+    .col {
+      display: table-cell;
+      padding: 8px;
+    }
+  </style>
+</head>
+<body class="coral--light">
+  <div class="row" id="example_light">
+    <div class="col">
+      <h1 class="coral-Heading coral-Heading--1">Coral.Search</h1>
+
+      <h2 class="coral-Heading coral-Heading--2"><label id="label-0">Default</label></h2>
+      <coral-search labelledby="label-0"></coral-search>
+
+      <h2 class="coral-Heading coral-Heading--2" id="label-3">Value</h2>
+      <coral-search name="ni12" value="test value" labelledby="label-3"></coral-search>
+
+      <h2 class="coral-Heading coral-Heading--2" id="label-4">Placeholder</h2>
+      <coral-search name="ni13" placeholder="Placeholder" labelledby="label-4"></coral-search>
+
+      <h2 class="coral-Heading coral-Heading--2" id="label-5">MaxLength</h2>
+      <coral-search name="ni13" maxlength="10" labelledby="label-5"></coral-search>
+
+      <h2 class="coral-Heading coral-Heading--2" id="label-6">Quiet</h2>
+      <coral-search name="ni13" placeholder="Placeholder" labelledby="label-6" variant="quiet"></coral-search>
+    </div>
+
+    <div class="col">
+      <h1 class="coral-Heading coral-Heading--1">FormField</h1>
+
+      <h2 class="coral-Heading coral-Heading--2" id="label-15">Name</h2>
+      <coral-search name="ni13" labelledby="label-15"></coral-search>
+
+      <h2 class="coral-Heading coral-Heading--2" id="label-16">Invalid</h2>
+      <coral-search name="ni3" invalid min="0" max="5" labelledby="label-16"></coral-search>
+
+      <h2 class="coral-Heading coral-Heading--2" id="label-17">Disabled</h2>
+      <coral-search name="ni4" disabled value="0" labelledby="label-17"></coral-search>
+
+      <h2 class="coral-Heading coral-Heading--2" id="label-19">Required</h2>
+      <form>
+        <coral-search name="ni4" required labelledby="label-19"></coral-search>
+        <input class="coral-Button coral-Button--square" type="submit" title="Submit"/>
+      </form>
+    </div>
+  </div>
+  <div class="coral--dark row" id="example_dark">
+    <div class="col">
+      <h1 class="coral-Heading coral-Heading--1">Coral.Search</h1>
+
+      <h2 class="coral-Heading coral-Heading--2"><label id="dark-label-0">Default</label></h2>
+      <coral-search labelledby="dark-label-0"></coral-search>
+
+      <h2 class="coral-Heading coral-Heading--2" id="dark-label-3">Value</h2>
+      <coral-search name="ni12" value="test value" labelledby="dark-label-3"></coral-search>
+
+      <h2 class="coral-Heading coral-Heading--2" id="dark-label-4">Placeholder</h2>
+      <coral-search name="ni13" placeholder="Placeholder" labelledby="label-4"></coral-search>
+
+      <h2 class="coral-Heading coral-Heading--2" id="dark-label-5">MaxLength</h2>
+      <coral-search name="ni13" maxlength="10" labelledby="label-5"></coral-search>
+
+      <h2 class="coral-Heading coral-Heading--2" id="dark-label-6">Quiet</h2>
+      <coral-search name="ni13" placeholder="Placeholder" labelledby="dark-label-6" variant="quiet"></coral-search>
+    </div>
+
+    <div class="col">
+      <h1 class="coral-Heading coral-Heading--1">FormField</h1>
+
+      <h2 class="coral-Heading coral-Heading--2" id="dark-label-15">Name</h2>
+      <coral-search name="ni13" labelledby="dark-label-15"></coral-search>
+
+      <h2 class="coral-Heading coral-Heading--2" id="dark-label-16">Invalid</h2>
+      <coral-search name="ni3" invalid min="0" max="5" labelledby="dark-label-16"></coral-search>
+
+      <h2 class="coral-Heading coral-Heading--2" id="dark-label-17">Disabled</h2>
+      <coral-search name="ni4" disabled value="0" labelledby="dark-label-17"></coral-search>
+
+      <h2 class="coral-Heading coral-Heading--2" id="dark-label-19">Required</h2>
+      <form>
+        <coral-search name="ni4" required labelledby="dark-label-19"></coral-search>
+        <input class="coral-Button coral-Button--square" type="submit" title="Submit"/>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

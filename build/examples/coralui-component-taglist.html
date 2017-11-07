@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Coral.TagList</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+  <script src="../../js/coral.js"></script>
+
+  <style>
+    body {
+      padding: 15px;
+    }
+
+    section {
+      box-sizing: border-box;
+      padding: 12px;
+    }
+
+    .custom-tag {
+      background-color: #a90000;
+      color: white;
+      vertical-align: middle;
+      padding: 2px;
+      margin: 2px;
+      width: 100px;
+    }
+
+    .limited-space {
+      width: 200px;
+      border: 1px solid black;
+      padding: 10px;
+      margin: 10px;
+    }
+
+    .limited-space coral-taglist {
+      width: 100%;
+    }
+  </style>
+</head>
+<body class="coral--light">
+
+<h1 class="coral-Heading coral-Heading--1">TagList Examples</h1>
+
+<section>
+  <h2 class="coral-Heading coral-Heading--2" id="label-0">Default</h2>
+  <coral-taglist labelledby="label-0">
+    <coral-tag>Lehi</coral-tag>
+    <coral-tag>Paris</coral-tag>
+    <coral-tag>Basel</coral-tag>
+  </coral-taglist>
+
+  <h2 class="coral-Heading coral-Heading--2" id="label-1">Disabled</h2>
+  <coral-taglist disabled labelledby="label-1">
+    <coral-tag>Lehi</coral-tag>
+    <coral-tag>Paris</coral-tag>
+    <coral-tag>Basel</coral-tag>
+  </coral-taglist>
+
+  <h2 class="coral-Heading coral-Heading--2" id="label-2">Read only</h2>
+  <coral-taglist readonly labelledby="label-2">
+    <coral-tag>Lehi</coral-tag>
+    <coral-tag>Paris</coral-tag>
+    <coral-tag>Basel</coral-tag>
+  </coral-taglist>
+
+  <h2 class="coral-Heading coral-Heading--2" id="label-3">With values</h2>
+  <coral-taglist labelledby="label-3">
+    <coral-tag value="l">Lehi</coral-tag>
+    <coral-tag value="p">Paris</coral-tag>
+    <coral-tag value="b">Basel</coral-tag>
+  </coral-taglist>
+
+  <h2 class="coral-Heading coral-Heading--2" id="label-4">Quiet tags</h2>
+  <coral-taglist labelledby="label-4">
+    <coral-tag>Lehi</coral-tag>
+    <coral-tag quiet="true">Paris</coral-tag>
+    <coral-tag>Basel</coral-tag>
+  </coral-taglist>
+</section>
+<section class="coral--dark">
+  <h2 class="coral-Heading coral-Heading--2" id="label-5">Default</h2>
+  <coral-taglist labelledby="label-5">
+    <coral-tag>Lehi</coral-tag>
+    <coral-tag>Paris</coral-tag>
+    <coral-tag>Basel</coral-tag>
+  </coral-taglist>
+
+  <h2 class="coral-Heading coral-Heading--2" id="label-6">Disabled</h2>
+  <coral-taglist disabled labelledby="label-6">
+    <coral-tag>Lehi</coral-tag>
+    <coral-tag>Paris</coral-tag>
+    <coral-tag>Basel</coral-tag>
+  </coral-taglist>
+
+  <h2 class="coral-Heading coral-Heading--2" id="label-7">Read only</h2>
+  <coral-taglist readonly labelledby="label-7">
+    <coral-tag>Lehi</coral-tag>
+    <coral-tag>Paris</coral-tag>
+    <coral-tag>Basel</coral-tag>
+  </coral-taglist>
+
+  <h2 class="coral-Heading coral-Heading--2" id="label-8">Quiet tags</h2>
+  <coral-taglist labelledby="label-8">
+    <coral-tag>Lehi</coral-tag>
+    <coral-tag quiet="true">Paris</coral-tag>
+    <coral-tag>Basel</coral-tag>
+  </coral-taglist>
+</section>
+<section class="limited-space">
+  <label id="label-9">LIMITED SPACE</label>
+  <coral-taglist labelledby="label-9">
+    <coral-tag multiline><coral-icon icon="actions"></coral-icon> Actions </coral-tag>
+    <coral-tag multiline>Ecuador SUPER SUPER SUPER LONG</coral-tag>
+    <coral-tag multiline>This is an amazing long tag which should never ever be there but ... sometimes ...</coral-tag>
+    <coral-tag multiline>Bahamas</coral-tag>
+    <coral-tag multiline>Iamareallyreallylongtagwithjustoneword</coral-tag>
+  </coral-taglist>
+</section>
+<section>
+  <h2 class="coral-Heading coral-Heading--2" id="label-10">Tag without TagList</h2>
+  <coral-tag>Lonely tag</coral-tag>
+  <br>
+  <h2 class="coral-Heading coral-Heading--2" id="label-11">Tag with Sizes</h2>
+  <coral-taglist readonly labelledby="label-11">
+    <coral-tag readonly>Large tag (default)</coral-tag>
+    <br>
+    <coral-tag readonly size="m">Medium tag</coral-tag>
+    <br>
+    <coral-tag readonly size="s">Small tag</coral-tag>
+    <br>
+    <coral-tag readonly size="l">Large tag (explicit)</coral-tag>
+    <br>
+  </coral-taglist>
+</section>
+<section id="constructorFromJS">
+  <h2 class="coral-Heading coral-Heading--2">Created with JavaScript Constructor</h2>
+</section>
+<section>
+  <h2 class="coral-Heading coral-Heading--2" id="label-12">Managing tags</h2>
+
+  <form>
+    <coral-taglist id="taglist" name="destination" labelledby="label-12">
+      <coral-tag>Lehi</coral-tag>
+      <coral-tag>Paris</coral-tag>
+      <coral-tag>Basel</coral-tag>
+    </coral-taglist>
+    <br>
+    <button is="coral-button" id="addButton" type="button">Add tag</button>
+    <button is="coral-button" id="removeButton" type="button">Remove tag</button>
+    <button is="coral-button" id="clearButton" type="button">Clear tags</button>
+    <button is="coral-button" id="resetButton" type="button">Reset</button>
+    <button is="coral-button" color="primary" type="submit">Submit</button>
+  </form>
+</section>
+
+<section>
+  <h2 class="coral-Heading coral-Heading--2" id="label-13">Color tags (default size)</h2>
+  <coral-taglist readonly labelledby="label-13">
+    <coral-tag readonly color="blue">Blue</coral-tag>
+    <coral-tag readonly color="lightblue">Lightblue</coral-tag>
+    <coral-tag readonly color="periwinkle">Periwinkle</coral-tag>
+    <coral-tag readonly color="plum">Plum</coral-tag>
+    <coral-tag readonly color="fuchsia">Fuchsia</coral-tag>
+    <coral-tag readonly color="magenta">magenta</coral-tag>
+    <coral-tag readonly color="red">Red</coral-tag>
+    <coral-tag readonly color="orange">Orange</coral-tag>
+    <coral-tag readonly color="tangerine">Tangerine</coral-tag>
+    <coral-tag readonly color="yellow">Yellow</coral-tag>
+    <coral-tag readonly color="chartreuse">chartreuse</coral-tag>
+    <coral-tag readonly color="green">Green</coral-tag>
+    <coral-tag readonly color="kellygreen">Kellygreen</coral-tag>
+    <coral-tag readonly color="seafoam">Seafoam</coral-tag>
+    <coral-tag readonly color="cyan">Cyan</coral-tag>
+    <coral-tag readonly color="grey">Grey</coral-tag>
+  </coral-taglist>
+</section>
+
+<section>
+  <h2 class="coral-Heading coral-Heading--2" id="label-14">Color tags (medium)</h2>
+  <coral-taglist readonly labelledby="label-14">
+    <coral-tag readonly size="m" color="blue">Blue</coral-tag>
+    <coral-tag readonly size="m" color="lightblue">Lightblue</coral-tag>
+    <coral-tag readonly size="m" color="periwinkle">Periwinkle</coral-tag>
+    <coral-tag readonly size="m" color="plum">Plum</coral-tag>
+    <coral-tag readonly size="m" color="fuchsia">Fuchsia</coral-tag>
+    <coral-tag readonly size="m" color="magenta">magenta</coral-tag>
+    <coral-tag readonly size="m" color="red">Red</coral-tag>
+    <coral-tag readonly size="m" color="orange">Orange</coral-tag>
+    <coral-tag readonly size="m" color="tangerine">Tangerine</coral-tag>
+    <coral-tag readonly size="m" color="yellow">Yellow</coral-tag>
+    <coral-tag readonly size="m" color="chartreuse">chartreuse</coral-tag>
+    <coral-tag readonly size="m" color="green">Green</coral-tag>
+    <coral-tag readonly size="m" color="kellygreen">Kellygreen</coral-tag>
+    <coral-tag readonly size="m" color="seafoam">Seafoam</coral-tag>
+    <coral-tag readonly size="m" color="cyan">Cyan</coral-tag>
+    <coral-tag readonly size="m" color="grey">Grey</coral-tag>
+  </coral-taglist>
+</section>
+
+<section>
+  <h2 class="coral-Heading coral-Heading--2" id="label-15">Color tags (small)</h2>
+  <coral-taglist readonly labelledby="label-15">
+    <coral-tag readonly size="s" color="blue">Blue</coral-tag>
+    <coral-tag readonly size="s" color="lightblue">Lightblue</coral-tag>
+    <coral-tag readonly size="s" color="periwinkle">Periwinkle</coral-tag>
+    <coral-tag readonly size="s" color="plum">Plum</coral-tag>
+    <coral-tag readonly size="s" color="fuchsia">Fuchsia</coral-tag>
+    <coral-tag readonly size="s" color="magenta">magenta</coral-tag>
+    <coral-tag readonly size="s" color="red">Red</coral-tag>
+    <coral-tag readonly size="s" color="orange">Orange</coral-tag>
+    <coral-tag readonly size="s" color="tangerine">Tangerine</coral-tag>
+    <coral-tag readonly size="s" color="yellow">Yellow</coral-tag>
+    <coral-tag readonly size="s" color="chartreuse">chartreuse</coral-tag>
+    <coral-tag readonly size="s" color="green">Green</coral-tag>
+    <coral-tag readonly size="s" color="kellygreen">Kellygreen</coral-tag>
+    <coral-tag readonly size="s" color="seafoam">Seafoam</coral-tag>
+    <coral-tag readonly size="s" color="cyan">Cyan</coral-tag>
+    <coral-tag readonly size="s" color="grey">Grey</coral-tag>
+  </coral-taglist>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+
+    var tagList = document.getElementById('taglist');
+
+    document.getElementById('addButton').onclick = function() {
+      var tag = new Coral.Tag();
+      tag.label.innerHTML = '<strong>New</strong> destination';
+      tag.value = 'new destination ' + Math.random().toString(36).substr(2, 5);
+      tagList.items.add(tag);
+    };
+    document.getElementById('removeButton').onclick = function() {
+      var items = tagList.items.getAll();
+      if (items.length) {
+        tagList.items.remove(items.pop());
+      }
+    };
+    document.getElementById('clearButton').onclick = function() {
+      tagList.clear();
+    };
+    document.getElementById('resetButton').onclick = function() {
+      tagList.reset();
+    };
+
+    var tagListFromConstructor = new Coral.TagList();
+    tagListFromConstructor.set({
+      name: 'destinations',
+      labelledBy: 'constructorFromJS'
+    });
+    var tagFromConstructor = new Coral.Tag();
+    tagFromConstructor.set({
+      label: {
+        innerHTML: 'Paris'
+      },
+      value: 'paris'
+    });
+    tagListFromConstructor.items.add(tagFromConstructor);
+    document.getElementById('constructorFromJS').appendChild(tagListFromConstructor);
+  });
+</script>
+</body>
+</html>

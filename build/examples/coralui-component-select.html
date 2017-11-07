@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>Coral.Select</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../css/coral.css">
+    <script src="../../js/coral.js"></script>
+    <style>
+    section {
+      border-top: 1px solid #C8C8C8;
+      padding: 12px;
+    }
+
+    .col {
+      width: 30%;
+      margin-right: 3%;
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    #log {
+      border: 1px solid #bababa;
+      height: 100px;
+      overflow-y: scroll;
+      padding: 10px 10px 10px 25px;
+      margin: 0;
+    }
+    </style>
+  </head>
+
+  <body class="coral--light u-coral-padding">
+    <h1 class="coral-Heading coral-Heading--1">coral-Select</h1>
+    <section>
+      <div class="col">
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-0">Default</label></h2>
+        <form method="GET">
+          <coral-select name="select1" labelledby="label-0">
+            <coral-select-item value="actions">
+              <coral-icon icon="actions"></coral-icon> Actions </coral-select-item>
+            <coral-select-item value="add">
+              <coral-icon icon="add"></coral-icon> Add </coral-select-item>
+            <coral-select-item value="add-circle">
+              <coral-icon icon="addCircle"></coral-icon> Add-Circle </coral-select-item>
+            <coral-select-item value="adjust">
+              <coral-icon icon="adjust"></coral-icon> Adjust </coral-select-item>
+            <coral-select-item value="alert">
+              <coral-icon icon="alert"></coral-icon> Alert </coral-select-item>
+            <coral-select-item value="alert-add">
+              <coral-icon icon="alertAdd"></coral-icon> Alert-Add </coral-select-item>
+            <coral-select-item value="alias">
+              <coral-icon icon="alias"></coral-icon> Alias </coral-select-item>
+            <coral-select-item value="anchor">
+              <coral-icon icon="anchor"></coral-icon> Anchor </coral-select-item>
+            <coral-select-item value="annotate">
+              <coral-icon icon="annotate"></coral-icon> Annotate </coral-select-item>
+            <coral-select-item value="answer">
+              <coral-icon icon="answer"></coral-icon> Answer </coral-select-item>
+          </coral-select>
+          <button type="submit" is="coral-button">Submit</button>
+        </form>
+
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-1">Placeholder</label></h2>
+        <form method="GET">
+          <coral-select name="select2" placeholder="Choose an item" labelledby="label-1">
+            <coral-select-item value="tza">Tanzania - United Republic of Tanzania, Northwest</coral-select-item>
+            <coral-select-item value="are">United Arab Emirates</coral-select-item>
+            <coral-select-item value="gbr">United Kingdom</coral-select-item>
+            <coral-select-item value="usa">United States of America and the republic for which it stands, one nation</coral-select-item>
+          </coral-select>
+          <button type="submit" is="coral-button">Submit</button>
+        </form>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-1b">Placeholder + Disabled</label></h2>
+        <form method="GET">
+          <coral-select name="select2" placeholder="Choose an item" labelledby="label-1b" disabled>
+            <coral-select-item value="tza">Tanzania - United Republic of Tanzania, Northwest</coral-select-item>
+            <coral-select-item value="are">United Arab Emirates</coral-select-item>
+            <coral-select-item value="gbr">United Kingdom</coral-select-item>
+            <coral-select-item value="usa">United States of America and the republic for which it stands, one nation</coral-select-item>
+          </coral-select>
+          <button type="submit" is="coral-button">Submit</button>
+        </form>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-2">Initially selected</label></h2>
+        <form method="GET">
+          <coral-select name="select3" labelledby="label-2">
+            <coral-select-item value="actions">
+              <coral-icon icon="actions"></coral-icon> Actions </coral-select-item>
+            <coral-select-item value="add">
+              <coral-icon icon="add"></coral-icon> Add </coral-select-item>
+            <coral-select-item value="add-circle">
+              <coral-icon icon="addCircle"></coral-icon> Add-Circle </coral-select-item>
+            <coral-select-item value="adjust" selected>
+              <coral-icon icon="adjust"></coral-icon> Adjust </coral-select-item>
+          </coral-select>
+          <button type="submit" is="coral-button">Submit</button>
+        </form>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-3">Initially selected + Placeholder</label></h2>
+        <form method="GET">
+          <coral-select name="select4" placeholder="Choose a continent" labelledby="label-3">
+            <coral-select-item value="am">America</coral-select-item>
+            <coral-select-item value="eu" selected>Europe</coral-select-item>
+            <coral-select-item value="af">Africa</coral-select-item>
+            <coral-select-item value="as">Asia</coral-select-item>
+            <coral-select-item value="oc">Oceania</coral-select-item>
+          </coral-select>
+          <button type="submit" is="coral-button">Submit</button>
+        </form>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-3b">Quiet + Placeholder</label></h2>
+        <form method="GET">
+          <coral-select name="select4" placeholder="Choose a continent" labelledby="label-3b" variant="quiet">
+            <coral-select-item value="am">America</coral-select-item>
+            <coral-select-item value="eu">Europe</coral-select-item>
+            <coral-select-item value="af">Africa</coral-select-item>
+            <coral-select-item value="as">Asia</coral-select-item>
+            <coral-select-item value="oc">Oceania</coral-select-item>
+          </coral-select>
+          <button type="submit" is="coral-button">Submit</button>
+        </form>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-3c">Quiet + Placeholder + Disabled</label></h2>
+        <form method="GET">
+          <coral-select name="select4" placeholder="Choose a continent" labelledby="label-3c" variant="quiet" disabled>
+            <coral-select-item value="am">America</coral-select-item>
+            <coral-select-item value="eu">Europe</coral-select-item>
+            <coral-select-item value="af">Africa</coral-select-item>
+            <coral-select-item value="as">Asia</coral-select-item>
+            <coral-select-item value="oc">Oceania</coral-select-item>
+          </coral-select>
+          <button type="submit" is="coral-button">Submit</button>
+        </form>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-4">Quiet + Initially selected + Placeholder</label></h2>
+        <form method="GET">
+          <coral-select name="select4" placeholder="Choose a continent" labelledby="label-4" variant="quiet">
+            <coral-select-item value="am">America</coral-select-item>
+            <coral-select-item value="eu" selected>Europe</coral-select-item>
+            <coral-select-item value="af">Africa</coral-select-item>
+            <coral-select-item value="as">Asia</coral-select-item>
+            <coral-select-item value="oc">Oceania</coral-select-item>
+          </coral-select>
+          <button type="submit" is="coral-button">Submit</button>
+        </form>
+      </div>
+      <div class="col">
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-5">Multiple</label></h2>
+        <form method="GET">
+          <coral-select name="select5" multiple labelledby="label-5">
+            <coral-select-item value="actions">
+              <coral-icon icon="actions"></coral-icon> Actions </coral-select-item>
+            <coral-select-item value="add">
+              <coral-icon icon="add"></coral-icon> Add </coral-select-item>
+            <coral-select-item value="add-circle">
+              <coral-icon icon="addCircle"></coral-icon> Add-Circle </coral-select-item>
+            <coral-select-item value="adjust">
+              <coral-icon icon="adjust"></coral-icon> Adjust </coral-select-item>
+            <coral-select-item value="alert">
+              <coral-icon icon="alert"></coral-icon> Alert </coral-select-item>
+            <coral-select-item value="alert-add">
+              <coral-icon icon="alertAdd"></coral-icon> Alert-Add </coral-select-item>
+            <coral-select-item value="alias">
+              <coral-icon icon="alias"></coral-icon> Alias </coral-select-item>
+            <coral-select-item value="anchor">
+              <coral-icon icon="anchor"></coral-icon> Anchor </coral-select-item>
+            <coral-select-item value="annotate">
+              <coral-icon icon="annotate"></coral-icon> Annotate </coral-select-item>
+            <coral-select-item value="answer">
+              <coral-icon icon="answer"></coral-icon> Answer </coral-select-item>
+          </coral-select>
+          <button type="submit" is="coral-button">Submit</button>
+        </form>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-6">Placeholder + Multiple</label></h2>
+        <form method="GET">
+          <coral-select name="select6" multiple placeholder="Choose an action" labelledby="label-6">
+            <coral-select-item value="actions">
+              <coral-icon icon="actions"></coral-icon> Actions </coral-select-item>
+            <coral-select-item value="add">
+              <coral-icon icon="add"></coral-icon> Add </coral-select-item>
+            <coral-select-item value="add-circle">
+              <coral-icon icon="addCircle"></coral-icon> Add-Circle </coral-select-item>
+            <coral-select-item value="adjust">
+              <coral-icon icon="adjust"></coral-icon> Adjust </coral-select-item>
+            <coral-select-item value="alert">
+              <coral-icon icon="alert"></coral-icon> Alert </coral-select-item>
+            <coral-select-item value="alert-add">
+              <coral-icon icon="alertAdd"></coral-icon> Alert-Add </coral-select-item>
+            <coral-select-item value="alias">
+              <coral-icon icon="alias"></coral-icon> Alias </coral-select-item>
+            <coral-select-item value="anchor">
+              <coral-icon icon="anchor"></coral-icon> Anchor </coral-select-item>
+            <coral-select-item value="annotate">
+              <coral-icon icon="annotate"></coral-icon> Annotate </coral-select-item>
+            <coral-select-item value="answer">
+              <coral-icon icon="answer"></coral-icon> Answer </coral-select-item>
+          </coral-select>
+          <button type="submit" is="coral-button">Submit</button>
+        </form>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-6b">Placeholder + Multiple + Disabled</label></h2>
+        <form method="GET">
+          <coral-select name="select6" multiple placeholder="Choose an action" labelledby="label-6b" disabled>
+            <coral-select-item value="actions">
+              <coral-icon icon="actions"></coral-icon> Actions </coral-select-item>
+            <coral-select-item value="add">
+              <coral-icon icon="add"></coral-icon> Add </coral-select-item>
+            <coral-select-item value="add-circle">
+              <coral-icon icon="addCircle"></coral-icon> Add-Circle </coral-select-item>
+            <coral-select-item value="adjust">
+              <coral-icon icon="adjust"></coral-icon> Adjust </coral-select-item>
+            <coral-select-item value="alert">
+              <coral-icon icon="alert"></coral-icon> Alert </coral-select-item>
+            <coral-select-item value="alert-add">
+              <coral-icon icon="alertAdd"></coral-icon> Alert-Add </coral-select-item>
+            <coral-select-item value="alias">
+              <coral-icon icon="alias"></coral-icon> Alias </coral-select-item>
+            <coral-select-item value="anchor">
+              <coral-icon icon="anchor"></coral-icon> Anchor </coral-select-item>
+            <coral-select-item value="annotate">
+              <coral-icon icon="annotate"></coral-icon> Annotate </coral-select-item>
+            <coral-select-item value="answer">
+              <coral-icon icon="answer"></coral-icon> Answer </coral-select-item>
+          </coral-select>
+          <button type="submit" is="coral-button">Submit</button>
+        </form>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-7">Initially selected + Multiple</label></h2>
+        <form method="GET">
+          <coral-select name="select7" multiple labelledby="label-7">
+            <coral-select-item value="actions">
+              <coral-icon icon="actions"></coral-icon> Actions </coral-select-item>
+            <coral-select-item value="add" selected>
+              <coral-icon icon="add"></coral-icon> Add </coral-select-item>
+            <coral-select-item value="add-circle">
+              <coral-icon icon="addCircle"></coral-icon> Add-Circle </coral-select-item>
+            <coral-select-item value="adjust" selected>
+              <coral-icon icon="adjust"></coral-icon> Adjust </coral-select-item>
+          </coral-select>
+          <button type="submit" is="coral-button">Submit</button>
+        </form>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-8">Initially selected + Multiple + Placeholder</label></h2>
+        <form method="GET">
+          <coral-select name="select8" multiple placeholder="Choose an action" labelledby="label-8">
+            <coral-select-item value="actions">
+              <coral-icon icon="actions"></coral-icon> Actions </coral-select-item>
+            <coral-select-item value="add" selected>
+              <coral-icon icon="add"></coral-icon> Add </coral-select-item>
+            <coral-select-item value="add-circle">
+              <coral-icon icon="addCircle"></coral-icon> Add-Circle </coral-select-item>
+            <coral-select-item value="adjust" selected>
+              <coral-icon icon="adjust"></coral-icon> Adjust </coral-select-item>
+          </coral-select>
+          <button type="submit" is="coral-button">Submit</button>
+        </form>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-9">Quiet + Initially selected + Multiple + Placeholder</label></h2>
+        <form method="GET">
+          <coral-select name="select8" multiple placeholder="Choose an action" labelledby="label-9" variant="quiet">
+            <coral-select-item value="actions">
+              <coral-icon icon="actions"></coral-icon> Actions </coral-select-item>
+            <coral-select-item value="add" selected>
+              <coral-icon icon="add"></coral-icon> Add </coral-select-item>
+            <coral-select-item value="add-circle">
+              <coral-icon icon="addCircle"></coral-icon> Add-Circle </coral-select-item>
+            <coral-select-item value="adjust" selected>
+              <coral-icon icon="adjust"></coral-icon> Adjust </coral-select-item>
+          </coral-select>
+          <button type="submit" is="coral-button" variant="quiet">Submit</button>
+        </form>
+      </div>
+      <div class="col">
+        <h2 class="coral-Heading coral-Heading--2">Log</h2>
+        <ul id="log"></ul>
+      </div>
+    </section>
+    <h1 class="coral-Heading coral-Heading--1">FormField compliance</h1>
+    <section>
+      <div class="col">
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-r">Required</label></h2>
+        <form method="GET">
+          <coral-select name="select1" labelledby="label-r" required placeholder="Choose an item">
+            <coral-select-item value="actions">
+              <coral-icon icon="actions"></coral-icon> Actions </coral-select-item>
+            <coral-select-item value="add">
+              <coral-icon icon="add"></coral-icon> Add </coral-select-item>
+            <coral-select-item value="add-circle">
+              <coral-icon icon="addCircle"></coral-icon> Add-Circle </coral-select-item>
+            <coral-select-item value="adjust">
+              <coral-icon icon="adjust"></coral-icon> Adjust </coral-select-item>
+            <coral-select-item value="alert">
+              <coral-icon icon="alert"></coral-icon> Alert </coral-select-item>
+            <coral-select-item value="alert-add">
+              <coral-icon icon="alertAdd"></coral-icon> Alert-Add </coral-select-item>
+            <coral-select-item value="alias">
+              <coral-icon icon="alias"></coral-icon> Alias </coral-select-item>
+            <coral-select-item value="anchor">
+              <coral-icon icon="anchor"></coral-icon> Anchor </coral-select-item>
+            <coral-select-item value="annotate">
+              <coral-icon icon="annotate"></coral-icon> Annotate </coral-select-item>
+            <coral-select-item value="answer">
+              <coral-icon icon="answer"></coral-icon> Answer </coral-select-item>
+          </coral-select>
+          <button type="submit" is="coral-button" variant="primary">Submit</button>
+        </form>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-i">Invalid</label></h2>
+        <form method="GET">
+          <coral-select name="select1" labelledby="label-i" invalid>
+            <coral-select-item value="actions">
+              <coral-icon icon="actions"></coral-icon> Actions </coral-select-item>
+            <coral-select-item value="add">
+              <coral-icon icon="add"></coral-icon> Add </coral-select-item>
+            <coral-select-item value="add-circle">
+              <coral-icon icon="addCircle"></coral-icon> Add-Circle </coral-select-item>
+            <coral-select-item value="adjust">
+              <coral-icon icon="adjust"></coral-icon> Adjust </coral-select-item>
+            <coral-select-item value="alert">
+              <coral-icon icon="alert"></coral-icon> Alert </coral-select-item>
+            <coral-select-item value="alert-add">
+              <coral-icon icon="alertAdd"></coral-icon> Alert-Add </coral-select-item>
+            <coral-select-item value="alias">
+              <coral-icon icon="alias"></coral-icon> Alias </coral-select-item>
+            <coral-select-item value="anchor">
+              <coral-icon icon="anchor"></coral-icon> Anchor </coral-select-item>
+            <coral-select-item value="annotate">
+              <coral-icon icon="annotate"></coral-icon> Annotate </coral-select-item>
+            <coral-select-item value="answer">
+              <coral-icon icon="answer"></coral-icon> Answer </coral-select-item>
+          </coral-select>
+          <button type="submit" is="coral-button" variant="primary">Submit</button>
+        </form>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-d">Disabled</label></h2>
+        <form method="GET">
+          <coral-select name="select1" labelledby="label-d" disabled>
+            <coral-select-item value="actions">
+              <coral-icon icon="actions"></coral-icon> Actions </coral-select-item>
+            <coral-select-item value="add">
+              <coral-icon icon="add"></coral-icon> Add </coral-select-item>
+            <coral-select-item value="add-circle">
+              <coral-icon icon="addCircle"></coral-icon> Add-Circle </coral-select-item>
+            <coral-select-item value="adjust">
+              <coral-icon icon="adjust"></coral-icon> Adjust </coral-select-item>
+            <coral-select-item value="alert">
+              <coral-icon icon="alert"></coral-icon> Alert </coral-select-item>
+            <coral-select-item value="alert-add">
+              <coral-icon icon="alertAdd"></coral-icon> Alert-Add </coral-select-item>
+            <coral-select-item value="alias">
+              <coral-icon icon="alias"></coral-icon> Alias </coral-select-item>
+            <coral-select-item value="anchor">
+              <coral-icon icon="anchor"></coral-icon> Anchor </coral-select-item>
+            <coral-select-item value="annotate">
+              <coral-icon icon="annotate"></coral-icon> Annotate </coral-select-item>
+            <coral-select-item value="answer">
+              <coral-icon icon="answer"></coral-icon> Answer </coral-select-item>
+          </coral-select>
+          <button type="submit" is="coral-button" variant="primary">Submit</button>
+        </form>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-ro">ReadOnly</label></h2>
+        <form method="GET">
+          <coral-select name="select1" labelledby="label-ro" readonly>
+            <coral-select-item value="actions">
+              <coral-icon icon="actions"></coral-icon> Actions </coral-select-item>
+            <coral-select-item value="add">
+              <coral-icon icon="add"></coral-icon> Add </coral-select-item>
+            <coral-select-item value="add-circle">
+              <coral-icon icon="addCircle"></coral-icon> Add-Circle </coral-select-item>
+            <coral-select-item value="adjust">
+              <coral-icon icon="adjust"></coral-icon> Adjust </coral-select-item>
+            <coral-select-item value="alert">
+              <coral-icon icon="alert"></coral-icon> Alert </coral-select-item>
+            <coral-select-item value="alert-add">
+              <coral-icon icon="alertAdd"></coral-icon> Alert-Add </coral-select-item>
+            <coral-select-item value="alias">
+              <coral-icon icon="alias"></coral-icon> Alias </coral-select-item>
+            <coral-select-item value="anchor">
+              <coral-icon icon="anchor"></coral-icon> Anchor </coral-select-item>
+            <coral-select-item value="annotate">
+              <coral-icon icon="annotate"></coral-icon> Annotate </coral-select-item>
+            <coral-select-item value="answer">
+              <coral-icon icon="answer"></coral-icon> Answer </coral-select-item>
+          </coral-select>
+          <button type="submit" is="coral-button" variant="primary">Submit</button>
+        </form>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-re">Reset</label></h2>
+        <form method="GET">
+          <coral-select name="select1" labelledby="label-re">
+            <coral-select-item value="actions">Actions</coral-select-item>
+            <coral-select-item value="add">Add</coral-select-item>
+            <coral-select-item value="add-circle">Add-Circle</coral-select-item>
+            <coral-select-item value="adjust">Adjust</coral-select-item>
+            <coral-select-item value="alert">Alert</coral-select-item>
+            <coral-select-item value="alert-add">Alert-Add</coral-select-item>
+            <coral-select-item value="alias" selected>Alias</coral-select-item>
+            <coral-select-item value="anchor">Anchor</coral-select-item>
+            <coral-select-item value="annotate">Annotate</coral-select-item>
+            <coral-select-item value="answer">Answer</coral-select-item>
+          </coral-select>
+          <button type="reset" is="coral-button" variant="quiet">Reset</button>
+          <button type="submit" is="coral-button" variant="primary" hidden>Submit</button>
+        </form>
+      </div>
+      <div class="col">
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-m-r">Required</label></h2>
+        <form method="GET">
+          <coral-select name="select1" labelledby="label-m-r" required multiple>
+            <coral-select-item value="actions">
+              <coral-icon icon="actions"></coral-icon> Actions </coral-select-item>
+            <coral-select-item value="add">
+              <coral-icon icon="add"></coral-icon> Add </coral-select-item>
+            <coral-select-item value="add-circle">
+              <coral-icon icon="addCircle"></coral-icon> Add-Circle </coral-select-item>
+            <coral-select-item value="adjust">
+              <coral-icon icon="adjust"></coral-icon> Adjust </coral-select-item>
+            <coral-select-item value="alert">
+              <coral-icon icon="alert"></coral-icon> Alert </coral-select-item>
+            <coral-select-item value="alert-add">
+              <coral-icon icon="alertAdd"></coral-icon> Alert-Add </coral-select-item>
+            <coral-select-item value="alias">
+              <coral-icon icon="alias"></coral-icon> Alias </coral-select-item>
+            <coral-select-item value="anchor">
+              <coral-icon icon="anchor"></coral-icon> Anchor </coral-select-item>
+            <coral-select-item value="annotate">
+              <coral-icon icon="annotate"></coral-icon> Annotate </coral-select-item>
+            <coral-select-item value="answer">
+              <coral-icon icon="answer"></coral-icon> Answer </coral-select-item>
+          </coral-select>
+          <button type="submit" is="coral-button" variant="primary">Submit</button>
+        </form>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-m-i">Invalid</label></h2>
+        <form method="GET">
+          <coral-select name="select1" labelledby="label-m-i" invalid multiple>
+            <coral-select-item value="actions">
+              <coral-icon icon="actions"></coral-icon> Actions </coral-select-item>
+            <coral-select-item value="add">
+              <coral-icon icon="add"></coral-icon> Add </coral-select-item>
+            <coral-select-item value="add-circle">
+              <coral-icon icon="addCircle"></coral-icon> Add-Circle </coral-select-item>
+            <coral-select-item value="adjust">
+              <coral-icon icon="adjust"></coral-icon> Adjust </coral-select-item>
+            <coral-select-item value="alert">
+              <coral-icon icon="alert"></coral-icon> Alert </coral-select-item>
+            <coral-select-item value="alert-add">
+              <coral-icon icon="alertAdd"></coral-icon> Alert-Add </coral-select-item>
+            <coral-select-item value="alias" selected>
+              <coral-icon icon="alias"></coral-icon> Alias </coral-select-item>
+            <coral-select-item value="anchor">
+              <coral-icon icon="anchor"></coral-icon> Anchor </coral-select-item>
+            <coral-select-item value="annotate">
+              <coral-icon icon="annotate"></coral-icon> Annotate </coral-select-item>
+            <coral-select-item value="answer" selected>
+              <coral-icon icon="answer"></coral-icon> Answer </coral-select-item>
+          </coral-select>
+          <button type="submit" is="coral-button" variant="primary">Submit</button>
+        </form>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-m-d">Disabled</label></h2>
+        <form method="GET">
+          <coral-select name="select1" labelledby="label-m-d" disabled multiple invalid>
+            <coral-select-item value="actions">
+              <coral-icon icon="actions"></coral-icon> Actions </coral-select-item>
+            <coral-select-item value="add">
+              <coral-icon icon="add"></coral-icon> Add </coral-select-item>
+            <coral-select-item value="add-circle" selected>
+              <coral-icon icon="addCircle"></coral-icon> Add-Circle </coral-select-item>
+            <coral-select-item value="adjust">
+              <coral-icon icon="adjust"></coral-icon> Adjust </coral-select-item>
+            <coral-select-item value="alert">
+              <coral-icon icon="alert"></coral-icon> Alert </coral-select-item>
+            <coral-select-item value="alert-add">
+              <coral-icon icon="alertAdd"></coral-icon> Alert-Add </coral-select-item>
+            <coral-select-item value="alias" selected>
+              <coral-icon icon="alias"></coral-icon> Alias </coral-select-item>
+            <coral-select-item value="anchor">
+              <coral-icon icon="anchor"></coral-icon> Anchor </coral-select-item>
+            <coral-select-item value="annotate">
+              <coral-icon icon="annotate"></coral-icon> Annotate </coral-select-item>
+            <coral-select-item value="answer">
+              <coral-icon icon="answer"></coral-icon> Answer </coral-select-item>
+          </coral-select>
+          <button type="submit" is="coral-button" variant="primary">Submit</button>
+        </form>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-m-ro">ReadOnly</label></h2>
+        <form method="GET">
+          <coral-select name="select1" labelledby="label-m-ro" readonly multiple>
+            <coral-select-item value="actions">
+              <coral-icon icon="actions"></coral-icon> Actions </coral-select-item>
+            <coral-select-item value="add">
+              <coral-icon icon="add"></coral-icon> Add </coral-select-item>
+            <coral-select-item value="add-circle" selected>
+              <coral-icon icon="addCircle"></coral-icon> Add-Circle </coral-select-item>
+            <coral-select-item value="adjust">
+              <coral-icon icon="adjust"></coral-icon> Adjust </coral-select-item>
+            <coral-select-item value="alert">
+              <coral-icon icon="alert"></coral-icon> Alert </coral-select-item>
+            <coral-select-item value="alert-add" selected>
+              <coral-icon icon="alertAdd"></coral-icon> Alert-Add </coral-select-item>
+            <coral-select-item value="alias">
+              <coral-icon icon="alias"></coral-icon> Alias </coral-select-item>
+            <coral-select-item value="anchor">
+              <coral-icon icon="anchor"></coral-icon> Anchor </coral-select-item>
+            <coral-select-item value="annotate">
+              <coral-icon icon="annotate"></coral-icon> Annotate </coral-select-item>
+            <coral-select-item value="answer">
+              <coral-icon icon="answer"></coral-icon> Answer </coral-select-item>
+          </coral-select>
+          <button type="submit" is="coral-button" variant="primary">Submit</button>
+        </form>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-m-re">Reset</label></h2>
+        <form method="GET">
+          <coral-select name="select1" labelledby="label-m-re" multiple>
+            <coral-select-item value="actions">Actions</coral-select-item>
+            <coral-select-item value="add">Add</coral-select-item>
+            <coral-select-item value="add-circle" selected>Add-Circle</coral-select-item>
+            <coral-select-item value="adjust" selected>Adjust</coral-select-item>
+            <coral-select-item value="alert">Alert</coral-select-item>
+            <coral-select-item value="alert-add">Alert-Add</coral-select-item>
+            <coral-select-item value="alias" selected>Alias</coral-select-item>
+            <coral-select-item value="anchor">Anchor</coral-select-item>
+            <coral-select-item value="annotate">Annotate</coral-select-item>
+            <coral-select-item value="answer">Answer</coral-select-item>
+          </coral-select>
+          <button type="reset" is="coral-button" variant="quiet">Reset</button>
+          <button type="submit" is="coral-button" variant="primary" hidden>Submit</button>
+        </form>
+      </div>
+    </section>
+    <section>
+      <h2 class="coral-Heading coral-Heading--2">Programatic Selection</h2>
+      <label id="label-m-ps-0" class="u-coral-screenReaderOnly">Animals</label>
+      <coral-select id="animals" labelledby="label-m-ps-0">
+        <coral-select-item value="ki" selected>Kitten</coral-select-item>
+        <coral-select-item value="pu">Puppy</coral-select-item>
+        <coral-select-item value="fr">Frog</coral-select-item>
+        <coral-select-item value="mk">Monkey</coral-select-item>
+        <coral-select-item value="cw">Cow</coral-select-item>
+      </coral-select>
+      <label id="label-m-ps-1" class="u-coral-screenReaderOnly">Animals</label>
+      <coral-select id="sounds" labelledby="label-m-ps-1">
+        <coral-select-item value="ki" selected>Mew Mew</coral-select-item>
+        <coral-select-item value="pu">Arf Arf</coral-select-item>
+        <coral-select-item value="fr">Ribbit Ribbit</coral-select-item>
+        <coral-select-item value="mk">Eek Eek</coral-select-item>
+        <coral-select-item value="cw">Moo Moo</coral-select-item>
+      </coral-select>
+    </section>
+    <script type="text/javascript">
+      const log = document.getElementById('log');
+      const animals = document.getElementById('animals');
+      const sounds = document.getElementById('sounds');
+
+
+      Coral.commons.ready(sounds, function(){
+        sounds.on('change', function(event) {
+          animals.value = sounds.value;
+
+          const li = document.createElement('li');
+          li.innerHTML = 'Programmatic select animal:' + sounds.value;
+          log.insertBefore(li, log.firstChild);
+        });
+      });
+
+      Coral.commons.ready(animals, function(){
+        animals.on('change', function(event) {
+          sounds.value = animals.value;
+
+          const li = document.createElement('li');
+          li.innerHTML = 'Programmatic select sound:' + animals.value;
+          log.insertBefore(li, log.firstChild);
+        });
+      });
+
+      document.addEventListener('change', function(event) {
+        const li = document.createElement('li');
+        li.innerHTML = 'change: ' + event.target + ' count: ' + event.target.selectedItems.length + ' value: ' + event.target.value;
+        log.insertBefore(li, log.firstChild);
+      });
+
+      document.addEventListener('coral-collection:add', function(event) {
+        const li = document.createElement('li');
+        li.innerHTML = 'add: ' + event.target + '  ' + event.detail.item.content.textContent;
+        log.insertBefore(li, log.firstChild);
+      });
+
+      document.addEventListener('coral-collection:remove', function(event) {
+        const li = document.createElement('li');
+        li.innerHTML = 'remove: ' + event.target + '  ' + event.detail.item.content.textContent;
+        log.insertBefore(li, log.firstChild);
+      });
+
+      document.addEventListener('coral-select:showitems', function(event) {
+        const li = document.createElement('li');
+        li.innerHTML = 'showitems: ' + event.detail.start;
+        log.insertBefore(li, log.firstChild);
+      });
+
+      document.addEventListener('coral-select:hideitems', function(event) {
+        const li = document.createElement('li');
+        li.innerHTML = 'hideitems';
+        log.insertBefore(li, log.firstChild);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Coral.Multifield</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+  <script src="../../js/coral.js"></script>
+
+  <style>
+    body {
+      padding: 15px;
+    }
+
+    section {
+      box-sizing: border-box;
+      padding: 12px;
+    }
+  </style>
+</head>
+<body class="coral--light">
+<section>
+  <h1 class="coral-Heading coral-Heading--1">Default: template</h1>
+  <coral-multifield>
+    <coral-multifield-item>
+      <input is="coral-textfield" type="text" value="Basel"/>
+    </coral-multifield-item>
+    <button coral-multifield-add type="button" is="coral-button">Add a field</button>
+    <template coral-multifield-template>
+      <input is="coral-textfield" type="text"/>
+    </template>
+  </coral-multifield>
+</section>
+<section class="coral--dark">
+  <h1 class="coral-Heading coral-Heading--2">Default</h1>
+
+  <coral-multifield>
+    <coral-multifield-item>
+      <input is="coral-textfield" type="text" value="Basel"/>
+    </coral-multifield-item>
+    <button coral-multifield-add type="button" is="coral-button">Add a field</button>
+    <template coral-multifield-template>
+      <input is="coral-textfield" type="text"/>
+    </template>
+  </coral-multifield>
+</section>
+<section>
+  <h1 class="coral-Heading coral-Heading--1">Multifield using a multifield as template</h1>
+  <coral-multifield>
+    <coral-multifield-item>
+      <coral-multifield>
+        <coral-multifield-item></coral-multifield-item>
+        <coral-multifield-item></coral-multifield-item>
+        <button coral-multifield-add type="button" is="coral-button">Add a field</button>
+        <template coral-multifield-template>
+          <input is="coral-textfield" type="text"/>
+        </template>
+      </coral-multifield>
+    </coral-multifield-item>
+    <button coral-multifield-add type="button" is="coral-button">Add a field</button>
+    <template coral-multifield-template>
+      <coral-multifield>
+        <coral-multifield-item></coral-multifield-item>
+        <coral-multifield-item></coral-multifield-item>
+        <button coral-multifield-add type="button" is="coral-button">Add a field</button>
+        <template coral-multifield-template>
+          <input is="coral-textfield" type="text"/>
+        </template>
+      </coral-multifield>
+    </template>
+  </coral-multifield>
+</section>
+<section id="section">
+  <h1 class="coral-Heading coral-Heading--1">Using JavaScript</h1>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var multifield = new Coral.Multifield();
+      multifield.template.content.appendChild(document.createElement('input', {is: 'coral-textfield'}));
+      multifield.items.add(new Coral.Multifield.Item());
+      var addButton = document.createElement('button', 'coral-button');
+      addButton.setAttribute('coral-multifield-add', '');
+      addButton.label.textContent = 'Add a field';
+      addButton.type = 'button';
+      multifield.appendChild(addButton);
+
+      document.getElementById('section').appendChild(multifield);
+    });
+  </script>
+</section>
+
+<section>
+  <h1 class="coral-Heading coral-Heading--2">Inside a form</h1>
+
+  <form id="form">
+    <coral-multifield id="multifield">
+      <button coral-multifield-add type="button" is="coral-button">Add a field</button>
+      <template coral-multifield-template>
+        <input is="coral-textfield" type="text" name="city"/>
+      </template>
+    </coral-multifield>
+    <button type="submit" is="coral-button">Submit</button>
+  </form>
+  <script>
+    var multifield = document.getElementById('multifield');
+    var items = multifield.items.getAll();
+    var cities = ['New York', 'Paris', 'Berlin', 'Hong-kong', 'Tokyo', 'Kourou'];
+
+    multifield.on('change', function() {
+      var previousItems = items;
+      items = multifield.items.getAll();
+
+      // An item was added
+      if (items.length > previousItems.length) {
+        items[items.length - 1].content.firstElementChild.value = cities[Math.floor((Math.random() * cities.length) + 0)];
+      }
+    });
+  </script>
+</section>
+</body>
+</html>

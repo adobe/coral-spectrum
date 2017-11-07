@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>Coral.Clock</title>
+    <link rel="stylesheet" href="../../css/coral.css">
+    <!--Load momentJS to support different formats -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="../../js/coral.js"></script>
+    <style>
+    .col {
+      width: 30%;
+      margin-right: 3%;
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    #log {
+      border: 1px solid #bababa;
+      height: 100px;
+      overflow-y: scroll;
+      padding: 10px 10px 10px 25px;
+      margin: 0;
+    }
+
+    .coral-Heading--2 {
+      margin-bottom: 10px;
+    }
+    </style>
+  </head>
+
+  <body class="coral--light u-coral-padding">
+    <section>
+      <div class="col">
+        <h1 class="coral-Heading coral-Heading--1">coral-Clock</h1>
+        <h2 class="coral-Heading coral-Heading--2"><label id="clock-label-0">Unset (with JS change watch)</label></h2>
+        <coral-clock labelledby="clock-label-0" id="clock1" value></coral-clock>
+        <h2 class="coral-Heading coral-Heading--2"><label id="clock-label-1">Preset time</label></h2>
+        <coral-clock labelledby="clock-label-1" value="05:04"></coral-clock>
+        <h2 class="coral-Heading coral-Heading--2"><label id="clock-label-2">Custom value format</label></h2>
+        <coral-clock labelledby="clock-label-2" valueformat="H-m" value="3-4"></coral-clock>
+        <h2 class="coral-Heading coral-Heading--2"><label id="clock-label-3">AM/PM display format</label></h2>
+        <coral-clock labelledby="clock-label-3" displayformat="hh:mm A" value="15:04"></coral-clock>
+        <h2 class="coral-Heading coral-Heading--2"><label id="clock-label-4">Quiet variant Preset time</label></h2>
+        <coral-clock labelledby="clock-label-4" value="05:04" variant="quiet"></coral-clock>
+        <h2 class="coral-Heading coral-Heading--2"><label id="clock-label-5">Quiet variant Unset (with JS change watch)</label></h2>
+        <coral-clock labelledby="clock-label-5" value variant="quiet"></coral-clock>
+        <h2 class="coral-Heading coral-Heading--2"><label id="clock-label-6">AM/PM display format quiet variant</label></h2>
+        <coral-clock labelledby="clock-label-6" displayformat="hh:mm A" value="15:04" variant="quiet"></coral-clock>
+      </div>
+      <div class="col">
+        <h1 class="coral-Heading coral-Heading--1">FormField compliance</h1>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-0">Disabled</label></h2>
+        <form method="GET">
+          <coral-clock labelledby="label-0" disabled name="disabled"></coral-clock>
+          <button type="submit" is="coral-button" variant="primary">Submit</button>
+        </form>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-1">Invalid</label></h2>
+        <coral-clock labelledby="label-1" invalid></coral-clock>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-2">Name</label></h2>
+        <form method="GET">
+          <coral-clock labelledby="label-2" name="clock"></coral-clock>
+          <button type="submit" is="coral-button" variant="primary">Submit</button>
+        </form>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-3">ReadOnly</label></h2>
+        <coral-clock labelledby="label-3" readonly></coral-clock>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-4">Required</label></h2>
+        <form method="GET">
+          <coral-clock labelledby="label-4" required name="required"></coral-clock>
+          <button type="submit" is="coral-button" variant="primary">Submit</button>
+        </form>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-5">Value</label></h2>
+        <coral-clock labelledby="label-5" value="05:04"></coral-clock>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-6">LabelledBy</label></h2>
+        <coral-clock labelledby="label-6"></coral-clock>
+      </div>
+      <div class="col">
+        <h1 class="coral-Heading coral-Heading--1">FormField compliance for quiet variant</h1>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-7">Quiet Disabled</label></h2>
+        <form method="GET">
+          <coral-clock labelledby="label-7" disabled name="disabled" variant="quiet"></coral-clock>
+          <button type="submit" is="coral-button" variant="primary">Submit</button>
+        </form>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-8">Quiet Invalid</label></h2>
+        <coral-clock labelledby="label-8" invalid variant="quiet"></coral-clock>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-9">Quiet Name</label></h2>
+        <form method="GET">
+          <coral-clock labelledby="label-9" name="clock" variant="quiet"></coral-clock>
+          <button type="submit" is="coral-button" variant="primary">Submit</button>
+        </form>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-10">Quiet ReadOnly</label></h2>
+        <coral-clock labelledby="label-10" readonly variant="quiet"></coral-clock>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-11">Quiet Required</label></h2>
+        <form method="GET">
+          <coral-clock labelledby="label-11" required name="required" variant="quiet"></coral-clock>
+          <button type="submit" is="coral-button" variant="primary">Submit</button>
+        </form>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-12">Quiet Value</label></h2>
+        <coral-clock labelledby="label-12" value="05:04" variant="quiet"></coral-clock>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-13">Quiet LabelledBy</label></h2>
+        <coral-clock labelledby="label-13" variant="quiet"></coral-clock>
+      </div>
+    </section>
+    <section>
+      <div class="col">
+        <h2 class="coral-Heading coral-Heading--2">Log</h2>
+        <ul id="log"></ul>
+      </div>
+    </section>
+    <script type="text/javascript">
+      const log = document.getElementById('log');
+      document.addEventListener('change', function(event) {
+        const li = document.createElement('li');
+        li.innerHTML = 'change: ' + event.target + ' value: ' + event.target.value;
+        log.insertBefore(li, log.firstChild);
+      });
+    </script>
+  </body>
+
+</html>

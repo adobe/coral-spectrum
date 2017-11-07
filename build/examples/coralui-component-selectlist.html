@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Coral.SelectList</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+  <script src="../../js/coral.js"></script>
+
+  <script>
+    function log(text) {
+      var log = document.getElementById('log');
+      var li = document.createElement('li');
+      li.textContent = text;
+      log.insertBefore(li, log.firstChild);
+    }
+
+    document.addEventListener('coral-selectlist:change', function(event) {
+      console.log(event);
+      if (event.target.selectedItem !== null) {
+        log(event.type + ' <' + event.target.selectedItem.value + ' ' + event.target.selectedItem.textContent + '> length: ' + event.target.selectedItems.length);
+      }
+      else {
+        log(event.type + ' <null> length: ' + event.target.selectedItems.length);
+      }
+    });
+
+    document.addEventListener('coral-selectlist:scrollbottom', function(event) {
+      console.log(event);
+      log(event.type);
+    });
+  </script>
+
+  <style>
+  body {
+    padding: 15px;
+  }
+  section {
+    border-top: 1px solid #C8C8C8;
+    padding: 12px;
+  }
+  .col {
+    width: 30%;
+    margin-right: 3%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .demo-Thumb {
+    padding-right: 10px;
+    display: table-cell;
+  }
+  .demo-Label {
+    display: table-cell;
+    width: 1000px;
+  }
+  </style>
+</head>
+
+<body class="coral--light">
+
+  <h1 class="coral-Heading coral-Heading--1">Select List</h1>
+
+  <section>
+    <div class="col">
+      <h2 class="coral-Heading coral-Heading--2">Standalone</h2>
+      <coral-selectlist>
+        <coral-selectlist-item value="actions">
+          <coral-icon class="demo-Thumb" icon="actions"></coral-icon>
+          <div class="demo-Label">Vertical Bar Graph with long name</div>
+        </coral-selectlist-item>
+        <coral-selectlist-item value="add" selected>
+          <coral-icon class="demo-Thumb" icon="add"></coral-icon>
+          <div class="demo-Label">Add</div>
+        </coral-selectlist-item>
+        <coral-selectlist-item value="add-circle" selected>
+          <coral-icon class="demo-Thumb" icon="addCircle"></coral-icon>
+          <div class="demo-Label">Add-Circle</div>
+        </coral-selectlist-item>
+        <coral-selectlist-item value="adjust" disabled>
+          <coral-icon class="demo-Thumb" icon="adjust"></coral-icon>
+          <div class="demo-Label">Adjust</div>
+        </coral-selectlist-item>
+        <coral-selectlist-item value="alert">
+          <coral-icon class="demo-Thumb" icon="alert"></coral-icon>
+          <div class="demo-Label">Alert</div>
+        </coral-selectlist-item>
+        <coral-selectlist-item value="alert-add">
+          <coral-icon class="demo-Thumb" icon="alertAdd"></coral-icon>
+          <div class="demo-Label">Alert-Add</div>
+        </coral-selectlist-item>
+        <coral-selectlist-item value="alias">
+          <coral-icon class="demo-Thumb" icon="alias"></coral-icon>
+          <div class="demo-Label">Alias</div>
+        </coral-selectlist-item>
+        <coral-selectlist-item value="anchor">
+          <coral-icon class="demo-Thumb" icon="anchor"></coral-icon>
+          <div class="demo-Label">Anchor</div>
+        </coral-selectlist-item>
+        <coral-selectlist-item value="annotate">
+          <coral-icon class="demo-Thumb" icon="annotate"></coral-icon>
+          <div class="demo-Label">Annotate</div>
+        </coral-selectlist-item>
+        <coral-selectlist-item value="answer">
+          <coral-icon class="demo-Thumb" icon="answer"></coral-icon>
+          <div class="demo-Label">Answer</div>
+        </coral-selectlist-item>
+      </coral-selectlist>
+    </div>
+    <div class="col">
+      <h2 class="coral-Heading coral-Heading--2">Standalone with groups</h2>
+      <coral-selectlist>
+        <coral-selectlist-group label="Group 1">
+          <coral-selectlist-item value="actions">Actions</coral-selectlist-item>
+          <coral-selectlist-item value="add" disabled>Add</coral-selectlist-item>
+          <coral-selectlist-item value="add-circle">Add-Circle</coral-selectlist-item>
+          <coral-selectlist-item value="adjust">Adjust</coral-selectlist-item>
+        </coral-selectlist-group>
+        <coral-selectlist-group label="Group 2">
+          <coral-selectlist-item value="alert" disabled>Alert</coral-selectlist-item>
+          <coral-selectlist-item value="alert-add">Alert-Add</coral-selectlist-item>
+          <coral-selectlist-item value="alias">Alias</coral-selectlist-item>
+        </coral-selectlist-group>
+        <coral-selectlist-group label="Group 3">
+          <coral-selectlist-item value="anchor">Anchor</coral-selectlist-item>
+          <coral-selectlist-item value="annotate">Annotate</coral-selectlist-item>
+          <coral-selectlist-item value="answer">Answer</coral-selectlist-item>
+        </coral-selectlist-group>
+      </coral-selectlist>
+    </div>
+    <div class="col">
+      <h2 class="coral-Heading coral-Heading--2">Multiple</h2>
+      <coral-selectlist multiple>
+        <coral-selectlist-item>Actions</coral-selectlist-item>
+        <coral-selectlist-item disabled>Add</coral-selectlist-item>
+        <coral-selectlist-item value="add-circle">Add-Circle</coral-selectlist-item>
+        <coral-selectlist-item value="adjust">Adjust</coral-selectlist-item>
+        <coral-selectlist-item value="alert" disabled>Alert</coral-selectlist-item>
+        <coral-selectlist-item value="alert-add">Alert-Add</coral-selectlist-item>
+        <coral-selectlist-item value="alias">Alias</coral-selectlist-item>
+        <coral-selectlist-item value="anchor">Anchor</coral-selectlist-item>
+        <coral-selectlist-item value="annotate">Annotate</coral-selectlist-item>
+        <coral-selectlist-item value="answer">Answer</coral-selectlist-item>
+      </coral-selectlist>
+    </div>
+  </section>
+
+  <section class="coral--dark">
+    <div class="col">
+      <h2 class="coral-Heading coral-Heading--2">Standalone</h2>
+      <coral-selectlist>
+        <coral-selectlist-item value="actions">
+          <coral-icon icon="actions"></coral-icon>
+          Actions
+        </coral-selectlist-item>
+        <coral-selectlist-item value="add">
+          <coral-icon icon="add"></coral-icon>
+          Add
+        </coral-selectlist-item>
+        <coral-selectlist-item value="add-circle">
+          <coral-icon icon="addCircle"></coral-icon>
+          Add-Circle
+        </coral-selectlist-item>
+        <coral-selectlist-item value="adjust">
+          <coral-icon icon="adjust"></coral-icon>
+          Adjust
+        </coral-selectlist-item>
+        <coral-selectlist-item value="alert">
+          <coral-icon icon="alert"></coral-icon>
+          Alert
+        </coral-selectlist-item>
+        <coral-selectlist-item value="alert-add">
+          <coral-icon icon="alertAdd"></coral-icon>
+          Alert-Add
+        </coral-selectlist-item>
+        <coral-selectlist-item value="alias">
+          <coral-icon icon="alias"></coral-icon>
+          Alias
+        </coral-selectlist-item>
+        <coral-selectlist-item value="anchor">
+          <coral-icon icon="anchor"></coral-icon>
+          Anchor
+        </coral-selectlist-item>
+        <coral-selectlist-item value="annotate">
+          <coral-icon icon="annotate"></coral-icon>
+          Annotate
+        </coral-selectlist-item>
+        <coral-selectlist-item value="answer">
+          <coral-icon icon="answer"></coral-icon>
+          Answer
+        </coral-selectlist-item>
+      </coral-selectlist>
+    </div>
+    <div class="col">
+      <h2 class="coral-Heading coral-Heading--2">Standalone with groups</h2>
+      <coral-selectlist>
+        <coral-selectlist-group label="Group 1">
+          <coral-selectlist-item value="actions">Actions</coral-selectlist-item>
+          <coral-selectlist-item value="add">Add</coral-selectlist-item>
+          <coral-selectlist-item value="add-circle">Add-Circle</coral-selectlist-item>
+          <coral-selectlist-item value="adjust">Adjust</coral-selectlist-item>
+        </coral-selectlist-group>
+        <coral-selectlist-group label="Group 2">
+          <coral-selectlist-item value="alert">Alert</coral-selectlist-item>
+          <coral-selectlist-item value="alert-add">Alert-Add</coral-selectlist-item>
+          <coral-selectlist-item value="alias">Alias</coral-selectlist-item>
+        </coral-selectlist-group>
+        <coral-selectlist-group label="Group 3">
+          <coral-selectlist-item value="anchor">Anchor</coral-selectlist-item>
+          <coral-selectlist-item value="annotate">Annotate</coral-selectlist-item>
+          <coral-selectlist-item value="answer">Answer</coral-selectlist-item>
+        </coral-selectlist-group>
+      </coral-selectlist>
+    </div>
+    <div class="col">
+      <h2 class="coral-Heading coral-Heading--2">Multiple</h2>
+      <coral-selectlist multiple>
+        <coral-selectlist-item value="actions">Actions</coral-selectlist-item>
+        <coral-selectlist-item value="add" disabled>Add</coral-selectlist-item>
+        <coral-selectlist-item value="add-circle">Add-Circle</coral-selectlist-item>
+        <coral-selectlist-item value="adjust">Adjust</coral-selectlist-item>
+        <coral-selectlist-item value="alert" disabled>Alert</coral-selectlist-item>
+        <coral-selectlist-item value="alert-add">Alert-Add</coral-selectlist-item>
+        <coral-selectlist-item value="alias">Alias</coral-selectlist-item>
+        <coral-selectlist-item value="anchor">Anchor</coral-selectlist-item>
+        <coral-selectlist-item value="annotate">Annotate</coral-selectlist-item>
+        <coral-selectlist-item value="answer">Answer</coral-selectlist-item>
+      </coral-selectlist>
+    </div>
+  </section>
+
+  <ul id="log"></ul>
+</body>
+
+</html>
+

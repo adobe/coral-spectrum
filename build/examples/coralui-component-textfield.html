@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+  <title>Textfield</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+  <script src="../../js/coral.js"></script>
+
+  <style type="text/css">
+    body {
+      padding: 15px;
+    }
+  </style>
+
+</head>
+<body class="coral--light">
+  <h2>Default</h2>
+  <input type="text" is="coral-textfield">
+
+  <h2>Disabled</h2>
+  <input type="text" is="coral-textfield" disabled>
+
+  <h2>Invalid</h2>
+  <input type="text" is="coral-textfield" invalid>
+
+  <h2>Name</h2>
+  <input type="text" is="coral-textfield" name="name">
+
+  <h2>ReadOnly</h2>
+  <input type="text" is="coral-textfield" readonly value="readonly field">
+
+  <h2>Required</h2>
+  <input type="text" is="coral-textfield" required>
+
+  <h2>Value</h2>
+  <input type="text" is="coral-textfield" value="value">
+
+  <h2 id="createdWithJSConstructor">Created with JavaScript Constructor</h2>
+  <script>
+    var textfieldFromConstructor = new Coral.Textfield();
+    document.body.appendChild(textfieldFromConstructor);
+  </script>
+
+  <h2 id="createdWithCreateElement">Created with Create Element</h2>
+  <script>
+    var textfield = document.createElement('input', {is:'coral-textfield'});
+    document.body.appendChild(textfield);
+  </script>
+
+  <h2>Quiet variant</h2>
+  <input type="text" is="coral-textfield" placeholder="Enter your name" variant="quiet">
+
+</body>
+</html>

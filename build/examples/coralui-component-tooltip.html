@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Tooltip</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+  <script src="../../js/coral.js"></script>
+
+  <style>
+    body {
+      margin: 10px;
+    }
+
+    .box {
+      margin: 50px auto;
+      width: 50px;
+      height: 50px;
+      padding: 10px;
+      border: 1px dashed gray;
+      text-align: center;
+    }
+
+    .box-row {
+      text-align: center;
+    }
+
+    .box-row .box {
+      display: inline-block;
+      margin: 50px;
+    }
+  </style>
+</head>
+<body class="coral--light">
+  <h1 class="coral-Heading coral-Heading--1">Tooltip Examples</h1>
+  <section>
+    <h2 class="coral-Heading coral-Heading--2">Basic Tooltip</h2>
+
+    <section class="block">
+      <coral-tooltip target="_next" placement="right" style="width:200px">
+        <i class="coral-Icon coral-Icon--infoCircle"></i>
+        I said a hip hop,
+        Hippie to the hippie,
+        The hip, hip a hop, and you don't stop, a rock it,
+        To the bang bang boogie, say, up jump the boogie,
+        To the rhythm of the boogie, the beat.
+      </coral-tooltip>
+      <div class="box">Wrapping with icon (right)</div>
+    </section>
+
+    <section class="block">
+      <coral-tooltip target="_next" placement="left" style="width:200px">
+        <i class="coral-Icon coral-Icon--infoCircle"></i>
+        I said a hip hop,
+        Hippie to the hippie,
+        The hip, hip a hop, and you don't stop, a rock it,
+        To the bang bang boogie, say, up jump the boogie,
+        To the rhythm of the boogie, the beat.
+      </coral-tooltip>
+      <div class="box">Wrapping with icon (left)</div>
+    </section>
+
+
+    <div class="box-row">
+      <div class="box">right</div>
+      <coral-tooltip target="_prev" type="error" placement="right">Tooltip right</coral-tooltip>
+
+      <div class="box">top</div>
+      <coral-tooltip target="_prev" placement="top">Tooltip top</coral-tooltip>
+
+      <div class="box">bottom</div>
+      <coral-tooltip target="_prev" placement="bottom">Tooltip bottom</coral-tooltip>
+
+      <div class="box">left</div>
+      <coral-tooltip target="_prev" placement="left">Tooltip left</coral-tooltip>
+    </div>
+
+    <div class="box" id="hasJSTooltip">From JS</div>
+
+    <section class="block">
+      <div style="width:500px;height:100px;border:1px solid teal;overflow:scroll;">
+        <strong id="target1">Hover Me</strong><br>
+        <strong>er</strong><br>
+        <strong>er</strong><br>
+        <strong>er</strong><br>
+        <strong id="target2">Hover Me</strong><br>
+        <strong>er</strong><br>
+        <strong>er</strong><br>
+        <strong>er</strong><br>
+        <strong id="target3">Hover Me</strong><br>
+        <strong>er</strong><br>
+        <strong>er</strong><br>
+        <strong>er</strong><br>
+        <strong id="target4">Hover Me</strong><br>
+        <strong>er</strong><br>
+        <strong>er</strong><br>
+        <strong>er</strong><br>
+      </div>
+
+      <coral-tooltip target="#target1" placement="bottom">Hello</coral-tooltip>
+      <coral-tooltip target="#target2" placement="top">Hello</coral-tooltip>
+      <coral-tooltip target="#target3" placement="left">Hello</coral-tooltip>
+      <coral-tooltip target="#target4" placement="right">Hello</coral-tooltip>
+    </section>
+
+  </section>
+
+  <script>
+    var tooltip = new Coral.Tooltip();
+
+    tooltip.set({
+      content: {
+        innerHTML: 'js tooltip'
+      },
+      target: '#hasJSTooltip',
+      variant: 'inspect'
+    });
+
+    document.body.appendChild(tooltip);
+  </script>
+
+</body>
+</html>
