@@ -18,18 +18,25 @@ module.exports = function(gulp) {
   const runSequence = require('run-sequence').use(gulp);
   const server = require('gulp-server-livereload');
   
-  gulp.task('templates+scripts', function() {
-    runSequence('templates', 'scripts');
-  });
-  
-  gulp.task('styles+scripts', function() {
-    runSequence('styles', 'scripts');
+  gulp.task('build+watch', function() {
+    runSequence(
+      'styles',
+      'theme',
+      'resources',
+      'templates',
+      'scripts',
+      'cleanup'
+    );
   });
   
   gulp.task('watch', function() {
-    gulp.watch('src/templates/*.html', ['templates+scripts']);
-    gulp.watch(['src/scripts/*.js', 'index.js'], ['scripts']);
-    gulp.watch('src/styles/*.styl', ['styles+scripts']);
+    gulp.watch([
+      'src/templates/*.html',
+      'src/styles/*.styl',
+      'src/scripts/*.js',
+      'src/resources/**/*',
+      'index.js'
+    ], ['build+watch']);
   
     return gulp.src('./')
       .pipe(server({
