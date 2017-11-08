@@ -16,7 +16,7 @@
  */
 module.exports = function(gulp) {
   const runSequence = require('run-sequence').use(gulp);
-  var server = require('gulp-server-livereload');
+  const server = require('gulp-server-livereload');
   
   gulp.task('templates+scripts', function() {
     runSequence('templates', 'scripts');

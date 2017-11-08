@@ -18,23 +18,36 @@
 const path = require('path');
 const packageJSON = require(path.join(process.cwd(), 'package.json'));
 
-const themeCloudUI = ((packageJSON['dependencies'] && packageJSON['dependencies']['@coralui/coralui-theme-spectrum']) ||
-(packageJSON['devDependencies'] && packageJSON['devDependencies']['@coralui/coralui-theme-spectrum'])) && 'spectrum';
+const dependencies = Object.assign(packageJSON['dependencies'] || {}, packageJSON['devDependencies'] || {});
 
-const themeSpectrum = ((packageJSON['dependencies'] && packageJSON['dependencies']['@coralui/coralui-theme-cloudui']) ||
-(packageJSON['devDependencies'] && packageJSON['devDependencies']['@coralui/coralui-theme-cloudui'])) && 'cloudui';
-
-// If both themes, spectrum wins
-const theme = themeSpectrum || themeCloudUI;
+// Assuming a theme is named with "theme"
+const theme = Object.keys(dependencies).find(key => key.indexOf('theme') !== -1);
 
 module.exports = {
   getTheme: function() {
     return theme;
   },
   addTheme: function() {
-    return `import '@coralui/coralui-theme-${theme}/build/css/coral.css';`;
+    // Default
+    if (theme === 'coralui-theme-spectrum') {
+      return `import 'coralui-theme-spectrum';`
+    }
+    
+    // Custom theme
+    // Assuming the css is in build/css/coral.css
+    return theme ? `import '${theme}/build/css/coral.css';` : '';
+  },
+  getResources: function() {
+    // Default
+    if (theme === 'coralui-theme-spectrum') {
+      return `node_modules/${theme}/src/resources/**/*`
+    }
+  
+    // Custom theme
+    // Assuming the resources are in build/resources
+    return `node_modules/${theme}/build/resources/**/*`
   },
   getIndex: function() {
-    return theme ? `index-${theme}` : 'index';
-  }
+    return theme ? `index-${theme.replace(/[^a-zA-Z ]/g, '')}` : 'index';
+  },
 };

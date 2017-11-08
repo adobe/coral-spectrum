@@ -3,7 +3,7 @@
   "version": "4.0.0",
   "description": "ColumnView component",
   "dependencies": {
-    "@coralui/coralui-theme-spectrum": "^2.3.7",
+    "coralui-theme-spectrum": "file:../coralui-theme-spectrum",
     "coralui-mixin-component": "file:../coralui-mixin-component",
     "coralui-component-icon": "file:../coralui-component-button",
     "coralui-collection": "file:../coralui-component-button",

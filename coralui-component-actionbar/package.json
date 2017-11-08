@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "ActionBar component",
   "dependencies": {
-    "@coralui/coralui-theme-spectrum": "^2.3.7",
+    "coralui-theme-spectrum": "file:../coralui-theme-spectrum",
     "coralui-mixin-component": "file:../coralui-mixin-component",
     "coralui-collection": "file:../coralui-collection",
     "coralui-component-button": "file:../coralui-component-button",

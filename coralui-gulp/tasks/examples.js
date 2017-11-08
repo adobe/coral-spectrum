@@ -36,7 +36,7 @@ module.exports = function(gulp) {
           content = `${content.replace("'../' + component + '/examples/index.html'", "component + '.html'")}`;
         }
         
-        return `${content}`;
+        return content;
       }))
       .pipe(rename(function(file) {
         // Rename example file using component name

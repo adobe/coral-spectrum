@@ -3,7 +3,7 @@
   "version": "5.0.0",
   "description": "SelectList component",
   "dependencies": {
-    "@coralui/coralui-theme-spectrum": "^2.3.7",
+    "coralui-theme-spectrum": "file:../coralui-theme-spectrum",
     "coralui-mixin-component": "file:../coralui-mixin-component",
     "coralui-component-wait": "file:../coralui-component-wait",
     "coralui-collection": "file:../coralui-collection",

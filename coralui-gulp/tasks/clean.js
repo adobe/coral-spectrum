@@ -17,6 +17,8 @@
 module.exports = function(gulp) {
   const fs = require('fs');
   const del = require('del');
+  const theme = require('../helpers/theme');
+  const util = require('../helpers/util');
   
   gulp.task('clean', function() {
     del.sync('./build/**');
@@ -24,5 +26,16 @@ module.exports = function(gulp) {
     fs.mkdirSync('./build');
     fs.mkdirSync('./build/css');
     fs.mkdirSync('./build/js');
+  });
+  
+  gulp.task('cleanup', function() {
+    if (!util.isTLB()) {
+      del.sync('./README.md');
+    }
+    
+    const index = theme.getIndex();
+    if (index !== 'index') {
+      del.sync(`./${index}.js`);
+    }
   });
 };

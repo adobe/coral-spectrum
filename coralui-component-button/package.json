@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "Button component",
   "dependencies": {
-    "@coralui/coralui-theme-spectrum": "^2.3.7",
+    "coralui-theme-spectrum": "file:../coralui-theme-spectrum",
     "coralui-mixin-component": "file:../coralui-mixin-component",
     "coralui-mixin-button": "file:../coralui-mixin-button",
     "coralui-externals": "file:../coralui-externals",

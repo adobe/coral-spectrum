@@ -17,9 +17,11 @@
 module.exports = function(gulp) {
   const plumber = require('gulp-plumber');
   const stylus = require('gulp-stylus');
+  const modifyFile = require('gulp-modify-file');
+  const theme = require('../helpers/theme');
   
   gulp.task('styles', function() {
-    return gulp.src('src/styles/index.styl')
+    return gulp.src(['src/styles/index.styl', 'node_modules/coralui-*/src/styles/index.styl'])
       .pipe(plumber())
       .pipe(stylus({
         'include css': true,
@@ -27,6 +29,20 @@ module.exports = function(gulp) {
           './node_modules'
         ]
       }))
-      .pipe(gulp.dest('src/styles'));
+      .pipe(modifyFile((content) => {
+        if (theme.getTheme() === 'coralui-theme-spectrum') {
+          const spectrumConfig = require(`../configs/spectrum.conf.js`);
+          
+          // Map Spectrum selectors with Coral ones
+          spectrumConfig.forEach((selectors) => {
+            content = content.replace(selectors.spectrum, selectors.coral);
+          });
+        }
+        
+        return content;
+      }))
+      .pipe(gulp.dest(function (file) {
+        return file.base;
+      }));
   });
 };

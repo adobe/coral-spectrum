@@ -21,7 +21,10 @@ module.exports = function(gulp) {
   const themeHelper = require('../helpers/theme');
   
   gulp.task('resources', function() {
-    return gulp.src(`node_modules/@coralui/coralui-theme-${themeHelper.getTheme()}/build/resources/**/*`)
+    return gulp.src([
+      'src/resources/**/*',
+      themeHelper.getResources()
+    ])
       .pipe(plumber())
       .pipe(rename(function (file) {
         file.dirname = path.join('resources', file.dirname);
