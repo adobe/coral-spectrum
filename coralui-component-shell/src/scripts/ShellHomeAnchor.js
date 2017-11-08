@@ -26,7 +26,7 @@ const CLASSNAME = 'coral3-Shell-homeAnchor';
  @classdesc A Shell Home Anchor component
  @htmltag coral-shell-homeanchor
  @htmlbasetag a
- @extends HTMLAnchorElement
+ @extends {HTMLAnchorElement}
  @extends {ComponentMixin}
  */
 class ShellHomeAnchor extends ComponentMixin(HTMLAnchorElement) {

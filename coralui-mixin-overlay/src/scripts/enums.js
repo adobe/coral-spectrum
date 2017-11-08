@@ -43,12 +43,11 @@ const focusOnShow = {
   OFF: 'off'
 };
 
-
 /**
- The time it should take for overlays to fade in milliseconds.
+ The time it should take for {@link Overlay} to fade in milliseconds.
  Important: This should be greater than or equal to the CSS transition time.
  
-  @type {Number}
+ @typedef {Number} OverlayFadeTime
  */
 const FADETIME = 350;
 

@@ -24,7 +24,7 @@ import {ButtonMixin} from 'coralui-mixin-button';
  @classdesc A Button component containing text and/or an icon.
  @htmltag coral-button
  @htmlbasetag button
- @extends HTMLButtonElement
+ @extends {HTMLButtonElement}
  @extends {ComponentMixin}
  @extends {ButtonMixin}
  */

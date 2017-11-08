@@ -24,7 +24,7 @@ const CLASSNAME = 'coral3-AnchorList-item';
  @class Coral.AnchorList.Item
  @classdesc An AnchorList item component
  @htmltag coral-anchorlist-item
- @extends HTMLAnchorElement
+ @extends {HTMLAnchorElement}
  @extends {ComponentMixin}
  @extends {ListItemMixin}
  */

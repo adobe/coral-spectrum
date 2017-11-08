@@ -24,7 +24,7 @@ const CLASSNAME = 'coral3-ButtonList-item';
  @class Coral.ButtonList.Item
  @classdesc An ButtonList item component
  @htmltag coral-buttonlist-item
- @extends HTMLButtonElement
+ @extends {HTMLButtonElement}
  @extends {ComponentMixin}
  @extends {ListItemMixin}
  */
