@@ -31,7 +31,7 @@ const TEMPLATE_SUPPORT = 'content' in document.createElement('template');
  Multifield partially supports the <code>template</code> element in IE 11. If adding/removing items in the template
  is required, <code>template.content</code> should be used.
  Child elements can be given a special attribute to enable functionality:
- * <code>[coral-multifield-add]</code> - Click to add an item.
+ - <code>[coral-multifield-add]</code>. Click to add an item.
  @htmltag coral-multifield
  @extends {HTMLElement}
  @extends {ComponentMixin}

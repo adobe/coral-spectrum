@@ -23,7 +23,7 @@ const CLASSNAME = 'coral3-BasicList-item';
 
 /**
  @mixin ListItemMixin
- @classdesc The base element for list item components
+ @classdesc The base element for List Item components
  */
 const ListItemMixin = (superClass) => class extends superClass {
   /** @ignore */

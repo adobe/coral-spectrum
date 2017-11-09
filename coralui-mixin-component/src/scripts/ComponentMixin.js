@@ -335,29 +335,23 @@ const ComponentMixin = (superClass) => class extends superClass {
   /** @ignore */
   constructor() {
     super();
-  
-    // @legacy
+    
     // Attach Vent
     this._vent = new Vent(this);
     this._events = {};
   }
   
-  // @legacy
+  // Constructs and returns the component name based on the constructor
   get _componentName() { return this.constructor._componentName || getConstructorName(this.constructor); }
   
-  // @legacy
-  get _properties() { return {}; }
-  
-  // @legacy
+  // Returns all watched attributes case sensitive mapped to their properties
   get _attributes() { return this.constructor._attributePropertyMap || getAttributePropertyMap(this.constructor); }
   
-  // @legacy
   // The filter function for keyboard events. By default, any child element can trigger keyboard events.
-  // You can pass {@link Coral.Keys.filterInputs} to avoid listening to key events triggered from within
+  // You can pass {@link Keys.filterInputs} to avoid listening to key events triggered from within
   // inputs.
   _filterKeys() { return true; }
   
-  // @legacy
   // Attach event listeners including global ones
   _delegateEvents(eventMap) {
     this._events = commons.extend(this._events, eventMap);
@@ -365,7 +359,6 @@ const ComponentMixin = (superClass) => class extends superClass {
     delegateGlobalEvents.call(this);
   }
   
-  // @legacy
   // Returns the content zone if the component is connected and contains the content zone else null
   // Ideally content zones will be replaced by shadow dom and <slot> elements
   _getContentZone(contentZone) {
@@ -376,7 +369,6 @@ const ComponentMixin = (superClass) => class extends superClass {
     return contentZone;
   }
   
-  // @legacy
   // Sets the value as content zone for the property given the specified options
   // Ideally content zones will be replaced by shadow dom and <slot> elements
   _setContentZone(property, value, options) {
@@ -458,14 +450,16 @@ const ComponentMixin = (superClass) => class extends superClass {
     }
   }
   
-  // @legacy
+  /**
+   Returns the component name.
+   
+   @return {String}
+   */
   toString() {
     return `Coral.${this._componentName}`;
   }
   
   /**
-   @legacy
-   
    Add an event listener.
  
    @param {String} eventName
@@ -484,9 +478,8 @@ const ComponentMixin = (superClass) => class extends superClass {
   }
   
   /**
-   @legacy
-   
    Remove an event listener.
+   
    @param {String} eventName
    The event name to stop listening for.
    @param {String} [selector]
@@ -503,9 +496,8 @@ const ComponentMixin = (superClass) => class extends superClass {
   }
   
   /**
-   @legacy
-   
    Trigger an event.
+   
    @param {String} eventName
    The event name to trigger.
    @param {Object} [props]
@@ -569,12 +561,7 @@ const ComponentMixin = (superClass) => class extends superClass {
   }
   
   /**
-   @legacy
-   
    Set multiple properties.
-   
-   @name ComponentMixin#set
-   @function
    
    @param {Object.<String, *>} properties
    An object of property/value pairs to set.
@@ -640,6 +627,7 @@ const ComponentMixin = (superClass) => class extends superClass {
   
   /**
    Get the value of a property.
+   
    @param {String} property
    The name of the property to fetch the value of.
    @returns {*} Property value.
@@ -650,6 +638,7 @@ const ComponentMixin = (superClass) => class extends superClass {
   
   /**
    Show this component.
+   
    @returns {ComponentMixin} this, chainable
    */
   show() {
@@ -657,6 +646,7 @@ const ComponentMixin = (superClass) => class extends superClass {
       return this;
     }
   
+    /** @ignore */
     this.hidden = false;
     return this;
   }
@@ -670,6 +660,7 @@ const ComponentMixin = (superClass) => class extends superClass {
       return this;
     }
   
+    /** @ignore */
     this.hidden = true;
     return this;
   }
@@ -677,9 +668,10 @@ const ComponentMixin = (superClass) => class extends superClass {
   /** @ignore */
   // eslint-disable-next-line no-unused-vars
   attributeChangedCallback(name, oldValue, value) {
-    if (!this._reflectedAttribute) {
+    const self = this;
+    if (!self._reflectedAttribute) {
       // Use the attribute/property mapping
-      this[this._attributes[name] || name] = value;
+      self[self._attributes[name] || name] = value;
     }
   }
   

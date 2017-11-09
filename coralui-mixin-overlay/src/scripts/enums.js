@@ -1,5 +1,5 @@
 /**
- Enumeration for {@link Overlay} trap options.
+ Enumeration for {@link OverlayMixin} trap options.
  
  @typedef {Object} OverlayTrapFocusEnum
  
@@ -14,7 +14,7 @@ const trapFocus = {
 };
 
 /**
- Enumeration for {@link Overlay} return focus options.
+ Enumeration for {@link OverlayMixin} return focus options.
  
  @typedef {Object} OverlayReturnFocusEnum
  
@@ -29,7 +29,7 @@ const returnFocus = {
 };
 
 /**
- Enumeration for {@link Overlay} focus behavior options.
+ Enumeration for {@link OverlayMixin} focus behavior options.
  
  @typedef {Object} OverlayFocusOnShowEnum
  
@@ -44,7 +44,7 @@ const focusOnShow = {
 };
 
 /**
- The time it should take for {@link Overlay} to fade in milliseconds.
+ The time it should take for {@link OverlayMixin} to fade in milliseconds.
  Important: This should be greater than or equal to the CSS transition time.
  
  @typedef {Number} OverlayFadeTime

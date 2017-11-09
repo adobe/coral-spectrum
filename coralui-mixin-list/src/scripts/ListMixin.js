@@ -21,7 +21,7 @@ import {transform, validate} from 'coralui-util';
 const CLASSNAME = 'coral3-BasicList';
 
 /**
- Enumeration for {@link List}, {@link AnchorList}, {@link ButtonList} interactions.
+ Enumeration for {@link ListMixin} interactions.
  
  @typedef {Object} ListInteractionEnum
  
@@ -37,7 +37,7 @@ const interaction = {
 
 /**
  @mixin ListMixin
- @classdesc The base element for list components
+ @classdesc The base element for List components
  */
 const ListMixin = (superClass) => class extends superClass {
   /** @ignore */
@@ -211,7 +211,7 @@ const ListMixin = (superClass) => class extends superClass {
   }
   
   /**
-   Returns {@link List} interaction options.
+   Returns {@link ListMixin} interaction options.
    
    @return {ListInteractionEnum}
    */

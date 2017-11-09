@@ -75,10 +75,10 @@ const KEY_SPACE = Keys.keyToCode('space');
  @classdesc A Table component is a container component to display and manipulate data in two dimensions.
  To define table actions on specific elements, handles can be used.
  A handle is given a special attribute :
- * <code>[coral-table-select]</code> - Select/unselect all table items.
- * <code>[coral-table-rowselect]</code> - Select/unselect the table item.
- * <code>[coral-table-roworder]</code> - Drag to order the table item.
- * <code>[coral-table-rowlock]</code> - Lock/unlock the table item.
+ - <code>[coral-table-select]</code>. Select/unselect all table items.
+ - <code>[coral-table-rowselect]</code>. Select/unselect the table item.
+ - <code>[coral-table-roworder]</code>. Drag to order the table item.
+ - <code>[coral-table-rowlock]</code>. Lock/unlock the table item.
  @htmltag coral-table
  @htmlbasetag table
  @extends {HTMLTableElement}

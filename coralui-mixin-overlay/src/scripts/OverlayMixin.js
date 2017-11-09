@@ -373,7 +373,7 @@ function doBackdropShow(zIndex, instance) {
 
 /**
  @mixin OverlayMixin
- @classdesc The base element for overlay components
+ @classdesc The base element for Overlay components
  */
 const OverlayMixin = (superClass) => class extends superClass {
   /** @ignore */
@@ -402,6 +402,7 @@ const OverlayMixin = (superClass) => class extends superClass {
     if (this._trapFocus === trapFocus.ON) {
       // Give ourselves tabIndex if we are not focusable
       if (this.tabIndex < 0) {
+        /** @ignore */
         this.tabIndex = 0;
       }
       
@@ -802,7 +803,7 @@ const OverlayMixin = (superClass) => class extends superClass {
   /**
    Open the overlay and set the z-index accordingly.
    
-   @returns {ComponentMixin} this, chainable
+   @returns {OverlayMixin} this, chainable
    */
   show() {
     this.open = true;
@@ -813,7 +814,7 @@ const OverlayMixin = (superClass) => class extends superClass {
   /**
    Close the overlay.
    
-   @returns {ComponentMixin} this, chainable
+   @returns {OverlayMixin} this, chainable
    */
   hide() {
     this.open = false;
@@ -827,7 +828,7 @@ const OverlayMixin = (superClass) => class extends superClass {
    @param {HTMLElement} element
    The element to return focus to. This must be a DOM element, not a jQuery object or selector.
    
-   @returns {ComponentMixin} this, chainable
+   @returns {OverlayMixin} this, chainable
    */
   returnFocusTo(element) {
     if (this.returnFocus === returnFocus.OFF) {
@@ -862,28 +863,28 @@ const OverlayMixin = (superClass) => class extends superClass {
   }
   
   /**
-   Returns {@link Overlay} trap focus options.
+   Returns {@link OverlayMixin} trap focus options.
    
    @return {OverlayTrapFocusEnum}
    */
   static get trapFocus() { return trapFocus; }
   
   /**
-   Returns {@link Overlay} return focus options.
+   Returns {@link OverlayMixin} return focus options.
    
    @return {OverlayReturnFocusEnum}
    */
   static get returnFocus() { return returnFocus; }
   
   /**
-   Returns {@link Overlay} focus on show options.
+   Returns {@link OverlayMixin} focus on show options.
    
    @return {OverlayFocusOnShowEnum}
    */
   static get focusOnShow() { return focusOnShow; }
   
   /**
-   Returns {@link Overlay} fadetime in milliseconds.
+   Returns {@link OverlayMixin} fadetime in milliseconds.
    
    @return {Number}
    */
@@ -937,14 +938,14 @@ const OverlayMixin = (superClass) => class extends superClass {
   }
   
   /**
-   Called when the {@link Overlay} is clicked.
+   Called when the {@link OverlayMixin} is clicked.
    
    @function backdropClickedCallback
    @protected
    */
   
   /**
-   Triggered before the {@link Overlay} is opened with <code>show()</code> or <code>instance.open = true</code>.
+   Triggered before the {@link OverlayMixin} is opened with <code>show()</code> or <code>instance.open = true</code>.
  
    @typedef {CustomEvent} coral-overlay:beforeopen
    
@@ -953,13 +954,13 @@ const OverlayMixin = (superClass) => class extends superClass {
    */
   
   /**
-   Triggered after the {@link Overlay} is opened with <code>show()</code> or <code>instance.open = true</code>
+   Triggered after the {@link OverlayMixin} is opened with <code>show()</code> or <code>instance.open = true</code>
  
    @typedef {CustomEvent} coral-overlay:open
    */
   
   /**
-   Triggered before the {@link Overlay} is closed with <code>hide()</code> or <code>instance.open = false</code>.
+   Triggered before the {@link OverlayMixin} is closed with <code>hide()</code> or <code>instance.open = false</code>.
  
    @typedef {CustomEvent} coral-overlay:beforeclose
    
@@ -968,7 +969,7 @@ const OverlayMixin = (superClass) => class extends superClass {
    */
   
   /**
-   Triggered after the {@link Overlay} is closed with <code>hide()</code> or <code>instance.open = false</code>
+   Triggered after the {@link OverlayMixin} is closed with <code>hide()</code> or <code>instance.open = false</code>
  
    @typedef {CustomEvent} coral-overlay:close
    */

@@ -57,7 +57,14 @@ const TARGET_INPUT_SELECTOR = 'input:not([type=hidden])';
 
 /**
  @mixin FormFieldMixin
- @classdesc The base element for all Form Field components
+ @classdesc The base element for Form Field components. If not extending a {@link HTMLInputElement}, following
+ properties should be implemented at least :
+ - <code>disabled</code>. Whether this field is disabled or not.
+ - <code>invalid</code>. Whether the current value of this field is invalid or not.
+ - <code>name</code>. Name used to submit the data in a form.
+ - <code>readOnly</code>. Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
+ - <code>required</code>. Whether this field is required or not.
+ - <code>value</code>. This field's current value.
  */
 const FormFieldMixin = (superClass) => class extends superClass {
   /** @ignore */
@@ -69,6 +76,66 @@ const FormFieldMixin = (superClass) => class extends superClass {
       'global:reset': '_onFormReset'
     };
   }
+  
+  /**
+   Whether this field is disabled or not.
+   
+   @type {Boolean}
+   @default false
+   @htmlattribute disabled
+   @htmlattributereflected
+   @abstract
+   */
+  
+  /**
+   Whether the current value of this field is invalid or not.
+   
+   @type {Boolean}
+   @default false
+   @htmlattribute invalid
+   @htmlattributereflected
+   @abstract
+   */
+  
+  /**
+   Name used to submit the data in a form.
+   
+   @type {String}
+   @default ""
+   @htmlattribute name
+   @htmlattributereflected
+   @abstract
+   */
+  
+  /**
+   Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
+   This is ignored for checkbox, radio or fileupload.
+   
+   @type {Boolean}
+   @default false
+   @htmlattribute readonly
+   @htmlattributereflected
+   @abstract
+   */
+  
+  /**
+   Whether this field is required or not.
+   
+   @type {Boolean}
+   @default false
+   @htmlattribute required
+   @htmlattributereflected
+   @abstract
+   */
+  
+  /**
+   This field's current value.
+   
+   @type {String}
+   @default ""
+   @htmlattribute value
+   @abstract
+   */
   
   /**
    Whether the current value of this field is invalid or not.
@@ -141,7 +208,7 @@ const FormFieldMixin = (superClass) => class extends superClass {
   
   /**
    Target property that will be taken from <code>event.target</code> and set into
-   {@link Coral.mixin.formField#_componentTargetProperty} when a change event is triggered.
+   {@link FormFieldMixin#_componentTargetProperty} when a change event is triggered.
    @type {String}
    @default "value"
    @protected
@@ -151,7 +218,7 @@ const FormFieldMixin = (superClass) => class extends superClass {
   }
   
   /**
-   Whether the change event needs to be triggered when {@link Coral.mixin.formField#_onInputChange} is called.
+   Whether the change event needs to be triggered when {@link FormFieldMixin#_onInputChange} is called.
    @type {Boolean}
    @default true
    @protected
@@ -199,6 +266,7 @@ const FormFieldMixin = (superClass) => class extends superClass {
     // stops the current event
     event.stopPropagation();
     
+    /** @ignore */
     this[this._componentTargetProperty] = event.target[this._eventTargetProperty];
     
     // Explicitly re-emit the change event after the property has been set
@@ -272,6 +340,7 @@ const FormFieldMixin = (superClass) => class extends superClass {
    Clears the <code>value</code> of formField to the default value.
    */
   clear() {
+    /** @ignore */
     this.value = '';
   }
   
@@ -281,6 +350,7 @@ const FormFieldMixin = (superClass) => class extends superClass {
   reset() {
     // since the 'value' property is not reflected, form components use it to restore the initial value. When a
     // component has support for values, this method needs to be overwritten
+    /** @ignore */
     this.value = transform.string(this.getAttribute('value'));
   }
   

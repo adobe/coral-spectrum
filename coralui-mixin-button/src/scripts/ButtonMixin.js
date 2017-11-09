@@ -59,7 +59,7 @@ for (const variantValue in variant) {
 }
 
 /**
- Enumeration for {@link Button}, {@link AnchorButton} sizes.
+ Enumeration for {@link ButtonMixin} sizes.
  
  @typedef {Object} ButtonSizeEnum
  
@@ -74,7 +74,7 @@ const size = {
 };
 
 /**
- Enumeration for {@link Button}, {@link AnchorButton} icon position options.
+ Enumeration for {@link ButtonMixin} icon position options.
  
  @typedef {Object} ButtonIconPositionEnum
  
@@ -90,7 +90,7 @@ const iconPosition = {
 
 /**
  @mixin ButtonMixin
- @classdesc The base element for button components
+ @classdesc The base element for Button components
  */
 const ButtonMixin = (superClass) => class extends superClass {
   /** @ignore */
@@ -231,6 +231,7 @@ const ButtonMixin = (superClass) => class extends superClass {
   }
   
   // We just reflect it but we also trigger an event to be used by button group
+  /** @ignore */
   get value() {
     return this.getAttribute('value');
   }
@@ -356,21 +357,21 @@ const ButtonMixin = (superClass) => class extends superClass {
   get _contentZones() { return {'coral-button-label': 'label'}; }
   
   /**
-   Returns {@link Button} sizes.
+   Returns {@link ButtonMixin} sizes.
    
    @return {ButtonSizeEnum}
    */
   static get size() { return size; }
   
   /**
-   Returns {@link Button} variants.
+   Returns {@link ButtonMixin} variants.
    
    @return {ButtonVariantEnum}
    */
   static get variant() { return variant; }
   
   /**
-   Returns {@link Button} icon positions.
+   Returns {@link ButtonMixin} icon positions.
    
    @return {ButtonIconPositionEnum}
    */
@@ -449,7 +450,7 @@ const ButtonMixin = (superClass) => class extends superClass {
   }
   
   /**
-   Triggered when {@link Button#selected} changed.
+   Triggered when {@link ButtonMixin#selected} changed.
    
    @typedef {CustomEvent} coral-button:_selectedchanged
    
@@ -457,7 +458,7 @@ const ButtonMixin = (superClass) => class extends superClass {
    */
   
   /**
-   Triggered when {@link Button#value} changed.
+   Triggered when {@link ButtonMixin#value} changed.
    
    @typedef {CustomEvent} coral-button:_valuechanged
    
