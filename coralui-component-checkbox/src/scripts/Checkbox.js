@@ -310,15 +310,6 @@ class Checkbox extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this.checked = this._initialCheckedState;
   }
   
-  /**
-   The default content zone.
-   
-   @type {HTMLElement}
-   @contentzone
-   */
-  get defaultContentZone() { return this.label; }
-  set defaultContentZone(value) { this.label = value; }
-  
   get _contentZones() { return {'coral-checkbox-label': 'label'}; }
   
   /** @ignore */

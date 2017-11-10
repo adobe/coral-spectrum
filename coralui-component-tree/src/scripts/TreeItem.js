@@ -30,6 +30,16 @@ const CHEVRON_CLASSES = {
   false: 'chevronRight'
 };
 
+/**
+ Enumeration for {@link TreeItem} variants.
+ 
+ @typedef {Object} TreeItemVariantEnum
+ 
+ @property {String} DRILLDOWN
+ Default variant with icon to expand/collapse subtree.
+ @property {String} LEAF
+ Variant for leaf items. Icon to expand/collapse subtree is hidden.
+ */
 const variant = {
   /* Default variant with icon to expand/collapse subtree. */
   DRILLDOWN: 'drilldown',
@@ -211,7 +221,7 @@ class TreeItem extends ComponentMixin(HTMLElement) {
   }
   
   /**
-   The item's variant. See {@link TreeItemVariant}.
+   The item's variant. See {@link TreeItemVariantEnum}.
    
    @type {String}
    @default TreeItemVariant.DRILLDOWN
@@ -316,18 +326,9 @@ class TreeItem extends ComponentMixin(HTMLElement) {
   /**
    Returns {@link TreeItem} variants.
    
-   @return {TreeItemVariant}
+   @return {TreeItemVariantEnum}
    */
   static get variant() { return variant; }
-  
-  /**
-   The default content zone.
-   
-   @type {HTMLElement}
-   @contentzone
-   */
-  get defaultContentZone() { return this.content; }
-  set defaultContentZone(value) { this.content = value; }
   
   get _contentZones() { return {'coral-tree-item-content': 'content'}; }
   

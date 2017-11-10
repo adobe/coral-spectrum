@@ -47,8 +47,6 @@ describe('Coral.mixin._component', function() {
       });
     }
     
-    get defaultContentZone() {return this.content;}
-    set defaultContentZone(value) {this.content = value;}
     get _contentZones() {return {'x-element-content': 'content'};}
     
     static get observedAttributes() {
@@ -216,11 +214,6 @@ describe('Coral.mixin._component', function() {
     });
   
     describe('#_getContentZone()', function() {
-      it('should expose content zones with descriptor.defaultContentZone as instance.defaultContentZone', function() {
-        expect(el.defaultContentZone).to.equal(el.content);
-        expect(el.defaultContentZone).not.to.be.null;
-      });
-      
       it('should return the content zone', function() {
         expect(el.content).to.equal(el._elements.content);
         expect(el.content.tagName.toLowerCase()).to.equal('x-element-content');
@@ -237,12 +230,6 @@ describe('Coral.mixin._component', function() {
       it('should insert the content zone once the element is connected', function() {
         helpers.target.appendChild(el);
         expect(el.content).to.equal(el.querySelector('x-element-content'));
-      });
-  
-      it('should set the corresponding content zone when instance.defaultContentZone is reassigned', function() {
-        const newContent = document.createElement('x-element-content');
-        el.defaultContentZone = newContent;
-        expect(el.content).to.equal(newContent);
       });
   
       it('should allow setting values on content zones via object notation', function() {
@@ -286,6 +273,23 @@ describe('Coral.mixin._component', function() {
   
         expect(el.content).to.equal(null);
         expect(el.querySelector('x-element-content')).to.equal(null);
+      });
+      
+      it('should set content zone in virtual dom', function(done) {
+        const content = el.content;
+        const newContent = document.createElement('x-element-content');
+        newContent.innerHTML = 'text';
+        
+        el.appendChild(newContent);
+  
+        // Wait for content zone MO
+        helpers.next(() => {
+          expect(el.contains(content)).to.be.false;
+          expect(el.contains(newContent)).to.be.true;
+          expect(el.content.innerHTML).to.equal('text');
+          expect(el.content._contentZoned).to.be.true;
+          done();
+        });
       });
     });
   

@@ -92,15 +92,6 @@ class ShellSolution extends ComponentMixin(HTMLAnchorElement) {
     this.classList.toggle(`${CLASSNAME}--linked`, this._linked);
   }
   
-  /**
-   The default content zone.
-   
-   @type {HTMLElement}
-   @contentzone
-   */
-  get defaultContentZone() { return this.label; }
-  set defaultContentZone(value) { this.label = value; }
-  
   get _contentZones() { return {'coral-shell-solution-label': 'label'}; }
   
   /** @ignore */

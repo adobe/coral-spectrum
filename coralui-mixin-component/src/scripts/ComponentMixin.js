@@ -336,9 +336,35 @@ const ComponentMixin = (superClass) => class extends superClass {
   constructor() {
     super();
     
+    const self = this;
+    
     // Attach Vent
-    this._vent = new Vent(this);
-    this._events = {};
+    self._vent = new Vent(self);
+    self._events = {};
+    
+    // Content zone MO for virtual DOM support
+    if (self._contentZones) {
+      self._contentZoneObserver = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          for (let i = 0; i < mutation.addedNodes.length; i++) {
+            const addedNode = mutation.addedNodes[i];
+        
+            for (const name in self._contentZones) {
+              const contentZone = self._contentZones[name];
+              if (addedNode.nodeName.toLowerCase() === name && !addedNode._contentZoned) {
+                // Insert the content zone at the right position
+                self[contentZone] = addedNode;
+              }
+            }
+          }
+        });
+      });
+  
+      self._contentZoneObserver.observe(self, {
+        childList: true,
+        subtree: true
+      });
+    }
   }
   
   // Constructs and returns the component name based on the constructor
@@ -391,6 +417,9 @@ const ComponentMixin = (superClass) => class extends superClass {
       }
       
       oldNode = this._elements[handle];
+  
+      // Flag it for the content zone MO
+      value._contentZoned = true;
       
       // Replace the existing element
       if (insert) {

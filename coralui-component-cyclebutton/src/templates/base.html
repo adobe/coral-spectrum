@@ -1,11 +1,11 @@
 <js>
   var buttonId = Coral.commons.getUID();
 </js>
-<button id="{{buttonId}}" handle="button" aria-expanded="false" class="coral3-CycleButton-button" is="coral-button" variant="quiet" iconsize="S">
-  <coral-button-label>
-    <coral-icon handle="openIcon" icon="chevronDown" size="xxs" class="coral3-CycleButton-openIcon"></coral-icon>
-  </coral-button-label>
-</button>
+<button id="{{buttonId}}" handle="button" aria-expanded="false" class="coral3-CycleButton-button" is="coral-button" variant="quiet" iconsize="S"></button>
+<coral-icon handle="openIcon" icon="chevronDown" size="xxs" class="coral3-CycleButton-openIcon"></coral-icon>
+<js>
+  this.button.label.appendChild(this.openIcon);
+</js>
 <coral-overlay handle="overlay" class="coral3-CycleButton-overlay" returnfocus="on" focusonshow="coral-selectlist" trapfocus="on" placement="bottom">
   <coral-selectlist handle="selectList" id="{{Coral.commons.getUID()}}"></coral-selectlist>
   <coral-buttonlist handle="actionList" hidden></coral-buttonlist>

@@ -69,15 +69,6 @@ class TableHeaderCell extends ComponentMixin(HTMLTableCellElement) {
     this.trigger('coral-table-headercell:_contentchanged');
   }
   
-  /**
-   The default content zone.
-   
-   @type {HTMLElement}
-   @contentzone
-   */
-  get defaultContentZone() { return this.content; }
-  set defaultContentZone(value) { this.content = value; }
-  
   get _contentZones() { return {'coral-table-headercell-content': 'content'}; }
   
   /** @ignore */

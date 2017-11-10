@@ -209,15 +209,6 @@ class Drawer extends ComponentMixin(HTMLElement) {
     }
   }
   
-  /**
-   The default content zone.
-   
-   @type {HTMLElement}
-   @contentzone
-   */
-  get defaultContentZone() { return this.content; }
-  set defaultContentZone(value) { this.content = value; }
-  
   get _contentZones() { return {'coral-drawer-content': 'content'}; }
   
   /**

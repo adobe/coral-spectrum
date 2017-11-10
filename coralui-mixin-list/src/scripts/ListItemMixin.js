@@ -92,15 +92,6 @@ const ListItemMixin = (superClass) => class extends superClass {
     this._elements.icon.hidden = this._elements.icon.icon === '';
   }
   
-  /**
-   The default content zone.
-   
-   @type {HTMLElement}
-   @contentzone
-   */
-  get defaultContentZone() { return this.content; }
-  set defaultContentZone(value) { this.content = value; }
-  
   get _contentZones() { return {'coral-list-item-content': 'content'}; }
   
   /** @ignore */

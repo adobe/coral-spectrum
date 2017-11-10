@@ -9,7 +9,7 @@
 ### [» Styles](./manual/styles.html)
 *Theme, public CSS and Typekit*
 ### [» Framework Support](./manual/frameworks.html)
-*ReactJS, Angular and Torq*
+*React, Angular, Vue and Torq*
 ### [» Architecture](./manual/architecture.html)
 *Technical decisions behind the architecture*
 ### [» View examples](./manual/examples.html)

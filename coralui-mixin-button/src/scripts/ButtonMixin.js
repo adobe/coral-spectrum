@@ -345,15 +345,6 @@ const ButtonMixin = (superClass) => class extends superClass {
     return Object.keys(this._contentZones)[0];
   }
   
-  /**
-   The default content zone.
-   
-   @type {HTMLElement}
-   @contentzone
-   */
-  get defaultContentZone() { return this.label; }
-  set defaultContentZone(value) { this.label = value; }
-  
   get _contentZones() { return {'coral-button-label': 'label'}; }
   
   /**

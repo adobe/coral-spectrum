@@ -2343,15 +2343,6 @@ class Table extends ComponentMixin(HTMLTableElement) {
     this._resetLayout();
   }
   
-  /**
-   The default content zone.
-   
-   @type {HTMLElement}
-   @contentzone
-   */
-  get defaultContentZone() { return this.body; }
-  set defaultContentZone(value) { this.body = value; }
-  
   get _contentZones() {
     return {
       tbody: 'body',

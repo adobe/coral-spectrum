@@ -507,15 +507,6 @@ class ActionBar extends ComponentMixin(HTMLElement) {
     this._elements.primary.appendChild(frag);
   }
   
-  /**
-   The default content zone.
-   
-   @type {HTMLElement}
-   @contentzone
-   */
-  get defaultContentZone() { return this.primary; }
-  set defaultContentZone(value) { this.primary = value; }
-  
   get _contentZones() {
     return {
       'coral-actionbar-primary': 'primary',

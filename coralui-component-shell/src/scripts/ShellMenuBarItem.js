@@ -238,15 +238,6 @@ class ShellMenuBarItem extends ComponentMixin(HTMLElement) {
     return newTarget;
   }
   
-  /**
-   The default content zone.
-   
-   @type {HTMLElement}
-   @contentzone
-   */
-  get defaultContentZone() { return this.label; }
-  set defaultContentZone(value) { this.label = value; }
-  
   get _contentZones() { return {'coral-button-label': 'label'}; }
   
   /**

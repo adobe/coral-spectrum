@@ -211,15 +211,6 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
     this._elements.acHeader.focus();
   }
   
-  /**
-   The default content zone.
-   
-   @type {HTMLElement}
-   @contentzone
-   */
-  get defaultContentZone() { return this.content; }
-  set defaultContentZone(value) { this.content = value; }
-  
   get _contentZones() { return {'coral-accordion-item-label': 'label', 'coral-accordion-item-content': 'content'}; }
   
   /** @ignore */
