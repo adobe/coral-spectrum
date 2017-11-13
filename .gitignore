@@ -1,6 +1,10 @@
-.DS_Store
 /build
 /node_modules
 npm-debug.log
-**/src/templates/*.js
-**/coralui-*/index-*.js
+index-*.js
+
+coralui-*/src/templates/*.js
+coralui-*/index-*.js
+coralui-*/build
+coralui-*/node_modules
+coralui-*/npm-debug.log
