@@ -32,7 +32,11 @@ module.exports = function(gulp) {
     if (fs.existsSync('./README.md') && fs.readFileSync('./README.md').toString().trim() === '') {
       del.sync('./README.md');
     }
+  
+    // Remove generated templates
+    del.sync('./src/templates/*.js');
     
+    // Remove themed index
     const index = theme.getIndex();
     if (index !== 'index') {
       del.sync(`./${index}.js`);
