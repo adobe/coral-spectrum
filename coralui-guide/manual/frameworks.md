@@ -21,7 +21,7 @@ CoralUI 4.x + Angular example : https://git.corp.adobe.com/ringel/coralui-angula
 
 CoralUI 4.x + Vue example : https://git.corp.adobe.com/ringel/coralui-vue. 
 
-*Angular quickstart : https://vuejs.org/v2/guide/installation.html#CLI.*
+*Vue quickstart : https://vuejs.org/v2/guide/installation.html#CLI.*
 
 ## Torq
 
