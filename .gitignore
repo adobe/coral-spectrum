@@ -1,10 +1,10 @@
 /build
 /node_modules
-npm-debug.log
-index-*.js
+/npm-debug.log
+/index-*.js
 
-coralui-*/src/templates/*.js
-coralui-*/index-*.js
-coralui-*/build
-coralui-*/node_modules
-coralui-*/npm-debug.log
+/coralui-*/src/templates/*.js
+/coralui-*/index-*.js
+/coralui-*/build
+/coralui-*/node_modules
+/coralui-*/npm-debug.log
