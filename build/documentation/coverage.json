@@ -1,0 +1,2089 @@
+{
+  "coverage": "69.2%",
+  "expectCount": 3153,
+  "actualCount": 2182,
+  "files": {
+    "coralui/coralui-collection/src/scripts/Collection.js": {
+      "expectCount": 35,
+      "actualCount": 20,
+      "undocumentLines": [
+        101,
+        103,
+        104,
+        105,
+        106,
+        109,
+        110,
+        113,
+        120,
+        126,
+        135,
+        140,
+        141,
+        142,
+        358
+      ]
+    },
+    "coralui/coralui-collection/src/scripts/SelectableCollection.js": {
+      "expectCount": 16,
+      "actualCount": 12,
+      "undocumentLines": [
+        26,
+        34,
+        35,
+        36
+      ]
+    },
+    "coralui/coralui-collection/src/scripts/listToArray.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-accordion/src/scripts/Accordion.js": {
+      "expectCount": 38,
+      "actualCount": 25,
+      "undocumentLines": [
+        23,
+        24,
+        25,
+        26,
+        47,
+        50,
+        88,
+        107,
+        126,
+        149,
+        181,
+        320,
+        381
+      ]
+    },
+    "coralui/coralui-component-accordion/src/scripts/AccordionItem.js": {
+      "expectCount": 19,
+      "actualCount": 11,
+      "undocumentLines": [
+        23,
+        26,
+        44,
+        103,
+        118,
+        163,
+        178,
+        214
+      ]
+    },
+    "coralui/coralui-component-accordion/src/scripts/AccordionItemContent.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-accordion/src/scripts/AccordionItemLabel.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-actionbar/src/scripts/ActionBar.js": {
+      "expectCount": 26,
+      "actualCount": 19,
+      "undocumentLines": [
+        22,
+        47,
+        54,
+        110,
+        435,
+        497,
+        510
+      ]
+    },
+    "coralui/coralui-component-actionbar/src/scripts/ActionBarContainer.js": {
+      "expectCount": 18,
+      "actualCount": 13,
+      "undocumentLines": [
+        25,
+        72,
+        94,
+        110,
+        154
+      ]
+    },
+    "coralui/coralui-component-actionbar/src/scripts/ActionBarContainerCollection.js": {
+      "expectCount": 5,
+      "actualCount": 1,
+      "undocumentLines": [
+        27,
+        38,
+        46,
+        66
+      ]
+    },
+    "coralui/coralui-component-actionbar/src/scripts/ActionBarContainerMixin.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-actionbar/src/scripts/ActionBarItem.js": {
+      "expectCount": 5,
+      "actualCount": 4,
+      "undocumentLines": [
+        20
+      ]
+    },
+    "coralui/coralui-component-actionbar/src/scripts/ActionBarPrimary.js": {
+      "expectCount": 5,
+      "actualCount": 4,
+      "undocumentLines": [
+        22
+      ]
+    },
+    "coralui/coralui-component-actionbar/src/scripts/ActionBarSecondary.js": {
+      "expectCount": 5,
+      "actualCount": 4,
+      "undocumentLines": [
+        22
+      ]
+    },
+    "coralui/coralui-component-actionbar/src/scripts/getFirstSelectableWrappedItem.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-alert/src/scripts/Alert.js": {
+      "expectCount": 23,
+      "actualCount": 13,
+      "undocumentLines": [
+        24,
+        71,
+        74,
+        80,
+        85,
+        105,
+        132,
+        162,
+        238,
+        243
+      ]
+    },
+    "coralui/coralui-component-alert/src/scripts/AlertContent.js": {
+      "expectCount": 3,
+      "actualCount": 2,
+      "undocumentLines": [
+        18
+      ]
+    },
+    "coralui/coralui-component-alert/src/scripts/AlertFooter.js": {
+      "expectCount": 3,
+      "actualCount": 2,
+      "undocumentLines": [
+        18
+      ]
+    },
+    "coralui/coralui-component-alert/src/scripts/AlertHeader.js": {
+      "expectCount": 3,
+      "actualCount": 2,
+      "undocumentLines": [
+        18
+      ]
+    },
+    "coralui/coralui-component-anchorbutton/src/scripts/AnchorButton.js": {
+      "expectCount": 11,
+      "actualCount": 8,
+      "undocumentLines": [
+        23,
+        64,
+        102
+      ]
+    },
+    "coralui/coralui-component-anchorbutton/src/scripts/AnchorButtonLabel.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-autocomplete/src/scripts/Autocomplete.js": {
+      "expectCount": 105,
+      "actualCount": 80,
+      "undocumentLines": [
+        33,
+        51,
+        82,
+        139,
+        142,
+        145,
+        148,
+        151,
+        157,
+        170,
+        192,
+        222,
+        242,
+        311,
+        312,
+        338,
+        510,
+        532,
+        551,
+        619,
+        1021,
+        1040,
+        1090,
+        1244,
+        1797
+      ]
+    },
+    "coralui/coralui-component-autocomplete/src/scripts/AutocompleteItem.js": {
+      "expectCount": 13,
+      "actualCount": 9,
+      "undocumentLines": [
+        33,
+        54,
+        91,
+        109
+      ]
+    },
+    "coralui/coralui-component-button/src/scripts/Button.js": {
+      "expectCount": 2,
+      "actualCount": 2,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-button/src/scripts/ButtonLabel.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-buttongroup/src/scripts/ButtonGroup.js": {
+      "expectCount": 48,
+      "actualCount": 38,
+      "undocumentLines": [
+        59,
+        75,
+        79,
+        112,
+        139,
+        272,
+        295,
+        325,
+        347,
+        688
+      ]
+    },
+    "coralui/coralui-component-calendar/src/scripts/Calendar.js": {
+      "expectCount": 65,
+      "actualCount": 49,
+      "undocumentLines": [
+        177,
+        194,
+        223,
+        227,
+        231,
+        232,
+        255,
+        274,
+        292,
+        312,
+        334,
+        360,
+        382,
+        425,
+        443,
+        478
+      ]
+    },
+    "coralui/coralui-component-card/src/scripts/Card.js": {
+      "expectCount": 28,
+      "actualCount": 16,
+      "undocumentLines": [
+        22,
+        46,
+        50,
+        68,
+        115,
+        155,
+        168,
+        228,
+        265,
+        284,
+        300,
+        309
+      ]
+    },
+    "coralui/coralui-component-card/src/scripts/CardAsset.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-card/src/scripts/CardContent.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-card/src/scripts/CardContext.js": {
+      "expectCount": 5,
+      "actualCount": 4,
+      "undocumentLines": [
+        20
+      ]
+    },
+    "coralui/coralui-component-card/src/scripts/CardDescription.js": {
+      "expectCount": 5,
+      "actualCount": 4,
+      "undocumentLines": [
+        20
+      ]
+    },
+    "coralui/coralui-component-card/src/scripts/CardInfo.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-card/src/scripts/CardOverlay.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-card/src/scripts/CardProperty.js": {
+      "expectCount": 9,
+      "actualCount": 6,
+      "undocumentLines": [
+        22,
+        37,
+        85
+      ]
+    },
+    "coralui/coralui-component-card/src/scripts/CardPropertyContent.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-card/src/scripts/CardPropertyList.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-card/src/scripts/CardTitle.js": {
+      "expectCount": 5,
+      "actualCount": 4,
+      "undocumentLines": [
+        20
+      ]
+    },
+    "coralui/coralui-component-charactercount/src/scripts/CharacterCount.js": {
+      "expectCount": 13,
+      "actualCount": 9,
+      "undocumentLines": [
+        21,
+        59,
+        68,
+        103
+      ]
+    },
+    "coralui/coralui-component-checkbox/src/scripts/Checkbox.js": {
+      "expectCount": 32,
+      "actualCount": 19,
+      "undocumentLines": [
+        23,
+        26,
+        48,
+        55,
+        82,
+        100,
+        167,
+        186,
+        204,
+        214,
+        221,
+        313,
+        366
+      ]
+    },
+    "coralui/coralui-component-checkbox/src/scripts/CheckboxLabel.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-clock/src/scripts/Clock.js": {
+      "expectCount": 44,
+      "actualCount": 24,
+      "undocumentLines": [
+        27,
+        28,
+        29,
+        32,
+        33,
+        34,
+        35,
+        52,
+        56,
+        76,
+        84,
+        102,
+        124,
+        165,
+        208,
+        244,
+        265,
+        286,
+        439,
+        525
+      ]
+    },
+    "coralui/coralui-component-colorinput/src/scripts/Color.js": {
+      "expectCount": 50,
+      "actualCount": 46,
+      "undocumentLines": [
+        794,
+        795,
+        796,
+        1116
+      ]
+    },
+    "coralui/coralui-component-colorinput/src/scripts/ColorInput.js": {
+      "expectCount": 60,
+      "actualCount": 43,
+      "undocumentLines": [
+        32,
+        141,
+        145,
+        160,
+        193,
+        218,
+        272,
+        289,
+        306,
+        323,
+        380,
+        422,
+        457,
+        475,
+        544,
+        597,
+        801
+      ]
+    },
+    "coralui/coralui-component-colorinput/src/scripts/ColorInputAbstractSubviewMixin.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-colorinput/src/scripts/ColorInputColorProperties.js": {
+      "expectCount": 12,
+      "actualCount": 10,
+      "undocumentLines": [
+        27,
+        52
+      ]
+    },
+    "coralui/coralui-component-colorinput/src/scripts/ColorInputItem.js": {
+      "expectCount": 7,
+      "actualCount": 5,
+      "undocumentLines": [
+        57,
+        74
+      ]
+    },
+    "coralui/coralui-component-colorinput/src/scripts/ColorInputSlider.js": {
+      "expectCount": 8,
+      "actualCount": 6,
+      "undocumentLines": [
+        23,
+        44
+      ]
+    },
+    "coralui/coralui-component-colorinput/src/scripts/ColorInputSwatch.js": {
+      "expectCount": 13,
+      "actualCount": 9,
+      "undocumentLines": [
+        25,
+        44,
+        62,
+        92
+      ]
+    },
+    "coralui/coralui-component-colorinput/src/scripts/ColorInputSwatches.js": {
+      "expectCount": 22,
+      "actualCount": 15,
+      "undocumentLines": [
+        26,
+        52,
+        56,
+        71,
+        108,
+        128,
+        160
+      ]
+    },
+    "coralui/coralui-component-columnview/src/scripts/ColumnView.js": {
+      "expectCount": 47,
+      "actualCount": 36,
+      "undocumentLines": [
+        23,
+        25,
+        80,
+        83,
+        103,
+        123,
+        145,
+        303,
+        356,
+        729,
+        730
+      ]
+    },
+    "coralui/coralui-component-columnview/src/scripts/ColumnViewCollection.js": {
+      "expectCount": 5,
+      "actualCount": 1,
+      "undocumentLines": [
+        26,
+        39,
+        43,
+        47
+      ]
+    },
+    "coralui/coralui-component-columnview/src/scripts/ColumnViewColumn.js": {
+      "expectCount": 38,
+      "actualCount": 27,
+      "undocumentLines": [
+        23,
+        68,
+        73,
+        74,
+        75,
+        80,
+        131,
+        177,
+        286,
+        304,
+        482
+      ]
+    },
+    "coralui/coralui-component-columnview/src/scripts/ColumnViewColumnContent.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-columnview/src/scripts/ColumnViewItem.js": {
+      "expectCount": 19,
+      "actualCount": 11,
+      "undocumentLines": [
+        22,
+        41,
+        59,
+        116,
+        140,
+        173,
+        194,
+        203
+      ]
+    },
+    "coralui/coralui-component-columnview/src/scripts/ColumnViewItemContent.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-columnview/src/scripts/ColumnViewItemThumbnail.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-columnview/src/scripts/ColumnViewPreview.js": {
+      "expectCount": 7,
+      "actualCount": 4,
+      "undocumentLines": [
+        20,
+        35,
+        59
+      ]
+    },
+    "coralui/coralui-component-columnview/src/scripts/ColumnViewPreviewAsset.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-columnview/src/scripts/ColumnViewPreviewContent.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-columnview/src/scripts/ColumnViewPreviewLabel.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-columnview/src/scripts/ColumnViewPreviewSeparator.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-columnview/src/scripts/ColumnViewPreviewValue.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-cyclebutton/src/scripts/CycleButton.js": {
+      "expectCount": 46,
+      "actualCount": 37,
+      "undocumentLines": [
+        60,
+        93,
+        103,
+        118,
+        151,
+        175,
+        188,
+        214,
+        284
+      ]
+    },
+    "coralui/coralui-component-cyclebutton/src/scripts/CycleButtonAction.js": {
+      "expectCount": 5,
+      "actualCount": 4,
+      "undocumentLines": [
+        41
+      ]
+    },
+    "coralui/coralui-component-cyclebutton/src/scripts/CycleButtonItem.js": {
+      "expectCount": 14,
+      "actualCount": 10,
+      "undocumentLines": [
+        62,
+        99,
+        129,
+        156
+      ]
+    },
+    "coralui/coralui-component-datepicker/src/scripts/Datepicker.js": {
+      "expectCount": 57,
+      "actualCount": 38,
+      "undocumentLines": [
+        45,
+        49,
+        87,
+        89,
+        95,
+        120,
+        123,
+        153,
+        156,
+        214,
+        238,
+        280,
+        368,
+        370,
+        407,
+        449,
+        485,
+        504,
+        536
+      ]
+    },
+    "coralui/coralui-component-dialog/src/scripts/Dialog.js": {
+      "expectCount": 46,
+      "actualCount": 28,
+      "undocumentLines": [
+        114,
+        116,
+        117,
+        120,
+        139,
+        162,
+        163,
+        164,
+        171,
+        188,
+        269,
+        294,
+        331,
+        369,
+        414,
+        433,
+        590,
+        615
+      ]
+    },
+    "coralui/coralui-component-dialog/src/scripts/DialogContent.js": {
+      "expectCount": 3,
+      "actualCount": 2,
+      "undocumentLines": [
+        18
+      ]
+    },
+    "coralui/coralui-component-dialog/src/scripts/DialogFooter.js": {
+      "expectCount": 3,
+      "actualCount": 2,
+      "undocumentLines": [
+        18
+      ]
+    },
+    "coralui/coralui-component-dialog/src/scripts/DialogHeader.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-drawer/src/scripts/Drawer.js": {
+      "expectCount": 19,
+      "actualCount": 11,
+      "undocumentLines": [
+        39,
+        42,
+        60,
+        83,
+        124,
+        148,
+        188,
+        212
+      ]
+    },
+    "coralui/coralui-component-drawer/src/scripts/DrawerContent.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-fileupload/src/scripts/FileUpload.js": {
+      "expectCount": 66,
+      "actualCount": 51,
+      "undocumentLines": [
+        24,
+        26,
+        93,
+        97,
+        105,
+        214,
+        295,
+        329,
+        360,
+        364,
+        385,
+        389,
+        420,
+        454,
+        573
+      ]
+    },
+    "coralui/coralui-component-fileupload/src/scripts/FileUploadItem.js": {
+      "expectCount": 27,
+      "actualCount": 15,
+      "undocumentLines": [
+        46,
+        48,
+        50,
+        51,
+        52,
+        53,
+        68,
+        69,
+        98,
+        113,
+        129,
+        148
+      ]
+    },
+    "coralui/coralui-component-icon/src/scripts/Icon.js": {
+      "expectCount": 20,
+      "actualCount": 15,
+      "undocumentLines": [
+        72,
+        76,
+        94,
+        109,
+        155
+      ]
+    },
+    "coralui/coralui-component-list/src/scripts/AnchorList.js": {
+      "expectCount": 6,
+      "actualCount": 5,
+      "undocumentLines": [
+        21
+      ]
+    },
+    "coralui/coralui-component-list/src/scripts/AnchorListItem.js": {
+      "expectCount": 6,
+      "actualCount": 5,
+      "undocumentLines": [
+        21
+      ]
+    },
+    "coralui/coralui-component-list/src/scripts/ButtonList.js": {
+      "expectCount": 6,
+      "actualCount": 5,
+      "undocumentLines": [
+        21
+      ]
+    },
+    "coralui/coralui-component-list/src/scripts/ButtonListItem.js": {
+      "expectCount": 3,
+      "actualCount": 2,
+      "undocumentLines": [
+        21
+      ]
+    },
+    "coralui/coralui-component-list/src/scripts/List.js": {
+      "expectCount": 2,
+      "actualCount": 2,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-list/src/scripts/ListItem.js": {
+      "expectCount": 2,
+      "actualCount": 2,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-list/src/scripts/ListItemContent.js": {
+      "expectCount": 3,
+      "actualCount": 2,
+      "undocumentLines": [
+        18
+      ]
+    },
+    "coralui/coralui-component-masonry/src/scripts/Masonry.js": {
+      "expectCount": 54,
+      "actualCount": 31,
+      "undocumentLines": [
+        23,
+        47,
+        60,
+        63,
+        77,
+        79,
+        97,
+        98,
+        99,
+        100,
+        101,
+        103,
+        104,
+        128,
+        145,
+        179,
+        227,
+        243,
+        332,
+        380,
+        381,
+        621,
+        666
+      ]
+    },
+    "coralui/coralui-component-masonry/src/scripts/MasonryColumnLayout.js": {
+      "expectCount": 30,
+      "actualCount": 20,
+      "undocumentLines": [
+        38,
+        77,
+        79,
+        81,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90
+      ]
+    },
+    "coralui/coralui-component-masonry/src/scripts/MasonryDashboardLayout.js": {
+      "expectCount": 4,
+      "actualCount": 4,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-masonry/src/scripts/MasonryFixedCenteredLayout.js": {
+      "expectCount": 6,
+      "actualCount": 4,
+      "undocumentLines": [
+        34,
+        38
+      ]
+    },
+    "coralui/coralui-component-masonry/src/scripts/MasonryFixedSpreadLayout.js": {
+      "expectCount": 6,
+      "actualCount": 4,
+      "undocumentLines": [
+        37,
+        40
+      ]
+    },
+    "coralui/coralui-component-masonry/src/scripts/MasonryItem.js": {
+      "expectCount": 16,
+      "actualCount": 12,
+      "undocumentLines": [
+        22,
+        37,
+        40,
+        74
+      ]
+    },
+    "coralui/coralui-component-masonry/src/scripts/MasonryLayout.js": {
+      "expectCount": 12,
+      "actualCount": 9,
+      "undocumentLines": [
+        37,
+        49,
+        109
+      ]
+    },
+    "coralui/coralui-component-masonry/src/scripts/MasonryLayoutUtil.js": {
+      "expectCount": 5,
+      "actualCount": 5,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-masonry/src/scripts/MasonryVariableLayout.js": {
+      "expectCount": 3,
+      "actualCount": 3,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-multifield/src/scripts/Multifield.js": {
+      "expectCount": 21,
+      "actualCount": 13,
+      "undocumentLines": [
+        22,
+        23,
+        24,
+        25,
+        26,
+        56,
+        103,
+        299
+      ]
+    },
+    "coralui/coralui-component-multifield/src/scripts/MultifieldCollection.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        20,
+        21
+      ]
+    },
+    "coralui/coralui-component-multifield/src/scripts/MultifieldItem.js": {
+      "expectCount": 7,
+      "actualCount": 4,
+      "undocumentLines": [
+        23,
+        39,
+        66
+      ]
+    },
+    "coralui/coralui-component-multifield/src/scripts/MultifieldItemContent.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-numberinput/src/scripts/NumberInput.js": {
+      "expectCount": 53,
+      "actualCount": 36,
+      "undocumentLines": [
+        25,
+        27,
+        28,
+        29,
+        30,
+        32,
+        95,
+        99,
+        151,
+        209,
+        243,
+        277,
+        298,
+        316,
+        335,
+        363,
+        369
+      ]
+    },
+    "coralui/coralui-component-overlay/src/scripts/Overlay.js": {
+      "expectCount": 47,
+      "actualCount": 28,
+      "undocumentLines": [
+        24,
+        25,
+        65,
+        139,
+        155,
+        180,
+        191,
+        215,
+        236,
+        271,
+        287,
+        303,
+        320,
+        338,
+        356,
+        376,
+        389,
+        442,
+        495
+      ]
+    },
+    "coralui/coralui-component-panelstack/src/scripts/Panel.js": {
+      "expectCount": 10,
+      "actualCount": 6,
+      "undocumentLines": [
+        21,
+        36,
+        74,
+        84
+      ]
+    },
+    "coralui/coralui-component-panelstack/src/scripts/PanelContent.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-panelstack/src/scripts/PanelStack.js": {
+      "expectCount": 12,
+      "actualCount": 8,
+      "undocumentLines": [
+        21,
+        42,
+        57,
+        97
+      ]
+    },
+    "coralui/coralui-component-popover/src/scripts/Popover.js": {
+      "expectCount": 31,
+      "actualCount": 17,
+      "undocumentLines": [
+        22,
+        24,
+        83,
+        100,
+        114,
+        115,
+        116,
+        117,
+        118,
+        121,
+        187,
+        225,
+        258,
+        360
+      ]
+    },
+    "coralui/coralui-component-popover/src/scripts/PopoverContent.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-popover/src/scripts/PopoverHeader.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-popover/src/scripts/PopoverSeparator.js": {
+      "expectCount": 3,
+      "actualCount": 2,
+      "undocumentLines": [
+        18
+      ]
+    },
+    "coralui/coralui-component-progress/src/scripts/Progress.js": {
+      "expectCount": 30,
+      "actualCount": 17,
+      "undocumentLines": [
+        60,
+        63,
+        70,
+        76,
+        94,
+        101,
+        132,
+        163,
+        201,
+        220,
+        269,
+        323,
+        356
+      ]
+    },
+    "coralui/coralui-component-progress/src/scripts/ProgressLabel.js": {
+      "expectCount": 3,
+      "actualCount": 2,
+      "undocumentLines": [
+        18
+      ]
+    },
+    "coralui/coralui-component-quickactions/src/scripts/QuickActions.js": {
+      "expectCount": 76,
+      "actualCount": 54,
+      "undocumentLines": [
+        29,
+        30,
+        83,
+        85,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        109,
+        170,
+        195,
+        273,
+        769,
+        770,
+        771,
+        772,
+        780,
+        881,
+        1068
+      ]
+    },
+    "coralui/coralui-component-quickactions/src/scripts/QuickActionsItem.js": {
+      "expectCount": 16,
+      "actualCount": 11,
+      "undocumentLines": [
+        49,
+        51,
+        91,
+        111,
+        131
+      ]
+    },
+    "coralui/coralui-component-radio/src/scripts/Radio.js": {
+      "expectCount": 28,
+      "actualCount": 17,
+      "undocumentLines": [
+        23,
+        44,
+        51,
+        78,
+        147,
+        166,
+        184,
+        195,
+        202,
+        280,
+        333
+      ]
+    },
+    "coralui/coralui-component-radio/src/scripts/RadioLabel.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-search/src/scripts/Search.js": {
+      "expectCount": 30,
+      "actualCount": 22,
+      "undocumentLines": [
+        25,
+        68,
+        113,
+        133,
+        151,
+        247,
+        323,
+        329
+      ]
+    },
+    "coralui/coralui-component-select/src/scripts/Select.js": {
+      "expectCount": 72,
+      "actualCount": 54,
+      "undocumentLines": [
+        54,
+        58,
+        64,
+        149,
+        153,
+        156,
+        166,
+        181,
+        204,
+        287,
+        435,
+        470,
+        489,
+        501,
+        571,
+        1060,
+        1305,
+        1321
+      ]
+    },
+    "coralui/coralui-component-select/src/scripts/SelectItem.js": {
+      "expectCount": 13,
+      "actualCount": 9,
+      "undocumentLines": [
+        33,
+        73,
+        91,
+        110
+      ]
+    },
+    "coralui/coralui-component-selectlist/src/scripts/SelectList.js": {
+      "expectCount": 51,
+      "actualCount": 37,
+      "undocumentLines": [
+        24,
+        50,
+        91,
+        94,
+        98,
+        101,
+        102,
+        122,
+        141,
+        182,
+        202,
+        230,
+        438,
+        471
+      ]
+    },
+    "coralui/coralui-component-selectlist/src/scripts/SelectListGroup.js": {
+      "expectCount": 8,
+      "actualCount": 5,
+      "undocumentLines": [
+        22,
+        44,
+        59
+      ]
+    },
+    "coralui/coralui-component-selectlist/src/scripts/SelectListItem.js": {
+      "expectCount": 15,
+      "actualCount": 11,
+      "undocumentLines": [
+        21,
+        54,
+        90,
+        111
+      ]
+    },
+    "coralui/coralui-component-shell/src/scripts/Shell.js": {
+      "expectCount": 7,
+      "actualCount": 4,
+      "undocumentLines": [
+        20,
+        36,
+        61
+      ]
+    },
+    "coralui/coralui-component-shell/src/scripts/ShellContent.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-shell/src/scripts/ShellHeader.js": {
+      "expectCount": 11,
+      "actualCount": 8,
+      "undocumentLines": [
+        20,
+        35,
+        133
+      ]
+    },
+    "coralui/coralui-component-shell/src/scripts/ShellHelp.js": {
+      "expectCount": 14,
+      "actualCount": 11,
+      "undocumentLines": [
+        29,
+        44,
+        66
+      ]
+    },
+    "coralui/coralui-component-shell/src/scripts/ShellHelpItem.js": {
+      "expectCount": 3,
+      "actualCount": 2,
+      "undocumentLines": [
+        20
+      ]
+    },
+    "coralui/coralui-component-shell/src/scripts/ShellHomeAnchor.js": {
+      "expectCount": 9,
+      "actualCount": 6,
+      "undocumentLines": [
+        22,
+        38,
+        89
+      ]
+    },
+    "coralui/coralui-component-shell/src/scripts/ShellHomeAnchorLabel.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-shell/src/scripts/ShellMenu.js": {
+      "expectCount": 24,
+      "actualCount": 14,
+      "undocumentLines": [
+        22,
+        39,
+        59,
+        78,
+        79,
+        80,
+        103,
+        123,
+        142,
+        160
+      ]
+    },
+    "coralui/coralui-component-shell/src/scripts/ShellMenuBar.js": {
+      "expectCount": 6,
+      "actualCount": 4,
+      "undocumentLines": [
+        21,
+        47
+      ]
+    },
+    "coralui/coralui-component-shell/src/scripts/ShellMenuBarItem.js": {
+      "expectCount": 22,
+      "actualCount": 15,
+      "undocumentLines": [
+        40,
+        44,
+        62,
+        116,
+        161,
+        204,
+        241
+      ]
+    },
+    "coralui/coralui-component-shell/src/scripts/ShellOrgSwitcher.js": {
+      "expectCount": 26,
+      "actualCount": 20,
+      "undocumentLines": [
+        23,
+        56,
+        62,
+        77,
+        147,
+        299
+      ]
+    },
+    "coralui/coralui-component-shell/src/scripts/ShellOrgSwitcherFooter.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-shell/src/scripts/ShellOrganization.js": {
+      "expectCount": 22,
+      "actualCount": 16,
+      "undocumentLines": [
+        24,
+        50,
+        65,
+        99,
+        132,
+        171
+      ]
+    },
+    "coralui/coralui-component-shell/src/scripts/ShellSolution.js": {
+      "expectCount": 11,
+      "actualCount": 7,
+      "undocumentLines": [
+        22,
+        37,
+        89,
+        95
+      ]
+    },
+    "coralui/coralui-component-shell/src/scripts/ShellSolutionLabel.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-shell/src/scripts/ShellSolutionSwitcher.js": {
+      "expectCount": 7,
+      "actualCount": 4,
+      "undocumentLines": [
+        22,
+        37,
+        69
+      ]
+    },
+    "coralui/coralui-component-shell/src/scripts/ShellSolutions.js": {
+      "expectCount": 8,
+      "actualCount": 5,
+      "undocumentLines": [
+        22,
+        41,
+        63
+      ]
+    },
+    "coralui/coralui-component-shell/src/scripts/ShellSuborganization.js": {
+      "expectCount": 4,
+      "actualCount": 3,
+      "undocumentLines": [
+        21
+      ]
+    },
+    "coralui/coralui-component-shell/src/scripts/ShellUser.js": {
+      "expectCount": 15,
+      "actualCount": 12,
+      "undocumentLines": [
+        21,
+        49,
+        171
+      ]
+    },
+    "coralui/coralui-component-shell/src/scripts/ShellUserContent.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-shell/src/scripts/ShellUserFooter.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-shell/src/scripts/ShellUserHeading.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-shell/src/scripts/ShellUserName.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-shell/src/scripts/ShellUserSubheading.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-shell/src/scripts/ShellWorkspace.js": {
+      "expectCount": 8,
+      "actualCount": 6,
+      "undocumentLines": [
+        21,
+        54
+      ]
+    },
+    "coralui/coralui-component-shell/src/scripts/ShellWorkspaces.js": {
+      "expectCount": 17,
+      "actualCount": 13,
+      "undocumentLines": [
+        21,
+        50,
+        65,
+        110
+      ]
+    },
+    "coralui/coralui-component-slider/src/scripts/RangedSlider.js": {
+      "expectCount": 17,
+      "actualCount": 13,
+      "undocumentLines": [
+        22,
+        123,
+        190,
+        196
+      ]
+    },
+    "coralui/coralui-component-slider/src/scripts/Slider.js": {
+      "expectCount": 63,
+      "actualCount": 44,
+      "undocumentLines": [
+        25,
+        26,
+        27,
+        80,
+        104,
+        126,
+        149,
+        171,
+        193,
+        210,
+        238,
+        322,
+        342,
+        362,
+        378,
+        457,
+        478,
+        479,
+        920
+      ]
+    },
+    "coralui/coralui-component-slider/src/scripts/SliderItem.js": {
+      "expectCount": 6,
+      "actualCount": 5,
+      "undocumentLines": [
+        20
+      ]
+    },
+    "coralui/coralui-component-steplist/src/scripts/Step.js": {
+      "expectCount": 13,
+      "actualCount": 7,
+      "undocumentLines": [
+        24,
+        39,
+        77,
+        128,
+        140,
+        195
+      ]
+    },
+    "coralui/coralui-component-steplist/src/scripts/StepLabel.js": {
+      "expectCount": 3,
+      "actualCount": 2,
+      "undocumentLines": [
+        18
+      ]
+    },
+    "coralui/coralui-component-steplist/src/scripts/StepList.js": {
+      "expectCount": 37,
+      "actualCount": 29,
+      "undocumentLines": [
+        56,
+        96,
+        111,
+        146,
+        211,
+        231,
+        293,
+        456
+      ]
+    },
+    "coralui/coralui-component-steplist/src/scripts/getTarget.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-switch/src/scripts/Switch.js": {
+      "expectCount": 20,
+      "actualCount": 12,
+      "undocumentLines": [
+        23,
+        42,
+        60,
+        107,
+        126,
+        144,
+        155,
+        162
+      ]
+    },
+    "coralui/coralui-component-table/src/scripts/Table.js": {
+      "expectCount": 113,
+      "actualCount": 76,
+      "undocumentLines": [
+        37,
+        54,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        70,
+        71,
+        93,
+        168,
+        170,
+        176,
+        179,
+        181,
+        187,
+        285,
+        304,
+        346,
+        369,
+        420,
+        461,
+        509,
+        1251,
+        1293,
+        1565,
+        1584,
+        1590,
+        1607,
+        1786,
+        1847,
+        2346
+      ]
+    },
+    "coralui/coralui-component-table/src/scripts/TableBody.js": {
+      "expectCount": 6,
+      "actualCount": 4,
+      "undocumentLines": [
+        22,
+        39
+      ]
+    },
+    "coralui/coralui-component-table/src/scripts/TableCell.js": {
+      "expectCount": 14,
+      "actualCount": 12,
+      "undocumentLines": [
+        21,
+        65
+      ]
+    },
+    "coralui/coralui-component-table/src/scripts/TableColumn.js": {
+      "expectCount": 20,
+      "actualCount": 13,
+      "undocumentLines": [
+        21,
+        83,
+        101,
+        120,
+        141,
+        166,
+        184
+      ]
+    },
+    "coralui/coralui-component-table/src/scripts/TableFoot.js": {
+      "expectCount": 3,
+      "actualCount": 2,
+      "undocumentLines": [
+        21
+      ]
+    },
+    "coralui/coralui-component-table/src/scripts/TableHead.js": {
+      "expectCount": 9,
+      "actualCount": 6,
+      "undocumentLines": [
+        22,
+        39,
+        61
+      ]
+    },
+    "coralui/coralui-component-table/src/scripts/TableHeaderCell.js": {
+      "expectCount": 9,
+      "actualCount": 5,
+      "undocumentLines": [
+        20,
+        36,
+        41,
+        72
+      ]
+    },
+    "coralui/coralui-component-table/src/scripts/TableHeaderCellContent.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-table/src/scripts/TableRow.js": {
+      "expectCount": 30,
+      "actualCount": 21,
+      "undocumentLines": [
+        22,
+        38,
+        48,
+        66,
+        86,
+        107,
+        127,
+        163,
+        173
+      ]
+    },
+    "coralui/coralui-component-table/src/scripts/TableSectionMixin.js": {
+      "expectCount": 2,
+      "actualCount": 1,
+      "undocumentLines": [
+        23
+      ]
+    },
+    "coralui/coralui-component-table/src/scripts/TableUtil.js": {
+      "expectCount": 10,
+      "actualCount": 10,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-tablist/src/scripts/Tab.js": {
+      "expectCount": 18,
+      "actualCount": 11,
+      "undocumentLines": [
+        24,
+        40,
+        102,
+        122,
+        152,
+        180,
+        227
+      ]
+    },
+    "coralui/coralui-component-tablist/src/scripts/TabLabel.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-tablist/src/scripts/TabList.js": {
+      "expectCount": 31,
+      "actualCount": 24,
+      "undocumentLines": [
+        54,
+        86,
+        102,
+        136,
+        203,
+        222,
+        333
+      ]
+    },
+    "coralui/coralui-component-tablist/src/scripts/getTarget.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-tabview/src/scripts/TabView.js": {
+      "expectCount": 14,
+      "actualCount": 11,
+      "undocumentLines": [
+        40,
+        56,
+        162
+      ]
+    },
+    "coralui/coralui-component-taglist/src/scripts/Tag.js": {
+      "expectCount": 36,
+      "actualCount": 20,
+      "undocumentLines": [
+        23,
+        87,
+        95,
+        102,
+        107,
+        108,
+        111,
+        114,
+        152,
+        191,
+        214,
+        232,
+        250,
+        269,
+        288,
+        409
+      ]
+    },
+    "coralui/coralui-component-taglist/src/scripts/TagLabel.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-taglist/src/scripts/TagList.js": {
+      "expectCount": 36,
+      "actualCount": 26,
+      "undocumentLines": [
+        24,
+        26,
+        72,
+        112,
+        131,
+        179,
+        205,
+        227,
+        445,
+        458
+      ]
+    },
+    "coralui/coralui-component-textarea/src/scripts/Textarea.js": {
+      "expectCount": 13,
+      "actualCount": 9,
+      "undocumentLines": [
+        22,
+        41,
+        78,
+        90
+      ]
+    },
+    "coralui/coralui-component-textfield/src/scripts/Textfield.js": {
+      "expectCount": 9,
+      "actualCount": 6,
+      "undocumentLines": [
+        38,
+        42,
+        77
+      ]
+    },
+    "coralui/coralui-component-tooltip/src/scripts/Tooltip.js": {
+      "expectCount": 32,
+      "actualCount": 18,
+      "undocumentLines": [
+        22,
+        29,
+        32,
+        59,
+        65,
+        68,
+        93,
+        94,
+        97,
+        102,
+        121,
+        139,
+        252,
+        328
+      ]
+    },
+    "coralui/coralui-component-tooltip/src/scripts/TooltipContent.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-tree/src/scripts/Tree.js": {
+      "expectCount": 35,
+      "actualCount": 30,
+      "undocumentLines": [
+        22,
+        64,
+        100,
+        119,
+        165
+      ]
+    },
+    "coralui/coralui-component-tree/src/scripts/TreeItem.js": {
+      "expectCount": 28,
+      "actualCount": 17,
+      "undocumentLines": [
+        25,
+        28,
+        50,
+        56,
+        82,
+        130,
+        159,
+        236,
+        255,
+        276,
+        333
+      ]
+    },
+    "coralui/coralui-component-tree/src/scripts/TreeItemContent.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coralui/coralui-component-wait/src/scripts/Wait.js": {
+      "expectCount": 13,
+      "actualCount": 8,
+      "undocumentLines": [
+        55,
+        59,
+        87,
+        109,
+        128
+      ]
+    },
+    "coralui/coralui-component-wizardview/src/scripts/WizardView.js": {
+      "expectCount": 19,
+      "actualCount": 16,
+      "undocumentLines": [
+        24,
+        59,
+        80
+      ]
+    },
+    "coralui/coralui-datetime/src/scripts/DateTime.js": {
+      "expectCount": 33,
+      "actualCount": 25,
+      "undocumentLines": [
+        19,
+        22,
+        24,
+        30,
+        33,
+        67,
+        68,
+        69
+      ]
+    },
+    "coralui/coralui-dragaction/src/scripts/DragAction.js": {
+      "expectCount": 45,
+      "actualCount": 19,
+      "undocumentLines": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        28,
+        29,
+        30,
+        33,
+        34,
+        217,
+        218,
+        219,
+        229,
+        236,
+        289,
+        311,
+        350,
+        351,
+        356,
+        376,
+        391,
+        406,
+        412,
+        434,
+        679
+      ]
+    },
+    "coralui/coralui-mixin-button/src/scripts/ButtonMixin.js": {
+      "expectCount": 32,
+      "actualCount": 21,
+      "undocumentLines": [
+        52,
+        56,
+        101,
+        107,
+        112,
+        158,
+        207,
+        225,
+        256,
+        275,
+        348
+      ]
+    },
+    "coralui/coralui-mixin-component/src/scripts/ComponentMixin.js": {
+      "expectCount": 32,
+      "actualCount": 20,
+      "undocumentLines": [
+        22,
+        234,
+        371,
+        374,
+        379,
+        382,
+        383,
+        390,
+        400,
+        462,
+        465,
+        712
+      ]
+    },
+    "coralui/coralui-mixin-formfield/src/scripts/FormFieldMixin.js": {
+      "expectCount": 23,
+      "actualCount": 18,
+      "undocumentLines": [
+        21,
+        56,
+        74,
+        152,
+        358
+      ]
+    },
+    "coralui/coralui-mixin-list/src/scripts/ListItemMixin.js": {
+      "expectCount": 11,
+      "actualCount": 7,
+      "undocumentLines": [
+        22,
+        34,
+        72,
+        95
+      ]
+    },
+    "coralui/coralui-mixin-list/src/scripts/ListMixin.js": {
+      "expectCount": 20,
+      "actualCount": 16,
+      "undocumentLines": [
+        21,
+        47,
+        69,
+        99
+      ]
+    },
+    "coralui/coralui-mixin-overlay/src/scripts/OverlayMixin.js": {
+      "expectCount": 52,
+      "actualCount": 37,
+      "undocumentLines": [
+        31,
+        34,
+        37,
+        38,
+        44,
+        384,
+        400,
+        446,
+        464,
+        508,
+        612,
+        664,
+        669,
+        719,
+        861
+      ]
+    },
+    "coralui/coralui-util/src/scripts/Commons.js": {
+      "expectCount": 31,
+      "actualCount": 22,
+      "undocumentLines": [
+        22,
+        25,
+        28,
+        46,
+        63,
+        149,
+        152,
+        155,
+        728
+      ]
+    },
+    "coralui/coralui-util/src/scripts/Events.js": {
+      "expectCount": 8,
+      "actualCount": 6,
+      "undocumentLines": [
+        29,
+        102
+      ]
+    },
+    "coralui/coralui-util/src/scripts/I18nProvider.js": {
+      "expectCount": 11,
+      "actualCount": 7,
+      "undocumentLines": [
+        483,
+        484,
+        171,
+        177
+      ]
+    },
+    "coralui/coralui-util/src/scripts/Keys.js": {
+      "expectCount": 40,
+      "actualCount": 22,
+      "undocumentLines": [
+        79,
+        138,
+        140,
+        212,
+        215,
+        266,
+        274,
+        286,
+        299,
+        305,
+        332,
+        412,
+        414,
+        443,
+        473,
+        586,
+        697,
+        726
+      ]
+    },
+    "coralui/coralui-util/src/scripts/ResizeObserver.js": {
+      "expectCount": 10,
+      "actualCount": 1,
+      "undocumentLines": [
+        26,
+        29,
+        31,
+        34,
+        38,
+        80,
+        95,
+        104,
+        125
+      ]
+    },
+    "coralui/coralui-util/src/scripts/Transformation.js": {
+      "expectCount": 7,
+      "actualCount": 6,
+      "undocumentLines": [
+        103
+      ]
+    },
+    "coralui/coralui-util/src/scripts/Validation.js": {
+      "expectCount": 4,
+      "actualCount": 3,
+      "undocumentLines": [
+        84
+      ]
+    }
+  }
+}

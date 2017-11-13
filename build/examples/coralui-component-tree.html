@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html class="coral-App">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Coral.Tree</title>
+    <link rel="stylesheet" href="../css/coral.css">
+    <script src="../js/coral.js"></script>
+    <style>
+        body {
+            padding: 15px;
+        }
+        section {
+            border-top: 1px solid #C8C8C8;
+            padding: 12px;
+        }
+        .col {
+            width: 30%;
+            margin-right: 3%;
+            display: inline-block;
+            vertical-align: top;
+        }
+        .label-title{
+            font-size: .9rem;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+        .action-button{
+            position: absolute;
+            top: 0;
+            padding: 0px;
+            min-width: 3rem;
+        }
+    </style>
+  </head>
+
+  <body class="coral--light">
+    <div>
+        <section>
+          <div class="col">
+              <h2>Single level Tree without selection </h2>
+              <h3>No selection</h3>
+              <coral-tree>
+                <coral-tree-item><coral-tree-item-content>Item 1</coral-tree-item-content></coral-tree-item>
+                <coral-tree-item><coral-tree-item-content>Item 2</coral-tree-item-content></coral-tree-item>
+                <coral-tree-item><coral-tree-item-content>Item 3</coral-tree-item-content></coral-tree-item>
+              </coral-tree>
+          </div>
+          <div class="col">
+              <h2>Multi-level Tree</h2>
+              <h3>With selection</h3>
+              <coral-tree>
+                  <coral-tree-item disabled ><coral-tree-item-content>Item 2</coral-tree-item-content></coral-tree-item>
+                  <coral-tree-item expanded>
+                      <coral-tree-item-content>Item 1</coral-tree-item-content>
+                      <coral-tree-item disabled><coral-tree-item-content>Sub Item 1</coral-tree-item-content></coral-tree-item>
+                      <coral-tree-item><coral-tree-item-content>Sub Item 2</coral-tree-item-content></coral-tree-item>
+                  </coral-tree-item>
+                  <coral-tree-item><coral-tree-item-content>Item 2</coral-tree-item-content></coral-tree-item>
+                  <coral-tree-item hidden><coral-tree-item-content>Item 3</coral-tree-item-content></coral-tree-item>
+              </coral-tree>
+          </div>
+          <div class="col">
+              <h2>Multi-level Tree</h2>
+              <h3>Disabled</h3>
+              <coral-tree>
+                  <coral-tree-item disabled>
+                      <coral-tree-item-content>Item 1</coral-tree-item-content>
+                      <coral-tree-item><coral-tree-item-content>Sub Item 1</coral-tree-item-content></coral-tree-item>
+                      <coral-tree-item><coral-tree-item-content>Sub Item 2</coral-tree-item-content></coral-tree-item>
+                  </coral-tree-item>
+                  <coral-tree-item disabled><coral-tree-item-content>Item 2</coral-tree-item-content></coral-tree-item>
+                  <coral-tree-item disabled><coral-tree-item-content>Item 3</coral-tree-item-content></coral-tree-item>
+              </coral-tree>
+          </div>
+        </section>
+        <section>
+            <div class="col">
+                <h2>Multiple level Tree with selection and expanded</h2>
+                <h3>With selection & expanded</h3>
+                <coral-tree>
+                    <coral-tree-item>
+                        <coral-tree-item-content>Item 1</coral-tree-item-content>
+                        <coral-tree-item><coral-tree-item-content>Sub Item 11</coral-tree-item-content></coral-tree-item>
+                        <coral-tree-item><coral-tree-item-content>Sub Item 12</coral-tree-item-content></coral-tree-item>
+                    </coral-tree-item>
+                    <coral-tree-item expanded>
+                        <coral-tree-item-content>Item 2</coral-tree-item-content>
+                        <coral-tree-item expanded>
+                            <coral-tree-item-content>Sub Item 21</coral-tree-item-content>
+                            <coral-tree-item selected ><coral-tree-item-content>leaf 211</coral-tree-item-content></coral-tree-item>
+                            <coral-tree-item><coral-tree-item-content>leaf 212</coral-tree-item-content></coral-tree-item>
+                        </coral-tree-item>
+                        <coral-tree-item><coral-tree-item-content>Sub Item 22</coral-tree-item-content></coral-tree-item>
+                    </coral-tree-item>
+                    <coral-tree-item><coral-tree-item-content>Item 3</coral-tree-item-content></coral-tree-item>
+                </coral-tree>
+            </div>
+            <div class="col">
+                <h2>Multiple level Tree with Icon</h2>
+                <h3>With Icon, selection and expanded</h3>
+                <coral-tree>
+                    <coral-tree-item>
+                        <coral-tree-item-content><coral-icon icon="folder"></coral-icon> Item 1</coral-tree-item-content>
+                        <coral-tree-item><coral-tree-item-content><coral-icon icon="file"></coral-icon> Sub Item 11</coral-tree-item-content></coral-tree-item>
+                        <coral-tree-item><coral-tree-item-content><coral-icon icon="file"></coral-icon> Sub Item 12</coral-tree-item-content></coral-tree-item>
+                    </coral-tree-item>
+                    <coral-tree-item expanded>
+                        <coral-tree-item-content><coral-icon icon="folder"></coral-icon> Item 2</coral-tree-item-content>
+                        <coral-tree-item expanded>
+                            <coral-tree-item-content><coral-icon icon="folder"></coral-icon> Sub Item 21</coral-tree-item-content>
+                            <coral-tree-item selected ><coral-tree-item-content><coral-icon icon="file"></coral-icon> leaf 211</coral-tree-item-content></coral-tree-item>
+                            <coral-tree-item><coral-tree-item-content><coral-icon icon="file"></coral-icon> leaf 212</coral-tree-item-content></coral-tree-item>
+                        </coral-tree-item>
+                        <coral-tree-item><coral-tree-item-content><coral-icon icon="folder"></coral-icon> Sub Item 22</coral-tree-item-content></coral-tree-item>
+                    </coral-tree-item>
+                    <coral-tree-item><coral-tree-item-content><coral-icon icon="folder"></coral-icon> Item 3</coral-tree-item-content></coral-tree-item>
+                </coral-tree>
+            </div>
+            <div class="col">
+                <h2>Multiple level Tree with Icon</h2>
+                <h3>With Customization</h3>
+                <coral-tree>
+                    <coral-tree-item>
+                        <coral-tree-item-content>
+                            <coral-icon icon="folder"></coral-icon> <label class="label-title">Item 1</label><label>Description</label>
+                            <button is="coral-button" icon="edit" variant="quiet" class="action-button"></button>
+                        </coral-tree-item-content>
+                        <coral-tree-item>
+                            <coral-tree-item-content>
+                                <coral-icon icon="folder"></coral-icon> <label class="label-title">Sub Item 11</label><label>Description</label>
+                                <button is="coral-button" icon="edit" variant="quiet" class="action-button"></button>
+                            </coral-tree-item-content>
+                        </coral-tree-item>
+                        <coral-tree-item>
+                            <coral-tree-item-content>
+                                <coral-icon icon="folder"></coral-icon> <label class="label-title">Sub Item 12</label><label>Description</label>
+                                <button is="coral-button" icon="edit" variant="quiet" class="action-button"></button>
+                            </coral-tree-item-content>
+                        </coral-tree-item>
+                    </coral-tree-item>
+                   <coral-tree-item expanded>
+                       <coral-tree-item-content>
+                           <coral-icon icon="folder"></coral-icon> <label class="label-title">Item 2</label><label>Description</label>
+                           <button is="coral-button" icon="edit" variant="quiet" class="action-button"></button>
+                       </coral-tree-item-content>
+                        <coral-tree-item expanded>
+                            <coral-tree-item-content>
+                                <coral-icon icon="folder"></coral-icon> <label class="label-title">Sub Item 21</label><label>Description</label>
+                                <button is="coral-button" icon="edit" variant="quiet" class="action-button"></button>
+                            </coral-tree-item-content>
+                            <coral-tree-item selected >
+                                <coral-tree-item-content>
+                                    <coral-icon icon="folder"></coral-icon> <label class="label-title">Leaf 1</label><label>Description</label>
+                                    <button is="coral-button" icon="edit" variant="quiet" class="action-button"></button>
+                                </coral-tree-item-content>
+                            </coral-tree-item>
+                            <coral-tree-item>
+                                <coral-tree-item-content>
+                                    <coral-icon icon="folder"></coral-icon> <label class="label-title">Leaf 2</label><label>Description</label>
+                                    <button is="coral-button" icon="edit" variant="quiet" class="action-button"></button>
+                                </coral-tree-item-content>
+                            </coral-tree-item>
+                        </coral-tree-item>
+                        <coral-tree-item>
+                            <coral-tree-item-content>
+                                <coral-icon icon="folder"></coral-icon> <label class="label-title">Sub Item 22</label><label>Description</label>
+                                <button is="coral-button" icon="edit" variant="quiet" class="action-button"></button>
+                            </coral-tree-item-content>
+                        </coral-tree-item>
+                    </coral-tree-item>
+                    <coral-tree-item>
+                        <coral-tree-item-content>
+                            <coral-icon icon="folder"></coral-icon> <label class="label-title">Item 3</label><label>Description</label>
+                            <button is="coral-button" icon="edit" variant="quiet" class="action-button"></button>
+                        </coral-tree-item-content>
+                    </coral-tree-item>
+                </coral-tree>
+            </div>
+        </section>
+        <section>
+            <div class="col">
+                <h2>Single level Tree with interactive elements</h2>
+                <coral-tree>
+                    <coral-tree-item>
+                        <coral-tree-item-content>
+                            <input type="checkbox" coral-interactive/>
+                            Item 1
+                        </coral-tree-item-content>
+                    </coral-tree-item>
+                    <coral-tree-item>
+                        <coral-tree-item-content>
+                            <select coral-interactive>
+                                <option>Option 1</option>
+                                <option>Option 2</option>
+                                <option>Option 3</option>
+                            </select>
+                            Item 2
+                        </coral-tree-item-content>
+                    </coral-tree-item>
+                    <coral-tree-item>
+                        <coral-tree-item-content>
+                            <button coral-interactive>Click me</button>
+                            Item 3
+                        </coral-tree-item-content>
+                    </coral-tree-item>
+                    <coral-tree-item>
+                        <coral-tree-item-content>
+                            <textarea coral-interactive>Enter Text</textarea>
+                            Item 4
+                        </coral-tree-item-content>
+                    </coral-tree-item>
+                    <coral-tree-item>
+                        <coral-tree-item-content>
+                            <input type="radio" coral-interactive/>
+                            Item 5
+                        </coral-tree-item-content>
+                    </coral-tree-item>
+                </coral-tree>
+            </div>
+        </section>
+    </div>
+    <div class="coral--dark">
+      <section>
+        <div class="col">
+          <h2>Single level Tree without selection </h2>
+          <h3>No selection</h3>
+          <coral-tree>
+            <coral-tree-item><coral-tree-item-content>Item 1</coral-tree-item-content></coral-tree-item>
+            <coral-tree-item><coral-tree-item-content>Item 2</coral-tree-item-content></coral-tree-item>
+            <coral-tree-item><coral-tree-item-content>Item 3</coral-tree-item-content></coral-tree-item>
+          </coral-tree>
+        </div>
+        <div class="col">
+          <h2>Multi-level Tree</h2>
+          <h3>With selection</h3>
+          <coral-tree>
+            <coral-tree-item selected expanded>
+              <coral-tree-item-content>Item 1</coral-tree-item-content>
+              <coral-tree-item><coral-tree-item-content>Sub Item 1</coral-tree-item-content></coral-tree-item>
+              <coral-tree-item><coral-tree-item-content>Sub Item 2</coral-tree-item-content></coral-tree-item>
+            </coral-tree-item>
+            <coral-tree-item><coral-tree-item-content>Item 2</coral-tree-item-content></coral-tree-item>
+            <coral-tree-item><coral-tree-item-content>Item 3</coral-tree-item-content></coral-tree-item>
+          </coral-tree>
+        </div>
+        <div class="col">
+              <h2>Multi-level Tree</h2>
+              <h3>Disabled</h3>
+              <coral-tree>
+                  <coral-tree-item disabled>
+                      <coral-tree-item-content>Item 1</coral-tree-item-content>
+                      <coral-tree-item><coral-tree-item-content>Sub Item 1</coral-tree-item-content></coral-tree-item>
+                      <coral-tree-item><coral-tree-item-content>Sub Item 2</coral-tree-item-content></coral-tree-item>
+                  </coral-tree-item>
+                  <coral-tree-item disabled><coral-tree-item-content>Item 2</coral-tree-item-content></coral-tree-item>
+                  <coral-tree-item disabled><coral-tree-item-content>Item 3</coral-tree-item-content></coral-tree-item>
+              </coral-tree>
+          </div>
+      </section>
+      <section>
+        <div class="col">
+          <h2>Multiple level Tree with selection and expanded</h2>
+          <h3>With selection & expanded</h3>
+          <coral-tree>
+            <coral-tree-item>
+              <coral-tree-item-content>Item 1</coral-tree-item-content>
+              <coral-tree-item><coral-tree-item-content>Sub Item 11</coral-tree-item-content></coral-tree-item>
+              <coral-tree-item><coral-tree-item-content>Sub Item 12</coral-tree-item-content></coral-tree-item>
+            </coral-tree-item>
+            <coral-tree-item expanded>
+              <coral-tree-item-content>Item 2</coral-tree-item-content>
+              <coral-tree-item expanded>
+                <coral-tree-item-content>Sub Item 21</coral-tree-item-content>
+                <coral-tree-item selected ><coral-tree-item-content>leaf 211</coral-tree-item-content></coral-tree-item>
+                <coral-tree-item><coral-tree-item-content>leaf 212</coral-tree-item-content></coral-tree-item>
+              </coral-tree-item>
+              <coral-tree-item><coral-tree-item-content>Sub Item 22</coral-tree-item-content></coral-tree-item>
+            </coral-tree-item>
+            <coral-tree-item><coral-tree-item-content>Item 3</coral-tree-item-content></coral-tree-item>
+          </coral-tree>
+        </div>
+        <div class="col">
+          <h2>Multiple level Tree with Icon</h2>
+          <h3>With Icon, selection and expanded</h3>
+          <coral-tree>
+            <coral-tree-item>
+              <coral-tree-item-content><coral-icon icon="folder"></coral-icon> Item 1</coral-tree-item-content>
+              <coral-tree-item><coral-tree-item-content><coral-icon icon="file"></coral-icon> Sub Item 11</coral-tree-item-content></coral-tree-item>
+              <coral-tree-item><coral-tree-item-content><coral-icon icon="file"></coral-icon> Sub Item 12</coral-tree-item-content></coral-tree-item>
+            </coral-tree-item>
+            <coral-tree-item expanded>
+              <coral-tree-item-content><coral-icon icon="folder"></coral-icon> Item 2</coral-tree-item-content>
+              <coral-tree-item expanded>
+                <coral-tree-item-content><coral-icon icon="folder"></coral-icon> Sub Item 21</coral-tree-item-content>
+                <coral-tree-item selected ><coral-tree-item-content><coral-icon icon="file"></coral-icon> leaf 211</coral-tree-item-content></coral-tree-item>
+                <coral-tree-item><coral-tree-item-content><coral-icon icon="file"></coral-icon> leaf 212</coral-tree-item-content></coral-tree-item>
+              </coral-tree-item>
+              <coral-tree-item><coral-tree-item-content><coral-icon icon="folder"></coral-icon> Sub Item 22</coral-tree-item-content></coral-tree-item>
+            </coral-tree-item>
+            <coral-tree-item><coral-tree-item-content><coral-icon icon="folder"></coral-icon> Item 3</coral-tree-item-content></coral-tree-item>
+          </coral-tree>
+        </div>
+        <div class="col">
+          <h2>Multiple level Tree with Icon</h2>
+          <h3>With Customization</h3>
+          <coral-tree>
+            <coral-tree-item>
+              <coral-tree-item-content>
+                <coral-icon icon="folder"></coral-icon> <label class="label-title">Item 1</label><label>Description</label>
+                <button is="coral-button" icon="edit" variant="quiet" class="action-button"></button>
+              </coral-tree-item-content>
+              <coral-tree-item>
+                <coral-tree-item-content>
+                  <coral-icon icon="folder"></coral-icon> <label class="label-title">Sub Item 11</label><label>Description</label>
+                  <button is="coral-button" icon="edit" variant="quiet" class="action-button"></button>
+                </coral-tree-item-content>
+              </coral-tree-item>
+              <coral-tree-item>
+                <coral-tree-item-content>
+                  <coral-icon icon="folder"></coral-icon> <label class="label-title">Sub Item 12</label><label>Description</label>
+                  <button is="coral-button" icon="edit" variant="quiet" class="action-button"></button>
+                </coral-tree-item-content>
+              </coral-tree-item>
+            </coral-tree-item>
+            <coral-tree-item expanded>
+              <coral-tree-item-content>
+                <coral-icon icon="folder"></coral-icon> <label class="label-title">Item 2</label><label>Description</label>
+                <button is="coral-button" icon="edit" variant="quiet" class="action-button"></button>
+              </coral-tree-item-content>
+              <coral-tree-item expanded>
+                <coral-tree-item-content>
+                  <coral-icon icon="folder"></coral-icon> <label class="label-title">Sub Item 21</label><label>Description</label>
+                  <button is="coral-button" icon="edit" variant="quiet" class="action-button"></button>
+                </coral-tree-item-content>
+                <coral-tree-item selected >
+                  <coral-tree-item-content>
+                    <coral-icon icon="folder"></coral-icon> <label class="label-title">Leaf 1</label><label>Description</label>
+                    <button class="coral-Button coral-Button--quiet action-button">
+                      <i class="coral-Icon coral-Icon--edit"></i>
+                    </button>
+                  </coral-tree-item-content>
+                </coral-tree-item>
+                <coral-tree-item>
+                  <coral-tree-item-content>
+                    <coral-icon icon="folder"></coral-icon> <label class="label-title">Leaf 2</label><label>Description</label>
+                    <button class="coral-Button coral-Button--quiet action-button">
+                      <i class="coral-Icon coral-Icon--edit"></i>
+                    </button>
+                  </coral-tree-item-content>
+                </coral-tree-item>
+              </coral-tree-item>
+              <coral-tree-item>
+                <coral-tree-item-content>
+                  <coral-icon icon="folder"></coral-icon> <label class="label-title">Sub Item 22</label><label>Description</label>
+                  <button is="coral-button" icon="edit" variant="quiet" class="action-button"></button>
+                </coral-tree-item-content>
+              </coral-tree-item>
+            </coral-tree-item>
+            <coral-tree-item>
+              <coral-tree-item-content>
+                <coral-icon icon="folder"></coral-icon> <label class="label-title">Item 3</label><label>Description</label>
+                <button is="coral-button" icon="edit" variant="quiet" class="action-button"></button>
+              </coral-tree-item-content>
+            </coral-tree-item>
+          </coral-tree>
+        </div>
+      </section>
+    </div>
+  </body>
+
+</html>

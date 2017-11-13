@@ -7,7 +7,7 @@
     "url": "https://git.corp.adobe.com/Coral/coralui"
   },
   "devDependencies": {
-    "coralui-theme-spectrum": "file:coralui-theme-spectrum",
+    "@coralui/coralui-theme-spectrum": "^2.4.0",
     "coralui-compat": "file:coralui-compat",
     "coralui-component-accordion": "file:coralui-component-accordion",
     "coralui-component-actionbar": "file:coralui-component-actionbar",
