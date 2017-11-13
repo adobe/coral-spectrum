@@ -4,6 +4,7 @@
 /index-*.js
 
 /coralui-*/src/templates/*.js
+/coralui-*/src/styles/index.css
 /coralui-*/index-*.js
 /coralui-*/build
 /coralui-*/node_modules
