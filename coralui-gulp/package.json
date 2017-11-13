@@ -4,6 +4,7 @@
   "description": "CoralUI components builder",
   "dependencies": {
     "@adobe/eslint-config-adobe-js": "0.0.2",
+    "babel-eslint": "^8.0.2",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-env": "^1.6.0",
     "chai": "^4.0.2",
@@ -16,6 +17,7 @@
     "esdoc-inject-style-plugin": "^1.0.0",
     "esdoc-member-plugin": "^1.0.0",
     "esdoc-standard-plugin": "^1.0.0",
+    "eslint-plugin-babel": "^4.1.2",
     "gulp": "^3.9.1",
     "gulp-better-rollup": "^1.1.1",
     "gulp-bump": "^2.7.0",
