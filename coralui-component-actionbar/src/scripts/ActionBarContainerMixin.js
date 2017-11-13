@@ -25,10 +25,10 @@ import popoverContent from '../templates/popoverContent';
 import {transform, i18n} from 'coralui-util';
 
 /**
- @mixin ActionBarContainer
+ @mixin ActionBarContainerMixin
  @classdesc The base element for action bar containers
  */
-const ActionBarContainer = (superClass) => class extends superClass {
+const ActionBarContainerMixin = (superClass) => class extends superClass {
   /** @ignore */
   constructor() {
     super();
@@ -235,4 +235,4 @@ const ActionBarContainer = (superClass) => class extends superClass {
   }
 };
 
-export default ActionBarContainer;
+export default ActionBarContainerMixin;
