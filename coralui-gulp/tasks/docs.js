@@ -26,7 +26,7 @@ module.exports = function(gulp) {
   gulp.task('docs', function(cb) {
     
     // @todo due to https://github.com/esdoc/esdoc/issues/455, use class def
-    gulp.src(['src/scripts/*Mixin.js', 'coralui-mixin-*/src/scripts/*Mixin.js'])
+    gulp.src(['src/scripts/*Mixin.js', 'coralui-*/src/scripts/*Mixin.js'])
       .pipe(plumber())
       .pipe(modifyFile((content, path) => {
         const className = path.split('/').pop().slice(0, -3);
@@ -45,7 +45,7 @@ module.exports = function(gulp) {
     const p = exec('node_modules/.bin/esdoc -c node_modules/coralui-gulp/configs/esdoc.conf.js', (err) => {
       
       // @todo due to https://github.com/esdoc/esdoc/issues/455, revert class def
-      gulp.src(['src/scripts/*Mixin.js', 'coralui-mixin-*/src/scripts/*Mixin.js'])
+      gulp.src(['src/scripts/*Mixin.js', 'coralui-*/src/scripts/*Mixin.js'])
         .pipe(plumber())
         .pipe(modifyFile((content, path) => {
           const className = path.split('/').pop().slice(0, -3);
