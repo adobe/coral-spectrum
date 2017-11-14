@@ -25,8 +25,7 @@ module.exports = function(gulp) {
       'theme',
       'resources',
       'templates',
-      'scripts',
-      'cleanup'
+      'scripts'
     );
   });
   
@@ -43,8 +42,7 @@ module.exports = function(gulp) {
       'watch',
       'minify',
       'examples',
-      'docs',
-      'cleanup'
+      'docs'
     );
   });
   

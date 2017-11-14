@@ -24,8 +24,7 @@ module.exports = function(gulp) {
       'theme',
       'resources',
       'templates',
-      'scripts',
-      'cleanup'
+      'scripts'
     );
   });
   
