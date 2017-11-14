@@ -61,6 +61,7 @@
     "semver": "^5.3.0",
     "sinon": "^2.3.5",
     "sinon-chai": "^2.11.0",
+    "stylus-svg": "^0.3.1",
     "through2": "^2.0.3"
   }
 }

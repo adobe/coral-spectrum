@@ -17,6 +17,7 @@
 module.exports = function(gulp) {
   const plumber = require('gulp-plumber');
   const stylus = require('gulp-stylus');
+  const svgImport = require('stylus-svg');
   const modifyFile = require('gulp-modify-file');
   const theme = require('../helpers/theme');
   
@@ -27,6 +28,9 @@ module.exports = function(gulp) {
         'include css': true,
         include: [
           './node_modules'
+        ],
+        use: [
+          svgImport()
         ]
       }))
       .pipe(modifyFile((content) => {
