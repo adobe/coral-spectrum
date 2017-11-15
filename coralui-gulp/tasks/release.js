@@ -15,19 +15,26 @@
  * from Adobe Systems Incorporated.
  */
 module.exports = function(gulp) {
-  const runSequence = require('run-sequence').use(gulp);
-  const gutil = require('gulp-util');
+  const fs = require('fs');
   const exec = require('child_process').exec;
-  const git = require('gulp-git');
-  const bump = require('gulp-bump');
+  const runSequence = require('run-sequence').use(gulp);
+  const del = require('del');
   const inq = require('inquirer');
   const semver = require('semver');
+  
+  const gutil = require('gulp-util');
+  const git = require('gulp-git');
+  const bump = require('gulp-bump');
   
   const CWD = process.cwd();
   const modulePackageJson = require(`${CWD}/package.json`);
   const registry = 'https://artifactory.corp.adobe.com/artifactory/api/npm/npm-coralui-local';
   
-  gulp.task('push', function() {
+  // The version we'll actually release
+  let releaseVersion;
+  
+  // Push current branch commits to origin
+  gulp.task('push', function(cb) {
     // Get the current branch name
     exec('git rev-parse --abbrev-ref HEAD', function(err, stdout, stderr) {
       if (err) {
@@ -40,67 +47,38 @@ module.exports = function(gulp) {
           if (err) {
             console.error(err.message);
           }
+          
+          cb();
         });
       }
     });
   });
   
-  gulp.task('release', function() {
-    function beginRelease() {
-      runSequence(
-        'push',
-        'tag-release',
-        'npm-publish',
-        function (err) {
-          if (err) {
-            console.error(err.message);
-          }
-          else {
-            console.log('Release successful.');
-          }
-        }
-      );
-    }
+  // Removes build folder and commits
+  gulp.task('remove-build', function() {
+    del.sync('build/**/*');
     
-    runSequence(
-      'bump-version',
-      'test',
-      'build',
-      function () {
-        // Command line shortcut
-        if (gutil.env.confirm) {
-          beginRelease();
-        }
-        else {
-          inq.prompt({
-            type: 'confirm',
-            name: 'confirmed',
-            message: `Release ${modulePackageJson.version} ?`
-          })
-            .then(function(res) {
-              if (res.confirmed) {
-                beginRelease();
-              }
-            });
-        }
-      }
-    );
+    return gulp.src('.')
+      .pipe(git.commit('releng - Prepare for next development iteration', {args: '-a'}));
   });
   
-  gulp.task('npm-publish', function() {
+  // Publish release to artifactory
+  gulp.task('npm-publish', function(cb) {
     exec(`npm publish --registry=${registry}`, function(err, stdout, stderr) {
       if (err) {
-        console.err(stderr);
+        console.error(stderr);
       }
       else {
         console.log(stdout);
+        
+        cb();
       }
     });
   });
   
-  gulp.task('tag-release', function() {
-    const releaseVersion = modulePackageJson.version;
-    const releaseMessage = `@releng - Release ${releaseVersion}`;
+  // Tag and push release
+  gulp.task('tag-release', function(cb) {
+    const releaseMessage = `releng - Release ${releaseVersion}`;
     
     git.tag(releaseVersion, releaseMessage, function(err) {
       if (err) {
@@ -111,63 +89,74 @@ module.exports = function(gulp) {
         if (err) {
           console.error(err.message);
         }
+        
+        cb();
       });
     });
   });
   
-  gulp.task('bump-version', function() {
+  // Increase release version based on user choice and adds build folder then commits
+  gulp.task('bump-version', function(cb) {
     function doVersionBump() {
       gulp.src(`${CWD}/package.json`)
-        .pipe(bump({ version: releaseVersion }))
-        .pipe(gulp.dest('./'))
-        .pipe(git.commit(`@releng - Release ${releaseVersion}`));
+        .pipe(bump({version: releaseVersion}))
+        .pipe(gulp.dest('./'));
+      
+      exec('git add --all -f build', function(err, stdout, stderr) {
+        if (err) {
+          console.error(stderr);
+        }
+        else {
+          gulp.src([`${CWD}/package.json`, `${CWD}/build/**/*`])
+            .pipe(git.commit(`releng - Release ${releaseVersion}`));
+          
+          cb();
+        }
+      });
     }
     
-    var currentVersion = modulePackageJson.version;
-    
-    // The version we'll actually release
-    var releaseVersion = null;
+    const currentVersion = modulePackageJson.version;
     
     // Potential versions
-    var patchVersion = semver.inc(currentVersion, 'patch');
-    var minorVersion = semver.inc(currentVersion, 'minor');
-    var majorVersion = semver.inc(currentVersion, 'major');
-    var preVersion = semver.inc(currentVersion, 'prerelease', 'beta');
-    var preMajorVersion = semver.inc(currentVersion, 'premajor', 'beta');
-    var preMinorVersion = semver.inc(currentVersion, 'preminor', 'beta');
-    var prePatchVersion = semver.inc(currentVersion, 'prepatch', 'beta');
+    const patchVersion = semver.inc(currentVersion, 'patch');
+    const minorVersion = semver.inc(currentVersion, 'minor');
+    const majorVersion = semver.inc(currentVersion, 'major');
+    const preVersion = semver.inc(currentVersion, 'prerelease', 'beta');
+    const preMajorVersion = semver.inc(currentVersion, 'premajor', 'beta');
+    const preMinorVersion = semver.inc(currentVersion, 'preminor', 'beta');
+    const prePatchVersion = semver.inc(currentVersion, 'prepatch', 'beta');
     
     // Command line bump shortcuts
     if (gutil.env.pre) {
-      releaseVersion = preVersion
+      releaseVersion = preVersion;
     }
     else if (gutil.env.patch) {
-      releaseVersion = patchVersion
+      releaseVersion = patchVersion;
     }
     else if (gutil.env.minor) {
-      releaseVersion = minorVersion
+      releaseVersion = minorVersion;
     }
     else if (gutil.env.major) {
-      releaseVersion = majorVersion
+      releaseVersion = majorVersion;
     }
     else if (gutil.env.prepatch) {
-      releaseVersion = prePatchVersion
+      releaseVersion = prePatchVersion;
     }
     else if (gutil.env.preMinorVersion) {
-      releaseVersion = prePatchVersion
+      releaseVersion = prePatchVersion;
     }
     else if (gutil.env.preMajorVersion) {
-      releaseVersion = prePatchVersion
+      releaseVersion = prePatchVersion;
     }
     else if (gutil.env.releaseVersion) {
-      releaseVersion = gutil.env.releaseVersion
+      releaseVersion = gutil.env.releaseVersion;
     }
     
     if (releaseVersion) {
       doVersionBump();
     }
     else {
-      var choices = [];
+      let choices = [];
       
       if (currentVersion.match('-beta')) {
         choices = choices.concat([
@@ -249,5 +238,55 @@ module.exports = function(gulp) {
           }
         });
     }
+  });
+  
+  // Full release task
+  gulp.task('release', function() {
+    const buildFiles = fs.existsSync('build') ? fs.readdirSync('build') : [];
+    if (!buildFiles.length) {
+      console.error('Release aborted: build folder is empty.');
+      
+      return;
+    }
+    
+    function beginRelease() {
+      runSequence(
+        'push',
+        'tag-release',
+        'npm-publish',
+        'remove-build',
+        'push',
+        function(err) {
+          if (err) {
+            console.error(err.message);
+          }
+          else {
+            console.log('Release successful.');
+          }
+        }
+      );
+    }
+    
+    runSequence(
+      'bump-version',
+      function() {
+        // Command line shortcut
+        if (gutil.env.confirm) {
+          beginRelease();
+        }
+        else {
+          inq.prompt({
+            type: 'confirm',
+            name: 'confirmed',
+            message: `Release ${releaseVersion} ?`
+          })
+            .then(function(res) {
+              if (res.confirmed) {
+                beginRelease();
+              }
+            });
+        }
+      }
+    );
   });
 };
