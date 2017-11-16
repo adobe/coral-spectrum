@@ -34,7 +34,7 @@ module.exports = function(gulp) {
         ]
       }))
       .pipe(modifyFile((content) => {
-        if (theme.getTheme() === 'coralui-theme-spectrum') {
+        if (theme.getTheme() === 'coralui-theme-spectrum' || process.cwd().split('/').pop() === 'coralui-theme-spectrum') {
           const spectrumConfig = require(`../configs/spectrum.conf.js`);
           
           // Map Spectrum selectors with Coral ones

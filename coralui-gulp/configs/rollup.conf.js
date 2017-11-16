@@ -20,12 +20,17 @@ const commonjs = require('rollup-plugin-commonjs');
 const css = require('rollup-plugin-css-only');
 const babel = require('rollup-plugin-babel');
 const json = require('rollup-plugin-json');
+const resources = require('../plugins/rollup-plugin-resources');
 
 module.exports = {
   plugins: [
     nodeResolve(),
     commonjs(),
     json(),
+    resources({
+      include: '**/*.svg',
+      output: './build/resources'
+    }),
     css({ output: './build/css/coral.css'}),
     babel({
       presets: [

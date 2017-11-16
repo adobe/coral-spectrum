@@ -1,4 +1,13 @@
 describe('Coral.Icon', function() {
+  const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
+  const hasSVGIcon = (el, icon) => {
+    if (el._elements.svg && el.contains(el._elements.svg)) {
+      return el._elements.svg.querySelector('use').href.baseVal.endsWith(capitalize(icon));
+    }
+    
+    return false;
+  };
+  
   describe('Namespace', function() {
     it('should be defined', function() {
       expect(Coral).to.have.property('Icon');
@@ -22,28 +31,26 @@ describe('Coral.Icon', function() {
       var icon = helpers.build(new Coral.Icon());
       expect(icon.classList.contains('coral3-Icon')).to.be.true;
       expect(icon.classList.contains('coral3-Icon--sizeS')).to.be.true;
-      expect(icon.classList.contains('coral3-Icon--null')).to.be.false;
-      expect(icon.classList.contains('coral3-Icon--undefined')).to.be.false;
     });
 
     it('should be possible using createElement', function() {
       var icon = helpers.build(document.createElement('coral-icon'));
       expect(icon.classList.contains('coral3-Icon')).to.be.true;
       expect(icon.classList.contains('coral3-Icon--sizeS')).to.be.true;
-      expect(icon.classList.contains('coral3-Icon--null')).to.be.false;
-      expect(icon.classList.contains('coral3-Icon--undefined')).to.be.false;
     });
 
     it('should be possible using markup', function() {
       var icon = helpers.build('<coral-icon></coral-icon>');
       expect(icon.classList.contains('coral3-Icon')).to.be.true;
       expect(icon.classList.contains('coral3-Icon--sizeS')).to.be.true;
-      expect(icon.classList.contains('coral3-Icon--null')).to.be.false;
-      expect(icon.classList.contains('coral3-Icon--undefined')).to.be.false;
     });
 
     it('should be possible to clone using markup', function() {
       helpers.cloneComponent('<coral-icon icon="add" size="L"></coral-icon>');
+    });
+  
+    it('should be possible to clone an image icon using markup', function() {
+      helpers.cloneComponent('<coral-icon icon="http://via.placeholder.com/150x150" size="L"></coral-icon>');
     });
 
     it('should be possible to clone using js', function() {
@@ -70,15 +77,7 @@ describe('Coral.Icon', function() {
         expect(icon.icon).to.equal('add');
         expect(icon.getAttribute('icon')).to.equal('add');
         expect(icon.size).to.equal(Coral.Icon.size.SMALL);
-        expect(icon.classList.contains('coral3-Icon--add')).to.be.true;
-      });
-
-      it('should not have class for empty icon', function() {
-        var icon = helpers.build('<coral-icon icon=""></coral-icon>');
-        expect(icon.icon).to.equal('');
-        expect(icon.getAttribute('icon')).to.equal('');
-        expect(icon.size).to.equal(Coral.Icon.size.SMALL);
-        expect(icon.classList.contains('coral3-Icon--')).to.be.false;
+        expect(hasSVGIcon(icon, 'add')).to.be.true;
       });
 
       it('should support arbitrary relative URLs', function() {
@@ -111,7 +110,6 @@ describe('Coral.Icon', function() {
     });
 
     describe('#size', function() {
-
       it('should be initially Coral.Icon.size.SMALL', function() {
         var icon = helpers.build('<coral-icon></coral-icon>');
         expect(icon.size).to.equal(Coral.Icon.size.SMALL);
@@ -146,14 +144,6 @@ describe('Coral.Icon', function() {
         expect(icon.classList.contains('coral3-Icon--sizeL')).to.be.true;
       });
     });
-
-    describe('#hidden', function() {
-      it('should hide component on false', function() {
-        var icon = helpers.build('<coral-icon size="l" hidden></coral-icon>');
-        expect(icon.hasAttribute('hidden')).to.be.true;
-        expect(window.getComputedStyle(icon).display).to.equal('none');
-      });
-    });
   });
 
   describe('API', function() {
@@ -164,9 +154,7 @@ describe('Coral.Icon', function() {
         expect(icon.icon).to.equal('');
         expect(icon.classList.contains('coral3-Icon')).to.be.true;
         expect(icon.classList.contains('coral3-Icon--sizeS')).to.be.true;
-        expect(icon.classList.contains('coral3-Icon--')).to.be.false;
-        expect(icon.classList.contains('coral3-Icon--null')).to.be.false;
-        expect(icon.classList.contains('coral3-Icon--undefined')).to.be.false;
+        expect(icon.innerHTML.trim()).to.equal('');
       });
 
       it('should set the new icon', function() {
@@ -175,7 +163,7 @@ describe('Coral.Icon', function() {
         icon.icon = 'add';
 
         expect(icon.hasAttribute('icon')).to.be.true;
-        expect(icon.classList.contains('coral3-Icon--add')).to.be.true;
+        expect(hasSVGIcon(icon, 'add')).to.be.true;
       });
 
       it('should trim the value', function() {
@@ -184,7 +172,7 @@ describe('Coral.Icon', function() {
         icon.icon = ' add ';
 
         expect(icon.hasAttribute('icon')).to.be.true;
-        expect(icon.classList.contains('coral3-Icon--add')).to.be.true;
+        expect(hasSVGIcon(icon, 'add')).to.be.true;
       });
 
       it('should convert everything to a string', function() {
@@ -197,7 +185,7 @@ describe('Coral.Icon', function() {
         expect(icon.icon).to.equal('true');
 
         expect(icon.hasAttribute('icon')).to.be.true;
-        expect(icon.classList.contains('coral3-Icon--true')).to.be.true;
+        expect(hasSVGIcon(icon, 'true')).to.be.true;
       });
 
       it('should set with an attribute', function() {
@@ -206,59 +194,53 @@ describe('Coral.Icon', function() {
         icon.setAttribute('icon', 'add');
 
         expect(icon.getAttribute('icon')).to.equal('add');
-        expect(icon.classList.contains('coral3-Icon--add')).to.be.true;
+        expect(hasSVGIcon(icon, 'add')).to.be.true;
       });
 
-      it('should not leave class traces', function() {
+      it('should not set multiple SVG icons', function() {
         var icon = new Coral.Icon();
-        icon.classList.add('coral3-Icon--test');
-        expect(icon.classList.contains('coral3-Icon--test')).to.be.true;
-
+        
         icon.icon = 'adobeSocial';
         icon.icon = 'add';
-
-        expect(icon.classList.contains('coral3-Icon--add')).to.be.true;
+  
+        expect(hasSVGIcon(icon, 'add')).to.be.true;
+        expect(icon.querySelectorAll('svg').length).to.equal(1);
       });
 
       it('should remove the icon with null', function() {
         var icon = new Coral.Icon();
         icon.icon = 'add';
-
-        expect(icon.classList.contains('coral3-Icon--add')).to.be.true;
+  
+        expect(hasSVGIcon(icon, 'add')).to.be.true;
 
         icon.icon = null;
 
         expect(icon.icon).to.equal('');
-        expect(icon.classList.contains('coral3-Icon--')).to.be.false;
-        expect(icon.classList.contains('coral3-Icon--null')).to.be.false;
-        expect(icon.classList.contains('coral3-Icon--undefined')).to.be.false;
+        expect(hasSVGIcon(icon, 'add')).to.be.false;
       });
 
       it('should remove the icon with undefined', function() {
         var icon = new Coral.Icon();
         icon.icon = 'add';
-
-        expect(icon.classList.contains('coral3-Icon--add')).to.be.true;
+  
+        expect(hasSVGIcon(icon, 'add')).to.be.true;
 
         icon.icon = undefined;
 
         expect(icon.icon).to.equal('');
-        expect(icon.classList.contains('coral3-Icon--null')).to.be.false;
-        expect(icon.classList.contains('coral3-Icon--undefined')).to.be.false;
+        expect(hasSVGIcon(icon, 'add')).to.be.false;
       });
 
       it('should remove the icon with empty string', function() {
         var icon = new Coral.Icon();
         icon.icon = 'add';
-
-        expect(icon.classList.contains('coral3-Icon--add')).to.be.true;
+  
+        expect(hasSVGIcon(icon, 'add')).to.be.true;
 
         icon.icon = '';
 
         expect(icon.icon).to.equal('');
-        expect(icon.classList.contains('coral3-Icon--')).to.be.false;
-        expect(icon.classList.contains('coral3-Icon--null')).to.be.false;
-        expect(icon.classList.contains('coral3-Icon--undefined')).to.be.false;
+        expect(hasSVGIcon(icon, 'add')).to.be.false;
       });
 
       it('should remove the icon when the attribute is removed', function() {
@@ -266,11 +248,12 @@ describe('Coral.Icon', function() {
         icon.setAttribute('icon', 'add');
 
         expect(icon.getAttribute('icon')).to.equal('add');
-        expect(icon.classList.contains('coral3-Icon--add')).to.be.true;
+        expect(hasSVGIcon(icon, 'add')).to.be.true;
 
         icon.removeAttribute('icon');
 
         expect(icon.icon).to.equal('');
+        expect(hasSVGIcon(icon, 'add')).to.be.false;
       });
     });
 
@@ -361,7 +344,7 @@ describe('Coral.Icon', function() {
     
         icon.icon = 'add';
     
-        expect(icon.getAttribute('aria-label')).to.equal('add');
+        expect(icon.getAttribute('aria-label')).to.equal(capitalize('add'));
       });
   
       it('should add an aria-label equal to the value of the title attribute property when not set and when a title attribute is present', function() {

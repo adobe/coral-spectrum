@@ -16,13 +16,8 @@
  */
 import {ComponentMixin} from 'coralui-mixin-component';
 import {transform, validate} from 'coralui-util';
-
-/**
- Regex used to remove the modifier classes. Size related classes are not matched this regex.
- 
- @ignore
- */
-const ICON_REGEX = /[\s?]coral3-Icon--(?!size(XXS|XS|S|M|L))\w+/g;
+import '@spectrum/spectrum-icons/svg/spectrum-icons.svg';
+import '@spectrum/spectrum-icons/svg/AS.loadIcons';
 
 /**
  Regex used to match URLs. Assume it's a URL if it has a slash, colon, or dot.
@@ -37,6 +32,15 @@ const URL_REGEX = /\/|:|\./g;
  @ignore
  */
 const SPLIT_CAMELCASE_REGEX = /([a-z0-9])([A-Z])/g;
+
+/**
+ Returns capitalized string. This is used to map the icons with their SVG counterpart.
+ 
+ @ignore
+ @param {String} s
+ @return {String}
+ */
+const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
 
 /**
  Enumeration for {@link Icon} sizes.
@@ -80,7 +84,7 @@ for (const sizeValue in size) {
 
 /**
  @class Coral.Icon
- @classdesc An Icon component. CoralUI ships with a set of monochrome icons.
+ @classdesc An Icon component. Icon ships with a set of SVG icons.
  @htmltag coral-icon
  @extends {HTMLElement}
  @extends {ComponentMixin}
@@ -95,7 +99,7 @@ class Icon extends ComponentMixin(HTMLElement) {
   }
   
   /**
-   Icon name accordion to the CloudUI Icon sheet.
+   Icon name.
    
    @type {String}
    @default ""
@@ -109,30 +113,33 @@ class Icon extends ComponentMixin(HTMLElement) {
     this._icon = transform.string(value).trim();
     this._reflectAttribute('icon', this._icon);
     
-    // removes the old classes
-    /** @ignore */
-    this.className = this.className.replace(ICON_REGEX, '').trim();
-  
-    // sets the desired icon
+    // Remove image and SVG elements
+    ['image', 'svg'].forEach((type) => {
+      const el = this._elements[type] || this.querySelector(`.${CLASSNAME}-${type}`);
+      if (el) {
+        el.remove();
+      }
+    });
+    
+    // Sets the desired icon
     if (this._icon) {
       // Detect if it's a URL
       if (this._icon.match(URL_REGEX)) {
-        // Note that we're an image so we hide the font-related goodies
-        this.classList.add('is-image');
-        
         // Create an image and add it to the icon
-        const img = this._elements.image = this._elements.image || document.createElement('img');
-        img.className = `${CLASSNAME}-image`;
-        img.src = this.icon;
-        this.appendChild(img);
+        this._elements.image = this._elements.image || document.createElement('img');
+        this._elements.image.className = `${CLASSNAME}-image`;
+        this._elements.image.src = this.icon;
+        this.appendChild(this._elements.image);
       }
       else {
-        if (this._elements.image && this._elements.image.parentNode === this) {
-          // Remove image related stuff
-          this.removeChild(this._elements.image);
-          this.classList.remove('is-image');
-        }
-        this.classList.add(`${CLASSNAME}--${this._icon}`);
+        // Insert SVG Icon using HTML because creating it with JS doesn't work
+        const iconName = capitalize(this._icon);
+        this.insertAdjacentHTML('beforeend', `
+          <svg focusable="false" aria-hidden="true" class="${CLASSNAME}-svg">
+            <use xlink:href="#spectrum-icon-24-${iconName}"></use>
+          </svg>
+        `);
+        this._elements.svg = this.lastElementChild;
       }
     }
     
@@ -181,7 +188,7 @@ class Icon extends ComponentMixin(HTMLElement) {
    @private
    */
   _updateAltText(value) {
-    const isImage = this.classList.contains('is-image');
+    const isImage = this.contains(this._elements.image);
     
     let altText;
     if (typeof value === 'string') {
@@ -191,7 +198,7 @@ class Icon extends ComponentMixin(HTMLElement) {
       altText = '';
     }
     else {
-      altText = this.icon.replace(SPLIT_CAMELCASE_REGEX, '$1 $2').toLowerCase();
+      altText = capitalize(this.icon.replace(SPLIT_CAMELCASE_REGEX, '$1 $2'));
     }
   
     // If no other role has been set, provide the appropriate
@@ -225,6 +232,21 @@ class Icon extends ComponentMixin(HTMLElement) {
    */
   static get size() { return size; }
   
+  /**
+   Loads the SVG icons. Called by default, it requests the icons based on the JS file path.
+   
+   @param {String} [url] SVG icons url.
+   */
+  static load(url) {
+    if (!url) {
+      const scripts = document.getElementsByTagName('script');
+      const path = scripts[scripts.length - 1].src;
+      url = `${path.split('/').slice(0, -2).join('/')}/resources/spectrum-icons.svg`;
+    }
+  
+    window.AdobeSpectrum.loadIcons(url);
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return ['icon', 'size', 'alt', 'title'];
@@ -252,5 +274,8 @@ class Icon extends ComponentMixin(HTMLElement) {
     }
   }
 }
+
+// Load icons
+Icon.load();
 
 export default Icon;

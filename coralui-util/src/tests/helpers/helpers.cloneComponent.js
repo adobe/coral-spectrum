@@ -52,8 +52,7 @@ helpers.cloneComponent = function(element, options) {
         expect(elCloneClassNameArray.length).to.equal(elClassNameArray.length, 'clone className count does not match');
       });
     });
-
-
+    
     describe('cloned children', function() {
       var elChildren;
       var elCloneChildren;
@@ -63,7 +62,7 @@ helpers.cloneComponent = function(element, options) {
         elCloneChildren = elClone.querySelectorAll('*');
       });
 
-      it('should have the same legnth', function() {
+      it('should have the same length', function() {
         expect(elCloneChildren.length).to.equal(elChildren.length, 'cloned children count does not match');
       });
 
@@ -75,12 +74,26 @@ helpers.cloneComponent = function(element, options) {
 
       it('should have matching classnames', function() {
         for (var i = 0; i < elCloneChildren.length; i++) {
-          var elChildrenClassNameArray = elChildren[i].className.trim().split(' ');
-          var elCloneChildrenClassNameArray = elCloneChildren[i].className.trim().split(' ');
-          expect(elCloneChildrenClassNameArray).to.have.members(elChildrenClassNameArray,
-            'clone child className vs new child className');
-          expect(elCloneChildrenClassNameArray.length).to.equal(elChildrenClassNameArray.length,
-            'clone child className length vs new child className length');
+          var elChildrenClassName;
+          var elCloneChildrenClassName;
+          
+          if (typeof elChildren[i].className === 'string') {
+            elChildrenClassName = elChildren[i].className.trim().split(' ');
+            elCloneChildrenClassName = elCloneChildren[i].className.trim().split(' ');
+  
+            expect(elCloneChildrenClassName).to.have.members(elChildrenClassName,
+              'clone child className vs new child className');
+            expect(elCloneChildrenClassName.length).to.equal(elChildrenClassName.length,
+              'clone child className length vs new child className length');
+          }
+          // Support <svg>
+          else if (typeof elCloneChildren === 'object') {
+            elChildrenClassName = elChildren[i].className;
+            elCloneChildrenClassName = elCloneChildren[i].className;
+  
+            expect(elCloneChildrenClassName).to.deep.equal(elChildrenClassName,
+              'clone child className vs new child className');
+          }
         }
       });
     });
