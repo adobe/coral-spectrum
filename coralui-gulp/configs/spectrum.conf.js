@@ -84,10 +84,9 @@ module.exports = [
     spectrum: /\.spectrum-Body/g,
     coral: '.coral-Body'
   },
-  // New Spectrum CSS only components
   {
-    spectrum: /\.spectrum-Body/g,
-    coral: '.coral-Body'
+    spectrum: /\.spectrum-Rule/g,
+    coral: '.coral-Rule'
   },
   // Coral Components
   {
