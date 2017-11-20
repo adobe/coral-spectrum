@@ -16,7 +16,7 @@
  */
 import {ComponentMixin} from 'coralui-mixin-component';
 import {transform, validate} from 'coralui-util';
-import '@spectrum/spectrum-icons/svg/spectrum-icons.svg';
+import iconsPath from '@spectrum/spectrum-icons/svg/spectrum-icons.svg';
 import '@spectrum/spectrum-icons/svg/AS.loadIcons';
 
 /**
@@ -241,7 +241,7 @@ class Icon extends ComponentMixin(HTMLElement) {
     if (!url) {
       const scripts = document.getElementsByTagName('script');
       const path = scripts[scripts.length - 1].src;
-      url = `${path.split('/').slice(0, -2).join('/')}/resources/spectrum-icons.svg`;
+      url = `${path.split('/').slice(0, -iconsPath.split('/').length).join('/')}/${iconsPath}`;
     }
   
     window.AdobeSpectrum.loadIcons(url);

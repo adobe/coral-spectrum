@@ -38,10 +38,17 @@ function resources(opts) {
     transform: function transform(code, id) {
       if (filter(id)) {
         const file = id.split('/').pop();
-        fs.outputFile(path.join(process.cwd(), opts.output, file), code);
-  
+        let outputPath = path.join(opts.output, file);
+        
+        if (outputPath.startsWith('./')) {
+          outputPath = outputPath.replace('./', '');
+        }
+        
+        fs.outputFile(path.join(process.cwd(), outputPath), code);
+        
+        // Export the file path
         return {
-          code: ("export default " + (JSON.stringify(code)) + ";"),
+          code: `export default '${outputPath}';`,
           map: {mappings: ''}
         };
       }
