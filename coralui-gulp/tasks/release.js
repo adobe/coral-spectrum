@@ -54,14 +54,6 @@ module.exports = function(gulp) {
     });
   });
   
-  // Removes build folder and commits
-  gulp.task('remove-build', function() {
-    del.sync('build/**/*');
-    
-    return gulp.src('.')
-      .pipe(git.commit('releng - Prepare for next development iteration', {args: '-a'}));
-  });
-  
   // Publish release to artifactory
   gulp.task('npm-publish', function(cb) {
     exec(`npm publish --registry=${registry}`, function(err, stdout, stderr) {
@@ -95,24 +87,15 @@ module.exports = function(gulp) {
     });
   });
   
-  // Increase release version based on user choice and adds build folder then commits
+  // Increase release version based on user choice
   gulp.task('bump-version', function(cb) {
     function doVersionBump() {
       gulp.src(`${CWD}/package.json`)
         .pipe(bump({version: releaseVersion}))
-        .pipe(gulp.dest('./'));
+        .pipe(gulp.dest('./'))
+        .pipe(git.commit(`releng - Release ${releaseVersion}`));
       
-      exec('git add --all -f build', function(err, stdout, stderr) {
-        if (err) {
-          console.error(stderr);
-        }
-        else {
-          gulp.src([`${CWD}/package.json`, `${CWD}/build/**/*`])
-            .pipe(git.commit(`releng - Release ${releaseVersion}`));
-          
-          cb();
-        }
-      });
+      cb();
     }
     
     const currentVersion = modulePackageJson.version;
@@ -254,8 +237,6 @@ module.exports = function(gulp) {
         'push',
         'tag-release',
         'npm-publish',
-        'remove-build',
-        'push',
         function(err) {
           if (err) {
             console.error(err.message);

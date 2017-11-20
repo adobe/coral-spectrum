@@ -60,6 +60,18 @@
     "coralui-gulp": "file:coralui-gulp",
     "gulp": "^3.9.1"
   },
+  "files": [
+    "build",
+    "index.js",
+    "coralui-*/index.js",
+    "coralui-*/i18n",
+    "coralui-*/libs",
+    "coralui-*/polyfills",
+    "coralui-*/src/scripts/*.js",
+    "coralui-*/src/templates/*.html",
+    "coralui-*/src/styles/*.styl",
+    "coralui-*/src/data"
+  ],
   "author": {
     "name": "CoralUI",
     "email": "DL-CoralUI@adobe.com"
