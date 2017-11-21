@@ -100,6 +100,7 @@ class Checkbox extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._indeterminate = transform.booleanAttr(value);
     this._reflectAttribute('indeterminate', this._indeterminate);
     
+    this.classList.toggle('is-indeterminate', this._indeterminate);
     this._elements.input.indeterminate = this._indeterminate;
     this._elements.input[this._indeterminate ? 'setAttribute' : 'removeAttribute']('aria-checked', 'mixed');
   }
