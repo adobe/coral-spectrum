@@ -15,19 +15,27 @@
  * from Adobe Systems Incorporated.
  */
 module.exports = function(gulp) {
+  const runSequence = require('run-sequence').use(gulp);
   const KarmaServer = require('karma').Server;
   const configFile = `${__dirname}/../configs/karma.conf.js`;
   
-  gulp.task('tests', function(done) {
+  gulp.task('karma', function(done) {
     new KarmaServer({
       configFile: configFile,
       singleRun: true
     }, done).start();
   });
   
-  gulp.task('tests-watch', function(done) {
+  gulp.task('karma-watch', function(done) {
     new KarmaServer({
       configFile: configFile
     }, done).start();
-  })
+  });
+  
+  gulp.task('tests', function() {
+    runSequence(
+      'build',
+      'karma'
+    );
+  });
 };

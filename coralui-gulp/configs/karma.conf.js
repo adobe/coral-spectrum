@@ -46,9 +46,20 @@ module.exports = function(config) {
       plugins: rollupConfig.plugins
     },
   
+    customLaunchers: {
+      FirefoxHeadless: {
+        base: 'Firefox',
+        flags: [ '-headless' ],
+        prefs: {
+          // Fixes tabs opened on startup
+          'extensions.enabledScopes': 0
+        }
+      },
+    },
+  
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome', 'Firefox'],
+    browsers: ['ChromeHeadless', 'FirefoxHeadless'],
     
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
