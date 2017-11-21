@@ -3,7 +3,7 @@
 
   <head>
     <meta charset="utf-8">
-    <title>Alert Examples</title>
+    <title>Coral.Alert</title>
     <link rel="stylesheet" href="../build/css/coral.css">
     <script src="../build/js/coral.js"></script>
     <style>
@@ -32,7 +32,14 @@
     </style>
   </head>
 
-  <body class="coral--light u-coral-clearFix">
+  <body class="coral--light">
+    <div style="position:fixed;top:15px;right:15px;">
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--lighthest'">Lightest</a> |
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+    </div>
+
     <div class="col">
       <section>
         <h3 class="coral-Heading coral-Heading--3">Alerts</h3>

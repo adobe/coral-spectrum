@@ -14,102 +14,110 @@
   </style>
 </head>
 
-<body class="coral--light u-coral-padding">
-<h2 class="coral-Heading coral-Heading--2" id="file-upload-label">File Upload</h2>
-<coral-fileupload name="file" async id="fileUpload" action="http://localhost/~ringel/multiplefileupload.php" multiple labelledby="file-upload-label">
-  <div coral-fileupload-dropzone class="coral3-FileUpload-dropZone">Drop files...</div>
-  <button coral-fileupload-select is="coral-button">Select files...</button>
-  <button coral-fileupload-submit variant="primary" is="coral-button">Upload</button>
-  <button coral-fileupload-abort variant="warning" is="coral-button">Abort</button>
-  <button coral-fileupload-clear is="coral-button">Clear</button>
-  <ul id="fileList"></ul>
-</coral-fileupload>
-<script>
-  // Listen to XHR events
-  var xhrEventNames = [
-    'loadstart',
-    'readystatechange',
-    'progress',
-    'timeout',
-    'load',
-    'loadend',
-    'error',
-    'abort',
-    'dragenter',
-    'dragover',
-    'dragleave',
-    'drop'
-  ];
+<body class="coral--light">
 
-  xhrEventNames.forEach(function(name) {
-    fileUpload.on('coral-fileupload:' + name, function(event) {
-      console.log(name);
-      if (event.detail && event.detail.item) {
-        console.log(event.detail.item);
-      }
-    })
-  });
+  <div style="position:fixed;top:15px;right:15px;">
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--lighthest'">Lightest</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+  </div>
 
-  // Listen to fileupload events
-  fileUpload
-    .on('change', function(event) {
-      console.log('change');
-    })
-    .on('coral-fileupload:fileadded', function(event) {
-      console.log('fileadded');
-      var item = event.detail.item;
-      var size = Math.round(item.file.size / 1000);
+  <h2 class="coral-Heading coral-Heading--2" id="file-upload-label">File Upload</h2>
+  <coral-fileupload name="file" async id="fileUpload" action="http://localhost/~ringel/multiplefileupload.php" multiple labelledby="file-upload-label">
+    <div coral-fileupload-dropzone class="coral3-FileUpload-dropZone">Drop files...</div>
+    <button coral-fileupload-select is="coral-button">Select files...</button>
+    <button coral-fileupload-submit variant="primary" is="coral-button">Upload</button>
+    <button coral-fileupload-abort variant="warning" is="coral-button">Abort</button>
+    <button coral-fileupload-clear is="coral-button">Clear</button>
+    <ul id="fileList"></ul>
+  </coral-fileupload>
+  <script>
+    // Listen to XHR events
+    var xhrEventNames = [
+      'loadstart',
+      'readystatechange',
+      'progress',
+      'timeout',
+      'load',
+      'loadend',
+      'error',
+      'abort',
+      'dragenter',
+      'dragover',
+      'dragleave',
+      'drop'
+    ];
 
-      var li = document.createElement('li');
-      li._filename = item.file.name;
-      li.innerHTML = '<a class="uploadFile" href="#" coral-fileupload-uploadfile="' + item.file.name + '">upload</a> - <a coral-fileupload-removefile="' + item.file.name + '"class="removeFile" href="#">remove</a><span class="progress"></span>';
-      li.insertBefore(document.createTextNode(item.file.name + ' - ' + (size === 0 ? item.file.size + ' bytes ' : size + ' kb ')), li.firstChild);
-
-      fileList.appendChild(li);
-    })
-    .on('coral-fileupload:fileremoved', function(event) {
-      console.log('fileremoved');
-      var item = event.detail.item;
-
-      Array.prototype.some.call(fileList.querySelectorAll('li'), function(li) {
-        if (li._filename === item.file.name) {
-          fileList.removeChild(li);
-          return true;
+    xhrEventNames.forEach(function(name) {
+      fileUpload.on('coral-fileupload:' + name, function(event) {
+        console.log(name);
+        if (event.detail && event.detail.item) {
+          console.log(event.detail.item);
         }
-      });
-    })
-    .on('coral-fileupload:progress', function(event) {
-      console.log('progress');
-      var item = event.detail.item;
+      })
+    });
 
-      Array.prototype.some.call(fileList.querySelectorAll('li'), function(li) {
-        if (event.detail.lengthComputable && li._filename === item.file.name) {
-          li.querySelector('.progress').textContent = ' - ' + Math.ceil(event.detail.loaded / event.detail.total * 100) + '%';
-          return true;
-        }
-      });
-    })
-    .on('coral-fileupload:load', function(event) {
-      console.log('load');
-      var item = event.detail.item;
-      if (item.status === 200) {
-        Array.prototype.forEach.call(fileList.querySelectorAll('li'), function(li) {
+    // Listen to fileupload events
+    fileUpload
+      .on('change', function(event) {
+        console.log('change');
+      })
+      .on('coral-fileupload:fileadded', function(event) {
+        console.log('fileadded');
+        var item = event.detail.item;
+        var size = Math.round(item.file.size / 1000);
+
+        var li = document.createElement('li');
+        li._filename = item.file.name;
+        li.innerHTML = '<a class="uploadFile" href="#" coral-fileupload-uploadfile="' + item.file.name + '">upload</a> - <a coral-fileupload-removefile="' + item.file.name + '"class="removeFile" href="#">remove</a><span class="progress"></span>';
+        li.insertBefore(document.createTextNode(item.file.name + ' - ' + (size === 0 ? item.file.size + ' bytes ' : size + ' kb ')), li.firstChild);
+
+        fileList.appendChild(li);
+      })
+      .on('coral-fileupload:fileremoved', function(event) {
+        console.log('fileremoved');
+        var item = event.detail.item;
+
+        Array.prototype.some.call(fileList.querySelectorAll('li'), function(li) {
           if (li._filename === item.file.name) {
-            li.style.color = 'green';
+            fileList.removeChild(li);
+            return true;
           }
         });
-      }
-    })
-    .on('coral-fileupload:error', function(event) {
-      console.log('error');
-      var item = event.detail.item;
-      Array.prototype.forEach.call(fileList.querySelectorAll('li'), function(li) {
-        if (li._filename === item.file.name) {
-          li.style.color = 'red';
+      })
+      .on('coral-fileupload:progress', function(event) {
+        console.log('progress');
+        var item = event.detail.item;
+
+        Array.prototype.some.call(fileList.querySelectorAll('li'), function(li) {
+          if (event.detail.lengthComputable && li._filename === item.file.name) {
+            li.querySelector('.progress').textContent = ' - ' + Math.ceil(event.detail.loaded / event.detail.total * 100) + '%';
+            return true;
+          }
+        });
+      })
+      .on('coral-fileupload:load', function(event) {
+        console.log('load');
+        var item = event.detail.item;
+        if (item.status === 200) {
+          Array.prototype.forEach.call(fileList.querySelectorAll('li'), function(li) {
+            if (li._filename === item.file.name) {
+              li.style.color = 'green';
+            }
+          });
         }
+      })
+      .on('coral-fileupload:error', function(event) {
+        console.log('error');
+        var item = event.detail.item;
+        Array.prototype.forEach.call(fileList.querySelectorAll('li'), function(li) {
+          if (li._filename === item.file.name) {
+            li.style.color = 'red';
+          }
+        });
       });
-    });
-</script>
+  </script>
 </body>
 
 </html>

@@ -22,7 +22,13 @@
   </style>
 
 </head>
-<body>
+<body class="coral--light">
+  <div style="position:fixed;top:15px;right:15px;">
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--lighthest'">Lightest</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+  </div>
 
   <div class="coral--light row" id="example_light">
     <div class="col example_small">
@@ -105,110 +111,6 @@
       <section>
         <h2 class="coral-Heading coral-Heading--2">Bottom Label</h2>
         <coral-progress value="65" size='L' labelposition="bottom" showpercent></coral-progress>
-      </section>
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">Bottom Label (custom)</h2>
-        <coral-progress value="65" size='L' labelposition='bottom'>Copying files...</coral-progress>
-      </section>
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">No Label</h2>
-        <coral-progress value="65" size='L'></coral-progress>
-      </section>
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">Blank Label</h2>
-        <coral-progress value="65" size='L'>&nbsp;</coral-progress>
-      </section>
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">Indeterminate with no label</h2>
-        <coral-progress indeterminate value="65" size='L'></coral-progress>
-      </section>
-    </div>
-
-  </div>
-
-
-
-  <div class="coral--dark row" id="example_dark">
-    <div class="col example_small">
-      <h1 class="coral-Heading coral-Heading--1">SMALL</h1>
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">Left Label</h2>
-        <coral-progress value="65" size='S' labelposition="left"></coral-progress>
-      </section>
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">Right Label</h2>
-        <coral-progress value="65" size='S' labelposition="right"></coral-progress>
-      </section>
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">Bottom Label</h2>
-        <coral-progress value="65" size='S' labelposition="bottom"></coral-progress>
-      </section>
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">Bottom Label (custom)</h2>
-        <coral-progress value="65" size='S' labelposition='bottom'>
-          Adjusting dingus...
-        </coral-progress>
-      </section>
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">No Label</h2>
-        <coral-progress value="65" size='S'></coral-progress>
-      </section>
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">Blank Label</h2>
-        <coral-progress value="65" size='S'>&nbsp;</coral-progress>
-      </section>
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">Indeterminate with no label</h2>
-        <coral-progress indeterminate value="65" size='S'></coral-progress>
-      </section>
-
-    </div>
-
-    <div class="col example_medium">
-      <h1 class="coral-Heading coral-Heading--1">MEDIUM</h1>
-       <section>
-        <h2 class="coral-Heading coral-Heading--2">Left Label</h2>
-        <coral-progress value="65" labelposition="left"></coral-progress>
-      </section>
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">Right Label</h2>
-        <coral-progress value="65" labelposition="right"></coral-progress>
-      </section>
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">Bottom Label</h2>
-        <coral-progress value="65" labelposition="bottom"></coral-progress>
-      </section>
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">Bottom Label (custom)</h2>
-        <coral-progress value="65" size='L' labelposition='bottom'>Copying files...</coral-progress>
-      </section>
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">No Label</h2>
-        <coral-progress value="65"></coral-progress>
-      </section>
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">Blank Label</h2>
-        <coral-progress value="65">&nbsp;</coral-progress>
-      </section>
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">Indeterminate with no label</h2>
-        <coral-progress indeterminate value="65"></coral-progress>
-      </section>
-    </div>
-
-    <div class="col example_large">
-      <h1 class="coral-Heading coral-Heading--1">LARGE</h1>
-       <section>
-        <h2 class="coral-Heading coral-Heading--2">Left Label</h2>
-        <coral-progress value="65" size='L' labelposition="left"></coral-progress>
-      </section>
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">Right Label</h2>
-        <coral-progress value="65" size='L' labelposition="right"></coral-progress>
-      </section>
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">Bottom Label</h2>
-        <coral-progress value="65" size='L' labelposition="bottom"></coral-progress>
       </section>
       <section>
         <h2 class="coral-Heading coral-Heading--2">Bottom Label (custom)</h2>

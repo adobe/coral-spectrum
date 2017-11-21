@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Dialog</title>
+  <title>Coral.Dialog</title>
 
   <link rel="stylesheet" href="../build/css/coral.css">
   <script src="../build/js/coral.js"></script>
@@ -13,7 +13,13 @@
   </style>
 </head>
 
-<body class="coral--light u-coral-padding">
+<body class="coral--light">
+  <div style="position:fixed;top:15px;right:15px;">
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--lighthest'">Lightest</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+  </div>
 
   <section>
     <h2 class="coral-Heading coral-Heading--2">Markup Initialization</h2>
@@ -177,49 +183,10 @@
         // Add the dialog to the DOM
         document.body.appendChild(dialog);
 
-        // Check whether to display with the dark theme
-        if (target.hasAttribute('data-dark')) {
-          dialog.classList.add('coral--dark');
-        }
-
         // Show the dialog and return focus to the button when its closed
         dialog.open = true;
       });
     </script>
-  </section>
-
-  <section class="coral--dark">
-    <h2 class="coral-Heading coral-Heading--2">Dark</h2>
-
-    <!--
-    Note: data-dark is not a magic attribute, it is specific to this example for applying .coral--dark CSS class.
-    -->
-
-    <button is="coral-button" data-dialog="default" data-dark="true">Default</button>
-    <button is="coral-button" icon="alert" data-dialog="error" data-dark="true">Error</button>
-    <button is="coral-button" icon="alert" data-dialog="warning" data-dark="true">Warning</button>
-    <button is="coral-button" icon="checkCircle" data-dialog="success" data-dark="true">Success</button>
-    <button is="coral-button" icon="helpCircle" data-dialog="help" data-dark="true">Help</button>
-    <button is="coral-button" icon="infoCircle" data-dialog="info" data-dark="true">Info</button>
-
-    <coral-dialog class="coral--dark" fullscreen id="fullscreenDialogDark">
-      <coral-dialog-header>Fullscreen Dialog</coral-dialog-header>
-      <coral-dialog-content>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet. Etiam efficitur aliquam eros quis tincidunt. Donec odio tortor, placerat a mattis eget, ultrices quis urna. Etiam pellentesque mollis finibus. Etiam a elit rhoncus, porta magna non, mollis ante. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-
-        <p>Vivamus quis maximus enim. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut efficitur, nibh id luctus porttitor, quam nibh malesuada dui, at mattis mauris risus eget nibh. Suspendisse nec nisl eu felis ullamcorper lobortis. Nullam vulputate in mi vitae vehicula. Cras molestie urna id est faucibus tincidunt. Curabitur fermentum dui eget porta hendrerit. Nam lacinia, neque non iaculis blandit, risus ipsum accumsan velit, eu consectetur sapien magna ac enim. Aenean at augue vestibulum dolor faucibus pellentesque at vel justo. Aenean justo velit, bibendum et lectus id, efficitur accumsan diam. Sed tempus posuere justo, ultrices placerat magna aliquet in. Integer rhoncus sapien diam, eu iaculis urna porttitor quis. Vivamus volutpat tellus a scelerisque lacinia. Ut vel velit neque. Proin id augue tempus, vestibulum diam vel, pharetra erat. Integer id tellus id lorem sollicitudin pulvinar sit amet vel erat.</p>
-
-      </coral-dialog-content>
-      <coral-dialog-footer><button is="coral-button" variant="primary" coral-close>Done</button></coral-dialog-footer>
-    </coral-dialog>
-
-    <button is="coral-button" onclick="document.getElementById('fullscreenDialogDark').open = true">Fullscreen Dialog</button>
-
-    <coral-dialog class="coral--dark" id='defaultCloseButtonDialogDark' closable='on'>
-      <coral-dialog-header>Done</coral-dialog-header>
-      <coral-dialog-content>You can close this now.</coral-dialog-content>
-    </coral-dialog>
-    <button is='coral-button' onclick="document.getElementById('defaultCloseButtonDialogDark').open = true">Closable</button>
   </section>
 
   <section>

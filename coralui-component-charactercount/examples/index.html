@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-  <title>Character count</title>
+  <title>Coral.CharacterCount</title>
 
   <link rel="stylesheet" href="../build/css/coral.css">
   <script src="../build/js/coral.js"></script>
@@ -19,6 +19,13 @@
 
 </head>
 <body class="coral--light">
+  <div style="position:fixed;top:15px;right:15px;">
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--lighthest'">Lightest</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+  </div>
+
   <h1 class="coral-Heading coral-Heading--1">CharacterCount Examples</h1>
 
   <h3 class="coral-Heading coral-Heading--3">From markup</h3>
@@ -67,29 +74,6 @@
     });
     document.getElementById('inputJS').parentNode.appendChild(characterCount);
   </script>
-  </section>
-
-  <section class="coral--dark">
-    <h1>Dark Examples</h1>
-
-    <h2>Default</h2>
-    <input is="coral-textfield" type="text">
-    <coral-charactercount></coral-charactercount>
-
-    <h2>With maxlength</h2>
-    <input is="coral-textfield" type="text">
-    <coral-charactercount maxlength="10"></coral-charactercount>
-
-    <h2>Max Length from target input</h2>
-    <input is="coral-textfield" maxlength="8" type="text">
-    <coral-charactercount></coral-charactercount>
-
-    <h2>Invalid</h2>
-    <p>
-      (max length set to 5, value initialized to 13 character string)
-    </p>
-    <input is="coral-textfield" value="tooLongString" is="coral-textfield" type="text">
-    <coral-charactercount maxlength="5"></coral-charactercount>
   </section>
 </body>
 </html>

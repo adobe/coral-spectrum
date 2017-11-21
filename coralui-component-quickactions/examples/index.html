@@ -37,7 +37,15 @@
   </style>
 </head>
 
-<body class="coral--light u-coral-padding">
+<body class="coral--light">
+
+  <div style="position:fixed;top:15px;right:15px;">
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--lighthest'">Lightest</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+  </div>
+
   <h1 class="coral-Heading coral-Heading--1">coral-QuickActions</h1>
   <section>
     <div class="col">
@@ -161,164 +169,6 @@
           </tbody>
         </table>
         <coral-quickactions target="_prev" threshold="-1">
-          <coral-quickactions-item icon="copy">Copy</coral-quickactions-item>
-          <coral-quickactions-item icon="move">Move</coral-quickactions-item>
-          <coral-quickactions-item icon="download">Download</coral-quickactions-item>
-          <coral-quickactions-item icon="share">Share</coral-quickactions-item>
-          <coral-quickactions-item icon="publish">Publish</coral-quickactions-item>
-          <coral-quickactions-item icon="copy">Copy</coral-quickactions-item>
-          <coral-quickactions-item icon="lockOn">Lock</coral-quickactions-item>
-          <coral-quickactions-item icon="lockOff">Unlock</coral-quickactions-item>
-          <coral-quickactions-item icon="note">Annotate</coral-quickactions-item>
-          <coral-quickactions-item icon="paste">Paste</coral-quickactions-item>
-          <coral-quickactions-item icon="pinOn">Add Pin</coral-quickactions-item>
-          <coral-quickactions-item icon="pinOff">Remove Pin</coral-quickactions-item>
-          <coral-quickactions-item icon="print">Print</coral-quickactions-item>
-        </coral-quickactions>
-      </section>
-    </div><!-- inline block - remove whitespace
- --><div class="col">
-      <section class="coral--dark">
-        <h2 class="coral-Heading coral-Heading--2">Dark</h2>
-        <i>Dark theme</i>
-        <table class="coral-Table" tabindex="0">
-          <thead>
-            <tr class="coral-Table-row">
-              <th class="coral-Table-headerCell">Pet Name</th>
-              <th class="coral-Table-headerCell">Type</th>
-              <th class="coral-Table-headerCell">Good/Bad</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="coral-Table-row">
-              <td class="coral-Table-cell">Hopper</td>
-              <td class="coral-Table-cell">Frog</td>
-              <td class="coral-Table-cell">Good</td>
-            </tr>
-            <tr class="coral-Table-row">
-              <td class="coral-Table-cell">Pokey</td>
-              <td class="coral-Table-cell">Porcupine</td>
-              <td class="coral-Table-cell">Good</td>
-            </tr>
-            <tr class="coral-Table-row">
-              <td class="coral-Table-cell">Mr. Snuggles</td>
-              <td class="coral-Table-cell">Snake</td>
-              <td class="coral-Table-cell">Bad</td>
-            </tr>
-          </tbody>
-        </table>
-        <coral-quickactions target="_prev">
-          <coral-quickactions-item icon="copy">Copy</coral-quickactions-item>
-          <coral-quickactions-item icon="move">Move</coral-quickactions-item>
-          <coral-quickactions-item icon="download">Download</coral-quickactions-item>
-          <coral-quickactions-item icon="share">Share</coral-quickactions-item>
-          <coral-quickactions-item icon="publish">Publish</coral-quickactions-item>
-        </coral-quickactions>
-      </section>
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">Placement bottom</h2>
-        <i>(placement = "BOTTOM")</i>
-        <table class="coral-Table" tabindex="0">
-          <thead>
-            <tr class="coral-Table-row">
-              <th class="coral-Table-headerCell">Pet Name</th>
-              <th class="coral-Table-headerCell">Type</th>
-              <th class="coral-Table-headerCell">Good/Bad</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="coral-Table-row">
-              <td class="coral-Table-cell">Squeak</td>
-              <td class="coral-Table-cell">Mouse</td>
-              <td class="coral-Table-cell">Bad</td>
-            </tr>
-            <tr class="coral-Table-row">
-              <td class="coral-Table-cell">Spot</td>
-              <td class="coral-Table-cell">Dog</td>
-              <td class="coral-Table-cell">Bad</td>
-            </tr>
-            <tr class="coral-Table-row">
-              <td class="coral-Table-cell">Fluffy</td>
-              <td class="coral-Table-cell">Velociraptor</td>
-              <td class="coral-Table-cell">Good</td>
-            </tr>
-          </tbody>
-        </table>
-        <coral-quickactions target="_prev" placement="BOTTOM">
-          <coral-quickactions-item icon="copy">Copy</coral-quickactions-item>
-          <coral-quickactions-item icon="move">Move</coral-quickactions-item>
-          <coral-quickactions-item icon="download">Download</coral-quickactions-item>
-          <coral-quickactions-item icon="share">Share</coral-quickactions-item>
-          <coral-quickactions-item icon="publish">Publish</coral-quickactions-item>
-        </coral-quickactions>
-      </section>
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">Initially open and interaction off</h2>
-        <i>(open = "true", interaction = "OFF")</i>
-        <table class="coral-Table" tabindex="0">
-          <thead>
-            <tr class="coral-Table-row">
-              <th class="coral-Table-headerCell">Pet Name</th>
-              <th class="coral-Table-headerCell">Type</th>
-              <th class="coral-Table-headerCell">Good/Bad</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="coral-Table-row">
-              <td class="coral-Table-cell">Jessica</td>
-              <td class="coral-Table-cell">Rabbit</td>
-              <td class="coral-Table-cell">Bad</td>
-            </tr>
-            <tr class="coral-Table-row">
-              <td class="coral-Table-cell">Spike</td>
-              <td class="coral-Table-cell">Bloodhound</td>
-              <td class="coral-Table-cell">Good</td>
-            </tr>
-            <tr class="coral-Table-row">
-              <td class="coral-Table-cell">Luis</td>
-              <td class="coral-Table-cell">Python</td>
-              <td class="coral-Table-cell">Good</td>
-            </tr>
-          </tbody>
-        </table>
-        <coral-quickactions target="_prev" interaction="OFF" open>
-          <coral-quickactions-item icon="copy">Copy</coral-quickactions-item>
-          <coral-quickactions-item icon="move">Move</coral-quickactions-item>
-          <coral-quickactions-item icon="download">Download</coral-quickactions-item>
-          <coral-quickactions-item icon="share">Share</coral-quickactions-item>
-          <coral-quickactions-item icon="publish">Publish</coral-quickactions-item>
-        </coral-quickactions>
-      </section>
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">Parent target selector</h2>
-        <i>(target = _parent), in this case, the section element rather than the table</i>
-        <table class="coral-Table coral-Table--hover" tabindex="0">
-          <thead>
-          <tr class="coral-Table-row">
-            <th class="coral-Table-headerCell">Pet Name</th>
-            <th class="coral-Table-headerCell">Type</th>
-            <th class="coral-Table-headerCell">Good/Bad</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr class="coral-Table-row">
-            <td class="coral-Table-cell">Ben</td>
-            <td class="coral-Table-cell">Krystov</td>
-            <td class="coral-Table-cell">Rav</td>
-          </tr>
-          <tr class="coral-Table-row">
-            <td class="coral-Table-cell">Mongoose</td>
-            <td class="coral-Table-cell">Dolphin</td>
-            <td class="coral-Table-cell">Centipede</td>
-          </tr>
-          <tr class="coral-Table-row">
-            <td class="coral-Table-cell">Good</td>
-            <td class="coral-Table-cell">Bad</td>
-            <td class="coral-Table-cell">Good</td>
-          </tr>
-          </tbody>
-        </table>
-        <coral-quickactions target="_parent">
           <coral-quickactions-item icon="copy">Copy</coral-quickactions-item>
           <coral-quickactions-item icon="move">Move</coral-quickactions-item>
           <coral-quickactions-item icon="download">Download</coral-quickactions-item>

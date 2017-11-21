@@ -22,7 +22,14 @@
     </style>
   </head>
 
-  <body class="coral--light u-coral-padding">
+  <body class="coral--light">
+    <div style="position:fixed;top:15px;right:15px;">
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--lighthest'">Lightest</a> |
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+    </div>
+
     <h2 class="coral-Heading coral-Heading--2">Customized ActionBar with ordinary buttons:</h2>
     <coral-actionbar>
       <coral-actionbar-primary threshold="-1" morebuttontext="More">

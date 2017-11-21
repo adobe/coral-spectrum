@@ -37,7 +37,13 @@
   </head>
 
   <body class="coral--light">
-    <button id="toggleStyle" is="coral-button" class="u-coral-pullRight">ToggleStyle</button>
+    <div style="position:fixed;top:15px;right:15px;">
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--lighthest'">Lightest</a> |
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+    </div>
+
     <h1 class="coral-Heading coral-Heading--1">coral-ColorInput</h1>
     <section>
       <div class="col">
@@ -160,15 +166,6 @@
       const li = document.createElement('li');
       li.innerHTML = 'remove: ' + event.target + '  ' + event.detail.item.value;
       log.insertBefore(li, log.firstChild);
-    });
-
-    // create toggle button
-    document.getElementById('toggleStyle').addEventListener('click', function() {
-      if (document.body.className === 'coral--light') {
-        document.body.className = 'coral--dark';
-      } else {
-        document.body.className = 'coral--light';
-      }
     });
     </script>
   </body>

@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-  <title>Textarea</title>
+  <title>Coral.Textarea</title>
 
   <link rel="stylesheet" href="../build/css/coral.css">
   <script src="../build/js/coral.js"></script>
@@ -14,6 +14,13 @@
 
 </head>
 <body class="coral--light">
+  <div style="position:fixed;top:15px;right:15px;">
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--lighthest'">Lightest</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+  </div>
+
   <h2>Default</h2>
   <textarea is='coral-textarea'></textarea>
 

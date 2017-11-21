@@ -21,21 +21,12 @@
   </style>
 </head>
 <body class="coral--light">
-  <button is="coral-button" id="colorswitch" style="position:fixed;top:20px;right:20px;z-index:1337;margin:0;">Light</button>
-  <script>
-    document.getElementById('colorswitch').addEventListener('click', function(){
-      var bc = document.body.classList;
-      if (bc.contains('coral--dark')){
-        bc.remove('coral--dark');
-        bc.add('coral--light');
-        this.textContent = 'Dark';
-      } else {
-        bc.add('coral--dark');
-        bc.remove('coral--light');
-        this.textContent = 'Light';
-      }
-    })
-  </script>
+  <div style="position:fixed;top:15px;right:15px;">
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--lighthest'">Lightest</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+  </div>
 
   <section>
     <div class="col">

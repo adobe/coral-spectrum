@@ -36,7 +36,15 @@
       }
     </style>
   </head>
-  <body class="u-coral-clearFix coral--light u-coral-padding">
+  <body class="coral--light">
+
+    <div style="position:fixed;top:15px;right:15px;">
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--lighthest'">Lightest</a> |
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+    </div>
+
     <h1 class="coral-Heading coral-Heading--1">coral-CycleButton</h1>
     <section>
       <div class="col">
@@ -141,62 +149,6 @@
             <coral-cyclebutton-item>Grid View</coral-cyclebutton-item>
             <coral-cyclebutton-item icon="viewList">List View</coral-cyclebutton-item>
             <coral-cyclebutton-item>Column View</coral-cyclebutton-item>
-          </coral-cyclebutton>
-        </section>
-      </div><!-- remove inline block space
-   --><div class="col coral--dark">
-        <section>
-          <h2 class="coral-Heading coral-Heading--2">Normal buttons (with popover)</h2>
-          <coral-cyclebutton>
-            <coral-cyclebutton-item icon="viewCard">Card View</coral-cyclebutton-item>
-            <coral-cyclebutton-item icon="viewList">List View</coral-cyclebutton-item>
-            <coral-cyclebutton-item icon="viewColumn">Column View</coral-cyclebutton-item>
-            <coral-cyclebutton-item icon="viewGrid">Grid View</coral-cyclebutton-item>
-          </coral-cyclebutton>
-          <h2 class="coral-Heading coral-Heading--2">Normal buttons (simple cycle)</h2>
-          <coral-cyclebutton>
-            <coral-cyclebutton-item icon="add">Add View</coral-cyclebutton-item>
-            <coral-cyclebutton-item icon="minus">Remove View</coral-cyclebutton-item>
-          </coral-cyclebutton>
-          <h2 class="coral-Heading coral-Heading--2">Normal (pre)selected buttons (with popover)</h2>
-          <coral-cyclebutton>
-            <coral-cyclebutton-item icon="viewCard">Card View</coral-cyclebutton-item>
-            <coral-cyclebutton-item icon="viewGrid">Grid View</coral-cyclebutton-item>
-            <coral-cyclebutton-item icon="viewList">List View</coral-cyclebutton-item>
-            <coral-cyclebutton-item icon="viewColumn" selected>Column View</coral-cyclebutton-item>
-          </coral-cyclebutton>
-          <h2 class="coral-Heading coral-Heading--2">Normal (pre)selected buttons (simple cycle)</h2>
-          <coral-cyclebutton>
-            <coral-cyclebutton-item icon="add">Add</coral-cyclebutton-item>
-            <coral-cyclebutton-item icon="minus" selected>Remove</coral-cyclebutton-item>
-          </coral-cyclebutton>
-          <h2 class="coral-Heading coral-Heading--2">Normal buttons with displayMode=icontext (simple cycle)</h2>
-          <coral-cyclebutton displaymode="icontext">
-            <coral-cyclebutton-item icon="deviceRotatePortrait">Portrait</coral-cyclebutton-item>
-            <coral-cyclebutton-item icon="deviceRotateLandscape">Landscape</coral-cyclebutton-item>
-          </coral-cyclebutton>
-          <h2 class="coral-Heading coral-Heading--2">Normal buttons with displayMode=icontext (with popover and additional actions)</h2>
-          <coral-cyclebutton displaymode="icontext">
-            <coral-cyclebutton-item icon="viewCard">Card View</coral-cyclebutton-item>
-            <coral-cyclebutton-item icon="viewGrid">Grid View</coral-cyclebutton-item>
-            <coral-cyclebutton-item icon="viewList">List View</coral-cyclebutton-item>
-            <coral-cyclebutton-item icon="viewColumn">Column View</coral-cyclebutton-item>
-            <coral-cyclebutton-action icon="gear">View Settings</coral-cyclebutton-action>
-            <coral-cyclebutton-action icon="more">More Settings</coral-cyclebutton-action>
-          </coral-cyclebutton>
-          <h2 class="coral-Heading coral-Heading--2">Normal buttons with component displayMode=icontext and first item displayMode=icon (with popover)</h2>
-          <coral-cyclebutton displayMode="icontext">
-            <coral-cyclebutton-item icon="viewCard" displayMode="icon">Card View</coral-cyclebutton-item>
-            <coral-cyclebutton-item icon="viewGrid">Grid View</coral-cyclebutton-item>
-            <coral-cyclebutton-item icon="viewList">List View</coral-cyclebutton-item>
-            <coral-cyclebutton-item icon="viewColumn">Column View</coral-cyclebutton-item>
-          </coral-cyclebutton>
-          <h2 class="coral-Heading coral-Heading--2">Additional actions, items below threshold</h2>
-          <coral-cyclebutton>
-            <coral-cyclebutton-item icon="viewCard">Card View</coral-cyclebutton-item>
-            <coral-cyclebutton-item icon="viewGrid">Grid View</coral-cyclebutton-item>
-            <coral-cyclebutton-action icon="gear">View Settings</coral-cyclebutton-action>
-            <coral-cyclebutton-action icon="more">More Settings</coral-cyclebutton-action>
           </coral-cyclebutton>
         </section>
       </div>

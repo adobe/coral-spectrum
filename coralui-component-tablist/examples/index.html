@@ -45,46 +45,18 @@
     </style>
   </head>
 
-  <body class="coral--light u-coral-padding">
+  <body class="coral--light">
+
+  <div style="position:fixed;top:15px;right:15px;">
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--lighthest'">Lightest</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+  </div>
 
   <h1 class="coral-Heading coral-Heading--1">coral-TabList</h1>
     <div class="row">
       <div class="col">
-        <section>
-          <h2 class="coral-Heading coral-Heading--2">Default</h2>
-          <coral-tablist>
-            <coral-tab icon="comment" target="#panel_0"></coral-tab>
-            <coral-tab target="#panel_1">Tab One</coral-tab>
-            <coral-tab icon="delete" target="#panel_3">Tab Two</coral-tab>
-            <coral-tab target="#panel_4" disabled>Disabled</coral-tab>
-            <coral-tab icon="alert" target="#panel_5" invalid>Invalid</coral-tab>
-            <coral-tab icon="alert" target="#panel_6" invalid disabled>Invalid + Disabled</coral-tab>
-          </coral-tablist>
-        </section>
-        <section>
-          <h2 class="coral-Heading coral-Heading--2">Size: Large</h2>
-          <coral-tablist id="large" size="L">
-            <coral-tab icon="comment" target="#panel_00"></coral-tab>
-            <coral-tab target="#panel_10">Tab One</coral-tab>
-            <coral-tab icon="delete" target="#panel_30">Tab Two</coral-tab>
-            <coral-tab target="#panel_40" disabled>Disabled</coral-tab>
-            <coral-tab icon="alert" target="#panel_50" invalid>Invalid</coral-tab>
-            <coral-tab icon="alert" target="#panel_60" invalid disabled>Invalid + Disabled</coral-tab>
-          </coral-tablist>
-        </section>
-        <section>
-          <h2 class="coral-Heading coral-Heading--2">Orientation: Vertical</h2>
-          <coral-tablist id="vertical" orientation="vertical">
-            <coral-tab icon="comment" target="#panel_00"></coral-tab>
-            <coral-tab target="#panel_10">Tab One</coral-tab>
-            <coral-tab icon="delete" target="#panel_30">Tab Two</coral-tab>
-            <coral-tab target="#panel_40" disabled>Disabled</coral-tab>
-            <coral-tab icon="alert" target="#panel_50" invalid>Invalid</coral-tab>
-            <coral-tab icon="alert" target="#panel_60" invalid disabled>Invalid + Disabled</coral-tab>
-          </coral-tablist>
-        </section>
-      </div>
-      <div class="col coral--dark">
         <section>
           <h2 class="coral-Heading coral-Heading--2">Default</h2>
           <coral-tablist>

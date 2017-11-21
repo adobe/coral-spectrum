@@ -3,7 +3,7 @@
 
   <head>
     <meta charset="utf-8">
-    <title>TabView Example</title>
+    <title>Coral.TabView</title>
     <link rel="stylesheet" href="../build/css/coral.css">
     <script src="../build/js/coral.js"></script>
     <style>
@@ -44,7 +44,15 @@
     </script>
   </head>
 
-  <body class="coral--light u-coral-padding">
+  <body class="coral--light">
+
+    <div style="position:fixed;top:15px;right:15px;">
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--lighthest'">Lightest</a> |
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+    </div>
+
     <h1 class="coral-Heading coral-Heading--1">coral-TabView</h1>
     <div class="col">
       <section>
@@ -139,46 +147,6 @@
       </section>
     </div>
     <div class="col">
-      <div class="coral--dark coral-Well">
-        <section>
-          <h2 class="coral-Heading coral-Heading--2">Default Example</h2>
-          <coral-tabview>
-            <coral-tablist>
-              <coral-tab>Coral Tab 1</coral-tab>
-              <coral-tab icon="checkCircle">Coral Tab 2</coral-tab>
-              <coral-tab icon="delete" selected>Coral Tab 3</coral-tab>
-              <coral-tab disabled>Disabled</coral-tab>
-              <coral-tab invalid>Invalid</coral-tab>
-            </coral-tablist>
-            <coral-panelstack class="coral-Well">
-              <coral-panel>Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
-              <coral-panel>Lorem ipsum dolor sit amet.</coral-panel>
-              <coral-panel>Sed eget eros sit amet nulla ultricies.</coral-panel>
-              <coral-panel>Fusce nec ante non nibh mollis mollis mollis vitae dui.</coral-panel>
-              <coral-panel>Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
-            </coral-panelstack>
-          </coral-tabview>
-        </section>
-        <section>
-          <h2 class="coral-Heading coral-Heading--2">Orientation: vertical</h2>
-          <coral-tabview orientation="vertical">
-            <coral-tablist>
-              <coral-tab>Coral Tab 1</coral-tab>
-              <coral-tab icon="checkCircle">Coral Tab 2</coral-tab>
-              <coral-tab icon="delete" selected>Coral Tab 3</coral-tab>
-              <coral-tab disabled>Disabled</coral-tab>
-              <coral-tab invalid>Invalid</coral-tab>
-            </coral-tablist>
-            <coral-panelstack class="coral-Well">
-              <coral-panel>Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
-              <coral-panel>Lorem ipsum dolor sit amet.</coral-panel>
-              <coral-panel>Sed eget eros sit amet nulla ultricies.</coral-panel>
-              <coral-panel>Fusce nec ante non nibh mollis mollis mollis vitae dui.</coral-panel>
-              <coral-panel>Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
-            </coral-panelstack>
-          </coral-tabview>
-        </section>
-      </div>
       <section>
         <h2 class="coral-Heading coral-Heading--2">Log</h2>
         <ul id="log"></ul>

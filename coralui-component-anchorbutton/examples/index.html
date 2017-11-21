@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <title>Coral.Button</title>
+  <title>Coral.AnchorButton</title>
 
   <link rel="stylesheet" href="../build/css/coral.css">
   <script src="../build/js/coral.js"></script>
@@ -19,6 +19,13 @@
   </style>
 </head>
 <body class="coral--light">
+  <div style="position:fixed;top:15px;right:15px;">
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--lighthest'">Lightest</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+  </div>
+
   <section>
     <h1 class='coral-Heading coral-Heading--1'>Examples with coral-anchorbutton-label element explicitly declared in markup</h1>
     <h2>Default</h2>

@@ -42,7 +42,14 @@
     </script>
   </head>
 
-  <body class="coral--light u-coral-padding">
+  <body class="coral--light">
+    <div style="position:fixed;top:15px;right:15px;">
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--lighthest'">Lightest</a> |
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+    </div>
+
     <h1 class="coral-Heading coral-Heading--1">coral-WizardView</h1>
     <div class="col">
       <section>
@@ -101,26 +108,6 @@
       </section>
     </div>
     <div class="col">
-      <div class="coral--dark coral-Well">
-        <section>
-          <h2 class="coral-Heading coral-Heading--2">Default Example</h2>
-          <coral-wizardview id="dark">
-            <coral-steplist coral-wizardview-steplist interaction="on">
-              <coral-step>Coral Step 1</coral-step>
-              <coral-step>Coral Step 2</coral-step>
-              <coral-step selected>Coral Step 3</coral-step>
-              <coral-step>Coral Step 4</coral-step>
-              <coral-step>Coral Step 5</coral-step>
-            </coral-steplist>
-            <coral-panelstack coral-wizardview-panelstack class="coral-Well">
-              <coral-panel>Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
-              <coral-panel>Lorem ipsum dolor sit amet.</coral-panel>
-              <coral-panel>Sed eget eros sit amet nulla ultricies.</coral-panel>
-              <coral-panel>Fusce nec ante non nibh mollis mollis mollis vitae dui.</coral-panel>
-            </coral-panelstack>
-          </coral-wizardview>
-        </section>
-      </div>
       <section>
         <h2 class="coral-Heading coral-Heading--2">Log</h2>
         <ul id="log"></ul>

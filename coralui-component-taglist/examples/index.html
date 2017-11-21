@@ -40,6 +40,13 @@
 </head>
 <body class="coral--light">
 
+<div style="position:fixed;top:15px;right:15px;">
+  <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+  <a href="#" class="coral-Link" onclick="document.body.className='coral--lighthest'">Lightest</a> |
+  <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+  <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+</div>
+
 <h1 class="coral-Heading coral-Heading--1">TagList Examples</h1>
 
 <section>
@@ -78,35 +85,7 @@
     <coral-tag>Basel</coral-tag>
   </coral-taglist>
 </section>
-<section class="coral--dark">
-  <h2 class="coral-Heading coral-Heading--2" id="label-5">Default</h2>
-  <coral-taglist labelledby="label-5">
-    <coral-tag>Lehi</coral-tag>
-    <coral-tag>Paris</coral-tag>
-    <coral-tag>Basel</coral-tag>
-  </coral-taglist>
 
-  <h2 class="coral-Heading coral-Heading--2" id="label-6">Disabled</h2>
-  <coral-taglist disabled labelledby="label-6">
-    <coral-tag>Lehi</coral-tag>
-    <coral-tag>Paris</coral-tag>
-    <coral-tag>Basel</coral-tag>
-  </coral-taglist>
-
-  <h2 class="coral-Heading coral-Heading--2" id="label-7">Read only</h2>
-  <coral-taglist readonly labelledby="label-7">
-    <coral-tag>Lehi</coral-tag>
-    <coral-tag>Paris</coral-tag>
-    <coral-tag>Basel</coral-tag>
-  </coral-taglist>
-
-  <h2 class="coral-Heading coral-Heading--2" id="label-8">Quiet tags</h2>
-  <coral-taglist labelledby="label-8">
-    <coral-tag>Lehi</coral-tag>
-    <coral-tag quiet="true">Paris</coral-tag>
-    <coral-tag>Basel</coral-tag>
-  </coral-taglist>
-</section>
 <section class="limited-space">
   <label id="label-9">LIMITED SPACE</label>
   <coral-taglist labelledby="label-9">

@@ -30,20 +30,16 @@
       height: 100px;
     }
   </style>
-
-  <script>
-    function copyContent(source, dest, childSelector, cb) {
-      dest = document.querySelector(dest);
-      source = document.querySelector(source);
-      dest.innerHTML = source.innerHTML;
-      if (childSelector && cb) {
-        Array.prototype.forEach.call(dest.querySelectorAll(childSelector), cb);
-      }
-      return dest;
-    }
-  </script>
 </head>
 <body class="coral--light">
+
+<div style="position:fixed;top:15px;right:15px;">
+  <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+  <a href="#" class="coral-Link" onclick="document.body.className='coral--lighthest'">Lightest</a> |
+  <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+  <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+</div>
+
 <coral-wait centered></coral-wait>
 
 <section class="col title">
@@ -74,7 +70,5 @@
     <coral-wait size="L" variant="dots" centered></coral-wait>
   </div>
 </section>
-<section class="coral--dark col" id="example_dark"></section>
-<script>copyContent('#example_light', '#example_dark');</script>
 </body>
 </html>
