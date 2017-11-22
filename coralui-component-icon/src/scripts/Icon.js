@@ -198,7 +198,7 @@ class Icon extends ComponentMixin(HTMLElement) {
       altText = '';
     }
     else {
-      altText = capitalize(this.icon.replace(SPLIT_CAMELCASE_REGEX, '$1 $2'));
+      altText = this.icon.replace(SPLIT_CAMELCASE_REGEX, '$1 $2');
     }
   
     // If no other role has been set, provide the appropriate

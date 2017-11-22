@@ -1,6 +1,7 @@
 describe('Coral.Icon', function() {
-  const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
   const hasSVGIcon = (el, icon) => {
+    const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
+    
     if (el._elements.svg && el.contains(el._elements.svg)) {
       return el._elements.svg.querySelector('use').href.baseVal.endsWith(capitalize(icon));
     }
@@ -344,7 +345,7 @@ describe('Coral.Icon', function() {
     
         icon.icon = 'add';
     
-        expect(icon.getAttribute('aria-label')).to.equal(capitalize('add'));
+        expect(icon.getAttribute('aria-label')).to.equal('add');
       });
   
       it('should add an aria-label equal to the value of the title attribute property when not set and when a title attribute is present', function() {
