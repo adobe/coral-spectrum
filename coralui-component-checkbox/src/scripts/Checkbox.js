@@ -17,6 +17,7 @@
 
 import {ComponentMixin} from 'coralui-mixin-component';
 import {FormFieldMixin} from 'coralui-mixin-formfield';
+import 'coralui-component-icon';
 import base from '../templates/base';
 import {transform, commons} from 'coralui-util';
 

@@ -1,3 +1,8 @@
 <input type="checkbox" handle="input" class="coral3-Checkbox-input" id="{{Coral.commons.getUID()}}">
-<span class="coral3-Checkbox-checkmark" handle="checkbox"></span>
+<span class="coral3-Checkbox-box" handle="checkbox">
+  <coral-icon handle="icon" icon="spectrum-css-icon-CheckboxCheckmark"></coral-icon>
+  <js>
+    this.icon.querySelector('svg').classList.add('coral3-Checkbox-checkmark');
+  </js>
+</span>
 <label class="coral3-Checkbox-label" handle="labelWrapper" for="{{this.input.id}}" hidden></label>
