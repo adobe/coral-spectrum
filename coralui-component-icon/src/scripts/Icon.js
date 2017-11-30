@@ -16,8 +16,12 @@
  */
 import {ComponentMixin} from 'coralui-mixin-component';
 import {transform, validate} from 'coralui-util';
-import iconsPath from '@spectrum/spectrum-css/dist/icons/spectrum-icons.svg';
+import SPECTRUM_ICONS_PATH from '@spectrum/spectrum-css/dist/icons/spectrum-icons.svg';
+import SPECTRUM_CSS_ICONS_PATH from '@spectrum/spectrum-css/dist/icons/spectrum-css-icons.svg';
 import '@spectrum/spectrum-css/dist/icons/AS.loadIcons';
+
+const SPECTRUM_ICONS = 'spectrum-icons';
+const SPECTRUM_CSS_ICONS = 'spectrum-css-icons';
 
 /**
  Regex used to match URLs. Assume it's a URL if it has a slash, colon, or dot.
@@ -191,13 +195,22 @@ class Icon extends ComponentMixin(HTMLElement) {
   set alt(value) { this.setAttribute('alt', value); }
   
   _updateIcon() {
-    const iconName = capitalize(this.icon);
-    const svgSize = sizeMap[this.getAttribute('size') || size.SMALL];
-  
+    let iconId;
+    const isSpectrumCSSIcon = this.icon.indexOf('spectrum-css-icon') === 0;
+    
+    if (!isSpectrumCSSIcon) {
+      const iconName = capitalize(this.icon);
+      const svgSize = sizeMap[this.getAttribute('size') || size.SMALL];
+      iconId = `spectrum-icon-${svgSize}-${iconName}`;
+    }
+    else {
+      iconId = this.icon;
+    }
+    
     // Insert SVG Icon using HTML because creating it with JS doesn't work
     this.insertAdjacentHTML('beforeend', `
           <svg focusable="false" aria-hidden="true" class="${CLASSNAME}-svg">
-            <use xlink:href="#spectrum-icon-${svgSize}-${iconName}"></use>
+            <use xlink:href="#${iconId}"></use>
           </svg>
         `);
     
@@ -259,15 +272,22 @@ class Icon extends ComponentMixin(HTMLElement) {
   static get size() { return size; }
   
   /**
-   Loads the SVG icons. Called by default, it requests the icons based on the JS file path.
+   Loads the SVG icons. It's requesting the icons based on the JS file path by default.
    
    @param {String} [url] SVG icons url.
    */
   static load(url) {
-    if (!url) {
+    const resolveIconsPath = (iconsPath) => {
       const scripts = document.getElementsByTagName('script');
       const path = scripts[scripts.length - 1].src;
-      url = `${path.split('/').slice(0, -iconsPath.split('/').length).join('/')}/${iconsPath}`;
+      return `${path.split('/').slice(0, -iconsPath.split('/').length).join('/')}/${iconsPath}`;
+    };
+    
+    if (url === SPECTRUM_ICONS) {
+      url = resolveIconsPath(SPECTRUM_ICONS_PATH);
+    }
+    else if (url === SPECTRUM_CSS_ICONS) {
+      url = resolveIconsPath(SPECTRUM_CSS_ICONS_PATH);
     }
   
     window.AdobeSpectrum.loadIcons(url);
@@ -302,6 +322,7 @@ class Icon extends ComponentMixin(HTMLElement) {
 }
 
 // Load icons
-Icon.load();
+Icon.load(SPECTRUM_ICONS);
+Icon.load(SPECTRUM_CSS_ICONS);
 
 export default Icon;
