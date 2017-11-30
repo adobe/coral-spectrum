@@ -335,16 +335,6 @@ describe('Coral.Icon', function() {
   
         expect(icon._elements.svg.querySelector('use').href.baseVal.indexOf('24') !== -1).to.be.true;
       });
-  
-      it('should support spectrum-css icons', function() {
-        var icon = helpers.build(new Coral.Icon());
-        
-        const iconId = 'spectrum-css-icon-CheckboxCheckmark';
-        
-        icon.icon = iconId;
-        expect(icon.icon).to.equal(iconId);
-        expect(icon._elements.svg.querySelector('use').href.baseVal.indexOf(iconId) !== -1).to.be.true;
-      });
     });
   });
   

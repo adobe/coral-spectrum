@@ -195,17 +195,9 @@ class Icon extends ComponentMixin(HTMLElement) {
   set alt(value) { this.setAttribute('alt', value); }
   
   _updateIcon() {
-    let iconId;
-    const isSpectrumCSSIcon = this.icon.indexOf('spectrum-css-icon') === 0;
-    
-    if (!isSpectrumCSSIcon) {
-      const iconName = capitalize(this.icon);
-      const svgSize = sizeMap[this.getAttribute('size') || size.SMALL];
-      iconId = `spectrum-icon-${svgSize}-${iconName}`;
-    }
-    else {
-      iconId = this.icon;
-    }
+    const iconName = capitalize(this.icon);
+    const iconSize = sizeMap[this.getAttribute('size') || size.SMALL];
+    const iconId = `spectrum-icon-${iconSize}-${iconName}`;
     
     // Insert SVG Icon using HTML because creating it with JS doesn't work
     this.insertAdjacentHTML('beforeend', `
