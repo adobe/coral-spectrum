@@ -15,10 +15,25 @@
  * from Adobe Systems Incorporated.
  */
 
+const CLASSNAME = 'coral3-Accordion-header';
+
 /**
  @class Coral.Accordion.Item.Label
  @classdesc Accordion item's label component
  @htmltag coral-accordion-item-label
- @return {HTMLElement}
+ @extends {HTMLElement}
  */
-export default () => document.createElement('coral-accordion-item-label');
+class AccordionItemLabel extends HTMLElement {
+  /** @ignore */
+  connectedCallback() {
+    this.classList.add(CLASSNAME);
+  
+    // @spectrum this should be supported
+    this.style.display = 'block';
+  
+    // a11y
+    this.setAttribute('role', 'tab');
+  }
+}
+
+export default AccordionItemLabel;

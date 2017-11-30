@@ -8,15 +8,8 @@
   <script src="../build/js/coral.js"></script>
 
   <style>
-    .col {
-      width: 33%;
-      margin-right: 3%;
-      display: inline-block;
-      vertical-align: top;
-    }
-
     section {
-      padding: 12px;
+      padding: 15px;
     }
   </style>
 </head>
@@ -29,361 +22,127 @@
   </div>
 
   <section>
-    <div class="col">
-      <h2 class="coral-Heading coral-Heading--2">From markup with inline content</h2>
-      <h3 class="coral-Heading coral-Heading--3">No selection</h3>
-      <coral-accordion multiple>
-        <coral-accordion-item selected>
-          <coral-accordion-item-label>First</coral-accordion-item-label>
-          Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit.
-          <a class="coral-Link" href="#">Chocolate cake</a>
-          halvah chocolate cake candy canes powder chocolate croissant. Lollipop fruitcake muffin chocolate cake apple pie bear claw cookie tootsie roll. Chupa chups dessert icing gummies cake jelly pie sesame snaps. Wafer halvah cake sweet.
-        </coral-accordion-item>
-        <coral-accordion-item selected>
-          <coral-accordion-item-label>Second</coral-accordion-item-label>
-          Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit.
-          <a class="coral-Link" href="#">Chocolate cake</a>
-          halvah chocolate cake candy canes powder chocolate croissant. Lollipop fruitcake muffin chocolate cake apple pie bear claw cookie tootsie roll. Chupa chups dessert icing gummies cake jelly pie sesame snaps. Wafer halvah cake sweet.
-        </coral-accordion-item>
-      </coral-accordion>
+    <h1 class="coral-Heading coral-Heading--1">Coral.Accordion</h1>
 
-      <h3 class="coral-Heading coral-Heading--3">First item selected</h3>
-      <coral-accordion>
-        <coral-accordion-item selected>
-          <coral-accordion-item-label>First</coral-accordion-item-label>
-          This is the first bit o'content
-        </coral-accordion-item>
-        <coral-accordion-item>
-          <coral-accordion-item-label>Second</coral-accordion-item-label>
-          This is the second bit o'content
-        </coral-accordion-item>
-        <coral-accordion-item>
-          <coral-accordion-item-label>Third</coral-accordion-item-label>
-          This is the third bit o'content
-        </coral-accordion-item>
-      </coral-accordion>
-    </div>
+    <h2 class="coral-Heading coral-Heading--2">Default</h2>
+    <coral-accordion>
+      <coral-accordion-item selected>
+        <coral-accordion-item-label>First</coral-accordion-item-label>
+        This is the first bit o'content
+      </coral-accordion-item>
+      <coral-accordion-item>
+        <coral-accordion-item-label>Second</coral-accordion-item-label>
+        This is the second bit o'content
+      </coral-accordion-item>
+      <coral-accordion-item>
+        <coral-accordion-item-label>Third</coral-accordion-item-label>
+        This is the third bit o'content
+      </coral-accordion-item>
+    </coral-accordion>
 
-    <!-- Accordion disabled column -->
-    <div class="col">
-      <h2 class="coral-Heading coral-Heading--2">Disabled</h2>
-      <h3 class="coral-Heading coral-Heading--3">No selection</h3>
-      <coral-accordion>
-        <coral-accordion-item disabled><coral-accordion-item-label>First</coral-accordion-item-label>Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit.
-          <a class="coral-Link" href="#">Chocolate cake</a>
-          halvah chocolate cake candy canes powder chocolate croissant. Lollipop fruitcake muffin chocolate cake apple pie bear claw cookie tootsie roll. Chupa chups dessert icing gummies cake jelly pie sesame snaps. Wafer halvah cake sweet.
-        </coral-accordion-item>
-        <coral-accordion-item disabled><coral-accordion-item-label>Second</coral-accordion-item-label>Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit.
-          <a class="coral-Link" href="#">Chocolate cake</a>
-          halvah chocolate cake candy canes powder chocolate croissant. Lollipop fruitcake muffin chocolate cake apple pie bear claw cookie tootsie roll. Chupa chups dessert icing gummies cake jelly pie sesame snaps. Wafer halvah cake sweet.
-        </coral-accordion-item>
-      </coral-accordion>
+    <h2 class="coral-Heading coral-Heading--2">Multiple</h2>
+    <coral-accordion multiple>
+      <coral-accordion-item selected>
+        <coral-accordion-item-label>First</coral-accordion-item-label>
+        Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit.
+        <a class="coral-Link" href="#">Chocolate cake</a>
+        halvah chocolate cake candy canes powder chocolate croissant. Lollipop fruitcake muffin chocolate cake apple pie bear claw cookie tootsie roll. Chupa chups dessert icing gummies cake jelly pie sesame snaps. Wafer halvah cake sweet.
+      </coral-accordion-item>
+      <coral-accordion-item selected>
+        <coral-accordion-item-label>Second</coral-accordion-item-label>
+        Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit.
+        <a class="coral-Link" href="#">Chocolate cake</a>
+        halvah chocolate cake candy canes powder chocolate croissant. Lollipop fruitcake muffin chocolate cake apple pie bear claw cookie tootsie roll. Chupa chups dessert icing gummies cake jelly pie sesame snaps. Wafer halvah cake sweet.
+      </coral-accordion-item>
+    </coral-accordion>
 
-      <h3 class="coral-Heading coral-Heading--3">First item selected</h3>
-      <coral-accordion>
-        <coral-accordion-item selected disabled><coral-accordion-item-label>First</coral-accordion-item-label>This is the first bit o'content</coral-accordion-item>
-        <coral-accordion-item disabled><coral-accordion-item-label>Second</coral-accordion-item-label>This is the second bit o'content</coral-accordion-item>
-        <coral-accordion-item disabled><coral-accordion-item-label>Third</coral-accordion-item-label>This is the third bit o'content</coral-accordion-item>
-      </coral-accordion>
-    </div>
-  </section>
+    <h2 class="coral-Heading coral-Heading--2">Disabled</h2>
+    <coral-accordion>
+      <coral-accordion-item disabled><coral-accordion-item-label>First</coral-accordion-item-label>Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit.
+        <a class="coral-Link" href="#">Chocolate cake</a>
+        halvah chocolate cake candy canes powder chocolate croissant. Lollipop fruitcake muffin chocolate cake apple pie bear claw cookie tootsie roll. Chupa chups dessert icing gummies cake jelly pie sesame snaps. Wafer halvah cake sweet.
+      </coral-accordion-item>
+      <coral-accordion-item disabled selected><coral-accordion-item-label>Second</coral-accordion-item-label>Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit.
+        <a class="coral-Link" href="#">Chocolate cake</a>
+        halvah chocolate cake candy canes powder chocolate croissant. Lollipop fruitcake muffin chocolate cake apple pie bear claw cookie tootsie roll. Chupa chups dessert icing gummies cake jelly pie sesame snaps. Wafer halvah cake sweet.
+      </coral-accordion-item>
+    </coral-accordion>
 
-  <!-- JS section -->
-  <section>
-    <div class="col">
-      <h2 class="coral-Heading coral-Heading--2">From JavaScript</h2>
-      <div id="accordionFromJavaScript"></div>
+    <h2 class="coral-Heading coral-Heading--2">Nested</h2>
+    <coral-accordion>
+      <coral-accordion-item selected><coral-accordion-item-label>First</coral-accordion-item-label>This is the first bit o'content</coral-accordion-item>
+      <coral-accordion-item selected><coral-accordion-item-label>Second</coral-accordion-item-label>This is the second bit o'content</coral-accordion-item>
+      <coral-accordion-item selected>
+        <coral-accordion-item-label>Third</coral-accordion-item-label>
+        A NESTED ACCORDION!
+        <coral-accordion>
+          <coral-accordion-item>
+            <coral-accordion-item-label>First</coral-accordion-item-label>
+            <span tabindex="0">This is the first bit o'content</span></coral-accordion-item>
+          <coral-accordion-item selected>
+            <coral-accordion-item-label>Second</coral-accordion-item-label>
+            <span tabindex="0">This is the second bit o'content</span></coral-accordion-item>
+          <coral-accordion-item>
+            <coral-accordion-item-label>Third</coral-accordion-item-label>
+            <span tabindex="0">This is the third bit o'content</span></coral-accordion-item>
+        </coral-accordion>
+      </coral-accordion-item>
+    </coral-accordion>
 
-      <script>
-        var accordion = new Coral.Accordion();
-        accordion.items.add({
-          label: {
-            innerHTML: 'First'
-          },
-          content: {
-            innerHTML: 'This is the first bit o\'content'
-          }
-        });
+    <h2 class="coral-Heading coral-Heading--2">Interactive</h2>
+    <coral-accordion variant="large">
+      <coral-accordion-item selected><coral-accordion-item-label><input type="checkbox" coral-interactive><span>First</span></coral-accordion-item-label>This is the first bit o'content. And an icon for testing css<coral-icon icon="add"></coral-icon></coral-accordion-item>
+      <coral-accordion-item><coral-accordion-item-label><span>Second</span><button coral-interactive>Click Me</button></coral-accordion-item-label>This is the second bit o'content. And an icon for testing css<coral-icon icon="add"></coral-icon></coral-accordion-item>
+      <coral-accordion-item>
+        <coral-accordion-item-label>
+          <span>Third</span>
+          <select coral-interactive>
+            <option>Option 1</option>
+            <option>Option 2</option>
+            <option>Option 3</option>
+          </select>
+        </coral-accordion-item-label>This is the third bit o'content. And an icon for testing css<coral-icon icon="add"></coral-icon>
+      </coral-accordion-item>
+      <coral-accordion-item><coral-accordion-item-label><a href="#" coral-interactive>link</a></coral-accordion-item-label>This is the forth bit o'content</coral-accordion-item>
+      <coral-accordion-item><coral-accordion-item-label><textarea coral-interactive>title content</textarea></coral-accordion-item-label>This is the fifth bit o'content</coral-accordion-item>
+      <coral-accordion-item><coral-accordion-item-label><button coral-interactive>Click Me</button></coral-accordion-item-label>This is the seventh bit o'content</coral-accordion-item>
+      <coral-accordion-item><coral-accordion-item-label><div coral-interactive><button>Click Me</button><button>Or Me</button></div></coral-accordion-item-label>This is the eighth bit o'content</coral-accordion-item>
+    </coral-accordion>
 
-        accordion.items.add({
-          label: {
-            innerHTML: 'Second'
-          },
-          content: {
-            innerHTML: 'This is the second bit o\'content',
-          }
-        });
+    <h2 class="coral-Heading coral-Heading--2">From JavaScript</h2>
+    <div id="from-javascript"></div>
+    <script>
+      var accordion = new Coral.Accordion();
+      accordion.items.add({
+        label: {
+          innerHTML: 'First'
+        },
+        content: {
+          innerHTML: 'This is the first bit o\'content'
+        }
+      });
 
-        var item = accordion.items.add({
-          label: {
-            innerHTML: 'Third'
-          },
-          content: {
-            innerHTML: 'This is the third bit o\'content, with no subtitle'
-          }
-        });
+      accordion.items.add({
+        label: {
+          innerHTML: 'Second'
+        },
+        content: {
+          innerHTML: 'This is the second bit o\'content',
+        }
+      });
 
-        document.getElementById('accordionFromJavaScript').appendChild(accordion);
-      </script>
-      <h2 class="coral-Heading coral-Heading--2">From JavaScript Instances</h2>
-      <div id="accordionFromJavaScriptInstances"></div>
-      <script>
-        var accordion = new Coral.Accordion();
+      accordion.items.add({
+        label: {
+          innerHTML: 'Third'
+        },
+        content: {
+          innerHTML: 'This is the third bit o\'content, with no subtitle'
+        }
+      });
 
-        var itemInstance1 = new Coral.Accordion.Item();
-        itemInstance1.label.innerHTML = 'First';
-        itemInstance1.content.innerHTML = 'This is the first bit o\'content';
-        accordion.appendChild(itemInstance1);
+      document.getElementById('from-javascript').appendChild(accordion);
+    </script>
 
-        var itemInstance2 = new Coral.Accordion.Item();
-        itemInstance2.label.innerHTML = 'Second';
-        itemInstance2.content.innerHTML = 'This is the second bit o\'content';
-        accordion.appendChild(itemInstance2);
-
-        document.getElementById('accordionFromJavaScriptInstances').appendChild(accordion);
-
-      </script>
-    </div>
-
-    <!-- JS disabled column -->
-    <div class="col">
-      <h2 class="coral-Heading coral-Heading--2">Disabled</h2>
-      <div id="accordionFromJavaScriptDisabled"></div>
-
-      <script>
-        var accordion = new Coral.Accordion();
-        accordion.items.add({
-          label: {
-            innerHTML: 'First'
-          },
-          content: {
-            innerHTML: 'This is the first bit o\'content'
-          },
-          disabled: 'true'
-        });
-
-        accordion.items.add({
-          label: {
-            innerHTML: 'Second'
-          },
-          content: {
-            innerHTML: 'This is the second bit o\'content'
-          },
-          disabled: 'true'
-        });
-
-        var item = accordion.items.add({
-          label: {
-            innerHTML: 'Third'
-          },
-          content: {
-            innerHTML: 'This is the third bit o\'content, with no subtitle'
-          },
-          disabled: 'true'
-        });
-
-        document.getElementById('accordionFromJavaScriptDisabled').appendChild(accordion);
-      </script>
-      <h2 class="coral-Heading coral-Heading--2">Disabled</h2>
-      <div id="accordionFromJavaScriptDisabledInstances"></div>
-      <script>
-        var accordion = new Coral.Accordion();
-
-        var itemInstance1 = new Coral.Accordion.Item();
-        itemInstance1.label.innerHTML = 'First';
-        itemInstance1.content.innerHTML = 'This is the first bit o\'content';
-        itemInstance1.disabled = 'true'
-        accordion.appendChild(itemInstance1);
-
-        var itemInstance2 = new Coral.Accordion.Item();
-        itemInstance2.label.innerHTML = 'Second';
-        itemInstance2.content.innerHTML = 'This is the second bit o\'content';
-        itemInstance2.disabled = 'true'
-        accordion.appendChild(itemInstance2);
-
-        document.getElementById('accordionFromJavaScriptDisabledInstances').appendChild(accordion);
-
-      </script>
-    </div>
-
-  </section>
-
-  <section>
-    <div class="col">
-      <h2 class="coral-Heading coral-Heading--2">Nested Accordion</h2>
-
-      <coral-accordion>
-        <coral-accordion-item selected><coral-accordion-item-label>First</coral-accordion-item-label>This is the first bit o'content</coral-accordion-item>
-        <coral-accordion-item selected><coral-accordion-item-label>Second</coral-accordion-item-label>This is the second bit o'content</coral-accordion-item>
-        <coral-accordion-item selected>
-          <coral-accordion-item-label>Third</coral-accordion-item-label>
-          A NESTED ACCORDION!
-          <coral-accordion>
-            <coral-accordion-item>
-              <coral-accordion-item-label>First</coral-accordion-item-label>
-              <span tabindex="0">This is the first bit o'content</span></coral-accordion-item>
-            <coral-accordion-item selected>
-              <coral-accordion-item-label>Second</coral-accordion-item-label>
-              <span tabindex="0">This is the second bit o'content</span></coral-accordion-item>
-            <coral-accordion-item>
-              <coral-accordion-item-label>Third</coral-accordion-item-label>
-              <span tabindex="0">This is the third bit o'content</span></coral-accordion-item>
-          </coral-accordion>
-        </coral-accordion-item>
-      </coral-accordion>
-    </div>
-
-  </section>
-
-  <!-- Accordion quiet section -->
-  <section>
-    <div class="col">
-      <h3 class="coral-Heading coral-Heading--3">First item selected - quiet variant</h3>
-      <coral-accordion variant="quiet">
-        <coral-accordion-item selected><coral-accordion-item-label>First</coral-accordion-item-label>This is the first bit o'content. And an icon for testing css<coral-icon icon="add"></coral-icon></coral-accordion-item>
-        <coral-accordion-item><coral-accordion-item-label>Second</coral-accordion-item-label>This is the second bit o'content</coral-accordion-item>
-        <coral-accordion-item><coral-accordion-item-label>Third</coral-accordion-item-label>This is the third bit o'content</coral-accordion-item>
-      </coral-accordion>
-    </div>
-
-    <div class="col">
-      <h3 class="coral-Heading coral-Heading--3">Disabled</h3>
-      <coral-accordion variant="quiet">
-        <coral-accordion-item selected disabled><coral-accordion-item-label>First</coral-accordion-item-label>This is the first bit o'content</coral-accordion-item>
-        <coral-accordion-item disabled><coral-accordion-item-label>Second</coral-accordion-item-label>This is the second bit o'content</coral-accordion-item>
-        <coral-accordion-item disabled><coral-accordion-item-label>Third</coral-accordion-item-label>This is the third bit o'content</coral-accordion-item>
-      </coral-accordion>
-    </div>
-  </section>
-
-  <!-- Accordion large section -->
-  <section>
-    <div>
-      <h3 class="coral-Heading coral-Heading--3">First item selected - large variant</h3>
-      <coral-accordion variant="large">
-        <coral-accordion-item selected><coral-accordion-item-label>First</coral-accordion-item-label>This is the first bit o'content</coral-accordion-item>
-        <coral-accordion-item><coral-accordion-item-label>Second</coral-accordion-item-label>This is the second bit o'content</coral-accordion-item>
-        <coral-accordion-item><coral-accordion-item-label>Third</coral-accordion-item-label>This is the third bit o'content</coral-accordion-item>
-      </coral-accordion>
-    </div>
-  </section>
-
-  <section>
-    <div>
-      <h3 class="coral-Heading coral-Heading--3">First item selected - large variant - disabled</h3>
-      <coral-accordion variant="large">
-        <coral-accordion-item selected disabled><coral-accordion-item-label>First</coral-accordion-item-label>This is the first bit o'content</coral-accordion-item>
-        <coral-accordion-item><coral-accordion-item-label>Second</coral-accordion-item-label>This is the second bit o'content</coral-accordion-item>
-        <coral-accordion-item><coral-accordion-item-label>Third</coral-accordion-item-label>This is the third bit o'content</coral-accordion-item>
-      </coral-accordion>
-    </div>
-  </section>
-
-  <section>
-    <!-- collapsible enabled column -->
-    <div class="col">
-      <h3 class="coral-Heading coral-Heading--3">As collapsible panels</h3>
-      <coral-accordion>
-        <coral-accordion-item selected><coral-accordion-item-label>First</coral-accordion-item-label>This is the first bit o'content</coral-accordion-item>
-      </coral-accordion>
-
-      <coral-accordion>
-        <coral-accordion-item selected><coral-accordion-item-label>Second</coral-accordion-item-label>This is the second bit o'content</coral-accordion-item>
-      </coral-accordion>
-
-      <coral-accordion>
-        <coral-accordion-item selected><coral-accordion-item-label>Third</coral-accordion-item-label>This is the second bit o'content</coral-accordion-item>
-      </coral-accordion>
-    </div>
-    <!-- collapsible disabled column -->
-    <div class="col">
-      <h3 class="coral-Heading coral-Heading--3">Disabled</h3>
-      <coral-accordion>
-        <coral-accordion-item selected disabled><coral-accordion-item-label>First</coral-accordion-item-label>This is the first bit o'content</coral-accordion-item>
-      </coral-accordion>
-
-      <coral-accordion>
-        <coral-accordion-item selected disabled><coral-accordion-item-label>Second</coral-accordion-item-label>This is the second bit o'content</coral-accordion-item>
-      </coral-accordion>
-
-      <coral-accordion>
-        <coral-accordion-item selected disabled><coral-accordion-item-label>Third</coral-accordion-item-label>This is the second bit o'content</coral-accordion-item>
-      </coral-accordion>
-    </div>
-
-  </section>
-
-  <section>
-    <div class="col">
-      <h3 class="coral-Heading coral-Heading--3">With selected item</h3>
-      <coral-accordion>
-        <coral-accordion-item selected>
-          <coral-accordion-item-label>Collapsible</coral-accordion-item-label>
-          Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit.
-          <a class="coral-Link" href="#">Chocolate cake</a>
-          halvah chocolate cake candy canes powder chocolate croissant. Lollipop fruitcake muffin chocolate cake apple pie bear claw cookie tootsie roll. Chupa chups dessert icing gummies cake jelly pie sesame snaps. Wafer halvah cake sweet.
-        </coral-accordion-item>
-      </coral-accordion>
-    </div>
-    <div class="col">
-      <h3 class="coral-Heading coral-Heading--3">Disabled</h3>
-      <coral-accordion>
-        <coral-accordion-item selected disabled>
-          <coral-accordion-item-label>Collapsible</coral-accordion-item-label>
-          Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit.
-          <a class="coral-Link" href="#">Chocolate cake</a>
-          halvah chocolate cake candy canes powder chocolate croissant. Lollipop fruitcake muffin chocolate cake apple pie bear claw cookie tootsie roll. Chupa chups dessert icing gummies cake jelly pie sesame snaps. Wafer halvah cake sweet.
-        </coral-accordion-item>
-      </coral-accordion>
-    </div>
-  </section>
-
-  <!-- collapsible large section -->
-  <section>
-    <div>
-      <h3 class="coral-Heading coral-Heading--3">Block</h3>
-      <coral-accordion variant="large">
-        <coral-accordion-item selected>
-          <coral-accordion-item-label>Collapsed</coral-accordion-item-label>
-          Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit.
-          <a class="coral-Link" href="#">Chocolate cake</a>
-          halvah chocolate cake candy canes powder chocolate croissant. Lollipop fruitcake muffin chocolate cake apple pie bear claw cookie tootsie roll. Chupa chups dessert icing gummies cake jelly pie sesame snaps. Wafer halvah cake sweet.
-        </coral-accordion-item>
-      </coral-accordion>
-
-      <h3 class="coral-Heading coral-Heading--3">Disabled</h3>
-      <coral-accordion variant="large">
-        <coral-accordion-item disabled><coral-accordion-item-label>Collapsed</coral-accordion-item-label>Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit.
-          <a class="coral-Link" href="#">Chocolate cake</a>
-          halvah chocolate cake candy canes powder chocolate croissant. Lollipop fruitcake muffin chocolate cake apple pie bear claw cookie tootsie roll. Chupa chups dessert icing gummies cake jelly pie sesame snaps. Wafer halvah cake sweet.
-        </coral-accordion-item>
-      </coral-accordion>
-    </div>
-  </section>
-
-  <!-- coral-interactive usage -->
-  <section>
-    <div class="col">
-      <h3 class="coral-Heading coral-Heading--3">First item selected - clickables in item label variants</h3>
-      <coral-accordion variant="large">
-        <coral-accordion-item selected><coral-accordion-item-label><input type="checkbox" coral-interactive><span>First</span></coral-accordion-item-label>This is the first bit o'content. And an icon for testing css<coral-icon icon="add"></coral-icon></coral-accordion-item>
-        <coral-accordion-item><coral-accordion-item-label><span>Second</span><button coral-interactive>Click Me</button></coral-accordion-item-label>This is the second bit o'content. And an icon for testing css<coral-icon icon="add"></coral-icon></coral-accordion-item>
-        <coral-accordion-item>
-          <coral-accordion-item-label>
-            <span>Third</span>
-            <select coral-interactive>
-              <option>Option 1</option>
-              <option>Option 2</option>
-              <option>Option 3</option>
-            </select>
-          </coral-accordion-item-label>This is the third bit o'content. And an icon for testing css<coral-icon icon="add"></coral-icon>
-        </coral-accordion-item>
-        <coral-accordion-item><coral-accordion-item-label><a href="#" coral-interactive>link</a></coral-accordion-item-label>This is the forth bit o'content</coral-accordion-item>
-        <coral-accordion-item><coral-accordion-item-label><textarea coral-interactive>title content</textarea></coral-accordion-item-label>This is the fifth bit o'content</coral-accordion-item>
-        <coral-accordion-item><coral-accordion-item-label><button coral-interactive>Click Me</button></coral-accordion-item-label>This is the seventh bit o'content</coral-accordion-item>
-        <coral-accordion-item><coral-accordion-item-label><div coral-interactive><button>Click Me</button><button>Or Me</button></div></coral-accordion-item-label>This is the eighth bit o'content</coral-accordion-item>
-      </coral-accordion>
-    </div>
   </section>
 </body>
 </html>

@@ -1,22 +1,17 @@
 describe('Coral.Accordion', function() {
   // Assert whether an item is properly active or inactive.
   var assertActiveness = function(item, isSelected) {
-    var content = item._elements.acContent;
-    var header = item._elements.acHeader;
-
-    // make sure that the CSS3 transition is executed
-    item._onCollapsed();
+    var content = item._elements.content;
+    var header = item._elements.label;
 
     if (isSelected) {
-      expect(item.classList.contains('is-selected')).to.be.true;
+      expect(item.classList.contains('is-open')).to.be.true;
       expect(header.getAttribute('aria-selected')).to.equal('true');
       expect(header.getAttribute('aria-expanded')).to.equal('true');
       expect(content.getAttribute('aria-hidden')).to.equal('false');
-      expect(parseInt(getComputedStyle(content).height)).to.be.above(0);
-      expect(getComputedStyle(content).display).to.equal('block');
     }
     else {
-      expect(item.classList.contains('is-selected')).to.be.false;
+      expect(item.classList.contains('is-open')).to.be.false;
       expect(header.getAttribute('aria-expanded')).to.equal('false');
       expect(header.getAttribute('aria-selected')).to.equal('false');
       expect(content.getAttribute('aria-hidden')).to.equal('true');
@@ -171,15 +166,14 @@ describe('Coral.Accordion', function() {
     });
   
     describe('#variant', function() {
-      it('should add the variant class ', function() {
+      it('should set the variant', function() {
         const el = helpers.build(window.__html__['Coral.Accordion.base.html']);
         el.variant = Coral.Accordion.variant.LARGE;
-        expect(el.classList.contains('coral3-Accordion--large')).to.be.true;
+        expect(el.variant).to.equal('large');
         el.variant = Coral.Accordion.variant.QUIET;
-        expect(el.classList.contains('coral3-Accordion--quiet')).to.be.true;
+        expect(el.variant).to.equal('quiet');
         el.variant = Coral.Accordion.variant.DEFAULT;
-        expect(el.classList.contains('coral3-Accordion--default')).to.be.false;
-        expect(el.classList.contains('coral3-Accordion--quiet')).to.be.false;
+        expect(el.variant).to.equal('default');
       });
     });
     
@@ -242,20 +236,6 @@ describe('Coral.Accordion', function() {
   
         assertActiveness(forthItem, true);
         expect(checkbox.checked).to.be.true;
-      });
-
-      it('should expand collapsible in accordion while clicking on the chevron while a child tag has the coral-interactive attribute in the item label', function() {
-        const el = helpers.build(window.__html__['Coral.Accordion.label.interaction.html']);
-        var firstItem = el.items.getAll()[0];
-        var chevron = firstItem.querySelector('[handle="icon"]');
-  
-        expect(chevron).to.exist;
-  
-        chevron.click();
-        assertActiveness(firstItem, false);
-  
-        chevron.click();
-        assertActiveness(firstItem, true);
       });
 
       it('should not expand collapsible in accordion while clicking on a button in the item label', function() {
@@ -381,7 +361,7 @@ describe('Coral.Accordion', function() {
       });
     });
     
-    describe('coral-collection:remove', function() {
+    describe('#coral-collection:remove', function() {
       it('should trigger coral-collection:remove when removing an item', function(done) {
         const el = helpers.build(window.__html__['Coral.Accordion.base.html']);
         var removeSpy = sinon.spy();
@@ -437,37 +417,13 @@ describe('Coral.Accordion', function() {
         const el = helpers.build(window.__html__['Coral.Accordion.base.html']);
         expect(el.getAttribute('role')).to.equal('tablist');
         expect(el.querySelectorAll('[role=presentation]').length).equal(3);
-        expect(el.querySelectorAll('div[role=tabpanel]').length).equal(3);
+        expect(el.querySelectorAll('[role=tabpanel]').length).equal(3);
 
         expect(el.querySelector('[role=tab]').getAttribute('aria-controls'))
-          .equal(el.querySelector('div[role=tabpanel]').getAttribute('id'));
+          .equal(el.querySelector('[role=tabpanel]').getAttribute('id'));
 
-        expect(el.querySelector('div[role=tabpanel]').getAttribute('aria-labelledby'))
+        expect(el.querySelector('[role=tabpanel]').getAttribute('aria-labelledby'))
           .equal(el.querySelector('[role=tab]').getAttribute('id'));
-      });
-    });
-
-    describe('animation', function () {
-      it('should adapt styling after collapsing out', function() {
-        const el = helpers.build(window.__html__['Coral.Accordion.base.html']);
-        var secondItem = el.items.getAll()[1];
-        secondItem._selected = true;
-        secondItem._onCollapsed();
-        expect(secondItem._elements.acContent.classList.contains('is-collapsing')).to.be.false;
-        expect(secondItem._elements.acContent.classList.contains('is-closed')).to.be.false;
-        expect(secondItem._elements.acContent.classList.contains('is-open')).to.be.true;
-        expect(secondItem._elements.acContent.style.height).to.be.equal('');
-      });
-
-      it('should adapt styling after collapsing in', function() {
-        const el = helpers.build(window.__html__['Coral.Accordion.base.html']);
-        var secondItem = el.items.getAll()[1];
-        secondItem._selected = false;
-        secondItem._onCollapsed();
-        expect(secondItem._elements.acContent.classList.contains('is-collapsing')).to.be.false;
-        expect(secondItem._elements.acContent.classList.contains('is-closed')).to.be.true;
-        expect(secondItem._elements.acContent.classList.contains('is-open')).to.be.false;
-        expect(secondItem._elements.acContent.style.height).to.be.equal('0px');
       });
     });
   });

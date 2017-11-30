@@ -15,10 +15,22 @@
  * from Adobe Systems Incorporated.
  */
 
+const CLASSNAME = 'coral3-Accordion-content';
+
 /**
  @class Coral.Accordion.Item.Content
  @classdesc Accordion item's content component
  @htmltag coral-accordion-item-content
- @return {HTMLElement}
+ @extends {HTMLElement}
  */
-export default () => document.createElement('coral-accordion-item-content');
+class AccordionItemContent extends HTMLElement {
+  /** @ignore */
+  connectedCallback() {
+    this.classList.add(CLASSNAME);
+    
+    // a11y
+    this.setAttribute('role', 'tabpanel');
+  }
+}
+
+export default AccordionItemContent;

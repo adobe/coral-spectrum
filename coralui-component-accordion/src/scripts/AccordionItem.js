@@ -16,17 +16,10 @@
  */
 
 import {ComponentMixin} from 'coralui-mixin-component';
-import 'coralui-component-icon';
-import item from '../templates/item';
 import {transform, commons} from 'coralui-util';
+import {Icon} from 'coralui-component-icon';
 
 const CLASSNAME = 'coral3-Accordion-item';
-
-// Chevron classes for selected states
-const CHEVRON_CLASSES = {
-  true: 'chevronDown',
-  false: 'chevronRight'
-};
 
 /**
  @class Coral.Accordion.Item
@@ -46,7 +39,6 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
       label: this.querySelector('coral-accordion-item-label') || document.createElement('coral-accordion-item-label'),
       content: this.querySelector('coral-accordion-item-content') || document.createElement('coral-accordion-item-content')
     };
-    item.call(this._elements);
   }
   
   /**
@@ -63,7 +55,9 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
       handle: 'label',
       tagName: 'coral-accordion-item-label',
       insert: function(label) {
-        this._elements.labelContainer.appendChild(label);
+        this._setAria(label, this._elements.content);
+        
+        this.insertBefore(label, this.firstChild);
       }
     });
   }
@@ -82,7 +76,9 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
       handle: 'content',
       tagName: 'coral-accordion-item-content',
       insert: function(content) {
-        this._elements.acContent.appendChild(content);
+        this._setAria(this._elements.label, content);
+        
+        this.appendChild(content);
       }
     });
   }
@@ -103,50 +99,13 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
     this._selected = this.disabled ? false : transform.booleanAttr(value);
     this._reflectAttribute('selected', this._selected);
     
-    this.classList.toggle('is-selected', this._selected);
+    this.classList.toggle('is-open', this._selected);
     this.removeAttribute('aria-selected');
-    this._elements.acHeader.setAttribute('aria-selected', this._selected);
-    this._elements.acHeader.setAttribute('aria-expanded', this._selected);
-    this._elements.acContent.setAttribute('aria-hidden', !this._selected);
-    this._elements.icon.icon = CHEVRON_CLASSES[this._selected];
+    this._elements.label.setAttribute('aria-selected', this._selected);
+    this._elements.label.setAttribute('aria-expanded', this._selected);
+    this._elements.content.setAttribute('aria-hidden', !this._selected);
   
-    const animateElement = this._elements.acContent;
-  
-    // eslint-disable-next-line no-unused-vars
-    let offsetHeight;
-    if (!this._animate) {
-      this._animate = true;
-      if (this._selected) {
-        animateElement.classList.add('is-open');
-      }
-      else {
-        animateElement.classList.add('is-closed');
-        animateElement.style.height = '0';
-      }
-    }
-    else {
-      if (this._selected) {
-        animateElement.classList.remove('is-closed');
-        animateElement.classList.add('is-collapsing');
-        animateElement.style.height = `${animateElement.scrollHeight}px`;
-      }
-      else {
-        animateElement.style.height = `${animateElement.scrollHeight}px`;
-        // We read the offset height to force a reflow, this is needed to start the transition between absolute values
-        // https://blog.alexmaccaw.com/css-transitions under Redrawing
-        offsetHeight = animateElement.offsetHeight;
-        animateElement.classList.add('is-collapsing');
-        animateElement.classList.remove('is-open');
-        animateElement.style.height = 0;
-      }
-    
-      const self = this;
-      commons.transitionEnd(animateElement, () => {
-        self._onCollapsed();
-      });
-  
-      this.trigger('coral-accordion-item:_selectedchanged');
-    }
+    this.trigger('coral-accordion-item:_selectedchanged');
   }
   
   /**
@@ -165,7 +124,7 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
   
     this.classList.toggle('is-disabled', this.disabled);
     this.removeAttribute('aria-disabled');
-    this._elements.acHeader.setAttribute('aria-disabled', this.disabled);
+    this._elements.label.setAttribute('aria-disabled', this.disabled);
   
     this.selected = this.selected;
   }
@@ -178,28 +137,34 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
     this.__isTabTarget = value;
     
     if (this.disabled) {
-      this._elements.acHeader.removeAttribute('tabindex');
+      this._elements.label.removeAttribute('tabindex');
     }
     else {
-      this._elements.acHeader.setAttribute('tabindex', this.__isTabTarget ? '0' : '-1');
+      this._elements.label.setAttribute('tabindex', this.__isTabTarget ? '0' : '-1');
     }
   }
   
-  /** @private **/
-  _onCollapsed() {
-    // Handles styling of the container after collapsing.
-    const animateElement = this._elements.acContent;
-    animateElement.classList.remove('is-collapsing');
-    animateElement.classList.add('is-closed');
-    if (this.selected) {
-      animateElement.classList.add('is-open');
-      animateElement.classList.remove('is-closed');
-      animateElement.style.height = '';
+  _insertTemplate() {
+    const iconId = 'spectrum-css-icon-AccordionChevron';
+    const classes = ['coral3-Accordion-indicator', 'coral3-Accordion-icon'];
+    
+    if (this.label) {
+      this.label.insertAdjacentHTML('afterend', Icon._renderSVG(iconId, classes));
+    }
+    else if (this.content) {
+      this.content.insertAdjacentHTML('beforebegin', Icon._renderSVG(iconId, classes));
     }
     else {
-      animateElement.classList.add('is-closed');
-      animateElement.classList.remove('is-open');
+      this.innerHTML = Icon._renderSVG(iconId, classes);
     }
+  }
+  
+  _setAria(label, content) {
+    label.id = label.id || commons.getUID();
+    content.id = content.id || commons.getUID();
+  
+    label.setAttribute('aria-controls', content.id);
+    content.setAttribute('aria-labelledby', label.id);
   }
   
   /**
@@ -208,7 +173,7 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
    @ignore
    */
   focus() {
-    this._elements.acHeader.focus();
+    this._elements.label.focus();
   }
   
   get _contentZones() { return {'coral-accordion-item-label': 'label', 'coral-accordion-item-content': 'content'}; }
@@ -223,48 +188,32 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
     super.connectedCallback();
     
     this.classList.add(CLASSNAME);
-    
-    const header = this._elements.acHeader;
   
     // a11y
-    header.setAttribute('aria-controls', this._elements.acContent.id);
-    this._elements.acContent.setAttribute('aria-labelledby', header.id);
     this.setAttribute('role', 'presentation');
-    
-    // Defaults
-    this.selected = this.selected;
-    
-    // Render the template and set element references
-    const frag = document.createDocumentFragment();
-    
-    const templateHandleNames = ['acHeader', 'icon', 'labelContainer', 'acContent'];
-    
-    frag.appendChild(this._elements.acHeader);
-    frag.appendChild(this._elements.acContent);
-    
-    const label = this._elements.label;
-    const content = this._elements.content;
   
-    // Assign the content zones, moving them into place in the process
-    this.label = label;
-    this.content = content;
-  
-    // Move any remaining elements into the content sub-component
-    while (this.firstChild) {
-      const child = this.firstChild;
-      if (child.nodeType === Node.TEXT_NODE ||
-        child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
-        // Add non-template elements to the content
-        content.appendChild(child);
-      }
-      else {
-        // Remove anything else element
-        this.removeChild(child);
+    // Support cloneNode
+    const template = this.querySelector('.coral3-Accordion-icon');
+    if (template) {
+      template.remove();
+    }
+    
+    // Move content into the content zone if not specified
+    if (!this._elements.content.parentNode) {
+      while (this.firstChild) {
+        this._elements.content.appendChild(this.firstChild);
       }
     }
   
-    // Lastly, add the fragment into the container
-    this.appendChild(frag);
+    // Assign the content zones, moving them into place in the process
+    this.label = this._elements.label;
+    this.content = this._elements.content;
+  
+    // Insert template once content zones are placed
+    this._insertTemplate();
+    
+    // Defaults
+    this.selected = this.selected;
   }
 }
 

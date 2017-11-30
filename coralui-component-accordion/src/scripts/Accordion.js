@@ -33,9 +33,9 @@ const UP_ARROW = 38;
  @property {String} DEFAULT
  Default look and feel.
  @property {String} QUIET
- Quiet variant with minimal borders.
+ Not supported. Falls back to DEFAULT.
  @property {String} LARGE
- Large variant, typically used inside a navigation rail since it does not have borders on the sides.
+ Not supported. Falls back to DEFAULT.
  */
 const variant = {
   DEFAULT: 'default',
@@ -45,12 +45,6 @@ const variant = {
 
 // the accordions's base classname
 const CLASSNAME = 'coral3-Accordion';
-
-// builds a string with all the possible class names to be able to handle variant changes
-const ALL_VARIANT_CLASSES = [];
-for (const variantValue in variant) {
-  ALL_VARIANT_CLASSES.push(`${CLASSNAME}--${variant[variantValue]}`);
-}
 
 /**
  @class Coral.Accordion
@@ -66,19 +60,19 @@ class Accordion extends ComponentMixin(HTMLElement) {
     
     // Attach events
     this._delegateEvents({
-      'click coral-accordion-item:not([disabled]) [handle="acHeader"]': '_onItemClick',
+      'click coral-accordion-item:not([disabled]) coral-accordion-item-label': '_onItemClick',
   
-      'key:space [handle="acHeader"]': '_onToggleItemKey',
-      'key:return [handle="acHeader"]': '_onToggleItemKey',
-      'key:pageup [handle="acHeader"]': '_focusPreviousItem',
-      'key:left [handle="acHeader"]': '_focusPreviousItem',
-      'key:up [handle="acHeader"]': '_focusPreviousItem',
-      'key:pagedown [handle="acHeader"]': '_focusNextItem',
-      'key:right [handle="acHeader"]': '_focusNextItem',
-      'key:down [handle="acHeader"]': '_focusNextItem',
-      'key:home [handle="acHeader"]': '_onHomeKey',
-      'key:end [handle="acHeader"]': '_onEndKey',
-      'keydown [handle="acContent"]': '_onItemContentKeyDown',
+      'key:space coral-accordion-item-label': '_onToggleItemKey',
+      'key:return coral-accordion-item-label': '_onToggleItemKey',
+      'key:pageup coral-accordion-item-label': '_focusPreviousItem',
+      'key:left coral-accordion-item-label': '_focusPreviousItem',
+      'key:up coral-accordion-item-label': '_focusPreviousItem',
+      'key:pagedown coral-accordion-item-label': '_focusNextItem',
+      'key:right coral-accordion-item-label': '_focusNextItem',
+      'key:down coral-accordion-item-label': '_focusNextItem',
+      'key:home coral-accordion-item-label': '_onHomeKey',
+      'key:end coral-accordion-item-label': '_onEndKey',
+      'keydown coral-accordion-item-label': '_onItemContentKeyDown',
       
       // private
       'coral-accordion-item:_selectedchanged': '_onItemSelectedChanged'
@@ -106,12 +100,6 @@ class Accordion extends ComponentMixin(HTMLElement) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
-
-    this.classList.remove(...ALL_VARIANT_CLASSES);
-
-    if (this._variant !== variant.DEFAULT) {
-      this.classList.add(`${CLASSNAME}--${this._variant}`);
-    }
   }
   
   /**
