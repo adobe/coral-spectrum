@@ -429,5 +429,15 @@ describe('Coral.Icon', function() {
         expect(icon._elements.image.getAttribute('alt')).to.equal('');
       });
     });
+    
+    describe('SVG', function() {
+      it('should render the SVG markup', function() {
+        helpers.target.innerHTML = Coral.Icon._renderSVG('testId', ['testClass']);
+        
+        const svg = helpers.target.querySelector('svg');
+        expect(svg.classList.contains('testClass')).to.be.true;
+        expect(svg.querySelector('use').href.baseVal.indexOf('testId') !== -1).to.be.true;
+      });
+    });
   });
 });

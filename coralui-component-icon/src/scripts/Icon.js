@@ -200,11 +200,7 @@ class Icon extends ComponentMixin(HTMLElement) {
     const iconId = `spectrum-icon-${iconSize}-${iconName}`;
     
     // Insert SVG Icon using HTML because creating it with JS doesn't work
-    this.insertAdjacentHTML('beforeend', `
-          <svg focusable="false" aria-hidden="true" class="${CLASSNAME}-svg">
-            <use xlink:href="#${iconId}"></use>
-          </svg>
-        `);
+    this.insertAdjacentHTML('beforeend', this.constructor._renderSVG(iconId));
     
     this._elements.svg = this.lastElementChild;
   }
@@ -254,6 +250,24 @@ class Icon extends ComponentMixin(HTMLElement) {
     else {
       this.setAttribute('aria-label', altText);
     }
+  }
+  
+  /**
+   Returns the SVG markup.
+   
+   @param {String} iconId
+   @param {Array.<String>} additionalClasses
+   @return {String}
+   */
+  static _renderSVG(iconId, additionalClasses=[]) {
+    additionalClasses.unshift(CLASSNAME);
+    additionalClasses.unshift(`${CLASSNAME}-svg`);
+    
+    return `
+      <svg focusable="false" aria-hidden="true" class="${additionalClasses.join(' ')}">
+        <use xlink:href="#${iconId}"></use>
+      </svg>
+    `;
   }
   
   /**
