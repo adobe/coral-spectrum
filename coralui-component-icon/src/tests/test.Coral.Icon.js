@@ -325,6 +325,16 @@ describe('Coral.Icon', function() {
         expect(icon.classList.contains('coral3-Icon--sizeXS')).to.be.true;
         expect(icon.classList.contains('coral3-Icon--sizeME')).to.be.true;
       });
+      
+      it('should update the icon if the size changed', function() {
+        var icon = helpers.build(new Coral.Icon());
+        icon.icon = 'add';
+        expect(icon._elements.svg.querySelector('use').href.baseVal.indexOf('18') !== -1).to.be.true;
+  
+        icon.size = 'XXL';
+  
+        expect(icon._elements.svg.querySelector('use').href.baseVal.indexOf('24') !== -1).to.be.true;
+      });
     });
   });
   

@@ -16,8 +16,8 @@
  */
 import {ComponentMixin} from 'coralui-mixin-component';
 import {transform, validate} from 'coralui-util';
-import iconsPath from '@spectrum/spectrum-icons/svg/spectrum-icons.svg';
-import '@spectrum/spectrum-icons/svg/AS.loadIcons';
+import iconsPath from '@spectrum/spectrum-css/dist/icons/spectrum-icons.svg';
+import '@spectrum/spectrum-css/dist/icons/AS.loadIcons';
 
 /**
  Regex used to match URLs. Assume it's a URL if it has a slash, colon, or dot.
@@ -82,6 +82,17 @@ for (const sizeValue in size) {
   ALL_SIZE_CLASSES.push(`${CLASSNAME}--size${size[sizeValue]}`);
 }
 
+// Based on https://git.corp.adobe.com/pages/Spectrum/spectrum-css/icons/
+const sizeMap = {
+  XXS: 18,
+  XS: 24,
+  S: 18,
+  M: 24,
+  L: 18,
+  XL: 24,
+  XXL: 24
+};
+
 /**
  @class Coral.Icon
  @classdesc An Icon component. Icon ships with a set of SVG icons.
@@ -132,14 +143,7 @@ class Icon extends ComponentMixin(HTMLElement) {
         this.appendChild(this._elements.image);
       }
       else {
-        // Insert SVG Icon using HTML because creating it with JS doesn't work
-        const iconName = capitalize(this._icon);
-        this.insertAdjacentHTML('beforeend', `
-          <svg focusable="false" aria-hidden="true" class="${CLASSNAME}-svg">
-            <use xlink:href="#spectrum-icon-24-${iconName}"></use>
-          </svg>
-        `);
-        this._elements.svg = this.lastElementChild;
+        this._updateIcon();
       }
     }
     
@@ -158,6 +162,8 @@ class Icon extends ComponentMixin(HTMLElement) {
     return this._size || size.SMALL;
   }
   set size(value) {
+    const oldSize = this._size;
+    
     value = transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) && value || size.SMALL;
     this._reflectAttribute('size', this._size);
@@ -166,6 +172,12 @@ class Icon extends ComponentMixin(HTMLElement) {
     this.classList.remove(...ALL_SIZE_CLASSES);
     // adds the new size
     this.classList.add(`${CLASSNAME}--size${this._size}`);
+    
+    // We need to update the icon if the size changed
+    if (oldSize && oldSize !== this._size && this.contains(this._elements.svg)) {
+      this._elements.svg.remove();
+      this._updateIcon();
+    }
     
     this._updateAltText();
   }
@@ -177,6 +189,20 @@ class Icon extends ComponentMixin(HTMLElement) {
   /** @private */
   get alt() { return this.getAttribute('alt'); }
   set alt(value) { this.setAttribute('alt', value); }
+  
+  _updateIcon() {
+    const iconName = capitalize(this.icon);
+    const svgSize = sizeMap[this.getAttribute('size') || size.SMALL];
+  
+    // Insert SVG Icon using HTML because creating it with JS doesn't work
+    this.insertAdjacentHTML('beforeend', `
+          <svg focusable="false" aria-hidden="true" class="${CLASSNAME}-svg">
+            <use xlink:href="#spectrum-icon-${svgSize}-${iconName}"></use>
+          </svg>
+        `);
+    
+    this._elements.svg = this.lastElementChild;
+  }
   
   /**
    Updates the aria-label or img alt attribute depending on value of alt, title or icon.

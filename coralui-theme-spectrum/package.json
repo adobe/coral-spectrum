@@ -3,8 +3,7 @@
   "version": "3.0.0",
   "description": "Spectrum theme",
   "dependencies": {
-    "@spectrum/spectrum-css": "^2.0.0-beta.62",
-    "@spectrum/spectrum-icons": "^1.0.0-beta.7"
+    "@spectrum/spectrum-css": "^2.0.0-beta.63"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
