@@ -26,26 +26,31 @@ import {transform, validate} from 'coralui-util';
  @property {String} CTA
  A button that is meant to grab the user's attention.
  @property {String} PRIMARY
- A button that indicates that the button's action is the primary action.
+ A default button that indicates that the button's action is the primary action.
  @property {String} SECONDARY
- An alias to secondary, included for backwards compatibility.
- @property {String} DEFAULT
- A default, gray button.
+ A button that indicates that the button's action is the secondary action.
  @property {String} QUIET
- A button with no border or background.
+ A quiet button that indicates that the button's action is the primary action.
+ @property {String} MINIMAL
+ A quiet button that indicates that the button's action is the secondary action.
  @property {String} WARNING
  A button that indicates that the button's action is dangerous.
- @property {String} MINIMAL
- A minimal button with no background or border.
+ @property {String} ICON
+ A quiet icon only button.
+ @property {String} DEFAULT
+ Not supported. Falls back to SECONDARY.
  */
 const variant = {
   CTA: 'cta',
   PRIMARY: 'primary',
   SECONDARY: 'secondary',
-  DEFAULT: 'secondary',
   QUIET: 'quiet',
+  MINIMAL: 'minimal',
   WARNING: 'warning',
-  MINIMAL: 'minimal'
+  ICON: 'icon',
+  DEFAULT: 'secondary',
+  // Private to be used for custom Button classes like toggle, dropdown and action
+  _CUSTOM: '_custom'
 };
 
 // the button's base classname
@@ -55,7 +60,20 @@ const CLASSNAME = 'coral3-Button';
 // changes
 const ALL_VARIANT_CLASSES = [];
 for (const variantValue in variant) {
-  ALL_VARIANT_CLASSES.push(`${CLASSNAME}--${variant[variantValue]}`);
+  let value;
+  if (variantValue === 'QUIET') {
+    value = `${CLASSNAME}--${variant.QUIET}--primary`;
+  }
+  else if (variantValue === 'MINIMAL') {
+    value = `${CLASSNAME}--${variant.QUIET}--secondary`;
+  }
+  else {
+    value = `${CLASSNAME}--${variant[variantValue]}`;
+  }
+  
+  if (variantValue !== '_CUSTOM') {
+    ALL_VARIANT_CLASSES.push(value);
+  }
 }
 
 /**
@@ -66,7 +84,7 @@ for (const variantValue in variant) {
  @property {String} MEDIUM
  A medium button is the default, normal sized button.
  @property {String} LARGE
- A large button, which is larger than a medium button.
+ Not supported. Falls back to MEDIUM.
  */
 const size = {
   MEDIUM: 'M',
@@ -177,22 +195,23 @@ const ButtonMixin = (superClass) => class extends superClass {
   
   /**
    Size of the icon. It accepts both lower and upper case sizes. See {@link IconSizeEnum}.
+   "EXTRA_SMALL" is the icon only size currently supported.
    
    @type {String}
-   @default IconSizeEnum.SMALL
+   @default IconSizeEnum.EXTRA_SMALL
    @htmlattribute iconsize
    */
   get iconSize() {
-    return this._elements.icon && this._elements.icon.size || Icon.size.SMALL;
+    return this._iconSize || Icon.size.EXTRA_SMALL;
   }
   set iconSize(value) {
-    this._getIconElement().size = value;
+    value = transform.string(value).toUpperCase();
+    this._iconSize = validate.enumeration(Icon.size)(value) && value || Icon.size.EXTRA_SMALL;
   }
   
   /**
-   The size of the button. It accepts both lower and upper case sizes. Currently only "M" (the default) and "L"
-   are available.
-   See {@link ButtonSizeEnum}.
+   The size of the button. It accepts both lower and upper case sizes. See {@link ButtonSizeEnum}.
+   Currently only "MEDIUM" is supported.
    
    @type {String}
    @default ButtonSizeEnum.MEDIUM
@@ -206,8 +225,6 @@ const ButtonMixin = (superClass) => class extends superClass {
     value = transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) && value || size.MEDIUM;
     this._reflectAttribute('size', this._size);
-  
-    this.classList.toggle(`${CLASSNAME}--large`, this._size === size.LARGE);
   }
   
   /**
@@ -263,22 +280,33 @@ const ButtonMixin = (superClass) => class extends superClass {
    The button's variant. See {@link ButtonVariantEnum}.
    
    @type {String}
-   @default ButtonVariantEnum.SECONDARY
+   @default ButtonVariantEnum.PRIMARY
    @htmlattribute variant
    @htmlattributereflected
    */
   get variant() {
-    return this._variant || variant.SECONDARY;
+    return this._variant || variant.PRIMARY;
   }
   set variant(value) {
     value = transform.string(value).toLowerCase();
-    this._variant = validate.enumeration(variant)(value) && value || variant.SECONDARY;
+    this._variant = validate.enumeration(variant)(value) && value || variant.PRIMARY;
     this._reflectAttribute('variant', this._variant);
     
     // removes every existing variant
     this.classList.remove(...ALL_VARIANT_CLASSES);
-
-    this.classList.add(`${CLASSNAME}--${this._variant}`);
+    
+    if (this._variant === variant.QUIET) {
+      this.classList.add(`${CLASSNAME}--${variant.QUIET}--primary`);
+    }
+    else if (this._variant === variant.MINIMAL) {
+      this.classList.add(`${CLASSNAME}--${variant.QUIET}--secondary`);
+    }
+    else if (this._variant !== variant._CUSTOM) {
+      this.classList.add(`${CLASSNAME}--${this._variant}`);
+    }
+    
+    // Hide the label if we're in icon only mode
+    this._elements.label.hidden = this._variant === variant.ICON;
   }
   
   /** @ignore */
@@ -320,6 +348,8 @@ const ButtonMixin = (superClass) => class extends superClass {
   _getIconElement() {
     if (!this._elements.icon) {
       this._elements.icon = new Icon();
+      // "EXTRA_SMALL" is the only size currently supported.
+      this._elements.icon.size = Icon.size.EXTRA_SMALL;
     }
     return this._elements.icon;
   }
@@ -391,7 +421,7 @@ const ButtonMixin = (superClass) => class extends superClass {
     this.classList.add(CLASSNAME);
     
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.SECONDARY; }
+    if (!this._variant) { this.variant = variant.PRIMARY; }
     if (!this._size) { this.size = size.MEDIUM; }
     
     // Create a fragment

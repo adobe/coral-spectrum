@@ -7,13 +7,16 @@ describe('Coral.Button', function() {
 
     it('should define the variants in an enum', function() {
       expect(Coral.Button.variant).to.exist;
-      expect(Coral.Button.variant.DEFAULT).to.equal('secondary'); // backwards compat
+      expect(Coral.Button.variant.CTA).to.equal('cta');
       expect(Coral.Button.variant.SECONDARY).to.equal('secondary');
       expect(Coral.Button.variant.PRIMARY).to.equal('primary');
       expect(Coral.Button.variant.WARNING).to.equal('warning');
       expect(Coral.Button.variant.QUIET).to.equal('quiet');
       expect(Coral.Button.variant.MINIMAL).to.equal('minimal');
-      expect(Object.keys(Coral.Button.variant).length).to.equal(7);
+      expect(Coral.Button.variant.DEFAULT).to.equal('secondary');
+      expect(Coral.Button.variant.ICON).to.equal('icon');
+      expect(Coral.Button.variant._CUSTOM).to.equal('_custom');
+      expect(Object.keys(Coral.Button.variant).length).to.equal(9);
     });
 
     it('should define the iconPositions in an enum', function() {
@@ -88,15 +91,6 @@ describe('Coral.Button', function() {
 
   describe('Markup', function() {
 
-    describe('#hidden', function() {
-
-      it('should hide component on false', function() {
-        const button = helpers.build('<button is="coral-button" hidden></button>');
-        expect(getComputedStyle(button).display).to.equal('none');
-        expect(button.hasAttribute('hidden')).to.be.true;
-      });
-    });
-
     describe('#label', function() {
 
       it('should be initially empty', function() {
@@ -120,7 +114,7 @@ describe('Coral.Button', function() {
         expect(button._getIconElement().parentNode).not.to.be.null;
 
         button.label.textContent = 'Hello';
-        expect(button.textContent).to.equal('Hello');
+        expect(button.label.textContent).to.equal('Hello');
         expect(button.classList.contains('coral3-Button')).to.be.true;
         expect(button.icon).to.equal('add');
       });
@@ -134,7 +128,7 @@ describe('Coral.Button', function() {
         expect(button._getIconElement().parentNode).not.to.be.null;
 
         button.label.textContent = '';
-        expect(button.textContent).to.equal('');
+        expect(button.label.textContent).to.equal('');
         expect(button.classList.contains('coral3-Button')).to.be.true;
         expect(button.icon).to.equal('add');
       });
@@ -148,7 +142,7 @@ describe('Coral.Button', function() {
         expect(button._getIconElement().parentNode).not.to.be.null;
 
         button.label.textContent = 'Add';
-        expect(button.textContent).to.equal('Add');
+        expect(button.label.textContent).to.equal('Add');
         expect(button.classList.contains('coral3-Button')).to.be.true;
         expect(button.icon).to.equal('add');
       });
@@ -168,7 +162,7 @@ describe('Coral.Button', function() {
         const button = helpers.build('<button is="coral-button" icon="add"></button>');
         expect(button.icon).to.equal('add');
         expect(button.hasAttribute('icon', 'add')).to.be.true;
-        expect(button.textContent).to.equal('');
+        expect(button.label.textContent).to.equal('');
         expect(button._getIconElement()).to.exist;
         expect(button._getIconElement().icon).to.equal('add');
         expect(button.classList.contains('coral3-Button')).to.be.true;
@@ -179,7 +173,7 @@ describe('Coral.Button', function() {
         expect(button.icon).to.equal('add');
         expect(button.label.innerHTML).to.equal('Add');
         expect(button.hasAttribute('icon', 'add')).to.be.true;
-        expect(button.textContent).to.equal('Add');
+        expect(button.label.textContent).to.equal('Add');
         expect(button._getIconElement()).to.exist;
         expect(button._getIconElement().icon).to.equal('add');
         expect(button.classList.contains('coral3-Button')).to.be.true;
@@ -202,7 +196,7 @@ describe('Coral.Button', function() {
         expect(button.icon).to.equal('add');
         expect(button.label.innerHTML).to.equal('Add');
         expect(button.hasAttribute('icon', 'add')).to.be.true;
-        expect(button.textContent).to.equal('Add');
+        expect(button.label.textContent).to.equal('Add');
         expect(button._elements.icon).to.exist;
         expect(button._elements.icon.icon).to.equal('add');
         expect(button._elements.icon.alt).to.equal('');
@@ -223,7 +217,7 @@ describe('Coral.Button', function() {
         button.label.textContent = 'Add';
         // Wait for the MO to kick in
         setTimeout(() => {
-          expect(button.textContent).to.equal('Add');
+          expect(button.label.textContent).to.equal('Add');
           expect(button.classList.contains('coral3-Button')).to.be.true;
           expect(button.icon).to.equal('add');
           expect(button._elements.icon.alt).to.equal('');
@@ -243,7 +237,7 @@ describe('Coral.Button', function() {
         button.label.innerHTML = '';
         // Wait for the MO to kick in
         setTimeout(() => {
-          expect(button.textContent).to.equal('');
+          expect(button.label.textContent).to.equal('');
           expect(button.classList.contains('coral3-Button')).to.be.true;
           expect(button.icon).to.equal('add');
           expect(button._elements.icon.alt).to.equal('');
@@ -291,7 +285,7 @@ describe('Coral.Button', function() {
     describe('#iconsize', function() {
       it('should be initially the default', function() {
         const button = helpers.build('<button is="coral-button"></button>');
-        expect(button.iconSize).to.equal(Coral.Icon.size.SMALL);
+        expect(button.iconSize).to.equal(Coral.Icon.size.EXTRA_SMALL);
         expect(button.hasAttribute('iconsize')).to.be.false;
       });
 
@@ -305,10 +299,10 @@ describe('Coral.Button', function() {
 
       it('should discard invalid iconsize', function() {
         const button = helpers.build('<button is="coral-button" iconsize="megalarge" icon="add"></button>');
-        expect(button.iconSize).to.equal(Coral.Icon.size.SMALL);
+        expect(button.iconSize).to.equal(Coral.Icon.size.EXTRA_SMALL);
         expect(button.hasAttribute('iconsize', 'megalarge')).to.be.true;
         expect(button._getIconElement().icon).to.equal('add');
-        expect(button._getIconElement().size).to.equal(Coral.Icon.size.SMALL);
+        expect(button._getIconElement().size).to.equal(Coral.Icon.size.EXTRA_SMALL);
       });
     });
 
@@ -347,15 +341,11 @@ describe('Coral.Button', function() {
       it('should default to medium', function() {
         const button = helpers.build('<button is="coral-button"></button>');
         expect(button.size).to.equal(Coral.Button.size.MEDIUM);
-        expect(button.classList.contains('coral3-Button--large')).to.be.false;
-        expect(button.classList.contains('coral3-Button')).to.be.true;
       });
 
       it('should set the size modifier', function() {
         const button = helpers.build('<button is="coral-button" size="L"></button>');
         expect(button.size).to.equal(Coral.Button.size.LARGE);
-        expect(button.classList.contains('coral3-Button--large')).to.be.true;
-        expect(button.classList.contains('coral3-Button')).to.be.true;
       });
     });
 
@@ -388,33 +378,33 @@ describe('Coral.Button', function() {
 
     describe('#variant', function() {
 
-      it('should be initially Coral.Button.variant.DEFAULT', function() {
+      it('should be initially Coral.Button.variant.PRIMARY', function() {
         const button = helpers.build('<button is="coral-button"></button>');
-        expect(button.variant).to.equal(Coral.Button.variant.DEFAULT);
+        expect(button.variant).to.equal(Coral.Button.variant.PRIMARY);
         expect(button.hasAttribute('variant')).to.be.true;
         expect(button.classList.contains('coral3-Button')).to.be.true;
       });
 
       it('should set the new variant', function() {
-        const button = helpers.build('<button is="coral-button" variant="primary"></button>');
-        expect(button.variant).to.equal('primary');
-        expect(button.variant).to.equal(Coral.Button.variant.PRIMARY);
-        expect(button.hasAttribute('variant', 'primary')).to.be.true;
-        expect(button.classList.contains('coral3-Button--primary')).to.be.true;
+        const button = helpers.build('<button is="coral-button" variant="cta"></button>');
+        expect(button.variant).to.equal('cta');
+        expect(button.variant).to.equal(Coral.Button.variant.CTA);
+        expect(button.getAttribute('variant')).to.equal(Coral.Button.variant.CTA);
+        expect(button.classList.contains('coral3-Button--cta')).to.be.true;
         expect(button.classList.contains('coral3-Button')).to.be.true;
       });
 
       it('should add the default class if variant is empty', function() {
         const button = helpers.build('<button is="coral-button" variant=""></button>');
-        expect(button.variant).to.equal(Coral.Button.variant.DEFAULT);
-        expect(button.hasAttribute('variant', Coral.Button.variant.DEFAULT)).to.be.true;
+        expect(button.variant).to.equal(Coral.Button.variant.PRIMARY);
+        expect(button.hasAttribute('variant', Coral.Button.variant.PRIMARY)).to.be.true;
         expect(button.classList.contains('coral3-Button')).to.be.true;
       });
 
       it('should go back to default variant for invalid variant', function() {
         const button = helpers.build('<button is="coral-button" variant="invalidvariant"></button>');
-        expect(button.variant).to.equal(Coral.Button.variant.DEFAULT);
-        expect(button.hasAttribute('variant', Coral.Button.variant.DEFAULT)).to.be.true;
+        expect(button.variant).to.equal(Coral.Button.variant.PRIMARY);
+        expect(button.hasAttribute('variant', Coral.Button.variant.PRIMARY)).to.be.true;
         expect(button.classList.contains('coral3-Button')).to.be.true;
       });
 
@@ -451,12 +441,11 @@ describe('Coral.Button', function() {
       expect(button.block).to.be.true;
       expect(button.variant).to.equal(Coral.Button.variant.PRIMARY);
       expect(button.icon).to.equal('share');
-      expect(button.classList.contains('coral3-Button--large')).to.be.true;
       expect(button.classList.contains('coral3-Button--block')).to.be.true;
       expect(button.classList.contains('coral3-Button--primary')).to.be.true;
       expect(button._getIconElement()).to.exist;
       expect(button._getIconElement().icon).to.equal('share');
-      expect(button.textContent).to.equal('Share');
+      expect(button.label.textContent).to.equal('Share');
       expect(button.classList.contains('coral3-Button')).to.be.true;
     }); // end variant
   }); // end describe markup
@@ -475,7 +464,7 @@ describe('Coral.Button', function() {
         var button = new Coral.Button();
         button.icon = 'add';
         expect(button.hasAttribute('icon')).to.be.false;
-        expect(button._getIconElement().classList.contains('coral3-Icon--add')).to.be.true;
+        expect(button._getIconElement().icon).to.equal('add');
       });
 
       it('should convert everything to string', function() {
@@ -490,7 +479,7 @@ describe('Coral.Button', function() {
         expect(button.icon).to.equal('true');
         expect(button.hasAttribute('icon')).to.be.false;
         expect(button._getIconElement()).not.to.be.null;
-        expect(button._getIconElement().classList.contains('coral3-Icon--true')).to.be.true;
+        expect(button._getIconElement().icon).to.equal('true');
       });
 
       it('should remove the icon with empty string', function() {
@@ -526,11 +515,11 @@ describe('Coral.Button', function() {
 
     describe('#iconSize', function() {
 
-      it('should default to Coral.Icon.size.SMALL', function() {
+      it('should default to Coral.Icon.size.EXTRA_SMALL', function() {
         var button = new Coral.Button();
         button.icon = 'add';
-        expect(button.iconSize).to.equal(Coral.Icon.size.SMALL);
-        expect(button._getIconElement().size).to.equal(Coral.Icon.size.SMALL);
+        expect(button.iconSize).to.equal(Coral.Icon.size.EXTRA_SMALL);
+        expect(button._getIconElement().size).to.equal(Coral.Icon.size.EXTRA_SMALL);
       });
 
       it('should sync the iconSize correctly', function() {
@@ -552,7 +541,8 @@ describe('Coral.Button', function() {
         button.icon = 'add';
         button.iconSize = Coral.Icon.size.LARGE;
         expect(button.iconSize).to.equal(Coral.Icon.size.LARGE);
-        expect(button._getIconElement().size).to.equal(Coral.Icon.size.LARGE);
+        // Only "EXTRA_SMALL" is currently supported
+        expect(button._getIconElement().size).to.equal(Coral.Icon.size.EXTRA_SMALL);
       });
 
       it('should accept lowercase values', function() {
@@ -560,8 +550,9 @@ describe('Coral.Button', function() {
         button.icon = 'add';
         button.iconSize = Coral.Icon.size.LARGE.toLowerCase();
         expect(button.iconSize).to.equal(Coral.Icon.size.LARGE);
-        expect(button._getIconElement().size).to.equal(Coral.Icon.size.LARGE);
-        expect(button._getIconElement().classList.contains('coral3-Icon--sizeL')).to.be.true;
+        // Only "EXTRA_SMALL" is currently supported
+        expect(button._getIconElement().size).to.equal(Coral.Icon.size.EXTRA_SMALL);
+        expect(button._getIconElement().classList.contains('coral3-Icon--sizeXS')).to.be.true;
       });
 
       it('should be set with an attribute', function() {
@@ -570,7 +561,8 @@ describe('Coral.Button', function() {
         button.setAttribute('iconsize', Coral.Icon.size.LARGE);
         expect(button.iconSize).to.equal(Coral.Icon.size.LARGE);
         expect(button.hasAttribute('iconsize', 'L')).to.be.true;
-        expect(button._getIconElement().size).to.equal(Coral.Icon.size.LARGE);
+        // Only "EXTRA_SMALL" is currently supported
+        expect(button._getIconElement().size).to.equal(Coral.Icon.size.EXTRA_SMALL);
       });
 
       it('should discard values not part of the enum', function() {
@@ -581,14 +573,14 @@ describe('Coral.Button', function() {
         button.iconSize = 'megalarge';
         button.iconSize = null;
         button.iconSize = -1;
-        // Fallbacks to default enum which is SMALL
-        expect(button.iconSize).to.equal(Coral.Icon.size.SMALL);
+        // Fallbacks to default enum which is EXTRA_SMALL
+        expect(button.iconSize).to.equal(Coral.Icon.size.EXTRA_SMALL);
       });
 
-      it('should discard unknonwn attribute', function() {
+      it('should discard unknown attribute', function() {
         var button = new Coral.Button();
         button.setAttribute('size', 'megalarge');
-        expect(button.iconSize).to.equal(Coral.Icon.size.SMALL);
+        expect(button.iconSize).to.equal(Coral.Icon.size.EXTRA_SMALL);
       });
 
       it('should keep the size after the icon is changed', function() {
@@ -598,15 +590,17 @@ describe('Coral.Button', function() {
         button.iconSize = 'L';
 
         expect(button._getIconElement().icon).to.equal('add');
-        expect(button._getIconElement().size).to.equal('L');
+        // Only "EXTRA_SMALL" is currently supported
+        expect(button._getIconElement().size).to.equal('XS');
 
         button.icon = 'delete';
 
         expect(button.icon).to.equal('delete');
         expect(button.iconSize).to.equal('L');
-        expect(button._getIconElement().size).to.equal('L');
         expect(button._getIconElement().icon).to.equal('delete');
-        expect(button._getIconElement().classList.contains('coral3-Icon--sizeL')).to.be.true;
+        // Only "EXTRA_SMALL" is currently supported
+        expect(button._getIconElement().size).to.equal('XS');
+        expect(button._getIconElement().classList.contains('coral3-Icon--sizeXS')).to.be.true;
       });
     });
 

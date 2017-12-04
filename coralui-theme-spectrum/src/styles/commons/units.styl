@@ -15,15 +15,6 @@
  * from Adobe Systems Incorporated.
  */
 
-@require '@spectrum/spectrum-css/dist/icons/spectrum-icons.css';
-
-@require '@spectrum/spectrum-css/dist/spectrum-core.css';
-
-@require '@spectrum/spectrum-css/dist/spectrum-darkest.css';
-@require '@spectrum/spectrum-css/dist/spectrum-dark.css';
-@require '@spectrum/spectrum-css/dist/spectrum-light.css';
-@require '@spectrum/spectrum-css/dist/spectrum-lightest.css';
-
-// Coral specificities
-@require 'commons';
-@require 'button';
+// base size of the font used to calculate all the units
+$coral-base-size = 16px; // The size of one rem in pixels
+$px = 0rem + (1 / $coral-base-size); // The size of one pixel in rems
