@@ -38,7 +38,6 @@ import 'coralui-component-quickactions/src/tests';
 import 'coralui-component-radio/src/tests';
 import 'coralui-component-search/src/tests';
 import 'coralui-component-select/src/tests';
-import 'coralui-component-selectlist/src/tests';
 import 'coralui-component-shell/src/tests';
 import 'coralui-component-slider/src/tests';
 import 'coralui-component-steplist/src/tests';

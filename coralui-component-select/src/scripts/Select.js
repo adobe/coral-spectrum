@@ -20,7 +20,7 @@ import {FormFieldMixin} from 'coralui-mixin-formfield';
 import {SelectableCollection} from 'coralui-collection';
 import {Button} from 'coralui-component-button';
 import {Tag} from 'coralui-component-taglist';
-import {SelectListItem} from 'coralui-component-selectlist';
+import {SelectListItem} from 'coralui-component-list';
 import 'coralui-component-icon';
 import 'coralui-component-overlay';
 import base from '../templates/base';

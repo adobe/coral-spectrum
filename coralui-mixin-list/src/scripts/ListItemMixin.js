@@ -72,6 +72,7 @@ const ListItemMixin = (superClass) => class extends superClass {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
   
+    this.classList.toggle('is-disabled', this._disabled);
     this.setAttribute('aria-disabled', this._disabled);
   }
   
@@ -101,7 +102,7 @@ const ListItemMixin = (superClass) => class extends superClass {
   connectedCallback() {
     super.connectedCallback();
     
-    this.classList.add(CLASSNAME);
+    this.classList.add(CLASSNAME, 'coral3-SelectList-item');
   
     // The attribute that makes different types of list items co-exist
     // This is also used for event delegation

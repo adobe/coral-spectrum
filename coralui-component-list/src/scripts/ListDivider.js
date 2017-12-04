@@ -15,17 +15,19 @@
  * from Adobe Systems Incorporated.
  */
 
-@require '@spectrum/spectrum-css/dist/icons/spectrum-icons.css';
+const CLASSNAME = 'coral3-SelectList-divider';
 
-@require '@spectrum/spectrum-css/dist/spectrum-core.css';
+/**
+ @class Coral.List.Divider
+ @classdesc The List divider
+ @htmltag coral-list-divider
+ @extends {HTMLElement}
+ */
+class ListDivider extends HTMLElement {
+  /** @ignore */
+  connectedCallback() {
+    this.classList.add(CLASSNAME);
+  }
+}
 
-@require '@spectrum/spectrum-css/dist/spectrum-darkest.css';
-@require '@spectrum/spectrum-css/dist/spectrum-dark.css';
-@require '@spectrum/spectrum-css/dist/spectrum-light.css';
-@require '@spectrum/spectrum-css/dist/spectrum-lightest.css';
-
-// Coral specificities
-@require 'commons';
-@require 'button';
-@require 'charactercount';
-@require 'list';
+export default ListDivider;

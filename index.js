@@ -19,7 +19,7 @@ import {DragAction} from 'coralui-dragaction';
 import {Drawer, DrawerContent} from 'coralui-component-drawer';
 import {FileUpload, FileUploadItem} from 'coralui-component-fileupload';
 import {Icon} from 'coralui-component-icon';
-import {List, AnchorList, ButtonList} from 'coralui-component-list';
+import {List, ListItem, ListItemContent, ListDivider, AnchorList, AnchorListItem, ButtonList, ButtonListItem, SelectList, SelectListGroup, SelectListItem, SelectListItemContent} from 'coralui-component-list';
 import {Masonry, MasonryItem, MasonryLayout} from 'coralui-component-masonry';
 import {Multifield, MultifieldItem, MultifieldItemContent} from 'coralui-component-multifield';
 import {NumberInput} from 'coralui-component-numberinput';
@@ -31,7 +31,6 @@ import {QuickActions, QuickActionsItem} from 'coralui-component-quickactions';
 import {Radio, RadioLabel} from 'coralui-component-radio';
 import {Shell, ShellContent, ShellHeader, ShellHomeAnchor, ShellHomeAnchorLabel, ShellHelp, ShellHelpItem, ShellMenu, ShellMenuBar, ShellMenuBarItem, ShellUser, ShellUserContent, ShellUserFooter, ShellUserHeading, ShellUserName, ShellUserSubheading, ShellWorkspaces, ShellWorkspace, ShellSolutionSwitcher, ShellSolutions, ShellSolution, ShellSolutionLabel, ShellOrgSwitcher, ShellOrganization, ShellSuborganization, ShellOrgSwitcherFooter} from 'coralui-component-shell';
 import {Select, SelectItem} from 'coralui-component-select';
-import {SelectList, SelectListGroup, SelectListItem} from 'coralui-component-selectlist';
 import {Search} from 'coralui-component-search';
 import {Slider, SliderItem, RangedSlider} from 'coralui-component-slider';
 import {StepList, Step, StepLabel} from 'coralui-component-steplist';
@@ -67,12 +66,14 @@ export {
   AnchorButton,
   AnchorButtonLabel,
   AnchorList,
+  AnchorListItem,
   Autocomplete,
   AutocompleteItem,
   Button,
   ButtonLabel,
   ButtonGroup,
   ButtonList,
+  ButtonListItem,
   Calendar,
   Card,
   CardProperty,
@@ -122,6 +123,9 @@ export {
   FileUploadItem,
   Icon,
   List,
+  ListItem,
+  ListItemContent,
+  ListDivider,
   Masonry,
   MasonryItem,
   MasonryLayout,
@@ -149,6 +153,7 @@ export {
   SelectList,
   SelectListGroup,
   SelectListItem,
+  SelectListItemContent,
   Shell,
   ShellContent,
   ShellHeader,

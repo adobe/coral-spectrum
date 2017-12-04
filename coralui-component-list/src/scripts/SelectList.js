@@ -69,9 +69,6 @@ class SelectList extends ComponentMixin(HTMLElement) {
   
       'click coral-selectlist-item': '_onItemClick',
   
-      'capture:mouseenter coral-selectlist-item': '_onItemMouseEnter',
-      'capture:mouseleave coral-selectlist-item': '_onItemMouseLeave',
-  
       'key:space coral-selectlist-item': '_onToggleItemKey',
       'key:return coral-selectlist-item': '_onToggleItemKey',
       'key:pageup coral-selectlist-item': '_focusPreviousItem',
@@ -244,27 +241,6 @@ class SelectList extends ComponentMixin(HTMLElement) {
         item[item.hasAttribute('selected') ? 'removeAttribute' : 'setAttribute']('selected', '');
       }
     }
-  }
-  
-  /** @private */
-  _onItemMouseEnter(event) {
-    if (event.target.disabled) {
-      return;
-    }
-  
-    // if the component already has the focus, we can change the activeElement.
-    if (this.classList.contains('is-focused')) {
-      this._focusItem(event.target);
-    }
-    // since we cannot give focus to the item, we mark it as highlighted
-    else {
-      event.target.classList.add('is-highlighted');
-    }
-  }
-  
-  /** @private */
-  _onItemMouseLeave(event) {
-    event.target.classList.remove('is-highlighted');
   }
   
   /** @private */
@@ -538,7 +514,7 @@ class SelectList extends ComponentMixin(HTMLElement) {
   connectedCallback() {
     super.connectedCallback();
     
-    this.classList.add(CLASSNAME);
+    this.classList.add(CLASSNAME, 'coral3-BasicList');
     
     // adds the role to support accessibility
     this.setAttribute('role', 'listbox');

@@ -17,6 +17,8 @@
 
 import {ComponentMixin} from 'coralui-mixin-component';
 import {transform} from 'coralui-util';
+import 'coralui-component-icon';
+import icon from '../templates/checkIcon';
 
 const CLASSNAME = 'coral3-SelectList-item';
 
@@ -31,14 +33,14 @@ class SelectListItem extends ComponentMixin(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
-    // Events
-    this._delegateEvents({
-      focus: '_onFocus',
-      blur: '_onBlur'
-    });
-  }
   
+    // Templates
+    this._elements = {
+      // Fetch or create the content zone element
+      content: this.querySelector('coral-selectlist-item-content') || document.createElement('coral-selectlist-item-content')
+    };
+    icon.call(this._elements);
+  }
   /**
    Value of the item. If not explicitly set, the value of <code>Node.textContent</code> is returned.
    
@@ -60,19 +62,18 @@ class SelectListItem extends ComponentMixin(HTMLElement) {
    
    @type {HTMLElement}
    @contentzone
-   @readonly
    */
   get content() {
-    return this;
+    return this._getContentZone(this._elements.content);
   }
   set content(value) {
-    // Support configs
-    if (typeof value === 'object') {
-      for (const prop in value) {
-        /** @ignore */
-        this[prop] = value[prop];
+    this._setContentZone('content', value, {
+      handle: 'content',
+      tagName: 'coral-selectlist-item-content',
+      insert: function(content) {
+        this.appendChild(content);
       }
-    }
+    });
   }
   
   /**
@@ -92,6 +93,9 @@ class SelectListItem extends ComponentMixin(HTMLElement) {
     
     this.classList.toggle('is-selected', this._selected);
     this.setAttribute('aria-selected', this._selected);
+    
+    // Toggle check icon
+    this._elements.icon.hidden = !this._selected;
     
     this.trigger('coral-selectlist-item:_selectedchanged');
   }
@@ -117,15 +121,7 @@ class SelectListItem extends ComponentMixin(HTMLElement) {
     this.selected = this.selected;
   }
   
-  /** @private */
-  _onFocus() {
-    this.classList.add('is-highlighted');
-  }
-  
-  /** @private */
-  _onBlur() {
-    this.classList.remove('is-highlighted');
-  }
+  get _contentZones() { return {'coral-selectlist-item-content': 'content'}; }
   
   /** @ignore */
   static get observedAttributes() {
@@ -136,9 +132,31 @@ class SelectListItem extends ComponentMixin(HTMLElement) {
   connectedCallback() {
     super.connectedCallback();
     
-    this.classList.add(CLASSNAME);
+    this.classList.add(CLASSNAME, 'coral3-BasicList-item');
     
     this.setAttribute('role', 'option');
+  
+    // Support cloneNode
+    const template = this.querySelector('.coral3-SelectList-icon');
+    if (template) {
+      template.remove();
+    }
+    
+    // Fetch or create the content content zone element
+    const content = this._elements.content;
+  
+    // Move any remaining elements into the content sub-component
+    if (!content.parentNode) {
+      while (this.firstChild) {
+        content.appendChild(this.firstChild);
+      }
+    }
+  
+    // Add template
+    this.appendChild(this._elements.icon);
+  
+    // Assign the content zones, moving them into place in the process
+    this.content = content;
   }
 }
 

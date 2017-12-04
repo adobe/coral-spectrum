@@ -44,7 +44,7 @@ describe('Coral.SelectList.Item', function() {
     describe('#content', function() {
       it('should not be null', function() {
         const el = new Coral.SelectList.Item();
-        expect(el.content).equal(el);
+        expect(el.content).to.not.equal(null);
       });
     });
     
@@ -63,13 +63,6 @@ describe('Coral.SelectList.Item', function() {
     
         expect(el.value).to.equal('Test 123');
         expect(el.getAttribute('value')).to.equal('Test 123');
-      });
-    });
-    
-    describe('#content', function() {
-      it('should reference the item', function() {
-        var el = new Coral.SelectList.Item();
-        expect(el.content).to.equal(el);
       });
     });
   });

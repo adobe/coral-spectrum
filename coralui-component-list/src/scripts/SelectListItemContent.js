@@ -15,17 +15,10 @@
  * from Adobe Systems Incorporated.
  */
 
-@require '@spectrum/spectrum-css/dist/icons/spectrum-icons.css';
-
-@require '@spectrum/spectrum-css/dist/spectrum-core.css';
-
-@require '@spectrum/spectrum-css/dist/spectrum-darkest.css';
-@require '@spectrum/spectrum-css/dist/spectrum-dark.css';
-@require '@spectrum/spectrum-css/dist/spectrum-light.css';
-@require '@spectrum/spectrum-css/dist/spectrum-lightest.css';
-
-// Coral specificities
-@require 'commons';
-@require 'button';
-@require 'charactercount';
-@require 'list';
+/**
+ @class Coral.SelectList.Item.Content
+ @classdesc The SelectList Item content
+ @htmltag coral-selectlist-item-content
+ @return {HTMLElement}
+ */
+export default () => document.createElement('coral-selectlist-item-content');

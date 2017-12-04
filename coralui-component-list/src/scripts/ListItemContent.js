@@ -22,7 +22,6 @@ const CLASSNAME = 'coral3-BasicList-item-content';
  @classdesc The List item content
  @htmltag coral-list-item-content
  @extends {HTMLElement}
- @private
  */
 class ListItemContent extends HTMLElement {
   /** @ignore */

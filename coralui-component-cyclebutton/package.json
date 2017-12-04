@@ -10,7 +10,6 @@
     "coralui-component-button": "file:../coralui-component-button",
     "coralui-component-list": "file:../coralui-component-list",
     "coralui-component-overlay": "file:../coralui-component-overlay",
-    "coralui-component-selectlist": "file:../coralui-component-selectlist",
     "coralui-externals": "file:../coralui-externals",
     "coralui-util": "file:../coralui-util"
   },

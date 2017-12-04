@@ -45,7 +45,6 @@ const ListMixin = (superClass) => class extends superClass {
     super();
   
     this._events = {
-      'capture:mouseenter [coral-list-item]': '_onItemMouseEnter',
       'key:down [coral-list-item]': '_focusNextItem',
       'key:right [coral-list-item]': '_focusNextItem',
       'key:left [coral-list-item]': '_focusPreviousItem',
@@ -98,14 +97,6 @@ const ListMixin = (superClass) => class extends superClass {
     value = transform.string(value).toLowerCase();
     this._interaction = validate.enumeration(interaction)(value) && value || interaction.ON;
     this._reflectAttribute('interaction', this._interaction);
-  }
-  
-  /** @private */
-  _onItemMouseEnter(event) {
-    // Do not try to focus on disabled items
-    if (!event.matchedTarget.hasAttribute('disabled') && this.interaction === interaction.ON) {
-      event.matchedTarget.focus();
-    }
   }
   
   /**
@@ -224,7 +215,7 @@ const ListMixin = (superClass) => class extends superClass {
   connectedCallback() {
     super.connectedCallback();
     
-    this.classList.add(CLASSNAME);
+    this.classList.add(CLASSNAME, 'coral3-SelectList');
     
     // Default reflected attributes
     if (!this._interaction) { this.interaction = interaction.ON; }
