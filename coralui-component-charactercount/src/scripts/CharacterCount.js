@@ -148,7 +148,9 @@ class CharacterCount extends ComponentMixin(HTMLElement) {
     
     // Set defaults
     this.target = this.target;
-    if (!this._maxLength) { this.maxLength = this._maxLength; }
+  
+    // Refresh once connected
+    this._refreshCharCount();
   }
 }
 
