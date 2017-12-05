@@ -21,8 +21,7 @@ import {transform, commons} from 'coralui-util';
 import 'coralui-component-icon';
 import getTarget from './getTarget';
 
-const CLASSNAME = 'coral3-Tab';
-
+const CLASSNAME = 'coral3-TabList-item';
 
 /**
  @class Coral.Tab
@@ -41,6 +40,18 @@ class Tab extends ComponentMixin(HTMLElement) {
       label: this.querySelector('coral-tab-label') || document.createElement('coral-tab-label')
     };
     base.call(this._elements);
+  
+    // Listen for mutations
+    this._observer = new MutationObserver(() => {
+      this.trigger('coral-tab:_sizechanged');
+    });
+  
+    // Watch for changes to the label element
+    this._observer.observe(this._elements.label, {
+      childList: true,
+      characterData: true,
+      subtree: true
+    });
   }
   
   /**
@@ -80,10 +91,12 @@ class Tab extends ComponentMixin(HTMLElement) {
     // removes the icon element from the DOM.
     if (this.icon === '') {
       iconElement.remove();
+      this.trigger('coral-tab:_sizechanged');
     }
     // adds the icon back since it was blown away by textContent
-    else if (!iconElement.parentNode) {
+    else if (!iconElement.parentElement) {
       this.insertBefore(iconElement, this.firstChild);
+      this.trigger('coral-tab:_sizechanged');
     }
   }
   

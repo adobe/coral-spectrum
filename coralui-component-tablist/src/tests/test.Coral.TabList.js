@@ -218,6 +218,29 @@ describe('Coral.TabList', function() {
           });
         });
       });
+      
+      describe('#variant', function() {
+        it('should default to Coral.TabList.variant.PANEL', function() {
+          expect(el.variant).to.equal(Coral.TabList.variant.PANEL);
+        });
+  
+        it('should set variant classname', function() {
+          el.variant = Coral.TabList.variant.ANCHORED;
+          expect(el.classList.contains('coral3-TabList--anchored')).be.true;
+          expect(el.classList.contains('coral3-TabList--panel')).be.false;
+          expect(el.classList.contains('coral3-TabList--page')).be.false;
+  
+          el.variant = Coral.TabList.variant.PAGE;
+          expect(el.classList.contains('coral3-TabList--page')).be.true;
+          expect(el.classList.contains('coral3-TabList--anchored')).be.false;
+          expect(el.classList.contains('coral3-TabList--panel')).be.false;
+  
+          el.variant = Coral.TabList.variant.PANEL;
+          expect(el.classList.contains('coral3-TabList--panel')).be.true;
+          expect(el.classList.contains('coral3-TabList--page')).be.false;
+          expect(el.classList.contains('coral3-TabList--anchored')).be.false;
+        });
+      });
     });
 
     describe('#icon', function() {
@@ -242,7 +265,7 @@ describe('Coral.TabList', function() {
         expect(tabPanelItem._elements.icon.icon).to.equal('gear');
   
         // By Default, Extra Small icons are used in tab panel
-        expect(tabPanelItem._elements.icon.size).to.equal(Coral.Icon.size.SMALL);
+        expect(tabPanelItem._elements.icon.size).to.equal(Coral.Icon.size.EXTRA_SMALL);
       });
     });
   });
@@ -473,6 +496,65 @@ describe('Coral.TabList', function() {
       let item1 = el.items.first();
       expect(el.selectedItem).to.equal(item1);
       expect(item1.selected).to.be.true;
+    });
+    
+    it('should set the line under the selected item', function(done) {
+      const el = helpers.build(window.__html__['Coral.TabList.selectedItem.html']);
+      const selectedItem = el.selectedItem;
+      
+      helpers.next(() => {
+        expect(el._elements.line.style.left).to.not.equal('');
+        expect(el._elements.line.style.width).to.not.equal('');
+        expect(el._elements.line.hidden).to.be.false;
+        
+        done();
+      });
+    });
+  
+    it('should set the line under the newly selected item', function(done) {
+      const el = helpers.build(window.__html__['Coral.TabList.selectedItem.html']);
+      el.items.first().selected = true;
+    
+      helpers.next(() => {
+        const selectedItem = el.selectedItem;
+        expect(el._elements.line.style.left).to.not.equal('');
+        expect(el._elements.line.style.width).to.not.equal('');
+        expect(el._elements.line.hidden).to.be.false;
+        
+        done();
+      });
+    });
+  
+    it('should set the line under the selected item after switching orientation', function(done) {
+      const el = helpers.build(window.__html__['Coral.TabList.selectedItem.html']);
+      const selectedItem = el.selectedItem;
+      
+      el.orientation = 'vertical';
+      
+      helpers.next(() => {
+        expect(el._elements.line.style.left).to.equal('');
+        expect(el._elements.line.style.width).to.equal('');
+        expect(el._elements.line.style.top).to.not.equal('');
+        expect(el._elements.line.style.height).to.not.equal('');
+        expect(el._elements.line.hidden).to.be.false;
+        
+        done();
+      });
+    });
+  
+    it('should hide the line if no selected item', function(done) {
+      const el = new Coral.TabList();
+      expect(el._elements.line.hidden).to.be.true;
+      
+      helpers.build(el);
+  
+      // Line is set next frame
+      helpers.next(() => {
+        // Still hidden
+        expect(el._elements.line.hidden).to.be.true;
+        
+        done();
+      });
     });
   });
 

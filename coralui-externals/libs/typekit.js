@@ -10,7 +10,16 @@
   
   var config = {
     kitId: typeKitId,
-    scriptTimeout: 3000
+    scriptTimeout: 3000,
+    loading: function() {
+      Coral.events.dispatch('coral-commons:_webfontloading');
+    },
+    active: function() {
+      Coral.events.dispatch('coral-commons:_webfontactive');
+    },
+    inactive: function() {
+      Coral.events.dispatch('coral-commons:_webfontinactive');
+    }
   };
   
   if (!window.Typekit) { // we load the typescript only once

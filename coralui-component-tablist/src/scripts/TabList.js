@@ -18,6 +18,7 @@
 import {ComponentMixin} from 'coralui-mixin-component';
 import {SelectableCollection} from 'coralui-collection';
 import {transform, validate, commons} from 'coralui-util';
+import line from '../templates/line';
 import getTarget from './getTarget';
 
 /**
@@ -28,7 +29,7 @@ import getTarget from './getTarget';
  @property {String} MEDIUM
  A medium-sized tablist. This is the default.
  @property {String} LARGE
- A large-sized tablist, typically used for headers.
+ Not supported. Falls back to MEDIUM.
  */
 const size = {
   MEDIUM: 'M',
@@ -50,8 +51,32 @@ const orientation = {
   VERTICAL: 'vertical'
 };
 
+/**
+ Enumeration for {@link TabList} variant.
+ 
+ @typedef {Object} TabListVariantEnum
+ 
+ @property {String} PANEL
+ A panel TabList. This is the default value.
+ @property {String} PAGE
+ A page TabList.
+ @property {String} ANCHORED
+ An anchored TabList.
+ */
+const variant = {
+  PANEL: 'panel',
+  PAGE: 'page',
+  ANCHORED: 'anchored'
+};
+
 // the tablist's base classname
 const CLASSNAME = 'coral3-TabList';
+
+// An array of all possible variant classnames
+const ALL_VARIANT_CLASSES = [];
+for (const variantValue in variant) {
+  ALL_VARIANT_CLASSES.push(`${CLASSNAME}--${variant[variantValue]}`);
+}
 
 /**
  @class Coral.TabList
@@ -65,6 +90,10 @@ class TabList extends ComponentMixin(HTMLElement) {
   constructor() {
     super();
     
+    // Templates
+    this._elements = {};
+    line.call(this._elements);
+    
     // Attach events
     this._delegateEvents({
       'click > coral-tab': '_onTabClick',
@@ -76,18 +105,45 @@ class TabList extends ComponentMixin(HTMLElement) {
       'key:pageup > coral-tab': '_selectPreviousItem',
       'key:left > coral-tab': '_selectPreviousItem',
       'key:up > coral-tab': '_selectPreviousItem',
+  
+      'global:coral-commons:_webfontactive': '_setLine',
       
       // private
       'coral-tab:_selectedchanged': '_onItemSelectedChanged',
-      'coral-tab:_validateselection': '_onValidateSelection'
+      'coral-tab:_validateselection': '_onValidateSelection',
+      'coral-tab:_sizechanged': '_setLine'
     });
     
     // Used for eventing
     this._oldSelection = null;
     
+    this._setLine = this._setLine.bind(this);
+    
     // Init the collection mutation observer
     this.items._startHandlingItems(true);
+  }
+  
+  /**
+   The TabList variant style to use. See {@link TabListVariantEnum}.
+   
+   @type {String}
+   @default TabListVariantEnum.PANEL
+   @htmlattribute variant
+   @htmlattributereflected
+   */
+  get variant() {
+    return this._variant || variant.PANEL;
+  }
+  set variant(value) {
+    value = transform.string(value).toLowerCase();
+    this._variant = validate.enumeration(variant)(value) && value || variant.PANEL;
+    this._reflectAttribute('variant', this._variant);
     
+    // Remove all variant classes
+    this.classList.remove(...ALL_VARIANT_CLASSES);
+    
+    // Set new variant class
+    this.classList.add(`${CLASSNAME}--${this._variant}`);
   }
   
   /**
@@ -221,8 +277,11 @@ class TabList extends ComponentMixin(HTMLElement) {
     value = transform.string(value).toLowerCase();
     this._orientation = validate.enumeration(orientation)(value) && value || orientation.HORIZONTAL;
     this._reflectAttribute('orientation', this._orientation);
+  
+    this.classList.toggle(`${CLASSNAME}--vertical`, this._orientation === orientation.VERTICAL);
+    this.classList.toggle(`${CLASSNAME}--horizontal`, this._orientation === orientation.HORIZONTAL);
     
-    this.classList[this._orientation === orientation.VERTICAL ? 'add' : 'remove'](`${CLASSNAME}--vertical`);
+    this._setLine(true);
   }
   
   /** @private */
@@ -359,7 +418,52 @@ class TabList extends ComponentMixin(HTMLElement) {
       this._selectFirstItem();
     }
     
+    this._setLine();
+    
     this._triggerChangeEvent();
+  }
+  
+  _setLine(clear) {
+    window.requestAnimationFrame(() => {
+      const selectedItem = this.selectedItem;
+      
+      // Position line under the selected item
+      if (selectedItem) {
+        if (this.orientation === orientation.HORIZONTAL) {
+          const padding = window.parseInt(window.getComputedStyle(selectedItem).paddingLeft);
+          const left = selectedItem.offsetLeft + padding;
+          const width = selectedItem.clientWidth - padding * 2;
+  
+          // Orientation changed
+          if (clear) {
+            this._elements.line.style.top = '';
+            this._elements.line.style.height = '';
+          }
+  
+          this._elements.line.style.left = `${left}px`;
+          this._elements.line.style.width = `${width}px`;
+        }
+        else if (this.orientation === orientation.VERTICAL) {
+          const top = selectedItem.offsetTop;
+          const height = selectedItem.clientHeight;
+  
+          // Orientation changed
+          if (clear) {
+            this._elements.line.style.left = '';
+            this._elements.line.style.width = '';
+          }
+  
+          this._elements.line.style.top = `${top}px`;
+          this._elements.line.style.height = `${height}px`;
+        }
+        
+        this._elements.line.hidden = false;
+      }
+      else {
+        // Hide line if no selected item
+        this._elements.line.hidden = true;
+      }
+    });
   }
   
   /** @private */
@@ -395,9 +499,16 @@ class TabList extends ComponentMixin(HTMLElement) {
     return orientation;
   }
   
+  /**
+   Returns {@link TabList} variants.
+   
+   @return {TabListVariantEnum}
+   */
+  static get variant() { return variant; }
+  
   /** @ignore */
   static get observedAttributes() {
-    return ['target', 'size', 'orientation'];
+    return ['target', 'size', 'orientation', 'variant'];
   }
   
   /** @ignore */
@@ -405,14 +516,24 @@ class TabList extends ComponentMixin(HTMLElement) {
     super.connectedCallback();
     
     this.classList.add(CLASSNAME);
+  
+    // adds the role to support accessibility
+    this.setAttribute('role', 'tablist');
+    this.setAttribute('aria-multiselectable', 'false');
     
     // Default reflected attributes
     if (!this._size) { this.size = size.MEDIUM; }
     if (!this._orientation) { this.orientation = orientation.HORIZONTAL; }
+    if (!this._variant) { this.variant = variant.PANEL; }
     
-    // adds the role to support accessibility
-    this.setAttribute('role', 'tablist');
-    this.setAttribute('aria-multiselectable', 'false');
+    // Support cloneNode
+    const template = this.querySelector('.coral3-TabList-item-line');
+    if (template) {
+      template.remove();
+    }
+    
+    // Insert tab line
+    this.appendChild(this._elements.line);
     
     // Don't trigger events once connected
     this._preventTriggeringEvents = true;

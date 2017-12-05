@@ -15,10 +15,19 @@
  * from Adobe Systems Incorporated.
  */
 
+const CLASSNAME = 'coral3-TabList-item-label';
+
 /**
  @class Coral.Tab.Label
  @classdesc Tab's label component
  @htmltag coral-tab-label
- @return {HTMLElement}
+ @extends {HTMLElement}
  */
-export default () => document.createElement('coral-tab-label');
+class TabLabel extends HTMLElement {
+  /** @ignore */
+  connectedCallback() {
+    this.classList.add(CLASSNAME);
+  }
+}
+
+export default TabLabel;
