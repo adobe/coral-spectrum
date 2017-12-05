@@ -34,7 +34,7 @@ import {Select, SelectItem} from 'coralui-component-select';
 import {Search} from 'coralui-component-search';
 import {Slider, SliderItem, RangedSlider} from 'coralui-component-slider';
 import {StepList, Step, StepLabel} from 'coralui-component-steplist';
-import {Switch} from 'coralui-component-switch';
+import {Switch, SwitchLabel} from 'coralui-component-switch';
 import {Table, TableColumn, TableCell, TableHeaderCell, TableRow, TableHead, TableBody, TableFoot} from 'coralui-component-table';
 import {Tab, TabLabel, TabList} from 'coralui-component-tablist';
 import {TabView} from 'coralui-component-tabview';
@@ -187,6 +187,7 @@ export {
   Step,
   StepLabel,
   Switch,
+  SwitchLabel,
   Table,
   TableColumn,
   TableCell,

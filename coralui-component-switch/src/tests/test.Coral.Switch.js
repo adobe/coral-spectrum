@@ -70,6 +70,70 @@ describe('Coral.Switch', function() {
       
       expect(el._elements.input.value).to.equal('yes');
     });
+  
+    describe('#label', function() {
+      it('should be initially hidden', function() {
+        var el = new Coral.Switch();
+      
+        expect(el.label.textContent).to.equal('');
+        expect(el._elements.labelWrapper.textContent).to.equal('');
+        expect(el._elements.labelWrapper.hasAttribute('hidden')).to.be.true;
+      });
+    
+      it('should show label when content is not empty', function() {
+        const el = helpers.build(window.__html__['Coral.Switch.withLabel.html']);
+        expect(el._elements.labelWrapper.hidden).to.equal(false);
+      });
+    
+      it('should hide label when content set to empty', function(done) {
+        var el = new Coral.Switch();
+        helpers.target.appendChild(el);
+      
+        expect(el._elements.labelWrapper.hidden).to.equal(true);
+      
+        el.label.innerHTML = 'Test';
+      
+        // Wait for MO
+        helpers.next(() => {
+          expect(el._elements.labelWrapper.hidden).to.equal(false);
+        
+          el.label.innerHTML = '';
+        
+          // Wait for MO
+          helpers.next(() => {
+            expect(el._elements.labelWrapper.hidden).to.equal(true);
+            done();
+          });
+        });
+      });
+    
+      it('should hide label when content set to empty when not in DOM', function(done) {
+        var el = helpers.build(new Coral.Switch());
+      
+        expect(el._elements.labelWrapper.hidden).to.equal(true);
+      
+        el.label.innerHTML = 'Test';
+      
+        // Wait for MO
+        helpers.next(() => {
+          expect(el._elements.labelWrapper.hidden).to.equal(false);
+        
+          helpers.target.removeChild(el);
+          el.label.innerHTML = '';
+        
+          // Wait for MO
+          helpers.next(() => {
+            helpers.target.appendChild(el);
+          
+            // Wait for MO
+            helpers.next(() => {
+              expect(el._elements.labelWrapper.hidden).to.equal(true);
+              done();
+            });
+          });
+        });
+      });
+    });
 
     describe('#checked', function() {
       it('should reflect checked value', function() {

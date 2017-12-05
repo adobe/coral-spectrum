@@ -20,7 +20,7 @@ import {FormFieldMixin} from 'coralui-mixin-formfield';
 import base from '../templates/base';
 import {transform} from 'coralui-util';
 
-const CLASSNAME = 'coral3-Switch';
+const CLASSNAME = 'coral3-ToggleSwitch';
 
 /**
  @class Coral.Switch
@@ -39,8 +39,24 @@ class Switch extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._delegateEvents(this._events);
     
     // Prepare templates
-    this._elements = {};
+    this._elements = {
+      // Try to find the label content zone
+      label: this.querySelector('coral-switch-label') || document.createElement('coral-switch-label')
+    };
     base.call(this._elements);
+  
+    // Check if the label is empty whenever we get a mutation
+    this._observer = new MutationObserver(this._hideLabelIfEmpty.bind(this));
+  
+    // Watch for changes to the label element's children
+    this._observer.observe(this._elements.labelWrapper, {
+      // Catch changes to childList
+      childList: true,
+      // Catch changes to textContent
+      characterData: true,
+      // Monitor any child node
+      subtree: true
+    });
   }
   
   /**
@@ -61,6 +77,25 @@ class Switch extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._reflectAttribute('checked', this._checked);
     
     this._elements.input.checked = this._checked;
+  }
+  
+  /**
+   The switch's label element.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
+  get label() {
+    return this._getContentZone(this._elements.label);
+  }
+  set label(value) {
+    this._setContentZone('label', value, {
+      handle: 'label',
+      tagName: 'coral-switch-label',
+      insert: function(label) {
+        this._elements.labelWrapper.appendChild(label);
+      }
+    });
   }
   
   /**
@@ -161,6 +196,22 @@ class Switch extends FormFieldMixin(ComponentMixin(HTMLElement)) {
    */
   get _eventTargetProperty() { return 'checked'; }
   
+  /**
+   Hide the label if it's empty.
+   
+   @ignore
+   */
+  _hideLabelIfEmpty() {
+    const label = this.label;
+    // If it's empty and has no non-textnode children, hide the label
+    const hiddenValue = label.children.length === 0 && label.textContent.replace(/\s*/g, '') === '';
+    // Only bother if the hidden status has changed
+    if (hiddenValue !== this._elements.labelWrapper.hidden) {
+      this._elements.labelWrapper.hidden = hiddenValue;
+    }
+  }
+  
+  get _contentZones() { return {'coral-switch-label': 'label'}; }
   
   /**
    Inherited from {@link FormFieldMixin#clear}.
@@ -189,12 +240,23 @@ class Switch extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
     // Create a fragment
     const frag = document.createDocumentFragment();
-    
-    const templateHandleNames = ['input', 'label'];
+  
+    const templateHandleNames = ['input', 'switch', 'labelWrapper'];
   
     // Render the template
     frag.appendChild(this._elements.input);
-    frag.appendChild(this._elements.label);
+    frag.appendChild(this._elements.switch);
+    frag.appendChild(this._elements.labelWrapper);
+  
+    const label = this._elements.label;
+  
+    // Remove it so we can process children
+    if (label && label.parentNode) {
+      label.parentNode.removeChild(label);
+    }
+  
+    // Hide the labelWrapper by default (will be shown, via contentZone observer)
+    this._elements.labelWrapper.hidden = true;
   
     // Clean up
     while (this.firstChild) {
@@ -203,7 +265,7 @@ class Switch extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       if (child.nodeType === Node.TEXT_NODE ||
         child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
         // Add non-template elements to the content
-        frag.appendChild(child);
+        label.appendChild(child);
       }
       else {
         // Remove anything else
@@ -213,6 +275,16 @@ class Switch extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
     // Append the fragment to the component
     this.appendChild(frag);
+  
+    // Assign the content zones, moving them into place in the process
+    this.label = label;
+  
+    // Cache the initial checked state of the switch (in order to implement reset)
+    this._initialCheckedState = this.checked;
+  
+    // Check if we need to hide the label
+    // We must do this because IE does not catch mutations when nodes are not in the DOM
+    this._hideLabelIfEmpty();
   }
 }
 
