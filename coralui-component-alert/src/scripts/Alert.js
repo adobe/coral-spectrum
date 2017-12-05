@@ -16,18 +16,8 @@
  */
 
 import {ComponentMixin} from 'coralui-mixin-component';
-import 'coralui-component-icon';
-import icon from '../templates/icon';
+import {Icon} from 'coralui-component-icon';
 import {transform, validate} from 'coralui-util';
-
-// A map of types to icon names
-const iconMap = {
-  success: 'checkCircle',
-  info: 'infoCircle',
-  error: 'alert',
-  warning: 'alert',
-  help: 'helpCircle'
-};
 
 /**
  Enumeration for {@link Alert} variants.
@@ -35,15 +25,15 @@ const iconMap = {
  @typedef {Object} AlertVariantEnum
  
  @property {String} ERROR
- An alert with a red header and warning icon, indicating that an error has occurred.
+ An alert with a warning icon to indicate that an error has occurred.
  @property {String} WARNING
- An alert with an orange header and warning icon, notifying the user of something important.
+ An alert with a warning icon to warn the user of something important.
  @property {String} SUCCESS
- An alert with a blue header and question mark icon, provides the user with help.
+ An alert with a question mark icon to notify the user of a successful operation.
  @property {String} HELP
- An alert with a blue header and info icon, informs the user of non-critical information.
+ A neutral alert with a question icon to help the user with non-critical information.
  @property {String} INFO
- An alert with a blue header and info icon, informs the user of non-critical information.
+ An alert with an info icon to inform the user of non-critical information.
  */
 const variant = {
   ERROR: 'error',
@@ -61,7 +51,7 @@ const variant = {
  @property {String} SMALL
  A small alert, usually employed for single line alerts without headers.
  @property {String} LARGE
- A large alert, usually employed for multi-line alerts with headers.
+ Not supported. Falls back to SMALL.
  */
 const size = {
   SMALL: 'S',
@@ -70,22 +60,14 @@ const size = {
 
 const CLASSNAME = 'coral3-Alert';
 
-// size mapping
-const SIZE_CLASSES = {
-  S: 'small',
-  L: 'large'
-};
-
 // An array of all possible variant classnames
 const ALL_VARIANT_CLASSES = [];
 for (const variantValue in variant) {
   ALL_VARIANT_CLASSES.push(`${CLASSNAME}--${variant[variantValue]}`);
 }
-// An array of all possible size classnames
-const ALL_SIZE_CLASSES = [];
-for (const sizeValue in size) {
-  ALL_SIZE_CLASSES.push(`${CLASSNAME}--${SIZE_CLASSES[size[sizeValue]]}`);
-}
+
+// Used to map icon with variant
+const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
 
 /**
  @class Coral.Alert
@@ -108,7 +90,6 @@ class Alert extends ComponentMixin(HTMLElement) {
       content: this.querySelector('coral-alert-content') || document.createElement('coral-alert-content'),
       footer: this.querySelector('coral-alert-footer') || document.createElement('coral-alert-footer')
     };
-    icon.call(this._elements);
     
     // Events
     this._delegateEvents({
@@ -132,7 +113,8 @@ class Alert extends ComponentMixin(HTMLElement) {
     this._variant = validate.enumeration(variant)(value) && value || variant.INFO;
     this._reflectAttribute('variant', this._variant);
     
-    this._elements.icon.icon = iconMap[this._variant];
+    this._insertTemplate();
+    
     // Remove all variant classes
     this.classList.remove(...ALL_VARIANT_CLASSES);
 
@@ -143,7 +125,7 @@ class Alert extends ComponentMixin(HTMLElement) {
     
     // Set the role attribute to alert or status depending on
     // the variant so that the element turns into a live region
-    this.setAttribute('role', this._variant === variant.ERROR || this._variant === variant.WARNING ? 'alert' : 'status');
+    this.setAttribute('role', this._variant);
   }
   
   /**
@@ -161,10 +143,6 @@ class Alert extends ComponentMixin(HTMLElement) {
     value = transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) && value || size.SMALL;
     this._reflectAttribute('size', this._size);
-  
-    // Remove all variant classes and adds the new one
-    this.classList.remove(...ALL_SIZE_CLASSES);
-    this.classList.add(`${CLASSNAME}--${SIZE_CLASSES[this._size]}`);
   }
   
   /**
@@ -181,8 +159,7 @@ class Alert extends ComponentMixin(HTMLElement) {
       handle: 'header',
       tagName: 'coral-alert-header',
       insert: function(header) {
-        // After the icon
-        this.insertBefore(header, this._elements.icon.nextElementSibling);
+        this.insertBefore(header, this.firstChild);
       }
     });
   }
@@ -240,6 +217,23 @@ class Alert extends ComponentMixin(HTMLElement) {
     }
   }
   
+  _insertTemplate() {
+    if (this._elements.icon) {
+      this._elements.icon.remove();
+    }
+  
+    let variantValue = this.variant;
+    
+    // Warning icon is same as ERROR icon
+    if (variantValue === variant.WARNING) {
+      variantValue = variant.ERROR;
+    }
+    
+    // Inject the SVG icon
+    this.insertAdjacentHTML('afterbegin', Icon._renderSVG(`spectrum-css-icon-Alert${capitalize(variantValue)}`, ['coral3-Alert-icon']));
+    this._elements.icon = this.querySelector('.coral3-Alert-icon');
+  }
+  
   get _contentZones() {
     return {
       'coral-alert-header': 'header',
@@ -286,7 +280,7 @@ class Alert extends ComponentMixin(HTMLElement) {
     while (this.firstChild) {
       const child = this.firstChild;
       if (child.nodeType === Node.TEXT_NODE ||
-        child.nodeType === Node.ELEMENT_NODE && child.getAttribute('handle') !== 'icon') {
+        child.nodeType === Node.ELEMENT_NODE && !child.classList.contains('coral3-Alert-icon')) {
         // Add non-template elements to the content
         this._elements.content.appendChild(child);
       }
@@ -295,24 +289,15 @@ class Alert extends ComponentMixin(HTMLElement) {
         this.removeChild(child);
       }
     }
-  
-    const iconElement = this.querySelector('coral-icon');
-    if (iconElement === null) {
-      // Create the icon and add the reference to _elements
-      this.appendChild(this._elements.icon);
-    }
-    else {
-      // Add the reference to _elements
-      this._elements.icon = iconElement;
-    }
+    
+    this._insertTemplate();
   
     // Assign the content zones so the insert functions will be called
     for (const contentZone in this._contentZones) {
       const contentZoneName = this._contentZones[contentZone];
-      const element = this._elements[this._contentZones[contentZone]];
-  
+      
       /** @ignore */
-      this[contentZoneName] = element;
+      this[contentZoneName] = this._elements[contentZoneName];
     }
   }
 }

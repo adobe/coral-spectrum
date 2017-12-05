@@ -73,16 +73,6 @@ describe('Coral.Alert', function() {
       it('should default to small', function() {
         expect(el.size).to.equal(Coral.Alert.size.SMALL);
       });
-    
-      it('should set correct className when size is small', function() {
-        el.size = Coral.Alert.size.SMALL;
-        expect(el.classList.contains('coral3-Alert--small')).to.be.true;
-      });
-    
-      it('should set correct className when size is large', function() {
-        el.size = Coral.Alert.size.LARGE;
-        expect(el.classList.contains('coral3-Alert--large')).to.be.true;
-      });
     });
   
     describe('#variant', function() {

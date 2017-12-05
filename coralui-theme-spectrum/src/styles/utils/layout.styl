@@ -15,24 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-// Spectrum CSS
-@require '@spectrum/spectrum-css/dist/icons/spectrum-icons.css';
-
-@require '@spectrum/spectrum-css/dist/spectrum-core.css';
-
-@require '@spectrum/spectrum-css/dist/spectrum-darkest.css';
-@require '@spectrum/spectrum-css/dist/spectrum-dark.css';
-@require '@spectrum/spectrum-css/dist/spectrum-light.css';
-@require '@spectrum/spectrum-css/dist/spectrum-lightest.css';
-
-// Coral specificities
-@require 'commons';
-@require 'utils';
-
-@require 'button';
-@require 'charactercount';
-@require 'list';
-@require 'panelstack';
-@require 'progress';
-@require 'tablist';
-@require 'wait';
+// This is more specific than simply specifying the attribute selector
+// The specificity makes [hidden] work with classes that have a non-default display property
+[hidden] {
+  display: none !important;
+}
