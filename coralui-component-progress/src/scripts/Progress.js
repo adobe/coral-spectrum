@@ -20,6 +20,21 @@ import base from '../templates/base';
 import {transform, validate} from 'coralui-util';
 
 /**
+ Enumeration for {@link Progress} variants.
+ 
+ @typedef {Object} ProgressVariantEnum
+ 
+ @property {String} DEFAULT
+ The default progress bar.
+ @property {String} MONOCHROME
+ A black and white styled progress bar.
+ */
+const variant = {
+  DEFAULT: 'default',
+  MONOCHROME: 'monochrome'
+};
+
+/**
  Enumeration for {@link Progress} sizes.
  
  @typedef {Object} ProgressSizeEnum
@@ -27,9 +42,9 @@ import {transform, validate} from 'coralui-util';
  @property {String} SMALL
  A small progress bar.
  @property {String} MEDIUM
- A medium progress bar.
+ A default medium progress bar.
  @property {String} LARGE
- A large progress bar.
+ Not supported. Falls back to MEDIUM.
  */
 const size = {
   SMALL: 'S',
@@ -46,37 +61,20 @@ const size = {
  Show the label to the left of the bar.
  @property {String} RIGHT
  Show the label to the right of the bar.
- @property {String} LARGE
- Show the label below the bar.
+ @property {String} SIDE
+ Show the label to the side of the bar.
+ @property {String} BOTTOM
+ Not supported. Falls back to LEFT.
  */
 const labelPosition = {
   LEFT: 'left',
   RIGHT: 'right',
+  SIDE: 'side',
   BOTTOM: 'bottom'
 };
 
 // Base classname
-// We're not using coral-Progress here to avoid conflicts with core
-const CLASSNAME = 'coral3-Progress';
-
-// size mapping
-const SIZE_CLASSES = {
-  S: 'small',
-  M: 'medium',
-  L: 'large'
-};
-
-// A string of all possible size classnames
-const ALL_SIZE_CLASSES = [];
-for (const sizeValue in size) {
-  ALL_SIZE_CLASSES.push(`${CLASSNAME}--${SIZE_CLASSES[size[sizeValue]]}`);
-}
-
-// A string of all possible label position classnames
-const ALL_LABEL_POSITION_CLASSES = [];
-for (const position in labelPosition) {
-  ALL_LABEL_POSITION_CLASSES.push(`${CLASSNAME}--${labelPosition[position]}Label`);
-}
+const CLASSNAME = 'coral3-Loader--bar';
 
 /**
  @class Coral.Progress
@@ -98,12 +96,31 @@ class Progress extends ComponentMixin(HTMLElement) {
     base.call(this._elements);
   
     // Watch for label changes
-    this._observer = new MutationObserver(this._toggleLabelBasedOnContent.bind(this));
+    this._observer = new MutationObserver(this._toggleLabelVisibility.bind(this));
     this._observer.observe(this._elements.label, {
       characterData: true,
       childList: true,
       subtree: true
     });
+  }
+  
+  /**
+   The progress variant. See {@link ProgressVariantEnum}.
+   
+   @type {String}
+   @default ProgressVariantEnum.DEFAULT
+   @htmlattribute variant
+   @htmlattributereflected
+   */
+  get variant() {
+    return this._variant || variant.DEFAULT;
+  }
+  set variant(value) {
+    value = transform.string(value).toLowerCase();
+    this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
+    this._reflectAttribute('variant', this._variant);
+    
+    this.classList.toggle(`${CLASSNAME}--fullpage`, this._variant === variant.MONOCHROME);
   }
   
   /**
@@ -138,9 +155,9 @@ class Progress extends ComponentMixin(HTMLElement) {
       // ARIA: Reflect value for screenreaders
       this.setAttribute('aria-valuenow', this._value);
     
-      if (this.showPercent === true) {
+      if (this.showPercent) {
         // Only update label text in percent mode
-        this._setLabelContent(`${this._value}%`);
+        this._setPercentage(`${this._value}%`);
       }
     }
     
@@ -200,9 +217,8 @@ class Progress extends ComponentMixin(HTMLElement) {
     value = transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) && value || size.MEDIUM;
     this._reflectAttribute('size', this._size);
-  
-    this.classList.remove(...ALL_SIZE_CLASSES);
-    this.classList.add(`${CLASSNAME}--${SIZE_CLASSES[this._size]}`);
+    
+    this.classList.toggle(`${CLASSNAME}--small`, this._size === size.SMALL);
   }
   
   /**
@@ -222,15 +238,10 @@ class Progress extends ComponentMixin(HTMLElement) {
   
     if (this._showPercent) {
       const content = this.indeterminate ? '' : `${this.value}%`;
-      this._setLabelContent(content);
-      this._showLabel();
+      this._setPercentage(content);
     }
-    else {
-      // This clears the content of the label when showPercent is turned off
-      // Ideally, if a label was set and showPercent was set to false, we wouldn't mess with it
-      // However, in this case, we don't want to leave incorrect label contents around, so we remove it to be safe
-      this.label.innerHTML = '';
-    }
+    
+    this._toggleLabelVisibility();
   }
   
   /**
@@ -257,70 +268,103 @@ class Progress extends ComponentMixin(HTMLElement) {
    Label position. See {@link ProgressLabelPositionEnum}.
    
    @type {String}
-   @default ProgressLabelPositionEnum.RIGHT
+   @default ProgressLabelPositionEnum.LEFT
    @htmlattribute labelposition
    @htmlattributereflected
    */
   get labelPosition() {
-    return this._labelPosition || labelPosition.RIGHT;
+    return this._labelPosition || labelPosition.LEFT;
   }
   set labelPosition(value) {
     value = transform.string(value).toLowerCase();
-    this._labelPosition = validate.enumeration(labelPosition)(value) && value || labelPosition.RIGHT;
+    this._labelPosition = validate.enumeration(labelPosition)(value) && value || labelPosition.LEFT;
     this._reflectAttribute('labelposition', this._labelPosition);
-  
-    this.classList.remove(...ALL_LABEL_POSITION_CLASSES);
-    if (this._elements.label.textContent.length > 0) {
-      this.classList.add(`${CLASSNAME}--${this._labelPosition}Label`);
+    
+    this.classList.toggle('coral3-Loader--side-label', this._labelPosition === labelPosition.SIDE);
+    
+    let elements = ['label', 'percentage', 'bar'];
+    if (this.labelPosition === labelPosition.RIGHT) {
+      elements = ['percentage', 'label', 'bar'];
     }
+    else if (this.labelPosition === labelPosition.SIDE) {
+      elements = ['label', 'bar', 'percentage'];
+    }
+    
+    // @spectrum should be supported with classes
+    elements.forEach((el, i) => {
+      this._elements[el].style.order = i;
+    });
+    
+    this._toggleLabelVisibility();
   }
   
   /** @ignore */
-  _toggleLabelBasedOnContent() {
-    if (this._elements.label.textContent.length > 0) {
-      this._showLabel();
+  _toggleLabelVisibility() {
+    const percentage = this._elements.percentage;
+    const label = this._elements.label;
+    const isSidePositioned = this.labelPosition === labelPosition.SIDE;
+    
+    // Handle percentage
+    if (this.showPercent) {
+      percentage.style.visibility = 'visible';
+      percentage.setAttribute('aria-hidden', 'false');
+      
+      if (isSidePositioned) {
+        percentage.hidden = false;
+      }
     }
     else {
-      this._hideLabel();
+      percentage.style.visibility = 'hidden';
+      percentage.setAttribute('aria-hidden', 'true');
+
+      if (isSidePositioned) {
+        percentage.hidden = true;
+      }
     }
-  }
   
-  /** @ignore */
-  _hideLabel() {
-    this._elements.label.hidden = true;
-    this.classList.remove(...ALL_LABEL_POSITION_CLASSES);
-    this.classList.add(`${CLASSNAME}--noLabel`);
+    // Handle label
+    if (label.textContent.length > 0) {
+      label.style.visibility = 'visible';
+      label.setAttribute('aria-hidden', 'false');
     
-    // Remove the value for accessibility so the screenreader knows we're unlabelled
-    this.removeAttribute('aria-valuetext');
-  }
-  
-  /** @ignore */
-  _showLabel() {
-    this._elements.label.hidden = false;
-    this.classList.remove(`${CLASSNAME}--noLabel`);
-    this.classList.add(`${CLASSNAME}--${this.labelPosition}Label`);
+      if (isSidePositioned) {
+        label.hidden = false;
+      }
     
-    if (this.showPercent === false) {
-      // Update the value for accessibility as it was cleared when the label was hidden
-      this.setAttribute('aria-valuetext', this.label.textContent);
+      if (!this.showPercent) {
+        // Update the value for accessibility as it was cleared when the label was hidden
+        this.setAttribute('aria-valuetext', label.textContent);
+      }
     }
-  }
-  
-  /** @ignore */
-  _setLabelContent(content) {
-    this._elements.label.textContent = content;
+    else {
+      label.style.visibility = 'hidden';
+      label.setAttribute('aria-hidden', 'true');
     
-    // ARIA
-    if (this.showPercent === true) {
+      if (isSidePositioned) {
+        label.hidden = true;
+      }
+    
+      // Remove the value for accessibility so the screenreader knows we're unlabelled
       this.removeAttribute('aria-valuetext');
     }
-    else {
-      this.setAttribute('aria-valuetext', this.label.textContent);
-    }
+  }
+  
+  /** @ignore */
+  _setPercentage(content) {
+    this._elements.percentage.textContent = content;
+    
+    // ARIA
+    this[this.showPercent ? 'removeAttribute' : 'setAttribute']('aria-valuetext', content);
   }
   
   get _contentZones() { return {'coral-progress-label': 'label'}; }
+  
+  /**
+   Returns {@link Progress} variants.
+   
+   @return {ProgressVariantEnum}
+   */
+  static get variant() { return variant; }
   
   /**
    Returns {@link Progress} label position options.
@@ -339,6 +383,7 @@ class Progress extends ComponentMixin(HTMLElement) {
   /** @ignore */
   static get observedAttributes() {
     return [
+      'variant',
       'value',
       'indeterminate',
       'size',
@@ -366,14 +411,18 @@ class Progress extends ComponentMixin(HTMLElement) {
     this.classList.add(CLASSNAME);
     
     // Default reflected attributes
+    if (!this._variant) { this.variant = variant.DEFAULT; }
     if (!this._value) { this.value = this.value; }
     if (!this._size) { this.size = size.MEDIUM; }
-    if (!this._labelPosition) { this.labelPosition = labelPosition.RIGHT; }
+    if (!this._labelPosition) { this.labelPosition = labelPosition.LEFT; }
   
     // Create a fragment
     const fragment = document.createDocumentFragment();
+  
+    const templateHandleNames = ['bar', 'percentage'];
     
     // Render the template
+    fragment.appendChild(this._elements.percentage);
     fragment.appendChild(this._elements.bar);
     
     const label = this._elements.label;
@@ -387,7 +436,7 @@ class Progress extends ComponentMixin(HTMLElement) {
     while (this.firstChild) {
       const child = this.firstChild;
       if (child.nodeType === Node.TEXT_NODE ||
-        child.getAttribute('handle') !== 'bar') {
+        child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
         // Add non-template elements to the label
         label.appendChild(child);
       }
@@ -404,7 +453,7 @@ class Progress extends ComponentMixin(HTMLElement) {
     this.label = label;
   
     // Toggle label based on content
-    this._toggleLabelBasedOnContent();
+    this._toggleLabelVisibility();
   
     // ARIA
     this.setAttribute('role', 'progressbar');

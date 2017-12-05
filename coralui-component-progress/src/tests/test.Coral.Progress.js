@@ -11,6 +11,22 @@ describe('Coral.Progress', function() {
       expect(Coral.Progress.size.LARGE).to.equal('L');
       expect(Object.keys(Coral.Progress.size).length).to.equal(3);
     });
+  
+    it('should define the labelPosition in an enum', function() {
+      expect(Coral.Progress.labelPosition).to.exist;
+      expect(Coral.Progress.labelPosition.LEFT).to.equal('left');
+      expect(Coral.Progress.labelPosition.RIGHT).to.equal('right');
+      expect(Coral.Progress.labelPosition.SIDE).to.equal('side');
+      expect(Coral.Progress.labelPosition.BOTTOM).to.equal('bottom');
+      expect(Object.keys(Coral.Progress.labelPosition).length).to.equal(4);
+    });
+  
+    it('should define the variant in an enum', function() {
+      expect(Coral.Progress.variant).to.exist;
+      expect(Coral.Progress.variant.DEFAULT).to.equal('default');
+      expect(Coral.Progress.variant.MONOCHROME).to.equal('monochrome');
+      expect(Object.keys(Coral.Progress.variant).length).to.equal(2);
+    });
   });
   
   describe('Instantiation', function() {
@@ -65,8 +81,8 @@ describe('Coral.Progress', function() {
     });
   
     describe('#labelPosition', function() {
-      it('should be equal to right by default', function() {
-        expect(el.labelPosition).to.equal(Coral.Progress.labelPosition.RIGHT);
+      it('should be equal to left by default', function() {
+        expect(el.labelPosition).to.equal(Coral.Progress.labelPosition.LEFT);
       });
     });
   });
@@ -143,32 +159,71 @@ describe('Coral.Progress', function() {
         var contentNodeValue = progress.label.textContent;
         expect(contentNodeValue).to.equal('SOME LABEL');
       });
+  
+      it('should not be visible if it has no content', function() {
+        var progress = helpers.build(new Coral.Progress());
+        expect(progress._elements.label.style.visibility).to.equal('hidden', 'Label should be hidden');
+        expect(progress._elements.label.getAttribute('aria-hidden')).to.equal('true');
+      });
+  
+      it('should be visible if it has content', function(done) {
+        var progress = helpers.build(new Coral.Progress());
+        progress.label.innerHTML = 'Custom content';
+        
+        // Wait for MO
+        helpers.next(function() {
+          expect(progress._elements.label.style.visibility).to.equal('visible', 'Label should be visible');
+          expect(progress._elements.label.getAttribute('aria-hidden')).to.equal('false');
+          
+          done();
+        });
+      });
+  
+      it('should not be hidden if it has content and is side positioned', function() {
+        var progress = helpers.build(new Coral.Progress());
+        progress.label.innerHTML = 'Custom content';
+        progress.labelPosition = 'side';
+        
+        expect(progress._elements.label.hidden).to.be.false;
+      });
+  
+      it('should be hidden if it has no content and is side positioned', function() {
+        var progress = helpers.build(new Coral.Progress());
+        progress.labelPosition = 'side';
+    
+        expect(progress._elements.label.hidden).to.be.true;
+      });
     });
     
     describe('#showPercent', function() {
-      it('label should be hidden when showPercent is off and label has no text content', function() {
+      it('should be not be visible if not set', function() {
         var progress = helpers.build(new Coral.Progress());
-        expect(progress._elements.label.hidden).to.equal(true, 'Label should be hidden');
-        expect(progress.classList.contains('coral3-Progress--noLabel')).to.be.true;
-      });
   
-      it('label should be visible when showPercent false and label has content', function() {
-        var progress = helpers.build(new Coral.Progress());
-        progress.label.innerHTML = 'Custom content';
-        expect(progress._elements.label.style['display']).to.not.equal('none', 'Label should be visible');
-        expect(progress._elements.label.style['display']).to.not.equal('none', 'Label should stay visible');
+        expect(progress._elements.percentage.style.visibility).to.equal('hidden', 'Percentage should be hidden');
+        expect(progress._elements.percentage.getAttribute('aria-hidden')).to.equal('true');
       });
-  
-      it('should set correct classname when showpercent === false', function() {
-        var progress = helpers.build(new Coral.Progress());
-        expect(progress.classList.contains('coral3-Progress--noLabel'), 'should have --noLabel class').to.be.true;
-      });
-  
-      it('should set correct classname when showpercent === true', function() {
+      
+      it('should be visible if set', function() {
         var progress = helpers.build(new Coral.Progress());
         progress.showPercent = true;
-        
-        expect(progress.classList.contains('coral3-Progress--noLabel'), 'should not have --noLabel class').to.be.false;
+  
+        expect(progress._elements.percentage.style.visibility).to.equal('visible', 'Percentage should be visible');
+        expect(progress._elements.percentage.getAttribute('aria-hidden')).to.equal('false');
+      });
+  
+      it('should not be hidden if it is set and is side positioned', function() {
+        var progress = helpers.build(new Coral.Progress());
+        progress.labelPosition = 'side';
+        progress.showPercent = true;
+    
+        expect(progress._elements.percentage.hidden).to.be.false;
+      });
+  
+      it('should be hidden if it no content and is side positioned', function() {
+        var progress = helpers.build(new Coral.Progress());
+        progress.labelPosition = 'side';
+    
+        expect(progress._elements.percentage.hidden).to.be.true;
       });
     });
     
@@ -176,50 +231,48 @@ describe('Coral.Progress', function() {
       it('should set the correct classname when switching sizes', function() {
         var progress = helpers.build(new Coral.Progress());
   
-        progress.size = Coral.Progress.size.LARGE;
-  
-        expect(progress.classList.contains('coral3-Progress--large')).to.be.true;
-        expect(progress.classList.contains('coral3-Progress--small')).to.be.false;
-        expect(progress.classList.contains('coral3-Progress--medium')).to.be.false;
-  
         progress.size = Coral.Progress.size.SMALL;
-  
-        expect(progress.classList.contains('coral3-Progress--small')).to.be.true;
-        expect(progress.classList.contains('coral3-Progress--medium')).to.be.false;
-        expect(progress.classList.contains(progress._className+'--large')).to.be.false;
+        expect(progress.classList.contains('coral3-Loader--bar--small')).to.be.true;
       });
   
       it('should accept lowercase size values', function() {
         var progress = helpers.build(new Coral.Progress());
-        progress.size = 'l';
-  
-        expect(progress.classList.contains('coral3-Progress--large')).to.be.true;
-        expect(progress.classList.contains('coral3-Progress--small')).to.be.false;
-        expect(progress.classList.contains('coral3-Progress--medium')).to.be.false;
-  
+        
         progress.size = 's';
-  
-        expect(progress.classList.contains('coral3-Progress--small')).to.be.true;
-        expect(progress.classList.contains('coral3-Progress--medium')).to.be.false;
-        expect(progress.classList.contains(progress._className+'--large')).to.be.false;
+        expect(progress.classList.contains('coral3-Loader--bar--small')).to.be.true;
       });
     });
     
     describe('#labelPosition', function() {
-      it('should set the correct className when switching label positions', function() {
+      it('should switch label with percentage', function() {
         var progress = new Coral.Progress();
-        progress.label.innerHTML = 'something';
+        
         progress.labelPosition = 'right';
+        ['percentage', 'label', 'bar'].forEach((el, i) => {
+          expect(progress._elements[el].style.order).to.equal(i.toString());
+        });
+        
+        progress.labelPosition = 'left';
+        ['label', 'percentage', 'bar'].forEach((el, i) => {
+          expect(progress._elements[el].style.order).to.equal(i.toString());
+        });
   
-        expect(progress.classList.contains('coral3-Progress--rightLabel')).to.be.true;
-        expect(progress.classList.contains('coral3-Progress--leftLabel')).to.be.false;
-        expect(progress.classList.contains('coral3-Progress--bottomLabel')).to.be.false;
+        progress.labelPosition = 'side';
+        ['label', 'bar', 'percentage'].forEach((el, i) => {
+          expect(progress._elements[el].style.order).to.equal(i.toString());
+        });
+      });
+    });
+  });
   
-        progress.labelPosition = 'bottom';
-  
-        expect(progress.classList.contains('coral3-Progress--bottomLabel')).to.be.true;
-        expect(progress.classList.contains('coral3-Progress--leftLabel')).to.be.false;
-        expect(progress.classList.contains(progress._className+'--rightLabel')).to.be.false;
+  describe('Events', function() {
+    it('#coral-progress:change', function() {
+      it('should trigger when changing the value', function() {
+        const spy = sinon.spy();
+        const el = new Coral.Progress();
+        el.on('coral-progress:change', spy);
+        el.value = 30;
+        expect(spy.callCount).to.equal(1);
       });
     });
   });
