@@ -15,26 +15,19 @@
  * from Adobe Systems Incorporated.
  */
 
-// Spectrum CSS
-@require '@spectrum/spectrum-css/dist/icons/spectrum-icons.css';
+// Remove overlay flashing while loading the page
+coral-overlay {
+  display: none;
+}
 
-@require '@spectrum/spectrum-css/dist/spectrum-core.css';
+.coral3-Overlay {
+  position: absolute;
+  display: block;
+}
 
-@require '@spectrum/spectrum-css/dist/spectrum-darkest.css';
-@require '@spectrum/spectrum-css/dist/spectrum-dark.css';
-@require '@spectrum/spectrum-css/dist/spectrum-light.css';
-@require '@spectrum/spectrum-css/dist/spectrum-lightest.css';
-
-// Coral specificities
-@require 'commons';
-@require 'utils';
-
-@require 'button';
-@require 'charactercount';
-@require 'list';
-@require 'panelstack';
-@require 'progress';
-@require 'tablist';
-@require 'wait';
-
-@require 'overlay';
+.coral3-Overlay:focus {
+  // The overlay is focused when opened
+  // We don't want to indicate this in most cases
+  // The user can hit tab to focus on the first child of the shown overlay
+  outline: none;
+}
