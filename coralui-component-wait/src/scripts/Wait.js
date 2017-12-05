@@ -25,11 +25,14 @@ import {transform, validate} from 'coralui-util';
  
  @property {String} DEFAULT
  The default variant.
+ @property {String} MONOCHROME
+ A black and white styled wait.
  @property {String} DOTS
- A dot styled wait.
+ Not supported. Falls back to DEFAULT.
  */
 const variant = {
   DEFAULT: 'default',
+  MONOCHROME: 'monochrome',
   DOTS: 'dots'
 };
 
@@ -39,9 +42,9 @@ const variant = {
  @typedef {Object} WaitSizeEnum
  
  @property {String} SMALL
- A small wait indicator. This is the default size.
+ A small wait indicator.
  @property {String} MEDIUM
- A medium wait indicator.
+ A medium wait indicator. This is the default size.
  @property {String} LARGE
  A large wait indicator.
  */
@@ -52,14 +55,7 @@ const size = {
 };
 
 // the waits's base classname
-const CLASSNAME = 'coral3-Wait';
-
-// builds a string containing all possible variant classnames. this will be used to remove classnames when the variant
-// changes
-const ALL_VARIANT_CLASSES = [];
-for (const variantValue in variant) {
-  ALL_VARIANT_CLASSES.push(`${CLASSNAME}--${variant[variantValue]}`);
-}
+const CLASSNAME = 'coral3-Loader';
 
 /**
  @class Coral.Wait
@@ -75,23 +71,23 @@ class Wait extends ComponentMixin(HTMLElement) {
    See {@link WaitSizeEnum}.
    
    @type {String}
-   @default WaitSizeEnum.SMALL
+   @default WaitSizeEnum.MEDIUM
    @htmlattribute size
    @htmlattributereflected
    */
   get size() {
-    return this._size || size.SMALL;
+    return this._size || size.MEDIUM;
   }
   set size(value) {
     value = transform.string(value).toUpperCase();
-    this._size = validate.enumeration(size)(value) && value || size.SMALL;
+    this._size = validate.enumeration(size)(value) && value || size.MEDIUM;
     this._reflectAttribute('size', this._size);
 
     // large css change
     this.classList.toggle(`${CLASSNAME}--large`, this._size === size.LARGE);
 
-    // medium css change
-    this.classList.toggle(`${CLASSNAME}--medium`, this._size === size.MEDIUM);
+    // small css change
+    this.classList.toggle(`${CLASSNAME}--small`, this._size === size.SMALL);
   }
   
   /**
@@ -108,7 +104,7 @@ class Wait extends ComponentMixin(HTMLElement) {
   set centered(value) {
     this._centered = transform.booleanAttr(value);
     this._reflectAttribute('centered', this._centered);
-    
+  
     this.classList.toggle(`${CLASSNAME}--centered`, this._centered);
   }
   
@@ -127,13 +123,86 @@ class Wait extends ComponentMixin(HTMLElement) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
-
-    // removes every existing variant
-    this.classList.remove(...ALL_VARIANT_CLASSES);
-
-    if (this._variant !== variant.DEFAULT) {
-      this.classList.add(`${CLASSNAME}--${this._variant}`);
+  
+    this.classList.toggle(`${CLASSNAME}--fullpage`, this._variant === variant.MONOCHROME);
+  }
+  
+  /**
+   Whether to hide the current value and show an animation. Set to true for operations whose progress cannot be
+   determined.
+   
+   @type {Boolean}
+   @default false
+   @htmlattribute indeterminate
+   @htmlattributereflected
+   */
+  get indeterminate() {
+    return this._indeterminate || false;
+  }
+  set indeterminate(value) {
+    this._indeterminate = transform.booleanAttr(value);
+    this._reflectAttribute('indeterminate', this._indeterminate);
+    
+    if (this._indeterminate) {
+      this.classList.add(`${CLASSNAME}--indeterminate`);
+      
+      // ARIA: Remove attributes
+      this.removeAttribute('aria-valuenow');
+      this.removeAttribute('aria-valuemin');
+      this.removeAttribute('aria-valuemax');
+      
+      this.value = 0;
     }
+    else {
+      this.classList.remove(`${CLASSNAME}--indeterminate`);
+      
+      // ARIA: Add attributes
+      this.setAttribute('aria-valuemin', '0');
+      this.setAttribute('aria-valuemax', '100');
+      
+      this.value = this._oldValue;
+    }
+  }
+  
+  /**
+   The current progress in percent. If no value is set on initialization, wait is forced into indeterminate state.
+   
+   @type {Number}
+   @default 0
+   @emits {coral-wait:change}
+   @htmlattribute value
+   @htmlattributereflected
+   */
+  get value() {
+    return this.hasAttribute('indeterminate') ? 0 : this._value || 0;
+  }
+  set value(value) {
+    value = transform.number(value) || 0;
+    
+    // Stay within bounds
+    if (value > 100) {
+      value = 100;
+    }
+    else if (value < 0) {
+      value = 0;
+    }
+    
+    this._value = value;
+    this._reflectAttribute('value', this._value);
+    
+    if (!this.hasAttribute('indeterminate')) {
+      this.style.backgroundPosition = `${this._value}% center`;
+  
+      // ARIA: Reflect value for screenreaders
+      this.setAttribute('aria-valuenow', this._value);
+      this.setAttribute('aria-valuemin', '0');
+      this.setAttribute('aria-valuemax', '100');
+    }
+    else {
+      this.style.backgroundPosition = '';
+    }
+    
+    this.trigger('coral-wait:change');
   }
   
   /**
@@ -152,19 +221,44 @@ class Wait extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return ['size', 'centered', 'variant'];
+    return ['size', 'centered', 'variant', 'value', 'indeterminate'];
+  }
+  
+  /** @ignore */
+  attributeChangedCallback(name, oldValue, value) {
+    if (name === 'indeterminate' && transform.booleanAttr(value)) {
+      // Remember current value in case indeterminate is toggled back
+      this._oldValue = this._value || 0;
+    }
+    
+    super.attributeChangedCallback(name, oldValue, value);
   }
   
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();
-  
-    // Default reflected attributes
-    if (!this._size) { this.size = size.SMALL; }
-    if (!this._variant) { this.variant = variant.DEFAULT; }
     
     this.classList.add(CLASSNAME);
+    
+    // ARIA
+    this.setAttribute('role', 'progressbar');
+    
+    // Default reflected attributes
+    if (!this._size) { this.size = size.MEDIUM; }
+    if (!this._variant) { this.variant = variant.DEFAULT; }
+    
+    // If no value is specified, indeterminate is set
+    if (!this._value) { this.indeterminate = true; }
+    
+    // Centering reads the size
+    if (this.centered) { this.centered = this.centered; }
   }
+  
+  /**
+   Triggered when the {@link Wait} value is changed.
+   
+   @typedef {CustomEvent} coral-wait:change
+   */
 }
 
 export default Wait;

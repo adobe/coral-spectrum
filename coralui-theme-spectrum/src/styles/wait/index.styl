@@ -15,19 +15,21 @@
  * from Adobe Systems Incorporated.
  */
 
-@require '@spectrum/spectrum-css/dist/icons/spectrum-icons.css';
+.coral3-Loader--centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -16*$px;
+  margin-top: -16*$px;
 
-@require '@spectrum/spectrum-css/dist/spectrum-core.css';
+  &.coral3-Loader--small {
+    margin-left: -8*$px;
+    margin-top: -8*$px;
+  }
 
-@require '@spectrum/spectrum-css/dist/spectrum-darkest.css';
-@require '@spectrum/spectrum-css/dist/spectrum-dark.css';
-@require '@spectrum/spectrum-css/dist/spectrum-light.css';
-@require '@spectrum/spectrum-css/dist/spectrum-lightest.css';
-
-// Coral specificities
-@require 'commons';
-@require 'button';
-@require 'charactercount';
-@require 'list';
-@require 'progress';
-@require 'wait';
+  &.coral3-Loader--large,
+  &.coral3-Loader--fullpage {
+    margin-left: -32*$px;
+    margin-top: -32*$px;
+  }
+}
