@@ -17,13 +17,14 @@
 
 import {Overlay} from 'coralui-component-overlay';
 import {Vent} from 'coralui-externals';
+import base from '../templates/base';
 import {transform, validate, commons} from 'coralui-util';
 
 const arrowMap = {
-  left: 'Left',
-  right: 'Right',
-  top: 'Up',
-  bottom: 'Down'
+  left: 'left',
+  right: 'right',
+  top: 'top',
+  bottom: 'bottom'
 };
 
 const CLASSNAME = 'coral3-Tooltip';
@@ -36,22 +37,25 @@ const TOOLTIP_ARROW_SIZE = 12;
  
  @typedef {Object} TooltipVariantEnum
  
+ @property {String} DEFAULT
+ A default tooltip that provides additional information.
  @property {String} INFO
- A blue tooltip that informs the user of non-critical information.
- @property {String} ERROR
- A red tooltip that indicates an error has occurred.
- @property {String} WARNING
- An orange tooltip that notifies the user of something important.
+ A tooltip that informs the user of non-critical information.
  @property {String} SUCCESS
- A green tooltip that indicates an operation was successful.
+ A tooltip that indicates an operation was successful.
+ @property {String} ERROR
+ A tooltip that indicates an error has occurred.
+ @property {String} WARNING
+ Not supported. Falls back to DEFAULT.
  @property {String} INSPECT
- A dark gray tooltip that provides additional information for a chart item.
+ Not supported. Falls back to DEFAULT.
  */
 const variant = {
+  DEFAULT: 'default',
   INFO: 'info',
+  SUCCESS: 'success',
   ERROR: 'error',
   WARNING: 'warning',
-  SUCCESS: 'success',
   INSPECT: 'inspect'
 };
 
@@ -68,7 +72,7 @@ const ALL_PLACEMENT_CLASSES = [];
 const placementClassMap = {};
 for (const key in Overlay.placement) {
   const direction = Overlay.placement[key];
-  const placementClass = `${CLASSNAME}--arrow${arrowMap[direction]}`;
+  const placementClass = `${CLASSNAME}--${arrowMap[direction]}`;
   
   // Store in map
   placementClassMap[direction] = placementClass;
@@ -97,6 +101,9 @@ class Tooltip extends Overlay {
     this._elements = commons.extend(this._elements, {
       content: this.querySelector('coral-tooltip-content') || document.createElement('coral-tooltip-content')
     });
+    
+    // Generate template
+    base.call(this._elements);
   
     // Used for events
     this._id = commons.getUID();
@@ -109,16 +116,16 @@ class Tooltip extends Overlay {
    The variant of tooltip. See {@link TooltipVariantEnum}.
    
    @type {String}
-   @default TooltipVariantEnum.INFO
+   @default TooltipVariantEnum.DEFAULT
    @htmlattribute variant
    @htmlattributereflected
    */
   get variant() {
-    return this._variant || variant.INFO;
+    return this._variant || variant.DEFAULT;
   }
   set variant(value) {
     value = transform.string(value).toLowerCase();
-    this._variant = validate.enumeration(variant)(value) && value || variant.INFO;
+    this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
   
     this.classList.remove(...ALL_VARIANT_CLASSES);
@@ -352,18 +359,25 @@ class Tooltip extends Overlay {
     this.setAttribute('tabindex', '-1');
   
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.INFO; }
+    if (!this._variant) { this.variant = variant.DEFAULT; }
   
+    // Support cloneNode
+    const tip = this.querySelector('.coral3-Tooltip-tip');
+    if (tip) {
+      tip.remove();
+    }
+    
     const content = this._elements.content;
-    
-    // Remove it so we can process children
-    if (content.parentNode) {
-      this.removeChild(content);
+  
+    // Move the content into the content zone if none specified
+    if (!content.parentNode) {
+      while (this.firstChild) {
+        content.appendChild(this.firstChild);
+      }
     }
     
-    while (this.firstChild) {
-      content.appendChild(this.firstChild);
-    }
+    // Append template
+    this.appendChild(this._elements.tip);
   
     // Assign the content zone so the insert function will be called
     this.content = content;

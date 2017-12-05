@@ -9,7 +9,7 @@ describe('Coral.Tooltip', function() {
       var tooltip = helpers.build(new Coral.Tooltip());
       helpers.target.appendChild(tooltip);
     
-      expect(tooltip.variant).to.equal('info');
+      expect(tooltip.variant).to.equal('default');
       expect(tooltip.delay).to.equal(500);
     });
   });

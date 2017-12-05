@@ -15,10 +15,19 @@
  * from Adobe Systems Incorporated.
  */
 
+const CLASSNAME = 'coral3-Tooltip-label';
+
 /**
  @class Coral.Tooltip.Content
  @classdesc Tooltip's content component
  @htmltag coral-tooltip-content
- @return {HTMLElement}
+ @extends {HTMLElement}
  */
-export default () => document.createElement('coral-tooltip-content');
+class TooltipContent extends HTMLElement {
+  /** @ignore */
+  connectedCallback() {
+    this.classList.add(CLASSNAME);
+  }
+}
+
+export default TooltipContent;

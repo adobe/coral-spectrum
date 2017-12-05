@@ -8,26 +8,18 @@
   <script src="../build/js/coral.js"></script>
 
   <style>
-    body {
-      margin: 10px;
+    section {
+      padding: 15px;
     }
 
     .box {
-      margin: 50px auto;
+      margin-top: 50px;
+      margin-left: 100px;
       width: 50px;
       height: 50px;
       padding: 10px;
       border: 1px dashed gray;
       text-align: center;
-    }
-
-    .box-row {
-      text-align: center;
-    }
-
-    .box-row .box {
-      display: inline-block;
-      margin: 50px;
     }
   </style>
 </head>
@@ -39,92 +31,77 @@
     <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
   </div>
 
-  <h1 class="coral-Heading coral-Heading--1">Tooltip Examples</h1>
   <section>
-    <h2 class="coral-Heading coral-Heading--2">Basic Tooltip</h2>
+    <h1 class="coral-Heading coral-Heading--1">Coral.Tooltip</h1>
 
-    <section class="block">
-      <coral-tooltip target="_next" placement="right" style="width:200px">
-        <i class="coral-Icon coral-Icon--infoCircle"></i>
-        I said a hip hop,
-        Hippie to the hippie,
-        The hip, hip a hop, and you don't stop, a rock it,
-        To the bang bang boogie, say, up jump the boogie,
-        To the rhythm of the boogie, the beat.
-      </coral-tooltip>
-      <div class="box">Wrapping with icon (right)</div>
-    </section>
+    <h2 class="coral-Heading coral-Heading--2">Default</h2>
+    <div class="box">Default</div>
+    <coral-tooltip target="_prev">Tooltip</coral-tooltip>
 
-    <section class="block">
-      <coral-tooltip target="_next" placement="left" style="width:200px">
-        <i class="coral-Icon coral-Icon--infoCircle"></i>
-        I said a hip hop,
-        Hippie to the hippie,
-        The hip, hip a hop, and you don't stop, a rock it,
-        To the bang bang boogie, say, up jump the boogie,
-        To the rhythm of the boogie, the beat.
-      </coral-tooltip>
-      <div class="box">Wrapping with icon (left)</div>
-    </section>
+    <h2 class="coral-Heading coral-Heading--2">Placement</h2>
+    <div class="box">right</div>
+    <coral-tooltip target="_prev" placement="right">Tooltip right</coral-tooltip>
 
+    <div class="box">top</div>
+    <coral-tooltip target="_prev" placement="top">Tooltip top</coral-tooltip>
 
-    <div class="box-row">
-      <div class="box">right</div>
-      <coral-tooltip target="_prev" type="error" placement="right">Tooltip right</coral-tooltip>
+    <div class="box">bottom</div>
+    <coral-tooltip target="_prev" placement="bottom">Tooltip bottom</coral-tooltip>
 
-      <div class="box">top</div>
-      <coral-tooltip target="_prev" placement="top">Tooltip top</coral-tooltip>
+    <div class="box">left</div>
+    <coral-tooltip target="_prev" placement="left">Tooltip left</coral-tooltip>
 
-      <div class="box">bottom</div>
-      <coral-tooltip target="_prev" placement="bottom">Tooltip bottom</coral-tooltip>
+    <h2 class="coral-Heading coral-Heading--2">Variants</h2>
+    <div class="box">success</div>
+    <coral-tooltip target="_prev" variant="success">Tooltip</coral-tooltip>
 
-      <div class="box">left</div>
-      <coral-tooltip target="_prev" placement="left">Tooltip left</coral-tooltip>
-    </div>
+    <div class="box">info</div>
+    <coral-tooltip target="_prev" variant="info">Tooltip</coral-tooltip>
 
+    <div class="box">error</div>
+    <coral-tooltip target="_prev" variant="error">Tooltip</coral-tooltip>
+
+    <h2 class="coral-Heading coral-Heading--2">From JS</h2>
     <div class="box" id="hasJSTooltip">From JS</div>
+    <script>
+      var tooltip = new Coral.Tooltip();
 
-    <section class="block">
+      tooltip.set({
+        content: {
+          innerHTML: 'js tooltip'
+        },
+        target: '#hasJSTooltip'
+      });
+
+      document.body.appendChild(tooltip);
+    </script>
+
+    <h2 class="coral-Heading coral-Heading--2">Scrolling container</h2>
+    <div class="block">
       <div style="width:500px;height:100px;border:1px solid teal;overflow:scroll;">
         <strong id="target1">Hover Me</strong><br>
-        <strong>er</strong><br>
-        <strong>er</strong><br>
-        <strong>er</strong><br>
+        <span>lorem</span><br>
+        <span>lorem</span><br>
+        <span>lorem</span><br>
         <strong id="target2">Hover Me</strong><br>
-        <strong>er</strong><br>
-        <strong>er</strong><br>
-        <strong>er</strong><br>
+        <span>lorem</span><br>
+        <span>lorem</span><br>
+        <span>lorem</span><br>
         <strong id="target3">Hover Me</strong><br>
-        <strong>er</strong><br>
-        <strong>er</strong><br>
-        <strong>er</strong><br>
+        <span>lorem</span><br>
+        <span>lorem</span><br>
+        <span>lorem</span><br>
         <strong id="target4">Hover Me</strong><br>
-        <strong>er</strong><br>
-        <strong>er</strong><br>
-        <strong>er</strong><br>
+        <span>lorem</span><br>
+        <span>lorem</span><br>
+        <span>lorem</span><br>
       </div>
 
       <coral-tooltip target="#target1" placement="bottom">Hello</coral-tooltip>
       <coral-tooltip target="#target2" placement="top">Hello</coral-tooltip>
       <coral-tooltip target="#target3" placement="left">Hello</coral-tooltip>
       <coral-tooltip target="#target4" placement="right">Hello</coral-tooltip>
-    </section>
-
+    </div>
   </section>
-
-  <script>
-    var tooltip = new Coral.Tooltip();
-
-    tooltip.set({
-      content: {
-        innerHTML: 'js tooltip'
-      },
-      target: '#hasJSTooltip',
-      variant: 'inspect'
-    });
-
-    document.body.appendChild(tooltip);
-  </script>
-
 </body>
 </html>
