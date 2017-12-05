@@ -15,21 +15,25 @@
  * from Adobe Systems Incorporated.
  */
 
-@require '@spectrum/spectrum-css/dist/icons/spectrum-icons.css';
+// Makes the custom element behave like a div
+coral-panel-content {
+  display: block;
+}
 
-@require '@spectrum/spectrum-css/dist/spectrum-core.css';
+.coral3-PanelStack {
+  display: block;
+}
 
-@require '@spectrum/spectrum-css/dist/spectrum-darkest.css';
-@require '@spectrum/spectrum-css/dist/spectrum-dark.css';
-@require '@spectrum/spectrum-css/dist/spectrum-light.css';
-@require '@spectrum/spectrum-css/dist/spectrum-lightest.css';
+.coral3-Panel {
+  display: block;
+}
 
-// Coral specificities
-@require 'commons';
-@require 'button';
-@require 'charactercount';
-@require 'list';
-@require 'panelstack';
-@require 'progress';
-@require 'tablist';
-@require 'wait';
+.coral3-Panel:not(.is-selected) {
+  display: none;
+}
+
+// @spectrum Since coral-Well provides a margin top we need to override it.
+.coral3-PanelStack.coral-Well,
+.coral3-Panel.coral-Well {
+  margin-top: 0;
+}
