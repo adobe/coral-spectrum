@@ -19,6 +19,29 @@ import {Icon} from 'coralui-component-icon';
 import {transform, validate} from 'coralui-util';
 
 /**
+ Enumeration for {@link Button}, {@link AnchorButton} icon sizes.
+ 
+ @typedef {Object} ButtonIconSizeEnum
+ 
+ @property {String} EXTRA_EXTRA_SMALL
+ Extra extra small size icon, typically 9px size.
+ @property {String} EXTRA_SMALL
+ Extra small size icon, typically 12px size.
+ @property {String} SMALL
+ Small size icon, typically 18px size. This is the default size.
+ @property {String} MEDIUM
+ Medium size icon, typically 24px size.
+ */
+const iconSize = {};
+const excludedIconSizes = [Icon.size.LARGE, Icon.size.EXTRA_LARGE, Icon.size.EXTRA_EXTRA_LARGE];
+for (const key in Icon.size) {
+  // Populate button icon sizes by excluding the largest icon sizes
+  if (excludedIconSizes.indexOf(Icon.size[key]) === -1) {
+    iconSize[key] = Icon.size[key];
+  }
+}
+
+/**
  Enumeration for {@link Button}, {@link AnchorButton} variants.
  
  @typedef {Object} ButtonVariantEnum
@@ -194,19 +217,18 @@ const ButtonMixin = (superClass) => class extends superClass {
   }
   
   /**
-   Size of the icon. It accepts both lower and upper case sizes. See {@link IconSizeEnum}.
-   "EXTRA_SMALL" is the icon only size currently supported.
+   Size of the icon. It accepts both lower and upper case sizes. See {@link ButtonIconSizeEnum}.
    
    @type {String}
-   @default IconSizeEnum.EXTRA_SMALL
+   @default ButtonIconSizeEnum.SMALL
    @htmlattribute iconsize
    */
   get iconSize() {
-    return this._iconSize || Icon.size.EXTRA_SMALL;
+    return this._elements.icon && this._elements.icon.size || iconSize.SMALL;
   }
   set iconSize(value) {
     value = transform.string(value).toUpperCase();
-    this._iconSize = validate.enumeration(Icon.size)(value) && value || Icon.size.EXTRA_SMALL;
+    this._getIconElement().size = validate.enumeration(iconSize)(value) && value || iconSize.SMALL;
   }
   
   /**
@@ -348,8 +370,7 @@ const ButtonMixin = (superClass) => class extends superClass {
   _getIconElement() {
     if (!this._elements.icon) {
       this._elements.icon = new Icon();
-      // "EXTRA_SMALL" is the only size currently supported.
-      this._elements.icon.size = Icon.size.EXTRA_SMALL;
+      this._elements.icon.size = this.iconSize;
     }
     return this._elements.icon;
   }
@@ -397,6 +418,13 @@ const ButtonMixin = (superClass) => class extends superClass {
    @return {ButtonIconPositionEnum}
    */
   static get iconPosition() { return iconPosition; }
+  
+  /**
+   Returns {@link ButtonMixin} icon sizes.
+   
+   @return {ButtonIconSizeEnum}
+   */
+  static get iconSize() { return iconSize; }
   
   /** @ignore */
   static get observedAttributes() {

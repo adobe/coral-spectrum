@@ -16,14 +16,29 @@
  */
 
 .coral3-Button {
-  // Force text-align for anchorbuttons
+  // @spectrum: force text-align for anchorbuttons
   text-align: center;
 
   // Support text + icon buttons
-  .coral3-Icon + coral-button-label:not(:empty):not([hidden]),
-  .coral3-Icon + coral-anchorbutton-label:not(:empty):not([hidden]),
-  coral-button-label:not(:empty):not([hidden]) + .coral3-Icon,
-  coral-anchorbutton-label:not(:empty):not([hidden]) + .coral3-Icon {
+  coral-icon + coral-button-label:not(:empty):not([hidden]),
+  coral-icon + coral-anchorbutton-label:not(:empty):not([hidden]),
+  coral-button-label:not(:empty):not([hidden]) + coral-icon,
+  coral-anchorbutton-label:not(:empty):not([hidden]) + coral-icon {
     margin-left: 4*$px;
+  }
+
+// @spectrum: vertically align icon
+  &:not(.coral3-Button--icon) {
+    coral-icon[size="XXS"] {
+      margin-top: 6*$px;
+    }
+
+    coral-icon[size="XS"] {
+      margin-top: 4*$px;
+    }
+
+    coral-icon[size="M"] {
+      margin-top: -2*$px;
+    }
   }
 }
