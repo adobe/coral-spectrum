@@ -267,6 +267,20 @@ describe('Coral.TabList', function() {
         // By Default, Extra Small icons are used in tab panel
         expect(tabPanelItem._elements.icon.size).to.equal(Coral.Icon.size.EXTRA_SMALL);
       });
+  
+      it('should change icon size depending on label', function(done) {
+        const el = new Coral.Tab();
+        el.icon = 'add';
+        expect(el._elements.icon.size).to.equal(Coral.Icon.size.SMALL);
+        
+        el.label.textContent = 'text';
+        // Wait for MO
+        helpers.next(() => {
+          expect(el._elements.icon.size).to.equal(Coral.Icon.size.EXTRA_SMALL);
+          
+          done();
+        });
+      });
     });
   });
 

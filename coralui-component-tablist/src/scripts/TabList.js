@@ -105,8 +105,6 @@ class TabList extends ComponentMixin(HTMLElement) {
       'key:pageup > coral-tab': '_selectPreviousItem',
       'key:left > coral-tab': '_selectPreviousItem',
       'key:up > coral-tab': '_selectPreviousItem',
-  
-      'global:coral-commons:_webfontactive': '_setLine',
       
       // private
       'coral-tab:_selectedchanged': '_onItemSelectedChanged',
@@ -531,6 +529,12 @@ class TabList extends ComponentMixin(HTMLElement) {
     if (template) {
       template.remove();
     }
+  
+    // Remove the object if it's already there
+    const object = this.querySelector('object');
+    if (object && object.parentNode === this) {
+      this.removeChild(object);
+    }
     
     // Insert tab line
     this.appendChild(this._elements.line);
@@ -541,6 +545,9 @@ class TabList extends ComponentMixin(HTMLElement) {
     this._preventTriggeringEvents = false;
     
     this._oldSelection = this.selectedItem;
+    
+    // Display line once tabList is shown
+    commons.addResizeListener(this, this._setLine);
   }
   
   /**

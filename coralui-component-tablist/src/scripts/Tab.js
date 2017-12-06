@@ -18,7 +18,7 @@
 import {ComponentMixin} from 'coralui-mixin-component';
 import base from '../templates/base';
 import {transform, commons} from 'coralui-util';
-import 'coralui-component-icon';
+import {Icon} from 'coralui-component-icon';
 import getTarget from './getTarget';
 
 const CLASSNAME = 'coral3-TabList-item';
@@ -43,6 +43,12 @@ class Tab extends ComponentMixin(HTMLElement) {
   
     // Listen for mutations
     this._observer = new MutationObserver(() => {
+      // Change icon size if the label is empty
+      const icon = this._elements.icon;
+      if (icon) {
+        icon.size = this._elements.label.textContent.trim().length ? Icon.size.EXTRA_SMALL : Icon.size.SMALL;
+      }
+      
       this.trigger('coral-tab:_sizechanged');
     });
   
@@ -95,6 +101,10 @@ class Tab extends ComponentMixin(HTMLElement) {
     }
     // adds the icon back since it was blown away by textContent
     else if (!iconElement.parentElement) {
+      // Change icon size if the label is empty
+      if (!this._elements.label.textContent.trim().length) {
+        iconElement.size = Icon.size.SMALL;
+      }
       this.insertBefore(iconElement, this.firstChild);
       this.trigger('coral-tab:_sizechanged');
     }
