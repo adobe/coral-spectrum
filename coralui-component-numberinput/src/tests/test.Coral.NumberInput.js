@@ -1,8 +1,7 @@
 describe('Coral.NumberInput', function() {
   function testInstance(instance) {
     expect(instance.getAttribute('role')).to.equal('group');
-    expect(instance.classList.contains('coral3-NumberInput')).to.be.true;
-    expect(instance.classList.contains('coral-InputGroup')).to.be.true;
+    expect(instance.classList.contains('coral3-Stepper')).to.be.true;
 
     expect(instance._elements.input).to.exist;
     expect(instance._elements.stepUp).to.exist;
@@ -58,6 +57,16 @@ describe('Coral.NumberInput', function() {
   });
 
   describe('Markup', function() {
+    
+    describe('#disabled', function() {
+      it('should be settable from markup', function() {
+        const el = helpers.build(window.__html__['Coral.NumberInput.disabled.html']);
+        expect(el.disabled).to.be.true;
+        expect(el.value).to.equal('5');
+        expect(el.classList.contains('is-disabled')).to.be.true;
+        expect(el.getAttribute('disabled')).to.not.be.null;
+      });
+    });
 
     describe('#invalid', function() {
 

@@ -22,7 +22,7 @@ import 'coralui-component-textfield';
 import base from '../templates/base';
 import {transform, commons} from 'coralui-util';
 
-const CLASSNAME = 'coral3-NumberInput';
+const CLASSNAME = 'coral3-Stepper';
 let clearLiveRegionTimeout;
 const LIVEREGION_TIMEOUT_DELAY = 3000;
 const MSPOINTER_TYPE_MOUSE = 0x00000004;
@@ -134,8 +134,8 @@ class NumberInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
     flagStepButtonClick = false;
     
-    this.invalid = this.invalid;
-    this.disabled = this.disabled;
+    this.invalid = this.hasAttribute('invalid');
+    this.disabled = this.hasAttribute('disabled');
   }
   
   /**
@@ -151,8 +151,8 @@ class NumberInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._valueAsNumber = transform.float(value);
   
     this.value = this._valueAsNumber;
-    this.invalid = this.invalid;
-    this.disabled = this.disabled;
+    this.invalid = this.hasAttribute('invalid');
+    this.disabled = this.hasAttribute('disabled');
   }
   
   /**
@@ -186,8 +186,8 @@ class NumberInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       this._elements.input.min = this._min;
     }
     
-    this.invalid = this.invalid;
-    this.disabled = this.disabled;
+    this.invalid = this.hasAttribute('invalid');
+    this.disabled = this.hasAttribute('disabled');
   }
   
   /**
@@ -221,8 +221,8 @@ class NumberInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       this._elements.input.max = this._max;
     }
     
-    this.invalid = this.invalid;
-    this.disabled = this.disabled;
+    this.invalid = this.hasAttribute('invalid');
+    this.disabled = this.hasAttribute('disabled');
   }
   
   /**
@@ -761,7 +761,6 @@ class NumberInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     super.connectedCallback();
 
     this.classList.add(CLASSNAME);
-    this.classList.add('coral-InputGroup');
 
     // Default reflected attributes
     if (!this._step) { this.step = 1; }
