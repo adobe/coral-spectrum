@@ -9,32 +9,9 @@
 
     <style type="text/css">
     section {
-      border-top: 1px solid #C8C8C8;
-      padding: 12px;
-    }
-
-    #log {
-      background-color: white;
-      border: 1px solid #bababa;
-      height: 100px;
-      overflow-y: scroll;
-      padding: 10px 10px 10px 25px;
-      margin: 0;
+      padding: 15px;
     }
     </style>
-    <script type="text/javascript">
-    function log(text) {
-      var li = document.createElement('li');
-      li.textContent = text;
-      document.getElementById('log').insertBefore(li, this.firstChild);
-    }
-
-    document.addEventListener('coral-steplist:change', function(event) {
-      log(event.type +
-        ' {selection: "' + (event.detail.selection ? event.detail.selection.textContent : null) +
-        '", oldSelection: "' + (event.detail.oldSelection ? event.detail.oldSelection.textContent : null) + '"}');
-    });
-    </script>
   </head>
 
   <body class="coral--light">
@@ -46,92 +23,43 @@
       <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
     </div>
 
-    <h1 class="coral-Heading coral-Heading--1">coral-StepList</h1>
     <section>
-      <h2 class="coral-Heading coral-Heading--2">StepList 1</h2>
-      <coral-steplist interaction="on">
-        <coral-step>Step 1</coral-step>
-      </coral-steplist>
-      <h2 class="coral-Heading coral-Heading--2">StepList 2</h2>
-      <coral-steplist interaction="on">
+      <h1 class="coral-Heading coral-Heading--1">Coral.StepList</h1>
+
+      <h2 class="coral-Heading coral-Heading--2">Default</h2>
+      <coral-steplist>
         <coral-step>Step 1</coral-step>
         <coral-step>Step 2</coral-step>
+        <coral-step>Step 3</coral-step>
       </coral-steplist>
-      <h2 class="coral-Heading coral-Heading--2">StepList 3</h2>
+
+      <h2 class="coral-Heading coral-Heading--2">Single Step</h2>
+      <coral-steplist interaction="on">
+        <coral-step>Step 1</coral-step>
+      </coral-steplist>
+
+      <h2 class="coral-Heading coral-Heading--2">Selectable Steps</h2>
       <coral-steplist interaction="on">
         <coral-step>Step 1</coral-step>
         <coral-step selected>Step 2</coral-step>
         <coral-step>Step 3</coral-step>
       </coral-steplist>
-      <h2 class="coral-Heading coral-Heading--2">StepList 4</h2>
-      <coral-steplist interaction="on">
-        <coral-step>Step 1</coral-step>
-        <coral-step selected>Step 2</coral-step>
-        <coral-step>Step 3</coral-step>
-        <coral-step>Step 4</coral-step>
-      </coral-steplist>
-      <h2 class="coral-Heading coral-Heading--2">StepList 5</h2>
-      <coral-steplist interaction="on">
+
+      <h2 class="coral-Heading coral-Heading--2">Small Size</h2>
+      <coral-steplist size="S" interaction="on">
         <coral-step>Step 1</coral-step>
         <coral-step selected>Step 2</coral-step>
         <coral-step>Step 3</coral-step>
         <coral-step>Step 4</coral-step>
         <coral-step>Step 5</coral-step>
       </coral-steplist>
-      <h2 class="coral-Heading coral-Heading--2">No Text</h2>
-      <coral-steplist interaction="on">
-        <coral-step></coral-step>
-        <coral-step selected></coral-step>
-        <coral-step></coral-step>
-        <coral-step></coral-step>
-        <coral-step></coral-step>
-      </coral-steplist>
+
       <h2 class="coral-Heading coral-Heading--2">Long Text</h2>
       <coral-steplist interaction="on">
-        <coral-step>My text is the longest</coral-step>
-        <coral-step selected>And my text is quite long</coral-step>
-        <coral-step>If this was in German</coral-step>
-        <coral-step>It would likely look wrong</coral-step>
+        <coral-step>My text is the longest among all</coral-step>
+        <coral-step selected>And my text is quite long too</coral-step>
+        <coral-step>My text is short</coral-step>
       </coral-steplist>
-      <h2 class="coral-Heading coral-Heading--2">Interactive: off</h2>
-      <coral-steplist interaction="off">
-        <coral-step>Step 1</coral-step>
-        <coral-step selected>Step 2</coral-step>
-        <coral-step>Step 3</coral-step>
-        <coral-step>Step 4</coral-step>
-        <coral-step>Step 5</coral-step>
-      </coral-steplist>
-    </section>
-    <section>
-      <h2 class="coral-Heading coral-Heading--2">Size: Small</h2>
-      <coral-steplist size="S" interaction="on">
-        <coral-step>Step 1</coral-step>
-        <coral-step selected>Step 2</coral-step>
-        <coral-step>Step 3</coral-step>
-        <coral-step>Step 4</coral-step>
-        <coral-step>Step 5</coral-step>
-      </coral-steplist>
-      <h2 class="coral-Heading coral-Heading--2">No Text</h2>
-      <coral-steplist size="S" interaction="on">
-        <coral-step></coral-step>
-        <coral-step selected></coral-step>
-        <coral-step></coral-step>
-        <coral-step></coral-step>
-        <coral-step></coral-step>
-      </coral-steplist>
-      <h2 class="coral-Heading coral-Heading--2">Interactive: off</h2>
-      <coral-steplist size="S" interaction="off">
-        <coral-step></coral-step>
-        <coral-step selected></coral-step>
-        <coral-step></coral-step>
-        <coral-step></coral-step>
-        <coral-step></coral-step>
-      </coral-steplist>
-    </section>
-    <section>
-      <h2 class="coral-Heading coral-Heading--2">Log</h2>
-      <ul id="log"></ul>
     </section>
   </body>
-
 </html>

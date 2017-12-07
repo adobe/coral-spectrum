@@ -15,19 +15,25 @@
  * from Adobe Systems Incorporated.
  */
 
-const CLASSNAME = 'coral3-Steplist-label';
+// Support hybrid mode
+.coral3-Steplist--hybrid {
+  .coral3-Steplist-label {
+    width: auto;
+    white-space: nowrap;
+  }
 
-/**
- @class Coral.Step.Label
- @classdesc A Step Label
- @htmltag coral-step-label
- @extends {HTMLElement}
- */
-class StepLabel extends HTMLElement {
-  /** @ignore */
-  connectedCallback() {
-    this.classList.add(CLASSNAME);
+  .coral3-Steplist-item:last-child {
+    // Center last step in hybrid mode
+    .coral3-Steplist-label {
+      left: 100%;
+      transform: translateX(-50%);
+    }
+  }
+
+  .coral3-Steplist-item.is-selected {
+    .coral3-Steplist-label:after {
+      // Display "(stepX/stepTotal)"
+      content: attr(data-coral-step-index);
+    }
   }
 }
-
-export default StepLabel;

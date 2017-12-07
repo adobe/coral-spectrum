@@ -21,7 +21,7 @@ import step from '../templates/step';
 import {transform, commons} from 'coralui-util';
 import getTarget from './getTarget';
 
-const CLASSNAME = 'coral3-Step';
+const CLASSNAME = 'coral3-Steplist-item';
 
 /**
  @class Coral.Step
@@ -137,6 +137,24 @@ class Step extends ComponentMixin(HTMLElement) {
     }
   }
   
+  _isHybrid() {
+    const label = this.label;
+    const maxWidth = this.label.clientWidth;
+    
+    // Required to be able to measure full width
+    label.style.position = 'relative';
+    label.style.whiteSpace = 'inherit';
+    label.style.display = 'inline';
+  
+    // Mark it for hybrid mode
+    this._labelIsHidden = label.getBoundingClientRect().width > maxWidth;
+    
+    // Restore defaults
+    label.style.position = '';
+    label.style.whiteSpace = '';
+    label.style.display = '';
+  }
+  
   get _contentZones() { return {'coral-step-label': 'label'}; }
   
   /** @ignore */
@@ -191,8 +209,8 @@ class Step extends ComponentMixin(HTMLElement) {
     // Assign the content zone so the insert function will be called
     this.label = label;
     
-    // Mark it for hybrid mode
-    this._labelIsHidden = this.label.clientWidth > this.clientWidth;
+    // Measure hybrid potential
+    this._isHybrid();
   }
 }
 

@@ -53,7 +53,7 @@ const size = {
 };
 
 // the StepList's base classname
-const CLASSNAME = 'coral3-StepList';
+const CLASSNAME = 'coral3-Steplist';
 
 /**
  @class Coral.StepList
@@ -73,9 +73,9 @@ class StepList extends ComponentMixin(HTMLElement) {
       'click > coral-step': '_onStepClick',
   
       'capture:focus > coral-step': '_onStepMouseEnter',
-      'capture:mouseenter > coral-step': '_onStepMouseEnter',
+      'capture:mouseenter > coral-step > [handle="stepMarkerContainer"]': '_onStepMouseEnter',
       'capture:blur > coral-step': '_onStepMouseLeave',
-      'capture:mouseleave > coral-step': '_onStepMouseLeave',
+      'capture:mouseleave > coral-step > [handle="stepMarkerContainer"]': '_onStepMouseLeave',
   
       'key:enter > coral-step': '_onStepKeyboardSelect',
       'key:space > coral-step': '_onStepKeyboardSelect',
@@ -362,9 +362,9 @@ class StepList extends ComponentMixin(HTMLElement) {
   }
   
   /** @private */
-  _onStepMouseEnter(event) {
+  _onStepMouseEnter() {
     if (this.size === size.SMALL || this._isHybridMode) {
-      const step = event.matchedTarget;
+      const step = event.target.closest('coral-step');
       if (step.hasAttribute('selected') && this._isHybridMode) {
         return;
       }
@@ -380,7 +380,7 @@ class StepList extends ComponentMixin(HTMLElement) {
   /** @private */
   _onStepMouseLeave(event) {
     if (this.size === size.SMALL || this._isHybridMode) {
-      const step = event.matchedTarget;
+      const step = event.target.closest('coral-step');
       step._elements.tooltip.open = false;
     }
   }
