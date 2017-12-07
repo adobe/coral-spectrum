@@ -13,6 +13,7 @@ commons.extend(strings, {
 });
 
 window.customElements.define('coral-dialog', Dialog);
+window.customElements.define('coral-dialog-header', DialogHeader);
 window.customElements.define('coral-dialog-content', DialogContent);
 window.customElements.define('coral-dialog-footer', DialogFooter);
 

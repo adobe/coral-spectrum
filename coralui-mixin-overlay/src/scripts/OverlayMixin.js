@@ -345,7 +345,7 @@ function doBackdropShow(zIndex, instance) {
   
   if (!backdropEl) {
     backdropEl = document.createElement('div');
-    backdropEl.className = 'coral3-Backdrop';
+    backdropEl.className = 'coral3-Underlay';
     document.body.appendChild(backdropEl);
     
     backdropEl.addEventListener('click', handleBackdropClick);
@@ -544,7 +544,7 @@ const OverlayMixin = (superClass) => class extends superClass {
     
           // The default style should be display: none for overlays
           // Show ourselves first for centering calculations etc
-          self.style.display = 'block';
+          self.style.display = '';
   
           // Do it in the next frame to make the animation happen
           window.requestAnimationFrame(() => {

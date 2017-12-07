@@ -15,22 +15,12 @@
  * from Adobe Systems Incorporated.
  */
 
-const CLASSNAME = 'coral3-Dialog-title';
-
-/**
- @class Coral.Dialog.Header
- @classdesc The Dialog header content
- @htmltag coral-dialog-header
- @extends {HTMLElement}
- */
-class DialogHeader extends HTMLElement {
-  /** @ignore */
-  connectedCallback() {
-    this.classList.add(CLASSNAME);
-  
-    this.setAttribute('role', 'heading');
-    this.setAttribute('aria-level', '2');
-  }
+// @spectrum
+coral-dialog-footer {
+  display: block;
 }
 
-export default DialogHeader;
+// Prevent dialog flashing on page load
+coral-dialog {
+  display: none;
+}

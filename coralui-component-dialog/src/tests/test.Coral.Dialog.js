@@ -68,7 +68,6 @@ describe('Coral.Dialog', function() {
       expect(el.closable).to.equal(Coral.Dialog.closable.OFF);
       expect(el.backdrop).to.equal(Coral.Dialog.backdrop.MODAL);
       expect(el.movable).to.equal(false);
-      expect(el.style.display).to.equal('none');
     });
   
     describe('#variant', function() {
@@ -76,7 +75,6 @@ describe('Coral.Dialog', function() {
         el.variant = Coral.Dialog.variant.ERROR;
       
         expect(el.classList.contains('coral3-Dialog--error')).to.be.true;
-        expect(el._elements.icon.icon).to.equal('alert');
         expect(el.getAttribute('role')).to.equal('alertdialog');
       });
     
@@ -84,7 +82,6 @@ describe('Coral.Dialog', function() {
         el.variant = Coral.Dialog.variant.WARNING;
       
         expect(el.classList.contains('coral3-Dialog--warning')).to.be.true;
-        expect(el._elements.icon.icon).to.equal('alert');
         expect(el.getAttribute('role')).to.equal('alertdialog');
       });
     
@@ -92,7 +89,6 @@ describe('Coral.Dialog', function() {
         el.variant = Coral.Dialog.variant.SUCCESS;
       
         expect(el.classList.contains('coral3-Dialog--success')).to.be.true;
-        expect(el._elements.icon.icon).to.equal('checkCircle');
         expect(el.getAttribute('role')).to.equal('alertdialog');
       });
     
@@ -100,7 +96,6 @@ describe('Coral.Dialog', function() {
         el.variant = Coral.Dialog.variant.HELP;
       
         expect(el.classList.contains('coral3-Dialog--help')).to.be.true;
-        expect(el._elements.icon.icon).to.equal('helpCircle');
         expect(el.getAttribute('role')).to.equal('alertdialog');
       });
     
@@ -108,7 +103,6 @@ describe('Coral.Dialog', function() {
         el.variant = Coral.Dialog.variant.INFO;
       
         expect(el.classList.contains('coral3-Dialog--info')).to.be.true;
-        expect(el._elements.icon.icon).to.equal('infoCircle');
         expect(el.getAttribute('role')).to.equal('alertdialog');
       });
     
@@ -116,19 +110,16 @@ describe('Coral.Dialog', function() {
         el.variant = Coral.Dialog.variant.INFO;
       
         expect(el.classList.contains('coral3-Dialog--info')).to.be.true;
-        expect(el._elements.icon.icon).to.equal('infoCircle');
       
         el.variant = Coral.Dialog.variant.HELP;
       
         expect(el.classList.contains('coral3-Dialog--info')).to.be.false;
         expect(el.classList.contains('coral3-Dialog--help')).to.be.true;
-        expect(el._elements.icon.icon).to.equal('helpCircle');
       
         el.variant = Coral.Dialog.variant.DEFAULT;
       
         expect(el.classList.contains('coral3-Dialog--help')).to.be.false;
         expect(el.classList.contains('coral3-Dialog--default')).to.be.false;
-        expect(el._elements.icon.icon).to.equal('');
       });
     });
   
@@ -142,7 +133,7 @@ describe('Coral.Dialog', function() {
       it('should create a drag action instance', function() {
         el.movable = true;
       
-        var dragAction = el._elements.wrapper.dragAction;
+        var dragAction = el.dragAction;
         expect(dragAction instanceof Coral.DragAction).to.be.true;
         expect(dragAction.handle).to.equal(el._elements.headerWrapper);
       });
@@ -150,39 +141,34 @@ describe('Coral.Dialog', function() {
       it('should be movable by dragging the dialog header', function(done) {
         // The dialog needs to be opened before it can be moved.
         el = helpers.build(window.__html__['Coral.Dialog.fromElements-open.html']);
-      
-        var dragElement = el._elements.wrapper;
+        
         var handle = el._elements.headerWrapper;
       
         // Make sure the dialog is positioned
         helpers.next(function() {
-          expect(el._elements.wrapper.style.width).to.equal('');
+          expect(el.style.width).to.equal('');
           
           el.movable = true;
         
           var offset = {
-            left: dragElement.offsetLeft,
-            top: dragElement.offsetTop
+            left: el.offsetLeft,
+            top: el.offsetTop
           };
         
           el.dispatchEvent(dummyMouseEvent('mousedown'));
           el.dispatchEvent(dummyMouseEvent('mousemove', 10, 20));
         
           // The dialog can only be moved by the handle
-          expect(dragElement.offsetLeft).to.equal(offset.left);
-          expect(dragElement.offsetTop).to.equal(offset.top);
+          expect(el.offsetLeft).to.equal(offset.left);
+          expect(el.offsetTop).to.equal(offset.top);
         
           handle.dispatchEvent(dummyMouseEvent('mousedown'));
           handle.dispatchEvent(dummyMouseEvent('mousemove', 10, 20));
         
-          expect(dragElement.offsetLeft).to.equal(offset.left + 10);
-          expect(dragElement.offsetTop).to.equal(offset.top + 20);
-        
-          // The fixed width is set only once all dialog items are defined
-          Coral.commons.ready(el, function() {
-            expect(el._elements.wrapper.style.width).to.not.equal('');
-            done();
-          });
+          expect(el.offsetLeft).to.equal(offset.left + 10);
+          expect(el.offsetTop).to.equal(offset.top + 20);
+          
+          done();
         });
       });
     
@@ -204,8 +190,7 @@ describe('Coral.Dialog', function() {
     
       it('should be possible to center a moved dialog', function(done) {
         el.movable = true;
-      
-        var dragElement = el._elements.wrapper;
+        
         var handle = el._elements.headerWrapper;
       
         handle.dispatchEvent(dummyMouseEvent('mousedown'));
@@ -214,8 +199,8 @@ describe('Coral.Dialog', function() {
         el.center();
       
         helpers.next(function() {
-          expect(dragElement.style.top).to.equal('50%');
-          expect(dragElement.style.left).to.equal('50%');
+          expect(el.style.top).to.equal('');
+          expect(el.style.left).to.equal('');
         
           done();
         });
@@ -225,13 +210,12 @@ describe('Coral.Dialog', function() {
         el.movable = true;
         el.movable = false;
       
-        expect(el._elements.wrapper.dragAction).to.be.undefined;
+        expect(el.dragAction).to.be.undefined;
       });
     
       it('should center the dialog if not movable anymore', function() {
         el.movable = true;
-      
-        var dragElement = el._elements.wrapper;
+        
         var handle = el._elements.headerWrapper;
       
         handle.dispatchEvent(dummyMouseEvent('mousedown'));
@@ -239,19 +223,18 @@ describe('Coral.Dialog', function() {
       
         el.movable = false;
       
-        expect(dragElement.style.top).to.equal('50%');
-        expect(dragElement.style.left).to.equal('50%');
+        expect(el.style.top).to.equal('');
+        expect(el.style.left).to.equal('');
       });
     });
     
     describe('#backdrop', function() {
-      it('should not take the whole screen if backdrop is set to none', function() {
+      it('should hide the underlay if backdrop is set to none', function() {
         el.backdrop = 'none';
         el.open = true;
     
         expect(el.open).to.be.true;
-        expect(el.classList.contains('coral3-Dialog--backdropNone')).to.be.true;
-        expect(document.elementFromPoint(0, 0)).to.not.equal(el);
+        expect(document.elementFromPoint(0, 0)).to.not.equal(document.querySelector('coral3-Underlay'));
       });
     });
   });
@@ -423,11 +406,11 @@ describe('Coral.Dialog', function() {
       });
   
       it('should allow vertical scroll if the dialog is bigger than the window', function(done) {
-        el._elements.wrapper.style.height = (window.innerHeight * 2) + 'px';
+        el.style.height = (window.innerHeight * 2) + 'px';
         el.open = true;
         helpers.next(function() {
-          expect(el._elements.wrapper.style.top).to.equal('');
-          expect(el._elements.wrapper.style.marginTop).to.equal('');
+          expect(el.style.top).to.equal('');
+          expect(el.style.marginTop).to.equal('');
           done();
         });
       });
@@ -436,37 +419,8 @@ describe('Coral.Dialog', function() {
         el.fullscreen = true;
         el.open = true;
         helpers.next(function() {
-          expect(el._elements.wrapper.style.left).to.equal('');
-          expect(el._elements.wrapper.style.marginLeft).to.equal('');
-          done();
-        });
-      });
-  
-      it('should be centered when contents are small', function(done) {
-        el.set({
-          header: 'I am the eggman',
-          content: 'I am the walrus',
-          footer: 'Coo coo ca choo'
-        });
-    
-        el.show();
-    
-        helpers.next(function() {
-          var wrapper = el._elements.wrapper;
-      
-          var style = wrapper.style;
-      
-          // We should definitely be positioned absolute in this case
-          expect(style.position).to.equal('absolute');
-      
-          // In the center
-          expect(style.top).to.equal('50%');
-          expect(style.left).to.equal('50%');
-      
-          // With a nice calculation for margin offset
-          expect(parseFloat(style.marginTop)).to.be.lessThan(0);
-          expect(parseFloat(style.marginLeft)).to.be.lessThan(0);
-      
+          expect(el.style.left).to.equal('');
+          expect(el.style.marginLeft).to.equal('');
           done();
         });
       });
@@ -480,7 +434,7 @@ describe('Coral.Dialog', function() {
         el.remove();
     
         expect(el.parentNode).to.equal(null, 'dialog should be detached');
-        var backdrop = document.querySelector('.coral3-Backdrop');
+        var backdrop = document.querySelector('.coral3-Underlay');
         expect(backdrop).to.not.be.null;
     
         // Make sure the backdrop is visible
@@ -495,7 +449,7 @@ describe('Coral.Dialog', function() {
         el.remove();
     
         expect(el.parentNode).to.equal(null, 'dialog should be detached');
-        var backdrop = document.querySelector('.coral3-Backdrop');
+        var backdrop = document.querySelector('.coral3-Underlay');
         expect(backdrop).to.not.be.null;
     
         // Make sure the backdrop is visible
@@ -507,11 +461,8 @@ describe('Coral.Dialog', function() {
         var wrapper1 = el.querySelector('#wrapper1');
         var wrapper2 = el.querySelector('#wrapper2');
     
-        expect(el._elements.wrapper).to.exist;
-        expect(el._elements.wrapper.className.trim()).to.equal('coral3-Dialog-wrapper');
-    
-        expect(el._elements.wrapper.contains(wrapper1)).to.equal(true, 'Dialog should contain wrapper1');
-        expect(el._elements.wrapper.contains(wrapper2)).to.equal(true, 'Dialog should contain wrapper2');
+        expect(el.contains(wrapper1)).to.equal(true, 'Dialog should contain wrapper1');
+        expect(el.contains(wrapper2)).to.equal(true, 'Dialog should contain wrapper2');
     
         expect(wrapper1.contains(wrapper2)).to.equal(true, 'wrapper1 should contain wrapper2');
     
@@ -524,10 +475,7 @@ describe('Coral.Dialog', function() {
         el = helpers.build(window.__html__['Coral.Dialog.wrapper.single.html']);
         var wrapper1 = el.querySelector('#wrapper1');
     
-        expect(el._elements.wrapper).to.exist;
-        expect(el._elements.wrapper.className.trim()).to.equal('coral3-Dialog-wrapper');
-    
-        expect(el._elements.wrapper.contains(wrapper1)).to.equal(true, 'Dialog should contain wrapper1');
+        expect(el.contains(wrapper1)).to.equal(true, 'Dialog should contain wrapper1');
     
         expect(wrapper1.contains(el.header)).to.equal(true, 'wrapper1 should contain header');
         expect(wrapper1.contains(el.content)).to.equal(true, 'wrapper1 should contain content');
@@ -536,22 +484,14 @@ describe('Coral.Dialog', function() {
   
       it('should wrap internal elements', function() {
         el = helpers.build(window.__html__['Coral.Dialog.fromElements.html']);
-        var wrapper = el._elements.wrapper;
     
-        expect(el._elements.wrapper).to.exist;
-        expect(el._elements.wrapper.className.trim()).to.equal('coral3-Dialog-wrapper');
-    
-        expect(wrapper.contains(el.header)).to.equal(true, 'wrapper should contain header');
-        expect(wrapper.contains(el.content)).to.equal(true, 'wrapper should contain content');
-        expect(wrapper.contains(el.footer)).to.equal(true, 'wrapper should contain footer');
+        expect(el.contains(el.header)).to.equal(true, 'wrapper should contain header');
+        expect(el.contains(el.content)).to.equal(true, 'wrapper should contain content');
+        expect(el.contains(el.footer)).to.equal(true, 'wrapper should contain footer');
       });
   
       it('should create wrapper when no content zones are provided', function() {
         el = helpers.build(window.__html__['Coral.Dialog.contentOnly.html']);
-        var wrapper = el._elements.wrapper;
-    
-        expect(el._elements.wrapper).to.exist;
-        expect(el._elements.wrapper.className.trim()).to.equal('coral3-Dialog-wrapper');
     
         // we check that all content zones were properly created
         expect(el.header).to.exist;
@@ -561,9 +501,9 @@ describe('Coral.Dialog', function() {
         expect(el.footer).to.exist;
         expect(el.contains(el.footer)).to.be.true;
     
-        expect(wrapper.contains(el.header)).to.equal(true, 'wrapper should contain header');
-        expect(wrapper.contains(el.content)).to.equal(true, 'wrapper should contain content');
-        expect(wrapper.contains(el.footer)).to.equal(true, 'wrapper should contain footer');
+        expect(el.contains(el.header)).to.equal(true, 'wrapper should contain header');
+        expect(el.contains(el.content)).to.equal(true, 'wrapper should contain content');
+        expect(el.contains(el.footer)).to.equal(true, 'wrapper should contain footer');
     
         // the content should be moved into the coral-dialog-content
         expect(el.content.textContent).to.equal('This content will be moved to coral-dialog-content.');
