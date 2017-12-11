@@ -2,6 +2,7 @@ import 'coralui-externals';
 import Card from './src/scripts/Card';
 import CardProperty from './src/scripts/CardProperty';
 import CardTitle from './src/scripts/CardTitle';
+import CardSubtitle from './src/scripts/CardSubtitle';
 import CardContext from './src/scripts/CardContext';
 import CardDescription from './src/scripts/CardDescription';
 import CardAsset from './src/scripts/CardAsset';
@@ -14,6 +15,7 @@ import CardPropertyContent from './src/scripts/CardPropertyContent';
 window.customElements.define('coral-card', Card);
 window.customElements.define('coral-card-property', CardProperty);
 window.customElements.define('coral-card-title', CardTitle);
+window.customElements.define('coral-card-subtitle', CardSubtitle);
 window.customElements.define('coral-card-context', CardContext);
 window.customElements.define('coral-card-description', CardDescription);
 
@@ -22,6 +24,7 @@ window.Coral = window.Coral || {};
 window.Coral.Card = Card;
 window.Coral.Card.Property = CardProperty;
 window.Coral.Card.Title = CardTitle;
+window.Coral.Card.Subtitle = CardSubtitle;
 window.Coral.Card.Context = CardContext;
 window.Coral.Card.Description = CardDescription;
 window.Coral.Card.Asset = CardAsset;
@@ -35,6 +38,7 @@ export {
   Card,
   CardProperty,
   CardTitle,
+  CardSubtitle,
   CardContext,
   CardDescription,
   CardAsset,

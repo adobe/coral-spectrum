@@ -6,7 +6,7 @@ import {Autocomplete, AutocompleteItem} from 'coralui-component-autocomplete';
 import {Button, ButtonLabel} from 'coralui-component-button';
 import {ButtonGroup} from 'coralui-component-buttongroup';
 import {Calendar} from 'coralui-component-calendar';
-import {Card, CardProperty, CardTitle, CardContext, CardDescription, CardAsset, CardContent, CardOverlay, CardPropertyContent, CardPropertyList} from 'coralui-component-card';
+import {Card, CardProperty, CardTitle, CardSubtitle, CardContext, CardDescription, CardAsset, CardContent, CardOverlay, CardPropertyContent, CardPropertyList} from 'coralui-component-card';
 import {CharacterCount} from 'coralui-component-charactercount';
 import {Checkbox, CheckboxLabel} from 'coralui-component-checkbox';
 import {Clock} from 'coralui-component-clock';
@@ -78,6 +78,7 @@ export {
   Card,
   CardProperty,
   CardTitle,
+  CardSubtitle,
   CardContext,
   CardDescription,
   CardAsset,
