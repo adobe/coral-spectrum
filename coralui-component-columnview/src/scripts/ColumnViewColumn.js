@@ -180,6 +180,19 @@ class ColumnViewColumn extends ComponentMixin(HTMLElement) {
     this._setStateFromDOM();
   }
   
+  /**
+   Returns an Array containing the last selected items inside this Column in selected order.
+   
+   @type {Array.<HTMLElement>}
+   @private
+   */
+  get _lastSelectedItems() {
+    return this.__lastSelectedItems || this.selectedItems;
+  }
+  set _lastSelectedItems(value) {
+    this.__lastSelectedItems = value;
+  }
+  
   /** @private */
   _onItemClick(event) {
     // since transform will kill the modification, we trigger the event manually
@@ -203,6 +216,41 @@ class ColumnViewColumn extends ComponentMixin(HTMLElement) {
       
       // toggles the selection of the item
       const isSelected = item.hasAttribute('selected');
+      
+      if (!isSelected) {
+        if (this._selectionMode === selectionMode.SINGLE) {
+          item.setAttribute('active', '');
+        }
+        // Handle multi-selection with shiftKey
+        else if (event.shiftKey && this._selectionMode === selectionMode.MULTIPLE) {
+          const lastSelectedItem = this._lastSelectedItems[this._lastSelectedItems.length - 1];
+    
+          if (lastSelectedItem) {
+            const items = this.items.getAll();
+            const lastSelectedItemIndex = items.indexOf(lastSelectedItem);
+            const selectedItemIndex = items.indexOf(item);
+      
+            // true : selection goes up, false : selection goes down
+            const direction = selectedItemIndex < lastSelectedItemIndex;
+            const selectionRange = [];
+            let selectionIndex = lastSelectedItemIndex;
+      
+            // Retrieve all items in the range
+            while (selectedItemIndex !== selectionIndex) {
+              selectionIndex = direction ? selectionIndex - 1 : selectionIndex + 1;
+              selectionRange.push(items[selectionIndex]);
+            }
+      
+            // Select all items in the range silently
+            selectionRange.forEach((rangeItem) => {
+              // Except for item which is needed to trigger the selection change event
+              if (rangeItem !== item) {
+                rangeItem.set('selected', true, true);
+              }
+            });
+          }
+        }
+      }
       
       if (!isSelected && this._selectionMode === selectionMode.SINGLE) {
         item.setAttribute('active', '');
@@ -253,6 +301,18 @@ class ColumnViewColumn extends ComponentMixin(HTMLElement) {
     
     // item that was selected
     const item = event.target;
+    const isSelected = item.selected;
+  
+    if (isSelected) {
+      // Remember the last selected item
+      this._lastSelectedItems.push(item);
+    }
+    else {
+      const removedItemIndex = this._lastSelectedItems.indexOf(item);
+      if (removedItemIndex !== -1) {
+        this._lastSelectedItems = this._lastSelectedItems.splice(removedItemIndex, 1);
+      }
+    }
     
     // ignores event handling due to bulk select operation
     if (this._bulkSelectionChange) {
@@ -260,7 +320,7 @@ class ColumnViewColumn extends ComponentMixin(HTMLElement) {
     }
     
     // when the item is selected, we need to enforce the selection mode
-    if (item.selected) {
+    if (isSelected) {
       this._bulkSelectionChange = true;
       // when there is selection, no item can be active
       this.items._deactivateAll();

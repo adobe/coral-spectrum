@@ -205,6 +205,29 @@ describe('Coral.ColumnView', function() {
     });
 
     describe('#coral-columnview:change', function() {
+      it('should be triggered once when multiple items are clicked with shift key', function() {
+        const el = helpers.build(window.__html__['Coral.ColumnView.full.html']);
+        // no initial events
+        expect(changeSpy.callCount).to.equal(0);
+    
+        const columns = el.columns.getAll();
+    
+        const firstColumn = columns[0];
+    
+        // First select an item
+        firstColumn.items.first().selected = true;
+        expect(changeSpy.callCount).to.equal(1);
+    
+        // Then select another item with shift key
+        firstColumn.items.last().thumbnail.dispatchEvent(new MouseEvent('click', {
+          bubbles: true,
+          shiftKey: true
+        }));
+    
+        expect(changeSpy.callCount).to.equal(2, 'The event should be triggered once');
+        expect(firstColumn.selectedItems).to.deep.equal(firstColumn.items.getAll());
+      });
+      
       it('should not be triggered when the column content is clicked an nothing was active', function() {
         const el = helpers.build(window.__html__['Coral.ColumnView.full.html']);
         // no initial events
@@ -747,7 +770,32 @@ describe('Coral.ColumnView', function() {
   });
 
   // @todo: add tests for keys
-  describe('User Interaction', function() {});
+  describe('User Interaction', function() {
+    it('should select all items between the last selected item and item clicked with shift key (down)', function() {
+      const el = helpers.build(window.__html__['Coral.ColumnView.full.html']);
+      const columns = el.columns.getAll();
+    
+      const firstColumn = columns[0];
+
+      const items = firstColumn.items.getAll();
+      const fromIndex = 1;
+      const toIndex = 4;
+    
+      // First select an item
+      items[fromIndex].selected = true;
+    
+      // Then select another item with shift key
+      items[toIndex].thumbnail.dispatchEvent(new MouseEvent('click', {
+        bubbles: true,
+        shiftKey: true
+      }));
+    
+      items.forEach(function(item, i) {
+        const isSelected = (i >= fromIndex && i <= toIndex);
+        expect(item.selected).to.equal(isSelected);
+      });
+    });
+  });
 
   // @todo: add test for preview resize
   describe('Implementation Details', function() {
