@@ -8,13 +8,8 @@
   <script src="../build/js/coral.js"></script>
 
   <style>
-    .row {
-      display: table;
-      width: 100%;
-    }
-    .col {
-      display: table-cell;
-      padding: 8px;
+    section {
+      padding: 15px;
     }
   </style>
 </head>
@@ -26,44 +21,29 @@
     <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
   </div>
 
-  <div class="row" id="example_light">
-    <div class="col">
-      <h1 class="coral-Heading coral-Heading--1">Coral.Search</h1>
+  <section>
+    <h1 class="coral-Heading coral-Heading--1">Coral.Search</h1>
 
-      <h2 class="coral-Heading coral-Heading--2"><label id="label-0">Default</label></h2>
-      <coral-search labelledby="label-0"></coral-search>
+    <h2 class="coral-Heading coral-Heading--2">Default</h2>
+    <coral-search></coral-search>
 
-      <h2 class="coral-Heading coral-Heading--2" id="label-3">Value</h2>
-      <coral-search name="ni12" value="test value" labelledby="label-3"></coral-search>
+    <h2 class="coral-Heading coral-Heading--2">With Value</h2>
+    <coral-search name="ni12" value="test value"></coral-search>
 
-      <h2 class="coral-Heading coral-Heading--2" id="label-4">Placeholder</h2>
-      <coral-search name="ni13" placeholder="Placeholder" labelledby="label-4"></coral-search>
+    <h2 class="coral-Heading coral-Heading--2">With Placeholder</h2>
+    <coral-search placeholder="Placeholder"></coral-search>
 
-      <h2 class="coral-Heading coral-Heading--2" id="label-5">MaxLength</h2>
-      <coral-search name="ni13" maxlength="10" labelledby="label-5"></coral-search>
+    <h2 class="coral-Heading coral-Heading--2">With Max Length</h2>
+    <coral-search maxlength="10"></coral-search>
 
-      <h2 class="coral-Heading coral-Heading--2" id="label-6">Quiet</h2>
-      <coral-search name="ni13" placeholder="Placeholder" labelledby="label-6" variant="quiet"></coral-search>
-    </div>
+    <h2 class="coral-Heading coral-Heading--2">Quiet variant</h2>
+    <coral-search placeholder="Placeholder" variant="quiet"></coral-search>
 
-    <div class="col">
-      <h1 class="coral-Heading coral-Heading--1">FormField</h1>
+    <h2 class="coral-Heading coral-Heading--2">Disabled</h2>
+    <coral-search disabled></coral-search>
 
-      <h2 class="coral-Heading coral-Heading--2" id="label-15">Name</h2>
-      <coral-search name="ni13" labelledby="label-15"></coral-search>
-
-      <h2 class="coral-Heading coral-Heading--2" id="label-16">Invalid</h2>
-      <coral-search name="ni3" invalid min="0" max="5" labelledby="label-16"></coral-search>
-
-      <h2 class="coral-Heading coral-Heading--2" id="label-17">Disabled</h2>
-      <coral-search name="ni4" disabled value="0" labelledby="label-17"></coral-search>
-
-      <h2 class="coral-Heading coral-Heading--2" id="label-19">Required</h2>
-      <form>
-        <coral-search name="ni4" required labelledby="label-19"></coral-search>
-        <input class="coral-Button coral-Button--square" type="submit" title="Submit"/>
-      </form>
-    </div>
-  </div>
+    <h2 class="coral-Heading coral-Heading--2">Required</h2>
+    <coral-search required></coral-search>
+  </section>
 </body>
 </html>

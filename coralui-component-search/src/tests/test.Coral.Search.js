@@ -1,6 +1,5 @@
 describe('Coral.Search', function() {
   function testInstance(instance) {
-    expect(instance.classList.contains('coral-DecoratedTextfield')).to.be.true;
     expect(instance.classList.contains('coral3-Search')).to.be.true;
     expect(instance._elements.input).to.exist;
     expect(instance.getAttribute('icon')).to.equal('search');
@@ -30,7 +29,7 @@ describe('Coral.Search', function() {
     });
 
     it('should be possible using markup', function() {
-      var ni = helpers.build('<coral-search></coral-search>');
+      var ni = helpers.build(window.__html__['Coral.Search.html']);
       testInstance(ni);
     });
   
@@ -60,12 +59,7 @@ describe('Coral.Search', function() {
 
       it('should set icon', function() {
         el.icon = 'launch';
-        expect(el._elements.icon.icon).to.equal('launch');
-      });
-
-      it('should hide icon when not set', function() {
-        el.icon = '';
-        expect(el._elements.icon.hidden).to.equal(true);
+        expect(el.icon).to.equal('launch');
       });
     });
 

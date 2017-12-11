@@ -256,6 +256,13 @@ describe('Coral.Icon', function() {
         expect(icon.icon).to.equal('');
         expect(hasSVGIcon(icon, 'add')).to.be.false;
       });
+      
+      it('should support SVG icon Id', function() {
+        const el = new Coral.Icon();
+        el.icon = 'spectrum-css-icon-SearchClear';
+        expect(el.icon).to.equal('spectrum-css-icon-SearchClear');
+        expect(hasSVGIcon(el, 'spectrum-css-icon-SearchClear')).to.be.false;
+      });
     });
 
     describe('#size', function() {

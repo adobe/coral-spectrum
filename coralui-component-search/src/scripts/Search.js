@@ -19,6 +19,7 @@ import {ComponentMixin} from 'coralui-mixin-component';
 import {FormFieldMixin} from 'coralui-mixin-formfield';
 import 'coralui-component-textfield';
 import 'coralui-component-button';
+import {Icon} from 'coralui-component-icon';
 import base from '../templates/base';
 import {transform, validate, commons} from 'coralui-util';
 
@@ -157,17 +158,6 @@ class Search extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   Inherited from {@link FormFieldMixin#invalid}.
-   */
-  get invalid() {
-    return super.invalid;
-  }
-  set invalid(value) {
-    super.invalid = value;
-    this._elements.input.invalid = this._invalid;
-  }
-  
-  /**
    Inherited from {@link FormFieldMixin#labelledBy}.
    */
   get labelledBy() {
@@ -212,26 +202,6 @@ class Search extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   This sets the left icon on the search component.
-   
-   @type {String}
-   @default "search"
-   @htmlattribute icon
-   @htmlattributereflected
-   */
-  get icon() {
-    return this._elements.icon.icon || 'search';
-  }
-  set icon(value) {
-    this._elements.icon.icon = value;
-    if (this._elements.icon.icon) {
-      this._reflectAttribute('icon', this._elements.icon.icon);
-    }
-    // Hide if no icon provided
-    this._elements.icon.hidden = !this._elements.icon.icon;
-  }
-  
-  /**
    The search's variant. See {@link SearchVariantEnum}.
    
    @type {String}
@@ -248,6 +218,31 @@ class Search extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._reflectAttribute('variant', this._variant);
     
     this._elements.input.variant = value;
+  }
+  
+  /**
+   @ignore
+   
+   Not supported anymore.
+   */
+  get icon() {
+    return this._icon || 'search';
+  }
+  set icon(value) {
+    this._icon = transform.string(value);
+    this._reflectAttribute('icon', this._icon);
+  }
+  
+  /**
+   @ignore
+   
+   Not supported anymore.
+   */
+  get invalid() {
+    return super.invalid;
+  }
+  set invalid(value) {
+    super.invalid = value;
   }
   
   /** @ignore */
@@ -348,39 +343,30 @@ class Search extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     super.connectedCallback();
     
     this.classList.add(CLASSNAME);
-    this.classList.add('coral-DecoratedTextfield');
   
     // Default reflected attributes
     if (!this._icon) { this.icon = 'search'; }
     if (!this._variant) { this.variant = variant.DEFAULT; }
   
+    // Support cloneNode
+    const templates = this.querySelectorAll('.coral3-Search-input, .coral3-Search-icon, .coral3-Search-clear');
+    for (let i = 0; i < templates.length; i++) {
+      templates[i].remove();
+    }
+    
     // Create a fragment
     const fragment = document.createDocumentFragment();
   
-    const templateHandleNames = ['icon', 'input', 'clearButton'];
-  
     // Render the main template
-    fragment.appendChild(this._elements.icon);
     fragment.appendChild(this._elements.input);
     fragment.appendChild(this._elements.clearButton);
-    
-    // Process remaining elements as necessary
-    while (this.firstChild) {
-      const child = this.firstChild;
-      if (child.nodeType === Node.TEXT_NODE ||
-        child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
-        // Add non-template elements to the fragment
-        fragment.appendChild(child);
-      }
-      else {
-        // Remove anything else
-        this.removeChild(child);
-      }
-    }
   
     // Add the frag to the component
     this.appendChild(fragment);
-  
+    
+    // Insert search icon
+    this._elements.input.insertAdjacentHTML('afterend', Icon._renderSVG('spectrum-css-icon-SearchMagGlass', ['coral3-Search-icon']));
+   
     this._updateClearButton();
   }
   
