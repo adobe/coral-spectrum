@@ -74,6 +74,7 @@ class MasonryItem extends ComponentMixin(HTMLElement) {
     this._selected = transform.booleanAttr(value);
     this._reflectAttribute('selected', this._selected);
   
+    this.setAttribute('aria-selected', this._selected);
     this.classList.toggle('is-selected', this._selected);
   }
   
