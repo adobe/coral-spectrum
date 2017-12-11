@@ -34,6 +34,7 @@ import ShellWorkspace from './src/scripts/ShellWorkspace';
 
 import ShellSolutionSwitcher from './src/scripts/ShellSolutionSwitcher';
 import ShellSolutions from './src/scripts/ShellSolutions';
+import ShellSolutionsHeader from './src/scripts/ShellSolutionsHeader';
 import ShellSolution from './src/scripts/ShellSolution';
 import ShellSolutionLabel from './src/scripts/ShellSolutionLabel';
 
@@ -95,6 +96,7 @@ window.Coral.Shell.Workspace = ShellWorkspace;
 
 window.Coral.Shell.SolutionSwitcher = ShellSolutionSwitcher;
 window.Coral.Shell.Solutions = ShellSolutions;
+window.Coral.Shell.Solutions.Header = ShellSolutionsHeader;
 window.Coral.Shell.Solution = ShellSolution;
 window.Coral.Shell.Solution.Label = ShellSolutionLabel;
 
