@@ -1,7 +1,4 @@
-<js>
-  var buttonId = Coral.commons.getUID();
-</js>
-<button id="{{buttonId}}" handle="button" aria-expanded="false" class="coral3-CycleButton-button" is="coral-button" variant="quiet" iconsize="S"></button>
+<button id="{{Coral.commons.getUID()}}" handle="button" class="coral3-CycleButton-button" is="coral-button" variant="quiet" iconsize="S">
 <coral-icon handle="openIcon" icon="chevronDown" size="xxs" class="coral3-CycleButton-openIcon"></coral-icon>
 <js>
   this.button.label.appendChild(this.openIcon);

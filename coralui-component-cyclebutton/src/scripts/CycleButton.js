@@ -74,6 +74,7 @@ class CycleButton extends ComponentMixin(HTMLElement) {
     // Attach events
     this._delegateEvents({
       'click :not(coral-cyclebutton-action)': '_onItemClick',
+      'click button[is="coral-buttonlist-item"]': '_onActionClick',
       'key:down [aria-expanded=false]': '_onItemClick',
       'coral-selectlist:change': '_onSelectListChange',
       
@@ -460,7 +461,7 @@ class CycleButton extends ComponentMixin(HTMLElement) {
   }
   
   /** @private */
-  _proxyClick(event) {
+  _onActionClick(event) {
     event.stopPropagation();
     
     const item = event.matchedTarget;
@@ -521,6 +522,9 @@ class CycleButton extends ComponentMixin(HTMLElement) {
   /** @ignore */
   _getSelectListItem(item) {
     const selectListItem = new SelectListItem();
+  
+    // We do first the content, so that the icon is not destroyed
+    selectListItem.content.innerHTML = item.content.innerHTML;
     
     // If an icon was specified we need to create an element for it and add it directly to the selectList Item
     if (item.icon) {
@@ -528,11 +532,9 @@ class CycleButton extends ComponentMixin(HTMLElement) {
         icon: item.icon,
         size: Icon.size.SMALL
       });
-      
-      selectListItem.content.appendChild(icon);
+  
+      selectListItem.content.insertBefore(icon, selectListItem.content.firstChild);
     }
-    
-    selectListItem.content.appendChild(document.createTextNode(item.content.textContent));
     
     selectListItem._originalItem = item;
     item._selectListItem = selectListItem;
@@ -548,9 +550,7 @@ class CycleButton extends ComponentMixin(HTMLElement) {
     actionListItem.content.innerHTML = action.content.innerHTML;
     
     actionListItem._originalItem = action;
-    actionListItem._elements.buttonListItem = actionListItem;
-    
-    actionListItem.on('click', this._proxyClick.bind(this));
+    action._buttonListItem = actionListItem;
     
     return actionListItem;
   }

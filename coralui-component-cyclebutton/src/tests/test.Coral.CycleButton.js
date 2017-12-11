@@ -109,7 +109,7 @@ describe('Coral.CycleButton', function() {
         
         var button = el._elements.button;
         expect(button.icon.trim()).to.equal('');
-        expect(button.textContent.trim()).to.equal('List');
+        expect(button.label.innerHTML.trim()).to.equal('List <b>View</b>');
       });
 
       it('should display icon when in text mode and only icon is in item object', function() {
@@ -574,14 +574,17 @@ describe('Coral.CycleButton', function() {
     it('should proxy click event on action when selected by clicking an actionList item', function() {
       const el = helpers.build(SNIPPET_WITHACTIONS);
       var spy = sinon.spy();
-
-      el.querySelector('#btn1').click();
+  
+      // Opens the overlay
+      el._elements.button.click();
       
       document.addEventListener('click', spy);
-
-      el._elements.actionList.firstChild.click();
+  
+      // We click on the first action available
+      el._elements.actionList.items.first().click();
       
       expect(spy.callCount).to.equal(1, 'spy called once after clicking actions actionList item');
+      expect(spy.args[0][0].target.tagName.toLowerCase()).to.equal('coral-cyclebutton-action');
       document.removeEventListener('click', spy);
     });
   }); // Events
@@ -828,6 +831,43 @@ describe('Coral.CycleButton', function() {
       helpers.target.appendChild(frag);
       
       expect(el.items.getAll()[1].selected).to.equal(true, 'Second item is selected');
+    });
+  
+    it('should allow HTML content inside the items', function() {
+      const el = helpers.build(SNIPPET_MIXEDITEMS);
+      
+      // Opens the overlay
+      el._elements.button.click();
+  
+      const items = el.items.getAll();
+      const listItems = el._elements.selectList.items.getAll();
+  
+      items.forEach((item, index) => {
+        // We use contain, as the item will have the markup for the icon as well
+        expect(listItems[index].content.innerHTML).to.contain(item.content.innerHTML, 'Items should include the HTML');
+      });
+  
+      // Selects the 2nd item
+      listItems[1].click();
+  
+      expect(el._elements.button.label.innerHTML).to.equal(items[1].content.innerHTML, 'Button should show the HTML');
+    });
+  
+    it('should allow HTML content inside the actions', function() {
+      const el = helpers.build(SNIPPET_WITHACTIONS);
+      
+      // Opens the overlay
+      el._elements.button.click();
+      
+      const items = el.actions.getAll();
+      const listItems = el._elements.actionList.items.getAll();
+    
+      items.forEach((item, index) => {
+        expect(item.content.innerHTML).to.equal(listItems[index].content.innerHTML, 'Actions should include the HTML');
+      });
+    
+      // selects the 2nd item
+      listItems[1].click();
     });
   }); // Implementation Details
 });
