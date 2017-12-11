@@ -17,7 +17,7 @@
 
 import {ComponentMixin} from 'coralui-mixin-component';
 import {FormFieldMixin} from 'coralui-mixin-formfield';
-import 'coralui-component-button';
+import {Button} from 'coralui-component-button';
 import {SelectableCollection} from 'coralui-collection';
 import base from '../templates/base';
 import {transform, validate, commons} from 'coralui-util';
@@ -533,8 +533,16 @@ class ButtonGroup extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
   /** @private */
   _onItemAdded(item) {
-    // we need to add button group specific classes to style the button correctly
+    // Store variant to be able to reset it when item is removed
+    item._initialVariant = item._initialVariant || item.variant;
+    
+    // Custom variant
+    item.variant = Button.variant._CUSTOM;
+    
+    // We need to add button group specific classes to style the button correctly
     item.classList.add('coral3-ButtonGroup-item');
+    item.classList.add('coral3-Button--toggle');
+    
     if (this.selectionMode !== selectionMode.NONE) {
       if (this.selectionMode === selectionMode.SINGLE) {
         item.setAttribute('role', 'radio');
@@ -572,8 +580,13 @@ class ButtonGroup extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
   /** @private */
   _onItemRemoved(item) {
-    // we clear the class that was added
+    // Restore variant
+    item.variant = item._initialVariant;
+    item._initialVariant = undefined;
+    
+    // We clear the classes that were added
     item.classList.remove('coral3-ButtonGroup-item');
+    item.classList.remove('coral3-Button--toggle');
     item.removeAttribute('role');
     
     const self = this;

@@ -847,11 +847,11 @@ describe('Coral.ButtonGroup', function() {
         expect(items[1].hasAttribute('value')).to.be.false;
         
         // since no value attribute is available, we use the text content
-        expect(el.value).to.equal(items[1].textContent);
+        expect(el.value).to.equal(items[1].label.textContent);
         
         el.value = items[0].textContent;
         
-        expect(el.value).to.equal(items[0].textContent);
+        expect(el.value).to.equal(items[0].label.textContent);
         
         expect(items[0].hasAttribute('selected')).to.be.true;
       });
@@ -876,7 +876,7 @@ describe('Coral.ButtonGroup', function() {
         var items = el.items.getAll();
         
         // since no value attribute is available, we use the text content
-        expect(el.value).to.equal(items[1].textContent);
+        expect(el.value).to.equal(items[1].label.textContent);
         
         // sets a new value
         items[1].setAttribute('value', 'newvalue');
@@ -977,13 +977,13 @@ describe('Coral.ButtonGroup', function() {
         
         expect(items[1].hasAttribute('value')).to.be.false;
         expect(items[2].hasAttribute('value')).to.be.false;
-        expect(items[1].value).not.to.equal(items[1].textContent, 'they should not match due to the transformations');
-        expect(items[2].value).not.to.equal(items[2].textContent, 'they should not match due to the transformations');
+        expect(items[1].value).not.to.equal(items[1].label.textContent, 'they should not match due to the transformations');
+        expect(items[2].value).not.to.equal(items[2].label.textContent, 'they should not match due to the transformations');
         
         expect(el.values).to.deep.equal(['Camera', 'Delete action']);
         
         // we force the first item to have the value
-        el.value = items[0].textContent;
+        el.value = items[0].label.textContent;
         
         expect(el.items._getAllSelected()).to.deep.equal([items[0]]);
       });
@@ -1440,17 +1440,19 @@ describe('Coral.ButtonGroup', function() {
       expect(el.value).to.equal('item1', '"item1" should now be set as value');
     });
     
-    it('should add "coral3-ButtonGroup-item" class to children', function() {
+    it('should add item classes to children', function() {
+      expect(item1.variant).to.equal(Coral.Button.variant._CUSTOM);
       expect(item1.classList.contains('coral3-ButtonGroup-item')).to.be.true;
+      expect(item1.classList.contains('coral3-Button--toggle')).to.be.true;
     });
     
-    it('should remove "coral3-ButtonGroup-item" class to children', function(done) {
-      expect(item1.classList.contains('coral3-ButtonGroup-item')).to.be.true;
-      
+    it('should remove item classes from children', function(done) {
       item1.remove();
       
       helpers.next(() => {
+        expect(item1.variant).to.equal(Coral.Button.variant.PRIMARY);
         expect(item1.classList.contains('coral3-ButtonGroup-item')).to.be.false;
+        expect(item1.classList.contains('coral3-Button--toggle')).to.be.false;
         done();
       });
     });
