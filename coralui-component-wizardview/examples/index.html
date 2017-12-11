@@ -7,39 +7,11 @@
     <link rel="stylesheet" href="../build/css/coral.css">
     <script src="../build/js/coral.js"></script>
     <style>
-    .col {
-      float: left;
-      margin-right: 12px;
-      width: 650px;
-    }
-
-    .col > section {
-      padding: 10px;
-    }
-
-    #log {
-      background-color: white;
-      border: 1px solid #bababa;
-      height: 100px;
-      overflow-y: scroll;
-      padding: 10px 10px 10px 25px;
-      margin: 0;
+    section {
+      padding: 15px;
+      max-width: 800px;
     }
     </style>
-    <script type="text/javascript">
-    function log(text) {
-      const log = document.getElementById('log');
-      const li = document.createElement('li');
-      li.textContent = text;
-
-      log.insertBefore(li, log.firstChild);
-    }
-    document.addEventListener('coral-wizardview:change', function(event) {
-      log(event.type + ' #' + event.target.id +
-        ' {selection: "' + (event.detail.selection ? event.detail.selection.textContent : null) +
-        '", oldSelection: "' + (event.detail.oldSelection ? event.detail.oldSelection.textContent : null) + '"}');
-    });
-    </script>
   </head>
 
   <body class="coral--light">
@@ -50,69 +22,97 @@
       <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
     </div>
 
-    <h1 class="coral-Heading coral-Heading--1">coral-WizardView</h1>
-    <div class="col">
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">Default Example</h2>
-        <coral-wizardview id="default">
-          <coral-steplist coral-wizardview-steplist interaction="on">
-            <coral-step>Coral Step 1</coral-step>
-            <coral-step>Coral Step 2</coral-step>
-            <coral-step selected>Coral Step 3</coral-step>
-            <coral-step>Coral Step 4</coral-step>
-            <coral-step>Coral Step 5</coral-step>
-          </coral-steplist>
-          <coral-panelstack coral-wizardview-panelstack class="coral-Well">
-            <coral-panel>Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
-            <coral-panel>Lorem ipsum dolor sit amet.</coral-panel>
-            <coral-panel>Sed eget eros sit amet nulla ultricies.</coral-panel>
-            <coral-panel>Fusce nec ante non nibh mollis mollis mollis vitae dui.</coral-panel>
-          </coral-panelstack>
-        </coral-wizardview>
-      </section>
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">Nested Example</h2>
-        <coral-wizardview id="nested_outer">
-          <coral-steplist coral-wizardview-steplist interaction="on">
-            <coral-step>Coral Step 1</coral-step>
-            <coral-step>Coral Step 2</coral-step>
-          </coral-steplist>
-          <coral-panelstack coral-wizardview-panelstack class="coral-Well">
-            <coral-panel>
-              <coral-wizardview id="nested_1">
-                <coral-steplist coral-wizardview-steplist interaction="on">
-                  <coral-step>Coral Step 1</coral-step>
-                  <coral-step>Coral Step 2</coral-step>
-                </coral-steplist>
-                <coral-panelstack coral-wizardview-panelstack>
-                  <coral-panel class="u-coral-padding">Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
-                  <coral-panel class="u-coral-padding">Lorem ipsum dolor sit amet.</coral-panel>
-                </coral-panelstack>
-              </coral-wizardview>
-            </coral-panel>
-            <coral-panel>
-              <coral-wizardview id="nested_2">
-                <coral-steplist coral-wizardview-steplist interaction="on">
-                  <coral-step></coral-step>
-                  <coral-step></coral-step>
-                  <coral-step></coral-step>
-                </coral-steplist>
-                <coral-panelstack coral-wizardview-panelstack>
-                  <coral-panel class="u-coral-padding">Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
-                  <coral-panel class="u-coral-padding">Lorem ipsum dolor sit amet.</coral-panel>
-                </coral-panelstack>
-              </coral-wizardview>
-            </coral-panel>
-          </coral-panelstack>
-        </coral-wizardview>
-      </section>
-    </div>
-    <div class="col">
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">Log</h2>
-        <ul id="log"></ul>
-      </section>
-    </div>
-  </body>
+    <section>
+      <h1 class="coral-Heading coral-Heading--1">Coral.WizardView</h1>
 
+      <h2 class="coral-Heading coral-Heading--2">Default Example</h2>
+      <coral-wizardview id="default">
+        <coral-steplist coral-wizardview-steplist interaction="on">
+          <coral-step>Coral Step 1</coral-step>
+          <coral-step>Coral Step 2</coral-step>
+          <coral-step selected>Coral Step 3</coral-step>
+          <coral-step>Coral Step 4</coral-step>
+          <coral-step>Coral Step 5</coral-step>
+        </coral-steplist>
+        <coral-panelstack coral-wizardview-panelstack class="coral-Well">
+          <coral-panel>Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+          <coral-panel>Lorem ipsum dolor sit amet.</coral-panel>
+          <coral-panel>Sed eget eros sit amet nulla ultricies.</coral-panel>
+          <coral-panel>Fusce nec ante non nibh mollis mollis mollis vitae dui.</coral-panel>
+        </coral-panelstack>
+      </coral-wizardview>
+
+      <h2 class="coral-Heading coral-Heading--2">Nested Example</h2>
+      <coral-wizardview id="nested_outer">
+        <coral-steplist coral-wizardview-steplist interaction="on">
+          <coral-step>Coral Step 1</coral-step>
+          <coral-step>Coral Step 2</coral-step>
+        </coral-steplist>
+        <coral-panelstack coral-wizardview-panelstack class="coral-Well">
+          <coral-panel>
+            <coral-wizardview id="nested_1">
+              <coral-steplist coral-wizardview-steplist interaction="on">
+                <coral-step>Coral Step 1</coral-step>
+                <coral-step>Coral Step 2</coral-step>
+              </coral-steplist>
+              <coral-panelstack coral-wizardview-panelstack>
+                <coral-panel class="u-coral-padding">Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+                <coral-panel class="u-coral-padding">Lorem ipsum dolor sit amet.</coral-panel>
+              </coral-panelstack>
+            </coral-wizardview>
+          </coral-panel>
+          <coral-panel>
+            <coral-wizardview id="nested_2">
+              <coral-steplist coral-wizardview-steplist interaction="on">
+                <coral-step></coral-step>
+                <coral-step></coral-step>
+                <coral-step></coral-step>
+              </coral-steplist>
+              <coral-panelstack coral-wizardview-panelstack>
+                <coral-panel class="u-coral-padding">Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+                <coral-panel class="u-coral-padding">Lorem ipsum dolor sit amet.</coral-panel>
+              </coral-panelstack>
+            </coral-wizardview>
+          </coral-panel>
+        </coral-panelstack>
+      </coral-wizardview>
+
+      <h2 class="coral-Heading coral-Heading--2">Custom Actions</h2>
+      <coral-wizardview>
+        <coral-steplist coral-wizardview-steplist interaction="on">
+          <coral-step>Step 1</coral-step>
+          <coral-step>Step 2</coral-step>
+          <coral-step>Step 3</coral-step>
+          <coral-step>Step 4</coral-step>
+        </coral-steplist>
+        <coral-panelstack coral-wizardview-panelstack>
+          <coral-panel>
+            <button is="coral-button">Cancel</button>
+          </coral-panel>
+          <coral-panel>
+            <button is="coral-button" coral-wizardview-previous>Previous</button>
+          </coral-panel>
+          <coral-panel>
+            <button is="coral-button" coral-wizardview-previous>Previous</button>
+          </coral-panel>
+        </coral-panelstack>
+        <coral-panelstack coral-wizardview-panelstack>
+          <coral-panel>
+            <button is="coral-button" variant="primary" coral-wizardview-next>Next</button>
+          </coral-panel>
+          <coral-panel>
+            <button is="coral-button" variant="primary" coral-wizardview-next>Next</button>
+          </coral-panel>
+          <coral-panel>
+            <button is="coral-button" variant="primary">Done</button>
+          </coral-panel>
+        </coral-panelstack>
+        <coral-panelstack coral-wizardview-panelstack>
+          <coral-panel>Lorem ipsum dolor sit amet.</coral-panel>
+          <coral-panel>Aenean faucibus ornare laoreet. </coral-panel>
+          <coral-panel>Cras luctus purus.</coral-panel>
+        </coral-panelstack>
+      </coral-wizardview>
+    </section>
+  </body>
 </html>
