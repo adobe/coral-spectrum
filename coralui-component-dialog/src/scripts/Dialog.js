@@ -59,17 +59,17 @@ const interaction = {
  @typedef {Object} DialogVariantEnum
  
  @property {String} DEFAULT
- A dialog with the default, gray header and no icon.
+ A default dialog without header icon.
  @property {String} ERROR
- A dialog with a red header and warning icon, indicating that an error has occurred.
+ A dialog with an error header and icon, indicating that an error has occurred.
  @property {String} WARNING
- A dialog with an orange header and warning icon, notifying the user of something important.
+ A dialog with a warning header and icon, notifying the user of something important.
  @property {String} SUCCESS
- A dialog with a green header and checkmark icon, indicates to the user that an operation was successful.
+ A dialog with a success header and icon, indicates to the user that an operation was successful.
  @property {String} HELP
- A dialog with a blue header and question mark icon, provides the user with help.
+ A dialog with a question header and icon, provides the user with help.
  @property {String} INFO
- A dialog with a blue header and info icon, informs the user of non-critical information.
+ A dialog with an info header and icon, informs the user of non-critical information.
  */
 const variant = {
   DEFAULT: 'default',
@@ -379,7 +379,7 @@ class Dialog extends OverlayMixin(ComponentMixin(HTMLElement)) {
     this._closable = validate.enumeration(closable)(value) && value || closable.OFF;
     this._reflectAttribute('closable', this._closable);
     
-    this._elements.closeButton.style.display = this.closable === closable.ON ? 'block' : 'none';
+    this._elements.closeButton.style.display = this._closable === closable.ON ? 'block' : 'none';
   }
   
   /**

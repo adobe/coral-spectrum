@@ -15,10 +15,14 @@
  * from Adobe Systems Incorporated.
  */
 
+import {DialogHeader} from 'coralui-component-dialog';
+
 /**
  @class Coral.Popover.Header
- @classdesc A Popover Header component
+ @classdesc The Popover header content
  @htmltag coral-popover-header
- @return {HTMLElement}
+ @extends {DialogHeader}
  */
-export default () => document.createElement('coral-popover-header');
+class PopoverHeader extends DialogHeader {}
+
+export default PopoverHeader;

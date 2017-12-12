@@ -15,8 +15,14 @@
  * from Adobe Systems Incorporated.
  */
 
-$tab-color-invalid = rgb(227, 72, 80);
+import {DialogFooter} from 'coralui-component-dialog';
 
-.coral--lightest {
-  @import 'skin'
-}
+/**
+ @class Coral.Popover.Footer
+ @classdesc The Popover footer content
+ @htmltag coral-popover-footer
+ @extends {HTMLElement}
+ */
+class PopoverFooter extends DialogFooter {}
+
+export default PopoverFooter;

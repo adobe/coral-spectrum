@@ -5,6 +5,8 @@
   "dependencies": {
     "coralui-theme-spectrum": "file:../coralui-theme-spectrum",
     "coralui-component-overlay": "file:../coralui-component-overlay",
+    "coralui-component-icon": "file:../coralui-component-icon",
+    "coralui-component-dialog": "file:../coralui-component-dialog",
     "coralui-externals": "file:../coralui-externals",
     "coralui-util": "file:../coralui-util"
   },

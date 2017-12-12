@@ -18,9 +18,19 @@
 // @spectrum
 coral-dialog-footer {
   display: block;
+
+  &:empty {
+    display: none;
+  }
 }
 
 // Prevent dialog flashing on page load
 coral-dialog {
   display: none;
 }
+
+@require 'darkest';
+@require 'dark';
+@require 'light';
+@require 'lightest';
+

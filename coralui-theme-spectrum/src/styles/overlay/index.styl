@@ -18,11 +18,10 @@
 // Remove overlay flashing while loading the page
 coral-overlay {
   display: none;
-}
 
-.coral3-Overlay {
-  position: absolute;
-  display: block;
+  &[open] {
+    display: block;
+  }
 }
 
 .coral3-Overlay:focus {

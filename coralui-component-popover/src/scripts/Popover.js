@@ -16,6 +16,7 @@
  */
 
 import {Overlay} from 'coralui-component-overlay';
+import {Icon} from 'coralui-component-icon';
 import base from '../templates/base';
 import {commons, transform, validate} from 'coralui-util';
 
@@ -23,18 +24,8 @@ const CLASSNAME = 'coral3-Popover';
 
 const OFFSET = 5;
 
-/**
- Map of variant -> icon class names
- 
- @ignore
- */
-const ICON_CLASSES = {
-  error: 'alert',
-  warning: 'alert',
-  success: 'checkCircle',
-  help: 'helpCircle',
-  info: 'infoCircle'
-};
+// Used to map icon with variant
+const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
 
 /**
  Enumeration for {@link Popover} closable state.
@@ -58,17 +49,17 @@ const closable = {
  @typedef {Object} PopoverVariantEnum
  
  @property {String} DEFAULT
- A popover with the default, gray header and no icon.
+ A default popover without header icon.
  @property {String} ERROR
- A popover with a red header and warning icon, indicating that an error has occurred.
+ A popover with an error header and icon, indicating that an error has occurred.
  @property {String} WARNING
- A popover with an orange header and warning icon, notifying the user of something important.
+ A popover with a warning header and icon, notifying the user of something important.
  @property {String} SUCCESS
- A popover with a green header and checkmark icon, indicates to the user that an operation was successful.
+ A popover with a success header and icon, indicates to the user that an operation was successful.
  @property {String} HELP
- A popover with a blue header and question mark icon, provides the user with help.
+ A popover with a question header and icon, provides the user with help.
  @property {String} INFO
- A popover with a blue header and info icon, informs the user of non-critical information.
+ A popover with an info header and icon, informs the user of non-critical information.
  */
 const variant = {
   DEFAULT: 'default',
@@ -76,13 +67,24 @@ const variant = {
   WARNING: 'warning',
   SUCCESS: 'success',
   HELP: 'help',
-  INFO: 'info'
+  INFO: 'info',
+  // Private custom popover to be used by other components
+  _CUSTOM: '_custom'
 };
 
 // A string of all possible variant classnames
 const ALL_VARIANT_CLASSES = [];
 for (const variantValue in variant) {
-  ALL_VARIANT_CLASSES.push(`${CLASSNAME}--${variant[variantValue]}`);
+  if (variantValue !== '_CUSTOM') {
+    ALL_VARIANT_CLASSES.push(`coral3-Dialog--${variant[variantValue]}`);
+  }
+}
+
+// A string of all possible placement classnames
+const placement = Overlay.placement;
+const ALL_PLACEMENT_CLASSES = [];
+for (const placementKey in placement) {
+  ALL_PLACEMENT_CLASSES.push(`${CLASSNAME}--${placement[placementKey]}`);
 }
 
 /**
@@ -100,14 +102,16 @@ class Popover extends Overlay {
     this._elements = commons.extend(this._elements, {
       // Fetch or create the content zone elements
       header: this.querySelector('coral-popover-header') || document.createElement('coral-popover-header'),
-      content: this.querySelector('coral-popover-content') || document.createElement('coral-popover-content')
+      content: this.querySelector('coral-popover-content') || document.createElement('coral-popover-content'),
+      footer: this.querySelector('coral-popover-footer') || document.createElement('coral-popover-footer')
     });
     base.call(this._elements);
     
     // Events
     this._delegateEvents({
       'global:capture:click': '_handleClick',
-      'click [coral-close]': '_handleCloseClick'
+      'click [coral-close]': '_handleCloseClick',
+      'coral-overlay:positioned': '_onPositioned'
     });
     
     // Override defaults from Overlay
@@ -118,10 +122,14 @@ class Popover extends Overlay {
     this._lengthOffset = OFFSET;
   
     // Listen for mutations
-    this._headerObserver = new MutationObserver(this._hideHeaderIfEmpty.bind(this));
+    ['header', 'footer'].forEach((name) => {
+      this[`_${name}Observer`] = new MutationObserver(() => {
+        this._hideContentZoneIfEmpty(name);
+      });
   
-    // Watch for changes to the header element's children
-    this._observeHeader();
+      // Watch for changes
+      this._observeContentZone(name);
+    });
   }
   
   /**
@@ -139,7 +147,8 @@ class Popover extends Overlay {
       handle: 'content',
       tagName: 'coral-popover-content',
       insert: function(content) {
-        this._elements.contentWrapper.appendChild(content);
+        // The content should always be before footer
+        this.insertBefore(content, this.footer);
       }
     });
   }
@@ -159,14 +168,41 @@ class Popover extends Overlay {
       handle: 'header',
       tagName: 'coral-popover-header',
       insert: function(header) {
-        this._elements.headerContent.appendChild(header);
+        this._elements.headerWrapper.insertBefore(header, this._elements.headerWrapper.firstChild);
       },
       set: function() {
         // Stop observing the old header and observe the new one
-        this._observeHeader();
+        this._observeContentZone('header');
     
         // Check if header needs to be hidden
-        this._hideHeaderIfEmpty();
+        this._hideContentZoneIfEmpty('header');
+      }
+    });
+  }
+  
+  /**
+   The popover's footer element.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
+  get footer() {
+    return this._getContentZone(this._elements.footer);
+  }
+  set footer(value) {
+    this._setContentZone('footer', value, {
+      handle: 'footer',
+      tagName: 'coral-popover-footer',
+      insert: function(footer) {
+        // The footer should always be after content
+        this.appendChild(footer);
+      },
+      set: function() {
+        // Stop observing the old header and observe the new one
+        this._observeContentZone('footer');
+  
+        // Check if header needs to be hidden
+        this._hideContentZoneIfEmpty('footer');
       }
     });
   }
@@ -186,23 +222,24 @@ class Popover extends Overlay {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
+  
+    // Insert SVG icon
+    this._insertTypeIcon();
     
     // Remove all variant classes
     this.classList.remove(...ALL_VARIANT_CLASSES);
     
-    if (this._variant === variant.DEFAULT) {
-      this._elements.icon.icon = '';
-      
+    const isCustomVariant = this._variant === variant._CUSTOM;
+    this.classList.toggle(`${CLASSNAME}--dialog`, !isCustomVariant);
+    this._elements.tip.hidden = isCustomVariant;
+    
+    if (this._variant === variant.DEFAULT || isCustomVariant) {
       // ARIA
       this.setAttribute('role', 'dialog');
     }
     else {
-      this._elements.icon.icon = ICON_CLASSES[this._variant];
-      
       // Set new variant class
-      // Don't use this._className; use the constant
-      // This lets popover get our styles for free
-      this.classList.add(`${CLASSNAME}--${this._variant}`);
+      this.classList.add(`coral3-Dialog--${this._variant}`);
       
       // ARIA
       this.setAttribute('role', 'alertdialog');
@@ -225,7 +262,7 @@ class Popover extends Overlay {
     this._closable = validate.enumeration(closable)(value) && value || closable.OFF;
     this._reflectAttribute('closable', this._closable);
   
-    this._elements.closeButton.style.display = this.closable === closable.ON ? '' : 'none';
+    this._elements.closeButton.style.display = this._closable === closable.ON ? 'block' : 'none';
   }
   
   /**
@@ -270,11 +307,36 @@ class Popover extends Overlay {
     }
   }
   
-  /** @ignore */
-  _observeHeader() {
-    if (this._headerObserver) {
-      this._headerObserver.disconnect();
-      this._headerObserver.observe(this._elements.header, {
+  _onPositioned(event) {
+    // Set arrow placement
+    this.classList.remove(...ALL_PLACEMENT_CLASSES);
+    this.classList.add(`${CLASSNAME}--${event.detail.placement}`);
+  }
+  
+  _insertTypeIcon() {
+    if (this._elements.icon) {
+      this._elements.icon.remove();
+    }
+    
+    let variantValue = this.variant;
+    
+    // Warning icon is same as ERROR icon
+    if (variantValue === variant.WARNING) {
+      variantValue = variant.ERROR;
+    }
+    
+    // Inject the SVG icon
+    if (variantValue !== variant.DEFAULT && variantValue !== variant._CUSTOM) {
+      this._elements.headerWrapper.insertAdjacentHTML('beforeend', Icon._renderSVG(`spectrum-css-icon-Alert${capitalize(variantValue)}`, ['coral3-Dialog-typeIcon']));
+      this._elements.icon = this.querySelector('.coral3-Dialog-typeIcon');
+    }
+  }
+  
+  _observeContentZone(name) {
+    const observer = this[`_${name}Observer`];
+    if (observer) {
+      observer.disconnect();
+      observer.observe(this._elements[name], {
         // Catch changes to childList
         childList: true,
         // Catch changes to textContent
@@ -285,31 +347,17 @@ class Popover extends Overlay {
     }
   }
   
-  /**
-   Hide the header wrapper if the header content zone is empty.
-   @ignore
-   */
-  _hideHeaderIfEmpty() {
-    const header = this._elements.header;
-    const headerWrapper = this._elements.headerWrapper;
-    const headerContent = this._elements.headerContent;
-    
+  _hideContentZoneIfEmpty(name) {
+    const contentZone = this._elements[name];
+    const target = name === 'header' ? this._elements.headerWrapper : contentZone;
+  
     // If it's empty and has no non-textnode children, hide the header
-    const hiddenValue = header.children.length === 0 && header.textContent.replace(/\s*/g, '') === '';
-    
+    const hiddenValue = contentZone.children.length === 0 && contentZone.textContent.replace(/\s*/g, '') === '';
+  
     // Only bother if the hidden status has changed
-    if (hiddenValue !== headerWrapper.hidden) {
-      headerWrapper.hidden = hiddenValue;
-      
-      if (hiddenValue) {
-        headerContent.removeAttribute('role');
-        headerContent.removeAttribute('aria-level');
-      }
-      else {
-        headerContent.setAttribute('role', 'heading');
-        headerContent.setAttribute('aria-level', '2');
-      }
-      
+    if (hiddenValue !== target.hidden) {
+      target.hidden = hiddenValue;
+    
       // Reposition as the height has changed
       this.reposition();
     }
@@ -360,7 +408,8 @@ class Popover extends Overlay {
   get _contentZones() {
     return {
       'coral-popover-header': 'header',
-      'coral-popover-content': 'content'
+      'coral-popover-content': 'content',
+      'coral-popover-footer': 'footer'
     };
   }
   
@@ -400,47 +449,48 @@ class Popover extends Overlay {
     if (!this._variant) { this.variant = variant.DEFAULT; }
     if (!this._closable) { this.closable = closable.OFF; }
   
-    const templateHandleNames = ['headerWrapper', 'contentWrapper'];
-  
-    // Create a fragment
-    const frag = document.createDocumentFragment();
-    
-    // Render the main template
-    frag.appendChild(this._elements.headerWrapper);
-    frag.appendChild(this._elements.contentWrapper);
-    
-    // Fetch the content zones
+    // // Fetch the content zones
     const header = this._elements.header;
     const content = this._elements.content;
+    const footer = this._elements.footer;
+  
+    // Verify if a content zone is provided
+    const contentZoneProvided = this.contains(content) && content || this.contains(footer) && footer || this.contains(header) && header;
     
     // Remove content zones so we can process children
     if (header.parentNode) { header.remove(); }
     if (content.parentNode) { content.remove(); }
+    if (footer.parentNode) { footer.remove(); }
   
     // Remove tab captures
     Array.prototype.filter.call(this.children, (child) => child.hasAttribute('coral-tabcapture')).forEach((tabCapture) => {
       this.removeChild(tabCapture);
     }, this);
   
-    while (this.firstChild) {
-      const child = this.firstChild;
-      if (child.nodeType === Node.TEXT_NODE ||
-        templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
-        // Add non-template elements to the content
-        content.appendChild(child);
-      }
-      else {
-        // Remove anything else
-        this.removeChild(child);
+    // Support cloneNode
+    const template = this.querySelectorAll('.coral3-Dialog-header, .coral3-Dialog-closeButton, .coral3-Popover-tip');
+    for (let i = 0; i < template.length; i++) {
+      template[i].remove();
+    }
+  
+    // Move everything in the content
+    if (!contentZoneProvided) {
+      while (this.firstChild) {
+        content.appendChild(this.firstChild);
       }
     }
   
-    // Add the frag to the component
+    // Insert template
+    const frag = document.createDocumentFragment();
+    frag.appendChild(this._elements.headerWrapper);
+    frag.appendChild(this._elements.closeButton);
+    frag.appendChild(this._elements.tip);
     this.appendChild(frag);
     
     // Assign content zones
     this.header = header;
     this.content = content;
+    this.footer = footer;
   
     // Add the Overlay coral-tabcapture elements at the end
     super.connectedCallback();

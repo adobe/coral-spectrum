@@ -15,10 +15,14 @@
  * from Adobe Systems Incorporated.
  */
 
+import {DialogContent} from 'coralui-component-dialog';
+
 /**
  @class Coral.Popover.Content
- @classdesc A Popover Content component
+ @classdesc The Popover default content
  @htmltag coral-popover-content
- @return {HTMLElement}
+ @extends {DialogContent}
  */
-export default () => document.createElement('coral-popover-content');
+class PopoverContent extends DialogContent {}
+
+export default PopoverContent;

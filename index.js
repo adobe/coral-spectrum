@@ -25,7 +25,7 @@ import {Multifield, MultifieldItem, MultifieldItemContent} from 'coralui-compone
 import {NumberInput} from 'coralui-component-numberinput';
 import {Overlay} from 'coralui-component-overlay';
 import {Panel, PanelStack, PanelContent} from 'coralui-component-panelstack';
-import {Popover, PopoverHeader, PopoverContent, PopoverSeparator} from 'coralui-component-popover';
+import {Popover, PopoverHeader, PopoverContent, PopoverFooter, PopoverSeparator} from 'coralui-component-popover';
 import {Progress, ProgressLabel} from 'coralui-component-progress';
 import {QuickActions, QuickActionsItem} from 'coralui-component-quickactions';
 import {Radio, RadioLabel} from 'coralui-component-radio';
@@ -141,6 +141,7 @@ export {
   Popover,
   PopoverHeader,
   PopoverContent,
+  PopoverFooter,
   PopoverSeparator,
   Progress,
   ProgressLabel,

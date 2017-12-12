@@ -15,18 +15,16 @@
  * from Adobe Systems Incorporated.
  */
 
-const CLASSNAME = 'coral3-Popover-separator';
+const CLASSNAMES = ['coral-Rule', 'coral-Rule--subsection2'];
 
 /**
- @class Coral.Popover.Separator
- @classdesc The Popover separator
- @htmltag coral-popover-separator
- @extends {HTMLElement}
+ @ignore
+ Not supported.
  */
 class PopoverSeparator extends HTMLElement {
   /** @ignore */
   connectedCallback() {
-    this.classList.add(CLASSNAME);
+    this.classList.add(...CLASSNAMES);
   }
 }
 

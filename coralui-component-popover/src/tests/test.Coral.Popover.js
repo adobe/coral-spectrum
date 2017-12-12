@@ -46,7 +46,8 @@ describe('Coral.Popover', function() {
       expect(Coral.Popover.variant.SUCCESS).to.equal('success');
       expect(Coral.Popover.variant.HELP).to.equal('help');
       expect(Coral.Popover.variant.INFO).to.equal('info');
-      expect(Object.keys(Coral.Popover.variant).length).to.equal(6);
+      expect(Coral.Popover.variant._CUSTOM).to.equal('_custom');
+      expect(Object.keys(Coral.Popover.variant).length).to.equal(7);
     });
   });
   
@@ -79,8 +80,6 @@ describe('Coral.Popover', function() {
         el.header.innerHTML = 'Test';
         el.show();
   
-        expect(el._elements.headerWrapper.hidden).to.equal(true);
-  
         // Wait for MO
         helpers.next(function() {
           expect(el._elements.headerWrapper.hidden).to.equal(false);
@@ -90,6 +89,26 @@ describe('Coral.Popover', function() {
           // Wait for MO
           helpers.next(function() {
             expect(el._elements.headerWrapper.hidden).to.equal(true);
+            done();
+          });
+        });
+      });
+    });
+  
+    describe('#footer', function() {
+      it('should hide footer when content set to empty', function(done) {
+        el.footer.innerHTML = 'Test';
+        el.show();
+      
+        // Wait for MO
+        helpers.next(function() {
+          expect(el.footer.hidden).to.equal(false);
+        
+          el.footer.innerHTML = '';
+        
+          // Wait for MO
+          helpers.next(function() {
+            expect(el.footer.hidden).to.equal(true);
             done();
           });
         });
@@ -105,11 +124,25 @@ describe('Coral.Popover', function() {
         expect(el.querySelector('coral-popover-header')).to.not.equal(null);
         
         var header = el._elements.headerWrapper;
-        var content = el._elements.contentWrapper;
-        var headerIndex = Array.prototype.indexOf.call(header.parentNode.children, header);
-        var contentIndex = Array.prototype.indexOf.call(content.parentNode.children, content);
+        var content = el.content;
+        var headerIndex = Array.prototype.indexOf.call(el.children, header);
+        var contentIndex = Array.prototype.indexOf.call(el.children, content);
         
         expect(headerIndex).to.be.lt(contentIndex);
+      });
+    });
+  
+    describe('#footer', function() {
+      it('should position the rendered footer below content', function() {
+        el = helpers.build(window.__html__['Coral.Popover.contentOnly.html']);
+        expect(el.querySelector('coral-popover-footer')).to.not.equal(null);
+  
+        var content = el.content;
+        var footer = el.footer;
+        var contentIndex = Array.prototype.indexOf.call(el.children, content);
+        var footerIndex = Array.prototype.indexOf.call(el.children, footer);
+      
+        expect(contentIndex).to.be.lt(footerIndex);
       });
     });
     

@@ -1,247 +1,165 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta charset="utf-8">
   <title>Coral.Popover</title>
 
   <link rel="stylesheet" href="../build/css/coral.css">
   <script src="../build/js/coral.js"></script>
 
-  <style type="text/css">
-  body {
-    padding: 15px;
-  }
-  .scrollable {
-    width: 500px;
-    height: 500px;
-    overflow: auto;
-    position: relative; /* Contain popover */
-    border: 1px solid gray;
-  }
+  <style>
+    body {
+      padding: 15px;
+    }
+
+    .grid {
+      position: absolute;
+      top: 80px;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+
+      text-align: center;
+    }
+
+    .grid-center {
+      width: 10rem;
+      height: 10rem;
+    }
+
+    .box {
+      width: 10rem;
+      height: 10rem;
+      border: 1px dashed #333;
+      background: rgba(255, 255, 255, .5);
+    }
+
+    .controls {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      opacity: 0.75;
+      padding: 15px;
+    }
+
   </style>
 </head>
-
 <body class="coral--light">
 
-  <div style="position:fixed;top:15px;right:15px;">
+  <div style="position:fixed;top:15px;right:15px;z-index:10">
     <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
     <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
     <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
     <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
   </div>
 
-  <div class="samples">
-    <h1 class="coral-Heading coral-Heading--1">Popover</h1>
-    <h2 class="coral-Heading coral-Heading--2">Tab Capture</h2>
+  <h1 class="coral-Heading coral-Heading--1">Coral.Popover</h1>
 
-    <button id="button-popover_capture" is="coral-button">Open</button>
+  <table class="grid">
+    <tr>
+      <td><button class="box" id="target_1">Target 1</button></td>
+      <td></td>
+      <td><button class="box" id="target_2">Target 2</button></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td class="grid-center"><button class="box" id="target_3">Target 3</button></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><button class="box" id="target_4">Target 4</button></td>
+      <td></td>
+      <td><button class="box" id="target_5">Target 5</button></td>
+    </tr>
+  </table>
 
-    <coral-popover id="popover_capture" placement="bottom" target="#button-popover_capture">
-      <coral-popover-content class="u-coral-padding">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.
-        </p>
-        <button is="coral-button" onclick="popover_capture.hide()">Cancel</button>
-        <button is="coral-button" variant="primary" onclick="popover_capture.hide()">Ok</button>
-      </coral-popover-content>
-    </coral-popover>
+  <section class="controls">
+    <a href="#" class="coral-Link" onclick="toggleVisibility(); event.preventDefault();">Toggle (t)</a> |
+    <a href="#" class="coral-Link" onclick="toggleHeader(); event.preventDefault();">Toggle Header (h)</a> |
+    <a href="#" class="coral-Link" onclick="toggleFooter(); event.preventDefault();">Toggle Footer (j)</a> |
+    <a href="#" class="coral-Link" onclick="cycleTargets(); event.preventDefault();">Cycle target (a)</a> |
+    <a href="#" class="coral-Link" onclick="cyclePointFrom(); event.preventDefault();">Cycle placement (f)</a> |
+    <a href="#" class="coral-Link" onclick="cycleVariant(); event.preventDefault();">Cycle variant (v)</a>
+  </section>
 
-    <div>
-      <h2 class="coral-Heading coral-Heading--2">Explicit Positioning</h2>
-      <p>Specified via placement property.</p>
-      <button id="popover-top-button" style="margin-right:15px;" is="coral-button">Top</button>
-      <button id="popover-right-button" style="margin-right:15px;" is="coral-button">Right</button>
-      <button id="popover-bottom-button" style="margin-right:15px;" is="coral-button">Bottom</button>
-      <button id="popover-left-button" is="coral-button">Left</button>
+  <coral-popover id="popover" target="#target_1">
+    <coral-popover-header>Popover Header</coral-popover-header>
+    <coral-popover-content>
+      This is typical popover content.<br>
+      There may be multiple lines and various items in the content.
+    </coral-popover-content>
+    <coral-popover-footer>
+      Popover Footer
+    </coral-popover-footer>
+  </coral-popover>
 
-      <coral-popover target="#popover-left-button" placement="left">
-        <coral-popover-content class="u-coral-padding">Lorem ipsum</coral-popover-content>
-      </coral-popover>
-    </div>
+  <script>
+    var target = [
+      '#target_1',
+      '#target_2',
+      '#target_3',
+      '#target_4',
+      '#target_5'
+    ];
+    target.curIndex = 0;
 
-    <coral-popover target="#popover-right-button" placement="right">
-      <coral-popover-content class="u-coral-padding">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.
-      </coral-popover-content>
-    </coral-popover>
+    var placement = [
+      'top',
+      'right',
+      'bottom',
+      'left'
+    ];
+    placement.curIndex = 0;
 
-    <coral-popover target="#popover-top-button" placement="top">
-      <coral-popover-content class="u-coral-padding">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.
-      </coral-popover-content>
-    </coral-popover>
+    var variant = [
+      'default',
+      'error',
+      'warning',
+      'success',
+      'info',
+      'help'
+    ];
+    variant.curIndex = 0;
 
-    <coral-popover target="#popover-bottom-button" placement="bottom">
-      <coral-popover-content class="u-coral-padding">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.
-      </coral-popover-content>
-    </coral-popover>
+    var popover = document.querySelector('#popover');
+    popover.show();
 
-    <h2 class="coral-Heading coral-Heading--2">Content Separators</h2>
-    <p>The element coral-popover-separator adds a line from side to side inside the popover.</p>
-    <button id="popover-separator-button" is="coral-button">Separator</button>
+    function cycleTargets() {
+      popover.target = target[++target.curIndex % target.length];
+      console.log('target changed to', popover.target);
+    }
 
-    <coral-popover target="#popover-separator-button">
-      <coral-popover-header>Popover Header</coral-popover-header>
-      <coral-popover-content>
-        <p class="u-coral-margin">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.
-        </p>
-        <coral-popover-separator></coral-popover-separator>
-        <p class="u-coral-margin">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.
-        </p>
-        <coral-popover-separator></coral-popover-separator>
-        <p class="u-coral-margin">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.
-        </p>
-      </coral-popover-content>
-    </coral-popover>
+    function cyclePointFrom() {
+      popover.placement = placement[++placement.curIndex % placement.length];
+      console.log('placement changed to', popover.placement);
+    }
 
-    <h2 class="coral-Heading coral-Heading--2">Link Example</h2>
-    <p>Popovers can be used from link or any clickable item by specifying data-toggle="popover" and data-target="myTarget".</p>
-    <p>And you don't need the content element.</p>
-    <p>This <a href="#" id="popover-link">link</a> will launch a popover.</p>
+    function cycleVariant() {
+      popover.variant = variant[++variant.curIndex % variant.length];
+      console.log('variant changed to', popover.variant);
+    }
 
-    <coral-popover target="#popover-link" placement="bottom" breadthoffset="50%p - 50%r">
-      <div class="u-coral-padding">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.
-      </div>
-    </coral-popover>
+    function toggleVisibility() {
+      popover.open = !popover.open;
+    }
 
-    <h2 class="coral-Heading coral-Heading--2">JS Class Initialization</h2>
-    <button id="popover-button-fromjs" is="coral-button">From JS</button>
-    <script>
-    var Popover = new Coral.Popover();
-    Popover.set({
-      target: '#popover-button-fromjs',
-      content: {
-        className: 'u-coral-padding',
-        textContent: 'Lorem ipsum'
-      }
-    });
-    document.body.appendChild(Popover);
-    </script>
+    function toggleHeader() {
+      popover.header.textContent = popover.header.textContent ? '' : 'Popover Header';
+    }
 
-    <h2 class="coral-Heading coral-Heading--2">Scrolling</h2>
-    <div class="scrollable">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
-      <button id="button-popover_scroll" is="coral-button">Open</button>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
+    function toggleFooter() {
+      popover.footer.textContent = popover.footer.textContent ? '' : 'Popover Footer';
+    }
 
-      <coral-popover id="popover_scroll" placement="right" target="#button-popover_scroll">
-        <coral-popover-content class="u-coral-padding">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.
-          </p>
-        </coral-popover-content>
-      </coral-popover>
-    </div>
+    Coral.keys.on('f', cyclePointFrom);
+    Coral.keys.on('a', cycleTargets);
+    Coral.keys.on('t', toggleVisibility);
+    Coral.keys.on('h', toggleHeader);
+    Coral.keys.on('j', toggleFooter);
+    Coral.keys.on('v', cycleVariant);
+  </script>
 
-    <h2 class="coral-Heading coral-Heading--2">In a Dialog</h2>
-    <button onclick="defaultDialog.show();" is="coral-button">Open</button>
-
-    <coral-dialog id="defaultDialog">
-      <coral-dialog-header>Dialog</coral-dialog-header>
-      <coral-dialog-content>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-
-        <button id="button-popover_indialog" is="coral-button">Open</button>
-
-        <coral-popover id="popover_indialog" placement="bottom" target="#button-popover_indialog">
-          <coral-popover-content class="u-coral-padding">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-          </coral-popover-content>
-        </coral-popover>
-
-      </coral-dialog-content>
-      <coral-dialog-footer>
-        <button is="coral-button" variant="primary" coral-close>Ok</button>
-      </coral-dialog-footer>
-    </coral-dialog>
-
-
-    <h2 class="coral-Heading coral-Heading--2">In a Fullscreen Dialog</h2>
-    <button onclick="fullscreenDialog.show();" is="coral-button">Open</button>
-
-    <coral-dialog id="fullscreenDialog" fullscreen>
-      <coral-dialog-header>Fullscreen Dialog</coral-dialog-header>
-      <coral-dialog-content>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-
-        <button id="button-popover_infullscreendialog" is="coral-button">Open</button>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-
-        <coral-popover id="popover_infullscreendialog" placement="bottom" target="#button-popover_infullscreendialog">
-          <coral-popover-content class="u-coral-padding">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque sit amet.</p>
-          </coral-popover-content>
-        </coral-popover>
-
-      </coral-dialog-content>
-      <coral-dialog-footer>
-        <button is="coral-button" variant="primary" coral-close>Ok</button>
-      </coral-dialog-footer>
-    </coral-dialog>
-
-  </div>
 </body>
-
 </html>
