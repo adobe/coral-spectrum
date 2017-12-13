@@ -204,7 +204,7 @@ class Icon extends ComponentMixin(HTMLElement) {
       iconId = `spectrum-icon-${iconSize}-${iconName}`;
     }
     
-    // Insert SVG Icon using HTML because creating it with JS doesn't work
+    // Insert SVG Icon using HTML because DOMly doesn't support document.createElementNS for <use> element
     this.insertAdjacentHTML('beforeend', this.constructor._renderSVG(iconId));
     
     this._elements.svg = this.lastElementChild;
