@@ -8,31 +8,18 @@
   <script src="../build/js/coral.js"></script>
   <style>
   section {
-    border-top: 1px solid #C8C8C8;
-    padding: 12px;
+    padding: 15px;
   }
 
-  .col {
-    width: 48%;
-    margin-left: 4%;
-    display: inline-block;
-    vertical-align: top;
-  }
-
-  .col:first-child {
-    margin-left: 0;
-  }
-
-  .col > section {
-    border-top: 0;
-  }
-
-  #log {
-    border: 1px solid #bababa;
-    height: 100px;
-    overflow-y: scroll;
-    padding: 10px 10px 10px 25px;
-    margin: 0;
+  .box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 50px;
+    text-align: center;
+    border: 1px dashed #333;
+    background: rgba(255, 255, 255, .5);
   }
   </style>
 </head>
@@ -46,172 +33,62 @@
     <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
   </div>
 
-  <h1 class="coral-Heading coral-Heading--1">coral-QuickActions</h1>
   <section>
-    <div class="col">
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">Default</h2>
-        <i>Hover table to view QuickActions</i>
-        <table class="coral-Table" tabindex="0">
-          <thead>
-            <tr class="coral-Table-row">
-              <th class="coral-Table-headerCell">Pet Name</th>
-              <th class="coral-Table-headerCell">Type</th>
-              <th class="coral-Table-headerCell">Good/Bad</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="coral-Table-row">
-              <td class="coral-Table-cell">Prickles</td>
-              <td class="coral-Table-cell">Hedgehog</td>
-              <td class="coral-Table-cell">Good</td>
-            </tr>
-            <tr class="coral-Table-row">
-              <td class="coral-Table-cell">Violet</td>
-              <td class="coral-Table-cell">Butterfly</td>
-              <td class="coral-Table-cell">Bad</td>
-            </tr>
-            <tr class="coral-Table-row">
-              <td class="coral-Table-cell">Max</td>
-              <td class="coral-Table-cell">Chimpanzee</td>
-              <td class="coral-Table-cell">Bad</td>
-            </tr>
-          </tbody>
-        </table>
-        <coral-quickactions target="_prev">
-          <coral-quickactions-item type="anchor" href="#" icon="copy">Copy</coral-quickactions-item>
-          <coral-quickactions-item type="anchor" href="#" icon="move">Move</coral-quickactions-item>
-          <coral-quickactions-item type="anchor" href="#" icon="download">Download</coral-quickactions-item>
-          <coral-quickactions-item type="anchor" href="#" icon="share">Share</coral-quickactions-item>
-          <coral-quickactions-item type="anchor" href="#" icon="publish">Publish</coral-quickactions-item>
-          <coral-quickactions-item type="anchor" href="#" icon="copy">Copy</coral-quickactions-item>
-          <coral-quickactions-item type="anchor" href="#" icon="lockOn">Lock</coral-quickactions-item>
-          <coral-quickactions-item type="anchor" href="#" icon="lockOff">Unlock</coral-quickactions-item>
-          <coral-quickactions-item icon="note">Annotate</coral-quickactions-item>
-          <coral-quickactions-item icon="paste">Paste</coral-quickactions-item>
-          <coral-quickactions-item icon="pinOn">Add Pin</coral-quickactions-item>
-          <coral-quickactions-item icon="pinOff">Remove Pin</coral-quickactions-item>
-          <coral-quickactions-item icon="print">Print</coral-quickactions-item>
-        </coral-quickactions>
-      </section>
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">Threshold</h2>
-        <i>(threshold = 2)</i>
-        <table class="coral-Table coral-Table--hover" tabindex="0">
-          <thead>
-            <tr class="coral-Table-row">
-              <th class="coral-Table-headerCell">Pet Name</th>
-              <th class="coral-Table-headerCell">Type</th>
-              <th class="coral-Table-headerCell">Good/Bad</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="coral-Table-row">
-              <td class="coral-Table-cell">Mongo</td>
-              <td class="coral-Table-cell">Chihuahua</td>
-              <td class="coral-Table-cell">Bad</td>
-            </tr>
-            <tr class="coral-Table-row">
-              <td class="coral-Table-cell">Tiny</td>
-              <td class="coral-Table-cell">Great Dane</td>
-              <td class="coral-Table-cell">Bad</td>
-            </tr>
-            <tr class="coral-Table-row">
-              <td class="coral-Table-cell">Jaws</td>
-              <td class="coral-Table-cell">Pit Bull</td>
-              <td class="coral-Table-cell">Good</td>
-            </tr>
-          </tbody>
-        </table>
-        <coral-quickactions target="_prev" threshold="2">
-          <coral-quickactions-item icon="copy">Copy</coral-quickactions-item>
-          <coral-quickactions-item icon="move">Move</coral-quickactions-item>
-          <coral-quickactions-item icon="download">Download</coral-quickactions-item>
-          <coral-quickactions-item icon="share">Share</coral-quickactions-item>
-          <coral-quickactions-item icon="publish">Publish</coral-quickactions-item>
-          <coral-quickactions-item icon="copy">Copy</coral-quickactions-item>
-          <coral-quickactions-item icon="lockOn">Lock</coral-quickactions-item>
-          <coral-quickactions-item icon="lockOff">Unlock</coral-quickactions-item>
-          <coral-quickactions-item icon="note">Annotate</coral-quickactions-item>
-          <coral-quickactions-item icon="paste">Paste</coral-quickactions-item>
-          <coral-quickactions-item icon="pinOn">Add Pin</coral-quickactions-item>
-          <coral-quickactions-item icon="pinOff">Remove Pin</coral-quickactions-item>
-          <coral-quickactions-item icon="print">Print</coral-quickactions-item>
-        </coral-quickactions>
-      </section>
-      <section>
-        <h2 class="coral-Heading coral-Heading--2">Threshold - unlimited items</h2>
-        <i>(threshold = -1)</i>
-        <table class="coral-Table coral-Table--hover" tabindex="0">
-          <thead>
-          <tr class="coral-Table-row">
-            <th class="coral-Table-headerCell">Pet Name</th>
-            <th class="coral-Table-headerCell">Type</th>
-            <th class="coral-Table-headerCell">Good/Bad</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr class="coral-Table-row">
-            <td class="coral-Table-cell">Ravinash</td>
-            <td class="coral-Table-cell">Rat</td>
-            <td class="coral-Table-cell">Good</td>
-          </tr>
-          <tr class="coral-Table-row">
-            <td class="coral-Table-cell">Hutch</td>
-            <td class="coral-Table-cell">Chicken</td>
-            <td class="coral-Table-cell">Good</td>
-          </tr>
-          <tr class="coral-Table-row">
-            <td class="coral-Table-cell">Jules</td>
-            <td class="coral-Table-cell">Rabbit</td>
-            <td class="coral-Table-cell">Bad</td>
-          </tr>
-          </tbody>
-        </table>
-        <coral-quickactions target="_prev" threshold="-1">
-          <coral-quickactions-item icon="copy">Copy</coral-quickactions-item>
-          <coral-quickactions-item icon="move">Move</coral-quickactions-item>
-          <coral-quickactions-item icon="download">Download</coral-quickactions-item>
-          <coral-quickactions-item icon="share">Share</coral-quickactions-item>
-          <coral-quickactions-item icon="publish">Publish</coral-quickactions-item>
-          <coral-quickactions-item icon="copy">Copy</coral-quickactions-item>
-          <coral-quickactions-item icon="lockOn">Lock</coral-quickactions-item>
-          <coral-quickactions-item icon="lockOff">Unlock</coral-quickactions-item>
-          <coral-quickactions-item icon="note">Annotate</coral-quickactions-item>
-          <coral-quickactions-item icon="paste">Paste</coral-quickactions-item>
-          <coral-quickactions-item icon="pinOn">Add Pin</coral-quickactions-item>
-          <coral-quickactions-item icon="pinOff">Remove Pin</coral-quickactions-item>
-          <coral-quickactions-item icon="print">Print</coral-quickactions-item>
-        </coral-quickactions>
-      </section>
-    </div>
-  </section>
-  <section>
-    <div class="col">
-      <h2 class="coral-Heading coral-Heading--2">Log</h2>
-      <ul id="log"></ul>
-    </div>
-  </section>
-  <script type="text/javascript">
-    const log = document.getElementById('log');
+    <h1 class="coral-Heading coral-Heading--1">Coral.QuickActions</h1>
 
-    document.addEventListener('click', function(event) {
-      if (event.target.tagName.toLowerCase() === 'coral-quickactions-item') {
-        const li = document.createElement('li');
-        li.innerHTML = 'item: ' + event.target + ' textContent: ' + event.target.content.textContent;
-        log.insertBefore(li, log.firstChild);
-      }
-    });
-    document.addEventListener('coral-collection:add', function(event) {
-      const li = document.createElement('li');
-      li.innerHTML = 'add: ' + event.target + '  ' + event.detail.item.content.textContent;
-      log.insertBefore(li, log.firstChild);
-    });
-    document.addEventListener('coral-collection:remove', function(event) {
-      const li = document.createElement('li');
-      li.innerHTML = 'remove: ' + event.target + '  ' + event.detail.item.content.textContent;
-      log.insertBefore(li, log.firstChild);
-    });
-  </script>
+    <h2 class="coral-Heading coral-Heading--2">Default</h2>
+    <div class="box">Hover me</div>
+    <coral-quickactions target="_prev">
+      <coral-quickactions-item type="anchor" href="#" icon="copy">Copy</coral-quickactions-item>
+      <coral-quickactions-item type="anchor" href="#" icon="move">Move</coral-quickactions-item>
+      <coral-quickactions-item type="anchor" href="#" icon="download">Download</coral-quickactions-item>
+      <coral-quickactions-item type="anchor" href="#" icon="share">Share</coral-quickactions-item>
+      <coral-quickactions-item type="anchor" href="#" icon="assetsPublished">Publish</coral-quickactions-item>
+      <coral-quickactions-item type="anchor" href="#" icon="copy">Copy</coral-quickactions-item>
+      <coral-quickactions-item type="anchor" href="#" icon="lockClosed">Lock</coral-quickactions-item>
+      <coral-quickactions-item type="anchor" href="#" icon="lockOpen">Unlock</coral-quickactions-item>
+      <coral-quickactions-item icon="note">Annotate</coral-quickactions-item>
+      <coral-quickactions-item icon="paste">Paste</coral-quickactions-item>
+      <coral-quickactions-item icon="pinOn">Add Pin</coral-quickactions-item>
+      <coral-quickactions-item icon="pinOff">Remove Pin</coral-quickactions-item>
+      <coral-quickactions-item icon="print">Print</coral-quickactions-item>
+    </coral-quickactions>
+
+    <h2 class="coral-Heading coral-Heading--2">Threshold limited</h2>
+    <div class="box">Hover me</div>
+    <coral-quickactions target="_prev" threshold="2">
+      <coral-quickactions-item icon="copy">Copy</coral-quickactions-item>
+      <coral-quickactions-item icon="move">Move</coral-quickactions-item>
+      <coral-quickactions-item icon="download">Download</coral-quickactions-item>
+      <coral-quickactions-item icon="share">Share</coral-quickactions-item>
+      <coral-quickactions-item icon="assetsPublished">Publish</coral-quickactions-item>
+      <coral-quickactions-item icon="copy">Copy</coral-quickactions-item>
+      <coral-quickactions-item icon="lockClosed">Lock</coral-quickactions-item>
+      <coral-quickactions-item icon="lockOpen">Unlock</coral-quickactions-item>
+      <coral-quickactions-item icon="note">Annotate</coral-quickactions-item>
+      <coral-quickactions-item icon="paste">Paste</coral-quickactions-item>
+      <coral-quickactions-item icon="pinOn">Add Pin</coral-quickactions-item>
+      <coral-quickactions-item icon="pinOff">Remove Pin</coral-quickactions-item>
+      <coral-quickactions-item icon="print">Print</coral-quickactions-item>
+    </coral-quickactions>
+
+    <h2 class="coral-Heading coral-Heading--2">Threshold unlimited</h2>
+    <div class="box">Hover me</div>
+    <coral-quickactions target="_prev" threshold="-1">
+      <coral-quickactions-item icon="copy">Copy</coral-quickactions-item>
+      <coral-quickactions-item icon="move">Move</coral-quickactions-item>
+      <coral-quickactions-item icon="download">Download</coral-quickactions-item>
+      <coral-quickactions-item icon="share">Share</coral-quickactions-item>
+      <coral-quickactions-item icon="assetsPublished">Publish</coral-quickactions-item>
+      <coral-quickactions-item icon="copy">Copy</coral-quickactions-item>
+      <coral-quickactions-item icon="lockClosed">Lock</coral-quickactions-item>
+      <coral-quickactions-item icon="lockOpen">Unlock</coral-quickactions-item>
+      <coral-quickactions-item icon="note">Annotate</coral-quickactions-item>
+      <coral-quickactions-item icon="paste">Paste</coral-quickactions-item>
+      <coral-quickactions-item icon="pinOn">Add Pin</coral-quickactions-item>
+      <coral-quickactions-item icon="pinOff">Remove Pin</coral-quickactions-item>
+      <coral-quickactions-item icon="print">Print</coral-quickactions-item>
+    </coral-quickactions>
+  </section>
 </body>
 </html>

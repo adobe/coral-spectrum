@@ -22,12 +22,13 @@ import {ButtonList, AnchorList} from 'coralui-component-list';
 import {Overlay} from 'coralui-component-overlay';
 import {Collection} from 'coralui-collection';
 import QuickActionsItem from './QuickActionsItem';
+import 'coralui-component-popover';
 import base from '../templates/base';
 import {transform, validate} from 'coralui-util';
 
 // MUST be kept in sync with quickactions.styl $coral-quickactions-button-gap
 const BUTTON_GAP = 10;
-const BUTTON_FOCUSABLE_SELECTOR = '.coral3-QuickActions-button:not([disabled]):not([hidden])';
+const BUTTON_FOCUSABLE_SELECTOR = '.coral3-QuickActions-item:not([disabled]):not([hidden])';
 
 /**
  Enumeration for {@link QuickActions} interaction options.
@@ -113,21 +114,20 @@ class QuickActions extends Overlay {
       'global:resize': '_onWindowResize',
       'mouseout': '_onMouseOut',
       'capture:blur': '_onBlur',
-      'global:click': '_onGlobalClick',
   
       // Keyboard interaction
       'global:key:escape': '_onEscapeKeypress',
-      'key:home > .coral3-QuickActions-button': '_onHomeKeypress',
-      'key:end > .coral3-QuickActions-button': '_onEndKeypress',
-      'key:pagedown > .coral3-QuickActions-button': '_onButtonKeypressNext',
-      'key:right > .coral3-QuickActions-button': '_onButtonKeypressNext',
-      'key:down > .coral3-QuickActions-button': '_onButtonKeypressNext',
-      'key:pageup > .coral3-QuickActions-button': '_onButtonKeypressPrevious',
-      'key:left > .coral3-QuickActions-button': '_onButtonKeypressPrevious',
-      'key:up > .coral3-QuickActions-button': '_onButtonKeypressPrevious',
+      'key:home > .coral3-QuickActions-item': '_onHomeKeypress',
+      'key:end > .coral3-QuickActions-item': '_onEndKeypress',
+      'key:pagedown > .coral3-QuickActions-item': '_onButtonKeypressNext',
+      'key:right > .coral3-QuickActions-item': '_onButtonKeypressNext',
+      'key:down > .coral3-QuickActions-item': '_onButtonKeypressNext',
+      'key:pageup > .coral3-QuickActions-item': '_onButtonKeypressPrevious',
+      'key:left > .coral3-QuickActions-item': '_onButtonKeypressPrevious',
+      'key:up > .coral3-QuickActions-item': '_onButtonKeypressPrevious',
   
       // Buttons
-      'click > .coral3-QuickActions-button:not([handle="moreButton"])': '_onButtonClick',
+      'click > .coral3-QuickActions-item:not([handle="moreButton"])': '_onButtonClick',
   
       // Overlay
       'coral-overlay:beforeopen': '_onOverlayBeforeOpen',
@@ -435,7 +435,7 @@ class QuickActions extends Overlay {
    @private
    */
   _getButtons(excludeMore) {
-    let buttonSelector = '.coral3-QuickActions-button';
+    let buttonSelector = '.coral3-QuickActions-item';
     buttonSelector = excludeMore ? `${buttonSelector}:not([handle="moreButton"])` : buttonSelector;
     
     return this.querySelectorAll(buttonSelector);
@@ -524,14 +524,14 @@ class QuickActions extends Overlay {
       }, true);
     }
     
-    button.classList.add('coral3-QuickActions-button');
+    button.variant = Button.variant._CUSTOM;
+    button.classList.add('coral3-QuickActions-item');
     button.setAttribute('tabindex', '-1');
     button.setAttribute('title', itemData.textContent.trim());
     button.setAttribute('aria-label', itemData.textContent.trim());
     button.setAttribute('role', 'menuitem');
     
-    // 'insertBefore' with an undefined "before" argument fails on IE
-    this.insertBefore(button, this.children[index] || null);
+    this.insertBefore(button, this.children[index]);
     
     // ButtonList Item
     let buttonListItem;
@@ -879,20 +879,6 @@ class QuickActions extends Overlay {
     }, this._overlayAnimationTime);
     
     this._preventClick = true;
-  }
-  
-  /** @ignore */
-  _onGlobalClick(event) {
-    if (this._elements.moreButton.contains(event.target)) {
-      this._elements.overlay.open = !this._elements.overlay.open;
-    }
-    else {
-      const withinOverlay = this._elements.overlay.contains(event.target);
-      
-      if (!withinOverlay) {
-        this._elements.overlay.open = false;
-      }
-    }
   }
   
   /** @ignore */

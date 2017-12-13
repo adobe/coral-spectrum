@@ -210,8 +210,9 @@ class Dialog extends OverlayMixin(ComponentMixin(HTMLElement)) {
       handle: 'content',
       tagName: 'coral-dialog-content',
       insert: function(content) {
+        const footer = this.footer;
         // The content should always be before footer
-        this._elements.contentZoneTarget.insertBefore(content, this.footer);
+        this._elements.contentZoneTarget.insertBefore(content, this.contains(footer) && footer || null);
       }
     });
   }

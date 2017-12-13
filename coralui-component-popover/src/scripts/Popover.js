@@ -147,8 +147,9 @@ class Popover extends Overlay {
       handle: 'content',
       tagName: 'coral-popover-content',
       insert: function(content) {
+        const footer = this.footer;
         // The content should always be before footer
-        this.insertBefore(content, this.footer);
+        this.insertBefore(content, this.contains(footer) && footer || null);
       }
     });
   }

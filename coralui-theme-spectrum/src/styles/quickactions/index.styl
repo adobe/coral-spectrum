@@ -1,0 +1,55 @@
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2017 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+
+// prevents flash of un-styled content
+coral-quickactions {
+  display: none;
+}
+
+// items are hidden by default
+coral-quickactions-item {
+  display: none;
+}
+
+.coral3-QuickActions {
+  position: absolute;
+  display: block;
+  // important: must match button outer height
+  max-height: 38*$px;
+  // prevents flash of un-styled content
+  visibility: hidden;
+  // removes focus around the QuickActions container
+  outline: none;
+}
+
+.coral3-QuickActions-item {
+  float: left;
+  // required in layout collapse calculation
+  min-width: 38*$px;
+}
+
+.coral3-QuickActions-overlay {
+  width: 140*$px;
+}
+
+.coral3-QuickActions-buttonList {
+  // constrains the size of the list to 6 items
+  max-height: 6*40*$px;
+  overflow-y: auto;
+  // removes the outline in FF
+  outline: none;
+}

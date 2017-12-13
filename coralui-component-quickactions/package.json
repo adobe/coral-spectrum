@@ -7,6 +7,7 @@
     "coralui-mixin-component": "file:../coralui-mixin-component",
     "coralui-collection": "file:../coralui-collection",
     "coralui-component-overlay": "file:../coralui-component-overlay",
+    "coralui-component-popover": "file:../coralui-component-popover",
     "coralui-component-icon": "file:../coralui-component-icon",
     "coralui-component-button": "file:../coralui-component-button",
     "coralui-component-anchorbutton": "file:../coralui-component-anchorbutton",
