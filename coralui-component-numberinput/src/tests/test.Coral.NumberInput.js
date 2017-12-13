@@ -121,7 +121,7 @@ describe('Coral.NumberInput', function() {
     var el;
 
     beforeEach(function() {
-      el = new Coral.NumberInput();
+      el = helpers.build(new Coral.NumberInput());
     });
 
     afterEach(function() {
@@ -285,6 +285,17 @@ describe('Coral.NumberInput', function() {
         el.step = 'any';
         expect(el.step).to.equal('any');
         expect(el._elements.input.getAttribute('step')).to.equal('any');
+      });
+      
+      it('should mark input invalid if value is not a multiple of step', function() {
+        el.setAttribute('value', '5');
+        el.step = '5';
+        expect(el.step).to.equal(5);
+        expect(el.invalid).to.be.false;
+        
+        el.value = '3';
+        helpers.event('change', el._elements.input);
+        expect(el.invalid).to.be.true;
       });
     });
 

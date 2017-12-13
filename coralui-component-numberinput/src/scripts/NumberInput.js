@@ -331,7 +331,9 @@ class NumberInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._elements.input.invalid = this._invalid;
   }
   
-  
+  /**
+   Inherited from {@link FormFieldMixin#labelledBy}.
+   */
   get labelledBy() {
     return super.labelledBy;
   }
@@ -427,7 +429,8 @@ class NumberInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
    */
   _validateInputValue() {
     this.invalid = this.value !== '' && (window.isNaN(Number(this.value)) ||
-      (this.max !== null && this.value > this.max || this.min !== null && this.value < this.min));
+      (this.max !== null && this.value > this.max || this.min !== null && this.value < this.min) ||
+      this.value % this._getActualStep() !== 0);
   }
   
   /**
