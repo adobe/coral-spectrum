@@ -129,6 +129,10 @@ class QuickActions extends Overlay {
       // Buttons
       'click > .coral3-QuickActions-item:not([handle="moreButton"])': '_onButtonClick',
   
+      // Accessibility
+      'capture:focus .coral3-QuickActions-item': '_onItemFocusIn',
+      'capture:blur .coral3-QuickActions-item': '_onItemFocusOut',
+      
       // Overlay
       'coral-overlay:beforeopen': '_onOverlayBeforeOpen',
       'coral-overlay:beforeclose': '_onOverlayBeforeClose',
@@ -705,6 +709,14 @@ class QuickActions extends Overlay {
     const targetElement = this._getTarget();
     
     return element && (this.contains(element) || targetElement && targetElement.contains(element));
+  }
+  
+  _onItemFocusIn(event) {
+    event.matchedTarget.classList.add('focus-ring');
+  }
+  
+  _onItemFocusOut(event) {
+    event.matchedTarget.classList.remove('focus-ring');
   }
   
   /** @ignore */

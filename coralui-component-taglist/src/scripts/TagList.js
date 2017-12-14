@@ -63,7 +63,11 @@ class TagList extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       'key:pageup coral-tag': '_onPreviousItemFocus',
       'key:home coral-tag': '_onFirstItemFocus',
       'key:end coral-tag': '_onLastItemFocus',
-  
+      
+      // Accessibility
+      'capture:focus coral-tag:not(.is-disabled)': '_onItemFocusIn',
+      'capture:blur coral-tag:not(.is-disabled)': '_onItemFocusOut',
+      
       // Private
       'coral-tag:_valuechanged': '_onTagValueChanged',
       'coral-tag:_connected': '_onTagConnected'
@@ -405,6 +409,14 @@ class TagList extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     if (length > 0) {
       this.items.getAll()[length - 1].focus();
     }
+  }
+  
+  _onItemFocusIn(event) {
+    event.matchedTarget.classList.add('focus-ring');
+  }
+  
+  _onItemFocusOut(event) {
+    event.matchedTarget.classList.remove('focus-ring');
   }
   
   /** @private */
