@@ -179,9 +179,8 @@ class TagList extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
     
-    this.classList.toggle('is-disabled', this._disabled);
     this.items.getAll().forEach((item) => {
-      item[this._disabled ? 'setAttribute' : 'removeAttribute']('disabled', '');
+      item.classList.toggle('is-disabled', this._disabled);
       if (item._input) {
         item._input.disabled = this._disabled;
       }
@@ -189,6 +188,18 @@ class TagList extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     // a11y
     this.setAttribute('aria-disabled', this._disabled);
+  }
+  
+  // JSDoc inherited
+  get invalid() {
+    return super.invalid;
+  }
+  set invalid(value) {
+    super.invalid = value;
+  
+    this.items.getAll().forEach((item) => {
+      item.classList.toggle('is-invalid', this._invalid);
+    });
   }
   
   /**
@@ -272,6 +283,10 @@ class TagList extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     // create corresponding input field
     this._attachInputToItem(attachedItem);
+    
+    // Set tag defaults
+    attachedItem.setAttribute('color', Tag.color.DEFAULT);
+    attachedItem.setAttribute('size', Tag.size.SMALL);
     
     // adds the role to support accessibility
     attachedItem.setAttribute('role', 'option');

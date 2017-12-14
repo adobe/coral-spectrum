@@ -346,7 +346,7 @@ describe('Coral.TagList', function() {
         tagList.disabled = true;
         
         tagList.items.getAll().forEach(function(item) {
-          expect(item._elements.button.disabled).to.be.true;
+          expect(item.classList.contains('is-disabled')).to.be.true;
           expect(item._input.disabled).to.be.true;
         });
       });

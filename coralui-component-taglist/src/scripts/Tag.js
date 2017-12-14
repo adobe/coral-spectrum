@@ -20,7 +20,8 @@ import 'coralui-component-button';
 import base from '../templates/base';
 import {transform, validate, events} from 'coralui-util';
 
-const CLASSNAME = 'coral3-Tag';
+const CLASSNAME = 'coral3-TagList-item';
+const LABEL_CLASSNAME = 'coral3-Label';
 
 /**
  Enumeration for {@link Tag} sizes.
@@ -28,11 +29,11 @@ const CLASSNAME = 'coral3-Tag';
  @typedef {Object} TagSizeEnum
  
  @property {String} SMALL
- A default tag (non-interactive), height 20px without closable button.
+ Not supported. Falls back to MEDIUM.
  @property {String} MEDIUM
- A default tag (non-interactive), height 28px without closable button.
+ A default sized tag.
  @property {String} LARGE
- A default tag (interactive), height 32px without closable button.
+ A large sized tag.
  */
 const size = {
   SMALL: 'S',
@@ -41,71 +42,83 @@ const size = {
 };
 
 /**
- Enumeration for {@link Tag} colors. By default they are semi-transparent unless otherwise stated.
+ Enumeration for {@link Tag} colors.
  
  @typedef {Object} TagColorEnum
  
  @property {String} DEFAULT
  @property {String} GREY
  @property {String} BLUE
- @property {String} LIGHT_BLUE
- @property {String} PERIWINKLE
- @property {String} PLUM
- @property {String} FUCHSIA
- @property {String} MAGENTA
  @property {String} RED
  @property {String} ORANGE
- @property {String} TANGERINE
- @property {String} YELLOW
- @property {String} CHARTREUSE
  @property {String} GREEN
- @property {String} KELLY_GREEN
- @property {String} SEA_FOAM
+ @property {String} LIGHT_BLUE
+ Not supported. Falls back to BLUE.
+ @property {String} PERIWINKLE
+ Not supported. Falls back to BLUE.
  @property {String} CYAN
+ Not supported. Falls back to BLUE.
+ @property {String} PLUM
+ Not supported. Falls back to RED.
+ @property {String} FUCHSIA
+ Not supported. Falls back to RED.
+ @property {String} MAGENTA
+ Not supported. Falls back to RED.
+ @property {String} TANGERINE
+ Not supported. Falls back to ORANGE.
+ @property {String} YELLOW
+ Not supported. Falls back to ORANGE.
+ @property {String} CHARTREUSE
+ Not supported. Falls back to GREEN.
+ @property {String} KELLY_GREEN
+ Not supported. Falls back to GREEN.
+ @property {String} SEA_FOAM
+ Not supported. Falls back to GREEN.
  */
 const color = {
   DEFAULT: '',
   GREY: 'grey',
   BLUE: 'blue',
+  RED: 'red',
+  ORANGE: 'orange',
+  GREEN: 'green',
   LIGHT_BLUE: 'lightblue',
   PERIWINKLE: 'periwinkle',
   PLUM: 'plum',
   FUCHSIA: 'fuchsia',
   MAGENTA: 'magenta',
-  RED: 'red',
-  ORANGE: 'orange',
   TANGERINE: 'tangerine',
   YELLOW: 'yellow',
   CHARTREUSE: 'chartreuse',
-  GREEN: 'green',
   KELLY_GREEN: 'kellygreen',
   SEA_FOAM: 'seafoam',
   CYAN: 'cyan'
 };
 
-// size mappings
-const SIZE_CLASSES = {
-  S: 'small',
-  M: 'medium',
-  L: 'large'
+const colorMap = {
+  lightblue: 'blue',
+  periwinkle: 'blue',
+  cyan: 'blue',
+  plum: 'red',
+  fuchsia: 'red',
+  magenta: 'red',
+  tangerine: 'orange',
+  yellow: 'orange',
+  chartreuse: 'green',
+  kelly_green: 'green',
+  sea_foam: 'green'
 };
-
-// builds a string containing all possible size classnames. this will be used to remove classnames when the size
-// changes
-const ALL_SIZE_CLASSES = [];
-for (const sizeValue in size) {
-  ALL_SIZE_CLASSES.push(`${CLASSNAME}--${SIZE_CLASSES[size[sizeValue]]}`);
-}
 
 // builds a string containing all possible color classnames. this will be used to remove classnames when the color
 // changes
 const ALL_COLOR_CLASSES = [];
 for (const colorValue in color) {
-  ALL_COLOR_CLASSES.push(`${CLASSNAME}--${color[colorValue]}`);
+  ALL_COLOR_CLASSES.push(`${LABEL_CLASSNAME}--${color[colorValue]}`);
 }
 
 const QUIET_CLASSNAME = `${CLASSNAME}--quiet`;
 const MULTILINE_CLASSNAME = `${CLASSNAME}--multiline`;
+const LARGE_CLASSNAME = `${LABEL_CLASSNAME}--large`;
 
 // Store coordinates of a mouse down event to compare against mouseup coordinates.
 let bullsEye = null;
@@ -170,7 +183,7 @@ class Tag extends ComponentMixin(HTMLElement) {
       handle: 'label',
       tagName: 'coral-tag-label',
       insert: function(label) {
-        this.appendChild(label);
+        this.insertBefore(label, this.firstChild);
         this._updateAriaLabel();
       }
     });
@@ -191,11 +204,15 @@ class Tag extends ComponentMixin(HTMLElement) {
     this._closable = transform.booleanAttr(value);
     this._reflectAttribute('closable', this._closable);
   
-    // Insert the button if it was not added to the DOM
-    if (this.closable && !this.contains(this._elements.button)) {
-      this.insertBefore(this._elements.button, this.firstChild);
+    // Only tags are closable
+    this._toggleTagVariant(this._closable);
+    
+    if (this._closable && !this.contains(this._elements.button)) {
+      // Insert the button if it was not added to the DOM
+      this.appendChild(this._elements.button);
     }
-    this._elements.button.hidden = !this.closable;
+    
+    this._elements.button.hidden = !this._closable;
     this._updateAriaLabel();
   }
   
@@ -232,6 +249,9 @@ class Tag extends ComponentMixin(HTMLElement) {
     this._quiet = transform.booleanAttr(value);
     this._reflectAttribute('quiet', this._quiet);
   
+    // Only tags are quiet
+    this._toggleTagVariant(this._quiet);
+    
     this.classList.toggle(QUIET_CLASSNAME, this._quiet);
   }
   
@@ -257,20 +277,19 @@ class Tag extends ComponentMixin(HTMLElement) {
    The tag's size. See {@link {TagSizeEnum}.
    
    @type {String}
-   @default TagSizeEnum.LARGE
+   @default TagSizeEnum.MEDIUM
    @htmlattribute size
    @htmlattributereflected
    */
   get size() {
-    return this._size || size.LARGE;
+    return this._size || size.MEDIUM;
   }
   set size(value) {
-    value = transform.string(value).toUpperCase();
-    this._size = validate.enumeration(size)(value) && value || size.LARGE;
+    value = this._host ? size.MEDIUM : transform.string(value).toUpperCase();
+    this._size = validate.enumeration(size)(value) && value || size.MEDIUM;
     this._reflectAttribute('size', this._size);
-  
-    this.classList.remove(...ALL_SIZE_CLASSES);
-    this.classList.add(`${CLASSNAME}--${SIZE_CLASSES[this._size]}`);
+    
+    this.classList.toggle(LARGE_CLASSNAME, this._size === size.LARGE);
   }
   
   /**
@@ -284,16 +303,37 @@ class Tag extends ComponentMixin(HTMLElement) {
     return this._color || color.DEFAULT;
   }
   set color(value) {
-    value = transform.string(value).toLowerCase();
+    value = this._host ? color.DEFAULT : transform.string(value).toLowerCase();
     this._color = validate.enumeration(color)(value) && value || color.DEFAULT;
+    
+    // Map unsupported colors
+    if (Object.keys(colorMap).indexOf(this._color) !== -1) {
+      this._color = colorMap[this._color];
+    }
+    
     this._reflectAttribute('color', this._color);
   
     // removes every existing color
     this.classList.remove(...ALL_COLOR_CLASSES);
-
-    if (this.color !== color.DEFAULT) {
-      this.classList.add(`${CLASSNAME}--${this._color}`);
+    
+    const isColored = this._color !== color.DEFAULT;
+  
+    // Only labels are colored
+    this._toggleTagVariant(!isColored);
+    
+    if (isColored) {
+      this.classList.add(`${LABEL_CLASSNAME}--${this._color}`);
     }
+  }
+  
+  /**
+    Toggle between Tag and Label styles
+   
+    @private
+   */
+  _toggleTagVariant(toggle) {
+    this.classList.toggle(CLASSNAME, toggle);
+    this.classList.toggle(LABEL_CLASSNAME, !toggle);
   }
   
   /** @private */
@@ -449,15 +489,10 @@ class Tag extends ComponentMixin(HTMLElement) {
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();
-    
-    this.classList.add(CLASSNAME);
   
     // Default reflected attributes
-    if (!this._size) { this.size = size.LARGE; }
+    if (!this._size) { this.size = size.MEDIUM; }
     if (!this._color) { this.color = color.DEFAULT; }
-  
-    // Create a fragment
-    const fragment = document.createDocumentFragment();
   
     const templateHandleNames = ['input', 'button'];
     
@@ -481,9 +516,6 @@ class Tag extends ComponentMixin(HTMLElement) {
         this.removeChild(child);
       }
     }
-  
-    // Add the frag to the component
-    this.appendChild(fragment);
   
     // Assign the content zones, moving them into place in the process
     this.label = label;

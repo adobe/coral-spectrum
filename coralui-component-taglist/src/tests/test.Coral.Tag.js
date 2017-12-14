@@ -68,7 +68,7 @@ describe('Coral.Tag', function() {
       it('should set multiline class if property is true', function() {
         var tag = helpers.build(window.__html__['Coral.Tag.base.html']);
         tag.multiline = true;
-        expect(tag.classList.contains('coral3-Tag--multiline')).to.be.true;
+        expect(tag.classList.contains('coral3-TagList-item--multiline')).to.be.true;
       });
     });
 
@@ -77,7 +77,7 @@ describe('Coral.Tag', function() {
         var tag = helpers.build(window.__html__['Coral.Tag.base.html']);
         tag.quiet = true;
 
-        expect(tag.classList.contains('coral3-Tag--quiet')).to.be.true;
+        expect(tag.classList.contains('coral3-TagList-item--quiet')).to.be.true;
       });
     });
 
@@ -85,18 +85,15 @@ describe('Coral.Tag', function() {
       it('should set another tag color', function() {
         var tag = helpers.build(window.__html__['Coral.Tag.base.html']);
         tag.color = 'grey';
-
-        expect(tag.classList.contains('coral3-Tag--grey')).to.be.true;
+        expect(tag.classList.contains('coral3-Label--grey')).to.be.true;
       });
     });
 
     describe('#size', function() {
       it('should set another tag size', function() {
         var tag = helpers.build(window.__html__['Coral.Tag.base.html']);
-        tag.size = 's';
-        expect(tag.classList.contains('coral3-Tag--small')).to.be.true;
-        tag.size = 'M';
-        expect(tag.classList.contains('coral3-Tag--medium')).to.be.true;
+        tag.size = 'L';
+        expect(tag.classList.contains('coral3-Label--large')).to.be.true;
       });
     });
   });
@@ -150,8 +147,8 @@ describe('Coral.Tag', function() {
     });
 
     describe('#size', function() {
-      it('should default to L', function() {
-        expect(el.size).to.equal(Coral.Tag.size.LARGE);
+      it('should default to M', function() {
+        expect(el.size).to.equal(Coral.Tag.size.MEDIUM);
       });
     });
 

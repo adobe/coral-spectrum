@@ -15,19 +15,25 @@
  * from Adobe Systems Incorporated.
  */
 
-const CLASSNAME = 'coral3-TagList-item-label';
-
-/**
- @class Coral.Tag.Label
- @classdesc Tag's label component
- @htmltag coral-tag-label
- @extends {HTMLElement}
- */
-class TagLabel extends HTMLElement {
-  /** @ignore */
-  connectedCallback() {
-    this.classList.add(CLASSNAME);
+.coral--light,
+.coral--dark,
+.coral--lightest,
+.coral--darkest {
+  // Support quiet
+  .coral3-TagList-item--quiet,
+  .coral3-TagList-item--quiet:hover {
+    border-color: transparent;
+    background-color: transparent;
   }
 }
 
-export default TagLabel;
+// Support multiline
+.coral3-TagList-item--multiline {
+  height: auto;
+
+  .coral3-TagList-item-label {
+    white-space: inherit;
+    text-overflow: inherit;
+  }
+}
+
