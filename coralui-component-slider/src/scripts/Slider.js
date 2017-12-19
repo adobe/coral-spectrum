@@ -18,7 +18,6 @@
 import {ComponentMixin} from 'coralui-mixin-component';
 import {FormFieldMixin} from 'coralui-mixin-formfield';
 import {Collection} from 'coralui-collection';
-import {Tooltip} from 'coralui-component-tooltip';
 import base from '../templates/base';
 import {transform, validate, events, commons, Keys} from 'coralui-util';
 
@@ -34,7 +33,7 @@ const CLASSNAME_INPUT = 'coral3-Slider-input';
  @property {String} HORIZONTAL
  Horizontal slider.
  @property {String} VERTICAL
- Vertical slider.
+ Not supported. Falls back to HORIZONTAL.
  */
 const orientation = {
   HORIZONTAL: 'horizontal',
@@ -63,10 +62,7 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       'key:pageDown .coral3-Slider-handle': '_handleKey',
       'key:home .coral3-Slider-handle': '_handleKey',
       'key:end .coral3-Slider-handle': '_handleKey',
-  
-      'capture:mouseenter .coral3-Slider-handle': '_onMouseEnter',
-      'capture:mouseleave .coral3-Slider-handle': '_onMouseLeave',
-  
+      
       'input': '_onInputChangeHandler',
   
       'touchstart': '_onMouseDown',
@@ -80,8 +76,11 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._elements = {};
     this._getTemplate().call(this._elements);
   
+    // Content zone
+    this._elements.content = this.querySelector('coral-slider-content') || document.createElement('coral-slider-content');
+  
     // Additional shortcuts
-    const handleContainer = this._elements.handleContainer;
+    const handleContainer = this._elements.controls;
     this._elements.handles = Array.prototype.slice.call(handleContainer.querySelectorAll(`.${CLASSNAME_HANDLE}`));
     this._elements.inputs = Array.prototype.slice.call(handleContainer.querySelectorAll(`.${CLASSNAME_INPUT}`));
   
@@ -90,6 +89,25 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     // Init the collection mutation observer
     this.items._startHandlingItems(true);
+  }
+  
+  /**
+   The slider's content.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
+  get content() {
+    return this._getContentZone(this._elements.content);
+  }
+  set content(value) {
+    this._setContentZone('content', value, {
+      handle: 'content',
+      tagName: 'coral-slider-content',
+      insert: function(content) {
+        this._elements.labelContent.appendChild(content);
+      }
+    });
   }
   
   /**
@@ -179,23 +197,37 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   Display tooltips for the slider value.
+   @ignore
    
-   @type {Boolean}
-   @default false
-   @htmlattribute tooltips
-   @htmlattributereflected
+   Not supported anymore. Use "showValue" instead.
    */
   get tooltips() {
-    return this._tooltips || false;
+    return this.showValue;
   }
   set tooltips(value) {
-    this._tooltips = transform.booleanAttr(value);
-    this._reflectAttribute('tooltips', this._tooltips);
+    this.showValue = value;
   }
   
   /**
-   Orientation of the slider, which can be VERTICAL or HORIZONTAL. See {@link SliderOrientationEnum}.
+   Display the slider value.
+   
+   @type {Boolean}
+   @default false
+   @htmlattribute showvalue
+   @htmlattributereflected
+   */
+  get showValue() {
+    return this._showValue || false;
+  }
+  set showValue(value) {
+    this._showValue = transform.booleanAttr(value);
+    this._reflectAttribute('showvalue', this._showValue);
+    
+    this._elements.labelValue.hidden = !this._showValue;
+  }
+  
+  /**
+   Orientation of the slider. See {@link SliderOrientationEnum}.
    
    @type {String}
    @default SliderOrientationEnum.HORIZONTAL
@@ -209,18 +241,6 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     value = transform.string(value).toLowerCase();
     this._orientation = validate.enumeration(orientation)(value) && value || orientation.HORIZONTAL;
     this._reflectAttribute('orientation', this._orientation);
-    
-    const isVertical = this._orientation === orientation.VERTICAL;
-    
-    this.classList.toggle(`${CLASSNAME}--vertical`, isVertical);
-    this.setAttribute('aria-orientation', this._orientation);
-    this._elements.inputs.forEach((input) => {
-      input.setAttribute('aria-orientation', this._orientation);
-    }, this);
-  
-    this._moveHandles();
-  
-    this._updateFill();
   }
   
   /**
@@ -241,7 +261,7 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     if (this._filled) {
       this._updateFill();
     }
-    this._elements.fillHandle.classList.toggle('is-hidden', !this._filled);
+    this._elements.fillHandle.hidden = !this._filled;
   }
   
   /**
@@ -322,6 +342,7 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
     
+    this.classList.toggle('is-disabled', this._disabled);
     this.setAttribute('aria-disabled', this._disabled);
     this._elements.inputs.forEach((input) => {
       input.disabled = this._disabled;
@@ -445,6 +466,10 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
    @private
    */
   _onMouseDown(event) {
+    if (this.disabled) {
+      return;
+    }
+    
     // do not accept right mouse button clicks
     if (event instanceof MouseEvent) {
       if ((event.which || event.button) !== 1) {
@@ -469,11 +494,6 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     this._currentHandle.classList.add('is-dragged');
     document.body.classList.add('u-coral-closedHand');
-    
-    if (this.tooltips) {
-      const idx = this._elements.handles.indexOf(this._currentHandle);
-      this._openTooltip(this._currentHandle, this._getLabel(this._values[idx]));
-    }
     
     this._draggingHandler = this._handleDragging.bind(this);
     this._mouseUpHandler = this._mouseUp.bind(this);
@@ -592,25 +612,18 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
    @private
    */
   _moveHandles() {
-    const self = this;
-    const calculatePercent = (value) => (value - self.min) / (self.max - self.min) * 100;
+    const calculatePercent = (value) => (value - this.min) / (this.max - this.min) * 100;
+    const labelValue = [];
     
     // Set the handle position as a percentage based on the stored values
     this._elements.handles.forEach((handle, index) => {
       const percent = calculatePercent(this._values[index]);
-      
-      if (this.orientation === orientation.VERTICAL) {
-        handle.style.bottom = `${percent}%`;
-        handle.style.left = '';
-      }
-      // Horizontal
-      else {
-        handle.style.left = `${percent}%`;
-        handle.style.bottom = '';
-      }
-      
-      this._updateTooltip(handle, this._getLabel(this._values[index]));
-    }, this);
+      handle.style.left = `${percent}%`;
+  
+      labelValue.push(this._getLabel(this._values[index]));
+    });
+    
+    this._elements.labelValue.textContent = labelValue.length > 1 ? labelValue.join(' - ') : labelValue[0];
   }
   
   /**
@@ -659,15 +672,7 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // Depending on support for input[type=range],
     // the event.target could be either the handle or its child input.
     // Use closest() to locate the actual handle.
-    const handle = event.target.closest(`.${CLASSNAME_HANDLE}`);
-    const index = this._elements.handles.indexOf(handle);
-    
-    this.classList.add('is-focused');
-    handle.classList.add('is-focused');
-    
-    if (this.tooltips) {
-      this._openTooltip(handle, this._getLabel(this._values[index]));
-    }
+    event.target.closest(`.${CLASSNAME_HANDLE}`).focus();
     
     events.on('touchstart.CoralSlider', this._onInteraction);
     events.on('mousedown.CoralSlider', this._onInteraction);
@@ -694,14 +699,7 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // Depending on support for input[type=range],
     // the event.target could be either the handle or its child input.
     // Use closest() to locate the actual handle.
-    const handle = event.target.closest(`.${CLASSNAME_HANDLE}`);
-    
-    this.classList.remove('is-focused');
-    handle.classList.remove('is-focused');
-    
-    if (this.tooltips) {
-      this._closeTooltip(handle);
-    }
+    event.target.closest(`.${CLASSNAME_HANDLE}`).blur();
     
     events.off('.CoralSlider');
   }
@@ -744,18 +742,11 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /** @private */
+  // eslint-disable-next-line no-unused-vars
   _getValueFromCoord(posX, posY, restrictBounds) {
-    let percent;
     const boundingClientRect = this.getBoundingClientRect();
-    
-    if (this.orientation === orientation.VERTICAL) {
-      const elementHeight = boundingClientRect.height;
-      percent = (boundingClientRect.top + elementHeight - posY) / elementHeight;
-    }
-    else {
-      const elementWidth = boundingClientRect.width;
-      percent = (posX - boundingClientRect.left) / elementWidth;
-    }
+    const elementWidth = boundingClientRect.width;
+    const percent = (posX - boundingClientRect.left) / elementWidth;
     
     // if the bounds are restricted, as with _handleClick, we shouldn't change the value.
     if (restrictBounds && (percent < 0 || percent > 1)) {
@@ -798,27 +789,6 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     return snappedValue;
   }
   
-  /** @private */
-  _onMouseEnter(event) {
-    const handle = event.matchedTarget;
-    const index = this._elements.handles.indexOf(handle);
-    
-    if (this.tooltips) {
-      this._openTooltip(handle, this._getLabel(this._values[index]));
-    }
-  }
-  
-  /** @private */
-  _onMouseLeave(event) {
-    const handle = event.matchedTarget;
-    
-    // in case the user drags the handle
-    // we do not close the tooltip
-    if (this.tooltips && !handle.classList.contains('is-dragged')) {
-      this._closeTooltip(handle);
-    }
-  }
-  
   /**
    end operation of a dragging flow
    @private
@@ -826,8 +796,6 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   _mouseUp() {
     this._currentHandle.classList.remove('is-dragged');
     document.body.classList.remove('u-coral-closedHand');
-    
-    this._closeTooltip(this._currentHandle);
     
     events.off('mousemove', this._draggingHandler);
     events.off('touchmove', this._draggingHandler);
@@ -846,52 +814,7 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
    */
   _updateFill() {
     const percent = (this._values[0] - this.min) / (this.max - this.min) * 100;
-    
-    if (this.orientation === orientation.VERTICAL) {
-      this._elements.fillHandle.style.height = `${percent}%`;
-      this._elements.fillHandle.style.width = '';
-    }
-    else {
-      this._elements.fillHandle.style.height = '';
-      this._elements.fillHandle.style.width = `${percent}%`;
-    }
-  }
-  
-  /**
-   Opens the tooltip of a handle
-   @protected
-   */
-  _openTooltip(handle, value) {
-    const tooltip = handle.querySelector('coral-tooltip');
-    const placement = this.orientation === orientation.VERTICAL ? Tooltip.placement.RIGHT : Tooltip.placement.TOP;
-    
-    tooltip.set({
-      content: {
-        textContent: value
-      },
-      target: handle,
-      placement: placement
-    });
-    
-    tooltip.open = true;
-  }
-  
-  /**
-   Updates the tooltip of a handle
-   @protected
-   */
-  _updateTooltip(handle, value) {
-    const tooltip = handle.querySelector('coral-tooltip');
-    tooltip.content.textContent = value;
-  }
-  
-  /**
-   Closes the tooltip of a handle
-   @protected
-   */
-  _closeTooltip(handle) {
-    const tooltip = handle.querySelector('coral-tooltip');
-    tooltip.open = false;
+    this._elements.fillHandle.style.width = `${percent}%`;
   }
   
   /**
@@ -921,6 +844,8 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     return base;
   }
   
+  get _contentZones() { return {'coral-slider-content': 'content'}; }
+  
   /**
    Returns {@link Slider} orientation options.
    
@@ -935,6 +860,8 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       'min',
       'max',
       'tooltips',
+      'showvalue',
+      'showValue',
       'orientation',
       'filled'
     ]);
@@ -954,34 +881,47 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     // A11y
     this.setAttribute('role', 'presentation');
-    
-    // Create a fragment
-    const frag = document.createDocumentFragment();
-    
-    const templateHandleNames = ['bar', 'handleContainer'];
+    this.setAttribute('aria-orientation', 'horizontal');
+  
+    // Support cloneNode
+    const template = this.querySelectorAll('.coral3-Slider-labelContainer, .coral3-Slider-controls');
+    for (let i = 0; i < template.length; i++) {
+      template[i].remove();
+    }
     
     // Render the main template
-    frag.appendChild(this._elements.bar);
-    frag.appendChild(this._elements.handleContainer);
-  
-    // Process remaining elements as necessary
-    while (this.firstChild) {
-      const child = this.firstChild;
-      
-      if (child.nodeType === Node.TEXT_NODE ||
-        child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1 ||
-        child.nodeName === 'CORAL-SLIDER-ITEM') {
-        // Add non-template elements to the fragment
-        frag.appendChild(child);
-      }
-      else {
-        // Remove anything else
-        this.removeChild(child);
+    const frag = document.createDocumentFragment();
+    frag.appendChild(this._elements.label);
+    frag.appendChild(this._elements.controls);
+    
+    const content = this._elements.content;
+    
+    // If no default content zone was provided, move everything there
+    if (!content.parentNode) {
+      // Process remaining elements as necessary
+      while (this.firstChild) {
+        const child = this.firstChild;
+    
+        if (child.nodeName === 'CORAL-SLIDER-ITEM') {
+          // Add items to the fragment
+          frag.appendChild(child);
+        }
+        else {
+          // Add anything else to the content
+          content.appendChild(child);
+        }
       }
     }
   
     // Add the frag to the component
     this.appendChild(frag);
+  
+    // Assign the content zone so the insert function will be called
+    this.content = content;
+  
+    // Defaults
+    this._moveHandles();
+    this._updateFill();
   }
 }
 

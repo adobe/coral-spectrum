@@ -33,54 +33,49 @@ describe('Coral.Slider', function() {
     afterEach(function() {
       el = null;
     });
-
+  
     describe('#tooltips', function() {
+      it('should default to showValue', function() {
+        expect(el.tooltips).to.be.false;
+        expect(el.showValue).to.equal(el.tooltips);
+        
+        el.tooltips = true;
+        expect(el.tooltips).to.be.true;
+        expect(el.showValue).to.equal(el.tooltips);
+      });
+    });
+    
+    describe('#showValue', function() {
       it('should default to false', function() {
-        expect(el.tooltips).to.equal(false);
+        expect(el.showValue).to.equal(false);
       });
 
       it('should be settable', function() {
-        el.tooltips = true;
-
-        var tooltips = el.querySelectorAll('coral-tooltip');
-        var handles = el.querySelectorAll('.coral3-Slider-handle');
-
-        expect(tooltips.length).to.equal(handles.length);
+        el.showValue = true;
+        expect(el._elements.labelValue.hidden).to.be.false;
       });
 
       it('should be labelled by slider items if available', function() {
-        const el = helpers.build(window.__html__['Coral.Slider.labeled.html']);
-
-        var tooltip = el.querySelector('coral-tooltip');
-        expect(tooltip.content.textContent).to.equal('Second Test');
-
+        const el = helpers.build(window.__html__['Coral.Slider.labelled.html']);
         var slider = el.querySelector('coral-slider');
+        
+        expect(slider._elements.labelValue.textContent).to.equal('Second Test');
+        
         slider.value = '5';
-        expect(tooltip.content.textContent).to.equal('Fifth Test');
+        expect(slider._elements.labelValue.textContent).to.equal('Fifth Test');
       });
 
-      it('should match the tooltip text to the input value on value change (default tooltip formatter)', function() {
-        var tooltip = el.querySelector('coral-tooltip');
-
+      it('should match the label text to the input value on value change', function() {
         var newVal = '60';
         el.value = newVal;
         
-        expect(tooltip.content.textContent).to.equal(newVal);
+        expect(el._elements.labelValue.textContent).to.equal(newVal);
       });
     });
 
     describe('#orientation', function() {
       it('should default to horizontal', function() {
         expect(el.orientation).to.equal(Coral.Slider.orientation.HORIZONTAL);
-      });
-
-      it('should be possible setting the orientation', function() {
-        var verticalAlign = Coral.Slider.orientation.VERTICAL;
-        el.orientation = verticalAlign;
-        
-        expect(el.getAttribute('aria-orientation')).to.equal(verticalAlign);
-        expect(el.classList.contains('coral3-Slider--vertical')).to.be.true;
-        expect(el._elements.inputs[0].getAttribute('aria-orientation')).to.equal(verticalAlign);
       });
     });
 
@@ -225,15 +220,13 @@ describe('Coral.Slider', function() {
         target: handle
       });
       
-      expect(el.classList.contains('is-focused')).to.be.true;
-      expect(el._elements.handles[0].classList.contains('is-focused')).to.be.true;
+      expect(el._elements.handles[0]).to.equal(document.activeElement);
       
       el._blur({
         target: handle
       });
-      
-      expect(el.classList.contains('is-focused')).to.be.false;
-      expect(el._elements.handles[0].classList.contains('is-focused')).to.be.false;
+  
+      expect(el._elements.handles[0]).to.not.equal(document.activeElement);
     });
     
     it('decrease with left key', function() {

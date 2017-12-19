@@ -19,8 +19,6 @@ import Slider from './Slider';
 import range from '../templates/range';
 import {transform} from 'coralui-util';
 
-const CLASSNAME = 'coral3-Slider';
-
 /**
  @class Coral.RangedSlider
  @classdesc A Ranged Slider
@@ -169,16 +167,9 @@ class RangedSlider extends Slider {
     const deltaMaxMinBase = 100 / (this.max - this.min);
     const percent = (this._getLowestValue() - this.min) * deltaMaxMinBase;
     const percentDiff = (this._getHighestValue() - this.min) * deltaMaxMinBase - percent;
-  
-    if (this.orientation === this.constructor.orientation.VERTICAL) {
-      this._elements.fillHandle.style.bottom = `${percent}%`;
-      this._elements.fillHandle.style.height = `${percentDiff}%`;
-    }
-    // Horizontal
-    else {
-      this._elements.fillHandle.style.left = `${percent}%`;
-      this._elements.fillHandle.style.width = `${percentDiff}%`;
-    }
+    
+    this._elements.fillHandle.style.left = `${percent}%`;
+    this._elements.fillHandle.style.width = `${percentDiff}%`;
   }
   
   /** @override */
@@ -216,8 +207,6 @@ class RangedSlider extends Slider {
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();
-    
-    this.classList.add(CLASSNAME);
     
     // Set filled attribute by default
     this.setAttribute('filled', '');

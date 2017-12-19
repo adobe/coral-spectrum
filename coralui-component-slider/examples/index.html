@@ -5,6 +5,11 @@
   <title>Coral.Slider</title>
   <link rel="stylesheet" href="../build/css/coral.css">
   <script src="../build/js/coral.js"></script>
+  <style>
+    section {
+      padding: 15px;
+    }
+  </style>
 </head>
 <body class="coral--light">
 
@@ -15,61 +20,34 @@
     <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
   </div>
 
-  <section class="coral-Form-fieldset">
-    <h1 class="coral-Form-fieldset-legend">Sliders</h1>
+  <section>
+    <h1 class="coral-Heading coral-Heading--1">Coral.Slider</h1>
 
-    <div class="coral-Form-fieldwrapper left">
-      <label id="slider-label-0" class="coral-Form-fieldlabel">Basic Horizontal Slider</label><br>
-      <coral-slider name="slider-0" value="14" min="10" max="20" step="2" labelledby="slider-label-0"></coral-slider>
-    </div>
-    <div class="coral-Form-fieldwrapper left">
-      <label id="slider-label-1" class="coral-Form-fieldlabel">Filled Horizontal Slider with Tooltips</label><br>
-      <coral-slider name="slider-1" value="14" min="10" max="20" step="2" labelledby="slider-label-1" filled tooltips></coral-slider>
-    </div>
-    <div class="coral-Form-fieldwrapper left">
-      <label id="slider-label-2" class="coral-Form-fieldlabel">Filled vertical slider</label><br>
-      <coral-slider name="slider-2" orientation="vertical" tooltips filled value="12" min="10" max="20" step="2" labelledby="slider-label-2"></coral-slider>
-    </div>
-    <div class="coral-Form-fieldwrapper left">
-      <label id="slider-label-3" class="coral-Form-fieldlabel">Disabled Horizontal Slider</label><br>
-      <coral-slider name="slider-3" value="14" disabled labelledby="slider-label-3"></coral-slider>
-    </div>
-  </section>
+    <h2 class="coral-Heading coral-Heading--2">Default</h2>
+    <coral-slider></coral-slider>
 
-  <section class="coral-Form-fieldset">
-    <h1 class="coral-Form-fieldset-legend">Ranged Sliders</h1>
+    <h2 class="coral-Heading coral-Heading--2">Filled</h2>
+    <coral-slider filled value="14" min="10" max="20" step="2"></coral-slider>
 
-    <div class="coral-Form-fieldwrapper left">
-      <label id="slider-label-20" class="coral-Form-fieldlabel">Basic Horizontal Slider</label><br>
-      <coral-rangedslider name="slider-20" startvalue="12" endvalue="18" min="10" max="20" step="2" labelledby="slider-label-20"></coral-rangedslider>
-    </div>
-    <div class="coral-Form-fieldwrapper left">
-      <label id="slider-label-21" class="coral-Form-fieldlabel">Horizontal Slider with Tooltips</label><br>
-      <coral-rangedslider name="slider-21" tooltips></coral-rangedslider>
-    </div>
-    <div class="coral-Form-fieldwrapper left">
-      <label id="slider-label-22" class="coral-Form-fieldlabel">vertical slider</label><br>
-      <coral-rangedslider name="slider-22" orientation="vertical" tooltips filled startvalue="12" endvalue="18" min="10" max="20" step="2" labelledby="slider-label-22"></coral-rangedslider>
-    </div>
-    <div class="coral-Form-fieldwrapper left">
-      <label id="slider-label-24" class="coral-Form-fieldlabel">Disabled Horizontal Slider</label><br>
-      <coral-rangedslider name="slider-24" startvalue="12" endvalue="18" min="10" max="20" disabled labelledby="slider-label-24"></coral-rangedslider>
-    </div>
-  </section>
+    <h2 class="coral-Heading coral-Heading--2">With Label + Value</h2>
+    <coral-slider showvalue value="14" min="10" max="20" step="2">
+      <coral-slider-content>Slider label</coral-slider-content>
+    </coral-slider>
 
-  <section class="coral-Form-fieldset">
-    <h1 class="coral-Form-fieldset-legend">Labeled Sliders</h1>
+    <h2 class="coral-Heading coral-Heading--2">Ranged Slider</h2>
+    <coral-rangedslider showvalue startvalue="12" endvalue="18" min="10" max="20" step="2"></coral-rangedslider>
 
-    <div class="coral-Form-fieldwrapper">
-      <label id="slider-label-30" class="coral-Form-fieldlabel">Slider with Labeled</label><br/>
-      <coral-slider name="slider-30" tooltips value="2" min="1" max="5" step="1" labelledby="slider-label-30">
-        <coral-slider-item value="1">First</coral-slider-item>
-        <coral-slider-item value="2">Second</coral-slider-item>
-        <coral-slider-item value="3">Third</coral-slider-item>
-        <coral-slider-item value="4">Fourth</coral-slider-item>
-        <coral-slider-item value="5">Fifth</coral-slider-item>
-      </coral-slider>
-    </div>
+    <h2 class="coral-Heading coral-Heading--2">Disabled</h2>
+    <coral-slider filled disabled value="14" min="10" max="20" step="2"></coral-slider>
+
+    <h2 class="coral-Heading coral-Heading--2">With custom values</h2>
+    <coral-slider showvalue value="2" min="1" max="5" step="1">
+      <coral-slider-item value="1">First</coral-slider-item>
+      <coral-slider-item value="2">Second</coral-slider-item>
+      <coral-slider-item value="3">Third</coral-slider-item>
+      <coral-slider-item value="4">Fourth</coral-slider-item>
+      <coral-slider-item value="5">Fifth</coral-slider-item>
+    </coral-slider>
   </section>
 </body>
 </html>

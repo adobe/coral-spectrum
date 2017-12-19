@@ -15,5 +15,13 @@
  * from Adobe Systems Incorporated.
  */
 
-@require 'layout';
-@require 'accessibility';
+// Hidden from visual browsers, but still accessible to screenreaders
+.u-coral-screenReaderOnly {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  // Workaround for the focus rectangle in Webkit
+  overflow: hidden;
+  width: 1px !important;
+  height: 1px !important;
+  margin: 0 -1px -1px 0 !important;
+}

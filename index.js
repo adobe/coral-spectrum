@@ -32,7 +32,7 @@ import {Radio, RadioLabel} from 'coralui-component-radio';
 import {Shell, ShellContent, ShellHeader, ShellHomeAnchor, ShellHomeAnchorLabel, ShellHelp, ShellHelpItem, ShellMenu, ShellMenuBar, ShellMenuBarItem, ShellUser, ShellUserContent, ShellUserFooter, ShellUserHeading, ShellUserName, ShellUserSubheading, ShellWorkspaces, ShellWorkspace, ShellSolutionSwitcher, ShellSolutions, ShellSolutionsHeader, ShellSolution, ShellSolutionLabel, ShellOrgSwitcher, ShellOrganization, ShellSuborganization, ShellOrgSwitcherFooter} from 'coralui-component-shell';
 import {Select, SelectItem} from 'coralui-component-select';
 import {Search} from 'coralui-component-search';
-import {Slider, SliderItem, RangedSlider} from 'coralui-component-slider';
+import {Slider, SliderItem, SliderContent, RangedSlider} from 'coralui-component-slider';
 import {StepList, Step, StepLabel} from 'coralui-component-steplist';
 import {Switch, SwitchLabel} from 'coralui-component-switch';
 import {Table, TableColumn, TableCell, TableHeaderCell, TableRow, TableHead, TableBody, TableFoot} from 'coralui-component-table';
@@ -184,6 +184,7 @@ export {
   ShellSuborganization,
   ShellOrgSwitcherFooter,
   Slider,
+  SliderContent,
   SliderItem,
   RangedSlider,
   StepList,

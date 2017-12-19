@@ -189,18 +189,12 @@ describe('Coral.RangedSlider', function() {
       });
     });
 
-    describe('#tooltips', function() {
-      it('should default to false', function() {
-        expect(el.tooltips).to.equal(false);
-      });
-
-      it('should be settable', function() {
-        el.tooltips = true;
-
-        var tooltips = el.querySelectorAll('coral-tooltip');
-        var handles = el.querySelectorAll('.coral3-Slider-handle');
-
-        expect(tooltips.length).to.equal(handles.length);
+    describe('#showValue', function() {
+      it('should display both values', function() {
+        el.showValue = true;
+        el.values = [10, 20];
+  
+        expect(el._elements.labelValue.textContent).to.equal('10 - 20');
       });
     });
   });
