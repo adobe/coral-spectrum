@@ -1,0 +1,81 @@
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2017 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+
+$actionbar-height = 44*$px;
+$actionbar-item-height = 38*$px;
+$actionbar-padding = ($actionbar-height - $actionbar-item-height) / 2;
+$actionbar-container-padding-left = 15*$px;
+$actionbar-container-padding-right = 15*$px;
+
+.coral3-ActionBar {
+  display: block;
+  box-sizing: border-box;
+
+  position: relative;
+
+  height: $actionbar-height;
+  // padding is added overall to avoid the focus to overflow outside the component
+  padding: $actionbar-padding 0;
+}
+
+.coral3-ActionBar-primary,
+.coral3-ActionBar-secondary {
+  position absolute;
+
+  > coral-popover {
+    display: table;
+    overflow: hidden;
+
+    .coral3-ActionBar-item > * {
+      width: 100%;
+      white-space: nowrap;
+    }
+  }
+
+  > .coral3-ActionBar-item,
+  > .coral3-Button[coral-actionbar-more] {
+    display: block;
+    float: left;
+    // required to get the focused item to go to the foreground
+    position: relative;
+  }
+
+  > [coral-actionbar-offscreen] {
+    // important to make Coral.commons.addResizeListener work with actionbar
+    position: absolute !important;
+    left: -999em;
+  }
+}
+
+.coral3-ActionBar-primary {
+  left: $actionbar-container-padding-left;
+}
+
+.coral3-ActionBar-secondary {
+  right: $actionbar-container-padding-right;
+}
+
+.coral3-ActionBar-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.coral3-ActionBar-list-item {
+  margin: 0;
+  padding: 0;
+}

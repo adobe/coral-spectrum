@@ -17,7 +17,8 @@
 
 import ActionBarContainerCollection from './ActionBarContainerCollection';
 import getFirstSelectableWrappedItem from './getFirstSelectableWrappedItem';
-import 'coralui-component-button';
+import {Button} from 'coralui-component-button';
+import 'coralui-component-anchorbutton';
 import 'coralui-component-popover';
 import morePopover from '../templates/morePopover';
 import moreButton from '../templates/moreButton';
@@ -61,7 +62,8 @@ const ActionBarContainerMixin = (superClass) => class extends superClass {
     if (!this._items) {
       this._items = new ActionBarContainerCollection({
         host: this,
-        itemTagName: 'coral-actionbar-item'
+        itemTagName: 'coral-actionbar-item',
+        onItemAdded: this._styleButton
       });
     }
 
@@ -107,6 +109,23 @@ const ActionBarContainerMixin = (superClass) => class extends superClass {
   }
   
   /**
+   Make sure the button has action style
+   */
+  _styleButton(item) {
+    const button = item.querySelector('button[is="coral-button"]') || item.querySelector('a[is="coral-anchorbutton"]');
+    if (button) {
+      const oldVariant = button.getAttribute('variant');
+      if (oldVariant === Button.variant._CUSTOM) {
+        return;
+      }
+      
+      const newVariant = oldVariant === Button.variant.QUIET ? 'coral3-Button--quiet--action' : 'coral3-Button--action';
+      button.setAttribute('variant', Button.variant._CUSTOM);
+      button.classList.add(newVariant);
+    }
+  }
+  
+  /**
    Called after popover.open is set to true, but before the transition of the popover is done. Show elements inside
    the actionbar, that are hidden due to space problems.
    
@@ -123,6 +142,15 @@ const ActionBarContainerMixin = (superClass) => class extends superClass {
     if (this._itemsInPopover.length < 1) {
       return;
     }
+  
+    // Store the button if any
+    this._itemsInPopover.forEach((item) => {
+      item._button = item.querySelector('button[is="coral-button"]') || item.querySelector('a[is="coral-anchorbutton"]');
+    });
+    
+    // Whether a ButtonList or AnchorList should be rendered
+    this._itemsInPopover.isButtonList = this._itemsInPopover.every(item => item._button && item._button.tagName === 'BUTTON');
+    this._itemsInPopover.isAnchorList = this._itemsInPopover.every(item => item._button && item._button.tagName === 'A');
     
     // show the current popover (hidden needed to disable fade time of popover)
     this._elements.popover.hidden = false;
@@ -232,6 +260,9 @@ const ActionBarContainerMixin = (superClass) => class extends superClass {
   
     // Insert popover always as firstChild to ensure element order (cloneNode support)
     this.insertBefore(this._elements.popover, this.firstChild);
+    
+    // Style the buttons accordingly
+    this.items.getAll().forEach(item => this._styleButton(item));
   }
 };
 
