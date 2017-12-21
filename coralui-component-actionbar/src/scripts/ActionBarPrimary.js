@@ -44,6 +44,11 @@ class ActionBarPrimary extends ActionBarContainer(ComponentMixin(HTMLElement)) {
       }
       
       this.insertBefore(item, this._elements.moreButton);
+      
+      // Reset target
+      if (item._button && item._popover) {
+        item._popover.target = item._button;
+      }
     }
   }
   

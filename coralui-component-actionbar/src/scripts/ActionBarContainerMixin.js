@@ -19,7 +19,7 @@ import ActionBarContainerCollection from './ActionBarContainerCollection';
 import getFirstSelectableWrappedItem from './getFirstSelectableWrappedItem';
 import {Button} from 'coralui-component-button';
 import 'coralui-component-anchorbutton';
-import 'coralui-component-popover';
+import {Popover} from 'coralui-component-popover';
 import morePopover from '../templates/morePopover';
 import moreButton from '../templates/moreButton';
 import popoverContent from '../templates/popoverContent';
@@ -37,7 +37,11 @@ const ActionBarContainerMixin = (superClass) => class extends superClass {
     // Events
     this._delegateEvents({
       'coral-overlay:beforeopen [handle="popover"]': '_onOverlayBeforeOpen',
-      'coral-overlay:beforeclose [handle="popover"]': '_onOverlayBeforeClose'
+      'coral-overlay:beforeclose [handle="popover"]': '_onOverlayBeforeClose',
+  
+      // Accessibility
+      'capture:focus .coral3-ActionBar-button:not([disabled])': '_onItemFocusIn',
+      'capture:blur .coral3-ActionBar-button:not([disabled])': '_onItemFocusOut'
     });
     
     // Templates
@@ -63,7 +67,7 @@ const ActionBarContainerMixin = (superClass) => class extends superClass {
       this._items = new ActionBarContainerCollection({
         host: this,
         itemTagName: 'coral-actionbar-item',
-        onItemAdded: this._styleButton
+        onItemAdded: this._styleItem
       });
     }
 
@@ -109,11 +113,13 @@ const ActionBarContainerMixin = (superClass) => class extends superClass {
   }
   
   /**
-   Make sure the button has action style
+   Style item content
    */
-  _styleButton(item) {
+  _styleItem(item) {
     const button = item.querySelector('button[is="coral-button"]') || item.querySelector('a[is="coral-anchorbutton"]');
     if (button) {
+      button.classList.add('coral3-ActionBar-button');
+      
       const oldVariant = button.getAttribute('variant');
       if (oldVariant === Button.variant._CUSTOM) {
         return;
@@ -123,6 +129,19 @@ const ActionBarContainerMixin = (superClass) => class extends superClass {
       button.setAttribute('variant', Button.variant._CUSTOM);
       button.classList.add(newVariant);
     }
+    
+    const popover = item.querySelector('coral-popover');
+    if (popover && (popover.querySelector('coral-buttonlist') || popover.querySelector('coral-anchorlist'))) {
+      popover.setAttribute('variant', Popover.variant._CUSTOM);
+    }
+  }
+  
+  _onItemFocusIn(event) {
+    event.matchedTarget.classList.add('focus-ring');
+  }
+  
+  _onItemFocusOut(event) {
+    event.matchedTarget.classList.remove('focus-ring');
   }
   
   /**
@@ -143,9 +162,10 @@ const ActionBarContainerMixin = (superClass) => class extends superClass {
       return;
     }
   
-    // Store the button if any
+    // Store the button and popover on the item
     this._itemsInPopover.forEach((item) => {
       item._button = item.querySelector('button[is="coral-button"]') || item.querySelector('a[is="coral-anchorbutton"]');
+      item._popover = item.querySelector('coral-popover');
     });
     
     // Whether a ButtonList or AnchorList should be rendered
@@ -261,8 +281,8 @@ const ActionBarContainerMixin = (superClass) => class extends superClass {
     // Insert popover always as firstChild to ensure element order (cloneNode support)
     this.insertBefore(this._elements.popover, this.firstChild);
     
-    // Style the buttons accordingly
-    this.items.getAll().forEach(item => this._styleButton(item));
+    // Style the items to match action items
+    this.items.getAll().forEach(item => this._styleItem(item));
   }
 };
 

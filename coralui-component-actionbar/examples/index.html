@@ -110,16 +110,10 @@
         </coral-actionbar-secondary>
       </coral-actionbar>
 
-      <h2 class="coral-Heading coral-Heading--2">Switching bars</h2>
+      <h2 class="coral-Heading coral-Heading--2">With action menu</h2>
       <coral-actionbar id="switchBar1">
         <coral-actionbar-item>
-          <button id="switchBar1Button" is="coral-button">Switch To</button>
-        </coral-actionbar-item>
-        <coral-actionbar-item>
           <button is="coral-button" variant="quiet" icon="copy">Copy</button>
-        </coral-actionbar-item>
-        <coral-actionbar-item>
-          <button is="coral-button" variant="quiet" icon="move">Move</button>
         </coral-actionbar-item>
         <coral-actionbar-item>
           <button is="coral-button" variant="quiet" icon="globe">Publish</button>
@@ -128,31 +122,26 @@
           <button is="coral-button" variant="quiet" icon="globeRemove">Unpublish</button>
         </coral-actionbar-item>
         <coral-actionbar-item>
-          <button is="coral-button" variant="quiet" icon="delete">Delete</button>
+          <button id="popover-button" is="coral-button" icon="search" title="Delete">Open Popover</button>
+          <coral-popover id="popover" target="#popover-button" placement="bottom">
+            <coral-buttonlist>
+              <button is="coral-buttonlist-item" icon="add">Add</button>
+              <button is="coral-buttonlist-item" icon="move">Move</button>
+              <button is="coral-buttonlist-item" disabled>Delete</button>
+            </coral-buttonlist>
+            </coral-popover-content>
+          </coral-popover>
         </coral-actionbar-item>
-      </coral-actionbar>
-      <coral-actionbar id="switchBar2" hidden>
         <coral-actionbar-item>
-          <button id="switchBar2Button" is="coral-button">Switch Back</button>
+          <button is="coral-button" variant="quiet" icon="copy">Copy</button>
+        </coral-actionbar-item>
+        <coral-actionbar-item>
+          <button is="coral-button" variant="quiet" icon="globe">Publish</button>
+        </coral-actionbar-item>
+        <coral-actionbar-item>
+          <button is="coral-button" variant="quiet" icon="globeRemove">Unpublish</button>
         </coral-actionbar-item>
       </coral-actionbar>
-      <script>
-        var switchBar1 = document.getElementById('switchBar1');
-        var switchBar2 = document.getElementById('switchBar2');
-
-        var switchBar1Button = document.getElementById('switchBar1Button');
-        var switchBar2Button = document.getElementById('switchBar2Button');
-
-        switchBar1Button.addEventListener("click", function() {
-          switchBar1.hidden = true;
-          switchBar2.hidden = false;
-        });
-
-        switchBar2Button.addEventListener("click", function() {
-          switchBar1.hidden = false;
-          switchBar2.hidden = true;
-        });
-      </script>
     </section>
   </body>
 </html>

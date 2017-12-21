@@ -11,7 +11,7 @@
   }
 </js>
 <if data.isButtonList>
-  <coral-buttonlist tabindex="0">
+  <coral-buttonlist tabindex="0" coral-actionbar-offscreen handle="buttonList">
     <foreach data>
       <button is="coral-buttonlist-item" handle="buttonListItem">
         <js>
@@ -19,11 +19,17 @@
         </js>
         <coral-action-bar-item coral-actionbar-offscreen>{{data._button.label.textContent}}</coral-action-bar-item>
       </button>
+      <if data._popover>
+        <js>
+          var popover = data._popover.cloneNode(true);
+          this.buttonList.items.add(popover);
+        </js>
+      </if>
     </foreach>
   </coral-buttonlist>
   <else>
     <if data.isAnchorList>
-      <coral-anchorlist tabindex="0">
+      <coral-anchorlist tabindex="0" coral-actionbar-offscreen handle="anchorList">
         <foreach data>
           <a is="coral-anchorlist-item" handle="anchorListItem">
             <js>
@@ -31,6 +37,12 @@
             </js>
             <coral-action-bar-item coral-actionbar-offscreen>{{data._button.label.textContent}}</coral-action-bar-item>
           </a>
+          <if data._popover>
+            <js>
+              var popover = data._popover.cloneNode(true);
+              this.anchorList.items.add(popover);
+            </js>
+          </if>
         </foreach>
       </coral-anchorlist>
       <else>
@@ -41,7 +53,9 @@
             </li>
           </foreach>
         </ul>
+      </else>
     </if>
+  </else>
 </if>
 
 
