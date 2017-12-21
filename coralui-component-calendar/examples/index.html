@@ -8,20 +8,8 @@
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>-->
     <script src="../build/js/coral.js"></script>
     <style>
-    body {
-      padding: 15px;
-    }
-
     section {
-      border-top: 1px solid #C8C8C8;
-      padding: 12px;
-    }
-
-    .col {
-      width: 30%;
-      margin-right: 3%;
-      display: inline-block;
-      vertical-align: top;
+      padding: 15px;
     }
     </style>
   </head>
@@ -34,45 +22,20 @@
       <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
     </div>
 
-    <h1 class="coral-Heading coral-Heading--1">Calendar</h1>
     <section>
-      <div class="col">
-        <h2 class="coral-Heading coral-Heading--2">Unset (with JS change watch)</h2>
-        <coral-calendar id="cal1"></coral-calendar>
-      </div>
-    </section>
-    <section>
-      <div class="col">
-        <h2 class="coral-Heading coral-Heading--2">Preset date</h2>
-        <coral-calendar value="2017-03-02"></coral-calendar>
-      </div>
-    </section>
-    <!--<section>-->
-      <!--<div class="col">-->
-        <!--<h2 class="coral-Heading coral-Heading&#45;&#45;2">Custom value format</h2>-->
-        <!--<coral-calendar valueformat="DD-MM-YYYY" value="02-03-2017"></coral-calendar>-->
-      <!--</div>-->
-    <!--</section>-->
-    <section>
-      <div class="col">
-        <h2 class="coral-Heading coral-Heading--2">Min Max</h2>
-        <coral-calendar min="2016-11-13" max="2016-11-23" value="2016-11-25"></coral-calendar>
-      </div>
-    </section>
-    <section>
-      <div class="col">
-        <h2 class="coral-Heading coral-Heading--2">Disabled</h2>
-        <coral-calendar value="2017-03-02" disabled></coral-calendar>
-      </div>
-    </section>
+      <h1 class="coral-Heading coral-Heading--1">Coral.Calendar</h1>
 
-    <script>
-      var calendar = document.getElementById('cal1');
+      <h2 class="coral-Heading coral-Heading--2">Default</h2>
+      <coral-calendar></coral-calendar>
 
-      calendar.on('change', function() {
-        console.log('change!', calendar.value);
-      });
-    </script>
+      <h2 class="coral-Heading coral-Heading--2">With preset date</h2>
+      <coral-calendar value="2017-03-02"></coral-calendar>
+
+      <h2 class="coral-Heading coral-Heading--2">With min/max</h2>
+      <coral-calendar min="2016-11-13" max="2016-11-25" value="2016-11-23"></coral-calendar>
+
+      <h2 class="coral-Heading coral-Heading--2">Disabled</h2>
+      <coral-calendar value="2017-03-02" disabled></coral-calendar>
+    </section>
   </body>
-
 </html>

@@ -289,7 +289,7 @@ class DateTime {
     if (type.indexOf('month') === 0) {
       this._date.setMonth(this._date.getMonth() + value);
     }
-    else if (type === 'days') {
+    else if (type.indexOf('day') === 0) {
       this._date.setDate(this._date.getDate() + value);
     }
     
@@ -303,7 +303,7 @@ class DateTime {
     if (type.indexOf('month') === 0) {
       this._date.setMonth(this._date.getMonth() - value);
     }
-    else if (type === 'days') {
+    else if (type.indexOf('day') === 0) {
       this._date.setDate(this._date.getDate() - value);
     }
     

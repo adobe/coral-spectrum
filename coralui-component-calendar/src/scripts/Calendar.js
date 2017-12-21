@@ -195,14 +195,14 @@ class Calendar extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     this._delegateEvents(commons.extend(this._events, {
       'click .coral3-Calendar-nextMonth,.coral3-Calendar-prevMonth': '_onNextOrPreviousMonthClick',
-      'click .coral3-Calendar-calendarBody .coral3-Calendar-date': '_onDayClick',
-      'mousedown .coral3-Calendar-calendarBody .coral3-Calendar-date': '_onDayMouseDown',
-      'key:up .coral3-Calendar-calendarBody': '_onUpKey',
-      'key:right .coral3-Calendar-calendarBody': '_onRightKey',
-      'key:down .coral3-Calendar-calendarBody': '_onDownKey',
-      'key:left .coral3-Calendar-calendarBody': '_onLeftKey',
-      'key:home .coral3-Calendar-calendarBody': '_onHomeOrEndKey',
-      'key:end .coral3-Calendar-calendarBody': '_onHomeOrEndKey',
+      'click .coral3-Calendar-body .coral3-Calendar-date': '_onDayClick',
+      'mousedown .coral3-Calendar-body .coral3-Calendar-date': '_onDayMouseDown',
+      'key:up .coral3-Calendar-body': '_onUpKey',
+      'key:right .coral3-Calendar-body': '_onRightKey',
+      'key:down .coral3-Calendar-body': '_onDownKey',
+      'key:left .coral3-Calendar-body': '_onLeftKey',
+      'key:home .coral3-Calendar-body': '_onHomeOrEndKey',
+      'key:end .coral3-Calendar-body': '_onHomeOrEndKey',
       'key:pageup': '_onPageUpKey',
       'key:pagedown': '_onPageDownKey',
   
@@ -215,8 +215,8 @@ class Calendar extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       // On Windows, we use CTRL+Page Down
       'key:ctrl+pagedown': '_onCtrlPageDownKey',
   
-      'key:enter .coral3-Calendar-calendarBody': '_onEnterKey',
-      'key:space .coral3-Calendar-calendarBody': '_onEnterKey'
+      'key:enter .coral3-Calendar-body': '_onEnterKey',
+      'key:space .coral3-Calendar-body': '_onEnterKey'
     }));
     
     // Prepare templates
@@ -565,14 +565,7 @@ class Calendar extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       this._activeDescendant = null;
       
       el = this._elements.body.querySelector('.is-selected');
-      
-      const selectedId = el ? el.id : null;
-      
-      el = this._elements.body.querySelector('.is-today');
-      
-      const todayId = el ? el.id : null;
-      
-      this._activeDescendant = selectedId || todayId;
+      this._activeDescendant = el && el.id;
       
       if (!this._activeDescendant || !this._elements.body.querySelector(`#${this._activeDescendant} [data-date]`)) {
         const currentMoment = this._value;
@@ -610,7 +603,7 @@ class Calendar extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     el = document.getElementById(this._activeDescendant);
     if (el) {
-      el.classList.add('is-focused');
+      el.querySelector('.coral3-Calendar-date').classList.add('is-focused');
     }
   }
   
@@ -696,6 +689,12 @@ class Calendar extends FormFieldMixin(ComponentMixin(HTMLElement)) {
               result.weekIndex = cursor.week();
               result.formattedDate = cursor.format('LL');
             }
+            else {
+              cssClass.push('is-disabled');
+            }
+          }
+          else {
+            cssClass.push('is-outsideMonth');
           }
     
           result.isDisabled = this.disabled || !result.dateAttr;
@@ -743,7 +742,7 @@ class Calendar extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   _gotoPreviousOrNextTimeUnit(unit, isNext) {
     const direction = isNext ? 'left' : 'right';
     const operator = isNext ? 'add' : 'subtract';
-    const el = this._elements.body.querySelector('td.is-focused .coral3-Calendar-date');
+    const el = this._elements.body.querySelector('.coral3-Calendar-date.is-focused');
     let currentActive;
     let currentMoment;
     let newMoment;
@@ -810,7 +809,7 @@ class Calendar extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
   /** @ignore */
   _getToNewMoment(direction, operator, difference) {
-    const el = this._elements.body.querySelector('td.is-focused .coral3-Calendar-date');
+    const el = this._elements.body.querySelector('.coral3-Calendar-date.is-focused');
     let currentActive;
     
     if (el) {
@@ -882,7 +881,7 @@ class Calendar extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   _onEnterKey(event) {
     event.preventDefault();
     
-    const el = this._elements.body.querySelector('td.is-focused .coral3-Calendar-date');
+    const el = this._elements.body.querySelector('.coral3-Calendar-date.is-focused');
     
     if (el) {
       el.click();
@@ -929,7 +928,7 @@ class Calendar extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     const isHome = event.keyCode === Keys.keyToCode('home');
     const direction = '';
     const operator = isHome ? 'subtract' : 'add';
-    const el = this._elements.body.querySelector('td.is-focused .coral3-Calendar-date');
+    const el = this._elements.body.querySelector('.coral3-Calendar-date.is-focused');
     
     if (el) {
       const currentActive = el.dataset.date;
