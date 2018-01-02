@@ -7,6 +7,7 @@
     "coralui-mixin-component": "file:../coralui-mixin-component",
     "coralui-collection": "file:../coralui-collection",
     "coralui-component-button": "file:../coralui-component-button",
+    "coralui-component-textfield": "file:../coralui-component-textfield",
     "coralui-dragaction": "file:../coralui-dragaction",
     "coralui-externals": "file:../coralui-externals",
     "coralui-util": "file:../coralui-util"

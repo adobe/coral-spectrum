@@ -17,6 +17,7 @@
 
 import {ComponentMixin} from 'coralui-mixin-component';
 import MultifieldCollection from './MultifieldCollection';
+import 'coralui-component-textfield';
 import {commons} from 'coralui-util';
 
 const CLASSNAME = 'coral3-Multifield';
@@ -177,6 +178,8 @@ class Multifield extends ComponentMixin(HTMLElement) {
   /** @ignore */
   _onDragStart(event) {
     if (event.target.closest('coral-multifield') === this) {
+      document.body.classList.add('u-coral-closedHand');
+      
       const dragElement = event.detail.dragElement;
       const items = this.items.getAll();
       const dragElementIndex = items.indexOf(dragElement);
@@ -233,6 +236,8 @@ class Multifield extends ComponentMixin(HTMLElement) {
   /** @ignore */
   _onDragEnd(event) {
     if (event.target.closest('coral-multifield') === this) {
+      document.body.classList.remove('u-coral-closedHand');
+      
       const dragElement = event.detail.dragElement;
       const items = this.items.getAll();
       const beforeArr = [];
@@ -302,7 +307,7 @@ class Multifield extends ComponentMixin(HTMLElement) {
   connectedCallback() {
     super.connectedCallback();
     
-    this.classList.add(CLASSNAME);
+    this.classList.add(CLASSNAME, 'coral-Well');
     
     // a11y
     this.setAttribute('role', 'list');
