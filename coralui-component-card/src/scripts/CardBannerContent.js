@@ -1,7 +1,7 @@
 /*
  * ADOBE CONFIDENTIAL
  *
- * Copyright 2017 Adobe Systems Incorporated
+ * Copyright 2018 Adobe Systems Incorporated
  * All Rights Reserved.
  *
  * NOTICE:  All information contained herein is, and remains
@@ -15,26 +15,19 @@
  * from Adobe Systems Incorporated.
  */
 
-// This is more specific than simply specifying the attribute selector
-// The specificity makes [hidden] work with classes that have a non-default display property
-[hidden] {
-  display: none !important;
-}
+const CLASSNAME = 'coral3-Banner-content';
 
-
-// Clears the floats using the micro clearfix
-clearfix() {
-  &:before,
-  &:after {
-    content: "";
-    display: table;
-  }
-
-  &:after {
-    clear: both
+/**
+ @class Coral.Card.Banner.Content
+ @classdesc A Card Banner Content component
+ @htmltag coral-card-banner-content
+ @extends {HTMLElement}
+ */
+class CardBannerContent extends HTMLElement {
+  /** @ignore */
+  connectedCallback() {
+    this.classList.add(CLASSNAME);
   }
 }
 
-.u-coral-clearFix {
-  clearfix();
-}
+export default CardBannerContent;

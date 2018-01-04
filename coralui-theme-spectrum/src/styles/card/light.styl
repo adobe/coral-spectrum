@@ -1,7 +1,7 @@
 /*
  * ADOBE CONFIDENTIAL
  *
- * Copyright 2017 Adobe Systems Incorporated
+ * Copyright 2018 Adobe Systems Incorporated
  * All Rights Reserved.
  *
  * NOTICE:  All information contained herein is, and remains
@@ -15,26 +15,20 @@
  * from Adobe Systems Incorporated.
  */
 
-// This is more specific than simply specifying the attribute selector
-// The specificity makes [hidden] work with classes that have a non-default display property
-[hidden] {
-  display: none !important;
-}
+$card-border-color = rgba(44, 44, 44, .05);
+$card-property-border-color = rgb(234, 234, 234);
 
-
-// Clears the floats using the micro clearfix
-clearfix() {
-  &:before,
-  &:after {
-    content: "";
-    display: table;
+.coral--light {
+  .coral3-Card-wrapper {
+    background-color: white;
   }
 
-  &:after {
-    clear: both
+  .coral3-Card.coral3-Card--stacked {
+    &:before,
+    &:after {
+      background-color: white;
+    }
   }
-}
 
-.u-coral-clearFix {
-  clearfix();
+  @import 'skin.styl';
 }

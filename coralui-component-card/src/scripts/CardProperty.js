@@ -91,7 +91,7 @@ class CardProperty extends ComponentMixin(HTMLElement) {
   connectedCallback() {
     super.connectedCallback();
     
-    this.classList.add(CLASSNAME);
+    this.classList.add(CLASSNAME, 'coral-Body--small');
   
     // Create a fragment
     const frag = document.createDocumentFragment();

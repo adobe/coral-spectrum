@@ -50,7 +50,7 @@ class CardContext extends ComponentMixin(HTMLElement) {
   connectedCallback() {
     super.connectedCallback();
     
-    this.classList.add(CLASSNAME);
+    this.classList.add(CLASSNAME, 'coral-Heading', 'coral-Heading--5');
   }
 }
 

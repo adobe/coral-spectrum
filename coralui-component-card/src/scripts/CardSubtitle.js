@@ -50,7 +50,7 @@ class CardSubtitle extends ComponentMixin(HTMLElement) {
   connectedCallback() {
     super.connectedCallback();
     
-    this.classList.add(CLASSNAME);
+    this.classList.add(CLASSNAME, 'coral-Body--secondary');
   }
 }
 

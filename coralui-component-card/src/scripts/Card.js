@@ -67,6 +67,7 @@ class Card extends ComponentMixin(HTMLElement) {
     // Prepare templates
     this._elements = {
       // Fetch or create the content zone elements
+      banner: this.querySelector('coral-card-banner') || document.createElement('coral-card-banner'),
       asset: this.querySelector('coral-card-asset') || document.createElement('coral-card-asset'),
       content: this.querySelector('coral-card-content') || document.createElement('coral-card-content'),
       info: this.querySelector('coral-card-info') || document.createElement('coral-card-info'),
@@ -74,6 +75,19 @@ class Card extends ComponentMixin(HTMLElement) {
     };
     base.call(this._elements);
   
+    // Check if the banner is empty whenever we get a mutation
+    this._observer = new MutationObserver(this._hideBannerIfEmpty.bind(this));
+    
+    // Watch for changes to the banner element's children
+    this._observer.observe(this._elements.banner, {
+      // Catch changes to childList
+      childList: true,
+      // Catch changes to textContent
+      characterData: true,
+      // Monitor any child node
+      subtree: true
+    });
+    
     // Events
     this._delegateEvents({
       'capture:load coral-card-asset img': '_onLoad'
@@ -188,7 +202,28 @@ class Card extends ComponentMixin(HTMLElement) {
       handle: 'content',
       tagName: 'coral-card-content',
       insert: function(content) {
+        content.classList.add('u-coral-padding');
         this._elements.wrapper.insertBefore(content, this.overlay || null);
+      }
+    });
+  }
+  
+  /**
+   The Banner of the card.
+   
+   @type {HTMLElement}
+   @contentzone
+   */
+  get banner() {
+    return this._getContentZone(this._elements.banner);
+  }
+  set banner(value) {
+    this._setContentZone('banner', value, {
+      handle: 'banner',
+      tagName: 'coral-card-banner',
+      insert: function(content) {
+        content.classList.add('coral3-Banner--corner');
+        this.appendChild(content);
       }
     });
   }
@@ -306,8 +341,29 @@ class Card extends ComponentMixin(HTMLElement) {
     event.target.classList.remove('is-loading');
   }
   
+  /**
+   Hide the banner if it's empty
+   @ignore
+   */
+  _hideBannerIfEmpty() {
+    const banner = this._elements.banner;
+    const bannerHeader = banner._elements.header;
+    const bannerContent = banner._elements.content;
+    
+    // If it's empty and has no non-textnode children, hide the label
+    const headerHiddenValue = bannerHeader.children.length === 0 && bannerHeader.textContent.replace(/\s*/g, '') === '';
+    const contentHiddenValue = bannerContent.children.length === 0 && bannerContent.textContent.replace(/\s*/g, '') === '';
+    const hiddenValue = headerHiddenValue && contentHiddenValue;
+    
+    // Only bother if the hidden status has changed
+    if (hiddenValue !== this._elements.banner.hidden) {
+      this._elements.banner.hidden = hiddenValue;
+    }
+  }
+  
   get _contentZones() {
     return {
+      'coral-card-banner': 'banner',
       'coral-card-asset': 'asset',
       'coral-card-content': 'content',
       'coral-card-info': 'info',
@@ -342,7 +398,7 @@ class Card extends ComponentMixin(HTMLElement) {
   connectedCallback() {
     super.connectedCallback();
     
-    this.classList.add(CLASSNAME);
+    this.classList.add(CLASSNAME, 'coral-Well');
     
     // Default reflected attributes
     if (!this._variant) { this.variant = variant.DEFAULT; }
@@ -387,6 +443,7 @@ class Card extends ComponentMixin(HTMLElement) {
     this.overlay = this._elements.overlay;
     this.content = content;
     this.info = this._elements.info;
+    this.banner = this._elements.banner;
   
     this.appendChild(this._elements.wrapper);
   

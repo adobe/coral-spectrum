@@ -12,6 +12,9 @@ describe('Coral.Card', function() {
       expect(Coral.Card).to.have.property('Content');
       expect(Coral.Card).to.have.property('PropertyList');
       expect(Coral.Card.Property).to.have.property('Content');
+      expect(Coral.Card).to.have.property('Banner');
+      expect(Coral.Card.Banner).to.have.property('Header');
+      expect(Coral.Card.Banner).to.have.property('Content');
     });
   
     it('should define the variants in an enum', function() {
@@ -35,6 +38,8 @@ describe('Coral.Card', function() {
   });
 
   describe('API', function() {
+    describe('#banner', function() {});
+    
     describe('#asset', function() {});
 
     describe('#content', function() {});
@@ -57,6 +62,8 @@ describe('Coral.Card', function() {
   });
 
   describe('Markup', function() {
+    describe('#banner', function() {});
+    
     describe('#asset', function() {});
 
     describe('#assetheight', function() {});

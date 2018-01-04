@@ -1,0 +1,108 @@
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2018 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+
+$card-overlay-background-color = rgba(30, 30, 30, 0.9);
+
+$card-context-inverted-color = rgb(153, 153, 153);
+$card-title-inverted-color = white;
+$card-subtitle-inverted-color = rgb(153, 153, 153);
+$card-property-inverted-color = rgb(205, 205, 205);
+$card-property-icon-inverted-color = rgb(205, 205, 205);
+$card-wrapper-inverted-background-color = rgba(30, 30, 30, 0.9);
+$card-wrapper-inverted-border-color = rgba(44, 44, 44, .05);
+
+$card-context-condensed-color = rgb(118, 118, 118);
+$card-title-condensed-color = rgb(50, 50, 50);
+$card-subtitle-condensed-color = rgb(118, 118, 118);
+$card-property-condensed-color = rgb(80, 80, 80);
+$card-property-icon-condensed-color = rgb(75, 75, 75);
+$card-wrapper-condensed-background-color = rgba(255, 255, 255, 0.9);
+$card-wrapper-condensed-border-color = rgba(211, 211, 211, .05);
+
+coral-card-overlay {
+  background-color: $card-overlay-background-color;
+}
+
+coral-card-propertylist + coral-card-propertylist {
+  border-top-color: $card-property-border-color;
+}
+
+// used in case it needs to show a stack underneath
+.coral3-Card--stacked {
+  &:before,
+  &:after {
+    background: inherit;
+    border-bottom-color: $card-border-color;
+    border-left-color: $card-border-color;
+    border-right-color: $card-border-color;
+  }
+}
+
+// condensed modifier used to represent projects
+.coral3-Card--condensed {
+  .coral3-Card-wrapper {
+    background-color: $card-wrapper-condensed-background-color;
+    border-bottom-color: $card-wrapper-condensed-border-color;
+  }
+
+  .coral3-Card-context {
+    color: $card-context-condensed-color;
+  }
+
+  .coral3-Card-title {
+    color: $card-title-condensed-color;
+  }
+
+  .coral3-Card-subtitle {
+    color: $card-subtitle-condensed-color;
+  }
+
+  .coral3-Card-property {
+    color: $card-property-condensed-color;
+  }
+
+  .coral3-Card-property-icon {
+    color: $card-property-icon-condensed-color;
+  }
+}
+
+.coral3-Card--inverted {
+  .coral3-Card-wrapper {
+    background-color: $card-wrapper-inverted-background-color;
+    border-bottom-color: $card-wrapper-inverted-border-color;
+  }
+
+  .coral3-Card-context {
+    color: $card-context-inverted-color;
+  }
+
+  .coral3-Card-title {
+    color: $card-title-inverted-color;
+  }
+
+  .coral3-Card-subtitle {
+    color: $card-subtitle-inverted-color;
+  }
+
+  .coral3-Card-property {
+    color: $card-property-inverted-color;
+  }
+
+  .coral3-Card-property-icon {
+    color: $card-property-icon-inverted-color;
+  }
+}
