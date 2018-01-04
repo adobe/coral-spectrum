@@ -39,7 +39,7 @@ module.exports = [
     coral: '.coral-Heading--1'
   },
   {
-    spectrum: /\.spectrum-Heading--page-title/g,
+    spectrum: /\.spectrum-Heading--pageTitle/g,
     coral: '.coral-Heading--2'
   },
   {
