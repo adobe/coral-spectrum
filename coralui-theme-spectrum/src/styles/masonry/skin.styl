@@ -1,0 +1,38 @@
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2018 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+
+$masonry-selected-background-color = rgba(20, 115, 230, 0.4);
+$masonry-selected-hover-background-color = rgba(20, 115, 230, 0.5);
+
+.coral3-Masonry-item.is-selected:after {
+  background-image: svgImport($masonry-selected-icon-url, 'path {fill: white}');
+  background-color: $masonry-selected-background-color;
+}
+
+.coral3-Masonry-item.is-selected:hover:after {
+  background-color: $masonry-selected-hover-background-color;
+}
+
+.coral3-Masonry.is-selectable .coral3-Masonry-item:not([selected]) {
+  &:hover,
+  &:focus {
+    &:after {
+      background-image: svgImport($masonry-selected-icon-url, 'path {fill: white}');
+      background-color: $masonry-hover-background-color;
+    }
+  }
+}

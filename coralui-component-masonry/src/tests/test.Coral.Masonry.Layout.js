@@ -162,16 +162,10 @@ describe('Coral.Masonry.Layout', function() {
       });
     });
   
-    it('should support fixed-spread layout', function(done) {
+    it('should support fixed-spread layout', function() {
       const el = helpers.build(window.__html__['Coral.Masonry.fixed-spread.left-aligned.html']);
-    
-      // Wait for layouting
-      helpers.next(function() {
-        // should align the items on the left if the first row is not filled
-        expect(el.items.getAll()[0].getBoundingClientRect().left).to.equal(0);
-      
-        done();
-      });
+      // should align the items on the left if the first row is not filled
+      expect(el.items.first().getBoundingClientRect().left).to.equal(el.getBoundingClientRect().left);
     });
   
     it('should support fixed-centered layout', function(done) {

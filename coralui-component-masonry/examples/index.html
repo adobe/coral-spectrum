@@ -7,26 +7,28 @@
     <link rel="stylesheet" href="../build/css/coral.css">
     <script src="../build/js/coral.js"></script>
     <style>
+    body {
+      padding: 15px;
+    }
+
     .coral3-Masonry {
-      border: 1px solid black;
+      border: 1px dashed #ccc;
+      border-radius: 4px;
       margin: 1rem;
       padding: 0.5rem;
     }
 
     .coral3-Masonry.is-complete > .coral3-Masonry-item.is-beforeInserting:first-child {
       /* Set top to padding height for a straight transition */
-      -webkit-transform: translate(-200%, 0.5rem);
       transform: translate(-200%, 0.5rem);
     }
 
     .coral3-Masonry-item {
       margin: 0.5rem;
-      border: 1px solid black;
     }
 
     .coral3-Masonry article {
       padding: 0.5rem;
-      background-color: white;
       width: 100%;
       height: 100%;
       box-sizing: border-box;
@@ -52,64 +54,79 @@
       <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
     </div>
 
-    layout:
-    <select name="layout">
-      <option>fixed-centered</option>
-      <option>fixed-spread</option>
-      <option>variable</option>
-      <option>dashboard</option>
-    </select>
-    column width:
-    <input name="columnWidth">
+    <h1 class="coral-Heading coral-Heading--1">Coral.Masonry</h1>
+
     <label>
-      <input type="checkbox" name="image">image
+      <input type="checkbox" id="is-selectable">
+      Selectable items
     </label>
+    <br>
+    <label>
+      Layout
+      <select name="layout">
+        <option>fixed-centered</option>
+        <option>fixed-spread</option>
+        <option>variable</option>
+        <option>dashboard</option>
+      </select>
+    </label>
+    <br>
+    <label>
+      Column width
+      <input name="columnWidth">
+    </label>
+    <br>
     <button class="prepend" data-count="1">prepend 1</button>
     <button class="prepend" data-count="10">prepend 10</button>
     <button class="append" data-count="1">append 1</button>
     <button class="append" data-count="10">append 10</button>
     <button class="append" data-count="100">append 100</button>
-    double click on item to remove it
+    <label>
+      Image
+      <input type="checkbox" name="image">
+    </label>
+    (double click on item to remove it)
+
     <coral-masonry orderable id="masonry" layout="fixed-centered" columnwidth="250" orderable>
-      <coral-masonry-item>
+      <coral-masonry-item class="coral-Well">
         <article>
           <span coral-masonry-draghandle></span>
-          <input type="checkbox" name="selected"> Big image from adobe.com:
-          <img src="http://wwwimages.adobe.com/content/dam/acom/en/lobby/lobby-bg-last-chance-loggedout-1400x860.jpg">
+          With image
+          <img src="http://via.placeholder.com/600x300">
         </article>
       </coral-masonry-item>
-      <coral-masonry-item>
-        <article>
-          <span coral-masonry-draghandle></span>
-          card
-          <br>card
-        </article>
-      </coral-masonry-item>
-      <coral-masonry-item colspan="2">
+      <coral-masonry-item class="coral-Well">
         <article>
           <span coral-masonry-draghandle></span>
           card
           <br>card
-          <br>card
         </article>
       </coral-masonry-item>
-      <coral-masonry-item>
+      <coral-masonry-item class="coral-Well" colspan="2">
         <article>
           <span coral-masonry-draghandle></span>
-          <input type="checkbox" name="selected"> card
+          card
+          <br>card
+          <br>card
+        </article>
+      </coral-masonry-item>
+      <coral-masonry-item class="coral-Well">
+        <article>
+          <span coral-masonry-draghandle></span>
+          card
           <br>card
           <br>card
           <br>card
         </article>
       </coral-masonry-item>
-      <coral-masonry-item colspan="2">
+      <coral-masonry-item class="coral-Well" colspan="2">
         <article>card
           <br>card
           <br>card
           <br>card
           <br>card</article>
       </coral-masonry-item>
-      <coral-masonry-item>
+      <coral-masonry-item class="coral-Well">
         <article>card
           <br>card
           <br>card
@@ -117,29 +134,29 @@
           <br>card
           <br>card</article>
       </coral-masonry-item>
-      <coral-masonry-item>
+      <coral-masonry-item class="coral-Well">
         <article>card
           <br>card</article>
       </coral-masonry-item>
-      <coral-masonry-item colspan="2">
+      <coral-masonry-item class="coral-Well" colspan="2">
         <article>card
           <br>card
           <br>card</article>
       </coral-masonry-item>
-      <coral-masonry-item>
+      <coral-masonry-item class="coral-Well">
         <article>card
-          <br>card
-          <br>card
-          <br>card</article>
-      </coral-masonry-item>
-      <coral-masonry-item colspan="2">
-        <article>card
-          <br>card
           <br>card
           <br>card
           <br>card</article>
       </coral-masonry-item>
-      <coral-masonry-item>
+      <coral-masonry-item class="coral-Well" colspan="2">
+        <article>card
+          <br>card
+          <br>card
+          <br>card
+          <br>card</article>
+      </coral-masonry-item>
+      <coral-masonry-item class="coral-Well">
         <article>card
           <br>card
           <br>card
@@ -167,14 +184,16 @@
       event.matchedTarget.remove();
     });
 
-    masonry.on('change', ':checkbox', function(e) {
-      event.matchedTarget.closest('.coral3-Masonry-item').setAttribute('selected', e.target.checked);
-    });
-
     Coral.events.on('click', '.prepend', function() {
       var count = this.dataset.count;
       for (var i = 0; i < count; i++) {
         masonry.items.add(createItem(), masonry.items.first());
+      }
+    });
+
+    Coral.events.on('click', 'coral-masonry-item', function(event) {
+      if (masonry.classList.contains('is-selectable')) {
+        event.matchedTarget.selected = !event.matchedTarget.selected;
       }
     });
 
@@ -189,6 +208,10 @@
       });
     });
 
+    Coral.events.on('change', '#is-selectable', function(event) {
+      masonry.classList.toggle('is-selectable', event.target.checked);
+    });
+
     function createItem() {
       var image = document.querySelector('[name=image]').checked;
       return image ? createImageItem() : createTextItem();
@@ -201,9 +224,10 @@
     function createImageItem() {
       var width = randomSize();
       var height = randomSize();
-      var url = 'http://lorempixel.com/' + width + '/' + height + '/abstract/' + Math.floor(Math.random() * 10);
+      var url = 'http://via.placeholder.com/' + width + 'x' + height;
 
       var item = document.createElement('coral-masonry-item');
+      item.classList.add('coral-Well');
       item.content.innerHTML = '<img src="' + url + '" style="width: ' + (width / 2) + 'px; height: ' + (height / 2) + 'px;">';
 
       return item;
@@ -214,6 +238,7 @@
       var html = new Array(rows + 1).join('card<br>').slice(0, -4);
 
       var item = document.createElement('coral-masonry-item');
+      item.classList.add('coral-Well');
       item.content.innerHTML = '<article>' + html + '</article>';
 
       return item;
