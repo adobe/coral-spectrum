@@ -43,34 +43,6 @@ describe('Coral.Drawer', function () {
         expect(drawer._elements.slider.style.height).to.equal('0px');
       });
   
-      it('should update icon accordingly (open=false and direction=down)', function() {
-        var drawer = helpers.build(window.__html__['Coral.Drawer.default.html']);
-        expect(drawer.open).to.be.false;
-        expect(drawer.direction).to.equal('down');
-    
-        expect(drawer._elements.toggleButton.icon).to.equal('chevronDown');
-      });
-  
-      it('should update icon accordingly (open=true and direction=down)', function() {
-        var drawer = helpers.build(window.__html__['Coral.Drawer.default.html']);
-        expect(drawer.open).to.be.false;
-        expect(drawer.direction).to.equal('down');
-    
-        drawer.open = true;
-        drawer._updateIcon();
-        expect(drawer._elements.toggleButton.icon).to.equal('chevronUp');
-      });
-  
-      it('should update icon accordingly (open=false and direction=up)', function() {
-        var drawer = helpers.build(window.__html__['Coral.Drawer.default.html']);
-        expect(drawer.open).to.be.false;
-        expect(drawer.direction).to.equal('down');
-    
-        drawer.direction = 'up';
-        drawer._updateIcon();
-        expect(drawer._elements.toggleButton.icon).to.equal('chevronUp');
-      });
-  
       it('should open the drawer if open is set to true', function(done) {
         var drawer = helpers.build(window.__html__['Coral.Drawer.default.html']);
         drawer.open = true;
@@ -114,28 +86,16 @@ describe('Coral.Drawer', function () {
     
         expect(drawer.classList.contains('coral3-Drawer--down')).to.be.true;
       });
-  
-      it('should update icon accordingly (open=true and direction=up)', function() {
-        var drawer = helpers.build(window.__html__['Coral.Drawer.default.html']);
-        expect(drawer.open).to.be.false;
-        expect(drawer.direction).to.equal('down');
-    
-        drawer.direction = 'up';
-        drawer.open = true;
-        drawer._updateIcon();
-        expect(drawer._elements.toggleButton.icon).to.equal('chevronDown');
-      });
     });
 
     describe('#disabled', function() {
-      it('should disable the button and set the class name is-disable and aria-disabled', function() {
+      it('should hide the toggle and set aria-disabled', function() {
         var drawer = helpers.build(window.__html__['Coral.Drawer.default.html']);
         expect(drawer.disabled).to.be.false;
         drawer.disabled = true;
-    
-        expect(drawer.classList.contains('is-disabled')).to.be.true;
+        
         expect(drawer.getAttribute('aria-disabled')).to.equal('true');
-        expect(drawer._elements.toggleButton.disabled).to.be.true;
+        expect(drawer._elements.toggle.hidden).to.be.true;
       });
     });
     

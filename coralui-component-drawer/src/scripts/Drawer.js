@@ -64,7 +64,7 @@ class Drawer extends ComponentMixin(HTMLElement) {
     
     // Events
     this._delegateEvents({
-      'click .coral3-Drawer-toggleButton:not(:disabled)': '_onClick'
+      'click .coral3-Drawer-toggleButton': '_onClick'
     });
   }
   
@@ -84,8 +84,7 @@ class Drawer extends ComponentMixin(HTMLElement) {
     this._reflectAttribute('disabled', this._disabled);
   
     this.setAttribute('aria-disabled', this._disabled);
-    this.classList.toggle('is-disabled', this._disabled);
-    this._elements.toggleButton.disabled = this._disabled;
+    this._elements.toggle.hidden = this._disabled;
   }
   
   /**
@@ -126,8 +125,6 @@ class Drawer extends ComponentMixin(HTMLElement) {
   
     this.classList.remove(...ALL_DIRECTION_CLASSES);
     this.classList.add(`${CLASSNAME}--${this._direction}`);
-
-    this._updateIcon();
   }
   
   /**
@@ -149,7 +146,6 @@ class Drawer extends ComponentMixin(HTMLElement) {
     this._reflectAttribute('open', this._open);
   
     this.setAttribute('aria-expanded', this._open);
-    this._updateIcon();
   
     // eslint-disable-next-line no-unused-vars
     let offsetHeight;
@@ -199,16 +195,6 @@ class Drawer extends ComponentMixin(HTMLElement) {
     this.open = !this.open;
   }
   
-  /** @private */
-  _updateIcon() {
-    if (this.direction === direction.UP) {
-      this._elements.toggleButton.icon = this.open ? 'chevronDown' : 'chevronUp';
-    }
-    else if (this.direction === direction.DOWN) {
-      this._elements.toggleButton.icon = this.open ? 'chevronUp' : 'chevronDown';
-    }
-  }
-  
   get _contentZones() { return {'coral-drawer-content': 'content'}; }
   
   /**
@@ -231,7 +217,7 @@ class Drawer extends ComponentMixin(HTMLElement) {
   connectedCallback() {
     super.connectedCallback();
     
-    this.classList.add(CLASSNAME);
+    this.classList.add(CLASSNAME, 'coral-Well');
     
     // Default reflected attributes
     if (!this._direction) { this.direction = direction.DOWN; }

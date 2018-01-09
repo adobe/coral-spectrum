@@ -8,19 +8,9 @@
   <script src="../build/js/coral.js"></script>
 
   <style>
-    body {
+    section {
       padding: 15px;
-    }
-
-    .col {
-      float: left;
-      margin-right: 12px;
-      width: 480px;
-      padding: 10px;
-    }
-
-    .coral-Heading {
-      margin: 15px 0;
+      max-width: 300px;
     }
   </style>
 </head>
@@ -32,20 +22,18 @@
     <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
   </div>
 
-  <div class="col">
-    <h3 class="coral-Heading coral-Heading--3">Drawer Down</h3>
-    <div class="demo-direction-down">
-      <coral-drawer>
-        <a class="coral-Link" href="#">Link</a>
-      </coral-drawer>
-    </div>
+  <section>
+    <h1 class="coral-Heading coral-Heading--1">Coral.Drawer</h1>
 
-    <h3 class="coral-Heading coral-Heading--3">Drawer Up</h3>
-    <div class="demo-direction-up">
-      <coral-drawer open direction="up">
-        <a class="coral-Link" href="#">Link</a>
-      </coral-drawer>
-    </div>
-  </div>
+    <h2 class="coral-Heading coral-Heading--2">Drawer down</h2>
+    <coral-drawer>
+      <a class="coral-Link" href="#">Link</a>
+    </coral-drawer>
+
+    <h2 class="coral-Heading coral-Heading--2">Drawer up & opened</h2>
+    <coral-drawer open direction="up">
+      <a class="coral-Link" href="#">Link</a>
+    </coral-drawer>
+  </section>
 </body>
 </html>
