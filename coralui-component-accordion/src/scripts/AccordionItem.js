@@ -39,6 +39,14 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
       label: this.querySelector('coral-accordion-item-label') || document.createElement('coral-accordion-item-label'),
       content: this.querySelector('coral-accordion-item-content') || document.createElement('coral-accordion-item-content')
     };
+    
+    // Listen to content changes
+    this._observer = new MutationObserver(this._onContentChange.bind(this));
+    this._observer.observe(this, {
+      childList: true,
+      characterData: true,
+      subtree: true
+    });
   }
   
   /**
@@ -99,12 +107,15 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
     this._selected = this.disabled ? false : transform.booleanAttr(value);
     this._reflectAttribute('selected', this._selected);
     
+    // Read it before applying is-open which adds additional padding
+    const scrollHeight = this._elements.content.scrollHeight;
+    
     this.classList.toggle('is-open', this._selected);
     this._elements.label.setAttribute('aria-selected', this._selected);
     this._elements.label.setAttribute('aria-expanded', this._selected);
     this._elements.content.setAttribute('aria-hidden', !this._selected);
     
-    this._elements.content.style.height = this._selected ? this._elements.content.scrollHeight + 'px' : '0';
+    this._elements.content.style.height = this._selected ? `${scrollHeight}px` : '0';
   
     this.trigger('coral-accordion-item:_selectedchanged');
   }
@@ -166,6 +177,20 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
   
     label.setAttribute('aria-controls', content.id);
     content.setAttribute('aria-labelledby', label.id);
+  }
+  
+  _onContentChange() {
+    // Make sure item height adapts to the content if item is selected
+    if (this.selected) {
+      const computedStyle = getComputedStyle(this._elements.content);
+      const padding = parseInt(computedStyle.paddingTop, 10) + parseInt(computedStyle.paddingBottom, 10);
+      
+      this._elements.content.style.height = '';
+      // Do it next frame to avoid the browser from batching the layout operations
+      requestAnimationFrame(() => {
+        this._elements.content.style.height = `${this._elements.content.scrollHeight - padding}px`;
+      }, 1000);
+    }
   }
   
   /**

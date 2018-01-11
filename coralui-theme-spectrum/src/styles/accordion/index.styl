@@ -19,7 +19,6 @@
 .coral3-Accordion-item:not(.is-open) {
   & > .coral3-Accordion-content {
     display: block;
-    overflow: hidden;
     padding: 0 0 0 16*$px;
   }
 
@@ -31,6 +30,7 @@
 // @spectrum support animation
 .coral3-Accordion--animated {
   .coral3-Accordion-content {
+    overflow: hidden;
     transition: height ease 250ms;
   }
 }
