@@ -100,10 +100,11 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
     this._reflectAttribute('selected', this._selected);
     
     this.classList.toggle('is-open', this._selected);
-    this.removeAttribute('aria-selected');
     this._elements.label.setAttribute('aria-selected', this._selected);
     this._elements.label.setAttribute('aria-expanded', this._selected);
     this._elements.content.setAttribute('aria-hidden', !this._selected);
+    
+    this._elements.content.style.height = this._selected ? this._elements.content.scrollHeight + 'px' : '0';
   
     this.trigger('coral-accordion-item:_selectedchanged');
   }

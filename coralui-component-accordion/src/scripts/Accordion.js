@@ -426,6 +426,11 @@ class Accordion extends ComponentMixin(HTMLElement) {
     this._preventTriggeringEvents = false;
     
     this._oldSelection = this.selectedItems;
+    
+    // Don't trigger animations on rendering
+    window.requestAnimationFrame(() => {
+      this.classList.add(`${CLASSNAME}--animated`);
+    });
   }
   
   /**
