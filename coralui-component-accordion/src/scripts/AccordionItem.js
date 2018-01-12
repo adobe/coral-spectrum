@@ -39,14 +39,6 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
       label: this.querySelector('coral-accordion-item-label') || document.createElement('coral-accordion-item-label'),
       content: this.querySelector('coral-accordion-item-content') || document.createElement('coral-accordion-item-content')
     };
-    
-    // Listen to content changes
-    this._observer = new MutationObserver(this._onContentChange.bind(this));
-    this._observer.observe(this, {
-      childList: true,
-      characterData: true,
-      subtree: true
-    });
   }
   
   /**
@@ -104,7 +96,7 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
     return this._selected || false;
   }
   set selected(value) {
-    this._selected = this.disabled ? false : transform.booleanAttr(value);
+    this._selected = this.hasAttribute('disabled') ? false : transform.booleanAttr(value);
     this._reflectAttribute('selected', this._selected);
     
     // Read it before applying is-open which adds additional padding
@@ -115,7 +107,21 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
     this._elements.label.setAttribute('aria-expanded', this._selected);
     this._elements.content.setAttribute('aria-hidden', !this._selected);
     
+    if (!this._selected) {
+      this._elements.content.style.height = `${scrollHeight}px`;
+      // We read the offset height to force a reflow, this is needed to start the transition between absolute values
+      // https://blog.alexmaccaw.com/css-transitions under Redrawing
+      // eslint-disable-next-line no-unused-vars
+      const offsetHeight = this._elements.content.offsetHeight;
+    }
+    
     this._elements.content.style.height = this._selected ? `${scrollHeight}px` : '0';
+
+    if (this._selected) {
+      commons.transitionEnd(this._elements.content, () => {
+        this._elements.content.style.height = '';
+      });
+    }
   
     this.trigger('coral-accordion-item:_selectedchanged');
   }
@@ -134,9 +140,9 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
   
-    this.classList.toggle('is-disabled', this.disabled);
+    this.classList.toggle('is-disabled', this._disabled);
     this.removeAttribute('aria-disabled');
-    this._elements.label.setAttribute('aria-disabled', this.disabled);
+    this._elements.label.setAttribute('aria-disabled', this._disabled);
   
     this.selected = this.selected;
   }
@@ -177,20 +183,6 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
   
     label.setAttribute('aria-controls', content.id);
     content.setAttribute('aria-labelledby', label.id);
-  }
-  
-  _onContentChange() {
-    // Make sure item height adapts to the content if item is selected
-    if (this.selected) {
-      const computedStyle = getComputedStyle(this._elements.content);
-      const padding = parseInt(computedStyle.paddingTop, 10) + parseInt(computedStyle.paddingBottom, 10);
-      
-      this._elements.content.style.height = '';
-      // Do it next frame to avoid the browser from batching the layout operations
-      requestAnimationFrame(() => {
-        this._elements.content.style.height = `${this._elements.content.scrollHeight - padding}px`;
-      }, 1000);
-    }
   }
   
   /**
