@@ -1,0 +1,85 @@
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2017 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+
+.coral3-Tree {
+  display: block;
+}
+
+.coral3-Tree-item {
+  position: relative;
+  display: block;
+
+  &.is-expanded {
+    & > .coral3-Tree-header .coral3-Tree-collapseExpand svg {
+      transform: rotate(90deg);
+    }
+  }
+
+  &.is-disabled {
+    .coral3-Tree-header {
+      cursor: default;
+    }
+  }
+
+  &.coral3-Tree-item--leaf {
+    .coral3-Tree-collapseExpand {
+      visibility : hidden;
+    }
+  }
+}
+
+.coral3-Tree-collapseExpand svg {
+  transition: transform ease 125ms;
+}
+
+.coral3-Tree-header {
+  display: flex;
+  box-sizing: border-box;
+  padding: 0 16*$px 0 16*$px;
+  margin-bottom: 4*$px;
+  border-radius: 4*$px;
+  align-items: center;
+  height: 40*$px;
+  width: 272*$px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.coral3-Tree-contentContainer {
+  flex: 1;
+  min-width: 0; /* shrink regardless of content */
+}
+
+.coral3-Tree-item-spacer {
+  padding-left : 21*$px;
+}
+
+.coral3-Tree-subTree {
+  transition: height ease 250ms;
+  overflow: hidden;
+}
+
+@require 'darkest'
+@require 'dark'
+@require 'light'
+@require 'lightest'

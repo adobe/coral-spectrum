@@ -24,12 +24,6 @@ import {transform, commons, validate} from 'coralui-util';
 
 const CLASSNAME = 'coral3-Tree-item';
 
-// Chevron classes for expanded/collapse states
-const CHEVRON_CLASSES = {
-  true: 'chevronDown',
-  false: 'chevronRight'
-};
-
 /**
  Enumeration for {@link TreeItem} variants.
  
@@ -160,15 +154,12 @@ class TreeItem extends ComponentMixin(HTMLElement) {
     this._reflectAttribute('expanded', this._expanded);
   
     const header = this._elements.header;
-    const chevron = this._elements.icon;
     const subTreeContainer = this._elements.subTreeContainer;
   
     this.classList.toggle('is-expanded', this._expanded);
     this.classList.toggle('is-collapsed', !this._expanded);
     header.setAttribute('aria-expanded', this._expanded);
     subTreeContainer.setAttribute('aria-hidden', !this._expanded);
-  
-    chevron.icon = CHEVRON_CLASSES[this._expanded];
     
     this.trigger('coral-tree-item:_expandedchanged');
   
