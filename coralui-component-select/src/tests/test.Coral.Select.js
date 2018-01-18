@@ -15,7 +15,7 @@ describe('Coral.Select', function() {
 
   describe('Instantiation', function() {
     function testDefaultInstance(select) {
-      expect(select.classList.contains('coral3-Select')).to.be.true;
+      expect(select.classList.contains('coral3-Dropdown')).to.be.true;
     }
 
     it('should be possible using new', function() {
@@ -504,23 +504,12 @@ describe('Coral.Select', function() {
         expect(el._elements.input.value).to.equal(item2.value);
         expect(el._elements.taglist.value).to.equal('');
 
-        // when multiple = false, all items are visible
-        el._elements.list.items.getAll().forEach(function(item) {
-          expect(item.hidden).to.equal(false, 'all selectlist items should be visible');
-        });
-
         el.multiple = true;
 
         var tags = el._elements.taglist.items.getAll();
 
         expect(tags.length).to.equal(1, 'there should be 1 tag');
         expect(tags[0].value).to.equal(item2.value);
-        expect(tags[0].textContent).to.equal(item2.textContent);
-
-        // when multiple = true, selected items are hidden
-        el.items.getAll().forEach(function(item) {
-          expect(item._selectListItem.hidden).to.equal(item.selected, 'hidden should match the selection');
-        });
       });
 
       it('should not have tags and multiple selected options when multiple is switched to single', function() {
@@ -541,16 +530,6 @@ describe('Coral.Select', function() {
         // expect(el._elements.nativeSelect.selectedOptions.length).to.equal(2, 'there should be two selected options');
         expect(el._elements.list.selectedItems.length).to.equal(2, 'there should be two selected items');
         expect(el._elements.taglist.items.length).to.equal(2, 'there should be two taglist items');
-
-        // when multiple = true, selected items are hidden
-        el._elements.list.items.getAll().forEach(function(item) {
-          if (item.selected) {
-            expect(item.hidden).to.equal(true, 'selected items should be hidden in the selectlist');
-          }
-          else {
-            expect(item.hidden).to.equal(false, 'non selected items be visible in the selectlist');
-          }
-        });
         
         el.multiple = false;
   
@@ -564,11 +543,6 @@ describe('Coral.Select', function() {
         // expect(el._elements.nativeSelect.selectedOptions.length).to.equal(1, 'there should be one selected option');
         expect(el._elements.list.selectedItems.length).to.equal(1, 'there should be one selected item');
         expect(el._elements.taglist.items.length).to.equal(0, 'there should be zero taglist items');
-  
-        // when multiple = false, all items are visible
-        el._elements.list.items.getAll().forEach(function(item) {
-          expect(item.hidden).to.equal(false, 'all items should be visible in the selectlist');
-        });
         
         // now instead of showing 'Select', the actual item needs to be shown
         expect(el._elements.label.textContent).to.equal(item3.content.textContent);
@@ -624,8 +598,6 @@ describe('Coral.Select', function() {
 
         // Wait for MO
         helpers.next(function() {
-          expect(item4._selectListItem.hidden).to.be.true;
-
           expect(el._elements.list.items.length).to.equal(itemCount + 1);
           expect(el._elements.taglist.items.length).to.equal(1);
 
@@ -899,25 +871,22 @@ describe('Coral.Select', function() {
       it('should be initially Coral.Select.variant.DEFAULT', function() {
         expect(el.variant).to.equal(Coral.Select.variant.DEFAULT);
         expect(el.getAttribute('variant')).to.equal(Coral.Select.variant.DEFAULT);
-        expect(el._elements.button.variant).to.equal('secondary');
       });
 
       it('should set the new variant', function() {
         el.variant = Coral.Select.variant.QUIET;
 
         expect(el.variant).to.equal('quiet');
-        expect(el._elements.button.variant).to.equal('quiet');
-        
-        expect(el.classList.contains('coral3-Select--quiet')).to.be.true;
-        expect(el.classList.contains('coral3-Select')).to.be.true;
+        expect(el._elements.button.classList.contains('coral3-Button--quiet--dropdown')).to.be.true;
+        expect(el._elements.button.classList.contains('coral3-Button--dropdown')).to.be.false;
       });
 
-      it('should not add class for invalid variant', function() {
-        el.variant = 'invalidvariant';
+      it('should set the default variant', function() {
+        el.variant = Coral.Select.variant.DEFAULT;
 
         expect(el.variant).to.equal(Coral.Select.variant.DEFAULT);
-        expect(el.classList.contains('coral3-Select--invalidvariant')).to.be.false;
-        expect(el.classList.contains('coral3-Select')).to.be.true;
+        expect(el._elements.button.classList.contains('coral3-Button--dropdown')).to.be.true;
+        expect(el._elements.button.classList.contains('coral3-Button--quiet--dropdown')).to.be.false;
       });
     });
 
@@ -1180,32 +1149,26 @@ describe('Coral.Select', function() {
 
   describe('Markup', function() {
     describe('#variant', function() {
-      it('should not add class for empty variant', function() {
+      it('should not set empty variant', function() {
         const el = helpers.build(window.__html__['Coral.Select.variant.empty.html']);
         expect(el.variant).to.equal(Coral.Select.variant.DEFAULT);
         expect(el.getAttribute('variant')).to.equal(Coral.Select.variant.DEFAULT);
-        expect(el.classList.contains('coral3-Select')).to.be.true;
       });
 
-      it('should not add class for invalid variant', function() {
+      it('should not set invalid variant', function() {
         const el = helpers.build(window.__html__['Coral.Select.variant.invalid.html']);
         expect(el.variant).to.equal(Coral.Select.variant.DEFAULT);
         expect(el.getAttribute('variant')).to.equal(Coral.Select.variant.DEFAULT);
-        expect(el.classList.contains('coral3-Select')).to.be.true;
-        expect(el.classList.contains('coral3-Select--invalidvariant')).to.be.false;
       });
 
       it('should remove variant classnames when variant changes', function() {
         const el = helpers.build(window.__html__['Coral.Select.variant.quiet.html']);
-        expect(el.classList.contains('coral3-Select--quiet')).to.be.true;
-        expect(el._elements.button.variant).to.equal('quiet');
-
-        el.variant = Coral.Select.variant.DEFAULT;
-        expect(el._elements.button.variant).to.equal(Coral.Button.variant.DEFAULT);
+        expect(el._elements.button.classList.contains('coral3-Button--quiet--dropdown')).to.be.true;
+        expect(el._elements.button.classList.contains('coral3-Button--dropdown')).to.be.false;
         
-        expect(el.classList.contains('coral3-Select--default')).to.be.false;
-        expect(el.classList.contains('coral3-Select--quiet')).to.be.false;
-        expect(el._elements.button.variant).to.not.equal(Coral.Button.variant.QUIET);
+        el.variant = Coral.Select.variant.DEFAULT;
+        expect(el._elements.button.classList.contains('coral3-Button--dropdown')).to.be.true;
+        expect(el._elements.button.classList.contains('coral3-Button--quiet--dropdown')).to.be.false;
       });
     });
 
@@ -1295,9 +1258,8 @@ describe('Coral.Select', function() {
 
         expect(el._elements.list.selectedItems.length).to.equal(2);
 
-        el._elements.list.selectedItems.forEach(function(value) {
-          expect(value.hidden).to.be.true;
-          expect(value.selected).to.be.true;
+        el._elements.list.selectedItems.forEach(function(item) {
+          expect(item.selected).to.be.true;
         });
 
         expect(el._elements.taglist.items.length).to.equal(2, 'tags must have been created for the selected items');
@@ -1578,7 +1540,9 @@ describe('Coral.Select', function() {
             expect(changeSpy.callCount).to.equal(1);
 
             // opens the overlay again
-            el._elements.button.click();
+            helpers.next(() => {
+              el._elements.button.click();
+            });
           }
           else if (openEventCount === 1) {
             expect(changeSpy.callCount).to.equal(1, 'selecting an item again must not trigger a change event');
@@ -1664,7 +1628,7 @@ describe('Coral.Select', function() {
 
         // we fake the native input
         el._useNativeInput = true;
-        el.classList.add('coral3-Select--native');
+        el.classList.add('coral3-Dropdown--native');
         el.appendChild(el._elements.nativeSelect);
 
         var options = el._elements.nativeSelect.options;
@@ -1691,7 +1655,7 @@ describe('Coral.Select', function() {
 
         // we fake the native input
         el._useNativeInput = true;
-        el.classList.add('coral3-Select--native');
+        el.classList.add('coral3-Dropdown--native');
         el.appendChild(el._elements.nativeSelect);
 
         var options = el._elements.nativeSelect.options;
@@ -1903,11 +1867,6 @@ describe('Coral.Select', function() {
       tags[0]._elements.button.click();
       
       expect(el.selectedItems.length).to.equal(selectedItemCount - 1);
-  
-      // makes sure the items inside the selectlist have the correct visibility
-      el.items.getAll().forEach(function(item) {
-        expect(item._selectListItem.hidden).to.equal(item.selected, 'hidden should match the selection');
-      });
     });
 
     it('should focus the button when an item is selected', function(done) {
@@ -1915,13 +1874,12 @@ describe('Coral.Select', function() {
       el.on('coral-overlay:open', function() {
         // selects the 2nd item in the list
         el._elements.list.items.getAll()[1].click();
-
-        // we wait for the nextFrame that focuses the button
-        helpers.next(function() {
-          expect(document.activeElement).to.equal(el._elements.button);
-
-          done();
-        });
+      }, true);
+      
+      el.on('coral-overlay:close', function() {
+        expect(document.activeElement).to.equal(el._elements.button);
+        
+        done();
       }, true);
 
       // opens the overlay
@@ -1935,13 +1893,12 @@ describe('Coral.Select', function() {
 
         expect(selectListItems[2].selected).to.be.true;
         selectListItems[2].click();
-
-        // we wait for the nextFrame that focuses the button
-        helpers.next(function() {
-          expect(document.activeElement).to.equal(el._elements.button);
-
-          done();
-        });
+      }, true);
+      
+      el.on('coral-overlay:close', function() {
+        expect(document.activeElement).to.equal(el._elements.button);
+  
+        done();
       }, true);
 
       // we select first an item
@@ -1954,16 +1911,14 @@ describe('Coral.Select', function() {
     it('should focus the button when it is toggled', function(done) {
       const el = helpers.build(window.__html__['Coral.Select.placeholder.html']);
       el.on('coral-overlay:open', function() {
-
         // we click the button again to toggle the overlay
         el._elements.button.click();
-
-        // we wait for the nextFrame that focuses the button
-        helpers.next(function() {
-          expect(document.activeElement).to.equal(el._elements.button);
-
-          done();
-        });
+      }, true);
+      
+      el.on('coral-overlay:close', function() {
+        expect(document.activeElement).to.equal(el._elements.button);
+  
+        done();
       }, true);
 
       // opens the overlay
@@ -1976,13 +1931,12 @@ describe('Coral.Select', function() {
       el.on('coral-overlay:open', function() {
         // we simulate a click somewhere else in the page
         document.body.click();
-
-        // we wait for the nextFrame that focuses the button
-        helpers.next(function() {
-          expect(document.activeElement).to.equal(el._elements.button);
-
-          done();
-        });
+      }, true);
+      
+      el.on('coral-overlay:close', function() {
+        expect(document.activeElement).to.equal(el._elements.button);
+  
+        done();
       }, true);
 
       // opens the overlay
@@ -1994,47 +1948,23 @@ describe('Coral.Select', function() {
       el.on('coral-overlay:open', function() {
         // selects the 2nd item in the list
         el._elements.list.items.getAll()[1].click();
-
-        // we wait for the nextFrame that focuses the button
-        helpers.next(function() {
-          expect(document.activeElement).to.equal(el._elements.button);
-
-          done();
-        });
+      }, true);
+      
+      el.on('coral-overlay:close', function() {
+        expect(document.activeElement).to.equal(el._elements.button);
+  
+        done();
       }, true);
 
       // opens the overlay
       el._elements.button.click();
     });
 
-    it('should focus the taglist when the last tag is removed', function(done) {
-      const el = helpers.build(window.__html__['Coral.Select.multiple.selected.html']);
-      expect(el._elements.taglist.items.length).to.equal(2, 'there should be one item');
-
-      // we removed the first item as if it were through user interaction
-      el._elements.taglist.items.getAll()[0]._elements.button.click();
-
-      // Wait for MO
-      helpers.next(function() {
-        expect(document.activeElement).not.to.equal(el._elements.button, 'focus should not be in the button');
-
-        // removes the second item which should cause the focus to go back to the button
-        el._elements.taglist.items.getAll()[0]._elements.button.click();
-
-        helpers.next(function() {
-          expect(document.activeElement).to.equal(el._elements.button, 'button should get focus when it is the last item');
-
-          done();
-        // we use capture since the propagation of the event is stopped
-        }, true);
-      });
-    });
-
     it('should focus the button when user interacts with the native select', function(done) {
       const el = helpers.build(window.__html__['Coral.Select.base.html']);
       // we fake the native input
       el._useNativeInput = true;
-      el.classList.add('coral3-Select--native');
+      el.classList.add('coral3-Dropdown--native');
       el.appendChild(el._elements.nativeSelect);
 
       var options = el._elements.nativeSelect.options;

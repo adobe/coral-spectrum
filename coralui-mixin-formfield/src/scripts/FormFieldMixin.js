@@ -179,7 +179,7 @@ const FormFieldMixin = (superClass) => class extends superClass {
   
     const currentLabelledBy = element.getAttribute('aria-labelledby');
   
-    // we clear the old label asignments
+    // we clear the old label assignments
     if (currentLabelledBy && currentLabelledBy !== value) {
       this._updateForAttributes(currentLabelledBy, elementId, true);
     }
@@ -234,7 +234,8 @@ const FormFieldMixin = (superClass) => class extends superClass {
    @returns {HTMLElement} the labellable element.
    */
   _getLabellableElement() {
-    const element = this.querySelector(LABELLABLE_ELEMENTS_SELECTOR);
+    // Use predefined element or query it
+    const element = this._labellableElement || this.querySelector(LABELLABLE_ELEMENTS_SELECTOR);
     
     // Use the found element or the container
     return element || this;

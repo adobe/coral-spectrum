@@ -2,24 +2,24 @@
   var buttonId = Coral.commons.getUID();
   var listId = Coral.commons.getUID();
 </js>
-<button handle="button" type="button" is="coral-button" block role="combobox" aria-expanded="false" aria-haspopup="true" id="{{buttonId}}" aria-controls="{{listId}}" aria-owns="{{listId}}" class="coral3-Select-button">
-  <span handle="label" class="coral3-Select-label" role="textbox" aria-readonly="true">&#x200b;</span>
-  <!-- @todo add margin-left override to theme -->
-  <coral-button-label style="margin-left:0" handle="buttonLabel"></coral-button-label>
-  <coral-icon handle="icon" icon="chevronDown" size="xxs" class="coral3-Select-openIcon"></coral-icon>
+<button variant="_custom" iconposition="right" handle="button" type="button" is="coral-button" role="combobox" aria-expanded="false" aria-haspopup="true" id="{{buttonId}}" aria-controls="{{listId}}" aria-owns="{{listId}}" class="coral3-Button--dropdown coral3-Dropdown-trigger">
+  <coral-button-label class="coral3-Dropdown-label" handle="label" aria-readonly="true">&#x200b;</coral-button-label>
+  <coral-icon icon="alert" hidden handle="invalidIcon" class="coral3-Dropdown-invalidIcon"></coral-icon>
 </button>
 <js>
-  // Since we don't have a mutation observer anymore to replace content zones magically, we have to do it manually.
-  this.button._elements.label = this.buttonLabel;
+  // Don't wait for button MO to pick up the label
+  this.button._elements.label = this.label;
+  // Render invalid icon
+  this.button.insertAdjacentHTML('beforeend', Coral.Icon._renderSVG('spectrum-css-icon-SelectDownChevron', ['coral3-Dropdown-icon']));
 </js>
-<coral-overlay handle="overlay" class="coral3-Select-overlay" placement="bottom" collision="fit" trapfocus="on" focusonshow="on" target="#{{buttonId}}" role="presentation">
+<coral-popover variant="_custom" handle="overlay" placement="bottom" collision="fit" trapfocus="on" focusonshow="on" target="#{{buttonId}}" role="presentation">
   <js>
     // Constrains the size of the list to 6 items.
     // @todo move this to theme
     var maxHeight = 'max-height:' + (42 * 6) + 'px';
   </js>
-  <coral-selectlist style="{{maxHeight}}" handle="list" class="coral3-Select-selectList" role="listbox" id="{{listId}}"></coral-selectlist>
-</coral-overlay>
+  <coral-selectlist style="{{maxHeight}}" handle="list" role="listbox" id="{{listId}}"></coral-selectlist>
+</coral-popover>
 <input handle="input" type="hidden">
-<select handle="nativeSelect" class="coral3-Select-select" tabindex="-1"></select>
-<coral-taglist handle="taglist" class="coral3-Select-tagList"></coral-taglist>
+<select handle="nativeSelect" class="coral3-Dropdown-select" tabindex="-1"></select>
+<coral-taglist handle="taglist" class="coral3-Dropdown-tagList"></coral-taglist>

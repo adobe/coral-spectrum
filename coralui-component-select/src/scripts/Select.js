@@ -18,11 +18,11 @@
 import {ComponentMixin} from 'coralui-mixin-component';
 import {FormFieldMixin} from 'coralui-mixin-formfield';
 import {SelectableCollection} from 'coralui-collection';
-import {Button} from 'coralui-component-button';
+import 'coralui-component-button';
 import {Tag} from 'coralui-component-taglist';
 import {SelectListItem} from 'coralui-component-list';
 import 'coralui-component-icon';
-import 'coralui-component-overlay';
+import 'coralui-component-popover';
 import base from '../templates/base';
 import {transform, validate, commons, i18n, Keys} from 'coralui-util';
 
@@ -51,14 +51,7 @@ const overlayOffset = {
   quiet: 4
 };
 
-const CLASSNAME = 'coral3-Select';
-
-// builds a string containing all possible variant classnames. This will be used to remove
-// classnames when the variant changes.
-const ALL_VARIANT_CLASSES = [];
-for (const variantKey in variant) {
-  ALL_VARIANT_CLASSES.push(`${CLASSNAME}--${variant[variantKey]}`);
-}
+const CLASSNAME = 'coral3-Dropdown';
 
 // used in 'auto' mode to determine if the client is on mobile.
 const IS_MOBILE_DEVICE = navigator.userAgent.match(/iPhone|iPad|iPod|Android/i) !== null;
@@ -127,11 +120,10 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       'change coral-taglist': '_onTagListChange',
       'change select': '_onNativeSelectChange',
       'click select': '_onNativeSelectClick',
-      // selector required since tags also have .coral3-Select-button
-      'click > .coral3-Select-button': '_onButtonClick',
+      'click > .coral3-Dropdown-trigger': '_onButtonClick',
 
-      'key:space > .coral3-Select-button': '_onSpaceKey',
-      'key:down > .coral3-Select-button': '_onSpaceKey',
+      'key:space > .coral3-Dropdown-trigger': '_onSpaceKey',
+      'key:down > .coral3-Dropdown-trigger': '_onSpaceKey',
       'key:tab coral-selectlist-item': '_onTabKey',
       'key:tab+shift coral-selectlist-item': '_onTabKey',
       
@@ -148,6 +140,9 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // Templates
     this._elements = {};
     base.call(this._elements);
+  
+    // Pre-define labellable element
+    this._labellableElement = this._elements.button;
     
     // default value of inner flag to process events
     this._bulkSelectionChange = false;
@@ -231,10 +226,10 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       }
     }
     
-    this._elements.list.multiple = value;
+    this._elements.list.multiple = this._multiple;
     
     // sets the correct name for value submission
-    this._setName(this.name);
+    this._setName(this.getAttribute('name') || '');
     
     // we need to make sure the selection is valid
     this._setStateFromDOM();
@@ -242,15 +237,9 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // everytime multiple changes, the state of the selectlist and taglist need to be updated
     this.items.getAll().forEach((item) => {
       if (this._multiple && item.hasAttribute('selected')) {
-        if (item._selectListItem) {
-          item._selectListItem.setAttribute('hidden', '');
-        }
         this._addTagToTagList(item);
       }
       else {
-        if (item._selectListItem) {
-          item._selectListItem.removeAttribute('hidden');
-        }
         // taglist is never used for multiple = false
         this._removeTagFromTagList(item);
         
@@ -291,13 +280,13 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // case 2:  p +  m + !se = p
     // case 6:  p + !m + !se = p
     if (this._placeholder && (this.hasAttribute('multiple') || !this.selectedItem)) {
-      this._elements.button.classList.add('is-placeholder');
+      this._elements.label.classList.add('is-placeholder');
       this._elements.label.textContent = this._placeholder;
     }
     // case 7: !p +  m +  se = 'Select'
     // case 8: !p +  m + !se = 'Select'
     else if (this.hasAttribute('multiple')) {
-      this._elements.button.classList.add('is-placeholder');
+      this._elements.label.classList.add('is-placeholder');
       this._elements.label.textContent = i18n.get('Select');
     }
     // case 4: !p + !m + !se = firstSelectable (native behavior)
@@ -307,7 +296,7 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       
       // gets the first candidate for selection
       const placeholderItem = this.items._getFirstSelectable();
-      this._elements.button.classList.remove('is-placeholder');
+      this._elements.label.classList.remove('is-placeholder');
       
       if (placeholderItem) {
         // selects using the attribute in case the item is not yet initialized
@@ -442,6 +431,7 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._elements.button.disabled = this._disabled || isReadOnly;
     this._elements.input.disabled = this._disabled || isReadOnly;
     this._elements.taglist.disabled = this._disabled || isReadOnly;
+    this._elements.invalidIcon.hidden = this.disabled;
   }
   
   /**
@@ -454,6 +444,8 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     super.invalid = value;
     
     this.classList.toggle('is-invalid', this.invalid);
+    this._elements.button.classList.toggle('is-invalid', this.invalid);
+    this._elements.invalidIcon.hidden = !this.invalid && !this.disabled;
   }
   
   /**
@@ -570,18 +562,9 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
-    
-    // we need to handle the default value of the button because it is not 'default'. this is done in the set
-    // since the button will have its own sync
-    this._elements.button.variant = value === variant.DEFAULT ?
-      Button.variant.DEFAULT :
-      Button.variant.QUIET;
-    
-    this.classList.remove(...ALL_VARIANT_CLASSES);
-    
-    if (this._variant !== variant.DEFAULT) {
-      this.classList.add(`${CLASSNAME}--${this._variant}`);
-    }
+  
+    this._elements.button.classList.toggle('coral3-Button--dropdown', this._variant === variant.DEFAULT);
+    this._elements.button.classList.toggle('coral3-Button--quiet--dropdown', this._variant === variant.QUIET);
     
     // sets the separation of the overlay from the button based on the variant
     this._elements.overlay.offset = overlayOffset[this._variant];
@@ -591,10 +574,10 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   _setName(value) {
     if (this.multiple) {
       this._elements.input.name = '';
-      this._elements.taglist.name = value;
+      this._elements.taglist.setAttribute('name', value);
     }
     else {
-      this._elements.taglist.name = '';
+      this._elements.taglist.setAttribute('name', '');
       this._elements.input.name = value;
     }
   }
@@ -741,7 +724,6 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     if (this.multiple) {
       // in case it was selected before it was added
       if (item.selected) {
-        selectListItem.hidden = true;
         this._addTagToTagList(item);
       }
     }
@@ -786,11 +768,9 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     if (this.multiple) {
       this._addTagToTagList(item);
-      // we need to hide the item from further selections
       // @todo: what happens when ALL items have been selected
       //  1. a message is disabled (i18n?)
       //  2. we don't try to open the selectlist (native behavior).
-      item._selectListItem.hidden = true;
     }
     else {
       this._elements.input.value = item.value;
@@ -807,11 +787,9 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     item._selectListItem.selected = false;
     item._nativeOption.selected = false;
     
-    // the hidden items need to be reinstated
     if (this.multiple) {
       // we use the internal reference to remove the related tag from the taglist
       this._removeTagFromTagList(item);
-      item._selectListItem.hidden = false;
     }
   }
   
@@ -988,7 +966,7 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       // }
       
       // Toggle openness
-      if (this._elements.overlay.open) {
+      if (this._elements.overlay.classList.contains('is-open')) {
         this._hideOptions();
       }
       else {
@@ -1052,8 +1030,10 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // stops propagation cause the event is internal to the component
     event.stopImmediatePropagation();
     
-    this.classList.add(event.detail.vertical === 'top' ? 'is-openBelow' : 'is-openAbove');
-    this._elements.overlay.style.minWidth = `${this.offsetWidth}px`;
+    if (this.open) {
+      this.classList.add(event.detail.vertical === 'top' ? 'is-openBelow' : 'is-openAbove');
+      this._elements.overlay.style.minWidth = `${this.offsetWidth}px`;
+    }
   }
   
   // @todo: while the select is multiple, if everything is deselected no change event will be triggered.
@@ -1134,7 +1114,7 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // case 3: !p + !m +  se = se
     // case 5:  p + !m +  se = se
     if (this.selectedItem && !this.multiple) {
-      this._elements.button.classList.remove('is-placeholder');
+      this._elements.label.classList.remove('is-placeholder');
       this._elements.label.innerHTML = this.selectedItem.innerHTML;
     }
   }
@@ -1344,7 +1324,7 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // Default reflected attributes
     if (!this._variant) { this.variant = variant.DEFAULT; }
     
-    this.classList.toggle('coral3-Select--native', this._useNativeInput);
+    this.classList.toggle(`${CLASSNAME}--native`, this._useNativeInput);
   
     if (!this._useNativeInput && this.contains(this._elements.nativeSelect)) {
       this.removeChild(this._elements.nativeSelect);

@@ -309,9 +309,11 @@ class Popover extends Overlay {
   }
   
   _onPositioned(event) {
-    // Set arrow placement
-    this.classList.remove(...ALL_PLACEMENT_CLASSES);
-    this.classList.add(`${CLASSNAME}--${event.detail.placement}`);
+    if (this.open) {
+      // Set arrow placement
+      this.classList.remove(...ALL_PLACEMENT_CLASSES);
+      this.classList.add(`${CLASSNAME}--${event.detail.placement}`);
+    }
   }
   
   _insertTypeIcon() {

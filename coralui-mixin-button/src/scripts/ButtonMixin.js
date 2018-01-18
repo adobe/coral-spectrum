@@ -176,7 +176,12 @@ const ButtonMixin = (superClass) => class extends superClass {
       handle: 'label',
       tagName: this._contentZoneTagName,
       insert: function(label) {
-        this.appendChild(label);
+        if (this.iconPosition === iconPosition.LEFT) {
+          this.appendChild(label);
+        }
+        else {
+          this.insertBefore(label, this.firstChild);
+        }
       }
     });
   }
@@ -342,8 +347,10 @@ const ButtonMixin = (superClass) => class extends superClass {
     }
     // add or adjust the icon. Add it back since it was blown away by textContent
     else if (!iconElement.parentNode || this._iconPosition) {
-      // insertBefore with <code>null</code> appends
-      this.insertBefore(iconElement, this.iconPosition === iconPosition.LEFT ? this.firstChild : null);
+      if (this.contains(this.label)) {
+        // insertBefore with <code>null</code> appends
+        this.insertBefore(iconElement, this.iconPosition === iconPosition.LEFT ? this.label : this.label.nextElementSibling);
+      }
     }
   
     // makes sure the button is correctly annotated
@@ -457,8 +464,10 @@ const ButtonMixin = (superClass) => class extends superClass {
     
     const label = this._elements.label;
   
+    const contentZoneProvided = label.parentNode;
+    
     // Remove it so we can process children
-    if (label.parentNode) {
+    if (contentZoneProvided) {
       this.removeChild(label);
     }
   
@@ -478,6 +487,10 @@ const ButtonMixin = (superClass) => class extends superClass {
           fragment.appendChild(child);
           iconAdded = true;
         }
+      }
+      // Avoid content zone to be voracious
+      else if (contentZoneProvided) {
+        fragment.appendChild(child);
       }
       else {
         // Move anything else into the label
