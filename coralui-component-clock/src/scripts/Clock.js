@@ -409,6 +409,7 @@ class Clock extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
   /** @private */
   _togglePeriod(show) {
+    this.classList.toggle(`${CLASSNAME}--extended`, show);
     this._elements.period.hidden = !show;
   }
   
