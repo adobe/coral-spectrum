@@ -1,11 +1,9 @@
 <js>
   var uid = Coral.commons.getUID();
 </js>
-<coral-calendar handle="calendar" class="u-coral-borderless" aria-labelledby="{{uid}}-calendar">
+<coral-calendar handle="calendar" class="coral3-Datepicker-calendar" aria-labelledby="{{uid}}-calendar">
   <span id="{{uid}}-calendar" class="u-coral-screenReaderOnly" hidden>{{Coral.i18n.get("Calendar")}}</span>
 </coral-calendar>
-<div class="coral3-Datepicker-clockContainer" handle="clockContainer">
-  <coral-clock handle="clock" aria-labelledby="{{uid}}-clock">
-    <span id="{{uid}}-clock" class="u-coral-screenReaderOnly" hidden>{{Coral.i18n.get("Time")}}</span>
-  </coral-clock>
-</div>
+<coral-clock handle="clock" class="coral3-Datepicker-clock" aria-labelledby="{{uid}}-clock">
+  <span id="{{uid}}-clock" class="u-coral-screenReaderOnly" hidden>{{Coral.i18n.get("Time")}}</span>
+</coral-clock>

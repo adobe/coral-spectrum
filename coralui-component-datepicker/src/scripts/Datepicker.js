@@ -18,7 +18,7 @@
 import {ComponentMixin} from 'coralui-mixin-component';
 import {FormFieldMixin} from 'coralui-mixin-formfield';
 import {DateTime} from 'coralui-datetime';
-import {Button} from 'coralui-component-button';
+import 'coralui-component-button';
 import 'coralui-component-clock';
 import 'coralui-component-calendar';
 import 'coralui-component-popover';
@@ -160,16 +160,16 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     const isTime = this._type === type.TIME;
     const isDate = this._type === type.DATE;
   
-    this._elements.toggle.icon = isTime ? 'clock' : 'calendar';
+    this._elements.icon.icon = isTime ? 'clock' : 'calendar';
   
     const toggleLabel = isTime ? i18n.get('Time') : i18n.get('Calendar');
     this._elements.toggle.setAttribute('aria-label', toggleLabel);
     this._elements.toggle.setAttribute('title', toggleLabel);
   
-    this._elements.clockContainer.style.display = !isDate ? '' : 'none';
-    this._elements.clockContainer.setAttribute('aria-hidden', isDate);
+    this._elements.clock.hidden = isDate;
+    this._elements.clock.setAttribute('aria-hidden', isDate);
   
-    this._elements.calendar.style.display = isTime ? 'none' : '';
+    this._elements.calendar.hidden = isTime;
     this._elements.calendar.setAttribute('aria-hidden', isTime);
     
     // Change format if we have a native format set
@@ -408,7 +408,8 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
     // passes down the variant to the underlying components
     // we have to do this because default of button is not 'default', but 'secondary'
-    this._elements.toggle.variant = this._variant === variant.DEFAULT ? Button.variant.DEFAULT : Button.variant.QUIET;
+    this._elements.toggle.classList.toggle('coral3-Button--dropdown', this._variant === variant.DEFAULT);
+    this._elements.toggle.classList.toggle('coral3-Button--quiet--dropdown', this._variant === variant.QUIET);
     this._elements.input.variant = this._variant;
   
     // removes every existing variant
@@ -467,6 +468,7 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     super.invalid = value;
     
     this.classList.toggle('is-invalid', this.invalid);
+    this._elements.toggle.classList.toggle('is-invalid', this.invalid);
     this._elements.input.invalid = this.invalid;
     this._elements.input.setAttribute('aria-invalid', this.invalid);
   }
@@ -485,8 +487,9 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
     
+    this._elements.toggle.classList.toggle('is-invalid', this._required);
     this.setAttribute('aria-required', this._required);
-  
+    
     this._elements.input.required = this._required;
   }
   
@@ -767,7 +770,7 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     frag.appendChild(this._elements.popover);
     frag.appendChild(this._elements.hiddenInput);
     frag.appendChild(this._elements.input);
-    frag.appendChild(this._elements.toggleButtonContainer);
+    frag.appendChild(this._elements.toggle);
     
     this.appendChild(frag);
   

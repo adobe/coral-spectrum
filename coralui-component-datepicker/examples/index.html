@@ -9,14 +9,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="../build/js/coral.js"></script>
     <style>
-     .col {
-       width: 40%;
-       margin-right: 3%;
-       display: inline-block;
-       vertical-align: top;
-     }
-     section + section {
-       margin-top: 20px;
+     section {
+       padding: 15px;
      }
     </style>
   </head>
@@ -30,103 +24,40 @@
     </div>
 
     <section>
-      <div class="col">
-        <h1 class="coral-Heading coral-Heading--1">coral-Datepicker</h1>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label0">Default</label></h2>
-        <coral-datepicker labelledby="label0"></coral-datepicker>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label1">DisplayFormat: MM-DD-YYYY</label></h2>
-        <coral-datepicker value="2014-12-31" displayformat="MM-DD-YYYY" labelledby="label1"></coral-datepicker>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label2">ValueFormat: YYYY-MM-DD</label></h2>
-        <form method="GET">
-          <coral-datepicker value="2014-12-31" valueformat="YYYY-MM-DD" displayformat="DD-MM-YYYY" name="valueformat" labelledby="label2"></coral-datepicker>
-          <button type="submit" is="coral-button" variant="primary">Submit</button>
-        </form>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label3">Time</label></h2>
-        <coral-datepicker type="time" labelledby="label3"></coral-datepicker>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label4">Time with value</label></h2>
-        <coral-datepicker type="time" value="13:14" labelledby="label4"></coral-datepicker>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label5">Date &amp; Time</label></h2>
-        <coral-datepicker type="datetime" labelledby="label5"></coral-datepicker>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label6">Date &amp; Time with value</label></h2>
-        <coral-datepicker type="datetime" value="2014-12-31T14:12+00:00" labelledby="label6"></coral-datepicker>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label7">Placeholder</label></h2>
-        <coral-datepicker type="date" placeholder="Placeholder" labelledby="label7"></coral-datepicker>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label8">Min and Max</label></h2>
-        <coral-datepicker type="date" min="2015-04-10" max="2015-04-28" value="2015-04-15" labelledby="label8"></coral-datepicker>
-      </div>
-      <div class="col">
-        <h1 class="coral-Heading coral-Heading--1">coral-Datepicker quiet variant</h1>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label9">Default</label></h2>
-        <coral-datepicker variant="quiet" labelledby="label9"></coral-datepicker>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label10">DisplayFormat: MM-DD-YYYY</label></h2>
-        <coral-datepicker value="2014-12-31" displayformat="MM-DD-YYYY" variant="quiet" labelledby="label10"></coral-datepicker>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label11">ValueFormat: YYYY-MM-DD</label></h2>
-        <form method="GET">
-          <coral-datepicker value="2014-12-31" valueformat="YYYY-MM-DD" displayformat="DD-MM-YYYY" name="valueformat" variant="quiet" labelledby="label11"></coral-datepicker>
-          <button type="submit" is="coral-button" variant="primary">Submit</button>
-        </form>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label12">Time</label></h2>
-        <coral-datepicker type="time" variant="quiet" labelledby="label12"></coral-datepicker>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label13">Time with value</label></h2>
-        <coral-datepicker type="time" value="13:14" variant="quiet" labelledby="label13"></coral-datepicker>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label14">Date &amp; Time</label></h2>
-        <coral-datepicker type="datetime" variant="quiet" labelledby="label14"></coral-datepicker>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label15">Date &amp; Time with value</label></h2>
-        <coral-datepicker type="datetime" value="2014-12-31T14:12+00:00" variant="quiet" labelledby="label15"></coral-datepicker>
-        <h2 class="coral-Heading coral-Heading--2" variant="quiet"><label id="label16">Placeholder</label></h2>
-        <coral-datepicker type="date" placeholder="Placeholder" variant="quiet" labelledby="label16"></coral-datepicker>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label17">Min and Max</label></h2>
-        <coral-datepicker type="date" min="2015-04-10" max="2015-04-28" value="2015-04-15" variant="quiet" labelledby="label17"></coral-datepicker>
-      </div>
-    </section>
-    <section>
-      <div class="col">
-        <h1 class="coral-Heading coral-Heading--1">FormField compliance</h1>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label18">Required</label></h2>
-        <form method="GET">
-          <coral-datepicker required labelledby="label18"></coral-datepicker>
-          <button type="submit" is="coral-button" variant="primary">Submit</button>
-        </form>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label19">Invalid</label></h2>
-        <coral-datepicker value="2014-12-31" max="2010-12-31" displayformat="MM/DD/YYYY" invalid labelledby="label19"></coral-datepicker>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label20">Disabled</label></h2>
-        <coral-datepicker value="2014-12-31" disabled labelledby="label20"></coral-datepicker>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label21">ReadOnly</label></h2>
-        <coral-datepicker value="2014-12-31" readonly labelledby="label21"></coral-datepicker>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label22">Name</label></h2>
-        <form method="GET">
-          <coral-datepicker value="2014-12-31" name="custom_name" labelledby="label22"></coral-datepicker>
-          <button type="submit" is="coral-button" variant="primary">Submit</button>
-        </form>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label23">Value</label></h2>
-        <coral-datepicker value="2014-12-31" labelledby="label23"></coral-datepicker>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label-1">LabelledBy</label></h2>
-        <coral-datepicker labelledby="label-1"></coral-datepicker>
-      </div>
-      <div class="col">
-        <h1 class="coral-Heading coral-Heading--1">FormField compliance quiet variant</h1>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label24">Required</label></h2>
-        <form method="GET">
-          <coral-datepicker required variant="quiet" labelledby="label24"></coral-datepicker>
-          <button type="submit" is="coral-button" variant="primary">Submit</button>
-        </form>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label25">Invalid</label></h2>
-        <coral-datepicker value="2014-12-31" max="2010-12-31" displayformat="MM/DD/YYYY" variant="quiet" invalid labelledby="label25"></coral-datepicker>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label26">Disabled</label></h2>
-        <coral-datepicker value="2014-12-31" variant="quiet" disabled labelledby="label26"></coral-datepicker>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label27">ReadOnly</label></h2>
-        <coral-datepicker value="2014-12-31" variant="quiet" readonly labelledby="label27"></coral-datepicker>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label28">Name</label></h2>
-        <form method="GET">
-          <coral-datepicker value="2014-12-31" name="custom_name" variant="quiet" labelledby="label28"></coral-datepicker>
-          <button type="submit" is="coral-button" variant="primary">Submit</button>
-        </form>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label29">Value</label></h2>
-        <coral-datepicker value="2014-12-31" variant="quiet" labelledby="label29"></coral-datepicker>
-        <h2 class="coral-Heading coral-Heading--2"><label id="label-2">LabelledBy</label></h2>
-        <coral-datepicker labelledby="label-2" variant="quiet"></coral-datepicker>
-      </div>
+      <h1 class="coral-Heading coral-Heading--1">Coral.Datepicker</h1>
+
+      <h2 class="coral-Heading coral-Heading--2">Default</h2>
+      <coral-datepicker></coral-datepicker>
+
+      <h2 class="coral-Heading coral-Heading--2">DisplayFormat: MM-DD-YYYY</h2>
+      <coral-datepicker value="2014-12-31" displayformat="MM-DD-YYYY"></coral-datepicker>
+
+      <h2 class="coral-Heading coral-Heading--2">ValueFormat: YYYY-MM-DD</h2>
+      <coral-datepicker value="2014-12-31" valueformat="YYYY-MM-DD" displayformat="DD-MM-YYYY"></coral-datepicker>
+
+      <h2 class="coral-Heading coral-Heading--2">Time only</h2>
+      <coral-datepicker type="time" placeholder="Placeholder" value="13:14"></coral-datepicker>
+
+      <h2 class="coral-Heading coral-Heading--2">Date and Time</h2>
+      <coral-datepicker type="datetime" value="2014-12-31T14:12+00:00"></coral-datepicker>
+
+      <h2 class="coral-Heading coral-Heading--2">With Min/Max</h2>
+      <coral-datepicker type="date" min="2015-04-10" max="2015-04-28" value="2015-04-15"></coral-datepicker>
+
+      <h2 class="coral-Heading coral-Heading--2">Quiet variant</h2>
+      <coral-datepicker value="2014-12-31" displayformat="MM-DD-YYYY" variant="quiet"></coral-datepicker>
+
+      <h2 class="coral-Heading coral-Heading--2">Invalid</h2>
+      <coral-datepicker invalid></coral-datepicker>
+
+      <h2 class="coral-Heading coral-Heading--2">Required</h2>
+      <coral-datepicker required></coral-datepicker>
+
+      <h2 class="coral-Heading coral-Heading--2">ReadOnly</h2>
+      <coral-datepicker value="2014-12-31" readonly></coral-datepicker>
+
+      <h2 class="coral-Heading coral-Heading--2">Disabled</h2>
+      <coral-datepicker value="2014-12-31" disabled></coral-datepicker>
     </section>
   </body>
-
 </html>

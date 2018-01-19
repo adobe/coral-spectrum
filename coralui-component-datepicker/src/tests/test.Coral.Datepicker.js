@@ -475,20 +475,19 @@ describe('Coral.Datepicker', function() {
       describe('#variant', function() {
         it('should be set to "default" by default', function() {
           expect(el.variant).to.equal(Coral.Datepicker.variant.DEFAULT, '"default" should be set');
-          expect(el._elements.toggle.variant).to.equal('secondary', '"default" should be set the toggle variant to the default of the button');
         });
       
         it('should be possible to set the variant', function() {
           expect(el.classList.contains('coral-InputGroup--quiet')).to.be.false;
         
           expect(el.variant).to.equal(Coral.Datepicker.variant.DEFAULT, '"default" should be set');
-          expect(el._elements.toggle.variant).to.equal('secondary', '"default" should be set the toggle variant to the default of the button');
-          expect(el._elements.input.variant).to.equal(Coral.Datepicker.variant.DEFAULT, '"default" should be set tp the input variant');
+          expect(el._elements.toggle.classList.contains('coral3-Button--dropdown')).to.be.true;
+          expect(el._elements.input.variant).to.equal(Coral.Datepicker.variant.DEFAULT, '"default" should be set to the input variant');
         
           el.variant = Coral.Datepicker.variant.QUIET;
         
           expect(el.variant).to.equal(Coral.Datepicker.variant.QUIET, '"quiet" should be set');
-          expect(el._elements.toggle.variant).to.equal(Coral.Datepicker.variant.QUIET, '"quiet" should be set the toggle variant');
+          expect(el._elements.toggle.classList.contains('coral3-Button--quiet--dropdown')).to.be.true;
           expect(el._elements.input.variant).to.equal(Coral.Datepicker.variant.QUIET, '"quiet" should be set tp the input variant');
         
           expect(el.classList.contains('coral-InputGroup--quiet')).to.be.true;
@@ -875,21 +874,21 @@ describe('Coral.Datepicker', function() {
         el._elements.toggle.click();
       
         helpers.next(function() {
-          expect(el._elements.calendar.offsetParent).to.not.equal(null);
-          expect(el._elements.clockContainer.offsetParent).to.equal(null);
+          expect(el._elements.calendar.hidden).to.be.false;
+          expect(el._elements.clock.hidden).to.be.true;
           expect(el._elements.toggle.icon).to.equal('calendar');
         
           // we change the type and check the expected display
           el.type = Coral.Datepicker.type.TIME;
         
-          expect(el._elements.calendar.offsetParent).to.equal(null);
-          expect(el._elements.clockContainer.offsetParent).to.not.equal(null);
+          expect(el._elements.calendar.hidden).to.be.true;
+          expect(el._elements.clock.hidden).to.be.false;
           expect(el._elements.toggle.icon).to.equal('clock');
         
           el.type = Coral.Datepicker.type.DATETIME;
         
-          expect(el._elements.calendar.offsetParent).to.not.equal(null);
-          expect(el._elements.clockContainer.offsetParent).to.not.equal(null);
+          expect(el._elements.calendar.hidden).to.be.false;
+          expect(el._elements.clock.hidden).be.false;
           expect(el._elements.toggle.icon).to.equal('calendar');
         
           done();
