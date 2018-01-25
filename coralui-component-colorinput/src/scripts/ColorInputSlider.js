@@ -20,7 +20,7 @@ import 'coralui-component-tooltip';
 import sliderBase from '../templates/sliderBase';
 import {transform} from 'coralui-util';
 
-const CLASSNAMES = ['coral3-ColorInput-slider', 'coral3-Slider'];
+const CLASSNAMES = ['coral3-ColorInput-slider', 'coral3-Slider--color'];
 
 /**
  @class Coral.ColorInput.Slider

@@ -23,7 +23,7 @@ import {SelectableCollection} from 'coralui-collection';
 import {Icon} from 'coralui-component-icon';
 import 'coralui-component-textfield';
 import 'coralui-component-button';
-import 'coralui-component-overlay';
+import 'coralui-component-popover';
 import './ColorInputColorProperties';
 import './ColorInputSwatches';
 import base from '../templates/base';
@@ -140,6 +140,9 @@ class ColorInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // Prepare templates
     this._elements = {};
     base.call(this._elements);
+  
+    // Pre-define labellable element
+    this._labellableElement = this._elements.input;
   
     // Used for eventing
     this._oldSelection = null;
@@ -577,8 +580,6 @@ class ColorInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   _onColorPreviewClick(event) {
     // restore focus to appropriate element when overlay closes
     this._elements.overlay.returnFocusTo(this.variant === variant.SWATCH ? event.matchedTarget : this._elements.input);
-    
-    this._elements.overlay.open = !this._elements.overlay.open;
   }
   
   /** @ignore */
@@ -727,7 +728,7 @@ class ColorInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   _syncColorPreviewIcon() {
     const colorPreview = this._elements.colorPreview;
     
-    colorPreview.icon = this.disabled && this.variant === variant.SWATCH ? 'lockOn' : '';
+    colorPreview.icon = this.disabled && this.variant === variant.SWATCH ? 'lockClosed' : '';
     colorPreview.iconSize = Icon.size.SMALL;
   }
   
@@ -905,7 +906,7 @@ class ColorInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._oldSelection = this.selectedItem;
     
     // we use 'this' so properly aligns to the input
-    this._elements.overlay.target = this;
+    this._elements.overlay.target = this._elements.colorPreview;
   }
 }
 

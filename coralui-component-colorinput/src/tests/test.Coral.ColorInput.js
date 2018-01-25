@@ -69,7 +69,7 @@ describe('Coral.ColorInput', function() {
         expect(el._elements.colorPreview.disabled).to.equal(true, 'button should now be disabled');
         expect(el._elements.input.disabled).to.equal(true, 'input field should now be disabled');
 
-        expect(el._elements.colorPreview.icon).to.equal('lockOn', 'the color preview icon should now reflect the locked state (in swatch variant)');
+        expect(el._elements.colorPreview.icon).to.equal('lockClosed', 'the color preview icon should now reflect the locked state (in swatch variant)');
       });
     });
 

@@ -1,10 +1,12 @@
-<js>var uid = Coral.commons.getUID();</js>
-<div handle="bar" class="coral3-ColorInput-sliderBar coral3-Slider-bar">
-  <div handle="fillHandle" class="coral3-Slider-fill is-hidden" role="presentation"></div>
+<div class="coral3-Slider-labelContainer" handle="label">
+  <label class="coral3-Slider-label" handle="labelContent"></label>
+  <label class="coral3-Slider-value" handle="labelValue" hidden></label>
 </div>
-<div handle="handleContainer">
-  <div handle="leftHandle" class="coral3-ColorInput-sliderHandle coral3-Slider-handle">
-    <input handle="leftInput" type="range" id="{{uid}}" class="coral3-Slider-input">
-    <coral-tooltip variant="inspect" id="{{uid}}-tooltip" for="{{uid}}" interaction="off"></coral-tooltip>
+<div class="coral3-Slider-controls u-coral-noMargin" role="presentation" handle="controls">
+  <div class="coral3-Slider-track coral3-ColorInput-sliderBar" handle="bar">
+    <div class="coral3-Slider-track--fill" handle="fillHandle" hidden></div>
+  </div>
+  <div class="coral3-Slider-handle coral3-ColorInput-sliderHandle" tabindex="0" handle="leftHandle">
+    <input aria-orientation="horizontal" handle="leftInput" value="1" type="range" class="coral3-Slider-input">
   </div>
 </div>

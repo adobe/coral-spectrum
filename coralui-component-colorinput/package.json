@@ -10,7 +10,7 @@
     "coralui-component-tooltip": "file:../coralui-component-tooltip",
     "coralui-component-slider": "file:../coralui-component-slider",
     "coralui-component-textfield": "file:../coralui-component-textfield",
-    "coralui-component-overlay": "file:../coralui-component-overlay",
+    "coralui-component-popover": "file:../coralui-component-popover",
     "coralui-externals": "file:../coralui-externals",
     "coralui-util": "file:../coralui-util"
   },
