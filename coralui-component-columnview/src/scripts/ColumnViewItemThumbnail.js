@@ -19,6 +19,13 @@
  @class Coral.ColumnView.Item.Thumbnail
  @classdesc ColumnView's Item thumbnail component
  @htmltag coral-columnview-item-thumbnail
- @return {HTMLElement}
+ @extends {HTMLElement}
  */
-export default () => document.createElement('coral-columnview-item-thumbnail');
+
+class ColumnViewItemThumbnail extends HTMLElement {
+  connectedCallback() {
+    this.classList.add('coral3-MillerColumn-itemThumbnail');
+  }
+}
+
+export default ColumnViewItemThumbnail;

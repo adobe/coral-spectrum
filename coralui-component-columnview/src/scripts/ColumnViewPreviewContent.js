@@ -15,10 +15,21 @@
  * from Adobe Systems Incorporated.
  */
 
+const CLASSNAME = 'coral-Body--small';
+
 /**
  @class Coral.ColumnView.Preview.Content
  @classdesc ColumnView's preview content component
  @htmltag coral-columnview-preview-content
- @return {HTMLElement}
+ @extends {HTMLElement}
  */
-export default () => document.createElement('coral-columnview-preview-content');
+class ColumnViewPreviewContent extends HTMLElement {
+  /** @ignore */
+  constructor() {
+    super();
+    
+    this.classList.add(CLASSNAME);
+  }
+}
+
+export default ColumnViewPreviewContent;

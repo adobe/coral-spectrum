@@ -7,44 +7,17 @@
     <!-- We use jQuery for remote AJAX requests and parsing HTML response -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <style type="text/css">
-    html,
-    body {
-      padding: 0;
-      margin: 0;
-      height: 100%;
-      width: 100%;
-    }
 
-    .example-ActionBar {
-      height: 46px;
-      padding: 14px 20px 0 20px;
-      box-sizing: border-box;
-      border-bottom: 1px solid rgba(0,0,0,0.10);
-    }
-
-    .example-Container {
-      position: absolute;
-      top: 47px;
-      bottom: 0;
-      left: 0;
-      right: calc(30% + 15px);
-    }
-
-    .example-Container--right {
-      left: calc(70% + 15px);
-      right: 0
-    }
-
-    .u-coral-pullRight + .u-coral-pullRight {
-      padding-right: 10px;
+    section {
+      padding: 15px;
     }
 
     #log {
       border: 1px solid #bababa;
-      height: 300px;
+      height: 200px;
       overflow-y: scroll;
-      padding: 10px 10px 10px 25px;
-      margin: 0;
+      padding: 10px;
+      margin: 15px;
     }
     </style>
   </head>
@@ -56,23 +29,26 @@
       <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
     </div>
 
-    <div class="example-ActionBar">
-      <label>SelectionMode</label>
-      <select name="selectionmode">
-        <option>none</option>
-        <option>single</option>
-        <option>multiple</option>
-      </select>
-      <span class="u-coral-pullRight">Selected: <b id="selected_count">0</b></span>
-      <span class="u-coral-pullRight">ActiveItem: <i id="active_item"></i> </span>
-    </div>
-    <div class="example-Container">
+    <section>
+      <h1 class="coral-Heading coral-Heading--1">Coral.ColumnView</h1>
+
+      <div style="margin-bottom:15px;">
+        <label style="padding-left:10px;">SelectionMode</label>
+        <select name="selectionmode">
+          <option>none</option>
+          <option>single</option>
+          <option>multiple</option>
+        </select>
+        <span style="padding-left:10px;">Selected: <b id="selected_count">0</b></span>
+        <span style="padding-left:10px;">ActiveItem: <i id="active_item"></i> </span>
+      </div>
+
       <coral-columnview id="columnview" selectionmode="multiple"><coral-columnview-column data-src="content.html" id="cv-multiple-0"></coral-columnview-column></coral-columnview>
-    </div>
-    <div class="example-Container example-Container--right">
+
       <h2 class="coral-Heading coral-Heading--2">Log</h2>
       <ul id="log"></ul>
-    </div>
+    </section>
+
     <script type="text/javascript">
       const log = document.getElementById('log');
       const columnView = document.getElementById('columnview');

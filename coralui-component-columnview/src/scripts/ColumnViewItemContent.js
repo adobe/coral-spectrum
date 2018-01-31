@@ -19,6 +19,12 @@
  @class Coral.ColumnView.Item.Content
  @classdesc ColumnView's Item content component
  @htmltag coral-columnview-item-content
- @return {HTMLElement}
+ @extends {HTMLElement}
  */
-export default () => document.createElement('coral-columnview-item-content');
+class ColumnViewItemContent extends HTMLElement {
+  connectedCallback() {
+    this.classList.add('coral3-MillerColumn-itemLabel');
+  }
+}
+
+export default ColumnViewItemContent;

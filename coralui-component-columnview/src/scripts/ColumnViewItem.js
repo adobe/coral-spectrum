@@ -17,9 +17,10 @@
 
 import {ComponentMixin} from 'coralui-mixin-component';
 import {Icon} from 'coralui-component-icon';
+import {Checkbox} from 'coralui-component-checkbox';
 import {transform, validate} from 'coralui-util';
 
-const CLASSNAME = 'coral3-ColumnView-item';
+const CLASSNAME = 'coral3-MillerColumn-item';
 
 /**
  Enumeration for {@link ColumnViewItem} variants.
@@ -35,13 +36,6 @@ const variant = {
   DEFAULT: 'default',
   DRILLDOWN: 'drilldown'
 };
-
-// builds a string containing all possible variant classnames. this will be used to remove classnames when the variant
-// changes
-const ALL_VARIANT_CLASSES = [];
-for (const variantValue in variant) {
-  ALL_VARIANT_CLASSES.push(`${CLASSNAME}--${variant[variantValue]}`);
-}
 
 /**
  @class Coral.ColumnView.Item
@@ -76,7 +70,8 @@ class ColumnViewItem extends ComponentMixin(HTMLElement) {
       handle: 'content',
       tagName: 'coral-columnview-item-content',
       insert: function(content) {
-        this.appendChild(content);
+        // Insert before chevron
+        this.insertBefore(content, this.querySelector('.coral3-MillerColumn-childIndicator'));
       }
     });
   }
@@ -95,6 +90,7 @@ class ColumnViewItem extends ComponentMixin(HTMLElement) {
       handle: 'thumbnail',
       tagName: 'coral-columnview-item-thumbnail',
       insert: function(thumbnail) {
+        // Insert before content
         this.insertBefore(thumbnail, this.content || null);
       }
     });
@@ -115,12 +111,18 @@ class ColumnViewItem extends ComponentMixin(HTMLElement) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration('variant', value) && value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
-    
-    // removes every existing variant
-    this.classList.remove(...ALL_VARIANT_CLASSES);
   
-    if (this._variant !== variant.DEFAULT) {
-      this.classList.add(`${CLASSNAME}--${this._variant}`);
+    if (this._variant === variant.DRILLDOWN) {
+      // Render chevron on demand
+      const childIndicator = this.querySelector('.coral3-MillerColumn-childIndicator');
+      if (!childIndicator) {
+        this.insertAdjacentHTML('beforeend', Icon._renderSVG('spectrum-css-icon-MillerColumnRightChevron', ['coral3-MillerColumn-childIndicator']));
+      }
+      
+      this.classList.add('is-branch');
+    }
+    else {
+      this.classList.remove('is-branch');
     }
   }
   
@@ -144,7 +146,7 @@ class ColumnViewItem extends ComponentMixin(HTMLElement) {
     if (this._icon) {
       // creates a new icon element
       if (!this._elements.icon) {
-        this._elements.icon = document.createElement('coral-icon');
+        this._elements.icon = new Icon();
       }
     
       this._elements.icon.icon = this.icon;
@@ -175,6 +177,12 @@ class ColumnViewItem extends ComponentMixin(HTMLElement) {
   
     this.classList.toggle('is-selected', this._selected);
     this.setAttribute('aria-selected', this._selected || this.active);
+  
+    // Sync checkbox item selector
+    const itemSelector = this.querySelector('coral-checkbox[coral-columnview-itemselect]');
+    if (itemSelector) {
+      itemSelector[this._selected ? 'setAttribute' : 'removeAttribute']('checked', '');
+    }
     
     this.trigger('coral-columnview-item:_selectedchanged');
   }
@@ -194,7 +202,7 @@ class ColumnViewItem extends ComponentMixin(HTMLElement) {
     this._active = transform.booleanAttr(value);
     this._reflectAttribute('active', this._active);
   
-    this.classList.toggle('is-active', this._active);
+    this.classList.toggle('is-navigated', this._active);
     this.setAttribute('aria-selected', this._active || this.selected);
     
     this.trigger('coral-columnview-item:_activechanged');
@@ -205,6 +213,33 @@ class ColumnViewItem extends ComponentMixin(HTMLElement) {
       'coral-columnview-item-content': 'content',
       'coral-columnview-item-thumbnail': 'thumbnail'
     };
+  }
+  
+  /** @ignore */
+  attributeChangedCallback(name, oldValue, value) {
+    if (name === '_selectable') {
+      // Disable selection
+      if (value === null) {
+        this.classList.remove('is-branch-selectable');
+      }
+      // Enable selection
+      else {
+        this.classList.add('is-branch-selectable');
+        let itemSelector = this.querySelector('[coral-columnview-itemselect]');
+  
+        // Render checkbox on demand
+        if (!itemSelector) {
+          itemSelector = new Checkbox();
+          itemSelector.setAttribute('coral-columnview-itemselect', '');
+      
+          // Add the item selector as first child
+          this.insertBefore(itemSelector, this.firstChild);
+        }
+      }
+    }
+    else {
+      super.attributeChangedCallback(name, oldValue, value);
+    }
   }
   
   /**
@@ -220,7 +255,8 @@ class ColumnViewItem extends ComponentMixin(HTMLElement) {
       'variant',
       'icon',
       'selected',
-      'active'
+      'active',
+      '_selectable'
     ];
   }
   
@@ -239,17 +275,23 @@ class ColumnViewItem extends ComponentMixin(HTMLElement) {
     const thumbnail = this._elements.thumbnail;
     const content = this._elements.content;
     
-    // Remove content zones so we can process children
-    if (content.parentNode) { content.remove(); }
-    if (thumbnail.parentNode) { thumbnail.remove(); }
-  
-    // move the contents of the item into the content zone
-    while (this.firstChild) {
-      content.appendChild(this.firstChild);
-    }
+    const contentZoneProvided = content.parentNode || thumbnail.parentNode;
     
-    this.content = content;
-    this.thumbnail = thumbnail;
+    if (!contentZoneProvided) {
+      // move the contents of the item into the content zone
+      while (this.firstChild) {
+        content.appendChild(this.firstChild);
+      }
+  
+      this.content = content;
+      this.thumbnail = thumbnail;
+    }
+    else {
+      // Insert thumbnail if icon is specified
+      if (this.icon) {
+        this.thumbnail = this._elements.thumbnail;
+      }
+    }
   }
 }
 

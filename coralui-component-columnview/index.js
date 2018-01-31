@@ -16,7 +16,10 @@ import ColumnViewPreviewValue from './src/scripts/ColumnViewPreviewValue';
 window.customElements.define('coral-columnview', ColumnView);
 window.customElements.define('coral-columnview-column', ColumnViewColumn);
 window.customElements.define('coral-columnview-item', ColumnViewItem);
+window.customElements.define('coral-columnview-item-thumbnail', ColumnViewItemThumbnail);
+window.customElements.define('coral-columnview-item-content', ColumnViewItemContent);
 window.customElements.define('coral-columnview-preview', ColumnViewPreview);
+window.customElements.define('coral-columnview-preview-content', ColumnViewPreviewContent);
 
 // Expose component on the Coral namespace
 window.Coral = window.Coral || {};

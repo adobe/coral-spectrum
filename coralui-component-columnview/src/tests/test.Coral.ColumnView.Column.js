@@ -143,7 +143,7 @@ describe('Coral.ColumnView.Column', function() {
 
   describe('User Interaction', function() {
 
-    it('should selected an item when the thumbnail is clicked', function() {
+    it('should select an item when the item selector is clicked', function() {
       const el = helpers.build(window.__html__['Coral.ColumnView.Column.base.html']);
       // required since NONE will ignore selection
       el._selectionMode = Coral.ColumnView.selectionMode.SINGLE;
@@ -151,11 +151,13 @@ describe('Coral.ColumnView.Column', function() {
       var item = el.items.first();
       expect(el.selectedItem).to.be.null;
 
-      item.thumbnail.click();
+      const itemSelector = item.querySelector('[coral-columnview-itemselect]');
+      
+      itemSelector.click();
       expect(el.selectedItem).to.equal(item);
 
       // it should toggle
-      item.thumbnail.click();
+      itemSelector.click();
       expect(el.selectedItem).to.be.null;
     });
 

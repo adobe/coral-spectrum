@@ -20,7 +20,7 @@ import ColumnViewCollection from './ColumnViewCollection';
 import selectionMode from './selectionMode';
 import {transform, validate} from 'coralui-util';
 
-const CLASSNAME = 'coral3-ColumnView-column';
+const CLASSNAME = 'coral3-MillerColumn';
 
 /**
  The number of milliseconds for which scroll events should be debounced.
@@ -35,7 +35,7 @@ const SCROLL_DEBOUNCE = 100;
  
  @ignore
  */
-const ITEM_HEIGHT = 48;
+const ITEM_HEIGHT = 40;
 
 /**
  @class Coral.ColumnView.Column
@@ -57,7 +57,7 @@ class ColumnViewColumn extends ComponentMixin(HTMLElement) {
   
       // item interaction
       'click coral-columnview-item': '_onItemClick',
-      'click coral-columnview-item-thumbnail': '_onItemThumbnailClick',
+      'click [coral-columnview-itemselect]': '_onItemSelectClick',
   
       // item events
       'coral-columnview-item:_activechanged coral-columnview-item': '_onItemActiveChange',
@@ -76,6 +76,7 @@ class ColumnViewColumn extends ComponentMixin(HTMLElement) {
   
     // cache bound event handler functions
     this._onDebouncedScroll = this._onDebouncedScroll.bind(this);
+    this._toggleItemSelection = this._toggleItemSelection.bind(this);
   
     this._observer = new MutationObserver(this._handleMutation.bind(this));
     // items outside the scroll area are not supported
@@ -130,8 +131,9 @@ class ColumnViewColumn extends ComponentMixin(HTMLElement) {
     if (!this._items) {
       this._items = new ColumnViewCollection({
         host: this,
-        container: this.content,
-        itemTagName: 'coral-columnview-item'
+        container: this._elements.content,
+        itemTagName: 'coral-columnview-item',
+        onItemAdded: this._toggleItemSelection
       });
     }
   
@@ -177,6 +179,8 @@ class ColumnViewColumn extends ComponentMixin(HTMLElement) {
     this.__selectionMode = validate.enumeration(selectionMode)(value) && value || null;
     this._reflectAttribute('selectionmode', this.__selectionMode);
   
+    this.items.getAll().forEach(item => this._toggleItemSelection(item));
+    
     this._setStateFromDOM();
   }
   
@@ -206,8 +210,12 @@ class ColumnViewColumn extends ComponentMixin(HTMLElement) {
     }
   }
   
+  _toggleItemSelection(item) {
+    item[this._selectionMode !== selectionMode.NONE ? 'setAttribute' : 'removeAttribute']('_selectable', '');
+  }
+  
   /** @private */
-  _onItemThumbnailClick(event) {
+  _onItemSelectClick(event) {
     if (this._selectionMode && this._selectionMode !== selectionMode.NONE) {
       // stops propagation so that active is not called as well
       event.stopPropagation();

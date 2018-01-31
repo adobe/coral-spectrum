@@ -173,20 +173,15 @@ describe('Coral.ColumnView', function() {
 
       it('should fire a "coral-columnview:loaditems" event until there is no more space on screen', function(done) {
         var columnView = new Coral.ColumnView();
+        // Set height to detect overflow is occurring due to items being added
+        columnView.style.height = '100px';
         var column = new Coral.ColumnView.Column();
-
-        var item = null;
+  
+        // this callback should be called several times until there is no more space available
         columnView.on('coral-columnview:loaditems', function() {
-          // this callback should be called several times until there is no more space available
-
-          // add 2 items
-          for (var i = 0; i < 2; i++) {
-            item = new Coral.ColumnView.Item();
-            item.icon = 'file';
-
-            // should trigger a new "coral-columnview:loaditems" asynchronously if space available
-            column.items.add(item);
-          }
+          
+          // should trigger a new "coral-columnview:loaditems" asynchronously if space available
+          column.items.add(new Coral.ColumnView.Item());
 
           // calculate if there is more space and more items should be loaded
           var itemsHeight = 0;
@@ -219,7 +214,7 @@ describe('Coral.ColumnView', function() {
         expect(changeSpy.callCount).to.equal(1);
     
         // Then select another item with shift key
-        firstColumn.items.last().thumbnail.dispatchEvent(new MouseEvent('click', {
+        firstColumn.items.last().querySelector('[coral-columnview-itemselect]').dispatchEvent(new MouseEvent('click', {
           bubbles: true,
           shiftKey: true
         }));
@@ -785,7 +780,7 @@ describe('Coral.ColumnView', function() {
       items[fromIndex].selected = true;
     
       // Then select another item with shift key
-      items[toIndex].thumbnail.dispatchEvent(new MouseEvent('click', {
+      items[toIndex].querySelector('[coral-columnview-itemselect]').dispatchEvent(new MouseEvent('click', {
         bubbles: true,
         shiftKey: true
       }));
