@@ -20,11 +20,11 @@ import {FormFieldMixin} from 'coralui-mixin-formfield';
 import {Tag} from 'coralui-component-taglist';
 import {SelectableCollection} from 'coralui-collection';
 import AutocompleteItem from './AutocompleteItem';
+import {Textfield} from 'coralui-component-textfield';
 import 'coralui-component-icon';
 import 'coralui-component-button';
 import 'coralui-component-list';
-import 'coralui-component-overlay';
-import 'coralui-component-textfield';
+import 'coralui-component-popover';
 import 'coralui-component-wait';
 import base from '../templates/base';
 import loadIndicator from '../templates/loadIndicator';
@@ -49,6 +49,21 @@ const SCROLL_DEBOUNCE = 100;
 
 // @temp - Enable debug messages when writing tests
 const DEBUG = 0;
+
+/**
+ Enumeration for {@link Autocomplete} variants.
+ 
+ @typedef {Object} AutocompleteVariantEnum
+ 
+ @property {String} DEFAULT
+ A default, gray Autocomplete.
+ @property {String} QUIET
+ An Autocomplete with no border or background.
+ */
+const variant = {
+  DEFAULT: 'default',
+  QUIET: 'quiet'
+};
 
 /**
  Enumeration for {@link Autocomplete} match options.
@@ -85,6 +100,9 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._elements.tagList.reset = () => {
       // Kill inner tagList reset so it doesn't interfer with the autocomplete reset
     };
+  
+    // Pre-define labellable element
+    this._labellableElement = this._elements.input;
     
     // Events
     this._delegateEvents({
@@ -110,8 +128,8 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
       // Focus
       'capture:blur': '_handleFocusOut',
-      'capture:focus [handle="inputGroup"]': '_handleInputGroupFocusIn',
-      'capture:blur [handle="inputGroup"]': '_handleInputGroupFocusOut',
+      'capture:focus [handle="input"]': '_handleInputFocusIn',
+      'capture:blur [handle="input"]': '_handleInputFocusOut',
   
       // Taglist
       'coral-collection:remove [handle="tagList"]': '_handleTagRemoved',
@@ -121,8 +139,8 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       // Needed for ButtonList
       'key:enter button[is="coral-buttonlist-item"]': '_handleSelect',
       'click button[is="coral-buttonlist-item"]': '_handleSelect',
-      'capture:scroll [handle="overlay"]': '_onScroll',
-      'capture:mousewheel [handle="overlay"]': '_onMouseWheel',
+      'capture:scroll [handle="selectList"]': '_onScroll',
+      'capture:mousewheel [handle="selectList"]': '_onMouseWheel',
       'mousedown button[is="coral-buttonlist-item"]': '_handleSelect',
       'capture:mouseenter [is="coral-buttonlist-item"]': '_handleListItemFocus',
   
@@ -279,21 +297,33 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   The icon of the autocomplete.
+   The Autocomplete's variant. See {@link AutocompleteVariantEnum}.
    
-   @type {String}
-   @default ""
-   @htmlattribute icon
+   @type {AutocompleteVariantEnum}
+   @default AutocompleteVariantEnum.DEFAULT
+   @htmlattribute variant
    @htmlattributereflected
    */
-  get icon() {
-    return this._elements.icon.icon;
+  get variant() {
+    return this._variant || variant.DEFAULT;
   }
-  set icon(value) {
-    this._elements.icon.icon = value;
+  set variant(value) {
+    value = transform.string(value).toLowerCase();
+    this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
+    this._reflectAttribute('variant', this._variant);
     
-    // Hide if no icon provided
-    this._elements.icon.hidden = !this._elements.icon.icon;
+    if (this._variant === variant.QUIET) {
+      this._elements.input.variant = Textfield.variant.QUIET;
+      this._elements.trigger.classList.remove('coral3-Button--dropdown');
+      this._elements.trigger.classList.add('coral3-Button--quiet--dropdown');
+      this._elements.inputGroup.classList.add('coral-InputGroup--quiet');
+    }
+    else {
+      this._elements.input.variant = Textfield.variant.DEFAULT;
+      this._elements.trigger.classList.add('coral3-Button--dropdown');
+      this._elements.trigger.classList.remove('coral3-Button--quiet--dropdown');
+      this._elements.inputGroup.classList.remove('coral-InputGroup--quiet');
+    }
   }
   
   /**
@@ -337,29 +367,27 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   set loading(value) {
     this._loading = transform.booleanAttr(value);
     
-    let load = this._elements.loadIndicator;
-    
     if (this._loading) {
-      const overlay = this._elements.overlay;
+      const selectList = this._elements.overlay;
   
-      // we decide first if we need to scroll to the bottom since adding the load will change the dimentions
-      const scrollToBottom = overlay.scrollTop >= overlay.scrollHeight - overlay.clientHeight;
+      // we decide first if we need to scroll to the bottom since adding the load will change the dimensions
+      const scrollToBottom = selectList.scrollTop >= selectList.scrollHeight - selectList.clientHeight;
       
       // if it does not exist we create it
-      if (!load) {
-        load = this._elements.loadIndicator = loadIndicator.call(this._elements).firstChild;
+      if (!this._elements.loadIndicator) {
+        loadIndicator.call(this._elements);
       }
     
       // inserts the item at the end
-      this._elements.overlay.appendChild(load);
+      this._elements.overlay.content.appendChild(this._elements.loadIndicator);
     
       // we make the load indicator visible
       if (scrollToBottom) {
-        overlay.scrollTop = overlay.scrollHeight;
+        selectList.scrollTop = selectList.scrollHeight;
       }
     }
-    else if (load && load.parentNode) {
-      this._elements.overlay.removeChild(load);
+    else if (this._elements.loadIndicator) {
+      this._elements.loadIndicator.remove();
     }
   }
   
@@ -492,8 +520,9 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     super.invalid = value;
   
     // Add to outer component
-    this.classList.toggle('is-invalid', this.invalid);
-    this._elements.input.classList.toggle('is-invalid', this.invalid);
+    this._elements.inputGroup.classList.toggle('is-invalid', this.invalid);
+    this._elements.trigger.classList.toggle('is-invalid', this.invalid);
+    this._elements.input.invalid = this.invalid;
   }
   
   /**
@@ -511,11 +540,15 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._reflectAttribute('disabled', this._disabled);
     
     this.setAttribute('aria-disabled', this._disabled);
-    this.classList.toggle('is-disabled', this._disabled);
+    this._elements.inputGroup.classList.toggle('is-disabled', this._disabled);
     
     this._elements.input.disabled = this._disabled;
-    this._elements.trigger.disabled = this._disabled || this.readOnly;
-    this._elements.tagList.disabled = this._disabled || this.readOnly;
+  
+    const disabledOrReadOnly = this._disabled || this.readOnly;
+    this._elements.trigger.disabled = disabledOrReadOnly;
+    this._elements.tagList.disabled = disabledOrReadOnly;
+    // Prevents the overlay to be shown
+    this._elements.inputGroup.disabled = disabledOrReadOnly;
   }
   
   /**
@@ -534,7 +567,12 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this.setAttribute('aria-readonly', this._readOnly);
   
     this._elements.input.readOnly = this._readOnly;
-    this._elements.trigger.disabled = this._readOnly || this.disabled;
+    
+    const readOnlyOrDisabled = this._readOnly || this.disabled;
+    this._elements.trigger.readOnly = readOnlyOrDisabled;
+    this._elements.tagList.readOnly = readOnlyOrDisabled;
+    // Prevents the overlay to be shown
+    this._elements.inputGroup.disabled = readOnlyOrDisabled;
   }
   
   /**
@@ -570,6 +608,19 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     else {
       this._elements.tagList.removeAttribute('aria-labelledby');
     }
+  }
+  
+  /**
+   @ignore
+   
+   Not supported anymore.
+   */
+  get icon() {
+    return this._icon || '';
+  }
+  set icon(value) {
+    this._icon = transform.string(value);
+    this._reflectAttribute('icon', this._icon);
   }
   
   /** @private */
@@ -1042,20 +1093,19 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
   /** @private */
   _onMouseWheel(event) {
-    const overlay = this._elements.overlay;
+    const selectList = this._elements.selectList;
     // If scrolling with mouse wheel and if it has hit the top or bottom boundary
     // `SCROLL_BOTTOM_THRESHOLD` is ignored when hitting scroll bottom to allow debounced loading
-    if (event.deltaY < 0 && overlay.scrollTop === 0 || event.deltaY > 0 && overlay.scrollTop >= overlay.scrollHeight - overlay.clientHeight) {
+    if (event.deltaY < 0 && selectList.scrollTop === 0 || event.deltaY > 0 && selectList.scrollTop >= selectList.scrollHeight - selectList.clientHeight) {
       event.preventDefault();
     }
   }
   
   /** @private */
   _handleScrollBottom() {
-    const overlay = this._elements.overlay;
     const selectList = this._elements.selectList;
     
-    if (overlay.scrollTop >= overlay.scrollHeight - overlay.clientHeight - SCROLL_BOTTOM_THRESHOLD) {
+    if (selectList.scrollTop >= selectList.scrollHeight - selectList.clientHeight - SCROLL_BOTTOM_THRESHOLD) {
       const inputValue = this._elements.input.value;
       
       // Do not clear the suggestions here, instead we'll expect them to append
@@ -1107,13 +1157,16 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /** @private */
-  _handleInputGroupFocusIn() {
-    this.classList.add('is-focused');
+  _handleInputFocusIn() {
+    // @spectrum
+    if (this._elements.input.variant !== Textfield.variant.QUIET) {
+      this._elements.input.classList.add('focus-ring');
+    }
   }
   
   /** @private */
-  _handleInputGroupFocusOut() {
-    this.classList.remove('is-focused');
+  _handleInputFocusOut() {
+    this._elements.input.classList.remove('focus-ring');
   }
   
   /** @private */
@@ -1149,7 +1202,7 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
   /** @private */
   _handleTriggerClick() {
-    if (this._elements.overlay.open) {
+    if (this._elements.overlay.classList.contains('is-open')) {
       this._hideSuggestionsAndFocus();
     }
     else {
@@ -1186,11 +1239,11 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   /** @private */
   _scrollItemIntoView(item) {
     const itemRect = item.getBoundingClientRect();
-    const overlayRect = this._elements.overlay.getBoundingClientRect();
-    if (itemRect.top < overlayRect.top) {
+    const selectListRect = this._elements.selectList.getBoundingClientRect();
+    if (itemRect.top < selectListRect.top) {
       item.scrollIntoView();
     }
-    else if (itemRect.bottom > overlayRect.bottom) {
+    else if (itemRect.bottom > selectListRect.bottom) {
       item.scrollIntoView(false);
     }
   }
@@ -1734,19 +1787,6 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     else {
       this._updateButtonAccessibilityLabel(this._elements.selectList.items.length);
     }
-    
-    // Reset height
-    this._elements.selectList.style.height = '';
-    
-    // Measure actual height
-    const style = window.getComputedStyle(this._elements.selectList);
-    const height = parseInt(style.height, 10);
-    const maxHeight = parseInt(style.maxHeight, 10);
-    
-    if (height < maxHeight) {
-      // Make it scrollable
-      this._elements.selectList.style.height = `${height - 1}px`;
-    }
   }
   
   /**
@@ -1759,9 +1799,6 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     else {
       this._showSuggestionsCalled = false;
     }
-    
-    // @todo make sure this doesn't cause recalculate
-    this._elements.overlay.style.minWidth = `${this.offsetWidth}px`;
     
     if (this._elements.overlay.open) {
       // Reposition as the length of the list may have changed
@@ -1806,6 +1843,13 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
    */
   static get match() { return match; }
   
+  /**
+   Returns {@link Autocomplete} variants.
+   
+   @return {AutocompleteVariantEnum}
+   */
+  static get variant() { return variant; }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -1818,7 +1862,8 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       'maxLength',
       'icon',
       'match',
-      'loading'
+      'loading',
+      'variant'
     ]);
   }
   
@@ -1841,6 +1886,9 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._elements.trigger.setAttribute('aria-haspopup', 'true');
     this._elements.trigger.setAttribute('aria-controls', this._elements.selectList.id);
   
+    // Default reflected attributes
+    if (!this._variant) { this.variant = variant.DEFAULT; }
+  
     // Create a fragment
     const frag = document.createDocumentFragment();
   
@@ -1850,7 +1898,7 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     frag.appendChild(this._elements.inputGroup);
     frag.appendChild(this._elements.tagList);
   
-    this._elements.overlay.target = this._elements.inputGroup;
+    this._elements.overlay.target = this._elements.trigger;
   
     // Clean up
     while (this.firstChild) {
