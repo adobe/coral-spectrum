@@ -9,7 +9,7 @@
     "coralui-component-icon": "file:../coralui-component-icon",
     "coralui-component-button": "file:../coralui-component-button",
     "coralui-component-list": "file:../coralui-component-list",
-    "coralui-component-overlay": "file:../coralui-component-overlay",
+    "coralui-component-popover": "file:../coralui-component-popover",
     "coralui-externals": "file:../coralui-externals",
     "coralui-util": "file:../coralui-util"
   },

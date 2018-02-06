@@ -16,7 +16,7 @@
  */
 
 import {ComponentMixin} from 'coralui-mixin-component';
-import 'coralui-component-overlay';
+import 'coralui-component-popover';
 import 'coralui-component-button';
 import CycleButtonItem from './CycleButtonItem';
 import {Icon} from 'coralui-component-icon';
@@ -56,7 +56,7 @@ const ITEM_TAG_NAME = 'coral-cyclebutton-item';
 /** @ignore */
 const ACTION_TAG_NAME = 'coral-cyclebutton-action';
 
-const CLASSNAME = 'coral3-CycleButton';
+const CLASSNAME = 'coral3-CycleSelect';
 
 /**
  @class Coral.CycleButton
@@ -367,7 +367,7 @@ class CycleButton extends ComponentMixin(HTMLElement) {
     // show the popover. If there are actions, we always show the popover.
     if (this._isExtended()) {
       // we toggle the overlay if it was already open
-      if (this._elements.overlay.open) {
+      if (this._elements.overlay.classList.contains('is-open')) {
         this._hideOverlay();
       }
       else {
@@ -408,9 +408,7 @@ class CycleButton extends ComponentMixin(HTMLElement) {
     // manipulate button sub-component depending on display mode
     if (effectiveDisplayMode === displayMode.ICON) {
       this._elements.button.icon = effectiveIcon;
-      this._elements.openIcon.remove();
       this._elements.button.label.innerHTML = '';
-      this._elements.button.label.appendChild(this._elements.openIcon);
     
       // @a11y
       const ariaLabel = item.content.textContent.replace(WHITESPACE_REGEX, ' ');
@@ -481,7 +479,7 @@ class CycleButton extends ComponentMixin(HTMLElement) {
   /** @private */
   _checkExtended() {
     const isExtended = this._isExtended();
-    this.classList.toggle('coral3-CycleButton--extended', isExtended);
+    this.classList.toggle(`${CLASSNAME}--extended`, isExtended);
     
     // @a11y
     if (isExtended) {
@@ -490,12 +488,18 @@ class CycleButton extends ComponentMixin(HTMLElement) {
       this._elements.button.setAttribute('aria-controls', uid);
       this._elements.button.setAttribute('aria-haspopup', true);
       this._elements.button.setAttribute('aria-expanded', false);
+  
+      // Setup overlay
+      this._elements.overlay.target = this._elements.button;
     }
     else {
       this._elements.button.removeAttribute('aria-owns');
       this._elements.button.removeAttribute('aria-controls');
       this._elements.button.removeAttribute('aria-haspopup');
       this._elements.button.removeAttribute('aria-expanded');
+  
+      // Kill overlay
+      this._elements.overlay.target = null;
     }
   }
   
@@ -532,6 +536,7 @@ class CycleButton extends ComponentMixin(HTMLElement) {
         icon: item.icon,
         size: Icon.size.SMALL
       });
+      icon.classList.add(`${CLASSNAME}-list-icon`);
   
       selectListItem.content.insertBefore(icon, selectListItem.content.firstChild);
     }
@@ -604,7 +609,7 @@ class CycleButton extends ComponentMixin(HTMLElement) {
   
   /** @private */
   _selectCycleItem(item) {
-    item.selected = true;
+    item.setAttribute('selected', '');
   }
   
   /** @ignore */
@@ -640,7 +645,7 @@ class CycleButton extends ComponentMixin(HTMLElement) {
     this.classList.add(CLASSNAME);
     
     // Default reflected attributes
-    if (!this._threshold) { this.threshold = 3; }
+    if (typeof this._threshold === 'undefined') { this.threshold = 3; }
     if (!this._displayMode) { this.displayMode = displayMode.ICON; }
     
     // adds the role to support accessibility
