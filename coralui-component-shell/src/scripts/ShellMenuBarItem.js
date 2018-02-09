@@ -89,10 +89,10 @@ class ShellMenuBarItem extends ComponentMixin(HTMLElement) {
   }
   
   /**
-   Size of the icon. It accepts both lower and upper case sizes. See {@link IconSizeEnum}.
+   Size of the icon. It accepts both lower and upper case sizes. See {@link ButtonIconSizeEnum}.
    
    @type {String}
-   @default IconSizeEnum.SMALL
+   @default ButtonIconSizeEnum.SMALL
    @htmlattribute iconsize
    */
   get iconSize() {

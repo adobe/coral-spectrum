@@ -16,6 +16,7 @@
  */
 import {ComponentMixin} from 'coralui-mixin-component';
 import {transform, validate} from 'coralui-util';
+import ICON_MAP from 'coralui-compat/data/iconMap.json';
 import SPECTRUM_ICONS_PATH from '@spectrum/spectrum-css/dist/icons/spectrum-icons.svg';
 import SPECTRUM_ICONS_COLOR_PATH from '@spectrum/spectrum-css/dist/icons/spectrum-icons-color.svg';
 import SPECTRUM_CSS_ICONS_PATH from '@spectrum/spectrum-css/dist/icons/spectrum-css-icons.svg';
@@ -135,7 +136,7 @@ class Icon extends ComponentMixin(HTMLElement) {
     
     // Remove image and SVG elements
     ['image', 'svg'].forEach((type) => {
-      const el = this._elements[type] || this.querySelector(`.${CLASSNAME}-${type}`);
+      const el = this._elements[type] || this.querySelector(`.${CLASSNAME}--${type}`);
       if (el) {
         el.remove();
       }
@@ -147,7 +148,7 @@ class Icon extends ComponentMixin(HTMLElement) {
       if (this._icon.match(URL_REGEX)) {
         // Create an image and add it to the icon
         this._elements.image = this._elements.image || document.createElement('img');
-        this._elements.image.className = `${CLASSNAME}-image`;
+        this._elements.image.className = `${CLASSNAME} ${CLASSNAME}--image`;
         this._elements.image.src = this.icon;
         this.appendChild(this._elements.image);
       }
@@ -204,8 +205,46 @@ class Icon extends ComponentMixin(HTMLElement) {
     
     // If icon name is passed, we have to build the icon Id based on the icon name
     if (iconId.indexOf(SPECTRUM_ICONS_IDENTIFIER) !== 0) {
-      const iconName = capitalize(iconId);
-      const iconSize = sizeMap[this.getAttribute('size') || size.SMALL];
+      const iconMapped = ICON_MAP[iconId];
+      let iconName;
+      
+      if (iconMapped) {
+        if (iconMapped.spectrumIcon) {
+          // Use the default mapped icon
+          iconName = iconMapped.spectrumIcon;
+        }
+        else {
+          // Verify if icon should be light or dark by looking up parents theme
+          const closest = this.closest('.coral--light, .coral--dark, .coral--lightest, .coral--darkest');
+          
+          if (closest) {
+            if (closest.classList.contains('coral--light') || closest.classList.contains('coral--lightest')) {
+              // Use light icon
+              iconName = iconMapped.spectrumIconLight;
+            }
+            else {
+              // Use dark icon
+              iconName = iconMapped.spectrumIconDark;
+            }
+          }
+          // Use light by default
+          else {
+            iconName = iconMapped.spectrumIconLight;
+          }
+        }
+        
+        // Inform user about icon name changes
+        if (iconName) {
+          console.warn(`Coral.Icon: the icon ${iconId} has been deprecated. Please use ${iconName} instead.`);
+        }
+        else {
+          console.warn(`Coral.Icon: the icon ${iconId} has been removed. Please contact Icons@Adobe.`);
+        }
+      }
+      // In most cases, using the capitalized icon name maps to the spectrum icon name
+      else {
+        iconName = capitalize(iconId);
+      }
       
       // Verify if icon name is a colored icon
       if (SPECTRUM_COLORED_ICONS_IDENTIFIER.some(identifier => iconId.indexOf(identifier) !== -1)) {
@@ -213,6 +252,8 @@ class Icon extends ComponentMixin(HTMLElement) {
         iconId = `spectrum-icon-24-${iconName}`;
       }
       else {
+        const sizeAttribute = this.getAttribute('size');
+        const iconSize = sizeMap[sizeAttribute && sizeAttribute.toUpperCase() || size.SMALL];
         iconId = `spectrum-icon-${iconSize}-${iconName}`;
       }
     }
@@ -277,9 +318,9 @@ class Icon extends ComponentMixin(HTMLElement) {
    @param {Array.<String>} additionalClasses
    @return {String}
    */
-  static _renderSVG(iconId, additionalClasses=[]) {
+  static _renderSVG(iconId, additionalClasses = []) {
     additionalClasses.unshift(CLASSNAME);
-    additionalClasses.unshift(`${CLASSNAME}-svg`);
+    additionalClasses.unshift(`${CLASSNAME}--svg`);
     
     return `
       <svg focusable="false" aria-hidden="true" class="${additionalClasses.join(' ')}">

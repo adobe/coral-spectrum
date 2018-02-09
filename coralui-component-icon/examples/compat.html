@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Coral.Icon</title>
+  <link rel="stylesheet" href="../build/css/coral.css">
+  <script src="../build/js/coral.js"></script>
+  <style>
+    section {
+      padding: 15px;
+    }
+
+    coral-icon {
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+<section id="container"></section>
+
+<script>
+  var theme = location.hash.slice(1);
+  if (!theme) {
+    theme = 'light';
+    location.hash = theme;
+  }
+  document.body.classList.add('coral--' + theme);
+
+  var container = document.getElementById('container');
+  var deprecatedIcons = [
+    "abc",
+    "adobe",
+    "check",
+    "checkCircle",
+    "closedCaptions",
+    "dps",
+    "emailAlert",
+    "exclude",
+    "eyedropper",
+    "file",
+    "fileGlobe2",
+    "film",
+    "gear",
+    "helpCircle",
+    "html5",
+    "infoCircle",
+    "lockOff",
+    "lockOn",
+    "minus",
+    "minusCircle",
+    "open",
+    "os",
+    "page",
+    "pages",
+    "paintBucket",
+    "pausePlay",
+    "pausePlayCircle",
+    "popOut",
+    "publish",
+    "rss",
+    "reflectHorizontal",
+    "reflectVertical",
+    "save",
+    "saveAs",
+    "select",
+    "selectAll",
+    "sms",
+    "smsLightning",
+    "smsRefresh",
+    "starFill",
+    "starStroke",
+    "tag",
+    "tagExclude",
+    "tags",
+    "textCenter",
+    "textJustified",
+    "textLeft",
+    "textLetteredLowercase",
+    "textLetteredUppercase",
+    "textRight",
+    "triangleDown",
+    "triangleRight",
+    "upload",
+    "usa",
+    "users",
+    "viewOff",
+    "viewOn",
+    "vk",
+    "wand",
+    "aBC",
+    "target",
+    "draw",
+    "write",
+    "annotate",
+    "downloaded",
+    "campaignRemove",
+    "accordionLeft",
+    "accordionDown",
+    "accordionRight",
+    "accordionUp",
+    "deviceMobile",
+    "deviceTv",
+    "downloadFromCloud",
+    "dPS",
+    "coverImage",
+    "unflag",
+    "folderDefault",
+    "folderLockedDefault",
+    "automate",
+    "unpublish",
+    "graphBarStackedHorizontal",
+    "graphBarStackedVertical",
+    "graphTrendRounded",
+    "hTML5",
+    "imageMap",
+    "breadcrumb",
+    "oS",
+    "navigation",
+    "rSS",
+    "sMS",
+    "sMSLightning",
+    "sMSRefresh",
+    "star",
+    "stop",
+    "uSA",
+    "vK",
+    "facebookCircleColor",
+    "googlePlusCircleColor",
+    "instagramCircleColor",
+    "linkedInCircleColor",
+    "sinaWeiboCircleColor",
+    "tableCellMergeColor",
+    "tableColumnAddLeftColor",
+    "tableColumnAddRightColor",
+    "tableColumnMergeColor",
+    "tableColumnRemoveCenterColor",
+    "tableColumnSplitColor",
+    "tableRowAddBottomColor",
+    "tableRowAddTopColor",
+    "tableRowMergeColor",
+    "tableRowRemoveCenterColor",
+    "tableRowSplitColor",
+    "tableSelectColumnColor",
+    "tableSelectRowColor",
+    "twitterCircleColor",
+    "userCircleColor",
+    "userGroupCircleColor",
+    "youTubeCircleColor"
+  ];
+
+  var html = '';
+  deprecatedIcons.forEach(function(icon) {
+    html += icon + '<br><coral-icon icon="'+ icon +'" size="m"></coral-icon><br>';
+  });
+  container.innerHTML = html;
+</script>
+
+</body>
+
+</html>

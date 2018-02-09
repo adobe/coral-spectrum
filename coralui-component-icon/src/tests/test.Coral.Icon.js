@@ -1,9 +1,10 @@
 describe('Coral.Icon', function() {
-  const hasSVGIcon = (el, icon) => {
+  const hasSVGIcon = (el, icon, ignoreCapitalize) => {
     const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
     
     if (el._elements.svg && el.contains(el._elements.svg)) {
-      return el._elements.svg.querySelector('use').href.baseVal.endsWith(capitalize(icon));
+      const iconName = ignoreCapitalize ? icon : capitalize(icon);
+      return el._elements.svg.querySelector('use').href.baseVal.endsWith(iconName);
     }
     
     return false;
@@ -444,6 +445,54 @@ describe('Coral.Icon', function() {
         const svg = helpers.target.querySelector('svg');
         expect(svg.classList.contains('testClass')).to.be.true;
         expect(svg.querySelector('use').href.baseVal.indexOf('testId') !== -1).to.be.true;
+      });
+    });
+    
+    describe('Compat', function() {
+      it('should capitalize the icon name to match to the new icon name', function() {
+        const el = new Coral.Icon();
+        el.icon = 'add';
+        expect(hasSVGIcon(el, 'Add', true)).to.be.true;
+      });
+      
+      it('should map the old icon name to the new icon name', function() {
+        const el = new Coral.Icon();
+        el.icon = 'adobe';
+        expect(hasSVGIcon(el, 'AdobeLogo', true)).to.be.true;
+      });
+  
+      it('should map to the new icon name based on the light theme', function() {
+        const container = document.createElement('div');
+        const el = new Coral.Icon();
+        container.appendChild(el);
+        
+        container.classList.add('coral--light');
+        
+        el.icon = 'userCircleColor';
+  
+        expect(hasSVGIcon(el, 'User-CircleColorLight', true)).to.be.true;
+      });
+  
+      it('should map to the new icon name based on the dark theme', function() {
+        const container = document.createElement('div');
+        const el = new Coral.Icon();
+        container.appendChild(el);
+    
+        container.classList.add('coral--dark');
+    
+        el.icon = 'userCircleColor';
+    
+        expect(hasSVGIcon(el, 'User-CircleColorDark', true)).to.be.true;
+      });
+  
+      it('should map to the new light icon by default if no theme specified', function() {
+        const container = document.createElement('div');
+        const el = new Coral.Icon();
+        container.appendChild(el);
+    
+        el.icon = 'userCircleColor';
+    
+        expect(hasSVGIcon(el, 'User-CircleColorLight', true)).to.be.true;
       });
     });
   });

@@ -55,48 +55,25 @@ coral-shell-menu {
 }
 
 .coral3-Shell-menubar-item--circle {
-  .coral3-Icon {
-    &.coral3-Icon--sizeXXS {
-      .coral3-Icon-image {
-        border-radius : 9*$px;
-      }
-    }
+  .coral3-Icon--image {
+    // center image inside button due to removed borders
+    margin-top: -2*$px;
+  }
 
-    &.coral3-Icon--sizeXS {
-      .coral3-Icon-image {
-        border-radius : 12*$px;
-      }
-    }
+  .coral3-Icon--sizeXXS .coral3-Icon--image {
+    border-radius : 9*$px;
+  }
 
-    &.coral3-Icon--sizeS {
-      .coral3-Icon-image {
-        border-radius : 18*$px;
-      }
-    }
+  .coral3-Icon--sizeXS .coral3-Icon--image {
+    border-radius : 12*$px;
+  }
 
-    &.coral3-Icon--sizeM {
-      .coral3-Icon-image {
-        border-radius : 24*$px;
-      }
-    }
+  .coral3-Icon--sizeS .coral3-Icon--image {
+    border-radius : 18*$px;
+  }
 
-    &.coral3-Icon--sizeL {
-      .coral3-Icon-image {
-        border-radius : 36*$px;
-      }
-    }
-
-    &.coral3-Icon--sizeXL {
-      .coral3-Icon-image {
-        border-radius : 48*$px;
-      }
-    }
-
-    &.coral3-Icon--sizeXXL {
-      .coral3-Icon-image {
-        border-radius : 72*$px;
-      }
-    }
+  .coral3-Icon--sizeM .coral3-Icon--image {
+    border-radius : 24*$px;
   }
 }
 

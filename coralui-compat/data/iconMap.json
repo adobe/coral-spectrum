@@ -1,0 +1,396 @@
+{
+  "abc": {
+    "spectrumIcon": "ABC"
+  },
+  "adobe": {
+    "spectrumIcon": "AdobeLogo"
+  },
+  "check": {
+    "spectrumIcon": "Checkmark"
+  },
+  "checkCircle": {
+    "spectrumIcon": "CheckmarkCircle"
+  },
+  "closedCaptions": {
+    "spectrumIcon": "CloseCaptions"
+  },
+  "dps": {
+    "spectrumIcon": "DPS"
+  },
+  "emailAlert": {
+    "spectrumIcon": "Alert"
+  },
+  "exclude": {
+    "spectrumIcon": "Cancel"
+  },
+  "eyedropper": {
+    "spectrumIcon": "Sampler"
+  },
+  "file": {
+    "spectrumIcon": "Document"
+  },
+  "fileGlobe2": {
+    "spectrumIcon": "FileGlobe"
+  },
+  "film": {
+    "spectrumIcon": "Filmroll"
+  },
+  "gear": {
+    "spectrumIcon": "Settings"
+  },
+  "helpCircle": {
+    "spectrumIcon": "Help"
+  },
+  "html5": {
+    "spectrumIcon": "HTML5"
+  },
+  "infoCircle": {
+    "spectrumIcon": "Info"
+  },
+  "lockOff": {
+    "spectrumIcon": "LockOpen"
+  },
+  "lockOn": {
+    "spectrumIcon": "LockClosed"
+  },
+  "minus": {
+    "spectrumIcon": "Remove"
+  },
+  "minusCircle": {
+    "spectrumIcon": "RemoveCircle"
+  },
+  "open": {
+    "spectrumIcon": "FolderOpen"
+  },
+  "os": {
+    "spectrumIcon": "OS"
+  },
+  "page": {
+    "spectrumIcon": "WebPage"
+  },
+  "pages": {
+    "spectrumIcon": "WebPages"
+  },
+  "paintBucket": {
+    "spectrumIcon": "ColorFill"
+  },
+  "pausePlay": {
+    "spectrumIcon": "StepForward"
+  },
+  "pausePlayCircle": {
+    "spectrumIcon": "StepForwardCircle"
+  },
+  "popOut": {
+    "spectrumIcon": "ArrowUpRight"
+  },
+  "publish": {
+    "spectrumIcon": "Send"
+  },
+  "rss": {
+    "spectrumIcon": "RSS"
+  },
+  "reflectHorizontal": {
+    "spectrumIcon": "FlipHorizontal"
+  },
+  "reflectVertical": {
+    "spectrumIcon": "FlipVertical"
+  },
+  "save": {
+    "spectrumIcon": "SaveFloppy"
+  },
+  "saveAs": {
+    "spectrumIcon": "SaveAsFloppy"
+  },
+  "select": {
+    "spectrumIcon": "SelectBox"
+  },
+  "selectAll": {
+    "spectrumIcon": "SelectBoxAll"
+  },
+  "sms": {
+    "spectrumIcon": "SMS"
+  },
+  "smsLightning": {
+    "spectrumIcon": "SMSLightning"
+  },
+  "smsRefresh": {
+    "spectrumIcon": "SMSRefresh"
+  },
+  "starFill": {
+    "spectrumIcon": "Star"
+  },
+  "starStroke": {
+    "spectrumIcon": "StarOutline"
+  },
+  "tag": {
+    "spectrumIcon": "Label"
+  },
+  "tagExclude": {
+    "spectrumIcon": "LabelExclude"
+  },
+  "tags": {
+    "spectrumIcon": "Labels"
+  },
+  "textCenter": {
+    "spectrumIcon": "TextAlignCenter"
+  },
+  "textJustified": {
+    "spectrumIcon": "TextAlignJustify"
+  },
+  "textLeft": {
+    "spectrumIcon": "TextAlignLeft"
+  },
+  "textLetteredLowercase": {
+    "spectrumIcon": "TextLetteredLowerCase"
+  },
+  "textLetteredUppercase": {
+    "spectrumIcon": "TextLetteredUpperCase"
+  },
+  "textRight": {
+    "spectrumIcon": "TextAlignRight"
+  },
+  "triangleDown": {
+    "spectrumIcon": "ChevronDown"
+  },
+  "triangleRight": {
+    "spectrumIcon": "ChevronRight"
+  },
+  "upload": {
+    "spectrumIcon": "UploadToCloud"
+  },
+  "usa": {
+    "spectrumIcon": "USA"
+  },
+  "users": {
+    "spectrumIcon": "UserGroup"
+  },
+  "viewOff": {
+    "spectrumIcon": "VisibilityOff"
+  },
+  "viewOn": {
+    "spectrumIcon": "Visibility"
+  },
+  "vk": {
+    "spectrumIcon": "VK"
+  },
+  "wand": {
+    "spectrumIcon": "MagicWand"
+  },
+  "aBC": {
+    "deprecated": true,
+    "spectrumIcon": "ABC"
+  },
+  "target": {
+    "spectrumIcon": "AdobeTarget"
+  },
+  "draw": {
+    "spectrumIcon": "AnnotatePen"
+  },
+  "write": {
+    "spectrumIcon": "AnnotatePen"
+  },
+  "annotate": {
+    "spectrumIcon": "AnnotatePen"
+  },
+  "downloaded": {
+    "spectrumIcon": "Download"
+  },
+  "campaignRemove": {
+    "spectrumIcon": "CampaignClose"
+  },
+  "accordionLeft": {
+    "spectrumIcon": "ChevronDoubleLeft"
+  },
+  "accordionDown": {
+    "spectrumIcon": "ChevronDown"
+  },
+  "accordionRight": {
+    "spectrumIcon": "ChevronDoubleRight"
+  },
+  "accordionUp": {
+    "spectrumIcon": "ChevronUp"
+  },
+  "deviceMobile": {
+    "spectrumIcon": "DevicePhone"
+  },
+  "deviceTv": {
+    "deprecated": true,
+    "spectrumIcon": "DeviceTV"
+  },
+  "downloadFromCloud": {
+    "spectrumIcon": "Download",
+    "deprecated": true
+  },
+  "dPS": {
+    "deprecated": true,
+    "spectrumIcon": "DPS"
+  },
+  "coverImage": {
+    "spectrumIcon": "FacebookCoverImage"
+  },
+  "unflag": {
+    "spectrumIcon": "FlagExclude"
+  },
+  "folderDefault": {
+    "spectrumIcon": "FolderAdobe"
+  },
+  "folderLockedDefault": {
+    "spectrumIcon": "FolderLockedAdobe"
+  },
+  "automate": {
+    "spectrumIcon": "Gears"
+  },
+  "unpublish": {
+    "spectrumIcon": "GlobeRemove"
+  },
+  "graphBarStackedHorizontal": {
+    "spectrumIcon": "GraphBarHorizontalStacked"
+  },
+  "graphBarStackedVertical": {
+    "spectrumIcon": "GraphBarVertical"
+  },
+  "graphTrendRounded": {
+    "spectrumIcon": "GraphTrend"
+  },
+  "hTML5": {
+    "spectrumIcon": "HTML5",
+    "deprecated": true
+  },
+  "imageMap": {
+    "spectrumIcon": "ImageMapRectangle"
+  },
+  "breadcrumb": {
+    "spectrumIcon": "Menu"
+  },
+  "oS": {
+    "spectrumIcon": "OS",
+    "deprecated": true
+  },
+  "navigation": {
+    "spectrumIcon": "Rail"
+  },
+  "rSS": {
+    "spectrumIcon": "RSS",
+    "deprecated": true
+  },
+  "sMS": {
+    "spectrumIcon": "SMS",
+    "deprecated": true
+  },
+  "sMSLightning": {
+    "spectrumIcon": "SMSLightning",
+    "deprecated": true
+  },
+  "sMSRefresh": {
+    "spectrumIcon": "SMSRefresh",
+    "deprecated": true
+  },
+  "star": {
+    "spectrumIcon": "Star"
+  },
+  "stop": {
+    "spectrumIcon": "StopCircle"
+  },
+  "uSA": {
+    "spectrumIcon": "USA",
+    "deprecated": true
+  },
+  "vK": {
+    "spectrumIcon": "VK",
+    "deprecated": true
+  },
+  "facebookCircleColor": {
+    "spectrumIcon": "Facebook-CircleColorLight"
+  },
+  "googlePlusCircleColor": {
+    "spectrumIcon": "GooglePlus-CircleColorLight"
+  },
+  "instagramCircleColor": {
+    "spectrumIcon": "Instagram-CircleColorLight"
+  },
+  "linkedInCircleColor": {
+    "spectrumIcon": "LinkedIn-CircleColorLight"
+  },
+  "sinaWeiboCircleColor": {
+    "spectrumIcon": "SinaWeibo-CircleColorLight"
+  },
+  "tableCellMergeColor": {
+    "spectrumIconLight": "TableCellMergeColorLight",
+    "spectrumIconDark": "TableCellMergeColorDark",
+    "spectrumIconActive": "TableCellMergeColorActive"
+  },
+  "tableColumnAddLeftColor": {
+    "spectrumIconLight": "TableColumnAddLeftColorLight",
+    "spectrumIconDark": "TableColumnAddLeftColorDark",
+    "spectrumIconActive": "TableColumnAddLeftColorActive"
+  },
+  "tableColumnAddRightColor": {
+    "spectrumIconLight": "TableColumnAddLeftColorLight",
+    "spectrumIconDark": "TableColumnAddRightColorDark",
+    "spectrumIconActive": "TableColumnAddRightColorActive"
+  },
+  "tableColumnMergeColor": {
+    "spectrumIconLight": "TableColumnMergeColorLight",
+    "spectrumIconActive": "TableColumnMergeColorActive",
+    "spectrumIconDark": "TableColumnMergeColorDark"
+  },
+  "tableColumnRemoveCenterColor": {
+    "spectrumIconLight": "TableColumnRemoveCenterColorLight",
+    "spectrumIconActive": "TableColumnRemoveCenterColorActive",
+    "spectrumIconDark": "TableColumnRemoveCenterColorDark"
+  },
+  "tableColumnSplitColor": {
+    "spectrumIconLight": "TableColumnSplitColorLight",
+    "spectrumIconActive": "TableColumnSplitColorActive",
+    "spectrumIconDark": "TableColumnSplitColorDark"
+  },
+  "tableRowAddBottomColor": {
+    "spectrumIconLight": "TableRowAddBottomColorLight",
+    "spectrumIconActive": "TableRowAddBottomColorActive",
+    "spectrumIconDark": "TableRowAddBottomColorDark"
+  },
+  "tableRowAddTopColor": {
+    "spectrumIconLight": "TableRowAddTopColorLight",
+    "spectrumIconActive": "TableRowAddTopColorActive",
+    "spectrumIconDark": "TableRowAddTopColorDark"
+  },
+  "tableRowMergeColor": {
+    "spectrumIconLight": "TableRowMergeColorLight",
+    "spectrumIconActive": "TableRowMergeColorActive",
+    "spectrumIconDark": "TableRowMergeColorDark"
+  },
+  "tableRowRemoveCenterColor": {
+    "spectrumIconLight": "TableRowRemoveCenterColorLight",
+    "spectrumIconActive": "TableRowRemoveCenterColorActive",
+    "spectrumIconDark": "TableRowRemoveCenterColorDark"
+  },
+  "tableRowSplitColor": {
+    "spectrumIconLight": "TableRowSplitColorLight",
+    "spectrumIconActive": "TableRowSplitColorActive",
+    "spectrumIconDark": "TableRowSplitColorDark"
+  },
+  "tableSelectColumnColor": {
+    "spectrumIconLight": "TableSelectColumnColorLight",
+    "spectrumIconActive": "TableSelectColumnColorActive",
+    "spectrumIconDark": "TableSelectColumnColorDark"
+  },
+  "tableSelectRowColor": {
+    "spectrumIconLight": "TableSelectRowColorLight",
+    "spectrumIconActive": "TableSelectRowColorActive",
+    "spectrumIconDark": "TableSelectRowColorDark"
+  },
+  "twitterCircleColor": {
+    "spectrumIcon": "Twitter-CircleColorLight"
+  },
+  "userCircleColor": {
+    "spectrumIconLight": "User-CircleColorLight",
+    "spectrumIconDark": "User-CircleColorDark"
+  },
+  "userGroupCircleColor": {
+    "spectrumIconLight": "UserGroup-CircleColorLight",
+    "spectrumIconDark": "UserGroup-CircleColorDark"
+  },
+  "youTubeCircleColor": {
+    "spectrumIcon": "YouTube-CircleColorLight"
+  }
+}
