@@ -11,6 +11,7 @@
     "coralui-component-wait": "file:../coralui-component-wait",
     "coralui-mixin-overlay": "file:../coralui-mixin-overlay",
     "coralui-component-button": "file:../coralui-component-button",
+    "coralui-component-anchorbutton": "file:../coralui-component-anchorbutton",
     "coralui-collection": "file:../coralui-collection",
     "coralui-externals": "file:../coralui-externals",
     "coralui-util": "file:../coralui-util"

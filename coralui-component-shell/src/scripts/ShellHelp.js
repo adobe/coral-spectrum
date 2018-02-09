@@ -180,6 +180,8 @@ class ShellHelp extends ComponentMixin(HTMLElement) {
           target: result.target
         });
         
+        item.classList.add('coral3-Shell-help-result-item');
+        
         item.content = helpResult.call(this._elements, {
           title: result.title,
           description: description
@@ -200,8 +202,9 @@ class ShellHelp extends ComponentMixin(HTMLElement) {
           },
           target: '_blank'
         });
-        
-        seeAllItem.classList.add('coral-Link', 'coral3-Shell-help-allResults');
+  
+        // Look like a link
+        seeAllItem.content.classList.add('coral-Link');
         
         this._elements.results.appendChild(seeAllItem);
       }

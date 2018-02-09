@@ -87,14 +87,14 @@ class Search extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   The value this radio should submit when checked. Changing this value will not trigger an event.
+   The submitted input value. Changing this value will not trigger an event.
    
    @type {String}
-   @default "on"
+   @default ""
    @htmlattribute value
    */
   get value() {
-    return this._elements.input.value || 'on';
+    return this._elements.input.value || '';
   }
   set value(value) {
     this._elements.input.value = value;

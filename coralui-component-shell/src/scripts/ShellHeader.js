@@ -42,7 +42,8 @@ class ShellHeader extends ComponentMixin(HTMLElement) {
     // Events
     this._delegateEvents({
       'global:coral-overlay:beforeopen': '_handleMenuBeforeOpenOrClose',
-      'global:coral-overlay:beforeclose': '_handleMenuBeforeOpenOrClose'
+      'global:coral-overlay:beforeclose': '_handleMenuBeforeOpenOrClose',
+      'global:coral-overlay:close': '_handleMenuClose'
     });
   }
   
@@ -116,11 +117,32 @@ class ShellHeader extends ComponentMixin(HTMLElement) {
   
     // header only changes zIndex due to menus
     if (target.tagName === 'CORAL-SHELL-MENU') {
+      target.classList.add('is-animated');
+      
       const self = this;
       // we need one frame to make sure the zIndex is already set
       window.requestAnimationFrame(() => {
         self.style.zIndex = parseInt(target.style.zIndex, 10) + 100;
+        window.clearTimeout(self._zIndexTimeout);
       });
+    }
+  }
+  
+  /**
+   Cleanup after _handleMenuBeforeOpenOrClose() to make sure
+   we do not leave high zIndex behind that overlay other element on the page
+   */
+  _handleMenuClose(event) {
+    const target = event.target;
+    
+    // header only changes zIndex due to menus
+    if (target.tagName === 'CORAL-SHELL-MENU') {
+      // we need additional time to make sure the zIndex is already set
+      this._zIndexTimeout = setTimeout(() => {
+        target.classList.remove('is-animated');
+  
+        this.style.zIndex = null;
+      }, target.constructor.FADETIME);
     }
   }
   

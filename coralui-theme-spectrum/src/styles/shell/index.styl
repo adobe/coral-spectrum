@@ -15,39 +15,31 @@
  * from Adobe Systems Incorporated.
  */
 
-// hidden by default
-coral-cyclebutton-item,
-coral-cyclebutton-action {
-  display: none;
+$shell-header-height = 52*$px;
+
+.coral3-Shell {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 
-.coral3-CycleSelect {
-  box-sizing: border-box;
+coral-shell-content {
+  position: absolute;
+  top: $shell-header-height;
+  bottom: 0;
+  left: 0;
+  right: 0;
 
-  display: inline-block;
-  cursor: pointer;
+  -webkit-overflow-scrolling: touch;
+  overflow: auto;
 }
 
-.coral3-CycleSelect-overlay {
-  width: 140*$px;
-}
-
-.coral3-CycleSelect-icon {
-  display: none;
-  float: right;
-  position: relative;
-  top: 12*$px;
-
-  width: 10*$px;
-  height: 6*$px;
-
-  margin-left: 12*$px;
-}
-
-.coral3-CycleSelect--extended .coral3-CycleSelect-icon {
-  display: inline-block;
-}
-
-.coral3-CycleSelect-list-icon {
-  margin-right: 12*$px;
-}
+@require 'header';
+@require 'help';
+@require 'menubar';
+@require 'orgswitcher';
+@require 'solutionswitcher';
+@require 'user';
+@require 'workspaces';

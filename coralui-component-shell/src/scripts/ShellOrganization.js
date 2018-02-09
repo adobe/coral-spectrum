@@ -260,8 +260,7 @@ class ShellOrganization extends ListItem {
       frag.appendChild(this._elements.items);
       this.appendChild(frag);
   
-      this._elements.icon.size = Icon.size.MEDIUM;
-      this._elements.icon.classList.add('coral3-Shell-orgSwitcher-item-icon');
+      this._elements.icon.size = Icon.size.SMALL;
     }
     
     // Don't trigger events once connected

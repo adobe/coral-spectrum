@@ -88,9 +88,6 @@ const ListItemMixin = (superClass) => class extends superClass {
   }
   set icon(value) {
     this._elements.icon.icon = value;
-  
-    // Hide if no icon
-    this._elements.icon.hidden = this._elements.icon.icon === '';
   }
   
   get _contentZones() { return {'coral-list-item-content': 'content'}; }

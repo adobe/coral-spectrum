@@ -37,8 +37,6 @@ class ShellSuborganization extends ShellOrganization {
   
     // Set the icon size
     this._elements.icon.size = Icon.size.SMALL;
-    // Add the className, owned by this component
-    this._elements.icon.classList.add('coral3-Shell-orgSwitcher-subitem-icon');
   
     // Be accessible
     this.setAttribute('role', 'button');

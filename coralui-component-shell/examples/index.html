@@ -6,12 +6,12 @@
   <link rel="stylesheet" href="../build/css/coral.css">
   <script src="../build/js/coral.js"></script>
 </head>
-<body>
+<body class="coral--light">
 
-<coral-shell class="coral--light">
-  <coral-shell-header class="coral--dark">
+<coral-shell>
+  <coral-shell-header>
     <coral-shell-header-home>
-      <a is="coral-shell-homeanchor" icon="adobeExperienceManagerColor" href="#">Adobe Experience Manager</a>
+      <a is="coral-shell-homeanchor" icon="adobeExperienceManagerColorDark" href="#">Adobe Experience Manager</a>
     </coral-shell-header-home>
     <coral-shell-header-content>
       <coral-shell-workspaces>
@@ -25,26 +25,26 @@
       <a is="coral-anchorbutton" variant="quiet" href="#">Beta Feedback</a>
       <coral-shell-menubar>
         <coral-shell-menubar-item menu="#menu_organizations">NIKE, Inc.</coral-shell-menubar-item>
-        <coral-shell-menubar-item menu="#menu_help" icon="helpCircle"></coral-shell-menubar-item>
+        <coral-shell-menubar-item menu="#menu_help" icon="helpOutline"></coral-shell-menubar-item>
         <coral-shell-menubar-item menu="#menu_solutions" icon="apps"></coral-shell-menubar-item>
         <coral-shell-menubar-item menu="#menu_pulse" icon="bell" badge="5"></coral-shell-menubar-item>
-        <coral-shell-menubar-item menu="#menu_user" icon="userCircleColor" iconsize="M"></coral-shell-menubar-item>
+        <coral-shell-menubar-item menu="#menu_user" iconsize="M" iconvariant="circle" icon="assets/avatar.jpg"></coral-shell-menubar-item>
       </coral-shell-menubar>
     </coral-shell-header-actions>
   </coral-shell-header>
   <coral-shell-menu id="menu_organizations">
     <coral-shell-orgswitcher>
-      <coral-shell-organization name="facebook" icon="facebookColor">Facebook, Inc.</coral-shell-organization>
-      <coral-shell-organization name="flickr" icon="flickrColor">Flickr, Inc.</coral-shell-organization>
-      <coral-shell-organization name="newsgator" icon="newsgatorColor">Newsgator, Inc.</coral-shell-organization>
-      <coral-shell-organization name="microsoft" icon="windowsColor">
+      <coral-shell-organization name="facebook" icon="facebook">Facebook, Inc.</coral-shell-organization>
+      <coral-shell-organization name="flickr" icon="flickr">Flickr, Inc.</coral-shell-organization>
+      <coral-shell-organization name="newsgator" icon="newsgator">Newsgator, Inc.</coral-shell-organization>
+      <coral-shell-organization name="microsoft" icon="windows8">
         Microsoft
         <coral-shell-suborganization name="microsoftjapan" icon="adobeTarget" selected>Microsoft Japan</coral-shell-suborganization>
         <coral-shell-suborganization name="microsoftusa" icon="adobeTarget">Microsoft USA</coral-shell-suborganization>
         <coral-shell-suborganization name="microsoftsouthamerica" icon="adobeTarget">Microsoft South America</coral-shell-suborganization>
       </coral-shell-organization>
       <coral-shell-orgswitcher-footer>
-        <button is="coral-button" variant="minimal">Manage Organizations</button>
+        <button is="coral-button" variant="quiet">Manage Organizations</button>
       </coral-shell-orgswitcher-footer>
     </coral-shell-orgswitcher>
   </coral-shell-menu>
@@ -54,7 +54,7 @@
       <a is="coral-shell-help-item" icon="callCenter" href="#customercare">Customer Care</a>
       <a is="coral-shell-help-item" icon="news" href="#news">What's new in CoralUI</a>
       <a is="coral-shell-help-item" icon="servers" href="#status">Adobe Marketing Cloud Status</a>
-      <a is="coral-shell-help-item" icon="lightbulb" href="#getstarted">Getting Started with CoralUI</a>
+      <a is="coral-shell-help-item" icon="info" href="#getstarted">Getting Started with CoralUI</a>
     </coral-shell-help>
   </coral-shell-menu>
   <coral-shell-menu id="menu_pulse" placement="right" from="right" full>
@@ -63,60 +63,57 @@
   <coral-shell-menu id="menu_solutions" placement="top" from="top" full top>
     <coral-shell-solutionswitcher>
       <coral-shell-solutions>
-        <a is="coral-shell-solution" icon="adobeAnalyticsColor" href="#" linked>Analytics</a>
-        <a is="coral-shell-solution" icon="adobeExperienceManagerColor" href="#" linked>Experience Manager</a>
-        <a is="coral-shell-solution" icon="adobeTargetColor" href="#" linked>Target</a>
+        <coral-shell-solutions-header>Advertising Cloud</coral-shell-solutions-header>
+        <a is="coral-shell-solution" icon="adobeMediaOptimizerColorDark" linked href="#">Media Optimizer</a>
       </coral-shell-solutions>
+
       <coral-shell-solutions>
-        <a is="coral-shell-solution" icon="adobeAudienceManager" href="#">Audience Manager</a>
-        <a is="coral-shell-solution" icon="adobeCampaign" href="#">Campaign</a>
-        <a is="coral-shell-solution" icon="adobeMediaOptimizer" href="#">Media Optimizer</a>
-        <a is="coral-shell-solution" icon="adobePrimetime" href="#">Primetime</a>
-        <a is="coral-shell-solution" icon="adobeSocial" href="#">Social</a>
+        <coral-shell-solutions-header>Marketing Cloud</coral-shell-solutions-header>
+        <a is="coral-shell-solution" icon="adobeCampaignColorDark" linked href="#">Campaign</a>
+        <a is="coral-shell-solution" icon="adobeExperienceManagerColorDark" href="#">Experience Manager</a>
+        <a is="coral-shell-solution" icon="adobeTargetColorDark" href="#">Target</a>
+        <a is="coral-shell-solution" icon="adobePrimetimeColorDark" href="#">Primetime</a>
+        <a is="coral-shell-solution" icon="adobeSocialColorDark" href="#">Social</a>
       </coral-shell-solutions>
+
+      <coral-shell-solutions>
+        <coral-shell-solutions-header>Analytics Cloud</coral-shell-solutions-header>
+        <a is="coral-shell-solution" icon="adobeAnalyticsColorDark" linked href="#">Analytics</a>
+        <a is="coral-shell-solution" icon="adobeAudienceManagerColorDark" linked href="#">Audience Manager</a>
+      </coral-shell-solutions>
+
       <coral-shell-solutions secondary>
-        <a target="_blank" is="coral-shell-solution" icon="launch" href="http://www.adobe.com/marketing-cloud/activation.html">Activation</a>
-        <a target="_blank" is="coral-shell-solution" icon="asset" href="http://www.adobe.com/marketing-cloud/integrated-marketing-services.html">Assets</a>
-        <a target="_blank" is="coral-shell-solution" icon="sync" href="https://marketing.adobe.com/exchange">Exchange</a>
-        <a target="_blank" is="coral-shell-solution" icon="feed" href="http://www.adobe.com/marketing-cloud/integrated-marketing-services.html">Feed</a>
-        <a target="_blank" is="coral-shell-solution" icon="mobileServices" href="http://www.adobe.com/marketing-cloud/mobile-marketing.html">Mobile Services</a>
-        <a target="_blank" is="coral-shell-solution" icon="user" href="http://www.adobe.com/marketing-cloud/people.html">Profiles &amp; Audiences</a>
+        <coral-shell-solutions-header>Platform</coral-shell-solutions-header>
+        <a is="coral-shell-solution" href="#">Activation</a>
+        <a is="coral-shell-solution" href="#">Assets</a>
+        <a is="coral-shell-solution" href="#">Exchange</a>
+        <a is="coral-shell-solution" href="#">Feed</a>
+        <a is="coral-shell-solution" href="#">Mobile Services</a>
+        <a is="coral-shell-solution" href="#">People</a>
       </coral-shell-solutions>
     </coral-shell-solutionswitcher>
   </coral-shell-menu>
   <coral-shell-menu id="menu_user">
-    <coral-shell-user avatar="http://wwwimages.adobe.com/content/dam/Adobe/en/leaders/images/138x138/adobe-leaders-shantanu-narayen-138x138.jpg">
+    <coral-shell-user avatar="assets/avatar.jpg">
       <coral-shell-user-name>Shantanu Narayen</coral-shell-user-name>
       <coral-shell-user-heading>CEO</coral-shell-user-heading>
       <coral-shell-user-subheading>Adobe Systems, Inc.</coral-shell-user-subheading>
       <coral-shell-user-footer>
-        <a is="coral-anchorbutton" variant="minimal" href="#signout">Sign Out</a>
-        <a is="coral-anchorbutton" variant="minimal" href="#profile">Profile</a>
+        <a is="coral-anchorbutton" variant="quiet" href="#signout">Sign Out</a>
+        <a is="coral-anchorbutton" variant="quiet" href="#profile">Profile</a>
       </coral-shell-user-footer>
     </coral-shell-user>
   </coral-shell-menu>
-  <coral-shell-content class="u-coral-clearFix">
+  <coral-shell-content>
     <!-- Main application goes here -->
-    <section class="u-coral-pullLeft" style="width: 35%;padding: 2rem">
-      <h1 class="coral-Heading coral-Heading--1">Hello!</h1>
-      <h2 class="coral-Heading coral-Heading--2">What is this?</h2>
+    <section class="u-coral-padding">
+      <h1 class="coral-Heading coral-Heading--1">Coral.Shell</h1>
+      <h2 class="coral-Heading coral-Heading--2">What is this ?</h2>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lacinia luctus accumsan. Vestibulum nec euismod nisi, ut pretium magna. Maecenas vehicula id metus sit amet blandit. Mauris viverra elementum velit a condimentum. Phasellus at sodales sapien, eu mollis felis. Aenean dictum pellentesque nibh, non viverra metus. Nulla et dui et neque rutrum dapibus nec vitae quam. Curabitur consectetur euismod mi nec ultrices. Nullam condimentum, nulla sed semper pulvinar, sem est euismod justo, vitae laoreet magna purus et dui. Integer fermentum nisl id sapien porta venenatis. Phasellus sit amet fermentum risus. In at dictum risus. Duis tempus tellus enim, at ultricies lacus sagittis ac. Vivamus ac ligula tellus. Nam at neque tellus.</p>
 
       <p>Nullam consectetur risus rhoncus sapien pulvinar vestibulum. Cras id ex auctor, imperdiet tortor ut, varius augue. Quisque euismod sollicitudin elementum. Aliquam sagittis, nulla non euismod eleifend, nunc quam rutrum nulla, in varius tortor sem fringilla quam. Sed auctor, enim et rhoncus commodo, dui leo dignissim sapien, eu gravida tortor neque quis orci. Nam non eros metus. Phasellus lacus ante, posuere id sollicitudin eget, euismod venenatis risus. Morbi maximus sodales ante nec commodo. Mauris sed neque at ante varius aliquam. Suspendisse sit amet est porta, tincidunt arcu sed, tincidunt metus. Integer venenatis erat pellentesque luctus efficitur. Donec imperdiet tincidunt nisl vel tempus.</p>
 
-      <h2 class="coral-Heading coral-Heading--2">How does it work?</h2>
-      <p>Nullam consectetur risus rhoncus sapien pulvinar vestibulum. Cras id ex auctor, imperdiet tortor ut, varius augue. Quisque euismod sollicitudin elementum. Aliquam sagittis, nulla non euismod eleifend, nunc quam rutrum nulla, in varius tortor sem fringilla quam. Sed auctor, enim et rhoncus commodo, dui leo dignissim sapien, eu gravida tortor neque quis orci. Nam non eros metus. Phasellus lacus ante, posuere id sollicitudin eget, euismod venenatis risus. Morbi maximus sodales ante nec commodo. Mauris sed neque at ante varius aliquam. Suspendisse sit amet est porta, tincidunt arcu sed, tincidunt metus. Integer venenatis erat pellentesque luctus efficitur. Donec imperdiet tincidunt nisl vel tempus.</p>
-
-    </section>
-    <section class="u-coral-pullLeft" style="width: 35%;padding: 2rem">
-      <div class="coral-Well">
-        <p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lacinia luctus accumsan. Vestibulum nec euismod nisi, ut pretium magna. Maecenas vehicula id metus sit amet blandit. Mauris viverra elementum velit a condimentum. Phasellus at sodales sapien, eu mollis felis. Aenean dictum pellentesque nibh, non viverra metus. Nulla et dui et neque rutrum dapibus nec vitae quam. Curabitur consectetur euismod mi nec ultrices. Nullam condimentum, nulla sed semper pulvinar, sem est euismod justo. </p>
-      </div>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lacinia luctus accumsan. Vestibulum nec euismod nisi, ut pretium magna. Maecenas vehicula id metus sit amet blandit. Mauris viverra elementum velit a condimentum. Phasellus at sodales sapien, eu mollis felis. Aenean dictum pellentesque nibh, non viverra metus. Nulla et dui et neque rutrum dapibus nec vitae quam. Curabitur consectetur euismod mi nec ultrices. Nullam condimentum, nulla sed semper pulvinar, sem est euismod justo, vitae laoreet magna purus et dui. Integer fermentum nisl id sapien porta venenatis. Phasellus sit amet fermentum risus. In at dictum risus. Duis tempus tellus enim, at ultricies lacus sagittis ac. Vivamus ac ligula tellus. Nam at neque tellus.</p>
-
-      <p>Nullam consectetur risus rhoncus sapien pulvinar vestibulum. Cras id ex auctor, imperdiet tortor ut, varius augue. Quisque euismod sollicitudin elementum. Aliquam sagittis, nulla non euismod eleifend, nunc quam rutrum nulla, in varius tortor sem fringilla quam. Sed auctor, enim et rhoncus commodo, dui leo dignissim sapien, eu gravida tortor neque quis orci. Nam non eros metus. Phasellus lacus ante, posuere id sollicitudin eget, euismod venenatis risus. Morbi maximus sodales ante nec commodo. Mauris sed neque at ante varius aliquam. Suspendisse sit amet est porta, tincidunt arcu sed, tincidunt metus. Integer venenatis erat pellentesque luctus efficitur. Donec imperdiet tincidunt nisl vel tempus.</p>
-
-      <h2 class="coral-Heading coral-Heading--2">Want to learn more?</h2>
+      <h2 class="coral-Heading coral-Heading--2">How does it work ?</h2>
       <p>Nullam consectetur risus rhoncus sapien pulvinar vestibulum. Cras id ex auctor, imperdiet tortor ut, varius augue. Quisque euismod sollicitudin elementum. Aliquam sagittis, nulla non euismod eleifend, nunc quam rutrum nulla, in varius tortor sem fringilla quam. Sed auctor, enim et rhoncus commodo, dui leo dignissim sapien, eu gravida tortor neque quis orci. Nam non eros metus. Phasellus lacus ante, posuere id sollicitudin eget, euismod venenatis risus. Morbi maximus sodales ante nec commodo. Mauris sed neque at ante varius aliquam. Suspendisse sit amet est porta, tincidunt arcu sed, tincidunt metus. Integer venenatis erat pellentesque luctus efficitur. Donec imperdiet tincidunt nisl vel tempus.</p>
 
     </section>

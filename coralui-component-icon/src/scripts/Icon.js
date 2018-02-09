@@ -17,11 +17,16 @@
 import {ComponentMixin} from 'coralui-mixin-component';
 import {transform, validate} from 'coralui-util';
 import SPECTRUM_ICONS_PATH from '@spectrum/spectrum-css/dist/icons/spectrum-icons.svg';
+import SPECTRUM_ICONS_COLOR_PATH from '@spectrum/spectrum-css/dist/icons/spectrum-icons-color.svg';
 import SPECTRUM_CSS_ICONS_PATH from '@spectrum/spectrum-css/dist/icons/spectrum-css-icons.svg';
 import '@spectrum/spectrum-css/dist/icons/AS.loadIcons';
 
 const SPECTRUM_ICONS = 'spectrum-icons';
+const SPECTRUM_ICONS_COLOR = 'spectrum-icons-color';
 const SPECTRUM_CSS_ICONS = 'spectrum-css-icons';
+
+const SPECTRUM_ICONS_IDENTIFIER = 'spectrum-';
+const SPECTRUM_COLORED_ICONS_IDENTIFIER = ['ColorLight', 'ColorDark', 'ColorActive'];
 
 /**
  Regex used to match URLs. Assume it's a URL if it has a slash, colon, or dot.
@@ -198,10 +203,18 @@ class Icon extends ComponentMixin(HTMLElement) {
     let iconId = this.icon;
     
     // If icon name is passed, we have to build the icon Id based on the icon name
-    if (this.icon.indexOf('spectrum-') !== 0) {
-      const iconName = capitalize(this.icon);
+    if (iconId.indexOf(SPECTRUM_ICONS_IDENTIFIER) !== 0) {
+      const iconName = capitalize(iconId);
       const iconSize = sizeMap[this.getAttribute('size') || size.SMALL];
-      iconId = `spectrum-icon-${iconSize}-${iconName}`;
+      
+      // Verify if icon name is a colored icon
+      if (SPECTRUM_COLORED_ICONS_IDENTIFIER.some(identifier => iconId.indexOf(identifier) !== -1)) {
+        // Colored icons are 24 by default
+        iconId = `spectrum-icon-24-${iconName}`;
+      }
+      else {
+        iconId = `spectrum-icon-${iconSize}-${iconName}`;
+      }
     }
     
     // Insert SVG Icon using HTML because DOMly doesn't support document.createElementNS for <use> element
@@ -297,6 +310,9 @@ class Icon extends ComponentMixin(HTMLElement) {
     if (url === SPECTRUM_ICONS) {
       url = resolveIconsPath(SPECTRUM_ICONS_PATH);
     }
+    else if (url === SPECTRUM_ICONS_COLOR) {
+      url = resolveIconsPath(SPECTRUM_ICONS_COLOR_PATH);
+    }
     else if (url === SPECTRUM_CSS_ICONS) {
       url = resolveIconsPath(SPECTRUM_CSS_ICONS_PATH);
     }
@@ -334,6 +350,7 @@ class Icon extends ComponentMixin(HTMLElement) {
 
 // Load icons
 Icon.load(SPECTRUM_ICONS);
+Icon.load(SPECTRUM_ICONS_COLOR);
 Icon.load(SPECTRUM_CSS_ICONS);
 
 export default Icon;
