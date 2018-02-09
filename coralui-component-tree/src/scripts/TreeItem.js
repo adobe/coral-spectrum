@@ -19,10 +19,9 @@ import {ComponentMixin} from 'coralui-mixin-component';
 import {Collection} from 'coralui-collection';
 import 'coralui-component-icon';
 import treeItem from '../templates/treeItem';
-import spacer from '../templates/spacer';
 import {transform, commons, validate} from 'coralui-util';
 
-const CLASSNAME = 'coral3-Tree-item';
+const CLASSNAME = 'coral3-TreeView-item';
 
 /**
  Enumeration for {@link TreeItem} variants.
@@ -46,19 +45,6 @@ const ALL_VARIANT_CLASSES = [];
 for (const variantValue in variant) {
   ALL_VARIANT_CLASSES.push(`${CLASSNAME}--${variant[variantValue]}`);
 }
-
-const addTreeItemSpacer = function(item) {
-  if (item) {
-    let parentItem = item._parent;
-    while (parentItem) {
-      const headerNode = item._elements.header;
-      if (headerNode) {
-        headerNode.insertBefore(spacer(), headerNode.firstChild);
-      }
-      parentItem = parentItem._parent;
-    }
-  }
-};
 
 /**
  @class Coral.Tree.Item
@@ -107,7 +93,7 @@ class TreeItem extends ComponentMixin(HTMLElement) {
       handle: 'content',
       tagName: 'coral-tree-item-content',
       insert: function(content) {
-        this._elements.contentContainer.appendChild(content);
+        this._elements.header.appendChild(content);
       }
     });
   }
@@ -156,8 +142,9 @@ class TreeItem extends ComponentMixin(HTMLElement) {
     const header = this._elements.header;
     const subTreeContainer = this._elements.subTreeContainer;
   
-    this.classList.toggle('is-expanded', this._expanded);
+    this.classList.toggle('is-open', this._expanded);
     this.classList.toggle('is-collapsed', !this._expanded);
+    
     header.setAttribute('aria-expanded', this._expanded);
     subTreeContainer.setAttribute('aria-hidden', !this._expanded);
     
@@ -246,8 +233,8 @@ class TreeItem extends ComponentMixin(HTMLElement) {
     this._selected = transform.booleanAttr(value);
     this._reflectAttribute('selected', this._selected);
   
-    this.classList.toggle('is-selected', this._selected);
-    this.setAttribute('aria-selected', this._selected);
+    this._elements.header.classList.toggle('is-selected', this._selected);
+    this._elements.header.setAttribute('aria-selected', this._selected);
     
     this.trigger('coral-tree-item:_selectedchanged');
   }
@@ -267,7 +254,7 @@ class TreeItem extends ComponentMixin(HTMLElement) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
   
-    this.classList.toggle('is-disabled', this._disabled);
+    this._elements.header.classList.toggle('is-disabled', this._disabled);
     this._elements.header.setAttribute('aria-disabled', this._disabled);
     
     this.trigger('coral-tree-item:_disabledchanged');
@@ -297,7 +284,6 @@ class TreeItem extends ComponentMixin(HTMLElement) {
   /** @private */
   _onItemAdded(item) {
     item._parent = this;
-    addTreeItemSpacer(item);
   }
   
   /** @private */
@@ -347,18 +333,9 @@ class TreeItem extends ComponentMixin(HTMLElement) {
     // Render the template and set element references
     const frag = document.createDocumentFragment();
   
-    const templateHandleNames = ['header', 'icon', 'contentContainer', 'subTreeContainer'];
+    const templateHandleNames = ['header', 'icon', 'subTreeContainer'];
     
-    // Support cloning nested structures by moving spacers into the header and existing tree items into the sub tree
-    const header = this.querySelector('.coral3-Tree-header');
-    if (header) {
-      const spacers = header.querySelectorAll('.coral3-Tree-item-spacer');
-      for (let i = 0; i < spacers.length; i++) {
-        this._elements.header.insertBefore(spacers[i], this._elements.header.firstChild);
-      }
-    }
-    
-    const subTree = this.querySelector('.coral3-Tree-subTree');
+    const subTree = this.querySelector('.coral3-TreeView');
     if (subTree) {
       const items = subTree.querySelectorAll('coral-tree-item');
       for (let i = 0; i < items.length; i++) {

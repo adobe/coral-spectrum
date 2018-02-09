@@ -19,7 +19,9 @@ import {ComponentMixin} from 'coralui-mixin-component';
 import {SelectableCollection} from 'coralui-collection';
 import {transform} from 'coralui-util';
 
-const CLASSNAME = 'coral3-Tree';
+const CLASSNAME = 'coral3-TreeView';
+
+const INDICATOR_HIT_SIZE = {x: 30, y: 36};
 
 /**
  @class Coral.Tree
@@ -37,21 +39,21 @@ class Tree extends ComponentMixin(HTMLElement) {
     
     // Attach events
     this._delegateEvents({
-      'click .coral3-Tree-header': '_onItemClick',
-      'click .coral3-Tree-collapseExpand': '_onExpandCollapseClick',
+      'click .coral3-TreeView-link': '_onItemClick',
       'coral-collection:add coral-tree-item': '_onCollectionChange',
       'coral-collection:remove coral-tree-item': '_onCollectionChange',
       // a11y
-      'key:space .coral3-Tree-header': '_onItemClick',
-      'key:enter .coral3-Tree-header': '_onExpandCollapseClick',
-      'key:pageup .coral3-Tree-header': '_onFocusPreviousItem',
-      'key:left .coral3-Tree-header': '_onFocusPreviousItem',
-      'key:up .coral3-Tree-header': '_onFocusPreviousItem',
-      'key:pagedown .coral3-Tree-header': '_onFocusNextItem',
-      'key:right .coral3-Tree-header': '_onFocusNextItem',
-      'key:down .coral3-Tree-header': '_onFocusNextItem',
-      'key:home .coral3-Tree-header': '_onFocusFirstItem',
-      'key:end .coral3-Tree-header': '_onFocusLastItem',
+      'key:space .coral3-TreeView-link': '_onItemClick',
+      'key:enter .coral3-TreeView-link': '_onExpandCollapseClick',
+      'key:pageup .coral3-TreeView-link': '_onFocusPreviousItem',
+      'key:left .coral3-TreeView-link': '_onFocusPreviousItem',
+      'key:up .coral3-TreeView-link': '_onFocusPreviousItem',
+      'key:pagedown .coral3-TreeView-link': '_onFocusNextItem',
+      'key:right .coral3-TreeView-link': '_onFocusNextItem',
+      'key:down .coral3-TreeView-link': '_onFocusNextItem',
+      'key:home .coral3-TreeView-link': '_onFocusFirstItem',
+      'key:end .coral3-TreeView-link': '_onFocusLastItem',
+      'capture:blur .coral3-TreeView-link[tabindex="0"]': '_onItemBlur',
       // private
       'coral-tree-item:_selectedchanged': '_onItemSelectedChanged',
       'coral-tree-item:_disabledchanged': '_onFocusableChanged',
@@ -231,6 +233,12 @@ class Tree extends ComponentMixin(HTMLElement) {
     if (event.target.hasAttribute('coral-interactive') || event.target.closest('[coral-interactive]')) {
       return;
     }
+    
+    // If the indicator is clicked, expand/collapse the tree item
+    if (event.target === event.matchedTarget && event.offsetX <= INDICATOR_HIT_SIZE.x && event.offsetY <= INDICATOR_HIT_SIZE.y) {
+      this._onExpandCollapseClick(event);
+      return;
+    }
   
     // The click was performed on the header so we select the item (parentNode) the selection is toggled
     const item = event.target.closest('coral-tree-item');
@@ -306,14 +314,17 @@ class Tree extends ComponentMixin(HTMLElement) {
     // Change focus
     if (siblingItem !== item) {
       item._elements.header.setAttribute('tabindex', '-1');
+      item._elements.header.classList.remove('focus-ring');
+      
       siblingItem._elements.header.setAttribute('tabindex', '0');
+      siblingItem._elements.header.classList.add('focus-ring');
       siblingItem._elements.header.focus();
     }
   }
   
   /** @private */
   _focusEdgeItem(last) {
-  // Query the focusable item
+    // Query the focusable item
     const focusable = this._getFocusable();
     if (focusable) {
       const focusableItems = this._getFocusableItems();
@@ -386,12 +397,19 @@ class Tree extends ComponentMixin(HTMLElement) {
   
   /** @private */
   _getFocusable() {
-    return this.querySelector('coral-tree-item > .coral3-Tree-header[tabindex="0"]');
+    return this.querySelector('coral-tree-item > .coral3-TreeView-link[tabindex="0"]');
   }
   
   /** @private */
   _getFocusableItems() {
     return this.items.getAll().filter((item) => !item.closest('coral-tree-item[disabled]') && !item.closest('coral-tree-item[hidden]'));
+  }
+  
+  _onItemBlur() {
+    const focused = this.querySelector('.coral3-TreeView-link.focus-ring');
+    if (focused) {
+      focused.classList.remove('focus-ring');
+    }
   }
   
   /** @private */
@@ -400,6 +418,7 @@ class Tree extends ComponentMixin(HTMLElement) {
     const focusable = this._getFocusable();
     if (focusable) {
       focusable.setAttribute('tabindex', '-1');
+      focusable.classList.remove('focus-ring');
     }
   
     // Defined item or first item by default gets the focus

@@ -1,5 +1,5 @@
-<div class="coral3-Tree-header" tabindex="-1" role="tab" id="{{Coral.commons.getUID()}}" handle="header">
-  <coral-icon class="coral3-Tree-collapseExpand" size="S" handle="icon" role="img" icon="chevronRight"></coral-icon>
-  <div class="coral3-Tree-contentContainer" handle="contentContainer"></div>
-</div>
-<div class="coral3-Tree-subTree" handle="subTreeContainer" id="{{Coral.commons.getUID()}}" role="tabpanel"></div>
+<div class="coral3-TreeView-link" tabindex="-1" role="tab" id="{{Coral.commons.getUID()}}" handle="header"></div>
+<js>
+  this.header.insertAdjacentHTML('afterbegin', Coral.Icon._renderSVG('spectrum-css-icon-AccordionChevron', ['coral3-TreeView-indicator']));
+</js>
+<div class="coral3-TreeView" handle="subTreeContainer" id="{{Coral.commons.getUID()}}" role="tabpanel"></div>

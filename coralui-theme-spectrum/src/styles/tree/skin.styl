@@ -15,28 +15,12 @@
  * from Adobe Systems Incorporated.
  */
 
-.coral3-Tree-item {
-  .coral3-Tree-header {
-    &:hover,
-    &:focus {
-      background-color: $tree-background-color-hover;
-    }
-  }
+.coral3-TreeView-link.is-disabled {
+  color: $tree-color-disabled;
+  cursor: default;
 
-  &.is-selected > .coral3-Tree-header {
-    background-color: $tree-background-color-selected;
-
-    &:hover {
-      background-color: $tree-background-color-selected-hover;
-    }
-  }
-
-  &.is-disabled {
-    .coral3-Tree-header,
-    .coral3-Tree-header:hover,
-    .coral3-Tree-header:focus {
-      color: $tree-color-disabled;
-      background-color: transparent;
-    }
+  // @spectrum
+  &:hover:before {
+    background-color: transparent;
   }
 }

@@ -15,68 +15,15 @@
  * from Adobe Systems Incorporated.
  */
 
-.coral3-Tree {
-  display: block;
-}
-
-.coral3-Tree-item {
-  position: relative;
-  display: block;
-
-  &.is-expanded {
-    & > .coral3-Tree-header .coral3-Tree-collapseExpand svg {
-      transform: rotate(90deg);
-    }
-  }
-
-  &.is-disabled {
-    .coral3-Tree-header {
-      cursor: default;
-    }
-  }
-
-  &.coral3-Tree-item--leaf {
-    .coral3-Tree-collapseExpand {
-      visibility : hidden;
-    }
-  }
-}
-
-.coral3-Tree-collapseExpand svg {
-  transition: transform ease 125ms;
-}
-
-.coral3-Tree-header {
-  display: flex;
-  box-sizing: border-box;
-  padding: 0 16*$px 0 16*$px;
-  margin-bottom: 4*$px;
-  border-radius: 4*$px;
-  align-items: center;
-  height: 40*$px;
-  width: 272*$px;
-  cursor: pointer;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  &:focus {
-    outline: none;
-  }
-}
-
-.coral3-Tree-contentContainer {
-  flex: 1;
-  min-width: 0; /* shrink regardless of content */
-}
-
-.coral3-Tree-item-spacer {
-  padding-left : 21*$px;
-}
-
-.coral3-Tree-subTree {
+.coral3-TreeView {
   transition: height ease 250ms;
   overflow: hidden;
+
+  // @spectrum
+  .coral3-TreeView {
+    height: inherit;
+    visibility: inherit;
+  }
 }
 
 @require 'darkest'

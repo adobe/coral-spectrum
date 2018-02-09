@@ -1,27 +1,8 @@
 describe('Coral.Tree', function() {
   // Assert whether an item is properly active or inactive.
   var assertActiveness = function(item, isSelected, isExpanded) {
-    
-    var header = item._elements.header;
-    var subTree = item._elements.subTreeContainer;
-    
-    if (isSelected) {
-      expect(item.classList.contains('is-selected')).to.be.true;
-      expect(item.getAttribute('aria-selected')).to.equal('true');
-    }
-    else {
-      expect(item.classList.contains('is-selected')).to.be.false;
-      expect(item.getAttribute('aria-selected')).to.equal('false');
-    }
-    
-    if (isExpanded) {
-      expect(header.getAttribute('aria-expanded')).to.equal('true');
-      expect(subTree.getAttribute('aria-hidden')).to.equal('false');
-    }
-    else {
-      expect(header.getAttribute('aria-expanded')).to.equal('false');
-      expect(subTree.getAttribute('aria-hidden')).to.equal('true');
-    }
+    expect(item.selected).to.equal(isSelected);
+    expect(item.expanded).to.equal(isExpanded);
   };
   
   describe('Namespace', function() {
@@ -311,24 +292,24 @@ describe('Coral.Tree', function() {
       const el = helpers.build(window.__html__['Coral.Tree.base.html']);
       
       var item = el.items.getAll()[1];
-      item._elements.icon.click();
+      item._elements.header.click();
       
       assertActiveness(item, false, true);
       
-      item._elements.icon.click();
+      item._elements.header.click();
       
       assertActiveness(item, false, false);
     });
     
-    it('should select item in tree when header is clicked', function() {
+    it('should select item in tree when content is clicked', function() {
       const el = helpers.build(window.__html__['Coral.Tree.base.html']);
       
       var item = el.items.getAll()[1];
-      item._elements.header.click();
+      item._elements.content.click();
       
       assertActiveness(item, true, false);
       
-      item._elements.header.click();
+      item._elements.content.click();
       
       assertActiveness(item, false, false);
     });
@@ -717,9 +698,9 @@ describe('Coral.Tree', function() {
     });
     
     it('should have right classes set', function() {
-      expect(el.classList.contains('coral3-Tree')).to.be.true;
+      expect(el.classList.contains('coral3-TreeView')).to.be.true;
       var item = el.items.getAll()[0];
-      expect(item.classList.contains('coral3-Tree-item')).to.be.true;
+      expect(item.classList.contains('coral3-TreeView-item')).to.be.true;
     });
     
     it('should generate header and subtree for tree item with right classes', function() {
@@ -728,8 +709,8 @@ describe('Coral.Tree', function() {
       var subTree = item._elements.subTreeContainer;
       expect(header).not.to.be.null;
       expect(subTree).not.to.be.null;
-      expect(header.classList.contains('coral3-Tree-header')).to.be.true;
-      expect(subTree.classList.contains('coral3-Tree-subTree')).to.be.true;
+      expect(header.classList.contains('coral3-TreeView-link')).to.be.true;
+      expect(subTree.classList.contains('coral3-TreeView')).to.be.true;
     });
   });
   
@@ -746,10 +727,10 @@ describe('Coral.Tree', function() {
       
       expect(checkbox.checked).to.equal(true);
       assertActiveness(item, false, false);
-      item._elements.icon.click();
+      item._elements.header.click();
       
       assertActiveness(item, false, true);
-      item._elements.header.click();
+      item._elements.content.click();
       
       assertActiveness(item, true, true);
     });
@@ -766,10 +747,10 @@ describe('Coral.Tree', function() {
       select.focus();
       
       assertActiveness(item, false, false);
-      item._elements.icon.click();
+      item._elements.header.click();
       
       assertActiveness(item, false, true);
-      item._elements.header.click();
+      item._elements.content.click();
       
       assertActiveness(item, true, true);
     });
@@ -783,10 +764,10 @@ describe('Coral.Tree', function() {
       button.click();
       
       assertActiveness(item, false, false);
-      item._elements.icon.click();
+      item._elements.header.click();
       
       assertActiveness(item, false, true);
-      item._elements.header.click();
+      item._elements.content.click();
       
       assertActiveness(item, true, true);
     });
@@ -802,10 +783,10 @@ describe('Coral.Tree', function() {
       textarea.blur();
       
       assertActiveness(item, false, false);
-      item._elements.icon.click();
+      item._elements.header.click();
       
       assertActiveness(item, false, true);
-      item._elements.header.click();
+      item._elements.content.click();
       
       assertActiveness(item, true, true);
     });
@@ -835,10 +816,10 @@ describe('Coral.Tree', function() {
   
       expect(radio.checked).to.equal(true);
       assertActiveness(item, false, false);
-      item._elements.icon.click();
+      item._elements.header.click();
       
       assertActiveness(item, false, true);
-      item._elements.header.click();
+      item._elements.content.click();
   
       assertActiveness(item, true, true);
     });
