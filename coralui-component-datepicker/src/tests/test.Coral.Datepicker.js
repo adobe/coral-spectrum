@@ -830,7 +830,8 @@ describe('Coral.Datepicker', function() {
         expect(datepicker3.hasAttribute('invalid')).to.equal(false, 'datepicker3 should not have an invalid attribute');
       });
       
-      it('should restore focus to toggle when closed using ESC key', function(done) {
+      // @flaky on FF
+      it.skip('should restore focus to toggle when closed using ESC key', function(done) {
         const el = helpers.build(window.__html__['Coral.Datepicker.type.time.html']);
         el._elements.popover._overlayAnimationTime = 0;
         
