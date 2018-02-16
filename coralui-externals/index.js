@@ -5,6 +5,7 @@ import './polyfills/element.remove.js';
 import './polyfills/classList-partial-shim.js';
 import './polyfills/requestAnimationFrame.js';
 import './polyfills/CustomEvent.js';
+import './polyfills/focus-ring.js';
 // Positioning
 import PopperJS from 'popper.js';
 // Eventing
