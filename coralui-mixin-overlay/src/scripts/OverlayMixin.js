@@ -197,7 +197,7 @@ function createDocumentTabCaptureEls() {
       const top = overlays.top();
       if (top && top.instance.trapFocus === trapFocus.ON) {
         // Focus on the first tabbable element of the top overlay
-        Array.prototype.some.forEach.call(top.instance.querySelectorAll(commons.TABBABLE_ELEMENT_SELECTOR), (item) => {
+        Array.prototype.some.call(top.instance.querySelectorAll(commons.TABBABLE_ELEMENT_SELECTOR), (item) => {
           if (item.offsetParent !== null && !item.hasAttribute('coral-tabcapture')) {
             item.focus();
             return true;
