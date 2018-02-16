@@ -35,11 +35,11 @@ describe('Coral.ColumnView.Item', function() {
       });
 
       it('should be settable', function() {
-        el.icon = 'file';
-        expect(el.icon).to.equal('file');
+        el.icon = 'document';
+        expect(el.icon).to.equal('document');
       
         expect(el._elements.icon).to.exist;
-        expect(el._elements.icon.icon).to.equal('file');
+        expect(el._elements.icon.icon).to.equal('document');
         expect(el._elements.icon.size).to.equal(Coral.Icon.size.SMALL);
 
         // it should be inside the thumbnail content zone

@@ -1165,6 +1165,7 @@ describe('Coral.register', function() {
       expect(el).to.have.property('className', 'first-class second-class third-class');
     });
     
+    // @flaky in FF
     it.skip('should not overwrite pre upgrade classes', function() {
       var el = document.createElement('coral-delayed-upgrade');
       el.className = 'pre-upgrade-class';

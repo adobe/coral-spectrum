@@ -1345,6 +1345,7 @@ describe('Coral.Table', function() {
         expect(table.querySelector('.coral3-Table-row--placeholder')).to.be.null;
       });
       
+      // @flaky
       it.skip('should scroll to the table bottom in sticky mode', function(done) {
         var table = helpers.build(window.__html__['Coral.Table.sticky.orderable.row.html']);
         var row = table.items.first();
@@ -1364,7 +1365,8 @@ describe('Coral.Table', function() {
           });
         }, 100);
       });
-      
+  
+      // @flaky
       it.skip('should scroll to the table top in sticky mode', function(done) {
         var table = helpers.build(window.__html__['Coral.Table.sticky.orderable.row.html']);
         var row = table.items.last();
@@ -2164,7 +2166,8 @@ describe('Coral.Table', function() {
           done();
         }, 100);
       });
-      
+  
+      // @flaky
       it.skip('should add the sticky class and prepare the header cells', function(done) {
         var table = helpers.build(window.__html__['Coral.Table.sticky.empty.html']);
         var wait = table._wait;
@@ -2186,7 +2189,8 @@ describe('Coral.Table', function() {
           });
         }, wait);
       });
-    
+  
+      // @flaky
       it.skip('should calculate head placeholder size if head is sticky', function(done) {
         var table = helpers.build(window.__html__['Coral.Table.resize.html']);
         var wait = table._wait;
@@ -2211,7 +2215,8 @@ describe('Coral.Table', function() {
           done();
         }, wait);
       });
-    
+  
+      // @flaky
       it.skip('should calculate the sticky headercells when table has empty columns', function(done) {
         var table = helpers.build(window.__html__['Coral.Table.sticky.empty.html']);
         var wait = table._wait;

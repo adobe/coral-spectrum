@@ -799,13 +799,13 @@ describe('Coral.CycleButton', function() {
       el.items.first().click();
       expect(el.icon).to.equal('apps', 'The general icon is not apps');
       expect(el._elements.button.icon).to.equal('apps', 'The icon of the the button is not the general one');
-      el.icon = 'viewOn';
+      el.icon = 'visibility';
       
-      expect(el._elements.button.icon).to.equal('viewOn', 'The button icon is not the new defined "viewOn" one');
+      expect(el._elements.button.icon).to.equal('visibility', 'The button icon is not the new defined "visibility" one');
       el._elements.selectList.children[0].click();
       
-      expect(el.icon).to.equal('viewOn', 'The general icon is not apps');
-      expect(el._elements.button.icon).to.equal('viewOn', 'The icon of the button is not the defined default viewOn one');
+      expect(el.icon).to.equal('visibility', 'The general icon is not apps');
+      expect(el._elements.button.icon).to.equal('visibility', 'The icon of the button is not the defined default visibility one');
     });
 
     it('should have the item icon when item is clicked and has a icon defined', function() {

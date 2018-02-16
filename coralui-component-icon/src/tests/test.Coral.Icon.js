@@ -449,16 +449,34 @@ describe('Coral.Icon', function() {
     });
     
     describe('Compat', function() {
+      let warn;
+      let called = 0;
+      
+      beforeEach(() => {
+        warn = console.warn;
+        
+        console.warn = function() {
+          called++;
+        };
+      });
+      
+      afterEach(() => {
+        console.warn = warn;
+        called = 0;
+      });
+      
       it('should capitalize the icon name to match to the new icon name', function() {
         const el = new Coral.Icon();
         el.icon = 'add';
         expect(hasSVGIcon(el, 'Add', true)).to.be.true;
+        expect(called).to.equal(0);
       });
       
       it('should map the old icon name to the new icon name', function() {
         const el = new Coral.Icon();
         el.icon = 'adobe';
         expect(hasSVGIcon(el, 'AdobeLogo', true)).to.be.true;
+        expect(called).to.equal(1);
       });
   
       it('should map to the new icon name based on the light theme', function() {
@@ -471,6 +489,7 @@ describe('Coral.Icon', function() {
         el.icon = 'userCircleColor';
   
         expect(hasSVGIcon(el, 'User-CircleColorLight', true)).to.be.true;
+        expect(called).to.equal(1);
       });
   
       it('should map to the new icon name based on the dark theme', function() {
@@ -483,6 +502,7 @@ describe('Coral.Icon', function() {
         el.icon = 'userCircleColor';
     
         expect(hasSVGIcon(el, 'User-CircleColorDark', true)).to.be.true;
+        expect(called).to.equal(1);
       });
   
       it('should map to the new light icon by default if no theme specified', function() {
@@ -493,6 +513,7 @@ describe('Coral.Icon', function() {
         el.icon = 'userCircleColor';
     
         expect(hasSVGIcon(el, 'User-CircleColorLight', true)).to.be.true;
+        expect(called).to.equal(1);
       });
     });
   });

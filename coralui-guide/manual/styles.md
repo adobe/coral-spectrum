@@ -98,7 +98,7 @@ A composite CSS pattern for Buttons and Textfields.
 ```
 <div class="coral-InputGroup">
   <span class="coral-InputGroup-button">
-    <button is="coral-button" icon="minus" title="Minus"></button>
+    <button is="coral-button" icon="remove" title="Remove"></button>
   </span>
   <input is="coral-textfield" class="coral-InputGroup-input">
   <span class="coral-InputGroup-button">
@@ -162,7 +162,7 @@ A composite CSS pattern for Buttons and Textfields.
 ```
 <div class="coral-InputGroup coral-InputGroup--block">
   <span class="coral-InputGroup-button">
-    <button is="coral-button" icon="minus" title="Minus"></button>
+    <button is="coral-button" icon="remove" title="Remove"></button>
   </span>
   <input is="coral-textfield" class="coral-InputGroup-input">
   <span class="coral-InputGroup-button">
@@ -187,7 +187,7 @@ Add the `coral-Form--vertical` class to render all labels and fields on the same
   <div class="coral-Form-fieldwrapper">
     <label class="coral-Form-fieldlabel">Text (with coral-Form-fieldinfo)</label>
     <span class="coral-Form-field">Read only text</span>
-    <coral-icon id="coral-Form-Aligned-Text-required" class="coral-Form-fieldinfo" icon="infoCircle"></coral-icon>
+    <coral-icon id="coral-Form-Aligned-Text-required" class="coral-Form-fieldinfo" icon="info"></coral-icon>
     <coral-tooltip variant="info" placement="right" target="#coral-Form-Vertical-Text-required">Tooltip Information</coral-tooltip>
   </div>
   <label class="coral-Form-fieldlabel">Aligning buttons left</label>
@@ -211,7 +211,7 @@ Add the `coral-Form--aligned` class to render each label and field pair on the s
   <div class="coral-Form-fieldwrapper">
     <label class="coral-Form-fieldlabel">Text</label>
     <span class="coral-Form-field">Read only text</span>
-    <coral-icon id="coral-Form-Aligned-Text-required" class="coral-Form-fieldinfo" icon="infoCircle"></coral-icon>
+    <coral-icon id="coral-Form-Aligned-Text-required" class="coral-Form-fieldinfo" icon="info"></coral-icon>
     <coral-tooltip variant="info" placement="right" target="#coral-Form-Aligned-Text-required">Tooltip Information</coral-tooltip>
   </div>
 </section>

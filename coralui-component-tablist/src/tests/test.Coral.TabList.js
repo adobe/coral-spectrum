@@ -259,10 +259,10 @@ describe('Coral.TabList', function() {
         var items = el.items.getAll();
         var tabPanelItem = items[0];
   
-        tabPanelItem.icon = 'gear';
+        tabPanelItem.icon = 'settings';
         
         expect(tabPanelItem._elements.icon).to.exist;
-        expect(tabPanelItem._elements.icon.icon).to.equal('gear');
+        expect(tabPanelItem._elements.icon.icon).to.equal('settings');
   
         // By Default, Extra Small icons are used in tab panel
         expect(tabPanelItem._elements.icon.size).to.equal(Coral.Icon.size.EXTRA_SMALL);
