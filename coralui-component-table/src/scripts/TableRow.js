@@ -19,7 +19,7 @@ import {ComponentMixin} from 'coralui-mixin-component';
 import {SelectableCollection} from 'coralui-collection';
 import {transform} from 'coralui-util';
 
-const CLASSNAME = 'coral-Table-row';
+const CLASSNAME = 'coral3-Table-row';
 
 /**
  @class Coral.Table.Row

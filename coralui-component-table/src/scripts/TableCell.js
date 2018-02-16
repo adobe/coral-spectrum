@@ -18,7 +18,7 @@
 import {ComponentMixin} from 'coralui-mixin-component';
 import {transform} from 'coralui-util';
 
-const CLASSNAME = 'coral-Table-cell';
+const CLASSNAME = 'coral3-Table-cell';
 
 /**
  @class Coral.Table.Cell

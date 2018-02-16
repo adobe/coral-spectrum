@@ -57,12 +57,12 @@ describe('Coral.Table', function() {
   describe('Instantiation', function() {
     it('should be possible using new', function() {
       const el = helpers.build(new Coral.Table());
-      expect(el.classList.contains('coral-Table-wrapper')).to.be.true;
+      expect(el.classList.contains('coral3-Table-wrapper')).to.be.true;
     });
   
     it('should be possible using document.createElement', function() {
       const el = helpers.build(document.createElement('table', {is: 'coral-table'}));
-      expect(el.classList.contains('coral-Table-wrapper')).to.be.true;
+      expect(el.classList.contains('coral3-Table-wrapper')).to.be.true;
     });
   
     it('should be possible to clone using markup', function() {
@@ -243,7 +243,7 @@ describe('Coral.Table', function() {
       it('should have a list variant', function() {
         const el = new Coral.Table();
         el.variant = Coral.Table.variant.LIST;
-        expect(el.classList.contains('coral-Table-wrapper--list')).to.be.true;
+        expect(el.classList.contains('coral3-Table-wrapper--list')).to.be.true;
       });
     });
   
@@ -1342,7 +1342,7 @@ describe('Coral.Table', function() {
         }));
         
         expect(row.dragAction).to.be.undefined;
-        expect(table.querySelector('.coral-Table-row--placeholder')).to.be.null;
+        expect(table.querySelector('.coral3-Table-row--placeholder')).to.be.null;
       });
       
       it.skip('should scroll to the table bottom in sticky mode', function(done) {
@@ -1911,11 +1911,11 @@ describe('Coral.Table', function() {
         var table = helpers.build(window.__html__['Coral.Table.orderable.row.html']);
     
         table.on('coral-table:beforeroworder', function() {
-          expect(table.querySelector('.coral-Table-row--placeholder')).to.be.null;
+          expect(table.querySelector('.coral3-Table-row--placeholder')).to.be.null;
         });
     
         table.on('coral-table:roworder', function() {
-          expect(table.querySelector('.coral-Table-row--placeholder')).to.be.null;
+          expect(table.querySelector('.coral3-Table-row--placeholder')).to.be.null;
           done();
         });
     
@@ -2172,7 +2172,7 @@ describe('Coral.Table', function() {
       
         // Because of debouncing
         window.setTimeout(function() {
-          expect(table.classList.contains('coral-Table-wrapper--sticky')).to.be.true;
+          expect(table.classList.contains('coral3-Table-wrapper--sticky')).to.be.true;
         
           getHeaderCells(table.head.rows[0]).forEach(function(headerCell) {
             var computedStyle = window.getComputedStyle(headerCell);
@@ -2305,16 +2305,40 @@ describe('Coral.Table', function() {
         getColumns(table.columns)[0].hidden = true;
   
         getRows([table._elements.table]).forEach(function(row) {
-          expect(row.cells[0].hasAttribute('hidden')).to.be.true;
+          expect(row.cells[0].offsetParent).to.equal(null);
         });
       });
     
-      it('appended cells should be hidden', function(done) {
+      it('appended cells should be hidden', function() {
         var table = helpers.build(window.__html__['Coral.Table.hidden.html']);
         var cell1 = new Coral.Table.Cell();
         var cell2 = new Coral.Table.Cell();
       
-        cell2.hidden = true;
+        var row = table.items.add({});
+        row.appendChild(cell1);
+        row.appendChild(cell2);
+      
+        table.body.appendChild(row);
+        
+        expect(cell1.offsetParent).to.equal(null);
+        expect(cell2.offsetParent).to.not.equal(null);
+      });
+    });
+  
+    describe('#hidden', function() {
+      it('should set the text alignment to right', function() {
+        var table = helpers.build(window.__html__['Coral.Table.base.html']);
+        getColumns(table.columns)[0].alignment = Coral.Table.Column.alignment.RIGHT;
+      
+        getRows([table._elements.table]).forEach(function(row) {
+          expect(getComputedStyle(row.cells[0]).textAlign).to.equal('right');
+        });
+      });
+    
+      it('appended cells should have the text alignment right', function() {
+        var table = helpers.build(window.__html__['Coral.Table.alignment.html']);
+        var cell1 = new Coral.Table.Cell();
+        var cell2 = new Coral.Table.Cell();
       
         var row = table.items.add({});
         row.appendChild(cell1);
@@ -2322,12 +2346,8 @@ describe('Coral.Table', function() {
       
         table.body.appendChild(row);
       
-        // Wait for MO
-        helpers.next(function() {
-          expect(cell1.hidden).to.be.true;
-          expect(cell2.hidden).to.be.false;
-          done();
-        });
+        expect(getComputedStyle(cell1).textAlign).to.equal('right');
+        expect(getComputedStyle(cell2).textAlign).to.not.equal('right');
       });
     });
   

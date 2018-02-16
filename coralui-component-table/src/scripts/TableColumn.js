@@ -16,9 +16,10 @@
  */
 
 import {ComponentMixin} from 'coralui-mixin-component';
+import {alignment} from './TableUtil';
 import {transform, validate} from 'coralui-util';
 
-const CLASSNAME = 'coral-Table-column';
+const CLASSNAME = 'coral3-Table-column';
 
 /**
  Enumeration for {@link TableColumn} sortable direction options.
@@ -68,6 +69,30 @@ const sortableType = {
  @extends {ComponentMixin}
  */
 class TableColumn extends ComponentMixin(HTMLTableColElement) {
+  /**
+   The column cells alignment. The alignment should take the {@link i18n} configuration into account.
+   
+   @type {String}
+   @default TableColumnAlignmentEnum.LEFT
+   @htmlattribute alignment
+   @htmlattributereflected
+   */
+  get alignment() {
+    return this._alignment || alignment.LEFT;
+  }
+  set alignment(value) {
+    const oldValue = this._alignment;
+    
+    value = transform.string(value).toLowerCase();
+    this._alignment = validate.enumeration(alignment)(value) && value || alignment.LEFT;
+    this._reflectAttribute('alignment', this._alignment);
+  
+    // Don't trigger on initialization if alignment is LEFT to improve performance
+    if (!(typeof oldValue === 'undefined' && this._alignment === alignment.LEFT)) {
+      this.trigger('coral-table-column:_alignmentchanged');
+    }
+  }
+  
   /**
    Whether the column has a fixed width.
    
@@ -227,12 +252,20 @@ class TableColumn extends ComponentMixin(HTMLTableColElement) {
    */
   static get sortableType() { return sortableType; }
   
+  /**
+   Returns {@link TableColumn} alignment options.
+   
+   @return {TableColumnAlignmentEnum}
+   */
+  static get alignment() { return alignment; }
+  
   /** @ignore */
   static get observedAttributes() {
     return [
       'fixedwidth',
       'fixedWidth',
       'hidden',
+      'alignment',
       'orderable',
       'sortable',
       'sortabletype',
@@ -251,7 +284,16 @@ class TableColumn extends ComponentMixin(HTMLTableColElement) {
     // Default reflected attributes
     if (!this._sortableType) { this.sortableType = sortableType.ALPHANUMERIC; }
     if (!this._sortableDirection) { this.sortableDirection = sortableDirection.DEFAULT; }
+    if (!this._alignment) { this.alignment = alignment.LEFT; }
   }
+  
+  /**
+   Triggered when {@link TableColumn#alignment} changed.
+   
+   @typedef {CustomEvent} coral-table-column:_alignmentchanged
+   
+   @private
+   */
   
   /**
    Triggered when {@link TableColumn#fixedWidth} changed.

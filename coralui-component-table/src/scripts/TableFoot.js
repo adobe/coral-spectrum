@@ -18,7 +18,7 @@
 import {ComponentMixin} from 'coralui-mixin-component';
 import TableSectionMixin from './TableSectionMixin';
 
-const CLASSNAME = 'coral-Table-foot';
+const CLASSNAME = 'coral3-Table-foot';
 
 /**
  @class Coral.Table.Foot

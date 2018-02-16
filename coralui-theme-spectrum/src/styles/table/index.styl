@@ -1,0 +1,705 @@
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2018 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+
+$table-sort-icon-url = "../embed/SortArrow.svg";
+$table-list-check-icon-url = "../embed/Check.svg";
+$table-drag-handle-icon-url = "../embed/DragHandle.svg";
+
+/* Base */
+.coral3-Table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}
+
+.coral3-Table-headerCell {
+  text-align: left;
+  font-size: 11*$px;
+  font-weight: 700;
+  line-height: 12*$px;
+  letter-spacing: 1*$px;
+  text-transform: uppercase;
+  padding: 4*$px 16*$px;
+  transition: color 125ms ease-in-out;
+}
+
+.coral3-Table-cell {
+  font-size: 14*$px;
+  line-height: 24*$px;
+  padding: 12*$px 16*$px;
+  transition: background-color 125ms ease-in-out;
+}
+
+.coral3-Table-head {
+  .coral3-Table-row:not(:first-of-type) {
+    .coral3-Table-cell,
+    .coral3-Table-headerCell {
+      border-top: 1*$px solid;
+    }
+  }
+}
+
+.coral3-Table-body {
+  .coral3-Table-cell {
+    border-top: 1*$px solid;
+
+    &:first-of-type {
+      border-left: 1*$px solid;
+    }
+
+    &:last-of-type {
+      border-right: 1*$px solid;
+    }
+  }
+
+  .coral3-Table-row {
+    &:first-of-type {
+      .coral3-Table-cell {
+        border-top: 1*$px solid;
+
+        &:first-of-type {
+          border-top-left-radius: 4*$px;
+        }
+
+        &:last-of-type {
+          border-top-right-radius: 4*$px;
+        }
+      }
+    }
+
+    &:last-of-type {
+      .coral3-Table-cell {
+        border-bottom: 1*$px solid;
+
+        &:first-of-type {
+          border-bottom-left-radius: 4*$px;
+        }
+
+        &:last-of-type {
+          border-bottom-right-radius: 4*$px;
+        }
+      }
+    }
+  }
+}
+/* END Base */
+
+/* Template */
+.coral3-Table-wrapper {
+  display: block;
+  overflow: hidden;
+
+  &.is-unselectable {
+    user-select: none;
+  }
+
+  &.is-disabled {
+    .coral3-Table-head {
+      // Prevent sort and order
+      pointer-events: none;
+
+      // Hide sort and order handles
+      .coral3-Table-headerCell {
+        cursor: auto;
+        user-select: initial;
+
+        coral-table-headercell-content {
+          cursor: auto;
+          user-select: initial;
+
+          &:before,
+          &:after {
+            visibility: hidden;
+          }
+        }
+      }
+    }
+
+    .coral3-Table-wrapper-container {
+      border: none;
+    }
+  }
+}
+
+.coral3-Table-wrapper-container {
+  overflow: auto;
+}
+/* END Template*/
+
+/* #fixedWith */
+.coral3-Table-column[fixedwidth] {
+  width: 1*$px;
+}
+
+.coral3-Table-headerCell[fixedwidth] {
+  white-space: nowrap;
+}
+/* END #fixedWidth */
+
+/* #divider */
+.coral3-Table-divider--cell {
+  &.coral3-Table-head {
+    .coral3-Table-cell,
+    .coral3-Table-headerCell {
+      &:not(:last-of-type) {
+        border-right: 1*$px solid;
+      }
+    }
+  }
+
+  &.coral3-Table-body {
+    .coral3-Table-cell:not(:last-of-type) {
+      border-right: 1*$px solid;
+    }
+  }
+}
+
+.coral3-Table-divider--column {
+  &.coral3-Table-head {
+    .coral3-Table-row:not(:first-of-type) {
+      .coral3-Table-cell,
+      .coral3-Table-headerCell {
+        border-top: none;
+      }
+    }
+    .coral3-Table-cell,
+    .coral3-Table-headerCell {
+      &:not(:last-of-type) {
+        border-right: 1*$px solid;
+      }
+    }
+  }
+
+  &.coral3-Table-body {
+    .coral3-Table-row:not(:first-of-type) {
+      .coral3-Table-cell {
+        border-top: none;
+      }
+    }
+
+    .coral3-Table-cell:not(:last-of-type) {
+      border-right: 1*$px solid;
+    }
+  }
+}
+
+.coral3-Table-divider--none {
+  &.coral3-Table-head {
+    .coral3-Table-cell,
+    .coral3-Table-headerCell {
+      border-top: none;
+    }
+  }
+
+  &.coral3-Table-body {
+    .coral3-Table-row:not(:first-of-type) {
+      .coral3-Table-cell {
+        border-top: none;
+      }
+    }
+  }
+}
+/* END #divider */
+
+/* #sticky */
+.coral3-Table-wrapper--sticky {
+  position: relative;
+
+  .coral3-Table-wrapper-container {
+    border: 1*$px solid;
+    border-radius: 4*$px;
+  }
+
+  .coral3-Table {
+    // Fill the gap from the empty head.
+    // @todo it should be multipled by the number of head rows
+    margin-top: -1*$px;
+  }
+
+  // Borders are applied by the container in sticky state so we remove the outer body cell borders and radius
+  .coral3-Table-body {
+    .coral3-Table-cell {
+      &:first-of-type {
+        border-left :none;
+      }
+
+      &:last-of-type {
+        border-right: none;
+      }
+    }
+
+    .coral3-Table-row {
+      &:first-of-type .coral3-Table-cell {
+        border-radius: 0;
+        border-top: none;
+      }
+
+      &:last-of-type .coral3-Table-cell {
+        border-radius: 0;
+        border-bottom: none;
+      }
+    }
+  }
+
+  .coral3-Table-head[sticky] {
+    // Don't show the header while layout calculations are performed
+    &.is-hidden {
+      visibility: hidden;
+    }
+
+    &.coral3-Table-divider--row coral-table-headercell-content {
+      border-top: 1*$px solid;
+    }
+
+    &.coral3-Table-divider--column coral-table-headercell-content {
+      border-right: 1*$px solid;
+    }
+
+    &.coral3-Table-divider--cell coral-table-headercell-content {
+      border-top: 1*$px solid;
+      border-right: 1*$px solid;
+    }
+
+    .coral3-Table-row:first-child coral-table-headercell-content {
+      border-top: none;
+    }
+
+    .coral3-Table-headerCell {
+      // We can't set 0 or else screen readers will ignore the header cells in sticky state
+      height: 0.5*$px;
+      line-height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      border-top: none;
+      overflow: hidden;
+
+      &:last-of-type coral-table-headercell-content {
+        border-right: none;
+      }
+    }
+
+    // The header cell content is styled to be displayed in sticky state
+    coral-table-headercell-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position absolute;
+      box-sizing: border-box;
+      line-height: 12*$px;
+      min-height: 20*$px;
+      padding: 4*$px 16*$px;
+      margin-left: -16*$px;
+    }
+  }
+}
+
+// @polyfill ie/edge
+// polyfill for edge is necessary because flex + ::after (used for sorting icons) don't play well together
+.coral3-Table-wrapper--IE {
+  .coral3-Table-head[sticky] {
+    coral-table-headercell-content {
+      display: block;
+    }
+  }
+}
+/* END #sticky */
+
+/* #sortable */
+.coral3-Table-headerCell[sortable] {
+  cursor: pointer;
+  user-select: none;
+
+  coral-table-headercell-content {
+    position: relative;
+    cursor: pointer;
+
+    &:after {
+      content: '';
+      background-size: 10*$px 12*$px;
+      background-position: 50%;
+      background-repeat: no-repeat;
+      position: absolute;
+      height: 100%;
+      width: 10*$px;
+      padding-left: 10*$px;
+      top: 0;
+      transition: transform 125ms ease-in-out;
+    }
+  }
+
+  &[sortabledirection="descending"] {
+    coral-table-headercell-content:after {
+      transform: rotateZ(180deg);
+    }
+  }
+}
+/* END #sortable */
+
+/* #selectable */
+.coral3-Table-wrapper[selectable] {
+  .coral3-Table-row {
+    &[coral-table-rowselect]:hover:not(.is-selected) .coral3-Table-cell {
+      cursor: pointer;
+    }
+
+    &.is-selected {
+      &[coral-table-rowselect] {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.coral3-Table-row[selectable] {
+  .coral3-Table-cell {
+    &[coral-table-cellselect] {
+      position: relative;
+      cursor: pointer;
+
+      &:hover {
+        &:after {
+          content: "";
+          background-size: 18*$px 18*$px;
+          background-position: 50% 50%;
+          background-repeat: no-repeat;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          left: 0;
+        }
+      }
+    }
+
+    &.is-selected {
+      position: relative;
+
+      &:after {
+        content: "";
+        background-size: 18*$px 18*$px;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+      }
+    }
+  }
+}
+/* END #selectable */
+
+/* #variant */
+// Align design to Miller Columns since thumbnail selection pattern was removed in Spectrum
+.coral3-Table-wrapper--list {
+  .coral3-Table-cell:first-of-type {
+    white-space: nowrap;
+
+    coral-checkbox[coral-table-rowselect] {
+      & + img {
+        height: 24*$px;
+        width: 24*$px;
+        line-height: 24*$px;
+        vertical-align: top;
+        object-fit: cover;
+        margin-top: 4*$px;
+        margin-left: 4*$px;
+      }
+
+      & + coral-icon {
+        vertical-align: middle;
+        text-align: center;
+        width: 24*$px;
+        margin-left: 4*$px;
+        margin-top: 7*$px;
+      }
+    }
+  }
+}
+
+// Remove borders and radius for quiet variant
+.coral3-Table-wrapper--quiet {
+  .coral3-Table-body {
+    .coral3-Table-row {
+      &:first-of-type {
+        .coral3-Table-cell {
+          &:first-of-type {
+            border-top-left-radius: 0;
+          }
+
+          &:last-of-type {
+            border-top-right-radius: 0;
+          }
+        }
+      }
+
+      &:last-of-type {
+        .coral3-Table-cell {
+          &:first-of-type {
+            border-bottom-left-radius: 0;
+          }
+
+          &:last-of-type {
+            border-bottom-right-radius: 0;
+          }
+        }
+      }
+    }
+  }
+
+  &.coral3-Table-wrapper--sticky {
+    .coral3-Table-wrapper-container {
+      border-radius: 0;
+    }
+
+    .coral3-Table-body {
+      .coral3-Table-row {
+        &:first-of-type {
+          .coral3-Table-cell {
+            border-top: none;
+          }
+        }
+
+        &:last-of-type {
+          .coral3-Table-cell {
+            border-bottom: none;
+          }
+        }
+      }
+    }
+  }
+}
+/* END #variant */
+
+/* #lockable */
+.coral3-Table-wrapper[lockable] .coral3-Table-row {
+  [coral-table-rowlock] {
+    visibility: hidden;
+  }
+
+  &[locked] {
+    .coral3-Table-headerCell,
+    .coral3-Table-cell {
+      [coral-table-rowlock] {
+        visibility: visible;
+      }
+    }
+  }
+
+  &:hover {
+    [coral-table-rowlock] {
+      visibility: visible;
+    }
+
+    &:not(.is-selected) .coral3-Table-cell {
+      cursor: pointer;
+    }
+  }
+}
+/* END #lockable */
+
+/* #orderable */
+.coral3-Table-headerCell,
+.coral3-Table-row {
+  &.is-dragging,
+  &.is-before,
+  &.is-after {
+    position: relative;
+    -ms-touch-action: none;
+    touch-action: none;
+    user-select: none;
+  }
+
+  &.is-dragging {
+    z-index: 10;
+  }
+}
+
+.coral3-Table-row.is-dragging {
+  .coral3-Table-cell,
+  .coral3-Table-headerCell {
+    // @todo is it really required ?
+    border-radius: 0 !important;
+  }
+}
+
+.coral3-Table-row--placeholder {
+  visibility: hidden;
+}
+
+.coral3-Table-wrapper {
+  // Keep the table top border while dragging
+  &.is-draggedFirstItem {
+    .coral3-Table-body .coral3-Table-row:nth-of-type(2) {
+      .coral3-Table-cell {
+        &:first-of-type {
+          border-top-left-radius: 4*$px;
+        }
+
+        &:last-of-type {
+          border-top-right-radius: 4*$px;
+        }
+      }
+    }
+  }
+
+  // Hide the drag handles when the table is sorted
+  &.is-sorted .coral3-Table-row [coral-table-roworder] {
+    visibility: hidden;
+  }
+
+  &:not(.coral3-Table-wrapper--sticky) {
+    .coral3-Table-row--placeholder {
+      visibility: visible;
+
+      .coral3-Table-cell,
+      .coral3-Table-headerCell {
+        // Hide the content, but leave the borders visible
+        text-indent: -1000*$px;
+      }
+    }
+
+    // Keep the table bottom border while dragging
+    &.is-draggedLastItem  {
+      .coral3-Table-body .coral3-Table-row:nth-last-of-type(2) {
+        .coral3-Table-cell {
+          border-bottom: 1*$px solid;
+
+          &:first-of-type {
+            border-bottom-left-radius: 4*$px;
+          }
+
+          &:last-of-type {
+            border-bottom-right-radius: 4*$px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.coral3-Table-wrapper--sticky {
+  .coral3-Table-headerCell[orderable] {
+    position: static;
+  }
+
+  // If sticky, the container border is used instead of the row border
+  &.is-draggedFirstItem {
+    .coral3-Table-body .coral3-Table-row:nth-of-type(2) {
+      .coral3-Table-cell {
+        border-top: none;
+      }
+    }
+  }
+}
+
+[coral-table-roworder] {
+  &:not(:disabled):not(.is-disabled) {
+    // Fallback if grab cursor is not supported
+    cursor: move;
+    cursor: -webkit-grab;
+    cursor: grab;
+
+    -ms-touch-action: none;
+    touch-action: none;
+    user-select: none;
+
+    &:active {
+      // Fallback if grabbing cursor is not supported
+      cursor: move !important;
+      cursor: -webkit-grabbing !important;
+      cursor: grabbing !important;
+    }
+  }
+}
+
+.coral3-Table-headerCell[orderable] {
+  position: relative;
+
+  coral-table-headercell-content {
+    position: relative;
+
+    &:before {
+      content: '';
+      background-size: 12*$px 12*$px;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      position: absolute;
+      height: 100%;
+      width: 12*$px;
+      margin-left: -12*$px;
+      top: 0;
+
+      // Fallback if grab cursor is not supported
+      cursor: move;
+      cursor: -webkit-grab;
+      cursor: grab;
+    }
+  }
+
+  // Support non sticky and sticky state
+  &.is-dragging coral-table-headercell-content,
+  coral-table-headercell-content.is-dragging {
+    &:before {
+      // Fallback if grabbing cursor is not supported
+      cursor: move !important;
+      cursor: -webkit-grabbing !important;
+      cursor: grabbing !important;
+    }
+  }
+}
+/* END #orderable */
+
+/* #a11y */
+.coral3-Table-headerCell {
+  &:focus,
+  &.is-focused,
+  coral-table-headercell-content:focus,
+  coral-table-headercell-content.is-focused {
+    outline: none;
+  }
+}
+
+.coral3-Table-row {
+  &:focus,
+  &.is-focused {
+    outline: none;
+
+    // Adds left focus bar
+    .coral3-Table-cell:first-of-type {
+      position: relative;
+
+      &:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        border-left: 2*$px solid;
+        box-sizing: border-box;
+      }
+    }
+  }
+}
+/* END #a11y */
+@require 'light';
+@require 'lightest';
+@require 'dark';
+@require 'darkest';

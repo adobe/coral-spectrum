@@ -25,16 +25,13 @@ import TableHead from './TableHead';
 import TableBody from './TableBody';
 import TableFoot from './TableFoot';
 import 'coralui-component-button';
-import 'coralui-component-checkbox';
+import {Checkbox} from 'coralui-component-checkbox';
 import base from '../templates/base';
 import {SelectableCollection} from 'coralui-collection';
-import {getCellByIndex, getColumns, getCells, getContentCells, getHeaderCells, getRows, getSiblingsOf, getIndexOf, watchForWebFontLoad, divider} from './TableUtil';
+import {getCellByIndex, getColumns, getCells, getContentCells, getHeaderCells, getRows, getSiblingsOf, getIndexOf, divider} from './TableUtil';
 import {transform, validate, commons, Keys} from 'coralui-util';
 
-// Handles relayouting once web font is loaded
-watchForWebFontLoad();
-
-const CLASSNAME = 'coral-Table-wrapper';
+const CLASSNAME = 'coral3-Table-wrapper';
 
 /**
  Enumeration for {@link Table} variants
@@ -43,11 +40,14 @@ const CLASSNAME = 'coral-Table-wrapper';
  
  @property {String} DEFAULT
  A default table.
+ @property {String} QUIET
+ A quiet table with transparent borders and background.
  @property {String} LIST
- A list table using thumbnails as selectable checkboxes.
+ A table with the first column used for selection.
  */
 const variant = {
   DEFAULT: 'default',
+  QUIET: 'quiet',
   LIST: 'list'
 };
 
@@ -101,7 +101,7 @@ class Table extends ComponentMixin(HTMLTableElement) {
     // Events
     this._delegateEvents({
       // Table specific
-      'global:coral-commons:_webfontload': '_resetLayout',
+      'global:coral-commons:_webfontactive': '_resetLayout',
       'change [coral-table-select]': '_onSelectAll',
       'capture:scroll [handle="container"]': '_onScroll',
   
@@ -154,6 +154,7 @@ class Table extends ComponentMixin(HTMLTableElement) {
       'coral-table-head:_contentchanged': '_onHeadContentChanged',
       'coral-table-body:_contentchanged': '_onBodyContentChanged',
       'coral-table-body:_empty': '_onBodyEmpty',
+      'coral-table-column:_alignmentchanged': '_onAlignmentChanged',
       'coral-table-column:_fixedwidthchanged': '_onFixedWidthChanged',
       'coral-table-column:_orderablechanged': '_onColumnOrderableChanged',
       'coral-table-column:_sortablechanged': '_onColumnSortableChanged',
@@ -287,6 +288,14 @@ class Table extends ComponentMixin(HTMLTableElement) {
   
     this.classList.remove(...ALL_VARIANT_CLASSES);
     this.classList.add(`${CLASSNAME}--${this._variant}`);
+  
+    // @compat
+    const body = this.body;
+    if (body) {
+      const rows = getRows([body]);
+      // Use the first column as selection column
+      rows.forEach(row => this._toggleSelectionCheckbox(row));
+    }
   }
   
   /**
@@ -550,7 +559,7 @@ class Table extends ComponentMixin(HTMLTableElement) {
       
       // The row placeholder indicating where the dragged element will be dropped
       const placeholder = row.cloneNode(true);
-      placeholder.classList.add('coral-Table-row--placeholder');
+      placeholder.classList.add('coral3-Table-row--placeholder');
       
       // Prepare the row position before inserting its placeholder
       row.style.top = `${rowBoundingClientRect.top - tableBoundingClientRect.top}px`;
@@ -885,7 +894,7 @@ class Table extends ComponentMixin(HTMLTableElement) {
             const rows = getRows([table.body]);
             if (rows.length) {
               lastSelectedItem = rows[0];
-              lastSelectedItem.selected = true;
+              lastSelectedItem.set('selected', true, true);
             }
           }
           
@@ -908,15 +917,15 @@ class Table extends ComponentMixin(HTMLTableElement) {
               // Direction change
               if (!before && lastSelectedDirection === 'up' || before && lastSelectedDirection === 'down') {
                 selectionRange.forEach((item) => {
-                  item.selected = false;
+                  item.set('selected', false, true);
                 });
               }
               
               // Select item
               const selectionRangeRow = selectionRange[before ? 0 : selectionRange.length - 1];
-              selectionRangeRow.selected = true;
+              selectionRangeRow.set('selected', true, true);
               getSiblingsOf(selectionRangeRow, row, rangeQuery).forEach((item) => {
-                item.selected = true;
+                item.set('selected', true, true);
               });
             }
             else {
@@ -926,19 +935,19 @@ class Table extends ComponentMixin(HTMLTableElement) {
               if (selection.some((item) => !item.hasAttribute('selected'))) {
                 // Select all items in between
                 selection.forEach((item) => {
-                  item.selected = true;
+                  item.set('selected', true, true);
                 });
                 
                 // Deselect selected item right before/after the selection range
                 getSiblingsOf(row, 'tr[is="coral-table-row"]:not([selected])', rangeQuery).forEach((item) => {
-                  item.selected = false;
+                  item.set('selected', false, true);
                 });
               }
               else {
                 // Deselect items
                 selection[before ? 'push' : 'unshift'](lastSelectedItem);
                 selection.forEach((item) => {
-                  item.selected = false;
+                  item.set('selected', false, true);
                 });
               }
             }
@@ -1007,9 +1016,9 @@ class Table extends ComponentMixin(HTMLTableElement) {
     dragData.style.cells = [];
     getCells(dragElement).forEach((cell) => {
       // Backup styles to restore them later
-      dragData.style.cells.push(cell.content.getAttribute('style'));
+      dragData.style.cells.push(cell.getAttribute('style'));
       // Cells will shrink otherwise
-      cell.content.style.width = window.getComputedStyle(cell).width;
+      cell.style.width = window.getComputedStyle(cell).width;
     });
     
     dragElement.style.position = 'absolute';
@@ -1094,9 +1103,9 @@ class Table extends ComponentMixin(HTMLTableElement) {
     dragElement.dragAction.destroy();
     
     // Restore specific styling
-    dragElement.setAttribute('style', dragData.style.row);
+    dragElement.setAttribute('style', dragData.style.row || '');
     getCells(dragElement).forEach((cell, i) => {
-      cell.content.setAttribute('style', dragData.style.cells[i]);
+      cell.setAttribute('style', dragData.style.cells[i] || '');
     });
     
     // Trigger the event on table
@@ -1333,6 +1342,9 @@ class Table extends ComponentMixin(HTMLTableElement) {
         addedNode._toggleSelectable(table.selectable);
         addedNode._toggleOrderable(table.orderable);
         addedNode._toggleLockable(table.lockable);
+  
+        // @compat
+        this._toggleSelectionCheckbox(addedNode);
         
         const selectedItems = table.selectedItems;
         if (addedNode.selected) {
@@ -1502,6 +1514,12 @@ class Table extends ComponentMixin(HTMLTableElement) {
     table.classList.toggle(IS_DISABLED, disable);
   }
   
+  _onAlignmentChanged(event) {
+    event.stopImmediatePropagation();
+  
+    this._resetAlignmentColumns();
+  }
+  
   /** @private */
   _onFixedWidthChanged(event) {
     event.stopImmediatePropagation();
@@ -1584,7 +1602,7 @@ class Table extends ComponentMixin(HTMLTableElement) {
   _onColumnHiddenChanged(event) {
     event.stopImmediatePropagation();
     
-    this._syncHiddenColumn(event.target, true);
+    this._resetHiddenColumns(true);
   }
   
   _onBeforeColumnSort(event) {
@@ -1943,26 +1961,6 @@ class Table extends ComponentMixin(HTMLTableElement) {
   }
   
   /** @private */
-  _syncHiddenColumn(column, resetLayout) {
-    const table = this;
-    const columnIndex = getIndexOf(column);
-    
-    if (columnIndex !== -1) {
-      // Apply hidden on all cells in the column
-      getRows([table._elements.table]).forEach((row) => {
-        const cell = getCellByIndex(row, columnIndex);
-        if (cell) {
-          cell.hidden = column.hidden;
-        }
-      });
-      
-      if (resetLayout) {
-        table._resetLayout();
-      }
-    }
-  }
-  
-  /** @private */
   _isSorted() {
     let column = null;
     const isSorted = getColumns(this.columns).some((col) => {
@@ -2241,10 +2239,48 @@ class Table extends ComponentMixin(HTMLTableElement) {
   }
   
   /** @private */
-  _resetHiddenColumns() {
+  _resetHiddenColumns(resetLayout) {
+    this.id = this.id || commons.getUID();
+    
+    // Delete styles
+    this._elements.hiddenStyle.innerHTML = '';
+    
+    // Render styles for each column
     getColumns(this.columns).forEach((column) => {
-      this._syncHiddenColumn(column);
-    }, this);
+      if (column.hidden) {
+        const columnIndex = getIndexOf(column) + 1;
+        
+        this._elements.hiddenStyle.innerHTML += `
+           #${this.id} .coral3-Table-cell:nth-child(${columnIndex}),
+           #${this.id} .coral3-Table-headerCell:nth-child(${columnIndex}) {
+             display: none;
+           }
+        `;
+      }
+    });
+    
+    if (resetLayout) {
+      this._resetLayout();
+    }
+  }
+  
+  _resetAlignmentColumns() {
+    this.id = this.id || commons.getUID();
+  
+    // Delete styles
+    this._elements.alignmentStyle.innerHTML = '';
+  
+    getColumns(this.columns).forEach((column) => {
+      const columnAlignment = column.alignment;
+      const columnIndex = getIndexOf(column) + 1;
+      
+      this._elements.alignmentStyle.innerHTML += `
+         #${this.id} .coral3-Table-cell:nth-child(${columnIndex}),
+         #${this.id} .coral3-Table-headerCell:nth-child(${columnIndex}) {
+           text-align: ${columnAlignment};
+         }
+      `;
+    });
   }
   
   /** @private */
@@ -2293,6 +2329,41 @@ class Table extends ComponentMixin(HTMLTableElement) {
     }
   }
   
+  // @compat
+  _toggleSelectionCheckbox(row) {
+    // Use the first column as selection column
+    if (this._variant === variant.LIST) {
+      const cell = getContentCells(row)[0];
+      if (cell) {
+        cell.removeAttribute('coral-table-rowselect');
+    
+        // Support cloneNode
+        cell._checkbox = cell._checkbox || cell.querySelector('coral-checkbox[coral-table-rowselect]');
+        
+        // Render checkbox if none
+        if (!cell._checkbox) {
+          cell._checkbox = new Checkbox();
+          cell._checkbox.setAttribute('coral-table-rowselect', '');
+        }
+  
+        // Sync selection
+        cell._checkbox[row.selected ? 'setAttribute' : 'removeAttribute']('checked', '');
+        
+        // Add checkbox
+        cell.insertBefore(cell._checkbox, cell.firstChild);
+      }
+    }
+    else {
+      // Remove selection column
+      const cell = getContentCells(row)[0];
+  
+      // Remove checkbox
+      if (cell && cell._checkbox) {
+        cell._checkbox.remove();
+      }
+    }
+  }
+  
   /** @private */
   _setHeaderCellScope(headerCell, tableSection) {
     // Add appropriate scope depending on whether header cell is in THEAD or TBODY
@@ -2304,21 +2375,7 @@ class Table extends ComponentMixin(HTMLTableElement) {
   
   /**  @private */
   _handleMutations(mutations) {
-    let resetHiddenColumns = false;
-  
     mutations.forEach((mutation) => {
-      // Sync added nodes
-      for (let i = 0; i < mutation.addedNodes.length; i++) {
-        const addedNode = mutation.addedNodes[i];
-      
-        resetHiddenColumns = resetHiddenColumns || (addedNode instanceof TableHeaderCell ||
-          addedNode instanceof TableCell ||
-          addedNode instanceof TableRow ||
-          addedNode instanceof TableHead ||
-          addedNode instanceof TableBody ||
-          addedNode instanceof TableFoot);
-      }
-    
       // Sync removed nodes
       for (let k = 0; k < mutation.removedNodes.length; k++) {
         const removedNode = mutation.removedNodes[k];
@@ -2334,11 +2391,6 @@ class Table extends ComponentMixin(HTMLTableElement) {
         }
       }
     }, this);
-  
-    // Sync hidden columns
-    if (resetHiddenColumns) {
-      this._resetHiddenColumns();
-    }
   
     this._resetLayout();
   }
@@ -2421,7 +2473,7 @@ class Table extends ComponentMixin(HTMLTableElement) {
     this.columns = columns;
     
     // cloneNode support
-    const wrapper = this.querySelector('.coral-Table-wrapper-container');
+    const wrapper = this.querySelector('.coral3-Table-wrapper-container');
     const object = this.querySelector('object');
     
     if (wrapper) { wrapper.remove(); }

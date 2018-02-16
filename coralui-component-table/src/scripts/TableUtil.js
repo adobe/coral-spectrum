@@ -15,8 +15,6 @@
  * from Adobe Systems Incorporated.
  */
 
-import {events} from 'coralui-util';
-
 /** @ignore */
 const getIndexOf = (el) => {
   const parent = el.parentNode;
@@ -80,30 +78,6 @@ const getSiblingsOf = (el, selector, type) => {
 };
 
 /** @ignore */
-const watchForWebFontLoad = () => {
-  // Background: sticky header cell size is calculated based on the non sticky header cell size.
-  // On initialization, the size might be calculated before the Typekit font is loaded. In result, the calculated size
-  // differs from the size with the new font.
-  // Adding a resize listener to header cells is too processing heavy (possibly many header cells).
-  // And table and table section (<coral-table-head>, <coral-table-row> etc.) are not capturing the size change.
-  const root = document.documentElement;
-  if (root.className.indexOf('wf-inactive') !== -1 || root.className.indexOf('wf-loading') !== -1) {
-    const webFontLoadObserver = new MutationObserver(() => {
-      if (root.className.indexOf('wf-active') !== -1) {
-        webFontLoadObserver.disconnect();
-        events.dispatch('coral-commons:_webfontload');
-      }
-    });
-    
-    // Watch for class changes
-    webFontLoadObserver.observe(root, {
-      attributes: true,
-      attributeFilter: ['class']
-    });
-  }
-};
-
-/** @ignore */
 const listToArray = (list) => {
   const res = [];
   for (let i = 0, listCount = res.length = list.length; i < listCount; i++) {
@@ -161,8 +135,27 @@ const divider = {
   CELL: 'cell'
 };
 
+/**
+ Enumeration for {@link TableColumn} alignment options.
+ 
+ @typedef {Object} TableColumnAlignmentEnum
+ 
+ @property {String} LEFT
+ Left alignment.
+ @property {String} CENTER
+ Center alignment.
+ @property {String} RIGHT
+ Right alignment.
+ */
+const alignment = {
+  LEFT: 'left',
+  CENTER: 'center',
+  RIGHT: 'right'
+};
+
 export {
   divider,
+  alignment,
   getColumns,
   getCells,
   getContentCells,
@@ -170,6 +163,5 @@ export {
   getCellByIndex,
   getIndexOf,
   getSiblingsOf,
-  getRows,
-  watchForWebFontLoad
+  getRows
 };

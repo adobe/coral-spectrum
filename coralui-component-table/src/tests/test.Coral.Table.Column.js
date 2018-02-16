@@ -13,16 +13,17 @@ describe('Coral.Table.Column', function() {
   describe('Instantiation', function() {
     it('should be possible using new', function() {
       const el = helpers.build(new Coral.Table.Column());
-      expect(el.classList.contains('coral-Table-column')).to.be.true;
+      expect(el.classList.contains('coral3-Table-column')).to.be.true;
     });
     
     it('should be possible using document.createElement', function() {
       const el = helpers.build(document.createElement('col', {is: 'coral-table-column'}));
-      expect(el.classList.contains('coral-Table-column')).to.be.true;
+      expect(el.classList.contains('coral3-Table-column')).to.be.true;
     });
   });
   
   describe('API', function() {
+    
     describe('#fixedWidth', function() {});
   
     describe('#hidden', function() {});
@@ -42,6 +43,13 @@ describe('Coral.Table.Column', function() {
       it('should default to sortableDirection.DEFAULT', function() {
         const el = new Coral.Table.Column();
         expect(el.sortableDirection).to.equal(Coral.Table.Column.sortableDirection.DEFAULT);
+      });
+    });
+  
+    describe('#alignment', function() {
+      it('should default to alignment.LEFT', function() {
+        const el = new Coral.Table.Column();
+        expect(el.alignment).to.equal(Coral.Table.Column.alignment.LEFT);
       });
     });
   });

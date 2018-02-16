@@ -1,0 +1,404 @@
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2018 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+
+/* Base */
+.coral3-Table-headerCell {
+  color: $table-header-cell-color;
+}
+
+.coral3-Table-cell {
+  background-color: $table-background-color;
+  color: $table-cell-color;
+}
+
+.coral3-Table-head {
+  .coral3-Table-row:not(:first-of-type) {
+    .coral3-Table-cell,
+    .coral3-Table-headerCell {
+      border-top-color: $table-border-color;
+    }
+  }
+}
+
+.coral3-Table-body {
+  .coral3-Table-cell {
+    border-top-color: $table-border-color;
+
+    &:first-of-type {
+      border-left-color: $table-border-color;
+    }
+
+    &:last-of-type {
+      border-right-color: $table-border-color;
+    }
+  }
+
+  .coral3-Table-row {
+    &:first-of-type {
+      .coral3-Table-cell {
+        border-top-color: $table-border-color;
+      }
+    }
+
+    &:last-of-type {
+      .coral3-Table-cell {
+        border-bottom-color: $table-border-color;
+      }
+    }
+  }
+}
+
+.coral3-Table-divider--cell {
+  &.coral3-Table-head {
+    .coral3-Table-cell,
+    .coral3-Table-headerCell {
+      &:not(:last-of-type) {
+        border-right-color: $table-border-color;
+      }
+    }
+  }
+
+  &.coral3-Table-body {
+    .coral3-Table-cell:not(:last-of-type) {
+      border-right-color: $table-border-color;
+    }
+  }
+}
+
+.coral3-Table-divider--column {
+  &.coral3-Table-head {
+    .coral3-Table-cell,
+    .coral3-Table-headerCell {
+      &:not(:last-of-type) {
+        border-right-color: $table-border-color;
+      }
+    }
+  }
+
+  &.coral3-Table-body {
+    .coral3-Table-cell:not(:last-of-type) {
+      border-right-color: $table-border-color;
+    }
+  }
+}
+/* END Base */
+
+/* #sticky */
+.coral3-Table-wrapper--sticky {
+  .coral3-Table-wrapper-container {
+    border-color: $table-border-color;
+  }
+
+  .coral3-Table-head[sticky] {
+    .coral3-Table-row:last-of-type {
+      .coral3-Table-headerCell {
+        border-top: none;
+      }
+    }
+
+    &.coral3-Table-divider--row coral-table-headercell-content {
+      border-top-color: $table-border-color;
+    }
+
+    &.coral3-Table-divider--column coral-table-headercell-content {
+      border-right-color: $table-border-color;
+    }
+
+    &.coral3-Table-divider--cell coral-table-headercell-content {
+      border-top-color: $table-border-color;
+      border-right-color: $table-border-color;
+    }
+  }
+}
+/* END #sticky */
+
+/* #variant */
+.coral3-Table-wrapper--quiet {
+  .coral3-Table-cell {
+    background: transparent;
+  }
+
+  .coral3-Table-body {
+    .coral3-Table-cell {
+      &:first-of-type {
+        border-left-color: transparent;
+      }
+
+      &:last-of-type {
+        border-right-color: transparent;
+      }
+    }
+  }
+
+  &.coral3-Table-wrapper--sticky {
+    .coral3-Table-wrapper-container {
+      border-left-color: transparent;
+      border-right-color: transparent;
+    }
+  }
+
+  .coral3-Table-row[selectable] {
+    .coral3-Table-cell {
+      &[coral-table-cellselect] {
+        &:hover {
+          background-color: $table-quiet-background-color-hover;
+        }
+      }
+    }
+  }
+
+  &.coral3-Table-wrapper[lockable] .coral3-Table-row {
+    &:hover {
+      &:not(.is-selected) .coral3-Table-cell {
+        background-color: $table-quiet-background-color-hover;
+      }
+    }
+  }
+}
+/* END #variant */
+
+/* #sortable */
+.coral3-Table-headerCell[sortable] {
+  &:hover {
+    color: $table-header-cell-color-hover;
+  }
+
+  &[sortabledirection="default"] {
+    &:hover {
+      coral-table-headercell-content:after {
+        background-image: svgImport($table-sort-icon-url, 'path {fill: '+ $table-header-cell-icon-color +'}');
+        opacity: .5;
+      }
+    }
+  }
+
+  &[sortabledirection="ascending"] {
+    coral-table-headercell-content:after {
+      background-image: svgImport($table-sort-icon-url, 'path {fill: '+ $table-header-cell-icon-color +'}');
+    }
+
+    &:hover {
+      coral-table-headercell-content:after {
+        background-image: svgImport($table-sort-icon-url, 'path {fill: '+ $table-header-cell-icon-color-hover +'}');
+      }
+    }
+  }
+
+  &[sortabledirection="descending"] {
+    coral-table-headercell-content:after {
+      background-image: svgImport($table-sort-icon-url, 'path {fill: '+ $table-header-cell-icon-color +'}');
+    }
+
+    &:hover {
+      coral-table-headercell-content:after {
+        background-image: svgImport($table-sort-icon-url, 'path {fill: '+ $table-header-cell-icon-color-hover +'}');
+      }
+    }
+  }
+}
+/* END #sortable */
+
+/* #selectable */
+.coral3-Table-wrapper[selectable] {
+  .coral3-Table-row {
+    &[coral-table-rowselect]:not(.is-selected) {
+      &:hover {
+        .coral3-Table-cell {
+          background-color: $table-background-color-hover;
+        }
+      }
+    }
+
+    &.is-selected {
+      .coral3-Table-cell {
+        background-color: $table-background-color-selected;
+      }
+
+      &:hover {
+        .coral3-Table-cell {
+          background-color: $table-background-color-selected-hover;
+        }
+      }
+
+      &[coral-table-rowselect] {
+        .coral3-Table-cell {
+          background-color: $table-background-color-selected;
+        }
+
+        &:hover {
+          .coral3-Table-cell {
+            background-color: $table-background-color-selected-hover;
+          }
+        }
+      }
+    }
+  }
+
+  &.coral3-Table-wrapper--quiet {
+    .coral3-Table-row {
+      &[coral-table-rowselect]:not(.is-selected) {
+        &:hover {
+          .coral3-Table-cell {
+            background-color: $table-quiet-background-color-hover;
+          }
+        }
+      }
+
+      &.is-selected {
+        .coral3-Table-cell {
+          background-color: $table-quiet-background-color-selected;
+        }
+
+        &:hover {
+          .coral3-Table-cell {
+            background-color: $table-quiet-background-color-selected-hover;
+          }
+        }
+
+        &[coral-table-rowselect] {
+          .coral3-Table-cell {
+            background-color: $table-quiet-background-color-selected;
+          }
+
+          &:hover {
+            .coral3-Table-cell {
+              background-color: $table-quiet-background-color-selected-hover;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.coral3-Table-row[selectable] {
+  .coral3-Table-cell {
+    &[coral-table-cellselect] {
+      &:hover {
+        background-color: $table-background-color-hover;
+
+        &:after {
+          background-image: svgImport($table-list-check-icon-url, 'path {fill: white}');
+        }
+      }
+    }
+
+    &.is-selected {
+      &:after {
+        background-color: $table-thumbnail-background-color-selected;
+        background-image: svgImport($table-list-check-icon-url, 'path {fill: white}');
+      }
+    }
+  }
+}
+/* END #selectable */
+
+/* #lockable */
+.coral3-Table-wrapper[lockable] .coral3-Table-row {
+  [coral-table-rowlock] {
+    &:hover {
+      opacity: 1 !important;
+    }
+  }
+
+  &[locked] {
+    .coral3-Table-headerCell,
+    .coral3-Table-cell {
+      [coral-table-rowlock] {
+        opacity: 1;
+      }
+    }
+  }
+
+  &:hover {
+    [coral-table-rowlock] {
+      opacity: .2;
+    }
+
+    &:not(.is-selected) .coral3-Table-cell {
+      background-color: $table-background-color-hover;
+    }
+  }
+}
+/* END #lockable */
+
+/* #orderable */
+.coral3-Table-row.is-dragging {
+  .coral3-Table-cell,
+  .coral3-Table-headerCell {
+    opacity: .8;
+  }
+}
+
+.coral3-Table-wrapper {
+  &:not(.coral3-Table-wrapper--sticky) {
+    .coral3-Table-row--placeholder {
+      .coral3-Table-cell,
+      .coral3-Table-headerCell {
+        background: transparent;
+      }
+    }
+
+  // Keep the table bottom border while dragging
+    &.is-draggedLastItem  {
+      .coral3-Table-body .coral3-Table-row:nth-last-of-type(2) {
+        .coral3-Table-cell {
+          border-bottom-color: $table-border-color;
+        }
+      }
+    }
+  }
+}
+
+.coral3-Table-headerCell[orderable] {
+  &:not([sortable]):hover {
+    color: $table-header-cell-color-hover;
+  }
+
+  coral-table-headercell-content:before {
+    background-image: svgImport($table-drag-handle-icon-url, 'circle {fill: '+ $table-header-cell-icon-color +'}');
+  }
+
+  &:hover {
+    coral-table-headercell-content:before {
+      background-image: svgImport($table-drag-handle-icon-url, 'circle {fill: '+ $table-header-cell-icon-color-hover +'}');
+    }
+  }
+}
+/* END #orderable */
+
+/* a11y */
+.coral3-Table-headerCell {
+  &:focus,
+  &.is-focused,
+  coral-table-headercell-content:focus,
+  coral-table-headercell-content.is-focused {
+    color: $table-header-cell-color-focused;
+  }
+}
+
+.coral3-Table-row {
+  &:focus,
+  &.is-focused {
+    .coral3-Table-cell:first-of-type {
+      &:after {
+        border-left-color: $table-row-focused-color;
+      }
+    }
+  }
+}
+/* END a11y */

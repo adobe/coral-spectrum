@@ -19,7 +19,7 @@ import {ComponentMixin} from 'coralui-mixin-component';
 import TableSectionMixin from './TableSectionMixin';
 import {transform} from 'coralui-util';
 
-const CLASSNAME = 'coral-Table-head';
+const CLASSNAME = 'coral3-Table-head';
 
 /**
  @class Coral.Table.Head
