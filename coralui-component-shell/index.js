@@ -126,6 +126,7 @@ export {
   ShellWorkspace,
   ShellSolutionSwitcher,
   ShellSolutions,
+  ShellSolutionsHeader,
   ShellSolution,
   ShellSolutionLabel,
   ShellOrgSwitcher,
