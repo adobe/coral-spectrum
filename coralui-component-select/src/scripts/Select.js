@@ -642,9 +642,12 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
   /** @private */
   _hideOptions() {
-    this._elements.overlay.open = false;
-    
-    this.trigger('coral-select:hideitems');
+    // Don't close the overlay if selection = multiple
+    if (!this.multiple) {
+      this._elements.overlay.open = false;
+  
+      this.trigger('coral-select:hideitems');
+    }
   }
   
   /** @ignore */

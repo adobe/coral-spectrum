@@ -1943,23 +1943,6 @@ describe('Coral.Select', function() {
       el._elements.button.click();
     });
 
-    it('should focus the button when an item is selected and multiple=true', function(done) {
-      const el = helpers.build(window.__html__['Coral.Select.placeholder.multiple.html']);
-      el.on('coral-overlay:open', function() {
-        // selects the 2nd item in the list
-        el._elements.list.items.getAll()[1].click();
-      }, true);
-      
-      el.on('coral-overlay:close', function() {
-        expect(document.activeElement).to.equal(el._elements.button);
-  
-        done();
-      }, true);
-
-      // opens the overlay
-      el._elements.button.click();
-    });
-
     it('should focus the button when user interacts with the native select', function(done) {
       const el = helpers.build(window.__html__['Coral.Select.base.html']);
       // we fake the native input
@@ -1978,6 +1961,22 @@ describe('Coral.Select', function() {
 
         done();
       });
+    });
+  
+    it('should keep the overlay open if multiple=true and an item is selected', function(done) {
+      const el = helpers.build(window.__html__['Coral.Select.placeholder.multiple.html']);
+      
+      el.on('coral-overlay:open', function() {
+        // selects the 2nd item in the list
+        el._elements.list.items.getAll()[1].click();
+        
+        expect(el._elements.overlay.open).to.be.true;
+        
+        done();
+      }, true);
+    
+      // opens the overlay
+      el._elements.button.click();
     });
 
     it('should close the overlay using esc key', function(done) {
