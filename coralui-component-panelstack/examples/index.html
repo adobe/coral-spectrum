@@ -51,7 +51,9 @@
     </section>
 
     <script>
-      Coral.events.on('click', '.cycle', function() {
+      Coral.events.on('click', '.cycle', function(event) {
+        event.preventDefault();
+
         var panel = document.getElementById(this.dataset.target);
         var items = panel.items.getAll();
         var selectedItem = panel.selectedItem;
