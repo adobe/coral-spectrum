@@ -18,7 +18,7 @@
 import {ComponentMixin} from 'coralui-mixin-component';
 import {FormFieldMixin} from 'coralui-mixin-formfield';
 import base from '../templates/base';
-import {transform} from 'coralui-util';
+import {transform, commons} from 'coralui-util';
 
 const CLASSNAME = 'coral3-ToggleSwitch';
 
@@ -36,7 +36,10 @@ class Switch extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     super();
     
     // Make sure the events from the FormField are attached
-    this._delegateEvents(this._events);
+    this._delegateEvents(commons.extend(this._events, {
+      'capture:focus .coral3-ToggleSwitch-input': '_onFocus',
+      'capture:blur .coral3-ToggleSwitch-input': '_onBlur'
+    }));
     
     // Prepare templates
     this._elements = {
@@ -44,6 +47,9 @@ class Switch extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       label: this.querySelector('coral-switch-label') || document.createElement('coral-switch-label')
     };
     base.call(this._elements);
+  
+    // Pre-define labellable element
+    this._labellableElement = this._elements.input;
   
     // Check if the label is empty whenever we get a mutation
     this._observer = new MutationObserver(this._hideLabelIfEmpty.bind(this));
@@ -209,6 +215,14 @@ class Switch extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     if (hiddenValue !== this._elements.labelWrapper.hidden) {
       this._elements.labelWrapper.hidden = hiddenValue;
     }
+  }
+  
+  _onFocus(){
+    this._elements.input.classList.add('focus-ring');
+  }
+  
+  _onBlur(){
+    this._elements.input.classList.remove('focus-ring');
   }
   
   get _contentZones() { return {'coral-switch-label': 'label'}; }
