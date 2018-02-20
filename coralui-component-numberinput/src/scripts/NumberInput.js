@@ -95,6 +95,9 @@ class NumberInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._elements = {};
     base.call(this._elements);
   
+    // Pre-define labellable element
+    this._labellableElement = this._elements.input;
+  
     // Default is null
     this._min = this._max = null;
   }
@@ -711,16 +714,6 @@ class NumberInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._elements.liveregion.setAttribute('role', 'presentation');
     this._elements.liveregion.setAttribute('aria-hidden', true);
     this._clearLiveRegion();
-  }
-  
-  /**
-   Modified to target the input instead of the button. This is used by the Coral.mixin.formField to be able to
-   properly label the component.
-   
-   @private
-   */
-  _getLabellableElement() {
-    return this._elements.input;
   }
   
   /** @ignore */
