@@ -92,6 +92,9 @@ class FileUpload extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // Prepare templates
     this._elements = {};
     base.call(this._elements);
+  
+    // Pre-define labellable element
+    this._labellableElement = this._elements.input;
     
     // Used for items
     this._uploadQueue = [];
@@ -275,6 +278,19 @@ class FileUpload extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
     // Set aria-labelledby attribute on the labellable element joining ids array into space-delimited list of ids.
     this._elements.input.setAttribute('aria-labelledby', ids.join(' '));
+  
+    if (labelledBy) {
+      // Set label for attribute
+      const labelElement = document.getElementById(labelledBy);
+      if (labelElement && labelElement.tagName === 'LABEL') {
+        labelElement.setAttribute('for', this._elements.input.id);
+        this._labelElement = labelElement;
+      }
+    }
+    // Remove label for attribute
+    else if (this._labelElement) {
+      this._labelElement.removeAttribute('for');
+    }
   }
   
   /**
