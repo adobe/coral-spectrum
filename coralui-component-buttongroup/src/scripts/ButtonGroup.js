@@ -75,6 +75,9 @@ class ButtonGroup extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._elements = {};
     base.call(this._elements);
   
+    // Pre-define labellable element
+    this._labellableElement = this;
+  
     // save initial selection (used for reset)
     this._initalSelectedValues = [];
     
@@ -850,15 +853,6 @@ class ButtonGroup extends FormFieldMixin(ComponentMixin(HTMLElement)) {
         }
       }
     }
-  }
-  
-  /**
-   Modifies the accessibility target to be the ButtonGroup itself and not any of the internal buttons.
-   
-   @private
-   */
-  _getLabellableElement() {
-    return this;
   }
   
   /**
