@@ -70,20 +70,6 @@ class ColorInputSlider extends Slider {
     barStyle.filter = `progid:DXImageTransform.Microsoft.gradient(startColorstr='${stops[0]}', endColorstr='${stops[1]}', gradientType=1)`;
   }
   
-  /**
-   Inherited from {@link FormFieldMixin#labelledBy}.
-   */
-  get labelledBy() {
-    return super.labelledBy;
-  }
-  set labelledBy(value) {
-    super.labelledBy = value;
-  
-    if (this.labelledBy) {
-      this._updateForAttributes(this.labelledBy, this._getLabellableElement().id);
-    }
-  }
-  
   /** @override */
   _getTemplate() {
     return sliderBase;

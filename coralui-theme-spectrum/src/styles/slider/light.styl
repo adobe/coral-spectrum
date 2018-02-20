@@ -1,7 +1,7 @@
 /*
  * ADOBE CONFIDENTIAL
  *
- * Copyright 2017 Adobe Systems Incorporated
+ * Copyright 2018 Adobe Systems Incorporated
  * All Rights Reserved.
  *
  * NOTICE:  All information contained herein is, and remains
@@ -15,16 +15,9 @@
  * from Adobe Systems Incorporated.
  */
 
-coral-slider-item {
-  display: none;
-}
+$slider-handle-border-color = rgb(38, 128, 235);
+$slider-handle-background-color = rgb(38, 128, 235);
 
-// @spectrum
-.spectrum-Slider-handle.is-focused {
-  border-width: 8*$px;
+.coral--light {
+  @import 'skin.styl'
 }
-
-@require 'light';
-@require 'lightest';
-@require 'dark';
-@require 'darkest';

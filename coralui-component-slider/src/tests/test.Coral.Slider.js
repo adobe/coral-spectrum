@@ -220,13 +220,13 @@ describe('Coral.Slider', function() {
         target: handle
       });
       
-      expect(el._elements.handles[0]).to.equal(document.activeElement);
+      expect(el._elements.handles[0].classList.contains('is-focused')).to.be.true;
       
       el._blur({
         target: handle
       });
   
-      expect(el._elements.handles[0]).to.not.equal(document.activeElement);
+      expect(el._elements.handles[0].classList.contains('is-focused')).to.be.false;
     });
     
     it('decrease with left key', function() {

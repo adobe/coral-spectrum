@@ -1,7 +1,7 @@
 /*
  * ADOBE CONFIDENTIAL
  *
- * Copyright 2017 Adobe Systems Incorporated
+ * Copyright 2018 Adobe Systems Incorporated
  * All Rights Reserved.
  *
  * NOTICE:  All information contained herein is, and remains
@@ -15,16 +15,10 @@
  * from Adobe Systems Incorporated.
  */
 
-coral-slider-item {
-  display: none;
-}
-
 // @spectrum
-.spectrum-Slider-handle.is-focused {
-  border-width: 8*$px;
+.coral3-Slider:not(.coral3-Slider--color) {
+  .coral3-Slider-handle.is-focused {
+    border-color: $slider-handle-border-color;
+    background-color: $slider-handle-background-color;
+  }
 }
-
-@require 'light';
-@require 'lightest';
-@require 'dark';
-@require 'darkest';

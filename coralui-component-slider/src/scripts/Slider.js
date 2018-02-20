@@ -76,6 +76,9 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._elements = {};
     this._getTemplate().call(this._elements);
   
+    // Pre-define labellable element
+    this._labellableElement = this._elements.leftInput;
+  
     // Content zone
     this._elements.content = this.querySelector('coral-slider-content') || document.createElement('coral-slider-content');
   
@@ -393,39 +396,16 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
    Inherited from {@link FormFieldMixin#labelledBy}.
    */
   get labelledBy() {
-    return this._elements.handles.length === 1 ? this._elements.inputs[0].getAttribute('aria-labelledby') : this.getAttribute('aria-labelledby');
+    return super.labelledBy;
   }
   set labelledBy(value) {
-    this._labelledBy = transform.string(value);
-  
-    // Removing the labels
-    if (!this._labelledBy) {
-      this._updateForAttributes(this.labelledBy, this._elements.inputs[0].id, true);
-      this.removeAttribute('aria-labelledby');
+    super.labelledBy = value;
     
-      this._elements.handles.forEach((handle, i) => {
-        handle.removeAttribute('aria-labelledby');
-        this._elements.inputs[i].removeAttribute('aria-labelledby');
-      }, this);
-    }
-    // Adding labels
-    else {
-      if (this._elements.handles.length === 1) {
-        this._elements.handles[0].setAttribute('aria-labelledby', this._labelledBy);
-        this._elements.inputs[0].setAttribute('aria-labelledby', this._labelledBy);
-      }
-      else {
-        this.setAttribute('aria-labelledby', this._labelledBy);
-    
-        this._elements.handles.forEach((handle, i) => {
-          const label = `${this._labelledBy} ${handle.querySelector('label').id}`;
+    if (this._elements.inputs.length > 1) {
+      const input = this._elements.inputs[1];
+      const labelledBy = this.labelledBy;
       
-          handle.setAttribute('aria-labelledby', label);
-          this._elements.inputs[i].setAttribute('aria-labelledby', label);
-        }, this);
-      }
-      
-      this._updateForAttributes(this._labelledBy, this._elements.inputs[0].id);
+      input[labelledBy ? 'setAttribute' : 'removeAttribute']('aria-labelledby', labelledBy);
     }
   }
   
@@ -672,7 +652,7 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // Depending on support for input[type=range],
     // the event.target could be either the handle or its child input.
     // Use closest() to locate the actual handle.
-    event.target.closest(`.${CLASSNAME_HANDLE}`).focus();
+    event.target.closest(`.${CLASSNAME_HANDLE}`).classList.add('is-focused');
     
     events.on('touchstart.CoralSlider', this._onInteraction);
     events.on('mousedown.CoralSlider', this._onInteraction);
@@ -699,7 +679,7 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // Depending on support for input[type=range],
     // the event.target could be either the handle or its child input.
     // Use closest() to locate the actual handle.
-    event.target.closest(`.${CLASSNAME_HANDLE}`).blur();
+    event.target.closest(`.${CLASSNAME_HANDLE}`).classList.remove('is-focused');
     
     events.off('.CoralSlider');
   }
