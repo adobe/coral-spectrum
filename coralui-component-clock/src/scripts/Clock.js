@@ -83,6 +83,9 @@ class Clock extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // Prepare templates
     this._elements = {};
     base.call(this._elements);
+  
+    // Pre-define labellable element
+    this._labellableElement = this;
   }
   
   /**
@@ -502,16 +505,6 @@ class Clock extends FormFieldMixin(ComponentMixin(HTMLElement)) {
         this.trigger('change');
       }
     }
-  }
-  
-  /**
-   Modified the label target to be the clock itself and not the first input. This is used by the
-   <code>Coral.mixin.formField</code> to be able to properly label the component.
-   
-   @private
-   */
-  _getLabellableElement() {
-    return this;
   }
   
   /**
