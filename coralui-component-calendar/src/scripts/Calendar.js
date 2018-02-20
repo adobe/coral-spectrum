@@ -222,6 +222,9 @@ class Calendar extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // Prepare templates
     this._elements = {};
     calendar.call(this._elements);
+  
+    // Pre-define labellable element
+    this._labellableElement = this;
 
     // Internal keeper of the month that is currently on display.
     this._cursor = null;
