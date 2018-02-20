@@ -122,6 +122,9 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // Creates and stores the contents of the popover separately
     this._calendarFragment = popoverContent.call(this._elements);
   
+    // Pre-define labellable element
+    this._labellableElement = this._elements.input;
+  
     const popoverId = this._elements.popover.id;
     const events = {};
     events[`global:click #${popoverId} coral-calendar`] = '_onCalendarDayClick';
@@ -561,15 +564,6 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       this.setAttribute('aria-expanded', 'false');
       this.setAttribute('aria-owns', this._elements.popover.id);
     }
-  }
-  
-  /**
-   Sets the correct labellable target.
-   
-   @protected
-   */
-  _getLabellableElement() {
-    return this._elements.input;
   }
   
   /** @ignore */
