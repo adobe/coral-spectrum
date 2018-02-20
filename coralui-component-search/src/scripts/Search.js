@@ -68,6 +68,9 @@ class Search extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // Prepare templates
     this._elements = {};
     base.call(this._elements);
+  
+    // Pre-define labellable element
+    this._labellableElement = this._elements.input;
   }
   
   /**
@@ -303,15 +306,6 @@ class Search extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
     // If we've been cleared, trigger the event
     this.trigger('coral-search:clear');
-  }
-  
-  /**
-   Modified to target the input instead of the button.
- 
-   @private
-   */
-  _getLabellableElement() {
-    return this._elements.input;
   }
   
   // overrides the behavior from mixin-formfield
