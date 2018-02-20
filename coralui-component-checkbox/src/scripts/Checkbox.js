@@ -52,6 +52,9 @@ class Checkbox extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     };
     base.call(this._elements);
   
+    // Pre-define labellable element
+    this._labellableElement = this._elements.input;
+  
     // Check if the label is empty whenever we get a mutation
     this._observer = new MutationObserver(this._hideLabelIfEmpty.bind(this));
   
