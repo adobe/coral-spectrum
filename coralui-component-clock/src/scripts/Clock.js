@@ -299,7 +299,7 @@ class Clock extends FormFieldMixin(ComponentMixin(HTMLElement)) {
    */
   get labelledBy() {
     // Get current aria-labelledby attribute on the labellable element.
-    let labelledBy = this._getLabellableElement().getAttribute('aria-labelledby');
+    let labelledBy = this.getAttribute('aria-labelledby');
   
     // If a labelledBy attribute has been defined,
     if (labelledBy) {
@@ -327,17 +327,25 @@ class Clock extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     if (labelledBy) {
       // prepend the labelledBy value to the ids array
       ids.unshift(labelledBy);
-    
-      // Keep labelledBy property and labelledby attribute in sync.
-      this._reflectAttribute('labelledby', labelledBy);
   
       // Set aria-labelledby attribute on the labellable element joining ids array into space-delimited list of ids.
-      this._getLabellableElement().setAttribute('aria-labelledby', ids.join(' '));
+      this.setAttribute('aria-labelledby', ids.join(' '));
+  
+      // Set label for attribute
+      const labelElement = document.getElementById(labelledBy);
+      if (labelElement && labelElement.tagName === 'LABEL') {
+        labelElement.setAttribute('for', this._elements.hours.id);
+        this._labelElement = labelElement;
+      }
     }
     else {
-      // labelledBy property is null, remove the labelledby attribute.
-      this.removeAttribute('labelledby');
+      // labelledBy property is null, remove the aria-labelledby attribute.
       this.removeAttribute('aria-labelledby');
+  
+      // Remove label for attribute
+      if (this._labelElement) {
+        this._labelElement.removeAttribute('for');
+      }
     }
   }
   
