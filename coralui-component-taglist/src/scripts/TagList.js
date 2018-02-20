@@ -73,6 +73,9 @@ class TagList extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       'coral-tag:_connected': '_onTagConnected'
     }));
   
+    // Pre-define labellable element
+    this._labellableElement = this;
+  
     this._itemToFocusAfterDelete = null;
   }
   
@@ -466,11 +469,6 @@ class TagList extends FormFieldMixin(ComponentMixin(HTMLElement)) {
         itemToFocusAfterDelete = undefined;
       }
     });
-  }
-  
-  // Inherited
-  _getLabellableElement() {
-    return this;
   }
   
   /** @private */
