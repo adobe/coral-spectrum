@@ -15,41 +15,19 @@
  * from Adobe Systems Incorporated.
  */
 
-coral-select-item {
-  display: none;
-}
+.coral-InputGroup-button .coral3-Button {
+  color: $inputgroup-button-color;
+  background-color: $inputgroup-button-background-color;
+  border-color: $inputgroup-button-border-color;
 
-.coral3-Dropdown {
-  .coral3-Dropdown-tagList {
-    display: none;
+  &:hover {
+    color: $inputgroup-color-hover;
+    background-color: $inputgroup-button-background-color-hover;
+    border-color: $inputgroup-button-border-color-hover;
   }
 
-  .coral3-Dropdown-select {
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    display: none;
-
-    width: 100%;
-    height: 32*$px;
-
-    // allows the size to match the size of the button
-    -webkit-appearance: none;
-    -moz-appearance: none;
-  }
-
-  .coral3-Button--dropdown {
-    .coral3-Dropdown-label .coral3-Icon,
-    .coral3-Dropdown-invalidIcon {
-      margin-top: 0;
-    }
-  }
-}
-
-.coral3-Dropdown--native {
-  .coral3-Dropdown-select {
-    display: block;
-    opacity: 0.01;
+  &:active {
+    background-color: $inputgroup-button-background-color-active;
+    border-color: $inputgroup-button-border-color-active;
   }
 }

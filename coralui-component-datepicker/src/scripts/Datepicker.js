@@ -42,7 +42,7 @@ const variant = {
   QUIET: 'quiet'
 };
 
-const CLASSNAME = 'coral-InputGroup';
+const CLASSNAME = 'coral3-InputGroup';
 
 // builds a string containing all possible variant classnames. This will be used to remove
 // classnames when the variant changes.

@@ -56,16 +56,12 @@ module.exports = [
   },
   // CSS only components
   {
-    spectrum: /\.spectrum-DecoratedTextfield/g,
-    coral: '.coral-DecoratedTextfield'
-  },
-  {
-    spectrum: /\.spectrum-InputGroup/g,
-    coral: '.coral-InputGroup'
-  },
-  {
     spectrum: /\.spectrum-Link/g,
     coral: '.coral-Link'
+  },
+  {
+    spectrum: /\.spectrum-FieldGroup/g,
+    coral: '.coral-RadioGroup'
   },
   {
     spectrum: /\.spectrum-Table-headCell/g,
@@ -87,6 +83,10 @@ module.exports = [
   {
     spectrum: /\.spectrum-Rule/g,
     coral: '.coral-Rule'
+  },
+  {
+    spectrum: /\.spectrum-FieldLabel/g,
+    coral: '.coral-FieldLabel'
   },
   // @spectrum Ignore Shell to avoid clashing as it'll be removed in future versions of Spectrum CSS
   {

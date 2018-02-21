@@ -1,0 +1,240 @@
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2018 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+
+$form-vmargin-min = 8*$px;
+// produces 15px separation between field and next label
+$form-vertical-vmargin-max = 6*$px;
+$form-aligned-vmargin-max = 15*$px;
+$form-hmargin = 8*$px;
+$form-vmargin = 7*$px;
+$form-aligned-label-min-width = 104*$px;
+
+// creates 5px from the icon
+$form-vertical-label-line-height = 27*$px;
+$form-aligned-label-line-height = 32*$px;
+
+$form-fieldset-font-size = 18*$px;
+$form-fieldset-line-height = 24*$px;
+
+/**
+ * Indicates the fieldset.
+ * .fieldset is used instead of <fieldset> as <legend> cannot be styled as per requirement.
+ */
+.coral-Form-fieldset {
+  // matches 30px marging at the bottom
+  margin: 0 10*$px 26*$px 10*$px;
+  border: none;
+}
+
+/**
+ * Indicates the legend of fieldset.
+ */
+.coral-Form-fieldset-legend {
+  display: block;
+  margin: 8*$px 0 10*$px 0;
+
+  font-weight: 700;
+  font-style: normal;
+
+  font-size: $form-fieldset-font-size;
+  line-height: $form-fieldset-line-height;
+}
+
+.coral-Form-fieldset:first-of-type {
+  border: none;
+}
+
+.coral-Form-fieldset:first-of-type .coral-Form-fieldset-legend {
+  margin-top: 25*$px;
+}
+
+/**
+ * Indicates that the form is using vertical layout, where the label is placed above the field.
+ */
+.coral-Form--vertical .coral-Form-field {
+  margin: 0 0 $form-vertical-vmargin-max;
+}
+
+.coral-Form--vertical .coral-Form-fieldlabel {
+  display: block;
+  line-height: $form-vertical-label-line-height;
+}
+
+.coral-Form--vertical .coral-Form-fieldwrapper {
+  position: relative;
+  display: block;
+}
+
+.coral-Form--vertical .coral-Form-fieldwrapper--alignRight {
+  text-align: right;
+}
+
+.coral-Form--vertical .coral-Form-fieldwrapper .coral-Form-fieldinfo,
+.coral-Form--vertical .coral-Form-fieldwrapper .coral-Form-fielderror {
+  position: absolute;
+  top: 4*$px;
+  right: 0;
+}
+
+.coral-Form--vertical .coral-Form-fieldwrapper--singleline {
+  clearfix();
+}
+
+.coral-Form--vertical .coral-Form-fieldwrapper--singleline .coral-Form-field {
+  margin: 0;
+}
+
+.coral-Form--vertical .coral-Form-fieldwrapper--singleline .coral-Form-fieldinfo,
+.coral-Form--vertical .coral-Form-fieldwrapper--singleline .coral-Form-fielderror {
+  float: left;
+  position: static;
+  margin-left: $form-hmargin;
+  margin-top: $form-vmargin;
+}
+
+/**
+ * Indicates that the form is using aligned layout, where the label and the field are placed on the same line.
+ */
+.coral-Form--aligned .coral-Form-field {
+  float: left;
+  margin: 0 0 $form-aligned-vmargin-max 0;
+}
+
+.coral-Form--aligned .coral-Form-fieldwrapper {
+  clear: left;
+  display: block;
+  margin: 0 0 $form-aligned-vmargin-max 0;
+
+  clearfix();
+}
+
+.coral-Form--aligned .coral-Form-fieldwrapper--singleline {
+  margin-bottom: $form-vmargin-min;
+}
+
+.coral-Form--aligned .coral-Form-fieldset {
+  clearfix();
+}
+
+.coral-Form--aligned .coral-Form-fieldlabel {
+  float: left;
+  clear: left;
+  margin: 0 $form-hmargin 0 0;
+  line-height: $form-aligned-label-line-height;
+  min-width: $form-aligned-label-min-width;
+}
+
+.coral-Form--aligned .coral-Form-fieldlabel:empty + .coral-Form-field {
+  margin-left: $form-hmargin + $form-aligned-label-min-width;
+}
+
+.coral-Form--aligned .coral-Form-fieldwrapper .coral-Form-field {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.coral-Form--aligned .coral-Form-fieldwrapper .coral-Form-fieldlabel {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.coral-Form--aligned .coral-Form-fieldwrapper .coral-Form-fieldinfo
+.coral-Form--aligned .coral-Form-fieldwrapper .coral-Form-fielderror {
+  float: left;
+  margin-left: $form-hmargin;
+  margin-top: $form-vmargin;
+}
+
+.coral-Form--aligned .coral-Form-fieldset {
+  // because of float, the margin of the field/fieldwrapper ($form-aligned-vmargin-max) is not collapsed
+  // so reduce the margin-bottom of the fieldset (30px)
+  margin-bottom: 10*$px; // 30 - 20
+}
+
+.coral-Form--vertical .coral-Form-field.coral3-Autocomplete {
+  display: block;
+  width: 100%;
+}
+
+.coral-Form--vertical {
+  .coral-Form-field.coral3-Calendar {
+    display: block;
+    width: 100%;
+    max-width: 500*$px;
+  }
+}
+
+.coral-Form--vertical {
+  .coral-Form-field.coral3-Checkbox {
+    display: block;
+  }
+
+  .coral-Form-fieldwrapper--singleline .coral-Form-field.coral3-Checkbox {
+    float: left;
+  }
+}
+
+.coral-Form--vertical .coral-Form-field.coral3-ColorInput {
+  width: 100%;
+}
+
+.coral-Form--vertical .coral-Form-field.coral-DecoratedTextfield {
+  display: block;
+  width: 100%;
+}
+
+.coral-Form--vertical .coral-Form-field.coral-InputGroup {
+  display: table;
+  width: 100%;
+}
+
+.coral-Form--vertical .coral-Form-field.coral3-Multifield {
+  display: block;
+}
+
+.coral-Form--vertical {
+
+  .coral-Form-field.coral3-Radio {
+    display: block;
+  }
+
+  .coral-Form-fieldwrapper--singleline .coral-Form-field.coral3-Radio {
+    float: left;
+  }
+}
+
+.coral-Form--vertical .coral-Form-field.coral3-Select {
+  display: block;
+  width: 100%;
+}
+
+.coral-Form--vertical .coral-Form-field.coral3-Slider {
+  display: block;
+
+  &:not(.coral3-Slider--vertical) {
+    width: 100%;
+  }
+}
+
+.coral-Form--vertical .coral-Form-field.coral3-Textfield{
+  display: block;
+  width: 100%;
+}
+
+.coral-Form--aligned .coral-Form-field.coral3-Textfield--multiline {
+  display: block;
+}

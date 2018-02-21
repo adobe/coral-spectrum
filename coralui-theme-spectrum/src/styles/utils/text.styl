@@ -15,41 +15,10 @@
  * from Adobe Systems Incorporated.
  */
 
-coral-select-item {
-  display: none;
-}
-
-.coral3-Dropdown {
-  .coral3-Dropdown-tagList {
-    display: none;
-  }
-
-  .coral3-Dropdown-select {
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    display: none;
-
-    width: 100%;
-    height: 32*$px;
-
-    // allows the size to match the size of the button
-    -webkit-appearance: none;
-    -moz-appearance: none;
-  }
-
-  .coral3-Button--dropdown {
-    .coral3-Dropdown-label .coral3-Icon,
-    .coral3-Dropdown-invalidIcon {
-      margin-top: 0;
-    }
-  }
-}
-
-.coral3-Dropdown--native {
-  .coral3-Dropdown-select {
-    display: block;
-    opacity: 0.01;
-  }
+// Prevent text from wrapping, use an ellipsis to truncate
+.u-coral-ellipsis {
+  max-width: 100%;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
 }

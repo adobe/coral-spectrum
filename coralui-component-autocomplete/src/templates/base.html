@@ -7,15 +7,15 @@
   <coral-buttonlist style="{{maxHeight}}" id="{{Coral.commons.getUID()}}" class="coral3-Autocomplete-selectList" handle="selectList" role="listbox" interaction="off"></coral-buttonlist>
 </coral-popover>
 <input type="hidden" handle="field">
-<div class="coral-InputGroup coral3-Autocomplete-inputGroup" handle="inputGroup" role="presentation">
-  <input class="coral-InputGroup-input coral3-Autocomplete-input" type="text" autocomplete="off" handle="input" role="textbox" is="coral-textfield">
-  <button type="button" class="coral3-Button--dropdown coral-InputGroup-button coral3-Autocomplete-trigger" is="coral-button" variant="_custom" handle="trigger" aria-label="{{Coral.i18n.get('Show suggestions')}}" title="{{Coral.i18n.get('Show suggestions')}}">
+<div class="coral3-InputGroup coral3-Autocomplete-inputGroup" handle="inputGroup" role="presentation">
+  <input class="coral3-InputGroup-input coral3-Autocomplete-input" type="text" autocomplete="off" handle="input" role="textbox" is="coral-textfield">
+  <button type="button" class="coral3-Button--dropdown coral3-InputGroup-button coral3-Autocomplete-trigger" is="coral-button" variant="_custom" handle="trigger" aria-label="{{Coral.i18n.get('Show suggestions')}}" title="{{Coral.i18n.get('Show suggestions')}}">
     <coral-button-label handle="label"></coral-button-label>
     <js>
       // Don't wait for button MO to pick up the label
       this.trigger._elements.label = this.label;
       // Render invalid icon
-      this.trigger.insertAdjacentHTML('beforeend', Coral.Icon._renderSVG('spectrum-css-icon-SelectDownChevron', ['coral-InputGroup-icon']));
+      this.trigger.insertAdjacentHTML('beforeend', Coral.Icon._renderSVG('spectrum-css-icon-SelectDownChevron', ['coral3-InputGroup-icon']));
     </js>
   </button>
 </div>

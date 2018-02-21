@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Coral</title>
+
+  <link rel="stylesheet" href="../../build/css/coral.css">
+  <style>
+    section {
+      padding: 15px;
+    }
+  </style>
+  <script src="../../build/js/coral.js"></script>
+</head>
+<body class="coral--light">
+
+<div style="position:fixed;top:15px;right:15px;">
+  <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+  <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
+  <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+  <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+</div>
+
+<section>
+
+  <h1 class="coral-Heading coral-Heading--1">CSS only components</h1>
+
+  <h2 class="coral-Heading coral-Heading--2">coral-DecoratedTextfield</h2>
+
+  <h3 class="coral-Heading coral-Heading--3">Icon Only</h3>
+
+  <span class="coral-DecoratedTextfield">
+    <coral-icon class="coral-DecoratedTextfield-icon" icon="search" size="XS"></coral-icon>
+    <input is="coral-textfield" class="coral-DecoratedTextfield-input"/>
+  </span>
+
+
+  <h3 class="coral-Heading coral-Heading--3">Button Only</h3>
+
+  <span class="coral-DecoratedTextfield">
+    <input is="coral-textfield" class="coral-DecoratedTextfield-input"/>
+    <button is="coral-button" variant="icon" icon="close" iconsize="XS"
+            class="coral-DecoratedTextfield-button"></button>
+  </span>
+
+  <h3 class="coral-Heading coral-Heading--3">Icon and Button</h3>
+
+  <span class="coral-DecoratedTextfield">
+    <coral-icon class="coral-DecoratedTextfield-icon" icon="search" size="XS"></coral-icon>
+    <input is="coral-textfield" class="coral-DecoratedTextfield-input"/>
+    <button is="coral-button" variant="icon" icon="close" iconsize="XS"
+            class="coral-DecoratedTextfield-button"></button>
+  </span>
+
+  <h2 class="coral-Heading coral-Heading--2">coral-Heading</h2>
+
+  <h1 class="coral-Heading coral-Heading--1">Heading 1</h1>
+  <h2 class="coral-Heading coral-Heading--2">Heading 2</h2>
+  <h3 class="coral-Heading coral-Heading--3">Heading 3</h3>
+  <h4 class="coral-Heading coral-Heading--4">Heading 4</h4>
+  <h5 class="coral-Heading coral-Heading--5">Heading 5</h5>
+  <h6 class="coral-Heading coral-Heading--6">Heading 6</h6>
+
+  <h2 class="coral-Heading coral-Heading--2">coral-Body</h2>
+
+  <p class="coral-Body--small">Small Body Text</p>
+  <p class="coral-Body">Default Body Text</p>
+  <p class="coral-Body--secondary">Secondary Body Text</p>
+  <p class="coral-Body--italic"> Body Text Italic</p>
+  <p class="coral-Body--large">Large Body Text</p>
+
+  <h2 class="coral-Heading coral-Heading--2">coral-Rule</h2>
+
+  <hr class="coral-Rule">
+  <hr class="coral-Rule coral-Rule--subsection">
+  <hr class="coral-Rule coral-Rule--subsection2">
+
+  <h3 class="coral-Heading coral-Heading--3">Vertical Rule</h3>
+
+  <coral-icon icon="add"></coral-icon>
+  <span class="coral-Rule coral-Rule--panel"></span>
+  <coral-icon icon="remove"></coral-icon>
+
+  <h2 class="coral-Heading coral-Heading--2">coral-InputGroup</h2>
+
+  <h3 class="coral-Heading coral-Heading--3">Button before</h3>
+
+  <div class="coral-InputGroup">
+    <span class="coral-InputGroup-button">
+      <button is="coral-button" icon="selectBox" title="Select"></button>
+    </span>
+    <input is="coral-textfield" class="coral-InputGroup-input"/>
+  </div>
+
+  <h3 class="coral-Heading coral-Heading--3">Button after</h3>
+
+  <div class="coral-InputGroup">
+    <input is="coral-textfield" class="coral-InputGroup-input"/>
+    <span class="coral-InputGroup-button">
+      <button is="coral-button" icon="selectBox" title="Select"></button>
+    </span>
+  </div>
+
+  <h3 class="coral-Heading coral-Heading--3">Icon Buttons on both sides</h3>
+
+  <div class="coral-InputGroup">
+    <span class="coral-InputGroup-button">
+      <button is="coral-button" icon="remove" title="Remove"></button>
+    </span>
+    <input is="coral-textfield" class="coral-InputGroup-input"/>
+    <span class="coral-InputGroup-button">
+      <button is="coral-button" icon="add" title="Add"></button>
+    </span>
+  </div>
+
+  <h3 class="coral-Heading coral-Heading--3">Text Buttons on both side</h3>
+
+  <div class="coral-InputGroup">
+    <span class="coral-InputGroup-button">
+      <button is="coral-button">Go!</button>
+    </span>
+    <input is="coral-textfield" class="coral-InputGroup-input"/>
+    <span class="coral-InputGroup-button">
+      <button is="coral-button">Go!</button>
+    </span>
+  </div>
+
+  <h3 class="coral-Heading coral-Heading--3">Block with Button before</h3>
+  <div class="coral-InputGroup coral-InputGroup--block">
+    <span class="coral-InputGroup-button">
+      <button is="coral-button" icon="selectBox" title="Select"></button>
+    </span>
+    <input is="coral-textfield" class="coral-InputGroup-input"/>
+  </div>
+
+  <h3 class="coral-Heading coral-Heading--3">Block with Button after</h3>
+
+  <div class="coral-InputGroup coral-InputGroup--block">
+    <input is="coral-textfield" class="coral-InputGroup-input"/>
+    <span class="coral-InputGroup-button">
+      <button is="coral-button" icon="selectBox" title="Select"></button>
+    </span>
+  </div>
+
+  <h3 class="coral-Heading coral-Heading--3">Block with text Buttons and both sides</h3>
+
+  <div class="coral-InputGroup coral-InputGroup--block">
+    <span class="coral-InputGroup-button">
+      <button is="coral-button">Go!</button>
+    </span>
+    <input is="coral-textfield" class="coral-InputGroup-input"/>
+    <span class="coral-InputGroup-button">
+      <button is="coral-button">Go!</button>
+    </span>
+  </div>
+
+  <h3 class="coral-Heading coral-Heading--3">Block with Icons Buttons on both sides</h3>
+
+  <div class="coral-InputGroup coral-InputGroup--block">
+    <span class="coral-InputGroup-button">
+      <button is="coral-button" icon="remove" title="Remove"></button>
+    </span>
+    <input is="coral-textfield" class="coral-InputGroup-input"/>
+    <span class="coral-InputGroup-button">
+      <button is="coral-button" icon="add" title="Add"></button>
+    </span>
+  </div>
+
+  <h2 class="coral-Heading coral-Heading--2">coral-FieldLabel</h2>
+
+  <label for="story" class="coral-FieldLabel">Life Story</label>
+  <textarea is="coral-textarea" id="story" placeholder="Enter your life story"></textarea>
+
+  <h3 class="coral-Heading coral-Heading--3">Left Variation</h3>
+
+  <label class="coral-FieldLabel coral-FieldLabel--left" for="email">Email Address</label>
+  <input type="text" is="coral-textfield" placeholder="Enter your e-mail address" id="email"/>
+
+  <h2 class="coral-Heading coral-Heading--2">coral-Form</h2>
+
+  <h3 class="coral-Heading coral-Heading--3">Vertical Layout</h3>
+
+  <form class="coral-Form coral-Form--vertical" style="width:300px;">
+    <section class="coral-Form-fieldset">
+      <h3 class="coral-Form-fieldset-legend">Registration</h3>
+
+      <label class="coral-Form-fieldlabel">Username</label>
+      <input is="coral-textfield" class="coral-Form-field"/>
+      <div class="coral-Form-fieldwrapper">
+        <label class="coral-Form-fieldlabel">Password</label>
+        <input is="coral-textfield" class="coral-Form-field"/>
+        <coral-icon class="coral-Form-fieldinfo" icon="info"></coral-icon>
+        <coral-tooltip target="_prev" variant="info" placement="right">At least 12 characters</coral-tooltip>
+      </div>
+      <div class="coral-Form-fieldwrapper coral-Form-fieldwrapper--singleline">
+        <coral-checkbox class="coral-Form-field">Remember me</coral-checkbox>
+      </div>
+    </section>
+  </form>
+
+  <h3 class="coral-Heading coral-Heading--3">Aligned Layout</h3>
+
+  <form class="coral-Form coral-Form--aligned">
+    <section class="coral-Form-fieldset">
+      <label class="coral-Form-fieldlabel">Username</label>
+      <input is="coral-textfield" class="coral-Form-field"/>
+      <div class="coral-Form-fieldwrapper">
+        <label class="coral-Form-fieldlabel">Password</label>
+        <input is="coral-textfield" class="coral-Form-field"/>
+        <coral-icon class="coral-Form-fieldinfo" icon="info"></coral-icon>
+        <coral-tooltip target="_prev" variant="info" placement="right">At least 12 characters</coral-tooltip>
+      </div>
+    </section>
+  </form>
+
+  <h2 class="coral-Heading coral-Heading--2">coral-Link</h2>
+
+  <h3 class="coral-Heading coral-Heading--3">Regular</h3>
+
+  <a href="#" class="coral-Link">link</a>.
+
+  <h3 class="coral-Heading coral-Heading--3">Subtle</h3>
+
+  <a href="#" class="coral-Link coral-Link--subtle">subtle link</a>
+
+  <h2 class="coral-Heading coral-Heading--2">coral-List</h2>
+
+  <ul class="coral-List">
+    <li class="coral-List-item">Item 1</li>
+    <li class="coral-List-item">Item 2</li>
+    <li class="coral-List-item">Item 3</li>
+  </ul>
+
+  <h3 class="coral-Heading coral-Heading--3">condensed</h3>
+
+  <ul class="coral-List coral-List--condensed">
+    <li class="coral-List-item">Item 1</li>
+    <li class="coral-List-item">Item 2</li>
+    <li class="coral-List-item">Item 3</li>
+  </ul>
+
+  <h3 class="coral-Heading coral-Heading--3">minimal</h3>
+
+  <ul class="coral-List coral-List--minimal">
+    <li class="coral-List-item">Item 1</li>
+    <li class="coral-List-item">Item 2</li>
+    <li class="coral-List-item">Item 3</li>
+  </ul>
+
+  <h2 class="coral-Heading coral-Heading--2">coral-RadioGroup</h2>
+
+  <h3 class="coral-Heading coral-Heading--3">Horizontal</h3>
+
+  <div class="coral-RadioGroup">
+    <label class="coral-Radio">
+      <coral-radio name="r1">Quack Quack</coral-radio>
+    </label>
+    <label class="coral-Radio">
+      <coral-radio name="r1">Woof Woof</coral-radio>
+    </label>
+    <label class="coral-Radio">
+      <coral-radio name="r1">Meow Meow</coral-radio>
+    </label>
+  </div>
+
+  <h3 class="coral-Heading coral-Heading--3">Vertical</h3>
+
+  <div class="coral-RadioGroup coral-RadioGroup--vertical">
+    <label class="coral-Radio">
+      <coral-radio name="r1">Quack Quack</coral-radio>
+    </label>
+    <label class="coral-Radio">
+      <coral-radio name="r1">Woof Woof</coral-radio>
+    </label>
+    <label class="coral-Radio">
+      <coral-radio name="r1">Meow Meow</coral-radio>
+    </label>
+  </div>
+
+  <h3 class="coral-Heading coral-Heading--3">Labels below</h3>
+
+  <div class="coral-RadioGroup coral-RadioGroup--labelsBelow">
+    <label class="coral-Radio">
+      <coral-radio name="r1">1</coral-radio>
+    </label>
+    <label class="coral-Radio">
+      <coral-radio name="r1">2</coral-radio>
+    </label>
+    <label class="coral-Radio">
+      <coral-radio name="r1">3</coral-radio>
+    </label>
+  </div>
+
+  <h2 class="coral-Heading coral-Heading--2">coral-Table</h2>
+
+  <h3 class="coral-Heading coral-Heading--3">Basic</h3>
+
+  <table class="coral-Table">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+      <th class="coral-Table-headerCell">Pet Name</th>
+      <th class="coral-Table-headerCell">Type</th>
+      <th class="coral-Table-headerCell">Good/Bad</th>
+    </tr>
+    </thead>
+    <tbody class="coral-Table-body">
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Squeak</td>
+      <td class="coral-Table-cell">Mouse</td>
+      <td class="coral-Table-cell">Bad</td>
+    </tr>
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Spot</td>
+      <td class="coral-Table-cell">Dog</td>
+      <td class="coral-Table-cell">Bad</td>
+    </tr>
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Fluffy</td>
+      <td class="coral-Table-cell">Velociraptor</td>
+      <td class="coral-Table-cell">Good</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h3 class="coral-Heading coral-Heading--3">Row hover</h3>
+
+  <table class="coral-Table coral-Table--hover">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+      <th class="coral-Table-headerCell">Pet Name</th>
+      <th class="coral-Table-headerCell">Type</th>
+      <th class="coral-Table-headerCell">Good/Bad</th>
+    </tr>
+    </thead>
+    <tbody class="coral-Table-body">
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Mongo</td>
+      <td class="coral-Table-cell">Chihuahua</td>
+      <td class="coral-Table-cell">Bad</td>
+    </tr>
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Tiny</td>
+      <td class="coral-Table-cell">Great Dane</td>
+      <td class="coral-Table-cell">Bad</td>
+    </tr>
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Jaws</td>
+      <td class="coral-Table-cell">Pit Bull</td>
+      <td class="coral-Table-cell">Good</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h3 class="coral-Heading coral-Heading--3">Bordered</h3>
+
+  <table class="coral-Table coral-Table--bordered">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+      <th class="coral-Table-headerCell">Pet Name</th>
+      <th class="coral-Table-headerCell">Type</th>
+      <th class="coral-Table-headerCell">Good/Bad</th>
+    </tr>
+    </thead>
+    <tbody class="coral-Table-body">
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Hopper</td>
+      <td class="coral-Table-cell">Frog</td>
+      <td class="coral-Table-cell">Good</td>
+    </tr>
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Pokey</td>
+      <td class="coral-Table-cell">Porcupine</td>
+      <td class="coral-Table-cell">Good</td>
+    </tr>
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Mr. Snuggles</td>
+      <td class="coral-Table-cell">Snake</td>
+      <td class="coral-Table-cell">Bad</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h2 class="coral-Heading coral-Heading--2">coral-Well</h2>
+
+  <div class="coral-Well">
+    Lorem ipsum Fugiat sit mollit incididunt in occaecat reprehenderit cillum
+    magna Excepteur enim eu deserunt eiusmod dolor occaecat dolore officia mollit
+    dolore consectetur elit in enim esse consectetur amet do exercitation..
+  </div>
+</section>
+
+</body>
+</html>

@@ -316,13 +316,13 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       this._elements.input.variant = Textfield.variant.QUIET;
       this._elements.trigger.classList.remove('coral3-Button--dropdown');
       this._elements.trigger.classList.add('coral3-Button--quiet--dropdown');
-      this._elements.inputGroup.classList.add('coral-InputGroup--quiet');
+      this._elements.inputGroup.classList.add('coral3-InputGroup--quiet');
     }
     else {
       this._elements.input.variant = Textfield.variant.DEFAULT;
       this._elements.trigger.classList.add('coral3-Button--dropdown');
       this._elements.trigger.classList.remove('coral3-Button--quiet--dropdown');
-      this._elements.inputGroup.classList.remove('coral-InputGroup--quiet');
+      this._elements.inputGroup.classList.remove('coral3-InputGroup--quiet');
     }
   }
   

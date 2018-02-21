@@ -478,7 +478,7 @@ describe('Coral.Datepicker', function() {
         });
       
         it('should be possible to set the variant', function() {
-          expect(el.classList.contains('coral-InputGroup--quiet')).to.be.false;
+          expect(el.classList.contains('coral3-InputGroup--quiet')).to.be.false;
         
           expect(el.variant).to.equal(Coral.Datepicker.variant.DEFAULT, '"default" should be set');
           expect(el._elements.toggle.classList.contains('coral3-Button--dropdown')).to.be.true;
@@ -490,7 +490,7 @@ describe('Coral.Datepicker', function() {
           expect(el._elements.toggle.classList.contains('coral3-Button--quiet--dropdown')).to.be.true;
           expect(el._elements.input.variant).to.equal(Coral.Datepicker.variant.QUIET, '"quiet" should be set tp the input variant');
         
-          expect(el.classList.contains('coral-InputGroup--quiet')).to.be.true;
+          expect(el.classList.contains('coral3-InputGroup--quiet')).to.be.true;
         });
       });
     });

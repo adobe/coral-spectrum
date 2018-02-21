@@ -15,6 +15,49 @@
  * from Adobe Systems Incorporated.
  */
 
+// @compat
+.coral-List-item + .coral-List-item {
+  margin-top: 6*$px; // use em so font size is taken into account
+}
+
+// @compat
+.coral-List {
+  margin: 0;
+}
+
+// @compat
+.coral-List--minimal {
+  list-style: none;
+  padding: 0;
+
+  > .coral-List-item {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+// @compat
+.coral-List--condensed {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  > .coral-List-item {
+    display: inline-block;
+    margin-right: 0.3rem;
+
+    &:after {
+      content: ",";
+    }
+
+    &:nth-last-of-type(1) {
+      &:after {
+        content: "";
+      }
+    }
+  }
+}
+
 .coral3-BasicList,
 .coral3-BasicList-item,
 .coral3-SelectList-divider {

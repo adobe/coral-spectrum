@@ -19,6 +19,35 @@ $table-sort-icon-url = "../embed/SortArrow.svg";
 $table-list-check-icon-url = "../embed/Check.svg";
 $table-drag-handle-icon-url = "../embed/DragHandle.svg";
 
+// @spectrum
+.coral-Table-row {
+  cursor: inherit;
+}
+
+// @spectrum
+.coral-Table-head, .coral-Table-foot {
+  .coral-Table-row {
+    background: transparent;
+  }
+}
+
+// @spectrum
+.coral-Table:not(.coral-Table--hover) .coral-Table-row:hover {
+  background-color: inherit;
+}
+
+// @spectrum
+.coral-Table--hover .coral-Table-body .coral-Table-row {
+  cursor: pointer;
+}
+
+// @compat
+.coral-Table--bordered {
+  .coral-Table-body .coral-Table-row .coral-Table-cell {
+    border-right: 1px solid;
+  }
+}
+
 /* Base */
 .coral3-Table {
   border-collapse: separate;

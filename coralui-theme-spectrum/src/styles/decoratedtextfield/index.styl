@@ -15,27 +15,41 @@
  * from Adobe Systems Incorporated.
  */
 
-.coral3-Autocomplete {
+.coral-DecoratedTextfield {
   position: relative;
+
+  box-sizing: border-box;
+  margin: 0;
+  vertical-align: top;
   display: inline-block;
 }
 
-.coral3-Autocomplete-overlay {
-  width: 226*$px;
+.coral-DecoratedTextfield-icon {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  margin-left: 10*$px;
+  height: 18*$px;
+
+  // Don't get clicks
+  pointer-events: none;
 }
 
-// Data-only component, targeted with tagName as it doesn't get a CSS class
-coral-autocomplete-item {
-  display: none;
+// Move text to right when the icon is visible
+.coral-DecoratedTextfield-icon:not([hidden]) + .coral-DecoratedTextfield-input {
+  padding-left: 25*$px;
+  // Reset the text-indent the spectrum textfield has
+  text-indent: 0;
 }
 
-.coral3-Autocomplete-tagList {
-  display: block;
-  margin-top: 7*$px;
-}
+.coral-DecoratedTextfield-button {
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  right: 0;
 
-.coral3-Autocomplete-loading {
-  position: relative;
-  height: 42*$px;
+  &.is-hidden {
+    visibility: hidden;
+  }
 }
-

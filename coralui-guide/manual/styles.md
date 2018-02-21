@@ -31,7 +31,7 @@ Renders a textfield with an embedded button, icon, or both.
 ```
 <span class="coral-DecoratedTextfield">
   <coral-icon class="coral-DecoratedTextfield-icon" icon="search" size="XS"></coral-icon>
-  <input is="coral-textfield" class="coral-DecoratedTextfield-input">
+  <input is="coral-textfield" class="coral-DecoratedTextfield-input"/>
 </span>
 ```
 
@@ -39,8 +39,9 @@ Renders a textfield with an embedded button, icon, or both.
  
 ```
 <span class="coral-DecoratedTextfield">
-  <input is="coral-textfield" class="coral-DecoratedTextfield-input">
-  <button is="coral-button" variant="minimal" icon="close" iconsize="XS" class="coral-DecoratedTextfield-button"></button>
+  <input is="coral-textfield" class="coral-DecoratedTextfield-input"/>
+  <button is="coral-button" variant="icon" icon="close" iconsize="XS"
+          class="coral-DecoratedTextfield-button"></button>
 </span>
 ``` 
 
@@ -48,9 +49,10 @@ Renders a textfield with an embedded button, icon, or both.
 
 ```
 <span class="coral-DecoratedTextfield">
-  <coral-icon class="coral-DecoratedTextfield-icon" icon="search" size="XS"></coral-icon>
-  <input is="coral-textfield" class="coral-DecoratedTextfield-input">
-  <button is="coral-button" variant="minimal" icon="close" iconsize="XS" class="coral-DecoratedTextfield-button"></button>
+<coral-icon class="coral-DecoratedTextfield-icon" icon="search" size="XS"></coral-icon>
+  <input is="coral-textfield" class="coral-DecoratedTextfield-input"/>
+  <button is="coral-button" variant="icon" icon="close" iconsize="XS"
+          class="coral-DecoratedTextfield-button"></button>
 </span>
 ```
 
@@ -67,6 +69,36 @@ Headings are used to represent titles in content.
 <h6 class="coral-Heading coral-Heading--6">Heading 6</h6>
 ```
 
+### coral-Body 
+
+Typography elements see below examples
+
+```
+<p class="coral-Body--small">Small Body Text</p>
+<p class="coral-Body">Default Body Text</p>
+<p class="coral-Body--secondary">Secondary Body Text</p>
+<p class="coral-Body--italic"> Body Text Italic</p>
+<p class="coral-Body--large">Large Body Text</p>
+```
+
+### coral-Rule
+
+Styles to define rules in the content
+ 
+```
+<hr class="coral-Rule">
+<hr class="coral-Rule coral-Rule--subsection">
+<hr class="coral-Rule coral-Rule--subsection2">
+```
+
+#### Vertical Rule
+
+```
+<coral-icon icon="add"></coral-icon>
+<span class="coral-Rule coral-Rule--panel"></span>
+<coral-icon icon="remove"></coral-icon>
+``` 
+
 ### coral-InputGroup
 
 A composite CSS pattern for Buttons and Textfields.
@@ -76,9 +108,9 @@ A composite CSS pattern for Buttons and Textfields.
 ```
 <div class="coral-InputGroup">
   <span class="coral-InputGroup-button">
-    <button is="coral-button" icon="select" title="Select"></button>
+    <button is="coral-button" icon="selectBox" title="Select"></button>
   </span>
-  <input is="coral-textfield" class="coral-InputGroup-input">
+  <input is="coral-textfield" class="coral-InputGroup-input"/>
 </div>
 ```
 
@@ -86,9 +118,9 @@ A composite CSS pattern for Buttons and Textfields.
 
 ```
 <div class="coral-InputGroup">
-  <input is="coral-textfield" class="coral-InputGroup-input">
+  <input is="coral-textfield" class="coral-InputGroup-input"/>
   <span class="coral-InputGroup-button">
-    <button is="coral-button" icon="select" title="Select"></button>
+    <button is="coral-button" icon="selectBox" title="Select"></button>
   </span>
 </div>
 ```
@@ -100,7 +132,7 @@ A composite CSS pattern for Buttons and Textfields.
   <span class="coral-InputGroup-button">
     <button is="coral-button" icon="remove" title="Remove"></button>
   </span>
-  <input is="coral-textfield" class="coral-InputGroup-input">
+  <input is="coral-textfield" class="coral-InputGroup-input"/>
   <span class="coral-InputGroup-button">
     <button is="coral-button" icon="add" title="Add"></button>
   </span>
@@ -114,7 +146,7 @@ A composite CSS pattern for Buttons and Textfields.
   <span class="coral-InputGroup-button">
     <button is="coral-button">Go!</button>
   </span>
-  <input is="coral-textfield" class="coral-InputGroup-input">
+  <input is="coral-textfield" class="coral-InputGroup-input"/>
   <span class="coral-InputGroup-button">
     <button is="coral-button">Go!</button>
   </span>
@@ -126,9 +158,9 @@ A composite CSS pattern for Buttons and Textfields.
 ```
 <div class="coral-InputGroup coral-InputGroup--block">
   <span class="coral-InputGroup-button">
-    <button is="coral-button" icon="select" title="Select"></button>
+    <button is="coral-button" icon="selectBox" title="Select"></button>
   </span>
-  <input is="coral-textfield" class="coral-InputGroup-input">
+  <input is="coral-textfield" class="coral-InputGroup-input"/>
 </div>
 ```
 
@@ -136,9 +168,9 @@ A composite CSS pattern for Buttons and Textfields.
 
 ```
 <div class="coral-InputGroup coral-InputGroup--block">
-  <input is="coral-textfield" class="coral-InputGroup-input">
+  <input is="coral-textfield" class="coral-InputGroup-input"/>
   <span class="coral-InputGroup-button">
-    <button is="coral-button" icon="select" title="Select"></button>
+    <button is="coral-button" icon="selectBox" title="Select"></button>
   </span>
 </div>
 ```
@@ -150,7 +182,7 @@ A composite CSS pattern for Buttons and Textfields.
   <span class="coral-InputGroup-button">
     <button is="coral-button">Go!</button>
   </span>
-  <input is="coral-textfield" class="coral-InputGroup-input">
+  <input is="coral-textfield" class="coral-InputGroup-input"/>
   <span class="coral-InputGroup-button">
     <button is="coral-button">Go!</button>
   </span>
@@ -164,11 +196,27 @@ A composite CSS pattern for Buttons and Textfields.
   <span class="coral-InputGroup-button">
     <button is="coral-button" icon="remove" title="Remove"></button>
   </span>
-  <input is="coral-textfield" class="coral-InputGroup-input">
+  <input is="coral-textfield" class="coral-InputGroup-input"/>
   <span class="coral-InputGroup-button">
     <button is="coral-button" icon="add" title="Add"></button>
   </span>
 </div>
+```
+
+### coral-FieldLabel
+
+Label styles. Field label for use with form inputs.
+
+```
+<label for="story" class="coral-FieldLabel">Life Story</label>
+<textarea is="coral-textarea" id="story" placeholder="Enter your life story"></textarea>
+```
+
+#### Left Variation
+
+```
+<label class="coral-FieldLabel coral-FieldLabel--left" for="email">Email Address</label>
+<input type="text" is="coral-textfield" placeholder="Enter your e-mail address" id="email">
 ```
 
 ### coral-Form
@@ -180,22 +228,22 @@ Form styles. Please look at the related components, to see more examples.
 Add the `coral-Form--vertical` class to render all labels and fields on the same vertical line.
 
 ```
-<form class="coral-Form coral-Form--vertical">
+<form class="coral-Form coral-Form--vertical" style="width:300px;">
   <section class="coral-Form-fieldset">
-  <label class="coral-Form-fieldlabel">Text</label>
-  <span class="coral-Form-field">Read only text</span>
-  <div class="coral-Form-fieldwrapper">
-    <label class="coral-Form-fieldlabel">Text (with coral-Form-fieldinfo)</label>
-    <span class="coral-Form-field">Read only text</span>
-    <coral-icon id="coral-Form-Aligned-Text-required" class="coral-Form-fieldinfo" icon="info"></coral-icon>
-    <coral-tooltip variant="info" placement="right" target="#coral-Form-Vertical-Text-required">Tooltip Information</coral-tooltip>
-  </div>
-  <label class="coral-Form-fieldlabel">Aligning buttons left</label>
-  <div class="coral-Form-fieldwrapper coral-Form-fieldwrapper--alignLeft">
-    <button is="coral-button" class="coral-Form-field" type="button">Cancel</button>
-    <button is="coral-button" variant="primary" class="coral-Form-field">Submit</button>
-  </div>
-</section>
+    <h3 class="coral-Form-fieldset-legend">Registration</h3>
+  
+    <label class="coral-Form-fieldlabel">Username</label>
+    <input is="coral-textfield" class="coral-Form-field"/>
+    <div class="coral-Form-fieldwrapper">
+      <label class="coral-Form-fieldlabel">Password</label>
+      <input is="coral-textfield" class="coral-Form-field"/>
+      <coral-icon class="coral-Form-fieldinfo" icon="info"></coral-icon>
+      <coral-tooltip target="_prev" variant="info" placement="right">At least 12 characters</coral-tooltip>
+    </div>
+    <div class="coral-Form-fieldwrapper coral-Form-fieldwrapper--singleline">
+      <coral-checkbox class="coral-Form-field">Remember me</coral-checkbox>
+    </div>
+  </section>
 </form>
 ```
 
@@ -206,15 +254,15 @@ Add the `coral-Form--aligned` class to render each label and field pair on the s
 ```
 <form class="coral-Form coral-Form--aligned">
   <section class="coral-Form-fieldset">
-  <label class="coral-Form-fieldlabel">Text</label>
-  <span class="coral-Form-field">Read only text</span>
-  <div class="coral-Form-fieldwrapper">
-    <label class="coral-Form-fieldlabel">Text</label>
-    <span class="coral-Form-field">Read only text</span>
-    <coral-icon id="coral-Form-Aligned-Text-required" class="coral-Form-fieldinfo" icon="info"></coral-icon>
-    <coral-tooltip variant="info" placement="right" target="#coral-Form-Aligned-Text-required">Tooltip Information</coral-tooltip>
-  </div>
-</section>
+    <label class="coral-Form-fieldlabel">Username</label>
+    <input is="coral-textfield" class="coral-Form-field"/>
+    <div class="coral-Form-fieldwrapper">
+      <label class="coral-Form-fieldlabel">Password</label>
+      <input is="coral-textfield" class="coral-Form-field"/>
+      <coral-icon class="coral-Form-fieldinfo" icon="info"></coral-icon>
+      <coral-tooltip target="_prev" variant="info" placement="right">At least 12 characters</coral-tooltip>
+    </div>
+  </section>
 </form>
 ```
 
@@ -232,6 +280,36 @@ Links get styled using the `coral-Link` class.
 
 ```
 <a href="#" class="coral-Link coral-Link--subtle">subtle link</a>
+```
+
+### coral-List
+
+```
+<ul class="coral-List">
+ <li class="coral-List-item">Item 1</li>
+ <li class="coral-List-item">Item 2</li>
+ <li class="coral-List-item">Item 3</li>
+</ul>
+```
+
+#### Condensed
+
+```
+<ul class="coral-List coral-List--condensed">
+ <li class="coral-List-item">Item 1</li>
+ <li class="coral-List-item">Item 2</li>
+ <li class="coral-List-item">Item 3</li>
+</ul>
+```
+
+#### Minimal
+
+```
+<ul class="coral-List coral-List--minimal">
+ <li class="coral-List-item">Item 1</li>
+ <li class="coral-List-item">Item 2</li>
+ <li class="coral-List-item">Item 3</li>
+</ul>
 ```
 
 ### coral-RadioGroup
