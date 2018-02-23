@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title>Coral.DragAction</title>
+
+  <link rel="stylesheet" href="../css/coral.css">
+  <script src="../js/coral.js"></script>
+
+  <style>
+    section {
+      padding: 15px;
+    }
+
+
+  </style>
+</head>
+
+<body class="coral--light">
+
+<section>
+  <h1 class="coral-Heading coral-Heading--1">Coral.DragAction</h1>
+
+  <h2 class="coral-Heading coral-Heading--2">Default</h2>
+  <span coral-dragaction>
+    <p>You can drag me</p>
+    <img src="http://via.placeholder.com/200x100">
+  </span>
+
+  <h2 class="coral-Heading coral-Heading--2">Limited to a single axis</h2>
+  <span coral-dragaction coral-dragaction-axis="horizontal">You can drag me on the horizontal axis only</span>
+
+  <h2 class="coral-Heading coral-Heading--2">Limited to a handle</h2>
+  <div coral-dragaction coral-dragaction-handle=".handle1, .handle2">I can be dragged only by this <span class="handle1"><b>handle</b></span> or this <span class="handle2"><i>handle</i></span></div>
+
+  <h2 class="coral-Heading coral-Heading--2">Containment</h2>
+  <div style="height:200px;width:200px;background: #eee;overflow:scroll;">
+    <div coral-dragaction coral-dragaction-containment style="width:50px;border:1px solid #999;">
+      You can not drag me out
+    </div>
+  </div>
+
+  <h2 class="coral-Heading coral-Heading--2">Automatic window scroll</h2>
+  <span coral-dragaction coral-dragaction-scroll>You can drag me and window will scroll</span>
+
+  <h2 class="coral-Heading coral-Heading--2">Automatic container scroll</h2>
+  <div style="overflow: scroll;border: 1px solid; height:500px;width:500px;">
+    <span coral-dragaction coral-dragaction-scroll>You can drag me and container will scroll</span>
+    <div style="background: linear-gradient(lightgoldenrodyellow, lightcoral); height:1000px;width:1000px;"></div>
+  </div>
+
+  <h2 class="coral-Heading coral-Heading--2">Drag'n'drop</h2>
+  <span id="dragaction" coral-dragaction coral-dragaction-dropzone="#dropzone">You can drop me on #dropzone</span>
+
+  <div id="dropzone" style="height:200px;width:200px;background:#eee;">I'm #dropzone</div>
+
+  <h2 class="coral-Heading coral-Heading--2">Initialized with JS</h2>
+  <span id="init-js">You can drag me vertically</span>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var dragAction = new Coral.DragAction('#init-js');
+    dragAction.axis = 'vertical';
+
+    document.getElementById('dragaction').addEventListener('coral-dragaction:drop', function(event) {
+      event.detail.dropElement.style.background = 'beige';
+    });
+  });
+</script>
+</body>
+</html>

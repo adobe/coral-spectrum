@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+  <title>Coral.Checkbox</title>
+
+  <link rel="stylesheet" href="../css/coral.css">
+  <script src="../js/coral.js"></script>
+
+  <style type="text/css">
+    section {
+      padding: 15px;
+    }
+  </style>
+
+</head>
+<body class="coral--light">
+  <div style="position:fixed;top:15px;right:15px;">
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--light'">Light</a> |
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--lightest'">Lightest</a> |
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--dark'">Dark</a> |
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--darkest'">Darkest</a>
+  </div>
+
+  <section>
+    <h1 class="coral-Heading coral-Heading--1">Coral.Checkbox</h1>
+    <h2 class="coral-Heading coral-Heading--2">From markup</h2>
+    <coral-checkbox name="checkboxField1"><coral-checkbox-label>Standard checkbox</coral-checkbox-label></coral-checkbox>
+
+    <h2 class="coral-Heading coral-Heading--2">No label</h2>
+    <coral-checkbox name="checkboxField2"></coral-checkbox>
+
+    <h2 class="coral-Heading coral-Heading--2">Checked</h2>
+    <coral-checkbox name="checkboxField3" checked><coral-checkbox-label>Checked checkbox</coral-checkbox-label></coral-checkbox>
+
+    <h2 class="coral-Heading coral-Heading--2">Indeterminate</h2>
+    <coral-checkbox name="checkboxField3" indeterminate><coral-checkbox-label>Indeterminate checkbox</coral-checkbox-label></coral-checkbox>
+
+    <h2 class="coral-Heading coral-Heading--2">With value</h2>
+    <coral-checkbox name="checkboxField4" value="1"><coral-checkbox-label>Checkbox with custom value</coral-checkbox-label></coral-checkbox>
+
+    <h2 class="coral-Heading coral-Heading--2">Disabled</h2>
+    <coral-checkbox name="checkboxField5" disabled><coral-checkbox-label>Disabled checkbox</coral-checkbox-label></coral-checkbox>
+
+    <h2 class="coral-Heading coral-Heading--2">Checked and disabled</h2>
+    <coral-checkbox name="checkboxField6" checked disabled><coral-checkbox-label>Checked and disabled</coral-checkbox-label></coral-checkbox>
+
+    <h2 class="coral-Heading coral-Heading--2">From JavaScript</h2>
+    <div id="from-javascript"></div>
+    <script>
+      var checkboxFromJS = new Coral.Checkbox();
+      checkboxFromJS.label.innerHTML = 'From JavaScript';
+      document.getElementById('from-javascript').appendChild(checkboxFromJS);
+    </script>
+
+    <h2 class="coral-Heading coral-Heading--2">Tri-State Cycling</h2>
+    <div id="tri-state"></div>
+    <script type="text/javascript">
+      var checkbox = document.createElement('coral-checkbox');
+      checkbox.label.innerHTML = 'Cycle States by Clicking Me';
+      var exampleDiv = document.getElementById('tri-state');
+      exampleDiv.appendChild(checkbox);
+
+      var state = 0;
+      checkbox.on('change', function handleChanged(event) {
+        state++;
+        switch(state) {
+          case 1:
+            checkbox.checked = true;
+            checkbox.indeterminate = false;
+            break;
+          case 2:
+            checkbox.checked = true;
+            checkbox.indeterminate = true;
+            break;
+          case 3:
+            checkbox.checked = false;
+            checkbox.indeterminate = false;
+            state = 0;
+            break;
+        }
+      });
+    </script>
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Coral.TabView</title>
+    <link rel="stylesheet" href="../css/coral.css">
+    <script src="../js/coral.js"></script>
+    <style>
+      section {
+        padding: 15px;
+      }
+    </style>
+  </head>
+
+  <body class="coral--light">
+
+    <div style="position:fixed;top:15px;right:15px;">
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--light'">Light</a> |
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--lightest'">Lightest</a> |
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--dark'">Dark</a> |
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--darkest'">Darkest</a>
+    </div>
+
+    <section>
+      <h1 class="coral-Heading coral-Heading--1">Coral.TabView</h1>
+
+      <h2 class="coral-Heading coral-Heading--2">Default</h2>
+      <coral-tabview id="tabView">
+        <coral-tablist>
+          <coral-tab>Coral Tab 1</coral-tab>
+          <coral-tab icon="add">Coral Tab 2</coral-tab>
+          <coral-tab icon="delete" selected>Coral Tab 3</coral-tab>
+          <coral-tab disabled>Disabled</coral-tab>
+          <coral-tab invalid>Invalid</coral-tab>
+        </coral-tablist>
+        <coral-panelstack class="coral-Well">
+          <coral-panel>Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+          <coral-panel>Lorem ipsum dolor sit amet.</coral-panel>
+          <coral-panel>Sed eget eros sit amet nulla ultricies.</coral-panel>
+          <coral-panel>Fusce nec ante non nibh mollis mollis mollis vitae dui.</coral-panel>
+          <coral-panel>Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+        </coral-panelstack>
+      </coral-tabview>
+
+      <h2 class="coral-Heading coral-Heading--2">Vertical orientation</h2>
+      <coral-tabview orientation="vertical">
+        <coral-tablist>
+          <coral-tab>Text only</coral-tab>
+          <coral-tab icon="add"></coral-tab>
+          <coral-tab icon="delete" selected>Icon and text</coral-tab>
+          <coral-tab disabled>Disabled</coral-tab>
+          <coral-tab invalid>Invalid</coral-tab>
+        </coral-tablist>
+        <coral-panelstack class="coral-Well">
+          <coral-panel>Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+          <coral-panel>Lorem ipsum dolor sit amet.</coral-panel>
+          <coral-panel>Sed eget eros sit amet nulla ultricies.</coral-panel>
+          <coral-panel>Fusce nec ante non nibh mollis mollis mollis vitae dui.</coral-panel>
+          <coral-panel>Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+        </coral-panelstack>
+      </coral-tabview>
+
+      <h2 class="coral-Heading coral-Heading--2">Nested Example</h2>
+      <coral-tabview id="tabView">
+        <coral-tablist>
+          <coral-tab>Coral Tab 1</coral-tab>
+          <coral-tab icon="add">Coral Tab 2</coral-tab>
+        </coral-tablist>
+        <coral-panelstack class="coral-Well">
+          <coral-panel>
+            <coral-tabview orientation="vertical">
+              <coral-tablist>
+                <coral-tab>Coral Tab 1</coral-tab>
+                <coral-tab icon="add">Coral Tab 2</coral-tab>
+              </coral-tablist>
+              <coral-panelstack>
+                <coral-panel>Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+                <coral-panel>Lorem ipsum dolor sit amet.</coral-panel>
+              </coral-panelstack>
+            </coral-tabview>
+          </coral-panel>
+          <coral-panel>
+            <coral-tabview orientation="vertical">
+              <coral-tablist>
+                <coral-tab icon="add"></coral-tab>
+                <coral-tab icon="remove"></coral-tab>
+              </coral-tablist>
+              <coral-panelstack>
+                <coral-panel>Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+                <coral-panel>Lorem ipsum dolor sit amet.</coral-panel>
+              </coral-panelstack>
+            </coral-tabview>
+          </coral-panel>
+        </coral-panelstack>
+      </coral-tabview>
+    </section>
+  </body>
+</html>

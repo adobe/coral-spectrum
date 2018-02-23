@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+  <title>Coral.Progress</title>
+
+  <link rel="stylesheet" href="../css/coral.css">
+  <script src="../js/coral.js"></script>
+
+  <style>
+    section {
+      padding: 15px;
+    }
+
+    .container {
+      width: 200px;
+      height: 200px;
+      background-color: rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+
+</head>
+<body class="coral--light">
+  <div style="position:fixed;top:15px;right:15px;">
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--light'">Light</a> |
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--lightest'">Lightest</a> |
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--dark'">Dark</a> |
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--darkest'">Darkest</a>
+  </div>
+
+  <section>
+    <h1 class="coral-Heading coral-Heading--1">Coral.Progress</h1>
+    <h2 class="coral-Heading coral-Heading--2">Default</h2>
+    <coral-progress value="65"></coral-progress>
+
+    <h2 class="coral-Heading coral-Heading--2">Small</h2>
+    <coral-progress value="65" size="S"></coral-progress>
+
+    <h2 class="coral-Heading coral-Heading--2">Monochrome</h2>
+    <div class="container">
+      <coral-progress value="65" variant="monochrome" showpercent>Loading</coral-progress>
+    </div>
+
+    <h2 class="coral-Heading coral-Heading--2">With label</h2>
+    <coral-progress value="65">Loading</coral-progress>
+
+    <h2 class="coral-Heading coral-Heading--2">With percent</h2>
+    <coral-progress value="65" showpercent></coral-progress>
+
+    <h2 class="coral-Heading coral-Heading--2">With label + percent</h2>
+    <coral-progress value="65" showpercent>Loading</coral-progress>
+
+    <h2 class="coral-Heading coral-Heading--2">With right positioned label + percent</h2>
+    <coral-progress value="65" labelposition="right" showpercent>Loading</coral-progress>
+
+    <h2 class="coral-Heading coral-Heading--2">With side positioned label</h2>
+    <coral-progress value="65" labelposition="side">Loading</coral-progress>
+
+    <h2 class="coral-Heading coral-Heading--2">With side positioned label + percent</h2>
+    <coral-progress value="65" labelposition="side" showpercent>Loading</coral-progress>
+
+    <h2 class="coral-Heading coral-Heading--2">With label content zone</h2>
+    <coral-progress value="22">
+      <coral-progress-label>This is my progress</coral-progress-label>
+    </coral-progress>
+
+    <h2 class="coral-Heading coral-Heading--2">Indeterminate</h2>
+    <coral-progress indeterminate></coral-progress>
+  </section>
+
+</body>
+</html>

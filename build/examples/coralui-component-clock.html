@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>Coral.Clock</title>
+    <link rel="stylesheet" href="../css/coral.css">
+    <!--Load momentJS to support different formats -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="../js/coral.js"></script>
+    <style>
+      section {
+        padding: 15px;
+      }
+    </style>
+  </head>
+
+  <body class="coral--light">
+    <div style="position:fixed;top:15px;right:15px;">
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--light'">Light</a> |
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--lightest'">Lightest</a> |
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--dark'">Dark</a> |
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--darkest'">Darkest</a>
+    </div>
+
+    <section>
+      <h1 class="coral-Heading coral-Heading--1">Coral.Clock</h1>
+
+      <h2 class="coral-Heading coral-Heading--2">Default</h2>
+      <coral-clock></coral-clock>
+
+      <h2 class="coral-Heading coral-Heading--2">Preset time</h2>
+      <coral-clock value="05:04"></coral-clock>
+
+      <h2 class="coral-Heading coral-Heading--2">Custom value format</h2>
+      <coral-clock valueformat="H-m" value="3-4"></coral-clock>
+
+      <h2 class="coral-Heading coral-Heading--2">AM/PM display format</h2>
+      <coral-clock displayformat="hh:mm A" value="15:04"></coral-clock>
+
+      <h2 class="coral-Heading coral-Heading--2">Quiet variant</h2>
+      <coral-clock labelledby="clock-label-4" value="05:04" variant="quiet"></coral-clock>
+
+      <h2 class="coral-Heading coral-Heading--2">AM/PM display format quiet variant</h2>
+      <coral-clock displayformat="hh:mm A" value="15:04" variant="quiet"></coral-clock>
+
+      <h2 class="coral-Heading coral-Heading--2">Disabled</h2>
+      <coral-clock disabled></coral-clock>
+
+      <h2 class="coral-Heading coral-Heading--2">Invalid</h2>
+      <coral-clock invalid></coral-clock>
+
+      <h2 class="coral-Heading coral-Heading--2">ReadOnly</h2>
+      <coral-clock readonly value="15:04"></coral-clock>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Coral.ColumnView</title>
+    <link rel="stylesheet" href="../css/coral.css">
+    <script src="../js/coral.js"></script>
+    <!-- We use jQuery for remote AJAX requests and parsing HTML response -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <style type="text/css">
+
+    section {
+      padding: 15px;
+    }
+
+    coral-columnview-column {
+      max-height: 400px;
+    }
+
+    #log {
+      border: 1px solid #bababa;
+      height: 200px;
+      overflow-y: scroll;
+      padding: 10px;
+      margin: 15px;
+    }
+    </style>
+  </head>
+  <body class="coral--light">
+    <div style="position:fixed;top:15px;right:15px;">
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--light'">Light</a> |
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--lightest'">Lightest</a> |
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--dark'">Dark</a> |
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--darkest'">Darkest</a>
+    </div>
+
+    <section>
+      <h1 class="coral-Heading coral-Heading--1">Coral.ColumnView</h1>
+
+      <div style="margin-bottom:15px;">
+        <label style="padding-left:10px;">SelectionMode</label>
+        <select name="selectionmode">
+          <option>none</option>
+          <option>single</option>
+          <option>multiple</option>
+        </select>
+        <span style="padding-left:10px;">Selected: <b id="selected_count">0</b></span>
+        <span style="padding-left:10px;">ActiveItem: <i id="active_item"></i> </span>
+      </div>
+
+      <coral-columnview id="columnview" selectionmode="multiple"><coral-columnview-column data-src="content.html" id="cv-multiple-0"></coral-columnview-column></coral-columnview>
+
+      <h2 class="coral-Heading coral-Heading--2">Log</h2>
+      <ul id="log"></ul>
+    </section>
+
+    <script type="text/javascript">
+      const log = document.getElementById('log');
+      const columnView = document.getElementById('columnview');
+      const selectionModeSelector = document.querySelector('[name=selectionmode]');
+
+      selectionModeSelector.value = columnView.getAttribute('selectionmode');
+
+      selectionModeSelector.addEventListener('change', function() {
+        columnView.setAttribute('selectionmode', selectionModeSelector.value);
+      });
+
+      document.addEventListener('coral-columnview:loaditems', function(event) {
+        var item = event.detail.item;
+        var column = event.detail.column;
+        var url = item ? item.dataset.src : column.dataset.src || '';
+
+        const li = document.createElement('li');
+        li.innerHTML = '<b>load</b>: src: "' + url + '" start: ' + event.detail.start + ' column: ' + event.detail.column.id;
+        log.insertBefore(li, log.firstChild);
+      });
+
+      document.addEventListener('coral-columnview:change', function(event) {
+        var selection = '';
+        var oldSelection = '';
+
+        for (var i = 0; i < event.detail.selection.length; i++) {
+          selection += ' ' + event.detail.selection[i].textContent;
+        }
+
+        for (var j = 0; j < event.detail.oldSelection.length; j++) {
+          oldSelection += ' ' + event.detail.oldSelection[j].textContent;
+        }
+
+        const li = document.createElement('li');
+        li.innerHTML = '<b>select</b>: new: ' + selection + ' old: ' + oldSelection;
+        log.insertBefore(li, log.firstChild);
+
+        document.getElementById('selected_count').innerHTML = event.target.selectedItems.length;
+      });
+
+      document.addEventListener('coral-columnview:navigate', function(event) {
+        const li = document.createElement('li');
+        li.innerHTML = '<b>navigate</b>: new: "' + event.detail.activeItem.textContent + '" old: "' + (event.detail.oldActiveItem && event.detail.oldActiveItem.textContent);
+        log.insertBefore(li, log.firstChild);
+      });
+
+      // document.addEventListener('coral-collection:add', function(event) {
+      //   $('#log').prepend($('<li></li>').html('add: ' + event.detail.item + ' column: ' + event.target.id));
+      // });
+
+      // document.addEventListener('coral-collection:remove', function(event) {
+      //   $('#log').prepend($('<li></li>').html('remove: ' + event.detail.item + ' column: ' + event.target.id));
+      // });
+
+      document.addEventListener('coral-columnview:activeitemchange', function(event) {
+        const li = document.createElement('li');
+        li.innerHTML = '<b>active</b>: new: "' + event.detail.activeItem.textContent + '" old: "' + (event.detail.oldActiveItem && event.detail.oldActiveItem.textContent);
+        log.insertBefore(li, log.firstChild);
+
+        document.getElementById('active_item').innerHTML = event.detail.activeItem ? event.detail.activeItem.textContent : '';
+      });
+
+      document.addEventListener('coral-columnview:loaditems', function(event) {
+        var cv = event.target;
+        var item = event.detail.item;
+        var column = event.detail.column;
+
+        // if item is set, it means we load the item content
+        var url = item ? item.dataset.src : column.dataset.src;
+
+        // there is no information on additional items
+        if (typeof url === 'undefined') {
+          return;
+        }
+
+        console.log('Loading: %s', url);
+
+        const populate = function(data) {
+          var $data = $(data);
+
+          // if it is a preview column we add it directly
+          if ($data.is('coral-columnview-preview')) {
+            cv.setNextColumn($data[0], column);
+          }
+          else {
+            // otherwise we treat it as a normal column
+            var $contentWrapper = $data.find('coral-columnview-column-content').first();
+            var $columnWrapper = $contentWrapper.closest('coral-columnview-column');
+
+            if ($contentWrapper.length > 0) {
+              if (item) {
+                // adds an unique id to be able to identify the column
+                $data[0].id = Coral.commons.getUID();
+                // we add the new column and scroll to it
+                cv.setNextColumn($data[0], column);
+              }
+              // we load data in the current column
+              else {
+                // update the source of the current column (so that lazyloading does work)
+                var nextSrcToLoad = $($columnWrapper).attr('data-src');
+                if (!nextSrcToLoad) {
+                  column.removeAttribute('data-src');
+                }
+                else {
+                  column.setAttribute('data-src', nextSrcToLoad);
+                }
+
+                // update the content
+                $(column.content).append($contentWrapper.html());
+              }
+            }
+          }
+        };
+
+        const XMLHttpRequest = new window.XMLHttpRequest();
+        XMLHttpRequest.onreadystatechange = function() {
+          if (XMLHttpRequest.readyState == 4 && XMLHttpRequest.status == 200) {
+            populate(XMLHttpRequest.responseText);
+          }
+          else {
+            // In this case we're in the top examples page and have to adjust the url accordingly
+            const XMLHttpRequest2 = new window.XMLHttpRequest();
+            XMLHttpRequest2.open('GET', '../../coralui-component-columnview/examples/' + url, true);
+            XMLHttpRequest2.send();
+
+            XMLHttpRequest2.onreadystatechange = function() {
+              if (XMLHttpRequest2.readyState == 4 && XMLHttpRequest2.status == 200) {
+                populate(XMLHttpRequest2.responseText);
+              }
+            }
+          }
+        };
+
+        XMLHttpRequest.open('GET', url, true);
+        XMLHttpRequest.send();
+      });
+
+    </script>
+  </body>
+</html>

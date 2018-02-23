@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../">
+  <title data-ice="title">Manual | Coral Spectrum</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<script src="./inject/script/0-typekit.js"></script><script src="./inject/script/0-guide.js"></script><link rel="stylesheet" href="./inject/css/0-guide.css"><meta name="description" content="Coral Spectrum is a library of web components following Spectrum design patterns."><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Coral Spectrum"><meta property="twitter:description" content="Coral Spectrum is a library of web components following Spectrum design patterns."></head>
+<body class="layout-container manual-root manual-index" data-ice="rootContainer">
+
+<header>
+  <a href="./" style="display: flex; align-items: center;"><img src="./image/brand_logo.png" style="width:34px;"></a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a href="https://git.corp.adobe.com/Coral/coralui/tree/release/coral-spectrum">Repository</a></header>
+
+<nav class="navigation" data-ice="nav"><div class="manual-toc-root">
+  
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/README.html"><a href="manual/README.html" data-ice="link">CoralUI (4.x)</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#getting-started" data-ice="link">Getting started</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#consumers" data-ice="link">Consumers</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#contributors" data-ice="link">Contributors</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/overview.html"><a href="manual/overview.html" data-ice="link">Overview</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#introduction" data-ice="link">Introduction</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#unified-experience" data-ice="link">Unified Experience</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#enhanced-api" data-ice="link">Enhanced API</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#future-thinking" data-ice="link">Future Thinking</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#spectrum-css" data-ice="link">Spectrum CSS</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#accessibility" data-ice="link">Accessibility</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#internationalization" data-ice="link">Internationalization</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#backwards-compatibility" data-ice="link">Backwards Compatibility</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#browser-support" data-ice="link">Browser Support</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#open-development" data-ice="link">Open Development</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/manual.html"><a href="manual/manual.html" data-ice="link">Manual</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/manual.html"><a href="manual/manual.html#getting-started" data-ice="link">Getting started</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/manual.html"><a href="manual/manual.html#consume-with-npm" data-ice="link">Consume with npm</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/manual.html"><a href="manual/manual.html#custom-build" data-ice="link">Custom build</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/manual.html"><a href="manual/manual.html#development" data-ice="link">Development</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/styles.html"><a href="manual/styles.html" data-ice="link">Styles</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/styles.html"><a href="manual/styles.html#theme" data-ice="link">Theme</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/styles.html"><a href="manual/styles.html#css-only-components" data-ice="link">CSS only components</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#coral-decoratedtextfield" data-ice="link">coral-DecoratedTextfield</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#icon-only" data-ice="link">Icon Only</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#button-only" data-ice="link">Button Only</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#icon-and-button" data-ice="link">Icon and Button</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#coral-heading" data-ice="link">coral-Heading</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#coral-body" data-ice="link">coral-Body</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#coral-rule" data-ice="link">coral-Rule</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#vertical-rule" data-ice="link">Vertical Rule</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#coral-inputgroup" data-ice="link">coral-InputGroup</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#button-before" data-ice="link">Button before</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#button-after" data-ice="link">Button after</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#icon-buttons-on-both-sides" data-ice="link">Icon Buttons on both sides</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#text-buttons-on-both-side" data-ice="link">Text Buttons on both side</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#block-with-button-before" data-ice="link">Block with Button before</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#block-with-button-after" data-ice="link">Block with Button after</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#block-with-text-buttons-and-both-sides" data-ice="link">Block with text Buttons and both sides</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#block-with-icons-buttons-on-both-sides" data-ice="link">Block with Icons Buttons on both sides</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#coral-fieldlabel" data-ice="link">coral-FieldLabel</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#left-variation" data-ice="link">Left Variation</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#coral-form" data-ice="link">coral-Form</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#vertical-layout" data-ice="link">Vertical Layout</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#aligned-layout" data-ice="link">Aligned Layout</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#coral-link" data-ice="link">coral-Link</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#regular" data-ice="link">Regular</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#subtle" data-ice="link">Subtle</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#coral-list" data-ice="link">coral-List</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#condensed" data-ice="link">Condensed</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#minimal" data-ice="link">Minimal</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#coral-radiogroup" data-ice="link">coral-RadioGroup</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#horizontal" data-ice="link">Horizontal</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#vertical" data-ice="link">Vertical</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#labels-below" data-ice="link">Labels below</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#coral-table" data-ice="link">coral-Table</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#basic" data-ice="link">Basic</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#row-hover" data-ice="link">Row hover</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#bordered" data-ice="link">Bordered</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#coral-well" data-ice="link">coral-Well</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#u-coral" data-ice="link">u-coral</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-clearfix" data-ice="link">u-coral-clearFix</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-noborder" data-ice="link">u-coral-noBorder</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-noscroll" data-ice="link">u-coral-noScroll</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-screenreaderonly" data-ice="link">u-coral-screenReaderOnly</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-closedhand" data-ice="link">u-coral-closedHand</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-openhand" data-ice="link">u-coral-openHand</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-pullleft" data-ice="link">u-coral-pullLeft</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-pullright" data-ice="link">u-coral-pullRight</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-padding" data-ice="link">u-coral-padding</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-padding-horizontal" data-ice="link">u-coral-padding-horizontal</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-padding-vertical" data-ice="link">u-coral-padding-vertical</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-margin" data-ice="link">u-coral-margin</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-nopadding" data-ice="link">u-coral-noPadding</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-nopadding-horizontal" data-ice="link">u-coral-noPadding-horizontal</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-nopadding-vertical" data-ice="link">u-coral-noPadding-vertical</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-nomargin" data-ice="link">u-coral-noMargin</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-ellipsis" data-ice="link">u-coral-ellipsis</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-visiblexs---u-coral-hiddenxs" data-ice="link">u-coral-visibleXS | u-coral-hiddenXS</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-visibles---u-coral-hiddens" data-ice="link">u-coral-visibleS | u-coral-hiddenS</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-visiblem---u-coral-hiddenm" data-ice="link">u-coral-visibleM | u-coral-hiddenM</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-visiblel---u-coral-hiddenl" data-ice="link">u-coral-visibleL | u-coral-hiddenL</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/styles.html"><a href="manual/styles.html#using-typekit" data-ice="link">Using Typekit</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#domains" data-ice="link">Domains</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#requesting-a-kit-for-additional-domains" data-ice="link">Requesting a Kit for Additional Domains</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#kit-configuration" data-ice="link">Kit configuration</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#using-a-custom-kit-with-coralui" data-ice="link">Using a Custom Kit with CoralUI</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#font-loading" data-ice="link">Font loading</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/frameworks.html"><a href="manual/frameworks.html" data-ice="link">Frameworks</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/frameworks.html"><a href="manual/frameworks.html#react" data-ice="link">React</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/frameworks.html"><a href="manual/frameworks.html#angular" data-ice="link">Angular</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/frameworks.html"><a href="manual/frameworks.html#vue" data-ice="link">Vue</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/frameworks.html"><a href="manual/frameworks.html#torq" data-ice="link">Torq</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/architecture.html"><a href="manual/architecture.html" data-ice="link">Architecture</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/architecture.html"><a href="manual/architecture.html#web-components" data-ice="link">Web Components</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/architecture.html"><a href="manual/architecture.html#content-zones" data-ice="link">Content Zones</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/architecture.html"><a href="manual/architecture.html#dependencies" data-ice="link">Dependencies</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/architecture.html"><a href="manual/architecture.html#upgrade-to-coralui--4-x-" data-ice="link">Upgrade to CoralUI (4.x)</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/architecture.html"><a href="manual/architecture.html#custom-elements-v1" data-ice="link">Custom Elements v1</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/architecture.html"><a href="manual/architecture.html#coral-register" data-ice="link">Coral.register</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/examples.html"><a href="manual/examples.html" data-ice="link">Examples</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/examples.html"><a href="manual/examples.html#showcase" data-ice="link">Showcase</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/examples.html"><a href="manual/examples.html#playground" data-ice="link">Playground</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/examples.html"><a href="manual/examples.html#configurator" data-ice="link">Configurator</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/contribution.html"><a href="manual/contribution.html" data-ice="link">Contribution</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/contribution.html"><a href="manual/contribution.html#open-development" data-ice="link">Open Development</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/contribution.html"><a href="manual/contribution.html#find-tasks" data-ice="link">Find Tasks</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/contribution.html"><a href="manual/contribution.html#development" data-ice="link">Development</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/contribution.html"><a href="manual/contribution.html#tools" data-ice="link">Tools</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/contribution.html"><a href="manual/contribution.html#track-your-work" data-ice="link">Track your work</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/contribution.html"><a href="manual/contribution.html#work-on-branches" data-ice="link">Work on branches</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/contribution.html"><a href="manual/contribution.html#coding-conventions" data-ice="link">Coding Conventions</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/contribution.html"><a href="manual/contribution.html#general-principles" data-ice="link">General Principles</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/contribution.html"><a href="manual/contribution.html#general-formatting" data-ice="link">General Formatting</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/contribution.html"><a href="manual/contribution.html#add-adobe-disclaimer" data-ice="link">Add Adobe disclaimer</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/contribution.html"><a href="manual/contribution.html#definition-of-done" data-ice="link">Definition of done</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/contribution.html"><a href="manual/contribution.html#submitting-code" data-ice="link">Submitting Code</a></li>
+</ul>
+  </div>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><div class="github-markdown">
+  <div class="manual-user-index" data-ice="manualUserIndex"><p></p><h1 class="guide-Title"><img src="./manual/asset/coral.png">CoralUI (4.x)</h1>
+
+<p></p>
+<p><strong>A JavaScript library of touch-first web components for creating beautiful experiences.</strong></p>
+<h3 id="-a-href----manual-overview-html--&#xBB;-overview--a-"><a href="./manual/overview.html">&#xBB; Overview</a></h3><p><em>Vision and goals</em></p>
+<h3 id="-a-href----manual-manual-html--&#xBB;-manual--a-"><a href="./manual/manual.html">&#xBB; Manual</a></h3><p><em>Get you started. How to install through npm, consume etc</em></p>
+<h3 id="-a-href----manual-styles-html--&#xBB;-styles--a-"><a href="./manual/styles.html">&#xBB; Styles</a></h3><p><em>Theme, public CSS and Typekit</em></p>
+<h3 id="-a-href----manual-frameworks-html--&#xBB;-framework-support--a-"><a href="./manual/frameworks.html">&#xBB; Framework Support</a></h3><p><em>React, Angular, Vue and Torq</em></p>
+<h3 id="-a-href----manual-architecture-html--&#xBB;-architecture--a-"><a href="./manual/architecture.html">&#xBB; Architecture</a></h3><p><em>Technical decisions behind the architecture</em></p>
+<h3 id="-a-href----manual-examples-html--&#xBB;-view-examples--a-"><a href="./manual/examples.html">&#xBB; View examples</a></h3><p><em>All components showcased and Playground</em></p>
+<h3 id="-a-href----manual-contribution-html--&#xBB;-contribution--a-"><a href="./manual/contribution.html">&#xBB; Contribution</a></h3><p><em>Open development principles</em></p>
+<hr>
+<h3 id="where-is-the-coralui--3-x--documentation--">Where is the CoralUI (3.x) documentation ?</h3><p>You&apos;ll find the 3.x documentation at <a href="http://coralui.corp.adobe.com/3.x">http://coralui.corp.adobe.com/3.x</a></p>
+</div>
+
+  
+
+  <div class="manual-cards">
+    
+  <div class="manual-card-wrap" data-ice="cards">
+      <div class="manual-card">
+        <div data-ice="card"><h1>CoralUI (4.x)</h1><p><strong>A JavaScript library of touch-first web components for creating beautiful experiences.</strong></p><p>This repository packages the components that make up CoralUI Spectrum Components built by leveraging 
+the <a href="https://w3c.github.io/webcomponents/spec/custom/">Custom Elements v1</a> specification, which is part of the 
+emerging <a href="https://www.webcomponents.org/introduction">Web Components</a> standard. </p><p>It is an implementation of the <a href="http://spectrum.corp.adobe.com/">Spectrum design specifications</a>. </p><h2>Getting started</h2><h3>Consumers</h3><p>The easiest way to get started with CoralUI is to download the ZIP archive of the 
+<a href="https://git.corp.adobe.com/Coral/coralui/tags">latest release</a> which contains all components. 
+After you&apos;ve unzipped the downloaded zip archive, follow the steps below :</p><ul>
+<li>Put <code>coral.min.css</code> in the <code>css/</code> directory of your project.</li>
+<li>Put <code>coral.min.js</code> in the <code>js/</code> directory of your project.</li>
+<li>Also put the content of the <code>/resources</code> folder in the <code>/resources</code> directory of your project. 
+This is required for icons and other assets to work.</li>
+<li>In the <code>&lt;head&gt;</code> section of your HTML, add the following:<pre><code><code class="source-code prettyprint">&lt;link rel=&quot;stylesheet&quot; href=&quot;css/coral.min.css&quot;&gt;
+&lt;script src=&quot;js/coral.min.js&quot;&gt;&lt;/script&gt;</code>
+</code></pre></li>
+<li>That&apos;s it. Now you&apos;re ready to use CoralUI.</li>
+<li><strong>Note:</strong> Calendar, Clock and Datepicker components will leverage <a href="http://momentjs.com/">moment.js</a> if loaded on the page</li>
+</ul><p><strong>For NPM consumers</strong></p><p>We use Artifactory as an Adobe internal repository manager hosted at <a href="https://artifactory.corp.adobe.com">https://artifactory.corp.adobe.com</a>. </p><p>To retrieve coralui npm packages from artifactory, you have two options :</p><ul>
+<li>Add the following 2 lines to &apos;~/.npmrc&apos;:<pre><code><code class="source-code prettyprint">@coralui:registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-coralui-release
+@spectrum:registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-spectrum-snapshot-local</code>
+</code></pre></li>
+<li>Or run npm install with additional parameters<pre><code><code class="source-code prettyprint">npm install --scope=@coralui --registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-coralui-release
+npm install --scope=@spectrum --registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-spectrum-snapshot-local</code>
+</code></pre></li>
+</ul><p>Then you can install coralui npm packages :</p><pre><code><code class="source-code prettyprint">npm install @coralui/coralui</code>
+</code></pre><p>If your project uses ES6 imports/exports, you can import only required components :</p><pre><code><code class="source-code prettyprint">import {Button, Textfield} from &apos;@coralui/coralui&apos;;</code>
+</code></pre><h3>Contributors</h3><p>CoralUI follows open development principles:</p><ul>
+<li>The code is discoverable and openly available to anyone.</li>
+<li>Discussions about CoralUI happen on an open and archived channel.</li>
+<li>All important technical decisions are exposed on that channel.</li>
+<li>All commits are backed by issues in an openly accessible tracker, which offers a self-service overview of the project&apos;s status and history.</li>
+<li>People who are not members of the core team are encouraged to provide contributions.</li>
+<li>Meritocracy is taken into account when considering the priority of contributions and suggestions. 
+The more you contribute, and the more valuable your contributions are, the more influence you will have within the project.</li>
+</ul><p><strong>Slack channel: <a href="https://coralui.slack.com">https://coralui.slack.com</a>. Mailing list: <a href="./manual/mailto:coralui-dev@adobe.com">coralui-dev@adobe.com</a></strong></p><p>All CoralUI work is tracked in our <a href="https://jira.corp.adobe.com/browse/CUI">JIRA project</a>.</p><p>Before starting, make sure the work you are doing is tracked in JIRA. Create an issue if one doesn&apos;t already exist. 
+An issue description should be complete and include steps to reproduce if the issue is a defect.</p><p>It is required that you work on a feature branch, even in your own fork. The feature branch naming convention is 
+<code>issue/CUI-x</code>. CUI-x corresponds to the JIRA ticket.</p><p>You will be ready to submit your code when your work meets the Definition of Done see 
+<a href="http://coralui.corp.adobe.com">http://coralui.corp.adobe.com</a> for all details. 
+Once ready, your work must be peer reviewed by a pull request.</p><p><strong>Gulp tasks</strong>
+First run <code>npm i</code> then you can use below Gulp tasks to work on CoralUI components :</p><ul>
+<li><code>gulp build</code> to generate the JS/CSS files.</li>
+<li><code>gulp minify</code> to generate a minified version of the JS/CSS files.</li>
+<li><code>gulp tests</code> to run the tests.</li>
+<li><code>gulp docs</code> to build the documentation.</li>
+<li><code>gulp watch</code> to run the examples under <code>localhost:9001/examples/</code> and update JS/CSS files on the fly.</li>
+<li><code>gulp</code> to generate the JS/CSS files and minified files, run the tests and generate the docs.</li>
+</ul></div>
+        <a data-ice="link" href="manual/README.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <div class="manual-card">
+        <div data-ice="card"><h1>Overview</h1><h2>Introduction</h2><p>CoralUI has roots as an internal Open Development project, with core volunteers working on this problem since 2012. 
+As of 2016, the effort has become part of the One Adobe &amp; Cloud Platform effort, which means building a full CoralUI 
+team that includes Exec Leadership, PgM, PM, EM, Dev, and QE members. CoralUI is also becoming a One Adobe Technical 
+Standard, meaning it will be used as the default platform for web projects.</p><h2>Unified Experience</h2><p>Our vision is to create consistent Adobe experiences by providing a complete, easy to use library of HTML components. 
+Standardization on CoralUI allows teams to reduce code duplication and variation and encourages company wide collaboration. 
+This reduction in effort means teams can focus on meeting customer needs, not reinventing the wheel. Use of CoralUI also 
+enables easy, unified design updates, and provides a library that is under Adobe&#x2019;s full control.</p><h2>Enhanced API</h2><p>CoralUI&apos;s components are essentially extended DOM elements. We enhance the existing API with additional functionality, 
+as well as providing some patterns that aren&apos;t available with native HTML alone. Since we expose a JavaScript API that&#x2019;s 
+based on the native DOM API and has all of the same methods as any other HTML element instance, anyone familiar with the 
+DOM already knows most of the API works. </p><p>Most API is available via markup, so don&#x2019;t have to write JavaScript for most basic uses. All you have to do is write 
+the markup for a component, just like you would a normal HTML element.</p><h2>Future Thinking</h2><p>CoralUI is pushing the web forward by leveraging the <a href="https://www.webcomponents.org/introduction">Web Components</a> specification. 
+However, given the landscape of browser implementation and the state of the polyfill ecosystem, we decided to only implement 
+<a href="https://w3c.github.io/webcomponents/spec/custom/">Custom Elements v1</a> at this time.</p><p>A strong advantage CoralUI derives from custom elements is the ability to hide many implementation details from the consumer. 
+More to the point, we found that designs become closely tied to their markup. The use of custom elements allows much more 
+freedom to change the underlying markup that supports those elements. This makes the exposed API smaller and more explicit, 
+resulting in a lower risk of updates to CoralUI needing to introduce breaking changes.</p><p>In addition, every Coral component is an HTML element. This give us the ability to create components from markup or JavaScript 
+and lets us treat them like any other native element, setting properties, appending them in the DOM, etc. </p><h2>Spectrum CSS</h2><p>The current default theme is is an implementation of the <a href="http://spectrum.corp.adobe.com/">Spectrum</a> design specifications. 
+It&apos;s still possible to change the look of an entire CoralUI (4.x) build by simply providing a custom theme.</p><h2>Accessibility</h2><p>Having an inaccessible application can mean thousands of dollars of fines if you land a government contract. 
+It also means alienating an entire segment of society by making your application completely unusable to them. 
+To help you avoid this, we&#x2019;ve made it a rule that every CoralUI component should be accessible. We&#x2019;ve also built a few 
+things into CoralUI to make implementing accessibility easier for component authors and consumers alike.</p><h2>Internationalization</h2><p>CoralUI provides a robust internal system for internationalization of its strings. This can also be used to provided 
+localized content and data inside your application. This is done via our build process and Adobe&apos;s Aladdin service. 
+With a few easy steps, translations can be downloaded and included in the deployed resources of your code. The API for 
+this includes simple functions for getting translated strings, substitution within strings, and the use of translation hints.</p><h2>Backwards Compatibility</h2><p>CoralUI (4.x) ships by default a compatibility package to support the CoralUI (3.x) way to register elements <code>Coral.register</code>. 
+Custom Coral components using Custom Elements v0 are therefore still supported although we highly encourage to migrate 
+to Custom Elements v1 as it&apos;ll become the Web standard. </p><h2>Browser Support</h2><p>CoralUI (4.x) is designed to support the following browsers:</p><ul>
+<li>Chrome (latest)</li>
+<li>Safari (latest)</li>
+<li>Firefox (latest)</li>
+<li>Edge (latest)</li>
+<li>IE 11</li>
+<li>iOS 7+</li>
+<li>Android 4.4+</li>
+</ul><h2>Open Development</h2><p>Since 2012, CoralUI has been an open development project driven by a group of dedicated engineers from various teams 
+across the company.
+CoralUI will always remain an open project, with the goal of becoming public open source in the near future. 
+All are welcome to contribute. </p></div>
+        <a data-ice="link" href="manual/overview.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <div class="manual-card">
+        <div data-ice="card"><h1>Manual</h1><h2>Getting started</h2><p><strong>The following information is intended to get you up and running quickly with CoralUI</strong></p><p>The easiest way to start experimenting with CoralUI is to download the ZIP archive of the 
+<a href="https://git.corp.adobe.com/Coral/coralui/tags">latest release</a> which contains all components. 
+After you&apos;ve unzipped the downloaded zip archive, follow the steps below :</p><ul>
+<li>Put <code>coral.min.css</code> in the <code>css/</code> directory of your project.</li>
+<li>Put <code>coral.min.js</code> in the <code>js/</code> directory of your project.</li>
+<li>Also put the content of the <code>/resources</code> folder in the <code>/resources</code> directory of your project. 
+This is required for icons and other assets to work.</li>
+<li>In the <code>&lt;head&gt;</code> section of your HTML, add the following:<pre><code><code class="source-code prettyprint">&lt;link rel=&quot;stylesheet&quot; href=&quot;css/coral.min.css&quot;&gt;
+&lt;script src=&quot;js/coral.min.js&quot;&gt;&lt;/script&gt;</code>
+</code></pre></li>
+<li>That&apos;s it. Now you&apos;re ready to use CoralUI.</li>
+<li><strong>Note:</strong> Calendar, Clock and Datepicker components will leverage <a href="http://momentjs.com/">moment.js</a> if loaded on the page</li>
+</ul><h2>Consume with npm</h2><p>We use Artifactory as an Adobe internal repository manager hosted at <a href="https://artifactory.corp.adobe.com">https://artifactory.corp.adobe.com</a>. </p><p>To retrieve coralui npm packages from artifactory, you have two options :</p><ul>
+<li>Add the following 2 lines to &apos;~/.npmrc&apos;:<pre><code><code class="source-code prettyprint">@coralui:registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-coralui-release
+@spectrum:registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-spectrum-snapshot-local</code>
+</code></pre></li>
+<li>Or run npm install with additional parameters<pre><code><code class="source-code prettyprint">npm install --scope=@coralui --registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-coralui-release
+npm install --scope=@spectrum --registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-spectrum-snapshot-local</code>
+</code></pre></li>
+</ul><p>Then you can install coralui npm packages :</p><pre><code><code class="source-code prettyprint">npm install @coralui/coralui</code>
+</code></pre><p>If your project uses a module bundler (e.g. Webpack) and a ES6/7 to ES5 transpiler (e.g. Babel), 
+you can bundle only needed components :</p><pre><code><code class="source-code prettyprint">import {Button, Textfield} from &apos;@coralui/coralui&apos;;</code>
+</code></pre><h2>Custom build</h2><p>Don&apos;t want all of CoralUI, or want to add components that aren&apos;t in the default build? No problem ! 
+We&apos;ll show you how to customize a build : </p><ol>
+<li>Fork the <a href="https://git.corp.adobe.com/Coral/coralui">repository</a> on GitHub</li>
+<li>Open <code>index.js</code> and remove components you would like excluded from the build. Repeat for <code>src/tests/index.js</code>.</li>
+<li>Run <code>npm install</code>. Optionally you can also add additional components to <code>package.json</code>.</li>
+<li>Run <code>gulp</code>. This will generate the build and run the tests.</li>
+</ol><h2>Development</h2><p>First run <code>npm i</code> then you can use below Gulp tasks to work on CoralUI components :</p><ul>
+<li><code>gulp build</code> to generate the JS/CSS files.</li>
+<li><code>gulp minify</code> to generate a minified version of the JS/CSS files.</li>
+<li><code>gulp tests</code> to run the tests.</li>
+<li><code>gulp docs</code> to build the documentation.</li>
+<li><code>gulp watch</code> to run the examples under <code>localhost:9001/examples/</code> and watch changes in the src folder.</li>
+<li><code>gulp</code> to generate the JS/CSS files and minified files, run the tests and generate the docs.</li>
+</ul></div>
+        <a data-ice="link" href="manual/manual.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <div class="manual-card">
+        <div data-ice="card"><h1>Styles</h1><h2>Theme</h2><p>The default CoralUI font styles cascade from <code>coral--light</code> or <code>coral--dark</code> theme, so that class must be specified at a higher level.</p><pre><code><code class="source-code prettyprint">&lt;body class=&quot;coral--light&quot;&gt;
+    &lt;!-- light theme --&gt;
+    &lt;div class=&quot;container&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;coral--dark&quot;&gt;
+        &lt;!-- dark theme --&gt;
+    &lt;/div&gt;
+&lt;/body&gt;</code>
+</code></pre><h2>CSS only components</h2><p><strong>This section provides details on the few CSS-only components included in CoralUI considered as public API.</strong></p><p>There are some CoralUI components that are markup and CSS only. They are not custom elements, and as such are used by 
+setting CSS selectors on normal HTML markup. </p><h3>coral-DecoratedTextfield</h3><p>Renders a textfield with an embedded button, icon, or both.</p><h4>Icon Only</h4><pre><code><code class="source-code prettyprint">&lt;span class=&quot;coral-DecoratedTextfield&quot;&gt;
+  &lt;coral-icon class=&quot;coral-DecoratedTextfield-icon&quot; icon=&quot;search&quot; size=&quot;XS&quot;&gt;&lt;/coral-icon&gt;
+  &lt;input is=&quot;coral-textfield&quot; class=&quot;coral-DecoratedTextfield-input&quot;/&gt;
+&lt;/span&gt;</code>
+</code></pre><h4>Button Only</h4><pre><code><code class="source-code prettyprint">&lt;span class=&quot;coral-DecoratedTextfield&quot;&gt;
+  &lt;input is=&quot;coral-textfield&quot; class=&quot;coral-DecoratedTextfield-input&quot;/&gt;
+  &lt;button is=&quot;coral-button&quot; variant=&quot;icon&quot; icon=&quot;close&quot; iconsize=&quot;XS&quot;
+          class=&quot;coral-DecoratedTextfield-button&quot;&gt;&lt;/button&gt;
+&lt;/span&gt;</code>
+</code></pre><h4>Icon and Button</h4><pre><code><code class="source-code prettyprint">&lt;span class=&quot;coral-DecoratedTextfield&quot;&gt;
+&lt;coral-icon class=&quot;coral-DecoratedTextfield-icon&quot; icon=&quot;search&quot; size=&quot;XS&quot;&gt;&lt;/coral-icon&gt;
+  &lt;input is=&quot;coral-textfield&quot; class=&quot;coral-DecoratedTextfield-input&quot;/&gt;
+  &lt;button is=&quot;coral-button&quot; variant=&quot;icon&quot; icon=&quot;close&quot; iconsize=&quot;XS&quot;
+          class=&quot;coral-DecoratedTextfield-button&quot;&gt;&lt;/button&gt;
+&lt;/span&gt;</code>
+</code></pre><h3>coral-Heading</h3><p>Headings are used to represent titles in content. </p><pre><code><code class="source-code prettyprint">&lt;h1 class=&quot;coral-Heading coral-Heading--1&quot;&gt;Heading 1&lt;/h1&gt;
+&lt;h2 class=&quot;coral-Heading coral-Heading--2&quot;&gt;Heading 2&lt;/h2&gt;
+&lt;h3 class=&quot;coral-Heading coral-Heading--3&quot;&gt;Heading 3&lt;/h3&gt;
+&lt;h4 class=&quot;coral-Heading coral-Heading--4&quot;&gt;Heading 4&lt;/h4&gt;
+&lt;h5 class=&quot;coral-Heading coral-Heading--5&quot;&gt;Heading 5&lt;/h5&gt;
+&lt;h6 class=&quot;coral-Heading coral-Heading--6&quot;&gt;Heading 6&lt;/h6&gt;</code>
+</code></pre><h3>coral-Body</h3><p>Typography elements see below examples</p><pre><code><code class="source-code prettyprint">&lt;p class=&quot;coral-Body--small&quot;&gt;Small Body Text&lt;/p&gt;
+&lt;p class=&quot;coral-Body&quot;&gt;Default Body Text&lt;/p&gt;
+&lt;p class=&quot;coral-Body--secondary&quot;&gt;Secondary Body Text&lt;/p&gt;
+&lt;p class=&quot;coral-Body--italic&quot;&gt; Body Text Italic&lt;/p&gt;
+&lt;p class=&quot;coral-Body--large&quot;&gt;Large Body Text&lt;/p&gt;</code>
+</code></pre><h3>coral-Rule</h3><p>Styles to define rules in the content</p><pre><code><code class="source-code prettyprint">&lt;hr class=&quot;coral-Rule&quot;&gt;
+&lt;hr class=&quot;coral-Rule coral-Rule--subsection&quot;&gt;
+&lt;hr class=&quot;coral-Rule coral-Rule--subsection2&quot;&gt;</code>
+</code></pre><h4>Vertical Rule</h4><pre><code><code class="source-code prettyprint">&lt;coral-icon icon=&quot;add&quot;&gt;&lt;/coral-icon&gt;
+&lt;span class=&quot;coral-Rule coral-Rule--panel&quot;&gt;&lt;/span&gt;
+&lt;coral-icon icon=&quot;remove&quot;&gt;&lt;/coral-icon&gt;</code>
+</code></pre><h3>coral-InputGroup</h3><p>A composite CSS pattern for Buttons and Textfields.</p><h4>Button before</h4><pre><code><code class="source-code prettyprint">&lt;div class=&quot;coral-InputGroup&quot;&gt;
+  &lt;span class=&quot;coral-InputGroup-button&quot;&gt;
+    &lt;button is=&quot;coral-button&quot; icon=&quot;selectBox&quot; title=&quot;Select&quot;&gt;&lt;/button&gt;
+  &lt;/span&gt;
+  &lt;input is=&quot;coral-textfield&quot; class=&quot;coral-InputGroup-input&quot;/&gt;
+&lt;/div&gt;</code>
+</code></pre><h4>Button after</h4><pre><code><code class="source-code prettyprint">&lt;div class=&quot;coral-InputGroup&quot;&gt;
+  &lt;input is=&quot;coral-textfield&quot; class=&quot;coral-InputGroup-input&quot;/&gt;
+  &lt;span class=&quot;coral-InputGroup-button&quot;&gt;
+    &lt;button is=&quot;coral-button&quot; icon=&quot;selectBox&quot; title=&quot;Select&quot;&gt;&lt;/button&gt;
+  &lt;/span&gt;
+&lt;/div&gt;</code>
+</code></pre><h4>Icon Buttons on both sides</h4><pre><code><code class="source-code prettyprint">&lt;div class=&quot;coral-InputGroup&quot;&gt;
+  &lt;span class=&quot;coral-InputGroup-button&quot;&gt;
+    &lt;button is=&quot;coral-button&quot; icon=&quot;remove&quot; title=&quot;Remove&quot;&gt;&lt;/button&gt;
+  &lt;/span&gt;
+  &lt;input is=&quot;coral-textfield&quot; class=&quot;coral-InputGroup-input&quot;/&gt;
+  &lt;span class=&quot;coral-InputGroup-button&quot;&gt;
+    &lt;button is=&quot;coral-button&quot; icon=&quot;add&quot; title=&quot;Add&quot;&gt;&lt;/button&gt;
+  &lt;/span&gt;
+&lt;/div&gt;</code>
+</code></pre><h4>Text Buttons on both side</h4><pre><code><code class="source-code prettyprint">&lt;div class=&quot;coral-InputGroup&quot;&gt;
+  &lt;span class=&quot;coral-InputGroup-button&quot;&gt;
+    &lt;button is=&quot;coral-button&quot;&gt;Go!&lt;/button&gt;
+  &lt;/span&gt;
+  &lt;input is=&quot;coral-textfield&quot; class=&quot;coral-InputGroup-input&quot;/&gt;
+  &lt;span class=&quot;coral-InputGroup-button&quot;&gt;
+    &lt;button is=&quot;coral-button&quot;&gt;Go!&lt;/button&gt;
+  &lt;/span&gt;
+&lt;/div&gt;</code>
+</code></pre><h4>Block with Button before</h4><pre><code><code class="source-code prettyprint">&lt;div class=&quot;coral-InputGroup coral-InputGroup--block&quot;&gt;
+  &lt;span class=&quot;coral-InputGroup-button&quot;&gt;
+    &lt;button is=&quot;coral-button&quot; icon=&quot;selectBox&quot; title=&quot;Select&quot;&gt;&lt;/button&gt;
+  &lt;/span&gt;
+  &lt;input is=&quot;coral-textfield&quot; class=&quot;coral-InputGroup-input&quot;/&gt;
+&lt;/div&gt;</code>
+</code></pre><h4>Block with Button after</h4><pre><code><code class="source-code prettyprint">&lt;div class=&quot;coral-InputGroup coral-InputGroup--block&quot;&gt;
+  &lt;input is=&quot;coral-textfield&quot; class=&quot;coral-InputGroup-input&quot;/&gt;
+  &lt;span class=&quot;coral-InputGroup-button&quot;&gt;
+    &lt;button is=&quot;coral-button&quot; icon=&quot;selectBox&quot; title=&quot;Select&quot;&gt;&lt;/button&gt;
+  &lt;/span&gt;
+&lt;/div&gt;</code>
+</code></pre><h4>Block with text Buttons and both sides</h4><pre><code><code class="source-code prettyprint">&lt;div class=&quot;coral-InputGroup coral-InputGroup--block&quot;&gt;
+  &lt;span class=&quot;coral-InputGroup-button&quot;&gt;
+    &lt;button is=&quot;coral-button&quot;&gt;Go!&lt;/button&gt;
+  &lt;/span&gt;
+  &lt;input is=&quot;coral-textfield&quot; class=&quot;coral-InputGroup-input&quot;/&gt;
+  &lt;span class=&quot;coral-InputGroup-button&quot;&gt;
+    &lt;button is=&quot;coral-button&quot;&gt;Go!&lt;/button&gt;
+  &lt;/span&gt;
+&lt;/div&gt;</code>
+</code></pre><h4>Block with Icons Buttons on both sides</h4><pre><code><code class="source-code prettyprint">&lt;div class=&quot;coral-InputGroup coral-InputGroup--block&quot;&gt;
+  &lt;span class=&quot;coral-InputGroup-button&quot;&gt;
+    &lt;button is=&quot;coral-button&quot; icon=&quot;remove&quot; title=&quot;Remove&quot;&gt;&lt;/button&gt;
+  &lt;/span&gt;
+  &lt;input is=&quot;coral-textfield&quot; class=&quot;coral-InputGroup-input&quot;/&gt;
+  &lt;span class=&quot;coral-InputGroup-button&quot;&gt;
+    &lt;button is=&quot;coral-button&quot; icon=&quot;add&quot; title=&quot;Add&quot;&gt;&lt;/button&gt;
+  &lt;/span&gt;
+&lt;/div&gt;</code>
+</code></pre><h3>coral-FieldLabel</h3><p>Label styles. Field label for use with form inputs.</p><pre><code><code class="source-code prettyprint">&lt;label for=&quot;story&quot; class=&quot;coral-FieldLabel&quot;&gt;Life Story&lt;/label&gt;
+&lt;textarea is=&quot;coral-textarea&quot; id=&quot;story&quot; placeholder=&quot;Enter your life story&quot;&gt;&lt;/textarea&gt;</code>
+</code></pre><h4>Left Variation</h4><pre><code><code class="source-code prettyprint">&lt;label class=&quot;coral-FieldLabel coral-FieldLabel--left&quot; for=&quot;email&quot;&gt;Email Address&lt;/label&gt;
+&lt;input type=&quot;text&quot; is=&quot;coral-textfield&quot; placeholder=&quot;Enter your e-mail address&quot; id=&quot;email&quot;&gt;</code>
+</code></pre><h3>coral-Form</h3><p>Form styles. Please look at the related components, to see more examples.</p><h4>Vertical Layout</h4><p>Add the <code>coral-Form--vertical</code> class to render all labels and fields on the same vertical line.</p><pre><code><code class="source-code prettyprint">&lt;form class=&quot;coral-Form coral-Form--vertical&quot; style=&quot;width:300px;&quot;&gt;
+  &lt;section class=&quot;coral-Form-fieldset&quot;&gt;
+    &lt;h3 class=&quot;coral-Form-fieldset-legend&quot;&gt;Registration&lt;/h3&gt;
+
+    &lt;label class=&quot;coral-Form-fieldlabel&quot;&gt;Username&lt;/label&gt;
+    &lt;input is=&quot;coral-textfield&quot; class=&quot;coral-Form-field&quot;/&gt;
+    &lt;div class=&quot;coral-Form-fieldwrapper&quot;&gt;
+      &lt;label class=&quot;coral-Form-fieldlabel&quot;&gt;Password&lt;/label&gt;
+      &lt;input is=&quot;coral-textfield&quot; class=&quot;coral-Form-field&quot;/&gt;
+      &lt;coral-icon class=&quot;coral-Form-fieldinfo&quot; icon=&quot;info&quot;&gt;&lt;/coral-icon&gt;
+      &lt;coral-tooltip target=&quot;_prev&quot; variant=&quot;info&quot; placement=&quot;right&quot;&gt;At least 12 characters&lt;/coral-tooltip&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;coral-Form-fieldwrapper coral-Form-fieldwrapper--singleline&quot;&gt;
+      &lt;coral-checkbox class=&quot;coral-Form-field&quot;&gt;Remember me&lt;/coral-checkbox&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+&lt;/form&gt;</code>
+</code></pre><h4>Aligned Layout</h4><p>Add the <code>coral-Form--aligned</code> class to render each label and field pair on the same horizontal line.</p><pre><code><code class="source-code prettyprint">&lt;form class=&quot;coral-Form coral-Form--aligned&quot;&gt;
+  &lt;section class=&quot;coral-Form-fieldset&quot;&gt;
+    &lt;label class=&quot;coral-Form-fieldlabel&quot;&gt;Username&lt;/label&gt;
+    &lt;input is=&quot;coral-textfield&quot; class=&quot;coral-Form-field&quot;/&gt;
+    &lt;div class=&quot;coral-Form-fieldwrapper&quot;&gt;
+      &lt;label class=&quot;coral-Form-fieldlabel&quot;&gt;Password&lt;/label&gt;
+      &lt;input is=&quot;coral-textfield&quot; class=&quot;coral-Form-field&quot;/&gt;
+      &lt;coral-icon class=&quot;coral-Form-fieldinfo&quot; icon=&quot;info&quot;&gt;&lt;/coral-icon&gt;
+      &lt;coral-tooltip target=&quot;_prev&quot; variant=&quot;info&quot; placement=&quot;right&quot;&gt;At least 12 characters&lt;/coral-tooltip&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+&lt;/form&gt;</code>
+</code></pre><h3>coral-Link</h3><p>Links get styled using the <code>coral-Link</code> class.</p><h4>Regular</h4><pre><code><code class="source-code prettyprint">&lt;a href=&quot;#&quot; class=&quot;coral-Link&quot;&gt;link&lt;/a&gt;.</code>
+</code></pre><h4>Subtle</h4><pre><code><code class="source-code prettyprint">&lt;a href=&quot;#&quot; class=&quot;coral-Link coral-Link--subtle&quot;&gt;subtle link&lt;/a&gt;</code>
+</code></pre><h3>coral-List</h3><pre><code><code class="source-code prettyprint">&lt;ul class=&quot;coral-List&quot;&gt;
+ &lt;li class=&quot;coral-List-item&quot;&gt;Item 1&lt;/li&gt;
+ &lt;li class=&quot;coral-List-item&quot;&gt;Item 2&lt;/li&gt;
+ &lt;li class=&quot;coral-List-item&quot;&gt;Item 3&lt;/li&gt;
+&lt;/ul&gt;</code>
+</code></pre><h4>Condensed</h4><pre><code><code class="source-code prettyprint">&lt;ul class=&quot;coral-List coral-List--condensed&quot;&gt;
+ &lt;li class=&quot;coral-List-item&quot;&gt;Item 1&lt;/li&gt;
+ &lt;li class=&quot;coral-List-item&quot;&gt;Item 2&lt;/li&gt;
+ &lt;li class=&quot;coral-List-item&quot;&gt;Item 3&lt;/li&gt;
+&lt;/ul&gt;</code>
+</code></pre><h4>Minimal</h4><pre><code><code class="source-code prettyprint">&lt;ul class=&quot;coral-List coral-List--minimal&quot;&gt;
+ &lt;li class=&quot;coral-List-item&quot;&gt;Item 1&lt;/li&gt;
+ &lt;li class=&quot;coral-List-item&quot;&gt;Item 2&lt;/li&gt;
+ &lt;li class=&quot;coral-List-item&quot;&gt;Item 3&lt;/li&gt;
+&lt;/ul&gt;</code>
+</code></pre><h3>coral-RadioGroup</h3><p>Aligns Radio components.</p><h4>Horizontal</h4><pre><code><code class="source-code prettyprint">&lt;div class=&quot;coral-RadioGroup&quot;&gt;
+  &lt;label class=&quot;coral-Radio&quot;&gt;
+    &lt;coral-radio name=&quot;r1&quot;&gt;Quack Quack&lt;/coral-radio&gt;
+  &lt;/label&gt;
+  &lt;label class=&quot;coral-Radio&quot;&gt;
+    &lt;coral-radio name=&quot;r1&quot;&gt;Woof Woof&lt;/coral-radio&gt;
+  &lt;/label&gt;
+  &lt;label class=&quot;coral-Radio&quot;&gt;
+    &lt;coral-radio name=&quot;r1&quot;&gt;Meow Meow&lt;/coral-radio&gt;
+  &lt;/label&gt;
+&lt;/div&gt;</code>
+</code></pre><h4>Vertical</h4><pre><code><code class="source-code prettyprint">&lt;div class=&quot;coral-RadioGroup coral-RadioGroup--vertical&quot;&gt;
+  &lt;label class=&quot;coral-Radio&quot;&gt;
+    &lt;coral-radio name=&quot;r1&quot;&gt;Quack Quack&lt;/coral-radio&gt;
+  &lt;/label&gt;
+  &lt;label class=&quot;coral-Radio&quot;&gt;
+    &lt;coral-radio name=&quot;r1&quot;&gt;Woof Woof&lt;/coral-radio&gt;
+  &lt;/label&gt;
+  &lt;label class=&quot;coral-Radio&quot;&gt;
+    &lt;coral-radio name=&quot;r1&quot;&gt;Meow Meow&lt;/coral-radio&gt;
+  &lt;/label&gt;
+&lt;/div&gt;</code>
+</code></pre><h4>Labels below</h4><pre><code><code class="source-code prettyprint">&lt;div class=&quot;coral-RadioGroup coral-RadioGroup--labelsBelow&quot;&gt;
+  &lt;label class=&quot;coral-Radio&quot;&gt;
+    &lt;coral-radio name=&quot;r1&quot;&gt;1&lt;/coral-radio&gt;
+  &lt;/label&gt;
+  &lt;label class=&quot;coral-Radio&quot;&gt;
+    &lt;coral-radio name=&quot;r1&quot;&gt;2&lt;/coral-radio&gt;
+  &lt;/label&gt;
+  &lt;label class=&quot;coral-Radio&quot;&gt;
+    &lt;coral-radio name=&quot;r1&quot;&gt;3&lt;/coral-radio&gt;
+  &lt;/label&gt;
+&lt;/div&gt;</code>
+</code></pre><h3>coral-Table</h3><h4>Basic</h4><pre><code><code class="source-code prettyprint">&lt;table class=&quot;coral-Table&quot;&gt;
+  &lt;thead class=&quot;coral-Table-head&quot;&gt;
+    &lt;tr class=&quot;coral-Table-row&quot;&gt;
+      &lt;th class=&quot;coral-Table-headerCell&quot;&gt;Pet Name&lt;/th&gt;
+      &lt;th class=&quot;coral-Table-headerCell&quot;&gt;Type&lt;/th&gt;
+      &lt;th class=&quot;coral-Table-headerCell&quot;&gt;Good/Bad&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody class=&quot;coral-Table-body&quot;&gt;
+    &lt;tr class=&quot;coral-Table-row&quot;&gt;
+      &lt;td class=&quot;coral-Table-cell&quot;&gt;Squeak&lt;/td&gt;
+      &lt;td class=&quot;coral-Table-cell&quot;&gt;Mouse&lt;/td&gt;
+      &lt;td class=&quot;coral-Table-cell&quot;&gt;Bad&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr class=&quot;coral-Table-row&quot;&gt;
+      &lt;td class=&quot;coral-Table-cell&quot;&gt;Spot&lt;/td&gt;
+      &lt;td class=&quot;coral-Table-cell&quot;&gt;Dog&lt;/td&gt;
+      &lt;td class=&quot;coral-Table-cell&quot;&gt;Bad&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr class=&quot;coral-Table-row&quot;&gt;
+      &lt;td class=&quot;coral-Table-cell&quot;&gt;Fluffy&lt;/td&gt;
+      &lt;td class=&quot;coral-Table-cell&quot;&gt;Velociraptor&lt;/td&gt;
+      &lt;td class=&quot;coral-Table-cell&quot;&gt;Good&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code>
+</code></pre><h4>Row hover</h4><pre><code><code class="source-code prettyprint">&lt;table class=&quot;coral-Table coral-Table--hover&quot;&gt;
+  &lt;thead class=&quot;coral-Table-head&quot;&gt;
+    &lt;tr class=&quot;coral-Table-row&quot;&gt;
+      &lt;th class=&quot;coral-Table-headerCell&quot;&gt;Pet Name&lt;/th&gt;
+      &lt;th class=&quot;coral-Table-headerCell&quot;&gt;Type&lt;/th&gt;
+      &lt;th class=&quot;coral-Table-headerCell&quot;&gt;Good/Bad&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody class=&quot;coral-Table-body&quot;&gt;
+    &lt;tr class=&quot;coral-Table-row&quot;&gt;
+      &lt;td class=&quot;coral-Table-cell&quot;&gt;Mongo&lt;/td&gt;
+      &lt;td class=&quot;coral-Table-cell&quot;&gt;Chihuahua&lt;/td&gt;
+      &lt;td class=&quot;coral-Table-cell&quot;&gt;Bad&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr class=&quot;coral-Table-row&quot;&gt;
+      &lt;td class=&quot;coral-Table-cell&quot;&gt;Tiny&lt;/td&gt;
+      &lt;td class=&quot;coral-Table-cell&quot;&gt;Great Dane&lt;/td&gt;
+      &lt;td class=&quot;coral-Table-cell&quot;&gt;Bad&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr class=&quot;coral-Table-row&quot;&gt;
+      &lt;td class=&quot;coral-Table-cell&quot;&gt;Jaws&lt;/td&gt;
+      &lt;td class=&quot;coral-Table-cell&quot;&gt;Pit Bull&lt;/td&gt;
+      &lt;td class=&quot;coral-Table-cell&quot;&gt;Good&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code>
+</code></pre><h4>Bordered</h4><pre><code><code class="source-code prettyprint">&lt;table class=&quot;coral-Table coral-Table--bordered&quot;&gt;
+  &lt;thead class=&quot;coral-Table-head&quot;&gt;
+    &lt;tr class=&quot;coral-Table-row&quot;&gt;
+      &lt;th class=&quot;coral-Table-headerCell&quot;&gt;Pet Name&lt;/th&gt;
+      &lt;th class=&quot;coral-Table-headerCell&quot;&gt;Type&lt;/th&gt;
+      &lt;th class=&quot;coral-Table-headerCell&quot;&gt;Good/Bad&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody class=&quot;coral-Table-body&quot;&gt;
+    &lt;tr class=&quot;coral-Table-row&quot;&gt;
+      &lt;td class=&quot;coral-Table-cell&quot;&gt;Hopper&lt;/td&gt;
+      &lt;td class=&quot;coral-Table-cell&quot;&gt;Frog&lt;/td&gt;
+      &lt;td class=&quot;coral-Table-cell&quot;&gt;Good&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr class=&quot;coral-Table-row&quot;&gt;
+      &lt;td class=&quot;coral-Table-cell&quot;&gt;Pokey&lt;/td&gt;
+      &lt;td class=&quot;coral-Table-cell&quot;&gt;Porcupine&lt;/td&gt;
+      &lt;td class=&quot;coral-Table-cell&quot;&gt;Good&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr class=&quot;coral-Table-row&quot;&gt;
+      &lt;td class=&quot;coral-Table-cell&quot;&gt;Mr. Snuggles&lt;/td&gt;
+      &lt;td class=&quot;coral-Table-cell&quot;&gt;Snake&lt;/td&gt;
+      &lt;td class=&quot;coral-Table-cell&quot;&gt;Bad&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code>
+</code></pre><h3>coral-Well</h3><p>Wells are used to separate field groups or large blocks of text.</p><pre><code><code class="source-code prettyprint">&lt;div class=&quot;coral-Well&quot;&gt;
+    Lorem ipsum Fugiat sit mollit incididunt in occaecat reprehenderit cillum
+    magna Excepteur enim eu deserunt eiusmod dolor occaecat dolore officia mollit
+    dolore consectetur elit in enim esse consectetur amet do exercitation..
+  &lt;/div&gt;</code>
+</code></pre><h3>u-coral</h3><p>CoralUI provides some CSS utility classes that can be applied to any DOM element.</p><h4>u-coral-clearFix</h4><p>Applies the clearfix hack.</p><h4>u-coral-noBorder</h4><p>Removes all the borders of an element.</p><h4>u-coral-noScroll</h4><p>Stops an element from scrolling.</p><h4>u-coral-screenReaderOnly</h4><p>Hides elements from visual browsers.</p><h4>u-coral-closedHand</h4><p>A closed hand cursor that indicates an item is current grabbed.</p><h4>u-coral-openHand</h4><p>An open hand cursor to indicate that an item can be grabbed.</p><h4>u-coral-pullLeft</h4><p>Floats the content to the left.</p><h4>u-coral-pullRight</h4><p>Floats the content to the right.</p><h4>u-coral-padding</h4><p>Adds the default padding on all sides.</p><h4>u-coral-padding-horizontal</h4><p>Adds the default padding to left and right.</p><h4>u-coral-padding-vertical</h4><p>Adds the default padding to top and bottom.</p><h4>u-coral-margin</h4><p>Adds the default the margin on all sides.</p><h4>u-coral-noPadding</h4><p>Removes the padding on all sides.</p><h4>u-coral-noPadding-horizontal</h4><p>Removes the padding on the left and right side.</p><h4>u-coral-noPadding-vertical</h4><p>Removes the padding on the top and bottom side.</p><h4>u-coral-noMargin</h4><p>Removes the margin on all sides.</p><h4>u-coral-ellipsis</h4><p>Prevent text from wrapping, use an ellipsis to truncate.</p><h4>u-coral-visibleXS | u-coral-hiddenXS</h4><p>Extra small device: &lt;768px.</p><h4>u-coral-visibleS | u-coral-hiddenS</h4><p>Small device: &gt;= 768px.</p><h4>u-coral-visibleM | u-coral-hiddenM</h4><p>Medium device: &gt;= 992px.</p><h4>u-coral-visibleL | u-coral-hiddenL</h4><p>Large device &gt;= 1200px.</p><h2>Using Typekit</h2><p>CoralUI uses Typekit to securely deliver the Adobe Clean corporate font.</p><h3>Domains</h3><p>It comes pre-configured with a kit that is limited to the following domains :</p><ul>
+<li>*.adobe.com</li>
+<li>*.demdex.com</li>
+<li>*.acrobat.com</li>
+<li>*.omniture.com</li>
+<li>*.day.com</li>
+<li>localhost</li>
+<li>127.0.0.1</li>
+<li>0.0.0.0</li>
+</ul><p>If you are using CoralUI on a server on a domain other than these, you will need to request and configure your own Typekit kit.</p><h3>Requesting a Kit for Additional Domains</h3><p>If you need to enable CoralUI on additional domains, you will need to obtain a voucher for Adobe Clean from the Typekit team.</p><ol>
+<li>Create a <a href="https://inside.corp.adobe.com/itech/kc/KB1312968.html">generic Adobe account</a> to use as your Typekit account. (recommended)</li>
+<li>Visit <a href="https://wiki.corp.adobe.com/display/devrel/Using+Typekit+at+Adobe">Adobe TypeKit Wiki</a> for further help on Adobe TypeKit accounts.</li>
+<li>Configure your kit per the Kit Configuration settings below.</li>
+<li>Configure CoralUI to use your default kit per the instructions below.</li>
+</ol><h3>Kit configuration</h3><p>Your Kit should be configured with following font variations included.</p><pre><code><code class="source-code prettyprint">Adobe Clean - Light
+Adobe Clean - Regular
+Adobe Clean - Bold
+Adobe Clean - Italic
+Adobe Clean Condensed - Bold
+Adobe Clean Condensed - Italic</code>
+</code></pre><p>Choose default language support for both families.</p><h3>Using a Custom Kit with CoralUI</h3><p>Include your Typekit ID as a CoralUI option before CoralUI gets loaded.</p><pre><code><code class="source-code prettyprint">&lt;script&gt;
+  window.Coral = window.Coral || {};
+  Coral.options = { typeKitId: &apos;xwm7izk&apos;};
+&lt;/script&gt;</code>
+</code></pre><h3>Font loading</h3><p>Typekit typically relies on a <code>.wf-loading</code> selector to hide content and prevent the Flash Of Unstyled Text (FOUT) that 
+is associated with web fonts.</p><pre><code><code class="source-code prettyprint">.wf-loading {
+  visibility: hidden;
+}</code>
+</code></pre><p>That selector would work in conjunction with the function in the typekit.js JavaScript file to remove the selector from 
+the DOM when Typekit has loaded. However, experience has shown that hiding content and blocking until Typekit loads can 
+make the page or app unresponsive on initial load.</p><p>CoralUI remains agnostic. Consumers must implement their own solution to avoid Flash Of Unstyled Text during font loading.</p></div>
+        <a data-ice="link" href="manual/styles.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <div class="manual-card">
+        <div data-ice="card"><h1>Frameworks</h1><p><strong>Major JS frameworks (see below) are supported. For each framework, an example app with CoralUI 4.x has been created.</strong></p><p>All examples showcase a Coral.Dialog with Coral.Button&apos;s and are based on respective frameworks tutorials to get started.
+CoralUI build files (JS/CSS) are included on top and that&apos;s it. It works.</p><h2>React</h2><p>CoralUI 4.x + React example : <a href="https://git.corp.adobe.com/ringel/coralui-react">https://git.corp.adobe.com/ringel/coralui-react</a>. </p><p><em>React quickstart : <a href="https://reactjs.org/docs/installation.html#creating-a-new-application">https://reactjs.org/docs/installation.html#creating-a-new-application</a>.</em></p><h2>Angular</h2><p>CoralUI 4.x + Angular example : <a href="https://git.corp.adobe.com/ringel/coralui-angular">https://git.corp.adobe.com/ringel/coralui-angular</a>. </p><p><em>Angular quickstart : <a href="https://angular.io/guide/quickstart">https://angular.io/guide/quickstart</a>.</em></p><h2>Vue</h2><p>CoralUI 4.x + Vue example : <a href="https://git.corp.adobe.com/ringel/coralui-vue">https://git.corp.adobe.com/ringel/coralui-vue</a>. </p><p><em>Vue quickstart : <a href="https://vuejs.org/v2/guide/installation.html#CLI">https://vuejs.org/v2/guide/installation.html#CLI</a>.</em></p><h2>Torq</h2><p>CoralUI 4.x + Torq example : <a href="https://git.corp.adobe.com/ringel/coralui-torq">https://git.corp.adobe.com/ringel/coralui-torq</a>. </p><p><em>Torq quickstart : <a href="http://torq.corp.adobe.com/latest/#page/guides/tutorial/intro">http://torq.corp.adobe.com/latest/#page/guides/tutorial/intro</a>.</em></p></div>
+        <a data-ice="link" href="manual/frameworks.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <div class="manual-card">
+        <div data-ice="card"><h1>Architecture</h1><h2>Web Components</h2><p>CoralUI hides implementation detail from consumers by leveraging the <a href="https://w3c.github.io/webcomponents/spec/custom/">Custom Elements v1</a> 
+specification, which is part of the emerging <a href="https://www.webcomponents.org/introduction">Web Components</a> standard.</p><p><strong>Therefore any Coral CSS classes and attributes not explicitly mentioned in the public documentation are private and subject to change. 
+Their direct use is not recommended and at high risk of breaking after subsequent updates of CoralUI library.</strong></p><p>Custom elements allow CoralUI to define new types of DOM elements to be used in an HTML document. As a result, CoralUI 
+can extend native elements like a button or text input to provide additional functionality or it can provide completely 
+new elements like a progress indicator. Consumers can then use these elements using their custom tags (e.g., <code>&lt;coral-progress&gt;</code>) 
+and directly interact with their custom properties.</p><p>A strong advantage CoralUI derives from Custom Elements is the ability to hide many implementation details from the consumer. 
+While a progress indicator may be composed of a variety of spans, divs, or images, these are underlying details that shouldn&apos;t
+concern consumers. Rather than consumers copying and maintaining large swaths of code containing all these elements with their 
+various attributes, they are typically able to use a simple Custom Element tag and the underlying elements are seamlessly 
+produced by CoralUI on their behalf. By keeping implementation details internal to components, the exposed public API is 
+minimized and more explicit resulting in a lower risk of introducing breaking changes. </p><p>For now, we have not implemented Shadow DOM or other aspects of the Web Components specification due to lack of browser 
+native support but also polyfill performance issues. </p><p>Custom Elements can be used before their definition is registered. Progressive enhancement is a feature of Custom Elements.
+To know when an element or a set of elements becomes defined, you can use <code>Coral.commons.ready(el, callback)</code>;</p><h2>Content Zones</h2><p>Without shadow DOM, we need some way to mix user-provided content with presentational elements. Our answer to this is content zones. 
+Essentially, we have simple, brainless HTML tags that serve as wrappers for content. 
+Users provide these tags when creating elements from markup, and after we render the template, we simply move these content zones into place.</p><p>This <code>Coral.Alert</code> markup shows content zones for header and content areas of the component:</p><pre><code><code class="source-code prettyprint">&lt;coral-alert&gt;
+  &lt;coral-alert-header&gt;INFO&lt;/coral-alert-header&gt;
+  &lt;coral-alert-content&gt;This is is an alert.&lt;/coral-alert-content&gt;
+&lt;/coral-alert&gt;</code>
+</code></pre><p>Additionally, in the same way you can access the body of the HTML document with document.body, we create references for 
+each content zone on the JavaScript object that corresponds to the component. You can access the header content zone with 
+<code>alert.header</code> and change its content e.g append elements or do whatever else you need to do.</p><h2>Dependencies</h2><p>CoralUI has a few dependencies and polyfills. Some are actually written and maintained by the CoralUI team, and are included in 
+CoralUI without being considered an external dependency.</p><p>These dependencies are:</p><ul>
+<li><a href="https://github.com/webcomponents/custom-elements/">Custom Elements v1 polyfill</a> with built-in components support</li>
+<li><a href="https://github.com/lazd/domly">DOMly</a> to render HTML templates</li>
+<li><a href="https://git.corp.adobe.com//lawdavis/vent">Vent</a> for DOM event delegation</li>
+<li><a href="https://popper.js.org/">PopperJS</a> to manager poppers</li>
+</ul><h2>Upgrade to CoralUI (4.x)</h2><h3>Custom Elements v1</h3><p>3.x relies on Custom Elements v0 which is an outdated spec which won&apos;t be implemented natively in major browsers.
+V0 was a <a href="https://www.w3.org/TR/2016/WD-custom-elements-20160226/">Google-only proposed specification</a> while 
+Custom Elements v1 is a WHATWG Web Standard adopted by all major browser vendors.</p><p>A major change in v1 is that component initialization is now done in an ES6 class constructor. The list of 
+<a href="http://w3c.github.io/webcomponents/spec/custom/#custom-element-conformance">Requirements for custom element constructors</a> 
+prohibits a new component from setting attributes or adding child nodes in its constructor. </p><p><strong>Let&apos;s have a look at a concrete example</strong></p><p>With 3.x you could do following: </p><pre><code><code class="source-code prettyprint">var alert = new Coral.Alert();
+var header = alert.querySelector(&apos;coral-alert-header&apos;);
+header.textContent = &apos;Info&apos;;</code>
+</code></pre><p>With 4.x and Custom Elements v1, this is not possible anymore since the tag is empty when created. You&apos;ll have
+to use the JavaScript API provided by the component instead.</p><pre><code><code class="source-code prettyprint">var alert = new Coral.Alert();
+var header = alert.header; // Use the JS API to access the content zone
+header.textContent = &apos;Info&apos;;</code>
+</code></pre><p>Also <code>window.CustomElements</code> namespace provided by the CoralUI (3.x) Custom Elements v0 polyfill doesn&apos;t exist in CoralUI (4.x).</p><h3>Coral.register</h3><p>CoralUI (4.x) ships by default a compatibility package to support the CoralUI (3.x) way to register elements <code>Coral.register</code>.
+Unfortunately, extending Coral 4.x components is not supported. So if you have :</p><pre><code><code class="source-code prettyprint">Coral.register({
+    name: &apos;Element&apos;,
+    tagName: &apos;coral-element&apos;,
+    extend: Coral.Alert
+});</code>
+</code></pre><p>It will not extend <code>Coral.Alert</code>. Instead use ES6 classes <code>extend</code> feature to extend Coral components.</p></div>
+        <a data-ice="link" href="manual/architecture.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <div class="manual-card">
+        <div data-ice="card"><h1>Examples</h1><h2>Showcase</h2><p>All components can be seen in action <a href="./manual/../../examples" target="_blank">here</a>. These are only examples and 
+don&apos;t cover all scenarios. </p><h2>Playground</h2><p>Coral 4.x HTML/CSS/JS editor with live preview. Code can be shared by copy pasting the URL. 
+The playground is sandboxed to prevent security risks.</p><p>Live at <a href="https://git.corp.adobe.com/pages/ringel/coralui-playground">https://git.corp.adobe.com/pages/ringel/coralui-playground</a>.</p><h2>Configurator</h2><p>A component configurator. Coming soon.</p></div>
+        <a data-ice="link" href="manual/examples.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <div class="manual-card">
+        <div data-ice="card"><h1>Contribution</h1><h2>Open Development</h2><p>CoralUI follows open development principles:</p><ul>
+<li>The code is discoverable and openly available to anyone.</li>
+<li>Discussions about CoralUI happen on an open and archived channel.</li>
+<li>All important technical decisions are exposed on that channel.</li>
+<li>All commits are backed by issues in an openly accessible tracker, which offers a self-service overview of the project&apos;s status and history.</li>
+<li>People who are not members of the core team are encouraged to provide contributions.</li>
+<li>Meritocracy is taken into account when considering the priority of contributions and suggestions. 
+The more you contribute, and the more valuable your contributions are, the more influence you will have within the project.</li>
+</ul><p><strong>Slack channel: <a href="https://coralui.slack.com">https://coralui.slack.com</a>. Mailing list: <a href="./manual/mailto:coralui-dev@adobe.com">coralui-dev@adobe.com</a></strong></p><h2>Find Tasks</h2><p>All CoralUI work is tracked in our <a href="https://jira.corp.adobe.com/browse/CUI">JIRA project</a>. Before you look there, be sure 
+you&apos;ve contacted the community. 
+We prioritize blocker and critical defects first, though submissions of new components and other &apos;non-bug&apos; contribution is welcome. 
+Just talk to the community and we will work it out.</p><p>Once you are ready to submit a bug, find an issue to fix, find a feature to work on, or document a new task, go to JIRA. 
+Everything is in JIRA.</p><h2>Development</h2><p>Below are steps to take to when starting as a contributor.</p><h3>Tools</h3><p>You will need the following tools to work with CoralUI:</p><ul>
+<li>node</li>
+<li>npm</li>
+<li>git</li>
+</ul><p>If you don&apos;t have those tools working, get that set up first.</p><h3>Track your work</h3><p>Before starting, make sure the work you are doing is tracked in JIRA. Create an issue if one doesn&apos;t already exist. 
+An issue description should be complete and include steps to reproduce if the issue is a defect.</p><h3>Work on branches</h3><p>It is required that you work on a feature branch, even in your own fork. The feature branch naming convention is 
+<code>issue/CUI-x</code>. CUI-x corresponds to the JIRA ticket.</p><h3>Coding Conventions</h3><p>This gives guide to general coding conventions for CoralUI. These are generally enforced at the time of code review.</p><h4>General Principles</h4><ul>
+<li>Write readable code (descriptive names, logically organized, comments etc.)</li>
+<li>Preserve modularity</li>
+<li>Keep backward compatibility in mind</li>
+<li>Don&apos;t use deprecated APIs</li>
+<li>Touch in-mind</li>
+<li>Performance is critical</li>
+</ul><h4>General Formatting</h4><p>We included an <code>.editorconfig</code> file to set up the defaults. In addition, the code is linted based on the 
+<a href="https://git.corp.adobe.com/experience-platform/adobe-js-code-standards/">Adobe eslint configuration</a>.</p><p>Use <code>gulp lint</code> to run linting.</p><h4>Add Adobe disclaimer</h4><pre><code><code class="source-code prettyprint">/*
+* ADOBE CONFIDENTIAL
+*
+* Copyright [YEAR] Adobe Systems Incorporated
+* All Rights Reserved.
+*
+* NOTICE: All information contained herein is, and remains
+* the property of Adobe Systems Incorporated and its suppliers,
+* if any. The intellectual and technical concepts contained
+* herein are proprietary to Adobe Systems Incorporated and its
+* suppliers and may be covered by U.S. and Foreign Patents,
+* patents in process, and are protected by trade secret or copyright law.
+* Dissemination of this information or reproduction of this material
+* is strictly forbidden unless prior written permission is obtained
+* from Adobe Systems Incorporated.
+*/</code>
+</code></pre><h3>Definition of done</h3><ul>
+<li>Work is tracked in JIRA</li>
+<li>API changes are approved by the community</li>
+<li>Code is complete (documented, meets accessibility standards and automated tests added)</li>
+<li>All tests passing (no regressions)</li>
+<li>Verified working on all supported browsers</li>
+</ul><h2>Submitting Code</h2><p>You will be ready to submit your code when your work meets the Definition of Done. 
+Once ready, your work must be peer reviewed by a pull request.</p><p>In some cases minor work may receive only &quot;+1&quot; as a comment, which just indicates the code was reviewed and no changes were needed.
+When review is done, the pull request will be merged by the community and any related JIRA issues will be closed. </p></div>
+        <a data-ice="link" href="manual/contribution.html"></a>
+      </div>
+    </div>
+</div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.4)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Coral.PanelStack</title>
+    <link rel="stylesheet" href="../css/coral.css">
+    <script src="../js/coral.js"></script>
+    <style>
+    section {
+      padding: 15px;
+    }
+    </style>
+  </head>
+
+  <body class="coral--light">
+
+    <div style="position:fixed;top:15px;right:15px;">
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--light'">Light</a> |
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--lightest'">Lightest</a> |
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--dark'">Dark</a> |
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--darkest'">Darkest</a>
+    </div>
+
+    <section>
+      <h1 class="coral-Heading coral-Heading--1">Coral.PanelStack</h1>
+
+      <h2 class="coral-Heading coral-Heading--1">Default</h2>
+      <coral-panelstack id="panel-list">
+        <coral-panel selected>Panel 0: Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+        <coral-panel>Panel 1: Lorem ipsum dolor sit amet.</coral-panel>
+        <coral-panel> Panel 2: Sed eget eros sit amet nulla ultricies.</coral-panel>
+        <coral-panel>
+          Panel 3: Fusce nec ante non nibh mollis mollis mollis vitae dui. Vivamus tristique nunc lacus, a placerat orci dapibus vel. Sed eget eros sit amet nulla ultricies scelerisque.
+        </coral-panel>
+        <coral-panel>Panel 4: Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+      </coral-panelstack>
+      <a href="#" class="coral-Link cycle" data-target="panel-list">Next</a>
+
+      <h2 class="coral-Heading coral-Heading--1">Using coral-Well</h2>
+      <coral-panelstack id="panel-well">
+        <coral-panel selected class="coral-Well">Panel 0: Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+        <coral-panel selected class="coral-Well">Panel 1: Lorem ipsum dolor sit amet.</coral-panel>
+        <coral-panel class="coral-Well"> Panel 2: Sed eget eros sit amet nulla ultricies.</coral-panel>
+        <coral-panel class="coral-Well">
+          Panel 3: Fusce nec ante non nibh mollis mollis mollis vitae dui. Vivamus tristique nunc lacus, a placerat orci dapibus vel. Sed eget eros sit amet nulla ultricies scelerisque.
+        </coral-panel>
+        <coral-panel class="coral-Well">Panel 4: Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+      </coral-panelstack>
+      <a href="#" class="coral-Link cycle" data-target="panel-well">Next</a>
+    </section>
+
+    <script>
+      Coral.events.on('click', '.cycle', function(event) {
+        event.preventDefault();
+
+        var panel = document.getElementById(this.dataset.target);
+        var items = panel.items.getAll();
+        var selectedItem = panel.selectedItem;
+
+        var next = selectedItem === items.slice(-1)[0] ? items[0] : items[items.indexOf(selectedItem) + 1];
+
+        next.setAttribute('selected', '');
+      });
+    </script>
+  </body>
+</html>

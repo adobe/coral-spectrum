@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Coral.Multifield</title>
+
+  <link rel="stylesheet" href="../css/coral.css">
+  <script src="../js/coral.js"></script>
+
+  <style>
+    section {
+      padding: 15px;
+    }
+  </style>
+</head>
+<body class="coral--light">
+
+  <div style="position:fixed;top:15px;right:15px;">
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--light'">Light</a> |
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--lightest'">Lightest</a> |
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--dark'">Dark</a> |
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--darkest'">Darkest</a>
+  </div>
+
+  <section>
+    <h1 class="coral-Heading coral-Heading--1">Coral.Multifield</h1>
+
+    <h2 class="coral-Heading coral-Heading--2">Default</h2>
+    <coral-multifield>
+      <coral-multifield-item>
+        <input is="coral-textfield" type="text" value="Basel"/>
+      </coral-multifield-item>
+      <button coral-multifield-add type="button" is="coral-button">Add a field</button>
+      <template coral-multifield-template>
+        <input is="coral-textfield" type="text"/>
+      </template>
+    </coral-multifield>
+
+    <h2 class="coral-Heading coral-Heading--2">Nested multifield</h2>
+    <coral-multifield>
+      <coral-multifield-item>
+        <coral-multifield>
+          <coral-multifield-item></coral-multifield-item>
+          <coral-multifield-item></coral-multifield-item>
+          <button coral-multifield-add type="button" is="coral-button">Add a field</button>
+          <template coral-multifield-template>
+            <input is="coral-textfield" type="text"/>
+          </template>
+        </coral-multifield>
+      </coral-multifield-item>
+      <button coral-multifield-add type="button" is="coral-button">Add a field</button>
+      <template coral-multifield-template>
+        <coral-multifield>
+          <coral-multifield-item></coral-multifield-item>
+          <coral-multifield-item></coral-multifield-item>
+          <button coral-multifield-add type="button" is="coral-button">Add a field</button>
+          <template coral-multifield-template>
+            <input is="coral-textfield" type="text"/>
+          </template>
+        </coral-multifield>
+      </template>
+    </coral-multifield>
+
+    <h2 class="coral-Heading coral-Heading--2">Rendered with JS</h2>
+    <div id="with-js"></div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var multifield = new Coral.Multifield();
+        multifield.template.content.appendChild(document.createElement('input', {is: 'coral-textfield'}));
+        multifield.items.add(new Coral.Multifield.Item());
+        var addButton = new Coral.Button();
+        addButton.setAttribute('coral-multifield-add', '');
+        addButton.label.textContent = 'Add a field';
+        addButton.type = 'button';
+        multifield.appendChild(addButton);
+
+        document.getElementById('with-js').appendChild(multifield);
+      });
+    </script>
+  </section>
+</body>
+</html>

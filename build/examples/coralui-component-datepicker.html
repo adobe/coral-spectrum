@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Coral.Datepicker</title>
+    <link rel="stylesheet" href="../css/coral.css">
+    <!--Load momentJS to support different formats -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="../js/coral.js"></script>
+    <style>
+     section {
+       padding: 15px;
+     }
+    </style>
+  </head>
+
+  <body class="coral--light">
+    <div style="position:fixed;top:15px;right:15px;">
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--light'">Light</a> |
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--lightest'">Lightest</a> |
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--dark'">Dark</a> |
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--darkest'">Darkest</a>
+    </div>
+
+    <section>
+      <h1 class="coral-Heading coral-Heading--1">Coral.Datepicker</h1>
+
+      <h2 class="coral-Heading coral-Heading--2">Default</h2>
+      <coral-datepicker></coral-datepicker>
+
+      <h2 class="coral-Heading coral-Heading--2">DisplayFormat: MM-DD-YYYY</h2>
+      <coral-datepicker value="2014-12-31" displayformat="MM-DD-YYYY"></coral-datepicker>
+
+      <h2 class="coral-Heading coral-Heading--2">ValueFormat: YYYY-MM-DD</h2>
+      <coral-datepicker value="2014-12-31" valueformat="YYYY-MM-DD" displayformat="DD-MM-YYYY"></coral-datepicker>
+
+      <h2 class="coral-Heading coral-Heading--2">Time only</h2>
+      <coral-datepicker type="time" placeholder="Placeholder" value="13:14"></coral-datepicker>
+
+      <h2 class="coral-Heading coral-Heading--2">Date and Time</h2>
+      <coral-datepicker type="datetime" value="2014-12-31T14:12+00:00"></coral-datepicker>
+
+      <h2 class="coral-Heading coral-Heading--2">With Min/Max</h2>
+      <coral-datepicker type="date" min="2015-04-10" max="2015-04-28" value="2015-04-15"></coral-datepicker>
+
+      <h2 class="coral-Heading coral-Heading--2">Quiet variant</h2>
+      <coral-datepicker value="2014-12-31" displayformat="MM-DD-YYYY" variant="quiet"></coral-datepicker>
+
+      <h2 class="coral-Heading coral-Heading--2">Invalid</h2>
+      <coral-datepicker invalid></coral-datepicker>
+
+      <h2 class="coral-Heading coral-Heading--2">Required</h2>
+      <coral-datepicker required></coral-datepicker>
+
+      <h2 class="coral-Heading coral-Heading--2">ReadOnly</h2>
+      <coral-datepicker value="2014-12-31" readonly></coral-datepicker>
+
+      <h2 class="coral-Heading coral-Heading--2">Disabled</h2>
+      <coral-datepicker value="2014-12-31" disabled></coral-datepicker>
+    </section>
+  </body>
+</html>

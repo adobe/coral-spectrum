@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Coral.Button</title>
+
+  <link rel="stylesheet" href="../css/coral.css">
+  <script src="../js/coral.js"></script>
+
+  <style type="text/css">
+    section {
+      padding: 15px;
+      max-width: 300px;
+    }
+  </style>
+</head>
+<body class="coral--light">
+  <div style="position:fixed;top:15px;right:15px;">
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--light'">Light</a> |
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--lightest'">Lightest</a> |
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--dark'">Dark</a> |
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--darkest'">Darkest</a>
+  </div>
+
+  <section>
+    <h1 class='coral-Heading coral-Heading--1'>Coral.Button</h1>
+    <h2 class="coral-Heading coral-Heading--2">Default</h2>
+    <button is="coral-button">Default</button>
+
+    <h2 class="coral-Heading coral-Heading--2">CTA</h2>
+    <button is="coral-button" variant="cta">CTA</button>
+
+    <h2 class="coral-Heading coral-Heading--2">Secondary</h2>
+    <button is="coral-button" variant="secondary">Secondary</button>
+
+    <h2 class="coral-Heading coral-Heading--2">Warning</h2>
+    <button is="coral-button" variant="warning">Warning</button>
+
+    <h2 class="coral-Heading coral-Heading--2">Quiet button</h2>
+    <button is="coral-button" variant="quiet">Quiet</button>
+
+    <h2 class="coral-Heading coral-Heading--2">Minimal button</h2>
+    <button is="coral-button" variant="minimal">Minimal</button>
+
+    <h2 class="coral-Heading coral-Heading--2">Disabled button</h2>
+    <button is="coral-button" disabled>Disabled</button>
+
+    <h2 class="coral-Heading coral-Heading--2">Icon button</h2>
+    <button is="coral-button" icon="home" iconposition="left">With Icon</button>
+    <button is="coral-button" icon="home" iconposition="right">With Icon</button>
+    <button is="coral-button" icon="home" variant="icon">With Icon</button>
+
+    <h2 class="coral-Heading coral-Heading--2">Image button</h2>
+    <button is="coral-button" icon="http://via.placeholder.com/64x64" iconposition="left">With Image</button>
+    <button is="coral-button" icon="http://via.placeholder.com/64x64" iconposition="right">With Image</button>
+
+    <h2 class="coral-Heading coral-Heading--2">Block</h2>
+    <button is="coral-button" block>Block Button</button>
+  </section>
+</body>
+</html>

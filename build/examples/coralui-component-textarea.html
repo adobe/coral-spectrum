@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+  <title>Coral.Textarea</title>
+
+  <link rel="stylesheet" href="../css/coral.css">
+  <script src="../js/coral.js"></script>
+
+  <style type="text/css">
+    section {
+      padding: 15px;
+    }
+  </style>
+
+</head>
+<body class="coral--light">
+  <div style="position:fixed;top:15px;right:15px;">
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--light'">Light</a> |
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--lightest'">Lightest</a> |
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--dark'">Dark</a> |
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--darkest'">Darkest</a>
+  </div>
+
+  <section>
+    <h1 class="coral-Heading coral-Heading--1">Coral.Textarea</h1>
+    <h2 class="coral-Heading coral-Heading--2">Default</h2>
+    <textarea is='coral-textarea'></textarea>
+
+    <h2 class="coral-Heading coral-Heading--2">Placeholder</h2>
+    <textarea is='coral-textarea' placeholder="Placeholder"></textarea>
+
+    <h2 class="coral-Heading coral-Heading--2">Disabled</h2>
+    <textarea is='coral-textarea' disabled></textarea>
+
+    <h2 class="coral-Heading coral-Heading--2">Invalid</h2>
+    <textarea is='coral-textarea' invalid></textarea>
+
+    <h2 class="coral-Heading coral-Heading--2">Name</h2>
+    <textarea is='coral-textarea' name="textarea_1"></textarea>
+
+    <h2 class="coral-Heading coral-Heading--2">ReadOnly</h2>
+    <textarea is='coral-textarea' readonly></textarea>
+
+    <h2 class="coral-Heading coral-Heading--2">Required</h2>
+    <textarea is='coral-textarea' required></textarea>
+
+    <h2 class="coral-Heading coral-Heading--2">Value</h2>
+    <textarea is='coral-textarea'>Initial Content</textarea>
+
+    <h2 class="coral-Heading coral-Heading--2">Created with JavaScript Constructor</h2>
+    <div id="from-javascript"></div>
+    <script>
+      var textareaFromConstructor = new Coral.Textarea();
+      document.getElementById('from-javascript').appendChild(textareaFromConstructor);
+    </script>
+
+    <h2 class="coral-Heading coral-Heading--2">Quiet variant</h2>
+    <textarea is='coral-textarea' placeholder="Enter your name" variant="quiet"></textarea>
+  </section>
+
+</body>
+</html>

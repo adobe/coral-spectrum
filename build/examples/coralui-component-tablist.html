@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Coral.TabList</title>
+    <link rel="stylesheet" href="../css/coral.css">
+    <script src="../js/coral.js"></script>
+    <style type="text/css">
+    section {
+      padding: 15px;
+    }
+    </style>
+  </head>
+
+  <body class="coral--light">
+
+    <div style="position:fixed;top:15px;right:15px;">
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--light'">Light</a> |
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--lightest'">Lightest</a> |
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--dark'">Dark</a> |
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--darkest'">Darkest</a>
+    </div>
+
+    <section>
+      <h1 class="coral-Heading coral-Heading--1">Coral.TabList</h1>
+
+      <h2 class="coral-Heading coral-Heading--2">Default</h2>
+      <coral-tablist>
+        <coral-tab>Tab One</coral-tab>
+        <coral-tab>Tab Two</coral-tab>
+        <coral-tab disabled>Disabled</coral-tab>
+        <coral-tab invalid>Invalid</coral-tab>
+        <coral-tab invalid disabled>Invalid + Disabled</coral-tab>
+      </coral-tablist>
+
+      <h2 class="coral-Heading coral-Heading--2">Anchored variant</h2>
+      <coral-tablist variant="anchored">
+        <coral-tab>Tab One</coral-tab>
+        <coral-tab>Tab Two</coral-tab>
+        <coral-tab disabled>Disabled</coral-tab>
+        <coral-tab invalid>Invalid</coral-tab>
+        <coral-tab invalid disabled>Invalid + Disabled</coral-tab>
+      </coral-tablist>
+
+      <h2 class="coral-Heading coral-Heading--2">Page variant</h2>
+      <coral-tablist variant="page">
+        <coral-tab>Tab One</coral-tab>
+        <coral-tab>Tab Two</coral-tab>
+        <coral-tab disabled>Disabled</coral-tab>
+        <coral-tab invalid>Invalid</coral-tab>
+        <coral-tab invalid disabled>Invalid + Disabled</coral-tab>
+      </coral-tablist>
+
+      <h2 class="coral-Heading coral-Heading--2">Icons</h2>
+      <coral-tablist>
+        <coral-tab icon="comment" target="#panel_0"></coral-tab>
+        <coral-tab target="#panel_1">Tab One</coral-tab>
+        <coral-tab icon="delete" target="#panel_3">Tab Two</coral-tab>
+        <coral-tab target="#panel_4" disabled>Disabled</coral-tab>
+        <coral-tab icon="alert" target="#panel_5" invalid>Invalid</coral-tab>
+        <coral-tab icon="alert" target="#panel_6" invalid disabled>Invalid + Disabled</coral-tab>
+      </coral-tablist>
+
+      <h2 class="coral-Heading coral-Heading--2">Vertical</h2>
+      <coral-tablist orientation="vertical">
+        <coral-tab icon="delete">Tab One</coral-tab>
+        <coral-tab icon="add"></coral-tab>
+        <coral-tab disabled>Disabled</coral-tab>
+        <coral-tab invalid>Invalid</coral-tab>
+        <coral-tab invalid disabled>Invalid + Disabled</coral-tab>
+      </coral-tablist>
+    </section>
+  </body>
+</html>

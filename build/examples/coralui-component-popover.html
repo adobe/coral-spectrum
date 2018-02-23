@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Coral.Popover</title>
+
+  <link rel="stylesheet" href="../css/coral.css">
+  <script src="../js/coral.js"></script>
+
+  <style>
+    body {
+      padding: 15px;
+    }
+
+    .grid {
+      position: absolute;
+      top: 80px;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+
+      text-align: center;
+    }
+
+    .grid-center {
+      width: 10rem;
+      height: 10rem;
+    }
+
+    .box {
+      width: 10rem;
+      height: 10rem;
+      border: 1px dashed #333;
+      background: rgba(255, 255, 255, .5);
+    }
+
+    .controls {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      opacity: 0.75;
+      padding: 15px;
+    }
+
+  </style>
+</head>
+<body class="coral--light">
+
+  <div style="position:fixed;top:15px;right:15px;z-index:10">
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--light'">Light</a> |
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--lightest'">Lightest</a> |
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--dark'">Dark</a> |
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--darkest'">Darkest</a>
+  </div>
+
+  <h1 class="coral-Heading coral-Heading--1">Coral.Popover</h1>
+
+  <table class="grid">
+    <tr>
+      <td><button class="box" id="target_1">Target 1</button></td>
+      <td></td>
+      <td><button class="box" id="target_2">Target 2</button></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td class="grid-center"><button class="box" id="target_3">Target 3</button></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><button class="box" id="target_4">Target 4</button></td>
+      <td></td>
+      <td><button class="box" id="target_5">Target 5</button></td>
+    </tr>
+  </table>
+
+  <section class="controls">
+    <a href="#" class="coral-Link" onclick="toggleVisibility(); event.preventDefault();">Toggle (t)</a> |
+    <a href="#" class="coral-Link" onclick="toggleHeader(); event.preventDefault();">Toggle Header (h)</a> |
+    <a href="#" class="coral-Link" onclick="toggleFooter(); event.preventDefault();">Toggle Footer (j)</a> |
+    <a href="#" class="coral-Link" onclick="cycleTargets(); event.preventDefault();">Cycle target (a)</a> |
+    <a href="#" class="coral-Link" onclick="cyclePointFrom(); event.preventDefault();">Cycle placement (f)</a> |
+    <a href="#" class="coral-Link" onclick="cycleVariant(); event.preventDefault();">Cycle variant (v)</a>
+  </section>
+
+  <coral-popover id="popover" target="#target_1">
+    <coral-popover-header>Popover Header</coral-popover-header>
+    <coral-popover-content>
+      This is typical popover content.<br>
+      There may be multiple lines and various items in the content.
+    </coral-popover-content>
+    <coral-popover-footer>
+      Popover Footer
+    </coral-popover-footer>
+  </coral-popover>
+
+  <script>
+    var target = [
+      '#target_1',
+      '#target_2',
+      '#target_3',
+      '#target_4',
+      '#target_5'
+    ];
+    target.curIndex = 0;
+
+    var placement = [
+      'top',
+      'right',
+      'bottom',
+      'left'
+    ];
+    placement.curIndex = 0;
+
+    var variant = [
+      'default',
+      'error',
+      'warning',
+      'success',
+      'info',
+      'help'
+    ];
+    variant.curIndex = 0;
+
+    var popover = document.querySelector('#popover');
+    popover.show();
+
+    function cycleTargets() {
+      popover.target = target[++target.curIndex % target.length];
+      console.log('target changed to', popover.target);
+    }
+
+    function cyclePointFrom() {
+      popover.placement = placement[++placement.curIndex % placement.length];
+      console.log('placement changed to', popover.placement);
+    }
+
+    function cycleVariant() {
+      popover.variant = variant[++variant.curIndex % variant.length];
+      console.log('variant changed to', popover.variant);
+    }
+
+    function toggleVisibility() {
+      popover.open = !popover.open;
+    }
+
+    function toggleHeader() {
+      popover.header.textContent = popover.header.textContent ? '' : 'Popover Header';
+    }
+
+    function toggleFooter() {
+      popover.footer.textContent = popover.footer.textContent ? '' : 'Popover Footer';
+    }
+
+    Coral.keys.on('f', cyclePointFrom);
+    Coral.keys.on('a', cycleTargets);
+    Coral.keys.on('t', toggleVisibility);
+    Coral.keys.on('h', toggleHeader);
+    Coral.keys.on('j', toggleFooter);
+    Coral.keys.on('v', cycleVariant);
+  </script>
+
+</body>
+</html>

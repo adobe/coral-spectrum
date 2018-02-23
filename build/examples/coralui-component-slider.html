@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Coral.Slider</title>
+  <link rel="stylesheet" href="../css/coral.css">
+  <script src="../js/coral.js"></script>
+  <style>
+    section {
+      padding: 15px;
+    }
+  </style>
+</head>
+<body class="coral--light">
+
+  <div style="position:fixed;top:15px;right:15px;">
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--light'">Light</a> |
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--lightest'">Lightest</a> |
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--dark'">Dark</a> |
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--darkest'">Darkest</a>
+  </div>
+
+  <section>
+    <h1 class="coral-Heading coral-Heading--1">Coral.Slider</h1>
+
+    <h2 class="coral-Heading coral-Heading--2">Default</h2>
+    <coral-slider></coral-slider>
+
+    <h2 class="coral-Heading coral-Heading--2">Filled</h2>
+    <coral-slider filled value="14" min="10" max="20" step="2"></coral-slider>
+
+    <h2 class="coral-Heading coral-Heading--2">With Label + Value</h2>
+    <coral-slider showvalue value="14" min="10" max="20" step="2">
+      <coral-slider-content>Slider label</coral-slider-content>
+    </coral-slider>
+
+    <h2 class="coral-Heading coral-Heading--2">Ranged Slider</h2>
+    <coral-rangedslider showvalue startvalue="12" endvalue="18" min="10" max="20" step="2"></coral-rangedslider>
+
+    <h2 class="coral-Heading coral-Heading--2">Disabled</h2>
+    <coral-slider filled disabled value="14" min="10" max="20" step="2"></coral-slider>
+
+    <h2 class="coral-Heading coral-Heading--2">With custom values</h2>
+    <coral-slider showvalue value="2" min="1" max="5" step="1">
+      <coral-slider-item value="1">First</coral-slider-item>
+      <coral-slider-item value="2">Second</coral-slider-item>
+      <coral-slider-item value="3">Third</coral-slider-item>
+      <coral-slider-item value="4">Fourth</coral-slider-item>
+      <coral-slider-item value="5">Fifth</coral-slider-item>
+    </coral-slider>
+  </section>
+</body>
+</html>
