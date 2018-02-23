@@ -1,7 +1,7 @@
 {
   "name": "@coralui/coral-spectrum",
   "description": "Coral Spectrum is a library of web components following Spectrum design patterns.",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "repository": {
     "type": "git",
     "url": "https://git.corp.adobe.com/Coral/coralui/tree/release/coral-spectrum"
