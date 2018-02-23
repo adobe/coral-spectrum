@@ -2,9 +2,11 @@
 /npm-debug.log
 /index.css
 /index-*.js
+/gulpfile.js
 
 /coralui-*/src/templates/*.js
 /coralui-*/index.css
 /coralui-*/index-*.js
 /coralui-*/README.md
 /coralui-*/build
+/coralui-*/gulpfile.js
