@@ -17,6 +17,7 @@
 
 const fs = require('fs-extra');
 const path = require('path');
+const util = require('../helpers/util');
 const rollupPluginUtils = require('rollup-pluginutils');
 
 // Converts files to modules and copies the imported resources filtered by options.include to options.output.
@@ -31,7 +32,7 @@ function resources(opts) {
     throw Error('output option should be specified');
   }
   
-  const filter = rollupPluginUtils.createFilter(opts.include, opts.exclude);
+  const filter = rollupPluginUtils.createFilter(path.join(util.getRoot(), opts.include), opts.exclude);
   
   return {
     name: 'resources',

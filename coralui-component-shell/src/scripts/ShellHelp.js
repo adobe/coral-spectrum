@@ -15,12 +15,12 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
-import {Collection} from 'coralui-collection';
-import 'coralui-component-search';
-import {AnchorListItem} from 'coralui-component-list';
-import 'coralui-component-wait';
-import {commons, i18n} from 'coralui-util';
+import {ComponentMixin} from '/coralui-mixin-component';
+import {Collection} from '/coralui-collection';
+import '/coralui-component-search';
+import {AnchorListItem} from '/coralui-component-list';
+import '/coralui-component-wait';
+import {commons, i18n} from '/coralui-util';
 import help from '../templates/help';
 import helpResult from '../templates/helpResult';
 import helpSearchError from '../templates/helpSearchError';

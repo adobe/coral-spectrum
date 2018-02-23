@@ -15,9 +15,9 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
-import {Collection} from 'coralui-collection';
-import {transform} from 'coralui-util';
+import {ComponentMixin} from '/coralui-mixin-component';
+import {Collection} from '/coralui-collection';
+import {transform} from '/coralui-util';
 
 const CLASSNAME = 'coral3-Shell-solutions';
 

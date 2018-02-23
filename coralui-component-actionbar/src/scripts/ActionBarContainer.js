@@ -15,9 +15,9 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
+import {ComponentMixin} from '/coralui-mixin-component';
 import ActionBarContainerMixin from './ActionBarContainerMixin';
-import 'coralui-component-list';
+import '/coralui-component-list';
 
 const CLASSNAME = 'coral3-ActionBar-container';
 

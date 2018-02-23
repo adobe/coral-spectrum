@@ -37,7 +37,7 @@ module.exports = function(gulp) {
     del.sync('./src/templates/*.js');
   
     // Remove generated styles
-    del.sync('./src/styles/index.css');
+    del.sync('./index.css');
     
     // Remove themed index
     const index = theme.getIndex();

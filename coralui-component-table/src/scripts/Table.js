@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
-import {DragAction} from 'coralui-dragaction';
+import {ComponentMixin} from '/coralui-mixin-component';
+import {DragAction} from '/coralui-dragaction';
 import TableColumn from './TableColumn';
 import TableCell from './TableCell';
 import TableHeaderCell from './TableHeaderCell';
@@ -24,12 +24,12 @@ import TableRow from './TableRow';
 import TableHead from './TableHead';
 import TableBody from './TableBody';
 import TableFoot from './TableFoot';
-import 'coralui-component-button';
-import {Checkbox} from 'coralui-component-checkbox';
+import '/coralui-component-button';
+import {Checkbox} from '/coralui-component-checkbox';
 import base from '../templates/base';
-import {SelectableCollection} from 'coralui-collection';
+import {SelectableCollection} from '/coralui-collection';
 import {getCellByIndex, getColumns, getCells, getContentCells, getHeaderCells, getRows, getSiblingsOf, getIndexOf, divider} from './TableUtil';
-import {transform, validate, commons, Keys} from 'coralui-util';
+import {transform, validate, commons, Keys} from '/coralui-util';
 
 const CLASSNAME = 'coral3-Table-wrapper';
 

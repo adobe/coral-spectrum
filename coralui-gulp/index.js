@@ -17,6 +17,7 @@ module.exports = function(gulp) {
   require('./tasks/minify.js')(gulp);
   require('./tasks/tests.js')(gulp);
   require('./tasks/watch.js')(gulp);
+  require('./tasks/release.js')(gulp);
   
   gulp.task('build', function() {
     runSequence(

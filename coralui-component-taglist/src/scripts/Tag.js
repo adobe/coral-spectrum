@@ -15,10 +15,10 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
-import 'coralui-component-button';
+import {ComponentMixin} from '/coralui-mixin-component';
+import '/coralui-component-button';
 import base from '../templates/base';
-import {transform, validate, events} from 'coralui-util';
+import {transform, validate, events} from '/coralui-util';
 
 const CLASSNAME = 'coral3-TagList-item';
 const LABEL_CLASSNAME = 'coral3-Label';

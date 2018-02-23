@@ -15,9 +15,9 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
-import {DragAction} from 'coralui-dragaction';
-import {transform, commons} from 'coralui-util';
+import {ComponentMixin} from '/coralui-mixin-component';
+import {DragAction} from '/coralui-dragaction';
+import {transform, commons} from '/coralui-util';
 
 const CLASSNAME = 'coral3-Masonry-item';
 

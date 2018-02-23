@@ -15,9 +15,9 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
-import {transform} from 'coralui-util';
-import 'coralui-component-icon';
+import {ComponentMixin} from '/coralui-mixin-component';
+import {transform} from '/coralui-util';
+import '/coralui-component-icon';
 import icon from '../templates/checkIcon';
 
 const CLASSNAME = 'coral3-SelectList-item';

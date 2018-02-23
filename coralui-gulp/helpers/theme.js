@@ -16,12 +16,9 @@
  */
 
 const path = require('path');
-const packageJSON = require(path.join(process.cwd(), 'package.json'));
+const util = require('../helpers/util');
 
-const dependencies = Object.assign(packageJSON['dependencies'] || {}, packageJSON['devDependencies'] || {});
-
-// Assuming a theme is named with "theme"
-const theme = Object.keys(dependencies).find(key => key.indexOf('theme') !== -1);
+const theme = util.getPackageJSON().theme;
 
 module.exports = {
   getTheme: function() {
@@ -30,7 +27,7 @@ module.exports = {
   addTheme: function() {
     // Default
     if (theme === 'coralui-theme-spectrum') {
-      return `import 'coralui-theme-spectrum';`
+      return `import './index.css';`
     }
     
     // Custom theme
@@ -40,14 +37,14 @@ module.exports = {
   getResources: function() {
     // Default
     if (theme === 'coralui-theme-spectrum') {
-      return `node_modules/${theme}/src/resources/**/*`
+      return `/${theme}/src/resources/**/*`
     }
   
     // Custom theme
     // Assuming the resources are in build/resources
-    return `node_modules/${theme}/build/resources/**/*`
+    return path.join(util.getRoot(), `node_modules/${theme}/build/resources/**/*`);
   },
   getIndex: function() {
-    return theme ? `index-${theme.replace(/[^a-zA-Z ]/g, '')}` : 'index';
+    return theme ? 'index-themed' : 'index';
   },
 };

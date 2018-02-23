@@ -26,8 +26,10 @@ module.exports = function(gulp) {
   const git = require('gulp-git');
   const bump = require('gulp-bump');
   
+  const util = require('../helpers/util');
+  const root = util.getRoot();
   const CWD = process.cwd();
-  const modulePackageJson = require(`${CWD}/package.json`);
+  const modulePackageJson = util.getPackageJSON();
   const registry = 'https://artifactory.corp.adobe.com/artifactory/api/npm/npm-coralui-local';
   
   // The version we'll actually release
@@ -225,6 +227,12 @@ module.exports = function(gulp) {
   
   // Full release task
   gulp.task('release', function() {
+    if (CWD !== root) {
+      console.error('Release aborted: not in root folder.');
+  
+      return;
+    }
+    
     const buildFiles = fs.existsSync('build') ? fs.readdirSync('build') : [];
     if (!buildFiles.length) {
       console.error('Release aborted: build folder is empty.');

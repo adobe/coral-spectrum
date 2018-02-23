@@ -16,10 +16,13 @@
  */
 module.exports = function(gulp) {
   const fs = require('fs');
+  const path = require('path');
   const exec = require('child_process').exec;
   const plumber = require('gulp-plumber');
   const modifyFile = require('gulp-modify-file');
+  const util = require('../helpers/util');
   
+  const root = util.getRoot();
   const regExp = /.*class extends superClass {/g;
   
   // @todo due to https://github.com/nanopx/gulp-esdoc/issues/19, we can't use gulp-esdoc
@@ -42,7 +45,8 @@ module.exports = function(gulp) {
     }
     catch (e) {}
     
-    const p = exec('node_modules/.bin/esdoc -c node_modules/coralui-gulp/configs/esdoc.conf.js', (err) => {
+    const config = path.join(root, 'coralui-gulp/configs/esdoc.conf.js');
+    const p = exec(path.join(root, `node_modules/.bin/esdoc -c ${config}`), (err) => {
       
       // @todo due to https://github.com/esdoc/esdoc/issues/455, revert class def
       gulp.src(['src/scripts/*Mixin.js', 'coralui-*/src/scripts/*Mixin.js'])

@@ -17,8 +17,11 @@
 
 const fs = require('fs');
 const path = require('path');
+const util = require('../helpers/util');
 
 module.exports = function(config) {
+  const packageJSON = util.getPackageJSON();
+  const root = util.getRoot();
   const CWD = process.cwd();
   
   const rollupConfig = require('./rollup.conf.js');
@@ -26,16 +29,13 @@ module.exports = function(config) {
   const preprocessors = {};
   
   // Rollup pre-process
-  preprocessors[`${CWD}/src/tests/index.js`] = ['rollup'];
+  preprocessors[path.join(CWD, 'src/tests/index.js')] = ['rollup'];
   
   // Pre-process HTML snippets
-  preprocessors[`${CWD}/src/tests/snippets/**/*.html`] = ['html2js'];
+  preprocessors[path.join(CWD, 'src/tests/snippets/**/*.html')] = ['html2js'];
   
   // Pre-process snippets of dependencies
-  preprocessors[`${CWD}/node_modules/coralui-*/src/tests/snippets/**/*.html`] = ['html2js'];
-  
-  // The package.json of the tested module (usually a component)
-  const modulePackageJson = require(`${CWD}/package.json`);
+  preprocessors[path.join(root, 'coralui-*/src/tests/snippets/**/*.html')] = ['html2js'];
   
   config.set({
     preprocessors: preprocessors,
@@ -84,7 +84,7 @@ module.exports = function(config) {
       `${CWD}/build/css/coral.css`,
       
       // Load momentJS for date time components
-      `${CWD}/node_modules/moment/moment.js`,
+      `${root}/node_modules/moment/moment.js`,
   
       {
         // Load the resources
@@ -103,7 +103,7 @@ module.exports = function(config) {
       },
       {
         // Test helpers that will be included as executable JS
-        pattern: `${CWD}/node_modules/coralui-*/src/tests/helpers/*.js`,
+        pattern: `${root}/coralui-*/src/tests/helpers/*.js`,
         watched: true,
         served: true,
         included: true // Include testing helpers
@@ -111,7 +111,7 @@ module.exports = function(config) {
   
       {
         // Files to be available as window.__html__['FILENAME.html']
-        pattern: `${CWD}/node_modules/coralui-*/src/tests/snippets/**/*.html`,
+        pattern: `${root}/coralui-*/src/tests/snippets/**/*.html`,
         watched: true,
         served: true,
         included: true // Include HTML snippets so they are preprocessed
@@ -153,8 +153,8 @@ module.exports = function(config) {
         return suite.join(' ') + ' ' + result.description;
       },
       properties: {
-        'module.name': modulePackageJson.name,
-        'module.version': modulePackageJson.version,
+        'module.name': packageJSON.name,
+        'module.version': packageJSON.version,
         // Jenkins environment variables:
         'build.url': process.env.BUILD_URL,
         'job.name': process.env.JOB_NAME,

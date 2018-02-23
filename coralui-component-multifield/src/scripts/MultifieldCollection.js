@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
  
-import {Collection} from 'coralui-collection';
+import {Collection} from '/coralui-collection';
 
 class MultifieldCollection extends Collection {
   add(item, insertBefore) {

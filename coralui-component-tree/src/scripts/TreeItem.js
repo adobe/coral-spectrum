@@ -15,11 +15,11 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
-import {Collection} from 'coralui-collection';
-import 'coralui-component-icon';
+import {ComponentMixin} from '/coralui-mixin-component';
+import {Collection} from '/coralui-collection';
+import '/coralui-component-icon';
 import treeItem from '../templates/treeItem';
-import {transform, commons, validate} from 'coralui-util';
+import {transform, commons, validate} from '/coralui-util';
 
 const CLASSNAME = 'coral3-TreeView-item';
 

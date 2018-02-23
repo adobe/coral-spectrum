@@ -16,7 +16,7 @@
  */
 
 import {divider} from './TableUtil';
-import {transform, validate} from 'coralui-util';
+import {transform, validate} from '/coralui-util';
 
 // Builds a string containing all possible divider classnames. This will be used to remove classnames when the
 // divider changes

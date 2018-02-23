@@ -15,15 +15,15 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
-import 'coralui-component-popover';
-import 'coralui-component-button';
+import {ComponentMixin} from '/coralui-mixin-component';
+import '/coralui-component-popover';
+import '/coralui-component-button';
 import CycleButtonItem from './CycleButtonItem';
-import {Icon} from 'coralui-component-icon';
-import {ButtonList, SelectListItem} from 'coralui-component-list';
-import {SelectableCollection} from 'coralui-collection';
+import {Icon} from '/coralui-component-icon';
+import {ButtonList, SelectListItem} from '/coralui-component-list';
+import {SelectableCollection} from '/coralui-collection';
 import base from '../templates/base';
-import {transform, validate} from 'coralui-util';
+import {transform, validate} from '/coralui-util';
 
 /**
  Enumeration for {@link CycleButton} display options.

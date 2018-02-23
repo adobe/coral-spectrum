@@ -1,4 +1,4 @@
-import 'coralui-externals';
+import '/coralui-externals';
 import ButtonGroup from './src/scripts/ButtonGroup';
 
 window.customElements.define('coral-buttongroup', ButtonGroup);

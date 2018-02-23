@@ -15,10 +15,10 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
-import 'coralui-component-button';
+import {ComponentMixin} from '/coralui-mixin-component';
+import '/coralui-component-button';
 import item from '../templates/item';
-import {DragAction} from 'coralui-dragaction';
+import {DragAction} from '/coralui-dragaction';
 
 const CLASSNAME = 'coral3-Multifield-item';
 

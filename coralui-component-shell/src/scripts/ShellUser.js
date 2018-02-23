@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
+import {ComponentMixin} from '/coralui-mixin-component';
 import user from '../templates/user';
 
 const CLASSNAME = 'coral3-Shell-user';

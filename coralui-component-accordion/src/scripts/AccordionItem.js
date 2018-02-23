@@ -15,9 +15,9 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
-import {transform, commons} from 'coralui-util';
-import {Icon} from 'coralui-component-icon';
+import {ComponentMixin} from '/coralui-mixin-component';
+import {transform, commons} from '/coralui-util';
+import {Icon} from '/coralui-component-icon';
 
 const CLASSNAME = 'coral3-Accordion-item';
 

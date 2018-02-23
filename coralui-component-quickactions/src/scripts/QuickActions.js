@@ -15,16 +15,16 @@
  * from Adobe Systems Incorporated.
  */
 
-import {Icon} from 'coralui-component-icon';
-import {Button} from 'coralui-component-button';
-import {AnchorButton} from 'coralui-component-anchorbutton';
-import {ButtonList, AnchorList} from 'coralui-component-list';
-import {Overlay} from 'coralui-component-overlay';
-import {Collection} from 'coralui-collection';
+import {Icon} from '/coralui-component-icon';
+import {Button} from '/coralui-component-button';
+import {AnchorButton} from '/coralui-component-anchorbutton';
+import {ButtonList, AnchorList} from '/coralui-component-list';
+import {Overlay} from '/coralui-component-overlay';
+import {Collection} from '/coralui-collection';
 import QuickActionsItem from './QuickActionsItem';
-import 'coralui-component-popover';
+import '/coralui-component-popover';
 import base from '../templates/base';
-import {transform, validate} from 'coralui-util';
+import {transform, validate} from '/coralui-util';
 
 // MUST be kept in sync with quickactions.styl $coral-quickactions-button-gap
 const BUTTON_GAP = 10;

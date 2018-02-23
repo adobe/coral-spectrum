@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import {SelectableCollection} from 'coralui-collection';
-import {transform, validate} from 'coralui-util';
+import {SelectableCollection} from '/coralui-collection';
+import {transform, validate} from '/coralui-util';
 
 const CLASSNAME = 'coral3-BasicList';
 

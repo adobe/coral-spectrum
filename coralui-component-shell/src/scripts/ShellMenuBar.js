@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
-import {Collection} from 'coralui-collection';
+import {ComponentMixin} from '/coralui-mixin-component';
+import {Collection} from '/coralui-collection';
 
 const CLASSNAME = 'coral3-Shell-menubar';
 

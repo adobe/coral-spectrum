@@ -15,10 +15,10 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
-import {FormFieldMixin} from 'coralui-mixin-formfield';
+import {ComponentMixin} from '/coralui-mixin-component';
+import {FormFieldMixin} from '/coralui-mixin-formfield';
 import base from '../templates/base';
-import {transform, commons} from 'coralui-util';
+import {transform, commons} from '/coralui-util';
 
 const CLASSNAME = 'coral3-ToggleSwitch';
 
@@ -217,11 +217,11 @@ class Switch extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     }
   }
   
-  _onFocus(){
+  _onFocus() {
     this._elements.input.classList.add('focus-ring');
   }
   
-  _onBlur(){
+  _onBlur() {
     this._elements.input.classList.remove('focus-ring');
   }
   

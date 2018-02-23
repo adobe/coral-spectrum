@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import {DialogFooter} from 'coralui-component-dialog';
+import {DialogFooter} from '/coralui-component-dialog';
 
 /**
  @class Coral.Popover.Footer

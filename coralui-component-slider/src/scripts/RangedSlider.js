@@ -17,7 +17,7 @@
 
 import Slider from './Slider';
 import range from '../templates/range';
-import {transform} from 'coralui-util';
+import {transform} from '/coralui-util';
 
 /**
  @class Coral.RangedSlider

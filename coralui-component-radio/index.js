@@ -1,4 +1,4 @@
-import 'coralui-externals';
+import '/coralui-externals';
 import Radio from './src/scripts/Radio';
 import RadioLabel from './src/scripts/RadioLabel';
 

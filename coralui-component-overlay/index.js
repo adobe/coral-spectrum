@@ -1,4 +1,4 @@
-import 'coralui-externals';
+import '/coralui-externals';
 import Overlay from './src/scripts/Overlay';
 
 window.customElements.define('coral-overlay', Overlay);

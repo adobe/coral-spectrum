@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
-import 'coralui-component-icon';
+import {ComponentMixin} from '/coralui-mixin-component';
+import '/coralui-component-icon';
 import icon from '../templates/icon';
 
 const CLASSNAME = 'coral3-Card-property';

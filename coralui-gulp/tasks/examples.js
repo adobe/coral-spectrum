@@ -22,7 +22,7 @@ module.exports = function(gulp) {
   
   gulp.task('examples', function() {
     return gulp.src([
-      'node_modules/coralui-*/examples/index.html', 'examples/index.html'
+      'coralui-*/examples/index.html', 'examples/index.html'
     ], {base: './'})
       .pipe(plumber())
       .pipe(modifyFile((content, path) => {
@@ -39,10 +39,16 @@ module.exports = function(gulp) {
         return content;
       }))
       .pipe(rename(function(file) {
+        const dirNameArr = file.dirname.split('/');
+        
         // Rename example file using component name
-        if (file.dirname.indexOf('node_modules') === 0) {
-          const path = file.dirname.split('/');
-          file.basename = path[1];
+        if (dirNameArr.length > 1) {
+          // Components
+          file.basename = dirNameArr[0];
+        }
+        else {
+          // Root
+          file.basename = 'index';
         }
         
         // Put all examples under /examples

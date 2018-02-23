@@ -15,9 +15,9 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
-import {FormFieldMixin} from 'coralui-mixin-formfield';
-import {transform, validate, commons} from 'coralui-util';
+import {ComponentMixin} from '/coralui-mixin-component';
+import {FormFieldMixin} from '/coralui-mixin-formfield';
+import {transform, validate, commons} from '/coralui-util';
 
 const CLASSNAME = 'coral3-Textfield';
 

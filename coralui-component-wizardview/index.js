@@ -1,4 +1,4 @@
-import 'coralui-externals';
+import '/coralui-externals';
 import WizardView from './src/scripts/WizardView';
 
 window.customElements.define('coral-wizardview', WizardView);

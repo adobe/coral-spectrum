@@ -1,4 +1,4 @@
-import 'coralui-externals';
+import '/coralui-externals';
 import FileUpload from './src/scripts/FileUpload';
 import FileUploadItem from './src/scripts/FileUploadItem';
 

@@ -1,4 +1,4 @@
-import 'coralui-externals';
+import '/coralui-externals';
 import Tooltip from './src/scripts/Tooltip';
 import TooltipContent from './src/scripts/TooltipContent';
 

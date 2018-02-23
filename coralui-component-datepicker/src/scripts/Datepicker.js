@@ -15,17 +15,17 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
-import {FormFieldMixin} from 'coralui-mixin-formfield';
-import {DateTime} from 'coralui-datetime';
-import 'coralui-component-button';
-import 'coralui-component-clock';
-import 'coralui-component-calendar';
-import 'coralui-component-popover';
-import 'coralui-component-textfield';
+import {ComponentMixin} from '/coralui-mixin-component';
+import {FormFieldMixin} from '/coralui-mixin-formfield';
+import {DateTime} from '/coralui-datetime';
+import '/coralui-component-button';
+import '/coralui-component-clock';
+import '/coralui-component-calendar';
+import '/coralui-component-popover';
+import '/coralui-component-textfield';
 import base from '../templates/base';
 import popoverContent from '../templates/popoverContent';
-import {transform, commons, validate, i18n} from 'coralui-util';
+import {transform, commons, validate, i18n} from '/coralui-util';
 
 /**
  Enum for {@link Datepicker} variant values.

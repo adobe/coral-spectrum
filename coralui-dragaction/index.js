@@ -1,4 +1,4 @@
-import 'coralui-externals';
+import '/coralui-externals';
 import DragAction from './src/scripts/DragAction';
 
 // Expose DragAction on the Coral namespace

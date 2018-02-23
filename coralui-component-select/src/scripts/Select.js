@@ -15,16 +15,16 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
-import {FormFieldMixin} from 'coralui-mixin-formfield';
-import {SelectableCollection} from 'coralui-collection';
-import 'coralui-component-button';
-import {Tag} from 'coralui-component-taglist';
-import {SelectListItem} from 'coralui-component-list';
-import 'coralui-component-icon';
-import 'coralui-component-popover';
+import {ComponentMixin} from '/coralui-mixin-component';
+import {FormFieldMixin} from '/coralui-mixin-formfield';
+import {SelectableCollection} from '/coralui-collection';
+import '/coralui-component-button';
+import {Tag} from '/coralui-component-taglist';
+import {SelectListItem} from '/coralui-component-list';
+import '/coralui-component-icon';
+import '/coralui-component-popover';
 import base from '../templates/base';
-import {transform, validate, commons, i18n, Keys} from 'coralui-util';
+import {transform, validate, commons, i18n, Keys} from '/coralui-util';
 
 /**
  Enumeration for {@link Select} variants.

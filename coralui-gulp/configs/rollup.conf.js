@@ -15,6 +15,10 @@
  * from Adobe Systems Incorporated.
  */
 
+const path = require('path');
+const util = require('../helpers/util');
+
+const rootImport = require('rollup-plugin-root-import');
 const nodeResolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 const css = require('rollup-plugin-css-only');
@@ -24,6 +28,11 @@ const resources = require('../plugins/rollup-plugin-resources');
 
 module.exports = {
   plugins: [
+    rootImport({
+      useEntry: 'prepend',
+      extensions: '/index.js',
+      root: util.getRoot()
+    }),
     nodeResolve(),
     commonjs(),
     json(),

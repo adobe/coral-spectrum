@@ -15,9 +15,9 @@
  * from Adobe Systems Incorporated.
  */
 
-import 'coralui-component-icon';
+import '/coralui-component-icon';
 import item from '../templates/item';
-import {transform} from 'coralui-util';
+import {transform} from '/coralui-util';
 
 const CLASSNAME = 'coral3-BasicList-item';
 

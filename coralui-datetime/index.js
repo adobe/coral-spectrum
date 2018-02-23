@@ -1,4 +1,4 @@
-import 'coralui-externals';
+import '/coralui-externals';
 import DateTime from './src/scripts/DateTime';
 
 // Expose DateTime on the Coral namespace

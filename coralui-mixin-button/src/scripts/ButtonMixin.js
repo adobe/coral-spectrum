@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import {Icon} from 'coralui-component-icon';
-import {transform, validate} from 'coralui-util';
+import {Icon} from '/coralui-component-icon';
+import {transform, validate} from '/coralui-util';
 
 /**
  Enumeration for {@link Button}, {@link AnchorButton} icon sizes.

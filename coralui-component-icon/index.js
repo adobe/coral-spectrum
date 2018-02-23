@@ -1,4 +1,4 @@
-import 'coralui-externals';
+import '/coralui-externals';
 import Icon from './src/scripts/Icon';
 
 window.customElements.define('coral-icon', Icon);

@@ -1,4 +1,4 @@
-import {ComponentMixin} from 'coralui-mixin-component';
+import {ComponentMixin} from '/coralui-mixin-component';
 import OverlayMixin from '../scripts/OverlayMixin';
 
 /**

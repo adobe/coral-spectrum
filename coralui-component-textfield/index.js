@@ -1,4 +1,4 @@
-import 'coralui-externals';
+import '/coralui-externals';
 import Textfield from './src/scripts/Textfield';
 
 window.customElements.define('coral-textfield', Textfield, {extends: 'input'});

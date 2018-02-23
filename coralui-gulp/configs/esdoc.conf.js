@@ -15,23 +15,25 @@
  * from Adobe Systems Incorporated.
  */
 
+const path = require('path');
 const util = require('../helpers/util');
-const CWD = process.cwd();
+
+const root = util.getRoot();
 
 const config = {
   source: './src/scripts',
   destination: './build/documentation',
   plugins: [
     {name: 'esdoc-external-ecmascript-plugin', option: {enable: false}},
-    {name: 'coralui-guide/plugins/Externals.js'},
+    {name: path.join(root, 'coralui-guide/plugins/Externals.js')},
     {
       name: 'esdoc-standard-plugin',
       option: {
         accessor: {access: ['public']},
         brand: {
-          logo: `${CWD}/node_modules/coralui-guide/assets/logo.png`,
-          title: 'CoralUI',
-          repository: 'https://git.corp.adobe.com/Coral/coralui',
+          logo: path.join(root, 'coralui-guide/assets/logo.png'),
+          title: 'Coral Spectrum',
+          repository: 'https://git.corp.adobe.com/Coral/coralui/tree/release/coral-spectrum',
           site: 'http://coralui.corp.adobe.com'
         }
       }
@@ -47,9 +49,9 @@ const config = {
       }
     },
     {name: 'esdoc-lint-plugin', option: {enable: false}},
-    {name: 'coralui-guide/plugins/Enhancer.js'},
-    {name: 'esdoc-inject-script-plugin', option: {enable: true, scripts: [`${CWD}/node_modules/coralui-guide/scripts/typekit.js`, `${CWD}/node_modules/coralui-guide/scripts/guide.js`]}},
-    {name: 'esdoc-inject-style-plugin', option: {enable: true, styles: [`${CWD}/node_modules/coralui-guide/styles/guide.css`]}}
+    {name: path.join(root, 'coralui-guide/plugins/Enhancer.js')},
+    {name: 'esdoc-inject-script-plugin', option: {enable: true, scripts: [path.join(root, 'coralui-guide/scripts/typekit.js'), path.join(root, 'coralui-guide/scripts/guide.js')]}},
+    {name: 'esdoc-inject-style-plugin', option: {enable: true, styles: [path.join(root, 'coralui-guide/styles/guide.css')]}}
   ]
 };
 
@@ -60,18 +62,18 @@ if (util.isTLB()) {
   config.excludes = ['^node_modules', '^build'];
   
   config.plugins.find(plugin => plugin.name === 'esdoc-standard-plugin').option.manual = {
-    index: `${CWD}/index.md`,
+    index: path.join(root, 'index.md'),
     globalIndex: true,
-    asset: `${CWD}/node_modules/coralui-guide/assets`,
+    asset: path.join(root, 'coralui-guide/assets'),
     'files': [
-      `${CWD}/README.md`,
-      `${CWD}/node_modules/coralui-guide/manual/overview.md`,
-      `${CWD}/node_modules/coralui-guide/manual/manual.md`,
-      `${CWD}/node_modules/coralui-guide/manual/styles.md`,
-      `${CWD}/node_modules/coralui-guide/manual/frameworks.md`,
-      `${CWD}/node_modules/coralui-guide/manual/architecture.md`,
-      `${CWD}/node_modules/coralui-guide/manual/examples.md`,
-      `${CWD}/node_modules/coralui-guide/manual/contribution.md`
+      path.join(root, 'README.md'),
+      path.join(root, 'coralui-guide/manual/overview.md'),
+      path.join(root, 'coralui-guide/manual/manual.md'),
+      path.join(root, 'coralui-guide/manual/styles.md'),
+      path.join(root, 'coralui-guide/manual/frameworks.md'),
+      path.join(root, 'coralui-guide/manual/architecture.md'),
+      path.join(root, 'coralui-guide/manual/examples.md'),
+      path.join(root, 'coralui-guide/manual/contribution.md')
     ]
   };
 }

@@ -1,4 +1,4 @@
-import 'coralui-externals';
+import '/coralui-externals';
 import Tree from './src/scripts/Tree';
 import TreeItem from './src/scripts/TreeItem';
 import TreeItemContent from './src/scripts/TreeItemContent';

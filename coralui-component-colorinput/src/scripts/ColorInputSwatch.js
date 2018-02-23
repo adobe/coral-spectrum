@@ -15,12 +15,12 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
+import {ComponentMixin} from '/coralui-mixin-component';
 import ColorInputAbstractSubviewMixin from './ColorInputAbstractSubviewMixin';
 import Color from './Color';
-import 'coralui-component-button';
+import '/coralui-component-button';
 import colorButton from '../templates/colorButton';
-import {i18n, transform} from 'coralui-util';
+import {i18n, transform} from '/coralui-util';
 
 const CLASSNAME = 'coral3-ColorInput-swatch';
 

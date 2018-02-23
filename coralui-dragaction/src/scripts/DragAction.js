@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import {events, validate, transform, commons} from 'coralui-util';
+import {events, validate, transform, commons} from '/coralui-util';
 
 // Attributes
 const DROP_ZONE_ATTRIBUTE = 'coral-dragaction-dropzone';

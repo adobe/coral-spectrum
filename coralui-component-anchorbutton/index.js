@@ -1,4 +1,4 @@
-import 'coralui-externals';
+import '/coralui-externals';
 import AnchorButton from './src/scripts/AnchorButton';
 import AnchorButtonLabel from './src/scripts/AnchorButtonLabel';
 

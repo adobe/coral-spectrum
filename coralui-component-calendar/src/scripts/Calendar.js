@@ -15,14 +15,14 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
-import {FormFieldMixin} from 'coralui-mixin-formfield';
-import {DateTime} from 'coralui-datetime';
-import 'coralui-component-button';
+import {ComponentMixin} from '/coralui-mixin-component';
+import {FormFieldMixin} from '/coralui-mixin-formfield';
+import {DateTime} from '/coralui-datetime';
+import '/coralui-component-button';
 import calendar from '../templates/calendar';
 import container from '../templates/container';
 import table from '../templates/table';
-import {transform, commons, i18n, Keys} from 'coralui-util';
+import {transform, commons, i18n, Keys} from '/coralui-util';
 
 /** @ignore */
 function isDateInRange(date, startDate, endDate) {

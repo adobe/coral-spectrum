@@ -1,4 +1,4 @@
-import 'coralui-externals';
+import '/coralui-externals';
 
 import ColumnView from './src/scripts/ColumnView';
 import ColumnViewColumn from './src/scripts/ColumnViewColumn';

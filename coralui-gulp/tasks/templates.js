@@ -15,12 +15,14 @@
  * from Adobe Systems Incorporated.
  */
 module.exports = function(gulp) {
+  const path = require('path');
   const plumber = require('gulp-plumber');
   const domly = require('gulp-domly');
   const modifyFile = require('gulp-modify-file');
+  const util = require('../helpers/util');
   
   gulp.task('templates', function() {
-    return gulp.src(['src/templates/*.html', 'node_modules/coralui-*/src/templates/*.html'])
+    return gulp.src(['src/templates/*.html', path.join(util.getRoot(), 'coralui-*/src/templates/*.html')])
       .pipe(plumber())
       .pipe(domly({
         compilerOptions: {

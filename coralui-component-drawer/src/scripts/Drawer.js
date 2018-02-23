@@ -15,10 +15,10 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
-import 'coralui-component-button';
+import {ComponentMixin} from '/coralui-mixin-component';
+import '/coralui-component-button';
 import base from '../templates/base';
-import {commons, transform, validate} from 'coralui-util';
+import {commons, transform, validate} from '/coralui-util';
 
 /**
  Enumeration for {@link Drawer} directions.

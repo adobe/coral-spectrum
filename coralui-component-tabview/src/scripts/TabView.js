@@ -15,10 +15,10 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
-import 'coralui-component-panelstack';
-import 'coralui-component-tablist';
-import {commons} from 'coralui-util';
+import {ComponentMixin} from '/coralui-mixin-component';
+import '/coralui-component-panelstack';
+import '/coralui-component-tablist';
+import {commons} from '/coralui-util';
 
 /**
  Enumeration for {@link TabView} orientations.

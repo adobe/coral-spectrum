@@ -1,4 +1,4 @@
-import 'coralui-externals';
+import '/coralui-externals';
 import TabView from './src/scripts/TabView';
 
 window.customElements.define('coral-tabview', TabView);

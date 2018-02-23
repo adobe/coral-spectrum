@@ -15,11 +15,11 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
-import {FormFieldMixin} from 'coralui-mixin-formfield';
-import {Collection} from 'coralui-collection';
+import {ComponentMixin} from '/coralui-mixin-component';
+import {FormFieldMixin} from '/coralui-mixin-formfield';
+import {Collection} from '/coralui-collection';
 import base from '../templates/base';
-import {transform, validate, events, commons, Keys} from 'coralui-util';
+import {transform, validate, events, commons, Keys} from '/coralui-util';
 
 const CLASSNAME = 'coral3-Slider';
 const CLASSNAME_HANDLE = 'coral3-Slider-handle';

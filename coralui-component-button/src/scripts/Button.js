@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
-import {ButtonMixin} from 'coralui-mixin-button';
+import {ComponentMixin} from '/coralui-mixin-component';
+import {ButtonMixin} from '/coralui-mixin-button';
 
 
 /**

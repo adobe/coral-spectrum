@@ -1,4 +1,4 @@
-import {DateTime} from 'coralui-datetime';
+import {DateTime} from '/coralui-datetime';
 
 describe('Coral.Datepicker', function() {
   // @todo: add tests for mobile

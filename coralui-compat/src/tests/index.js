@@ -1,5 +1,5 @@
-import 'coralui-externals';
-import 'coralui-util';
+import '/coralui-externals';
+import '/coralui-util';
 
 import '../../index';
 

@@ -1,4 +1,4 @@
-import {DateTime} from 'coralui-datetime';
+import {DateTime} from '/coralui-datetime';
 
 describe('Coral.Calendar', function() {
   describe('Namespace', function() {

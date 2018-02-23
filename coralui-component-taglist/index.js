@@ -1,6 +1,6 @@
-import 'coralui-externals';
+import '/coralui-externals';
 import translations from './i18n/translations.json';
-import {commons, strings} from 'coralui-util';
+import {commons, strings} from '/coralui-util';
 import Tag from './src/scripts/Tag';
 import TagLabel from './src/scripts/TagLabel';
 import TagList from './src/scripts/TagList';

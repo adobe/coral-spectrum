@@ -1,4 +1,4 @@
-import 'coralui-externals';
+import '/coralui-externals';
 import Alert from './src/scripts/Alert';
 import AlertHeader from './src/scripts/AlertHeader';
 import AlertContent from './src/scripts/AlertContent';

@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import {Vent} from 'coralui-externals';
+import {Vent} from '/coralui-externals';
 
 /**
  Events helper.

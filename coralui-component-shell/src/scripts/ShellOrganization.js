@@ -15,11 +15,11 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ListItem} from 'coralui-component-list';
-import {SelectableCollection} from 'coralui-collection';
-import {Icon} from 'coralui-component-icon';
+import {ListItem} from '/coralui-component-list';
+import {SelectableCollection} from '/coralui-collection';
+import {Icon} from '/coralui-component-icon';
 import organization from '../templates/organization';
-import {transform, commons} from 'coralui-util';
+import {transform, commons} from '/coralui-util';
 
 const CLASSNAMES = ['coral3-BasicList-item', 'coral3-Shell-orgSwitcher-item'];
 

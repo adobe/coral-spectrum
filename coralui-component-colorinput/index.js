@@ -1,4 +1,4 @@
-import 'coralui-externals';
+import '/coralui-externals';
 import Color from './src/scripts/Color';
 import ColorInput from './src/scripts/ColorInput';
 import ColorInputItem from './src/scripts/ColorInputItem';
@@ -8,7 +8,7 @@ import ColorInputSlider from './src/scripts/ColorInputSlider';
 import ColorInputColorProperties from './src/scripts/ColorInputColorProperties';
 
 import translations from './i18n/translations.json';
-import {strings, commons} from 'coralui-util';
+import {strings, commons} from '/coralui-util';
 
 // i18n
 commons.extend(strings, {

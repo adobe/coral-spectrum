@@ -16,7 +16,7 @@
  */
 
 import ShellOrganization from './ShellOrganization';
-import {Icon} from 'coralui-component-icon';
+import {Icon} from '/coralui-component-icon';
 
 const CLASSNAME = `coral3-BasicList-item, coral3-Shell-orgSwitcher-subitem `;
 

@@ -15,10 +15,10 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
-import 'coralui-component-tooltip';
+import {ComponentMixin} from '/coralui-mixin-component';
+import '/coralui-component-tooltip';
 import step from '../templates/step';
-import {transform, commons} from 'coralui-util';
+import {transform, commons} from '/coralui-util';
 import getTarget from './getTarget';
 
 const CLASSNAME = 'coral3-Steplist-item';

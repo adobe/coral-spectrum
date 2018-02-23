@@ -1,4 +1,4 @@
-import 'coralui-externals';
+import '/coralui-externals';
 import Checkbox from './src/scripts/Checkbox';
 import CheckboxLabel from './src/scripts/CheckboxLabel';
 

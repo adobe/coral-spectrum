@@ -15,26 +15,31 @@
  * from Adobe Systems Incorporated.
  */
 module.exports = function(gulp) {
+  const path = require('path');
   const plumber = require('gulp-plumber');
+  const rename = require('gulp-rename');
   const stylus = require('gulp-stylus');
   const svgImport = require('stylus-svg');
   const modifyFile = require('gulp-modify-file');
   const theme = require('../helpers/theme');
+  const util = require('../helpers/util');
+  
+  const root = util.getRoot();
   
   gulp.task('styles', function() {
-    return gulp.src(['src/styles/index.styl', 'node_modules/coralui-*/src/styles/index.styl'])
+    return gulp.src(['src/styles/index.styl', path.join(root, 'coralui-*/src/styles/index.styl')])
       .pipe(plumber())
       .pipe(stylus({
         'include css': true,
         include: [
-          './node_modules'
+          path.join(root, 'node_modules')
         ],
         use: [
           svgImport()
         ]
       }))
       .pipe(modifyFile((content) => {
-        if (theme.getTheme() === 'coralui-theme-spectrum' || process.cwd().split('/').pop() === 'coralui-theme-spectrum') {
+        if (theme.getTheme() === 'coralui-theme-spectrum') {
           const spectrumConfig = require(`../configs/spectrum.conf.js`);
           
           // Map Spectrum selectors with Coral ones
@@ -45,8 +50,9 @@ module.exports = function(gulp) {
         
         return content;
       }))
-      .pipe(gulp.dest(function (file) {
-        return file.base;
-      }));
+      .pipe(rename(function (file) {
+        file.dirname = '.';
+      }))
+      .pipe(gulp.dest('./'));
   });
 };

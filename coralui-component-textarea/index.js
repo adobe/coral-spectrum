@@ -1,4 +1,4 @@
-import 'coralui-externals';
+import '/coralui-externals';
 import Textarea from './src/scripts/Textarea';
 
 window.customElements.define('coral-textarea', Textarea, {extends: 'textarea'});

@@ -12,6 +12,10 @@
       padding: 15px;
     }
 
+    coral-columnview-column {
+      max-height: 400px;
+    }
+
     #log {
       border: 1px solid #bababa;
       height: 200px;
@@ -23,10 +27,10 @@
   </head>
   <body class="coral--light">
     <div style="position:fixed;top:15px;right:15px;">
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--light'">Light</a> |
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--lightest'">Lightest</a> |
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--dark'">Dark</a> |
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--darkest'">Darkest</a>
     </div>
 
     <section>
@@ -171,7 +175,7 @@
           else {
             // In this case we're in the top examples page and have to adjust the url accordingly
             const XMLHttpRequest2 = new window.XMLHttpRequest();
-            XMLHttpRequest2.open('GET', '../node_modules/coralui-component-columnview/examples/' + url, true);
+            XMLHttpRequest2.open('GET', '../../coralui-component-columnview/examples/' + url, true);
             XMLHttpRequest2.send();
 
             XMLHttpRequest2.onreadystatechange = function() {

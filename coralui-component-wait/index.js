@@ -1,4 +1,4 @@
-import 'coralui-externals';
+import '/coralui-externals';
 import Wait from './src/scripts/Wait';
 
 window.customElements.define('coral-wait', Wait);

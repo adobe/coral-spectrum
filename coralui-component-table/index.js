@@ -1,4 +1,4 @@
-import 'coralui-externals';
+import '/coralui-externals';
 import Table from './src/scripts/Table';
 import TableColumn from './src/scripts/TableColumn';
 import TableCell from './src/scripts/TableCell';

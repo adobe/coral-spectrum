@@ -15,14 +15,14 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
+import {ComponentMixin} from '/coralui-mixin-component';
 import ColorInputAbstractSubviewMixin from './ColorInputAbstractSubviewMixin';
 import Color from './Color';
-import 'coralui-component-button';
-import 'coralui-component-textfield';
+import '/coralui-component-button';
+import '/coralui-component-textfield';
 import './ColorInputSlider';
 import propertiesSubview from '../templates/colorProperties';
-import {commons, i18n} from 'coralui-util';
+import {commons, i18n} from '/coralui-util';
 
 const CLASSNAME = 'coral3-ColorInput-colorProperties';
 

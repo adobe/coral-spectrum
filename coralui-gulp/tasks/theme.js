@@ -29,7 +29,7 @@ module.exports = function(gulp) {
           return `${themeHelper.addTheme()}\n${content}`;
         }))
         .pipe(rename({
-          basename: themeHelper.getIndex()
+          basename: 'index-themed'
         }))
         .pipe(gulp.dest('.'));
     }

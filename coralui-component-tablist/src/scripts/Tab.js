@@ -15,10 +15,10 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
+import {ComponentMixin} from '/coralui-mixin-component';
 import base from '../templates/base';
-import {transform, commons} from 'coralui-util';
-import {Icon} from 'coralui-component-icon';
+import {transform, commons} from '/coralui-util';
+import {Icon} from '/coralui-component-icon';
 import getTarget from './getTarget';
 
 const CLASSNAME = 'coral3-TabList-item';

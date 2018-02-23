@@ -1,4 +1,4 @@
-import 'coralui-externals';
+import '/coralui-externals';
 import StepList from './src/scripts/StepList';
 import Step from './src/scripts/Step';
 import StepLabel from './src/scripts/StepLabel';

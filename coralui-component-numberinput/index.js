@@ -1,6 +1,6 @@
-import 'coralui-externals';
+import '/coralui-externals';
 import translations from './i18n/translations.json';
-import {strings, commons} from 'coralui-util';
+import {strings, commons} from '/coralui-util';
 import NumberInput from './src/scripts/NumberInput';
 
 // i18n

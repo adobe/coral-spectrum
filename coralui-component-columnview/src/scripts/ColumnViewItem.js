@@ -15,10 +15,10 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
-import {Icon} from 'coralui-component-icon';
-import {Checkbox} from 'coralui-component-checkbox';
-import {transform, validate} from 'coralui-util';
+import {ComponentMixin} from '/coralui-mixin-component';
+import {Icon} from '/coralui-component-icon';
+import {Checkbox} from '/coralui-component-checkbox';
+import {transform, validate} from '/coralui-util';
 
 const CLASSNAME = 'coral3-MillerColumn-item';
 
@@ -286,11 +286,9 @@ class ColumnViewItem extends ComponentMixin(HTMLElement) {
       this.content = content;
       this.thumbnail = thumbnail;
     }
-    else {
-      // Insert thumbnail if icon is specified
-      if (this.icon) {
-        this.thumbnail = this._elements.thumbnail;
-      }
+    // Insert thumbnail if icon is specified
+    else if (this.icon) {
+      this.thumbnail = this._elements.thumbnail;
     }
   }
 }

@@ -15,11 +15,11 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from 'coralui-mixin-component';
-import {transform, validate} from 'coralui-util';
-import 'coralui-component-icon';
-import 'coralui-component-button';
-import 'coralui-component-anchorbutton';
+import {ComponentMixin} from '/coralui-mixin-component';
+import {transform, validate} from '/coralui-util';
+import '/coralui-component-icon';
+import '/coralui-component-button';
+import '/coralui-component-anchorbutton';
 import menuBarItem from '../templates/menuBarItem';
 
 /**
