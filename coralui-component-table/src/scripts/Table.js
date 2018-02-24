@@ -43,7 +43,7 @@ const CLASSNAME = 'coral3-Table-wrapper';
  @property {String} QUIET
  A quiet table with transparent borders and background.
  @property {String} LIST
- A table with the first column used for selection.
+ Not supported. Falls back to DEFAULT.
  */
 const variant = {
   DEFAULT: 'default',
@@ -2332,35 +2332,30 @@ class Table extends ComponentMixin(HTMLTableElement) {
   // @compat
   _toggleSelectionCheckbox(row) {
     // Use the first column as selection column
-    if (this._variant === variant.LIST) {
-      const cell = getContentCells(row)[0];
-      if (cell) {
-        cell.removeAttribute('coral-table-rowselect');
+    const cell = getContentCells(row)[0];
     
-        // Support cloneNode
-        cell._checkbox = cell._checkbox || cell.querySelector('coral-checkbox[coral-table-rowselect]');
-        
-        // Render checkbox if none
-        if (!cell._checkbox) {
-          cell._checkbox = new Checkbox();
-          cell._checkbox.setAttribute('coral-table-rowselect', '');
-        }
+    // On condition handle attribute is set
+    if (cell && cell.hasAttribute('coral-table-rowselect')) {
+      cell.classList.add('coral3-Table-cell--check');
+      
+      cell.removeAttribute('coral-table-rowselect');
   
-        // Sync selection
-        cell._checkbox[row.selected ? 'setAttribute' : 'removeAttribute']('checked', '');
-        
-        // Add checkbox
-        cell.insertBefore(cell._checkbox, cell.firstChild);
+      // Support cloneNode
+      cell._checkbox = cell._checkbox || cell.querySelector('coral-checkbox');
+      
+      // Render checkbox if none
+      if (!cell._checkbox) {
+        cell._checkbox = new Checkbox();
       }
-    }
-    else {
-      // Remove selection column
-      const cell = getContentCells(row)[0];
   
-      // Remove checkbox
-      if (cell && cell._checkbox) {
-        cell._checkbox.remove();
-      }
+      // Identifies as selection handle
+      cell._checkbox.setAttribute('coral-table-rowselect', '');
+      
+      // Sync selection
+      cell._checkbox[row.selected ? 'setAttribute' : 'removeAttribute']('checked', '');
+      
+      // Add checkbox
+      cell.insertBefore(cell._checkbox, cell.firstChild);
     }
   }
   

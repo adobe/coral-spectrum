@@ -431,36 +431,34 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
     }
   }
 }
-/* END #selectable */
 
-/* #variant */
 // Align design to Miller Columns since thumbnail selection pattern was removed in Spectrum
-.coral3-Table-wrapper--list {
-  .coral3-Table-cell:first-of-type {
-    white-space: nowrap;
+.coral3-Table-cell--check {
+  white-space: nowrap;
 
-    coral-checkbox[coral-table-rowselect] {
-      & + img {
-        height: 24*$px;
-        width: 24*$px;
-        line-height: 24*$px;
-        vertical-align: top;
-        object-fit: cover;
-        margin-top: 4*$px;
-        margin-left: 4*$px;
-      }
+  coral-checkbox[coral-table-rowselect] {
+    & + img {
+      height: 24*$px;
+      width: 24*$px;
+      line-height: 24*$px;
+      vertical-align: top;
+      object-fit: cover;
+      margin-top: 4*$px;
+      margin-left: 4*$px;
+    }
 
-      & + coral-icon {
-        vertical-align: middle;
-        text-align: center;
-        width: 24*$px;
-        margin-left: 4*$px;
-        margin-top: 7*$px;
-      }
+    & + coral-icon {
+      vertical-align: middle;
+      text-align: center;
+      width: 24*$px;
+      margin-left: 4*$px;
+      margin-top: 7*$px;
     }
   }
 }
+/* END #selectable */
 
+/* #variant */
 // Remove borders and radius for quiet variant
 .coral3-Table-wrapper--quiet {
   .coral3-Table-body {

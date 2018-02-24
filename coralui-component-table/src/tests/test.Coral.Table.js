@@ -240,10 +240,10 @@ describe('Coral.Table', function() {
     });
   
     describe('#variant', function() {
-      it('should have a list variant', function() {
+      it('should have a quiet variant', function() {
         const el = new Coral.Table();
-        el.variant = Coral.Table.variant.LIST;
-        expect(el.classList.contains('coral3-Table-wrapper--list')).to.be.true;
+        el.variant = Coral.Table.variant.QUIET;
+        expect(el.classList.contains('coral3-Table-wrapper--quiet')).to.be.true;
       });
     });
   
