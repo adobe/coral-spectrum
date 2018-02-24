@@ -26,21 +26,26 @@ const babel = require('rollup-plugin-babel');
 const json = require('rollup-plugin-json');
 const resources = require('../plugins/rollup-plugin-resources');
 
+const root = util.getRoot();
+
 module.exports = {
   plugins: [
     rootImport({
       useEntry: 'prepend',
       extensions: '/index.js',
-      root: util.getRoot()
+      root: root
     }),
     nodeResolve(),
     commonjs(),
     json(),
     resources({
-      include: '**/*.svg',
+      include: path.join(root, '**/*.svg'),
       output: './build/resources'
     }),
-    css({ output: './build/css/coral.css'}),
+    css({
+      include: path.join(root, '**/*.css'),
+      output: './build/css/coral.css'
+    }),
     babel({
       presets: [
         [

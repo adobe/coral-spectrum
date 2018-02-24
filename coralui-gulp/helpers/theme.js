@@ -27,7 +27,7 @@ module.exports = {
   addTheme: function() {
     // Default
     if (theme === 'coralui-theme-spectrum') {
-      return `import './index.css';`
+      return `import '/coralui-theme-spectrum';`
     }
     
     // Custom theme

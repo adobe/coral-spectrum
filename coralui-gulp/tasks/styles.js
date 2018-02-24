@@ -50,9 +50,8 @@ module.exports = function(gulp) {
         
         return content;
       }))
-      .pipe(rename(function (file) {
-        file.dirname = '.';
-      }))
-      .pipe(gulp.dest('./'));
+      .pipe(gulp.dest(function (file) {
+        return file.base;
+      }));
   });
 };
