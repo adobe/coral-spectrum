@@ -1,12 +1,19 @@
-/node_modules
-/npm-debug.log
+/.editorconfig
+/.eslintrc
+/.gitignore
+
 /index-themed.js
 /gulpfile.js
+/index.md
+/examples
+/src/tests
 
-/coralui-*/src/templates/*.js
-/coralui-*/src/styles/index.css
+/coralui-*/examples
+/coralui-*/src/tests
+/coralui-*/src/templates/*.html
+/coralui-*/src/styles/**/*.styl
+/coralui-*/src/embed
 /coralui-*/index-themed.js
-/coralui-*/README.md
 /coralui-*/build
 /coralui-*/gulpfile.js
 
