@@ -24,7 +24,7 @@
     
     // Insert title
     var title = document.createElement('span');
-    title.textContent = 'CoralUI';
+    title.textContent = document.title.split('|').pop().trim();
     header.children[0].appendChild(title);
     
     // Indicate active navigation
@@ -50,6 +50,9 @@
       }
     }
     
+    // Move header title
+    nav.insertBefore(header.firstElementChild, nav.firstChild);
+    
     // Hide content if empty for
     var content = document.querySelector('.content');
     if (content.textContent.trim() === '') {
@@ -71,6 +74,8 @@
     var search = document.querySelector('.search-box');
     var result = document.querySelector('.search-result');
     var input = document.querySelector('.search-input');
+    
+    input.insertAdjacentHTML('beforebegin', '<svg class="search-icon" viewBox="0 0 16 16" width="100%" height="100%"><path d="M9.508.495h-.01A5.993 5.993 0 0 0 3.505 6.48v.007A5.993 5.993 0 0 0 4.77 10.17L.225 14.714a.75.75 0 1 0 1.05 1.072l.011-.011L5.83 11.23A5.998 5.998 0 1 0 9.508.495zm-.003 10.5a4.5 4.5 0 1 1 4.5-4.5 4.5 4.5 0 0 1-4.5 4.5z"></path></svg>');
     
     // Enhance search, open by default
     input.placeholder = 'Search components, events, properties, methods etc.';
@@ -141,5 +146,14 @@
         }
       }
     });
+  
+    // Override manual.js
+    var matched = location.pathname.match(/\/(manual\/.*\.html)$/);
+    if (!matched) return;
+    var currentName = matched[1];
+    var link = document.querySelector('.navigation .manual-toc li[data-link="' + currentName + '"]');
+    if (link) {
+      link.className += ' is-selected';
+    }
   });
 }());

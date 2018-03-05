@@ -7,10 +7,8 @@ don't cover all scenarios.
  
 ## Playground
  
-Coral 4.x HTML/CSS/JS editor with live preview. Code can be shared by copy pasting the URL. 
+The Coral Spectrum playground is available <a href="../../playground" target="_blank">here</a>. It's an HTML/CSS/JS editor with live preview. Code can be shared by copy pasting the URL. 
 The playground is sandboxed to prevent security risks.
-
-Live at https://git.corp.adobe.com/pages/ringel/coralui-playground.
  
 ## Configurator
 

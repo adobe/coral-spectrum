@@ -1,0 +1,29 @@
+<div handle="wrapper">
+  <div handle="preview" class="coral3-Playground-preview">
+    <coral-wait hidden class="coral3-Playground-loading" handle="loading" size="L" variant="dots"></coral-wait>
+    <iframe sandbox="allow-same-origin allow-scripts allow-modals" handle="frame" class="coral3-Playground-preview-frame"></iframe>
+  </div>
+  <div class="coral3-Playground-settings">
+    <button handle="run" type="button" is="coral-button" icon="play" variant="quiet"></button>
+    <button class="coral3-Playground-settings-action" variant="quiet" handle="gear" type="button" is="coral-button" role="combobox" aria-expanded="false" aria-haspopup="true"
+            icon="gear"></button>
+    <coral-popover variant="_custom" handle="overlay" class="coral3-Playground-overlay" trapfocus="on" focusonshow="on" target=".coral3-Playground-settings-action"
+                   role="presentation" offset="-1" lengthoffset="-100%" breadthoffset="100%">
+      <coral-popover-content class="u-coral-padding">
+        <div class="coral3-Playground-field">
+          <div class="coral3-Playground-field-label">Live reload</div>
+          <coral-switch handle="livereload"></coral-switch>
+        </div>
+        <div class="coral3-Playground-field">
+          <div class="coral3-Playground-field-label">Screen</div>
+          <coral-buttongroup handle="screen" selectionmode="single">
+            <button is="coral-button" icon="separator" value="vertical"></button>
+            <button is="coral-button" icon="separator" value="horizontal"></button>
+            <button is="coral-button" icon="fullScreen" value="fullscreen"></button>
+          </coral-buttongroup>
+        </div>
+      </coral-popover-content>
+    </coral-popover>
+  </div>
+  <div class="coral3-Playground-editor" handle="editor"></div>
+</div>

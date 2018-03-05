@@ -31,10 +31,10 @@ const config = {
       option: {
         accessor: {access: ['public']},
         brand: {
-          logo: path.join(root, 'coralui-guide/assets/logo.png'),
+          logo: path.join(root, 'coralui-guide/assets/coral.png'),
           title: 'Coral Spectrum',
           repository: 'https://git.corp.adobe.com/Coral/coralui/tree/release/coral-spectrum',
-          site: 'http://coralui.corp.adobe.com'
+          site: 'http://coral-spectrum.corp.adobe.com'
         }
       }
     },
@@ -59,7 +59,7 @@ const config = {
 if (util.isTLB()) {
   config.source = '.';
   config.includes = ['^.external-ecmascript.js', '^coralui-[a-z]+-[a-z]+/src/scripts', '^coralui-[a-z]+/src/scripts'];
-  config.excludes = ['^node_modules', '^build'];
+  config.excludes = ['^node_modules', '^build', '^coralui-component-playground'];
   
   config.plugins.find(plugin => plugin.name === 'esdoc-standard-plugin').option.manual = {
     index: path.join(root, 'index.md'),

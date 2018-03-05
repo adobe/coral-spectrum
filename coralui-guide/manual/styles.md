@@ -3,7 +3,7 @@
 ## Theme
 
 
-The default CoralUI font styles cascade from `coral--light` or `coral--dark` theme, so that class must be specified at a higher level.
+The default Coral Spectrum font styles cascade from `coral--light`, `coral--lightest`, `coral--dark` and `coral--darkest` theme, so that class must be specified at a higher level.
 
 ```
 <body class="coral--light">
@@ -17,9 +17,9 @@ The default CoralUI font styles cascade from `coral--light` or `coral--dark` the
 
 ## CSS only components
 
-**This section provides details on the few CSS-only components included in CoralUI considered as public API.**
+**This section provides details on the few CSS-only components included in Coral Spectrum considered as public API.**
 
-There are some CoralUI components that are markup and CSS only. They are not custom elements, and as such are used by 
+There are some Coral Spectrum components that are markup and CSS only. They are not custom elements, and as such are used by 
 setting CSS selectors on normal HTML markup. 
 
 ### coral-DecoratedTextfield
@@ -473,7 +473,7 @@ Wells are used to separate field groups or large blocks of text.
 
 ### u-coral
 
-CoralUI provides some CSS utility classes that can be applied to any DOM element.
+Coral Spectrum provides some CSS utility classes that can be applied to any DOM element.
 
 #### u-coral-clearFix
 
@@ -561,7 +561,7 @@ Large device >= 1200px.
 
 ## Using Typekit
 
-CoralUI uses Typekit to securely deliver the Adobe Clean corporate font.
+Coral Spectrum uses Typekit to securely deliver the Adobe Clean corporate font.
 
 ### Domains
 
@@ -576,16 +576,16 @@ It comes pre-configured with a kit that is limited to the following domains :
 * 127.0.0.1
 * 0.0.0.0
 
-If you are using CoralUI on a server on a domain other than these, you will need to request and configure your own Typekit kit.
+If you are using Coral Spectrum on a server on a domain other than these, you will need to request and configure your own Typekit kit.
 
 ### Requesting a Kit for Additional Domains
 
-If you need to enable CoralUI on additional domains, you will need to obtain a voucher for Adobe Clean from the Typekit team.
+If you need to enable Coral Spectrum on additional domains, you will need to obtain a voucher for Adobe Clean from the Typekit team.
 
 1. Create a [generic Adobe account](https://inside.corp.adobe.com/itech/kc/KB1312968.html) to use as your Typekit account. (recommended)
 2. Visit [Adobe TypeKit Wiki](https://wiki.corp.adobe.com/display/devrel/Using+Typekit+at+Adobe) for further help on Adobe TypeKit accounts.
 3. Configure your kit per the Kit Configuration settings below.
-4. Configure CoralUI to use your default kit per the instructions below.
+4. Configure Coral Spectrum to use your default kit per the instructions below.
 
 ### Kit configuration
 
@@ -602,9 +602,9 @@ Adobe Clean Condensed - Italic
 
 Choose default language support for both families.
 
-### Using a Custom Kit with CoralUI
+### Using a Custom Kit with Coral Spectrum
 
-Include your Typekit ID as a CoralUI option before CoralUI gets loaded.
+Include your Typekit ID as a Coral Spectrum option before Coral Spectrum gets loaded.
 
 ```
 <script>
@@ -628,5 +628,5 @@ That selector would work in conjunction with the function in the typekit.js Java
 the DOM when Typekit has loaded. However, experience has shown that hiding content and blocking until Typekit loads can 
 make the page or app unresponsive on initial load.
 
-CoralUI remains agnostic. Consumers must implement their own solution to avoid Flash Of Unstyled Text during font loading.
+Coral Spectrum remains agnostic. Consumers must implement their own solution to avoid Flash Of Unstyled Text during font loading.
 

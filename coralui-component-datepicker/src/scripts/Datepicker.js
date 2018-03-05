@@ -554,7 +554,7 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       this.removeAttribute('aria-owns');
     }
     else {
-      // Switch to CoralUI Calendar picker:
+      // Switch to Calendar picker
       this._elements.toggle.hidden = false;
       this._elements.input.setAttribute('type', 'text');
     

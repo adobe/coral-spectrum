@@ -1,6 +1,8 @@
-<h1 class="guide-Title"><img src="./manual/asset/coral.png">CoralUI (4.x)</h1>
+## Coral Spectrum
 
-**A JavaScript library of touch-first web components for creating beautiful experiences.**
+**A JavaScript library of Web Components following Spectrum design patterns.**
+
+Our vision is to create consistent Adobe experiences by providing a complete, easy to use library of HTML components compatible with major frameworks.
 
 ### [» Overview](./manual/overview.html)
 *Vision and goals*
@@ -16,9 +18,3 @@
 *All components showcased and Playground*
 ### [» Contribution](./manual/contribution.html)
 *Open development principles*
-
-- - -
-
-### Where is the CoralUI (3.x) documentation ?
-
-You'll find the 3.x documentation at http://coralui.corp.adobe.com/3.x

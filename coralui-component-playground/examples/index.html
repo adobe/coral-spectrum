@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Coral.Playground</title>
+  <link id="coral-link" rel="stylesheet" href="../build/css/coral.css">
+  <script id="coral-script" src="../build/js/coral.js"></script>
+</head>
+<body class="coral--light">
+<script>
+  var link = document.getElementById('coral-link');
+  var script = document.getElementById('coral-script');
+
+  // JS constructor example with sharable code
+  var config = Coral.Playground.read(location.hash.substr(1));
+  if (!Object.keys(config).length) {
+    config.code = '<!DOCTYPE html>\n' +
+      '<html>\n' +
+      '<head>\n' +
+      '  <link rel="stylesheet" href="'+ link.href +'"/>\n' +
+      '  <script src="'+ script.src +'"><\/script>\n' +
+      '  <script>window.addEventListener("message", function(e) {document.head.insertAdjacentHTML("beforeend", e.data)});<\/script>\n' +
+      '  <!-- Load other libraries/frameworks e.g. via a CDN -->\n' +
+      '</head>\n' +
+      '<body class="coral--light">\n' +
+      '  <button is="coral-button">Button</button>\n' +
+      '  <!-- Share your code by running it first then copy paste the URL -->\n' +
+      '</body>\n' +
+      '</html>\n';
+    config.livereload = true;
+  }
+
+  var playground = new Coral.Playground(config);
+  var loaded = false;
+
+  playground.addEventListener('coral-playground:coderun', function() {
+    location.hash = playground.share();
+
+    playground.run('data:text/html,' + encodeURI(playground.code));
+  });
+
+  playground.addEventListener('coral-playground:settingschange', function() {
+    location.hash = playground.share();
+  });
+
+  playground.addEventListener('coral-playground:load', function() {
+    // Workaround to load the icons
+      var icons = document.querySelectorAll('head svg');
+      var html = '';
+      for (var i = 0; i < icons.length; i++) {
+        html += icons[i].outerHTML;
+      }
+      playground._elements.frame.contentWindow.postMessage(html,'*');
+  });
+
+  document.body.appendChild(playground);
+</script>
+</body>
+
+</html>

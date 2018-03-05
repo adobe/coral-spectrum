@@ -2,9 +2,9 @@
 
 ## Getting started
 
-**The following information is intended to get you up and running quickly with CoralUI**
+**The following information is intended to get you up and running quickly with Coral Spectrum**
 
-The easiest way to start experimenting with CoralUI is to download the ZIP archive of the 
+The easiest way to start experimenting with Coral Spectrum is to download the ZIP archive of the 
 [latest release](https://git.corp.adobe.com/Coral/coralui/tags) which contains all components. 
 After you've unzipped the downloaded zip archive, follow the steps below :
 * Put `coral.min.css` in the `css/` directory of your project.
@@ -16,7 +16,7 @@ This is required for icons and other assets to work.
 <link rel="stylesheet" href="css/coral.min.css">
 <script src="js/coral.min.js"></script>
 ```
-* That's it. Now you're ready to use CoralUI.
+* That's it. Now you're ready to use Coral Spectrum.
 * **Note:** Calendar, Clock and Datepicker components will leverage [moment.js](http://momentjs.com/) if loaded on the page
 
 ## Consume with npm
@@ -27,39 +27,39 @@ To retrieve coralui npm packages from artifactory, you have two options :
 * Add the following 2 lines to '~/.npmrc':
 ```
 @coralui:registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-coralui-release
-@spectrum:registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-spectrum-snapshot-local
+@spectrum:registry=https://artifactory.corp.adobe.com:443/artifactory/api/npm/npm-spectrum-release
 ```
 * Or run npm install with additional parameters
 ```
 npm install --scope=@coralui --registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-coralui-release
-npm install --scope=@spectrum --registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-spectrum-snapshot-local
+npm install --scope=@spectrum --registry=https://artifactory.corp.adobe.com:443/artifactory/api/npm/npm-spectrum-release
 ```
 
 Then you can install coralui npm packages :
 
 ```
-npm install @coralui/coralui
+npm install @coralui/coral-spectrum
 ```
 
-If your project uses a module bundler (e.g. Webpack) and a ES6/7 to ES5 transpiler (e.g. Babel), 
+If your project uses a module bundler and a ES6/7 to ES5 transpiler, 
 you can bundle only needed components :
 
 ```
-import {Button, Textfield} from '@coralui/coralui';  
+import {Button, Textfield} from '@coralui/coral-spectrum';  
 ```
 
 ## Custom build
 
-Don't want all of CoralUI, or want to add components that aren't in the default build? No problem ! 
+Don't want all of Coral Spectrum, or want to add components that aren't in the default build? No problem ! 
 We'll show you how to customize a build : 
-1. Fork the [repository](https://git.corp.adobe.com/Coral/coralui) on GitHub
+1. Fork the [repository](https://git.corp.adobe.com/Coral/coralui/tree/release/coral-spectrum) on GitHub
 2. Open `index.js` and remove components you would like excluded from the build. Repeat for `src/tests/index.js`.
 3. Run `npm install`. Optionally you can also add additional components to `package.json`.
 4. Run `gulp`. This will generate the build and run the tests.
    
 ## Development
    
-First run `npm i` then you can use below Gulp tasks to work on CoralUI components :
+First run `npm i` then you can use below Gulp tasks to work on Coral Spectrum components :
 * `gulp build` to generate the JS/CSS files.
 * `gulp minify` to generate a minified version of the JS/CSS files.
 * `gulp tests` to run the tests.

@@ -1,18 +1,18 @@
-# CoralUI (4.x)
+# Coral Spectrum
 
-**A JavaScript library of touch-first web components for creating beautiful experiences.**
+**Coral Spectrum is a library of Web Components following Spectrum design patterns.**
 
-This repository packages the components that make up CoralUI Spectrum Components built by leveraging 
+This repository packages the components that make up Coral Spectrum components built by leveraging 
 the [Custom Elements v1](https://w3c.github.io/webcomponents/spec/custom/) specification, which is part of the 
-emerging [Web Components](https://www.webcomponents.org/introduction) standard. 
+emerging [Web Components](https://www.webcomponents.org/introduction) standard.  
 
-It is an implementation of the [Spectrum design specifications](http://spectrum.corp.adobe.com/). 
+Components are following the [Spectrum design patterns](http://spectrum.corp.adobe.com/) for a unique experience. 
 
 ## Getting started
 
 ### Consumers
 
-The easiest way to get started with CoralUI is to download the ZIP archive of the 
+The easiest way to get started with Coral Spectrum is to download the ZIP archive of the 
 [latest release](https://git.corp.adobe.com/Coral/coralui/tags) which contains all components. 
 After you've unzipped the downloaded zip archive, follow the steps below :
 * Put `coral.min.css` in the `css/` directory of your project.
@@ -24,7 +24,7 @@ This is required for icons and other assets to work.
 <link rel="stylesheet" href="css/coral.min.css">
 <script src="js/coral.min.js"></script>
 ```
-* That's it. Now you're ready to use CoralUI.
+* That's it. Now you're ready to use Coral Spectrum.
 * **Note:** Calendar, Clock and Datepicker components will leverage [moment.js](http://momentjs.com/) if loaded on the page
 
 **For NPM consumers**
@@ -57,9 +57,9 @@ import {Button, Textfield} from '@coralui/coralui';
 
 ### Contributors
 
-CoralUI follows open development principles:
+Coral Spectrum follows open development principles:
 * The code is discoverable and openly available to anyone.
-* Discussions about CoralUI happen on an open and archived channel.
+* Discussions about Coral Spectrum happen on an open and archived channel.
 * All important technical decisions are exposed on that channel.
 * All commits are backed by issues in an openly accessible tracker, which offers a self-service overview of the project's status and history.
 * People who are not members of the core team are encouraged to provide contributions.
@@ -68,7 +68,7 @@ The more you contribute, and the more valuable your contributions are, the more 
 
 **Slack channel: https://coralui.slack.com. Mailing list: [coralui-dev@adobe.com](mailto:coralui-dev@adobe.com)**
 
-All CoralUI work is tracked in our [JIRA project](https://jira.corp.adobe.com/browse/CUI).
+All Coral Spectrum work is tracked in our [JIRA project](https://jira.corp.adobe.com/browse/CORAL).
 
 Before starting, make sure the work you are doing is tracked in JIRA. Create an issue if one doesn't already exist. 
 An issue description should be complete and include steps to reproduce if the issue is a defect.
@@ -81,7 +81,7 @@ http://coralui.corp.adobe.com for all details.
 Once ready, your work must be peer reviewed by a pull request.
 
 **Gulp tasks**
-First run `npm i` then you can use below Gulp tasks to work on CoralUI components :
+First run `npm i` then you can use below Gulp tasks to work on Coral Spectrum components :
 * `gulp build` to generate the JS/CSS files.
 * `gulp minify` to generate a minified version of the JS/CSS files.
 * `gulp tests` to run the tests.

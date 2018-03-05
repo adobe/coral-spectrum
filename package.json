@@ -1,6 +1,6 @@
 {
   "name": "@coralui/coral-spectrum",
-  "description": "Coral Spectrum is a library of web components following Spectrum design patterns.",
+  "description": "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.",
   "version": "1.0.0-beta.4",
   "repository": {
     "type": "git",
@@ -20,6 +20,8 @@
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-env": "^1.6.0",
     "chai": "^4.0.2",
+    "codemirror": "^5.35.0",
+    "deflate-js": "^0.2.3",
     "del": "^2.2.2",
     "esdoc": "^1.0.3",
     "esdoc-accessor-plugin": "^1.0.0",
@@ -42,6 +44,7 @@
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-server-livereload": "^1.9.2",
+    "gulp-sftp": "^0.1.5",
     "gulp-sourcemaps": "^2.4.1",
     "gulp-stylus": "^2.6.0",
     "gulp-util": "^3.0.8",

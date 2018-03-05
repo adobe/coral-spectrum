@@ -2,22 +2,22 @@
 
 ## Web Components
 
-CoralUI hides implementation detail from consumers by leveraging the [Custom Elements v1](https://w3c.github.io/webcomponents/spec/custom/) 
+Coral Spectrum hides implementation detail from consumers by leveraging the [Custom Elements v1](https://w3c.github.io/webcomponents/spec/custom/) 
 specification, which is part of the emerging [Web Components](https://www.webcomponents.org/introduction) standard.
 
 **Therefore any Coral CSS classes and attributes not explicitly mentioned in the public documentation are private and subject to change. 
-Their direct use is not recommended and at high risk of breaking after subsequent updates of CoralUI library.**
+Their direct use is not recommended and at high risk of breaking after subsequent updates of Coral Spectrum library.**
 
-Custom elements allow CoralUI to define new types of DOM elements to be used in an HTML document. As a result, CoralUI 
+Custom elements allow Coral Spectrum to define new types of DOM elements to be used in an HTML document. As a result, Coral Spectrum 
 can extend native elements like a button or text input to provide additional functionality or it can provide completely 
 new elements like a progress indicator. Consumers can then use these elements using their custom tags (e.g., `<coral-progress>`) 
 and directly interact with their custom properties.
 
-A strong advantage CoralUI derives from Custom Elements is the ability to hide many implementation details from the consumer. 
+A strong advantage Coral Spectrum derives from Custom Elements is the ability to hide many implementation details from the consumer. 
 While a progress indicator may be composed of a variety of spans, divs, or images, these are underlying details that shouldn't
 concern consumers. Rather than consumers copying and maintaining large swaths of code containing all these elements with their 
 various attributes, they are typically able to use a simple Custom Element tag and the underlying elements are seamlessly 
-produced by CoralUI on their behalf. By keeping implementation details internal to components, the exposed public API is 
+produced by Coral Spectrum on their behalf. By keeping implementation details internal to components, the exposed public API is 
 minimized and more explicit resulting in a lower risk of introducing breaking changes. 
 
 For now, we have not implemented Shadow DOM or other aspects of the Web Components specification due to lack of browser 
@@ -47,8 +47,8 @@ each content zone on the JavaScript object that corresponds to the component. Yo
 
 ## Dependencies
 
-CoralUI has a few dependencies and polyfills. Some are actually written and maintained by the CoralUI team, and are included in 
-CoralUI without being considered an external dependency.
+Coral Spectrum has a few dependencies and polyfills. Some are actually written and maintained by the Coral Spectrum team, and are included 
+without being considered an external dependency.
 
 These dependencies are:
 * [Custom Elements v1 polyfill](https://github.com/webcomponents/custom-elements/) with built-in components support
@@ -57,13 +57,13 @@ These dependencies are:
 * [PopperJS](https://popper.js.org/) to manager poppers
 
 
-## Upgrade to CoralUI (4.x)
+## Upgrade to Coral Spectrum
 
 ### Custom Elements v1
 
-3.x relies on Custom Elements v0 which is an outdated spec which won't be implemented natively in major browsers.
+CoralUI 3.x relies on Custom Elements v0 which is an outdated spec which won't be implemented natively in major browsers.
 V0 was a [Google-only proposed specification](https://www.w3.org/TR/2016/WD-custom-elements-20160226/) while 
-Custom Elements v1 is a WHATWG Web Standard adopted by all major browser vendors.
+Coral Spectrum relies on Custom Elements v1 which is a WHATWG Web Standard adopted by all major browser vendors.
 
 A major change in v1 is that component initialization is now done in an ES6 class constructor. The list of 
 [Requirements for custom element constructors](http://w3c.github.io/webcomponents/spec/custom/#custom-element-conformance) 
@@ -78,7 +78,7 @@ var header = alert.querySelector('coral-alert-header');
 header.textContent = 'Info';
 ```
  
-With 4.x and Custom Elements v1, this is not possible anymore since the tag is empty when created. You'll have
+With Coral Spectrum and Custom Elements v1, this is not possible anymore since the tag is empty when created. You'll have
 to use the JavaScript API provided by the component instead.
 
 ```
@@ -87,12 +87,12 @@ var header = alert.header; // Use the JS API to access the content zone
 header.textContent = 'Info';
 ```
 
-Also `window.CustomElements` namespace provided by the CoralUI (3.x) Custom Elements v0 polyfill doesn't exist in CoralUI (4.x).
+Also `window.CustomElements` namespace provided by the 3.x Custom Elements v0 polyfill doesn't exist in Coral Spectrum.
 
 ### Coral.register
 
-CoralUI (4.x) ships by default a compatibility package to support the CoralUI (3.x) way to register elements `Coral.register`.
-Unfortunately, extending Coral 4.x components is not supported. So if you have :
+Coral Spectrum ships by default a compatibility package to support the 3.x way to register elements `Coral.register`.
+Unfortunately, components registered with `Coral.register` can't be extended e.g :
 ```
 Coral.register({
     name: 'Element',
@@ -100,7 +100,6 @@ Coral.register({
     extend: Coral.Alert
 });
 ```
-
-It will not extend `Coral.Alert`. Instead use ES6 classes `extend` feature to extend Coral components.
+will not extend `Coral.Alert`. Instead use ES6 classes `extend` feature to extend Coral Spectrum components.
 
 

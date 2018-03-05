@@ -88,7 +88,7 @@ const arrayDiff = function(a, b) {
 /**
  @class Coral.Select
  @classdesc A Select component is a form field that allows users to select from a list of options. If this component is
- shown on a mobile device, it will show a native select list, instead of the select list styled via CoralUI.
+ shown on a mobile device, it will show a native select list, instead of the select list styled via Coral Spectrum.
  @htmltag coral-select
  @extends {HTMLElement}
  @extends {ComponentMixin}

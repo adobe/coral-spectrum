@@ -9,6 +9,7 @@ module.exports = function(gulp) {
   require('./tasks/i18n.js')(gulp);
   require('./tasks/examples.js')(gulp);
   require('./tasks/docs.js')(gulp);
+  require('./tasks/deploy.js')(gulp);
   require('./tasks/templates.js')(gulp);
   require('./tasks/styles.js')(gulp);
   require('./tasks/theme.js')(gulp);
@@ -40,10 +41,7 @@ module.exports = function(gulp) {
       'templates',
       'scripts',
       'karma-watch',
-      'watch',
-      'minify',
-      'examples',
-      'docs'
+      'watch'
     );
   });
   
@@ -59,6 +57,7 @@ module.exports = function(gulp) {
       'karma',
       'minify',
       'examples',
+      'playground',
       'docs',
       'cleanup'
     );

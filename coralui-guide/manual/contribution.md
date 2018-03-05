@@ -2,20 +2,20 @@
 
 ## Open Development
 
-CoralUI follows open development principles:
+Coral Spectrum follows open development principles:
 * The code is discoverable and openly available to anyone.
-* Discussions about CoralUI happen on an open and archived channel.
+* Discussions about Coral Spectrum happen on an open and archived channel.
 * All important technical decisions are exposed on that channel.
 * All commits are backed by issues in an openly accessible tracker, which offers a self-service overview of the project's status and history.
 * People who are not members of the core team are encouraged to provide contributions.
 * Meritocracy is taken into account when considering the priority of contributions and suggestions. 
 The more you contribute, and the more valuable your contributions are, the more influence you will have within the project.
 
-**Slack channel: https://coralui.slack.com. Mailing list: [coralui-dev@adobe.com](mailto:coralui-dev@adobe.com)**
+**Slack channel: #coral_spectrum.**
 
 ## Find Tasks
 
-All CoralUI work is tracked in our [JIRA project](https://jira.corp.adobe.com/browse/CUI). Before you look there, be sure 
+All Coral Spectrum work is tracked in our [JIRA project](https://jira.corp.adobe.com/browse/CORAL). Before you look there, be sure 
 you've contacted the community. 
 We prioritize blocker and critical defects first, though submissions of new components and other 'non-bug' contribution is welcome. 
 Just talk to the community and we will work it out.
@@ -29,7 +29,7 @@ Below are steps to take to when starting as a contributor.
 
 ### Tools
 
-You will need the following tools to work with CoralUI:
+You will need the following tools to work with Coral Spectrum:
 * node
 * npm
 * git
@@ -44,11 +44,11 @@ An issue description should be complete and include steps to reproduce if the is
 ### Work on branches
 
 It is required that you work on a feature branch, even in your own fork. The feature branch naming convention is 
-`issue/CUI-x`. CUI-x corresponds to the JIRA ticket.
+`issue/CORAL-x`. CUI-x corresponds to the JIRA ticket.
 
 ### Coding Conventions
 
-This gives guide to general coding conventions for CoralUI. These are generally enforced at the time of code review.
+This gives guide to general coding conventions for Coral Spectrum. These are generally enforced at the time of code review.
 
 #### General Principles
 

@@ -20,6 +20,28 @@ module.exports = function(gulp) {
   const rename = require('gulp-rename');
   const regExp = /\.\.\/build/g;
   
+  gulp.task('playground', function() {
+    return gulp.src([
+      'coralui-component-playground/build/**/*', 'coralui-component-playground/examples/index.html'
+    ], {base: './coralui-component-playground'})
+      .pipe(plumber())
+      .pipe(modifyFile((content, path) => {
+        // Replace coralui.js and coralui.css paths
+        if (path.split('/').pop() === 'index.html') {
+          content = `${content.replace(regExp, 'build')}`;
+        }
+      
+        return content;
+      }))
+      .pipe(rename(function(file) {
+        // Put playground under /build/playground
+        if (file.dirname === 'examples') {
+          file.dirname = '.';
+        }
+      }))
+      .pipe(gulp.dest('./build/playground'));
+  });
+  
   gulp.task('examples', function() {
     return gulp.src([
       'coralui-*/examples/index.html', 'examples/index.html'
