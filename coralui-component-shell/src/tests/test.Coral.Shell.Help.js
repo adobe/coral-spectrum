@@ -103,7 +103,7 @@ describe('Coral.Shell.Help', function() {
         ];
 
         var total = 1111;
-        var allResultsURL = 'http://coralui.corp.adobe.com';
+        var allResultsURL = 'http://coral-spectrum.corp.adobe.com';
 
         const el = helpers.build(htmlSnippet);
         el.showResults(resultItems, total, allResultsURL);

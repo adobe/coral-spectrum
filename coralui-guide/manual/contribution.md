@@ -11,7 +11,7 @@ Coral Spectrum follows open development principles:
 * Meritocracy is taken into account when considering the priority of contributions and suggestions. 
 The more you contribute, and the more valuable your contributions are, the more influence you will have within the project.
 
-**Slack channel: #coral_spectrum.**
+**Slack channel: #coral_spectrum**
 
 ## Find Tasks
 
@@ -44,7 +44,7 @@ An issue description should be complete and include steps to reproduce if the is
 ### Work on branches
 
 It is required that you work on a feature branch, even in your own fork. The feature branch naming convention is 
-`issue/CORAL-x`. CUI-x corresponds to the JIRA ticket.
+`issue/CORAL-x`. CORAL-x corresponds to the JIRA ticket.
 
 ### Coding Conventions
 

@@ -23,17 +23,18 @@ module.exports = function(gulp) {
   const host = 'coral-spectrum.corp.adobe.com';
   const username = util.env.username;
   const password = util.env.password;
+  const folder = util.env.folder;
   
   gulp.task('deploy', function() {
   
     // Copy all files
-    // gulp deploy --username XXX --password XXX
+    // gulp deploy --username XXX --password XXX --folder latest
     gulp.src(['build/**/*'])
       .pipe(sftp({
         host: host,
         user: username,
         pass: password,
-        remotePath: '/var/www/html/'
+        remotePath: path.join('/var/www/html/', folder || '')
       }));
   });
 };

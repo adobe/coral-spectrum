@@ -27,12 +27,12 @@ To retrieve coralui npm packages from artifactory, you have two options :
 * Add the following 2 lines to '~/.npmrc':
 ```
 @coralui:registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-coralui-release
-@spectrum:registry=https://artifactory.corp.adobe.com:443/artifactory/api/npm/npm-spectrum-release
+@spectrum:registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-spectrum-release
 ```
 * Or run npm install with additional parameters
 ```
 npm install --scope=@coralui --registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-coralui-release
-npm install --scope=@spectrum --registry=https://artifactory.corp.adobe.com:443/artifactory/api/npm/npm-spectrum-release
+npm install --scope=@spectrum --registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-spectrum-release
 ```
 
 Then you can install coralui npm packages :

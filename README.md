@@ -35,12 +35,12 @@ To retrieve coralui npm packages from artifactory, you have two options :
 * Add the following 2 lines to '~/.npmrc':
 ```
 @coralui:registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-coralui-release
-@spectrum:registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-spectrum-snapshot-local
+@spectrum:registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-spectrum-release
 ```
 * Or run npm install with additional parameters
 ```
 npm install --scope=@coralui --registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-coralui-release
-npm install --scope=@spectrum --registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-spectrum-snapshot-local
+npm install --scope=@spectrum --registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-spectrum-release
 ```
 
 Then you can install coralui npm packages :
@@ -66,7 +66,7 @@ Coral Spectrum follows open development principles:
 * Meritocracy is taken into account when considering the priority of contributions and suggestions. 
 The more you contribute, and the more valuable your contributions are, the more influence you will have within the project.
 
-**Slack channel: https://coralui.slack.com. Mailing list: [coralui-dev@adobe.com](mailto:coralui-dev@adobe.com)**
+**Slack channel: #coral_spectrum**
 
 All Coral Spectrum work is tracked in our [JIRA project](https://jira.corp.adobe.com/browse/CORAL).
 
@@ -74,10 +74,9 @@ Before starting, make sure the work you are doing is tracked in JIRA. Create an 
 An issue description should be complete and include steps to reproduce if the issue is a defect.
 
 It is required that you work on a feature branch, even in your own fork. The feature branch naming convention is 
-`issue/CUI-x`. CUI-x corresponds to the JIRA ticket.
+`issue/CORAL-x`. CORAL-x corresponds to the JIRA ticket.
 
-You will be ready to submit your code when your work meets the Definition of Done see 
-http://coralui.corp.adobe.com for all details. 
+You will be ready to submit your code when your work meets the Definition of Done. 
 Once ready, your work must be peer reviewed by a pull request.
 
 **Gulp tasks**
