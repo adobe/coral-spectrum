@@ -434,12 +434,11 @@ class TabList extends ComponentMixin(HTMLElement) {
   
           // Orientation changed
           if (clear) {
-            this._elements.line.style.top = '';
             this._elements.line.style.height = '';
           }
-  
-          this._elements.line.style.left = `${left}px`;
+          
           this._elements.line.style.width = `${width}px`;
+          this._elements.line.style.transform = `translate(${left}px, 0)`;
         }
         else if (this.orientation === orientation.VERTICAL) {
           const top = selectedItem.offsetTop;
@@ -447,12 +446,11 @@ class TabList extends ComponentMixin(HTMLElement) {
   
           // Orientation changed
           if (clear) {
-            this._elements.line.style.left = '';
             this._elements.line.style.width = '';
           }
-  
-          this._elements.line.style.top = `${top}px`;
+          
           this._elements.line.style.height = `${height}px`;
+          this._elements.line.style.transform = `translate(0, ${top}px)`;
         }
         
         this._elements.line.hidden = false;

@@ -517,7 +517,7 @@ describe('Coral.TabList', function() {
       const selectedItem = el.selectedItem;
       
       helpers.next(() => {
-        expect(el._elements.line.style.left).to.not.equal('');
+        expect(el._elements.line.style.transform).to.not.equal('');
         expect(el._elements.line.style.width).to.not.equal('');
         expect(el._elements.line.hidden).to.be.false;
         
@@ -531,7 +531,7 @@ describe('Coral.TabList', function() {
     
       helpers.next(() => {
         const selectedItem = el.selectedItem;
-        expect(el._elements.line.style.left).to.not.equal('');
+        expect(el._elements.line.style.transform).to.not.equal('');
         expect(el._elements.line.style.width).to.not.equal('');
         expect(el._elements.line.hidden).to.be.false;
         
@@ -546,10 +546,9 @@ describe('Coral.TabList', function() {
       el.orientation = 'vertical';
       
       helpers.next(() => {
-        expect(el._elements.line.style.left).to.equal('');
         expect(el._elements.line.style.width).to.equal('');
-        expect(el._elements.line.style.top).to.not.equal('');
         expect(el._elements.line.style.height).to.not.equal('');
+        expect(el._elements.line.style.translate).to.not.equal('');
         expect(el._elements.line.hidden).to.be.false;
         
         done();
