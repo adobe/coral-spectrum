@@ -13,7 +13,7 @@ Components are following the [Spectrum design patterns](http://spectrum.corp.ado
 ### Consumers
 
 The easiest way to get started with Coral Spectrum is to download the ZIP archive of the 
-[latest release](https://git.corp.adobe.com/Coral/coralui/tags) which contains all components. 
+[latest release](https://git.corp.adobe.com/Coral/coral-spectrum/tags) which contains all components. 
 After you've unzipped the downloaded zip archive, follow the steps below :
 * Put `coral.min.css` in the `css/` directory of your project.
 * Put `coral.min.js` in the `js/` directory of your project.

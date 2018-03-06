@@ -5,7 +5,7 @@
 **The following information is intended to get you up and running quickly with Coral Spectrum**
 
 The easiest way to start experimenting with Coral Spectrum is to download the ZIP archive of the 
-[latest release](https://git.corp.adobe.com/Coral/coralui/tags) which contains all components. 
+[latest release](https://git.corp.adobe.com/Coral/coral-spectrum/tags) which contains all components. 
 After you've unzipped the downloaded zip archive, follow the steps below :
 * Put `coral.min.css` in the `css/` directory of your project.
 * Put `coral.min.js` in the `js/` directory of your project.
