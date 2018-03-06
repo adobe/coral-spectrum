@@ -48,6 +48,8 @@ you can bundle only needed components :
 import {Button, Textfield} from '@coralui/coral-spectrum';  
 ```
 
+You'll find a Webpack config example at https://git.corp.adobe.com/ringel/coralui-webpack.
+
 ## Custom build
 
 Don't want all of Coral Spectrum, or want to add components that aren't in the default build? No problem ! 
