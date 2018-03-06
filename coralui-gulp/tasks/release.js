@@ -92,7 +92,7 @@ module.exports = function(gulp) {
   // Increase release version based on user choice
   gulp.task('bump-version', function(cb) {
     function doVersionBump() {
-      gulp.src(`${CWD}/package.json`)
+      gulp.src([`${CWD}/package.json`, `${CWD}/package-lock.json`])
         .pipe(bump({version: releaseVersion}))
         .pipe(gulp.dest('./'))
         .pipe(git.commit(`releng - Release ${releaseVersion}`));
