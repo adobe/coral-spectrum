@@ -133,6 +133,7 @@ module.exports = function(config) {
     // Configure the reporter
     coverageIstanbulReporter: {
       dir: `${CWD}/build/coverage/`,
+      combineBrowserReports: true,
       reports: ['lcov', 'text-summary']
     },
   
