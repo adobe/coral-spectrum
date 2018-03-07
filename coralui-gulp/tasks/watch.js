@@ -15,8 +15,11 @@
  * from Adobe Systems Incorporated.
  */
 module.exports = function(gulp) {
+  const path = require('path');
   const runSequence = require('run-sequence').use(gulp);
   const server = require('gulp-server-livereload');
+  const util = require('../helpers/util');
+  const theme = require('../helpers/theme');
   
   gulp.task('build+watch', function() {
     runSequence(
@@ -30,10 +33,8 @@ module.exports = function(gulp) {
   
   gulp.task('watch', function() {
     gulp.watch([
-      'src/templates/*.html',
-      'src/styles/*.styl',
-      'src/scripts/*.js',
-      'src/resources/**/*',
+      'src/**',
+      path.join(util.getRoot(), theme.getTheme(), '**/*.styl'),
       'index.js'
     ], ['build+watch']);
   
