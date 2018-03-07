@@ -17,10 +17,10 @@
 
 const fs = require('fs');
 const path = require('path');
+const istanbul = require('rollup-plugin-istanbul');
 const util = require('../helpers/util');
 
 module.exports = function(config) {
-  const packageJSON = util.getPackageJSON();
   const root = util.getRoot();
   const CWD = process.cwd();
   
@@ -36,6 +36,11 @@ module.exports = function(config) {
   
   // Pre-process snippets of dependencies
   preprocessors[path.join(root, 'coralui-*/src/tests/snippets/**/*.html')] = ['html2js'];
+  
+  const rollupPlugins = rollupConfig.plugins;
+  rollupPlugins.push(istanbul({
+    include: util.isTLB() ? path.join(CWD, 'coralui-*/src/scripts/*.js') : path.join(CWD, 'src/scripts/*.js')
+  }));
   
   config.set({
     preprocessors: preprocessors,
@@ -64,19 +69,6 @@ module.exports = function(config) {
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['mocha', 'sinon-chai'],
-  
-    plugins: [
-      require('karma-chrome-launcher'),
-      require('karma-firefox-launcher'),
-      require('karma-html2js-preprocessor'),
-      require('karma-mocha'),
-      require('karma-sinon-chai'),
-      require('karma-coverage'),
-      require('karma-benchmark'),
-      require('karma-benchmark-reporter'),
-      require('karma-junit-reporter'),
-      require('karma-rollup-preprocessor')
-    ],
     
     // list of files / patterns to load in the browser
     files: [
@@ -136,38 +128,12 @@ module.exports = function(config) {
     
     // test results reporter to use
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['junit', 'progress', 'coverage'],
-  
-    junitReporter: {
-      outputDir: `${CWD}/build/reports`,
-      outputFile: 'tests.xml',
-      useBrowserName: true,
-      classNameFormatter: function(browser, result) {
-        return result.suite[0];
-      },
-      nameFormatter: function(browser, result) {
-        let suite = result.suite;
-        if (suite.length > 1) {
-          suite = suite.slice(1);
-        }
-        return suite.join(' ') + ' ' + result.description;
-      },
-      properties: {
-        'module.name': packageJSON.name,
-        'module.version': packageJSON.version,
-        // Jenkins environment variables:
-        'build.url': process.env.BUILD_URL,
-        'job.name': process.env.JOB_NAME,
-        'git.commit': process.env.GIT_PREVIOUS_SUCCESSFUL_COMMIT,
-        'git.branch': process.env.GIT_BRANCH,
-        'git.url': process.env.GIT_URL
-      }
-    },
+    reporters: ['progress', 'coverage-istanbul'],
   
     // Configure the reporter
-    coverageReporter: {
-      type: 'lcov',
-      dir: `${CWD}/build/coverage/`
+    coverageIstanbulReporter: {
+      dir: `${CWD}/build/coverage/`,
+      reports: ['lcov', 'text-summary']
     },
   
     html2JsPreprocessor: {
