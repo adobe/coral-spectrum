@@ -40,8 +40,8 @@ module.exports = function(gulp) {
       'resources',
       'templates',
       'scripts',
-      'karma-watch',
-      'watch'
+      'watch',
+      'karma-watch'
     );
   });
   

@@ -34,6 +34,7 @@ module.exports = function(gulp) {
   gulp.task('watch', function() {
     gulp.watch([
       'src/**',
+      '!src/tests/**',
       path.join(util.getRoot(), theme.getTheme(), '**/*.styl'),
       'index.js'
     ], ['build+watch']);

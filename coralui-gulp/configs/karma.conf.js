@@ -75,7 +75,7 @@ module.exports = function(config) {
       require('karma-benchmark'),
       require('karma-benchmark-reporter'),
       require('karma-junit-reporter'),
-      require('karma-rollup-plugin')
+      require('karma-rollup-preprocessor')
     ],
     
     // list of files / patterns to load in the browser
@@ -104,7 +104,7 @@ module.exports = function(config) {
       {
         // Test helpers that will be included as executable JS
         pattern: `${root}/coralui-*/src/tests/helpers/*.js`,
-        watched: true,
+        watched: false,
         served: true,
         included: true // Include testing helpers
       },
@@ -120,7 +120,7 @@ module.exports = function(config) {
       {
         // Test helpers that will be included as executable JS
         pattern: `${CWD}/src/tests/helpers/*.js`,
-        watched: true,
+        watched: false,
         served: true,
         included: true // Include testing helpers
       },
@@ -130,7 +130,7 @@ module.exports = function(config) {
         pattern: `${CWD}/src/tests/index.js`,
         watched: true,
         served: true,
-        included: true // Include testing helpers
+        included: true
       }
     ],
     
