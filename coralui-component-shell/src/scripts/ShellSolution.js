@@ -19,7 +19,7 @@ import {ComponentMixin} from '/coralui-mixin-component';
 import {transform} from '/coralui-util';
 import solutionIcon from '../templates/solutionIcon';
 
-const CLASSNAME = 'coral3-Shell-solution';
+const CLASSNAME = '_coral-Shell-solution';
 
 /**
  @class Coral.Shell.Solution

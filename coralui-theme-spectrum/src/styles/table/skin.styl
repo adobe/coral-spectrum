@@ -23,26 +23,26 @@
 }
 
 /* Base */
-.coral3-Table-headerCell {
+._coral-Table-headerCell {
   color: $table-header-cell-color;
 }
 
-.coral3-Table-cell {
+._coral-Table-cell {
   background-color: $table-background-color;
   color: $table-cell-color;
 }
 
-.coral3-Table-head {
-  .coral3-Table-row:not(:first-of-type) {
-    .coral3-Table-cell,
-    .coral3-Table-headerCell {
+._coral-Table-head {
+  ._coral-Table-row:not(:first-of-type) {
+    ._coral-Table-cell,
+    ._coral-Table-headerCell {
       border-top-color: $table-border-color;
     }
   }
 }
 
-.coral3-Table-body {
-  .coral3-Table-cell {
+._coral-Table-body {
+  ._coral-Table-cell {
     border-top-color: $table-border-color;
 
     &:first-of-type {
@@ -54,50 +54,50 @@
     }
   }
 
-  .coral3-Table-row {
+  ._coral-Table-row {
     &:first-of-type {
-      .coral3-Table-cell {
+      ._coral-Table-cell {
         border-top-color: $table-border-color;
       }
     }
 
     &:last-of-type {
-      .coral3-Table-cell {
+      ._coral-Table-cell {
         border-bottom-color: $table-border-color;
       }
     }
   }
 }
 
-.coral3-Table-divider--cell {
-  &.coral3-Table-head {
-    .coral3-Table-cell,
-    .coral3-Table-headerCell {
+._coral-Table-divider--cell {
+  &._coral-Table-head {
+    ._coral-Table-cell,
+    ._coral-Table-headerCell {
       &:not(:last-of-type) {
         border-right-color: $table-border-color;
       }
     }
   }
 
-  &.coral3-Table-body {
-    .coral3-Table-cell:not(:last-of-type) {
+  &._coral-Table-body {
+    ._coral-Table-cell:not(:last-of-type) {
       border-right-color: $table-border-color;
     }
   }
 }
 
-.coral3-Table-divider--column {
-  &.coral3-Table-head {
-    .coral3-Table-cell,
-    .coral3-Table-headerCell {
+._coral-Table-divider--column {
+  &._coral-Table-head {
+    ._coral-Table-cell,
+    ._coral-Table-headerCell {
       &:not(:last-of-type) {
         border-right-color: $table-border-color;
       }
     }
   }
 
-  &.coral3-Table-body {
-    .coral3-Table-cell:not(:last-of-type) {
+  &._coral-Table-body {
+    ._coral-Table-cell:not(:last-of-type) {
       border-right-color: $table-border-color;
     }
   }
@@ -105,27 +105,27 @@
 /* END Base */
 
 /* #sticky */
-.coral3-Table-wrapper--sticky {
-  .coral3-Table-wrapper-container {
+._coral-Table-wrapper--sticky {
+  ._coral-Table-wrapper-container {
     border-color: $table-border-color;
   }
 
-  .coral3-Table-head[sticky] {
-    .coral3-Table-row:last-of-type {
-      .coral3-Table-headerCell {
+  ._coral-Table-head[sticky] {
+    ._coral-Table-row:last-of-type {
+      ._coral-Table-headerCell {
         border-top: none;
       }
     }
 
-    &.coral3-Table-divider--row coral-table-headercell-content {
+    &._coral-Table-divider--row coral-table-headercell-content {
       border-top-color: $table-border-color;
     }
 
-    &.coral3-Table-divider--column coral-table-headercell-content {
+    &._coral-Table-divider--column coral-table-headercell-content {
       border-right-color: $table-border-color;
     }
 
-    &.coral3-Table-divider--cell coral-table-headercell-content {
+    &._coral-Table-divider--cell coral-table-headercell-content {
       border-top-color: $table-border-color;
       border-right-color: $table-border-color;
     }
@@ -134,13 +134,13 @@
 /* END #sticky */
 
 /* #variant */
-.coral3-Table-wrapper--quiet {
-  .coral3-Table-cell {
+._coral-Table-wrapper--quiet {
+  ._coral-Table-cell {
     background: transparent;
   }
 
-  .coral3-Table-body {
-    .coral3-Table-cell {
+  ._coral-Table-body {
+    ._coral-Table-cell {
       &:first-of-type {
         border-left-color: transparent;
       }
@@ -151,15 +151,15 @@
     }
   }
 
-  &.coral3-Table-wrapper--sticky {
-    .coral3-Table-wrapper-container {
+  &._coral-Table-wrapper--sticky {
+    ._coral-Table-wrapper-container {
       border-left-color: transparent;
       border-right-color: transparent;
     }
   }
 
-  .coral3-Table-row[selectable] {
-    .coral3-Table-cell {
+  ._coral-Table-row[selectable] {
+    ._coral-Table-cell {
       &[coral-table-cellselect] {
         &:hover {
           background-color: $table-quiet-background-color-hover;
@@ -168,9 +168,9 @@
     }
   }
 
-  &.coral3-Table-wrapper[lockable] .coral3-Table-row {
+  &._coral-Table-wrapper[lockable] ._coral-Table-row {
     &:hover {
-      &:not(.is-selected) .coral3-Table-cell {
+      &:not(.is-selected) ._coral-Table-cell {
         background-color: $table-quiet-background-color-hover;
       }
     }
@@ -179,7 +179,7 @@
 /* END #variant */
 
 /* #sortable */
-.coral3-Table-headerCell[sortable] {
+._coral-Table-headerCell[sortable] {
   &:hover {
     color: $table-header-cell-color-hover;
   }
@@ -220,34 +220,34 @@
 /* END #sortable */
 
 /* #selectable */
-.coral3-Table-wrapper[selectable] {
-  .coral3-Table-row {
+._coral-Table-wrapper[selectable] {
+  ._coral-Table-row {
     &[coral-table-rowselect]:not(.is-selected) {
       &:hover {
-        .coral3-Table-cell {
+        ._coral-Table-cell {
           background-color: $table-background-color-hover;
         }
       }
     }
 
     &.is-selected {
-      .coral3-Table-cell {
+      ._coral-Table-cell {
         background-color: $table-background-color-selected;
       }
 
       &:hover {
-        .coral3-Table-cell {
+        ._coral-Table-cell {
           background-color: $table-background-color-selected-hover;
         }
       }
 
       &[coral-table-rowselect] {
-        .coral3-Table-cell {
+        ._coral-Table-cell {
           background-color: $table-background-color-selected;
         }
 
         &:hover {
-          .coral3-Table-cell {
+          ._coral-Table-cell {
             background-color: $table-background-color-selected-hover;
           }
         }
@@ -255,34 +255,34 @@
     }
   }
 
-  &.coral3-Table-wrapper--quiet {
-    .coral3-Table-row {
+  &._coral-Table-wrapper--quiet {
+    ._coral-Table-row {
       &[coral-table-rowselect]:not(.is-selected) {
         &:hover {
-          .coral3-Table-cell {
+          ._coral-Table-cell {
             background-color: $table-quiet-background-color-hover;
           }
         }
       }
 
       &.is-selected {
-        .coral3-Table-cell {
+        ._coral-Table-cell {
           background-color: $table-quiet-background-color-selected;
         }
 
         &:hover {
-          .coral3-Table-cell {
+          ._coral-Table-cell {
             background-color: $table-quiet-background-color-selected-hover;
           }
         }
 
         &[coral-table-rowselect] {
-          .coral3-Table-cell {
+          ._coral-Table-cell {
             background-color: $table-quiet-background-color-selected;
           }
 
           &:hover {
-            .coral3-Table-cell {
+            ._coral-Table-cell {
               background-color: $table-quiet-background-color-selected-hover;
             }
           }
@@ -292,8 +292,8 @@
   }
 }
 
-.coral3-Table-row[selectable] {
-  .coral3-Table-cell {
+._coral-Table-row[selectable] {
+  ._coral-Table-cell {
     &[coral-table-cellselect] {
       &:hover {
         background-color: $table-background-color-hover;
@@ -315,7 +315,7 @@
 /* END #selectable */
 
 /* #lockable */
-.coral3-Table-wrapper[lockable] .coral3-Table-row {
+._coral-Table-wrapper[lockable] ._coral-Table-row {
   [coral-table-rowlock] {
     &:hover {
       opacity: 1 !important;
@@ -323,8 +323,8 @@
   }
 
   &[locked] {
-    .coral3-Table-headerCell,
-    .coral3-Table-cell {
+    ._coral-Table-headerCell,
+    ._coral-Table-cell {
       [coral-table-rowlock] {
         opacity: 1;
       }
@@ -336,7 +336,7 @@
       opacity: .2;
     }
 
-    &:not(.is-selected) .coral3-Table-cell {
+    &:not(.is-selected) ._coral-Table-cell {
       background-color: $table-background-color-hover;
     }
   }
@@ -344,26 +344,26 @@
 /* END #lockable */
 
 /* #orderable */
-.coral3-Table-row.is-dragging {
-  .coral3-Table-cell,
-  .coral3-Table-headerCell {
+._coral-Table-row.is-dragging {
+  ._coral-Table-cell,
+  ._coral-Table-headerCell {
     opacity: .8;
   }
 }
 
-.coral3-Table-wrapper {
-  &:not(.coral3-Table-wrapper--sticky) {
-    .coral3-Table-row--placeholder {
-      .coral3-Table-cell,
-      .coral3-Table-headerCell {
+._coral-Table-wrapper {
+  &:not(._coral-Table-wrapper--sticky) {
+    ._coral-Table-row--placeholder {
+      ._coral-Table-cell,
+      ._coral-Table-headerCell {
         background: transparent;
       }
     }
 
   // Keep the table bottom border while dragging
     &.is-draggedLastItem  {
-      .coral3-Table-body .coral3-Table-row:nth-last-of-type(2) {
-        .coral3-Table-cell {
+      ._coral-Table-body ._coral-Table-row:nth-last-of-type(2) {
+        ._coral-Table-cell {
           border-bottom-color: $table-border-color;
         }
       }
@@ -371,7 +371,7 @@
   }
 }
 
-.coral3-Table-headerCell[orderable] {
+._coral-Table-headerCell[orderable] {
   &:not([sortable]):hover {
     color: $table-header-cell-color-hover;
   }
@@ -389,7 +389,7 @@
 /* END #orderable */
 
 /* a11y */
-.coral3-Table-headerCell {
+._coral-Table-headerCell {
   &:focus,
   &.is-focused,
   coral-table-headercell-content:focus,
@@ -398,10 +398,10 @@
   }
 }
 
-.coral3-Table-row {
+._coral-Table-row {
   &:focus,
   &.is-focused {
-    .coral3-Table-cell:first-of-type {
+    ._coral-Table-cell:first-of-type {
       &:after {
         border-left-color: $table-row-focused-color;
       }

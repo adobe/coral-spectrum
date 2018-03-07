@@ -22,7 +22,7 @@ import {transform, validate} from '/coralui-util';
 // divider changes
 const ALL_DIVIDER_CLASSES = [];
 for (const dividerValue in divider) {
-  ALL_DIVIDER_CLASSES.push(`coral3-Table-divider--${divider[dividerValue]}`);
+  ALL_DIVIDER_CLASSES.push(`_coral-Table-divider--${divider[dividerValue]}`);
 }
 
 /**
@@ -47,7 +47,7 @@ const TableSectionMixin = (superClass) => class extends superClass {
     this._reflectAttribute('divider', this._divider);
   
     this.classList.remove(...ALL_DIVIDER_CLASSES);
-    this.classList.add(`coral3-Table-divider--${this.divider}`);
+    this.classList.add(`_coral-Table-divider--${this.divider}`);
   }
   
   /** @ignore */

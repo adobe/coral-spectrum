@@ -65,7 +65,7 @@ coral-colorinput-item {
   display: none;
 }
 
-.coral3-ColorInput {
+._coral-ColorInput {
   position: relative;
   display: inline-block;
   white-space: nowrap;
@@ -75,19 +75,19 @@ coral-colorinput-item {
     width: $colorinput-overlay-size;
     padding: $colorinput-overlay-padding;
 
-    .coral3-ColorInput-propertiesSubview {
+    ._coral-ColorInput-propertiesSubview {
       display: block;
       float: left;
       padding-right: $colorinput-overlay-padding;
       border-right: $colorinput-properties-subview-border solid;
 
-      .coral3-ColorInput-previewView {
+      ._coral-ColorInput-previewView {
         display: inline-block;
 
-        .coral3-ColorInput-preview-container {
+        ._coral-ColorInput-preview-container {
           float: left;
 
-          .coral3-ColorInput-preview {
+          ._coral-ColorInput-preview {
             position: relative;
             width: 48*$px;
             height: 48*$px;
@@ -95,7 +95,7 @@ coral-colorinput-item {
           }
         }
 
-        .coral3-ColorInput-editHex {
+        ._coral-ColorInput-editHex {
           width: $colorinput-edit-hex-width;
           float: right;
           margin-left: $colorinput-edit-hex-left-margin;
@@ -111,7 +111,7 @@ coral-colorinput-item {
         }
       }
 
-      .coral3-ColorInput-rgbaView {
+      ._coral-ColorInput-rgbaView {
         margin-top: $colorinput-rgba-view-top-margin;
 
         label {
@@ -127,26 +127,26 @@ coral-colorinput-item {
       }
     }
 
-    .coral3-ColorInput-swatches {
+    ._coral-ColorInput-swatches {
 
-      .coral3-ColorInput-swatchesSubview {
+      ._coral-ColorInput-swatchesSubview {
         display: inline-block;
         width: $colorinput-swatch-subview-width;
         padding-left: $colorinput-swatch-subview-left-padding;
 
-        .coral3-ColorInput-swatches-header-title {
+        ._coral-ColorInput-swatches-header-title {
           // Add margin to vertically align the title with the below swatch container
           margin-left: $colorinput-swatch-subview-container-left-margin;
           margin-bottom: $colorinput-swatch-subview-title-bottom-margin;
         }
 
-        .coral3-ColorInput-swatches-container {
+        ._coral-ColorInput-swatches-container {
           max-height: $colorinput-swatch-subview-container-height;
           overflow-y: auto;
         }
       }
 
-      .coral3-ColorInput-swatch {
+      ._coral-ColorInput-swatch {
         display: block;
         float: left;
         padding: $colorinput-swatch-top-padding $colorinput-swatch-left-right-padding 0;
@@ -199,7 +199,7 @@ coral-colorinput-item {
   }
 }
 
-.coral3-ColorInput-buttonWrapper {
+._coral-ColorInput-buttonWrapper {
   position: absolute;
   right: $colorinput-button-wrapper-offset;
   top: $colorinput-button-wrapper-offset;
@@ -207,12 +207,12 @@ coral-colorinput-item {
   // set opacity < 1 to create new stacking context (for checker image to work)
   opacity: .999;
 
-  .coral3-ColorInput-preview {
+  ._coral-ColorInput-preview {
     border-width: $colorinput-button-border-width;
   }
 }
 
-.coral3-ColorInput-button {
+._coral-ColorInput-button {
   width: $colorinput-button-size;
   height: $colorinput-button-size;
   position: relative;
@@ -221,8 +221,8 @@ coral-colorinput-item {
   margin: 0;
 }
 
-.coral3-ColorInput-swatch button:hover,
-.coral3-ColorInput-preview:not([disabled]):hover {
+._coral-ColorInput-swatch button:hover,
+._coral-ColorInput-preview:not([disabled]):hover {
   &:after {
     display: block;
     position: absolute;
@@ -235,7 +235,7 @@ coral-colorinput-item {
   }
 }
 
-.coral3-ColorInput-input {
+._coral-ColorInput-input {
   display: block;
   // makes space for the color preview
   padding-right: $colorinput-input-swatch-size;
@@ -244,26 +244,26 @@ coral-colorinput-item {
 }
 
 // Swatch variant
-.coral3-ColorInput--swatch {
+._coral-ColorInput--swatch {
   width: $colorinput-input-swatch-size;
   height: $colorinput-input-swatch-size;
 
   // makes sure the width stays no matter the parent's configuration
   max-width: $colorinput-input-swatch-size;
 
-  .coral3-ColorInput-input {
+  ._coral-ColorInput-input {
     position: absolute;
     opacity: 0;
     height: $colorinput-input-swatch-size;
     width: $colorinput-input-swatch-size;
   }
 
-  .coral3-ColorInput-buttonWrapper {
+  ._coral-ColorInput-buttonWrapper {
     top: 0;
     right: 0;
   }
 
-  .coral3-ColorInput-button {
+  ._coral-ColorInput-button {
     left: 0;
     top: 0;
     padding: 0;
@@ -272,7 +272,7 @@ coral-colorinput-item {
   }
 }
 
-.coral3-ColorInput-preview {
+._coral-ColorInput-preview {
   border-radius: $colorinput-button-border-radius;
   box-sizing: border-box;
   background-origin: border-box;
@@ -294,9 +294,9 @@ coral-colorinput-item {
   }
 }
 
-.coral3-ColorInput--novalue .coral3-ColorInput-preview,
-.coral3-ColorInput.is-invalid .coral3-ColorInput-preview,
-.coral3-ColorInput-swatch .coral3-ColorInput-swatch-novalue {
+._coral-ColorInput--novalue ._coral-ColorInput-preview,
+._coral-ColorInput.is-invalid ._coral-ColorInput-preview,
+._coral-ColorInput-swatch ._coral-ColorInput-swatch-novalue {
   background-image: svgImport($colorinput-blank-url);
   background-repeat: no-repeat;
   background-position: center;
@@ -310,13 +310,13 @@ coral-colorinput-item {
   }
 }
 
-.coral3-ColorInput-slider {
+._coral-ColorInput-slider {
   display: inline-block;
   width: $colorinput-slider-width;
   margin: $colorinput-slider-margin;
 }
 
-.coral3-ColorInput-sliderBar {
+._coral-ColorInput-sliderBar {
   &:before {
     display: block;
     position: absolute;
@@ -335,23 +335,23 @@ coral-colorinput-item {
 }
 
 //Single view CSS
-.coral3-ColorInput {
-  coral-popover.coral3-ColorInput-onlyPropertiesView {
+._coral-ColorInput {
+  coral-popover._coral-ColorInput-onlyPropertiesView {
     width: $colorinput-overlay-only-properties-width;
 
-    .coral3-ColorInput-propertiesSubview {
+    ._coral-ColorInput-propertiesSubview {
       border-right: 0;
     }
   }
 }
 
-.coral3-ColorInput {
-  coral-popover.coral3-ColorInput-onlySwatchesView {
+._coral-ColorInput {
+  coral-popover._coral-ColorInput-onlySwatchesView {
     width: $colorinput-overlay-only-swatch-width;
 
-    .coral3-ColorInput-swatches {
+    ._coral-ColorInput-swatches {
 
-      .coral3-ColorInput-swatchesSubview{
+      ._coral-ColorInput-swatchesSubview{
         padding-left: 0;
       }
     }

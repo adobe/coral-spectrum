@@ -43,7 +43,7 @@ const variant = {
 };
 
 // the card's base classname
-const CLASSNAME = 'coral3-Card';
+const CLASSNAME = '_coral-Card';
 
 // builds a string containing all possible variant classnames. this will be used to remove classnames when the variant
 // changes
@@ -222,7 +222,7 @@ class Card extends ComponentMixin(HTMLElement) {
       handle: 'banner',
       tagName: 'coral-card-banner',
       insert: function(content) {
-        content.classList.add('coral3-Banner--corner');
+        content.classList.add('_coral-Banner--corner');
         this.appendChild(content);
       }
     });

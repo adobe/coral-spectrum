@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-const CLASSNAME = 'coral3-Steplist-label';
+const CLASSNAME = '_coral-Steplist-label';
 
 /**
  @class Coral.Step.Label

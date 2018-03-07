@@ -24,7 +24,7 @@ import './ColorInputSlider';
 import propertiesSubview from '../templates/colorProperties';
 import {commons, i18n} from '/coralui-util';
 
-const CLASSNAME = 'coral3-ColorInput-colorProperties';
+const CLASSNAME = '_coral-ColorInput-colorProperties';
 
 /**
  @class Coral.ColorInput.ColorProperties
@@ -44,8 +44,8 @@ class ColorInputColorProperties extends ColorInputAbstractSubviewMixin(Component
       'change [handle="greenSlider"]': '_onGreenSliderChange',
       'change [handle="blueSlider"]': '_onBlueSliderChange',
       'change [handle="alphaSlider"]': '_onAlphaSliderChange',
-      'change .coral3-ColorInput-editHex': '_onChangeHex',
-      'change .coral3-ColorInput-editRgba': '_onChangeRgba'
+      'change ._coral-ColorInput-editHex': '_onChangeHex',
+      'change ._coral-ColorInput-editRgba': '_onChangeRgba'
     }));
     
     // Templates
@@ -221,7 +221,7 @@ class ColorInputColorProperties extends ColorInputAbstractSubviewMixin(Component
     this.classList.add(CLASSNAME);
   
     // Support cloneNode
-    const subview = this.querySelector('.coral3-ColorInput-propertiesSubview');
+    const subview = this.querySelector('._coral-ColorInput-propertiesSubview');
     if (subview) {
       subview.remove();
     }

@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-const CLASSNAME = 'coral3-TabList-item-label';
+const CLASSNAME = '_coral-TabList-item-label';
 
 /**
  @class Coral.Tab.Label

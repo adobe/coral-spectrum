@@ -18,7 +18,7 @@
 import {ComponentMixin} from '/coralui-mixin-component';
 import user from '../templates/user';
 
-const CLASSNAME = 'coral3-Shell-user';
+const CLASSNAME = '_coral-Shell-user';
 
 /**
  Enumeration for {@link ShellUser} avatar options. Avatar assets should use one of those provided, when no asset is set

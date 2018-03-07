@@ -136,7 +136,7 @@ const interaction = {
   OFF: 'off'
 };
 
-const CLASSNAME = 'coral3-Overlay';
+const CLASSNAME = '_coral-Overlay';
 
 /**
  @class Coral.Overlay

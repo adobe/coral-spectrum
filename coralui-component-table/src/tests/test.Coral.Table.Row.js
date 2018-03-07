@@ -8,12 +8,12 @@ describe('Coral.Table.Row', function() {
   describe('Instantiation', function() {
     it('should be possible using new', function() {
       const el = helpers.build(new Coral.Table.Row());
-      expect(el.classList.contains('coral3-Table-row')).to.be.true;
+      expect(el.classList.contains('_coral-Table-row')).to.be.true;
     });
     
     it('should be possible using document.createElement', function() {
       const el = helpers.build(document.createElement('tr', {is: 'coral-table-row'}));
-      expect(el.classList.contains('coral3-Table-row')).to.be.true;
+      expect(el.classList.contains('_coral-Table-row')).to.be.true;
     });
   });
 

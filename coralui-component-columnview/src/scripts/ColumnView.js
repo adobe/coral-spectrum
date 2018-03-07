@@ -20,7 +20,7 @@ import ColumnViewCollection from './ColumnViewCollection';
 import selectionMode from './selectionMode';
 import {transform, validate, commons} from '/coralui-util';
 
-const CLASSNAME = 'coral3-MillerColumns';
+const CLASSNAME = '_coral-MillerColumns';
 
 const scrollTo = (element, to, duration, scrollCallback) => {
   if (duration <= 0) {

@@ -1,6 +1,6 @@
 describe('Coral.Search', function() {
   function testInstance(instance) {
-    expect(instance.classList.contains('coral3-Search')).to.be.true;
+    expect(instance.classList.contains('_coral-Search')).to.be.true;
     expect(instance._elements.input).to.exist;
     expect(instance.getAttribute('icon')).to.equal('search');
     expect(instance.hasAttribute('disabled')).to.be.false;

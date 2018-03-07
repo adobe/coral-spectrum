@@ -30,7 +30,7 @@ import base from '../templates/base';
 import loadIndicator from '../templates/loadIndicator';
 import {transform, validate, commons, i18n} from '/coralui-util';
 
-const CLASSNAME = 'coral3-Autocomplete';
+const CLASSNAME = '_coral-Autocomplete';
 
 /**
  The distance, in pixels, from the bottom of the List at which we assume the user has scrolled
@@ -314,15 +314,15 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     if (this._variant === variant.QUIET) {
       this._elements.input.variant = Textfield.variant.QUIET;
-      this._elements.trigger.classList.remove('coral3-Button--dropdown');
-      this._elements.trigger.classList.add('coral3-Button--quiet--dropdown');
-      this._elements.inputGroup.classList.add('coral3-InputGroup--quiet');
+      this._elements.trigger.classList.remove('_coral-Button--dropdown');
+      this._elements.trigger.classList.add('_coral-Button--quiet--dropdown');
+      this._elements.inputGroup.classList.add('_coral-InputGroup--quiet');
     }
     else {
       this._elements.input.variant = Textfield.variant.DEFAULT;
-      this._elements.trigger.classList.add('coral3-Button--dropdown');
-      this._elements.trigger.classList.remove('coral3-Button--quiet--dropdown');
-      this._elements.inputGroup.classList.remove('coral3-InputGroup--quiet');
+      this._elements.trigger.classList.add('_coral-Button--dropdown');
+      this._elements.trigger.classList.remove('_coral-Button--quiet--dropdown');
+      this._elements.inputGroup.classList.remove('_coral-InputGroup--quiet');
     }
   }
   

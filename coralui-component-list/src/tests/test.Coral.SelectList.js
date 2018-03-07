@@ -7,7 +7,7 @@ describe('Coral.SelectList', function() {
 
   describe('Instantiation', function() {
     function testDefaultInstance(el) {
-      expect(el.classList.contains('coral3-SelectList')).to.be.true;
+      expect(el.classList.contains('_coral-SelectList')).to.be.true;
       expect(el.getAttribute('role')).equal('listbox');
     }
 
@@ -160,7 +160,7 @@ describe('Coral.SelectList', function() {
         const el = helpers.build(window.__html__['Coral.SelectList.base.html']);
         el.loading = true;
       
-        var indicator = el.querySelector('.coral3-SelectList-loading');
+        var indicator = el.querySelector('._coral-SelectList-loading');
         expect(indicator).to.not.equal(null);
       });
 
@@ -169,7 +169,7 @@ describe('Coral.SelectList', function() {
         el.loading = true;
         el.loading = false;
         
-        var indicator = el.querySelector('.coral3-SelectList-loading');
+        var indicator = el.querySelector('._coral-SelectList-loading');
         expect(indicator).to.equal(null);
       });
 
@@ -178,7 +178,7 @@ describe('Coral.SelectList', function() {
         el.loading = true;
         el.loading = false;
         
-        var indicator = el.querySelector('.coral3-SelectList-loading');
+        var indicator = el.querySelector('._coral-SelectList-loading');
         expect(indicator).to.equal(null);
 
         el.items.add({
@@ -192,7 +192,7 @@ describe('Coral.SelectList', function() {
         
         var indicator = el.children[el.children.length - 1];
 
-        expect(indicator.classList.contains('coral3-SelectList-loading')).to.be.true;
+        expect(indicator.classList.contains('_coral-SelectList-loading')).to.be.true;
       });
     });
 

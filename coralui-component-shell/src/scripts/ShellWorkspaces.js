@@ -18,7 +18,7 @@
 import {ComponentMixin} from '/coralui-mixin-component';
 import {SelectableCollection} from '/coralui-collection';
 
-const CLASSNAME = 'coral3-Shell-workspaces';
+const CLASSNAME = '_coral-Shell-workspaces';
 
 /**
  @class Coral.Shell.Workspaces

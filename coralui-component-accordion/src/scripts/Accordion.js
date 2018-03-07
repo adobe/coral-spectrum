@@ -44,7 +44,7 @@ const variant = {
 };
 
 // the accordions's base classname
-const CLASSNAME = 'coral3-Accordion';
+const CLASSNAME = '_coral-Accordion';
 
 /**
  @class Coral.Accordion

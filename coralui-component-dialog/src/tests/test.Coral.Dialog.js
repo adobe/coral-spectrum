@@ -74,52 +74,52 @@ describe('Coral.Dialog', function() {
       it('should support error variant', function() {
         el.variant = Coral.Dialog.variant.ERROR;
       
-        expect(el.classList.contains('coral3-Dialog--error')).to.be.true;
+        expect(el.classList.contains('_coral-Dialog--error')).to.be.true;
         expect(el.getAttribute('role')).to.equal('alertdialog');
       });
     
       it('should support warning variant', function() {
         el.variant = Coral.Dialog.variant.WARNING;
       
-        expect(el.classList.contains('coral3-Dialog--warning')).to.be.true;
+        expect(el.classList.contains('_coral-Dialog--warning')).to.be.true;
         expect(el.getAttribute('role')).to.equal('alertdialog');
       });
     
       it('should support success variant', function() {
         el.variant = Coral.Dialog.variant.SUCCESS;
       
-        expect(el.classList.contains('coral3-Dialog--success')).to.be.true;
+        expect(el.classList.contains('_coral-Dialog--success')).to.be.true;
         expect(el.getAttribute('role')).to.equal('alertdialog');
       });
     
       it('should support help variant', function() {
         el.variant = Coral.Dialog.variant.HELP;
       
-        expect(el.classList.contains('coral3-Dialog--help')).to.be.true;
+        expect(el.classList.contains('_coral-Dialog--help')).to.be.true;
         expect(el.getAttribute('role')).to.equal('alertdialog');
       });
     
       it('should support info variant', function() {
         el.variant = Coral.Dialog.variant.INFO;
       
-        expect(el.classList.contains('coral3-Dialog--info')).to.be.true;
+        expect(el.classList.contains('_coral-Dialog--info')).to.be.true;
         expect(el.getAttribute('role')).to.equal('alertdialog');
       });
     
       it('should support switching variants', function() {
         el.variant = Coral.Dialog.variant.INFO;
       
-        expect(el.classList.contains('coral3-Dialog--info')).to.be.true;
+        expect(el.classList.contains('_coral-Dialog--info')).to.be.true;
       
         el.variant = Coral.Dialog.variant.HELP;
       
-        expect(el.classList.contains('coral3-Dialog--info')).to.be.false;
-        expect(el.classList.contains('coral3-Dialog--help')).to.be.true;
+        expect(el.classList.contains('_coral-Dialog--info')).to.be.false;
+        expect(el.classList.contains('_coral-Dialog--help')).to.be.true;
       
         el.variant = Coral.Dialog.variant.DEFAULT;
       
-        expect(el.classList.contains('coral3-Dialog--help')).to.be.false;
-        expect(el.classList.contains('coral3-Dialog--default')).to.be.false;
+        expect(el.classList.contains('_coral-Dialog--help')).to.be.false;
+        expect(el.classList.contains('_coral-Dialog--default')).to.be.false;
       });
     });
   
@@ -234,7 +234,7 @@ describe('Coral.Dialog', function() {
         el.open = true;
     
         expect(el.open).to.be.true;
-        expect(document.elementFromPoint(0, 0)).to.not.equal(document.querySelector('coral3-Underlay'));
+        expect(document.elementFromPoint(0, 0)).to.not.equal(document.querySelector('_coral-Underlay'));
       });
     });
   });
@@ -434,7 +434,7 @@ describe('Coral.Dialog', function() {
         el.remove();
     
         expect(el.parentNode).to.equal(null, 'dialog should be detached');
-        var backdrop = document.querySelector('.coral3-Underlay');
+        var backdrop = document.querySelector('._coral-Underlay');
         expect(backdrop).to.not.be.null;
     
         // Make sure the backdrop is visible
@@ -449,7 +449,7 @@ describe('Coral.Dialog', function() {
         el.remove();
     
         expect(el.parentNode).to.equal(null, 'dialog should be detached');
-        var backdrop = document.querySelector('.coral3-Underlay');
+        var backdrop = document.querySelector('._coral-Underlay');
         expect(backdrop).to.not.be.null;
     
         // Make sure the backdrop is visible

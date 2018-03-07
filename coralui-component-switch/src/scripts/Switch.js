@@ -20,7 +20,7 @@ import {FormFieldMixin} from '/coralui-mixin-formfield';
 import base from '../templates/base';
 import {transform, commons} from '/coralui-util';
 
-const CLASSNAME = 'coral3-ToggleSwitch';
+const CLASSNAME = '_coral-ToggleSwitch';
 
 /**
  @class Coral.Switch
@@ -37,8 +37,8 @@ class Switch extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     // Make sure the events from the FormField are attached
     this._delegateEvents(commons.extend(this._events, {
-      'capture:focus .coral3-ToggleSwitch-input': '_onFocus',
-      'capture:blur .coral3-ToggleSwitch-input': '_onBlur'
+      'capture:focus ._coral-ToggleSwitch-input': '_onFocus',
+      'capture:blur ._coral-ToggleSwitch-input': '_onBlur'
     }));
     
     // Prepare templates

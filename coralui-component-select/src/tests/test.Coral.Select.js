@@ -15,7 +15,7 @@ describe('Coral.Select', function() {
 
   describe('Instantiation', function() {
     function testDefaultInstance(select) {
-      expect(select.classList.contains('coral3-Dropdown')).to.be.true;
+      expect(select.classList.contains('_coral-Dropdown')).to.be.true;
     }
 
     it('should be possible using new', function() {
@@ -877,16 +877,16 @@ describe('Coral.Select', function() {
         el.variant = Coral.Select.variant.QUIET;
 
         expect(el.variant).to.equal('quiet');
-        expect(el._elements.button.classList.contains('coral3-Button--quiet--dropdown')).to.be.true;
-        expect(el._elements.button.classList.contains('coral3-Button--dropdown')).to.be.false;
+        expect(el._elements.button.classList.contains('_coral-Button--quiet--dropdown')).to.be.true;
+        expect(el._elements.button.classList.contains('_coral-Button--dropdown')).to.be.false;
       });
 
       it('should set the default variant', function() {
         el.variant = Coral.Select.variant.DEFAULT;
 
         expect(el.variant).to.equal(Coral.Select.variant.DEFAULT);
-        expect(el._elements.button.classList.contains('coral3-Button--dropdown')).to.be.true;
-        expect(el._elements.button.classList.contains('coral3-Button--quiet--dropdown')).to.be.false;
+        expect(el._elements.button.classList.contains('_coral-Button--dropdown')).to.be.true;
+        expect(el._elements.button.classList.contains('_coral-Button--quiet--dropdown')).to.be.false;
       });
     });
 
@@ -1163,12 +1163,12 @@ describe('Coral.Select', function() {
 
       it('should remove variant classnames when variant changes', function() {
         const el = helpers.build(window.__html__['Coral.Select.variant.quiet.html']);
-        expect(el._elements.button.classList.contains('coral3-Button--quiet--dropdown')).to.be.true;
-        expect(el._elements.button.classList.contains('coral3-Button--dropdown')).to.be.false;
+        expect(el._elements.button.classList.contains('_coral-Button--quiet--dropdown')).to.be.true;
+        expect(el._elements.button.classList.contains('_coral-Button--dropdown')).to.be.false;
         
         el.variant = Coral.Select.variant.DEFAULT;
-        expect(el._elements.button.classList.contains('coral3-Button--dropdown')).to.be.true;
-        expect(el._elements.button.classList.contains('coral3-Button--quiet--dropdown')).to.be.false;
+        expect(el._elements.button.classList.contains('_coral-Button--dropdown')).to.be.true;
+        expect(el._elements.button.classList.contains('_coral-Button--quiet--dropdown')).to.be.false;
       });
     });
 
@@ -1628,7 +1628,7 @@ describe('Coral.Select', function() {
 
         // we fake the native input
         el._useNativeInput = true;
-        el.classList.add('coral3-Dropdown--native');
+        el.classList.add('_coral-Dropdown--native');
         el.appendChild(el._elements.nativeSelect);
 
         var options = el._elements.nativeSelect.options;
@@ -1655,7 +1655,7 @@ describe('Coral.Select', function() {
 
         // we fake the native input
         el._useNativeInput = true;
-        el.classList.add('coral3-Dropdown--native');
+        el.classList.add('_coral-Dropdown--native');
         el.appendChild(el._elements.nativeSelect);
 
         var options = el._elements.nativeSelect.options;
@@ -1947,7 +1947,7 @@ describe('Coral.Select', function() {
       const el = helpers.build(window.__html__['Coral.Select.base.html']);
       // we fake the native input
       el._useNativeInput = true;
-      el.classList.add('coral3-Dropdown--native');
+      el.classList.add('_coral-Dropdown--native');
       el.appendChild(el._elements.nativeSelect);
 
       var options = el._elements.nativeSelect.options;

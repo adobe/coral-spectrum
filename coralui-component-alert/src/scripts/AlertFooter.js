@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-const CLASSNAME = 'coral3-Alert-footer';
+const CLASSNAME = '_coral-Alert-footer';
 
 /**
  @class Coral.Alert.Footer

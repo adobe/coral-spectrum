@@ -19,7 +19,7 @@ import {ComponentMixin} from '/coralui-mixin-component';
 import {FormFieldMixin} from '/coralui-mixin-formfield';
 import {transform, validate, commons} from '/coralui-util';
 
-const CLASSNAME = 'coral3-Textfield';
+const CLASSNAME = '_coral-Textfield';
 
 /**
  Enumeration for {@link Textarea} variants.

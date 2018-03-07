@@ -32,12 +32,12 @@ coral-multifield-item-content {
   }
 }
 
-.coral3-Multifield {
+._coral-Multifield {
   display: inline-block;
   box-sizing: border-box;
 }
 
-.coral3-Multifield-item {
+._coral-Multifield-item {
   display: block;
   position: relative;
   padding-right: 2*$multifield-button-width;
@@ -47,7 +47,7 @@ coral-multifield-item-content {
 
   // Moving only makes sense, when there is more than one input
   // we use the tag because type selectors work better with an actual type
-  &:only-of-type > .coral3-Multifield-move {
+  &:only-of-type > ._coral-Multifield-move {
     display: none;
   }
 
@@ -67,17 +67,17 @@ coral-multifield-item-content {
   }
 }
 
-.coral3-Multifield-remove,
-.coral3-Multifield-move {
+._coral-Multifield-remove,
+._coral-Multifield-move {
   position: absolute;
   top: 0;
 }
 
-.coral3-Multifield-remove {
+._coral-Multifield-remove {
   right: $multifield-button-width;
 }
 
-.coral3-Multifield-move {
+._coral-Multifield-move {
   right: 0;
 }
 

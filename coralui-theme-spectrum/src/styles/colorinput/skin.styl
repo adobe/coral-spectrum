@@ -19,18 +19,18 @@ $colorinput-swatch-button-icon-color = white;
 $colorinput-button-icon-color = rgba(0, 0, 0, .4);
 $colorinput-button-hover-background-color = rgba(255, 255, 255, 0.1);
 
-.coral3-ColorInput coral-popover {
-  .coral3-ColorInput-propertiesSubview {
+._coral-ColorInput coral-popover {
+  ._coral-ColorInput-propertiesSubview {
     border-right-color: $colorinput-propertiessubview-border;
   }
 
-  .coral3-ColorInput-swatch {
+  ._coral-ColorInput-swatch {
     &[selected] button {
       coral-icon {
         color: $colorinput-swatch-button-icon-color;
       }
 
-      &.coral3-ColorInput-swatch-novalue {
+      &._coral-ColorInput-swatch-novalue {
         coral-icon {
           color: $colorinput-button-icon-color;
         }
@@ -39,13 +39,13 @@ $colorinput-button-hover-background-color = rgba(255, 255, 255, 0.1);
   }
 }
 
-.coral3-ColorInput-preview {
+._coral-ColorInput-preview {
   &:disabled, &[disabled] {
     background-color: transparent;
   }
 }
 
-.coral3-ColorInput--novalue .coral3-ColorInput-preview {
+._coral-ColorInput--novalue ._coral-ColorInput-preview {
   &:disabled, &[disabled] {
     background-image: svgImport($colorinput-blank-url);
     background-repeat: no-repeat;
@@ -55,8 +55,8 @@ $colorinput-button-hover-background-color = rgba(255, 255, 255, 0.1);
   }
 }
 
-.coral3-ColorInput-swatch button,
-.coral3-ColorInput-preview:not([disabled]) {
+._coral-ColorInput-swatch button,
+._coral-ColorInput-preview:not([disabled]) {
   border-color: $colorinput-button-border-color;
 
   &:hover {
@@ -68,10 +68,10 @@ $colorinput-button-hover-background-color = rgba(255, 255, 255, 0.1);
   }
 }
 
-.coral3-ColorInput-swatch-novalue:hover {
+._coral-ColorInput-swatch-novalue:hover {
   background-color: transparent;
 }
 
-.coral3-ColorInput-preview[disabled] > coral-icon {
+._coral-ColorInput-preview[disabled] > coral-icon {
   color: $colorinput-button-icon-color;
 }

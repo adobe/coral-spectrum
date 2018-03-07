@@ -131,13 +131,13 @@ describe('Coral.ColorInput', function() {
       });
 
       it('should be possible to set the variant', function() {
-        expect(el.classList.contains('coral3-ColorInput--swatch')).to.equal(false, 'ColorInput should not be minimal variant');
+        expect(el.classList.contains('_coral-ColorInput--swatch')).to.equal(false, 'ColorInput should not be minimal variant');
         expect(el._elements.input.getAttribute('tabindex')).to.not.equal('-1', 'In default variant colorinput should have no tabindex of -1');
         
         el.variant = Coral.ColorInput.variant.SWATCH;
         
         expect(el.variant).to.equal(Coral.ColorInput.variant.SWATCH);
-        expect(el.classList.contains('coral3-ColorInput--swatch')).to.equal(true, 'ColorInput should now be minimal variant');
+        expect(el.classList.contains('_coral-ColorInput--swatch')).to.equal(true, 'ColorInput should now be minimal variant');
 
         expect(el._elements.input.getAttribute('tabindex')).to.equal('-1', 'In minimal variant colorinput should have no tabindex');
       });
@@ -344,8 +344,8 @@ describe('Coral.ColorInput', function() {
     describe('#variant', function() {
       it('should be possible to set the variant using markup', function() {
         const el = helpers.build('<coral-colorinput variant="swatch"></coral-colorinput>');
-        expect(el.classList.contains('coral3-ColorInput')).to.be.true;
-        expect(el.classList.contains('coral3-ColorInput--swatch')).to.be.true;
+        expect(el.classList.contains('_coral-ColorInput')).to.be.true;
+        expect(el.classList.contains('_coral-ColorInput--swatch')).to.be.true;
       });
     });
 
@@ -471,7 +471,7 @@ describe('Coral.ColorInput', function() {
 
     it('should have right classes set', function() {
       const el = helpers.build(window.__html__['Coral.ColorInput.base.html']);
-      expect(el.classList.contains('coral3-ColorInput')).to.be.true;
+      expect(el.classList.contains('_coral-ColorInput')).to.be.true;
     });
 
     it('should have the right role set', function() {
@@ -504,13 +504,13 @@ describe('Coral.ColorInput', function() {
       var properties = el.querySelectorAll('coral-colorinput-colorproperties');
       expect(properties.length).to.equal(1, 'there should be a coral-colorinput-edit component ');
   
-      var propertiesView = properties[0].querySelectorAll('.coral3-ColorInput-propertiesSubview');
+      var propertiesView = properties[0].querySelectorAll('._coral-ColorInput-propertiesSubview');
       expect(propertiesView.length).to.equal(1, 'there should be a properties view ');
   
-      var previewView = propertiesView[0].querySelectorAll('.coral3-ColorInput-previewView');
+      var previewView = propertiesView[0].querySelectorAll('._coral-ColorInput-previewView');
       expect(previewView.length).to.equal(1, 'there should be a preview View');
   
-      var rgbaView = propertiesView[0].querySelectorAll('.coral3-ColorInput-rgbaView');
+      var rgbaView = propertiesView[0].querySelectorAll('._coral-ColorInput-rgbaView');
       expect(rgbaView.length).to.equal(1, 'there should be a rgba view');
     });
 

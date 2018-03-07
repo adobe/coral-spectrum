@@ -18,7 +18,7 @@
 import {SelectableCollection} from '/coralui-collection';
 import {transform, validate} from '/coralui-util';
 
-const CLASSNAME = 'coral3-BasicList';
+const CLASSNAME = '_coral-BasicList';
 
 /**
  Enumeration for {@link ListMixin} interactions.
@@ -215,7 +215,7 @@ const ListMixin = (superClass) => class extends superClass {
   connectedCallback() {
     super.connectedCallback();
     
-    this.classList.add(CLASSNAME, 'coral3-SelectList');
+    this.classList.add(CLASSNAME, '_coral-SelectList');
     
     // Default reflected attributes
     if (!this._interaction) { this.interaction = interaction.ON; }

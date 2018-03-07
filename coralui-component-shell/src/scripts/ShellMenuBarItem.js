@@ -38,7 +38,7 @@ const iconVariant = {
 };
 
 // the Menubar Item's base classname
-const CLASSNAME = 'coral3-Shell-menubar-item';
+const CLASSNAME = '_coral-Shell-menubar-item';
 
 // Builds a string containing all possible iconVariant classnames. This will be used to remove classnames when the variant
 // changes
@@ -268,7 +268,7 @@ class ShellMenuBarItem extends ComponentMixin(HTMLElement) {
     
     this.classList.add(CLASSNAME);
     
-    const button = this.querySelector('.coral3-Shell-menu-button');
+    const button = this.querySelector('._coral-Shell-menu-button');
     
     if (button) {
       this._elements.shellMenuButton = button;

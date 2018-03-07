@@ -58,13 +58,13 @@
   }
 }
 
-.coral3-BasicList,
-.coral3-BasicList-item,
-.coral3-SelectList-divider {
+._coral-BasicList,
+._coral-BasicList-item,
+._coral-SelectList-divider {
   display: block;
 }
 
-.coral3-BasicList-item {
+._coral-BasicList-item {
   text-decoration: none;
   text-align: left;
 
@@ -78,7 +78,7 @@
   }
 }
 
-.coral3-BasicList-item-icon {
+._coral-BasicList-item-icon {
   float: left;
 
   margin-right: 12*$px;
@@ -98,19 +98,19 @@
   }
 }
 
-.coral3-BasicList-item-outerContainer {
+._coral-BasicList-item-outerContainer {
   overflow: hidden; // Don't go under the float
 
   height: 100%; // Truncate text when it's longer than 2 lines
 }
 
-.coral3-BasicList-item-contentContainer {
+._coral-BasicList-item-contentContainer {
   display: table;
   table-layout: fixed; // Allow percent width
   width: 100%; // Required for text-overflow: ellipsis to apply on cells
 }
 
-.coral3-BasicList-item-content {
+._coral-BasicList-item-content {
   display: table-cell;
   vertical-align: middle; // Center content
 
@@ -121,19 +121,19 @@
   text-overflow: ellipsis;
 }
 
-.coral3-ButtonList-item,
-.coral3-AnchorList-item {
+._coral-ButtonList-item,
+._coral-AnchorList-item {
   // Avoid selection on interactive elements
   user-select: none;
 }
 
-.coral3-ButtonList-item {
+._coral-ButtonList-item {
   border: none;
   font-family: inherit;
   border-radius: 0;
 }
 
-.coral3-SelectList-group:before {
+._coral-SelectList-group:before {
   display: block;
   padding: 12*$px;
   padding-bottom: 0;
@@ -144,13 +144,13 @@
 }
 
 // Spectrum CSS overrides
-.coral3-SelectList-option {
+._coral-SelectList-option {
   height: inherit;
 }
 
 // Spectrum CSS overrides
-.coral3-SelectList .coral3-SelectList-option {
-  &:not(.coral3-AnchorList-item):not(.coral3-ButtonList-item):not(.coral3-SelectList-item):hover {
+._coral-SelectList ._coral-SelectList-option {
+  &:not(._coral-AnchorList-item):not(._coral-ButtonList-item):not(._coral-SelectList-item):hover {
     background-color: inherit;
     color: inherit;
     cursor: inherit;

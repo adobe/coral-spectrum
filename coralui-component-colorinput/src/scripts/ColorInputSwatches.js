@@ -23,7 +23,7 @@ import {SelectableCollection} from '/coralui-collection';
 import swatchesHeader from '../templates/swatchesHeader';
 import {commons} from '/coralui-util';
 
-const CLASSNAME = 'coral3-ColorInput-swatches';
+const CLASSNAME = '_coral-ColorInput-swatches';
 
 /**
  @class Coral.ColorInput.Swatches
@@ -41,7 +41,7 @@ class ColorInputSwatches extends ColorInputAbstractSubviewMixin(ComponentMixin(H
     // Events
     this._delegateEvents(commons.extend(this._events, {
       'click coral-colorinput-swatch': '_onSwatchClicked',
-      'keydown .coral3-ColorInput-swatch': '_onKeyDown',
+      'keydown ._coral-ColorInput-swatch': '_onKeyDown',
       'capture:focus coral-colorinput-swatch': '_onFocus',
   
       // private
@@ -323,7 +323,7 @@ class ColorInputSwatches extends ColorInputAbstractSubviewMixin(ComponentMixin(H
     this.setAttribute('role', 'listbox');
   
     // Support cloneNode
-    const swatchesSubview = this.querySelector('.coral3-ColorInput-swatchesSubview');
+    const swatchesSubview = this.querySelector('._coral-ColorInput-swatchesSubview');
     if (swatchesSubview) {
       swatchesSubview.remove();
     }

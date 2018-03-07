@@ -19,7 +19,7 @@ import {ComponentMixin} from '/coralui-mixin-component';
 import getFirstSelectableWrappedItem from './getFirstSelectableWrappedItem';
 import ActionBarContainer from './ActionBarContainerMixin';
 
-const CLASSNAME = 'coral3-ActionBar-primary';
+const CLASSNAME = '_coral-ActionBar-primary';
 
 /**
  @class Coral.ActionBar.Primary

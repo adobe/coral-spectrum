@@ -25,7 +25,7 @@ const ColorInputAbstractSubviewMixin = (superClass) => class extends superClass 
     super();
     
     this._events = {
-      'click .coral3-ColorInput-preview': '_onPreviewClicked'
+      'click ._coral-ColorInput-preview': '_onPreviewClicked'
     };
   
     // export a static variable used by all subviews

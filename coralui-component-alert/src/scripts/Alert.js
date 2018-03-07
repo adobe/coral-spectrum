@@ -58,7 +58,7 @@ const size = {
   LARGE: 'L'
 };
 
-const CLASSNAME = 'coral3-Alert';
+const CLASSNAME = '_coral-Alert';
 
 // An array of all possible variant classnames
 const ALL_VARIANT_CLASSES = [];
@@ -230,8 +230,8 @@ class Alert extends ComponentMixin(HTMLElement) {
     }
     
     // Inject the SVG icon
-    this.insertAdjacentHTML('afterbegin', Icon._renderSVG(`spectrum-css-icon-Alert${capitalize(variantValue)}`, ['coral3-Alert-icon']));
-    this._elements.icon = this.querySelector('.coral3-Alert-icon');
+    this.insertAdjacentHTML('afterbegin', Icon._renderSVG(`spectrum-css-icon-Alert${capitalize(variantValue)}`, ['_coral-Alert-icon']));
+    this._elements.icon = this.querySelector('._coral-Alert-icon');
   }
   
   get _contentZones() {
@@ -280,7 +280,7 @@ class Alert extends ComponentMixin(HTMLElement) {
     while (this.firstChild) {
       const child = this.firstChild;
       if (child.nodeType === Node.TEXT_NODE ||
-        child.nodeType === Node.ELEMENT_NODE && !child.classList.contains('coral3-Alert-icon')) {
+        child.nodeType === Node.ELEMENT_NODE && !child.classList.contains('_coral-Alert-icon')) {
         // Add non-template elements to the content
         this._elements.content.appendChild(child);
       }

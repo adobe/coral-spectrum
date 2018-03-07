@@ -15,14 +15,14 @@
  * from Adobe Systems Incorporated.
  */
 
-.coral3-Drawer {
+._coral-Drawer {
   display: block;
   position: relative;
   // Override coral-Well padding
   padding: 0;
 }
 
-.coral3-Drawer-toggle {
+._coral-Drawer-toggle {
   position: absolute;
   left: 0;
   right: 0;
@@ -32,7 +32,7 @@
   height: 8*$px;
 }
 
-.coral3-Drawer-toggleButton {
+._coral-Drawer-toggleButton {
   width: 100%;
   height: 100%;
   padding: 0;
@@ -52,32 +52,32 @@
   }
 }
 
-.coral3-Drawer-content {
+._coral-Drawer-content {
   padding: 16*$px;
 }
 
-.coral3-Drawer-slider {
+._coral-Drawer-slider {
   overflow: hidden;
   transition: height ease 250ms;
 }
 
-.coral3-Drawer--down {
-  .coral3-Drawer-toggle {
+._coral-Drawer--down {
+  ._coral-Drawer-toggle {
     bottom: -9 *$px;
   }
 
-  .coral3-Drawer-toggleButton {
+  ._coral-Drawer-toggleButton {
     border-top-left-radius: 0
     border-top-right-radius: 0;
   }
 }
 
-.coral3-Drawer--up {
-  .coral3-Drawer-toggle {
+._coral-Drawer--up {
+  ._coral-Drawer-toggle {
     top: -9 *$px;
   }
 
-  .coral3-Drawer-toggleButton {
+  ._coral-Drawer-toggleButton {
     border-bottom-left-radius: 0
     border-bottom-right-radius: 0;
 

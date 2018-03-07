@@ -13,7 +13,7 @@ describe('Coral.Checkbox', function() {
       ['disabled', 'readonly', 'invalid', 'required', 'checked'].forEach(function(attr) {
         expect(checkbox.hasAttribute(attr)).to.be.false;
       });
-      expect(checkbox.classList.contains('coral3-Checkbox')).to.be.true;
+      expect(checkbox.classList.contains('_coral-Checkbox')).to.be.true;
     });
 
     it('should be possible to clone the element using markup', function() {
@@ -38,18 +38,18 @@ describe('Coral.Checkbox', function() {
   describe('Markup', function() {
     it('should be possible using markup', function() {
       const el = helpers.build('<coral-checkbox></coral-checkbox>');
-      expect(el.classList.contains('coral3-Checkbox')).to.be.true;
+      expect(el.classList.contains('_coral-Checkbox')).to.be.true;
     });
 
     it('should be possible using markup with text', function() {
       const el = helpers.build('<coral-checkbox>Checkbox</coral-checkbox>');
-      expect(el.classList.contains('coral3-Checkbox')).to.be.true;
+      expect(el.classList.contains('_coral-Checkbox')).to.be.true;
       expect(el.label.textContent).to.equal('Checkbox');
     });
 
     it('should be possible using markup with content zone', function() {
       const el = helpers.build('<coral-checkbox><coral-checkbox-label>Checkbox</coral-checkbox-label></coral-checkbox>');
-      expect(el.classList.contains('coral3-Checkbox')).to.be.true;
+      expect(el.classList.contains('_coral-Checkbox')).to.be.true;
       expect(el.label.textContent).to.equal('Checkbox');
     });
   });

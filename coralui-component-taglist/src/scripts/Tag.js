@@ -20,8 +20,8 @@ import '/coralui-component-button';
 import base from '../templates/base';
 import {transform, validate, events} from '/coralui-util';
 
-const CLASSNAME = 'coral3-TagList-item';
-const LABEL_CLASSNAME = 'coral3-Label';
+const CLASSNAME = '_coral-TagList-item';
+const LABEL_CLASSNAME = '_coral-Label';
 
 /**
  Enumeration for {@link Tag} sizes.

@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-const CLASSNAME = 'coral3-Banner-content';
+const CLASSNAME = '_coral-Banner-content';
 
 /**
  @class Coral.Card.Banner.Content

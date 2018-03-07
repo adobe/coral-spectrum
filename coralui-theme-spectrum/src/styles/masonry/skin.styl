@@ -18,16 +18,16 @@
 $masonry-selected-background-color = rgba(20, 115, 230, 0.4);
 $masonry-selected-hover-background-color = rgba(20, 115, 230, 0.5);
 
-.coral3-Masonry-item.is-selected:after {
+._coral-Masonry-item.is-selected:after {
   background-image: svgImport($masonry-selected-icon-url, 'path {fill: white}');
   background-color: $masonry-selected-background-color;
 }
 
-.coral3-Masonry-item.is-selected:hover:after {
+._coral-Masonry-item.is-selected:hover:after {
   background-color: $masonry-selected-hover-background-color;
 }
 
-.coral3-Masonry.is-selectable .coral3-Masonry-item:not([selected]) {
+._coral-Masonry.is-selectable ._coral-Masonry-item:not([selected]) {
   &:hover,
   &:focus {
     &:after {

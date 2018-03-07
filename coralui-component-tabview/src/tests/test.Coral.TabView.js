@@ -6,7 +6,7 @@ describe('Coral.TabView', function() {
   });
 
   function testDefaultInstance(el) {
-    expect(el.classList.contains('coral3-TabView')).to.be.true;
+    expect(el.classList.contains('_coral-TabView')).to.be.true;
     expect(el.tabList).not.to.be.null;
     expect(el.panelStack).not.to.be.null;
 
@@ -88,13 +88,13 @@ describe('Coral.TabView', function() {
       it('should be settable', function() {
         el.orientation = Coral.TabView.orientation.VERTICAL;
         expect(el.orientation).to.equal(Coral.TabView.orientation.VERTICAL);
-        expect(el.classList.contains('coral3-TabView--vertical')).to.be.true;
+        expect(el.classList.contains('_coral-TabView--vertical')).to.be.true;
       });
   
       it('should set orientation to tablist', function() {
         const el = helpers.build(window.__html__['Coral.TabView.orientation.html']);
         expect(el.orientation).to.equal(Coral.TabView.orientation.VERTICAL);
-        expect(el.classList.contains('coral3-TabView--vertical')).to.be.true;
+        expect(el.classList.contains('_coral-TabView--vertical')).to.be.true;
         expect(el.tabList.getAttribute('orientation')).to.equal(Coral.TabView.orientation.VERTICAL);
       });
     });

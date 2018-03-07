@@ -30,7 +30,7 @@ describe('Coral.AnchorButton', function() {
     it('should set is-select on keyDown', function() {
       var button = helpers.build(new Coral.AnchorButton());
       
-      expect(button.classList.contains('coral3-Button')).to.be.true;
+      expect(button.classList.contains('_coral-Button')).to.be.true;
       expect(button.classList.contains('is-selected')).to.be.false;
 
       helpers.keydown('space', button);

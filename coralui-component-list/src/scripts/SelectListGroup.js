@@ -19,7 +19,7 @@ import {ComponentMixin} from '/coralui-mixin-component';
 import {SelectableCollection} from '/coralui-collection';
 import {transform} from '/coralui-util';
 
-const CLASSNAME = 'coral3-SelectList-group';
+const CLASSNAME = '_coral-SelectList-group';
 
 /**
  @class Coral.SelectList.Group

@@ -21,7 +21,7 @@ import FileUploadItem from './FileUploadItem';
 import base from '../templates/base';
 import {transform, commons, validate} from '/coralui-util';
 
-const CLASSNAME = 'coral3-FileUpload';
+const CLASSNAME = '_coral-FileUpload';
 
 const XHR_EVENT_NAMES = ['loadstart', 'progress', 'load', 'error', 'loadend', 'readystatechange', 'abort', 'timeout'];
 

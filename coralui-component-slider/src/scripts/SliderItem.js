@@ -17,7 +17,7 @@
 
 import {transform} from '/coralui-util';
 
-const CLASSNAME = 'coral3-Slider-item';
+const CLASSNAME = '_coral-Slider-item';
 
 /**
  @class Coral.Slider.Item

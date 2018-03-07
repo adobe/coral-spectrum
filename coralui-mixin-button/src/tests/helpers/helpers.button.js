@@ -36,7 +36,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
     describe('Instantiation', function() {
       it('should be possible using new', function() {
         var button = helpers.build(new Constructor());
-        expect(button.classList.contains('coral3-Button')).to.be.true;
+        expect(button.classList.contains('_coral-Button')).to.be.true;
         expect(button.hasAttribute('block')).to.be.false;
         expect(button.hasAttribute('icon')).to.be.false;
         expect(button.hasAttribute('variant')).to.be.true;
@@ -103,7 +103,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
           const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" hidden></'+ baseTagName +'>');
           expect(button.label.textContent).to.equal('', 'label.textContent');
           expect(button.textContent).to.equal('');
-          expect(button.classList.contains('coral3-Button')).to.be.true;
+          expect(button.classList.contains('_coral-Button')).to.be.true;
         });
       
         it('should use the existing nodes as the initial label value', function() {
@@ -121,7 +121,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
         
           button.label.textContent = 'Hello';
           expect(button.label.textContent).to.equal('Hello');
-          expect(button.classList.contains('coral3-Button')).to.be.true;
+          expect(button.classList.contains('_coral-Button')).to.be.true;
           expect(button.icon).to.equal('add');
         });
       
@@ -135,7 +135,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
         
           button.label.textContent = '';
           expect(button.label.textContent).to.equal('');
-          expect(button.classList.contains('coral3-Button')).to.be.true;
+          expect(button.classList.contains('_coral-Button')).to.be.true;
           expect(button.icon).to.equal('add');
         });
       
@@ -149,7 +149,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
         
           button.label.textContent = 'Add';
           expect(button.label.textContent).to.equal('Add');
-          expect(button.classList.contains('coral3-Button')).to.be.true;
+          expect(button.classList.contains('_coral-Button')).to.be.true;
           expect(button.icon).to.equal('add');
         });
       });
@@ -161,7 +161,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
           expect(button.icon).to.equal('');
           expect(button._getIconElement().parentNode).to.be.null;
           expect(button.hasAttribute('icon')).to.be.false;
-          expect(button.classList.contains('coral3-Button')).to.be.true;
+          expect(button.classList.contains('_coral-Button')).to.be.true;
         });
       
         it('should set a new icon', function() {
@@ -171,7 +171,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
           expect(button.label.textContent).to.equal('');
           expect(button._getIconElement()).to.exist;
           expect(button._getIconElement().icon).to.equal('add');
-          expect(button.classList.contains('coral3-Button')).to.be.true;
+          expect(button.classList.contains('_coral-Button')).to.be.true;
         });
       
         it('should not be square when there is a label', function() {
@@ -182,7 +182,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
           expect(button.label.textContent).to.equal('Add');
           expect(button._getIconElement()).to.exist;
           expect(button._getIconElement().icon).to.equal('add');
-          expect(button.classList.contains('coral3-Button')).to.be.true;
+          expect(button.classList.contains('_coral-Button')).to.be.true;
         });
       
         it('should have default icon alt text when there is no label', function() {
@@ -194,7 +194,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
           expect(button._elements.icon.icon).to.equal('add');
           expect(button._elements.icon.alt).to.equal(null);
           expect(button._elements.icon.getAttribute('aria-label')).to.equal('add');
-          expect(button.classList.contains('coral3-Button')).to.be.true;
+          expect(button.classList.contains('_coral-Button')).to.be.true;
         });
       
         it('should not have icon alt text when there is a label', function() {
@@ -207,7 +207,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
           expect(button._elements.icon.icon).to.equal('add');
           expect(button._elements.icon.alt).to.equal('');
           expect(button._elements.icon.getAttribute('aria-label')).to.be.null;
-          expect(button.classList.contains('coral3-Button')).to.be.true;
+          expect(button.classList.contains('_coral-Button')).to.be.true;
         });
       
         it('should remove icon alt text if the label is added', function(done) {
@@ -224,7 +224,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
           // Wait for the MO to kick in
           setTimeout(() => {
             expect(button.label.textContent).to.equal('Add');
-            expect(button.classList.contains('coral3-Button')).to.be.true;
+            expect(button.classList.contains('_coral-Button')).to.be.true;
             expect(button.icon).to.equal('add');
             expect(button._elements.icon.alt).to.equal('');
             expect(button._elements.icon.getAttribute('aria-label')).to.be.null;
@@ -244,7 +244,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
           // Wait for the MO to kick in
           setTimeout(() => {
             expect(button.label.textContent).to.equal('');
-            expect(button.classList.contains('coral3-Button')).to.be.true;
+            expect(button.classList.contains('_coral-Button')).to.be.true;
             expect(button.icon).to.equal('add');
             expect(button._elements.icon.alt).to.equal('');
             expect(button._elements.icon.getAttribute('aria-label')).to.equal('add');
@@ -269,7 +269,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
             expect(button._getIconElement().icon).to.equal('share');
             expect(button._elements.icon.alt).to.equal('');
             expect(button._elements.icon.getAttribute('aria-label')).to.equal('share');
-            expect(button.classList.contains('coral3-Button')).to.be.true;
+            expect(button.classList.contains('_coral-Button')).to.be.true;
             done();
           });
         });
@@ -284,7 +284,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
           expect(button._getIconElement()).to.exist;
           expect(button._getIconElement().icon).to.equal('');
           expect(button._getIconElement().parentNode).to.be.null;
-          expect(button.classList.contains('coral3-Button')).to.be.true;
+          expect(button.classList.contains('_coral-Button')).to.be.true;
         });
       }); // end describe icon
     
@@ -361,24 +361,24 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
           const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'"></'+ baseTagName +'>');
           expect(button.block).to.be.false;
           expect(button.hasAttribute('block')).to.be.false;
-          expect(button.classList.contains('coral3-Button--block')).to.be.false;
-          expect(button.classList.contains('coral3-Button')).to.be.true;
+          expect(button.classList.contains('_coral-Button--block')).to.be.false;
+          expect(button.classList.contains('_coral-Button')).to.be.true;
         });
       
         it('should set the size modifier', function() {
           const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" block></'+ baseTagName +'>');
           expect(button.block).to.be.true;
           expect(button.hasAttribute('block')).to.be.true;
-          expect(button.classList.contains('coral3-Button--block')).to.be.true;
-          expect(button.classList.contains('coral3-Button')).to.be.true;
+          expect(button.classList.contains('_coral-Button--block')).to.be.true;
+          expect(button.classList.contains('_coral-Button')).to.be.true;
         });
       
         it('should behave like an attribute boolean', function() {
           const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" block="false"></'+ baseTagName +'>');
           expect(button.block).to.be.true;
           expect(button.hasAttribute('block')).to.be.true;
-          expect(button.classList.contains('coral3-Button--block')).to.be.true;
-          expect(button.classList.contains('coral3-Button')).to.be.true;
+          expect(button.classList.contains('_coral-Button--block')).to.be.true;
+          expect(button.classList.contains('_coral-Button')).to.be.true;
         });
       });
     
@@ -388,7 +388,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
           const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'"></'+ baseTagName +'>');
           expect(button.variant).to.equal(Constructor.variant.PRIMARY);
           expect(button.hasAttribute('variant')).to.be.true;
-          expect(button.classList.contains('coral3-Button')).to.be.true;
+          expect(button.classList.contains('_coral-Button')).to.be.true;
         });
       
         it('should set the new variant', function() {
@@ -396,31 +396,31 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
           expect(button.variant).to.equal('cta');
           expect(button.variant).to.equal(Constructor.variant.CTA);
           expect(button.getAttribute('variant')).to.equal(Constructor.variant.CTA);
-          expect(button.classList.contains('coral3-Button--cta')).to.be.true;
-          expect(button.classList.contains('coral3-Button')).to.be.true;
+          expect(button.classList.contains('_coral-Button--cta')).to.be.true;
+          expect(button.classList.contains('_coral-Button')).to.be.true;
         });
       
         it('should add the default class if variant is empty', function() {
           const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" variant=""></'+ baseTagName +'>');
           expect(button.variant).to.equal(Constructor.variant.PRIMARY);
           expect(button.hasAttribute('variant', Constructor.variant.PRIMARY)).to.be.true;
-          expect(button.classList.contains('coral3-Button')).to.be.true;
+          expect(button.classList.contains('_coral-Button')).to.be.true;
         });
       
         it('should go back to default variant for invalid variant', function() {
           const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" variant="invalidvariant"></'+ baseTagName +'>');
           expect(button.variant).to.equal(Constructor.variant.PRIMARY);
           expect(button.hasAttribute('variant', Constructor.variant.PRIMARY)).to.be.true;
-          expect(button.classList.contains('coral3-Button')).to.be.true;
+          expect(button.classList.contains('_coral-Button')).to.be.true;
         });
       
         it('should remove variant classnames when variant changes', function() {
           const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" variant="primary"></'+ baseTagName +'>');
-          expect(button.classList.contains('coral3-Button--primary')).to.be.true;
+          expect(button.classList.contains('_coral-Button--primary')).to.be.true;
         
           button.variant = Constructor.variant.WARNING;
-          expect(button.classList.contains('coral3-Button--warning')).to.be.true;
-          expect(button.classList.contains('coral3-Button--primary')).to.be.false;
+          expect(button.classList.contains('_coral-Button--warning')).to.be.true;
+          expect(button.classList.contains('_coral-Button--primary')).to.be.false;
         });
       });
     
@@ -447,12 +447,12 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
         expect(button.block).to.be.true;
         expect(button.variant).to.equal(Constructor.variant.PRIMARY);
         expect(button.icon).to.equal('share');
-        expect(button.classList.contains('coral3-Button--block')).to.be.true;
-        expect(button.classList.contains('coral3-Button--primary')).to.be.true;
+        expect(button.classList.contains('_coral-Button--block')).to.be.true;
+        expect(button.classList.contains('_coral-Button--primary')).to.be.true;
         expect(button._getIconElement()).to.exist;
         expect(button._getIconElement().icon).to.equal('share');
         expect(button.label.textContent).to.equal('Share');
-        expect(button.classList.contains('coral3-Button')).to.be.true;
+        expect(button.classList.contains('_coral-Button')).to.be.true;
       }); // end variant
     });
   

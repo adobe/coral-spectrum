@@ -102,7 +102,7 @@ const backdrop = {
 const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
 
 // The dialog's base classname
-const CLASSNAME = 'coral3-Dialog';
+const CLASSNAME = '_coral-Dialog';
 // Modifier classnames
 const FULLSCREEN_CLASSNAME = `${CLASSNAME}--fullscreenTakeover`;
 
@@ -491,8 +491,8 @@ class Dialog extends OverlayMixin(ComponentMixin(HTMLElement)) {
     
     // Inject the SVG icon
     if (variantValue !== variant.DEFAULT) {
-      this._elements.headerWrapper.insertAdjacentHTML('beforeend', Icon._renderSVG(`spectrum-css-icon-Alert${capitalize(variantValue)}`, ['coral3-Dialog-typeIcon']));
-      this._elements.icon = this.querySelector('.coral3-Dialog-typeIcon');
+      this._elements.headerWrapper.insertAdjacentHTML('beforeend', Icon._renderSVG(`spectrum-css-icon-Alert${capitalize(variantValue)}`, ['_coral-Dialog-typeIcon']));
+      this._elements.icon = this.querySelector('._coral-Dialog-typeIcon');
     }
   }
   
@@ -611,7 +611,7 @@ class Dialog extends OverlayMixin(ComponentMixin(HTMLElement)) {
     }, this);
     
     // Support cloneNode
-    const template = this.querySelectorAll('.coral3-Dialog-header, .coral3-Dialog-closeButton');
+    const template = this.querySelectorAll('._coral-Dialog-header, ._coral-Dialog-closeButton');
     for (let i = 0; i < template.length; i++) {
       template[i].remove();
     }

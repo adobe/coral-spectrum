@@ -1,9 +1,9 @@
-<table handle="table" class="coral3-Calendar-table" role="presentation">
+<table handle="table" class="_coral-Calendar-table" role="presentation">
   <thead role="presentation">
     <tr role="row">
       <foreach data.dayNames,columnNumber>
-        <th role="columnheader" scope="col" class="coral3-Calendar-tableCell">
-          <abbr class="coral3-Calendar-dayOfWeek" title="{{data.dayFullName}}">{{data.dayAbbr}}</abbr>
+        <th role="columnheader" scope="col" class="_coral-Calendar-tableCell">
+          <abbr class="_coral-Calendar-dayOfWeek" title="{{data.dayFullName}}">{{data.dayAbbr}}</abbr>
         </th>
       </foreach>
     </tr>
@@ -32,16 +32,16 @@
               }
             }
           </js>
-          <td handle="cell" role="gridcell" id="{{Coral.commons.getUID()}}-row{{rowNumber}}-col{{columnNumber}}" class="coral3-Calendar-tableCell" aria-selected="{{data.ariaSelected}}" if-data.isDisabled='aria-disabled="true"' if-data.ariaInvalid='aria-invalid="true"' if-data.formattedDate='title="{{calendarTitle}}"'>
+          <td handle="cell" role="gridcell" id="{{Coral.commons.getUID()}}-row{{rowNumber}}-col{{columnNumber}}" class="_coral-Calendar-tableCell" aria-selected="{{data.ariaSelected}}" if-data.isDisabled='aria-disabled="true"' if-data.ariaInvalid='aria-invalid="true"' if-data.formattedDate='title="{{calendarTitle}}"'>
             <js>
               if (data.cssClass.indexOf('is-outsideMonth') !== -1) {
                 this.cell.classList.add('is-outsideMonth');
               }
             </js>
             <if data.dateAttr>
-                <a role="presentation" class="coral3-Calendar-date {{data.cssClass}}" data-date="{{data.dateAttr}}">{{data.dateText}}</a>
+                <a role="presentation" class="_coral-Calendar-date {{data.cssClass}}" data-date="{{data.dateAttr}}">{{data.dateText}}</a>
               <else>
-                <span role="presentation" class="coral3-Calendar-date {{data.cssClass}}">{{data.dateText}}</span>
+                <span role="presentation" class="_coral-Calendar-date {{data.cssClass}}">{{data.dateText}}</span>
               </else>
             </if>
           </td>

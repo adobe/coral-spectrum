@@ -1,5 +1,5 @@
 describe('Coral.QuickActions', function() {
-  var BUTTON_SELECTOR = '.coral3-QuickActions-item:not([handle="moreButton"])';
+  var BUTTON_SELECTOR = '._coral-QuickActions-item:not([handle="moreButton"])';
 
   var itemObject = {
     icon: 'copy',

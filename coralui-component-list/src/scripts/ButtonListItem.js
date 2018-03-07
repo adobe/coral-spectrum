@@ -18,7 +18,7 @@
 import {ComponentMixin} from '/coralui-mixin-component';
 import {ListItemMixin} from '/coralui-mixin-list';
 
-const CLASSNAME = 'coral3-ButtonList-item';
+const CLASSNAME = '_coral-ButtonList-item';
 
 /**
  @class Coral.ButtonList.Item

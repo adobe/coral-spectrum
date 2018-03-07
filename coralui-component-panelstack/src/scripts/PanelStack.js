@@ -18,7 +18,7 @@
 import {ComponentMixin} from '/coralui-mixin-component';
 import {SelectableCollection} from '/coralui-collection';
 
-const CLASSNAME = 'coral3-PanelStack';
+const CLASSNAME = '_coral-PanelStack';
 
 /**
  @class Coral.PanelStack

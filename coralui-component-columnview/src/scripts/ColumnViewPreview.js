@@ -17,7 +17,7 @@
 
 import {ComponentMixin} from '/coralui-mixin-component';
 
-const CLASSNAME = 'coral3-MillerColumn';
+const CLASSNAME = '_coral-MillerColumn';
 
 /**
  @class Coral.ColumnView.Preview

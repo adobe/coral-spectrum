@@ -91,12 +91,12 @@ module.exports = [
   // @spectrum Ignore Shell to avoid clashing as it'll be removed in future versions of Spectrum CSS
   {
     spectrum: /\.spectrum-Shell/g,
-    coral: '.coral3-ShellIgnore'
+    coral: '._coral-ShellIgnore'
   },
   // Coral Components
   {
     spectrum: /\.spectrum-/g,
-    coral: '.coral3-'
+    coral: '._coral-'
   },
   // Base
   {

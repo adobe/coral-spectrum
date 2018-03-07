@@ -36,7 +36,7 @@ const direction = {
 };
 
 // The drawer's base classname
-const CLASSNAME = 'coral3-Drawer';
+const CLASSNAME = '_coral-Drawer';
 
 // A string of all possible direction classnames
 const ALL_DIRECTION_CLASSES = [];
@@ -64,7 +64,7 @@ class Drawer extends ComponentMixin(HTMLElement) {
     
     // Events
     this._delegateEvents({
-      'click .coral3-Drawer-toggleButton': '_onClick'
+      'click ._coral-Drawer-toggleButton': '_onClick'
     });
   }
   

@@ -19,7 +19,7 @@ import {ComponentMixin} from '/coralui-mixin-component';
 import '/coralui-component-icon';
 import homeAnchorIcon from '../templates/homeAnchorIcon';
 
-const CLASSNAME = 'coral3-Shell-homeAnchor';
+const CLASSNAME = '_coral-Shell-homeAnchor';
 
 /**
  @class Coral.Shell.HomeAnchor

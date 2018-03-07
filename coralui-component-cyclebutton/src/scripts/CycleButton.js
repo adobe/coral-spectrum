@@ -56,7 +56,7 @@ const ITEM_TAG_NAME = 'coral-cyclebutton-item';
 /** @ignore */
 const ACTION_TAG_NAME = 'coral-cyclebutton-action';
 
-const CLASSNAME = 'coral3-CycleSelect';
+const CLASSNAME = '_coral-CycleSelect';
 
 /**
  @class Coral.CycleButton

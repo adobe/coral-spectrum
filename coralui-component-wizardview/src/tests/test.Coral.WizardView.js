@@ -1,6 +1,6 @@
 describe('Coral.WizardView', function() {
   function testDefaultInstance(el) {
-    expect(el.classList.contains('coral3-WizardView')).to.be.true;
+    expect(el.classList.contains('_coral-WizardView')).to.be.true;
   }
 
   describe('Namespace', function() {

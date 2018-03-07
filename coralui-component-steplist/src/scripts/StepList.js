@@ -53,7 +53,7 @@ const size = {
 };
 
 // the StepList's base classname
-const CLASSNAME = 'coral3-Steplist';
+const CLASSNAME = '_coral-Steplist';
 
 /**
  @class Coral.StepList

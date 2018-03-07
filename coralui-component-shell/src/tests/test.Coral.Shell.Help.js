@@ -77,7 +77,7 @@ describe('Coral.Shell.Help', function() {
 
         el.showError();
         expect(el._elements.resultMessage.hidden).to.equal(false);
-        expect(resultMessage.querySelector('.coral3-Shell-help-resultMessage-heading').textContent).to.equal(expectedResultMessage);
+        expect(resultMessage.querySelector('._coral-Shell-help-resultMessage-heading').textContent).to.equal(expectedResultMessage);
       });
     });
 
@@ -119,7 +119,7 @@ describe('Coral.Shell.Help', function() {
         var expectedResultMessage = 'No results found';
 
         expect(el._elements.resultMessage.hidden).to.equal(false);
-        expect(resultMessage.querySelector('.coral3-Shell-help-resultMessage-heading').textContent).to.equal(expectedResultMessage);
+        expect(resultMessage.querySelector('._coral-Shell-help-resultMessage-heading').textContent).to.equal(expectedResultMessage);
       });
     });
   });

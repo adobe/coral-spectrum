@@ -1,13 +1,13 @@
-<button id="{{Coral.commons.getUID()}}" handle="button" class="coral3-CycleSelect-button coral3-Button--quiet--action" is="coral-button" variant="_custom" iconsize="S">
+<button id="{{Coral.commons.getUID()}}" handle="button" class="_coral-CycleSelect-button _coral-Button--quiet--action" is="coral-button" variant="_custom" iconsize="S">
   <coral-button-label handle="label"></coral-button-label>
 </button>
 <js>
   // Don't wait for button MO to pick up the label
   this.button._elements.label = this.label;
   // Render chevron icon
-  this.button.insertAdjacentHTML('afterbegin', Coral.Icon._renderSVG('spectrum-css-icon-SelectDownChevron', ['coral3-CycleSelect-icon']));
+  this.button.insertAdjacentHTML('afterbegin', Coral.Icon._renderSVG('spectrum-css-icon-SelectDownChevron', ['_coral-CycleSelect-icon']));
 </js>
-<coral-popover variant="_custom" handle="overlay" class="coral3-CycleSelect-overlay" returnfocus="on" focusonshow="coral-selectlist" trapfocus="on" placement="bottom">
-  <coral-selectlist class="coral3-CycleSelect-list" handle="selectList" id="{{Coral.commons.getUID()}}"></coral-selectlist>
+<coral-popover variant="_custom" handle="overlay" class="_coral-CycleSelect-overlay" returnfocus="on" focusonshow="coral-selectlist" trapfocus="on" placement="bottom">
+  <coral-selectlist class="_coral-CycleSelect-list" handle="selectList" id="{{Coral.commons.getUID()}}"></coral-selectlist>
   <coral-buttonlist handle="actionList" hidden></coral-buttonlist>
 </coral-popover>

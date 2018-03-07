@@ -20,7 +20,7 @@ import {SelectableCollection} from '/coralui-collection';
 import orgSwitcher from '../templates/orgSwitcher';
 import {commons} from '/coralui-util';
 
-const CLASSNAMES = ['coral3-BasicList', 'coral3-Shell-orgSwitcher'];
+const CLASSNAMES = ['_coral-BasicList', '_coral-Shell-orgSwitcher'];
 
 /**
  Minimum number of entries required to show search control.
@@ -315,9 +315,9 @@ class ShellOrgSwitcher extends List {
     // Support cloneNode
     if (container) {
       this._elements.container = container;
-      this._elements.items = this.querySelector('.coral3-Shell-orgSwitcher-items');
-      this._elements.search = this.querySelector('.coral3-Shell-orgSwitcher-search');
-      this._elements.resultMessage = this.querySelector('.coral3-Shell-orgSwitcher-resultMessage');
+      this._elements.items = this.querySelector('._coral-Shell-orgSwitcher-items');
+      this._elements.search = this.querySelector('._coral-Shell-orgSwitcher-search');
+      this._elements.resultMessage = this.querySelector('._coral-Shell-orgSwitcher-resultMessage');
       this._items._container = this._elements.items;
     }
     else {

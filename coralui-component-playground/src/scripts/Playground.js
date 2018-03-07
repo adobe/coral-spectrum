@@ -32,7 +32,7 @@ import CodeMirror from 'codemirror';
 import 'codemirror/mode/xml/xml';
 
 // Base classname
-const CLASS_NAME = 'coral3-Playground';
+const CLASS_NAME = '_coral-Playground';
 
 /**
  Enumeration for {@link Playground} screens.

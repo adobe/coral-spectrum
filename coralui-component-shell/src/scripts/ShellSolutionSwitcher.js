@@ -19,7 +19,7 @@ import {ComponentMixin} from '/coralui-mixin-component';
 import {Collection} from '/coralui-collection';
 import solutionSwitcher from '../templates/solutionSwitcher';
 
-const CLASSNAME = 'coral3-Shell-solutionSwitcher';
+const CLASSNAME = '_coral-Shell-solutionSwitcher';
 
 /**
  @class Coral.Shell.SolutionSwitcher
@@ -84,7 +84,7 @@ class ShellSolutionSwitcher extends ComponentMixin(HTMLElement) {
     // force dark theme
     this.classList.add('coral--dark');
     
-    const container = this.querySelector('.coral3-Shell-solutions-container') || this._elements.container;
+    const container = this.querySelector('._coral-Shell-solutions-container') || this._elements.container;
     
     // Remove it so we can process solutions
     if (container.parentNode) {

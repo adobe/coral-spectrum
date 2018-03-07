@@ -21,7 +21,7 @@ import {transform, commons} from '/coralui-util';
 import {Icon} from '/coralui-component-icon';
 import getTarget from './getTarget';
 
-const CLASSNAME = 'coral3-TabList-item';
+const CLASSNAME = '_coral-TabList-item';
 
 /**
  @class Coral.Tab

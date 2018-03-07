@@ -502,35 +502,35 @@ describe('Coral.CycleButton', function() {
     describe('#threshold', function() {
       it('should be in normal mode if itemCount less than threshold', function() {
         const el = helpers.build(SNIPPET_TWOITEMS);
-        expect(el.classList.contains('coral3-CycleSelect--extended')).to.be.false;
+        expect(el.classList.contains('_coral-CycleSelect--extended')).to.be.false;
       });
 
       it('should enable extended mode if itemCount greater than threshold', function() {
         const el = helpers.build(SNIPPET_THREEITEMS);
-        expect(el.classList.contains('coral3-CycleSelect--extended')).to.be.true;
+        expect(el.classList.contains('_coral-CycleSelect--extended')).to.be.true;
       });
 
       it('should change extended mode if itemCount gets greater than threshold', function(done) {
         const el = helpers.build(SNIPPET_TWOITEMS);
-        expect(el.classList.contains('coral3-CycleSelect--extended')).to.be.false;
+        expect(el.classList.contains('_coral-CycleSelect--extended')).to.be.false;
         var button = new Coral.CycleButton.Item();
         el.appendChild(button);
         
         // Wait for MO
         helpers.next(function() {
-          expect(el.classList.contains('coral3-CycleSelect--extended')).to.be.true;
+          expect(el.classList.contains('_coral-CycleSelect--extended')).to.be.true;
           done();
         });
       });
 
       it('should change extended mode if itemCount gets less than threshold', function(done) {
         const el = helpers.build(SNIPPET_THREEITEMS);
-        expect(el.classList.contains('coral3-CycleSelect--extended')).to.be.true;
+        expect(el.classList.contains('_coral-CycleSelect--extended')).to.be.true;
         el.removeChild(el.querySelector('#btn3'));
         
         // Wait for MO
         helpers.next(function() {
-          expect(el.classList.contains('coral3-CycleSelect--extended')).to.be.false;
+          expect(el.classList.contains('_coral-CycleSelect--extended')).to.be.false;
           done();
         });
       });

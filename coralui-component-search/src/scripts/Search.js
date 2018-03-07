@@ -23,7 +23,7 @@ import {Icon} from '/coralui-component-icon';
 import base from '../templates/base';
 import {transform, validate, commons} from '/coralui-util';
 
-const CLASSNAME = 'coral3-Search';
+const CLASSNAME = '_coral-Search';
 
 /**
  Enumeration for {@link Search} variants.
@@ -343,7 +343,7 @@ class Search extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     if (!this._variant) { this.variant = variant.DEFAULT; }
   
     // Support cloneNode
-    const templates = this.querySelectorAll('.coral3-Search-input, .coral3-Search-icon, .coral3-Search-clear');
+    const templates = this.querySelectorAll('._coral-Search-input, ._coral-Search-icon, ._coral-Search-clear');
     for (let i = 0; i < templates.length; i++) {
       templates[i].remove();
     }
@@ -359,7 +359,7 @@ class Search extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this.appendChild(fragment);
     
     // Insert search icon
-    this._elements.input.insertAdjacentHTML('afterend', Icon._renderSVG('spectrum-css-icon-SearchMagGlass', ['coral3-Search-icon']));
+    this._elements.input.insertAdjacentHTML('afterend', Icon._renderSVG('spectrum-css-icon-SearchMagGlass', ['_coral-Search-icon']));
    
     this._updateClearButton();
   }

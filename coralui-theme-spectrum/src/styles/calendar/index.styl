@@ -16,30 +16,30 @@
  */
 
 // Prevent fast transition overflows
-.coral3-Calendar {
+._coral-Calendar {
   max-height: 312*$px;
   overflow: hidden;
 }
 
-.coral3-DatePicker-calendarSlidingContainer {
+._coral-DatePicker-calendarSlidingContainer {
   display: block;
   position: relative;
   overflow: hidden;
 }
 
-.coral3-Calendar-table--transit {
+._coral-Calendar-table--transit {
   position: absolute;
   top: 0;
   left: 0;
   transition: left 400ms;
 }
 
-.coral3-Calendar-tableCell.is-outsideMonth {
+._coral-Calendar-tableCell.is-outsideMonth {
   pointer-events: none;
   opacity: .2;
 }
 
 // @spectrum
-.coral3-Calendar-date.is-outsideMonth {
+._coral-Calendar-date.is-outsideMonth {
   visibility: visible;
 }

@@ -18,7 +18,7 @@
 import {ComponentMixin} from '/coralui-mixin-component';
 import {transform} from '/coralui-util';
 
-const CLASSNAME = 'coral3-CharacterCount';
+const CLASSNAME = '_coral-CharacterCount';
 
 /**
  Enumeration for {@link CharacterCount} targets.

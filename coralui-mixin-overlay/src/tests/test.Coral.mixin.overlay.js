@@ -650,7 +650,7 @@ describe('Coral.mixin._overlay', function() {
       overlay2.open = true;
     
       helpers.next(function() {
-        document.querySelector('.coral3-Underlay').click();
+        document.querySelector('._coral-Underlay').click();
       
         expect(overlay1.backdropClickedCallback.callCount).to.equal(1);
         expect(overlay2.backdropClickedCallback.callCount).to.equal(1);
@@ -783,7 +783,7 @@ describe('Coral.mixin._overlay', function() {
         overlay2.open = true;
       
         helpers.next(function() {
-          var backdrop = document.querySelector('.coral3-Underlay');
+          var backdrop = document.querySelector('._coral-Underlay');
           expect(backdrop).to.not.be.null;
         
           // Make sure the top overlay is above the bottom overlay
@@ -813,7 +813,7 @@ describe('Coral.mixin._overlay', function() {
         overlay.open = true;
       
         helpers.next(function() {
-          var backdrop = document.querySelector('.coral3-Underlay');
+          var backdrop = document.querySelector('._coral-Underlay');
           expect(backdrop).to.not.be.null;
         
           // Make sure the backdrop is visible
@@ -838,7 +838,7 @@ describe('Coral.mixin._overlay', function() {
         overlay.open = true;
       
         helpers.next(function() {
-          var backdrop = document.querySelector('.coral3-Underlay');
+          var backdrop = document.querySelector('._coral-Underlay');
           expect(backdrop).to.not.be.null;
         
           // Make sure the backdrop is visible
@@ -870,7 +870,7 @@ describe('Coral.mixin._overlay', function() {
         overlay2.open = true;
       
         helpers.next(function() {
-          var backdrop = document.querySelector('.coral3-Underlay');
+          var backdrop = document.querySelector('._coral-Underlay');
           expect(backdrop).to.not.be.null;
         
           // Make sure the backdrop is visible
@@ -918,7 +918,7 @@ describe('Coral.mixin._overlay', function() {
         overlay2.open = true;
       
         helpers.next(function() {
-          var backdrop = document.querySelector('.coral3-Underlay');
+          var backdrop = document.querySelector('._coral-Underlay');
           expect(backdrop).to.not.be.null;
         
           // Make sure the backdrop is open
@@ -969,7 +969,7 @@ describe('Coral.mixin._overlay', function() {
         overlay3.open = true;
       
         helpers.next(function() {
-          var backdrop = document.querySelector('.coral3-Underlay');
+          var backdrop = document.querySelector('._coral-Underlay');
           expect(backdrop).to.not.be.null;
         
           // Make sure the backdrop is visible
@@ -1036,7 +1036,7 @@ describe('Coral.mixin._overlay', function() {
         helpers.target.appendChild(overlay3);
       
         helpers.next(function() {
-          var backdrop = document.querySelector('.coral3-Underlay');
+          var backdrop = document.querySelector('._coral-Underlay');
           expect(backdrop).to.not.be.null;
         
           // Make sure the backdrop is visible
@@ -1061,7 +1061,7 @@ describe('Coral.mixin._overlay', function() {
         overlay.open = true;
       
         helpers.next(function() {
-          var backdrop = document.querySelector('.coral3-Underlay');
+          var backdrop = document.querySelector('._coral-Underlay');
           expect(backdrop).to.not.be.null;
         
           // Make sure the backdrop is visible
@@ -1108,7 +1108,7 @@ describe('Coral.mixin._overlay', function() {
             overlay2.open = false;
           
             helpers.next(function() {
-              var backdrop = document.querySelector('.coral3-Underlay');
+              var backdrop = document.querySelector('._coral-Underlay');
               expect(backdrop).to.not.be.null;
             
               expect(zIndex(overlay1)).to.be.greaterThan(zIndex(backdrop));

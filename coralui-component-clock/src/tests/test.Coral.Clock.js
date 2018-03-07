@@ -330,7 +330,7 @@ describe('Coral.Clock', function() {
         });
   
         it('should be possible to set the variant', function() {
-          expect(el.classList.contains('coral3-Clock--quiet')).to.be.false;
+          expect(el.classList.contains('_coral-Clock--quiet')).to.be.false;
   
           expect(el.variant).to.equal(Coral.Clock.variant.DEFAULT, '"default" should be set');
   
@@ -346,7 +346,7 @@ describe('Coral.Clock', function() {
           expect(el._elements.minutes.variant).to.equal(Coral.Clock.variant.QUIET, '"quiet" should be set tp the minutes input variant');
           expect(el._elements.period.variant).to.equal(Coral.Clock.variant.QUIET, '"quiet" should be set tp the period input variant');
   
-          expect(el.classList.contains('coral3-Clock--quiet')).to.be.true;
+          expect(el.classList.contains('_coral-Clock--quiet')).to.be.true;
         });
       });
   

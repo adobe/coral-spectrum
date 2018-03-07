@@ -3,10 +3,10 @@ var labelId = Coral.commons.getUID();
 </js>
 <div handle="container">
   <label class="u-coral-screenReaderOnly" id="{{labelId}}">{{Coral.i18n.get('Search Organizations')}}</label>
-  <coral-search class="coral3-Shell-orgSwitcher-search" handle="search" placeholder="{{Coral.i18n.get('Search Organizations')}}" labelledby="{{labelId}}"></coral-search>
-  <div class="coral3-Shell-orgSwitcher-items" handle="items"></div>
-  <div class="coral3-Shell-orgSwitcher-resultMessage" handle="resultMessage" hidden>
-    <div class="coral3-Shell-orgSwitcher-resultMessage-container">
+  <coral-search class="_coral-Shell-orgSwitcher-search" handle="search" placeholder="{{Coral.i18n.get('Search Organizations')}}" labelledby="{{labelId}}"></coral-search>
+  <div class="_coral-Shell-orgSwitcher-items" handle="items"></div>
+  <div class="_coral-Shell-orgSwitcher-resultMessage" handle="resultMessage" hidden>
+    <div class="_coral-Shell-orgSwitcher-resultMessage-container">
       <h2 class="coral-Heading coral-Heading--2">{{Coral.i18n.get('No organizations found.')}}</h2>
     </div>
   </div>

@@ -27,7 +27,7 @@ const arrowMap = {
   bottom: 'bottom'
 };
 
-const CLASSNAME = 'coral3-Tooltip';
+const CLASSNAME = '_coral-Tooltip';
 
 // This is in JS as we're setting this to induce wrapping before collision calculations
 const TOOLTIP_ARROW_SIZE = 12;
@@ -362,7 +362,7 @@ class Tooltip extends Overlay {
     if (!this._variant) { this.variant = variant.DEFAULT; }
   
     // Support cloneNode
-    const tip = this.querySelector('.coral3-Tooltip-tip');
+    const tip = this.querySelector('._coral-Tooltip-tip');
     if (tip) {
       tip.remove();
     }

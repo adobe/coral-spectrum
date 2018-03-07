@@ -22,7 +22,7 @@ import '/coralui-component-textfield';
 import base from '../templates/base';
 import {transform, commons} from '/coralui-util';
 
-const CLASSNAME = 'coral3-Stepper';
+const CLASSNAME = '_coral-Stepper';
 let clearLiveRegionTimeout;
 const LIVEREGION_TIMEOUT_DELAY = 3000;
 const MSPOINTER_TYPE_MOUSE = 0x00000004;

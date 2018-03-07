@@ -31,7 +31,7 @@ import {SelectableCollection} from '/coralui-collection';
 import {getCellByIndex, getColumns, getCells, getContentCells, getHeaderCells, getRows, getSiblingsOf, getIndexOf, divider} from './TableUtil';
 import {transform, validate, commons, Keys} from '/coralui-util';
 
-const CLASSNAME = 'coral3-Table-wrapper';
+const CLASSNAME = '_coral-Table-wrapper';
 
 /**
  Enumeration for {@link Table} variants
@@ -559,7 +559,7 @@ class Table extends ComponentMixin(HTMLTableElement) {
       
       // The row placeholder indicating where the dragged element will be dropped
       const placeholder = row.cloneNode(true);
-      placeholder.classList.add('coral3-Table-row--placeholder');
+      placeholder.classList.add('_coral-Table-row--placeholder');
       
       // Prepare the row position before inserting its placeholder
       row.style.top = `${rowBoundingClientRect.top - tableBoundingClientRect.top}px`;
@@ -2251,8 +2251,8 @@ class Table extends ComponentMixin(HTMLTableElement) {
         const columnIndex = getIndexOf(column) + 1;
         
         this._elements.hiddenStyle.innerHTML += `
-           #${this.id} .coral3-Table-cell:nth-child(${columnIndex}),
-           #${this.id} .coral3-Table-headerCell:nth-child(${columnIndex}) {
+           #${this.id} ._coral-Table-cell:nth-child(${columnIndex}),
+           #${this.id} ._coral-Table-headerCell:nth-child(${columnIndex}) {
              display: none;
            }
         `;
@@ -2275,8 +2275,8 @@ class Table extends ComponentMixin(HTMLTableElement) {
       const columnIndex = getIndexOf(column) + 1;
       
       this._elements.alignmentStyle.innerHTML += `
-         #${this.id} .coral3-Table-cell:nth-child(${columnIndex}),
-         #${this.id} .coral3-Table-headerCell:nth-child(${columnIndex}) {
+         #${this.id} ._coral-Table-cell:nth-child(${columnIndex}),
+         #${this.id} ._coral-Table-headerCell:nth-child(${columnIndex}) {
            text-align: ${columnAlignment};
          }
       `;
@@ -2336,7 +2336,7 @@ class Table extends ComponentMixin(HTMLTableElement) {
     
     // On condition handle attribute is set
     if (cell && cell.hasAttribute('coral-table-rowselect')) {
-      cell.classList.add('coral3-Table-cell--check');
+      cell.classList.add('_coral-Table-cell--check');
       
       cell.removeAttribute('coral-table-rowselect');
   
@@ -2468,7 +2468,7 @@ class Table extends ComponentMixin(HTMLTableElement) {
     this.columns = columns;
     
     // cloneNode support
-    const wrapper = this.querySelector('.coral3-Table-wrapper-container');
+    const wrapper = this.querySelector('._coral-Table-wrapper-container');
     const object = this.querySelector('object');
     
     if (wrapper) { wrapper.remove(); }

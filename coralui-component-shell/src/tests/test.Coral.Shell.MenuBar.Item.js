@@ -174,7 +174,7 @@ describe('Coral.Shell.MenuBar.Item', function() {
       it('should set the iconVariant class', function() {
         const el = helpers.build(window.__html__['Coral.Shell.MenuBar.Item.circle.html']);
         expect(el.iconVariant).to.equal('circle');
-        expect(el.classList.contains('coral3-Shell-menubar-item--circle')).to.be.true;
+        expect(el.classList.contains('_coral-Shell-menubar-item--circle')).to.be.true;
       });
     });
 

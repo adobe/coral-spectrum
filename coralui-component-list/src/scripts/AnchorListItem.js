@@ -18,7 +18,7 @@
 import {ComponentMixin} from '/coralui-mixin-component';
 import {ListItemMixin} from '/coralui-mixin-list';
 
-const CLASSNAME = 'coral3-AnchorList-item';
+const CLASSNAME = '_coral-AnchorList-item';
 
 /**
  @class Coral.AnchorList.Item

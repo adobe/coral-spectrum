@@ -232,14 +232,14 @@ describe('Coral.Progress', function() {
         var progress = helpers.build(new Coral.Progress());
   
         progress.size = Coral.Progress.size.SMALL;
-        expect(progress.classList.contains('coral3-Loader--bar--small')).to.be.true;
+        expect(progress.classList.contains('_coral-Loader--bar--small')).to.be.true;
       });
   
       it('should accept lowercase size values', function() {
         var progress = helpers.build(new Coral.Progress());
         
         progress.size = 's';
-        expect(progress.classList.contains('coral3-Loader--bar--small')).to.be.true;
+        expect(progress.classList.contains('_coral-Loader--bar--small')).to.be.true;
       });
     });
     

@@ -20,7 +20,7 @@ import MultifieldCollection from './MultifieldCollection';
 import '/coralui-component-textfield';
 import {commons} from '/coralui-util';
 
-const CLASSNAME = 'coral3-Multifield';
+const CLASSNAME = '_coral-Multifield';
 const IS_DRAGGING_CLASS = 'is-dragging';
 const IS_AFTER_CLASS = 'is-after';
 const IS_BEFORE_CLASS = 'is-before';
@@ -49,7 +49,7 @@ class Multifield extends ComponentMixin(HTMLElement) {
       'coral-dragaction:dragend coral-multifield-item': '_onDragEnd',
   
       'click [coral-multifield-add]': '_onAddItemClick',
-      'click .coral3-Multifield-remove': '_onRemoveItemClick'
+      'click ._coral-Multifield-remove': '_onRemoveItemClick'
     });
     
     // Templates

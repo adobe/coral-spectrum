@@ -18,7 +18,7 @@
 import {ComponentMixin} from '/coralui-mixin-component';
 import {transform} from '/coralui-util';
 
-const CLASSNAME = 'coral3-Shell-workspaces-workspace';
+const CLASSNAME = '_coral-Shell-workspaces-workspace';
 
 /**
  @class Coral.Shell.Workspace

@@ -29,7 +29,7 @@ import './ColorInputSwatches';
 import base from '../templates/base';
 import {validate, transform, commons, i18n} from '/coralui-util';
 
-const CLASSNAME = 'coral3-ColorInput';
+const CLASSNAME = '_coral-ColorInput';
 
 /**
  Enumeration for {@link ColorInput} variants.
@@ -126,7 +126,7 @@ class ColorInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._delegateEvents(commons.extend(this._events, {
       'coral-overlay:beforeopen': '_beforeOverlayOpen',
       'coral-overlay:close': '_onOverlayClose',
-      'key:down .coral3-ColorInput-input:not([readonly])': '_onKeyDown',
+      'key:down ._coral-ColorInput-input:not([readonly])': '_onKeyDown',
       'key:down [handle="colorPreview"]': '_onKeyDown',
       'click [handle="colorPreview"]': '_onColorPreviewClick',
       'global:click': '_onGlobalClick',
@@ -197,12 +197,12 @@ class ColorInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._reflectAttribute('variant', this._variant);
     
     if (this._variant === variant.SWATCH) {
-      this.classList.add('coral3-ColorInput--swatch');
+      this.classList.add('_coral-ColorInput--swatch');
       this._elements.input.setAttribute('tabindex', -1);
       this._elements.colorPreview.removeAttribute('tabindex');
     }
     else {
-      this.classList.remove('coral3-ColorInput--swatch');
+      this.classList.remove('_coral-ColorInput--swatch');
       this._elements.input.removeAttribute('tabindex');
       this._elements.colorPreview.setAttribute('tabindex', -1);
     }
@@ -665,13 +665,13 @@ class ColorInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   _showOrHideView(view, hide) {
     view.hidden = hide;
     //Remove both classes and add only the required one
-    this._elements.overlay.classList.remove('coral3-ColorInput-onlySwatchesView', 'coral3-ColorInput-onlyPropertiesView');
+    this._elements.overlay.classList.remove('_coral-ColorInput-onlySwatchesView', '_coral-ColorInput-onlyPropertiesView');
     
     if (!this._elements.propertiesView.hidden && this._elements.swatchesView.hidden) {
-      this._elements.overlay.classList.add('coral3-ColorInput-onlyPropertiesView');
+      this._elements.overlay.classList.add('_coral-ColorInput-onlyPropertiesView');
     }
     else if (this._elements.propertiesView.hidden && !this._elements.swatchesView.hidden) {
-      this._elements.overlay.classList.add('coral3-ColorInput-onlySwatchesView');
+      this._elements.overlay.classList.add('_coral-ColorInput-onlySwatchesView');
     }
     
     // Update accessibility label for colorPreview button when only swatches are shown
@@ -803,7 +803,7 @@ class ColorInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // update color preview
     const currentColor = this.valueAsColor;
     this._elements.colorPreview.style.backgroundColor = currentColor ? currentColor.rgbaValue : '';
-    this.classList.toggle('coral3-ColorInput--novalue', this.value === '');
+    this.classList.toggle('_coral-ColorInput--novalue', this.value === '');
   }
   
   /**

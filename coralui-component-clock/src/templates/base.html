@@ -1,9 +1,9 @@
 <input type="hidden" name="" handle="input">
 <time handle="valueAsText" id="{{Coral.commons.getUID()}}" hidden></time>
-<input is="coral-textfield" id="{{Coral.commons.getUID()}}" type="number" min="0" max="23" class="coral3-Clock-hour" handle="hours" aria-label="{{Coral.i18n.get('Hours')}}">
-<span class="coral3-Clock-divider" handle="divider">:</span>
-<input is="coral-textfield" type="number" min="0" max="59" class="coral3-Clock-minute" handle="minutes" aria-label="{{Coral.i18n.get('Minutes')}}">
-<coral-select handle="period" class="coral3-Clock-period" hidden aria-label="{{Coral.i18n.get('AM/PM')}}">
+<input is="coral-textfield" id="{{Coral.commons.getUID()}}" type="number" min="0" max="23" class="_coral-Clock-hour" handle="hours" aria-label="{{Coral.i18n.get('Hours')}}">
+<span class="_coral-Clock-divider" handle="divider">:</span>
+<input is="coral-textfield" type="number" min="0" max="59" class="_coral-Clock-minute" handle="minutes" aria-label="{{Coral.i18n.get('Minutes')}}">
+<coral-select handle="period" class="_coral-Clock-period" hidden aria-label="{{Coral.i18n.get('AM/PM')}}">
   <coral-select-item value="am"></coral-select-item>
   <coral-select-item value="pm"></coral-select-item>
 </coral-select>

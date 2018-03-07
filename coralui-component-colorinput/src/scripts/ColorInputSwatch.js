@@ -22,7 +22,7 @@ import '/coralui-component-button';
 import colorButton from '../templates/colorButton';
 import {i18n, transform} from '/coralui-util';
 
-const CLASSNAME = 'coral3-ColorInput-swatch';
+const CLASSNAME = '_coral-ColorInput-swatch';
 
 /**
  @class Coral.ColorInput.Swatch
@@ -108,7 +108,7 @@ class ColorInputSwatch extends ColorInputAbstractSubviewMixin(ComponentMixin(HTM
       this.setAttribute('aria-value', hexColorValue);
     }
     else {
-      this._elements.colorButton.classList.add('coral3-ColorInput-swatch-novalue');
+      this._elements.colorButton.classList.add('_coral-ColorInput-swatch-novalue');
       this._elements.colorButton.label.textContent = i18n.get('unset');
       this.setAttribute('aria-value', '');
     }

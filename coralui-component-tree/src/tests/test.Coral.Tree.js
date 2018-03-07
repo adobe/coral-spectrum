@@ -698,9 +698,9 @@ describe('Coral.Tree', function() {
     });
     
     it('should have right classes set', function() {
-      expect(el.classList.contains('coral3-TreeView')).to.be.true;
+      expect(el.classList.contains('_coral-TreeView')).to.be.true;
       var item = el.items.getAll()[0];
-      expect(item.classList.contains('coral3-TreeView-item')).to.be.true;
+      expect(item.classList.contains('_coral-TreeView-item')).to.be.true;
     });
     
     it('should generate header and subtree for tree item with right classes', function() {
@@ -709,8 +709,8 @@ describe('Coral.Tree', function() {
       var subTree = item._elements.subTreeContainer;
       expect(header).not.to.be.null;
       expect(subTree).not.to.be.null;
-      expect(header.classList.contains('coral3-TreeView-link')).to.be.true;
-      expect(subTree.classList.contains('coral3-TreeView')).to.be.true;
+      expect(header.classList.contains('_coral-TreeView-link')).to.be.true;
+      expect(subTree.classList.contains('_coral-TreeView')).to.be.true;
     });
   });
   

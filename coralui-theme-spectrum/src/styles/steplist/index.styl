@@ -16,22 +16,22 @@
  */
 
 // Support hybrid mode
-.coral3-Steplist--hybrid {
-  .coral3-Steplist-label {
+._coral-Steplist--hybrid {
+  ._coral-Steplist-label {
     width: auto;
     white-space: nowrap;
   }
 
-  .coral3-Steplist-item:last-child {
+  ._coral-Steplist-item:last-child {
     // Center last step in hybrid mode
-    .coral3-Steplist-label {
+    ._coral-Steplist-label {
       left: 100%;
       transform: translateX(-50%);
     }
   }
 
-  .coral3-Steplist-item.is-selected {
-    .coral3-Steplist-label:after {
+  ._coral-Steplist-item.is-selected {
+    ._coral-Steplist-label:after {
       // Display "(stepX/stepTotal)"
       content: attr(data-coral-step-index);
     }

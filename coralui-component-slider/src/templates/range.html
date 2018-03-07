@@ -3,20 +3,20 @@
   data.uidMax = Coral.commons.getUID();
 </js>
 
-<div class="coral3-Slider-labelContainer" handle="label">
-  <label class="coral3-Slider-label" handle="labelContent"></label>
-  <label class="coral3-Slider-value" handle="labelValue" hidden></label>
+<div class="_coral-Slider-labelContainer" handle="label">
+  <label class="_coral-Slider-label" handle="labelContent"></label>
+  <label class="_coral-Slider-value" handle="labelValue" hidden></label>
 </div>
-<div class="coral3-Slider-controls" role="presentation" handle="controls">
-  <div class="coral3-Slider-track">
-    <div class="coral3-Slider-track--fill" handle="fillHandle" hidden></div>
+<div class="_coral-Slider-controls" role="presentation" handle="controls">
+  <div class="_coral-Slider-track">
+    <div class="_coral-Slider-track--fill" handle="fillHandle" hidden></div>
   </div>
-  <div class="coral3-Slider-handle" handle="leftHandle">
+  <div class="_coral-Slider-handle" handle="leftHandle">
     <label handle="leftLabel" class="u-coral-screenReaderOnly" id="{{data.uidMin}}-label" for="{{data.uidMin}}" aria-hidden="true">Minimum</label>
-    <input aria-orientation="horizontal" handle="leftInput" value="1" type="range" class="coral3-Slider-input" id="{{data.uidMin}}">
+    <input aria-orientation="horizontal" handle="leftInput" value="1" type="range" class="_coral-Slider-input" id="{{data.uidMin}}">
   </div>
-  <div class="coral3-Slider-handle" handle="rightHandle">
+  <div class="_coral-Slider-handle" handle="rightHandle">
     <label handle="rightLabel" class="u-coral-screenReaderOnly" id="{{data.uidMax}}-label" for="{{data.uidMax}}" aria-hidden="true">Maximum</label>
-    <input aria-orientation="horizontal" handle="rightInput" value="100" type="range" class="coral3-Slider-input" id="{{data.uidMax}}">
+    <input aria-orientation="horizontal" handle="rightInput" value="100" type="range" class="_coral-Slider-input" id="{{data.uidMax}}">
   </div>
 </div>

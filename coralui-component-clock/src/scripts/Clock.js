@@ -49,7 +49,7 @@ const variant = {
   QUIET: 'quiet'
 };
 
-const CLASSNAME = 'coral3-Clock';
+const CLASSNAME = '_coral-Clock';
 
 // builds an array containing all possible variant classnames. this will be used to remove classnames when the variant
 // changes

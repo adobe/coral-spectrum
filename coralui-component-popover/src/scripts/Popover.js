@@ -20,7 +20,7 @@ import {Icon} from '/coralui-component-icon';
 import base from '../templates/base';
 import {commons, transform, validate} from '/coralui-util';
 
-const CLASSNAME = 'coral3-Popover';
+const CLASSNAME = '_coral-Popover';
 
 const OFFSET = 5;
 
@@ -76,7 +76,7 @@ const variant = {
 const ALL_VARIANT_CLASSES = [];
 for (const variantValue in variant) {
   if (variantValue !== '_CUSTOM') {
-    ALL_VARIANT_CLASSES.push(`coral3-Dialog--${variant[variantValue]}`);
+    ALL_VARIANT_CLASSES.push(`_coral-Dialog--${variant[variantValue]}`);
   }
 }
 
@@ -240,7 +240,7 @@ class Popover extends Overlay {
     }
     else {
       // Set new variant class
-      this.classList.add(`coral3-Dialog--${this._variant}`);
+      this.classList.add(`_coral-Dialog--${this._variant}`);
       
       // ARIA
       this.setAttribute('role', 'alertdialog');
@@ -330,8 +330,8 @@ class Popover extends Overlay {
     
     // Inject the SVG icon
     if (variantValue !== variant.DEFAULT && variantValue !== variant._CUSTOM) {
-      this._elements.headerWrapper.insertAdjacentHTML('beforeend', Icon._renderSVG(`spectrum-css-icon-Alert${capitalize(variantValue)}`, ['coral3-Dialog-typeIcon']));
-      this._elements.icon = this.querySelector('.coral3-Dialog-typeIcon');
+      this._elements.headerWrapper.insertAdjacentHTML('beforeend', Icon._renderSVG(`spectrum-css-icon-Alert${capitalize(variantValue)}`, ['_coral-Dialog-typeIcon']));
+      this._elements.icon = this.querySelector('._coral-Dialog-typeIcon');
     }
   }
   
@@ -471,7 +471,7 @@ class Popover extends Overlay {
     }, this);
   
     // Support cloneNode
-    const template = this.querySelectorAll('.coral3-Dialog-header, .coral3-Dialog-closeButton, .coral3-Popover-tip');
+    const template = this.querySelectorAll('._coral-Dialog-header, ._coral-Dialog-closeButton, ._coral-Popover-tip');
     for (let i = 0; i < template.length; i++) {
       template[i].remove();
     }

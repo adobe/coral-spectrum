@@ -22,13 +22,13 @@ describe('Coral.Wait', function() {
     it('should be possible using new', function() {
       var wait = helpers.build(new Coral.Wait());
       
-      expect(wait.classList.contains('coral3-Loader')).to.be.true;
+      expect(wait.classList.contains('_coral-Loader')).to.be.true;
       expect(wait.hasAttribute('centered')).to.be.false;
       expect(wait.hasAttribute('variant')).to.be.true;
       expect(wait.hasAttribute('size')).to.be.true;
-      expect(wait.classList.contains('coral3-Loader--centered')).to.be.false;
-      expect(wait.classList.contains('coral3-Loader--large')).to.be.false;
-      expect(wait.classList.contains('coral3-Loader--medium')).to.be.false;
+      expect(wait.classList.contains('_coral-Loader--centered')).to.be.false;
+      expect(wait.classList.contains('_coral-Loader--large')).to.be.false;
+      expect(wait.classList.contains('_coral-Loader--medium')).to.be.false;
     });
   });
   
@@ -44,7 +44,7 @@ describe('Coral.Wait', function() {
         var wait = helpers.build(new Coral.Wait());
         wait.centered = true;
         
-        expect(wait.classList.contains('coral3-Loader--centered')).to.be.true;
+        expect(wait.classList.contains('_coral-Loader--centered')).to.be.true;
       });
   
       it('should not be centered', function() {
@@ -52,7 +52,7 @@ describe('Coral.Wait', function() {
         wait.centered = true;
         wait.centered = false;
   
-        expect(wait.classList.contains('coral3-Loader--centered')).to.be.false;
+        expect(wait.classList.contains('_coral-Loader--centered')).to.be.false;
       });
     });
     
@@ -67,14 +67,14 @@ describe('Coral.Wait', function() {
         var wait = new Coral.Wait();
         wait.size = Coral.Wait.size.LARGE;
         
-        expect(wait.classList.contains('coral3-Loader--large')).to.be.true;
+        expect(wait.classList.contains('_coral-Loader--large')).to.be.true;
       });
       
       it('can be set to small', function() {
         var wait = new Coral.Wait();
         wait.size = Coral.Wait.size.SMALL;
         
-        expect(wait.classList.contains('coral3-Loader--small')).to.be.true;
+        expect(wait.classList.contains('_coral-Loader--small')).to.be.true;
       });
     });
   
@@ -168,7 +168,7 @@ describe('Coral.Wait', function() {
         
         expect(wait.centered).to.be.false;
         expect(wait.hasAttribute('centered')).to.be.false;
-        expect(wait.classList.contains('coral3-Loader--centered')).to.be.false;
+        expect(wait.classList.contains('_coral-Loader--centered')).to.be.false;
       });
       
       it('should set centered', function() {
@@ -176,8 +176,8 @@ describe('Coral.Wait', function() {
         
         expect(wait.centered).to.be.true;
         expect(wait.getAttribute('centered')).to.equal('');
-        expect(wait.classList.contains('coral3-Loader')).to.be.true;
-        expect(wait.classList.contains('coral3-Loader--centered')).to.be.true;
+        expect(wait.classList.contains('_coral-Loader')).to.be.true;
+        expect(wait.classList.contains('_coral-Loader--centered')).to.be.true;
       });
       
       it('should still be centered', function() {
@@ -185,8 +185,8 @@ describe('Coral.Wait', function() {
   
         expect(wait.centered).to.be.true;
         expect(wait.hasAttribute('centered')).to.be.true;
-        expect(wait.classList.contains('coral3-Loader')).to.be.true;
-        expect(wait.classList.contains('coral3-Loader--centered')).to.be.true;
+        expect(wait.classList.contains('_coral-Loader')).to.be.true;
+        expect(wait.classList.contains('_coral-Loader--centered')).to.be.true;
       });
     });
     
@@ -196,27 +196,27 @@ describe('Coral.Wait', function() {
         var wait = helpers.build('<coral-wait></coral-wait>');
   
         expect(wait.size).to.equal(Coral.Wait.size.MEDIUM);
-        expect(wait.classList.contains('coral3-Loader')).to.be.true;
-        expect(wait.classList.contains('coral3-Loader--large')).to.be.false;
-        expect(wait.classList.contains('coral3-Loader--medium')).to.be.false;
+        expect(wait.classList.contains('_coral-Loader')).to.be.true;
+        expect(wait.classList.contains('_coral-Loader--large')).to.be.false;
+        expect(wait.classList.contains('_coral-Loader--medium')).to.be.false;
       });
       
       it('should be able to set to large', function() {
         var wait = helpers.build('<coral-wait size="L"></coral-wait>');
         
         expect(wait.size).to.equal(Coral.Wait.size.LARGE);
-        expect(wait.classList.contains('coral3-Loader--large')).to.be.true;
-        expect(wait.classList.contains('coral3-Loader--medium')).to.be.false;
-        expect(wait.classList.contains('coral3-Loader')).to.be.true;
+        expect(wait.classList.contains('_coral-Loader--large')).to.be.true;
+        expect(wait.classList.contains('_coral-Loader--medium')).to.be.false;
+        expect(wait.classList.contains('_coral-Loader')).to.be.true;
       });
       
       it('should be able to set to medium', function() {
         var wait = helpers.build('<coral-wait size="M"></coral-wait>');
         
         expect(wait.size).to.equal(Coral.Wait.size.MEDIUM);
-        expect(wait.classList.contains('coral3-Loader--large')).to.be.false;
-        expect(wait.classList.contains('coral3-Loader--small')).to.be.false;
-        expect(wait.classList.contains('coral3-Loader')).to.be.true;
+        expect(wait.classList.contains('_coral-Loader--large')).to.be.false;
+        expect(wait.classList.contains('_coral-Loader--small')).to.be.false;
+        expect(wait.classList.contains('_coral-Loader')).to.be.true;
       });
     });
     
@@ -227,7 +227,7 @@ describe('Coral.Wait', function() {
         
         expect(el.variant).to.equal(Coral.Wait.variant.DEFAULT);
         expect(el.getAttribute('variant')).to.equal(Coral.Wait.variant.DEFAULT);
-        expect(el.classList.contains('coral3-Loader')).to.be.true;
+        expect(el.classList.contains('_coral-Loader')).to.be.true;
       });
       
       it('should set the new variant', function() {
@@ -236,8 +236,8 @@ describe('Coral.Wait', function() {
         expect(el.variant).to.equal('monochrome');
         expect(el.variant).to.equal(Coral.Wait.variant.MONOCHROME);
         expect(el.getAttribute('variant')).to.equal('monochrome');
-        expect(el.classList.contains('coral3-Loader--fullpage')).to.be.true;
-        expect(el.classList.contains('coral3-Loader')).to.be.true;
+        expect(el.classList.contains('_coral-Loader--fullpage')).to.be.true;
+        expect(el.classList.contains('_coral-Loader')).to.be.true;
       });
       
       it('should not add class for empty variant', function() {
@@ -245,7 +245,7 @@ describe('Coral.Wait', function() {
   
         expect(el.variant).to.equal(Coral.Wait.variant.DEFAULT);
         expect(el.getAttribute('variant')).to.equal(Coral.Wait.variant.DEFAULT);
-        expect(el.classList.contains('coral3-Loader')).to.be.true;
+        expect(el.classList.contains('_coral-Loader')).to.be.true;
       });
       
       it('should not add class for invalid variant', function() {
@@ -253,16 +253,16 @@ describe('Coral.Wait', function() {
         
         expect(el.variant).to.equal(Coral.Wait.variant.DEFAULT);
         expect(el.getAttribute('variant')).to.equal(Coral.Wait.variant.DEFAULT);
-        expect(el.classList.contains('coral3-Loader')).to.be.true;
+        expect(el.classList.contains('_coral-Loader')).to.be.true;
       });
       
       it('should remove variant classnames when variant changes', function() {
         var el = helpers.build('<coral-wait variant="monochrome"></coral-wait>');
   
-        expect(el.classList.contains('coral3-Loader--fullpage')).to.be.true;
+        expect(el.classList.contains('_coral-Loader--fullpage')).to.be.true;
         el.variant = Coral.Wait.variant.DEFAULT;
         
-        expect(el.classList.contains('coral3-Loader--fullpage')).to.be.false;
+        expect(el.classList.contains('_coral-Loader--fullpage')).to.be.false;
       });
     });
   });

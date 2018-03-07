@@ -21,9 +21,9 @@ import {Collection} from '/coralui-collection';
 import base from '../templates/base';
 import {transform, validate, events, commons, Keys} from '/coralui-util';
 
-const CLASSNAME = 'coral3-Slider';
-const CLASSNAME_HANDLE = 'coral3-Slider-handle';
-const CLASSNAME_INPUT = 'coral3-Slider-input';
+const CLASSNAME = '_coral-Slider';
+const CLASSNAME_HANDLE = '_coral-Slider-handle';
+const CLASSNAME_INPUT = '_coral-Slider-input';
 
 /**
  Enumeration for {@link Slider} orientations.
@@ -54,14 +54,14 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     super();
   
     this._delegateEvents(commons.extend(this._events, {
-      'key:up .coral3-Slider-handle': '_handleKey',
-      'key:right .coral3-Slider-handle': '_handleKey',
-      'key:down .coral3-Slider-handle': '_handleKey',
-      'key:left .coral3-Slider-handle': '_handleKey',
-      'key:pageUp .coral3-Slider-handle': '_handleKey',
-      'key:pageDown .coral3-Slider-handle': '_handleKey',
-      'key:home .coral3-Slider-handle': '_handleKey',
-      'key:end .coral3-Slider-handle': '_handleKey',
+      'key:up ._coral-Slider-handle': '_handleKey',
+      'key:right ._coral-Slider-handle': '_handleKey',
+      'key:down ._coral-Slider-handle': '_handleKey',
+      'key:left ._coral-Slider-handle': '_handleKey',
+      'key:pageUp ._coral-Slider-handle': '_handleKey',
+      'key:pageDown ._coral-Slider-handle': '_handleKey',
+      'key:home ._coral-Slider-handle': '_handleKey',
+      'key:end ._coral-Slider-handle': '_handleKey',
       
       'input': '_onInputChangeHandler',
   
@@ -864,7 +864,7 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this.setAttribute('aria-orientation', 'horizontal');
   
     // Support cloneNode
-    const template = this.querySelectorAll('.coral3-Slider-labelContainer, .coral3-Slider-controls');
+    const template = this.querySelectorAll('._coral-Slider-labelContainer, ._coral-Slider-controls');
     for (let i = 0; i < template.length; i++) {
       template[i].remove();
     }

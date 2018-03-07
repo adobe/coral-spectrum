@@ -18,7 +18,7 @@
 import {ComponentMixin} from '/coralui-mixin-component';
 import {Collection} from '/coralui-collection';
 
-const CLASSNAME = 'coral3-Shell-menubar';
+const CLASSNAME = '_coral-Shell-menubar';
 
 /**
  @class Coral.Shell.MenuBar

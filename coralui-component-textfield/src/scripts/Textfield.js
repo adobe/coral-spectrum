@@ -35,7 +35,7 @@ const variant = {
 };
 
 // the textfield's base classname
-const CLASSNAME = 'coral3-Textfield';
+const CLASSNAME = '_coral-Textfield';
 
 // Builds a string containing all possible variant classnames. This will be used to remove classnames when the variant
 // changes

@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-const CLASSNAME = 'coral3-Tooltip-label';
+const CLASSNAME = '_coral-Tooltip-label';
 
 /**
  @class Coral.Tooltip.Content

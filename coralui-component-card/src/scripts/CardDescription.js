@@ -17,7 +17,7 @@
 
 import {ComponentMixin} from '/coralui-mixin-component';
 
-const CLASSNAME = 'coral3-Card-description';
+const CLASSNAME = '_coral-Card-description';
 
 /**
  @class Coral.Card.Description

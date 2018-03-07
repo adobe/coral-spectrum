@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-const CLASSNAME = 'coral3-Dialog-footer';
+const CLASSNAME = '_coral-Dialog-footer';
 
 /**
  @class Coral.Dialog.Footer

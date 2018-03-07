@@ -21,7 +21,7 @@ describe('Coral.StepList', function() {
 
   function testDefaultInstance(el) {
     expect(el.getAttribute('aria-multiselectable')).to.equal('false');
-    expect(el.classList.contains('coral3-Steplist')).to.be.true;
+    expect(el.classList.contains('_coral-Steplist')).to.be.true;
     expect(el.selectedItem).to.be.null;
   }
 

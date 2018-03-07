@@ -19,7 +19,7 @@ import {ComponentMixin} from '/coralui-mixin-component';
 import {DragAction} from '/coralui-dragaction';
 import {transform, commons} from '/coralui-util';
 
-const CLASSNAME = 'coral3-Masonry-item';
+const CLASSNAME = '_coral-Masonry-item';
 
 /**
  @class Coral.Masonry.Item

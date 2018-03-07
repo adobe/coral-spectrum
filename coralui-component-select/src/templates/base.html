@@ -2,15 +2,15 @@
   var buttonId = Coral.commons.getUID();
   var listId = Coral.commons.getUID();
 </js>
-<button variant="_custom" iconposition="right" handle="button" type="button" is="coral-button" role="combobox" aria-expanded="false" aria-haspopup="true" id="{{buttonId}}" aria-controls="{{listId}}" aria-owns="{{listId}}" class="coral3-Button--dropdown coral3-Dropdown-trigger">
-  <coral-button-label class="coral3-Dropdown-label" handle="label" aria-readonly="true">&#x200b;</coral-button-label>
-  <coral-icon icon="alert" hidden handle="invalidIcon" class="coral3-Dropdown-invalidIcon"></coral-icon>
+<button variant="_custom" iconposition="right" handle="button" type="button" is="coral-button" role="combobox" aria-expanded="false" aria-haspopup="true" id="{{buttonId}}" aria-controls="{{listId}}" aria-owns="{{listId}}" class="_coral-Button--dropdown _coral-Dropdown-trigger">
+  <coral-button-label class="_coral-Dropdown-label" handle="label" aria-readonly="true">&#x200b;</coral-button-label>
+  <coral-icon icon="alert" hidden handle="invalidIcon" class="_coral-Dropdown-invalidIcon"></coral-icon>
 </button>
 <js>
   // Don't wait for button MO to pick up the label
   this.button._elements.label = this.label;
   // Render invalid icon
-  this.button.insertAdjacentHTML('beforeend', Coral.Icon._renderSVG('spectrum-css-icon-SelectDownChevron', ['coral3-Dropdown-icon']));
+  this.button.insertAdjacentHTML('beforeend', Coral.Icon._renderSVG('spectrum-css-icon-SelectDownChevron', ['_coral-Dropdown-icon']));
 </js>
 <coral-popover variant="_custom" handle="overlay" placement="bottom" collision="fit" trapfocus="on" focusonshow="on" target="#{{buttonId}}" role="presentation">
   <js>
@@ -21,5 +21,5 @@
   <coral-selectlist style="{{maxHeight}}" handle="list" role="listbox" id="{{listId}}"></coral-selectlist>
 </coral-popover>
 <input handle="input" type="hidden">
-<select handle="nativeSelect" class="coral3-Dropdown-select" tabindex="-1"></select>
-<coral-taglist handle="taglist" class="coral3-Dropdown-tagList"></coral-taglist>
+<select handle="nativeSelect" class="_coral-Dropdown-select" tabindex="-1"></select>
+<coral-taglist handle="taglist" class="_coral-Dropdown-tagList"></coral-taglist>

@@ -6,7 +6,7 @@ describe('Coral.Masonry.Item', function() {
   });
 
   function testInstance(item) {
-    expect(item.classList.contains('coral3-Masonry-item')).to.be.true;
+    expect(item.classList.contains('_coral-Masonry-item')).to.be.true;
     expect(item.getAttribute('tabindex')).to.equal('-1');
   }
 

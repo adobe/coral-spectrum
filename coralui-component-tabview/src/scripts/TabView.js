@@ -37,7 +37,7 @@ const orientation = {
 };
 
 // the tabview's base classname
-const CLASSNAME = 'coral3-TabView';
+const CLASSNAME = '_coral-TabView';
 
 /**
  @class Coral.TabView

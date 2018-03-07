@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-const CLASSNAME = 'coral3-Dialog-title';
+const CLASSNAME = '_coral-Dialog-title';
 
 /**
  @class Coral.Dialog.Header

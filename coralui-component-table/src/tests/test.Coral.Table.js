@@ -57,12 +57,12 @@ describe('Coral.Table', function() {
   describe('Instantiation', function() {
     it('should be possible using new', function() {
       const el = helpers.build(new Coral.Table());
-      expect(el.classList.contains('coral3-Table-wrapper')).to.be.true;
+      expect(el.classList.contains('_coral-Table-wrapper')).to.be.true;
     });
   
     it('should be possible using document.createElement', function() {
       const el = helpers.build(document.createElement('table', {is: 'coral-table'}));
-      expect(el.classList.contains('coral3-Table-wrapper')).to.be.true;
+      expect(el.classList.contains('_coral-Table-wrapper')).to.be.true;
     });
   
     it('should be possible to clone using markup', function() {
@@ -243,7 +243,7 @@ describe('Coral.Table', function() {
       it('should have a quiet variant', function() {
         const el = new Coral.Table();
         el.variant = Coral.Table.variant.QUIET;
-        expect(el.classList.contains('coral3-Table-wrapper--quiet')).to.be.true;
+        expect(el.classList.contains('_coral-Table-wrapper--quiet')).to.be.true;
       });
     });
   
@@ -1342,7 +1342,7 @@ describe('Coral.Table', function() {
         }));
         
         expect(row.dragAction).to.be.undefined;
-        expect(table.querySelector('.coral3-Table-row--placeholder')).to.be.null;
+        expect(table.querySelector('._coral-Table-row--placeholder')).to.be.null;
       });
       
       // @flaky
@@ -1913,11 +1913,11 @@ describe('Coral.Table', function() {
         var table = helpers.build(window.__html__['Coral.Table.orderable.row.html']);
     
         table.on('coral-table:beforeroworder', function() {
-          expect(table.querySelector('.coral3-Table-row--placeholder')).to.be.null;
+          expect(table.querySelector('._coral-Table-row--placeholder')).to.be.null;
         });
     
         table.on('coral-table:roworder', function() {
-          expect(table.querySelector('.coral3-Table-row--placeholder')).to.be.null;
+          expect(table.querySelector('._coral-Table-row--placeholder')).to.be.null;
           done();
         });
     
@@ -2175,7 +2175,7 @@ describe('Coral.Table', function() {
       
         // Because of debouncing
         window.setTimeout(function() {
-          expect(table.classList.contains('coral3-Table-wrapper--sticky')).to.be.true;
+          expect(table.classList.contains('_coral-Table-wrapper--sticky')).to.be.true;
         
           getHeaderCells(table.head.rows[0]).forEach(function(headerCell) {
             var computedStyle = window.getComputedStyle(headerCell);

@@ -40,8 +40,8 @@ const ActionBarContainerMixin = (superClass) => class extends superClass {
       'coral-overlay:beforeclose [handle="popover"]': '_onOverlayBeforeClose',
   
       // Accessibility
-      'capture:focus .coral3-ActionBar-button:not([disabled])': '_onItemFocusIn',
-      'capture:blur .coral3-ActionBar-button:not([disabled])': '_onItemFocusOut'
+      'capture:focus ._coral-ActionBar-button:not([disabled])': '_onItemFocusIn',
+      'capture:blur ._coral-ActionBar-button:not([disabled])': '_onItemFocusOut'
     });
     
     // Templates
@@ -118,14 +118,14 @@ const ActionBarContainerMixin = (superClass) => class extends superClass {
   _styleItem(item) {
     const button = item.querySelector('button[is="coral-button"]') || item.querySelector('a[is="coral-anchorbutton"]');
     if (button) {
-      button.classList.add('coral3-ActionBar-button');
+      button.classList.add('_coral-ActionBar-button');
       
       const oldVariant = button.getAttribute('variant');
       if (oldVariant === Button.variant._CUSTOM) {
         return;
       }
       
-      const newVariant = oldVariant === Button.variant.QUIET ? 'coral3-Button--quiet--action' : 'coral3-Button--action';
+      const newVariant = oldVariant === Button.variant.QUIET ? '_coral-Button--quiet--action' : '_coral-Button--action';
       button.setAttribute('variant', Button.variant._CUSTOM);
       button.classList.add(newVariant);
     }

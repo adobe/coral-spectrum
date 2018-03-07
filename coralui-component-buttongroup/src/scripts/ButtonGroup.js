@@ -56,7 +56,7 @@ const itemValueFromDOM = function(item) {
   return attr !== null ? attr : item.textContent.replace(/\s{2,}/g, ' ').trim();
 };
 
-const CLASSNAME = 'coral3-ButtonGroup';
+const CLASSNAME = '_coral-ButtonGroup';
 
 /**
  @class Coral.ButtonGroup
@@ -543,8 +543,8 @@ class ButtonGroup extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     item.variant = Button.variant._CUSTOM;
     
     // We need to add button group specific classes to style the button correctly
-    item.classList.add('coral3-ButtonGroup-item');
-    item.classList.add('coral3-Button--toggle');
+    item.classList.add('_coral-ButtonGroup-item');
+    item.classList.add('_coral-Button--toggle');
     
     if (this.selectionMode !== selectionMode.NONE) {
       if (this.selectionMode === selectionMode.SINGLE) {
@@ -588,8 +588,8 @@ class ButtonGroup extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     item._initialVariant = undefined;
     
     // We clear the classes that were added
-    item.classList.remove('coral3-ButtonGroup-item');
-    item.classList.remove('coral3-Button--toggle');
+    item.classList.remove('_coral-ButtonGroup-item');
+    item.classList.remove('_coral-Button--toggle');
     item.removeAttribute('role');
     
     const self = this;

@@ -21,7 +21,7 @@ import step from '../templates/step';
 import {transform, commons} from '/coralui-util';
 import getTarget from './getTarget';
 
-const CLASSNAME = 'coral3-Steplist-item';
+const CLASSNAME = '_coral-Steplist-item';
 
 /**
  @class Coral.Step

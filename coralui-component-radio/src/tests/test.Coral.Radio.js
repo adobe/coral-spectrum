@@ -13,7 +13,7 @@ describe('Coral.Radio', function() {
       ['disabled', 'readonly', 'invalid', 'required', 'checked'].forEach(function(attr) {
         expect(radio.hasAttribute(attr)).to.be.false;
       });
-      expect(radio.classList.contains('coral3-Radio')).to.be.true;
+      expect(radio.classList.contains('_coral-Radio')).to.be.true;
     });
     
     it('should be possible to clone the element using markup', function() {

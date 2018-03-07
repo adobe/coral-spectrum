@@ -7,7 +7,7 @@ describe('Coral.SelectList.Item', function() {
 
   describe('Instantiation', function() {
     function testDefaultInstance(el) {
-      expect(el.classList.contains('coral3-SelectList-item')).to.be.true;
+      expect(el.classList.contains('_coral-SelectList-item')).to.be.true;
       expect(el.getAttribute('role')).to.equal('option');
     }
 

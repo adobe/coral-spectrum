@@ -1,7 +1,7 @@
 describe('Coral.NumberInput', function() {
   function testInstance(instance) {
     expect(instance.getAttribute('role')).to.equal('group');
-    expect(instance.classList.contains('coral3-Stepper')).to.be.true;
+    expect(instance.classList.contains('_coral-Stepper')).to.be.true;
 
     expect(instance._elements.input).to.exist;
     expect(instance._elements.stepUp).to.exist;

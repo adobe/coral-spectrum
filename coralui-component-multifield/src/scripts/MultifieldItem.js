@@ -20,7 +20,7 @@ import '/coralui-component-button';
 import item from '../templates/item';
 import {DragAction} from '/coralui-dragaction';
 
-const CLASSNAME = 'coral3-Multifield-item';
+const CLASSNAME = '_coral-Multifield-item';
 
 /**
  @class Coral.Multifield.Item

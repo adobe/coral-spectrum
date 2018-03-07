@@ -27,7 +27,7 @@ $card-asset-lowResolution-padding = 16*$px;
 // coral-card-asset, coral-card-content, coral-card-overlay, coral-card-info, coral-card-propertylist
 
 // main container of the card
-.coral3-Card {
+._coral-Card {
   // used to place the banners and the stack
   position: relative;
   vertical-align: top;
@@ -39,13 +39,13 @@ $card-asset-lowResolution-padding = 16*$px;
   padding: 0;
 }
 
-.coral3-Card--fixedWidth {
+._coral-Card--fixedWidth {
   display: inline-block;
   width: $card-width;
 }
 
 // used in case it needs to show a stack underneath
-.coral3-Card--stacked {
+._coral-Card--stacked {
   margin-bottom: 8*$px;
 
   &:before,
@@ -75,15 +75,15 @@ $card-asset-lowResolution-padding = 16*$px;
 }
 
 // condensed modifier used to represent projects
-.coral3-Card--inverted,
-.coral3-Card--condensed {
+._coral-Card--inverted,
+._coral-Card--condensed {
 
   // fixes the size of the asset to match the card
   coral-card-asset {
     height: $card-condensed-height;
   }
 
-  .coral3-Card-wrapper {
+  ._coral-Card-wrapper {
     position: absolute;
     top: 0;
     height: $card-condensed-wrapper-height;
@@ -96,7 +96,7 @@ $card-asset-lowResolution-padding = 16*$px;
   }
 
   // hidden cause otherwise it would not fit
-  .coral3-Card-description {
+  ._coral-Card-description {
     display: none;
   }
 
@@ -113,28 +113,28 @@ $card-asset-lowResolution-padding = 16*$px;
   }
 }
 
-.coral3-Card--condensed {
-  .coral3-Card-wrapper {
+._coral-Card--condensed {
+  ._coral-Card-wrapper {
     border-bottom: $px solid;
   }
 }
 
-.coral3-Card--asset {
-  .coral3-Card-wrapper {
+._coral-Card--asset {
+  ._coral-Card-wrapper {
     display: none;
   }
 }
 
-.coral3-Card--inverted,
-.coral3-Card--condensed,
-.coral3-Card--asset {
+._coral-Card--inverted,
+._coral-Card--condensed,
+._coral-Card--asset {
   coral-card-asset {
     border-bottom-left-radius: $card-border-radius;
     border-bottom-right-radius: $card-border-radius;
   }
 }
 
-.coral3-Card-wrapper {
+._coral-Card-wrapper {
   display: block;
   position: relative;
   border-bottom-left-radius: $card-border-radius;
@@ -209,7 +209,7 @@ coral-card-propertylist {
   display: block;
   clearfix();
 
-  > .coral3-Card-property {
+  > ._coral-Card-property {
     display: inline-block;
     float: left;
     margin-right: 15*$px;
@@ -223,7 +223,7 @@ coral-card-propertylist + coral-card-propertylist {
   padding-top: 12*$px;
 }
 
-.coral3-Card-property-icon + coral-card-property-content:not(:empty) {
+._coral-Card-property-icon + coral-card-property-content:not(:empty) {
   margin-left: 6*$px;
 }
 
@@ -248,24 +248,24 @@ coral-card-content:empty {
 }
 
 coral-card-content,
-.coral3-Card-context,
-.coral3-Card-title,
-.coral3-Card-subtitle,
-.coral3-Card-description,
-.coral3-Banner-header,
-.coral3-Banner-content {
+._coral-Card-context,
+._coral-Card-title,
+._coral-Card-subtitle,
+._coral-Card-description,
+._coral-Banner-header,
+._coral-Banner-content {
   display: block;
 }
 
-.coral3-Card-context {
+._coral-Card-context {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
 
-.coral3-Card-title,
-.coral3-Card-subtitle,
-.coral3-Card-description {
+._coral-Card-title,
+._coral-Card-subtitle,
+._coral-Card-description {
   // in case the title is in an anchor
   text-decoration: none;
 
@@ -273,28 +273,28 @@ coral-card-content,
   word-break: break-all;
 }
 
-.coral3-Card-context + .coral3-Card-title {
+._coral-Card-context + ._coral-Card-title {
   margin-top: 2*$px;
 }
 
-.coral3-Card-context + .coral3-Card-description,
-.coral3-Card-title + .coral3-Card-description {
+._coral-Card-context + ._coral-Card-description,
+._coral-Card-title + ._coral-Card-description {
   margin-top: 10*$px;
 }
 
-.coral3-Card-context + coral-card-propertylist,
-.coral3-Card-title + coral-card-propertylist,
-.coral3-Card-subtitle + coral-card-propertylist,
-.coral3-Card-description + coral-card-propertylist {
+._coral-Card-context + coral-card-propertylist,
+._coral-Card-title + coral-card-propertylist,
+._coral-Card-subtitle + coral-card-propertylist,
+._coral-Card-description + coral-card-propertylist {
   margin-top: 10*$px;
 }
 
-.coral3-Banner--corner {
+._coral-Banner--corner {
   z-index: 1;
 }
 
-// added .coral3-Alert due to specificity of the classes vs tags
-coral-card-info > coral-alert.coral3-Alert {
+// added ._coral-Alert due to specificity of the classes vs tags
+coral-card-info > coral-alert._coral-Alert {
   display: block;
   clear: both;
 
@@ -319,8 +319,8 @@ coral-card-info > coral-alert.coral3-Alert {
   }
 }
 
-// added .coral3-Label due to specificity of the classes vs tags
-coral-card-info > coral-tag.coral3-Label {
+// added ._coral-Label due to specificity of the classes vs tags
+coral-card-info > coral-tag._coral-Label {
   float: right;
   clear: both;
 

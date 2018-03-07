@@ -55,7 +55,7 @@ const size = {
 };
 
 // the waits's base classname
-const CLASSNAME = 'coral3-Loader';
+const CLASSNAME = '_coral-Loader';
 
 /**
  @class Coral.Wait

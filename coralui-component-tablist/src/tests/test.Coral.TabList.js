@@ -8,7 +8,7 @@ describe('Coral.TabList', function() {
   describe('Instantiation', function() {
     function testDefaultInstance(el) {
       expect(el.getAttribute('aria-multiselectable')).to.equal('false');
-      expect(el.classList.contains('coral3-TabList')).to.be.true;
+      expect(el.classList.contains('_coral-TabList')).to.be.true;
       expect(el.getAttribute('size')).to.equal(Coral.TabList.size.MEDIUM);
       expect(el.getAttribute('orientation')).to.equal(Coral.TabList.orientation.HORIZONTAL);
       expect(el.getAttribute('role')).to.equal('tablist');
@@ -226,19 +226,19 @@ describe('Coral.TabList', function() {
   
         it('should set variant classname', function() {
           el.variant = Coral.TabList.variant.ANCHORED;
-          expect(el.classList.contains('coral3-TabList--anchored')).be.true;
-          expect(el.classList.contains('coral3-TabList--panel')).be.false;
-          expect(el.classList.contains('coral3-TabList--page')).be.false;
+          expect(el.classList.contains('_coral-TabList--anchored')).be.true;
+          expect(el.classList.contains('_coral-TabList--panel')).be.false;
+          expect(el.classList.contains('_coral-TabList--page')).be.false;
   
           el.variant = Coral.TabList.variant.PAGE;
-          expect(el.classList.contains('coral3-TabList--page')).be.true;
-          expect(el.classList.contains('coral3-TabList--anchored')).be.false;
-          expect(el.classList.contains('coral3-TabList--panel')).be.false;
+          expect(el.classList.contains('_coral-TabList--page')).be.true;
+          expect(el.classList.contains('_coral-TabList--anchored')).be.false;
+          expect(el.classList.contains('_coral-TabList--panel')).be.false;
   
           el.variant = Coral.TabList.variant.PANEL;
-          expect(el.classList.contains('coral3-TabList--panel')).be.true;
-          expect(el.classList.contains('coral3-TabList--page')).be.false;
-          expect(el.classList.contains('coral3-TabList--anchored')).be.false;
+          expect(el.classList.contains('_coral-TabList--panel')).be.true;
+          expect(el.classList.contains('_coral-TabList--page')).be.false;
+          expect(el.classList.contains('_coral-TabList--anchored')).be.false;
         });
       });
     });

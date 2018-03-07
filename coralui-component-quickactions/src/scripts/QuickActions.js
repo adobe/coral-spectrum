@@ -28,7 +28,7 @@ import {transform, validate} from '/coralui-util';
 
 // MUST be kept in sync with quickactions.styl $coral-quickactions-button-gap
 const BUTTON_GAP = 10;
-const BUTTON_FOCUSABLE_SELECTOR = '.coral3-QuickActions-item:not([disabled]):not([hidden])';
+const BUTTON_FOCUSABLE_SELECTOR = '._coral-QuickActions-item:not([disabled]):not([hidden])';
 
 /**
  Enumeration for {@link QuickActions} interaction options.
@@ -83,7 +83,7 @@ const placement = {
 
 const OFFSET = 10;
 
-const CLASSNAME = 'coral3-QuickActions';
+const CLASSNAME = '_coral-QuickActions';
 
 /**
  @class Coral.QuickActions
@@ -117,21 +117,21 @@ class QuickActions extends Overlay {
   
       // Keyboard interaction
       'global:key:escape': '_onEscapeKeypress',
-      'key:home > .coral3-QuickActions-item': '_onHomeKeypress',
-      'key:end > .coral3-QuickActions-item': '_onEndKeypress',
-      'key:pagedown > .coral3-QuickActions-item': '_onButtonKeypressNext',
-      'key:right > .coral3-QuickActions-item': '_onButtonKeypressNext',
-      'key:down > .coral3-QuickActions-item': '_onButtonKeypressNext',
-      'key:pageup > .coral3-QuickActions-item': '_onButtonKeypressPrevious',
-      'key:left > .coral3-QuickActions-item': '_onButtonKeypressPrevious',
-      'key:up > .coral3-QuickActions-item': '_onButtonKeypressPrevious',
+      'key:home > ._coral-QuickActions-item': '_onHomeKeypress',
+      'key:end > ._coral-QuickActions-item': '_onEndKeypress',
+      'key:pagedown > ._coral-QuickActions-item': '_onButtonKeypressNext',
+      'key:right > ._coral-QuickActions-item': '_onButtonKeypressNext',
+      'key:down > ._coral-QuickActions-item': '_onButtonKeypressNext',
+      'key:pageup > ._coral-QuickActions-item': '_onButtonKeypressPrevious',
+      'key:left > ._coral-QuickActions-item': '_onButtonKeypressPrevious',
+      'key:up > ._coral-QuickActions-item': '_onButtonKeypressPrevious',
   
       // Buttons
-      'click > .coral3-QuickActions-item:not([handle="moreButton"])': '_onButtonClick',
+      'click > ._coral-QuickActions-item:not([handle="moreButton"])': '_onButtonClick',
   
       // Accessibility
-      'capture:focus .coral3-QuickActions-item': '_onItemFocusIn',
-      'capture:blur .coral3-QuickActions-item': '_onItemFocusOut',
+      'capture:focus ._coral-QuickActions-item': '_onItemFocusIn',
+      'capture:blur ._coral-QuickActions-item': '_onItemFocusOut',
       
       // Overlay
       'coral-overlay:beforeopen': '_onOverlayBeforeOpen',
@@ -439,7 +439,7 @@ class QuickActions extends Overlay {
    @private
    */
   _getButtons(excludeMore) {
-    let buttonSelector = '.coral3-QuickActions-item';
+    let buttonSelector = '._coral-QuickActions-item';
     buttonSelector = excludeMore ? `${buttonSelector}:not([handle="moreButton"])` : buttonSelector;
     
     return this.querySelectorAll(buttonSelector);
@@ -529,7 +529,7 @@ class QuickActions extends Overlay {
     }
     
     button.variant = Button.variant._CUSTOM;
-    button.classList.add('coral3-QuickActions-item');
+    button.classList.add('_coral-QuickActions-item');
     button.setAttribute('tabindex', '-1');
     button.setAttribute('title', itemData.textContent.trim());
     button.setAttribute('aria-label', itemData.textContent.trim());

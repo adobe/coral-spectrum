@@ -13,12 +13,12 @@ describe('Coral.Table.Column', function() {
   describe('Instantiation', function() {
     it('should be possible using new', function() {
       const el = helpers.build(new Coral.Table.Column());
-      expect(el.classList.contains('coral3-Table-column')).to.be.true;
+      expect(el.classList.contains('_coral-Table-column')).to.be.true;
     });
     
     it('should be possible using document.createElement', function() {
       const el = helpers.build(document.createElement('col', {is: 'coral-table-column'}));
-      expect(el.classList.contains('coral3-Table-column')).to.be.true;
+      expect(el.classList.contains('_coral-Table-column')).to.be.true;
     });
   });
   

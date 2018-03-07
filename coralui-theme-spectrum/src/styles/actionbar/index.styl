@@ -21,7 +21,7 @@ $actionbar-padding = ($actionbar-height - $actionbar-item-height) / 2;
 $actionbar-container-padding-left = 15*$px;
 $actionbar-container-padding-right = 15*$px;
 
-.coral3-ActionBar {
+._coral-ActionBar {
   display: block;
   box-sizing: border-box;
 
@@ -32,22 +32,22 @@ $actionbar-container-padding-right = 15*$px;
   padding: $actionbar-padding 0;
 }
 
-.coral3-ActionBar-primary,
-.coral3-ActionBar-secondary {
+._coral-ActionBar-primary,
+._coral-ActionBar-secondary {
   position absolute;
 
   > coral-popover {
     display: table;
     overflow: hidden;
 
-    .coral3-ActionBar-item > * {
+    ._coral-ActionBar-item > * {
       width: 100%;
       white-space: nowrap;
     }
   }
 
-  > .coral3-ActionBar-item,
-  > .coral3-Button[coral-actionbar-more] {
+  > ._coral-ActionBar-item,
+  > ._coral-Button[coral-actionbar-more] {
     display: block;
     float: left;
     // required to get the focused item to go to the foreground
@@ -62,25 +62,25 @@ $actionbar-container-padding-right = 15*$px;
   }
 }
 
-.coral3-ActionBar-primary {
+._coral-ActionBar-primary {
   left: $actionbar-container-padding-left;
 }
 
-.coral3-ActionBar-secondary {
+._coral-ActionBar-secondary {
   right: $actionbar-container-padding-right;
 }
 
-.coral3-ActionBar-list {
+._coral-ActionBar-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.coral3-ActionBar-list-item {
+._coral-ActionBar-list-item {
   margin: 0;
   padding: 0;
 }
 
-.coral3-ActionBar-popover {
+._coral-ActionBar-popover {
   max-width: 192*$px;
 }

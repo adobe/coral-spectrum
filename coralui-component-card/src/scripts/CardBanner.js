@@ -18,7 +18,7 @@
 import {ComponentMixin} from '/coralui-mixin-component';
 import {transform, validate} from '/coralui-util';
 
-const CLASSNAME = 'coral3-Banner';
+const CLASSNAME = '_coral-Banner';
 
 /**
  Enumeration for {@link CardBanner} variants.

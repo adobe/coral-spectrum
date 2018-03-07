@@ -21,7 +21,7 @@ import '/coralui-component-icon';
 import treeItem from '../templates/treeItem';
 import {transform, commons, validate} from '/coralui-util';
 
-const CLASSNAME = 'coral3-TreeView-item';
+const CLASSNAME = '_coral-TreeView-item';
 
 /**
  Enumeration for {@link TreeItem} variants.
@@ -335,7 +335,7 @@ class TreeItem extends ComponentMixin(HTMLElement) {
   
     const templateHandleNames = ['header', 'icon', 'subTreeContainer'];
     
-    const subTree = this.querySelector('.coral3-TreeView');
+    const subTree = this.querySelector('._coral-TreeView');
     if (subTree) {
       const items = subTree.querySelectorAll('coral-tree-item');
       for (let i = 0; i < items.length; i++) {

@@ -70,7 +70,7 @@ const variant = {
 };
 
 // the tablist's base classname
-const CLASSNAME = 'coral3-TabList';
+const CLASSNAME = '_coral-TabList';
 
 // An array of all possible variant classnames
 const ALL_VARIANT_CLASSES = [];
@@ -523,7 +523,7 @@ class TabList extends ComponentMixin(HTMLElement) {
     if (!this._variant) { this.variant = variant.PANEL; }
     
     // Support cloneNode
-    const template = this.querySelector('.coral3-TabList-item-line');
+    const template = this.querySelector('._coral-TabList-item-line');
     if (template) {
       template.remove();
     }

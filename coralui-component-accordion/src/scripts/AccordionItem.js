@@ -19,7 +19,7 @@ import {ComponentMixin} from '/coralui-mixin-component';
 import {transform, commons} from '/coralui-util';
 import {Icon} from '/coralui-component-icon';
 
-const CLASSNAME = 'coral3-Accordion-item';
+const CLASSNAME = '_coral-Accordion-item';
 
 /**
  @class Coral.Accordion.Item
@@ -164,7 +164,7 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
   
   _insertTemplate() {
     const iconId = 'spectrum-css-icon-AccordionChevron';
-    const classes = ['coral3-Accordion-indicator', 'coral3-Accordion-icon'];
+    const classes = ['_coral-Accordion-indicator', '_coral-Accordion-icon'];
     
     if (this.label) {
       this.label.insertAdjacentHTML('afterend', Icon._renderSVG(iconId, classes));
@@ -211,7 +211,7 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
     this.setAttribute('role', 'presentation');
   
     // Support cloneNode
-    const template = this.querySelector('.coral3-Accordion-icon');
+    const template = this.querySelector('._coral-Accordion-icon');
     if (template) {
       template.remove();
     }

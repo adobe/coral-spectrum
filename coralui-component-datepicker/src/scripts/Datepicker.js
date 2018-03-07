@@ -42,7 +42,7 @@ const variant = {
   QUIET: 'quiet'
 };
 
-const CLASSNAME = 'coral3-InputGroup';
+const CLASSNAME = '_coral-InputGroup';
 
 // builds a string containing all possible variant classnames. This will be used to remove
 // classnames when the variant changes.
@@ -411,8 +411,8 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
     // passes down the variant to the underlying components
     // we have to do this because default of button is not 'default', but 'secondary'
-    this._elements.toggle.classList.toggle('coral3-Button--dropdown', this._variant === variant.DEFAULT);
-    this._elements.toggle.classList.toggle('coral3-Button--quiet--dropdown', this._variant === variant.QUIET);
+    this._elements.toggle.classList.toggle('_coral-Button--dropdown', this._variant === variant.DEFAULT);
+    this._elements.toggle.classList.toggle('_coral-Button--quiet--dropdown', this._variant === variant.QUIET);
     this._elements.input.variant = this._variant;
   
     // removes every existing variant

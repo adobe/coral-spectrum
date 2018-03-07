@@ -21,7 +21,7 @@ import {Icon} from '/coralui-component-icon';
 import organization from '../templates/organization';
 import {transform, commons} from '/coralui-util';
 
-const CLASSNAMES = ['coral3-BasicList-item', 'coral3-Shell-orgSwitcher-item'];
+const CLASSNAMES = ['_coral-BasicList-item', '_coral-Shell-orgSwitcher-item'];
 
 
 /**
@@ -245,11 +245,11 @@ class ShellOrganization extends ListItem {
     super.connectedCallback();
   
     this.setAttribute('id', this.id || commons.getUID());
-    const items = this.querySelector(`#${this.id} > .coral3-Shell-orgSwitcher-subitems`);
+    const items = this.querySelector(`#${this.id} > ._coral-Shell-orgSwitcher-subitems`);
     
     if (items) {
       this._elements.items = items;
-      this._elements.checkmark = this.querySelector(`#${this.id} > .coral3-Shell-orgSwitcher-item-checkmark`);
+      this._elements.checkmark = this.querySelector(`#${this.id} > ._coral-Shell-orgSwitcher-item-checkmark`);
       this._items._container = this._elements.items;
     }
     else {

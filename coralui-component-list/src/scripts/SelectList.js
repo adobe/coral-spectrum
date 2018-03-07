@@ -47,7 +47,7 @@ const ITEM_TAG_NAME = 'coral-selectlist-item';
 /** @ignore */
 const GROUP_TAG_NAME = 'coral-selectlist-group';
 
-const CLASSNAME = 'coral3-SelectList';
+const CLASSNAME = '_coral-SelectList';
 
 /**
  @class Coral.SelectList
@@ -514,7 +514,7 @@ class SelectList extends ComponentMixin(HTMLElement) {
   connectedCallback() {
     super.connectedCallback();
     
-    this.classList.add(CLASSNAME, 'coral3-BasicList');
+    this.classList.add(CLASSNAME, '_coral-BasicList');
     
     // adds the role to support accessibility
     this.setAttribute('role', 'listbox');

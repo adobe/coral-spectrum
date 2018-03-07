@@ -20,7 +20,7 @@ import {FormFieldMixin} from '/coralui-mixin-formfield';
 import base from '../templates/base';
 import {transform, commons} from '/coralui-util';
 
-const CLASSNAME = 'coral3-Radio';
+const CLASSNAME = '_coral-Radio';
 
 /**
  @class Coral.Radio

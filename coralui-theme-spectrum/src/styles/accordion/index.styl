@@ -16,20 +16,20 @@
  */
 
 // @spectrum support nested accordions
-.coral3-Accordion-item:not(.is-open) {
-  & > .coral3-Accordion-content {
+._coral-Accordion-item:not(.is-open) {
+  & > ._coral-Accordion-content {
     display: block;
     padding: 0 0 0 16*$px;
   }
 
-  & > .coral3-Accordion-indicator {
+  & > ._coral-Accordion-indicator {
     transform: none;
   }
 }
 
 // @spectrum support animation
-.coral3-Accordion--animated {
-  .coral3-Accordion-content {
+._coral-Accordion--animated {
+  ._coral-Accordion-content {
     overflow: hidden;
     transition: height ease 250ms;
   }

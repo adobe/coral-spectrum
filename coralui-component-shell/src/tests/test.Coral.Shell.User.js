@@ -13,12 +13,12 @@ describe('Coral.Shell.User', function() {
   describe('Instantiation', function() {
     it('should be possible using new', function() {
       var user = helpers.build(new Coral.Shell.User());
-      expect(user.classList.contains('coral3-Shell-user')).to.be.true;
+      expect(user.classList.contains('_coral-Shell-user')).to.be.true;
     });
 
     it('should be possible using createElement', function() {
       var user = helpers.build(document.createElement('coral-shell-user'));
-      expect(user.classList.contains('coral3-Shell-user')).to.be.true;
+      expect(user.classList.contains('_coral-Shell-user')).to.be.true;
     });
 
     it('should be possible using markup', function() {
@@ -41,7 +41,7 @@ describe('Coral.Shell.User', function() {
       it('should default to avatar.DEFAULT', function() {
         var user = helpers.build(new Coral.Shell.User());
         expect(user.avatar).to.equal(Coral.Shell.User.avatar.DEFAULT);
-        expect(user._elements.avatar.classList.contains('coral3-Shell-user-avatar')).to.be.true;
+        expect(user._elements.avatar.classList.contains('_coral-Shell-user-avatar')).to.be.true;
       });
       
       it('should set the new avatar', function() {
@@ -78,20 +78,20 @@ describe('Coral.Shell.User', function() {
       it('should be default value initially', function() {
         var user = helpers.build('<coral-shell-user></coral-shell-user>');
         expect(user.avatar).to.equal(Coral.Shell.User.avatar.DEFAULT);
-        expect(user._elements.avatar.classList.contains('coral3-Shell-user-avatar')).to.be.true;
+        expect(user._elements.avatar.classList.contains('_coral-Shell-user-avatar')).to.be.true;
       });
 
       it('should set the new avatar', function() {
         var user = helpers.build('<coral-shell-user avatar="http://wwwimages.adobe.com/content/dam/Adobe/en/leaders/images/138x138/adobe-leaders-shantanu-narayen-138x138.jpg"></coral-shell-user>');
         expect(user.avatar).to.equal('http://wwwimages.adobe.com/content/dam/Adobe/en/leaders/images/138x138/adobe-leaders-shantanu-narayen-138x138.jpg');
-        expect(user._elements.avatar.classList.contains('coral3-Shell-user-avatar')).to.be.true;
+        expect(user._elements.avatar.classList.contains('_coral-Shell-user-avatar')).to.be.true;
       });
 
       it('should allow empty avatar', function() {
         var user = helpers.build('<coral-shell-user avatar=""></coral-shell-user>');
         expect(user.avatar).to.equal('');
         expect(user.hasAttribute('avatar')).to.be.true;
-        expect(user._elements.avatar.classList.contains('coral3-Shell-user-avatar')).to.be.true;
+        expect(user._elements.avatar.classList.contains('_coral-Shell-user-avatar')).to.be.true;
       });
 
       it('should support arbitrary relative URLs', function() {

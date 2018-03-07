@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-const CLASSNAME = 'coral3-Alert-content';
+const CLASSNAME = '_coral-Alert-content';
 
 /**
  @class Coral.Alert.Content

@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-const CLASSNAME = 'coral3-SelectList-divider';
+const CLASSNAME = '_coral-SelectList-divider';
 
 /**
  @class Coral.List.Divider

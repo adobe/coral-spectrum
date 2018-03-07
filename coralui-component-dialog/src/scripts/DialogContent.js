@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-const CLASSNAME = 'coral3-Dialog-content';
+const CLASSNAME = '_coral-Dialog-content';
 
 /**
  @class Coral.Dialog.Content

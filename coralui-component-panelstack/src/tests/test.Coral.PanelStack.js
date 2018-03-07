@@ -7,7 +7,7 @@ describe('Coral.PanelStack', function() {
 
   describe('Instantiation', function() {
     function testDefaultInstance(el) {
-      expect(el.classList.contains('coral3-PanelStack')).to.be.true;
+      expect(el.classList.contains('_coral-PanelStack')).to.be.true;
       expect(el.selectedItem).to.be.null;
 
       expect(el.hasAttribute('selectedItem')).to.be.false;

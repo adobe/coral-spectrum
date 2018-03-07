@@ -96,8 +96,8 @@ describe('Coral.Card', function() {
         expect(el.variant).to.equal(Coral.Card.variant.CONDENSED);
         expect(el.getAttribute('variant')).to.equal('condensed');
         
-        expect(el.classList.contains('coral3-Card--condensed')).to.be.true;
-        expect(el.classList.contains('coral3-Card')).to.be.true;
+        expect(el.classList.contains('_coral-Card--condensed')).to.be.true;
+        expect(el.classList.contains('_coral-Card')).to.be.true;
       });
     });
   });

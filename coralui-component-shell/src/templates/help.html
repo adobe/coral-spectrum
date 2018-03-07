@@ -3,12 +3,12 @@ var labelId = Coral.commons.getUID();
 </js>
 <div handle="contentWrapper">
   <label class="u-coral-screenReaderOnly" id="{{labelId}}">{{Coral.i18n.get('Search for Help')}}</label>
-  <coral-search class="coral3-Shell-help-search" handle="search" placeholder="{{Coral.i18n.get('Search for Help')}}" labelledby="{{labelId}}"></coral-search>
-  <div class="coral3-Shell-help-items" handle="items"></div>
-  <coral-anchorlist class="coral3-Shell-help-results" handle="results" hidden></coral-anchorlist>
-  <div class="coral3-Shell-help-resultMessage" handle="resultMessage" hidden></div>
-  <div class="coral3-Shell-help-loading" handle="loading" hidden>
-    <coral-wait size="S" class="coral3-Shell-help-loading-wait"></coral-wait>
-    <span class="coral-Heading--2 coral3-Shell-help-loading-info">{{Coral.i18n.get('Searching Help&hellip;')}}</span>
+  <coral-search class="_coral-Shell-help-search" handle="search" placeholder="{{Coral.i18n.get('Search for Help')}}" labelledby="{{labelId}}"></coral-search>
+  <div class="_coral-Shell-help-items" handle="items"></div>
+  <coral-anchorlist class="_coral-Shell-help-results" handle="results" hidden></coral-anchorlist>
+  <div class="_coral-Shell-help-resultMessage" handle="resultMessage" hidden></div>
+  <div class="_coral-Shell-help-loading" handle="loading" hidden>
+    <coral-wait size="S" class="_coral-Shell-help-loading-wait"></coral-wait>
+    <span class="coral-Heading--2 _coral-Shell-help-loading-info">{{Coral.i18n.get('Searching Help&hellip;')}}</span>
   </div>
 </div>

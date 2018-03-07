@@ -8,12 +8,12 @@ describe('Coral.Table.Cell', function() {
   describe('Instantiation', function() {
     it('should be possible using new', function() {
       const el = helpers.build(new Coral.Table.HeaderCell());
-      expect(el.classList.contains('coral3-Table-headerCell')).to.be.true;
+      expect(el.classList.contains('_coral-Table-headerCell')).to.be.true;
     });
   
     it('should be possible using document.createElement', function() {
       const el = helpers.build(document.createElement('th', {is: 'coral-table-headercell'}));
-      expect(el.classList.contains('coral3-Table-headerCell')).to.be.true;
+      expect(el.classList.contains('_coral-Table-headerCell')).to.be.true;
     });
   });
   

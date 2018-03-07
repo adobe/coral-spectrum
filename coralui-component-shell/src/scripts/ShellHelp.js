@@ -26,7 +26,7 @@ import helpResult from '../templates/helpResult';
 import helpSearchError from '../templates/helpSearchError';
 import noHelpResults from '../templates/noHelpResults';
 
-const CLASSNAMES = ['coral3-BasicList', 'coral3-AnchorList', 'coral3-Shell-help'];
+const CLASSNAMES = ['_coral-BasicList', '_coral-AnchorList', '_coral-Shell-help'];
 
 /**
  @class Coral.Shell.Help
@@ -180,7 +180,7 @@ class ShellHelp extends ComponentMixin(HTMLElement) {
           target: result.target
         });
         
-        item.classList.add('coral3-Shell-help-result-item');
+        item.classList.add('_coral-Shell-help-result-item');
         
         item.content = helpResult.call(this._elements, {
           title: result.title,

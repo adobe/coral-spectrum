@@ -22,13 +22,13 @@ coral-masonry-item {
   visibility: hidden;
 }
 
-.coral3-Masonry {
+._coral-Masonry {
   display: block;
   position: relative;
   box-sizing: border-box !important; // required by layout
 }
 
-.coral3-Masonry-item {
+._coral-Masonry-item {
   position: absolute;
   display: block;
   box-sizing: border-box !important; // required by layout
@@ -59,12 +59,12 @@ coral-masonry-item {
 }
 
 // TODO define better placeholder style
-.coral3-Masonry-item--placeholder {
+._coral-Masonry-item--placeholder {
   visibility: hidden !important;
 }
 
 // Transitions
-.coral3-Masonry.is-loaded > .coral3-Masonry-item {
+._coral-Masonry.is-loaded > ._coral-Masonry-item {
   transition: transform 0.5s;
 
   &.is-beforeInserting {
@@ -82,12 +82,12 @@ coral-masonry-item {
   }
 }
 
-.coral3-Masonry.is-selectable {
-  .coral3-Masonry-item {
+._coral-Masonry.is-selectable {
+  ._coral-Masonry-item {
     cursor: pointer;
   }
 
-  .coral3-Masonry-item:not([selected]) {
+  ._coral-Masonry-item:not([selected]) {
     &:hover,
     &:focus {
       outline: none;

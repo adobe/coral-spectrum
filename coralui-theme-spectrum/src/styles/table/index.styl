@@ -49,13 +49,13 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
 }
 
 /* Base */
-.coral3-Table {
+._coral-Table {
   border-collapse: separate;
   border-spacing: 0;
   width: 100%;
 }
 
-.coral3-Table-headerCell {
+._coral-Table-headerCell {
   text-align: left;
   font-size: 11*$px;
   font-weight: 700;
@@ -66,24 +66,24 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
   transition: color 125ms ease-in-out;
 }
 
-.coral3-Table-cell {
+._coral-Table-cell {
   font-size: 14*$px;
   line-height: 24*$px;
   padding: 12*$px 16*$px;
   transition: background-color 125ms ease-in-out;
 }
 
-.coral3-Table-head {
-  .coral3-Table-row:not(:first-of-type) {
-    .coral3-Table-cell,
-    .coral3-Table-headerCell {
+._coral-Table-head {
+  ._coral-Table-row:not(:first-of-type) {
+    ._coral-Table-cell,
+    ._coral-Table-headerCell {
       border-top: 1*$px solid;
     }
   }
 }
 
-.coral3-Table-body {
-  .coral3-Table-cell {
+._coral-Table-body {
+  ._coral-Table-cell {
     border-top: 1*$px solid;
 
     &:first-of-type {
@@ -95,9 +95,9 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
     }
   }
 
-  .coral3-Table-row {
+  ._coral-Table-row {
     &:first-of-type {
-      .coral3-Table-cell {
+      ._coral-Table-cell {
         border-top: 1*$px solid;
 
         &:first-of-type {
@@ -111,7 +111,7 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
     }
 
     &:last-of-type {
-      .coral3-Table-cell {
+      ._coral-Table-cell {
         border-bottom: 1*$px solid;
 
         &:first-of-type {
@@ -128,7 +128,7 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
 /* END Base */
 
 /* Template */
-.coral3-Table-wrapper {
+._coral-Table-wrapper {
   display: block;
   overflow: hidden;
 
@@ -137,12 +137,12 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
   }
 
   &.is-disabled {
-    .coral3-Table-head {
+    ._coral-Table-head {
       // Prevent sort and order
       pointer-events: none;
 
       // Hide sort and order handles
-      .coral3-Table-headerCell {
+      ._coral-Table-headerCell {
         cursor: auto;
         user-select: initial;
 
@@ -158,85 +158,85 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
       }
     }
 
-    .coral3-Table-wrapper-container {
+    ._coral-Table-wrapper-container {
       border: none;
     }
   }
 }
 
-.coral3-Table-wrapper-container {
+._coral-Table-wrapper-container {
   overflow: auto;
 }
 /* END Template*/
 
 /* #fixedWith */
-.coral3-Table-column[fixedwidth] {
+._coral-Table-column[fixedwidth] {
   width: 1*$px;
 }
 
-.coral3-Table-headerCell[fixedwidth] {
+._coral-Table-headerCell[fixedwidth] {
   white-space: nowrap;
 }
 /* END #fixedWidth */
 
 /* #divider */
-.coral3-Table-divider--cell {
-  &.coral3-Table-head {
-    .coral3-Table-cell,
-    .coral3-Table-headerCell {
+._coral-Table-divider--cell {
+  &._coral-Table-head {
+    ._coral-Table-cell,
+    ._coral-Table-headerCell {
       &:not(:last-of-type) {
         border-right: 1*$px solid;
       }
     }
   }
 
-  &.coral3-Table-body {
-    .coral3-Table-cell:not(:last-of-type) {
+  &._coral-Table-body {
+    ._coral-Table-cell:not(:last-of-type) {
       border-right: 1*$px solid;
     }
   }
 }
 
-.coral3-Table-divider--column {
-  &.coral3-Table-head {
-    .coral3-Table-row:not(:first-of-type) {
-      .coral3-Table-cell,
-      .coral3-Table-headerCell {
+._coral-Table-divider--column {
+  &._coral-Table-head {
+    ._coral-Table-row:not(:first-of-type) {
+      ._coral-Table-cell,
+      ._coral-Table-headerCell {
         border-top: none;
       }
     }
-    .coral3-Table-cell,
-    .coral3-Table-headerCell {
+    ._coral-Table-cell,
+    ._coral-Table-headerCell {
       &:not(:last-of-type) {
         border-right: 1*$px solid;
       }
     }
   }
 
-  &.coral3-Table-body {
-    .coral3-Table-row:not(:first-of-type) {
-      .coral3-Table-cell {
+  &._coral-Table-body {
+    ._coral-Table-row:not(:first-of-type) {
+      ._coral-Table-cell {
         border-top: none;
       }
     }
 
-    .coral3-Table-cell:not(:last-of-type) {
+    ._coral-Table-cell:not(:last-of-type) {
       border-right: 1*$px solid;
     }
   }
 }
 
-.coral3-Table-divider--none {
-  &.coral3-Table-head {
-    .coral3-Table-cell,
-    .coral3-Table-headerCell {
+._coral-Table-divider--none {
+  &._coral-Table-head {
+    ._coral-Table-cell,
+    ._coral-Table-headerCell {
       border-top: none;
     }
   }
 
-  &.coral3-Table-body {
-    .coral3-Table-row:not(:first-of-type) {
-      .coral3-Table-cell {
+  &._coral-Table-body {
+    ._coral-Table-row:not(:first-of-type) {
+      ._coral-Table-cell {
         border-top: none;
       }
     }
@@ -245,23 +245,23 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
 /* END #divider */
 
 /* #sticky */
-.coral3-Table-wrapper--sticky {
+._coral-Table-wrapper--sticky {
   position: relative;
 
-  .coral3-Table-wrapper-container {
+  ._coral-Table-wrapper-container {
     border: 1*$px solid;
     border-radius: 4*$px;
   }
 
-  .coral3-Table {
+  ._coral-Table {
     // Fill the gap from the empty head.
     // @todo it should be multipled by the number of head rows
     margin-top: -1*$px;
   }
 
   // Borders are applied by the container in sticky state so we remove the outer body cell borders and radius
-  .coral3-Table-body {
-    .coral3-Table-cell {
+  ._coral-Table-body {
+    ._coral-Table-cell {
       &:first-of-type {
         border-left :none;
       }
@@ -271,43 +271,43 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
       }
     }
 
-    .coral3-Table-row {
-      &:first-of-type .coral3-Table-cell {
+    ._coral-Table-row {
+      &:first-of-type ._coral-Table-cell {
         border-radius: 0;
         border-top: none;
       }
 
-      &:last-of-type .coral3-Table-cell {
+      &:last-of-type ._coral-Table-cell {
         border-radius: 0;
         border-bottom: none;
       }
     }
   }
 
-  .coral3-Table-head[sticky] {
+  ._coral-Table-head[sticky] {
     // Don't show the header while layout calculations are performed
     &.is-hidden {
       visibility: hidden;
     }
 
-    &.coral3-Table-divider--row coral-table-headercell-content {
+    &._coral-Table-divider--row coral-table-headercell-content {
       border-top: 1*$px solid;
     }
 
-    &.coral3-Table-divider--column coral-table-headercell-content {
+    &._coral-Table-divider--column coral-table-headercell-content {
       border-right: 1*$px solid;
     }
 
-    &.coral3-Table-divider--cell coral-table-headercell-content {
+    &._coral-Table-divider--cell coral-table-headercell-content {
       border-top: 1*$px solid;
       border-right: 1*$px solid;
     }
 
-    .coral3-Table-row:first-child coral-table-headercell-content {
+    ._coral-Table-row:first-child coral-table-headercell-content {
       border-top: none;
     }
 
-    .coral3-Table-headerCell {
+    ._coral-Table-headerCell {
       // We can't set 0 or else screen readers will ignore the header cells in sticky state
       height: 0.5*$px;
       line-height: 0;
@@ -338,8 +338,8 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
 
 // @polyfill ie/edge
 // polyfill for edge is necessary because flex + ::after (used for sorting icons) don't play well together
-.coral3-Table-wrapper--IE {
-  .coral3-Table-head[sticky] {
+._coral-Table-wrapper--IE {
+  ._coral-Table-head[sticky] {
     coral-table-headercell-content {
       display: block;
     }
@@ -348,7 +348,7 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
 /* END #sticky */
 
 /* #sortable */
-.coral3-Table-headerCell[sortable] {
+._coral-Table-headerCell[sortable] {
   cursor: pointer;
   user-select: none;
 
@@ -379,9 +379,9 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
 /* END #sortable */
 
 /* #selectable */
-.coral3-Table-wrapper[selectable] {
-  .coral3-Table-row {
-    &[coral-table-rowselect]:hover:not(.is-selected) .coral3-Table-cell {
+._coral-Table-wrapper[selectable] {
+  ._coral-Table-row {
+    &[coral-table-rowselect]:hover:not(.is-selected) ._coral-Table-cell {
       cursor: pointer;
     }
 
@@ -393,8 +393,8 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
   }
 }
 
-.coral3-Table-row[selectable] {
-  .coral3-Table-cell {
+._coral-Table-row[selectable] {
+  ._coral-Table-cell {
     &[coral-table-cellselect] {
       position: relative;
       cursor: pointer;
@@ -433,7 +433,7 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
 }
 
 // Align design to Miller Columns since thumbnail selection pattern was removed in Spectrum
-.coral3-Table-cell--check {
+._coral-Table-cell--check {
   white-space: nowrap;
 
   coral-checkbox[coral-table-rowselect] {
@@ -460,11 +460,11 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
 
 /* #variant */
 // Remove borders and radius for quiet variant
-.coral3-Table-wrapper--quiet {
-  .coral3-Table-body {
-    .coral3-Table-row {
+._coral-Table-wrapper--quiet {
+  ._coral-Table-body {
+    ._coral-Table-row {
       &:first-of-type {
-        .coral3-Table-cell {
+        ._coral-Table-cell {
           &:first-of-type {
             border-top-left-radius: 0;
           }
@@ -476,7 +476,7 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
       }
 
       &:last-of-type {
-        .coral3-Table-cell {
+        ._coral-Table-cell {
           &:first-of-type {
             border-bottom-left-radius: 0;
           }
@@ -489,21 +489,21 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
     }
   }
 
-  &.coral3-Table-wrapper--sticky {
-    .coral3-Table-wrapper-container {
+  &._coral-Table-wrapper--sticky {
+    ._coral-Table-wrapper-container {
       border-radius: 0;
     }
 
-    .coral3-Table-body {
-      .coral3-Table-row {
+    ._coral-Table-body {
+      ._coral-Table-row {
         &:first-of-type {
-          .coral3-Table-cell {
+          ._coral-Table-cell {
             border-top: none;
           }
         }
 
         &:last-of-type {
-          .coral3-Table-cell {
+          ._coral-Table-cell {
             border-bottom: none;
           }
         }
@@ -514,14 +514,14 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
 /* END #variant */
 
 /* #lockable */
-.coral3-Table-wrapper[lockable] .coral3-Table-row {
+._coral-Table-wrapper[lockable] ._coral-Table-row {
   [coral-table-rowlock] {
     visibility: hidden;
   }
 
   &[locked] {
-    .coral3-Table-headerCell,
-    .coral3-Table-cell {
+    ._coral-Table-headerCell,
+    ._coral-Table-cell {
       [coral-table-rowlock] {
         visibility: visible;
       }
@@ -533,7 +533,7 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
       visibility: visible;
     }
 
-    &:not(.is-selected) .coral3-Table-cell {
+    &:not(.is-selected) ._coral-Table-cell {
       cursor: pointer;
     }
   }
@@ -541,8 +541,8 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
 /* END #lockable */
 
 /* #orderable */
-.coral3-Table-headerCell,
-.coral3-Table-row {
+._coral-Table-headerCell,
+._coral-Table-row {
   &.is-dragging,
   &.is-before,
   &.is-after {
@@ -557,23 +557,23 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
   }
 }
 
-.coral3-Table-row.is-dragging {
-  .coral3-Table-cell,
-  .coral3-Table-headerCell {
+._coral-Table-row.is-dragging {
+  ._coral-Table-cell,
+  ._coral-Table-headerCell {
     // @todo is it really required ?
     border-radius: 0 !important;
   }
 }
 
-.coral3-Table-row--placeholder {
+._coral-Table-row--placeholder {
   visibility: hidden;
 }
 
-.coral3-Table-wrapper {
+._coral-Table-wrapper {
   // Keep the table top border while dragging
   &.is-draggedFirstItem {
-    .coral3-Table-body .coral3-Table-row:nth-of-type(2) {
-      .coral3-Table-cell {
+    ._coral-Table-body ._coral-Table-row:nth-of-type(2) {
+      ._coral-Table-cell {
         &:first-of-type {
           border-top-left-radius: 4*$px;
         }
@@ -586,16 +586,16 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
   }
 
   // Hide the drag handles when the table is sorted
-  &.is-sorted .coral3-Table-row [coral-table-roworder] {
+  &.is-sorted ._coral-Table-row [coral-table-roworder] {
     visibility: hidden;
   }
 
-  &:not(.coral3-Table-wrapper--sticky) {
-    .coral3-Table-row--placeholder {
+  &:not(._coral-Table-wrapper--sticky) {
+    ._coral-Table-row--placeholder {
       visibility: visible;
 
-      .coral3-Table-cell,
-      .coral3-Table-headerCell {
+      ._coral-Table-cell,
+      ._coral-Table-headerCell {
         // Hide the content, but leave the borders visible
         text-indent: -1000*$px;
       }
@@ -603,8 +603,8 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
 
     // Keep the table bottom border while dragging
     &.is-draggedLastItem  {
-      .coral3-Table-body .coral3-Table-row:nth-last-of-type(2) {
-        .coral3-Table-cell {
+      ._coral-Table-body ._coral-Table-row:nth-last-of-type(2) {
+        ._coral-Table-cell {
           border-bottom: 1*$px solid;
 
           &:first-of-type {
@@ -620,15 +620,15 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
   }
 }
 
-.coral3-Table-wrapper--sticky {
-  .coral3-Table-headerCell[orderable] {
+._coral-Table-wrapper--sticky {
+  ._coral-Table-headerCell[orderable] {
     position: static;
   }
 
   // If sticky, the container border is used instead of the row border
   &.is-draggedFirstItem {
-    .coral3-Table-body .coral3-Table-row:nth-of-type(2) {
-      .coral3-Table-cell {
+    ._coral-Table-body ._coral-Table-row:nth-of-type(2) {
+      ._coral-Table-cell {
         border-top: none;
       }
     }
@@ -655,7 +655,7 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
   }
 }
 
-.coral3-Table-headerCell[orderable] {
+._coral-Table-headerCell[orderable] {
   position: relative;
 
   coral-table-headercell-content {
@@ -693,7 +693,7 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
 /* END #orderable */
 
 /* #a11y */
-.coral3-Table-headerCell {
+._coral-Table-headerCell {
   &:focus,
   &.is-focused,
   coral-table-headercell-content:focus,
@@ -702,13 +702,13 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
   }
 }
 
-.coral3-Table-row {
+._coral-Table-row {
   &:focus,
   &.is-focused {
     outline: none;
 
     // Adds left focus bar
-    .coral3-Table-cell:first-of-type {
+    ._coral-Table-cell:first-of-type {
       position: relative;
 
       &:after {

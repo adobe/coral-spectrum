@@ -19,7 +19,7 @@ import {ComponentMixin} from '/coralui-mixin-component';
 import '/coralui-component-icon';
 import icon from '../templates/icon';
 
-const CLASSNAME = 'coral3-Card-property';
+const CLASSNAME = '_coral-Card-property';
 
 /**
  @class Coral.Card.Property

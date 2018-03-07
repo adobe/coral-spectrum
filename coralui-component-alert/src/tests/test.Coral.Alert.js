@@ -82,27 +82,27 @@ describe('Coral.Alert', function() {
     
       it('should set correct className when variant is error', function() {
         el.variant = Coral.Alert.variant.ERROR;
-        expect(el.classList.contains('coral3-Alert--error')).to.be.true;
+        expect(el.classList.contains('_coral-Alert--error')).to.be.true;
       });
     
       it('should set correct className when variant is warning', function() {
         el.variant = Coral.Alert.variant.WARNING;
-        expect(el.classList.contains('coral3-Alert--warning')).to.be.true;
+        expect(el.classList.contains('_coral-Alert--warning')).to.be.true;
       });
     
       it('should set correct className when variant is success', function() {
         el.variant = Coral.Alert.variant.SUCCESS;
-        expect(el.classList.contains('coral3-Alert--success')).to.be.true;
+        expect(el.classList.contains('_coral-Alert--success')).to.be.true;
       });
     
       it('should set correct className when variant is help', function() {
         el.variant = Coral.Alert.variant.HELP;
-        expect(el.classList.contains('coral3-Alert--help')).to.be.true;
+        expect(el.classList.contains('_coral-Alert--help')).to.be.true;
       });
     
       it('should set correct className when variant is info', function() {
         el.variant = Coral.Alert.variant.INFO;
-        expect(el.classList.contains('coral3-Alert--info')).to.be.true;
+        expect(el.classList.contains('_coral-Alert--info')).to.be.true;
       });
     });
   });

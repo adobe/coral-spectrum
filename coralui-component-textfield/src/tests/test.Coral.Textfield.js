@@ -54,11 +54,11 @@ describe('Coral.Textfield', function() {
       });
 
       it('should be possible to set the variant', function() {
-        expect(el.classList.contains('coral3-Textfield--quiet')).to.be.false;
+        expect(el.classList.contains('_coral-Textfield--quiet')).to.be.false;
 
         el.variant = Coral.Textfield.variant.QUIET;
         expect(el.variant).to.equal(Coral.Textfield.variant.QUIET, '"quiet" should be set');
-        expect(el.classList.contains('coral3-Textfield--quiet')).to.be.true;
+        expect(el.classList.contains('_coral-Textfield--quiet')).to.be.true;
       });
     });
   });

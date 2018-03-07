@@ -14,7 +14,7 @@
   };
   
   // The element's base classname
-  var CLASSNAME = 'coral3-Drawer';
+  var CLASSNAME = '_coral-Drawer';
   
   // A string of all possible direction classnames
   var ALL_DIRECTION_CLASSES = [];
@@ -35,7 +35,7 @@
     className: CLASSNAME,
     
     events: {
-      'click .coral3-Drawer-toggleButton:not(:disabled)': '_onClick'
+      'click ._coral-Drawer-toggleButton:not(:disabled)': '_onClick'
     },
     
     properties: {

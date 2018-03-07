@@ -83,7 +83,7 @@ const size = {
 };
 
 // icon's base classname
-const CLASSNAME = 'coral3-Icon';
+const CLASSNAME = '_coral-Icon';
 
 // builds an array containing all possible size classnames. this will be used to remove classnames when the size
 // changes

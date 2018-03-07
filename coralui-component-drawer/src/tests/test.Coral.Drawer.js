@@ -12,7 +12,7 @@ describe('Coral.Drawer', function () {
       expect(drawer.open).to.be.false;
       expect(drawer.hasAttribute('open')).to.be.false;
       expect(drawer.getAttribute('direction')).to.equal(Coral.Drawer.direction.DOWN);
-      expect(drawer.classList.contains('coral3-Drawer')).to.be.true;
+      expect(drawer.classList.contains('_coral-Drawer')).to.be.true;
     });
     
     it('should be possible to clone the element using markup', function() {
@@ -72,19 +72,19 @@ describe('Coral.Drawer', function () {
       it('should set direction class up', function() {
         var drawer = helpers.build(window.__html__['Coral.Drawer.default.html']);
         expect(drawer.direction).to.equal('down');
-        expect(drawer.classList.contains('coral3-Drawer--down')).to.be.true;
+        expect(drawer.classList.contains('_coral-Drawer--down')).to.be.true;
     
         drawer.direction = 'up';
-        expect(drawer.classList.contains('coral3-Drawer--up')).to.be.true;
+        expect(drawer.classList.contains('_coral-Drawer--up')).to.be.true;
       });
   
       it('should set direction class down', function() {
         var drawer = helpers.build(window.__html__['Coral.Drawer.up.html']);
         expect(drawer.direction).to.equal('up');
-        expect(drawer.classList.contains('coral3-Drawer--up')).to.be.true;
+        expect(drawer.classList.contains('_coral-Drawer--up')).to.be.true;
         drawer.direction = 'down';
     
-        expect(drawer.classList.contains('coral3-Drawer--down')).to.be.true;
+        expect(drawer.classList.contains('_coral-Drawer--down')).to.be.true;
       });
     });
 

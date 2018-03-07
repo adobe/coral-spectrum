@@ -20,7 +20,7 @@ import MasonryItem from './MasonryItem';
 import {SelectableCollection} from '/coralui-collection';
 import {transform, commons} from '/coralui-util';
 
-const CLASSNAME = 'coral3-Masonry';
+const CLASSNAME = '_coral-Masonry';
 
 /**
  Enumeration for {@link Masonry} layouts.
@@ -545,7 +545,7 @@ class Masonry extends ComponentMixin(HTMLElement) {
       placeholder.appendChild(contentDiv);
       
       // Insert placeholder before dragged item
-      placeholder.classList.add('coral3-Masonry-item--placeholder');
+      placeholder.classList.add('_coral-Masonry-item--placeholder');
       
       this.insertBefore(placeholder, item);
     }

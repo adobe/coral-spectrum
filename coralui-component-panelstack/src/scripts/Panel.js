@@ -18,7 +18,7 @@
 import {ComponentMixin} from '/coralui-mixin-component';
 import {transform} from '/coralui-util';
 
-const CLASSNAME = 'coral3-Panel';
+const CLASSNAME = '_coral-Panel';
 
 /**
  @class Coral.Panel

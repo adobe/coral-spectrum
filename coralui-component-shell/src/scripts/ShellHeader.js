@@ -17,7 +17,7 @@
 
 import {ComponentMixin} from '/coralui-mixin-component';
 
-const CLASSNAME = 'coral3-Shell-header';
+const CLASSNAME = '_coral-Shell-header';
 
 /**
  @class Coral.Shell.Header

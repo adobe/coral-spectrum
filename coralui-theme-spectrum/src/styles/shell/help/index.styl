@@ -24,12 +24,12 @@ $shell-help-background = white;
 $shell-loading-middle = 48%; // Better visual centering
 $shell-loading-spacing = 16*$px;
 
-.coral3-Shell-help {
+._coral-Shell-help {
   display: block;
   width: $shell-help-width;
 }
 
-.coral3-Shell-help-search {
+._coral-Shell-help-search {
   width: 100%;
 
   input[is="coral-textfield"] {
@@ -41,15 +41,15 @@ $shell-loading-spacing = 16*$px;
   }
 }
 
-.coral3-Shell-help-items {
+._coral-Shell-help-items {
   padding: 3*$px 0;
 }
 
-.coral3-Shell-help-result-item {
+._coral-Shell-help-result-item {
   height: auto;
 }
 
-.coral3-Shell-help-result-description {
+._coral-Shell-help-result-description {
   color: rgb(112, 112, 112);
   font-weight: 300;
   letter-spacing: 0.125px; // Tweak: Letters were too close
@@ -60,8 +60,8 @@ $shell-loading-spacing = 16*$px;
   text-overflow: ellipsis;
 }
 
-.coral3-Shell-help-loading,
-.coral3-Shell-help-resultMessage {
+._coral-Shell-help-loading,
+._coral-Shell-help-resultMessage {
   // Contain the wait component
   position: relative;
   display: block;
@@ -70,17 +70,17 @@ $shell-loading-spacing = 16*$px;
   background-color: $shell-help-background;
 }
 
-.coral3-Shell-help-resultMessage {
+._coral-Shell-help-resultMessage {
   display: table;
   width: 100%;
 }
 
-.coral3-Shell-help-resultMessage-heading {
+._coral-Shell-help-resultMessage-heading {
   margin-bottom: 12*$px;
   margin-top: -8*$px;
 }
 
-.coral3-Shell-help-resultMessage-container {
+._coral-Shell-help-resultMessage-container {
   display: table-cell;
 
   padding: 0 20*$px;
@@ -90,7 +90,7 @@ $shell-loading-spacing = 16*$px;
   text-align: center;
 }
 
-.coral3-Shell-help-loading-wait {
+._coral-Shell-help-loading-wait {
   position: absolute;
   bottom: (100% - $shell-loading-middle);
   left: 50%;
@@ -99,7 +99,7 @@ $shell-loading-spacing = 16*$px;
   margin-bottom: ($shell-loading-spacing / 2);
 }
 
-.coral3-Shell-help-loading-info {
+._coral-Shell-help-loading-info {
   position: absolute;
   top: $shell-loading-middle;
   left: 0;

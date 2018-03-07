@@ -19,7 +19,7 @@ import {ComponentMixin} from '/coralui-mixin-component';
 import {SelectableCollection} from '/coralui-collection';
 import {transform} from '/coralui-util';
 
-const CLASSNAME = 'coral3-TreeView';
+const CLASSNAME = '_coral-TreeView';
 
 const INDICATOR_HIT_SIZE = {x: 30, y: 36};
 
@@ -39,21 +39,21 @@ class Tree extends ComponentMixin(HTMLElement) {
     
     // Attach events
     this._delegateEvents({
-      'click .coral3-TreeView-link': '_onItemClick',
+      'click ._coral-TreeView-link': '_onItemClick',
       'coral-collection:add coral-tree-item': '_onCollectionChange',
       'coral-collection:remove coral-tree-item': '_onCollectionChange',
       // a11y
-      'key:space .coral3-TreeView-link': '_onItemClick',
-      'key:enter .coral3-TreeView-link': '_onExpandCollapseClick',
-      'key:pageup .coral3-TreeView-link': '_onFocusPreviousItem',
-      'key:left .coral3-TreeView-link': '_onFocusPreviousItem',
-      'key:up .coral3-TreeView-link': '_onFocusPreviousItem',
-      'key:pagedown .coral3-TreeView-link': '_onFocusNextItem',
-      'key:right .coral3-TreeView-link': '_onFocusNextItem',
-      'key:down .coral3-TreeView-link': '_onFocusNextItem',
-      'key:home .coral3-TreeView-link': '_onFocusFirstItem',
-      'key:end .coral3-TreeView-link': '_onFocusLastItem',
-      'capture:blur .coral3-TreeView-link[tabindex="0"]': '_onItemBlur',
+      'key:space ._coral-TreeView-link': '_onItemClick',
+      'key:enter ._coral-TreeView-link': '_onExpandCollapseClick',
+      'key:pageup ._coral-TreeView-link': '_onFocusPreviousItem',
+      'key:left ._coral-TreeView-link': '_onFocusPreviousItem',
+      'key:up ._coral-TreeView-link': '_onFocusPreviousItem',
+      'key:pagedown ._coral-TreeView-link': '_onFocusNextItem',
+      'key:right ._coral-TreeView-link': '_onFocusNextItem',
+      'key:down ._coral-TreeView-link': '_onFocusNextItem',
+      'key:home ._coral-TreeView-link': '_onFocusFirstItem',
+      'key:end ._coral-TreeView-link': '_onFocusLastItem',
+      'capture:blur ._coral-TreeView-link[tabindex="0"]': '_onItemBlur',
       // private
       'coral-tree-item:_selectedchanged': '_onItemSelectedChanged',
       'coral-tree-item:_disabledchanged': '_onFocusableChanged',
@@ -397,7 +397,7 @@ class Tree extends ComponentMixin(HTMLElement) {
   
   /** @private */
   _getFocusable() {
-    return this.querySelector('coral-tree-item > .coral3-TreeView-link[tabindex="0"]');
+    return this.querySelector('coral-tree-item > ._coral-TreeView-link[tabindex="0"]');
   }
   
   /** @private */
@@ -406,7 +406,7 @@ class Tree extends ComponentMixin(HTMLElement) {
   }
   
   _onItemBlur() {
-    const focused = this.querySelector('.coral3-TreeView-link.focus-ring');
+    const focused = this.querySelector('._coral-TreeView-link.focus-ring');
     if (focused) {
       focused.classList.remove('focus-ring');
     }

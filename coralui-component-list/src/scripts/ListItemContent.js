@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-const CLASSNAME = 'coral3-BasicList-item-content';
+const CLASSNAME = '_coral-BasicList-item-content';
 
 /**
  @class Coral.List.Item.Content

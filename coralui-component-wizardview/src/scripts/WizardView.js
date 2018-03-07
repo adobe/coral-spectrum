@@ -21,7 +21,7 @@ import '/coralui-component-steplist';
 import '/coralui-component-panelstack';
 import {commons} from '/coralui-util';
 
-const CLASSNAME = 'coral3-WizardView';
+const CLASSNAME = '_coral-WizardView';
 
 /**
  @class Coral.WizardView

@@ -20,7 +20,7 @@ import {transform} from '/coralui-util';
 import '/coralui-component-icon';
 import icon from '../templates/checkIcon';
 
-const CLASSNAME = 'coral3-SelectList-item';
+const CLASSNAME = '_coral-SelectList-item';
 
 /**
  @class Coral.SelectList.Item
@@ -132,12 +132,12 @@ class SelectListItem extends ComponentMixin(HTMLElement) {
   connectedCallback() {
     super.connectedCallback();
     
-    this.classList.add(CLASSNAME, 'coral3-BasicList-item');
+    this.classList.add(CLASSNAME, '_coral-BasicList-item');
     
     this.setAttribute('role', 'option');
   
     // Support cloneNode
-    const template = this.querySelector('.coral3-SelectList-icon');
+    const template = this.querySelector('._coral-SelectList-icon');
     if (template) {
       template.remove();
     }

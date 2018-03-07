@@ -17,7 +17,7 @@
 
 import {ComponentMixin} from '/coralui-mixin-component';
 
-const CLASSNAME = 'coral3-ActionBar-item';
+const CLASSNAME = '_coral-ActionBar-item';
 
 /**
  @class Coral.ActionBar.Item

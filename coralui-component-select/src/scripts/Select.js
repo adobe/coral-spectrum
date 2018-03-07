@@ -51,7 +51,7 @@ const overlayOffset = {
   quiet: 4
 };
 
-const CLASSNAME = 'coral3-Dropdown';
+const CLASSNAME = '_coral-Dropdown';
 
 // used in 'auto' mode to determine if the client is on mobile.
 const IS_MOBILE_DEVICE = navigator.userAgent.match(/iPhone|iPad|iPod|Android/i) !== null;
@@ -120,10 +120,10 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       'change coral-taglist': '_onTagListChange',
       'change select': '_onNativeSelectChange',
       'click select': '_onNativeSelectClick',
-      'click > .coral3-Dropdown-trigger': '_onButtonClick',
+      'click > ._coral-Dropdown-trigger': '_onButtonClick',
 
-      'key:space > .coral3-Dropdown-trigger': '_onSpaceKey',
-      'key:down > .coral3-Dropdown-trigger': '_onSpaceKey',
+      'key:space > ._coral-Dropdown-trigger': '_onSpaceKey',
+      'key:down > ._coral-Dropdown-trigger': '_onSpaceKey',
       'key:tab coral-selectlist-item': '_onTabKey',
       'key:tab+shift coral-selectlist-item': '_onTabKey',
       
@@ -563,8 +563,8 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
   
-    this._elements.button.classList.toggle('coral3-Button--dropdown', this._variant === variant.DEFAULT);
-    this._elements.button.classList.toggle('coral3-Button--quiet--dropdown', this._variant === variant.QUIET);
+    this._elements.button.classList.toggle('_coral-Button--dropdown', this._variant === variant.DEFAULT);
+    this._elements.button.classList.toggle('_coral-Button--quiet--dropdown', this._variant === variant.QUIET);
     
     // sets the separation of the overlay from the button based on the variant
     this._elements.overlay.offset = overlayOffset[this._variant];

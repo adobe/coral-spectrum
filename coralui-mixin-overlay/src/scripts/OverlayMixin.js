@@ -345,7 +345,7 @@ function doBackdropShow(zIndex, instance) {
   
   if (!backdropEl) {
     backdropEl = document.createElement('div');
-    backdropEl.className = 'coral3-Underlay';
+    backdropEl.className = '_coral-Underlay';
     document.body.appendChild(backdropEl);
     
     backdropEl.addEventListener('click', handleBackdropClick);

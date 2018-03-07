@@ -4,7 +4,7 @@ describe('Coral.CharacterCount', function() {
   describe('Instantiation', function() {
     it('should be possible using new', function() {
       var defaultCharacterCount = helpers.build(new Coral.CharacterCount());
-      expect(defaultCharacterCount.classList.contains('coral3-CharacterCount')).to.be.true;
+      expect(defaultCharacterCount.classList.contains('_coral-CharacterCount')).to.be.true;
       expect(defaultCharacterCount).to.have.property('target');
       expect(defaultCharacterCount).to.have.property('maxLength');
       expect(defaultCharacterCount.target).to.equal(Coral.CharacterCount.target.PREVIOUS);
@@ -13,7 +13,7 @@ describe('Coral.CharacterCount', function() {
 
     it('should be possible using createElement', function() {
       var defaultCharacterCount = helpers.build(document.createElement('coral-charactercount'));
-      expect(defaultCharacterCount.classList.contains('coral3-CharacterCount')).to.be.true;
+      expect(defaultCharacterCount.classList.contains('_coral-CharacterCount')).to.be.true;
       expect(defaultCharacterCount).to.have.property('target');
       expect(defaultCharacterCount).to.have.property('maxLength');
       expect(defaultCharacterCount.target).to.equal(Coral.CharacterCount.target.PREVIOUS);
@@ -22,7 +22,7 @@ describe('Coral.CharacterCount', function() {
 
     it('should be possible using markup', function() {
       var defaultCharacterCount = helpers.build('<coral-charactercount></coral-charactercount>');
-      expect(defaultCharacterCount.classList.contains('coral3-CharacterCount')).to.be.true;
+      expect(defaultCharacterCount.classList.contains('_coral-CharacterCount')).to.be.true;
       expect(defaultCharacterCount).to.have.property('target');
       expect(defaultCharacterCount).to.have.property('maxLength');
       expect(defaultCharacterCount.target).to.equal(Coral.CharacterCount.target.PREVIOUS);

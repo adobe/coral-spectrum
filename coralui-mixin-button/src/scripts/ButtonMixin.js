@@ -77,7 +77,7 @@ const variant = {
 };
 
 // the button's base classname
-const CLASSNAME = 'coral3-Button';
+const CLASSNAME = '_coral-Button';
 
 // builds an array containing all possible variant classnames. this will be used to remove classnames when the variant
 // changes

@@ -19,7 +19,7 @@ import '/coralui-component-icon';
 import item from '../templates/item';
 import {transform} from '/coralui-util';
 
-const CLASSNAME = 'coral3-BasicList-item';
+const CLASSNAME = '_coral-BasicList-item';
 
 /**
  @mixin ListItemMixin
@@ -99,7 +99,7 @@ const ListItemMixin = (superClass) => class extends superClass {
   connectedCallback() {
     super.connectedCallback();
     
-    this.classList.add(CLASSNAME, 'coral3-SelectList-item');
+    this.classList.add(CLASSNAME, '_coral-SelectList-item');
   
     // The attribute that makes different types of list items co-exist
     // This is also used for event delegation

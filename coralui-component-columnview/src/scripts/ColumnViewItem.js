@@ -20,7 +20,7 @@ import {Icon} from '/coralui-component-icon';
 import {Checkbox} from '/coralui-component-checkbox';
 import {transform, validate} from '/coralui-util';
 
-const CLASSNAME = 'coral3-MillerColumn-item';
+const CLASSNAME = '_coral-MillerColumn-item';
 
 /**
  Enumeration for {@link ColumnViewItem} variants.
@@ -71,7 +71,7 @@ class ColumnViewItem extends ComponentMixin(HTMLElement) {
       tagName: 'coral-columnview-item-content',
       insert: function(content) {
         // Insert before chevron
-        this.insertBefore(content, this.querySelector('.coral3-MillerColumn-childIndicator'));
+        this.insertBefore(content, this.querySelector('._coral-MillerColumn-childIndicator'));
       }
     });
   }
@@ -114,9 +114,9 @@ class ColumnViewItem extends ComponentMixin(HTMLElement) {
   
     if (this._variant === variant.DRILLDOWN) {
       // Render chevron on demand
-      const childIndicator = this.querySelector('.coral3-MillerColumn-childIndicator');
+      const childIndicator = this.querySelector('._coral-MillerColumn-childIndicator');
       if (!childIndicator) {
-        this.insertAdjacentHTML('beforeend', Icon._renderSVG('spectrum-css-icon-MillerColumnRightChevron', ['coral3-MillerColumn-childIndicator']));
+        this.insertAdjacentHTML('beforeend', Icon._renderSVG('spectrum-css-icon-MillerColumnRightChevron', ['_coral-MillerColumn-childIndicator']));
       }
       
       this.classList.add('is-branch');

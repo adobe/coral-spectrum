@@ -43,41 +43,41 @@ coral-shell-menu {
   }
 }
 
-.coral3-Shell-menubar {
+._coral-Shell-menubar {
   // Live in harmony with buttons
   display: inline-block;
 }
 
-.coral3-Shell-menubar-item {
+._coral-Shell-menubar-item {
   display: inline-block;
 
   vertical-align: top;
 }
 
-.coral3-Shell-menubar-item--circle {
-  .coral3-Icon--image {
+._coral-Shell-menubar-item--circle {
+  ._coral-Icon--image {
     // center image inside button due to removed borders
     margin-top: -2*$px;
   }
 
-  .coral3-Icon--sizeXXS .coral3-Icon--image {
+  ._coral-Icon--sizeXXS ._coral-Icon--image {
     border-radius : 9*$px;
   }
 
-  .coral3-Icon--sizeXS .coral3-Icon--image {
+  ._coral-Icon--sizeXS ._coral-Icon--image {
     border-radius : 12*$px;
   }
 
-  .coral3-Icon--sizeS .coral3-Icon--image {
+  ._coral-Icon--sizeS ._coral-Icon--image {
     border-radius : 18*$px;
   }
 
-  .coral3-Icon--sizeM .coral3-Icon--image {
+  ._coral-Icon--sizeM ._coral-Icon--image {
     border-radius : 24*$px;
   }
 }
 
-.coral3-Shell-menu {
+._coral-Shell-menu {
   position: absolute;
 
   max-height: "calc(100% - %s)" % $shell-header-height;
@@ -103,14 +103,14 @@ coral-shell-menu {
   }
 }
 
-.coral3-Shell-menu--full {
+._coral-Shell-menu--full {
   border-radius: 0;
 }
 
-.coral3-Shell-menu--placement-top {
+._coral-Shell-menu--placement-top {
   top: $shell-header-height;
 
-  &.coral3-Shell-menu--full {
+  &._coral-Shell-menu--full {
     left: 0;
     right: 0;
     border: none;
@@ -118,11 +118,11 @@ coral-shell-menu {
   }
 }
 
-.coral3-Shell-menu--placement-right {
+._coral-Shell-menu--placement-right {
   top: $shell-header-height;
   right: 0;
 
-  &.coral3-Shell-menu--full {
+  &._coral-Shell-menu--full {
     // Determined by position
     max-height: none;
 
@@ -132,19 +132,19 @@ coral-shell-menu {
   }
 }
 
-.coral3-Shell-menu--from-top {
+._coral-Shell-menu--from-top {
   transform: translateY(-100%);
 }
 
-.coral3-Shell-menu--from-right {
+._coral-Shell-menu--from-right {
   transform: translateX(100%);
 }
 
-.coral3-Shell-menu-button {
+._coral-Shell-menu-button {
   position: relative;
 }
 
-.coral3-Shell-menu-button[badge]:after {
+._coral-Shell-menu-button[badge]:after {
   content: attr(badge);
   position: absolute;
   top: 3*$px;

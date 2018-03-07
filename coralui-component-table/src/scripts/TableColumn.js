@@ -19,7 +19,7 @@ import {ComponentMixin} from '/coralui-mixin-component';
 import {alignment} from './TableUtil';
 import {transform, validate} from '/coralui-util';
 
-const CLASSNAME = 'coral3-Table-column';
+const CLASSNAME = '_coral-Table-column';
 
 /**
  Enumeration for {@link TableColumn} sortable direction options.

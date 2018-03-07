@@ -30,7 +30,7 @@ $shell-solution-text-color-hover = white;
 $shell-solution-icon-color = rgba(255, 255, 255, .45);
 $shell-solution-secondary-icon-color = rgba(255, 255, 255, .60);
 
-.coral3-Shell-solutionSwitcher {
+._coral-Shell-solutionSwitcher {
   position: relative;
   display: flex;
   padding: 48*$px 5%;
@@ -45,7 +45,7 @@ $shell-solution-secondary-icon-color = rgba(255, 255, 255, .60);
   }
 }
 
-.coral3-Shell-solutions-container {
+._coral-Shell-solutions-container {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -58,7 +58,7 @@ $shell-solution-secondary-icon-color = rgba(255, 255, 255, .60);
   justify-content: space-around;
 }
 
-.coral3-Shell-solutions {
+._coral-Shell-solutions {
   padding-right: 25*$px;
   width: inherit;
   display: flex;
@@ -76,7 +76,7 @@ coral-shell-solutions-header {
   font-weight: bold;
 }
 
-.coral3-Shell-solution {
+._coral-Shell-solution {
   display: flex;
   height: $shell-solutionswitcher-icon-container-height;
   align-items: center;
@@ -95,24 +95,24 @@ coral-shell-solutions-header {
   }
 }
 
-.coral3-Shell-solution:hover {
+._coral-Shell-solution:hover {
   color: $shell-solution-text-color-hover;
 }
 
-.coral3-Shell-solution--linked {
+._coral-Shell-solution--linked {
   color: $shell-solution-linked-text-color;
 }
 
-.coral3-Shell-solution--linked:hover .coral3-Shell-solution-icon {
+._coral-Shell-solution--linked:hover ._coral-Shell-solution-icon {
   transform: scale(1.2);
 }
 
-.coral3-Shell-solution--linked .coral3-Shell-solution-icon:before {
+._coral-Shell-solution--linked ._coral-Shell-solution-icon:before {
   width: $shell-solutionswitcher-linked-solution-iconsize;
   height: $shell-solutionswitcher-linked-solution-iconsize;
 }
 
-.coral3-Shell-solution-icon {
+._coral-Shell-solution-icon {
   color: $shell-solution-icon-color;
   font-size: $shell-solutionswitcher-iconsize;
   will-change: transform;
@@ -131,7 +131,7 @@ coral-shell-solution-label {
 }
 
 // Secondary menu styling
-.coral3-Shell-solutions--secondary {
+._coral-Shell-solutions--secondary {
   @media (min-width: 900px) {
     width: 25%;
   }
@@ -145,7 +145,7 @@ coral-shell-solution-label {
   padding-right: 0;
   whitespace: nowrap;
 
-  .coral3-Shell-solution {
+  ._coral-Shell-solution {
     display: block;
     height: auto;
     width: auto;
@@ -154,7 +154,7 @@ coral-shell-solution-label {
     text-align: left;
 
     &:hover {
-      .coral3-Shell-solution-icon {
+      ._coral-Shell-solution-icon {
         transform: scale(1);
       }
       coral-shell-solution-label {
@@ -163,7 +163,7 @@ coral-shell-solution-label {
     }
   }
 
-  .coral3-Shell-solution-icon {
+  ._coral-Shell-solution-icon {
     display: none;
   }
 

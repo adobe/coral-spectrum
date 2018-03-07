@@ -8,7 +8,7 @@ describe('Coral.Masonry.Layout', function() {
   describe('Instantiation', function() {
   
     function testInstance(masonry, expectedLayout) {
-      expect(masonry.classList.contains('coral3-Masonry')).to.be.true;
+      expect(masonry.classList.contains('_coral-Masonry')).to.be.true;
       expect(masonry.getAttribute('layout')).to.equal(expectedLayout);
     }
     

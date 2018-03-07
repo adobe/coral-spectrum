@@ -49,11 +49,11 @@ describe('Coral.Textarea', function() {
 
       it('should be possible to set the variant', function() {
 
-        expect(el.classList.contains('coral3-Textfield--quiet')).to.be.false;
+        expect(el.classList.contains('_coral-Textfield--quiet')).to.be.false;
 
         el.variant = Coral.Textarea.variant.QUIET;
         expect(el.variant).to.equal(Coral.Textarea.variant.QUIET, '"quiet" should be set');
-        expect(el.classList.contains('coral3-Textfield--quiet')).to.be.true;
+        expect(el.classList.contains('_coral-Textfield--quiet')).to.be.true;
       });
 
       it('should increase the height automatically if variant=quiet', function() {

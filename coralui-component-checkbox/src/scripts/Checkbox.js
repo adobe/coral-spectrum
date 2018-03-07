@@ -24,7 +24,7 @@ import {transform, commons} from '/coralui-util';
 const IS_IE_OR_EDGE = navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0 ||
   window.navigator.userAgent.indexOf('Edge') !== -1;
 
-const CLASSNAME = 'coral3-Checkbox';
+const CLASSNAME = '_coral-Checkbox';
 
 /**
  @class Coral.Checkbox

@@ -100,7 +100,7 @@ describe('Coral.ActionBar', function() {
   describe('Markup', function() {
     it('should have right classes set', function() {
       const bar = helpers.build(window.__html__['Coral.ActionBar.empty.html']);
-      expect(bar.classList.contains('coral3-ActionBar')).to.be.true;
+      expect(bar.classList.contains('_coral-ActionBar')).to.be.true;
     });
 
     it('should generate the matching content zones', function() {

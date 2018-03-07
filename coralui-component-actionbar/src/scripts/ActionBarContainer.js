@@ -19,7 +19,7 @@ import {ComponentMixin} from '/coralui-mixin-component';
 import ActionBarContainerMixin from './ActionBarContainerMixin';
 import '/coralui-component-list';
 
-const CLASSNAME = 'coral3-ActionBar-container';
+const CLASSNAME = '_coral-ActionBar-container';
 
 /**
  Enumeration for {@link ActionBarContainer} positions.

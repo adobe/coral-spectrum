@@ -17,7 +17,7 @@
 
 import {AnchorListItem} from '/coralui-component-list';
 
-const CLASSNAME = ['coral3-BasicList-item', 'coral3-AnchorList-item', 'coral3-Shell-help-item'];
+const CLASSNAME = ['_coral-BasicList-item', '_coral-AnchorList-item', '_coral-Shell-help-item'];
 
 /**
  @class Coral.Shell.Help.Item
