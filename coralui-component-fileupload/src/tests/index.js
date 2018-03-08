@@ -1,4 +1,2 @@
-import '../../index';
-
-import './test.Coral.FileUpload.Item';
-import './test.Coral.FileUpload';
+import './test.FileUpload.Item';
+import './test.FileUpload';

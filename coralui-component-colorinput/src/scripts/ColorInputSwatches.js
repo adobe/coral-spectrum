@@ -21,7 +21,7 @@ import ColorInputSwatch from './ColorInputSwatch';
 import Color from './Color';
 import {SelectableCollection} from '/coralui-collection';
 import swatchesHeader from '../templates/swatchesHeader';
-import {commons} from '/coralui-util';
+import {commons, i18n} from '/coralui-util';
 
 const CLASSNAME = '_coral-ColorInput-swatches';
 
@@ -50,7 +50,7 @@ class ColorInputSwatches extends ColorInputAbstractSubviewMixin(ComponentMixin(H
     
     // Templates
     this._elements = {};
-    swatchesHeader.call(this._elements);
+    swatchesHeader.call(this._elements, {commons, i18n});
   
     // Used for eventing
     this._oldSelection = null;

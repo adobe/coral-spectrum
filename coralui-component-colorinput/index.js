@@ -15,6 +15,7 @@ commons.extend(strings, {
   'coralui-component-colorinput': translations
 });
 
+// Expose component on the Coral namespace
 window.customElements.define('coral-colorinput', ColorInput);
 window.customElements.define('coral-colorinput-item', ColorInputItem);
 window.customElements.define('coral-colorinput-swatches', ColorInputSwatches);
@@ -22,14 +23,10 @@ window.customElements.define('coral-colorinput-swatch', ColorInputSwatch);
 window.customElements.define('coral-colorinput-slider', ColorInputSlider);
 window.customElements.define('coral-colorinput-colorproperties', ColorInputColorProperties);
 
-// Expose component on the Coral namespace
-window.Coral = window.Coral || {};
-window.Coral.Color = Color;
-window.Coral.ColorInput = ColorInput;
-window.Coral.ColorInput.Item = ColorInputItem;
-window.Coral.ColorInput.Swatches = ColorInputSwatches;
-window.Coral.ColorInput.Swatch = ColorInputSwatch;
-window.Coral.ColorInput.Slider = ColorInputSlider;
-window.Coral.ColorInput.ColorProperties = ColorInputColorProperties;
+ColorInput.Item = ColorInputItem;
+ColorInput.Swatches = ColorInputSwatches;
+ColorInput.Swatch = ColorInputSwatch;
+ColorInput.Slider = ColorInputSlider;
+ColorInput.ColorProperties = ColorInputColorProperties;
 
-export {Color, ColorInput, ColorInputItem, ColorInputSwatches, ColorInputSwatch, ColorInputSlider, ColorInputColorProperties};
+export {Color, ColorInput};

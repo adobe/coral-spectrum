@@ -17,7 +17,7 @@
 
 import {ComponentMixin} from '/coralui-mixin-component';
 import {FormFieldMixin} from '/coralui-mixin-formfield';
-import '/coralui-component-icon';
+import {Icon} from '/coralui-component-icon';
 import base from '../templates/base';
 import {transform, commons} from '/coralui-util';
 
@@ -50,7 +50,7 @@ class Checkbox extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       // Try to find the label content zone or create one
       label: this.querySelector('coral-checkbox-label') || document.createElement('coral-checkbox-label')
     };
-    base.call(this._elements);
+    base.call(this._elements, {commons, Icon});
   
     // Pre-define labellable element
     this._labellableElement = this._elements.input;

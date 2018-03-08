@@ -1,3 +1,1 @@
-import '../../index';
-
-import './test.Coral.Textarea';
+import './test.Textarea';

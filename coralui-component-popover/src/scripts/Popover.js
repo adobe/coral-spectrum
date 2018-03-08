@@ -18,7 +18,7 @@
 import {Overlay} from '/coralui-component-overlay';
 import {Icon} from '/coralui-component-icon';
 import base from '../templates/base';
-import {commons, transform, validate} from '/coralui-util';
+import {commons, transform, validate, i18n} from '/coralui-util';
 
 const CLASSNAME = '_coral-Popover';
 
@@ -105,7 +105,7 @@ class Popover extends Overlay {
       content: this.querySelector('coral-popover-content') || document.createElement('coral-popover-content'),
       footer: this.querySelector('coral-popover-footer') || document.createElement('coral-popover-footer')
     });
-    base.call(this._elements);
+    base.call(this._elements, {i18n: i18n});
     
     // Events
     this._delegateEvents({

@@ -4,18 +4,18 @@
     // @todo move this to theme
     var maxHeight = 'max-height:' + (32 * 6) + 'px';
   </js>
-  <coral-buttonlist style="{{maxHeight}}" id="{{Coral.commons.getUID()}}" class="_coral-Autocomplete-selectList" handle="selectList" role="listbox" interaction="off"></coral-buttonlist>
+  <coral-buttonlist style="{{maxHeight}}" id="{{data.commons.getUID()}}" class="_coral-Autocomplete-selectList" handle="selectList" role="listbox" interaction="off"></coral-buttonlist>
 </coral-popover>
 <input type="hidden" handle="field">
 <div class="_coral-InputGroup _coral-Autocomplete-inputGroup" handle="inputGroup" role="presentation">
   <input class="_coral-InputGroup-input _coral-Autocomplete-input" type="text" autocomplete="off" handle="input" role="textbox" is="coral-textfield">
-  <button type="button" class="_coral-Button--dropdown _coral-InputGroup-button _coral-Autocomplete-trigger" is="coral-button" variant="_custom" handle="trigger" aria-label="{{Coral.i18n.get('Show suggestions')}}" title="{{Coral.i18n.get('Show suggestions')}}">
+  <button type="button" class="_coral-Button--dropdown _coral-InputGroup-button _coral-Autocomplete-trigger" is="coral-button" variant="_custom" handle="trigger" aria-label="{{data.i18n.get('Show suggestions')}}" title="{{data.i18n.get('Show suggestions')}}">
     <coral-button-label handle="label"></coral-button-label>
     <js>
       // Don't wait for button MO to pick up the label
       this.trigger._elements.label = this.label;
       // Render invalid icon
-      this.trigger.insertAdjacentHTML('beforeend', Coral.Icon._renderSVG('spectrum-css-icon-SelectDownChevron', ['_coral-InputGroup-icon']));
+      this.trigger.insertAdjacentHTML('beforeend', data.Icon._renderSVG('spectrum-css-icon-SelectDownChevron', ['_coral-InputGroup-icon']));
     </js>
   </button>
 </div>

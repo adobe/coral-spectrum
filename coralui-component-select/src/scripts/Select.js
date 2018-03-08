@@ -20,8 +20,8 @@ import {FormFieldMixin} from '/coralui-mixin-formfield';
 import {SelectableCollection} from '/coralui-collection';
 import '/coralui-component-button';
 import {Tag} from '/coralui-component-taglist';
-import {SelectListItem} from '/coralui-component-list';
-import '/coralui-component-icon';
+import {SelectList} from '/coralui-component-list';
+import {Icon} from '/coralui-component-icon';
 import '/coralui-component-popover';
 import base from '../templates/base';
 import {transform, validate, commons, i18n, Keys} from '/coralui-util';
@@ -139,7 +139,7 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
 
     // Templates
     this._elements = {};
-    base.call(this._elements);
+    base.call(this._elements, {commons, Icon});
   
     // Pre-define labellable element
     this._labellableElement = this._elements.button;
@@ -695,7 +695,7 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   _onItemAdded(item) {
     const selectListItemParent = this._elements.list;
   
-    const selectListItem = item._selectListItem || new SelectListItem();
+    const selectListItem = item._selectListItem || new SelectList.Item();
     
     // @todo: Make sure it is added at the right index.
     selectListItemParent.appendChild(selectListItem);

@@ -15,6 +15,7 @@ import CardContent from './src/scripts/CardContent';
 import CardPropertyList from './src/scripts/CardPropertyList';
 import CardPropertyContent from './src/scripts/CardPropertyContent';
 
+// Expose component on the Coral namespace
 window.customElements.define('coral-card', Card);
 window.customElements.define('coral-card-banner', CardBanner);
 window.customElements.define('coral-card-banner-header', CardBannerHeader);
@@ -25,37 +26,19 @@ window.customElements.define('coral-card-subtitle', CardSubtitle);
 window.customElements.define('coral-card-context', CardContext);
 window.customElements.define('coral-card-description', CardDescription);
 
-// Expose component on the Coral namespace
-window.Coral = window.Coral || {};
-window.Coral.Card = Card;
-window.Coral.Card.Banner = CardBanner;
-window.Coral.Card.Banner.Header = CardBannerHeader;
-window.Coral.Card.Banner.Content = CardBannerContent;
-window.Coral.Card.Property = CardProperty;
-window.Coral.Card.Title = CardTitle;
-window.Coral.Card.Subtitle = CardSubtitle;
-window.Coral.Card.Context = CardContext;
-window.Coral.Card.Description = CardDescription;
-window.Coral.Card.Asset = CardAsset;
-window.Coral.Card.Overlay = CardOverlay;
-window.Coral.Card.Info = CardInfo;
-window.Coral.Card.Content = CardContent;
-window.Coral.Card.PropertyList = CardPropertyList;
-window.Coral.Card.Property.Content = CardPropertyContent;
+Card.Banner = CardBanner;
+Card.Banner.Header = CardBannerHeader;
+Card.Banner.Content = CardBannerContent;
+Card.Property = CardProperty;
+Card.Property.Content = CardPropertyContent;
+Card.Title = CardTitle;
+Card.Subtitle = CardSubtitle;
+Card.Context = CardContext;
+Card.Description = CardDescription;
+Card.Asset = CardAsset;
+Card.Overlay = CardOverlay;
+Card.Info = CardInfo;
+Card.Content = CardContent;
+Card.PropertyList = CardPropertyList;
 
-export {
-  Card,
-  CardBanner,
-  CardBannerHeader,
-  CardBannerContent,
-  CardProperty,
-  CardTitle,
-  CardSubtitle,
-  CardContext,
-  CardDescription,
-  CardAsset,
-  CardContent,
-  CardOverlay,
-  CardPropertyContent,
-  CardPropertyList,
-};
+export {Card};

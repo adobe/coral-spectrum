@@ -1,4 +1,2 @@
-import '../../index';
-
-import './test.Coral.Slider';
-import './test.Coral.RangedSlider';
+import './test.Slider';
+import './test.RangedSlider';

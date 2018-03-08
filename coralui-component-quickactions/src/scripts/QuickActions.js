@@ -24,7 +24,7 @@ import {Collection} from '/coralui-collection';
 import QuickActionsItem from './QuickActionsItem';
 import '/coralui-component-popover';
 import base from '../templates/base';
-import {transform, validate} from '/coralui-util';
+import {transform, validate, commons, i18n} from '/coralui-util';
 
 // MUST be kept in sync with quickactions.styl $coral-quickactions-button-gap
 const BUTTON_GAP = 10;
@@ -156,7 +156,7 @@ class QuickActions extends Overlay {
     this._onTargetMouseLeave = this._onTargetMouseLeave.bind(this);
     
     // Template
-    base.call(this._elements);
+    base.call(this._elements, {commons, i18n});
   
     // delegates the item handling to the collection
     this.items._startHandlingItems(true);

@@ -21,7 +21,7 @@ import {Tag} from '/coralui-component-taglist';
 import {SelectableCollection} from '/coralui-collection';
 import AutocompleteItem from './AutocompleteItem';
 import {Textfield} from '/coralui-component-textfield';
-import '/coralui-component-icon';
+import {Icon} from '/coralui-component-icon';
 import '/coralui-component-button';
 import '/coralui-component-list';
 import '/coralui-component-popover';
@@ -95,7 +95,7 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     // Template
     this._elements = {};
-    base.call(this._elements);
+    base.call(this._elements, {Icon, commons, i18n});
     
     this._elements.tagList.reset = () => {
       // Kill inner tagList reset so it doesn't interfer with the autocomplete reset

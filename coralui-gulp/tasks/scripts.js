@@ -28,6 +28,7 @@ module.exports = function(gulp) {
       .pipe(plumber())
       .pipe(sourceMaps.init())
       .pipe(rollup({
+        moduleName: 'Coral',
         plugins: rollupConfig.plugins
       }, 'iife'))
       .pipe(sourceMaps.write())

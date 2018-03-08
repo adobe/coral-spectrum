@@ -1,222 +1,53 @@
-import {Accordion, AccordionItem, AccordionItemContent, AccordionItemLabel} from '/coralui-component-accordion';
-import {ActionBar, ActionBarItem, ActionBarPrimary, ActionBarSecondary, ActionBarContainer} from '/coralui-component-actionbar';
-import {Alert, AlertHeader, AlertContent, AlertFooter} from '/coralui-component-alert';
-import {AnchorButton, AnchorButtonLabel} from '/coralui-component-anchorbutton';
-import {Autocomplete, AutocompleteItem} from '/coralui-component-autocomplete';
-import {Button, ButtonLabel} from '/coralui-component-button';
-import {ButtonGroup} from '/coralui-component-buttongroup';
-import {Calendar} from '/coralui-component-calendar';
-import {Card, CardBanner, CardBannerHeader, CardBannerContent, CardProperty, CardTitle, CardSubtitle, CardContext, CardDescription, CardAsset, CardContent, CardOverlay, CardPropertyContent, CardPropertyList} from '/coralui-component-card';
-import {CharacterCount} from '/coralui-component-charactercount';
-import {Checkbox, CheckboxLabel} from '/coralui-component-checkbox';
-import {Clock} from '/coralui-component-clock';
-import {Color, ColorInput, ColorInputItem, ColorInputSwatches, ColorInputSwatch, ColorInputSlider, ColorInputColorProperties} from '/coralui-component-colorinput';
-import {ColumnView, ColumnViewColumn, ColumnViewColumnContent, ColumnViewItem, ColumnViewItemContent, ColumnViewItemThumbnail, ColumnViewPreview, ColumnViewPreviewAsset, ColumnViewPreviewContent, ColumnViewPreviewLabel, ColumnViewPreviewSeparator, ColumnViewPreviewValue} from '/coralui-component-columnview';
-import {CycleButton, CycleButtonItem, CycleButtonAction} from '/coralui-component-cyclebutton';
-import {Datepicker} from '/coralui-component-datepicker';
-import {Dialog, DialogHeader, DialogContent, DialogFooter} from '/coralui-component-dialog';
-import {DragAction} from '/coralui-dragaction';
-import {Drawer, DrawerContent} from '/coralui-component-drawer';
-import {FileUpload, FileUploadItem} from '/coralui-component-fileupload';
-import {Icon} from '/coralui-component-icon';
-import {List, ListItem, ListItemContent, ListDivider, AnchorList, AnchorListItem, ButtonList, ButtonListItem, SelectList, SelectListGroup, SelectListItem, SelectListItemContent} from '/coralui-component-list';
-import {Masonry, MasonryItem, MasonryLayout} from '/coralui-component-masonry';
-import {Multifield, MultifieldItem, MultifieldItemContent} from '/coralui-component-multifield';
-import {NumberInput} from '/coralui-component-numberinput';
-import {Overlay} from '/coralui-component-overlay';
-import {Panel, PanelStack, PanelContent} from '/coralui-component-panelstack';
-import {Popover, PopoverHeader, PopoverContent, PopoverFooter, PopoverSeparator} from '/coralui-component-popover';
-import {Progress, ProgressLabel} from '/coralui-component-progress';
-import {QuickActions, QuickActionsItem} from '/coralui-component-quickactions';
-import {Radio, RadioLabel} from '/coralui-component-radio';
-import {Shell, ShellContent, ShellHeader, ShellHomeAnchor, ShellHomeAnchorLabel, ShellHelp, ShellHelpItem, ShellMenu, ShellMenuBar, ShellMenuBarItem, ShellUser, ShellUserContent, ShellUserFooter, ShellUserHeading, ShellUserName, ShellUserSubheading, ShellWorkspaces, ShellWorkspace, ShellSolutionSwitcher, ShellSolutions, ShellSolutionsHeader, ShellSolution, ShellSolutionLabel, ShellOrgSwitcher, ShellOrganization, ShellSuborganization, ShellOrgSwitcherFooter} from '/coralui-component-shell';
-import {Select, SelectItem} from '/coralui-component-select';
-import {Search} from '/coralui-component-search';
-import {Slider, SliderItem, SliderContent, RangedSlider} from '/coralui-component-slider';
-import {StepList, Step, StepLabel} from '/coralui-component-steplist';
-import {Switch, SwitchLabel} from '/coralui-component-switch';
-import {Table, TableColumn, TableCell, TableHeaderCell, TableRow, TableHead, TableBody, TableFoot} from '/coralui-component-table';
-import {Tab, TabLabel, TabList} from '/coralui-component-tablist';
-import {TabView} from '/coralui-component-tabview';
-import {Tag, TagLabel, TagList} from '/coralui-component-taglist';
-import {Textarea} from '/coralui-component-textarea';
-import {Textfield} from '/coralui-component-textfield';
-import {Tooltip, TooltipContent} from '/coralui-component-tooltip';
-import {Tree, TreeItem, TreeItemContent} from '/coralui-component-tree';
-import {Wait} from '/coralui-component-wait';
-import {WizardView} from '/coralui-component-wizardview';
+export {Collection, SelectableCollection} from '/coralui-collection';
+export {DateTime} from '/coralui-datetime';
+export {DragAction} from '/coralui-dragaction';
+
+export {Accordion} from '/coralui-component-accordion';
+export {ActionBar} from '/coralui-component-actionbar';
+export {Alert} from '/coralui-component-alert';
+export {AnchorButton} from '/coralui-component-anchorbutton';
+export {Autocomplete} from '/coralui-component-autocomplete';
+export {Button} from '/coralui-component-button';
+export {ButtonGroup} from '/coralui-component-buttongroup';
+export {Calendar} from '/coralui-component-calendar';
+export {Card} from '/coralui-component-card';
+export {CharacterCount} from '/coralui-component-charactercount';
+export {Checkbox} from '/coralui-component-checkbox';
+export {Clock} from '/coralui-component-clock';
+export {Color, ColorInput} from '/coralui-component-colorinput';
+export {ColumnView} from '/coralui-component-columnview';
+export {CycleButton} from '/coralui-component-cyclebutton';
+export {Datepicker} from '/coralui-component-datepicker';
+export {Dialog} from '/coralui-component-dialog';
+export {Drawer} from '/coralui-component-drawer';
+export {FileUpload} from '/coralui-component-fileupload';
+export {Icon} from '/coralui-component-icon';
+export {List, AnchorList, ButtonList, SelectList} from '/coralui-component-list';
+export {Masonry} from '/coralui-component-masonry';
+export {Multifield} from '/coralui-component-multifield';
+export {NumberInput} from '/coralui-component-numberinput';
+export {Overlay} from '/coralui-component-overlay';
+export {Panel, PanelStack} from '/coralui-component-panelstack';
+export {Popover} from '/coralui-component-popover';
+export {Progress} from '/coralui-component-progress';
+export {QuickActions} from '/coralui-component-quickactions';
+export {Radio} from '/coralui-component-radio';
+export {Shell} from '/coralui-component-shell';
+export {Select} from '/coralui-component-select';
+export {Search} from '/coralui-component-search';
+export {Slider, RangedSlider} from '/coralui-component-slider';
+export {StepList, Step} from '/coralui-component-steplist';
+export {Switch} from '/coralui-component-switch';
+export {Table} from '/coralui-component-table';
+export {Tab, TabList} from '/coralui-component-tablist';
+export {TabView} from '/coralui-component-tabview';
+export {Tag, TagList} from '/coralui-component-taglist';
+export {Textarea} from '/coralui-component-textarea';
+export {Textfield} from '/coralui-component-textfield';
+export {Tooltip} from '/coralui-component-tooltip';
+export {Tree, TreeItem} from '/coralui-component-tree';
+export {Wait} from '/coralui-component-wait';
+export {WizardView} from '/coralui-component-wizardview';
 
 // For Coral3 custom elements registration support
 import '/coralui-compat';
-
-export {
-  Accordion,
-  AccordionItem,
-  AccordionItemContent,
-  AccordionItemLabel,
-  ActionBar,
-  ActionBarItem,
-  ActionBarPrimary,
-  ActionBarSecondary,
-  ActionBarContainer,
-  Alert,
-  AlertHeader,
-  AlertContent,
-  AlertFooter,
-  AnchorButton,
-  AnchorButtonLabel,
-  AnchorList,
-  AnchorListItem,
-  Autocomplete,
-  AutocompleteItem,
-  Button,
-  ButtonLabel,
-  ButtonGroup,
-  ButtonList,
-  ButtonListItem,
-  Calendar,
-  Card,
-  CardBanner,
-  CardBannerHeader,
-  CardBannerContent,
-  CardProperty,
-  CardTitle,
-  CardSubtitle,
-  CardContext,
-  CardDescription,
-  CardAsset,
-  CardContent,
-  CardOverlay,
-  CardPropertyContent,
-  CardPropertyList,
-  CharacterCount,
-  Checkbox,
-  CheckboxLabel,
-  Clock,
-  Color,
-  ColorInput,
-  ColorInputItem,
-  ColorInputSwatches,
-  ColorInputSwatch,
-  ColorInputSlider,
-  ColorInputColorProperties,
-  ColumnView,
-  ColumnViewColumn,
-  ColumnViewColumnContent,
-  ColumnViewItem,
-  ColumnViewItemContent,
-  ColumnViewItemThumbnail,
-  ColumnViewPreview,
-  ColumnViewPreviewAsset,
-  ColumnViewPreviewContent,
-  ColumnViewPreviewLabel,
-  ColumnViewPreviewSeparator,
-  ColumnViewPreviewValue,
-  CycleButton,
-  CycleButtonItem,
-  CycleButtonAction,
-  Datepicker,
-  Dialog,
-  DialogHeader,
-  DialogContent,
-  DialogFooter,
-  DragAction,
-  Drawer,
-  DrawerContent,
-  FileUpload,
-  FileUploadItem,
-  Icon,
-  List,
-  ListItem,
-  ListItemContent,
-  ListDivider,
-  Masonry,
-  MasonryItem,
-  MasonryLayout,
-  Multifield,
-  MultifieldItem,
-  MultifieldItemContent,
-  NumberInput,
-  Overlay,
-  Panel,
-  PanelStack,
-  PanelContent,
-  Popover,
-  PopoverHeader,
-  PopoverContent,
-  PopoverFooter,
-  PopoverSeparator,
-  Progress,
-  ProgressLabel,
-  QuickActions,
-  QuickActionsItem,
-  Radio,
-  RadioLabel,
-  Search,
-  Select,
-  SelectItem,
-  SelectList,
-  SelectListGroup,
-  SelectListItem,
-  SelectListItemContent,
-  Shell,
-  ShellContent,
-  ShellHeader,
-  ShellHomeAnchor,
-  ShellHomeAnchorLabel,
-  ShellHelp,
-  ShellHelpItem,
-  ShellMenu,
-  ShellMenuBar,
-  ShellMenuBarItem,
-  ShellUser,
-  ShellUserContent,
-  ShellUserFooter,
-  ShellUserHeading,
-  ShellUserName,
-  ShellUserSubheading,
-  ShellWorkspaces,
-  ShellWorkspace,
-  ShellSolutionSwitcher,
-  ShellSolutions,
-  ShellSolutionsHeader,
-  ShellSolution,
-  ShellSolutionLabel,
-  ShellOrgSwitcher,
-  ShellOrganization,
-  ShellSuborganization,
-  ShellOrgSwitcherFooter,
-  Slider,
-  SliderContent,
-  SliderItem,
-  RangedSlider,
-  StepList,
-  Step,
-  StepLabel,
-  Switch,
-  SwitchLabel,
-  Table,
-  TableColumn,
-  TableCell,
-  TableHeaderCell,
-  TableRow,
-  TableHead,
-  TableBody,
-  TableFoot,
-  Tab,
-  TabLabel,
-  TabList,
-  TabView,
-  Tag,
-  TagLabel,
-  TagList,
-  Textarea,
-  Textfield,
-  Tooltip,
-  TooltipContent,
-  Tree,
-  TreeItem,
-  TreeItemContent,
-  Wait,
-  WizardView
-}

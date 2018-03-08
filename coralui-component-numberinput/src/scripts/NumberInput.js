@@ -19,8 +19,9 @@ import {ComponentMixin} from '/coralui-mixin-component';
 import {FormFieldMixin} from '/coralui-mixin-formfield';
 import '/coralui-component-button';
 import '/coralui-component-textfield';
+import {Icon} from '/coralui-component-icon';
 import base from '../templates/base';
-import {transform, commons} from '/coralui-util';
+import {transform, commons, i18n} from '/coralui-util';
 
 const CLASSNAME = '_coral-Stepper';
 let clearLiveRegionTimeout;
@@ -93,7 +94,7 @@ class NumberInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     // Prepare templates
     this._elements = {};
-    base.call(this._elements);
+    base.call(this._elements, {i18n, commons, Icon});
   
     // Pre-define labellable element
     this._labellableElement = this._elements.input;

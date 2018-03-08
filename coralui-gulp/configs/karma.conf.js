@@ -37,8 +37,7 @@ module.exports = function(config) {
   // Pre-process snippets of dependencies
   preprocessors[path.join(root, 'coralui-*/src/tests/snippets/**/*.html')] = ['html2js'];
   
-  const rollupPlugins = rollupConfig.plugins;
-  rollupPlugins.push(istanbul({
+  rollupConfig.plugins.push(istanbul({
     include: util.isTLB() ? path.join(CWD, 'coralui-*/src/scripts/*.js') : path.join(CWD, 'src/scripts/*.js')
   }));
   
@@ -48,6 +47,7 @@ module.exports = function(config) {
     // specify the config for the rollup pre-processor: run babel plugin on the code
     rollupPreprocessor: {
       format: 'iife',
+      moduleName: 'Coral',
       plugins: rollupConfig.plugins
     },
   

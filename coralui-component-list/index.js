@@ -12,6 +12,7 @@ import SelectListGroup from './src/scripts/SelectListGroup';
 import SelectListItem from './src/scripts/SelectListItem';
 import SelectListItemContent from './src/scripts/SelectListItemContent';
 
+// Expose component on the Coral namespace
 window.customElements.define('coral-list', List);
 window.customElements.define('coral-list-divider', ListDivider);
 window.customElements.define('coral-list-item', ListItem);
@@ -24,32 +25,13 @@ window.customElements.define('coral-selectlist', SelectList);
 window.customElements.define('coral-selectlist-item', SelectListItem);
 window.customElements.define('coral-selectlist-group', SelectListGroup);
 
-// Expose component on the Coral namespace
-window.Coral = window.Coral || {};
-window.Coral.List = List;
-window.Coral.List.Divider = ListDivider;
-window.Coral.List.Item = ListItem;
-window.Coral.List.Item.Content = ListItemContent;
-window.Coral.AnchorList = AnchorList;
-window.Coral.AnchorList.Item = AnchorListItem;
-window.Coral.ButtonList = ButtonList;
-window.Coral.ButtonList.Item = ButtonListItem;
-window.Coral.SelectList = SelectList;
-window.Coral.SelectList.Group = SelectListGroup;
-window.Coral.SelectList.Item = SelectListItem;
-window.Coral.SelectList.Item.Content = SelectListItemContent;
+List.Divider = ListDivider;
+List.Item = ListItem;
+List.Item.Content = ListItemContent;
+AnchorList.Item = AnchorListItem;
+ButtonList.Item = ButtonListItem;
+SelectList.Group = SelectListGroup;
+SelectList.Item = SelectListItem;
+SelectList.Item.Content = SelectListItemContent;
 
-export {
-  List,
-  ListDivider,
-  ListItem,
-  ListItemContent,
-  AnchorList,
-  AnchorListItem,
-  ButtonList,
-  ButtonListItem,
-  SelectList,
-  SelectListGroup,
-  SelectListItem,
-  SelectListItemContent
-};
+export {List, AnchorList, ButtonList, SelectList};

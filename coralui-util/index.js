@@ -12,7 +12,8 @@ import validate from './src/scripts/Validation';
  */
 const mixin = {};
 
-// Expose helpers on Coral namespace
+// @compat
+// Expose helpers on Coral namespace required
 window.Coral = window.Coral || {};
 window.Coral.commons = commons;
 window.Coral.events = events;

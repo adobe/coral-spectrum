@@ -18,7 +18,7 @@
 import {List} from '/coralui-component-list';
 import {SelectableCollection} from '/coralui-collection';
 import orgSwitcher from '../templates/orgSwitcher';
-import {commons} from '/coralui-util';
+import {commons, i18n} from '/coralui-util';
 
 const CLASSNAMES = ['_coral-BasicList', '_coral-Shell-orgSwitcher'];
 
@@ -56,7 +56,7 @@ class ShellOrgSwitcher extends List {
     this._elements = {
       footer: this.querySelector('coral-shell-orgswitcher-footer') || document.createElement('coral-shell-orgswitcher-footer')
     };
-    orgSwitcher.call(this._elements);
+    orgSwitcher.call(this._elements, {commons, i18n});
   
     // Used for eventing
     this._oldSelection = null;

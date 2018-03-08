@@ -46,7 +46,7 @@ class Switch extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       // Try to find the label content zone
       label: this.querySelector('coral-switch-label') || document.createElement('coral-switch-label')
     };
-    base.call(this._elements);
+    base.call(this._elements, {commons});
   
     // Pre-define labellable element
     this._labellableElement = this._elements.input;

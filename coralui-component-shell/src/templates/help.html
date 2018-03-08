@@ -1,14 +1,14 @@
 <js>
-var labelId = Coral.commons.getUID();
+var labelId = data.commons.getUID();
 </js>
 <div handle="contentWrapper">
-  <label class="u-coral-screenReaderOnly" id="{{labelId}}">{{Coral.i18n.get('Search for Help')}}</label>
-  <coral-search class="_coral-Shell-help-search" handle="search" placeholder="{{Coral.i18n.get('Search for Help')}}" labelledby="{{labelId}}"></coral-search>
+  <label class="u-coral-screenReaderOnly" id="{{labelId}}">{{data.i18n.get('Search for Help')}}</label>
+  <coral-search class="_coral-Shell-help-search" handle="search" placeholder="{{data.i18n.get('Search for Help')}}" labelledby="{{labelId}}"></coral-search>
   <div class="_coral-Shell-help-items" handle="items"></div>
   <coral-anchorlist class="_coral-Shell-help-results" handle="results" hidden></coral-anchorlist>
   <div class="_coral-Shell-help-resultMessage" handle="resultMessage" hidden></div>
   <div class="_coral-Shell-help-loading" handle="loading" hidden>
     <coral-wait size="S" class="_coral-Shell-help-loading-wait"></coral-wait>
-    <span class="coral-Heading--2 _coral-Shell-help-loading-info">{{Coral.i18n.get('Searching Help&hellip;')}}</span>
+    <span class="coral-Heading--2 _coral-Shell-help-loading-info">{{data.i18n.get('Searching Help&hellip;')}}</span>
   </div>
 </div>

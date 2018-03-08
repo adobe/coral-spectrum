@@ -1,3 +1,1 @@
-import '../../index';
-
-import './test.Coral.Accordion';
+import './test.Accordion';

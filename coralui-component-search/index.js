@@ -8,10 +8,7 @@ commons.extend(strings, {
   'coralui-component-search': translations
 });
 
-window.customElements.define('coral-search', Search);
-
 // Expose component on the Coral namespace
-window.Coral = window.Coral || {};
-window.Coral.Search = Search;
+window.customElements.define('coral-search', Search);
 
 export {Search};

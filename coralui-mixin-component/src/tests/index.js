@@ -1,3 +1,1 @@
-import '../../index';
-
-import './test.Coral.mixin.component';
+import './test.mixin.component';

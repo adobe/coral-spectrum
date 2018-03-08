@@ -10,14 +10,11 @@ commons.extend(strings, {
   'coralui-component-taglist': translations
 });
 
+// Expose component on the Coral namespace
 window.customElements.define('coral-tag', Tag);
 window.customElements.define('coral-tag-label', TagLabel);
 window.customElements.define('coral-taglist', TagList);
 
-// Expose component on the Coral namespace
-window.Coral = window.Coral || {};
-window.Coral.Tag = Tag;
-window.Coral.Tag.Label = TagLabel;
-window.Coral.TagList = TagList;
+Tag.Label = TagLabel;
 
-export {Tag, TagLabel, TagList};
+export {Tag, TagList};

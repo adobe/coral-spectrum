@@ -1,10 +1,8 @@
-import '../../index';
-
-import './test.Coral.Table.Cell';
-import './test.Coral.Table.HeaderCell';
-import './test.Coral.Table.Row';
-import './test.Coral.Table.Head';
-import './test.Coral.Table.Body';
-import './test.Coral.Table.Foot';
-import './test.Coral.Table.Column';
-import './test.Coral.Table';
+import './test.Table.Cell';
+import './test.Table.HeaderCell';
+import './test.Table.Row';
+import './test.Table.Head';
+import './test.Table.Body';
+import './test.Table.Foot';
+import './test.Table.Column';
+import './test.Table';

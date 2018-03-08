@@ -8,10 +8,7 @@ commons.extend(strings, {
   'coralui-component-numberinput': translations
 });
 
-window.customElements.define('coral-numberinput', NumberInput);
-
 // Expose component on the Coral namespace
-window.Coral = window.Coral || {};
-window.Coral.NumberInput = NumberInput;
+window.customElements.define('coral-numberinput', NumberInput);
 
 export {NumberInput};

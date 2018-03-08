@@ -91,7 +91,7 @@ class FileUpload extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     // Prepare templates
     this._elements = {};
-    base.call(this._elements);
+    base.call(this._elements, {commons});
   
     // Pre-define labellable element
     this._labellableElement = this._elements.input;

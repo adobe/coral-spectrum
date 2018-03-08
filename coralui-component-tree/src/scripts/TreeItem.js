@@ -17,7 +17,7 @@
 
 import {ComponentMixin} from '/coralui-mixin-component';
 import {Collection} from '/coralui-collection';
-import '/coralui-component-icon';
+import {Icon} from '/coralui-component-icon';
 import treeItem from '../templates/treeItem';
 import {transform, commons, validate} from '/coralui-util';
 
@@ -63,7 +63,7 @@ class TreeItem extends ComponentMixin(HTMLElement) {
       // Create or fetch the content zones
       content: this.querySelector('coral-tree-item-content') || document.createElement('coral-tree-item-content')
     };
-    treeItem.call(this._elements);
+    treeItem.call(this._elements, {Icon, commons});
   
     // Tells the collection to automatically detect the items and handle the events
     this.items._startHandlingItems();

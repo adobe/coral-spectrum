@@ -9,12 +9,10 @@ commons.extend(strings, {
   'coralui-component-select': translations
 });
 
+// Expose component on the Coral namespace
 window.customElements.define('coral-select', Select);
 window.customElements.define('coral-select-item', SelectItem);
 
-// Expose component on the Coral namespace
-window.Coral = window.Coral || {};
-window.Coral.Select = Select;
-window.Coral.Select.Item = SelectItem;
+Select.Item = SelectItem;
 
-export {Select, SelectItem};
+export {Select};

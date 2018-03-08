@@ -21,7 +21,7 @@ import '/coralui-component-textfield';
 import '/coralui-component-button';
 import {Icon} from '/coralui-component-icon';
 import base from '../templates/base';
-import {transform, validate, commons} from '/coralui-util';
+import {transform, validate, commons, i18n} from '/coralui-util';
 
 const CLASSNAME = '_coral-Search';
 
@@ -67,7 +67,7 @@ class Search extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     // Prepare templates
     this._elements = {};
-    base.call(this._elements);
+    base.call(this._elements, {i18n});
   
     // Pre-define labellable element
     this._labellableElement = this._elements.input;

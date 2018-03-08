@@ -1,3 +1,1 @@
-import '../../index';
-
-import './test.Coral.ButtonGroup';
+import './test.ButtonGroup';

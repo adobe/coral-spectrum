@@ -1,7 +1,5 @@
-import '../../index';
-
-import './test.Coral.ActionBar.Container';
-import './test.Coral.ActionBar.Primary';
-import './test.Coral.ActionBar.Secondary';
-import './test.Coral.ActionBar.Item';
-import './test.Coral.ActionBar';
+import './test.ActionBar.Container';
+import './test.ActionBar.Primary';
+import './test.ActionBar.Secondary';
+import './test.ActionBar.Item';
+import './test.ActionBar';

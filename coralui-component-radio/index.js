@@ -2,11 +2,9 @@ import '/coralui-externals';
 import Radio from './src/scripts/Radio';
 import RadioLabel from './src/scripts/RadioLabel';
 
+// Expose component on the Coral namespace
 window.customElements.define('coral-radio', Radio);
 
-// Expose component on the Coral namespace
-window.Coral = window.Coral || {};
-window.Coral.Radio = Radio;
-window.Coral.Radio.Label = RadioLabel;
+Radio.Label = RadioLabel;
 
-export {Radio, RadioLabel};
+export {Radio};

@@ -1,4 +1,2 @@
-import '../../index';
-
-import './test.Coral.QuickActions';
-import './test.Coral.QuickActions.Item';
+import './test.QuickActions';
+import './test.QuickActions.Item';

@@ -1,4 +1,2 @@
-import '../../index';
-
-import './test.Coral.Collection';
-import './test.Coral.SelectableCollection';
+import './test.Collection';
+import './test.SelectableCollection';

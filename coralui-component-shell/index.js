@@ -43,94 +43,50 @@ import ShellOrgSwitcherFooter from './src/scripts/ShellOrgSwitcherFooter';
 import ShellOrganization from './src/scripts/ShellOrganization';
 import ShellSuborganization from './src/scripts/ShellSuborganization';
 
+// Expose component on the Coral namespace
 window.customElements.define('coral-shell', Shell);
-
 window.customElements.define('coral-shell-header', ShellHeader);
 window.customElements.define('coral-shell-homeanchor', ShellHomeAnchor, {extends: 'a'});
-
 window.customElements.define('coral-shell-help', ShellHelp);
 window.customElements.define('coral-shell-help-item', ShellHelpItem, {extends: 'a'});
-
 window.customElements.define('coral-shell-menu', ShellMenu);
 window.customElements.define('coral-shell-menubar', ShellMenuBar);
 window.customElements.define('coral-shell-menubar-item', ShellMenuBarItem);
-
 window.customElements.define('coral-shell-user', ShellUser);
-
 window.customElements.define('coral-shell-workspaces', ShellWorkspaces);
 window.customElements.define('coral-shell-workspace', ShellWorkspace, {extends: 'a'});
-
 window.customElements.define('coral-shell-solutionswitcher', ShellSolutionSwitcher);
 window.customElements.define('coral-shell-solutions', ShellSolutions);
 window.customElements.define('coral-shell-solution', ShellSolution, {extends: 'a'});
-
 window.customElements.define('coral-shell-orgswitcher', ShellOrgSwitcher);
 window.customElements.define('coral-shell-organization', ShellOrganization);
 window.customElements.define('coral-shell-suborganization', ShellSuborganization);
 
-// Expose component on the Coral namespace
-window.Coral = window.Coral || {};
-window.Coral.Shell = Shell;
-window.Coral.Shell.Content = ShellContent;
+Shell.Content = ShellContent;
+Shell.Header = ShellHeader;
+Shell.HomeAnchor = ShellHomeAnchor;
+Shell.HomeAnchor.Label = ShellHomeAnchorLabel;
+Shell.Help = ShellHelp;
+Shell.Help.Item = ShellHelpItem;
+Shell.Menu = ShellMenu;
+Shell.MenuBar = ShellMenuBar;
+Shell.MenuBar.Item = ShellMenuBarItem;
+Shell.User = ShellUser;
+Shell.User.Content = ShellUserContent;
+Shell.User.Footer = ShellUserFooter;
+Shell.User.Heading = ShellUserHeading;
+Shell.User.Name = ShellUserName;
+Shell.User.Subheading = ShellUserSubheading;
+Shell.Workspaces = ShellWorkspaces;
+Shell.Workspace = ShellWorkspace;
+Shell.SolutionSwitcher = ShellSolutionSwitcher;
+Shell.Solutions = ShellSolutions;
+Shell.Solutions.Header = ShellSolutionsHeader;
+Shell.Solution = ShellSolution;
+Shell.Solution.Label = ShellSolutionLabel;
+Shell.OrgSwitcher = ShellOrgSwitcher;
+Shell.OrgSwitcher.Footer = ShellOrgSwitcherFooter;
+Shell.Organization = ShellOrganization;
+Shell.Suborganization = ShellSuborganization;
 
-window.Coral.Shell.Header = ShellHeader;
-window.Coral.Shell.HomeAnchor = ShellHomeAnchor;
-window.Coral.Shell.HomeAnchor.Label = ShellHomeAnchorLabel;
-
-window.Coral.Shell.Help = ShellHelp;
-window.Coral.Shell.Help.Item = ShellHelpItem;
-
-window.Coral.Shell.Menu = ShellMenu;
-window.Coral.Shell.MenuBar = ShellMenuBar;
-window.Coral.Shell.MenuBar.Item = ShellMenuBarItem;
-
-window.Coral.Shell.User = ShellUser;
-window.Coral.Shell.User.Content = ShellUserContent;
-window.Coral.Shell.User.Footer = ShellUserFooter;
-window.Coral.Shell.User.Heading = ShellUserHeading;
-window.Coral.Shell.User.Name = ShellUserName;
-window.Coral.Shell.User.Subheading = ShellUserSubheading;
-
-window.Coral.Shell.Workspaces = ShellWorkspaces;
-window.Coral.Shell.Workspace = ShellWorkspace;
-
-window.Coral.Shell.SolutionSwitcher = ShellSolutionSwitcher;
-window.Coral.Shell.Solutions = ShellSolutions;
-window.Coral.Shell.Solutions.Header = ShellSolutionsHeader;
-window.Coral.Shell.Solution = ShellSolution;
-window.Coral.Shell.Solution.Label = ShellSolutionLabel;
-
-window.Coral.Shell.OrgSwitcher = ShellOrgSwitcher;
-window.Coral.Shell.Organization = ShellOrganization;
-window.Coral.Shell.Suborganization = ShellSuborganization;
-window.Coral.Shell.OrgSwitcher.Footer = ShellOrgSwitcherFooter;
-
-export {
-  Shell,
-  ShellContent,
-  ShellHeader,
-  ShellHomeAnchor,
-  ShellHomeAnchorLabel,
-  ShellHelp,
-  ShellHelpItem,
-  ShellMenu,
-  ShellMenuBar,
-  ShellMenuBarItem,
-  ShellUser,
-  ShellUserContent,
-  ShellUserFooter,
-  ShellUserHeading,
-  ShellUserName,
-  ShellUserSubheading,
-  ShellWorkspaces,
-  ShellWorkspace,
-  ShellSolutionSwitcher,
-  ShellSolutions,
-  ShellSolutionsHeader,
-  ShellSolution,
-  ShellSolutionLabel,
-  ShellOrgSwitcher,
-  ShellOrganization,
-  ShellSuborganization,
-  ShellOrgSwitcherFooter
-};
+export {Shell};

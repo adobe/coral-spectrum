@@ -1,3 +1,1 @@
-import '../../index';
-
-import './test.Coral.mixin.overlay';
+import './test.mixin.overlay';

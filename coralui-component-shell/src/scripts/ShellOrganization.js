@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ListItem} from '/coralui-component-list';
+import {List} from '/coralui-component-list';
 import {SelectableCollection} from '/coralui-collection';
 import {Icon} from '/coralui-component-icon';
 import organization from '../templates/organization';
@@ -30,7 +30,7 @@ const CLASSNAMES = ['_coral-BasicList-item', '_coral-Shell-orgSwitcher-item'];
  @htmltag coral-shell-organization
  @extends {ListItem}
  */
-class ShellOrganization extends ListItem {
+class ShellOrganization extends List.Item {
   /** @ignore */
   constructor() {
     super();
@@ -44,7 +44,7 @@ class ShellOrganization extends ListItem {
       'coral-shell-suborganization:_selectedchanged': '_onItemSelectedChanged'
     });
   
-    organization.call(this._elements);
+    organization.call(this._elements, {Icon});
   
     // Used for eventing
     this._oldSelection = null;

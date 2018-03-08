@@ -17,18 +17,18 @@
   <coral-colorinput-item value="#AAAAAA"></coral-colorinput-item>
   <coral-colorinput-item value="#DDDDDD"></coral-colorinput-item>
 </div>
-<js>var uid = Coral.commons.getUID();</js>
+<js>var uid = data.commons.getUID();</js>
 <input handle="input" is="coral-textfield" class="_coral-ColorInput-input" type="text" value="">
 <div class="_coral-ColorInput-buttonWrapper" handle="buttonWrapper" role="presentation">
   <button handle="colorPreview" is="coral-button" variant="default" class="_coral-ColorInput-button _coral-ColorInput-preview" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="{{uid}}"></button>
   <js>
     // Since we don't have a mutation observer anymore to replace content zones magically, we have to do it manually.
     this.colorPreview.label.classList.add('u-coral-screenReaderOnly');
-    this.colorPreview.label.innerText = Coral.i18n.get('Color Picker');
+    this.colorPreview.label.innerText = data.i18n.get('Color Picker');
     this.id = uid + '-coral-button-label';
   </js>
 </div>
-<coral-popover variant="_custom" role="dialog" focusonshow="on" trapfocus="on" handle="overlay" breadthoffset="+50%r - 50%p" lengthoffset="5px" placement="bottom" id="{{uid}}" aria-label="{{Coral.i18n.get('Color Picker')}}">
+<coral-popover variant="_custom" role="dialog" focusonshow="on" trapfocus="on" handle="overlay" breadthoffset="+50%r - 50%p" lengthoffset="5px" placement="bottom" id="{{uid}}" aria-label="{{data.i18n.get('Color Picker')}}">
   <coral-colorinput-colorproperties handle="propertiesView"></coral-colorinput-colorproperties>
   <coral-colorinput-swatches handle="swatchesView"></coral-colorinput-swatches>
 </coral-popover>

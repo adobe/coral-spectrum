@@ -9,12 +9,10 @@ commons.extend(strings, {
   'coralui-component-quickactions': translations
 });
 
+// Expose component on the Coral namespace
 window.customElements.define('coral-quickactions', QuickActions);
 window.customElements.define('coral-quickactions-item', QuickActionsItem);
 
-// Expose component on the Coral namespace
-window.Coral = window.Coral || {};
-window.Coral.QuickActions = QuickActions;
-window.Coral.QuickActions.Item = QuickActionsItem;
+QuickActions.Item = QuickActionsItem;
 
-export {QuickActions, QuickActionsItem};
+export {QuickActions};

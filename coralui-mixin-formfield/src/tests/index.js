@@ -1,3 +1,1 @@
-import '../../index';
-
-import './test.Coral.mixin.formField';
+import './test.mixin.formField';

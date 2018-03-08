@@ -8,10 +8,7 @@ commons.extend(strings, {
   'coralui-component-clock': translations
 });
 
-window.customElements.define('coral-clock', Clock);
-
 // Expose component on the Coral namespace
-window.Coral = window.Coral || {};
-window.Coral.Clock = Clock;
+window.customElements.define('coral-clock', Clock);
 
 export {Clock};

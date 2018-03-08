@@ -14,13 +14,11 @@ Masonry.registerLayout(Masonry.layouts.FIXED_SPREAD, MasonryFixedSpreadLayout);
 Masonry.registerLayout(Masonry.layouts.VARIABLE, MasonryVariableLayout);
 Masonry.registerLayout(Masonry.layouts.DASHBOARD, MasonryDashboardLayout);
 
+// Expose component on the Coral namespace
 window.customElements.define('coral-masonry', Masonry);
 window.customElements.define('coral-masonry-item', MasonryItem);
 
-// Expose component on the Coral namespace
-window.Coral = window.Coral || {};
-window.Coral.Masonry = Masonry;
-window.Coral.Masonry.Item = MasonryItem;
-window.Coral.Masonry.Layout = MasonryLayout;
+Masonry.Item = MasonryItem;
+Masonry.Layout = MasonryLayout;
 
-export {Masonry, MasonryItem, MasonryLayout};
+export {Masonry};

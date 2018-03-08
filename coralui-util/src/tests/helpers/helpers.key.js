@@ -1,7 +1,7 @@
 var helpers = helpers || {};
 
 /**
-  Note: these helpers are implicitly tested by test.Coral.keys.js
+  Note: these helpers are implicitly tested by test.keys.js
 */
 (function() {
   var modifierEventProperties = {

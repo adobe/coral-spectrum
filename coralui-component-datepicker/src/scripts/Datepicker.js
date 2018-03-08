@@ -118,9 +118,9 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
     // Prepare templates
     this._elements = {};
-    base.call(this._elements);
+    base.call(this._elements, {commons, i18n});
     // Creates and stores the contents of the popover separately
-    this._calendarFragment = popoverContent.call(this._elements);
+    this._calendarFragment = popoverContent.call(this._elements, {commons, i18n});
   
     // Pre-define labellable element
     this._labellableElement = this._elements.input;

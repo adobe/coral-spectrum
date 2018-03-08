@@ -20,10 +20,10 @@ import '/coralui-component-popover';
 import '/coralui-component-button';
 import CycleButtonItem from './CycleButtonItem';
 import {Icon} from '/coralui-component-icon';
-import {ButtonList, SelectListItem} from '/coralui-component-list';
+import {ButtonList, SelectList} from '/coralui-component-list';
 import {SelectableCollection} from '/coralui-collection';
 import base from '../templates/base';
-import {transform, validate} from '/coralui-util';
+import {transform, validate, commons} from '/coralui-util';
 
 /**
  Enumeration for {@link CycleButton} display options.
@@ -91,7 +91,7 @@ class CycleButton extends ComponentMixin(HTMLElement) {
     
     // Templates
     this._elements = {};
-    base.call(this._elements);
+    base.call(this._elements, {Icon, commons});
   
     // Assign the button as the target for the overlay (faster than querySelect the target via id)
     this._elements.overlay.target = this._elements.button;
@@ -525,7 +525,7 @@ class CycleButton extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   _getSelectListItem(item) {
-    const selectListItem = new SelectListItem();
+    const selectListItem = new SelectList.Item();
   
     // We do first the content, so that the icon is not destroyed
     selectListItem.content.innerHTML = item.content.innerHTML;

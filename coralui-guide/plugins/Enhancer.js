@@ -21,8 +21,14 @@ class Enhancer {
         
         doc.unknown.forEach((item) => {
           if (item.tagName === '@class') {
+            doc.importStyle = item.tagValue.split('.')[1];
+            
             doc.examples = doc.examples || [];
             doc.examples.unshift('<caption>JS constructor</caption>\nnew '+ item.tagValue +'();');
+          }
+          
+          if (item.tagName === '@mixin') {
+            doc.importStyle = '';
           }
           
           if (item.tagName === '@htmlbasetag') {

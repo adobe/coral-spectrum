@@ -1,6 +1,4 @@
-import '../../index';
-
-import './test.Coral.List';
-import './test.Coral.SelectList';
-import './test.Coral.SelectList.Item';
-import './test.Coral.SelectList.Group';
+import './test.List';
+import './test.SelectList';
+import './test.SelectList.Item';
+import './test.SelectList.Group';

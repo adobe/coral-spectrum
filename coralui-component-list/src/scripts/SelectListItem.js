@@ -17,8 +17,8 @@
 
 import {ComponentMixin} from '/coralui-mixin-component';
 import {transform} from '/coralui-util';
-import '/coralui-component-icon';
-import icon from '../templates/checkIcon';
+import {Icon} from '/coralui-component-icon';
+import checkIcon from '../templates/checkIcon';
 
 const CLASSNAME = '_coral-SelectList-item';
 
@@ -39,7 +39,7 @@ class SelectListItem extends ComponentMixin(HTMLElement) {
       // Fetch or create the content zone element
       content: this.querySelector('coral-selectlist-item-content') || document.createElement('coral-selectlist-item-content')
     };
-    icon.call(this._elements);
+    checkIcon.call(this._elements, {Icon});
   }
   /**
    Value of the item. If not explicitly set, the value of <code>Node.textContent</code> is returned.

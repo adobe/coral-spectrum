@@ -1,5 +1,3 @@
-import '../../index';
-
-import './test.Coral.Color';
-import './test.Coral.ColorInput.Item';
-import './test.Coral.ColorInput';
+import './test.Color';
+import './test.ColorInput.Item';
+import './test.ColorInput';

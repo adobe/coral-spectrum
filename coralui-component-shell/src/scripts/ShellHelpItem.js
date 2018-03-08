@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import {AnchorListItem} from '/coralui-component-list';
+import {AnchorList} from '/coralui-component-list';
 
 const CLASSNAME = ['_coral-BasicList-item', '_coral-AnchorList-item', '_coral-Shell-help-item'];
 
@@ -25,7 +25,7 @@ const CLASSNAME = ['_coral-BasicList-item', '_coral-AnchorList-item', '_coral-Sh
  @htmltag coral-shell-help-item
  @extends {AnchorListItem}
  */
-class ShellHelpItem extends AnchorListItem {
+class ShellHelpItem extends AnchorList.Item {
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();

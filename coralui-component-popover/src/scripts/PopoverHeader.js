@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import {DialogHeader} from '/coralui-component-dialog';
+import {Dialog} from '/coralui-component-dialog';
 
 /**
  @class Coral.Popover.Header
@@ -23,6 +23,6 @@ import {DialogHeader} from '/coralui-component-dialog';
  @htmltag coral-popover-header
  @extends {DialogHeader}
  */
-class PopoverHeader extends DialogHeader {}
+class PopoverHeader extends Dialog.Header {}
 
 export default PopoverHeader;

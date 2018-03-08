@@ -1,5 +1,3 @@
-import '../../index';
-
-import './test.Coral.Select.Collection';
-import './test.Coral.Select.Item';
-import './test.Coral.Select';
+import './test.Select.Collection';
+import './test.Select.Item';
+import './test.Select';

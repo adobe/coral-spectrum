@@ -1,6 +1,4 @@
-import '../../index';
-
-import './test.Coral.commons';
-import './test.Coral.keys';
-import './test.Coral.transform';
-import './test.Coral.validate';
+import './test.commons';
+import './test.keys';
+import './test.transform';
+import './test.validate';

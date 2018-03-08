@@ -207,6 +207,10 @@ pre.prettyprint > code,
   margin-left: 0;
 }
 
+code[data-ice="importPathCode"]:empty {
+  display: none;
+}
+
 .expression-extends .prettyprint {
   padding: 0;
 }

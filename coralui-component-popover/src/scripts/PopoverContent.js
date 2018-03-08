@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import {DialogContent} from '/coralui-component-dialog';
+import {Dialog} from '/coralui-component-dialog';
 
 /**
  @class Coral.Popover.Content
@@ -23,6 +23,6 @@ import {DialogContent} from '/coralui-component-dialog';
  @htmltag coral-popover-content
  @extends {DialogContent}
  */
-class PopoverContent extends DialogContent {}
+class PopoverContent extends Dialog.Content {}
 
 export default PopoverContent;

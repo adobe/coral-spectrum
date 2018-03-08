@@ -82,7 +82,7 @@ class Clock extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     // Prepare templates
     this._elements = {};
-    base.call(this._elements);
+    base.call(this._elements, {commons, i18n});
   
     // Pre-define labellable element
     this._labellableElement = this;

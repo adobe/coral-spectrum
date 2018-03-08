@@ -1,4 +1,2 @@
-import '../../index';
-
-import './test.Coral.Tab';
-import './test.Coral.TabList';
+import './test.Tab';
+import './test.TabList';

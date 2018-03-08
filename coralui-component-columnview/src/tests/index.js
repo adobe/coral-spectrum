@@ -1,6 +1,4 @@
-import '../../index';
-
-import './test.Coral.ColumnView.Column';
-import './test.Coral.ColumnView.Item';
-import './test.Coral.ColumnView.Preview';
-import './test.Coral.ColumnView';
+import './test.ColumnView.Column';
+import './test.ColumnView.Item';
+import './test.ColumnView.Preview';
+import './test.ColumnView';

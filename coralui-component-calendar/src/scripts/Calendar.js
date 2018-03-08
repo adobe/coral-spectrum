@@ -221,7 +221,7 @@ class Calendar extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     // Prepare templates
     this._elements = {};
-    calendar.call(this._elements);
+    calendar.call(this._elements, {commons, i18n});
   
     // Pre-define labellable element
     this._labellableElement = this;
@@ -644,6 +644,8 @@ class Calendar extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     }
     
     const data = {
+      i18n: i18n,
+      commons: commons,
       // eslint-disable-next-line no-unused-vars
       dayNames: ARRAYOF7.map((currentIndex, index) => {
         const dayMoment = new DateTime.Moment().day((index + this.startDay) % 7);

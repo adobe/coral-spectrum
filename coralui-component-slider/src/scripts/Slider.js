@@ -74,7 +74,7 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     // Prepare templates
     this._elements = {};
-    this._getTemplate().call(this._elements);
+    this._getTemplate().call(this._elements, {commons});
   
     // Pre-define labellable element
     this._labellableElement = this._elements.leftInput;

@@ -1,5 +1,3 @@
-import '../../index';
-
-import './test.Coral.CycleButton.Item';
-import './test.Coral.CycleButton.Action';
-import './test.Coral.CycleButton';
+import './test.CycleButton.Item';
+import './test.CycleButton.Action';
+import './test.CycleButton';

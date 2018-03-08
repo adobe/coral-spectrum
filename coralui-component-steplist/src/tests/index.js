@@ -1,4 +1,2 @@
-import '../../index';
-
-import './test.Coral.Step';
-import './test.Coral.StepList';
+import './test.Step';
+import './test.StepList';

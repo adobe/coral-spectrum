@@ -1,3 +1,7 @@
+<js>
+  this.i18n = data.i18n;
+  this.commons = data.commons;
+</js>
 <table handle="table" class="_coral-Calendar-table" role="presentation">
   <thead role="presentation">
     <tr role="row">
@@ -17,22 +21,22 @@
             var calendarDate = data.dateLabel + ', ' + data.formattedDate;
             if (data.isToday) {
               if (data.ariaSelected) {
-                calendarTitle = Coral.i18n.get('Today, {0} selected', calendarDate, 'date');
+                calendarTitle = this.i18n.get('Today, {0} selected', calendarDate, 'date');
               }
               else {
-                calendarTitle = Coral.i18n.get('Today, {0}', calendarDate, 'date');
+                calendarTitle = this.i18n.get('Today, {0}', calendarDate, 'date');
               }
             }
             else {
               if (data.ariaSelected) {
-                calendarTitle = Coral.i18n.get('{0} selected', calendarDate, 'date');
+                calendarTitle = this.i18n.get('{0} selected', calendarDate, 'date');
               }
               else {
                 calendarTitle = calendarTitle = calendarDate;
               }
             }
           </js>
-          <td handle="cell" role="gridcell" id="{{Coral.commons.getUID()}}-row{{rowNumber}}-col{{columnNumber}}" class="_coral-Calendar-tableCell" aria-selected="{{data.ariaSelected}}" if-data.isDisabled='aria-disabled="true"' if-data.ariaInvalid='aria-invalid="true"' if-data.formattedDate='title="{{calendarTitle}}"'>
+          <td handle="cell" role="gridcell" id="{{this.commons.getUID()}}-row{{rowNumber}}-col{{columnNumber}}" class="_coral-Calendar-tableCell" aria-selected="{{data.ariaSelected}}" if-data.isDisabled='aria-disabled="true"' if-data.ariaInvalid='aria-invalid="true"' if-data.formattedDate='title="{{calendarTitle}}"'>
             <js>
               if (data.cssClass.indexOf('is-outsideMonth') !== -1) {
                 this.cell.classList.add('is-outsideMonth');

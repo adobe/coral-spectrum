@@ -8,10 +8,7 @@ commons.extend(strings, {
   'coralui-component-datepicker': translations
 });
 
-window.customElements.define('coral-datepicker', Datepicker);
-
 // Expose component on the Coral namespace
-window.Coral = window.Coral || {};
-window.Coral.Datepicker = Datepicker;
+window.customElements.define('coral-datepicker', Datepicker);
 
 export {Datepicker};

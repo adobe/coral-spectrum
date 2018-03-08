@@ -9,12 +9,10 @@ commons.extend(strings, {
   'coralui-component-autocomplete': translations
 });
 
+// Expose component on the Coral namespace
 window.customElements.define('coral-autocomplete-item', AutocompleteItem);
 window.customElements.define('coral-autocomplete', Autocomplete);
 
-// Expose component on the Coral namespace
-window.Coral = window.Coral || {};
-window.Coral.Autocomplete = Autocomplete;
-window.Coral.Autocomplete.Item = AutocompleteItem;
+Autocomplete.Item = AutocompleteItem;
 
-export {Autocomplete, AutocompleteItem};
+export {Autocomplete};

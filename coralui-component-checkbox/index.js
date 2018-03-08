@@ -2,11 +2,9 @@ import '/coralui-externals';
 import Checkbox from './src/scripts/Checkbox';
 import CheckboxLabel from './src/scripts/CheckboxLabel';
 
+// Expose component on the Coral namespace
 window.customElements.define('coral-checkbox', Checkbox);
 
-// Expose component on the Coral namespace
-window.Coral = window.Coral || {};
-window.Coral.Checkbox = Checkbox;
-window.Coral.Checkbox.Label = CheckboxLabel;
+Checkbox.Label = CheckboxLabel;
 
-export {Checkbox, CheckboxLabel};
+export {Checkbox};

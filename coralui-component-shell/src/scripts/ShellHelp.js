@@ -18,7 +18,7 @@
 import {ComponentMixin} from '/coralui-mixin-component';
 import {Collection} from '/coralui-collection';
 import '/coralui-component-search';
-import {AnchorListItem} from '/coralui-component-list';
+import {AnchorList} from '/coralui-component-list';
 import '/coralui-component-wait';
 import {commons, i18n} from '/coralui-util';
 import help from '../templates/help';
@@ -42,7 +42,7 @@ class ShellHelp extends ComponentMixin(HTMLElement) {
     
     // Prepare templates
     this._elements = {};
-    help.call(this._elements);
+    help.call(this._elements, {commons, i18n});
     
     // Events
     this._delegateEvents({
@@ -139,7 +139,7 @@ class ShellHelp extends ComponentMixin(HTMLElement) {
     
     this._elements.resultMessage.innerHTML = '';
     
-    this._elements.resultMessage.appendChild(helpSearchError.call(this._elements));
+    this._elements.resultMessage.appendChild(helpSearchError.call(this._elements, {i18n: i18n}));
     
     this._elements.resultMessage.hidden = false;
   }
@@ -162,7 +162,7 @@ class ShellHelp extends ComponentMixin(HTMLElement) {
       // Clear existing result message
       this._elements.resultMessage.innerHTML = '';
       // Indicate to the user that no results were found
-      this._elements.resultMessage.appendChild(noHelpResults.call(this._elements));
+      this._elements.resultMessage.appendChild(noHelpResults.call(this._elements, {i18n: i18n}));
       // Show result message
       this._elements.resultMessage.hidden = false;
     }
@@ -175,7 +175,7 @@ class ShellHelp extends ComponentMixin(HTMLElement) {
         const separator = ' & ';
         const description = result.tags.join(separator);
         
-        const item = new AnchorListItem().set({
+        const item = new AnchorList.Item().set({
           href: result.href,
           target: result.target
         });
@@ -195,7 +195,7 @@ class ShellHelp extends ComponentMixin(HTMLElement) {
       
       // Show total
       if (total > 1) {
-        const seeAllItem = new AnchorListItem().set({
+        const seeAllItem = new AnchorList.Item().set({
           href: allResultsURL,
           content: {
             innerHTML: i18n.get('See all {0} results', total)

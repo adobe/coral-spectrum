@@ -45,7 +45,7 @@ class Radio extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       // Try to find the label content zone
       label: this.querySelector('coral-radio-label') || document.createElement('coral-radio-label')
     };
-    base.call(this._elements);
+    base.call(this._elements, {commons});
   
     // Pre-define labellable element
     this._labellableElement = this._elements.input;

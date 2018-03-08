@@ -1,3 +1,1 @@
-import '../../index';
-
-import './test.Coral.Tooltip';
+import './test.Tooltip';

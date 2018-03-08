@@ -1,3 +1,1 @@
-import '../../index';
-
-import './test.Coral.NumberInput';
+import './test.NumberInput';

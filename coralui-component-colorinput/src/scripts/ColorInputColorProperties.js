@@ -50,7 +50,7 @@ class ColorInputColorProperties extends ColorInputAbstractSubviewMixin(Component
     
     // Templates
     this._elements = {};
-    propertiesSubview.call(this._elements);
+    propertiesSubview.call(this._elements, {commons, i18n});
   }
   
   /** @ignore */
