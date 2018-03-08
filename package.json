@@ -6,6 +6,11 @@
     "type": "git",
     "url": "https://git.corp.adobe.com/Coral/coralui/tree/release/coral-spectrum"
   },
+  "scripts": {
+    "start": "gulp build && gulp watch",
+    "build": "gulp build",
+    "test": "gulp tests"
+  },
   "dependencies": {
     "@coralui/vent": "^1.0.0",
     "@spectrum/spectrum-css": "^2.0.0-beta.63",
