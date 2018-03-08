@@ -38,10 +38,13 @@ resulting in a lower risk of updates to Coral Spectrum needing to introduce brea
 In addition, every Coral component is an HTML element. This give us the ability to create components from markup or JavaScript 
 and lets us treat them like any other native element, setting properties, appending them in the DOM, etc. 
 
-## Spectrum CSS
+## Spectrum
 
-The current default theme is is an implementation of the [Spectrum](http://spectrum.corp.adobe.com/) design specifications. 
-It's still possible to change the look of an entire Coral Spectrum build by providing a custom theme though it's not recommended.
+The current default theme is is an implementation of the [Spectrum](http://spectrum.corp.adobe.com/) design specifications, Adobe’s design system.
+Spectrum provides elements and tools to help product teams work more efficiently, and to make Adobe’s applications more cohesive.
+
+Coral Spectrum leverages internally the [Spectrum CSS](http://spectrum-css.corp.adobe.com/) framework to style components including the Spectrum SVG icons. 
+To request new icons, please follow the instructions listed on http://icons.corp.adobe.com. Ideally, the icon team should be creating or reviewing every icon for every Adobe experience.  
 
 ## Accessibility
 

@@ -1,4 +1,6 @@
+import '/coralui-theme-spectrum';
 import '/coralui-externals';
+
 import helpTranslations from './i18n/coralui-component-shell-help/translations.json';
 import orgSwitcherTranslations from './i18n/coralui-component-shell-orgswitcher/translations.json';
 import {strings, commons} from '/coralui-util';

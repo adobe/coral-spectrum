@@ -19,12 +19,10 @@ module.exports = function(gulp) {
   const runSequence = require('run-sequence').use(gulp);
   const server = require('gulp-server-livereload');
   const util = require('../helpers/util');
-  const theme = require('../helpers/theme');
   
   gulp.task('build+watch', function() {
     runSequence(
       'styles',
-      'theme',
       'resources',
       'templates',
       'scripts'
@@ -35,7 +33,7 @@ module.exports = function(gulp) {
     gulp.watch([
       'src/**',
       '!src/tests/**',
-      path.join(util.getRoot(), theme.getTheme(), '**/*.styl'),
+      path.join(util.getRoot(), 'coralui-theme-spectrum/**/*.styl'),
       'index.js'
     ], ['build+watch']);
   

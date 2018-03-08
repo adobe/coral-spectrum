@@ -1,4 +1,6 @@
+import '/coralui-theme-spectrum';
 import '/coralui-externals';
+
 import PanelStack from './src/scripts/PanelStack';
 import Panel from './src/scripts/Panel';
 import PanelContent from './src/scripts/PanelContent';

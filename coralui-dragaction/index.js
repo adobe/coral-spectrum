@@ -1,4 +1,6 @@
+import '/coralui-theme-spectrum';
 import '/coralui-externals';
+
 import DragAction from './src/scripts/DragAction';
 
 // Apply DragAction on HTML elements with the attribute "coral-dragaction"

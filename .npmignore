@@ -2,7 +2,6 @@
 /.eslintrc
 /.gitignore
 
-/index-themed.js
 /gulpfile.js
 /index.md
 /examples
@@ -13,7 +12,6 @@
 /coralui-*/src/templates/*.html
 /coralui-*/src/styles/**/*.styl
 /coralui-*/src/embed
-/coralui-*/index-themed.js
 /coralui-*/build
 /coralui-*/gulpfile.js
 

@@ -21,10 +21,9 @@ module.exports = function(gulp) {
   const rollup = require('gulp-better-rollup');
   const rollupConfig = require('../configs/rollup.conf.js');
   const rename = require('gulp-rename');
-  const themeHelper = require('../helpers/theme');
   
   gulp.task('scripts', function() {
-    return gulp.src(`${themeHelper.getIndex()}.js`)
+    return gulp.src('index.js')
       .pipe(plumber())
       .pipe(sourceMaps.init())
       .pipe(rollup({

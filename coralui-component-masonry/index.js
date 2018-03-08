@@ -1,3 +1,4 @@
+import '/coralui-theme-spectrum';
 import '/coralui-externals';
 
 import Masonry from './src/scripts/Masonry';

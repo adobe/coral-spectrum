@@ -1,4 +1,6 @@
+import '/coralui-theme-spectrum';
 import '/coralui-externals';
+
 import WizardView from './src/scripts/WizardView';
 
 // Expose component on the Coral namespace

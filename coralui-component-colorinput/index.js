@@ -1,4 +1,6 @@
+import '/coralui-theme-spectrum';
 import '/coralui-externals';
+
 import Color from './src/scripts/Color';
 import ColorInput from './src/scripts/ColorInput';
 import ColorInputItem from './src/scripts/ColorInputItem';

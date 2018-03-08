@@ -1,4 +1,6 @@
+import '/coralui-theme-spectrum';
 import '/coralui-externals';
+
 import Tab from './src/scripts/Tab';
 import TabLabel from './src/scripts/TabLabel';
 import TabList from './src/scripts/TabList';

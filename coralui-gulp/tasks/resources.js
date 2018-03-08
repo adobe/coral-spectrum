@@ -18,12 +18,12 @@ module.exports = function(gulp) {
   const path = require('path');
   const plumber = require('gulp-plumber');
   const rename = require('gulp-rename');
-  const themeHelper = require('../helpers/theme');
+  const util = require('../helpers/util');
   
   gulp.task('resources', function() {
     return gulp.src([
       'src/resources/**/*',
-      themeHelper.getResources()
+      path.join(util.getRoot(), 'coralui-theme-spectrum/src/resources/**/*'),
     ])
       .pipe(plumber())
       .pipe(rename(function (file) {

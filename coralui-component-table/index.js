@@ -1,3 +1,4 @@
+import '/coralui-theme-spectrum';
 import '/coralui-externals';
 
 import Table from './src/scripts/Table';

@@ -1,4 +1,6 @@
+import '/coralui-theme-spectrum';
 import '/coralui-externals';
+
 import Textfield from './src/scripts/Textfield';
 
 // Expose component on the Coral namespace

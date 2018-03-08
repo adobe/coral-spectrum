@@ -1,4 +1,6 @@
+import '/coralui-theme-spectrum';
 import '/coralui-externals';
+
 import Button from './src/scripts/Button';
 import ButtonLabel from './src/scripts/ButtonLabel';
 

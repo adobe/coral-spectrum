@@ -1,7 +1,9 @@
 // Import all components
 import '../index';
 
+import '/coralui-theme-spectrum';
 import '/coralui-externals';
+
 import Playground from './src/scripts/Playground';
 import './src/styles/index.css';
 

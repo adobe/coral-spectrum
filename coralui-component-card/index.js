@@ -1,4 +1,6 @@
+import '/coralui-theme-spectrum';
 import '/coralui-externals';
+
 import Card from './src/scripts/Card';
 import CardBanner from './src/scripts/CardBanner';
 import CardBannerHeader from './src/scripts/CardBannerHeader';

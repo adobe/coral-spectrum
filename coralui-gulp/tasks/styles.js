@@ -21,8 +21,8 @@ module.exports = function(gulp) {
   const stylus = require('gulp-stylus');
   const svgImport = require('stylus-svg');
   const modifyFile = require('gulp-modify-file');
-  const theme = require('../helpers/theme');
   const util = require('../helpers/util');
+  const spectrumConfig = require(`../configs/spectrum.conf.js`);
   
   const root = util.getRoot();
   
@@ -39,14 +39,10 @@ module.exports = function(gulp) {
         ]
       }))
       .pipe(modifyFile((content) => {
-        if (theme.getTheme() === 'coralui-theme-spectrum') {
-          const spectrumConfig = require(`../configs/spectrum.conf.js`);
-          
-          // Map Spectrum selectors with Coral ones
-          spectrumConfig.forEach((selectors) => {
-            content = content.replace(selectors.spectrum, selectors.coral);
-          });
-        }
+        // Map Spectrum selectors with Coral ones
+        spectrumConfig.forEach((selectors) => {
+          content = content.replace(selectors.spectrum, selectors.coral);
+        });
         
         return content;
       }))

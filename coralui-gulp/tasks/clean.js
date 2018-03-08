@@ -17,7 +17,6 @@
 module.exports = function(gulp) {
   const fs = require('fs');
   const del = require('del');
-  const theme = require('../helpers/theme');
   
   gulp.task('clean', function() {
     del.sync('./build/**');
@@ -38,11 +37,5 @@ module.exports = function(gulp) {
   
     // Remove generated styles
     del.sync('./src/styles/index.css');
-    
-    // Remove themed index
-    const index = theme.getIndex();
-    if (index !== 'index') {
-      del.sync(`./${index}.js`);
-    }
   });
 };

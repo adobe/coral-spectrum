@@ -1,4 +1,6 @@
+import '/coralui-theme-spectrum';
 import '/coralui-externals';
+
 import Multifield from './src/scripts/Multifield';
 import MultifieldItem from './src/scripts/MultifieldItem';
 import MultifieldItemContent from './src/scripts/MultifieldItemContent';

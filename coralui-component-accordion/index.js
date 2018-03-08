@@ -1,4 +1,6 @@
+import '/coralui-theme-spectrum';
 import '/coralui-externals';
+
 import Accordion from './src/scripts/Accordion';
 import AccordionItem from './src/scripts/AccordionItem';
 import AccordionItemLabel from './src/scripts/AccordionItemLabel';

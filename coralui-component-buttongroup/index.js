@@ -1,4 +1,6 @@
+import '/coralui-theme-spectrum';
 import '/coralui-externals';
+
 import ButtonGroup from './src/scripts/ButtonGroup';
 
 // Expose component on the Coral namespace

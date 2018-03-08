@@ -1,4 +1,6 @@
+import '/coralui-theme-spectrum';
 import '/coralui-externals';
+
 import QuickActions from './src/scripts/QuickActions';
 import QuickActionsItem from './src/scripts/QuickActionsItem';
 import translations from './i18n/translations.json';

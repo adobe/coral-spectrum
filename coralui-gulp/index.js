@@ -12,7 +12,6 @@ module.exports = function(gulp) {
   require('./tasks/deploy.js')(gulp);
   require('./tasks/templates.js')(gulp);
   require('./tasks/styles.js')(gulp);
-  require('./tasks/theme.js')(gulp);
   require('./tasks/resources.js')(gulp);
   require('./tasks/scripts.js')(gulp);
   require('./tasks/minify.js')(gulp);
@@ -24,7 +23,6 @@ module.exports = function(gulp) {
     runSequence(
       'clean',
       'styles',
-      'theme',
       'resources',
       'templates',
       'scripts'
@@ -36,7 +34,6 @@ module.exports = function(gulp) {
       'clean',
       'lint',
       'styles',
-      'theme',
       'resources',
       'templates',
       'scripts',
@@ -50,7 +47,6 @@ module.exports = function(gulp) {
       'clean',
       'lint',
       'styles',
-      'theme',
       'resources',
       'templates',
       'scripts',

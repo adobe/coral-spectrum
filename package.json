@@ -6,7 +6,6 @@
     "type": "git",
     "url": "https://git.corp.adobe.com/Coral/coralui/tree/release/coral-spectrum"
   },
-  "theme": "coralui-theme-spectrum",
   "dependencies": {
     "@coralui/vent": "^1.0.0",
     "@spectrum/spectrum-css": "^2.0.0-beta.63",
