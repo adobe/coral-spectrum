@@ -9,7 +9,7 @@ describe('Shell.HomeAnchor', function() {
   
   describe('Instantiation', function() {
     it('should be possible to clone using markup', function() {
-      helpers.cloneComponent('<a is="coral-shell-homeanchor" icon="adobeExperienceManagerColor" href="#">Adobe Experience Manager</a>');
+      helpers.cloneComponent('<a is="coral-shell-homeanchor" icon="adobeExperienceManagerColorDark" href="#">Adobe Experience Manager</a>');
     });
   
     it('should be possible to clone using js', function() {
