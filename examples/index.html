@@ -93,7 +93,8 @@
        const item = list.items.add({
          label: {
            textContent: component
-         }
+         },
+         selected: location.hash.slice(1) === component
        });
       item.setAttribute('src', '../' + component + '/examples/index.html');
     });
@@ -103,6 +104,7 @@
       XMLHttpRequest.onreadystatechange = function() {
         if (XMLHttpRequest.readyState == 4 && XMLHttpRequest.status == 200) {
           preview.srcdoc = this.responseText;
+          location.hash = event.detail.selection.textContent;
         }
       };
 
