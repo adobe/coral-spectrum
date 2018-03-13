@@ -3,7 +3,6 @@ const fs = require('fs');
 class Enhancer {
   onHandleDocs(ev) {
     for (const doc of ev.data.docs) {
-      
       if (doc.description && doc.description.indexOf('\n\nnull') !== -1) {
         doc.description = doc.description.replace('\n\nnull', '');
       }
@@ -25,6 +24,9 @@ class Enhancer {
             
             doc.examples = doc.examples || [];
             doc.examples.unshift('<caption>JS constructor</caption>\nnew '+ item.tagValue +'();');
+            
+            doc.see = doc.see || [];
+            doc.see.push('../examples/#' + doc.memberof.split('/')[1]);
           }
           
           if (item.tagName === '@mixin') {

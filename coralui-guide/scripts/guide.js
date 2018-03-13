@@ -133,6 +133,12 @@
         }
       }
     }
+  
+    // Modify component examples link to open in a new tab
+    var examples = document.querySelectorAll('a[href*="../examples/#"]');
+    for (var i = 0; i < examples.length; i++) {
+      examples[i].target = '_blank';
+    }
     
     document.body.className += ' is-ready';
     

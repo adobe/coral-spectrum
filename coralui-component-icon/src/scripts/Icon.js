@@ -105,11 +105,11 @@ const sizeMap = {
 
 /**
  @class Coral.Icon
- @classdesc An Icon component. Icon ships with a set of SVG icons.
+ @classdesc An Icon component. Icon ships with a set of SVG icons see http://icons.corp.adobe.com for how to request
+ new icons.
  @htmltag coral-icon
  @extends {HTMLElement}
  @extends {ComponentMixin}
- @see http://icons.corp.adobe.com/
  */
 class Icon extends ComponentMixin(HTMLElement) {
   /** @ignore */
