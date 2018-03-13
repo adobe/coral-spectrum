@@ -1,9 +1,72 @@
 {
+  "aBC": {
+    "deprecated": true,
+    "spectrumIcon": "ABC"
+  },
   "abc": {
     "spectrumIcon": "ABC"
   },
+  "accordionDown": {
+    "spectrumIcon": "ChevronDown"
+  },
+  "accordionLeft": {
+    "spectrumIcon": "ChevronDoubleLeft"
+  },
+  "accordionRight": {
+    "spectrumIcon": "ChevronDoubleRight"
+  },
+  "accordionUp": {
+    "spectrumIcon": "ChevronUp"
+  },
   "adobe": {
     "spectrumIcon": "AdobeLogo"
+  },
+  "adobeAnalyticsColor": {
+    "spectrumIconDark": "AdobeAnalyticsColorDark",
+    "spectrumIconLight": "AdobeAnalyticsColorLight"
+  },
+  "adobeAudienceManagerColor": {
+    "spectrumIconDark": "AdobeAudienceManagerColorDark",
+    "spectrumIconLight": "AdobeAudienceManagerColorLight"
+  },
+  "adobeCampaignColor": {
+    "spectrumIconDark": "AdobeCampaignColorDark",
+    "spectrumIconLight": "AdobeCampaignColorLight"
+  },
+  "adobeExperienceManagerColor": {
+    "spectrumIconDark": "AdobeExperienceManagerColorDark",
+    "spectrumIconLight": "AdobeExperienceManagerColorLight"
+  },
+  "adobeMediaOptimizerColor": {
+    "spectrumIconDark": "AdobeMediaOptimizerColorDark",
+    "spectrumIconLight": "AdobeMediaOptimizerColorLight"
+  },
+  "adobePrimetimeColor": {
+    "spectrumIconDark": "AdobePrimetimeColorDark",
+    "spectrumIconLight": "AdobePrimetimeColorLight"
+  },
+  "adobeSocialColor": {
+    "spectrumIconDark": "AdobeSocialColorDark",
+    "spectrumIconLight": "AdobeSocialColorLight"
+  },
+  "adobeTargetColor": {
+    "spectrumIconDark": "AdobeTargetColorDark",
+    "spectrumIconLight": "AdobeTargetColorLight"
+  },
+  "annotate": {
+    "spectrumIcon": "AnnotatePen"
+  },
+  "automate": {
+    "spectrumIcon": "Gears"
+  },
+  "breadcrumb": {
+    "spectrumIcon": "Menu"
+  },
+  "calendarCheckColor": {
+    "spectrumIcon": "CalendarCheckColorLight"
+  },
+  "campaignRemove": {
+    "spectrumIcon": "CampaignClose"
   },
   "check": {
     "spectrumIcon": "Checkmark"
@@ -14,17 +77,71 @@
   "closedCaptions": {
     "spectrumIcon": "CloseCaptions"
   },
+  "coverImage": {
+    "spectrumIcon": "FacebookCoverImage"
+  },
+  "deviceMobile": {
+    "spectrumIcon": "DevicePhone"
+  },
+  "deviceTv": {
+    "deprecated": true,
+    "spectrumIcon": "DeviceTV"
+  },
+  "downloaded": {
+    "spectrumIcon": "Download"
+  },
+  "downloadFromCloud": {
+    "deprecated": true,
+    "spectrumIcon": "Download"
+  },
+  "dPS": {
+    "deprecated": true,
+    "spectrumIcon": "DPS"
+  },
   "dps": {
     "spectrumIcon": "DPS"
   },
+  "draw": {
+    "spectrumIcon": "AnnotatePen"
+  },
   "emailAlert": {
     "spectrumIcon": "Alert"
+  },
+  "emotionAdmirationColor": {
+    "spectrumIcon": "EmotionAdmirationColorLight"
+  },
+  "emotionAngerColor": {
+    "spectrumIcon": "EmotionAngerColorLight"
+  },
+  "emotionAnticipationColor": {
+    "spectrumIcon": "EmotionAnticipationColorLight"
+  },
+  "emotionDisgustColor": {
+    "spectrumIcon": "EmotionDisgustColorLight"
+  },
+  "emotionFearColor": {
+    "spectrumIcon": "EmotionFearColorLight"
+  },
+  "emotionJoyColor": {
+    "spectrumIcon": "EmotionJoyColorLight"
+  },
+  "emotionSadnessColor": {
+    "spectrumIcon": "EmotionSadnessColorLight"
+  },
+  "emotionSurpriseColor": {
+    "spectrumIcon": "EmotionSurpriseColorLight"
   },
   "exclude": {
     "spectrumIcon": "Cancel"
   },
   "eyedropper": {
     "spectrumIcon": "Sampler"
+  },
+  "facebookCircleColor": {
+    "spectrumIcon": "Facebook-CircleColorLight"
+  },
+  "facebookColor": {
+    "spectrumIcon": "FacebookColorLight"
   },
   "file": {
     "spectrumIcon": "Document"
@@ -35,17 +152,69 @@
   "film": {
     "spectrumIcon": "Filmroll"
   },
+  "flickrColor": {
+    "spectrumIcon": "FlickrColorLight"
+  },
+  "folderDefault": {
+    "spectrumIcon": "FolderAdobe"
+  },
+  "folderLockedDefault": {
+    "spectrumIcon": "FolderLockedAdobe"
+  },
   "gear": {
     "spectrumIcon": "Settings"
+  },
+  "googleAnalyticsColor": {
+    "spectrumIcon": "GoogleAnalyticsColorLight"
+  },
+  "googlePlusCircleColor": {
+    "spectrumIcon": "GooglePlus-CircleColorLight"
+  },
+  "googlePlusColor": {
+    "spectrumIcon": "GooglePlusColorLight"
+  },
+  "graphBarStackedHorizontal": {
+    "spectrumIcon": "GraphBarHorizontalStacked"
+  },
+  "graphBarStackedVertical": {
+    "spectrumIcon": "GraphBarVertical"
+  },
+  "graphTrendRounded": {
+    "spectrumIcon": "GraphTrend"
   },
   "helpCircle": {
     "spectrumIcon": "Help"
   },
+  "hTML5": {
+    "deprecated": true,
+    "spectrumIcon": "HTML5"
+  },
   "html5": {
     "spectrumIcon": "HTML5"
   },
+  "imageCheckColor": {
+    "spectrumIcon": "ImageCheckColorLight"
+  },
+  "imageMap": {
+    "spectrumIcon": "ImageMapRectangle"
+  },
   "infoCircle": {
     "spectrumIcon": "Info"
+  },
+  "instagramCircleColor": {
+    "spectrumIcon": "Instagram-CircleColorLight"
+  },
+  "instagramColor": {
+    "spectrumIcon": "InstagramColorLight"
+  },
+  "linkCheckColor": {
+    "spectrumIcon": "LinkCheckColorLight"
+  },
+  "linkedInCircleColor": {
+    "spectrumIcon": "LinkedIn-CircleColorLight"
+  },
+  "linkedInColor": {
+    "spectrumIcon": "LinkedInColorLight"
   },
   "lockOff": {
     "spectrumIcon": "LockOpen"
@@ -59,10 +228,20 @@
   "minusCircle": {
     "spectrumIcon": "RemoveCircle"
   },
+  "navigation": {
+    "spectrumIcon": "Rail"
+  },
+  "newsgatorColor": {
+    "spectrumIcon": "NewsgatorColorLight"
+  },
   "open": {
     "spectrumIcon": "FolderOpen"
   },
   "os": {
+    "spectrumIcon": "OS"
+  },
+  "oS": {
+    "deprecated": true,
     "spectrumIcon": "OS"
   },
   "page": {
@@ -83,17 +262,33 @@
   "popOut": {
     "spectrumIcon": "ArrowUpRight"
   },
+  "projectCameraColor": {
+    "spectrumIcon": "ProjectCameraColorLight"
+  },
+  "projectColor": {
+    "spectrumIcon": "ProjectColorLight"
+  },
+  "projectPlayColor": {
+    "spectrumIcon": "ProjectPlayColorLight"
+  },
+  "projectRefreshColor": {
+    "spectrumIcon": "ProjectRefreshColorLight"
+  },
   "publish": {
     "spectrumIcon": "Send"
-  },
-  "rss": {
-    "spectrumIcon": "RSS"
   },
   "reflectHorizontal": {
     "spectrumIcon": "FlipHorizontal"
   },
   "reflectVertical": {
     "spectrumIcon": "FlipVertical"
+  },
+  "rSS": {
+    "deprecated": true,
+    "spectrumIcon": "RSS"
+  },
+  "rss": {
+    "spectrumIcon": "RSS"
   },
   "save": {
     "spectrumIcon": "SaveFloppy"
@@ -107,20 +302,109 @@
   "selectAll": {
     "spectrumIcon": "SelectBoxAll"
   },
+  "sinaWeiboCircleColor": {
+    "spectrumIcon": "SinaWeibo-CircleColorLight"
+  },
+  "sinaWeiboColor": {
+    "spectrumIcon": "SinaWeiboColorLight"
+  },
   "sms": {
     "spectrumIcon": "SMS"
+  },
+  "sMS": {
+    "deprecated": true,
+    "spectrumIcon": "SMS"
+  },
+  "sMSLightning": {
+    "deprecated": true,
+    "spectrumIcon": "SMSLightning"
   },
   "smsLightning": {
     "spectrumIcon": "SMSLightning"
   },
+  "sMSRefresh": {
+    "deprecated": true,
+    "spectrumIcon": "SMSRefresh"
+  },
   "smsRefresh": {
     "spectrumIcon": "SMSRefresh"
+  },
+  "star": {
+    "spectrumIcon": "Star"
   },
   "starFill": {
     "spectrumIcon": "Star"
   },
   "starStroke": {
     "spectrumIcon": "StarOutline"
+  },
+  "stop": {
+    "spectrumIcon": "StopCircle"
+  },
+  "tableCellMergeColor": {
+    "spectrumIconActive": "TableCellMergeColorActive",
+    "spectrumIconDark": "TableCellMergeColorDark",
+    "spectrumIconLight": "TableCellMergeColorLight"
+  },
+  "tableColumnAddLeftColor": {
+    "spectrumIconActive": "TableColumnAddLeftColorActive",
+    "spectrumIconDark": "TableColumnAddLeftColorDark",
+    "spectrumIconLight": "TableColumnAddLeftColorLight"
+  },
+  "tableColumnAddRightColor": {
+    "spectrumIconActive": "TableColumnAddRightColorActive",
+    "spectrumIconDark": "TableColumnAddRightColorDark",
+    "spectrumIconLight": "TableColumnAddLeftColorLight"
+  },
+  "tableColumnMergeColor": {
+    "spectrumIconActive": "TableColumnMergeColorActive",
+    "spectrumIconDark": "TableColumnMergeColorDark",
+    "spectrumIconLight": "TableColumnMergeColorLight"
+  },
+  "tableColumnRemoveCenterColor": {
+    "spectrumIconActive": "TableColumnRemoveCenterColorActive",
+    "spectrumIconDark": "TableColumnRemoveCenterColorDark",
+    "spectrumIconLight": "TableColumnRemoveCenterColorLight"
+  },
+  "tableColumnSplitColor": {
+    "spectrumIconActive": "TableColumnSplitColorActive",
+    "spectrumIconDark": "TableColumnSplitColorDark",
+    "spectrumIconLight": "TableColumnSplitColorLight"
+  },
+  "tableRowAddBottomColor": {
+    "spectrumIconActive": "TableRowAddBottomColorActive",
+    "spectrumIconDark": "TableRowAddBottomColorDark",
+    "spectrumIconLight": "TableRowAddBottomColorLight"
+  },
+  "tableRowAddTopColor": {
+    "spectrumIconActive": "TableRowAddTopColorActive",
+    "spectrumIconDark": "TableRowAddTopColorDark",
+    "spectrumIconLight": "TableRowAddTopColorLight"
+  },
+  "tableRowMergeColor": {
+    "spectrumIconActive": "TableRowMergeColorActive",
+    "spectrumIconDark": "TableRowMergeColorDark",
+    "spectrumIconLight": "TableRowMergeColorLight"
+  },
+  "tableRowRemoveCenterColor": {
+    "spectrumIconActive": "TableRowRemoveCenterColorActive",
+    "spectrumIconDark": "TableRowRemoveCenterColorDark",
+    "spectrumIconLight": "TableRowRemoveCenterColorLight"
+  },
+  "tableRowSplitColor": {
+    "spectrumIconActive": "TableRowSplitColorActive",
+    "spectrumIconDark": "TableRowSplitColorDark",
+    "spectrumIconLight": "TableRowSplitColorLight"
+  },
+  "tableSelectColumnColor": {
+    "spectrumIconActive": "TableSelectColumnColorActive",
+    "spectrumIconDark": "TableSelectColumnColorDark",
+    "spectrumIconLight": "TableSelectColumnColorLight"
+  },
+  "tableSelectRowColor": {
+    "spectrumIconActive": "TableSelectRowColorActive",
+    "spectrumIconDark": "TableSelectRowColorDark",
+    "spectrumIconLight": "TableSelectRowColorLight"
   },
   "tag": {
     "spectrumIcon": "Label"
@@ -130,6 +414,12 @@
   },
   "tags": {
     "spectrumIcon": "Labels"
+  },
+  "target": {
+    "spectrumIcon": "AdobeTarget"
+  },
+  "targetCheckColor": {
+    "spectrumIcon": "TargetCheckColorLight"
   },
   "textCenter": {
     "spectrumIcon": "TextAlignCenter"
@@ -155,11 +445,35 @@
   "triangleRight": {
     "spectrumIcon": "ChevronRight"
   },
+  "twitterCircleColor": {
+    "spectrumIcon": "Twitter-CircleColorLight"
+  },
+  "twitterColor": {
+    "spectrumIcon": "TwitterColorLight"
+  },
+  "unflag": {
+    "spectrumIcon": "FlagExclude"
+  },
+  "unpublish": {
+    "spectrumIcon": "GlobeRemove"
+  },
   "upload": {
     "spectrumIcon": "UploadToCloud"
   },
   "usa": {
     "spectrumIcon": "USA"
+  },
+  "uSA": {
+    "deprecated": true,
+    "spectrumIcon": "USA"
+  },
+  "userCircleColor": {
+    "spectrumIconDark": "User-CircleColorDark",
+    "spectrumIconLight": "User-CircleColorLight"
+  },
+  "userGroupCircleColor": {
+    "spectrumIconDark": "UserGroup-CircleColorDark",
+    "spectrumIconLight": "UserGroup-CircleColorLight"
   },
   "users": {
     "spectrumIcon": "UserGroup"
@@ -173,224 +487,26 @@
   "vk": {
     "spectrumIcon": "VK"
   },
+  "vK": {
+    "deprecated": true,
+    "spectrumIcon": "VK"
+  },
   "wand": {
     "spectrumIcon": "MagicWand"
   },
-  "aBC": {
-    "deprecated": true,
-    "spectrumIcon": "ABC"
+  "windowsColor": {
+    "spectrumIcon": "WindowsColorLight"
   },
-  "target": {
-    "spectrumIcon": "AdobeTarget"
-  },
-  "draw": {
-    "spectrumIcon": "AnnotatePen"
+  "wordpressColor": {
+    "spectrumIcon": "WordpressColorLight"
   },
   "write": {
     "spectrumIcon": "AnnotatePen"
   },
-  "annotate": {
-    "spectrumIcon": "AnnotatePen"
-  },
-  "downloaded": {
-    "spectrumIcon": "Download"
-  },
-  "campaignRemove": {
-    "spectrumIcon": "CampaignClose"
-  },
-  "accordionLeft": {
-    "spectrumIcon": "ChevronDoubleLeft"
-  },
-  "accordionDown": {
-    "spectrumIcon": "ChevronDown"
-  },
-  "accordionRight": {
-    "spectrumIcon": "ChevronDoubleRight"
-  },
-  "accordionUp": {
-    "spectrumIcon": "ChevronUp"
-  },
-  "deviceMobile": {
-    "spectrumIcon": "DevicePhone"
-  },
-  "deviceTv": {
-    "deprecated": true,
-    "spectrumIcon": "DeviceTV"
-  },
-  "downloadFromCloud": {
-    "spectrumIcon": "Download",
-    "deprecated": true
-  },
-  "dPS": {
-    "deprecated": true,
-    "spectrumIcon": "DPS"
-  },
-  "coverImage": {
-    "spectrumIcon": "FacebookCoverImage"
-  },
-  "unflag": {
-    "spectrumIcon": "FlagExclude"
-  },
-  "folderDefault": {
-    "spectrumIcon": "FolderAdobe"
-  },
-  "folderLockedDefault": {
-    "spectrumIcon": "FolderLockedAdobe"
-  },
-  "automate": {
-    "spectrumIcon": "Gears"
-  },
-  "unpublish": {
-    "spectrumIcon": "GlobeRemove"
-  },
-  "graphBarStackedHorizontal": {
-    "spectrumIcon": "GraphBarHorizontalStacked"
-  },
-  "graphBarStackedVertical": {
-    "spectrumIcon": "GraphBarVertical"
-  },
-  "graphTrendRounded": {
-    "spectrumIcon": "GraphTrend"
-  },
-  "hTML5": {
-    "spectrumIcon": "HTML5",
-    "deprecated": true
-  },
-  "imageMap": {
-    "spectrumIcon": "ImageMapRectangle"
-  },
-  "breadcrumb": {
-    "spectrumIcon": "Menu"
-  },
-  "oS": {
-    "spectrumIcon": "OS",
-    "deprecated": true
-  },
-  "navigation": {
-    "spectrumIcon": "Rail"
-  },
-  "rSS": {
-    "spectrumIcon": "RSS",
-    "deprecated": true
-  },
-  "sMS": {
-    "spectrumIcon": "SMS",
-    "deprecated": true
-  },
-  "sMSLightning": {
-    "spectrumIcon": "SMSLightning",
-    "deprecated": true
-  },
-  "sMSRefresh": {
-    "spectrumIcon": "SMSRefresh",
-    "deprecated": true
-  },
-  "star": {
-    "spectrumIcon": "Star"
-  },
-  "stop": {
-    "spectrumIcon": "StopCircle"
-  },
-  "uSA": {
-    "spectrumIcon": "USA",
-    "deprecated": true
-  },
-  "vK": {
-    "spectrumIcon": "VK",
-    "deprecated": true
-  },
-  "facebookCircleColor": {
-    "spectrumIcon": "Facebook-CircleColorLight"
-  },
-  "googlePlusCircleColor": {
-    "spectrumIcon": "GooglePlus-CircleColorLight"
-  },
-  "instagramCircleColor": {
-    "spectrumIcon": "Instagram-CircleColorLight"
-  },
-  "linkedInCircleColor": {
-    "spectrumIcon": "LinkedIn-CircleColorLight"
-  },
-  "sinaWeiboCircleColor": {
-    "spectrumIcon": "SinaWeibo-CircleColorLight"
-  },
-  "tableCellMergeColor": {
-    "spectrumIconLight": "TableCellMergeColorLight",
-    "spectrumIconDark": "TableCellMergeColorDark",
-    "spectrumIconActive": "TableCellMergeColorActive"
-  },
-  "tableColumnAddLeftColor": {
-    "spectrumIconLight": "TableColumnAddLeftColorLight",
-    "spectrumIconDark": "TableColumnAddLeftColorDark",
-    "spectrumIconActive": "TableColumnAddLeftColorActive"
-  },
-  "tableColumnAddRightColor": {
-    "spectrumIconLight": "TableColumnAddLeftColorLight",
-    "spectrumIconDark": "TableColumnAddRightColorDark",
-    "spectrumIconActive": "TableColumnAddRightColorActive"
-  },
-  "tableColumnMergeColor": {
-    "spectrumIconLight": "TableColumnMergeColorLight",
-    "spectrumIconActive": "TableColumnMergeColorActive",
-    "spectrumIconDark": "TableColumnMergeColorDark"
-  },
-  "tableColumnRemoveCenterColor": {
-    "spectrumIconLight": "TableColumnRemoveCenterColorLight",
-    "spectrumIconActive": "TableColumnRemoveCenterColorActive",
-    "spectrumIconDark": "TableColumnRemoveCenterColorDark"
-  },
-  "tableColumnSplitColor": {
-    "spectrumIconLight": "TableColumnSplitColorLight",
-    "spectrumIconActive": "TableColumnSplitColorActive",
-    "spectrumIconDark": "TableColumnSplitColorDark"
-  },
-  "tableRowAddBottomColor": {
-    "spectrumIconLight": "TableRowAddBottomColorLight",
-    "spectrumIconActive": "TableRowAddBottomColorActive",
-    "spectrumIconDark": "TableRowAddBottomColorDark"
-  },
-  "tableRowAddTopColor": {
-    "spectrumIconLight": "TableRowAddTopColorLight",
-    "spectrumIconActive": "TableRowAddTopColorActive",
-    "spectrumIconDark": "TableRowAddTopColorDark"
-  },
-  "tableRowMergeColor": {
-    "spectrumIconLight": "TableRowMergeColorLight",
-    "spectrumIconActive": "TableRowMergeColorActive",
-    "spectrumIconDark": "TableRowMergeColorDark"
-  },
-  "tableRowRemoveCenterColor": {
-    "spectrumIconLight": "TableRowRemoveCenterColorLight",
-    "spectrumIconActive": "TableRowRemoveCenterColorActive",
-    "spectrumIconDark": "TableRowRemoveCenterColorDark"
-  },
-  "tableRowSplitColor": {
-    "spectrumIconLight": "TableRowSplitColorLight",
-    "spectrumIconActive": "TableRowSplitColorActive",
-    "spectrumIconDark": "TableRowSplitColorDark"
-  },
-  "tableSelectColumnColor": {
-    "spectrumIconLight": "TableSelectColumnColorLight",
-    "spectrumIconActive": "TableSelectColumnColorActive",
-    "spectrumIconDark": "TableSelectColumnColorDark"
-  },
-  "tableSelectRowColor": {
-    "spectrumIconLight": "TableSelectRowColorLight",
-    "spectrumIconActive": "TableSelectRowColorActive",
-    "spectrumIconDark": "TableSelectRowColorDark"
-  },
-  "twitterCircleColor": {
-    "spectrumIcon": "Twitter-CircleColorLight"
-  },
-  "userCircleColor": {
-    "spectrumIconLight": "User-CircleColorLight",
-    "spectrumIconDark": "User-CircleColorDark"
-  },
-  "userGroupCircleColor": {
-    "spectrumIconLight": "UserGroup-CircleColorLight",
-    "spectrumIconDark": "UserGroup-CircleColorDark"
-  },
   "youTubeCircleColor": {
     "spectrumIcon": "YouTube-CircleColorLight"
+  },
+  "youTubeColor": {
+    "spectrumIcon": "YouTubeColorLight"
   }
 }
