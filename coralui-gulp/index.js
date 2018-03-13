@@ -29,6 +29,17 @@ module.exports = function(gulp) {
     );
   });
   
+  gulp.task('run', function() {
+    runSequence(
+      'clean',
+      'styles',
+      'resources',
+      'templates',
+      'scripts',
+      'watch'
+    );
+  });
+  
   gulp.task('dev', function() {
     runSequence(
       'clean',

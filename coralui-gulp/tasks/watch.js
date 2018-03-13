@@ -30,12 +30,28 @@ module.exports = function(gulp) {
   });
   
   gulp.task('watch', function() {
-    gulp.watch([
-      'src/**',
-      '!src/tests/**',
-      path.join(util.getRoot(), 'coralui-theme-spectrum/**/*.styl'),
-      'index.js'
-    ], ['build+watch']);
+    if (!util.isTLB()) {
+      gulp.watch([
+        'index.js',
+        'libs/**',
+        'data/**',
+        'polyfills/**',
+        'src/**',
+        '!src/tests/**',
+        path.join(util.getRoot(), 'coralui-theme-spectrum/**/*.styl'),
+      ], ['build+watch']);
+    }
+    else {
+      gulp.watch([
+        'index.js',
+        'coralui-*/libs/**',
+        'coralui-*/data/**',
+        'coralui-*/polyfills/**',
+        'coralui-*/src/scripts/**/*.js',
+        'coralui-*/src/templates/**/*.html',
+        'coralui-*/src/styles/**/*.styl',
+      ], ['build+watch']);
+    }
   
     return gulp.src('./')
       .pipe(server({
