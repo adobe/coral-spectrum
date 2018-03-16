@@ -51,9 +51,6 @@ const displayMode = {
 const WHITESPACE_REGEX = /[\t\n\r ]+/g;
 
 /** @ignore */
-const ITEM_TAG_NAME = 'coral-cyclebutton-item';
-
-/** @ignore */
 const ACTION_TAG_NAME = 'coral-cyclebutton-action';
 
 const CLASSNAME = '_coral-CycleSelect';
@@ -71,33 +68,37 @@ class CycleButton extends ComponentMixin(HTMLElement) {
   constructor() {
     super();
     
-    // Attach events
-    this._delegateEvents({
-      'click :not(coral-cyclebutton-action)': '_onItemClick',
-      'click button[is="coral-buttonlist-item"]': '_onActionClick',
-      'key:down [aria-expanded=false]': '_onItemClick',
-      'coral-selectlist:change': '_onSelectListChange',
-      
-      'global:click': '_onGlobalClick',
-      'global:touchstart': '_onGlobalClick',
-      'global:key:escape': '_onEscapeKey',
+    // Templates
+    this._elements = {};
+    base.call(this._elements, {Icon, commons});
+    
+    const events = {
+      'click ._coral-CycleSelect-button': '_onItemClick',
+      'click coral-cyclebutton-item': '_onItemClick',
+      'key:down ._coral-CycleSelect-button[aria-expanded=false]': '_onItemClick',
       
       // private
       'coral-cyclebutton-item:_selectedchanged': '_onItemSelectedChanged',
       'coral-cyclebutton-item:_validateselection': '_onValidateSelection',
       'coral-cyclebutton-item:_iconchanged coral-cyclebutton-item[selected]': '_onSelectedItemPropertyChange',
       'coral-cyclebutton-item:_displaymodechanged coral-cyclebutton-item[selected]': '_onSelectedItemPropertyChange'
-    });
+    };
+  
+    const overlay = this._elements.overlay;
+    const overlayId = overlay.id;
     
-    // Templates
-    this._elements = {};
-    base.call(this._elements, {Icon, commons});
+    // Overlay
+    events[`global:capture:click #${overlayId} button[is="coral-buttonlist-item"]`] = '_onActionClick';
+    events[`global:capture:coral-selectlist:change #${overlayId}`] = '_onSelectListChange';
+    
+    // Attach events
+    this._delegateEvents(events);
   
     // Assign the button as the target for the overlay (faster than querySelect the target via id)
-    this._elements.overlay.target = this._elements.button;
+    overlay.target = this._elements.button;
   
     // Gives the focus back to button once the overlay is closed
-    this._elements.overlay.returnFocusTo(this._elements.button);
+    overlay.returnFocusTo(this._elements.button);
     
     // Used for eventing
     this._oldSelection = null;
@@ -330,38 +331,12 @@ class CycleButton extends ComponentMixin(HTMLElement) {
     }
   }
   
-  /** @ignore */
-  _onEscapeKey() {
-    // When escape is pressed, hide ourselves
-    if (this._elements.overlay._isTopOverlay()) {
-      this._hideOverlay();
-    }
-  }
-  
-  /** @ignore */
-  _onGlobalClick(event) {
-    if (!this._elements.overlay.open) {
-      return;
-    }
-    
-    // makes sure we don't hide ourselves when clicked
-    const eventTargetWithinOverlayTarget = this._elements.overlay.contains(event.target);
-    const eventTargetWithinItself = this.contains(event.target);
-    if (!eventTargetWithinOverlayTarget && !eventTargetWithinItself) {
-      this._hideOverlay();
-    }
-  }
-  
   /** @private */
   _onItemClick(event) {
     event.preventDefault();
     
     const items = this.items.getAll();
     const itemCount = items.length;
-    
-    if (!(event.matchedTarget === this._elements.button || event.matchedTarget.tagName.toLowerCase() === ITEM_TAG_NAME)) {
-      return;
-    }
     
     // When we have more than a specified number of items, use the overlay selection. If threshold is 0, then we never
     // show the popover. If there are actions, we always show the popover.
@@ -662,6 +637,9 @@ class CycleButton extends ComponentMixin(HTMLElement) {
   
     const frag = document.createDocumentFragment();
   
+    // Cannot be open by default when rendered
+    this._elements.overlay.removeAttribute('open');
+  
     // Render the base layout
     frag.appendChild(this._elements.button);
     frag.appendChild(this._elements.overlay);
@@ -675,6 +653,16 @@ class CycleButton extends ComponentMixin(HTMLElement) {
     this._preventTriggeringEvents = false;
     
     this._oldSelection = this.selectedItem;
+  }
+  
+  /** @ignore */
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    
+    // In case it was moved out don't forget to remove it
+    if (!this.contains(this._elements.overlay)) {
+      this._elements.overlay.remove();
+    }
   }
   
   /**

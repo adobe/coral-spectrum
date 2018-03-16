@@ -867,5 +867,9 @@ describe('CycleButton', function() {
       // selects the 2nd item
       listItems[1].click();
     });
+  
+    describe('Smart Overlay', () => {
+      helpers.testSmartOverlay('coral-cyclebutton');
+    });
   }); // Implementation Details
 });
