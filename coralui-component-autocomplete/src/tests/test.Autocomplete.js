@@ -232,7 +232,7 @@ describe('Autocomplete', function() {
       el.multiple = true;
       el.forceSelection = false;
 
-      // show suggestions with no items programatically
+      // show suggestions with no items programmatically
       el.showSuggestions();
 
       helpers.next(function() {
@@ -272,10 +272,10 @@ describe('Autocomplete', function() {
             expect(el._elements.selectList.items.length).to.equal(2, 'selectList should contain items');
 
             // Click the first suggestion
-            el._elements.selectList.items.getAll()[0].click();
+            el._elements.selectList.items.getAll()[0].trigger('mousedown');
 
             // Click the second suggestion
-            el._elements.selectList.items.getAll()[1].click();
+            el._elements.selectList.items.getAll()[1].trigger('mousedown');
 
             helpers.next(function() {
               expect(el._elements.tagList.items.length).to.equal(2, 'tagList should contain  selected items');
@@ -378,7 +378,7 @@ describe('Autocomplete', function() {
         helpers.event('input', el._elements.input);
 
         // Click the suggestion
-        el._elements.selectList.items.getAll()[0].click();
+        el._elements.selectList.items.getAll()[0].trigger('mousedown');
 
         // Value should be correct
         expect(el.value).to.equal('sa', 'value should be set from SelectList item click');
@@ -461,7 +461,7 @@ describe('Autocomplete', function() {
           helpers.event('input', el._elements.input);
 
           // Click the suggestion
-          el._elements.selectList.items.getAll()[0].click();
+          el._elements.selectList.items.getAll()[0].trigger('mousedown');
 
           expect(spy.callCount).to.equal(1, 'call count after selecting item');
 
@@ -879,7 +879,7 @@ describe('Autocomplete', function() {
         helpers.event('input', el._elements.input);
 
         // Click the suggestion
-        el._elements.selectList.items.getAll()[0].click();
+        el._elements.selectList.items.getAll()[0].trigger('mousedown');
 
         expect(spy.callCount).to.equal(1, 'call count after selecting item');
         expect(el._elements.input.value).to.equal('', 'el._elements.input.value should be reset to an empty string');
@@ -920,7 +920,7 @@ describe('Autocomplete', function() {
         helpers.event('input', el._elements.input);
 
         // Click the suggestion
-        el._elements.selectList.items.getAll()[0].click();
+        el._elements.selectList.items.getAll()[0].trigger('mousedown');
 
         expect(el.value).to.equal('fi', 'value should now be firefox');
         expect(changeSpy.callCount).to.equal(1, 'call count after selecting item');
@@ -977,7 +977,7 @@ describe('Autocomplete', function() {
         helpers.event('input', el._elements.input);
 
         // Click the suggestion
-        el._elements.selectList.items.getAll()[0].click();
+        el._elements.selectList.items.getAll()[0].trigger('mousedown');
 
         expect(el.value).to.equal('fi', 'value should now be firefox');
         expect(changeSpy.callCount).to.equal(1, 'call count after selecting item');
@@ -1033,7 +1033,7 @@ describe('Autocomplete', function() {
         helpers.event('input', el._elements.input);
 
         // Click the suggestion
-        el._elements.selectList.items.getAll()[0].click();
+        el._elements.selectList.items.getAll()[0].trigger('mousedown');
 
         expect(el.value).to.equal('fi', 'value should now be firefox');
         expect(changeSpy.callCount).to.equal(1, 'call count after selecting item');
@@ -1224,7 +1224,7 @@ describe('Autocomplete', function() {
           expect(el._elements.overlay.open).to.equal(true, 'menu should remain open when item receives focus');
 
           // click focused selectList item element
-          document.activeElement.click();
+          document.activeElement.trigger('mousedown');
 
           setTimeout(function() {
             expect(el._elements.overlay.open).to.be.false;
@@ -1435,7 +1435,7 @@ describe('Autocomplete', function() {
         helpers.event('input', el._elements.input);
 
         // Click the suggestion
-        el._elements.selectList.items.getAll()[0].click();
+        el._elements.selectList.items.getAll()[0].trigger('mousedown');
 
         // Special characters should not be escaped
         expect(el.value).to.equal(item.value, 'value should now be &&');
@@ -1647,7 +1647,7 @@ describe('Autocomplete', function() {
       });
 
       el.on('coral-overlay:open', function() {
-        el._elements.selectList.items.getAll()[1].click();
+        el._elements.selectList.items.getAll()[1].trigger('mousedown');
 
         // Mimic the input focus out
         el._handleFocusOut({target: el._elements.input, preventDefault: function() {}});
@@ -1693,6 +1693,10 @@ describe('Autocomplete', function() {
     
       el._elements.input.value = 'Internet & Explorer';
       helpers.event('input', el._elements.input);
+    });
+  
+    describe('Smart Overlay', () => {
+      helpers.testSmartOverlay('coral-autocomplete');
     });
   
     describe('#formField (single select)', function() {

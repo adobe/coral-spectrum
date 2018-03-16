@@ -103,9 +103,9 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
     // Pre-define labellable element
     this._labellableElement = this._elements.input;
-    
-    // Events
-    this._delegateEvents({
+  
+    const overlayId = this._elements.overlay.id;
+    const events = {
       // ARIA Autocomplete role keyboard interaction
       // http://www.w3.org/TR/wai-aria-practices/#autocomplete
       'key:up [handle="input"]': '_handleInputUpKeypress',
@@ -123,8 +123,6 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       // Interaction
       'click [handle="trigger"]': '_handleTriggerClick',
       'mousedown [handle="trigger"]': '_handleTriggerMousedown',
-      'key:escape': '_hideSuggestionsAndFocus',
-      'key:shift+tab [is="coral-buttonlist-item"]': '_handleListFocusShift',
   
       // Focus
       'capture:blur': '_handleFocusOut',
@@ -134,24 +132,24 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       // Taglist
       'coral-collection:remove [handle="tagList"]': '_handleTagRemoved',
       'change [handle="tagList"]': '_preventTagListChangeEvent',
-  
-      // SelectList
-      // Needed for ButtonList
-      'key:enter button[is="coral-buttonlist-item"]': '_handleSelect',
-      'click button[is="coral-buttonlist-item"]': '_handleSelect',
-      'capture:scroll [handle="selectList"]': '_onScroll',
-      'capture:mousewheel [handle="selectList"]': '_onMouseWheel',
-      'mousedown button[is="coral-buttonlist-item"]': '_handleSelect',
-      'capture:mouseenter [is="coral-buttonlist-item"]': '_handleListItemFocus',
-  
-      // Overlay
-      'coral-overlay:positioned': '_handleOverlayPositioned',
-  
+    
       // Items
       'coral-autocomplete-item:_valuechanged': '_handleItemValueChange',
       'coral-autocomplete-item:_selectedchanged': '_handleItemSelectedChange',
       'coral-autocomplete-item:_contentchanged': '_handleItemContentChange'
-    });
+    };
+    
+    // Interaction
+    events[`global:key:shift+tab #${overlayId} [is="coral-buttonlist-item"]`] = '_handleListFocusShift';
+  
+    // SelectList
+    events[`global:key:enter #${overlayId} button[is="coral-buttonlist-item"]`] = '_handleSelect';
+    events[`global:capture:mousedown #${overlayId} button[is="coral-buttonlist-item"]`] = '_handleSelect';
+    events[`global:capture:scroll #${overlayId} [handle="selectList"]`] = '_onScroll';
+    events[`global:capture:mousewheel #${overlayId} [handle="selectList"]`] = '_onMouseWheel';
+    
+    // Events
+    this._delegateEvents(events);
   
     // A map of values to tags
     this._tagMap = {};
@@ -1170,19 +1168,6 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /** @private */
-  _handleOverlayPositioned(event) {
-    // We'll remove these classes when closed
-    if (event.detail.vertical === 'top') {
-      this.classList.remove('is-openAbove');
-      this.classList.add('is-openBelow');
-    }
-    else {
-      this.classList.remove('is-openBelow');
-      this.classList.add('is-openAbove');
-    }
-  }
-  
-  /** @private */
   _handleListFocusShift(event) {
     if (this._elements.overlay.open) {
       // Stop focus shift
@@ -1810,7 +1795,6 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     }
     
     this.setAttribute('aria-expanded', 'true');
-    this.classList.add('is-open');
   }
   
   /**
@@ -1820,7 +1804,6 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._elements.overlay.open = false;
     
     this.setAttribute('aria-expanded', 'false');
-    this.classList.remove('is-open', 'is-openBelow', 'is-openAbove');
     this._elements.input.removeAttribute('aria-activedescendant');
     
     // Don't let the suggestions show
@@ -1892,6 +1875,9 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // Create a fragment
     const frag = document.createDocumentFragment();
   
+    // Cannot be open by default when rendered
+    this._elements.overlay.removeAttribute('open');
+    
     // Render the template
     frag.appendChild(this._elements.overlay);
     frag.appendChild(this._elements.field);
@@ -1922,6 +1908,16 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
     // save initial selection (used for reset)
     this._initialSelectedValues = this.values.slice(0);
+  }
+  
+  /** @ignore */
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    
+    // In case it was moved out don't forget to remove it
+    if (!this.contains(this._elements.overlay)) {
+      this._elements.overlay.remove();
+    }
   }
 }
 
