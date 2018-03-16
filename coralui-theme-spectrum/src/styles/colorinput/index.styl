@@ -17,12 +17,13 @@
 $colorinput-transparency-url = '../embed/Transparency.svg';
 $colorinput-blank-url = '../embed/ColorBlank.svg';
 
-$colorinput-overlay-size = 475*$px;
+$colorinput-overlay-size = 500*$px;
 $colorinput-overlay-padding = 15*$px;
 
 $colorinput-button-border-radius = 4*$px;
 $colorinput-button-border-width = 1*$px;
 
+$colorinput-properties-subview-right-padding = 24*$px;
 $colorinput-properties-subview-border = 2*$px;
 $colorinput-properties-subview-width = 240*$px;
 
@@ -68,133 +69,134 @@ coral-colorinput-item {
 ._coral-ColorInput {
   position: relative;
   display: inline-block;
+}
+
+._coral-ColorInput-overlay {
+  height: 246*$px;
+  width: $colorinput-overlay-size;
+  padding: $colorinput-overlay-padding;
   white-space: nowrap;
 
-  coral-popover {
-    height: 246*$px;
-    width: $colorinput-overlay-size;
-    padding: $colorinput-overlay-padding;
+  ._coral-ColorInput-propertiesSubview {
+    display: block;
+    float: left;
+    padding-right: $colorinput-properties-subview-right-padding;
+    border-right: $colorinput-properties-subview-border solid;
 
-    ._coral-ColorInput-propertiesSubview {
-      display: block;
-      float: left;
-      padding-right: $colorinput-overlay-padding;
-      border-right: $colorinput-properties-subview-border solid;
+    ._coral-ColorInput-previewView {
+      display: inline-block;
 
-      ._coral-ColorInput-previewView {
-        display: inline-block;
+      ._coral-ColorInput-preview-container {
+        float: left;
 
-        ._coral-ColorInput-preview-container {
-          float: left;
-
-          ._coral-ColorInput-preview {
-            position: relative;
-            width: 48*$px;
-            height: 48*$px;
-            border-width: $colorinput-button-border-width;
-          }
-        }
-
-        ._coral-ColorInput-editHex {
-          width: $colorinput-edit-hex-width;
-          float: right;
-          margin-left: $colorinput-edit-hex-left-margin;
-
-          input {
-            // Align the # character with the input
-            margin-top: $colorinput-edit-hex-top-margin;
-            height: $colorinput-rgba-view-input-height;
-            width: 100%;
-            min-width: 0;
-            text-transform: uppercase;
-          }
+        ._coral-ColorInput-preview {
+          position: relative;
+          width: 48*$px;
+          height: 48*$px;
+          border-width: $colorinput-button-border-width;
         }
       }
 
-      ._coral-ColorInput-rgbaView {
-        margin-top: $colorinput-rgba-view-top-margin;
-
-        label {
-          line-height: $colorinput-rgba-view-label-line-height;
-          vertical-align: middle;
-        }
+      ._coral-ColorInput-editHex {
+        width: $colorinput-edit-hex-width;
+        float: right;
+        margin-left: $colorinput-edit-hex-left-margin;
 
         input {
-          min-width: $colorinput-rgba-view-input-width;
-          width: $colorinput-rgba-view-input-width;
+        // Align the # character with the input
+          margin-top: $colorinput-edit-hex-top-margin;
           height: $colorinput-rgba-view-input-height;
+          width: 100%;
+          min-width: 0;
+          text-transform: uppercase;
         }
       }
     }
 
-    ._coral-ColorInput-swatches {
+    ._coral-ColorInput-rgbaView {
+      margin-top: $colorinput-rgba-view-top-margin;
 
-      ._coral-ColorInput-swatchesSubview {
-        display: inline-block;
-        width: $colorinput-swatch-subview-width;
-        padding-left: $colorinput-swatch-subview-left-padding;
-
-        ._coral-ColorInput-swatches-header-title {
-          // Add margin to vertically align the title with the below swatch container
-          margin-left: $colorinput-swatch-subview-container-left-margin;
-          margin-bottom: $colorinput-swatch-subview-title-bottom-margin;
-        }
-
-        ._coral-ColorInput-swatches-container {
-          max-height: $colorinput-swatch-subview-container-height;
-          overflow-y: auto;
-        }
+      label {
+        line-height: $colorinput-rgba-view-label-line-height;
+        vertical-align: middle;
       }
 
-      ._coral-ColorInput-swatch {
-        display: block;
-        float: left;
-        padding: $colorinput-swatch-top-padding $colorinput-swatch-left-right-padding 0;
+      input {
+        min-width: $colorinput-rgba-view-input-width;
+        width: $colorinput-rgba-view-input-width;
+        height: $colorinput-rgba-view-input-height;
+      }
+    }
+  }
 
-        /* All buttons inside the colorinput are square */
-        button {
-          position: relative;
-          width: $colorinput-swatch-button-size;
-          height: $colorinput-swatch-button-size;
-          padding-left: $colorinput-swatch-button-left-padding;
-          padding-top: $colorinput-swatch-button-top-padding;
+  ._coral-ColorInput-swatches {
+
+    ._coral-ColorInput-swatchesSubview {
+      display: inline-block;
+      width: $colorinput-swatch-subview-width;
+      padding-left: $colorinput-swatch-subview-left-padding;
+      float: right;
+
+      ._coral-ColorInput-swatches-header-title {
+      // Add margin to vertically align the title with the below swatch container
+        margin-left: $colorinput-swatch-subview-container-left-margin;
+        margin-bottom: $colorinput-swatch-subview-title-bottom-margin;
+      }
+
+      ._coral-ColorInput-swatches-container {
+        max-height: $colorinput-swatch-subview-container-height;
+        overflow-y: auto;
+      }
+    }
+
+    ._coral-ColorInput-swatch {
+      display: block;
+      float: left;
+      padding: $colorinput-swatch-top-padding $colorinput-swatch-left-right-padding 0;
+
+      /* All buttons inside the colorinput are square */
+      button {
+        position: relative;
+        width: $colorinput-swatch-button-size;
+        height: $colorinput-swatch-button-size;
+        padding-left: $colorinput-swatch-button-left-padding;
+        padding-top: $colorinput-swatch-button-top-padding;
+        border-radius: $colorinput-button-border-radius;
+        border-width: $colorinput-button-border-width;
+        margin-right: 0;
+
+        coral-icon {
+          display: none;
+        }
+
+        &:before {
+          display: block;
+          position: absolute;
+          left: 0;
+          top: 0;
+          z-index: -1;
+          content: "";
+          width: 100%;
+          height: 100%;
           border-radius: $colorinput-button-border-radius;
-          border-width: $colorinput-button-border-width;
-          margin-right: 0;
 
-          coral-icon {
-            display: none;
-          }
-
-          &:before {
-            display: block;
-            position: absolute;
-            left: 0;
-            top: 0;
-            z-index: -1;
-            content: "";
-            width: 100%;
-            height: 100%;
-            border-radius: $colorinput-button-border-radius;
-
-            background-image: svgImport($colorinput-transparency-url);
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: 100%;
-          }
+          background-image: svgImport($colorinput-transparency-url);
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: 100%;
         }
-
-        &[selected] {
-          button {
-            coral-icon {
-              display: inherit;
-              vertical-align: inherit;
-            }
-          }
-        }
-
-        clearfix();
       }
+
+      &[selected] {
+        button {
+          coral-icon {
+            display: inherit;
+            vertical-align: inherit;
+          }
+        }
+      }
+
+      clearfix();
     }
   }
 }
@@ -295,6 +297,7 @@ coral-colorinput-item {
 }
 
 ._coral-ColorInput--novalue ._coral-ColorInput-preview,
+._coral-ColorInput-preview--novalue,
 ._coral-ColorInput.is-invalid ._coral-ColorInput-preview,
 ._coral-ColorInput-swatch ._coral-ColorInput-swatch-novalue {
   background-image: svgImport($colorinput-blank-url);
@@ -335,25 +338,22 @@ coral-colorinput-item {
 }
 
 //Single view CSS
-._coral-ColorInput {
-  coral-popover._coral-ColorInput-onlyPropertiesView {
-    width: $colorinput-overlay-only-properties-width;
+._coral-ColorInput-overlay._coral-ColorInput-onlyPropertiesView {
+  width: $colorinput-overlay-only-properties-width;
 
-    ._coral-ColorInput-propertiesSubview {
-      border-right: 0;
-    }
+  ._coral-ColorInput-propertiesSubview {
+    border-right: 0;
   }
 }
 
-._coral-ColorInput {
-  coral-popover._coral-ColorInput-onlySwatchesView {
-    width: $colorinput-overlay-only-swatch-width;
+._coral-ColorInput-overlay._coral-ColorInput-onlySwatchesView {
+  width: $colorinput-overlay-only-swatch-width;
 
-    ._coral-ColorInput-swatches {
+  ._coral-ColorInput-swatches {
 
-      ._coral-ColorInput-swatchesSubview{
-        padding-left: 0;
-      }
+    ._coral-ColorInput-swatchesSubview{
+      padding-left: 0;
+      float: none;
     }
   }
 }
