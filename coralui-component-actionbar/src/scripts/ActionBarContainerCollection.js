@@ -53,7 +53,7 @@ class ActionBarContainerCollection extends SelectableCollection {
         !child.hasAttribute('disabled') &&
         !child.hasAttribute('hidden') &&
         !child.hasAttribute('coral-actionbar-offscreen') &&
-        child !== this._host._elements.popover &&
+        child !== this._host._elements.overlay &&
         getFirstSelectableWrappedItem(child)
       ) {
         selectableItems.push(child);

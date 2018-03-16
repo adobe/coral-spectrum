@@ -120,9 +120,9 @@ class ActionBarContainer extends ActionBarContainerMixin(ComponentMixin(HTMLElem
     }
   
     // Cleanup 'More' popover
-    this._elements.popover = this.querySelector('[coral-actionbar-popover]');
-    if (this._elements.popover) {
-      this.removeChild(this._elements.popover);
+    this._elements.overlay = this.querySelector('[coral-actionbar-popover]');
+    if (this._elements.overlay) {
+      this.removeChild(this._elements.overlay);
     }
   
     // Init 'More' button
@@ -131,10 +131,10 @@ class ActionBarContainer extends ActionBarContainerMixin(ComponentMixin(HTMLElem
     this.appendChild(this._elements.moreButton);
   
     // Init 'More' popover
-    this._elements.popover.target = this._elements.moreButton;
+    this._elements.overlay.target = this._elements.moreButton;
   
     // Insert popover always as firstChild to ensure element order (cloneNode support)
-    this.insertBefore(this._elements.popover, this.firstChild);
+    this.insertBefore(this._elements.overlay, this.firstChild);
   
     this._attachMoreButtonToContainer();
   }

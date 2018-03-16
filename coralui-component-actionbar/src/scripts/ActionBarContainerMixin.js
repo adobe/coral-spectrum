@@ -20,10 +20,10 @@ import getFirstSelectableWrappedItem from './getFirstSelectableWrappedItem';
 import {Button} from '/coralui-component-button';
 import '/coralui-component-anchorbutton';
 import {Popover} from '/coralui-component-popover';
-import morePopover from '../templates/morePopover';
+import moreOverlay from '../templates/moreOverlay';
 import moreButton from '../templates/moreButton';
-import popoverContent from '../templates/popoverContent';
-import {transform, i18n} from '/coralui-util';
+import overlayContent from '../templates/overlayContent';
+import {commons, transform, i18n} from '/coralui-util';
 
 /**
  @mixin ActionBarContainerMixin
@@ -34,22 +34,24 @@ const ActionBarContainerMixin = (superClass) => class extends superClass {
   constructor() {
     super();
     
-    // Events
-    this._delegateEvents({
-      'coral-overlay:beforeopen [handle="popover"]': '_onOverlayBeforeOpen',
-      'coral-overlay:beforeclose [handle="popover"]': '_onOverlayBeforeClose',
-  
-      // Accessibility
-      'capture:focus ._coral-ActionBar-button:not([disabled])': '_onItemFocusIn',
-      'capture:blur ._coral-ActionBar-button:not([disabled])': '_onItemFocusOut'
-    });
-    
     // Templates
     this._elements = {};
     this._itemsInPopover = [];
     moreButton.call(this._elements);
-    morePopover.call(this._elements);
-    popoverContent.call(this._elements, this._itemsInPopover);
+    moreOverlay.call(this._elements, {commons});
+    overlayContent.call(this._elements, this._itemsInPopover);
+  
+    const overlayId = this._elements.overlay.id;
+    const events = {
+      // Accessibility
+      'capture:focus ._coral-ActionBar-button:not([disabled])': '_onItemFocusIn',
+      'capture:blur ._coral-ActionBar-button:not([disabled])': '_onItemFocusOut'
+    };
+    events[`global:capture:coral-overlay:beforeopen #${overlayId}`] = '_onOverlayBeforeOpen';
+    events[`global:capture:coral-overlay:beforeclose #${overlayId}`] = '_onOverlayBeforeClose';
+  
+    // Events
+    this._delegateEvents(events);
   
     // Init the collection mutation observer
     this.items._startHandlingItems(true);
@@ -152,7 +154,7 @@ const ActionBarContainerMixin = (superClass) => class extends superClass {
    */
   _onOverlayBeforeOpen(event) {
     // there might be popovers in popover => ignore them
-    if (event.target !== this._elements.popover) {
+    if (event.target !== this._elements.overlay) {
       return;
     }
     
@@ -173,12 +175,12 @@ const ActionBarContainerMixin = (superClass) => class extends superClass {
     this._itemsInPopover.isAnchorList = this._itemsInPopover.every(item => item._button && item._button.tagName === 'A');
     
     // show the current popover (hidden needed to disable fade time of popover)
-    this._elements.popover.hidden = false;
+    this._elements.overlay.hidden = false;
     
     // render popover content
-    const popover = this._elements.popover;
+    const popover = this._elements.overlay;
     popover.content.innerHTML = '';
-    popover.content.appendChild(popoverContent.call(this._elements, this._itemsInPopover));
+    popover.content.appendChild(overlayContent.call(this._elements, this._itemsInPopover));
     
     // focus first item (nextFrame needed as popover must be visible and initialized with items)
     const self = this;
@@ -210,17 +212,17 @@ const ActionBarContainerMixin = (superClass) => class extends superClass {
    */
   _onOverlayBeforeClose(event) {
     // there might be popovers in popover => ignore them
-    if (event.target !== this._elements.popover) {
+    if (event.target !== this._elements.overlay) {
       return;
     }
     
     const focusedItem = document.activeElement.parentNode;
     
     // hide the popover(needed to disable fade time of popover)
-    this._elements.popover.hidden = true;
+    this._elements.overlay.hidden = true;
     
     //close any popovers, that might be inside the 'more' popover
-    const childPopovers = this._elements.popover.getElementsByTagName('coral-popover');
+    const childPopovers = this._elements.overlay.getElementsByTagName('coral-popover');
     for (let i = 0; i < childPopovers.length; i++) {
       childPopovers[i].open = false;
     }
@@ -276,13 +278,26 @@ const ActionBarContainerMixin = (superClass) => class extends superClass {
     this.appendChild(this._elements.moreButton);
   
     // Init 'More' popover
-    this._elements.popover.target = this._elements.moreButton;
+    this._elements.overlay.target = this._elements.moreButton;
   
+    // Cannot be open by default when rendered
+    this._elements.overlay.removeAttribute('open');
+    
     // Insert popover always as firstChild to ensure element order (cloneNode support)
-    this.insertBefore(this._elements.popover, this.firstChild);
+    this.insertBefore(this._elements.overlay, this.firstChild);
     
     // Style the items to match action items
     this.items.getAll().forEach(item => this._styleItem(item));
+  }
+  
+  /** @ignore */
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    
+    // In case it was moved out don't forget to remove it
+    if (!this.contains(this._elements.overlay)) {
+      this._elements.overlay.remove();
+    }
   }
 };
 

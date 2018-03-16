@@ -256,46 +256,46 @@ describe('ActionBar', function() {
 
     it('should open a popover on click on "more" button (only one "more" popover should be open at once)', function() {
       const bar = helpers.build(window.__html__['ActionBar.base.html']);
-      expect(bar.primary._elements.popover.open).to.equal(false, 'left popover should be closed by default');
-      expect(bar.secondary._elements.popover.open).to.equal(false, 'right popover should be closed by default');
+      expect(bar.primary._elements.overlay.open).to.equal(false, 'left popover should be closed by default');
+      expect(bar.secondary._elements.overlay.open).to.equal(false, 'right popover should be closed by default');
 
       // click on left more should open a popover
       bar.primary._elements.moreButton.click();
       
-      expect(bar.primary._elements.popover.open).to.equal(true, 'left popover should now be open');
-      expect(bar.secondary._elements.popover.open).to.equal(false, 'right popover should still be closed');
+      expect(bar.primary._elements.overlay.open).to.equal(true, 'left popover should now be open');
+      expect(bar.secondary._elements.overlay.open).to.equal(false, 'right popover should still be closed');
   
       // click on right more should open another popover (and close the other one)
       bar.secondary._elements.moreButton.click();
   
-      expect(bar.primary._elements.popover.open).to.equal(false, 'left popover should now be closed again');
-      expect(bar.secondary._elements.popover.open).to.equal(true, 'right popover should now be open');
+      expect(bar.primary._elements.overlay.open).to.equal(false, 'left popover should now be closed again');
+      expect(bar.secondary._elements.overlay.open).to.equal(true, 'right popover should now be open');
     });
   
     it('should open a popover on click on "more" button without throwing an exception if all items are disabled', function() {
       const bar = helpers.build(window.__html__['ActionBar.disabled.html']);
       
-      expect(bar.primary._elements.popover.open).to.equal(false, 'left popover should be closed by default');
-      expect(bar.secondary._elements.popover.open).to.equal(false, 'right popover should be closed by default');
+      expect(bar.primary._elements.overlay.open).to.equal(false, 'left popover should be closed by default');
+      expect(bar.secondary._elements.overlay.open).to.equal(false, 'right popover should be closed by default');
   
       // click on left more should open a popover
       bar.primary._elements.moreButton.click(); // used to break as exception was thrown ...
   
-      expect(bar.primary._elements.popover.open).to.equal(true, 'left popover should now be open');
-      expect(bar.secondary._elements.popover.open).to.equal(false, 'right popover should still be closed');
+      expect(bar.primary._elements.overlay.open).to.equal(true, 'left popover should now be open');
+      expect(bar.secondary._elements.overlay.open).to.equal(false, 'right popover should still be closed');
     });
 
     it('should close a popover on click outside of popover', function() {
       const bar = helpers.build(window.__html__['ActionBar.base.html']);
       // open left popover
-      bar.primary._elements.popover.open = true;
+      bar.primary._elements.overlay.open = true;
   
-      expect(bar.primary._elements.popover.open).to.equal(true, 'left popover should be open');
+      expect(bar.primary._elements.overlay.open).to.equal(true, 'left popover should be open');
   
       // click outside of popover should close it
       document.body.click();
   
-      expect(bar.primary._elements.popover.open).to.equal(false, 'left popover should now be closed again');
+      expect(bar.primary._elements.overlay.open).to.equal(false, 'left popover should now be closed again');
     });
 
     // @flaky
@@ -366,7 +366,7 @@ describe('ActionBar', function() {
       
       // Wait for resize listener and MO
       window.setTimeout(function() {
-        el.primary._elements.popover.open = true;
+        el.primary._elements.overlay.open = true;
         
         // there should now be some items in the popover
         expect(el.primary._itemsInPopover.length === 1).to.be.true;
@@ -375,7 +375,7 @@ describe('ActionBar', function() {
         expect(el.primary.items.getAll().length).to.equal(2);
   
         // close the popover => all items should be moved back from popover
-        el.primary._elements.popover.open = false;
+        el.primary._elements.overlay.open = false;
         
         // there should be no items in popover
         expect(el.primary._itemsInPopover.length).to.equal(0);
@@ -511,6 +511,12 @@ describe('ActionBar', function() {
       for (i = 0; i < rightActionBarItems.length; i++) {
         expect(rightActionBarItems[i].querySelector('button').getAttribute('tabindex')).to.equal('-1', 'all other items should not be tabable("' + i + '" failed"');
       }
+    });
+  
+    describe('Smart Overlay', () => {
+      helpers.testSmartOverlay('coral-actionbar-primary');
+      helpers.testSmartOverlay('coral-actionbar-secondary');
+      helpers.testSmartOverlay('coral-actionbar-container');
     });
   });
 });

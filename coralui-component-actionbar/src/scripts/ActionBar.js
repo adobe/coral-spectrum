@@ -157,12 +157,12 @@ class ActionBar extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   _onLayout() {
-    if (!this.primary || !this.primary._elements.popover || !this.secondary || !this.secondary._elements.popover) {
+    if (!this.primary || !this.primary._elements.overlay || !this.secondary || !this.secondary._elements.overlay) {
       // while containers are not cached do nothing
       return;
     }
     
-    if (this.primary._elements.popover.open === true || this.secondary._elements.popover.open === true) {
+    if (this.primary._elements.overlay.open === true || this.secondary._elements.overlay.open === true) {
       // while popovers are open do not relayout
       return;
     }
@@ -366,9 +366,9 @@ class ActionBar extends ComponentMixin(HTMLElement) {
   _getAllSelectableItems(currentItem) {
     let selectableItems = [];
     
-    if (this.primary._elements.popover.open === true || this.secondary._elements.popover.open === true) {
+    if (this.primary._elements.overlay.open === true || this.secondary._elements.overlay.open === true) {
       // if popover is open only items in popover can be selected
-      const popoverItems = this.primary._elements.popover.open === true ? this.primary._itemsInPopover :
+      const popoverItems = this.primary._elements.overlay.open === true ? this.primary._itemsInPopover :
         this.secondary._itemsInPopover;
       let item = null;
       
