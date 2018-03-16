@@ -99,47 +99,49 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   constructor() {
     super();
 
-    // Attach events
-    this._delegateEvents(commons.extend(this._events, {
+    // Templates
+    this._elements = {};
+    base.call(this._elements, {commons, Icon});
+    
+    const events = {
+      'global:click': '_onGlobalClick',
+      'global:touchstart': '_onGlobalClick',
+      
       'coral-collection:add coral-taglist': '_onInternalEvent',
-      'coral-collection:add coral-selectlist': '_onSelectListItemAdd',
-
       'coral-collection:remove coral-taglist': '_onInternalEvent',
-      'coral-collection:remove coral-selectlist': '_onInternalEvent',
-
+  
       // item events
       'coral-select-item:_valuechanged coral-select-item': '_onItemValueChange',
       'coral-select-item:_contentchanged coral-select-item': '_onItemContentChange',
       'coral-select-item:_disabledchanged coral-select-item': '_onItemDisabledChange',
       'coral-select-item:_selectedchanged coral-select-item': '_onItemSelectedChange',
-
-      'coral-selectlist:beforechange': '_onSelectListBeforeChange',
-      'coral-selectlist:change': '_onSelectListChange',
-      'coral-selectlist:scrollbottom': '_onSelectListScrollBottom',
-
+  
       'change coral-taglist': '_onTagListChange',
       'change select': '_onNativeSelectChange',
       'click select': '_onNativeSelectClick',
       'click > ._coral-Dropdown-trigger': '_onButtonClick',
-
+  
       'key:space > ._coral-Dropdown-trigger': '_onSpaceKey',
       'key:down > ._coral-Dropdown-trigger': '_onSpaceKey',
-      'key:tab coral-selectlist-item': '_onTabKey',
-      'key:tab+shift coral-selectlist-item': '_onTabKey',
-      
-      'coral-overlay:close': '_onOverlayToggle',
-      'coral-overlay:open': '_onOverlayToggle',
-      'coral-overlay:positioned': '_onOverlayPositioned',
-      'coral-overlay:beforeopen': '_onInternalEvent',
-      'coral-overlay:beforeclose': '_onInternalEvent',
-
-      'global:click': '_onGlobalClick',
-      'global:touchstart': '_onGlobalClick'
-    }));
-
-    // Templates
-    this._elements = {};
-    base.call(this._elements, {commons, Icon});
+    };
+  
+    // Overlay
+    const overlayId = this._elements.overlay.id;
+    events[`global:capture:coral-collection:add #${overlayId} coral-selectlist`] = '_onSelectListItemAdd';
+    events[`global:capture:coral-collection:remove #${overlayId} coral-selectlist`] = '_onInternalEvent';
+    events[`global:capture:coral-selectlist:beforechange #${overlayId}`] = '_onSelectListBeforeChange';
+    events[`global:capture:coral-selectlist:change #${overlayId}`] = '_onSelectListChange';
+    events[`global:capture:coral-selectlist:scrollbottom #${overlayId}`] = '_onSelectListScrollBottom';
+    events[`global:key:tab #${overlayId} coral-selectlist-item`] = '_onTabKey';
+    events[`global:key:tab+shift #${overlayId} coral-selectlist-item`] = '_onTabKey';
+    events[`global:capture:coral-overlay:close #${overlayId}`] = '_onOverlayToggle';
+    events[`global:capture:coral-overlay:open #${overlayId}`] = '_onOverlayToggle';
+    events[`global:capture:coral-overlay:positioned #${overlayId}`] = '_onOverlayPositioned';
+    events[`global:capture:coral-overlay:beforeopen #${overlayId}`] = '_onInternalEvent';
+    events[`global:capture:coral-overlay:beforeclose #${overlayId}`] = '_onInternalEvent';
+    
+    // Attach events
+    this._delegateEvents(commons.extend(this._events, events));
   
     // Pre-define labellable element
     this._labellableElement = this._elements.button;
@@ -1015,6 +1017,10 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // stops propagation cause the event is internal to the component
     event.stopImmediatePropagation();
     
+    // Trigger private event instead
+    const type = event.type.split(':').pop();
+    this.trigger(`coral-select:_overlay${type}`);
+    
     this._elements.button.classList.toggle('is-selected', event.target.open);
     
     // @a11y
@@ -1354,6 +1360,10 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
     // Render the main template
     const frag = document.createDocumentFragment();
+  
+    // Cannot be open by default when rendered
+    this._elements.overlay.removeAttribute('open');
+    
     frag.appendChild(this._elements.button);
     frag.appendChild(this._elements.input);
     frag.appendChild(this._elements.nativeSelect);
@@ -1361,6 +1371,16 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     frag.appendChild(this._elements.overlay);
     
     this.insertBefore(frag, this.firstChild);
+  }
+  
+  /** @ignore */
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    
+    // In case it was moved out don't forget to remove it
+    if (!this.contains(this._elements.overlay)) {
+      this._elements.overlay.remove();
+    }
   }
   
   /**

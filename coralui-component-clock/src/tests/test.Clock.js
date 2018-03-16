@@ -492,7 +492,8 @@ describe('Clock', function() {
             // Open coral-select overlay
             el.querySelector('button').click();
   
-            el.on('coral-overlay:open', function() {
+            // Private event
+            el.on('coral-select:_overlayopen', function() {
               // Select AM
               el.querySelector('coral-selectlist-item:first-child').click();
     
@@ -515,7 +516,8 @@ describe('Clock', function() {
             // Open coral-select overlay
             el.querySelector('button').click();
   
-            el.on('coral-overlay:open', function() {
+            // Private event
+            el.on('coral-select:_overlayopen', function() {
               // Select PM
               el.querySelector('coral-selectlist-item:last-child').click();
     
@@ -571,7 +573,8 @@ describe('Clock', function() {
             // Open coral-select overlay
             el.querySelector('button').click();
   
-            el.on('coral-overlay:open', function() {
+            // Private event
+            el.on('coral-select:_overlayopen', function() {
               // Select PM
               el.querySelector('coral-selectlist-item:last-child').click();
     
@@ -596,7 +599,8 @@ describe('Clock', function() {
             // Open coral-select overlay
             el.querySelector('button').click();
   
-            el.on('coral-overlay:open', function() {
+            // Private event
+            el.on('coral-select:_overlayopen', function() {
               // Select PM
               el.querySelector('coral-selectlist-item:last-child').click();
     
@@ -744,7 +748,8 @@ describe('Clock', function() {
           // Open coral-select overlay
           el.querySelector('button').click();
   
-          el.on('coral-overlay:open', function() {
+          // Private event
+          el.on('coral-select:_overlayopen', function() {
             // Select AM
             el.querySelector('coral-selectlist-item:first-child').click();
             

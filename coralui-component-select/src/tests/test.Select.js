@@ -1117,14 +1117,14 @@ describe('Select', function() {
       });
 
       it('should not shift focus if already inside the component ', function(done) {
-        el.on('coral-overlay:open', function() {
+        el.on('coral-select:_overlayopen', function() {
           expect(document.activeElement).not.to.equal(el._elements.button);
           // we focus the component
           el.focus();
           expect(document.activeElement).not.to.equal(el._elements.button, 'focus should not be in the button');
 
           done();
-        }, true);
+        });
 
         // opens the overlay
         el._elements.button.click();
@@ -1512,7 +1512,7 @@ describe('Select', function() {
 
         if (!el._useNativeInput) {
           // Overlay does not open immediately any longer
-          el.on('coral-overlay:open', callback, true);
+          el.on('coral-select:_overlayopen', callback);
 
           // opens the overlay (forces a change event to be triggered on next select)
           el._elements.button.click();
@@ -1529,7 +1529,7 @@ describe('Select', function() {
         el.on('change', changeSpy);
 
         var openEventCount = 0;
-        el.on('coral-overlay:open', function() {
+        el.on('coral-select:_overlayopen', function() {
           if (openEventCount === 0) {
             expect(changeSpy.callCount).to.equal(0);
             // selects the 2nd item in the list
@@ -1555,7 +1555,7 @@ describe('Select', function() {
           }
 
           openEventCount++;
-        }, true);
+        });
 
         // opens the overlay the first time
         el._elements.button.click();
@@ -1569,14 +1569,14 @@ describe('Select', function() {
           el._elements.list.items.getAll()[2].click();
         });
 
-        el.on('coral-overlay:open', function() {
+        el.on('coral-select:_overlayopen', function() {
           // selects the 2nd item in the list
           el._elements.list.items.getAll()[1].click();
           expect(el.value).to.equal('as');
           expect(changeCallbackCount).to.equal(1);
 
           done();
-        }, true);
+        });
 
         // opens the overlay
         el._elements.button.click();
@@ -1697,7 +1697,7 @@ describe('Select', function() {
         const el = helpers.build(window.__html__['Select.selected.html']);
         el.on('change', changeSpy);
 
-        el.on('coral-overlay:open', function() {
+        el.on('coral-select:_overlayopen', function() {
           // we remove the selected item
           el.selectedItem.remove();
 
@@ -1720,7 +1720,7 @@ describe('Select', function() {
 
             done();
           });
-        }, true);
+        });
 
         // opens the list
         el._elements.button.click();
@@ -1778,7 +1778,7 @@ describe('Select', function() {
         var items = el.items.getAll();
 
         // we handle the event instead of assuming that it opens the next frame
-        el.on('coral-overlay:open', function() {
+        el.on('coral-select:_overlayopen', function() {
           // selects the item on index 1
           el._elements.list.items.getAll()[1].click();
           expect(el.selectedItem).to.equal(items[1]);
@@ -1786,7 +1786,7 @@ describe('Select', function() {
           expect(el._elements.label.innerHTML).to.equal(items[1].content.innerHTML);
 
           done()
-        }, true);
+        });
 
         // opens the list
         el._elements.button.click();
@@ -1798,7 +1798,7 @@ describe('Select', function() {
         var items = el.items.getAll();
         var itemCount = items.length;
         
-        el.on('coral-overlay:open', function() {
+        el.on('coral-select:_overlayopen', function() {
           // selects the item on index 1, this will cause the overlay to close
           el._elements.list.items.getAll()[1].click();
   
@@ -1826,7 +1826,7 @@ describe('Select', function() {
           });
   
           done();
-        }, true);
+        });
 
         // opens the list
         el._elements.button.click();
@@ -1867,16 +1867,16 @@ describe('Select', function() {
 
     it('should focus the button when an item is selected', function(done) {
       const el = helpers.build(window.__html__['Select.placeholder.html']);
-      el.on('coral-overlay:open', function() {
+      el.on('coral-select:_overlayopen', function() {
         // selects the 2nd item in the list
         el._elements.list.items.getAll()[1].click();
-      }, true);
+      });
       
-      el.on('coral-overlay:close', function() {
+      el.on('coral-select:_overlayclose', function() {
         expect(document.activeElement).to.equal(el._elements.button);
         
         done();
-      }, true);
+      });
 
       // opens the overlay
       el._elements.button.click();
@@ -1884,18 +1884,18 @@ describe('Select', function() {
 
     it('should focus the button when the selected item is clicked again', function(done) {
       const el = helpers.build(window.__html__['Select.placeholder.html']);
-      el.on('coral-overlay:open', function() {
+      el.on('coral-select:_overlayopen', function() {
         var selectListItems = el._elements.list.items.getAll();
 
         expect(selectListItems[2].selected).to.be.true;
         selectListItems[2].click();
-      }, true);
+      });
       
-      el.on('coral-overlay:close', function() {
+      el.on('coral-select:_overlayclose', function() {
         expect(document.activeElement).to.equal(el._elements.button);
   
         done();
-      }, true);
+      });
 
       // we select first an item
       el.items.getAll()[2].selected = true;
@@ -1906,16 +1906,16 @@ describe('Select', function() {
 
     it('should focus the button when it is toggled', function(done) {
       const el = helpers.build(window.__html__['Select.placeholder.html']);
-      el.on('coral-overlay:open', function() {
+      el.on('coral-select:_overlayopen', function() {
         // we click the button again to toggle the overlay
         el._elements.button.click();
-      }, true);
+      });
       
-      el.on('coral-overlay:close', function() {
+      el.on('coral-select:_overlayclose', function() {
         expect(document.activeElement).to.equal(el._elements.button);
   
         done();
-      }, true);
+      });
 
       // opens the overlay
       el._elements.button.click();
@@ -1924,16 +1924,16 @@ describe('Select', function() {
     // this behavior matches the native select
     it('should focus the button when the overlay is open and the user clicks outside', function(done) {
       const el = helpers.build(window.__html__['Select.placeholder.html']);
-      el.on('coral-overlay:open', function() {
+      el.on('coral-select:_overlayopen', function() {
         // we simulate a click somewhere else in the page
         document.body.click();
-      }, true);
+      });
       
-      el.on('coral-overlay:close', function() {
+      el.on('coral-select:_overlayclose', function() {
         expect(document.activeElement).to.equal(el._elements.button);
   
         done();
-      }, true);
+      });
 
       // opens the overlay
       el._elements.button.click();
@@ -1962,14 +1962,14 @@ describe('Select', function() {
     it('should keep the overlay open if multiple=true and an item is selected', function(done) {
       const el = helpers.build(window.__html__['Select.placeholder.multiple.html']);
       
-      el.on('coral-overlay:open', function() {
+      el.on('coral-select:_overlayopen', function() {
         // selects the 2nd item in the list
         el._elements.list.items.getAll()[1].click();
         
         expect(el._elements.overlay.open).to.be.true;
         
         done();
-      }, true);
+      });
     
       // opens the overlay
       el._elements.button.click();
@@ -1977,17 +1977,17 @@ describe('Select', function() {
 
     it('should close the overlay using esc key', function(done) {
       const el = helpers.build(window.__html__['Select.base.html']);
-      el.on('coral-overlay:open', function() {
+      el.on('coral-select:_overlayopen', function() {
         // pressing escape should close the overlay
         helpers.keypress('esc', helpers.target);
-      }, true);
+      });
 
-      el.on('coral-overlay:close', function() {
+      el.on('coral-select:_overlayclose', function() {
         expect(el._elements.overlay.open).to.equal(false, 'overlay should be closed');
         expect(document.activeElement).to.equal(el._elements.button, 'focus should return to the button');
 
         done();
-      }, true);
+      });
 
       // opens the overlay
       el._elements.button.click();
@@ -2127,6 +2127,10 @@ describe('Select', function() {
         expect(arrayDiff([item1, item2, item3], [item1, item2, item3])).to.deep.equal([]);
         expect(arrayDiff([item1, item2], [item2, item1])).to.deep.equal([], 'order should not matter');
       });
+    });
+  
+    describe('Smart Overlay', () => {
+      helpers.testSmartOverlay('coral-select');
     });
   });
 
