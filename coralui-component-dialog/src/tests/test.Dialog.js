@@ -1,3 +1,4 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
 import {Dialog} from '/coralui-component-dialog';
 import {mixin} from '/coralui-util';
 import {DragAction} from '/coralui-dragaction';

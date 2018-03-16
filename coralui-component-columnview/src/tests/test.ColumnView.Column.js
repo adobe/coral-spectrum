@@ -1,3 +1,4 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
 import {ColumnView} from '/coralui-component-columnview';
 
 describe('ColumnView.Column', function() {

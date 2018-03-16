@@ -1,3 +1,4 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
 import {Autocomplete} from '/coralui-component-autocomplete';
 import {i18n} from '/coralui-util';
 

@@ -1,27 +1,21 @@
-var helpers = helpers || {};
+import {keys} from '/coralui-util';
+
+// Create a target element
+let target = document.createElement('div');
+
+// Add it to the body
+document.body.appendChild(target);
 
 before(function() {
   // Add coral--light to the body
   document.body.classList.add('coral--light');
 });
 
-beforeEach(function() {
-  if (helpers.target && helpers.target.parentNode) {
-    helpers.target.parentNode.removeChild(helpers.target);
-  }
-
-  // Create a target element
-  helpers.target = document.createElement('div');
-  
-  // Add it to the body
-  document.body.appendChild(helpers.target);
-});
-
 afterEach(function() {
   // Empty target
-  helpers.target.innerHTML = '';
+  target.innerHTML = '';
   // Reset pressed keys
-  Coral.keys.reset();
+  keys.reset();
 });
 
 /**
@@ -30,7 +24,7 @@ afterEach(function() {
   @param {Function} callback
     The callback to execute.
 */
-helpers.next = window.requestAnimationFrame.bind(window);
+const next = window.requestAnimationFrame.bind(window);
 
 /**
   Build and return an instance ready to be used
@@ -38,10 +32,10 @@ helpers.next = window.requestAnimationFrame.bind(window);
   @param {String|HTMLElement} element
     The markup or HTML element to prepare. The markup only contain a single root tag.
 */
-helpers.build = function(element) {
+const build = function(element) {
   if (element instanceof HTMLElement) {
     // Add the element to the DOM
-    return helpers.target.appendChild(element);
+    return target.appendChild(element);
   }
   else if (typeof element === 'string') {
     // Create a container element and populate it with the markup
@@ -52,8 +46,10 @@ helpers.build = function(element) {
     const instance = div.children[0];
   
     // Add the element to the DOM
-    return helpers.target.appendChild(instance);
+    return target.appendChild(instance);
   }
   
   throw Error('helpers.build requires a string markup or an HTMLElement.');
 };
+
+export {build, next, target};

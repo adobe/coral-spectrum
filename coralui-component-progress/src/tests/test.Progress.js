@@ -1,3 +1,4 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
 import {Progress} from '/coralui-component-progress';
 
 describe('Progress', function() {

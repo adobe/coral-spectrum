@@ -1,3 +1,4 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
 import {CycleButton} from '/coralui-component-cyclebutton';
 
 describe('CycleButton', function() {

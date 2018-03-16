@@ -1,3 +1,4 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
 import {Tag} from '/coralui-component-taglist';
 
 describe('Tag', function() {

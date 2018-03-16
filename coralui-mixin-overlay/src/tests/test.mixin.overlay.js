@@ -1,3 +1,4 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
 import {ComponentMixin} from '/coralui-mixin-component';
 import {OverlayMixin} from '/coralui-mixin-overlay';
 import {commons, mixin} from '/coralui-util';

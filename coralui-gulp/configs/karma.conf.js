@@ -93,13 +93,6 @@ module.exports = function(config) {
         served: true,
         included: true // Include HTML snippets so they are preprocessed
       },
-      {
-        // Test helpers that will be included as executable JS
-        pattern: `${root}/coralui-*/src/tests/helpers/*.js`,
-        watched: false,
-        served: true,
-        included: true // Include testing helpers
-      },
   
       {
         // Files to be available as window.__html__['FILENAME.html']
@@ -107,14 +100,6 @@ module.exports = function(config) {
         watched: true,
         served: true,
         included: true // Include HTML snippets so they are preprocessed
-      },
-  
-      {
-        // Test helpers that will be included as executable JS
-        pattern: `${CWD}/src/tests/helpers/*.js`,
-        watched: false,
-        served: true,
-        included: true // Include testing helpers
       },
       
       {

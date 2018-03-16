@@ -1,3 +1,4 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
 import {QuickActions} from '/coralui-component-quickactions';
 
 describe('QuickActions.Item', function() {

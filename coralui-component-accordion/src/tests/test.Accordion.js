@@ -1,3 +1,4 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
 import {Accordion} from '/coralui-component-accordion';
 
 describe('Accordion', function() {

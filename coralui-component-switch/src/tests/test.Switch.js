@@ -1,3 +1,4 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
 import {Switch} from '/coralui-component-switch';
 import {events} from '/coralui-util';
 

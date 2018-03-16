@@ -1,3 +1,4 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
 import {ComponentMixin} from '/coralui-mixin-component';
 import {Collection} from '/coralui-collection';
 import {transform} from '/coralui-util';

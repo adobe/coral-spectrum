@@ -1,4 +1,6 @@
-var helpers = helpers || {};
+import {commons} from '/coralui-util';
+import {target, build} from './helpers.build';
+import {event} from './helpers.events';
 
 var LABELLABLE_ELEMENTS_SELECTOR = 'button,input:not([type=hidden]),keygen,meter,output,progress,select,textarea';
 
@@ -8,7 +10,7 @@ var LABELLABLE_ELEMENTS_SELECTOR = 'button,input:not([type=hidden]),keygen,meter
  @param {HTMLElement} form
  The form element that contains the submittable elements
  */
-helpers.serializeArray = function(form) {
+const serializeArray = function(form) {
   var arr = [];
   
   if (form && form.tagName !== 'FORM') {
@@ -54,7 +56,7 @@ helpers.serializeArray = function(form) {
  @param {String} [options.default=""]
  Default value of the component. If not provided empty string is used.
  */
-helpers.testFormField = function(markup, options) {
+const testFormField = function(markup, options) {
   // sets the default to empty string since this is the normal value
   options.default = options.default || '';
   
@@ -66,13 +68,13 @@ helpers.testFormField = function(markup, options) {
     beforeEach(function() {
       changeSpy = sinon.spy();
       // event is added before we build the component to make sure instantiation does not trigger any undesired events.
-      helpers.target.addEventListener('change', changeSpy);
+      target.addEventListener('change', changeSpy);
       
-      el = helpers.build(markup);
+      el = build(markup);
     });
     
     afterEach(function() {
-      helpers.target.removeEventListener('change', changeSpy);
+      target.removeEventListener('change', changeSpy);
       el = changeSpy = null;
     });
     
@@ -139,13 +141,13 @@ helpers.testFormField = function(markup, options) {
           
           // reparents the el
           form.appendChild(el);
-          helpers.target.appendChild(form);
+          target.appendChild(form);
           
           el.value = options.value;
           expect(el.name).to.equal('');
           expect(el.value).to.equal(options.value);
           
-          var values = helpers.serializeArray(el.parentNode);
+          var values = serializeArray(el.parentNode);
           expect(values.length).to.equal(0);
         });
         
@@ -154,7 +156,7 @@ helpers.testFormField = function(markup, options) {
           
           // reparents the el
           form.appendChild(el);
-          helpers.target.appendChild(form);
+          target.appendChild(form);
           
           el.name = 'componentName';
           
@@ -170,7 +172,7 @@ helpers.testFormField = function(markup, options) {
           
           if (options.value !== '') {
             // we check value immediately to make sure it is set without delay
-            expect(helpers.serializeArray(form)[0]).to.deep.equal({
+            expect(serializeArray(form)[0]).to.deep.equal({
               name: 'componentName',
               value: options.value
             });
@@ -226,10 +228,10 @@ helpers.testFormField = function(markup, options) {
         it('should remove labels with empty string', function() {
           var label1 = document.createElement('label');
           
-          label1.id = Coral.commons.getUID();
+          label1.id = commons.getUID();
           label1.textContent = 'label 1';
           
-          helpers.target.appendChild(label1);
+          target.appendChild(label1);
           
           el.labelledBy = label1.id;
           
@@ -251,13 +253,13 @@ helpers.testFormField = function(markup, options) {
           var label1 = document.createElement('label');
           var label2 = document.createElement('label');
           
-          label1.id = Coral.commons.getUID();
-          label2.id = Coral.commons.getUID();
+          label1.id = commons.getUID();
+          label2.id = commons.getUID();
           label1.textContent = 'label 1';
           label2.textContent = 'label 2';
           
-          helpers.target.appendChild(label1);
-          helpers.target.appendChild(label2);
+          target.appendChild(label1);
+          target.appendChild(label2);
           
           var labelledBy = label1.id + ' ' + label2.id;
           el.labelledBy = labelledBy;
@@ -335,7 +337,7 @@ helpers.testFormField = function(markup, options) {
           
           // reparents the el
           form.appendChild(el);
-          helpers.target.appendChild(form);
+          target.appendChild(form);
           
           el.value = options.value;
           
@@ -351,7 +353,7 @@ helpers.testFormField = function(markup, options) {
           
           // reparents the el
           form.appendChild(el);
-          helpers.target.appendChild(form);
+          target.appendChild(form);
           
           var reset = document.createElement('input');
           reset.type = 'reset';
@@ -403,13 +405,13 @@ helpers.testFormField = function(markup, options) {
           var label1 = document.createElement('label');
           var label2 = document.createElement('label');
           
-          label1.id = Coral.commons.getUID();
-          label2.id = Coral.commons.getUID();
+          label1.id = commons.getUID();
+          label2.id = commons.getUID();
           label1.textContent = 'label 1';
           label2.textContent = 'label 2';
           
-          helpers.target.appendChild(label1);
-          helpers.target.appendChild(label2);
+          target.appendChild(label1);
+          target.appendChild(label2);
           
           var labelledBy = label1.id + ' ' + label2.id;
           el.setAttribute('labelledby', labelledBy);
@@ -457,7 +459,7 @@ helpers.testFormField = function(markup, options) {
             
             internalInput.value = options.value;
             
-            helpers.event('change', internalInput);
+            event('change', internalInput);
             
             expect(changeSpy.callCount).to.equal(1);
             
@@ -475,3 +477,5 @@ helpers.testFormField = function(markup, options) {
     });
   });
 };
+
+export {serializeArray, testFormField};

@@ -1,3 +1,4 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
 import {FileUpload} from '/coralui-component-fileupload';
 
 describe('FileUpload.Item', function() {

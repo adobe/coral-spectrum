@@ -1,3 +1,4 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
 import {Alert} from '/coralui-component-alert';
 
 describe('Alert', function() {

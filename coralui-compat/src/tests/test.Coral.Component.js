@@ -1,3 +1,5 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
+
 describe('Coral.Component', function() {
   let warn = console.warn;
   

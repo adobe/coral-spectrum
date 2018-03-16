@@ -1,3 +1,4 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
 import {DragAction} from '/coralui-dragaction';
 import {events} from '/coralui-util';
 

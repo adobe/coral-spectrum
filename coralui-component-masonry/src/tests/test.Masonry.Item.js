@@ -1,3 +1,4 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
 import {Masonry} from '/coralui-component-masonry';
 
 describe('Masonry.Item', function() {

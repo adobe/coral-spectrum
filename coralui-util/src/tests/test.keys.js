@@ -1,6 +1,5 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
 import {keys, Keys} from '/coralui-util';
-
-const helpers = window.helpers;
 
 describe('keys', function() {
   it('should have a numeric keycode', function() {
@@ -26,11 +25,14 @@ describe('keys', function() {
     var childBSpy = sinon.spy();
     var parentASpy = sinon.spy();
     var parentBSpy = sinon.spy();
+    
+    var div1 = document.createElement('div');
+    var div2 = document.createElement('div');
+    div1.appendChild(div2);
+    
+    helpers.target.appendChild(div1);
 
-    var div = document.createElement('div');
-    helpers.target.appendChild(div);
-
-    var customKeys = new Keys(helpers.target);
+    var customKeys = new Keys(div1);
   
     customKeys.on('b', function(event) {
       // Remove the node
@@ -41,7 +43,7 @@ describe('keys', function() {
     keys.on('a', parentASpy);
     keys.on('b', parentBSpy);
 
-    helpers.keypress('b', div);
+    helpers.keypress('b', div2);
 
     // We should get the event locally
     expect(childBSpy.callCount).to.equal(1, 'childBSpy call count after B keypress');

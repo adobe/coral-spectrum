@@ -1,3 +1,4 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
 import {ColorInput, Color} from '/coralui-component-colorinput';
 
 describe('ColorInput', function() {

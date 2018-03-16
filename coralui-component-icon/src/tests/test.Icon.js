@@ -1,3 +1,4 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
 import {Icon} from '/coralui-component-icon';
 
 describe('Icon', function() {

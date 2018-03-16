@@ -1,3 +1,4 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
 import {Tree} from '/coralui-component-tree';
 
 describe('Tree', function() {

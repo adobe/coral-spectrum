@@ -1,3 +1,4 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
 import {Card} from '/coralui-component-card';
 
 describe('Card', function() {

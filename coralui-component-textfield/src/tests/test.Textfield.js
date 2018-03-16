@@ -1,3 +1,4 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
 import {Textfield} from '/coralui-component-textfield';
 
 describe('Textfield', function() {

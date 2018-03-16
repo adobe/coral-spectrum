@@ -1,3 +1,4 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
 import {Table} from '/coralui-component-table';
 import {getIndexOf, getRows, getColumns, getHeaderCells} from '../scripts/TableUtil';
 

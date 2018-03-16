@@ -1,28 +1,28 @@
-var helpers = helpers || {};
+import {target, build} from './helpers.build';
 
-helpers.overlay = {};
+const overlay = {};
 
-helpers.overlay.createFloatingTarget = function() {
-  var target = document.createElement('div');
-  target.textContent = 'Floating overlay target';
-  target.style.position = 'fixed';
-  target.style.left = '50%';
-  target.style.top = '50%';
+overlay.createFloatingTarget = function() {
+  var overlayTarget = document.createElement('div');
+  overlayTarget.textContent = 'Floating overlay target';
+  overlayTarget.style.position = 'fixed';
+  overlayTarget.style.left = '50%';
+  overlayTarget.style.top = '50%';
 
-  // Add to helpers.target so it it cleared after each test
-  helpers.target.appendChild(target);
+  // Add to target so it it cleared after each test
+  target.appendChild(overlayTarget);
 
-  return target;
+  return overlayTarget;
 };
 
-helpers.overlay.createStaticTarget = function() {
-  var target = document.createElement('div');
-  target.textContent = 'Static overlay target';
+overlay.createStaticTarget = function() {
+  var overlayTarget = document.createElement('div');
+  overlayTarget.textContent = 'Static overlay target';
 
-  // Add to helpers.target so it it cleared after each test
-  helpers.target.appendChild(target);
+  // Add to target so it it cleared after each test
+  target.appendChild(overlayTarget);
 
-  return target;
+  return overlayTarget;
 };
 
 /**
@@ -30,10 +30,10 @@ helpers.overlay.createStaticTarget = function() {
  
  @param {String} tagName
  */
-helpers.testSmartOverlay = function(tagName) {
+const testSmartOverlay = function(tagName) {
   describe('testSmartOverlay', () => {
     it('should add/remove the overlay if the component is added/removed from the document', () => {
-      const wrapper = helpers.build(`
+      const wrapper = build(`
         <div style="overflow: hidden">
           <${tagName}></${tagName}>
         </div>
@@ -56,3 +56,5 @@ helpers.testSmartOverlay = function(tagName) {
     });
   });
 };
+
+export {overlay, testSmartOverlay};

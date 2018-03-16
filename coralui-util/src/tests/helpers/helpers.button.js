@@ -1,4 +1,5 @@
-var helpers = helpers || {};
+import {build} from './helpers.build';
+import {cloneComponent} from './helpers.cloneComponent';
 
 /**
  Helper used to check that the component complies with the button behavior.
@@ -7,7 +8,7 @@ var helpers = helpers || {};
  @param {String} tagName
  @param {String} baseTagName
  */
-helpers.testButton = function(Constructor, tagName, baseTagName) {
+const testButton = function(Constructor, tagName, baseTagName) {
   describe('testButton', function() {
     
     describe('Enums', function() {
@@ -35,7 +36,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
   
     describe('Instantiation', function() {
       it('should be possible using new', function() {
-        var button = helpers.build(new Constructor());
+        var button = build(new Constructor());
         expect(button.classList.contains('_coral-Button')).to.be.true;
         expect(button.hasAttribute('block')).to.be.false;
         expect(button.hasAttribute('icon')).to.be.false;
@@ -43,55 +44,55 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
       });
     
       it('should not blow away loose HTML', function() {
-        const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'"><span>Add</span></'+ baseTagName +'>');
+        const button = build('<'+ baseTagName +' is="'+ tagName +'"><span>Add</span></'+ baseTagName +'>');
         expect(button.label.innerHTML).to.equal('<span>Add</span>');
       });
     
       it('should be possible to clone using markup', function() {
-        helpers.cloneComponent('<'+ baseTagName +' is="'+ tagName +'">Add</'+ baseTagName +'>');
+        cloneComponent('<'+ baseTagName +' is="'+ tagName +'">Add</'+ baseTagName +'>');
       });
     
       it('should be possible to clone a button with size attribute using markup', function() {
-        helpers.cloneComponent('<'+ baseTagName +' is="'+ tagName +'" size="L">Add</'+ baseTagName +'>');
+        cloneComponent('<'+ baseTagName +' is="'+ tagName +'" size="L">Add</'+ baseTagName +'>');
       });
     
       it('should be possible to clone a button with icon attribute using markup', function() {
-        helpers.cloneComponent('<'+ baseTagName +' is="'+ tagName +'" icon="add">Add</'+ baseTagName +'>');
+        cloneComponent('<'+ baseTagName +' is="'+ tagName +'" icon="add">Add</'+ baseTagName +'>');
       });
     
       it('should be possible to clone a button with icon and size attribute using markup', function() {
-        helpers.cloneComponent('<'+ baseTagName +' is="'+ tagName +'" icon="add" size"L">Add</'+ baseTagName +'>');
+        cloneComponent('<'+ baseTagName +' is="'+ tagName +'" icon="add" size"L">Add</'+ baseTagName +'>');
       });
     
       it('should be possible to clone a button with quiet attribute using markup', function() {
-        helpers.cloneComponent('<'+ baseTagName +' is="'+ tagName +'" variant="quiet">Add</'+ baseTagName +'>');
+        cloneComponent('<'+ baseTagName +' is="'+ tagName +'" variant="quiet">Add</'+ baseTagName +'>');
       });
     
       it('should be possible to clone a button using js', function() {
         var button = new Constructor();
         button.label.textContent = 'Add Button';
-        helpers.cloneComponent(button);
+        cloneComponent(button);
       });
     
       it('should be possible to clone a button with a specific size using js', function() {
         var button = new Constructor();
         button.size = 'L';
         button.label.textContent = 'Add Button';
-        helpers.cloneComponent(button);
+        cloneComponent(button);
       });
     
       it('should be possible to clone a button with an icon using js', function() {
         var button = new Constructor();
         button.icon = 'add';
         button.label.textContent = 'Add Button';
-        helpers.cloneComponent(button);
+        cloneComponent(button);
       });
     
       it('should be possible to clone a button with a variant using js', function() {
         var button = new Constructor();
         button.variant = 'quiet';
         button.label.textContent = 'Quiet Button';
-        helpers.cloneComponent(button);
+        cloneComponent(button);
       });
     });
   
@@ -100,19 +101,19 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
       describe('#label', function() {
       
         it('should be initially empty', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" hidden></'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" hidden></'+ baseTagName +'>');
           expect(button.label.textContent).to.equal('', 'label.textContent');
           expect(button.textContent).to.equal('');
           expect(button.classList.contains('_coral-Button')).to.be.true;
         });
       
         it('should use the existing nodes as the initial label value', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'">Button</'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'">Button</'+ baseTagName +'>');
           expect(button.label.innerHTML).to.equal('Button');
         });
       
         it('should resync the icon once the label is modified', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" icon="add">Add</'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" icon="add">Add</'+ baseTagName +'>');
           expect(button.icon).to.equal('add');
           expect(button.label.innerHTML).to.equal('Add');
           expect(button.hasAttribute('icon', 'add')).to.be.true;
@@ -126,7 +127,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
         });
       
         it('should change to square if the label is removed', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" icon="add">Add</'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" icon="add">Add</'+ baseTagName +'>');
           expect(button.icon).to.equal('add');
           expect(button.label.innerHTML).to.equal('Add');
           expect(button.hasAttribute('icon', 'add')).to.be.true;
@@ -140,7 +141,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
         });
       
         it('should remove square if the label is added', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" icon="add"></'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" icon="add"></'+ baseTagName +'>');
           expect(button.icon).to.equal('add');
           expect(button.label.innerHTML).to.equal('');
           expect(button.hasAttribute('icon', 'add')).to.be.true;
@@ -157,7 +158,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
       describe('#icon', function() {
       
         it('should be initially empty', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'"></'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'"></'+ baseTagName +'>');
           expect(button.icon).to.equal('');
           expect(button._getIconElement().parentNode).to.be.null;
           expect(button.hasAttribute('icon')).to.be.false;
@@ -165,7 +166,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
         });
       
         it('should set a new icon', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" icon="add"></'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" icon="add"></'+ baseTagName +'>');
           expect(button.icon).to.equal('add');
           expect(button.hasAttribute('icon', 'add')).to.be.true;
           expect(button.label.textContent).to.equal('');
@@ -175,7 +176,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
         });
       
         it('should not be square when there is a label', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" icon="add">Add</'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" icon="add">Add</'+ baseTagName +'>');
           expect(button.icon).to.equal('add');
           expect(button.label.innerHTML).to.equal('Add');
           expect(button.hasAttribute('icon', 'add')).to.be.true;
@@ -186,7 +187,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
         });
       
         it('should have default icon alt text when there is no label', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" icon="add"></'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" icon="add"></'+ baseTagName +'>');
           expect(button.icon).to.equal('add');
           expect(button.label.innerHTML).to.equal('');
           expect(button.hasAttribute('icon', 'add')).to.be.true;
@@ -198,7 +199,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
         });
       
         it('should not have icon alt text when there is a label', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" icon="add">Add</'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" icon="add">Add</'+ baseTagName +'>');
           expect(button.icon).to.equal('add');
           expect(button.label.innerHTML).to.equal('Add');
           expect(button.hasAttribute('icon', 'add')).to.be.true;
@@ -211,7 +212,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
         });
       
         it('should remove icon alt text if the label is added', function(done) {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" icon="add"></'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" icon="add"></'+ baseTagName +'>');
           expect(button.icon).to.equal('add');
           expect(button.label.innerHTML).to.equal('');
           expect(button.getAttribute('icon')).to.equal('add');
@@ -233,7 +234,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
         });
       
         it('should restore default icon alt text if the label is removed', function(done) {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" icon="add">Add</'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" icon="add">Add</'+ baseTagName +'>');
           expect(button.label.innerHTML).to.equal('Add');
           expect(button.hasAttribute('icon', 'add')).to.be.true;
           expect(button.icon).to.equal('add');
@@ -253,7 +254,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
         });
       
         it('should not create a new icon if the value is updated', function(done) {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" icon="add">Add</'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" icon="add">Add</'+ baseTagName +'>');
           expect(button.label.innerHTML).to.equal('Add');
           expect(button.hasAttribute('icon', 'add')).to.be.true;
           expect(button.icon).to.equal('add');
@@ -275,7 +276,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
         });
       
         it('should hide the icon element once the icon is set to empty string', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" icon="add"></'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" icon="add"></'+ baseTagName +'>');
           expect(button.icon).to.equal('add');
           expect(button.hasAttribute('icon', 'add')).to.be.true;
           expect(button._getIconElement().parentNode).not.to.be.null;
@@ -290,13 +291,13 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
     
       describe('#iconsize', function() {
         it('should be initially the default', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'"></'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'"></'+ baseTagName +'>');
           expect(button.iconSize).to.equal(Constructor.iconSize.SMALL);
           expect(button.hasAttribute('iconsize')).to.be.false;
         });
       
         it('should set the new iconsize', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" iconsize="XS" icon="add"></'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" iconsize="XS" icon="add"></'+ baseTagName +'>');
           expect(button.iconSize).to.equal(Constructor.iconSize.EXTRA_SMALL);
           expect(button.getAttribute('iconsize')).to.equal('XS');
           expect(button._getIconElement().icon).to.equal('add');
@@ -304,7 +305,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
         });
       
         it('should discard invalid iconsize', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" iconsize="megalarge" icon="add"></'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" iconsize="megalarge" icon="add"></'+ baseTagName +'>');
           expect(button.iconSize).to.equal(Constructor.iconSize.SMALL);
           expect(button.hasAttribute('iconsize', 'megalarge')).to.be.true;
           expect(button._getIconElement().icon).to.equal('add');
@@ -314,29 +315,29 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
     
       describe('#iconposition', function() {
         it('should generate icon per default on left when not defined', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" icon="add"></'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" icon="add"></'+ baseTagName +'>');
           expect(button.iconPosition).to.equal(Constructor.iconPosition.LEFT);
           expect(button.firstElementChild.tagName).to.equal('CORAL-ICON');
         });
       
         it('should generate icon on the left when defined in iconposition', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" icon="add" iconposition="left"></'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" icon="add" iconposition="left"></'+ baseTagName +'>');
           expect(button.firstElementChild.tagName).to.equal('CORAL-ICON');
         });
       
         it('should generate icon on the right when defined in iconposition', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" icon="add" iconposition="right"></'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" icon="add" iconposition="right"></'+ baseTagName +'>');
           expect(button.firstElementChild.tagName).to.equal(tagName.toUpperCase() + '-LABEL');
         });
       
         it('should move icon on the left iconposition is changed on runtime', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" icon="add" iconposition="RIGHT"></'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" icon="add" iconposition="RIGHT"></'+ baseTagName +'>');
           button.iconPosition = 'LEFT';
           expect(button.firstElementChild.tagName).to.equal('CORAL-ICON');
         });
       
         it('should default to "left" when the attribute is removed', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" icon="add" iconposition="right"></'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" icon="add" iconposition="right"></'+ baseTagName +'>');
           button.removeAttribute('iconposition');
           expect(button.iconPosition).to.equal(Constructor.iconPosition.LEFT);
           expect(button.firstElementChild.tagName).to.equal('CORAL-ICON');
@@ -345,12 +346,12 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
     
       describe('#size', function() {
         it('should default to medium', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'"></'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'"></'+ baseTagName +'>');
           expect(button.size).to.equal(Constructor.size.MEDIUM);
         });
       
         it('should set the size modifier', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" size="L"></'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" size="L"></'+ baseTagName +'>');
           expect(button.size).to.equal(Constructor.size.LARGE);
         });
       });
@@ -358,7 +359,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
       describe('#block', function() {
       
         it('should be initially false', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'"></'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'"></'+ baseTagName +'>');
           expect(button.block).to.be.false;
           expect(button.hasAttribute('block')).to.be.false;
           expect(button.classList.contains('_coral-Button--block')).to.be.false;
@@ -366,7 +367,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
         });
       
         it('should set the size modifier', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" block></'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" block></'+ baseTagName +'>');
           expect(button.block).to.be.true;
           expect(button.hasAttribute('block')).to.be.true;
           expect(button.classList.contains('_coral-Button--block')).to.be.true;
@@ -374,7 +375,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
         });
       
         it('should behave like an attribute boolean', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" block="false"></'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" block="false"></'+ baseTagName +'>');
           expect(button.block).to.be.true;
           expect(button.hasAttribute('block')).to.be.true;
           expect(button.classList.contains('_coral-Button--block')).to.be.true;
@@ -385,14 +386,14 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
       describe('#variant', function() {
       
         it('should be initially Constructor.variant.PRIMARY', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'"></'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'"></'+ baseTagName +'>');
           expect(button.variant).to.equal(Constructor.variant.PRIMARY);
           expect(button.hasAttribute('variant')).to.be.true;
           expect(button.classList.contains('_coral-Button')).to.be.true;
         });
       
         it('should set the new variant', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" variant="cta"></'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" variant="cta"></'+ baseTagName +'>');
           expect(button.variant).to.equal('cta');
           expect(button.variant).to.equal(Constructor.variant.CTA);
           expect(button.getAttribute('variant')).to.equal(Constructor.variant.CTA);
@@ -401,21 +402,21 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
         });
       
         it('should add the default class if variant is empty', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" variant=""></'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" variant=""></'+ baseTagName +'>');
           expect(button.variant).to.equal(Constructor.variant.PRIMARY);
           expect(button.hasAttribute('variant', Constructor.variant.PRIMARY)).to.be.true;
           expect(button.classList.contains('_coral-Button')).to.be.true;
         });
       
         it('should go back to default variant for invalid variant', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" variant="invalidvariant"></'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" variant="invalidvariant"></'+ baseTagName +'>');
           expect(button.variant).to.equal(Constructor.variant.PRIMARY);
           expect(button.hasAttribute('variant', Constructor.variant.PRIMARY)).to.be.true;
           expect(button.classList.contains('_coral-Button')).to.be.true;
         });
       
         it('should remove variant classnames when variant changes', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" variant="primary"></'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" variant="primary"></'+ baseTagName +'>');
           expect(button.classList.contains('_coral-Button--primary')).to.be.true;
         
           button.variant = Constructor.variant.WARNING;
@@ -427,14 +428,14 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
       describe('#selected', function() {
       
         it('should default to false', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'"></'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'"></'+ baseTagName +'>');
           expect(button.selected).to.be.false;
           expect(button.classList.contains('is-selected')).to.be.false;
           expect(button.hasAttribute('selected')).to.be.false;
         });
       
         it('should be settable', function() {
-          const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" selected></'+ baseTagName +'>');
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" selected></'+ baseTagName +'>');
           expect(button.selected).to.be.true;
           expect(button.hasAttribute('selected')).to.be.true;
           expect(button.classList.contains('is-selected')).to.be.true;
@@ -442,7 +443,7 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
       });
     
       it('should accept all attributes at once', function() {
-        const button = helpers.build('<'+ baseTagName +' is="'+ tagName +'" icon="share" variant="primary" size="L" block>Share</'+ baseTagName +'>');
+        const button = build('<'+ baseTagName +' is="'+ tagName +'" icon="share" variant="primary" size="L" block>Share</'+ baseTagName +'>');
         expect(button.size).to.equal(Constructor.size.LARGE);
         expect(button.block).to.be.true;
         expect(button.variant).to.equal(Constructor.variant.PRIMARY);
@@ -629,3 +630,5 @@ helpers.testButton = function(Constructor, tagName, baseTagName) {
     });
   });
 };
+
+export {testButton};

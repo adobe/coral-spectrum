@@ -1,4 +1,4 @@
-var helpers = helpers || {};
+import {build, target} from './helpers.build';
 
 /**
   Helpers used to test a cloned component.
@@ -7,7 +7,7 @@ var helpers = helpers || {};
   @param {Object} [options] - Object that contains configuration values to test.
   @param {Boolean} [options.deepClone=true] - deepClone the component. True, if not provided.
 */
-helpers.cloneComponent = function(element, options) {
+const cloneComponent = function(element, options) {
   // sets the default if component should be deep cloned
   options = options || {};
   options.deepClone = options.deepClone || true;
@@ -20,14 +20,14 @@ helpers.cloneComponent = function(element, options) {
     beforeEach(function() {
       
       if (typeof element === 'string') {
-        el = helpers.build(element);
+        el = build(element);
       }
       else if (element instanceof HTMLElement) {
-        el = helpers.target.appendChild(element);
+        el = target.appendChild(element);
       }
       
       // Do the clone
-      elClone = helpers.target.appendChild(el.cloneNode(options.deepClone));
+      elClone = target.appendChild(el.cloneNode(options.deepClone));
     });
 
     afterEach(function() {
@@ -99,3 +99,5 @@ helpers.cloneComponent = function(element, options) {
     });
   });
 };
+
+export {cloneComponent};

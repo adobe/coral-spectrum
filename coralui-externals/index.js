@@ -23,11 +23,6 @@ import './polyfills/custom-elements.min.js';
 // Patch document.createElement for custom elements v0 usage
 import './polyfills/document.createElement-patch.js';
 
-// Expose on the window
-window.Promise = window.Promise || Promise;
-window.Vent = window.Vent || Vent;
-window.PopperJS = window.PopperJS || PopperJS;
-
 export {
   Promise,
   Vent,

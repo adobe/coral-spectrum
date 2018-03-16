@@ -1,3 +1,4 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
 import {Slider} from '/coralui-component-slider';
 
 describe('Slider', function() {

@@ -122,7 +122,7 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       'click > ._coral-Dropdown-trigger': '_onButtonClick',
   
       'key:space > ._coral-Dropdown-trigger': '_onSpaceKey',
-      'key:down > ._coral-Dropdown-trigger': '_onSpaceKey',
+      'key:down > ._coral-Dropdown-trigger': '_onSpaceKey'
     };
   
     // Overlay

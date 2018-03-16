@@ -1,3 +1,4 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
 import {WizardView} from '/coralui-component-wizardview';
 import {Panel, PanelStack} from '/coralui-component-panelstack';
 import {Step, StepList} from '/coralui-component-steplist';

@@ -1,3 +1,4 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
 import {Table} from '/coralui-component-table';
 
 describe('Table.Foot', function() {

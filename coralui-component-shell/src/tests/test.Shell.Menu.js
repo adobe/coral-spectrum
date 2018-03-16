@@ -1,3 +1,4 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
 import {Shell} from '/coralui-component-shell';
 
 describe('Shell.Menu', function() {

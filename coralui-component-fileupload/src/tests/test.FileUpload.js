@@ -1,3 +1,4 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
 describe('FileUpload', function() {
   //Fake event to be used on a change event of the file input: _onInputChange(event)
   var event = {

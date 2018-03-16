@@ -1,3 +1,5 @@
+import {helpers} from '/coralui-util/src/tests/helpers';
+
 describe('Coral.register', function() {
   let warn = console.warn;
   

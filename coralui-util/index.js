@@ -12,19 +12,6 @@ import validate from './src/scripts/Validation';
  */
 const mixin = {};
 
-// @compat
-// Expose helpers on Coral namespace required
-window.Coral = window.Coral || {};
-window.Coral.commons = commons;
-window.Coral.events = events;
-window.Coral.i18n = i18n;
-window.Coral.keys = keys;
-window.Coral.Keys = Keys;
-window.Coral.mixin = mixin;
-window.Coral.strings = strings;
-window.Coral.transform = transform;
-window.Coral.validate = validate;
-
 export {
   commons,
   events,
