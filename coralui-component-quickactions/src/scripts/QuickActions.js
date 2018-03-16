@@ -107,16 +107,21 @@ class QuickActions extends Overlay {
     this._target = target.PREVIOUS;
     this._placement = placement.TOP;
   
+    // Flag
     this._openedBefore = false;
+  
+    // Debounce timer
+    this._timeout = null;
     
-    // Events
-    this._delegateEvents({
+    // Template
+    base.call(this._elements, {commons, i18n});
+  
+    const events = {
       'global:resize': '_onWindowResize',
       'mouseout': '_onMouseOut',
       'capture:blur': '_onBlur',
-  
+
       // Keyboard interaction
-      'global:key:escape': '_onEscapeKeypress',
       'key:home > ._coral-QuickActions-item': '_onHomeKeypress',
       'key:end > ._coral-QuickActions-item': '_onEndKeypress',
       'key:pagedown > ._coral-QuickActions-item': '_onButtonKeypressNext',
@@ -125,38 +130,38 @@ class QuickActions extends Overlay {
       'key:pageup > ._coral-QuickActions-item': '_onButtonKeypressPrevious',
       'key:left > ._coral-QuickActions-item': '_onButtonKeypressPrevious',
       'key:up > ._coral-QuickActions-item': '_onButtonKeypressPrevious',
-  
+    
       // Buttons
       'click > ._coral-QuickActions-item:not([handle="moreButton"])': '_onButtonClick',
-  
+    
       // Accessibility
       'capture:focus ._coral-QuickActions-item': '_onItemFocusIn',
       'capture:blur ._coral-QuickActions-item': '_onItemFocusOut',
-      
-      // Overlay
-      'coral-overlay:beforeopen': '_onOverlayBeforeOpen',
-      'coral-overlay:beforeclose': '_onOverlayBeforeClose',
-      'coral-overlay:open': '_onOverlayOpen',
-      'coral-overlay:close': '_onOverlayClose',
-      'coral-overlay:positioned': '_onOverlayPositioned',
-  
-      // ButtonList
-      'click [coral-list-item]': '_onButtonListItemClick',
-  
+    
       // Items
       'coral-quickactions-item:_contentchanged': '_onItemChange',
       'coral-quickactions-item:_iconchanged': '_onItemChange',
       'coral-quickactions-item:_hrefchanged': '_onItemChange',
       'coral-quickactions-item:_typechanged': '_onItemTypeChange'
-    });
+    };
+  
+    const overlayId = this._elements.overlay.id;
+    
+    // Overlay
+    events[`global:capture:coral-overlay:beforeopen #${overlayId}`] = '_onOverlayBeforeOpen';
+    events[`global:capture:coral-overlay:beforeclose #${overlayId}`] = '_onOverlayBeforeClose';
+    events[`global:capture:coral-overlay:open #${overlayId}`] = '_onOverlayOpen';
+    events[`global:capture:coral-overlay:close #${overlayId}`] = '_onOverlayClose';
+    events[`global:capture:coral-overlay:positioned #${overlayId}`] = '_onOverlayPositioned';
+    events[`global:capture:click #${overlayId} [coral-list-item]`] = '_onButtonListItemClick';
   
     // Cache bound event handler functions
     this._onTargetMouseEnter = this._onTargetMouseEnter.bind(this);
     this._onTargetKeyUp = this._onTargetKeyUp.bind(this);
     this._onTargetMouseLeave = this._onTargetMouseLeave.bind(this);
-    
-    // Template
-    base.call(this._elements, {commons, i18n});
+  
+    // Events
+    this._delegateEvents(events);
   
     // delegates the item handling to the collection
     this.items._startHandlingItems(true);
@@ -474,7 +479,7 @@ class QuickActions extends Overlay {
     const event = item.trigger('click');
     
     if (!event.defaultPrevented && this.interaction === interaction.ON) {
-      this.hide();
+      this._hideAll();
     }
   }
   
@@ -708,7 +713,7 @@ class QuickActions extends Overlay {
   _isInternalToComponent(element) {
     const targetElement = this._getTarget();
     
-    return element && (this.contains(element) || targetElement && targetElement.contains(element));
+    return element && (this.contains(element) || this._elements.overlay.contains(element) || targetElement && targetElement.contains(element));
   }
   
   _onItemFocusIn(event) {
@@ -724,13 +729,32 @@ class QuickActions extends Overlay {
     this._layout();
   }
   
+  _handleEscape(event) {
+    if (typeof this._isTop === 'undefined') {
+      this._isTop = this._isTopOverlay();
+    }
+    
+    // Debounce
+    if (this._timeout !== null) {
+      window.clearTimeout(this._timeout);
+    }
+    
+    this._timeout = window.setTimeout(() => {
+      if (this._isTop) {
+        super._handleEscape(event);
+      }
+  
+      this._isTop = undefined;
+    });
+  }
+  
   /** @ignore */
   _onMouseOut(event) {
     const toElement = event.toElement || event.relatedTarget;
     
     // Hide if we mouse leave to any element external to the component and its target
     if (!this._isInternalToComponent(toElement) && this.interaction === interaction.ON) {
-      this.hide();
+      this._hideAll();
     }
   }
   
@@ -747,15 +771,20 @@ class QuickActions extends Overlay {
           toElement = document.activeElement;
           
           if (!self._isInternalToComponent(toElement)) {
-            self.hide();
+            self._hideAll();
           }
         });
       }
       // Hide if we focus out to any element external to the component and its target
       else if (!this._isInternalToComponent(toElement)) {
-        this.hide();
+        this._hideAll();
       }
     }
+  }
+  
+  _hideAll() {
+    this.hide();
+    this._elements.overlay.hide();
   }
   
   /** @ignore */
@@ -805,21 +834,7 @@ class QuickActions extends Overlay {
     
     // Do not hide if we entered the quick actions
     if (!this._isInternalToComponent(toElement)) {
-      this.hide();
-    }
-  }
-  
-  /** @ignore */
-  _onEscapeKeypress() {
-    if (this.interaction !== interaction.ON) {
-      return;
-    }
-    
-    if (this._elements.overlay.open && this._elements.overlay._isTopOverlay()) {
-      this._elements.overlay.hide();
-    }
-    else if (this.open && this._isTopOverlay()) {
-      this.hide();
+      this._hideAll();
     }
   }
   
@@ -1133,6 +1148,9 @@ class QuickActions extends Overlay {
       }
     }, this);
   
+    // Cannot be open by default when rendered
+    this._elements.overlay.removeAttribute('open');
+  
     // Inserting the overlay before the items
     this.insertBefore(this._elements.overlay, this.firstChild);
   
@@ -1141,6 +1159,16 @@ class QuickActions extends Overlay {
   
     // Link target
     this._elements.overlay.target = this._elements.moreButton;
+  }
+  
+  /** @ignore */
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    
+    // In case it was moved out don't forget to remove it
+    if (!this.contains(this._elements.overlay)) {
+      this._elements.overlay.remove();
+    }
   }
 }
 

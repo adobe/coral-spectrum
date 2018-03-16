@@ -388,7 +388,7 @@ describe('QuickActions', function() {
       expect(el.open).to.equal(true, 'QuickActions opened after ctrl + space key pressed');
     });
 
-    it('should close on escape keypress', function() {
+    it('should close on escape keypress', function(done) {
       const el = helpers.build(window.__html__['QuickActions.base.html']);
       el.target = targetElement;
 
@@ -399,7 +399,11 @@ describe('QuickActions', function() {
       // Hit escape key
       helpers.keypress('escape', el);
       
-      expect(el.open).to.equal(false, 'QuickActions closed after escape keypress');
+      // Wait for debounce to end
+      setTimeout(() => {
+        expect(el.open).to.equal(false, 'QuickActions closed after escape keypress');
+        done();
+      });
     });
 
     it('should navigate to next button for "right", "down" and "pagedown" keypresses', function(done) {
@@ -691,6 +695,10 @@ describe('QuickActions', function() {
     it('should override the inline max-width applied by extended Overlay to prevent collapse', function() {
       const el = helpers.build(window.__html__['QuickActions.empty.html']);
       expect(el.style.maxWidth === 'none').to.equal(true, 'max-width is correctly overridden');
+    });
+  
+    describe('Smart Overlay', () => {
+      helpers.testSmartOverlay('coral-quickactions');
     });
   });
 });
