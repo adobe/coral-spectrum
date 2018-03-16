@@ -28,7 +28,7 @@
     this.id = uid + '-coral-button-label';
   </js>
 </div>
-<coral-popover variant="_custom" role="dialog" focusonshow="on" trapfocus="on" handle="overlay" breadthoffset="+50%r - 50%p" lengthoffset="5px" placement="bottom" id="{{uid}}" aria-label="{{data.i18n.get('Color Picker')}}">
+<coral-popover smart class="_coral-ColorInput-overlay" variant="_custom" role="dialog" focusonshow="on" trapfocus="on" handle="overlay" breadthoffset="+50%r - 50%p" lengthoffset="5px" placement="bottom" id="{{uid}}" aria-label="{{data.i18n.get('Color Picker')}}">
   <coral-colorinput-colorproperties handle="propertiesView"></coral-colorinput-colorproperties>
   <coral-colorinput-swatches handle="swatchesView"></coral-colorinput-swatches>
 </coral-popover>

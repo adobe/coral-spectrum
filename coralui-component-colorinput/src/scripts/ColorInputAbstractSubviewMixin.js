@@ -56,16 +56,16 @@ const ColorInputAbstractSubviewMixin = (superClass) => class extends superClass 
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();
-  
-    // cache colorinput if this component is attached to dom
-    const colorinput = this.closest('coral-colorinput');
     
-    if (colorinput) {
+    const overlay = this.closest('._coral-ColorInput-overlay');
+    
+    if (overlay && overlay._colorinput) {
       // save references to bound callbacks (in order to be able to remove them again from event system)
       this.__beforeOverlayOpen = this._beforeOverlayOpen.bind(this);
       this.__onColorInputChange = this._onColorInputChange.bind(this);
-    
-      this._colorinput = colorinput;
+      
+      // cache colorinput if this component is attached to dom
+      this._colorinput = overlay._colorinput;
       this._colorinput.on('coral-overlay:beforeopen', this.__beforeOverlayOpen);
       this._colorinput.on('coral-colorinput:_valuechange', this.__onColorInputChange);
     

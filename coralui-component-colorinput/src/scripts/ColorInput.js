@@ -122,24 +122,34 @@ class ColorInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   constructor() {
     super();
     
-    // @polyfill ie
-    this._delegateEvents(commons.extend(this._events, {
-      'coral-overlay:beforeopen': '_beforeOverlayOpen',
-      'coral-overlay:close': '_onOverlayClose',
+    // Prepare templates
+    this._elements = {};
+    base.call(this._elements, {commons, i18n});
+    
+    const overlay = this._elements.overlay;
+    const overlayId = overlay.id;
+  
+    // Add a reference to this
+    overlay._colorinput = this;
+    
+    // Extend form field events
+    const events = commons.extend(this._events, {
       'key:down ._coral-ColorInput-input:not([readonly])': '_onKeyDown',
       'key:down [handle="colorPreview"]': '_onKeyDown',
       'click [handle="colorPreview"]': '_onColorPreviewClick',
-      'global:click': '_onGlobalClick',
       'key:esc input': '_onKeyEsc',
       'key:enter input': '_onKeyEsc',
   
       // private
       'coral-colorinput-item:_selectedchanged': '_onItemSelectedChanged'
-    }));
+    });
     
-    // Prepare templates
-    this._elements = {};
-    base.call(this._elements, {commons, i18n});
+    // Overlay
+    events[`global:capture:coral-overlay:beforeopen #${overlayId}`] = '_beforeOverlayOpen';
+    events[`global:capture:coral-overlay:close #${overlayId}`] = '_onOverlayClose';
+    
+    // Events
+    this._delegateEvents(events);
   
     // Pre-define labellable element
     this._labellableElement = this._elements.input;
@@ -582,18 +592,6 @@ class ColorInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._elements.overlay.returnFocusTo(this.variant === variant.SWATCH ? event.matchedTarget : this._elements.input);
   }
   
-  /** @ignore */
-  _onGlobalClick(event) {
-    if (!this._elements.overlay.open) {
-      return;
-    }
-    
-    //Don't close when clicked inside itself
-    if (!this.contains(event.target)) {
-      this._elements.overlay.open = false;
-    }
-  }
-  
   // JSDocs inherited from Coral.mixin.formField
   _onInputChange(event) {
     // method used by Coral.mixin.formField as a callback whenever a form field changes
@@ -800,10 +798,18 @@ class ColorInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   _updateColorPreview() {
+    const isValueEmpty = this.value === '';
+    
     // update color preview
     const currentColor = this.valueAsColor;
     this._elements.colorPreview.style.backgroundColor = currentColor ? currentColor.rgbaValue : '';
-    this.classList.toggle('_coral-ColorInput--novalue', this.value === '');
+    this.classList.toggle('_coral-ColorInput--novalue', isValueEmpty);
+    
+    // Update preview in overlay
+    const preview = this._elements.overlay.querySelector('._coral-ColorInput-preview');
+    if (preview) {
+      preview.classList.toggle('_coral-ColorInput-preview--novalue', isValueEmpty);
+    }
   }
   
   /**
@@ -868,6 +874,9 @@ class ColorInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     const frag = document.createDocumentFragment();
   
+    // Cannot be open by default when rendered
+    this._elements.overlay.removeAttribute('open');
+    
     // Render template
     frag.appendChild(this._elements.defaultPalette);
     frag.appendChild(this._elements.input);
@@ -907,6 +916,16 @@ class ColorInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     // we use 'this' so properly aligns to the input
     this._elements.overlay.target = this._elements.colorPreview;
+  }
+  
+  /** @ignore */
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    
+    // In case it was moved out don't forget to remove it
+    if (!this.contains(this._elements.overlay)) {
+      this._elements.overlay.remove();
+    }
   }
 }
 
