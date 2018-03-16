@@ -805,7 +805,7 @@ describe('Datepicker', function() {
         // opens the popover
         el._elements.toggle.click();
       
-        expect(el._elements.popover.open).to.be.false;
+        expect(el._elements.overlay.open).to.be.false;
         expect(el.getAttribute('aria-expanded')).to.equal('false');
       });
     
@@ -831,7 +831,7 @@ describe('Datepicker', function() {
       // @flaky on FF
       it.skip('should restore focus to toggle when closed using ESC key', function(done) {
         const el = helpers.build(window.__html__['Datepicker.type.time.html']);
-        el._elements.popover._overlayAnimationTime = 0;
+        el._elements.overlay._overlayAnimationTime = 0;
         
         // explicitly set focus to toggle button
         el._elements.toggle.focus();
@@ -857,12 +857,6 @@ describe('Datepicker', function() {
     });
   
     describe('Implementation details', function() {
-      describe('#formField', function() {
-        helpers.testFormField(window.__html__['Datepicker.value.html'], {
-          value: '2014-12-31'
-        });
-      });
-    
       it('should show different controls depending on the type', function(done) {
         var el = new Datepicker();
         el._renderCalendar();
@@ -909,7 +903,7 @@ describe('Datepicker', function() {
           cell.click();
         
           expect(el.value).to.equal(cell.dataset.date);
-          expect(el._elements.popover.open).to.be.false;
+          expect(el._elements.overlay.open).to.be.false;
         
           done();
         });
@@ -931,7 +925,7 @@ describe('Datepicker', function() {
           cell.click();
         
           expect(el.value).to.equal(cell.dataset.date);
-          expect(el._elements.popover.open).to.be.false;
+          expect(el._elements.overlay.open).to.be.false;
         
           done();
         });
@@ -953,9 +947,19 @@ describe('Datepicker', function() {
           cell.click();
         
           expect(el.value).to.equal(cell.dataset.date);
-          expect(el._elements.popover.open).to.be.false;
+          expect(el._elements.overlay.open).to.be.false;
         
           done();
+        });
+      });
+  
+      describe('Smart Overlay', () => {
+        helpers.testSmartOverlay('coral-datepicker');
+      });
+  
+      describe('#formField', function() {
+        helpers.testFormField(window.__html__['Datepicker.value.html'], {
+          value: '2014-12-31'
         });
       });
     });

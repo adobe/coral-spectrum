@@ -24,7 +24,7 @@ import '/coralui-component-calendar';
 import '/coralui-component-popover';
 import '/coralui-component-textfield';
 import base from '../templates/base';
-import popoverContent from '../templates/popoverContent';
+import overlayContent from '../templates/overlayContent';
 import {transform, commons, validate, i18n} from '/coralui-util';
 
 /**
@@ -120,19 +120,18 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._elements = {};
     base.call(this._elements, {commons, i18n});
     // Creates and stores the contents of the popover separately
-    this._calendarFragment = popoverContent.call(this._elements, {commons, i18n});
+    this._calendarFragment = overlayContent.call(this._elements, {commons, i18n});
   
     // Pre-define labellable element
     this._labellableElement = this._elements.input;
   
-    const popoverId = this._elements.popover.id;
+    const overlayId = this._elements.overlay.id;
     const events = {};
-    events[`global:click #${popoverId} coral-calendar`] = '_onCalendarDayClick';
-    events[`global:capture:change #${popoverId}`] = '_onChange';
-    events[`global:capture:coral-overlay:beforeopen #${popoverId}`] = '_onPopoverBeforeOpen';
-    events[`global:capture:coral-overlay:open #${popoverId}`] = '_onPopoverOpenOrClose';
-    events[`global:capture:coral-overlay:close #${popoverId}`] = '_onPopoverOpenOrClose';
-    events[`global:key:esc #${popoverId} coral-clock input[is=coral-textfield]`] = '_onEscapeKey';
+    events[`global:capture:click #${overlayId} coral-calendar`] = '_onCalendarDayClick';
+    events[`global:capture:change #${overlayId}`] = '_onChange';
+    events[`global:capture:coral-overlay:beforeopen #${overlayId}`] = '_onPopoverBeforeOpen';
+    events[`global:capture:coral-overlay:open #${overlayId}`] = '_onPopoverOpenOrClose';
+    events[`global:capture:coral-overlay:close #${overlayId}`] = '_onPopoverOpenOrClose';
     events['key:alt+down [handle="input"],[handle="toggle"]'] = '_onAltDownKey';
     events['key:down [handle="toggle"]'] = '_onAltDownKey';
     
@@ -548,7 +547,7 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       this._elements.input.setAttribute('type', this.type);
     
       // Hide pop-over and remove related attributes:
-      this._elements.popover.hidden = true;
+      this._elements.overlay.hidden = true;
       this.removeAttribute('aria-haspopup');
       this.removeAttribute('aria-expanded');
       this.removeAttribute('aria-owns');
@@ -559,10 +558,10 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       this._elements.input.setAttribute('type', 'text');
     
       // Show pop-over and add related attributes:
-      this._elements.popover.hidden = false;
+      this._elements.overlay.hidden = false;
       this.setAttribute('aria-haspopup', 'true');
       this.setAttribute('aria-expanded', 'false');
-      this.setAttribute('aria-owns', this._elements.popover.id);
+      this.setAttribute('aria-owns', this._elements.overlay.id);
     }
   }
   
@@ -578,10 +577,10 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
    @ignore
    */
   _onPopoverOpenOrClose() {
-    this.setAttribute('aria-expanded', this._elements.popover.open);
+    this.setAttribute('aria-expanded', this._elements.overlay.open);
     
     // set focus to calendar grid
-    if (this._elements.popover.open) {
+    if (this._elements.overlay.open) {
       if (this.type === type.TIME) {
         this._elements.clock.focus();
       }
@@ -596,7 +595,7 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     if (event.target.tagName === 'A') {
       // since a selection has been made, we close the popover. we cannot use the _onChange listener to handle this
       // because clicking on the same button will not trigger a change event
-      this._elements.popover.open = false;
+      this._elements.overlay.open = false;
     }
   }
   
@@ -627,18 +626,13 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     }
   }
   
-  /** @ignore */
-  _onEscapeKey() {
-    this._elements.popover.open = false;
-  }
-  
   /** @private */
   _onAltDownKey(event) {
     // Stop any consequences of pressing the key
     event.preventDefault();
     
-    if (!this._elements.popover.open) {
-      this._elements.popover.open = true;
+    if (!this._elements.overlay.open) {
+      this._elements.overlay.open = true;
     }
   }
   
@@ -699,8 +693,8 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
   /** @ignore */
   _renderCalendar() {
-    if (this._elements.popover.content.innerHTML === '') {
-      this._elements.popover.content.appendChild(this._calendarFragment);
+    if (this._elements.overlay.content.innerHTML === '') {
+      this._elements.overlay.content.appendChild(this._calendarFragment);
       this._calendarFragment = undefined;
     }
   }
@@ -759,9 +753,12 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     }
   
     const frag = document.createDocumentFragment();
+  
+    // Cannot be open by default when rendered
+    this._elements.overlay.removeAttribute('open');
     
     // Render template
-    frag.appendChild(this._elements.popover);
+    frag.appendChild(this._elements.overlay);
     frag.appendChild(this._elements.hiddenInput);
     frag.appendChild(this._elements.input);
     frag.appendChild(this._elements.toggle);
@@ -769,7 +766,7 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this.appendChild(frag);
   
     // Point at the button from the bottom
-    this._elements.popover.target = this._elements.toggle;
+    this._elements.overlay.target = this._elements.toggle;
   }
   
   /** @ignore */
@@ -777,8 +774,8 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     super.disconnectedCallback();
     
     // In case it was moved out don't forget to remove it
-    if (!this.contains(this._elements.popover)) {
-      this._elements.popover.remove();
+    if (!this.contains(this._elements.overlay)) {
+      this._elements.overlay.remove();
     }
   }
 }
