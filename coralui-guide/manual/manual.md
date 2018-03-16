@@ -57,15 +57,16 @@ We'll show you how to customize a build :
 1. Fork the [repository](https://git.corp.adobe.com/Coral/coralui/tree/release/coral-spectrum) on GitHub
 2. Open `index.js` and remove components you would like excluded from the build. Repeat for `src/tests/index.js`.
 3. Run `npm install`. Optionally you can also add additional components to `package.json`.
-4. Run `gulp`. This will generate the build and run the tests.
+4. Run `gulp tests`. This will generate the build and run the tests.
    
 ## Development
    
 First run `npm i` then you can use below Gulp tasks to work on Coral Spectrum components :
-* `gulp build` to generate the JS/CSS files.
-* `gulp minify` to generate a minified version of the JS/CSS files.
-* `gulp tests` to run the tests.
-* `gulp docs` to build the documentation.
-* `gulp watch` to run the examples under `localhost:9001/examples/` and watch changes in the src folder.
-* `gulp` to generate the JS/CSS files and minified files, run the tests and generate the docs.
+* `gulp run` to generate the build and run the dev server on localhost:9001 by default.
+* `gulp build` to generate the build.
+* `gulp watch` to run the dev server on localhost:9001 by default. 
+* `gulp tests` to generate the build and run the tests.
+* `gulp karma` to run the tests only.
+* `gulp karma-watch` to debug the tests on localhost:9876 by default.
+* `gulp docs` to build the documentation. 
 

@@ -30,29 +30,19 @@ module.exports = function(gulp) {
   });
   
   gulp.task('watch', function() {
-    if (!util.isTLB()) {
-      gulp.watch([
-        'index.js',
-        'libs/**',
-        'data/**',
-        'polyfills/**',
-        'src/**',
-        '!src/tests/**',
-        path.join(util.getRoot(), 'coralui-theme-spectrum/**/*.styl'),
-      ], ['build+watch']);
-    }
-    else {
-      gulp.watch([
-        'index.js',
-        'coralui-*/libs/**',
-        'coralui-*/data/**',
-        'coralui-*/polyfills/**',
-        'coralui-*/src/scripts/**/*.js',
-        'coralui-*/src/templates/**/*.html',
-        'coralui-*/src/styles/**/*.styl',
-      ], ['build+watch']);
-    }
-  
+    const root = util.getRoot();
+    
+    gulp.watch([
+      path.join(root, 'coralui-*/index.js'),
+      path.join(root, 'coralui-*/libs/**'),
+      path.join(root, 'coralui-*/data/**',),
+      path.join(root, 'coralui-*/polyfills/**'),
+      path.join(root, 'coralui-*/src/scripts/**/*.js'),
+      path.join(root, 'coralui-*/src/templates/**/*.html'),
+      path.join(root, 'coralui-*/src/styles/**/*.styl'),
+      path.join(root, 'coralui-theme-spectrum/**/*.styl'),
+    ], ['build+watch']);
+    
     return gulp.src('./')
       .pipe(server({
         port: 9001,

@@ -81,11 +81,13 @@ Once ready, your work must be peer reviewed by a pull request.
 
 **Gulp tasks**
 First run `npm i` then you can use below Gulp tasks to work on Coral Spectrum components :
-* `gulp build` to generate the JS/CSS files.
-* `gulp minify` to generate a minified version of the JS/CSS files.
-* `gulp tests` to run the tests.
-* `gulp docs` to build the documentation.
-* `gulp watch` to run the examples under `localhost:9001/examples/` and update JS/CSS files on the fly.
-* `gulp` to generate the JS/CSS files and minified files, run the tests and generate the docs.
+* `gulp run` to generate the build and run the dev server on localhost:9001 by default.
+* `gulp build` to generate the build.
+* `gulp watch` to run the dev server on localhost:9001 by default. 
+* `gulp tests` to generate the build and run the tests.
+* `gulp karma` to run the tests only.
+* `gulp karma-watch` to debug the tests on localhost:9876 by default.
+* `gulp docs` to build the documentation. 
+
 
 
