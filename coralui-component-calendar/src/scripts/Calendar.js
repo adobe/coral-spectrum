@@ -516,14 +516,16 @@ class Calendar extends FormFieldMixin(ComponentMixin(HTMLElement)) {
    
    @param {moment} currentMoment
    A moment to test.
+   @param {String} unit
+   Year, Month, Week, Day
    @returns {Boolean}
    <code>true</code> if moment specified is before <code>min</code>
    
    @ignore
    */
-  _isBeforeMin(currentMoment) {
+  _isBeforeMin(currentMoment, unit) {
     const min = this.min ? new DateTime.Moment(this.min) : null;
-    return min && currentMoment.isBefore(min);
+    return min && currentMoment.isBefore(min, unit);
   }
   
   /**
@@ -531,14 +533,16 @@ class Calendar extends FormFieldMixin(ComponentMixin(HTMLElement)) {
    
    @param {moment} currentMoment
    A moment to test.
+   @param {String} unit
+   Year, Month, Week, Day
    @returns {Boolean}
    <code>true</code> if moment specified is after <code>max</code>
    
    @ignore
    */
-  _isAfterMax(currentMoment) {
+  _isAfterMax(currentMoment, unit) {
     const max = this.max ? new DateTime.Moment(this.max) : null;
-    return max && currentMoment.isAfter(max);
+    return max && currentMoment.isAfter(max, unit);
   }
   
   /**
@@ -546,13 +550,15 @@ class Calendar extends FormFieldMixin(ComponentMixin(HTMLElement)) {
    
    @param {moment} currentMoment
    A moment to test.
+   @param {String} unit
+   Year, Month, Week, Day
    @returns {Boolean}
    <code>true</code> if moment specified falls within <code>min</code>/<code>max</code> date range.
    
    @ignore
    */
-  _isInRange(currentMoment) {
-    return !(this._isBeforeMin(currentMoment) || this._isAfterMax(currentMoment));
+  _isInRange(currentMoment, unit) {
+    return !(this._isBeforeMin(currentMoment, unit) || this._isAfterMax(currentMoment, unit));
   }
   
   /**
@@ -753,13 +759,13 @@ class Calendar extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     let newMoment;
     let difference;
     
-    if (unit !== timeUnit.MONTH && el) {
+    if (el) {
       currentActive = el.dataset.date;
       currentMoment = new DateTime.Moment(currentActive);
       newMoment = currentMoment[operator](1, unit);
       
       // make sure new moment is in range before transitioning
-      if (this._isInRange(newMoment)) {
+      if (this._isInRange(newMoment, unit)) {
         difference = Math.abs(new DateTime.Moment(currentActive).diff(newMoment, 'days'));
         this._getToNewMoment(direction, operator, difference);
         this._setActiveDescendant();
@@ -769,7 +775,7 @@ class Calendar extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       this._requireCursor();
       
       // if cursor is out of range
-      if (!this._isInRange(this._cursor)) {
+      if (!this._isInRange(this._cursor, unit)) {
         
         // advance to closest value in range
         if (this._isBeforeMin(this._cursor)) {

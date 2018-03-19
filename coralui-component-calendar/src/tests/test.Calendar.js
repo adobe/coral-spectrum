@@ -531,6 +531,16 @@ describe('Calendar', function() {
         
         expect(el._cursor.month()).to.eql(moment(el.valueAsDate).subtract(1, 'month').month());
       });
+  
+      it('should go to next month on next month button click when min and max are set', function() {
+        el.value = '2018-03-14';
+        el.min = '2018-03-03';
+        el.max = '2018-05-20';
+        
+        el._elements.next.click();
+        
+        expect(el._cursor.month()).to.eql(moment(el.valueAsDate).add(1, 'month').month());
+      });
     
       it('should calculate invalid only once the user interacted with the component', function() {
         el.value = '2000-01-01';

@@ -340,11 +340,9 @@ class DateTime {
   /**
    @see https://momentjs.com/docs/#/query/is-before/
    */
-  isBefore(coralDate) {
-    const date = coralDate && coralDate._date;
-    
-    if (date) {
-      return date > this._date;
+  isBefore(coralDate, unit) {
+    if (coralDate && coralDate._date) {
+      return unit ? coralDate[unit]() > this[unit]() : coralDate._date > this._date;
     }
     
     return false;
@@ -353,11 +351,9 @@ class DateTime {
   /**
    @see https://momentjs.com/docs/#/query/is-after/
    */
-  isAfter(coralDate) {
-    const date = coralDate && coralDate._date;
-    
-    if (date) {
-      return date < this._date;
+  isAfter(coralDate, unit) {
+    if (coralDate && coralDate._date) {
+      return unit ? coralDate[unit]() < this[unit]() : coralDate._date < this._date;
     }
     
     return false;
