@@ -48,7 +48,7 @@ describe('Popover', function() {
       expect(Popover.variant.SUCCESS).to.equal('success');
       expect(Popover.variant.HELP).to.equal('help');
       expect(Popover.variant.INFO).to.equal('info');
-      expect(Popover.variant._CUSTOM).to.equal('_custom');
+      expect(Popover.variant.FLYOUT).to.equal('flyout');
       expect(Object.keys(Popover.variant).length).to.equal(7);
     });
   });

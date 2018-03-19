@@ -60,6 +60,8 @@ const closable = {
  A popover with a question header and icon, provides the user with help.
  @property {String} INFO
  A popover with an info header and icon, informs the user of non-critical information.
+ @property {String} FLYOUT
+ A popover without header and footer, only content.
  */
 const variant = {
   DEFAULT: 'default',
@@ -68,14 +70,13 @@ const variant = {
   SUCCESS: 'success',
   HELP: 'help',
   INFO: 'info',
-  // Private custom popover to be used by other components
-  _CUSTOM: '_custom'
+  FLYOUT: 'flyout'
 };
 
 // A string of all possible variant classnames
 const ALL_VARIANT_CLASSES = [];
 for (const variantValue in variant) {
-  if (variantValue !== '_CUSTOM') {
+  if (variantValue !== 'FLYOUT') {
     ALL_VARIANT_CLASSES.push(`_coral-Dialog--${variant[variantValue]}`);
   }
 }
@@ -230,11 +231,13 @@ class Popover extends Overlay {
     // Remove all variant classes
     this.classList.remove(...ALL_VARIANT_CLASSES);
     
-    const isCustomVariant = this._variant === variant._CUSTOM;
-    this.classList.toggle(`${CLASSNAME}--dialog`, !isCustomVariant);
-    this._elements.tip.hidden = isCustomVariant;
+    const isFlyoutVariant = this._variant === variant.FLYOUT;
+    this.classList.toggle(`${CLASSNAME}--dialog`, !isFlyoutVariant);
+    this._elements.tip.hidden = isFlyoutVariant;
+    this._elements.headerWrapper.hidden = isFlyoutVariant;
+    this._elements.footer.hidden = isFlyoutVariant;
     
-    if (this._variant === variant.DEFAULT || isCustomVariant) {
+    if (this._variant === variant.DEFAULT || isFlyoutVariant) {
       // ARIA
       this.setAttribute('role', 'dialog');
     }
@@ -329,7 +332,7 @@ class Popover extends Overlay {
     }
     
     // Inject the SVG icon
-    if (variantValue !== variant.DEFAULT && variantValue !== variant._CUSTOM) {
+    if (variantValue !== variant.DEFAULT && variantValue !== variant.FLYOUT) {
       this._elements.headerWrapper.insertAdjacentHTML('beforeend', Icon._renderSVG(`spectrum-css-icon-Alert${capitalize(variantValue)}`, ['_coral-Dialog-typeIcon']));
       this._elements.icon = this.querySelector('._coral-Dialog-typeIcon');
     }

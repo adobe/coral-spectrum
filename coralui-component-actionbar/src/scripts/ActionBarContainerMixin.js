@@ -134,7 +134,7 @@ const ActionBarContainerMixin = (superClass) => class extends superClass {
     
     const popover = item.querySelector('coral-popover');
     if (popover && (popover.querySelector('coral-buttonlist') || popover.querySelector('coral-anchorlist'))) {
-      popover.setAttribute('variant', Popover.variant._CUSTOM);
+      popover.setAttribute('variant', Popover.variant.FLYOUT);
     }
   }
   
