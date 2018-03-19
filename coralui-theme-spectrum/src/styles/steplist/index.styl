@@ -37,3 +37,28 @@
     }
   }
 }
+
+// @compat
+._coral-Steplist--small {
+  ._coral-Steplist-item:first-child,
+  ._coral-Steplist-item:last-child {
+    position: relative;
+  }
+
+  ._coral-Steplist-item:first-child {
+    left: 10*$px;
+  }
+
+  ._coral-Steplist-item:last-child {
+    right: 10*$px;
+  }
+
+  ._coral-Steplist-item {
+    width: 20*$px;
+    padding: 0;
+  }
+
+  ._coral-Steplist-segment {
+    display: none;
+  }
+}
