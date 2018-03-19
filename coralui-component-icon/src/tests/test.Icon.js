@@ -149,9 +149,17 @@ describe('Icon', function() {
 
   describe('API', function() {
 
+    let icon;
+    beforeEach(() => {
+      icon = helpers.build(new Icon());
+    });
+  
+    afterEach(() => {
+      icon = null;
+    });
+    
     describe('#icon', function() {
       it('should default to null', function() {
-        var icon = helpers.build(new Icon());
         expect(icon.icon).to.equal('');
         expect(icon.classList.contains('_coral-Icon')).to.be.true;
         expect(icon.classList.contains('_coral-Icon--sizeS')).to.be.true;
@@ -159,8 +167,6 @@ describe('Icon', function() {
       });
 
       it('should set the new icon', function() {
-        var icon = new Icon();
-
         icon.icon = 'add';
 
         expect(icon.hasAttribute('icon')).to.be.true;
@@ -168,8 +174,6 @@ describe('Icon', function() {
       });
 
       it('should trim the value', function() {
-        var icon = new Icon();
-
         icon.icon = ' add ';
 
         expect(icon.hasAttribute('icon')).to.be.true;
@@ -177,7 +181,6 @@ describe('Icon', function() {
       });
 
       it('should convert everything to a string', function() {
-        var icon = new Icon();
         icon.icon = 5;
         expect(icon.icon).to.equal('5');
         icon.icon = false;
@@ -190,8 +193,6 @@ describe('Icon', function() {
       });
 
       it('should set with an attribute', function() {
-        var icon = new Icon();
-
         icon.setAttribute('icon', 'add');
 
         expect(icon.getAttribute('icon')).to.equal('add');
@@ -199,8 +200,6 @@ describe('Icon', function() {
       });
 
       it('should not set multiple SVG icons', function() {
-        var icon = new Icon();
-        
         icon.icon = 'adobeSocial';
         icon.icon = 'add';
   
@@ -209,7 +208,6 @@ describe('Icon', function() {
       });
 
       it('should remove the icon with null', function() {
-        var icon = new Icon();
         icon.icon = 'add';
   
         expect(hasSVGIcon(icon, 'add')).to.be.true;
@@ -221,7 +219,6 @@ describe('Icon', function() {
       });
 
       it('should remove the icon with undefined', function() {
-        var icon = new Icon();
         icon.icon = 'add';
   
         expect(hasSVGIcon(icon, 'add')).to.be.true;
@@ -233,7 +230,6 @@ describe('Icon', function() {
       });
 
       it('should remove the icon with empty string', function() {
-        var icon = new Icon();
         icon.icon = 'add';
   
         expect(hasSVGIcon(icon, 'add')).to.be.true;
@@ -245,7 +241,6 @@ describe('Icon', function() {
       });
 
       it('should remove the icon when the attribute is removed', function() {
-        var icon = new Icon();
         icon.setAttribute('icon', 'add');
 
         expect(icon.getAttribute('icon')).to.equal('add');
@@ -258,23 +253,19 @@ describe('Icon', function() {
       });
       
       it('should support SVG icon Id', function() {
-        const el = new Icon();
-        el.icon = 'spectrum-css-icon-SearchClear';
-        expect(el.icon).to.equal('spectrum-css-icon-SearchClear');
-        expect(hasSVGIcon(el, 'spectrum-css-icon-SearchClear')).to.be.false;
+        icon.icon = 'spectrum-css-icon-SearchClear';
+        expect(icon.icon).to.equal('spectrum-css-icon-SearchClear');
+        expect(hasSVGIcon(icon, 'spectrum-css-icon-SearchClear')).to.be.false;
       });
     });
 
     describe('#size', function() {
 
       it('should default to Icon.size.SMALL', function() {
-        var icon = new Icon();
         expect(icon.size).to.equal(Icon.size.SMALL);
       });
 
       it('should set the new size', function() {
-        var icon = new Icon();
-
         icon.size = Icon.size.LARGE;
         expect(icon.size).to.equal(Icon.size.LARGE);
 
@@ -282,8 +273,6 @@ describe('Icon', function() {
       });
 
       it('should accept lowercase values', function() {
-        var icon = new Icon();
-
         icon.size = Icon.size.LARGE.toLowerCase();
         expect(icon.size).to.equal(Icon.size.LARGE);
 
@@ -291,8 +280,6 @@ describe('Icon', function() {
       });
       
       it('should be set with an attribute', function() {
-        var icon = new Icon();
-
         icon.setAttribute('size', Icon.size.LARGE);
         expect(icon.size).to.equal(Icon.size.LARGE);
 
@@ -301,8 +288,6 @@ describe('Icon', function() {
       });
 
       it('should discard values not part of the enum', function() {
-        var icon = new Icon();
-
         // this value will be accepted
         icon.size = 'XS';
         // all these will be discarded
@@ -315,15 +300,12 @@ describe('Icon', function() {
       });
 
       it('should discard unknown attribute', function() {
-        var icon = new Icon();
-
         icon.setAttribute('size', 'megalarge');
         // Fallbacks to default enum which is SMALL
         expect(icon.getAttribute('size')).to.equal(Icon.size.SMALL);
       });
 
       it('should not remove unknown size classes', function() {
-        var icon = new Icon();
         icon.classList.add('_coral-Icon--sizeME');
 
         icon.size = 'XS';
@@ -334,7 +316,6 @@ describe('Icon', function() {
       });
       
       it('should update the icon if the size changed', function() {
-        var icon = helpers.build(new Icon());
         icon.icon = 'add';
         expect(icon._elements.svg.querySelector('use').href.baseVal.indexOf('18') !== -1).to.be.true;
   
@@ -465,14 +446,14 @@ describe('Icon', function() {
       });
       
       it('should capitalize the icon name to match to the new icon name', function() {
-        const el = new Icon();
+        const el = helpers.build(new Icon());
         el.icon = 'add';
         expect(hasSVGIcon(el, 'Add', true)).to.be.true;
         expect(called).to.equal(0);
       });
       
       it('should map the old icon name to the new icon name', function() {
-        const el = new Icon();
+        const el = helpers.build(new Icon());
         el.icon = 'adobe';
         expect(hasSVGIcon(el, 'AdobeLogo', true)).to.be.true;
         expect(called).to.equal(1);
@@ -487,6 +468,8 @@ describe('Icon', function() {
         
         el.icon = 'userCircleColor';
   
+        helpers.target.appendChild(container);
+  
         expect(hasSVGIcon(el, 'User-CircleColorLight', true)).to.be.true;
         expect(called).to.equal(1);
       });
@@ -499,6 +482,8 @@ describe('Icon', function() {
         container.classList.add('coral--dark');
     
         el.icon = 'userCircleColor';
+  
+        helpers.target.appendChild(container);
     
         expect(hasSVGIcon(el, 'User-CircleColorDark', true)).to.be.true;
         expect(called).to.equal(1);
@@ -510,6 +495,8 @@ describe('Icon', function() {
         container.appendChild(el);
     
         el.icon = 'userCircleColor';
+        
+        helpers.target.appendChild(container);
     
         expect(hasSVGIcon(el, 'User-CircleColorLight', true)).to.be.true;
         expect(called).to.equal(1);

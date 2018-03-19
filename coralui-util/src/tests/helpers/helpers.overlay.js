@@ -43,16 +43,16 @@ const testSmartOverlay = function(tagName) {
       el._elements.overlay.open = true;
     
       expect(el.contains(el._elements.overlay)).to.be.false;
-      expect(document.contains(el._elements.overlay)).to.be.true;
+      expect(document.body.contains(el._elements.overlay)).to.be.true;
     
       el.remove();
     
-      expect(document.contains(el._elements.overlay)).to.be.false;
+      expect(document.body.contains(el._elements.overlay)).to.be.false;
     
       wrapper.appendChild(el);
     
       expect(el._elements.overlay.hasAttribute('open')).to.be.false;
-      expect(document.contains(el._elements.overlay)).to.be.true;
+      expect(document.body.contains(el._elements.overlay)).to.be.true;
     });
   });
 };

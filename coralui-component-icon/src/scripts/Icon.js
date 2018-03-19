@@ -201,6 +201,11 @@ class Icon extends ComponentMixin(HTMLElement) {
   set alt(value) { this.setAttribute('alt', value); }
   
   _updateIcon() {
+    if (!document.body.contains(this)) {
+      this._delayedRendering = true;
+      return;
+    }
+    
     let iconId = this.icon;
     
     // If icon name is passed, we have to build the icon Id based on the icon name
@@ -247,7 +252,7 @@ class Icon extends ComponentMixin(HTMLElement) {
       }
       
       // Verify if icon name is a colored icon
-      if (SPECTRUM_COLORED_ICONS_IDENTIFIER.some(identifier => iconId.indexOf(identifier) !== -1)) {
+      if (SPECTRUM_COLORED_ICONS_IDENTIFIER.some(identifier => iconName.indexOf(identifier) !== -1)) {
         // Colored icons are 24 by default
         iconId = `spectrum-icon-24-${iconName}`;
       }
@@ -262,6 +267,7 @@ class Icon extends ComponentMixin(HTMLElement) {
     this.insertAdjacentHTML('beforeend', this.constructor._renderSVG(iconId));
     
     this._elements.svg = this.lastElementChild;
+    this._delayedRendering = false;
   }
   
   /**
@@ -385,6 +391,10 @@ class Icon extends ComponentMixin(HTMLElement) {
     // Set default size
     if (!this._size) {
       this.size = size.SMALL;
+    }
+    
+    if (this._delayedRendering) {
+      this._updateIcon();
     }
   }
 }
