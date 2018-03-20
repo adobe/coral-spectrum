@@ -37,7 +37,8 @@
       <h2 class="coral-Heading coral-Heading--2">Anchored variant</h2>
       <coral-tablist variant="anchored">
         <coral-tab>Tab One</coral-tab>
-        <coral-tab>Tab Two</coral-tab>
+        <coral-tab icon="comment">Tab Two</coral-tab>
+        <coral-tab icon="home"></coral-tab>
         <coral-tab disabled>Disabled</coral-tab>
         <coral-tab invalid>Invalid</coral-tab>
         <coral-tab invalid disabled>Invalid + Disabled</coral-tab>
@@ -46,7 +47,8 @@
       <h2 class="coral-Heading coral-Heading--2">Page variant</h2>
       <coral-tablist variant="page">
         <coral-tab>Tab One</coral-tab>
-        <coral-tab>Tab Two</coral-tab>
+        <coral-tab icon="comment">Tab Two</coral-tab>
+        <coral-tab icon="home"></coral-tab>
         <coral-tab disabled>Disabled</coral-tab>
         <coral-tab invalid>Invalid</coral-tab>
         <coral-tab invalid disabled>Invalid + Disabled</coral-tab>
@@ -54,7 +56,7 @@
 
       <h2 class="coral-Heading coral-Heading--2">Icons</h2>
       <coral-tablist>
-        <coral-tab icon="comment" target="#panel_0"></coral-tab>
+        <coral-tab icon="home" target="#panel_0"></coral-tab>
         <coral-tab target="#panel_1">Tab One</coral-tab>
         <coral-tab icon="delete" target="#panel_3">Tab Two</coral-tab>
         <coral-tab target="#panel_4" disabled>Disabled</coral-tab>
@@ -62,13 +64,43 @@
         <coral-tab icon="alert" target="#panel_6" invalid disabled>Invalid + Disabled</coral-tab>
       </coral-tablist>
 
-      <h2 class="coral-Heading coral-Heading--2">Vertical</h2>
+      <h2 class="coral-Heading coral-Heading--2">Vertical default</h2>
       <coral-tablist orientation="vertical">
-        <coral-tab icon="delete">Tab One</coral-tab>
-        <coral-tab icon="add"></coral-tab>
+        <coral-tab>Tab One</coral-tab>
+        <coral-tab>Tab Two</coral-tab>
         <coral-tab disabled>Disabled</coral-tab>
         <coral-tab invalid>Invalid</coral-tab>
         <coral-tab invalid disabled>Invalid + Disabled</coral-tab>
+      </coral-tablist>
+
+      <h2 class="coral-Heading coral-Heading--2">Vertical Anchored variant</h2>
+      <coral-tablist orientation="vertical" variant="anchored">
+        <coral-tab>Tab One</coral-tab>
+        <coral-tab icon="comment">Tab Two</coral-tab>
+        <coral-tab icon="home"></coral-tab>
+        <coral-tab disabled>Disabled</coral-tab>
+        <coral-tab invalid>Invalid</coral-tab>
+        <coral-tab invalid disabled>Invalid + Disabled</coral-tab>
+      </coral-tablist>
+
+      <h2 class="coral-Heading coral-Heading--2">Vertical Page variant</h2>
+      <coral-tablist orientation="vertical" variant="page">
+        <coral-tab>Tab One</coral-tab>
+        <coral-tab icon="comment">Tab Two</coral-tab>
+        <coral-tab icon="home"></coral-tab>
+        <coral-tab disabled>Disabled</coral-tab>
+        <coral-tab invalid>Invalid</coral-tab>
+        <coral-tab invalid disabled>Invalid + Disabled</coral-tab>
+      </coral-tablist>
+
+      <h2 class="coral-Heading coral-Heading--2">Vertical Icons</h2>
+      <coral-tablist orientation="vertical">
+        <coral-tab icon="home" target="#panel_0"></coral-tab>
+        <coral-tab target="#panel_1">Tab One</coral-tab>
+        <coral-tab icon="delete" target="#panel_3">Tab Two</coral-tab>
+        <coral-tab target="#panel_4" disabled>Disabled</coral-tab>
+        <coral-tab icon="alert" target="#panel_5" invalid>Invalid</coral-tab>
+        <coral-tab icon="alert" target="#panel_6" invalid disabled>Invalid + Disabled</coral-tab>
       </coral-tablist>
     </section>
   </body>

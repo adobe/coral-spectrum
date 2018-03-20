@@ -20,14 +20,124 @@
   cursor: default;
 }
 
-// @spectrum align icon
-._coral-TabList-item-icon {
-  margin: 0 !important;
+// @spectrum support vertical line
+._coral-TabList--vertical ._coral-TabList-item-line {
+  top: 0;
 }
 
 // @spectrum align icon
-._coral-TabList-item-icon[size="S"] svg {
-  margin: 0 !important;
+._coral-TabList-item-icon {
+  position: relative;
+}
+
+// @spectrum vertically align icon
+._coral-TabList--horizontal {
+  ._coral-TabList-item-icon[size="XS"] {
+    top: -5*$px;
+  }
+
+  ._coral-TabList-item-icon[size="S"] {
+    top: -10*$px;
+  }
+
+  &._coral-TabList--anchored {
+    ._coral-TabList-item-icon[size="XS"] {
+      top: 8*$px;
+    }
+
+    ._coral-TabList-item-icon[size="S"] {
+      top: 10*$px;
+    }
+  }
+
+  &._coral-TabList--page {
+    ._coral-TabList-item-icon[size="XS"] {
+      top: 1*$px;
+    }
+
+    ._coral-TabList-item-icon[size="S"] {
+      top: 3*$px;
+    }
+  }
+}
+
+// @spectrum vertically align icon
+._coral-TabList--vertical {
+  ._coral-TabList-item-icon[size="XS"] {
+    top: -3*$px;
+  }
+
+  ._coral-TabList-item-icon[size="S"] {
+    top: -6*$px;
+  }
+
+  &._coral-TabList--anchored {
+    ._coral-TabList-item-icon[size="XS"] {
+      top: 3*$px;
+    }
+
+    ._coral-TabList-item-icon[size="S"] {
+      top: 6*$px;
+    }
+  }
+
+  &._coral-TabList--page {
+    ._coral-TabList-item-icon[size="XS"] {
+      top: 3*$px;
+    }
+
+    ._coral-TabList-item-icon[size="S"] {
+      top: 6*$px;
+    }
+  }
+}
+
+// @spectrum support text + icon
+._coral-TabList--anchored,
+._coral-TabList--page {
+  ._coral-TabList-item-icon[size="XS"] {
+    margin-right: 8*$px;
+  }
+}
+
+// @spectrum align item text in page/anchored variant
+._coral-TabList--vertical {
+  ._coral-TabList-item {
+    line-height: 14*$px;
+  }
+
+  &._coral-TabList--page,
+  &._coral-TabList--anchored {
+    ._coral-TabList-item {
+      line-height: 28*$px;
+    }
+  }
+}
+
+// @spectrum support vertical + page variant
+._coral-TabList--vertical._coral-TabList--page {
+  ._coral-TabList-item {
+    padding-left: 8*$px;
+  }
+}
+
+// @spectrum support vertical + anchored variant
+._coral-TabList--vertical._coral-TabList--anchored {
+  border-left-width: 2*$px;
+  border-left-style: solid;
+
+  ._coral-TabList-item-line {
+    left: -2*$px;
+  }
+
+  ._coral-TabList-item {
+    padding-left: 16*$px;
+    margin-top: 8*$px;
+
+    &:last-of-type {
+      margin-bottom: 8*$px;
+    }
+  }
 }
 
 @require 'light';
