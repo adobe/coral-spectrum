@@ -94,12 +94,15 @@ class ShellMenuBarItem extends ComponentMixin(HTMLElement) {
    @type {String}
    @default ButtonIconSizeEnum.SMALL
    @htmlattribute iconsize
+   @htmlattributereflected
    */
   get iconSize() {
     return this._elements.shellMenuButton.iconSize;
   }
   set iconSize(value) {
     this._elements.shellMenuButton.iconSize = value;
+    // Required for styling
+    this._reflectAttribute('iconsize', this.iconSize);
   }
   
   /**
