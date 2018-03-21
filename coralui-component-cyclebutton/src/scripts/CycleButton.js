@@ -93,12 +93,6 @@ class CycleButton extends ComponentMixin(HTMLElement) {
     
     // Attach events
     this._delegateEvents(events);
-  
-    // Assign the button as the target for the overlay (faster than querySelect the target via id)
-    overlay.target = this._elements.button;
-  
-    // Gives the focus back to button once the overlay is closed
-    overlay.returnFocusTo(this._elements.button);
     
     // Used for eventing
     this._oldSelection = null;
@@ -463,18 +457,16 @@ class CycleButton extends ComponentMixin(HTMLElement) {
       this._elements.button.setAttribute('aria-controls', uid);
       this._elements.button.setAttribute('aria-haspopup', true);
       this._elements.button.setAttribute('aria-expanded', false);
-  
-      // Setup overlay
-      this._elements.overlay.target = this._elements.button;
+      
+      this._elements.overlay.hidden = false;
     }
     else {
       this._elements.button.removeAttribute('aria-owns');
       this._elements.button.removeAttribute('aria-controls');
       this._elements.button.removeAttribute('aria-haspopup');
       this._elements.button.removeAttribute('aria-expanded');
-  
-      // Kill overlay
-      this._elements.overlay.target = null;
+      
+      this._elements.overlay.hidden = true;
     }
   }
   
@@ -646,6 +638,9 @@ class CycleButton extends ComponentMixin(HTMLElement) {
   
     // Inserting the template before the items
     this.insertBefore(frag, this.firstChild);
+  
+    // Assign the button as the target for the overlay
+    this._elements.overlay.target = this._elements.button;
     
     // Don't trigger events once connected
     this._preventTriggeringEvents = true;

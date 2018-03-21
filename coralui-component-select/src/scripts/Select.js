@@ -156,9 +156,6 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       // since reseting a form will call the reset on every component, we need to kill the behavior of the taglist
       // otherwise the state will not be accurate
     };
-  
-    // handles the focus allocation every time the overlay closes
-    this._elements.overlay.returnFocusTo(this._elements.button);
 
     this._initialValues = [];
 
@@ -1029,9 +1026,6 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     if (!event.target.open) {
       this.classList.remove('is-openAbove', 'is-openBelow');
     }
-  
-    // handles the focus allocation every time the overlay closes
-    this._elements.overlay.returnFocusTo(this._elements.button);
   }
   
   /** @private */
@@ -1371,6 +1365,9 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     frag.appendChild(this._elements.overlay);
     
     this.insertBefore(frag, this.firstChild);
+  
+    // Assign the button as the target for the overlay
+    this._elements.overlay.target = this._elements.button;
   }
   
   /** @ignore */
