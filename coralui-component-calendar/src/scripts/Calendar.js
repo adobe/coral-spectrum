@@ -247,7 +247,7 @@ class Calendar extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       return this._startDay;
     }
     
-    if (typeof DateTime.Moment.localeData().firstDayOfWeek !== 'undefined') {
+    if (typeof DateTime.Moment.localeData(i18n.locale).firstDayOfWeek !== 'undefined') {
       return DateTime.Moment.localeData(i18n.locale).firstDayOfWeek();
     }
     
