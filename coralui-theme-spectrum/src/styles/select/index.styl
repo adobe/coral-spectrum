@@ -40,9 +40,8 @@ coral-select-item {
   }
 
   ._coral-Button--dropdown {
-    ._coral-Dropdown-label ._coral-Icon,
-    ._coral-Dropdown-invalidIcon {
-      margin-top: 0;
+    ._coral-Dropdown-label > coral-icon:first-child {
+      margin-right: 4*$px;
     }
   }
 }
@@ -52,4 +51,8 @@ coral-select-item {
     display: block;
     opacity: 0.01;
   }
+}
+
+._coral-Select-overlay coral-selectlist-item-content > coral-icon:first-child {
+  margin-right: 8*$px;
 }

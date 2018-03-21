@@ -19,21 +19,19 @@ $colorinput-swatch-button-icon-color = white;
 $colorinput-button-icon-color = rgba(0, 0, 0, .4);
 $colorinput-button-hover-background-color = rgba(255, 255, 255, 0.1);
 
-._coral-ColorInput-overlay {
-  ._coral-ColorInput-propertiesSubview {
-    border-right-color: $colorinput-propertiessubview-border;
-  }
+._coral-ColorInput-propertiesSubview {
+  border-right-color: $colorinput-propertiessubview-border;
+}
 
-  ._coral-ColorInput-swatch {
-    &[selected] button {
+._coral-ColorInput-swatch {
+  &[selected] button {
+    coral-icon {
+      color: $colorinput-swatch-button-icon-color;
+    }
+
+    &._coral-ColorInput-swatch-novalue {
       coral-icon {
-        color: $colorinput-swatch-button-icon-color;
-      }
-
-      &._coral-ColorInput-swatch-novalue {
-        coral-icon {
-          color: $colorinput-button-icon-color;
-        }
+        color: $colorinput-button-icon-color;
       }
     }
   }

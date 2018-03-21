@@ -15,30 +15,16 @@
  * from Adobe Systems Incorporated.
  */
 
+// @spectrum support text + icon buttons
 ._coral-Button {
-  // @spectrum: force text-align for anchorbuttons
-  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-  // Support text + icon buttons
   coral-icon + coral-button-label:not(:empty):not([hidden]),
   coral-icon + coral-anchorbutton-label:not(:empty):not([hidden]),
   coral-button-label:not(:empty):not([hidden]) + coral-icon,
   coral-anchorbutton-label:not(:empty):not([hidden]) + coral-icon {
-    margin-left: 4*$px;
-  }
-
-// @spectrum: vertically align icon
-  &:not(._coral-Button--icon) {
-    coral-icon[size="XXS"] {
-      margin-top: 2*$px;
-    }
-
-    coral-icon[size="S"] {
-      margin-top: -4*$px;
-    }
-
-    coral-icon[size="M"] {
-      margin-top: -6*$px;
-    }
+    margin-left: 8*$px;
   }
 }

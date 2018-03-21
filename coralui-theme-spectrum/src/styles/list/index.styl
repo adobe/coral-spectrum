@@ -72,25 +72,13 @@
   &:focus {
     outline: none;
   }
-
-  coral-icon {
-    vertical-align: text-top;
-  }
 }
 
 ._coral-BasicList-item-icon {
   float: left;
 
+  margin-top: 6*$px;
   margin-right: 12*$px;
-
-  // Align icon correctly
-  line-height: 38*$px;
-
-  text-align: center;
-
-  svg {
-    vertical-align: baseline;
-  }
 
   // Hide if no icon
   &:empty {
@@ -143,12 +131,12 @@
   content: attr(label);
 }
 
-// Spectrum CSS overrides
+// @spectrum
 ._coral-SelectList-option {
   height: inherit;
 }
 
-// Spectrum CSS overrides
+// @spectrum
 ._coral-SelectList ._coral-SelectList-option {
   &:not(._coral-AnchorList-item):not(._coral-ButtonList-item):not(._coral-SelectList-item):hover {
     background-color: inherit;
