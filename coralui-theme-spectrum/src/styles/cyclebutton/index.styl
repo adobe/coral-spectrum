@@ -21,11 +21,6 @@ coral-cyclebutton-action {
   display: none;
 }
 
-coral-selectlist-item-content {
-  display: flex;
-  align-items: center;
-}
-
 ._coral-CycleSelect {
   box-sizing: border-box;
 
@@ -33,8 +28,15 @@ coral-selectlist-item-content {
   cursor: pointer;
 }
 
-._coral-CycleSelect-overlay {
-  width: 140*$px;
+// Expand list width based on content
+._coral-CycleSelect-buttonList {
+  ._coral-BasicList-item-contentContainer {
+    width: auto;
+  }
+
+  button[is="coral-buttonlist-item"] {
+    width: 100%;
+  }
 }
 
 ._coral-CycleSelect-icon {

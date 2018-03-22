@@ -36,16 +36,6 @@ $actionbar-container-padding-right = 15*$px;
 ._coral-ActionBar-secondary {
   position absolute;
 
-  > coral-popover {
-    display: table;
-    overflow: hidden;
-
-    ._coral-ActionBar-item > * {
-      width: 100%;
-      white-space: nowrap;
-    }
-  }
-
   > ._coral-ActionBar-item,
   > ._coral-Button[coral-actionbar-more] {
     display: block;
@@ -70,17 +60,14 @@ $actionbar-container-padding-right = 15*$px;
   right: $actionbar-container-padding-right;
 }
 
-._coral-ActionBar-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+// Expand list width based on content
+._coral-ActionBar-buttonList {
+  ._coral-BasicList-item-contentContainer {
+    width: auto;
+  }
 
-._coral-ActionBar-list-item {
-  margin: 0;
-  padding: 0;
-}
-
-._coral-ActionBar-popover {
-  max-width: 192*$px;
+  button[is="coral-buttonlist-item"] {
+    display: flex;
+    width: 100%;
+  }
 }

@@ -58,6 +58,18 @@
   }
 }
 
+// @spectrum support text + icon
+coral-selectlist-item-content {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  & > coral-icon:first-child {
+    position: relative;
+    top: 3*$px;
+  }
+}
+
 ._coral-BasicList,
 ._coral-BasicList-item,
 ._coral-SelectList-divider {
@@ -67,6 +79,8 @@
 ._coral-BasicList-item {
   text-decoration: none;
   text-align: left;
+  // Allows line breaks
+  height: auto;
 
   &.is-focused,
   &:focus {

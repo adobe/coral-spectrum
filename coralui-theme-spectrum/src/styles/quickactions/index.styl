@@ -47,14 +47,19 @@ coral-quickactions-item {
   }
 }
 
-._coral-QuickActions-overlay {
-  width: 140*$px;
-}
-
 ._coral-QuickActions-buttonList {
   // constrains the size of the list to 6 items
   max-height: 6*40*$px;
   overflow-y: auto;
   // removes the outline in FF
   outline: none;
+
+// Expand list width based on content
+  ._coral-BasicList-item-contentContainer {
+    width: auto;
+  }
+
+  button[is="coral-buttonlist-item"] {
+    width: 100%;
+  }
 }

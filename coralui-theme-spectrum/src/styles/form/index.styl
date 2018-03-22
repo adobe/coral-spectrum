@@ -65,176 +65,139 @@ $form-fieldset-line-height = 24*$px;
 /**
  * Indicates that the form is using vertical layout, where the label is placed above the field.
  */
-.coral-Form--vertical .coral-Form-field {
-  margin: 0 0 $form-vertical-vmargin-max;
-}
+.coral-Form--vertical {
+  .coral-Form-field {
+    margin: 0 0 $form-vertical-vmargin-max;
+  }
 
-.coral-Form--vertical .coral-Form-fieldlabel {
-  display: block;
-  line-height: $form-vertical-label-line-height;
-}
+  .coral-Form-fieldlabel {
+    display: block;
+    line-height: $form-vertical-label-line-height;
+  }
 
-.coral-Form--vertical .coral-Form-fieldwrapper {
-  position: relative;
-  display: block;
-}
+  .coral-Form-fieldwrapper {
+    position: relative;
+    display: block;
 
-.coral-Form--vertical .coral-Form-fieldwrapper--alignRight {
-  text-align: right;
-}
+    .coral-Form-fieldinfo,
+    .coral-Form-fielderror {
+      position: absolute;
+      top: 4*$px;
+      right: 0;
+    }
+  }
 
-.coral-Form--vertical .coral-Form-fieldwrapper .coral-Form-fieldinfo,
-.coral-Form--vertical .coral-Form-fieldwrapper .coral-Form-fielderror {
-  position: absolute;
-  top: 4*$px;
-  right: 0;
-}
+  .coral-Form-fieldwrapper--alignRight {
+    text-align: right;
+  }
 
-.coral-Form--vertical .coral-Form-fieldwrapper--singleline {
-  clearfix();
-}
+  .coral-Form-fieldwrapper--singleline {
+    clearfix();
 
-.coral-Form--vertical .coral-Form-fieldwrapper--singleline .coral-Form-field {
-  margin: 0;
-}
+    .coral-Form-field {
+      margin: 0;
+    }
 
-.coral-Form--vertical .coral-Form-fieldwrapper--singleline .coral-Form-fieldinfo,
-.coral-Form--vertical .coral-Form-fieldwrapper--singleline .coral-Form-fielderror {
-  float: left;
-  position: static;
-  margin-left: $form-hmargin;
-  margin-top: $form-vmargin;
+    .coral-Form-fieldinfo,
+    .coral-Form-fielderror {
+      float: left;
+      position: static;
+      margin-left: $form-hmargin;
+      margin-top: $form-vmargin;
+    }
+  }
 }
 
 /**
  * Indicates that the form is using aligned layout, where the label and the field are placed on the same line.
  */
-.coral-Form--aligned .coral-Form-field {
-  float: left;
-  margin: 0 0 $form-aligned-vmargin-max 0;
-}
+.coral-Form--aligned {
+  .coral-Form-field {
+    float: left;
+    margin: 0 0 $form-aligned-vmargin-max 0;
+  }
 
-.coral-Form--aligned .coral-Form-fieldwrapper {
-  clear: left;
-  display: block;
-  margin: 0 0 $form-aligned-vmargin-max 0;
+  .coral-Form-fieldwrapper {
+    clear: left;
+    display: block;
+    margin: 0 0 $form-aligned-vmargin-max 0;
 
-  clearfix();
-}
+    clearfix();
+  }
 
-.coral-Form--aligned .coral-Form-fieldwrapper--singleline {
-  margin-bottom: $form-vmargin-min;
-}
+  .coral-Form-fieldwrapper--singleline {
+    margin-bottom: $form-vmargin-min;
+  }
 
-.coral-Form--aligned .coral-Form-fieldset {
-  clearfix();
-}
+  .coral-Form-fieldset {
+    clearfix();
+  }
 
-.coral-Form--aligned .coral-Form-fieldlabel {
-  float: left;
-  clear: left;
-  margin: 0 $form-hmargin 0 0;
-  line-height: $form-aligned-label-line-height;
-  min-width: $form-aligned-label-min-width;
-}
+  .coral-Form-fieldlabel {
+    float: left;
+    clear: left;
+    margin: 0 $form-hmargin 0 0;
+    line-height: $form-aligned-label-line-height;
+    min-width: $form-aligned-label-min-width;
+  }
 
-.coral-Form--aligned .coral-Form-fieldlabel:empty + .coral-Form-field {
-  margin-left: $form-hmargin + $form-aligned-label-min-width;
-}
+  .coral-Form-fieldlabel:empty + .coral-Form-field {
+    margin-left: $form-hmargin + $form-aligned-label-min-width;
+  }
 
-.coral-Form--aligned .coral-Form-fieldwrapper .coral-Form-field {
-  margin-top: 0;
-  margin-bottom: 0;
-}
+  .coral-Form-fieldwrapper {
+    .coral-Form-field {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
 
-.coral-Form--aligned .coral-Form-fieldwrapper .coral-Form-fieldlabel {
-  margin-top: 0;
-  margin-bottom: 0;
-}
+    .coral-Form-fieldlabel {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
 
-.coral-Form--aligned .coral-Form-fieldwrapper .coral-Form-fieldinfo
-.coral-Form--aligned .coral-Form-fieldwrapper .coral-Form-fielderror {
-  float: left;
-  margin-left: $form-hmargin;
-  margin-top: $form-vmargin;
-}
+    .coral-Form-fieldinfo
+    .coral-Form-fielderror {
+      float: left;
+      margin-left: $form-hmargin;
+      margin-top: $form-vmargin;
+    }
+  }
 
-.coral-Form--aligned .coral-Form-fieldset {
+  .coral-Form-fieldset {
   // because of float, the margin of the field/fieldwrapper ($form-aligned-vmargin-max) is not collapsed
   // so reduce the margin-bottom of the fieldset (30px)
-  margin-bottom: 10*$px; // 30 - 20
-}
+    margin-bottom: 10*$px; // 30 - 20
+  }
 
-.coral-Form--vertical .coral-Form-field._coral-Autocomplete {
-  display: block;
-  width: 100%;
-}
-
-.coral-Form--vertical {
-  .coral-Form-field._coral-Calendar {
+  .coral-Form-field._coral-Textfield--multiline {
     display: block;
-    width: 100%;
-    max-width: 500*$px;
   }
 }
 
 .coral-Form--vertical {
-  .coral-Form-field._coral-Checkbox {
-    display: block;
-  }
-
-  .coral-Form-fieldwrapper--singleline .coral-Form-field._coral-Checkbox {
-    float: left;
-  }
-}
-
-.coral-Form--vertical .coral-Form-field._coral-ColorInput {
-  width: 100%;
-}
-
-.coral-Form--vertical .coral-Form-field.coral-DecoratedTextfield {
-  display: block;
-  width: 100%;
-}
-
-.coral-Form--vertical .coral-Form-field.coral-InputGroup {
-  display: table;
-  width: 100%;
-}
-
-.coral-Form--vertical .coral-Form-field._coral-Multifield {
-  display: block;
-}
-
-.coral-Form--vertical {
-
-  .coral-Form-field._coral-Radio {
-    display: block;
-  }
-
-  .coral-Form-fieldwrapper--singleline .coral-Form-field._coral-Radio {
-    float: left;
-  }
-}
-
-.coral-Form--vertical .coral-Form-field._coral-Select {
-  display: block;
-  width: 100%;
-}
-
-.coral-Form--vertical .coral-Form-field._coral-Slider {
-  display: block;
-
-  &:not(._coral-Slider--vertical) {
+  .coral-Form-field.coral-InputGroup,
+  .coral-Form-field.coral-DecoratedTextfield,
+  .coral-Form-field.coral-DecoratedTextfield .coral-DecoratedTextfield-input,
+  .coral-Form-field._coral-InputGroup,
+  .coral-Form-field._coral-Textfield,
+  .coral-Form-field._coral-Autocomplete,
+  .coral-Form-field._coral-Autocomplete ._coral-InputGroup,
+  .coral-Form-field._coral-Multifield,
+  .coral-Form-field._coral-Search,
+  .coral-Form-field._coral-Search ._coral-Search-input,
+  .coral-Form-field._coral-ColorInput,
+  .coral-Form-field._coral-Stepper,
+  .coral-Form-field._coral-Dropdown,
+  .coral-Form-field._coral-Slider:not(._coral-Slider--vertical) {
     width: 100%;
   }
-}
 
-.coral-Form--vertical .coral-Form-field._coral-Textfield{
-  display: block;
-  width: 100%;
-}
-
-.coral-Form--aligned .coral-Form-field._coral-Textfield--multiline {
-  display: block;
+  .coral-Form-fieldwrapper--singleline {
+    .coral-Form-field._coral-Checkbox,
+    .coral-Form-field._coral-Radio {
+      display: block;
+      float: left;
+    }
+  }
 }

@@ -142,6 +142,9 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // Interaction
     events[`global:key:shift+tab #${overlayId} [is="coral-buttonlist-item"]`] = '_handleListFocusShift';
   
+    // Overlay
+    events[`global:capture:coral-overlay:positioned #${overlayId}`] = '_onOverlayPositioned';
+    
     // SelectList
     events[`global:key:enter #${overlayId} button[is="coral-buttonlist-item"]`] = '_handleSelect';
     events[`global:capture:mousedown #${overlayId} button[is="coral-buttonlist-item"]`] = '_handleSelect';
@@ -1080,6 +1083,15 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       // Show suggestions that match in the DOM
       this.addSuggestions(this._getMatches(inputValue, this._optionContainsValue));
       this.showSuggestions();
+    }
+  }
+  
+  _onOverlayPositioned(event) {
+    // stops propagation cause the event is internal to the component
+    event.stopImmediatePropagation();
+    
+    if (this._elements.overlay.open) {
+      this._elements.overlay.style.minWidth = `${this.offsetWidth}px`;
     }
   }
   

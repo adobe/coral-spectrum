@@ -41,16 +41,6 @@ const variant = {
   QUIET: 'quiet'
 };
 
-/**
- Offset used to separate the overlay from the button based on the variant.
- 
- @private
- */
-const overlayOffset = {
-  default: -1,
-  quiet: 4
-};
-
 const CLASSNAME = '_coral-Dropdown';
 
 // used in 'auto' mode to determine if the client is on mobile.
@@ -564,9 +554,6 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
     this._elements.button.classList.toggle('_coral-Button--dropdown', this._variant === variant.DEFAULT);
     this._elements.button.classList.toggle('_coral-Button--quiet--dropdown', this._variant === variant.QUIET);
-    
-    // sets the separation of the overlay from the button based on the variant
-    this._elements.overlay.offset = overlayOffset[this._variant];
   }
   
   /** @ignore */
@@ -1033,8 +1020,7 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // stops propagation cause the event is internal to the component
     event.stopImmediatePropagation();
     
-    if (this.open) {
-      this.classList.add(event.detail.vertical === 'top' ? 'is-openBelow' : 'is-openAbove');
+    if (this._elements.overlay.open) {
       this._elements.overlay.style.minWidth = `${this.offsetWidth}px`;
     }
   }
