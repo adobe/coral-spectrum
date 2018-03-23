@@ -21,6 +21,12 @@ import {Promise} from '/coralui-externals';
 // Used for unique IDs
 let nextID = 0;
 
+// Remove namespace from global options
+const cleanOption = (name) => {
+  name = name.replace('coral', '');
+  return name.charAt(0).toLowerCase() + name.slice(1);
+};
+
 // Threshold time in milliseconds that the setTimeout will wait for the transitionEnd event to be triggered.
 const TRANSITION_DURATION_THRESHOLD = 100;
 
@@ -153,7 +159,33 @@ class Commons {
   
     focusableElements.push('[tabindex]:not([tabindex="-1"])');
     this._tabbableElementsSelector = focusableElements.join(':not([tabindex="-1"]),');
+  
+    const scripts = document.getElementsByTagName('script');
+    this._script = scripts[scripts.length - 1];
   }
+  
+  /**
+   Returns Coral global options retrieved on the <code><script></code> data attributes including:
+   - <code>[data-coral-icons]</code>: source folder of the SVG icons. If the icons are renamed, you'll have to load them
+   manually using {@link Icon.load}.
+   - <code>[data-coral-typekit]</code>: custom typekit id used to load the fonts.
+   
+   @returns {Object}
+   The global options object.
+   */
+  get options() {
+    const options = {};
+    const props = this._script.dataset;
+    for (const key in props) {
+      // Detect Coral namespaced options
+      if (key.indexOf('coral') === 0) {
+        options[cleanOption(key)] = props[key];
+      }
+    }
+    
+    return options;
+  }
+  
   /**
    Copy the properties from all provided objects into the first object.
    

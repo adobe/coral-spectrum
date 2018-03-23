@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 import {ComponentMixin} from '/coralui-mixin-component';
-import {transform, validate} from '/coralui-util';
+import {transform, validate, commons} from '/coralui-util';
 import ICON_MAP from '/coralui-compat/data/iconMap.json';
 import SPECTRUM_ICONS_PATH from '@spectrum/spectrum-css/dist/icons/spectrum-icons.svg';
 import SPECTRUM_ICONS_COLOR_PATH from '@spectrum/spectrum-css/dist/icons/spectrum-icons-color.svg';
@@ -25,6 +25,9 @@ import '@spectrum/spectrum-css/dist/icons/AS.loadIcons';
 const SPECTRUM_ICONS = 'spectrum-icons';
 const SPECTRUM_ICONS_COLOR = 'spectrum-icons-color';
 const SPECTRUM_CSS_ICONS = 'spectrum-css-icons';
+
+const ICONS = [SPECTRUM_ICONS, SPECTRUM_ICONS_COLOR, SPECTRUM_CSS_ICONS];
+const ICONS_PATH = commons.options.icons;
 
 const SPECTRUM_ICONS_IDENTIFIER = 'spectrum-';
 const SPECTRUM_COLORED_ICONS_IDENTIFIER = ['ColorLight', 'ColorDark', 'ColorActive'];
@@ -399,9 +402,12 @@ class Icon extends ComponentMixin(HTMLElement) {
   }
 }
 
-// Load icons
-Icon.load(SPECTRUM_ICONS);
-Icon.load(SPECTRUM_ICONS_COLOR);
-Icon.load(SPECTRUM_CSS_ICONS);
+// Load all icons by default
+if (ICONS_PATH) {
+  ICONS.forEach(iconSet => Icon.load(`${ICONS_PATH}${iconSet}.svg`));
+}
+else {
+  ICONS.forEach(iconSet => Icon.load(iconSet));
+}
 
 export default Icon;

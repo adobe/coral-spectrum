@@ -1,10 +1,6 @@
-import {events} from '/coralui-util';
+import {commons, events} from '/coralui-util';
 
-var typeKitId = 'ruf7eed';
-
-if (window.Coral && window.Coral.options && window.Coral.options.typeKitId) {
-  typeKitId = window.Coral.options.typeKitId;
-}
+var typeKitId = commons && commons.options.typekit || 'ruf7eed';
 
 var config = {
   kitId: typeKitId,
