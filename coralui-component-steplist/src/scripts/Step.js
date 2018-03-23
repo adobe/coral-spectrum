@@ -177,6 +177,9 @@ class Step extends ComponentMixin(HTMLElement) {
   
     // Discard the template created tooltip if one is provided by markup
     this._elements.tooltip = this.querySelector('coral-tooltip') || this._elements.tooltip;
+  
+    // Cannot be open by default when rendered
+    this._elements.tooltip.removeAttribute('open');
     
     // Render main template
     frag.appendChild(this._elements.stepMarkerContainer);
@@ -206,11 +209,24 @@ class Step extends ComponentMixin(HTMLElement) {
     
     this.appendChild(frag);
   
+    // Link tooltip target
+    this._elements.tooltip.target = this._elements.stepMarkerContainer;
+    
     // Assign the content zone so the insert function will be called
     this.label = label;
     
     // Measure hybrid potential
     this._isHybrid();
+  }
+  
+  /** @ignore */
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    
+    // In case it was moved out don't forget to remove it
+    if (!this.contains(this._elements.tooltip)) {
+      this._elements.tooltip.remove();
+    }
   }
 }
 
