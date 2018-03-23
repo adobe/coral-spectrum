@@ -1,7 +1,7 @@
 /*
  * ADOBE CONFIDENTIAL
  *
- * Copyright 2017 Adobe Systems Incorporated
+ * Copyright 2018 Adobe Systems Incorporated
  * All Rights Reserved.
  *
  * NOTICE:  All information contained herein is, and remains
@@ -15,23 +15,6 @@
  * from Adobe Systems Incorporated.
  */
 
-// @spectrum support text + icon
-coral-tag-label {
-  display: flex;
-  align-items: center;
+.coral--light {
+  @import 'skin.styl'
 }
-
-// Support multiline
-._coral-TagList-item--multiline {
-  height: auto;
-
-  ._coral-TagList-item-label {
-    white-space: inherit;
-    text-overflow: inherit;
-  }
-}
-
-@require 'light';
-@require 'lightest';
-@require 'dark';
-@require 'darkest';

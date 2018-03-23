@@ -110,7 +110,7 @@ describe('Select', function() {
         expect(el.selectedItem).to.equal(item1);
         expect(el.selectedItems).to.deep.equal([item1, item2]);
         // should update to the default placeholder for multiple
-        expect(el._elements.label.textContent).to.equal('Select', 'should be the default ');
+        expect(el._elements.label.textContent).to.equal('Item 1, Item 2');
   
         // we switch back to single
         el.multiple = false;
@@ -148,7 +148,7 @@ describe('Select', function() {
         expect(el.placeholder).to.equal('');
         
         // should update to the default placeholder for multiple
-        expect(el._elements.label.textContent).to.equal('Select');
+        expect(el._elements.label.textContent).to.equal('Item 1');
 
         // we switch back to single
         el.multiple = false;
@@ -160,6 +160,7 @@ describe('Select', function() {
       // case 8: !p +  m + !se = 'Select'
       it('should show "Select" if no placeholder, multiple and nothing selected', function() {
         el.multiple = true;
+        el.selectedItem.selected = false;
         
         expect(el.placeholder).to.equal('');
         expect(el._elements.label.textContent).to.equal('Select');
@@ -178,20 +179,21 @@ describe('Select', function() {
 
         // activates the multiple
         el.multiple = true;
+        el.selectedItem.selected = false;
         
         // should update to the default placeholder for multiple
         expect(el._elements.label.textContent).to.equal('Select');
       });
 
       // case 7: !p +  m +  se = 'Select'
-      it('should say "Select" in the label if multiple=true and there is selection', function() {
+      it('should enumerate the selected items in the label if multiple=true and there is selection', function() {
         // we wait for the selection to happen
         el.multiple = true;
 
         expect(el.selectedItem).to.equal(item1);
         expect(el.selectedItems).to.deep.equal([item1]);
         expect(el.placeholder).to.equal('');
-        expect(el._elements.label.textContent).to.equal('Select');
+        expect(el._elements.label.textContent).to.equal('Item 1');
       });
 
       // case 7: !p +  m +  se = 'Select'
@@ -210,9 +212,10 @@ describe('Select', function() {
 
         // we change to multiple to see if the label is correctly updated
         el.multiple = true;
+        item1.selected = true;
         
         // should show the default placeholder since we are multiple
-        expect(el._elements.label.textContent).to.equal('Select');
+        expect(el._elements.label.textContent).to.equal('Item 1, Item 2');
       });
 
       // case 5:  p + !m +  se = se
@@ -1293,7 +1296,7 @@ describe('Select', function() {
       });
 
       // case 7: !p +  m +  se = 'Select'
-      it('should say "Select" in the label if multiple and has a selected item', function() {
+      it('should enumerate the selected items in the label if multiple and has a selected item', function() {
         const el = helpers.build(window.__html__['Select.multiple.selected.html']);
         var items = el.items.getAll();
 
@@ -1301,7 +1304,7 @@ describe('Select', function() {
         expect(el.selectedItem).to.equal(items[1]);
         expect(el.selectedItems).to.deep.equal([items[1], items[3]]);
 
-        expect(el._elements.label.textContent).to.equal('Select');
+        expect(el._elements.label.textContent).to.equal('Africa, Europe');
       });
     });
 

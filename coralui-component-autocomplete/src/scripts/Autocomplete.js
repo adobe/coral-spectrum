@@ -130,6 +130,7 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       'capture:blur [handle="input"]': '_handleInputFocusOut',
   
       // Taglist
+      'coral-collection:add [handle="tagList"]': '_handleTagAdded',
       'coral-collection:remove [handle="tagList"]': '_handleTagRemoved',
       'change [handle="tagList"]': '_preventTagListChangeEvent',
     
@@ -1527,6 +1528,11 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     event.stopImmediatePropagation();
   }
   
+  _handleTagAdded() {
+    // Forces tags to wrap
+    this._elements.tagList.style.width = `${this.offsetWidth}px`;
+  }
+  
   /**
    Handle tags that are removed by the user.
    
@@ -1798,8 +1804,10 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     }
     
     if (this._elements.overlay.open) {
-      // Reposition as the length of the list may have changed
-      this._elements.overlay.reposition();
+      // Force overlay repositioning (remote loading)
+      requestAnimationFrame(() => {
+        this._elements.overlay.reposition();
+      });
     }
     else {
       // Just show

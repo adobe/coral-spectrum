@@ -256,7 +256,7 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   // case 4: !p + !m + !se = firstSelectable (native behavior)
   // case 5:  p + !m +  se = se
   // case 6:  p + !m + !se = p
-  // case 7: !p +  m +  se = 'Select'
+  // case 7: !p +  m +  se = selectedItems
   // case 8: !p +  m + !se = 'Select'
   get placeholder() {
     return this._placeholder || '';
@@ -264,6 +264,8 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   set placeholder(value) {
     this._placeholder = transform.string(value);
     this._reflectAttribute('placeholder', this._placeholder);
+    
+    let limitWidth = false;
     
     // case 1:  p +  m +  se = p
     // case 2:  p +  m + !se = p
@@ -275,8 +277,17 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // case 7: !p +  m +  se = 'Select'
     // case 8: !p +  m + !se = 'Select'
     else if (this.hasAttribute('multiple')) {
-      this._elements.label.classList.add('is-placeholder');
-      this._elements.label.textContent = i18n.get('Select');
+      // case 7: !p +  m +  se = selectedItems
+      if (this.selectedItem) {
+        limitWidth = true;
+        this._elements.label.classList.remove('is-placeholder');
+        this._elements.label.textContent = this.selectedItems.map(item => item.textContent.trim()).join(', ');
+      }
+      // case 8: !p +  m + !se = 'Select'
+      else {
+        this._elements.label.classList.add('is-placeholder');
+        this._elements.label.textContent = i18n.get('Select');
+      }
     }
     // case 4: !p + !m + !se = firstSelectable (native behavior)
     else if (!this.selectedItem) {
@@ -297,6 +308,9 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
         this._elements.label.textContent = '';
       }
     }
+    
+    // case 7: limit width to allow text ellipsis
+    this.style.maxWidth = limitWidth ? `${this.offsetWidth}px` : '';
   }
   
   /**
@@ -608,8 +622,11 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     if (!this._useNativeInput) {
       // Show the overlay
       this._elements.overlay.open = true;
-      // Force overlay repositioning to adapt overlay width to the select width
-      this._elements.overlay.reposition();
+  
+      // Force overlay repositioning (remote loading)
+      requestAnimationFrame(() => {
+        this._elements.overlay.reposition();
+      });
     }
     
     // Trigger an event
@@ -902,7 +919,6 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     item._tag = item._tag || new Tag();
     item._tag.set({
       value: item.value,
-      multiline: true,
       label: {
         innerHTML: item.innerHTML
       }
