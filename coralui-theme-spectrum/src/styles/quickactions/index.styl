@@ -26,10 +26,10 @@ coral-quickactions-item {
 }
 
 ._coral-QuickActions {
+  // @spectrum
+  justify-content: center;
+
   position: absolute;
-  display: block;
-  // important: must match button outer height
-  max-height: 38*$px;
   // prevents flash of un-styled content
   visibility: hidden;
   // removes focus around the QuickActions container
@@ -51,8 +51,6 @@ coral-quickactions-item {
   // constrains the size of the list to 6 items
   max-height: 6*40*$px;
   overflow-y: auto;
-  // removes the outline in FF
-  outline: none;
 
 // Expand list width based on content
   ._coral-BasicList-item-contentContainer {

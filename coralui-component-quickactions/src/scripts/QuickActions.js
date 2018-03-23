@@ -26,8 +26,8 @@ import '/coralui-component-popover';
 import base from '../templates/base';
 import {transform, validate, commons, i18n} from '/coralui-util';
 
-// MUST be kept in sync with quickactions.styl $coral-quickactions-button-gap
-const BUTTON_GAP = 10;
+// MUST be kept in sync with quickactions styles
+const BUTTON_GAP = 12;
 const BUTTON_FOCUSABLE_SELECTOR = '._coral-QuickActions-item:not([disabled]):not([hidden])';
 
 /**
@@ -592,9 +592,8 @@ class QuickActions extends Overlay {
     }
     
     const totalAvailableWidth = this.offsetWidth - BUTTON_GAP;
-    const buttonMinWidth = window.getComputedStyle(buttons[0], null).getPropertyValue('min-width');
-    const buttonWidth = Math.round(parseFloat(buttonMinWidth, 10));
-    const buttonOuterWidth = buttonWidth + BUTTON_GAP;
+    const buttonOuterWidth = buttons[0].offsetWidth + BUTTON_GAP;
+    
     let totalFittingButtons = 0;
     let widthUsed = 0;
     
@@ -664,12 +663,7 @@ class QuickActions extends Overlay {
       this._elements.moreButton.hide();
     }
     
-    // Center the buttons horizontally
-    const totalButtonWidth = totalButtons * buttonOuterWidth;
-    const shift = Math.round((totalAvailableWidth - totalButtonWidth) / 2);
-    this.style.paddingLeft = `${shift}px`;
-    
-    // Reset the QuickActions display if necessary
+    // Reset the QuickActions display
     if (temporarilyShown) {
       this.style.left += 10000;
       this.style.top += 10000;
