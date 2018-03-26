@@ -25,12 +25,16 @@ module.exports = function(gulp) {
   gulp.task('scripts', function() {
     return gulp.src('index.js')
       .pipe(plumber())
-      .pipe(sourceMaps.init())
+      .pipe(sourceMaps.init({largeFile: true}))
       .pipe(rollup({
         moduleName: 'Coral',
         plugins: rollupConfig.plugins
       }, 'iife'))
-      .pipe(sourceMaps.write())
+      .pipe(sourceMaps.write('.', {
+        sourceMappingURL: () => {
+          return 'coral.map';
+        }
+      }))
       .pipe(rename({
         dirname: 'js',
         basename: 'coral'
