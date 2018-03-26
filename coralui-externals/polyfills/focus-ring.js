@@ -82,12 +82,20 @@
   }
   
   function onFocusHandler(event) {
+    if (event.target === document) {
+      return;
+    }
+    
     if (keyboardFocus) {
       event.target.classList.add('focus-ring');
     }
   }
   
   function onBlurHandler(event) {
+    if (event.target === document) {
+      return;
+    }
+    
     event.target.classList.remove('focus-ring');
   }
   
