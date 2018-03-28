@@ -599,6 +599,9 @@ class Dialog extends OverlayMixin(ComponentMixin(HTMLElement)) {
   
     // The content zone target requires the dialog class in case of multiple wrappers
     this._elements.contentZoneTarget.classList.add(CLASSNAME);
+  
+    // The content zone target requires the is-open class in case of multiple wrappers
+    this._elements.contentZoneTarget.classList.toggle('is-open', this.open);
     
     // Remove content zones so we can process children
     if (header.parentNode) { header.remove(); }
