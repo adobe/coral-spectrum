@@ -44,6 +44,9 @@ module.exports = function(gulp) {
           content = content.replace(selectors.spectrum, selectors.coral);
         });
         
+        // Remove topdoc comments
+        content = content.replace(/\/\* topdoc.*[\s\S]*?\*\//g, '');
+        
         return content;
       }))
       .pipe(gulp.dest(function (file) {
