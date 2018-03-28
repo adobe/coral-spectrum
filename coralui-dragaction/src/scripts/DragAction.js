@@ -15,6 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
+import {Vent} from '/coralui-externals';
 import {events, validate, transform, commons} from '/coralui-util';
 
 // Attributes
@@ -233,7 +234,7 @@ class DragAction {
     };
   
     // Prepare Vent
-    this._dragEvents = new window.Vent(this._dragElement);
+    this._dragEvents = new Vent(this._dragElement);
   
     // Handle options. Binds events to dragElement if no handles defined or found
     this.handle = this._dragElement.getAttribute(HANDLE_ATTRIBUTE);
@@ -314,7 +315,7 @@ class DragAction {
       if (this._handles && this._handles.length) {
         const self = this;
         this._handles.forEach((handle) => {
-          handle._dragEvents = handle._dragEvents || new window.Vent(handle);
+          handle._dragEvents = handle._dragEvents || new Vent(handle);
           handle._dragEvents.on('mousedown.CoralDragAction', self._dragStart.bind(self));
           handle._dragEvents.on('touchstart.CoralDragAction', self._dragStart.bind(self));
           handle.classList.add(OPEN_HAND_CLASS);
