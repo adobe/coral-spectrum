@@ -56,12 +56,17 @@
         </coral-alert-content>
       </coral-alert>
 
+      <h2 class="coral-Heading coral-Heading--2">With content only</h2>
+      <coral-alert variant="error">
+        <coral-alert-content>Something went wrong.</coral-alert-content>
+      </coral-alert>
+
       <h2 class="coral-Heading coral-Heading--2">Closable</h2>
       <coral-alert variant="success">
         <coral-alert-header>Success</coral-alert-header>
         <coral-alert-content>Everything went better than expected.</coral-alert-content>
         <coral-alert-footer>
-          <button is="coral-button" variant="quiet" coral-close>Close</button>
+          <a href="#" onclick="event.preventDefault()" class="coral-Link" coral-close>You can click me to close the alert</a>
         </coral-alert-footer>
       </coral-alert>
     </section>
