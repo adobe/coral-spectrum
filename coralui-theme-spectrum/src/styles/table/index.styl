@@ -438,21 +438,47 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
 
   coral-checkbox[coral-table-rowselect] {
     & + img {
+      vertical-align: text-top;
       height: 24*$px;
       width: 24*$px;
       line-height: 24*$px;
-      vertical-align: top;
       object-fit: cover;
-      margin-top: 4*$px;
+      margin-top: 2*$px;
       margin-left: 4*$px;
     }
 
     & + coral-icon {
-      vertical-align: middle;
+      vertical-align: text-top;
       text-align: center;
       width: 24*$px;
       margin-left: 4*$px;
-      margin-top: 7*$px;
+      margin-top: 5*$px;
+    }
+  }
+}
+
+table[is="coral-table"]:not([selectable]) {
+  td[is="coral-table-cell"],
+  th[is="coral-table-headercell"] {
+    [coral-table-select],
+    [coral-table-rowselect] {
+      display: none;
+    }
+
+    [coral-table-rowselect] {
+      & + img,
+      & + coral-icon {
+        margin: 0;
+      }
+    }
+  }
+}
+
+tr[is="coral-table-row"]:not([selectable]) {
+  td[is="coral-table-cell"],
+  th[is="coral-table-headercell"] {
+    [coral-table-cellselect] {
+      display: none;
     }
   }
 }
@@ -535,6 +561,15 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
 
     &:not(.is-selected) ._coral-Table-cell {
       cursor: pointer;
+    }
+  }
+}
+
+table[is="coral-table"]:not([lockable]) {
+  td[is="coral-table-cell"],
+  th[is="coral-table-headercell"] {
+    [coral-table-rowlock] {
+      display: none;
     }
   }
 }
@@ -687,6 +722,15 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
       cursor: move !important;
       cursor: -webkit-grabbing !important;
       cursor: grabbing !important;
+    }
+  }
+}
+
+table[is="coral-table"]:not([orderable]) {
+  td[is="coral-table-cell"],
+  th[is="coral-table-headercell"] {
+    [coral-table-roworder] {
+      display: none;
     }
   }
 }
