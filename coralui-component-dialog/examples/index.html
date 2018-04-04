@@ -236,7 +236,11 @@
           <form action="/submit" method="post">
             <input type="hidden" value="">
             <coral-dialog-header>Dialog with a Multiple wrappers</coral-dialog-header>
-            <coral-dialog-content>I have 3 wrappers</coral-dialog-content>
+            <coral-dialog-content>
+              <div style="width:800px;height:600px;">
+                I have 3 wrappers
+              </div>
+            </coral-dialog-content>
             <coral-dialog-footer><button is="coral-button" variant="primary" coral-close>Submit</button></coral-dialog-footer>
           </form>
         </coral-fileupload>

@@ -327,11 +327,6 @@ class Dialog extends OverlayMixin(ComponentMixin(HTMLElement)) {
   }
   set open(value) {
     super.open = value;
-  
-    if (this._elements.contentZoneTarget) {
-      // The content zone target requires the is-open class in case of multiple wrappers
-      this._elements.contentZoneTarget.classList.toggle('is-open', this.open);
-    }
     
     // Ensure we're in the DOM
     if (this.open && document.body.contains(this)) {
@@ -339,6 +334,9 @@ class Dialog extends OverlayMixin(ComponentMixin(HTMLElement)) {
       
       // If not child of document.body, we have to move it there
       this._moveToDocumentBody();
+  
+      // Support wrapped dialog
+      this.classList.toggle(`${CLASSNAME}--wrapped`, this._elements.contentZoneTarget !== this);
     
       // Show the backdrop, if necessary
       if (this.backdrop !== backdrop.NONE) {
@@ -596,12 +594,6 @@ class Dialog extends OverlayMixin(ComponentMixin(HTMLElement)) {
     else {
       this._elements.contentZoneTarget = this;
     }
-  
-    // The content zone target requires the dialog class in case of multiple wrappers
-    this._elements.contentZoneTarget.classList.add(CLASSNAME);
-  
-    // The content zone target requires the is-open class in case of multiple wrappers
-    this._elements.contentZoneTarget.classList.toggle('is-open', this.open);
     
     // Remove content zones so we can process children
     if (header.parentNode) { header.remove(); }

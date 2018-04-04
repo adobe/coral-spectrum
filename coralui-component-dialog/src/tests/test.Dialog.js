@@ -481,6 +481,9 @@ describe('Dialog', function() {
         expect(wrapper1.contains(el.header)).to.equal(true, 'wrapper1 should contain header');
         expect(wrapper1.contains(el.content)).to.equal(true, 'wrapper1 should contain content');
         expect(wrapper1.contains(el.footer)).to.equal(true, 'wrapper1 should contain footer');
+        
+        el.open = true;
+        expect(el.classList.contains('_coral-Dialog--wrapped')).to.be.true;
       });
   
       it('should wrap internal elements', function() {

@@ -24,6 +24,13 @@
   }
 }
 
+// @compat fix header in wrapped dialog
+._coral-Dialog--wrapped:not(._coral-Dialog--fullscreenTakeover) ._coral-Dialog-title {
+  position: relative;
+  overflow: visible;
+  top: -18*$px;
+}
+
 // @spectrum
 coral-dialog-footer {
   display: block;
