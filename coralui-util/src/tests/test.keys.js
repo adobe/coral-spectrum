@@ -298,31 +298,48 @@ describe('keys', function() {
 
   it('should support non-alphanumeric keys', function() {
     var sequence = '';
-    var character;
-    var keysMap = { ',': 188, '.': 190, '/': 191,
-        '`': 192, 'minus': 189, 'plus': 107, '=': 187,
-        ';': 186, '\'': 222,
-        '[': 219, ']': 221, '\\': 220 };
+    const characters = ['plus', 'minus', '+', ',', '.', '/', '=', ';', '\'', ']', '\\'];
 
     function makeSequencer(character) {
       return function() {
         sequence += character;
       };
     }
-
-    for (character in keysMap) {
+  
+    characters.forEach((character) => {
       keys.on(character, makeSequencer(character));
-      helpers.keypress(keysMap[character]);
-    }
-
-    expect(sequence).to.equal(',./`minusplus=;\'[]\\');
-
-    for (character in keysMap) {
+      helpers.keypress(character);
+    });
+  
+    expect(sequence).to.equal('plusminus+,./=;\']\\');
+  
+    characters.forEach((character) => {
       keys.off(character);
-      helpers.keypress(keysMap[character]);
-    }
-
-    expect(sequence).to.equal(',./`minusplus=;\'[]\\');
+      helpers.keypress(character);
+    });
+  
+    expect(sequence).to.equal('plusminus+,./=;\']\\');
+  
+    // Test the key "[" separately because the key charcode which is generated with the keyhelper is reserved inside
+    // the implementation with the modifier key 91
+    sequence = '';
+    keys.on('[', makeSequencer('['));
+    helpers.keypress(221, null, null, '[');
+    expect(sequence).to.equal('[');
+  });
+  
+  it('should support whitespace keys', function() {
+    var enterSpy = sinon.spy();
+    var spaceSpy = sinon.spy();
+    
+    keys.on('enter', enterSpy);
+    keys.on('space', spaceSpy);
+    keys.on(' ', spaceSpy);
+    
+    helpers.keypress(32); // space
+    expect(spaceSpy.callCount).to.equal(2, 'Space key was pressed');
+    helpers.keypress(13); // enter
+    expect(enterSpy.callCount).to.equal(1, 'Enter key was pressed');
   });
 
   it('should support both the top row of number keys and the numeric keypad', function() {

@@ -76,62 +76,51 @@ const normalizedCodes = {
   105: 57
 };
 
+// These keys are also implicitely used external
 const specialKeyCodes = {
-  'backspace': 8,
-  'tab': 9,
-  'return': 13,
-  'enter': 13,
-  'pause': 19,
-  'capslock': 20,
-  'esc': 27,
-  'escape': 27,
-  'space': 32,
-  'pageup': 33,
-  'pagedown': 34,
-  'end': 35,
-  'home': 36,
-  'left': 37,
-  'up': 38,
-  'right': 39,
-  'down': 40,
-  'insert': 45,
-  'del': 46,
-  'delete': 46,
-  ';': 186,
-  '=': 187,
-  '*': 106,
-  'plus': 107,
-  'minus': 189,
-  '.': 190,
-  'period': 190,
-  '/': 191,
-  'f1': 112,
-  'f2': 113,
-  'f3': 114,
-  'f4': 115,
-  'f5': 116,
-  'f6': 117,
-  'f7': 118,
-  'f8': 119,
-  'f9': 120,
-  'f10': 121,
-  'f11': 122,
-  'f12': 123,
-  'f13': 124,
-  'f14': 125,
-  'f15': 126,
-  'f16': 127,
-  'f17': 128,
-  'f18': 129,
-  'f19': 130,
-  'numlock': 144,
-  'scroll': 145,
-  ',': 188,
-  '`': 192,
-  '[': 219,
-  '\\': 220,
-  ']': 221,
-  '\'': 222
+  backspace: 8,
+  tab: 9,
+  return: 13, // real event key is "enter" this will be mapped internally
+  pause: 19,
+  capslock: 20,
+  esc: 27,
+  escape: 27,
+  space: 32, // real event key is " " this will be mapped internally
+  pageup: 33,
+  pagedown: 34,
+  end: 35,
+  home: 36,
+  left: 37, // real event key is "arrowLeft" this will be mapped internally
+  up: 38, // real event key is "arrowUp" this will be mapped internally
+  right: 39, // real event key is "arrowRight" this will be mapped internally
+  down: 40, // real event key is "arrowDown" this will be mapped internally
+  insert: 45,
+  del: 46,
+  delete: 46,
+  period: 190,
+  plus: 107,
+  minus: 189,
+  f1: 112,
+  f2: 113,
+  f3: 114,
+  f4: 115,
+  f5: 116,
+  f6: 117,
+  f7: 118,
+  f8: 119,
+  f9: 120,
+  f10: 121,
+  f11: 122,
+  f12: 123,
+  f13: 124,
+  f14: 125,
+  f15: 126,
+  f16: 127,
+  f17: 128,
+  f18: 129,
+  f19: 130,
+  numlock: 144,
+  scroll: 145
 };
 
 // Match a namespaced event, such as ctrl+r.myNS
@@ -158,6 +147,26 @@ function normalizeCode(code) {
   return normalizedCodes[code] || code;
 }
 
+function mapSpecialEventKeyToSpecialAPIDefinition(eventKey) {
+  // The official event.key is not compatible with this API special key registration, so map them
+  switch (eventKey) {
+    case 'enter':
+      return 'return';
+    case ' ':
+      return 'space';
+    case 'arrowup':
+      return 'up';
+    case 'arrowdown':
+      return 'down';
+    case 'arrowleft':
+      return 'left';
+    case 'arrowright':
+      return 'right';
+    default:
+      return eventKey;
+  }
+}
+
 /**
  Convert a key to its character code representation.
  
@@ -167,7 +176,7 @@ function normalizeCode(code) {
  @return {*|Number}
  */
 function keyToCode(key) {
-  key = key.toLowerCase();
+  key = mapSpecialEventKeyToSpecialAPIDefinition(key.toLowerCase());
   
   // Map special string representations to their character code equivalent
   const code = specialKeyCodes[key] || modifierCodes[key];
@@ -178,6 +187,23 @@ function keyToCode(key) {
   
   // Return the special code from the map or the char code repesenting the character
   return code || key.toUpperCase().charCodeAt(0);
+}
+
+function cleanupFilteredListeners(keycombo, listeners, event) {
+  const result = [];
+  if (!listeners || !event.key || keycombo.indexOf('+') > 0) {
+    return listeners;
+  }
+  
+  // Check there is no registration conflict for same code registrations
+  // For example: "." keyCharCode is 46 and "delete" keyCode is also 46
+  const key = mapSpecialEventKeyToSpecialAPIDefinition(event.key.toLowerCase());
+  for (let i = 0; i < listeners.length; i++) {
+    if (listeners[i].originalString.indexOf(key) === 0 || key.indexOf(listeners[i].originalString) === 0) {
+      result.push(listeners[i]);
+    }
+  }
+  return result;
 }
 
 /**
@@ -346,7 +372,18 @@ class Keys {
     let listeners = [];
     
     // Execute listeners associated with the current key combination
-    const comboListeners = this._keyListeners[this._currentKeyCombo];
+    let comboListeners = this._keyListeners[this._currentKeyCombo];
+    comboListeners = cleanupFilteredListeners(this._currentKeyCombo, comboListeners, event);
+  
+    // If it is a combo key combination but we listen on the final key combination result or on special single char like "/"
+    // E.g. we listen on "/" but the user presses "Shift+7" on a german-swiss keyboard
+    // or we listen on "/" on the single key event on a US layout keyboard
+    if (!keyup && !comboListeners) {
+      if (event.key) {
+        comboListeners = this._keyListeners[event.key.charCodeAt(0)];
+        comboListeners = cleanupFilteredListeners(this._currentKeyCombo, comboListeners, event);
+      }
+    }
     
     let sequenceListeners;
     if (!keyup) {
@@ -539,9 +576,9 @@ class Keys {
     // Determine if this selector needs context when evaluating event delegation
     // A selector needs context when it includes things like >, ~, :first-child, etc
     const needsContext = selector ? needsContextRE.test(selector) : false;
-    
-    // Check if the stirng is a sequence or a keypress
-    if (keyCombo.toString().indexOf('-') !== -1) {
+  
+    // Check if the string is a sequence or a keypress
+    if (keyCombo.toString().indexOf('-') !== -1 && keyCombo.toString().length > 1) {
       // It's a sequence!
       
       // Divide it into its parts and convert to a code string
@@ -789,8 +826,13 @@ class Keys {
    @ignore
    */
   _keyComboToCodeString(keyCombo) {
+    // if single "+"
+    if (keyCombo === '+') {
+      return keyToCode(keyCombo);
+    }
+  
     return keyCombo
-    // Convert to string so numbers are supported
+      // Convert to string so numbers are supported
       .toString()
       .split('+')
       .map(keyToCode)

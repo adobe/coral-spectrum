@@ -58,6 +58,38 @@
       }
     });
 
+    Coral.keys.on('?', function() {
+      document.querySelector('#_question').classList.add('dirty');
+      return false;
+    });
+    Coral.keys.on('/', function() {
+      document.querySelector('#_slash').classList.add('dirty');
+      return false;
+    });
+    Coral.keys.on('-', function() {
+      document.querySelector('#_minus').classList.add('dirty');
+      return false;
+    });
+    Coral.keys.on('+', function() {
+      document.querySelector('#_plus').classList.add('dirty');
+      return false;
+    });
+    Coral.keys.on(',', function() {
+      document.querySelector('#_comma').classList.add('dirty');
+      return false;
+    });
+    Coral.keys.on('.', function() {
+      document.querySelector('#_dot').classList.add('dirty');
+      return false;
+    });
+    Coral.keys.on(':', function() {
+      document.querySelector('#_colon').classList.add('dirty');
+      return false;
+    });
+    Coral.keys.on(';', function() {
+      document.querySelector('#_semicolon').classList.add('dirty');
+      return false;
+    });
 
     Coral.keys.on('ctrl+command+a', function() {
       document.querySelector('#_ctrl_command_a').classList.add('dirty');
@@ -71,7 +103,6 @@
       document.querySelector('#_ctrl_shift_a').classList.add('dirty');
       return false;
     });
-
     Coral.keys.on('command+alt+a', function() {
       document.querySelector('#_command_alt_a').classList.add('dirty');
       return false;
@@ -1028,6 +1059,10 @@
       document.querySelector('#_Shift_f12').classList.add('dirty');
       return false;
     });
+    Coral.keys.on('Shift+/', function() {
+      document.querySelector('#_Shift_slash').classList.add('dirty');
+      return false;
+    });
     Coral.keys.on('Alt+esc', function() {
       document.querySelector('#_Alt_esc').classList.add('dirty');
       return false;
@@ -1207,6 +1242,9 @@
   <div id="_f10" class="eventNotifier">f10</div>
   <div id="_f11" class="eventNotifier">f11</div>
   <div id="_f12" class="eventNotifier">f12</div>
+  <div id="_question" class="eventNotifier">?</div><div id="_slash" class="eventNotifier">/</div>
+  <div id="_minus" class="eventNotifier">-</div><div id="_plus" class="eventNotifier">+</div><div id="_comma" class="eventNotifier">,</div><div id="_dot" class="eventNotifier">.</div>
+  <div id="_colon" class="eventNotifier">:</div><div id="_semicolon" class="eventNotifier">;</div>
   <div style="clear: both;"/>
 
   <h2>0-9 Digits</h2>
@@ -1541,6 +1579,7 @@
   <div id="_Shift_f10" class="eventNotifier">Shift+f10</div>
   <div id="_Shift_f11" class="eventNotifier">Shift+f11</div>
   <div id="_Shift_f12" class="eventNotifier">Shift+f12</div>
+  <div id="_Shift_slash" class="eventNotifier">Shift+/</div>
   <div style="clear:
 both;"/>
   <strong>Alt</strong>

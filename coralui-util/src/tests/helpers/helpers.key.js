@@ -30,8 +30,10 @@ function getCode(char) {
     The element to trigger the event on
   @param {Array.<String>} modifiers
     An array of modifiers to include in the event
+  @param {String} key
+    The key string
 */
-const keydown = function(code, el, modifiers) {
+const keydown = function(code, el, modifiers, key) {
   code = getCode(code);
 
   el = el || document.documentElement;
@@ -39,6 +41,8 @@ const keydown = function(code, el, modifiers) {
   event.initEvent('keydown', true, true);
   event.keyCode = code;
   event.which = code;
+  event.key = key;
+  
   if (modifiers && modifiers.length > 0) {
     for (var i = 0; i < modifiers.length; i++) {
       var modifierCode = getCode(modifiers[i]);
@@ -79,13 +83,15 @@ const keyup = function(code, el) {
     The element to trigger the event on
   @param {Array.<String>} modifiers
     An array of modifiers to include in the event
+  @param {String} key
+    The key string
 */
-const keypress = function(code, el, modifiers) {
+const keypress = function(code, el, modifiers, key) {
   if (el) {
     el.focus();
   }
 
-  keydown(code, el, modifiers);
+  keydown(code, el, modifiers, key);
   keyup(code, el);
 };
 
