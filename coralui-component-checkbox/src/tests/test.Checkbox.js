@@ -1,6 +1,6 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {Checkbox} from '/coralui-component-checkbox';
-import {events} from '/coralui-util';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {Checkbox} from '../../../coralui-component-checkbox';
+import {events} from '../../../coralui-util';
 
 describe('Checkbox', function() {
   describe('Namespace', function() {

@@ -15,10 +15,10 @@
  * from Adobe Systems Incorporated.
  */
 
-import {Overlay} from '/coralui-component-overlay';
-import {Icon} from '/coralui-component-icon';
+import {Overlay} from '../../../coralui-component-overlay';
+import {Icon} from '../../../coralui-component-icon';
 import base from '../templates/base';
-import {commons, transform, validate, i18n} from '/coralui-util';
+import {commons, transform, validate, i18n} from '../../../coralui-util';
 
 const CLASSNAME = '_coral-Popover';
 

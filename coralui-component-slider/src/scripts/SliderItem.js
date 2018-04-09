@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import {transform} from '/coralui-util';
+import {transform} from '../../../coralui-util';
 
 const CLASSNAME = '_coral-Slider-item';
 

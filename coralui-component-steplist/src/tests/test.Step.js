@@ -1,5 +1,5 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {Step, StepList} from '/coralui-component-steplist';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {Step, StepList} from '../../../coralui-component-steplist';
 
 describe('Step', function() {
   var el;

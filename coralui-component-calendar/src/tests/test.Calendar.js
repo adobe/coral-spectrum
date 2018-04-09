@@ -1,6 +1,6 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {Calendar} from '/coralui-component-calendar';
-import {DateTime} from '/coralui-datetime';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {Calendar} from '../../../coralui-component-calendar';
+import {DateTime} from '../../../coralui-datetime';
 
 describe('Calendar', function() {
   describe('Instantiation', function() {

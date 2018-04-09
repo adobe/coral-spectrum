@@ -1,6 +1,6 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {TabList, Tab} from '/coralui-component-tablist';
-import {Icon} from '/coralui-component-icon';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {TabList, Tab} from '../../../coralui-component-tablist';
+import {Icon} from '../../../coralui-component-icon';
 
 describe('TabList', function() {
   

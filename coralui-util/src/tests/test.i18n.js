@@ -1,4 +1,4 @@
-import {i18n} from '/coralui-util';
+import {i18n} from '../../../coralui-util';
 
 describe('i18n', function() {
   before(function() {

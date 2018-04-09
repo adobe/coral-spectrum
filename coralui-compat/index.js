@@ -1,5 +1,5 @@
-import {Vent, Promise} from '/coralui-externals';
-import {commons, events, i18n, keys, Keys, mixin, strings, transform, validate} from '/coralui-util';
+import {Vent, Promise} from '../coralui-externals';
+import {commons, events, i18n, keys, Keys, mixin, strings, transform, validate} from '../coralui-util';
 import 'document-register-element/build/document-register-element';
 import './libs/Coral.register';
 import './libs/Coral.Property';

@@ -1,5 +1,5 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {RangedSlider} from '/coralui-component-slider';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {RangedSlider} from '../../../coralui-component-slider';
 
 describe('RangedSlider', function() {
   

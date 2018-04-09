@@ -1,5 +1,5 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {Accordion} from '/coralui-component-accordion';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {Accordion} from '../../../coralui-component-accordion';
 
 describe('Accordion', function() {
   // Assert whether an item is properly active or inactive.

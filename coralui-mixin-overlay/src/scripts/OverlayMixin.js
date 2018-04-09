@@ -16,8 +16,8 @@
  */
 
 import base from '../templates/base';
-import {Vent} from '/coralui-externals';
-import {validate, transform, commons} from '/coralui-util';
+import {Vent} from '../../../coralui-externals';
+import {validate, transform, commons} from '../../../coralui-util';
 import {trapFocus, returnFocus, focusOnShow, FADETIME} from './enums';
 
 // The tab capture element that lives at the top of the body

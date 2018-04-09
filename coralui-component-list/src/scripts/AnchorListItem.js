@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from '/coralui-mixin-component';
-import {ListItemMixin} from '/coralui-mixin-list';
+import {ComponentMixin} from '../../../coralui-mixin-component';
+import {ListItemMixin} from '../../../coralui-mixin-list';
 
 const CLASSNAME = '_coral-AnchorList-item';
 

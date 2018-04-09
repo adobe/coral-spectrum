@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import {transform} from '/coralui-util';
+import {transform} from '../../../coralui-util';
 
 // try to stay in same color space as long as possible (because of conversions being not 100% accurate ...)
 /** @ignore */

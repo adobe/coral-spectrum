@@ -15,13 +15,13 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from '/coralui-mixin-component';
-import {FormFieldMixin} from '/coralui-mixin-formfield';
-import {DateTime} from '/coralui-datetime';
-import '/coralui-component-textfield';
-import '/coralui-component-select';
+import {ComponentMixin} from '../../../coralui-mixin-component';
+import {FormFieldMixin} from '../../../coralui-mixin-formfield';
+import {DateTime} from '../../../coralui-datetime';
+import '../../../coralui-component-textfield';
+import '../../../coralui-component-select';
 import base from '../templates/base';
-import {transform, commons, validate, i18n} from '/coralui-util';
+import {transform, commons, validate, i18n} from '../../../coralui-util';
 
 // Default for display and value format
 const DEFAULT_HOUR_FORMAT = 'HH';

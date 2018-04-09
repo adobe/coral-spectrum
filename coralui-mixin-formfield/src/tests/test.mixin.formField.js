@@ -1,7 +1,7 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {ComponentMixin} from '/coralui-mixin-component';
-import {FormFieldMixin} from '/coralui-mixin-formfield';
-import {commons, transform} from '/coralui-util';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {ComponentMixin} from '../../../coralui-mixin-component';
+import {FormFieldMixin} from '../../../coralui-mixin-formfield';
+import {commons, transform} from '../../../coralui-util';
 
 describe('mixin._formField', function() {
   // Dummy custom element

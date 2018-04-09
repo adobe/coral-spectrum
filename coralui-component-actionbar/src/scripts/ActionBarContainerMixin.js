@@ -17,13 +17,13 @@
 
 import ActionBarContainerCollection from './ActionBarContainerCollection';
 import getFirstSelectableWrappedItem from './getFirstSelectableWrappedItem';
-import {Button} from '/coralui-component-button';
-import '/coralui-component-anchorbutton';
-import {Popover} from '/coralui-component-popover';
+import {Button} from '../../../coralui-component-button';
+import '../../../coralui-component-anchorbutton';
+import {Popover} from '../../../coralui-component-popover';
 import moreOverlay from '../templates/moreOverlay';
 import moreButton from '../templates/moreButton';
 import overlayContent from '../templates/overlayContent';
-import {commons, transform, i18n} from '/coralui-util';
+import {commons, transform, i18n} from '../../../coralui-util';
 
 /**
  @mixin ActionBarContainerMixin

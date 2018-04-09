@@ -15,9 +15,9 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from '/coralui-mixin-component';
-import {SelectableCollection} from '/coralui-collection';
-import {transform, validate, commons} from '/coralui-util';
+import {ComponentMixin} from '../../../coralui-mixin-component';
+import {SelectableCollection} from '../../../coralui-collection';
+import {transform, validate, commons} from '../../../coralui-util';
 import line from '../templates/line';
 import getTarget from './getTarget';
 

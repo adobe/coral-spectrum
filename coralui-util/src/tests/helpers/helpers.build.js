@@ -1,4 +1,4 @@
-import {keys} from '/coralui-util';
+import {keys} from '../../../../coralui-util';
 
 // Create a target element
 let target = document.createElement('div');

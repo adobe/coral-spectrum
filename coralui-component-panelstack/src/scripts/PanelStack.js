@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from '/coralui-mixin-component';
-import {SelectableCollection} from '/coralui-collection';
+import {ComponentMixin} from '../../../coralui-mixin-component';
+import {SelectableCollection} from '../../../coralui-collection';
 
 const CLASSNAME = '_coral-PanelStack';
 

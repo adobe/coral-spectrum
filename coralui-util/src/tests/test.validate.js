@@ -1,4 +1,4 @@
-import {validate} from '/coralui-util';
+import {validate} from '../../../coralui-util';
 
 describe('validate', function() {
   

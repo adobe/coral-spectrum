@@ -1,5 +1,5 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {Button} from '/coralui-component-button';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {Button} from '../../../coralui-component-button';
 
 describe('Button', function() {
   describe('Namespace', function() {

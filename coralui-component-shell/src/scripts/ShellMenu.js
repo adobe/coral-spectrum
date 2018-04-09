@@ -15,9 +15,9 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from '/coralui-mixin-component';
-import {OverlayMixin} from '/coralui-mixin-overlay';
-import {transform, validate} from '/coralui-util';
+import {ComponentMixin} from '../../../coralui-mixin-component';
+import {OverlayMixin} from '../../../coralui-mixin-overlay';
+import {transform, validate} from '../../../coralui-util';
 
 const CLASSNAME = '_coral-Shell-menu';
 

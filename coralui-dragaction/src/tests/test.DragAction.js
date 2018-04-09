@@ -1,6 +1,6 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {DragAction} from '/coralui-dragaction';
-import {events} from '/coralui-util';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {DragAction} from '../../../coralui-dragaction';
+import {events} from '../../../coralui-util';
 
 describe('DragAction', function() {
   // Mock for dragging

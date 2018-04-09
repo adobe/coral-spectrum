@@ -1,5 +1,5 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {CharacterCount} from '/coralui-component-charactercount';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {CharacterCount} from '../../../coralui-component-charactercount';
 
 describe('CharacterCount', function() {
   var input, characterCount;

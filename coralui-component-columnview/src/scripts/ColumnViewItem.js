@@ -15,10 +15,10 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from '/coralui-mixin-component';
-import {Icon} from '/coralui-component-icon';
-import {Checkbox} from '/coralui-component-checkbox';
-import {transform, validate} from '/coralui-util';
+import {ComponentMixin} from '../../../coralui-mixin-component';
+import {Icon} from '../../../coralui-component-icon';
+import {Checkbox} from '../../../coralui-component-checkbox';
+import {transform, validate} from '../../../coralui-util';
 
 const CLASSNAME = '_coral-MillerColumn-item';
 

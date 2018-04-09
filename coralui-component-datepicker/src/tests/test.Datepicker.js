@@ -1,7 +1,7 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {Datepicker} from '/coralui-component-datepicker';
-import {DateTime} from '/coralui-datetime';
-import {commons, Keys} from '/coralui-util';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {Datepicker} from '../../../coralui-component-datepicker';
+import {DateTime} from '../../../coralui-datetime';
+import {commons, Keys} from '../../../coralui-util';
 
 describe('Datepicker', function() {
   // @todo: add tests for mobile

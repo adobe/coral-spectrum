@@ -15,11 +15,11 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from '/coralui-mixin-component';
-import {OverlayMixin} from '/coralui-mixin-overlay';
-import {PopperJS} from '/coralui-externals';
+import {ComponentMixin} from '../../../coralui-mixin-component';
+import {OverlayMixin} from '../../../coralui-mixin-overlay';
+import {PopperJS} from '../../../coralui-externals';
 import ALIGN_MAP from '../data/alignMapping.json';
-import {transform, validate, commons} from '/coralui-util';
+import {transform, validate, commons} from '../../../coralui-util';
 
 const DEPRECATED_ALIGN = 'Coral.Overlay: alignAt and alignMy have been deprecated. Please use the offset, inner and placement properties instead.';
 const DEPRECATED_FLIP_FIT = 'Coral.Overlay.collision.FLIP_FIT has been deprecated. Please use Coral.Overlay.collision.FLIP instead.';

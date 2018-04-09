@@ -1,5 +1,5 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {Panel} from '/coralui-component-panelstack';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {Panel} from '../../../coralui-component-panelstack';
 
 describe('Panel', function() {
   describe('Namespace', function() {

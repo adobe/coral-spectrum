@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import {AnchorList} from '/coralui-component-list';
+import {AnchorList} from '../../../coralui-component-list';
 
 const CLASSNAME = ['_coral-BasicList-item', '_coral-AnchorList-item', '_coral-Shell-help-item'];
 

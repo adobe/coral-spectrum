@@ -1,5 +1,5 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {PanelStack, Panel} from '/coralui-component-panelstack';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {PanelStack, Panel} from '../../../coralui-component-panelstack';
 
 describe('PanelStack', function() {
   

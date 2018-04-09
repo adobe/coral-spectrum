@@ -1,5 +1,5 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {ComponentMixin} from '/coralui-mixin-component';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {ComponentMixin} from '../../../coralui-mixin-component';
 
 describe('mixin._component', function() {
   // Dummy custom element

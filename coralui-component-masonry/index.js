@@ -1,5 +1,5 @@
-import '/coralui-theme-spectrum';
-import '/coralui-externals';
+import '../coralui-theme-spectrum';
+import '../coralui-externals';
 
 import Masonry from './src/scripts/Masonry';
 import MasonryItem from './src/scripts/MasonryItem';

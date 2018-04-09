@@ -1,4 +1,4 @@
-import {Color} from '/coralui-component-colorinput';
+import {Color} from '../../../coralui-component-colorinput';
 
 describe('Color', function() {
   

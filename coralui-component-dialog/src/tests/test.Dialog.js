@@ -1,7 +1,7 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {Dialog} from '/coralui-component-dialog';
-import {mixin} from '/coralui-util';
-import {DragAction} from '/coralui-dragaction';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {Dialog} from '../../../coralui-component-dialog';
+import {mixin} from '../../../coralui-util';
+import {DragAction} from '../../../coralui-dragaction';
 
 describe('Dialog', function() {
   // We don't need this in our test cases

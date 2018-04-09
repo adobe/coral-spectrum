@@ -15,11 +15,11 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from '/coralui-mixin-component';
-import {FormFieldMixin} from '/coralui-mixin-formfield';
-import {Icon} from '/coralui-component-icon';
+import {ComponentMixin} from '../../../coralui-mixin-component';
+import {FormFieldMixin} from '../../../coralui-mixin-formfield';
+import {Icon} from '../../../coralui-component-icon';
 import base from '../templates/base';
-import {transform, commons} from '/coralui-util';
+import {transform, commons} from '../../../coralui-util';
 
 const IS_IE_OR_EDGE = navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0 ||
   window.navigator.userAgent.indexOf('Edge') !== -1;

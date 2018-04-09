@@ -15,11 +15,11 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from '/coralui-mixin-component';
-import {FormFieldMixin} from '/coralui-mixin-formfield';
+import {ComponentMixin} from '../../../coralui-mixin-component';
+import {FormFieldMixin} from '../../../coralui-mixin-formfield';
 import Tag from './Tag';
-import {Collection} from '/coralui-collection';
-import {transform, commons} from '/coralui-util';
+import {Collection} from '../../../coralui-collection';
+import {transform, commons} from '../../../coralui-util';
 
 const CLASSNAME = '_coral-TagList';
 // Collection

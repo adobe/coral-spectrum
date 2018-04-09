@@ -1,6 +1,6 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {Shell} from '/coralui-component-shell';
-import {Collection} from '/coralui-collection';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {Shell} from '../../../coralui-component-shell';
+import {Collection} from '../../../coralui-collection';
 
 describe('Shell.Workspaces', function() {
   describe('Namespace', function() {

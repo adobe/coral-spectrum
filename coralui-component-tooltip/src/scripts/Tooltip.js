@@ -15,10 +15,10 @@
  * from Adobe Systems Incorporated.
  */
 
-import {Overlay} from '/coralui-component-overlay';
-import {Vent} from '/coralui-externals';
+import {Overlay} from '../../../coralui-component-overlay';
+import {Vent} from '../../../coralui-externals';
 import base from '../templates/base';
-import {transform, validate, commons} from '/coralui-util';
+import {transform, validate, commons} from '../../../coralui-util';
 
 const arrowMap = {
   left: 'left',

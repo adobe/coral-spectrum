@@ -15,20 +15,20 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from '/coralui-mixin-component';
-import {FormFieldMixin} from '/coralui-mixin-formfield';
-import {Tag} from '/coralui-component-taglist';
-import {SelectableCollection} from '/coralui-collection';
+import {ComponentMixin} from '../../../coralui-mixin-component';
+import {FormFieldMixin} from '../../../coralui-mixin-formfield';
+import {Tag} from '../../../coralui-component-taglist';
+import {SelectableCollection} from '../../../coralui-collection';
 import AutocompleteItem from './AutocompleteItem';
-import {Textfield} from '/coralui-component-textfield';
-import {Icon} from '/coralui-component-icon';
-import '/coralui-component-button';
-import '/coralui-component-list';
-import '/coralui-component-popover';
-import '/coralui-component-wait';
+import {Textfield} from '../../../coralui-component-textfield';
+import {Icon} from '../../../coralui-component-icon';
+import '../../../coralui-component-button';
+import '../../../coralui-component-list';
+import '../../../coralui-component-popover';
+import '../../../coralui-component-wait';
 import base from '../templates/base';
 import loadIndicator from '../templates/loadIndicator';
-import {transform, validate, commons, i18n} from '/coralui-util';
+import {transform, validate, commons, i18n} from '../../../coralui-util';
 
 const CLASSNAME = '_coral-Autocomplete';
 

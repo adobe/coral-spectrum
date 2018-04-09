@@ -1,6 +1,6 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {ComponentMixin} from '/coralui-mixin-component';
-import {SelectableCollection} from '/coralui-collection';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {ComponentMixin} from '../../../coralui-mixin-component';
+import {SelectableCollection} from '../../../coralui-collection';
 
 describe('SelectableCollection', function() {
   // test collection container

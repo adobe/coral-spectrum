@@ -1,4 +1,4 @@
-import {commons} from '/coralui-util';
+import {commons} from '../../../../coralui-util';
 import {target, build} from './helpers.build';
 import {event} from './helpers.events';
 

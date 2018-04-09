@@ -15,9 +15,9 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from '/coralui-mixin-component';
+import {ComponentMixin} from '../../../coralui-mixin-component';
 import base from '../templates/base';
-import {transform, validate} from '/coralui-util';
+import {transform, validate} from '../../../coralui-util';
 
 const COLOR_HINT_REG_EXP = /^#[0-9A-F]{6}$/i;
 

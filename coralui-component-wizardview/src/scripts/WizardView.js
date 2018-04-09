@@ -15,11 +15,11 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from '/coralui-mixin-component';
-import {Collection} from '/coralui-collection';
-import '/coralui-component-steplist';
-import '/coralui-component-panelstack';
-import {commons} from '/coralui-util';
+import {ComponentMixin} from '../../../coralui-mixin-component';
+import {Collection} from '../../../coralui-collection';
+import '../../../coralui-component-steplist';
+import '../../../coralui-component-panelstack';
+import {commons} from '../../../coralui-util';
 
 const CLASSNAME = '_coral-WizardView';
 

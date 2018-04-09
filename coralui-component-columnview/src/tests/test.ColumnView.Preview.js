@@ -1,5 +1,5 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {ColumnView} from '/coralui-component-columnview';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {ColumnView} from '../../../coralui-component-columnview';
 
 describe('ColumnView.Preview', function() {
   describe('Namespace', function() {

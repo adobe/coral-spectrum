@@ -14,9 +14,9 @@
  * is strictly forbidden unless prior written permission is obtained
  * from Adobe Systems Incorporated.
  */
-import {ComponentMixin} from '/coralui-mixin-component';
-import {transform, validate, commons} from '/coralui-util';
-import ICON_MAP from '/coralui-compat/data/iconMap.json';
+import {ComponentMixin} from '../../../coralui-mixin-component';
+import {transform, validate, commons} from '../../../coralui-util';
+import ICON_MAP from '../../../coralui-compat/data/iconMap.json';
 import SPECTRUM_ICONS_PATH from '@spectrum/spectrum-css/dist/icons/spectrum-icons.svg';
 import SPECTRUM_ICONS_COLOR_PATH from '@spectrum/spectrum-css/dist/icons/spectrum-icons-color.svg';
 import SPECTRUM_CSS_ICONS_PATH from '@spectrum/spectrum-css/dist/icons/spectrum-css-icons.svg';

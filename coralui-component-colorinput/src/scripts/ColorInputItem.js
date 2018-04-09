@@ -15,9 +15,9 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from '/coralui-mixin-component';
+import {ComponentMixin} from '../../../coralui-mixin-component';
 import Color from './Color';
-import {transform} from '/coralui-util';
+import {transform} from '../../../coralui-util';
 
 /**
  @class Coral.ColorInput.Item

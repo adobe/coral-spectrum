@@ -15,9 +15,9 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from '/coralui-mixin-component';
-import {ButtonMixin} from '/coralui-mixin-button';
-import {transform, commons} from '/coralui-util';
+import {ComponentMixin} from '../../../coralui-mixin-component';
+import {ButtonMixin} from '../../../coralui-mixin-button';
+import {transform, commons} from '../../../coralui-util';
 
 // Key code
 const SPACE = 32;

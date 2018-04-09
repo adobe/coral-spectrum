@@ -15,10 +15,10 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from '/coralui-mixin-component';
+import {ComponentMixin} from '../../../coralui-mixin-component';
 import ColumnViewCollection from './ColumnViewCollection';
 import selectionMode from './selectionMode';
-import {transform, validate, commons} from '/coralui-util';
+import {transform, validate, commons} from '../../../coralui-util';
 
 const CLASSNAME = '_coral-MillerColumns';
 

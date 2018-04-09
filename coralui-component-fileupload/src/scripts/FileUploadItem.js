@@ -16,7 +16,7 @@
  */
 
 import MIME_TYPES from '../data/mimetypes.json';
-import {transform, validate} from '/coralui-util';
+import {transform, validate} from '../../../coralui-util';
 
 /**
  Enumeration for {@link FileUploadItem} response types.

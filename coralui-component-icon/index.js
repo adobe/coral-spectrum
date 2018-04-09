@@ -1,5 +1,5 @@
-import '/coralui-theme-spectrum';
-import '/coralui-externals';
+import '../coralui-theme-spectrum';
+import '../coralui-externals';
 
 import Icon from './src/scripts/Icon';
 

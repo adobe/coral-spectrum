@@ -1,8 +1,8 @@
-import '/coralui-theme-spectrum';
-import '/coralui-externals';
+import '../coralui-theme-spectrum';
+import '../coralui-externals';
 
 import translations from './i18n/translations.json';
-import {strings, commons} from '/coralui-util';
+import {strings, commons} from '../coralui-util';
 import Popover from './src/scripts/Popover';
 import PopoverHeader from './src/scripts/PopoverHeader';
 import PopoverContent from './src/scripts/PopoverContent';

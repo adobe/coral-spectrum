@@ -1,5 +1,5 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {List, ButtonList, AnchorList} from '/coralui-component-list';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {List, ButtonList, AnchorList} from '../../../coralui-component-list';
 
 describe('List', function() {
   

@@ -1,4 +1,4 @@
-import {transform} from '/coralui-util';
+import {transform} from '../../../coralui-util';
 
 describe('transform', function() {
 

@@ -1,5 +1,5 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {Multifield} from '/coralui-component-multifield';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {Multifield} from '../../../coralui-component-multifield';
 
 describe('Multifield', function() {
   // Mock for dragging

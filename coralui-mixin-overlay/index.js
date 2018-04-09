@@ -1,6 +1,6 @@
 import OverlayMixin from './src/scripts/OverlayMixin';
 import {trapFocus, returnFocus, focusOnShow, FADETIME} from './src/scripts/enums';
-import {mixin} from '/coralui-util';
+import {mixin} from '../coralui-util';
 
 OverlayMixin.trapFocus = trapFocus;
 OverlayMixin.returnFocus = returnFocus;

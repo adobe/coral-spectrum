@@ -16,7 +16,7 @@
  */
 
 import ResizeObserver from './ResizeObserver';
-import {Promise} from '/coralui-externals';
+import {Promise} from '../../../coralui-externals';
 
 // Used for unique IDs
 let nextID = 0;

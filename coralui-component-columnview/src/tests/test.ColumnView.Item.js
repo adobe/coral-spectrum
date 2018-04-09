@@ -1,6 +1,6 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {ColumnView} from '/coralui-component-columnview';
-import {Icon} from '/coralui-component-icon';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {ColumnView} from '../../../coralui-component-columnview';
+import {Icon} from '../../../coralui-component-icon';
 
 describe('ColumnView.Item', function() {
   describe('Namespace', function() {

@@ -1,5 +1,5 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {Tooltip} from '/coralui-component-tooltip';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {Tooltip} from '../../../coralui-component-tooltip';
 
 describe('Tooltip', function() {
   describe('Namespace', function() {

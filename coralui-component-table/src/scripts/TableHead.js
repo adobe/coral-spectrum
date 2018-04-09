@@ -15,9 +15,9 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from '/coralui-mixin-component';
+import {ComponentMixin} from '../../../coralui-mixin-component';
 import TableSectionMixin from './TableSectionMixin';
-import {transform} from '/coralui-util';
+import {transform} from '../../../coralui-util';
 
 const CLASSNAME = '_coral-Table-head';
 

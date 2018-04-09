@@ -1,6 +1,6 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {ActionBar} from '/coralui-component-actionbar';
-import {Button} from '/coralui-component-button';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {ActionBar} from '../../../coralui-component-actionbar';
+import {Button} from '../../../coralui-component-button';
 
 describe('ActionBar', function() {
   let warn = console.warn;

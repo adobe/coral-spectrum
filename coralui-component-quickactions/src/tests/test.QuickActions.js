@@ -1,8 +1,8 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {QuickActions} from '/coralui-component-quickactions';
-import {Button} from '/coralui-component-button';
-import {AnchorButton} from '/coralui-component-anchorbutton';
-import {ButtonList, AnchorList} from '/coralui-component-list';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {QuickActions} from '../../../coralui-component-quickactions';
+import {Button} from '../../../coralui-component-button';
+import {AnchorButton} from '../../../coralui-component-anchorbutton';
+import {ButtonList, AnchorList} from '../../../coralui-component-list';
 
 describe('QuickActions', function() {
   var BUTTON_SELECTOR = '._coral-QuickActions-item:not([handle="moreButton"])';

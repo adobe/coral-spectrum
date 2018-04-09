@@ -1,4 +1,4 @@
-import {Keys} from '/coralui-util';
+import {Keys} from '../../../../coralui-util';
 
 /**
   Note: these helpers are implicitly tested by test.keys.js

@@ -1,5 +1,5 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {Autocomplete} from '/coralui-component-autocomplete';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {Autocomplete} from '../../../coralui-component-autocomplete';
 
 describe('Autocomplete.Item', function() {
   describe('API', function() {

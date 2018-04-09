@@ -15,19 +15,19 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from '/coralui-mixin-component';
-import {FormFieldMixin} from '/coralui-mixin-formfield';
+import {ComponentMixin} from '../../../coralui-mixin-component';
+import {FormFieldMixin} from '../../../coralui-mixin-formfield';
 import Color from './Color';
 import ColorInputItem from './ColorInputItem';
-import {SelectableCollection} from '/coralui-collection';
-import {Icon} from '/coralui-component-icon';
-import '/coralui-component-textfield';
-import '/coralui-component-button';
-import '/coralui-component-popover';
+import {SelectableCollection} from '../../../coralui-collection';
+import {Icon} from '../../../coralui-component-icon';
+import '../../../coralui-component-textfield';
+import '../../../coralui-component-button';
+import '../../../coralui-component-popover';
 import './ColorInputColorProperties';
 import './ColorInputSwatches';
 import base from '../templates/base';
-import {validate, transform, commons, i18n} from '/coralui-util';
+import {validate, transform, commons, i18n} from '../../../coralui-util';
 
 const CLASSNAME = '_coral-ColorInput';
 

@@ -1,4 +1,4 @@
-import {ActionBar} from '/coralui-component-actionbar';
+import {ActionBar} from '../../../coralui-component-actionbar';
 
 describe('ActionBar.Container', function() {
   describe('Namespace', function() {

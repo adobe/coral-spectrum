@@ -15,10 +15,10 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from '/coralui-mixin-component';
+import {ComponentMixin} from '../../../coralui-mixin-component';
 import MultifieldCollection from './MultifieldCollection';
-import '/coralui-component-textfield';
-import {commons} from '/coralui-util';
+import '../../../coralui-component-textfield';
+import {commons} from '../../../coralui-util';
 
 const CLASSNAME = '_coral-Multifield';
 const IS_DRAGGING_CLASS = 'is-dragging';

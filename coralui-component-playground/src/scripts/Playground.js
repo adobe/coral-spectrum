@@ -15,13 +15,13 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from '/coralui-mixin-component';
-import {transform, validate} from '/coralui-util';
-import '/coralui-component-wait';
-import '/coralui-component-button';
-import '/coralui-component-popover';
-import '/coralui-component-switch';
-import '/coralui-component-buttongroup';
+import {ComponentMixin} from '../../../coralui-mixin-component';
+import {transform, validate} from '../../../coralui-util';
+import '../../../coralui-component-wait';
+import '../../../coralui-component-button';
+import '../../../coralui-component-popover';
+import '../../../coralui-component-switch';
+import '../../../coralui-component-buttongroup';
 import base from '../templates/base';
 
 // Import external dependencies including JS and CSS

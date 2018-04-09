@@ -1,5 +1,5 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {CycleButton} from '/coralui-component-cyclebutton';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {CycleButton} from '../../../coralui-component-cyclebutton';
 
 describe('CycleButton.Item', function() {
   describe('Namespace', function() {

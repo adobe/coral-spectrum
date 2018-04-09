@@ -1,6 +1,6 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {ColumnView} from '/coralui-component-columnview';
-import {commons} from '/coralui-util';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {ColumnView} from '../../../coralui-component-columnview';
+import {commons} from '../../../coralui-util';
 
 describe('ColumnView', function() {
   // handles the loading and annotating of the columns so that content can be loaded remotely

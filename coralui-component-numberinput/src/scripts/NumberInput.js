@@ -15,13 +15,13 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from '/coralui-mixin-component';
-import {FormFieldMixin} from '/coralui-mixin-formfield';
-import '/coralui-component-button';
-import '/coralui-component-textfield';
-import {Icon} from '/coralui-component-icon';
+import {ComponentMixin} from '../../../coralui-mixin-component';
+import {FormFieldMixin} from '../../../coralui-mixin-formfield';
+import '../../../coralui-component-button';
+import '../../../coralui-component-textfield';
+import {Icon} from '../../../coralui-component-icon';
 import base from '../templates/base';
-import {transform, commons, i18n} from '/coralui-util';
+import {transform, commons, i18n} from '../../../coralui-util';
 
 const CLASSNAME = '_coral-Stepper';
 let clearLiveRegionTimeout;

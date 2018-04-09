@@ -1,5 +1,5 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {Popover} from '/coralui-component-popover';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {Popover} from '../../../coralui-component-popover';
 
 describe('Popover', function() {
   var el;

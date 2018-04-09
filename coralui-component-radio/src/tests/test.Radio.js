@@ -1,6 +1,6 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {Radio} from '/coralui-component-radio';
-import {events, commons} from '/coralui-util';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {Radio} from '../../../coralui-component-radio';
+import {events, commons} from '../../../coralui-util';
 
 describe('Radio', function() {
   describe('Namespace', function() {

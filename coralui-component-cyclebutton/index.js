@@ -1,5 +1,5 @@
-import '/coralui-theme-spectrum';
-import '/coralui-externals';
+import '../coralui-theme-spectrum';
+import '../coralui-externals';
 
 import CycleButton from './src/scripts/CycleButton';
 import CycleButtonItem from './src/scripts/CycleButtonItem';

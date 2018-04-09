@@ -15,13 +15,13 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from '/coralui-mixin-component';
-import {OverlayMixin} from '/coralui-mixin-overlay';
-import {DragAction} from '/coralui-dragaction';
-import {Icon} from '/coralui-component-icon';
-import '/coralui-component-button';
+import {ComponentMixin} from '../../../coralui-mixin-component';
+import {OverlayMixin} from '../../../coralui-mixin-overlay';
+import {DragAction} from '../../../coralui-dragaction';
+import {Icon} from '../../../coralui-component-icon';
+import '../../../coralui-component-button';
 import base from '../templates/base';
-import {commons, transform, validate, i18n} from '/coralui-util';
+import {commons, transform, validate, i18n} from '../../../coralui-util';
 
 /**
  Enumeration for {@link Dialog} closable options.

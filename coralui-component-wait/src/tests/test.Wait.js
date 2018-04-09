@@ -1,5 +1,5 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {Wait} from '/coralui-component-wait';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {Wait} from '../../../coralui-component-wait';
 
 describe('Wait', function() {
   

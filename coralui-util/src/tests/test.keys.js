@@ -1,5 +1,5 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {keys, Keys} from '/coralui-util';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {keys, Keys} from '../../../coralui-util';
 
 describe('keys', function() {
   it('should have a numeric keycode', function() {

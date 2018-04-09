@@ -1,5 +1,5 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {commons} from '/coralui-util';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {commons} from '../../../coralui-util';
 
 describe('commons', function() {
   describe('#extend', function() {

@@ -1,5 +1,5 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {Select} from '/coralui-component-select';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {Select} from '../../../coralui-component-select';
 
 describe('Select', function() {
   // @todo: test reordering the options

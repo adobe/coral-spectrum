@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from '/coralui-mixin-component';
-import {Collection} from '/coralui-collection';
+import {ComponentMixin} from '../../../coralui-mixin-component';
+import {Collection} from '../../../coralui-collection';
 import solutionSwitcher from '../templates/solutionSwitcher';
 
 const CLASSNAME = '_coral-Shell-solutionSwitcher';

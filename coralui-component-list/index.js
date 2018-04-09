@@ -1,5 +1,5 @@
-import '/coralui-theme-spectrum';
-import '/coralui-externals';
+import '../coralui-theme-spectrum';
+import '../coralui-externals';
 
 import List from './src/scripts/List';
 import ListDivider from './src/scripts/ListDivider';

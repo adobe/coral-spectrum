@@ -1,4 +1,4 @@
-import {commons, events} from '/coralui-util';
+import {commons, events} from '../../coralui-util';
 
 var typeKitId = commons && commons.options.typekit || 'ruf7eed';
 

@@ -1,5 +1,5 @@
-import '/coralui-theme-spectrum';
-import '/coralui-externals';
+import '../coralui-theme-spectrum';
+import '../coralui-externals';
 
 import Progress from './src/scripts/Progress';
 import ProgressLabel from './src/scripts/ProgressLabel';

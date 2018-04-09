@@ -15,8 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from '/coralui-mixin-component';
-import {ListMixin} from '/coralui-mixin-list';
+import {ComponentMixin} from '../../../coralui-mixin-component';
+import {ListMixin} from '../../../coralui-mixin-list';
 
 /**
  @class Coral.List

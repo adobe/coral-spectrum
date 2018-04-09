@@ -1,5 +1,5 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {TabList, Tab} from '/coralui-component-tablist';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {TabList, Tab} from '../../../coralui-component-tablist';
 
 describe('Tab', function() {
   describe('Namespace', function() {

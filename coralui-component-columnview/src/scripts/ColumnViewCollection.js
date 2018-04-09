@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import {SelectableCollection} from '/coralui-collection';
+import {SelectableCollection} from '../../../coralui-collection';
 
 /**
  @class Coral.ColumnView.Collection

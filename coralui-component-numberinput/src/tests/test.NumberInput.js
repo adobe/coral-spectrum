@@ -1,6 +1,6 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {NumberInput} from '/coralui-component-numberinput';
-import {commons} from '/coralui-util';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {NumberInput} from '../../../coralui-component-numberinput';
+import {commons} from '../../../coralui-util';
 
 describe('NumberInput', function() {
   function testInstance(instance) {

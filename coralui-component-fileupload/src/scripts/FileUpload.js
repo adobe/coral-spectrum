@@ -15,11 +15,11 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from '/coralui-mixin-component';
-import {FormFieldMixin} from '/coralui-mixin-formfield';
+import {ComponentMixin} from '../../../coralui-mixin-component';
+import {FormFieldMixin} from '../../../coralui-mixin-formfield';
 import FileUploadItem from './FileUploadItem';
 import base from '../templates/base';
-import {transform, commons, validate} from '/coralui-util';
+import {transform, commons, validate} from '../../../coralui-util';
 
 const CLASSNAME = '_coral-FileUpload';
 

@@ -18,7 +18,6 @@
 const path = require('path');
 const util = require('../helpers/util');
 
-const rootImport = require('rollup-plugin-root-import');
 const nodeResolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 const css = require('rollup-plugin-css-only');
@@ -30,11 +29,6 @@ const root = util.getRoot();
 
 module.exports = {
   plugins: [
-    rootImport({
-      useEntry: 'prepend',
-      extensions: '/index.js',
-      root: root
-    }),
     nodeResolve(),
     commonjs(),
     json(),

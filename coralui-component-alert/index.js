@@ -1,5 +1,5 @@
-import '/coralui-theme-spectrum';
-import '/coralui-externals';
+import '../coralui-theme-spectrum';
+import '../coralui-externals';
 
 import Alert from './src/scripts/Alert';
 import AlertHeader from './src/scripts/AlertHeader';

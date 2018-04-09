@@ -1,4 +1,4 @@
-import '/coralui-externals';
+import '../coralui-externals';
 
 import commons from './src/scripts/Commons';
 import events from './src/scripts/Events';

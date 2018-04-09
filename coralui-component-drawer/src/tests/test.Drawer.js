@@ -1,6 +1,6 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {Drawer} from '/coralui-component-drawer';
-import {commons} from '/coralui-util';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {Drawer} from '../../../coralui-component-drawer';
+import {commons} from '../../../coralui-util';
 
 describe('Drawer', function () {
   describe('Namespace', function() {

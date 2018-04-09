@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from '/coralui-mixin-component';
+import {ComponentMixin} from '../../../coralui-mixin-component';
 
 const CLASSNAME = '_coral-Card-subtitle';
 

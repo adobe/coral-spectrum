@@ -1,5 +1,5 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {Textarea} from '/coralui-component-textarea';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {Textarea} from '../../../coralui-component-textarea';
 
 describe('Textarea', function() {
 

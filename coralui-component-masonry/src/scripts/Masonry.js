@@ -15,10 +15,10 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from '/coralui-mixin-component';
+import {ComponentMixin} from '../../../coralui-mixin-component';
 import MasonryItem from './MasonryItem';
-import {SelectableCollection} from '/coralui-collection';
-import {transform, commons} from '/coralui-util';
+import {SelectableCollection} from '../../../coralui-collection';
+import {transform, commons} from '../../../coralui-util';
 
 const CLASSNAME = '_coral-Masonry';
 

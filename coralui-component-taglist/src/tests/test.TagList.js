@@ -1,5 +1,5 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {TagList, Tag} from '/coralui-component-taglist';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {TagList, Tag} from '../../../coralui-component-taglist';
 
 describe('TagList', function() {
   

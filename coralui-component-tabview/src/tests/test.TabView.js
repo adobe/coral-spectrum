@@ -1,7 +1,7 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {TabView} from '/coralui-component-tabview';
-import {Tab} from '/coralui-component-tablist';
-import {Panel} from '/coralui-component-panelstack';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {TabView} from '../../../coralui-component-tabview';
+import {Tab} from '../../../coralui-component-tablist';
+import {Panel} from '../../../coralui-component-panelstack';
 
 describe('TabView', function() {
   

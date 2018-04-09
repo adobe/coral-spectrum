@@ -1,5 +1,5 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {ActionBar} from '/coralui-component-actionbar';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {ActionBar} from '../../../coralui-component-actionbar';
 
 describe('ActionBar.Primary', function() {
   describe('Namespace', function() {

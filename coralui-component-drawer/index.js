@@ -1,5 +1,5 @@
-import '/coralui-theme-spectrum';
-import '/coralui-externals';
+import '../coralui-theme-spectrum';
+import '../coralui-externals';
 
 import Drawer from './src/scripts/Drawer';
 import DrawerContent from './src/scripts/DrawerContent';

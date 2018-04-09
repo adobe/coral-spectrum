@@ -15,13 +15,13 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ComponentMixin} from '/coralui-mixin-component';
-import {FormFieldMixin} from '/coralui-mixin-formfield';
-import '/coralui-component-textfield';
-import '/coralui-component-button';
-import {Icon} from '/coralui-component-icon';
+import {ComponentMixin} from '../../../coralui-mixin-component';
+import {FormFieldMixin} from '../../../coralui-mixin-formfield';
+import '../../../coralui-component-textfield';
+import '../../../coralui-component-button';
+import {Icon} from '../../../coralui-component-icon';
 import base from '../templates/base';
-import {transform, validate, commons, i18n} from '/coralui-util';
+import {transform, validate, commons, i18n} from '../../../coralui-util';
 
 const CLASSNAME = '_coral-Search';
 

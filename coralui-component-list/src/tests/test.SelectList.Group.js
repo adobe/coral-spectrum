@@ -1,5 +1,5 @@
-import {helpers} from '/coralui-util/src/tests/helpers';
-import {SelectList} from '/coralui-component-list';
+import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {SelectList} from '../../../coralui-component-list';
 
 describe('SelectList.Group', function() {
   describe('Namespace', function() {
