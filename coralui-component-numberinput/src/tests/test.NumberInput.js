@@ -522,9 +522,14 @@ describe('NumberInput', function() {
     });
 
     describe('#valueAsNumber', function() {
-      it('should default to null', function() {
+      it('should default to NaN', function() {
         expect(el.value).to.equal('');
         expect(el.valueAsNumber).to.be.NaN;
+      });
+      
+      it('should return 0 instead of NaN', () => {
+        el.value = 0;
+        expect(el.valueAsNumber).to.equal(0);
       });
 
       it('should set the new value', function() {

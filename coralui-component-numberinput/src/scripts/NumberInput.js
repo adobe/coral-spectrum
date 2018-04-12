@@ -149,7 +149,18 @@ class NumberInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
    @default NaN
    */
   get valueAsNumber() {
-    return this._valueAsNumber || transform.float(this.value) || window.NaN;
+    let valueAsNumber = this._valueAsNumber;
+    
+    if (valueAsNumber !== null && !isNaN(valueAsNumber)) {
+      return valueAsNumber;
+    }
+    
+    valueAsNumber = transform.float(this.value);
+    if (valueAsNumber !== null && !isNaN(valueAsNumber)) {
+      return valueAsNumber;
+    }
+    
+    return NaN;
   }
   set valueAsNumber(value) {
     this._valueAsNumber = transform.float(value);
