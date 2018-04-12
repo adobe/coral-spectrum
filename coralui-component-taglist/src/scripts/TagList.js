@@ -296,8 +296,7 @@ class TagList extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     attachedItem.setAttribute('size', Tag.size.SMALL);
     
     // adds the role to support accessibility
-    attachedItem.setAttribute('role', 'option');
-    attachedItem.setAttribute('aria-selected', false);
+    attachedItem.setAttribute('role', 'listitem');
     attachedItem.setAttribute('tabindex', '-1');
     attachedItem[this.readOnly ? 'removeAttribute' : 'setAttribute']('closable', '');
     
@@ -322,7 +321,6 @@ class TagList extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   _onItemDisconnected(detachedItem) {
     // Cleans the tag from TagList specific values
     detachedItem.removeAttribute('role');
-    detachedItem.removeAttribute('aria-selected');
     detachedItem.removeAttribute('tabindex');
     detachedItem._host = undefined;
     
@@ -342,7 +340,6 @@ class TagList extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       this.setAttribute('aria-live', 'polite');
       
       const tag = event.matchedTarget;
-      tag.setAttribute('aria-selected', true);
       
       // add tabindex to first item and remove from previous focused item
       this.items.getAll().forEach((item) => {
@@ -362,7 +359,6 @@ class TagList extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       this.setAttribute('aria-live', 'off');
       
       const tag = event.matchedTarget;
-      tag.setAttribute('aria-selected', false);
       
       this._setItemToFocusOnDelete(tag);
     }
@@ -506,7 +502,7 @@ class TagList extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     self.classList.add(CLASSNAME);
     
     // adds the role to support accessibility
-    self.setAttribute('role', 'listbox');
+    self.setAttribute('role', 'list');
   
     self.setAttribute('aria-live', 'off');
     self.setAttribute('aria-atomic', 'false');

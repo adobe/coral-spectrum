@@ -91,10 +91,10 @@ describe('TagList', function() {
         
         expect(eventSpy.callCount).to.equal(1, 'coral-collection:add should be called once');
         expect(eventSpy.args[0][0].detail.item.tagName).to.equal('CORAL-TAG');
-        expect(eventSpy.args[0][0].detail.item.getAttribute('role')).to.equal('option');
+        expect(eventSpy.args[0][0].detail.item.getAttribute('role')).to.equal('listitem');
         expect(tagList.items.length).to.equal(2);
         tagList.items.getAll().forEach(function(item) {
-          expect(item.getAttribute('role')).to.equal('option');
+          expect(item.getAttribute('role')).to.equal('listitem');
         });
       });
       
@@ -107,8 +107,7 @@ describe('TagList', function() {
         
         expect(eventSpy.callCount).to.equal(1, 'coral-collection:remove should be called once');
         expect(eventSpy.args[0][0].detail.item.tagName).to.equal('CORAL-TAG');
-        expect(eventSpy.args[0][0].detail.item.getAttribute('role')).not.to.equal('option');
-        expect(eventSpy.args[0][0].detail.item.getAttribute('aria-selected')).not.to.equal('aria-selected');
+        expect(eventSpy.args[0][0].detail.item.getAttribute('role')).not.to.equal('listitem');
         expect(tagList.items.length).to.equal(0);
       });
       
@@ -408,7 +407,7 @@ describe('TagList', function() {
   describe('User Interaction', function() {
     it('should have a role', function() {
       var tagList = helpers.build(window.__html__['TagList.base.html']);
-      expect(tagList.getAttribute('role')).to.equal('listbox');
+      expect(tagList.getAttribute('role')).to.equal('list');
     });
     
     it('should remove a focused tag on backspace', function() {
@@ -421,22 +420,6 @@ describe('TagList', function() {
       
       expect(tagList.items.getAll().length).to.equal(0);
       expect(eventSpy.callCount).to.equal(1);
-    });
-    
-    it('set aria-selected attribute to true to focused item', function() {
-      var tagList = helpers.build(window.__html__['TagList.base.html']);
-      tagList.items.add(new Tag());
-      
-      var all = tagList.items.getAll();
-      expect(all[0].getAttribute('aria-selected')).to.equal('false');
-      expect(all[1].getAttribute('aria-selected')).to.equal('false');
-      expect(all[0].getAttribute('tabindex')).to.equal('0');
-      expect(all[1].getAttribute('tabindex')).to.equal('-1');
-      
-      all[0].trigger('focus');
-      
-      expect(all[0].getAttribute('aria-selected')).to.equal('true');
-      expect(all[1].getAttribute('aria-selected')).to.equal('false');
     });
     
     it('should not focus next item on tab', function() {
