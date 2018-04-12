@@ -76,6 +76,10 @@ class ColumnView extends ComponentMixin(HTMLElement) {
       'coral-columnview-column:_selecteditemchanged': '_onColumnSelectedItemChanged'
     });
   
+    // Defaults
+    this._oldActiveItem = null;
+    this._oldSelection = [];
+    
     // default value of inner flag to process events
     this._bulkSelectionChange = false;
   
@@ -753,7 +757,7 @@ class ColumnView extends ComponentMixin(HTMLElement) {
   _validateColumnViewChange() {
     // we evaluate first the active event since we always need to trigger active first and then selection
     const activeItem = this.activeItem;
-    const oldActiveItem = this._oldActiveItem || null;
+    const oldActiveItem = this._oldActiveItem;
     
     // same column events are only triggered if the active item changed, otherwise they are ignored
     if (activeItem !== oldActiveItem) {
