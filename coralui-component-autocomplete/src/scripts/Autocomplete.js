@@ -813,12 +813,13 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
         this.value = last.getAttribute('value');
       }
     }
-    // Use this.hasAttribute('multiple') instead of this.multiple here, as this method is called from _render and element might not be ready
-    else if (this.hasAttribute('multiple')) {
-      this._resetValues();
-    }
-    else {
-      this.value = '';
+    else if (!this.hasAttribute('value')) {
+      if (this.hasAttribute('multiple')) {
+        this._resetValues();
+      }
+      else {
+        this.value = '';
+      }
     }
   }
   

@@ -315,6 +315,16 @@ describe('Autocomplete', function() {
       });
     });
   });
+  
+  describe('Markup', () => {
+    describe('#value', () => {
+      it('should read the value from the DOM', () => {
+        const el = helpers.build(window.__html__['Autocomplete.value.html']);
+        expect(el.value).to.equal('asdf');
+        expect(el.values).to.deep.equal(['asdf']);
+      });
+    });
+  });
 
   describe('Events', function() {
     var el;
