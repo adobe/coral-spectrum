@@ -15,6 +15,15 @@
  * from Adobe Systems Incorporated.
  */
 
+// @spectrum focus-ring bug ?
+._coral-Stepper[role="group"].is-focused {
+  box-shadow: none;
+
+  ._coral-Stepper-input.is-focused:not(.focus-ring) {
+    box-shadow: none;
+  }
+}
+
 ._coral-Stepper-stepUp
 ._coral-Stepper-stepDown {
   display: block;

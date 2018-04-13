@@ -122,8 +122,9 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     events[`global:capture:coral-selectlist:beforechange #${overlayId}`] = '_onSelectListBeforeChange';
     events[`global:capture:coral-selectlist:change #${overlayId}`] = '_onSelectListChange';
     events[`global:capture:coral-selectlist:scrollbottom #${overlayId}`] = '_onSelectListScrollBottom';
-    events[`global:key:tab #${overlayId} coral-selectlist-item`] = '_onTabKey';
-    events[`global:key:tab+shift #${overlayId} coral-selectlist-item`] = '_onTabKey';
+    // TODO for some reason this disables tabbing into the select
+    // events[`global:key:tab #${overlayId} coral-selectlist-item`] = '_onTabKey';
+    // events[`global:key:tab+shift #${overlayId} coral-selectlist-item`] = '_onTabKey';
     events[`global:capture:coral-overlay:close #${overlayId}`] = '_onOverlayToggle';
     events[`global:capture:coral-overlay:open #${overlayId}`] = '_onOverlayToggle';
     events[`global:capture:coral-overlay:positioned #${overlayId}`] = '_onOverlayPositioned';
@@ -1008,9 +1009,9 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
    
    @private
    */
-  _onTabKey(event) {
-    event.preventDefault();
-  }
+  // _onTabKey(event) {
+  // event.preventDefault();
+  // }
   
   /** @private */
   _onOverlayToggle(event) {

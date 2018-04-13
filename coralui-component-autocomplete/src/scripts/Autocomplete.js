@@ -126,8 +126,6 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
       // Focus
       'capture:blur': '_handleFocusOut',
-      'capture:focus [handle="input"]': '_handleInputFocusIn',
-      'capture:blur [handle="input"]': '_handleInputFocusOut',
   
       // Taglist
       'coral-collection:add [handle="tagList"]': '_handleTagAdded',
@@ -1166,19 +1164,6 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
         self.hideSuggestions();
       }
     }, 0);
-  }
-  
-  /** @private */
-  _handleInputFocusIn() {
-    // @spectrum
-    if (this._elements.input.variant !== Textfield.variant.QUIET) {
-      this._elements.input.classList.add('focus-ring');
-    }
-  }
-  
-  /** @private */
-  _handleInputFocusOut() {
-    this._elements.input.classList.remove('focus-ring');
   }
   
   /** @private */

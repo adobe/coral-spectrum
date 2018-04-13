@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@coralui/vent": "^1.0.0",
-    "@spectrum/spectrum-css": "^2.0.0-beta.63",
+    "@spectrum/spectrum-css": "^2.0.0-beta.78",
     "document-register-element": "^1.7.0",
     "normalize.css": "^8.0.0",
     "popper.js": "^1.10.6",
