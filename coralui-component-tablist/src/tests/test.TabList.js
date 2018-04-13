@@ -219,8 +219,8 @@ describe('TabList', function() {
       });
       
       describe('#variant', function() {
-        it('should default to TabList.variant.PANEL', function() {
-          expect(el.variant).to.equal(TabList.variant.PANEL);
+        it('should default to TabList.variant.PAGE', function() {
+          expect(el.variant).to.equal(TabList.variant.PAGE);
         });
   
         it('should set variant classname', function() {

@@ -56,16 +56,16 @@ const orientation = {
  
  @typedef {Object} TabListVariantEnum
  
- @property {String} PANEL
- A panel TabList. This is the default value.
  @property {String} PAGE
- A page TabList.
+ A page TabList. This is the default value.
+ @property {String} PANEL
+ A panel TabList.
  @property {String} ANCHORED
  An anchored TabList.
  */
 const variant = {
-  PANEL: 'panel',
   PAGE: 'page',
+  PANEL: 'panel',
   ANCHORED: 'anchored'
 };
 
@@ -125,16 +125,16 @@ class TabList extends ComponentMixin(HTMLElement) {
    The TabList variant style to use. See {@link TabListVariantEnum}.
    
    @type {String}
-   @default TabListVariantEnum.PANEL
+   @default TabListVariantEnum.PAGE
    @htmlattribute variant
    @htmlattributereflected
    */
   get variant() {
-    return this._variant || variant.PANEL;
+    return this._variant || variant.PAGE;
   }
   set variant(value) {
     value = transform.string(value).toLowerCase();
-    this._variant = validate.enumeration(variant)(value) && value || variant.PANEL;
+    this._variant = validate.enumeration(variant)(value) && value || variant.PAGE;
     this._reflectAttribute('variant', this._variant);
     
     // Remove all variant classes
@@ -520,7 +520,7 @@ class TabList extends ComponentMixin(HTMLElement) {
     // Default reflected attributes
     if (!this._size) { this.size = size.MEDIUM; }
     if (!this._orientation) { this.orientation = orientation.HORIZONTAL; }
-    if (!this._variant) { this.variant = variant.PANEL; }
+    if (!this._variant) { this.variant = variant.PAGE; }
     
     // Support cloneNode
     const template = this.querySelector('._coral-TabList-item-line');
