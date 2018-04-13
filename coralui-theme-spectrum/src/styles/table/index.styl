@@ -68,9 +68,10 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
 
 ._coral-Table-cell {
   font-size: 14*$px;
-  line-height: 24*$px;
-  padding: 12*$px 16*$px;
   transition: background-color 125ms ease-in-out;
+  // @spectrum support 2 rows inside a cell without growing the full row height
+  padding: 0 16*$px;
+  height: 48*$px;
 }
 
 ._coral-Table-head {
