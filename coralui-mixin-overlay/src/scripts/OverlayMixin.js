@@ -20,6 +20,21 @@ import {Vent} from '../../../coralui-externals';
 import {validate, transform, commons} from '../../../coralui-util';
 import {trapFocus, returnFocus, focusOnShow, FADETIME} from './enums';
 
+// Includes overlay itself
+const COMPONENTS_WITH_OVERLAY = `
+  coral-actionbar,
+  coral-autocomplete,
+  coral-colorinput,
+  coral-cyclebutton,
+  coral-datepicker,
+  coral-dialog,
+  coral-overlay,
+  coral-popover,
+  coral-quickactions,
+  coral-select,
+  coral-tooltip
+`;
+
 // The tab capture element that lives at the top of the body
 let topTabCaptureEl;
 let bottomTabCaptureEl;
@@ -586,6 +601,9 @@ const OverlayMixin = (superClass) => class extends superClass {
               self._handleReturnFocus();
               
               self._debounce(() => {
+                // Inform child overlays that we're closing
+                self._closeChildOverlays();
+                
                 self.trigger('coral-overlay:close');
                 self._silenced = false;
               });
@@ -602,6 +620,24 @@ const OverlayMixin = (superClass) => class extends superClass {
           }
         }
       });
+    }
+  }
+  
+  _closeChildOverlays() {
+    const components = this.querySelectorAll(COMPONENTS_WITH_OVERLAY);
+    
+    // Close all children overlays and components with overlays
+    for (let i = 0; i < components.length; i++) {
+      const component = components[i];
+      
+      // Overlay component
+      if (component.hasAttribute('open')) {
+        component.removeAttribute('open');
+      }
+      // Component that uses an overlay
+      else if (component._elements && component._elements.overlay && component._elements.overlay.hasAttribute('open')) {
+        component._elements.overlay.removeAttribute('open');
+      }
     }
   }
   
