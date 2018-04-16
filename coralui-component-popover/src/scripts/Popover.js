@@ -270,20 +270,6 @@ class Popover extends Overlay {
   }
   
   /**
-   The popover's icon.
-   
-   @type {String}
-   @default ""
-   @htmlattribute icon
-   */
-  get icon() {
-    return this._elements.icon;
-  }
-  set icon(value) {
-    this._elements.icon = value;
-  }
-  
-  /**
    Inherited from {@link Overlay#open}.
    */
   get open() {
@@ -309,6 +295,18 @@ class Popover extends Overlay {
         target.classList.remove('is-selected');
       }
     }
+  }
+  
+  /**
+   @ignore
+   
+   Not supported anymore.
+   */
+  get icon() {
+    return this._icon || '';
+  }
+  set icon(value) {
+    this._icon = transform.string(value);
   }
   
   _onPositioned(event) {
@@ -437,8 +435,7 @@ class Popover extends Overlay {
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'closable',
-      'variant',
-      'icon'
+      'variant'
     ]);
   }
   
