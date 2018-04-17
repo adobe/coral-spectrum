@@ -732,7 +732,7 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
         value: item.getAttribute('value'),
         icon: item.getAttribute('icon'),
         disabled: item.hasAttribute('disabled'),
-        content: item.innerHTML,
+        content: item.innerHTML.replace(/\s{2,}/g, ' ').trim(),
         text: item.innerText
       };
       this._options.push(itemObj);

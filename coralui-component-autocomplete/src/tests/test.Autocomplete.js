@@ -1706,6 +1706,22 @@ describe('Autocomplete', function() {
       helpers.event('input', el._elements.input);
     });
   
+    it('should set the value of the multiline content option when selected', function(done) {
+      const el = helpers.build(window.__html__['Autocomplete.content.html']);
+      el.on('coral-overlay:open', function() {
+        el._elements.selectList.items.first().trigger('mousedown');
+      
+        // Mimic the input focus out
+        el._handleFocusOut({target: el._elements.input, preventDefault: function() {}});
+        
+        expect(el.value).to.equal(el.items.first().value);
+        done();
+      });
+      
+      el._elements.input.value = 'c';
+      helpers.event('input', el._elements.input);
+    });
+  
     describe('Smart Overlay', () => {
       helpers.testSmartOverlay('coral-autocomplete');
     });
