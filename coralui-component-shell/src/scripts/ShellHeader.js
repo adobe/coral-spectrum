@@ -117,13 +117,12 @@ class ShellHeader extends ComponentMixin(HTMLElement) {
   
     // header only changes zIndex due to menus
     if (target.tagName === 'CORAL-SHELL-MENU') {
-      target.classList.add('is-animated');
-      
-      const self = this;
       // we need one frame to make sure the zIndex is already set
       window.requestAnimationFrame(() => {
-        self.style.zIndex = parseInt(target.style.zIndex, 10) + 100;
-        window.clearTimeout(self._zIndexTimeout);
+        this.style.zIndex = parseInt(target.style.zIndex, 10) + 100;
+        target.classList.add('is-animated');
+        
+        window.clearTimeout(this._zIndexTimeout);
       });
     }
   }
