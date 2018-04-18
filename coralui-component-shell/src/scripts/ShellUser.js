@@ -29,8 +29,7 @@ const CLASSNAME = '_coral-Shell-user';
  Default avatar, show user icon from icon font.
  */
 const avatar = {
-  
-  DEFAULT: 'user'
+  DEFAULT: 'userCircleColor'
 };
 
 /**
@@ -55,7 +54,7 @@ class ShellUser extends ComponentMixin(HTMLElement) {
       footer: this.querySelector('coral-shell-user-footer') || document.createElement('coral-shell-user-footer')
     };
     
-    user.call(this._elements);
+    user.call(this._elements, {icon: avatar.DEFAULT});
   }
   
   /**
@@ -63,7 +62,7 @@ class ShellUser extends ComponentMixin(HTMLElement) {
    See {@link Icon} for valid usage and icon names.
    
    @type {String}
-   @default user (Shows a placeholder user icon from the icon font)
+   @default ShellUserAvatarEnum.DEFAULT
    @htmlattribute avatar
    */
   get avatar() {
