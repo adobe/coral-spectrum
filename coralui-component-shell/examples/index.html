@@ -28,7 +28,7 @@
         <coral-shell-menubar-item menu="#menu_help" icon="helpOutline"></coral-shell-menubar-item>
         <coral-shell-menubar-item menu="#menu_solutions" icon="apps"></coral-shell-menubar-item>
         <coral-shell-menubar-item menu="#menu_pulse" icon="bell" badge="5"></coral-shell-menubar-item>
-        <coral-shell-menubar-item menu="#menu_user" iconsize="M" iconvariant="circle" icon="assets/avatar.jpg"></coral-shell-menubar-item>
+        <coral-shell-menubar-item menu="#menu_user" iconsize="M" iconvariant="circle" icon="userCircleColor"></coral-shell-menubar-item>
       </coral-shell-menubar>
     </coral-shell-header-actions>
   </coral-shell-header>
@@ -44,7 +44,7 @@
         <coral-shell-suborganization name="microsoftsouthamerica" icon="adobeTarget">Microsoft South America</coral-shell-suborganization>
       </coral-shell-organization>
       <coral-shell-orgswitcher-footer>
-        <button is="coral-button" variant="quiet">Manage Organizations</button>
+        <button is="coral-button" variant="primary">Manage Organizations</button>
       </coral-shell-orgswitcher-footer>
     </coral-shell-orgswitcher>
   </coral-shell-menu>
@@ -94,13 +94,20 @@
     </coral-shell-solutionswitcher>
   </coral-shell-menu>
   <coral-shell-menu id="menu_user">
-    <coral-shell-user avatar="assets/avatar.jpg">
+    <coral-shell-user avatar="https://wwwimages2.adobe.com/content/dam/acom/en/leaders/photos/shantanu-narayen.jpg">
       <coral-shell-user-name>Shantanu Narayen</coral-shell-user-name>
       <coral-shell-user-heading>CEO</coral-shell-user-heading>
-      <coral-shell-user-subheading>Adobe Systems, Inc.</coral-shell-user-subheading>
+      <coral-shell-user-subheading>
+        <a is="coral-anchorbutton" variant="quiet" href="#profile">Edit Profile</a>
+      </coral-shell-user-subheading>
+      <coral-shell-user-content>
+        <coral-select variant="quiet">
+          <coral-select-item>Geometrixx</coral-select-item>
+          <coral-select-item>We.retail</coral-select-item>
+        </coral-select>
+      </coral-shell-user-content>
       <coral-shell-user-footer>
-        <a is="coral-anchorbutton" variant="quiet" href="#signout">Sign Out</a>
-        <a is="coral-anchorbutton" variant="quiet" href="#profile">Profile</a>
+        <a is="coral-anchorbutton" variant="primary" href="#signout">Sign Out</a>
       </coral-shell-user-footer>
     </coral-shell-user>
   </coral-shell-menu>

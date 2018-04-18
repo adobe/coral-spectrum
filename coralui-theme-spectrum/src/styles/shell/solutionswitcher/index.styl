@@ -16,16 +16,16 @@
  */
 
 $shell-solutionswitcher-transitiontime = 0.21s; // Fibonacci number
-$shell-solutionswitcher-background-color = rgb(30, 30, 30);
+$shell-solutionswitcher-background-color = rgb(38, 38, 38);
 $shell-solutionswitcher-iconsize = 48*$px;
 $shell-solutionswitcher-linked-solution-iconsize = 48*$px;
 $shell-solutionswitcher-icon-container-height = 48*$px;
 $shell-solutionswitcher-secondary-iconsize = 24*$px;
 $shell-solutions-border = 2*$px solid
 $shell-solutions-border-color = rgba(45, 45, 45, 1)
-$shell-solutions-header-text-color = rgba(133,133,133, 0.8);
+$shell-solutions-header-text-color = rgb(180, 180, 180);
 $shell-solution-linked-text-color = rgba(226,226,226, 0.8);
-$shell-solution-text-color = rgba(133,133,133, 0.8);
+$shell-solution-text-color = rgb(133, 133, 133);
 $shell-solution-text-color-hover = white;
 $shell-solution-icon-color = rgba(255, 255, 255, .45);
 $shell-solution-secondary-icon-color = rgba(255, 255, 255, .60);
@@ -68,11 +68,11 @@ $shell-solution-secondary-icon-color = rgba(255, 255, 255, .60);
 
 coral-shell-solutions-header {
   text-transform: uppercase;
-  padding-bottom: 14*$px;
+  padding-bottom: 10*$px;
   border-bottom: $shell-solutions-border $shell-solutions-border-color;
   text-decoration: none;
   color: $shell-solutions-header-text-color;
-  font-size: 12*$px;
+  font-size: 11*$px;
   font-weight: bold;
 }
 
@@ -104,7 +104,7 @@ coral-shell-solutions-header {
 }
 
 ._coral-Shell-solution--linked:hover ._coral-Shell-solution-icon {
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 ._coral-Shell-solution--linked ._coral-Shell-solution-icon:before {
@@ -126,7 +126,7 @@ coral-shell-solutions-header {
 
 coral-shell-solution-label {
   margin-left: 16*$px;
-  font-weight: 300;
+  font-size: 14*$px;
   transition: opacity $shell-solutionswitcher-transitiontime ease-out;
 }
 

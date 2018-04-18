@@ -15,76 +15,82 @@
  * from Adobe Systems Incorporated.
  */
 
-$user-width = 200*$px;
-$user-image-size = 48*$px;
-$user-name-color = rgb(60, 60, 60);
-$user-heading-color = rgb(112, 112, 112);
-$user-background = white;
+$user-width = 260*$px;
+$user-name-color = rgb(75, 75, 75);
+$user-heading-color = rgb(142, 142, 142);
+$user-separator-color = rgb(234, 234, 234);
 
 ._coral-Shell-user {
   display: block;
-
-  background: $user-background;
-}
-
-._coral-Shell-user-container {
-  padding: 20*$px 16*$px 16*$px 16*$px;
-
-  min-width: $user-width;
+  padding: 24*$px;
+  width: $user-width;
 }
 
 ._coral-Shell-user-image {
-  float: left;
-
-  width: $user-image-size;
-  height: $user-image-size;
-  margin-right: 16*$px;
-  line-height: $user-image-size;
-
-  border-radius: $user-image-size;
+  height: 64*$px;
+  width: 64*$px;
   overflow: hidden;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ._coral-Icon {
+    display: block;
+    border-radius: 100%;
+    object-fit: cover;
+  }
 }
 
 coral-shell-user-name {
   display: block;
-
-  font-size: 15*$px;
-  font-weight: bold;
+  text-align: center;
+  font-weight: 100;
+  font-size: 28*$px;
+  margin: 16*$px 0 8*$px;
   color: $user-name-color;
 }
 
-coral-shell-user-heading,
+coral-shell-user-heading {
+  display: block;
+  text-align: center;
+  font-size: 14*$px;
+  color: $user-heading-color;
+  padding-bottom: 16*$px;
+}
+
 coral-shell-user-subheading {
+  border-top: 2*$px solid $user-separator-color;
+  padding: 16*$px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &:empty {
+    display: none;
+  }
+}
+
+coral-shell-user-content {
+  border-top: 2*$px solid $user-separator-color;
+  padding: 16*$px 0;
   display: block;
 
-  font-size: 13*$px;
-  color: $user-heading-color;
+  &:empty {
+    display: none;
+  }
 }
 
 coral-shell-user-footer {
-  width: 100%;
-  display: table;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  margin-top: 8*$px;
-
-  background-color: rgb(250, 250, 250);
-
-  border-top: 1*$px solid rgb(235, 235, 235);
-
-  ._coral-Button {
-    display: table-cell;
-
-    // Make them be 44px so Lindsay is happy
-    padding: 3*$px 0;
-
-    border-radius: 0;
-
-    & + ._coral-Button {
-
-      &, &:focus {
-        border-left: 1*$px solid rgb(235, 235, 235);
-      }
-    }
+coral-shell-user-subheading,
+coral-shell-user-footer {
+  ._coral-Button + ._coral-Button {
+    margin-left: 0;
+    margin-top: 12*$px;
   }
 }
