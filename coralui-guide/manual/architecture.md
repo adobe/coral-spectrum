@@ -2,7 +2,7 @@
 
 ## Web Components
 
-Coral Spectrum hides implementation detail from consumers by leveraging the [Custom Elements v1](https://w3c.github.io/webcomponents/spec/custom/) 
+Coral Spectrum hides implementation detail from consumers by leveraging the [Custom Elements v1](https://html.spec.whatwg.org/multipage/custom-elements.html) 
 specification, which is part of the emerging [Web Components](https://www.webcomponents.org/introduction) standard.
 
 **Therefore any Coral CSS classes and attributes not explicitly mentioned in the public documentation are private and subject to change. 

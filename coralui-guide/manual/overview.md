@@ -28,7 +28,7 @@ the markup for a component, just like you would a normal HTML element.
 
 Coral Spectrum is pushing the web forward by leveraging the [Web Components](https://www.webcomponents.org/introduction) specification. 
 However, given the landscape of browser implementation and the state of the polyfill ecosystem, we decided to only implement 
-[Custom Elements v1](https://w3c.github.io/webcomponents/spec/custom/) at this time.
+[Custom Elements v1](https://html.spec.whatwg.org/multipage/custom-elements.html) at this time.
 
 A strong advantage Coral Spectrum derives from custom elements is the ability to hide many implementation details from the consumer. 
 More to the point, we found that designs become closely tied to their markup. The use of custom elements allows much more 
@@ -43,7 +43,7 @@ and lets us treat them like any other native element, setting properties, append
 The current default theme is is an implementation of the [Spectrum](http://spectrum.corp.adobe.com/) design specifications, Adobe’s design system.
 Spectrum provides elements and tools to help product teams work more efficiently, and to make Adobe’s applications more cohesive.
 
-Coral Spectrum leverages internally the [Spectrum CSS](http://spectrum-css.corp.adobe.com/) framework to style components including the Spectrum SVG icons. 
+Coral Spectrum leverages the [Spectrum CSS](http://spectrum-css.corp.adobe.com/) framework to style components including the Spectrum SVG icons. 
 To request new icons, please follow the instructions listed on http://icons.corp.adobe.com. Ideally, the icon team should be creating or reviewing every icon for every Adobe experience.  
 
 ## Accessibility

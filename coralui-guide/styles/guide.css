@@ -42,6 +42,11 @@ h2 {
   background: #fafafa;
 }
 
+img:not([src*=".svg"]).logo {
+  max-width: 500px;
+  box-shadow: none;
+}
+
 .navigation {
   border-right: none;
   background: white;
