@@ -111,7 +111,6 @@ class Popover extends Overlay {
     // Events
     this._delegateEvents({
       'global:capture:click': '_handleClick',
-      'click [coral-close]': '_handleCloseClick',
       'coral-overlay:positioned': '_onPositioned'
     });
     
@@ -364,19 +363,6 @@ class Popover extends Overlay {
     
       // Reposition as the height has changed
       this.reposition();
-    }
-  }
-  
-  /**
-   @ignore
-   @todo maybe this should be mixin or something
-   */
-  _handleCloseClick(event) {
-    const dismissTarget = event.matchedTarget;
-    const dismissValue = dismissTarget.getAttribute('coral-close');
-    if (!dismissValue || this.matches(dismissValue)) {
-      this.hide();
-      event.stopPropagation();
     }
   }
   
