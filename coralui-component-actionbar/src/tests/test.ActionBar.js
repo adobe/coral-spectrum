@@ -406,6 +406,31 @@ describe('ActionBar', function() {
         done();
       }, 100);
     });
+    
+    it('should copy button items attributes including classes', (done) => {
+      el._wait = 0;
+      el.primary.threshold = 1;
+  
+      const button1 = new Button();
+      const button2 = new Button();
+      
+      button2.classList.add('custom');
+      button2.dataset.custom = 'custom';
+      
+      el.primary.items.add({}).appendChild(button1);
+      el.primary.items.add({}).appendChild(button2);
+  
+      // Wait for resize listener and MO
+      window.setTimeout(() => {
+        el.primary._elements.moreButton.click();
+  
+        // 2nd item is hidden and only visible in more overlay
+        const hiddenButton = el.primary._elements.buttonList.items.first();
+        expect(hiddenButton.classList.contains('custom')).to.be.true;
+        expect(hiddenButton.dataset.custom).to.equal('custom');
+        done();
+      }, 100);
+    });
 
     it('should not move items to popover, that are hidden on purpose', function(done) {
       el._wait = 0;

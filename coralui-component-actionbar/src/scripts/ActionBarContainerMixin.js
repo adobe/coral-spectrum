@@ -25,6 +25,27 @@ import moreButton from '../templates/moreButton';
 import overlayContent from '../templates/overlayContent';
 import {commons, transform, i18n} from '../../../coralui-util';
 
+// Matches private Coral classes in class attribute
+const REG_EXP = /_coral([^\s]+)/g;
+
+const copyAttributes = (from, to) => {
+  const excludedAttributes = ['is', 'id', 'variant', 'size'];
+  
+  for (let i = 0; i < from.attributes.length; i++) {
+    const attr = from.attributes[i];
+    
+    if (excludedAttributes.indexOf(attr.nodeName) === -1) {
+      if (attr.nodeName === 'class') {
+        // Filter out private Coral classes
+        to.setAttribute(attr.nodeName, `${to.className} ${attr.nodeValue.replace(REG_EXP, '')}`);
+      }
+      else {
+        to.setAttribute(attr.nodeName, attr.nodeValue);
+      }
+    }
+  }
+};
+
 /**
  @mixin ActionBarContainerMixin
  @classdesc The base element for action bar containers
@@ -39,7 +60,10 @@ const ActionBarContainerMixin = (superClass) => class extends superClass {
     this._itemsInPopover = [];
     moreButton.call(this._elements);
     moreOverlay.call(this._elements, {commons});
-    overlayContent.call(this._elements, this._itemsInPopover);
+    overlayContent.call(this._elements, {
+      items: this._itemsInPopover,
+      copyAttributes
+    });
   
     const overlayId = this._elements.overlay.id;
     const events = {
@@ -180,7 +204,10 @@ const ActionBarContainerMixin = (superClass) => class extends superClass {
     // render popover content
     const popover = this._elements.overlay;
     popover.content.innerHTML = '';
-    popover.content.appendChild(overlayContent.call(this._elements, this._itemsInPopover));
+    popover.content.appendChild(overlayContent.call(this._elements, {
+      items: this._itemsInPopover,
+      copyAttributes
+    }));
     
     // focus first item (nextFrame needed as popover must be visible and initialized with items)
     const self = this;

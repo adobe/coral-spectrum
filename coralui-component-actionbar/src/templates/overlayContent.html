@@ -1,18 +1,9 @@
 <js>
-  var excludedAttributes = ['is', 'class', 'variant', 'size'];
-
-  function copyAttributes(from, to) {
-    for (var i = 0; i < from.attributes.length; i++) {
-    var attr = from.attributes[i];
-      if (excludedAttributes.indexOf(attr.nodeName) === -1) {
-        to.setAttribute(attr.nodeName, attr.nodeValue);
-      }
-    }
-  }
+  var copyAttributes = data.copyAttributes;
 </js>
-<if data.isButtonList>
+<if data.items.isButtonList>
   <coral-buttonlist class="_coral-ActionBar-buttonList" tabindex="0" coral-actionbar-offscreen handle="buttonList">
-    <foreach data>
+    <foreach data.items>
       <button is="coral-buttonlist-item" handle="buttonListItem">
         <js>
           copyAttributes(data._button, this.buttonListItem);
@@ -28,7 +19,7 @@
     </foreach>
   </coral-buttonlist>
   <else>
-    <if data.isAnchorList>
+    <if data.items.isAnchorList>
       <coral-anchorlist tabindex="0" coral-actionbar-offscreen handle="anchorList">
         <foreach data>
           <a is="coral-anchorlist-item" handle="anchorListItem">
@@ -47,7 +38,7 @@
       </coral-anchorlist>
       <else>
         <ul class="_coral-ActionBar-list">
-          <foreach data>
+          <foreach data.items>
             <li class="_coral-ActionBar-list-item">
               <partial data></partial>
             </li>
