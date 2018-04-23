@@ -20,10 +20,15 @@ module.exports = function(gulp) {
   const configFile = `${__dirname}/../configs/karma.conf.js`;
   
   gulp.task('karma', function(done) {
-    new KarmaServer({
+    KarmaServer.start({
       configFile: configFile,
       singleRun: true
-    }, done).start();
+    }, (err) => {
+      if (err) {
+        process.exit(err);
+      }
+      done();
+    });
   });
   
   gulp.task('karma-watch', function(done) {
