@@ -9,7 +9,9 @@
   "scripts": {
     "start": "gulp build && gulp watch",
     "build": "gulp build",
-    "test": "gulp tests"
+    "test": "gulp build && gulp karma",
+    "prepare-release": "gulp lint && gulp build && gulp karma && gulp examples && gulp minify && cd coralui-component-playground && gulp build && cd .. && gulp playground && gulp docs",
+    "perform-release": "gulp release && gulp deploy"
   },
   "dependencies": {
     "@coralui/vent": "^1.0.0",
