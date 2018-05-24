@@ -324,25 +324,13 @@ $table-drag-handle-icon-url = "../embed/DragHandle.svg";
 
     // The header cell content is styled to be displayed in sticky state
     coral-table-headercell-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      display: block;
       position absolute;
       box-sizing: border-box;
       line-height: 12*$px;
       min-height: 20*$px;
       padding: 4*$px 16*$px;
       margin-left: -16*$px;
-    }
-  }
-}
-
-// @polyfill ie/edge
-// polyfill for edge is necessary because flex + ::after (used for sorting icons) don't play well together
-._coral-Table-wrapper--IE {
-  ._coral-Table-head[sticky] {
-    coral-table-headercell-content {
-      display: block;
     }
   }
 }

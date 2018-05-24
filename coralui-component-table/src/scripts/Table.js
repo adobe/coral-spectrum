@@ -65,9 +65,6 @@ const IS_LAST_ITEM_DRAGGED = 'is-draggedLastItem';
 const IS_DRAGGING_CLASS = 'is-dragging';
 const IS_BEFORE_CLASS = 'is-before';
 const IS_AFTER_CLASS = 'is-after';
-const IS_IE_OR_EDGE = navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0 ||
-  navigator.userAgent.indexOf('Edge') !== -1;
-const IS_FIREFOX = navigator.userAgent.indexOf('Firefox') !== -1;
 const KEY_SPACE = Keys.keyToCode('space');
 
 /**
@@ -1889,11 +1886,7 @@ class Table extends ComponentMixin(HTMLTableElement) {
       headerCell.content.style.height = '';
       headerCell.content.style.top = '';
       headerCell.content.style.marginLeft = '';
-      
-      // @polyfill ie/edge/firefox
-      if (IS_IE_OR_EDGE || IS_FIREFOX) {
-        headerCell.content.style.paddingTop = '';
-      }
+      headerCell.content.style.paddingTop = '';
     }
   }
   
@@ -2179,9 +2172,8 @@ class Table extends ComponentMixin(HTMLTableElement) {
               headerCell.content.style.height = `${rowHeight}px`;
             }
             
-            // @polyfill ie/edge/firefox
             // Vertically align text in sticky cell by getting the label height
-            if ((IS_IE_OR_EDGE || IS_FIREFOX) && headerCell.content.textContent.trim().length) {
+            if (headerCell.content.textContent.trim().length) {
               const stickyHeaderCellHeight = headerCell.content.getBoundingClientRect().height;
               const span = document.createElement('span');
               
@@ -2423,11 +2415,6 @@ class Table extends ComponentMixin(HTMLTableElement) {
     super.connectedCallback();
     
     this.classList.add(CLASSNAME);
-  
-    // @polyfill ie/edge/firefox
-    if (IS_IE_OR_EDGE || IS_FIREFOX) {
-      this.classList.add(`${CLASSNAME}--IE`);
-    }
     
     // Wrapper should have role="presentation" because it wraps another table
     this.setAttribute('role', 'presentation');
