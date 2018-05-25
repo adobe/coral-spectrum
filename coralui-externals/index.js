@@ -12,7 +12,7 @@ import Promise from 'promise-polyfill';
 // Positioning
 import PopperJS from 'popper.js';
 // Eventing
-import Vent from '@coralui/vent';
+import Vent from '@adobe/vent';
 // Adobe fonts
 import './libs/typekit';
 

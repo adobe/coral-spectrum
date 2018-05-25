@@ -53,7 +53,7 @@ without being considered an external dependency.
 These dependencies are:
 * [Custom Elements v1 polyfill](https://github.com/webcomponents/custom-elements/) with built-in components support
 * [DOMly](https://github.com/lazd/domly) to render HTML templates
-* [Vent](https://git.corp.adobe.com//lawdavis/vent) for DOM event delegation
+* [Vent](https://github.com/adobe/vent) for DOM event delegation
 * [PopperJS](https://popper.js.org/) to manager poppers
 
 
