@@ -21,6 +21,11 @@ components including the Spectrum SVG icons.
 To request new icons, please follow the instructions listed on http://icons.corp.adobe.com. Ideally, the icon team 
 should be creating or reviewing every icon for every Adobe experience.
 
+All components can be seen in action <a href="../examples" target="_blank">here</a>. These are only examples and 
+don't cover all scenarios. The API documentation can be found in the <a href="./identifiers.html" target="_blank">references</a>.    
+A playground is available <a href="../playground" target="_blank">here</a> to experiment and preview code with the latest Coral Spectrum version.
+Code can be shared by copy pasting the URL. The playground is sandboxed to prevent security risks.
+
 ### [» Overview](./manual/overview.html)
 Vision and goals
 ### [» Manual](./manual/manual.html)
