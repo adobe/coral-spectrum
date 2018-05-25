@@ -102,4 +102,34 @@ Coral.register({
 ```
 will not extend `Coral.Alert`. Instead use ES6 classes `extend` feature to extend Coral Spectrum components.
 
+### API changes 
+ 
+Due to the new Spectrum design, the API of few components were adapted accordingly: 
+ 
+#### SVG Icons
 
+Coral Spectrum ships SVG icons that need to be loaded first before being displayed. 
+There are several ways to load the icons: 
+* Reuse the same file structure as in the `build` folder with `css/coral.css`, `js/coral.js` and `resources/*.svg`.   
+* Add `data-coral-icons="PATH_TO_RESOURCES_FOLDER"` to the `<script>` loading Coral Spectrum. See [options](../class/coral-spectrum/coralui-util/src/scripts/Commons.js~Commons.html#instance-member-options) for details.
+* Use [Coral.Icon#load](../class/coral-spectrum/coralui-component-icon/src/scripts/Icon.js~Icon.html#static-method-load) to load the icon set on demand.
+ 
+#### CTA Buttons
+
+Spectrum has deliberately changed [ButtonVariantEnum.PRIMARY](../typedef/index.html#static-typedef-ButtonVariantEnum). 
+The blue button (Call To Action) should really only show up maybe once per page therefore we encourage teams to review the usage of 
+Primary Button and switch to CTA Button only when it makes sense.
+
+#### Dialog Popovers
+
+Spectrum Popovers are coming in 2 different variations: 
+ * Dialog Popover with header, content and footer section
+ * Flyout Popover used as dropdown in other components
+ 
+Therefore [PopoverVariantEnum.FLYOUT](../typedef/index.html#static-typedef-PopoverVariantEnum) was added in addition 
+to the default Popover variant used to render a Dialog Popover.     
+
+ 
+ 
+ 
+ 
