@@ -103,7 +103,7 @@ class TagList extends FormFieldMixin(ComponentMixin(HTMLElement)) {
         this._attachInputToItem(item);
     
         this.items.add(item);
-      }, this);
+      });
     }
   }
   
@@ -142,7 +142,7 @@ class TagList extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       if (item._input) {
         item._input.name = this._name;
       }
-    }, this);
+    });
   }
   
   /**
@@ -191,7 +191,7 @@ class TagList extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       if (item._input) {
         item._input.disabled = this._disabled;
       }
-    }, this);
+    });
     
     // a11y
     this.setAttribute('aria-disabled', this._disabled);
@@ -225,7 +225,7 @@ class TagList extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     this.items.getAll().forEach((item) => {
       item.closable = !this._readOnly;
-    }, this);
+    });
   
     // a11y
     this.setAttribute('aria-readonly', this._readOnly);

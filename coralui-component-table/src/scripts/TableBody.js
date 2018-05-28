@@ -51,7 +51,7 @@ class TableBody extends TableSectionMixin(ComponentMixin(HTMLTableSectionElement
         addedNodes: mutation.addedNodes,
         removedNodes: mutation.removedNodes
       });
-    }, this);
+    });
   }
   
   /** @ignore */

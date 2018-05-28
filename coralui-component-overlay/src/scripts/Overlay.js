@@ -559,7 +559,7 @@ class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
           
           modifier.boundariesElement = this.within;
         }
-      }, this);
+      });
   
       if (this.open || forceReposition) {
         this._popper.update();

@@ -152,7 +152,7 @@ class ColumnView extends ComponentMixin(HTMLElement) {
     // propagates the selection mode to the columns
     this.columns.getAll().forEach((item) => {
       item.setAttribute('_selectionmode', this._selectionMode);
-    }, this);
+    });
   
     this.classList.remove(`${CLASSNAME}--selection`);
   

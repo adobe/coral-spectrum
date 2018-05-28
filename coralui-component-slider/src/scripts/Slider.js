@@ -151,7 +151,7 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       this._elements.inputs.forEach((input) => {
         input.setAttribute('step', this._step);
         input.setAttribute('aria-valuestep', this._step);
-      }, this);
+      });
     }
   }
   
@@ -174,7 +174,7 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._elements.inputs.forEach((input) => {
       input.setAttribute('min', this._min);
       input.setAttribute('aria-valuemin', this._min);
-    }, this);
+    });
   }
   
   /**
@@ -196,7 +196,7 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._elements.inputs.forEach((input) => {
       input.setAttribute('max', this._max);
       input.setAttribute('aria-valuemax', this._max);
-    }, this);
+    });
   }
   
   /**
@@ -295,7 +295,7 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     this._elements.inputs.forEach((input) => {
       input.name = this.getAttribute('name');
-    }, this);
+    });
   }
   
   /**
@@ -349,7 +349,7 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this.setAttribute('aria-disabled', this._disabled);
     this._elements.inputs.forEach((input) => {
       input.disabled = this._disabled;
-    }, this);
+    });
   }
   
   /**
@@ -369,7 +369,7 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this.setAttribute('aria-required', this._required);
     this._elements.inputs.forEach((input) => {
       input.required = this._required;
-    }, this);
+    });
   }
   
   /**
@@ -389,7 +389,7 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this.setAttribute('aria-readonly', this._readOnly);
     this._elements.inputs.forEach((input) => {
       input.readOnly = this._readOnly;
-    }, this);
+    });
   }
   
   /**
@@ -421,7 +421,7 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
         input.value = value;
         input.setAttribute('aria-valuenow', value);
         input.setAttribute('aria-valuetext', this._getLabel(value));
-      }, this);
+      });
     
       this._moveHandles();
     }

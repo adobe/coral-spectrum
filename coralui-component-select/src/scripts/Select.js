@@ -238,7 +238,7 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
           this._elements.input.value = itemValueFromDOM(item);
         }
       }
-    }, this);
+    });
   }
   
   /**
@@ -1344,7 +1344,7 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this.selectedItems.forEach((item) => {
       // we use DOM API instead of properties in case the item is not yet initialized
       this._initialValues.push(itemValueFromDOM(item));
-    }, this);
+    });
   
     // Cleanup template elements (supporting cloneNode)
     const templateElements = this.querySelectorAll('[handle]');

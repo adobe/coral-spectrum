@@ -93,7 +93,7 @@ class ShellHelp extends ComponentMixin(HTMLElement) {
     this.setAttribute('id', this.id || commons.getUID());
     Array.prototype.forEach.call(this.querySelectorAll(`#${this.id} > a[is="coral-shell-help-item"]`), (item) => {
       this._elements.items.appendChild(item);
-    }, this);
+    });
   }
   
   /** @private */
@@ -188,7 +188,7 @@ class ShellHelp extends ComponentMixin(HTMLElement) {
         }).firstElementChild;
         
         this._elements.results.appendChild(item);
-      }, this);
+      });
       
       // Show results
       this._elements.results.hidden = false;
@@ -231,7 +231,7 @@ class ShellHelp extends ComponentMixin(HTMLElement) {
   
       ['search', 'result', 'items', 'results', 'resultMessage', 'loading'].forEach((handle) => {
         this._elements[handle] = this.querySelector(`[handle="${handle}"]`);
-      }, this);
+      });
       this._items._container = this._elements.items;
     }
     else {

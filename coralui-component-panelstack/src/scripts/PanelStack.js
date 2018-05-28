@@ -97,7 +97,7 @@ class PanelStack extends ComponentMixin(HTMLElement) {
           this._preventTriggeringEvents = true;
           selectedItem.removeAttribute('selected');
         }
-      }, this);
+      });
   
       // We can trigger change events again
       this._preventTriggeringEvents = false;

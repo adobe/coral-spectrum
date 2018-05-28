@@ -323,7 +323,7 @@ class FileUpload extends FormFieldMixin(ComponentMixin(HTMLElement)) {
           input.value = param.value;
       
           this.appendChild(input);
-        }, this);
+        });
       }
     }
   }
@@ -746,14 +746,14 @@ class FileUpload extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       item.classList.toggle('is-required', this.required);
       item.classList.toggle('is-readOnly', this.readOnly);
       item[this.disabled || this.readOnly ? 'setAttribute' : 'removeAttribute']('disabled', '');
-    }, this);
+    });
   }
   
   /** @private */
   _clearQueue() {
     this._uploadQueue.slice().forEach((item) => {
       this._clearFile(item.file.name);
-    }, this);
+    });
   }
   
   /**
@@ -982,7 +982,7 @@ class FileUpload extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       this._uploadQueue.forEach((item) => {
         this._abortFile(item.file.name);
         this._ajaxUpload(item);
-      }, this);
+      });
     }
   }
   
@@ -1027,7 +1027,7 @@ class FileUpload extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       // Abort all files
       this._uploadQueue.forEach((item) => {
         this._abortFile(item.file.name);
-      }, this);
+      });
     }
   }
   

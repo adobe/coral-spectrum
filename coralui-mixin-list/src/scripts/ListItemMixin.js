@@ -118,7 +118,7 @@ const ListItemMixin = (superClass) => class extends superClass {
     // Cleanup template elements (supporting cloneNode)
     Array.prototype.filter.call(this.children, (child) => child.hasAttribute('handle')).forEach((handleItem) => {
       this.removeChild(handleItem);
-    }, this);
+    });
   
     // Move any remaining elements into the content sub-component
     while (this.firstChild) {

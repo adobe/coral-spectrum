@@ -354,7 +354,7 @@ class Table extends ComponentMixin(HTMLTableElement) {
   
     getRows([this.body]).forEach((row) => {
       row[this._orderable ? 'setAttribute' : 'removeAttribute']('_orderable', '');
-    }, this);
+    });
   
     // a11y
     this._toggleFocusable();
@@ -428,7 +428,7 @@ class Table extends ComponentMixin(HTMLTableElement) {
   
     getRows([this.body]).forEach((row) => {
       row[this._lockable ? 'setAttribute' : 'removeAttribute']('_lockable', '');
-    }, this);
+    });
   
     // a11y
     this._toggleFocusable();
@@ -2377,7 +2377,7 @@ class Table extends ComponentMixin(HTMLTableElement) {
           });
         }
       }
-    }, this);
+    });
   
     this._resetLayout();
   }
@@ -2474,8 +2474,8 @@ class Table extends ComponentMixin(HTMLTableElement) {
     getRows([this._elements.table]).forEach((row) => {
       getHeaderCells(row).forEach((headerCell) => {
         this._setHeaderCellScope(headerCell, row.parentNode);
-      }, this);
-    }, this);
+      });
+    });
     
     // Detect table size changes
     commons.addResizeListener(this, this._resetLayout);

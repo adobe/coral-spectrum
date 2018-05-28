@@ -231,12 +231,12 @@ class WizardView extends ComponentMixin(HTMLElement) {
     // we apply the selection to all available steplists
     this.stepLists.getAll().forEach((stepList) => {
       this._selectItemByIndex(stepList, index);
-    }, this);
+    });
     
     // we apply the selection to all available panelstacks
     this.panelStacks.getAll().forEach((panelStack) => {
       this._selectItemByIndex(panelStack, index);
-    }, this);
+    });
   }
   
   /**
@@ -260,7 +260,7 @@ class WizardView extends ComponentMixin(HTMLElement) {
     
     this.panelStacks.getAll().forEach((panelStack) => {
       this._selectItemByIndex(panelStack, index);
-    }, this);
+    });
   }
   
   /**
@@ -284,7 +284,7 @@ class WizardView extends ComponentMixin(HTMLElement) {
     
     this.stepLists.getAll().forEach((stepList) => {
       this._selectItemByIndex(stepList, index);
-    }, this);
+    });
   }
   
   /**

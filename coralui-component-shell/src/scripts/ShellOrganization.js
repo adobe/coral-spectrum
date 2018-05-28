@@ -201,7 +201,7 @@ class ShellOrganization extends List.Item {
       if (!this._elements.items.contains(item)) {
         this._elements.items.appendChild(item);
       }
-    }, this);
+    });
   }
   
   /** @private */

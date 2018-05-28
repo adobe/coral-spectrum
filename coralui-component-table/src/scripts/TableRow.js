@@ -109,7 +109,7 @@ class TableRow extends ComponentMixin(HTMLTableRowElement) {
     
     this.items.getAll().forEach((cell) => {
       cell[this._selectable ? 'setAttribute' : 'removeAttribute']('_selectable', '');
-    }, this);
+    });
   }
   
   /**
@@ -263,7 +263,7 @@ class TableRow extends ComponentMixin(HTMLTableRowElement) {
         addedNodes: mutation.addedNodes,
         removedNodes: mutation.removedNodes
       });
-    }, this);
+    });
   }
   
   /** @ignore */

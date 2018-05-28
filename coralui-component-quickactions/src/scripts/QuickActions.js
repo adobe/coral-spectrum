@@ -1140,7 +1140,7 @@ class QuickActions extends Overlay {
       if (handle) {
         handle.remove();
       }
-    }, this);
+    });
   
     // Cannot be open by default when rendered
     this._elements.overlay.removeAttribute('open');

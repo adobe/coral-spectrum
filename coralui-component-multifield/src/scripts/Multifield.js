@@ -318,7 +318,7 @@ class Multifield extends ComponentMixin(HTMLElement) {
     // Prepare items content based on the given template
     this.items.getAll().forEach((item) => {
       this._renderTemplate(item);
-    }, this);
+    });
   }
 }
 

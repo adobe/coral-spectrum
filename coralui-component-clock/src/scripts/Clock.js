@@ -571,7 +571,7 @@ class Clock extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // Render template
     ['input', 'valueAsText', 'hours', 'divider', 'minutes', 'period'].forEach((handle) => {
       this.appendChild(this._elements[handle]);
-    }, this);
+    });
     
     this._syncDisplay();
   }

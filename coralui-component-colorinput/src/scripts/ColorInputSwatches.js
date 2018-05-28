@@ -108,7 +108,7 @@ class ColorInputSwatches extends ColorInputAbstractSubviewMixin(ComponentMixin(H
           this._preventTriggeringEvents = true;
           selectedItem.removeAttribute('selected');
         }
-      }, this);
+      });
       
       // We can trigger change events again
       this._preventTriggeringEvents = false;
