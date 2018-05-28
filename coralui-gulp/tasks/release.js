@@ -17,6 +17,7 @@
 module.exports = function(gulp) {
   const fs = require('fs');
   const exec = require('child_process').exec;
+  const spawn = require('child_process').spawn;
   const runSequence = require('run-sequence').use(gulp);
   const del = require('del');
   const inq = require('inquirer');
@@ -223,6 +224,25 @@ module.exports = function(gulp) {
           }
         });
     }
+  });
+  
+  gulp.task('prepare', () => {
+    if (CWD !== root) {
+      console.error('Prepare aborted: not in root folder.');
+    
+      return;
+    }
+    
+    spawn(`
+      gulp build &&
+      gulp karma &&
+      gulp examples &&
+      gulp minify &&
+      cd coralui-component-playground && gulp build &&
+      cd .. &&
+      gulp playground &&
+      gulp docs
+    `, [], {shell: true, stdio: 'inherit'});
   });
   
   // Full release task
