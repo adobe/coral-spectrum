@@ -22,6 +22,7 @@ module.exports = function(gulp) {
   gulp.task('build', function() {
     runSequence(
       'clean',
+      'lint',
       'styles',
       'resources',
       'templates',

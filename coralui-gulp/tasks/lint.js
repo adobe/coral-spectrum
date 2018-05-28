@@ -31,5 +31,6 @@ module.exports = function(gulp) {
       .pipe(plumber())
       .pipe(eslint())
       .pipe(eslint.format())
+      .pipe(eslint.failAfterError());
   });
 };
