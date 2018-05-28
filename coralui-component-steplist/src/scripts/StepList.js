@@ -144,15 +144,14 @@ class StepList extends ComponentMixin(HTMLElement) {
   set target(value) {
     if (value === null || typeof value === 'string' || value instanceof Node) {
       this._target = value;
-  
-      const self = this;
+      
       // we do this in the sync in case the target was not yet in the DOM
       window.requestAnimationFrame(() => {
-        const realTarget = getTarget(self._target);
+        const realTarget = getTarget(this._target);
   
         // we add proper accessibility if available
         if (realTarget) {
-          const stepItems = self.items.getAll();
+          const stepItems = this.items.getAll();
           const panelItems = realTarget.items ? realTarget.items.getAll() : realTarget.children;
     
           // we need to add a11y to all components, regardless of whether they can be perfectly paired
@@ -549,11 +548,10 @@ class StepList extends ComponentMixin(HTMLElement) {
   
     this._oldSelection = this.selectedItem;
     
-    const self = this;
     window.customElements.whenDefined('coral-step').then(() => {
-      self._allChildrenAdded = true;
+      this._allChildrenAdded = true;
       // Force label update
-      self._updateLabels();
+      this._updateLabels();
     });
   }
   

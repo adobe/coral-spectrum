@@ -336,31 +336,29 @@ const ComponentMixin = (superClass) => class extends superClass {
   constructor() {
     super();
     
-    const self = this;
-    
     // Attach Vent
-    self._vent = new Vent(self);
-    self._events = {};
+    this._vent = new Vent(this);
+    this._events = {};
     
     // Content zone MO for virtual DOM support
-    if (self._contentZones) {
-      self._contentZoneObserver = new MutationObserver((mutations) => {
+    if (this._contentZones) {
+      this._contentZoneObserver = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
           for (let i = 0; i < mutation.addedNodes.length; i++) {
             const addedNode = mutation.addedNodes[i];
         
-            for (const name in self._contentZones) {
-              const contentZone = self._contentZones[name];
+            for (const name in this._contentZones) {
+              const contentZone = this._contentZones[name];
               if (addedNode.nodeName.toLowerCase() === name && !addedNode._contentZoned) {
                 // Insert the content zone at the right position
-                self[contentZone] = addedNode;
+                this[contentZone] = addedNode;
               }
             }
           }
         });
       });
   
-      self._contentZoneObserver.observe(self, {
+      this._contentZoneObserver.observe(this, {
         childList: true,
         subtree: true
       });
@@ -600,24 +598,22 @@ const ComponentMixin = (superClass) => class extends superClass {
    @returns {ComponentMixin} this, chainable.
    */
   set(propertyOrProperties, valueOrSilent, silent) {
-    const self = this;
-    
     let property;
     let properties;
     let value;
     
-    const isContentZone = (prop) => self._contentZones && commons.swapKeysAndValues(self._contentZones)[prop];
+    const isContentZone = (prop) => this._contentZones && commons.swapKeysAndValues(this._contentZones)[prop];
     
     const updateContentZone = (prop, val) => {
       // If content zone exists and we only want to update properties on the content zone
-      if (self[prop] instanceof HTMLElement && !(val instanceof HTMLElement)) {
+      if (this[prop] instanceof HTMLElement && !(val instanceof HTMLElement)) {
         for (const contentZoneProperty in val) {
-          self[prop][contentZoneProperty] = val[contentZoneProperty];
+          this[prop][contentZoneProperty] = val[contentZoneProperty];
         }
       }
       // Else assign the new value to the content zone
       else {
-        self[prop] = val;
+        this[prop] = val;
       }
     };
     
@@ -626,9 +622,9 @@ const ComponentMixin = (superClass) => class extends superClass {
         updateContentZone(prop, val);
       }
       else {
-        self._silenced = silent;
-        self[prop] = val;
-        self._silenced = false;
+        this._silenced = silent;
+        this[prop] = val;
+        this._silenced = false;
       }
     };
     
@@ -697,10 +693,9 @@ const ComponentMixin = (superClass) => class extends superClass {
   /** @ignore */
   // eslint-disable-next-line no-unused-vars
   attributeChangedCallback(name, oldValue, value) {
-    const self = this;
-    if (!self._reflectedAttribute) {
+    if (!this._reflectedAttribute) {
       // Use the attribute/property mapping
-      self[self._attributes[name] || name] = value;
+      this[this._attributes[name] || name] = value;
     }
   }
   

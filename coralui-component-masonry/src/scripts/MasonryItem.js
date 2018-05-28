@@ -88,9 +88,8 @@ class MasonryItem extends ComponentMixin(HTMLElement) {
       this.classList.remove('is-beforeInserting');
       this.classList.add('is-inserting');
       
-      const self = this;
       commons.transitionEnd(this, () => {
-        self.classList.remove('is-inserting');
+        this.classList.remove('is-inserting');
       });
     }
   }
@@ -136,10 +135,9 @@ class MasonryItem extends ComponentMixin(HTMLElement) {
   /** @ignore */
   attributeChangedCallback(name, oldValue, value) {
     if (name === '_removing') {
-      const self = this;
       // Do it in the next frame so that the removing animation is visible
       window.requestAnimationFrame(() => {
-        self.classList.toggle('is-removing', value !== null);
+        this.classList.toggle('is-removing', value !== null);
       });
     }
     else if (name === '_orderable') {

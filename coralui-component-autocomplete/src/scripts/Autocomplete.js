@@ -992,7 +992,6 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     const items = selectList._getSelectableItems();
     let index;
     let item;
-    const self = this;
     
     if (currentItem) {
       index = items.indexOf(currentItem);
@@ -1009,7 +1008,7 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
         if (currentItem) {
           currentItem.classList.remove('is-focused');
         }
-        self._scrollItemIntoView(item);
+        this._scrollItemIntoView(item);
         item.classList.add('is-focused');
         input.setAttribute('aria-activedescendant', item.id);
       }
@@ -1028,7 +1027,6 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     const items = selectList._getSelectableItems();
     let index;
     let item;
-    const self = this;
     
     if (currentItem) {
       index = items.indexOf(currentItem);
@@ -1043,7 +1041,7 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     window.requestAnimationFrame(() => {
       if (item) {
-        self._scrollItemIntoView(item);
+        this._scrollItemIntoView(item);
         item.classList.add('is-focused');
         input.setAttribute('aria-activedescendant', item.id);
       }
@@ -1136,7 +1134,6 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
   /** @private */
   _handleFocusOut(event) {
-    const self = this;
     const selectList = this._elements.selectList;
     const target = event.target;
     const inputBlur = target === this._elements.input;
@@ -1149,11 +1146,11 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // Firefox doesn't support focusout/focusin, so we're left doing awful things
     this._blurTimeout = window.setTimeout(() => {
       const relatedTarget = document.activeElement;
-      const focusOutside = !self.contains(relatedTarget);
+      const focusOutside = !this.contains(relatedTarget);
       
       // If focus has moved out of the autocomplete, it's an input event
-      if (inputBlur && focusOutside && !self.multiple) {
-        self._handleInput(event);
+      if (inputBlur && focusOutside && !this.multiple) {
+        this._handleInput(event);
       }
       // Nothing was focused
       else if (!relatedTarget || ((inputBlur || relatedTarget !== document.body) &&
@@ -1161,7 +1158,7 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
         focusOutside ||
         // Focus has shifted from the selectList to another element inside of the autocomplete component
         selectList.contains(target) && !selectList.contains(relatedTarget))) {
-        self.hideSuggestions();
+        this.hideSuggestions();
       }
     }, 0);
   }
@@ -1493,9 +1490,8 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     // Focus on the input element
     // We have to wait a frame here because the item steals focus when selected
-    const self = this;
     window.requestAnimationFrame(() => {
-      self._elements.input.focus();
+      this._elements.input.focus();
     });
     
     // Hide the options when option is selected in all cases

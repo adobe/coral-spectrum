@@ -325,7 +325,6 @@ class SelectList extends ComponentMixin(HTMLElement) {
    @private
    */
   _onKeyPress(event) {
-    const self = this;
     // The string entered when the key was pressed
     const newString = String.fromCharCode(event.which);
     
@@ -339,7 +338,7 @@ class SelectList extends ComponentMixin(HTMLElement) {
     
     // Set a timeout so that _keypressSearchString is cleared after 1 second
     this._keypressTimeoutID = window.setTimeout(() => {
-      self._keypressSearchString = '';
+      this._keypressSearchString = '';
     }, this._keypressTimeoutDuration);
     
     // Search within selectable items

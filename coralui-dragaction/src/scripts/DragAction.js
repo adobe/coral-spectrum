@@ -156,16 +156,16 @@ function within(scrollingElement, a, b) {
 
 /**
  @ignore
- @param {DragAction} self
+ @param {DragAction} dragAction
  Coral.DragAction instance
  @returns {HTMLElement}
  The dropzone that is being hovered by the dragged element or null if none
  */
-function isOverDropZone(self) {
+function isOverDropZone(dragAction) {
   let el = null;
-  if (self._dropZones && self._dropZones.length) {
-    self._dropZones.some((dropZone) => {
-      if (within(self._scrollingElement, self._dragElement, dropZone)) {
+  if (dragAction._dropZones && dragAction._dropZones.length) {
+    dragAction._dropZones.some((dropZone) => {
+      if (within(dragAction._scrollingElement, dragAction._dragElement, dropZone)) {
         el = dropZone;
         return true;
       }
@@ -313,11 +313,10 @@ class DragAction {
     
       // Bind events
       if (this._handles && this._handles.length) {
-        const self = this;
         this._handles.forEach((handle) => {
           handle._dragEvents = handle._dragEvents || new Vent(handle);
-          handle._dragEvents.on('mousedown.CoralDragAction', self._dragStart.bind(self));
-          handle._dragEvents.on('touchstart.CoralDragAction', self._dragStart.bind(self));
+          handle._dragEvents.on('mousedown.CoralDragAction', this._dragStart.bind(this));
+          handle._dragEvents.on('touchstart.CoralDragAction', this._dragStart.bind(this));
           handle.classList.add(OPEN_HAND_CLASS);
         });
       }
@@ -465,7 +464,6 @@ class DragAction {
   /** @private */
   _drag(event) {
     if (this._dragElement.classList.contains(IS_DRAGGING_CLASS)) {
-      const self = this;
       const pagePosition = getPagePosition(event);
   
       const documentScrollTop = this._scrollingElement.scrollTop;
@@ -492,9 +490,9 @@ class DragAction {
         left: containerBoundingClientRect.left + documentScrollLeft
       };
       
-      self._dragEvents.dispatch('coral-dragaction:drag', {
+      this._dragEvents.dispatch('coral-dragaction:drag', {
         detail: {
-          dragElement: self._dragElement,
+          dragElement: this._dragElement,
           pageX: pagePosition.x,
           pageY: pagePosition.y
         }
@@ -610,40 +608,40 @@ class DragAction {
       this._dragElement.style.left = `${newPosition.left - dragElementPosition.left + dragElementCSSPosition.left}px`;
       
       // Trigger dropzone related events
-      const dropZone = isOverDropZone(self);
+      const dropZone = isOverDropZone(this);
       if (dropZone) {
-        self._dropElement = dropZone;
-        if (!self._dropZoneEntered) {
-          self._dropZoneEntered = true;
-          self._dragEvents.dispatch('coral-dragaction:dragenter', {
+        this._dropElement = dropZone;
+        if (!this._dropZoneEntered) {
+          this._dropZoneEntered = true;
+          this._dragEvents.dispatch('coral-dragaction:dragenter', {
             detail: {
-              dragElement: self._dragElement,
+              dragElement: this._dragElement,
               pageX: pagePosition.x,
               pageY: pagePosition.y,
-              dropElement: self._dropElement
+              dropElement: this._dropElement
             }
           });
         }
-        
-        self._dragEvents.dispatch('coral-dragaction:dragover', {
+  
+        this._dragEvents.dispatch('coral-dragaction:dragover', {
           detail: {
-            dragElement: self._dragElement,
+            dragElement: this._dragElement,
             pageX: pagePosition.x,
             pageY: pagePosition.y,
-            dropElement: self._dropElement
+            dropElement: this._dropElement
           }
         });
       }
-      else if (self._dropZoneEntered) {
-        self._dragEvents.dispatch('coral-dragaction:dragleave', {
+      else if (this._dropZoneEntered) {
+        this._dragEvents.dispatch('coral-dragaction:dragleave', {
           detail: {
-            dragElement: self._dragElement,
+            dragElement: this._dragElement,
             pageX: pagePosition.x,
             pageY: pagePosition.y,
-            dropElement: self._dropElement
+            dropElement: this._dropElement
           }
         });
-        self._dropZoneEntered = false;
+        this._dropZoneEntered = false;
       }
     }
   }

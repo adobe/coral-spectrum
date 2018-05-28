@@ -226,14 +226,13 @@ class Tooltip extends Overlay {
   
   /** @ignore */
   _handleFocusOut() {
-    const self = this;
     // The item that should have focus will get it on the next frame
     window.requestAnimationFrame(() => {
-      const targetIsFocused = document.activeElement === self._getTarget();
+      const targetIsFocused = document.activeElement === this._getTarget();
       
       if (!targetIsFocused) {
-        self._cancelShow();
-        self.open = false;
+        this._cancelShow();
+        this.open = false;
       }
     });
   }
@@ -255,9 +254,8 @@ class Tooltip extends Overlay {
       this._handleFocusOut();
     }
     else {
-      const self = this;
       this._hideTimeout = window.setTimeout(() => {
-        self._handleFocusOut();
+        this._handleFocusOut();
       }, this.delay);
     }
   }
@@ -267,57 +265,55 @@ class Tooltip extends Overlay {
     if (!target) {
       return;
     }
-  
-    const self = this;
     
     // Make sure we don't add listeners twice to the same element for this particular tooltip
-    if (target[`_hasCoralTooltipListeners${self._id}`]) {
+    if (target[`_hasCoralTooltipListeners${this._id}`]) {
       return;
     }
-    target[`_hasCoralTooltipListeners${self._id}`] = true;
+    target[`_hasCoralTooltipListeners${this._id}`] = true;
     
     // Remove listeners from the old target
-    if (self._oldTarget) {
-      const oldTarget = self._getTarget(self._oldTarget);
+    if (this._oldTarget) {
+      const oldTarget = this._getTarget(this._oldTarget);
       if (oldTarget) {
-        self._removeTargetListeners(oldTarget);
+        this._removeTargetListeners(oldTarget);
       }
     }
     
     // Store the current target value
-    self._oldTarget = target;
+    this._oldTarget = target;
     
     // Use Vent to bind events on the target
-    self._targetEvents = new Vent(target);
+    this._targetEvents = new Vent(target);
   
-    self._targetEvents.on(`mouseenter.CoralTooltip${self._id} focusin.CoralTooltip${self._id}`, () => {
+    this._targetEvents.on(`mouseenter.CoralTooltip${this._id} focusin.CoralTooltip${this._id}`, () => {
       // Don't let the tooltip hide
-      self._cancelHide();
+      this._cancelHide();
       
-      if (!self.open) {
-        self._cancelShow();
+      if (!this.open) {
+        this._cancelShow();
         
-        if (self.delay === 0) {
+        if (this.delay === 0) {
           // Show immediately
-          self.show();
+          this.show();
         }
         else {
-          self._showTimeout = window.setTimeout(() => {
-            self.show();
-          }, self.delay);
+          this._showTimeout = window.setTimeout(() => {
+            this.show();
+          }, this.delay);
         }
       }
     });
   
-    self._targetEvents.on(`mouseleave.CoralTooltip${self._id}`, () => {
-      if (self.interaction === self.constructor.interaction.ON) {
-        self._startHide();
+    this._targetEvents.on(`mouseleave.CoralTooltip${this._id}`, () => {
+      if (this.interaction === this.constructor.interaction.ON) {
+        this._startHide();
       }
     });
   
-    self._targetEvents.on(`focusout.CoralTooltip${self._id}`, () => {
-      if (self.interaction === self.constructor.interaction.ON) {
-        self._handleFocusOut();
+    this._targetEvents.on(`focusout.CoralTooltip${this._id}`, () => {
+      if (this.interaction === this.constructor.interaction.ON) {
+        this._handleFocusOut();
       }
     });
   }

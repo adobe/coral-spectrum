@@ -149,15 +149,14 @@ class TreeItem extends ComponentMixin(HTMLElement) {
     subTreeContainer.setAttribute('aria-hidden', !this._expanded);
     
     this.trigger('coral-tree-item:_expandedchanged');
-  
-    const self = this;
+    
     // Do animation in next frame to avoid a forced reflow
     window.requestAnimationFrame(() => {
       // Don't animate on initialization
-      if (self._animate) {
+      if (this._animate) {
         // Remove height as we want the drawer to naturally grow if content is added later
         commons.transitionEnd(subTreeContainer, () => {
-          if (self.expanded) {
+          if (this.expanded) {
             subTreeContainer.style.height = '';
           }
           else {
@@ -166,12 +165,12 @@ class TreeItem extends ComponentMixin(HTMLElement) {
   
           // Trigger once the animation is over to inform coral-tree
           if (triggerEvent) {
-            self.trigger('coral-tree-item:_afterexpandedchanged');
+            this.trigger('coral-tree-item:_afterexpandedchanged');
           }
         });
     
         // Force height to enable transition
-        if (!self.expanded) {
+        if (!this.expanded) {
           subTreeContainer.style.height = `${subTreeContainer.scrollHeight}px`;
         }
         else {
@@ -183,14 +182,14 @@ class TreeItem extends ComponentMixin(HTMLElement) {
         // eslint-disable-next-line no-unused-vars
         const offsetHeight = subTreeContainer.offsetHeight;
         
-        subTreeContainer.style.height = self.expanded ? `${subTreeContainer.scrollHeight}px` : 0;
+        subTreeContainer.style.height = this.expanded ? `${subTreeContainer.scrollHeight}px` : 0;
       }
       else {
         // Make sure it's animated next time
-        self._animate = true;
+        this._animate = true;
     
         // Hide it on initialization if closed
-        if (!self.expanded) {
+        if (!this.expanded) {
           subTreeContainer.style.height = 0;
           subTreeContainer.hidden = true;
         }

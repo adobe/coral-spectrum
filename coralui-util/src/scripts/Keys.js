@@ -331,10 +331,9 @@ class Keys {
   _processSequences() {
     const activeSequenceListeners = [];
     
-    const self = this;
     // Check each sequence's state
     this._keySequences.forEach((sequence) => {
-      if (sequence.parts[sequence.currentPart] === self._currentKeyCombo) {
+      if (sequence.parts[sequence.currentPart] === this._currentKeyCombo) {
         // If the current key combo in the sequence was pressed, increment the pointer
         sequence.currentPart++;
       }

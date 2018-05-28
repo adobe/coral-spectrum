@@ -240,10 +240,9 @@ class Checkbox extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     if (this._triggerChangeEvent) {
       // @polyfill ie/edge
       if (IS_IE_OR_EDGE) {
-        const self = this;
         // We need 1 additional frame in case the indeterminate state is set manually on change event
         window.requestAnimationFrame(() => {
-          self.trigger('change');
+          this.trigger('change');
         });
       }
       else {

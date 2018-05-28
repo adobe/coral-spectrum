@@ -353,7 +353,6 @@ class ColumnViewColumn extends ComponentMixin(HTMLElement) {
     
     this._bulkCollectionChange = true;
     
-    const self = this;
     // we use setTimeout instead of nextFrame because macrotasks allow for more flexibility since they are less
     // aggressive in executing the code
     window.setTimeout(() => {
@@ -361,8 +360,8 @@ class ColumnViewColumn extends ComponentMixin(HTMLElement) {
       // adding/removing elements. Also make sure that only one event is triggered at once
       
       // bulkCollectionChange has to be reset before loading new items
-      self._bulkCollectionChange = false;
-      self._loadFittingAdditionalItems();
+      this._bulkCollectionChange = false;
+      this._loadFittingAdditionalItems();
     }, 0);
   }
   
@@ -592,9 +591,8 @@ class ColumnViewColumn extends ComponentMixin(HTMLElement) {
     
     // instead of being super aggressive on requesting data, we use setTimeout so it is scheduled after all the code
     // has been executed (macrotask), this way events can be added before
-    const self = this;
     window.setTimeout(() => {
-      self._loadFittingAdditionalItems();
+      this._loadFittingAdditionalItems();
     });
   }
 }

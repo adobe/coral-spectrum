@@ -292,32 +292,31 @@ class QuickActions extends Overlay {
   set open(value) {
     super.open = value;
     
-    const self = this;
     // Position once we can read items layout in the next frame
     window.requestAnimationFrame(() => {
-      if (self.open && !self._openedBefore) {
+      if (this.open && !this._openedBefore) {
         // we iterate over all the items initializing them in the correct order
-        const items = self.items.getAll();
+        const items = this.items.getAll();
         for (let i = 0, itemCount = items.length; i < itemCount; i++) {
-          self._attachItem(items[i], i);
+          this._attachItem(items[i], i);
         }
   
-        self._openedBefore = true;
+        this._openedBefore = true;
       }
   
-      if (self.open) {
-        self._layout();
+      if (this.open) {
+        this._layout();
         
         // The QuickActions must be visible for us to be able to focus them,
         // this may not be the case if we initially open them, due to the FOUC handling.
-        self.style.visibility = 'visible';
-        self.focus();
+        this.style.visibility = 'visible';
+        this.focus();
       }
   
       // we toggle "is-selected" on the target to indicate that the over is open
-      const targetElement = self._getTarget();
+      const targetElement = this._getTarget();
       if (targetElement) {
-        targetElement.classList.toggle('is-selected', self.open);
+        targetElement.classList.toggle('is-selected', this.open);
       }
     });
   }
@@ -759,13 +758,12 @@ class QuickActions extends Overlay {
     if (this.interaction === interaction.ON) {
       // In FF toElement is not available to us so we test the newly-focused element
       if (!toElement) {
-        const self = this;
         // The active element is not ready until the next frame
         window.requestAnimationFrame(() => {
           toElement = document.activeElement;
           
-          if (!self._isInternalToComponent(toElement)) {
-            self._hideAll();
+          if (!this._isInternalToComponent(toElement)) {
+            this._hideAll();
           }
         });
       }
@@ -894,9 +892,8 @@ class QuickActions extends Overlay {
     this._proxyClick(item);
     
     // Prevent double click or alternate selection during animation
-    const self = this;
     window.setTimeout(() => {
-      self._preventClick = false;
+      this._preventClick = false;
     }, this._overlayAnimationTime);
     
     this._preventClick = true;
@@ -930,9 +927,8 @@ class QuickActions extends Overlay {
       // do not allow internal Overlay events to escape QuickActions
       event.stopImmediatePropagation();
       
-      const self = this;
       window.requestAnimationFrame(() => {
-        const focusableItems = self._elements.buttonList.items.getAll().filter((item) => !item.hasAttribute('hidden') && !item.hasAttribute('disabled'));
+        const focusableItems = this._elements.buttonList.items.getAll().filter((item) => !item.hasAttribute('hidden') && !item.hasAttribute('disabled'));
         
         if (focusableItems.length > 0) {
           focusableItems[0].focus();
@@ -946,19 +942,18 @@ class QuickActions extends Overlay {
     if (event.target === this) {
       this._elements.overlay.open = false;
       
-      const self = this;
       // Return the trapFocus and returnFocus properties to their state before open.
       // Handles the keyboard launch and interaction enabled case, which implies focus trap and focus return.
       // Wait a frame as this is called before the 'open' property sync. Otherwise, returnFocus is set prematurely.
       window.requestAnimationFrame(() => {
-        if (self._previousTrapFocus) {
-          self.trapFocus = self._previousTrapFocus;
-          self._previousTrapFocus = undefined;
+        if (this._previousTrapFocus) {
+          this.trapFocus = this._previousTrapFocus;
+          this._previousTrapFocus = undefined;
         }
         
-        if (self._previousReturnFocus) {
-          self.returnFocus = self._previousReturnFocus;
-          self._previousReturnFocus = undefined;
+        if (this._previousReturnFocus) {
+          this.returnFocus = this._previousReturnFocus;
+          this._previousReturnFocus = undefined;
         }
       });
     }

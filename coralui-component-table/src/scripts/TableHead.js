@@ -61,10 +61,9 @@ class TableHead extends TableSectionMixin(ComponentMixin(HTMLTableSectionElement
     this._sticky = transform.booleanAttr(value);
     this._reflectAttribute('sticky', this._sticky);
     
-    const self = this;
     // Delay execution for better performance
     window.requestAnimationFrame(() => {
-      self.trigger('coral-table-head:_stickychanged');
+      this.trigger('coral-table-head:_stickychanged');
     });
   }
   

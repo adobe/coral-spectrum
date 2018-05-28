@@ -100,7 +100,6 @@ function TableAnimator(host) {
   };
   
   this.slide = (newTable, direction) => {
-    const self = this;
     const replace = direction === undefined;
     const isLeft = direction === 'left';
     const oldTable = this.oldTable;
@@ -129,7 +128,7 @@ function TableAnimator(host) {
     
     commons.transitionEnd(oldTable, () => {
       oldTable.parentNode.removeChild(oldTable);
-      self._removeContainerIfEmpty();
+      this._removeContainerIfEmpty();
     });
     
     // Set the new table to start out of view (either left or right depending on the direction of the slide), and mark
@@ -140,8 +139,8 @@ function TableAnimator(host) {
     // When the transition is done, have the transition class lifted
     commons.transitionEnd(newTable, () => {
       newTable.classList.remove('_coral-Calendar-table--transit');
-      self.host.appendChild(newTable);
-      self._removeContainerIfEmpty();
+      this.host.appendChild(newTable);
+      this._removeContainerIfEmpty();
     });
     
     // Force a redraw by querying the browser for its offsetWidth. Without this, the re-positioning code later on
@@ -495,9 +494,8 @@ class Calendar extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     const newTable = this._renderTable(displayYear, displayMonth + 1);
     
     if (oldTable) {
-      const self = this;
       commons.transitionEnd(newTable, () => {
-        self._setActiveDescendant();
+        this._setActiveDescendant();
       });
     }
     

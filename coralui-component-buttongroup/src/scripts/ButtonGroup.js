@@ -297,13 +297,12 @@ class ButtonGroup extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
-  
-    const self = this;
+    
     this._elements.nativeSelect.disabled = this.readOnly || this.disabled;
     // Also update for all the items the disabled property so it matches the native select.
     this.items.getAll().forEach((item) => {
-      item.disabled = self.disabled || self.readOnly && !item.hasAttribute('selected');
-      if (self.readOnly) {
+      item.disabled = this.disabled || this.readOnly && !item.hasAttribute('selected');
+      if (this.readOnly) {
         item.setAttribute('aria-disabled', true);
       }
       else {
@@ -592,12 +591,11 @@ class ButtonGroup extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     item.classList.remove('_coral-Button--toggle');
     item.removeAttribute('role');
     
-    const self = this;
     if (!item.parentNode) {
       // Remove the item from the initial selected values
-      const index = self._initalSelectedValues.indexOf(item.value);
+      const index = this._initalSelectedValues.indexOf(item.value);
       if (index !== -1) {
-        self._initalSelectedValues.splice(index, 1);
+        this._initalSelectedValues.splice(index, 1);
       }
     }
     

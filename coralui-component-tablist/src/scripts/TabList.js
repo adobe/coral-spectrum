@@ -189,15 +189,14 @@ class TabList extends ComponentMixin(HTMLElement) {
     if (value === null || typeof value === 'string' || value instanceof Node) {
       this._target = value;
       
-      const self = this;
       // we do in case the target was not yet in the DOM
       window.requestAnimationFrame(() => {
-        const realTarget = getTarget(self._target);
+        const realTarget = getTarget(this._target);
   
         // we add proper accessibility if available
         if (realTarget) {
     
-          const tabItems = self.items.getAll();
+          const tabItems = this.items.getAll();
           const panelItems = realTarget.items ? realTarget.items.getAll() : realTarget.children;
     
           // we need to add a11y to all component, no matter if they can be perfectly paired

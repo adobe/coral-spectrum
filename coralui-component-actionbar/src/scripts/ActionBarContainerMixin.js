@@ -210,11 +210,10 @@ const ActionBarContainerMixin = (superClass) => class extends superClass {
     }));
     
     // focus first item (nextFrame needed as popover must be visible and initialized with items)
-    const self = this;
     let wrappedItem;
     let loop = true;
-    const focusFirstItem = function() {
-      wrappedItem = getFirstSelectableWrappedItem(self._itemsInPopover[0]);
+    const focusFirstItem = () => {
+      wrappedItem = getFirstSelectableWrappedItem(this._itemsInPopover[0]);
       if (wrappedItem) {
         // focus first item
         wrappedItem.removeAttribute('tabindex');

@@ -482,11 +482,10 @@ class CycleButton extends ComponentMixin(HTMLElement) {
     // @a11y
     this._elements.button.setAttribute('aria-expanded', false);
     this._elements.overlay.hide();
-  
-    const self = this;
+    
     // Make sure the button is focused once closed
     window.requestAnimationFrame(() => {
-      self._elements.button.focus();
+      this._elements.button.focus();
     });
   }
   
@@ -586,10 +585,9 @@ class CycleButton extends ComponentMixin(HTMLElement) {
     
     this._populateLists();
     
-    const self = this;
     // Wait for list to be populated before showing the overlay
     window.requestAnimationFrame(() => {
-      self._elements.overlay.show();
+      this._elements.overlay.show();
     });
   }
   

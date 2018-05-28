@@ -69,7 +69,6 @@ class Tree extends ComponentMixin(HTMLElement) {
     this.items._startHandlingItems(true);
   
     // Listen for mutations for Torq compatibility
-    const self = this;
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         for (let i = 0; i < mutation.addedNodes.length; i++) {
@@ -84,7 +83,7 @@ class Tree extends ComponentMixin(HTMLElement) {
       });
     });
 
-    observer.observe(self, {
+    observer.observe(this, {
       childList: true,
       subtree: true
     });
@@ -474,11 +473,10 @@ class Tree extends ComponentMixin(HTMLElement) {
     this.setAttribute('role', 'tree');
     this.setAttribute('aria-multiselectable', this.multiple);
     
-    const self = this;
     // Requires tree item API to be defined
     window.customElements.whenDefined('coral-tree-item').then(() => {
       // Enable keyboard interaction
-      self._resetFocusableItem();
+      this._resetFocusableItem();
     });
     
     // Don't trigger events once connected

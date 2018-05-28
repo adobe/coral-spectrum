@@ -63,19 +63,18 @@ class Multifield extends ComponentMixin(HTMLElement) {
     this._handleTemplateSupport(this._elements.template);
     
     // Template support: move nodes added to the <template> to its content fragment
-    const self = this;
-    self._observer = new MutationObserver((mutations) => {
+    this._observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         for (let i = 0; i < mutation.addedNodes.length; i++) {
           const addedNode = mutation.addedNodes[i];
-          const template = self.template;
+          const template = this.template;
         
           if (template.contains(addedNode) && template !== addedNode) {
             // Move the node to the template content
             template.content.appendChild(addedNode);
             // Update all items content with the template content
-            self.items.getAll().forEach((item) => {
-              self._renderTemplate(item);
+            this.items.getAll().forEach((item) => {
+              this._renderTemplate(item);
             });
           }
         }
@@ -83,7 +82,7 @@ class Multifield extends ComponentMixin(HTMLElement) {
     });
   
     // Watch for changes to the template element
-    self._observer.observe(self, {
+    this._observer.observe(this, {
       childList: true,
       subtree: true
     });
@@ -154,11 +153,10 @@ class Multifield extends ComponentMixin(HTMLElement) {
   _onAddItemClick(event) {
     if (event.matchedTarget.closest('coral-multifield') === this) {
       this.items.add(document.createElement('coral-multifield-item'));
-  
-      const self = this;
+      
       // Wait for MO to render item template
       window.requestAnimationFrame(() => {
-        self.trigger('change');
+        this.trigger('change');
       });
     }
   }

@@ -496,30 +496,29 @@ const OverlayMixin = (superClass) => class extends superClass {
     return this._open || false;
   }
   set open(value) {
-    const self = this;
-    const silenced = self._silenced;
+    const silenced = this._silenced;
     
     value = transform.booleanAttr(value);
-    const beforeEvent = self.trigger(value ? 'coral-overlay:beforeopen' : 'coral-overlay:beforeclose');
+    const beforeEvent = this.trigger(value ? 'coral-overlay:beforeopen' : 'coral-overlay:beforeclose');
     
     if (!beforeEvent.defaultPrevented) {
-      const open = self._open = value;
-      self._reflectAttribute('open', open);
+      const open = this._open = value;
+      this._reflectAttribute('open', open);
   
       // Set aria-hidden false before we show
       // Otherwise, screen readers will not announce
       // Doesn't matter when we set aria-hidden true (nothing being announced)
-      self.setAttribute('aria-hidden', !open);
+      this.setAttribute('aria-hidden', !open);
   
       // Don't do anything if we're not in the DOM yet
       // This prevents errors related to allocating a zIndex we don't need
-      if (self.parentNode) {
+      if (this.parentNode) {
         // Do this check afterwards as we may have been appended inside of _show()
         if (open) {
           // Set z-index
-          self._pushOverlay();
+          this._pushOverlay();
       
-          if (self.returnFocus === returnFocus.ON) {
+          if (this.returnFocus === returnFocus.ON) {
             this._elementToFocusWhenHidden =
               // cached element
               this._elementToFocusWhenHidden ||
@@ -531,7 +530,7 @@ const OverlayMixin = (superClass) => class extends superClass {
         }
         else {
           // Release zIndex
-          self._popOverlay();
+          this._popOverlay();
         }
       }
       
@@ -539,49 +538,49 @@ const OverlayMixin = (superClass) => class extends superClass {
       window.requestAnimationFrame(() => {
         
         // Keep it silenced
-        self._silenced = silenced;
+        this._silenced = silenced;
         
         if (open) {
-          if (self.trapFocus === trapFocus.ON) {
+          if (this.trapFocus === trapFocus.ON) {
             // Make sure tab capture elements are positioned correctly
             if (
               // Tab capture elements are no longer at the bottom
-              self._elements.topTabCapture !== self.firstElementChild ||
-              self._elements.bottomTabCapture !== self.lastElementChild ||
+              this._elements.topTabCapture !== this.firstElementChild ||
+              this._elements.bottomTabCapture !== this.lastElementChild ||
               // Tab capture elements have been separated
-              self._elements.bottomTabCapture.previousElementSibling !== self._elements.intermediateTabCapture
+              this._elements.bottomTabCapture.previousElementSibling !== this._elements.intermediateTabCapture
             ) {
-              self.insertBefore(self._elements.intermediateTabCapture, self.firstElementChild);
-              self.appendChild(self._elements.intermediateTabCapture);
-              self.appendChild(self._elements.bottomTabCapture);
+              this.insertBefore(this._elements.intermediateTabCapture, this.firstElementChild);
+              this.appendChild(this._elements.intermediateTabCapture);
+              this.appendChild(this._elements.bottomTabCapture);
             }
           }
     
           // The default style should be display: none for overlays
           // Show ourselves first for centering calculations etc
-          self.style.display = '';
+          this.style.display = '';
   
           // Do it in the next frame to make the animation happen
           window.requestAnimationFrame(() => {
-            self.classList.add('is-open');
+            this.classList.add('is-open');
           });
   
           const openComplete = () => {
-            if (self.open) {
-              self._debounce(() => {
+            if (this.open) {
+              this._debounce(() => {
   
                 // handles the focus behavior based on accessibility recommendations
-                self._handleFocus();
-                
-                self.trigger('coral-overlay:open');
-                self._silenced = false;
+                this._handleFocus();
+  
+                this.trigger('coral-overlay:open');
+                this._silenced = false;
               });
             }
           };
   
-          if (self._overlayAnimationTime) {
+          if (this._overlayAnimationTime) {
             // Wait for animation to complete
-            commons.transitionEnd(self, openComplete);
+            commons.transitionEnd(this, openComplete);
           }
           else {
             // Execute immediately
@@ -590,29 +589,29 @@ const OverlayMixin = (superClass) => class extends superClass {
         }
         else {
           // Fade out
-          self.classList.remove('is-open');
+          this.classList.remove('is-open');
     
           const closeComplete = () => {
-            if (!self.open) {
+            if (!this.open) {
               // Hide self
-              self.style.display = 'none';
+              this.style.display = 'none';
   
               // makes sure the focus is returned per accessibility recommendations
-              self._handleReturnFocus();
-              
-              self._debounce(() => {
+              this._handleReturnFocus();
+  
+              this._debounce(() => {
                 // Inform child overlays that we're closing
-                self._closeChildOverlays();
-                
-                self.trigger('coral-overlay:close');
-                self._silenced = false;
+                this._closeChildOverlays();
+  
+                this.trigger('coral-overlay:close');
+                this._silenced = false;
               });
             }
           };
     
-          if (self._overlayAnimationTime) {
+          if (this._overlayAnimationTime) {
             // Wait for animation to complete
-            commons.transitionEnd(self, closeComplete);
+            commons.transitionEnd(this, closeComplete);
           }
           else {
             // Execute immediately

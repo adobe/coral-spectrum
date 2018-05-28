@@ -402,10 +402,9 @@ class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
       this._validateParentOverflow();
     }
     
-    const self = this;
     // We need an additional frame to help popper read the correct offsets
     window.requestAnimationFrame(() => {
-      self.reposition();
+      this.reposition();
     });
   }
   
@@ -441,10 +440,9 @@ class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
     if (!this._oldPosition) {
       this._oldPosition = data.styles.transform;
       
-      const self = this;
       // Do it in the next frame to avoid triggering the event too early
       window.requestAnimationFrame(() => {
-        self.trigger('coral-overlay:positioned', data);
+        this.trigger('coral-overlay:positioned', data);
       });
     }
     // Trigger again only if position changed
@@ -637,12 +635,11 @@ class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
   
     // In case it was not added to the DOM, make sure popper is initialized by setting target
     this.target = this.target;
-  
-    const self = this;
+    
     // We need an additional frame to help popper read the correct offsets
     window.requestAnimationFrame(() => {
       // Force repositioning
-      self.reposition(true);
+      this.reposition(true);
     });
   }
   

@@ -140,7 +140,6 @@ class Drawer extends ComponentMixin(HTMLElement) {
   }
   set open(value) {
     const silenced = this._silenced;
-    const self = this;
     
     this._open = transform.booleanAttr(value);
     this._reflectAttribute('open', this._open);
@@ -157,16 +156,16 @@ class Drawer extends ComponentMixin(HTMLElement) {
     if (this._animate) {
       commons.transitionEnd(slider, () => {
         // Keep it silenced
-        self._silenced = silenced;
+        this._silenced = silenced;
         
         // Remove height as we want the drawer to naturally grow if content is added later
-        if (self._open) {
+        if (this._open) {
           slider.style.height = '';
         }
       
         // Trigger once transition is finished
-        self.trigger(`coral-drawer:${(self._open ? 'open' : 'close')}`);
-        self._silenced = false;
+        this.trigger(`coral-drawer:${(this._open ? 'open' : 'close')}`);
+        this._silenced = false;
       });
     
       if (!this._open) {
@@ -176,7 +175,7 @@ class Drawer extends ComponentMixin(HTMLElement) {
       
       // Do transition in next task as browser might batch up the height property change before painting
       window.setTimeout(() => {
-        slider.style.height = self._open ? `${slider.scrollHeight}px` : 0;
+        slider.style.height = this._open ? `${slider.scrollHeight}px` : 0;
       }, 10);
     }
     else {

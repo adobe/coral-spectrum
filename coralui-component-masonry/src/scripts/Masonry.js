@@ -267,13 +267,12 @@ class Masonry extends ComponentMixin(HTMLElement) {
    */
   _scheduleLayout() {
     if (!this._forceDebounce && !this._layoutScheduled) {
-      const self = this;
       window.requestAnimationFrame(() => {
         // Skip layout if a layout was forced in between
-        if (self._layoutScheduled) {
-          self._doLayout();
+        if (this._layoutScheduled) {
+          this._doLayout();
           // Cancel potentially scheduled layout if the current layout was enforced by calling doLayout directly
-          self._layoutScheduled = false;
+          this._layoutScheduled = false;
         }
       });
       
@@ -289,10 +288,9 @@ class Masonry extends ComponentMixin(HTMLElement) {
     }
     window.clearTimeout(this._debounceId);
     
-    const self = this;
     this._debounceId = window.setTimeout(() => {
-      self._forceDebounce = false;
-      self._scheduleLayout('window resize');
+      this._forceDebounce = false;
+      this._scheduleLayout('window resize');
     }, 500);
   }
   
@@ -426,9 +424,8 @@ class Masonry extends ComponentMixin(HTMLElement) {
       item.classList.add('is-beforeInserting');
   
       // Do it in the next frame so that the inserting animation is visible
-      const self = this;
       window.requestAnimationFrame(() => {
-        self._onItemAdded(item);
+        this._onItemAdded(item);
       });
     }
   }
@@ -665,11 +662,10 @@ class Masonry extends ComponentMixin(HTMLElement) {
     // This indicates that the initial items are being attached
     this._attaching = true;
     
-    const self = this;
     window.requestAnimationFrame(() => {
-      self._attaching = false;
+      this._attaching = false;
       // Update loaded after all items have been attached
-      self._updateLoaded();
+      this._updateLoaded();
     });
   }
   

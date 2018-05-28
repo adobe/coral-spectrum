@@ -2031,12 +2031,11 @@ class Table extends ComponentMixin(HTMLTableElement) {
       }
     }
     
-    const self = this;
     // Focus last selected item
     window.requestAnimationFrame(() => {
-      const itemToFocus = self._lastSelectedItems.items[self._lastSelectedItems.items.length - 1];
+      const itemToFocus = this._lastSelectedItems.items[this._lastSelectedItems.items.length - 1];
       if (itemToFocus) {
-        self._focusItem(itemToFocus, true);
+        this._focusItem(itemToFocus, true);
       }
     });
   }
@@ -2114,11 +2113,10 @@ class Table extends ComponentMixin(HTMLTableElement) {
       window.clearTimeout(this._timeout);
     }
     
-    const self = this;
     this._timeout = window.setTimeout(() => {
-      self._timeout = null;
-      self._resizeStickyHead();
-      self._resizeContainer();
+      this._timeout = null;
+      this._resizeStickyHead();
+      this._resizeContainer();
     }, this._wait);
   }
   

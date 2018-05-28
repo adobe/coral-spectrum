@@ -368,14 +368,13 @@ class Accordion extends ComponentMixin(HTMLElement) {
     if (!this._resetTabTargetScheduled) {
       this._resetTabTargetScheduled = true;
       
-      const self = this;
       window.requestAnimationFrame(() => {
-        self._resetTabTargetScheduled = false;
+        this._resetTabTargetScheduled = false;
         
         // since hidden items cannot have focus, we need to make sure the tabTarget is not hidden
-        const selectedItems = self.items._getAllSelected();
+        const selectedItems = this.items._getAllSelected();
   
-        self._tabTarget = selectedItems.length ? selectedItems[0] : self.items._getFirstSelectable();
+        this._tabTarget = selectedItems.length ? selectedItems[0] : this.items._getFirstSelectable();
       });
     }
   }

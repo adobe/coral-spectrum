@@ -738,7 +738,6 @@ class NumberInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
   /** @ignore */
   _updateLiveRegion(value) {
-    const self = this;
     let textNode;
     
     clearTimeout(clearLiveRegionTimeout);
@@ -747,9 +746,11 @@ class NumberInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     if (value && value !== '') {
       textNode = document.createTextNode(value);
       window.requestAnimationFrame(() => {
-        self._elements.liveregion.appendChild(textNode);
-        clearLiveRegionTimeout = setTimeout(self._clearLiveRegion.bind(self),
-          LIVEREGION_TIMEOUT_DELAY);
+        this._elements.liveregion.appendChild(textNode);
+        
+        clearLiveRegionTimeout = setTimeout(() => {
+          this._clearLiveRegion();
+        }, LIVEREGION_TIMEOUT_DELAY);
       });
     }
   }

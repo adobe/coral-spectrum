@@ -271,8 +271,7 @@ class TagList extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
   /** @private */
   _onItemConnected(attachedItem) {
-    const self = this;
-    const items = self.items.getAll();
+    const items = this.items.getAll();
     
     // Prevents to add duplicates based on the tag value
     const duplicate = items.some((tag) => {
@@ -459,9 +458,8 @@ class TagList extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       }
     }
     
-    const self = this;
     window.requestAnimationFrame(() => {
-      if (tag.parentElement !== null && !self.contains(document.activeElement)) {
+      if (tag.parentElement !== null && !this.contains(document.activeElement)) {
         itemToFocusAfterDelete = undefined;
       }
     });
@@ -496,29 +494,27 @@ class TagList extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();
-    
-    const self = this;
-    
-    self.classList.add(CLASSNAME);
+  
+    this.classList.add(CLASSNAME);
     
     // adds the role to support accessibility
-    self.setAttribute('role', 'list');
+    this.setAttribute('role', 'list');
   
-    self.setAttribute('aria-live', 'off');
-    self.setAttribute('aria-atomic', 'false');
-    self.setAttribute('aria-relevant', 'additions');
+    this.setAttribute('aria-live', 'off');
+    this.setAttribute('aria-atomic', 'false');
+    this.setAttribute('aria-relevant', 'additions');
   
     // Since tagList can have multiple values, we have to store them all to be able to reset them
-    if (self.hasAttribute('value')) {
-      self._initialValues = [self.getAttribute('value')];
+    if (this.hasAttribute('value')) {
+      this._initialValues = [this.getAttribute('value')];
     }
     else {
-      self._initialValues = self.items.getAll().map((item) => itemValueFromDOM(item));
+      this._initialValues = this.items.getAll().map((item) => itemValueFromDOM(item));
     }
     
     // Prepare items
     this.items.getAll().forEach((item) => {
-      self._onItemConnected(item);
+      this._onItemConnected(item);
     });
   }
 }

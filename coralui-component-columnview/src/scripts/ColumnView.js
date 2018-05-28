@@ -620,10 +620,9 @@ class ColumnView extends ComponentMixin(HTMLElement) {
     }
     
     // make sure to clear columns next to this column if animation is done
-    const self = this;
-    const completeCallback = function() {
+    const completeCallback = () => {
       if (clearEmptyColumns) {
-        self._removeEmptyColumnsWithSmoothTransition(triggerEvent);
+        this._removeEmptyColumnsWithSmoothTransition(triggerEvent);
       }
     };
     
@@ -684,7 +683,6 @@ class ColumnView extends ComponentMixin(HTMLElement) {
    @private
    */
   _removeEmptyColumnsWithSmoothTransition(triggerEvent) {
-    const self = this;
     
     // fade width of empty items to 0 before removing the columns (for better usability while navigating)
     const emptyColumns = Array.prototype.filter.call(this.querySelectorAll('coral-columnview-column, coral-columnview-preview'), el => !el.firstChild);
@@ -695,7 +693,7 @@ class ColumnView extends ComponentMixin(HTMLElement) {
       commons.transitionEnd(column, () => {
         column.remove();
         if (i === emptyColumns.length - 1 && triggerEvent) {
-          self._validateNavigation(self.columns.last());
+          this._validateNavigation(this.columns.last());
         }
       });
       column.style.width = 0;

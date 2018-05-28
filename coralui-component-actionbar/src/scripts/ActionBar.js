@@ -106,9 +106,8 @@ class ActionBar extends ComponentMixin(HTMLElement) {
     // http://www.backalleycoder.com/2013/03/18/cross-browser-event-based-element-resize-detection/
     
     // relayout any time the dom changes
-    const self = this;
     this._observer = new MutationObserver(() => {
-      self._debounceOnLayout();
+      this._debounceOnLayout();
     });
     
     // Watch for changes
@@ -481,17 +480,15 @@ class ActionBar extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   _debounceOnLayout() {
-    const self = this;
-    
     // Debounce
-    if (self._timeout !== null) {
-      window.clearTimeout(self._timeout);
+    if (this._timeout !== null) {
+      window.clearTimeout(this._timeout);
     }
-    
-    self._timeout = window.setTimeout(() => {
-      self._timeout = null;
-      self._onLayout();
-    }, self._wait);
+  
+    this._timeout = window.setTimeout(() => {
+      this._timeout = null;
+      this._onLayout();
+    }, this._wait);
   }
   
   _moveDirectItemChildren() {

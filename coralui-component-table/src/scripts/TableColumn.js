@@ -145,9 +145,8 @@ class TableColumn extends ComponentMixin(HTMLTableColElement) {
     this._orderable = transform.booleanAttr(value);
     this._reflectAttribute('orderable', this._orderable);
     
-    const self = this;
     window.requestAnimationFrame(() => {
-      self.trigger('coral-table-column:_orderablechanged');
+      this.trigger('coral-table-column:_orderablechanged');
     });
   }
   
@@ -166,9 +165,8 @@ class TableColumn extends ComponentMixin(HTMLTableColElement) {
     this._sortable = transform.booleanAttr(value);
     this._reflectAttribute('sortable', this._sortable);
     
-    const self = this;
     window.requestAnimationFrame(() => {
-      self.trigger('coral-table-column:_sortablechanged');
+      this.trigger('coral-table-column:_sortablechanged');
     });
   }
   

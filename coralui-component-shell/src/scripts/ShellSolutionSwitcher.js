@@ -37,7 +37,6 @@ class ShellSolutionSwitcher extends ComponentMixin(HTMLElement) {
     this._elements = {};
     solutionSwitcher.call(this._elements);
     
-    const self = this;
     // Listen for mutations
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
@@ -45,7 +44,7 @@ class ShellSolutionSwitcher extends ComponentMixin(HTMLElement) {
           const addedNode = mutation.addedNodes[i];
           // Move non secondary solutions to the container
           if (addedNode.nodeName === 'CORAL-SHELL-SOLUTIONS' && !addedNode.hasAttribute('secondary')) {
-            self._elements.container.appendChild(addedNode);
+            this._elements.container.appendChild(addedNode);
           }
         }
       });

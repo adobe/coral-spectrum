@@ -653,7 +653,6 @@ class FileUpload extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       return;
     }
     
-    const self = this;
     let files = [];
     const items = [];
     
@@ -691,21 +690,21 @@ class FileUpload extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     items.forEach((item) => {
       
       // If file is not found in uploadQueue using filename
-      if (!self._getQueueItemByFilename(item.file.name)) {
+      if (!this._getQueueItemByFilename(item.file.name)) {
         
         // Check file size
-        if (self.sizeLimit && item.file.size > self.sizeLimit) {
-          self.trigger('coral-fileupload:filesizeexceeded', {item});
+        if (this.sizeLimit && item.file.size > this.sizeLimit) {
+          this.trigger('coral-fileupload:filesizeexceeded', {item});
         }
         // Check mime type
-        else if (self.accept && !item._isMimeTypeAllowed(self.accept)) {
-          self.trigger('coral-fileupload:filemimetyperejected', {item});
+        else if (this.accept && !item._isMimeTypeAllowed(this.accept)) {
+          this.trigger('coral-fileupload:filemimetyperejected', {item});
         }
         else {
           // Add item to queue
-          self._uploadQueue.push(item);
-          
-          self.trigger('coral-fileupload:fileadded', {item});
+          this._uploadQueue.push(item);
+  
+          this.trigger('coral-fileupload:fileadded', {item});
         }
       }
     });
@@ -831,14 +830,12 @@ class FileUpload extends FormFieldMixin(ComponentMixin(HTMLElement)) {
    @private
    */
   _ajaxUpload(item) {
-    const self = this;
-    
     // Use the action/method provided by the last button click, if provided
     const action = this._buttonAction || this.action;
     const requestMethod = this._buttonMethod ? this._buttonMethod.toUpperCase() : this.method;
     
     // We merge the global parameters with the specific file parameters and send them all together
-    const parameters = self.parameters.concat(item.parameters);
+    const parameters = this.parameters.concat(item.parameters);
     
     const formData = new FormData();
     
@@ -876,8 +873,8 @@ class FileUpload extends FormFieldMixin(ComponentMixin(HTMLElement)) {
           detail.loaded = event.loaded;
           detail.total = event.total;
         }
-        
-        self.trigger(`coral-fileupload:${name}`, detail);
+  
+        this.trigger(`coral-fileupload:${name}`, detail);
       });
     });
     
@@ -1087,12 +1084,11 @@ class FileUpload extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
     // Add the input to the component
     this.appendChild(this._elements.input);
-  
-    const self = this;
+    
     // IE11 requires one more frame or the resize listener <object> will appear as an overlaying white box
     window.requestAnimationFrame(() => {
       // Handles the repositioning of the input to allow dropping files
-      commons.addResizeListener(self, self._positionInputOnDropZone);
+      commons.addResizeListener(this, this._positionInputOnDropZone);
     });
   }
 }

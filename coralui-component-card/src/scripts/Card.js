@@ -127,27 +127,26 @@ class Card extends ComponentMixin(HTMLElement) {
   }
   set assetHeight(value) {
     this._assetHeight = transform.number(value);
-  
-    const self = this;
+    
     // Avoid a forced reflow by executing following in the next frame
     window.requestAnimationFrame(() => {
       // both hint dimensions need to be set in order to use this feature
-      if (!self._loaded && self._elements.asset && self.assetWidth && self._assetHeight) {
+      if (!this._loaded && this._elements.asset && this.assetWidth && this._assetHeight) {
         // gets the width without the border of the card
-        const clientRect = self.getBoundingClientRect();
+        const clientRect = this.getBoundingClientRect();
         const width = clientRect.right - clientRect.left;
         // calculates the image ratio used to resize the height
-        const ratio = width / self.assetWidth;
+        const ratio = width / this.assetWidth;
     
         // the image is considered "low resolution"
         // @todo: check this after removal of lowResolution
         if (ratio > 1) {
           // 32 = $card-asset-lowResolution-padding * 2
-          self._elements.asset.style.height = `${self._assetHeight + 32}px`;
+          this._elements.asset.style.height = `${this._assetHeight + 32}px`;
         }
         // for non-low resolution images, condensed and inverted cards do not require the height to be set
-        else if (self.variant !== variant.CONDENSED && self.variant !== variant.INVERTED) {
-          self._elements.asset.style.height = `${ratio * self._assetHeight}px`;
+        else if (this.variant !== variant.CONDENSED && this.variant !== variant.INVERTED) {
+          this._elements.asset.style.height = `${ratio * this._assetHeight}px`;
         }
       }
     });

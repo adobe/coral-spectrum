@@ -102,23 +102,22 @@ class Playground extends ComponentMixin(HTMLElement) {
     });
     
     // Init editor
-    const self = this;
-    self._editor = new CodeMirror(self._elements.editor, CODEMIRROR_CONFIG);
+    this._editor = new CodeMirror(this._elements.editor, CODEMIRROR_CONFIG);
   
     // Bind editor
-    self._editor.on('change', () => {
-      if (self.livereload) {
-        self._debounceTrigger('coral-playground:coderun');
+    this._editor.on('change', () => {
+      if (this.livereload) {
+        this._debounceTrigger('coral-playground:coderun');
       }
       else {
-        self._elements.run.style.visibility = 'visible';
+        this._elements.run.style.visibility = 'visible';
       }
     });
   
-    self._elements.frame.onload = () => {
-      self._elements.loading.hidden = true;
+    this._elements.frame.onload = () => {
+      this._elements.loading.hidden = true;
   
-      self.trigger('coral-playground:load');
+      this.trigger('coral-playground:load');
     };
   }
   
@@ -185,15 +184,13 @@ class Playground extends ComponentMixin(HTMLElement) {
   }
   
   _debounceTrigger(event) {
-    const self = this;
-    
     // Debounce
-    if (self._timeout !== null) {
-      window.clearTimeout(self._timeout);
+    if (this._timeout !== null) {
+      window.clearTimeout(this._timeout);
     }
-    self._timeout = window.setTimeout(() => {
-      self._timeout = null;
-      self.trigger(event);
+    this._timeout = window.setTimeout(() => {
+      this._timeout = null;
+      this.trigger(event);
     }, DEBOUNCE_TIME);
   }
   
@@ -269,12 +266,11 @@ class Playground extends ComponentMixin(HTMLElement) {
    @return {String}
    */
   share() {
-    const self = this;
     let query = '?';
     
     PROPERTIES.forEach((property) => {
-      if (self[property]) {
-        query += `${property}=${(property === 'code' ? Playground._compress(self.code) : self[property])}&`;
+      if (this[property]) {
+        query += `${property}=${(property === 'code' ? Playground._compress(this.code) : this[property])}&`;
       }
     });
     
@@ -297,21 +293,19 @@ class Playground extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   connectedCallback() {
-    const self = this;
-    
-    self.classList.add(CLASS_NAME);
-    self.appendChild(self._elements.wrapper);
+    this.classList.add(CLASS_NAME);
+    this.appendChild(this._elements.wrapper);
   
     // Set properties and defaults
-    self.screen = self._config.screen;
-    self.code = self._config.code;
-    self.livereload = self._config.livereload;
+    this.screen = this._config.screen;
+    this.code = this._config.code;
+    this.livereload = this._config.livereload;
   
     window.requestAnimationFrame(() => {
-      self._editor.refresh();
+      this._editor.refresh();
     
-      if (self.livereload) {
-        self._debounceTrigger('coral-playground:coderun');
+      if (this.livereload) {
+        this._debounceTrigger('coral-playground:coderun');
       }
     });
   }
