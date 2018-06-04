@@ -51,11 +51,17 @@ Coral Spectrum has a few dependencies and polyfills. Some are actually written a
 without being considered an external dependency.
 
 These dependencies are:
+* [Spectrum CSS](http://spectrum-css.corp.adobe.com/) for the Spectrum theme and icons
 * [Custom Elements v1 polyfill](https://github.com/webcomponents/custom-elements/) with built-in components support
+* [Promise polyfill](https://www.npmjs.com/package/promise-polyfill) for IE11 support
+* [CustomEvent polyfill](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent#Polyfill) for IE11 support
+* Element `closest(), matches(), remove() and classList` polyfills for IE11 support
 * [DOMly](https://github.com/lazd/domly) to render HTML templates
 * [Vent](https://github.com/adobe/vent) for DOM event delegation
-* [PopperJS](https://popper.js.org/) to manager poppers
+* [PopperJS](https://popper.js.org/) to manage poppers
+* [Typekit](https://typekit.com/) to load Adobe Clean fonts
 
+**Note:** Calendar, Clock and Datepicker components will leverage [moment.js](http://momentjs.com/) if loaded on the page.
 
 ## Upgrade to Coral Spectrum
 
