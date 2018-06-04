@@ -44,7 +44,8 @@ const modifierCodeMap = {
   16: true,
   17: true,
   18: true,
-  91: true
+  91: true,
+  224: true
 };
 
 /**

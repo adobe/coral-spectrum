@@ -63,6 +63,19 @@ describe('keys', function() {
     spies.ctrlShiftA = sinon.spy();
     spies.commandCtrlShiftA = sinon.spy();
     spies.commandCtrlAltShiftA = sinon.spy();
+    spies.meta = sinon.spy();
+    
+    keys.on('command+c', spies.meta);
+    
+    helpers.keydown('c', null, ['meta'], 91);
+    helpers.keyup('c', null);
+    
+    expect(spies.meta.callCount).to.equal(1, 'Command+C keypress count');
+    
+    helpers.keydown('c', null, ['meta'], 224);
+    helpers.keyup('c', null);
+    
+    expect(spies.meta.callCount).to.equal(2, 'Command+C keypress count');
 
     keys.on('a', spies.a);
     keys.on('shift+a', spies.shiftA);
