@@ -66,7 +66,7 @@ describe('Tag', function() {
       it('should set multiline class if property is true', function() {
         var tag = helpers.build(window.__html__['Tag.base.html']);
         tag.multiline = true;
-        expect(tag.classList.contains('_coral-TagList-item--multiline')).to.be.true;
+        expect(tag.classList.contains('_coral-Tags-item--multiline')).to.be.true;
       });
     });
 
@@ -75,7 +75,7 @@ describe('Tag', function() {
         var tag = helpers.build(window.__html__['Tag.base.html']);
         tag.quiet = true;
 
-        expect(tag.classList.contains('_coral-TagList-item--quiet')).to.be.true;
+        expect(tag.classList.contains('_coral-Tags-item--quiet')).to.be.true;
       });
     });
 

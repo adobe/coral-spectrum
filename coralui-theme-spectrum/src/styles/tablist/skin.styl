@@ -15,6 +15,15 @@
 * from Adobe Systems Incorporated.
 */
 
-._coral-TabList-item:not(.is-disabled).is-invalid {
+._coral-Tabs-item:not(.is-disabled).is-invalid {
   color: $tab-color-invalid;
+}
+
+// @spectrum
+._coral-Tabs--vertical {
+  border-left-color: $tabs-border-color;
+
+  &._coral-Tabs--quiet {
+    border-left-color: transparent;
+  }
 }

@@ -790,8 +790,8 @@ class NumberInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     const templateHandleNames = ['presentation', 'input'];
     
     // Render main template
-    frag.appendChild(this._elements.presentation);
     frag.appendChild(this._elements.input);
+    frag.appendChild(this._elements.presentation);
   
     while (this.firstChild) {
       const child = this.firstChild;

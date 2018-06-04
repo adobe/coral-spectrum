@@ -21,7 +21,7 @@ import Tag from './Tag';
 import {Collection} from '../../../coralui-collection';
 import {transform, commons} from '../../../coralui-util';
 
-const CLASSNAME = '_coral-TagList';
+const CLASSNAME = '_coral-Tags';
 // Collection
 const ITEM_TAGNAME = 'coral-tag';
 

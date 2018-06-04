@@ -2149,7 +2149,7 @@ class Table extends ComponentMixin(HTMLTableElement) {
         if (headerCells.length) {
           const computedStyle = window.getComputedStyle(headerCells[0].content);
           let rowHeight = 0;
-          // Default min-height is 37px
+          
           const stickyHeaderCellMinHeight = parseFloat(computedStyle.minHeight);
           // Divider 'row' or 'cell'  adds a border top
           const borderTop = parseFloat(computedStyle.borderTopWidth);

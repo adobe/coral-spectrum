@@ -7,7 +7,7 @@ describe('TabList', function() {
   describe('Instantiation', function() {
     function testDefaultInstance(el) {
       expect(el.getAttribute('aria-multiselectable')).to.equal('false');
-      expect(el.classList.contains('_coral-TabList')).to.be.true;
+      expect(el.classList.contains('_coral-Tabs')).to.be.true;
       expect(el.getAttribute('size')).to.equal(TabList.size.MEDIUM);
       expect(el.getAttribute('orientation')).to.equal(TabList.orientation.HORIZONTAL);
       expect(el.getAttribute('role')).to.equal('tablist');
@@ -218,26 +218,23 @@ describe('TabList', function() {
         });
       });
       
-      describe('#variant', function() {
-        it('should default to TabList.variant.PAGE', function() {
-          expect(el.variant).to.equal(TabList.variant.PAGE);
+      describe('#size', function() {
+        it('should default to TabList.size.MEDIUM', function() {
+          expect(el.size).to.equal(TabList.size.MEDIUM);
         });
   
-        it('should set variant classname', function() {
-          el.variant = TabList.variant.ANCHORED;
-          expect(el.classList.contains('_coral-TabList--anchored')).be.true;
-          expect(el.classList.contains('_coral-TabList--panel')).be.false;
-          expect(el.classList.contains('_coral-TabList--page')).be.false;
+        it('should set the size classnames', function() {
+          el.size = TabList.size.SMALL;
+          expect(el.classList.contains('_coral-Tabs--compact')).be.true;
+          expect(el.classList.contains('_coral-Tabs--quiet')).be.false;
   
-          el.variant = TabList.variant.PAGE;
-          expect(el.classList.contains('_coral-TabList--page')).be.true;
-          expect(el.classList.contains('_coral-TabList--anchored')).be.false;
-          expect(el.classList.contains('_coral-TabList--panel')).be.false;
+          el.size = TabList.size.LARGE;
+          expect(el.classList.contains('_coral-Tabs--quiet')).be.true;
+          expect(el.classList.contains('_coral-Tabs--compact')).be.false;
   
-          el.variant = TabList.variant.PANEL;
-          expect(el.classList.contains('_coral-TabList--panel')).be.true;
-          expect(el.classList.contains('_coral-TabList--page')).be.false;
-          expect(el.classList.contains('_coral-TabList--anchored')).be.false;
+          el.size = TabList.size.MEDIUM;
+          expect(el.classList.contains('_coral-Tabs--quiet')).be.false;
+          expect(el.classList.contains('_coral-Tabs--compact')).be.false;
         });
       });
     });

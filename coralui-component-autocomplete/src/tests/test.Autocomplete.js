@@ -202,8 +202,7 @@ describe('Autocomplete', function() {
         
         expect(el.variant).to.equal(Autocomplete.variant.QUIET);
         expect(el.getAttribute('variant')).to.equal(el.variant);
-        expect(el._elements.trigger.classList.contains('_coral-Button--quiet--dropdown')).to.be.true;
-        expect(el._elements.trigger.classList.contains('_coral-Button--dropdown')).to.be.false;
+        expect(el._elements.trigger.classList.contains('_coral-FieldButton--quiet')).to.be.true;
         expect(el._elements.inputGroup.classList.contains('_coral-InputGroup--quiet')).to.be.true;
       });
   
@@ -213,8 +212,7 @@ describe('Autocomplete', function() {
   
         expect(el.variant).to.equal(Autocomplete.variant.DEFAULT);
         expect(el.getAttribute('variant')).to.equal(el.variant);
-        expect(el._elements.trigger.classList.contains('_coral-Button--quiet--dropdown')).to.be.false;
-        expect(el._elements.trigger.classList.contains('_coral-Button--dropdown')).to.be.true;
+        expect(el._elements.trigger.classList.contains('_coral-FieldButton--quiet')).to.be.false;
         expect(el._elements.inputGroup.classList.contains('_coral-InputGroup--quiet')).to.be.false;
       });
     });

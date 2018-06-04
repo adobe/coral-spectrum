@@ -1,18 +1,6 @@
 import {helpers} from '../../../coralui-util/src/tests/helpers';
 
 describe('Coral.register', function() {
-  let warn = console.warn;
-  
-  before(() => {
-    console.warn = () => {
-      // Override it to prevent spamming the console
-    };
-  });
-  
-  after(() => {
-    // Restore warn
-    console.warn = warn;
-  });
   
   describe('#defineProperties', function() {
     var Parent;

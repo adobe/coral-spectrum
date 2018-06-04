@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-const CLASSNAME = '_coral-TagList-item-label';
+const CLASSNAME = '_coral-Tags-item-label';
 
 /**
  @class Coral.Tag.Label

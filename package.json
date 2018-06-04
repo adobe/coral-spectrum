@@ -7,15 +7,19 @@
     "url": "https://git.corp.adobe.com/Coral/coralui/tree/release/coral-spectrum"
   },
   "scripts": {
-    "start": "gulp build && gulp watch",
+    "start": "gulp run",
+    "lint": "gulp lint",
     "build": "gulp build",
-    "test": "gulp build && gulp karma",
-    "prepare-release": "gulp lint && gulp build && gulp karma && gulp examples && gulp minify && cd coralui-component-playground && gulp build && cd .. && gulp playground && gulp docs",
+    "test": "gulp test",
+    "dev": "gulp dev",
+    "docs": "gulp docs",
+    "prepare-release": "gulp prepare",
     "perform-release": "gulp release && gulp deploy"
   },
   "dependencies": {
+    "@adobe/focus-ring-polyfill": "^0.1.5",
     "@adobe/vent": "^1.0.0",
-    "@spectrum/spectrum-css": "^2.0.0-beta.78",
+    "@spectrum/spectrum-css": "^2.0.0-beta.91",
     "document-register-element": "^1.7.0",
     "normalize.css": "^8.0.0",
     "popper.js": "^1.10.6",

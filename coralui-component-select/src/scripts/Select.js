@@ -311,7 +311,13 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     }
     
     // case 7: limit width to allow text ellipsis
-    this.style.maxWidth = limitWidth ? `${this.offsetWidth}px` : '';
+    if (limitWidth) {
+      const width = this.offsetWidth;
+      this.style.maxWidth = width > 0 ? `${width}px` : '';
+    }
+    else {
+      this.style.maxWidth = '';
+    }
   }
   
   /**

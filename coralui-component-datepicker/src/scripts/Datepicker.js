@@ -409,10 +409,8 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
   
     // passes down the variant to the underlying components
-    // we have to do this because default of button is not 'default', but 'secondary'
-    this._elements.toggle.classList.toggle('_coral-Button--dropdown', this._variant === variant.DEFAULT);
-    this._elements.toggle.classList.toggle('_coral-Button--quiet--dropdown', this._variant === variant.QUIET);
     this._elements.input.variant = this._variant;
+    this._elements.toggle.classList.toggle('_coral-FieldButton--quiet', this._variant === variant.QUIET);
   
     // removes every existing variant
     this.classList.remove(...ALL_VARIANT_CLASSES);

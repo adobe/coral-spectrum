@@ -26,12 +26,15 @@ import getTarget from './getTarget';
  
  @typedef {Object} TabListSizeEnum
  
+ @property {String} SMALL
+ A small-sized tablist.
  @property {String} MEDIUM
  A medium-sized tablist. This is the default.
  @property {String} LARGE
- Not supported. Falls back to MEDIUM.
+ A large-sized tablist.
  */
 const size = {
+  SMALL: 'S',
   MEDIUM: 'M',
   LARGE: 'L'
 };
@@ -51,32 +54,8 @@ const orientation = {
   VERTICAL: 'vertical'
 };
 
-/**
- Enumeration for {@link TabList} variant.
- 
- @typedef {Object} TabListVariantEnum
- 
- @property {String} PAGE
- A page TabList. This is the default value.
- @property {String} PANEL
- A panel TabList.
- @property {String} ANCHORED
- An anchored TabList.
- */
-const variant = {
-  PAGE: 'page',
-  PANEL: 'panel',
-  ANCHORED: 'anchored'
-};
-
 // the tablist's base classname
-const CLASSNAME = '_coral-TabList';
-
-// An array of all possible variant classnames
-const ALL_VARIANT_CLASSES = [];
-for (const variantValue in variant) {
-  ALL_VARIANT_CLASSES.push(`${CLASSNAME}--${variant[variantValue]}`);
-}
+const CLASSNAME = '_coral-Tabs';
 
 /**
  @class Coral.TabList
@@ -119,29 +98,6 @@ class TabList extends ComponentMixin(HTMLElement) {
     
     // Init the collection mutation observer
     this.items._startHandlingItems(true);
-  }
-  
-  /**
-   The TabList variant style to use. See {@link TabListVariantEnum}.
-   
-   @type {String}
-   @default TabListVariantEnum.PAGE
-   @htmlattribute variant
-   @htmlattributereflected
-   */
-  get variant() {
-    return this._variant || variant.PAGE;
-  }
-  set variant(value) {
-    value = transform.string(value).toLowerCase();
-    this._variant = validate.enumeration(variant)(value) && value || variant.PAGE;
-    this._reflectAttribute('variant', this._variant);
-    
-    // Remove all variant classes
-    this.classList.remove(...ALL_VARIANT_CLASSES);
-    
-    // Set new variant class
-    this.classList.add(`${CLASSNAME}--${this._variant}`);
   }
   
   /**
@@ -255,8 +211,16 @@ class TabList extends ComponentMixin(HTMLElement) {
     value = transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) && value || size.MEDIUM;
     this._reflectAttribute('size', this._size);
+  
+    // Remove all variant classes
+    this.classList.remove(`${CLASSNAME}--compact`, `${CLASSNAME}--quiet`);
     
-    this.classList[this._size === size.LARGE ? 'add' : 'remove'](`${CLASSNAME}--large`);
+    if (this._size === size.SMALL) {
+      this.classList.add(`${CLASSNAME}--compact`);
+    }
+    else if (this._size === size.LARGE) {
+      this.classList.add(`${CLASSNAME}--quiet`);
+    }
   }
   
   /**
@@ -494,16 +458,9 @@ class TabList extends ComponentMixin(HTMLElement) {
     return orientation;
   }
   
-  /**
-   Returns {@link TabList} variants.
-   
-   @return {TabListVariantEnum}
-   */
-  static get variant() { return variant; }
-  
   /** @ignore */
   static get observedAttributes() {
-    return ['target', 'size', 'orientation', 'variant'];
+    return ['target', 'size', 'orientation'];
   }
   
   /** @ignore */
@@ -519,10 +476,9 @@ class TabList extends ComponentMixin(HTMLElement) {
     // Default reflected attributes
     if (!this._size) { this.size = size.MEDIUM; }
     if (!this._orientation) { this.orientation = orientation.HORIZONTAL; }
-    if (!this._variant) { this.variant = variant.PAGE; }
     
     // Support cloneNode
-    const template = this.querySelector('._coral-TabList-item-line');
+    const template = this.querySelector('._coral-Tabs-selectionIndicator');
     if (template) {
       template.remove();
     }

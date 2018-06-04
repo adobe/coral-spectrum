@@ -45,7 +45,7 @@ module.exports = function(gulp) {
         });
         
         // Remove topdoc comments
-        content = content.replace(/\/\* topdoc.*[\s\S]*?\*\//g, '');
+        content = content.replace(/\/\* topdoc.*[\s\S]*?\*\//g, '\n\n');
         
         return content;
       }))

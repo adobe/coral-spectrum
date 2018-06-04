@@ -58,8 +58,6 @@ for (const key in Icon.size) {
  A quiet button that indicates that the button's action is the secondary action.
  @property {String} WARNING
  A button that indicates that the button's action is dangerous.
- @property {String} ICON
- A quiet icon only button.
  @property {String} DEFAULT
  Not supported. Falls back to SECONDARY.
  */
@@ -70,7 +68,6 @@ const variant = {
   QUIET: 'quiet',
   MINIMAL: 'minimal',
   WARNING: 'warning',
-  ICON: 'icon',
   DEFAULT: 'secondary',
   // Private to be used for custom Button classes like toggle, dropdown and action
   _CUSTOM: '_custom'
@@ -331,9 +328,6 @@ const ButtonMixin = (superClass) => class extends superClass {
     else if (this._variant !== variant._CUSTOM) {
       this.classList.add(`${CLASSNAME}--${this._variant}`);
     }
-    
-    // Hide the label if we're in icon only mode
-    this._elements.label.hidden = this._variant === variant.ICON;
   }
   
   /** @ignore */

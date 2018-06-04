@@ -1442,8 +1442,7 @@ describe('ButtonGroup', function() {
     
     it('should add item classes to children', function() {
       expect(item1.variant).to.equal(Button.variant._CUSTOM);
-      expect(item1.classList.contains('_coral-ButtonGroup-item')).to.be.true;
-      expect(item1.classList.contains('_coral-Button--toggle')).to.be.true;
+      expect(item1.classList.contains('_coral-ActionButton')).to.be.true;
     });
     
     it('should remove item classes from children', function(done) {
@@ -1451,8 +1450,7 @@ describe('ButtonGroup', function() {
       
       helpers.next(() => {
         expect(item1.variant).to.equal(Button.variant.PRIMARY);
-        expect(item1.classList.contains('_coral-ButtonGroup-item')).to.be.false;
-        expect(item1.classList.contains('_coral-Button--toggle')).to.be.false;
+        expect(item1.classList.contains('_coral-ActionButton')).to.be.false;
         done();
       });
     });

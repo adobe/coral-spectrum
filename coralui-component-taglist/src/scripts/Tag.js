@@ -20,7 +20,7 @@ import '../../../coralui-component-button';
 import base from '../templates/base';
 import {transform, validate, events, i18n} from '../../../coralui-util';
 
-const CLASSNAME = '_coral-TagList-item';
+const CLASSNAME = '_coral-Tags-item';
 const LABEL_CLASSNAME = '_coral-Label';
 
 /**
@@ -333,6 +333,7 @@ class Tag extends ComponentMixin(HTMLElement) {
    */
   _toggleTagVariant(toggle) {
     this.classList.toggle(CLASSNAME, toggle);
+    this.classList.toggle(`${CLASSNAME}--deletable`, toggle);
     this.classList.toggle(LABEL_CLASSNAME, !toggle);
   }
   

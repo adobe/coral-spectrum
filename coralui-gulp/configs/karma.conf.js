@@ -154,6 +154,11 @@ module.exports = function(config) {
     // If browser does not capture in given timeout [ms], kill it
     captureTimeout: 20000,
     // report which specs are slower than 500ms
-    reportSlowerThan: 500
+    reportSlowerThan: 500,
+  
+    client: {
+      // Set to true for debugging via e.g console.debug
+      captureConsole: false
+    }
   });
 };

@@ -692,11 +692,6 @@ describe('QuickActions', function() {
         done();
       });
     });
-
-    it('should override the inline max-width applied by extended Overlay to prevent collapse', function() {
-      const el = helpers.build(window.__html__['QuickActions.empty.html']);
-      expect(el.style.maxWidth === 'none').to.equal(true, 'max-width is correctly overridden');
-    });
   
     describe('Smart Overlay', () => {
       helpers.testSmartOverlay('coral-quickactions');

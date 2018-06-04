@@ -17,6 +17,7 @@
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import {transform, validate} from '../../../coralui-util';
+import base from '../templates/base';
 
 /**
  Enumeration for {@link Wait} variants.
@@ -25,14 +26,11 @@ import {transform, validate} from '../../../coralui-util';
  
  @property {String} DEFAULT
  The default variant.
- @property {String} MONOCHROME
- A black and white styled wait.
  @property {String} DOTS
  Not supported. Falls back to DEFAULT.
  */
 const variant = {
   DEFAULT: 'default',
-  MONOCHROME: 'monochrome',
   DOTS: 'dots'
 };
 
@@ -66,6 +64,13 @@ const CLASSNAME = '_coral-Loader';
  @extends {ComponentMixin}
  */
 class Wait extends ComponentMixin(HTMLElement) {
+  constructor() {
+    super();
+  
+    // Prepare templates
+    this._elements = {};
+    base.call(this._elements);
+  }
   /**
    The size of the wait indicator. Currently 'S' (the default), 'M' and 'L' are available.
    See {@link WaitSizeEnum}.
@@ -123,8 +128,6 @@ class Wait extends ComponentMixin(HTMLElement) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
-  
-    this.classList.toggle(`${CLASSNAME}--fullpage`, this._variant === variant.MONOCHROME);
   }
   
   /**
@@ -189,9 +192,27 @@ class Wait extends ComponentMixin(HTMLElement) {
     
     this._value = value;
     this._reflectAttribute('value', this._value);
+  
+    const subMask1 = this._elements.subMask1;
+    const subMask2 = this._elements.subMask2;
     
     if (!this.hasAttribute('indeterminate')) {
-      this.style.backgroundPosition = `${this._value}% center`;
+      let angle;
+      
+      if (value > 0 && value <= 50) {
+        angle = -180 + value / 50 * 180;
+        subMask1.style.transform = `rotate(${angle}deg)`;
+        subMask2.style.transform = 'rotate(-180deg)';
+      }
+      else if (value > 50) {
+        angle = -180 + (value - 50) / 50 * 180;
+        subMask1.style.transform = 'rotate(0deg)';
+        subMask2.style.transform = `rotate(${angle}deg)`;
+      }
+      else {
+        subMask1.style.transform = '';
+        subMask2.style.transform = '';
+      }
   
       // ARIA: Reflect value for screenreaders
       this.setAttribute('aria-valuenow', this._value);
@@ -199,7 +220,8 @@ class Wait extends ComponentMixin(HTMLElement) {
       this.setAttribute('aria-valuemax', '100');
     }
     else {
-      this.style.backgroundPosition = '';
+      subMask1.style.transform = '';
+      subMask2.style.transform = '';
     }
     
     this.trigger('coral-wait:change');
@@ -252,6 +274,16 @@ class Wait extends ComponentMixin(HTMLElement) {
     
     // Centering reads the size
     if (this.centered) { this.centered = this.centered; }
+  
+    // Support cloneNode
+    const template = this.querySelectorAll('._coral-Loader-track, ._coral-Loader-fills');
+    for (let i = 0; i < template.length; i++) {
+      template[i].remove();
+    }
+  
+    // Render template
+    this.appendChild(this._elements.track);
+    this.appendChild(this._elements.fills);
   }
   
   /**

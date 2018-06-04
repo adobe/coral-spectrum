@@ -151,9 +151,12 @@ const ActionBarContainerMixin = (superClass) => class extends superClass {
         return;
       }
       
-      const newVariant = oldVariant === Button.variant.QUIET ? '_coral-Button--quiet--action' : '_coral-Button--action';
       button.setAttribute('variant', Button.variant._CUSTOM);
-      button.classList.add(newVariant);
+      button.classList.add('_coral-ActionButton');
+      
+      if (oldVariant === Button.variant.QUIET) {
+        button.classList.add('_coral-ActionButton--quiet');
+      }
     }
     
     const popover = item.querySelector('coral-popover');

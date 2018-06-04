@@ -1,18 +1,6 @@
 import {helpers} from '../../../coralui-util/src/tests/helpers';
 
 describe('Coral.Component', function() {
-  let warn = console.warn;
-  
-  before(() => {
-    console.warn = () => {
-      // Override it to prevent spamming the console
-    };
-  });
-  
-  after(() => {
-    // Restore warn
-    console.warn = warn;
-  });
   
   // When a component MUST be registered inside of a test, use this to get a unique tag name
   var curTagUID = 0;

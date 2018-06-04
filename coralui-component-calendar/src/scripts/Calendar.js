@@ -609,8 +609,22 @@ class Calendar extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     }
     
     el = document.getElementById(this._activeDescendant);
+    const newTable = this.querySelector('._coral-Calendar-table--transit');
+    const isTransitioning = newTable !== null;
+    
     if (el) {
-      el.querySelector('._coral-Calendar-date').classList.add('is-focused');
+      if (isTransitioning) {
+        commons.transitionEnd(newTable, () => {
+          // Prevents from chopping off the transition animation
+          window.setTimeout(() => {
+            el.querySelector('._coral-Calendar-date').classList.add('is-focused');
+          }, 50);
+        });
+      }
+      else {
+        // Focus the selected date
+        el.querySelector('._coral-Calendar-date').classList.add('is-focused');
+      }
     }
   }
   

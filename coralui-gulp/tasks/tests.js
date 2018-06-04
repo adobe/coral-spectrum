@@ -15,9 +15,9 @@
  * from Adobe Systems Incorporated.
  */
 module.exports = function(gulp) {
-  const runSequence = require('run-sequence').use(gulp);
   const KarmaServer = require('karma').Server;
   const configFile = `${__dirname}/../configs/karma.conf.js`;
+  const spawn = require('child_process').spawn;
   
   gulp.task('karma', function(done) {
     KarmaServer.start({
@@ -37,10 +37,7 @@ module.exports = function(gulp) {
     }, done).start();
   });
   
-  gulp.task('tests', function() {
-    runSequence(
-      'build',
-      'karma'
-    );
+  gulp.task('test', function() {
+    spawn('gulp build && gulp karma', [], {shell: true, stdio: 'inherit'});
   });
 };

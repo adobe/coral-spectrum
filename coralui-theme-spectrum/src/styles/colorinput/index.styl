@@ -44,8 +44,7 @@ $colorinput-swatch-top-padding = 8*$px;
 $colorinput-swatch-left-right-padding = 4*$px;
 
 $colorinput-swatch-button-size = 32*$px;
-$colorinput-swatch-button-left-padding = 6.4*$px;
-$colorinput-swatch-button-top-padding = 6.4*$px;
+$colorinput-swatch-button-padding = 6.4*$px;
 
 $colorinput-button-wrapper-offset = 2*$px;
 
@@ -151,8 +150,7 @@ coral-colorinput-item {
     position: relative;
     width: $colorinput-swatch-button-size;
     height: $colorinput-swatch-button-size;
-    padding-left: $colorinput-swatch-button-left-padding;
-    padding-top: $colorinput-swatch-button-top-padding;
+    padding-left: $colorinput-swatch-button-padding;
     border-radius: $colorinput-button-border-radius;
     border-width: $colorinput-button-border-width;
     margin-right: 0;
@@ -312,6 +310,9 @@ coral-colorinput-item {
 }
 
 ._coral-ColorInput-sliderBar {
+  // @spectrum
+  z-index: inherit;
+
   &:before {
     display: block;
     position: absolute;

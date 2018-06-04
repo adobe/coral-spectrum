@@ -3,18 +3,6 @@ import {ActionBar} from '../../../coralui-component-actionbar';
 import {Button} from '../../../coralui-component-button';
 
 describe('ActionBar', function() {
-  let warn = console.warn;
-  
-  before(() => {
-    console.warn = () => {
-      // Override it to prevent spamming the console
-    };
-  });
-  
-  after(() => {
-    // Restore warn
-    console.warn = warn;
-  });
 
   describe('Instantiation', function() {
     it('should be possible to clone via markup', function() {

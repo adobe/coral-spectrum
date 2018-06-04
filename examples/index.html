@@ -18,8 +18,12 @@
       overflow: scroll;
     }
 
+    .example-List coral-tab {
+      text-transform: capitalize;
+    }
+
     .example-Preview {
-      width: calc(100% - 250px);
+      width: calc(100% - 150px);
       height: 100%;
       position: absolute;
       top: 0;
@@ -31,7 +35,7 @@
 </head>
 <body class="coral--dark">
   <div class="example-List">
-    <coral-tablist variant="panel" orientation="vertical" id="example-list"></coral-tablist>
+    <coral-tablist size="S" orientation="vertical" id="example-list"></coral-tablist>
   </div>
   <iframe class="example-Preview" id="example-preview"></iframe>
 
@@ -90,12 +94,13 @@
     const preview = document.getElementById('example-preview');
 
     components.forEach(function(component) {
-       const item = list.items.add({
-         label: {
-           textContent: component
-         },
-         selected: location.hash.slice(1) === component
-       });
+      const name = component.split('-').pop();
+      const item = list.items.add({
+        label: {
+          textContent: name
+        },
+        selected: location.hash.slice(1) === name
+      });
       item.setAttribute('src', '../' + component + '/examples/index.html');
     });
 

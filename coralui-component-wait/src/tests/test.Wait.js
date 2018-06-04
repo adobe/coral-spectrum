@@ -7,9 +7,8 @@ describe('Wait', function() {
     it('should define the variants in an enum', function() {
       expect(Wait.variant).to.exist;
       expect(Wait.variant.DEFAULT).to.equal('default');
-      expect(Wait.variant.MONOCHROME).to.equal('monochrome');
       expect(Wait.variant.DOTS).to.equal('dots');
-      expect(Object.keys(Wait.variant).length).to.equal(3);
+      expect(Object.keys(Wait.variant).length).to.equal(2);
     });
     
     it('should define the sizes in an enum', function() {
@@ -230,42 +229,13 @@ describe('Wait', function() {
         
         expect(el.variant).to.equal(Wait.variant.DEFAULT);
         expect(el.getAttribute('variant')).to.equal(Wait.variant.DEFAULT);
-        expect(el.classList.contains('_coral-Loader')).to.be.true;
       });
       
       it('should set the new variant', function() {
-        var el = helpers.build('<coral-wait variant="monochrome"></coral-wait>');
+        var el = helpers.build('<coral-wait variant="dots"></coral-wait>');
         
-        expect(el.variant).to.equal('monochrome');
-        expect(el.variant).to.equal(Wait.variant.MONOCHROME);
-        expect(el.getAttribute('variant')).to.equal('monochrome');
-        expect(el.classList.contains('_coral-Loader--fullpage')).to.be.true;
-        expect(el.classList.contains('_coral-Loader')).to.be.true;
-      });
-      
-      it('should not add class for empty variant', function() {
-        var el = helpers.build('<coral-wait variant=""></coral-wait>');
-  
-        expect(el.variant).to.equal(Wait.variant.DEFAULT);
-        expect(el.getAttribute('variant')).to.equal(Wait.variant.DEFAULT);
-        expect(el.classList.contains('_coral-Loader')).to.be.true;
-      });
-      
-      it('should not add class for invalid variant', function() {
-        var el = helpers.build('<coral-wait variant="invalidvariant"></coral-wait>');
-        
-        expect(el.variant).to.equal(Wait.variant.DEFAULT);
-        expect(el.getAttribute('variant')).to.equal(Wait.variant.DEFAULT);
-        expect(el.classList.contains('_coral-Loader')).to.be.true;
-      });
-      
-      it('should remove variant classnames when variant changes', function() {
-        var el = helpers.build('<coral-wait variant="monochrome"></coral-wait>');
-  
-        expect(el.classList.contains('_coral-Loader--fullpage')).to.be.true;
-        el.variant = Wait.variant.DEFAULT;
-        
-        expect(el.classList.contains('_coral-Loader--fullpage')).to.be.false;
+        expect(el.variant).to.equal(Wait.variant.DOTS);
+        expect(el.getAttribute('variant')).to.equal('dots');
       });
     });
   });

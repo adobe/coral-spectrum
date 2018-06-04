@@ -480,13 +480,13 @@ describe('Datepicker', function() {
           expect(el.classList.contains('_coral-InputGroup--quiet')).to.be.false;
         
           expect(el.variant).to.equal(Datepicker.variant.DEFAULT, '"default" should be set');
-          expect(el._elements.toggle.classList.contains('_coral-Button--dropdown')).to.be.true;
+          expect(el._elements.toggle.classList.contains('_coral-FieldButton--quiet')).to.be.false;
           expect(el._elements.input.variant).to.equal(Datepicker.variant.DEFAULT, '"default" should be set to the input variant');
         
           el.variant = Datepicker.variant.QUIET;
         
           expect(el.variant).to.equal(Datepicker.variant.QUIET, '"quiet" should be set');
-          expect(el._elements.toggle.classList.contains('_coral-Button--quiet--dropdown')).to.be.true;
+          expect(el._elements.toggle.classList.contains('_coral-FieldButton--quiet')).to.be.true;
           expect(el._elements.input.variant).to.equal(Datepicker.variant.QUIET, '"quiet" should be set tp the input variant');
         
           expect(el.classList.contains('_coral-InputGroup--quiet')).to.be.true;

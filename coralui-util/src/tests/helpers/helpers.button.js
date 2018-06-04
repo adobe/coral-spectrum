@@ -21,9 +21,8 @@ const testButton = function(Constructor, tagName, baseTagName) {
         expect(Constructor.variant.QUIET).to.equal('quiet');
         expect(Constructor.variant.MINIMAL).to.equal('minimal');
         expect(Constructor.variant.DEFAULT).to.equal('secondary');
-        expect(Constructor.variant.ICON).to.equal('icon');
         expect(Constructor.variant._CUSTOM).to.equal('_custom');
-        expect(Object.keys(Constructor.variant).length).to.equal(9);
+        expect(Object.keys(Constructor.variant).length).to.equal(8);
       });
   
       it('should define the iconPositions in an enum', function() {

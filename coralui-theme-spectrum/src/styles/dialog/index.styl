@@ -23,12 +23,30 @@
 }
 
 // @spectrum
+._coral-Dialog-closeButton {
+  line-height: 18*$px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 18*$px;
+  height: 18*$px;
+
+  ._coral-Icon {
+    width: 12*$px;
+  }
+}
+
+// @spectrum
 coral-dialog-footer {
   display: block;
 
   &:empty {
     display: none;
   }
+}
+
+._coral-Dialog-dragIcon {
+  margin-top: -3*$px;
 }
 
 // Prevent dialog flashing on page load

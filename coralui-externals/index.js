@@ -5,7 +5,8 @@ import './polyfills/element.remove.js';
 import './polyfills/classList-partial-shim.js';
 import './polyfills/requestAnimationFrame.js';
 import './polyfills/CustomEvent.js';
-import './polyfills/focus-ring.js';
+// Accessibility
+import '@adobe/focus-ring-polyfill';
 // @IE
 import Promise from 'promise-polyfill';
 

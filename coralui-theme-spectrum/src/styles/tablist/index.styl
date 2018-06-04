@@ -15,73 +15,17 @@
  * from Adobe Systems Incorporated.
  */
 
-// @spectrum override cursor
-._coral-TabList-item.is-disabled ._coral-TabList-item-label {
-  cursor: default;
-}
-
 // @spectrum support vertical line
-._coral-TabList--vertical ._coral-TabList-item-line {
-  top: 0;
-}
-
-// @spectrum
-._coral-TabList--horizontal {
-  ._coral-TabList-item {
-    display: inline-flex;
-    align-items: center;
-
-    ._coral-Icon {
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-  }
-}
-
-// @spectrum
-._coral-TabList--vertical {
-  ._coral-TabList-item {
-    display: flex;
-    align-items: center;
-
-    ._coral-Icon {
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-  }
-}
-
-// @spectrum support text + icon
-._coral-TabList--anchored,
-._coral-TabList--page {
-  ._coral-TabList-item-icon[size="XS"] {
-    margin-right: 8*$px;
-  }
-}
-
-// @spectrum support vertical + page variant
-._coral-TabList--vertical._coral-TabList--page {
-  ._coral-TabList-item {
-    padding-left: 8*$px;
-  }
-}
-
-// @spectrum support vertical + anchored variant
-._coral-TabList--vertical._coral-TabList--anchored {
-  border-left-width: 2*$px;
+._coral-Tabs--vertical {
   border-left-style: solid;
+  border-left-width: 2*$px;
 
-  ._coral-TabList-item-line {
-    left: -2*$px;
+  ._coral-Tabs-item {
+    margin-left: 8*$px;
   }
 
-  ._coral-TabList-item {
-    padding-left: 16*$px;
-    margin-top: 8*$px;
-
-    &:last-of-type {
-      margin-bottom: 8*$px;
-    }
+  ._coral-Tabs-selectionIndicator {
+    left: -2*$px;
   }
 }
 

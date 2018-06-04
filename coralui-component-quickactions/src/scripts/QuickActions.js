@@ -26,8 +26,6 @@ import '../../../coralui-component-popover';
 import base from '../templates/base';
 import {transform, validate, commons, i18n} from '../../../coralui-util';
 
-// MUST be kept in sync with quickactions styles
-const BUTTON_GAP = 12;
 const BUTTON_FOCUSABLE_SELECTOR = '._coral-QuickActions-item:not([disabled]):not([hidden])';
 
 /**
@@ -533,7 +531,7 @@ class QuickActions extends Overlay {
     }
     
     button.variant = Button.variant._CUSTOM;
-    button.classList.add('_coral-QuickActions-item');
+    button.classList.add('_coral-QuickActions-item', '_coral-ActionButton', '_coral-ActionButton--quiet');
     button.setAttribute('tabindex', '-1');
     button.setAttribute('title', itemData.textContent.trim());
     button.setAttribute('aria-label', itemData.textContent.trim());
@@ -590,31 +588,35 @@ class QuickActions extends Overlay {
       temporarilyShown = true;
     }
     
-    const totalAvailableWidth = this.offsetWidth - BUTTON_GAP;
-    const buttonOuterWidth = buttons[0].offsetWidth + BUTTON_GAP;
+    const totalAvailableWidth = this.offsetWidth;
+    const buttonWidth = buttons[0].offsetWidth;
     
     let totalFittingButtons = 0;
     let widthUsed = 0;
     
     while (totalAvailableWidth > widthUsed) {
-      widthUsed += buttonOuterWidth;
+      widthUsed += buttonWidth;
       
       if (totalAvailableWidth > widthUsed) {
         totalFittingButtons++;
       }
     }
+  
+    // Remove one to avoid taking full width space
+    totalFittingButtons--;
     
-    const handleThreshold = this.threshold > 0;
-    const moreButtonsThanThreshold = handleThreshold && buttons.length > this.threshold;
+    const threshold = this.threshold;
+    const handleThreshold = threshold > 0;
+    const moreButtonsThanThreshold = handleThreshold && buttons.length > threshold;
     const collapse = buttons.length > totalFittingButtons || moreButtonsThanThreshold;
     
     // +1 to account for the more button
-    const collapseToThreshold = collapse && handleThreshold && this.threshold + 1 < totalFittingButtons;
+    const collapseToThreshold = collapse && handleThreshold && threshold + 1 < totalFittingButtons;
     
     let totalButtons;
     if (collapse) {
       if (collapseToThreshold) {
-        totalButtons = this.threshold + 1;
+        totalButtons = threshold + 1;
       }
       else {
         totalButtons = totalFittingButtons;
@@ -661,6 +663,8 @@ class QuickActions extends Overlay {
       this._toggleTabbable(buttons[0], true);
       this._elements.moreButton.hide();
     }
+  
+    this._setWidth(true);
     
     // Reset the QuickActions display
     if (temporarilyShown) {
@@ -678,11 +682,29 @@ class QuickActions extends Overlay {
    
    @ignore
    */
-  _setWidth() {
+  _setWidth(buttonWidthBased) {
+    let width = 0;
     const targetElement = this._getTarget();
     
     if (targetElement) {
-      this.style.width = `${targetElement.offsetWidth}px`;
+      const maxWidth = targetElement.offsetWidth;
+      
+      if (buttonWidthBased) {
+        const visibleButtons = this.querySelectorAll('._coral-QuickActions-item:not([hidden])');
+  
+        if (visibleButtons.length) {
+          const buttonWidth = visibleButtons[0].offsetWidth;
+    
+          for (let i = 0; i < visibleButtons.length && width <= maxWidth; i++) {
+            width += buttonWidth;
+          }
+    
+          this.style.width = `${width}px`;
+        }
+      }
+      else {
+        this.style.width = `${maxWidth}px`;
+      }
     }
   }
   
@@ -1119,9 +1141,6 @@ class QuickActions extends Overlay {
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();
-  
-    // @todo move to theme
-    this.style.maxWidth = 'none';
     
     this.classList.add(CLASSNAME);
     

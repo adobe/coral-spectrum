@@ -108,7 +108,7 @@ Once the installation is complete, you can use below [gulp](https://gulpjs.com/)
 * `gulp run` to generate the build and run the dev server on localhost:9001 by default.
 * `gulp build` to generate the build.
 * `gulp watch` to run the dev server on localhost:9001 by default. 
-* `gulp tests` to generate the build and run the tests.
+* `gulp test` to generate the build and run the tests.
 * `gulp karma` to run the tests only.
 * `gulp karma-watch` to debug the tests on localhost:9876 by default.
 * `gulp docs` to build the documentation. 
