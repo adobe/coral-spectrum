@@ -1144,7 +1144,7 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // Firefox doesn't support focusout/focusin, so we're left doing awful things
     this._blurTimeout = window.setTimeout(() => {
       const relatedTarget = document.activeElement;
-      const focusOutside = !this.contains(relatedTarget);
+      const focusOutside = !this.contains(relatedTarget) && !this._elements.overlay.contains(relatedTarget);
       
       // If focus has moved out of the autocomplete, it's an input event
       if (inputBlur && focusOutside && !this.multiple) {

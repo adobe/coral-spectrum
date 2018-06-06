@@ -67,6 +67,7 @@ coral-selectlist-item-content {
   & > coral-icon:first-child {
     position: relative;
     top: 3*$px;
+    margin-right: 8*$px;
   }
 }
 
@@ -100,27 +101,10 @@ coral-selectlist-item-content {
   }
 }
 
-._coral-BasicList-item-outerContainer {
-  overflow: hidden; // Don't go under the float
-
-  height: 100%; // Truncate text when it's longer than 2 lines
-}
-
-._coral-BasicList-item-contentContainer {
-  display: table;
-  table-layout: fixed; // Allow percent width
-  width: 100%; // Required for text-overflow: ellipsis to apply on cells
-}
-
-._coral-BasicList-item-content {
-  display: table-cell;
-  vertical-align: middle; // Center content
-
-  max-width: 100%; // Enable text-overflow
-
-  white-space: nowrap;
+._coral-BasicList-item-container {
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 ._coral-ButtonList-item,
@@ -130,6 +114,7 @@ coral-selectlist-item-content {
 }
 
 ._coral-ButtonList-item {
+  width: 100%;
   border: none;
   font-family: inherit;
   border-radius: 0;
@@ -143,20 +128,6 @@ coral-selectlist-item-content {
   font-weight: bold;
   text-transform: uppercase;
   content: attr(label);
-}
-
-// @spectrum
-._coral-SelectList-option {
-  height: inherit;
-}
-
-// @spectrum
-._coral-SelectList ._coral-SelectList-option {
-  &:not(._coral-AnchorList-item):not(._coral-ButtonList-item):not(._coral-SelectList-item):hover {
-    background-color: inherit;
-    color: inherit;
-    cursor: inherit;
-  }
 }
 
 @require 'light';

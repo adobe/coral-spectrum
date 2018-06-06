@@ -15,19 +15,11 @@
  * from Adobe Systems Incorporated.
  */
 
-const CLASSNAME = '_coral-BasicList-item-content';
-
 /**
  @class Coral.List.Item.Content
  @classdesc The List item content
  @htmltag coral-list-item-content
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class ListItemContent extends HTMLElement {
-  /** @ignore */
-  connectedCallback() {
-    this.classList.add(CLASSNAME);
-  }
-}
+export default () => document.createElement('coral-list-item-content');
 
-export default ListItemContent;

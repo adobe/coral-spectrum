@@ -52,7 +52,7 @@ const ListItemMixin = (superClass) => class extends superClass {
       handle: 'content',
       tagName: 'coral-list-item-content',
       insert: function(content) {
-        this._elements.contentContainer.appendChild(content);
+        this._elements.container.appendChild(content);
       }
     });
   }
@@ -110,7 +110,7 @@ const ListItemMixin = (superClass) => class extends superClass {
   
     // Render the template
     fragment.appendChild(this._elements.icon);
-    fragment.appendChild(this._elements.outerContainer);
+    fragment.appendChild(this._elements.container);
   
     // Fetch or create the content content zone element
     const content = this._elements.content;
