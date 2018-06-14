@@ -26,7 +26,7 @@ class Enhancer {
             doc.examples.unshift('<caption>JS constructor</caption>\nnew '+ item.tagValue +'();');
             
             doc.see = doc.see || [];
-            doc.see.push('../examples/#' + doc.memberof.split('/')[1]);
+            doc.see.push('../examples/' + doc.memberof.split('/')[1] + '.html');
           }
           
           if (item.tagName === '@mixin') {

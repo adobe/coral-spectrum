@@ -46,8 +46,6 @@
     </div>
 
     <section class="u-coral-margin">
-      <h1 class="coral-Heading coral-Heading--1">Coral.WizardView</h1>
-
       <h2 class="coral-Heading coral-Heading--2">Default Example</h2>
       <div class="markup">
         <coral-wizardview id="default">
@@ -114,25 +112,25 @@
             <coral-step>Step 4</coral-step>
           </coral-steplist>
           <coral-panelstack coral-wizardview-panelstack>
-            <coral-panel>
-              <button is="coral-button">Cancel</button>
+            <coral-panel class="u-coral-margin">
+              <button is="coral-button" variant="quiet">Cancel</button>
             </coral-panel>
-            <coral-panel>
-              <button is="coral-button" coral-wizardview-previous>Previous</button>
+            <coral-panel class="u-coral-margin">
+              <button is="coral-button" variant="quiet" coral-wizardview-previous>Previous</button>
             </coral-panel>
-            <coral-panel>
-              <button is="coral-button" coral-wizardview-previous>Previous</button>
+            <coral-panel class="u-coral-margin">
+              <button is="coral-button" variant="quiet" coral-wizardview-previous>Previous</button>
             </coral-panel>
           </coral-panelstack>
           <coral-panelstack coral-wizardview-panelstack>
-            <coral-panel>
+            <coral-panel class="u-coral-margin">
               <button is="coral-button" variant="primary" coral-wizardview-next>Next</button>
             </coral-panel>
-            <coral-panel>
+            <coral-panel class="u-coral-margin">
               <button is="coral-button" variant="primary" coral-wizardview-next>Next</button>
             </coral-panel>
-            <coral-panel>
-              <button is="coral-button" variant="primary">Done</button>
+            <coral-panel class="u-coral-margin">
+              <button is="coral-button" variant="cta">Done</button>
             </coral-panel>
           </coral-panelstack>
           <coral-panelstack coral-wizardview-panelstack>

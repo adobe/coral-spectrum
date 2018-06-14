@@ -134,10 +134,26 @@
       }
     }
   
-    // Modify component examples link to open in a new tab
-    var examples = document.querySelectorAll('a[href*="../examples/#"]');
-    for (var i = 0; i < examples.length; i++) {
-      examples[i].target = '_blank';
+    // Insert examples iframe
+    var example = document.querySelector('a[href*="../examples/"]');
+    if (example) {
+      var id = new Date();
+      example.insertAdjacentHTML('beforebegin',
+        '<iframe id="'+ id +'" style="height:600px;border:0;width:100%;" src="'+ example.href +'"></iframe>');
+      
+      var iframe = document.getElementById(id);
+      iframe.onload = function() {
+        if (iframe.src.indexOf('shell') === -1) {
+          var content = iframe.contentDocument;
+          iframe.style.height = content.body.scrollHeight + 20 + 'px';
+          content.documentElement.style.overflowY = 'hidden';
+  
+          content.documentElement.onclick = function() {
+            iframe.style.height = content.body.scrollHeight + 20 + 'px';
+          };
+        }
+      };
+      example.remove();
     }
     
     document.body.className += ' is-ready';

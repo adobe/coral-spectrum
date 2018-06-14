@@ -172,7 +172,7 @@ body.is-ready {
   right: 8px;
 }
 
-.search-result li {
+.search-result li a {
   padding: 9px 0 9px 12px;
 }
 
@@ -218,4 +218,9 @@ code[data-ice="importPathCode"]:empty {
 
 .expression-extends .prettyprint {
   padding: 0;
+}
+
+[data-ice="exampleDocs"] h4,
+[data-ice="see"] h4 {
+  display: none;
 }

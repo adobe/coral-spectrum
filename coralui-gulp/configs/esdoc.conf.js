@@ -72,7 +72,6 @@ if (util.isTLB()) {
       path.join(root, 'coralui-guide/manual/styles.md'),
       path.join(root, 'coralui-guide/manual/frameworks.md'),
       path.join(root, 'coralui-guide/manual/architecture.md'),
-      path.join(root, 'coralui-guide/manual/examples.md'),
       path.join(root, 'coralui-guide/manual/contribution.md')
     ]
   };
