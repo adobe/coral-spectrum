@@ -117,7 +117,7 @@ function doRepositionBackdrop() {
 }
 
 overlays = {
-  pop: function(instance) {
+  pop(instance) {
     // Get overlay index
     const index = this.indexOf(instance);
     
@@ -135,7 +135,7 @@ overlays = {
     return overlay;
   },
   
-  push: function(instance) {
+  push(instance) {
     // Pop overlay
     const overlay = this.pop(instance) || {instance};
     
@@ -160,7 +160,7 @@ overlays = {
     return overlay;
   },
   
-  indexOf: function(instance) {
+  indexOf(instance) {
     // Loop over stack
     // Find overlay
     // Return index
@@ -172,7 +172,7 @@ overlays = {
     return -1;
   },
   
-  get: function(instance) {
+  get(instance) {
     // Get overlay index
     const index = this.indexOf(instance);
     
@@ -180,21 +180,21 @@ overlays = {
     return index === -1 ? null : _overlays[index];
   },
   
-  top: function() {
+  top() {
     const length = _overlays.length;
     return length === 0 ? null : _overlays[length - 1];
   },
   
-  getHighestZIndex: function() {
+  getHighestZIndex() {
     const overlay = this.top();
     return overlay ? overlay.zIndex : startZIndex;
   },
   
-  some: function(...args) {
+  some(...args) {
     return _overlays.some(...args);
   },
   
-  forEach: function(...args) {
+  forEach(...args) {
     return _overlays.forEach(...args);
   }
 };

@@ -139,7 +139,7 @@ class ShellHelp extends ComponentMixin(HTMLElement) {
     
     this._elements.resultMessage.innerHTML = '';
     
-    this._elements.resultMessage.appendChild(helpSearchError.call(this._elements, {i18n: i18n}));
+    this._elements.resultMessage.appendChild(helpSearchError.call(this._elements, {i18n}));
     
     this._elements.resultMessage.hidden = false;
   }
@@ -162,7 +162,7 @@ class ShellHelp extends ComponentMixin(HTMLElement) {
       // Clear existing result message
       this._elements.resultMessage.innerHTML = '';
       // Indicate to the user that no results were found
-      this._elements.resultMessage.appendChild(noHelpResults.call(this._elements, {i18n: i18n}));
+      this._elements.resultMessage.appendChild(noHelpResults.call(this._elements, {i18n}));
       // Show result message
       this._elements.resultMessage.hidden = false;
     }

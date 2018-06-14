@@ -97,7 +97,7 @@ class DateTime {
         else {
           // If string is invalid, the date will be invalid too
           // "replace" fixes the one day off issue
-          this._date = new Date(this._value.replace(/-/g, '\/').replace(/T.+/, ''));
+          this._date = new Date(this._value.replace(/-/g, '/').replace(/T.+/, ''));
         }
       }
       else if (this._value === null) {

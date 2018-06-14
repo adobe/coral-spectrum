@@ -106,7 +106,7 @@ class Popover extends Overlay {
       content: this.querySelector('coral-popover-content') || document.createElement('coral-popover-content'),
       footer: this.querySelector('coral-popover-footer') || document.createElement('coral-popover-footer')
     });
-    base.call(this._elements, {i18n: i18n});
+    base.call(this._elements, {i18n});
     
     // Events
     this._delegateEvents({

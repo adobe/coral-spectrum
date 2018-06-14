@@ -81,20 +81,26 @@ const normalizedCodes = {
 const specialKeyCodes = {
   backspace: 8,
   tab: 9,
-  return: 13, // real event key is "enter" this will be mapped internally
+  // real event key is "enter" this will be mapped internally
+  return: 13,
   pause: 19,
   capslock: 20,
   esc: 27,
   escape: 27,
-  space: 32, // real event key is " " this will be mapped internally
+  // real event key is " " this will be mapped internally
+  space: 32,
   pageup: 33,
   pagedown: 34,
   end: 35,
   home: 36,
-  left: 37, // real event key is "arrowLeft" this will be mapped internally
-  up: 38, // real event key is "arrowUp" this will be mapped internally
-  right: 39, // real event key is "arrowRight" this will be mapped internally
-  down: 40, // real event key is "arrowDown" this will be mapped internally
+  // real event key is "arrowLeft" this will be mapped internally
+  left: 37,
+  // real event key is "arrowUp" this will be mapped internally
+  up: 38,
+  // real event key is "arrowRight" this will be mapped internally
+  right: 39,
+  // real event key is "arrowDown" this will be mapped internally
+  down: 40,
   insert: 45,
   del: 46,
   delete: 46,
@@ -464,7 +470,7 @@ class Keys {
       this._setCurrentKeyCombo(event);
     }
     
-    this._executeListeners.call(this, event);
+    this._executeListeners(event);
     
     // Workaround: keyup events are never triggered while the command key is down, so reset the list of keys
     if (event.metaKey) {

@@ -32,7 +32,8 @@
     "no-continue": 0,
     "no-multi-assign": 0,
     "max-depth": 0,
-    "max-lines": 1
+    "max-lines": 1,
+    "babel/object-curly-spacing": 0
   },
   "parserOptions": {
     "ecmaVersion": 6,
