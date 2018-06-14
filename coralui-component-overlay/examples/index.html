@@ -2,192 +2,209 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Coral.Overlay</title>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const markup = document.body.querySelectorAll('.markup');
+      for (var i = 0; i < markup.length; i++) {
+        const code = markup[i].innerHTML;
+        const id = 'markup-code-' + i;
+        markup[i].insertAdjacentHTML('afterend',
+          '<div style="margin:10px 0">' +
+          '<a onclick="event.preventDefault();this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+          '<pre hidden>' +
+          '<code id="'+ id +'" class="html">' +
+          '</code>' +
+          '</pre>' +
+          '</div>');
+        document.getElementById(id).textContent = code;
+      }
+      window.hljs.initHighlightingOnLoad();
+    });
+  </script>
+
   <link rel="stylesheet" href="../build/css/coral.css">
-  <script src="../build/js/coral.js"></script>
-
-  <style>
-    body {
-      padding: 15px;
-    }
-
-    .grid {
-      position: absolute;
-      top: 80px;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
-
-      text-align: center;
-    }
-
-    .grid-center {
-      width: 10rem;
-      height: 10rem;
-    }
-
-    .box {
-      width: 10rem;
-      height: 10rem;
-      border: 1px dashed #333;
-      background: rgba(255, 255, 255, .5);
-    }
-
-    .controls {
-      position: fixed;
-      right: 0;
-      bottom: 0;
-      opacity: 0.75;
-      padding: 15px;
-    }
-
-    coral-overlay {
-      padding: 5px;
-      text-align: center;
-      border-radius: 5px;
-      border: 1px dashed #333;
-      background: rgba(255, 255, 255, .5);
-    }
-  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const script = document.createElement('script');
+      script.src = '../build/js/coral.js';
+      document.head.appendChild(script);
+    });
+  </script>
 </head>
 <body class="coral--light">
 
-<div style="position:fixed;top:15px;right:15px;z-index:10">
-  <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--light'">Light</a> |
-  <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--lightest'">Lightest</a> |
-  <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--dark'">Dark</a> |
-  <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--darkest'">Darkest</a>
-</div>
+  <div style="position:fixed;top:15px;right:15px;z-index:10">
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--light'">Light</a> |
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--lightest'">Lightest</a> |
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--dark'">Dark</a> |
+    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--darkest'">Darkest</a>
+  </div>
 
-<h1 class="coral-Heading coral-Heading--1">Coral.Overlay</h1>
+  <section class="u-coral-margin">
+    <h1 class="coral-Heading coral-Heading--1">Coral.Overlay</h1>
 
-<table class="grid">
-  <tr>
-    <td><button class="box" id="target_1">Target 1</button></td>
-    <td></td>
-    <td><button class="box" id="target_2">Target 2</button></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td class="grid-center"><button class="box" id="target_3">Target 3</button></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><button class="box" id="target_4">Target 4</button></td>
-    <td></td>
-    <td><button class="box" id="target_5">Target 5</button></td>
-  </tr>
-</table>
+    <div class="markup">
+      <style>
+        .grid {
+          width: 100%;
+          height: 100%;
+          text-align: center;
+        }
 
-<section class="controls">
-  <a href="#" class="coral-Link" onclick="toggleVisibility(); event.preventDefault();">Toggle (t)</a> |
-  <a href="#" class="coral-Link" onclick="toggleInner(); event.preventDefault();">Toggle inner (i)</a> |
-  <a href="#" class="coral-Link" onclick="cycleTargets(); event.preventDefault();">Cycle target (a)</a> |
-  <a href="#" class="coral-Link" onclick="cyclePointFrom(); event.preventDefault();">Cycle placement (f)</a> |
-  <a href="#" class="coral-Link" onclick="cyclePointFrom(); event.preventDefault();">Cycle collision (p)</a> |
-  <a href="#" class="coral-Link" onclick="increaseLengthOffset(); event.preventDefault();">Increase length offset (c)</a> |
-  <a href="#" class="coral-Link" onclick="decreaseLengthOffset(); event.preventDefault();">Decrease length offset (v)</a> |
-  <a href="#" class="coral-Link" onclick="increaseBreadthOffset(); event.preventDefault();">Increase breadth offset (n)</a> |
-  <a href="#" class="coral-Link" onclick="decreaseBreadthOffset(); event.preventDefault();">Decrease breadth offset (m)</a> |
-  <a href="#" class="coral-Link" onclick="restoreOffsets(); event.preventDefault();">Restore offsets (z)</a> |
-</section>
+        .grid-center {
+          width: 10rem;
+          height: 10rem;
+        }
 
-<coral-overlay id="overlay" target="#target_1" style="width:200px">
-  This is typical overlay content.
-</coral-overlay>
+        .box {
+          width: 10rem;
+          height: 10rem;
+          border: 1px dashed #333;
+          background: rgba(255, 255, 255, .5);
+        }
 
-<script>
-  var target = [
-    '#target_1',
-    '#target_2',
-    '#target_3',
-    '#target_4',
-    '#target_5'
-  ];
-  target.curIndex = 0;
+        coral-overlay {
+          padding: 5px;
+          text-align: center;
+          border-radius: 5px;
+          border: 1px dashed #333;
+          background: rgba(255, 255, 255, .5);
+        }
+      </style>
 
-  var placement = [
-    'right',
-    'bottom',
-    'left',
-    'top'
-  ];
-  placement.curIndex = 0;
+      <table class="grid">
+        <tr>
+          <td><button class="box" id="target_1">Target 1</button></td>
+          <td></td>
+          <td><button class="box" id="target_2">Target 2</button></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="grid-center"><button class="box" id="target_3">Target 3</button></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><button class="box" id="target_4">Target 4</button></td>
+          <td></td>
+          <td><button class="box" id="target_5">Target 5</button></td>
+        </tr>
+      </table>
 
-  var collision = [
-    'flip',
-    'fit',
-    'none'
-  ];
-  collision.curIndex = 0;
+      <section style="margin-top:15px;">
+        <a href="#" class="coral-Link" onclick="toggleVisibility(); event.preventDefault();">Toggle (t)</a> |
+        <a href="#" class="coral-Link" onclick="toggleInner(); event.preventDefault();">Toggle inner (i)</a> |
+        <a href="#" class="coral-Link" onclick="cycleTargets(); event.preventDefault();">Cycle target (a)</a> |
+        <a href="#" class="coral-Link" onclick="cyclePointFrom(); event.preventDefault();">Cycle placement (f)</a> |
+        <a href="#" class="coral-Link" onclick="cyclePointFrom(); event.preventDefault();">Cycle collision (p)</a> |
+        <a href="#" class="coral-Link" onclick="increaseLengthOffset(); event.preventDefault();">Increase length offset (c)</a> |
+        <a href="#" class="coral-Link" onclick="decreaseLengthOffset(); event.preventDefault();">Decrease length offset (v)</a> |
+        <a href="#" class="coral-Link" onclick="increaseBreadthOffset(); event.preventDefault();">Increase breadth offset (n)</a> |
+        <a href="#" class="coral-Link" onclick="decreaseBreadthOffset(); event.preventDefault();">Decrease breadth offset (m)</a> |
+        <a href="#" class="coral-Link" onclick="restoreOffsets(); event.preventDefault();">Restore offsets (z)</a> |
+      </section>
 
-  var overlay = document.querySelector('#overlay');
-  overlay.show();
+      <coral-overlay id="overlay" target="#target_1" style="width:200px">
+        This is typical overlay content.
+      </coral-overlay>
 
-  function cycleTargets() {
-    overlay.target = target[++target.curIndex % target.length];
-    console.log('target changed to', overlay.target);
-  }
+      <script>
+        window.addEventListener('load', function() {
+          var target = [
+            '#target_1',
+            '#target_2',
+            '#target_3',
+            '#target_4',
+            '#target_5'
+          ];
+          target.curIndex = 0;
 
-  function cyclePointFrom() {
-    overlay.placement = placement[++placement.curIndex % placement.length];
-    console.log('placement changed to', overlay.placement);
-  }
+          var placement = [
+            'right',
+            'bottom',
+            'left',
+            'top'
+          ];
+          placement.curIndex = 0;
 
-  function toggleVisibility() {
-    overlay.open = !overlay.open;
-  }
+          var collision = [
+            'flip',
+            'fit',
+            'none'
+          ];
+          collision.curIndex = 0;
 
-  function toggleInner() {
-    overlay.inner = !overlay.inner;
-  }
+          var overlay = document.querySelector('#overlay');
+          overlay.show();
 
-  function cycleCollision() {
-    overlay.collision = collision[++collision.curIndex % collision.length];
-    console.log('collision changed to', collision.placement);
-  }
+          function cycleTargets() {
+            overlay.target = target[++target.curIndex % target.length];
+            console.log('target changed to', overlay.target);
+          }
 
-  function increaseLengthOffset() {
-    overlay.lengthOffset = parseInt(overlay.lengthOffset) + 5;
-    console.log('lengthOffset changed to', overlay.lengthOffset);
-  }
+          function cyclePointFrom() {
+            overlay.placement = placement[++placement.curIndex % placement.length];
+            console.log('placement changed to', overlay.placement);
+          }
 
-  function increaseBreadthOffset() {
-    overlay.breadthOffset = parseInt(overlay.breadthOffset) + 5;
-    console.log('breadthOffset changed to', overlay.breadthOffset);
-  }
+          function toggleVisibility() {
+            overlay.open = !overlay.open;
+          }
 
-  function decreaseLengthOffset() {
-    overlay.lengthOffset = parseInt(overlay.lengthOffset) - 5;
-    console.log('lengthOffset changed to', overlay.lengthOffset);
-  }
+          function toggleInner() {
+            overlay.inner = !overlay.inner;
+          }
 
-  function decreaseBreadthOffset() {
-    overlay.breadthOffset = parseInt(overlay.breadthOffset) - 5;
-    console.log('breadthOffset changed to', overlay.breadthOffset);
-  }
+          function cycleCollision() {
+            overlay.collision = collision[++collision.curIndex % collision.length];
+            console.log('collision changed to', collision.placement);
+          }
 
-  function restoreOffsets() {
-    overlay.lengthOffset = 0;
-    overlay.breadthOffset = 0;
-    console.log('lengthOffset changed to 0');
-    console.log('breadthOffset changed to 0');
-  }
+          function increaseLengthOffset() {
+            overlay.lengthOffset = parseInt(overlay.lengthOffset) + 5;
+            console.log('lengthOffset changed to', overlay.lengthOffset);
+          }
 
-  Coral.keys.on('f', cyclePointFrom);
-  Coral.keys.on('a', cycleTargets);
-  Coral.keys.on('t', toggleVisibility);
-  Coral.keys.on('i', toggleInner);
-  Coral.keys.on('p', cycleCollision);
-  Coral.keys.on('c', increaseLengthOffset);
-  Coral.keys.on('v', decreaseLengthOffset);
-  Coral.keys.on('n', increaseBreadthOffset);
-  Coral.keys.on('m', decreaseBreadthOffset);
-  Coral.keys.on('z', restoreOffsets);
-</script>
+          function increaseBreadthOffset() {
+            overlay.breadthOffset = parseInt(overlay.breadthOffset) + 5;
+            console.log('breadthOffset changed to', overlay.breadthOffset);
+          }
+
+          function decreaseLengthOffset() {
+            overlay.lengthOffset = parseInt(overlay.lengthOffset) - 5;
+            console.log('lengthOffset changed to', overlay.lengthOffset);
+          }
+
+          function decreaseBreadthOffset() {
+            overlay.breadthOffset = parseInt(overlay.breadthOffset) - 5;
+            console.log('breadthOffset changed to', overlay.breadthOffset);
+          }
+
+          function restoreOffsets() {
+            overlay.lengthOffset = 0;
+            overlay.breadthOffset = 0;
+            console.log('lengthOffset changed to 0');
+            console.log('breadthOffset changed to 0');
+          }
+
+          Coral.keys.on('f', cyclePointFrom);
+          Coral.keys.on('a', cycleTargets);
+          Coral.keys.on('t', toggleVisibility);
+          Coral.keys.on('i', toggleInner);
+          Coral.keys.on('p', cycleCollision);
+          Coral.keys.on('c', increaseLengthOffset);
+          Coral.keys.on('v', decreaseLengthOffset);
+          Coral.keys.on('n', increaseBreadthOffset);
+          Coral.keys.on('m', decreaseBreadthOffset);
+          Coral.keys.on('z', restoreOffsets);
+        });
+      </script>
+    </div>
+  </section>
 
 </body>
 </html>

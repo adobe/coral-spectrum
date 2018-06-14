@@ -1093,6 +1093,7 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
   /** @private */
   _onScroll() {
+    this._isOverlayScrolling = true;
     window.clearTimeout(this._scrollTimeout);
     this._scrollTimeout = window.setTimeout(this._handleScrollBottom, SCROLL_DEBOUNCE);
   }
@@ -1283,10 +1284,16 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
   /** @private */
   _handleInput(event) {
-    let focusedItemValue;
+    // Don't set value and hide suggestions while scrolling overlay
+    if (this._isOverlayScrolling) {
+      this._isOverlayScrolling = false;
+      return;
+    }
     
     // Stop the event
     event.preventDefault();
+    
+    let focusedItemValue;
     
     // If a selectList item has focus, set the input value to the value of the selected item.
     if (this._elements.overlay.open && this._elements.input.getAttribute('aria-activedescendant')) {

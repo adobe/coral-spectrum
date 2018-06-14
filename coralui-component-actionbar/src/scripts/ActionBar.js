@@ -156,8 +156,9 @@ class ActionBar extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   _onLayout() {
-    if (!this.primary || !this.primary._elements.overlay || !this.secondary || !this.secondary._elements.overlay) {
-      // while containers are not cached do nothing
+    if (!this.primary || !this.primary._elements || !this.primary._elements.overlay ||
+      !this.secondary || !this.secondary._elements || !this.secondary._elements.overlay) {
+      // while containers are not cached or no items are rendered do nothing
       return;
     }
     
@@ -322,6 +323,15 @@ class ActionBar extends ComponentMixin(HTMLElement) {
       if (wrappedItem) {
         wrappedItem.focus();
       }
+    }
+  
+    // re-calculate layout on element resize
+    if (!this._resizeListenerAttached) {
+      commons.addResizeListener(this, this._debounceOnLayout);
+      commons.addResizeListener(this.primary, this._debounceOnLayout);
+      commons.addResizeListener(this.secondary, this._debounceOnLayout);
+  
+      this._resizeListenerAttached = true;
     }
   }
   
@@ -583,11 +593,6 @@ class ActionBar extends ComponentMixin(HTMLElement) {
     // Call content zone inserts
     this.primary = this._elements.primary;
     this.secondary = this._elements.secondary;
-  
-    // re-calculate layout on element resize
-    commons.addResizeListener(this, this._debounceOnLayout);
-    commons.addResizeListener(this.primary, this._debounceOnLayout);
-    commons.addResizeListener(this.secondary, this._debounceOnLayout);
 
     //force one layout
     this._onLayout();

@@ -1,15 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Coral.List</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const markup = document.body.querySelectorAll('.markup');
+      for (var i = 0; i < markup.length; i++) {
+        const code = markup[i].innerHTML;
+        const id = 'markup-code-' + i;
+        markup[i].insertAdjacentHTML('afterend',
+          '<div style="margin:10px 0">' +
+          '<a onclick="event.preventDefault();this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+          '<pre hidden>' +
+          '<code id="'+ id +'" class="html">' +
+          '</code>' +
+          '</pre>' +
+          '</div>');
+        document.getElementById(id).textContent = code;
+      }
+      window.hljs.initHighlightingOnLoad();
+    });
+  </script>
+
   <link rel="stylesheet" href="../build/css/coral.css">
-  <script src="../build/js/coral.js"></script>
-  <style>
-    section {
-      padding: 15px;
-      max-width: 300px;
-    }
-  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const script = document.createElement('script');
+      script.src = '../build/js/coral.js';
+      document.head.appendChild(script);
+    });
+  </script>
 </head>
 <body class="coral--light">
 
@@ -20,86 +45,98 @@
     <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--darkest'">Darkest</a>
   </div>
 
-  <section>
+  <section class="u-coral-margin">
 
     <h1 class="coral-Heading-1">Coral.List</h1>
 
     <h2 class="coral-Heading-2">Default</h2>
-    <coral-list>
-      <coral-list-item icon="globe">Marketing Cloud Help<br>And more text</coral-list-item>
-      <coral-list-divider></coral-list-divider>
-      <coral-list-item icon="userGroup">Community</coral-list-item>
-      <coral-list-item icon="callCenter">Customer Care</coral-list-item>
-      <coral-list-item icon="news">What's new in Coral Spectrum</coral-list-item>
-      <coral-list-item icon="servers">Adobe Marketing Cloud Status</coral-list-item>
-      <coral-list-item icon="lightbulb">Getting Started with Coral Spectrum And Incredible Long Titles That Are Sure To Cause
-        Overflow
-      </coral-list-item>
-      <coral-list-item icon="disqus" disabled>Disabled Item</coral-list-item>
-      <coral-list-item>No Icon</coral-list-item>
-    </coral-list>
+    <div class="markup">
+      <coral-list style="max-width:300px">
+        <coral-list-item icon="globe">Marketing Cloud Help<br>And more text</coral-list-item>
+        <coral-list-divider></coral-list-divider>
+        <coral-list-item icon="userGroup">Community</coral-list-item>
+        <coral-list-item icon="callCenter">Customer Care</coral-list-item>
+        <coral-list-item icon="news">What's new in Coral Spectrum</coral-list-item>
+        <coral-list-item icon="servers">Adobe Marketing Cloud Status</coral-list-item>
+        <coral-list-item icon="lightbulb">Getting Started with Coral Spectrum And Incredible Long Titles That Are Sure To Cause
+          Overflow
+        </coral-list-item>
+        <coral-list-item icon="disqus" disabled>Disabled Item</coral-list-item>
+        <coral-list-item>No Icon</coral-list-item>
+      </coral-list>
+    </div>
 
     <h2 class="coral-Heading-2">ButtonList</h2>
-    <coral-buttonlist>
-      <button is="coral-buttonlist-item" icon="globe" value="learn">Marketing Cloud Help<br>And more text</button>
-      <coral-list-divider></coral-list-divider>
-      <button is="coral-buttonlist-item" icon="userGroup" value="community">Community</button>
-      <button is="coral-buttonlist-item" icon="callCenter" value="customercare">Customer Care</button>
-      <button is="coral-buttonlist-item" icon="news" value="news">What's new in Coral Spectrum</button>
-      <button is="coral-buttonlist-item" icon="servers" value="status">Adobe Marketing Cloud Status</button>
-      <button is="coral-buttonlist-item" icon="lightbulb" value="getstarted">Getting Started with Coral Spectrum And Incredible
-        Long Titles That Are Sure To Cause Overflow
-      </button>
-      <button is="coral-buttonlist-item" icon="disqus" value="status" disabled>Disabled Item</button>
-      <button is="coral-buttonlist-item" value="noicon">No Icon</button>
-    </coral-buttonlist>
+    <div class="markup">
+      <coral-buttonlist style="max-width:300px">
+        <button is="coral-buttonlist-item" icon="globe" value="learn">Marketing Cloud Help<br>And more text</button>
+        <coral-list-divider></coral-list-divider>
+        <button is="coral-buttonlist-item" icon="userGroup" value="community">Community</button>
+        <button is="coral-buttonlist-item" icon="callCenter" value="customercare">Customer Care</button>
+        <button is="coral-buttonlist-item" icon="news" value="news">What's new in Coral Spectrum</button>
+        <button is="coral-buttonlist-item" icon="servers" value="status">Adobe Marketing Cloud Status</button>
+        <button is="coral-buttonlist-item" icon="lightbulb" value="getstarted">Getting Started with Coral Spectrum And Incredible
+          Long Titles That Are Sure To Cause Overflow
+        </button>
+        <button is="coral-buttonlist-item" icon="disqus" value="status" disabled>Disabled Item</button>
+        <button is="coral-buttonlist-item" value="noicon">No Icon</button>
+      </coral-buttonlist>
+    </div>
 
     <h2 class="coral-Heading-2">AnchorList</h2>
-    <coral-anchorlist>
-      <a is="coral-anchorlist-item" icon="globe" href="#learn">Marketing Cloud Help</a>
-      <coral-list-divider></coral-list-divider>
-      <a is="coral-anchorlist-item" icon="userGroup" href="#community">Community</a>
-      <a is="coral-anchorlist-item" icon="callCenter" href="#customercare">Customer Care</a>
-      <a is="coral-anchorlist-item" icon="news" href="#news">What's new in Coral Spectrum</a>
-      <a is="coral-anchorlist-item" icon="servers" href="#status">Adobe Marketing Cloud Status</a>
-      <a is="coral-anchorlist-item" icon="lightbulb" href="#getstarted">Getting Started with Coral Spectrum And Incredible Long
-        Titles That Are Sure To Cause Overflow</a>
-      <a is="coral-anchorlist-item" icon="disqus" href="#status" disabled>Disabled Item</a>
-      <a is="coral-anchorlist-item" href="#status">No Icon</a>
-    </coral-anchorlist>
+    <div class="markup">
+      <coral-anchorlist style="max-width:300px">
+        <a is="coral-anchorlist-item" icon="globe" href="#learn">Marketing Cloud Help</a>
+        <coral-list-divider></coral-list-divider>
+        <a is="coral-anchorlist-item" icon="userGroup" href="#community">Community</a>
+        <a is="coral-anchorlist-item" icon="callCenter" href="#customercare">Customer Care</a>
+        <a is="coral-anchorlist-item" icon="news" href="#news">What's new in Coral Spectrum</a>
+        <a is="coral-anchorlist-item" icon="servers" href="#status">Adobe Marketing Cloud Status</a>
+        <a is="coral-anchorlist-item" icon="lightbulb" href="#getstarted">Getting Started with Coral Spectrum And Incredible Long
+          Titles That Are Sure To Cause Overflow</a>
+        <a is="coral-anchorlist-item" icon="disqus" href="#status" disabled>Disabled Item</a>
+        <a is="coral-anchorlist-item" href="#status">No Icon</a>
+      </coral-anchorlist>
+    </div>
 
     <h2 class="coral-Heading-2">SelectList</h2>
-    <coral-selectlist>
-      <coral-selectlist-item value="1">Option 1</coral-selectlist-item>
-      <coral-selectlist-item value="2">
-        <coral-icon icon="add"></coral-icon>
-        Option 2 with icon</coral-selectlist-item>
-      <coral-selectlist-item value="3" selected>Option 3 with loooooooooong text causing overflow</coral-selectlist-item>
-      <coral-selectlist-item value="4" disabled>Option 4</coral-selectlist-item>
-    </coral-selectlist>
+    <div class="markup">
+      <coral-selectlist style="max-width:300px">
+        <coral-selectlist-item value="1">Option 1</coral-selectlist-item>
+        <coral-selectlist-item value="2">
+          <coral-icon icon="add"></coral-icon>
+          Option 2 with icon</coral-selectlist-item>
+        <coral-selectlist-item value="3" selected>Option 3 with loooooooooong text causing overflow</coral-selectlist-item>
+        <coral-selectlist-item value="4" disabled>Option 4</coral-selectlist-item>
+      </coral-selectlist>
+    </div>
 
     <h2 class="coral-Heading coral-Heading-2">Multi SelectList</h2>
-    <coral-selectlist multiple>
-      <coral-selectlist-item value="1">Option 1</coral-selectlist-item>
-      <coral-selectlist-item value="2" selected>Option 2</coral-selectlist-item>
-      <coral-selectlist-item value="3" selected>Option 3</coral-selectlist-item>
-    </coral-selectlist>
+    <div class="markup">
+      <coral-selectlist multiple style="max-width:300px">
+        <coral-selectlist-item value="1">Option 1</coral-selectlist-item>
+        <coral-selectlist-item value="2" selected>Option 2</coral-selectlist-item>
+        <coral-selectlist-item value="3" selected>Option 3</coral-selectlist-item>
+      </coral-selectlist>
+    </div>
 
     <h2 class="coral-Heading coral-Heading-2">SelectList Groups</h2>
-    <coral-selectlist>
-      <coral-selectlist-group label="Group 1">
-        <coral-list-divider></coral-list-divider>
-        <coral-selectlist-item value="1">Option 1</coral-selectlist-item>
-        <coral-selectlist-item value="2" disabled>Option 2</coral-selectlist-item>
-        <coral-selectlist-item value="3">Option 3</coral-selectlist-item>
-      </coral-selectlist-group>
-      <coral-selectlist-group label="Group 2">
-        <coral-list-divider></coral-list-divider>
-        <coral-selectlist-item value="1">Option 1</coral-selectlist-item>
-        <coral-selectlist-item value="2" disabled>Option 2</coral-selectlist-item>
-        <coral-selectlist-item value="3">Option 3</coral-selectlist-item>
-      </coral-selectlist-group>
-    </coral-selectlist>
+    <div class="markup">
+      <coral-selectlist style="max-width:300px">
+        <coral-selectlist-group label="Group 1">
+          <coral-list-divider></coral-list-divider>
+          <coral-selectlist-item value="1">Option 1</coral-selectlist-item>
+          <coral-selectlist-item value="2" disabled>Option 2</coral-selectlist-item>
+          <coral-selectlist-item value="3">Option 3</coral-selectlist-item>
+        </coral-selectlist-group>
+        <coral-selectlist-group label="Group 2">
+          <coral-list-divider></coral-list-divider>
+          <coral-selectlist-item value="1">Option 1</coral-selectlist-item>
+          <coral-selectlist-item value="2" disabled>Option 2</coral-selectlist-item>
+          <coral-selectlist-item value="3">Option 3</coral-selectlist-item>
+        </coral-selectlist-group>
+      </coral-selectlist>
+    </div>
   </section>
 </body>
 </html>

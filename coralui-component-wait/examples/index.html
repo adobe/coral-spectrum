@@ -1,23 +1,40 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Coral.Wait</title>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const markup = document.body.querySelectorAll('.markup');
+      for (var i = 0; i < markup.length; i++) {
+        const code = markup[i].innerHTML;
+        const id = 'markup-code-' + i;
+        markup[i].insertAdjacentHTML('afterend',
+          '<div style="margin:10px 0">' +
+          '<a onclick="event.preventDefault();this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+          '<pre hidden>' +
+          '<code id="'+ id +'" class="html">' +
+          '</code>' +
+          '</pre>' +
+          '</div>');
+        document.getElementById(id).textContent = code;
+      }
+      window.hljs.initHighlightingOnLoad();
+    });
+  </script>
+
   <link rel="stylesheet" href="../build/css/coral.css">
-  <script src="../build/js/coral.js"></script>
-
-  <style>
-    section {
-      padding: 15px;
-    }
-
-    .container {
-      position: relative;
-      width: 200px;
-      height: 200px;
-      background-color: rgba(0, 0, 0, 0.4);
-    }
-  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const script = document.createElement('script');
+      script.src = '../build/js/coral.js';
+      document.head.appendChild(script);
+    });
+  </script>
 </head>
 <body class="coral--light">
 
@@ -28,25 +45,45 @@
   <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--darkest'">Darkest</a>
 </div>
 
-<section>
+<section class="u-coral-margin">
   <h1 class="coral-Heading coral-Heading--1">Coral.Wait</h1>
+
   <h2 class="coral-Heading coral-Heading--2">Default</h2>
-  <coral-wait></coral-wait>
+  <div class="markup">
+    <coral-wait></coral-wait>
+  </div>
 
   <h2 class="coral-Heading coral-Heading--2">With value</h2>
-  <coral-wait value="50"></coral-wait>
+  <div class="markup">
+    <coral-wait value="50"></coral-wait>
+  </div>
 
   <h2 class="coral-Heading coral-Heading--2">Sizes</h2>
-  <coral-wait size="S" value="25"></coral-wait>
-  <coral-wait size="M" value="50"></coral-wait>
-  <coral-wait size="L" value="75"></coral-wait>
+  <div class="markup">
+    <coral-wait size="S" value="25"></coral-wait>
+    <coral-wait size="M" value="50"></coral-wait>
+    <coral-wait size="L" value="75"></coral-wait>
+  </div>
 
   <h2 class="coral-Heading coral-Heading--2">Indeterminate</h2>
-  <coral-wait indeterminate></coral-wait>
+  <div class="markup">
+    <coral-wait indeterminate></coral-wait>
+  </div>
 
   <h2 class="coral-Heading coral-Heading--2">Centered</h2>
-  <div class="container">
-    <coral-wait centered value="50"></coral-wait>
+  <div class="markup">
+    <style>
+      .container {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+    </style>
+
+    <div class="container">
+      <coral-wait centered value="50"></coral-wait>
+    </div>
   </div>
 </section>
 </body>

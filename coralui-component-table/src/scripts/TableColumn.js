@@ -89,7 +89,9 @@ class TableColumn extends ComponentMixin(HTMLTableColElement) {
   
     // Don't trigger on initialization if alignment is LEFT to improve performance
     if (!(typeof oldValue === 'undefined' && this._alignment === alignment.LEFT)) {
-      this.trigger('coral-table-column:_alignmentchanged');
+      window.requestAnimationFrame(() => {
+        this.trigger('coral-table-column:_alignmentchanged');
+      });
     }
   }
   
@@ -108,7 +110,9 @@ class TableColumn extends ComponentMixin(HTMLTableColElement) {
     this._fixedWidth = transform.booleanAttr(value);
     this._reflectAttribute('fixedwidth', this._fixedWidth);
     
-    this.trigger('coral-table-column:_fixedwidthchanged');
+    window.requestAnimationFrame(() => {
+      this.trigger('coral-table-column:_fixedwidthchanged');
+    });
   }
   
   /**
@@ -126,7 +130,9 @@ class TableColumn extends ComponentMixin(HTMLTableColElement) {
     this._hidden = transform.booleanAttr(value);
     this._reflectAttribute('hidden', this._hidden);
     
-    this.trigger('coral-table-column:_hiddenchanged');
+    window.requestAnimationFrame(() => {
+      this.trigger('coral-table-column:_hiddenchanged');
+    });
   }
   
   /**
@@ -211,7 +217,9 @@ class TableColumn extends ComponentMixin(HTMLTableColElement) {
     if (!this._preventSort) {
       this._doSort();
       
-      this.trigger('coral-table-column:_sortabledirectionchanged');
+      window.requestAnimationFrame(() => {
+        this.trigger('coral-table-column:_sortabledirectionchanged');
+      });
     }
   }
   

@@ -1,17 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Coral.Calendar</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="event.preventDefault();this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
     <link rel="stylesheet" href="../build/css/coral.css">
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>-->
-    <script src="../build/js/coral.js"></script>
-    <style>
-    section {
-      padding: 15px;
-    }
-    </style>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../build/js/coral.js';
+        document.head.appendChild(script);
+      });
+    </script>
   </head>
 
   <body class="coral--light">
@@ -22,20 +46,28 @@
       <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--darkest'">Darkest</a>
     </div>
 
-    <section>
+    <section class="u-coral-margin">
       <h1 class="coral-Heading coral-Heading--1">Coral.Calendar</h1>
 
       <h2 class="coral-Heading coral-Heading--2">Default</h2>
-      <coral-calendar></coral-calendar>
+      <div class="markup">
+        <coral-calendar></coral-calendar>
+      </div>
 
       <h2 class="coral-Heading coral-Heading--2">With preset date</h2>
-      <coral-calendar value="2017-03-02"></coral-calendar>
+      <div class="markup">
+        <coral-calendar value="2017-03-02"></coral-calendar>
+      </div>
 
       <h2 class="coral-Heading coral-Heading--2">With min/max</h2>
-      <coral-calendar max="2018-05-20" min="2018-03-03" value="2018-03-14"></coral-calendar>
+      <div class="markup">
+        <coral-calendar max="2018-05-20" min="2018-03-03" value="2018-03-14"></coral-calendar>
+      </div>
 
       <h2 class="coral-Heading coral-Heading--2">Disabled</h2>
-      <coral-calendar value="2017-03-02" disabled></coral-calendar>
+      <div class="markup">
+        <coral-calendar value="2017-03-02" disabled></coral-calendar>
+      </div>
     </section>
   </body>
 </html>

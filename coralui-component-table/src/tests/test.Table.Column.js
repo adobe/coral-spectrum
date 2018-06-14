@@ -72,20 +72,27 @@ describe('Table.Column', function() {
     });
     
     describe('#coral-table-column:_fixedwidthchanged', function() {
-      it('should trigger when changing fixedWidth', function() {
+      it('should trigger when changing fixedWidth', function(done) {
         el.on('coral-table-column:_fixedwidthchanged', spy);
         el.fixedWidth = true;
         
-        expect(spy.callCount).to.equal(1);
+        helpers.next(() => {
+          expect(spy.callCount).to.equal(1);
+          done();
+        });
       });
     });
     
     describe('#coral-table-column:_hiddenchanged', function() {
-      it('should trigger when changing hidden', function() {
+      it('should trigger when changing hidden', function(done) {
         el.on('coral-table-column:_hiddenchanged', spy);
         el.hidden = true;
-        
-        expect(spy.callCount).to.equal(1);
+  
+        // Event is triggered in next frame
+        helpers.next(() => {
+          expect(spy.callCount).to.equal(1);
+          done();
+        });
       });
     });
     
@@ -116,11 +123,14 @@ describe('Table.Column', function() {
     });
     
     describe('#coral-table-column:_sortabledirectionchanged', function() {
-      it('should trigger when changing sortableDirection', function() {
+      it('should trigger when changing sortableDirection', function(done) {
         el.on('coral-table-column:_sortabledirectionchanged', spy);
         el.sortableDirection = Table.Column.sortableDirection.ASCENDING;
         
-        expect(spy.callCount).to.equal(1);
+        helpers.next(() => {
+          expect(spy.callCount).to.equal(1);
+          done();
+        });
       });
     });
     
@@ -128,7 +138,7 @@ describe('Table.Column', function() {
       it('should trigger when changing sortableDirection', function() {
         el.on('coral-table-column:_sort', spy);
         el.sortableDirection = Table.Column.sortableDirection.ASCENDING;
-  
+        
         expect(spy.callCount).to.equal(1);
       });
     });

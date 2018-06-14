@@ -1,18 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Coral.Datepicker</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="event.preventDefault();this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
     <link rel="stylesheet" href="../build/css/coral.css">
     <!--Load momentJS to support different formats -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-    <script src="../build/js/coral.js"></script>
-    <style>
-     section {
-       padding: 15px;
-     }
-    </style>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../build/js/coral.js';
+        document.head.appendChild(script);
+      });
+    </script>
   </head>
 
   <body class="coral--light">
@@ -23,47 +47,71 @@
       <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--darkest'">Darkest</a>
     </div>
 
-    <section>
+    <section class="u-coral-margin">
       <h1 class="coral-Heading coral-Heading--1">Coral.Datepicker</h1>
 
       <h2 class="coral-Heading coral-Heading--2">Default</h2>
-      <coral-datepicker></coral-datepicker>
+      <div class="markup">
+        <coral-datepicker></coral-datepicker>
+      </div>
 
       <h2 class="coral-Heading coral-Heading--2">DisplayFormat: MM-DD-YYYY</h2>
-      <coral-datepicker value="2014-12-31" displayformat="MM-DD-YYYY"></coral-datepicker>
+      <div class="markup">
+        <coral-datepicker value="2014-12-31" displayformat="MM-DD-YYYY"></coral-datepicker>
+      </div>
 
       <h2 class="coral-Heading coral-Heading--2">ValueFormat: YYYY-MM-DD</h2>
-      <coral-datepicker value="2014-12-31" valueformat="YYYY-MM-DD" displayformat="DD-MM-YYYY"></coral-datepicker>
+      <div class="markup">
+        <coral-datepicker value="2014-12-31" valueformat="YYYY-MM-DD" displayformat="DD-MM-YYYY"></coral-datepicker>
+      </div>
 
       <h2 class="coral-Heading coral-Heading--2">Time only</h2>
-      <coral-datepicker type="time" placeholder="Placeholder" value="13:14"></coral-datepicker>
+      <div class="markup">
+        <coral-datepicker type="time" placeholder="Placeholder" value="13:14"></coral-datepicker>
+      </div>
 
       <h2 class="coral-Heading coral-Heading--2">Date and Time</h2>
-      <coral-datepicker type="datetime" value="2014-12-31T14:12+00:00"></coral-datepicker>
+      <div class="markup">
+        <coral-datepicker type="datetime" value="2014-12-31T14:12+00:00"></coral-datepicker>
+      </div>
 
       <h2 class="coral-Heading coral-Heading--2">With Min/Max</h2>
-      <coral-datepicker type="date" min="2015-04-10" max="2015-04-28" value="2015-04-15"></coral-datepicker>
+      <div class="markup">
+        <coral-datepicker type="date" min="2015-04-10" max="2015-04-28" value="2015-04-15"></coral-datepicker>
+      </div>
 
       <h2 class="coral-Heading coral-Heading--2">Quiet variant</h2>
-      <coral-datepicker value="2014-12-31" displayformat="MM-DD-YYYY" variant="quiet"></coral-datepicker>
+      <div class="markup">
+        <coral-datepicker value="2014-12-31" displayformat="MM-DD-YYYY" variant="quiet"></coral-datepicker>
+      </div>
 
       <h2 class="coral-Heading coral-Heading--2">Invalid</h2>
-      <coral-datepicker invalid></coral-datepicker>
+      <div class="markup">
+        <coral-datepicker invalid></coral-datepicker>
+      </div>
 
       <h2 class="coral-Heading coral-Heading--2">Required</h2>
-      <coral-datepicker required></coral-datepicker>
+      <div class="markup">
+        <coral-datepicker required></coral-datepicker>
+      </div>
 
       <h2 class="coral-Heading coral-Heading--2">ReadOnly</h2>
-      <coral-datepicker value="2014-12-31" readonly></coral-datepicker>
+      <div class="markup">
+        <coral-datepicker value="2014-12-31" readonly></coral-datepicker>
+      </div>
 
       <h2 class="coral-Heading coral-Heading--2">Disabled</h2>
-      <coral-datepicker value="2014-12-31" disabled></coral-datepicker>
+      <div class="markup">
+        <coral-datepicker value="2014-12-31" disabled></coral-datepicker>
+      </div>
 
       <h2 class="coral-Heading coral-Heading--2">Form Field</h2>
-      <form class="coral-Form coral-Form--vertical" style="max-width:300px;">
-        <label id="label" class="coral-FieldLabel">Label</label>
-        <coral-datepicker class="coral-Form-field" labelledby="label"></coral-datepicker>
-      </form>
+      <div class="markup">
+        <form class="coral-Form coral-Form--vertical" style="max-width:300px;">
+          <label id="label" class="coral-FieldLabel">Label</label>
+          <coral-datepicker class="coral-Form-field" labelledby="label"></coral-datepicker>
+        </form>
+      </div>
     </section>
   </body>
 </html>

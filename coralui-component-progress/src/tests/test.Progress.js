@@ -19,13 +19,6 @@ describe('Progress', function() {
       expect(Progress.labelPosition.BOTTOM).to.equal('bottom');
       expect(Object.keys(Progress.labelPosition).length).to.equal(4);
     });
-  
-    it('should define the variant in an enum', function() {
-      expect(Progress.variant).to.exist;
-      expect(Progress.variant.DEFAULT).to.equal('default');
-      expect(Progress.variant.MONOCHROME).to.equal('monochrome');
-      expect(Object.keys(Progress.variant).length).to.equal(2);
-    });
   });
   
   describe('Instantiation', function() {

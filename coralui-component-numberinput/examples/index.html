@@ -1,16 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Coral.NumberInput</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="event.preventDefault();this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
     <link rel="stylesheet" href="../build/css/coral.css">
-    <script src="../build/js/coral.js"></script>
-    <style>
-      section {
-        padding: 15px;
-      }
-    </style>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../build/js/coral.js';
+        document.head.appendChild(script);
+      });
+    </script>
   </head>
 
   <body class="coral--light">
@@ -22,38 +46,56 @@
       <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--darkest'">Darkest</a>
     </div>
 
-    <section>
+    <section class="u-coral-margin">
       <h1 class="coral-Heading coral-Heading--1">Coral.NumberInput</h1>
 
       <h2 class="coral-Heading coral-Heading--2">Default</h2>
-      <coral-numberinput></coral-numberinput>
+      <div class="markup">
+        <coral-numberinput></coral-numberinput>
+      </div>
 
       <h2 class="coral-Heading coral-Heading--2">Preset step</h2>
-      <coral-numberinput step="3" value="0"></coral-numberinput>
+      <div class="markup">
+        <coral-numberinput step="3" value="0"></coral-numberinput>
+      </div>
 
       <h2 class="coral-Heading coral-Heading--2">Decimal support</h2>
-      <coral-numberinput step="0.5"></coral-numberinput>
+      <div class="markup">
+        <coral-numberinput step="0.5"></coral-numberinput>
+      </div>
 
       <h2 class="coral-Heading coral-Heading--2">With max/min range</h2>
-      <coral-numberinput value="1" max="5" min="0"></coral-numberinput>
+      <div class="markup">
+        <coral-numberinput value="1" max="5" min="0"></coral-numberinput>
+      </div>
 
       <h2 class="coral-Heading coral-Heading--2">Invalid</h2>
-      <coral-numberinput invalid value="-1" min="0" max="5"></coral-numberinput>
+      <div class="markup">
+        <coral-numberinput invalid value="-1" min="0" max="5"></coral-numberinput>
+      </div>
 
       <h2 class="coral-Heading coral-Heading--2">Disabled</h2>
-      <coral-numberinput disabled value="0"></coral-numberinput>
+      <div class="markup">
+        <coral-numberinput disabled value="0"></coral-numberinput>
+      </div>
 
       <h2 class="coral-Heading coral-Heading--2">ReadOnly</h2>
-      <coral-numberinput readonly value="0"></coral-numberinput>
+      <div class="markup">
+        <coral-numberinput readonly value="0"></coral-numberinput>
+      </div>
 
       <h2 class="coral-Heading coral-Heading--2">Required</h2>
-      <coral-numberinput required></coral-numberinput>
+      <div class="markup">
+        <coral-numberinput required></coral-numberinput>
+      </div>
 
       <h2 class="coral-Heading coral-Heading--2">Form Field</h2>
-      <form class="coral-Form coral-Form--vertical" style="max-width:300px;">
-        <label id="label" class="coral-FieldLabel">Label</label>
-        <coral-numberinput class="coral-Form-field" labelledby="label"></coral-numberinput>
-      </form>
+      <div class="markup">
+        <form class="coral-Form coral-Form--vertical" style="max-width:300px;">
+          <label id="label" class="coral-FieldLabel">Label</label>
+          <coral-numberinput class="coral-Form-field" labelledby="label"></coral-numberinput>
+        </form>
+      </div>
     </section>
   </body>
 </html>

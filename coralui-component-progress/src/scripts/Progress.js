@@ -20,21 +20,6 @@ import base from '../templates/base';
 import {transform, validate} from '../../../coralui-util';
 
 /**
- Enumeration for {@link Progress} variants.
- 
- @typedef {Object} ProgressVariantEnum
- 
- @property {String} DEFAULT
- The default progress bar.
- @property {String} MONOCHROME
- A black and white styled progress bar.
- */
-const variant = {
-  DEFAULT: 'default',
-  MONOCHROME: 'monochrome'
-};
-
-/**
  Enumeration for {@link Progress} sizes.
  
  @typedef {Object} ProgressSizeEnum
@@ -102,25 +87,6 @@ class Progress extends ComponentMixin(HTMLElement) {
       childList: true,
       subtree: true
     });
-  }
-  
-  /**
-   The progress variant. See {@link ProgressVariantEnum}.
-   
-   @type {String}
-   @default ProgressVariantEnum.DEFAULT
-   @htmlattribute variant
-   @htmlattributereflected
-   */
-  get variant() {
-    return this._variant || variant.DEFAULT;
-  }
-  set variant(value) {
-    value = transform.string(value).toLowerCase();
-    this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
-    this._reflectAttribute('variant', this._variant);
-    
-    this.classList.toggle(`${CLASSNAME}--fullpage`, this._variant === variant.MONOCHROME);
   }
   
   /**
@@ -360,13 +326,6 @@ class Progress extends ComponentMixin(HTMLElement) {
   get _contentZones() { return {'coral-progress-label': 'label'}; }
   
   /**
-   Returns {@link Progress} variants.
-   
-   @return {ProgressVariantEnum}
-   */
-  static get variant() { return variant; }
-  
-  /**
    Returns {@link Progress} label position options.
    
    @return {ProgressLabelPositionEnum}
@@ -383,7 +342,6 @@ class Progress extends ComponentMixin(HTMLElement) {
   /** @ignore */
   static get observedAttributes() {
     return [
-      'variant',
       'value',
       'indeterminate',
       'size',
@@ -411,7 +369,6 @@ class Progress extends ComponentMixin(HTMLElement) {
     this.classList.add(CLASSNAME);
     
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.DEFAULT; }
     if (!this._value) { this.value = this.value; }
     if (!this._size) { this.size = size.MEDIUM; }
     if (!this._labelPosition) { this.labelPosition = labelPosition.LEFT; }

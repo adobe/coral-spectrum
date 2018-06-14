@@ -2,23 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Coral.Table</title>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const markup = document.body.querySelectorAll('.markup');
+      for (var i = 0; i < markup.length; i++) {
+        const code = markup[i].innerHTML;
+        const id = 'markup-code-' + i;
+        markup[i].insertAdjacentHTML('afterend',
+          '<div style="margin:10px 0">' +
+          '<a onclick="event.preventDefault();this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+          '<pre hidden>' +
+          '<code id="'+ id +'" class="html">' +
+          '</code>' +
+          '</pre>' +
+          '</div>');
+        document.getElementById(id).textContent = code;
+      }
+      window.hljs.initHighlightingOnLoad();
+    });
+  </script>
+
   <link rel="stylesheet" href="../build/css/coral.css">
-  <script src="../build/js/coral.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const script = document.createElement('script');
+      script.src = '../build/js/coral.js';
+      document.head.appendChild(script);
+    });
+  </script>
 
   <style>
-    section {
-      padding: 15px;
+    table[is="coral-table"] {
       max-width: 500px;
-    }
-
-    .table-sticky [coral-table-scroll] {
-      max-height: 200px;
-    }
-
-    .table-custom-sorting {
-      min-height: 200px;
     }
 
     input[type="text"] {
@@ -39,901 +59,973 @@
     <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--darkest'">Darkest</a>
   </div>
 
-  <section>
+  <section class="u-coral-margin">
     <h1 class="coral-Heading coral-Heading--1">Coral.Table</h1>
 
     <h2 class="coral-Heading coral-Heading--2">Default</h2>
-    <table is="coral-table">
-      <thead is="coral-table-head">
-      <tr is="coral-table-row">
-        <th is="coral-table-headercell">Activities</th>
-        <th is="coral-table-headercell">Numbers</th>
-        <th is="coral-table-headercell">Date</th>
-      </tr>
-      </thead>
-      <tbody is="coral-table-body">
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Alpha</td>
-        <td is="coral-table-cell">23,857</td>
-        <td is="coral-table-cell">January 28, 2012</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Beta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">December 1, 2011</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Charlie</td>
-        <td is="coral-table-cell">3,498</td>
-        <td is="coral-table-cell">February 15, 2012</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Delta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">May 16, 2012</td>
-      </tr>
-      </tbody>
-    </table>
-
-    <h2 class="coral-Heading coral-Heading--2">Quiet variant</h2>
-    <table is="coral-table" variant="quiet">
-      <thead is="coral-table-head">
-      <tr is="coral-table-row">
-        <th is="coral-table-headercell">Activities</th>
-        <th is="coral-table-headercell">Numbers</th>
-        <th is="coral-table-headercell">Date</th>
-      </tr>
-      </thead>
-      <tbody is="coral-table-body">
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Alpha</td>
-        <td is="coral-table-cell">23,857</td>
-        <td is="coral-table-cell">January 28, 2012</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Beta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">December 1, 2011</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Charlie</td>
-        <td is="coral-table-cell">3,498</td>
-        <td is="coral-table-cell">February 15, 2012</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Delta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">May 16, 2012</td>
-      </tr>
-      </tbody>
-    </table>
-
-    <h2 class="coral-Heading coral-Heading--2">Checkbox selection</h2>
-    <table is="coral-table" selectable orderable multiple class="table-sticky">
-      <col is="coral-table-column" fixedwidth>
-      <col is="coral-table-column" sortable sortabledirection="ascending">
-      <col is="coral-table-column" sortable sortabletype="date">
-      <col is="coral-table-column" fixedwidth>
-      <thead is="coral-table-head" sticky>
-      <tr is="coral-table-row">
-        <th is="coral-table-headercell">
-          <coral-checkbox coral-table-select></coral-checkbox>
-        </th>
-        <th is="coral-table-headercell">Activities</th>
-        <th is="coral-table-headercell">Date</th>
-        <th is="coral-table-headercell"></th>
-      </tr>
-      </thead>
-      <tbody is="coral-table-body">
-      <tr is="coral-table-row">
-        <td is="coral-table-cell" coral-table-rowselect>
-          <coral-checkbox></coral-checkbox>
-          <coral-icon icon="folder"></coral-icon>
-        </td>
-        <td is="coral-table-cell">Alpha</td>
-        <td is="coral-table-cell">January 28, 2012</td>
-        <td is="coral-table-cell">
-          <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
-        </td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell" coral-table-rowselect>
-          <coral-checkbox></coral-checkbox>
-          <img src="http://via.placeholder.com/128x128" alt="thumbnail">
-        </td>
-        <td is="coral-table-cell">Charlie</td>
-        <td is="coral-table-cell">February 15, 2012</td>
-        <td is="coral-table-cell">
-          <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
-        </td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell" coral-table-rowselect>
-          <coral-checkbox></coral-checkbox>
-          <img src="http://via.placeholder.com/128x128">
-        </td>
-        <td is="coral-table-cell">Delta</td>
-        <td is="coral-table-cell">May 16, 2012</td>
-        <td is="coral-table-cell">
-          <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
-        </td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell" coral-table-rowselect>
-          <coral-checkbox></coral-checkbox>
-          <img src="http://via.placeholder.com/128x128">
-        </td>
-        <td is="coral-table-cell">Alpha</td>
-        <td is="coral-table-cell">January 28, 2012</td>
-        <td is="coral-table-cell">
-          <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
-        </td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell" coral-table-rowselect>
-          <coral-checkbox></coral-checkbox>
-          <img src="http://via.placeholder.com/128x128">
-        </td>
-        <td is="coral-table-cell">Beta</td>
-        <td is="coral-table-cell">December 1, 2011</td>
-        <td is="coral-table-cell">
-          <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
-        </td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell" coral-table-rowselect>
-          <coral-checkbox></coral-checkbox>
-          <img src="http://via.placeholder.com/128x128">
-        </td>
-        <td is="coral-table-cell">Charlie</td>
-        <td is="coral-table-cell">February 15, 2012</td>
-        <td is="coral-table-cell">
-          <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
-        </td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell" coral-table-rowselect>
-          <img src="http://via.placeholder.com/128x128">
-        </td>
-        <td is="coral-table-cell">Delta</td>
-        <td is="coral-table-cell">May 16, 2012</td>
-        <td is="coral-table-cell">
-          <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-
-    <h2 class="coral-Heading coral-Heading--2">Content with centered alignment</h2>
-    <table is="coral-table">
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">
-          <p>There are no saved activities in your account yet.</p>
-          <p>Get started now.</p>
-        </td>
-      </tr>
-      <colgroup>
-        <col is="coral-table-column" alignment="center">
-      </colgroup>
-    </table>
-
-    <h2 class="coral-Heading coral-Heading--2">Column divider</h2>
-    <table is="coral-table">
-      <thead is="coral-table-head">
-      <tr is="coral-table-row">
-        <th is="coral-table-headercell">Activities</th>
-        <th is="coral-table-headercell">Numbers</th>
-        <th is="coral-table-headercell">Date</th>
-      </tr>
-      </thead>
-      <tbody is="coral-table-body" divider="column">
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Alpha</td>
-        <td is="coral-table-cell">23,857</td>
-        <td is="coral-table-cell">January 28, 2012</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Beta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">December 1, 2011</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Charlie</td>
-        <td is="coral-table-cell">3,498</td>
-        <td is="coral-table-cell">February 15, 2012</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Delta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">May 16, 2012</td>
-      </tr>
-      </tbody>
-    </table>
-
-    <h2 class="coral-Heading coral-Heading--2">Cell divider</h2>
-    <table is="coral-table">
-      <thead is="coral-table-head">
-      <tr is="coral-table-row">
-        <th is="coral-table-headercell"></th>
-        <th is="coral-table-headercell">Activities</th>
-        <th is="coral-table-headercell">Numbers</th>
-        <th is="coral-table-headercell">Date</th>
-        <th is="coral-table-headercell"></th>
-      </tr>
-      </thead>
-      <tbody is="coral-table-body" divider="cell">
-      <tr is="coral-table-row">
-        <th is="coral-table-headercell">Left Label</th>
-        <td is="coral-table-cell">Alpha</td>
-        <td is="coral-table-cell">23,857</td>
-        <td is="coral-table-cell">January 28, 2012</td>
-        <th is="coral-table-headercell">Right Label</th>
-      </tr>
-      <tr is="coral-table-row">
-        <th is="coral-table-headercell">Left Label</th>
-        <td is="coral-table-cell">Beta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">December 1, 2011</td>
-        <th is="coral-table-headercell">Right Label</th>
-      </tr>
-      <tr is="coral-table-row">
-        <th is="coral-table-headercell">Left Label</th>
-        <td is="coral-table-cell">Charlie</td>
-        <td is="coral-table-cell">3,498</td>
-        <td is="coral-table-cell">February 15, 2012</td>
-        <th is="coral-table-headercell">Right Label</th>
-      </tr>
-      </tbody>
-    </table>
-
-    <h2 class="coral-Heading coral-Heading--2">Sticky head example</h2>
-    <table is="coral-table" class="table-sticky">
-      <thead is="coral-table-head" divider="cell" sticky>
-      <tr is="coral-table-row">
-        <th is="coral-table-headercell">Column 1 with loooooooonnnnnng text</th>
-        <th is="coral-table-headercell">Column 2 with loooooooonnnnnng text</th>
-        <th is="coral-table-headercell">Column 3</th>
-      </tr>
-      <tr is="coral-table-row">
-        <th is="coral-table-headercell">Sub Column 1 has a long text also</th>
-        <th is="coral-table-headercell">Sub Column 2</th>
-        <th is="coral-table-headercell">Sub Column 3 wants to mimic sub column 1</th>
-      </tr>
-      </thead>
-      <tbody is="coral-table-body" divider="column">
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Cell 1</td>
-        <td is="coral-table-cell">Cell 2</td>
-        <td is="coral-table-cell">Cell 3</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Cell 1</td>
-        <td is="coral-table-cell">Cell 2</td>
-        <td is="coral-table-cell">Cell 3</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Cell 1</td>
-        <td is="coral-table-cell">Cell 2</td>
-        <td is="coral-table-cell">Cell 3</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Cell 1</td>
-        <td is="coral-table-cell">Cell 2</td>
-        <td is="coral-table-cell">Cell 3</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Cell 1</td>
-        <td is="coral-table-cell">Cell 2</td>
-        <td is="coral-table-cell">Cell 3</td>
-      </tr>
-      </tbody>
-    </table>
-
-    <h2 class="coral-Heading coral-Heading--2">Sortable columns</h2>
-    <table is="coral-table">
-      <colgroup>
-        <col is="coral-table-column" sortable sortabledirection="ascending">
-        <col is="coral-table-column" sortable sortabletype="number">
-        <col is="coral-table-column" sortable sortabletype="date">
-      </colgroup>
-      <thead is="coral-table-head">
-      <tr is="coral-table-row">
-        <th is="coral-table-headercell">Activities</th>
-        <th is="coral-table-headercell">Numbers</th>
-        <th is="coral-table-headercell">Date</th>
-      </tr>
-      </thead>
-      <tbody is="coral-table-body">
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Beta</td>
-        <td is="coral-table-cell" value="20398">20,398</td>
-        <td is="coral-table-cell" value="1322694000000">December 1, 2011</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Alpha</td>
-        <td is="coral-table-cell" value="23857">23,857</td>
-        <td is="coral-table-cell" value="1327705200000">January 28, 2012</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Charlie</td>
-        <td is="coral-table-cell" value="3498">3,498</td>
-        <td is="coral-table-cell" value="1329260400000">February 15, 2012</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Delta</td>
-        <td is="coral-table-cell" value="20398">20,398</td>
-        <td is="coral-table-cell" value="1337119200000">May 16, 2012</td>
-      </tr>
-      </tbody>
-    </table>
-
-    <h2 class="coral-Heading coral-Heading--2">Custom sorting</h2>
-    <table is="coral-table" class="table-custom-sorting">
-      <col is="coral-table-column" sortable sortabletype="custom" sortabledirection="ascending">
-      <thead is="coral-table-head">
-      <tr is="coral-table-row">
-        <th is="coral-table-headercell">Activities</th>
-      </tr>
-      </thead>
-      <tbody is="coral-table-body">
-      </tbody>
-    </table>
-
-    <h2 class="coral-Heading coral-Heading--2">Sortable + orderable columns</h2>
-    <table is="coral-table">
-      <colgroup>
-        <col is="coral-table-column" orderable sortable sortabledirection="ascending">
-        <col is="coral-table-column" orderable sortable sortabletype="number">
-        <col is="coral-table-column" sortable sortabletype="date">
-      </colgroup>
-      <thead is="coral-table-head">
-      <tr is="coral-table-row">
-        <th is="coral-table-headercell">Activities</th>
-        <th is="coral-table-headercell">Numbers</th>
-        <th is="coral-table-headercell">Date</th>
-      </tr>
-      </thead>
-      <tfoot is="coral-table-foot">
-      <tr is="coral-table-row">
-        <th is="coral-table-headercell">Activities</th>
-        <th is="coral-table-headercell">Numbers</th>
-        <th is="coral-table-headercell">Date</th>
-      </tr>
-      </tfoot>
-      <tbody is="coral-table-body">
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Alpha</td>
-        <td is="coral-table-cell">23,857</td>
-        <td is="coral-table-cell">January 28, 2012</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Beta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">December 1, 2011</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Charlie</td>
-        <td is="coral-table-cell">3,498</td>
-        <td is="coral-table-cell">February 15, 2012</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Delta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">May 16, 2012</td>
-      </tr>
-      </tbody>
-    </table>
-
-    <h2 class="coral-Heading coral-Heading--2">Selectable rows</h2>
-    <table is="coral-table" selectable multiple>
-      <thead is="coral-table-head">
-      <tr is="coral-table-row">
-        <th is="coral-table-headercell">Activities</th>
-        <th is="coral-table-headercell">Numbers</th>
-        <th is="coral-table-headercell">Date</th>
-      </tr>
-      </thead>
-      <tbody is="coral-table-body">
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Alpha</td>
-        <td is="coral-table-cell">23,857</td>
-        <td is="coral-table-cell">January 28, 2012</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Beta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">December 1, 2011</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Charlie</td>
-        <td is="coral-table-cell">3,498</td>
-        <td is="coral-table-cell">February 15, 2012</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Delta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">May 16, 2012</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Echo</td>
-        <td is="coral-table-cell">1,331</td>
-        <td is="coral-table-cell">June 26, 2015</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Foxtrot</td>
-        <td is="coral-table-cell">41,331</td>
-        <td is="coral-table-cell">July 12, 2014</td>
-      </tr>
-      </tbody>
-    </table>
-
-    <h2 class="coral-Heading coral-Heading--2">Selectable cells</h2>
-    <table is="coral-table">
-      <thead is="coral-table-head">
-      <tr is="coral-table-row">
-        <th is="coral-table-headercell" colspan="2"></th>
-        <th is="coral-table-headercell">EN_AE</th>
-        <th is="coral-table-headercell">EN_BE</th>
-        <th is="coral-table-headercell">EN_CA</th>
-      </tr>
-      </thead>
-      <tbody is="coral-table-body">
-      <tr is="coral-table-row" selectable>
-        <th is="coral-table-headerCell">
-          <coral-icon icon="folder"></coral-icon>
-        </th>
-        <th is="coral-table-headerCell">Men's</th>
-        <td is="coral-table-cell">
-          <coral-checkbox coral-table-cellselect></coral-checkbox>
-          LIVE COPY UP TO DATE</td>
-        <td is="coral-table-cell">LIVE COPY DOES NOT EXIST</td>
-        <td is="coral-table-cell">LIVE COPY MODIFIED</td>
-      </tr>
-      <tr is="coral-table-row" selectable>
-        <th is="coral-table-headerCell">
-          <coral-icon icon="folder"></coral-icon>
-        </th>
-        <th is="coral-table-headerCell">Women's</th>
-        <td is="coral-table-cell">LIVE COPY DOES NOT EXIST</td>
-        <td is="coral-table-cell">LIVE COPY UP TO DATE</td>
-        <td is="coral-table-cell">LIVE COPY MODIFIED</td>
-      </tr>
-      <tr is="coral-table-row" selectable>
-        <th is="coral-table-headerCell">
-          <coral-icon icon="folder"></coral-icon>
-        </th>
-        <th is="coral-table-headerCell">Equipment</th>
-        <td is="coral-table-cell">LIVE COPY UP TO DATE</td>
-        <td is="coral-table-cell">LIVE COPY MODIFIED</td>
-        <td is="coral-table-cell">LIVE COPY DOES NOT EXIST</td>
-      </tr>
-      </tbody>
-    </table>
-
-    <h2 class="coral-Heading coral-Heading--2">Orderable columns + orderable rows</h2>
-    <table is="coral-table" orderable>
-      <col is="coral-table-column" orderable>
-      <col is="coral-table-column" orderable>
-      <col is="coral-table-column" orderable>
-      <thead is="coral-table-head">
-      <tr is="coral-table-row">
-        <th is="coral-table-headercell">Activities</th>
-        <th is="coral-table-headercell">Numbers</th>
-        <th is="coral-table-headercell">Date</th>
-      </tr>
-      </thead>
-      <tbody is="coral-table-body">
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Alpha</td>
-        <td is="coral-table-cell">23,857</td>
-        <td is="coral-table-cell">January 28, 2012</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Beta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">December 1, 2011</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Charlie</td>
-        <td is="coral-table-cell">3,498</td>
-        <td is="coral-table-cell">February 15, 2012</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Delta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">May 16, 2012</td>
-      </tr>
-      </tbody>
-    </table>
-
-    <h2 class="coral-Heading coral-Heading--2">Orderable columns + orderable rows + sticky head</h2>
-    <table is="coral-table" orderable class="table-sticky">
-      <col is="coral-table-column" orderable>
-      <col is="coral-table-column" orderable>
-      <col is="coral-table-column" orderable>
-      <thead is="coral-table-head" sticky>
-      <tr is="coral-table-row">
-        <th is="coral-table-headercell">Activities</th>
-        <th is="coral-table-headercell">Numbers</th>
-        <th is="coral-table-headercell">Date</th>
-      </tr>
-      </thead>
-      <tbody is="coral-table-body">
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Alpha</td>
-        <td is="coral-table-cell">23,857</td>
-        <td is="coral-table-cell">January 28, 2012</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Beta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">December 1, 2011</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Charlie</td>
-        <td is="coral-table-cell">3,498</td>
-        <td is="coral-table-cell">February 15, 2012</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Delta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">May 16, 2012</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Delta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">May 16, 2012</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Delta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">May 16, 2012</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Delta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">May 16, 2012</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Delta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">May 16, 2012</td>
-      </tr>
-      </tbody>
-    </table>
-
-    <h2 class="coral-Heading coral-Heading--2">Fixed width columns + sticky head + quiet variant</h2>
-    <table is="coral-table" orderable variant="quiet" class="table-sticky">
-      <col is="coral-table-column" orderable fixedwidth>
-      <col is="coral-table-column" orderable sortable sortabledirection="ascending" sortabletype="number">
-      <col is="coral-table-column" orderable fixedwidth>
-      <thead is="coral-table-head" sticky>
-      <tr is="coral-table-row">
-        <th is="coral-table-headercell">Activities</th>
-        <th is="coral-table-headercell">Numbers</th>
-        <th is="coral-table-headercell">Date</th>
-      </tr>
-      </thead>
-      <tbody is="coral-table-body" divider="cell">
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Alpha</td>
-        <td is="coral-table-cell">23,857</td>
-        <td is="coral-table-cell">January 28</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Beta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">December</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Charlie</td>
-        <td is="coral-table-cell">3,498</td>
-        <td is="coral-table-cell">February</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Delta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">May</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Delta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">April</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Delta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">June</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Delta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">December</td>
-      </tr>
-      </tbody>
-    </table>
-
-    <h2 class="coral-Heading coral-Heading--2">Orderable rows with handles</h2>
-    <table is="coral-table" orderable>
-      <col is="coral-table-column">
-      <col is="coral-table-column">
-      <col is="coral-table-column">
-      <col is="coral-table-column" fixedwidth>
-      <thead is="coral-table-head">
-      <tr is="coral-table-row">
-        <th is="coral-table-headercell">Activities</th>
-        <th is="coral-table-headercell">Numbers</th>
-        <th is="coral-table-headercell">Date</th>
-      </tr>
-      </thead>
-      <tbody is="coral-table-body" orderable>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Alpha</td>
-        <td is="coral-table-cell">23,857</td>
-        <td is="coral-table-cell">January 28, 2012</td>
-        <td is="coral-table-cell">
-          <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
-        </td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Beta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">December 1, 2011</td>
-        <td is="coral-table-cell">
-          <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
-        </td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Charlie</td>
-        <td is="coral-table-cell">3,498</td>
-        <td is="coral-table-cell">February 15, 2012</td>
-        <td is="coral-table-cell">
-          <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
-        </td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Delta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">May 16, 2012</td>
-        <td is="coral-table-cell">
-          <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-
-    <h2 class="coral-Heading coral-Heading--2">Lockable rows</h2>
-    <table is="coral-table" lockable>
-      <col is="coral-table-column" sortable sortabledirection="ascending">
-      <col is="coral-table-column">
-      <col is="coral-table-column">
-      <col is="coral-table-column" fixedwidth>
-      <thead is="coral-table-head">
-      <tr is="coral-table-row">
-        <th is="coral-table-headercell" sortable>Activities</th>
-        <th is="coral-table-headercell">Numbers</th>
-        <th is="coral-table-headercell">Date</th>
-        <th is="coral-table-headercell"></th>
-      </tr>
-      </thead>
-      <tbody is="coral-table-body">
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Alpha</td>
-        <td is="coral-table-cell">23,857</td>
-        <td is="coral-table-cell">January 28, 2012</td>
-        <td is="coral-table-cell">
-          <button is="coral-button" type="button" icon="lockClosed" variant="minimal" coral-table-rowlock></button>
-        </td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Beta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">December 1, 2011</td>
-        <td is="coral-table-cell">
-          <button is="coral-button" type="button" icon="lockClosed" variant="minimal" coral-table-rowlock></button>
-        </td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Charlie</td>
-        <td is="coral-table-cell">3,498</td>
-        <td is="coral-table-cell">February 15, 2012</td>
-        <td is="coral-table-cell">
-          <button is="coral-button" type="button" icon="lockClosed" variant="minimal" coral-table-rowlock></button>
-        </td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Delta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">May 16, 2012</td>
-        <td is="coral-table-cell">
-          <button is="coral-button" type="button" icon="lockClosed" variant="minimal" coral-table-rowlock></button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-
-    <h2 class="coral-Heading coral-Heading--2">Hidden columns example</h2>
-    <div class="hide-control">
-      <coral-checkbox type="checkbox" target=".hide-activities-col">Toggle activities</coral-checkbox>
-      <coral-checkbox type="checkbox" target=".hide-numbers-col">Toggle numbers</coral-checkbox>
-      <coral-checkbox type="checkbox" target=".hide-date-col">Toggle date</coral-checkbox>
+    <div class="markup">
+      <table is="coral-table">
+        <thead is="coral-table-head">
+        <tr is="coral-table-row">
+          <th is="coral-table-headercell">Activities</th>
+          <th is="coral-table-headercell">Numbers</th>
+          <th is="coral-table-headercell">Date</th>
+        </tr>
+        </thead>
+        <tbody is="coral-table-body">
+        <tr is="coral-table-row">
+          <td is="coral-table-cell">Alpha</td>
+          <td is="coral-table-cell">23,857</td>
+          <td is="coral-table-cell">January 28, 2012</td>
+        </tr>
+        <tr is="coral-table-row">
+          <td is="coral-table-cell">Beta</td>
+          <td is="coral-table-cell">20,398</td>
+          <td is="coral-table-cell">December 1, 2011</td>
+        </tr>
+        <tr is="coral-table-row">
+          <td is="coral-table-cell">Charlie</td>
+          <td is="coral-table-cell">3,498</td>
+          <td is="coral-table-cell">February 15, 2012</td>
+        </tr>
+        <tr is="coral-table-row">
+          <td is="coral-table-cell">Delta</td>
+          <td is="coral-table-cell">20,398</td>
+          <td is="coral-table-cell">May 16, 2012</td>
+        </tr>
+        </tbody>
+      </table>
     </div>
 
-    <table is="coral-table">
-      <colgroup>
-        <col is="coral-table-column" class="hide-activities-col">
-        <col is="coral-table-column" class="hide-numbers-col">
-        <col is="coral-table-column" class="hide-date-col">
-      </colgroup>
-      <thead is="coral-table-head">
-      <tr is="coral-table-row">
-        <th is="coral-table-headercell">Activities</th>
-        <th is="coral-table-headercell">Numbers</th>
-        <th is="coral-table-headercell">Date</th>
-      </tr>
-      </thead>
-      <tbody is="coral-table-body">
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Alpha</td>
-        <td is="coral-table-cell">23,857</td>
-        <td is="coral-table-cell">January 28, 2012</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Beta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">December 1, 2011</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Charlie</td>
-        <td is="coral-table-cell">3,498</td>
-        <td is="coral-table-cell">February 15, 2012</td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Delta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">May 16, 2012</td>
-      </tr>
-      </tbody>
-    </table>
+    <h2 class="coral-Heading coral-Heading--2">Quiet variant</h2>
+    <div class="markup">
+      <table is="coral-table" variant="quiet">
+        <thead is="coral-table-head">
+        <tr is="coral-table-row">
+          <th is="coral-table-headercell">Activities</th>
+          <th is="coral-table-headercell">Numbers</th>
+          <th is="coral-table-headercell">Date</th>
+        </tr>
+        </thead>
+        <tbody is="coral-table-body">
+        <tr is="coral-table-row">
+          <td is="coral-table-cell">Alpha</td>
+          <td is="coral-table-cell">23,857</td>
+          <td is="coral-table-cell">January 28, 2012</td>
+        </tr>
+        <tr is="coral-table-row">
+          <td is="coral-table-cell">Beta</td>
+          <td is="coral-table-cell">20,398</td>
+          <td is="coral-table-cell">December 1, 2011</td>
+        </tr>
+        <tr is="coral-table-row">
+          <td is="coral-table-cell">Charlie</td>
+          <td is="coral-table-cell">3,498</td>
+          <td is="coral-table-cell">February 15, 2012</td>
+        </tr>
+        <tr is="coral-table-row">
+          <td is="coral-table-cell">Delta</td>
+          <td is="coral-table-cell">20,398</td>
+          <td is="coral-table-cell">May 16, 2012</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="coral-Heading coral-Heading--2">Checkbox selection</h2>
+    <div class="markup">
+      <style>
+        .table-sticky [coral-table-scroll] {
+          max-height: 200px;
+        }
+      </style>
+      <table is="coral-table" selectable orderable multiple class="table-sticky">
+        <colgroup>
+          <col is="coral-table-column" fixedwidth>
+          <col is="coral-table-column" sortable sortabledirection="ascending">
+          <col is="coral-table-column" sortable sortabletype="date">
+          <col is="coral-table-column" fixedwidth>
+        </colgroup>
+        <thead is="coral-table-head" sticky>
+          <tr is="coral-table-row">
+            <th is="coral-table-headercell">
+              <coral-checkbox coral-table-select></coral-checkbox>
+            </th>
+            <th is="coral-table-headercell">Activities</th>
+            <th is="coral-table-headercell">Date</th>
+            <th is="coral-table-headercell"></th>
+          </tr>
+        </thead>
+        <tbody is="coral-table-body">
+          <tr is="coral-table-row">
+            <td is="coral-table-cell" coral-table-rowselect>
+              <coral-checkbox></coral-checkbox>
+              <coral-icon icon="folder"></coral-icon>
+            </td>
+            <td is="coral-table-cell">Alpha</td>
+            <td is="coral-table-cell">January 28, 2012</td>
+            <td is="coral-table-cell">
+              <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
+            </td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell" coral-table-rowselect>
+              <coral-checkbox></coral-checkbox>
+              <img src="http://via.placeholder.com/128x128" alt="thumbnail">
+            </td>
+            <td is="coral-table-cell">Charlie</td>
+            <td is="coral-table-cell">February 15, 2012</td>
+            <td is="coral-table-cell">
+              <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
+            </td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell" coral-table-rowselect>
+              <coral-checkbox></coral-checkbox>
+              <img src="http://via.placeholder.com/128x128">
+            </td>
+            <td is="coral-table-cell">Delta</td>
+            <td is="coral-table-cell">May 16, 2012</td>
+            <td is="coral-table-cell">
+              <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
+            </td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell" coral-table-rowselect>
+              <coral-checkbox></coral-checkbox>
+              <img src="http://via.placeholder.com/128x128">
+            </td>
+            <td is="coral-table-cell">Alpha</td>
+            <td is="coral-table-cell">January 28, 2012</td>
+            <td is="coral-table-cell">
+              <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
+            </td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell" coral-table-rowselect>
+              <coral-checkbox></coral-checkbox>
+              <img src="http://via.placeholder.com/128x128">
+            </td>
+            <td is="coral-table-cell">Beta</td>
+            <td is="coral-table-cell">December 1, 2011</td>
+            <td is="coral-table-cell">
+              <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
+            </td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell" coral-table-rowselect>
+              <coral-checkbox></coral-checkbox>
+              <img src="http://via.placeholder.com/128x128">
+            </td>
+            <td is="coral-table-cell">Charlie</td>
+            <td is="coral-table-cell">February 15, 2012</td>
+            <td is="coral-table-cell">
+              <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
+            </td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell" coral-table-rowselect>
+              <img src="http://via.placeholder.com/128x128">
+            </td>
+            <td is="coral-table-cell">Delta</td>
+            <td is="coral-table-cell">May 16, 2012</td>
+            <td is="coral-table-cell">
+              <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="coral-Heading coral-Heading--2">Content with centered alignment</h2>
+    <div class="markup">
+      <table is="coral-table">
+        <tbody is="coral-table-body">
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">
+              <p>There are no saved activities in your account yet.</p>
+              <p>Get started now.</p>
+            </td>
+          </tr>
+        </tbody>
+        <colgroup>
+          <col is="coral-table-column" alignment="center">
+        </colgroup>
+      </table>
+    </div>
+
+    <h2 class="coral-Heading coral-Heading--2">Column divider</h2>
+    <div class="markup">
+      <table is="coral-table">
+        <thead is="coral-table-head">
+          <tr is="coral-table-row">
+            <th is="coral-table-headercell">Activities</th>
+            <th is="coral-table-headercell">Numbers</th>
+            <th is="coral-table-headercell">Date</th>
+          </tr>
+        </thead>
+        <tbody is="coral-table-body" divider="column">
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Alpha</td>
+            <td is="coral-table-cell">23,857</td>
+            <td is="coral-table-cell">January 28, 2012</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Beta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">December 1, 2011</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Charlie</td>
+            <td is="coral-table-cell">3,498</td>
+            <td is="coral-table-cell">February 15, 2012</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Delta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">May 16, 2012</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="coral-Heading coral-Heading--2">Cell divider</h2>
+    <div class="markup">
+      <table is="coral-table">
+        <thead is="coral-table-head">
+          <tr is="coral-table-row">
+            <th is="coral-table-headercell"></th>
+            <th is="coral-table-headercell">Activities</th>
+            <th is="coral-table-headercell">Numbers</th>
+            <th is="coral-table-headercell">Date</th>
+            <th is="coral-table-headercell"></th>
+          </tr>
+        </thead>
+        <tbody is="coral-table-body" divider="cell">
+          <tr is="coral-table-row">
+            <th is="coral-table-headercell">Left Label</th>
+            <td is="coral-table-cell">Alpha</td>
+            <td is="coral-table-cell">23,857</td>
+            <td is="coral-table-cell">January 28, 2012</td>
+            <th is="coral-table-headercell">Right Label</th>
+          </tr>
+          <tr is="coral-table-row">
+            <th is="coral-table-headercell">Left Label</th>
+            <td is="coral-table-cell">Beta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">December 1, 2011</td>
+            <th is="coral-table-headercell">Right Label</th>
+          </tr>
+          <tr is="coral-table-row">
+            <th is="coral-table-headercell">Left Label</th>
+            <td is="coral-table-cell">Charlie</td>
+            <td is="coral-table-cell">3,498</td>
+            <td is="coral-table-cell">February 15, 2012</td>
+            <th is="coral-table-headercell">Right Label</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="coral-Heading coral-Heading--2">Sticky head example</h2>
+    <div class="markup">
+      <table is="coral-table" class="table-sticky">
+        <thead is="coral-table-head" divider="cell" sticky>
+          <tr is="coral-table-row">
+            <th is="coral-table-headercell">Column 1 with loooooooonnnnnng text</th>
+            <th is="coral-table-headercell">Column 2 with loooooooonnnnnng text</th>
+            <th is="coral-table-headercell">Column 3</th>
+          </tr>
+          <tr is="coral-table-row">
+            <th is="coral-table-headercell">Sub Column 1 has a long text also</th>
+            <th is="coral-table-headercell">Sub Column 2</th>
+            <th is="coral-table-headercell">Sub Column 3 wants to mimic sub column 1</th>
+          </tr>
+        </thead>
+        <tbody is="coral-table-body" divider="column">
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Cell 1</td>
+            <td is="coral-table-cell">Cell 2</td>
+            <td is="coral-table-cell">Cell 3</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Cell 1</td>
+            <td is="coral-table-cell">Cell 2</td>
+            <td is="coral-table-cell">Cell 3</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Cell 1</td>
+            <td is="coral-table-cell">Cell 2</td>
+            <td is="coral-table-cell">Cell 3</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Cell 1</td>
+            <td is="coral-table-cell">Cell 2</td>
+            <td is="coral-table-cell">Cell 3</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Cell 1</td>
+            <td is="coral-table-cell">Cell 2</td>
+            <td is="coral-table-cell">Cell 3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="coral-Heading coral-Heading--2">Sortable columns</h2>
+    <div class="markup">
+      <table is="coral-table">
+        <colgroup>
+          <col is="coral-table-column" sortable sortabledirection="ascending">
+          <col is="coral-table-column" sortable sortabletype="number">
+          <col is="coral-table-column" sortable sortabletype="date">
+        </colgroup>
+        <thead is="coral-table-head">
+        <tr is="coral-table-row">
+          <th is="coral-table-headercell">Activities</th>
+          <th is="coral-table-headercell">Numbers</th>
+          <th is="coral-table-headercell">Date</th>
+        </tr>
+        </thead>
+        <tbody is="coral-table-body">
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Beta</td>
+            <td is="coral-table-cell" value="20398">20,398</td>
+            <td is="coral-table-cell" value="1322694000000">December 1, 2011</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Alpha</td>
+            <td is="coral-table-cell" value="23857">23,857</td>
+            <td is="coral-table-cell" value="1327705200000">January 28, 2012</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Charlie</td>
+            <td is="coral-table-cell" value="3498">3,498</td>
+            <td is="coral-table-cell" value="1329260400000">February 15, 2012</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Delta</td>
+            <td is="coral-table-cell" value="20398">20,398</td>
+            <td is="coral-table-cell" value="1337119200000">May 16, 2012</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="coral-Heading coral-Heading--2">Custom sorting</h2>
+    <div class="markup">
+      <style>
+        .table-custom-sorting {
+          min-height: 200px;
+        }
+      </style>
+
+      <table is="coral-table" class="table-custom-sorting">
+        <colgroup>
+          <col is="coral-table-column" sortable sortabletype="custom" sortabledirection="ascending">
+        </colgroup>
+        <thead is="coral-table-head">
+          <tr is="coral-table-row">
+            <th is="coral-table-headercell">Activities</th>
+          </tr>
+        </thead>
+        <tbody is="coral-table-body"></tbody>
+      </table>
+
+      <script>
+        window.addEventListener('load', function() {
+          var activities = ['Beta', 'Alpha', 'Charlie', 'Echo', 'Delta', 'Golf', 'Hotel', 'Foxtrot'];
+
+          function appendActivity (table, activity) {
+            table.items.add().appendChild(new Coral.Table.Cell().set({
+              content: {
+                textContent : activity
+              }
+            }));
+          }
+
+          function customSort(table, newDirection) {
+            table.items.clear();
+            var data = activities.slice();
+            if (newDirection === Coral.Table.Column.sortableDirection.DEFAULT) {
+              data.slice(0,4).forEach(function(activity) {
+                appendActivity(table, activity);
+              });
+            }
+            else if (newDirection === Coral.Table.Column.sortableDirection.ASCENDING) {
+              data.sort().slice(0,4).forEach(function(activity) {
+                appendActivity(table, activity);
+              });
+            }
+            else if (newDirection === Coral.Table.Column.sortableDirection.DESCENDING) {
+              data.sort().reverse().slice(0,4).forEach(function(activity) {
+                appendActivity(table, activity);
+              });
+            }
+          }
+
+          // Custom sorting example
+          var customSortingTable = document.querySelector('.table-custom-sorting');
+          customSort(customSortingTable, customSortingTable.columns.firstElementChild.sortableDirection);
+
+          customSortingTable.on('coral-table:beforecolumnsort', function(event) {
+            customSort(customSortingTable, event.detail.direction);
+          });
+        });
+      </script>
+    </div>
+
+    <h2 class="coral-Heading coral-Heading--2">Sortable + orderable columns</h2>
+    <div class="markup">
+      <table is="coral-table">
+        <colgroup>
+          <col is="coral-table-column" orderable sortable sortabledirection="ascending">
+          <col is="coral-table-column" orderable sortable sortabletype="number">
+          <col is="coral-table-column" sortable sortabletype="date">
+        </colgroup>
+        <thead is="coral-table-head">
+          <tr is="coral-table-row">
+            <th is="coral-table-headercell">Activities</th>
+            <th is="coral-table-headercell">Numbers</th>
+            <th is="coral-table-headercell">Date</th>
+          </tr>
+        </thead>
+        <tfoot is="coral-table-foot">
+          <tr is="coral-table-row">
+            <th is="coral-table-headercell">Activities</th>
+            <th is="coral-table-headercell">Numbers</th>
+            <th is="coral-table-headercell">Date</th>
+          </tr>
+        </tfoot>
+        <tbody is="coral-table-body">
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Alpha</td>
+            <td is="coral-table-cell">23,857</td>
+            <td is="coral-table-cell">January 28, 2012</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Beta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">December 1, 2011</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Charlie</td>
+            <td is="coral-table-cell">3,498</td>
+            <td is="coral-table-cell">February 15, 2012</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Delta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">May 16, 2012</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="coral-Heading coral-Heading--2">Selectable rows</h2>
+    <div class="markup">
+      <table is="coral-table" selectable multiple>
+        <thead is="coral-table-head">
+          <tr is="coral-table-row">
+            <th is="coral-table-headercell">Activities</th>
+            <th is="coral-table-headercell">Numbers</th>
+            <th is="coral-table-headercell">Date</th>
+          </tr>
+        </thead>
+        <tbody is="coral-table-body">
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Alpha</td>
+            <td is="coral-table-cell">23,857</td>
+            <td is="coral-table-cell">January 28, 2012</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Beta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">December 1, 2011</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Charlie</td>
+            <td is="coral-table-cell">3,498</td>
+            <td is="coral-table-cell">February 15, 2012</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Delta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">May 16, 2012</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Echo</td>
+            <td is="coral-table-cell">1,331</td>
+            <td is="coral-table-cell">June 26, 2015</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Foxtrot</td>
+            <td is="coral-table-cell">41,331</td>
+            <td is="coral-table-cell">July 12, 2014</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="coral-Heading coral-Heading--2">Selectable cells</h2>
+    <div class="markup">
+      <table is="coral-table">
+        <thead is="coral-table-head">
+          <tr is="coral-table-row">
+            <th is="coral-table-headercell" colspan="2"></th>
+            <th is="coral-table-headercell">EN_AE</th>
+            <th is="coral-table-headercell">EN_BE</th>
+            <th is="coral-table-headercell">EN_CA</th>
+          </tr>
+        </thead>
+        <tbody is="coral-table-body">
+          <tr is="coral-table-row" selectable>
+            <th is="coral-table-headerCell">
+              <coral-icon icon="folder"></coral-icon>
+            </th>
+            <th is="coral-table-headerCell">Men's</th>
+            <td is="coral-table-cell">
+              <coral-checkbox coral-table-cellselect></coral-checkbox>
+              LIVE COPY UP TO DATE</td>
+            <td is="coral-table-cell">LIVE COPY DOES NOT EXIST</td>
+            <td is="coral-table-cell">LIVE COPY MODIFIED</td>
+          </tr>
+          <tr is="coral-table-row" selectable>
+            <th is="coral-table-headerCell">
+              <coral-icon icon="folder"></coral-icon>
+            </th>
+            <th is="coral-table-headerCell">Women's</th>
+            <td is="coral-table-cell">LIVE COPY DOES NOT EXIST</td>
+            <td is="coral-table-cell">LIVE COPY UP TO DATE</td>
+            <td is="coral-table-cell">LIVE COPY MODIFIED</td>
+          </tr>
+          <tr is="coral-table-row" selectable>
+            <th is="coral-table-headerCell">
+              <coral-icon icon="folder"></coral-icon>
+            </th>
+            <th is="coral-table-headerCell">Equipment</th>
+            <td is="coral-table-cell">LIVE COPY UP TO DATE</td>
+            <td is="coral-table-cell">LIVE COPY MODIFIED</td>
+            <td is="coral-table-cell">LIVE COPY DOES NOT EXIST</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="coral-Heading coral-Heading--2">Orderable columns + orderable rows</h2>
+    <div class="markup">
+      <table is="coral-table" orderable>
+        <colgroup>
+          <col is="coral-table-column" orderable>
+          <col is="coral-table-column" orderable>
+          <col is="coral-table-column" orderable>
+        </colgroup>
+        <thead is="coral-table-head">
+          <tr is="coral-table-row">
+            <th is="coral-table-headercell">Activities</th>
+            <th is="coral-table-headercell">Numbers</th>
+            <th is="coral-table-headercell">Date</th>
+          </tr>
+        </thead>
+        <tbody is="coral-table-body">
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Alpha</td>
+            <td is="coral-table-cell">23,857</td>
+            <td is="coral-table-cell">January 28, 2012</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Beta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">December 1, 2011</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Charlie</td>
+            <td is="coral-table-cell">3,498</td>
+            <td is="coral-table-cell">February 15, 2012</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Delta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">May 16, 2012</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="coral-Heading coral-Heading--2">Orderable columns + orderable rows + sticky head</h2>
+    <div class="markup">
+      <table is="coral-table" orderable class="table-sticky">
+        <colgroup>
+          <col is="coral-table-column" orderable>
+          <col is="coral-table-column" orderable>
+          <col is="coral-table-column" orderable>
+        </colgroup>
+        <thead is="coral-table-head" sticky>
+          <tr is="coral-table-row">
+            <th is="coral-table-headercell">Activities</th>
+            <th is="coral-table-headercell">Numbers</th>
+            <th is="coral-table-headercell">Date</th>
+          </tr>
+        </thead>
+        <tbody is="coral-table-body">
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Alpha</td>
+            <td is="coral-table-cell">23,857</td>
+            <td is="coral-table-cell">January 28, 2012</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Beta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">December 1, 2011</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Charlie</td>
+            <td is="coral-table-cell">3,498</td>
+            <td is="coral-table-cell">February 15, 2012</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Delta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">May 16, 2012</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Delta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">May 16, 2012</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Delta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">May 16, 2012</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Delta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">May 16, 2012</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Delta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">May 16, 2012</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="coral-Heading coral-Heading--2">Fixed width columns + sticky head + quiet variant</h2>
+    <div class="markup">
+      <table is="coral-table" orderable variant="quiet" class="table-sticky">
+        <colgroup>
+          <col is="coral-table-column" orderable fixedwidth>
+          <col is="coral-table-column" orderable sortable sortabledirection="ascending" sortabletype="number">
+          <col is="coral-table-column" orderable fixedwidth>
+        </colgroup>
+        <thead is="coral-table-head" sticky>
+          <tr is="coral-table-row">
+            <th is="coral-table-headercell">Activities</th>
+            <th is="coral-table-headercell">Numbers</th>
+            <th is="coral-table-headercell">Date</th>
+          </tr>
+        </thead>
+        <tbody is="coral-table-body" divider="cell">
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Alpha</td>
+            <td is="coral-table-cell">23,857</td>
+            <td is="coral-table-cell">January 28</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Beta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">December</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Charlie</td>
+            <td is="coral-table-cell">3,498</td>
+            <td is="coral-table-cell">February</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Delta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">May</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Delta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">April</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Delta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">June</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Delta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">December</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="coral-Heading coral-Heading--2">Orderable rows with handles</h2>
+    <div class="markup">
+      <table is="coral-table" orderable>
+        <colgroup>
+          <col is="coral-table-column">
+          <col is="coral-table-column">
+          <col is="coral-table-column">
+          <col is="coral-table-column" fixedwidth>
+        </colgroup>
+        <thead is="coral-table-head">
+          <tr is="coral-table-row">
+            <th is="coral-table-headercell">Activities</th>
+            <th is="coral-table-headercell">Numbers</th>
+            <th is="coral-table-headercell">Date</th>
+          </tr>
+        </thead>
+        <tbody is="coral-table-body" orderable>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Alpha</td>
+            <td is="coral-table-cell">23,857</td>
+            <td is="coral-table-cell">January 28, 2012</td>
+            <td is="coral-table-cell">
+              <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
+            </td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Beta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">December 1, 2011</td>
+            <td is="coral-table-cell">
+              <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
+            </td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Charlie</td>
+            <td is="coral-table-cell">3,498</td>
+            <td is="coral-table-cell">February 15, 2012</td>
+            <td is="coral-table-cell">
+              <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
+            </td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Delta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">May 16, 2012</td>
+            <td is="coral-table-cell">
+              <button is="coral-button" type="button" variant="minimal" icon="dragHandle" coral-table-roworder></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="coral-Heading coral-Heading--2">Lockable rows</h2>
+    <div class="markup">
+      <table is="coral-table" lockable>
+        <colgroup>
+          <col is="coral-table-column" sortable sortabledirection="ascending">
+          <col is="coral-table-column">
+          <col is="coral-table-column">
+          <col is="coral-table-column" fixedwidth>
+        </colgroup>
+        <thead is="coral-table-head">
+          <tr is="coral-table-row">
+            <th is="coral-table-headercell" sortable>Activities</th>
+            <th is="coral-table-headercell">Numbers</th>
+            <th is="coral-table-headercell">Date</th>
+            <th is="coral-table-headercell"></th>
+          </tr>
+        </thead>
+        <tbody is="coral-table-body">
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Alpha</td>
+            <td is="coral-table-cell">23,857</td>
+            <td is="coral-table-cell">January 28, 2012</td>
+            <td is="coral-table-cell">
+              <button is="coral-button" type="button" icon="lockClosed" variant="minimal" coral-table-rowlock></button>
+            </td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Beta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">December 1, 2011</td>
+            <td is="coral-table-cell">
+              <button is="coral-button" type="button" icon="lockClosed" variant="minimal" coral-table-rowlock></button>
+            </td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Charlie</td>
+            <td is="coral-table-cell">3,498</td>
+            <td is="coral-table-cell">February 15, 2012</td>
+            <td is="coral-table-cell">
+              <button is="coral-button" type="button" icon="lockClosed" variant="minimal" coral-table-rowlock></button>
+            </td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Delta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">May 16, 2012</td>
+            <td is="coral-table-cell">
+              <button is="coral-button" type="button" icon="lockClosed" variant="minimal" coral-table-rowlock></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="coral-Heading coral-Heading--2">Hidden columns example</h2>
+    <div class="markup">
+      <div class="hide-control">
+        <coral-checkbox type="checkbox" target=".hide-activities-col">Toggle activities</coral-checkbox>
+        <coral-checkbox type="checkbox" target=".hide-numbers-col">Toggle numbers</coral-checkbox>
+        <coral-checkbox type="checkbox" target=".hide-date-col">Toggle date</coral-checkbox>
+      </div>
+
+      <table is="coral-table">
+        <colgroup>
+          <col is="coral-table-column" class="hide-activities-col">
+          <col is="coral-table-column" class="hide-numbers-col">
+          <col is="coral-table-column" class="hide-date-col">
+        </colgroup>
+        <thead is="coral-table-head">
+          <tr is="coral-table-row">
+            <th is="coral-table-headercell">Activities</th>
+            <th is="coral-table-headercell">Numbers</th>
+            <th is="coral-table-headercell">Date</th>
+          </tr>
+        </thead>
+        <tbody is="coral-table-body">
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Alpha</td>
+            <td is="coral-table-cell">23,857</td>
+            <td is="coral-table-cell">January 28, 2012</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Beta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">December 1, 2011</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Charlie</td>
+            <td is="coral-table-cell">3,498</td>
+            <td is="coral-table-cell">February 15, 2012</td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Delta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">May 16, 2012</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <script>
+        window.addEventListener('load', function() {
+          Coral.events.on('change', '.hide-control coral-checkbox', function(event) {
+            var checkbox = event.matchedTarget;
+            checkbox.closest('section').querySelector(checkbox.getAttribute('target')).hidden = checkbox.checked;
+          });
+        });
+      </script>
+    </div>
 
     <h2 class="coral-Heading coral-Heading--2">Additive table</h2>
-    <table is="coral-table">
-      <colgroup>
-        <col is="coral-table-column">
-        <col is="coral-table-column">
-        <col is="coral-table-column" fixedwidth>
-      </colgroup>
-      <thead is="coral-table-head">
-      <tr is="coral-table-row">
-        <th is="coral-table-headercell">Activities</th>
-        <th is="coral-table-headercell">Numbers</th>
-      </tr>
-      </thead>
-      <tbody is="coral-table-body">
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Alpha</td>
-        <td is="coral-table-cell">23,857</td>
-        <td is="coral-table-cell">
-          <button coral-row-remove is="coral-button" type="button" icon="close" iconSize="XS" variant="quiet"></button>
-        </td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Beta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">
-          <button coral-row-remove is="coral-button" type="button" icon="close" iconSize="XS" variant="quiet"></button>
-        </td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Charlie</td>
-        <td is="coral-table-cell">3,498</td>
-        <td is="coral-table-cell">
-          <button coral-row-remove is="coral-button" type="button" icon="close" iconSize="XS" variant="quiet"></button>
-        </td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">Delta</td>
-        <td is="coral-table-cell">20,398</td>
-        <td is="coral-table-cell">
-          <button coral-row-remove is="coral-button" type="button" icon="close" iconSize="XS" variant="quiet"></button>
-        </td>
-      </tr>
-      <tr is="coral-table-row">
-        <td is="coral-table-cell">
-          <input type="text" placeholder="Type Activity">
-        </td>
-        <td is="coral-table-cell">
-          <input type="text" placeholder="Type Number">
-        </td>
-        <td is="coral-table-cell">
-          <button coral-row-add is="coral-button" type="button" icon="add" iconSize="XS" variant="quiet"></button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+    <div class="markup">
+      <table is="coral-table">
+        <colgroup>
+          <col is="coral-table-column">
+          <col is="coral-table-column">
+          <col is="coral-table-column" fixedwidth>
+        </colgroup>
+        <thead is="coral-table-head">
+          <tr is="coral-table-row">
+            <th is="coral-table-headercell">Activities</th>
+            <th is="coral-table-headercell">Numbers</th>
+          </tr>
+        </thead>
+        <tbody is="coral-table-body">
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Alpha</td>
+            <td is="coral-table-cell">23,857</td>
+            <td is="coral-table-cell">
+              <button coral-row-remove is="coral-button" type="button" icon="close" iconSize="XS" variant="quiet"></button>
+            </td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Beta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">
+              <button coral-row-remove is="coral-button" type="button" icon="close" iconSize="XS" variant="quiet"></button>
+            </td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Charlie</td>
+            <td is="coral-table-cell">3,498</td>
+            <td is="coral-table-cell">
+              <button coral-row-remove is="coral-button" type="button" icon="close" iconSize="XS" variant="quiet"></button>
+            </td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">Delta</td>
+            <td is="coral-table-cell">20,398</td>
+            <td is="coral-table-cell">
+              <button coral-row-remove is="coral-button" type="button" icon="close" iconSize="XS" variant="quiet"></button>
+            </td>
+          </tr>
+          <tr is="coral-table-row">
+            <td is="coral-table-cell">
+              <input type="text" placeholder="Type Activity">
+            </td>
+            <td is="coral-table-cell">
+              <input type="text" placeholder="Type Number">
+            </td>
+            <td is="coral-table-cell">
+              <button coral-row-add is="coral-button" type="button" icon="add" iconSize="XS" variant="quiet"></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <script>
+        window.addEventListener('load', function() {
+
+          // Additive table example
+          Coral.events.on('click', 'tr[is="coral-table-row"] [coral-row-remove]', function() {
+            this.closest('tr[is="coral-table-row"]').remove();
+          });
+
+          Coral.events.on('click', 'tr[is="coral-table-row"] [coral-row-add]', function() {
+            var row = this.closest('tr[is="coral-table-row"]');
+            var rowClone = row.cloneNode(true);
+            var table = row.closest('table[is="coral-table"]');
+
+            // Copy user input to cell content
+            row.items.getAll().forEach(function(cell) {
+              var textfield = cell.querySelector('input');
+              if (textfield) {
+                cell.content.textContent = textfield.value;
+              }
+              cell.classList.remove('u-coral-nopadding');
+            });
+
+            // Change button
+            var button = row.querySelector('[coral-row-add]');
+            if (button) {
+              button.icon = 'close';
+              button.removeAttribute('coral-row-add');
+              button.setAttribute('coral-row-remove', '');
+            }
+
+            // Append the clone
+            Array.prototype.forEach.call(rowClone.querySelectorAll('input'), function(textfield) {
+              textfield.value = '';
+            });
+            table.items.add(rowClone);
+          });
+        });
+      </script>
+    </div>
+
   </section>
-
-  <script>
-    var activities = ['Beta', 'Alpha', 'Charlie', 'Echo', 'Delta', 'Golf', 'Hotel', 'Foxtrot'];
-    function appendActivity (table, activity) {
-      table.items.add().appendChild(new Coral.Table.Cell().set({
-        content: {
-          textContent : activity
-        }
-      }));
-    }
-
-    function customSort(table, newDirection) {
-      table.items.clear();
-      var data = activities.slice();
-      if (newDirection === Coral.Table.Column.sortableDirection.DEFAULT) {
-        data.slice(0,4).forEach(function(activity) {
-          appendActivity(table, activity);
-        });
-      }
-      else if (newDirection === Coral.Table.Column.sortableDirection.ASCENDING) {
-        data.sort().slice(0,4).forEach(function(activity) {
-          appendActivity(table, activity);
-        });
-      }
-      else if (newDirection === Coral.Table.Column.sortableDirection.DESCENDING) {
-        data.sort().reverse().slice(0,4).forEach(function(activity) {
-          appendActivity(table, activity);
-        });
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-      // Custom sorting example
-      Array.prototype.slice.call(document.querySelectorAll('.table-custom-sorting')).forEach(function(table) {
-        customSort(table, table.columns.firstChild.sortableDirection);
-
-        table.on('coral-table:beforecolumnsort', function(event) {
-          customSort(table, event.detail.direction);
-        });
-      });
-
-      // Hide columns example
-      Coral.events.on('change', '.hide-control coral-checkbox', function(event) {
-        var checkbox = event.matchedTarget;
-        checkbox.closest('section').querySelector(checkbox.getAttribute('target')).hidden = checkbox.checked;
-      });
-
-      // Additive table example
-      Coral.events.on('click', 'tr[is="coral-table-row"] [coral-row-remove]', function() {
-        this.closest('tr[is="coral-table-row"]').remove();
-      });
-
-      Coral.events.on('click', 'tr[is="coral-table-row"] [coral-row-add]', function() {
-        var row = this.closest('tr[is="coral-table-row"]');
-        var rowClone = row.cloneNode(true);
-        var table = row.closest('table[is="coral-table"]');
-
-        // Copy user input to cell content
-        row.items.getAll().forEach(function(cell) {
-          var textfield = cell.querySelector('input');
-          if (textfield) {
-            cell.content.textContent = textfield.value;
-          }
-          cell.classList.remove('u-coral-nopadding');
-        });
-
-        // Change button
-        var button = row.querySelector('[coral-row-add]');
-        if (button) {
-          button.icon = 'close';
-          button.removeAttribute('coral-row-add');
-          button.setAttribute('coral-row-remove', '');
-        }
-
-        // Append the clone
-        Array.prototype.forEach.call(rowClone.querySelectorAll('input'), function(textfield) {
-          textfield.value = '';
-        });
-        table.items.add(rowClone);
-      });
-    });
-  </script>
 
 </body>
 </html>

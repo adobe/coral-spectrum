@@ -1404,7 +1404,7 @@ describe('Table', function() {
         expect(col.sortableDirection).to.equal(sortableDirection);
       });
       
-      it('should set sortable direction to ascending', function() {
+      it('should set sortable direction to ascending', function(done) {
         var eventSpy = sinon.spy();
         var table = helpers.build(window.__html__['Table.sortable.html']);
         table.on('coral-table:columnsort', eventSpy);
@@ -1414,13 +1414,16 @@ describe('Table', function() {
         
         headerCell.click();
         
-        expect(eventSpy.callCount).to.equal(1);
-        expect(eventSpy.args[0][0].detail.column).to.equal(col);
-        expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.ASCENDING);
-        expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
+        helpers.next(() => {
+          expect(eventSpy.callCount).to.equal(1);
+          expect(eventSpy.args[0][0].detail.column).to.equal(col);
+          expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.ASCENDING);
+          expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
+          done();
+        });
       });
       
-      it('should set sortable direction to descending', function() {
+      it('should set sortable direction to descending', function(done) {
         var eventSpy = sinon.spy();
         var table = helpers.build(window.__html__['Table.sortable.html']);
         table.on('coral-table:columnsort', eventSpy);
@@ -1431,13 +1434,16 @@ describe('Table', function() {
         headerCell.click();
         headerCell.click();
         
-        expect(eventSpy.callCount).to.equal(2);
-        expect(eventSpy.args[0][0].detail.column).to.equal(col);
-        expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.DESCENDING);
-        expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
+        helpers.next(() => {
+          expect(eventSpy.callCount).to.equal(2);
+          expect(eventSpy.args[0][0].detail.column).to.equal(col);
+          expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.DESCENDING);
+          expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
+          done();
+        });
       });
       
-      it('should set sortable direction back to default', function() {
+      it('should set sortable direction back to default', function(done) {
         var eventSpy = sinon.spy();
         var table = helpers.build(window.__html__['Table.sortable.html']);
         table.on('coral-table:columnsort', eventSpy);
@@ -1449,10 +1455,13 @@ describe('Table', function() {
         headerCell.click();
         headerCell.click();
         
-        expect(eventSpy.callCount).to.equal(3);
-        expect(eventSpy.args[0][0].detail.column).to.equal(col);
-        expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.DEFAULT);
-        expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
+        helpers.next(() => {
+          expect(eventSpy.callCount).to.equal(3);
+          expect(eventSpy.args[0][0].detail.column).to.equal(col);
+          expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.DEFAULT);
+          expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
+          done();
+        });
       });
     });
     
@@ -2281,7 +2290,7 @@ describe('Table', function() {
     });
   
     describe('#fixedWidth', function() {
-      it('should set a fixed width to the column', function() {
+      it('should set a fixed width to the column', function(done) {
         var table = helpers.build(window.__html__['Table.fixedwidth.html']);
         var headRow = table.head.rows[0];
         var col = getColumns(table.columns)[0];
@@ -2294,25 +2303,31 @@ describe('Table', function() {
         var cell2Width = cell2.getBoundingClientRect().width;
       
         col.fixedWidth = true;
-      
-        expect(cell1.getBoundingClientRect().width < cell1Width).to.be.true;
-        expect(cell2.getBoundingClientRect().width > cell2Width).to.be.true;
-        expect(headerCell1.hasAttribute('fixedwidth')).to.be.true;
-        expect(headerCell2.hasAttribute('fixedwidth')).to.be.false;
+        
+        helpers.next(() => {
+          expect(cell1.getBoundingClientRect().width < cell1Width).to.be.true;
+          expect(cell2.getBoundingClientRect().width > cell2Width).to.be.true;
+          expect(headerCell1.hasAttribute('fixedwidth')).to.be.true;
+          expect(headerCell2.hasAttribute('fixedwidth')).to.be.false;
+          done();
+        });
       });
     });
   
     describe('#hidden', function() {
-      it('should hide the column', function() {
+      it('should hide the column', function(done) {
         var table = helpers.build(window.__html__['Table.base.html']);
         getColumns(table.columns)[0].hidden = true;
   
-        getRows([table._elements.table]).forEach(function(row) {
-          expect(row.cells[0].offsetParent).to.equal(null);
+        helpers.next(() => {
+          getRows([table._elements.table]).forEach(function(row) {
+            expect(row.cells[0].offsetParent).to.equal(null);
+          });
+          done();
         });
       });
     
-      it('appended cells should be hidden', function() {
+      it('appended cells should be hidden', function(done) {
         var table = helpers.build(window.__html__['Table.hidden.html']);
         var cell1 = new Table.Cell();
         var cell2 = new Table.Cell();
@@ -2323,22 +2338,28 @@ describe('Table', function() {
       
         table.body.appendChild(row);
         
-        expect(cell1.offsetParent).to.equal(null);
-        expect(cell2.offsetParent).to.not.equal(null);
+        helpers.next(() => {
+          expect(cell1.offsetParent).to.equal(null);
+          expect(cell2.offsetParent).to.not.equal(null);
+          done();
+        });
       });
     });
   
     describe('#hidden', function() {
-      it('should set the text alignment to right', function() {
+      it('should set the text alignment to right', function(done) {
         var table = helpers.build(window.__html__['Table.base.html']);
         getColumns(table.columns)[0].alignment = Table.Column.alignment.RIGHT;
       
-        getRows([table._elements.table]).forEach(function(row) {
-          expect(getComputedStyle(row.cells[0]).textAlign).to.equal('right');
+        helpers.next(() => {
+          getRows([table._elements.table]).forEach(function(row) {
+            expect(getComputedStyle(row.cells[0]).textAlign).to.equal('right');
+          });
+          done();
         });
       });
     
-      it('appended cells should have the text alignment right', function() {
+      it('appended cells should have the text alignment right', function(done) {
         var table = helpers.build(window.__html__['Table.alignment.html']);
         var cell1 = new Table.Cell();
         var cell2 = new Table.Cell();
@@ -2349,8 +2370,11 @@ describe('Table', function() {
       
         table.body.appendChild(row);
       
-        expect(getComputedStyle(cell1).textAlign).to.equal('right');
-        expect(getComputedStyle(cell2).textAlign).to.not.equal('right');
+        helpers.next(() => {
+          expect(getComputedStyle(cell1).textAlign).to.equal('right');
+          expect(getComputedStyle(cell2).textAlign).to.not.equal('right');
+          done();
+        });
       });
     });
   
@@ -2451,7 +2475,7 @@ describe('Table', function() {
         });
       });
     
-      it('should sort by alphanumeric type ascending using cells value property', function() {
+      it('should sort by alphanumeric type ascending using cells value property', function(done) {
         var eventSpy = sinon.spy();
         var table = helpers.build(window.__html__['Table.sortable.value.html']);
         table.on('coral-table:columnsort', eventSpy);
@@ -2460,17 +2484,20 @@ describe('Table', function() {
         var headerCell = table.head.rows[0].cells[0];
         col.sortableDirection = Table.Column.sortableDirection.ASCENDING;
       
-        expect(eventSpy.callCount).to.equal(1);
-        expect(eventSpy.args[0][0].detail.column).to.equal(col);
-        expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.ASCENDING);
-        expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
-      
-        table.items.getAll().forEach(function(row, i) {
-          expect(parseInt(row.dataset.alphanumeric)).to.equal(i);
+        helpers.next(() => {
+          expect(eventSpy.callCount).to.equal(1);
+          expect(eventSpy.args[0][0].detail.column).to.equal(col);
+          expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.ASCENDING);
+          expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
+  
+          table.items.getAll().forEach(function(row, i) {
+            expect(parseInt(row.dataset.alphanumeric)).to.equal(i);
+          });
+          done();
         });
       });
     
-      it('should sort by alphanumeric type descending using cells value property', function() {
+      it('should sort by alphanumeric type descending using cells value property', function(done) {
         var eventSpy = sinon.spy();
         var table = helpers.build(window.__html__['Table.sortable.value.html']);
         table.on('coral-table:columnsort', eventSpy);
@@ -2479,18 +2506,21 @@ describe('Table', function() {
         var headerCell = table.head.rows[0].cells[0];
         col.sortableDirection = Table.Column.sortableDirection.DESCENDING;
       
-        expect(eventSpy.callCount).to.equal(1);
-        expect(eventSpy.args[0][0].detail.column).to.equal(col);
-        expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.DESCENDING);
-        expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
-      
-        var rows = table.items.getAll().reverse();
-        rows.forEach(function(row, i) {
-          expect(parseInt(row.dataset.alphanumeric)).to.equal(i);
+        helpers.next(() => {
+          expect(eventSpy.callCount).to.equal(1);
+          expect(eventSpy.args[0][0].detail.column).to.equal(col);
+          expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.DESCENDING);
+          expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
+  
+          var rows = table.items.getAll().reverse();
+          rows.forEach(function(row, i) {
+            expect(parseInt(row.dataset.alphanumeric)).to.equal(i);
+          });
+          done();
         });
       });
     
-      it('should sort by number type ascending using cells value property', function() {
+      it('should sort by number type ascending using cells value property', function(done) {
         var eventSpy = sinon.spy();
         var table = helpers.build(window.__html__['Table.sortable.value.html']);
         table.on('coral-table:columnsort', eventSpy);
@@ -2499,17 +2529,20 @@ describe('Table', function() {
         var headerCell = table.head.rows[0].cells[1];
         col.sortableDirection = Table.Column.sortableDirection.ASCENDING;
       
-        expect(eventSpy.callCount).to.equal(1);
-        expect(eventSpy.args[0][0].detail.column).to.equal(col);
-        expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.ASCENDING);
-        expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
-      
-        table.items.getAll().forEach(function(row, i) {
-          expect(parseInt(row.dataset.number)).to.equal(i);
+        helpers.next(() => {
+          expect(eventSpy.callCount).to.equal(1);
+          expect(eventSpy.args[0][0].detail.column).to.equal(col);
+          expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.ASCENDING);
+          expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
+  
+          table.items.getAll().forEach(function(row, i) {
+            expect(parseInt(row.dataset.number)).to.equal(i);
+          });
+          done();
         });
       });
     
-      it('should sort by number type descending using cells value property', function() {
+      it('should sort by number type descending using cells value property', function(done) {
         var eventSpy = sinon.spy();
         var table = helpers.build(window.__html__['Table.sortable.value.html']);
         table.on('coral-table:columnsort', eventSpy);
@@ -2518,18 +2551,21 @@ describe('Table', function() {
         var headerCell = table.head.rows[0].cells[1];
         col.sortableDirection = Table.Column.sortableDirection.DESCENDING;
       
-        expect(eventSpy.callCount).to.equal(1);
-        expect(eventSpy.args[0][0].detail.column).to.equal(col);
-        expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.DESCENDING);
-        expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
-      
-        var rows = table.items.getAll().reverse();
-        rows.forEach(function(row, i) {
-          expect(parseInt(row.dataset.number)).to.equal(i);
+        helpers.next(() => {
+          expect(eventSpy.callCount).to.equal(1);
+          expect(eventSpy.args[0][0].detail.column).to.equal(col);
+          expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.DESCENDING);
+          expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
+  
+          var rows = table.items.getAll().reverse();
+          rows.forEach(function(row, i) {
+            expect(parseInt(row.dataset.number)).to.equal(i);
+          });
+          done();
         });
       });
     
-      it('should sort by date type ascending using cells value property', function() {
+      it('should sort by date type ascending using cells value property', function(done) {
         var eventSpy = sinon.spy();
         var table = helpers.build(window.__html__['Table.sortable.value.html']);
         table.on('coral-table:columnsort', eventSpy);
@@ -2538,17 +2574,20 @@ describe('Table', function() {
         var headerCell = table.head.rows[0].cells[2];
         col.sortableDirection = Table.Column.sortableDirection.ASCENDING;
       
-        expect(eventSpy.callCount).to.equal(1);
-        expect(eventSpy.args[0][0].detail.column).to.equal(col);
-        expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.ASCENDING);
-        expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
-      
-        table.items.getAll().forEach(function(row, i) {
-          expect(parseInt(row.dataset.date)).to.equal(i);
+        helpers.next(() => {
+          expect(eventSpy.callCount).to.equal(1);
+          expect(eventSpy.args[0][0].detail.column).to.equal(col);
+          expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.ASCENDING);
+          expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
+  
+          table.items.getAll().forEach(function(row, i) {
+            expect(parseInt(row.dataset.date)).to.equal(i);
+          });
+          done();
         });
       });
     
-      it('should sort by date type descending using cells value property', function() {
+      it('should sort by date type descending using cells value property', function(done) {
         var eventSpy = sinon.spy();
         var table = helpers.build(window.__html__['Table.sortable.value.html']);
         table.on('coral-table:columnsort', eventSpy);
@@ -2557,14 +2596,17 @@ describe('Table', function() {
         var headerCell = table.head.rows[0].cells[2];
         col.sortableDirection = Table.Column.sortableDirection.DESCENDING;
       
-        expect(eventSpy.callCount).to.equal(1);
-        expect(eventSpy.args[0][0].detail.column).to.equal(col);
-        expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.DESCENDING);
-        expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
-      
-        var rows = table.items.getAll().reverse();
-        rows.forEach(function(row, i) {
-          expect(parseInt(row.dataset.date)).to.equal(i);
+        helpers.next(() => {
+          expect(eventSpy.callCount).to.equal(1);
+          expect(eventSpy.args[0][0].detail.column).to.equal(col);
+          expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.DESCENDING);
+          expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
+  
+          var rows = table.items.getAll().reverse();
+          rows.forEach(function(row, i) {
+            expect(parseInt(row.dataset.date)).to.equal(i);
+          });
+          done();
         });
       });
     
@@ -2597,7 +2639,7 @@ describe('Table', function() {
         expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.DESCENDING);
       });
     
-      it('should not sort if sortableType is set to custom but still allow to change sortableDirection', function() {
+      it('should not sort if sortableType is set to custom but still allow to change sortableDirection', function(done) {
         var eventSpy = sinon.spy();
         var table = helpers.build(window.__html__['Table.sortable.html']);
         table.on('coral-table:columnsort', eventSpy);
@@ -2607,18 +2649,21 @@ describe('Table', function() {
       
         col.sortableType = Table.Column.sortableType.CUSTOM;
         col.sortableDirection = Table.Column.sortableDirection.DESCENDING;
-      
-        // 'coral-table:columnsort' is not triggered if custom sorting
-        expect(eventSpy.callCount).to.equal(0);
-        expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.DESCENDING);
-        expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
-      
-        table.items.getAll().forEach(function(row, i) {
-          expect(parseInt(row.dataset.default)).to.equal(i);
+        
+        helpers.next(() => {
+          // 'coral-table:columnsort' is not triggered if custom sorting
+          expect(eventSpy.callCount).to.equal(0);
+          expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.DESCENDING);
+          expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
+  
+          table.items.getAll().forEach(function(row, i) {
+            expect(parseInt(row.dataset.default)).to.equal(i);
+          });
+          done();
         });
       });
     
-      it('should disable row ordering if table is in a sorted state (ascending)', function() {
+      it('should disable row ordering if table is in a sorted state (ascending)', function(done) {
         var eventSpy = sinon.spy();
         var table = helpers.build(window.__html__['Table.orderable.hidden.html']);
         table.on('coral-table:columnsort', eventSpy);
@@ -2626,11 +2671,14 @@ describe('Table', function() {
         var col = getColumns(table.columns)[0];
         col.sortableDirection = Table.Column.sortableDirection.ASCENDING;
       
-        expect(table._isSorted()).to.equal(col);
-        expect(table.classList.contains('is-sorted')).to.be.true;
+        helpers.next(() => {
+          expect(table._isSorted()).to.equal(col);
+          expect(table.classList.contains('is-sorted')).to.be.true;
+          done();
+        });
       });
     
-      it('should disable row ordering if table is in a sorted state (descending)', function() {
+      it('should disable row ordering if table is in a sorted state (descending)', function(done) {
         var eventSpy = sinon.spy();
         var table = helpers.build(window.__html__['Table.orderable.hidden.html']);
         table.on('coral-table:columnsort', eventSpy);
@@ -2638,8 +2686,11 @@ describe('Table', function() {
         var col = getColumns(table.columns)[0];
         col.sortableDirection = Table.Column.sortableDirection.DESCENDING;
       
-        expect(table._isSorted()).to.equal(col);
-        expect(table.classList.contains('is-sorted')).to.be.true;
+        helpers.next(() => {
+          expect(table._isSorted()).to.equal(col);
+          expect(table.classList.contains('is-sorted')).to.be.true;
+          done();
+        });
       });
     
       it('should enable row ordering back if table is not in a sorted state anymore', function() {

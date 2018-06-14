@@ -4,13 +4,37 @@
   <head>
     <meta charset="utf-8">
     <title>Coral.Tree</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="event.preventDefault();this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
     <link rel="stylesheet" href="../build/css/coral.css">
-    <script src="../build/js/coral.js"></script>
-    <style>
-       section {
-         padding: 15px;
-       }
-    </style>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../build/js/coral.js';
+        document.head.appendChild(script);
+      });
+    </script>
   </head>
 
   <body class="coral--light">
@@ -21,108 +45,118 @@
       <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--darkest'">Darkest</a>
     </div>
 
-    <section>
+    <section class="u-coral-margin">
       <h1 class="coral-Heading coral-Heading--1">Coral.Tree</h1>
 
       <h2 class="coral-Heading coral-Heading--2">Default</h2>
-      <coral-tree>
-        <coral-tree-item disabled ><coral-tree-item-content>Item 2</coral-tree-item-content></coral-tree-item>
-        <coral-tree-item expanded>
-          <coral-tree-item-content>Item 1</coral-tree-item-content>
-          <coral-tree-item disabled><coral-tree-item-content>Sub Item 1</coral-tree-item-content></coral-tree-item>
+      <div class="markup">
+        <coral-tree>
+          <coral-tree-item disabled ><coral-tree-item-content>Item 2</coral-tree-item-content></coral-tree-item>
           <coral-tree-item expanded>
-            <coral-tree-item-content>Sub Item 2</coral-tree-item-content>
+            <coral-tree-item-content>Item 1</coral-tree-item-content>
+            <coral-tree-item disabled><coral-tree-item-content>Sub Item 1</coral-tree-item-content></coral-tree-item>
             <coral-tree-item expanded>
-              <coral-tree-item-content>Item 1</coral-tree-item-content>
-              <coral-tree-item disabled><coral-tree-item-content>Sub Item 1</coral-tree-item-content></coral-tree-item>
-              <coral-tree-item>
-                <coral-tree-item-content>Sub Item 2</coral-tree-item-content>
+              <coral-tree-item-content>Sub Item 2</coral-tree-item-content>
+              <coral-tree-item expanded>
+                <coral-tree-item-content>Item 1</coral-tree-item-content>
+                <coral-tree-item disabled><coral-tree-item-content>Sub Item 1</coral-tree-item-content></coral-tree-item>
+                <coral-tree-item>
+                  <coral-tree-item-content>Sub Item 2</coral-tree-item-content>
+                </coral-tree-item>
               </coral-tree-item>
             </coral-tree-item>
           </coral-tree-item>
-        </coral-tree-item>
-        <coral-tree-item><coral-tree-item-content>Item 2</coral-tree-item-content></coral-tree-item>
-        <coral-tree-item hidden><coral-tree-item-content>Item 3</coral-tree-item-content></coral-tree-item>
-      </coral-tree>
+          <coral-tree-item><coral-tree-item-content>Item 2</coral-tree-item-content></coral-tree-item>
+          <coral-tree-item hidden><coral-tree-item-content>Item 3</coral-tree-item-content></coral-tree-item>
+        </coral-tree>
+      </div>
 
       <h2 class="coral-Heading coral-Heading--2">Handle expansion via JS</h2>
-      <coral-tree>
-        <coral-tree-item id="tree-item">
-          <coral-tree-item-content>Item 1</coral-tree-item-content>
-        </coral-tree-item>
-      </coral-tree>
-      <br>
-      <a id="add-item" class="coral-Link" href="#">Add item</a>
-      <a id="remove-item" class="coral-Link" href="#">Remove item</a>
+      <div class="markup">
+        <coral-tree>
+          <coral-tree-item id="tree-item">
+            <coral-tree-item-content>Item 1</coral-tree-item-content>
+          </coral-tree-item>
+        </coral-tree>
+
+        <div class="u-coral-margin">
+          <a id="add-item" class="coral-Link" href="#">Add item</a>
+          <a id="remove-item" class="coral-Link" href="#">Remove item</a>
+        </div>
+
+        <script>
+          window.addEventListener('load', function() {
+            var tree = document.getElementById('tree-item');
+            var add = document.getElementById('add-item');
+            var remove = document.getElementById('remove-item');
+
+            add.addEventListener('click', function(e) {
+              e.preventDefault();
+              tree.items.add({
+                content: {
+                  textContent: 'Sub item ' + (tree.items.length + 1)
+                }
+              });
+            });
+
+            remove.addEventListener('click', function(e) {
+              e.preventDefault();
+              tree.items.length && tree.items.last().remove();
+            });
+
+            tree.addEventListener('coral-collection:add', function() {
+              tree.expanded = true;
+            });
+
+            tree.addEventListener('coral-collection:remove', function() {
+              if (!tree.items.length) {
+                tree.expanded = false;
+              }
+            });
+          });
+        </script>
+      </div>
 
       <h2 class="coral-Heading coral-Heading--2">With interactive elements</h2>
-      <coral-tree>
-        <coral-tree-item>
-          <coral-tree-item-content>
-            <input type="checkbox" coral-interactive/>
-            Item 1
-          </coral-tree-item-content>
-        </coral-tree-item>
-        <coral-tree-item>
-          <coral-tree-item-content>
-            <select coral-interactive>
-              <option>Option 1</option>
-              <option>Option 2</option>
-              <option>Option 3</option>
-            </select>
-            Item 2
-          </coral-tree-item-content>
-        </coral-tree-item>
-        <coral-tree-item>
-          <coral-tree-item-content>
-            <button coral-interactive>Click me</button>
-            Item 3
-          </coral-tree-item-content>
-        </coral-tree-item>
-        <coral-tree-item>
-          <coral-tree-item-content>
-            <textarea coral-interactive>Enter Text</textarea>
-            Item 4
-          </coral-tree-item-content>
-        </coral-tree-item>
-        <coral-tree-item>
-          <coral-tree-item-content>
-            <input type="radio" coral-interactive/>
-            Item 5
-          </coral-tree-item-content>
-        </coral-tree-item>
-      </coral-tree>
+      <div class="markup">
+        <coral-tree>
+          <coral-tree-item>
+            <coral-tree-item-content>
+              <input type="checkbox" coral-interactive/>
+              Item 1
+            </coral-tree-item-content>
+          </coral-tree-item>
+          <coral-tree-item>
+            <coral-tree-item-content>
+              <select coral-interactive>
+                <option>Option 1</option>
+                <option>Option 2</option>
+                <option>Option 3</option>
+              </select>
+              Item 2
+            </coral-tree-item-content>
+          </coral-tree-item>
+          <coral-tree-item>
+            <coral-tree-item-content>
+              <button coral-interactive>Click me</button>
+              Item 3
+            </coral-tree-item-content>
+          </coral-tree-item>
+          <coral-tree-item>
+            <coral-tree-item-content>
+              <textarea coral-interactive>Enter Text</textarea>
+              Item 4
+            </coral-tree-item-content>
+          </coral-tree-item>
+          <coral-tree-item>
+            <coral-tree-item-content>
+              <input type="radio" coral-interactive/>
+              Item 5
+            </coral-tree-item-content>
+          </coral-tree-item>
+        </coral-tree>
+      </div>
     </section>
-
-  <script>
-    var tree = document.getElementById('tree-item');
-    var add = document.getElementById('add-item');
-    var remove = document.getElementById('remove-item');
-
-    add.addEventListener('click', function(e) {
-      e.preventDefault();
-      tree.items.add({
-        content: {
-          textContent: 'Sub item ' + (tree.items.length + 1)
-        }
-      });
-    });
-
-    remove.addEventListener('click', function(e) {
-      e.preventDefault();
-      tree.items.length && tree.items.last().remove();
-    });
-
-    tree.addEventListener('coral-collection:add', function() {
-      tree.expanded = true;
-    });
-
-    tree.addEventListener('coral-collection:remove', function() {
-      if (!tree.items.length) {
-        tree.expanded = false;
-      }
-    });
-  </script>
   </body>
 
 </html>
