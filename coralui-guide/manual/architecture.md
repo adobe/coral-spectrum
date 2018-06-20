@@ -55,6 +55,7 @@ These dependencies are:
 * [Custom Elements v1 polyfill](https://github.com/webcomponents/custom-elements/) with built-in components support
 * [Promise polyfill](https://www.npmjs.com/package/promise-polyfill) for IE11 support
 * [CustomEvent polyfill](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent#Polyfill) for IE11 support
+* [ResizeObserver polyfill](https://github.com/que-etc/resize-observer-polyfill) to detect element size changes
 * Element `closest(), matches(), remove() and classList` polyfills for IE11 support
 * [DOMly](https://github.com/lazd/domly) to render HTML templates
 * [Vent](https://github.com/adobe/vent) for DOM event delegation

@@ -649,10 +649,6 @@ class Masonry extends ComponentMixin(HTMLElement) {
     
     this.classList.add(CLASSNAME);
     
-    // Support cloneNode
-    const object = this.querySelector('object');
-    if (object && object.parentNode === this) { this.removeChild(object); }
-    
     // Default reflected attributes
     if (!this._layout) { this.layout = layouts.FIXED_CENTERED; }
   

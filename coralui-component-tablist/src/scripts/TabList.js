@@ -482,12 +482,6 @@ class TabList extends ComponentMixin(HTMLElement) {
     if (template) {
       template.remove();
     }
-  
-    // Remove the object if it's already there
-    const object = this.querySelector('object');
-    if (object && object.parentNode === this) {
-      this.removeChild(object);
-    }
     
     // Insert tab line
     this.appendChild(this._elements.line);

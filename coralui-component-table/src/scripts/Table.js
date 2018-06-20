@@ -2454,10 +2454,9 @@ class Table extends ComponentMixin(HTMLTableElement) {
     
     // cloneNode support
     const wrapper = this.querySelector('._coral-Table-wrapper-container');
-    const object = this.querySelector('object');
-    
-    if (wrapper) { wrapper.remove(); }
-    if (object && object.parentNode === this) { this.removeChild(object); }
+    if (wrapper) {
+      wrapper.remove();
+    }
   
     // Append frag
     this.appendChild(frag);

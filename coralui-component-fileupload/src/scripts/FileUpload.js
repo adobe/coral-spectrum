@@ -1075,13 +1075,7 @@ class FileUpload extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     if (inputElement) {
       inputElement.parentNode.removeChild(inputElement);
     }
-  
-    // Remove the object if it's already there
-    const object = this.querySelector('object');
-    if (object && object.parentNode === this) {
-      this.removeChild(object);
-    }
-  
+    
     // Add the input to the component
     this.appendChild(this._elements.input);
     

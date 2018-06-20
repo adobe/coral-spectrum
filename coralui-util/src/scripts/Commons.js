@@ -15,8 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import ResizeObserver from './ResizeObserver';
-import {Promise} from '../../../coralui-externals';
+import {ResizeObserver, Promise} from '../../../coralui-externals';
 
 // Used for unique IDs
 let nextID = 0;
@@ -152,7 +151,20 @@ function isHTMLUnknownElementIE(name) {
 class Commons {
   /** @ignore */
   constructor() {
-    this._resizeEvent = new ResizeObserver();
+    // Create a Map to link elements to observe to their resize event callbacks
+    this._resizeObserverMap = new Map();
+    
+    this._resizeObserver = new ResizeObserver((entries) => {
+      for (let i = 0; i < entries.length; i++) {
+        const observedElement = entries[i].target;
+        const allCallbacks = this._resizeObserverMap.get(observedElement);
+        if (allCallbacks) {
+          for (let j = 0; j < allCallbacks.length; j++) {
+            allCallbacks[j].call(observedElement);
+          }
+        }
+      }
+    });
     
     const focusableElements = FOCUSABLE_ELEMENTS.slice();
     this._focusableElementsSelector = focusableElements.join(',');
@@ -652,7 +664,14 @@ class Commons {
    */
   // eslint-disable-next-line func-names
   addResizeListener(element, onResize) {
-    this._resizeEvent._addResizeListener(element, onResize);
+    // Map callback to element
+    if (!this._resizeObserverMap.has(element)) {
+      this._resizeObserverMap.set(element, []);
+    }
+    this._resizeObserverMap.get(element).push(onResize);
+    
+    // Observe element resize events
+    this._resizeObserver.observe(element);
   }
   
   /**
@@ -665,7 +684,16 @@ class Commons {
    */
   // eslint-disable-next-line func-names
   removeResizeListener(element, onResize) {
-    this._resizeEvent._removeResizeListener(element, onResize);
+    // Stop observing element resize events
+    this._resizeObserver.unobserve(element);
+    this._resizeObserver.disconnect(element);
+    
+    // Remove event from map
+    const onResizeEvents = this._resizeObserverMap.get(element);
+    const index = onResizeEvents.indexOf(onResize);
+    if (index !== -1) {
+      onResizeEvents.splice(index, 1);
+    }
   }
   
   /**

@@ -4,6 +4,7 @@ import './polyfills/element.matches.js';
 import './polyfills/element.remove.js';
 import './polyfills/classList-partial-shim.js';
 import './polyfills/CustomEvent.js';
+import ResizeObserver from 'resize-observer-polyfill/dist/ResizeObserver';
 // Accessibility
 import '@adobe/focus-ring-polyfill';
 // @IE
@@ -27,5 +28,6 @@ import './polyfills/document.createElement-patch.js';
 export {
   Promise,
   Vent,
-  PopperJS
+  PopperJS,
+  ResizeObserver
 }
