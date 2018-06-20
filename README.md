@@ -119,7 +119,7 @@ Once the installation is complete, you can use below [gulp](https://gulpjs.com/)
 * `gulp karma-watch` to debug the tests on localhost:9876 by default.
 * `gulp docs` to build the documentation. 
 
-Each component can be built independently.
+Each component can be built independently. Use `--host myhost` option to specify dev server hostname.  
 
 
 

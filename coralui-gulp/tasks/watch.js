@@ -18,7 +18,8 @@ module.exports = function(gulp) {
   const path = require('path');
   const runSequence = require('run-sequence').use(gulp);
   const server = require('gulp-server-livereload');
-  const util = require('../helpers/util');
+  const util = require('gulp-util');
+  const root = require('../helpers/util').getRoot();
   
   gulp.task('build+watch', function() {
     runSequence(
@@ -30,8 +31,6 @@ module.exports = function(gulp) {
   });
   
   gulp.task('watch', function() {
-    const root = util.getRoot();
-    
     gulp.watch([
       path.join(root, 'coralui-*/index.js'),
       path.join(root, 'coralui-*/libs/**'),
@@ -45,6 +44,7 @@ module.exports = function(gulp) {
     
     return gulp.src('./')
       .pipe(server({
+        host: util.env.host || 'localhost',
         port: 9001,
         livereload: false,
         directoryListing: true
