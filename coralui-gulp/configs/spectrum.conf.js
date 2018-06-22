@@ -93,6 +93,11 @@ module.exports = [
     spectrum: /\.spectrum-Shell/g,
     coral: '._coral-ShellIgnore'
   },
+  // @compat .coral-DecoratedTextfield
+  {
+    spectrum: /\.spectrum-ClearButton/g,
+    coral: '._coral-ClearButton, .coral-DecoratedTextfield > ._coral-Button'
+  },
   // Coral Components
   {
     spectrum: /\.spectrum-/g,
