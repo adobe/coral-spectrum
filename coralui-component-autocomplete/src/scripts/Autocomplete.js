@@ -149,6 +149,7 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     events[`global:capture:mousedown #${overlayId} button[is="coral-buttonlist-item"]`] = '_handleSelect';
     events[`global:capture:scroll #${overlayId} [handle="selectList"]`] = '_onScroll';
     events[`global:capture:mousewheel #${overlayId} [handle="selectList"]`] = '_onMouseWheel';
+    events[`global:capture:mousedown #${overlayId} [handle="selectList"]`] = '_onMouseDown';
     
     // Events
     this._delegateEvents(events);
@@ -1108,6 +1109,10 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     }
   }
   
+  _onMouseDown(event) {
+    this._isOverlayScrollBarClicked = event.matchedTarget.clientWidth <= event.offsetX;
+  }
+  
   /** @private */
   _handleScrollBottom() {
     const selectList = this._elements.selectList;
@@ -1285,8 +1290,9 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   /** @private */
   _handleInput(event) {
     // Don't set value and hide suggestions while scrolling overlay
-    if (this._isOverlayScrolling) {
+    if (this._isOverlayScrolling || this._isOverlayScrollBarClicked) {
       this._isOverlayScrolling = false;
+      this._isOverlayScrollBarClicked = false;
       return;
     }
     
