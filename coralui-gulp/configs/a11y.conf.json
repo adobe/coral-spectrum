@@ -1,0 +1,6 @@
+{
+  "showOnlyViolations": true,
+  "headless": true,
+  "verbose": true,
+  "folderOutputReport": "build/a11y"
+}

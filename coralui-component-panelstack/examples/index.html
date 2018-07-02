@@ -83,16 +83,18 @@
         <a href="#" class="coral-Link cycle" data-target="panel-well">Next</a>
 
         <script>
-          Coral.events.on('click', '.cycle', function(event) {
-            event.preventDefault();
+          window.addEventListener('load', function() {
+            Coral.events.on('click', '.cycle', function(event) {
+              event.preventDefault();
 
-            var panel = document.getElementById(this.dataset.target);
-            var items = panel.items.getAll();
-            var selectedItem = panel.selectedItem;
+              var panel = document.getElementById(this.dataset.target);
+              var items = panel.items.getAll();
+              var selectedItem = panel.selectedItem;
 
-            var next = selectedItem === items.slice(-1)[0] ? items[0] : items[items.indexOf(selectedItem) + 1];
+              var next = selectedItem === items.slice(-1)[0] ? items[0] : items[items.indexOf(selectedItem) + 1];
 
-            next.setAttribute('selected', '');
+              next.setAttribute('selected', '');
+            });
           });
         </script>
       </div>

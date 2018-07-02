@@ -9,61 +9,55 @@
   <script src="Coral.Element.js"></script>
 
   <style>
-    body {
-      padding: 15px;
-    }
-
     .col {
       float: left;
       margin-right: 12px;
       width: 480px;
       padding: 10px;
     }
-
-    .coral-Heading {
-      margin: 15px 0;
-    }
   </style>
 </head>
 <body class="coral--light">
 
-<h1 class="coral-Heading coral-Heading--2">Example of Coral.Element registered with CustomElements v0 via Coral.register()</h1>
+<section class="u-coral-margin">
+  <h1 class="coral-Heading coral-Heading--2">Example of Coral.Element registered with CustomElements v0 via Coral.register()</h1>
 
-<div class="col">
-  <h3 class="coral-Heading coral-Heading--3">Drawer Down</h3>
-  <div class="demo-direction-down">
-    <coral-element>
-      <coral-checkbox>CustomElements v1 checkbox</coral-checkbox>
-    </coral-element>
+  <div class="col">
+    <h3 class="coral-Heading coral-Heading--3">Drawer Down</h3>
+    <div class="demo-direction-down">
+      <coral-element>
+        <coral-checkbox>CustomElements v1 checkbox</coral-checkbox>
+      </coral-element>
+    </div>
+
+    <h3 class="coral-Heading coral-Heading--3">Drawer Up</h3>
+    <div class="demo-direction-up">
+      <coral-element open direction="up">
+        <button is="coral-button">CustomElements v1 button</button>
+      </coral-element>
+    </div>
   </div>
 
-  <h3 class="coral-Heading coral-Heading--3">Drawer Up</h3>
-  <div class="demo-direction-up">
-    <coral-element open direction="up">
-      <button is="coral-button">CustomElements v1 button</button>
-    </coral-element>
-  </div>
-</div>
+  <div class="col coral--dark">
+    <h3 class="coral-Heading coral-Heading--3">Dark Drawer Down</h3>
+    <div class="demo-direction-down">
+      <coral-element>
+        <coral-checkbox>CustomElements v1 checkbox</coral-checkbox>
+      </coral-element>
+    </div>
 
-<div class="col coral--dark">
-  <h3 class="coral-Heading coral-Heading--3">Dark Drawer Down</h3>
-  <div class="demo-direction-down">
-    <coral-element>
-      <coral-checkbox>CustomElements v1 checkbox</coral-checkbox>
-    </coral-element>
+    <h3 class="coral-Heading coral-Heading--3">Dark Drawer Up</h3>
+    <div class="demo-direction-up">
+      <coral-element open direction="up">
+        <button is="coral-button">CustomElements v1 button</button>
+      </coral-element>
+    </div>
   </div>
-
-  <h3 class="coral-Heading coral-Heading--3">Dark Drawer Up</h3>
-  <div class="demo-direction-up">
-    <coral-element open direction="up">
-      <button is="coral-button">CustomElements v1 button</button>
-    </coral-element>
-  </div>
-</div>
-<script>
-  Coral.commons.ready(document.querySelector('coral-element'), function(el) {
-    console.log(el);
-  });
-</script>
+  <script>
+    Coral.commons.ready(document.querySelector('coral-element'), function(el) {
+      console.log(el);
+    });
+  </script>
+</section>
 </body>
 </html>

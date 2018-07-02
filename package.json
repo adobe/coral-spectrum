@@ -7,7 +7,7 @@
     "url": "https://git.corp.adobe.com/Coral/coralui/tree/release/coral-spectrum"
   },
   "scripts": {
-    "start": "gulp run",
+    "start": "gulp",
     "lint": "gulp lint",
     "build": "gulp build",
     "test": "gulp test",
@@ -44,7 +44,9 @@
     "esdoc-standard-plugin": "^1.0.0",
     "eslint-plugin-babel": "^4.1.2",
     "fs-extra": "^4.0.2",
+    "glob-all": "^3.1.0",
     "gulp": "^3.9.1",
+    "gulp-axe-webdriver": "^2.1.2",
     "gulp-better-rollup": "^1.1.1",
     "gulp-bump": "^2.7.0",
     "gulp-domly": "^0.1.0",

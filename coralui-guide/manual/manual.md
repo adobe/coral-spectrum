@@ -55,7 +55,7 @@ You'll find a Webpack config example at https://git.corp.adobe.com/ringel/coralu
 First verify the `.npmrc` configuration then run `npm i`.
  
 Once the installation is complete, you can use below [gulp](https://gulpjs.com/) tasks to work on Coral Spectrum components :
-* `gulp run` to generate the build and run the dev server on localhost:9001 by default.
+* `gulp` to generate the build and run the dev server on localhost:9001 by default.
 * `gulp build` to generate the build.
 * `gulp watch` to run the dev server on localhost:9001 by default. 
 * `gulp test` to generate the build and run the tests.

@@ -98,58 +98,60 @@
       </coral-tooltip>
 
       <script>
-        var target = [
-          '#target_1',
-          '#target_2',
-          '#target_3',
-          '#target_4',
-          '#target_5'
-        ];
-        target.curIndex = 0;
+        window.addEventListener('load', function() {
+          var target = [
+            '#target_1',
+            '#target_2',
+            '#target_3',
+            '#target_4',
+            '#target_5'
+          ];
+          target.curIndex = 0;
 
-        var placement = [
-          'right',
-          'bottom',
-          'left',
-          'top'
-        ];
-        placement.curIndex = 0;
+          var placement = [
+            'right',
+            'bottom',
+            'left',
+            'top'
+          ];
+          placement.curIndex = 0;
 
-        var variant = [
-          'info',
-          'error',
-          'warning',
-          'success',
-          'inspect'
-        ];
-        variant.curIndex = 0;
+          var variant = [
+            'info',
+            'error',
+            'warning',
+            'success',
+            'inspect'
+          ];
+          variant.curIndex = 0;
 
-        var tooltip = document.querySelector('#tooltip');
-        tooltip.show();
+          var tooltip = document.querySelector('#tooltip');
+          tooltip.show();
 
-        function cycleTargets() {
-          tooltip.target = target[++target.curIndex % target.length];
-          console.log('target changed to', tooltip.target);
-        }
+          function cycleTargets() {
+            tooltip.target = target[++target.curIndex % target.length];
+            console.log('target changed to', tooltip.target);
+          }
 
-        function cyclePointFrom() {
-          tooltip.placement = placement[++placement.curIndex % placement.length];
-          console.log('placement changed to', tooltip.placement);
-        }
+          function cyclePointFrom() {
+            tooltip.placement = placement[++placement.curIndex % placement.length];
+            console.log('placement changed to', tooltip.placement);
+          }
 
-        function cycleVariant() {
-          tooltip.variant = variant[++variant.curIndex % variant.length];
-          console.log('variant changed to', tooltip.variant);
-        }
+          function cycleVariant() {
+            tooltip.variant = variant[++variant.curIndex % variant.length];
+            console.log('variant changed to', tooltip.variant);
+          }
 
-        function toggleVisibility() {
-          tooltip.open = !tooltip.open;
-        }
+          function toggleVisibility() {
+            tooltip.open = !tooltip.open;
+          }
 
-        Coral.keys.on('f', cyclePointFrom);
-        Coral.keys.on('a', cycleTargets);
-        Coral.keys.on('t', toggleVisibility);
-        Coral.keys.on('v', cycleVariant);
+          Coral.keys.on('f', cyclePointFrom);
+          Coral.keys.on('a', cycleTargets);
+          Coral.keys.on('t', toggleVisibility);
+          Coral.keys.on('v', cycleVariant);
+        });
       </script>
     </div>
   </section>

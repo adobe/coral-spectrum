@@ -7,6 +7,7 @@ module.exports = function(gulp) {
   require('./tasks/clean.js')(gulp);
   require('./tasks/lint.js')(gulp);
   require('./tasks/i18n.js')(gulp);
+  require('./tasks/a11y.js')(gulp);
   require('./tasks/examples.js')(gulp);
   require('./tasks/docs.js')(gulp);
   require('./tasks/deploy.js')(gulp);
@@ -30,17 +31,6 @@ module.exports = function(gulp) {
     );
   });
   
-  gulp.task('run', function() {
-    runSequence(
-      'clean',
-      'styles',
-      'resources',
-      'templates',
-      'scripts',
-      'watch'
-    );
-  });
-  
   gulp.task('dev', function() {
     runSequence(
       'clean',
@@ -57,17 +47,11 @@ module.exports = function(gulp) {
   gulp.task('default', function() {
     runSequence(
       'clean',
-      'lint',
       'styles',
       'resources',
       'templates',
       'scripts',
-      'karma',
-      'minify',
-      'examples',
-      'playground',
-      'docs',
-      'cleanup'
+      'watch'
     );
   });
 };
