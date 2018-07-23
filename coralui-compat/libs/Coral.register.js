@@ -449,6 +449,8 @@ if (typeof exports !== 'undefined') {
    
    @param {Object} options
    Component options.
+   @param {Object} options.namespace
+   Namespace where to store the constructor.
    @param {String} options.name
    Name of the constructor (i.e. 'Accordion.Item'). The constructor will be available under 'Coral' at the path
    specified by the name.
@@ -631,7 +633,7 @@ if (typeof exports !== 'undefined') {
     var Constructor = document.registerElement(options.tagName, registrationOptions);
     
     // Assign the constructor at the correct location within the Coral namespace
-    Coral.commons.setSubProperty(Coral, options.name, Constructor);
+    Coral.commons.setSubProperty(options.namespace || Coral, options.name, Constructor);
     
     return Constructor;
   };

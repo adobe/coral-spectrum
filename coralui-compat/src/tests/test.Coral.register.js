@@ -1176,7 +1176,20 @@ describe('Coral.register', function() {
       var clonedEl = el.cloneNode();
       expect(clonedEl).to.have.property('className', 'first-class');
     });
-    
   });
   
+  describe('namespace', function() {
+    it('should be possible to define a component in a custom namespace', function() {
+      var Custom = {};
+  
+      var constructor = Coral.register({
+        tagName: 'custom-component',
+        name: 'Component',
+        namespace: Custom
+      });
+      
+      expect(Custom.Component).to.equal(constructor);
+      expect(new Custom.Component().tagName).to.equal('CUSTOM-COMPONENT');
+    });
+  });
 });
