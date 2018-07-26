@@ -572,9 +572,8 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
-  
-    this._elements.button.classList.toggle('_coral-Button--dropdown', this._variant === variant.DEFAULT);
-    this._elements.button.classList.toggle('_coral-Button--quiet--dropdown', this._variant === variant.QUIET);
+    
+    this._elements.button.classList.toggle('_coral-FieldButton--quiet', this._variant === variant.QUIET);
   }
   
   /** @ignore */

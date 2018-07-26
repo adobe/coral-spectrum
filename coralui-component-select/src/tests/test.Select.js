@@ -879,16 +879,14 @@ describe('Select', function() {
         el.variant = Select.variant.QUIET;
 
         expect(el.variant).to.equal('quiet');
-        expect(el._elements.button.classList.contains('_coral-Button--quiet--dropdown')).to.be.true;
-        expect(el._elements.button.classList.contains('_coral-Button--dropdown')).to.be.false;
+        expect(el._elements.button.classList.contains('_coral-FieldButton--quiet')).to.be.true;
       });
 
       it('should set the default variant', function() {
         el.variant = Select.variant.DEFAULT;
 
         expect(el.variant).to.equal(Select.variant.DEFAULT);
-        expect(el._elements.button.classList.contains('_coral-Button--dropdown')).to.be.true;
-        expect(el._elements.button.classList.contains('_coral-Button--quiet--dropdown')).to.be.false;
+        expect(el._elements.button.classList.contains('_coral-FieldButton--quiet')).to.be.false;
       });
     });
 
@@ -1165,12 +1163,10 @@ describe('Select', function() {
 
       it('should remove variant classnames when variant changes', function() {
         const el = helpers.build(window.__html__['Select.variant.quiet.html']);
-        expect(el._elements.button.classList.contains('_coral-Button--quiet--dropdown')).to.be.true;
-        expect(el._elements.button.classList.contains('_coral-Button--dropdown')).to.be.false;
+        expect(el._elements.button.classList.contains('_coral-FieldButton--quiet')).to.be.true;
         
         el.variant = Select.variant.DEFAULT;
-        expect(el._elements.button.classList.contains('_coral-Button--dropdown')).to.be.true;
-        expect(el._elements.button.classList.contains('_coral-Button--quiet--dropdown')).to.be.false;
+        expect(el._elements.button.classList.contains('_coral-FieldButton--quiet')).to.be.false;
       });
     });
 
