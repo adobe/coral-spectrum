@@ -167,7 +167,7 @@ class ColumnViewColumn extends ComponentMixin(HTMLElement) {
    See {@link ColumnViewSelectionModeEnum}.
    
    @type {String}
-   @htmlattribute selectionmode
+   @htmlattribute _selectionmode
    @htmlattributereflected
    @private
    */
@@ -177,7 +177,7 @@ class ColumnViewColumn extends ComponentMixin(HTMLElement) {
   set _selectionMode(value) {
     value = transform.string(value).toLowerCase();
     this.__selectionMode = validate.enumeration(selectionMode)(value) && value || null;
-    this._reflectAttribute('selectionmode', this.__selectionMode);
+    this._reflectAttribute('_selectionmode', this.__selectionMode);
   
     this.items.getAll().forEach(item => this._toggleItemSelection(item));
     
