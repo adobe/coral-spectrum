@@ -24,7 +24,7 @@ import '@spectrum/spectrum-css/dist/icons/AS.loadIcons';
 
 const SPECTRUM_ICONS = 'spectrum-icons';
 const SPECTRUM_ICONS_COLOR = 'spectrum-icons-color';
-const SPECTRUM_CSS_ICONS = 'spectrum-css-icons';
+const SPECTRUM_CSS_ICONS = 'spectrum-css-icons-medium';
 
 const ICONS = [SPECTRUM_ICONS, SPECTRUM_ICONS_COLOR, SPECTRUM_CSS_ICONS];
 const ICONS_PATH = commons.options.icons;
