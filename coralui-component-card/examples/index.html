@@ -432,18 +432,17 @@
     <script>
       window.addEventListener('load', function() {
         var images = document.getElementsByTagName('img');
-
         const XMLHttpRequest = new window.XMLHttpRequest();
         XMLHttpRequest.onreadystatechange = function() {
-          if (!(XMLHttpRequest.readyState == 4 && XMLHttpRequest.status == 200)) {
-
-            // In this case we're in the top examples page and have to adjust the url accordingly
-            for (var i = 0; i < images.length; i++) {
-              images[i].src = '../../coralui-component-card/examples/' + images[i].src.split('/').slice(-2).join('/');
+          if (XMLHttpRequest.readyState === XMLHttpRequest.DONE) {
+            if (XMLHttpRequest.status != 200) {
+              // In this case we're in the top examples page and have to adjust the url accordingly
+              for (var i = 0; i < images.length; i++) {
+                images[i].src = '../../coralui-component-card/examples/' + images[i].src.split('/').slice(-2).join('/');
+              }
             }
           }
         };
-
         XMLHttpRequest.open('GET', images[0].src, true);
         XMLHttpRequest.send();
       });
