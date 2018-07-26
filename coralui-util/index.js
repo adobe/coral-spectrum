@@ -9,6 +9,8 @@ import validate from './src/scripts/Validation';
 
 /**
   @private
+ 
+  Utility that holds all mixins.
  */
 const mixin = {};
 

@@ -592,10 +592,7 @@ class ColorInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._elements.overlay.returnFocusTo(this.variant === variant.SWATCH ? event.matchedTarget : this._elements.input);
   }
   
-  // JSDocs inherited from Coral.mixin.formField
   _onInputChange(event) {
-    // method used by Coral.mixin.formField as a callback whenever a form field changes
-    
     if (event.target === this._elements.input) {
       // only handle changes to the hidden input field ...
       

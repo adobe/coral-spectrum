@@ -70,8 +70,7 @@ class Checkbox extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   Checked state for the checkbox. When the checked state is changed by user interaction a
-   {@link Coral.mixin.formField#event:change} event is triggered.
+   Checked state for the checkbox.
    
    @type {Boolean}
    @default false

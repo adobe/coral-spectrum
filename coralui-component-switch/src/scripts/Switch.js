@@ -66,8 +66,7 @@ class Switch extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   Whether the switch is on or off. Changing the checked value will cause a
-   {@link Coral.mixin.formField#event:change} event to be triggered.
+   Whether the switch is on or off.
    
    @type {Boolean}
    @default false

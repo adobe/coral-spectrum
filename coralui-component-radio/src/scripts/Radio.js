@@ -65,8 +65,7 @@ class Radio extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   Checked state for the radio, <code>true</code> is checked and <code>false</code> is unchecked. Changing the
-   checked value will cause a {@link Coral.mixin.formField.event:change} event to be triggered.
+   Checked state for the radio, <code>true</code> is checked and <code>false</code> is unchecked.
    
    @type {Boolean}
    @default false
