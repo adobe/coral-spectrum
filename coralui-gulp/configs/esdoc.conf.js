@@ -33,7 +33,7 @@ const config = {
         brand: {
           logo: path.join(root, 'coralui-guide/assets/coral.png'),
           title: 'Coral Spectrum',
-          repository: 'https://git.corp.adobe.com/Coral/coralui/tree/release/coral-spectrum',
+          repository: 'https://git.corp.adobe.com/Coral/coral-spectrum',
           site: 'http://coral-spectrum.corp.adobe.com'
         }
       }
