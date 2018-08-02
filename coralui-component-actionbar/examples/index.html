@@ -82,7 +82,7 @@
               <button is="coral-button" icon="viewList">View List</button>
             </coral-actionbar-item>
             <coral-actionbar-item>
-              <button is="coral-button" icon="viewColumn">View a loooooonoooooog Column</button>
+              <button is="coral-button" icon="viewColumn">View a <span style="color:red">loooooonoooooog Column</span></button>
             </coral-actionbar-item>
             <coral-actionbar-item>
               <button is="coral-button" class="custom" variant="quiet" disabled data-custom="text">Disable action</button>
@@ -154,8 +154,8 @@
             <button is="coral-button" variant="quiet" icon="globeRemove">Unpublish</button>
           </coral-actionbar-item>
           <coral-actionbar-item>
-            <button id="popover-button" is="coral-button" icon="search" title="Delete">Open Popover</button>
-            <coral-popover id="popover" target="#popover-button" placement="bottom">
+            <button class="popover-button" is="coral-button" icon="search" title="Delete">Open Popover</button>
+            <coral-popover target=".popover-button" placement="bottom">
               <coral-buttonlist>
                 <button is="coral-buttonlist-item" icon="add">Add</button>
                 <button is="coral-buttonlist-item" icon="move">Move</button>
