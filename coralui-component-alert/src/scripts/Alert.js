@@ -225,12 +225,13 @@ class Alert extends ComponentMixin(HTMLElement) {
     let variantValue = this.variant;
     
     // Warning icon is same as ERROR icon
-    if (variantValue === variant.WARNING) {
-      variantValue = variant.ERROR;
+    if (variantValue === variant.WARNING || variantValue === variant.ERROR) {
+      variantValue = 'alert';
     }
     
     // Inject the SVG icon
-    this.insertAdjacentHTML('afterbegin', Icon._renderSVG(`spectrum-css-icon-Alert${capitalize(variantValue)}`, ['_coral-Alert-icon']));
+    const iconName = capitalize(variantValue);
+    this.insertAdjacentHTML('afterbegin', Icon._renderSVG(`spectrum-css-icon-${iconName}Medium`, ['_coral-Alert-icon', `_coral-UIIcon-${iconName}Medium`]));
     this._elements.icon = this.querySelector('._coral-Alert-icon');
   }
   

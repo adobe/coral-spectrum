@@ -99,7 +99,7 @@ const ListItemMixin = (superClass) => class extends superClass {
   connectedCallback() {
     super.connectedCallback();
     
-    this.classList.add(CLASSNAME, '_coral-SelectList-item');
+    this.classList.add(CLASSNAME, '_coral-Menu-item');
   
     // The attribute that makes different types of list items co-exist
     // This is also used for event delegation

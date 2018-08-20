@@ -17,19 +17,19 @@
 
 // @spectrum support nested accordions
 ._coral-Accordion-item:not(.is-open) {
-  & > ._coral-Accordion-content {
+  & > ._coral-Accordion-itemContent {
     display: block;
     padding: 0 0 0 16*$px;
   }
 
-  & > ._coral-Accordion-indicator {
+  & > ._coral-Accordion-itemIndicator {
     transform: none;
   }
 }
 
 // @spectrum support animation
 ._coral-Accordion--animated {
-  ._coral-Accordion-content {
+  ._coral-Accordion-itemContent {
     overflow: hidden;
     transition: height ease 250ms;
   }

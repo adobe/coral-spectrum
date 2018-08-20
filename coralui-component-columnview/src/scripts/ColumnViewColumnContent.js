@@ -19,6 +19,13 @@
  @class Coral.ColumnView.Column.Content
  @classdesc ColumnView's Column content component
  @htmltag coral-columnview-column-content
- @return {HTMLElement}
+ @extends {HTMLElement}
  */
-export default () => document.createElement('coral-columnview-column-content');
+class ColumnViewColumnContent extends HTMLElement {
+  /** @ignore */
+  connectedCallback() {
+    this.classList.add('_coral-AssetList');
+  }
+}
+
+export default ColumnViewColumnContent;

@@ -82,10 +82,10 @@ const ALL_VARIANT_CLASSES = [];
 for (const variantValue in variant) {
   let value;
   if (variantValue === 'QUIET') {
-    value = `${CLASSNAME}--${variant.QUIET}--primary`;
+    value = `${CLASSNAME}--primary`;
   }
   else if (variantValue === 'MINIMAL') {
-    value = `${CLASSNAME}--${variant.QUIET}--secondary`;
+    value = `${CLASSNAME}--secondary`;
   }
   else {
     value = `${CLASSNAME}--${variant[variantValue]}`;
@@ -318,15 +318,20 @@ const ButtonMixin = (superClass) => class extends superClass {
     
     // removes every existing variant
     this.classList.remove(...ALL_VARIANT_CLASSES);
+    this.classList.remove(`${CLASSNAME}--quiet`);
     
     if (this._variant === variant.QUIET) {
-      this.classList.add(`${CLASSNAME}--${variant.QUIET}--primary`);
+      this.classList.add(CLASSNAME, `${CLASSNAME}--primary`, `${CLASSNAME}--quiet`);
+      this.classList.add(`${CLASSNAME}--quiet`);
     }
     else if (this._variant === variant.MINIMAL) {
-      this.classList.add(`${CLASSNAME}--${variant.QUIET}--secondary`);
+      this.classList.add(CLASSNAME, `${CLASSNAME}--secondary`, `${CLASSNAME}--quiet`);
     }
     else if (this._variant !== variant._CUSTOM) {
-      this.classList.add(`${CLASSNAME}--${this._variant}`);
+      this.classList.add(CLASSNAME, `${CLASSNAME}--${this._variant}`);
+    }
+    else {
+      this.classList.remove(CLASSNAME);
     }
   }
   
@@ -447,11 +452,13 @@ const ButtonMixin = (superClass) => class extends superClass {
   connectedCallback() {
     super.connectedCallback();
     
-    this.classList.add(CLASSNAME);
-    
     // Default reflected attributes
     if (!this._variant) { this.variant = variant.PRIMARY; }
     if (!this._size) { this.size = size.MEDIUM; }
+    
+    if (this.variant !== variant._CUSTOM) {
+      this.classList.add(CLASSNAME);
+    }
     
     // Create a fragment
     const fragment = document.createDocumentFragment();

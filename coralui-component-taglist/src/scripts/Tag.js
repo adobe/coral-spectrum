@@ -17,6 +17,7 @@
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import '../../../coralui-component-button';
+import {Icon} from '../../../coralui-component-icon';
 import base from '../templates/base';
 import {transform, validate, events, i18n} from '../../../coralui-util';
 
@@ -166,7 +167,7 @@ class Tag extends ComponentMixin(HTMLElement) {
       // Create or fetch the label element.
       label: this.querySelector('coral-tag-label') || document.createElement('coral-tag-label')
     };
-    base.call(this._elements, {i18n});
+    base.call(this._elements, {i18n, Icon});
   }
   
   /**

@@ -70,6 +70,21 @@ class ColorInputSlider extends Slider {
     barStyle.filter = `progid:DXImageTransform.Microsoft.gradient(startColorstr='${stops[0]}', endColorstr='${stops[1]}', gradientType=1)`;
   }
   
+  _moveHandles() {
+    const calculatePercent = (value) => (value - this.min) / (this.max - this.min) * 100;
+    const labelValue = [];
+    
+    // Set the handle position as a percentage based on the stored values
+    this._elements.handles.forEach((handle, index) => {
+      const percent = calculatePercent(this._values[index]);
+      handle.style.left = `${percent}%`;
+      
+      labelValue.push(this._getLabel(this._values[index]));
+    });
+    
+    this._elements.labelValue.textContent = labelValue.length > 1 ? labelValue.join(' - ') : labelValue[0];
+  }
+  
   /** @override */
   _getTemplate() {
     return sliderBase;

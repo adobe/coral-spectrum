@@ -53,7 +53,7 @@ const size = {
 };
 
 // the waits's base classname
-const CLASSNAME = '_coral-Loader';
+const CLASSNAME = '_coral-CircleLoader';
 
 /**
  @class Coral.Wait
@@ -276,7 +276,7 @@ class Wait extends ComponentMixin(HTMLElement) {
     if (this.centered) { this.centered = this.centered; }
   
     // Support cloneNode
-    const template = this.querySelectorAll('._coral-Loader-track, ._coral-Loader-fills');
+    const template = this.querySelectorAll('._coral-CircleLoader-track, ._coral-CircleLoader-fills');
     for (let i = 0; i < template.length; i++) {
       template[i].remove();
     }

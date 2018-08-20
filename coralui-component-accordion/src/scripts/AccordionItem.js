@@ -163,8 +163,8 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
   }
   
   _insertTemplate() {
-    const iconId = 'spectrum-css-icon-AccordionChevron';
-    const classes = ['_coral-Accordion-indicator', '_coral-Accordion-icon'];
+    const iconId = 'spectrum-css-icon-ChevronRightMedium';
+    const classes = ['_coral-Accordion-itemIndicator', '_coral-UIIcon-ChevronRightMedium'];
     
     if (this.label) {
       this.label.insertAdjacentHTML('afterend', Icon._renderSVG(iconId, classes));
@@ -211,7 +211,7 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
     this.setAttribute('role', 'presentation');
   
     // Support cloneNode
-    const template = this.querySelector('._coral-Accordion-icon');
+    const template = this.querySelector('._coral-Accordion-itemIndicator');
     if (template) {
       template.remove();
     }

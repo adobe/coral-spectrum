@@ -215,7 +215,7 @@ const ListMixin = (superClass) => class extends superClass {
   connectedCallback() {
     super.connectedCallback();
     
-    this.classList.add(CLASSNAME, '_coral-SelectList');
+    this.classList.add(CLASSNAME, '_coral-Menu');
     
     // Default reflected attributes
     if (!this._interaction) { this.interaction = interaction.ON; }

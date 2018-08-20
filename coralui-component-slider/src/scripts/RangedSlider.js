@@ -41,7 +41,6 @@ class RangedSlider extends Slider {
     if (!transform.booleanAttr(value)) {
       console.warn('Coral.RangedSlider: filled can not be set to false.');
     }
-    super.filled = true;
   }
   
   /**
@@ -163,16 +162,6 @@ class RangedSlider extends Slider {
   }
   
   /** @override */
-  _updateFill() {
-    const deltaMaxMinBase = 100 / (this.max - this.min);
-    const percent = (this._getLowestValue() - this.min) * deltaMaxMinBase;
-    const percentDiff = (this._getHighestValue() - this.min) * deltaMaxMinBase - percent;
-    
-    this._elements.fillHandle.style.left = `${percent}%`;
-    this._elements.fillHandle.style.width = `${percentDiff}%`;
-  }
-  
-  /** @override */
   _getTemplate() {
     return range;
   }
@@ -207,6 +196,8 @@ class RangedSlider extends Slider {
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();
+    
+    this.classList.add('_coral-Slider--range');
     
     // Set filled attribute by default
     this.setAttribute('filled', '');

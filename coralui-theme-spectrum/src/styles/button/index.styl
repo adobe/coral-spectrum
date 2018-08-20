@@ -20,13 +20,34 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
 
+// @spectrum
+button[is="coral-button"] {
+  padding-bottom: 1*$px;
+}
+
+._coral-Button,
+._coral-ActionButton {
   coral-icon + coral-button-label:not(:empty):not([hidden]),
   coral-icon + coral-anchorbutton-label:not(:empty):not([hidden]),
   coral-button-label:not(:empty):not([hidden]) + coral-icon,
   coral-anchorbutton-label:not(:empty):not([hidden]) + coral-icon {
     margin-left: 8*$px;
   }
+}
+
+// @compat
+._coral-Button--block {
+  display: flex;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  min-width: 0;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 // Clear Button doesn't have blue border when tab focused

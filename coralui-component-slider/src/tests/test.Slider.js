@@ -197,6 +197,7 @@ describe('Slider', function() {
     
     beforeEach(function() {
       el = new Slider();
+      el.style.width = '200px';
       helpers.target.appendChild(el);
       
       handle = el._elements.handles[0];

@@ -1,8 +1,8 @@
 <input type="checkbox" handle="input" class="_coral-Checkbox-input" id="{{data.commons.getUID()}}">
 <span class="_coral-Checkbox-box" handle="checkbox">
   <js>
-    this.checkbox.innerHTML = data.Icon._renderSVG('spectrum-css-icon-CheckboxCheckmark', ['_coral-Checkbox-checkmark']);
-    this.checkbox.innerHTML += data.Icon._renderSVG('spectrum-css-icon-CheckboxPartialCheckmark', ['_coral-Checkbox-partialCheckmark']);
+    this.checkbox.innerHTML = data.Icon._renderSVG('spectrum-css-icon-CheckmarkSmall', ['_coral-Checkbox-checkmark', '_coral-UIIcon-CheckmarkSmall']);
+    this.checkbox.innerHTML += data.Icon._renderSVG('spectrum-css-icon-DashSmall', ['_coral-Checkbox-partialCheckmark', '_coral-UIIcon-DashSmall']);
   </js>
 </span>
 <label class="_coral-Checkbox-label" handle="labelWrapper" for="{{this.input.id}}" hidden></label>

@@ -17,6 +17,7 @@ import ColumnViewPreviewValue from './src/scripts/ColumnViewPreviewValue';
 // Expose component on the Coral namespace
 window.customElements.define('coral-columnview', ColumnView);
 window.customElements.define('coral-columnview-column', ColumnViewColumn);
+window.customElements.define('coral-columnview-column-content', ColumnViewColumnContent);
 window.customElements.define('coral-columnview-item', ColumnViewItem);
 window.customElements.define('coral-columnview-item-thumbnail', ColumnViewItemThumbnail);
 window.customElements.define('coral-columnview-item-content', ColumnViewItemContent);

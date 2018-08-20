@@ -1,6 +1,15 @@
 import {helpers} from '../../../coralui-util/src/tests/helpers';
 import {Tree} from '../../../coralui-component-tree';
 
+// @todo
+const onIndicatorClick = (el, item) => {
+  el._onItemClick({
+    target: item.querySelector('._coral-TreeView-indicator'),
+    preventDefault: () => {},
+    stopPropagation: () => {}
+  });
+};
+
 describe('Tree', function() {
   // Assert whether an item is properly active or inactive.
   var assertActiveness = function(item, isSelected, isExpanded) {
@@ -294,11 +303,12 @@ describe('Tree', function() {
       const el = helpers.build(window.__html__['Tree.base.html']);
       
       var item = el.items.getAll()[1];
-      item._elements.header.click();
+      
+      onIndicatorClick(el, item);
       
       assertActiveness(item, false, true);
       
-      item._elements.header.click();
+      onIndicatorClick(el, item);
       
       assertActiveness(item, false, false);
     });
@@ -711,7 +721,7 @@ describe('Tree', function() {
       var subTree = item._elements.subTreeContainer;
       expect(header).not.to.be.null;
       expect(subTree).not.to.be.null;
-      expect(header.classList.contains('_coral-TreeView-link')).to.be.true;
+      expect(header.classList.contains('_coral-TreeView-itemLink')).to.be.true;
       expect(subTree.classList.contains('_coral-TreeView')).to.be.true;
     });
   });
@@ -729,7 +739,8 @@ describe('Tree', function() {
       
       expect(checkbox.checked).to.equal(true);
       assertActiveness(item, false, false);
-      item._elements.header.click();
+      
+      onIndicatorClick(el, item);
       
       assertActiveness(item, false, true);
       item._elements.content.click();
@@ -749,7 +760,7 @@ describe('Tree', function() {
       select.focus();
       
       assertActiveness(item, false, false);
-      item._elements.header.click();
+      onIndicatorClick(el, item);
       
       assertActiveness(item, false, true);
       item._elements.content.click();
@@ -766,7 +777,7 @@ describe('Tree', function() {
       button.click();
       
       assertActiveness(item, false, false);
-      item._elements.header.click();
+      onIndicatorClick(el, item);
       
       assertActiveness(item, false, true);
       item._elements.content.click();
@@ -785,7 +796,7 @@ describe('Tree', function() {
       textarea.blur();
       
       assertActiveness(item, false, false);
-      item._elements.header.click();
+      onIndicatorClick(el, item);
       
       assertActiveness(item, false, true);
       item._elements.content.click();
@@ -818,7 +829,7 @@ describe('Tree', function() {
   
       expect(radio.checked).to.equal(true);
       assertActiveness(item, false, false);
-      item._elements.header.click();
+      onIndicatorClick(el, item);
       
       assertActiveness(item, false, true);
       item._elements.content.click();

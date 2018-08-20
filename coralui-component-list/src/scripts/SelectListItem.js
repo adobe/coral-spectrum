@@ -20,7 +20,7 @@ import {transform} from '../../../coralui-util';
 import {Icon} from '../../../coralui-component-icon';
 import checkIcon from '../templates/checkIcon';
 
-const CLASSNAME = '_coral-SelectList-item';
+const CLASSNAME = '_coral-Menu-item';
 
 /**
  @class Coral.SelectList.Item
@@ -71,7 +71,7 @@ class SelectListItem extends ComponentMixin(HTMLElement) {
       handle: 'content',
       tagName: 'coral-selectlist-item-content',
       insert: function(content) {
-        this.appendChild(content);
+        this.insertBefore(content, this._elements.icon);
       }
     });
   }

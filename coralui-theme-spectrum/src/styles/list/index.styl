@@ -73,7 +73,7 @@ coral-selectlist-item-content {
 
 ._coral-BasicList,
 ._coral-BasicList-item,
-._coral-SelectList-divider {
+._coral-Menu-divider {
   display: block;
 }
 
@@ -115,7 +115,9 @@ coral-selectlist-item-content {
 
 ._coral-ButtonList-item {
   width: 100%;
-  border: none;
+  border-top: 0;
+  border-bottom: 0;
+  border-right: 0;
   font-family: inherit;
   border-radius: 0;
 }
@@ -128,6 +130,10 @@ coral-selectlist-item-content {
   font-weight: bold;
   text-transform: uppercase;
   content: attr(label);
+}
+
+coral-selectlist-item._coral-Menu-item {
+  display: flex;
 }
 
 @require 'light';

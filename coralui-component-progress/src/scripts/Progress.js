@@ -59,7 +59,7 @@ const labelPosition = {
 };
 
 // Base classname
-const CLASSNAME = '_coral-Loader--bar';
+const CLASSNAME = '_coral-BarLoader';
 
 /**
  @class Coral.Progress
@@ -246,7 +246,7 @@ class Progress extends ComponentMixin(HTMLElement) {
     this._labelPosition = validate.enumeration(labelPosition)(value) && value || labelPosition.LEFT;
     this._reflectAttribute('labelposition', this._labelPosition);
     
-    this.classList.toggle('_coral-Loader--side-label', this._labelPosition === labelPosition.SIDE);
+    this.classList.toggle('_coral-BarLoader--sideLabel', this._labelPosition === labelPosition.SIDE);
     
     let elements = ['label', 'percentage', 'bar'];
     if (this.labelPosition === labelPosition.RIGHT) {

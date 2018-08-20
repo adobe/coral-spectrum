@@ -24,6 +24,7 @@ window.customElements.define('coral-buttonlist', ButtonList);
 window.customElements.define('coral-buttonlist-item', ButtonListItem, {extends: 'button'});
 window.customElements.define('coral-selectlist', SelectList);
 window.customElements.define('coral-selectlist-item', SelectListItem);
+window.customElements.define('coral-selectlist-item-content', SelectListItemContent);
 window.customElements.define('coral-selectlist-group', SelectListGroup);
 
 List.Divider = ListDivider;

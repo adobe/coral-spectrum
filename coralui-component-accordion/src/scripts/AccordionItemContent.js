@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-const CLASSNAME = '_coral-Accordion-content';
+const CLASSNAME = '_coral-Accordion-itemContent';
 
 /**
  @class Coral.Accordion.Item.Content

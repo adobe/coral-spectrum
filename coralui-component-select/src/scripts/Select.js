@@ -266,8 +266,6 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._placeholder = transform.string(value);
     this._reflectAttribute('placeholder', this._placeholder);
     
-    let limitWidth = false;
-    
     // case 1:  p +  m +  se = p
     // case 2:  p +  m + !se = p
     // case 6:  p + !m + !se = p
@@ -280,7 +278,6 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     else if (this.hasAttribute('multiple')) {
       // case 7: !p +  m +  se = selectedItems
       if (this.selectedItem) {
-        limitWidth = true;
         this._elements.label.classList.remove('is-placeholder');
         this._elements.label.textContent = this.selectedItems.map(item => item.textContent.trim()).join(', ');
       }
@@ -308,15 +305,6 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
         // label must be cleared when there is no placeholder and no item to select
         this._elements.label.textContent = '';
       }
-    }
-    
-    // case 7: limit width to allow text ellipsis
-    if (limitWidth) {
-      const width = this.offsetWidth;
-      this.style.maxWidth = width > 0 ? `${width}px` : '';
-    }
-    else {
-      this.style.maxWidth = '';
     }
   }
   

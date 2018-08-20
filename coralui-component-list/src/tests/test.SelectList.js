@@ -4,7 +4,7 @@ import {SelectList} from '../../../coralui-component-list';
 describe('SelectList', function() {
   describe('Instantiation', function() {
     function testDefaultInstance(el) {
-      expect(el.classList.contains('_coral-SelectList')).to.be.true;
+      expect(el.classList.contains('_coral-Menu')).to.be.true;
       expect(el.getAttribute('role')).equal('listbox');
     }
 

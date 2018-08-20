@@ -20,7 +20,7 @@ import {Icon} from '../../../coralui-component-icon';
 import {Checkbox} from '../../../coralui-component-checkbox';
 import {transform, validate} from '../../../coralui-util';
 
-const CLASSNAME = '_coral-MillerColumn-item';
+const CLASSNAME = '_coral-AssetList-item';
 
 /**
  Enumeration for {@link ColumnViewItem} variants.
@@ -114,9 +114,9 @@ class ColumnViewItem extends ComponentMixin(HTMLElement) {
   
     if (this._variant === variant.DRILLDOWN) {
       // Render chevron on demand
-      const childIndicator = this.querySelector('._coral-MillerColumn-childIndicator');
+      const childIndicator = this.querySelector('._coral-AssetList-itemChildIndicator');
       if (!childIndicator) {
-        this.insertAdjacentHTML('beforeend', Icon._renderSVG('spectrum-css-icon-MillerColumnRightChevron', ['_coral-MillerColumn-childIndicator']));
+        this.insertAdjacentHTML('beforeend', Icon._renderSVG('spectrum-css-icon-ChevronRightMedium', ['_coral-AssetList-itemChildIndicator', '_coral-UIIcon-ChevronRightMedium']));
       }
       
       this.classList.add('is-branch');
@@ -220,11 +220,11 @@ class ColumnViewItem extends ComponentMixin(HTMLElement) {
     if (name === '_selectable') {
       // Disable selection
       if (value === null) {
-        this.classList.remove('is-branch-selectable');
+        this.classList.remove('is-selectable');
       }
       // Enable selection
       else {
-        this.classList.add('is-branch-selectable');
+        this.classList.add('is-selectable');
         let itemSelector = this.querySelector('[coral-columnview-itemselect]');
   
         // Render checkbox on demand

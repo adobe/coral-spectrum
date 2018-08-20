@@ -8,14 +8,14 @@
 </coral-popover>
 <input type="hidden" handle="field">
 <div class="_coral-InputGroup _coral-Autocomplete-inputGroup" handle="inputGroup" role="presentation">
-  <input class="_coral-InputGroup-input _coral-Autocomplete-input" type="text" autocomplete="off" handle="input" role="textbox" is="coral-textfield">
+  <input class="_coral-InputGroup-field _coral-Autocomplete-input" type="text" autocomplete="off" handle="input" role="textbox" is="coral-textfield">
   <button type="button" class="_coral-FieldButton _coral-InputGroup-button _coral-Autocomplete-trigger" is="coral-button" variant="_custom" handle="trigger" aria-label="{{data.i18n.get('Show suggestions')}}" title="{{data.i18n.get('Show suggestions')}}">
     <coral-button-label handle="label"></coral-button-label>
     <js>
       // Don't wait for button MO to pick up the label
       this.trigger._elements.label = this.label;
       // Render invalid icon
-      this.trigger.insertAdjacentHTML('beforeend', data.Icon._renderSVG('spectrum-css-icon-SelectDownChevron', ['_coral-InputGroup-icon']));
+      this.trigger.insertAdjacentHTML('beforeend', data.Icon._renderSVG('spectrum-css-icon-ChevronDownMedium', ['_coral-InputGroup-icon', '_coral-UIIcon-ChevronDownMedium']));
     </js>
   </button>
 </div>

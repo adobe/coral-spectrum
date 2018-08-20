@@ -20,7 +20,7 @@ import ColumnViewCollection from './ColumnViewCollection';
 import selectionMode from './selectionMode';
 import {transform, validate} from '../../../coralui-util';
 
-const CLASSNAME = '_coral-MillerColumn';
+const CLASSNAME = '_coral-MillerColumns-item';
 
 /**
  The number of milliseconds for which scroll events should be debounced.

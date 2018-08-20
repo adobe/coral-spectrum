@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-const CLASSNAME = '_coral-Loader--bar-label';
+const CLASSNAME = '_coral-BarLoader-label';
 
 /**
  @class Coral.Progress.Label

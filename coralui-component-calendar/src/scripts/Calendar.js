@@ -19,6 +19,7 @@ import {ComponentMixin} from '../../../coralui-mixin-component';
 import {FormFieldMixin} from '../../../coralui-mixin-formfield';
 import {DateTime} from '../../../coralui-datetime';
 import '../../../coralui-component-button';
+import {Icon} from '../../../coralui-component-icon';
 import calendar from '../templates/calendar';
 import container from '../templates/container';
 import table from '../templates/table';
@@ -220,7 +221,7 @@ class Calendar extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     // Prepare templates
     this._elements = {};
-    calendar.call(this._elements, {commons, i18n});
+    calendar.call(this._elements, {commons, i18n, Icon});
   
     // Pre-define labellable element
     this._labellableElement = this;

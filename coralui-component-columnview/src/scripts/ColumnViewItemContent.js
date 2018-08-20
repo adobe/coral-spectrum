@@ -23,7 +23,7 @@
  */
 class ColumnViewItemContent extends HTMLElement {
   connectedCallback() {
-    this.classList.add('_coral-MillerColumn-itemLabel');
+    this.classList.add('_coral-AssetList-itemLabel');
   }
 }
 

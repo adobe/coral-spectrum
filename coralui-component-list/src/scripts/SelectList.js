@@ -47,7 +47,7 @@ const ITEM_TAG_NAME = 'coral-selectlist-item';
 /** @ignore */
 const GROUP_TAG_NAME = 'coral-selectlist-group';
 
-const CLASSNAME = '_coral-SelectList';
+const CLASSNAME = '_coral-Menu';
 
 /**
  @class Coral.SelectList

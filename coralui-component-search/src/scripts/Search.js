@@ -67,7 +67,7 @@ class Search extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     // Prepare templates
     this._elements = {};
-    base.call(this._elements, {i18n});
+    base.call(this._elements, {i18n, Icon});
   
     // Pre-define labellable element
     this._labellableElement = this._elements.input;
@@ -359,7 +359,7 @@ class Search extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this.appendChild(fragment);
     
     // Insert search icon
-    this._elements.input.insertAdjacentHTML('afterend', Icon._renderSVG('spectrum-css-icon-SearchMagGlass', ['_coral-Search-icon']));
+    this._elements.input.insertAdjacentHTML('afterend', Icon._renderSVG('spectrum-css-icon-Magnifier', ['_coral-Search-icon', '_coral-UIIcon-Magnifier']));
    
     this._updateClearButton();
   }

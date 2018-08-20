@@ -324,13 +324,14 @@ class Popover extends Overlay {
     let variantValue = this.variant;
     
     // Warning icon is same as ERROR icon
-    if (variantValue === variant.WARNING) {
-      variantValue = variant.ERROR;
+    if (variantValue === variant.WARNING || variantValue === variant.ERROR) {
+      variantValue = 'alert';
     }
     
     // Inject the SVG icon
     if (variantValue !== variant.DEFAULT && variantValue !== variant.FLYOUT) {
-      this._elements.headerWrapper.insertAdjacentHTML('beforeend', Icon._renderSVG(`spectrum-css-icon-Alert${capitalize(variantValue)}`, ['_coral-Dialog-typeIcon']));
+      const iconName = capitalize(variantValue);
+      this._elements.headerWrapper.insertAdjacentHTML('beforeend', Icon._renderSVG(`spectrum-css-icon-${iconName}Medium`, ['_coral-Dialog-typeIcon', `_coral-UIIcon-${iconName}Medium`]));
       this._elements.icon = this.querySelector('._coral-Dialog-typeIcon');
     }
   }

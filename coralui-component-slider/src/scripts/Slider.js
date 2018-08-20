@@ -260,11 +260,8 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   set filled(value) {
     this._filled = transform.booleanAttr(value);
     this._reflectAttribute('filled', this._filled);
-  
-    if (this._filled) {
-      this._updateFill();
-    }
-    this._elements.fillHandle.hidden = !this._filled;
+    
+    this.classList.toggle(`${CLASSNAME}--filled`, this._filled);
   }
   
   /**
@@ -327,8 +324,6 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       const valueAttribute = this.getAttribute('value');
       input[valueAttribute ? 'setAttribute' : 'removeAttribute']('value', valueAttribute);
     }
-  
-    this._updateFill();
   }
   
   /**
@@ -425,8 +420,6 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
       this._moveHandles();
     }
-  
-    this._updateFill();
   }
   
   /** @private */
@@ -596,12 +589,35 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     const labelValue = [];
     
     // Set the handle position as a percentage based on the stored values
-    this._elements.handles.forEach((handle, index) => {
-      const percent = calculatePercent(this._values[index]);
+    if (this._elements.handles.length === 1) {
+      const handle = this._elements.handles[0];
+      const percent = calculatePercent(this._values[0]);
       handle.style.left = `${percent}%`;
+      
+      handle.previousElementSibling.style.width = `${percent}%`;
+      handle.nextElementSibling.style.width = `${100 - percent}%`;
   
-      labelValue.push(this._getLabel(this._values[index]));
-    });
+      labelValue.push(this._getLabel(this._values[0]));
+    }
+    else {
+      const leftHandle = this._elements.handles[0];
+      const leftPercent = calculatePercent(this._values[0]);
+      leftHandle.style.left = `${leftPercent}%`;
+      
+      const rightHandle = this._elements.handles[1];
+      const rightPercent = calculatePercent(this._values[1]);
+      rightHandle.style.left = `${rightPercent}%`;
+  
+      leftHandle.previousElementSibling.style.width = `${leftPercent}%`;
+      leftHandle.nextElementSibling.style.left = `${leftPercent}%`;
+      
+      const middlePercent = 100 - rightPercent;
+      leftHandle.nextElementSibling.style.right = `${middlePercent}%`;
+      rightHandle.nextElementSibling.style.width = `${middlePercent}%`;
+  
+      labelValue.push(this._getLabel(this._values[0]));
+      labelValue.push(this._getLabel(this._values[1]));
+    }
     
     this._elements.labelValue.textContent = labelValue.length > 1 ? labelValue.join(' - ') : labelValue[0];
   }
@@ -789,15 +805,6 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   called when it is necessary to update the fill
-   @protected
-   */
-  _updateFill() {
-    const percent = (this._values[0] - this.min) / (this.max - this.min) * 100;
-    this._elements.fillHandle.style.width = `${percent}%`;
-  }
-  
-  /**
    Gets the label for a passed value.
    
    @param value
@@ -901,7 +908,6 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
     // Defaults
     this._moveHandles();
-    this._updateFill();
   }
 }
 

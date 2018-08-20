@@ -24,7 +24,7 @@
 
 class ColumnViewItemThumbnail extends HTMLElement {
   connectedCallback() {
-    this.classList.add('_coral-MillerColumn-itemThumbnail');
+    this.classList.add('_coral-AssetList-itemThumbnail');
   }
 }
 

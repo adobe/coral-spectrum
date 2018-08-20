@@ -21,8 +21,6 @@ import {transform} from '../../../coralui-util';
 
 const CLASSNAME = '_coral-TreeView';
 
-const INDICATOR_HIT_SIZE = {x: 30, y: 36};
-
 /**
  @class Coral.Tree
  @classdesc A Tree component is a container component to display collapsible content.
@@ -39,21 +37,21 @@ class Tree extends ComponentMixin(HTMLElement) {
     
     // Attach events
     this._delegateEvents({
-      'click ._coral-TreeView-link': '_onItemClick',
+      'click ._coral-TreeView-itemLink': '_onItemClick',
       'coral-collection:add coral-tree-item': '_onCollectionChange',
       'coral-collection:remove coral-tree-item': '_onCollectionChange',
       // a11y
-      'key:space ._coral-TreeView-link': '_onItemClick',
-      'key:enter ._coral-TreeView-link': '_onExpandCollapseClick',
-      'key:pageup ._coral-TreeView-link': '_onFocusPreviousItem',
-      'key:left ._coral-TreeView-link': '_onFocusPreviousItem',
-      'key:up ._coral-TreeView-link': '_onFocusPreviousItem',
-      'key:pagedown ._coral-TreeView-link': '_onFocusNextItem',
-      'key:right ._coral-TreeView-link': '_onFocusNextItem',
-      'key:down ._coral-TreeView-link': '_onFocusNextItem',
-      'key:home ._coral-TreeView-link': '_onFocusFirstItem',
-      'key:end ._coral-TreeView-link': '_onFocusLastItem',
-      'capture:blur ._coral-TreeView-link[tabindex="0"]': '_onItemBlur',
+      'key:space ._coral-TreeView-itemLink': '_onItemClick',
+      'key:enter ._coral-TreeView-itemLink': '_onExpandCollapseClick',
+      'key:pageup ._coral-TreeView-itemLink': '_onFocusPreviousItem',
+      'key:left ._coral-TreeView-itemLink': '_onFocusPreviousItem',
+      'key:up ._coral-TreeView-itemLink': '_onFocusPreviousItem',
+      'key:pagedown ._coral-TreeView-itemLink': '_onFocusNextItem',
+      'key:right ._coral-TreeView-itemLink': '_onFocusNextItem',
+      'key:down ._coral-TreeView-itemLink': '_onFocusNextItem',
+      'key:home ._coral-TreeView-itemLink': '_onFocusFirstItem',
+      'key:end ._coral-TreeView-itemLink': '_onFocusLastItem',
+      'capture:blur ._coral-TreeView-itemLink[tabindex="0"]': '_onItemBlur',
       // private
       'coral-tree-item:_selectedchanged': '_onItemSelectedChanged',
       'coral-tree-item:_disabledchanged': '_onFocusableChanged',
@@ -234,7 +232,7 @@ class Tree extends ComponentMixin(HTMLElement) {
     }
     
     // If the indicator is clicked, expand/collapse the tree item
-    if (event.target === event.matchedTarget && event.offsetX <= INDICATOR_HIT_SIZE.x && event.offsetY <= INDICATOR_HIT_SIZE.y) {
+    if (event.target.closest('._coral-TreeView-indicator')) {
       this._onExpandCollapseClick(event);
       return;
     }
@@ -396,7 +394,7 @@ class Tree extends ComponentMixin(HTMLElement) {
   
   /** @private */
   _getFocusable() {
-    return this.querySelector('coral-tree-item > ._coral-TreeView-link[tabindex="0"]');
+    return this.querySelector('coral-tree-item > ._coral-TreeView-itemLink[tabindex="0"]');
   }
   
   /** @private */
@@ -405,7 +403,7 @@ class Tree extends ComponentMixin(HTMLElement) {
   }
   
   _onItemBlur() {
-    const focused = this.querySelector('._coral-TreeView-link.focus-ring');
+    const focused = this.querySelector('._coral-TreeView-itemLink.focus-ring');
     if (focused) {
       focused.classList.remove('focus-ring');
     }

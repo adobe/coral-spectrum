@@ -1,7 +1,20 @@
 <input handle="input" type="hidden" name="">
 <div handle="header" class="_coral-Calendar-header">
-  <div handle="heading" class="coral-Heading _coral-Calendar-heading" id="{{data.commons.getUID()}}" role="heading" aria-live="assertive" aria-atomic="true"></div>
-  <button type="button" handle="prev" class="_coral-Calendar-prevMonth _coral-ClearButton" is="coral-button" variant="_custom" icon="spectrum-css-icon-CarouselLeftChevron" iconsize="XS" aria-label="{{data.i18n.get('Previous')}}" title="{{data.i18n.get('Previous')}}"></button>
-  <button type="button" handle="next" class="_coral-Calendar-nextMonth _coral-ClearButton" is="coral-button" variant="_custom" icon="spectrum-css-icon-CarouselRightChevron" iconsize="XS" aria-label="{{data.i18n.get('Next')}}" title="{{data.i18n.get('Next')}}"></button>
+  <div handle="heading" class="_coral-Calendar-title" id="{{data.commons.getUID()}}" role="heading" aria-live="assertive" aria-atomic="true"></div>
+  <button type="button" handle="prev" class="_coral-Calendar-prevMonth _coral-ActionButton _coral-ActionButton--quiet" is="coral-button" variant="_custom" aria-label="{{data.i18n.get('Previous')}}" title="{{data.i18n.get('Previous')}}">
+    <coral-button-label handle="prevLabel"></coral-button-label>
+  </button>
+  <button type="button" handle="next" class="_coral-Calendar-nextMonth _coral-ActionButton _coral-ActionButton--quiet" is="coral-button" variant="_custom" aria-label="{{data.i18n.get('Next')}}" title="{{data.i18n.get('Next')}}">
+    <coral-button-label handle="nextLabel"></coral-button-label>
+  </button>
+  <js>
+    // Don't wait for button MO to pick up the label
+    this.prev._elements.label = this.prevLabel;
+    this.next._elements.label = this.nextLabel;
+
+    // Render chevron icon
+    this.prev.insertAdjacentHTML('beforeend', data.Icon._renderSVG('spectrum-css-icon-ChevronLeftLarge', ['_coral-UIIcon-ChevronLeftLarge']));
+    this.next.insertAdjacentHTML('beforeend', data.Icon._renderSVG('spectrum-css-icon-ChevronRightLarge', ['_coral-UIIcon-ChevronRightLarge']));
+  </js>
 </div>
 <div class="_coral-Calendar-body" handle="body" role="grid" tabindex="0" aria-readonly="true"></div>

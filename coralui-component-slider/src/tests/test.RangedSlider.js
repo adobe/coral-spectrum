@@ -30,8 +30,6 @@ describe('RangedSlider', function() {
     describe('#filled', function() {
       it('should default to true', function() {
         expect(el.filled).to.be.true;
-        
-        expect(el._elements.fillHandle.classList.contains('is-hidden')).to.be.false;
       });
 
       it('should not be settable', function() {
@@ -44,7 +42,6 @@ describe('RangedSlider', function() {
         el.filled = false;
         
         expect(el.filled).to.be.true;
-        expect(el._elements.fillHandle.classList.contains('is-hidden')).to.be.false;
   
         // Restore warn
         console.warn = warn;

@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-const CLASSNAME = '_coral-Accordion-header';
+const CLASSNAME = '_coral-Accordion-itemHeader';
 
 /**
  @class Coral.Accordion.Item.Label
