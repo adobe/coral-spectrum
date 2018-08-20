@@ -34,7 +34,7 @@ const config = {
           logo: path.join(root, 'coralui-guide/assets/coral.png'),
           title: 'Coral Spectrum',
           repository: 'https://git.corp.adobe.com/Coral/coral-spectrum',
-          site: 'http://coral-spectrum.corp.adobe.com'
+          site: 'https://git.corp.adobe.com/pages/Coral/coral-spectrum/build/documentation'
         }
       }
     },

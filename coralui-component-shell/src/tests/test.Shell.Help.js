@@ -107,7 +107,7 @@ describe('Shell.Help', function() {
         ];
 
         var total = 1111;
-        var allResultsURL = 'http://coral-spectrum.corp.adobe.com';
+        var allResultsURL = 'https://adobe.com';
 
         const el = helpers.build(htmlSnippet);
         el.showResults(resultItems, total, allResultsURL);

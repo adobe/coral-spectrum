@@ -16,43 +16,21 @@
  */
 module.exports = function(gulp) {
   
-  const fs = require('fs');
   const path = require('path');
-  const util = require('gulp-util');
-  const sftp = require('gulp-sftp');
+  const ghPages = require('gulp-gh-pages');
+  const util = require('../helpers/util');
   
-  // Configuration parameters, defaults to empty string
-  let host = '';
-  let username = '';
-  let password = '';
-  let folder = '';
-  
-  try {
-    const configFile = fs.readFileSync('deploy-config.json');
-    const config = JSON.parse(configFile);
+  gulp.task('deploy', () => {
+    if (!util.isTLB()) {
+      console.error('Deploy aborted: not in root folder.');
+      
+      return;
+    }
     
-    host = config.host;
-    username = config.username;
-    password = config.password;
-    folder = config.folder;
-  }
-  catch (e) {}
-  
-  // Override config with parameters
-  // e.g gulp deploy --host XXX --username XXX --password XXX --folder XXX
-  host = util.env.host || host;
-  username = util.env.username || username;
-  password = util.env.password || password;
-  folder = util.env.folder || folder;
-  
-  gulp.task('deploy', function() {
-    // Copy all files
-    gulp.src(['build/**/*'])
-      .pipe(sftp({
-        host: host,
-        user: username,
-        pass: password,
-        remotePath: path.join('/var/www/html/', folder)
+    return gulp
+      .src('./build/**/*', {base: '.'})
+      .pipe(ghPages({
+        message: `CORAL-0: deploy ${util.getPackageJSON().version}`
       }));
   });
 };
