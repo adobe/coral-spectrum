@@ -398,14 +398,27 @@ class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
   set open(value) {
     super.open = value;
     
-    if (this.open && this.smart) {
-      this._validateParentOverflow();
+    if (this.open) {
+      if (this.smart) {
+        this._validateParentOverflow();
+      }
+      
+      this._togglePopperEventListener(true);
+  
+      // We need an additional frame to help popper read the correct offsets
+      window.requestAnimationFrame(() => {
+        this.reposition();
+      });
     }
-    
-    // We need an additional frame to help popper read the correct offsets
-    window.requestAnimationFrame(() => {
-      this.reposition();
-    });
+    else {
+      this._togglePopperEventListener(false);
+    }
+  }
+  
+  _togglePopperEventListener(toggle) {
+    if (this._popper) {
+      this._popper[toggle ? 'enableEventListeners' : 'disableEventListeners']();
+    }
   }
   
   /** @ignore */
@@ -640,6 +653,10 @@ class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
     window.requestAnimationFrame(() => {
       // Force repositioning
       this.reposition(true);
+      
+      if (!this.open) {
+        this._togglePopperEventListener(false);
+      }
     });
   }
   
