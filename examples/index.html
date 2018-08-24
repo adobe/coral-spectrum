@@ -93,6 +93,16 @@
     const list = document.getElementById('example-list');
     const preview = document.getElementById('example-preview');
 
+    preview.addEventListener('load', function() {
+      // Workaround to load the icons
+      var icons = document.querySelectorAll('head svg');
+      var html = '';
+      for (var i = 0; i < icons.length; i++) {
+        html += icons[i].outerHTML;
+      }
+      preview.contentWindow.postMessage(html, '*');
+    });
+
     components.forEach(function(component) {
       const name = component.split('-').pop();
       const item = list.items.add({
