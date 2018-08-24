@@ -437,7 +437,7 @@
     }
     
     if (!this._syncPending) {
-      Coral.commons.nextFrame(this._syncDOM);
+      window.requestAnimationFrame(this._syncDOM);
       this._syncPending = true;
     }
   };
