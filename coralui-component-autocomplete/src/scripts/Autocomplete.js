@@ -1796,16 +1796,13 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       this._showSuggestionsCalled = false;
     }
     
-    if (this._elements.overlay.open) {
-      // Force overlay repositioning (remote loading)
-      requestAnimationFrame(() => {
-        this._elements.overlay.reposition();
-      });
-    }
-    else {
-      // Just show
-      this._elements.overlay.open = true;
-    }
+    // Just show
+    this._elements.overlay.open = true;
+  
+    // Force overlay repositioning (e.g because of remote loading)
+    requestAnimationFrame(() => {
+      this._elements.overlay.reposition();
+    });
     
     this.setAttribute('aria-expanded', 'true');
   }
