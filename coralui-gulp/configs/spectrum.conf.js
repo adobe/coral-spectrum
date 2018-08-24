@@ -63,6 +63,11 @@ module.exports = [
     spectrum: /\.spectrum-FieldGroup/g,
     coral: '.coral-RadioGroup'
   },
+  // @compat .coral-RadioGroup--labelsBelow
+  {
+    spectrum: /\.spectrum-Radio--labelBelow/g,
+    coral: '.coral-RadioGroup--labelsBelow  ._coral-Radio'
+  },
   {
     spectrum: /\.spectrum-Table-headCell/g,
     coral: '.coral-Table-headerCell'
@@ -87,11 +92,6 @@ module.exports = [
   {
     spectrum: /\.spectrum-FieldLabel/g,
     coral: '.coral-FieldLabel'
-  },
-  // @spectrum Ignore Shell to avoid clashing as it'll be removed in future versions of Spectrum CSS
-  {
-    spectrum: /\.spectrum-Shell/g,
-    coral: '._coral-ShellIgnore'
   },
   // @compat .coral-DecoratedTextfield
   {
