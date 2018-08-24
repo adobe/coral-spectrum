@@ -1,6 +1,7 @@
 /build
 /node_modules
 /npm-debug.log
+/.publish
 
 /coralui-*/src/templates/*.js
 /coralui-*/src/styles/index.css
