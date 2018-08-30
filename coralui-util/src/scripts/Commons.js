@@ -15,7 +15,8 @@
  * from Adobe Systems Incorporated.
  */
 
-import {ResizeObserver, Promise} from '../../../coralui-externals';
+import Promise from 'promise-polyfill';
+import ResizeObserver from 'resize-observer-polyfill/dist/ResizeObserver';
 
 // Used for unique IDs
 let nextID = 0;

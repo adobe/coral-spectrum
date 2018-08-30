@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import commons from './commons';
+import commons from './Commons';
 
 /**
  A map of modifier names to their corresponding keycodes.

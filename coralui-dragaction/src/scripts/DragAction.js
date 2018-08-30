@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import {Vent} from '../../../coralui-externals';
+import Vent from '@adobe/vent';
 import {events, validate, transform, commons} from '../../../coralui-util';
 
 // Attributes

@@ -16,7 +16,7 @@
  */
 
 import {Overlay} from '../../../coralui-component-overlay';
-import {Vent} from '../../../coralui-externals';
+import Vent from '@adobe/vent';
 import base from '../templates/base';
 import {transform, validate, commons} from '../../../coralui-util';
 

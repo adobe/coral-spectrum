@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import commons from './commons';
+import commons from './Commons';
 
 /**
  Set of property value validation functions.

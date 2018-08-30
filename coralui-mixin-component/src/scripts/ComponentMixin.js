@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import {Vent} from '../../../coralui-externals';
+import Vent from '@adobe/vent';
 import {commons, Keys, keys, events} from '../../../coralui-util';
 
 // Used to split events by type/target

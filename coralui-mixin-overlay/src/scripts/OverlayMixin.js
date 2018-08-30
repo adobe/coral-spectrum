@@ -16,7 +16,7 @@
  */
 
 import base from '../templates/base';
-import {Vent} from '../../../coralui-externals';
+import Vent from '@adobe/vent';
 import {validate, transform, commons} from '../../../coralui-util';
 import {trapFocus, returnFocus, focusOnShow, FADETIME} from './enums';
 

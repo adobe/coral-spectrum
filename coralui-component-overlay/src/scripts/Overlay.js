@@ -17,7 +17,7 @@
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import {OverlayMixin} from '../../../coralui-mixin-overlay';
-import {PopperJS} from '../../../coralui-externals';
+import PopperJS from 'popper.js';
 import ALIGN_MAP from '../data/alignMapping.json';
 import {transform, validate, commons} from '../../../coralui-util';
 
