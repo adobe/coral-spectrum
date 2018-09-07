@@ -227,14 +227,6 @@ describe('Table', function() {
         expect(table.classList.contains('is-disabled')).to.be.true;
         expect(table.querySelector('[coral-table-select]').disabled).to.be.true;
       });
-  
-      it('should be possible to declare items without table body', function() {
-        var table = helpers.build(window.__html__['Table.rowsonly.html']);
-        var selector = 'table tbody[is="coral-table-body"] tr[is="coral-table-row"]';
-        
-        expect(table.items.getAll()).to.deep.equal(Array.from(table.querySelectorAll(selector)));
-        expect(table.querySelector('tbody:not([is])')).equal(null);
-      });
     });
   
     describe('#variant', function() {

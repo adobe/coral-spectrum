@@ -2432,20 +2432,6 @@ class Table extends ComponentMixin(HTMLTableElement) {
     // Disconnect MO observer while moving table sections around
     this._observer.disconnect();
     
-    // Support row only content
-    if (!body.parentNode) {
-      // Look for the table auto generated table body
-      const tableAutoCreatedBody = this.querySelector('tbody');
-      if (tableAutoCreatedBody) {
-        // Move the rows inside the coral table body
-        while (tableAutoCreatedBody.firstChild) {
-          body.appendChild(tableAutoCreatedBody.firstChild);
-        }
-        // Remove the auto generated table body
-        tableAutoCreatedBody.remove();
-      }
-    }
-    
     // Call content zone inserts
     this.head = head;
     this.body = body;
