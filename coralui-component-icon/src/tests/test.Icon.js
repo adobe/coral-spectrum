@@ -470,7 +470,7 @@ describe('Icon', function() {
   
         helpers.target.appendChild(container);
   
-        expect(hasSVGIcon(el, 'User-CircleColorLight', true)).to.be.true;
+        expect(hasSVGIcon(el, 'UserCircleColor_Light', true)).to.be.true;
         expect(called).to.equal(1);
       });
   
@@ -485,7 +485,7 @@ describe('Icon', function() {
   
         helpers.target.appendChild(container);
     
-        expect(hasSVGIcon(el, 'User-CircleColorDark', true)).to.be.true;
+        expect(hasSVGIcon(el, 'UserCircleColor_Dark', true)).to.be.true;
         expect(called).to.equal(1);
       });
   
@@ -498,7 +498,7 @@ describe('Icon', function() {
         
         helpers.target.appendChild(container);
     
-        expect(hasSVGIcon(el, 'User-CircleColorLight', true)).to.be.true;
+        expect(hasSVGIcon(el, 'UserCircleColor_Light', true)).to.be.true;
         expect(called).to.equal(1);
       });
     });

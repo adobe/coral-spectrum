@@ -22,36 +22,36 @@
     "spectrumIcon": "AdobeLogo"
   },
   "adobeAnalyticsColor": {
-    "spectrumIconDark": "AdobeAnalyticsColorDark",
-    "spectrumIconLight": "AdobeAnalyticsColorLight"
+    "spectrumIconDark": "AdobeAnalyticsColor_Dark",
+    "spectrumIconLight": "AdobeAnalyticsColor_Light"
   },
   "adobeAudienceManagerColor": {
-    "spectrumIconDark": "AdobeAudienceManagerColorDark",
-    "spectrumIconLight": "AdobeAudienceManagerColorLight"
+    "spectrumIconDark": "AdobeAudienceManagerColor_Dark",
+    "spectrumIconLight": "AdobeAudienceManagerColor_Light"
   },
   "adobeCampaignColor": {
-    "spectrumIconDark": "AdobeCampaignColorDark",
-    "spectrumIconLight": "AdobeCampaignColorLight"
+    "spectrumIconDark": "AdobeCampaignColor_Dark",
+    "spectrumIconLight": "AdobeCampaignColor_Light"
   },
   "adobeExperienceManagerColor": {
-    "spectrumIconDark": "AdobeExperienceManagerColorDark",
-    "spectrumIconLight": "AdobeExperienceManagerColorLight"
+    "spectrumIconDark": "AdobeExperienceManagerColor_Dark",
+    "spectrumIconLight": "AdobeExperienceManagerColor_Light"
   },
   "adobeMediaOptimizerColor": {
-    "spectrumIconDark": "AdobeMediaOptimizerColorDark",
-    "spectrumIconLight": "AdobeMediaOptimizerColorLight"
+    "spectrumIconDark": "AdobeMediaOptimizerColor_Dark",
+    "spectrumIconLight": "AdobeMediaOptimizerColor_Light"
   },
   "adobePrimetimeColor": {
-    "spectrumIconDark": "AdobePrimetimeColorDark",
-    "spectrumIconLight": "AdobePrimetimeColorLight"
+    "spectrumIconDark": "AdobePrimetimeColor_Dark",
+    "spectrumIconLight": "AdobePrimetimeColor_Light"
   },
   "adobeSocialColor": {
-    "spectrumIconDark": "AdobeSocialColorDark",
-    "spectrumIconLight": "AdobeSocialColorLight"
+    "spectrumIconDark": "AdobeSocialColor_Dark",
+    "spectrumIconLight": "AdobeSocialColor_Light"
   },
   "adobeTargetColor": {
-    "spectrumIconDark": "AdobeTargetColorDark",
-    "spectrumIconLight": "AdobeTargetColorLight"
+    "spectrumIconDark": "AdobeTargetColor_Dark",
+    "spectrumIconLight": "AdobeTargetColor_Light"
   },
   "annotate": {
     "spectrumIcon": "AnnotatePen"
@@ -63,7 +63,7 @@
     "spectrumIcon": "Menu"
   },
   "calendarCheckColor": {
-    "spectrumIcon": "CalendarCheckColorLight"
+    "spectrumIcon": "CalendarCheckColor_Light"
   },
   "campaignRemove": {
     "spectrumIcon": "CampaignClose"
@@ -108,28 +108,28 @@
     "spectrumIcon": "Alert"
   },
   "emotionAdmirationColor": {
-    "spectrumIcon": "EmotionAdmirationColorLight"
+    "spectrumIcon": "EmotionAdmirationColor_Light"
   },
   "emotionAngerColor": {
-    "spectrumIcon": "EmotionAngerColorLight"
+    "spectrumIcon": "EmotionAngerColor_Light"
   },
   "emotionAnticipationColor": {
-    "spectrumIcon": "EmotionAnticipationColorLight"
+    "spectrumIcon": "EmotionAnticipationColor_Light"
   },
   "emotionDisgustColor": {
-    "spectrumIcon": "EmotionDisgustColorLight"
+    "spectrumIcon": "EmotionDisgustColor_Light"
   },
   "emotionFearColor": {
-    "spectrumIcon": "EmotionFearColorLight"
+    "spectrumIcon": "EmotionFearColor_Light"
   },
   "emotionJoyColor": {
-    "spectrumIcon": "EmotionJoyColorLight"
+    "spectrumIcon": "EmotionJoyColor_Light"
   },
   "emotionSadnessColor": {
-    "spectrumIcon": "EmotionSadnessColorLight"
+    "spectrumIcon": "EmotionSadnessColor_Light"
   },
   "emotionSurpriseColor": {
-    "spectrumIcon": "EmotionSurpriseColorLight"
+    "spectrumIcon": "EmotionSurpriseColor_Light"
   },
   "exclude": {
     "spectrumIcon": "Cancel"
@@ -138,10 +138,10 @@
     "spectrumIcon": "Sampler"
   },
   "facebookCircleColor": {
-    "spectrumIcon": "Facebook-CircleColorLight"
+    "spectrumIcon": "FacebookCircleColor_Light"
   },
   "facebookColor": {
-    "spectrumIcon": "FacebookColorLight"
+    "spectrumIcon": "FacebookColor_Light"
   },
   "file": {
     "spectrumIcon": "Document"
@@ -153,7 +153,7 @@
     "spectrumIcon": "Filmroll"
   },
   "flickrColor": {
-    "spectrumIcon": "FlickrColorLight"
+    "spectrumIcon": "FlickrColor_Light"
   },
   "folderDefault": {
     "spectrumIcon": "FolderAdobe"
@@ -165,13 +165,13 @@
     "spectrumIcon": "Settings"
   },
   "googleAnalyticsColor": {
-    "spectrumIcon": "GoogleAnalyticsColorLight"
+    "spectrumIcon": "GoogleAnalyticsColor_Light"
   },
   "googlePlusCircleColor": {
-    "spectrumIcon": "GooglePlus-CircleColorLight"
+    "spectrumIcon": "GooglePlusCircleColor_Light"
   },
   "googlePlusColor": {
-    "spectrumIcon": "GooglePlusColorLight"
+    "spectrumIcon": "GooglePlusColor_Light"
   },
   "graphBarStackedHorizontal": {
     "spectrumIcon": "GraphBarHorizontalStacked"
@@ -193,7 +193,7 @@
     "spectrumIcon": "HTML5"
   },
   "imageCheckColor": {
-    "spectrumIcon": "ImageCheckColorLight"
+    "spectrumIcon": "ImageCheckColor_Light"
   },
   "imageMap": {
     "spectrumIcon": "ImageMapRectangle"
@@ -202,19 +202,19 @@
     "spectrumIcon": "Info"
   },
   "instagramCircleColor": {
-    "spectrumIcon": "Instagram-CircleColorLight"
+    "spectrumIcon": "InstagramCircleColor_Light"
   },
   "instagramColor": {
-    "spectrumIcon": "InstagramColorLight"
+    "spectrumIcon": "InstagramColor_Light"
   },
   "linkCheckColor": {
-    "spectrumIcon": "LinkCheckColorLight"
+    "spectrumIcon": "LinkCheckColor_Light"
   },
   "linkedInCircleColor": {
-    "spectrumIcon": "LinkedIn-CircleColorLight"
+    "spectrumIcon": "LinkedInCircleColor_Light"
   },
   "linkedInColor": {
-    "spectrumIcon": "LinkedInColorLight"
+    "spectrumIcon": "LinkedInColor_Light"
   },
   "lockOff": {
     "spectrumIcon": "LockOpen"
@@ -232,7 +232,7 @@
     "spectrumIcon": "Rail"
   },
   "newsgatorColor": {
-    "spectrumIcon": "NewsgatorColorLight"
+    "spectrumIcon": "NewsgatorColor_Light"
   },
   "open": {
     "spectrumIcon": "FolderOpen"
@@ -263,16 +263,16 @@
     "spectrumIcon": "ArrowUpRight"
   },
   "projectCameraColor": {
-    "spectrumIcon": "ProjectCameraColorLight"
+    "spectrumIcon": "ProjectCameraColor_Light"
   },
   "projectColor": {
-    "spectrumIcon": "ProjectColorLight"
+    "spectrumIcon": "ProjectColor_Light"
   },
   "projectPlayColor": {
-    "spectrumIcon": "ProjectPlayColorLight"
+    "spectrumIcon": "ProjectPlayColor_Light"
   },
   "projectRefreshColor": {
-    "spectrumIcon": "ProjectRefreshColorLight"
+    "spectrumIcon": "ProjectRefreshColor_Light"
   },
   "publish": {
     "spectrumIcon": "Send"
@@ -303,10 +303,10 @@
     "spectrumIcon": "SelectBoxAll"
   },
   "sinaWeiboCircleColor": {
-    "spectrumIcon": "SinaWeibo-CircleColorLight"
+    "spectrumIcon": "SinaWeiboCircleColor_Light"
   },
   "sinaWeiboColor": {
-    "spectrumIcon": "SinaWeiboColorLight"
+    "spectrumIcon": "SinaWeiboColor_Light"
   },
   "sms": {
     "spectrumIcon": "SMS"
@@ -342,69 +342,69 @@
     "spectrumIcon": "StopCircle"
   },
   "tableCellMergeColor": {
-    "spectrumIconActive": "TableCellMergeColorActive",
-    "spectrumIconDark": "TableCellMergeColorDark",
-    "spectrumIconLight": "TableCellMergeColorLight"
+    "spectrumIconActive": "TableCellMergeColor_Active",
+    "spectrumIconDark": "TableCellMergeColor_Dark",
+    "spectrumIconLight": "TableCellMergeColor_Light"
   },
   "tableColumnAddLeftColor": {
-    "spectrumIconActive": "TableColumnAddLeftColorActive",
-    "spectrumIconDark": "TableColumnAddLeftColorDark",
-    "spectrumIconLight": "TableColumnAddLeftColorLight"
+    "spectrumIconActive": "TableColumnAddLeftColor_Active",
+    "spectrumIconDark": "TableColumnAddLeftColor_Dark",
+    "spectrumIconLight": "TableColumnAddLeftColor_Light"
   },
   "tableColumnAddRightColor": {
-    "spectrumIconActive": "TableColumnAddRightColorActive",
-    "spectrumIconDark": "TableColumnAddRightColorDark",
-    "spectrumIconLight": "TableColumnAddLeftColorLight"
+    "spectrumIconActive": "TableColumnAddRightColor_Active",
+    "spectrumIconDark": "TableColumnAddRightColor_Dark",
+    "spectrumIconLight": "TableColumnAddLeftColor_Light"
   },
   "tableColumnMergeColor": {
-    "spectrumIconActive": "TableColumnMergeColorActive",
-    "spectrumIconDark": "TableColumnMergeColorDark",
-    "spectrumIconLight": "TableColumnMergeColorLight"
+    "spectrumIconActive": "TableColumnMergeColor_Active",
+    "spectrumIconDark": "TableColumnMergeColor_Dark",
+    "spectrumIconLight": "TableColumnMergeColor_Light"
   },
   "tableColumnRemoveCenterColor": {
-    "spectrumIconActive": "TableColumnRemoveCenterColorActive",
-    "spectrumIconDark": "TableColumnRemoveCenterColorDark",
-    "spectrumIconLight": "TableColumnRemoveCenterColorLight"
+    "spectrumIconActive": "TableColumnRemoveCenterColor_Active",
+    "spectrumIconDark": "TableColumnRemoveCenterColor_Dark",
+    "spectrumIconLight": "TableColumnRemoveCenterColor_Light"
   },
   "tableColumnSplitColor": {
-    "spectrumIconActive": "TableColumnSplitColorActive",
-    "spectrumIconDark": "TableColumnSplitColorDark",
-    "spectrumIconLight": "TableColumnSplitColorLight"
+    "spectrumIconActive": "TableColumnSplitColor_Active",
+    "spectrumIconDark": "TableColumnSplitColor_Dark",
+    "spectrumIconLight": "TableColumnSplitColor_Light"
   },
   "tableRowAddBottomColor": {
-    "spectrumIconActive": "TableRowAddBottomColorActive",
-    "spectrumIconDark": "TableRowAddBottomColorDark",
-    "spectrumIconLight": "TableRowAddBottomColorLight"
+    "spectrumIconActive": "TableRowAddBottomColor_Active",
+    "spectrumIconDark": "TableRowAddBottomColor_Dark",
+    "spectrumIconLight": "TableRowAddBottomColor_Light"
   },
   "tableRowAddTopColor": {
-    "spectrumIconActive": "TableRowAddTopColorActive",
-    "spectrumIconDark": "TableRowAddTopColorDark",
-    "spectrumIconLight": "TableRowAddTopColorLight"
+    "spectrumIconActive": "TableRowAddTopColor_Active",
+    "spectrumIconDark": "TableRowAddTopColor_Dark",
+    "spectrumIconLight": "TableRowAddTopColor_Light"
   },
   "tableRowMergeColor": {
-    "spectrumIconActive": "TableRowMergeColorActive",
-    "spectrumIconDark": "TableRowMergeColorDark",
-    "spectrumIconLight": "TableRowMergeColorLight"
+    "spectrumIconActive": "TableRowMergeColor_Active",
+    "spectrumIconDark": "TableRowMergeColor_Dark",
+    "spectrumIconLight": "TableRowMergeColor_Light"
   },
   "tableRowRemoveCenterColor": {
-    "spectrumIconActive": "TableRowRemoveCenterColorActive",
-    "spectrumIconDark": "TableRowRemoveCenterColorDark",
-    "spectrumIconLight": "TableRowRemoveCenterColorLight"
+    "spectrumIconActive": "TableRowRemoveCenterColor_Active",
+    "spectrumIconDark": "TableRowRemoveCenterColor_Dark",
+    "spectrumIconLight": "TableRowRemoveCenterColor_Light"
   },
   "tableRowSplitColor": {
-    "spectrumIconActive": "TableRowSplitColorActive",
-    "spectrumIconDark": "TableRowSplitColorDark",
-    "spectrumIconLight": "TableRowSplitColorLight"
+    "spectrumIconActive": "TableRowSplitColor_Active",
+    "spectrumIconDark": "TableRowSplitColor_Dark",
+    "spectrumIconLight": "TableRowSplitColor_Light"
   },
   "tableSelectColumnColor": {
-    "spectrumIconActive": "TableSelectColumnColorActive",
-    "spectrumIconDark": "TableSelectColumnColorDark",
-    "spectrumIconLight": "TableSelectColumnColorLight"
+    "spectrumIconActive": "TableSelectColumnColor_Active",
+    "spectrumIconDark": "TableSelectColumnColor_Dark",
+    "spectrumIconLight": "TableSelectColumnColor_Light"
   },
   "tableSelectRowColor": {
-    "spectrumIconActive": "TableSelectRowColorActive",
-    "spectrumIconDark": "TableSelectRowColorDark",
-    "spectrumIconLight": "TableSelectRowColorLight"
+    "spectrumIconActive": "TableSelectRowColor_Active",
+    "spectrumIconDark": "TableSelectRowColor_Dark",
+    "spectrumIconLight": "TableSelectRowColor_Light"
   },
   "tag": {
     "spectrumIcon": "Label"
@@ -419,7 +419,7 @@
     "spectrumIcon": "AdobeTarget"
   },
   "targetCheckColor": {
-    "spectrumIcon": "TargetCheckColorLight"
+    "spectrumIcon": "TargetCheckColor_Light"
   },
   "textCenter": {
     "spectrumIcon": "TextAlignCenter"
@@ -446,10 +446,10 @@
     "spectrumIcon": "ChevronRight"
   },
   "twitterCircleColor": {
-    "spectrumIcon": "Twitter-CircleColorLight"
+    "spectrumIcon": "TwitterCircleColor_Light"
   },
   "twitterColor": {
-    "spectrumIcon": "TwitterColorLight"
+    "spectrumIcon": "TwitterColor_Light"
   },
   "unflag": {
     "spectrumIcon": "FlagExclude"
@@ -468,12 +468,12 @@
     "spectrumIcon": "USA"
   },
   "userCircleColor": {
-    "spectrumIconDark": "User-CircleColorDark",
-    "spectrumIconLight": "User-CircleColorLight"
+    "spectrumIconDark": "UserCircleColor_Dark",
+    "spectrumIconLight": "UserCircleColor_Light"
   },
   "userGroupCircleColor": {
-    "spectrumIconDark": "UserGroup-CircleColorDark",
-    "spectrumIconLight": "UserGroup-CircleColorLight"
+    "spectrumIconDark": "UserGroupCircleColor_Dark",
+    "spectrumIconLight": "UserGroupCircleColor_Light"
   },
   "users": {
     "spectrumIcon": "UserGroup"
@@ -495,18 +495,18 @@
     "spectrumIcon": "MagicWand"
   },
   "windowsColor": {
-    "spectrumIcon": "WindowsColorLight"
+    "spectrumIcon": "WindowsColor_Light"
   },
   "wordpressColor": {
-    "spectrumIcon": "WordpressColorLight"
+    "spectrumIcon": "WordpressColor_Light"
   },
   "write": {
     "spectrumIcon": "AnnotatePen"
   },
   "youTubeCircleColor": {
-    "spectrumIcon": "YouTube-CircleColorLight"
+    "spectrumIcon": "YouTubeCircleColor_Light"
   },
   "youTubeColor": {
-    "spectrumIcon": "YouTubeColorLight"
+    "spectrumIcon": "YouTubeColor_Light"
   }
 }

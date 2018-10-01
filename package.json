@@ -19,9 +19,10 @@
   "dependencies": {
     "@adobe/focus-ring-polyfill": "^0.1.5",
     "@adobe/vent": "^1.0.0",
-    "@spectrum/spectrum-css": "^2.0.0",
+    "@spectrum/spectrum-css": "2.0.0",
+    "@spectrum/spectrum-iconstore": "^3.0.2",
     "document-register-element": "^1.7.0",
-    "normalize.css": "^8.0.0",
+    "normalize.css": "8.0.0",
     "popper.js": "^1.10.6",
     "promise-polyfill": "^6.0.2",
     "resize-observer-polyfill": "^1.5.0"

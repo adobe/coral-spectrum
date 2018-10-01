@@ -17,14 +17,14 @@
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import {transform, validate, commons} from '../../../coralui-util';
 import ICON_MAP from '../../../coralui-compat/data/iconMap.json';
-import SPECTRUM_ICONS_PATH from '@spectrum/spectrum-css/dist/icons/spectrum-icons.svg';
-import SPECTRUM_ICONS_COLOR_PATH from '@spectrum/spectrum-css/dist/icons/spectrum-icons-color.svg';
-import SPECTRUM_CSS_ICONS_PATH from '@spectrum/spectrum-css/dist/icons/spectrum-css-icons-medium.svg';
+import SPECTRUM_ICONS_PATH from '@spectrum/spectrum-iconstore/icons/workflow/spectrum-icons.svg';
+import SPECTRUM_ICONS_COLOR_PATH from '@spectrum/spectrum-iconstore/icons/workflow/spectrum-icons-color.svg';
+import SPECTRUM_CSS_ICONS_PATH from '@spectrum/spectrum-iconstore/icons/ui/ui-icons-medium.svg';
 import '@spectrum/spectrum-css/dist/icons/AS.loadIcons';
 
 const SPECTRUM_ICONS = 'spectrum-icons';
 const SPECTRUM_ICONS_COLOR = 'spectrum-icons-color';
-const SPECTRUM_CSS_ICONS = 'spectrum-css-icons-medium';
+const SPECTRUM_CSS_ICONS = 'ui-icons-medium';
 
 const ICONS = [SPECTRUM_ICONS, SPECTRUM_ICONS_COLOR, SPECTRUM_CSS_ICONS];
 const ICONS_PATH = commons.options.icons;
