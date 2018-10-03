@@ -49,7 +49,7 @@ for (const key in Icon.size) {
  @property {String} CTA
  A button that is meant to grab the user's attention.
  @property {String} PRIMARY
- A default button that indicates that the button's action is the primary action.
+ A button that indicates that the button's action is the primary action.
  @property {String} SECONDARY
  A button that indicates that the button's action is the secondary action.
  @property {String} QUIET
@@ -59,7 +59,7 @@ for (const key in Icon.size) {
  @property {String} WARNING
  A button that indicates that the button's action is dangerous.
  @property {String} DEFAULT
- Not supported. Falls back to SECONDARY.
+ The default button look and feel.
  */
 const variant = {
   CTA: 'cta',
@@ -68,7 +68,7 @@ const variant = {
   QUIET: 'quiet',
   MINIMAL: 'minimal',
   WARNING: 'warning',
-  DEFAULT: 'secondary',
+  DEFAULT: 'primary',
   // Private to be used for custom Button classes like toggle, dropdown and action
   _CUSTOM: '_custom'
 };
@@ -304,16 +304,16 @@ const ButtonMixin = (superClass) => class extends superClass {
    The button's variant. See {@link ButtonVariantEnum}.
    
    @type {String}
-   @default ButtonVariantEnum.PRIMARY
+   @default ButtonVariantEnum.DEFAULT
    @htmlattribute variant
    @htmlattributereflected
    */
   get variant() {
-    return this._variant || variant.PRIMARY;
+    return this._variant || variant.DEFAULT;
   }
   set variant(value) {
     value = transform.string(value).toLowerCase();
-    this._variant = validate.enumeration(variant)(value) && value || variant.PRIMARY;
+    this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
     
     // removes every existing variant
@@ -453,7 +453,7 @@ const ButtonMixin = (superClass) => class extends superClass {
     super.connectedCallback();
     
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.PRIMARY; }
+    if (!this._variant) { this.variant = variant.DEFAULT; }
     if (!this._size) { this.size = size.MEDIUM; }
     
     if (this.variant !== variant._CUSTOM) {

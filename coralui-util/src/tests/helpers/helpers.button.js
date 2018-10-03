@@ -20,7 +20,7 @@ const testButton = function(Constructor, tagName, baseTagName) {
         expect(Constructor.variant.WARNING).to.equal('warning');
         expect(Constructor.variant.QUIET).to.equal('quiet');
         expect(Constructor.variant.MINIMAL).to.equal('minimal');
-        expect(Constructor.variant.DEFAULT).to.equal('secondary');
+        expect(Constructor.variant.DEFAULT).to.equal('primary');
         expect(Constructor.variant._CUSTOM).to.equal('_custom');
         expect(Object.keys(Constructor.variant).length).to.equal(8);
       });
