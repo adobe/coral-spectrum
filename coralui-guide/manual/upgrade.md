@@ -1,6 +1,6 @@
-# Upgrade from CoralUI3 to Coral Spectrum 
+# Upgrade  
 
-## Benefits over CoralUI3
+## From CoralUI3 to Coral Spectrum
 
 ### Custom Elements v1
 

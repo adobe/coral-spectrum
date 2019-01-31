@@ -62,6 +62,7 @@ describe('Popover', function() {
     helpers.cloneComponent(
       'should be possible via cloneNode using js',
       new Popover().set({
+        variant: 'error',
         header: {
           textContent: 'header'
         },

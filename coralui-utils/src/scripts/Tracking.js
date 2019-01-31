@@ -28,6 +28,7 @@
  Using the above data you can map it to your own analytics tracker.
  */
 class Tracking {
+  /* @ignore */
   constructor() {
     /**
      All registered trackers.

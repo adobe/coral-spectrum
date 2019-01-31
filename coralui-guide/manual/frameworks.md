@@ -23,9 +23,3 @@ Coral Spectrum + Vue example : https://git.corp.adobe.com/ringel/coralui-vue.
 
 *Vue quickstart : https://vuejs.org/v2/guide/installation.html#CLI.*
 
-## Torq
-
-Coral Spectrum + Torq example : https://git.corp.adobe.com/ringel/coralui-torq. 
-
-*Torq quickstart : http://torq.corp.adobe.com/latest/#page/guides/tutorial/intro.*
-

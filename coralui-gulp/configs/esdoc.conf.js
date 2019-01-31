@@ -69,11 +69,11 @@ if (util.isTLB()) {
       path.join(root, 'README.md'),
       path.join(root, 'coralui-guide/manual/overview.md'),
       path.join(root, 'coralui-guide/manual/manual.md'),
+      path.join(root, 'coralui-guide/manual/upgrade.md'),
       path.join(root, 'coralui-guide/manual/styles.md'),
       path.join(root, 'coralui-guide/manual/frameworks.md'),
       path.join(root, 'coralui-guide/manual/architecture.md'),
-      path.join(root, 'coralui-guide/manual/contribution.md'),
-      path.join(root, 'coralui-guide/manual/upgrade.md')
+      path.join(root, 'coralui-guide/manual/contribution.md')
     ]
   };
 }

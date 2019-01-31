@@ -27,15 +27,30 @@
     title.textContent = document.title.split('|').pop().trim();
     header.children[0].appendChild(title);
     
+    // Move header title
+    nav.insertBefore(header.firstElementChild, nav.firstChild);
+    
+    var playground = document.createElement('a');
+    playground.href = '../playground';
+    playground.setAttribute('target', '_blank');
+    playground.textContent = 'Playground';
+    header.insertBefore(playground, header.firstElementChild);
+    
+    var examples = document.createElement('a');
+    examples.href = '../examples';
+    examples.setAttribute('target', '_blank');
+    examples.textContent = 'Examples';
+    header.insertBefore(examples, header.firstElementChild);
+    
     // Indicate active navigation
     if (document.title.indexOf('Reference') !== -1) {
-      header.children[1].className += ' is-active';
-    }
-    else if (document.title.indexOf('Source') !== -1) {
       header.children[2].className += ' is-active';
     }
+    else if (document.title.indexOf('Source') !== -1) {
+      header.children[3].className += ' is-active';
+    }
     else if (document.title.indexOf('Manual') === -1) {
-      header.children[1].className += ' is-active';
+      header.children[2].className += ' is-active';
       
       // Scroll into nav link
       var links = nav.querySelectorAll('a');
@@ -50,9 +65,6 @@
       }
     }
     
-    // Move header title
-    nav.insertBefore(header.firstElementChild, nav.firstChild);
-    
     // Hide content if empty for
     var content = document.querySelector('.content');
     if (content.textContent.trim() === '') {
@@ -64,7 +76,7 @@
     if (manualRootCard) {
       manualRootCard.parentNode.removeChild(manualRootCard);
     }
-  
+    
     // Remove README card
     var manualRootLink = nav.querySelector('.manual-toc-root [data-ice="manual"]:first-child');
     if (manualRootLink) {
@@ -133,7 +145,7 @@
         }
       }
     }
-  
+    
     // Insert examples iframe
     var example = document.querySelector('a[href*="../examples/"]');
     if (example) {
@@ -147,7 +159,7 @@
           var content = iframe.contentDocument;
           iframe.style.height = content.body.scrollHeight + 20 + 'px';
           content.documentElement.style.overflowY = 'hidden';
-  
+          
           content.documentElement.onclick = function() {
             iframe.style.height = content.body.scrollHeight + 20 + 'px';
           };
@@ -168,7 +180,7 @@
         }
       }
     });
-  
+    
     // Override manual.js
     var matched = location.pathname.match(/\/(manual\/.*\.html)$/);
     if (!matched) return;
