@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Shell} from '../../../coralui-component-shell';
 
 describe('Shell.HomeAnchor', function() {
@@ -9,12 +9,14 @@ describe('Shell.HomeAnchor', function() {
   });
   
   describe('Instantiation', function() {
-    it('should be possible to clone using markup', function() {
-      helpers.cloneComponent('<a is="coral-shell-homeanchor" icon="adobeExperienceManagerColorDark" href="#">Adobe Experience Manager</a>');
-    });
-  
-    it('should be possible to clone using js', function() {
-      helpers.cloneComponent(new Shell.HomeAnchor());
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using markup',
+      '<a is="coral-shell-homeanchor" icon="adobeExperienceManagerColorDark" href="#">Adobe Experience Manager</a>'
+    );
+    
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      new Shell.HomeAnchor()
+    );
   });
 });

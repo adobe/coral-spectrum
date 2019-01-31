@@ -16,7 +16,7 @@
  */
 
 import Vent from '@adobe/vent';
-import {events, validate, transform, commons} from '../../../coralui-util';
+import {events, validate, transform, commons} from '../../../coralui-utils';
 
 // Attributes
 const DROP_ZONE_ATTRIBUTE = 'coral-dragaction-dropzone';

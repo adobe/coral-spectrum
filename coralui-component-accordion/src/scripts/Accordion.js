@@ -17,7 +17,7 @@
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import {SelectableCollection} from '../../../coralui-collection';
-import {transform, validate, Keys} from '../../../coralui-util';
+import {transform, validate, Keys} from '../../../coralui-utils';
 
 // Key codes
 const PAGE_UP = 33;
@@ -404,7 +404,7 @@ class Accordion extends ComponentMixin(HTMLElement) {
 
   /** @ignore */
   static get observedAttributes() {
-    return ['variant', 'multiple'];
+    return super.observedAttributes.concat(['variant', 'multiple']);
   }
   
   /** @ignore */

@@ -24,7 +24,7 @@ import {SelectList} from '../../../coralui-component-list';
 import {Icon} from '../../../coralui-component-icon';
 import '../../../coralui-component-popover';
 import base from '../templates/base';
-import {transform, validate, commons, i18n, Keys} from '../../../coralui-util';
+import {transform, validate, commons, i18n, Keys} from '../../../coralui-utils';
 
 /**
  Enumeration for {@link Select} variants.
@@ -703,7 +703,8 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
         innerHTML: item.innerHTML
       },
       disabled: item.disabled,
-      selected: item.selected
+      selected: item.selected,
+      trackingElement: item.trackingElement
     }, true);
   
     const nativeOption = item._nativeOption || new Option();
@@ -871,6 +872,10 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       // closes and triggers the hideitems event
       this._hideOptions();
     }
+  
+    if (!this.multiple) {
+      this._trackEvent('change', 'coral-select-item', event, this.selectedItem);
+    }
   }
   
   /** @private */
@@ -1016,9 +1021,6 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this.trigger(`coral-select:_overlay${type}`);
     
     this._elements.button.classList.toggle('is-selected', event.target.open);
-    
-    // @a11y
-    this._elements.button.setAttribute('aria-expanded', event.target.open);
     
     if (!event.target.open) {
       this.classList.remove('is-openAbove', 'is-openBelow');
@@ -1264,6 +1266,10 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // when the item is selected, we need to enforce the selection mode
     if (item.selected) {
       this._onItemSelected(item);
+  
+      if (this.multiple) {
+        this._trackEvent('select', 'coral-select-item', event, item);
+      }
       
       // enforces the selection mode
       if (!this.hasAttribute('multiple')) {
@@ -1272,6 +1278,10 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     }
     else {
       this._onItemDeselected(item);
+  
+      if (this.multiple) {
+        this._trackEvent('deselect', 'coral-select-item', event, item);
+      }
     }
     
     this._bulkSelectionChange = false;
@@ -1364,6 +1374,8 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
     // Assign the button as the target for the overlay
     this._elements.overlay.target = this._elements.button;
+    // handles the focus allocation every time the overlay closes
+    this._elements.overlay.returnFocusTo(this._elements.button);
   }
   
   /** @ignore */

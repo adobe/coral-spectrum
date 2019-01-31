@@ -85,7 +85,7 @@ class CardProperty extends ComponentMixin(HTMLElement) {
   get _contentZones() { return {'coral-card-property-content': 'content'}; }
   
   /** @ignore */
-  static get observedAttributes() { return ['icon']; }
+  static get observedAttributes() { return super.observedAttributes.concat(['icon']); }
   
   /** @ignore */
   connectedCallback() {

@@ -18,7 +18,7 @@
 import {List} from '../../../coralui-component-list';
 import {SelectableCollection} from '../../../coralui-collection';
 import orgSwitcher from '../templates/orgSwitcher';
-import {commons, i18n} from '../../../coralui-util';
+import {commons, i18n} from '../../../coralui-utils';
 
 const CLASSNAMES = ['_coral-BasicList', '_coral-Shell-orgSwitcher'];
 

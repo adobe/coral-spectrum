@@ -1,5 +1,6 @@
 import '../coralui-theme-spectrum';
 import '../coralui-externals';
+import '../coralui-compat';
 
 import Radio from './src/scripts/Radio';
 import RadioLabel from './src/scripts/RadioLabel';

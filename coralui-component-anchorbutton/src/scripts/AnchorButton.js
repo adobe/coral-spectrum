@@ -17,7 +17,7 @@
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import {ButtonMixin} from '../../../coralui-mixin-button';
-import {transform, commons} from '../../../coralui-util';
+import {transform, commons} from '../../../coralui-utils';
 
 // Key code
 const SPACE = 32;
@@ -46,7 +46,7 @@ class AnchorButton extends ButtonMixin(ComponentMixin(HTMLAnchorElement)) {
     }));
     
     // cannot use the events hash because events on disabled items are not reported
-    this.addEventListener('click', this._onClick.bind(this));
+    this.addEventListener('click', this._onDisabledClick.bind(this));
   }
   
   /**
@@ -92,7 +92,7 @@ class AnchorButton extends ButtonMixin(ComponentMixin(HTMLAnchorElement)) {
   }
   
   /** @ignore */
-  _onClick(event) {
+  _onDisabledClick(event) {
     if (this.disabled) {
       event.preventDefault();
     }

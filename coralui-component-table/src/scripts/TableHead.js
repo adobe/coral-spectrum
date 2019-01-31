@@ -17,7 +17,7 @@
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import TableSectionMixin from './TableSectionMixin';
-import {transform} from '../../../coralui-util';
+import {transform} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-Table-head';
 

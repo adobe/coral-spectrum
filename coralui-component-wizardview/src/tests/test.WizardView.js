@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {WizardView} from '../../../coralui-component-wizardview';
 import {Panel, PanelStack} from '../../../coralui-component-panelstack';
 import {Step, StepList} from '../../../coralui-component-steplist';
@@ -60,13 +60,15 @@ describe('WizardView', function() {
       });
     });
   
-    it('should be possible via clone using markup', function() {
-      helpers.cloneComponent(window.__html__['WizardView.nested.html']);
-    });
+    helpers.cloneComponent(
+      'should be possible via clone using markup',
+      window.__html__['WizardView.nested.html']
+    );
   
-    it('should be possible via clone using js', function() {
-      helpers.cloneComponent(new WizardView());
-    });
+    helpers.cloneComponent(
+      'should be possible via clone using js',
+      new WizardView()
+    );
   });
 
   describe('API', function() {

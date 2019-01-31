@@ -16,7 +16,7 @@
  */
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
-import {transform, validate} from '../../../coralui-util';
+import {transform, validate} from '../../../coralui-utils';
 
 /**
  Enumeration for {@link QuickActionsItem} type values.
@@ -135,6 +135,20 @@ class QuickActionsItem extends ComponentMixin(HTMLElement) {
   }
   
   /**
+   Inherited from {@link ComponentMixin#trackingElement}.
+   */
+  get trackingElement() {
+    // it uses the name as the first fallback since it is not localized, otherwise it uses the label
+    return typeof this._trackingElement === 'undefined' ?
+      // keep spaces to only 1 max and trim. this mimics native html behaviors
+      this.icon || this.textContent.replace(/\s{2,}/g, ' ').trim() :
+      this._trackingElement;
+  }
+  set trackingElement(value) {
+    super.trackingElement = value;
+  }
+  
+  /**
    Handles mutations on the Item.
    
    @emits {coral-quickactions-item:_contentchanged}
@@ -153,7 +167,7 @@ class QuickActionsItem extends ComponentMixin(HTMLElement) {
   static get type() { return type; }
   
   /** @ignore */
-  static get observedAttributes() { return ['href', 'icon', 'type']; }
+  static get observedAttributes() { return super.observedAttributes.concat(['href', 'icon', 'type']); }
   
   /** @ignore */
   connectedCallback() {

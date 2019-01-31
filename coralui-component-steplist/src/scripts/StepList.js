@@ -17,7 +17,7 @@
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import {SelectableCollection} from '../../../coralui-collection';
-import {transform, validate, commons} from '../../../coralui-util';
+import {transform, validate, commons} from '../../../coralui-utils';
 import getTarget from './getTarget';
 
 /**
@@ -357,6 +357,8 @@ class StepList extends ComponentMixin(HTMLElement) {
       
       const item = event.matchedTarget.closest('coral-step');
       this._selectAndFocusItem(item);
+  
+      this._trackEvent('click', 'coral-steplist-item', event, item);
     }
   }
   
@@ -432,6 +434,10 @@ class StepList extends ComponentMixin(HTMLElement) {
   
   /** @private */
   _setHybridLabel(item) {
+    if (!item) {
+      return;
+    }
+    
     if (this._isHybridMode) {
       const items = this.items.getAll();
       const itemIndex = items.indexOf(item);
@@ -444,6 +450,10 @@ class StepList extends ComponentMixin(HTMLElement) {
   
       // Indicate item index
       item.label.dataset.coralStepIndex = ` (${(itemIndex + 1)}/${items.length})`;
+    }
+    else {
+      // Restore defaults
+      item.label.style.marginLeft = '';
     }
   }
   
@@ -525,7 +535,7 @@ class StepList extends ComponentMixin(HTMLElement) {
   static get interaction() { return interaction; }
   
   /** @ignore */
-  static get observedAttributes() { return ['target', 'size', 'interaction']; }
+  static get observedAttributes() { return super.observedAttributes.concat(['target', 'size', 'interaction']); }
   
   /** @ignore */
   connectedCallback() {

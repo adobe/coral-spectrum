@@ -16,10 +16,25 @@
  */
 
 import Vent from '@adobe/vent';
-import {commons, Keys, keys, events} from '../../../coralui-util';
+import {commons, Keys, keys, events, transform, validate, tracking as trackingUtil} from '../../../coralui-utils';
 
 // Used to split events by type/target
 const delegateEventSplitter = /^(\S+)\s*(.*)$/;
+
+/**
+ Enumeration representing the tracking options.
+ 
+ @typedef {Object} TrackingEnum
+ 
+ @property {String} ON
+ Enables tracking of the component interactions.
+ @property {String} OFF
+ Disables tracking of the component interactions.
+ */
+const tracking = {
+  ON: 'on',
+  OFF: 'off'
+};
 
 /**
  Return the method corresponding to the method name or the function, if passed.
@@ -365,6 +380,52 @@ const ComponentMixin = (superClass) => class extends superClass {
     }
   }
   
+  /**
+   Tracking of events. This provides insight on the usage of the components. It accepts "ON" and "OFF". In order to
+   successfully track the events, {Tracking} needs to be configured.
+   
+   @type {String}
+   @default TrackingEnum.ON
+   @htmlattribute tracking
+   */
+  get tracking() {
+    return this._tracking || this.getAttribute('tracking') || tracking.ON;
+  }
+  set tracking(value) {
+    value = transform.string(value).toLowerCase();
+    this._tracking = validate.enumeration(tracking)(value) && value || tracking.ON;
+  }
+  
+  /**
+   The string representing the feature being tracked. This provides additional context to the analytics trackers
+   about the feature that the element enables.
+   
+   @type {String}
+   @default ""
+   @htmlattribute trackingfeature
+   */
+  get trackingFeature() {
+    return this._trackingFeature || this.getAttribute('trackingFeature') || '';
+  }
+  set trackingFeature(value) {
+    this._trackingFeature = transform.string(value);
+  }
+  
+  /**
+   The string representing the element name being tracked. This providex additional context to the trackers about the
+   element that was interacted with.
+   
+   @type {String}
+   @default ""
+   @htmlattribute trackingelement
+   */
+  get trackingElement() {
+    return this._trackingElement || this.getAttribute('trackingElement') || '';
+  }
+  set trackingElement(value) {
+    this._trackingElement = transform.string(value);
+  }
+  
   // Constructs and returns the component name based on the constructor
   get _componentName() { return this.constructor._componentName || getConstructorName(this.constructor); }
   
@@ -381,6 +442,9 @@ const ComponentMixin = (superClass) => class extends superClass {
     this._events = commons.extend(this._events, eventMap);
     delegateEvents.call(this);
     delegateGlobalEvents.call(this);
+    
+    // Once events are attached, we dispose them
+    this._events = {};
   }
   
   // Returns the content zone if the component is connected and contains the content zone else null
@@ -475,6 +539,24 @@ const ComponentMixin = (superClass) => class extends superClass {
       this.setAttribute(attributeName, value);
       this._reflectedAttribute = false;
     }
+  }
+  
+  /**
+   Notifies external listeners about an internal interaction. This method is used internally in every
+   component's method that we want to track.
+   
+   @param {String} eventType The event type. Eg. click, select, etc.
+   @param {String} targetType The element type being used. Eg. cyclebutton, cyclebuttonitem, etc.
+   @param {CustomEvent} event
+   @param {ComponentMixin} childComponent - Optional, in case the event occurred on a child component.
+   
+   @returns {ComponentMixin}
+   */
+  _trackEvent(eventType, targetType, event, childComponent) {
+    if (this.tracking === this.constructor.tracking.ON) {
+      trackingUtil.track(eventType, targetType, event, this, childComponent);
+    }
+    return this;
   }
   
   /**
@@ -688,6 +770,26 @@ const ComponentMixin = (superClass) => class extends superClass {
     /** @ignore */
     this.hidden = true;
     return this;
+  }
+  
+  /**
+   Returns {@link ComponentMixin} tracking options.
+   
+   @return {TrackingEnum}
+   */
+  static get tracking() {
+    return tracking;
+  }
+  
+  /** @ignore */
+  static get observedAttributes() {
+    return [
+      'tracking',
+      'trackingelement',
+      'trackingElement',
+      'trackingfeature',
+      'trackingFeature'
+    ];
   }
   
   /** @ignore */

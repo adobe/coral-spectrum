@@ -18,7 +18,7 @@
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import {FormFieldMixin} from '../../../coralui-mixin-formfield';
 import base from '../templates/base';
-import {transform, commons} from '../../../coralui-util';
+import {transform, commons} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-Radio';
 
@@ -189,6 +189,20 @@ class Radio extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this.setAttribute('aria-readonly', this._readOnly);
   }
   
+  /**
+   Inherited from {@link ComponentMixin#trackingElement}.
+   */
+  get trackingElement() {
+    // it uses the name as the first fallback since it is not localized, otherwise it uses the label
+    return typeof this._trackingElement === 'undefined' ?
+      // keep spaces to only 1 max and trim. this mimics native html behaviors
+      (this.name ? `${this.name}=${this.value}` : '') || this.label.textContent.replace(/\s{2,}/g, ' ').trim() :
+      this._trackingElement;
+  }
+  set trackingElement(value) {
+    super.trackingElement = value;
+  }
+  
   /*
    Indicates to the formField that the 'checked' property needs to be set in this component.
    
@@ -246,9 +260,13 @@ class Radio extends FormFieldMixin(ComponentMixin(HTMLElement)) {
    */
   _onClick(event) {
     // Handle the click() just like the native radio
-    if (event.target === this && !this.checked) {
-      this.checked = true;
-      this.trigger('change');
+    if (!this.checked) {
+      if (event.target === this) {
+        this.checked = true;
+        this.trigger('change');
+      }
+  
+      this._trackEvent('checked', 'coral-radio', event);
     }
   }
   

@@ -22,7 +22,7 @@ import '../../../coralui-component-button';
 import '../../../coralui-component-textfield';
 import './ColorInputSlider';
 import propertiesSubview from '../templates/colorProperties';
-import {commons, i18n} from '../../../coralui-util';
+import {commons, i18n} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-ColorInput-colorProperties';
 

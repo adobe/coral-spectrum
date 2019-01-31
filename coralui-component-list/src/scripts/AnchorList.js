@@ -15,6 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
+import {commons} from '../../../coralui-utils';
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import {ListMixin} from '../../../coralui-mixin-list';
 
@@ -34,7 +35,9 @@ class AnchorList extends ListMixin(ComponentMixin(HTMLElement)) {
     super();
   
     // Events
-    this._delegateEvents(this._events);
+    this._delegateEvents(commons.extend(this._events, {
+      'click [coral-list-item]': '_onItemClick'
+    }));
   }
   
   /** @private */
@@ -47,6 +50,10 @@ class AnchorList extends ListMixin(ComponentMixin(HTMLElement)) {
   get _itemBaseTagName() {
     // Used for Collection
     return 'a';
+  }
+  
+  _onItemClick(event) {
+    this._trackEvent('click', 'coral-anchorlist-item', event, event.matchedTarget);
   }
   
   /** @ignore */

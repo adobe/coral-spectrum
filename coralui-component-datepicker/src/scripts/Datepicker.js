@@ -25,7 +25,7 @@ import '../../../coralui-component-popover';
 import '../../../coralui-component-textfield';
 import base from '../templates/base';
 import overlayContent from '../templates/overlayContent';
-import {transform, commons, validate, i18n} from '../../../coralui-util';
+import {transform, commons, validate, i18n} from '../../../coralui-utils';
 
 /**
  Enum for {@link Datepicker} variant values.
@@ -134,6 +134,7 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     events[`global:capture:coral-overlay:close #${overlayId}`] = '_onPopoverOpenOrClose';
     events['key:alt+down [handle="input"],[handle="toggle"]'] = '_onAltDownKey';
     events['key:down [handle="toggle"]'] = '_onAltDownKey';
+    events['change coral-datepicker > input[is="coral-textfield"]'] = '_onInputChange';
     
     // Events
     this._delegateEvents(commons.extend(this._events, events));
@@ -547,7 +548,6 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       // Hide pop-over and remove related attributes:
       this._elements.overlay.hidden = true;
       this.removeAttribute('aria-haspopup');
-      this.removeAttribute('aria-expanded');
       this.removeAttribute('aria-owns');
     }
     else {
@@ -558,7 +558,6 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       // Show pop-over and add related attributes:
       this._elements.overlay.hidden = false;
       this.setAttribute('aria-haspopup', 'true');
-      this.setAttribute('aria-expanded', 'false');
       this.setAttribute('aria-owns', this._elements.overlay.id);
     }
   }
@@ -574,9 +573,7 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
    
    @ignore
    */
-  _onPopoverOpenOrClose() {
-    this.setAttribute('aria-expanded', this._elements.overlay.open);
-    
+  _onPopoverOpenOrClose(event) {
     // set focus to calendar grid
     if (this._elements.overlay.open) {
       if (this.type === type.TIME) {
@@ -585,6 +582,11 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       else {
         this._elements.calendar.focus();
       }
+  
+      this._trackEvent('open', 'coral-datepicker', event);
+    }
+    else {
+      this._trackEvent('close', 'coral-datepicker', event);
     }
   }
   
@@ -594,6 +596,7 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       // since a selection has been made, we close the popover. we cannot use the _onChange listener to handle this
       // because clicking on the same button will not trigger a change event
       this._elements.overlay.open = false;
+      this._trackEvent('click', 'coral-datepicker', event);
     }
   }
   
@@ -607,6 +610,7 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._validateValue();
     
     this.trigger('change');
+    this._trackEvent('change', 'coral-datepicker', event);
   }
   
   /** @ignore */
@@ -738,7 +742,6 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     // a11y we only have AUTO mode.
     this._useNativeInput = IS_MOBILE_DEVICE;
-    this.setAttribute('role', 'datepicker');
     
     // Default reflected attributes
     if (!this._variant) { this.variant = variant.DEFAULT; }

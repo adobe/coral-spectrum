@@ -1,27 +1,33 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Tag} from '../../../coralui-component-taglist';
 
 describe('Tag', function() {
 
   describe('Instantiation', function() {
-    it('should be possible to clone a tag using markup', function() {
-      helpers.cloneComponent(window.__html__['Tag.base.html']);
-    });
-
-    it('should be possible to clone a tag with full markup', function() {
-      helpers.cloneComponent(window.__html__['Tag.full.html']);
-    });
-
-    it('should be possible to clone a tag with comments cusing markup', function() {
-      helpers.cloneComponent(window.__html__['Tag.full.html']);
-    });
-
-    it('should be possible to clone using js', function() {
-      var tag = new Tag();
-      tag.label.innerHTML = 'San José';
-      tag.value = 'SJ';
-      helpers.cloneComponent(tag);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone a tag using markup',
+      window.__html__['Tag.base.html']
+    );
+  
+    helpers.cloneComponent(
+      'should be possible to clone a tag with full markup',
+      window.__html__['Tag.full.html']
+    );
+  
+    helpers.cloneComponent(
+      'should be possible to clone a tag with comments cusing markup',
+      window.__html__['Tag.full.html']
+    );
+    
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      new Tag().set({
+        label: {
+          innerHTML: 'San José'
+        },
+        value: 'SJ'
+      })
+    );
   });
 
   describe('Markup', function() {

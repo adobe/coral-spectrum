@@ -1,3 +1,5 @@
+export {commons, events, i18n, keys, Keys, strings, transform, validate, tracking} from './coralui-utils';
+
 export {Collection, SelectableCollection} from './coralui-collection';
 export {DateTime} from './coralui-datetime';
 export {DragAction} from './coralui-dragaction';
@@ -49,5 +51,5 @@ export {Tree, TreeItem} from './coralui-component-tree';
 export {Wait} from './coralui-component-wait';
 export {WizardView} from './coralui-component-wizardview';
 
-// For Coral3 custom elements registration support
-import './coralui-compat';
+// @compat
+export {register, property, Component, mixin} from './coralui-compat';

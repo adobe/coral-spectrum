@@ -16,7 +16,7 @@
  */
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
-import {transform} from '../../../coralui-util';
+import {transform} from '../../../coralui-utils';
 
 /**
  @class Coral.Select.Item
@@ -113,6 +113,19 @@ class SelectItem extends ComponentMixin(HTMLElement) {
     this.trigger('coral-select-item:_valuechanged');
   }
   
+  /**
+   Inherited from {@link ComponentMixin#trackingElement}.
+   */
+  get trackingElement() {
+    return typeof this._trackingElement === 'undefined' ?
+      // keep spaces to only 1 max and trim. this mimics native html behaviors
+      this.value || this.textContent.replace(/\s{2,}/g, ' ').trim() :
+      this._trackingElement;
+  }
+  set trackingElement(value) {
+    super.trackingElement = value;
+  }
+  
   /** @private */
   _handleMutation() {
     this.trigger('coral-select-item:_contentchanged', {
@@ -122,7 +135,7 @@ class SelectItem extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return ['selected', 'disabled', 'value'];
+    return super.observedAttributes.concat(['selected', 'disabled', 'value']);
   }
 }
 

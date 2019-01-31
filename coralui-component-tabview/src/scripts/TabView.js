@@ -18,7 +18,7 @@
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import '../../../coralui-component-panelstack';
 import '../../../coralui-component-tablist';
-import {commons} from '../../../coralui-util';
+import {commons} from '../../../coralui-utils';
 
 /**
  Enumeration for {@link TabView} orientations.
@@ -103,6 +103,7 @@ class TabView extends ComponentMixin(HTMLElement) {
       handle: 'tabList',
       tagName: 'coral-tablist',
       insert: function(tabs) {
+        tabs.setAttribute('tracking', 'off');
         this.insertBefore(tabs, this._elements.panelStack || null);
       }
     });
@@ -148,8 +149,13 @@ class TabView extends ComponentMixin(HTMLElement) {
       const tab = document.getElementById(tabSelector);
     
       // we select the tab if this was not the case
-      if (tab && !tab.hasAttribute('selected')) {
-        tab.setAttribute('selected', '');
+      if (tab) {
+        if (!tab.hasAttribute('selected')) {
+          tab.setAttribute('selected', '');
+        }
+        else {
+          this._trackEvent('display', 'coral-tab', event, event.detail.selection);
+        }
       }
     }
   }
@@ -174,7 +180,7 @@ class TabView extends ComponentMixin(HTMLElement) {
   static get orientation() { return orientation; }
   
   /** @ignore */
-  static get observedAttributes() { return ['orientation']; }
+  static get observedAttributes() { return super.observedAttributes.concat(['orientation']); }
   
   /** @ignore */
   connectedCallback() {

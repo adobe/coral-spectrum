@@ -25,33 +25,81 @@
     "spectrumIconDark": "AdobeAnalyticsColor_Dark",
     "spectrumIconLight": "AdobeAnalyticsColor_Light"
   },
+  "adobeAnalyticsColorLight": {
+    "spectrumIcon": "AdobeAnalyticsColor_Light"
+  },
+  "adobeAnalyticsColorDark": {
+    "spectrumIcon": "AdobeAnalyticsColor_Dark"
+  },
   "adobeAudienceManagerColor": {
     "spectrumIconDark": "AdobeAudienceManagerColor_Dark",
     "spectrumIconLight": "AdobeAudienceManagerColor_Light"
+  },
+  "adobeAudienceManagerColorLight": {
+    "spectrumIcon": "AdobeAudienceManagerColor_Light"
+  },
+  "adobeAudienceManagerColorDark": {
+    "spectrumIcon": "AdobeAudienceManagerColor_Dark"
   },
   "adobeCampaignColor": {
     "spectrumIconDark": "AdobeCampaignColor_Dark",
     "spectrumIconLight": "AdobeCampaignColor_Light"
   },
+  "adobeCampaignColorLight": {
+    "spectrumIcon": "AdobeCampaignColor_Light"
+  },
+  "adobeCampaignColorDark": {
+    "spectrumIcon": "AdobeCampaignColor_Dark"
+  },
   "adobeExperienceManagerColor": {
     "spectrumIconDark": "AdobeExperienceManagerColor_Dark",
     "spectrumIconLight": "AdobeExperienceManagerColor_Light"
+  },
+  "adobeExperienceManagerColorLight": {
+    "spectrumIcon": "AdobeExperienceManagerColor_Light"
+  },
+  "adobeExperienceManagerColorDark": {
+    "spectrumIcon": "AdobeExperienceManagerColor_Dark"
   },
   "adobeMediaOptimizerColor": {
     "spectrumIconDark": "AdobeMediaOptimizerColor_Dark",
     "spectrumIconLight": "AdobeMediaOptimizerColor_Light"
   },
+  "adobeMediaOptimizerColorLight": {
+    "spectrumIcon": "AdobeMediaOptimizerColor_Light"
+  },
+  "adobeMediaOptimizerColorDark": {
+    "spectrumIcon": "AdobeMediaOptimizerColor_Dark"
+  },
   "adobePrimetimeColor": {
     "spectrumIconDark": "AdobePrimetimeColor_Dark",
     "spectrumIconLight": "AdobePrimetimeColor_Light"
+  },
+  "adobePrimetimeColorLight": {
+    "spectrumIcon": "AdobePrimetimeColor_Light"
+  },
+  "adobePrimetimeColorDark": {
+    "spectrumIcon": "AdobePrimetimeColor_Dark"
   },
   "adobeSocialColor": {
     "spectrumIconDark": "AdobeSocialColor_Dark",
     "spectrumIconLight": "AdobeSocialColor_Light"
   },
+  "adobeSocialColorLight": {
+    "spectrumIcon": "AdobeSocialColor_Light"
+  },
+  "adobeSocialColorDark": {
+    "spectrumIcon": "AdobeSocialColor_Dark"
+  },
   "adobeTargetColor": {
     "spectrumIconDark": "AdobeTargetColor_Dark",
     "spectrumIconLight": "AdobeTargetColor_Light"
+  },
+  "adobeTargetColorLight": {
+    "spectrumIcon": "AdobeTargetColor_Light"
+  },
+  "adobeTargetColorDark": {
+    "spectrumIcon": "AdobeTargetColor_Dark"
   },
   "annotate": {
     "spectrumIcon": "AnnotatePen"

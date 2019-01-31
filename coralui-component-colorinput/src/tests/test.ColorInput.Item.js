@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {ColorInput, Color} from '../../../coralui-component-colorinput';
 
 describe('ColorInput.Item', function() {

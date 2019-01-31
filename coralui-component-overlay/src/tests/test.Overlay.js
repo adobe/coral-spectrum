@@ -1,6 +1,6 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Overlay} from '../../../coralui-component-overlay';
-import {mixin} from '../../../coralui-util';
+import {mixin} from '../../../coralui-utils';
 
 describe('Overlay', function() {
   let overlay;
@@ -82,13 +82,15 @@ describe('Overlay', function() {
   });
   
   describe('Instantiation', function() {
-    it('should be possible to clone the element using markup', function() {
-      helpers.cloneComponent('<coral-overlay></coral-overlay>');
-    });
-    
-    it('should be possible to clone using js', function() {
-      helpers.cloneComponent(new Overlay());
-    });
+    helpers.cloneComponent(
+      'should be possible to clone the element using markup',
+      '<coral-overlay></coral-overlay>'
+    );
+  
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      new Overlay()
+    );
   });
   
   describe('API', function() {

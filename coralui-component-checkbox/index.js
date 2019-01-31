@@ -1,5 +1,6 @@
 import '../coralui-theme-spectrum';
 import '../coralui-externals';
+import '../coralui-compat';
 
 import Checkbox from './src/scripts/Checkbox';
 import CheckboxLabel from './src/scripts/CheckboxLabel';

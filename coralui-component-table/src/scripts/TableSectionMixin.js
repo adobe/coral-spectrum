@@ -16,7 +16,7 @@
  */
 
 import {divider} from './TableUtil';
-import {transform, validate} from '../../../coralui-util';
+import {transform, validate} from '../../../coralui-utils';
 
 // Builds a string containing all possible divider classnames. This will be used to remove classnames when the
 // divider changes
@@ -51,7 +51,7 @@ const TableSectionMixin = (superClass) => class extends superClass {
   }
   
   /** @ignore */
-  static get observedAttributes() { return ['divider']; }
+  static get observedAttributes() { return super.observedAttributes.concat(['divider']); }
   
   /** @ignore */
   connectedCallback() {

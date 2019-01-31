@@ -17,7 +17,7 @@
 
 import base from '../templates/base';
 import Vent from '@adobe/vent';
-import {validate, transform, commons} from '../../../coralui-util';
+import {validate, transform, commons} from '../../../coralui-utils';
 import {trapFocus, returnFocus, focusOnShow, FADETIME} from './enums';
 
 // Includes overlay itself
@@ -927,7 +927,7 @@ const OverlayMixin = (superClass) => class extends superClass {
   
   /** @ignore */
   static get observedAttributes() {
-    return [
+    return super.observedAttributes.concat([
       'trapfocus',
       'trapFocus',
       'returnfocus',
@@ -935,7 +935,7 @@ const OverlayMixin = (superClass) => class extends superClass {
       'focusonshow',
       'focusOnShow',
       'open'
-    ];
+    ]);
   }
   
   /** @ignore */

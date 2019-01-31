@@ -1,7 +1,7 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Datepicker} from '../../../coralui-component-datepicker';
 import {DateTime} from '../../../coralui-datetime';
-import {commons, Keys} from '../../../coralui-util';
+import {commons, Keys, tracking} from '../../../coralui-utils';
 
 describe('Datepicker', function() {
   // @todo: add tests for mobile
@@ -20,13 +20,15 @@ describe('Datepicker', function() {
   });
 
   describe('Instantiation', function() {
-    it('should be possible to clone the element using markup', function() {
-      helpers.cloneComponent(window.__html__['Datepicker.base.html']);
-    });
-
-    it('should be possible to clone the element using markup type="time"', function() {
-      helpers.cloneComponent(window.__html__['Datepicker.type.time.html']);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone the element using markup',
+      window.__html__['Datepicker.base.html']
+    );
+  
+    helpers.cloneComponent(
+      'should be possible to clone the element using markup type="time"',
+      window.__html__['Datepicker.type.time.html']
+    );
   });
   
   // Run tests once with moment fallback and once with moment
@@ -796,7 +798,6 @@ describe('Datepicker', function() {
       
         // Overlay does not open immediately any longer
         el.on('coral-overlay:open', function() {
-          expect(el.getAttribute('aria-expanded')).to.equal('true');
           done();
         });
       });
@@ -807,7 +808,6 @@ describe('Datepicker', function() {
         el._elements.toggle.click();
       
         expect(el._elements.overlay.open).to.be.false;
-        expect(el.getAttribute('aria-expanded')).to.equal('false');
       });
     
       it('should recheck the invalid state after a user interaction happened', function() {
@@ -951,6 +951,54 @@ describe('Datepicker', function() {
           expect(el._elements.overlay.open).to.be.false;
         
           done();
+        });
+      });
+  
+      describe('Tracking', function() {
+        var trackerFnSpy;
+    
+        beforeEach(function() {
+          trackerFnSpy = sinon.spy();
+          tracking.addListener(trackerFnSpy);
+        });
+    
+        afterEach(function() {
+          tracking.removeListener(trackerFnSpy);
+        });
+    
+        it('should call tracker callback with the expected tracker data when toggle button is clicked', function(done) {
+          const el = helpers.build(window.__html__['Datepicker.base.trackingOnWithAttributes.html']);
+          el._elements.toggle.click();
+          el.on('coral-overlay:open', function() {
+            expect(trackerFnSpy.callCount).to.equal(1, 'Track callback should be called once.');
+            var spyCall = trackerFnSpy.getCall(0);
+            var trackData = spyCall.args[0];
+            expect(trackData).to.have.property('targetType', 'coral-datepicker');
+            expect(trackData).to.have.property('targetElement', 'start date');
+            expect(trackData).to.have.property('eventType', 'open');
+            expect(trackData).to.have.property('rootFeature', 'sites');
+            expect(trackData).to.have.property('rootElement', 'start date');
+            expect(trackData).to.have.property('rootType', 'coral-datepicker');
+            done();
+          });
+        });
+    
+        it('should call tracker callback with the expected tracker data when value is manually changed', function(done) {
+          const el = helpers.build(window.__html__['Datepicker.base.trackingOnWithAttributes.html']);
+          var inputEl = el._elements.input;
+          inputEl.value = '2018-01-01';
+          inputEl.trigger('change');
+          helpers.next(function() {
+            var spyCall = trackerFnSpy.getCall(0);
+            var trackData = spyCall.args[0];
+            expect(trackData).to.have.property('targetType', 'coral-datepicker');
+            expect(trackData).to.have.property('targetElement', 'start date');
+            expect(trackData).to.have.property('eventType', 'change');
+            expect(trackData).to.have.property('rootFeature', 'sites');
+            expect(trackData).to.have.property('rootElement', 'start date');
+            expect(trackData).to.have.property('rootType', 'coral-datepicker');
+            done();
+          });
         });
       });
   

@@ -18,7 +18,7 @@
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import {Icon} from '../../../coralui-component-icon';
 import {Checkbox} from '../../../coralui-component-checkbox';
-import {transform, validate} from '../../../coralui-util';
+import {transform, validate} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-AssetList-item';
 
@@ -251,13 +251,13 @@ class ColumnViewItem extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return [
+    return super.observedAttributes.concat([
       'variant',
       'icon',
       'selected',
       'active',
       '_selectable'
-    ];
+    ]);
   }
   
   /** @ignore */

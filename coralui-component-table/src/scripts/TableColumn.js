@@ -17,7 +17,7 @@
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import {alignment} from './TableUtil';
-import {transform, validate} from '../../../coralui-util';
+import {transform, validate} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-Table-column';
 
@@ -267,7 +267,7 @@ class TableColumn extends ComponentMixin(HTMLTableColElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return [
+    return super.observedAttributes.concat([
       'fixedwidth',
       'fixedWidth',
       'hidden',
@@ -278,7 +278,7 @@ class TableColumn extends ComponentMixin(HTMLTableColElement) {
       'sortableType',
       'sortabledirection',
       'sortableDirection'
-    ];
+    ]);
   }
   
   /** @ignore */

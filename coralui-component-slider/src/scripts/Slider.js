@@ -19,7 +19,7 @@ import {ComponentMixin} from '../../../coralui-mixin-component';
 import {FormFieldMixin} from '../../../coralui-mixin-formfield';
 import {Collection} from '../../../coralui-collection';
 import base from '../templates/base';
-import {transform, validate, events, commons, Keys} from '../../../coralui-util';
+import {transform, validate, events, commons, Keys} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-Slider';
 const CLASSNAME_HANDLE = '_coral-Slider-handle';

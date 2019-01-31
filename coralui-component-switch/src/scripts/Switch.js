@@ -18,7 +18,7 @@
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import {FormFieldMixin} from '../../../coralui-mixin-formfield';
 import base from '../templates/base';
-import {transform, commons} from '../../../coralui-util';
+import {transform, commons} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-ToggleSwitch';
 

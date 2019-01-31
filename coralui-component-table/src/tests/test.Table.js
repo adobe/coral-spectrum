@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Table} from '../../../coralui-component-table';
 import {getIndexOf, getRows, getColumns, getHeaderCells} from '../scripts/TableUtil';
 
@@ -63,9 +63,10 @@ describe('Table', function() {
       expect(el.classList.contains('_coral-Table-wrapper')).to.be.true;
     });
   
-    it('should be possible to clone using markup', function() {
-      helpers.cloneComponent(window.__html__['Table.base.html']);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using markup',
+      window.__html__['Table.base.html']
+    );
   });
   
   describe('API', function() {

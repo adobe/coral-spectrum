@@ -16,7 +16,7 @@
  */
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
-import {transform} from '../../../coralui-util';
+import {transform} from '../../../coralui-utils';
 
 /**
  @class Coral.Autocomplete.Item
@@ -119,7 +119,7 @@ class AutocompleteItem extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return ['selected', 'disabled', 'value'];
+    return super.observedAttributes.concat(['selected', 'disabled', 'value']);
   }
 }
 

@@ -21,7 +21,7 @@ import {DragAction} from '../../../coralui-dragaction';
 import {Icon} from '../../../coralui-component-icon';
 import '../../../coralui-component-button';
 import base from '../templates/base';
-import {commons, transform, validate, i18n} from '../../../coralui-util';
+import {commons, transform, validate, i18n} from '../../../coralui-utils';
 
 /**
  Enumeration for {@link Dialog} closable options.
@@ -136,8 +136,13 @@ class Dialog extends OverlayMixin(ComponentMixin(HTMLElement)) {
 
     // Events
     this._delegateEvents({
+      'coral-overlay:open': '_handleOpen',
       'click [coral-close]': '_handleCloseClick',
-
+  
+      // Since we cover the backdrop with ourself for positioning purposes, this is implemented as a click listener
+      // instead of using backdropClickedCallback
+      'click': '_handleClick',
+      
       // Handle resize events
       'global:resize': 'center',
 
@@ -453,6 +458,10 @@ class Dialog extends OverlayMixin(ComponentMixin(HTMLElement)) {
     }
   }
   
+  _handleOpen(event) {
+    this._trackEvent('display', 'coral-dialog', event);
+  }
+  
   /** @ignore */
   _handleEscape() {
     // When escape is pressed, hide ourselves
@@ -471,6 +480,17 @@ class Dialog extends OverlayMixin(ComponentMixin(HTMLElement)) {
     if (!dismissValue || this.matches(dismissValue)) {
       this.open = false;
       event.stopPropagation();
+  
+      this._trackEvent('close', 'coral-dialog', event);
+    }
+  }
+  
+  _handleClick(event) {
+    // When we're modal, we close when our outer area (over the backdrop) is clicked
+    if (event.target === this && this.backdrop === backdrop.MODAL && this._isTopOverlay()) {
+      this.open = false;
+      
+      this._trackEvent('close', 'coral-dialog', event);
     }
   }
   

@@ -1,8 +1,9 @@
 import '../coralui-theme-spectrum';
 import '../coralui-externals';
+import '../coralui-compat';
 
 import translations from './i18n/translations.json';
-import {commons, strings} from '../coralui-util';
+import {commons, strings} from '../coralui-utils';
 import Calendar from './src/scripts/Calendar';
 
 // i18n

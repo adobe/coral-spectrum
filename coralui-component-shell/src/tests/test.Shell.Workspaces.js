@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Shell} from '../../../coralui-component-shell';
 import {Collection} from '../../../coralui-collection';
 
@@ -26,15 +26,17 @@ describe('Shell.Workspaces', function() {
       expect(el.items.length).to.equal(3);
     });
   
-    it('should be possible to clone using markup', function() {
-      helpers.cloneComponent(window.__html__['Shell.Workspaces.selected.html']);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using markup',
+      window.__html__['Shell.Workspaces.selected.html']
+    );
   
-    it('should be possible to clone using js', function() {
-      const el = new Shell.Workspaces();
-      el.items.add();
-      helpers.cloneComponent(el);
-    });
+    const el = new Shell.Workspaces();
+    el.items.add();
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      el
+    );
   });
 
   describe('API', function() {

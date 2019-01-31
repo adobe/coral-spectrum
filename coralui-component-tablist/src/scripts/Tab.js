@@ -17,7 +17,7 @@
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import base from '../templates/base';
-import {transform, commons} from '../../../coralui-util';
+import {transform, commons} from '../../../coralui-utils';
 import {Icon} from '../../../coralui-component-icon';
 import getTarget from './getTarget';
 
@@ -214,6 +214,19 @@ class Tab extends ComponentMixin(HTMLElement) {
   }
   
   /**
+   Inherited from {@link ComponentMixin#trackingElement}.
+   */
+  get trackingElement() {
+    return typeof this._trackingElement === 'undefined' ?
+      // keep spaces to only 1 max and trim. this mimics native html behaviors
+      this.label.textContent.replace(/\s{2,}/g, ' ').trim() :
+      this._trackingElement;
+  }
+  set trackingElement(value) {
+    super.trackingElement = value;
+  }
+  
+  /**
    Selects the target item
    
    @ignore
@@ -251,7 +264,7 @@ class Tab extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return ['selected', 'disabled', 'icon', 'invalid', 'target'];
+    return super.observedAttributes.concat(['selected', 'disabled', 'icon', 'invalid', 'target']);
   }
   
   /** @ignore */

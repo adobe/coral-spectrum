@@ -16,7 +16,7 @@
  */
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
-import {transform} from '../../../coralui-util';
+import {transform} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-Shell-workspaces-workspace';
 
@@ -68,7 +68,7 @@ class ShellWorkspace extends ComponentMixin(HTMLAnchorElement) {
   }
   
   /** @ignore */
-  static get observedAttributes() { return ['selected']; }
+  static get observedAttributes() { return super.observedAttributes.concat(['selected']); }
   
   /** @ignore */
   connectedCallback() {

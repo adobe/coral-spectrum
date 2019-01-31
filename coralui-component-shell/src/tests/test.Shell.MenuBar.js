@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Shell} from '../../../coralui-component-shell';
 
 describe('Shell.MenuBar', function() {
@@ -14,13 +14,15 @@ describe('Shell.MenuBar', function() {
       expect(el).to.be.an.instanceof(Shell.MenuBar);
     });
   
-    it('should be possible to clone using markup', function() {
-      helpers.cloneComponent('<coral-shell-menubar></coral-shell-menubar>');
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using markup',
+      '<coral-shell-menubar></coral-shell-menubar>'
+    );
   
-    it('should be possible to clone using js', function() {
-      helpers.cloneComponent(new Shell.MenuBar());
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      new Shell.MenuBar()
+    );
   });
 
   describe('API', function() {

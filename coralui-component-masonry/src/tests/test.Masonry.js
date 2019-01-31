@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Masonry} from '../../../coralui-component-masonry';
 
 describe('Masonry.Layout', function() {
@@ -26,10 +26,11 @@ describe('Masonry.Layout', function() {
       const el = helpers.build(window.__html__['Masonry.variable.empty.html']);
       testInstance(el, 'variable');
     });
-    
-    it('should be possible to clone via markup', function() {
-      helpers.cloneComponent(window.__html__['Masonry.base.html']);
-    });
+  
+    helpers.cloneComponent(
+      'should be possible to clone via markup',
+      window.__html__['Masonry.base.html']
+    );
   });
   
   describe('API', function() {

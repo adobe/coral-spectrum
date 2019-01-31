@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Slider} from '../../../coralui-component-slider';
 
 describe('Slider', function() {
@@ -16,13 +16,15 @@ describe('Slider', function() {
   });
   
   describe('Instantiation', function() {
-    it('should be possible to clone the element using markup', function() {
-      helpers.cloneComponent(window.__html__['Slider.base.html']);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone the element using markup',
+      window.__html__['Slider.base.html']
+    );
   
-    it('should be possible to clone using js', function() {
-      helpers.cloneComponent(new Slider());
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      new Slider()
+    );
   });
 
   describe('API', function() {

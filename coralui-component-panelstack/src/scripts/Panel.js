@@ -16,7 +16,7 @@
  */
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
-import {transform} from '../../../coralui-util';
+import {transform} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-Panel';
 
@@ -75,7 +75,6 @@ class Panel extends ComponentMixin(HTMLElement) {
     this._reflectAttribute('selected', this._selected);
     
     this.classList.toggle('is-selected', this._selected);
-    this.setAttribute('aria-selected', this._selected);
     this.setAttribute('aria-hidden', !this.selected);
     
     this.trigger('coral-panel:_selectedchanged');
@@ -85,7 +84,7 @@ class Panel extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return ['selected'];
+    return super.observedAttributes.concat(['selected']);
   }
   
   /** @ignore */
@@ -99,13 +98,12 @@ class Panel extends ComponentMixin(HTMLElement) {
   
     // Fetch the content zone elements
     const content = this._elements.content;
-    
-    // Remove it so we can process children
-    content.remove();
   
-    // Finally, move any remaining elements into the content sub-component
-    while (this.firstChild) {
-      content.appendChild(this.firstChild);
+    // Move the content into the content zone if none specified
+    if (!content.parentNode) {
+      while (this.firstChild) {
+        content.appendChild(this.firstChild);
+      }
     }
   
     // Assign the content zone so the insert function will be called

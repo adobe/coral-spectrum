@@ -1,5 +1,6 @@
 import '../coralui-theme-spectrum';
 import '../coralui-externals';
+import '../coralui-compat';
 
 import Switch from './src/scripts/Switch';
 import SwitchLabel from './src/scripts/SwitchLabel';

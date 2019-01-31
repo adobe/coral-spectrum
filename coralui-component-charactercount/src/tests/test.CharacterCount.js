@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {CharacterCount} from '../../../coralui-component-charactercount';
 
 describe('CharacterCount', function() {
@@ -31,14 +31,16 @@ describe('CharacterCount', function() {
       expect(defaultCharacterCount.target).to.equal(CharacterCount.target.PREVIOUS);
       expect(defaultCharacterCount.maxLength).to.be.null;
     });
-
-    it('should be possible to clone using markup', function() {
-      helpers.cloneComponent('<coral-charactercount></coral-charactercount>');
-    });
-
-    it('should be possible to clone using js', function() {
-      helpers.cloneComponent(new CharacterCount());
-    });
+  
+    helpers.cloneComponent(
+      'should be possible to clone using markup',
+      '<coral-charactercount></coral-charactercount>'
+    );
+  
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      new CharacterCount()
+    );
   });
 
   describe('Implementation Details', function() {

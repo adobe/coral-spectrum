@@ -17,7 +17,7 @@
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import {Icon} from '../../../coralui-component-icon';
-import {transform, validate} from '../../../coralui-util';
+import {transform, validate} from '../../../coralui-utils';
 
 /**
  Enumeration for {@link Alert} variants.
@@ -215,6 +215,8 @@ class Alert extends ComponentMixin(HTMLElement) {
       this.hidden = true;
       event.stopPropagation();
     }
+  
+    this._trackEvent('close', 'coral-alert', event);
   }
   
   _insertTemplate() {
@@ -258,7 +260,7 @@ class Alert extends ComponentMixin(HTMLElement) {
   static get size() { return size; }
   
   /** @ignore */
-  static get observedAttributes() { return ['variant', 'size']; }
+  static get observedAttributes() { return super.observedAttributes.concat(['variant', 'size']); }
   
   /** @ignore */
   connectedCallback() {

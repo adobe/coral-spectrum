@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Progress} from '../../../coralui-component-progress';
 
 describe('Progress', function() {
@@ -22,13 +22,15 @@ describe('Progress', function() {
   });
   
   describe('Instantiation', function() {
-    it('should be possible to clone using markup', function() {
-      helpers.cloneComponent('<coral-progress>SOME LABEL</coral-progress>');
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using markup',
+      '<coral-progress>SOME LABEL</coral-progress>'
+    );
   
-    it('should be possible to clone using js', function() {
-      helpers.cloneComponent(new Progress());
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      new Progress()
+    );
   });
   
   describe('API', function() {

@@ -1,5 +1,6 @@
 import '../coralui-theme-spectrum';
 import '../coralui-externals';
+import '../coralui-compat';
 
 import StepList from './src/scripts/StepList';
 import Step from './src/scripts/Step';

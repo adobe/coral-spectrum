@@ -19,7 +19,7 @@ import {ComponentMixin} from '../../../coralui-mixin-component';
 import {SelectableCollection} from '../../../coralui-collection';
 import '../../../coralui-component-wait';
 import loadIndicator from '../templates/loadIndicator';
-import {transform} from '../../../coralui-util';
+import {transform} from '../../../coralui-utils';
 
 const KEYPRESS_TIMEOUT_DURATION = 1000;
 
@@ -506,7 +506,7 @@ class SelectList extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return ['loading', 'multiple'];
+    return super.observedAttributes.concat(['loading', 'multiple']);
   }
   
   /** @ignore */

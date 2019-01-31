@@ -27,7 +27,7 @@ import '../../../coralui-component-popover';
 import './ColorInputColorProperties';
 import './ColorInputSwatches';
 import base from '../templates/base';
-import {validate, transform, commons, i18n} from '../../../coralui-util';
+import {validate, transform, commons, i18n} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-ColorInput';
 

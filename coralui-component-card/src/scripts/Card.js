@@ -17,7 +17,7 @@
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import base from '../templates/base';
-import {transform, validate} from '../../../coralui-util';
+import {transform, validate} from '../../../coralui-utils';
 
 const COLOR_HINT_REG_EXP = /^#[0-9A-F]{6}$/i;
 
@@ -379,7 +379,7 @@ class Card extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return [
+    return super.observedAttributes.concat([
       'assetwidth',
       'assetWidth',
       'assetheight',
@@ -390,7 +390,7 @@ class Card extends ComponentMixin(HTMLElement) {
       'fixedWidth',
       'variant',
       'stacked'
-    ];
+    ]);
   }
   
   /** @ignore */

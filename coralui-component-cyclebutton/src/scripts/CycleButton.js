@@ -23,7 +23,7 @@ import {Icon} from '../../../coralui-component-icon';
 import {ButtonList, SelectList} from '../../../coralui-component-list';
 import {SelectableCollection} from '../../../coralui-collection';
 import base from '../templates/base';
-import {transform, validate, commons} from '../../../coralui-util';
+import {transform, validate, commons} from '../../../coralui-utils';
 
 /**
  Enumeration for {@link CycleButton} display options.
@@ -73,6 +73,7 @@ class CycleButton extends ComponentMixin(HTMLElement) {
     base.call(this._elements, {Icon, commons});
     
     const events = {
+      'click button[is="coral-button"]': '_onMouseDown',
       'click ._coral-CycleSelect-button': '_onItemClick',
       'click coral-cyclebutton-item': '_onItemClick',
       'key:down ._coral-CycleSelect-button[aria-expanded=false]': '_onItemClick',
@@ -325,6 +326,12 @@ class CycleButton extends ComponentMixin(HTMLElement) {
     }
   }
   
+  _onMouseDown(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    this._trackEvent('click', 'coral-cyclebutton', event);
+  }
+  
   /** @private */
   _onItemClick(event) {
     event.preventDefault();
@@ -415,16 +422,19 @@ class CycleButton extends ComponentMixin(HTMLElement) {
   _onSelectListChange(event) {
     event.stopImmediatePropagation();
     event.preventDefault();
-    
+  
+    let origNode;
     const selectListItem = event.detail.selection;
     if (selectListItem) {
-      const origNode = selectListItem._originalItem;
+      origNode = selectListItem._originalItem;
       
       this._selectCycleItem(origNode);
       
       // Hide the overlay, cleanup will be done before overlay.show()
       this._hideOverlay();
     }
+  
+    this._trackEvent('selected', 'coral-cyclebutton-item', event, origNode);
   }
   
   /** @private */
@@ -437,6 +447,8 @@ class CycleButton extends ComponentMixin(HTMLElement) {
     if (!proxyEvent.defaultPrevented) {
       this._hideOverlay();
     }
+  
+    this._trackEvent('selected', 'coral-cyclebutton-action', event, item);
   }
   
   /** @private */
@@ -493,6 +505,9 @@ class CycleButton extends ComponentMixin(HTMLElement) {
   _getSelectListItem(item) {
     const selectListItem = new SelectList.Item();
   
+    // Needs to be reflected on the generated Item.
+    selectListItem.trackingElement = item.trackingElement;
+  
     // We do first the content, so that the icon is not destroyed
     selectListItem.content.innerHTML = item.content.innerHTML;
     
@@ -500,7 +515,8 @@ class CycleButton extends ComponentMixin(HTMLElement) {
     if (item.icon) {
       const icon = new Icon().set({
         icon: item.icon,
-        size: Icon.size.SMALL
+        size: Icon.size.SMALL,
+        tracking: Icon.tracking.OFF
       });
       icon.classList.add(`${CLASSNAME}-list-icon`);
   
@@ -518,6 +534,8 @@ class CycleButton extends ComponentMixin(HTMLElement) {
     const actionListItem = new ButtonList.Item();
     
     actionListItem.icon = action.icon;
+    // Needs to be reflected on the generated Action.
+    actionListItem.trackingElement = action.trackingElement;
     actionListItem.content.innerHTML = action.content.innerHTML;
     
     actionListItem._originalItem = action;
@@ -600,7 +618,7 @@ class CycleButton extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return ['icon', 'threshold', 'displaymode', 'displayMode'];
+    return super.observedAttributes.concat(['icon', 'threshold', 'displaymode', 'displayMode']);
   }
   
   /** @ignore */

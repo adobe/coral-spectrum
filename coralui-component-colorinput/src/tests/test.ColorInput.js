@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {ColorInput, Color} from '../../../coralui-component-colorinput';
 
 describe('ColorInput', function() {
@@ -12,13 +12,15 @@ describe('ColorInput', function() {
   });
   
   describe('Instantiation', function() {
-    it('should be possible to clone the element using markup', function() {
-      helpers.cloneComponent(window.__html__['ColorInput.base.html']);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone the element using markup',
+      window.__html__['ColorInput.base.html']
+    );
   
-    it('should be possible via cloneNode using js', function() {
-      helpers.cloneComponent(new ColorInput());
-    });
+    helpers.cloneComponent(
+      'should be possible via cloneNode using js',
+      new ColorInput()
+    );
   });
 
   describe('API', function() {

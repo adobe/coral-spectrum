@@ -1,34 +1,38 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {tracking} from '../../../coralui-utils';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {TagList, Tag} from '../../../coralui-component-taglist';
 
 describe('TagList', function() {
   
   describe('Instantiation', function() {
-    it('should be possible to clone a taglist with one tag using markup', function() {
-      helpers.cloneComponent(window.__html__['TagList.base.html']);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone a taglist with one tag using markup',
+      window.__html__['TagList.base.html']
+    );
+  
+    helpers.cloneComponent(
+      'should be possible to clone a taglist with multiple tags using markup',
+      window.__html__['TagList.full.html']
+    );
     
-    it('should be possible to clone a taglist with multiple tags using markup', function() {
-      helpers.cloneComponent(window.__html__['TagList.full.html']);
+    var tagList = new TagList();
+    tagList.items.add({
+      label: {
+        innerHTML: 'San José'
+      },
+      value: 'SJ'
     });
-    
-    it('should be possible to clone using js', function() {
-      var tagList = new TagList();
-      tagList.items.add({
-        label: {
-          innerHTML: 'San José'
-        },
-        value: 'SJ'
-      });
-      tagList.items.add({
-        label: {
-          innerHTML: 'New York'
-        },
-        value: 'NY'
-      });
-      
-      helpers.cloneComponent(tagList);
+    tagList.items.add({
+      label: {
+        innerHTML: 'New York'
+      },
+      value: 'NY'
     });
+  
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      tagList
+    );
   });
   
   describe('Markup', function() {
@@ -564,6 +568,38 @@ describe('TagList', function() {
       helpers.testFormField(window.__html__['TagList.value.html'], {
         value: 'myvalue'
       });
+    });
+  });
+  
+  describe('Tracking', function() {
+    var trackerFnSpy;
+    
+    beforeEach(function () {
+      trackerFnSpy = sinon.spy();
+      tracking.addListener(trackerFnSpy);
+    });
+    
+    afterEach(function () {
+      tracking.removeListener(trackerFnSpy);
+    });
+    
+    it('should call the tracker callback fn with expected parameters when the a tag is removed', function() {
+      const el = helpers.build(window.__html__['TagList.tracking.full.html']);
+      el.querySelector('coral-tag:nth-child(1)').click();
+      expect(trackerFnSpy.callCount).to.equal(1, 'Tracker should have been called only once.');
+      
+      var spyCall = trackerFnSpy.getCall(0);
+      expect(spyCall.args.length).to.equal(4);
+      
+      var trackData = spyCall.args[0];
+      expect(trackData).to.have.property('targetElement', 'First');
+      expect(trackData).to.have.property('targetType', 'coral-tag');
+      expect(trackData).to.have.property('eventType', 'remove');
+      expect(trackData).to.have.property('rootElement', 'element name');
+      expect(trackData).to.have.property('rootFeature', 'feature name');
+      expect(trackData).to.have.property('rootType', 'coral-taglist');
+      expect(spyCall.args[1]).to.be.an.instanceof(Event);
+      expect(spyCall.args[2]).to.be.an.instanceof(TagList);
     });
   });
 });

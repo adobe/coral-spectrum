@@ -1,4 +1,5 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {tracking} from '../../../coralui-utils';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Select} from '../../../coralui-component-select';
 
 describe('Select', function() {
@@ -31,21 +32,21 @@ describe('Select', function() {
       const el = helpers.build('<coral-select></coral-select>');
       testDefaultInstance(el);
     });
-
-    it('should be possible to clone using markup', function() {
-      const el = helpers.build(window.__html__['Select.multiple.base.html']);
-      helpers.cloneComponent(el);
-    });
-
-    it('should be possible to clone using markup with framework data', function() {
-      const el = helpers.build(window.__html__['Select.mustache.html']);
-      helpers.cloneComponent(el);
-    });
-
-    it('should be possible to clone using js', function() {
-      const el = helpers.build(new Select());
-      helpers.cloneComponent(el);
-    });
+  
+    helpers.cloneComponent(
+      'should be possible to clone using markup',
+      helpers.build(window.__html__['Select.multiple.base.html'])
+    );
+  
+    helpers.cloneComponent(
+      'should be possible to clone using markup with framework data',
+      window.__html__['Select.mustache.html']
+    );
+  
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      new Select()
+    );
   });
 
   // API tests that do not set the placeholder as default
@@ -2149,6 +2150,106 @@ describe('Select', function() {
         value: 'as',
         default: ''
       });
+    });
+  });
+  
+  describe('Tracking', function() {
+    var trackerFnSpy;
+    
+    beforeEach(function () {
+      trackerFnSpy = sinon.spy();
+      tracking.addListener(trackerFnSpy);
+    });
+    
+    afterEach(function () {
+      tracking.removeListener(trackerFnSpy);
+    });
+    
+    it('should call the tracker callback fn with expected parameters when the simple select changes it\'s value that has a trackingElement attribute', function() {
+      const el = helpers.build(window.__html__['Select.tracking.single.html']);
+      el.click();
+      
+      el._elements.list.items.first().click();
+      expect(trackerFnSpy.callCount).to.equal(1, 'Tracker should have been called only once.');
+      
+      var spyCall = trackerFnSpy.getCall(0);
+      expect(spyCall.args.length).to.equal(4);
+      
+      var trackData = spyCall.args[0];
+      expect(trackData).to.have.property('targetElement', 'First element name');
+      expect(trackData).to.have.property('targetType', 'coral-select-item');
+      expect(trackData).to.have.property('eventType', 'change');
+      expect(trackData).to.have.property('rootElement', 'element name');
+      expect(trackData).to.have.property('rootFeature', 'feature name');
+      expect(trackData).to.have.property('rootType', 'coral-select');
+      expect(spyCall.args[1]).to.be.an.instanceof(CustomEvent);
+      expect(spyCall.args[2]).to.be.an.instanceof(Select);
+    });
+    
+    it('should call the tracker callback fn with expected parameters when the simple select changes it\'s value that doesn\'t have a trackingElement attribute', function() {
+      const el = helpers.build(window.__html__['Select.tracking.single.html']);
+      el.click();
+      
+      el._elements.list.items.getAll()[1].click();
+      
+      expect(trackerFnSpy.callCount).to.equal(1, 'Tracker should have been called only once.');
+      var spyCall = trackerFnSpy.getCall(0);
+      expect(spyCall.args.length).to.equal(4);
+      
+      var trackData = spyCall.args[0];
+      expect(trackData).to.have.property('targetElement', 'Second');
+      expect(trackData).to.have.property('targetType', 'coral-select-item');
+      expect(trackData).to.have.property('eventType', 'change');
+      expect(trackData).to.have.property('rootElement', 'element name');
+      expect(trackData).to.have.property('rootFeature', 'feature name');
+      expect(trackData).to.have.property('rootType', 'coral-select');
+      expect(spyCall.args[1]).to.be.an.instanceof(CustomEvent);
+      expect(spyCall.args[2]).to.be.an.instanceof(Select);
+    });
+    
+    it('should call the tracker callback fn with expected parameters when the multiple select changes it\'s value that doesn\'t have a trackingElement attribute', function() {
+      const el = helpers.build(window.__html__['Select.tracking.multiple.html']);
+      el.click();
+  
+      el._elements.list.items.first().click();
+      expect(trackerFnSpy.callCount).to.equal(1, 'Tracker should have been called only once.');
+      
+      var spyCall = trackerFnSpy.getCall(0);
+      expect(spyCall.args.length).to.equal(4);
+      
+      var trackData = spyCall.args[0];
+      expect(trackData).to.have.property('targetElement', 'First element name');
+      expect(trackData).to.have.property('targetType', 'coral-select-item');
+      expect(trackData).to.have.property('eventType', 'select');
+      expect(trackData).to.have.property('rootElement', 'element name');
+      expect(trackData).to.have.property('rootFeature', 'feature name');
+      expect(trackData).to.have.property('rootType', 'coral-select');
+      expect(spyCall.args[1]).to.be.an.instanceof(CustomEvent);
+      expect(spyCall.args[2]).to.be.an.instanceof(Select);
+    });
+    
+    it.skip('should call the tracker callback fn with expected parameters when the multiple select adds a new tag and then removes it', function() {
+      const el = helpers.build(window.__html__['Select.tracking.multiple.html']);
+      el.click();
+  
+      const listItem = el._elements.list.items.first().click();
+      listItem.click();
+      
+      var tagItemCloseBtn = el.querySelector('coral-taglist coral-tag button[coral-close]');
+      tagItemCloseBtn.click();
+      
+      expect(trackerFnSpy.callCount).to.equal(2, 'Tracker should have been called twice.');
+      var spyCall = trackerFnSpy.getCall(1);
+      expect(spyCall.args.length).to.equal(4);
+      var trackData = spyCall.args[0];
+      expect(trackData).to.have.property('targetElement', 'First element name');
+      expect(trackData).to.have.property('targetType', 'coral-select-item');
+      expect(trackData).to.have.property('eventType', 'deselect');
+      expect(trackData).to.have.property('rootElement', 'element name');
+      expect(trackData).to.have.property('rootFeature', 'feature name');
+      expect(trackData).to.have.property('rootType', 'coral-select');
+      expect(spyCall.args[1]).to.be.an.instanceof(CustomEvent);
+      expect(spyCall.args[2]).to.be.an.instanceof(Select);
     });
   });
 });

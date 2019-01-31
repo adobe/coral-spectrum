@@ -16,7 +16,7 @@
  */
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
-import {transform} from '../../../coralui-util';
+import {transform} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-Table-cell';
 
@@ -129,7 +129,7 @@ class TableCell extends ComponentMixin(HTMLTableCellElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return ['selected', '_selectable'];
+    return super.observedAttributes.concat(['selected', '_selectable']);
   }
   
   /** @ignore */

@@ -16,7 +16,7 @@
  */
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
-import {transform, validate} from '../../../coralui-util';
+import {transform, validate} from '../../../coralui-utils';
 import '../../../coralui-component-icon';
 import '../../../coralui-component-button';
 import '../../../coralui-component-anchorbutton';
@@ -253,7 +253,7 @@ class ShellMenuBarItem extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return [
+    return super.observedAttributes.concat([
       'icon',
       'iconsize',
       'iconSize',
@@ -262,7 +262,7 @@ class ShellMenuBarItem extends ComponentMixin(HTMLElement) {
       'badge',
       'open',
       'menu'
-    ];
+    ]);
   }
   
   /** @ignore */

@@ -17,7 +17,7 @@
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import {Collection} from '../../../coralui-collection';
-import {transform} from '../../../coralui-util';
+import {transform} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-Shell-solutions';
 
@@ -67,7 +67,7 @@ class ShellSolutions extends ComponentMixin(HTMLElement) {
   }
   
   /** @ignore */
-  static get observedAttributes() { return ['secondary']; }
+  static get observedAttributes() { return super.observedAttributes.concat(['secondary']); }
   
   /** @ignore */
   connectedCallback() {

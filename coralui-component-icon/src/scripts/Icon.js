@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 import {ComponentMixin} from '../../../coralui-mixin-component';
-import {transform, validate, commons} from '../../../coralui-util';
+import {transform, validate, commons} from '../../../coralui-utils';
 import ICON_MAP from '../../../coralui-compat/data/iconMap.json';
 import SPECTRUM_ICONS_PATH from '@spectrum/spectrum-iconstore/icons/workflow/spectrum-icons.svg';
 import SPECTRUM_ICONS_COLOR_PATH from '@spectrum/spectrum-iconstore/icons/workflow/spectrum-icons-color.svg';
@@ -372,7 +372,7 @@ class Icon extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return ['icon', 'size', 'alt', 'title'];
+    return super.observedAttributes.concat(['icon', 'size', 'alt', 'title']);
   }
   
   /** @ignore */

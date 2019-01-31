@@ -1,7 +1,7 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Clock} from '../../../coralui-component-clock';
 import {DateTime} from '../../../coralui-datetime';
-import {i18n} from '../../../coralui-util';
+import {i18n} from '../../../coralui-utils';
 
 describe('Clock', function() {
   describe('Namespace', function() {
@@ -14,13 +14,15 @@ describe('Clock', function() {
   });
 
   describe('Instantiation', function() {
-    it('should be possible to clone using markup', function() {
-      helpers.cloneComponent(window.__html__['Clock.base.html']);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using markup',
+      window.__html__['Clock.base.html']
+    );
   
-    it('should be possible to clone with markup with value preset', function() {
-      helpers.cloneComponent(window.__html__['Clock.value.html']);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone with markup with value preset',
+      window.__html__['Clock.value.html']
+    );
   });
   
   // Run tests once with moment fallback and once with moment

@@ -19,11 +19,10 @@ import ActionBarContainerCollection from './ActionBarContainerCollection';
 import getFirstSelectableWrappedItem from './getFirstSelectableWrappedItem';
 import {Button} from '../../../coralui-component-button';
 import '../../../coralui-component-anchorbutton';
-import {Popover} from '../../../coralui-component-popover';
 import moreOverlay from '../templates/moreOverlay';
 import moreButton from '../templates/moreButton';
 import overlayContent from '../templates/overlayContent';
-import {commons, transform, i18n} from '../../../coralui-util';
+import {commons, transform, i18n} from '../../../coralui-utils';
 
 // Matches private Coral classes in class attribute
 const REG_EXP = /_coral([^\s]+)/g;
@@ -158,11 +157,6 @@ const ActionBarContainerMixin = (superClass) => class extends superClass {
         button.classList.add('_coral-ActionButton--quiet');
       }
     }
-    
-    const popover = item.querySelector('coral-popover');
-    if (popover && (popover.querySelector('coral-buttonlist') || popover.querySelector('coral-anchorlist'))) {
-      popover.setAttribute('variant', Popover.variant.FLYOUT);
-    }
   }
   
   _onItemFocusIn(event) {
@@ -274,7 +268,7 @@ const ActionBarContainerMixin = (superClass) => class extends superClass {
   
   /** @ignore */
   static get observedAttributes() {
-    return ['moreButtonText', 'morebuttontext', 'threshold'];
+    return super.observedAttributes.concat(['moreButtonText', 'morebuttontext', 'threshold']);
   }
   
   /** @ignore */

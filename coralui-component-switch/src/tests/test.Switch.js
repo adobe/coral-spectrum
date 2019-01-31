@@ -1,21 +1,24 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Switch} from '../../../coralui-component-switch';
-import {events} from '../../../coralui-util';
+import {events} from '../../../coralui-utils';
 
 describe('Switch', function() {
   
   describe('Instantiation', function() {
-    it('should be possible to clone using markup', function() {
-      helpers.cloneComponent('<coral-switch></coral-switch>');
-    });
-
-    it('should be possible to clone a switch with checked attribute using markup', function() {
-      helpers.cloneComponent('<coral-switch checked></coral-switch>');
-    });
-
-    it('should be possible to clone a switch using js', function() {
-      helpers.cloneComponent(new Switch());
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using markup',
+      '<coral-switch></coral-switch>'
+    );
+  
+    helpers.cloneComponent(
+      'should be possible to clone a switch with checked attribute using markup',
+      '<coral-switch checked></coral-switch>'
+    );
+  
+    helpers.cloneComponent(
+      'should be possible to clone a switch using js',
+      new Switch()
+    );
   });
 
   describe('Markup', function() {

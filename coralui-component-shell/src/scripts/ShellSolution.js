@@ -16,7 +16,7 @@
  */
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
-import {transform} from '../../../coralui-util';
+import {transform} from '../../../coralui-utils';
 import solutionIcon from '../templates/solutionIcon';
 
 const CLASSNAME = '_coral-Shell-solution';
@@ -95,7 +95,7 @@ class ShellSolution extends ComponentMixin(HTMLAnchorElement) {
   get _contentZones() { return {'coral-shell-solution-label': 'label'}; }
   
   /** @ignore */
-  static get observedAttributes() { return ['icon', 'linked']; }
+  static get observedAttributes() { return super.observedAttributes.concat(['icon', 'linked']); }
   
   /** @ignore */
   connectedCallback() {

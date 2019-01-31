@@ -21,7 +21,7 @@ import '../../../coralui-component-button';
 import '../../../coralui-component-textfield';
 import {Icon} from '../../../coralui-component-icon';
 import base from '../templates/base';
-import {transform, commons, i18n} from '../../../coralui-util';
+import {transform, commons, i18n} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-Stepper';
 let clearLiveRegionTimeout;
@@ -445,7 +445,7 @@ class NumberInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   _validateInputValue() {
     this.invalid = this.value !== '' && (window.isNaN(Number(this.value)) ||
       (this.max !== null && this.value > this.max || this.min !== null && this.value < this.min) ||
-      this.value % this._getActualStep() !== 0);
+      this.step !== 'any' && this.value % this._getActualStep() !== 0);
   }
   
   /**

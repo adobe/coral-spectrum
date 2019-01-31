@@ -19,7 +19,7 @@ import {ComponentMixin} from '../../../coralui-mixin-component';
 import '../../../coralui-component-button';
 import {Icon} from '../../../coralui-component-icon';
 import base from '../templates/base';
-import {transform, validate, events, i18n} from '../../../coralui-util';
+import {transform, validate, events, i18n} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-Tags-item';
 const LABEL_CLASSNAME = '_coral-Label';
@@ -338,6 +338,20 @@ class Tag extends ComponentMixin(HTMLElement) {
     this.classList.toggle(LABEL_CLASSNAME, !toggle);
   }
   
+  /**
+   Inherited from {@link ComponentMixin#trackingElement}.
+   */
+  get trackingElement() {
+    // it uses the name as the first fallback since it is not localized, otherwise it uses the label
+    return typeof this._trackingElement === 'undefined' ?
+      // keep spaces to only 1 max and trim. this mimics native html behaviors
+      this.value || this.label.textContent.replace(/\s{2,}/g, ' ').trim() :
+      this._trackingElement;
+  }
+  set trackingElement(value) {
+    super.trackingElement = value;
+  }
+  
   /** @private */
   _onRemoveButtonClick(event) {
     event.preventDefault();
@@ -349,7 +363,7 @@ class Tag extends ComponentMixin(HTMLElement) {
       this.remove();
   
       if (host) {
-        host._onTagButtonClicked();
+        host._onTagButtonClicked(this, event);
       }
     }
   }
@@ -466,7 +480,7 @@ class Tag extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return [
+    return super.observedAttributes.concat([
       'closable',
       'value',
       'quiet',
@@ -474,7 +488,7 @@ class Tag extends ComponentMixin(HTMLElement) {
       'size',
       'color',
       'disabled'
-    ];
+    ]);
   }
   
   /** @ignore */

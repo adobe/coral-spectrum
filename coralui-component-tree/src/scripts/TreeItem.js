@@ -19,7 +19,7 @@ import {ComponentMixin} from '../../../coralui-mixin-component';
 import {Collection} from '../../../coralui-collection';
 import {Icon} from '../../../coralui-component-icon';
 import treeItem from '../templates/treeItem';
-import {transform, commons, validate} from '../../../coralui-util';
+import {transform, commons, validate} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-TreeView-item';
 
@@ -310,7 +310,7 @@ class TreeItem extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return ['selected', 'disabled', 'variant', 'expanded', 'hidden'];
+    return super.observedAttributes.concat(['selected', 'disabled', 'variant', 'expanded', 'hidden']);
   }
   
   /** @ignore */

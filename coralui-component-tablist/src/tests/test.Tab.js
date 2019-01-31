@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {TabList, Tab} from '../../../coralui-component-tablist';
 
 describe('Tab', function() {
@@ -9,21 +9,25 @@ describe('Tab', function() {
   });
 
   describe('Instantiation', function() {
-    it('should be possible via clone using markup', function() {
-      helpers.cloneComponent('<coral-tab>Tab One</coral-tab>');
-    });
-
-    it('should be possible via clone using markup with textContent', function() {
-      helpers.cloneComponent('<coral-tab><coral-tab-label>Tab One</coral-tab-label></coral-tab>');
-    });
+    helpers.cloneComponent(
+      'should be possible via clone using markup',
+      '<coral-tab>Tab One</coral-tab>'
+    );
   
-    it('should be possible via clone using markup with icon', function() {
-      helpers.cloneComponent('<coral-tab icon="add"><coral-tab-label>Tab One</coral-tab-label></coral-tab>');
-    });
-
-    it('should be possible via clone using js', function() {
-      helpers.cloneComponent(new Tab());
-    });
+    helpers.cloneComponent(
+      'should be possible via clone using markup with textContent',
+      '<coral-tab><coral-tab-label>Tab One</coral-tab-label></coral-tab>'
+    );
+  
+    helpers.cloneComponent(
+      'should be possible via clone using markup with icon',
+      '<coral-tab icon="add"><coral-tab-label>Tab One</coral-tab-label></coral-tab>'
+    );
+  
+    helpers.cloneComponent(
+      'should be possible via clone using js',
+      new Tab()
+    );
   });
 
   describe('API', function() {

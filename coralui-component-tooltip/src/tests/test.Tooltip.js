@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Tooltip} from '../../../coralui-component-tooltip';
 
 describe('Tooltip', function() {
@@ -17,13 +17,15 @@ describe('Tooltip', function() {
   });
   
   describe('Instantiation', function() {
-    it('should be possible to clone the element using markup', function() {
-      helpers.cloneComponent('<coral-tooltip></coral-tooltip>');
-    });
+    helpers.cloneComponent(
+      'should be possible to clone the element using markup',
+      '<coral-tooltip></coral-tooltip>'
+    );
   
-    it('should be possible to clone using js', function() {
-      helpers.cloneComponent(new Tooltip());
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      new Tooltip()
+    );
   });
 
   describe('API', function() {

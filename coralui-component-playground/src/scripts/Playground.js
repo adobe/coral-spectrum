@@ -16,7 +16,7 @@
  */
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
-import {transform, validate} from '../../../coralui-util';
+import {transform, validate} from '../../../coralui-utils';
 import '../../../coralui-component-wait';
 import '../../../coralui-component-button';
 import '../../../coralui-component-popover';
@@ -288,7 +288,7 @@ class Playground extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return ['livereload', 'screen'];
+    return super.observedAttributes.concat(['livereload', 'screen']);
   }
   
   /** @ignore */

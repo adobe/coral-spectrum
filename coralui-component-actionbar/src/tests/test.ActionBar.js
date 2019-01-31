@@ -1,13 +1,14 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {ActionBar} from '../../../coralui-component-actionbar';
 import {Button} from '../../../coralui-component-button';
 
 describe('ActionBar', function() {
 
   describe('Instantiation', function() {
-    it('should be possible to clone via markup', function() {
-      helpers.cloneComponent(window.__html__['ActionBar.base.html']);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone via markup',
+      window.__html__['ActionBar.base.html']
+    );
   });
 
   describe('API', function() {

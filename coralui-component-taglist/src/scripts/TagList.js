@@ -19,7 +19,7 @@ import {ComponentMixin} from '../../../coralui-mixin-component';
 import {FormFieldMixin} from '../../../coralui-mixin-formfield';
 import Tag from './Tag';
 import {Collection} from '../../../coralui-collection';
-import {transform, commons} from '../../../coralui-util';
+import {transform, commons} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-Tags';
 // Collection
@@ -418,8 +418,10 @@ class TagList extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /** @private */
-  _onTagButtonClicked() {
+  _onTagButtonClicked(item, event) {
     this.trigger('change');
+  
+    this._trackEvent('remove', 'coral-tag', event, item);
   }
   
   /** @private */

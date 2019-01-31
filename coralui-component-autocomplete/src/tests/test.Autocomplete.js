@@ -1,6 +1,6 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Autocomplete} from '../../../coralui-component-autocomplete';
-import {i18n} from '../../../coralui-util';
+import {i18n} from '../../../coralui-utils';
 
 describe('Autocomplete', function() {
   describe('Namespace', function() {
@@ -11,13 +11,15 @@ describe('Autocomplete', function() {
   });
 
   describe('Instantiation', function() {
-    it('should be possible to clone using markup', function() {
-      helpers.cloneComponent(window.__html__['Autocomplete.base.html']);
-    });
-
-    it('should be possible to clone using js', function() {
-      helpers.cloneComponent(new Autocomplete());
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using markup',
+      window.__html__['Autocomplete.base.html']
+    );
+    
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      new Autocomplete()
+    );
   });
 
   describe('API', function() {

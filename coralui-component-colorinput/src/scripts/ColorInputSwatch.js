@@ -20,7 +20,7 @@ import ColorInputAbstractSubviewMixin from './ColorInputAbstractSubviewMixin';
 import Color from './Color';
 import '../../../coralui-component-button';
 import colorButton from '../templates/colorButton';
-import {i18n, transform} from '../../../coralui-util';
+import {i18n, transform} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-ColorInput-swatch';
 
@@ -156,7 +156,14 @@ class ColorInputSwatch extends ColorInputAbstractSubviewMixin(ComponentMixin(HTM
   
   /** @ignore */
   static get observedAttributes() {
-    return ['selected', 'tabindex', 'tabIndex', 'disabled', 'targetColor', 'targetcolor'];
+    return super.observedAttributes.concat([
+      'selected',
+      'tabindex',
+      'tabIndex',
+      'disabled',
+      'targetColor',
+      'targetcolor'
+    ]);
   }
   
   /** @ignore */

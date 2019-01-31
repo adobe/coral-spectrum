@@ -17,7 +17,7 @@
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import {OverlayMixin} from '../../../coralui-mixin-overlay';
-import {transform, validate} from '../../../coralui-util';
+import {transform, validate} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-Shell-menu';
 

@@ -1,20 +1,23 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Textarea} from '../../../coralui-component-textarea';
 
 describe('Textarea', function() {
 
   describe('Instantiation', function() {
-    it('should be possible via clone using markup', function() {
-      helpers.cloneComponent(window.__html__['Textarea.base.html']);
-    });
-
-    it('should be possible via clone using markup with textContent', function() {
-      helpers.cloneComponent(window.__html__['Textarea.value.html']);
-    });
-
-    it('should be possible via clone using js', function() {
-      helpers.cloneComponent(new Textarea());
-    });
+    helpers.cloneComponent(
+      'should be possible via clone using markup',
+      window.__html__['Textarea.base.html']
+    );
+  
+    helpers.cloneComponent(
+      'should be possible via clone using markup with textContent',
+      window.__html__['Textarea.value.html']
+    );
+  
+    helpers.cloneComponent(
+      'should be possible via clone using js',
+      new Textarea()
+    );
   });
 
   describe('API', function() {

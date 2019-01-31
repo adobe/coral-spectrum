@@ -18,7 +18,7 @@
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import ColumnViewCollection from './ColumnViewCollection';
 import selectionMode from './selectionMode';
-import {transform, validate} from '../../../coralui-util';
+import {transform, validate} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-MillerColumns-item';
 
@@ -550,10 +550,10 @@ class ColumnViewColumn extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return [
+    return super.observedAttributes.concat([
       '_selectionmode',
       '_selectionMode'
-    ];
+    ]);
   }
   
   /** @ignore */

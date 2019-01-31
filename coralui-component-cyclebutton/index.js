@@ -1,5 +1,6 @@
 import '../coralui-theme-spectrum';
 import '../coralui-externals';
+import '../coralui-compat';
 
 import CycleButton from './src/scripts/CycleButton';
 import CycleButtonItem from './src/scripts/CycleButtonItem';

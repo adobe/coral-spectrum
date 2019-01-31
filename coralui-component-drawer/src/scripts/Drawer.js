@@ -18,7 +18,7 @@
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import '../../../coralui-component-button';
 import base from '../templates/base';
-import {commons, transform, validate} from '../../../coralui-util';
+import {commons, transform, validate} from '../../../coralui-utils';
 
 /**
  Enumeration for {@link Drawer} directions.
@@ -205,11 +205,11 @@ class Drawer extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return [
+    return super.observedAttributes.concat([
       'disabled',
       'direction',
       'open'
-    ];
+    ]);
   }
   
   /** @ignore */

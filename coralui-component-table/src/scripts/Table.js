@@ -29,7 +29,7 @@ import {Checkbox} from '../../../coralui-component-checkbox';
 import base from '../templates/base';
 import {SelectableCollection} from '../../../coralui-collection';
 import {getCellByIndex, getColumns, getCells, getContentCells, getHeaderCells, getRows, getSiblingsOf, getIndexOf, divider} from './TableUtil';
-import {transform, validate, commons, Keys} from '../../../coralui-util';
+import {transform, validate, commons, Keys} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-Table-wrapper';
 
@@ -1865,10 +1865,27 @@ class Table extends ComponentMixin(HTMLTableElement) {
       
       // Don't allow the column to shrink less than its minimum allowed
       if (!headerCell.style.minWidth) {
-        const width = headerCell.content.getBoundingClientRect().width;
-        // Don't set the width if the header cell is hidden
-        if (width > 0) {
-          headerCell.style.minWidth = `${width}px`;
+        let hasVisibleChildNodes = false;
+        // In most cases, there's text content
+        if (headerCell.textContent.trim().length) {
+          hasVisibleChildNodes = true;
+        }
+        // Verify if there are any visible nodes without text content which could take layout space
+        else {
+          const headerCellChildren = headerCell.content.children;
+          for (let i = 0; i < headerCellChildren.length && !hasVisibleChildNodes; i++) {
+            if (headerCellChildren[0].offsetParent) {
+              hasVisibleChildNodes = true;
+            }
+          }
+        }
+  
+        if (hasVisibleChildNodes) {
+          const width = headerCell.content.getBoundingClientRect().width;
+          // Don't set the width if the header cell is hidden
+          if (width > 0) {
+            headerCell.style.minWidth = `${width}px`;
+          }
         }
       }
       
@@ -2405,7 +2422,7 @@ class Table extends ComponentMixin(HTMLTableElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return ['variant', 'selectable', 'orderable', 'multiple', 'lockable'];
+    return super.observedAttributes.concat(['variant', 'selectable', 'orderable', 'multiple', 'lockable']);
   }
   
   /** @ignore */

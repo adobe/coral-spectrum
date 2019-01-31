@@ -1,6 +1,6 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {AnchorButton} from '../../../coralui-component-anchorbutton';
-import {events} from '../../../coralui-util';
+import {events} from '../../../coralui-utils';
 
 describe('AnchorButton', function() {
   describe('Namespace', function() {

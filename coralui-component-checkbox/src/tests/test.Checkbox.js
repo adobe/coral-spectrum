@@ -1,6 +1,7 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {tracking} from '../../../coralui-utils';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Checkbox} from '../../../coralui-component-checkbox';
-import {events} from '../../../coralui-util';
+import {events} from '../../../coralui-utils';
 
 describe('Checkbox', function() {
   describe('Namespace', function() {
@@ -18,24 +19,29 @@ describe('Checkbox', function() {
       });
       expect(checkbox.classList.contains('_coral-Checkbox')).to.be.true;
     });
-
-    it('should be possible to clone the element using markup', function() {
-      helpers.cloneComponent(window.__html__['Checkbox.fromElement.html']);
-    });
-
-    it('should be possible to clone the element without label element using markup', function() {
-      helpers.cloneComponent(window.__html__['Checkbox.withContent.html']);
-    });
-
-    it('should be possible to clone the element with label using markup', function() {
-      helpers.cloneComponent(window.__html__['Checkbox.withLabel.html']);
-    });
-
-    it('should be possible to clone using js', function() {
-      var el = new Checkbox();
-      el.label.innerHTML = 'Test';
-      helpers.cloneComponent(el);
-    });
+    
+    helpers.cloneComponent(
+      'should be possible to clone the element using markup',
+      window.__html__['Checkbox.fromElement.html']
+    );
+  
+    helpers.cloneComponent(
+      'should be possible to clone the element without label element using markup',
+      window.__html__['Checkbox.withContent.html']
+    );
+    
+    helpers.cloneComponent(
+      'should be possible to clone the element with label using markup',
+      window.__html__['Checkbox.withLabel.html']
+    );
+  
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      new Checkbox().set({
+        label: {
+          innerHTML: 'Test'
+        }
+      }));
   });
 
   describe('Markup', function() {
@@ -273,7 +279,51 @@ describe('Checkbox', function() {
         expect(helpers.target.querySelectorAll('label[handle="labelWrapper"]').length).to.equal(1);
       }
     });
-
+  
+    describe('#trackingElement', function() {
+      it('should default to empty string', function() {
+        var el = new Checkbox();
+        expect(el.trackingElement).to.equal('');
+        expect(el.label.textContent).to.equal('');
+      });
+    
+      it('should default to the name when available', function() {
+        var el = new Checkbox();
+      
+        el.name = 'item1';
+        el.label.textContent = 'My checkbox';
+        expect(el.trackingElement).to.equal('item1=on');
+      
+        el.label.textContent = '  My content   with spaces';
+        expect(el.trackingElement).to.equal('item1=on');
+      
+        el.name = '';
+        expect(el.trackingElement).to.equal('My content with spaces');
+      
+        el.trackingElement = 'Check me';
+        expect(el.trackingElement).to.equal('Check me', 'Respects the user set value when available');
+      });
+    
+      it('should default to the content when name is not provided', function() {
+        var el = new Checkbox();
+      
+        el.label.textContent = 'My checkbox';
+        expect(el.trackingElement).to.equal('My checkbox');
+      
+        el.label.textContent = '  My content   with spaces';
+        expect(el.trackingElement).to.equal('My content with spaces');
+      
+        el.trackingElement = 'Check me';
+        expect(el.trackingElement).to.equal('Check me', 'Respects the user set value when available');
+      });
+    
+      it('should strip the html out of the content', function() {
+        var el = new Checkbox();
+      
+        el.label.innerHTML = 'My <b>c</b>heckbox';
+        expect(el.trackingElement).to.equal('My checkbox');
+      });
+    });
   });
 
   describe('Events', function() {
@@ -352,6 +402,121 @@ describe('Checkbox', function() {
       
       expect(preventSpy.callCount).to.equal(0);
       expect(changeSpy.callCount).to.equal(0);
+    });
+  });
+  
+  describe('Tracking', function() {
+    var trackerFnSpy;
+    
+    beforeEach(function () {
+      trackerFnSpy = sinon.spy();
+      tracking.addListener(trackerFnSpy);
+    });
+    
+    afterEach(function () {
+      tracking.removeListener(trackerFnSpy);
+    });
+    
+    it('should call the tracker callback fn once when a click is triggered', function() {
+      var button = new Checkbox();
+      helpers.target.appendChild(button);
+      button.click();
+      
+      expect(trackerFnSpy.callCount).to.equal(1, 'Track event should have been called only once.');
+    });
+    
+    it('should call the tracker callback fn twice when checking and unchecking the checkbox', function() {
+      const el = helpers.build(window.__html__['Checkbox.tracking.all.html']);
+      
+      el.click();
+      el.click();
+      
+      expect(trackerFnSpy.callCount).to.equal(2, 'Track event should have been called twice.');
+      
+      var spyCall = trackerFnSpy.getCall(0);
+      expect(spyCall.args.length).to.equal(4);
+      
+      var trackData = spyCall.args[0];
+      expect(trackData).to.have.property('targetType', 'coral-checkbox');
+      expect(trackData).to.have.property('eventType', 'checked');
+      expect(trackData).to.have.property('rootElement', 'element name');
+      expect(trackData).to.have.property('rootFeature', 'feature name');
+      expect(trackData).to.have.property('rootType', 'coral-checkbox');
+      expect(spyCall.args[1]).to.be.an.instanceof(MouseEvent);
+      expect(spyCall.args[2]).to.be.an.instanceof(Checkbox);
+      
+      spyCall = trackerFnSpy.getCall(1);
+      expect(spyCall.args.length).to.equal(4);
+      trackData = spyCall.args[0];
+      expect(trackData).to.have.property('targetType', 'coral-checkbox');
+      expect(trackData).to.have.property('eventType', 'unchecked');
+      expect(trackData).to.have.property('rootElement', 'element name');
+      expect(trackData).to.have.property('rootFeature', 'feature name');
+      expect(trackData).to.have.property('rootType', 'coral-checkbox');
+      expect(spyCall.args[1]).to.be.an.instanceof(MouseEvent);
+      expect(spyCall.args[2]).to.be.an.instanceof(Checkbox);
+    });
+    
+    it('should call the tracker callback fn with custom trackData properties: trackingfeature and trackingelement', function() {
+      var el = helpers.build(new Checkbox());
+      el.setAttribute('trackingfeature', 'sites');
+      el.setAttribute('trackingelement', 'rail toggle');
+      
+      el.click();
+      
+      expect(el.trackingElement).to.equal('rail toggle');
+      expect(el.trackingFeature).to.equal('sites');
+      
+      var spyCall = trackerFnSpy.getCall(0);
+      var trackData = spyCall.args[0];
+      expect(trackData).to.have.property('rootFeature', 'sites');
+      expect(trackData).to.have.property('rootElement', 'rail toggle');
+    });
+    
+    it('should not call the tracker callback fn when component has tracking=off attribute', function() {
+      var el = helpers.build(new Checkbox());
+      el.setAttribute('tracking', Checkbox.tracking.OFF);
+      el.click();
+      
+      expect(trackerFnSpy.callCount).to.equal(0, 'Tracking was performed while being disabled.');
+    });
+    
+    it('should fallback to the default trackingElement when not specified', function() {
+      const el = helpers.build(window.__html__['Checkbox.tracking.feature.html']);
+      el.click();
+      
+      expect(trackerFnSpy.callCount).to.equal(1, 'Track event should have been called once.');
+      
+      var spyCall = trackerFnSpy.getCall(0);
+      expect(spyCall.args.length).to.equal(4);
+      var trackData = spyCall.args[0];
+      expect(trackData).to.have.property('targetType', 'coral-checkbox');
+      expect(trackData).to.have.property('targetElement', 'CoralUI Rocks');
+      expect(trackData).to.have.property('eventType', 'checked');
+      expect(trackData).to.have.property('rootElement', 'CoralUI Rocks');
+      expect(trackData).to.have.property('rootFeature', 'feature name');
+      expect(trackData).to.have.property('rootType', 'coral-checkbox');
+      expect(spyCall.args[1]).to.be.an.instanceof(MouseEvent);
+      expect(spyCall.args[2]).to.be.an.instanceof(Checkbox);
+    });
+    
+    it('should pick the "name" atttribute as targetElement and rootElement', function() {
+      const el = helpers.build(window.__html__['Checkbox.tracking.name.html']);
+      el.click();
+      
+      expect(trackerFnSpy.callCount).to.equal(1, 'Track event should have been called once.');
+      
+      var spyCall = trackerFnSpy.getCall(0);
+      expect(spyCall.args.length).to.equal(4);
+      var trackData = spyCall.args[0];
+      expect(trackData).to.have.property('targetType', 'coral-checkbox');
+      expect(trackData).to.have.property('targetElement', 'checkboxName=kittens');
+      expect(trackData).to.have.property('eventType', 'checked');
+      expect(trackData).to.have.property('rootElement', 'checkboxName=kittens');
+      expect(trackData).to.have.property('rootFeature', 'feature name');
+      expect(trackData).to.have.property('rootType', 'coral-checkbox');
+      expect(spyCall.args[1]).to.be.an.instanceof(MouseEvent);
+      expect(spyCall.args[2]).to.be.an.instanceof(Checkbox);
     });
   });
 

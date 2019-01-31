@@ -29,6 +29,19 @@ const CLASSNAME = '_coral-ButtonList-item';
  @extends {ListItemMixin}
  */
 class ButtonListItem extends ListItemMixin(ComponentMixin(HTMLButtonElement)) {
+  /**
+   Inherited from {@link ComponentMixin#trackingElement}.
+   */
+  get trackingElement() {
+    return typeof this._trackingElement === 'undefined' ?
+      // keep spaces to only 1 max and trim. this mimics native html behaviors
+      this.content.textContent.replace(/\s{2,}/g, ' ').trim() :
+      this._trackingElement;
+  }
+  set trackingElement(value) {
+    super.trackingElement = value;
+  }
+  
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();

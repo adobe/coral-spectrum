@@ -1,10 +1,11 @@
 import '../coralui-theme-spectrum';
 import '../coralui-externals';
+import '../coralui-compat';
 
 import QuickActions from './src/scripts/QuickActions';
 import QuickActionsItem from './src/scripts/QuickActionsItem';
 import translations from './i18n/translations.json';
-import {strings, commons} from '../coralui-util';
+import {strings, commons} from '../coralui-utils';
 
 // i18n
 commons.extend(strings, {

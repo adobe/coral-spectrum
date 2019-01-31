@@ -18,7 +18,7 @@
 import {Overlay} from '../../../coralui-component-overlay';
 import Vent from '@adobe/vent';
 import base from '../templates/base';
-import {transform, validate, commons} from '../../../coralui-util';
+import {transform, validate, commons} from '../../../coralui-utils';
 
 const arrowMap = {
   left: 'left',

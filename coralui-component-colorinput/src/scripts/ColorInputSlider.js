@@ -18,7 +18,7 @@
 import {Slider} from '../../../coralui-component-slider';
 import '../../../coralui-component-tooltip';
 import sliderBase from '../templates/sliderBase';
-import {transform} from '../../../coralui-util';
+import {transform} from '../../../coralui-utils';
 
 const CLASSNAMES = ['_coral-ColorInput-slider', '_coral-Slider--color'];
 

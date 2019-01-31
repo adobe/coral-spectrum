@@ -1,6 +1,7 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {tracking} from '../../../coralui-utils';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Radio} from '../../../coralui-component-radio';
-import {events, commons} from '../../../coralui-util';
+import {events, commons} from '../../../coralui-utils';
 
 describe('Radio', function() {
   describe('Namespace', function() {
@@ -18,21 +19,25 @@ describe('Radio', function() {
       });
       expect(radio.classList.contains('_coral-Radio')).to.be.true;
     });
+  
+    helpers.cloneComponent(
+      'should be possible to clone the element using markup',
+      window.__html__['Radio.fromElement.html']
+    );
     
-    it('should be possible to clone the element using markup', function() {
-      helpers.cloneComponent(window.__html__['Radio.fromElement.html']);
-    });
-    
-    it('should be possible to clone the element with content using markup', function() {
-      helpers.cloneComponent(window.__html__['Radio.withLabel.html']);
-    });
-    
-    it('should be possible to clone using js', function() {
-      var el = new Radio();
-      el.label.innerHTML = 'Test';
-      helpers.cloneComponent(el);
-    });
-    
+    helpers.cloneComponent(
+      'should be possible to clone the element with content using markup',
+      window.__html__['Radio.withLabel.html']
+    );
+  
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      new Radio().set({
+        label: {
+          innerHTML: 'Test'
+        }
+      })
+    );
   });
   
   describe('API', function() {
@@ -516,6 +521,83 @@ describe('Radio', function() {
         
         done();
       });
+    });
+  });
+  
+  describe('Tracking', function() {
+    var trackerFnSpy;
+    
+    beforeEach(function () {
+      trackerFnSpy = sinon.spy();
+      tracking.addListener(trackerFnSpy);
+    });
+    
+    afterEach(function () {
+      tracking.removeListener(trackerFnSpy);
+    });
+    
+    it('should call the tracker callback fn once when selecting the radio with expected trackData parameters', function() {
+      const el = helpers.build(window.__html__['Radio.tracking.all.html']);
+      el.click();
+      expect(trackerFnSpy.callCount).to.equal(1, 'Track event should have been called once.');
+      
+      var spyCall = trackerFnSpy.getCall(0);
+      expect(spyCall.args.length).to.equal(4);
+      
+      var trackData = spyCall.args[0];
+      expect(trackData).to.have.property('targetElement', 'element name');
+      expect(trackData).to.have.property('targetType', 'coral-radio');
+      expect(trackData).to.have.property('eventType', 'checked');
+      expect(trackData).to.have.property('rootElement', 'element name');
+      expect(trackData).to.have.property('rootFeature', 'feature name');
+      expect(trackData).to.have.property('rootType', 'coral-radio');
+      expect(spyCall.args[1]).to.be.an.instanceof(MouseEvent);
+      expect(spyCall.args[2]).to.be.an.instanceof(Radio);
+    });
+    
+    it('should call the tracker callback fn with targetElement value from the label when the attribute is missing', function() {
+      const el = helpers.build(window.__html__['Radio.tracking.feature.html']);
+      el.click();
+      expect(trackerFnSpy.callCount).to.equal(1, 'Track event should have been called once.');
+      
+      var spyCall = trackerFnSpy.getCall(0);
+      expect(spyCall.args.length).to.equal(4);
+      
+      var trackData = spyCall.args[0];
+      expect(trackData).to.have.property('targetElement', 'radioName=radioValue');
+      expect(trackData).to.have.property('targetType', 'coral-radio');
+      expect(trackData).to.have.property('eventType', 'checked');
+      expect(trackData).to.have.property('rootElement', 'radioName=radioValue');
+      expect(trackData).to.have.property('rootFeature', 'feature name');
+      expect(trackData).to.have.property('rootType', 'coral-radio');
+      expect(spyCall.args[1]).to.be.an.instanceof(MouseEvent);
+      expect(spyCall.args[2]).to.be.an.instanceof(Radio);
+    });
+    
+    it('should call the tracker callback fn only once when clicking on the same radio input twice', function() {
+      const el = helpers.build(window.__html__['Radio.tracking.all.html']);
+      el.firstElementChild.click();
+      el.firstElementChild.click();
+      expect(trackerFnSpy.callCount).to.equal(1, 'Track event should have been called once.');
+    });
+    
+    it('should call the tracker callback fn with targetElement value from the label when the "name" attribute is missing', function() {
+      const el = helpers.build(window.__html__['Radio.tracking.name.html']);
+      el.click();
+      expect(trackerFnSpy.callCount).to.equal(1, 'Track event should have been called once.');
+      
+      var spyCall = trackerFnSpy.getCall(0);
+      expect(spyCall.args.length).to.equal(4);
+      
+      var trackData = spyCall.args[0];
+      expect(trackData).to.have.property('targetElement', 'Some Label');
+      expect(trackData).to.have.property('targetType', 'coral-radio');
+      expect(trackData).to.have.property('eventType', 'checked');
+      expect(trackData).to.have.property('rootElement', 'Some Label');
+      expect(trackData).to.have.property('rootFeature', 'feature name');
+      expect(trackData).to.have.property('rootType', 'coral-radio');
+      expect(spyCall.args[1]).to.be.an.instanceof(MouseEvent);
+      expect(spyCall.args[2]).to.be.an.instanceof(Radio);
     });
   });
 });

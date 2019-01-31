@@ -1,4 +1,5 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {tracking} from '../../../coralui-utils';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Alert} from '../../../coralui-component-alert';
 
 describe('Alert', function() {
@@ -22,23 +23,25 @@ describe('Alert', function() {
   });
 
   describe('Instantiation', function() {
-    it('should be possible to clone using markup', function() {
-      helpers.cloneComponent(window.__html__['Alert.base.html']);
-    });
-
-    it('should be possible to clone a large alert using markup', function() {
-      helpers.cloneComponent(window.__html__['Alert.large.html']);
-    });
-
-    it('should be possible to clone using js', function() {
-      helpers.cloneComponent(new Alert());
-    });
-
-    it('should be possible to clone a large alert using js', function() {
-      const el = new Alert();
-      el.size = 'L';
-      helpers.cloneComponent(el);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using markup',
+      window.__html__['Alert.base.html']
+    );
+    
+    helpers.cloneComponent(
+      'should be possible to clone a large alert using markup',
+      window.__html__['Alert.large.html']
+    );
+  
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      new Alert()
+    );
+  
+    helpers.cloneComponent(
+      'should be possible to clone a large alert using js',
+      new Alert().set({size: 'L'})
+    );
   });
 
   describe('API', function() {
@@ -205,6 +208,36 @@ describe('Alert', function() {
         expect(el.hidden).to.equal(true, 'hidden after close clicked');
         expect(spy.callCount).to.equal(0);
       });
+    });
+  });
+  
+  describe('Tracking', function() {
+    var trackerFnSpy;
+    
+    beforeEach(function () {
+      trackerFnSpy = sinon.spy();
+      tracking.addListener(trackerFnSpy);
+    });
+    
+    afterEach(function () {
+      tracking.removeListener(trackerFnSpy);
+    });
+    
+    it('should call the tracker callback fn with at least four parameters: trackData, event, component, childComponent when the alert is closed', function() {
+      const el = helpers.build(window.__html__['Alert.tracking.html']);
+      el.querySelector('[coral-close]').click();
+      var spyCall = trackerFnSpy.getCall(0);
+      expect(spyCall.args.length).to.equal(4);
+      
+      var trackData = spyCall.args[0];
+      expect(trackData).to.have.property('targetElement', 'element name');
+      expect(trackData).to.have.property('targetType', 'coral-alert');
+      expect(trackData).to.have.property('eventType', 'close');
+      expect(trackData).to.have.property('rootElement', 'element name');
+      expect(trackData).to.have.property('rootFeature', 'feature name');
+      expect(trackData).to.have.property('rootType', 'coral-alert');
+      expect(spyCall.args[1]).to.be.an.instanceof(MouseEvent);
+      expect(spyCall.args[2]).to.be.an.instanceof(Alert);
     });
   });
 });

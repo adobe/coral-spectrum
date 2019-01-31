@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Table} from '../../../coralui-component-table';
 
 describe('Table.Head', function() {
@@ -49,6 +49,22 @@ describe('Table.Head', function() {
         expect(el.classList.contains('_coral-Table-divider--cell')).to.be.true;
         expect(el.classList.contains('_coral-Table-divider--column')).to.be.false;
         expect(el.classList.contains('_coral-Table-divider--row')).to.be.false;
+      });
+    });
+  });
+  
+  describe('Markup', function() {
+    describe('#sticky', function() {
+      it('should not set min-width on header cell without visible content', function(done) {
+        const el = helpers.build(window.__html__['Table.sticky.empty.headercell.html']);
+        el._wait = 0;
+        // Because of debouncing
+        window.setTimeout(function() {
+          var headerCells = el.querySelectorAll('thead th');
+          expect(headerCells[0].style.minWidth).to.equal('');
+          expect(headerCells[1].style.minWidth).to.not.equal('');
+          done();
+        }, 100);
       });
     });
   });

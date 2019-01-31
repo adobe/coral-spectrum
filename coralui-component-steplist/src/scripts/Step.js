@@ -18,7 +18,7 @@
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import '../../../coralui-component-tooltip';
 import step from '../templates/step';
-import {transform, commons} from '../../../coralui-util';
+import {transform, commons} from '../../../coralui-utils';
 import getTarget from './getTarget';
 
 const CLASSNAME = '_coral-Steplist-item';
@@ -137,6 +137,19 @@ class Step extends ComponentMixin(HTMLElement) {
     }
   }
   
+  /**
+   Inherited from {@link ComponentMixin#trackingElement}.
+   */
+  get trackingElement() {
+    return typeof this._trackingElement === 'undefined' ?
+      // keep spaces to only 1 max and trim. this mimics native html behaviors
+      this.label.textContent.replace(/\s{2,}/g, ' ').trim() :
+      this._trackingElement;
+  }
+  set trackingElement(value) {
+    super.trackingElement = value;
+  }
+  
   _isHybrid() {
     const label = this.label;
     const maxWidth = this.label.clientWidth;
@@ -158,7 +171,7 @@ class Step extends ComponentMixin(HTMLElement) {
   get _contentZones() { return {'coral-step-label': 'label'}; }
   
   /** @ignore */
-  static get observedAttributes() { return ['selected', 'target']; }
+  static get observedAttributes() { return super.observedAttributes.concat(['selected', 'target']); }
   
   /** @ignore */
   connectedCallback() {

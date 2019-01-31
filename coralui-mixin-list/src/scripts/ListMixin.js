@@ -16,7 +16,7 @@
  */
 
 import {SelectableCollection} from '../../../coralui-collection';
-import {transform, validate} from '../../../coralui-util';
+import {transform, validate} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-BasicList';
 
@@ -209,7 +209,7 @@ const ListMixin = (superClass) => class extends superClass {
   static get interaction() { return interaction; }
   
   /** @ignore */
-  static get observedAttributes() { return ['interaction']; }
+  static get observedAttributes() { return super.observedAttributes.concat(['interaction']); }
   
   /** @ignore */
   connectedCallback() {

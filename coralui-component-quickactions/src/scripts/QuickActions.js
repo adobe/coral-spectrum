@@ -24,7 +24,7 @@ import {Collection} from '../../../coralui-collection';
 import QuickActionsItem from './QuickActionsItem';
 import '../../../coralui-component-popover';
 import base from '../templates/base';
-import {transform, validate, commons, i18n} from '../../../coralui-util';
+import {transform, validate, commons, i18n} from '../../../coralui-utils';
 
 const BUTTON_FOCUSABLE_SELECTOR = '._coral-QuickActions-item:not([disabled]):not([hidden])';
 
@@ -131,6 +131,7 @@ class QuickActions extends Overlay {
     
       // Buttons
       'click > ._coral-QuickActions-item:not([handle="moreButton"])': '_onButtonClick',
+      'click > ._coral-QuickActions-item[handle="moreButton"]': '_onMoreButtonClick',
     
       // Accessibility
       'capture:focus ._coral-QuickActions-item': '_onItemFocusIn',
@@ -519,14 +520,16 @@ class QuickActions extends Overlay {
       button = new Button().set({
         icon: itemData.icon,
         iconsize: Icon.size.SMALL,
-        type: 'button'
+        type: 'button',
+        tracking: 'off'
       }, true);
     }
     else if (item.type === type.ANCHOR) {
       button = new AnchorButton().set({
         icon: itemData.icon,
         iconsize: Icon.size.SMALL,
-        href: item.href
+        href: item.href,
+        tracking: 'off'
       }, true);
     }
     
@@ -808,6 +811,8 @@ class QuickActions extends Overlay {
     // Open if we aren't already
     if (!this.open && !this._isInternalToComponent(fromElement)) {
       this.show();
+  
+      this._trackEvent('display', 'coral-quickactions', event);
     }
   }
   
@@ -919,6 +924,15 @@ class QuickActions extends Overlay {
     }, this._overlayAnimationTime);
     
     this._preventClick = true;
+  
+    this._trackEvent('click', 'coral-quickactions-item', event, item);
+  }
+  
+  _onMoreButtonClick(event) {
+    const button = event.matchedTarget;
+    const item = button._elements.quickActionsItem;
+  
+    this._trackEvent('click', 'coral-quickactions-more', event, item);
   }
   
   /** @ignore */
@@ -1006,6 +1020,8 @@ class QuickActions extends Overlay {
     
     const item = buttonListItem._elements.quickActionsItem;
     this._proxyClick(item);
+  
+    this._trackEvent('click', 'coral-quickactions-item', event, item);
   }
   
   /** @ignore */

@@ -1,20 +1,23 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Textfield} from '../../../coralui-component-textfield';
 
 describe('Textfield', function() {
 
   describe('Instantiation', function() {
-    it('should be possible via clone using markup', function() {
-      helpers.cloneComponent(window.__html__['Textfield.base.html']);
-    });
-
-    it('should be possible via clone using markup with textContent', function() {
-      helpers.cloneComponent(window.__html__['Textfield.value.html']);
-    });
-
-    it('should be possible via clone using js', function() {
-      helpers.cloneComponent(new Textfield());
-    });
+    helpers.cloneComponent(
+      'should be possible via clone using markup',
+      window.__html__['Textfield.base.html']
+    );
+  
+    helpers.cloneComponent(
+      'should be possible via clone using markup with textContent',
+      window.__html__['Textfield.value.html']
+    );
+  
+    helpers.cloneComponent(
+      'should be possible via clone using js',
+      new Textfield()
+    );
   });
 
   describe('API', function() {

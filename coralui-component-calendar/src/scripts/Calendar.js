@@ -23,7 +23,7 @@ import {Icon} from '../../../coralui-component-icon';
 import calendar from '../templates/calendar';
 import container from '../templates/container';
 import table from '../templates/table';
-import {transform, commons, i18n, Keys} from '../../../coralui-util';
+import {transform, commons, i18n, Keys} from '../../../coralui-utils';
 
 /** @ignore */
 function isDateInRange(date, startDate, endDate) {

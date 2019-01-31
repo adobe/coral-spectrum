@@ -16,7 +16,7 @@
  */
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
-import {transform} from '../../../coralui-util';
+import {transform} from '../../../coralui-utils';
 
 /**
  @class Coral.CycleButton.Action
@@ -59,6 +59,19 @@ class CycleButtonAction extends ComponentMixin(HTMLElement) {
         this[prop] = value[prop];
       }
     }
+  }
+  
+  /**
+   Inherited from {@link ComponentMixin#trackingElement}.
+   */
+  get trackingElement() {
+    return typeof this._trackingElement === 'undefined' ?
+      // keep spaces to only 1 max and trim. this mimics native html behaviors
+      this.content.textContent.replace(/\s{2,}/g, ' ').trim() || this.icon :
+      this._trackingElement;
+  }
+  set trackingElement(value) {
+    super.trackingElement = value;
   }
 }
 

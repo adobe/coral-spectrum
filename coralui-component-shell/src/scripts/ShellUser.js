@@ -178,7 +178,7 @@ class ShellUser extends ComponentMixin(HTMLElement) {
   }
   
   /** @ignore */
-  static get observedAttributes() { return ['avatar']; }
+  static get observedAttributes() { return super.observedAttributes.concat(['avatar']); }
   
   /**
    Returns {@link ShellUser} avatar options.

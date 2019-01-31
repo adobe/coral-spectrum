@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {PanelStack, Panel} from '../../../coralui-component-panelstack';
 
 describe('PanelStack', function() {
@@ -25,14 +25,16 @@ describe('PanelStack', function() {
     it('should be possible using markup', function() {
       testDefaultInstance(helpers.build('<coral-panelstack></coral-panelstack>'));
     });
-
-    it('should be possible to clone the element using markup', function() {
-      helpers.cloneComponent(window.__html__['PanelStack.base.html']);
-    });
-
-    it('should be possible via cloneNode using js', function() {
-      helpers.cloneComponent(new PanelStack());
-    });
+  
+    helpers.cloneComponent(
+      'should be possible to clone the element using markup',
+      window.__html__['PanelStack.base.html']
+    );
+  
+    helpers.cloneComponent(
+      'should be possible via cloneNode using js',
+      new PanelStack()
+    );
   });
 
   describe('API', function() {

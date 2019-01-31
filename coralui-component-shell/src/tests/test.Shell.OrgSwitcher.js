@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Shell} from '../../../coralui-component-shell';
 
 describe('Shell.OrgSwitcher', function() {
@@ -57,16 +57,18 @@ describe('Shell.OrgSwitcher', function() {
       expect(orgSwitcher.items.getAll().indexOf(organization2)).to.equal(3);
     });
   
-    it('should be possible to clone using markup', function() {
-      helpers.cloneComponent(window.__html__['Shell.OrgSwitcher.subItems.html']);
-    });
-  
-    it('should be possible to clone using js', function() {
-      const el = new Shell.OrgSwitcher();
-      const item = el.items.add();
-      item.items.add();
-      helpers.cloneComponent(el);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using markup',
+      window.__html__['Shell.OrgSwitcher.subItems.html']
+    );
+    
+    const el = new Shell.OrgSwitcher();
+    const item = el.items.add();
+    item.items.add();
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      el
+    );
   });
   
   describe('API', function() {});

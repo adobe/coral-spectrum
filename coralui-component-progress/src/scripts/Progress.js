@@ -17,7 +17,7 @@
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import base from '../templates/base';
-import {transform, validate} from '../../../coralui-util';
+import {transform, validate} from '../../../coralui-utils';
 
 /**
  Enumeration for {@link Progress} sizes.
@@ -341,7 +341,7 @@ class Progress extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return [
+    return super.observedAttributes.concat([
       'value',
       'indeterminate',
       'size',
@@ -349,7 +349,7 @@ class Progress extends ComponentMixin(HTMLElement) {
       'showPercent',
       'labelposition',
       'labelPosition'
-    ];
+    ]);
   }
   
   /** @ignore */

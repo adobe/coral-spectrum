@@ -1,16 +1,18 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {RangedSlider} from '../../../coralui-component-slider';
 
 describe('RangedSlider', function() {
   
   describe('Instantiation', function() {
-    it('should be possible to clone the element using markup', function() {
-      helpers.cloneComponent(window.__html__['RangedSlider.base.html']);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone the element using markup',
+      window.__html__['RangedSlider.base.html']
+    );
   
-    it('should be possible to clone using js', function() {
-      helpers.cloneComponent(new RangedSlider());
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      new RangedSlider()
+    );
   });
 
   describe('API', function() {

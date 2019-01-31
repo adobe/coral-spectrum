@@ -1,5 +1,6 @@
 import '../coralui-theme-spectrum';
 import '../coralui-externals';
+import '../coralui-compat';
 
 import Accordion from './src/scripts/Accordion';
 import AccordionItem from './src/scripts/AccordionItem';

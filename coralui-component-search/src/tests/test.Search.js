@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Search} from '../../../coralui-component-search';
 import {Textfield} from '../../../coralui-component-textfield';
 
@@ -31,13 +31,15 @@ describe('Search', function() {
       testInstance(ni);
     });
   
-    it('should be possible to clone the element using markup', function() {
-      helpers.cloneComponent(window.__html__['Search.html']);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone the element using markup',
+      window.__html__['Search.html']
+    );
   
-    it('should be possible to clone using js', function() {
-      helpers.cloneComponent(new Search());
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      new Search()
+    );
   });
 
   describe('API', function() {

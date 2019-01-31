@@ -20,7 +20,7 @@ import {Collection} from '../../../coralui-collection';
 import '../../../coralui-component-search';
 import {AnchorList} from '../../../coralui-component-list';
 import '../../../coralui-component-wait';
-import {commons, i18n} from '../../../coralui-util';
+import {commons, i18n} from '../../../coralui-utils';
 import help from '../templates/help';
 import helpResult from '../templates/helpResult';
 import helpSearchError from '../templates/helpSearchError';
@@ -212,7 +212,7 @@ class ShellHelp extends ComponentMixin(HTMLElement) {
   }
   
   /** @ignore */
-  static get observedAttributes() { return ['placeholder']; }
+  static get observedAttributes() { return super.observedAttributes.concat(['placeholder']); }
   
   /** @ignore */
   connectedCallback() {

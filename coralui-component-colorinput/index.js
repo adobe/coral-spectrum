@@ -1,5 +1,6 @@
 import '../coralui-theme-spectrum';
 import '../coralui-externals';
+import '../coralui-compat';
 
 import Color from './src/scripts/Color';
 import ColorInput from './src/scripts/ColorInput';
@@ -10,7 +11,7 @@ import ColorInputSlider from './src/scripts/ColorInputSlider';
 import ColorInputColorProperties from './src/scripts/ColorInputColorProperties';
 
 import translations from './i18n/translations.json';
-import {strings, commons} from '../coralui-util';
+import {strings, commons} from '../coralui-utils';
 
 // i18n
 commons.extend(strings, {

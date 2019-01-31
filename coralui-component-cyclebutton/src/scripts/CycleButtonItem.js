@@ -16,7 +16,7 @@
  */
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
-import {transform, validate} from '../../../coralui-util';
+import {transform, validate} from '../../../coralui-utils';
 
 /**
  Enum for {CycleButtonItem} display options.
@@ -160,6 +160,19 @@ class CycleButtonItem extends ComponentMixin(HTMLElement) {
   }
   
   /**
+   Inherited from {@link ComponentMixin#trackingElement}.
+   */
+  get trackingElement() {
+    return typeof this._trackingElement === 'undefined' ?
+      // keep spaces to only 1 max and trim. this mimics native html behaviors
+      this.content.textContent.replace(/\s{2,}/g, ' ').trim() || this.icon :
+      this._trackingElement;
+  }
+  set trackingElement(value) {
+    super.trackingElement = value;
+  }
+  
+  /**
    Returns {@link CycleButtonItem} display options.
    
    @return {CycleButtonItemDisplayModeEnum}
@@ -168,7 +181,7 @@ class CycleButtonItem extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return ['selected', 'disabled', 'icon', 'displayMode', 'displaymode'];
+    return super.observedAttributes.concat(['selected', 'disabled', 'icon', 'displayMode', 'displaymode']);
   }
   
   /** @ignore */

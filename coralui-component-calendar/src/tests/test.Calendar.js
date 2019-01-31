@@ -1,22 +1,23 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Calendar} from '../../../coralui-component-calendar';
 import {DateTime} from '../../../coralui-datetime';
 
 describe('Calendar', function() {
   describe('Instantiation', function() {
-    it('should be possible to clone the element using markup', function() {
-      const el = helpers.build(window.__html__['Calendar.base.html']);
-      helpers.cloneComponent(el);
-    });
-    
-    it('should be possible to clone the element using markup with a value', function() {
-      const el = helpers.build(window.__html__['Calendar.value.html']);
-      helpers.cloneComponent(el);
-    });
-    
-    it('should be possible via cloneNode using js', function() {
-      helpers.cloneComponent(new Calendar());
-    });
+    helpers.cloneComponent(
+      'should be possible to clone the element using markup',
+      window.__html__['Calendar.base.html']
+    );
+
+    helpers.cloneComponent(
+      'should be possible to clone the element using markup with a value',
+      window.__html__['Calendar.value.html']
+    );
+
+    helpers.cloneComponent(
+      'should be possible via cloneNode using js',
+      new Calendar()
+    );
   });
   
   // Run tests once with moment fallback and once with moment

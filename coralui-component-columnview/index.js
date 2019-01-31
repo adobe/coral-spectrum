@@ -1,5 +1,6 @@
 import '../coralui-theme-spectrum';
 import '../coralui-externals';
+import '../coralui-compat';
 
 import ColumnView from './src/scripts/ColumnView';
 import ColumnViewColumn from './src/scripts/ColumnViewColumn';

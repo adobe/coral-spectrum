@@ -38,13 +38,15 @@ Code can be shared by copy pasting the URL. The playground is sandboxed to preve
 Vision and goals
 ### [» Manual](./manual/manual.html)
 Get you started. How to install through npm, consume etc
+### [» View examples](./manual/examples.html)
+All components showcased and Playground
+### [» Upgrade](./manual/upgrade.html)
+Helping you upgrade from CoralUI3
 ### [» Styles](./manual/styles.html)
 Theme, public CSS and Typekit
 ### [» Framework Support](./manual/frameworks.html)
-React, Angular, Vue and Torq
+React, Angular, Vue
 ### [» Architecture](./manual/architecture.html)
 Technical decisions behind the architecture
-### [» View examples](./manual/examples.html)
-All components showcased and Playground
 ### [» Contribution](./manual/contribution.html)
 Open development principles

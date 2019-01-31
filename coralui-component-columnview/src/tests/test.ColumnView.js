@@ -1,6 +1,6 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {ColumnView} from '../../../coralui-component-columnview';
-import {commons} from '../../../coralui-util';
+import {commons} from '../../../coralui-utils';
 
 describe('ColumnView', function() {
   // handles the loading and annotating of the columns so that content can be loaded remotely
@@ -74,9 +74,10 @@ describe('ColumnView', function() {
   });
   
   describe('Instantiation', function() {
-    it('should be possible to clone via markup', function() {
-      helpers.cloneComponent(window.__html__['ColumnView.full.html']);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone via markup',
+      window.__html__['ColumnView.full.html']
+    );
   });
 
   describe('API', function() {
@@ -554,7 +555,6 @@ describe('ColumnView', function() {
         item.click();
       });
       
-      // @todo: why transitionend is not triggered in this testcase on Chrome ?
       it('should be triggered when a column is removed', function(done) {
         var navigateSpy = sinon.spy();
 

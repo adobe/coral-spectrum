@@ -16,7 +16,7 @@
  */
 
 import {Icon} from '../../../coralui-component-icon';
-import {transform, validate} from '../../../coralui-util';
+import {transform, validate} from '../../../coralui-utils';
 
 /**
  Enumeration for {@link Button}, {@link AnchorButton} icon sizes.
@@ -49,7 +49,7 @@ for (const key in Icon.size) {
  @property {String} CTA
  A button that is meant to grab the user's attention.
  @property {String} PRIMARY
- A button that indicates that the button's action is the primary action.
+ A button that is meant to grab the user's attention.
  @property {String} SECONDARY
  A button that indicates that the button's action is the secondary action.
  @property {String} QUIET
@@ -68,7 +68,7 @@ const variant = {
   QUIET: 'quiet',
   MINIMAL: 'minimal',
   WARNING: 'warning',
-  DEFAULT: 'primary',
+  DEFAULT: 'default',
   // Private to be used for custom Button classes like toggle, dropdown and action
   _CUSTOM: '_custom'
 };
@@ -76,25 +76,23 @@ const variant = {
 // the button's base classname
 const CLASSNAME = '_coral-Button';
 
-// builds an array containing all possible variant classnames. this will be used to remove classnames when the variant
-// changes
-const ALL_VARIANT_CLASSES = [];
-for (const variantValue in variant) {
-  let value;
-  if (variantValue === 'QUIET') {
-    value = `${CLASSNAME}--primary`;
-  }
-  else if (variantValue === 'MINIMAL') {
-    value = `${CLASSNAME}--secondary`;
-  }
-  else {
-    value = `${CLASSNAME}--${variant[variantValue]}`;
-  }
-  
-  if (variantValue !== '_CUSTOM') {
-    ALL_VARIANT_CLASSES.push(value);
-  }
-}
+const ALL_VARIANT_CLASSES = [
+  `${CLASSNAME}--cta`,
+  `${CLASSNAME}--primary`,
+  `${CLASSNAME}--secondary`,
+  `${CLASSNAME}--warning`,
+  `${CLASSNAME}--quiet`
+];
+
+const VARIANT_MAP = {
+  cta: [CLASSNAME, ALL_VARIANT_CLASSES[0]],
+  primary: [CLASSNAME, ALL_VARIANT_CLASSES[0]],
+  secondary: [CLASSNAME, ALL_VARIANT_CLASSES[2]],
+  warning: [CLASSNAME, ALL_VARIANT_CLASSES[3]],
+  quiet: [CLASSNAME, ALL_VARIANT_CLASSES[1], ALL_VARIANT_CLASSES[4]],
+  minimal: [CLASSNAME, ALL_VARIANT_CLASSES[2], ALL_VARIANT_CLASSES[4]],
+  default: [CLASSNAME, ALL_VARIANT_CLASSES[1]]
+};
 
 /**
  Enumeration for {@link ButtonMixin} sizes.
@@ -138,12 +136,14 @@ const ButtonMixin = (superClass) => class extends superClass {
     // Templates
     this._elements = {
       // Create or fetch the label element
-      label: this.querySelector(this._contentZoneTagName) || document.createElement(this._contentZoneTagName)
+      label: this.querySelector(this._contentZoneTagName) || document.createElement(this._contentZoneTagName),
+      icon: this.querySelector('coral-icon')
     };
     
     // Events
     this._events = {
-      mousedown: '_onMouseDown'
+      mousedown: '_onMouseDown',
+      click: '_onClick'
     };
   
     // Listen for mutations
@@ -212,9 +212,15 @@ const ButtonMixin = (superClass) => class extends superClass {
    @htmlattribute icon
    */
   get icon() {
-    return this._elements.icon && this._elements.icon.icon || '';
+    if (this._elements.icon) {
+      return this._elements.icon.getAttribute('icon') || '';
+    }
+  
+    return this._icon || '';
   }
   set icon(value) {
+    this._icon = transform.string(value);
+    
     this._updateIcon(value);
   }
   
@@ -226,11 +232,19 @@ const ButtonMixin = (superClass) => class extends superClass {
    @htmlattribute iconsize
    */
   get iconSize() {
-    return this._elements.icon && this._elements.icon.size || iconSize.SMALL;
+    if (this._elements.icon) {
+      return this._elements.icon.getAttribute('size') || Icon.size.SMALL;
+    }
+  
+    return this._iconSize || Icon.size.SMALL;
   }
   set iconSize(value) {
     value = transform.string(value).toUpperCase();
-    this._getIconElement().size = validate.enumeration(iconSize)(value) && value || iconSize.SMALL;
+    this._iconSize = validate.enumeration(Icon.size)(value) && value || Icon.size.SMALL;
+  
+    if (this._updatedIcon) {
+      this._getIconElement().setAttribute('size', value);
+    }
   }
   
   /**
@@ -318,27 +332,47 @@ const ButtonMixin = (superClass) => class extends superClass {
     
     // removes every existing variant
     this.classList.remove(...ALL_VARIANT_CLASSES);
-    this.classList.remove(`${CLASSNAME}--quiet`);
     
-    if (this._variant === variant.QUIET) {
-      this.classList.add(CLASSNAME, `${CLASSNAME}--primary`, `${CLASSNAME}--quiet`);
-      this.classList.add(`${CLASSNAME}--quiet`);
-    }
-    else if (this._variant === variant.MINIMAL) {
-      this.classList.add(CLASSNAME, `${CLASSNAME}--secondary`, `${CLASSNAME}--quiet`);
-    }
-    else if (this._variant !== variant._CUSTOM) {
-      this.classList.add(CLASSNAME, `${CLASSNAME}--${this._variant}`);
+    if (this._variant === variant._CUSTOM) {
+      this.classList.remove(CLASSNAME);
     }
     else {
-      this.classList.remove(CLASSNAME);
+      this.classList.add(...VARIANT_MAP[this._variant]);
+    }
+  }
+  
+  /**
+   Inherited from {@link ComponentMixin#trackingElement}.
+   */
+  get trackingElement() {
+    return typeof this._trackingElement === 'undefined' ?
+    // keep spaces to only 1 max and trim. this mimics native html behaviors
+      this.label.textContent.replace(/\s{2,}/g, ' ').trim() || this.icon :
+      this._trackingElement;
+  }
+  set trackingElement(value) {
+    super.trackingElement = value;
+  }
+  
+  _onClick(event) {
+    if (!this.disabled) {
+      this._trackEvent('click', this.getAttribute('is'), event);
     }
   }
   
   /** @ignore */
   _updateIcon(value) {
+    if (!this._updatedIcon && this._elements.icon) {
+      return;
+    }
+    
+    this._updatedIcon = true;
+  
+    const iconSizeValue = this.iconSize;
     const iconElement = this._getIconElement();
     iconElement.icon = value;
+    // Update size as well
+    iconElement.size = iconSizeValue;
   
     // removes the icon element from the DOM.
     if (this.icon === '') {
@@ -434,7 +468,7 @@ const ButtonMixin = (superClass) => class extends superClass {
   
   /** @ignore */
   static get observedAttributes() {
-    return [
+    return super.observedAttributes.concat([
       'iconposition',
       'iconPosition',
       'iconsize',
@@ -445,7 +479,7 @@ const ButtonMixin = (superClass) => class extends superClass {
       'block',
       'variant',
       'value'
-    ];
+    ]);
   }
   
   /** @ignore */
@@ -506,6 +540,7 @@ const ButtonMixin = (superClass) => class extends superClass {
     this.label = label;
   
     // Make sure the icon is well positioned
+    this._updatedIcon = true;
     this._updateIcon(this.icon);
   
     // a11y

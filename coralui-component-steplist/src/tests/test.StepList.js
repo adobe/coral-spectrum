@@ -1,4 +1,5 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
+import {tracking} from '../../../coralui-utils';
 import {Step, StepList} from '../../../coralui-component-steplist';
 
 describe('StepList', function() {
@@ -41,17 +42,19 @@ describe('StepList', function() {
       testDefaultInstance(el);
     });
   
-    it('should be possible to clone the element using markup', function() {
-      helpers.cloneComponent(window.__html__['StepList.base.html']);
-    });
-  
-    it('should be possible to clone using js', function() {
-      const el = new StepList();
-      el.items.add();
-      el.items.add();
-      el.items.add();
-      helpers.cloneComponent(el);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone the element using markup',
+      window.__html__['StepList.base.html']
+    );
+    
+    const el = new StepList();
+    el.items.add();
+    el.items.add();
+    el.items.add();
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      el
+    );
   });
 
   describe('API', function() {
@@ -222,6 +225,16 @@ describe('StepList', function() {
         helpers.next(() => {
           expect(el.selectedItem.label.style.marginLeft).to.equal('120px');
           done();
+        });
+      });
+  
+      it('should not center the one long label when switching back from hybrid to normal mode', function() {
+        const el = helpers.build(window.__html__['StepList.longlabel.html']);
+        // Wait 1 more frame until long label is positioned
+        helpers.next(() => {
+          el.selectedItem._labelIsHidden = false;
+          el._updateLabels();
+          expect(el.selectedItem.label.style.marginLeft).to.equal('');
         });
       });
   
@@ -726,6 +739,60 @@ describe('StepList', function() {
         expect(removeSpy.callCount).to.equal(5);
         done();
       });
+    });
+  });
+  
+  describe('Tracking', function() {
+    var trackerFnSpy;
+    
+    beforeEach(function() {
+      trackerFnSpy = sinon.spy();
+      tracking.addListener(trackerFnSpy);
+    });
+    
+    afterEach(function() {
+      tracking.removeListener(trackerFnSpy);
+    });
+    
+    it('should not call the tracker callback if interaction is OFF', function() {
+      const el = helpers.build(window.__html__['StepList.tracking.html']);
+      // Turn interaction on
+      el.interaction = StepList.interaction.OFF;
+      var steps = el.items.getAll();
+      steps[0]._elements.stepMarkerContainer.click();
+      expect(trackerFnSpy.callCount).to.equal(0, 'Track callback should not be called.');
+    });
+    
+    it('should call tracker callback with the expected tracker data when first step is clicked', function() {
+      const el = helpers.build(window.__html__['StepList.tracking.html']);
+      var steps = el.items.getAll();
+      steps[0]._elements.stepMarkerContainer.click();
+      expect(trackerFnSpy.callCount).to.equal(1, 'Track callback should be called once.');
+      
+      var spyCall = trackerFnSpy.getCall(0);
+      var trackData = spyCall.args[0];
+      expect(trackData).to.have.property('targetType', 'coral-steplist-item');
+      expect(trackData).to.have.property('targetElement', 'Step 1');
+      expect(trackData).to.have.property('eventType', 'click');
+      expect(trackData).to.have.property('rootFeature', 'feature name');
+      expect(trackData).to.have.property('rootElement', 'element name');
+      expect(trackData).to.have.property('rootType', 'coral-steplist');
+    });
+    
+    it('should call tracker callback with the expected tracker data when an annotated step is clicked', function() {
+      const el = helpers.build(window.__html__['StepList.tracking.html']);
+      var steps = el.items.getAll();
+      steps[1]._elements.stepMarkerContainer.click();
+      expect(trackerFnSpy.callCount).to.equal(1, 'Track callback should be called once.');
+      
+      var spyCall = trackerFnSpy.getCall(0);
+      var trackData = spyCall.args[0];
+      expect(trackData).to.have.property('targetType', 'coral-steplist-item');
+      expect(trackData).to.have.property('targetElement', 'step two');
+      expect(trackData).to.have.property('eventType', 'click');
+      expect(trackData).to.have.property('rootFeature', 'feature name');
+      expect(trackData).to.have.property('rootElement', 'element name');
+      expect(trackData).to.have.property('rootType', 'coral-steplist');
     });
   });
 });

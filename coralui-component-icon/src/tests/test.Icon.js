@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Icon} from '../../../coralui-component-icon';
 
 describe('Icon', function() {
@@ -45,21 +45,24 @@ describe('Icon', function() {
       expect(icon.classList.contains('_coral-Icon')).to.be.true;
       expect(icon.classList.contains('_coral-Icon--sizeS')).to.be.true;
     });
-
-    it('should be possible to clone using markup', function() {
-      helpers.cloneComponent('<coral-icon icon="add" size="L"></coral-icon>');
-    });
+    
+    helpers.cloneComponent(
+      'should be possible to clone using markup',
+      '<coral-icon icon="add" size="L"></coral-icon>'
+    );
   
-    it('should be possible to clone an image icon using markup', function() {
-      helpers.cloneComponent('<coral-icon icon="http://via.placeholder.com/150x150" size="L"></coral-icon>');
-    });
-
-    it('should be possible to clone using js', function() {
-      var icon = new Icon();
-      icon.icon = 'add';
-      icon.size = 'L';
-      helpers.cloneComponent(icon);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone an image icon using markup',
+      '<coral-icon icon="http://via.placeholder.com/150x150" size="L"></coral-icon>'
+    );
+  
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      new Icon().set({
+        icon: 'add',
+        size: 'L'
+      }
+    ));
   });
 
   describe('Markup', function() {

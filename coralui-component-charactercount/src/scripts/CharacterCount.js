@@ -16,7 +16,7 @@
  */
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
-import {transform} from '../../../coralui-util';
+import {transform} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-CharacterCount';
 
@@ -137,7 +137,7 @@ class CharacterCount extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return ['target', 'maxlength', 'maxLength'];
+    return super.observedAttributes.concat(['target', 'maxlength', 'maxLength']);
   }
   
   /** @ignore */

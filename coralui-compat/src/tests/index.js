@@ -1,7 +1,7 @@
 import '../../../coralui-externals';
-import '../../../coralui-util';
+import '../../../coralui-utils';
 
 import '../../index';
 
-import './test.Coral.register';
-import './test.Coral.Component';
+import './test.register';
+import './test.Component';

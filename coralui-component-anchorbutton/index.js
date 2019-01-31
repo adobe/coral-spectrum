@@ -1,5 +1,6 @@
 import '../coralui-theme-spectrum';
 import '../coralui-externals';
+import '../coralui-compat';
 
 import AnchorButton from './src/scripts/AnchorButton';
 import AnchorButtonLabel from './src/scripts/AnchorButtonLabel';

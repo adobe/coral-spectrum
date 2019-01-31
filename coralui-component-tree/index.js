@@ -1,5 +1,6 @@
 import '../coralui-theme-spectrum';
 import '../coralui-externals';
+import '../coralui-compat';
 
 import Tree from './src/scripts/Tree';
 import TreeItem from './src/scripts/TreeItem';

@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Shell} from '../../../coralui-component-shell';
 
 describe('Shell.MenuBar.Item', function() {
@@ -14,13 +14,15 @@ describe('Shell.MenuBar.Item', function() {
       expect(el).to.be.an.instanceof(Shell.MenuBar.Item);
     });
   
-    it('should be possible to clone using markup', function() {
-      helpers.cloneComponent('<coral-shell-menubar-item></coral-shell-menubar-item>');
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using markup',
+      '<coral-shell-menubar-item></coral-shell-menubar-item>'
+    );
   
-    it('should be possible to clone using js', function() {
-      helpers.cloneComponent(new Shell.MenuBar.Item());
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      new Shell.MenuBar.Item()
+    );
   });
 
   describe('API', function() {
@@ -112,13 +114,9 @@ describe('Shell.MenuBar.Item', function() {
       it('should open the menu when open = true', function(done) {
         // binds the menu and the item together
         el.menu = menu;
-        menu._overlayAnimationTime = 0;
-  
-        expect(menu.offsetParent).to.equal(null);
         
         menu.on('coral-overlay:open', function() {
           expect(menu.open).to.be.true;
-          expect(menu.offsetParent).to.not.equal(null);
           expect(el.open).to.be.true;
 
           done();

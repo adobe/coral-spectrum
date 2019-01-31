@@ -17,7 +17,7 @@
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import {SelectableCollection} from '../../../coralui-collection';
-import {transform, validate, commons} from '../../../coralui-util';
+import {transform, validate, commons} from '../../../coralui-utils';
 import line from '../templates/line';
 import getTarget from './getTarget';
 
@@ -268,6 +268,8 @@ class TabList extends ComponentMixin(HTMLElement) {
     
     const item = event.matchedTarget;
     this._toggleItemSelectionAndFocus(item);
+  
+    this._trackEvent('click', 'coral-tab', event, item);
   }
   
   /** @private */
@@ -460,7 +462,7 @@ class TabList extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return ['target', 'size', 'orientation'];
+    return super.observedAttributes.concat(['target', 'size', 'orientation']);
   }
   
   /** @ignore */

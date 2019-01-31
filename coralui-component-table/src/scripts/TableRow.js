@@ -17,7 +17,7 @@
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import {SelectableCollection} from '../../../coralui-collection';
-import {transform} from '../../../coralui-util';
+import {transform} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-Table-row';
 
@@ -268,7 +268,7 @@ class TableRow extends ComponentMixin(HTMLTableRowElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return ['locked', 'selected', 'multiple', 'selectable', '_selectable', '_orderable', '_lockable'];
+    return super.observedAttributes.concat(['locked', 'selected', 'multiple', 'selectable', '_selectable', '_orderable', '_lockable']);
   }
   
   /** @ignore */

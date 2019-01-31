@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {CycleButton} from '../../../coralui-component-cyclebutton';
 
 describe('CycleButton.Item', function() {
@@ -16,13 +16,15 @@ describe('CycleButton.Item', function() {
   });
   
   describe('Instantiation', function() {
-    it('should be possible to clone the element using markup', function() {
-      helpers.cloneComponent('<coral-cyclebutton-item id="btn1" icon="viewCard">Card</coral-cyclebutton-item>');
-    });
-    
-    it('should be possible via cloneNode using js', function() {
-      helpers.cloneComponent(new CycleButton.Item());
-    });
+    helpers.cloneComponent(
+      'should be possible to clone the element using markup',
+      '<coral-cyclebutton-item id="btn1" icon="viewCard">Card</coral-cyclebutton-item>'
+    );
+  
+    helpers.cloneComponent(
+      'should be possible via cloneNode using js',
+      new CycleButton.Item()
+    );
   });
 
   describe('API', function() {
@@ -55,6 +57,37 @@ describe('CycleButton.Item', function() {
     describe('#icon', function () {
       it('should exist', function () {
         expect('icon' in el).to.be.true;
+      });
+    });
+  
+    describe('#trackingElement', function() {
+      it('should exist', function() {
+        expect('trackingElement' in el).to.be.true;
+      });
+    
+      it('should default to empty string', function() {
+        expect(el.trackingElement).to.equal('');
+        expect(el.content.textContent).to.equal('');
+        expect(el.icon).to.equal('');
+      });
+    
+      it('should default to the contents when available', function() {
+        el.content.textContent = 'Contents';
+        expect(el.trackingElement).to.equal('Contents');
+        el.content.textContent = ' Contents with  spaces ';
+        expect(el.trackingElement).to.equal('Contents with spaces');
+        el.trackingElement = 'user';
+        expect(el.trackingElement).to.equal('user', 'Respects the user set value when available');
+      });
+    
+      it('should strip the html out of the content', function() {
+        el.content.innerHTML = 'My <b>C</b>ontent';
+        expect(el.trackingElement).to.equal('My Content');
+      });
+    
+      it('should default to the icon when there is no content', function() {
+        el.icon = 'add';
+        expect(el.trackingElement).to.equal('add');
       });
     });
   });

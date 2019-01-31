@@ -17,7 +17,7 @@
 
 import '../../../coralui-component-icon';
 import item from '../templates/item';
-import {transform} from '../../../coralui-util';
+import {transform} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-BasicList-item';
 
@@ -93,7 +93,7 @@ const ListItemMixin = (superClass) => class extends superClass {
   get _contentZones() { return {'coral-list-item-content': 'content'}; }
   
   /** @ignore */
-  static get observedAttributes() { return ['disabled', 'icon']; }
+  static get observedAttributes() { return super.observedAttributes.concat(['disabled', 'icon']); }
   
   /** @ignore */
   connectedCallback() {

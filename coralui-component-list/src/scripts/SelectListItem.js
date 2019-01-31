@@ -16,7 +16,7 @@
  */
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
-import {transform} from '../../../coralui-util';
+import {transform} from '../../../coralui-utils';
 import {Icon} from '../../../coralui-component-icon';
 import checkIcon from '../templates/checkIcon';
 
@@ -125,7 +125,7 @@ class SelectListItem extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return ['selected', 'disabled'];
+    return super.observedAttributes.concat(['selected', 'disabled']);
   }
   
   /** @ignore */

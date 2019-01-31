@@ -21,7 +21,7 @@ import ColorInputSwatch from './ColorInputSwatch';
 import Color from './Color';
 import {SelectableCollection} from '../../../coralui-collection';
 import swatchesHeader from '../templates/swatchesHeader';
-import {commons, i18n} from '../../../coralui-util';
+import {commons, i18n} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-ColorInput-swatches';
 

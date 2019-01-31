@@ -1,4 +1,5 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {tracking} from '../../../coralui-utils';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {TabView} from '../../../coralui-component-tabview';
 import {Tab} from '../../../coralui-component-tablist';
 import {Panel} from '../../../coralui-component-panelstack';
@@ -35,17 +36,20 @@ describe('TabView', function() {
       expect(el.panelStack).to.equal(el.lastElementChild);
     });
   
-    it('should be possible to clone using markup', function() {
-      helpers.cloneComponent(window.__html__['TabView.base.html']);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using markup',
+      window.__html__['TabView.base.html']
+    );
   
-    it('should be possible to clone using js', function() {
-      helpers.cloneComponent(new TabView());
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      new TabView()
+    );
   
-    it('should be possible to clone an an instance with selected item', function() {
-      helpers.cloneComponent(window.__html__['TabView.selectedItem.html']);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone an an instance with selected item',
+      window.__html__['TabView.selectedItem.html']
+    );
   });
 
   describe('API', function() {
@@ -114,6 +118,39 @@ describe('TabView', function() {
         expect(changeSpy.callCount).to.equal(1);
         expect(changeSpy.args[0][0].detail.selection).to.equal(tab3);
         expect(changeSpy.args[0][0].detail.oldSelection).to.equal(tab1);
+      });
+    });
+  });
+  
+  describe('Tracking', function() {
+    var trackerFnSpy;
+    
+    beforeEach(function () {
+      trackerFnSpy = sinon.spy();
+      tracking.addListener(trackerFnSpy);
+    });
+    
+    afterEach(function () {
+      tracking.removeListener(trackerFnSpy);
+    });
+    
+    it('should call the tracker callback with the expected trackData parameters when a panel is displayed', function (done) {
+      const el = helpers.build(window.__html__['TabView.tracking.html']);
+      
+      // Wait for selection MOs to finish
+      helpers.next(function() {
+        el.querySelector('coral-tab:nth-child(2)').click();
+        expect(trackerFnSpy.callCount).to.equal(1, 'Track callback should have been called only once.');
+        
+        var spyCall = trackerFnSpy.getCall(0);
+        var trackData = spyCall.args[0];
+        expect(trackData).to.have.property('targetType', 'coral-tab');
+        expect(trackData).to.have.property('targetElement', 'element name');
+        expect(trackData).to.have.property('eventType', 'display');
+        expect(trackData).to.have.property('rootFeature', 'feature name');
+        expect(trackData).to.have.property('rootElement', 'element name');
+        expect(trackData).to.have.property('rootType', 'coral-tabview');
+        done();
       });
     });
   });

@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {SelectList} from '../../../coralui-component-list';
 
 describe('SelectList.Group', function() {

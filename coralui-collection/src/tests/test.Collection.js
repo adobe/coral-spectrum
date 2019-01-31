@@ -1,7 +1,7 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import {Collection} from '../../../coralui-collection';
-import {transform} from '../../../coralui-util';
+import {transform} from '../../../coralui-utils';
 
 describe('Collection', function() {
   var onItemAddedSpy = sinon.spy();

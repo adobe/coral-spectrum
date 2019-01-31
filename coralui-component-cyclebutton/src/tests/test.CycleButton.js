@@ -1,4 +1,5 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {tracking} from '../../../coralui-utils';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {CycleButton} from '../../../coralui-component-cyclebutton';
 
 describe('CycleButton', function() {
@@ -8,6 +9,8 @@ describe('CycleButton', function() {
   var SNIPPET_PRESETSELECT = window.__html__['CycleButton.presetSelect.html'];
   var SNIPPET_WITHACTIONS = window.__html__['CycleButton.withActions.html'];
   var SNIPPET_GENERALICON = window.__html__['CycleButton.generalIcon.html'];
+  var SNIPPET_TRACKING_ON_WITHATTRS = window.__html__['CycleButton.trackingOnWithAttrs.html'];
+  var SNIPPET_WITHACTIONS_WITHTRACKING = window.__html__['CycleButton.withActions.withTracking.html'];
 
   var WHITESPACE_REGEX = /[\t\n\r ]+/g;
 
@@ -26,16 +29,19 @@ describe('CycleButton', function() {
   });
 
   describe('Instantiation', function() {
-    it('should be possible to clone the element using markup', function() {
-      helpers.cloneComponent(SNIPPET_TWOITEMS);
-    });
-
-    it('should be possible via cloneNode using js', function() {
-      var el = new CycleButton();
-      el.appendChild(new CycleButton.Item());
-      el.appendChild(new CycleButton.Item());
-      helpers.cloneComponent(el);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone the element using markup',
+      SNIPPET_TWOITEMS
+    );
+  
+    var el = new CycleButton();
+    el.appendChild(new CycleButton.Item());
+    el.appendChild(new CycleButton.Item());
+    
+    helpers.cloneComponent(
+      'should be possible via cloneNode using js',
+      el
+    );
   });
 
   describe('API', function() {
@@ -873,4 +879,136 @@ describe('CycleButton', function() {
       helpers.testSmartOverlay('coral-cyclebutton');
     });
   }); // Implementation Details
+  
+  describe('Tracking', function() {
+    var trackerFnSpy;
+    
+    beforeEach(function() {
+      trackerFnSpy = sinon.spy();
+      tracking.addListener(trackerFnSpy);
+    });
+    afterEach(function() {
+      tracking.removeListener(trackerFnSpy);
+    });
+    
+    it('should call tracker callback only once when the button is clicked', function() {
+      const el = helpers.build(SNIPPET_TRACKING_ON_WITHATTRS);
+      el._elements.button.click();
+      
+      expect(trackerFnSpy.callCount).to.equal(1, 'Track callback should be called once.');
+    });
+    
+    it('should call tracker callback with expected track data values when clicked', function() {
+      const el = helpers.build(SNIPPET_TRACKING_ON_WITHATTRS);
+      el._elements.button.click();
+      
+      var spyCall = trackerFnSpy.getCall(0);
+      var trackData = spyCall.args[0];
+      expect(trackData).to.have.property('targetType', 'coral-cyclebutton');
+      expect(trackData).to.have.property('targetElement', 'rail toggle');
+      expect(trackData).to.have.property('eventType', 'click');
+      expect(trackData).to.have.property('rootFeature', 'sites');
+      expect(trackData).to.have.property('rootElement', 'rail toggle');
+      expect(trackData).to.have.property('rootType', 'coral-cyclebutton');
+    });
+    
+    it.skip('should call tracker callback twice with expected track data values when first item (with trackingelement attribute) is selected', function(done) {
+      const el = helpers.build(SNIPPET_TRACKING_ON_WITHATTRS);
+      el._elements.button.click();
+      
+      var listItems = el._elements.selectList.items.getAll();
+      // selects the 1st item
+      listItems[0].click();
+      
+      helpers.next(function() {
+        // 3 instead of 2 because of https://jira.corp.adobe.com/browse/CUI-7244
+        expect(trackerFnSpy.callCount).to.equal(3, 'Track callback should be called twice.');
+        var spyCall = trackerFnSpy.getCall(1);
+        var trackData = spyCall.args[0];
+        expect(trackData).to.have.property('targetType', 'coral-cyclebutton-item');
+        expect(trackData).to.have.property('targetElement', 'viewuser');
+        expect(trackData).to.have.property('eventType', 'selected');
+        expect(trackData).to.have.property('rootFeature', 'sites');
+        expect(trackData).to.have.property('rootElement', 'rail toggle');
+        expect(trackData).to.have.property('rootType', 'cyclebutton');
+        done();
+      });
+    });
+    
+    it.skip('should call tracker callback twice with expected track data values when second item (without trackingelement attribute) is selected', function(done) {
+      const el = helpers.build(SNIPPET_TRACKING_ON_WITHATTRS);
+      el._elements.button.click();
+      
+      helpers.next(function() {
+        var listItems = el._elements.selectList.items.getAll();
+        // selects the 2nd item
+        listItems[1].click();
+        
+        helpers.next(function() {
+          expect(trackerFnSpy.callCount).to.equal(2, 'Track callback should be called twice.');
+          var spyCall = trackerFnSpy.getCall(1);
+          var trackData = spyCall.args[0];
+          expect(trackData).to.have.property('targetType', 'coral-cyclebutton-item');
+          expect(trackData).to.have.property('targetElement', 'View System');
+          expect(trackData).to.have.property('eventType', 'selected');
+          expect(trackData).to.have.property('rootFeature', 'sites');
+          expect(trackData).to.have.property('rootElement', 'rail toggle');
+          expect(trackData).to.have.property('rootType', 'cyclebutton');
+          done();
+        });
+      });
+    });
+    
+    it.skip('should call tracker callback twice with expected track data values when first action (with trackingelement attribute) is selected', function(done) {
+      const el = helpers.build(SNIPPET_WITHACTIONS_WITHTRACKING);
+      // opens the overlay
+      el._elements.button.click();
+      
+      helpers.next(function() {
+        // we click on the second action
+        var actionItems = el._elements.actionList.items.getAll();
+        // selects the 1st item
+        actionItems[0].click();
+        
+        helpers.next(function() {
+          expect(trackerFnSpy.callCount).to.equal(2, 'Track callback should be called twice.');
+          var spyCall = trackerFnSpy.getCall(1);
+          var trackData = spyCall.args[0];
+          expect(trackData).to.have.property('targetType', 'coral-cyclebutton-action');
+          expect(trackData).to.have.property('targetElement', 'viewsettings');
+          expect(trackData).to.have.property('eventType', 'selected');
+          expect(trackData).to.have.property('rootFeature', 'sites');
+          expect(trackData).to.have.property('rootElement', 'rail toggle');
+          expect(trackData).to.have.property('rootType', 'cyclebutton');
+          done();
+        });
+      });
+    });
+    
+    it.skip('should call tracker callback twice with expected track data values when second action (without trackingelement attribute) is selected', function(done) {
+      const el = helpers.build(SNIPPET_WITHACTIONS_WITHTRACKING);
+      // opens the overlay
+      el._elements.button.click();
+      
+      helpers.next(function() {
+        // we click on the second action
+        var actionItems = el._elements.actionList.items.getAll();
+        // selects the 2nd item
+        actionItems[1].click();
+        
+        helpers.next(function() {
+          expect(trackerFnSpy.callCount).to.equal(2, 'Track callback should be called twice.');
+          var spyCall = trackerFnSpy.getCall(1);
+          var trackData = spyCall.args[0];
+          expect(trackData).to.have.property('targetType', 'coral-cyclebutton-action');
+          expect(trackData).to.have.property('targetElement', 'More Settings');
+          expect(trackData).to.have.property('eventType', 'selected');
+          expect(trackData).to.have.property('rootFeature', 'sites');
+          expect(trackData).to.have.property('rootElement', 'rail toggle');
+          expect(trackData).to.have.property('rootType', 'coral-cyclebutton');
+          done();
+        });
+      });
+    });
+  });
 });

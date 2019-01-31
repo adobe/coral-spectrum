@@ -1,5 +1,6 @@
 import '../coralui-theme-spectrum';
 import '../coralui-externals';
+import '../coralui-compat';
 
 import Tooltip from './src/scripts/Tooltip';
 import TooltipContent from './src/scripts/TooltipContent';

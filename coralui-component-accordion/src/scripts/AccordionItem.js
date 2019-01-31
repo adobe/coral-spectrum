@@ -16,7 +16,7 @@
  */
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
-import {transform, commons} from '../../../coralui-util';
+import {transform, commons} from '../../../coralui-utils';
 import {Icon} from '../../../coralui-component-icon';
 
 const CLASSNAME = '_coral-Accordion-item';
@@ -198,7 +198,7 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return ['selected', 'disabled'];
+    return super.observedAttributes.concat(['selected', 'disabled']);
   }
   
   /** @ignore */

@@ -1,4 +1,5 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {tracking} from '../../../coralui-utils';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {TabList, Tab} from '../../../coralui-component-tablist';
 import {Icon} from '../../../coralui-component-icon';
 
@@ -27,36 +28,39 @@ describe('TabList', function() {
     it('should be possible using markup', function() {
       testDefaultInstance(helpers.build('<coral-tablist></coral-tablist>'));
     });
+  
+    helpers.cloneComponent(
+      'should be possible via clone using markup',
+      window.__html__['TabList.base.html']
+    );
+  
+    helpers.cloneComponent(
+      'should be possible via clone using markup with textContent',
+      window.__html__['TabList.selectedItem.html']
+    );
+    
+    var el;
+    var item1, item2, item3;
 
-    it('should be possible via clone using markup', function() {
-      helpers.cloneComponent(window.__html__['TabList.base.html']);
-    });
+    el = new TabList();
 
-    it('should be possible via clone using markup with textContent', function() {
-      helpers.cloneComponent(window.__html__['TabList.selectedItem.html']);
-    });
+    item1 = new Tab();
+    item1.label.textContent = 'Item 1';
 
-    it('should be possible via clone using js', function() {
-      var el;
-      var item1, item2, item3;
+    item2 = new Tab();
+    item2.label.textContent = 'Item 2';
 
-      el = new TabList();
+    item3 = new Tab();
+    item3.label.textContent = 'Item 3';
 
-      item1 = new Tab();
-      item1.label.textContent = 'Item 1';
-
-      item2 = new Tab();
-      item2.label.textContent = 'Item 2';
-
-      item3 = new Tab();
-      item3.label.textContent = 'Item 3';
-
-      el.appendChild(item1);
-      el.appendChild(item2);
-      el.appendChild(item3);
-      
-      helpers.cloneComponent(el);
-    });
+    el.appendChild(item1);
+    el.appendChild(item2);
+    el.appendChild(item3);
+    
+    helpers.cloneComponent(
+      'should be possible via clone using js',
+      el
+    );
   });
 
   describe('API', function() {
@@ -847,6 +851,51 @@ describe('TabList', function() {
         expect(removeSpy.callCount).to.equal(5);
         done();
       });
+    });
+  });
+  
+  describe('Tracking', function() {
+    var trackerFnSpy;
+    
+    beforeEach(function () {
+      trackerFnSpy = sinon.spy();
+      tracking.addListener(trackerFnSpy);
+    });
+    
+    afterEach(function () {
+      tracking.removeListener(trackerFnSpy);
+    });
+    
+    it('should call the tracker callback with the expected trackData parameters when an item is clicked', function () {
+      const el = helpers.build(window.__html__['TabList.base.tracking.html']);
+      var items = el.items.getAll();
+      items[0].click();
+      expect(trackerFnSpy.callCount).to.equal(1, 'Track callback should have been called only once.');
+      
+      var spyCall = trackerFnSpy.getCall(0);
+      var trackData = spyCall.args[0];
+      expect(trackData).to.have.property('targetType', 'coral-tab');
+      expect(trackData).to.have.property('targetElement', 'Tab 1');
+      expect(trackData).to.have.property('eventType', 'click');
+      expect(trackData).to.have.property('rootFeature', 'feature name');
+      expect(trackData).to.have.property('rootElement', 'element name');
+      expect(trackData).to.have.property('rootType', 'coral-tablist');
+    });
+    
+    it('should call the tracker callback with the expected trackData parameters when an item that has annotations is clicked', function () {
+      const el = helpers.build(window.__html__['TabList.base.tracking.html']);
+      var items = el.items.getAll();
+      items[1].click();
+      expect(trackerFnSpy.callCount).to.equal(1, 'Track callback should have been called only once.');
+      
+      var spyCall = trackerFnSpy.getCall(0);
+      var trackData = spyCall.args[0];
+      expect(trackData).to.have.property('targetType', 'coral-tab');
+      expect(trackData).to.have.property('targetElement', 'Second Tab');
+      expect(trackData).to.have.property('eventType', 'click');
+      expect(trackData).to.have.property('rootFeature', 'feature name');
+      expect(trackData).to.have.property('rootElement', 'element name');
+      expect(trackData).to.have.property('rootType', 'coral-tablist');
     });
   });
 });

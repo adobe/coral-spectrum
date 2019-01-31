@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Shell} from '../../../coralui-component-shell';
 
 describe('Shell.SolutionSwitcher', function() {
@@ -22,16 +22,18 @@ describe('Shell.SolutionSwitcher', function() {
       expect(el instanceof Shell.SolutionSwitcher).to.equal(true);
     });
   
-    it('should be possible to clone using markup', function() {
-      helpers.cloneComponent(window.__html__['Shell.SolutionSwitcher.base.html']);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using markup',
+      window.__html__['Shell.SolutionSwitcher.base.html']
+    );
   
-    it('should be possible to clone using js', function() {
-      const el = new Shell.SolutionSwitcher();
-      const solutions = el.items.add();
-      solutions.items.add();
-      
-      helpers.cloneComponent(el);
-    });
+    const el = new Shell.SolutionSwitcher();
+    const solutions = el.items.add();
+    solutions.items.add();
+  
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      el
+    );
   });
 });

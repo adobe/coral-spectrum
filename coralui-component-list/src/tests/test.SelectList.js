@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {SelectList} from '../../../coralui-component-list';
 
 describe('SelectList', function() {
@@ -21,24 +21,27 @@ describe('SelectList', function() {
     it('should be possible using markup', function() {
       testDefaultInstance(helpers.build('<coral-selectlist></coral-selectlist>'));
     });
-
-    it('should be possible to clone using markup', function() {
-      helpers.cloneComponent(helpers.build(window.__html__['SelectList.base.html']));
+    
+    helpers.cloneComponent(
+      'should be possible to clone using markup',
+      helpers.build(window.__html__['SelectList.base.html'])
+    );
+    
+    helpers.cloneComponent(
+      'should be possible to clone using markup with groups',
+      helpers.build(window.__html__['SelectList.groups.html'])
+    );
+    
+    const el = new SelectList();
+    el.items.add({
+      content: {
+        innerHTML: 'Item 1'
+      }
     });
-  
-    it('should be possible to clone using markup with groups', function() {
-      helpers.cloneComponent(helpers.build(window.__html__['SelectList.groups.html']));
-    });
-
-    it('should be possible to clone using js', function() {
-      const el = new SelectList();
-      el.items.add({
-        content: {
-          innerHTML: 'Item 1'
-        }
-      });
-      helpers.cloneComponent(el);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      el
+    );
   });
   
   describe('API', function() {

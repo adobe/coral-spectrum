@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Accordion} from '../../../coralui-component-accordion';
 
 describe('Accordion', function() {
@@ -38,25 +38,30 @@ describe('Accordion', function() {
   });
   
   describe('Instantiation', function() {
-    it('should be possible to clone using markup', function() {
-      helpers.cloneComponent(window.__html__['Accordion.base.html']);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using markup',
+      window.__html__['Accordion.base.html']
+    );
   
-    it('should be possible to clone a nested accordion using markup', function() {
-      helpers.cloneComponent(window.__html__['Accordion.nested.html']);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone a nested accordion using markup',
+      window.__html__['Accordion.nested.html']
+    );
   
-    it('should be possible to clone a nested in content accordion using markup', function() {
-      helpers.cloneComponent(window.__html__['Accordion.nested.content.html']);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone a nested in content accordion using markup',
+      window.__html__['Accordion.nested.content.html']
+    );
   
-    it('should be possible to clone using js', function() {
-      helpers.cloneComponent(new Accordion());
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      new Accordion()
+    );
   
-    it('should be possible to clone an an instance with interactive components and elements in the item label', function() {
-      helpers.cloneComponent(window.__html__['Accordion.label.interaction.html']);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone an an instance with interactive components and elements in the item label',
+      window.__html__['Accordion.label.interaction.html']
+    );
   });
 
   describe('API', function() {

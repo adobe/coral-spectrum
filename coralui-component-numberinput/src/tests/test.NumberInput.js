@@ -1,6 +1,6 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {NumberInput} from '../../../coralui-component-numberinput';
-import {commons} from '../../../coralui-util';
+import {commons} from '../../../coralui-utils';
 
 describe('NumberInput', function() {
   function testInstance(instance) {
@@ -42,16 +42,16 @@ describe('NumberInput', function() {
       const el = helpers.build(window.__html__['NumberInput.base.html']);
       testInstance(el);
     });
-
-    it('should be possible to clone using markup', function() {
-      const el = helpers.build(window.__html__['NumberInput.base.html']);
-      helpers.cloneComponent(el);
-    });
-
-    it('should be possible to clone using js', function() {
-      var el = helpers.build(new NumberInput());
-      helpers.cloneComponent(el);
-    });
+    
+    helpers.cloneComponent(
+      'should be possible to clone using markup',
+      helpers.build(window.__html__['NumberInput.base.html'])
+    );
+  
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      helpers.build(new NumberInput())
+    );
   });
 
   describe('Markup', function() {
@@ -622,6 +622,19 @@ describe('NumberInput', function() {
         expect(el.getAttribute('aria-invalid')).to.equal('true');
         expect(el.classList.contains('is-invalid')).to.be.true;
         expect(el._elements.input.invalid).to.be.true;
+      });
+  
+      it('should not set "invalid" to true if step="any" and value is decimal', function() {
+        el.step = 'any';
+        el.value = 10.1;
+    
+        el.stepUp();
+        helpers.event('change', el._elements.input);
+        expect(el.invalid).to.be.false;
+    
+        el.stepDown();
+        helpers.event('change', el._elements.input);
+        expect(el.invalid).to.be.false;
       });
     });
 

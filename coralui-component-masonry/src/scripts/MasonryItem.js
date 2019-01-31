@@ -17,7 +17,7 @@
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import {DragAction} from '../../../coralui-dragaction';
-import {transform, commons} from '../../../coralui-util';
+import {transform, commons} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-Masonry-item';
 
@@ -130,7 +130,7 @@ class MasonryItem extends ComponentMixin(HTMLElement) {
   }
   
   /** @ignore */
-  static get observedAttributes() { return ['selected', '_removing', '_orderable']; }
+  static get observedAttributes() { return super.observedAttributes.concat(['selected', '_removing', '_orderable']); }
   
   /** @ignore */
   attributeChangedCallback(name, oldValue, value) {

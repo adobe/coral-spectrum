@@ -28,7 +28,7 @@ import '../../../coralui-component-popover';
 import '../../../coralui-component-wait';
 import base from '../templates/base';
 import loadIndicator from '../templates/loadIndicator';
-import {transform, validate, commons, i18n} from '../../../coralui-util';
+import {transform, validate, commons, i18n} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-Autocomplete';
 
@@ -126,6 +126,8 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
       // Focus
       'capture:blur': '_handleFocusOut',
+      'global:click': '_onGlobalClick',
+      'global:touchstart': '_onGlobalClick',
   
       // Taglist
       'coral-collection:add [handle="tagList"]': '_handleTagAdded',
@@ -1089,6 +1091,18 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     if (this._elements.overlay.open) {
       this._elements.overlay.style.minWidth = `${this.offsetWidth}px`;
+    }
+  }
+  
+  _onGlobalClick(event) {
+    if (!this._elements.overlay.open) {
+      return;
+    }
+    
+    const eventTargetWithinOverlayTarget = this._elements.inputGroup.contains(event.target);
+    const eventTargetWithinItself = this._elements.overlay.contains(event.target);
+    if (!eventTargetWithinOverlayTarget && !eventTargetWithinItself) {
+      this.hideSuggestions();
     }
   }
   

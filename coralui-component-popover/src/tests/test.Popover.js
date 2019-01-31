@@ -1,4 +1,5 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
+import {tracking} from '../../../coralui-utils';
 import {Popover} from '../../../coralui-component-popover';
 
 describe('Popover', function() {
@@ -48,19 +49,27 @@ describe('Popover', function() {
       expect(Popover.variant.SUCCESS).to.equal('success');
       expect(Popover.variant.HELP).to.equal('help');
       expect(Popover.variant.INFO).to.equal('info');
-      expect(Popover.variant.FLYOUT).to.equal('flyout');
-      expect(Object.keys(Popover.variant).length).to.equal(7);
+      expect(Object.keys(Popover.variant).length).to.equal(6);
     });
   });
   
   describe('Instantiation', function() {
-    it('should be possible via cloneNode using markup', function() {
-      helpers.cloneComponent(helpers.build(window.__html__['Popover.headerAndContent.html']));
-    });
-    
-    it('should be possible via cloneNode using js', function() {
-      helpers.cloneComponent(new Popover());
-    });
+    helpers.cloneComponent(
+      'should be possible via cloneNode using markup',
+      helpers.build(window.__html__['Popover.headerAndContent.html'])
+    );
+  
+    helpers.cloneComponent(
+      'should be possible via cloneNode using js',
+      new Popover().set({
+        header: {
+          textContent: 'header'
+        },
+        content: {
+          textContent: 'content'
+        }
+      })
+    );
   });
 
   describe('API', function() {
@@ -414,6 +423,84 @@ describe('Popover', function() {
       });
       
       el.show();
+    });
+  
+    describe('Tracking', function() {
+      var trackerFnSpy;
+    
+      beforeEach(function () {
+        trackerFnSpy = sinon.spy();
+        tracking.addListener(trackerFnSpy);
+      });
+    
+      afterEach(function () {
+        tracking.removeListener(trackerFnSpy);
+      });
+    
+      it('should not call the tracker callback fn when the popover is initialized and not opened', function() {
+        helpers.build(window.__html__['Popover.tracking.html']);
+        expect(trackerFnSpy.callCount).to.equal(0, 'Tracker was called.');
+      });
+    
+      it('should call the tracker callback fn with expected parameters when the popover is manually opened', function() {
+        const el = helpers.build(window.__html__['Popover.tracking.html']);
+        var popover = el.querySelector('coral-popover');
+        var demoBtn = document.getElementById('demoButton');
+        demoBtn.click();
+      
+        expect(trackerFnSpy.callCount).to.equal(1, 'Tracker should have been called only once.');
+        var spyCall = trackerFnSpy.getCall(0);
+        expect(spyCall.args.length).to.equal(4);
+        var trackData = spyCall.args[0];
+        expect(trackData).to.have.property('targetElement', 'element name');
+        expect(trackData).to.have.property('targetType', 'coral-popover');
+        expect(trackData).to.have.property('eventType', 'display');
+        expect(trackData).to.have.property('rootElement', 'element name');
+        expect(trackData).to.have.property('rootFeature', 'feature name');
+        expect(trackData).to.have.property('rootType', 'coral-popover');
+        expect(spyCall.args[1]).to.be.an.instanceof(MouseEvent);
+        expect(spyCall.args[2]).to.be.an.instanceof(Popover);
+      });
+    
+      it('should call the tracker callback fn with expected parameters when the popover is closed by clicking on the body', function() {
+        const el = helpers.build(window.__html__['Popover.tracking.autoOpen.html']);
+        var popover = el.querySelector('coral-popover');
+        document.body.click();
+        expect(trackerFnSpy.callCount).to.equal(1, 'Tracker should have been called once.');
+      
+        var spyCall = trackerFnSpy.getCall(0);
+        expect(spyCall.args.length).to.equal(4);
+      
+        var trackData = spyCall.args[0];
+        expect(trackData).to.have.property('targetElement', 'element name');
+        expect(trackData).to.have.property('targetType', 'coral-popover');
+        expect(trackData).to.have.property('eventType', 'close');
+        expect(trackData).to.have.property('rootElement', 'element name');
+        expect(trackData).to.have.property('rootFeature', 'feature name');
+        expect(trackData).to.have.property('rootType', 'coral-popover');
+        expect(spyCall.args[1]).to.be.an.instanceof(MouseEvent);
+        expect(spyCall.args[2]).to.be.an.instanceof(Popover);
+      });
+    
+      it('should call the tracker callback fn with expected parameters when the popover is closed by clicking on the "X" closable button', function() {
+        const el = helpers.build(window.__html__['Popover.tracking.autoOpen.html']);
+        var popover = el.querySelector('coral-popover');
+        popover.querySelector('[coral-close]').click();
+        expect(trackerFnSpy.callCount).to.equal(1, 'Tracker should have been called once.');
+      
+        var spyCall = trackerFnSpy.getCall(0);
+        expect(spyCall.args.length).to.equal(4);
+      
+        var trackData = spyCall.args[0];
+        expect(trackData).to.have.property('targetElement', 'element name');
+        expect(trackData).to.have.property('targetType', 'coral-popover');
+        expect(trackData).to.have.property('eventType', 'close');
+        expect(trackData).to.have.property('rootElement', 'element name');
+        expect(trackData).to.have.property('rootFeature', 'feature name');
+        expect(trackData).to.have.property('rootType', 'coral-popover');
+        expect(spyCall.args[1]).to.be.an.instanceof(MouseEvent);
+        expect(spyCall.args[2]).to.be.an.instanceof(Popover);
+      });
     });
   });
 });

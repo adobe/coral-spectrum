@@ -89,7 +89,7 @@ class ShellHomeAnchor extends ComponentMixin(HTMLAnchorElement) {
   get _contentZones() { return {'coral-shell-homeanchor-label': 'label'}; }
   
   /** @ignore */
-  static get observedAttributes() { return ['icon']; }
+  static get observedAttributes() { return super.observedAttributes.concat(['icon']); }
   
   /** @ignore */
   connectedCallback() {

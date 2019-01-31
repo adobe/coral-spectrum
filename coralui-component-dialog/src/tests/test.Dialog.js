@@ -1,6 +1,6 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Dialog} from '../../../coralui-component-dialog';
-import {mixin} from '../../../coralui-util';
+import {tracking, mixin} from '../../../coralui-utils';
 import {DragAction} from '../../../coralui-dragaction';
 
 describe('Dialog', function() {
@@ -28,17 +28,19 @@ describe('Dialog', function() {
   });
   
   describe('Instantiation', function() {
-    it('should be possible via cloneNode using markup', function() {
-      helpers.cloneComponent(helpers.build(window.__html__['Dialog.fromElements.html']));
-    });
-    
-    it('should be possible via cloneNode using markup (wrapper)', function() {
-      helpers.cloneComponent(helpers.build(window.__html__['Dialog.wrapper.single.html']));
-    });
-    
-    it('should be possible via cloneNode using js', function() {
-      const el = new Dialog();
-      el.set({
+    helpers.cloneComponent(
+      'should be possible via cloneNode using markup',
+      helpers.build(window.__html__['Dialog.fromElements.html'])
+    );
+  
+    helpers.cloneComponent(
+      'should be possible via cloneNode using markup (wrapper)',
+      helpers.build(window.__html__['Dialog.wrapper.single.html'])
+    );
+  
+    helpers.cloneComponent(
+      'should be possible via cloneNode using js',
+      new Dialog().set({
         header: {
           innerHTML: 'Header'
         },
@@ -48,9 +50,8 @@ describe('Dialog', function() {
         footer: {
           innerHTML: 'Footer'
         }
-      });
-      helpers.cloneComponent(el);
-    });
+      })
+    );
   });
   
   describe('API', function() {
@@ -266,6 +267,11 @@ describe('Dialog', function() {
   });
   
   describe('User Interaction', function() {
+    afterEach(function() {
+      const el = helpers.target.querySelector('coral-dialog');
+      el.hide();
+    });
+    
     describe('#ESC', function() {
       it('should close when escape pressed and interaction=ON', function() {
         const el = helpers.build(window.__html__['Dialog.open.html']);
@@ -371,6 +377,7 @@ describe('Dialog', function() {
     });
   
     afterEach(function() {
+      el.hide();
       el = null;
     });
     
@@ -519,6 +526,110 @@ describe('Dialog', function() {
         var input = el.querySelector('#input');
     
         expect(form.firstElementChild).to.equal(input);
+      });
+    });
+  });
+  
+  describe('Tracking', function() {
+    var trackerFnSpy;
+    
+    beforeEach(function () {
+      trackerFnSpy = sinon.spy();
+      tracking.addListener(trackerFnSpy);
+    });
+    
+    afterEach(function () {
+      tracking.removeListener(trackerFnSpy);
+    });
+    
+    it('should not call the tracker callback fn when the dialog is initialized and not opened', function() {
+      helpers.build(window.__html__['Dialog.tracking.html']);
+      expect(trackerFnSpy.callCount).to.equal(0, 'Tracker was called.');
+    });
+    
+    it('should call the tracker callback fn with expected parameters when the dialog is opened', function(done) {
+      const el = helpers.build(window.__html__['Dialog.tracking.html']);
+      el.show();
+      el.on('coral-overlay:open', function() {
+        expect(trackerFnSpy.callCount).to.equal(1, 'Tracker should have been called only once.');
+        
+        var spyCall = trackerFnSpy.getCall(0);
+        expect(spyCall.args.length).to.equal(4);
+        
+        var trackData = spyCall.args[0];
+        expect(trackData).to.have.property('targetElement', 'element name');
+        expect(trackData).to.have.property('targetType', 'coral-dialog');
+        expect(trackData).to.have.property('eventType', 'display');
+        expect(trackData).to.have.property('rootElement', 'element name');
+        expect(trackData).to.have.property('rootFeature', 'feature name');
+        expect(trackData).to.have.property('rootType', 'coral-dialog');
+        expect(spyCall.args[1]).to.be.an.instanceof(CustomEvent);
+        expect(spyCall.args[2]).to.be.an.instanceof(Dialog);
+        done();
+      });
+    });
+    
+    it('should call the tracker callback fn with expected parameters when the dialog is closed clicking on the "Close" button', function(done) {
+      const el = helpers.build(window.__html__['Dialog.tracking.html']);
+      el.show();
+      el.on('coral-overlay:open', function() {
+        el.querySelector('[coral-close]').click();
+        var spyCall = trackerFnSpy.getCall(1);
+        expect(spyCall.args.length).to.equal(4);
+        
+        var trackData = spyCall.args[0];
+        expect(trackData).to.have.property('targetElement', 'element name');
+        expect(trackData).to.have.property('targetType', 'coral-dialog');
+        expect(trackData).to.have.property('eventType', 'close');
+        expect(trackData).to.have.property('rootElement', 'element name');
+        expect(trackData).to.have.property('rootFeature', 'feature name');
+        expect(trackData).to.have.property('rootType', 'coral-dialog');
+        expect(spyCall.args[1]).to.be.an.instanceof(MouseEvent);
+        expect(spyCall.args[2]).to.be.an.instanceof(Dialog);
+        done();
+      });
+    });
+    
+    it('should call the tracker callback fn with expected parameters when the dialog is closed clicking on the "x" closable button', function(done) {
+      const el = helpers.build(window.__html__['Dialog.tracking.html']);
+      el.show();
+      el.on('coral-overlay:open', function() {
+        el.querySelector('[coral-close]').click();
+        var spyCall = trackerFnSpy.getCall(1);
+        expect(spyCall.args.length).to.equal(4);
+        
+        var trackData = spyCall.args[0];
+        expect(trackData).to.have.property('targetElement', 'element name');
+        expect(trackData).to.have.property('targetType', 'coral-dialog');
+        expect(trackData).to.have.property('eventType', 'close');
+        expect(trackData).to.have.property('rootElement', 'element name');
+        expect(trackData).to.have.property('rootFeature', 'feature name');
+        expect(trackData).to.have.property('rootType', 'coral-dialog');
+        expect(spyCall.args[1]).to.be.an.instanceof(MouseEvent);
+        expect(spyCall.args[2]).to.be.an.instanceof(Dialog);
+        done();
+      });
+    });
+    
+    it('should call the tracker callback fn with expected parameters when the dialog is closed by clicking on the backdrop', function(done) {
+      const el = helpers.build(window.__html__['Dialog.tracking.html']);
+      el.show();
+      el.on('coral-overlay:open', function() {
+        // helpers.keypress('escape');
+        el.click();
+        var spyCall = trackerFnSpy.getCall(1);
+        expect(spyCall.args.length).to.equal(4);
+        
+        var trackData = spyCall.args[0];
+        expect(trackData).to.have.property('targetElement', 'element name');
+        expect(trackData).to.have.property('targetType', 'coral-dialog');
+        expect(trackData).to.have.property('eventType', 'close');
+        expect(trackData).to.have.property('rootElement', 'element name');
+        expect(trackData).to.have.property('rootFeature', 'feature name');
+        expect(trackData).to.have.property('rootType', 'coral-dialog');
+        expect(spyCall.args[1]).to.be.an.instanceof(Event); // KeyboardEvent
+        expect(spyCall.args[2]).to.be.an.instanceof(Dialog);
+        done();
       });
     });
   });

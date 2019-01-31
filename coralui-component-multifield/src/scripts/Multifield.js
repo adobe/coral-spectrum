@@ -18,7 +18,7 @@
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import MultifieldCollection from './MultifieldCollection';
 import '../../../coralui-component-textfield';
-import {commons} from '../../../coralui-util';
+import {commons} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-Multifield';
 const IS_DRAGGING_CLASS = 'is-dragging';
@@ -49,7 +49,8 @@ class Multifield extends ComponentMixin(HTMLElement) {
       'coral-dragaction:dragend coral-multifield-item': '_onDragEnd',
   
       'click [coral-multifield-add]': '_onAddItemClick',
-      'click ._coral-Multifield-remove': '_onRemoveItemClick'
+      'click ._coral-Multifield-remove': '_onRemoveItemClick',
+      'change coral-multifield-item-content > input': '_onInputChange'
     });
     
     // Templates
@@ -157,6 +158,8 @@ class Multifield extends ComponentMixin(HTMLElement) {
       // Wait for MO to render item template
       window.requestAnimationFrame(() => {
         this.trigger('change');
+  
+        this._trackEvent('click', 'add item button', event);
       });
     }
   }
@@ -170,7 +173,13 @@ class Multifield extends ComponentMixin(HTMLElement) {
       }
       
       this.trigger('change');
+  
+      this._trackEvent('click', 'remove item button', event);
     }
+  }
+  
+  _onInputChange(event) {
+    this._trackEvent('change', 'input', event);
   }
   
   /** @ignore */
@@ -254,15 +263,29 @@ class Multifield extends ComponentMixin(HTMLElement) {
         item.style.position = '';
       });
   
+      const oldBefore = dragElement.previousElementSibling;
       const before = afterArr.shift();
       const after = beforeArr.pop();
-      
-      if (before) {
-        this.insertBefore(dragElement, before);
-        this.trigger('change');
-      }
-      if (after) {
-        this.insertBefore(dragElement, after.nextElementSibling);
+      const beforeEvent = this.trigger('coral-multifield:beforeitemorder', {
+        item: dragElement,
+        oldBefore: oldBefore,
+        before: before
+      });
+  
+      if (!beforeEvent.defaultPrevented) {
+        if (before) {
+          this.insertBefore(dragElement, before);
+        }
+        if (after) {
+          this.insertBefore(dragElement, after.nextElementSibling);
+        }
+  
+        this.trigger('coral-multifield:itemorder', {
+          item: dragElement,
+          oldBefore: oldBefore,
+          before: before
+        });
+  
         this.trigger('change');
       }
     }
@@ -318,6 +341,32 @@ class Multifield extends ComponentMixin(HTMLElement) {
       this._renderTemplate(item);
     });
   }
+  
+  /**
+   Triggered when the {@link Multifield} item are reordered.
+   
+   @typedef {CustomEvent} coral-multifield:beforeitemorder
+   
+   @property {MultifieldItem} detail.item
+   The item to be ordered.
+   @property {MultifieldItem} detail.oldBefore
+   Ordered item next sibling before the swap. If <code>null</code>, the item was the last item.
+   @property {MultifieldItem} detail.before
+   Ordered item will be inserted before this sibling item. If <code>null</code>, the item is inserted at the end.
+   */
+  
+  /**
+   Triggered when the {@link Multifield} item are reordered.
+   
+   @typedef {CustomEvent} coral-multifield:itemorder
+   
+   @property {MultifieldItem} detail.item
+   The ordered item.
+   @property {MultifieldItem} detail.oldBefore
+   Ordered item next sibling before the swap. If <code>null</code>, the item was the last item.
+   @property {MultifieldItem} detail.before
+   Ordered item was inserted before this sibling item. If <code>null</code>, the item was inserted at the end.
+   */
 }
 
 export default Multifield;

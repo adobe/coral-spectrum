@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {ButtonGroup} from '../../../coralui-component-buttongroup';
 import {Button} from '../../../coralui-component-button';
 
@@ -53,13 +53,15 @@ describe('ButtonGroup', function() {
   });
   
   describe('Instantiation', function() {
-    it('should be possible to clone using markup', function() {
-      helpers.cloneComponent(window.__html__['ButtonGroup.base.html']);
-    });
-    
-    it('should be possible to clone using js', function() {
-      helpers.cloneComponent(getSimpleButtonGroupElement())
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using markup',
+      window.__html__['ButtonGroup.base.html']
+    );
+  
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      getSimpleButtonGroupElement()
+    );
   });
   
   describe('API', function() {
@@ -1449,7 +1451,7 @@ describe('ButtonGroup', function() {
       item1.remove();
       
       helpers.next(() => {
-        expect(item1.variant).to.equal(Button.variant.PRIMARY);
+        expect(item1.variant).to.equal(Button.variant.DEFAULT);
         expect(item1.classList.contains('_coral-ActionButton')).to.be.false;
         done();
       });

@@ -1,16 +1,18 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Shell} from '../../../coralui-component-shell';
 
 describe('Shell', function() {
   
   describe('Instantiation', function() {
-    it('should be possible to clone using markup', function() {
-      helpers.cloneComponent(window.__html__['Shell.base.html']);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using markup',
+      window.__html__['Shell.base.html']
+    );
   
-    it('should be possible to clone using js', function() {
-      helpers.cloneComponent(new Shell());
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      new Shell()
+    );
   });
 
   describe('API', function() {

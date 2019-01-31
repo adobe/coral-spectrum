@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Step, StepList} from '../../../coralui-component-steplist';
 
 describe('Step', function() {
@@ -27,13 +27,15 @@ describe('Step', function() {
   });
   
   describe('Instantiation', function() {
-    it('should be possible to clone the element using markup', function() {
-      helpers.cloneComponent('<coral-step></coral-step>');
-    });
+    helpers.cloneComponent(
+      'should be possible to clone the element using markup',
+      '<coral-step></coral-step>'
+    );
   
-    it('should be possible to clone using js', function() {
-      helpers.cloneComponent(new Step());
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      new Step()
+    );
   });
 
   describe('API', function() {

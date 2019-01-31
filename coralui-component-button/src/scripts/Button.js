@@ -18,7 +18,6 @@
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import {ButtonMixin} from '../../../coralui-mixin-button';
 
-
 /**
  @class Coral.Button
  @classdesc A Button component containing text and/or an icon.

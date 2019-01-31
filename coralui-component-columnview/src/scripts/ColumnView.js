@@ -18,12 +18,15 @@
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import ColumnViewCollection from './ColumnViewCollection';
 import selectionMode from './selectionMode';
-import {transform, validate, commons} from '../../../coralui-util';
+import {transform, validate, commons} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-MillerColumns';
 
 const scrollTo = (element, to, duration, scrollCallback) => {
   if (duration <= 0) {
+    if (scrollCallback) {
+      scrollCallback();
+    }
     return;
   }
   
@@ -686,18 +689,23 @@ class ColumnView extends ComponentMixin(HTMLElement) {
     
     // fade width of empty items to 0 before removing the columns (for better usability while navigating)
     const emptyColumns = Array.prototype.filter.call(this.querySelectorAll('coral-columnview-column, coral-columnview-preview'), el => !el.firstChild);
-    
-    emptyColumns.forEach((column, i) => {
-      column.style.visibility = 'hidden';
-      column.classList.add('is-collapsing');
-      commons.transitionEnd(column, () => {
-        column.remove();
-        if (i === emptyColumns.length - 1 && triggerEvent) {
-          this._validateNavigation(this.columns.last());
-        }
+  
+    if (emptyColumns.length) {
+      emptyColumns.forEach((column, i) => {
+        column.style.visibility = 'hidden';
+        column.classList.add('is-collapsing');
+        commons.transitionEnd(column, () => {
+          column.remove();
+          if (i === emptyColumns.length - 1 && triggerEvent) {
+            this._validateNavigation(this.columns.last());
+          }
+        });
+        column.style.width = 0;
       });
-      column.style.width = 0;
-    });
+    }
+    else if (triggerEvent) {
+      this._validateNavigation(this.columns.last());
+    }
   }
   
   /** @private */
@@ -878,10 +886,10 @@ class ColumnView extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return [
+    return super.observedAttributes.concat([
       'selectionmode',
       'selectionMode'
-    ];
+    ]);
   }
   
   /** @ignore */

@@ -19,7 +19,7 @@ import {List} from '../../../coralui-component-list';
 import {SelectableCollection} from '../../../coralui-collection';
 import {Icon} from '../../../coralui-component-icon';
 import organization from '../templates/organization';
-import {transform, commons} from '../../../coralui-util';
+import {transform, commons} from '../../../coralui-utils';
 
 const CLASSNAMES = ['_coral-BasicList-item', '_coral-Shell-orgSwitcher-item'];
 

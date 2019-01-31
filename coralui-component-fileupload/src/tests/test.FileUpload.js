@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 describe('FileUpload', function() {
   //Fake event to be used on a change event of the file input: _onInputChange(event)
   var event = {
@@ -37,13 +37,15 @@ describe('FileUpload', function() {
   };
   
   describe('Instantiation', function() {
-    it('should be possible to clone the element using markup', function() {
-      helpers.cloneComponent(window.__html__['FileUpload.base.html']);
-    });
-  
-    it('should be possible to clone the element with special attributes', function() {
-      helpers.cloneComponent(window.__html__['FileUpload.specialAttributes.html']);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone the element using markup',
+      window.__html__['FileUpload.base.html']
+    );
+    
+    helpers.cloneComponent(
+      'should be possible to clone the element with special attributes',
+      window.__html__['FileUpload.specialAttributes.html']
+    );
   });
 
   describe('Markup', function() {

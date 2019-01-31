@@ -15,7 +15,7 @@
  * from Adobe Systems Incorporated.
  */
 
-import {transform, commons} from '../../../coralui-util';
+import {transform, commons} from '../../../coralui-utils';
 
 // https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories
 let LABELLABLE_ELEMENTS_SELECTOR = 'button,input:not([type=hidden]),keygen,meter,output,progress,select,textarea';
@@ -357,16 +357,16 @@ const FormFieldMixin = (superClass) => class extends superClass {
   
   // We don't want to watch existing attributes for components that extend native HTML elements
   static get _nativeObservedAttributes() {
-    return [
+    return super.observedAttributes.concat([
       'labelledby',
       'labelledBy',
       'invalid'
-    ];
+    ]);
   }
   
   /** @ignore */
   static get observedAttributes() {
-    return [
+    return super.observedAttributes.concat([
       'labelledby',
       'labelledBy',
       'invalid',
@@ -376,7 +376,7 @@ const FormFieldMixin = (superClass) => class extends superClass {
       'value',
       'disabled',
       'required'
-    ];
+    ]);
   }
 };
 

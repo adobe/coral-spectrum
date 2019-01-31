@@ -1,6 +1,6 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Drawer} from '../../../coralui-component-drawer';
-import {commons} from '../../../coralui-util';
+import {commons} from '../../../coralui-utils';
 
 describe('Drawer', function () {
   describe('Namespace', function() {
@@ -17,24 +17,30 @@ describe('Drawer', function () {
       expect(drawer.getAttribute('direction')).to.equal(Drawer.direction.DOWN);
       expect(drawer.classList.contains('_coral-Drawer')).to.be.true;
     });
-    
-    it('should be possible to clone the element using markup', function() {
-      helpers.cloneComponent(window.__html__['Drawer.default.html']);
-    });
-    
-    it('should be possible to clone the element with open using markup', function() {
-      helpers.cloneComponent(window.__html__['Drawer.open.html']);
-    });
-    
-    it('should be possible to clone the element direction using markup', function() {
-      helpers.cloneComponent(window.__html__['Drawer.up.html']);
-    });
-    
-    it('should be possible to clone using js', function() {
-      var el = new Drawer();
-      el.content.innerHTML = 'Test';
-      helpers.cloneComponent(el);
-    });
+  
+    helpers.cloneComponent(
+      'should be possible to clone the element using markup',
+      window.__html__['Drawer.default.html']
+    );
+  
+    helpers.cloneComponent(
+      'should be possible to clone the element with open using markup',
+      window.__html__['Drawer.open.html']
+    );
+  
+    helpers.cloneComponent(
+      'should be possible to clone the element direction using markup',
+      window.__html__['Drawer.up.html']
+    );
+  
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      new Drawer().set({
+        content: {
+          innerHTML: 'Test'
+        }
+      })
+    );
   });
   
   describe('Markup', function() {

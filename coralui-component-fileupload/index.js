@@ -1,5 +1,6 @@
 import '../coralui-theme-spectrum';
 import '../coralui-externals';
+import '../coralui-compat';
 
 import FileUpload from './src/scripts/FileUpload';
 import FileUploadItem from './src/scripts/FileUploadItem';

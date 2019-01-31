@@ -18,7 +18,7 @@
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import MasonryItem from './MasonryItem';
 import {SelectableCollection} from '../../../coralui-collection';
-import {transform, commons} from '../../../coralui-util';
+import {transform, commons} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-Masonry';
 
@@ -641,7 +641,7 @@ class Masonry extends ComponentMixin(HTMLElement) {
   static get layouts() { return layouts; }
   
   /** @ignore */
-  static get observedAttributes() { return ['layout', 'spacing', 'orderable']; }
+  static get observedAttributes() { return super.observedAttributes.concat(['layout', 'spacing', 'orderable']); }
   
   /** @ignore */
   connectedCallback() {

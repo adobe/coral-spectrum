@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Shell} from '../../../coralui-component-shell';
 
 describe('Shell.User', function() {
@@ -28,14 +28,16 @@ describe('Shell.User', function() {
       const el = helpers.build('<coral-shell-user>');
       expect(el instanceof Shell.User).to.equal(true);
     });
-
-    it('should be possible to clone using markup', function() {
-      helpers.cloneComponent('<coral-shell-user>');
-    });
-
-    it('should be possible to clone using js', function() {
-      helpers.cloneComponent(new Shell.User());
-    });
+  
+    helpers.cloneComponent(
+      'should be possible to clone using markup',
+      '<coral-shell-user></coral-shell-user>'
+    );
+  
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      new Shell.User()
+    );
   });
   
   describe('API', function() {

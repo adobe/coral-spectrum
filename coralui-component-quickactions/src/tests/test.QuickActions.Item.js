@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {QuickActions} from '../../../coralui-component-quickactions';
 
 describe('QuickActions.Item', function() {
@@ -26,13 +26,15 @@ describe('QuickActions.Item', function() {
   });
   
   describe('Instantiation', function() {
-    it('should be possible to clone using markup', function() {
-      helpers.cloneComponent('<coral-quickactions-item></coral-quickactions-item>');
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using markup',
+      '<coral-quickactions-item></coral-quickactions-item>'
+    );
   
-    it('should be possible to clone using js', function() {
-      helpers.cloneComponent(new QuickActions.Item());
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      new QuickActions.Item()
+    );
   });
 
   describe('API', function() {

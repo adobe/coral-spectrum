@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Card} from '../../../coralui-component-card';
 
 describe('Card', function() {
@@ -30,13 +30,15 @@ describe('Card', function() {
   });
   
   describe('Instantiation', function() {
-    it('should be possible to clone using markup', function() {
-      helpers.cloneComponent(window.__html__['Card.base.html']);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using markup',
+      window.__html__['Card.base.html']
+    );
   
-    it('should be possible to clone using js', function() {
-      helpers.cloneComponent(new Card());
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      new Card()
+    );
   });
 
   describe('API', function() {

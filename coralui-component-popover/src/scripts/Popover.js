@@ -18,7 +18,7 @@
 import {Overlay} from '../../../coralui-component-overlay';
 import {Icon} from '../../../coralui-component-icon';
 import base from '../templates/base';
-import {commons, transform, validate, i18n} from '../../../coralui-util';
+import {commons, transform, validate, i18n} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-Popover';
 
@@ -26,6 +26,9 @@ const OFFSET = 5;
 
 // Used to map icon with variant
 const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
+
+// If it's empty and has no non-textnode children
+const _isEmpty = (el) => !el || el.children.length === 0 && el.textContent.replace(/\s*/g, '') === '';
 
 /**
  Enumeration for {@link Popover} closable state.
@@ -60,8 +63,6 @@ const closable = {
  A popover with a question header and icon, provides the user with help.
  @property {String} INFO
  A popover with an info header and icon, informs the user of non-critical information.
- @property {String} FLYOUT
- A popover without header and footer, only content.
  */
 const variant = {
   DEFAULT: 'default',
@@ -69,16 +70,13 @@ const variant = {
   WARNING: 'warning',
   SUCCESS: 'success',
   HELP: 'help',
-  INFO: 'info',
-  FLYOUT: 'flyout'
+  INFO: 'info'
 };
 
 // A string of all possible variant classnames
 const ALL_VARIANT_CLASSES = [];
 for (const variantValue in variant) {
-  if (variantValue !== 'FLYOUT') {
-    ALL_VARIANT_CLASSES.push(`_coral-Dialog--${variant[variantValue]}`);
-  }
+  ALL_VARIANT_CLASSES.push(`_coral-Dialog--${variant[variantValue]}`);
 }
 
 // A string of all possible placement classnames
@@ -125,6 +123,7 @@ class Popover extends Overlay {
     ['header', 'footer'].forEach((name) => {
       this[`_${name}Observer`] = new MutationObserver(() => {
         this._hideContentZoneIfEmpty(name);
+        this._toggleFlyout();
       });
   
       // Watch for changes
@@ -230,13 +229,10 @@ class Popover extends Overlay {
     // Remove all variant classes
     this.classList.remove(...ALL_VARIANT_CLASSES);
     
-    const isFlyoutVariant = this._variant === variant.FLYOUT;
-    this.classList.toggle(`${CLASSNAME}--dialog`, !isFlyoutVariant);
-    this._elements.tip.hidden = isFlyoutVariant;
-    this._elements.headerWrapper.hidden = isFlyoutVariant;
-    this._elements.footer.hidden = isFlyoutVariant;
+    // Toggle dialog mode
+    this._toggleFlyout();
     
-    if (this._variant === variant.DEFAULT || isFlyoutVariant) {
+    if (this._variant === variant.DEFAULT) {
       // ARIA
       this.setAttribute('role', 'dialog');
     }
@@ -329,7 +325,7 @@ class Popover extends Overlay {
     }
     
     // Inject the SVG icon
-    if (variantValue !== variant.DEFAULT && variantValue !== variant.FLYOUT) {
+    if (variantValue !== variant.DEFAULT) {
       const iconName = capitalize(variantValue);
       this._elements.headerWrapper.insertAdjacentHTML('beforeend', Icon._renderSVG(`spectrum-css-icon-${iconName}Medium`, ['_coral-Dialog-typeIcon', `_coral-UIIcon-${iconName}Medium`]));
       this._elements.icon = this.querySelector('._coral-Dialog-typeIcon');
@@ -356,7 +352,7 @@ class Popover extends Overlay {
     const target = name === 'header' ? this._elements.headerWrapper : contentZone;
   
     // If it's empty and has no non-textnode children, hide the header
-    const hiddenValue = contentZone.children.length === 0 && contentZone.textContent.replace(/\s*/g, '') === '';
+    const hiddenValue = _isEmpty(contentZone);
   
     // Only bother if the hidden status has changed
     if (hiddenValue !== target.hidden) {
@@ -365,6 +361,14 @@ class Popover extends Overlay {
       // Reposition as the height has changed
       this.reposition();
     }
+  }
+  
+  _toggleFlyout() {
+    // Flyout mode is when there's only content in default variant
+    const isFlyout = this._variant === variant.DEFAULT && _isEmpty(this.header) && _isEmpty(this.footer);
+    
+    this.classList.toggle(`${CLASSNAME}--dialog`, !isFlyout);
+    this._elements.tip.hidden = isFlyout;
   }
   
   /** @private */
@@ -385,14 +389,20 @@ class Popover extends Overlay {
       if (!this.open && !targetEl.disabled) {
         // Open if we're not already open and target element is not disabled
         this.show();
+  
+        this._trackEvent('display', 'coral-popover', event);
       }
       else {
         this.hide();
+  
+        this._trackEvent('close', 'coral-popover', event);
       }
     }
     else if (this.open && !this.contains(eventTarget)) {
       // Close if we're open and the click was outside of the target and outside of the popover
       this.hide();
+  
+      this._trackEvent('close', 'coral-popover', event);
     }
   }
   

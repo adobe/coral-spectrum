@@ -20,7 +20,7 @@ import {FormFieldMixin} from '../../../coralui-mixin-formfield';
 import {Button} from '../../../coralui-component-button';
 import {SelectableCollection} from '../../../coralui-collection';
 import base from '../templates/base';
-import {transform, validate, commons} from '../../../coralui-util';
+import {transform, validate, commons} from '../../../coralui-utils';
 
 /**
  Enumeration for {@link ButtonGroup} selection options.

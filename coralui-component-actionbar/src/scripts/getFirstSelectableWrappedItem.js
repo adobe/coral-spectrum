@@ -1,4 +1,4 @@
-import {commons} from '../../../coralui-util';
+import {commons} from '../../../coralui-utils';
 
 /** @ignore */
 export default function getFirstSelectableWrappedItem(wrapperItem) {

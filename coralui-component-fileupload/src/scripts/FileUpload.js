@@ -19,7 +19,7 @@ import {ComponentMixin} from '../../../coralui-mixin-component';
 import {FormFieldMixin} from '../../../coralui-mixin-formfield';
 import FileUploadItem from './FileUploadItem';
 import base from '../templates/base';
-import {transform, commons, validate} from '../../../coralui-util';
+import {transform, commons, validate} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-FileUpload';
 
@@ -1048,9 +1048,6 @@ class FileUpload extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     super.connectedCallback();
     
     this.classList.add(CLASSNAME);
-  
-    // @a11y
-    this.setAttribute('role', 'group');
   
     const button = this.querySelector('[coral-fileupload-select]');
     if (button) {

@@ -1,4 +1,4 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {Tree} from '../../../coralui-component-tree';
 
 // @todo
@@ -32,23 +32,27 @@ describe('Tree', function() {
   });
   
   describe('Instantiation', function() {
-    it('should be possible to clone using markup', function() {
-      helpers.cloneComponent(window.__html__['Tree.base.html']);
-    });
-    
-    it('should be possible to clone nested tree using markup', function() {
-      helpers.cloneComponent(window.__html__['Tree.nested.html']);
-    });
-    
-    it('should be possible to clone tree with interactive elements', function() {
-      helpers.cloneComponent(window.__html__['Tree.interactive.html']);
-    });
-    
-    it('should be possible to clone using js', function() {
-      const el = new Tree();
-      el.items.add(new Tree.Item());
-      helpers.cloneComponent(el);
-    });
+    helpers.cloneComponent(
+      'should be possible to clone using markup',
+      window.__html__['Tree.base.html']
+    );
+  
+    helpers.cloneComponent(
+      'should be possible to clone nested tree using markup',
+      window.__html__['Tree.nested.html']
+    );
+  
+    helpers.cloneComponent(
+      'should be possible to clone tree with interactive elements',
+      window.__html__['Tree.interactive.html']
+    );
+  
+    const el = new Tree();
+    el.items.add(new Tree.Item());
+    helpers.cloneComponent(
+      'should be possible to clone using js',
+      el
+    );
   });
   
   describe('API', function() {

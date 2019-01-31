@@ -21,7 +21,7 @@ import '../../../coralui-component-textfield';
 import '../../../coralui-component-button';
 import {Icon} from '../../../coralui-component-icon';
 import base from '../templates/base';
-import {transform, validate, commons, i18n} from '../../../coralui-util';
+import {transform, validate, commons, i18n} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-Search';
 
@@ -237,9 +237,7 @@ class Search extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   @ignore
-   
-   Not supported anymore.
+   Inherited from {@link FormFieldMixin#invalid}.
    */
   get invalid() {
     return super.invalid;

@@ -1,5 +1,6 @@
 import '../coralui-theme-spectrum';
 import '../coralui-externals';
+import '../coralui-compat';
 
 import Slider from './src/scripts/Slider';
 import SliderContent from './src/scripts/SliderContent';

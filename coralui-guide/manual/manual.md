@@ -24,28 +24,28 @@ This is required for icons and other assets to work.
 ## Consume with npm
  
 To retrieve `@coralui` npm packages from artifactory, you have two options :
-* Add the following 2 lines to `~/.npmrc`:
+* Add the following line to `~/.npmrc`:
 ```
 @coralui:registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-coralui-release
-@spectrum:registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-spectrum-release
 ```
 * Or run npm install with additional parameters
 ```
 npm install --scope=@coralui --registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-coralui-release
-npm install --scope=@spectrum --registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-spectrum-release
 ```
 
-Then you can install `@coralui` npm packages :
-
+Then you can install `@coralui` npm packages. To install `@coralui/coral-spectrum`, you'll also have to configure 
+the `@spectrum` scope using your LDAP credentials.  
 ```
-npm install @coralui/coral-spectrum
+@spectrum:registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-spectrum-release
+
+npm --scope=@spectrum login
 ```
 
 If your project uses a module bundler and a ES6/7 to ES5 transpiler, 
 you can bundle only needed components :
 
 ```
-import {Button, Textfield} from '@coralui/coral-spectrum';  
+import {Button} from '@coralui/coral-spectrum/coralui-component-button';  
 ```
 
 You'll find a Webpack config example at https://git.corp.adobe.com/ringel/coralui-webpack.
@@ -54,13 +54,11 @@ You'll find a Webpack config example at https://git.corp.adobe.com/ringel/coralu
    
 First verify the `.npmrc` configuration then run `npm i`.
  
-Once the installation is complete, you can use below [gulp](https://gulpjs.com/) tasks to work on Coral Spectrum components :
-* `gulp` to generate the build and run the dev server on localhost:9001 by default.
-* `gulp build` to generate the build.
-* `gulp watch` to run the dev server on localhost:9001 by default. 
-* `gulp test` to generate the build and run the tests.
-* `gulp karma` to run the tests only.
-* `gulp karma-watch` to debug the tests on localhost:9876 by default.
-* `gulp docs` to build the documentation. 
+Once the installation is complete, you can use below tasks to get started:
+* `npm run start` to generate the build and run the dev server on `localhost:9001` by default.
+* `npm run build` to generate the build.
+* `npm run dev` to run the dev server on `localhost:9001` by default. 
+* `npm run build && npm run test` to generate the build and run the tests.
+* `npm run docs` to build the documentation. 
 
 Each component can be built independently.

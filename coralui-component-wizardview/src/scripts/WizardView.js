@@ -19,7 +19,7 @@ import {ComponentMixin} from '../../../coralui-mixin-component';
 import {Collection} from '../../../coralui-collection';
 import '../../../coralui-component-steplist';
 import '../../../coralui-component-panelstack';
-import {commons} from '../../../coralui-util';
+import {commons} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-WizardView';
 

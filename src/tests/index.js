@@ -1,4 +1,4 @@
-import '../../coralui-util/src/tests';
+import '../../coralui-utils/src/tests';
 import '../../coralui-collection/src/tests';
 import '../../coralui-dragaction/src/tests';
 import '../../coralui-mixin-component/src/tests';

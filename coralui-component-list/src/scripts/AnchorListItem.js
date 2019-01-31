@@ -62,6 +62,19 @@ class AnchorListItem extends ListItemMixin(ComponentMixin(HTMLAnchorElement)) {
     }
   }
   
+  /**
+   Inherited from {@link ComponentMixin#trackingElement}.
+   */
+  get trackingElement() {
+    return typeof this._trackingElement === 'undefined' ?
+      // keep spaces to only 1 max and trim. this mimics native html behaviors
+      this.content.textContent.replace(/\s{2,}/g, ' ').trim() :
+      this._trackingElement;
+  }
+  set trackingElement(value) {
+    super.trackingElement = value;
+  }
+  
   /** @private */
   _onClick(event) {
     // Support disabled property

@@ -18,8 +18,10 @@
 const CLASSNAMES = ['coral-Rule', 'coral-Rule--subsection2'];
 
 /**
- @ignore
- Not supported.
+ @class Coral.Popover.Separator
+ @classdesc The Popover separator
+ @htmltag coral-popover-separator
+ @extends {HTMLElement}
  */
 class PopoverSeparator extends HTMLElement {
   /** @ignore */

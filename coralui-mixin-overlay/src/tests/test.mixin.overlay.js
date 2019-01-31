@@ -1,7 +1,7 @@
-import {helpers} from '../../../coralui-util/src/tests/helpers';
+import {helpers} from '../../../coralui-utils/src/tests/helpers';
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import {OverlayMixin} from '../../../coralui-mixin-overlay';
-import {commons, mixin} from '../../../coralui-util';
+import {commons, mixin} from '../../../coralui-utils';
 
 /**
  Get the zIndex of an element
@@ -517,7 +517,7 @@ describe('mixin._overlay', function() {
           expect(openSpy.callCount).to.equal(1, '"coral-overlay:open" should only be called "once"!');
           expect(closeSpy.callCount).to.equal(0, '"coral-overlay:close" should never be called as it is canceled by open before animation is done');
           done();
-        }, 200);
+        }, 300);
       });
     });
     

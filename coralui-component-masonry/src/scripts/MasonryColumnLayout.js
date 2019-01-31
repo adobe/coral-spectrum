@@ -17,7 +17,7 @@
 
 import MasonryLayout from './MasonryLayout';
 import {setTransition, setTransform, csspx, getPositiveNumberProperty} from './MasonryLayoutUtil';
-import {Keys} from '../../../coralui-util';
+import {Keys} from '../../../coralui-utils';
 
 /**
  Base class for column-based masonry layouts.
