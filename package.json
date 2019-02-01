@@ -6,6 +6,7 @@
     "type": "git",
     "url": "https://git.corp.adobe.com/Coral/coral-spectrum"
   },
+  "private": true,
   "scripts": {
     "start": "gulp",
     "lint": "gulp lint",
@@ -19,16 +20,15 @@
   "dependencies": {
     "@adobe/focus-ring-polyfill": "^0.1.5",
     "@adobe/vent": "^1.0.0",
-    "@spectrum/spectrum-css": "2.0.0",
+    "@adobe/spectrum-css": "2.7.2",
     "@spectrum/spectrum-iconstore": "^3.0.2",
     "document-register-element": "^1.7.0",
-    "normalize.css": "8.0.0",
+    "normalize.css": "8.0.1",
     "popper.js": "^1.10.6",
     "promise-polyfill": "^6.0.2",
     "resize-observer-polyfill": "^1.5.0"
   },
   "devDependencies": {
-    "@adobe/eslint-config-adobe-js": "0.0.2",
     "babel-eslint": "^8.0.2",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-env": "^1.6.0",
@@ -43,7 +43,12 @@
     "esdoc-inject-style-plugin": "^1.0.0",
     "esdoc-member-plugin": "^1.0.0",
     "esdoc-standard-plugin": "^1.0.0",
+    "eslint-config-standard": "^12.0.0",
     "eslint-plugin-babel": "^4.1.2",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
     "fs-extra": "^4.0.2",
     "glob-all": "^3.1.0",
     "gulp": "^3.9.1",
@@ -51,7 +56,7 @@
     "gulp-better-rollup": "^1.1.1",
     "gulp-bump": "^2.7.0",
     "gulp-domly": "^0.1.0",
-    "gulp-eslint": "^4.0.0",
+    "gulp-eslint": "^5.0.0",
     "gulp-gh-pages": "^0.5.4",
     "gulp-git": "^2.4.1",
     "gulp-merge-json": "^1.0.0",

@@ -696,7 +696,6 @@ class ButtonGroup extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     }
   }
   
-  
   _selectItemByValue(values) {
     // queries all the buttons to change their selection state
     const buttons = this.items.getAll();

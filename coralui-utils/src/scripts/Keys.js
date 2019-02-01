@@ -265,27 +265,27 @@ class Keys {
     /**
      A map of key code combinations to arrays of listener functions
      */
-    this._keyListeners;
+    this._keyListeners = [];
   
     /**
      A an array of key sequences objects
      */
-    this._keySequences;
+    this._keySequences = [];
   
     /**
      The sorted array of currently pressed keycodes
      */
-    this._currentKeys;
+    this._currentKeys = [];
   
     /**
      The joined string representation of currently pressed keycodes
      */
-    this._currentKeyCombo;
+    this._currentKeyCombo = [];
   
     /**
      The timeout that corresponds to sequences
      */
-    this._sequenceTimeout;
+    this._sequenceTimeout = null;
     
     this._handleKeyDown = this._handleKeyDown.bind(this);
     this._handleKeyUp = this._handleKeyUp.bind(this);
@@ -429,7 +429,7 @@ class Keys {
         }
         
         // Add data to event object
-        if (typeof listener.data !== undefined) {
+        if (typeof listener.data !== 'undefined') {
           event.data = listener.data;
         }
         
@@ -509,7 +509,7 @@ class Keys {
       
       // If too many keys are pressed, then one is removed, make sure to check for a match
       this._setCurrentKeyCombo(event);
-      this._executeListeners.call(this, event, true);
+      this._executeListeners(event, true);
     }
   }
   

@@ -309,7 +309,6 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     // setting the value should always set the first value
     if (this._elements.handles.length === 1) {
-      
       const input = this._elements.inputs[0];
       
       value = this._snapValueToStep(value, this.min, this.max, this.step);
@@ -556,9 +555,9 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     let closestHandle;
     
     function calculateDistance(elem, x, y) {
-      const box = elem.getBoundingClientRect(),
-        top = box.top + window.pageYOffset,
-        left = box.left + window.pageXOffset;
+      const box = elem.getBoundingClientRect();
+      const top = box.top + window.pageYOffset;
+      const left = box.left + window.pageXOffset;
       
       return Math.floor(
         Math.sqrt(Math.pow(x - (left + box.width / 2), 2) + Math.pow(y - (top + box.height / 2), 2))

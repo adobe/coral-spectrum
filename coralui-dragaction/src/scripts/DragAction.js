@@ -308,7 +308,6 @@ class DragAction {
     if (typeof value === 'string' ||
       value instanceof HTMLElement ||
       Object.prototype.toString.call(value) === '[object NodeList]') {
-    
       this._handles = transformToArray(value);
     
       // Bind events

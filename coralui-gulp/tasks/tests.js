@@ -20,7 +20,7 @@ module.exports = function(gulp) {
   const spawn = require('child_process').spawn;
   
   gulp.task('karma', function(done) {
-    KarmaServer.start({
+    new KarmaServer({
       configFile: configFile,
       singleRun: true
     }, (err) => {
@@ -28,7 +28,7 @@ module.exports = function(gulp) {
         process.exit(err);
       }
       done();
-    });
+    }).start();
   });
   
   gulp.task('karma-watch', function(done) {

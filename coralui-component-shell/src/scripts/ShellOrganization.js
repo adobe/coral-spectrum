@@ -23,7 +23,6 @@ import {transform, commons} from '../../../coralui-utils';
 
 const CLASSNAMES = ['_coral-BasicList-item', '_coral-Shell-orgSwitcher-item'];
 
-
 /**
  @class Coral.Shell.Organization
  @classdesc A Shell Organization component

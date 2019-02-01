@@ -536,7 +536,6 @@ const OverlayMixin = (superClass) => class extends superClass {
       
       // Don't force reflow
       window.requestAnimationFrame(() => {
-        
         // Keep it silenced
         this._silenced = silenced;
         
@@ -568,7 +567,6 @@ const OverlayMixin = (superClass) => class extends superClass {
           const openComplete = () => {
             if (this.open) {
               this._debounce(() => {
-  
                 // handles the focus behavior based on accessibility recommendations
                 this._handleFocus();
   
@@ -873,7 +871,6 @@ const OverlayMixin = (superClass) => class extends superClass {
   
     // If the element is not focusable,
     if (element.offsetParent === null || !element.matches(commons.FOCUSABLE_ELEMENT_SELECTOR)) {
-    
       // add tabindex so that it is programmatically focusable.
       element.setAttribute('tabindex', -1);
     

@@ -20,7 +20,7 @@ import ICON_MAP from '../../../coralui-compat/data/iconMap.json';
 import SPECTRUM_ICONS_PATH from '@spectrum/spectrum-iconstore/icons/workflow/spectrum-icons.svg';
 import SPECTRUM_ICONS_COLOR_PATH from '@spectrum/spectrum-iconstore/icons/workflow/spectrum-icons-color.svg';
 import SPECTRUM_CSS_ICONS_PATH from '@spectrum/spectrum-iconstore/icons/ui/ui-icons-medium.svg';
-import '@spectrum/spectrum-css/dist/icons/AS.loadIcons';
+import loadIcons from '@adobe/spectrum-css/dist/icons/loadIcons';
 
 const SPECTRUM_ICONS = 'spectrum-icons';
 const SPECTRUM_ICONS_COLOR = 'spectrum-icons-color';
@@ -367,7 +367,7 @@ class Icon extends ComponentMixin(HTMLElement) {
       url = resolveIconsPath(SPECTRUM_CSS_ICONS_PATH);
     }
   
-    window.AdobeSpectrum.loadIcons(url);
+    loadIcons(url);
   }
   
   /** @ignore */

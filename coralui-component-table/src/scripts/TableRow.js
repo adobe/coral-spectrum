@@ -321,7 +321,6 @@ class TableRow extends ComponentMixin(HTMLTableRowElement) {
    @private
    */
   
-  
   /**
    Triggered when {@link TableRow#multiple} changed.
    

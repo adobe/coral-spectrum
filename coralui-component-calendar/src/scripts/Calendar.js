@@ -789,7 +789,6 @@ class Calendar extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       
       // if cursor is out of range
       if (!this._isInRange(this._cursor, unit)) {
-        
         // advance to closest value in range
         if (this._isBeforeMin(this._cursor)) {
           newMoment = this.min;

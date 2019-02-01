@@ -345,7 +345,6 @@ class ColumnView extends ComponentMixin(HTMLElement) {
         selectedItem.setAttribute('selected', '');
       }
       else {
-        
         if (selectedItem !== lastSelected.firstSelectedItem) {
           selectedItem.removeAttribute('selected');
         }
@@ -686,7 +685,6 @@ class ColumnView extends ComponentMixin(HTMLElement) {
    @private
    */
   _removeEmptyColumnsWithSmoothTransition(triggerEvent) {
-    
     // fade width of empty items to 0 before removing the columns (for better usability while navigating)
     const emptyColumns = Array.prototype.filter.call(this.querySelectorAll('coral-columnview-column, coral-columnview-preview'), el => !el.firstChild);
   

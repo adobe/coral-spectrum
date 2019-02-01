@@ -244,7 +244,7 @@ const ActionBarContainerMixin = (superClass) => class extends superClass {
     // hide the popover(needed to disable fade time of popover)
     this._elements.overlay.hidden = true;
     
-    //close any popovers, that might be inside the 'more' popover
+    // close any popovers, that might be inside the 'more' popover
     const childPopovers = this._elements.overlay.getElementsByTagName('coral-popover');
     for (let i = 0; i < childPopovers.length; i++) {
       childPopovers[i].open = false;

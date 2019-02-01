@@ -306,7 +306,6 @@ class Clock extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
     // If a labelledBy attribute has been defined,
     if (labelledBy) {
-    
       // and strip the valueAsText element id from the end of the aria-labelledby string.
       labelledBy = labelledBy.replace(this._elements.valueAsText.id, '').trim();
     

@@ -22,4 +22,3 @@
  @return {HTMLElement}
  */
 export default () => document.createElement('coral-list-item-content');
-

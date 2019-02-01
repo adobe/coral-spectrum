@@ -260,13 +260,12 @@ const getConstructorName = function(constructor) {
   
   // Traverses Coral constructors if not already done to set the namespace
   if (!constructor._namespace) {
-  
     // Set namespace on Coral constructors until 'constructor' is found
     const find = (obj, constructorToFind) => {
       let found = false;
       const type = typeof obj;
     
-      if (obj && type === 'object' || type === 'function')	{
+      if (obj && type === 'object' || type === 'function') {
         const subObj = Object.keys(obj);
       
         for (let i = 0; i < subObj.length; i++) {
@@ -274,7 +273,6 @@ const getConstructorName = function(constructor) {
         
           // Components are capitalized
           if (key[0].match(REG_EXP_UPPERCASE) !== null) {
-          
             // Keep a reference of the constructor name and its parent
             obj[key]._namespace = {
               parent: obj,

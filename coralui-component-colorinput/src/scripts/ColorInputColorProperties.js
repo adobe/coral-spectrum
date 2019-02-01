@@ -64,7 +64,7 @@ class ColorInputColorProperties extends ColorInputAbstractSubviewMixin(Component
       colorPreview.setAttribute('aria-pressed', 'true');
       colorPreview.setAttribute('aria-label', i18n.get('Color not set'));
     
-      //reset Hex value to empty
+      // reset Hex value to empty
       this._elements.hexInput.value = '';
     }
     else {
@@ -153,7 +153,7 @@ class ColorInputColorProperties extends ColorInputAbstractSubviewMixin(Component
   _onChangeHex(event) {
     event.stopPropagation();
   
-    //Value of hexInput field is without '#'.
+    // Value of hexInput field is without '#'.
     const value = `#${this._elements.hexInput.value}`;
     const color = new Color();
     color.value = value;
@@ -161,7 +161,7 @@ class ColorInputColorProperties extends ColorInputAbstractSubviewMixin(Component
     if (color.hex === null) {
       // no valid color value
       this._elements.hexInput.value = '';
-      //Save last valid color
+      // Save last valid color
       if (this._colorinput.valueAsColor !== null) {
         this.constructor._lastValidColor = this._colorinput.valueAsColor;
       }

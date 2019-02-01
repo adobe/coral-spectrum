@@ -33,8 +33,7 @@ To retrieve `@coralui` npm packages from artifactory, you have two options :
 npm install --scope=@coralui --registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-coralui-release
 ```
 
-Then you can install `@coralui` npm packages. To install `@coralui/coral-spectrum`, you'll also have to configure 
-the `@spectrum` scope using your LDAP credentials.  
+Then you can install `@coralui` npm packages. You'll also have to configure the `@spectrum` scope using your LDAP credentials to retrieve all SVG icons.
 ```
 @spectrum:registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-spectrum-release
 

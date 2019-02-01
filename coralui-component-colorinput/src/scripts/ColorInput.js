@@ -345,8 +345,7 @@ class ColorInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       defaultPalette.parentNode.removeChild(defaultPalette);
     }
   }
-
-
+  
   /**
    Short hint that describes the expected value of the ColorInput. It is displayed when the ColorInput is empty
    and the variant is {@link Coral.ColorInput.variant.DEFAULT}
@@ -659,7 +658,7 @@ class ColorInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   /** @ignore */
   _showOrHideView(view, hide) {
     view.hidden = hide;
-    //Remove both classes and add only the required one
+    // Remove both classes and add only the required one
     this._elements.overlay.classList.remove('_coral-ColorInput-onlySwatchesView', '_coral-ColorInput-onlyPropertiesView');
     
     if (!this._elements.propertiesView.hidden && this._elements.swatchesView.hidden) {
@@ -734,7 +733,6 @@ class ColorInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this.valueAsColor = color;
     
     if (!oldColor.isSimilarTo(this.valueAsColor, false)) {
-      
       // test if current color is invalid
       this._validateInputValue();
       

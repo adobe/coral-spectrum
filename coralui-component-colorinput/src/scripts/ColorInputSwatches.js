@@ -248,26 +248,26 @@ class ColorInputSwatches extends ColorInputAbstractSubviewMixin(ComponentMixin(H
     let newIndex = currentIndex;
     
     switch (event.which) {
-      //return
+      // return
       case 13:
         // Wait a frame before closing so that focus is restored correctly
         window.requestAnimationFrame(() => {
           overlay.open = false;
         });
         break;
-      //left arrow
+      // left arrow
       case 37:
         newIndex -= 1;
         break;
-      //up arrow
+      // up arrow
       case 38:
         newIndex -= 4;
         break;
-      //right arrow
+      // right arrow
       case 39:
         newIndex += 1;
         break;
-      //down arrow
+      // down arrow
       case 40:
         newIndex += 4;
         break;

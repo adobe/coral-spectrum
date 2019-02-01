@@ -151,7 +151,6 @@ class TabList extends ComponentMixin(HTMLElement) {
   
         // we add proper accessibility if available
         if (realTarget) {
-    
           const tabItems = this.items.getAll();
           const panelItems = realTarget.items ? realTarget.items.getAll() : realTarget.children;
     
@@ -161,7 +160,6 @@ class TabList extends ComponentMixin(HTMLElement) {
           let tab;
           let panel;
           for (let i = 0; i < maxItems; i++) {
-      
             tab = tabItems[i];
             panel = panelItems[i];
       

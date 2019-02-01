@@ -458,7 +458,6 @@ class MasonryColumnLayout extends MasonryLayout {
       if (layoutData && !layoutData.ignored && (
         layoutData.left <= x && layoutData.left + layoutData.width >= x &&
         layoutData.top <= y && layoutData.top + layoutData.height >= y)) {
-        
         return item;
       }
     }

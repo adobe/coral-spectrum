@@ -673,7 +673,6 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     event.stopPropagation();
     
     if (!this.multiple) {
-      
       const inputText = this._elements.input.value.toLowerCase();
       
       if (this.forceSelection || inputText === '') {

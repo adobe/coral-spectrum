@@ -379,7 +379,6 @@ class Table extends ComponentMixin(HTMLTableElement) {
   
     // Deselect all except last
     if (!this.multiple) {
-    
       const selection = this.selectedItems;
     
       if (selection.length > 1) {
@@ -671,7 +670,6 @@ class Table extends ComponentMixin(HTMLTableElement) {
       const draggedHeaderCell = isHeaderCellDragged ? headerCell : headerCell.content;
       
       if (!draggedHeaderCell.classList.contains(IS_DRAGGING_CLASS)) {
-  
         const offsetLeft = draggedHeaderCell.getBoundingClientRect().left + documentScrollLeft;
         const isAfter = event.detail.pageX < offsetLeft + draggedHeaderCell.offsetWidth / 3;
         
@@ -897,7 +895,6 @@ class Table extends ComponentMixin(HTMLTableElement) {
           
           // Don't continue if table has no items or if the last selected item is the clicked item
           if (lastSelectedItem && getIndexOf(row) !== getIndexOf(lastSelectedItem)) {
-            
             // Range selection direction
             const before = getIndexOf(row) < getIndexOf(lastSelectedItem);
             const rangeQuery = before ? 'prevUntil' : 'nextUntil';
@@ -906,7 +903,6 @@ class Table extends ComponentMixin(HTMLTableElement) {
             table._lastSelectedItems.direction = before ? 'up' : 'down';
             
             if (!row.selected) {
-              
               // Store selection range
               const selectionRange = getSiblingsOf(lastSelectedItem, 'tr[is="coral-table-row"]:not([selected])', rangeQuery);
               selectionRange[before ? 'push' : 'unshift'](lastSelectedItem);
@@ -1484,7 +1480,6 @@ class Table extends ComponentMixin(HTMLTableElement) {
       const removedNode = removedNodes[k];
       
       if (removedNode instanceof TableCell) {
-        
         if (removedNode.selected) {
           row._triggerChangeEvent();
         }
@@ -1774,7 +1769,6 @@ class Table extends ComponentMixin(HTMLTableElement) {
       });
     }
     else if (column.sortableDirection === sortableDirection.DEFAULT && !onInitialization) {
-      
       // Only sort if not custom sorting
       if (column.sortableType !== sortableType.CUSTOM) {
         // Put rows back to their initial position
@@ -2025,7 +2019,7 @@ class Table extends ComponentMixin(HTMLTableElement) {
           return;
         }
         
-        //Target sibling item
+        // Target sibling item
         const sibling = getSiblingsOf(lastSelectedItem, 'tr[is="coral-table-row"]', next ? 'next' : 'prev');
         if (!sibling.hasAttribute('selected')) {
           lastSelectedItem = sibling;
@@ -2241,8 +2235,8 @@ class Table extends ComponentMixin(HTMLTableElement) {
   
   /** @private */
   _resetContainerLayout(marginTop, height) {
-    this._elements.container.style.marginTop = marginTop ? marginTop : '';
-    this._elements.container.style.height = height ? height : '';
+    this._elements.container.style.marginTop = marginTop || '';
+    this._elements.container.style.height = height || '';
   }
   
   /** @private */

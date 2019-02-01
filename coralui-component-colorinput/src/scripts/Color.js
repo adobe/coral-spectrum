@@ -105,7 +105,6 @@ function _serializeRGB(rgb) {
   return '';
 }
 
-
 /**
  Parse an rgba value into an object.
  e.g.: 'rgba(0,0,0,0.5)' => {r:0, g:0, b:0, a:0.5}
@@ -118,7 +117,6 @@ function _serializeRGB(rgb) {
  @ignore
  */
 function _parseRGBA(rgbaStr) {
-  
   const sliced = _slice(rgbaStr, 'rgba(');
   
   if (sliced.length !== 4) {
@@ -140,7 +138,6 @@ function _parseRGBA(rgbaStr) {
   
   return {r, g, b, a};
 }
-
 
 /**
  Serialize an rgba object into a string.
@@ -170,7 +167,6 @@ function _serializeRGBA(rgba) {
  @ignore
  */
 function _parseCMYK(cmykStr) {
-  
   const sliced = _slice(cmykStr, 'cmyk(');
   
   if (sliced.length !== 4) {
@@ -204,7 +200,6 @@ function _parseCMYK(cmykStr) {
  */
 function _serializeCMYK(cmyk) {
   if (cmyk) {
-    
     // make sure there are not more than 2 digits after dot
     const c = parseFloat(cmyk.c.toFixed(2));
     const m = parseFloat(cmyk.m.toFixed(2));
@@ -276,7 +271,6 @@ function _hexToRgb(hex) {
  @ignore
  */
 function _serializeHex(hex) {
-  
   // explicitly test null (0 is valid)
   if (hex !== null) {
     const rgb = _hexToRgb(hex);
@@ -380,7 +374,6 @@ function _rgbToCmyk(rgb) {
   return result;
 }
 
-
 /**
  Parse an hsb value into an object.
  e.g.: 'hsb(360,100,0)' => {h:360, s:100, b:0}
@@ -426,7 +419,6 @@ function _parseHSB(hsbStr) {
  */
 function _serializeHSB(hsb) {
   if (hsb) {
-    
     // make sure there are not more than 2 digits after dot
     const h = parseFloat(hsb.h.toFixed(2));
     const s = parseFloat(hsb.s.toFixed(2));
@@ -437,7 +429,6 @@ function _serializeHSB(hsb) {
   
   return '';
 }
-
 
 /**
  Transforms a HSB (same as HSV) color into RGB representation.
@@ -598,7 +589,6 @@ function _parseHSL(hslStr) {
  */
 function _serializeHSL(hsl) {
   if (hsl) {
-    
     // make sure there are not more than 2 digits after dot
     const h = parseFloat(hsl.h.toFixed(2));
     const s = parseFloat(hsl.s.toFixed(2));
@@ -609,7 +599,6 @@ function _serializeHSL(hsl) {
   
   return '';
 }
-
 
 /**
  Transforms a HSL color into RGB representation.
@@ -665,7 +654,6 @@ function _hslToRgb(hsl) {
     g = hue2rgb(pValue, qValue, h);
     b = hue2rgb(pValue, qValue, h - 1 / 3);
   }
-  
   
   return {
     r: Math.round(r * 255),
@@ -771,7 +759,6 @@ function _parseHSLA(hslaStr) {
  */
 function _serializeHSLA(hsla) {
   if (hsla) {
-    
     // make sure there are not more than 2 digits after dot
     const h = parseFloat(hsla.h.toFixed(2));
     const s = parseFloat(hsla.s.toFixed(2));
@@ -1259,7 +1246,6 @@ class Color {
     
     return false;
   }
-  
   
   /**
    Calculates an array of lighter colors.

@@ -144,7 +144,6 @@ class TabView extends ComponentMixin(HTMLElement) {
   _onPanelStackChange(event) {
     // everytime the panelstack changes, we verify that the tablist and panelstack are up to date
     if (event.detail.selection) {
-    
       const tabSelector = event.detail.selection.getAttribute('aria-labelledby');
       const tab = document.getElementById(tabSelector);
     

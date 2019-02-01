@@ -212,7 +212,6 @@ class ActionBar extends ComponentMixin(HTMLElement) {
       // first calculate visibility of left item
       showItem = false;
       if (itemLeft !== null) {
-        
         if (itemLeft.hidden || itemLeft.style.display === 'none') {
           // item is hidden on purpose (we don't use it for layouting but do also not move offscreen) needed as it
           // might already have been moved offscreen before
@@ -346,7 +345,7 @@ class ActionBar extends ComponentMixin(HTMLElement) {
     const index = selectableItems.indexOf(currentItem);
     
     if (index >= 0 && selectableItems.length > index + 1) {
-      //if there is a next selectable element return it
+      // if there is a next selectable element return it
       return getFirstSelectableWrappedItem(selectableItems[index + 1]);
     }
     
@@ -364,7 +363,7 @@ class ActionBar extends ComponentMixin(HTMLElement) {
     const index = selectableItems.indexOf(currentItem);
     
     if (index > 0) {
-      //if there is a previous selectable element return it
+      // if there is a previous selectable element return it
       return getFirstSelectableWrappedItem(selectableItems[index - 1]);
     }
     
@@ -594,7 +593,7 @@ class ActionBar extends ComponentMixin(HTMLElement) {
     this.primary = this._elements.primary;
     this.secondary = this._elements.secondary;
 
-    //force one layout
+    // force one layout
     this._onLayout();
   }
 }

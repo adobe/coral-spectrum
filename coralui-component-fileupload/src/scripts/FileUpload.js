@@ -680,7 +680,6 @@ class FileUpload extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       return;
     }
     
-    
     // Initialize items
     for (let i = 0; i < files.length; i++) {
       items.push(new FileUploadItem(files[i]));
@@ -688,10 +687,8 @@ class FileUpload extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     
     // Verify if file is allowed to be uploaded and trigger events accordingly
     items.forEach((item) => {
-      
       // If file is not found in uploadQueue using filename
       if (!this._getQueueItemByFilename(item.file.name)) {
-        
         // Check file size
         if (this.sizeLimit && item.file.size > this.sizeLimit) {
           this.trigger('coral-fileupload:filesizeexceeded', {item});

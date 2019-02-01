@@ -532,7 +532,6 @@ class Commons {
     }
   }
   
-  
   /**
    Assign an object given a nested path
    
@@ -569,7 +568,6 @@ class Commons {
     // Do the actual assignment
     curObj[nsParts.shift()] = obj;
   }
-  
   
   /**
    Get the value of the property at the given nested path.
@@ -809,7 +807,6 @@ class Commons {
  
  @returns {*} The value to use. If <code>undefined</code>, the old value will be used.
  */
-
 
 /**
  Execute the callback once a CSS transition has ended.

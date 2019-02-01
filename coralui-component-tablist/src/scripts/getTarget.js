@@ -25,7 +25,6 @@
  @returns {?HTMLElement}
  */
 export default function getTarget(targetValue) {
-  
   if (targetValue instanceof Node) {
     // Just return the provided Node
     return targetValue;
