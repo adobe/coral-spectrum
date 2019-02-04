@@ -26,6 +26,9 @@ import '../../../coralui-component-popover';
 import base from '../templates/base';
 import {transform, validate, commons, i18n} from '../../../coralui-utils';
 
+// 32px button width + 8px left margin
+const BUTTON_WIDTH = 32 + 8;
+
 const BUTTON_FOCUSABLE_SELECTOR = '._coral-QuickActions-item:not([disabled]):not([hidden])';
 
 /**
@@ -592,13 +595,12 @@ class QuickActions extends Overlay {
     }
     
     const totalAvailableWidth = this.offsetWidth;
-    const buttonWidth = buttons[0].offsetWidth;
     
     let totalFittingButtons = 0;
     let widthUsed = 0;
     
     while (totalAvailableWidth > widthUsed) {
-      widthUsed += buttonWidth;
+      widthUsed += BUTTON_WIDTH;
       
       if (totalAvailableWidth > widthUsed) {
         totalFittingButtons++;
@@ -696,10 +698,8 @@ class QuickActions extends Overlay {
         const visibleButtons = this.querySelectorAll('._coral-QuickActions-item:not([hidden])');
   
         if (visibleButtons.length) {
-          const buttonWidth = visibleButtons[0].offsetWidth;
-    
           for (let i = 0; i < visibleButtons.length && width <= maxWidth; i++) {
-            width += buttonWidth;
+            width += BUTTON_WIDTH;
           }
     
           this.style.width = `${width}px`;
