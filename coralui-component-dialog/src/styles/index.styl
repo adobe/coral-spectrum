@@ -1,0 +1,67 @@
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2017 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+
+@require '@adobe/spectrum-css/dist/components/dialog/index.css';
+@require '@adobe/spectrum-css/dist/components/dialog/multiStops/light.css';
+@require '@adobe/spectrum-css/dist/components/dialog/multiStops/lightest.css';
+@require '@adobe/spectrum-css/dist/components/dialog/multiStops/dark.css';
+@require '@adobe/spectrum-css/dist/components/dialog/multiStops/darkest.css';
+
+// @compat fix header in wrapped dialog
+._coral-Dialog--wrapped:not(._coral-Dialog--fullscreenTakeover) ._coral-Dialog-title {
+  position: relative;
+  overflow: visible;
+  top: -18px;
+}
+
+// @spectrum
+._coral-Dialog-closeButton {
+  line-height: 18px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 18px;
+  height: 18px;
+
+  ._coral-Icon {
+    width: 12px;
+  }
+}
+
+// @spectrum
+coral-dialog-footer {
+  display: block;
+
+  &:empty {
+    display: none;
+  }
+}
+
+._coral-Dialog-dragIcon {
+  margin-top: -3px;
+}
+
+// Prevent dialog flashing on page load
+coral-dialog {
+  display: none;
+}
+
+@require 'light';
+@require 'lightest';
+@require 'dark';
+@require 'darkest';
+

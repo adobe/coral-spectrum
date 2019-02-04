@@ -1,0 +1,176 @@
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2018 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+
+$shell-solutionswitcher-transitiontime = 0.21s; // Fibonacci number
+$shell-solutionswitcher-background-color = rgb(38, 38, 38);
+$shell-solutionswitcher-iconsize = 48px;
+$shell-solutionswitcher-linked-solution-iconsize = 48px;
+$shell-solutionswitcher-icon-container-height = 48px;
+$shell-solutionswitcher-secondary-iconsize = 24px;
+$shell-solutions-border = 2px solid
+$shell-solutions-border-color = rgba(45, 45, 45, 1)
+$shell-solutions-header-text-color = rgb(180, 180, 180);
+$shell-solution-linked-text-color = rgba(226,226,226, 0.8);
+$shell-solution-text-color = rgb(133, 133, 133);
+$shell-solution-text-color-hover = white;
+$shell-solution-icon-color = rgba(255, 255, 255, .45);
+$shell-solution-secondary-icon-color = rgba(255, 255, 255, .60);
+
+._coral-Shell-solutionSwitcher {
+  position: relative;
+  display: flex;
+  padding: 48px 5%;
+  margin: auto;
+  background: $shell-solutionswitcher-background-color;
+  @media (max-width: 900px) {
+    padding: 30px;
+  }
+  @media (max-width: 550px) {
+    padding: 30px;
+    flex-direction: column;
+  }
+}
+
+._coral-Shell-solutions-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  @media (max-width: 900px) {
+    flex-wrap: wrap;
+  }
+  @media (max-width: 550px) {
+    flex-wrap: wrap;
+  }
+  justify-content: space-around;
+}
+
+._coral-Shell-solutions {
+  padding-right: 25px;
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 40px;
+}
+
+coral-shell-solutions-header {
+  text-transform: uppercase;
+  padding-bottom: 10px;
+  border-bottom: $shell-solutions-border $shell-solutions-border-color;
+  text-decoration: none;
+  color: $shell-solutions-header-text-color;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+._coral-Shell-solution {
+  display: flex;
+  height: $shell-solutionswitcher-icon-container-height;
+  align-items: center;
+  padding: 16px 0;
+  min-width: 120px;
+
+  text-decoration: none;
+
+  color: $shell-solution-text-color;
+  font-size: 16px;
+
+  width: 100%;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+._coral-Shell-solution:hover {
+  color: $shell-solution-text-color-hover;
+}
+
+._coral-Shell-solution--linked {
+  color: $shell-solution-linked-text-color;
+}
+
+._coral-Shell-solution--linked:hover ._coral-Shell-solution-icon {
+  transform: scale(1.1);
+}
+
+._coral-Shell-solution--linked ._coral-Shell-solution-icon:before {
+  width: $shell-solutionswitcher-linked-solution-iconsize;
+  height: $shell-solutionswitcher-linked-solution-iconsize;
+}
+
+._coral-Shell-solution-icon {
+  color: $shell-solution-icon-color;
+  font-size: $shell-solutionswitcher-iconsize;
+  will-change: transform;
+  transition: transform $shell-solutionswitcher-transitiontime ease-out, opacity $shell-solutionswitcher-transitiontime ease-out;
+
+  &:before {
+    width: $shell-solutionswitcher-iconsize;
+    height: $shell-solutionswitcher-iconsize;
+  }
+}
+
+coral-shell-solution-label {
+  margin-left: 16px;
+  font-size: 14px;
+  transition: opacity $shell-solutionswitcher-transitiontime ease-out;
+}
+
+// Secondary menu styling
+._coral-Shell-solutions--secondary {
+  @media (min-width: 900px) {
+    width: 25%;
+  }
+  @media (max-width: 900px) {
+    width: 33%;
+  }
+  @media (max-width: 550px) {
+    width: 100%;
+  }
+  vertical-align: top;
+  padding-right: 0;
+  whitespace: nowrap;
+
+  ._coral-Shell-solution {
+    display: block;
+    height: auto;
+    width: auto;
+    padding: 0;
+    text-decoration: none;
+    text-align: left;
+
+    &:hover {
+      ._coral-Shell-solution-icon {
+        transform: scale(1);
+      }
+      coral-shell-solution-label {
+        color: $shell-solution-text-color-hover;
+      }
+    }
+  }
+
+  ._coral-Shell-solution-icon {
+    display: none;
+  }
+
+  coral-shell-solution-label {
+    margin-left: 0;
+    display: inline-block;
+    font-size: 13px;
+    padding: 16px 0;
+  }
+}

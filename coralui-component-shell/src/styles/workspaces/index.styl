@@ -1,0 +1,62 @@
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2018 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+
+$workspaces-height = 45px;
+$workspaces-margin = 17.5px;
+$workspaces-textVerticalOffset = 5px;
+$workspaces-border-width = 2px;
+$workspaces-transitiontime = 0.21s;
+
+._coral-Shell-workspaces {
+  display: block;
+}
+
+._coral-Shell-workspaces-workspace {
+  display: inline-block;
+  box-sizing: border-box;
+  height: $workspaces-height;
+  margin: 0 $workspaces-margin;
+
+  border-bottom: $workspaces-border-width solid transparent;
+
+  line-height: $workspaces-height - $workspaces-border-width - $workspaces-textVerticalOffset;
+  color: rgb(190, 190, 190);
+  text-decoration: none;
+
+  font-style: normal;
+
+  transition: border-color $workspaces-transitiontime ease-out, color $workspaces-transitiontime ease-out;
+
+  &:hover {
+    color: white;
+  }
+
+  &.is-selected {
+    border-color: white;
+    color: white;
+  }
+
+  &:focus {
+    border-color: rgb(135, 190, 255);
+    color: rgb(135, 190, 255);
+    outline: none;
+  }
+
+  &:first-of-type {
+    margin-left: 0;
+  }
+}

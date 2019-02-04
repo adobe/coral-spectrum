@@ -1,0 +1,54 @@
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2017 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+
+@require '@adobe/spectrum-css/dist/components/tags/index.css';
+@require '@adobe/spectrum-css/dist/components/tags/multiStops/light.css';
+@require '@adobe/spectrum-css/dist/components/tags/multiStops/lightest.css';
+@require '@adobe/spectrum-css/dist/components/tags/multiStops/dark.css';
+@require '@adobe/spectrum-css/dist/components/tags/multiStops/darkest.css';
+
+@require '@adobe/spectrum-css/dist/components/label/index.css';
+@require '@adobe/spectrum-css/dist/components/label/multiStops/light.css';
+@require '@adobe/spectrum-css/dist/components/label/multiStops/lightest.css';
+@require '@adobe/spectrum-css/dist/components/label/multiStops/dark.css';
+@require '@adobe/spectrum-css/dist/components/label/multiStops/darkest.css';
+
+// @spectrum support text + icon
+coral-tag-label {
+  display: flex;
+  align-items: center;
+}
+
+// Support multiline
+._coral-Tags-item--multiline {
+  height: auto;
+
+  ._coral-Tags-item-label {
+    white-space: inherit;
+    text-overflow: inherit;
+  }
+}
+
+// @spectrum
+._coral-Label {
+  margin: 4px 4px;
+}
+
+@require 'light';
+@require 'lightest';
+@require 'dark';
+@require 'darkest';

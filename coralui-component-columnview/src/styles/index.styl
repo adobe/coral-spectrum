@@ -1,0 +1,126 @@
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2018 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+
+@require '@adobe/spectrum-css/dist/components/assetlist/index.css';
+@require '@adobe/spectrum-css/dist/components/assetlist/multiStops/light.css';
+@require '@adobe/spectrum-css/dist/components/assetlist/multiStops/lightest.css';
+@require '@adobe/spectrum-css/dist/components/assetlist/multiStops/dark.css';
+@require '@adobe/spectrum-css/dist/components/assetlist/multiStops/darkest.css';
+@require '@adobe/spectrum-css/dist/components/miller/index.css';
+
+._coral-MillerColumns {
+  display: block;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  outline: none;
+  box-sizing: border-box;
+}
+
+._coral-MillerColumns-item.is-collapsing {
+  transition: width ease 200ms;
+}
+
+._coral-AssetList-item:not(.is-selectable) [coral-columnview-itemselect] {
+  display:none;
+}
+
+._coral-AssetList-itemThumbnail {
+// Align icons
+  text-align: center;
+
+  & > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  & > coral-icon {
+    vertical-align: middle;
+  }
+}
+
+coral-columnview-preview-asset {
+// contains the image
+  position: relative;
+
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 13px;
+  margin-bottom: 15px;
+  min-height: 160px;
+}
+
+coral-columnview-preview-asset > coral-icon {
+  margin-top: 62px;
+  margin-bottom: 62px;
+}
+
+coral-columnview-preview-asset > img {
+  max-width: 100%;
+  max-height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+coral-columnview-preview-label,
+coral-columnview-preview-value {
+  display: block;
+}
+
+coral-columnview-preview-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-sizing: border-box;
+
+  width: 50%;
+  padding-right: 12px;
+  text-align: right;
+  float: left;
+  font-weight: bold;
+}
+
+coral-columnview-preview-value {
+  overflow: auto;
+  white-space: normal;
+  word-wrap: break-word;
+
+  padding-left: 12px;
+  max-width: 150px;
+
+  > coral-icon {
+    margin-right: 5px;
+  }
+}
+
+coral-columnview-preview-separator {
+  display: block;
+  height: 15px;
+}
+
+coral-columnview-column-content,
+coral-columnview-preview-content {
+  display: block;
+  height: 100%;
+  overflow-y: auto;
+}

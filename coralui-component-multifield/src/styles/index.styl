@@ -1,0 +1,83 @@
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2017 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+
+$multifield-inner-spacing = 10px;
+$multifield-button-width = 50px;
+$multifield-padding = 16px;
+
+// @polyfill IE
+[coral-multifield-template] {
+  display: none;
+}
+
+coral-multifield-item-content {
+  display: block;
+
+  > :first-child {
+    width: 100%;
+  }
+}
+
+._coral-Multifield {
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+._coral-Multifield-item {
+  display: block;
+  position: relative;
+  padding-right: 2*$multifield-button-width;
+  // adds separation between each item and the add button
+  margin-bottom: $multifield-inner-spacing;
+  box-sizing: border-box;
+
+  // Moving only makes sense, when there is more than one input
+  // we use the tag because type selectors work better with an actual type
+  &:only-of-type > ._coral-Multifield-move {
+    display: none;
+  }
+
+  &:last-of-type {
+    margin-bottom: 2*$multifield-inner-spacing;
+  }
+
+  &.is-dragging {
+    position: relative;
+    z-index: 10000;
+    opacity: 0.9;
+  }
+
+  &.is-after,
+  &.is-before {
+    position: relative;
+  }
+}
+
+._coral-Multifield-remove,
+._coral-Multifield-move {
+  position: absolute;
+  top: 0;
+}
+
+._coral-Multifield-remove {
+  right: $multifield-button-width;
+}
+
+._coral-Multifield-move {
+  right: 0;
+}
+

@@ -1,0 +1,33 @@
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2017 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+
+@require '@adobe/spectrum-css/dist/components/barloader/index.css';
+@require '@adobe/spectrum-css/dist/components/barloader/multiStops/light.css';
+@require '@adobe/spectrum-css/dist/components/barloader/multiStops/lightest.css';
+@require '@adobe/spectrum-css/dist/components/barloader/multiStops/dark.css';
+@require '@adobe/spectrum-css/dist/components/barloader/multiStops/darkest.css';
+
+// @spectrum indeterminate loader bar should be supported
+._coral-BarLoader--indeterminate ._coral-BarLoader-fill {
+  animation: coral-progress-indeterminate 934ms cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite forwards;
+  width: 100% !important;
+}
+
+@keyframes coral-progress-indeterminate {
+  0% { margin-left: -100%; margin-right: 100%; }
+  100% { margin-left: 100%; margin-right: 0; }
+}

@@ -1,0 +1,47 @@
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2017 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+
+@require '@adobe/spectrum-css/dist/components/quickaction/index.css';
+@require '@adobe/spectrum-css/dist/components/quickaction/multiStops/light.css';
+@require '@adobe/spectrum-css/dist/components/quickaction/multiStops/lightest.css';
+@require '@adobe/spectrum-css/dist/components/quickaction/multiStops/dark.css';
+@require '@adobe/spectrum-css/dist/components/quickaction/multiStops/darkest.css';
+
+// prevents flash of un-styled content
+coral-quickactions,
+coral-quickactions-item {
+  display: none;
+}
+
+._coral-QuickActions-item {
+  justify-content: center;
+}
+
+._coral-QuickActions-buttonList {
+// constrains the size of the list to 6 items 6x40=240
+  max-height: 240px;
+  overflow-y: auto;
+
+// Expand list width based on content
+  ._coral-BasicList-item-contentContainer {
+    width: auto;
+  }
+
+  button[is="coral-buttonlist-item"] {
+    width: 100%;
+  }
+}

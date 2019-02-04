@@ -1,0 +1,350 @@
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2018 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+$colorinput-transparency-url = './embed/Transparency.svg';
+$colorinput-blank-url = './embed/ColorBlank.svg';
+
+$colorinput-overlay-padding = 15px;
+
+$colorinput-button-border-radius = 4px;
+$colorinput-button-border-width = 1px;
+
+$colorinput-properties-subview-right-padding = 24px;
+$colorinput-properties-subview-border = 2px;
+
+$colorinput-edit-hex-width = 65px;
+$colorinput-edit-hex-left-margin = 20px;
+$colorinput-edit-hex-top-margin = -4px;
+
+$colorinput-rgba-view-top-margin = 5px;
+$colorinput-rgba-view-label-line-height = 30px;
+$colorinput-rgba-view-input-width = 28px;
+$colorinput-rgba-view-input-height = 30px;
+
+$colorinput-swatch-subview-width = 180px;
+$colorinput-swatch-subview-left-padding = 24px;
+$colorinput-swatch-subview-title-bottom-margin = 20px;
+$colorinput-swatch-subview-container-left-margin = 4px;
+$colorinput-swatch-subview-container-height = 164px;
+
+$colorinput-swatch-top-padding = 8px;
+$colorinput-swatch-left-right-padding = 4px;
+
+$colorinput-swatch-button-size = 32px;
+$colorinput-swatch-button-padding = 6.4px;
+
+$colorinput-button-wrapper-offset = 2px;
+
+$colorinput-button-size = 28px;
+
+$colorinput-input-swatch-size = 38px;
+
+$colorinput-slider-width = 160px;
+$colorinput-slider-margin = 5px 16px 0 16px;
+
+// items should be hidden by default
+coral-colorinput-item {
+  display: none;
+}
+
+._coral-ColorInput {
+  position: relative;
+  display: inline-block;
+}
+
+._coral-ColorInput-overlay {
+  padding: $colorinput-overlay-padding;
+}
+
+._coral-ColorInput-overlay coral-popover-content,
+._coral-ColorInput-editRgba-group,
+._coral-ColorInput-editHex-label {
+  display: flex;
+}
+
+._coral-ColorInput-previewView {
+  display: inline-block;
+}
+
+._coral-ColorInput-propertiesSubview {
+  padding-right: $colorinput-properties-subview-right-padding;
+  border-right: $colorinput-properties-subview-border solid;
+}
+
+._coral-ColorInput-preview-container {
+  float: left;
+
+  ._coral-ColorInput-preview {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    border-width: $colorinput-button-border-width;
+  }
+}
+
+._coral-ColorInput-editHex {
+  width: $colorinput-edit-hex-width;
+  float: right;
+  margin-left: $colorinput-edit-hex-left-margin;
+}
+
+._coral-ColorInput-editHex-input {
+  // Align the # character with the input
+  margin-top: $colorinput-edit-hex-top-margin;
+  width: 100%;
+  min-width: 0;
+  text-transform: uppercase;
+}
+
+._coral-ColorInput-rgbaView {
+  margin-top: $colorinput-rgba-view-top-margin;
+}
+
+._coral-ColorInput-editRgba-group-label {
+  line-height: $colorinput-rgba-view-label-line-height;
+  vertical-align: middle;
+}
+
+._coral-ColorInput-editRgba-group-input {
+  min-width: $colorinput-rgba-view-input-width;
+  width: $colorinput-rgba-view-input-width;
+  height: $colorinput-rgba-view-input-height;
+}
+
+._coral-ColorInput-swatchesSubview {
+  width: $colorinput-swatch-subview-width;
+  padding-left: $colorinput-swatch-subview-left-padding;
+}
+
+._coral-ColorInput-swatches-header-title {
+  // Add margin to vertically align the title with the below swatch container
+  margin-left: $colorinput-swatch-subview-container-left-margin;
+  margin-bottom: $colorinput-swatch-subview-title-bottom-margin;
+}
+
+._coral-ColorInput-swatches-container {
+  max-height: $colorinput-swatch-subview-container-height;
+  overflow-y: auto;
+}
+
+._coral-ColorInput-swatch {
+  display: block;
+  float: left;
+  padding: $colorinput-swatch-top-padding $colorinput-swatch-left-right-padding 0;
+
+  /* All buttons inside the colorinput are square */
+  button {
+    position: relative;
+    width: $colorinput-swatch-button-size;
+    height: $colorinput-swatch-button-size;
+    padding-left: $colorinput-swatch-button-padding;
+    border-radius: $colorinput-button-border-radius;
+    border-width: $colorinput-button-border-width;
+    margin-right: 0;
+
+    coral-icon {
+      display: none;
+    }
+
+    &:before {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: -1;
+      content: "";
+      width: 100%;
+      height: 100%;
+      border-radius: $colorinput-button-border-radius;
+
+      background-image: svgImport($colorinput-transparency-url);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 100%;
+    }
+  }
+
+  &[selected] {
+    button {
+      display: inline-block;
+
+      ._coral-Icon {
+        display: inherit;
+        vertical-align: inherit;
+      }
+    }
+  }
+
+  clearfix();
+}
+
+._coral-ColorInput-buttonWrapper {
+  position: absolute;
+  right: $colorinput-button-wrapper-offset;
+  top: $colorinput-button-wrapper-offset;
+
+  // set opacity < 1 to create new stacking context (for checker image to work)
+  opacity: .999;
+
+  ._coral-ColorInput-preview {
+    border-width: $colorinput-button-border-width;
+  }
+}
+
+._coral-ColorInput-button {
+  width: $colorinput-button-size;
+  height: $colorinput-button-size;
+  position: relative;
+
+  padding: 0;
+  margin: 0;
+}
+
+._coral-ColorInput-swatch button:hover,
+._coral-ColorInput-preview:not([disabled]):hover {
+  &:after {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    content: "";
+    width: 100%;
+    height: 100%;
+  }
+}
+
+._coral-ColorInput-input {
+  display: block;
+  // makes space for the color preview
+  padding-right: $colorinput-input-swatch-size;
+  // allows the input to grow with the container
+  width: 100%;
+}
+
+// Swatch variant
+._coral-ColorInput--swatch {
+  width: $colorinput-input-swatch-size;
+  height: $colorinput-input-swatch-size;
+
+  // makes sure the width stays no matter the parent's configuration
+  max-width: $colorinput-input-swatch-size;
+
+  ._coral-ColorInput-input {
+    position: absolute;
+    opacity: 0;
+    height: $colorinput-input-swatch-size;
+    width: $colorinput-input-swatch-size;
+  }
+
+  ._coral-ColorInput-buttonWrapper {
+    top: 0;
+    right: 0;
+  }
+
+  ._coral-ColorInput-button {
+    left: 0;
+    top: 0;
+    padding: 0;
+    height: $colorinput-input-swatch-size;
+    width: $colorinput-input-swatch-size;
+  }
+}
+
+._coral-ColorInput-preview {
+  border-radius: $colorinput-button-border-radius;
+  box-sizing: border-box;
+  background-origin: border-box;
+
+  &:before {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    content: "";
+    width: 100%;
+    height: 100%;
+
+    background-image: svgImport($colorinput-transparency-url);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+  }
+}
+
+._coral-ColorInput--novalue ._coral-ColorInput-preview,
+._coral-ColorInput-preview--novalue,
+._coral-ColorInput.is-invalid ._coral-ColorInput-preview,
+._coral-ColorInput-swatch ._coral-ColorInput-swatch-novalue {
+  background-image: svgImport($colorinput-blank-url);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+
+  &:hover, &:focus {
+    background-image: svgImport($colorinput-blank-url);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+  }
+}
+
+._coral-ColorInput-slider {
+  display: inline-block;
+  width: $colorinput-slider-width;
+  margin: $colorinput-slider-margin;
+}
+
+._coral-ColorInput-sliderBar {
+  // @spectrum
+  z-index: inherit;
+
+  &:before {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    content: "";
+    width: 100%;
+    height: 100%;
+    border-radius: $colorinput-button-border-radius;
+
+    background-image: svgImport($colorinput-transparency-url);
+  }
+
+  clearfix();
+}
+
+//Single view CSS
+._coral-ColorInput-onlyPropertiesView {
+  ._coral-ColorInput-propertiesSubview {
+    border-right: 0;
+  }
+}
+
+._coral-ColorInput-onlySwatchesView {
+  ._coral-ColorInput-swatchesSubview {
+    padding-left: 0;
+    float: none;
+  }
+}
+
+@require 'darkest.styl';
+@require 'dark.styl';
+@require 'light.styl';
+@require 'lightest.styl';

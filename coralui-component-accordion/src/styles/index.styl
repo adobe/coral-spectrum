@@ -1,0 +1,42 @@
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2018 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+
+@require '@adobe/spectrum-css/dist/components/accordion/index.css';
+@require '@adobe/spectrum-css/dist/components/accordion/multiStops/light.css';
+@require '@adobe/spectrum-css/dist/components/accordion/multiStops/lightest.css';
+@require '@adobe/spectrum-css/dist/components/accordion/multiStops/dark.css';
+@require '@adobe/spectrum-css/dist/components/accordion/multiStops/darkest.css';
+
+// @spectrum support nested accordions
+._coral-Accordion-item:not(.is-open) {
+  & > ._coral-Accordion-itemContent {
+    display: block;
+    padding: 0 0 0 16px;
+  }
+
+  & > ._coral-Accordion-itemIndicator {
+    transform: none;
+  }
+}
+
+// @spectrum support animation
+._coral-Accordion--animated {
+  ._coral-Accordion-itemContent {
+    overflow: hidden;
+    transition: height ease 250ms;
+  }
+}

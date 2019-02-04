@@ -1,0 +1,147 @@
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2017 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+
+@require '@adobe/spectrum-css/dist/components/menu/index.css';
+@require '@adobe/spectrum-css/dist/components/menu/multiStops/light.css';
+@require '@adobe/spectrum-css/dist/components/menu/multiStops/lightest.css';
+@require '@adobe/spectrum-css/dist/components/menu/multiStops/dark.css';
+@require '@adobe/spectrum-css/dist/components/menu/multiStops/darkest.css';
+
+// @compat
+.coral-List-item + .coral-List-item {
+  margin-top: 6px;
+}
+
+// @compat
+.coral-List {
+  margin: 0;
+}
+
+// @compat
+.coral-List--minimal {
+  list-style: none;
+  padding: 0;
+
+  > .coral-List-item {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+// @compat
+.coral-List--condensed {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  > .coral-List-item {
+    display: inline-block;
+    margin-right: 4px;
+
+    &:after {
+      content: ",";
+    }
+
+    &:nth-last-of-type(1) {
+      &:after {
+        content: "";
+      }
+    }
+  }
+}
+
+// @spectrum support text + icon
+coral-selectlist-item-content {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  & > coral-icon:first-child {
+    position: relative;
+    top: 3px;
+    margin-right: 8px;
+  }
+}
+
+._coral-BasicList,
+._coral-BasicList-item,
+._coral-Menu-divider {
+  display: block;
+}
+
+._coral-BasicList-item {
+  text-decoration: none;
+  text-align: left;
+// Allows line breaks
+  height: auto;
+
+  &.is-focused,
+  &:focus {
+    outline: none;
+  }
+}
+
+._coral-BasicList-item-icon {
+  float: left;
+
+  margin-right: 12px;
+
+// Hide if no icon
+  &:empty {
+    display: none;
+  }
+}
+
+._coral-BasicList-item-container {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+._coral-ButtonList-item,
+._coral-AnchorList-item {
+// Avoid selection on interactive elements
+  user-select: none;
+}
+
+._coral-ButtonList-item {
+  width: 100%;
+  border-top: 0;
+  border-bottom: 0;
+  border-right: 0;
+  font-family: inherit;
+  border-radius: 0;
+}
+
+._coral-SelectList-group:before {
+  display: block;
+  padding: 12px;
+  padding-bottom: 0;
+
+  font-weight: bold;
+  text-transform: uppercase;
+  content: attr(label);
+}
+
+coral-selectlist-item._coral-Menu-item {
+  display: flex;
+}
+
+@require 'light';
+@require 'lightest';
+@require 'dark';
+@require 'darkest';

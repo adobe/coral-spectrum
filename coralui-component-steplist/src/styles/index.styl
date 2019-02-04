@@ -1,0 +1,70 @@
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2017 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+
+@require '@adobe/spectrum-css/dist/components/steplist/index.css';
+@require '@adobe/spectrum-css/dist/components/steplist/multiStops/light.css';
+@require '@adobe/spectrum-css/dist/components/steplist/multiStops/lightest.css';
+@require '@adobe/spectrum-css/dist/components/steplist/multiStops/dark.css';
+@require '@adobe/spectrum-css/dist/components/steplist/multiStops/darkest.css';
+
+// Support hybrid mode
+._coral-Steplist--hybrid {
+  ._coral-Steplist-label {
+    width: auto;
+    white-space: nowrap;
+  }
+
+  ._coral-Steplist-item:last-child {
+  // Center last step in hybrid mode
+    ._coral-Steplist-label {
+      left: 100%;
+      transform: translateX(-50%);
+    }
+  }
+
+  ._coral-Steplist-item.is-selected {
+    ._coral-Steplist-label:after {
+    // Display "(stepX/stepTotal)"
+      content: attr(data-coral-step-index);
+    }
+  }
+}
+
+// @compat
+._coral-Steplist--small {
+  ._coral-Steplist-item:first-child,
+  ._coral-Steplist-item:last-child {
+    position: relative;
+  }
+
+  ._coral-Steplist-item:first-child {
+    left: 10px;
+  }
+
+  ._coral-Steplist-item:last-child {
+    right: 10px;
+  }
+
+  ._coral-Steplist-item {
+    width: 20px;
+    padding: 0;
+  }
+
+  ._coral-Steplist-segment {
+    display: none;
+  }
+}

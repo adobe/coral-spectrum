@@ -1,4 +1,6 @@
 import '../coralui-theme-spectrum';
+import './src/styles/index.css';
+
 import '../coralui-externals';
 import '../coralui-compat';
 

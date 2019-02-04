@@ -1,3 +1,5 @@
+import './src/styles/index.css';
+
 import OverlayMixin from './src/scripts/OverlayMixin';
 import {trapFocus, returnFocus, focusOnShow, FADETIME} from './src/scripts/enums';
 import {mixin} from '../coralui-utils';

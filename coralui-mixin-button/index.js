@@ -1,3 +1,5 @@
+import './src/styles/index.css';
+
 import ButtonMixin from './src/scripts/ButtonMixin';
 import {mixin} from '../coralui-utils';
 

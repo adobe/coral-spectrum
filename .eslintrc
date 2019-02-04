@@ -8,6 +8,7 @@
     "brace-style": ["error", "stroustrup", { "allowSingleLine": true }],
     "operator-linebreak": ["error", "after"],
     "semi": [2, "always"],
+    "complexity": [ "warn", 15 ],
 
     "max-depth": 1,
     "max-lines": 1,

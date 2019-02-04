@@ -1,0 +1,116 @@
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2018 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+
+$shell-help-width = 325px;
+
+$shell-help-loading-height = 300px
+
+$shell-help-background = white;
+
+$shell-loading-middle = 48%; // Better visual centering
+$shell-loading-spacing = 16px;
+
+._coral-Shell-help {
+  display: block;
+  padding: 24px;
+  box-sizing: border-box;
+  width: $shell-help-width;
+}
+
+._coral-Shell-help-search {
+  width: 100%;
+
+  input[is="coral-textfield"] {
+    width: 100%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+  }
+}
+
+._coral-Shell-help-items {
+  padding: 3px 0;
+}
+
+._coral-Shell-help-result-item {
+  height: auto;
+}
+
+._coral-Shell-help-result-description {
+  color: rgb(112, 112, 112);
+  font-weight: 300;
+  letter-spacing: 0.125px; // Tweak: Letters were too close
+  margin-top: -15px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+._coral-Shell-help-loading,
+._coral-Shell-help-resultMessage {
+  // Contain the wait component
+  position: relative;
+  display: block;
+  height: $shell-help-loading-height;
+
+  background-color: $shell-help-background;
+}
+
+._coral-Shell-help-resultMessage {
+  display: table;
+  width: 100%;
+}
+
+._coral-Shell-help-resultMessage-heading {
+  margin-bottom: 12px;
+  margin-top: -8px;
+}
+
+._coral-Shell-help-resultMessage-container {
+  display: table-cell;
+
+  padding: 0 20px;
+
+  vertical-align: middle;
+
+  text-align: center;
+}
+
+._coral-Shell-help-loading-wait {
+  position: absolute;
+  bottom: (100% - $shell-loading-middle);
+  left: 50%;
+
+  margin-left: -8px; // Center
+  margin-bottom: ($shell-loading-spacing / 2);
+}
+
+._coral-Shell-help-loading-info {
+  position: absolute;
+  top: $shell-loading-middle;
+  left: 0;
+  right: 0;
+
+  padding-left: 5px; // Tweak: Make it look nicer with the ellipsis
+
+  display: block;
+  padding-top: ($shell-loading-spacing / 2);
+
+  text-align: center;
+}
