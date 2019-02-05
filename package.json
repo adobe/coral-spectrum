@@ -6,7 +6,6 @@
     "type": "git",
     "url": "https://git.corp.adobe.com/Coral/coral-spectrum"
   },
-  "private": true,
   "scripts": {
     "start": "gulp",
     "lint": "gulp lint",
