@@ -53,11 +53,11 @@
       </coral-shell-header-content>
       <coral-shell-header-actions>
         <!-- Normal quiet button is used here if necessary -->
-        <a is="coral-anchorbutton" variant="quiet" href="#">Beta Feedback</a>
+        <!--<a is="coral-anchorbutton" variant="quiet" href="#">Beta Feedback</a>-->
         <coral-shell-menubar>
           <coral-shell-menubar-item menu="#menu_organizations">NIKE, Inc.</coral-shell-menubar-item>
-          <coral-shell-menubar-item menu="#menu_help" icon="helpOutline"></coral-shell-menubar-item>
           <coral-shell-menubar-item menu="#menu_solutions" icon="apps"></coral-shell-menubar-item>
+          <coral-shell-menubar-item menu="#menu_help" icon="helpOutline"></coral-shell-menubar-item>
           <coral-shell-menubar-item menu="#menu_pulse" icon="bell" badge="5"></coral-shell-menubar-item>
           <coral-shell-menubar-item menu="#menu_user" iconsize="M" iconvariant="circle" icon="userCircleColor"></coral-shell-menubar-item>
         </coral-shell-menubar>
@@ -128,17 +128,13 @@
       <coral-shell-user avatar="https://wwwimages2.adobe.com/content/dam/acom/en/leaders/photos/shantanu-narayen.jpg">
         <coral-shell-user-name>Shantanu Narayen</coral-shell-user-name>
         <coral-shell-user-heading>CEO</coral-shell-user-heading>
-        <coral-shell-user-subheading>
-          <a is="coral-anchorbutton" variant="quiet" href="#profile">Edit Profile</a>
-        </coral-shell-user-subheading>
         <coral-shell-user-content>
-          <coral-select variant="quiet">
-            <coral-select-item>Geometrixx</coral-select-item>
-            <coral-select-item>We.retail</coral-select-item>
-          </coral-select>
+          <div style="display:flex;justify-content:center">
+            <a is="coral-anchorbutton" variant="quiet" href="#profile">Edit Profile</a>
+          </div>
         </coral-shell-user-content>
         <coral-shell-user-footer>
-          <a is="coral-anchorbutton" variant="primary" href="#signout">Sign Out</a>
+          <a is="coral-anchorbutton" href="#signout">Sign Out</a>
         </coral-shell-user-footer>
       </coral-shell-user>
     </coral-shell-menu>

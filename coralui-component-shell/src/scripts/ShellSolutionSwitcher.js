@@ -80,8 +80,8 @@ class ShellSolutionSwitcher extends ComponentMixin(HTMLElement) {
     
     this.classList.add(CLASSNAME);
   
-    // force dark theme
-    this.classList.add('coral--dark');
+    // force darkest theme
+    this.classList.add('coral--darkest');
     
     const container = this.querySelector('._coral-Shell-solutions-container') || this._elements.container;
     

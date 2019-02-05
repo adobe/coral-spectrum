@@ -15,7 +15,6 @@
  * from Adobe.
  */
 
-$user-width = 260px;
 $user-name-color = rgb(75, 75, 75);
 $user-heading-color = rgb(142, 142, 142);
 $user-separator-color = rgb(234, 234, 234);
@@ -23,7 +22,10 @@ $user-separator-color = rgb(234, 234, 234);
 ._coral-Shell-user {
   display: block;
   padding: 24px;
-  width: $user-width;
+}
+
+._coral-Shell-user-container {
+  border-bottom: 2px solid $user-separator-color;
 }
 
 ._coral-Shell-user-image {
@@ -37,6 +39,8 @@ $user-separator-color = rgb(234, 234, 234);
 
   ._coral-Icon {
     display: block;
+    height: 100%;
+    width: 100%;
     border-radius: 100%;
     object-fit: cover;
   }
@@ -60,7 +64,6 @@ coral-shell-user-heading {
 }
 
 coral-shell-user-subheading {
-  border-top: 2px solid $user-separator-color;
   padding: 16px 0;
   display: flex;
   flex-direction: column;
@@ -72,7 +75,6 @@ coral-shell-user-subheading {
 }
 
 coral-shell-user-content {
-  border-top: 2px solid $user-separator-color;
   padding: 16px 0;
   display: block;
 

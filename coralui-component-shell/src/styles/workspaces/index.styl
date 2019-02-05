@@ -15,14 +15,38 @@
  * from Adobe.
  */
 
-$workspaces-height = 45px;
-$workspaces-margin = 17.5px;
-$workspaces-textVerticalOffset = 5px;
+$workspaces-height = 50px;
+$workspaces-margin = 12px;
 $workspaces-border-width = 2px;
 $workspaces-transitiontime = 0.21s;
 
 ._coral-Shell-workspaces {
-  display: block;
+  display: flex;
+  align-items: center;
+  height: 100%;
+
+  ._coral-Shell-workspaces-select {
+    margin-top: 4px;
+    height: 100%;
+    width: inherit;
+    border-bottom: $workspaces-border-width solid white;
+
+    ._coral-Dropdown-trigger {
+      margin-top: 7px;
+    }
+
+    ._coral-SelectList-icon {
+      margin-left: 8px;
+    }
+
+    coral-selectlist-item-content {
+      white-space: nowrap;
+    }
+
+    @media (min-width: 1024px) {
+      display: none;
+    }
+  }
 }
 
 ._coral-Shell-workspaces-workspace {
@@ -33,7 +57,7 @@ $workspaces-transitiontime = 0.21s;
 
   border-bottom: $workspaces-border-width solid transparent;
 
-  line-height: $workspaces-height - $workspaces-border-width - $workspaces-textVerticalOffset;
+  line-height: $workspaces-height + $workspaces-border-width;
   color: rgb(190, 190, 190);
   text-decoration: none;
 
@@ -51,12 +75,15 @@ $workspaces-transitiontime = 0.21s;
   }
 
   &:focus {
-    border-color: rgb(135, 190, 255);
-    color: rgb(135, 190, 255);
+    color: white;
     outline: none;
   }
 
   &:first-of-type {
     margin-left: 0;
+  }
+
+  @media (max-width: 1023px) {
+    display: none;
   }
 }

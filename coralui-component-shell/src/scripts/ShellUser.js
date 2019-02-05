@@ -143,6 +143,11 @@ class ShellUser extends ComponentMixin(HTMLElement) {
       handle: 'content',
       tagName: 'coral-shell-user-content',
       insert: function(content) {
+        // Empty content to hide it
+        if (content.innerHTML.trim() === '') {
+          content.innerHTML = '';
+        }
+        
         this.appendChild(content);
       }
     });

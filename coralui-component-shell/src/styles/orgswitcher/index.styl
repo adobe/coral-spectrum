@@ -15,7 +15,7 @@
  * from Adobe.
  */
 
-$shell-orgswitcher-width = 300px;
+$shell-orgswitcher-width = 250px;
 $shell-orgswitcher-message-height = 200px
 $shell-orgswitcher-background = white;
 $shell-orgswitcher-height = 320px;
@@ -46,18 +46,18 @@ $shell-orgswitcher-height = 320px;
   }
 }
 
-._coral-Shell-orgSwitcher-item {
-  padding-left: 10px;
+// todo
+._coral-Shell-orgSwitcher-item.is-parent:hover {
+  cursor: default !important;
+  background: transparent !important;
+}
 
-  &.is-parent:hover {
-    cursor: default;
-    background: transparent;
-  }
+coral-shell-organization._coral-Shell-orgSwitcher-item:last-child {
+  padding-bottom: 0;
 }
 
 ._coral-Shell-orgSwitcher-subitems {
-  // Compensate padding
-  margin-left: -10px;
+  margin-left: 18px;
 }
 
 ._coral-Shell-orgSwitcher-subitem {
@@ -69,17 +69,19 @@ $shell-orgswitcher-height = 320px;
   coral-list-item-content {
     height: 1rem;
   }
+
+  &:first-child {
+    margin-top: 6px;
+  }
 }
 
 ._coral-Shell-orgSwitcher-search {
-  width: 100%;
+  width: calc(100% - 16px);
+  margin-top: 4px;
+  margin-left: 8px;
 
   input[is="coral-textfield"] {
     width: 100%;
-    border-top: 0;
-    border-left: 0;
-    border-right: 0;
-    border-radius: 0;
   }
 }
 
@@ -105,14 +107,14 @@ $shell-orgswitcher-height = 320px;
 ._coral-Shell-orgSwitcher-checkmark {
   position: absolute;
   top: 10px;
-  right: 0;
+  right: 12px;
 }
 
 coral-shell-orgswitcher-footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 16px;
+  padding: 4px;
 
   &:empty {
     display: none;

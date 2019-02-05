@@ -15,7 +15,7 @@
  * from Adobe.
  */
 
-$shell-help-width = 325px;
+$shell-help-width = 250px;
 
 $shell-help-loading-height = 300px
 
@@ -26,20 +26,17 @@ $shell-loading-spacing = 16px;
 
 ._coral-Shell-help {
   display: block;
-  padding: 24px;
   box-sizing: border-box;
   width: $shell-help-width;
 }
 
 ._coral-Shell-help-search {
-  width: 100%;
+  width: calc(100% - 16px);
+  margin-top: 4px;
+  margin-left: 8px;
 
   input[is="coral-textfield"] {
     width: 100%;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-radius: 0;
   }
 }
 

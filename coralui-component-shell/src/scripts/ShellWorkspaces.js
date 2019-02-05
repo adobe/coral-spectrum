@@ -17,6 +17,7 @@
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import {SelectableCollection} from '../../../coralui-collection';
+import {Select} from '../../../coralui-component-select';
 
 const CLASSNAME = '_coral-Shell-workspaces';
 
@@ -43,8 +44,17 @@ class ShellWorkspaces extends ComponentMixin(HTMLElement) {
       'key:home [is="coral-shell-workspace"]': '_focusFirstItem',
       'key:end [is="coral-shell-workspace"]': '_focusLastItem',
       // private
-      'coral-shell-workspace:_selectedchanged': '_onItemSelectedChanged'
+      'coral-shell-workspace:_selectedchanged': '_onItemSelectedChanged',
+      'change ._coral-Shell-workspaces-select': '_onSelectChanged'
     });
+    
+    // Template
+    this._elements = {
+      select: new Select().set({
+        variant: 'quiet'
+      })
+    };
+    this._elements.select.classList.add('_coral-Shell-workspaces-select');
   
     // Used for eventing
     this._oldSelection = null;
@@ -115,8 +125,31 @@ class ShellWorkspaces extends ComponentMixin(HTMLElement) {
       // We can trigger change events again
       this._preventTriggeringEvents = false;
     }
+  
+    // Sync select items under the hood
+    this._renderSelectItems();
     
     this._triggerChangeEvent();
+  }
+  
+  _renderSelectItems() {
+    this._elements.select.items.clear();
+    
+    this.items.getAll().forEach((item) => {
+      this._elements.select.items.add({
+        content: {
+          innerHTML: item.innerHTML
+        },
+        selected: item.hasAttribute('selected'),
+        _workspace: item
+      });
+    });
+  }
+  
+  _onSelectChanged(event) {
+    event.stopImmediatePropagation();
+    
+    this._elements.select.selectedItem._workspace.selected = true;
   }
   
   /** @private */
@@ -222,6 +255,14 @@ class ShellWorkspaces extends ComponentMixin(HTMLElement) {
     this._preventTriggeringEvents = false;
   
     this._oldSelection = this.selectedItem;
+    
+    // Support cloneNode
+    const template = this.querySelector('._coral-Shell-workspaces-select');
+    if (template) {
+      template.remove();
+    }
+    
+    this.appendChild(this._elements.select);
   }
 }
 

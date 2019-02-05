@@ -17,15 +17,15 @@
 
 /* Note: $shell-header-height is defined in styles/coralui-component-shell */
 
-$shell-header-padding-leftright = 8px;
-$shell-header-padding-topbottom = 7px
+$shell-header-padding-left = 8px;
+$shell-header-padding-right = 2px;
 $shell-header-area = 45px;
 
-$shell-header-background-color = rgb(50, 50, 50);
+$shell-header-background-color = rgb(30, 30, 30);
 
 $shell-header-background-disabled-color = rgb(62, 62, 62);
 
-$shell-homeanchor-margin-right = 52px;
+$shell-homeanchor-margin-right = 64px;
 $shell-homeanchor-icon-margin-right = 10px;
 $shell-homeanchor-icon-margin-top = -3px;
 
@@ -43,7 +43,7 @@ $shell-homeanchor-focus-color = white;
   height: $shell-header-height;
 
   // padding-bottom 0 allows items to stick to the bottom without guessing the size of the padding
-  padding: $shell-header-padding-topbottom $shell-header-padding-leftright 0 $shell-header-padding-leftright;
+  padding: 0 $shell-header-padding-right 0 $shell-header-padding-left;
 
   background-color: $shell-header-background-color;
 
@@ -72,19 +72,22 @@ $shell-homeanchor-focus-color = white;
 }
 
 coral-shell-header-home {
-  display: block;
-
-  margin-right: $shell-homeanchor-margin-right;
-
+  display: flex;
+  align-items: center;
+  height: 100%;
   float: left;
-  vertical-align: top;
+
+  @media (min-width: 768px) {
+    margin-right: $shell-homeanchor-margin-right;
+  }
 }
 
 coral-shell-header-actions {
+  display: flex;
+  align-items: center;
+  height: 100%;
   float: right;
   margin-left: 15px;
-  padding-top: 3px;
-  padding-bottom: 3px;
 }
 
 // Greedy container that takes the available space
@@ -129,6 +132,7 @@ coral-shell-header-content {
     &:focus,
     &.is-focused {
       color: $shell-homeanchor-focus-color;
+      outline: none;
     }
 
     // active overrides focus
@@ -147,4 +151,8 @@ coral-shell-header-content {
 
 coral-shell-homeanchor-label {
   display: inline-block;
+
+  @media (max-width: 766px) {
+    display: none;
+  }
 }

@@ -30,13 +30,6 @@ describe('Shell.Workspaces', function() {
       'should be possible to clone using markup',
       window.__html__['Shell.Workspaces.selected.html']
     );
-  
-    const el = new Shell.Workspaces();
-    el.items.add();
-    helpers.cloneComponent(
-      'should be possible to clone using js',
-      el
-    );
   });
 
   describe('API', function() {
@@ -212,6 +205,38 @@ describe('Shell.Workspaces', function() {
         
         expect(document.activeElement).to.exist;
         expect(document.activeElement.id).to.equal(item3.id, 'Item 3 didn\'t get focus automatically');
+      });
+    });
+  });
+  
+  describe('Implementation Details', () => {
+    it('create a select based on the given workspaces', function() {
+      const el = helpers.build(window.__html__['Shell.Workspaces.base.html']);
+      const items = el.items.getAll();
+      el._elements.select.items.getAll().forEach((item, i) => {
+        expect(item.textContent === items[i].textContent);
+      });
+    });
+  
+    it('should sync the select based on the selected workspace', function() {
+      const el = helpers.build(window.__html__['Shell.Workspaces.selected.html']);
+      expect(el._elements.select.selectedItem).to.equal(el._elements.select.items.first());
+      
+      el.items.last().selected = true;
+      expect(el._elements.select.selectedItem).to.equal(el._elements.select.items.last());
+    });
+  
+    it('add an item to the selected if a new workspace is added', function() {
+      const el = helpers.build(window.__html__['Shell.Workspaces.base.html']);
+      el.items.add({
+        label: {
+          textContent: 'New item'
+        }
+      });
+  
+      const items = el.items.getAll();
+      el._elements.select.items.getAll().forEach((item, i) => {
+        expect(item.textContent === items[i].textContent);
       });
     });
   });
