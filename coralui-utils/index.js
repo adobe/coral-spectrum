@@ -1,5 +1,8 @@
 import '../coralui-externals';
 
+// Adobe fonts
+import './src/scripts/Typekit';
+// Utilities
 import commons from './src/scripts/Commons';
 import events from './src/scripts/Events';
 import {i18n, strings} from './src/scripts/I18nProvider';

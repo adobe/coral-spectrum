@@ -8,8 +8,6 @@ import Promise from 'promise-polyfill';
 import Vent from '@adobe/vent';
 // Accessibility
 import '@adobe/focus-ring-polyfill';
-// Adobe fonts
-import './libs/typekit';
 
 // @IE Force custom elements polyfill to work with ES5
 import './polyfills/forcePolyfill.js';
