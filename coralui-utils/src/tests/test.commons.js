@@ -444,7 +444,8 @@ describe('commons', function() {
 
   describe('#transitionEnd', function() {
 
-    it('should call the provided callback (even if the browser does not support transitions)', function(done) {
+    // @flaky on FF
+    it.skip('should call the provided callback (even if the browser does not support transitions)', function(done) {
       var el = helpers.target.appendChild(document.createElement('div'));
       el.textContent = 'onTransitionEnd Test';
       el.setAttribute('style', '-webkit-transition: all 100ms ease; -moz-transition: all 100ms ease; -o-transition: all 100ms ease; transition: all 100ms ease;');

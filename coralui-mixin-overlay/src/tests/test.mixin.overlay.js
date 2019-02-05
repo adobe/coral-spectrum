@@ -543,7 +543,7 @@ describe('mixin._overlay', function() {
           window.setTimeout(function() {
             expect(closeHasBeenCalled).to.equal(true, '"coral-overlay:close" should now have been called');
             done();
-          }, 101);
+          }, 200);
         });
       });
   
