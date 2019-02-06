@@ -22,7 +22,6 @@ $shell-orgswitcher-height = 320px;
 
 ._coral-Shell-orgSwitcher {
   width: $shell-orgswitcher-width;
-  padding: 24px;
   box-sizing: border-box;
 }
 
@@ -30,20 +29,6 @@ $shell-orgswitcher-height = 320px;
   max-height: $shell-orgswitcher-height;
   overflow-y: auto;
   padding: 3px 0;
-}
-
-._coral-Shell-orgSwitcher-item,
-._coral-Shell-orgSwitcher-subitem {
-  cursor: pointer;
-
-  padding-right: 0;
-  padding-left: 0;
-
-  position: relative;
-
-  &.is-selected {
-    color: rgb(65, 120, 205);
-  }
 }
 
 // todo
@@ -60,19 +45,8 @@ coral-shell-organization._coral-Shell-orgSwitcher-item:last-child {
   margin-left: 18px;
 }
 
-._coral-Shell-orgSwitcher-subitem {
-  padding-left: 40px;
-
-  // Don't overlap parent's icon
-  background: none;
-
-  coral-list-item-content {
-    height: 1rem;
-  }
-
-  &:first-child {
-    margin-top: 6px;
-  }
+._coral-Shell-orgSwitcher-subitem:first-child {
+  margin-top: 6px;
 }
 
 ._coral-Shell-orgSwitcher-search {
@@ -106,7 +80,7 @@ coral-shell-organization._coral-Shell-orgSwitcher-item:last-child {
 
 ._coral-Shell-orgSwitcher-checkmark {
   position: absolute;
-  top: 10px;
+  top: 8px;
   right: 12px;
 }
 

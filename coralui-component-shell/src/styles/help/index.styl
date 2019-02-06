@@ -51,8 +51,6 @@ $shell-loading-spacing = 16px;
 ._coral-Shell-help-result-description {
   color: rgb(112, 112, 112);
   font-weight: 300;
-  letter-spacing: 0.125px; // Tweak: Letters were too close
-  margin-top: -15px;
 
   white-space: nowrap;
   overflow: hidden;
@@ -74,9 +72,8 @@ $shell-loading-spacing = 16px;
   width: 100%;
 }
 
-._coral-Shell-help-resultMessage-heading {
-  margin-bottom: 12px;
-  margin-top: -8px;
+.coral-Heading--2._coral-Shell-help-resultMessage-heading {
+  margin: 0;
 }
 
 ._coral-Shell-help-resultMessage-container {
@@ -94,7 +91,7 @@ $shell-loading-spacing = 16px;
   bottom: (100% - $shell-loading-middle);
   left: 50%;
 
-  margin-left: -8px; // Center
+  margin-left: -16px; // Center
   margin-bottom: ($shell-loading-spacing / 2);
 }
 
