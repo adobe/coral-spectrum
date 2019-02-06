@@ -26,6 +26,7 @@ window.customElements.define('coral-card-banner', CardBanner);
 window.customElements.define('coral-card-banner-header', CardBannerHeader);
 window.customElements.define('coral-card-banner-content', CardBannerContent);
 window.customElements.define('coral-card-property', CardProperty);
+window.customElements.define('coral-card-propertylist', CardPropertyList);
 window.customElements.define('coral-card-title', CardTitle);
 window.customElements.define('coral-card-subtitle', CardSubtitle);
 window.customElements.define('coral-card-context', CardContext);

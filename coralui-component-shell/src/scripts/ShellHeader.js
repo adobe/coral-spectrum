@@ -165,7 +165,7 @@ class ShellHeader extends ComponentMixin(HTMLElement) {
     
     this.classList.add(CLASSNAME);
     // appheader only exists on darkest theme
-    this.classList.add('coral--darkest');
+    this.classList.add('coral--darkest', 'u-coral-clearFix');
     
     const home = this._elements.home;
     const actions = this._elements.actions;

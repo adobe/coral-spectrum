@@ -14,6 +14,13 @@
  * is strictly forbidden unless prior written permission is obtained
  * from Adobe.
  */
+
+@require '@adobe/spectrum-css/dist/components/banner/index.css';
+@require '@adobe/spectrum-css/dist/components/banner/multiStops/light.css';
+@require '@adobe/spectrum-css/dist/components/banner/multiStops/lightest.css';
+@require '@adobe/spectrum-css/dist/components/banner/multiStops/dark.css';
+@require '@adobe/spectrum-css/dist/components/banner/multiStops/darkest.css';
+
 $card-border-radius = 4px;
 $card-overlay-height = 96px;
 $card-stack-offset = 3px;
@@ -207,12 +214,12 @@ coral-card-asset {
 // properties
 coral-card-propertylist {
   display: block;
-  clearfix();
 
   > ._coral-Card-property {
     display: inline-block;
     float: left;
     margin-right: 15px;
+    margin-bottom: 0;
   }
 }
 
@@ -271,6 +278,20 @@ coral-card-content,
 
   word-wrap: break-word;
   word-break: break-all;
+}
+
+._coral-Card {
+  ._coral-Card-title,
+  ._coral-Card-context {
+    margin-top: 0;
+    font-weight: 400;
+  }
+
+  ._coral-Card-subtitle {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
 }
 
 ._coral-Card-context + ._coral-Card-title {

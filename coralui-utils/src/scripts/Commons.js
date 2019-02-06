@@ -76,6 +76,7 @@ const CORAL_COMPONENTS = [
   'coral-card-context',
   'coral-card-description',
   'coral-card-property',
+  'coral-card-propertylist',
   'coral-card-subtitle',
   'coral-card-title',
   'coral-charactercount',

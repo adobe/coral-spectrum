@@ -815,7 +815,7 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     let item;
     
     for (let i = 0; i < items.length; i++) {
-      if (transform.number(items[i].value) === transform.number(value)) {
+      if (transform.number(items[i].getAttribute('value')) === transform.number(value)) {
         item = items[i];
         break;
       }

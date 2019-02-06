@@ -170,7 +170,7 @@ class ColorInputSwatch extends ColorInputAbstractSubviewMixin(ComponentMixin(HTM
   connectedCallback() {
     super.connectedCallback();
     
-    this.classList.add(CLASSNAME);
+    this.classList.add(CLASSNAME, 'u-coral-clearFix');
     
     // adds the role to support accessibility
     this.setAttribute('role', 'option');

@@ -19,6 +19,13 @@
  @class Coral.Card.PropertyList
  @classdesc The Card PropertyList component
  @htmltag coral-card-propertylist
- @return {HTMLElement}
+ @extends {HTMLElement}
  */
-export default () => document.createElement('coral-card-propertylist');
+class CardPropertyList extends HTMLElement {
+  /* @ignore */
+  connectedCallback() {
+    this.classList.add('u-coral-clearFix');
+  }
+}
+
+export default CardPropertyList;
