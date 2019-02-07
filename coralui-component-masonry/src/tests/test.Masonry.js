@@ -38,6 +38,7 @@ describe('Masonry.Layout', function() {
     
     beforeEach(() => {
       el = helpers.build(new Masonry());
+      el.selectionMode = 'multiple';
     });
     
     afterEach(function() {
@@ -228,21 +229,53 @@ describe('Masonry.Layout', function() {
         });
       });
     });
+    
+    describe('#selectionMode', function() {
+      it('should default to NONE', function() {
+        expect(el.selectionMode === el.constructor.selectionMode.NONE);
+      });
+    });
+  });
+  
+  describe('Markup', function() {
+    describe('#selectionMode', function() {
+      it('should default to NONE', function() {
+        const el = helpers.build(window.__html__['Masonry.items.html']);
+        expect(el.selectionMode === el.constructor.selectionMode.NONE);
+      });
+      
+      it('should only have 1 selected item if selectionmode is single', function() {
+        const el = helpers.build(window.__html__['Masonry.items.selected.html']);
+        expect(el.selectedItems).to.deep.equal([el.items.first()]);
+        
+        el.items.last().selected = true;
+        expect(el.selectedItems).to.deep.equal([el.items.last()]);
+      });
+      
+      it('should be possible to select multiple items', function() {
+        const el = helpers.build(window.__html__['Masonry.items.selected.html']);
+        el.selectionMode = 'multiple';
+        
+        el.items.getAll().forEach((item) => {
+          item.selected = true;
+        });
+        expect(el.selectedItems).to.deep.equal(el.items.getAll());
+      });
+  
+      it('should have no selected item if selectionmode is none', function() {
+        const el = helpers.build(window.__html__['Masonry.items.selected.html']);
+        el.selectionMode = 'none';
+  
+        expect(el.selectedItems).to.deep.equal([]);
+      });
+    });
   });
 
   describe('Events', function() {
-    let el;
-    
-    beforeEach(() => {
-      el = helpers.build(new Masonry());
-    });
-    
-    afterEach(() => {
-      el = null;
-    });
-    
     describe('#coral-collection:add', function() {
       it('should trigger when adding an item', function(done) {
+        const el = helpers.build(new Masonry());
+        
         const spy = sinon.spy();
         el.on('coral-collection:add', spy);
     
@@ -259,6 +292,8 @@ describe('Masonry.Layout', function() {
     
     describe('#coral-collection:remove', function() {
       it('should trigger when removing an item', function(done) {
+        const el = helpers.build(new Masonry());
+        
         el.on('coral-collection:add', (event) => {
           const spy = sinon.spy();
           el.on('coral-collection:remove', spy);
@@ -277,6 +312,48 @@ describe('Masonry.Layout', function() {
         el.items.add(new Masonry.Item());
       });
     });
+    
+    describe('#coral-masonry:change', function() {
+      it('should trigger on selection change', function() {
+        const el = helpers.build(window.__html__['Masonry.items.html']);
+        el.selectionMode = 'single';
+        
+        const changeSpy = sinon.spy();
+        el.on('coral-masonry:change', changeSpy);
+        el.items.first().selected = true;
+    
+        expect(changeSpy.callCount).to.equal(1);
+        expect(changeSpy.args[0][0].detail.selection).to.equal(el.selectedItem);
+        expect(changeSpy.args[0][0].detail.oldSelection).to.equal(null);
+      });
+  
+      it('should return an array for selection and oldSelection if selectionmode is multiple', function() {
+        const el = helpers.build(window.__html__['Masonry.items.selected.html']);
+        el.selectionMode = 'multiple';
+        
+        const changeSpy = sinon.spy();
+        el.on('coral-masonry:change', changeSpy);
+        el.items.last().selected = true;
+    
+        expect(changeSpy.callCount).to.equal(1);
+        expect(changeSpy.args[0][0].detail.selection).to.deep.equal([el.items.first(), el.items.last()]);
+        expect(changeSpy.args[0][0].detail.oldSelection).to.deep.equal([el.items.first()]);
+      });
+  
+      it('should trigger on selectionmode multiple change', function() {
+        const el = helpers.build(window.__html__['Masonry.items.selected.html']);
+        el.selectionMode = 'multiple';
+        el.items.last().selected = true;
+    
+        let changeSpy = sinon.spy();
+        el.on('coral-masonry:change', changeSpy);
+        el.selectionMode = 'single';
+    
+        expect(changeSpy.callCount).to.equal(1);
+        expect(changeSpy.args[0][0].detail.selection).to.equal(el.items.last());
+        expect(changeSpy.args[0][0].detail.oldSelection).to.deep.equal([el.items.first(), el.items.last()]);
+      });
+    });
   });
   
   describe('User Interaction', function() {
@@ -288,6 +365,68 @@ describe('Masonry.Layout', function() {
         expect(el.items.first().getAttribute('tabindex')).to.equal('0');
         done();
       });
+    });
+    
+    it('should not be possible to select an item if Masonry has selectionmode none', function() {
+      const el = helpers.build(window.__html__['Masonry.items.html']);
+      expect(el.classList.contains('is-selectable')).to.be.false;
+      
+      const item = el.items.first();
+      item.click();
+      expect(el.selectedItems).to.deep.equal([]);
+    });
+  
+    it('should be possible to select one item max if Masonry has selectionmode single', function() {
+      const el = helpers.build(window.__html__['Masonry.items.html']);
+      el.selectionMode = 'single';
+      expect(el.classList.contains('is-selectable')).to.be.true;
+      
+      const firstItem = el.items.first();
+      const lastItem = el.items.last();
+  
+      expect(el.selectedItems).to.deep.equal([]);
+  
+      firstItem.click();
+      expect(el.selectedItems).to.deep.equal([firstItem]);
+  
+      lastItem.click();
+      expect(el.selectedItems).to.deep.equal([lastItem]);
+  
+      lastItem.click();
+      expect(el.selectedItems).to.deep.equal([]);
+    });
+  
+    it('should be possible to select multiple items if Masonry has selectionmode multiple', function() {
+      const el = helpers.build(window.__html__['Masonry.items.html']);
+      el.selectionMode = 'multiple';
+      expect(el.classList.contains('is-selectable')).to.be.true;
+      
+      const firstItem = el.items.first();
+      const lastItem = el.items.last();
+    
+      expect(el.selectedItems).to.deep.equal([]);
+    
+      firstItem.click();
+      expect(el.selectedItems).to.deep.equal([firstItem]);
+    
+      lastItem.click();
+      expect(el.selectedItems).to.deep.equal([firstItem, lastItem]);
+  
+      firstItem.click();
+      lastItem.click();
+      expect(el.selectedItems).to.deep.equal([]);
+    });
+    
+    it('should be possible to select an item with key:space', function() {
+      const el = helpers.build(window.__html__['Masonry.items.html']);
+      el.selectionMode = 'multiple';
+  
+      const items = el.items.getAll();
+      items.forEach((item) => {
+        helpers.keypress('space', item);
+      });
+      
+      expect(el.selectedItems).to.deep.equal(items);
     });
   });
   
@@ -321,6 +460,23 @@ describe('Masonry.Layout', function() {
           done();
         });
       });
+    });
+  });
+  
+  describe('Accessibility', function() {
+    it('should have role group', function() {
+      const el = helpers.build(new Masonry());
+      expect(el.getAttribute('role')).to.equal('group');
+    });
+    
+    it('should have an aria attribute for single/multiple selection', function() {
+      const el = helpers.build(new Masonry());
+      
+      el.selectionMode = 'single';
+      expect(el.getAttribute('aria-multiselectable')).to.equal('false');
+  
+      el.selectionMode = 'multiple';
+      expect(el.getAttribute('aria-multiselectable')).to.equal('true');
     });
   });
 });

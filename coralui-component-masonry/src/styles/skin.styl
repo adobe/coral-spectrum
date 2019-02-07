@@ -15,24 +15,19 @@
  * from Adobe.
  */
 
-$masonry-selected-background-color = rgba(20, 115, 230, 0.4);
-$masonry-selected-hover-background-color = rgba(20, 115, 230, 0.5);
-
-._coral-Masonry-item.is-selected:after {
-  background-image: svgImport($masonry-selected-icon-url, 'path {fill: white}');
-  background-color: $masonry-selected-background-color;
+._coral-Masonry-item-quickActions {
+  background-color: $masonry-quickactions-background-color;
 }
 
-._coral-Masonry-item.is-selected:hover:after {
-  background-color: $masonry-selected-hover-background-color;
-}
-
-._coral-Masonry.is-selectable ._coral-Masonry-item:not([selected]) {
-  &:hover,
-  &:focus {
-    &:after {
-      background-image: svgImport($masonry-selected-icon-url, 'path {fill: white}');
-      background-color: $masonry-hover-background-color;
-    }
+._coral-Masonry.is-selectable {
+  ._coral-Masonry-item.is-selected {
+    border-color: $masonry-item-selected-border-color;
+    box-shadow: 0 0 0 1px $masonry-item-selected-border-color;
   }
+}
+
+._coral-Masonry-item:focus {
+  border-color: $masonry-item-selected-border-color;
+  box-shadow: 0 0 0 1px $masonry-item-selected-border-color;
+  outline: none;
 }

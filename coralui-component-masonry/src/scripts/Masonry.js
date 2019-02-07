@@ -18,9 +18,27 @@
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import MasonryItem from './MasonryItem';
 import {SelectableCollection} from '../../../coralui-collection';
-import {transform, commons} from '../../../coralui-utils';
+import {validate, transform, commons} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-Masonry';
+
+/**
+ Enumeration for {@link Masonry} selection options.
+ 
+ @typedef {Object} MasonrySelectionModeEnum
+ 
+ @property {String} NONE
+ None is default, selection of Masonry items doesn't happen based on click.
+ @property {String} SINGLE
+ Single selection mode, Masonry behaves like radio input elements.
+ @property {String} MULTIPLE
+ Multiple selection mode, Masonry behaves like checkbox input elements.
+ */
+const selectionMode = {
+  NONE: 'none',
+  SINGLE: 'single',
+  MULTIPLE: 'multiple'
+};
 
 /**
  Enumeration for {@link Masonry} layouts.
@@ -119,8 +137,13 @@ class Masonry extends ComponentMixin(HTMLElement) {
       // Keyboard
       'capture:focus coral-masonry-item': '_onItemFocus',
       
+      // Selection
+      'click coral-masonry-item': '_onItemClick',
+      'key:space coral-masonry-item': '_onItemClick',
+      
       // private
-      'coral-masonry-item:_connected': '_onItemConnected'
+      'coral-masonry-item:_connected': '_onItemConnected',
+      'coral-masonry-item:_selectedchanged': '_onItemSelectedChanged'
     });
   
     // Relayout when child elements change or are added/removed
@@ -132,6 +155,12 @@ class Masonry extends ComponentMixin(HTMLElement) {
       characterData: true,
       attributes: true
     });
+  
+    // Used for eventing
+    this._oldSelection = [];
+  
+    // Init the collection mutation observer
+    this.items._startHandlingItems(true);
   }
   
   /**
@@ -146,11 +175,47 @@ class Masonry extends ComponentMixin(HTMLElement) {
         host: this,
         itemTagName: 'coral-masonry-item',
         // allows masonry to be nested
-        itemSelector: ':scope > coral-masonry-item:not([_removing]):not([_placeholder])'
+        itemSelector: ':scope > coral-masonry-item:not([_removing]):not([_placeholder])',
+        onItemAdded: this._validateSelection,
+        onItemRemoved: this._validateSelection
       });
     }
     
     return this._items;
+  }
+  
+  /**
+   Selection mode of Masonry
+   
+   @type {String}
+   @default MasonrySelectionModeEnum.NONE
+   @htmlattribute selectionmode
+   @htmlattributereflected
+   */
+  get selectionMode() {
+    return this._selectionMode || selectionMode.NONE;
+  }
+  set selectionMode(value) {
+    value = transform.string(value).toLowerCase();
+    this._selectionMode = validate.enumeration(selectionMode)(value) && value || selectionMode.NONE;
+    this._reflectAttribute('selectionmode', this._selectionMode);
+    
+    if (this._selectionMode === selectionMode.NONE) {
+      this.classList.remove('is-selectable');
+      this.removeAttribute('aria-multiselectable');
+    }
+    else {
+      this.classList.add('is-selectable');
+      this.setAttribute('aria-multiselectable', this._selectionMode === selectionMode.MULTIPLE);
+    }
+    
+    this._validateSelection();
+  }
+  
+  _onItemSelectedChanged(event) {
+    event.stopImmediatePropagation();
+    
+    this._validateSelection(event.target);
   }
   
   /**
@@ -246,6 +311,79 @@ class Masonry extends ComponentMixin(HTMLElement) {
   
     for (let i = 0; i < items.length; i++) {
       items[i][this._orderable ? 'setAttribute' : 'removeAttribute']('_orderable', '');
+    }
+  }
+  
+  _validateSelection(item) {
+    const selectedItems = this.selectedItems;
+    
+    if (this.selectionMode === selectionMode.NONE) {
+      selectedItems.forEach((selectedItem) => {
+        // Don't trigger change events
+        this._preventTriggeringEvents = true;
+        selectedItem.removeAttribute('selected');
+      });
+    }
+    else if (this.selectionMode === selectionMode.SINGLE) {
+      // Last selected item wins if multiple selection while not allowed
+      item = item || selectedItems[selectedItems.length - 1];
+      
+      if (item && item.hasAttribute('selected') && selectedItems.length > 1) {
+        selectedItems.forEach((selectedItem) => {
+          if (selectedItem !== item) {
+            // Don't trigger change events
+            this._preventTriggeringEvents = true;
+            selectedItem.removeAttribute('selected');
+          }
+        });
+        
+        // We can trigger change events again
+        this._preventTriggeringEvents = false;
+      }
+    }
+    
+    this._triggerChangeEvent();
+  }
+  
+  _triggerChangeEvent() {
+    const selectedItems = this.selectedItems;
+    const oldSelection = this._oldSelection;
+    
+    if (!this._preventTriggeringEvents && this._arraysAreDifferent(selectedItems, oldSelection)) {
+      if (this.selectionMode === selectionMode.MULTIPLE) {
+        this.trigger('coral-masonry:change', {
+          oldSelection: oldSelection,
+          selection: selectedItems
+        });
+      }
+      else {
+        this.trigger('coral-masonry:change', {
+          oldSelection: oldSelection.length > 1 ? oldSelection : oldSelection[0] || null,
+          selection: selectedItems[0] || null
+        });
+      }
+      
+      this._oldSelection = selectedItems;
+    }
+  }
+  
+  _arraysAreDifferent(selection, oldSelection) {
+    let diff = [];
+    
+    if (oldSelection.length === selection.length) {
+      diff = oldSelection.filter((item) => selection.indexOf(item) === -1);
+    }
+    
+    // since we guarantee that they are arrays, we can start by comparing their size
+    return oldSelection.length !== selection.length || diff.length !== 0;
+  }
+  
+  _onItemClick(event) {
+    if (this.selectionMode !== selectionMode.NONE) {
+      event.preventDefault();
+      
+      const item = event.matchedTarget;
+      item[item.hasAttribute('selected') ? 'removeAttribute' : 'setAttribute']('selected', '');
     }
   }
   
@@ -468,18 +606,12 @@ class Masonry extends ComponentMixin(HTMLElement) {
     if (this._attaching && item.nextElementSibling === null) {
       this._doLayout('last item attached');
     }
-    
-    // Collection event
-    this.trigger('coral-collection:add', {item});
   }
   
   /** @private */
   _onItemRemoved(item) {
     item._updateDragAction(false);
     item.classList.remove('is-managed');
-    
-    // Collection event
-    this.trigger('coral-collection:remove', {item});
   }
   
   /** @private */
@@ -640,8 +772,23 @@ class Masonry extends ComponentMixin(HTMLElement) {
    */
   static get layouts() { return layouts; }
   
+  /**
+   Returns {@link Masonry} selection mode options.
+   
+   @return {MasonrySelectionModeEnum}
+   */
+  static get selectionMode() { return selectionMode; }
+  
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat(['layout', 'spacing', 'orderable']); }
+  static get observedAttributes() {
+    return super.observedAttributes.concat([
+      'selectionMode',
+      'selectionmode',
+      'layout',
+      'spacing',
+      'orderable'
+    ]);
+  }
   
   /** @ignore */
   connectedCallback() {
@@ -649,9 +796,20 @@ class Masonry extends ComponentMixin(HTMLElement) {
     
     this.classList.add(CLASSNAME);
     
+    // a11y
+    this.setAttribute('role', 'group');
+    
     // Default reflected attributes
     if (!this._layout) { this.layout = layouts.FIXED_CENTERED; }
+    if (!this._selectionMode) { this.selectionMode = selectionMode.NONE; }
   
+    // Don't trigger events once connected
+    this._preventTriggeringEvents = true;
+    this._validateSelection();
+    this._preventTriggeringEvents = false;
+  
+    this._oldSelection = this.selectedItems;
+    
     // Handles the resizing of the masonry
     commons.addResizeListener(this, this._onResize.bind(this));
 
@@ -676,6 +834,17 @@ class Masonry extends ComponentMixin(HTMLElement) {
    The previous item before the reordering.
    @property {?MasonryItem} detail.before
    The previous item after the reordering.
+   */
+  
+  /**
+   Triggered when {@link Masonry} selected item has changed.
+   
+   @typedef {CustomEvent} coral-masonry:change
+   
+   @property {MasonryItem} detail.oldSelection
+   The prior selected item(s).
+   @property {MasonryItem} detail.selection
+   The newly selected item(s).
    */
 }
 

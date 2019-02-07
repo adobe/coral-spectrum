@@ -17,6 +17,8 @@
 
 import {ComponentMixin} from '../../../coralui-mixin-component';
 import {DragAction} from '../../../coralui-dragaction';
+import '../../../coralui-component-checkbox';
+import quickactions from '../templates/quickactions';
 import {transform, commons} from '../../../coralui-utils';
 
 const CLASSNAME = '_coral-Masonry-item';
@@ -38,6 +40,10 @@ class MasonryItem extends ComponentMixin(HTMLElement) {
     
     // Default value
     this._dragAction = null;
+    
+    // Template
+    this._elements = {};
+    quickactions.call(this._elements);
   }
   
   /**
@@ -76,6 +82,10 @@ class MasonryItem extends ComponentMixin(HTMLElement) {
   
     this.setAttribute('aria-selected', this._selected);
     this.classList.toggle('is-selected', this._selected);
+    
+    this._elements.check[this._selected ? 'setAttribute' : 'removeAttribute']('checked', '');
+    
+    this.trigger('coral-masonry-item:_selectedchanged');
   }
   
   /**
@@ -156,6 +166,15 @@ class MasonryItem extends ComponentMixin(HTMLElement) {
     
     // @a11y
     this.setAttribute('tabindex', '-1');
+    
+    // Support cloneNode
+    const template = this.querySelector('._coral-Masonry-item-quickActions');
+    if (template) {
+      template.remove();
+    }
+    this.appendChild(this._elements.quickactions);
+    // todo workaround to not give user possibility to tab into checkbox
+    this._elements.check._labellableElement.tabIndex = -1;
     
     // Inform masonry immediately
     this.trigger('coral-masonry-item:_connected');

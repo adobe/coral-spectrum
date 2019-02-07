@@ -39,6 +39,7 @@ describe('Masonry.Item', function() {
   
     beforeEach(function() {
       el = helpers.build(new Masonry());
+      el.selectionMode = 'single';
       item = new Masonry.Item();
       el.appendChild(item);
     });
@@ -61,6 +62,14 @@ describe('Masonry.Item', function() {
         
         expect(item.hasAttribute('selected')).to.be.true;
         expect(item.classList.contains('is-selected')).to.be.true;
+      });
+      
+      it('should toggle checkbox on selection', function() {
+        item.selected = true;
+        expect(item._elements.check.checked).to.be.true;
+  
+        item.selected = false;
+        expect(item._elements.check.checked).to.be.false;
       });
     });
     
@@ -162,6 +171,18 @@ describe('Masonry.Item', function() {
         item._updateDragAction(true);
         expectDisabled(item, handle);
       });
+    });
+  });
+  
+  describe('Accessibility', function() {
+    it('should have an aria attribute for selection', function() {
+      const el = new Masonry.Item();
+      
+      el.selected = true;
+      expect(el.getAttribute('aria-selected')).to.equal('true');
+  
+      el.selected = false;
+      expect(el.getAttribute('aria-selected')).to.equal('false');
     });
   });
 });

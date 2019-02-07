@@ -15,8 +15,6 @@
  * from Adobe.
  */
 
-$masonry-selected-icon-url = './embed/Check.svg';
-
 // Hide item before it is managed by the masonry
 coral-masonry-item {
   visibility: hidden;
@@ -43,19 +41,61 @@ coral-masonry-item {
   &.is-dragging, &.is-dropping {
     z-index: 1; // TODO other index?
   }
+}
 
-  &.is-selected:after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 36px 36px;
-    pointer-events: none;
+._coral-Masonry-item-quickActions {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 4px;
+  border-radius: 4px;
+
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(245,245,245,0.9);
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity 130ms ease-in-out, visibility 0ms linear 130ms;
+
+  ._coral-Checkbox {
+    margin: 0;
   }
+}
+
+._coral-Masonry.is-selectable {
+  ._coral-Masonry-item:hover ._coral-Masonry-item-quickActions {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  ._coral-Masonry-item.is-selected {
+    border-color: rgb(38, 128, 235);
+    box-shadow: 0 0 0 1px rgb(38, 128, 235);
+
+    ._coral-Masonry-item-quickActions {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  ._coral-Masonry-item:focus {
+    ._coral-Masonry-item-quickActions {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
+
+._coral-Masonry-item:focus {
+  border-color: rgb(38, 128, 235);
+  box-shadow: 0 0 0 1px rgb(38, 128, 235);
+  outline: none;
 }
 
 // TODO define better placeholder style
@@ -85,26 +125,6 @@ coral-masonry-item {
 ._coral-Masonry.is-selectable {
   ._coral-Masonry-item {
     cursor: pointer;
-  }
-
-  ._coral-Masonry-item:not([selected]) {
-    &:hover,
-    &:focus {
-      outline: none;
-
-      &:after {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        left: 0;
-        top: 0;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 36px 36px;
-        pointer-events: none;
-      }
-    }
   }
 }
 

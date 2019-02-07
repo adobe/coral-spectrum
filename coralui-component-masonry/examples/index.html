@@ -84,8 +84,12 @@
         </style>
 
         <label>
-          <input type="checkbox" id="is-selectable">
-          Selectable items
+          Selection mode
+          <select name="selection">
+            <option>none</option>
+            <option>single</option>
+            <option>multiple</option>
+          </select>
         </label>
         <br>
         <label>
@@ -202,6 +206,12 @@
               masonry.setAttribute('layout', this.value);
             });
 
+            const selectionSelector = document.querySelector('[name=selection]');
+            selectionSelector.value = masonry.getAttribute('selectionmode');
+            selectionSelector.addEventListener('change', function() {
+              masonry.setAttribute('selectionmode', this.value);
+            });
+
             const columnWidthSelector = document.querySelector('[name=columnWidth]');
             columnWidthSelector.value = masonry.getAttribute('columnwidth');
             columnWidthSelector.addEventListener('input', function() {
@@ -212,32 +222,28 @@
               event.matchedTarget.remove();
             });
 
-            Coral.events.on('click', '.prepend', function() {
-              var count = this.dataset.count;
-              for (var i = 0; i < count; i++) {
-                masonry.items.add(createItem(), masonry.items.first());
+            document.addEventListener('click', function(event) {
+              const prepend = event.target.matches('.prepend');
+              if (prepend) {
+                var count = prepend.dataset.count;
+                for (var i = 0; i < count; i++) {
+                  masonry.items.add(createItem(), masonry.items.first());
+                }
               }
             });
 
-            Coral.events.on('click', 'coral-masonry-item', function(event) {
-              if (masonry.classList.contains('is-selectable')) {
-                event.matchedTarget.selected = !event.matchedTarget.selected;
+            document.addEventListener('click', function(event) {
+              const append = event.target.matches('.append');
+              if (append) {
+                var startTime = Date.now();
+                var count = append.dataset.count;
+                for (var i = 0; i < count; i++) {
+                  masonry.items.add(createItem());
+                }
+                window.requestAnimationFrame(function() {
+                  console.log('Appending time:', Date.now() - startTime);
+                });
               }
-            });
-
-            Coral.events.on('click', '.append', function() {
-              var startTime = Date.now();
-              var count = this.dataset.count;
-              for (var i = 0; i < count; i++) {
-                masonry.items.add(createItem());
-              }
-              window.requestAnimationFrame(function() {
-                console.log('Appending time:', Date.now() - startTime);
-              });
-            });
-
-            Coral.events.on('change', '#is-selectable', function(event) {
-              masonry.classList.toggle('is-selectable', event.target.checked);
             });
 
             function createItem() {
