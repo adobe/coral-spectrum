@@ -13,8 +13,8 @@
     "test": "gulp test",
     "dev": "gulp dev",
     "docs": "gulp docs",
-    "prepare-release": "gulp prepare",
-    "perform-release": "gulp release && gulp deploy"
+    "release": "gulp release",
+    "deploy": "gulp deploy"
   },
   "dependencies": {
     "@adobe/focus-ring-polyfill": "0.1.5",

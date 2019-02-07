@@ -53,3 +53,6 @@ export {WizardView} from './coralui-component-wizardview';
 
 // @compat
 export {register, property, Component, mixin} from './coralui-compat';
+
+// Export current version
+export {version} from './src/scripts/version';

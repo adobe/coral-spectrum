@@ -241,7 +241,10 @@ module.exports = function(gulp) {
       cd coralui-component-playground && gulp build &&
       cd .. &&
       gulp playground &&
-      gulp docs
+      gulp docs &&
+      gulp push &&
+      tag-release &&
+      npm-publish
     `, [], {shell: true, stdio: 'inherit'});
   });
   
@@ -262,9 +265,7 @@ module.exports = function(gulp) {
     
     function beginRelease() {
       runSequence(
-        'push',
-        'tag-release',
-        'npm-publish',
+        'prepare',
         function(err) {
           if (err) {
             console.error(err.message);

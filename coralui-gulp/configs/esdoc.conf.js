@@ -59,7 +59,7 @@ const config = {
 if (util.isTLB()) {
   config.source = '.';
   config.includes = ['^.external-ecmascript.js', '^coralui-[a-z]+-[a-z]+/src/scripts', '^coralui-[a-z]+/src/scripts'];
-  config.excludes = ['^node_modules', '^build', '^coralui-component-playground'];
+  config.excludes = ['^node_modules', '^build', '^coralui-component-playground', '^src/scripts/version.js'];
   
   config.plugins.find(plugin => plugin.name === 'esdoc-standard-plugin').option.manual = {
     index: path.join(root, 'index.md'),
