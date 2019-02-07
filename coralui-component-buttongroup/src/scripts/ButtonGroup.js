@@ -130,7 +130,7 @@ class ButtonGroup extends FormFieldMixin(ComponentMixin(HTMLElement)) {
    Selection mode of Button group
    
    @type {String}
-   @default Coral.ButtonGroup.selectionMode.NONE
+   @default ButtonGroupSelectionModeEnum.NONE
    @htmlattribute selectionmode
    @htmlattributereflected
    */

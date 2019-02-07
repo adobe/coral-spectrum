@@ -158,7 +158,7 @@ class Accordion extends ComponentMixin(HTMLElement) {
    @readonly
    */
   get selectedItem() {
-    return this.items._getAllSelected()[0] || null;
+    return this.items._getFirstSelected();
   }
   
   /** @private **/

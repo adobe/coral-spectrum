@@ -97,7 +97,7 @@ describe('Accordion', function() {
     });
   
     describe('#variant', function() {
-      it('should defailt to DEFAULT', function() {
+      it('should default to DEFAULT', function() {
         expect(el.variant).to.equal(Accordion.variant.DEFAULT);
       });
     });
