@@ -30,7 +30,7 @@ module.exports = function(gulp) {
   const util = require('../helpers/util');
   const root = util.getRoot();
   const CWD = process.cwd();
-  const modulePackageJson = util.getPackageJSON();
+  let modulePackageJson = util.getPackageJSON();
   const registry = 'https://artifactory.corp.adobe.com/artifactory/api/npm/npm-coralui-local';
   
   // The version we'll actually release
@@ -73,6 +73,10 @@ module.exports = function(gulp) {
   
   // Tag and push release
   gulp.task('tag-release', function(cb) {
+    // Read updated package.json
+    modulePackageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+    releaseVersion = modulePackageJson.version;
+    
     const releaseMessage = `releng - Release ${releaseVersion}`;
     
     git.tag(releaseVersion, releaseMessage, function(err) {
