@@ -243,8 +243,8 @@ module.exports = function(gulp) {
       gulp playground &&
       gulp docs &&
       gulp push &&
-      tag-release &&
-      npm-publish
+      gulp tag-release &&
+      gulp npm-publish
     `, [], {shell: true, stdio: 'inherit'});
   });
   
@@ -256,33 +256,12 @@ module.exports = function(gulp) {
       return;
     }
     
-    const buildFiles = fs.existsSync('build') ? fs.readdirSync('build') : [];
-    if (!buildFiles.length) {
-      console.error('Release aborted: build folder is empty.');
-      
-      return;
-    }
-    
-    function beginRelease() {
-      runSequence(
-        'prepare',
-        function(err) {
-          if (err) {
-            console.error(err.message);
-          }
-          else {
-            console.log('Release successful.');
-          }
-        }
-      );
-    }
-    
     runSequence(
       'bump-version',
       function() {
         // Command line shortcut
         if (gutil.env.confirm) {
-          beginRelease();
+          runSequence('prepare');
         }
         else {
           inq.prompt({
@@ -292,7 +271,7 @@ module.exports = function(gulp) {
           })
             .then(function(res) {
               if (res.confirmed) {
-                beginRelease();
+                runSequence('prepare');
               }
             });
         }
