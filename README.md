@@ -76,7 +76,7 @@ If your project uses a module bundler and a ES6/7 to ES5 transpiler,
 you can bundle only needed components :
 
 ```
-import {Button} from '@coralui/coral-spectrum/coralui-component-button';  
+import {Button} from '@coralui/coral-spectrum/coral-component-button';  
 ```
 
 You'll find a Webpack config example at https://git.corp.adobe.com/ringel/coralui-webpack.

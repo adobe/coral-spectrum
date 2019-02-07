@@ -1,1 +1,1 @@
-require('./coralui-gulp')(require('gulp'));
+require('./coral-gulp')(require('gulp'));

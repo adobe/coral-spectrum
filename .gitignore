@@ -3,7 +3,7 @@
 /npm-debug.log
 /.publish
 
-/coralui-*/src/templates/*.js
-/coralui-*/src/styles/index.css
-/coralui-*/README.md
-/coralui-*/build
+/coral-*/src/templates/*.js
+/coral-*/src/styles/index.css
+/coral-*/README.md
+/coral-*/build

@@ -1,0 +1,176 @@
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2018 Adobe
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe.
+ */
+
+/* Note: $shell-header-height is defined in styles/coral-component-shell */
+
+$shell-header-padding-leftright = 8px;
+$shell-header-padding-topbottom = ($shell-header-height - 38) * 0.5;
+$shell-header-area = $shell-header-height - $shell-header-padding-topbottom;
+
+$shell-header-background-color = rgb(30, 30, 30);
+
+$shell-header-background-disabled-color = rgb(62, 62, 62);
+
+$shell-header-action-text-size = 12px;
+
+$shell-menu-background = white;
+$shell-menu-border = rgb(220, 220, 220);
+$shell-animation-time = 350ms;
+
+$shell-menubar-badge-background-color = rgb(235, 50, 45);
+$shell-menubar-badge-border-color = rgb(30, 30, 30);
+$shell-menubar-badge-text-color = white;
+
+coral-shell-menu {
+  display: none;
+
+  &.is-animated {
+    display: block;
+  }
+}
+
+._coral-Shell-menubar {
+  // Live in harmony with buttons
+  display: inline-block;
+}
+
+._coral-Shell-menubar-item {
+  display: inline-block;
+  vertical-align: top;
+  padding-left: 8px;
+  padding-right: 8px;
+
+  &[iconsize="M"] ._coral-Shell-menu-button {
+    top: -1px;
+  }
+}
+
+._coral-Shell-menubar-item--circle {
+  ._coral-Icon--sizeXXS ._coral-Icon--image {
+    border-radius : 9px;
+  }
+
+  ._coral-Icon--sizeXS ._coral-Icon--image {
+    border-radius : 12px;
+  }
+
+  ._coral-Icon--sizeS ._coral-Icon--image {
+    border-radius : 18px;
+  }
+
+  ._coral-Icon--sizeM ._coral-Icon--image {
+    border-radius : 24px;
+  }
+}
+
+._coral-Shell-menu {
+  position: absolute;
+
+  max-height: "calc(100% - %s)" % $shell-header-height;
+  overflow: auto;
+
+  border-bottom-left-radius: 4px;
+  border-width: 0 0 1px 1px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+
+  background: $shell-menu-background;
+
+  transition: transform $shell-animation-time cubic-bezier(.42,-.01,.175,1)
+
+  &:focus {
+    // The overlay is focused when opened
+    // We don't want to indicate this in most cases
+    // The user can hit tab to focus on the first child of the shown overlay
+    outline: none;
+  }
+
+  &.is-open {
+    transform: translateY(0) translateX(0);
+  }
+}
+
+._coral-Shell-menu--full {
+  border-radius: 0;
+}
+
+._coral-Shell-menu--placement-top {
+  top: $shell-header-height;
+
+  &._coral-Shell-menu--full {
+    left: 0;
+    right: 0;
+    border: none;
+    background: $shell-header-background-color;
+  }
+}
+
+._coral-Shell-menu--placement-right {
+  top: $shell-header-height;
+  right: 0;
+
+  &._coral-Shell-menu--full {
+    // Determined by position
+    max-height: none;
+
+    border-bottom: none;
+
+    bottom: 0;
+  }
+}
+
+._coral-Shell-menu--from-top {
+  transform: translateY(-100%);
+}
+
+._coral-Shell-menu--from-right {
+  transform: translateX(100%);
+}
+
+._coral-Shell-menu-button {
+  position: relative;
+}
+
+// @spectrum
+._coral-Shell-menubar ._coral-Shell-menu-button:not(:active) {
+  border-color: transparent;
+  background-color: transparent;
+}
+
+._coral-Shell-menu-button[badge]:after {
+  content: attr(badge);
+  position: absolute;
+  top: 3px;
+  left: 20px;
+
+  min-width: 5px;
+  height: 12px;
+  padding-left: 3.5px;
+  padding-right: 3.5px;
+
+  line-height: 12px;
+  text-align: center;
+
+  font-weight: bold;
+  font-size: 9px;
+  color: $shell-menubar-badge-text-color;
+
+  border-radius: 16px;
+
+  background-color: $shell-menubar-badge-background-color;
+
+  border: 1px solid $shell-menubar-badge-border-color;
+}

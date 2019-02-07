@@ -11,14 +11,14 @@
 /examples
 /src/tests
 
-/coralui-*/examples
-/coralui-*/src/tests
-/coralui-*/src/templates/*.html
-/coralui-*/src/styles/**/*.styl
-/coralui-*/src/embed
-/coralui-*/build
-/coralui-*/gulpfile.js
+/coral-*/examples
+/coral-*/src/tests
+/coral-*/src/templates/*.html
+/coral-*/src/styles/**/*.styl
+/coral-*/src/embed
+/coral-*/build
+/coral-*/gulpfile.js
 
-/coralui-guide
-/coralui-gulp
-/coralui-component-playground
+/coral-guide
+/coral-gulp
+/coral-component-playground

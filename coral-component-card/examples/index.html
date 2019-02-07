@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coral.Card</title>
+
+    <script>window.addEventListener("message", function(e) {!document.head.querySelector('svg') && document.head.insertAdjacentHTML("beforeend", e.data)});</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="event.preventDefault();this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
+    <link rel="stylesheet" href="../build/css/coral.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../build/js/coral.js';
+        document.head.appendChild(script);
+      });
+    </script>
+
+    <style>
+      coral-card {
+        margin-right: 15px;
+      }
+    </style>
+  </head>
+
+  <body class="coral--light">
+    <div style="position:fixed;top:15px;right:15px;z-index:10">
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--light'">Light</a> |
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--lightest'">Lightest</a> |
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--dark'">Dark</a> |
+      <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--darkest'">Darkest</a>
+    </div>
+
+    <section class="u-coral-margin">
+      <h2 class="coral-Heading coral-Heading--2">Default</h2>
+      <div class="markup">
+        <coral-card fixedwidth>
+          <coral-card-asset>
+            <img src="assets/400x400.jpeg">
+          </coral-card-asset>
+        </coral-card>
+
+        <coral-card fixedwidth>
+          <coral-card-asset>
+            <img src="assets/400x600.jpeg">
+          </coral-card-asset>
+          <coral-card-overlay>
+            <div class="u-coral-padding">
+              <coral-card-context>OVERLAY Only</coral-card-context>
+            </div>
+          </coral-card-overlay>
+        </coral-card>
+
+        <coral-card fixedwidth>
+          <coral-card-asset>
+            <img src="assets/400x400.jpeg">
+          </coral-card-asset>
+          <coral-card-overlay>
+            <div class="u-coral-padding">
+              <coral-card-context>Downloads</coral-card-context>
+            </div>
+          </coral-card-overlay>
+          <coral-card-content>
+            <coral-card-title>Girl's eye</coral-card-title>
+            <coral-card-subtitle>Girl's lips</coral-card-subtitle>
+            <coral-card-propertylist>
+              <coral-card-property icon="comment">2</coral-card-property>
+            </coral-card-propertylist>
+            <coral-card-propertylist>
+              <coral-card-property>2 weeks ago</coral-card-property>
+            </coral-card-propertylist>
+          </coral-card-content>
+        </coral-card>
+      </div>
+
+
+      <h2 class="coral-Heading coral-Heading--2">With banner</h2>
+      <div class="markup">
+        <coral-card fixedwidth>
+          <coral-card-banner>
+            <coral-card-banner-header>Most Popular</coral-card-banner-header>
+            <coral-card-banner-content>Includes Illustrator CC</coral-card-banner-content>
+          </coral-card-banner>
+          <coral-card-asset>
+            <img src="assets/400x400.jpeg">
+          </coral-card-asset>
+        </coral-card>
+
+        <coral-card fixedwidth>
+          <coral-card-banner variant="error">
+            <coral-card-banner-header>Purchase Soon</coral-card-banner-header>
+            <coral-card-banner-content>Trial expires in 2 days</coral-card-banner-content>
+          </coral-card-banner>
+          <coral-card-asset>
+            <img src="assets/400x600.jpeg">
+          </coral-card-asset>
+          <coral-card-overlay>
+            <div class="u-coral-padding">
+              <coral-card-context>OVERLAY Only</coral-card-context>
+            </div>
+          </coral-card-overlay>
+        </coral-card>
+
+        <coral-card fixedwidth>
+          <coral-card-banner variant="warning">
+            <coral-card-banner-header>Purchase Soon</coral-card-banner-header>
+            <coral-card-banner-content>Your trial is about to expire</coral-card-banner-content>
+          </coral-card-banner>
+          <coral-card-asset>
+            <img src="assets/400x400.jpeg">
+          </coral-card-asset>
+          <coral-card-overlay>
+            <div class="u-coral-padding">
+              <coral-card-context>Downloads</coral-card-context>
+            </div>
+          </coral-card-overlay>
+          <coral-card-content>
+            <coral-card-title>Girl's eye</coral-card-title>
+            <coral-card-subtitle>Girl's lips</coral-card-subtitle>
+            <coral-card-propertylist>
+              <coral-card-property icon="comment">2</coral-card-property>
+            </coral-card-propertylist>
+            <coral-card-propertylist>
+              <coral-card-property>2 weeks ago</coral-card-property>
+            </coral-card-propertylist>
+          </coral-card-content>
+        </coral-card>
+      </div>
+
+      <h2 class="coral-Heading coral-Heading--2">With links</h2>
+      <div class="markup">
+        <a href="http://www.adobe.com">
+          <coral-card fixedwidth stacked>
+            <coral-card-asset>
+              <img src="assets/807x595.jpeg">
+            </coral-card-asset>
+            <coral-card-content>
+              <coral-card-context>Card with surrounding link</coral-card-context>
+              <coral-card-title>Card Title</coral-card-title>
+              <coral-card-propertylist>
+                <coral-card-property>IMAGE</coral-card-property>
+                <coral-card-property>807 x 595</coral-card-property>
+                <coral-card-property>45.7 KB</coral-card-property>
+              </coral-card-propertylist>
+              <coral-card-propertylist>
+                <coral-card-property icon="add"></coral-card-property>
+                <coral-card-property icon="remove"></coral-card-property>
+                <coral-card-property icon="comment">3</coral-card-property>
+              </coral-card-propertylist>
+            </coral-card-content>
+          </coral-card>
+        </a>
+
+        <a href="http://www.adobe.com">
+          <coral-card fixedwidth stacked>
+            <coral-card-asset>
+              <img src="assets/400x595.jpeg">
+            </coral-card-asset>
+            <coral-card-overlay>
+              <div class="u-coral-padding">
+                <coral-card-context>Downloads</coral-card-context>
+              </div>
+            </coral-card-overlay>
+            <coral-card-content>
+              <coral-card-title>Card without context</coral-card-title>
+            </coral-card-content>
+          </coral-card>
+        </a>
+
+        <coral-card fixedwidth stacked>
+          <coral-card-asset>
+            <img src="assets/400x400.jpeg">
+          </coral-card-asset>
+          <coral-card-content>
+            <coral-card-context>Page description</coral-card-context>
+            <coral-card-title><a href="#" class="coral-Link">Page title (link)</a></coral-card-title>
+            <coral-card-propertylist>
+              <coral-card-property icon="add"></coral-card-property>
+              <coral-card-property icon="remove"></coral-card-property>
+              <coral-card-property icon="comment">3</coral-card-property>
+            </coral-card-propertylist>
+          </coral-card-content>
+        </coral-card>
+      </div>
+
+      <h2 class="coral-Heading coral-Heading--2">With SVG asset</h2>
+      <div class="markup">
+        <coral-card fixedwidth stacked>
+          <coral-card-asset>
+            <div style="background-color: purple;">
+              <img src="assets/Heartbeat_white.svg" width="100%">
+            </div>
+          </coral-card-asset>
+          <coral-card-content>
+            <coral-card-context>Card with SVG content</coral-card-context>
+            <coral-card-title>Card Title</coral-card-title>
+            <coral-card-description>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor justo vitae luctus commodo. Cras dolor erat, pulvinar eget vehicula non, consectetur vel sem. Nam pharetra scelerisque pharetra. Vestibulum id hendrerit tortor.</coral-card-description>
+          </coral-card-content>
+        </coral-card>
+
+        <coral-card fixedwidth stacked>
+          <coral-card-asset>
+            <div class="u-coral-clearFix" style="background: #7cae4a; display: table;">
+              <div style="width: 65%; display: table-cell; vertical-align: middle; background: #7cae4a;">
+                <img src="assets/Heartbeat_white.svg" width="100%">
+              </div>
+              <div class="" style="width: 20%; display: table-cell; vertical-align: middle; background: #7cae4a">
+                <img src="assets/Alert_16_white.svg" width="100%">
+              </div>
+            </div>
+          </coral-card-asset>
+          <coral-card-content>
+            <coral-card-context>Card with two assets</coral-card-context>
+            <coral-card-title>Card Title</coral-card-title>
+          </coral-card-content>
+        </coral-card>
+      </div>
+
+      <h2 class="coral-Heading coral-Heading--2">With lots of content</h2>
+      <div class="markup">
+        <coral-card fixedwidth stacked>
+          <coral-card-asset>
+            <img src="assets/300x300.jpeg">
+          </coral-card-asset>
+          <coral-card-content>
+            <coral-card-context>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum viverra ut urna at dignissim.</coral-card-context>
+            <coral-card-title>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum viverra ut urna at dignissim. Duis sed sem accumsan, consectetur lectus sed, dapibus purus. Pellentesque sed felis sed nisi faucibus gravida.</coral-card-title>
+            <coral-card-propertylist>
+              <coral-card-property icon="add"></coral-card-property>
+              <coral-card-property icon="remove"></coral-card-property>
+              <coral-card-property icon="comment">3</coral-card-property>
+              <coral-card-property icon="add"></coral-card-property>
+              <coral-card-property icon="remove"></coral-card-property>
+              <coral-card-property icon="comment">3</coral-card-property>
+              <coral-card-property icon="add"></coral-card-property>
+              <coral-card-property icon="remove"></coral-card-property>
+              <coral-card-property icon="comment">3</coral-card-property>
+              <coral-card-property icon="add"></coral-card-property>
+              <coral-card-property icon="remove"></coral-card-property>
+              <coral-card-property icon="comment">3</coral-card-property>
+              <coral-card-property icon="add"></coral-card-property>
+              <coral-card-property icon="remove"></coral-card-property>
+              <coral-card-property icon="comment">3</coral-card-property>
+            </coral-card-propertylist>
+          </coral-card-content>
+        </coral-card>
+      </div>
+
+      <h2 class="coral-Heading coral-Heading--2">With different asset sizes</h2>
+      <div class="markup">
+        <coral-card fixedwidth stacked>
+          <coral-card-asset>
+            <img src="assets/200x300.jpeg">
+          </coral-card-asset>
+          <coral-card-content>
+            <coral-card-context>Page description</coral-card-context>
+            <coral-card-title>Page Title</coral-card-title>
+            <coral-card-propertylist>
+              <coral-card-property icon="add"></coral-card-property>
+              <coral-card-property icon="remove"></coral-card-property>
+              <coral-card-property icon="comment">3</coral-card-property>
+            </coral-card-propertylist>
+          </coral-card-content>
+        </coral-card>
+
+        <coral-card fixedwidth>
+          <coral-card-asset>
+            <img src="assets/150x150.jpeg">
+          </coral-card-asset>
+        </coral-card>
+
+        <coral-card fixedwidth stacked>
+          <coral-card-asset>
+            <img src="assets/60x60.jpeg">
+          </coral-card-asset>
+          <coral-card-content>
+            <coral-card-context>Asset description</coral-card-context>
+            <coral-card-title>Asset Name (low resolution)</coral-card-title>
+          </coral-card-content>
+        </coral-card>
+
+        <coral-card fixedwidth>
+          <coral-card-asset>
+            <img src="assets/600x100.jpeg">
+          </coral-card-asset>
+          <coral-card-content>
+            <coral-card-context>Wide asset</coral-card-context>
+            <coral-card-title>Asset Name (low resolution)</coral-card-title>
+          </coral-card-content>
+        </coral-card>
+
+        <coral-card fixedwidth stacked>
+          <coral-card-asset>
+            <img src="assets/60x250.jpeg">
+          </coral-card-asset>
+          <coral-card-content>
+            <coral-card-context>Asset description</coral-card-context>
+            <coral-card-title>Asset Name (low resolution)</coral-card-title>
+          </coral-card-content>
+        </coral-card>
+
+        <coral-card fixedwidth stacked>
+          <coral-card-asset>
+            <img src="assets/250x250.jpeg">
+          </coral-card-asset>
+          <coral-card-content>
+            <coral-card-context>Asset description</coral-card-context>
+            <coral-card-title>Asset Name (low resolution)</coral-card-title>
+          </coral-card-content>
+        </coral-card>
+      </div>
+
+      <h2 class="coral-Heading coral-Heading--2">Condensed</h2>
+      <div class="markup">
+        <coral-card fixedwidth variant="condensed" stacked>
+          <coral-card-asset>
+            <img src="assets/400x400.jpeg">
+          </coral-card-asset>
+          <coral-card-content>
+            <coral-card-context>Collection</coral-card-context>
+            <coral-card-title>Running</coral-card-title>
+            <coral-card-propertylist>
+              <coral-card-property icon="add"></coral-card-property>
+              <coral-card-property icon="remove"></coral-card-property>
+              <coral-card-property icon="comment">3</coral-card-property>
+            </coral-card-propertylist>
+          </coral-card-content>
+        </coral-card>
+
+        <coral-card fixedwidth variant="condensed" stacked>
+          <coral-card-asset>
+          </coral-card-asset>
+          <coral-card-content>
+            <coral-card-context>Empty Card</coral-card-context>
+            <coral-card-title>Card Title</coral-card-title>
+          </coral-card-content>
+        </coral-card>
+
+        <coral-card fixedwidth variant="condensed" stacked>
+          <coral-card-asset>
+            <img src="assets/400x600.jpeg">
+          </coral-card-asset>
+          <coral-card-content>
+            <coral-card-title>Card Title</coral-card-title>
+          </coral-card-content>
+        </coral-card>
+      </div>
+
+      <h2 class="coral-Heading coral-Heading--2">Inverted</h2>
+      <div class="markup">
+        <coral-card fixedwidth variant="inverted" stacked>
+          <coral-card-asset>
+            <img src="assets/400x400.jpeg">
+          </coral-card-asset>
+          <coral-card-content>
+            <coral-card-context>Collection</coral-card-context>
+            <coral-card-title>Running</coral-card-title>
+            <coral-card-propertylist>
+              <coral-card-property icon="add"></coral-card-property>
+              <coral-card-property icon="remove"></coral-card-property>
+              <coral-card-property icon="comment">3</coral-card-property>
+            </coral-card-propertylist>
+          </coral-card-content>
+        </coral-card>
+
+        <coral-card fixedwidth variant="inverted" stacked>
+          <coral-card-asset>
+          </coral-card-asset>
+          <coral-card-content>
+            <coral-card-context>Empty Card</coral-card-context>
+            <coral-card-title>Card Title</coral-card-title>
+          </coral-card-content>
+        </coral-card>
+
+        <coral-card fixedwidth variant="inverted" stacked>
+          <coral-card-asset>
+            <img src="assets/400x600.jpeg">
+          </coral-card-asset>
+          <coral-card-content>
+            <coral-card-title>Card Title</coral-card-title>
+          </coral-card-content>
+        </coral-card>
+      </div>
+
+      <h2 class="coral-Heading coral-Heading--2">Wide cards</h2>
+      <div class="markup">
+        <div style="max-width:400px">
+          <coral-card>
+            <coral-card-asset>
+              <img src="assets/400x400.jpeg">
+            </coral-card-asset>
+            <coral-card-overlay>
+              <div class="u-coral-padding">
+                <coral-card-context>Downloads</coral-card-context>
+              </div>
+            </coral-card-overlay>
+            <coral-card-content>
+              <coral-card-title>Girl's eye</coral-card-title>
+              <coral-card-subtitle>Girl's lips</coral-card-subtitle>
+              <coral-card-propertylist>
+                <coral-card-property icon="comment">2</coral-card-property>
+              </coral-card-propertylist>
+              <coral-card-propertylist>
+                <coral-card-property>2 weeks ago</coral-card-property>
+              </coral-card-propertylist>
+            </coral-card-content>
+          </coral-card>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      window.addEventListener('load', function() {
+        var images = document.getElementsByTagName('img');
+        const XMLHttpRequest = new window.XMLHttpRequest();
+        XMLHttpRequest.onreadystatechange = function() {
+          if (XMLHttpRequest.readyState === XMLHttpRequest.DONE) {
+            if (XMLHttpRequest.status != 200) {
+              // In this case we're in the top examples page and have to adjust the url accordingly
+              for (var i = 0; i < images.length; i++) {
+                images[i].src = '../../coral-component-card/examples/' + images[i].src.split('/').slice(-2).join('/');
+              }
+            }
+          }
+        };
+        XMLHttpRequest.open('GET', images[0].src, true);
+        XMLHttpRequest.send();
+      });
+    </script>
+  </body>
+
+</html>
