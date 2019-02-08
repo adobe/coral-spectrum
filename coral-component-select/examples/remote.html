@@ -162,7 +162,7 @@
         // Ask the server for suggestions
         requestSingleMarkup = $.get(
           // handling the loading our selves gives us the oportunity to use URITemplates
-          'api/markup.html',
+          'data/markup.html',
           function(html) {
             setTimeout(function() {
               $(singleMarkup).append($(html));
@@ -199,7 +199,7 @@
         // Ask the server for suggestions
         requestSingleMarkupItems = $.get(
           // handling the loading our selves gives us the oportunity to use URITemplates
-          'api/markup.html',
+          'data/markup.html',
           function(html) {
             setTimeout(function() {
 
@@ -245,7 +245,7 @@
         // Ask the server for suggestions
         requestSingleJsonInit = $.get(
           // we use the event.detail.start as a way of doing pagination
-          'api/countries.' + event.detail.start + '.json',
+          'data/countries.' + event.detail.start + '.json',
           function(data) {
             singleJsonInitTimeout = setTimeout(function() {
 
