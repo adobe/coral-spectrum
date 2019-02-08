@@ -21,7 +21,7 @@ module.exports = function(gulp) {
   const minify = require('gulp-minifier');
   
   gulp.task('minify', function() {
-    return gulp.src(['build/js/coral.js', 'build/css/coral.css'])
+    return gulp.src(['dist/js/coral.js', 'build/css/coral.css'])
       .pipe(plumber())
       .pipe(minify({
         minify: true,
@@ -29,7 +29,7 @@ module.exports = function(gulp) {
         minifyCSS: true,
       }))
       .pipe(rename(function(file) {
-        file.dirname = path.join('build', file.extname.slice(1));
+        file.dirname = path.join('dist', file.extname.slice(1));
         file.extname = `.min${file.extname}`;
       }))
       .pipe(gulp.dest('.'));

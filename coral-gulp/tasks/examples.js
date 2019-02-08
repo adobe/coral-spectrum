@@ -18,17 +18,17 @@ module.exports = function(gulp) {
   const modifyFile = require('gulp-modify-file');
   const plumber = require('gulp-plumber');
   const rename = require('gulp-rename');
-  const regExp = /\.\.\/build/g;
+  const regExp = /\.\.\/dist/g;
   
   gulp.task('playground', function() {
     return gulp.src([
-      'coral-component-playground/build/**/*', 'coral-component-playground/examples/index.html'
+      'coral-component-playground/dist/**/*', 'coral-component-playground/examples/index.html'
     ], {base: './coral-component-playground'})
       .pipe(plumber())
       .pipe(modifyFile((content, path) => {
         // Replace coralui.js and coralui.css paths
         if (path.split('/').pop() === 'index.html') {
-          content = `${content.replace(regExp, 'build')}`;
+          content = `${content.replace(regExp, 'dist')}`;
         }
       
         return content;
@@ -39,7 +39,7 @@ module.exports = function(gulp) {
           file.dirname = '.';
         }
       }))
-      .pipe(gulp.dest('./build/playground'));
+      .pipe(gulp.dest('./dist/playground'));
   });
   
   gulp.task('examples', function() {
@@ -74,7 +74,7 @@ module.exports = function(gulp) {
         }
         
         // Put all examples under /examples
-        file.dirname = './build/examples';
+        file.dirname = './dist/examples';
       }))
       .pipe(gulp.dest('./'));
   });

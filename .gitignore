@@ -1,4 +1,4 @@
-/build
+/dist
 /node_modules
 /npm-debug.log
 /.publish
@@ -6,4 +6,4 @@
 /coral-*/src/templates/*.js
 /coral-*/src/styles/index.css
 /coral-*/README.md
-/coral-*/build
+/coral-*/dist

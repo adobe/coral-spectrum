@@ -34,11 +34,11 @@ module.exports = {
     json(),
     resources({
       include: path.join(root, '**/*.svg'),
-      output: './build/resources'
+      output: './dist/resources'
     }),
     css({
       include: path.join(root, '**/*.css'),
-      output: './build/css/coral.css'
+      output: './dist/css/coral.css'
     }),
     babel({
       presets: [

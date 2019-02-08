@@ -73,14 +73,14 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       // Load the theme
-      `${CWD}/build/css/coral.css`,
+      `${CWD}/dist/css/coral.css`,
       
       // Load momentJS for date time components
       `${root}/node_modules/moment/moment.js`,
   
       {
         // Load the resources
-        pattern: `${CWD}/build/resources/**/*`,
+        pattern: `${CWD}/dist/resources/**/*`,
         watched: false,
         included: false,
         served: true
@@ -117,7 +117,7 @@ module.exports = function(config) {
   
     // Configure the reporter
     coverageIstanbulReporter: {
-      dir: `${CWD}/build/coverage/`,
+      dir: `${CWD}/dist/coverage/`,
       combineBrowserReports: true,
       reports: ['lcov', 'text-summary']
     },

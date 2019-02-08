@@ -21,11 +21,11 @@ module.exports = function(gulp) {
   const util = require('../helpers/util');
   
   gulp.task('clean', function() {
-    del.sync('./build/**');
+    del.sync('./dist/**');
     // Prepare build folders
-    fs.mkdirSync('./build');
-    fs.mkdirSync('./build/css');
-    fs.mkdirSync('./build/js');
+    fs.mkdirSync('./dist');
+    fs.mkdirSync('./dist/css');
+    fs.mkdirSync('./dist/js');
   });
   
   gulp.task('cleanup', function() {

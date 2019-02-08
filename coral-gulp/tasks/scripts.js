@@ -39,6 +39,6 @@ module.exports = function(gulp) {
         dirname: 'js',
         basename: 'coral'
       }))
-      .pipe(gulp.dest('./build'));
+      .pipe(gulp.dest('./dist'));
   });
 };

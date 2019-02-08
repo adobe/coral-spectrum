@@ -22,7 +22,7 @@ const root = util.getRoot();
 
 const config = {
   source: './src/scripts',
-  destination: './build/documentation',
+  destination: './dist/documentation',
   plugins: [
     {name: 'esdoc-external-ecmascript-plugin', option: {enable: false}},
     {name: path.join(root, 'coral-guide/plugins/Externals.js')},
@@ -34,7 +34,7 @@ const config = {
           logo: path.join(root, 'coral-guide/assets/coral.png'),
           title: 'Coral Spectrum',
           repository: 'https://git.corp.adobe.com/Coral/coral-spectrum',
-          site: 'https://git.corp.adobe.com/pages/Coral/coral-spectrum/build/documentation'
+          site: 'https://git.corp.adobe.com/pages/Coral/coral-spectrum/dist/documentation'
         }
       }
     },
@@ -59,7 +59,7 @@ const config = {
 if (util.isTLB()) {
   config.source = '.';
   config.includes = ['^.external-ecmascript.js', '^coral-[a-z]+-[a-z]+/src/scripts', '^coral-[a-z]+/src/scripts'];
-  config.excludes = ['^node_modules', '^build', '^coral-component-playground', '^src/scripts/version.js'];
+  config.excludes = ['^node_modules', '^dist', '^coral-component-playground', '^src/scripts/version.js'];
   
   config.plugins.find(plugin => plugin.name === 'esdoc-standard-plugin').option.manual = {
     index: path.join(root, 'index.md'),

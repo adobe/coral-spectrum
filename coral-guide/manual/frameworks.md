@@ -3,7 +3,7 @@
 **Major JS frameworks (see below) are supported. For each framework, an example app with Coral Spectrum was created.**
 
 All examples showcase a Coral.Dialog with Coral.Button's and are based on respective frameworks tutorials to get started.
-Coral Spectrum build files (JS/CSS) are included on top and that's it. It works.
+Coral Spectrum dist files (JS/CSS) are included on top and that's it. It works.
 
 ## React
 

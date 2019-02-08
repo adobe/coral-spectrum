@@ -40,7 +40,7 @@ The easiest way to include Coral Spectrum is to download the package of the
 latest release on [artifactory](https://artifactory.corp.adobe.com/) which contains all components (search for `coral-spectrum`).
 Artifactory is the internal Adobe repository manager.
  
-After you've unzipped the downloaded package and found the `build` folder, follow the steps below :
+After you've unzipped the downloaded package and found the `dist` folder, follow the steps below :
 * Put `coral.min.css` in the `css/` directory of your project.
 * Put `coral.min.js` in the `js/` directory of your project.
 * Also put the content of the `/resources` folder in the `/resources` directory of your project. 

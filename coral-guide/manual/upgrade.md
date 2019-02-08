@@ -101,7 +101,7 @@ way of selection since Card selection via checkbox was not implemented yet.
 
 Coral Spectrum ships SVG icons that need to be loaded first before being displayed. 
 There are several ways to load the icons: 
-* Reuse the same file structure as in the `build` folder with `css/coral.css`, `js/coral.js` and `resources/*.svg`.   
+* Reuse the same file structure as in the `dist` folder with `css/coral.css`, `js/coral.js` and `resources/*.svg`.   
 * Add `data-coral-icons="PATH_TO_RESOURCES_FOLDER"` to the `<script>` loading Coral Spectrum. See [options](../class/coral-spectrum/coral-utils/src/scripts/Commons.js~Commons.html#instance-member-options) for details.
 * Use [Coral.Icon#load](../class/coral-spectrum/coral-component-icon/src/scripts/Icon.js~Icon.html#static-method-load) to load the icon set on demand.
 

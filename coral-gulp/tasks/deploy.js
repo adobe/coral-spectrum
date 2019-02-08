@@ -28,7 +28,7 @@ module.exports = function(gulp) {
     }
     
     return gulp
-      .src('./build/**/*', {base: '.'})
+      .src('./dist/**/*', {base: '.'})
       .pipe(ghPages({
         message: `CORAL-0: deploy ${util.getPackageJSON().version}`
       }));

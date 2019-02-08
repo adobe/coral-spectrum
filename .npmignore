@@ -16,7 +16,7 @@
 /coral-*/src/templates/*.html
 /coral-*/src/styles/**/*.styl
 /coral-*/src/embed
-/coral-*/build
+/coral-*/dist
 /coral-*/gulpfile.js
 
 /coral-guide

@@ -29,6 +29,6 @@ module.exports = function(gulp) {
       .pipe(rename(function (file) {
         file.dirname = path.join('resources', file.dirname);
       }))
-      .pipe(gulp.dest('build'));
+      .pipe(gulp.dest('dist'));
   });
 };
