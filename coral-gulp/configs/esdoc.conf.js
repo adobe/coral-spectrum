@@ -71,7 +71,6 @@ if (util.isTLB()) {
       path.join(root, 'coral-guide/manual/manual.md'),
       path.join(root, 'coral-guide/manual/upgrade.md'),
       path.join(root, 'coral-guide/manual/styles.md'),
-      path.join(root, 'coral-guide/manual/frameworks.md'),
       path.join(root, 'coral-guide/manual/architecture.md'),
       path.join(root, 'coral-guide/manual/contribution.md')
     ]
