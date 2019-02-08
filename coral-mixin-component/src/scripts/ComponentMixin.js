@@ -364,6 +364,7 @@ const ComponentMixin = (superClass) => class extends superClass {
               const contentZone = this._contentZones[name];
               if (addedNode.nodeName.toLowerCase() === name && !addedNode._contentZoned) {
                 // Insert the content zone at the right position
+                /** @ignore */
                 this[contentZone] = addedNode;
               }
             }
@@ -688,11 +689,13 @@ const ComponentMixin = (superClass) => class extends superClass {
       // If content zone exists and we only want to update properties on the content zone
       if (this[prop] instanceof HTMLElement && !(val instanceof HTMLElement)) {
         for (const contentZoneProperty in val) {
+          /** @ignore */
           this[prop][contentZoneProperty] = val[contentZoneProperty];
         }
       }
       // Else assign the new value to the content zone
       else {
+        /** @ignore */
         this[prop] = val;
       }
     };
@@ -703,6 +706,7 @@ const ComponentMixin = (superClass) => class extends superClass {
       }
       else {
         this._silenced = silent;
+        /** @ignore */
         this[prop] = val;
         this._silenced = false;
       }
@@ -795,6 +799,7 @@ const ComponentMixin = (superClass) => class extends superClass {
   attributeChangedCallback(name, oldValue, value) {
     if (!this._reflectedAttribute) {
       // Use the attribute/property mapping
+      /** @ignore */
       this[this._attributes[name] || name] = value;
     }
   }
