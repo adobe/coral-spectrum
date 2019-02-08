@@ -52,7 +52,7 @@ export {Wait} from './coral-component-wait';
 export {WizardView} from './coral-component-wizardview';
 
 // @compat
-export {register, property, Component, mixin} from './coral-compat';
+export {register, property, Component} from './coral-compat';
 
 // Export current version
 export {version} from './src/scripts/version';
