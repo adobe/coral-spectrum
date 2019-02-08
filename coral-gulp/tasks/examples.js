@@ -34,7 +34,7 @@ module.exports = function(gulp) {
         return content;
       }))
       .pipe(rename(function(file) {
-        // Put playground under /build/playground
+        // Put playground under /dist/playground
         if (file.dirname === 'examples') {
           file.dirname = '.';
         }

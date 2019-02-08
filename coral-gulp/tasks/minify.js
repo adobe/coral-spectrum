@@ -21,7 +21,7 @@ module.exports = function(gulp) {
   const minify = require('gulp-minifier');
   
   gulp.task('minify', function() {
-    return gulp.src(['dist/js/coral.js', 'build/css/coral.css'])
+    return gulp.src(['dist/js/coral.js', 'dist/css/coral.css'])
       .pipe(plumber())
       .pipe(minify({
         minify: true,

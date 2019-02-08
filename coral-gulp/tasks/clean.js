@@ -22,7 +22,7 @@ module.exports = function(gulp) {
   
   gulp.task('clean', function() {
     del.sync('./dist/**');
-    // Prepare build folders
+    // Prepare dist folders
     fs.mkdirSync('./dist');
     fs.mkdirSync('./dist/css');
     fs.mkdirSync('./dist/js');
