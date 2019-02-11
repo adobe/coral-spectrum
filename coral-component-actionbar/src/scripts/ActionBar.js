@@ -16,6 +16,7 @@
  */
 
 import {ComponentMixin} from '../../../coral-mixin-component';
+import '../../../coral-component-popover';
 import getFirstSelectableWrappedItem from './getFirstSelectableWrappedItem';
 import {commons} from '../../../coral-utils';
 
