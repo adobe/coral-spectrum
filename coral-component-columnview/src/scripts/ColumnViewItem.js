@@ -109,7 +109,7 @@ class ColumnViewItem extends ComponentMixin(HTMLElement) {
   }
   set variant(value) {
     value = transform.string(value).toLowerCase();
-    this._variant = validate.enumeration('variant', value) && value || variant.DEFAULT;
+    this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
   
     if (this._variant === variant.DRILLDOWN) {
