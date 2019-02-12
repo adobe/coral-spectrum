@@ -221,7 +221,7 @@ class QuickActions extends Overlay {
   }
   set placement(value) {
     value = transform.string(value).toLowerCase();
-    this._placement = validate.enumeration(placement) && value || placement.TOP;
+    this._placement = validate.enumeration(placement)(value) && value || placement.TOP;
     
     this.reposition();
   }
@@ -1109,10 +1109,19 @@ class QuickActions extends Overlay {
     if (toggle) {
       if (this.placement === placement.CENTER) {
         this._placement = Overlay.placement.RIGHT;
+        
+        this._oldInner = this._inner;
+        this._inner = false;
+        this._oldLengthOffset = this._lengthOffset;
+        this._lengthOffset = '-50%r - 50%p';
       }
     }
     else if (this._placement === Overlay.placement.RIGHT) {
       this._placement = placement.CENTER;
+      
+      // Restore
+      this._inner = this._oldInner;
+      this._lengthOffset = this._oldLengthOffset;
     }
   }
   
@@ -1122,6 +1131,20 @@ class QuickActions extends Overlay {
     this._toggleCenterPlacement(true);
     super.reposition();
     this._toggleCenterPlacement(false);
+  
+    // PopperJS inner property issue https://github.com/FezVrasta/popper.js/issues/400
+    if (this.placement === placement.TOP) {
+      this.style.marginTop = `${parseFloat(this.lengthOffset)}px`;
+      this.style.marginBottom = '';
+    }
+    else if (this.placement === placement.BOTTOM) {
+      this.style.marginBottom = `${parseFloat(this.lengthOffset)}px`;
+      this.style.marginTop = '';
+    }
+    else {
+      this.style.marginTop = '';
+      this.style.marginBottom = '';
+    }
   }
   
   /** @ignore */
