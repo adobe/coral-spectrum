@@ -33,6 +33,8 @@ coral-masonry-item {
   will-change: transform, opacity;
   left: 0;
   top: 0;
+  border: 1px solid transparent;
+  outline: none;
 
   &.is-managed {
     visibility: visible;
@@ -56,7 +58,6 @@ coral-masonry-item {
   top: 16px;
   width: 40px;
   height: 40px;
-  background-color: rgba(245,245,245,0.9);
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
@@ -69,33 +70,18 @@ coral-masonry-item {
 }
 
 ._coral-Masonry.is-selectable {
-  ._coral-Masonry-item:hover ._coral-Masonry-item-quickActions {
-    visibility: visible;
-    opacity: 1;
-  }
+  ._coral-Masonry-item {
+    cursor: pointer;
 
-  ._coral-Masonry-item.is-selected {
-    border-color: rgb(38, 128, 235);
-    box-shadow: 0 0 0 1px rgb(38, 128, 235);
-
-    ._coral-Masonry-item-quickActions {
-      visibility: visible;
-      opacity: 1;
+    &.is-selected,
+    &:focus,
+    &:hover {
+      ._coral-Masonry-item-quickActions {
+        visibility: visible;
+        opacity: 1;
+      }
     }
   }
-
-  ._coral-Masonry-item:focus {
-    ._coral-Masonry-item-quickActions {
-      visibility: visible;
-      opacity: 1;
-    }
-  }
-}
-
-._coral-Masonry-item:focus {
-  border-color: rgb(38, 128, 235);
-  box-shadow: 0 0 0 1px rgb(38, 128, 235);
-  outline: none;
 }
 
 // TODO define better placeholder style
@@ -119,12 +105,6 @@ coral-masonry-item {
   &.is-removing {
     opacity: 0;
     transition: opacity 0.5s;
-  }
-}
-
-._coral-Masonry.is-selectable {
-  ._coral-Masonry-item {
-    cursor: pointer;
   }
 }
 
