@@ -18,8 +18,7 @@
 import {ComponentMixin} from '../../../coral-mixin-component';
 import {OverlayMixin} from '../../../coral-mixin-overlay';
 import PopperJS from 'popper.js';
-import ALIGN_MAP from '../data/alignMapping.json';
-import {transform, validate, commons} from '../../../coral-utils';
+import {transform, validate} from '../../../coral-utils';
 
 const DEPRECATED_ALIGN = 'Coral.Overlay: alignAt and alignMy have been deprecated. Please use the offset, inner and placement properties instead.';
 const DEPRECATED_FLIP_FIT = 'Coral.Overlay.collision.FLIP_FIT has been deprecated. Please use Coral.Overlay.collision.FLIP instead.';
@@ -60,9 +59,6 @@ const align = {
   RIGHT_CENTER: 'right center',
   RIGHT_BOTTOM: 'right bottom'
 };
-
-// Used to map alignMy and alignAt with popper JS properties. ALIGN_MAP holds the mapping.
-const alignSwapped = commons.swapKeysAndValues(align);
 
 /**
  Enumeration for {@link Overlay} collision detection strategies.
@@ -213,8 +209,6 @@ class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
     
     value = transform.string(value).toLowerCase();
     this._alignMy = validate.enumeration(align)(value) && value || align.CENTER_CENTER;
-  
-    this._popperMapping();
   }
   
   /**
@@ -234,8 +228,6 @@ class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
     
     value = transform.string(value).toLowerCase();
     this._alignAt = validate.enumeration(align)(value) && value || align.CENTER_CENTER;
-    
-    this._popperMapping();
   }
   
   /**
@@ -529,14 +521,6 @@ class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
     }
   
     return newTarget;
-  }
-  
-  /** @ignore */
-  _popperMapping() {
-    const value = ALIGN_MAP[`${alignSwapped[this.alignMy]} ${alignSwapped[this.alignAt]}`];
-    if (value) {
-      this.set(value);
-    }
   }
   
   /**

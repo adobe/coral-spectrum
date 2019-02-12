@@ -402,16 +402,4 @@ describe('Overlay', function() {
       });
     });
   });
-  
-  describe('Implementation Details', function() {
-    it('should support most common alignMy and alignAt combinations', function() {
-      overlay.alignMy = Overlay.align.RIGHT_CENTER;
-      overlay.alignAt = Overlay.align.LEFT_CENTER;
-      
-      expect(overlay.placement).to.equal(Overlay.placement.LEFT);
-      expect(overlay.lengthOffset).to.equal('0px');
-      expect(overlay.breadthOffset).to.equal('0px');
-      expect(overlay.inner).to.be.false
-    });
-  });
 });
