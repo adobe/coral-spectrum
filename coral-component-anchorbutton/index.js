@@ -1,4 +1,5 @@
 import '../coral-theme-spectrum';
+import './src/styles/index.css';
 
 import '../coral-externals';
 import '../coral-compat';
