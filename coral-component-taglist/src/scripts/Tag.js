@@ -403,7 +403,7 @@ class Tag extends ComponentMixin(HTMLElement) {
     else {
       bullsEye = null;
     }
-    events.on('mouseup', this._onMouseUp);
+    events.on('mouseup.Tag', this._onMouseUp);
   }
   
   /** @private */
@@ -413,7 +413,7 @@ class Tag extends ComponentMixin(HTMLElement) {
     if (bullsEye !== null && (event.pageX !== bullsEye.x || event.pageY !== bullsEye.y)) {
       bullsEye = null;
     }
-    events.off('mouseup', this._onMouseUp);
+    events.off('mouseup.Tag', this._onMouseUp);
   }
   
   /**

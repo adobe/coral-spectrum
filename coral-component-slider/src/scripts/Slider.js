@@ -470,12 +470,12 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._draggingHandler = this._handleDragging.bind(this);
     this._mouseUpHandler = this._mouseUp.bind(this);
     
-    events.on('mousemove', this._draggingHandler);
-    events.on('mouseup', this._mouseUpHandler);
+    events.on('mousemove.Slider', this._draggingHandler);
+    events.on('mouseup.Slider', this._mouseUpHandler);
     
-    events.on('touchmove', this._draggingHandler);
-    events.on('touchend', this._mouseUpHandler);
-    events.on('touchcancel', this._mouseUpHandler);
+    events.on('touchmove.Slider', this._draggingHandler);
+    events.on('touchend.Slider', this._mouseUpHandler);
+    events.on('touchcancel.Slider', this._mouseUpHandler);
     
     this._setHandleFocus(this._currentHandle);
   }
@@ -669,8 +669,8 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // Use closest() to locate the actual handle.
     event.target.closest(`.${CLASSNAME_HANDLE}`).classList.add('is-focused');
     
-    events.on('touchstart.CoralSlider', this._onInteraction);
-    events.on('mousedown.CoralSlider', this._onInteraction);
+    events.on('touchstart.Slider', this._onInteraction);
+    events.on('mousedown.Slider', this._onInteraction);
   }
   
   /**
@@ -696,7 +696,8 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     // Use closest() to locate the actual handle.
     event.target.closest(`.${CLASSNAME_HANDLE}`).classList.remove('is-focused');
     
-    events.off('.CoralSlider');
+    events.off('touchstart.Slider');
+    events.off('mousedown.Slider');
   }
   
   /**
@@ -789,14 +790,15 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
    @private
    */
   _mouseUp() {
+    this._currentHandle.style.cursor = 'grab';
     this._currentHandle.classList.remove('is-dragged');
     document.body.classList.remove('u-coral-closedHand');
     
-    events.off('mousemove', this._draggingHandler);
-    events.off('touchmove', this._draggingHandler);
-    events.off('mouseup', this._mouseUpHandler);
-    events.off('touchend', this._mouseUpHandler);
-    events.off('touchcancel', this._mouseUpHandler);
+    events.off('mousemove.Slider', this._draggingHandler);
+    events.off('touchmove.Slider', this._draggingHandler);
+    events.off('mouseup.Slider', this._mouseUpHandler);
+    events.off('touchend.Slider', this._mouseUpHandler);
+    events.off('touchcancel.Slider', this._mouseUpHandler);
     
     this._currentHandle = null;
     this._draggingHandler = null;

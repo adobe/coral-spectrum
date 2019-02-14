@@ -338,7 +338,7 @@ describe('Checkbox', function() {
       checkbox = helpers.build(new Checkbox());
 
       // changeSpy and preventSpy for event bubble
-      events.on('change', function(event) {
+      events.on('change.TestCheckBox', function(event) {
 
         // target must always be the switch and not the input
         expect(event.target.tagName).to.equal('CORAL-CHECKBOX');
@@ -354,7 +354,7 @@ describe('Checkbox', function() {
     });
 
     afterEach(function() {
-      events.off('change');
+      events.off('change.TestCheckBox');
     });
 
     it('should trigger change on click', function() {

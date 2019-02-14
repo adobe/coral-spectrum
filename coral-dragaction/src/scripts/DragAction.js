@@ -254,10 +254,10 @@ class DragAction {
     this._drag = this._drag.bind(this);
     this._dragEnd = this._dragEnd.bind(this);
   
-    events.on(`touchmove.CoralDragAction${this._id}`, this._drag);
-    events.on(`mousemove.CoralDragAction${this._id}`, this._drag);
-    events.on(`touchend.CoralDragAction${this._id}`, this._dragEnd);
-    events.on(`mouseup.CoralDragAction${this._id}`, this._dragEnd);
+    events.on(`touchmove.DragAction${this._id}`, this._drag);
+    events.on(`mousemove.DragAction${this._id}`, this._drag);
+    events.on(`touchend.DragAction${this._id}`, this._dragEnd);
+    events.on(`mouseup.DragAction${this._id}`, this._dragEnd);
   
     // Store reference on dragElement
     this._dragElement.dragAction = this;
@@ -290,14 +290,14 @@ class DragAction {
     this._handle = value;
   
     // Unbind events
-    this._dragEvents.off('.CoralDragAction');
+    this._dragEvents.off('.DragAction');
   
     // Remove classes
     document.body.classList.remove(CLOSE_HAND_CLASS);
     this._dragElement.classList.remove(IS_DRAGGING_CLASS);
     if (this._handles && this._handles.length) {
       this._handles.forEach((handle) => {
-        handle._dragEvents.off('.CoralDragAction');
+        handle._dragEvents.off('.DragAction');
         handle.classList.remove(OPEN_HAND_CLASS);
       });
     }
@@ -314,22 +314,22 @@ class DragAction {
       if (this._handles && this._handles.length) {
         this._handles.forEach((handle) => {
           handle._dragEvents = handle._dragEvents || new Vent(handle);
-          handle._dragEvents.on('mousedown.CoralDragAction', this._dragStart.bind(this));
-          handle._dragEvents.on('touchstart.CoralDragAction', this._dragStart.bind(this));
+          handle._dragEvents.on('mousedown.DragAction', this._dragStart.bind(this));
+          handle._dragEvents.on('touchstart.DragAction', this._dragStart.bind(this));
           handle.classList.add(OPEN_HAND_CLASS);
         });
       }
       else {
-        this._dragEvents.on('touchstart.CoralDragAction', this._dragStart.bind(this));
-        this._dragEvents.on('mousedown.CoralDragAction', this._dragStart.bind(this));
+        this._dragEvents.on('touchstart.DragAction', this._dragStart.bind(this));
+        this._dragEvents.on('mousedown.DragAction', this._dragStart.bind(this));
         this._dragElement.classList.add(OPEN_HAND_CLASS);
       }
     }
     else {
       // Defaults to the dragElement
       this._handles = [];
-      this._dragEvents.on('touchstart.CoralDragAction', this._dragStart.bind(this));
-      this._dragEvents.on('mousedown.CoralDragAction', this._dragStart.bind(this));
+      this._dragEvents.on('touchstart.DragAction', this._dragStart.bind(this));
+      this._dragEvents.on('mousedown.DragAction', this._dragStart.bind(this));
       this._dragElement.classList.add(OPEN_HAND_CLASS);
     }
   }
@@ -416,7 +416,7 @@ class DragAction {
     }
     
     // Prevent touchscreen windows to scroll while dragging
-    events.on('touchmove.CoralDragAction', (e) => {
+    events.on('touchmove.DragAction', (e) => {
       e.preventDefault();
     });
     
@@ -709,16 +709,16 @@ class DragAction {
     this._dragElement.classList.remove(IS_DRAGGING_CLASS);
     if (this._handles && this._handles.length) {
       this._handles.forEach((handle) => {
-        handle._dragEvents.off('.CoralDragAction');
+        handle._dragEvents.off('.DragAction');
         handle.classList.remove(OPEN_HAND_CLASS);
       });
     }
     else {
-      this._dragEvents.off('.CoralDragAction');
+      this._dragEvents.off('.DragAction');
       this._dragElement.classList.remove(OPEN_HAND_CLASS);
     }
   
-    events.off(`.CoralDragAction${this._id}`);
+    events.off(`.DragAction${this._id}`);
   
     // Restore overflow
     if (document.body._overflow) {

@@ -267,10 +267,10 @@ class Tooltip extends Overlay {
     }
     
     // Make sure we don't add listeners twice to the same element for this particular tooltip
-    if (target[`_hasCoralTooltipListeners${this._id}`]) {
+    if (target[`_hasTooltipListeners${this._id}`]) {
       return;
     }
-    target[`_hasCoralTooltipListeners${this._id}`] = true;
+    target[`_hasTooltipListeners${this._id}`] = true;
     
     // Remove listeners from the old target
     if (this._oldTarget) {
@@ -286,7 +286,7 @@ class Tooltip extends Overlay {
     // Use Vent to bind events on the target
     this._targetEvents = new Vent(target);
   
-    this._targetEvents.on(`mouseenter.CoralTooltip${this._id} focusin.CoralTooltip${this._id}`, () => {
+    this._targetEvents.on(`mouseenter.Tooltip${this._id} focusin.Tooltip${this._id}`, () => {
       // Don't let the tooltip hide
       this._cancelHide();
       
@@ -305,13 +305,13 @@ class Tooltip extends Overlay {
       }
     });
   
-    this._targetEvents.on(`mouseleave.CoralTooltip${this._id}`, () => {
+    this._targetEvents.on(`mouseleave.Tooltip${this._id}`, () => {
       if (this.interaction === this.constructor.interaction.ON) {
         this._startHide();
       }
     });
   
-    this._targetEvents.on(`focusout.CoralTooltip${this._id}`, () => {
+    this._targetEvents.on(`focusout.Tooltip${this._id}`, () => {
       if (this.interaction === this.constructor.interaction.ON) {
         this._handleFocusOut();
       }
@@ -323,9 +323,9 @@ class Tooltip extends Overlay {
     // Remove listeners for this tooltip and mark that the element doesn't have them
     // Use the ID so we can support multiple tooltips on the same element
     if (this._targetEvents) {
-      this._targetEvents.off(`.CoralTooltip${this._id}`);
+      this._targetEvents.off(`.Tooltip${this._id}`);
     }
-    target[`_hasCoralTooltipListeners${this._id}`] = false;
+    target[`_hasTooltipListeners${this._id}`] = false;
   }
   
   get _contentZones() { return {'coral-tooltip-content': 'content'}; }

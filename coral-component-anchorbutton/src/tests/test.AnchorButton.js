@@ -69,7 +69,7 @@ describe('AnchorButton', function() {
       anchorbutton.on('keydown', keyDownSpy);
 
       // clickSpy and preventSpy for event bubble
-      events.on('click', function(event) {
+      events.on('click.TestAnchorButton', function(event) {
         if (event.target instanceof AnchorButton) {
           clickSpy();
           if (event.defaultPrevented) {
@@ -85,7 +85,7 @@ describe('AnchorButton', function() {
     });
 
     afterEach(function() {
-      events.off('click');
+      events.off('click.TestAnchorButton');
       helpers.target.removeChild(anchorbutton);
       anchorbutton = null;
     });

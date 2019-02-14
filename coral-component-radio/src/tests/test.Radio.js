@@ -346,7 +346,7 @@ describe('Radio', function() {
       radio = helpers.build(new Radio());
       
       // changeSpy and preventSpy for event bubble
-      events.on('change', function(event) {
+      events.on('change.TestRadio', function(event) {
         
         // target must always be the switch and not the input
         expect(event.target.tagName).to.equal('CORAL-RADIO');
@@ -363,7 +363,7 @@ describe('Radio', function() {
     
     afterEach(function() {
       helpers.target.removeChild(radio);
-      events.off('change');
+      events.off('change.TestRadio');
     });
     
     it('should trigger change on click', function() {

@@ -213,7 +213,7 @@ describe('Switch', function() {
       helpers.build(el);
 
       // changeSpy and preventSpy for event bubble
-      events.on('change', function(event) {
+      events.on('change.TestSwitch', function(event) {
 
         // target must always be the switch and not the input
         expect(event.target.tagName).to.equal('CORAL-SWITCH');
@@ -229,7 +229,7 @@ describe('Switch', function() {
     });
 
     afterEach(function() {
-      events.off('change');
+      events.off('change.TestSwitch');
     });
 
     it('should change trigger on click', function() {
