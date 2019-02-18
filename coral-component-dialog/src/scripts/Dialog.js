@@ -426,18 +426,33 @@ class Dialog extends OverlayMixin(ComponentMixin(HTMLElement)) {
     }
   }
   
+  /**
+   Inherited from {@link ComponentMixin#trackingElement}.
+   */
+  get trackingElement() {
+    return typeof this._trackingElement === 'undefined' ?
+      (this.header && this.header.textContent && this.header.textContent.replace(/\s{2,}/g, ' ').trim() || '') :
+      this._trackingElement;
+  }
+  set trackingElement(value) {
+    super.trackingElement = value;
+  }
+  
   /** @ignore */
   _observeHeader() {
     if (this._headerObserver) {
       this._headerObserver.disconnect();
-      this._headerObserver.observe(this._elements.header, {
-        // Catch changes to childList
-        childList: true,
-        // Catch changes to textContent
-        characterData: true,
-        // Monitor any child node
-        subtree: true
-      });
+  
+      if (this._elements.header) {
+        this._headerObserver.observe(this._elements.header, {
+          // Catch changes to childList
+          childList: true,
+          // Catch changes to textContent
+          characterData: true,
+          // Monitor any child node
+          subtree: true
+        });
+      }
     }
   }
   
@@ -447,14 +462,17 @@ class Dialog extends OverlayMixin(ComponentMixin(HTMLElement)) {
    */
   _hideHeaderIfEmpty() {
     const header = this._elements.header;
-    const headerWrapper = this._elements.headerWrapper;
-    
-    // If it's empty and has no non-textnode children, hide the header
-    const hiddenValue = header.children.length === 0 && header.textContent.replace(/\s*/g, '') === '';
-    
-    // Only bother if the hidden status has changed
-    if (hiddenValue !== headerWrapper.hidden) {
-      headerWrapper.hidden = hiddenValue;
+  
+    if (this._elements.header) {
+      const headerWrapper = this._elements.headerWrapper;
+  
+      // If it's empty and has no non-textnode children, hide the header
+      const hiddenValue = header.children.length === 0 && header.textContent.replace(/\s*/g, '') === '';
+  
+      // Only bother if the hidden status has changed
+      if (hiddenValue !== headerWrapper.hidden) {
+        headerWrapper.hidden = hiddenValue;
+      }
     }
   }
   

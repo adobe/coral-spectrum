@@ -239,6 +239,28 @@ describe('Dialog', function() {
         expect(document.elementFromPoint(0, 0)).to.not.equal(document.querySelector('_coral-Underlay'));
       });
     });
+  
+    describe('#trackingElement', function() {
+      it('should default to header title', function() {
+        el.header.textContent = 'Header title';
+        expect(el.trackingElement).to.equal('Header title');
+      });
+  
+      it('should strip down any extra spaces, per html convention', function() {
+        el.header.textContent = ' This header  has    some extra spaces.';
+        expect(el.trackingElement).to.equal('This header has some extra spaces.');
+      });
+      
+      it('should be empty string if no header provided', function() {
+        el.header = null;
+        expect(el.trackingElement).to.equal('');
+      });
+    
+      it('should be settable to a string', function() {
+        el.trackingElement = 'Custom';
+        expect(el.trackingElement).to.equal('Custom');
+      });
+    });
   });
   
   describe('Markup', function() {
