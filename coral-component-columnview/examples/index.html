@@ -165,7 +165,7 @@
                 if ($contentWrapper.length > 0) {
                   if (item) {
                     // adds an unique id to be able to identify the column
-                    $data[0].id = Coral.commons.getUID();
+                    $data[0].id = new Date().getTime();
                     // we add the new column and scroll to it
                     cv.setNextColumn($data[0], column);
                   }

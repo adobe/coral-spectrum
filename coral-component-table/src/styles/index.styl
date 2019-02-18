@@ -70,14 +70,16 @@ $table-drag-handle-icon-url = "./embed/DragHandle.svg";
   text-transform: uppercase;
   padding: 4px 16px;
   transition: color 125ms ease-in-out;
+  height: 26px;
 }
 
 ._coral-Table-cell {
   font-size: 14px;
   transition: background-color 125ms ease-in-out;
-// @spectrum support 2 rows inside a cell without growing the full row height
-  padding: 0 16px;
+  // @spectrum support 2 rows inside a cell without growing the full row height
+  padding: 4px 16px;
   height: 48px;
+  box-sizing: border-box;
 }
 
 ._coral-Table-head {
@@ -334,7 +336,7 @@ $table-drag-handle-icon-url = "./embed/DragHandle.svg";
       position absolute;
       box-sizing: border-box;
       line-height: 12px;
-      min-height: 20px;
+      min-height: 34px;
       padding: 4px 16px;
       margin-left: -16px;
     }
@@ -432,6 +434,8 @@ $table-drag-handle-icon-url = "./embed/DragHandle.svg";
   white-space: nowrap;
 
   coral-checkbox[coral-table-rowselect] {
+    margin-right: 0;
+
     & + img {
       height: 24px;
       width: 24px;

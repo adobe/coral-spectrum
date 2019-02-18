@@ -682,18 +682,15 @@ class Table extends ComponentMixin(HTMLTableElement) {
         // Place headercell after
         if (draggedHeaderCell.classList.contains(IS_AFTER_CLASS)) {
           if (columnIndex < dragElementIndex) {
-            const draggedHeaderCellComputedStyle = window.getComputedStyle(draggedHeaderCell);
-            const nextHeaderCellPadding = parseFloat(draggedHeaderCellComputedStyle.paddingLeft) + parseFloat(draggedHeaderCellComputedStyle.paddingRight);
-            
             // Position the header cells based on their siblings position
             if (isHeaderCellDragged) {
-              const nextHeaderCellWidth = parseFloat(draggedHeaderCellComputedStyle.width);
-              draggedHeaderCell.style.left = `${nextHeaderCellWidth + nextHeaderCellPadding}px`;
+              const nextHeaderCellWidth = draggedHeaderCell.clientWidth;
+              draggedHeaderCell.style.left = `${nextHeaderCellWidth}px`;
             }
             else {
               const nextHeaderCell = getSiblingsOf(headerCell, 'th[is="coral-table-headercell"]', 'next');
               const nextHeaderCellLeftOffset = nextHeaderCell.getBoundingClientRect().left + documentScrollLeft;
-              draggedHeaderCell.style.left = `${nextHeaderCellLeftOffset - nextHeaderCellPadding + containerScrollLeft}px`;
+              draggedHeaderCell.style.left = `${nextHeaderCellLeftOffset + containerScrollLeft}px`;
             }
           }
           else {
@@ -705,17 +702,15 @@ class Table extends ComponentMixin(HTMLTableElement) {
         if (draggedHeaderCell.classList.contains(IS_BEFORE_CLASS)) {
           if (columnIndex > dragElementIndex) {
             const prev = getSiblingsOf(headerCell, 'th[is="coral-table-headercell"]', 'prev');
-            const prevHeaderCellComputedStyle = window.getComputedStyle(prev);
-            const beforeHeaderCellPadding = parseFloat(prevHeaderCellComputedStyle.paddingLeft) + parseFloat(prevHeaderCellComputedStyle.paddingRight);
             
             // Position the header cells based on their siblings position
             if (isHeaderCellDragged) {
-              const beforeHeaderCellWidth = parseFloat(prevHeaderCellComputedStyle.width);
-              draggedHeaderCell.style.left = `${-1 * (beforeHeaderCellWidth + beforeHeaderCellPadding)}px`;
+              const beforeHeaderCellWidth = prev.clientWidth;
+              draggedHeaderCell.style.left = `${-1 * (beforeHeaderCellWidth)}px`;
             }
             else {
               const beforeHeaderCellLeftOffset = prev.getBoundingClientRect().left + documentScrollLeft;
-              draggedHeaderCell.style.left = `${beforeHeaderCellLeftOffset - beforeHeaderCellPadding + containerScrollLeft}px`;
+              draggedHeaderCell.style.left = `${beforeHeaderCellLeftOffset + containerScrollLeft}px`;
             }
           }
           else {
@@ -1002,6 +997,7 @@ class Table extends ComponentMixin(HTMLTableElement) {
   /** @private */
   _onRowDragStart(event) {
     const table = this;
+    const head = table.head;
     const body = table.body;
     const dragElement = event.detail.dragElement;
     const dragData = dragElement.dragAction._dragData;
@@ -1013,7 +1009,13 @@ class Table extends ComponentMixin(HTMLTableElement) {
       // Cells will shrink otherwise
       cell.style.width = window.getComputedStyle(cell).width;
     });
-    
+  
+    if (head && !head.sticky) {
+      // @polyfill ie11
+      // Element that scrolls the document.
+      const scrollingElement = document.scrollingElement || document.documentElement;
+      dragElement.style.top = `${dragElement.getBoundingClientRect().top + scrollingElement.scrollTop}px`;
+    }
     dragElement.style.position = 'absolute';
     
     // Setting drop zones allows to listen for coral-dragaction:dragover event
@@ -1045,7 +1047,7 @@ class Table extends ComponentMixin(HTMLTableElement) {
       const dragElementTop = dragElement.getBoundingClientRect().top;
       const position = dragElementTop - dragData.tableTop - dragData.headSize;
       const topScrollLimit = 0;
-      const bottomScrollTimit = dragData.tableSize - dragData.dragElementSize - dragData.headSize;
+      const bottomScrollLimit = dragData.tableSize - dragData.dragElementSize - dragData.headSize;
       const scrollOffset = 10;
       
       // Handle the scrollbar position based on the dragged element position.
@@ -1054,7 +1056,7 @@ class Table extends ComponentMixin(HTMLTableElement) {
         if (position < topScrollLimit) {
           table._elements.container.scrollTop -= scrollOffset;
         }
-        else if (position > bottomScrollTimit) {
+        else if (position > bottomScrollLimit) {
           table._elements.container.scrollTop += scrollOffset;
         }
       });

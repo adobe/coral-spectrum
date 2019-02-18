@@ -36,7 +36,11 @@
 }
 
 ._coral-AssetList-item:not(.is-selectable) [coral-columnview-itemselect] {
-  display:none;
+  display: none;
+}
+
+._coral-AssetList-item.is-selectable coral-checkbox[coral-columnview-itemselect] {
+  margin-right: 0;
 }
 
 ._coral-AssetList-itemThumbnail {

@@ -920,9 +920,11 @@
 
       <script>
         window.addEventListener('load', function() {
-          Coral.events.on('change', '.hide-control coral-checkbox', function(event) {
-            var checkbox = event.matchedTarget;
-            checkbox.closest('section').querySelector(checkbox.getAttribute('target')).hidden = checkbox.checked;
+          document.addEventListener('change', function(event) {
+            if (event.target.closest('.hide-control')) {
+              var checkbox = event.target.closest('coral-checkbox');
+              event.target.closest('section').querySelector(checkbox.getAttribute('target')).hidden = checkbox.checked;
+            }
           });
         });
       </script>
@@ -947,28 +949,28 @@
             <td is="coral-table-cell">Alpha</td>
             <td is="coral-table-cell">23,857</td>
             <td is="coral-table-cell">
-              <button coral-row-remove is="coral-button" type="button" icon="close" iconSize="XS" variant="quiet"></button>
+              <button row-remove is="coral-button" type="button" icon="close" iconSize="XS" variant="quiet"></button>
             </td>
           </tr>
           <tr is="coral-table-row">
             <td is="coral-table-cell">Beta</td>
             <td is="coral-table-cell">20,398</td>
             <td is="coral-table-cell">
-              <button coral-row-remove is="coral-button" type="button" icon="close" iconSize="XS" variant="quiet"></button>
+              <button row-remove is="coral-button" type="button" icon="close" iconSize="XS" variant="quiet"></button>
             </td>
           </tr>
           <tr is="coral-table-row">
             <td is="coral-table-cell">Charlie</td>
             <td is="coral-table-cell">3,498</td>
             <td is="coral-table-cell">
-              <button coral-row-remove is="coral-button" type="button" icon="close" iconSize="XS" variant="quiet"></button>
+              <button row-remove is="coral-button" type="button" icon="close" iconSize="XS" variant="quiet"></button>
             </td>
           </tr>
           <tr is="coral-table-row">
             <td is="coral-table-cell">Delta</td>
             <td is="coral-table-cell">20,398</td>
             <td is="coral-table-cell">
-              <button coral-row-remove is="coral-button" type="button" icon="close" iconSize="XS" variant="quiet"></button>
+              <button row-remove is="coral-button" type="button" icon="close" iconSize="XS" variant="quiet"></button>
             </td>
           </tr>
           <tr is="coral-table-row">
@@ -979,7 +981,7 @@
               <input type="text" placeholder="Type Number">
             </td>
             <td is="coral-table-cell">
-              <button coral-row-add is="coral-button" type="button" icon="add" iconSize="XS" variant="quiet"></button>
+              <button row-add is="coral-button" type="button" icon="add" iconSize="XS" variant="quiet"></button>
             </td>
           </tr>
         </tbody>
@@ -988,37 +990,41 @@
         window.addEventListener('load', function() {
 
           // Additive table example
-          Coral.events.on('click', 'tr[is="coral-table-row"] [coral-row-remove]', function() {
-            this.closest('tr[is="coral-table-row"]').remove();
+          document.addEventListener('click', function(event) {
+            if (event.target.closest('[row-remove]')) {
+              event.target.closest('tr[is="coral-table-row"]').remove();
+            }
           });
 
-          Coral.events.on('click', 'tr[is="coral-table-row"] [coral-row-add]', function() {
-            var row = this.closest('tr[is="coral-table-row"]');
-            var rowClone = row.cloneNode(true);
-            var table = row.closest('table[is="coral-table"]');
+          document.addEventListener('click', function(event) {
+            if (event.target.closest('[row-add]')) {
+              var row = event.target.closest('tr[is="coral-table-row"]');
+              var rowClone = row.cloneNode(true);
+              var table = row.closest('table[is="coral-table"]');
 
-            // Copy user input to cell content
-            row.items.getAll().forEach(function(cell) {
-              var textfield = cell.querySelector('input');
-              if (textfield) {
-                cell.content.textContent = textfield.value;
+              // Copy user input to cell content
+              row.items.getAll().forEach(function(cell) {
+                var textfield = cell.querySelector('input');
+                if (textfield) {
+                  cell.content.textContent = textfield.value;
+                }
+                cell.classList.remove('u-coral-nopadding');
+              });
+
+              // Change button
+              var button = row.querySelector('[row-add]');
+              if (button) {
+                button.icon = 'close';
+                button.removeAttribute('row-add');
+                button.setAttribute('row-remove', '');
               }
-              cell.classList.remove('u-coral-nopadding');
-            });
 
-            // Change button
-            var button = row.querySelector('[coral-row-add]');
-            if (button) {
-              button.icon = 'close';
-              button.removeAttribute('coral-row-add');
-              button.setAttribute('coral-row-remove', '');
+              // Append the clone
+              Array.prototype.forEach.call(rowClone.querySelectorAll('input'), function(textfield) {
+                textfield.value = '';
+              });
+              table.items.add(rowClone);
             }
-
-            // Append the clone
-            Array.prototype.forEach.call(rowClone.querySelectorAll('input'), function(textfield) {
-              textfield.value = '';
-            });
-            table.items.add(rowClone);
           });
         });
       </script>
