@@ -55,7 +55,7 @@ for (const key in Icon.size) {
  @property {String} QUIET
  A quiet button that indicates that the button's action is the primary action.
  @property {String} MINIMAL
- A quiet button that indicates that the button's action is the secondary action.
+ A quiet minimalistic button.
  @property {String} WARNING
  A button that indicates that the button's action is dangerous.
  @property {String} DEFAULT
