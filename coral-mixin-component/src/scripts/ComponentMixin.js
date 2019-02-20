@@ -797,10 +797,10 @@ const ComponentMixin = (superClass) => class extends superClass {
   /** @ignore */
   // eslint-disable-next-line no-unused-vars
   attributeChangedCallback(name, oldValue, value) {
-    if (!this._reflectedAttribute) {
+    const self = this;
+    if (!self._reflectedAttribute) {
       // Use the attribute/property mapping
-      /** @ignore */
-      this[this._attributes[name] || name] = value;
+      self[self._attributes[name] || name] = value;
     }
   }
   
