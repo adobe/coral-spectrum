@@ -24,9 +24,18 @@
   display: inline-block;
 
   // @compat
-  > .coral-DecoratedTextfield-button {
+  > .coral-DecoratedTextfield-button._coral-Button {
     margin-right: 0;
     min-width: 0;
+
+    &:hover {
+      background-color: transparent !important;
+    }
+  }
+
+  // @compat
+  > .coral-DecoratedTextfield-input {
+    padding-right: 32px;
   }
 }
 
