@@ -16,11 +16,6 @@ describe('List', function() {
     it('should support creation from markup', function() {
       expect(helpers.build('<coral-anchorlist>') instanceof AnchorList).to.equal(true);
     });
-  
-    it('should support co-existing anchor/button/list items', function() {
-      const el = helpers.build(window.__html__['List.mixed.html']);
-      expect(el.items.length).to.equal(3);
-    });
     
     helpers.cloneComponent(
       'should be possible via cloneNode using markup',
@@ -29,8 +24,27 @@ describe('List', function() {
   });
   
   describe('API', function() {
-    describe('#interaction', function() {});
-    
+    describe('#items', function() {
+      it('should support co-existing anchor/button/list items', function() {
+        const el = new List();
+        el.items.add(new List.Item());
+        el.items.add(new ButtonList.Item());
+        el.items.add(new AnchorList.Item());
+        expect(el.items.length).to.equal(3);
+      });
+    });
+  });
+  
+  describe('Markup', function() {
+    describe('#items', function() {
+      it('should support co-existing anchor/button/list items', function() {
+        const el = helpers.build(window.__html__['List.mixed.html']);
+        expect(el.items.length).to.equal(3);
+      });
+    });
+  });
+  
+  describe('Accessibility', function() {
     describe('#focus', function() {
       it('should focus on the first selectable element, thus ignoring the hidden elements', function() {
         const el = helpers.build(window.__html__['List.hidden.html']);

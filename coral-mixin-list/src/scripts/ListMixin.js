@@ -68,7 +68,7 @@ const ListMixin = (superClass) => class extends superClass {
       this._items = new SelectableCollection({
         itemTagName: this._itemTagName,
         itemBaseTagName: this._itemBaseTagName,
-        itemSelector: '[coral-list-item]',
+        itemSelector: 'coral-list-item, button[is="coral-buttonlist-item"], a[is="coral-anchorlist-item"]',
         host: this
       });
     }
