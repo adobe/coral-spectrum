@@ -1853,6 +1853,28 @@ describe('Select', function() {
       });
     });
 
+    describe('Accessibility', function() {
+      it('button should communicate expanded state', function(done) {
+        const el = helpers.build(window.__html__['Select.base.html']);
+        el.on('coral-select:_overlayopen', function() {
+          // selects the 2nd item in the list
+          expect(el._elements.button.getAttribute('aria-expanded')).to.equal('true');
+
+          // closes the overlay
+           el._elements.button.click();
+        });
+        
+        el.on('coral-select:_overlayclose', function() {
+          expect(el._elements.button.getAttribute('aria-expanded')).to.equal('false');
+          
+          done();
+        });
+  
+        // opens the overlay
+        el._elements.button.click();
+      });
+    });
+
     it('should remove selected items using the taglist when multiple=true', function() {
       const el = helpers.build(window.__html__['Select.multiple.selected.html']);
       expect(el.multiple).to.equal(true);

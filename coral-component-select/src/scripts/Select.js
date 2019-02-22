@@ -635,6 +635,9 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       // if the default is prevented, we should the loading indicator
       this._elements.list.loading = event.defaultPrevented;
     }
+
+    // communicate expanded state to assistive technology
+    this._elements.button.setAttribute('aria-expanded', true);
   }
   
   /** @private */
@@ -645,6 +648,9 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   
       this.trigger('coral-select:hideitems');
     }
+
+    // communicate collapsed state to assistive technology
+    this._elements.button.setAttribute('aria-expanded', false);
   }
   
   /** @ignore */

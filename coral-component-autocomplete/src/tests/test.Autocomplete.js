@@ -237,6 +237,9 @@ describe('Autocomplete', function() {
       el.showSuggestions();
 
       helpers.next(function() {
+        expect(el._elements.input.getAttribute('aria-expanded')).to.equal('true');
+        expect(el._elements.trigger.getAttribute('aria-expanded')).to.equal('true');
+
         expect(el._elements.overlay.open).to.equal(true, 'with no items, selectList should be open');
 
         expect(el._elements.selectList.items.length).to.equal(1);
@@ -262,12 +265,18 @@ describe('Autocomplete', function() {
 
         // Wait for mutation observers to pick up items
         helpers.next(function() {
+          expect(el._elements.input.getAttribute('aria-expanded')).to.equal('false');
+          expect(el._elements.trigger.getAttribute('aria-expanded')).to.equal('false');
+
           expect(el._elements.selectList.items.length).to.equal(0, 'there should be no items in the selectList before private _showSuggestions method is called');
 
           // show suggestions programatically
           el.showSuggestions();
 
           helpers.next(function() {
+            expect(el._elements.input.getAttribute('aria-expanded')).to.equal('true');
+            expect(el._elements.trigger.getAttribute('aria-expanded')).to.equal('true');
+
             expect(el._elements.overlay.open).to.equal(true, 'overlay should open when items are available in selectList');
 
             expect(el._elements.selectList.items.length).to.equal(2, 'selectList should contain items');
@@ -279,6 +288,9 @@ describe('Autocomplete', function() {
             el._elements.selectList.items.getAll()[1].trigger('mousedown');
 
             helpers.next(function() {
+              expect(el._elements.input.getAttribute('aria-expanded')).to.equal('false');
+              expect(el._elements.trigger.getAttribute('aria-expanded')).to.equal('false');
+
               expect(el._elements.tagList.items.length).to.equal(2, 'tagList should contain  selected items');
 
               // show suggestions programatically
@@ -301,6 +313,9 @@ describe('Autocomplete', function() {
               el.showSuggestions();
 
               helpers.next(function() {
+                expect(el._elements.input.getAttribute('aria-expanded')).to.equal('true');
+                expect(el._elements.trigger.getAttribute('aria-expanded')).to.equal('true');
+
                 expect(el._elements.overlay.open).to.equal(true, 'overlay should be open when "remote" selections are loading');
 
                 expect(el._elements.selectList.items.length).to.equal(1, 'selectList should contain item added remotely');

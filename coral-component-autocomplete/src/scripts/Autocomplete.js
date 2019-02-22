@@ -1817,7 +1817,8 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       this._elements.overlay.reposition();
     });
     
-    this.setAttribute('aria-expanded', 'true');
+    this._elements.input.setAttribute('aria-expanded', 'true');
+    this._elements.trigger.setAttribute('aria-expanded', 'true');
   }
   
   /**
@@ -1826,7 +1827,8 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   hideSuggestions() {
     this._elements.overlay.open = false;
     
-    this.setAttribute('aria-expanded', 'false');
+    this._elements.input.setAttribute('aria-expanded', 'false');
+    this._elements.trigger.setAttribute('aria-expanded', 'false');
     this._elements.input.removeAttribute('aria-activedescendant');
     
     // Don't let the suggestions show
@@ -1886,10 +1888,12 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._elements.input.setAttribute('role', 'combobox');
     this._elements.input.setAttribute('aria-autocomplete', 'list');
     this._elements.input.setAttribute('aria-haspopup', 'true');
+    this._elements.input.setAttribute('aria-expanded', 'false');
     this._elements.input.setAttribute('aria-controls', this._elements.selectList.id);
   
     // Trigger button attributes per ARIA Autocomplete
     this._elements.trigger.setAttribute('aria-haspopup', 'true');
+    this._elements.trigger.setAttribute('aria-expanded', 'false');
     this._elements.trigger.setAttribute('aria-controls', this._elements.selectList.id);
   
     // Default reflected attributes

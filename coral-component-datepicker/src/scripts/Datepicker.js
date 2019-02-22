@@ -548,6 +548,7 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       // Hide pop-over and remove related attributes:
       this._elements.overlay.hidden = true;
       this.removeAttribute('aria-haspopup');
+      this.removeAttribute('aria-expanded');
       this.removeAttribute('aria-owns');
     }
     else {
@@ -558,6 +559,7 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       // Show pop-over and add related attributes:
       this._elements.overlay.hidden = false;
       this.setAttribute('aria-haspopup', 'true');
+      this.setAttribute('aria-expanded', 'true');
       this.setAttribute('aria-owns', this._elements.overlay.id);
     }
   }
@@ -566,6 +568,7 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   _onPopoverBeforeOpen() {
     this._elements.calendar._validateCalendar();
     this._renderCalendar();
+    this.setAttribute('aria-expanded', true);
   }
   
   /**
@@ -582,10 +585,11 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       else {
         this._elements.calendar.focus();
       }
-  
+      this.setAttribute('aria-expanded', true);
       this._trackEvent('open', 'coral-datepicker', event);
     }
     else {
+      this.setAttribute('aria-expanded', false);
       this._trackEvent('close', 'coral-datepicker', event);
     }
   }
