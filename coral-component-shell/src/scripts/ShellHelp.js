@@ -91,7 +91,9 @@ class ShellHelp extends ComponentMixin(HTMLElement) {
   /** @private */
   _moveItems() {
     this.setAttribute('id', this.id || commons.getUID());
-    Array.prototype.forEach.call(this.querySelectorAll(`#${this.id} > a[is="coral-shell-help-item"]`), (item) => {
+    
+    const selector = `#${this.id} > a[is="coral-shell-help-item"], coral-shell-help-separator`;
+    Array.prototype.forEach.call(this.querySelectorAll(selector), (item) => {
       this._elements.items.appendChild(item);
     });
   }

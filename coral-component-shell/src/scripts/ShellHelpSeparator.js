@@ -1,7 +1,7 @@
 /*
  * ADOBE CONFIDENTIAL
  *
- * Copyright 2017 Adobe
+ * Copyright 2019 Adobe
  * All Rights Reserved.
  *
  * NOTICE:  All information contained herein is, and remains
@@ -16,14 +16,11 @@
  */
 
 /**
- @class Coral.Shell.Solutions.Header
- @classdesc Shell's solution sub-cloud name
- @htmltag coral-shell-solutions-header
+ @class Coral.Shell.Help.Separator
+ @classdesc Shell's help separator
+ @htmltag coral-shell-help-separator
  @return {HTMLElement}
  
  @deprecated
  */
-export default () => {
-  console.warn('Coral.Shell.Solutions.Header: coral-shell-solutions-header is deprecated.');
-  return document.createElement('coral-shell-solutions-header');
-};
+export default () => document.createElement('coral-shell-help-separator');

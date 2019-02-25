@@ -23,7 +23,6 @@ $shell-solutionswitcher-icon-container-height = 48px;
 $shell-solutionswitcher-secondary-iconsize = 24px;
 $shell-solutions-border = 2px solid
 $shell-solutions-border-color = rgba(45, 45, 45, 1)
-$shell-solutions-header-text-color = rgb(180, 180, 180);
 $shell-solution-linked-text-color = rgba(226,226,226, 0.8);
 $shell-solution-text-color = rgb(133, 133, 133);
 $shell-solution-text-color-hover = white;
@@ -31,14 +30,14 @@ $shell-solution-icon-color = rgba(255, 255, 255, .45);
 $shell-solution-secondary-icon-color = rgba(255, 255, 255, .60);
 
 ._coral-Shell-solutionSwitcher {
-  position: relative;
   display: flex;
   padding: 48px 5%;
-  margin: auto;
   background: $shell-solutionswitcher-background-color;
+
   @media (max-width: 900px) {
     padding: 30px;
   }
+
   @media (max-width: 550px) {
     padding: 30px;
     flex-direction: column;
@@ -46,42 +45,35 @@ $shell-solution-secondary-icon-color = rgba(255, 255, 255, .60);
 }
 
 ._coral-Shell-solutions-container {
-  width: 100%;
+  width: 80%;
+  padding-bottom: 40px;
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
+
   @media (max-width: 900px) {
     flex-wrap: wrap;
   }
+
   @media (max-width: 550px) {
     flex-wrap: wrap;
   }
-  justify-content: space-around;
 }
 
 ._coral-Shell-solutions {
-  padding-right: 25px;
-  width: inherit;
-  display: flex;
   flex-direction: column;
-  padding-bottom: 40px;
-}
 
-coral-shell-solutions-header {
-  text-transform: uppercase;
-  padding-bottom: 10px;
-  border-bottom: $shell-solutions-border $shell-solutions-border-color;
-  text-decoration: none;
-  color: $shell-solutions-header-text-color;
-  font-size: 11px;
-  font-weight: bold;
+  @media (min-width: 900px) {
+    width: 75%;
+    column-count: 3;
+  }
 }
 
 ._coral-Shell-solution {
-  display: flex;
+  display: inline-flex;
   height: $shell-solutionswitcher-icon-container-height;
   align-items: center;
   padding: 16px 0;
-  min-width: 120px;
 
   text-decoration: none;
 
@@ -132,21 +124,17 @@ coral-shell-solution-label {
 
 // Secondary menu styling
 ._coral-Shell-solutions--secondary {
-  @media (min-width: 900px) {
-    width: 25%;
-  }
-  @media (max-width: 900px) {
-    width: 33%;
-  }
+  display: flex;
+  vertical-align: top;
+  padding-right: 0;
+  width: 20%;
+
   @media (max-width: 550px) {
     width: 100%;
   }
-  vertical-align: top;
-  padding-right: 0;
-  whitespace: nowrap;
 
-  ._coral-Shell-solution {
-    display: block;
+  ._coral-Shell-solution:not(:first-of-type) {
+    display: flex;
     height: auto;
     width: auto;
     padding: 0;
@@ -157,20 +145,37 @@ coral-shell-solution-label {
       ._coral-Shell-solution-icon {
         transform: scale(1);
       }
+
       coral-shell-solution-label {
         color: $shell-solution-text-color-hover;
       }
     }
+
+    coral-shell-solution-label {
+      margin-left: 0;
+      display: inline-block;
+      font-size: 13px;
+      padding: 16px 0;
+    }
+
+    ._coral-Shell-solution-icon {
+      display: none;
+    }
+  }
+}
+
+._coral-Shell-solutions:first-of-type {
+  column-count: 1;
+
+  @media (min-width: 900px) {
+    width: 25%;
   }
 
-  ._coral-Shell-solution-icon {
-    display: none;
+  @media (max-width: 900px) {
+    width: 100%;
   }
+}
 
-  coral-shell-solution-label {
-    margin-left: 0;
-    display: inline-block;
-    font-size: 13px;
-    padding: 16px 0;
-  }
+coral-shell-solutions-header {
+  display: none;
 }

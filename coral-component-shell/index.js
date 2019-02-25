@@ -22,6 +22,7 @@ import ShellHomeAnchorLabel from './src/scripts/ShellHomeAnchorLabel';
 
 import ShellHelp from './src/scripts/ShellHelp';
 import ShellHelpItem from './src/scripts/ShellHelpItem';
+import ShellHelpSeparator from './src/scripts/ShellHelpSeparator';
 
 import ShellMenu from './src/scripts/ShellMenu';
 import ShellMenuBar from './src/scripts/ShellMenuBar';
@@ -73,6 +74,7 @@ Shell.HomeAnchor = ShellHomeAnchor;
 Shell.HomeAnchor.Label = ShellHomeAnchorLabel;
 Shell.Help = ShellHelp;
 Shell.Help.Item = ShellHelpItem;
+Shell.Help.Separator = ShellHelpSeparator;
 Shell.Menu = ShellMenu;
 Shell.MenuBar = ShellMenuBar;
 Shell.MenuBar.Item = ShellMenuBarItem;

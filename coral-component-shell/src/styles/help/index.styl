@@ -15,11 +15,12 @@
  * from Adobe.
  */
 
-$shell-help-width = 250px;
+$shell-help-width = 220px;
 
 $shell-help-loading-height = 300px
 
 $shell-help-background = white;
+$shell-help-separator-color = rgba(0, 0, 0, 0.05);
 
 $shell-loading-middle = 48%; // Better visual centering
 $shell-loading-spacing = 16px;
@@ -107,4 +108,20 @@ $shell-loading-spacing = 16px;
   padding-top: ($shell-loading-spacing / 2);
 
   text-align: center;
+}
+
+coral-shell-help-separator {
+  display: block;
+  position: relative;
+  height: 2px
+  background-color: $shell-help-background;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    height: 100%;
+    background-color: $shell-help-separator-color;
+  }
 }
