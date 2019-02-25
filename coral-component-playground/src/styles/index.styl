@@ -1,8 +1,29 @@
-
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2017 Adobe
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe.
+ */
 
 ._coral-Playground {
   width: 100%;
   height: 100%;
+
+  textarea {
+    position: fixed;
+    left: -999px;
+    opacity: 0;
+  }
 
   &._coral-Playground--horizontal {
     ._coral-Playground-editor {
@@ -63,6 +84,10 @@
 
   button[icon="separator"][value="vertical"] svg {
     transform: rotate(90deg);
+  }
+
+  ._coral-Playground-settings-button + ._coral-Playground-settings-button {
+    margin-left: 0;
   }
 }
 

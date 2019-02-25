@@ -21,18 +21,15 @@
       '  <link rel="stylesheet" href="'+ link.href +'"/>\n' +
       '  <script src="'+ script.src +'"><\/script>\n' +
       '  <script>window.addEventListener("message", function(e) {document.head.insertAdjacentHTML("beforeend", e.data)});<\/script>\n' +
-      '  <!-- Load other libraries/frameworks e.g. via a CDN -->\n' +
       '</head>\n' +
       '<body class="coral--light">\n' +
       '  <button is="coral-button">Button</button>\n' +
-      '  <!-- Share your code by running it first then copy paste the URL -->\n' +
       '</body>\n' +
       '</html>\n';
     config.livereload = true;
   }
 
   var playground = new Coral.Playground(config);
-  var loaded = false;
 
   playground.addEventListener('coral-playground:coderun', function() {
     location.hash = playground.share();

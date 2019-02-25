@@ -96,6 +96,7 @@ class Playground extends ComponentMixin(HTMLElement) {
   
     // Events
     this._delegateEvents({
+      'click [handle="share"]': '_onShareClick',
       'click [handle="run"]': '_onRunClick',
       'change [handle="livereload"]': '_onLiveReloadChange',
       'change [handle="screen"]': '_onScreenChange'
@@ -196,6 +197,17 @@ class Playground extends ComponentMixin(HTMLElement) {
   
   _onRunClick() {
     this._debounceTrigger('coral-playground:coderun');
+  }
+  
+  _onShareClick() {
+    this._elements.copy.value = location.href;
+    this._elements.copy.select();
+    document.execCommand('copy');
+  
+    this._elements.sharetip.open = true;
+    setTimeout(() => {
+      this._elements.sharetip.open = false;
+    }, 1000);
   }
   
   _onLiveReloadChange(event) {

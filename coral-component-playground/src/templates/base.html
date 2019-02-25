@@ -1,11 +1,14 @@
 <div handle="wrapper">
+  <textarea handle="copy"></textarea>
   <div handle="preview" class="_coral-Playground-preview">
     <coral-wait hidden class="_coral-Playground-loading" handle="loading" size="L" variant="dots"></coral-wait>
     <iframe sandbox="allow-same-origin allow-scripts allow-modals" handle="frame" class="_coral-Playground-preview-frame"></iframe>
   </div>
   <div class="_coral-Playground-settings">
-    <button handle="run" type="button" is="coral-button" icon="play" variant="quiet"></button>
-    <button class="_coral-Playground-settings-action" variant="quiet" handle="gear" type="button" is="coral-button" role="combobox" aria-expanded="false" aria-haspopup="true"
+    <button handle="run" class="_coral-Playground-settings-button" type="button" is="coral-button" icon="play" variant="minimal"></button>
+    <button handle="share" class="_coral-Playground-settings-button" type="button" is="coral-button" icon="share" variant="minimal"></button>
+    <coral-tooltip handle="sharetip" placement="left" interaction="off" target="_prev">URL copied to your clipboard</coral-tooltip>
+    <button class="_coral-Playground-settings-button _coral-Playground-settings-action" variant="minimal" handle="gear" type="button" is="coral-button" role="combobox" aria-expanded="false" aria-haspopup="true"
             icon="gear"></button>
     <coral-popover handle="overlay" class="_coral-Playground-overlay" trapfocus="on" focusonshow="on" target="._coral-Playground-settings-action"
                    role="presentation" offset="-1" lengthoffset="-100%" breadthoffset="100%">
