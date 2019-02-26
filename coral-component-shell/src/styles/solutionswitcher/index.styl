@@ -87,6 +87,12 @@ $shell-solution-secondary-icon-color = rgba(255, 255, 255, .60);
   }
 }
 
+._coral-Shell-solution:not([icon]) {
+  ._coral-Shell-solution-icon {
+    display: none;
+  }
+}
+
 ._coral-Shell-solution:hover {
   color: $shell-solution-text-color-hover;
 }
@@ -156,10 +162,6 @@ coral-shell-solution-label {
       display: inline-block;
       font-size: 13px;
       padding: 16px 0;
-    }
-
-    ._coral-Shell-solution-icon {
-      display: none;
     }
   }
 }
