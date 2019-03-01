@@ -15,7 +15,6 @@
  * from Adobe.
  */
 
-import Promise from 'promise-polyfill';
 import ResizeObserver from 'resize-observer-polyfill/dist/ResizeObserver';
 
 // Used for unique IDs

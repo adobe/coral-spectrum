@@ -18,13 +18,13 @@
   },
   "dependencies": {
     "@adobe/focus-ring-polyfill": "0.1.5",
-    "@adobe/vent": "1.0.0",
     "@adobe/spectrum-css": "2.7.2",
+    "@adobe/vent": "1.0.0",
     "@spectrum/spectrum-iconstore": "3.3.1",
+    "core-js": "2.6.5",
     "document-register-element": "1.13.1",
     "normalize.css": "8.0.1",
     "popper.js": "1.14.0",
-    "promise-polyfill": "8.1.0",
     "resize-observer-polyfill": "1.5.1"
   },
   "devDependencies": {
