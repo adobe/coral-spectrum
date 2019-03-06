@@ -27,9 +27,9 @@ class AccordionItemContent extends HTMLElement {
   /** @ignore */
   connectedCallback() {
     this.classList.add(CLASSNAME);
-    
-    // a11y
-    this.setAttribute('role', 'tabpanel');
+  
+    // WAI-ARIA 1.1
+    this.setAttribute('role', 'region');
   }
 }
 

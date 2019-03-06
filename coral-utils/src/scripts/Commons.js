@@ -51,7 +51,6 @@ const CORAL_COMPONENTS = [
   'coral-accordion',
   'coral-accordion-item',
   'coral-accordion-item-content',
-  'coral-accordion-item-label',
   'coral-actionbar',
   'coral-actionbar-container',
   'coral-actionbar-item',

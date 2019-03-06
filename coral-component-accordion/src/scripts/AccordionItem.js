@@ -17,6 +17,7 @@
 
 import {ComponentMixin} from '../../../coral-mixin-component';
 import {transform, commons} from '../../../coral-utils';
+import base from '../templates/base';
 import {Icon} from '../../../coral-component-icon';
 
 const CLASSNAME = '_coral-Accordion-item';
@@ -39,6 +40,8 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
       label: this.querySelector('coral-accordion-item-label') || document.createElement('coral-accordion-item-label'),
       content: this.querySelector('coral-accordion-item-content') || document.createElement('coral-accordion-item-content')
     };
+  
+    base.call(this._elements, {Icon});
   }
   
   /**
@@ -55,9 +58,9 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
       handle: 'label',
       tagName: 'coral-accordion-item-label',
       insert: function(label) {
-        this._setAria(label, this._elements.content);
+        this._setAria(this._elements.button, this._elements.content);
         
-        this.insertBefore(label, this.firstChild);
+        this._elements.button.appendChild(label);
       }
     });
   }
@@ -76,7 +79,7 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
       handle: 'content',
       tagName: 'coral-accordion-item-content',
       insert: function(content) {
-        this._setAria(this._elements.label, content);
+        this._setAria(this._elements.button, content);
         
         this.appendChild(content);
       }
@@ -103,9 +106,7 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
     const scrollHeight = this._elements.content.scrollHeight;
     
     this.classList.toggle('is-open', this._selected);
-    this._elements.label.setAttribute('aria-selected', this._selected);
-    this._elements.label.setAttribute('aria-expanded', this._selected);
-    this._elements.content.setAttribute('aria-hidden', !this._selected);
+    this._elements.button.setAttribute('aria-expanded', this._selected);
     
     if (!this._selected) {
       this._elements.content.style.height = `${scrollHeight}px`;
@@ -141,8 +142,7 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
     this._reflectAttribute('disabled', this._disabled);
   
     this.classList.toggle('is-disabled', this._disabled);
-    this.removeAttribute('aria-disabled');
-    this._elements.label.setAttribute('aria-disabled', this._disabled);
+    this._elements.button[this._disabled ? 'setAttribute' : 'removeAttribute']('disabled', '');
   
     this.selected = this.selected;
   }
@@ -155,34 +155,19 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
     this.__isTabTarget = value;
     
     if (this.disabled) {
-      this._elements.label.removeAttribute('tabindex');
+      this._elements.button.removeAttribute('tabindex');
     }
     else {
-      this._elements.label.setAttribute('tabindex', this.__isTabTarget ? '0' : '-1');
+      this._elements.button.setAttribute('tabindex', this.__isTabTarget ? '0' : '-1');
     }
   }
   
-  _insertTemplate() {
-    const iconId = 'spectrum-css-icon-ChevronRightMedium';
-    const classes = ['_coral-Accordion-itemIndicator', '_coral-UIIcon-ChevronRightMedium'];
-    
-    if (this.label) {
-      this.label.insertAdjacentHTML('afterend', Icon._renderSVG(iconId, classes));
-    }
-    else if (this.content) {
-      this.content.insertAdjacentHTML('beforebegin', Icon._renderSVG(iconId, classes));
-    }
-    else {
-      this.innerHTML = Icon._renderSVG(iconId, classes);
-    }
-  }
-  
-  _setAria(label, content) {
-    label.id = label.id || commons.getUID();
+  _setAria(button, content) {
+    button.id = button.id || commons.getUID();
     content.id = content.id || commons.getUID();
   
-    label.setAttribute('aria-controls', content.id);
-    content.setAttribute('aria-labelledby', label.id);
+    button.setAttribute('aria-controls', content.id);
+    content.setAttribute('aria-labelledby', button.id);
   }
   
   /**
@@ -211,7 +196,7 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
     this.setAttribute('role', 'presentation');
   
     // Support cloneNode
-    const template = this.querySelector('._coral-Accordion-itemIndicator');
+    const template = this.querySelector('._coral-Accordion-itemHeading');
     if (template) {
       template.remove();
     }
@@ -222,13 +207,12 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
         this._elements.content.appendChild(this.firstChild);
       }
     }
+    
+    this.appendChild(this._elements.heading);
   
     // Assign the content zones, moving them into place in the process
     this.label = this._elements.label;
     this.content = this._elements.content;
-  
-    // Insert template once content zones are placed
-    this._insertTemplate();
     
     // Defaults
     this.selected = this.selected;

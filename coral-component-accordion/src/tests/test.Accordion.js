@@ -4,20 +4,15 @@ import {Accordion} from '../../../coral-component-accordion';
 describe('Accordion', function() {
   // Assert whether an item is properly active or inactive.
   var assertActiveness = function(item, isSelected) {
-    var content = item._elements.content;
-    var header = item._elements.label;
+    var button = item._elements.button;
 
     if (isSelected) {
       expect(item.classList.contains('is-open')).to.be.true;
-      expect(header.getAttribute('aria-selected')).to.equal('true');
-      expect(header.getAttribute('aria-expanded')).to.equal('true');
-      expect(content.getAttribute('aria-hidden')).to.equal('false');
+      expect(button.getAttribute('aria-expanded')).to.equal('true');
     }
     else {
       expect(item.classList.contains('is-open')).to.be.false;
-      expect(header.getAttribute('aria-expanded')).to.equal('false');
-      expect(header.getAttribute('aria-selected')).to.equal('false');
-      expect(content.getAttribute('aria-hidden')).to.equal('true');
+      expect(button.getAttribute('aria-expanded')).to.equal('false');
     }
   };
 
@@ -249,14 +244,12 @@ describe('Accordion', function() {
         const el = helpers.build(window.__html__['Accordion.label.interaction.html']);
         var secondItem = el.items.getAll()[1];
         var forthItem = el.items.getAll()[3];
-        forthItem._elements.label.click();
   
-        assertActiveness(forthItem, true);
-  
-        var button = secondItem.querySelector('button');
-        expect(button).to.exist;
-  
+        var button = secondItem.querySelector('[coral-interactive]');
         button.click();
+        assertActiveness(forthItem, false);
+  
+        forthItem._elements.button.click();
         assertActiveness(forthItem, true);
       });
 
@@ -416,22 +409,19 @@ describe('Accordion', function() {
       expect(firstItem).equal(el.selectedItem);
     });
   });
-
-  describe('Implementation Details', function() {
-    
-    describe('accessibility', function() {
-      it('should have role=tablist', function() {
-        const el = helpers.build(window.__html__['Accordion.base.html']);
-        expect(el.getAttribute('role')).to.equal('tablist');
-        expect(el.querySelectorAll('[role=presentation]').length).equal(3);
-        expect(el.querySelectorAll('[role=tabpanel]').length).equal(3);
-
-        expect(el.querySelector('[role=tab]').getAttribute('aria-controls'))
-          .equal(el.querySelector('[role=tabpanel]').getAttribute('id'));
-
-        expect(el.querySelector('[role=tabpanel]').getAttribute('aria-labelledby'))
-          .equal(el.querySelector('[role=tab]').getAttribute('id'));
-      });
+  
+  describe('Accessibility', function() {
+    it('should comply to WAI-ARIA 1.1', function() {
+      const el = helpers.build(window.__html__['Accordion.base.html']);
+      expect(el.getAttribute('role')).to.equal('region');
+      expect(el.querySelectorAll('coral-accordion-item[role=presentation]').length).equal(3);
+      expect(el.querySelectorAll('coral-accordion-item-content[role=region]').length).equal(3);
+      
+      expect(el.querySelector('[aria-expanded]').getAttribute('aria-controls'))
+        .equal(el.querySelector('coral-accordion-item-content[role=region]').getAttribute('id'));
+      
+      expect(el.querySelector('coral-accordion-item-content[role=region]').getAttribute('aria-labelledby'))
+        .equal(el.querySelector('[aria-expanded]').getAttribute('id'));
     });
   });
 });

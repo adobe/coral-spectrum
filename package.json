@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@adobe/focus-ring-polyfill": "0.1.5",
-    "@adobe/spectrum-css": "2.7.2",
+    "@adobe/spectrum-css": "2.8.0",
     "@adobe/vent": "1.0.0",
     "@spectrum/spectrum-iconstore": "3.6.0",
     "core-js": "2.6.5",

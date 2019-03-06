@@ -12,7 +12,6 @@ import AccordionItemContent from './src/scripts/AccordionItemContent';
 // Expose component on the Coral namespace
 window.customElements.define('coral-accordion', Accordion);
 window.customElements.define('coral-accordion-item', AccordionItem);
-window.customElements.define('coral-accordion-item-label', AccordionItemLabel);
 window.customElements.define('coral-accordion-item-content', AccordionItemContent);
 
 Accordion.Item = AccordionItem;

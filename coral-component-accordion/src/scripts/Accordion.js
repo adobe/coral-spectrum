@@ -60,19 +60,19 @@ class Accordion extends ComponentMixin(HTMLElement) {
     
     // Attach events
     this._delegateEvents({
-      'click coral-accordion-item:not([disabled]) coral-accordion-item-label': '_onItemClick',
+      'click coral-accordion-item:not([disabled]) ._coral-Accordion-itemHeader': '_onItemClick',
   
-      'key:space coral-accordion-item-label': '_onToggleItemKey',
-      'key:return coral-accordion-item-label': '_onToggleItemKey',
-      'key:pageup coral-accordion-item-label': '_focusPreviousItem',
-      'key:left coral-accordion-item-label': '_focusPreviousItem',
-      'key:up coral-accordion-item-label': '_focusPreviousItem',
-      'key:pagedown coral-accordion-item-label': '_focusNextItem',
-      'key:right coral-accordion-item-label': '_focusNextItem',
-      'key:down coral-accordion-item-label': '_focusNextItem',
-      'key:home coral-accordion-item-label': '_onHomeKey',
-      'key:end coral-accordion-item-label': '_onEndKey',
-      'keydown coral-accordion-item-label': '_onItemContentKeyDown',
+      'key:space ._coral-Accordion-itemHeader': '_onToggleItemKey',
+      'key:return ._coral-Accordion-itemHeader': '_onToggleItemKey',
+      'key:pageup ._coral-Accordion-itemHeader': '_focusPreviousItem',
+      'key:left ._coral-Accordion-itemHeader': '_focusPreviousItem',
+      'key:up ._coral-Accordion-itemHeader': '_focusPreviousItem',
+      'key:pagedown ._coral-Accordion-itemHeader': '_focusNextItem',
+      'key:right ._coral-Accordion-itemHeader': '_focusNextItem',
+      'key:down ._coral-Accordion-itemHeader': '_focusNextItem',
+      'key:home ._coral-Accordion-itemHeader': '_onHomeKey',
+      'key:end ._coral-Accordion-itemHeader': '_onEndKey',
+      'keydown ._coral-Accordion-itemHeader': '_onItemContentKeyDown',
       
       // private
       'coral-accordion-item:_selectedchanged': '_onItemSelectedChanged'
@@ -247,7 +247,7 @@ class Accordion extends ComponentMixin(HTMLElement) {
     event.preventDefault();
     event.stopPropagation();
     
-    this._focusItem(this.items._getPreviousSelectable(event.target.parentNode));
+    this._focusItem(this.items._getPreviousSelectable(event.target.closest('coral-accordion-item')));
   }
   
   /** @private */
@@ -255,7 +255,7 @@ class Accordion extends ComponentMixin(HTMLElement) {
     event.preventDefault();
     event.stopPropagation();
     
-    this._focusItem(this.items._getNextSelectable(event.target.parentNode));
+    this._focusItem(this.items._getNextSelectable(event.target.closest('coral-accordion-item')));
   }
   
   /** @private */
@@ -281,7 +281,7 @@ class Accordion extends ComponentMixin(HTMLElement) {
     event.preventDefault();
     event.stopPropagation();
     
-    const item = event.target.parentNode;
+    const item = event.target.closest('coral-accordion-item');
     this._toggleItemSelection(item);
     this._focusItem(item);
   }
@@ -389,7 +389,7 @@ class Accordion extends ComponentMixin(HTMLElement) {
   /** @private */
   _focusItem(item) {
     if (item) {
-      item.focus();
+      item._elements.button.focus();
     }
     
     this._tabTarget = item;
@@ -416,7 +416,8 @@ class Accordion extends ComponentMixin(HTMLElement) {
     // Default reflected attributes
     if (!this._variant) { this.variant = variant.DEFAULT; }
     
-    this.setAttribute('role', 'tablist');
+    // WAI-ARIA 1.1
+    this.setAttribute('role', 'region');
     this.setAttribute('aria-multiselectable', this.multiple);
     
     // Don't trigger events once connected

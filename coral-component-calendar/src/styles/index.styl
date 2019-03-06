@@ -21,10 +21,16 @@
 @require '@adobe/spectrum-css/dist/components/calendar/multiStops/dark.css';
 @require '@adobe/spectrum-css/dist/components/calendar/multiStops/darkest.css';
 
-// Prevent fast transition overflows
 ._coral-Calendar {
   max-height: 312px;
+  // Prevent fast transition overflows
   overflow: hidden;
+
+  // @spectrum increase specificity
+  ._coral-Calendar-nextMonth,
+  ._coral-Calendar-prevMonth {
+    position: absolute;
+  }
 }
 
 ._coral-DatePicker-calendarSlidingContainer {
