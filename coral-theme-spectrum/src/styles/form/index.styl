@@ -92,7 +92,15 @@ $form-fieldset-line-height = 24px;
   }
 
   .coral-Form-fieldwrapper--singleline {
-    clearfix();
+    &:before,
+    &:after {
+      content: "";
+      display: table;
+    }
+
+    &:after {
+      clear: both;
+    }
 
     .coral-Form-field {
       margin: 0;
@@ -122,7 +130,15 @@ $form-fieldset-line-height = 24px;
     display: block;
     margin: 0 0 $form-aligned-vmargin-max 0;
 
-    clearfix();
+    &:before,
+    &:after {
+      content: "";
+      display: table;
+    }
+
+    &:after {
+      clear: both;
+    }
   }
 
   .coral-Form-fieldwrapper--singleline {
@@ -130,7 +146,15 @@ $form-fieldset-line-height = 24px;
   }
 
   .coral-Form-fieldset {
-    clearfix();
+    &:before,
+    &:after {
+      content: "";
+      display: table;
+    }
+
+    &:after {
+      clear: both;
+    }
   }
 
   .coral-Form-fieldlabel {
@@ -149,6 +173,10 @@ $form-fieldset-line-height = 24px;
     .coral-Form-field {
       margin-top: 0;
       margin-bottom: 0;
+
+      &.coral-RadioGroup {
+        display: block;
+      }
     }
 
     .coral-Form-fieldlabel {
@@ -195,6 +223,6 @@ $form-fieldset-line-height = 24px;
 
   .coral-Form-field._coral-Checkbox,
   .coral-Form-field._coral-Radio {
-    display: flex;
+    float: left;
   }
 }

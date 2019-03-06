@@ -21,9 +21,7 @@
   display: none !important;
 }
 
-
-// Clears the floats using the micro clearfix
-clearfix() {
+.u-coral-clearFix {
   &:before,
   &:after {
     content: "";
@@ -31,12 +29,8 @@ clearfix() {
   }
 
   &:after {
-    clear: both
+    clear: both;
   }
-}
-
-.u-coral-clearFix {
-  clearfix();
 }
 
 // Floats the content to the left
