@@ -179,7 +179,7 @@ class ActionBar extends ComponentMixin(HTMLElement) {
       focusedItem = focusedItem.parentNode;
     }
     
-    const ERROR_MARGIN = 25;
+    const ERROR_MARGIN = 70;
     
     const leftItems = this.primary.items.getAll();
     const rightItems = this.secondary.items.getAll().reverse();
