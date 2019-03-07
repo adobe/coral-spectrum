@@ -22,20 +22,17 @@ import {transform, validate} from '../../../coral-utils';
 
 const CLASSNAME = '_coral-MillerColumns-item';
 
-/**
- The number of milliseconds for which scroll events should be debounced.
- 
- @type {Number}
- @ignore
- */
+// The number of milliseconds for which scroll events should be debounced.
 const SCROLL_DEBOUNCE = 100;
 
-/**
- Height if every item to avoid using offsetHeight during calculations.
- 
- @ignore
- */
+// Height if every item to avoid using offsetHeight during calculations.
 const ITEM_HEIGHT = 40;
+
+// Flag to check if window load was called
+let WINDOW_LOAD = false;
+window.addEventListener('load', () => {
+  WINDOW_LOAD = true;
+});
 
 /**
  @class Coral.ColumnView.Column
@@ -589,11 +586,19 @@ class ColumnViewColumn extends ComponentMixin(HTMLElement) {
     this._oldSelection = this.selectedItems;
     this._oldActiveItem = this.activeItem;
     
-    // instead of being super aggressive on requesting data, we use setTimeout so it is scheduled after all the code
-    // has been executed (macrotask), this way events can be added before
-    window.setTimeout(() => {
-      this._loadFittingAdditionalItems();
-    });
+    if (!WINDOW_LOAD) {
+      // instead of being super aggressive on requesting data, we use window onload so it is scheduled after
+      // all the code has been executed, this way events can be added before
+      window.addEventListener('load', () => {
+        this._loadFittingAdditionalItems();
+      });
+    }
+    else {
+      // macro-task is necessary for the same reasons as listed above
+      setTimeout(() => {
+        this._loadFittingAdditionalItems();
+      });
+    }
   }
 }
 
