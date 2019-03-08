@@ -20,7 +20,7 @@
     "@adobe/focus-ring-polyfill": "0.1.5",
     "@adobe/spectrum-css": "2.8.0",
     "@adobe/vent": "1.0.0",
-    "@spectrum/spectrum-iconstore": "3.6.2",
+    "@spectrum/spectrum-iconstore": "3.6.3",
     "core-js": "2.6.5",
     "document-register-element": "1.13.1",
     "normalize.css": "8.0.1",
