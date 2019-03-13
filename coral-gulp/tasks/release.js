@@ -241,9 +241,8 @@ module.exports = function(gulp) {
       gulp build &&
       gulp karma &&
       gulp examples &&
-      gulp minify &&
-      cd coral-component-playground && gulp build &&
-      cd .. &&
+      gulp minify-css && gulp minify-js &&
+      cd coral-component-playground && gulp build && cd .. &&
       gulp playground &&
       gulp docs &&
       gulp push &&
