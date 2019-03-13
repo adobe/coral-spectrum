@@ -41,6 +41,8 @@ function injectSVG(svgURL, callback) {
       svg.setAttribute('data-url', svgURL);
       
       // Off screen
+      svg.classList.add('_coral-Icon-collection');
+      svg.setAttribute('focusable', 'false');
       svg.setAttribute('aria-hidden', 'true');
       svg.style.position = 'absolute';
       svg.style.left = '-999px';

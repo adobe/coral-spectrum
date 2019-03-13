@@ -20,7 +20,7 @@
       '<head>\n' +
       '  <link rel="stylesheet" href="'+ link.href +'"/>\n' +
       '  <script src="'+ script.src +'"><\/script>\n' +
-      '  <script>window.addEventListener("message", function(e) {document.head.insertAdjacentHTML("beforeend", e.data)});<\/script>\n' +
+      '  <script>window.addEventListener("message", function(e) {document.body.insertAdjacentHTML("beforeend", e.data)});<\/script>\n' +
       '</head>\n' +
       '<body class="coral--light">\n' +
       '  <button is="coral-button">Button</button>\n' +
@@ -43,7 +43,7 @@
 
   playground.addEventListener('coral-playground:load', function() {
     // Workaround to load the icons
-      var icons = document.querySelectorAll('head svg');
+      var icons = document.querySelectorAll('svg._coral-Icon-collection');
       var html = '';
       for (var i = 0; i < icons.length; i++) {
         html += icons[i].outerHTML;
