@@ -37,6 +37,7 @@ class WizardView extends ComponentMixin(HTMLElement) {
     super();
   
     this._delegateEvents({
+      'capture:click coral-steplist[coral-wizardview-steplist] > coral-step': '_onStepClick',
       'coral-steplist:change coral-steplist[coral-wizardview-steplist]': '_onStepListChange',
       'click [coral-wizardview-previous]': '_onPreviousClick',
       'click [coral-wizardview-next]': '_onNextClick'
@@ -45,6 +46,31 @@ class WizardView extends ComponentMixin(HTMLElement) {
     // Init the collection mutation observer
     this.stepLists._startHandlingItems(true);
     this.panelStacks._startHandlingItems(true);
+  
+    // Disable tracking for specific elements that are attached to the component.
+    this._observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        // Sync added nodes
+        for (let i = 0; i < mutation.addedNodes.length; i++) {
+          const addedNode = mutation.addedNodes[i];
+      
+          if (addedNode.setAttribute &&
+            (
+              addedNode.hasAttribute('coral-wizardview-next') ||
+              addedNode.hasAttribute('coral-wizardview-previous') ||
+              addedNode.hasAttribute('coral-wizardview-steplist') ||
+              addedNode.hasAttribute('coral-wizardview-panelstack')
+            )) {
+            addedNode.setAttribute('tracking', 'off');
+          }
+        }
+      });
+    });
+  
+    this._observer.observe(this, {
+      childList: true,
+      subtree: true
+    });
   }
   
   /**
@@ -98,6 +124,10 @@ class WizardView extends ComponentMixin(HTMLElement) {
     this._selectItemByIndex(item, this._getSelectedIndex());
   }
   
+  _onStepClick(event) {
+    this._trackEvent('click', 'coral-wizardview-steplist-step', event, event.matchedTarget);
+  }
+  
   /**
    Handles the next button click.
    
@@ -108,6 +138,10 @@ class WizardView extends ComponentMixin(HTMLElement) {
     event.stopPropagation();
     
     this.next();
+  
+    const stepList = this.stepLists.first();
+    const step = stepList.items.getAll()[this._getSelectedIndex()];
+    this._trackEvent('click', 'coral-wizardview-next', event, step);
   }
   
   /**
@@ -120,6 +154,10 @@ class WizardView extends ComponentMixin(HTMLElement) {
     event.stopPropagation();
     
     this.previous();
+  
+    const stepList = this.stepLists.first();
+    const step = stepList.items.getAll()[this._getSelectedIndex()];
+    this._trackEvent('click', 'coral-wizardview-previous', event, step);
   }
   
   /**
@@ -141,6 +179,8 @@ class WizardView extends ComponentMixin(HTMLElement) {
       selection: event.detail.selection,
       oldSelection: event.detail.oldSelection
     });
+  
+    this._trackEvent('change', 'coral-wizardview', event);
   }
   
   /** @private */
@@ -331,6 +371,13 @@ class WizardView extends ComponentMixin(HTMLElement) {
   
     this._syncStepListSelection(0);
     this._syncPanelStackSelection(0);
+  
+    // Disable tracking for specific elements that are attached to the component.
+    const selector = '[coral-wizardview-next],[coral-wizardview-previous],[coral-wizardview-steplist],[coral-wizardview-panelstack]';
+    const items = this.querySelectorAll(selector);
+    for (let i = 0; i < items.length; i++) {
+      items[i].setAttribute('tracking', 'off');
+    }
   }
   
   /**

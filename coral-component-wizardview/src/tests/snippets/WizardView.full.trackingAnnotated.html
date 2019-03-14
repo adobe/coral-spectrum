@@ -1,0 +1,27 @@
+<coral-wizardview trackingfeature="feature name" trackingelement="element name">
+  <coral-steplist coral-wizardview-steplist>
+    <coral-step>Coral Step 1</coral-step>
+    <coral-step selected>Coral Step 2</coral-step>
+    <coral-step>Coral Step 3</coral-step>
+  </coral-steplist>
+  <coral-panelstack coral-wizardview-panelstack>
+    <coral-panel>Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+    <coral-panel>Lorem ipsum dolor sit amet.</coral-panel>
+    <coral-panel>Sed eget eros sit amet nulla ultricies.</coral-panel>
+    <coral-panel>Fusce nec ante non nibh mollis mollis mollis vitae dui.</coral-panel>
+    <coral-panel>Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+  </coral-panelstack>
+  <coral-panelstack coral-wizardview-panelstack>
+    <coral-panel>
+      <button is="coral-button" variant="primary" coral-wizardview-next>Next</button>
+    </coral-panel>
+    <coral-panel>
+      <button is="coral-button" variant="quiet" coral-wizardview-previous>Back</button>
+      <button is="coral-button" variant="primary" coral-wizardview-next>Next</button>
+    </coral-panel>
+    <coral-panel>
+      <button is="coral-button" variant="quiet" coral-wizardview-previous>Back</button>
+      <button is="coral-button" variant="primary">Done</button>
+    </coral-panel>
+  </coral-panelstack>
+</coral-wizardview>

@@ -2,6 +2,7 @@ import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {WizardView} from '../../../coral-component-wizardview';
 import {Panel, PanelStack} from '../../../coral-component-panelstack';
 import {Step, StepList} from '../../../coral-component-steplist';
+import {tracking} from '../../../coral-utils';
 
 describe('WizardView', function() {
   function testDefaultInstance(el) {
@@ -522,7 +523,7 @@ describe('WizardView', function() {
       selectedIndex = steps.length - 1;
       steps[selectedIndex].setAttribute('selected', '');
 
-      el.panelStacks.getAll().forEach(function(panelStack, index) {
+      el.panelStacks.getAll().forEach(function(panelStack) {
         if (selectedIndex < panelStack.items.length) {
           expect(panelStack.items.getAll().indexOf(panelStack.selectedItem)).to.equal(selectedIndex);
         }
@@ -531,6 +532,118 @@ describe('WizardView', function() {
           expect(panelStack.selectedItem).to.equal(null, 'No panel should be selected');
         }
       });
+    });
+  });
+  
+  describe('Tracking', function() {
+    let trackerFnSpy;
+    let el;
+    
+    beforeEach(function() {
+      el = helpers.build(window.__html__['WizardView.full.trackingAnnotated.html']);
+      trackerFnSpy = sinon.spy();
+      tracking.addListener(trackerFnSpy);
+    });
+    
+    afterEach(function() {
+      tracking.removeListener(trackerFnSpy);
+    });
+    
+    it('should call tracker callback with the expected tracker data when "Next" button is clicked', function() {
+      // finds and clicks the next button
+      el.querySelector('[coral-wizardview-next]').click();
+      expect(trackerFnSpy.callCount).to.equal(2, 'Track callback should have been called twice.');
+
+      var spyCall = trackerFnSpy.getCall(0);
+      var trackData = spyCall.args[0];
+      expect(trackData).to.have.property('targetType', 'coral-wizardview');
+      expect(trackData).to.have.property('targetElement', 'element name');
+      expect(trackData).to.have.property('eventType', 'change');
+      expect(trackData).to.have.property('rootFeature', 'feature name');
+      expect(trackData).to.have.property('rootElement', 'element name');
+      expect(trackData).to.have.property('rootType', 'coral-wizardview');
+
+      spyCall = trackerFnSpy.getCall(1);
+      trackData = spyCall.args[0];
+      expect(trackData).to.have.property('targetType', 'coral-wizardview-next');
+      expect(trackData).to.have.property('targetElement', 'Coral Step 3');
+      expect(trackData).to.have.property('eventType', 'click');
+      expect(trackData).to.have.property('rootFeature', 'feature name');
+      expect(trackData).to.have.property('rootElement', 'element name');
+      expect(trackData).to.have.property('rootType', 'coral-wizardview');
+    });
+    
+    it('should call tracker callback with the expected tracker data when stepping back and forth clicking "Next" and "Previous" buttons', function() {
+      // Go to "Step 3"
+      el.querySelector('[coral-wizardview-next]').click();
+      expect(trackerFnSpy.callCount).to.equal(2, 'Track callback should have been called twice so far.');
+      
+      var spyCall = trackerFnSpy.getCall(0);
+      var trackData = spyCall.args[0];
+      expect(trackData).to.have.property('targetType', 'coral-wizardview');
+      expect(trackData).to.have.property('targetElement', 'element name');
+      expect(trackData).to.have.property('eventType', 'change');
+      
+      spyCall = trackerFnSpy.getCall(1);
+      trackData = spyCall.args[0];
+      expect(trackData).to.have.property('targetType', 'coral-wizardview-next');
+      expect(trackData).to.have.property('targetElement', 'Coral Step 3');
+      expect(trackData).to.have.property('eventType', 'click');
+      
+      // Go back to "Step 2"
+      el.querySelector('[coral-wizardview-previous]').click();
+      expect(trackerFnSpy.callCount).to.equal(4, 'Track callback should have been called four times so far.');
+      
+      spyCall = trackerFnSpy.getCall(2);
+      trackData = spyCall.args[0];
+      expect(trackData).to.have.property('targetType', 'coral-wizardview');
+      expect(trackData).to.have.property('targetElement', 'element name');
+      expect(trackData).to.have.property('eventType', 'change');
+      
+      spyCall = trackerFnSpy.getCall(3);
+      trackData = spyCall.args[0];
+      expect(trackData).to.have.property('targetType', 'coral-wizardview-previous');
+      expect(trackData).to.have.property('targetElement', 'Coral Step 2');
+      expect(trackData).to.have.property('eventType', 'click');
+      
+      // Go back to "Step 1"
+      el.querySelector('[coral-wizardview-previous]').click();
+      expect(trackerFnSpy.callCount).to.equal(6, 'Track callback should have been called six times so far.');
+      
+      spyCall = trackerFnSpy.getCall(4);
+      trackData = spyCall.args[0];
+      expect(trackData).to.have.property('targetType', 'coral-wizardview');
+      expect(trackData).to.have.property('targetElement', 'element name');
+      expect(trackData).to.have.property('eventType', 'change');
+      
+      spyCall = trackerFnSpy.getCall(5);
+      trackData = spyCall.args[0];
+      expect(trackData).to.have.property('targetType', 'coral-wizardview-previous');
+      expect(trackData).to.have.property('targetElement', 'Coral Step 1');
+      expect(trackData).to.have.property('eventType', 'click');
+    });
+    
+    it('should not call tracker callback when clicking on "Next" button and tracking is disabled for both wizard and buttons', function() {
+      el.tracking = el.constructor.tracking.OFF;
+      
+      // Go to "Next" step.
+      el.querySelector('[coral-wizardview-next]').click();
+      expect(trackerFnSpy.callCount).to.equal(0, 'Track callback should not have been called.');
+    });
+    
+    it('should call tracker callback with expected data when clicking on the Step from the StepList', function() {
+      // Go to "Next" step.
+      el.querySelector('coral-step:nth-child(3)').click();
+      expect(trackerFnSpy.callCount).to.equal(1, 'Track callback should have been called once so far.');
+      
+      var spyCall = trackerFnSpy.getCall(0);
+      var trackData = spyCall.args[0];
+      expect(trackData).to.have.property('targetType', 'coral-wizardview-steplist-step');
+      expect(trackData).to.have.property('targetElement', 'Coral Step 3');
+      expect(trackData).to.have.property('eventType', 'click');
+      expect(trackData).to.have.property('rootFeature', 'feature name');
+      expect(trackData).to.have.property('rootElement', 'element name');
+      expect(trackData).to.have.property('rootType', 'coral-wizardview');
     });
   });
 });
