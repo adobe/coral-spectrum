@@ -1805,18 +1805,21 @@ class Table extends ComponentMixin(HTMLTableElement) {
     
     // Defines the head height
     table._resetContainerLayout(head.sticky ? `${head.getBoundingClientRect().height}px` : null);
-    
-    getRows([head]).forEach((row) => {
-      getHeaderCells(row).forEach((headerCell) => {
-        table._toggleStickyHeaderCell(headerCell, head.sticky);
+  
+    // FF: wait next frame before reading and changing header cell layout
+    requestAnimationFrame(() => {
+      getRows([head]).forEach((row) => {
+        getHeaderCells(row).forEach((headerCell) => {
+          table._toggleStickyHeaderCell(headerCell, head.sticky);
+        });
       });
+  
+      // Make sure sticky styling is applied
+      table.classList.toggle(`${CLASSNAME}--sticky`, head.sticky);
+  
+      // Layout sticky head
+      table._resetLayout();
     });
-    
-    // Make sure sticky styling is applied
-    table.classList.toggle(`${CLASSNAME}--sticky`, head.sticky);
-    
-    // Layout sticky head
-    table._resetLayout();
   }
   
   /** @private */

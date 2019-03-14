@@ -66,6 +66,28 @@ describe('Table.Head', function() {
           done();
         }, 100);
       });
+  
+      it('should handle long header cell label with short content without overflowing', function(done) {
+        const el = helpers.build(window.__html__['Table.sticky.labeloverlap.html']);
+        
+        el._wait = 0;
+        // Because of debouncing
+        window.setTimeout(function() {
+          const longLabelHeaderCell = el.querySelector('thead th:nth-child(4)');
+          const labelWidth = longLabelHeaderCell.clientWidth;
+      
+          el._elements.head.sticky = false;
+      
+          window.setTimeout(function() {
+            el._elements.head.sticky = true;
+        
+            window.setTimeout(function() {
+              expect(longLabelHeaderCell.clientWidth).to.equal(labelWidth);
+              done();
+            }, 100);
+          }, 100);
+        }, 100);
+      });
     });
   });
   
