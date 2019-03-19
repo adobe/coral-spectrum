@@ -53,8 +53,8 @@ class ActionBarContainer extends ActionBarContainerMixin(ComponentMixin(HTMLElem
   constructor() {
     super();
   
-    console.warn('@deprecated: coral-actionbar-container is deprecated, use coral-actionbar-primary and ' +
-      'coral-actionbar-secondary instead');
+    console.warn(`Coral.ActionBar.Container: coral-actionbar-container has been deprecated.
+    Please use coral-actionbar-primary and coral-actionbar-secondary instead`);
   }
   
   /**
