@@ -37,6 +37,9 @@ if the definition is loaded before any usage of the component. This is currently
 Essentially this means that AEM users will be able to view the components rendered faster when the page loads with Coral Spectrum than with CoralUI3. 
 Code-wise, it means that `Coral.commons.ready()` becomes obsolete in most cases.
 
+On the other hand, all Coral Spectrum parent-child components are using asynchronous Mutation Observers replacing the 
+slow and synchronous events `coral-component:attached` and `coral-component:detached`.
+
 Also, new technologies were introduced to take advantage of browsers new capabilities to reduce performance issues for 
 certain components (e.g resizeListenerObserver for Coral.ActionBar which is used in all AEM consoles). 
 
@@ -162,6 +165,27 @@ For instance the example below will produce a different result in Coral Spectrum
   </coral-icon>
   <coral-button-label>Button</coral-button-label>
 </button>
+```
+
+### Parent-child component events
+
+Coral Spectrum parent-child components are relying on Mutation Observers for child mutation detection (ie. child node addition/removal).
+Mutation Observers are asynchronous therefore parent-child component events triggered on child mutation are triggered asynchronously e.g. :
+
+```
+var cyclebutton = document.body.appendChild(new Coral.CycleButton());
+cyclebutton.items.add({selected: true})
+document.body.addEventListener('coral-cyclebutton:change', function() {
+  // This will be called in the next frame although it was registered after. This might be unexpected and confusing.
+});
+
+// In above situation, it's recommended to add the child component in a first step and append the parent component to the DOM in a second step
+var cyclebutton = new Coral.CycleButton();
+cyclebutton.items.add({selected: true});
+document.body.appendChild(cyclebutton);
+document.body.addEventListener('coral-cyclebutton:change', function() {
+  // This won't be called in the next frame because the event is silenced on purpose     
+});
 ```
 
 ### Dependencies
