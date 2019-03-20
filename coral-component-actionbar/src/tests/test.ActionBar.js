@@ -500,7 +500,7 @@ describe('ActionBar', function() {
       }, 100);
     });
 
-    it('should allow tab navigation to jump between left side and right side of the actionbar all items in between do not have a tabindex )', function() {
+    it('should allow tab navigation to jump between left side and right side of the actionbar all items in between do not have a tabindex', function() {
       const bar = helpers.build(window.__html__['ActionBar.base.html']);
     
       expect(document.activeElement.tagName.toLowerCase()).to.not.equal('button', 'activeElement should not be an one of the buttons inside the actionbar');
@@ -513,18 +513,18 @@ describe('ActionBar', function() {
       firstButton.focus();
 
       expect(document.activeElement).to.equal(firstButton, 'activeElement should now be the first wrapped item (here button) inside the actionbar');
-      expect(document.activeElement.getAttribute('tabindex')).to.not.equal('-1', 'this element should be tabable');
-      expect(bar.primary._elements.moreButton.getAttribute('tabindex')).to.equal('-1', 'more should not be tabable');
+      expect(document.activeElement.getAttribute('tabindex')).to.not.equal('-1', 'this element should be tabbable');
+      expect(bar.primary._elements.moreButton.getAttribute('tabindex')).to.equal('-1', 'more should not be tabbable');
 
-      var i = 0;
+      var i;
       for (i = 1; i < leftActionBarItems.length; i++) {
-        expect(leftActionBarItems[i].querySelector('button').getAttribute('tabindex')).to.equal('-1', 'all other items should not be tabable("' + i + '" failed"');
+        expect(leftActionBarItems[i].querySelector('button').getAttribute('tabindex')).to.equal('-1', 'all other items should not be tabbable("' + i + '" failed"');
       }
 
-      // in this case the right more button should be tabable and no item on the right side
-      expect(bar.secondary._elements.moreButton.getAttribute('tabindex')).to.not.equal('-1', 'more should be tabable');
+      // in this case the right more button should be tabbable and no item on the right side
+      expect(bar.secondary._elements.moreButton.getAttribute('tabindex')).to.not.equal('-1', 'more should be tabbable');
       for (i = 0; i < rightActionBarItems.length; i++) {
-        expect(rightActionBarItems[i].querySelector('button').getAttribute('tabindex')).to.equal('-1', 'all other items should not be tabable("' + i + '" failed"');
+        expect(rightActionBarItems[i].querySelector('button').getAttribute('tabindex')).to.equal('-1', 'all other items should not be tabbable("' + i + '" failed"');
       }
     });
   

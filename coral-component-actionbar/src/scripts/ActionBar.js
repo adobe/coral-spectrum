@@ -204,6 +204,7 @@ class ActionBar extends ComponentMixin(HTMLElement) {
     let moreButtonLeftVisible = false;
     let moreButtonRightVisible = false;
     let showItem = false;
+    let tabbableItem = null;
     let itemWidth = 0;
     
     for (let i = 0; i < leftItems.length || i < rightItems.length; i++) {
@@ -236,9 +237,13 @@ class ActionBar extends ComponentMixin(HTMLElement) {
               showItem = true;
             }
           }
+  
+          // enable tab for first left tabbable item
+          if (tabbableItem === null && showItem && itemLeft.offsetParent) {
+            tabbableItem = i;
+          }
           
-          // enable tab for first left item
-          this._makeItemTabEnabled(itemLeft, showItem && i === 0);
+          this._toggleItemTabbable(itemLeft, tabbableItem === i);
           
           if (showItem) {
             leftVisibleItems += 1;
@@ -286,7 +291,7 @@ class ActionBar extends ComponentMixin(HTMLElement) {
           }
           
           // enable tab for 'first' right item
-          this._makeItemTabEnabled(itemRight, showItem && i === rightItems.length - 1);
+          this._toggleItemTabbable(itemRight, showItem && i === rightItems.length - 1);
           
           if (showItem) {
             rightVisibleItems += 1;
@@ -312,8 +317,8 @@ class ActionBar extends ComponentMixin(HTMLElement) {
     this._moveToScreen(this.secondary._elements.moreButton, moreButtonRightVisible);
     
     // enable tabs on more buttons if needed
-    this._makeItemTabEnabled(this.primary._elements.moreButton, leftVisibleItems < 1);
-    this._makeItemTabEnabled(this.secondary._elements.moreButton, rightVisibleItems < rightItems.length);
+    this._toggleItemTabbable(this.primary._elements.moreButton, leftVisibleItems < 1);
+    this._toggleItemTabbable(this.secondary._elements.moreButton, rightVisibleItems < rightItems.length);
     
     // we need to check if item has 'hasAttribute' because it is not present on the document
     if (focusedItem && focusedItem.hasAttribute && focusedItem.hasAttribute('coral-actionbar-offscreen')) {
@@ -474,17 +479,12 @@ class ActionBar extends ComponentMixin(HTMLElement) {
   }
   
   /** @ignore */
-  _makeItemTabEnabled(item, tabable) {
+  _toggleItemTabbable(item, tabbable) {
     // item might be wrapped (for now remove/add tabindex only on the first wrapped item)
     item = getFirstSelectableWrappedItem(item);
     
     if (item !== null) {
-      if (tabable && item.hasAttribute('tabindex')) {
-        item.removeAttribute('tabindex');
-      }
-      else if (!tabable && !item.hasAttribute('tabindex')) {
-        item.setAttribute('tabindex', '-1');
-      }
+      item[tabbable ? 'removeAttribute' : 'setAttribute']('tabindex', '-1');
     }
   }
   
