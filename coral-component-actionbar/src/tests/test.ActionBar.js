@@ -328,6 +328,59 @@ describe('ActionBar', function() {
         done();
       }, 100);
     });
+  
+    it('should allow tab navigation to jump between left side and right side of the actionbar all items in between do not have a tabindex', function() {
+      const bar = helpers.build(window.__html__['ActionBar.base.html']);
+    
+      expect(document.activeElement.tagName.toLowerCase()).to.not.equal('button', 'activeElement should not be an one of the buttons inside the actionbar');
+    
+      var leftActionBarItems = bar.primary.items.getAll();
+      var rightActionBarItems = bar.secondary.items.getAll();
+    
+      // simulate a tab press on first item in actionbar simply by setting focus as I can't trigger a real one ..
+      var firstButton = leftActionBarItems[0].querySelector('button');
+      firstButton.focus();
+    
+      expect(document.activeElement).to.equal(firstButton, 'activeElement should now be the first wrapped item (here button) inside the actionbar');
+      expect(document.activeElement.getAttribute('tabindex')).to.not.equal('-1', 'this element should be tabbable');
+      expect(bar.primary._elements.moreButton.getAttribute('tabindex')).to.equal('-1', 'more should not be tabbable');
+    
+      var i;
+      for (i = 1; i < leftActionBarItems.length; i++) {
+        expect(leftActionBarItems[i].querySelector('button').getAttribute('tabindex')).to.equal('-1', 'all other items should not be tabbable("' + i + '" failed"');
+      }
+    
+      // in this case the right more button should be tabbable and no item on the right side
+      expect(bar.secondary._elements.moreButton.getAttribute('tabindex')).to.not.equal('-1', 'more should be tabbable');
+      for (i = 0; i < rightActionBarItems.length; i++) {
+        expect(rightActionBarItems[i].querySelector('button').getAttribute('tabindex')).to.equal('-1', 'all other items should not be tabbable("' + i + '" failed"');
+      }
+    });
+  
+    it('should support hidden actions and find the first tabbable item for both left side and right side of the actionbar', function() {
+      const bar = helpers.build(window.__html__['ActionBar.hidden.html']);
+      
+      const primaryItems = bar.primary.items.getAll();
+      const secondaryItems = bar.secondary.items.getAll();
+      
+      const firstLeftTabbableItem = bar.querySelector('coral-actionbar-item:not([hidden]) button:not([tabindex="-1"])');
+      const firstRightTabbableItem = bar.querySelector('coral-actionbar-item:not([hidden]) a:not([tabindex="-1"])');
+      
+      expect(firstLeftTabbableItem.closest('coral-actionbar-item')).to.equal(primaryItems[1]);
+      expect(firstRightTabbableItem.closest('coral-actionbar-item')).to.equal(secondaryItems[1]);
+      
+      primaryItems.forEach((item) => {
+        if (item !== firstLeftTabbableItem) {
+          expect(item.querySelector('button').getAttribute('tabindex') === '-1');
+        }
+      });
+  
+      secondaryItems.forEach((item) => {
+        if (item !== firstRightTabbableItem) {
+          expect(item.querySelector('a').getAttribute('tabindex') === '-1');
+        }
+      });
+    });
   });
 
   describe('Implementation Details', function() {
@@ -373,7 +426,6 @@ describe('ActionBar', function() {
         done();
       }, 100);
     });
-
 
     it('should move items offscreen, if there is not enough space available at screen', function(done) {
       el._wait = 0;
@@ -498,34 +550,6 @@ describe('ActionBar', function() {
   
         done();
       }, 100);
-    });
-
-    it('should allow tab navigation to jump between left side and right side of the actionbar all items in between do not have a tabindex', function() {
-      const bar = helpers.build(window.__html__['ActionBar.base.html']);
-    
-      expect(document.activeElement.tagName.toLowerCase()).to.not.equal('button', 'activeElement should not be an one of the buttons inside the actionbar');
-
-      var leftActionBarItems = bar.primary.items.getAll();
-      var rightActionBarItems = bar.secondary.items.getAll();
-
-      // simulate a tab press on first item in actionbar simply by setting focus as I can't trigger a real one ..
-      var firstButton = leftActionBarItems[0].querySelector('button');
-      firstButton.focus();
-
-      expect(document.activeElement).to.equal(firstButton, 'activeElement should now be the first wrapped item (here button) inside the actionbar');
-      expect(document.activeElement.getAttribute('tabindex')).to.not.equal('-1', 'this element should be tabbable');
-      expect(bar.primary._elements.moreButton.getAttribute('tabindex')).to.equal('-1', 'more should not be tabbable');
-
-      var i;
-      for (i = 1; i < leftActionBarItems.length; i++) {
-        expect(leftActionBarItems[i].querySelector('button').getAttribute('tabindex')).to.equal('-1', 'all other items should not be tabbable("' + i + '" failed"');
-      }
-
-      // in this case the right more button should be tabbable and no item on the right side
-      expect(bar.secondary._elements.moreButton.getAttribute('tabindex')).to.not.equal('-1', 'more should be tabbable');
-      for (i = 0; i < rightActionBarItems.length; i++) {
-        expect(rightActionBarItems[i].querySelector('button').getAttribute('tabindex')).to.equal('-1', 'all other items should not be tabbable("' + i + '" failed"');
-      }
     });
   
     describe('Smart Overlay', () => {
