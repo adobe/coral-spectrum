@@ -759,9 +759,11 @@ class Commons {
     
     // Remove event from map
     const onResizeEvents = this._resizeObserverMap.get(element);
-    const index = onResizeEvents.indexOf(onResize);
-    if (index !== -1) {
-      onResizeEvents.splice(index, 1);
+    if (onResizeEvents) {
+      const index = onResizeEvents.indexOf(onResize);
+      if (index !== -1) {
+        onResizeEvents.splice(index, 1);
+      }
     }
   }
   
