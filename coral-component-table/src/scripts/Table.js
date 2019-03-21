@@ -1803,11 +1803,11 @@ class Table extends ComponentMixin(HTMLTableElement) {
     // Hide the sticky table head until it is properly positioned
     head.classList.toggle(IS_HIDDEN, head.sticky);
     
-    // Defines the head height
-    table._resetContainerLayout(head.sticky ? `${head.getBoundingClientRect().height}px` : null);
-  
-    // FF: wait next frame before reading and changing header cell layout
+    // Wait next frame before reading and changing header cell layout
     requestAnimationFrame(() => {
+      // Defines the head height
+      table._resetContainerLayout(head.sticky ? `${head.getBoundingClientRect().height}px` : null);
+      
       getRows([head]).forEach((row) => {
         getHeaderCells(row).forEach((headerCell) => {
           table._toggleStickyHeaderCell(headerCell, head.sticky);
