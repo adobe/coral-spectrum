@@ -15,81 +15,35 @@
  * from Adobe.
  */
 .coral-InputGroup {
-  // for dropdowns
-  position: relative;
-  display: inline-table; // All field needs to be inline-block-like.
-  vertical-align: top;
-  // prevent input groups from inheriting border styles from table cells when placed within a table
-  border-collapse: separate;
+  display: inline-flex;
   width: 226px;
 }
 
 .coral-InputGroup--block {
-  display: table;
+  display: flex;
   width: 100%;
 }
 
-.coral-InputGroup-button,
-.coral-InputGroup-input {
-  display: table-cell;
-}
-
-.coral-InputGroup-button {
-  width: 1px;
-  // aligns the components
-  vertical-align: middle;
-
-  position: relative;
-  font-size: 0;
-  white-space: nowrap;
-
-  // position for bringing hovered/focused/actived element above the siblings.
-  ._coral-Button {
-    position: relative; // Needed for z-index to function.
-    margin: 0;
-    border-radius: 0;
-    border-width: 1px;
-
-    // Brings the interaction to the front. z-index: 2 so it comes in front
-    // of neighboring elements with invalid state styles.
-    &:focus,
-    &:active {
-      z-index: 2;
-    }
-  }
-}
-
-.coral-InputGroup-input {
-  border-radius: 0;
-  z-index: 2;
-  position: relative;
-  width: 100%;
-
-  margin-bottom: 0;
-
-  // Invalid border should come on top, but it should not come above
-  // the borders of sibling elements that have focus.
-  &.is-invalid,
-  &:invalid,
-  &:focus {
-    z-index: 1
-  }
-}
-
-.coral-InputGroup-button:first-child ._coral-Button {
-  border-radius: 4px 0 0 4px;
-  border-right-width: 0;
-  left: 1px;
-}
-
-.coral-InputGroup-button:last-child ._coral-Button {
-  border-radius: 0 4px 4px 0;
-  border-left-width: 0;
-}
-
-// @compat
+// Force ActionButton style
 .coral-InputGroup-button ._coral-Button {
-  min-width: 0;
+  min-width: 32px;
+  padding: 0 6px;
+  border-width: 1px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.coral-InputGroup-input {
+  width: 100%;
+}
+
+.coral-InputGroup-button:first-child {
+  padding-right: 8px;
+}
+
+.coral-InputGroup-button:last-child {
+  padding-left: 8px;
 }
 
 @require 'light';

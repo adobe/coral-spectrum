@@ -24,10 +24,20 @@
     color: $inputgroup-button-color-hover;
     background-color: $inputgroup-button-background-color-hover;
     border-color: $inputgroup-button-border-color-hover;
+    box-shadow: none;
+  }
+
+  &.focus-ring {
+    background-color: $inputgroup-button-background-color-focus;
+    border-color: $inputgroup-button-border-color-focus;
+    box-shadow: $inputgroup-button-box-shadow-focus;
+    color: $inputgroup-button-color-focus;
   }
 
   &:active {
+    color: $inputgroup-button-color-active;
     background-color: $inputgroup-button-background-color-active;
     border-color: $inputgroup-button-border-color-active;
+    box-shadow: none;
   }
 }
