@@ -1834,15 +1834,10 @@ describe('Select', function() {
       });
 
       it('should update the placeholder when the content of the selectedItem changes', function(done) {
-        const el = helpers.build(window.__html__['Select.base.html']);
-        // we look for an item to select
-        var item = el.items.last();
-        item.selected = true;
-      
-        expect(el.selectedItem).to.equal(item);
-        expect(el._elements.label.textContent).to.equal(item.content.textContent);
-
-        item.content.textContent = 'New Content';
+        const el = helpers.build(window.__html__['Select.selected.html']);
+        expect(el._elements.label.textContent).to.equal('Europe');
+        
+        el.selectedItem.content.textContent = 'New Content';
 
         // we wait for the MO to trigger
         helpers.next(function() {
