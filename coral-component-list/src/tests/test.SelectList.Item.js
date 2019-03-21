@@ -69,5 +69,13 @@ describe('SelectList.Item', function() {
       });
     });
   });
+  
+  describe('Markup', function() {
+    it('should return the value different from the content', function() {
+      const el = helpers.build('<coral-selectlist-item value="2">Test</coral-selectlist-item>');
+      expect(el.value).to.equal('2');
+      expect(el.content.textContent).to.equal('Test');
+    });
+  });
 });
 

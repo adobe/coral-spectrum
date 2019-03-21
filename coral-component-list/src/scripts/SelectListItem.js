@@ -125,7 +125,7 @@ class SelectListItem extends ComponentMixin(HTMLElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return super.observedAttributes.concat(['selected', 'disabled']);
+    return super.observedAttributes.concat(['selected', 'disabled', 'value']);
   }
   
   /** @ignore */
