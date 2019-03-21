@@ -1823,10 +1823,11 @@ describe('Select', function() {
             // selects the item on index 1
             el._elements.list.items.getAll()[1].click();
             // selected item should match selectedItem
-            expect(el.selectedItem).to.equal(items[2]);
+            helpers.next(() => {
+              expect(el.selectedItem).to.equal(items[2]);
+              done();
+            });
           });
-  
-          done();
         });
 
         // opens the list
