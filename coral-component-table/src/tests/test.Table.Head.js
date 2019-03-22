@@ -82,7 +82,7 @@ describe('Table.Head', function() {
             el._elements.head.sticky = true;
         
             window.setTimeout(function() {
-              expect(longLabelHeaderCell.clientWidth).to.equal(labelWidth);
+              expect(longLabelHeaderCell.clientWidth >= labelWidth).to.be.true;
               done();
             }, 100);
           }, 100);
