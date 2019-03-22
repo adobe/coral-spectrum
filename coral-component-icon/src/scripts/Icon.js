@@ -352,8 +352,7 @@ class Icon extends ComponentMixin(HTMLElement) {
    */
   static load(url) {
     const resolveIconsPath = (iconsPath) => {
-      const scripts = document.getElementsByTagName('script');
-      const path = scripts[scripts.length - 1].src;
+      const path = commons._script.src;
       return `${path.split('/').slice(0, -iconsPath.split('/').length).join('/')}/${iconsPath}`;
     };
     

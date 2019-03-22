@@ -266,8 +266,14 @@ class Commons {
     
     this._coralSelector = CORAL_COMPONENTS.join(',');
   
-    const scripts = document.getElementsByTagName('script');
-    this._script = scripts[scripts.length - 1];
+    // @IE11
+    if (!document.currentScript) {
+      const scripts = document.getElementsByTagName('script');
+      this._script = scripts[scripts.length - 1];
+    }
+    else {
+      this._script = document.currentScript;
+    }
   }
   
   /**
