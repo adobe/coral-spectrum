@@ -55,6 +55,15 @@ $table-drag-handle-icon-url = "./embed/DragHandle.svg";
 }
 
 /* Base */
+table[is="coral-table"] {
+  // Don't show by default to avoid flashing during layout calculations
+  visibility: hidden;
+
+  &.is-ready {
+    visibility: visible;
+  }
+}
+
 ._coral-Table {
   border-collapse: separate;
   border-spacing: 0;
@@ -294,11 +303,6 @@ $table-drag-handle-icon-url = "./embed/DragHandle.svg";
   }
 
   ._coral-Table-head[sticky] {
-  // Don't show the header while layout calculations are performed
-    &.is-hidden {
-      visibility: hidden;
-    }
-
     &._coral-Table-divider--row coral-table-headercell-content {
       border-top: 1px solid;
     }

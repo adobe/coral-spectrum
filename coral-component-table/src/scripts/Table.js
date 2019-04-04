@@ -56,7 +56,6 @@ for (const variantValue in variant) {
   ALL_VARIANT_CLASSES.push(`${CLASSNAME}--${variant[variantValue]}`);
 }
 
-const IS_HIDDEN = 'is-hidden';
 const IS_DISABLED = 'is-disabled';
 const IS_SORTED = 'is-sorted';
 const IS_UNSELECTABLE = 'is-unselectable';
@@ -65,6 +64,7 @@ const IS_LAST_ITEM_DRAGGED = 'is-draggedLastItem';
 const IS_DRAGGING_CLASS = 'is-dragging';
 const IS_BEFORE_CLASS = 'is-before';
 const IS_AFTER_CLASS = 'is-after';
+const IS_READY = 'is-ready';
 const KEY_SPACE = Keys.keyToCode('space');
 
 /**
@@ -1800,9 +1800,6 @@ class Table extends ComponentMixin(HTMLTableElement) {
     const table = this;
     const head = event.target;
     
-    // Hide the sticky table head until it is properly positioned
-    head.classList.toggle(IS_HIDDEN, head.sticky);
-    
     // Wait next frame before reading and changing header cell layout
     requestAnimationFrame(() => {
       // Defines the head height
@@ -2133,6 +2130,9 @@ class Table extends ComponentMixin(HTMLTableElement) {
       this._timeout = null;
       this._resizeStickyHead();
       this._resizeContainer();
+      
+      // Mark table as ready
+      this.classList.add(IS_READY);
     }, this._wait);
   }
   
@@ -2229,9 +2229,6 @@ class Table extends ComponentMixin(HTMLTableElement) {
       const containerMarginTop = `${calculatedHeadSize}px`;
       const containerHeight = `calc(100% - ${calculatedHeadSize + containerBorderSize}px)`;
       this._resetContainerLayout(containerMarginTop, containerHeight);
-      
-      // Once the sticky table head is properly positioned, we don't need to hide it anymore
-      head.classList.remove(IS_HIDDEN);
     }
     else {
       this._resetContainerLayout();
@@ -2502,6 +2499,11 @@ class Table extends ComponentMixin(HTMLTableElement) {
     const column = this._isSorted();
     if (column) {
       column._doSort(true);
+    }
+  
+    // Mark table as ready
+    if (!this.head || this.head && !this.head.hasAttribute('sticky')) {
+      this.classList.add(IS_READY);
     }
   }
   
