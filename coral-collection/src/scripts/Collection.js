@@ -282,8 +282,7 @@ class Collection {
   
   /**
    Checks if the given Node belongs to the current collection. It is said that a Node belongs to a given collection
-   if it passes <code>options.filter</code> and it matches <code>options.itemSelector</code>. Text nodes cannot be
-   part of a collection.
+   if it passes <code>options.filter</code> and it matches <code>options.itemSelector</code>.
    
    @param {Node} node
    The node to check if it belongs to the collection.
@@ -293,8 +292,8 @@ class Collection {
    @protected
    */
   _isPartOfCollection(node) {
-    // we exclude Text nodes as they cannot be part of the collection. Text nodes do not implement matches and tagName
-    return !(node instanceof Text) &&
+    // Only element nodes are allowed
+    return node.nodeType === Node.ELEMENT_NODE &&
       filterItem(node, this._filter) &&
       // this is an optimization to avoid using matches
       (this._useItemTagName ? this._useItemTagName === node.tagName : node.matches(this._itemSelector));
