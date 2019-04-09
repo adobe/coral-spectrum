@@ -17,9 +17,8 @@
 module.exports = function(gulp) {
   const path = require('path');
   const runSequence = require('run-sequence').use(gulp);
-  const server = require('gulp-server-livereload');
-  const util = require('gulp-util');
   const root = require('../helpers/util').getRoot();
+  const spawn = require('child_process').spawn;
   
   gulp.task('build+watch', function() {
     runSequence(
@@ -41,13 +40,7 @@ module.exports = function(gulp) {
       path.join(root, 'coral-*/src/styles/**/*.styl'),
       path.join(root, 'coral-theme-spectrum/**/*.styl'),
     ], ['build+watch']);
-    
-    return gulp.src('./')
-      .pipe(server({
-        host: util.env.host || 'localhost',
-        port: 9001,
-        livereload: false,
-        directoryListing: true
-      }));
+  
+    spawn('npx http-server -p 9001 -c-1', [], {shell: true, stdio: 'inherit'});
   });
 };
