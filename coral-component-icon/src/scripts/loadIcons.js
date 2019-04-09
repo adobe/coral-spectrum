@@ -29,6 +29,26 @@ function injectSVG(svgURL, callback) {
     return;
   }
   
+  const removeDuplicatedIds = (svg) => {
+    const radialGradients = svg.getElementsByTagName('radialGradient');
+    const linearGradient = svg.getElementsByTagName('linearGradient');
+  
+    if (radialGradients.length === 1) {
+      radialGradients[0].remove();
+    }
+    else if (radialGradients.length > 1) {
+      // Leave only the one needed
+      while (radialGradients.length !== 1) {
+        radialGradients[0].remove();
+      }
+    }
+  
+    if (linearGradient.length) {
+      linearGradient[0].id = 'b';
+      linearGradient[0].nextElementSibling.setAttribute('fill', 'url(#b)');
+    }
+  };
+  
   // Parse the SVG
   const parser = new DOMParser();
   try {
@@ -37,6 +57,9 @@ function injectSVG(svgURL, callback) {
   
     // Make sure a real SVG was returned
     if (svg && svg.tagName === 'svg') {
+      // @spectrum remove duplicated ids
+      removeDuplicatedIds(svg);
+      
       // Store url information
       svg.setAttribute('data-url', svgURL);
       
