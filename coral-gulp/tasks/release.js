@@ -256,29 +256,48 @@ module.exports = function(gulp) {
     done();
   };
   
+  gulp.task('perform-release', function(done) {
+    const release = () => {
+      spawn(`
+        gulp build &&
+        gulp karma &&
+        gulp examples &&
+        gulp minify-css && gulp minify-js &&
+        cd coral-component-playground && gulp build && cd .. &&
+        gulp playground &&
+        gulp docs &&
+        gulp push &&
+        gulp tag-release &&
+        gulp npm-publish
+      `, [], {shell: true, stdio: 'inherit'});
+      
+      done();
+    };
+    
+    // Command line shortcut
+    if (argv.confirm) {
+      release();
+    }
+    else {
+      inq.prompt({
+        type: 'confirm',
+        name: 'confirmed',
+        message: `Release ${releaseVersion} ?`
+      })
+        .then(function(res) {
+          if (res.confirmed) {
+            release();
+          }
+        });
+    }
+  });
+  
   // Full release task
   gulp.task('release',
     gulp.series(
       'check-root-folder',
       'bump-version',
-      (done) => {
-        // Command line shortcut
-        if (argv.confirm) {
-          release(done);
-        }
-        else {
-          inq.prompt({
-            type: 'confirm',
-            name: 'confirmed',
-            message: `Release ${releaseVersion} ?`
-          })
-            .then(function(res) {
-              if (res.confirmed) {
-                release(done);
-              }
-            });
-        }
-      }
+      'perform-release'
     )
   );
 };
