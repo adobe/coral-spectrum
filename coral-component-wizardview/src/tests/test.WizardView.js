@@ -287,7 +287,7 @@ describe('WizardView', function() {
 
         el.on('coral-wizardview:change', spy);
         
-        spy.reset();
+        spy.resetHistory();
         step2.selected = true;
 
         // Make sure the step actually got selected
@@ -299,7 +299,7 @@ describe('WizardView', function() {
         expect(spy.getCall(0).args[0].detail.oldSelection).to.equal(step1, 'event.detail.oldSelection should be Step 1');
         expect(spy.getCall(0).args[0].detail.selection).to.equal(step2, 'event.detail.selection should be Step 2');
 
-        spy.reset();
+        spy.resetHistory();
         step1.selected = true;
 
         // Make sure the step actually got selected

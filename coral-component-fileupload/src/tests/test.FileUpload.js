@@ -434,7 +434,7 @@ describe('FileUpload', function() {
         expect(eventSpy.args[0][0].detail.action).to.equal('#fake2');
     
         fileUpload.abort();
-        eventSpy.reset();
+        eventSpy.resetHistory();
     
         fileUpload.querySelector('#uploadToDefault').click();
     
@@ -455,7 +455,7 @@ describe('FileUpload', function() {
         expect(eventSpy.args[0][0].detail.method).to.equal('PUT');
     
         fileUpload.abort();
-        eventSpy.reset();
+        eventSpy.resetHistory();
 
         fileUpload.querySelector('#uploadAsDefault').click();
 

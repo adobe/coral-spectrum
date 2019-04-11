@@ -94,12 +94,12 @@ describe('Collection', function() {
   
   // we need to reset all the spies
   afterEach(function() {
-    onItemAddedSpy.reset();
-    onItemRemovedSpy.reset();
-    onItemAddedNestedSpy.reset();
-    onItemRemovedNestedSpy.reset();
-    onCollectionChangedSpy.reset();
-    onNestedCollectionChangedSpy.reset();
+    onItemAddedSpy.resetHistory();
+    onItemRemovedSpy.resetHistory();
+    onItemAddedNestedSpy.resetHistory();
+    onItemRemovedNestedSpy.resetHistory();
+    onCollectionChangedSpy.resetHistory();
+    onNestedCollectionChangedSpy.resetHistory();
   });
   
   describe('Instantiation', function() {
@@ -801,7 +801,7 @@ describe('Collection', function() {
       afterEach(function() {
         helpers.target.removeEventListener('coral-collection:add', collectionAddSpy);
         
-        collectionAddSpy.reset();
+        collectionAddSpy.resetHistory();
       });
       
       it('should not trigger collection events for initial items', function() {
@@ -990,7 +990,7 @@ describe('Collection', function() {
       afterEach(function() {
         helpers.target.removeEventListener('coral-collection:remove', collectionRemoveSpy);
         
-        collectionRemoveSpy.reset();
+        collectionRemoveSpy.resetHistory();
       });
       
       it('should be triggered when an item is removed using removeChild()', function(done) {
@@ -1159,8 +1159,8 @@ describe('Collection', function() {
         helpers.target.removeEventListener('coral-collection:add', collectionAddSpy);
         helpers.target.removeEventListener('coral-collection:remove', collectionRemoveSpy);
         
-        collectionAddSpy.reset();
-        collectionRemoveSpy.reset();
+        collectionAddSpy.resetHistory();
+        collectionRemoveSpy.resetHistory();
       });
       
       it('should correctly report the initial state', function() {

@@ -382,7 +382,7 @@ describe('Dialog', function() {
         expect(dialog.open).to.equal(true, 'open after other close clicked');
         expect(spy.callCount).to.equal(1);
     
-        spy.reset();
+        spy.resetHistory();
         dialog.querySelector('#closeMyDialog').click();
     
         expect(dialog.open).to.equal(false, 'open after close clicked');

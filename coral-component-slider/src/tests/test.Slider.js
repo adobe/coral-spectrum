@@ -290,7 +290,7 @@ describe('Slider', function() {
       helpers.keydown('left', handle);
       expect(el.value).to.equal(String(min));
       
-      spy.reset();
+      spy.resetHistory();
       helpers.keydown('left', handle);
       expect(spy.callCount).to.equal(0);
     });
@@ -303,14 +303,14 @@ describe('Slider', function() {
       helpers.keydown('right', handle);
       expect(el.value).to.equal(String(max));
       
-      spy.reset();
+      spy.resetHistory();
       helpers.keydown('right', handle);
       expect(spy.callCount).to.equal(0);
     });
     
     it('hold and let got the handle without changing the value nor triggering the "change" event', function() {
       var oldVal = el.value = '40';
-      spy.reset();
+      spy.resetHistory();
       
       handle.dispatchEvent(createMouseEvent('mousedown', 0, 0));
       
@@ -323,7 +323,7 @@ describe('Slider', function() {
     
     it('drag to maximum, trigger "change" event', function() {
       var oldVal = el.value;
-      spy.reset();
+      spy.resetHistory();
       
       handle.dispatchEvent(createMouseEvent('mousedown', 0, 0));
       
@@ -336,7 +336,7 @@ describe('Slider', function() {
     
     it('drag to minimum, trigger "change" event', function() {
       var oldVal = el.value;
-      spy.reset();
+      spy.resetHistory();
       
       handle.dispatchEvent(createMouseEvent('mousedown', 500, 0));
       

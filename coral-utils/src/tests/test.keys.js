@@ -651,12 +651,12 @@ describe('keys', function() {
     expect(spy.callCount).to.equal(1);
     expect(spy.args[0][0].keys).to.equal('c-s');
     
-    spy.reset();
+    spy.resetHistory();
     helpers.keypress('t');
     expect(spy.callCount).to.equal(1);
     expect(spy.args[0][0].keys).to.equal('t');
   
-    spy.reset();
+    spy.resetHistory();
     helpers.keydown('q', null, ['shift']);
     expect(spy.callCount).to.equal(1);
     expect(spy.args[0][0].keys).to.equal('shift+q');
@@ -873,11 +873,11 @@ describe('keys', function() {
       helpers.keypress('b');
       expect(spy.callCount).to.equal(1);
 
-      spy.reset();
+      spy.resetHistory();
       helpers.keypress('b');
       expect(spy.callCount).to.equal(0);
 
-      spy.reset();
+      spy.resetHistory();
       helpers.keypress('a');
       helpers.keypress('b');
       expect(spy.callCount).to.equal(1);
@@ -913,7 +913,7 @@ describe('keys', function() {
         helpers.keypress('b');
         expect(spy.callCount).to.equal(1);
 
-        spy.reset();
+        spy.resetHistory();
         keys.off('a-b');
         helpers.keypress('a');
         helpers.keypress('b');
@@ -927,7 +927,7 @@ describe('keys', function() {
         helpers.keypress('b');
         expect(spy.callCount).to.equal(1);
 
-        spy.reset();
+        spy.resetHistory();
         keys.off('.myNS');
         helpers.keypress('a');
         helpers.keypress('b');
@@ -941,7 +941,7 @@ describe('keys', function() {
         helpers.keypress('b');
         expect(spy.callCount).to.equal(1);
 
-        spy.reset();
+        spy.resetHistory();
         keys.off('a-b.myNS');
         helpers.keypress('a');
         helpers.keypress('b');

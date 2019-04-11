@@ -202,7 +202,7 @@ describe('Alert', function() {
         expect(el.hidden).to.equal(false, 'hidden after close clicked');
         expect(spy.callCount).to.equal(1);
       
-        spy.reset();
+        spy.resetHistory();
         el.querySelector('#closeMyAlert').click();
       
         expect(el.hidden).to.equal(true, 'hidden after close clicked');

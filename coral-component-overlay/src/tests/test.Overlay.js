@@ -382,7 +382,7 @@ describe('Overlay', function() {
         expect(el.open).to.equal(true, 'open after close clicked');
         expect(spy.callCount).to.equal(1, 'click event bubble count');
         
-        spy.reset();
+        spy.resetHistory();
         
         // Click the button that should close the overlay
         el.querySelector('#closeMyOverlay').click();

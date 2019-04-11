@@ -553,7 +553,7 @@ describe('CycleButton', function() {
 
     afterEach(function() {
       document.removeEventListener('coral-cyclebutton:change', changeSpy);
-      changeSpy.reset();
+      changeSpy.resetHistory();
     });
 
     it('should not trigger change when appended', function(done) {
@@ -570,7 +570,7 @@ describe('CycleButton', function() {
     it('should trigger change on click', function() {
       const el = helpers.build(SNIPPET_TWOITEMS);
       // reset changeSpy, for same reason the callCount is '1' here
-      changeSpy.reset();
+      changeSpy.resetHistory();
       el.items.getAll()[0].click();
       
       expect(changeSpy.callCount).to.equal(1);
