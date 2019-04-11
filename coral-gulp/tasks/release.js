@@ -102,14 +102,17 @@ module.exports = function(gulp) {
   });
   
   // Increase release version based on user choice
-  gulp.task('bump-version', function() {
-    function doVersionBump() {
-      return gulp.src([`${CWD}/package.json`, `${CWD}/package-lock.json`])
+  gulp.task('bump-version', function(done) {
+    const doVersionBump = () => {
+      gulp.src([`${CWD}/package.json`, `${CWD}/package-lock.json`])
         .pipe(plumb())
         .pipe(bump({version: releaseVersion}))
         .pipe(gulp.dest('./'))
-        .pipe(git.commit(`releng - Release ${releaseVersion}`));
-    }
+        .pipe(git.commit(`releng - Release ${releaseVersion}`))
+        .on('end', () => {
+          done();
+        });
+    };
     
     const currentVersion = modulePackageJson.version;
     
@@ -149,7 +152,7 @@ module.exports = function(gulp) {
     }
     
     if (releaseVersion) {
-      return doVersionBump();
+      doVersionBump();
     }
     else {
       let choices = [];
@@ -225,18 +228,18 @@ module.exports = function(gulp) {
             }])
               .then(function(res) {
                 releaseVersion = res.version;
-                return doVersionBump();
+                doVersionBump();
               });
           }
           else {
             releaseVersion = res.version;
-            return doVersionBump();
+            doVersionBump();
           }
         });
     }
   });
   
-  const release = () => {
+  const release = (done) => {
     spawn(`
       gulp build &&
       gulp karma &&
@@ -249,6 +252,8 @@ module.exports = function(gulp) {
       gulp tag-release &&
       gulp npm-publish
     `, [], {shell: true, stdio: 'inherit'});
+    
+    done();
   };
   
   // Full release task
@@ -259,8 +264,7 @@ module.exports = function(gulp) {
       (done) => {
         // Command line shortcut
         if (argv.confirm) {
-          release();
-          done();
+          release(done);
         }
         else {
           inq.prompt({
@@ -270,8 +274,7 @@ module.exports = function(gulp) {
           })
             .then(function(res) {
               if (res.confirmed) {
-                release();
-                done();
+                release(done);
               }
             });
         }
