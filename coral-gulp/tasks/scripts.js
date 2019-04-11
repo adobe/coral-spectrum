@@ -16,7 +16,7 @@
  */
 module.exports = function(gulp) {
   const path = require('path');
-  const plumber = require('gulp-plumber');
+  const plumb = require('./plumb');
   const sourceMaps = require('gulp-sourcemaps');
   const rollup = require('gulp-better-rollup');
   const rollupConfig = require('../configs/rollup.conf.js');
@@ -24,7 +24,7 @@ module.exports = function(gulp) {
   
   gulp.task('scripts', function() {
     return gulp.src('index.js')
-      .pipe(plumber())
+      .pipe(plumb())
       .pipe(sourceMaps.init({largeFile: true}))
       .pipe(rollup({
         moduleName: 'Coral',

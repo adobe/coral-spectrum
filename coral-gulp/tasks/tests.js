@@ -17,7 +17,6 @@
 module.exports = function(gulp) {
   const KarmaServer = require('karma').Server;
   const configFile = `${__dirname}/../configs/karma.conf.js`;
-  const spawn = require('child_process').spawn;
   
   gulp.task('karma', function(done) {
     new KarmaServer({
@@ -35,9 +34,5 @@ module.exports = function(gulp) {
     new KarmaServer({
       configFile: configFile
     }, done).start();
-  });
-  
-  gulp.task('test', function() {
-    spawn('gulp build && gulp karma', [], {shell: true, stdio: 'inherit'});
   });
 };

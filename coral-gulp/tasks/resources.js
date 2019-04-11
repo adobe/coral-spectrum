@@ -16,16 +16,16 @@
  */
 module.exports = function(gulp) {
   const path = require('path');
-  const plumber = require('gulp-plumber');
+  const plumb = require('./plumb');
   const rename = require('gulp-rename');
   const util = require('../helpers/util');
   
   gulp.task('resources', function() {
-    return gulp.src([
-      'src/resources/**/*',
-      path.join(util.getRoot(), 'coral-theme-spectrum/src/resources/**/*'),
-    ])
-      .pipe(plumber())
+    return gulp.src(
+        ['src/resources/**/*', path.join(util.getRoot(), 'coral-theme-spectrum/src/resources/**/*')],
+        {allowEmpty: true}
+      )
+      .pipe(plumb())
       .pipe(rename(function (file) {
         file.dirname = path.join('resources', file.dirname);
       }))

@@ -16,7 +16,7 @@
  */
 module.exports = function(gulp) {
   const modifyFile = require('gulp-modify-file');
-  const plumber = require('gulp-plumber');
+  const plumb = require('./plumb.js');
   const rename = require('gulp-rename');
   const regExp = /\.\.\/dist/g;
   
@@ -24,7 +24,7 @@ module.exports = function(gulp) {
     return gulp.src([
       'coral-component-playground/dist/**/*', 'coral-component-playground/examples/index.html'
     ], {base: './coral-component-playground'})
-      .pipe(plumber())
+      .pipe(plumb())
       .pipe(modifyFile((content, path) => {
         // Replace coralui.js and coralui.css paths
         if (path.split('/').pop() === 'index.html') {
@@ -46,7 +46,7 @@ module.exports = function(gulp) {
     return gulp.src([
       'coral-*/examples/index.html', 'examples/index.html'
     ], {base: './'})
-      .pipe(plumber())
+      .pipe(plumb())
       .pipe(modifyFile((content, path) => {
         // Replace coralui.js and coralui.css paths
         if (path.split('/').pop() === 'index.html') {

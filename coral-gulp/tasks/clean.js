@@ -20,15 +20,17 @@ module.exports = function(gulp) {
   const path = require('path');
   const util = require('../helpers/util');
   
-  gulp.task('clean', function() {
+  gulp.task('clean', function(done) {
     del.sync('./dist/**');
     // Prepare dist folders
     fs.mkdirSync('./dist');
     fs.mkdirSync('./dist/css');
     fs.mkdirSync('./dist/js');
+    
+    done();
   });
   
-  gulp.task('cleanup', function() {
+  gulp.task('cleanup', function(done) {
     const isTLB = util.isTLB();
     const root = isTLB ? 'coral-*' : '';
     
@@ -45,5 +47,7 @@ module.exports = function(gulp) {
     // Remove generated styles
     const styles = path.join(root, 'src/styles/index.css');
     del.sync(styles);
+    
+    done();
   });
 };

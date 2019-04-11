@@ -18,15 +18,14 @@ module.exports = function(gulp) {
   const fs = require('fs');
   const exec = require('child_process').exec;
   const spawn = require('child_process').spawn;
-  const runSequence = require('run-sequence').use(gulp);
   const del = require('del');
   const inq = require('inquirer');
   const semver = require('semver');
-  
-  const gutil = require('gulp-util');
+  const plumb = require('./plumb')
+  const argv = require('minimist')(process.argv.slice(2));
   const git = require('gulp-git');
   const bump = require('gulp-bump');
-  
+  const PluginError = require('plugin-error');
   const util = require('../helpers/util');
   const root = util.getRoot();
   const CWD = process.cwd();
@@ -36,43 +35,51 @@ module.exports = function(gulp) {
   // The version we'll actually release
   let releaseVersion;
   
+  gulp.task('check-root-folder', function(done) {
+    if (CWD !== root) {
+      done(new PluginError('release', 'Release aborted: not in root folder.'));
+    }
+    
+    done();
+  });
+  
   // Push current branch commits to origin
-  gulp.task('push', function(cb) {
+  gulp.task('push', function(done) {
     // Get the current branch name
     exec('git rev-parse --abbrev-ref HEAD', function(err, stdout, stderr) {
       if (err) {
-        console.error(stderr);
+        done(new PluginError('release', stderr));
       }
       else {
         const currentBranch = stdout.trim();
         
         git.push('origin', currentBranch, function(err) {
           if (err) {
-            console.error(err.message);
+            done(new PluginError('release', err.message));
           }
           
-          cb();
+          done();
         });
       }
     });
   });
   
   // Publish release to artifactory
-  gulp.task('npm-publish', function(cb) {
+  gulp.task('npm-publish', function(done) {
     exec(`npm publish --registry=${registry}`, function(err, stdout, stderr) {
       if (err) {
-        console.error(stderr);
+        done(new PluginError('release', stderr));
       }
       else {
         console.log(stdout);
         
-        cb();
+        done();
       }
     });
   });
   
   // Tag and push release
-  gulp.task('tag-release', function(cb) {
+  gulp.task('tag-release', function(done) {
     // Read updated package.json
     modulePackageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
     releaseVersion = modulePackageJson.version;
@@ -81,28 +88,27 @@ module.exports = function(gulp) {
     
     git.tag(releaseVersion, releaseMessage, function(err) {
       if (err) {
-        console.error(err.message);
+        done(new PluginError('release', err.message));
       }
       
       git.push('origin', releaseVersion, function(err) {
         if (err) {
-          console.error(err.message);
+          done(new PluginError('release', err.message));
         }
         
-        cb();
+        done();
       });
     });
   });
   
   // Increase release version based on user choice
-  gulp.task('bump-version', function(cb) {
+  gulp.task('bump-version', function() {
     function doVersionBump() {
-      gulp.src([`${CWD}/package.json`, `${CWD}/package-lock.json`])
+      return gulp.src([`${CWD}/package.json`, `${CWD}/package-lock.json`])
+        .pipe(plumb())
         .pipe(bump({version: releaseVersion}))
         .pipe(gulp.dest('./'))
         .pipe(git.commit(`releng - Release ${releaseVersion}`));
-      
-      cb();
     }
     
     const currentVersion = modulePackageJson.version;
@@ -117,33 +123,33 @@ module.exports = function(gulp) {
     const prePatchVersion = semver.inc(currentVersion, 'prepatch', 'beta');
     
     // Command line bump shortcuts
-    if (gutil.env.pre) {
+    if (argv.pre) {
       releaseVersion = preVersion;
     }
-    else if (gutil.env.patch) {
+    else if (argv.patch) {
       releaseVersion = patchVersion;
     }
-    else if (gutil.env.minor) {
+    else if (argv.minor) {
       releaseVersion = minorVersion;
     }
-    else if (gutil.env.major) {
+    else if (argv.major) {
       releaseVersion = majorVersion;
     }
-    else if (gutil.env.prepatch) {
+    else if (argv.prepatch) {
       releaseVersion = prePatchVersion;
     }
-    else if (gutil.env.preMinorVersion) {
+    else if (argv.preMinorVersion) {
       releaseVersion = prePatchVersion;
     }
-    else if (gutil.env.preMajorVersion) {
+    else if (argv.preMajorVersion) {
       releaseVersion = prePatchVersion;
     }
-    else if (gutil.env.releaseVersion) {
-      releaseVersion = gutil.env.releaseVersion;
+    else if (argv.releaseVersion) {
+      releaseVersion = argv.releaseVersion;
     }
     
     if (releaseVersion) {
-      doVersionBump();
+      return doVersionBump();
     }
     else {
       let choices = [];
@@ -219,24 +225,18 @@ module.exports = function(gulp) {
             }])
               .then(function(res) {
                 releaseVersion = res.version;
-                doVersionBump();
+                return doVersionBump();
               });
           }
           else {
             releaseVersion = res.version;
-            doVersionBump();
+            return doVersionBump();
           }
         });
     }
   });
   
-  gulp.task('prepare', () => {
-    if (CWD !== root) {
-      console.error('Prepare aborted: not in root folder.');
-    
-      return;
-    }
-    
+  const release = () => {
     spawn(`
       gulp build &&
       gulp karma &&
@@ -249,22 +249,18 @@ module.exports = function(gulp) {
       gulp tag-release &&
       gulp npm-publish
     `, [], {shell: true, stdio: 'inherit'});
-  });
+  };
   
   // Full release task
-  gulp.task('release', function() {
-    if (CWD !== root) {
-      console.error('Release aborted: not in root folder.');
-  
-      return;
-    }
-    
-    runSequence(
+  gulp.task('release',
+    gulp.series(
+      'check-root-folder',
       'bump-version',
-      function() {
+      (done) => {
         // Command line shortcut
-        if (gutil.env.confirm) {
-          runSequence('prepare');
+        if (argv.confirm) {
+          release();
+          done();
         }
         else {
           inq.prompt({
@@ -274,11 +270,12 @@ module.exports = function(gulp) {
           })
             .then(function(res) {
               if (res.confirmed) {
-                runSequence('prepare');
+                release();
+                done();
               }
             });
         }
       }
-    );
-  });
+    )
+  );
 };

@@ -16,7 +16,7 @@
  */
 module.exports = function(gulp) {
   const path = require('path');
-  const plumber = require('gulp-plumber');
+  const plumb = require('./plumb');
   const rename = require('gulp-rename');
   const minify = require('gulp-minifier');
   const uglify = require('rollup-plugin-uglify-es');
@@ -26,7 +26,7 @@ module.exports = function(gulp) {
   
   gulp.task('minify-css', function() {
     return gulp.src(['dist/css/coral.css'])
-      .pipe(plumber())
+      .pipe(plumb())
       .pipe(minify({
         minify: true,
         minifyCSS: true,
@@ -40,7 +40,7 @@ module.exports = function(gulp) {
   
   gulp.task('minify-js', function() {
     return gulp.src('index.js')
-      .pipe(plumber())
+      .pipe(plumb())
       .pipe(sourceMaps.init({largeFile: true}))
       .pipe(rollup({
         moduleName: 'Coral',

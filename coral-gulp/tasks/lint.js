@@ -15,7 +15,7 @@
  * from Adobe.
  */
 module.exports = function(gulp) {
-  const plumber = require('gulp-plumber');
+  const plumb = require('./plumb');
   const eslint = require('gulp-eslint');
   const util = require('../helpers/util');
   
@@ -28,7 +28,7 @@ module.exports = function(gulp) {
   
   gulp.task('lint', function() {
     return gulp.src(src)
-      .pipe(plumber())
+      .pipe(plumb())
       .pipe(eslint())
       .pipe(eslint.format())
       .pipe(eslint.failAfterError());

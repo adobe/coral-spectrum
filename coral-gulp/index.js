@@ -1,8 +1,6 @@
 module.exports = function(gulp) {
   'use strict';
   
-  const runSequence = require('run-sequence').use(gulp);
-  
   // Tasks
   require('./tasks/clean.js')(gulp);
   require('./tasks/lint.js')(gulp);
@@ -20,38 +18,34 @@ module.exports = function(gulp) {
   require('./tasks/watch.js')(gulp);
   require('./tasks/release.js')(gulp);
   
-  gulp.task('build', function() {
-    runSequence(
-      'clean',
-      'lint',
-      'styles',
-      'resources',
-      'templates',
+  gulp.task('build',
+    gulp.series(
+      gulp.parallel('clean', 'lint'),
+      gulp.parallel('styles', 'resources', 'templates'),
       'scripts'
-    );
-  });
+    )
+  );
   
-  gulp.task('dev', function() {
-    runSequence(
+  gulp.task('test',
+    gulp.series(
+      'build',
+      'karma'
+    )
+  );
+
+  gulp.task('dev',
+    gulp.series(
+      'test',
+      'watch'
+    )
+  );
+
+  gulp.task('default',
+    gulp.series(
       'clean',
-      'lint',
-      'styles',
-      'resources',
-      'templates',
-      'scripts',
-      'watch',
-      'karma-watch'
-    );
-  });
-  
-  gulp.task('default', function() {
-    runSequence(
-      'clean',
-      'styles',
-      'resources',
-      'templates',
+      gulp.parallel('styles', 'resources', 'templates'),
       'scripts',
       'watch'
-    );
-  });
+    )
+  );
 };

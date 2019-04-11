@@ -16,7 +16,7 @@
  */
 module.exports = function(gulp) {
   const path = require('path');
-  const plumber = require('gulp-plumber');
+  const plumb = require('./plumb');
   const rename = require('gulp-rename');
   const stylus = require('gulp-stylus');
   const svgImport = require('stylus-svg');
@@ -27,8 +27,11 @@ module.exports = function(gulp) {
   const root = util.getRoot();
   
   gulp.task('styles', function() {
-    return gulp.src(['src/styles/index.styl', path.join(root, 'coral-*/src/styles/index.styl')])
-      .pipe(plumber())
+    return gulp.src(
+        ['src/styles/index.styl', path.join(root, 'coral-*/src/styles/index.styl')],
+        {allowEmpty: true}
+      )
+      .pipe(plumb())
       .pipe(stylus({
         'include css': true,
         include: [
