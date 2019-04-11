@@ -17,6 +17,7 @@
 module.exports = function(gulp) {
   const KarmaServer = require('karma').Server;
   const configFile = `${__dirname}/../configs/karma.conf.js`;
+  const PluginError = require('plugin-error');
   
   gulp.task('karma', function(done) {
     new KarmaServer({
@@ -24,7 +25,7 @@ module.exports = function(gulp) {
       singleRun: true
     }, (err) => {
       if (err) {
-        process.exit(err);
+        done(new PluginError('karma', 'Test failures'));
       }
       done();
     }).start();
