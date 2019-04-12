@@ -1,5 +1,4 @@
 import '../coral-theme-spectrum';
-import './src/styles/index.css';
 
 import '../coral-externals';
 import '../coral-compat';
@@ -8,6 +7,8 @@ import Slider from './src/scripts/Slider';
 import SliderContent from './src/scripts/SliderContent';
 import SliderItem from './src/scripts/SliderItem';
 import RangedSlider from './src/scripts/RangedSlider';
+
+import './src/styles/index.css';
 
 // Expose component on the Coral namespace
 window.customElements.define('coral-slider', Slider);

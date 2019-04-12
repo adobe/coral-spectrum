@@ -1,5 +1,4 @@
 import '../coral-theme-spectrum';
-import './src/styles/index.css';
 
 import '../coral-externals';
 import '../coral-compat';
@@ -16,6 +15,8 @@ import SelectList from './src/scripts/SelectList';
 import SelectListGroup from './src/scripts/SelectListGroup';
 import SelectListItem from './src/scripts/SelectListItem';
 import SelectListItemContent from './src/scripts/SelectListItemContent';
+
+import './src/styles/index.css';
 
 // Expose component on the Coral namespace
 window.customElements.define('coral-list', List);

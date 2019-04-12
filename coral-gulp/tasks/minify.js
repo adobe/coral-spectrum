@@ -17,19 +17,16 @@
 module.exports = function(gulp) {
   const path = require('path');
   const plumb = require('./plumb');
+  const rollup = require('rollup').rollup;
+  const cleanCSS = require('gulp-clean-css');
   const rename = require('gulp-rename');
-  const minify = require('gulp-minifier');
-  const uglify = require('rollup-plugin-uglify-es');
-  const sourceMaps = require('gulp-sourcemaps');
-  const rollup = require('gulp-better-rollup');
-  const rollupConfig = require('../configs/rollup.conf.js');
+  const rollupConfig = require('../configs/rollup.conf.js')({min: true});
   
   gulp.task('minify-css', function() {
     return gulp.src(['dist/css/coral.css'])
       .pipe(plumb())
-      .pipe(minify({
-        minify: true,
-        minifyCSS: true,
+      .pipe(cleanCSS({
+        compatibility: 'ie11'
       }))
       .pipe(rename({
         dirname: 'css',
@@ -38,23 +35,19 @@ module.exports = function(gulp) {
       .pipe(gulp.dest('./dist'));
   });
   
-  gulp.task('minify-js', function() {
-    return gulp.src('index.js')
-      .pipe(plumb())
-      .pipe(sourceMaps.init({largeFile: true}))
-      .pipe(rollup({
-        moduleName: 'Coral',
-        plugins: rollupConfig.plugins.concat([uglify()])
-      }, 'iife'))
-      .pipe(sourceMaps.write('.', {
-        sourceMappingURL: () => {
-          return 'coral.min.map';
-        }
-      }))
-      .pipe(rename({
-        dirname: 'js',
-        basename: 'coral.min'
-      }))
-      .pipe(gulp.dest('./dist'));
+  gulp.task('minify-js', async function(done) {
+    const bundle = await rollup({
+      input: 'index.js',
+      plugins: rollupConfig
+    });
+  
+    await bundle.write({
+      file: './dist/js/coral.min.js',
+      format: 'iife',
+      name: 'Coral',
+      sourcemap: true
+    });
+  
+    done();
   });
 };

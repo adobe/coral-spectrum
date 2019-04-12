@@ -1,5 +1,4 @@
 import '../coral-theme-spectrum';
-import './src/styles/index.css';
 
 import '../coral-externals';
 import '../coral-compat';
@@ -11,6 +10,8 @@ import ActionBarItem from './src/scripts/ActionBarItem';
 import ActionBarPrimary from './src/scripts/ActionBarPrimary';
 import ActionBarSecondary from './src/scripts/ActionBarSecondary';
 import ActionBarContainer from './src/scripts/ActionBarContainer';
+
+import './src/styles/index.css';
 
 // i18n
 commons.extend(strings, {

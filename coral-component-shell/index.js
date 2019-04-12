@@ -1,5 +1,4 @@
 import '../coral-theme-spectrum';
-import './src/styles/index.css';
 
 import '../coral-externals';
 import '../coral-compat';
@@ -7,11 +6,6 @@ import '../coral-compat';
 import helpTranslations from './i18n/coral-component-shell-help/translations.json';
 import orgSwitcherTranslations from './i18n/coral-component-shell-orgswitcher/translations.json';
 import {strings, commons} from '../coral-utils';
-// i18n
-commons.extend(strings, {
-  'coral-component-shell-help': helpTranslations,
-  'coral-component-shell-orgswitcher': orgSwitcherTranslations
-});
 
 import Shell from './src/scripts/Shell';
 import ShellContent from './src/scripts/ShellContent';
@@ -48,6 +42,15 @@ import ShellOrgSwitcher from './src/scripts/ShellOrgSwitcher';
 import ShellOrgSwitcherFooter from './src/scripts/ShellOrgSwitcherFooter';
 import ShellOrganization from './src/scripts/ShellOrganization';
 import ShellSuborganization from './src/scripts/ShellSuborganization';
+
+import './src/styles/index.css';
+
+// i18n
+commons.extend(strings, {
+  'coral-component-shell-help': helpTranslations,
+  'coral-component-shell-orgswitcher': orgSwitcherTranslations
+});
+
 
 // Expose component on the Coral namespace
 window.customElements.define('coral-shell', Shell);

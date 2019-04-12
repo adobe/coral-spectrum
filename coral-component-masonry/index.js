@@ -1,5 +1,4 @@
 import '../coral-theme-spectrum';
-import './src/styles/index.css';
 
 import '../coral-externals';
 import '../coral-compat';
@@ -11,6 +10,8 @@ import MasonryFixedCenteredLayout from './src/scripts/MasonryFixedCenteredLayout
 import MasonryFixedSpreadLayout from './src/scripts/MasonryFixedSpreadLayout';
 import MasonryVariableLayout from './src/scripts/MasonryVariableLayout';
 import MasonryDashboardLayout from './src/scripts/MasonryDashboardLayout';
+
+import './src/styles/index.css';
 
 // Register layouts
 Masonry.registerLayout(Masonry.layouts.FIXED_CENTERED, MasonryFixedCenteredLayout);

@@ -1,5 +1,4 @@
 import '../coral-theme-spectrum';
-import './src/styles/index.css';
 
 import '../coral-externals';
 import '../coral-compat';
@@ -7,6 +6,8 @@ import '../coral-compat';
 import StepList from './src/scripts/StepList';
 import Step from './src/scripts/Step';
 import StepLabel from './src/scripts/StepLabel';
+
+import './src/styles/index.css';
 
 // Expose component on the Coral namespace
 window.customElements.define('coral-steplist', StepList);

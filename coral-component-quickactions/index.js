@@ -1,5 +1,4 @@
 import '../coral-theme-spectrum';
-import './src/styles/index.css';
 
 import '../coral-externals';
 import '../coral-compat';
@@ -8,6 +7,8 @@ import QuickActions from './src/scripts/QuickActions';
 import QuickActionsItem from './src/scripts/QuickActionsItem';
 import translations from './i18n/translations.json';
 import {strings, commons} from '../coral-utils';
+
+import './src/styles/index.css';
 
 // i18n
 commons.extend(strings, {

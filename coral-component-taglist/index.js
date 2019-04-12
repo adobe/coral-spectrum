@@ -1,5 +1,4 @@
 import '../coral-theme-spectrum';
-import './src/styles/index.css';
 
 import '../coral-externals';
 import '../coral-compat';
@@ -9,6 +8,8 @@ import {commons, strings} from '../coral-utils';
 import Tag from './src/scripts/Tag';
 import TagLabel from './src/scripts/TagLabel';
 import TagList from './src/scripts/TagList';
+
+import './src/styles/index.css';
 
 // i18n
 commons.extend(strings, {

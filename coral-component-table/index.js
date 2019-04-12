@@ -1,5 +1,4 @@
 import '../coral-theme-spectrum';
-import './src/styles/index.css';
 
 import '../coral-externals';
 import '../coral-compat';
@@ -13,6 +12,8 @@ import TableRow from './src/scripts/TableRow';
 import TableHead from './src/scripts/TableHead';
 import TableBody from './src/scripts/TableBody';
 import TableFoot from './src/scripts/TableFoot';
+
+import './src/styles/index.css';
 
 // Expose component on the Coral namespace
 window.customElements.define('coral-table-column', TableColumn, {extends: 'col'});

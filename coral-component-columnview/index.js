@@ -1,5 +1,4 @@
 import '../coral-theme-spectrum';
-import './src/styles/index.css';
 
 import '../coral-externals';
 import '../coral-compat';
@@ -16,6 +15,8 @@ import ColumnViewPreviewContent from './src/scripts/ColumnViewPreviewContent';
 import ColumnViewPreviewLabel from './src/scripts/ColumnViewPreviewLabel';
 import ColumnViewPreviewSeparator from './src/scripts/ColumnViewPreviewSeparator';
 import ColumnViewPreviewValue from './src/scripts/ColumnViewPreviewValue';
+
+import './src/styles/index.css';
 
 // Expose component on the Coral namespace
 window.customElements.define('coral-columnview', ColumnView);

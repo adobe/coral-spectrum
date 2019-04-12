@@ -20,15 +20,16 @@ const util = require('../helpers/util');
 
 const nodeResolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
-const css = require('rollup-plugin-css-only');
+const css = require('rollup-plugin-postcss');
 const babel = require('rollup-plugin-babel');
 const json = require('rollup-plugin-json');
+const uglify = require('rollup-plugin-uglify').uglify;
 const resources = require('../plugins/rollup-plugin-resources');
 
 const root = util.getRoot();
 
-module.exports = {
-  plugins: [
+module.exports = (options = {}) => {
+  const plugins = [
     nodeResolve(),
     commonjs(),
     json(),
@@ -37,21 +38,26 @@ module.exports = {
       output: './dist/resources'
     }),
     css({
-      include: path.join(root, '**/*.css'),
-      output: './dist/css/coral.css'
+      extract: options.runTests ? false : './dist/css/coral.css'
     }),
     babel({
       presets: [
         [
-          'env',
+          "@babel/preset-env",
           {
-            modules: false
+            modules: false,
+            targets: {
+              ie: '11'
+            }
           }
         ]
-      ],
-      plugins: [
-        'babel-plugin-external-helpers'
       ]
     })
-  ]
+  ];
+  
+  if (options.min) {
+    plugins.push(uglify());
+  }
+  
+  return plugins;
 };

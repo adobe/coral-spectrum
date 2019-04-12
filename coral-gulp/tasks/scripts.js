@@ -15,30 +15,22 @@
  * from Adobe.
  */
 module.exports = function(gulp) {
-  const path = require('path');
-  const plumb = require('./plumb');
-  const sourceMaps = require('gulp-sourcemaps');
-  const rollup = require('gulp-better-rollup');
-  const rollupConfig = require('../configs/rollup.conf.js');
-  const rename = require('gulp-rename');
+  const rollup = require('rollup').rollup;
+  const rollupConfig = require('../configs/rollup.conf.js')();
   
-  gulp.task('scripts', function() {
-    return gulp.src('index.js')
-      .pipe(plumb())
-      .pipe(sourceMaps.init({largeFile: true}))
-      .pipe(rollup({
-        moduleName: 'Coral',
-        plugins: rollupConfig.plugins
-      }, 'iife'))
-      .pipe(sourceMaps.write('.', {
-        sourceMappingURL: () => {
-          return 'coral.map';
-        }
-      }))
-      .pipe(rename({
-        dirname: 'js',
-        basename: 'coral'
-      }))
-      .pipe(gulp.dest('./dist'));
+  gulp.task('scripts', async function(done) {
+    const bundle = await rollup({
+      input: 'index.js',
+      plugins: rollupConfig
+    });
+  
+    await bundle.write({
+      file: './dist/js/coral.js',
+      format: 'iife',
+      name: 'Coral',
+      sourcemap: true
+    });
+    
+    done();
   });
 };

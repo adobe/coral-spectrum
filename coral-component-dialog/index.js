@@ -1,5 +1,4 @@
 import '../coral-theme-spectrum';
-import './src/styles/index.css';
 
 import '../coral-externals';
 import '../coral-compat';
@@ -11,6 +10,8 @@ import Dialog from './src/scripts/Dialog';
 import DialogHeader from './src/scripts/DialogHeader';
 import DialogContent from './src/scripts/DialogContent';
 import DialogFooter from './src/scripts/DialogFooter';
+
+import './src/styles/index.css';
 
 // i18n
 commons.extend(strings, {

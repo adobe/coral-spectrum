@@ -24,12 +24,12 @@ module.exports = function(config) {
   const root = util.getRoot();
   const CWD = process.cwd();
   
-  const rollupConfig = require('./rollup.conf.js');
+  const rollupConfig = require('./rollup.conf.js')({runTests: true});
   
   const preprocessors = {};
   
   // Rollup pre-process
-  preprocessors[path.join(CWD, 'src/tests/index.js')] = ['rollup'];
+  preprocessors[path.join(CWD, 'src/tests/spec.js')] = ['rollup'];
   
   // Pre-process HTML snippets
   preprocessors[path.join(CWD, 'src/tests/snippets/**/*.html')] = ['html2js'];
@@ -37,7 +37,7 @@ module.exports = function(config) {
   // Pre-process snippets of dependencies
   preprocessors[path.join(root, 'coral-*/src/tests/snippets/**/*.html')] = ['html2js'];
   
-  rollupConfig.plugins.push(istanbul({
+  rollupConfig.push(istanbul({
     include: util.isTLB() ? path.join(CWD, 'coral-*/src/scripts/*.js') : path.join(CWD, 'src/scripts/*.js')
   }));
   
@@ -46,9 +46,11 @@ module.exports = function(config) {
   
     // specify the config for the rollup pre-processor: run babel plugin on the code
     rollupPreprocessor: {
-      format: 'iife',
-      moduleName: 'Coral',
-      plugins: rollupConfig.plugins
+      plugins: rollupConfig,
+      output: {
+        format: 'iife',
+        name: 'Coral'
+      }
     },
   
     customLaunchers: {
@@ -72,9 +74,6 @@ module.exports = function(config) {
     
     // list of files / patterns to load in the browser
     files: [
-      // Load the theme
-      `${CWD}/dist/css/coral.css`,
-      
       // Load momentJS for date time components
       `${root}/node_modules/moment/moment.js`,
   
@@ -104,8 +103,8 @@ module.exports = function(config) {
       
       {
         // Tests that will be included as executable JS
-        pattern: `${CWD}/src/tests/index.js`,
-        watched: true,
+        pattern: `${CWD}/src/tests/spec.js`,
+        watched: false,
         served: true,
         included: true
       }

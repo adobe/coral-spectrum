@@ -1,11 +1,12 @@
 import '../coral-theme-spectrum';
-import './src/styles/index.css';
 
 import '../coral-externals';
 import '../coral-compat';
 
 import Tooltip from './src/scripts/Tooltip';
 import TooltipContent from './src/scripts/TooltipContent';
+
+import './src/styles/index.css';
 
 // Expose component on the Coral namespace
 window.customElements.define('coral-tooltip', Tooltip);

@@ -1,5 +1,4 @@
 import '../coral-theme-spectrum';
-import './src/styles/index.css';
 
 import '../coral-externals';
 import '../coral-compat';
@@ -8,6 +7,8 @@ import Alert from './src/scripts/Alert';
 import AlertHeader from './src/scripts/AlertHeader';
 import AlertContent from './src/scripts/AlertContent';
 import AlertFooter from './src/scripts/AlertFooter';
+
+import './src/styles/index.css';
 
 // Expose component on the Coral namespace
 window.customElements.define('coral-alert', Alert);

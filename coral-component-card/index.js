@@ -1,5 +1,4 @@
 import '../coral-theme-spectrum';
-import './src/styles/index.css';
 
 import '../coral-externals';
 import '../coral-compat';
@@ -19,6 +18,8 @@ import CardInfo from './src/scripts/CardInfo';
 import CardContent from './src/scripts/CardContent';
 import CardPropertyList from './src/scripts/CardPropertyList';
 import CardPropertyContent from './src/scripts/CardPropertyContent';
+
+import './src/styles/index.css';
 
 // Expose component on the Coral namespace
 window.customElements.define('coral-card', Card);

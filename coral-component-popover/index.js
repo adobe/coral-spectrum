@@ -1,5 +1,4 @@
 import '../coral-theme-spectrum';
-import './src/styles/index.css';
 
 import '../coral-externals';
 import '../coral-compat';
@@ -11,6 +10,8 @@ import PopoverHeader from './src/scripts/PopoverHeader';
 import PopoverContent from './src/scripts/PopoverContent';
 import PopoverFooter from './src/scripts/PopoverFooter';
 import PopoverSeparator from './src/scripts/PopoverSeparator';
+
+import './src/styles/index.css';
 
 // i18n
 commons.extend(strings, {
