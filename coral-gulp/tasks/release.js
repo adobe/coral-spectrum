@@ -32,9 +32,6 @@ module.exports = function(gulp) {
   let modulePackageJson = util.getPackageJSON();
   const registry = 'https://artifactory.corp.adobe.com/artifactory/api/npm/npm-coralui-local';
   
-  // The version we'll actually release
-  let releaseVersion;
-  
   gulp.task('check-root-folder', function(done) {
     if (CWD !== root) {
       done(new PluginError('release', 'Release aborted: not in root folder.'));
@@ -80,14 +77,14 @@ module.exports = function(gulp) {
   
   // Tag and push release
   gulp.task('tag-release', function(done) {
-    const releaseMessage = `releng - Release ${releaseVersion}`;
+    const releaseMessage = `releng - Release ${GLOBAL.releaseVersion}`;
     
-    git.tag(releaseVersion, releaseMessage, function(err) {
+    git.tag(GLOBAL.releaseVersion, releaseMessage, function(err) {
       if (err) {
         done(new PluginError('release', err.message));
       }
       
-      git.push('origin', releaseVersion, function(err) {
+      git.push('origin', GLOBAL.releaseVersion, function(err) {
         if (err) {
           done(new PluginError('release', err.message));
         }
@@ -102,9 +99,9 @@ module.exports = function(gulp) {
     const doVersionBump = () => {
       gulp.src([`${CWD}/package.json`, `${CWD}/package-lock.json`])
         .pipe(plumb())
-        .pipe(bump({version: releaseVersion}))
+        .pipe(bump({version: GLOBAL.releaseVersion}))
         .pipe(gulp.dest('./'))
-        .pipe(git.commit(`releng - Release ${releaseVersion}`))
+        .pipe(git.commit(`releng - Release ${GLOBAL.releaseVersion}`))
         .on('end', () => {
           done();
         });
@@ -123,31 +120,31 @@ module.exports = function(gulp) {
     
     // Command line bump shortcuts
     if (argv.pre) {
-      releaseVersion = preVersion;
+      GLOBAL.releaseVersion = preVersion;
     }
     else if (argv.patch) {
-      releaseVersion = patchVersion;
+      GLOBAL.releaseVersion = patchVersion;
     }
     else if (argv.minor) {
-      releaseVersion = minorVersion;
+      GLOBAL.releaseVersion = minorVersion;
     }
     else if (argv.major) {
-      releaseVersion = majorVersion;
+      GLOBAL.releaseVersion = majorVersion;
     }
     else if (argv.prepatch) {
-      releaseVersion = prePatchVersion;
+      GLOBAL.releaseVersion = prePatchVersion;
     }
     else if (argv.preMinorVersion) {
-      releaseVersion = prePatchVersion;
+      GLOBAL.releaseVersion = prePatchVersion;
     }
     else if (argv.preMajorVersion) {
-      releaseVersion = prePatchVersion;
+      GLOBAL.releaseVersion = prePatchVersion;
     }
     else if (argv.releaseVersion) {
-      releaseVersion = argv.releaseVersion;
+      GLOBAL.releaseVersion = argv.releaseVersion;
     }
     
-    if (releaseVersion) {
+    if (GLOBAL.releaseVersion) {
       doVersionBump();
     }
     else {
@@ -223,12 +220,12 @@ module.exports = function(gulp) {
               message: 'What version would you like?'
             }])
               .then(function(res) {
-                releaseVersion = res.version;
+                GLOBAL.releaseVersion = res.version;
                 doVersionBump();
               });
           }
           else {
-            releaseVersion = res.version;
+            GLOBAL.releaseVersion = res.version;
             doVersionBump();
           }
         });
@@ -278,7 +275,7 @@ module.exports = function(gulp) {
       inq.prompt({
         type: 'confirm',
         name: 'confirmed',
-        message: `Release ${releaseVersion} ?`
+        message: `Release ${GLOBAL.releaseVersion} ?`
       })
         .then(function(res) {
           if (res.confirmed) {
