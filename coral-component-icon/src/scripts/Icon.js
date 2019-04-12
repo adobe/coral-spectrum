@@ -204,11 +204,6 @@ class Icon extends ComponentMixin(HTMLElement) {
   set alt(value) { this.setAttribute('alt', value); }
   
   _updateIcon() {
-    if (!document.body.contains(this)) {
-      this._delayedRendering = true;
-      return;
-    }
-    
     let iconId = this.icon;
     
     // If icon name is passed, we have to build the icon Id based on the icon name
@@ -270,7 +265,6 @@ class Icon extends ComponentMixin(HTMLElement) {
     this.insertAdjacentHTML('beforeend', this.constructor._renderSVG(iconId));
     
     this._elements.svg = this.lastElementChild;
-    this._delayedRendering = false;
   }
   
   /**
@@ -393,10 +387,6 @@ class Icon extends ComponentMixin(HTMLElement) {
     // Set default size
     if (!this._size) {
       this.size = size.SMALL;
-    }
-    
-    if (this._delayedRendering) {
-      this._updateIcon();
     }
   }
 }
