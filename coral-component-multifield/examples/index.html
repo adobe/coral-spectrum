@@ -95,7 +95,7 @@
           var multifield = new Coral.Multifield();
           multifield.template.content.appendChild(document.createElement('input', {is: 'coral-textfield'}));
           multifield.items.add(new Coral.Multifield.Item());
-          var addButton = new Coral.Button();
+          var addButton = document.createElement('button', {is: 'coral-button'});
           addButton.setAttribute('coral-multifield-add', '');
           addButton.label.textContent = 'Add a field';
           addButton.type = 'button';
