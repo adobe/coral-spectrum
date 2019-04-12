@@ -80,10 +80,6 @@ module.exports = function(gulp) {
   
   // Tag and push release
   gulp.task('tag-release', function(done) {
-    // Read updated package.json
-    modulePackageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-    releaseVersion = modulePackageJson.version;
-    
     const releaseMessage = `releng - Release ${releaseVersion}`;
     
     git.tag(releaseVersion, releaseMessage, function(err) {
