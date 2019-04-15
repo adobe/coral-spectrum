@@ -211,6 +211,9 @@ class Icon extends ComponentMixin(HTMLElement) {
       const iconMapped = ICON_MAP[iconId];
       let iconName;
       
+      // Restore default state
+      this.removeAttribute('_context');
+      
       if (iconMapped) {
         if (iconMapped.spectrumIcon) {
           // Use the default mapped icon
@@ -234,6 +237,9 @@ class Icon extends ComponentMixin(HTMLElement) {
           else {
             iconName = iconMapped.spectrumIconLight;
           }
+          
+          // Mark icon as contextual icon because the icon name is defined based on the theme
+          this.setAttribute('_context', '');
         }
         
         // Inform user about icon name changes
@@ -387,6 +393,11 @@ class Icon extends ComponentMixin(HTMLElement) {
     // Set default size
     if (!this._size) {
       this.size = size.SMALL;
+    }
+    
+    // Contextual icons need to be checked again
+    if (this.hasAttribute('_context')) {
+      this.icon = this.icon;
     }
   }
 }

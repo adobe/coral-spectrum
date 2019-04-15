@@ -468,10 +468,10 @@ describe('Icon', function() {
         container.appendChild(el);
         
         container.classList.add('coral--light');
-        
-        el.icon = 'userCircleColor';
   
         helpers.target.appendChild(container);
+  
+        el.icon = 'userCircleColor';
   
         expect(hasSVGIcon(el, 'UserCircleColor_Light', true)).to.be.true;
         expect(called).to.equal(1);
@@ -483,10 +483,10 @@ describe('Icon', function() {
         container.appendChild(el);
     
         container.classList.add('coral--dark');
-    
-        el.icon = 'userCircleColor';
   
         helpers.target.appendChild(container);
+        
+        el.icon = 'userCircleColor';
     
         expect(hasSVGIcon(el, 'UserCircleColor_Dark', true)).to.be.true;
         expect(called).to.equal(1);
@@ -496,10 +496,10 @@ describe('Icon', function() {
         const container = document.createElement('div');
         const el = new Icon();
         container.appendChild(el);
-    
-        el.icon = 'userCircleColor';
         
         helpers.target.appendChild(container);
+  
+        el.icon = 'userCircleColor';
     
         expect(hasSVGIcon(el, 'UserCircleColor_Light', true)).to.be.true;
         expect(called).to.equal(1);
