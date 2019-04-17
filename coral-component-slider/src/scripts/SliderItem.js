@@ -15,6 +15,8 @@
  * from Adobe.
  */
 
+import {ComponentMixin} from '../../../coral-mixin-component';
+
 import {transform} from '../../../coral-utils';
 
 const CLASSNAME = '_coral-Slider-item';
@@ -24,8 +26,9 @@ const CLASSNAME = '_coral-Slider-item';
  @classdesc The Slider item
  @htmltag coral-slider-item
  @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class SliderItem extends HTMLElement {
+class SliderItem extends ComponentMixin(HTMLElement) {
   /**
    The slider's item value.
    This should contain a number formatted as a string (e.g.: "10") or an empty string.

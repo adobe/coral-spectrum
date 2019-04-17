@@ -15,6 +15,8 @@
  * from Adobe.
  */
 
+import {ComponentMixin} from '../../../coral-mixin-component';
+
 const CLASSNAME = '_coral-Alert-content';
 
 /**
@@ -22,8 +24,9 @@ const CLASSNAME = '_coral-Alert-content';
  @classdesc The Alert default content
  @htmltag coral-alert-content
  @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class AlertContent extends HTMLElement {
+class AlertContent extends ComponentMixin(HTMLElement) {
   /** @ignore */
   connectedCallback() {
     this.classList.add(CLASSNAME);

@@ -15,6 +15,8 @@
  * from Adobe.
  */
 
+import {ComponentMixin} from '../../../coral-mixin-component';
+
 const CLASSNAME = '_coral-Dialog-content';
 
 /**
@@ -22,8 +24,9 @@ const CLASSNAME = '_coral-Dialog-content';
  @classdesc The Dialog default content
  @htmltag coral-dialog-content
  @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class DialogContent extends HTMLElement {
+class DialogContent extends ComponentMixin(HTMLElement) {
   /** @ignore */
   connectedCallback() {
     this.classList.add(CLASSNAME);

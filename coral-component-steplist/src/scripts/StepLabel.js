@@ -15,6 +15,8 @@
  * from Adobe.
  */
 
+import {ComponentMixin} from '../../../coral-mixin-component';
+
 const CLASSNAME = '_coral-Steplist-label';
 
 /**
@@ -22,8 +24,9 @@ const CLASSNAME = '_coral-Steplist-label';
  @classdesc A Step Label
  @htmltag coral-step-label
  @extends {HTMLElement}
+ @extends {ComponentMixin}
  */
-class StepLabel extends HTMLElement {
+class StepLabel extends ComponentMixin(HTMLElement) {
   /** @ignore */
   connectedCallback() {
     this.classList.add(CLASSNAME);
