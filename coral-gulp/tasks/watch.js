@@ -29,7 +29,7 @@ module.exports = function(gulp) {
       path.join(root, 'coral-*/src/templates/**/*.html'),
       path.join(root, 'coral-*/src/styles/**/*.styl'),
       path.join(root, 'coral-theme-spectrum/**/*.styl'),
-    ], gulp.series('styles', 'resources', 'templates', 'scripts'));
+    ], gulp.series(gulp.parallel('styles', 'templates'), 'scripts'));
   });
   
   gulp.task('server', function(done) {
