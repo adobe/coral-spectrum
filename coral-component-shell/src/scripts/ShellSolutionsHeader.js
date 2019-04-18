@@ -15,6 +15,8 @@
  * from Adobe.
  */
 
+import {commons} from '../../../coral-utils';
+
 /**
  @class Coral.Shell.Solutions.Header
  @classdesc Shell's solution sub-cloud name
@@ -24,6 +26,6 @@
  @deprecated
  */
 export default () => {
-  console.warn('Coral.Shell.Solutions.Header: coral-shell-solutions-header is deprecated.');
+  commons._log('warn', 'Coral.Shell.Solutions.Header: coral-shell-solutions-header is deprecated.');
   return document.createElement('coral-shell-solutions-header');
 };

@@ -15,6 +15,7 @@
  * from Adobe.
  */
 
+import {commons} from '../../../coral-utils';
 import Collection from './Collection';
 import listToArray from './listToArray';
 
@@ -27,7 +28,7 @@ class SelectableCollection extends Collection {
     super(options);
   
     if (this._filter) {
-      console.warn('Coral.SelectableCollection does not support the options.filter');
+      commons._log('warn', 'Coral.SelectableCollection does not support the options.filter');
     }
   
     // disabled items will not be a selection candicate although hidden items might

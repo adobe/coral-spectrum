@@ -244,10 +244,10 @@ class Icon extends ComponentMixin(HTMLElement) {
         
         // Inform user about icon name changes
         if (iconName) {
-          console.warn(`Coral.Icon: the icon ${iconId} has been deprecated. Please use ${iconName} instead.`);
+          commons._log('warn', `Coral.Icon: the icon ${iconId} has been deprecated. Please use ${iconName} instead.`);
         }
         else {
-          console.warn(`Coral.Icon: the icon ${iconId} has been removed. Please contact Icons@Adobe.`);
+          commons._log('warn', `Coral.Icon: the icon ${iconId} has been removed. Please contact Icons@Adobe.`);
         }
       }
       // In most cases, using the capitalized icon name maps to the spectrum icon name

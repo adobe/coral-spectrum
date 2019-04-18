@@ -18,7 +18,7 @@
 import {ComponentMixin} from '../../../coral-mixin-component';
 import {OverlayMixin} from '../../../coral-mixin-overlay';
 import PopperJS from 'popper.js';
-import {transform, validate} from '../../../coral-utils';
+import {transform, validate, commons} from '../../../coral-utils';
 
 const DEPRECATED_ALIGN = 'Coral.Overlay: alignAt and alignMy have been deprecated. Please use the offset, inner and placement properties instead.';
 const DEPRECATED_FLIP_FIT = 'Coral.Overlay.collision.FLIP_FIT has been deprecated. Please use Coral.Overlay.collision.FLIP instead.';
@@ -205,7 +205,7 @@ class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
     return this._alignMy || align.CENTER_CENTER;
   }
   set alignMy(value) {
-    console.warn(DEPRECATED_ALIGN);
+    commons._log('warn', DEPRECATED_ALIGN);
     
     value = transform.string(value).toLowerCase();
     this._alignMy = validate.enumeration(align)(value) && value || align.CENTER_CENTER;
@@ -224,7 +224,7 @@ class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
     return this._alignAt || align.CENTER_CENTER;
   }
   set alignAt(value) {
-    console.warn(DEPRECATED_ALIGN);
+    commons._log('warn', DEPRECATED_ALIGN);
     
     value = transform.string(value).toLowerCase();
     this._alignAt = validate.enumeration(align)(value) && value || align.CENTER_CENTER;
@@ -348,7 +348,7 @@ class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
     this._collision = validate.enumeration(collision)(value) && value || collision.FLIP;
     
     if (this._collision === collision.FLIP_FIT) {
-      console.warn(DEPRECATED_FLIP_FIT);
+      commons._log('warn', DEPRECATED_FLIP_FIT);
     }
   
     this.reposition();

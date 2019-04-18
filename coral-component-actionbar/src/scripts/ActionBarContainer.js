@@ -15,6 +15,7 @@
  * from Adobe.
  */
 
+import {commons} from '../../../coral-utils';
 import {ComponentMixin} from '../../../coral-mixin-component';
 import ActionBarContainerMixin from './ActionBarContainerMixin';
 import '../../../coral-component-list';
@@ -53,7 +54,7 @@ class ActionBarContainer extends ActionBarContainerMixin(ComponentMixin(HTMLElem
   constructor() {
     super();
   
-    console.warn(`Coral.ActionBar.Container: coral-actionbar-container has been deprecated.
+    commons._log('warn', `Coral.ActionBar.Container: coral-actionbar-container has been deprecated.
     Please use coral-actionbar-primary and coral-actionbar-secondary instead`);
   }
   

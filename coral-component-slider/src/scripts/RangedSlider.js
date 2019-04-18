@@ -17,7 +17,7 @@
 
 import Slider from './Slider';
 import range from '../templates/range';
-import {transform} from '../../../coral-utils';
+import {commons, transform} from '../../../coral-utils';
 
 /**
  @class Coral.RangedSlider
@@ -39,7 +39,7 @@ class RangedSlider extends Slider {
   }
   set filled(value) {
     if (!transform.booleanAttr(value)) {
-      console.warn('Coral.RangedSlider: filled can not be set to false.');
+      commons._log('warn', 'Coral.RangedSlider: filled can not be set to false.');
     }
   }
   

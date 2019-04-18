@@ -281,6 +281,7 @@ class Commons {
    - <code>[data-coral-icons]</code>: source folder of the SVG icons. If the icons are renamed, you'll have to load them
    manually using {@link Icon.load}.
    - <code>[data-coral-typekit]</code>: custom typekit id used to load the fonts.
+   - <code>[data-coral-logging]</code>: defines logging level. Possible values are "on" (default) or "off".
    
    @returns {Object}
    The global options object.
@@ -296,6 +297,20 @@ class Commons {
     }
     
     return options;
+  }
+  
+  /**
+   Utility function for logging.
+   
+   @param {String} level
+   Logging level
+   @param {String} args
+   Logging message
+   */
+  _log(level, ...args) {
+    if (console[level] && this.options.logging !== 'off') {
+      console[level].apply(null, args);
+    }
   }
   
   /**

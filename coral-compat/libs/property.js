@@ -211,12 +211,12 @@ property.contentZone = function(descriptor) {
           }
           else {
             if (oldNode && oldNode.parentNode) {
-              console.warn(this._componentName + ' does not define an insert method for content zone ' + handle + ', falling back to replace.');
+              commons._log('warn', this._componentName + ' does not define an insert method for content zone ' + handle + ', falling back to replace.');
               // Old way -- assume we have an old node
               this._elements[handle].parentNode.replaceChild(value, this._elements[handle]);
             }
             else {
-              console.error(this._componentName + ' does not define an insert method for content zone ' + handle + ', falling back to append.');
+              commons._log('error', this._componentName + ' does not define an insert method for content zone ' + handle + ', falling back to append.');
               // Just append, which may introduce bugs, but at least doesn't crazy
               this.appendChild(value);
             }

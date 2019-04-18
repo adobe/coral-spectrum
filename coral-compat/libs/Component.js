@@ -153,7 +153,7 @@ Component.prototype.createdCallback = function() {
     if (descriptor.contentZone) {
       // Check if the tag name is unique
       if (this._contentZones[descriptor.tagName]) {
-        console.warn('Coral.Component: content zone for "%s" is already defined', descriptor.tagName);
+        commons._log('warn', 'Coral.Component: content zone for "%s" is already defined', descriptor.tagName);
       }
       
       // Add the prop to the hash
@@ -458,7 +458,7 @@ Component.prototype._syncProp = function(propName, leaveInQueue) {
     method.call(this);
   }
   else {
-    console.warn('Coral.Component: sync method for %s is not defined', propName);
+    commons._log('warn', 'Coral.Component: sync method for %s is not defined', propName);
   }
   
   if (!leaveInQueue) {

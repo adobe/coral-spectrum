@@ -47,9 +47,6 @@ const SCROLL_BOTTOM_THRESHOLD = 50;
  */
 const SCROLL_DEBOUNCE = 100;
 
-// @temp - Enable debug messages when writing tests
-const DEBUG = 0;
-
 /**
  Enumeration for {@link Autocomplete} variants.
  
@@ -262,10 +259,8 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   set forceSelection(value) {
     this._forceSelection = transform.booleanAttr(value);
     this._reflectAttribute('forceselection', this._forceSelection);
-  
-    if (DEBUG) {
-      console.warn('Coral.Autocomplete: Should check for invalid state');
-    }
+    
+    commons._log('warn', 'Coral.Autocomplete: Should check for invalid state');
   }
   
   /**
@@ -860,9 +855,7 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
         // Just use the value
         content = value;
         
-        if (DEBUG) {
-          console.warn('Coral.Autocomplete: Did not have content for value %s', value);
-        }
+        commons._log('warn', 'Coral.Autocomplete: Did not have content for value %s', value);
       }
     }
     
@@ -871,8 +864,8 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     if (index === -1) {
       this._values.push(value);
     }
-    else if (DEBUG) {
-      console.warn('Coral.Autocomplete: Tried to add value that was already present');
+    else {
+      commons._log('warn', 'Coral.Autocomplete: Tried to add value that was already present');
     }
     
     const labelContent = {};
@@ -909,9 +902,7 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     const index = this._values.indexOf(value);
     
     if (index === -1) {
-      if (DEBUG) {
-        console.warn('Coral.Autocomplete: Tried to remove tag that is not in values');
-      }
+      commons._log('warn', 'Coral.Autocomplete: Tried to remove tag that is not in values');
       // Get out if we don't have the value
       return;
     }
@@ -928,8 +919,8 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
         this._startObserving();
       }
     }
-    else if (DEBUG) {
-      console.warn('Coral.Autocomplete: Tried to remove value without corresponding item');
+    else {
+      commons._log('warn', 'Coral.Autocomplete: Tried to remove value without corresponding item');
     }
     
     // Look up the tag by value
