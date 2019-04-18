@@ -15,16 +15,6 @@
  * from Adobe.
  */
 
-// An open hand for things that can be grabbed
-// No !important here as we may want certain elements within a draggable element to not be draggable
-.u-coral-openHand,
-.u-coral-openHand * {
-  // Fallback if grab cursor is not supported
-  cursor: move !important;
-  cursor: -webkit-grab !important;
-  cursor: grab !important;
-}
-
 // A closed hand grabbing things
 // Why !important? If your mouse goes over a disabled button while dragging something, the cursor will go away.
 .u-coral-closedHand,
@@ -33,4 +23,13 @@
   cursor: move !important;
   cursor: -webkit-grabbing !important;
   cursor: grabbing !important;
+}
+
+// An open hand for things that can be grabbed
+// No !important here as we may want certain elements within a draggable element to not be draggable
+.u-coral-openHand {
+  // Fallback if grab cursor is not supported
+  cursor: move;
+  cursor: -webkit-grab;
+  cursor: grab;
 }
