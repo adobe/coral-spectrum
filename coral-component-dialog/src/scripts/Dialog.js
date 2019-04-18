@@ -535,7 +535,7 @@ class Dialog extends OverlayMixin(ComponentMixin(HTMLElement)) {
     if (variantValue !== variant.DEFAULT) {
       const iconName = capitalize(variantValue);
       this._elements.headerWrapper.insertAdjacentHTML('beforeend', Icon._renderSVG(`spectrum-css-icon-${iconName}Medium`, ['_coral-Dialog-typeIcon', `_coral-UIIcon-${iconName}Medium`]));
-      this._elements.icon = this.querySelector('._coral-Dialog-typeIcon');
+      this._elements.icon = this._elements.headerWrapper.querySelector('._coral-Dialog-typeIcon');
     }
   }
   
