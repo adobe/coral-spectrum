@@ -514,45 +514,49 @@ describe('TabList', function() {
     
     it('should set the line under the selected item', function(done) {
       const el = helpers.build(window.__html__['TabList.selectedItem.html']);
-      const selectedItem = el.selectedItem;
+      const wait = el._wait;
+      el._wait = 0;
       
-      helpers.next(() => {
+      setTimeout(() => {
         expect(el._elements.line.style.transform).to.not.equal('');
         expect(el._elements.line.style.width).to.not.equal('');
         expect(el._elements.line.hidden).to.be.false;
         
         done();
-      });
+      }, wait);
     });
   
     it('should set the line under the newly selected item', function(done) {
       const el = helpers.build(window.__html__['TabList.selectedItem.html']);
+      const wait = el._wait;
+      el._wait = 0;
+      
       el.items.first().selected = true;
     
-      helpers.next(() => {
-        const selectedItem = el.selectedItem;
+      setTimeout(() => {
         expect(el._elements.line.style.transform).to.not.equal('');
         expect(el._elements.line.style.width).to.not.equal('');
         expect(el._elements.line.hidden).to.be.false;
         
         done();
-      });
+      }, wait);
     });
   
     it('should set the line under the selected item after switching orientation', function(done) {
       const el = helpers.build(window.__html__['TabList.selectedItem.html']);
-      const selectedItem = el.selectedItem;
+      const wait = el._wait;
+      el._wait = 0;
       
       el.orientation = 'vertical';
       
-      helpers.next(() => {
+      setTimeout(() => {
         expect(el._elements.line.style.width).to.equal('');
         expect(el._elements.line.style.height).to.not.equal('');
         expect(el._elements.line.style.translate).to.not.equal('');
         expect(el._elements.line.hidden).to.be.false;
         
         done();
-      });
+      }, wait);
     });
   
     it('should hide the line if no selected item', function(done) {

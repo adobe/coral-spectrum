@@ -84,6 +84,8 @@ class TabList extends ComponentMixin(HTMLElement) {
       'key:pageup > coral-tab': '_selectPreviousItem',
       'key:left > coral-tab': '_selectPreviousItem',
       'key:up > coral-tab': '_selectPreviousItem',
+  
+      'global:coral-commons:_webfontactive': '_setLine',
       
       // private
       'coral-tab:_selectedchanged': '_onItemSelectedChanged',
@@ -93,6 +95,11 @@ class TabList extends ComponentMixin(HTMLElement) {
     
     // Used for eventing
     this._oldSelection = null;
+  
+    // Debounce timer
+    this._timeout = null;
+    // Debounce wait in milliseconds
+    this._wait = 50;
     
     this._setLine = this._setLine.bind(this);
     
@@ -385,44 +392,51 @@ class TabList extends ComponentMixin(HTMLElement) {
   }
   
   _setLine(clear) {
-    window.requestAnimationFrame(() => {
+    // Debounce
+    if (this._timeout !== null) {
+      window.clearTimeout(this._timeout);
+    }
+  
+    this._timeout = window.setTimeout(() => {
+      this._timeout = null;
+  
       const selectedItem = this.selectedItem;
-      
+  
       // Position line under the selected item
       if (selectedItem) {
         if (this.orientation === orientation.HORIZONTAL) {
           const padding = window.parseInt(window.getComputedStyle(selectedItem).paddingLeft);
           const left = selectedItem.offsetLeft + padding;
           const width = selectedItem.clientWidth - padding * 2;
-  
+      
           // Orientation changed
           if (clear) {
             this._elements.line.style.height = '';
           }
-          
+      
           this._elements.line.style.width = `${width}px`;
           this._elements.line.style.transform = `translate(${left}px, 0)`;
         }
         else if (this.orientation === orientation.VERTICAL) {
           const top = selectedItem.offsetTop;
           const height = selectedItem.clientHeight;
-  
+      
           // Orientation changed
           if (clear) {
             this._elements.line.style.width = '';
           }
-          
+      
           this._elements.line.style.height = `${height}px`;
           this._elements.line.style.transform = `translate(0, ${top}px)`;
         }
-        
+    
         this._elements.line.hidden = false;
       }
       else {
         // Hide line if no selected item
         this._elements.line.hidden = true;
       }
-    });
+    }, this._wait);
   }
   
   /** @private */
