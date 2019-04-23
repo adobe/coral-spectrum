@@ -68,6 +68,11 @@ $form-fieldset-line-height = 24px;
 .coral-Form--vertical {
   .coral-Form-field {
     margin: 0 0 $form-vertical-vmargin-max;
+
+    // Don't override right checkbox margin
+    &._coral-Checkbox {
+      margin: 0 16px $form-vertical-vmargin-max 0;
+    }
   }
 
   .coral-Form-fieldlabel {
