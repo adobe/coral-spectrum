@@ -6,14 +6,8 @@ const typeKitId = commons && commons.options.typekit || 'ruf7eed';
 const config = {
   kitId: typeKitId,
   scriptTimeout: 3000,
-  loading: () => {
-    events.dispatch('coral-commons:_webfontloading');
-  },
   active: () => {
     events.dispatch('coral-commons:_webfontactive');
-  },
-  inactive: () => {
-    events.dispatch('coral-commons:_webfontinactive');
   }
 };
 
@@ -50,4 +44,22 @@ if (!window.Typekit) { // we load the typescript only once
   
   const s = document.getElementsByTagName('script')[0];
   s.parentNode.insertBefore(tk, s);
+}
+else {
+  // If Typekit is loaded externally, listen with a MO for active fonts
+  const root = document.documentElement;
+  if (root.className.indexOf('wf-inactive') !== -1 || root.className.indexOf('wf-loading') !== -1) {
+    const webFontLoadObserver = new MutationObserver(() => {
+      if (root.className.indexOf('wf-active') !== -1) {
+        webFontLoadObserver.disconnect();
+        events.dispatch('coral-commons:_webfontactive');
+      }
+    });
+  
+    // Watch for class changes
+    webFontLoadObserver.observe(root, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+  }
 }
