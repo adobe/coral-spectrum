@@ -555,6 +555,9 @@ class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
           modifier.enabled = this.collision !== collision.NONE;
           
           modifier.boundariesElement = this.within;
+          
+          // Default is 5 pixel
+          modifier.padding = 0;
         }
       });
   
