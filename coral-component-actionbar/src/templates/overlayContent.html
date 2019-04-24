@@ -24,7 +24,7 @@
   <else>
     <if data.items.isAnchorList>
       <coral-anchorlist tabindex="0" coral-actionbar-offscreen handle="anchorList">
-        <foreach data>
+        <foreach data.items>
           <a is="coral-anchorlist-item" handle="anchorListItem">
             <js>
               copyAttributes(data._button, this.anchorListItem);
