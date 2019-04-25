@@ -752,7 +752,7 @@ describe('QuickActions', function() {
       expect(spyCall.args.length).to.equal(4);
       
       var trackData = spyCall.args[0];
-      expect(trackData).to.have.property('targetElement', 'copy');
+      expect(trackData).to.have.property('targetElement', 'Copy');
       expect(trackData).to.have.property('targetType', 'coral-quickactions-item');
       expect(trackData).to.have.property('eventType', 'click');
       expect(trackData).to.have.property('rootElement', 'element name');
@@ -807,7 +807,7 @@ describe('QuickActions', function() {
       expect(spyCall.args.length).to.equal(4);
       
       var trackData = spyCall.args[0];
-      expect(trackData).to.have.property('targetElement', 'download');
+      expect(trackData).to.have.property('targetElement', 'Download');
       expect(trackData).to.have.property('targetType', 'coral-quickactions-item');
       expect(trackData).to.have.property('eventType', 'click');
       expect(trackData).to.have.property('rootElement', 'element name');

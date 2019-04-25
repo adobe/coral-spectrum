@@ -138,10 +138,10 @@ class QuickActionsItem extends ComponentMixin(HTMLElement) {
    Inherited from {@link ComponentMixin#trackingElement}.
    */
   get trackingElement() {
-    // it uses the name as the first fallback since it is not localized, otherwise it uses the label
+    
     return typeof this._trackingElement === 'undefined' ?
       // keep spaces to only 1 max and trim. this mimics native html behaviors
-      this.icon || this.textContent.replace(/\s{2,}/g, ' ').trim() :
+      (this.textContent && this.textContent.replace(/\s{2,}/g, ' ').trim() || this.icon) :
       this._trackingElement;
   }
   set trackingElement(value) {
