@@ -258,6 +258,7 @@ class Dialog extends OverlayMixin(ComponentMixin(HTMLElement)) {
     this._backdrop = validate.enumeration(backdrop)(value) && value || backdrop.MODAL;
   
     const showBackdrop = this._backdrop !== backdrop.NONE;
+    this.classList.toggle(`${CLASSNAME}--noBackdrop`, !showBackdrop);
   
     // We're visible now, so hide or show the modal accordingly
     if (this.open && showBackdrop) {
