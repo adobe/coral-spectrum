@@ -170,6 +170,16 @@ class QuickActions extends Overlay {
   }
   
   /**
+   Returns the inner overlay to allow customization.
+   
+   @type {Popover}
+   @readonly
+   */
+  get overlay() {
+    return this._elements.overlay;
+  }
+  
+  /**
    The Item collection.
    
    @type {Collection}

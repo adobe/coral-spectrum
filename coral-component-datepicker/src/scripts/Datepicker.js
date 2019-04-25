@@ -141,6 +141,16 @@ class Datepicker extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
+   Returns the inner overlay to allow customization.
+   
+   @type {Popover}
+   @readonly
+   */
+  get overlay() {
+    return this._elements.overlay;
+  }
+  
+  /**
    The type of datepicker to show to the user. See {@link DatepickerTypeEnum}.
    
    @type {DatepickerTypeEnum}

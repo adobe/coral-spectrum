@@ -155,6 +155,16 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
+   Returns the inner overlay to allow customization.
+   
+   @type {Popover}
+   @readonly
+   */
+  get overlay() {
+    return this._elements.overlay;
+  }
+  
+  /**
    The item collection.
    
    @type {SelectableCollection}

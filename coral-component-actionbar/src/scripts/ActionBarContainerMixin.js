@@ -81,6 +81,16 @@ const ActionBarContainerMixin = (superClass) => class extends superClass {
   }
   
   /**
+   Returns the inner overlay to allow customization.
+   
+   @type {Popover}
+   @readonly
+   */
+  get overlay() {
+    return this._elements.overlay;
+  }
+  
+  /**
    The Collection Interface that allows interacting with the items that the component contains.
    
    @type {ActionBarContainerCollection}
