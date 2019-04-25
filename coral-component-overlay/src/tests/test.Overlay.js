@@ -221,6 +221,28 @@ describe('Overlay', function() {
         expect(findPopperModifier('preventOverflow').boundariesElement).to.equal(document.body);
       });
     });
+    
+    describe('#withinOffset', function() {
+      it('should default to 5', function() {
+        expect(overlay.withinOffset).to.equal(5);
+        expect(findPopperModifier('preventOverflow').padding).to.equal(5);
+      });
+  
+      it('should be settable and reflected in popper', function() {
+        overlay.withinOffset = 10;
+        expect(findPopperModifier('preventOverflow').padding).to.equal(10);
+      });
+  
+      it('should support setting a string', function() {
+        overlay.withinOffset = '10px';
+        expect(overlay.withinOffset).to.equal(10);
+        expect(findPopperModifier('preventOverflow').padding).to.equal(10);
+  
+        overlay.withinOffset = '0px';
+        expect(overlay.withinOffset).to.equal(0);
+        expect(findPopperModifier('preventOverflow').padding).to.equal(0);
+      });
+    });
   
     describe('#inner', function() {
       it('should default to false', function() {
@@ -254,6 +276,16 @@ describe('Overlay', function() {
         overlay.offset = 10;
         expect(overlay.offset).to.equal(10);
         expect(findPopperModifier('offset').offset).to.equal('0px, 10px');
+      });
+      
+      it('should support setting a string', function() {
+        overlay.offset = '10px';
+        expect(overlay.offset).to.equal(10);
+        expect(findPopperModifier('offset').offset).to.equal('0px, 10px');
+  
+        overlay.offset = '0px';
+        expect(overlay.offset).to.equal(0);
+        expect(findPopperModifier('offset').offset).to.equal('0px, 0px');
       });
     });
   

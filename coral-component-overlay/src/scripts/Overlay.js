@@ -149,6 +149,9 @@ class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
   
     // Override from mixin-overlay
     this._overlayAnimationTime = 0;
+  
+    // Popper default
+    this._withinOffset = 5;
     
     // Events
     this._delegateEvents({
@@ -241,6 +244,7 @@ class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
     return transform.number(this.lengthOffset);
   }
   set offset(value) {
+    value = transform.number(value);
     if (typeof value === 'number') {
       this.lengthOffset = `${value}px`;
       this.breadthOffset = '0px';
@@ -329,6 +333,25 @@ class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
     if (value instanceof HTMLElement || typeof value === 'string') {
       this._within = value;
   
+      this.reposition();
+    }
+  }
+  
+  /**
+   Amount of pixel used to define a minimum distance between the boundaries and the overlay.
+   This makes sure the overlay always has a little padding between the edges of its container.
+   
+   @type {Number}
+   @default 5
+   @htmlattribute withinOffset
+   */
+  get withinOffset() {
+    return this._withinOffset;
+  }
+  set withinOffset(value) {
+    value = transform.number(value);
+    if (typeof value === 'number') {
+      this._withinOffset = value;
       this.reposition();
     }
   }
@@ -556,8 +579,7 @@ class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
           
           modifier.boundariesElement = this.within;
           
-          // Default is 5 pixel
-          modifier.padding = 0;
+          modifier.padding = this.withinOffset;
         }
       });
   
@@ -618,6 +640,8 @@ class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
       'breadthOffset',
       'placement',
       'within',
+      'withinoffset',
+      'withinOffset',
       'collision',
       'interaction',
       'target',
