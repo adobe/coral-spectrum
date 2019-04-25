@@ -138,7 +138,6 @@ class QuickActionsItem extends ComponentMixin(HTMLElement) {
    Inherited from {@link ComponentMixin#trackingElement}.
    */
   get trackingElement() {
-    
     return typeof this._trackingElement === 'undefined' ?
       // keep spaces to only 1 max and trim. this mimics native html behaviors
       (this.textContent && this.textContent.replace(/\s{2,}/g, ' ').trim() || this.icon) :
