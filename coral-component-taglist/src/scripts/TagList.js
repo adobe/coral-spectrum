@@ -475,7 +475,9 @@ class TagList extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._onItemConnected(item);
   }
   
-  // JSDocs inherited
+  /**
+   Inherited from {@link FormFieldMixin#reset}.
+   */
   reset() {
     // reset the values to the initial values
     this.values = this._initialValues;

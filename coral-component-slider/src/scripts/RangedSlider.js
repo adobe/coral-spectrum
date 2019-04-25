@@ -166,13 +166,17 @@ class RangedSlider extends Slider {
     return range;
   }
   
-  // JSDocs inherited
+  /**
+   Inherited from {@link FormFieldMixin#clear}.
+   */
   clear() {
     this.startValue = this.min;
     this.endValue = this.max;
   }
-
-  // JSDocs inherited
+  
+  /**
+   Inherited from {@link FormFieldMixin#reset}.
+   */
   reset() {
     // since the 'value' property is not reflected, form components use it to restore the initial value. When a
     // component has support for values, this method needs to be overwritten

@@ -1839,7 +1839,9 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this.trigger('coral-autocomplete:hidesuggestions');
   }
   
-  // JSDocs inherited from coral-mixin-formfield
+  /**
+   Inherited from {@link FormFieldMixin#reset}.
+   */
   reset() {
     // reset the values to the initial values
     this.values = this._initialSelectedValues;

@@ -18,6 +18,7 @@
 html, body {
   font-family: adobe-clean,Helvetica,Arial,sans-serif;
   font-weight: 300;
+  background: rgb(245, 245, 245)
 }
 
 a {
@@ -40,6 +41,8 @@ h2 {
 
 .github-markdown pre > code {
   background: #fafafa;
+  border: solid 1px #ddd;
+  padding: 8px;
 }
 
 img:not([src*=".svg"]).logo {
@@ -49,8 +52,8 @@ img:not([src*=".svg"]).logo {
 
 .navigation {
   border-right: none;
-  background: white;
-  box-shadow: 0 1px 25px #eee;
+  background: transparent;
+  box-shadow: none;
   padding: 0 0 0 15px !important;
   margin-top: 0 !important;
 }
@@ -60,8 +63,13 @@ img:not([src*=".svg"]).logo {
 }
 
 .inner-link-active {
+  background-color: rgba(0, 0, 0, .6) !important;
+}
+
+.github-markdown .inner-link-active {
   background-color: transparent !important;
   color: inherit !important;
+  padding-left: 0 !important;
 }
 
 body {
@@ -74,7 +82,7 @@ body.is-ready {
 
 .layout-container > header {
   position: absolute;
-  background: #fafafa;
+  background: transparent;
   border-bottom: none;
   left: 250px;
   right: 0;
@@ -91,7 +99,7 @@ body.is-ready {
 
 .layout-container > header > a.is-active {
   color: #2c2c2c;
-  border-bottom: solid 2px #eeeeee;
+  border-bottom: solid 2px rgb(44, 44, 44);
 }
 
 .navigation > a:first-child {
@@ -207,8 +215,8 @@ body.is-ready {
 pre.prettyprint > code,
 .import-path pre.prettyprint code {
   background: #fafafa;
+  border: solid 1px #ddd;
   padding: 8px;
-  border: none;
   margin-left: 0;
 }
 

@@ -497,7 +497,9 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._elements.taglist.disabled = this._readOnly || isDisabled;
   }
   
-  // JSDocs inherited
+  /**
+   Inherited from {@link FormFieldMixin#labelledBy}.
+   */
   get labelledBy() {
     return super.labelledBy;
   }
@@ -1306,7 +1308,9 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._updateLabel();
   }
   
-  // JSDocs inherited from coral-mixin-formfield
+  /**
+   Inherited from {@link FormFieldMixin#clear}.
+   */
   clear() {
     this.value = '';
   }
@@ -1322,7 +1326,9 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     }
   }
   
-  // JSDocs inherited from coral-mixin-formfield
+  /**
+   Inherited from {@link FormFieldMixin#reset}.
+   */
   reset() {
     // reset the values to the initial values
     this.values = this._initialValues;

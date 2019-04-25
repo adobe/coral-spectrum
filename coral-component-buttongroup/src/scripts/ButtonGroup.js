@@ -345,7 +345,9 @@ class ButtonGroup extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._elements.nativeSelect.setAttribute('aria-labelledby', this.labelledBy);
   }
   
-  // JSDocs inherited
+  /**
+   Inherited from {@link FormFieldMixin#reset}.
+   */
   reset() {
     // reset the values to the initial values
     this.values = this._initalSelectedValues;
