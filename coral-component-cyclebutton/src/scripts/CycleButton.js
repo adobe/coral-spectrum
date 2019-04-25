@@ -100,6 +100,7 @@ class CycleButton extends ComponentMixin(HTMLElement) {
     
     // Init the collection mutation observer
     this.items._startHandlingItems(true);
+    this.actions._startHandlingItems(true);
   }
   
   /**
@@ -194,7 +195,8 @@ class CycleButton extends ComponentMixin(HTMLElement) {
       this._actions = new SelectableCollection({
         host: this,
         itemTagName: ACTION_TAG_NAME,
-        itemSelector: ACTION_TAG_NAME
+        itemSelector: ACTION_TAG_NAME,
+        onCollectionChange: this._checkExtended
       });
     }
     return this._actions;
