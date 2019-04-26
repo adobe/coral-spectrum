@@ -48,7 +48,9 @@ class AutocompleteItem extends ComponentMixin(HTMLElement) {
    */
   get value() {
     // keep spaces to only 1 max and trim to mimic native select option behavior
-    return typeof this._value === 'undefined' ? this.textContent.replace(/\s{2,}/g, ' ').trim() : this._value;
+    return typeof this._value === 'undefined' ?
+      this.getAttribute('value') || this.textContent.replace(/\s{2,}/g, ' ').trim() :
+      this._value;
   }
   set value(value) {
     this._value = transform.string(value);
