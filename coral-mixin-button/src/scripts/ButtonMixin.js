@@ -347,7 +347,7 @@ const ButtonMixin = (superClass) => class extends superClass {
   get trackingElement() {
     return typeof this._trackingElement === 'undefined' ?
     // keep spaces to only 1 max and trim. this mimics native html behaviors
-      this.label.textContent.replace(/\s{2,}/g, ' ').trim() || this.icon :
+      (this.label || this).textContent.replace(/\s{2,}/g, ' ').trim() || this.icon :
       this._trackingElement;
   }
   set trackingElement(value) {

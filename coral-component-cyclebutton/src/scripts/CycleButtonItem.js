@@ -165,7 +165,7 @@ class CycleButtonItem extends ComponentMixin(HTMLElement) {
   get trackingElement() {
     return typeof this._trackingElement === 'undefined' ?
       // keep spaces to only 1 max and trim. this mimics native html behaviors
-      this.content.textContent.replace(/\s{2,}/g, ' ').trim() || this.icon :
+      (this.content || this).textContent.replace(/\s{2,}/g, ' ').trim() || this.icon :
       this._trackingElement;
   }
   set trackingElement(value) {

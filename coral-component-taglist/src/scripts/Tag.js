@@ -345,7 +345,7 @@ class Tag extends ComponentMixin(HTMLElement) {
     // it uses the name as the first fallback since it is not localized, otherwise it uses the label
     return typeof this._trackingElement === 'undefined' ?
       // keep spaces to only 1 max and trim. this mimics native html behaviors
-      this.value || this.label.textContent.replace(/\s{2,}/g, ' ').trim() :
+      this.value || (this.label || this).textContent.replace(/\s{2,}/g, ' ').trim() :
       this._trackingElement;
   }
   set trackingElement(value) {

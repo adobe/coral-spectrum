@@ -68,7 +68,7 @@ class AnchorListItem extends ListItemMixin(ComponentMixin(HTMLAnchorElement)) {
   get trackingElement() {
     return typeof this._trackingElement === 'undefined' ?
       // keep spaces to only 1 max and trim. this mimics native html behaviors
-      this.content.textContent.replace(/\s{2,}/g, ' ').trim() :
+      (this.content || this).textContent.replace(/\s{2,}/g, ' ').trim() :
       this._trackingElement;
   }
   set trackingElement(value) {
