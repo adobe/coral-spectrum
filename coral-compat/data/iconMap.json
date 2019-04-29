@@ -18,6 +18,9 @@
   "accordionUp": {
     "spectrumIcon": "ChevronUp"
   },
+  "adjust": {
+    "spectrumIcon": "Exposure"
+  },
   "adobe": {
     "spectrumIcon": "AdobeLogo"
   },
