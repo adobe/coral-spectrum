@@ -11,17 +11,27 @@ module.exports = function(config) {
   
   const preprocessors = {};
   
+  const specs = path.join(CWD, 'src/tests/spec.js');
+  let snippets;
+  let scripts;
+  
+  if (util.isTLB()) {
+    snippets = path.join(root, 'coral-*/src/tests/snippets/**/*.html');
+    scripts = path.join(root, 'coral-*/src/scripts/*.js');
+  }
+  else {
+    snippets = path.join(CWD, 'src/tests/snippets/**/*.html');
+    scripts = path.join(CWD, 'src/scripts/*.js');
+  }
+  
   // Rollup pre-process
-  preprocessors[path.join(CWD, 'src/tests/spec.js')] = ['rollup'];
+  preprocessors[specs] = ['rollup'];
   
   // Pre-process HTML snippets
-  preprocessors[path.join(CWD, 'src/tests/snippets/**/*.html')] = ['html2js'];
-  
-  // Pre-process snippets of dependencies
-  preprocessors[path.join(root, 'coral-*/src/tests/snippets/**/*.html')] = ['html2js'];
+  preprocessors[snippets] = ['html2js'];
   
   rollupConfig.push(istanbul({
-    include: util.isTLB() ? path.join(CWD, 'coral-*/src/scripts/*.js') : path.join(CWD, 'src/scripts/*.js')
+    include: scripts
   }));
   
   config.set({
@@ -32,7 +42,8 @@ module.exports = function(config) {
       plugins: rollupConfig,
       output: {
         format: 'iife',
-        name: 'Coral'
+        name: 'Coral',
+        sourcemap: 'inline'
       }
     },
   
@@ -54,6 +65,11 @@ module.exports = function(config) {
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['mocha', 'sinon-chai'],
+  
+    // Adding a proxy to map the icons
+    proxies: {
+      [path.join('/absolute', CWD, 'dist/resources/')]: path.join(root, 'coral-component-icon/src/resources/')
+    },
     
     // list of files / patterns to load in the browser
     files: [
@@ -62,7 +78,7 @@ module.exports = function(config) {
   
       {
         // Load the resources
-        pattern: `${CWD}/dist/resources/**/*`,
+        pattern: path.join(root, 'coral-component-icon/src/resources/**/*'),
         watched: false,
         included: false,
         served: true
@@ -70,15 +86,7 @@ module.exports = function(config) {
       
       {
         // Files to be available as window.__html__['FILENAME.html']
-        pattern: `${CWD}/src/tests/snippets/**/*.html`,
-        watched: true,
-        served: true,
-        included: true // Include HTML snippets so they are preprocessed
-      },
-  
-      {
-        // Files to be available as window.__html__['FILENAME.html']
-        pattern: `${root}/coral-*/src/tests/snippets/**/*.html`,
+        pattern: snippets,
         watched: true,
         served: true,
         included: true // Include HTML snippets so they are preprocessed
@@ -86,7 +94,7 @@ module.exports = function(config) {
       
       {
         // Tests that will be included as executable JS
-        pattern: `${CWD}/src/tests/spec.js`,
+        pattern: specs,
         watched: false,
         served: true,
         included: true
@@ -99,7 +107,7 @@ module.exports = function(config) {
   
     // Configure the reporter
     coverageIstanbulReporter: {
-      dir: `${CWD}/dist/coverage/`,
+      dir: path.join(CWD, 'dist/coverage'),
       combineBrowserReports: true,
       reports: ['lcov', 'text-summary']
     },
@@ -115,7 +123,7 @@ module.exports = function(config) {
         }
 
         // Otherwise, include the name of the folder
-        return `${lastFolder}/${path.basename(filePath)}`;
+        return path.join(lastFolder, path.basename(filePath));
       }
     },
     
