@@ -16,14 +16,12 @@ introduce breaking changes.
 
 ### Spectrum
 
-The current default theme is is an implementation of the [Spectrum](http://spectrum.corp.adobe.com/) design 
+The current default theme is is an implementation of the [Spectrum](https://adobe.design) design 
 specifications, Adobe’s design system. Spectrum provides elements and tools to help product teams work more 
 efficiently, and to make Adobe’s applications more cohesive.
  
-Coral Spectrum leverages the [Spectrum CSS](http://spectrum-css.corp.adobe.com/) framework to style 
+Coral Spectrum leverages the [Spectrum CSS](https://github.com/adobe/spectrum-css) framework to style 
 components including the Spectrum SVG icons. 
-To request new icons, please follow the instructions listed on http://icons.corp.adobe.com. Ideally, the icon team 
-should be creating or reviewing every icon for every Adobe experience.
 
 ### Showcase
 
@@ -37,7 +35,7 @@ Code can be shared by copy pasting the URL. The playground is sandboxed to preve
 ### [» Overview](./manual/overview.html)
 Vision and goals
 ### [» Manual](./manual/manual.html)
-Get you started. How to install through npm, consume etc
+Get you started. How to consume and build the project
 ### [» Upgrade](./manual/upgrade.html)
 Helping you upgrade from CoralUI3
 ### [» Styles](./manual/styles.html)

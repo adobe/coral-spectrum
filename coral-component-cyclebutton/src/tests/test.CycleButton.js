@@ -921,7 +921,6 @@ describe('CycleButton', function() {
       listItems[0].click();
       
       helpers.next(function() {
-        // 3 instead of 2 because of https://jira.corp.adobe.com/browse/CUI-7244
         expect(trackerFnSpy.callCount).to.equal(3, 'Track callback should be called twice.');
         var spyCall = trackerFnSpy.getCall(1);
         var trackData = spyCall.args[0];

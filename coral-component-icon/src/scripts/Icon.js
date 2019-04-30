@@ -1,19 +1,3 @@
-/*
- * ADOBE CONFIDENTIAL
- *
- * Copyright 2017 Adobe
- * All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Adobe and its suppliers,
- * if any.  The intellectual and technical concepts contained
- * herein are proprietary to Adobe and its
- * suppliers and may be covered by U.S. and Foreign Patents,
- * patents in process, and are protected by trade secret or copyright law.
- * Dissemination of this information or reproduction of this material
- * is strictly forbidden unless prior written permission is obtained
- * from Adobe.
- */
 import {ComponentMixin} from '../../../coral-mixin-component';
 import {transform, validate, commons} from '../../../coral-utils';
 import ICON_MAP from '../../../coral-compat/data/iconMap.json';
@@ -95,7 +79,7 @@ for (const sizeValue in size) {
   ALL_SIZE_CLASSES.push(`${CLASSNAME}--size${size[sizeValue]}`);
 }
 
-// Based on https://git.corp.adobe.com/pages/Spectrum/spectrum-css/icons/
+// Based on https://github.com/adobe/spectrum-css/tree/master/icons
 const sizeMap = {
   XXS: 18,
   XS: 24,
@@ -108,8 +92,7 @@ const sizeMap = {
 
 /**
  @class Coral.Icon
- @classdesc An Icon component. Icon ships with a set of SVG icons see http://icons.corp.adobe.com for how to request
- new icons.
+ @classdesc An Icon component. Icon ships with a set of SVG icons.
  @htmltag coral-icon
  @extends {HTMLElement}
  @extends {ComponentMixin}

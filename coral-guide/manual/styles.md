@@ -565,31 +565,19 @@ Coral Spectrum uses Typekit to securely deliver the Adobe Clean corporate font.
 
 ### Domains
 
-It comes pre-configured with a kit that is limited to the following domains :
+It comes pre-configured with a kit that is limited to certain domains including :
 
-* *.adobe.com
-* *.demdex.com
-* *.acrobat.com
-* *.omniture.com
-* *.day.com
 * localhost
 * 127.0.0.1
 * 0.0.0.0
+* *.adobe.com
 
-If you are using Coral Spectrum on a server on a domain other than these, you will need to request and configure your own Typekit kit.
-
-### Requesting a Kit for Additional Domains
-
-If you need to enable Coral Spectrum on additional domains, you will need to obtain a voucher for Adobe Clean from the Typekit team.
-
-1. Create a [generic Adobe account](https://inside.corp.adobe.com/itech/kc/KB1312968.html) to use as your Typekit account. (recommended)
-2. Visit [Adobe TypeKit Wiki](https://wiki.corp.adobe.com/display/devrel/Using+Typekit+at+Adobe) for further help on Adobe TypeKit accounts.
-3. Configure your kit per the Kit Configuration settings below.
-4. Configure Coral Spectrum to use your default kit per the instructions below.
+If you are using Coral Spectrum on a server on a domain other than these, you will need to request and configure your own Typekit kit. 
+Reach out to the Typekit team on https://fonts.adobe.com/.
 
 ### Kit configuration
 
-Your Kit should be configured with following font variations included.
+Your Kit should be configured with at least the following font variations included :
 
 ```
 Adobe Clean - Light
@@ -604,13 +592,10 @@ Choose default language support for both families.
 
 ### Using a Custom Kit with Coral Spectrum
 
-Include your Typekit ID as a Coral Spectrum option before Coral Spectrum gets loaded.
+Include your Typekit ID as a Coral Spectrum option e.g. :
 
 ```
-<script>
-  window.Coral = window.Coral || {};
-  Coral.options = { typeKitId: 'xwm7izk'};
-</script>
+<script src="js/coral.min.js" data-coral-typekit="TYPEKIT_ID"></script>
 ```
 
 ### Font loading

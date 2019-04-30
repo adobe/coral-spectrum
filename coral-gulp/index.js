@@ -27,23 +27,25 @@ module.exports = function(gulp) {
   
   gulp.task('test',
     gulp.series(
-      'build',
+      gulp.parallel('clean', 'lint'),
+      gulp.parallel('styles', 'templates'),
       'karma'
     )
   );
 
   gulp.task('dev',
     gulp.series(
-      'test',
+      gulp.parallel('clean', 'lint'),
+      gulp.parallel('styles', 'templates'),
+      'karma',
+      'scripts',
       'watch'
     )
   );
 
   gulp.task('default',
     gulp.series(
-      'clean',
-      gulp.parallel('styles', 'templates'),
-      'scripts',
+      'build',
       'watch'
     )
   );

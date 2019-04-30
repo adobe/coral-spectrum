@@ -1,19 +1,3 @@
-/*
- * ADOBE CONFIDENTIAL
- *
- * Copyright 2017 Adobe
- * All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Adobe and its suppliers,
- * if any.  The intellectual and technical concepts contained
- * herein are proprietary to Adobe and its
- * suppliers and may be covered by U.S. and Foreign Patents,
- * patents in process, and are protected by trade secret or copyright law.
- * Dissemination of this information or reproduction of this material
- * is strictly forbidden unless prior written permission is obtained
- * from Adobe.
- */
 module.exports = function(gulp) {
   const fs = require('fs');
   const exec = require('child_process').exec;
@@ -29,8 +13,9 @@ module.exports = function(gulp) {
   const util = require('../helpers/util');
   const root = util.getRoot();
   const CWD = process.cwd();
-  let modulePackageJson = util.getPackageJSON();
   const registry = 'https://artifactory.corp.adobe.com/artifactory/api/npm/npm-coralui-local';
+  
+  let modulePackageJson = util.getPackageJSON();
   
   // The version we'll actually release
   let releaseVersion;

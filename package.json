@@ -6,16 +6,6 @@
     "type": "git",
     "url": "https://git.corp.adobe.com/Coral/coral-spectrum"
   },
-  "scripts": {
-    "start": "gulp",
-    "lint": "gulp lint",
-    "build": "gulp build",
-    "test": "gulp test",
-    "dev": "gulp dev",
-    "docs": "gulp docs",
-    "release": "gulp release",
-    "deploy": "gulp deploy"
-  },
   "dependencies": {
     "@adobe/focus-ring-polyfill": "0.1.5",
     "@adobe/spectrum-css": "2.8.0",

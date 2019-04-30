@@ -40,11 +40,10 @@ and lets us treat them like any other native element, setting properties, append
 
 ## Spectrum
 
-The current default theme is is an implementation of the [Spectrum](http://spectrum.corp.adobe.com/) design specifications, Adobe’s design system.
+The current default theme is is an implementation of the [Spectrum](https://adobe.design) design specifications, Adobe’s design system.
 Spectrum provides elements and tools to help product teams work more efficiently, and to make Adobe’s applications more cohesive.
 
-Coral Spectrum leverages the [Spectrum CSS](http://spectrum-css.corp.adobe.com/) framework to style components including the Spectrum SVG icons. 
-To request new icons, please follow the instructions listed on http://icons.corp.adobe.com. Ideally, the icon team should be creating or reviewing every icon for every Adobe experience.  
+Coral Spectrum leverages the [Spectrum CSS](https://github.com/adobe/spectrum-css) framework to style components including the Spectrum SVG icons.   
 
 ## Accessibility
 
@@ -55,16 +54,32 @@ things into Coral Spectrum to make implementing accessibility easier for compone
  
 ## Internationalization
  
-Coral Spectrum provides a robust internal system for internationalization of its strings. This can also be used to provided 
-localized content and data inside your application. This is done via our build process and Adobe's Aladdin service. 
-With a few easy steps, translations can be downloaded and included in the deployed resources of your code. The API for 
-this includes simple functions for getting translated strings, substitution within strings, and the use of translation hints.
+Coral Spectrum provides a robust internal system for internationalization of its strings. 
+This is done via an internal Adobe process.
+ 
+Supported language are :
 
-## Backwards Compatibility
-
-Coral Spectrum ships by default a compatibility package to support the CoralUI 3.x way to register elements `Coral.register`. 
-Custom Coral components using Custom Elements v0 are therefore still supported although we highly encourage to migrate 
-to Custom Elements v1 as it'll become the Web standard. 
+Language family | Language tag | Language variant
+--- | --- | ---
+English | en-US | American English
+French | fr-FR | Standard French
+German | de-DE | Standard German
+Italian | it-IT | Standard Italian
+Spanish | es-ES | Castilian Spanish
+Portuguese | pt-BR | Brazilian Portuguese
+Japanese | ja-JP | Standard Japanese
+Korean | ko-KR | Standard Korean
+Chinese | zh-CN | Mainland China, simplified characters
+Chinese | zh-TW | Taiwan, traditional characters
+Dutch | nl-NL | Netherlands Dutch
+Danish | da-DK | Standard Danish
+Finnish | fi-FI | Standard Finnish
+Norwegian | no-NO | Standard Norwegian
+Swedish | sv-SE | Standard Swedish
+Czech | cs-CZ | Standard Czech
+Polish | pl-PL | Standard Polish
+Russian | ru-RU | Standard Russian
+Turkish | tr-TR | Standard Turkish
 
 ## Browser Support
 
@@ -77,12 +92,11 @@ Coral Spectrum is designed to support the following browsers:
 * iOS 7+
 * Android 4.4+
 
-## Open Development
+## Backwards Compatibility
 
-Since 2012, Coral Spectrum has been an open development project driven by a group of dedicated engineers from various teams 
-across the company.
-Coral Spectrum will always remain an open project, with the goal of becoming public open source in the near future. 
-All are welcome to contribute. 
+Coral Spectrum ships by default a compatibility package to support the CoralUI 3.x way to register elements `Coral.register`. 
+Custom Coral components using Custom Elements v0 are therefore still supported although we highly encourage to migrate 
+to Custom Elements v1 as it'll become the Web standard. 
 
 
 

@@ -14,7 +14,7 @@ introduce breaking changes.
 
 ### Spectrum
 
-The current default theme is is an implementation of the [Spectrum](http://spectrum.corp.adobe.com/) design 
+The current default theme is is an implementation of the [Spectrum](https://adobe.design) design 
 specifications, Adobe’s design system. Spectrum provides elements and tools to help product teams work more 
 efficiently, and to make Adobe’s applications more cohesive.
 
@@ -24,10 +24,8 @@ live form where AD is asked to enter products in order to be evaluated for Spect
 Needless to say, the Spectrum Theme is the only theme currently being supported and updated, with designers from all EC 
 contributing to its features.
  
-Coral Spectrum leverages the [Spectrum CSS](http://spectrum-css.corp.adobe.com/) framework to style 
+Coral Spectrum leverages the [Spectrum CSS](https://github.com/adobe/spectrum-css) framework to style 
 components including the Spectrum SVG icons. 
-To request new icons, please follow the instructions listed on http://icons.corp.adobe.com. Ideally, the icon team 
-should be creating or reviewing every icon for every Adobe experience.
 
 ### Performance
 
@@ -194,7 +192,7 @@ Coral Spectrum has a few dependencies and polyfills. Some are actually written a
 without being considered an external dependency.
 
 These dependencies are:
-* [Spectrum CSS](http://spectrum-css.corp.adobe.com/) for the Spectrum theme and icons
+* [Spectrum CSS](https://github.com/adobe/spectrum-css) for the Spectrum theme and icons
 * [Custom Elements v1 polyfill](https://github.com/webcomponents/custom-elements/) with built-in components support
 * [Promise polyfill](https://www.npmjs.com/package/promise-polyfill) for IE11 support
 * [CustomEvent polyfill](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent#Polyfill) for IE11 support

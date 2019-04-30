@@ -1,107 +1,128 @@
 # Contribution
 
-## Open Development
+We love pull requests from everyone.
 
-Coral Spectrum follows open development principles:
-* The code is discoverable and openly available to anyone.
-* Discussions about Coral Spectrum happen on an open and archived channel.
-* All important technical decisions are exposed on that channel.
-* All commits are backed by issues in an openly accessible tracker, which offers a self-service overview of the project's status and history.
-* People who are not members of the core team are encouraged to provide contributions.
-* Meritocracy is taken into account when considering the priority of contributions and suggestions. 
-The more you contribute, and the more valuable your contributions are, the more influence you will have within the project.
+The following are a set of guidelines to follow when contributing to this project.
 
-**Slack channel: #coral_spectrum**
+## Code Of Conduct
 
-## Find Tasks
+This project adheres to the Adobe [code of conduct](CODE_OF_CONDUCT.md). By participating,
+you are expected to uphold this code. Please report unacceptable behavior to
+[Grp-opensourceoffice@adobe.com](mailto:Grp-opensourceoffice@adobe.com).
 
-All Coral Spectrum work is tracked in our [JIRA project](https://jira.corp.adobe.com/browse/CORAL). Before you look there, be sure 
-you've contacted the community. 
-We prioritize blocker and critical defects first, though submissions of new components and other 'non-bug' contribution is welcome. 
-Just talk to the community and we will work it out.
+## Have A Question?
 
-Once you are ready to submit a bug, find an issue to fix, find a feature to work on, or document a new task, go to JIRA. 
-Everything is in JIRA.
+Start by filing an issue. The existing committers on this project work to reach
+consensus around project direction and issue solutions within issue threads
+(when appropriate).
 
-## Development
+### Security Issues
 
-Below are steps to take to when starting as a contributor.
+Security issues shouldn't be reported on this issue tracker. Instead, [file an issue to our security experts](https://helpx.adobe.com/security/alertus.html).
 
-### Tools
+## Contributor License Agreement
 
-You will need the following tools to work with Coral Spectrum:
-* node
-* npm
-* git
+All third-party contributions to this project must be accompanied by a signed contributor
+license agreement. This gives Adobe permission to redistribute your contributions
+as part of the project. [Sign our CLA](http://opensource.adobe.com/cla.html). You
+only need to submit an Adobe CLA one time, so if you have submitted one previously,
+you are good to go!
 
-If you don't have those tools working, get that set up first.
+## Code Reviews
 
-### Track your work
+All submissions should come in the form of pull requests and need to be reviewed
+by project committers.
 
-Before starting, make sure the work you are doing is tracked in JIRA. Create an issue if one doesn't already exist. 
-An issue description should be complete and include steps to reproduce if the issue is a defect.
-
-### Work on branches
-
-It is required that you work on a feature branch, even in your own fork. The feature branch naming convention is 
-`issue/CORAL-x`. CORAL-x corresponds to the JIRA ticket.
-
-### Coding Conventions
-
-This gives guide to general coding conventions for Coral Spectrum. These are generally enforced at the time of code review.
-
-#### General Principles
-
-* Write readable code (descriptive names, logically organized, comments etc.)
-* Preserve modularity
-* Keep backward compatibility in mind
-* Don't use deprecated APIs
-* Touch in-mind
-* Performance is critical
-
-#### General Formatting
-
-We included an `.editorconfig` file to set up the defaults. In addition, the code is linted based on the 
-[Adobe eslint configuration](https://git.corp.adobe.com/experience-platform/adobe-js-code-standards/).
-
-Use `gulp lint` to run linting.
-
-#### Add Adobe disclaimer
+Start by [forking](https://help.github.com/articles/fork-a-repo/) the repo, then [clone](https://help.github.com/articles/cloning-a-repository/) your fork:
 
 ```
-/*
-* ADOBE CONFIDENTIAL
-*
-* Copyright [YEAR] Adobe
-* All Rights Reserved.
-*
-* NOTICE: All information contained herein is, and remains
-* the property of Adobe and its suppliers,
-* if any. The intellectual and technical concepts contained
-* herein are proprietary to Adobe and its
-* suppliers and may be covered by U.S. and Foreign Patents,
-* patents in process, and are protected by trade secret or copyright law.
-* Dissemination of this information or reproduction of this material
-* is strictly forbidden unless prior written permission is obtained
-* from Adobe.
-*/
+git clone git@github.com:yourusername/coral-spectrum.git
 ```
- 
-### Definition of done
- 
-* Work is tracked in JIRA
-* API changes are approved by the community
-* Code is complete (documented, meets accessibility standards and automated tests added)
-* All tests passing (no regressions)
-* Verified working on all supported browsers
 
-## Submitting Code
+Set up a branch for your feature or bug fix, push it to your fork, and set up a remote for the upstream repo:
 
-You will be ready to submit your code when your work meets the Definition of Done. 
-Once ready, your work must be peer reviewed by a pull request.
- 
-In some cases minor work may receive only "+1" as a comment, which just indicates the code was reviewed and no changes were needed.
-When review is done, the pull request will be merged by the community and any related JIRA issues will be closed. 
+```
+git checkout -b my-awesome-new-feature
+git push -u origin my-awesome-new-feature
+git remote add upstream git@github.com:adobe/coral-spectrum.git
+```
+
+Install dependencies:
+
+```
+npm install
+```
+
+Make sure the [gulp-cli](https://github.com/gulpjs/gulp-cli) is installed globally:
+
+```
+npm install -g gulp-cli
+```
+
+Build the project, open a browser window, and watch for changes:
+
+```
+npm run start
+```
+
+Commit changes, referencing the relevant issue number (if any):
+
+```
+git commit -m "Cool stuff, closes #250, fixes #252"
+```
+
+Consider starting the commit message with an applicable emoji:
+
+* :art: `:art:` when improving the format/structure of the code
+* :zap: `:zap:` when improving performance
+* :non-potable_water: `:non-potable_water:` when plugging memory leaks
+* :memo: `:memo:` when writing docs
+* :ambulance: `:ambulance:` a critical hotfix.
+* :sparkles: `:sparkles:` when introducing new features
+* :bookmark: `:bookmark:` when releasing / version tags
+* :rocket: `:rocket:` when deploying stuff
+* :penguin: `:penguin:` when fixing something on Android
+* :apple: `:apple:` when fixing something on iOS
+* :checkered_flag: `:checkered_flag:` when fixing something on Windows
+* :bug: `:bug:` when fixing a bug
+* :fire: `:fire:` when removing code or files
+* :green_heart: `:green_heart:` when fixing the CI build
+* :white_check_mark: `:white_check_mark:` when adding tests
+* :lock: `:lock:` when dealing with security
+* :arrow_up: `:arrow_up:` when upgrading dependencies
+* :arrow_down: `:arrow_down:` when downgrading dependencies
+* :shirt: `:shirt:` when removing linter warnings
+* :hammer: `:hammer:` when doing heavy refactoring
+* :heavy_minus_sign: `:heavy_minus_sign:` when removing a dependency.
+* :heavy_plus_sign: `:heavy_plus_sign:` when adding a dependency.
+* :wrench: `:wrench:` when changing configuration files.
+* :globe_with_meridians: `:globe_with_meridians:` when dealing with internationalization and localization.
+* :pencil2: `:pencil2:` when fixing typos.
+* :hankey: `:hankey:` when writing bad code that needs to be improved.
+* :package: `:package:` when updating compiled files or packages.
+
+Make sure your branch is up to date with the original repo:
+
+```
+git fetch upstream
+git merge upstream/master
+```
+
+Review your changes and any possible conflicts and push to your fork:
+
+```
+git push origin
+```
+
+[Submit a pull request](https://help.github.com/articles/creating-a-pull-request/).
+
+At this point you're waiting on us. We do our best to keep on top of all the pull requests. We may suggest some changes, improvements or alternatives.
+
+Some things that will increase the chance that your pull request is accepted:
+
+- Write a [good commit message](http://chris.beams.io/posts/git-commit/).
+- Make sure the PR merges cleanly with the latest master.
+- Describe your feature/bugfix and why it's needed/important in the pull request description. 
   
  
 

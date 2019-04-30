@@ -16,14 +16,12 @@ introduce breaking changes.
 
 ### Spectrum
 
-The current default theme is is an implementation of the [Spectrum](http://spectrum.corp.adobe.com/) design 
+The current default theme is is an implementation of the [Spectrum](https://adobe.design) design 
 specifications, Adobe’s design system. Spectrum provides elements and tools to help product teams work more 
 efficiently, and to make Adobe’s applications more cohesive.
  
-Coral Spectrum leverages the [Spectrum CSS](http://spectrum-css.corp.adobe.com/) framework to style 
+Coral Spectrum leverages the [Spectrum CSS](https://github.com/adobe/spectrum-css) framework to style 
 components including the Spectrum SVG icons. 
-To request new icons, please follow the instructions listed on http://icons.corp.adobe.com. Ideally, the icon team 
-should be creating or reviewing every icon for every Adobe experience.
 
 ### Showcase
 
@@ -34,18 +32,14 @@ Code can be shared by copy pasting the URL. The playground is sandboxed to preve
 
 ## Getting started
 
-### Consumers
+### Consuming
 
-The easiest way to include Coral Spectrum is to download the package of the 
-latest release on [artifactory](https://artifactory.corp.adobe.com/) which contains all components (search for `coral-spectrum`).
-Artifactory is the internal Adobe repository manager.
+The easiest way to consume Coral Spectrum is to download the distribution package of the 
+latest release by running `npm i @adobe/coral-spectrum`. It includes all components and styles.
  
-After you've unzipped the downloaded package and found the `dist` folder, follow the steps below :
-* Put `coral.min.css` in the `css/` directory of your project.
-* Put `coral.min.js` in the `js/` directory of your project.
-* Also put the content of the `/resources` folder in the `/resources` directory of your project. 
-This is required for icons and other assets to work.
-* In the `<head>` section of your HTML, add the following:
+After you've unzipped the package, look for the `dist` folder and :
+* Copy the files from `dist/css`, `dist/js` and `dist/resources` in your project.
+* Reference the files in your page with :
 ```
 <link rel="stylesheet" href="css/coral.min.css">
 <script src="js/coral.min.js" data-coral-icons="PATH_TO_RESOURCES_FOLDER"></script>
@@ -53,67 +47,117 @@ This is required for icons and other assets to work.
 * That's it. Now you're ready to use Coral Spectrum.
 * **Note:** Calendar, Clock and Datepicker components will leverage [moment.js](http://momentjs.com/) if loaded on the page
 
-**For NPM consumers**
-
-To retrieve `@coralui` npm packages from artifactory, you have two options :
-* Add the following line to `~/.npmrc`:
-```
-@coralui:registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-coralui-release
-```
-* Or run npm install with additional parameters
-```
-npm install --scope=@coralui --registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-coralui-release
-```
-
-Then you can install `@coralui` npm packages. You'll also have to configure the `@spectrum` scope using your LDAP credentials to retrieve all SVG icons.  
-```
-@spectrum:registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-spectrum-release
-
-npm --scope=@spectrum login
-```
-
-If your project uses a module bundler and a ES6/7 to ES5 transpiler, 
-you can bundle only needed components :
+If your project only requires a few components, you can use a module bundler like [Webpack](https://webpack.js.org/) to only import the components needed. 
+Below is an example of a Webpack config:
 
 ```
-import {Button} from '@coralui/coral-spectrum/coral-component-button';  
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+
+module.exports = {
+  mode: 'production',
+  devtool: 'source-map',
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.min.js',
+    path: path.resolve(__dirname, 'dist')
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'icons/[name].[ext]'
+            },
+          },
+        ]
+      },
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader']
+      }
+    ]
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'style.min.css'
+    }),
+    new OptimizeCssAssetsPlugin({
+      assetNameRegExp: /style\.min\.css$/g,
+      cssProcessor: require('cssnano'),
+      cssProcessorPluginOptions: {
+        preset: ['default', { discardComments: { removeAll: true } }],
+      }
+    })
+  ]
+};  
 ```
 
-You'll find a Webpack config example at https://git.corp.adobe.com/ringel/coralui-webpack.
-
-## Development
-   
-First verify the `.npmrc` configuration then run `npm i`.
+Then in your `index.js` file, you can import and use single components :
  
-Once the installation is complete, you can use below tasks to get started:
-* `npm run start` to generate the build and run the dev server on `localhost:9001` by default.
-* `npm run build` to generate the build.
-* `npm run dev` to run the dev server on `localhost:9001` by default. 
-* `npm run build && npm run test` to generate the build and run the tests.
-* `npm run docs` to build the documentation. 
+```
+// Import Component
+import {Button} from '@coralui/coral-spectrum/coral-component-button';
 
-Each component can be built independently.
+const button = new Button();
+```
 
-### Contributors
+If icons are not displayed, ensure the path to the styles and icons are set e.g. :
 
-Coral Spectrum follows open development principles:
-* The code is discoverable and openly available to anyone.
-* Discussions about Coral Spectrum happen on an open and archived channel.
-* All important technical decisions are exposed on that channel.
-* All commits are backed by issues in an openly accessible tracker, which offers a self-service overview of the project's status and history.
-* People who are not members of the core team are encouraged to provide contributions.
-* Meritocracy is taken into account when considering the priority of contributions and suggestions. 
-The more you contribute, and the more valuable your contributions are, the more influence you will have within the project.
+```
+<link rel="stylesheet" href="dist/style.min.css">
+<script data-coral-icons="dist/icons/" src="dist/bundle.min.js"></script>
+```
 
-**Slack channel: #coral_spectrum**
 
-All Coral Spectrum work is tracked in our [JIRA project](https://jira.corp.adobe.com/browse/CORAL).
+## Building and Testing
 
-Before starting, make sure the work you are doing is tracked in JIRA. Create an issue if one doesn't already exist. 
-An issue description should be complete and include steps to reproduce if the issue is a defect.
+Run the following commands first :
+```
+npm install -g gulp-cli
+npm install
+```   
+ 
+You can use below tasks to get started:
+* `gulp` to generate the build in the `dist` folder and run the dev server on `localhost:9001` by default.
+* `gulp build` to generate the build in the `dist` folder.
+* `gulp dev` to run the dev server on `localhost:9001` by default. 
+* `gulp test` to run the tests. Test reports are in `dist/coverage`.
+* `gulp docs` to build the documentation in `dist/documentation`. 
 
-It is required that you work on a feature branch, even in your own fork. The feature branch naming convention is 
-`issue/CORAL-x`. CORAL-x corresponds to the JIRA ticket.
+Each component can be built independently e.g. `cd coral-component-button && gulp`.
 
-You will be ready to submit your code when your work meets the Definition of Done. 
-Once ready, your work must be peer reviewed by a pull request.
+### Contributing
+
+Check out the [contributing guidelines](https://github.com/adobe/coral-spectrum/blob/master/.github/CONTRIBUTING.md).
+
+### Releasing
+
+We are currently releasing this package on `npm`.
+
+Before we get started, clean up your dependencies with the following command :
+
+```
+git checkout master
+rm -rf node_modules && npm install
+```
+
+Then run `gulp release`. You'll be asked to bump the version (minor version bump by default). Coral Spectrum is following
+[semantic versioning](https://docs.npmjs.com/about-semantic-versioning) (either patch, minor or major).
+
+The command will take care of increasing, tagging the version and publishing the package to `npm`.     
+
+If everything went well, run `gulp deploy` to publish the documentation on the `gh-pages` branch else revert the version bump. 
