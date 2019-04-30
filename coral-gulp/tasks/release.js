@@ -13,7 +13,6 @@ module.exports = function(gulp) {
   const util = require('../helpers/util');
   const root = util.getRoot();
   const CWD = process.cwd();
-  const registry = 'https://artifactory.corp.adobe.com/artifactory/api/npm/npm-coralui-local';
   
   let modulePackageJson = util.getPackageJSON();
   
@@ -51,7 +50,7 @@ module.exports = function(gulp) {
   
   // Publish release to artifactory
   gulp.task('npm-publish', function(done) {
-    exec(`npm publish --registry=${registry}`, function(err, stdout, stderr) {
+    exec('npm publish', function(err, stdout, stderr) {
       if (err) {
         done(new PluginError('release', stderr));
       }

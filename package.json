@@ -1,10 +1,29 @@
 {
-  "name": "@coralui/coral-spectrum",
+  "name": "@adobe/coral-spectrum",
   "description": "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.",
   "version": "1.0.0-beta.60",
+  "homepage": "https://github.com/adobe/coral-spectrum#readme",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "https://git.corp.adobe.com/Coral/coral-spectrum"
+  },
+  "author": {
+    "name": "Stephan Ringel",
+    "url": "https://github.com/icaraps"
+  },
+  "contributors": [
+    {
+      "name": "Larry Davis",
+      "url": "https://github.com/lazd"
+    },
+    {
+      "name": "Oscar Bolanos",
+      "url": "https://github.com/joekukish"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/adobe/coral-spectrum/issues"
   },
   "dependencies": {
     "@adobe/focus-ring-polyfill": "0.1.5",

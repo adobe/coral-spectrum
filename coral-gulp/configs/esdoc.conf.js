@@ -16,8 +16,8 @@ const config = {
         brand: {
           logo: path.join(root, 'coral-guide/assets/coral.png'),
           title: 'Coral Spectrum',
-          repository: 'https://git.corp.adobe.com/Coral/coral-spectrum',
-          site: 'https://git.corp.adobe.com/pages/Coral/coral-spectrum/dist/documentation'
+          repository: 'https://github.com/adobe/coral-spectrum',
+          site: 'http://opensource.adobe.com/coral-spectrum/dist/documentation'
         }
       }
     },
