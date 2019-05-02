@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://git.corp.adobe.com/Coral/coral-spectrum"
+    "url": "https://github.com/adobe/coral-spectrum"
   },
   "author": {
     "name": "Stephan Ringel",
