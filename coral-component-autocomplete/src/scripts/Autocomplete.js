@@ -264,8 +264,6 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   set forceSelection(value) {
     this._forceSelection = transform.booleanAttr(value);
     this._reflectAttribute('forceselection', this._forceSelection);
-    
-    commons._log('warn', 'Coral.Autocomplete: Should check for invalid state');
   }
   
   /**
@@ -859,8 +857,6 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       else {
         // Just use the value
         content = value;
-        
-        commons._log('warn', 'Coral.Autocomplete: Did not have content for value %s', value);
       }
     }
     
@@ -868,9 +864,6 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     const index = this._values.indexOf(value);
     if (index === -1) {
       this._values.push(value);
-    }
-    else {
-      commons._log('warn', 'Coral.Autocomplete: Tried to add value that was already present');
     }
     
     const labelContent = {};
@@ -907,7 +900,6 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     const index = this._values.indexOf(value);
     
     if (index === -1) {
-      commons._log('warn', 'Coral.Autocomplete: Tried to remove tag that is not in values');
       // Get out if we don't have the value
       return;
     }
@@ -923,9 +915,6 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
         item.removeAttribute('selected');
         this._startObserving();
       }
-    }
-    else {
-      commons._log('warn', 'Coral.Autocomplete: Tried to remove value without corresponding item');
     }
     
     // Look up the tag by value

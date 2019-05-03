@@ -56,9 +56,6 @@ const layouts = {
   DASHBOARD: 'dashboard'
 };
 
-// @temp - Enable debug messages when writing tests
-const DEBUG = 0;
-
 // IE does not set the complete property to true if an image cannot be loaded. This code must be outside of the
 // masonry to make sure that the listener catches images which fail loading before the masonry is initalized.
 // @polyfill ie11
@@ -241,11 +238,8 @@ class Masonry extends ComponentMixin(HTMLElement) {
         
         this._scheduleLayout('new layout');
       }
-      else if (window.console) {
-        // @temp - Enable debug messages when writing tests
-        if (DEBUG) {
-          console.error('Coral.Masonry: Unknown layout:', value);
-        }
+      else {
+        commons._log('Coral.Masonry: Unknown layout:', value);
       }
     }
   }
