@@ -1,3 +1,15 @@
+/**
+ * Copyright 2019 Adobe. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under
+ * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+ * OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
+
 import {commons} from '../../coral-utils';
 
 /**
@@ -23,8 +35,6 @@ const property = {};
  @returns {Function} The descriptor factory.
  */
 property.proxy = function(descriptor) {
-  'use strict';
-  
   // Store the path
   var path = descriptor.path;
   
@@ -96,8 +106,6 @@ property.proxy = function(descriptor) {
  The handle of the element to proxy the attribute to.
  */
 property.proxyAttr = function(descriptor) {
-  'use strict';
-  
   var attribute = descriptor.attribute;
   var handle = descriptor.handle;
   
@@ -142,8 +150,6 @@ property.proxyAttr = function(descriptor) {
  Set to true if this is the default content zone that {@link Coral.Component#render} moves orphaned elements into.
  */
 property.contentZone = function(descriptor) {
-  'use strict';
-  
   var handle = descriptor.handle;
   var expectedTagName = descriptor.tagName;
   var additionalSetter = descriptor.set;

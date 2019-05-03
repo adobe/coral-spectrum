@@ -1,19 +1,15 @@
-/*
+/**
  * classList.js: Cross-browser full element.classList implementation.
  * 1.1.20150312
  *
  * By Eli Grey, http://eligrey.com
  * License: Dedicated to the public domain.
- *   See https://github.com/eligrey/classList.js/blob/master/LICENSE.md
+ * See https://github.com/eligrey/classList.js/blob/master/LICENSE.md
  */
 
-/*global self, document, DOMException */
-
-/*! @source http://purl.eligrey.com/github/classList.js/blob/master/classList.js */
+// Source http://purl.eligrey.com/github/classList.js/blob/master/classList.js
 
 (function () {
-  "use strict";
-  
   var testElement = document.createElement("_");
   
   testElement.classList.add("c1", "c2");

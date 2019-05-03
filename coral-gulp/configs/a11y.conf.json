@@ -1,6 +1,0 @@
-{
-  "showOnlyViolations": true,
-  "headless": true,
-  "verbose": true,
-  "folderOutputReport": "dist/a11y"
-}
