@@ -369,10 +369,10 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._loading = transform.booleanAttr(value);
     
     if (this._loading) {
-      const selectList = this._elements.overlay;
+      const overlay = this._elements.overlay;
   
       // we decide first if we need to scroll to the bottom since adding the load will change the dimensions
-      const scrollToBottom = selectList.scrollTop >= selectList.scrollHeight - selectList.clientHeight;
+      const scrollToBottom = overlay.scrollTop >= overlay.scrollHeight - overlay.clientHeight;
       
       // if it does not exist we create it
       if (!this._elements.loadIndicator) {
@@ -380,11 +380,11 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       }
     
       // inserts the item at the end
-      this._elements.overlay.content.appendChild(this._elements.loadIndicator);
+      this._elements.selectList.appendChild(this._elements.loadIndicator);
     
       // we make the load indicator visible
       if (scrollToBottom) {
-        selectList.scrollTop = selectList.scrollHeight;
+        overlay.scrollTop = overlay.scrollHeight;
       }
     }
     else if (this._elements.loadIndicator) {

@@ -139,6 +139,56 @@
         </coral-select>
       </div>
 
+      <h2 class="coral-Heading coral-Heading--2">Loading remote data</h2>
+      <div class="markup">
+        <coral-select id="remote" placeholder="Remote data"></coral-select>
+
+        <script>
+          window.addEventListener('load', function() {
+            // Fake remote data
+            var data = [];
+            for (var i = 1; i <= 1000; i++) {
+              data.push('Item ' + i);
+            }
+
+            var MULTIPLE_PAGE_SIZE = 20;
+            var LOADING_TIME = 1000;
+
+            var timeout;
+            var select = document.getElementById('remote');
+
+            select.addEventListener('coral-select:showitems', function(event) {
+
+              // Based on the amount of the items that the select currently has
+              var start = event.detail.start;
+              var end = MULTIPLE_PAGE_SIZE + start;
+
+              // If we have reached the end of the array there is nothing else to do
+              if (start >= data.length) {
+                return;
+              }
+
+              // Stop previous request
+              clearTimeout(timeout);
+
+              // Causes it to show the loading inside the selectlist
+              event.preventDefault();
+
+              // Make a request and show suggestions from that
+              timeout = setTimeout(function() {
+                data.slice(start, end).forEach(function(item) {
+                  select.items.add({
+                    content: {
+                      textContent: item
+                    }
+                  });
+                });
+              }, LOADING_TIME);
+            });
+          });
+        </script>
+      </div>
+
       <h2 class="coral-Heading coral-Heading--2">Multiple selection</h2>
       <div class="markup">
         <coral-select multiple>
