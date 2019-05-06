@@ -62,7 +62,7 @@ module.exports = function(gulp) {
   
   // Publish release to artifactory
   gulp.task('npm-publish', function(done) {
-    exec('npm publish', function(err, stdout, stderr) {
+    exec('npm publish --access public', function(err, stdout, stderr) {
       if (err) {
         done(new PluginError('release', stderr));
       }
