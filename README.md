@@ -27,7 +27,7 @@ components including the Spectrum SVG icons.
 
 All components can be seen in action [here](http://opensource.adobe.com/coral-spectrum/dist/examples). These are only examples and 
 don't cover all scenarios. The API documentation can be found in the [references](http://opensource.adobe.com/coral-spectrum/dist/documentation/identifiers.html).    
-A playground is available (here)[http://opensource.adobe.com/coral-spectrum/dist/playground] to experiment and preview code with the latest Coral Spectrum version.
+A playground is available [here](http://opensource.adobe.com/coral-spectrum/dist/playground) to experiment and preview code with the latest Coral Spectrum version.
 Code can be shared by copy pasting the URL. The playground is sandboxed to prevent security risks. 
 
 ## Getting started
