@@ -235,23 +235,6 @@ module.exports = function(gulp) {
     }
   });
   
-  const release = (done) => {
-    spawn(`
-      gulp build &&
-      gulp karma &&
-      gulp examples &&
-      gulp minify-css && gulp minify-js &&
-      cd coral-component-playground && gulp build && cd .. &&
-      gulp playground &&
-      gulp docs &&
-      gulp push &&
-      gulp tag-release &&
-      gulp npm-publish
-    `, [], {shell: true, stdio: 'inherit'});
-    
-    done();
-  };
-  
   gulp.task('perform-release', function(done) {
     const release = () => {
       spawn(`
