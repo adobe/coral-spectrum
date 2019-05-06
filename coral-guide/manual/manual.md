@@ -80,7 +80,7 @@ Then in your `index.js` file, you can import and use single components :
  
 ```
 // Import Component
-import {Button} from '@coralui/coral-spectrum/coral-component-button';
+import {Button} from '@adobe/coral-spectrum/coral-component-button';
 
 const button = new Button();
 ```
