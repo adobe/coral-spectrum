@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Coral.AnchorButton</title>
+
+  <script>window.addEventListener("message", function(e) {!document.head.querySelector('svg') && document.head.insertAdjacentHTML("beforeend", e.data)});</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const markup = document.body.querySelectorAll('.markup');
+      for (var i = 0; i < markup.length; i++) {
+        const code = markup[i].innerHTML;
+        const id = 'markup-code-' + i;
+        markup[i].insertAdjacentHTML('afterend',
+          '<div style="margin:10px 0">' +
+          '<a onclick="event.preventDefault();this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+          '<pre hidden>' +
+          '<code id="'+ id +'" class="html">' +
+          '</code>' +
+          '</pre>' +
+          '</div>');
+        document.getElementById(id).textContent = code;
+      }
+      window.hljs.initHighlightingOnLoad();
+    });
+  </script>
+
+  <link rel="stylesheet" href="../css/coral.css">
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const script = document.createElement('script');
+      script.src = '../js/coral.js';
+      document.head.appendChild(script);
+    });
+  </script>
+</head>
+<body class="coral--light">
+<div style="position:fixed;top:15px;right:15px;">
+  <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--light'">Light</a> |
+  <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--lightest'">Lightest</a> |
+  <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--dark'">Dark</a> |
+  <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--darkest'">Darkest</a>
+</div>
+
+<section class="u-coral-margin">
+  <h2 class="coral-Heading coral-Heading--2">Default</h2>
+  <div class="markup">
+    <a is="coral-anchorbutton" href="#">Default</a>
+  </div>
+
+  <h2 class="coral-Heading coral-Heading--2">CTA</h2>
+  <div class="markup">
+    <a is="coral-anchorbutton" href="#" variant="cta">CTA</a>
+  </div>
+
+  <h2 class="coral-Heading coral-Heading--2">Secondary</h2>
+  <div class="markup">
+    <a is="coral-anchorbutton" href="#" variant="secondary">Secondary</a>
+  </div>
+
+  <h2 class="coral-Heading coral-Heading--2">Warning</h2>
+  <div class="markup">
+    <a is="coral-anchorbutton" href="#" variant="warning">Warning</a>
+  </div>
+
+  <h2 class="coral-Heading coral-Heading--2">Quiet button</h2>
+  <div class="markup">
+    <a is="coral-anchorbutton" href="#" variant="quiet">Quiet</a>
+  </div>
+
+  <h2 class="coral-Heading coral-Heading--2">Minimal button</h2>
+  <div class="markup">
+    <a is="coral-anchorbutton" href="#" variant="minimal">Minimal</a>
+  </div>
+
+  <h2 class="coral-Heading coral-Heading--2">Disabled button</h2>
+  <div class="markup">
+    <a is="coral-anchorbutton" href="#" disabled>Disabled</a>
+  </div>
+
+  <h2 class="coral-Heading coral-Heading--2">Icon button</h2>
+  <div class="markup">
+    <a is="coral-anchorbutton" href="#" icon="home" iconposition="left">With Icon</a>
+    <a is="coral-anchorbutton" href="#" icon="home" iconposition="right">With Icon</a>
+  </div>
+
+  <h2 class="coral-Heading coral-Heading--2">Image button</h2>
+  <div class="markup">
+    <a is="coral-anchorbutton" href="#" icon="http://via.placeholder.com/64x64" iconposition="left">With Image</a>
+    <a is="coral-anchorbutton" href="#" icon="http://via.placeholder.com/64x64" iconposition="right">With Image</a>
+  </div>
+
+  <h2 class="coral-Heading coral-Heading--2">Block</h2>
+  <div class="markup">
+    <a is="coral-anchorbutton" href="#" block style="max-width:400px">Block Button</a>
+  </div>
+</section>
+</body>
+</html>

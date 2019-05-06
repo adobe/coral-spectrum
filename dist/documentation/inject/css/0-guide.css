@@ -1,0 +1,229 @@
+/**
+ * Copyright 2019 Adobe. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under
+ * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+ * OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
+
+html, body {
+  font-family: adobe-clean,Helvetica,Arial,sans-serif;
+  font-weight: 300;
+  background: rgb(245, 245, 245)
+}
+
+a {
+  color: rgb(13, 102, 208);
+}
+
+h2 {
+  border-bottom: none;
+}
+
+.github-markdown h2,
+.github-markdown h3 {
+  font-weight: 300;
+}
+
+.github-markdown h1,
+.github-markdown h4 {
+  font-weight: 500;
+}
+
+.github-markdown pre > code {
+  background: #fafafa;
+  border: solid 1px #ddd;
+  padding: 8px;
+}
+
+img:not([src*=".svg"]).logo {
+  max-width: 500px;
+  box-shadow: none;
+}
+
+.navigation {
+  border-right: none;
+  background: transparent;
+  box-shadow: none;
+  padding: 0 0 0 15px !important;
+  margin-top: 0 !important;
+}
+
+.navigation .nav-dir-path {
+  font-weight: 500;
+}
+
+.inner-link-active {
+  background-color: rgba(0, 0, 0, .6) !important;
+}
+
+.github-markdown .inner-link-active {
+  background-color: transparent !important;
+  color: inherit !important;
+  padding-left: 0 !important;
+}
+
+body {
+  visibility: hidden;
+}
+
+body.is-ready {
+  visibility: visible;
+}
+
+.layout-container > header {
+  position: absolute;
+  background: transparent;
+  border-bottom: none;
+  left: 250px;
+  right: 0;
+  width: auto;
+}
+
+.layout-container > header > a {
+  color: #8c8c8c;
+}
+
+.layout-container > header > a:hover {
+  color: #2c2c2c;
+}
+
+.layout-container > header > a.is-active {
+  color: #2c2c2c;
+  border-bottom: solid 2px rgb(44, 44, 44);
+}
+
+.navigation > a:first-child {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.navigation a:first-child span {
+  margin-left: 15px;
+  font-size: 22px;
+  color: #2c2c2c;
+  font-weight: 500;
+}
+
+.navigation .manual-toc-root > div {
+  padding-left: 0;
+}
+
+.navigation .manual-toc .indent-h1 {
+  padding: 0.2em 0 0.2em 0;
+  margin: 0.4em 0 0 0;
+
+}
+
+.navigation .manual-toc .indent-h1 a {
+  font-weight: 500;
+}
+
+.navigation .manual-toc li.is-selected a {
+  color: #555 !important;
+  background-color: rgba(44,44,44,0.06);
+  padding: 5px;
+  margin-left: -5px;
+  border-radius: 4px;
+}
+
+.search-input {
+  border-color: #8c8c8c;
+  font-family: adobe-clean,Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  padding-left: 24px;
+}
+
+.search-input:focus {
+  border-color: #c0c0c0;
+}
+
+.search-box {
+  top: 8px;
+  right: 10px;
+}
+
+.search-box img {
+  display: none;
+}
+
+.search-box.active .search-input-edge {
+  display: none;
+}
+
+.search-icon {
+  position: absolute;
+  top: -3px;
+  width: 16px;
+  height: 32px;
+  color: rgb(112, 112, 112);
+  fill: currentColor;
+  pointer-events: none;
+}
+
+.search-result {
+  height: inherit;
+  max-height: 600px;
+  border: 1px solid rgb(225, 225, 225);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  right: 8px;
+}
+
+.search-result li a {
+  padding: 9px 0 9px 12px;
+}
+
+.search-result li.selected {
+  background-color: rgb(245, 245, 245);
+}
+
+.search-box.active .search-input {
+  transition: none;
+}
+
+.search-box img {
+  width: 18px;
+  vertical-align: baseline;
+}
+
+.search-result li.search-separator {
+  color: black;
+  background: #f0f0f0;
+}
+
+.kind-enum {
+  color: royalblue;
+  background: lightblue;
+}
+
+.kind-event {
+  color: orange;
+  background: cornsilk;
+}
+
+pre.prettyprint > code,
+.import-path pre.prettyprint code {
+  background: #fafafa;
+  border: solid 1px #ddd;
+  padding: 8px;
+  margin-left: 0;
+}
+
+code[data-ice="importPathCode"]:empty {
+  display: none;
+}
+
+.expression-extends .prettyprint {
+  padding: 0;
+}
+
+[data-ice="exampleDocs"] h4,
+[data-ice="see"] h4 {
+  display: none;
+}

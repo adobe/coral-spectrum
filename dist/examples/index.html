@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Coral</title>
+
+  <link rel="stylesheet" href="../css/coral.css">
+  <style>
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .example-List {
+      height: 100%;
+      box-sizing: border-box;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      overflow: scroll;
+    }
+
+    .example-List coral-tab {
+      text-transform: capitalize;
+    }
+
+    .example-Preview {
+      width: calc(100% - 150px);
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      border: 0;
+    }
+  </style>
+  <script src="../js/coral.js"></script>
+</head>
+<body class="coral--dark">
+  <div class="example-List">
+    <coral-tablist size="S" orientation="vertical" id="example-list"></coral-tablist>
+  </div>
+  <iframe class="example-Preview" id="example-preview"></iframe>
+
+  <script>
+    const components = [
+      'coral-component-accordion',
+      'coral-component-actionbar',
+      'coral-component-alert',
+      'coral-component-anchorbutton',
+      'coral-component-autocomplete',
+      'coral-component-button',
+      'coral-component-buttongroup',
+      'coral-component-calendar',
+      'coral-component-card',
+      'coral-component-charactercount',
+      'coral-component-checkbox',
+      'coral-component-clock',
+      'coral-component-colorinput',
+      'coral-component-columnview',
+      'coral-component-cyclebutton',
+      'coral-component-datepicker',
+      'coral-component-dialog',
+      'coral-component-drawer',
+      'coral-component-fileupload',
+      'coral-component-icon',
+      'coral-component-list',
+      'coral-component-masonry',
+      'coral-component-multifield',
+      'coral-component-numberinput',
+      'coral-component-overlay',
+      'coral-component-panelstack',
+      'coral-component-popover',
+      'coral-component-progress',
+      'coral-component-quickactions',
+      'coral-component-radio',
+      'coral-component-search',
+      'coral-component-select',
+      'coral-component-shell',
+      'coral-component-slider',
+      'coral-component-steplist',
+      'coral-component-switch',
+      'coral-component-table',
+      'coral-component-tablist',
+      'coral-component-tabview',
+      'coral-component-taglist',
+      'coral-component-textarea',
+      'coral-component-textfield',
+      'coral-component-tooltip',
+      'coral-component-tree',
+      'coral-component-wait',
+      'coral-component-wizardview',
+      'coral-dragaction'
+    ];
+
+    const list = document.getElementById('example-list');
+    const preview = document.getElementById('example-preview');
+
+    preview.addEventListener('load', function() {
+      // Workaround to load the icons
+      var icons = document.querySelectorAll('head svg');
+      var html = '';
+      for (var i = 0; i < icons.length; i++) {
+        html += icons[i].outerHTML;
+      }
+      preview.contentWindow.postMessage(html, '*');
+    });
+
+    components.forEach(function(component) {
+      const name = component.split('-').pop();
+      const item = list.items.add({
+        label: {
+          textContent: name
+        },
+        selected: location.hash.slice(1) === name
+      });
+      item.setAttribute('src', component + '.html');
+    });
+
+    list.on('coral-tablist:change', function(event) {
+      const XMLHttpRequest = new window.XMLHttpRequest();
+      XMLHttpRequest.onreadystatechange = function() {
+        if (XMLHttpRequest.readyState == 4 && XMLHttpRequest.status == 200) {
+          preview.srcdoc = this.responseText;
+          location.hash = event.detail.selection.textContent;
+        }
+      };
+
+      XMLHttpRequest.open('GET', event.detail.selection.getAttribute('src'), true);
+      XMLHttpRequest.send();
+    });
+  </script>
+</body>
+</html>

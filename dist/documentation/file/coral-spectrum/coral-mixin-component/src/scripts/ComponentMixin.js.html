@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../../">
+  <title data-ice="title">coral-spectrum/coral-mixin-component/src/scripts/ComponentMixin.js | Coral Spectrum</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<script src="./inject/script/0-typekit.js"></script><script src="./inject/script/0-guide.js"></script><link rel="stylesheet" href="./inject/css/0-guide.css"><meta name="description" content="Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns."><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Coral Spectrum"><meta property="twitter:description" content="Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns."></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./" style="display: flex; align-items: center;"><img src="./image/brand_logo.png" style="width:34px;"></a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/adobe/coral-spectrum"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-collection-src-scripts">coral-collection/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-collection/src/scripts/Collection.js~Collection.html">Collection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-collection/src/scripts/SelectableCollection.js~SelectableCollection.html">SelectableCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-CollectionFilter">CollectionFilter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-CollectionOnChange">CollectionOnChange</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-CollectionOnItemAdded">CollectionOnItemAdded</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-CollectionOnItemRemoved">CollectionOnItemRemoved</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-collection:add">coral-collection:add</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-collection:remove">coral-collection:remove</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-accordion-src-scripts">coral-component-accordion/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-accordion/src/scripts/Accordion.js~Accordion.html">Accordion</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-accordion/src/scripts/AccordionItem.js~AccordionItem.html">AccordionItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-accordion/src/scripts/AccordionItemContent.js~AccordionItemContent.html">AccordionItemContent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-AccordionItemLabel">AccordionItemLabel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-accordion:change">coral-accordion:change</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-AccordionVariantEnum">AccordionVariantEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-actionbar-src-scripts">coral-component-actionbar/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-actionbar/src/scripts/ActionBar.js~ActionBar.html">ActionBar</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-actionbar/src/scripts/ActionBarContainer.js~ActionBarContainer.html">ActionBarContainer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-actionbar/src/scripts/ActionBarContainerCollection.js~ActionBarContainerCollection.html">ActionBarContainerCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-actionbar/src/scripts/ActionBarContainerMixin.js~ActionBarContainerMixin.html">ActionBarContainerMixin</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-actionbar/src/scripts/ActionBarItem.js~ActionBarItem.html">ActionBarItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-actionbar/src/scripts/ActionBarPrimary.js~ActionBarPrimary.html">ActionBarPrimary</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-actionbar/src/scripts/ActionBarSecondary.js~ActionBarSecondary.html">ActionBarSecondary</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ActionBarContainerPositionEnum">ActionBarContainerPositionEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-alert-src-scripts">coral-component-alert/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-alert/src/scripts/Alert.js~Alert.html">Alert</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-alert/src/scripts/AlertContent.js~AlertContent.html">AlertContent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-alert/src/scripts/AlertFooter.js~AlertFooter.html">AlertFooter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-alert/src/scripts/AlertHeader.js~AlertHeader.html">AlertHeader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-AlertSizeEnum">AlertSizeEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-AlertVariantEnum">AlertVariantEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-anchorbutton-src-scripts">coral-component-anchorbutton/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-anchorbutton/src/scripts/AnchorButton.js~AnchorButton.html">AnchorButton</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-AnchorButtonLabel">AnchorButtonLabel</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-autocomplete-src-scripts">coral-component-autocomplete/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-autocomplete/src/scripts/Autocomplete.js~Autocomplete.html">Autocomplete</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-autocomplete/src/scripts/AutocompleteItem.js~AutocompleteItem.html">AutocompleteItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-AutocompleteSuggestion">AutocompleteSuggestion</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-AutocompleteMatchEnum">AutocompleteMatchEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-AutocompleteVariantEnum">AutocompleteVariantEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-button-src-scripts">coral-component-button/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-button/src/scripts/Button.js~Button.html">Button</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ButtonLabel">ButtonLabel</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-buttongroup-src-scripts">coral-component-buttongroup/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-buttongroup/src/scripts/ButtonGroup.js~ButtonGroup.html">ButtonGroup</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ButtonGroupSelectionModeEnum">ButtonGroupSelectionModeEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-calendar-src-scripts">coral-component-calendar/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-calendar/src/scripts/Calendar.js~Calendar.html">Calendar</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-card-src-scripts">coral-component-card/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/Card.js~Card.html">Card</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/CardBanner.js~CardBanner.html">CardBanner</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/CardBannerContent.js~CardBannerContent.html">CardBannerContent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/CardBannerHeader.js~CardBannerHeader.html">CardBannerHeader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/CardContext.js~CardContext.html">CardContext</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/CardDescription.js~CardDescription.html">CardDescription</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/CardProperty.js~CardProperty.html">CardProperty</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/CardPropertyList.js~CardPropertyList.html">CardPropertyList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/CardSubtitle.js~CardSubtitle.html">CardSubtitle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/CardTitle.js~CardTitle.html">CardTitle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-CardAsset">CardAsset</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-CardContent">CardContent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-CardInfo">CardInfo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-CardOverlay">CardOverlay</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-CardPropertyContent">CardPropertyContent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-CardVariantEnum">CardVariantEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-CardBannerVariantEnum">CardBannerVariantEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-charactercount-src-scripts">coral-component-charactercount/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-charactercount/src/scripts/CharacterCount.js~CharacterCount.html">CharacterCount</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-CharacterCountTargetEnum">CharacterCountTargetEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-checkbox-src-scripts">coral-component-checkbox/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-checkbox/src/scripts/Checkbox.js~Checkbox.html">Checkbox</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-CheckboxLabel">CheckboxLabel</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-clock-src-scripts">coral-component-clock/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-clock/src/scripts/Clock.js~Clock.html">Clock</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ClockVariantEnum">ClockVariantEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-colorinput-src-scripts">coral-component-colorinput/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-colorinput/src/scripts/Color.js~Color.html">Color</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-colorinput/src/scripts/ColorInput.js~ColorInput.html">ColorInput</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-colorinput/src/scripts/ColorInputAbstractSubviewMixin.js~ColorInputAbstractSubviewMixin.html">ColorInputAbstractSubviewMixin</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-colorinput/src/scripts/ColorInputColorProperties.js~ColorInputColorProperties.html">ColorInputColorProperties</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-colorinput/src/scripts/ColorInputItem.js~ColorInputItem.html">ColorInputItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-colorinput/src/scripts/ColorInputSlider.js~ColorInputSlider.html">ColorInputSlider</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-colorinput/src/scripts/ColorInputSwatch.js~ColorInputSwatch.html">ColorInputSwatch</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-colorinput/src/scripts/ColorInputSwatches.js~ColorInputSwatches.html">ColorInputSwatches</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ColorInputAutoGenerateColorsEnum">ColorInputAutoGenerateColorsEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ColorInputShowDefaultColorsEnum">ColorInputShowDefaultColorsEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ColorInputShowPropertiesEnum">ColorInputShowPropertiesEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ColorInputShowSwatchesEnum">ColorInputShowSwatchesEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ColorInputVariantEnum">ColorInputVariantEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-columnview-src-scripts">coral-component-columnview/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-columnview/src/scripts/ColumnView.js~ColumnView.html">ColumnView</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-columnview/src/scripts/ColumnViewCollection.js~ColumnViewCollection.html">ColumnViewCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-columnview/src/scripts/ColumnViewColumn.js~ColumnViewColumn.html">ColumnViewColumn</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-columnview/src/scripts/ColumnViewColumnContent.js~ColumnViewColumnContent.html">ColumnViewColumnContent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-columnview/src/scripts/ColumnViewItem.js~ColumnViewItem.html">ColumnViewItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-columnview/src/scripts/ColumnViewItemContent.js~ColumnViewItemContent.html">ColumnViewItemContent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-columnview/src/scripts/ColumnViewItemThumbnail.js~ColumnViewItemThumbnail.html">ColumnViewItemThumbnail</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-columnview/src/scripts/ColumnViewPreview.js~ColumnViewPreview.html">ColumnViewPreview</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-columnview/src/scripts/ColumnViewPreviewContent.js~ColumnViewPreviewContent.html">ColumnViewPreviewContent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ColumnViewPreviewAsset">ColumnViewPreviewAsset</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ColumnViewPreviewLabel">ColumnViewPreviewLabel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ColumnViewPreviewSeparator">ColumnViewPreviewSeparator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ColumnViewPreviewValue">ColumnViewPreviewValue</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-columnview:activeitemchange">coral-columnview:activeitemchange</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-columnview:change">coral-columnview:change</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-columnview:loaditems">coral-columnview:loaditems</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-columnview:navigate">coral-columnview:navigate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ColumnViewItemVariantEnum">ColumnViewItemVariantEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ColumnViewSelectionModeEnum">ColumnViewSelectionModeEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-cyclebutton-src-scripts">coral-component-cyclebutton/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-cyclebutton/src/scripts/CycleButton.js~CycleButton.html">CycleButton</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-cyclebutton/src/scripts/CycleButtonAction.js~CycleButtonAction.html">CycleButtonAction</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-cyclebutton/src/scripts/CycleButtonItem.js~CycleButtonItem.html">CycleButtonItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-cyclebutton:change">coral-cyclebutton:change</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-CycleButtonDisplayModeEnum">CycleButtonDisplayModeEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-CycleButtonItemDisplayModeEnum">CycleButtonItemDisplayModeEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-datepicker-src-scripts">coral-component-datepicker/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-datepicker/src/scripts/Datepicker.js~Datepicker.html">Datepicker</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-DatepickerTypeEnum">DatepickerTypeEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-DatepickerVariantEnum">DatepickerVariantEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-dialog-src-scripts">coral-component-dialog/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-dialog/src/scripts/Dialog.js~Dialog.html">Dialog</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-dialog/src/scripts/DialogContent.js~DialogContent.html">DialogContent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-dialog/src/scripts/DialogFooter.js~DialogFooter.html">DialogFooter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-dialog/src/scripts/DialogHeader.js~DialogHeader.html">DialogHeader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-DialogBackdropEnum">DialogBackdropEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-DialogClosableEnum">DialogClosableEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-DialogInteractionEnum">DialogInteractionEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-DialogVariantEnum">DialogVariantEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-drawer-src-scripts">coral-component-drawer/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-drawer/src/scripts/Drawer.js~Drawer.html">Drawer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-DrawerContent">DrawerContent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-drawer:close">coral-drawer:close</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-drawer:open">coral-drawer:open</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-DrawerDirectionEnum">DrawerDirectionEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-fileupload-src-scripts">coral-component-fileupload/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-fileupload/src/scripts/FileUpload.js~FileUpload.html">FileUpload</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-fileupload/src/scripts/FileUploadItem.js~FileUploadItem.html">FileUploadItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-FileUploadMethodEnum">FileUploadMethodEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-FileUploadItemResponseTypeEnum">FileUploadItemResponseTypeEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-icon-src-scripts">coral-component-icon/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-icon/src/scripts/Icon.js~Icon.html">Icon</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadIcons">loadIcons</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-IconSizeEnum">IconSizeEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-list-src-scripts">coral-component-list/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-list/src/scripts/AnchorList.js~AnchorList.html">AnchorList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-list/src/scripts/AnchorListItem.js~AnchorListItem.html">AnchorListItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-list/src/scripts/ButtonList.js~ButtonList.html">ButtonList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-list/src/scripts/ButtonListItem.js~ButtonListItem.html">ButtonListItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-list/src/scripts/List.js~List.html">List</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-list/src/scripts/ListDivider.js~ListDivider.html">ListDivider</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-list/src/scripts/ListItem.js~ListItem.html">ListItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-list/src/scripts/SelectList.js~SelectList.html">SelectList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-list/src/scripts/SelectListGroup.js~SelectListGroup.html">SelectListGroup</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-list/src/scripts/SelectListItem.js~SelectListItem.html">SelectListItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-list/src/scripts/SelectListItemContent.js~SelectListItemContent.html">SelectListItemContent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ListItemContent">ListItemContent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-selectlist:change">coral-selectlist:change</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-selectlist:change">coral-selectlist:change</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-selectlist:scrollbottom">coral-selectlist:scrollbottom</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-masonry-src-scripts">coral-component-masonry/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry.html">Masonry</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryColumnLayout.js~MasonryColumnLayout.html">MasonryColumnLayout</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryDashboardLayout.js~MasonryDashboardLayout.html">MasonryDashboardLayout</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryFixedCenteredLayout.js~MasonryFixedCenteredLayout.html">MasonryFixedCenteredLayout</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryFixedSpreadLayout.js~MasonryFixedSpreadLayout.html">MasonryFixedSpreadLayout</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryItem.js~MasonryItem.html">MasonryItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryLayout.js~MasonryLayout.html">MasonryLayout</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryVariableLayout.js~MasonryVariableLayout.html">MasonryVariableLayout</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:change">coral-masonry:change</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:order">coral-masonry:order</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryLayoutsEnum">MasonryLayoutsEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonrySelectionModeEnum">MasonrySelectionModeEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-multifield-src-scripts">coral-component-multifield/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-multifield/src/scripts/Multifield.js~Multifield.html">Multifield</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-multifield/src/scripts/MultifieldCollection.js~MultifieldCollection.html">MultifieldCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-multifield/src/scripts/MultifieldItem.js~MultifieldItem.html">MultifieldItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-MultifieldItemContent">MultifieldItemContent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-multifield:beforeitemorder">coral-multifield:beforeitemorder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-multifield:itemorder">coral-multifield:itemorder</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-numberinput-src-scripts">coral-component-numberinput/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-numberinput/src/scripts/NumberInput.js~NumberInput.html">NumberInput</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-overlay-src-scripts">coral-component-overlay/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.html">Overlay</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-overlay:positioned">coral-overlay:positioned</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-OverlayAlignEnum">OverlayAlignEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-OverlayCollisionEnum">OverlayCollisionEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-OverlayInteractionEnum">OverlayInteractionEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-OverlayPlacementEnum">OverlayPlacementEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-OverlayTargetEnum">OverlayTargetEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-panelstack-src-scripts">coral-component-panelstack/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-panelstack/src/scripts/Panel.js~Panel.html">Panel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-panelstack/src/scripts/PanelStack.js~PanelStack.html">PanelStack</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-PanelContent">PanelContent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-panelstack:change">coral-panelstack:change</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-popover-src-scripts">coral-component-popover/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-popover/src/scripts/Popover.js~Popover.html">Popover</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-popover/src/scripts/PopoverContent.js~PopoverContent.html">PopoverContent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-popover/src/scripts/PopoverFooter.js~PopoverFooter.html">PopoverFooter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-popover/src/scripts/PopoverHeader.js~PopoverHeader.html">PopoverHeader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-popover/src/scripts/PopoverSeparator.js~PopoverSeparator.html">PopoverSeparator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-PopoverClosableEnum">PopoverClosableEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-PopoverVariantEnum">PopoverVariantEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-progress-src-scripts">coral-component-progress/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-progress/src/scripts/Progress.js~Progress.html">Progress</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-progress/src/scripts/ProgressLabel.js~ProgressLabel.html">ProgressLabel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-progress:change">coral-progress:change</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ProgressLabelPositionEnum">ProgressLabelPositionEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ProgressSizeEnum">ProgressSizeEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-quickactions-src-scripts">coral-component-quickactions/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions.html">QuickActions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-quickactions/src/scripts/QuickActionsItem.js~QuickActionsItem.html">QuickActionsItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-QuickActionsInteractionEnum">QuickActionsInteractionEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-QuickActionsPlacementEnum">QuickActionsPlacementEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-QuickActionsTargetEnum">QuickActionsTargetEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-QuickActionsItemTypeEnum">QuickActionsItemTypeEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-radio-src-scripts">coral-component-radio/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-radio/src/scripts/Radio.js~Radio.html">Radio</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-RadioLabel">RadioLabel</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-search-src-scripts">coral-component-search/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-search/src/scripts/Search.js~Search.html">Search</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-search:clear">coral-search:clear</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-search:input">coral-search:input</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-search:submit">coral-search:submit</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-SearchVariantEnum">SearchVariantEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-select-src-scripts">coral-component-select/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-select/src/scripts/Select.js~Select.html">Select</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-select/src/scripts/SelectItem.js~SelectItem.html">SelectItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-select:hideitems">coral-select:hideitems</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-select:showitems">coral-select:showitems</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-SelectVariantEnum">SelectVariantEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-shell-src-scripts">coral-component-shell/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-shell/src/scripts/Shell.js~Shell.html">Shell</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-shell/src/scripts/ShellHeader.js~ShellHeader.html">ShellHeader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-shell/src/scripts/ShellHelp.js~ShellHelp.html">ShellHelp</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-shell/src/scripts/ShellHelpItem.js~ShellHelpItem.html">ShellHelpItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-shell/src/scripts/ShellHomeAnchor.js~ShellHomeAnchor.html">ShellHomeAnchor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-shell/src/scripts/ShellMenu.js~ShellMenu.html">ShellMenu</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBar.js~ShellMenuBar.html">ShellMenuBar</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js~ShellMenuBarItem.html">ShellMenuBarItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-shell/src/scripts/ShellOrgSwitcher.js~ShellOrgSwitcher.html">ShellOrgSwitcher</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-shell/src/scripts/ShellOrganization.js~ShellOrganization.html">ShellOrganization</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-shell/src/scripts/ShellSolution.js~ShellSolution.html">ShellSolution</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-shell/src/scripts/ShellSolutionSwitcher.js~ShellSolutionSwitcher.html">ShellSolutionSwitcher</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-shell/src/scripts/ShellSolutions.js~ShellSolutions.html">ShellSolutions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-shell/src/scripts/ShellSuborganization.js~ShellSuborganization.html">ShellSuborganization</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-shell/src/scripts/ShellUser.js~ShellUser.html">ShellUser</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-shell/src/scripts/ShellWorkspace.js~ShellWorkspace.html">ShellWorkspace</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-shell/src/scripts/ShellWorkspaces.js~ShellWorkspaces.html">ShellWorkspaces</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ShellContent">ShellContent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ShellHelpSeparator">ShellHelpSeparator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ShellHomeAnchorLabel">ShellHomeAnchorLabel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ShellOrgSwitcherFooter">ShellOrgSwitcherFooter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ShellSolutionLabel">ShellSolutionLabel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ShellSolutionsHeader">ShellSolutionsHeader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ShellUserContent">ShellUserContent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ShellUserFooter">ShellUserFooter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ShellUserHeading">ShellUserHeading</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ShellUserName">ShellUserName</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ShellUserSubheading">ShellUserSubheading</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ShellHelpResult">ShellHelpResult</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ShellMenuFromEnum">ShellMenuFromEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ShellMenuPlacementEnum">ShellMenuPlacementEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-shell-menubar-item:close">coral-shell-menubar-item:close</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-shell-menubar-item:open">coral-shell-menubar-item:open</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ShellMenuBarItemIconVariantEnum">ShellMenuBarItemIconVariantEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-shell-orgswitcher:change">coral-shell-orgswitcher:change</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ShellUserAvatarEnum">ShellUserAvatarEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-slider-src-scripts">coral-component-slider/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-slider/src/scripts/RangedSlider.js~RangedSlider.html">RangedSlider</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider.html">Slider</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-slider/src/scripts/SliderItem.js~SliderItem.html">SliderItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-SliderContent">SliderContent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-SliderOrientationEnum">SliderOrientationEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-steplist-src-scripts">coral-component-steplist/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-steplist/src/scripts/Step.js~Step.html">Step</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-steplist/src/scripts/StepLabel.js~StepLabel.html">StepLabel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-steplist/src/scripts/StepList.js~StepList.html">StepList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-steplist:change">coral-steplist:change</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StepListInteractionEnum">StepListInteractionEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StepListSizeEnum">StepListSizeEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-switch-src-scripts">coral-component-switch/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-switch/src/scripts/Switch.js~Switch.html">Switch</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-SwitchLabel">SwitchLabel</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-table-src-scripts">coral-component-table/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-table/src/scripts/Table.js~Table.html">Table</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-table/src/scripts/TableBody.js~TableBody.html">TableBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-table/src/scripts/TableCell.js~TableCell.html">TableCell</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-table/src/scripts/TableColumn.js~TableColumn.html">TableColumn</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-table/src/scripts/TableFoot.js~TableFoot.html">TableFoot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-table/src/scripts/TableHead.js~TableHead.html">TableHead</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-table/src/scripts/TableHeaderCell.js~TableHeaderCell.html">TableHeaderCell</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-table/src/scripts/TableRow.js~TableRow.html">TableRow</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-table/src/scripts/TableSectionMixin.js~TableSectionMixin.html">TableSectionMixin</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-TableHeaderCellContent">TableHeaderCellContent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-table:beforecolumndrag">coral-table:beforecolumndrag</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-table:beforecolumnsort">coral-table:beforecolumnsort</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-table:beforeroworder">coral-table:beforeroworder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-table:change">coral-table:change</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-table:columndrag">coral-table:columndrag</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-table:columnsort">coral-table:columnsort</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-table:rowchange">coral-table:rowchange</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-table:rowlock">coral-table:rowlock</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-table:roworder">coral-table:roworder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-table:rowunlock">coral-table:rowunlock</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-TableVariantEnum">TableVariantEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-TableColumnSortableDirectionEnum">TableColumnSortableDirectionEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-TableColumnSortableTypeEnum">TableColumnSortableTypeEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-TableColumnAlignmentEnum">TableColumnAlignmentEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-TableSectionDividerEnum">TableSectionDividerEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-tablist-src-scripts">coral-component-tablist/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-tablist/src/scripts/Tab.js~Tab.html">Tab</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-tablist/src/scripts/TabLabel.js~TabLabel.html">TabLabel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-tablist/src/scripts/TabList.js~TabList.html">TabList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-tablist:change">coral-tablist:change</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-TabListOrientationEnum">TabListOrientationEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-TabListSizeEnum">TabListSizeEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-tabview-src-scripts">coral-component-tabview/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-tabview/src/scripts/TabView.js~TabView.html">TabView</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-tabview:change">coral-tabview:change</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-TabViewOrientationEnum">TabViewOrientationEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-taglist-src-scripts">coral-component-taglist/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-taglist/src/scripts/Tag.js~Tag.html">Tag</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-taglist/src/scripts/TagLabel.js~TagLabel.html">TagLabel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-taglist/src/scripts/TagList.js~TagList.html">TagList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-TagColorEnum">TagColorEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-TagSizeEnum">TagSizeEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-textarea-src-scripts">coral-component-textarea/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-textarea/src/scripts/Textarea.js~Textarea.html">Textarea</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-TextareaVariantEnum">TextareaVariantEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-textfield-src-scripts">coral-component-textfield/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-textfield/src/scripts/Textfield.js~Textfield.html">Textfield</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-TextfieldVariantEnum">TextfieldVariantEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-tooltip-src-scripts">coral-component-tooltip/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-tooltip/src/scripts/Tooltip.js~Tooltip.html">Tooltip</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-tooltip/src/scripts/TooltipContent.js~TooltipContent.html">TooltipContent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-TooltipVariantEnum">TooltipVariantEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-tree-src-scripts">coral-component-tree/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-tree/src/scripts/Tree.js~Tree.html">Tree</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-tree/src/scripts/TreeItem.js~TreeItem.html">TreeItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-TreeItemContent">TreeItemContent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-tree:change">coral-tree:change</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-tree:collapse">coral-tree:collapse</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-tree:expand">coral-tree:expand</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-TreeItemVariantEnum">TreeItemVariantEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-wait-src-scripts">coral-component-wait/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-wait/src/scripts/Wait.js~Wait.html">Wait</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-wait:change">coral-wait:change</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-WaitSizeEnum">WaitSizeEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-WaitVariantEnum">WaitVariantEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-wizardview-src-scripts">coral-component-wizardview/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-wizardview/src/scripts/WizardView.js~WizardView.html">WizardView</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-wizardview:change">coral-wizardview:change</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-datetime-src-scripts">coral-datetime/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-datetime/src/scripts/DateTime.js~DateTime.html">DateTime</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-dragaction-src-scripts">coral-dragaction/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-dragaction/src/scripts/DragAction.js~DragAction.html">DragAction</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:drag">coral-dragaction:drag</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragend">coral-dragaction:dragend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragenter">coral-dragaction:dragenter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragleave">coral-dragaction:dragleave</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragover">coral-dragaction:dragover</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragstart">coral-dragaction:dragstart</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:drop">coral-dragaction:drop</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-DragActionAxisEnum">DragActionAxisEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-mixin-button-src-scripts">coral-mixin-button/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-mixin-button/src/scripts/ButtonMixin.js~ButtonMixin.html">ButtonMixin</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ButtonIconPositionEnum">ButtonIconPositionEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ButtonIconSizeEnum">ButtonIconSizeEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ButtonSizeEnum">ButtonSizeEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ButtonVariantEnum">ButtonVariantEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-mixin-component-src-scripts">coral-mixin-component/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-mixin-component/src/scripts/ComponentMixin.js~ComponentMixin.html">ComponentMixin</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-TrackingEnum">TrackingEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-mixin-formfield-src-scripts">coral-mixin-formfield/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-mixin-formfield/src/scripts/FormFieldMixin.js~FormFieldMixin.html">FormFieldMixin</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-mixin-list-src-scripts">coral-mixin-list/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-mixin-list/src/scripts/ListItemMixin.js~ListItemMixin.html">ListItemMixin</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-mixin-list/src/scripts/ListMixin.js~ListMixin.html">ListMixin</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ListInteractionEnum">ListInteractionEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-mixin-overlay-src-scripts">coral-mixin-overlay/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-mixin-overlay/src/scripts/OverlayMixin.js~OverlayMixin.html">OverlayMixin</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-overlay:beforeclose">coral-overlay:beforeclose</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-overlay:beforeopen">coral-overlay:beforeopen</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-overlay:close">coral-overlay:close</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-overlay:open">coral-overlay:open</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-OverlayFadeTime">OverlayFadeTime</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-OverlayFocusOnShowEnum">OverlayFocusOnShowEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-OverlayReturnFocusEnum">OverlayReturnFocusEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-OverlayTrapFocusEnum">OverlayTrapFocusEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-utils-src-scripts">coral-utils/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-utils/src/scripts/Commons.js~Commons.html">Commons</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-utils/src/scripts/Events.js~Events.html">Events</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-utils/src/scripts/I18nProvider.js~I18nProvider.html">I18nProvider</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-utils/src/scripts/Keys.js~Keys.html">Keys</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-utils/src/scripts/Tracking.js~Tracking.html">Tracking</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-utils/src/scripts/Transformation.js~Transformation.html">Transformation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-utils/src/scripts/Validation.js~Validation.html">Validation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-commons">commons</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-events">events</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-i18n">i18n</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-strings">strings</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-keys">keys</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-tracking">tracking</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-transform">transform</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-validate">validate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-I18nLocalesEnum">I18nLocalesEnum</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">coral-spectrum/coral-mixin-component/src/scripts/ComponentMixin.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * Copyright 2019 Adobe. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under
+ * the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+ * OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
+
+import Vent from &apos;@adobe/vent&apos;;
+import {commons, Keys, keys, events, transform, validate, tracking as trackingUtil} from &apos;../../../coral-utils&apos;;
+
+// Used to split events by type/target
+const delegateEventSplitter = /^(\S+)\s*(.*)$/;
+
+/**
+ Enumeration representing the tracking options.
+ 
+ @typedef {Object} TrackingEnum
+ 
+ @property {String} ON
+ Enables tracking of the component interactions.
+ @property {String} OFF
+ Disables tracking of the component interactions.
+ */
+const tracking = {
+  ON: &apos;on&apos;,
+  OFF: &apos;off&apos;
+};
+
+/**
+ Return the method corresponding to the method name or the function, if passed.
+ @ignore
+ */
+const getListenerFromMethodNameOrFunction = function(obj, eventName, methodNameOrFunction) {
+  // Try to get the method
+  if (typeof methodNameOrFunction === &apos;function&apos;) {
+    return methodNameOrFunction;
+  }
+  else if (typeof methodNameOrFunction === &apos;string&apos;) {
+    if (!obj[methodNameOrFunction]) {
+      throw new Error(`Coral.Component: Unable to add ${eventName} listener for ${obj.toString()}, method
+      ${methodNameOrFunction} not found`);
+    }
+    
+    const listener = obj[methodNameOrFunction];
+    
+    if (typeof listener !== &apos;function&apos;) {
+      throw new Error(`Coral.Component: Unable to add ${eventName} listener for ${obj.toString()}, listener is a
+      ${(typeof listener)} but should be a function`);
+    }
+    
+    return listener;
+  }
+  else if (methodNameOrFunction) {
+    // If we&apos;re passed something that&apos;s truthy (like an object), but it&apos;s not a valid method name or a function, get
+    // angry
+    throw new Error(`Coral.Component: Unable to add ${eventName} listener for ${obj.toString()}, ${methodNameOrFunction}
+    is neither a method name or a function`);
+  }
+  
+  return null;
+};
+
+/**
+ Add local event and key combo listeners for this component, store global event/key combo listeners for later.
+ @ignore
+ */
+const delegateEvents = function() {
+  /*
+   Add listeners to new event
+   - Include in hash
+   Add listeners to existing event
+   - Override method and use super
+   Remove existing event
+   - Pass null
+   */
+  let match;
+  let eventName;
+  let eventInfo;
+  let listener;
+  let selector;
+  let elements;
+  let isGlobal;
+  let isKey;
+  let isResize;
+  let isCapture;
+  
+  for (eventInfo in this._events) {
+    listener = this._events[eventInfo];
+    
+    // Extract the event name and the selector
+    match = eventInfo.match(delegateEventSplitter);
+    eventName = `${match[1]}.CoralComponent`;
+    selector = match[2];
+    
+    if (selector === &apos;&apos;) {
+      // instead of null because the key module checks for undefined
+      selector = undefined;
+    }
+    
+    // Try to get the method corresponding to the value in the map
+    listener = getListenerFromMethodNameOrFunction(this, eventName, listener);
+    
+    if (listener) {
+      // Always execute in the context of the object
+      // @todo is this necessary? this should be correct anyway
+      listener = listener.bind(this);
+      
+      // Check if the listener is on the window
+      isGlobal = eventName.indexOf(&apos;global:&apos;) === 0;
+      if (isGlobal) {
+        eventName = eventName.substr(7);
+      }
+      
+      // Check if the listener is a capture listener
+      isCapture = eventName.indexOf(&apos;capture:&apos;) === 0;
+      if (isCapture) {
+        // @todo Limitation: It should be possible to do capture:global:, but it isn&apos;t
+        eventName = eventName.substr(8);
+      }
+      
+      // Check if the listener is a key listener
+      isKey = eventName.indexOf(&apos;key:&apos;) === 0;
+      if (isKey) {
+        if (isCapture) {
+          throw new Error(&apos;Coral.Keys does not currently support listening to key events with capture&apos;);
+        }
+        eventName = eventName.substr(4);
+      }
+      
+      // Check if the listener is a resize listener
+      isResize = eventName.indexOf(&apos;resize&apos;) === 0;
+      if (isResize) {
+        if (isCapture) {
+          throw new Error(&apos;Coral.commons.addResizeListener does not currently support listening to resize event with capture&apos;);
+        }
+      }
+      
+      if (isGlobal) {
+        // Store for adding/removal
+        if (isKey) {
+          this._globalKeys = this._globalKeys || [];
+          this._globalKeys.push({
+            keyCombo: eventName,
+            selector: selector,
+            listener: listener
+          });
+        }
+        else {
+          this._globalEvents = this._globalEvents || [];
+          this._globalEvents.push({eventName, selector, listener, isCapture});
+        }
+      }
+      // Events on the element itself
+      else if (isKey) {
+        // Create the keys instance only if its needed
+        this._keys = this._keys || new Keys(this, {
+          // The filter function for keyboard events.
+          filter: this._filterKeys,
+          // Execute key listeners in the context of the element
+          context: this
+        });
+    
+        // Add listener locally
+        this._keys.on(eventName, selector, listener);
+      }
+      else if (isResize) {
+        if (selector) {
+          elements = document.querySelectorAll(selector);
+          for (let i = 0; i &lt; elements.length; ++i) {
+            commons.addResizeListener(elements[i], listener);
+          }
+        }
+        else {
+          commons.addResizeListener(this, listener);
+        }
+      }
+      else {
+        this._vent.on(eventName, selector, listener, isCapture);
+      }
+    }
+  }
+};
+
+/**
+ Attach global event listeners for this component.
+ @ignore
+ */
+const delegateGlobalEvents = function() {
+  let i;
+  if (this._globalEvents) {
+    // Remove global event listeners
+    for (i = 0; i &lt; this._globalEvents.length; i++) {
+      const event = this._globalEvents[i];
+      events.on(event.eventName, event.selector, event.listener, event.isCapture);
+    }
+  }
+  
+  if (this._globalKeys) {
+    // Remove global key listeners
+    for (i = 0; i &lt; this._globalKeys.length; i++) {
+      const key = this._globalKeys[i];
+      keys.on(key.keyCombo, key.selector, key.listener);
+    }
+  }
+  
+  if (this._keys) {
+    this._keys.init(true);
+  }
+};
+
+/**
+ Remove global event listeners for this component.
+ @ignore
+ */
+const undelegateGlobalEvents = function() {
+  let i;
+  if (this._globalEvents) {
+    // Remove global event listeners
+    for (i = 0; i &lt; this._globalEvents.length; i++) {
+      const event = this._globalEvents[i];
+      events.off(event.eventName, event.selector, event.listener, event.isCapture);
+    }
+  }
+  
+  if (this._globalKeys) {
+    // Remove global key listeners
+    for (i = 0; i &lt; this._globalKeys.length; i++) {
+      const key = this._globalKeys[i];
+      keys.off(key.keyCombo, key.selector, key.listener);
+    }
+  }
+  
+  if (this._keys) {
+    this._keys.destroy(true);
+  }
+};
+
+// Used to find upper case characters
+const REG_EXP_UPPERCASE = /[A-Z]/g;
+
+/**
+ Returns the constructor namespace
+ @ignore
+ */
+const getConstructorName = function(constructor) {
+  // Will contain the namespace of the constructor in reversed order
+  const constructorName = [];
+  // Keep a reference on the passed constructor
+  const originalConstructor = constructor;
+  
+  // Traverses Coral constructors if not already done to set the namespace
+  if (!constructor._namespace) {
+    // Set namespace on Coral constructors until &apos;constructor&apos; is found
+    const find = (obj, constructorToFind) =&gt; {
+      let found = false;
+      const type = typeof obj;
+    
+      if (obj &amp;&amp; type === &apos;object&apos; || type === &apos;function&apos;) {
+        const subObj = Object.keys(obj);
+      
+        for (let i = 0; i &lt; subObj.length; i++) {
+          const key = subObj[i];
+        
+          // Components are capitalized
+          if (key[0].match(REG_EXP_UPPERCASE) !== null) {
+            // Keep a reference of the constructor name and its parent
+            obj[key]._namespace = {
+              parent: obj,
+              value: key
+            };
+          
+            found = obj[key] === constructorToFind;
+          
+            if (found) {
+              break;
+            }
+            else {
+              found = find(obj[key], constructorToFind);
+            }
+          }
+        }
+      }
+    
+      return found;
+    };
+  
+    // Look for the constructor in the Coral namespace
+    find(window.Coral, constructor);
+  }
+  
+  // Climb up the constructor namespace
+  while (constructor) {
+    if (constructor._namespace) {
+      constructorName.push(constructor._namespace.value);
+      constructor = constructor._namespace.parent;
+    }
+    else {
+      constructor = false;
+    }
+  }
+  
+  // Build the full namespace string and save it for reuse
+  originalConstructor._componentName = constructorName.reverse().join(&apos;.&apos;);
+  
+  return originalConstructor._componentName;
+};
+
+/**
+ Builds and returns an attribute/property map based on observed attributes
+ @ignore
+ */
+const getAttributePropertyMap = function(constructor) {
+  const observedAttributes = constructor.observedAttributes;
+  
+  if (!observedAttributes) {
+    return {};
+  }
+
+  const attributePropertyMap = {};
+  
+  observedAttributes.forEach((attribute) =&gt; {
+    // We assume if the attribute contains uppercase char, it&apos;s a property and can be mapped
+    if (attribute.match(REG_EXP_UPPERCASE)) {
+      attributePropertyMap[attribute.toLowerCase()] = attribute;
+    }
+  });
+  
+  constructor._attributePropertyMap = attributePropertyMap;
+  
+  return constructor._attributePropertyMap;
+};
+
+/**
+ @mixin ComponentMixin
+ @classdesc The base element for all Coral components
+ */
+class ComponentMixin extends superClass {
+  /** @ignore */
+  constructor() {
+    super();
+    
+    // Attach Vent
+    this._vent = new Vent(this);
+    this._events = {};
+    
+    // Content zone MO for virtual DOM support
+    if (this._contentZones) {
+      this._contentZoneObserver = new MutationObserver((mutations) =&gt; {
+        mutations.forEach((mutation) =&gt; {
+          for (let i = 0; i &lt; mutation.addedNodes.length; i++) {
+            const addedNode = mutation.addedNodes[i];
+        
+            for (const name in this._contentZones) {
+              const contentZone = this._contentZones[name];
+              if (addedNode.nodeName.toLowerCase() === name &amp;&amp; !addedNode._contentZoned) {
+                // Insert the content zone at the right position
+                /** @ignore */
+                this[contentZone] = addedNode;
+              }
+            }
+          }
+        });
+      });
+  
+      this._contentZoneObserver.observe(this, {
+        childList: true,
+        subtree: true
+      });
+    }
+  }
+  
+  /**
+   Tracking of events. This provides insight on the usage of the components. It accepts &quot;ON&quot; and &quot;OFF&quot;. In order to
+   successfully track the events, {Tracking} needs to be configured.
+   
+   @type {String}
+   @default TrackingEnum.ON
+   @htmlattribute tracking
+   */
+  get tracking() {
+    return this._tracking || this.getAttribute(&apos;tracking&apos;) || tracking.ON;
+  }
+  set tracking(value) {
+    value = transform.string(value).toLowerCase();
+    this._tracking = validate.enumeration(tracking)(value) &amp;&amp; value || tracking.ON;
+  }
+  
+  /**
+   The string representing the feature being tracked. This provides additional context to the analytics trackers
+   about the feature that the element enables.
+   
+   @type {String}
+   @default &quot;&quot;
+   @htmlattribute trackingfeature
+   */
+  get trackingFeature() {
+    return this._trackingFeature || this.getAttribute(&apos;trackingFeature&apos;) || &apos;&apos;;
+  }
+  set trackingFeature(value) {
+    this._trackingFeature = transform.string(value);
+  }
+  
+  /**
+   The string representing the element name being tracked. This providex additional context to the trackers about the
+   element that was interacted with.
+   
+   @type {String}
+   @default &quot;&quot;
+   @htmlattribute trackingelement
+   */
+  get trackingElement() {
+    return this._trackingElement || this.getAttribute(&apos;trackingElement&apos;) || &apos;&apos;;
+  }
+  set trackingElement(value) {
+    this._trackingElement = transform.string(value);
+  }
+  
+  // Constructs and returns the component name based on the constructor
+  get _componentName() { return this.constructor._componentName || getConstructorName(this.constructor); }
+  
+  // Returns all watched attributes case sensitive mapped to their properties
+  get _attributes() { return this.constructor._attributePropertyMap || getAttributePropertyMap(this.constructor); }
+  
+  // The filter function for keyboard events. By default, any child element can trigger keyboard events.
+  // You can pass {@link Keys.filterInputs} to avoid listening to key events triggered from within
+  // inputs.
+  _filterKeys() { return true; }
+  
+  // Attach event listeners including global ones
+  _delegateEvents(eventMap) {
+    this._events = commons.extend(this._events, eventMap);
+    delegateEvents.call(this);
+    delegateGlobalEvents.call(this);
+    
+    // Once events are attached, we dispose them
+    this._events = {};
+  }
+  
+  // Returns the content zone if the component is connected and contains the content zone else null
+  // Ideally content zones will be replaced by shadow dom and &lt;slot&gt; elements
+  _getContentZone(contentZone) {
+    if (document.documentElement.contains(this)) {
+      return this.contains(contentZone) &amp;&amp; contentZone || null;
+    }
+    // Return the content zone by default
+    return contentZone;
+  }
+  
+  // Sets the value as content zone for the property given the specified options
+  // Ideally content zones will be replaced by shadow dom and &lt;slot&gt; elements
+  _setContentZone(property, value, options) {
+    const handle = options.handle;
+    const expectedTagName = options.tagName;
+    const additionalSetter = options.set;
+    const insert = options.insert;
+    
+    let oldNode;
+    
+    if (value) {
+      if (!(value instanceof HTMLElement)) {
+        throw new Error(`DOMException: Failed to set the &quot;${property}&quot; property on &quot;${this.toString()}&quot;:
+        The provided value is not of type &quot;HTMLElement&quot;.`);
+      }
+      
+      if (expectedTagName &amp;&amp; value.tagName.toLowerCase() !== expectedTagName) {
+        throw new Error(`DOMException: Failed to set the &quot;${property}&quot; property on &quot;${this.toString()}&quot;: The new
+        ${property} element is of type &quot;${value.tagName}&quot;. It must be a &quot;${expectedTagName.toUpperCase()}&quot; element.`);
+      }
+      
+      oldNode = this._elements[handle];
+  
+      // Flag it for the content zone MO
+      value._contentZoned = true;
+      
+      // Replace the existing element
+      if (insert) {
+        // Remove old node
+        if (oldNode &amp;&amp; oldNode.parentNode) {
+          oldNode.parentNode.removeChild(oldNode);
+        }
+        // Insert new node
+        insert.call(this, value);
+      }
+      else if (oldNode &amp;&amp; oldNode.parentNode) {
+        commons._log(&apos;warn&apos;, `${this._componentName} does not define an insert method for content zone ${handle}, falling back to replace.`);
+        // Old way -- assume we have an old node
+        this._elements[handle].parentNode.replaceChild(value, this._elements[handle]);
+      }
+      else {
+        commons._log(&apos;error&apos;, `${this._componentName} does not define an insert method for content zone ${handle}, falling back to append.`);
+        // Just append, which may introduce bugs, but at least doesn&apos;t crazy
+        this.appendChild(value);
+      }
+    }
+    else {
+      // we need to remove the content zone if it exists
+      oldNode = this._elements[handle];
+      if (oldNode &amp;&amp; oldNode.parentNode) {
+        oldNode.parentNode.removeChild(oldNode);
+      }
+    }
+    
+    // Re-assign the handle to the new element
+    this._elements[handle] = value;
+    
+    // Invoke the setter
+    if (typeof additionalSetter === &apos;function&apos;) {
+      additionalSetter.call(this, value);
+    }
+  }
+  
+  // Handles the reflection of properties by using a flag to prevent setting the property by changing the attribute
+  _reflectAttribute(attributeName, value) {
+    if (typeof value === &apos;boolean&apos;) {
+      if (value &amp;&amp; !this.hasAttribute(attributeName)) {
+        this._reflectedAttribute = true;
+        this.setAttribute(attributeName, &apos;&apos;);
+        this._reflectedAttribute = false;
+      }
+      else if (!value &amp;&amp; this.hasAttribute(attributeName)) {
+        this._reflectedAttribute = true;
+        this.removeAttribute(attributeName);
+        this._reflectedAttribute = false;
+      }
+    }
+    else if (this.getAttribute(attributeName) !== String(value)) {
+      this._reflectedAttribute = true;
+      this.setAttribute(attributeName, value);
+      this._reflectedAttribute = false;
+    }
+  }
+  
+  /**
+   Notifies external listeners about an internal interaction. This method is used internally in every
+   component&apos;s method that we want to track.
+   
+   @param {String} eventType The event type. Eg. click, select, etc.
+   @param {String} targetType The element type being used. Eg. cyclebutton, cyclebuttonitem, etc.
+   @param {CustomEvent} event
+   @param {ComponentMixin} childComponent - Optional, in case the event occurred on a child component.
+   
+   @returns {ComponentMixin}
+   */
+  _trackEvent(eventType, targetType, event, childComponent) {
+    if (this.tracking === this.constructor.tracking.ON) {
+      trackingUtil.track(eventType, targetType, event, this, childComponent);
+    }
+    return this;
+  }
+  
+  /**
+   Returns the component name.
+   
+   @return {String}
+   */
+  toString() {
+    return `Coral.${this._componentName}`;
+  }
+  
+  /**
+   Add an event listener.
+ 
+   @param {String} eventName
+   The event name to listen for.
+   @param {String} [selector]
+   The selector to use for event delegation.
+   @param {Function} func
+   The function that will be called when the event is triggered.
+   @param {Boolean} [useCapture=false]
+   Whether or not to listen during the capturing or bubbling phase.
+   @returns {ComponentMixin} this, chainable.
+   */
+  on(eventName, selector, func, useCapture) {
+    this._vent.on(eventName, selector, func, useCapture);
+    return this;
+  }
+  
+  /**
+   Remove an event listener.
+   
+   @param {String} eventName
+   The event name to stop listening for.
+   @param {String} [selector]
+   The selector that was used for event delegation.
+   @param {Function} func
+   The function that was passed to &lt;code&gt;on()&lt;/code&gt;.
+   @param {Boolean} [useCapture]
+   Only remove listeners with &lt;code&gt;useCapture&lt;/code&gt; set to the value passed in.
+   @returns {ComponentMixin} this, chainable.
+   */
+  off(eventName, selector, func, useCapture) {
+    this._vent.off(eventName, selector, func, useCapture);
+    return this;
+  }
+  
+  /**
+   Trigger an event.
+   
+   @param {String} eventName
+   The event name to trigger.
+   @param {Object} [props]
+   Additional properties to make available to handlers as &lt;code&gt;event.detail&lt;/code&gt;.
+   @param {Boolean} [bubbles=true]
+   Set to &lt;code&gt;false&lt;/code&gt; to prevent the event from bubbling.
+   @param {Boolean} [cancelable=true]
+   Set to &lt;code&gt;false&lt;/code&gt; to prevent the event from being cancelable.
+   @returns {CustomEvent} CustomEvent object
+   */
+  trigger(eventName, props, bubbles, cancelable) {
+    // When &apos;bubbles&apos; is not set, then default to true:
+    bubbles = bubbles || bubbles === undefined;
+    
+    // When &apos;cancelable&apos; is not set, then default to true:
+    cancelable = cancelable || cancelable === undefined;
+    
+    const event = new CustomEvent(eventName, {
+      bubbles: bubbles,
+      cancelable: cancelable,
+      detail: props
+    });
+  
+    // Don&apos;t trigger the event if silenced
+    if (this._silenced) {
+      return event;
+    }
+    
+    // default value in case the dispatching fails
+    let defaultPrevented = false;
+    
+    try {
+      // leads to NS_ERROR_UNEXPECTED in Firefox
+      // https://bugzilla.mozilla.org/show_bug.cgi?id=329509
+      defaultPrevented = !this.dispatchEvent(event);
+    }
+    // eslint-disable-next-line no-empty
+    catch (e) {}
+    
+    // Check if the defaultPrevented status was correctly stored back to the event object
+    if (defaultPrevented !== event.defaultPrevented) {
+      // dispatchEvent() doesn&apos;t correctly set event.defaultPrevented in IE 9
+      // However, it does return false if preventDefault() was called
+      // Unfortunately, the returned event&apos;s defaultPrevented property is read-only
+      // We need to work around this such that (patchedEvent instanceof Event) === true
+      // First, we&apos;ll create an object that uses the event as its prototype
+      // This gives us an object we can modify that is still technically an instanceof Event
+      const patchedEvent = Object.create(event);
+      
+      // Next, we set the correct value for defaultPrevented on the new object
+      // We cannot simply assign defaultPrevented, it causes a &quot;Invalid Calling Object&quot; error in IE 9
+      // For some reason, defineProperty doesn&apos;t cause this
+      Object.defineProperty(patchedEvent, &apos;defaultPrevented&apos;, {
+        value: defaultPrevented
+      });
+      
+      return patchedEvent;
+    }
+    
+    return event;
+  }
+  
+  /**
+   Set multiple properties.
+   
+   @param {Object.&lt;String, *&gt;} properties
+   An object of property/value pairs to set.
+   @param {Boolean} silent
+   If true, events should not be triggered as a result of this set.
+   
+   @returns {ComponentMixin} this, chainable.
+   */
+  set(propertyOrProperties, valueOrSilent, silent) {
+    let property;
+    let properties;
+    let value;
+    
+    const isContentZone = (prop) =&gt; this._contentZones &amp;&amp; commons.swapKeysAndValues(this._contentZones)[prop];
+    
+    const updateContentZone = (prop, val) =&gt; {
+      // If content zone exists and we only want to update properties on the content zone
+      if (this[prop] instanceof HTMLElement &amp;&amp; !(val instanceof HTMLElement)) {
+        for (const contentZoneProperty in val) {
+          /** @ignore */
+          this[prop][contentZoneProperty] = val[contentZoneProperty];
+        }
+      }
+      // Else assign the new value to the content zone
+      else {
+        /** @ignore */
+        this[prop] = val;
+      }
+    };
+    
+    const setProperty = (prop, val) =&gt; {
+      if (isContentZone(prop)) {
+        updateContentZone(prop, val);
+      }
+      else {
+        this._silenced = silent;
+        /** @ignore */
+        this[prop] = val;
+        this._silenced = false;
+      }
+    };
+    
+    if (typeof propertyOrProperties === &apos;string&apos;) {
+      // Set a single property
+      property = propertyOrProperties;
+      value = valueOrSilent;
+      
+      setProperty(property, value);
+    }
+    else {
+      properties = propertyOrProperties;
+      silent = valueOrSilent;
+      
+      // Set a map of properties
+      for (property in properties) {
+        value = properties[property];
+        
+        setProperty(property, value);
+      }
+    }
+    
+    return this;
+  }
+  
+  /**
+   Get the value of a property.
+   
+   @param {String} property
+   The name of the property to fetch the value of.
+   @returns {*} Property value.
+   */
+  get(property) {
+    return this[property];
+  }
+  
+  /**
+   Show this component.
+   
+   @returns {ComponentMixin} this, chainable
+   */
+  show() {
+    if (!this.hidden) {
+      return this;
+    }
+  
+    /** @ignore */
+    this.hidden = false;
+    return this;
+  }
+  
+  /**
+   Hide this component.
+   @returns {ComponentMixin} this, chainable
+   */
+  hide() {
+    if (this.hidden) {
+      return this;
+    }
+  
+    /** @ignore */
+    this.hidden = true;
+    return this;
+  }
+  
+  /**
+   Returns {@link ComponentMixin} tracking options.
+   
+   @return {TrackingEnum}
+   */
+  static get tracking() {
+    return tracking;
+  }
+  
+  /** @ignore */
+  static get observedAttributes() {
+    return [
+      &apos;tracking&apos;,
+      &apos;trackingelement&apos;,
+      &apos;trackingElement&apos;,
+      &apos;trackingfeature&apos;,
+      &apos;trackingFeature&apos;
+    ];
+  }
+  
+  /** @ignore */
+  // eslint-disable-next-line no-unused-vars
+  attributeChangedCallback(name, oldValue, value) {
+    const self = this;
+    if (!self._reflectedAttribute) {
+      // Use the attribute/property mapping
+      self[self._attributes[name] || name] = value;
+    }
+  }
+  
+  /** @ignore */
+  connectedCallback() {
+    // A component that is reattached should respond to global events again
+    if (this._disconnected) {
+      delegateGlobalEvents.call(this);
+      this._disconnected = false;
+    }
+  }
+  
+  /** @ignore */
+  disconnectedCallback() {
+    // A component that isn&apos;t in the DOM should not be responding to global events
+    this._disconnected = true;
+    undelegateGlobalEvents.call(this);
+  }
+};
+
+export default ComponentMixin;
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
