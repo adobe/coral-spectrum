@@ -13,7 +13,7 @@
 module.exports = function(gulp) {
   const path = require('path');
   const ghPages = require('gulp-gh-pages');
-  const plumb = require('./plumb')
+  const plumb = require('./plumb');
   const PluginError = require('plugin-error');
   const util = require('../helpers/util');
   
@@ -25,7 +25,7 @@ module.exports = function(gulp) {
     return gulp.src('./dist/**/*', {base: '.'})
       .pipe(plumb())
       .pipe(ghPages({
-        message: `CORAL-0: deploy ${util.getPackageJSON().version}`
+        message: `Deploy ${util.getPackageJSON().version}`
       }));
   });
 };
