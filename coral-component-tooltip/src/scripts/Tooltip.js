@@ -184,10 +184,18 @@ class Tooltip extends Overlay {
   set target(value) {
     super.target = value;
   
-    if (this.interaction === this.constructor.interaction.ON) {
-      // Add listeners to the target
-      const target = this._getTarget(value);
-      this._addTargetListeners(target);
+    const target = this._getTarget(value);
+    
+    if (target) {
+      this._elements.tip.hidden = false;
+      
+      if (this.interaction === this.constructor.interaction.ON) {
+        // Add listeners to the target
+        this._addTargetListeners(target);
+      }
+    }
+    else {
+      this._elements.tip.hidden = true;
     }
   }
   
@@ -257,10 +265,6 @@ class Tooltip extends Overlay {
   
   /** @ignore */
   _addTargetListeners(target) {
-    if (!target) {
-      return;
-    }
-    
     // Make sure we don't add listeners twice to the same element for this particular tooltip
     if (target[`_hasTooltipListeners${this._id}`]) {
       return;

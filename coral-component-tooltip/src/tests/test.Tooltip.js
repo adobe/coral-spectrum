@@ -279,5 +279,20 @@ describe('Tooltip', function() {
     
       expect(target.getAttribute('tabindex')).to.equal('1');
     });
+    
+    it('should hide the tip if no target defined', function() {
+      var tooltip = new Tooltip();
+      helpers.target.appendChild(tooltip);
+      
+      expect(tooltip.target).to.equal(null);
+      expect(tooltip._elements.tip.hidden).to.be.true;
+  
+      var target = helpers.overlay.createFloatingTarget();
+      tooltip.target = target;
+      tooltip.open = true;
+  
+      expect(tooltip.target).to.equal(target);
+      expect(tooltip._elements.tip.hidden).to.be.false;
+    });
   });
 });
