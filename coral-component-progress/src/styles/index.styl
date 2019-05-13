@@ -15,14 +15,3 @@
 @require '@adobe/spectrum-css/dist/components/barloader/multiStops/lightest.css';
 @require '@adobe/spectrum-css/dist/components/barloader/multiStops/dark.css';
 @require '@adobe/spectrum-css/dist/components/barloader/multiStops/darkest.css';
-
-// @spectrum indeterminate loader bar should be supported
-._coral-BarLoader--indeterminate ._coral-BarLoader-fill {
-  animation: coral-progress-indeterminate 934ms cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite forwards;
-  width: 100% !important;
-}
-
-@keyframes coral-progress-indeterminate {
-  0% { margin-left: -100%; margin-right: 100%; }
-  100% { margin-left: 100%; margin-right: 0; }
-}

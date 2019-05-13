@@ -110,9 +110,9 @@ class Progress extends ComponentMixin(HTMLElement) {
     this._value = value;
     this._reflectAttribute('value', this._value);
   
-    this._elements.status.style.width = `${this.value}%`;
-  
     if (!this.indeterminate) {
+      this._elements.status.style.width = `${this.value}%`;
+      
       // ARIA: Reflect value for screenreaders
       this.setAttribute('aria-valuenow', this._value);
     
@@ -120,6 +120,9 @@ class Progress extends ComponentMixin(HTMLElement) {
         // Only update label text in percent mode
         this._setPercentage(`${this._value}%`);
       }
+    }
+    else {
+      this._elements.status.style.width = '';
     }
     
     this.trigger('coral-progress:change');
