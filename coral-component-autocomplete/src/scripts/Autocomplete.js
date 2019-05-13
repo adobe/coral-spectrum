@@ -1933,6 +1933,24 @@ class Autocomplete extends FormFieldMixin(ComponentMixin(HTMLElement)) {
       this._elements.overlay.remove();
     }
   }
+  
+  /**
+   Triggered when the {@link Autocomplete} could accept external data to be loaded by the user.
+   If <code>preventDefault()</code> is called, then a loading indicator will be shown.
+   {@link Autocomplete#loading} should be set to false to indicate that the data has been successfully loaded.
+   
+   @typedef {CustomEvent} coral-autocomplete:showsuggestions
+   
+   @property {String} detail.value
+   The user input.
+   */
+  
+  /**
+   Triggered when the {@link Autocomplete} hides the suggestions.
+   This is typically used to cancel a load request because the suggestions will not be shown anymore.
+   
+   @typedef {CustomEvent} coral-autocomplete:hidesuggestions
+   */
 }
 
 export default Autocomplete;
