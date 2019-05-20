@@ -92,7 +92,7 @@ const target = {
 };
 
 /**
- Enumeration for {@link Overlay} overlay placement values.
+ Enumeration for {@link Overlay} placement values.
  
  @typedef {Object} OverlayPlacementEnum
  
