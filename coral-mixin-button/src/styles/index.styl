@@ -16,13 +16,6 @@
 @require '@adobe/spectrum-css/dist/components/button/multiStops/dark.css';
 @require '@adobe/spectrum-css/dist/components/button/multiStops/darkest.css';
 
-// @spectrum support text + icon buttons
-._coral-Button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
 ._coral-Button,
 ._coral-ActionButton {
   coral-icon + coral-button-label:not(:empty):not([hidden]),
@@ -48,16 +41,6 @@
 
 ._coral-Button--block + ._coral-Button--block {
   margin-left: 0;
-}
-
-// Clear Button doesn't have blue border when tab focused
-._coral-Button._coral-ClearButton.focus-ring {
-  box-shadow: none;
-}
-
-// @spectrum
-._coral-Button.is-disabled {
-  cursor: default;
 }
 
 // @compat

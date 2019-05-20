@@ -88,11 +88,6 @@ module.exports = [
     spectrum: /\.spectrum-FieldLabel/g,
     coral: '.coral-FieldLabel'
   },
-  // @compat .coral-DecoratedTextfield
-  {
-    spectrum: /\.spectrum-ClearButton/g,
-    coral: '._coral-ClearButton, .coral-DecoratedTextfield > ._coral-Button'
-  },
   // @compat typography
   {
     spectrum: /\.spectrum-Typography/g,
