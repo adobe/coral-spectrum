@@ -1,7 +1,7 @@
 {
-  "coverage": "67.36%",
-  "expectCount": 3368,
-  "actualCount": 2269,
+  "coverage": "66.94%",
+  "expectCount": 3413,
+  "actualCount": 2285,
   "files": {
     "coral-spectrum/coral-collection/src/scripts/Collection.js": {
       "expectCount": 35,
@@ -751,8 +751,8 @@
       ]
     },
     "coral-spectrum/coral-component-dialog/src/scripts/Dialog.js": {
-      "expectCount": 47,
-      "actualCount": 27,
+      "expectCount": 48,
+      "actualCount": 28,
       "undocumentLines": [
         97,
         100,
@@ -767,13 +767,13 @@
         253,
         277,
         311,
-        335,
-        380,
-        398,
-        475,
-        502,
-        518,
-        564
+        378,
+        396,
+        473,
+        500,
+        517,
+        523,
+        569
       ]
     },
     "coral-spectrum/coral-component-dialog/src/scripts/DialogContent.js": {
@@ -1259,12 +1259,12 @@
         72,
         79,
         110,
-        141,
-        179,
-        197,
-        241,
-        321,
-        354
+        144,
+        182,
+        200,
+        244,
+        324,
+        357
       ]
     },
     "coral-spectrum/coral-component-progress/src/scripts/ProgressLabel.js": {
@@ -1977,6 +1977,47 @@
         72
       ]
     },
+    "coral-spectrum/coral-component-toast/src/scripts/Toast.js": {
+      "expectCount": 41,
+      "actualCount": 13,
+      "undocumentLines": [
+        60,
+        63,
+        68,
+        70,
+        93,
+        115,
+        131,
+        134,
+        135,
+        136,
+        139,
+        153,
+        187,
+        231,
+        233,
+        291,
+        339,
+        344,
+        362,
+        369,
+        375,
+        381,
+        387,
+        406,
+        412,
+        421,
+        429,
+        435
+      ]
+    },
+    "coral-spectrum/coral-component-toast/src/scripts/ToastContent.js": {
+      "expectCount": 3,
+      "actualCount": 2,
+      "undocumentLines": [
+        15
+      ]
+    },
     "coral-spectrum/coral-component-tooltip/src/scripts/Tooltip.js": {
       "expectCount": 35,
       "actualCount": 18,
@@ -1993,11 +2034,11 @@
         104,
         123,
         141,
-        252,
-        279,
-        282,
-        296,
-        326
+        260,
+        283,
+        286,
+        300,
+        330
       ]
     },
     "coral-spectrum/coral-component-tooltip/src/scripts/TooltipContent.js": {
@@ -2201,16 +2242,16 @@
         54,
         394,
         410,
-        456,
-        474,
-        517,
-        535,
-        618,
-        640,
-        692,
-        697,
-        747,
-        888
+        454,
+        472,
+        515,
+        533,
+        616,
+        638,
+        690,
+        695,
+        745,
+        886
       ]
     },
     "coral-spectrum/coral-utils/src/scripts/Commons.js": {

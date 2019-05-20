@@ -1134,6 +1134,18 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "@adobe/coral-spectrum~toast",
+    "class/coral-spectrum/coral-component-toast/src/scripts/Toast.js~Toast.html",
+    "<span>Toast</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
+  ],
+  [
+    "@adobe/coral-spectrum~toastcontent",
+    "class/coral-spectrum/coral-component-toast/src/scripts/ToastContent.js~ToastContent.html",
+    "<span>ToastContent</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
+  ],
+  [
     "@adobe/coral-spectrum~tooltip",
     "class/coral-spectrum/coral-component-tooltip/src/scripts/Tooltip.js~Tooltip.html",
     "<span>Tooltip</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
@@ -2193,6 +2205,18 @@ window.esdocSearchIndex = [
     "coral-spectrum/coral-component-autocomplete/src/scripts/autocomplete.js~autocomplete.autocompletesuggestion",
     "typedef/index.html#static-typedef-AutocompleteSuggestion",
     "coral-spectrum/coral-component-autocomplete/src/scripts/Autocomplete.js~Autocomplete.AutocompleteSuggestion",
+    "typedef"
+  ],
+  [
+    "coral-spectrum/coral-component-autocomplete/src/scripts/autocomplete.js~autocomplete.coral-autocomplete:hidesuggestions",
+    "typedef/index.html#static-typedef-coral-autocomplete:hidesuggestions",
+    "coral-spectrum/coral-component-autocomplete/src/scripts/Autocomplete.js~Autocomplete.coral-autocomplete:hidesuggestions",
+    "typedef"
+  ],
+  [
+    "coral-spectrum/coral-component-autocomplete/src/scripts/autocomplete.js~autocomplete.coral-autocomplete:showsuggestions",
+    "typedef/index.html#static-typedef-coral-autocomplete:showsuggestions",
+    "coral-spectrum/coral-component-autocomplete/src/scripts/Autocomplete.js~Autocomplete.coral-autocomplete:showsuggestions",
     "typedef"
   ],
   [
@@ -7354,6 +7378,78 @@ window.esdocSearchIndex = [
     "typedef/index.html#static-typedef-TextfieldVariantEnum",
     "coral-spectrum/coral-component-textfield/src/scripts/Textfield.js~TextfieldVariantEnum",
     "typedef"
+  ],
+  [
+    "coral-spectrum/coral-component-toast/src/scripts/toast.js",
+    "file/coral-spectrum/coral-component-toast/src/scripts/Toast.js.html",
+    "coral-spectrum/coral-component-toast/src/scripts/Toast.js",
+    "file"
+  ],
+  [
+    "coral-spectrum/coral-component-toast/src/scripts/toast.js~toast#action",
+    "class/coral-spectrum/coral-component-toast/src/scripts/Toast.js~Toast.html#instance-member-action",
+    "coral-spectrum/coral-component-toast/src/scripts/Toast.js~Toast#action",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-toast/src/scripts/toast.js~toast#autodismiss",
+    "class/coral-spectrum/coral-component-toast/src/scripts/Toast.js~Toast.html#instance-member-autoDismiss",
+    "coral-spectrum/coral-component-toast/src/scripts/Toast.js~Toast#autoDismiss",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-toast/src/scripts/toast.js~toast#content",
+    "class/coral-spectrum/coral-component-toast/src/scripts/Toast.js~Toast.html#instance-member-content",
+    "coral-spectrum/coral-component-toast/src/scripts/Toast.js~Toast#content",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-toast/src/scripts/toast.js~toast#open",
+    "class/coral-spectrum/coral-component-toast/src/scripts/Toast.js~Toast.html#instance-member-open",
+    "coral-spectrum/coral-component-toast/src/scripts/Toast.js~Toast#open",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-toast/src/scripts/toast.js~toast#placement",
+    "class/coral-spectrum/coral-component-toast/src/scripts/Toast.js~Toast.html#instance-member-placement",
+    "coral-spectrum/coral-component-toast/src/scripts/Toast.js~Toast#placement",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-toast/src/scripts/toast.js~toast#variant",
+    "class/coral-spectrum/coral-component-toast/src/scripts/Toast.js~Toast.html#instance-member-variant",
+    "coral-spectrum/coral-component-toast/src/scripts/Toast.js~Toast#variant",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-toast/src/scripts/toast.js~toast.placement",
+    "class/coral-spectrum/coral-component-toast/src/scripts/Toast.js~Toast.html#static-member-placement",
+    "coral-spectrum/coral-component-toast/src/scripts/Toast.js~Toast.placement",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-toast/src/scripts/toast.js~toast.variant",
+    "class/coral-spectrum/coral-component-toast/src/scripts/Toast.js~Toast.html#static-member-variant",
+    "coral-spectrum/coral-component-toast/src/scripts/Toast.js~Toast.variant",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-toast/src/scripts/toast.js~toastplacementenum",
+    "typedef/index.html#static-typedef-ToastPlacementEnum",
+    "coral-spectrum/coral-component-toast/src/scripts/Toast.js~ToastPlacementEnum",
+    "typedef"
+  ],
+  [
+    "coral-spectrum/coral-component-toast/src/scripts/toast.js~toastvariantenum",
+    "typedef/index.html#static-typedef-ToastVariantEnum",
+    "coral-spectrum/coral-component-toast/src/scripts/Toast.js~ToastVariantEnum",
+    "typedef"
+  ],
+  [
+    "coral-spectrum/coral-component-toast/src/scripts/toastcontent.js",
+    "file/coral-spectrum/coral-component-toast/src/scripts/ToastContent.js.html",
+    "coral-spectrum/coral-component-toast/src/scripts/ToastContent.js",
+    "file"
   ],
   [
     "coral-spectrum/coral-component-tooltip/src/scripts/tooltip.js",

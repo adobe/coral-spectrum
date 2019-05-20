@@ -16244,18 +16244,16 @@ var Coral = (function (exports) {
               this._vent.on('keydown', this._handleRootKeypress);
 
               this._vent.on('focus', '[coral-tabcapture]', this._handleTabCaptureFocus);
-            } // Don't just put this in an else, check if we currently have it disabled
-            // so we only attempt to remove elements if we were previously capturing tabs
-            else if (this._trapFocus === trapFocus.ON) {
-                // Remove elements
-                this.removeChild(this._elements.topTabCapture);
-                this.removeChild(this._elements.intermediateTabCapture);
-                this.removeChild(this._elements.bottomTabCapture); // Remove listeners
+            } else if (this._trapFocus === trapFocus.OFF) {
+              // Remove elements
+              this._elements.topTabCapture && this._elements.topTabCapture.remove();
+              this._elements.intermediateTabCapture && this._elements.intermediateTabCapture.remove();
+              this._elements.bottomTabCapture && this._elements.bottomTabCapture.remove(); // Remove listeners
 
-                this._vent.off('keydown', this._handleRootKeypress);
+              this._vent.off('keydown', this._handleRootKeypress);
 
-                this._vent.off('focus', '[coral-tabcapture]', this._handleTabCaptureFocus);
-              }
+              this._vent.off('focus', '[coral-tabcapture]', this._handleTabCaptureFocus);
+            }
           }
           /**
            Whether to return focus to the previously focused element when closed. See {@link OverlayReturnFocusEnum}.
@@ -19091,7 +19089,7 @@ var Coral = (function (exports) {
     NEXT: '_next'
   };
   /**
-   Enumeration for {@link Overlay} overlay placement values.
+   Enumeration for {@link Overlay} placement values.
    
    @typedef {Object} OverlayPlacementEnum
    
@@ -21340,9 +21338,15 @@ var Coral = (function (exports) {
     }, {
       key: "_moveToDocumentBody",
       value: function _moveToDocumentBody() {
-        if (this.parentNode !== document.body) {
-          document.body.insertBefore(this, document.body.lastElementChild);
-        }
+        // Not in the DOM
+        if (!document.body.contains(this)) {
+          document.body.appendChild(this);
+        } // In the DOM but not a direct child of body
+        else if (this.parentNode !== document.body) {
+            this._ignoreConnectedCallback = true;
+            document.body.appendChild(this);
+            this._ignoreConnectedCallback = false;
+          }
       }
     }, {
       key: "_insertTypeIcon",
@@ -21401,6 +21405,10 @@ var Coral = (function (exports) {
       /** @ignore */
       value: function connectedCallback() {
         var _this2 = this;
+
+        if (this._ignoreConnectedCallback) {
+          return;
+        }
 
         this.classList.add(CLASSNAME$7); // Default reflected attributes
 
@@ -21476,12 +21484,18 @@ var Coral = (function (exports) {
         this.content = content;
         this.footer = footer; // Add the Overlay coral-tabcapture elements at the end
 
-        _get(_getPrototypeOf(Dialog.prototype), "connectedCallback", this).call(this); // In case it was opened but not in the DOM yet
+        _get(_getPrototypeOf(Dialog.prototype), "connectedCallback", this).call(this);
+      }
+      /** @ignore */
 
-
-        if (this.open && !this._openInDOM) {
-          this.open = this.open;
+    }, {
+      key: "disconnectedCallback",
+      value: function disconnectedCallback() {
+        if (this._ignoreConnectedCallback) {
+          return;
         }
+
+        _get(_getPrototypeOf(Dialog.prototype), "disconnectedCallback", this).call(this);
       }
     }, {
       key: "interaction",
@@ -21667,9 +21681,8 @@ var Coral = (function (exports) {
         _set(_getPrototypeOf(Dialog.prototype), "open", value, this, true); // Ensure we're in the DOM
 
 
-        if (this.open && document.body.contains(this)) {
-          this._openInDOM = true; // If not child of document.body, we have to move it there
-
+        if (this.open) {
+          // If not child of document.body, we have to move it there
           this._moveToDocumentBody(); // Support wrapped dialog
 
 
@@ -30324,6 +30337,24 @@ var Coral = (function (exports) {
           this._elements.overlay.remove();
         }
       }
+      /**
+       Triggered when the {@link Autocomplete} could accept external data to be loaded by the user.
+       If <code>preventDefault()</code> is called, then a loading indicator will be shown.
+       {@link Autocomplete#loading} should be set to false to indicate that the data has been successfully loaded.
+       
+       @typedef {CustomEvent} coral-autocomplete:showsuggestions
+       
+       @property {String} detail.value
+       The user input.
+       */
+
+      /**
+       Triggered when the {@link Autocomplete} hides the suggestions.
+       This is typically used to cancel a load request because the suggestions will not be shown anymore.
+       
+       @typedef {CustomEvent} coral-autocomplete:hidesuggestions
+       */
+
     }, {
       key: "overlay",
       get: function get() {
@@ -41374,11 +41405,7 @@ var Coral = (function (exports) {
       value: function _addTargetListeners(target) {
         var _this4 = this;
 
-        if (!target) {
-          return;
-        } // Make sure we don't add listeners twice to the same element for this particular tooltip
-
-
+        // Make sure we don't add listeners twice to the same element for this particular tooltip
         if (target["_hasTooltipListeners".concat(this._id)]) {
           return;
         }
@@ -41562,11 +41589,17 @@ var Coral = (function (exports) {
       set: function set(value) {
         _set(_getPrototypeOf(Tooltip.prototype), "target", value, this, true);
 
-        if (this.interaction === this.constructor.interaction.ON) {
-          // Add listeners to the target
-          var target = this._getTarget(value);
+        var target = this._getTarget(value);
 
-          this._addTargetListeners(target);
+        if (target) {
+          this._elements.tip.hidden = false;
+
+          if (this.interaction === this.constructor.interaction.ON) {
+            // Add listeners to the target
+            this._addTargetListeners(target);
+          }
+        } else {
+          this._elements.tip.hidden = true;
         }
       }
       /**
@@ -55932,16 +55965,17 @@ var Coral = (function (exports) {
 
         this._reflectAttribute('value', this._value);
 
-        this._elements.status.style.width = "".concat(this.value, "%");
-
         if (!this.indeterminate) {
-          // ARIA: Reflect value for screenreaders
+          this._elements.status.style.width = "".concat(this.value, "%"); // ARIA: Reflect value for screenreaders
+
           this.setAttribute('aria-valuenow', this._value);
 
           if (this.showPercent) {
             // Only update label text in percent mode
             this._setPercentage("".concat(this._value, "%"));
           }
+        } else {
+          this._elements.status.style.width = '';
         }
 
         this.trigger('coral-progress:change');
@@ -71422,7 +71456,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.61";
+  var version = "1.0.0-beta.64";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
@@ -71448,7 +71482,7 @@ var Coral = (function (exports) {
   };
   var dependencies = {
   	"@adobe/focus-ring-polyfill": "0.1.5",
-  	"@adobe/spectrum-css": "2.10.0",
+  	"@adobe/spectrum-css": "2.11.0",
   	"@adobe/vent": "1.0.0",
   	"core-js": "2.6.5",
   	"document-register-element": "1.13.1",
@@ -71505,7 +71539,7 @@ var Coral = (function (exports) {
   	"karma-sinon-chai": "^2.0.2",
   	minimist: "^1.2.0",
   	mocha: "^6.1.3",
-  	moment: "2.18.1",
+  	moment: "^2.24.0",
   	"plugin-error": "^1.0.1",
   	request: "^2.81.0",
   	rollup: "^1.10.0",

@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">99.23% </span>
+        <span class="strong">99.24% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>129/130</span>
+        <span class='fraction'>130/131</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">89.33% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>24/24</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">99.23% </span>
+        <span class="strong">99.24% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>129/130</span>
+        <span class='fraction'>130/131</span>
       </div>
     </div>
     <p class="quiet">
@@ -470,7 +470,10 @@
 <a name='L422'></a><a href='#L422'>422</a>
 <a name='L423'></a><a href='#L423'>423</a>
 <a name='L424'></a><a href='#L424'>424</a>
-<a name='L425'></a><a href='#L425'>425</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L425'></a><a href='#L425'>425</a>
+<a name='L426'></a><a href='#L426'>426</a>
+<a name='L427'></a><a href='#L427'>427</a>
+<a name='L428'></a><a href='#L428'>428</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -720,7 +723,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">214x</span>
+<span class="cline-any cline-yes">208x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">120x</span>
@@ -736,8 +739,7 @@
 <span class="cline-any cline-yes">120x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">120x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">120x</span>
+<span class="cline-any cline-yes">114x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">114x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -746,6 +748,8 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">120x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -762,7 +766,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">340x</span>
+<span class="cline-any cline-yes">334x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">12x</span>
@@ -894,6 +898,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">102x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -1006,9 +1012,9 @@ class Progress extends ComponentMixin(HTMLElement) {
     this._value = value;
     this._reflectAttribute('value', this._value);
   
-    this._elements.status.style.width = `${this.value}%`;
-  
     if (!this.indeterminate) {
+      this._elements.status.style.width = `${this.value}%`;
+      
       // ARIA: Reflect value for screenreaders
       this.setAttribute('aria-valuenow', this._value);
     
@@ -1016,6 +1022,9 @@ class Progress extends ComponentMixin(HTMLElement) {
         // Only update label text in percent mode
         this._setPercentage(`${this._value}%`);
       }
+    }
+    else {
+      this._elements.status.style.width = '';
     }
     
     this.trigger('coral-progress:change');
@@ -1036,10 +1045,10 @@ class Progress extends ComponentMixin(HTMLElement) {
   set indeterminate(value) {
     this._indeterminate = transform.booleanAttr(value);
     this._reflectAttribute('indeterminate', this._indeterminate);
-  
+  <span class="missing-if-branch" title="else path not taken" >E</span>
     if (this._indeterminate) {
       this.classList.add(`${CLASSNAME}--indeterminate`);
-    <span class="missing-if-branch" title="else path not taken" >E</span>
+    
       // ARIA: Remove attributes
       this.removeAttribute('aria-valuenow');
       this.removeAttribute('aria-valuemin');
@@ -1059,10 +1068,10 @@ class Progress extends ComponentMixin(HTMLElement) {
   }
   
   /**
-   The vertical and text size of this progress bar. To adjust the width, simply set the CSS width property.
+   The vertical and text size of this progress bar<span class="branch-1 cbranch-no" title="branch not covered" >. To adjust the</span> width, simply set the CSS width property.
    See {@link ProgressSizeEnum}.
    
-   @type {String}<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+   @type {String}
    @default ProgressSizeEnum.MEDIUM
    @htmlattribute size
    @htmlattributereflected size
@@ -1082,10 +1091,10 @@ class Progress extends ComponentMixin(HTMLElement) {
    Boolean attribute to toggle showing progress percent as the label content.
    Default is true.
    
-   @type {Boolean}
+   @ty<span class="missing-if-branch" title="else path not taken" >E</span>pe {Boolean}
    @default false
    @htmlattribute showpercent
-   */<span class="missing-if-branch" title="else path not taken" >E</span>
+   */
   get showPercent() {
     return this._showPercent || false;
   }
@@ -1161,13 +1170,13 @@ class Progress extends ComponentMixin(HTMLElement) {
     const label = this._elements.label;
     const isSidePositioned = this.labelPosition === labelPosition.SIDE;
     
-    // Handle percentage
+    // H<span class="missing-if-branch" title="if path not taken" >I</span>andle percentage
     if (this.showPercent) {
-      percentage.style.visibility = 'visible';
+      perc<span class="cstat-no" title="statement not covered" >entage.style.visibility = 'visible';</span>
       percentage.setAttribute('aria-hidden', 'false');
-      <span class="missing-if-branch" title="if path not taken" >I</span>
+      
       if (isSidePositioned) {
-        pe<span class="cstat-no" title="statement not covered" >rcentage.hidden = false;</span>
+        percentage.hidden = false;
       }
     }
     else {
@@ -1223,9 +1232,9 @@ class Progress extends ComponentMixin(HTMLElement) {
    */
   static get labelPosition() { return labelPosition; }
   
-  /**
+  /**<span class="branch-2 cbranch-no" title="branch not covered" ></span>
    Returns {@link Progress} sizes.
-   <span class="branch-2 cbranch-no" title="branch not covered" ></span>
+   
    @return {ProgressSizeEnum}
    */
   static get size() { return size; }
@@ -1248,10 +1257,10 @@ class Progress extends ComponentMixin(HTMLElement) {
     if (name === 'indeterminate' &amp;&amp; transform.booleanAttr(value)) {
       // Remember current value in case indeterminate is toggled
       this._oldValue = this._value || 0;
-    }
-    
-    su<span class="missing-if-branch" title="else path not taken" >E</span>per.attributeChangedCallback(name, oldValue, value);
-  }<span class="branch-0 cbranch-no" title="branch not covered" ></span>
+    }<span class="missing-if-branch" title="else path not taken" >E</span>
+    <span class="branch-0 cbranch-no" title="branch not covered" ></span>
+    super.attributeChangedCallback(name, oldValue, value);
+  }
   
   /** @ignore */
   connectedCallback() {
@@ -1296,9 +1305,9 @@ class Progress extends ComponentMixin(HTMLElement) {
   
     // Add the frag to the component
     this.appendChild(fragment);
-  
+  <span class="branch-2 cbranch-no" title="branch not covered" ></span>
     // Assign the content zone
-    this.label = label;<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+    this.label = label;
   
     // Toggle label based on content
     this._toggleLabelVisibility();
@@ -1324,7 +1333,7 @@ export default Progress;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon May 06 2019 12:23:40 GMT+0200 (CEST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon May 20 2019 15:16:09 GMT+0200 (CEST)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
