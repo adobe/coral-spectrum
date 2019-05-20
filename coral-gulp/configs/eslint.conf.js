@@ -1,4 +1,4 @@
-{
+module.exports = {
   "extends": "standard",
   "env" : {
     "browser" : true,
@@ -9,10 +9,8 @@
     "operator-linebreak": ["error", "after"],
     "semi": [2, "always"],
     "complexity": [ "warn", 15 ],
-
     "max-depth": 1,
-    "max-lines": 1,
-
+    "max-lines": 0,
     "no-trailing-spaces": 0,
     "space-before-function-paren": 0,
     "no-mixed-operators": 0,
@@ -25,4 +23,4 @@
     "ecmaVersion": 6,
     "sourceType": "module"
   }
-}
+};

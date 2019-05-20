@@ -13,6 +13,7 @@
 module.exports = function(gulp) {
   const plumb = require('./plumb');
   const eslint = require('gulp-eslint');
+  const conf = require('../configs/eslint.conf.js');
   const util = require('../helpers/util');
   
   let src = 'src/scripts/**/*.js';
@@ -25,7 +26,7 @@ module.exports = function(gulp) {
   gulp.task('lint', function() {
     return gulp.src(src)
       .pipe(plumb())
-      .pipe(eslint())
+      .pipe(eslint(conf))
       .pipe(eslint.format())
       .pipe(eslint.failAfterError());
   });
