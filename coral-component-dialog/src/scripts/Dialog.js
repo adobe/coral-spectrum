@@ -331,9 +331,7 @@ class Dialog extends OverlayMixin(ComponentMixin(HTMLElement)) {
     super.open = value;
     
     // Ensure we're in the DOM
-    if (this.open && document.body.contains(this)) {
-      this._openInDOM = true;
-      
+    if (this.open) {
       // If not child of document.body, we have to move it there
       this._moveToDocumentBody();
   
@@ -510,8 +508,15 @@ class Dialog extends OverlayMixin(ComponentMixin(HTMLElement)) {
   
   /** @ignore */
   _moveToDocumentBody() {
-    if (this.parentNode !== document.body) {
-      document.body.insertBefore(this, document.body.lastElementChild);
+    // Not in the DOM
+    if (!document.body.contains(this)) {
+      document.body.appendChild(this);
+    }
+    // In the DOM but not a direct child of body
+    else if (this.parentNode !== document.body) {
+      this._ignoreConnectedCallback = true;
+      document.body.appendChild(this);
+      this._ignoreConnectedCallback = false;
     }
   }
   
@@ -612,6 +617,10 @@ class Dialog extends OverlayMixin(ComponentMixin(HTMLElement)) {
   
   /** @ignore */
   connectedCallback() {
+    if (this._ignoreConnectedCallback) {
+      return;
+    }
+    
     this.classList.add(CLASSNAME);
 
     // Default reflected attributes
@@ -670,11 +679,15 @@ class Dialog extends OverlayMixin(ComponentMixin(HTMLElement)) {
   
     // Add the Overlay coral-tabcapture elements at the end
     super.connectedCallback();
+  }
   
-    // In case it was opened but not in the DOM yet
-    if (this.open && !this._openInDOM) {
-      this.open = this.open;
+  /** @ignore */
+  disconnectedCallback() {
+    if (this._ignoreConnectedCallback) {
+      return;
     }
+    
+    super.disconnectedCallback();
   }
 }
 

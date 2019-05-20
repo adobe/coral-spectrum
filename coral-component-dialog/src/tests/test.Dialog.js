@@ -16,7 +16,8 @@ import {tracking, mixin} from '../../../coral-utils';
 import {DragAction} from '../../../coral-dragaction';
 
 describe('Dialog', function() {
-  // We don't need this in our test cases
+  // We don't need this in most our test cases
+  const moveToDocumentBody = Dialog.prototype._moveToDocumentBody;
   Dialog.prototype._moveToDocumentBody = function() {};
   
   /**
@@ -249,6 +250,22 @@ describe('Dialog', function() {
     
         expect(el.open).to.be.true;
         expect(document.elementFromPoint(0, 0)).to.not.equal(document.querySelector('_coral-Underlay'));
+      });
+    });
+    
+    describe('#open', function() {
+      it('should be possible to open the dialog even if not part of the DOM', function(done) {
+        const dialog = new Dialog();
+        // Restore to test it
+        dialog._moveToDocumentBody = moveToDocumentBody;
+  
+        dialog.open = true;
+  
+        helpers.next(function() {
+          expect(dialog.parentNode === document.body).to.be.true;
+          dialog.remove();
+          done();
+        });
       });
     });
   
