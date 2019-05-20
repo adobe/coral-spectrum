@@ -427,13 +427,11 @@ const OverlayMixin = (superClass) => class extends superClass {
       this._vent.on('keydown', this._handleRootKeypress);
       this._vent.on('focus', '[coral-tabcapture]', this._handleTabCaptureFocus);
     }
-    // Don't just put this in an else, check if we currently have it disabled
-    // so we only attempt to remove elements if we were previously capturing tabs
-    else if (this._trapFocus === trapFocus.ON) {
+    else if (this._trapFocus === trapFocus.OFF) {
       // Remove elements
-      this.removeChild(this._elements.topTabCapture);
-      this.removeChild(this._elements.intermediateTabCapture);
-      this.removeChild(this._elements.bottomTabCapture);
+      this._elements.topTabCapture && this._elements.topTabCapture.remove();
+      this._elements.intermediateTabCapture && this._elements.intermediateTabCapture.remove();
+      this._elements.bottomTabCapture && this._elements.bottomTabCapture.remove();
   
       // Remove listeners
       this._vent.off('keydown', this._handleRootKeypress);
