@@ -234,7 +234,7 @@ class Toast extends OverlayMixin(ComponentMixin(HTMLElement)) {
       this._queued = true;
       // Clear timer
       if (this._dimissTimeout) {
-        clearTimeout(this._dimissTimeout)
+        clearTimeout(this._dimissTimeout);
       }
       // Add it to the queue
       queue(this);
