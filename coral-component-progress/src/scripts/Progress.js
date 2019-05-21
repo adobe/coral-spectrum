@@ -212,7 +212,7 @@ class Progress extends ComponentMixin(HTMLElement) {
    Used to access to the {@link Coral.Progress.Label} element. Keep in mind that the width of a custom label is
    limited for {@link Coral.Progress.labelPosition.LEFT} and {@link Coral.Progress.labelPosition.RIGHT}.
    
-   @type {HTMLElement}
+   @type {ProgressLabel}
    @contentzone
    */
   get label() {

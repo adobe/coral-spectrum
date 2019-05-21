@@ -84,7 +84,7 @@ class Radio extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   /**
    The radios's label element.
    
-   @type {HTMLElement}
+   @type {RadioLabel}
    @contentzone
    */
   get label() {

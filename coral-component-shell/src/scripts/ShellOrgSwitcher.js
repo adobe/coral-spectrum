@@ -99,7 +99,7 @@ class ShellOrgSwitcher extends List {
   /**
    Content zone where the buttons are located.
    
-   @type {HTMLElement}
+   @type {ShellOrgSwitcherFooter}
    @contentzone
    */
   get footer() {

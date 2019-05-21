@@ -143,7 +143,7 @@ class Alert extends ComponentMixin(HTMLElement) {
   /**
    The alert header element.
    
-   @type {HTMLElement}
+   @type {AlertHeader}
    @contentzone
    */
   get header() {
@@ -162,7 +162,7 @@ class Alert extends ComponentMixin(HTMLElement) {
   /**
    The alert content element.
    
-   @type {HTMLElement}
+   @type {AlertContent}
    @contentzone
    */
   get content() {
@@ -182,7 +182,7 @@ class Alert extends ComponentMixin(HTMLElement) {
   /**
    The alert footer element.
    
-   @type {HTMLElement}
+   @type {AlertFooter}
    @contentzone
    */
   get footer() {

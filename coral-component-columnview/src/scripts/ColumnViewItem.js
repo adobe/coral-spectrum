@@ -54,7 +54,7 @@ class ColumnViewItem extends ComponentMixin(HTMLElement) {
   /**
    The content of the item.
    
-   @type {HTMLElement}
+   @type {ColumnViewItemContent}
    @contentzone
    */
   get content() {
@@ -74,7 +74,7 @@ class ColumnViewItem extends ComponentMixin(HTMLElement) {
   /**
    The thumbnail of the item. It is used to hold an icon or an image.
    
-   @type {HTMLElement}
+   @type {ColumnViewItemThumbnail}
    @contentzone
    */
   get thumbnail() {

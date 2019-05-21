@@ -41,12 +41,7 @@ class MasonryItem extends ComponentMixin(HTMLElement) {
     quickactions.call(this._elements);
   }
   
-  /**
-   Item content element.
-   
-   @type {HTMLElement}
-   @contentzone
-   */
+  // @compat
   get content() {
     return this;
   }

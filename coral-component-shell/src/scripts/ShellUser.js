@@ -70,7 +70,7 @@ class ShellUser extends ComponentMixin(HTMLElement) {
   /**
    The name content zone of the user-menu.
    
-   @type {HTMLElement}
+   @type {ShellUserName}
    @contentzone
    */
   get name() {
@@ -89,7 +89,7 @@ class ShellUser extends ComponentMixin(HTMLElement) {
   /**
    The heading content zone of the user-menu.
    
-   @type {HTMLElement}
+   @type {ShellUserHeading}
    @contentzone
    */
   get heading() {
@@ -108,7 +108,7 @@ class ShellUser extends ComponentMixin(HTMLElement) {
   /**
    The subheading content zone of the user-menu.
    
-   @type {HTMLElement}
+   @type {ShellUserSubheading}
    @contentzone
    */
   get subheading() {
@@ -127,7 +127,7 @@ class ShellUser extends ComponentMixin(HTMLElement) {
   /**
    The main content zone of the user-menu.
    
-   @type {HTMLElement}
+   @type {ShellUserContent}
    @contentzone
    */
   get content() {
@@ -151,7 +151,7 @@ class ShellUser extends ComponentMixin(HTMLElement) {
   /**
    The footer content zone of the user-menu.
    
-   @type {HTMLElement}
+   @type {ShellUserFooter}
    @contentzone
    */
   get footer() {

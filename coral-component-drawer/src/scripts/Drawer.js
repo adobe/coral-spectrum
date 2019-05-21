@@ -85,7 +85,7 @@ class Drawer extends ComponentMixin(HTMLElement) {
   /**
    The drawer's content element.
    
-   @type {HTMLElement}
+   @type {DrawerContent}
    @htmlttribute content
    @contentzone
    */

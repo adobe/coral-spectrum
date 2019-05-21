@@ -41,7 +41,7 @@ class MultifieldItem extends ComponentMixin(HTMLElement) {
   /**
    The item content.
    
-   @type {HTMLElement}
+   @type {MultifieldItemContent}
    @contentzone
    */
   get content() {

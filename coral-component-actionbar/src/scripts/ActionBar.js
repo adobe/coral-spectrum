@@ -60,7 +60,7 @@ class ActionBar extends ComponentMixin(HTMLElement) {
   /**
    The primary (left) container of the ActionBar.
    
-   @type {HTMLElement}
+   @type {ActionBarPrimary}
    @contentzone
    */
   get primary() {
@@ -80,7 +80,7 @@ class ActionBar extends ComponentMixin(HTMLElement) {
   /**
    The secondary (right) container of the ActionBar.
    
-   @type {HTMLElement}
+   @type {ActionBarSecondary}
    @contentzone
    */
   get secondary() {

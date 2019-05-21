@@ -38,7 +38,7 @@ class CardProperty extends ComponentMixin(HTMLElement) {
   /**
    The property's content zone
    
-   @type {HTMLElement}
+   @type {CardPropertyContent}
    @contentzone
    */
   get content() {

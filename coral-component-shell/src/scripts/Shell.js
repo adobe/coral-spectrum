@@ -37,7 +37,7 @@ class Shell extends ComponentMixin(HTMLElement) {
   /**
    The outer shell content zone.
    
-   @type {HTMLElement}
+   @type {ShellContent}
    @contentzone
    */
   get content() {

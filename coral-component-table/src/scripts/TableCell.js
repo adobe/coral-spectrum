@@ -24,12 +24,7 @@ const CLASSNAME = '_coral-Table-cell';
  @extends {ComponentMixin}
  */
 class TableCell extends ComponentMixin(HTMLTableCellElement) {
-  /**
-   The cell's content.
-   
-   @type {HTMLElement}
-   @contentzone
-   */
+  // @compat
   get content() {
     return this;
   }

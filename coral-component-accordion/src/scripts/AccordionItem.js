@@ -42,7 +42,7 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
   /**
    The label of this accordion item.
    
-   @type {HTMLElement}
+   @type {AccordionItemLabel}
    @contentzone
    */
   get label() {
@@ -63,7 +63,7 @@ class AccordionItem extends ComponentMixin(HTMLElement) {
   /**
    The content of this accordion item.
    
-   @type {HTMLElement}
+   @type {AccordionItemContent}
    @contentzone
    */
   get content() {

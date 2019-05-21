@@ -36,7 +36,7 @@ class Panel extends ComponentMixin(HTMLElement) {
   /**
    The content of the panel.
    
-   @type {HTMLElement}
+   @type {PanelContent}
    @contentzone
    */
   get content() {

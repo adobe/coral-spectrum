@@ -87,7 +87,7 @@ class CardBanner extends ComponentMixin(HTMLElement) {
   /**
    The banner's header.
    
-   @type {HTMLElement}
+   @type {CardBannerHeader}
    @contentzone
    */
   get header() {
@@ -106,7 +106,7 @@ class CardBanner extends ComponentMixin(HTMLElement) {
   /**
    The banner's content.
    
-   @type {HTMLElement}
+   @type {CardBannerContent}
    @contentzone
    */
   get content() {

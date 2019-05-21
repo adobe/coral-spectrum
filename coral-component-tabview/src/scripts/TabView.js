@@ -87,7 +87,7 @@ class TabView extends ComponentMixin(HTMLElement) {
   /**
    The TabList which handles all the tabs.
    
-   @type {HTMLElement}
+   @type {TabList}
    @contentzone
    */
   get tabList() {
@@ -107,7 +107,7 @@ class TabView extends ComponentMixin(HTMLElement) {
   /**
    The PanelStack which contains all the panels.
    
-   @type {HTMLElement}
+   @type {PanelStack}
    @contentzone
    */
   get panelStack() {

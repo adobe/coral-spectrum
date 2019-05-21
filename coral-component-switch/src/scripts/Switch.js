@@ -82,7 +82,7 @@ class Switch extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   /**
    The switch's label element.
    
-   @type {HTMLElement}
+   @type {SwitchLabel}
    @contentzone
    */
   get label() {

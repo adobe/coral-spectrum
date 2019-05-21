@@ -92,7 +92,7 @@ class Card extends ComponentMixin(HTMLElement) {
   /**
    The Asset of the card.
    
-   @type {HTMLElement}
+   @type {CardAsset}
    @contentzone
    */
   get asset() {
@@ -185,7 +185,7 @@ class Card extends ComponentMixin(HTMLElement) {
   /**
    The Content of the card.
    
-   @type {HTMLElement}
+   @type {CardContent}
    @contentzone
    */
   get content() {
@@ -205,7 +205,7 @@ class Card extends ComponentMixin(HTMLElement) {
   /**
    The Banner of the card.
    
-   @type {HTMLElement}
+   @type {CardBanner}
    @contentzone
    */
   get banner() {
@@ -225,7 +225,7 @@ class Card extends ComponentMixin(HTMLElement) {
   /**
    The information area of the card, which is placed over all the content. It is typically used for alerts.
    
-   @type {HTMLElement}
+   @type {CardInfo}
    @contentzone
    */
   get info() {
@@ -263,7 +263,7 @@ class Card extends ComponentMixin(HTMLElement) {
   /**
    The Overlay of the card.
    
-   @type {HTMLElement}
+   @type {CardOverlay}
    @contentzone
    */
   get overlay() {

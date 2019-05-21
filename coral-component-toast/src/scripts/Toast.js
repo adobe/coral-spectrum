@@ -312,7 +312,7 @@ class Toast extends OverlayMixin(ComponentMixin(HTMLElement)) {
   /**
    The Toast content element.
    
-   @type {HTMLElement}
+   @type {ToastContent}
    @contentzone
    */
   get content() {

@@ -131,7 +131,7 @@ class Popover extends Overlay {
    
    @contentzone
    @name content
-   @type {HTMLElement}
+   @type {PopoverContent}
    */
   get content() {
     return this._getContentZone(this._elements.content);
@@ -153,7 +153,7 @@ class Popover extends Overlay {
    
    @contentzone
    @name header
-   @type {HTMLElement}
+   @type {PopoverHeader}
    */
   get header() {
     return this._getContentZone(this._elements.header);
@@ -178,7 +178,7 @@ class Popover extends Overlay {
   /**
    The popover's footer element.
    
-   @type {HTMLElement}
+   @type {PopoverFooter}
    @contentzone
    */
   get footer() {

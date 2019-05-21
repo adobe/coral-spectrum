@@ -92,7 +92,7 @@ class Slider extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   /**
    The slider's content.
    
-   @type {HTMLElement}
+   @type {SliderContent}
    @contentzone
    */
   get content() {

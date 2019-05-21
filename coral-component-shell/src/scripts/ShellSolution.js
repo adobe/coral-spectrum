@@ -53,7 +53,7 @@ class ShellSolution extends ComponentMixin(HTMLAnchorElement) {
   /**
    The solution's label content zone.
    
-   @type {HTMLElement}
+   @type {ShellSolutionLabel}
    @contentzone
    */
   get label() {

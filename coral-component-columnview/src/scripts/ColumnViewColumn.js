@@ -96,7 +96,7 @@ class ColumnViewColumn extends ComponentMixin(HTMLElement) {
    The content of the column. This container is where the items should be added and is responsible for handling the
    scrolling.
    
-   @type {HTMLElement}
+   @type {ColumnViewColumnContent}
    @contentzone
    */
   get content() {

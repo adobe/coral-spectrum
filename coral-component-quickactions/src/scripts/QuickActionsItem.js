@@ -51,12 +51,7 @@ class QuickActionsItem extends ComponentMixin(HTMLElement) {
     });
   }
   
-  /**
-   The Item's content zone.
-   
-   @type {HTMLElement}
-   @contentzone
-   */
+  // @compat
   get content() {
     return this;
   }

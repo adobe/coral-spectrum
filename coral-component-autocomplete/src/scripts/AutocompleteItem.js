@@ -54,12 +54,7 @@ class AutocompleteItem extends ComponentMixin(HTMLElement) {
     this.trigger('coral-autocomplete-item:_valuechanged');
   }
   
-  /**
-   The content zone element of the item.
-   
-   @type {HTMLElement}
-   @contentzone
-   */
+  // @compat
   get content() {
     return this;
   }

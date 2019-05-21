@@ -33,12 +33,7 @@ class SelectItem extends ComponentMixin(HTMLElement) {
     });
   }
   
-  /**
-   Item content element.
-   
-   @type {HTMLElement}
-   @contentzone
-   */
+  // @compat
   get content() {
     return this;
   }

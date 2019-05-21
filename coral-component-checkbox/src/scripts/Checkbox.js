@@ -106,7 +106,7 @@ class Checkbox extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   /**
    The checkbox's label element.
    
-   @type {HTMLElement}
+   @type {CheckboxLabel}
    @contentzone
    */
   get label() {

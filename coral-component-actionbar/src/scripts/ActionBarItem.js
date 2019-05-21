@@ -22,12 +22,7 @@ const CLASSNAME = '_coral-ActionBar-item';
  @extends {ComponentMixin}
  */
 class ActionBarItem extends ComponentMixin(HTMLElement) {
-  /**
-   Item content element.
-   
-   @type {HTMLElement}
-   @contentzone
-   */
+  // @compat
   get content() {
     return this;
   }

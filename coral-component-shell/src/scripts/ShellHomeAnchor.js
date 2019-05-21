@@ -42,7 +42,7 @@ class ShellHomeAnchor extends ComponentMixin(HTMLAnchorElement) {
   /**
    The label of the anchor.
    
-   @type {HTMLElement}
+   @type {ShellHomeAnchorLabel}
    @contentzone
    */
   get label() {

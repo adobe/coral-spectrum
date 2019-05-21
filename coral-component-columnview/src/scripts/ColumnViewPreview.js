@@ -35,7 +35,7 @@ class ColumnViewPreview extends ComponentMixin(HTMLElement) {
   /**
    The content of the Preview.
    
-   @type {HTMLElement}
+   @type {ColumnViewPreviewContent}
    @contentzone
    */
   get content() {

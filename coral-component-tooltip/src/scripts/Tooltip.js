@@ -144,7 +144,7 @@ class Tooltip extends Overlay {
   /**
    The Tooltip content element.
    
-   @type {HTMLElement}
+   @type {TooltipContent}
    @contentzone
    */
   get content() {

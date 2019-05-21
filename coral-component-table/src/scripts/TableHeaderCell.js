@@ -43,7 +43,7 @@ class TableHeaderCell extends ComponentMixin(HTMLTableCellElement) {
   /**
    The header cell's content.
    
-   @type {HTMLElement}
+   @type {TableHeaderCellContent}
    @contentzone
    */
   get content() {

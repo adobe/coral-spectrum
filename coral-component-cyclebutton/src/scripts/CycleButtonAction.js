@@ -37,12 +37,7 @@ class CycleButtonAction extends ComponentMixin(HTMLElement) {
     this._reflectAttribute('icon', this._icon);
   }
   
-  /**
-   Action content element.
-   
-   @type {HTMLElement}
-   @contentzone
-   */
+  // @compat
   get content() {
     return this;
   }

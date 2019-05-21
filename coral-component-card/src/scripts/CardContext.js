@@ -22,12 +22,7 @@ const CLASSNAME = '_coral-Card-context';
  @extends {ComponentMixin}
  */
 class CardContext extends ComponentMixin(HTMLElement) {
-  /**
-   The context's content zone.
-   
-   @type {HTMLElement}
-   @contentzone
-   */
+  // @compat
   get content() {
     return this;
   }

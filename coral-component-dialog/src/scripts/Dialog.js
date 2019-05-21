@@ -173,7 +173,7 @@ class Dialog extends OverlayMixin(ComponentMixin(HTMLElement)) {
   /**
    The dialog header element.
    
-   @type {HTMLElement}
+   @type {DialogHeader}
    @contentzone
    */
   get header() {
@@ -200,7 +200,7 @@ class Dialog extends OverlayMixin(ComponentMixin(HTMLElement)) {
   /**
    The dialog content element.
    
-   @type {HTMLElement}
+   @type {DialogContent}
    @contentzone
    */
   get content() {
@@ -221,7 +221,7 @@ class Dialog extends OverlayMixin(ComponentMixin(HTMLElement)) {
   /**
    The dialog footer element.
    
-   @type {HTMLElement}
+   @type {DialogFooter}
    @contentzone
    */
   get footer() {

@@ -36,7 +36,7 @@ const ListItemMixin = (superClass) => class extends superClass {
   /**
    The content of the help item.
    
-   @type {HTMLElement}
+   @type {ListItemContent}
    @contentzone
    */
   get content() {

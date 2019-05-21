@@ -172,7 +172,7 @@ class ShellMenuBarItem extends ComponentMixin(HTMLElement) {
   /**
    The menubar item's label content zone.
    
-   @type {HTMLElement}
+   @type {ButtonLabel}
    @contentzone
    */
   get label() {

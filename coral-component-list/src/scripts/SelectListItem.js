@@ -55,7 +55,7 @@ class SelectListItem extends ComponentMixin(HTMLElement) {
   /**
    The content element for the item.
    
-   @type {HTMLElement}
+   @type {SelectListItemContent}
    @contentzone
    */
   get content() {

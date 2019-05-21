@@ -168,7 +168,7 @@ class Tag extends ComponentMixin(HTMLElement) {
   /**
    The tag's label element.
    
-   @type {HTMLElement}
+   @type {TagLabel}
    @contentzone
    */
   get label() {

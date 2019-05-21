@@ -40,7 +40,7 @@ class Step extends ComponentMixin(HTMLElement) {
   /**
    The label of the step.
    
-   @type {HTMLElement}
+   @type {StepLabel}
    @contentzone
    */
   get label() {

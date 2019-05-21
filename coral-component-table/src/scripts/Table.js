@@ -187,7 +187,7 @@ class Table extends ComponentMixin(HTMLTableElement) {
   /**
    The head of the table.
    
-   @type {HTMLElement}
+   @type {TableHead}
    @contentzone
    */
   get head() {
@@ -207,7 +207,7 @@ class Table extends ComponentMixin(HTMLTableElement) {
   /**
    The body of the table. Multiple bodies are not supported.
    
-   @type {HTMLElement}
+   @type {TableBody}
    @contentzone
    */
   get body() {
@@ -226,7 +226,7 @@ class Table extends ComponentMixin(HTMLTableElement) {
   /**
    The foot of the table.
    
-   @type {HTMLElement}
+   @type {TableFoot}
    @contentzone
    */
   get foot() {
@@ -246,7 +246,7 @@ class Table extends ComponentMixin(HTMLTableElement) {
   /**
    The columns of the table.
    
-   @type {HTMLElement}
+   @type {TableColumn}
    @contentzone
    */
   get columns() {

@@ -58,7 +58,7 @@ class Tab extends ComponentMixin(HTMLElement) {
   /**
    The label of the tab.
    
-   @type {HTMLElement}
+   @type {TabLabel}
    @contentzone
    */
   get label() {

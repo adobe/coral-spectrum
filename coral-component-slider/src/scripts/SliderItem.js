@@ -40,12 +40,7 @@ class SliderItem extends ComponentMixin(HTMLElement) {
     this._reflectAttribute('value', transform.string(value));
   }
   
-  /**
-   The content zone element of the item.
-   
-   @type {HTMLElement}
-   @contentzone
-   */
+  // @compat
   get content() {
     return this;
   }

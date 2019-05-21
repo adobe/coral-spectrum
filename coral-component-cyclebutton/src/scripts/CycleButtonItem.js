@@ -60,12 +60,7 @@ class CycleButtonItem extends ComponentMixin(HTMLElement) {
     this.trigger('coral-cyclebutton-item:_iconchanged');
   }
   
-  /**
-   Item content element.
-   
-   @type {HTMLElement}
-   @contentzone
-   */
+  // @compat
   get content() {
     return this;
   }
