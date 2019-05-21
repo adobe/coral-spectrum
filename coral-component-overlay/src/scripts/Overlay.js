@@ -397,6 +397,8 @@ class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
   }
   set smart(value) {
     this._smart = transform.booleanAttr(value);
+  
+    this._toggleSmartBehavior(this.open);
   }
   
   /**
@@ -408,13 +410,17 @@ class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
   set open(value) {
     super.open = value;
     
-    if (this.open) {
+    this._toggleSmartBehavior(this.open);
+  }
+  
+  _toggleSmartBehavior(toggle) {
+    if (toggle) {
       if (this.smart) {
         this._validateParentOverflow();
       }
-      
+    
       this._togglePopperEventListener(true);
-  
+    
       // We need an additional frame to help popper read the correct offsets
       window.requestAnimationFrame(() => {
         this.reposition();
@@ -453,7 +459,9 @@ class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
   
     // If it's the case then we move the overlay to make sure it's not truncated
     if (reposition) {
+      this._ignoreConnectedCallback = true;
       document.body.appendChild(this);
+      this._ignoreConnectedCallback = false;
     }
   }
   
@@ -647,6 +655,10 @@ class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
   
   /** @ignore */
   connectedCallback() {
+    if (this._ignoreConnectedCallback) {
+      return;
+    }
+    
     super.connectedCallback();
     
     this.classList.add(CLASSNAME);
@@ -666,6 +678,15 @@ class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
         this._togglePopperEventListener(false);
       }
     });
+  }
+  
+  /** @ignore */
+  disconnectedCallback() {
+    if (this._ignoreConnectedCallback) {
+      return;
+    }
+    
+    super.disconnectedCallback();
   }
   
   /**
