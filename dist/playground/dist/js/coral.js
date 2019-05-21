@@ -4246,7 +4246,7 @@
 
   var FOCUSABLE_ELEMENTS = ['input:not([disabled])', 'select:not([disabled])', 'textarea:not([disabled])', 'button:not([disabled])', 'a[href]', 'area[href]', 'summary', 'iframe', 'object', 'embed', 'audio[controls]', 'video[controls]', '[contenteditable]']; // To support Coral.commons.ready and differentiate lightweight tags from defined elements
 
-  var CORAL_COMPONENTS = ['coral-accordion', 'coral-accordion-item', 'coral-accordion-item-content', 'coral-actionbar', 'coral-actionbar-container', 'coral-actionbar-item', 'coral-actionbar-primary', 'coral-actionbar-secondary', 'coral-alert', 'coral-alert-header', 'coral-alert-content', 'coral-alert-footer', 'a[is="coral-anchorbutton"]', 'coral-autocomplete', 'coral-autocomplete-item', 'coral-autocomplete-item', 'button[is="coral-button"]', 'coral-buttongroup', 'coral-calendar', 'coral-card', 'coral-card-banner', 'coral-card-banner-content', 'coral-card-banner-header', 'coral-card-context', 'coral-card-description', 'coral-card-property', 'coral-card-propertylist', 'coral-card-subtitle', 'coral-card-title', 'coral-charactercount', 'coral-checkbox', 'coral-clock', 'coral-colorinput', 'coral-colorinput-colorproperties', 'coral-colorinput-item', 'coral-colorinput-slider', 'coral-colorinput-swatch', 'coral-colorinput-swatches', 'coral-columnview', 'coral-columnview-column', 'coral-columnview-column-content', 'coral-columnview-item', 'coral-columnview-item-content', 'coral-columnview-item-thumbnail', 'coral-columnview-preview', 'coral-columnview-preview-content', 'coral-cyclebutton', 'coral-cyclebutton-action', 'coral-cyclebutton-item', 'coral-datepicker', 'coral-dialog', 'coral-dialog-header', 'coral-dialog-content', 'coral-dialog-footer', 'coral-drawer', 'coral-fileupload', 'coral-icon', 'coral-list', 'coral-selectlist', 'coral-buttonlist', 'coral-anchorlist', 'coral-list-item', 'coral-selectlist-item', 'coral-selectlist-group', 'a[is="coral-anchorlist-item"]', 'button[is="coral-buttonlist-item"]', 'coral-masonry', 'coral-masonry-item', 'coral-multifield', 'coral-multifield-item', 'coral-numberinput', 'coral-overlay', 'coral-panel', 'coral-panelstack', 'coral-playground', 'coral-popover', 'coral-progress', 'coral-quickactions', 'coral-radio', 'coral-search', 'coral-select', 'coral-select-item', 'coral-shell', 'coral-shell-header', 'coral-shell-help', 'a[is="coral-shell-homeanchor"]', 'a[is="coral-shell-help-item"]', 'a[is="coral-shell-workspace"]', 'a[is="coral-shell-solution"]', 'coral-shell-menu', 'coral-shell-menubar', 'coral-shell-menubar-item', 'coral-shell-organization', 'coral-shell-orgswitcher', 'coral-shell-solution', 'coral-shell-solutions', 'coral-shell-solutionswitcher', 'coral-shell-suborganization', 'coral-shell-user', 'coral-shell-workspaces', 'coral-slider', 'coral-slider-item', 'coral-rangedslider', 'coral-step', 'coral-steplist', 'coral-step-label', 'coral-switch', 'table[is="coral-table"]', 'thead[is="coral-table-head"]', 'tbody[is="coral-table-body"]', 'tfoot[is="coral-table-foot"]', 'tr[is="coral-table-row"]', 'td[is="coral-table-cell"]', 'th[is="coral-table-headercell"]', 'col[is="coral-table-column"]', 'coral-tab', 'coral-tab-label', 'coral-tablist', 'coral-tabview', 'coral-taglist', 'coral-tag', 'textarea[is="coral-textarea"]', 'input[is="coral-textfield"]', 'coral-tooltip', 'coral-tooltip-content', 'coral-tree', 'coral-tree-item', 'coral-wait', 'coral-wizardview'];
+  var CORAL_COMPONENTS = ['coral-accordion', 'coral-accordion-item', 'coral-accordion-item-content', 'coral-actionbar', 'coral-actionbar-container', 'coral-actionbar-item', 'coral-actionbar-primary', 'coral-actionbar-secondary', 'coral-alert', 'coral-alert-header', 'coral-alert-content', 'coral-alert-footer', 'a[is="coral-anchorbutton"]', 'coral-autocomplete', 'coral-autocomplete-item', 'coral-autocomplete-item', 'button[is="coral-button"]', 'coral-buttongroup', 'coral-calendar', 'coral-card', 'coral-card-banner', 'coral-card-banner-content', 'coral-card-banner-header', 'coral-card-context', 'coral-card-description', 'coral-card-property', 'coral-card-propertylist', 'coral-card-subtitle', 'coral-card-title', 'coral-charactercount', 'coral-checkbox', 'coral-clock', 'coral-colorinput', 'coral-colorinput-colorproperties', 'coral-colorinput-item', 'coral-colorinput-slider', 'coral-colorinput-swatch', 'coral-colorinput-swatches', 'coral-columnview', 'coral-columnview-column', 'coral-columnview-column-content', 'coral-columnview-item', 'coral-columnview-item-content', 'coral-columnview-item-thumbnail', 'coral-columnview-preview', 'coral-columnview-preview-content', 'coral-cyclebutton', 'coral-cyclebutton-action', 'coral-cyclebutton-item', 'coral-datepicker', 'coral-dialog', 'coral-dialog-header', 'coral-dialog-content', 'coral-dialog-footer', 'coral-drawer', 'coral-fileupload', 'coral-icon', 'coral-list', 'coral-selectlist', 'coral-buttonlist', 'coral-anchorlist', 'coral-list-item', 'coral-selectlist-item', 'coral-selectlist-group', 'a[is="coral-anchorlist-item"]', 'button[is="coral-buttonlist-item"]', 'coral-masonry', 'coral-masonry-item', 'coral-multifield', 'coral-multifield-item', 'coral-numberinput', 'coral-overlay', 'coral-panel', 'coral-panelstack', 'coral-playground', 'coral-popover', 'coral-progress', 'coral-quickactions', 'coral-radio', 'coral-search', 'coral-select', 'coral-select-item', 'coral-shell', 'coral-shell-header', 'coral-shell-help', 'a[is="coral-shell-homeanchor"]', 'a[is="coral-shell-help-item"]', 'a[is="coral-shell-workspace"]', 'a[is="coral-shell-solution"]', 'coral-shell-menu', 'coral-shell-menubar', 'coral-shell-menubar-item', 'coral-shell-organization', 'coral-shell-orgswitcher', 'coral-shell-solution', 'coral-shell-solutions', 'coral-shell-solutionswitcher', 'coral-shell-suborganization', 'coral-shell-user', 'coral-shell-workspaces', 'coral-slider', 'coral-slider-item', 'coral-rangedslider', 'coral-step', 'coral-steplist', 'coral-step-label', 'coral-switch', 'table[is="coral-table"]', 'thead[is="coral-table-head"]', 'tbody[is="coral-table-body"]', 'tfoot[is="coral-table-foot"]', 'tr[is="coral-table-row"]', 'td[is="coral-table-cell"]', 'th[is="coral-table-headercell"]', 'col[is="coral-table-column"]', 'coral-tab', 'coral-tab-label', 'coral-tablist', 'coral-tabview', 'coral-taglist', 'coral-tag', 'textarea[is="coral-textarea"]', 'input[is="coral-textfield"]', 'coral-toast', 'coral-toast-content', 'coral-tooltip', 'coral-tooltip-content', 'coral-tree', 'coral-tree-item', 'coral-wait', 'coral-wizardview'];
   /**
    Converts CSS time to milliseconds. It supports both s and ms units. If the provided value has an unrecogenized unit,
    zero will be returned.
@@ -14435,7 +14435,8 @@
         svg.classList.add('_coral-Icon-collection');
         svg.setAttribute('focusable', 'false');
         svg.setAttribute('aria-hidden', 'true');
-        svg.style.position = 'absolute';
+        svg.style.position = 'fixed';
+        svg.style.top = '-999px';
         svg.style.left = '-999px'; // Insert it into the body
 
         if (document.body) {
@@ -14945,7 +14946,7 @@
     /**
      The label of this accordion item.
      
-     @type {HTMLElement}
+     @type {AccordionItemLabel}
      @contentzone
      */
 
@@ -15018,7 +15019,7 @@
       /**
        The content of this accordion item.
        
-       @type {HTMLElement}
+       @type {AccordionItemContent}
        @contentzone
        */
 
@@ -19168,6 +19169,26 @@
 
 
     _createClass(Overlay, [{
+      key: "_toggleSmartBehavior",
+      value: function _toggleSmartBehavior(toggle) {
+        var _this2 = this;
+
+        if (toggle) {
+          if (this.smart) {
+            this._validateParentOverflow();
+          }
+
+          this._togglePopperEventListener(true); // We need an additional frame to help popper read the correct offsets
+
+
+          window.requestAnimationFrame(function () {
+            _this2.reposition();
+          });
+        } else {
+          this._togglePopperEventListener(false);
+        }
+      }
+    }, {
       key: "_togglePopperEventListener",
       value: function _togglePopperEventListener(toggle) {
         if (this._popper) {
@@ -19199,7 +19220,9 @@
 
 
         if (reposition) {
+          this._ignoreConnectedCallback = true;
           document.body.appendChild(this);
+          this._ignoreConnectedCallback = false;
         }
       }
       /** @ignore */
@@ -19207,14 +19230,14 @@
     }, {
       key: "_onUpdate",
       value: function _onUpdate(data) {
-        var _this2 = this;
+        var _this3 = this;
 
         // Trigger once positioned the first time
         if (!this._oldPosition) {
           this._oldPosition = data.styles.transform; // Do it in the next frame to avoid triggering the event too early
 
           window.requestAnimationFrame(function () {
-            _this2.trigger('coral-overlay:positioned', data);
+            _this3.trigger('coral-overlay:positioned', data);
           });
         } // Trigger again only if position changed
         else {
@@ -19305,7 +19328,7 @@
     }, {
       key: "reposition",
       value: function reposition(forceReposition) {
-        var _this3 = this;
+        var _this4 = this;
 
         if (this._popper) {
           var targetElement = this._getTarget(); // Update target only if valid
@@ -19319,15 +19342,15 @@
 
           this._popper.modifiers.forEach(function (modifier) {
             if (modifier.name === 'offset') {
-              modifier.offset = "".concat(_this3.breadthOffset, ", ").concat(_this3.lengthOffset);
+              modifier.offset = "".concat(_this4.breadthOffset, ", ").concat(_this4.lengthOffset);
             } else if (modifier.name === 'flip') {
-              modifier.enabled = _this3.collision !== collision.FIT && _this3.collision !== collision.NONE;
+              modifier.enabled = _this4.collision !== collision.FIT && _this4.collision !== collision.NONE;
             } else if (modifier.name === 'inner') {
-              modifier.enabled = _this3.inner;
+              modifier.enabled = _this4.inner;
             } else if (modifier.name === 'preventOverflow') {
-              modifier.enabled = _this3.collision !== collision.NONE;
-              modifier.boundariesElement = _this3.within;
-              modifier.padding = _this3.withinOffset;
+              modifier.enabled = _this4.collision !== collision.NONE;
+              modifier.boundariesElement = _this4.within;
+              modifier.padding = _this4.withinOffset;
             }
           });
 
@@ -19349,7 +19372,11 @@
 
       /** @ignore */
       value: function connectedCallback() {
-        var _this4 = this;
+        var _this5 = this;
+
+        if (this._ignoreConnectedCallback) {
+          return;
+        }
 
         _get(_getPrototypeOf(Overlay.prototype), "connectedCallback", this).call(this);
 
@@ -19361,12 +19388,23 @@
 
         window.requestAnimationFrame(function () {
           // Force repositioning
-          _this4.reposition(true);
+          _this5.reposition(true);
 
-          if (!_this4.open) {
-            _this4._togglePopperEventListener(false);
+          if (!_this5.open) {
+            _this5._togglePopperEventListener(false);
           }
         });
+      }
+      /** @ignore */
+
+    }, {
+      key: "disconnectedCallback",
+      value: function disconnectedCallback() {
+        if (this._ignoreConnectedCallback) {
+          return;
+        }
+
+        _get(_getPrototypeOf(Overlay.prototype), "disconnectedCallback", this).call(this);
       }
       /**
        Triggered after the {@link Overlay} is positioned.
@@ -19632,6 +19670,8 @@
       },
       set: function set(value) {
         this._smart = transform.booleanAttr(value);
+
+        this._toggleSmartBehavior(this.open);
       }
       /**
        Inherited from {@link OverlayMixin#open}.
@@ -19643,24 +19683,9 @@
         return _get(_getPrototypeOf(Overlay.prototype), "open", this);
       },
       set: function set(value) {
-        var _this5 = this;
-
         _set(_getPrototypeOf(Overlay.prototype), "open", value, this, true);
 
-        if (this.open) {
-          if (this.smart) {
-            this._validateParentOverflow();
-          }
-
-          this._togglePopperEventListener(true); // We need an additional frame to help popper read the correct offsets
-
-
-          window.requestAnimationFrame(function () {
-            _this5.reposition();
-          });
-        } else {
-          this._togglePopperEventListener(false);
-        }
+        this._toggleSmartBehavior(this.open);
       }
     }], [{
       key: "align",
@@ -19898,7 +19923,7 @@
      
      @contentzone
      @name content
-     @type {HTMLElement}
+     @type {PopoverContent}
      */
 
 
@@ -20106,7 +20131,7 @@
        
        @contentzone
        @name header
-       @type {HTMLElement}
+       @type {PopoverHeader}
        */
 
     }, {
@@ -20133,7 +20158,7 @@
       /**
        The popover's footer element.
        
-       @type {HTMLElement}
+       @type {PopoverFooter}
        @contentzone
        */
 
@@ -21509,7 +21534,7 @@
       /**
        The dialog header element.
        
-       @type {HTMLElement}
+       @type {DialogHeader}
        @contentzone
        */
 
@@ -21538,7 +21563,7 @@
       /**
        The dialog content element.
        
-       @type {HTMLElement}
+       @type {DialogContent}
        @contentzone
        */
 
@@ -21561,7 +21586,7 @@
       /**
        The dialog footer element.
        
-       @type {HTMLElement}
+       @type {DialogFooter}
        @contentzone
        */
 
@@ -22181,7 +22206,7 @@
     /**
      The primary (left) container of the ActionBar.
      
-     @type {HTMLElement}
+     @type {ActionBarPrimary}
      @contentzone
      */
 
@@ -22718,7 +22743,7 @@
       /**
        The secondary (right) container of the ActionBar.
        
-       @type {HTMLElement}
+       @type {ActionBarSecondary}
        @contentzone
        */
 
@@ -22780,13 +22805,7 @@
       }
     }, {
       key: "content",
-
-      /**
-       Item content element.
-       
-       @type {HTMLElement}
-       @contentzone
-       */
+      // @compat
       get: function get() {
         return this;
       },
@@ -24054,7 +24073,7 @@
         /**
          The content of the help item.
          
-         @type {HTMLElement}
+         @type {ListItemContent}
          @contentzone
          */
 
@@ -25773,7 +25792,7 @@
       /**
        The content element for the item.
        
-       @type {HTMLElement}
+       @type {SelectListItemContent}
        @contentzone
        */
 
@@ -26336,7 +26355,7 @@
       /**
        The alert header element.
        
-       @type {HTMLElement}
+       @type {AlertHeader}
        @contentzone
        */
 
@@ -26357,7 +26376,7 @@
       /**
        The alert content element.
        
-       @type {HTMLElement}
+       @type {AlertContent}
        @contentzone
        */
 
@@ -26379,7 +26398,7 @@
       /**
        The alert footer element.
        
-       @type {HTMLElement}
+       @type {AlertFooter}
        @contentzone
        */
 
@@ -27335,7 +27354,7 @@
     /**
      The tag's label element.
      
-     @type {HTMLElement}
+     @type {TagLabel}
      @contentzone
      */
 
@@ -28465,13 +28484,7 @@
         this._reflectAttribute('value', this._value);
 
         this.trigger('coral-autocomplete-item:_valuechanged');
-      }
-      /**
-       The content zone element of the item.
-       
-       @type {HTMLElement}
-       @contentzone
-       */
+      } // @compat
 
     }, {
       key: "content",
@@ -33550,7 +33563,7 @@
     /**
      The Asset of the card.
      
-     @type {HTMLElement}
+     @type {CardAsset}
      @contentzone
      */
 
@@ -33741,7 +33754,7 @@
       /**
        The Content of the card.
        
-       @type {HTMLElement}
+       @type {CardContent}
        @contentzone
        */
 
@@ -33764,7 +33777,7 @@
       /**
        The Banner of the card.
        
-       @type {HTMLElement}
+       @type {CardBanner}
        @contentzone
        */
 
@@ -33786,7 +33799,7 @@
       /**
        The information area of the card, which is placed over all the content. It is typically used for alerts.
        
-       @type {HTMLElement}
+       @type {CardInfo}
        @contentzone
        */
 
@@ -33829,7 +33842,7 @@
       /**
        The Overlay of the card.
        
-       @type {HTMLElement}
+       @type {CardOverlay}
        @contentzone
        */
 
@@ -34051,7 +34064,7 @@
       /**
        The banner's header.
        
-       @type {HTMLElement}
+       @type {CardBannerHeader}
        @contentzone
        */
 
@@ -34072,7 +34085,7 @@
       /**
        The banner's content.
        
-       @type {HTMLElement}
+       @type {CardBannerContent}
        @contentzone
        */
 
@@ -34250,7 +34263,7 @@
     /**
      The property's content zone
      
-     @type {HTMLElement}
+     @type {CardPropertyContent}
      @contentzone
      */
 
@@ -34379,13 +34392,7 @@
       }
     }, {
       key: "content",
-
-      /**
-       The title's content zone.
-       
-       @type {HTMLElement}
-       @contentzone
-       */
+      // @compat
       get: function get() {
         return this;
       },
@@ -34434,13 +34441,7 @@
       }
     }, {
       key: "content",
-
-      /**
-       The subtitle's content zone.
-       
-       @type {HTMLElement}
-       @contentzone
-       */
+      // @compat
       get: function get() {
         return this;
       },
@@ -34489,13 +34490,7 @@
       }
     }, {
       key: "content",
-
-      /**
-       The context's content zone.
-       
-       @type {HTMLElement}
-       @contentzone
-       */
+      // @compat
       get: function get() {
         return this;
       },
@@ -34544,13 +34539,7 @@
       }
     }, {
       key: "content",
-
-      /**
-       The description's content zone.
-       
-       @type {HTMLElement}
-       @contentzone
-       */
+      // @compat
       get: function get() {
         return this;
       },
@@ -35224,7 +35213,7 @@
       /**
        The checkbox's label element.
        
-       @type {HTMLElement}
+       @type {CheckboxLabel}
        @contentzone
        */
 
@@ -37276,13 +37265,7 @@
       });
 
       return _this;
-    }
-    /**
-     Item content element.
-     
-     @type {HTMLElement}
-     @contentzone
-     */
+    } // @compat
 
 
     _createClass(SelectItem, [{
@@ -39867,7 +39850,7 @@
     /**
      The slider's content.
      
-     @type {HTMLElement}
+     @type {SliderContent}
      @contentzone
      */
 
@@ -40842,13 +40825,7 @@
       },
       set: function set(value) {
         this._reflectAttribute('value', transform.string(value));
-      }
-      /**
-       The content zone element of the item.
-       
-       @type {HTMLElement}
-       @contentzone
-       */
+      } // @compat
 
     }, {
       key: "content",
@@ -41542,7 +41519,7 @@
       /**
        The Tooltip content element.
        
-       @type {HTMLElement}
+       @type {TooltipContent}
        @contentzone
        */
 
@@ -45989,7 +45966,7 @@
        The content of the column. This container is where the items should be added and is responsible for handling the
        scrolling.
        
-       @type {HTMLElement}
+       @type {ColumnViewColumnContent}
        @contentzone
        */
 
@@ -46205,7 +46182,7 @@
     /**
      The content of the item.
      
-     @type {HTMLElement}
+     @type {ColumnViewItemContent}
      @contentzone
      */
 
@@ -46291,7 +46268,7 @@
       /**
        The thumbnail of the item. It is used to hold an icon or an image.
        
-       @type {HTMLElement}
+       @type {ColumnViewItemThumbnail}
        @contentzone
        */
 
@@ -46564,7 +46541,7 @@
     /**
      The content of the Preview.
      
-     @type {HTMLElement}
+     @type {ColumnViewPreviewContent}
      @contentzone
      */
 
@@ -46850,13 +46827,7 @@
         this._reflectAttribute('icon', this._icon);
 
         this.trigger('coral-cyclebutton-item:_iconchanged');
-      }
-      /**
-       Item content element.
-       
-       @type {HTMLElement}
-       @contentzone
-       */
+      } // @compat
 
     }, {
       key: "content",
@@ -47853,13 +47824,7 @@
         this._icon = transform.string(value);
 
         this._reflectAttribute('icon', this._icon);
-      }
-      /**
-       Action content element.
-       
-       @type {HTMLElement}
-       @contentzone
-       */
+      } // @compat
 
     }, {
       key: "content",
@@ -49171,7 +49136,7 @@
       /**
        The drawer's content element.
        
-       @type {HTMLElement}
+       @type {DrawerContent}
        @htmlttribute content
        @contentzone
        */
@@ -51726,13 +51691,7 @@
       _this._elements = {};
       template$A.call(_this._elements);
       return _this;
-    }
-    /**
-     Item content element.
-     
-     @type {HTMLElement}
-     @contentzone
-     */
+    } // @compat
 
 
     _createClass(MasonryItem, [{
@@ -54230,7 +54189,7 @@
     /**
      The item content.
      
-     @type {HTMLElement}
+     @type {MultifieldItemContent}
      @contentzone
      */
 
@@ -55570,7 +55529,7 @@
     /**
      The content of the panel.
      
-     @type {HTMLElement}
+     @type {PanelContent}
      @contentzone
      */
 
@@ -56069,7 +56028,7 @@
        Used to access to the {@link Coral.Progress.Label} element. Keep in mind that the width of a custom label is
        limited for {@link Coral.Progress.labelPosition.LEFT} and {@link Coral.Progress.labelPosition.RIGHT}.
        
-       @type {HTMLElement}
+       @type {ProgressLabel}
        @contentzone
        */
 
@@ -56260,13 +56219,7 @@
       });
 
       return _this;
-    }
-    /**
-     The Item's content zone.
-     
-     @type {HTMLElement}
-     @contentzone
-     */
+    } // @compat
 
 
     _createClass(QuickActionsItem, [{
@@ -58150,7 +58103,7 @@
       /**
        The radios's label element.
        
-       @type {HTMLElement}
+       @type {RadioLabel}
        @contentzone
        */
 
@@ -58626,7 +58579,7 @@
     /**
      The outer shell content zone.
      
-     @type {HTMLElement}
+     @type {ShellContent}
      @contentzone
      */
 
@@ -58951,7 +58904,7 @@
     /**
      The label of the anchor.
      
-     @type {HTMLElement}
+     @type {ShellHomeAnchorLabel}
      @contentzone
      */
 
@@ -60714,7 +60667,7 @@
       /**
        The menubar item's label content zone.
        
-       @type {HTMLElement}
+       @type {ButtonLabel}
        @contentzone
        */
 
@@ -60920,7 +60873,7 @@
       /**
        The name content zone of the user-menu.
        
-       @type {HTMLElement}
+       @type {ShellUserName}
        @contentzone
        */
 
@@ -60941,7 +60894,7 @@
       /**
        The heading content zone of the user-menu.
        
-       @type {HTMLElement}
+       @type {ShellUserHeading}
        @contentzone
        */
 
@@ -60962,7 +60915,7 @@
       /**
        The subheading content zone of the user-menu.
        
-       @type {HTMLElement}
+       @type {ShellUserSubheading}
        @contentzone
        */
 
@@ -60983,7 +60936,7 @@
       /**
        The main content zone of the user-menu.
        
-       @type {HTMLElement}
+       @type {ShellUserContent}
        @contentzone
        */
 
@@ -61009,7 +60962,7 @@
       /**
        The footer content zone of the user-menu.
        
-       @type {HTMLElement}
+       @type {ShellUserFooter}
        @contentzone
        */
 
@@ -61855,7 +61808,7 @@
       /**
        The solution's label content zone.
        
-       @type {HTMLElement}
+       @type {ShellSolutionLabel}
        @contentzone
        */
 
@@ -62326,7 +62279,7 @@
       /**
        Content zone where the buttons are located.
        
-       @type {HTMLElement}
+       @type {ShellOrgSwitcherFooter}
        @contentzone
        */
 
@@ -63573,7 +63526,7 @@
     /**
      The label of the step.
      
-     @type {HTMLElement}
+     @type {StepLabel}
      @contentzone
      */
 
@@ -64024,7 +63977,7 @@
       /**
        The switch's label element.
        
-       @type {HTMLElement}
+       @type {SwitchLabel}
        @contentzone
        */
 
@@ -64896,13 +64849,7 @@
 
     }, {
       key: "content",
-
-      /**
-       The cell's content.
-       
-       @type {HTMLElement}
-       @contentzone
-       */
+      // @compat
       get: function get() {
         return this;
       },
@@ -65008,7 +64955,7 @@
     /**
      The header cell's content.
      
-     @type {HTMLElement}
+     @type {TableHeaderCellContent}
      @contentzone
      */
 
@@ -65954,7 +65901,7 @@
     /**
      The head of the table.
      
-     @type {HTMLElement}
+     @type {TableHead}
      @contentzone
      */
 
@@ -68147,7 +68094,7 @@
       /**
        The body of the table. Multiple bodies are not supported.
        
-       @type {HTMLElement}
+       @type {TableBody}
        @contentzone
        */
 
@@ -68168,7 +68115,7 @@
       /**
        The foot of the table.
        
-       @type {HTMLElement}
+       @type {TableFoot}
        @contentzone
        */
 
@@ -68190,7 +68137,7 @@
       /**
        The columns of the table.
        
-       @type {HTMLElement}
+       @type {TableColumn}
        @contentzone
        */
 
@@ -68649,7 +68596,7 @@
     /**
      The label of the tab.
      
-     @type {HTMLElement}
+     @type {TabLabel}
      @contentzone
      */
 
@@ -69699,7 +69646,7 @@
       /**
        The TabList which handles all the tabs.
        
-       @type {HTMLElement}
+       @type {TabList}
        @contentzone
        */
 
@@ -69721,7 +69668,7 @@
       /**
        The PanelStack which contains all the panels.
        
-       @type {HTMLElement}
+       @type {PanelStack}
        @contentzone
        */
 
@@ -69952,7 +69899,676 @@
     extends: 'textarea'
   });
 
-  var CLASSNAME$1M = '_coral-TreeView';
+  var template$X = function anonymous(data_0
+  /*``*/
+  ) {
+    var frag = document.createDocumentFragment();
+    var el0 = this["body"] = document.createElement("div");
+    el0.className += " _coral-Toast-body";
+    el0.setAttribute("handle", "body");
+    frag.appendChild(el0);
+    var el1 = document.createTextNode("\n");
+    frag.appendChild(el1);
+    var el2 = this["buttons"] = document.createElement("div");
+    el2.className += " _coral-Toast-buttons";
+    el2.setAttribute("handle", "buttons");
+    var el3 = document.createTextNode("\n  ");
+    el2.appendChild(el3);
+    var el4 = document.createElement("button", "coral-button");
+    el4.setAttribute("tracking", "off");
+    el4.setAttribute("is", "coral-button");
+    el4.setAttribute("type", "button");
+    el4.setAttribute("variant", "_custom");
+    el4.className += " _coral-ClearButton _coral-ClearButton--medium _coral-ClearButton--overBackground";
+    el4.setAttribute("coral-close", "");
+    var el5 = document.createTextNode("\n    ");
+    el4.appendChild(el5);
+    var el6 = document.createElement("coral-icon");
+    el6.setAttribute("icon", "spectrum-css-icon-CrossMedium");
+    el6.className += " _coral-UIIcon-CrossMedium";
+    el4.appendChild(el6);
+    var el7 = document.createTextNode("\n    ");
+    el4.appendChild(el7);
+    var el8 = this["buttonLabel"] = document.createElement("coral-button-label");
+    el8.setAttribute("handle", "buttonLabel");
+    el4.appendChild(el8);
+    var el9 = document.createTextNode("\n  ");
+    el4.appendChild(el9);
+    el2.appendChild(el4);
+    var el10 = document.createTextNode("\n");
+    el2.appendChild(el10);
+    frag.appendChild(el2);
+    var el11 = document.createTextNode("\n");
+    frag.appendChild(el11);
+    return frag;
+  };
+
+  /**
+   Enumeration for {@link Toast} variants.
+   
+   @typedef {Object} ToastVariantEnum
+   
+   @property {String} DEFAULT
+   A neutral toast.
+   @property {String} ERROR
+   A toast to notify that an error has occurred or to warn the user of something important.
+   @property {String} SUCCESS
+   A toast to notify the user of a successful operation.
+   @property {String} INFO
+   A toast to notify the user of non-critical information.
+   */
+
+  var variant$j = {
+    DEFAULT: 'default',
+    ERROR: 'error',
+    SUCCESS: 'success',
+    INFO: 'info'
+  };
+  /**
+   Enumeration for {@link Toast} placement values.
+   
+   @typedef {Object} ToastPlacementEnum
+   
+   @property {String} LEFT
+   A toast anchored to the bottom left of screen.
+   @property {String} CENTER
+   A toast anchored to the bottom center of screen.
+   @property {String} RIGHT
+   A toast anchored to the bottom right of screen.
+   */
+
+  var placement$4 = {
+    LEFT: 'left',
+    CENTER: 'center',
+    RIGHT: 'right'
+  };
+  var CLASSNAME$1M = '_coral-Toast'; // An array of all possible variant
+
+  var ALL_VARIANT_CLASSES$c = [];
+
+  for (var variantValue$a in variant$j) {
+    ALL_VARIANT_CLASSES$c.push("".concat(CLASSNAME$1M, "--").concat(variant$j[variantValue$a]));
+  }
+
+  var PRIORITY_QUEUE = [];
+
+  var queue$1 = function queue(el) {
+    var priority;
+    var type = transform.string(el.getAttribute('variant')).toLowerCase();
+
+    if (type === variant$j.ERROR) {
+      priority = el.action ? 1 : 2;
+    } else if (type === variant$j.SUCCESS) {
+      priority = el.action ? 3 : 6;
+    } else if (type === variant$j.INFO) {
+      priority = el.action ? 4 : 7;
+    } else {
+      priority = el.action ? 5 : 8;
+    }
+
+    PRIORITY_QUEUE.push({
+      el: el,
+      priority: priority
+    });
+  };
+
+  var unqueue = function unqueue() {
+    var next = null;
+    [1, 2, 3, 4, 5, 6, 7, 8].some(function (priority) {
+      return PRIORITY_QUEUE.some(function (item, index) {
+        if (item.priority === priority) {
+          next = {
+            el: item.el,
+            index: index
+          };
+          return true;
+        }
+      });
+    });
+
+    if (next !== null) {
+      PRIORITY_QUEUE.splice(next.index, 1);
+      next.el.open = true;
+    }
+  }; // Used to map icon with variant
+
+
+  var capitalize$4 = function capitalize(s) {
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  };
+  /**
+   @class Coral.Toast
+   @classdesc Toasts display brief temporary notifications.
+   They are noticeable but do not disrupt the user experience and do not require an action to be taken.
+   @htmltag coral-toast
+   @extends {HTMLElement}
+   @extends {ComponentMixin}
+   @extends {OverlayMixin}
+   */
+
+
+  var Toast =
+  /*#__PURE__*/
+  function (_OverlayMixin) {
+    _inherits(Toast, _OverlayMixin);
+
+    /** @ignore */
+    function Toast() {
+      var _this;
+
+      _classCallCheck(this, Toast);
+
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(Toast).call(this)); // Debounce wait time in milliseconds
+
+      _this._wait = 50; // Override defaults from Overlay
+
+      _this._overlayAnimationTime = _this.constructor.FADETIME;
+      _this._focusOnShow = _this.constructor.focusOnShow.OFF;
+      _this._returnFocus = _this.constructor.returnFocus.ON; // Prepare templates
+
+      _this._elements = {
+        // Fetch or create the content zone element
+        content: _this.querySelector('coral-toast-content') || document.createElement('coral-toast-content')
+      };
+      template$X.call(_this._elements);
+
+      _this._delegateEvents({
+        'global:resize': '_debounceLayout',
+        'global:key:escape': '_onEscape',
+        'click [coral-close]': '_onCloseClick',
+        'coral-overlay:close': '_onClose'
+      }); // Layout any time the DOM changes
+
+
+      _this._observer = new MutationObserver(function () {
+        _this._debounceLayout();
+      }); // Watch for changes
+
+      _this._observer.observe(_assertThisInitialized(_this), {
+        childList: true,
+        subtree: true
+      });
+
+      return _this;
+    }
+    /**
+     Whether the Toast will be dismissed automatically after a certain period. The minimum and default value is 5 seconds.
+     The dismissible behavior can be disabled by setting the value to <code>0</code>.
+     If an actionable toast is set to auto-dismiss, make sure that the action is still accessible elsewhere in the application.
+     
+     @type {?Number}
+     @default 5000
+     @htmlattribute autodismiss
+     */
+
+
+    _createClass(Toast, [{
+      key: "_renderVariantIcon",
+      value: function _renderVariantIcon() {
+        if (this._elements.icon) {
+          this._elements.icon.remove();
+        }
+
+        var variantValue = this.variant; // Default variant has no icon
+
+        if (variantValue === variant$j.DEFAULT) {
+          return;
+        } // Inject the SVG icon
+
+
+        var iconName = variantValue === variant$j.ERROR ? 'Alert' : capitalize$4(variantValue);
+
+        var icon = Icon._renderSVG("spectrum-css-icon-".concat(iconName, "Medium"), ['_coral-Toast-typeIcon', "_coral-UIIcon-".concat(iconName, "Medium")]);
+
+        this.insertAdjacentHTML('afterbegin', icon);
+        this._elements.icon = this.querySelector('._coral-Toast-typeIcon');
+      }
+    }, {
+      key: "_moveToDocumentBody",
+      value: function _moveToDocumentBody() {
+        // Not in the DOM
+        if (!document.body.contains(this)) {
+          document.body.appendChild(this);
+        } // In the DOM but not a direct child of body
+        else if (this.parentNode !== document.body) {
+            this._ignoreConnectedCallback = true;
+            document.body.appendChild(this);
+            this._ignoreConnectedCallback = false;
+          }
+      }
+    }, {
+      key: "_debounceLayout",
+      value: function _debounceLayout() {
+        var _this2 = this;
+
+        // Debounce
+        if (this._layoutTimeout !== null) {
+          clearTimeout(this._layoutTimeout);
+        }
+
+        this._layoutTimeout = setTimeout(function () {
+          _this2._layoutTimeout = null;
+
+          _this2._position();
+        }, this._wait);
+      }
+    }, {
+      key: "_position",
+      value: function _position() {
+        var _this3 = this;
+
+        if (this.open) {
+          requestAnimationFrame(function () {
+            if (_this3.placement === placement$4.CENTER) {
+              _this3.style.left = "".concat(document.body.clientWidth / 2 - _this3.clientWidth / 2, "px");
+              _this3.style.right = '';
+            } else if (_this3.placement === placement$4.LEFT) {
+              _this3.style.left = 0;
+              _this3.style.right = '';
+            } else if (_this3.placement === placement$4.RIGHT) {
+              _this3.style.left = '';
+              _this3.style.right = 0;
+            }
+          });
+        }
+      }
+    }, {
+      key: "_onEscape",
+      value: function _onEscape() {
+        if (this.open && this.classList.contains('is-open')) {
+          this.open = false;
+        }
+      }
+    }, {
+      key: "_onCloseClick",
+      value: function _onCloseClick(event) {
+        var dismissTarget = event.matchedTarget;
+        var dismissValue = dismissTarget.getAttribute('coral-close');
+
+        if (!dismissValue || this.matches(dismissValue)) {
+          this.open = false;
+          event.stopPropagation();
+        }
+      }
+    }, {
+      key: "_onClose",
+      value: function _onClose() {
+        // Unmark it
+        this._queued = false; // Continue emptying the queue
+
+        unqueue();
+      }
+    }, {
+      key: "connectedCallback",
+
+      /** @ignore */
+      value: function connectedCallback() {
+        if (this._ignoreConnectedCallback) {
+          return;
+        }
+
+        _get(_getPrototypeOf(Toast.prototype), "connectedCallback", this).call(this);
+
+        this.classList.add(CLASSNAME$1M); // Default reflected attributes
+
+        if (!this._variant) {
+          this.variant = variant$j.DEFAULT;
+        } // Create a fragment
+
+
+        var fragment = document.createDocumentFragment();
+        var templateHandleNames = ['body', 'buttons']; // Render the template
+
+        fragment.appendChild(this._elements.body);
+        fragment.appendChild(this._elements.buttons);
+        var content = this._elements.content;
+
+        if (content.parentNode) {
+          content.remove();
+        }
+
+        var action = this.action;
+
+        if (action) {
+          action.remove();
+        }
+
+        while (this.firstChild) {
+          var child = this.firstChild;
+
+          if (child.nodeType === Node.TEXT_NODE || child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
+            // Add non-template elements to the content
+            content.appendChild(child);
+          } else {
+            // Remove anything else
+            this.removeChild(child);
+          }
+        } // Insert template
+
+
+        this.appendChild(fragment); // If default variant, does nothing
+
+        this._renderVariantIcon(); // Assign the content zones
+
+
+        this.content = this._elements.content;
+        this.action = action; // Add the Overlay coral-tabcapture elements at the end
+
+        _get(_getPrototypeOf(Toast.prototype), "connectedCallback", this).call(this);
+      }
+      /** @ignore */
+
+    }, {
+      key: "disconnectedCallback",
+      value: function disconnectedCallback() {
+        var _this4 = this;
+
+        if (this._ignoreConnectedCallback) {
+          return;
+        }
+
+        _get(_getPrototypeOf(Toast.prototype), "disconnectedCallback", this).call(this);
+
+        if (this._queued) {
+          var el = null;
+          PRIORITY_QUEUE.some(function (item, index) {
+            if (item.el === _this4) {
+              _this4._queued = false;
+              el = index;
+              return true;
+            }
+          });
+
+          if (el !== null) {
+            PRIORITY_QUEUE.splice(el, 1);
+          }
+        }
+      }
+    }, {
+      key: "autoDismiss",
+      get: function get() {
+        return typeof this._autoDismiss === 'number' ? this._autoDismiss : 5000;
+      },
+      set: function set(value) {
+        value = transform.number(value);
+
+        if (value !== null) {
+          value = Math.abs(value); // Value can't be set lower than 5secs. 0 is an exception.
+
+          if (value !== 0 && value < 5000) {
+            commons._log('warn', 'Coral.Toast: the value for autoDismiss has to be 5 seconds minimum.');
+
+            value = 5000;
+          }
+
+          this._autoDismiss = value;
+        }
+      }
+      /**
+       The actionable item marked with <code>[coral-toast-action]</code>.
+       Restricted to {@link Button} or {@link AnchorButton} elements.
+       Actionable toasts should not have a button with a redundant action. For example “dismiss” would be redundant as all
+       toasts already have a close button.
+       
+       @type {HTMLElement}
+       @readonly
+       */
+
+    }, {
+      key: "action",
+      get: function get() {
+        return this._elements.action || this.querySelector('[coral-toast-action]');
+      },
+      set: function set(el) {
+        if (!el) {
+          return;
+        }
+
+        if (el instanceof Button || el instanceof AnchorButton) {
+          this._elements.action = el;
+          el.setAttribute('coral-toast-action', '');
+          el.setAttribute('variant', Button.variant._CUSTOM);
+          el.classList.add('_coral-Button', '_coral-Button--overBackground', '_coral-Button--quiet');
+
+          this._elements.body.appendChild(el);
+        } else {
+          commons._log('warn', 'Coral.Toast: provided action is not a Coral.Button or Coral.AnchorButton.');
+        }
+      }
+      /**
+       Inherited from {@link OverlayMixin#open}.
+       */
+
+    }, {
+      key: "open",
+      get: function get() {
+        return _get(_getPrototypeOf(Toast.prototype), "open", this);
+      },
+      set: function set(value) {
+        var _this5 = this;
+
+        // Opening only if element is queued
+        value = transform.booleanAttr(value);
+
+        if (value && !this._queued) {
+          this._open = value; // Mark it
+
+          this._queued = true; // Clear timer
+
+          if (this._dimissTimeout) {
+            clearTimeout(this._dimissTimeout);
+          } // Add it to the queue
+
+
+          queue$1(this);
+          requestAnimationFrame(function () {
+            _this5._reflectAttribute('open', true); // If not child of document.body, we have to move it there
+
+
+            _this5._moveToDocumentBody();
+
+            requestAnimationFrame(function () {
+              // Start emptying the queue
+              if (document.querySelectorAll('coral-toast[open]').length === PRIORITY_QUEUE.length) {
+                unqueue();
+              }
+            });
+          });
+          return;
+        }
+
+        _set(_getPrototypeOf(Toast.prototype), "open", value, this, true); // Ensure we're in the DOM
+
+
+        if (this.open) {
+          // Position the element
+          this._position(); // Handles what to focus based on focusOnShow
+
+
+          this._handleFocus(); // Use raf to wait for autoDismiss value to be set
+
+
+          requestAnimationFrame(function () {
+            // Only dismiss if value is different than 0
+            if (_this5.autoDismiss !== 0) {
+              _this5._dimissTimeout = setTimeout(function () {
+                if (_this5.open && !_this5.contains(document.activeElement)) {
+                  _this5.open = false;
+                }
+              }, _this5.autoDismiss);
+            }
+          });
+        }
+      }
+      /**
+       The Toast variant. See {@link ToastVariantEnum}.
+       
+       @type {String}
+       @default ToastVariantEnum.DEFAULT
+       @htmlattribute variant
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "variant",
+      get: function get() {
+        return this._variant || variant$j.DEFAULT;
+      },
+      set: function set(value) {
+        var _this$classList;
+
+        value = transform.string(value).toLowerCase();
+        this._variant = validate.enumeration(variant$j)(value) && value || variant$j.DEFAULT;
+
+        this._reflectAttribute('variant', this._variant);
+
+        this._renderVariantIcon(); // Remove all variant classes
+
+
+        (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$c); // Set new variant class
+
+
+        this.classList.add("".concat(CLASSNAME$1M, "--").concat(this._variant)); // Set the role attribute to alert or status depending on
+        // the variant so that the element turns into a live region
+
+        this.setAttribute('role', this._variant);
+      }
+      /**
+       The Toast content element.
+       
+       @type {ToastContent}
+       @contentzone
+       */
+
+    }, {
+      key: "content",
+      get: function get() {
+        return this._getContentZone(this._elements.content);
+      },
+      set: function set(value) {
+        this._setContentZone('content', value, {
+          handle: 'content',
+          tagName: 'coral-toast-content',
+          insert: function insert(content) {
+            // After the header
+            this._elements.body.insertBefore(content, this._elements.body.firstChild);
+          }
+        });
+      }
+      /**
+       The Toast placement. See {@link ToastPlacementEnum}.
+       
+       @type {String}
+       @default ToastPlacementEnum.CENTER
+       @htmlattribute placement
+       */
+
+    }, {
+      key: "placement",
+      get: function get() {
+        return this._placement || placement$4.CENTER;
+      },
+      set: function set(value) {
+        value = transform.string(value).toLowerCase();
+        this._placement = validate.enumeration(placement$4)(value) && value || placement$4.CENTER;
+
+        this._debounceLayout();
+      }
+    }, {
+      key: "_contentZones",
+      get: function get() {
+        return {
+          'coral-toast-content': 'content'
+        };
+      }
+    }], [{
+      key: "_queue",
+      get: function get() {
+        return PRIORITY_QUEUE;
+      }
+      /**
+       Returns {@link Toast} placement options.
+       
+       @return {ToastPlacementEnum}
+       */
+
+    }, {
+      key: "placement",
+      get: function get() {
+        return placement$4;
+      }
+      /**
+       Returns {@link Toast} variants.
+       
+       @return {ToastVariantEnum}
+       */
+
+    }, {
+      key: "variant",
+      get: function get() {
+        return variant$j;
+      }
+      /** @ignore */
+
+    }, {
+      key: "observedAttributes",
+      get: function get() {
+        return _get(_getPrototypeOf(Toast), "observedAttributes", this).concat(['variant', 'placement', 'autodismiss', 'autoDismiss']);
+      }
+    }]);
+
+    return Toast;
+  }(OverlayMixin(ComponentMixin(HTMLElement)));
+
+  var CLASSNAME$1N = '_coral-Toast-content';
+  /**
+   @class Coral.Toast.Content
+   @classdesc The Toast default content
+   @htmltag coral-toast-content
+   @extends {HTMLElement}
+   @extends {ComponentMixin}
+   */
+
+  var ToastContent =
+  /*#__PURE__*/
+  function (_ComponentMixin) {
+    _inherits(ToastContent, _ComponentMixin);
+
+    function ToastContent() {
+      _classCallCheck(this, ToastContent);
+
+      return _possibleConstructorReturn(this, _getPrototypeOf(ToastContent).apply(this, arguments));
+    }
+
+    _createClass(ToastContent, [{
+      key: "connectedCallback",
+
+      /** @ignore */
+      value: function connectedCallback() {
+        this.classList.add(CLASSNAME$1N);
+      }
+    }]);
+
+    return ToastContent;
+  }(ComponentMixin(HTMLElement));
+
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+
+  window.customElements.define('coral-toast', Toast);
+  window.customElements.define('coral-toast-content', ToastContent);
+  Toast.Content = ToastContent;
+
+  var CLASSNAME$1O = '_coral-TreeView';
   /**
    @class Coral.Tree
    @classdesc A Tree component is a container component to display collapsible content.
@@ -70423,7 +71039,7 @@
 
         _get(_getPrototypeOf(Tree.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1M); // a11y
+        this.classList.add(CLASSNAME$1O); // a11y
 
         this.setAttribute('role', 'tree');
         this.setAttribute('aria-multiselectable', this.multiple); // Requires tree item API to be defined
@@ -70534,7 +71150,7 @@
     return Tree;
   }(ComponentMixin(HTMLElement));
 
-  var template$X = function anonymous(data_0
+  var template$Y = function anonymous(data_0
   /*``*/
   ) {
     var frag = document.createDocumentFragment();
@@ -70564,7 +71180,7 @@
     return frag;
   };
 
-  var CLASSNAME$1N = '_coral-TreeView-item';
+  var CLASSNAME$1P = '_coral-TreeView-item';
   /**
    Enumeration for {@link TreeItem} variants.
    
@@ -70576,17 +71192,17 @@
    Variant for leaf items. Icon to expand/collapse subtree is hidden.
    */
 
-  var variant$j = {
+  var variant$k = {
     /* Default variant with icon to expand/collapse subtree. */
     DRILLDOWN: 'drilldown',
 
     /* Variant for leaf items. Icon to expand/collapse subtree is hidden. */
     LEAF: 'leaf'
   };
-  var ALL_VARIANT_CLASSES$c = [];
+  var ALL_VARIANT_CLASSES$d = [];
 
-  for (var variantValue$a in variant$j) {
-    ALL_VARIANT_CLASSES$c.push("".concat(CLASSNAME$1N, "--").concat(variant$j[variantValue$a]));
+  for (var variantValue$b in variant$k) {
+    ALL_VARIANT_CLASSES$d.push("".concat(CLASSNAME$1P, "--").concat(variant$k[variantValue$b]));
   }
   /**
    @class Coral.Tree.Item
@@ -70614,7 +71230,7 @@
         // Create or fetch the content zones
         content: _this.querySelector('coral-tree-item-content') || document.createElement('coral-tree-item-content')
       };
-      template$X.call(_this._elements, {
+      template$Y.call(_this._elements, {
         Icon: Icon,
         commons: commons
       }); // Tells the collection to automatically detect the items and handle the events
@@ -70678,7 +71294,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(TreeItem.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1N); // a11y
+        this.classList.add(CLASSNAME$1P); // a11y
 
         this.setAttribute('role', 'treeitem');
         this.setAttribute('aria-selected', this.selected);
@@ -70689,7 +71305,7 @@
 
 
         if (!this._variant) {
-          this.variant = variant$j.DRILLDOWN;
+          this.variant = variant$k.DRILLDOWN;
         }
 
         this.expanded = this.expanded; // Render the template and set element references
@@ -70770,7 +71386,7 @@
       /**
        The content of this tree item.
        
-       @type {HTMLElement}
+       @type {TreeItemContent}
        @contentzone
        */
 
@@ -70895,17 +71511,17 @@
     }, {
       key: "variant",
       get: function get() {
-        return this._variant || variant$j.DRILLDOWN;
+        return this._variant || variant$k.DRILLDOWN;
       },
       set: function set(value) {
         var _this$classList;
 
         value = transform.string(value).toLowerCase();
-        this._variant = validate.enumeration(variant$j, value) && value || variant$j.DRILLDOWN; // removes every existing variant
+        this._variant = validate.enumeration(variant$k, value) && value || variant$k.DRILLDOWN; // removes every existing variant
 
-        (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$c);
+        (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$d);
 
-        this.classList.add("".concat(CLASSNAME$1N, "--").concat(this._variant));
+        this.classList.add("".concat(CLASSNAME$1P, "--").concat(this._variant));
       }
       /**
        Whether the item is selected.
@@ -70984,7 +71600,7 @@
     }], [{
       key: "variant",
       get: function get() {
-        return variant$j;
+        return variant$k;
       }
     }, {
       key: "observedAttributes",
@@ -71035,7 +71651,7 @@
   Tree.Item = TreeItem;
   Tree.Item.Content = TreeItemContent;
 
-  var CLASSNAME$1O = '_coral-WizardView';
+  var CLASSNAME$1Q = '_coral-WizardView';
   /**
    @class Coral.WizardView
    @classdesc A WizardView component is the wrapping container used to create the typical Wizard pattern. This is intended
@@ -71372,7 +71988,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(WizardView.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1O);
+        this.classList.add(CLASSNAME$1Q);
 
         this._syncStepListSelection(0);
 
@@ -71456,7 +72072,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.64";
+  var version = "1.0.0-beta.65";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
@@ -71662,6 +72278,7 @@
     TagList: TagList,
     Textarea: Textarea,
     Textfield: Textfield,
+    Toast: Toast,
     Tooltip: Tooltip,
     Tree: Tree,
     TreeItem: TreeItem,
@@ -71673,7 +72290,7 @@
     version: version$1
   });
 
-  var template$Y = function anonymous(data_0
+  var template$Z = function anonymous(data_0
   /*``*/
   ) {
     var frag = document.createDocumentFragment();
@@ -89566,7 +90183,7 @@
       _this._config = config; // Template
 
       _this._elements = {};
-      template$Y.call(_this._elements); // Events
+      template$Z.call(_this._elements); // Events
 
       _this._delegateEvents({
         'click [handle="share"]': '_onShareClick',

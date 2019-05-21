@@ -235,12 +235,7 @@
 <a name='L187'></a><a href='#L187'>187</a>
 <a name='L188'></a><a href='#L188'>188</a>
 <a name='L189'></a><a href='#L189'>189</a>
-<a name='L190'></a><a href='#L190'>190</a>
-<a name='L191'></a><a href='#L191'>191</a>
-<a name='L192'></a><a href='#L192'>192</a>
-<a name='L193'></a><a href='#L193'>193</a>
-<a name='L194'></a><a href='#L194'>194</a>
-<a name='L195'></a><a href='#L195'>195</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L190'></a><a href='#L190'>190</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -328,7 +323,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">979x</span>
+<span class="cline-any cline-yes">980x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">398x</span>
@@ -341,13 +336,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2335x</span>
+<span class="cline-any cline-yes">2338x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -370,7 +359,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">13288x</span>
+<span class="cline-any cline-yes">13290x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -403,18 +392,16 @@
 <span class="cline-any cline-yes">158x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">253x</span>
+<span class="cline-any cline-yes">254x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">253x</span>
-<span class="cline-any cline-yes">253x</span>
+<span class="cline-any cline-yes">254x</span>
+<span class="cline-any cline-yes">254x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">253x</span>
+<span class="cline-any cline-yes">254x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">253x</span>
-<span class="cline-any cline-yes">253x</span>
-<span class="cline-any cline-yes">253x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">254x</span>
+<span class="cline-any cline-yes">254x</span>
+<span class="cline-any cline-yes">254x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -431,9 +418,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">673x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">674x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">556x</span>
 <span class="cline-any cline-yes">556x</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -496,12 +486,7 @@ class CycleButtonItem extends ComponentMixin(HTMLElement) {
     this.trigger('coral-cyclebutton-item:_iconchanged');
   }
   
-  /**
-   Item content element.
-   
-   @type {HTMLElement}
-   @contentzone
-   */
+  // @compat
   get content() {
     return this;
   }
@@ -542,13 +527,13 @@ class CycleButtonItem extends ComponentMixin(HTMLElement) {
       this.trigger('coral-cyclebutton-item:_validateselection');
     }
   }
-  
-  /**<span class="fstat-no" title="function not covered" ></span>
-   Whether the Item is selected.
-   @ty<span class="cstat-no" title="statement not covered" >pe {Boolean}</span>
-   @defa<span class="cstat-no" title="statement not covered" >ult false</span>
-   @htmlattribute selected
-   @htmlat<span class="cstat-no" title="statement not covered" >tributereflected</span>
+  <span class="fstat-no" title="function not covered" ></span>
+  /**
+   Whe<span class="cstat-no" title="statement not covered" >ther the Item is selected.</span>
+   @type<span class="cstat-no" title="statement not covered" > {Boolean}</span>
+   @default false
+   @htmlat<span class="cstat-no" title="statement not covered" >tribute selected</span>
+   @htmlattributereflected
    */
   get selected() {
     return this._selected || false;
@@ -565,22 +550,22 @@ class CycleButtonItem extends ComponentMixin(HTMLElement) {
       
       this.trigger('coral-cyclebutton-item:_selectedchanged');
     }
-  }
-  <span class="fstat-no" title="function not covered" ></span>
-  /**<span class="cstat-no" title="statement not covered" ></span>
-   The displayMode to be used when the particular item is selected. When this value is set to &lt;code&gt;inherit&lt;/code&gt;
-   it <span class="cstat-no" title="statement not covered" >will defer to the component level displayMode. If th</span>e selected item does not have the necessary icon or text
-   information, then fallback to show whichever is available. The appearance of collapsed items in the popover are
+  }<span class="fstat-no" title="function not covered" ></span>
+  <span class="cstat-no" title="statement not covered" ></span>
+  /**
+   The<span class="cstat-no" title="statement not covered" > displayMode to be used when the particular item is </span>selected. When this value is set to &lt;code&gt;inherit&lt;/code&gt;
+   it will defer to the component level displayMode. If the selected item does not have the necessary icon or text
+   inf<span class="cstat-no" title="statement not covered" >ormation, then fallback to show whichever is availabl</span>e. The appearance of collapsed items in the popover are
    not<span class="cstat-no" title="statement not covered" > affected by this property.</span>
-   See<span class="cstat-no" title="statement not covered" > {@link CycleButtonItemDisplayModeEnum}.</span>
-   
-   @ty<span class="cstat-no" title="statement not covered" >pe {String}</span>
-   @defa<span class="cstat-no" title="statement not covered" >ult CycleButtonItemDisp</span>layModeEnum.INHERIT
+   See {@link CycleButtonItemDisplayModeEnum}.
+   <span class="cstat-no" title="statement not covered" ></span>
+   @type<span class="cstat-no" title="statement not covered" > {String}</span>
+   @default CycleButtonItemDisplayModeEnum.INHERIT
    @htmlattribute displaymode
-   @htmlattributereflected
-   */<span class="cstat-no" title="statement not covered" ></span>
-  get displayMode() {
-    retu<span class="cstat-no" title="statement not covered" >rn this._displayMode || displayMode.INHERIT;</span>
+   @ht<span class="cstat-no" title="statement not covered" >mlattributereflected</span>
+   */
+  get di<span class="cstat-no" title="statement not covered" >splayMode() {</span>
+    return this._displayMode || displayMode.INHERIT;
   }
   set displayMode(value) {
     value = transform.string(value).toLowerCase();
@@ -598,11 +583,11 @@ class CycleButtonItem extends ComponentMixin(HTMLElement) {
       // keep spaces to only 1 max and trim. this mimics native html behaviors
       (this.content || this).textContent.replace(/\s{2,}/g, ' ').trim() || this.icon :
       this._trackingElement;
-  }
-  set <span class="missing-if-branch" title="else path not taken" >E</span>trackingElement(value) {
+  }<span class="missing-if-branch" title="else path not taken" >E</span>
+  set trackingElement(value) {
     super.trackingElement = value;
-  }
-  <span class="branch-0 cbranch-no" title="branch not covered" ></span>
+  }<span class="branch-0 cbranch-no" title="branch not covered" ></span>
+  
   /**
    Returns {@link CycleButtonItem} display options.
    
@@ -634,7 +619,7 @@ export default CycleButtonItem;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon May 20 2019 15:16:09 GMT+0200 (CEST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue May 21 2019 17:41:32 GMT+0200 (CEST)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

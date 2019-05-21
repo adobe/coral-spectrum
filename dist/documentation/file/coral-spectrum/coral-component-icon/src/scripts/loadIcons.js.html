@@ -434,7 +434,8 @@ function injectSVG(svgURL, callback) {
       svg.classList.add(&apos;_coral-Icon-collection&apos;);
       svg.setAttribute(&apos;focusable&apos;, &apos;false&apos;);
       svg.setAttribute(&apos;aria-hidden&apos;, &apos;true&apos;);
-      svg.style.position = &apos;absolute&apos;;
+      svg.style.position = &apos;fixed&apos;;
+      svg.style.top = &apos;-999px&apos;;
       svg.style.left = &apos;-999px&apos;;
     
       // Insert it into the body

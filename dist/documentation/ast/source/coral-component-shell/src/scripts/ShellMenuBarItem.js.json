@@ -6695,7 +6695,7 @@
               "trailingComments": [
                 {
                   "type": "CommentBlock",
-                  "value": "*\n   The menubar item's label content zone.\n   \n   @type {HTMLElement}\n   @contentzone\n   ",
+                  "value": "*\n   The menubar item's label content zone.\n   \n   @type {ButtonLabel}\n   @contentzone\n   ",
                   "start": 4932,
                   "end": 5026,
                   "loc": {
@@ -6932,7 +6932,7 @@
               "leadingComments": [
                 {
                   "type": "CommentBlock",
-                  "value": "*\n   The menubar item's label content zone.\n   \n   @type {HTMLElement}\n   @contentzone\n   ",
+                  "value": "*\n   The menubar item's label content zone.\n   \n   @type {ButtonLabel}\n   @contentzone\n   ",
                   "start": 4932,
                   "end": 5026,
                   "loc": {
@@ -17279,7 +17279,7 @@
                 "trailingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   The menubar item's label content zone.\n   \n   @type {HTMLElement}\n   @contentzone\n   ",
+                    "value": "*\n   The menubar item's label content zone.\n   \n   @type {ButtonLabel}\n   @contentzone\n   ",
                     "start": 4932,
                     "end": 5026,
                     "loc": {
@@ -17516,7 +17516,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   The menubar item's label content zone.\n   \n   @type {HTMLElement}\n   @contentzone\n   ",
+                    "value": "*\n   The menubar item's label content zone.\n   \n   @type {ButtonLabel}\n   @contentzone\n   ",
                     "start": 4932,
                     "end": 5026,
                     "loc": {
@@ -22749,7 +22749,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n   The menubar item's label content zone.\n   \n   @type {HTMLElement}\n   @contentzone\n   ",
+      "value": "*\n   The menubar item's label content zone.\n   \n   @type {ButtonLabel}\n   @contentzone\n   ",
       "start": 4932,
       "end": 5026,
       "loc": {
@@ -35219,7 +35219,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n   The menubar item's label content zone.\n   \n   @type {HTMLElement}\n   @contentzone\n   ",
+      "value": "*\n   The menubar item's label content zone.\n   \n   @type {ButtonLabel}\n   @contentzone\n   ",
       "start": 4932,
       "end": 5026,
       "loc": {

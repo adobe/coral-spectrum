@@ -3411,7 +3411,7 @@
               "trailingComments": [
                 {
                   "type": "CommentBlock",
-                  "value": "*\n   The switch's label element.\n   \n   @type {HTMLElement}\n   @contentzone\n   ",
+                  "value": "*\n   The switch's label element.\n   \n   @type {SwitchLabel}\n   @contentzone\n   ",
                   "start": 2670,
                   "end": 2753,
                   "loc": {
@@ -3648,7 +3648,7 @@
               "leadingComments": [
                 {
                   "type": "CommentBlock",
-                  "value": "*\n   The switch's label element.\n   \n   @type {HTMLElement}\n   @contentzone\n   ",
+                  "value": "*\n   The switch's label element.\n   \n   @type {SwitchLabel}\n   @contentzone\n   ",
                   "start": 2670,
                   "end": 2753,
                   "loc": {
@@ -16909,7 +16909,7 @@
                 "trailingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   The switch's label element.\n   \n   @type {HTMLElement}\n   @contentzone\n   ",
+                    "value": "*\n   The switch's label element.\n   \n   @type {SwitchLabel}\n   @contentzone\n   ",
                     "start": 2670,
                     "end": 2753,
                     "loc": {
@@ -17146,7 +17146,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   The switch's label element.\n   \n   @type {HTMLElement}\n   @contentzone\n   ",
+                    "value": "*\n   The switch's label element.\n   \n   @type {SwitchLabel}\n   @contentzone\n   ",
                     "start": 2670,
                     "end": 2753,
                     "loc": {
@@ -27692,7 +27692,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n   The switch's label element.\n   \n   @type {HTMLElement}\n   @contentzone\n   ",
+      "value": "*\n   The switch's label element.\n   \n   @type {SwitchLabel}\n   @contentzone\n   ",
       "start": 2670,
       "end": 2753,
       "loc": {
@@ -34101,7 +34101,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n   The switch's label element.\n   \n   @type {HTMLElement}\n   @contentzone\n   ",
+      "value": "*\n   The switch's label element.\n   \n   @type {SwitchLabel}\n   @contentzone\n   ",
       "start": 2670,
       "end": 2753,
       "loc": {

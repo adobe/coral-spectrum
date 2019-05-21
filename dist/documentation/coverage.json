@@ -1,7 +1,7 @@
 {
-  "coverage": "66.94%",
-  "expectCount": 3413,
-  "actualCount": 2285,
+  "coverage": "66.52%",
+  "expectCount": 3417,
+  "actualCount": 2273,
   "files": {
     "coral-spectrum/coral-collection/src/scripts/Collection.js": {
       "expectCount": 35,
@@ -141,9 +141,10 @@
     },
     "coral-spectrum/coral-component-actionbar/src/scripts/ActionBarItem.js": {
       "expectCount": 5,
-      "actualCount": 4,
+      "actualCount": 3,
       "undocumentLines": [
-        15
+        15,
+        26
       ]
     },
     "coral-spectrum/coral-component-actionbar/src/scripts/ActionBarPrimary.js": {
@@ -255,12 +256,13 @@
     },
     "coral-spectrum/coral-component-autocomplete/src/scripts/AutocompleteItem.js": {
       "expectCount": 13,
-      "actualCount": 9,
+      "actualCount": 8,
       "undocumentLines": [
         28,
         51,
-        88,
-        106
+        58,
+        83,
+        101
       ]
     },
     "coral-spectrum/coral-component-button/src/scripts/Button.js": {
@@ -364,16 +366,18 @@
     },
     "coral-spectrum/coral-component-card/src/scripts/CardContext.js": {
       "expectCount": 5,
-      "actualCount": 4,
+      "actualCount": 3,
       "undocumentLines": [
-        15
+        15,
+        26
       ]
     },
     "coral-spectrum/coral-component-card/src/scripts/CardDescription.js": {
       "expectCount": 5,
-      "actualCount": 4,
+      "actualCount": 3,
       "undocumentLines": [
-        15
+        15,
+        26
       ]
     },
     "coral-spectrum/coral-component-card/src/scripts/CardInfo.js": {
@@ -409,16 +413,18 @@
     },
     "coral-spectrum/coral-component-card/src/scripts/CardSubtitle.js": {
       "expectCount": 5,
-      "actualCount": 4,
+      "actualCount": 3,
       "undocumentLines": [
-        15
+        15,
+        26
       ]
     },
     "coral-spectrum/coral-component-card/src/scripts/CardTitle.js": {
       "expectCount": 5,
-      "actualCount": 4,
+      "actualCount": 3,
       "undocumentLines": [
-        15
+        15,
+        26
       ]
     },
     "coral-spectrum/coral-component-charactercount/src/scripts/CharacterCount.js": {
@@ -709,19 +715,21 @@
     },
     "coral-spectrum/coral-component-cyclebutton/src/scripts/CycleButtonAction.js": {
       "expectCount": 6,
-      "actualCount": 5,
+      "actualCount": 4,
       "undocumentLines": [
-        36
+        36,
+        41
       ]
     },
     "coral-spectrum/coral-component-cyclebutton/src/scripts/CycleButtonItem.js": {
       "expectCount": 15,
-      "actualCount": 11,
+      "actualCount": 10,
       "undocumentLines": [
         57,
-        94,
-        124,
-        151
+        64,
+        89,
+        119,
+        146
       ]
     },
     "coral-spectrum/coral-component-datepicker/src/scripts/Datepicker.js": {
@@ -883,7 +891,7 @@
       "actualCount": 1,
       "undocumentLines": [
         20,
-        74
+        75
       ]
     },
     "coral-spectrum/coral-component-list/src/scripts/AnchorList.js": {
@@ -1059,13 +1067,14 @@
     },
     "coral-spectrum/coral-component-masonry/src/scripts/MasonryItem.js": {
       "expectCount": 17,
-      "actualCount": 12,
+      "actualCount": 11,
       "undocumentLines": [
         19,
         34,
         37,
         40,
-        75
+        45,
+        70
       ]
     },
     "coral-spectrum/coral-component-masonry/src/scripts/MasonryLayout.js": {
@@ -1149,8 +1158,8 @@
       ]
     },
     "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js": {
-      "expectCount": 48,
-      "actualCount": 28,
+      "expectCount": 51,
+      "actualCount": 29,
       "undocumentLines": [
         18,
         19,
@@ -1169,9 +1178,11 @@
         366,
         386,
         399,
-        428,
-        464,
-        518
+        416,
+        434,
+        462,
+        472,
+        526
       ]
     },
     "coral-spectrum/coral-component-panelstack/src/scripts/Panel.js": {
@@ -1313,13 +1324,14 @@
     },
     "coral-spectrum/coral-component-quickactions/src/scripts/QuickActionsItem.js": {
       "expectCount": 17,
-      "actualCount": 12,
+      "actualCount": 11,
       "undocumentLines": [
         44,
         46,
-        86,
-        106,
-        126
+        55,
+        81,
+        101,
+        121
       ]
     },
     "coral-spectrum/coral-component-radio/src/scripts/Radio.js": {
@@ -1384,12 +1396,13 @@
     },
     "coral-spectrum/coral-component-select/src/scripts/SelectItem.js": {
       "expectCount": 14,
-      "actualCount": 10,
+      "actualCount": 9,
       "undocumentLines": [
         28,
-        68,
-        86,
-        107
+        37,
+        63,
+        81,
+        102
       ]
     },
     "coral-spectrum/coral-component-shell/src/scripts/Shell.js": {
@@ -1657,9 +1670,10 @@
     },
     "coral-spectrum/coral-component-slider/src/scripts/SliderItem.js": {
       "expectCount": 6,
-      "actualCount": 5,
+      "actualCount": 4,
       "undocumentLines": [
-        17
+        17,
+        44
       ]
     },
     "coral-spectrum/coral-component-steplist/src/scripts/Step.js": {
@@ -1782,10 +1796,11 @@
     },
     "coral-spectrum/coral-component-table/src/scripts/TableCell.js": {
       "expectCount": 14,
-      "actualCount": 12,
+      "actualCount": 11,
       "undocumentLines": [
         16,
-        60
+        28,
+        55
       ]
     },
     "coral-spectrum/coral-component-table/src/scripts/TableColumn.js": {
@@ -1978,7 +1993,7 @@
       ]
     },
     "coral-spectrum/coral-component-toast/src/scripts/Toast.js": {
-      "expectCount": 41,
+      "expectCount": 42,
       "actualCount": 13,
       "undocumentLines": [
         60,
@@ -1987,28 +2002,29 @@
         70,
         93,
         115,
-        131,
-        134,
+        132,
         135,
         136,
-        139,
-        153,
-        187,
-        231,
-        233,
-        291,
-        339,
+        137,
+        140,
+        154,
+        188,
+        232,
+        234,
+        273,
+        296,
         344,
-        362,
-        369,
+        349,
+        368,
         375,
         381,
         387,
-        406,
+        393,
         412,
-        421,
-        429,
-        435
+        418,
+        427,
+        435,
+        441
       ]
     },
     "coral-spectrum/coral-component-toast/src/scripts/ToastContent.js": {
@@ -2263,13 +2279,13 @@
         25,
         28,
         45,
-        242,
         244,
-        257,
-        260,
+        246,
+        259,
         262,
-        267,
-        873
+        264,
+        269,
+        875
       ]
     },
     "coral-spectrum/coral-utils/src/scripts/Events.js": {
