@@ -16,6 +16,7 @@ import {Button} from '../../../coral-component-button';
 import {AnchorButton} from '../../../coral-component-anchorbutton';
 
 describe('Toast', function() {
+  const REDUCED_DURATION = 100;
   // We don't need this in most our test cases
   const moveToDocumentBody = Toast.prototype._moveToDocumentBody;
   Toast.prototype._moveToDocumentBody = function() {};
@@ -25,12 +26,13 @@ describe('Toast', function() {
       'should be possible via clone using markup',
       window.__html__['Toast.base.html']
     );
-  
+
     helpers.cloneComponent(
       'should be possible via clone using markup with action',
       window.__html__['Toast.action.html']
     );
   
+    // todo
     // helpers.cloneComponent(
     //   'should be possible via clone using js',
     //   new Toast()
@@ -83,14 +85,26 @@ describe('Toast', function() {
       });
   
       it('should only accept Button or AnchorButton elements', function() {
+        let warnCalled = 0;
+        const warn = console.warn;
+        // Override console.warn to detect if it was called
+        console.warn = function() {
+          warnCalled++;
+        };
+        
         const div = document.createElement('div');
         const button = new Button();
         const anchor = new AnchorButton();
         
         el.action = div;
         expect(el.action).to.equal(null);
+        expect(warnCalled).to.equal(1);
+        // Restore console.warn
+        console.warn = warn;
+        
         el.action = button;
         expect(el.action).to.equal(button);
+        
         el.action = anchor;
         expect(el.action).to.equal(anchor);
       });
@@ -107,13 +121,6 @@ describe('Toast', function() {
     describe('#open', function() {
       it('should be false by default', function() {
         expect(el.open).to.equal(false);
-      });
-      
-      it('should not open immediately', function() {
-        el.setAttribute('open', '');
-        expect(el.open).to.be.true;
-        expect(el._queued).to.be.true;
-        expect(el.classList.contains('is-open')).to.be.false;
       });
   
       it('should be possible to open the toast even if not part of the DOM', function(done) {
@@ -237,19 +244,6 @@ describe('Toast', function() {
         const el = helpers.build(window.__html__['Toast.autodismiss.html']);
         expect(el.autoDismiss).to.equal(6000);
       });
-
-      it.skip('should automatically close based on the autoDismiss value', function(done) {
-        const el = helpers.build(window.__html__['Toast.open.html']);
-        
-        el._autoDismiss = 10;
-        el._overlayAnimationTime = 0;
-        el.open = true;
-        
-        setTimeout(function() {
-          expect(el.open).to.be.false;
-          done();
-        }, 100);
-      });
     });
 
     describe('#placement', function() {
@@ -258,9 +252,9 @@ describe('Toast', function() {
         expect(el.placement).to.equal(Toast.placement.LEFT);
       });
 
-      it.skip('should position the toast accordingly to its placement value (center)', function(done) {
+      it('should position the toast accordingly to its placement value (center)', function(done) {
         const el = helpers.build(window.__html__['Toast.open.html']);
-        el._overlayAnimationTime = 0;
+        el._overlayAnimationTime = REDUCED_DURATION;
 
         el.on('coral-overlay:open', function() {
           expect(parseFloat(el.style.left) > 0).to.be.true;
@@ -269,9 +263,9 @@ describe('Toast', function() {
         });
       });
 
-      it.skip('should position the toast accordingly to its placement value (left)', function(done) {
+      it('should position the toast accordingly to its placement value (left)', function(done) {
         const el = helpers.build(window.__html__['Toast.open.html']);
-        el._overlayAnimationTime = 0;
+        el._overlayAnimationTime = REDUCED_DURATION;
         el.placement = 'left';
 
         el.on('coral-overlay:open', function() {
@@ -281,9 +275,9 @@ describe('Toast', function() {
         });
       });
 
-      it.skip('should position the toast accordingly to its placement value (right)', function(done) {
+      it('should position the toast accordingly to its placement value (right)', function(done) {
         const el = helpers.build(window.__html__['Toast.open.html']);
-        el._overlayAnimationTime = 0;
+        el._overlayAnimationTime = REDUCED_DURATION;
         el.placement = 'right';
 
         el.on('coral-overlay:open', function() {
@@ -295,7 +289,7 @@ describe('Toast', function() {
     });
   });
 
-  describe.skip('User Interaction', function() {
+  describe('User Interaction', function() {
     describe('#ESC', function() {
       it('should close when escape is pressed', function(done) {
         const el = helpers.build(window.__html__['Toast.open.html']);
@@ -327,7 +321,7 @@ describe('Toast', function() {
     });
   });
 
-  describe.skip('Implementation Details', function() {
+  describe('Implementation Details', function() {
     describe('Priority queue', function() {
       it('should define a priority queue', function() {
         const wrapper = helpers.build(window.__html__['Toast.queue.html']);
@@ -346,17 +340,17 @@ describe('Toast', function() {
         for (let i = 0; i < elements.length; i++) {
           const el = elements[i];
 
-          el._overlayAnimationTime = 0;
-          el._autoDismiss = 100;
+          el._overlayAnimationTime = REDUCED_DURATION;
+          el._autoDismiss = REDUCED_DURATION;
 
           el.on('coral-overlay:open', function() {
-            expect(parseInt(el.dataset.priority)).to.equal(count);
-          });
-
-          el.on('coral-overlay:beforeclose', function() {
+            expect(el._queued).to.be.true;
             expect(parseInt(el.dataset.priority)).to.equal(count);
             expect(wrapper.querySelectorAll('coral-toast.is-open').length).to.equal(1);
+          });
 
+          el.on('coral-overlay:close', function() {
+            expect(el._queued).to.be.false;
             count++;
             if (count === elements.length) {
               done();

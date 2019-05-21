@@ -166,6 +166,8 @@ const CORAL_COMPONENTS = [
   'coral-tag',
   'textarea[is="coral-textarea"]',
   'input[is="coral-textfield"]',
+  'coral-toast',
+  'coral-toast-content',
   'coral-tooltip',
   'coral-tooltip-content',
   'coral-tree',

@@ -58,6 +58,7 @@ export {TabView} from './coral-component-tabview';
 export {Tag, TagList} from './coral-component-taglist';
 export {Textarea} from './coral-component-textarea';
 export {Textfield} from './coral-component-textfield';
+export {Toast} from './coral-component-toast';
 export {Tooltip} from './coral-component-tooltip';
 export {Tree, TreeItem} from './coral-component-tree';
 export {Wait} from './coral-component-wait';

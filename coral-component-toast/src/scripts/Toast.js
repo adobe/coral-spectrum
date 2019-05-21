@@ -121,6 +121,7 @@ const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
  @htmltag coral-toast
  @extends {HTMLElement}
  @extends {ComponentMixin}
+ @extends {OverlayMixin}
  */
 class Toast extends OverlayMixin(ComponentMixin(HTMLElement)) {
   /** @ignore */
@@ -231,6 +232,10 @@ class Toast extends OverlayMixin(ComponentMixin(HTMLElement)) {
       this._open = value;
       // Mark it
       this._queued = true;
+      // Clear timer
+      if (this._dimissTimeout) {
+        clearTimeout(this._dimissTimeout)
+      }
       // Add it to the queue
       queue(this);
       
@@ -265,7 +270,7 @@ class Toast extends OverlayMixin(ComponentMixin(HTMLElement)) {
       requestAnimationFrame(() => {
         // Only dismiss if value is different than 0
         if (this.autoDismiss !== 0) {
-          setTimeout(() => {
+          this._dimissTimeout = setTimeout(() => {
             if (this.open && !this.contains(document.activeElement)) {
               this.open = false;
             }
@@ -355,7 +360,8 @@ class Toast extends OverlayMixin(ComponentMixin(HTMLElement)) {
     
     // Inject the SVG icon
     const iconName = variantValue === variant.ERROR ? 'Alert' : capitalize(variantValue);
-    this.insertAdjacentHTML('afterbegin', Icon._renderSVG(`spectrum-css-icon-${iconName}Medium`, ['_coral-Toast-typeIcon', `_coral-UIIcon-${iconName}Medium`]));
+    const icon = Icon._renderSVG(`spectrum-css-icon-${iconName}Medium`, ['_coral-Toast-typeIcon', `_coral-UIIcon-${iconName}Medium`]);
+    this.insertAdjacentHTML('afterbegin', icon);
     this._elements.icon = this.querySelector('._coral-Toast-typeIcon');
   }
   
@@ -374,12 +380,12 @@ class Toast extends OverlayMixin(ComponentMixin(HTMLElement)) {
   
   _debounceLayout() {
     // Debounce
-    if (this._timeout !== null) {
-      clearTimeout(this._timeout);
+    if (this._layoutTimeout !== null) {
+      clearTimeout(this._layoutTimeout);
     }
   
-    this._timeout = setTimeout(() => {
-      this._timeout = null;
+    this._layoutTimeout = setTimeout(() => {
+      this._layoutTimeout = null;
       this._position();
     }, this._wait);
   }

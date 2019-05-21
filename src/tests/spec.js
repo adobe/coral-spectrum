@@ -60,6 +60,7 @@ import '../../coral-component-tabview/src/tests/spec';
 import '../../coral-component-taglist/src/tests/spec';
 import '../../coral-component-textarea/src/tests/spec';
 import '../../coral-component-textfield/src/tests/spec';
+import '../../coral-component-toast/src/tests/spec';
 import '../../coral-component-tooltip/src/tests/spec';
 import '../../coral-component-tree/src/tests/spec';
 import '../../coral-component-wait/src/tests/spec';
