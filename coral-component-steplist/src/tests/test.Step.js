@@ -16,20 +16,29 @@ import {Step, StepList} from '../../../coral-component-steplist';
 describe('Step', function() {
   var el;
   var item;
+  var item1;
   var item2;
 
-  beforeEach(function() {
+  beforeEach(function(done) {
     el = new StepList();
     el.interaction = StepList.interaction.ON;
 
+    // Not added to StepList
     item = new Step();
-    el.appendChild(item);
+    
+    item1 = new Step();
+    el.appendChild(item1);
     item2 = new Step();
     el.appendChild(item2);
+    
+    // Wait for MO
+    helpers.next(() => {
+      done();
+    })
   });
 
   afterEach(function() {
-    el = item = item2 = null;
+    el = item = item1 = item2 = null;
   });
 
   describe('Namespace', function() {
@@ -58,7 +67,7 @@ describe('Step', function() {
       });
 
       it('should be a content zone', function() {
-        expect(item.label instanceof HTMLElement).to.be.true;
+        expect(item.label instanceof Step.Label).to.be.true;
       });
 
       it('should be settable', function() {
@@ -74,12 +83,12 @@ describe('Step', function() {
       });
 
       it('should be settable to truthy', function() {
-        item.selected = true;
+        item1.selected = true;
         
-        expect(item.selected).to.be.true;
-        expect(item.hasAttribute('selected')).to.be.true;
-        expect(item.classList.contains('is-selected')).to.be.true;
-        expect(item.tabIndex).to.equal(0);
+        expect(item1.selected).to.be.true;
+        expect(item1.hasAttribute('selected')).to.be.true;
+        expect(item1.classList.contains('is-selected')).to.be.true;
+        expect(item1.tabIndex).to.equal(0);
       });
     });
   });
@@ -88,8 +97,8 @@ describe('Step', function() {
     it('tabindex should be removed when StepList interaction is OFF', function() {
       el.interaction = StepList.interaction.OFF;
       
-      expect(item.hasAttribute('tabindex')).to.be.false;
-      expect(item.getAttribute('aria-readonly')).to.equal('true');
+      expect(item1.hasAttribute('tabindex')).to.be.false;
+      expect(item1.getAttribute('aria-readonly')).to.equal('true');
     });
   });
 });
