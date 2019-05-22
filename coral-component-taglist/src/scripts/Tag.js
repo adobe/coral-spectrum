@@ -20,7 +20,7 @@ const CLASSNAME = '_coral-Tags-item';
 const LABEL_CLASSNAME = '_coral-Label';
 
 /**
- Enumeration for {@link Tag} sizes.
+ Enumeration for {@link Tag} sizes. Only colored tags can have different sizes.
  
  @typedef {Object} TagSizeEnum
  
@@ -270,7 +270,7 @@ class Tag extends ComponentMixin(HTMLElement) {
   }
   
   /**
-   The tag's size. See {@link {TagSizeEnum}.
+   The tag's size. See {@link {TagSizeEnum}. Only colored tags can have different sizes.
    
    @type {String}
    @default TagSizeEnum.MEDIUM
