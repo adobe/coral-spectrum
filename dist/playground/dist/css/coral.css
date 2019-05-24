@@ -18798,50 +18798,50 @@ coral-masonry-item {
 .coral--light ._coral-Masonry-item-quickActions {
   background-color: rgba(245,245,245,0.9);
 }
-.coral--light ._coral-Masonry.is-selectable ._coral-Masonry-item.is-selected {
-  border-color: #2680eb;
-  box-shadow: 0 0 0 1px #2680eb;
-}
-.coral--light ._coral-Masonry.is-selectable ._coral-Masonry-item:focus {
+.coral--light ._coral-Masonry-item:focus {
   border-color: #2680eb;
   box-shadow: 0 0 0 1px #2680eb;
   outline: none;
 }
+.coral--light ._coral-Masonry.is-selectable ._coral-Masonry-item.is-selected {
+  border-color: #2680eb;
+  box-shadow: 0 0 0 1px #2680eb;
+}
 .coral--lightest ._coral-Masonry-item-quickActions {
   background-color: rgba(255,255,255,0.9);
+}
+.coral--lightest ._coral-Masonry-item:focus {
+  border-color: #378ef0;
+  box-shadow: 0 0 0 1px #378ef0;
+  outline: none;
 }
 .coral--lightest ._coral-Masonry.is-selectable ._coral-Masonry-item.is-selected {
   border-color: #378ef0;
   box-shadow: 0 0 0 1px #378ef0;
 }
-.coral--lightest ._coral-Masonry.is-selectable ._coral-Masonry-item:focus {
-  border-color: #378ef0;
-  box-shadow: 0 0 0 1px #378ef0;
-  outline: none;
-}
 .coral--dark ._coral-Masonry-item-quickActions {
   background-color: rgba(50,50,50,0.9);
+}
+.coral--dark ._coral-Masonry-item:focus {
+  border-color: #2680eb;
+  box-shadow: 0 0 0 1px #2680eb;
+  outline: none;
 }
 .coral--dark ._coral-Masonry.is-selectable ._coral-Masonry-item.is-selected {
   border-color: #2680eb;
   box-shadow: 0 0 0 1px #2680eb;
 }
-.coral--dark ._coral-Masonry.is-selectable ._coral-Masonry-item:focus {
-  border-color: #2680eb;
-  box-shadow: 0 0 0 1px #2680eb;
-  outline: none;
-}
 .coral--darkest ._coral-Masonry-item-quickActions {
   background-color: rgba(30,30,30,0.9);
+}
+.coral--darkest ._coral-Masonry-item:focus {
+  border-color: #1473e6;
+  box-shadow: 0 0 0 1px #1473e6;
+  outline: none;
 }
 .coral--darkest ._coral-Masonry.is-selectable ._coral-Masonry-item.is-selected {
   border-color: #1473e6;
   box-shadow: 0 0 0 1px #1473e6;
-}
-.coral--darkest ._coral-Masonry.is-selectable ._coral-Masonry-item:focus {
-  border-color: #1473e6;
-  box-shadow: 0 0 0 1px #1473e6;
-  outline: none;
 }
 
 /**

@@ -27197,7 +27197,7 @@ var Coral = (function (exports) {
   var CLASSNAME$w = '_coral-Tags-item';
   var LABEL_CLASSNAME = '_coral-Label';
   /**
-   Enumeration for {@link Tag} sizes.
+   Enumeration for {@link Tag} sizes. Only colored tags can have different sizes.
    
    @typedef {Object} TagSizeEnum
    
@@ -27685,7 +27685,7 @@ var Coral = (function (exports) {
         this.classList.toggle(MULTILINE_CLASSNAME, this._multiline);
       }
       /**
-       The tag's size. See {@link {TagSizeEnum}.
+       The tag's size. See {@link {TagSizeEnum}. Only colored tags can have different sizes.
        
        @type {String}
        @default TagSizeEnum.MEDIUM
@@ -72072,7 +72072,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.65";
+  var version = "1.0.0-beta.66";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
