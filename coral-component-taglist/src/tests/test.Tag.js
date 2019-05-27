@@ -110,6 +110,8 @@ describe('Tag', function() {
         var tag = helpers.build(window.__html__['Tag.base.html']);
         tag.size = 'L';
         expect(tag.classList.contains('_coral-Label--large')).to.be.true;
+        tag.size = 'S';
+        expect(tag.classList.contains('_coral-Label--small')).to.be.true;
       });
     });
   });

@@ -127,7 +127,6 @@ Search | `icon` |
 Slider | `vertical` | 
 Slider | `tooltips` |
 Table | `variant` | `LIST`
-Tag | `size` | `SMALL`
 Tag | `color` | `LIGHT_BLUE`, `PERIWINKLE`, `CYAN`, `PLUM`, `FUCHSIA`, `MAGENTA`, `TANGERINE`, `YELLOW`, `CHARTREUSE`, `KELLY_GREEN`, `SEA_FOAM`
 Tooltip | `variant` | `WARNING`
 Tooltip | `variant` | `INSPECT`
