@@ -27202,7 +27202,7 @@
    @typedef {Object} TagSizeEnum
    
    @property {String} SMALL
-   Not supported. Falls back to MEDIUM.
+   A small sized tag.
    @property {String} MEDIUM
    A default sized tag.
    @property {String} LARGE
@@ -27280,18 +27280,26 @@
     chartreuse: 'green',
     kelly_green: 'green',
     sea_foam: 'green'
-  }; // builds a string containing all possible color classnames. this will be used to remove classnames when the color
+  };
+  var swappedSize = commons.swapKeysAndValues(size$4); // builds a string containing all possible color classnames. this will be used to remove classnames when the color
   // changes
 
   var ALL_COLOR_CLASSES = [];
 
   for (var colorValue in color) {
     ALL_COLOR_CLASSES.push("".concat(LABEL_CLASSNAME, "--").concat(color[colorValue]));
+  } // builds a string containing all possible size classnames. this will be used to remove classnames when the size
+  // changes
+
+
+  var ALL_SIZE_CLASSES$1 = [];
+
+  for (var sizeValue$1 in Object.keys(size$4)) {
+    ALL_SIZE_CLASSES$1.push("".concat(LABEL_CLASSNAME, "--").concat(sizeValue$1));
   }
 
   var QUIET_CLASSNAME = "".concat(CLASSNAME$w, "--quiet");
-  var MULTILINE_CLASSNAME = "".concat(CLASSNAME$w, "--multiline");
-  var LARGE_CLASSNAME = "".concat(LABEL_CLASSNAME, "--large"); // Store coordinates of a mouse down event to compare against mouseup coordinates.
+  var MULTILINE_CLASSNAME = "".concat(CLASSNAME$w, "--multiline"); // Store coordinates of a mouse down event to compare against mouseup coordinates.
 
   var bullsEye = null; // Utility method to detect center point of an element.
 
@@ -27699,12 +27707,16 @@
         return this._size || size$4.MEDIUM;
       },
       set: function set(value) {
+        var _this$classList;
+
         value = this._host ? size$4.MEDIUM : transform.string(value).toUpperCase();
         this._size = validate.enumeration(size$4)(value) && value || size$4.MEDIUM;
 
         this._reflectAttribute('size', this._size);
 
-        this.classList.toggle(LARGE_CLASSNAME, this._size === size$4.LARGE);
+        (_this$classList = this.classList).remove.apply(_this$classList, ALL_SIZE_CLASSES$1);
+
+        this.classList.add("".concat(LABEL_CLASSNAME, "--").concat(swappedSize[this._size].toLowerCase()));
       }
       /**
        The tags's color. See {@link TagColorEnum}.
@@ -27720,7 +27732,7 @@
         return this._color || color.DEFAULT;
       },
       set: function set(value) {
-        var _this$classList;
+        var _this$classList2;
 
         value = this._host ? color.DEFAULT : transform.string(value).toLowerCase();
         this._color = validate.enumeration(color)(value) && value || color.DEFAULT; // Map unsupported colors
@@ -27732,7 +27744,7 @@
         this._reflectAttribute('color', this._color); // removes every existing color
 
 
-        (_this$classList = this.classList).remove.apply(_this$classList, ALL_COLOR_CLASSES);
+        (_this$classList2 = this.classList).remove.apply(_this$classList2, ALL_COLOR_CLASSES);
 
         var isColored = this._color !== color.DEFAULT; // Only labels are colored
 
@@ -72072,7 +72084,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.66";
+  var version = "1.0.0-beta.67";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

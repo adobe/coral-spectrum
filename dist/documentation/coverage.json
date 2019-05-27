@@ -1,6 +1,6 @@
 {
-  "coverage": "66.52%",
-  "expectCount": 3417,
+  "coverage": "66.5%",
+  "expectCount": 3418,
   "actualCount": 2273,
   "files": {
     "coral-spectrum/coral-collection/src/scripts/Collection.js": {
@@ -1927,26 +1927,27 @@
       ]
     },
     "coral-spectrum/coral-component-taglist/src/scripts/Tag.js": {
-      "expectCount": 39,
+      "expectCount": 40,
       "actualCount": 22,
       "undocumentLines": [
         19,
         20,
         94,
-        110,
-        115,
-        116,
-        117,
-        120,
-        123,
-        161,
-        200,
-        227,
-        245,
-        266,
-        285,
-        303,
-        460
+        108,
+        112,
+        119,
+        124,
+        125,
+        128,
+        131,
+        169,
+        208,
+        235,
+        253,
+        274,
+        293,
+        312,
+        469
       ]
     },
     "coral-spectrum/coral-component-taglist/src/scripts/TagLabel.js": {

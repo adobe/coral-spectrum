@@ -409,7 +409,7 @@ import {ComponentMixin} from &apos;../../../coral-mixin-component&apos;;
 import &apos;../../../coral-component-button&apos;;
 import {Icon} from &apos;../../../coral-component-icon&apos;;
 import base from &apos;../templates/base&apos;;
-import {transform, validate, events, i18n} from &apos;../../../coral-utils&apos;;
+import {transform, validate, events, i18n, commons} from &apos;../../../coral-utils&apos;;
 
 const CLASSNAME = &apos;_coral-Tags-item&apos;;
 const LABEL_CLASSNAME = &apos;_coral-Label&apos;;
@@ -420,7 +420,7 @@ const LABEL_CLASSNAME = &apos;_coral-Label&apos;;
  @typedef {Object} TagSizeEnum
  
  @property {String} SMALL
- Not supported. Falls back to MEDIUM.
+ A small sized tag.
  @property {String} MEDIUM
  A default sized tag.
  @property {String} LARGE
@@ -500,6 +500,8 @@ const colorMap = {
   sea_foam: &apos;green&apos;
 };
 
+const swappedSize = commons.swapKeysAndValues(size);
+
 // builds a string containing all possible color classnames. this will be used to remove classnames when the color
 // changes
 const ALL_COLOR_CLASSES = [];
@@ -507,9 +509,15 @@ for (const colorValue in color) {
   ALL_COLOR_CLASSES.push(`${LABEL_CLASSNAME}--${color[colorValue]}`);
 }
 
+// builds a string containing all possible size classnames. this will be used to remove classnames when the size
+// changes
+const ALL_SIZE_CLASSES = [];
+for (const sizeValue in Object.keys(size)) {
+  ALL_SIZE_CLASSES.push(`${LABEL_CLASSNAME}--${sizeValue}`);
+}
+
 const QUIET_CLASSNAME = `${CLASSNAME}--quiet`;
 const MULTILINE_CLASSNAME = `${CLASSNAME}--multiline`;
-const LARGE_CLASSNAME = `${LABEL_CLASSNAME}--large`;
 
 // Store coordinates of a mouse down event to compare against mouseup coordinates.
 let bullsEye = null;
@@ -679,8 +687,9 @@ class Tag extends ComponentMixin(HTMLElement) {
     value = this._host ? size.MEDIUM : transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) &amp;&amp; value || size.MEDIUM;
     this._reflectAttribute(&apos;size&apos;, this._size);
-    
-    this.classList.toggle(LARGE_CLASSNAME, this._size === size.LARGE);
+  
+    this.classList.remove(...ALL_SIZE_CLASSES);
+    this.classList.add(`${LABEL_CLASSNAME}--${swappedSize[this._size].toLowerCase()}`);
   }
   
   /**
