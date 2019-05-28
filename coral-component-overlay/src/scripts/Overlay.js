@@ -514,39 +514,8 @@ class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
     }
   }
   
-  /*
-   Get the element the overlay is anchored to.
-   
-   @protected
-   @param {HTMLElement|String} [target]
-   A specific target value to use.
-   If not provided, the current value of the {@link Coral.Overlay#target} property will be used.
-   @returns {HTMLElement|null}
-   */
   _getTarget(targetValue) {
-    // Use passed target
-    targetValue = targetValue || this.target;
-  
-    if (targetValue instanceof Node) {
-      // Just return the provided Node
-      return targetValue;
-    }
-  
-    // Dynamically get the target node based on target
-    let newTarget = null;
-    if (typeof targetValue === 'string') {
-      if (targetValue === target.PREVIOUS) {
-        newTarget = this.previousElementSibling;
-      }
-      else if (targetValue === target.NEXT) {
-        newTarget = this.nextElementSibling;
-      }
-      else {
-        newTarget = document.querySelector(targetValue);
-      }
-    }
-  
-    return newTarget;
+    return this.constructor._getTarget(this, targetValue);
   }
   
   /**
@@ -590,6 +559,42 @@ class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
         this._popper.update();
       }
     }
+  }
+  
+  /**
+   Get the element the overlay is anchored to.
+   
+   @param {HTMLElement} [el]
+   The reference element.
+   @param {HTMLElement|String} [target]
+   A specific target value to use.
+   If not provided, the current target of the element will be used.
+   @returns {HTMLElement|null}
+   */
+  static _getTarget(el, targetValue) {
+    // Use passed target
+    targetValue = targetValue || el.target;
+    
+    if (targetValue instanceof Node) {
+      // Just return the provided Node
+      return targetValue;
+    }
+    
+    // Dynamically get the target node based on target
+    let newTarget = null;
+    if (typeof targetValue === 'string') {
+      if (targetValue === target.PREVIOUS) {
+        newTarget = el.previousElementSibling;
+      }
+      else if (targetValue === target.NEXT) {
+        newTarget = el.nextElementSibling;
+      }
+      else {
+        newTarget = document.querySelector(targetValue);
+      }
+    }
+    
+    return newTarget;
   }
   
   /**

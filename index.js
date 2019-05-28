@@ -28,6 +28,7 @@ export {Card} from './coral-component-card';
 export {CharacterCount} from './coral-component-charactercount';
 export {Checkbox} from './coral-component-checkbox';
 export {Clock} from './coral-component-clock';
+export {CoachMark} from './coral-component-coachmark';
 export {Color, ColorInput} from './coral-component-colorinput';
 export {ColumnView} from './coral-component-columnview';
 export {CycleButton} from './coral-component-cyclebutton';

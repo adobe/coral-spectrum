@@ -75,6 +75,7 @@ const CORAL_COMPONENTS = [
   'coral-charactercount',
   'coral-checkbox',
   'coral-clock',
+  'coral-coachmark',
   'coral-colorinput',
   'coral-colorinput-colorproperties',
   'coral-colorinput-item',

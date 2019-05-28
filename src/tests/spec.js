@@ -30,6 +30,7 @@ import '../../coral-component-card/src/tests/spec';
 import '../../coral-component-charactercount/src/tests/spec';
 import '../../coral-component-checkbox/src/tests/spec';
 import '../../coral-component-clock/src/tests/spec';
+import '../../coral-component-coachmark/src/tests/spec';
 import '../../coral-component-colorinput/src/tests/spec';
 import '../../coral-component-columnview/src/tests/spec';
 import '../../coral-component-cyclebutton/src/tests/spec';
