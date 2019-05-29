@@ -61893,13 +61893,62 @@ var Coral = (function (exports) {
     }
 
     _createClass(ShellSolutions, [{
+      key: "_sortSolutions",
+      value: function _sortSolutions() {
+        var _this = this;
+
+        if (this.items.length > 1) {
+          var linked = [];
+          var nonLinked = [];
+          var isSecondary = this.hasAttribute('secondary');
+          this.items.getAll().forEach(function (item, i) {
+            // Exclude the first secondary item
+            if (!(isSecondary && i === 0)) {
+              if (item.hasAttribute('linked')) {
+                linked.push(item);
+              } else {
+                nonLinked.push(item);
+              }
+            }
+          });
+
+          var alphabeticalSort = function alphabeticalSort(a, b) {
+            var aText = a.textContent.trim().toLowerCase();
+            var bText = b.textContent.trim().toLowerCase();
+
+            if (aText < bText) {
+              return -1;
+            }
+
+            if (aText > bText) {
+              return 1;
+            }
+
+            return 0;
+          };
+
+          linked.sort(alphabeticalSort);
+          nonLinked.sort(alphabeticalSort);
+          linked.forEach(function (item) {
+            _this.appendChild(item);
+          });
+          nonLinked.forEach(function (item) {
+            _this.appendChild(item);
+          });
+        }
+      }
+      /** @ignore */
+
+    }, {
       key: "connectedCallback",
 
       /** @ignore */
       value: function connectedCallback() {
         _get(_getPrototypeOf(ShellSolutions.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1t);
+        this.classList.add(CLASSNAME$1t); // Sort linked solutions then non linked solutions alphabetically
+
+        this._sortSolutions();
       }
     }, {
       key: "items",
@@ -61943,8 +61992,6 @@ var Coral = (function (exports) {
 
         this.classList.toggle("".concat(CLASSNAME$1t, "--secondary"), this._secondary);
       }
-      /** @ignore */
-
     }], [{
       key: "observedAttributes",
       get: function get() {
@@ -72341,7 +72388,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.69";
+  var version = "1.0.0-beta.70";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

@@ -1,6 +1,6 @@
 {
-  "coverage": "66.46%",
-  "expectCount": 3435,
+  "coverage": "66.44%",
+  "expectCount": 3436,
   "actualCount": 2283,
   "files": {
     "coral-spectrum/coral-collection/src/scripts/Collection.js": {
@@ -1568,12 +1568,13 @@
       ]
     },
     "coral-spectrum/coral-component-shell/src/scripts/ShellSolutions.js": {
-      "expectCount": 8,
+      "expectCount": 9,
       "actualCount": 5,
       "undocumentLines": [
         17,
         36,
-        58
+        58,
+        64
       ]
     },
     "coral-spectrum/coral-component-shell/src/scripts/ShellSolutionsHeader.js": {
