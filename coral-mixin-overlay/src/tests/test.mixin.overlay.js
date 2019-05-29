@@ -615,7 +615,7 @@ describe('mixin._overlay', function() {
               expect(openSpy.called).to.equal(false, '"coral-overlay:open" should still not be called as it was canceled by close before animation was done');
               expect(closeSpy.called).to.equal(true, '"coral-overlay:close" now should have been called');
               done();
-            }, 200);
+            }, 300);
           });
         });
       });
