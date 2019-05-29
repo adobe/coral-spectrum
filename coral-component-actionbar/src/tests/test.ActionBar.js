@@ -440,7 +440,7 @@ describe('ActionBar', function() {
   
           done();
         });
-      }, 100);
+      }, 200);
     });
 
     it('should move items offscreen, if there is not enough space available at screen', function(done) {
