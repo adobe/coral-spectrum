@@ -1587,36 +1587,39 @@ describe('Autocomplete', function() {
 
           // clear value
           el._elements.input.value = '';
-          el._elements.input;
           helpers.event('input', el._elements.input);
 
           // force open selectList
           el._elements.trigger.click();
           
-          expect(el._elements.trigger.getAttribute('aria-label')).to.equal('Show 4 suggestions');
-
-          // close selectList
-          helpers.keydown('esc', el._elements.input);
-
-          // search for items containing the letter 'i'
-          el._elements.input.value = 'i';
-          el._elements.input;
-          helpers.event('input', el._elements.input);
-
-          // force open selectList
-          el._elements.trigger.click();
-          
-          expect(el._elements.trigger.getAttribute('aria-label')).to.equal('Show 3 suggestions');
-
-          // navigate to focus first item in selectList
-          helpers.keydown('down', el._elements.input);
-          
-          // select focused item in selectList
-          helpers.keydown('Enter', el._elements.input);
-        
-          expect(el._elements.trigger.getAttribute('aria-label')).to.equal('Show suggestions');
-
-          done();
+          helpers.next(function() {
+            expect(el._elements.trigger.getAttribute('aria-label')).to.equal('Show 4 suggestions');
+  
+            // close selectList
+            helpers.keydown('esc', el._elements.input);
+  
+            // search for items containing the letter 'i'
+            el._elements.input.value = 'i';
+            helpers.event('input', el._elements.input);
+  
+            // force open selectList
+            el._elements.trigger.click();
+            
+            helpers.next(function() {
+              expect(el._elements.trigger.getAttribute('aria-label')).to.equal('Show 3 suggestions');
+  
+              // navigate to focus first item in selectList
+              helpers.keydown('down', el._elements.input);
+  
+              // select focused item in selectList
+              helpers.keydown('Enter', el._elements.input);
+              
+              helpers.next(function() {
+                expect(el._elements.trigger.getAttribute('aria-label')).to.equal('Show suggestions');
+                done();
+              });
+            });
+          });
         }, el.delay);
       });
     });
