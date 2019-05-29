@@ -38259,6 +38259,8 @@ var Coral = (function (exports) {
                 if (modifier.name === 'offset') {
                   var lengthOffset = targetElement.clientHeight / 2 + _this2.clientHeight / 2;
                   modifier.offset = "0, -".concat(lengthOffset);
+                } else if (modifier.name === 'preventOverflow') {
+                  modifier.padding = 0;
                 }
               });
 
@@ -72339,7 +72341,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.68";
+  var version = "1.0.0-beta.69";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

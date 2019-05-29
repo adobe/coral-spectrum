@@ -22,12 +22,12 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>52/52</span>
+        <span class='fraction'>54/54</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">82.76% </span>
+        <span class="strong">83.87% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>24/29</span>
+        <span class='fraction'>26/31</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>52/52</span>
+        <span class='fraction'>54/54</span>
       </div>
     </div>
     <p class="quiet">
@@ -245,7 +245,10 @@
 <a name='L197'></a><a href='#L197'>197</a>
 <a name='L198'></a><a href='#L198'>198</a>
 <a name='L199'></a><a href='#L199'>199</a>
-<a name='L200'></a><a href='#L200'>200</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L200'></a><a href='#L200'>200</a>
+<a name='L201'></a><a href='#L201'>201</a>
+<a name='L202'></a><a href='#L202'>202</a>
+<a name='L203'></a><a href='#L203'>203</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -394,6 +397,8 @@
 <span class="cline-any cline-yes">40x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -444,6 +449,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">74x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">74x</span>
 <span class="cline-any cline-yes">74x</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -551,6 +557,9 @@ class CoachMark extends ComponentMixin(HTMLElement) {
               const lengthOffset = targetElement.clientHeight/2 + this.clientHeight/2;
               modifier.offset = `0, -${lengthOffset}`;
             }
+            else if (modifier.name === 'preventOverflow') {
+              modifier.padding = 0;
+            }
           });
     
           this._popper.update();
@@ -571,19 +580,19 @@ class CoachMark extends ComponentMixin(HTMLElement) {
     return this._size || size.MEDIUM;
   }
   set size(value) {
-    value = transform.string(value).toUpperCase();
+    va<span class="missing-if-branch" title="else path not taken" >E</span>lue = transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) &amp;&amp; value || size.MEDIUM;
     this._reflectAttribute('size', this._size);
-  <span class="missing-if-branch" title="else path not taken" >E</span>
+  
     this.classList.toggle(`${CLASSNAME}--quiet`, this._size === size.SMALL);
-  }
+  }<span class="missing-if-branch" title="else path not taken" >E</span>
   
   /**
-   The coa<span class="missing-if-branch" title="else path not taken" >E</span>ch mark variant. See {@link CoachMarkVariantEnum}.
-   
+   The coach mark variant. See {@link CoachMarkVariantEnum}.
+   <span class="missing-if-branch" title="else path not taken" >E</span>
    @type {String}
    @default CoachMarkVariantEnum.DEFAULT
-   @htmlattr<span class="missing-if-branch" title="else path not taken" >E</span>ibute variant
+   @htmlattribute variant
    @htmlattributereflected
    */
   get variant() {
@@ -616,8 +625,8 @@ class CoachMark extends ComponentMixin(HTMLElement) {
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'size',
-      'variant',
-      'target'<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+      'variant',<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+      'target'
     ]);
   }
   
@@ -638,8 +647,8 @@ class CoachMark extends ComponentMixin(HTMLElement) {
     }
   
     // Render template
-    this.appendChild(this._template);
-  }<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+    this.appendChild(this._template);<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+  }
 }
 &nbsp;
 export default CoachMark;
@@ -649,7 +658,7 @@ export default CoachMark;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed May 29 2019 08:52:10 GMT+0200 (CEST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed May 29 2019 10:06:54 GMT+0200 (CEST)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
