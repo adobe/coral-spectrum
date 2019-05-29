@@ -105,6 +105,9 @@ class CoachMark extends ComponentMixin(HTMLElement) {
               const lengthOffset = targetElement.clientHeight/2 + this.clientHeight/2;
               modifier.offset = `0, -${lengthOffset}`;
             }
+            else if (modifier.name === 'preventOverflow') {
+              modifier.padding = 0;
+            }
           });
     
           this._popper.update();
