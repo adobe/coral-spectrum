@@ -1,7 +1,7 @@
 {
-  "coverage": "66.5%",
-  "expectCount": 3418,
-  "actualCount": 2273,
+  "coverage": "66.46%",
+  "expectCount": 3435,
+  "actualCount": 2283,
   "files": {
     "coral-spectrum/coral-collection/src/scripts/Collection.js": {
       "expectCount": 35,
@@ -488,6 +488,19 @@
         335,
         445,
         521
+      ]
+    },
+    "coral-spectrum/coral-component-coachmark/src/scripts/CoachMark.js": {
+      "expectCount": 16,
+      "actualCount": 9,
+      "undocumentLines": [
+        52,
+        67,
+        68,
+        87,
+        94,
+        129,
+        148
       ]
     },
     "coral-spectrum/coral-component-colorinput/src/scripts/Color.js": {
@@ -1158,8 +1171,8 @@
       ]
     },
     "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js": {
-      "expectCount": 51,
-      "actualCount": 29,
+      "expectCount": 52,
+      "actualCount": 30,
       "undocumentLines": [
         18,
         19,
@@ -1182,7 +1195,7 @@
         434,
         462,
         472,
-        526
+        517
       ]
     },
     "coral-spectrum/coral-component-panelstack/src/scripts/Panel.js": {
@@ -2280,13 +2293,13 @@
         25,
         28,
         45,
-        244,
-        246,
-        259,
-        262,
-        264,
-        269,
-        875
+        245,
+        247,
+        260,
+        263,
+        265,
+        270,
+        876
       ]
     },
     "coral-spectrum/coral-utils/src/scripts/Events.js": {

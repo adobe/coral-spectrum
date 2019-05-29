@@ -109,7 +109,25 @@
       </coral-selectlist>
     </div>
 
-    <h2 class="coral-Heading coral-Heading-2">Multi SelectList</h2>
+    <h2 class="coral-Heading coral-Heading--2">SelectList with forced selection</h2>
+    <div class="markup">
+      <coral-selectlist id="list" style="max-width:300px">
+        <coral-selectlist-item selected value="1">Option 1</coral-selectlist-item>
+        <coral-selectlist-item value="2">Option 2</coral-selectlist-item>
+        <coral-selectlist-item value="3">Option 3</coral-selectlist-item>
+      </coral-selectlist>
+
+      <script>
+        list.addEventListener('coral-selectlist:beforechange', function(event) {
+          // We prevent the selection to change if we're in single selection and the clicked item is deselected
+          if (!list.multiple && event.detail.item.selected) {
+            event.preventDefault();
+          }
+        });
+      </script>
+    </div>
+
+    <h2 class="coral-Heading coral-Heading--2">Multi SelectList</h2>
     <div class="markup">
       <coral-selectlist multiple style="max-width:300px">
         <coral-selectlist-item value="1">Option 1</coral-selectlist-item>
@@ -118,7 +136,7 @@
       </coral-selectlist>
     </div>
 
-    <h2 class="coral-Heading coral-Heading-2">SelectList Groups</h2>
+    <h2 class="coral-Heading coral-Heading--2">SelectList Groups</h2>
     <div class="markup">
       <coral-selectlist style="max-width:300px">
         <coral-selectlist-group label="Group 1">

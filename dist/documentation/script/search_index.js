@@ -282,6 +282,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "@adobe/coral-spectrum~coachmark",
+    "class/coral-spectrum/coral-component-coachmark/src/scripts/CoachMark.js~CoachMark.html",
+    "<span>CoachMark</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
+  ],
+  [
     "@adobe/coral-spectrum~collection",
     "class/coral-spectrum/coral-collection/src/scripts/Collection.js~Collection.html",
     "<span>Collection</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
@@ -2895,6 +2901,54 @@ window.esdocSearchIndex = [
     "coral-spectrum/coral-component-clock/src/scripts/clock.js~clockvariantenum",
     "typedef/index.html#static-typedef-ClockVariantEnum",
     "coral-spectrum/coral-component-clock/src/scripts/Clock.js~ClockVariantEnum",
+    "typedef"
+  ],
+  [
+    "coral-spectrum/coral-component-coachmark/src/scripts/coachmark.js",
+    "file/coral-spectrum/coral-component-coachmark/src/scripts/CoachMark.js.html",
+    "coral-spectrum/coral-component-coachmark/src/scripts/CoachMark.js",
+    "file"
+  ],
+  [
+    "coral-spectrum/coral-component-coachmark/src/scripts/coachmark.js~coachmark#size",
+    "class/coral-spectrum/coral-component-coachmark/src/scripts/CoachMark.js~CoachMark.html#instance-member-size",
+    "coral-spectrum/coral-component-coachmark/src/scripts/CoachMark.js~CoachMark#size",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-coachmark/src/scripts/coachmark.js~coachmark#target",
+    "class/coral-spectrum/coral-component-coachmark/src/scripts/CoachMark.js~CoachMark.html#instance-member-target",
+    "coral-spectrum/coral-component-coachmark/src/scripts/CoachMark.js~CoachMark#target",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-coachmark/src/scripts/coachmark.js~coachmark#variant",
+    "class/coral-spectrum/coral-component-coachmark/src/scripts/CoachMark.js~CoachMark.html#instance-member-variant",
+    "coral-spectrum/coral-component-coachmark/src/scripts/CoachMark.js~CoachMark#variant",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-coachmark/src/scripts/coachmark.js~coachmark.size",
+    "class/coral-spectrum/coral-component-coachmark/src/scripts/CoachMark.js~CoachMark.html#static-member-size",
+    "coral-spectrum/coral-component-coachmark/src/scripts/CoachMark.js~CoachMark.size",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-coachmark/src/scripts/coachmark.js~coachmark.variant",
+    "class/coral-spectrum/coral-component-coachmark/src/scripts/CoachMark.js~CoachMark.html#static-member-variant",
+    "coral-spectrum/coral-component-coachmark/src/scripts/CoachMark.js~CoachMark.variant",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-coachmark/src/scripts/coachmark.js~coachmarksizeenum",
+    "typedef/index.html#static-typedef-CoachMarkSizeEnum",
+    "coral-spectrum/coral-component-coachmark/src/scripts/CoachMark.js~CoachMarkSizeEnum",
+    "typedef"
+  ],
+  [
+    "coral-spectrum/coral-component-coachmark/src/scripts/coachmark.js~coachmarkvariantenum",
+    "typedef/index.html#static-typedef-CoachMarkVariantEnum",
+    "coral-spectrum/coral-component-coachmark/src/scripts/CoachMark.js~CoachMarkVariantEnum",
     "typedef"
   ],
   [
