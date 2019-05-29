@@ -423,19 +423,23 @@ describe('ActionBar', function() {
       window.setTimeout(function() {
         el.primary._elements.overlay.open = true;
         
-        // there should now be some items in the popover
-        expect(el.primary._itemsInPopover.length === 1).to.be.true;
+        helpers.next(() => {
+          // there should now be some items in the popover
+          expect(el.primary._itemsInPopover.length === 1).to.be.true;
   
-        // you should still be able to get all items over the Collection Api (also the ones in the popover)
-        expect(el.primary.items.getAll().length).to.equal(2);
+          // you should still be able to get all items over the Collection Api (also the ones in the popover)
+          expect(el.primary.items.getAll().length).to.equal(2);
   
-        // close the popover => all items should be moved back from popover
-        el.primary._elements.overlay.open = false;
-        
-        // there should be no items in popover
-        expect(el.primary._itemsInPopover.length).to.equal(0);
-        
-        done();
+          // close the popover => all items should be moved back from popover
+          el.primary._elements.overlay.open = false;
+          
+          helpers.next(() => {
+            // there should be no items in popover
+            expect(el.primary._itemsInPopover.length).to.equal(0);
+            
+            done();
+          });
+        });
       }, 100);
     });
 
