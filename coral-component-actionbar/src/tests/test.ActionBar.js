@@ -422,8 +422,8 @@ describe('ActionBar', function() {
       // Wait for resize listener and MO
       window.setTimeout(function() {
         el.primary._elements.overlay.open = true;
-        
-        helpers.next(() => {
+  
+        el.primary._elements.overlay.on('coral-overlay:open', function() {
           // there should now be some items in the popover
           expect(el.primary._itemsInPopover.length === 1).to.be.true;
   
@@ -432,13 +432,13 @@ describe('ActionBar', function() {
   
           // close the popover => all items should be moved back from popover
           el.primary._elements.overlay.open = false;
-          
-          helpers.next(() => {
-            // there should be no items in popover
-            expect(el.primary._itemsInPopover.length).to.equal(0);
-            
-            done();
-          });
+        });
+  
+        el.primary._elements.overlay.on('coral-overlay:close', function() {
+          // there should be no items in popover
+          expect(el.primary._itemsInPopover.length).to.equal(0);
+  
+          done();
         });
       }, 100);
     });
