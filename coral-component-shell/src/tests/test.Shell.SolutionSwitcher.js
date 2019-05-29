@@ -33,6 +33,14 @@ describe('Shell.SolutionSwitcher', function() {
       var el = helpers.build(new Shell.SolutionSwitcher());
       expect(el instanceof Shell.SolutionSwitcher).to.equal(true);
     });
+    
+    it('should alphabetically sort linked solutions then non linked solutions', function() {
+      const el = helpers.build(window.__html__['Shell.SolutionSwitcher.base.html']);
+      const solutions = el.querySelectorAll('a[is="coral-shell-solution"]');
+      for (let i = 0; i < solutions.length; i++) {
+        expect(solutions[i].id).to.equal(`solution-${i}`);
+      }
+    });
   
     helpers.cloneComponent(
       'should be possible to clone using markup',

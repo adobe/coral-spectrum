@@ -61,6 +61,46 @@ class ShellSolutions extends ComponentMixin(HTMLElement) {
     this.classList.toggle(`${CLASSNAME}--secondary`, this._secondary);
   }
   
+  _sortSolutions() {
+    if (this.items.length > 1) {
+      const linked = [];
+      const nonLinked = [];
+      const isSecondary = this.hasAttribute('secondary');
+      
+      this.items.getAll().forEach((item, i) => {
+        // Exclude the first secondary item
+        if (!(isSecondary && i === 0)) {
+          if (item.hasAttribute('linked')) {
+            linked.push(item);
+          }
+          else {
+            nonLinked.push(item);
+          }
+        }
+      });
+  
+      const alphabeticalSort = (a, b) => {
+        const aText = a.textContent.trim().toLowerCase();
+        const bText = b.textContent.trim().toLowerCase();
+    
+        if (aText < bText) {return -1;}
+        if (aText > bText) {return 1;}
+        return 0;
+      };
+  
+      linked.sort(alphabeticalSort);
+      nonLinked.sort(alphabeticalSort);
+  
+      linked.forEach((item) => {
+        this.appendChild(item);
+      });
+  
+      nonLinked.forEach((item) => {
+        this.appendChild(item);
+      });
+    }
+  }
+  
   /** @ignore */
   static get observedAttributes() { return super.observedAttributes.concat(['secondary']); }
   
@@ -69,6 +109,9 @@ class ShellSolutions extends ComponentMixin(HTMLElement) {
     super.connectedCallback();
     
     this.classList.add(CLASSNAME);
+    
+    // Sort linked solutions then non linked solutions alphabetically
+    this._sortSolutions();
   }
 }
 
