@@ -224,11 +224,9 @@
 /* #selectable */
 ._coral-Table-wrapper[selectable] {
   ._coral-Table-row {
-    &[coral-table-rowselect]:not(.is-selected) {
-      &:hover {
-        ._coral-Table-cell {
-          background-color: $table-background-color-hover;
-        }
+    &:hover {
+      ._coral-Table-cell {
+        background-color: $table-background-color-hover;
       }
     }
 
@@ -242,28 +240,14 @@
           background-color: $table-background-color-selected-hover;
         }
       }
-
-      &[coral-table-rowselect] {
-        ._coral-Table-cell {
-          background-color: $table-background-color-selected;
-        }
-
-        &:hover {
-          ._coral-Table-cell {
-            background-color: $table-background-color-selected-hover;
-          }
-        }
-      }
     }
   }
 
   &._coral-Table-wrapper--quiet {
     ._coral-Table-row {
-      &[coral-table-rowselect]:not(.is-selected) {
-        &:hover {
-          ._coral-Table-cell {
-            background-color: $table-quiet-background-color-hover;
-          }
+      &:hover {
+        ._coral-Table-cell {
+          background-color: $table-quiet-background-color-hover;
         }
       }
 
@@ -275,18 +259,6 @@
         &:hover {
           ._coral-Table-cell {
             background-color: $table-quiet-background-color-selected-hover;
-          }
-        }
-
-        &[coral-table-rowselect] {
-          ._coral-Table-cell {
-            background-color: $table-quiet-background-color-selected;
-          }
-
-          &:hover {
-            ._coral-Table-cell {
-              background-color: $table-quiet-background-color-selected-hover;
-            }
           }
         }
       }
@@ -308,8 +280,14 @@
 
     &.is-selected {
       &:after {
-        background-color: $table-thumbnail-background-color-selected;
+        background-color: $table-quiet-background-color-selected;
         background-image: svgImport($table-list-check-icon-url, 'path {fill: white}');
+      }
+    }
+
+    &.is-selected:hover {
+      &:after {
+        background-color: $table-quiet-background-color-selected-hover;
       }
     }
   }
