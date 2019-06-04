@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 
 const CLASSNAME = '_coral-ActionBar-item';
 
@@ -19,9 +19,9 @@ const CLASSNAME = '_coral-ActionBar-item';
  @classdesc An ActionBar item component
  @htmltag coral-actionbar-item
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class ActionBarItem extends ComponentMixin(HTMLElement) {
+class ActionBarItem extends BaseComponent(HTMLElement) {
   // @compat
   get content() {
     return this;

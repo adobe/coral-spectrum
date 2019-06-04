@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
-import {ButtonMixin} from '../../../coral-mixin-button';
+import {BaseComponent} from '../../../coral-base-component';
+import {BaseButton} from '../../../coral-base-button';
 
 /**
  @class Coral.Button
@@ -19,10 +19,10 @@ import {ButtonMixin} from '../../../coral-mixin-button';
  @htmltag coral-button
  @htmlbasetag button
  @extends {HTMLButtonElement}
- @extends {ComponentMixin}
- @extends {ButtonMixin}
+ @extends {BaseComponent}
+ @extends {BaseButton}
  */
-class Button extends ButtonMixin(ComponentMixin(HTMLButtonElement)) {
+class Button extends BaseButton(BaseComponent(HTMLButtonElement)) {
   /** @ignore */
   constructor() {
     super();

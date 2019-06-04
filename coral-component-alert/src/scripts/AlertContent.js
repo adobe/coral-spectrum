@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 
 const CLASSNAME = '_coral-Alert-content';
 
@@ -19,9 +19,9 @@ const CLASSNAME = '_coral-Alert-content';
  @classdesc The Alert default content
  @htmltag coral-alert-content
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class AlertContent extends ComponentMixin(HTMLElement) {
+class AlertContent extends BaseComponent(HTMLElement) {
   /** @ignore */
   connectedCallback() {
     this.classList.add(CLASSNAME);

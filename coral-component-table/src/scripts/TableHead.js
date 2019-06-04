@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
-import TableSectionMixin from './TableSectionMixin';
+import {BaseComponent} from '../../../coral-base-component';
+import BaseTableSection from './BaseTableSection';
 import {transform} from '../../../coral-utils';
 
 const CLASSNAME = '_coral-Table-head';
@@ -22,10 +22,10 @@ const CLASSNAME = '_coral-Table-head';
  @htmltag coral-table-head
  @htmlbasetag thead
  @extends {HTMLTableSectionElement}
- @extends {ComponentMixin}
- @extends {TableSectionMixin}
+ @extends {BaseComponent}
+ @extends {BaseTableSection}
  */
-class TableHead extends TableSectionMixin(ComponentMixin(HTMLTableSectionElement)) {
+class TableHead extends BaseTableSection(BaseComponent(HTMLTableSectionElement)) {
   /** @ignore */
   constructor() {
     super();

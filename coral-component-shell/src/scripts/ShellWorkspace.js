@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {transform} from '../../../coral-utils';
 
 const CLASSNAME = '_coral-Shell-workspaces-workspace';
@@ -21,9 +21,9 @@ const CLASSNAME = '_coral-Shell-workspaces-workspace';
  @htmltag coral-shell-workspace
  @htmlbasetag a
  @extends {HTMLAnchorElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class ShellWorkspace extends ComponentMixin(HTMLAnchorElement) {
+class ShellWorkspace extends BaseComponent(HTMLAnchorElement) {
   /** @ignore */
   constructor() {
     super();

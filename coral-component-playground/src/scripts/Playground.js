@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {transform, validate} from '../../../coral-utils';
 import '../../../coral-component-wait';
 import '../../../coral-component-button';
@@ -72,9 +72,9 @@ const DEBOUNCE_TIME = 250;
  the URL
  @htmltag coral-playground
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class Playground extends ComponentMixin(HTMLElement) {
+class Playground extends BaseComponent(HTMLElement) {
   /**
    Takes an optional configuration object for initialization.
    

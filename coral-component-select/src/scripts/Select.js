@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
-import {FormFieldMixin} from '../../../coral-mixin-formfield';
+import {BaseComponent} from '../../../coral-base-component';
+import {BaseFormField} from '../../../coral-base-formfield';
 import {SelectableCollection} from '../../../coral-collection';
 import '../../../coral-component-button';
 import {Tag} from '../../../coral-component-taglist';
@@ -76,10 +76,10 @@ const arrayDiff = function(a, b) {
  shown on a mobile device, it will show a native select list, instead of the select list styled via Coral Spectrum.
  @htmltag coral-select
  @extends {HTMLElement}
- @extends {ComponentMixin}
- @extends {FormFieldMixin}
+ @extends {BaseComponent}
+ @extends {BaseFormField}
  */
-class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
+class Select extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -438,7 +438,7 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   Inherited from {@link FormFieldMixin#invalid}.
+   Inherited from {@link BaseFormField#invalid}.
    */
   get invalid() {
     return super.invalid;
@@ -493,7 +493,7 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   Inherited from {@link FormFieldMixin#labelledBy}.
+   Inherited from {@link BaseFormField#labelledBy}.
    */
   get labelledBy() {
     return super.labelledBy;
@@ -1304,7 +1304,7 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   Inherited from {@link FormFieldMixin#clear}.
+   Inherited from {@link BaseFormField#clear}.
    */
   clear() {
     this.value = '';
@@ -1322,7 +1322,7 @@ class Select extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   Inherited from {@link FormFieldMixin#reset}.
+   Inherited from {@link BaseFormField#reset}.
    */
   reset() {
     // reset the values to the initial values

@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {Icon} from '../../../coral-component-icon';
 import {transform, validate} from '../../../coral-utils';
 
@@ -71,9 +71,9 @@ const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
  <code>coral-close</code> attribute on an element contained by the Alert.
  @htmltag coral-alert
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class Alert extends ComponentMixin(HTMLElement) {
+class Alert extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -201,7 +201,7 @@ class Alert extends ComponentMixin(HTMLElement) {
   
   /**
    @ignore
-   @todo maybe this should be mixin or something
+   @todo maybe this should be base or something
    */
   _onCloseClick(event) {
     const dismissTarget = event.matchedTarget;

@@ -12,7 +12,8 @@
 
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Dialog} from '../../../coral-component-dialog';
-import {tracking, mixin} from '../../../coral-utils';
+import {BaseOverlay} from '../../../coral-base-overlay';
+import {tracking} from '../../../coral-utils';
 import {DragAction} from '../../../coral-dragaction';
 
 describe('Dialog', function() {
@@ -140,7 +141,7 @@ describe('Dialog', function() {
   
     describe('#focusOnShow', function() {
       it('should default to ON', function() {
-        expect(el.focusOnShow).to.equal(mixin._overlay.focusOnShow.ON);
+        expect(el.focusOnShow).to.equal(BaseOverlay.focusOnShow.ON);
       });
     });
   
@@ -372,7 +373,7 @@ describe('Dialog', function() {
       });
     });
   
-    // @todo maybe this test should be part of a mixin
+    // @todo maybe this test should be part of a base
     describe('[coral-close]', function() {
       it('should close when close button clicked', function() {
         const el = helpers.build(window.__html__['Dialog.full.html']);

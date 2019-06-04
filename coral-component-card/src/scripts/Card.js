@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import base from '../templates/base';
 import {transform, validate} from '../../../coral-utils';
 
@@ -52,9 +52,9 @@ for (const variantValue in variant) {
  @classdesc A Card component to display content in different variations.
  @htmltag coral-card
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class Card extends ComponentMixin(HTMLElement) {
+class Card extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

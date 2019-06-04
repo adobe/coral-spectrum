@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import ColumnViewCollection from './ColumnViewCollection';
 import selectionMode from './selectionMode';
 import {transform, validate, commons} from '../../../coral-utils';
@@ -47,9 +47,9 @@ const scrollTo = (element, to, duration, scrollCallback) => {
  (e.g. a filesystem or multi-level navigation).
  @htmltag coral-columnview
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class ColumnView extends ComponentMixin(HTMLElement) {
+class ColumnView extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

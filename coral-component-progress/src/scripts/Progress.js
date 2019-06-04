@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import base from '../templates/base';
 import {transform, validate} from '../../../coral-utils';
 
@@ -61,9 +61,9 @@ const CLASSNAME = '_coral-BarLoader';
  @classdesc A Progress component to indicate progress of processes.
  @htmltag coral-progress
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class Progress extends ComponentMixin(HTMLElement) {
+class Progress extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

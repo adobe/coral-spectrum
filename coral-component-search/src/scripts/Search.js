@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
-import {FormFieldMixin} from '../../../coral-mixin-formfield';
+import {BaseComponent} from '../../../coral-base-component';
+import {BaseFormField} from '../../../coral-base-formfield';
 import '../../../coral-component-textfield';
 import '../../../coral-component-button';
 import {Icon} from '../../../coral-component-icon';
@@ -40,10 +40,10 @@ const variant = {
  @classdesc A Search component is a search styled form field.
  @htmltag coral-search
  @extends {HTMLElement}
- @extends {ComponentMixin}
- @extends {FormFieldMixin}
+ @extends {BaseComponent}
+ @extends {BaseFormField}
  */
-class Search extends FormFieldMixin(ComponentMixin(HTMLElement)) {
+class Search extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -156,7 +156,7 @@ class Search extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   Inherited from {@link FormFieldMixin#labelledBy}.
+   Inherited from {@link BaseFormField#labelledBy}.
    */
   get labelledBy() {
     return super.labelledBy;
@@ -232,7 +232,7 @@ class Search extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   Inherited from {@link FormFieldMixin#invalid}.
+   Inherited from {@link BaseFormField#invalid}.
    */
   get invalid() {
     return super.invalid;
@@ -301,13 +301,13 @@ class Search extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this.trigger('coral-search:clear');
   }
   
-  // overrides the behavior from mixin-formfield
+  // overrides the behavior from BaseFormField
   reset() {
     // since there is an internal value, this one handles the reset
     this._elements.input.reset();
   }
   
-  // overrides the behavior from mixin-formfield
+  // overrides the behavior from BaseFormField
   clear() {
     // since there is an internal value, this one handles the clear
     this._elements.input.clear();

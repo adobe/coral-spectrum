@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {transform} from '../../../coral-utils';
 
 /**
@@ -18,9 +18,9 @@ import {transform} from '../../../coral-utils';
  @classdesc A CycleButton Action component
  @htmltag coral-cyclebutton-action
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class CycleButtonAction extends ComponentMixin(HTMLElement) {
+class CycleButtonAction extends BaseComponent(HTMLElement) {
   /**
    The Action's icon. See {@link Coral.Icon} for valid icon names.
    
@@ -52,7 +52,7 @@ class CycleButtonAction extends ComponentMixin(HTMLElement) {
   }
   
   /**
-   Inherited from {@link ComponentMixin#trackingElement}.
+   Inherited from {@link BaseComponent#trackingElement}.
    */
   get trackingElement() {
     return typeof this._trackingElement === 'undefined' ?

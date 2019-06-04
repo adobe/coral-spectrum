@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {SelectableCollection} from '../../../coral-collection';
 import {transform} from '../../../coral-utils';
 
@@ -21,9 +21,9 @@ const CLASSNAME = '_coral-SelectList-group';
  @classdesc A SelectList group component
  @htmltag coral-selectlist-group
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class SelectListGroup extends ComponentMixin(HTMLElement) {
+class SelectListGroup extends BaseComponent(HTMLElement) {
   /**
    The label of the group. It reflects the <code>label</code> attribute to the DOM.
    

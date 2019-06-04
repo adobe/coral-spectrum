@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {Collection} from '../../../coral-collection';
 import {transform} from '../../../coral-utils';
 
@@ -21,9 +21,9 @@ const CLASSNAME = '_coral-Shell-solutions';
  @classdesc A Shell Solutions component
  @htmltag coral-shell-solutions
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class ShellSolutions extends ComponentMixin(HTMLElement) {
+class ShellSolutions extends BaseComponent(HTMLElement) {
   /**
    The item collection.
    

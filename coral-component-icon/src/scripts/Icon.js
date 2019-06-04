@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {transform, validate, commons} from '../../../coral-utils';
 import ICON_MAP from '../../../coral-compat/data/iconMap';
 import SPECTRUM_ICONS_PATH from '../resources/spectrum-icons.svg';
@@ -107,9 +107,9 @@ const sizeMap = {
  @classdesc An Icon component. Icon ships with a set of SVG icons.
  @htmltag coral-icon
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class Icon extends ComponentMixin(HTMLElement) {
+class Icon extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

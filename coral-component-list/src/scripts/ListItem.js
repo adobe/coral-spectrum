@@ -10,18 +10,18 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
-import {ListItemMixin} from '../../../coral-mixin-list';
+import {BaseComponent} from '../../../coral-base-component';
+import {BaseListItem} from '../../../coral-base-list';
 
 /**
  @class Coral.List.Item
  @classdesc A List item component
  @htmltag coral-list-item
  @extends {HTMLElement}
- @extends {ComponentMixin}
- @extends {ListItemMixin}
+ @extends {BaseComponent}
+ @extends {BaseListItem}
  */
-class ListItem extends ListItemMixin(ComponentMixin(HTMLElement)) {
+class ListItem extends BaseListItem(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();

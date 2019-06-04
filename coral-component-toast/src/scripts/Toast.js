@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
-import {OverlayMixin} from '../../../coral-mixin-overlay';
+import {BaseComponent} from '../../../coral-base-component';
+import {BaseOverlay} from '../../../coral-base-overlay';
 import {Icon} from '../../../coral-component-icon';
 import {Button} from '../../../coral-component-button';
 import {AnchorButton} from '../../../coral-component-anchorbutton';
@@ -120,10 +120,10 @@ const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
  They are noticeable but do not disrupt the user experience and do not require an action to be taken.
  @htmltag coral-toast
  @extends {HTMLElement}
- @extends {ComponentMixin}
- @extends {OverlayMixin}
+ @extends {BaseComponent}
+ @extends {BaseOverlay}
  */
-class Toast extends OverlayMixin(ComponentMixin(HTMLElement)) {
+class Toast extends BaseOverlay(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -220,7 +220,7 @@ class Toast extends OverlayMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   Inherited from {@link OverlayMixin#open}.
+   Inherited from {@link BaseOverlay#open}.
    */
   get open() {
     return super.open;

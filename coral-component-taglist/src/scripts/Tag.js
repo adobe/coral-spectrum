@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import '../../../coral-component-button';
 import {Icon} from '../../../coral-component-icon';
 import base from '../templates/base';
@@ -149,9 +149,9 @@ const getOffsetCenter = (element) => {
  @classdesc A Tag component
  @htmltag coral-tag
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class Tag extends ComponentMixin(HTMLElement) {
+class Tag extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -343,7 +343,7 @@ class Tag extends ComponentMixin(HTMLElement) {
   }
   
   /**
-   Inherited from {@link ComponentMixin#trackingElement}.
+   Inherited from {@link BaseComponent#trackingElement}.
    */
   get trackingElement() {
     // it uses the name as the first fallback since it is not localized, otherwise it uses the label

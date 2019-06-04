@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
-import {ListItemMixin} from '../../../coral-mixin-list';
+import {BaseComponent} from '../../../coral-base-component';
+import {BaseListItem} from '../../../coral-base-list';
 
 const CLASSNAME = '_coral-AnchorList-item';
 
@@ -20,10 +20,10 @@ const CLASSNAME = '_coral-AnchorList-item';
  @classdesc An AnchorList item component
  @htmltag coral-anchorlist-item
  @extends {HTMLAnchorElement}
- @extends {ComponentMixin}
- @extends {ListItemMixin}
+ @extends {BaseComponent}
+ @extends {BaseListItem}
  */
-class AnchorListItem extends ListItemMixin(ComponentMixin(HTMLAnchorElement)) {
+class AnchorListItem extends BaseListItem(BaseComponent(HTMLAnchorElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -58,7 +58,7 @@ class AnchorListItem extends ListItemMixin(ComponentMixin(HTMLAnchorElement)) {
   }
   
   /**
-   Inherited from {@link ComponentMixin#trackingElement}.
+   Inherited from {@link BaseComponent#trackingElement}.
    */
   get trackingElement() {
     return typeof this._trackingElement === 'undefined' ?

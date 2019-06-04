@@ -224,6 +224,7 @@ code[data-ice="importPathCode"]:empty {
 }
 
 [data-ice="exampleDocs"] h4,
-[data-ice="see"] h4 {
+[data-ice="see"] h4,
+[data-ice="mixinExtends"] {
   display: none;
 }

@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 
 const CLASSNAME = '_coral-Dialog-footer';
 
@@ -19,9 +19,9 @@ const CLASSNAME = '_coral-Dialog-footer';
  @classdesc The Dialog footer content
  @htmltag coral-dialog-footer
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class DialogFooter extends ComponentMixin(HTMLElement) {
+class DialogFooter extends BaseComponent(HTMLElement) {
   /** @ignore */
   connectedCallback() {
     this.classList.add(CLASSNAME);

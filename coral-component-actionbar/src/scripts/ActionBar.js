@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import '../../../coral-component-popover';
 import getFirstSelectableWrappedItem from './getFirstSelectableWrappedItem';
 import {commons} from '../../../coral-utils';
@@ -23,9 +23,9 @@ const CLASSNAME = '_coral-ActionBar';
  of the bar. All items that do not fit into the bar are hidden but still accessible.
  @htmltag coral-actionbar
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class ActionBar extends ComponentMixin(HTMLElement) {
+class ActionBar extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

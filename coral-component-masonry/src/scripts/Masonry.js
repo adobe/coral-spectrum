@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import MasonryItem from './MasonryItem';
 import {SelectableCollection} from '../../../coral-collection';
 import {validate, transform, commons} from '../../../coral-utils';
@@ -96,9 +96,9 @@ const getPreviousItem = (item) => {
  @classdesc A Masonry component that allows to lay out items in a masonry grid.
  @htmltag coral-masonry
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class Masonry extends ComponentMixin(HTMLElement) {
+class Masonry extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

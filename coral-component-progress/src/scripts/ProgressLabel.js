@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 
 const CLASSNAME = '_coral-BarLoader-label';
 
@@ -19,9 +19,9 @@ const CLASSNAME = '_coral-BarLoader-label';
  @classdesc The Progress label content
  @htmltag coral-progress-label
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class ProgressLabel extends ComponentMixin(HTMLElement) {
+class ProgressLabel extends BaseComponent(HTMLElement) {
   /** @ignore */
   connectedCallback() {
     this.classList.add(CLASSNAME);

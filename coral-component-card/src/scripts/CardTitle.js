@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 
 const CLASSNAME = '_coral-Card-title';
 
@@ -19,9 +19,9 @@ const CLASSNAME = '_coral-Card-title';
  @classdesc A Card title component
  @htmltag coral-card-title
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class CardTitle extends ComponentMixin(HTMLElement) {
+class CardTitle extends BaseComponent(HTMLElement) {
   // @compat
   get content() {
     return this;

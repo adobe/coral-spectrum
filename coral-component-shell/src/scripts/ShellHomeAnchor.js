@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import '../../../coral-component-icon';
 import homeAnchorIcon from '../templates/homeAnchorIcon';
 
@@ -22,9 +22,9 @@ const CLASSNAME = '_coral-Shell-homeAnchor';
  @htmltag coral-shell-homeanchor
  @htmlbasetag a
  @extends {HTMLAnchorElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class ShellHomeAnchor extends ComponentMixin(HTMLAnchorElement) {
+class ShellHomeAnchor extends BaseComponent(HTMLAnchorElement) {
   /** @ignore */
   constructor() {
     super();

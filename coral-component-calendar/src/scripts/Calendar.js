@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
-import {FormFieldMixin} from '../../../coral-mixin-formfield';
+import {BaseComponent} from '../../../coral-base-component';
+import {BaseFormField} from '../../../coral-base-formfield';
 import {DateTime} from '../../../coral-datetime';
 import '../../../coral-component-button';
 import {Icon} from '../../../coral-component-icon';
@@ -177,10 +177,10 @@ const CLASSNAME = '_coral-Calendar';
  on the page.
  @htmltag coral-calendar
  @extends {HTMLElement}
- @extends {ComponentMixin}
- @extends {FormFieldMixin}
+ @extends {BaseComponent}
+ @extends {BaseFormField}
  */
-class Calendar extends FormFieldMixin(ComponentMixin(HTMLElement)) {
+class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -451,7 +451,7 @@ class Calendar extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   Inherited from {@link FormFieldMixin#invalid}.
+   Inherited from {@link BaseFormField#invalid}.
    */
   get invalid() {
     return super.invalid;

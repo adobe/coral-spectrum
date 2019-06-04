@@ -10,12 +10,12 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {tracking} from '../../../coral-utils';
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 
 describe('tracking', function() {
-  class ComponentTestForTrackComponent extends ComponentMixin(HTMLElement) {
+  class ComponentTestForTrackComponent extends BaseComponent(HTMLElement) {
     constructor() {
       super();
       
@@ -39,7 +39,7 @@ describe('tracking', function() {
     }
   }
   
-  class ComponentTestForTrackComponentItem extends ComponentMixin(HTMLElement) {
+  class ComponentTestForTrackComponentItem extends BaseComponent(HTMLElement) {
     constructor() {
       super();
     }

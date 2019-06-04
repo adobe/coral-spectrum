@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import '../../../coral-component-tooltip';
 import step from '../templates/step';
 import {transform, commons} from '../../../coral-utils';
@@ -23,9 +23,9 @@ const CLASSNAME = '_coral-Steplist-item';
  @classdesc A Step component
  @htmltag coral-step
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class Step extends ComponentMixin(HTMLElement) {
+class Step extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -133,7 +133,7 @@ class Step extends ComponentMixin(HTMLElement) {
   }
   
   /**
-   Inherited from {@link ComponentMixin#trackingElement}.
+   Inherited from {@link BaseComponent#trackingElement}.
    */
   get trackingElement() {
     return typeof this._trackingElement === 'undefined' ?

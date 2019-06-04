@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
-import {OverlayMixin} from '../../../coral-mixin-overlay';
+import {BaseComponent} from '../../../coral-base-component';
+import {BaseOverlay} from '../../../coral-base-overlay';
 import PopperJS from 'popper.js';
 import {transform, validate, commons} from '../../../coral-utils';
 
@@ -134,15 +134,15 @@ const CLASSNAME = '_coral-Overlay';
  @classdesc A generic Overlay component.
  @htmltag coral-overlay
  @extends {HTMLElement}
- @extends {ComponentMixin}
- @extends {OverlayMixin}
+ @extends {BaseComponent}
+ @extends {BaseOverlay}
  */
-class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
+class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
   
-    // Override from mixin-overlay
+    // Override from BaseOverlay
     this._overlayAnimationTime = 0;
   
     // Popper default
@@ -402,7 +402,7 @@ class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   Inherited from {@link OverlayMixin#open}.
+   Inherited from {@link BaseOverlay#open}.
    */
   get open() {
     return super.open;
@@ -489,7 +489,7 @@ class Overlay extends OverlayMixin(ComponentMixin(HTMLElement)) {
   }
 
   /**
-   @todo maybe this should be mixin or something
+   @todo maybe this should be base or something
    @ignore
    */
   _handleCloseClick(event) {

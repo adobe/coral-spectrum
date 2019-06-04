@@ -10,9 +10,9 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import getFirstSelectableWrappedItem from './getFirstSelectableWrappedItem';
-import ActionBarContainer from './ActionBarContainerMixin';
+import ActionBarContainer from './BaseActionBarContainer';
 
 const CLASSNAME = '_coral-ActionBar-secondary';
 
@@ -21,9 +21,9 @@ const CLASSNAME = '_coral-ActionBar-secondary';
  @classdesc An ActionBar secondary component
  @htmltag coral-actionbar-secondary
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class ActionBarSecondary extends ActionBarContainer(ComponentMixin(HTMLElement)) {
+class ActionBarSecondary extends ActionBarContainer(BaseComponent(HTMLElement)) {
   /** @ignore */
   _returnElementsFromPopover() {
     let item = null;

@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import '../../../coral-component-popover';
 import '../../../coral-component-button';
 import CycleButtonItem from './CycleButtonItem';
@@ -56,9 +56,9 @@ const CLASSNAME = '_coral-CycleSelect';
  a certain threshold, and shows them in a popover selector when above.
  @htmltag coral-cyclebutton
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class CycleButton extends ComponentMixin(HTMLElement) {
+class CycleButton extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

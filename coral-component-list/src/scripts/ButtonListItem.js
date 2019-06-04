@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
-import {ListItemMixin} from '../../../coral-mixin-list';
+import {BaseComponent} from '../../../coral-base-component';
+import {BaseListItem} from '../../../coral-base-list';
 
 const CLASSNAME = '_coral-ButtonList-item';
 
@@ -20,12 +20,12 @@ const CLASSNAME = '_coral-ButtonList-item';
  @classdesc An ButtonList item component
  @htmltag coral-buttonlist-item
  @extends {HTMLButtonElement}
- @extends {ComponentMixin}
- @extends {ListItemMixin}
+ @extends {BaseComponent}
+ @extends {BaseListItem}
  */
-class ButtonListItem extends ListItemMixin(ComponentMixin(HTMLButtonElement)) {
+class ButtonListItem extends BaseListItem(BaseComponent(HTMLButtonElement)) {
   /**
-   Inherited from {@link ComponentMixin#trackingElement}.
+   Inherited from {@link BaseComponent#trackingElement}.
    */
   get trackingElement() {
     return typeof this._trackingElement === 'undefined' ?

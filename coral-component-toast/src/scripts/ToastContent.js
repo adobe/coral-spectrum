@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 
 const CLASSNAME = '_coral-Toast-content';
 
@@ -19,9 +19,9 @@ const CLASSNAME = '_coral-Toast-content';
  @classdesc The Toast default content
  @htmltag coral-toast-content
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class ToastContent extends ComponentMixin(HTMLElement) {
+class ToastContent extends BaseComponent(HTMLElement) {
   /** @ignore */
   connectedCallback() {
     this.classList.add(CLASSNAME);

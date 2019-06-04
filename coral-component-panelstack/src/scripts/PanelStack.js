@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {SelectableCollection} from '../../../coral-collection';
 
 const CLASSNAME = '_coral-PanelStack';
@@ -20,9 +20,9 @@ const CLASSNAME = '_coral-PanelStack';
  @classdesc A PanelStack component holding a collection of panels. It wraps content, keeping only the selected panel in view.
  @htmltag coral-panelstack
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class PanelStack extends ComponentMixin(HTMLElement) {
+class PanelStack extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

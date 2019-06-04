@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
-import TableSectionMixin from './TableSectionMixin';
+import {BaseComponent} from '../../../coral-base-component';
+import BaseTableSection from './BaseTableSection';
 
 const CLASSNAME = '_coral-Table-foot';
 
@@ -21,10 +21,10 @@ const CLASSNAME = '_coral-Table-foot';
  @htmltag coral-table-foot
  @htmlbasetag tfoot
  @extends {HTMLTableSectionElement}
- @extends {ComponentMixin}
- @extends {TableSectionMixin}
+ @extends {BaseComponent}
+ @extends {BaseTableSection}
  */
-class TableFoot extends TableSectionMixin(ComponentMixin(HTMLTableSectionElement)) {
+class TableFoot extends BaseTableSection(BaseComponent(HTMLTableSectionElement)) {
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();

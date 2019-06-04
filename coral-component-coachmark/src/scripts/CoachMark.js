@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import base from '../templates/base';
 import {Overlay} from '../../../coral-component-overlay';
 import PopperJS from 'popper.js';
@@ -56,9 +56,9 @@ const CLASSNAME = '_coral-CoachMarkIndicator';
  @classdesc A coach mark component to highlight UI elements on the page.
  @htmltag coral-coachmark
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class CoachMark extends ComponentMixin(HTMLElement) {
+class CoachMark extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

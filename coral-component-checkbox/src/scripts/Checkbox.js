@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
-import {FormFieldMixin} from '../../../coral-mixin-formfield';
+import {BaseComponent} from '../../../coral-base-component';
+import {BaseFormField} from '../../../coral-base-formfield';
 import {Icon} from '../../../coral-component-icon';
 import base from '../templates/base';
 import {transform, commons} from '../../../coral-utils';
@@ -26,10 +26,10 @@ const CLASSNAME = '_coral-Checkbox';
  @classdesc A Checkbox component to be used as a form field.
  @htmltag coral-checkbox
  @extends {HTMLElement}
- @extends {ComponentMixin}
- @extends {FormFieldMixin}
+ @extends {BaseComponent}
+ @extends {BaseFormField}
  */
-class Checkbox extends FormFieldMixin(ComponentMixin(HTMLElement)) {
+class Checkbox extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -206,7 +206,7 @@ class Checkbox extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   Inherited from {@link ComponentMixin#trackingElement}.
+   Inherited from {@link BaseComponent#trackingElement}.
    */
   get trackingElement() {
     // it uses the name as the first fallback since it is not localized, otherwise it uses the label
@@ -311,14 +311,14 @@ class Checkbox extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   Inherited from {@link FormFieldMixin#clear}.
+   Inherited from {@link BaseFormField#clear}.
    */
   clear() {
     this.checked = false;
   }
   
   /**
-   Inherited from {@link FormFieldMixin#reset}.
+   Inherited from {@link BaseFormField#reset}.
    */
   reset() {
     this.checked = this._initialCheckedState;

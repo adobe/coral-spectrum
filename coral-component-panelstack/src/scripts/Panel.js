@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {transform} from '../../../coral-utils';
 
 const CLASSNAME = '_coral-Panel';
@@ -20,9 +20,9 @@ const CLASSNAME = '_coral-Panel';
  @classdesc A Panel component
  @htmltag coral-panel
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class Panel extends ComponentMixin(HTMLElement) {
+class Panel extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

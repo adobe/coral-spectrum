@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {DragAction} from '../../../coral-dragaction';
 import TableColumn from './TableColumn';
 import TableCell from './TableCell';
@@ -74,9 +74,9 @@ const KEY_SPACE = Keys.keyToCode('space');
  @htmltag coral-table
  @htmlbasetag table
  @extends {HTMLTableElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class Table extends ComponentMixin(HTMLTableElement) {
+class Table extends BaseComponent(HTMLTableElement) {
   /** @ignore */
   constructor() {
     super();

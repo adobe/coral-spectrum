@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 
 const CLASSNAME = '_coral-Tooltip-label';
 
@@ -19,9 +19,9 @@ const CLASSNAME = '_coral-Tooltip-label';
  @classdesc Tooltip's content component
  @htmltag coral-tooltip-content
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class TooltipContent extends ComponentMixin(HTMLElement) {
+class TooltipContent extends BaseComponent(HTMLElement) {
   /** @ignore */
   connectedCallback() {
     this.classList.add(CLASSNAME);

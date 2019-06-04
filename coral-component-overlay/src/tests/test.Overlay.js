@@ -12,7 +12,7 @@
 
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Overlay} from '../../../coral-component-overlay';
-import {mixin} from '../../../coral-utils';
+import {BaseOverlay} from '../../../coral-base-overlay';
 
 describe('Overlay', function() {
   let overlay;
@@ -114,7 +114,7 @@ describe('Overlay', function() {
     
     describe('#focusOnShow', function() {
       it('should default to ON', function() {
-        expect(overlay.focusOnShow).to.equal(mixin._overlay.focusOnShow.ON);
+        expect(overlay.focusOnShow).to.equal(BaseOverlay.focusOnShow.ON);
       });
     });
     
@@ -401,7 +401,7 @@ describe('Overlay', function() {
       });
     });
     
-    // @todo maybe this test should be part of a mixin
+    // @todo maybe this test should be part of a base
     describe('#[coral-close]', function() {
       it('should hide when any element with [coral-close] clicked', function() {
         const el = helpers.build(window.__html__['Overlay.coral-close.html']);

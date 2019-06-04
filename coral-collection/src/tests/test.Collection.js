@@ -11,7 +11,7 @@
  */
 
 import {helpers} from '../../../coral-utils/src/tests/helpers';
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {Collection} from '../../../coral-collection';
 import {transform} from '../../../coral-utils';
 
@@ -28,7 +28,7 @@ describe('Collection', function() {
   };
   
   // test collection container
-  window.customElements.define('coral-collection-test', class extends ComponentMixin(HTMLElement) {
+  window.customElements.define('coral-collection-test', class extends BaseComponent(HTMLElement) {
     constructor() {
       super();
     }
@@ -51,7 +51,7 @@ describe('Collection', function() {
   });
   
   // test nested collection container
-  window.customElements.define('coral-collection-nested-test', class extends ComponentMixin(HTMLElement) {
+  window.customElements.define('coral-collection-nested-test', class extends BaseComponent(HTMLElement) {
     constructor() {
       super();
     }
@@ -79,7 +79,7 @@ describe('Collection', function() {
     }
   });
   
-  window.customElements.define('coral-collection-test-item', class extends ComponentMixin(HTMLElement) {
+  window.customElements.define('coral-collection-test-item', class extends BaseComponent(HTMLElement) {
     constructor() {
       super();
     }
@@ -98,7 +98,7 @@ describe('Collection', function() {
     }
   });
   
-  window.customElements.define('coral-collection-test-button-item', class extends ComponentMixin(HTMLButtonElement) {
+  window.customElements.define('coral-collection-test-button-item', class extends BaseComponent(HTMLButtonElement) {
     constructor() {
       super();
     }

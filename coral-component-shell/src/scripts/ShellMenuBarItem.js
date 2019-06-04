@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {transform, validate} from '../../../coral-utils';
 import '../../../coral-component-icon';
 import '../../../coral-component-button';
@@ -47,9 +47,9 @@ for (const variantValue in iconVariant) {
  @classdesc A Shell MenuBar Item component
  @htmltag coral-shell-menubar-item
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class ShellMenuBarItem extends ComponentMixin(HTMLElement) {
+class ShellMenuBarItem extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

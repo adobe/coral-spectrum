@@ -207,7 +207,7 @@ These dependencies are:
 ### API changes
 
 * `window.CustomElements` is removed, `use window.customElements` instead.
-* `Coral.mixins.*` are not public anymore.
+* `Coral.mixins.*` is removed.
 * `coral-component:attached` is removed.
 * `coral-component:detached` is removed.
 * `alignMy` and `alignAt` are deprecated, use `placement` instead.

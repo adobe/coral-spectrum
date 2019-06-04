@@ -162,7 +162,7 @@ class RangedSlider extends Slider {
   }
   
   /**
-   Inherited from {@link FormFieldMixin#clear}.
+   Inherited from {@link BaseFormField#clear}.
    */
   clear() {
     this.startValue = this.min;
@@ -170,7 +170,7 @@ class RangedSlider extends Slider {
   }
   
   /**
-   Inherited from {@link FormFieldMixin#reset}.
+   Inherited from {@link BaseFormField#reset}.
    */
   reset() {
     // since the 'value' property is not reflected, form components use it to restore the initial value. When a

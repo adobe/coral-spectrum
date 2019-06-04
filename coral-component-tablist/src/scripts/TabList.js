@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {SelectableCollection} from '../../../coral-collection';
 import {transform, validate, commons} from '../../../coral-utils';
 import line from '../templates/line';
@@ -57,9 +57,9 @@ const CLASSNAME = '_coral-Tabs';
  @classdesc A TabList component holds a collection of tabs.
  @htmltag coral-tablist
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class TabList extends ComponentMixin(HTMLElement) {
+class TabList extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

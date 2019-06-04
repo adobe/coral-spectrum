@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
-import {OverlayMixin} from '../../../coral-mixin-overlay';
+import {BaseComponent} from '../../../coral-base-component';
+import {BaseOverlay} from '../../../coral-base-overlay';
 import {DragAction} from '../../../coral-dragaction';
 import {Icon} from '../../../coral-component-icon';
 import '../../../coral-component-button';
@@ -112,10 +112,10 @@ for (const variantValue in variant) {
  @classdesc A Dialog component that supports various use cases with custom content.
  @htmltag coral-dialog
  @extends {HTMLElement}
- @extends {ComponentMixin}
- @extends {OverlayMixin}
+ @extends {BaseComponent}
+ @extends {BaseOverlay}
  */
-class Dialog extends OverlayMixin(ComponentMixin(HTMLElement)) {
+class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -322,7 +322,7 @@ class Dialog extends OverlayMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   Inherited from {@link OverlayMixin#open}.
+   Inherited from {@link BaseOverlay#open}.
    */
   get open() {
     return super.open;
@@ -421,7 +421,7 @@ class Dialog extends OverlayMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   Inherited from {@link ComponentMixin#trackingElement}.
+   Inherited from {@link BaseComponent#trackingElement}.
    */
   get trackingElement() {
     return typeof this._trackingElement === 'undefined' ?
@@ -484,7 +484,7 @@ class Dialog extends OverlayMixin(ComponentMixin(HTMLElement)) {
   
   /**
    @ignore
-   @todo maybe this should be mixin or something
+   @todo maybe this should be base or something
    */
   _handleCloseClick(event) {
     const dismissTarget = event.matchedTarget;

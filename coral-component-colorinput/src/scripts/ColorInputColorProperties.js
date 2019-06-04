@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
-import ColorInputAbstractSubviewMixin from './ColorInputAbstractSubviewMixin';
+import {BaseComponent} from '../../../coral-base-component';
+import BaseColorInputAbstractSubview from './BaseColorInputAbstractSubview';
 import Color from './Color';
 import '../../../coral-component-button';
 import '../../../coral-component-textfield';
@@ -26,10 +26,10 @@ const CLASSNAME = '_coral-ColorInput-colorProperties';
  @classdesc A ColorInput Color properties component
  @htmltag coral-colorinput-colorproperties
  @extends {HTMLElement}
- @extends {ComponentMixin}
- @extends {ColorInputAbstractSubviewMixin}
+ @extends {BaseComponent}
+ @extends {BaseColorInputAbstractSubview}
  */
-class ColorInputColorProperties extends ColorInputAbstractSubviewMixin(ComponentMixin(HTMLElement)) {
+class ColorInputColorProperties extends BaseColorInputAbstractSubview(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();

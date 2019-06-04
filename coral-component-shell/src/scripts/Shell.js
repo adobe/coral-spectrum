@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 
 const CLASSNAME = '_coral-Shell';
 
@@ -20,9 +20,9 @@ const CLASSNAME = '_coral-Shell';
  integrate all Shell sub components.
  @htmltag coral-shell
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class Shell extends ComponentMixin(HTMLElement) {
+class Shell extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

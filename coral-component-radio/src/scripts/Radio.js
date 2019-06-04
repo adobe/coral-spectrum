@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
-import {FormFieldMixin} from '../../../coral-mixin-formfield';
+import {BaseComponent} from '../../../coral-base-component';
+import {BaseFormField} from '../../../coral-base-formfield';
 import base from '../templates/base';
 import {transform, commons} from '../../../coral-utils';
 
@@ -22,10 +22,10 @@ const CLASSNAME = '_coral-Radio';
  @classdesc A Radio component to be used as a form field.
  @htmltag coral-radio
  @extends {HTMLElement}
- @extends {ComponentMixin}
- @extends {FormFieldMixin}
+ @extends {BaseComponent}
+ @extends {BaseFormField}
  */
-class Radio extends FormFieldMixin(ComponentMixin(HTMLElement)) {
+class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -185,7 +185,7 @@ class Radio extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   Inherited from {@link ComponentMixin#trackingElement}.
+   Inherited from {@link BaseComponent#trackingElement}.
    */
   get trackingElement() {
     // it uses the name as the first fallback since it is not localized, otherwise it uses the label
@@ -279,14 +279,14 @@ class Radio extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   Inherited from {@link FormFieldMixin#clear}.
+   Inherited from {@link BaseFormField#clear}.
    */
   clear() {
     this.checked = false;
   }
   
   /**
-   Inherited from {@link FormFieldMixin#reset}.
+   Inherited from {@link BaseFormField#reset}.
    */
   reset() {
     this.checked = this._initialCheckedState;

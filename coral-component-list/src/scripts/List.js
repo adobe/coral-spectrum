@@ -10,18 +10,18 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
-import {ListMixin} from '../../../coral-mixin-list';
+import {BaseComponent} from '../../../coral-base-component';
+import {BaseList} from '../../../coral-base-list';
 
 /**
  @class Coral.List
  @classdesc A List component that supports multi-line text, icons, and text wrapping with ellipsis.
  @htmltag coral-list
  @extends {HTMLElement}
- @extends {ComponentMixin}
- @extends {ListMixin}
+ @extends {BaseComponent}
+ @extends {BaseList}
  */
-class List extends ListMixin(ComponentMixin(HTMLElement)) {
+class List extends BaseList(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();

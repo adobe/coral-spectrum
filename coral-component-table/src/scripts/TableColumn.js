@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {alignment} from './TableUtil';
 import {transform, validate} from '../../../coral-utils';
 
@@ -61,9 +61,9 @@ const sortableType = {
  @htmltag coral-table-column
  @htmlbasetag col
  @extends {HTMLTableColElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class TableColumn extends ComponentMixin(HTMLTableColElement) {
+class TableColumn extends BaseComponent(HTMLTableColElement) {
   /**
    The column cells alignment. The alignment should take the {@link i18n} configuration into account.
    

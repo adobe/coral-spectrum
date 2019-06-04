@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import ColumnViewCollection from './ColumnViewCollection';
 import selectionMode from './selectionMode';
 import {transform, validate} from '../../../coral-utils';
@@ -34,9 +34,9 @@ window.addEventListener('load', () => {
  @classdesc A ColumnView Column component
  @htmltag coral-columnview-column
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class ColumnViewColumn extends ComponentMixin(HTMLElement) {
+class ColumnViewColumn extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {DragAction} from '../../../coral-dragaction';
 import '../../../coral-component-checkbox';
 import quickactions from '../templates/quickactions';
@@ -23,9 +23,9 @@ const CLASSNAME = '_coral-Masonry-item';
  @classdesc A Masonry Item component
  @htmltag coral-masonry-item
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class MasonryItem extends ComponentMixin(HTMLElement) {
+class MasonryItem extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

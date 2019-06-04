@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import '../../../coral-component-icon';
 import icon from '../templates/icon';
 
@@ -21,9 +21,9 @@ const CLASSNAME = '_coral-Card-property';
  @classdesc A Card property component
  @htmltag coral-card-property
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class CardProperty extends ComponentMixin(HTMLElement) {
+class CardProperty extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

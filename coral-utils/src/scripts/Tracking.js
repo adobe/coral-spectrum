@@ -49,7 +49,7 @@ class Tracking {
   /**
    Get tracking annotations from the parent Component to which the event was bound.
    
-   @param {ComponentMixin} component
+   @param {BaseComponent} component
    @returns {{trackingElement: String, trackingElement: String}}
    */
   _getTrackingDataFromComponentAttr(component) {
@@ -75,8 +75,8 @@ class Tracking {
    @param {String} eventType
    @param {String} targetType
    @param {CustomEvent} event
-   @param {ComponentMixin} component
-   @param {ComponentMixin} childComponent
+   @param {BaseComponent} component
+   @param {BaseComponent} childComponent
    @returns {Object} An object with the tracking data.
    */
   _createTrackingData(eventType, targetType, event, component, childComponent) {
@@ -136,8 +136,8 @@ class Tracking {
    @param {String} targetType
    Eg. cycle button, cycle button item, etc.
    @param {CustomEvent} event
-   @param {ComponentMixin} component
-   @param {ComponentMixin} childComponent
+   @param {BaseComponent} component
+   @param {BaseComponent} childComponent
    Optional, in case the event occurred on a child component.
    @returns {Boolean} if the event was dispatch to at least 1 tracker.
    */

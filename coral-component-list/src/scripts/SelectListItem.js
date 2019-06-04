@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {transform} from '../../../coral-utils';
 import {Icon} from '../../../coral-component-icon';
 import checkIcon from '../templates/checkIcon';
@@ -22,9 +22,9 @@ const CLASSNAME = '_coral-Menu-item';
  @classdesc A SelectList item component
  @htmltag coral-selectlist-item
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class SelectListItem extends ComponentMixin(HTMLElement) {
+class SelectListItem extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

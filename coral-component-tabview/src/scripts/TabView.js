@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import '../../../coral-component-panelstack';
 import '../../../coral-component-tablist';
 import {commons} from '../../../coral-utils';
@@ -40,9 +40,9 @@ const CLASSNAME = '_coral-TabView';
  This is intended to be used with a {@link TabList} and {@link PanelStack}.
  @htmltag coral-tabview
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class TabView extends ComponentMixin(HTMLElement) {
+class TabView extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

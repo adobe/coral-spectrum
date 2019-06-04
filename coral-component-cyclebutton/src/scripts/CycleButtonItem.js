@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {transform, validate} from '../../../coral-utils';
 
 /**
@@ -39,9 +39,9 @@ const displayMode = {
  @classdesc A CycleButton Item component
  @htmltag coral-cyclebutton-item
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class CycleButtonItem extends ComponentMixin(HTMLElement) {
+class CycleButtonItem extends BaseComponent(HTMLElement) {
   /**
    The Item's icon. See {@link Coral.Icon} for valid icon names.
    
@@ -150,7 +150,7 @@ class CycleButtonItem extends ComponentMixin(HTMLElement) {
   }
   
   /**
-   Inherited from {@link ComponentMixin#trackingElement}.
+   Inherited from {@link BaseComponent#trackingElement}.
    */
   get trackingElement() {
     return typeof this._trackingElement === 'undefined' ?

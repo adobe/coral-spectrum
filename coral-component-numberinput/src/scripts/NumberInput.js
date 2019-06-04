@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
-import {FormFieldMixin} from '../../../coral-mixin-formfield';
+import {BaseComponent} from '../../../coral-base-component';
+import {BaseFormField} from '../../../coral-base-formfield';
 import '../../../coral-component-button';
 import '../../../coral-component-textfield';
 import {Icon} from '../../../coral-component-icon';
@@ -57,10 +57,10 @@ function handleDecimalOperation(operator, value1, value2) {
  <code>right</code>, <code>pageup</code>, <code>pagedown</code>, <code>home</code>, <code>end</code> and the Mouse Wheel.
  @htmltag coral-numberinput
  @extends {HTMLElement}
- @extends {ComponentMixin}
- @extends {FormFieldMixin}
+ @extends {BaseComponent}
+ @extends {BaseFormField}
  */
-class NumberInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
+class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -331,7 +331,7 @@ class NumberInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   Inherited from {@link FormFieldMixin#invalid}.
+   Inherited from {@link BaseFormField#invalid}.
    */
   get invalid() {
     return super.invalid;
@@ -342,7 +342,7 @@ class NumberInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   Inherited from {@link FormFieldMixin#labelledBy}.
+   Inherited from {@link BaseFormField#labelledBy}.
    */
   get labelledBy() {
     return super.labelledBy;
@@ -371,13 +371,13 @@ class NumberInput extends FormFieldMixin(ComponentMixin(HTMLElement)) {
     this._elements.input.placeholder = value;
   }
   
-  // overrides the behavior from mixin-formfield
+  // overrides the behavior from BaseFormField
   reset() {
     // since there is an internal value, this one handles the reset
     this._elements.input.reset();
   }
   
-  // overrides the behavior from mixin-formfield
+  // overrides the behavior from BaseFormField
   clear() {
     // since there is an internal value, this one handles the clear
     this._elements.input.clear();

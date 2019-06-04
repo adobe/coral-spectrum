@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import '../../../coral-component-button';
 import item from '../templates/item';
 import {DragAction} from '../../../coral-dragaction';
@@ -23,9 +23,9 @@ const CLASSNAME = '_coral-Multifield-item';
  added items will always be rendered based on the template.
  @htmltag coral-multifield-item
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class MultifieldItem extends ComponentMixin(HTMLElement) {
+class MultifieldItem extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

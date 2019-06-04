@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {SelectableCollection} from '../../../coral-collection';
 import {transform, validate, commons} from '../../../coral-utils';
 import getTarget from './getTarget';
@@ -55,9 +55,9 @@ const CLASSNAME = '_coral-Steplist';
  @classdesc A StepList component that holds a collection of steps.
  @htmltag coral-steplist
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class StepList extends ComponentMixin(HTMLElement) {
+class StepList extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

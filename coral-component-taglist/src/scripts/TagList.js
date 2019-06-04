@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
-import {FormFieldMixin} from '../../../coral-mixin-formfield';
+import {BaseComponent} from '../../../coral-base-component';
+import {BaseFormField} from '../../../coral-base-formfield';
 import Tag from './Tag';
 import {Collection} from '../../../coral-collection';
 import {transform, commons} from '../../../coral-utils';
@@ -38,10 +38,10 @@ const itemValueFromDOM = function(item) {
  @classdesc A TagList component is a form field container to manipulate tags.
  @htmltag coral-taglist
  @extends {HTMLElement}
- @extends {ComponentMixin}
- @extends {FormFieldMixin}
+ @extends {BaseComponent}
+ @extends {BaseFormField}
  */
-class TagList extends FormFieldMixin(ComponentMixin(HTMLElement)) {
+class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -471,7 +471,7 @@ class TagList extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   Inherited from {@link FormFieldMixin#reset}.
+   Inherited from {@link BaseFormField#reset}.
    */
   reset() {
     // reset the values to the initial values

@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {transform} from '../../../coral-utils';
 
 /**
@@ -18,9 +18,9 @@ import {transform} from '../../../coral-utils';
  @classdesc The Autocomplete Item
  @htmltag coral-autocomplete-item
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class AutocompleteItem extends ComponentMixin(HTMLElement) {
+class AutocompleteItem extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

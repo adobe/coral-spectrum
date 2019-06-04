@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
-import {FormFieldMixin} from '../../../coral-mixin-formfield';
+import {BaseComponent} from '../../../coral-base-component';
+import {BaseFormField} from '../../../coral-base-formfield';
 import base from '../templates/base';
 import {transform, commons} from '../../../coral-utils';
 
@@ -22,10 +22,10 @@ const CLASSNAME = '_coral-ToggleSwitch';
  @classdesc A Switch component is a toggle form field similar to a Checkbox component.
  @htmltag coral-switch
  @extends {HTMLElement}
- @extends {ComponentMixin}
- @extends {FormFieldMixin}
+ @extends {BaseComponent}
+ @extends {BaseFormField}
  */
-class Switch extends FormFieldMixin(ComponentMixin(HTMLElement)) {
+class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -222,14 +222,14 @@ class Switch extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   get _contentZones() { return {'coral-switch-label': 'label'}; }
   
   /**
-   Inherited from {@link FormFieldMixin#clear}.
+   Inherited from {@link BaseFormField#clear}.
    */
   clear() {
     this.checked = false;
   }
   
   /**
-   Inherited from {@link FormFieldMixin#reset}.
+   Inherited from {@link BaseFormField#reset}.
    */
   reset() {
     this.checked = this._initialCheckedState;

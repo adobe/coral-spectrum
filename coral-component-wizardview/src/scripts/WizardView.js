@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {Collection} from '../../../coral-collection';
 import '../../../coral-component-steplist';
 import '../../../coral-component-panelstack';
@@ -24,9 +24,9 @@ const CLASSNAME = '_coral-WizardView';
  to be used with a {@link StepList} and a {@link PanelStack}.
  @htmltag coral-wizardview
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class WizardView extends ComponentMixin(HTMLElement) {
+class WizardView extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {transform} from '../../../coral-utils';
 
 /**
@@ -18,9 +18,9 @@ import {transform} from '../../../coral-utils';
  @classdesc A Select item component
  @htmltag coral-select-item
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class SelectItem extends ComponentMixin(HTMLElement) {
+class SelectItem extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -106,7 +106,7 @@ class SelectItem extends ComponentMixin(HTMLElement) {
   }
   
   /**
-   Inherited from {@link ComponentMixin#trackingElement}.
+   Inherited from {@link BaseComponent#trackingElement}.
    */
   get trackingElement() {
     return typeof this._trackingElement === 'undefined' ?

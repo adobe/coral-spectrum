@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import '../../../coral-component-button';
 import base from '../templates/base';
 import {commons, transform, validate} from '../../../coral-utils';
@@ -44,9 +44,9 @@ for (const directionValue in direction) {
  @classdesc A Drawer component to display content that can be opened and closed with a sliding animation.
  @htmltag coral-drawer
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class Drawer extends ComponentMixin(HTMLElement) {
+class Drawer extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

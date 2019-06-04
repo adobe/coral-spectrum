@@ -11,12 +11,12 @@
  */
 
 import {helpers} from '../../../coral-utils/src/tests/helpers';
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {SelectableCollection} from '../../../coral-collection';
 
 describe('SelectableCollection', function() {
   // test collection container
-  window.customElements.define('coral-selectablecollection-container', class extends ComponentMixin(HTMLElement) {
+  window.customElements.define('coral-selectablecollection-container', class extends BaseComponent(HTMLElement) {
     constructor() {
       super();
     }
@@ -34,7 +34,7 @@ describe('SelectableCollection', function() {
     }
   });
   
-  window.customElements.define('coral-selectablecollection-item', class extends ComponentMixin(HTMLElement) {
+  window.customElements.define('coral-selectablecollection-item', class extends BaseComponent(HTMLElement) {
     constructor() {
       super();
     }

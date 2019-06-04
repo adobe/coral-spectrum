@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
-import {FormFieldMixin} from '../../../coral-mixin-formfield';
+import {BaseComponent} from '../../../coral-base-component';
+import {BaseFormField} from '../../../coral-base-formfield';
 import {transform, validate, commons} from '../../../coral-utils';
 
 const CLASSNAME = '_coral-Textfield';
@@ -44,10 +44,10 @@ for (const variantValue in variant) {
  @htmltag coral-textarea
  @htmlbasetag textarea
  @extends {HTMLTextAreaElement}
- @extends {ComponentMixin}
- @extends {FormFieldMixin}
+ @extends {BaseComponent}
+ @extends {BaseFormField}
  */
-class Textarea extends FormFieldMixin(ComponentMixin(HTMLTextAreaElement)) {
+class Textarea extends BaseFormField(BaseComponent(HTMLTextAreaElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -93,7 +93,7 @@ class Textarea extends FormFieldMixin(ComponentMixin(HTMLTextAreaElement)) {
   }
   
   /**
-   Inherited from {@link FormFieldMixin#reset}.
+   Inherited from {@link BaseFormField#reset}.
    */
   reset() {
     // the textarea uses the textContent to save the old value and not the value attribute

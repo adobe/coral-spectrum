@@ -11,8 +11,8 @@
  */
 
 import {commons} from '../../../coral-utils';
-import {ComponentMixin} from '../../../coral-mixin-component';
-import {ListMixin} from '../../../coral-mixin-list';
+import {BaseComponent} from '../../../coral-base-component';
+import {BaseList} from '../../../coral-base-list';
 
 const CLASSNAME = '_coral-ButtonList';
 
@@ -21,10 +21,10 @@ const CLASSNAME = '_coral-ButtonList';
  @classdesc A ButtonList component that supports multi-line text, icons, and text wrapping with ellipsis.
  @htmltag coral-buttonlist
  @extends {HTMLElement}
- @extends {ComponentMixin}
- @extends {ListMixin}
+ @extends {BaseComponent}
+ @extends {BaseList}
  */
-class ButtonList extends ListMixin(ComponentMixin(HTMLElement)) {
+class ButtonList extends BaseList(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();

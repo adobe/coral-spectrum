@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 
 const CLASSNAME = '_coral-Table-headerCell';
 
@@ -20,9 +20,9 @@ const CLASSNAME = '_coral-Table-headerCell';
  @htmltag coral-table-headercell
  @htmlbasetag th
  @extends {HTMLTableCellElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class TableHeaderCell extends ComponentMixin(HTMLTableCellElement) {
+class TableHeaderCell extends BaseComponent(HTMLTableCellElement) {
   /** @ignore */
   constructor() {
     super();

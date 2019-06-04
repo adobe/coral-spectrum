@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {Collection} from '../../../coral-collection';
 
 const CLASSNAME = '_coral-Shell-menubar';
@@ -20,9 +20,9 @@ const CLASSNAME = '_coral-Shell-menubar';
  @classdesc A Shell MenuBar component
  @htmltag coral-shell-menubar
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class ShellMenuBar extends ComponentMixin(HTMLElement) {
+class ShellMenuBar extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

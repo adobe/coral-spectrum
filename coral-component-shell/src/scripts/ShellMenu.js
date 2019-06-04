@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
-import {OverlayMixin} from '../../../coral-mixin-overlay';
+import {BaseComponent} from '../../../coral-base-component';
+import {BaseOverlay} from '../../../coral-base-overlay';
 import {transform, validate} from '../../../coral-utils';
 
 const CLASSNAME = '_coral-Shell-menu';
@@ -61,10 +61,10 @@ for (const fromValue in from) {
  @classdesc A Shell Menu component
  @htmltag coral-shell-menu
  @extends {HTMLElement}
- @extends {ComponentMixin}
- @extends {OverlayMixin}
+ @extends {BaseComponent}
+ @extends {BaseOverlay}
  */
-class ShellMenu extends OverlayMixin(ComponentMixin(HTMLElement)) {
+class ShellMenu extends BaseOverlay(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -157,7 +157,7 @@ class ShellMenu extends OverlayMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   Inherited from {@link OverlayMixin#open}.
+   Inherited from {@link BaseOverlay#open}.
    */
   get open() {
     return super.open;
@@ -180,7 +180,7 @@ class ShellMenu extends OverlayMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   @todo this is duplicated between ovelay components, maybe this should be in a mixin
+   @todo this is duplicated between ovelay components, maybe this should be in a base
    
    @ignore
    */

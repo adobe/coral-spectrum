@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 
 const CLASSNAMES = ['coral-Rule', 'coral-Rule--subsection2'];
 
@@ -19,9 +19,9 @@ const CLASSNAMES = ['coral-Rule', 'coral-Rule--subsection2'];
  @classdesc The Popover separator
  @htmltag coral-popover-separator
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class PopoverSeparator extends ComponentMixin(HTMLElement) {
+class PopoverSeparator extends BaseComponent(HTMLElement) {
   /** @ignore */
   connectedCallback() {
     this.classList.add(...CLASSNAMES);

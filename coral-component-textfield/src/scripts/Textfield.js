@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
-import {FormFieldMixin} from '../../../coral-mixin-formfield';
+import {BaseComponent} from '../../../coral-base-component';
+import {BaseFormField} from '../../../coral-base-formfield';
 import {transform, validate} from '../../../coral-utils';
 
 /**
@@ -45,10 +45,10 @@ for (const variantValue in variant) {
  @htmltag coral-textfield
  @htmlbasetag input
  @extends {HTMLInputElement}
- @extends {ComponentMixin}
- @extends {FormFieldMixin}
+ @extends {BaseComponent}
+ @extends {BaseFormField}
  */
-class Textfield extends FormFieldMixin(ComponentMixin(HTMLInputElement)) {
+class Textfield extends BaseFormField(BaseComponent(HTMLInputElement)) {
   /** @ignore */
   constructor() {
     super();

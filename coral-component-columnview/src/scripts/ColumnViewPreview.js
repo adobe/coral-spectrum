@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 
 const CLASSNAME = '_coral-MillerColumns-item';
 
@@ -19,9 +19,9 @@ const CLASSNAME = '_coral-MillerColumns-item';
  @classdesc A ColumnView Preview component
  @htmltag coral-columnview-preview
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class ColumnViewPreview extends ComponentMixin(HTMLElement) {
+class ColumnViewPreview extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

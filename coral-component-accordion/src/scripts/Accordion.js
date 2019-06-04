@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {SelectableCollection} from '../../../coral-collection';
 import {transform, validate, Keys} from '../../../coral-utils';
 
@@ -46,9 +46,9 @@ const CLASSNAME = '_coral-Accordion';
  @classdesc An Accordion component consisting of multiple collapsible items.
  @htmltag coral-accordion
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class Accordion extends ComponentMixin(HTMLElement) {
+class Accordion extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

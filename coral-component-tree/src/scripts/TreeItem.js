@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {Collection} from '../../../coral-collection';
 import {Icon} from '../../../coral-component-icon';
 import treeItem from '../templates/treeItem';
@@ -46,9 +46,9 @@ for (const variantValue in variant) {
  @classdesc A Tree item component
  @htmltag coral-tree-item
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class TreeItem extends ComponentMixin(HTMLElement) {
+class TreeItem extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

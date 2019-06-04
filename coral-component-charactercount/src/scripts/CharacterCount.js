@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {transform} from '../../../coral-utils';
 
 const CLASSNAME = '_coral-CharacterCount';
@@ -35,9 +35,9 @@ const target = {
  @classdesc A CharacterCount component that indicates the remaining characters in a Textfield or Textarea.
  @htmltag coral-charactercount
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class CharacterCount extends ComponentMixin(HTMLElement) {
+class CharacterCount extends BaseComponent(HTMLElement) {
   /**
    The target Textfield or Textarea for this component. It accepts values from {@link CharacterCountTargetEnum},
    as well as any DOM element or CSS selector.

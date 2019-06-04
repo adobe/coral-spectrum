@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 
 const CLASSNAME = '_coral-Dialog-content';
 
@@ -19,9 +19,9 @@ const CLASSNAME = '_coral-Dialog-content';
  @classdesc The Dialog default content
  @htmltag coral-dialog-content
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class DialogContent extends ComponentMixin(HTMLElement) {
+class DialogContent extends BaseComponent(HTMLElement) {
   /** @ignore */
   connectedCallback() {
     this.classList.add(CLASSNAME);

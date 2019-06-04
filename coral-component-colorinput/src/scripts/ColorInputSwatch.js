@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
-import ColorInputAbstractSubviewMixin from './ColorInputAbstractSubviewMixin';
+import {BaseComponent} from '../../../coral-base-component';
+import BaseColorInputAbstractSubview from './BaseColorInputAbstractSubview';
 import Color from './Color';
 import '../../../coral-component-button';
 import colorButton from '../templates/colorButton';
@@ -24,10 +24,10 @@ const CLASSNAME = '_coral-ColorInput-swatch';
  @classdesc A ColorInput Swatch component
  @htmltag coral-colorinput-swatch
  @extends {HTMLElement}
- @extends {ComponentMixin}
- @extends {ColorInputAbstractSubviewMixin}
+ @extends {BaseComponent}
+ @extends {BaseColorInputAbstractSubview}
  */
-class ColorInputSwatch extends ColorInputAbstractSubviewMixin(ComponentMixin(HTMLElement)) {
+class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();

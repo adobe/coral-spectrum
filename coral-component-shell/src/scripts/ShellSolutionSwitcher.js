@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {Collection} from '../../../coral-collection';
 import solutionSwitcher from '../templates/solutionSwitcher';
 
@@ -21,9 +21,9 @@ const CLASSNAME = '_coral-Shell-solutionSwitcher';
  @classdesc A Shell Solution Switcher component
  @htmltag coral-shell-solutionswitcher
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class ShellSolutionSwitcher extends ComponentMixin(HTMLElement) {
+class ShellSolutionSwitcher extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

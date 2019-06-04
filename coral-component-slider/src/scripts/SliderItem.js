@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 
 import {transform} from '../../../coral-utils';
 
@@ -21,9 +21,9 @@ const CLASSNAME = '_coral-Slider-item';
  @classdesc The Slider item
  @htmltag coral-slider-item
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class SliderItem extends ComponentMixin(HTMLElement) {
+class SliderItem extends BaseComponent(HTMLElement) {
   /**
    The slider's item value.
    This should contain a number formatted as a string (e.g.: "10") or an empty string.

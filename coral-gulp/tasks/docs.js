@@ -21,9 +21,9 @@ module.exports = function(gulp) {
   const root = util.getRoot();
   const regExp = /.*class extends superClass {/g;
   
-  gulp.task('rename-mixins', function() {
+  gulp.task('rename-base', function() {
     // @todo due to https://github.com/esdoc/esdoc/issues/455, use class def
-    return gulp.src(['src/scripts/*Mixin.js', 'coral-*/src/scripts/*Mixin.js'])
+    return gulp.src(['src/scripts/Base*.js', 'coral-*/src/scripts/Base*.js'])
       .pipe(plumb())
       .pipe(modifyFile((content, path) => {
         const className = path.split('/').pop().slice(0, -3);
@@ -53,9 +53,9 @@ module.exports = function(gulp) {
     p.stdout.pipe(process.stdout);
   });
   
-  gulp.task('revert-rename-mixins', function() {
+  gulp.task('revert-rename-base', function() {
     // @todo due to https://github.com/esdoc/esdoc/issues/455, revert class def
-    return gulp.src(['src/scripts/*Mixin.js', 'coral-*/src/scripts/*Mixin.js'])
+    return gulp.src(['src/scripts/Base*.js', 'coral-*/src/scripts/Base*.js'])
       .pipe(plumb())
       .pipe(modifyFile((content, path) => {
         const className = path.split('/').pop().slice(0, -3);
@@ -69,10 +69,10 @@ module.exports = function(gulp) {
   // @todo due to https://github.com/nanopx/gulp-esdoc/issues/19, we can't use gulp-esdoc
   gulp.task('docs',
     gulp.series(
-      'rename-mixins',
+      'rename-base',
       'create-readme',
       'esdoc',
-      'revert-rename-mixins'
+      'revert-rename-base'
     )
   );
 };

@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {SelectableCollection} from '../../../coral-collection';
 import '../../../coral-component-wait';
 import loadIndicator from '../templates/loadIndicator';
@@ -49,9 +49,9 @@ const CLASSNAME = '_coral-Menu';
  @classdesc A SelectList component is a selectable list of items.
  @htmltag coral-selectlist
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class SelectList extends ComponentMixin(HTMLElement) {
+class SelectList extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

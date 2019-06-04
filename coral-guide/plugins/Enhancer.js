@@ -41,7 +41,7 @@ class Enhancer {
             doc.see.push('../examples/' + doc.memberof.split('/')[1] + '.html');
           }
           
-          if (item.tagName === '@mixin') {
+          if (item.tagName === '@base') {
             doc.importStyle = '';
           }
           

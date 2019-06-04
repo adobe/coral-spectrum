@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import user from '../templates/user';
 
 const CLASSNAME = '_coral-Shell-user';
@@ -32,9 +32,9 @@ const avatar = {
  @classdesc A Shell User component
  @htmltag coral-shell-user
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class ShellUser extends ComponentMixin(HTMLElement) {
+class ShellUser extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

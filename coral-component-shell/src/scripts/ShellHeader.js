@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 
 const CLASSNAME = '_coral-Shell-header';
 
@@ -19,9 +19,9 @@ const CLASSNAME = '_coral-Shell-header';
  @classdesc A Shell Header component
  @htmltag coral-shell-header
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class ShellHeader extends ComponentMixin(HTMLElement) {
+class ShellHeader extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

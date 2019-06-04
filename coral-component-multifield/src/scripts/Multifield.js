@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import MultifieldCollection from './MultifieldCollection';
 import '../../../coral-component-textfield';
 import {commons} from '../../../coral-utils';
@@ -30,9 +30,9 @@ const TEMPLATE_SUPPORT = 'content' in document.createElement('template');
  - <code>[coral-multifield-add]</code>. Click to add an item.
  @htmltag coral-multifield
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class Multifield extends ComponentMixin(HTMLElement) {
+class Multifield extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

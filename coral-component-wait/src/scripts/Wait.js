@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {transform, validate} from '../../../coral-utils';
 import base from '../templates/base';
 
@@ -56,9 +56,9 @@ const CLASSNAME = '_coral-CircleLoader';
  When the time is known, {@link Progress} should be used instead.
  @htmltag coral-wait
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class Wait extends ComponentMixin(HTMLElement) {
+class Wait extends BaseComponent(HTMLElement) {
   constructor() {
     super();
   

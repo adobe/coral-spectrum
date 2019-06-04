@@ -11,8 +11,8 @@
  */
 
 import {commons} from '../../../coral-utils';
-import {ComponentMixin} from '../../../coral-mixin-component';
-import {ListMixin} from '../../../coral-mixin-list';
+import {BaseComponent} from '../../../coral-base-component';
+import {BaseList} from '../../../coral-base-list';
 
 const CLASSNAME = '_coral-AnchorList';
 
@@ -21,10 +21,10 @@ const CLASSNAME = '_coral-AnchorList';
  @classdesc An AnchorList component that supports multi-line text, icons, and text wrapping with ellipsis.
  @htmltag coral-anchorlist
  @extends {HTMLElement}
- @extends {ComponentMixin}
- @extends {ListMixin}
+ @extends {BaseComponent}
+ @extends {BaseList}
  */
-class AnchorList extends ListMixin(ComponentMixin(HTMLElement)) {
+class AnchorList extends BaseList(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();

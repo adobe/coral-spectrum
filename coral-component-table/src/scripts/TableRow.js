@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {SelectableCollection} from '../../../coral-collection';
 import {transform} from '../../../coral-utils';
 
@@ -22,9 +22,9 @@ const CLASSNAME = '_coral-Table-row';
  @htmltag coral-table-row
  @htmlbasetag tr
  @extends {HTMLTableRowElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class TableRow extends ComponentMixin(HTMLTableRowElement) {
+class TableRow extends BaseComponent(HTMLTableRowElement) {
   /** @ignore */
   constructor() {
     super();

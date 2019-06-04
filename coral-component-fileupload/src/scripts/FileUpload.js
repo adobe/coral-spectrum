@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
-import {FormFieldMixin} from '../../../coral-mixin-formfield';
+import {BaseComponent} from '../../../coral-base-component';
+import {BaseFormField} from '../../../coral-base-formfield';
 import FileUploadItem from './FileUploadItem';
 import base from '../templates/base';
 import {transform, commons, validate} from '../../../coral-utils';
@@ -53,10 +53,10 @@ const method = {
  
  @htmltag coral-fileupload
  @extends {HTMLElement}
- @extends {ComponentMixin}
- @extends {FormFieldMixin}
+ @extends {BaseComponent}
+ @extends {BaseFormField}
  */
-class FileUpload extends FormFieldMixin(ComponentMixin(HTMLElement)) {
+class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -167,7 +167,7 @@ class FileUpload extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   Inherited from {@link FormFieldMixin#invalid}.
+   Inherited from {@link BaseFormField#invalid}.
    */
   get invalid() {
     return super.invalid;
@@ -245,7 +245,7 @@ class FileUpload extends FormFieldMixin(ComponentMixin(HTMLElement)) {
   }
   
   /**
-   Inherited from {@link FormFieldMixin#labelledBy}.
+   Inherited from {@link BaseFormField#labelledBy}.
    */
   get labelledBy() {
     return super.labelledBy;

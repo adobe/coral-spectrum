@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import {Icon} from '../../../coral-component-icon';
 import {Checkbox} from '../../../coral-component-checkbox';
 import {transform, validate} from '../../../coral-utils';
@@ -37,9 +37,9 @@ const variant = {
  @classdesc A ColumnView Item component
  @htmltag coral-columnview-item
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class ColumnViewItem extends ComponentMixin(HTMLElement) {
+class ColumnViewItem extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();

@@ -11,8 +11,8 @@
  */
 
 import {commons} from '../../../coral-utils';
-import {ComponentMixin} from '../../../coral-mixin-component';
-import ActionBarContainerMixin from './ActionBarContainerMixin';
+import {BaseComponent} from '../../../coral-base-component';
+import BaseActionBarContainer from './BaseActionBarContainer';
 import '../../../coral-component-list';
 
 const CLASSNAME = '_coral-ActionBar-container';
@@ -40,11 +40,11 @@ const position = {
  @classdesc An ActionBar container component
  @htmltag coral-actionbar-container
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  
  @deprecated
  */
-class ActionBarContainer extends ActionBarContainerMixin(ComponentMixin(HTMLElement)) {
+class ActionBarContainer extends BaseActionBarContainer(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();

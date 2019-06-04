@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
+import {BaseComponent} from '../../../coral-base-component';
 import Color from './Color';
 import {transform} from '../../../coral-utils';
 
@@ -19,9 +19,9 @@ import {transform} from '../../../coral-utils';
  @classdesc A ColorInput Item component
  @htmltag coral-colorinput-item
  @extends {HTMLElement}
- @extends {ComponentMixin}
+ @extends {BaseComponent}
  */
-class ColorInputItem extends ComponentMixin(HTMLElement) {
+class ColorInputItem extends BaseComponent(HTMLElement) {
   /**
    The value of the color. This value can be set in different formats (HEX, RGB, RGBA, HSB, HSL, HSLA and CMYK).
    Corrects a hex value, if it is represented by 3 or 6 characters with or without '#'.

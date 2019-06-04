@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
-import TableSectionMixin from './TableSectionMixin';
+import {BaseComponent} from '../../../coral-base-component';
+import BaseTableSection from './BaseTableSection';
 import {getRows} from './TableUtil';
 
 const CLASSNAME = '_coral-Table-body';
@@ -22,10 +22,10 @@ const CLASSNAME = '_coral-Table-body';
  @htmltag coral-table-body
  @htmlbasetag tbody
  @extends {HTMLTableSectionElement}
- @extends {ComponentMixin}
- @extends {TableSectionMixin}
+ @extends {BaseComponent}
+ @extends {BaseTableSection}
  */
-class TableBody extends TableSectionMixin(ComponentMixin(HTMLTableSectionElement)) {
+class TableBody extends BaseTableSection(BaseComponent(HTMLTableSectionElement)) {
   /** @ignore */
   constructor() {
     super();

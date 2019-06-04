@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMixin} from '../../../coral-mixin-component';
-import {ButtonMixin} from '../../../coral-mixin-button';
+import {BaseComponent} from '../../../coral-base-component';
+import {BaseButton} from '../../../coral-base-button';
 import {transform, commons} from '../../../coral-utils';
 
 // Key code
@@ -26,10 +26,10 @@ const SPACE = 32;
  @htmltag coral-anchorbutton
  @htmlbasetag a
  @extends {HTMLAnchorElement}
- @extends {ComponentMixin}
- @extends {ButtonMixin}
+ @extends {BaseComponent}
+ @extends {BaseButton}
  */
-class AnchorButton extends ButtonMixin(ComponentMixin(HTMLAnchorElement)) {
+class AnchorButton extends BaseButton(BaseComponent(HTMLAnchorElement)) {
   /** @ignore */
   constructor() {
     super();

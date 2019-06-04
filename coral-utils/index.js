@@ -23,20 +23,12 @@ import transform from './src/scripts/Transformation';
 import validate from './src/scripts/Validation';
 import tracking from './src/scripts/Tracking';
 
-/**
-  @private
- 
-  Utility that holds all mixins.
- */
-const mixin = {};
-
 export {
   commons,
   events,
   i18n,
   keys,
   Keys,
-  mixin,
   strings,
   transform,
   validate,
