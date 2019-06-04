@@ -7418,7 +7418,7 @@ var Coral = (function (exports) {
       /**
        Get tracking annotations from the parent Component to which the event was bound.
        
-       @param {ComponentMixin} component
+       @param {BaseComponent} component
        @returns {{trackingElement: String, trackingElement: String}}
        */
 
@@ -7447,8 +7447,8 @@ var Coral = (function (exports) {
        @param {String} eventType
        @param {String} targetType
        @param {CustomEvent} event
-       @param {ComponentMixin} component
-       @param {ComponentMixin} childComponent
+       @param {BaseComponent} component
+       @param {BaseComponent} childComponent
        @returns {Object} An object with the tracking data.
        */
 
@@ -7516,8 +7516,8 @@ var Coral = (function (exports) {
        @param {String} targetType
        Eg. cycle button, cycle button item, etc.
        @param {CustomEvent} event
-       @param {ComponentMixin} component
-       @param {ComponentMixin} childComponent
+       @param {BaseComponent} component
+       @param {BaseComponent} childComponent
        Optional, in case the event occurred on a child component.
        @returns {Boolean} if the event was dispatch to at least 1 tracker.
        */
@@ -7578,13 +7578,6 @@ var Coral = (function (exports) {
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  /**
-    @private
-   
-    Utility that holds all mixins.
-   */
-
-  var mixin = {};
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -12725,12 +12718,12 @@ var Coral = (function (exports) {
     return constructor._attributePropertyMap;
   };
   /**
-   @mixin ComponentMixin
+   @base BaseComponent
    @classdesc The base element for all Coral components
    */
 
 
-  var ComponentMixin = function ComponentMixin(superClass) {
+  var BaseComponent = function BaseComponent(superClass) {
     return (
       /*#__PURE__*/
       function (_superClass) {
@@ -12901,9 +12894,9 @@ var Coral = (function (exports) {
            @param {String} eventType The event type. Eg. click, select, etc.
            @param {String} targetType The element type being used. Eg. cyclebutton, cyclebuttonitem, etc.
            @param {CustomEvent} event
-           @param {ComponentMixin} childComponent - Optional, in case the event occurred on a child component.
+           @param {BaseComponent} childComponent - Optional, in case the event occurred on a child component.
            
-           @returns {ComponentMixin}
+           @returns {BaseComponent}
            */
 
         }, {
@@ -12936,7 +12929,7 @@ var Coral = (function (exports) {
            The function that will be called when the event is triggered.
            @param {Boolean} [useCapture=false]
            Whether or not to listen during the capturing or bubbling phase.
-           @returns {ComponentMixin} this, chainable.
+           @returns {BaseComponent} this, chainable.
            */
 
         }, {
@@ -12957,7 +12950,7 @@ var Coral = (function (exports) {
            The function that was passed to <code>on()</code>.
            @param {Boolean} [useCapture]
            Only remove listeners with <code>useCapture</code> set to the value passed in.
-           @returns {ComponentMixin} this, chainable.
+           @returns {BaseComponent} this, chainable.
            */
 
         }, {
@@ -13036,7 +13029,7 @@ var Coral = (function (exports) {
            @param {Boolean} silent
            If true, events should not be triggered as a result of this set.
            
-           @returns {ComponentMixin} this, chainable.
+           @returns {BaseComponent} this, chainable.
            */
 
         }, {
@@ -13111,7 +13104,7 @@ var Coral = (function (exports) {
           /**
            Show this component.
            
-           @returns {ComponentMixin} this, chainable
+           @returns {BaseComponent} this, chainable
            */
 
         }, {
@@ -13128,7 +13121,7 @@ var Coral = (function (exports) {
           }
           /**
            Hide this component.
-           @returns {ComponentMixin} this, chainable
+           @returns {BaseComponent} this, chainable
            */
 
         }, {
@@ -13144,7 +13137,7 @@ var Coral = (function (exports) {
             return this;
           }
           /**
-           Returns {@link ComponentMixin} tracking options.
+           Returns {@link BaseComponent} tracking options.
            
            @return {TrackingEnum}
            */
@@ -13268,8 +13261,6 @@ var Coral = (function (exports) {
    * governing permissions and limitations under the License.
    */
 
-  mixin._component = ComponentMixin;
-
   var PAGE_UP = 33;
   var PAGE_DOWN = 34;
   var LEFT_ARROW = 37;
@@ -13299,13 +13290,13 @@ var Coral = (function (exports) {
    @classdesc An Accordion component consisting of multiple collapsible items.
    @htmltag coral-accordion
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var Accordion =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(Accordion, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(Accordion, _BaseComponent);
 
     /** @ignore */
     function Accordion() {
@@ -13768,7 +13759,7 @@ var Coral = (function (exports) {
     }]);
 
     return Accordion;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var template = function anonymous(data_0
   /*``*/
@@ -14561,13 +14552,13 @@ var Coral = (function (exports) {
    @classdesc An Icon component. Icon ships with a set of SVG icons.
    @htmltag coral-icon
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var Icon =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(Icon, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(Icon, _BaseComponent);
 
     /** @ignore */
     function Icon() {
@@ -14884,7 +14875,7 @@ var Coral = (function (exports) {
     }]);
 
     return Icon;
-  }(ComponentMixin(HTMLElement)); // Load all icons by default
+  }(BaseComponent(HTMLElement)); // Load all icons by default
 
 
   if (ICONS_PATH) {
@@ -14917,13 +14908,13 @@ var Coral = (function (exports) {
    @classdesc A Accordion item component
    @htmltag coral-accordion-item
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var AccordionItem =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(AccordionItem, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(AccordionItem, _BaseComponent);
 
     /** @ignore */
     function AccordionItem() {
@@ -15143,7 +15134,7 @@ var Coral = (function (exports) {
     }]);
 
     return AccordionItem;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -15413,7 +15404,7 @@ var Coral = (function (exports) {
    */
 
   /**
-   Enumeration for {@link OverlayMixin} trap options.
+   Enumeration for {@link BaseOverlay} trap options.
    
    @typedef {Object} OverlayTrapFocusEnum
    
@@ -15427,7 +15418,7 @@ var Coral = (function (exports) {
     OFF: 'off'
   };
   /**
-   Enumeration for {@link OverlayMixin} return focus options.
+   Enumeration for {@link BaseOverlay} return focus options.
    
    @typedef {Object} OverlayReturnFocusEnum
    
@@ -15442,7 +15433,7 @@ var Coral = (function (exports) {
     OFF: 'off'
   };
   /**
-   Enumeration for {@link OverlayMixin} focus behavior options.
+   Enumeration for {@link BaseOverlay} focus behavior options.
    
    @typedef {Object} OverlayFocusOnShowEnum
    
@@ -15457,7 +15448,7 @@ var Coral = (function (exports) {
     OFF: 'off'
   };
   /**
-   The time it should take for {@link OverlayMixin} to fade in milliseconds.
+   The time it should take for {@link BaseOverlay} to fade in milliseconds.
    Important: This should be greater than or equal to the CSS transition time.
    
    @typedef {Number} OverlayFadeTime
@@ -15806,12 +15797,12 @@ var Coral = (function (exports) {
     hideEverythingBut(instance);
   }
   /**
-   @mixin OverlayMixin
+   @base BaseOverlay
    @classdesc The base element for Overlay components
    */
 
 
-  var OverlayMixin = function OverlayMixin(superClass) {
+  var BaseOverlay = function BaseOverlay(superClass) {
     return (
       /*#__PURE__*/
       function (_superClass) {
@@ -16070,7 +16061,7 @@ var Coral = (function (exports) {
           /**
            Open the overlay and set the z-index accordingly.
            
-           @returns {OverlayMixin} this, chainable
+           @returns {BaseOverlay} this, chainable
            */
 
         }, {
@@ -16082,7 +16073,7 @@ var Coral = (function (exports) {
           /**
            Close the overlay.
            
-           @returns {OverlayMixin} this, chainable
+           @returns {BaseOverlay} this, chainable
            */
 
         }, {
@@ -16097,7 +16088,7 @@ var Coral = (function (exports) {
            @param {HTMLElement} element
            The element to return focus to. This must be a DOM element, not a jQuery object or selector.
            
-           @returns {OverlayMixin} this, chainable
+           @returns {BaseOverlay} this, chainable
            */
 
         }, {
@@ -16134,7 +16125,7 @@ var Coral = (function (exports) {
             return this;
           }
           /**
-           Returns {@link OverlayMixin} trap focus options.
+           Returns {@link BaseOverlay} trap focus options.
            
            @return {OverlayTrapFocusEnum}
            */
@@ -16186,14 +16177,14 @@ var Coral = (function (exports) {
             }
           }
           /**
-           Called when the {@link OverlayMixin} is clicked.
+           Called when the {@link BaseOverlay} is clicked.
            
            @function backdropClickedCallback
            @protected
            */
 
           /**
-           Triggered before the {@link OverlayMixin} is opened with <code>show()</code> or <code>instance.open = true</code>.
+           Triggered before the {@link BaseOverlay} is opened with <code>show()</code> or <code>instance.open = true</code>.
              @typedef {CustomEvent} coral-overlay:beforeopen
            
            @property {function} preventDefault
@@ -16201,12 +16192,12 @@ var Coral = (function (exports) {
            */
 
           /**
-           Triggered after the {@link OverlayMixin} is opened with <code>show()</code> or <code>instance.open = true</code>
+           Triggered after the {@link BaseOverlay} is opened with <code>show()</code> or <code>instance.open = true</code>
              @typedef {CustomEvent} coral-overlay:open
            */
 
           /**
-           Triggered before the {@link OverlayMixin} is closed with <code>hide()</code> or <code>instance.open = false</code>.
+           Triggered before the {@link BaseOverlay} is closed with <code>hide()</code> or <code>instance.open = false</code>.
              @typedef {CustomEvent} coral-overlay:beforeclose
            
            @property {function} preventDefault
@@ -16214,7 +16205,7 @@ var Coral = (function (exports) {
            */
 
           /**
-           Triggered after the {@link OverlayMixin} is closed with <code>hide()</code> or <code>instance.open = false</code>
+           Triggered after the {@link BaseOverlay} is closed with <code>hide()</code> or <code>instance.open = false</code>
              @typedef {CustomEvent} coral-overlay:close
            */
 
@@ -16434,7 +16425,7 @@ var Coral = (function (exports) {
             return trapFocus;
           }
           /**
-           Returns {@link OverlayMixin} return focus options.
+           Returns {@link BaseOverlay} return focus options.
            
            @return {OverlayReturnFocusEnum}
            */
@@ -16445,7 +16436,7 @@ var Coral = (function (exports) {
             return returnFocus;
           }
           /**
-           Returns {@link OverlayMixin} focus on show options.
+           Returns {@link BaseOverlay} focus on show options.
            
            @return {OverlayFocusOnShowEnum}
            */
@@ -16456,7 +16447,7 @@ var Coral = (function (exports) {
             return focusOnShow;
           }
           /**
-           Returns {@link OverlayMixin} fadetime in milliseconds.
+           Returns {@link BaseOverlay} fadetime in milliseconds.
            
            @return {Number}
            */
@@ -16491,12 +16482,11 @@ var Coral = (function (exports) {
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  OverlayMixin.trapFocus = trapFocus;
-  OverlayMixin.returnFocus = returnFocus;
-  OverlayMixin.focusOnShow = focusOnShow;
-  OverlayMixin.FADETIME = FADETIME; // Expose mixin on Coral namespace
 
-  mixin._overlay = OverlayMixin;
+  BaseOverlay.trapFocus = trapFocus;
+  BaseOverlay.returnFocus = returnFocus;
+  BaseOverlay.focusOnShow = focusOnShow;
+  BaseOverlay.FADETIME = FADETIME;
 
   /**!
    * @fileOverview Kickass library to create and place poppers near their reference elements.
@@ -19131,14 +19121,14 @@ var Coral = (function (exports) {
    @classdesc A generic Overlay component.
    @htmltag coral-overlay
    @extends {HTMLElement}
-   @extends {ComponentMixin}
-   @extends {OverlayMixin}
+   @extends {BaseComponent}
+   @extends {BaseOverlay}
    */
 
   var Overlay =
   /*#__PURE__*/
-  function (_OverlayMixin) {
-    _inherits(Overlay, _OverlayMixin);
+  function (_BaseOverlay) {
+    _inherits(Overlay, _BaseOverlay);
 
     /** @ignore */
     function Overlay() {
@@ -19146,7 +19136,7 @@ var Coral = (function (exports) {
 
       _classCallCheck(this, Overlay);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Overlay).call(this)); // Override from mixin-overlay
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(Overlay).call(this)); // Override from BaseOverlay
 
       _this._overlayAnimationTime = 0; // Popper default
 
@@ -19251,7 +19241,7 @@ var Coral = (function (exports) {
           }
       }
       /**
-       @todo maybe this should be mixin or something
+       @todo maybe this should be base or something
        @ignore
        */
 
@@ -19646,7 +19636,7 @@ var Coral = (function (exports) {
         this._toggleSmartBehavior(this.open);
       }
       /**
-       Inherited from {@link OverlayMixin#open}.
+       Inherited from {@link BaseOverlay#open}.
        */
 
     }, {
@@ -19752,7 +19742,7 @@ var Coral = (function (exports) {
     }]);
 
     return Overlay;
-  }(OverlayMixin(ComponentMixin(HTMLElement)));
+  }(BaseOverlay(BaseComponent(HTMLElement)));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -20480,7 +20470,7 @@ var Coral = (function (exports) {
     default: [CLASSNAME$6, ALL_VARIANT_CLASSES$1[1]]
   };
   /**
-   Enumeration for {@link ButtonMixin} sizes.
+   Enumeration for {@link BaseButton} sizes.
    
    @typedef {Object} ButtonSizeEnum
    
@@ -20495,7 +20485,7 @@ var Coral = (function (exports) {
     LARGE: 'L'
   };
   /**
-   Enumeration for {@link ButtonMixin} icon position options.
+   Enumeration for {@link BaseButton} icon position options.
    
    @typedef {Object} ButtonIconPositionEnum
    
@@ -20510,11 +20500,11 @@ var Coral = (function (exports) {
     LEFT: 'left'
   };
   /**
-   @mixin ButtonMixin
+   @base BaseButton
    @classdesc The base element for Button components
    */
 
-  var ButtonMixin = function ButtonMixin(superClass) {
+  var BaseButton = function BaseButton(superClass) {
     return (
       /*#__PURE__*/
       function (_superClass) {
@@ -20710,7 +20700,7 @@ var Coral = (function (exports) {
             this._makeAccessible();
           }
           /**
-           Triggered when {@link ButtonMixin#selected} changed.
+           Triggered when {@link BaseButton#selected} changed.
            
            @typedef {CustomEvent} coral-button:_selectedchanged
            
@@ -20718,7 +20708,7 @@ var Coral = (function (exports) {
            */
 
           /**
-           Triggered when {@link ButtonMixin#value} changed.
+           Triggered when {@link BaseButton#value} changed.
            
            @typedef {CustomEvent} coral-button:_valuechanged
            
@@ -20925,7 +20915,7 @@ var Coral = (function (exports) {
             }
           }
           /**
-           Inherited from {@link ComponentMixin#trackingElement}.
+           Inherited from {@link BaseComponent#trackingElement}.
            */
 
         }, {
@@ -20950,7 +20940,7 @@ var Coral = (function (exports) {
             };
           }
           /**
-           Returns {@link ButtonMixin} sizes.
+           Returns {@link BaseButton} sizes.
            
            @return {ButtonSizeEnum}
            */
@@ -20961,7 +20951,7 @@ var Coral = (function (exports) {
             return size$1;
           }
           /**
-           Returns {@link ButtonMixin} variants.
+           Returns {@link BaseButton} variants.
            
            @return {ButtonVariantEnum}
            */
@@ -20972,7 +20962,7 @@ var Coral = (function (exports) {
             return variant$2;
           }
           /**
-           Returns {@link ButtonMixin} icon positions.
+           Returns {@link BaseButton} icon positions.
            
            @return {ButtonIconPositionEnum}
            */
@@ -20983,7 +20973,7 @@ var Coral = (function (exports) {
             return iconPosition;
           }
           /**
-           Returns {@link ButtonMixin} icon sizes.
+           Returns {@link BaseButton} icon sizes.
            
            @return {ButtonIconSizeEnum}
            */
@@ -21019,22 +21009,20 @@ var Coral = (function (exports) {
    * governing permissions and limitations under the License.
    */
 
-  mixin._button = ButtonMixin;
-
   /**
    @class Coral.Button
    @classdesc A Button component containing text and/or an icon.
    @htmltag coral-button
    @htmlbasetag button
    @extends {HTMLButtonElement}
-   @extends {ComponentMixin}
-   @extends {ButtonMixin}
+   @extends {BaseComponent}
+   @extends {BaseButton}
    */
 
   var Button =
   /*#__PURE__*/
-  function (_ButtonMixin) {
-    _inherits(Button, _ButtonMixin);
+  function (_BaseButton) {
+    _inherits(Button, _BaseButton);
 
     /** @ignore */
     function Button() {
@@ -21050,7 +21038,7 @@ var Coral = (function (exports) {
     }
 
     return Button;
-  }(ButtonMixin(ComponentMixin(HTMLButtonElement)));
+  }(BaseButton(BaseComponent(HTMLButtonElement)));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -21223,15 +21211,15 @@ var Coral = (function (exports) {
    @classdesc A Dialog component that supports various use cases with custom content.
    @htmltag coral-dialog
    @extends {HTMLElement}
-   @extends {ComponentMixin}
-   @extends {OverlayMixin}
+   @extends {BaseComponent}
+   @extends {BaseOverlay}
    */
 
 
   var Dialog =
   /*#__PURE__*/
-  function (_OverlayMixin) {
-    _inherits(Dialog, _OverlayMixin);
+  function (_BaseOverlay) {
+    _inherits(Dialog, _BaseOverlay);
 
     /** @ignore */
     function Dialog() {
@@ -21338,7 +21326,7 @@ var Coral = (function (exports) {
       }
       /**
        @ignore
-       @todo maybe this should be mixin or something
+       @todo maybe this should be base or something
        */
 
     }, {
@@ -21700,7 +21688,7 @@ var Coral = (function (exports) {
         }
       }
       /**
-       Inherited from {@link OverlayMixin#open}.
+       Inherited from {@link BaseOverlay#open}.
        */
 
     }, {
@@ -21804,7 +21792,7 @@ var Coral = (function (exports) {
         }
       }
       /**
-       Inherited from {@link ComponentMixin#trackingElement}.
+       Inherited from {@link BaseComponent#trackingElement}.
        */
 
     }, {
@@ -21878,7 +21866,7 @@ var Coral = (function (exports) {
     }]);
 
     return Dialog;
-  }(OverlayMixin(ComponentMixin(HTMLElement)));
+  }(BaseOverlay(BaseComponent(HTMLElement)));
 
   var CLASSNAME$8 = '_coral-Dialog-title';
   /**
@@ -21886,13 +21874,13 @@ var Coral = (function (exports) {
    @classdesc The Dialog header content
    @htmltag coral-dialog-header
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var DialogHeader =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(DialogHeader, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(DialogHeader, _BaseComponent);
 
     function DialogHeader() {
       _classCallCheck(this, DialogHeader);
@@ -21912,7 +21900,7 @@ var Coral = (function (exports) {
     }]);
 
     return DialogHeader;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var CLASSNAME$9 = '_coral-Dialog-content';
   /**
@@ -21920,13 +21908,13 @@ var Coral = (function (exports) {
    @classdesc The Dialog default content
    @htmltag coral-dialog-content
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var DialogContent =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(DialogContent, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(DialogContent, _BaseComponent);
 
     function DialogContent() {
       _classCallCheck(this, DialogContent);
@@ -21944,7 +21932,7 @@ var Coral = (function (exports) {
     }]);
 
     return DialogContent;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var CLASSNAME$a = '_coral-Dialog-footer';
   /**
@@ -21952,13 +21940,13 @@ var Coral = (function (exports) {
    @classdesc The Dialog footer content
    @htmltag coral-dialog-footer
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var DialogFooter =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(DialogFooter, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(DialogFooter, _BaseComponent);
 
     function DialogFooter() {
       _classCallCheck(this, DialogFooter);
@@ -21976,7 +21964,7 @@ var Coral = (function (exports) {
     }]);
 
     return DialogFooter;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -22071,13 +22059,13 @@ var Coral = (function (exports) {
    @classdesc The Popover separator
    @htmltag coral-popover-separator
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var PopoverSeparator =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(PopoverSeparator, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(PopoverSeparator, _BaseComponent);
 
     function PopoverSeparator() {
       _classCallCheck(this, PopoverSeparator);
@@ -22097,7 +22085,7 @@ var Coral = (function (exports) {
     }]);
 
     return PopoverSeparator;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -22169,13 +22157,13 @@ var Coral = (function (exports) {
    of the bar. All items that do not fit into the bar are hidden but still accessible.
    @htmltag coral-actionbar
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var ActionBar =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(ActionBar, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(ActionBar, _BaseComponent);
 
     /** @ignore */
     function ActionBar() {
@@ -22778,7 +22766,7 @@ var Coral = (function (exports) {
     }]);
 
     return ActionBar;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var CLASSNAME$c = '_coral-ActionBar-item';
   /**
@@ -22786,13 +22774,13 @@ var Coral = (function (exports) {
    @classdesc An ActionBar item component
    @htmltag coral-actionbar-item
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var ActionBarItem =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(ActionBarItem, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(ActionBarItem, _BaseComponent);
 
     function ActionBarItem() {
       _classCallCheck(this, ActionBarItem);
@@ -22827,7 +22815,7 @@ var Coral = (function (exports) {
     }]);
 
     return ActionBarItem;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    @class Coral.ActionBar.Container.Collection
@@ -22902,14 +22890,14 @@ var Coral = (function (exports) {
    @htmltag coral-anchorbutton
    @htmlbasetag a
    @extends {HTMLAnchorElement}
-   @extends {ComponentMixin}
-   @extends {ButtonMixin}
+   @extends {BaseComponent}
+   @extends {BaseButton}
    */
 
   var AnchorButton =
   /*#__PURE__*/
-  function (_ButtonMixin) {
-    _inherits(AnchorButton, _ButtonMixin);
+  function (_BaseButton) {
+    _inherits(AnchorButton, _BaseButton);
 
     /** @ignore */
     function AnchorButton() {
@@ -23021,7 +23009,7 @@ var Coral = (function (exports) {
     }]);
 
     return AnchorButton;
-  }(ButtonMixin(ComponentMixin(HTMLAnchorElement)));
+  }(BaseButton(BaseComponent(HTMLAnchorElement)));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -23301,12 +23289,12 @@ var Coral = (function (exports) {
     }
   };
   /**
-   @mixin ActionBarContainerMixin
+   @base BaseActionBarContainer
    @classdesc The base element for action bar containers
    */
 
 
-  var ActionBarContainerMixin = function ActionBarContainerMixin(superClass) {
+  var BaseActionBarContainer = function BaseActionBarContainer(superClass) {
     return (
       /*#__PURE__*/
       function (_superClass) {
@@ -23647,7 +23635,7 @@ var Coral = (function (exports) {
    @classdesc An ActionBar primary component
    @htmltag coral-actionbar-primary
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var ActionBarPrimary =
@@ -23707,7 +23695,7 @@ var Coral = (function (exports) {
     }]);
 
     return ActionBarPrimary;
-  }(ActionBarContainerMixin(ComponentMixin(HTMLElement)));
+  }(BaseActionBarContainer(BaseComponent(HTMLElement)));
 
   var CLASSNAME$e = '_coral-ActionBar-secondary';
   /**
@@ -23715,7 +23703,7 @@ var Coral = (function (exports) {
    @classdesc An ActionBar secondary component
    @htmltag coral-actionbar-secondary
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var ActionBarSecondary =
@@ -23770,11 +23758,11 @@ var Coral = (function (exports) {
     }]);
 
     return ActionBarSecondary;
-  }(ActionBarContainerMixin(ComponentMixin(HTMLElement)));
+  }(BaseActionBarContainer(BaseComponent(HTMLElement)));
 
   var CLASSNAME$f = '_coral-BasicList';
   /**
-   Enumeration for {@link ListMixin} interactions.
+   Enumeration for {@link BaseList} interactions.
    
    @typedef {Object} ListInteractionEnum
    
@@ -23789,11 +23777,11 @@ var Coral = (function (exports) {
     OFF: 'off'
   };
   /**
-   @mixin ListMixin
+   @base BaseList
    @classdesc The base element for List components
    */
 
-  var ListMixin = function ListMixin(superClass) {
+  var BaseList = function BaseList(superClass) {
     return (
       /*#__PURE__*/
       function (_superClass) {
@@ -23949,7 +23937,7 @@ var Coral = (function (exports) {
             }
           }
           /**
-           Returns {@link ListMixin} interaction options.
+           Returns {@link BaseList} interaction options.
            
            @return {ListInteractionEnum}
            */
@@ -24051,11 +24039,11 @@ var Coral = (function (exports) {
 
   var CLASSNAME$g = '_coral-BasicList-item';
   /**
-   @mixin ListItemMixin
+   @base BaseListItem
    @classdesc The base element for List Item components
    */
 
-  var ListItemMixin = function ListItemMixin(superClass) {
+  var BaseListItem = function BaseListItem(superClass) {
     return (
       /*#__PURE__*/
       function (_superClass) {
@@ -24205,22 +24193,19 @@ var Coral = (function (exports) {
    * governing permissions and limitations under the License.
    */
 
-  mixin._list = ListMixin;
-  mixin._list.item = ListItemMixin;
-
   /**
    @class Coral.List
    @classdesc A List component that supports multi-line text, icons, and text wrapping with ellipsis.
    @htmltag coral-list
    @extends {HTMLElement}
-   @extends {ComponentMixin}
-   @extends {ListMixin}
+   @extends {BaseComponent}
+   @extends {BaseList}
    */
 
   var List =
   /*#__PURE__*/
-  function (_ListMixin) {
-    _inherits(List, _ListMixin);
+  function (_BaseList) {
+    _inherits(List, _BaseList);
 
     /** @ignore */
     function List() {
@@ -24236,7 +24221,7 @@ var Coral = (function (exports) {
     }
 
     return List;
-  }(ListMixin(ComponentMixin(HTMLElement)));
+  }(BaseList(BaseComponent(HTMLElement)));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -24285,14 +24270,14 @@ var Coral = (function (exports) {
    @classdesc A List item component
    @htmltag coral-list-item
    @extends {HTMLElement}
-   @extends {ComponentMixin}
-   @extends {ListItemMixin}
+   @extends {BaseComponent}
+   @extends {BaseListItem}
    */
 
   var ListItem =
   /*#__PURE__*/
-  function (_ListItemMixin) {
-    _inherits(ListItem, _ListItemMixin);
+  function (_BaseListItem) {
+    _inherits(ListItem, _BaseListItem);
 
     /** @ignore */
     function ListItem() {
@@ -24308,7 +24293,7 @@ var Coral = (function (exports) {
     }
 
     return ListItem;
-  }(ListItemMixin(ComponentMixin(HTMLElement)));
+  }(BaseListItem(BaseComponent(HTMLElement)));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -24338,14 +24323,14 @@ var Coral = (function (exports) {
    @classdesc An AnchorList component that supports multi-line text, icons, and text wrapping with ellipsis.
    @htmltag coral-anchorlist
    @extends {HTMLElement}
-   @extends {ComponentMixin}
-   @extends {ListMixin}
+   @extends {BaseComponent}
+   @extends {BaseList}
    */
 
   var AnchorList =
   /*#__PURE__*/
-  function (_ListMixin) {
-    _inherits(AnchorList, _ListMixin);
+  function (_BaseList) {
+    _inherits(AnchorList, _BaseList);
 
     /** @ignore */
     function AnchorList() {
@@ -24395,7 +24380,7 @@ var Coral = (function (exports) {
     }]);
 
     return AnchorList;
-  }(ListMixin(ComponentMixin(HTMLElement)));
+  }(BaseList(BaseComponent(HTMLElement)));
 
   var CLASSNAME$j = '_coral-AnchorList-item';
   /**
@@ -24403,14 +24388,14 @@ var Coral = (function (exports) {
    @classdesc An AnchorList item component
    @htmltag coral-anchorlist-item
    @extends {HTMLAnchorElement}
-   @extends {ComponentMixin}
-   @extends {ListItemMixin}
+   @extends {BaseComponent}
+   @extends {BaseListItem}
    */
 
   var AnchorListItem =
   /*#__PURE__*/
-  function (_ListItemMixin) {
-    _inherits(AnchorListItem, _ListItemMixin);
+  function (_BaseListItem) {
+    _inherits(AnchorListItem, _BaseListItem);
 
     /** @ignore */
     function AnchorListItem() {
@@ -24471,7 +24456,7 @@ var Coral = (function (exports) {
         }
       }
       /**
-       Inherited from {@link ComponentMixin#trackingElement}.
+       Inherited from {@link BaseComponent#trackingElement}.
        */
 
     }, {
@@ -24486,7 +24471,7 @@ var Coral = (function (exports) {
     }]);
 
     return AnchorListItem;
-  }(ListItemMixin(ComponentMixin(HTMLAnchorElement)));
+  }(BaseListItem(BaseComponent(HTMLAnchorElement)));
 
   var CLASSNAME$k = '_coral-ButtonList';
   /**
@@ -24494,14 +24479,14 @@ var Coral = (function (exports) {
    @classdesc A ButtonList component that supports multi-line text, icons, and text wrapping with ellipsis.
    @htmltag coral-buttonlist
    @extends {HTMLElement}
-   @extends {ComponentMixin}
-   @extends {ListMixin}
+   @extends {BaseComponent}
+   @extends {BaseList}
    */
 
   var ButtonList =
   /*#__PURE__*/
-  function (_ListMixin) {
-    _inherits(ButtonList, _ListMixin);
+  function (_BaseList) {
+    _inherits(ButtonList, _BaseList);
 
     /** @ignore */
     function ButtonList() {
@@ -24551,7 +24536,7 @@ var Coral = (function (exports) {
     }]);
 
     return ButtonList;
-  }(ListMixin(ComponentMixin(HTMLElement)));
+  }(BaseList(BaseComponent(HTMLElement)));
 
   var CLASSNAME$l = '_coral-ButtonList-item';
   /**
@@ -24559,14 +24544,14 @@ var Coral = (function (exports) {
    @classdesc An ButtonList item component
    @htmltag coral-buttonlist-item
    @extends {HTMLButtonElement}
-   @extends {ComponentMixin}
-   @extends {ListItemMixin}
+   @extends {BaseComponent}
+   @extends {BaseListItem}
    */
 
   var ButtonListItem =
   /*#__PURE__*/
-  function (_ListItemMixin) {
-    _inherits(ButtonListItem, _ListItemMixin);
+  function (_BaseListItem) {
+    _inherits(ButtonListItem, _BaseListItem);
 
     function ButtonListItem() {
       _classCallCheck(this, ButtonListItem);
@@ -24587,7 +24572,7 @@ var Coral = (function (exports) {
       key: "trackingElement",
 
       /**
-       Inherited from {@link ComponentMixin#trackingElement}.
+       Inherited from {@link BaseComponent#trackingElement}.
        */
       get: function get() {
         return typeof this._trackingElement === 'undefined' ? // keep spaces to only 1 max and trim. this mimics native html behaviors
@@ -24599,7 +24584,7 @@ var Coral = (function (exports) {
     }]);
 
     return ButtonListItem;
-  }(ListItemMixin(ComponentMixin(HTMLButtonElement)));
+  }(BaseListItem(BaseComponent(HTMLButtonElement)));
 
   var template$8 = function anonymous(data_0
   /*``*/
@@ -24703,13 +24688,13 @@ var Coral = (function (exports) {
    When the time is known, {@link Progress} should be used instead.
    @htmltag coral-wait
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var Wait =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(Wait, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(Wait, _BaseComponent);
 
     function Wait() {
       var _this;
@@ -24973,7 +24958,7 @@ var Coral = (function (exports) {
     }]);
 
     return Wait;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -25040,13 +25025,13 @@ var Coral = (function (exports) {
    @classdesc A SelectList component is a selectable list of items.
    @htmltag coral-selectlist
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var SelectList =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(SelectList, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(SelectList, _BaseComponent);
 
     /** @ignore */
     function SelectList() {
@@ -25607,7 +25592,7 @@ var Coral = (function (exports) {
     }]);
 
     return SelectList;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var CLASSNAME$o = '_coral-SelectList-group';
   /**
@@ -25615,13 +25600,13 @@ var Coral = (function (exports) {
    @classdesc A SelectList group component
    @htmltag coral-selectlist-group
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var SelectListGroup =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(SelectListGroup, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(SelectListGroup, _BaseComponent);
 
     function SelectListGroup() {
       _classCallCheck(this, SelectListGroup);
@@ -25690,7 +25675,7 @@ var Coral = (function (exports) {
     }]);
 
     return SelectListGroup;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var template$a = function anonymous(data_0
   /*``*/
@@ -25720,13 +25705,13 @@ var Coral = (function (exports) {
    @classdesc A SelectList item component
    @htmltag coral-selectlist-item
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var SelectListItem =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(SelectListItem, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(SelectListItem, _BaseComponent);
 
     /** @ignore */
     function SelectListItem() {
@@ -25881,7 +25866,7 @@ var Coral = (function (exports) {
     }]);
 
     return SelectListItem;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -25986,15 +25971,15 @@ var Coral = (function (exports) {
    @classdesc An ActionBar container component
    @htmltag coral-actionbar-container
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    
    @deprecated
    */
 
   var ActionBarContainer =
   /*#__PURE__*/
-  function (_ActionBarContainerMi) {
-    _inherits(ActionBarContainer, _ActionBarContainerMi);
+  function (_BaseActionBarContain) {
+    _inherits(ActionBarContainer, _BaseActionBarContain);
 
     /** @ignore */
     function ActionBarContainer() {
@@ -26103,7 +26088,7 @@ var Coral = (function (exports) {
     }]);
 
     return ActionBarContainer;
-  }(ActionBarContainerMixin(ComponentMixin(HTMLElement)));
+  }(BaseActionBarContainer(BaseComponent(HTMLElement)));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -26189,14 +26174,14 @@ var Coral = (function (exports) {
    <code>coral-close</code> attribute on an element contained by the Alert.
    @htmltag coral-alert
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
 
   var Alert =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(Alert, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(Alert, _BaseComponent);
 
     /** @ignore */
     function Alert() {
@@ -26234,7 +26219,7 @@ var Coral = (function (exports) {
 
       /**
        @ignore
-       @todo maybe this should be mixin or something
+       @todo maybe this should be base or something
        */
       value: function _onCloseClick(event) {
         var dismissTarget = event.matchedTarget;
@@ -26464,7 +26449,7 @@ var Coral = (function (exports) {
     }]);
 
     return Alert;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var CLASSNAME$t = '_coral-Alert-header';
   /**
@@ -26472,13 +26457,13 @@ var Coral = (function (exports) {
    @classdesc The Alert header content
    @htmltag coral-alert-header
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var AlertHeader =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(AlertHeader, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(AlertHeader, _BaseComponent);
 
     function AlertHeader() {
       _classCallCheck(this, AlertHeader);
@@ -26496,7 +26481,7 @@ var Coral = (function (exports) {
     }]);
 
     return AlertHeader;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var CLASSNAME$u = '_coral-Alert-content';
   /**
@@ -26504,13 +26489,13 @@ var Coral = (function (exports) {
    @classdesc The Alert default content
    @htmltag coral-alert-content
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var AlertContent =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(AlertContent, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(AlertContent, _BaseComponent);
 
     function AlertContent() {
       _classCallCheck(this, AlertContent);
@@ -26528,7 +26513,7 @@ var Coral = (function (exports) {
     }]);
 
     return AlertContent;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var CLASSNAME$v = '_coral-Alert-footer';
   /**
@@ -26536,13 +26521,13 @@ var Coral = (function (exports) {
    @classdesc The Alert footer content
    @htmltag coral-alert-footer
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var AlertFooter =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(AlertFooter, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(AlertFooter, _BaseComponent);
 
     function AlertFooter() {
       _classCallCheck(this, AlertFooter);
@@ -26560,7 +26545,7 @@ var Coral = (function (exports) {
     }]);
 
     return AlertFooter;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -26726,7 +26711,7 @@ var Coral = (function (exports) {
 
   var TARGET_INPUT_SELECTOR = 'input:not([type=hidden])';
   /**
-   @mixin FormFieldMixin
+   @base BaseFormField
    @classdesc The base element for Form Field components. If not extending a {@link HTMLInputElement}, following
    properties should be implemented at least :
    - <code>disabled</code>. Whether this field is disabled or not.
@@ -26737,7 +26722,7 @@ var Coral = (function (exports) {
    - <code>value</code>. This field's current value.
    */
 
-  var FormFieldMixin = function FormFieldMixin(superClass) {
+  var BaseFormField = function BaseFormField(superClass) {
     return (
       /*#__PURE__*/
       function (_superClass) {
@@ -26842,7 +26827,7 @@ var Coral = (function (exports) {
             return element || this;
           }
           /**
-           Gets the internal input that the mixin.formField would watch for change. By default, it searches if the
+           Gets the internal input that the BaseFormField would watch for change. By default, it searches if the
            <code>_getLabellableElement()</code> is an input. Components can override this function to be able to provide a
            different implementation. In case the value is <code>null</code>, the change event will be handled no matter
            the input that produced it.
@@ -26860,7 +26845,7 @@ var Coral = (function (exports) {
           /**
            Function called whenever the target component triggers a change event. <code>_getTargetChangeInput</code> is used
            internally to determine if the input belongs to the component. If the component decides to override this function,
-           the default from the mixin will not be called.
+           the default from the base will not be called.
            @protected
            */
 
@@ -27036,7 +27021,7 @@ var Coral = (function (exports) {
           }
           /**
            Target property that will be taken from <code>event.target</code> and set into
-           {@link FormFieldMixin#_componentTargetProperty} when a change event is triggered.
+           {@link BaseFormField#_componentTargetProperty} when a change event is triggered.
            @type {String}
            @default "value"
            @protected
@@ -27048,7 +27033,7 @@ var Coral = (function (exports) {
             return 'value';
           }
           /**
-           Whether the change event needs to be triggered when {@link FormFieldMixin#_onInputChange} is called.
+           Whether the change event needs to be triggered when {@link BaseFormField#_onInputChange} is called.
            @type {Boolean}
            @default true
            @protected
@@ -27089,8 +27074,6 @@ var Coral = (function (exports) {
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-
-  mixin._formField = FormFieldMixin;
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -27329,14 +27312,14 @@ var Coral = (function (exports) {
    @classdesc A Tag component
    @htmltag coral-tag
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
 
   var Tag =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(Tag, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(Tag, _BaseComponent);
 
     /** @ignore */
     function Tag() {
@@ -27387,7 +27370,7 @@ var Coral = (function (exports) {
         this.classList.toggle(LABEL_CLASSNAME, !toggle);
       }
       /**
-       Inherited from {@link ComponentMixin#trackingElement}.
+       Inherited from {@link BaseComponent#trackingElement}.
        */
 
     }, {
@@ -27809,7 +27792,7 @@ var Coral = (function (exports) {
     }]);
 
     return Tag;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -27874,15 +27857,15 @@ var Coral = (function (exports) {
    @classdesc A TagList component is a form field container to manipulate tags.
    @htmltag coral-taglist
    @extends {HTMLElement}
-   @extends {ComponentMixin}
-   @extends {FormFieldMixin}
+   @extends {BaseComponent}
+   @extends {BaseFormField}
    */
 
 
   var TagList =
   /*#__PURE__*/
-  function (_FormFieldMixin) {
-    _inherits(TagList, _FormFieldMixin);
+  function (_BaseFormField) {
+    _inherits(TagList, _BaseFormField);
 
     /** @ignore */
     function TagList() {
@@ -28175,7 +28158,7 @@ var Coral = (function (exports) {
         this._onItemConnected(item);
       }
       /**
-       Inherited from {@link FormFieldMixin#reset}.
+       Inherited from {@link BaseFormField#reset}.
        */
 
     }, {
@@ -28416,7 +28399,7 @@ var Coral = (function (exports) {
     }]);
 
     return TagList;
-  }(FormFieldMixin(ComponentMixin(HTMLElement)));
+  }(BaseFormField(BaseComponent(HTMLElement)));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -28444,13 +28427,13 @@ var Coral = (function (exports) {
    @classdesc The Autocomplete Item
    @htmltag coral-autocomplete-item
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var AutocompleteItem =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(AutocompleteItem, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(AutocompleteItem, _BaseComponent);
 
     /** @ignore */
     function AutocompleteItem() {
@@ -28566,7 +28549,7 @@ var Coral = (function (exports) {
     }]);
 
     return AutocompleteItem;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    Enumeration for {@link Textfield} variants.
@@ -28598,15 +28581,15 @@ var Coral = (function (exports) {
    @htmltag coral-textfield
    @htmlbasetag input
    @extends {HTMLInputElement}
-   @extends {ComponentMixin}
-   @extends {FormFieldMixin}
+   @extends {BaseComponent}
+   @extends {BaseFormField}
    */
 
 
   var Textfield =
   /*#__PURE__*/
-  function (_FormFieldMixin) {
-    _inherits(Textfield, _FormFieldMixin);
+  function (_BaseFormField) {
+    _inherits(Textfield, _BaseFormField);
 
     /** @ignore */
     function Textfield() {
@@ -28684,7 +28667,7 @@ var Coral = (function (exports) {
     }]);
 
     return Textfield;
-  }(FormFieldMixin(ComponentMixin(HTMLInputElement)));
+  }(BaseFormField(BaseComponent(HTMLInputElement)));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -28872,14 +28855,14 @@ var Coral = (function (exports) {
    @classdesc An Autocomplete component that allows users to search and select from a list of options.
    @htmltag coral-autocomplete
    @extends {HTMLElement}
-   @extends {ComponentMixin}
-   @extends {FormFieldMixin}
+   @extends {BaseComponent}
+   @extends {BaseFormField}
    */
 
   var Autocomplete =
   /*#__PURE__*/
-  function (_FormFieldMixin) {
-    _inherits(Autocomplete, _FormFieldMixin);
+  function (_BaseFormField) {
+    _inherits(Autocomplete, _BaseFormField);
 
     /** @ignore */
     function Autocomplete() {
@@ -30276,7 +30259,7 @@ var Coral = (function (exports) {
         this.trigger('coral-autocomplete:hidesuggestions');
       }
       /**
-       Inherited from {@link FormFieldMixin#reset}.
+       Inherited from {@link BaseFormField#reset}.
        */
 
     }, {
@@ -30748,7 +30731,7 @@ var Coral = (function (exports) {
         this._setName(value);
       }
       /**
-       Inherited from {@link FormFieldMixin#invalid}.
+       Inherited from {@link BaseFormField#invalid}.
        */
 
     }, {
@@ -30843,7 +30826,7 @@ var Coral = (function (exports) {
         this._elements.input.required = this._required;
       }
       /**
-       Inherited from {@link FormFieldMixin#labelledBy}.
+       Inherited from {@link BaseFormField#labelledBy}.
        */
 
     }, {
@@ -30902,7 +30885,7 @@ var Coral = (function (exports) {
     }]);
 
     return Autocomplete;
-  }(FormFieldMixin(ComponentMixin(HTMLElement)));
+  }(BaseFormField(BaseComponent(HTMLElement)));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -30979,14 +30962,14 @@ var Coral = (function (exports) {
    @classdesc A ButtonGroup component that can be used as a selection form field.
    @htmltag coral-buttongroup
    @extends {HTMLElement}
-   @extends {ComponentMixin}
-   @extends {FormFieldMixin}
+   @extends {BaseComponent}
+   @extends {BaseFormField}
    */
 
   var ButtonGroup =
   /*#__PURE__*/
-  function (_FormFieldMixin) {
-    _inherits(ButtonGroup, _FormFieldMixin);
+  function (_BaseFormField) {
+    _inherits(ButtonGroup, _BaseFormField);
 
     /** @ignore */
     function ButtonGroup() {
@@ -31034,7 +31017,7 @@ var Coral = (function (exports) {
       key: "reset",
 
       /**
-       Inherited from {@link FormFieldMixin#reset}.
+       Inherited from {@link BaseFormField#reset}.
        */
       value: function reset() {
         // reset the values to the initial values
@@ -31844,7 +31827,7 @@ var Coral = (function (exports) {
         }
       }
       /**
-       Inherited from {@link FormFieldMixin#labelledBy}.
+       Inherited from {@link BaseFormField#labelledBy}.
        */
 
     }, {
@@ -31872,7 +31855,7 @@ var Coral = (function (exports) {
     }]);
 
     return ButtonGroup;
-  }(FormFieldMixin(ComponentMixin(HTMLElement)));
+  }(BaseFormField(BaseComponent(HTMLElement)));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -32481,14 +32464,14 @@ var Coral = (function (exports) {
    on the page.
    @htmltag coral-calendar
    @extends {HTMLElement}
-   @extends {ComponentMixin}
-   @extends {FormFieldMixin}
+   @extends {BaseComponent}
+   @extends {BaseFormField}
    */
 
   var Calendar =
   /*#__PURE__*/
-  function (_FormFieldMixin) {
-    _inherits(Calendar, _FormFieldMixin);
+  function (_BaseFormField) {
+    _inherits(Calendar, _BaseFormField);
 
     /** @ignore */
     function Calendar() {
@@ -33423,7 +33406,7 @@ var Coral = (function (exports) {
         this._renderCalendar();
       }
       /**
-       Inherited from {@link FormFieldMixin#invalid}.
+       Inherited from {@link BaseFormField#invalid}.
        */
 
     }, {
@@ -33464,7 +33447,7 @@ var Coral = (function (exports) {
     }]);
 
     return Calendar;
-  }(FormFieldMixin(ComponentMixin(HTMLElement)));
+  }(BaseFormField(BaseComponent(HTMLElement)));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -33533,14 +33516,14 @@ var Coral = (function (exports) {
    @classdesc A Card component to display content in different variations.
    @htmltag coral-card
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
 
   var Card =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(Card, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(Card, _BaseComponent);
 
     /** @ignore */
     function Card() {
@@ -33961,7 +33944,7 @@ var Coral = (function (exports) {
     }]);
 
     return Card;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var CLASSNAME$E = '_coral-Banner';
   /**
@@ -33993,14 +33976,14 @@ var Coral = (function (exports) {
    @classdesc A Card Banner component
    @htmltag coral-card-banner
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
 
   var CardBanner =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(CardBanner, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(CardBanner, _BaseComponent);
 
     /** @ignore */
     function CardBanner() {
@@ -34150,7 +34133,7 @@ var Coral = (function (exports) {
     }]);
 
     return CardBanner;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -34256,13 +34239,13 @@ var Coral = (function (exports) {
    @classdesc A Card property component
    @htmltag coral-card-property
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var CardProperty =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(CardProperty, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(CardProperty, _BaseComponent);
 
     /** @ignore */
     function CardProperty() {
@@ -34377,7 +34360,7 @@ var Coral = (function (exports) {
     }]);
 
     return CardProperty;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var CLASSNAME$I = '_coral-Card-title';
   /**
@@ -34385,13 +34368,13 @@ var Coral = (function (exports) {
    @classdesc A Card title component
    @htmltag coral-card-title
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var CardTitle =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(CardTitle, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(CardTitle, _BaseComponent);
 
     function CardTitle() {
       _classCallCheck(this, CardTitle);
@@ -34426,7 +34409,7 @@ var Coral = (function (exports) {
     }]);
 
     return CardTitle;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var CLASSNAME$J = '_coral-Card-subtitle';
   /**
@@ -34434,13 +34417,13 @@ var Coral = (function (exports) {
    @classdesc A Card sub title component
    @htmltag coral-card-subtitle
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var CardSubtitle =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(CardSubtitle, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(CardSubtitle, _BaseComponent);
 
     function CardSubtitle() {
       _classCallCheck(this, CardSubtitle);
@@ -34475,7 +34458,7 @@ var Coral = (function (exports) {
     }]);
 
     return CardSubtitle;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var CLASSNAME$K = '_coral-Card-context';
   /**
@@ -34483,13 +34466,13 @@ var Coral = (function (exports) {
    @classdesc A Card context component
    @htmltag coral-card-context
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var CardContext =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(CardContext, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(CardContext, _BaseComponent);
 
     function CardContext() {
       _classCallCheck(this, CardContext);
@@ -34524,7 +34507,7 @@ var Coral = (function (exports) {
     }]);
 
     return CardContext;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var CLASSNAME$L = '_coral-Card-description';
   /**
@@ -34532,13 +34515,13 @@ var Coral = (function (exports) {
    @classdesc A Card description component
    @htmltag coral-card-title
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var CardDescription =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(CardDescription, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(CardDescription, _BaseComponent);
 
     function CardDescription() {
       _classCallCheck(this, CardDescription);
@@ -34573,7 +34556,7 @@ var Coral = (function (exports) {
     }]);
 
     return CardDescription;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -34784,13 +34767,13 @@ var Coral = (function (exports) {
    @classdesc A CharacterCount component that indicates the remaining characters in a Textfield or Textarea.
    @htmltag coral-charactercount
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var CharacterCount =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(CharacterCount, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(CharacterCount, _BaseComponent);
 
     function CharacterCount() {
       _classCallCheck(this, CharacterCount);
@@ -34927,7 +34910,7 @@ var Coral = (function (exports) {
     }]);
 
     return CharacterCount;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -34988,14 +34971,14 @@ var Coral = (function (exports) {
    @classdesc A Checkbox component to be used as a form field.
    @htmltag coral-checkbox
    @extends {HTMLElement}
-   @extends {ComponentMixin}
-   @extends {FormFieldMixin}
+   @extends {BaseComponent}
+   @extends {BaseFormField}
    */
 
   var Checkbox =
   /*#__PURE__*/
-  function (_FormFieldMixin) {
-    _inherits(Checkbox, _FormFieldMixin);
+  function (_BaseFormField) {
+    _inherits(Checkbox, _BaseFormField);
 
     /** @ignore */
     function Checkbox() {
@@ -35129,7 +35112,7 @@ var Coral = (function (exports) {
         }
       }
       /**
-       Inherited from {@link FormFieldMixin#clear}.
+       Inherited from {@link BaseFormField#clear}.
        */
 
     }, {
@@ -35138,7 +35121,7 @@ var Coral = (function (exports) {
         this.checked = false;
       }
       /**
-       Inherited from {@link FormFieldMixin#reset}.
+       Inherited from {@link BaseFormField#reset}.
        */
 
     }, {
@@ -35347,7 +35330,7 @@ var Coral = (function (exports) {
         this.setAttribute('aria-readonly', this._readOnly);
       }
       /**
-       Inherited from {@link ComponentMixin#trackingElement}.
+       Inherited from {@link BaseComponent#trackingElement}.
        */
 
     }, {
@@ -35399,7 +35382,7 @@ var Coral = (function (exports) {
     }]);
 
     return Checkbox;
-  }(FormFieldMixin(ComponentMixin(HTMLElement)));
+  }(BaseFormField(BaseComponent(HTMLElement)));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -35822,15 +35805,15 @@ var Coral = (function (exports) {
    shown on a mobile device, it will show a native select list, instead of the select list styled via Coral Spectrum.
    @htmltag coral-select
    @extends {HTMLElement}
-   @extends {ComponentMixin}
-   @extends {FormFieldMixin}
+   @extends {BaseComponent}
+   @extends {BaseFormField}
    */
 
 
   var Select =
   /*#__PURE__*/
-  function (_FormFieldMixin) {
-    _inherits(Select, _FormFieldMixin);
+  function (_BaseFormField) {
+    _inherits(Select, _BaseFormField);
 
     /** @ignore */
     function Select() {
@@ -36664,7 +36647,7 @@ var Coral = (function (exports) {
         this._updateLabel();
       }
       /**
-       Inherited from {@link FormFieldMixin#clear}.
+       Inherited from {@link BaseFormField#clear}.
        */
 
     }, {
@@ -36686,7 +36669,7 @@ var Coral = (function (exports) {
         }
       }
       /**
-       Inherited from {@link FormFieldMixin#reset}.
+       Inherited from {@link BaseFormField#reset}.
        */
 
     }, {
@@ -37085,7 +37068,7 @@ var Coral = (function (exports) {
         this._elements.invalidIcon.hidden = this.disabled;
       }
       /**
-       Inherited from {@link FormFieldMixin#invalid}.
+       Inherited from {@link BaseFormField#invalid}.
        */
 
     }, {
@@ -37150,7 +37133,7 @@ var Coral = (function (exports) {
         this._elements.taglist.disabled = this._readOnly || isDisabled;
       }
       /**
-       Inherited from {@link FormFieldMixin#labelledBy}.
+       Inherited from {@link BaseFormField#labelledBy}.
        */
 
     }, {
@@ -37252,20 +37235,20 @@ var Coral = (function (exports) {
     }]);
 
     return Select;
-  }(FormFieldMixin(ComponentMixin(HTMLElement)));
+  }(BaseFormField(BaseComponent(HTMLElement)));
 
   /**
    @class Coral.Select.Item
    @classdesc A Select item component
    @htmltag coral-select-item
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var SelectItem =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(SelectItem, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(SelectItem, _BaseComponent);
 
     /** @ignore */
     function SelectItem() {
@@ -37377,7 +37360,7 @@ var Coral = (function (exports) {
         this.trigger('coral-select-item:_valuechanged');
       }
       /**
-       Inherited from {@link ComponentMixin#trackingElement}.
+       Inherited from {@link BaseComponent#trackingElement}.
        */
 
     }, {
@@ -37397,7 +37380,7 @@ var Coral = (function (exports) {
     }]);
 
     return SelectItem;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -37527,15 +37510,15 @@ var Coral = (function (exports) {
    on the page.
    @htmltag coral-clock
    @extends {HTMLElement}
-   @extends {ComponentMixin}
-   @extends {FormFieldMixin}
+   @extends {BaseComponent}
+   @extends {BaseFormField}
    */
 
 
   var Clock =
   /*#__PURE__*/
-  function (_FormFieldMixin) {
-    _inherits(Clock, _FormFieldMixin);
+  function (_BaseFormField) {
+    _inherits(Clock, _BaseFormField);
 
     /** @ignore */
     function Clock() {
@@ -37686,7 +37669,7 @@ var Coral = (function (exports) {
         }
       }
       /**
-       Kills the internal _onInputChange from formMixin because it does not check the target.
+       Kills the internal _onInputChange from BaseFormField because it does not check the target.
        
        @private
        */
@@ -37941,7 +37924,7 @@ var Coral = (function (exports) {
         this._elements.input.disabled = this._disabled;
       }
       /**
-       Inherited from {@link FormFieldMixin#invalid}.
+       Inherited from {@link BaseFormField#invalid}.
        */
 
     }, {
@@ -38027,7 +38010,7 @@ var Coral = (function (exports) {
         this._syncDisplay();
       }
       /**
-       Inherited from {@link FormFieldMixin#labelledBy}.
+       Inherited from {@link BaseFormField#labelledBy}.
        */
 
     }, {
@@ -38091,7 +38074,7 @@ var Coral = (function (exports) {
     }]);
 
     return Clock;
-  }(FormFieldMixin(ComponentMixin(HTMLElement)));
+  }(BaseFormField(BaseComponent(HTMLElement)));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -38172,13 +38155,13 @@ var Coral = (function (exports) {
    @classdesc A coach mark component to highlight UI elements on the page.
    @htmltag coral-coachmark
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var CoachMark =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(CoachMark, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(CoachMark, _BaseComponent);
 
     /** @ignore */
     function CoachMark() {
@@ -38346,7 +38329,7 @@ var Coral = (function (exports) {
     }]);
 
     return CoachMark;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -39774,13 +39757,13 @@ var Coral = (function (exports) {
    @classdesc A ColorInput Item component
    @htmltag coral-colorinput-item
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var ColorInputItem =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(ColorInputItem, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(ColorInputItem, _BaseComponent);
 
     function ColorInputItem() {
       _classCallCheck(this, ColorInputItem);
@@ -39864,7 +39847,7 @@ var Coral = (function (exports) {
     }]);
 
     return ColorInputItem;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -39879,10 +39862,10 @@ var Coral = (function (exports) {
    */
 
   /**
-   @mixin ColorInputAbstractSubviewMixin
+   @base BaseColorInputAbstractSubview
    @classdesc An abstract subview class that other subviews should extend.
    */
-  var ColorInputAbstractSubviewMixin = function ColorInputAbstractSubviewMixin(superClass) {
+  var BaseColorInputAbstractSubview = function BaseColorInputAbstractSubview(superClass) {
     return (
       /*#__PURE__*/
       function (_superClass) {
@@ -40061,14 +40044,14 @@ var Coral = (function (exports) {
    @classdesc A Slider component is a form field that can be used to set a number within a range.
    @htmltag coral-slider
    @extends {HTMLElement}
-   @extends {ComponentMixin}
-   @extends {FormFieldMixin}
+   @extends {BaseComponent}
+   @extends {BaseFormField}
    */
 
   var Slider =
   /*#__PURE__*/
-  function (_FormFieldMixin) {
-    _inherits(Slider, _FormFieldMixin);
+  function (_BaseFormField) {
+    _inherits(Slider, _BaseFormField);
 
     /** @ignore */
     function Slider() {
@@ -40957,7 +40940,7 @@ var Coral = (function (exports) {
         });
       }
       /**
-       Inherited from {@link FormFieldMixin#labelledBy}.
+       Inherited from {@link BaseFormField#labelledBy}.
        */
 
     }, {
@@ -41026,7 +41009,7 @@ var Coral = (function (exports) {
     }]);
 
     return Slider;
-  }(FormFieldMixin(ComponentMixin(HTMLElement)));
+  }(BaseFormField(BaseComponent(HTMLElement)));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -41056,13 +41039,13 @@ var Coral = (function (exports) {
    @classdesc The Slider item
    @htmltag coral-slider-item
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var SliderItem =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(SliderItem, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(SliderItem, _BaseComponent);
 
     function SliderItem() {
       _classCallCheck(this, SliderItem);
@@ -41110,7 +41093,7 @@ var Coral = (function (exports) {
     }]);
 
     return SliderItem;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var template$p = function anonymous(data_0
   /*``*/
@@ -41302,7 +41285,7 @@ var Coral = (function (exports) {
         return template$p;
       }
       /**
-       Inherited from {@link FormFieldMixin#clear}.
+       Inherited from {@link BaseFormField#clear}.
        */
 
     }, {
@@ -41312,7 +41295,7 @@ var Coral = (function (exports) {
         this.endValue = this.max;
       }
       /**
-       Inherited from {@link FormFieldMixin#reset}.
+       Inherited from {@link BaseFormField#reset}.
        */
 
     }, {
@@ -41906,13 +41889,13 @@ var Coral = (function (exports) {
    @classdesc Tooltip's content component
    @htmltag coral-tooltip-content
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var TooltipContent =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(TooltipContent, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(TooltipContent, _BaseComponent);
 
     function TooltipContent() {
       _classCallCheck(this, TooltipContent);
@@ -41930,7 +41913,7 @@ var Coral = (function (exports) {
     }]);
 
     return TooltipContent;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -42360,14 +42343,14 @@ var Coral = (function (exports) {
    @classdesc A ColorInput Color properties component
    @htmltag coral-colorinput-colorproperties
    @extends {HTMLElement}
-   @extends {ComponentMixin}
-   @extends {ColorInputAbstractSubviewMixin}
+   @extends {BaseComponent}
+   @extends {BaseColorInputAbstractSubview}
    */
 
   var ColorInputColorProperties =
   /*#__PURE__*/
-  function (_ColorInputAbstractSu) {
-    _inherits(ColorInputColorProperties, _ColorInputAbstractSu);
+  function (_BaseColorInputAbstra) {
+    _inherits(ColorInputColorProperties, _BaseColorInputAbstra);
 
     /** @ignore */
     function ColorInputColorProperties() {
@@ -42583,7 +42566,7 @@ var Coral = (function (exports) {
     }]);
 
     return ColorInputColorProperties;
-  }(ColorInputAbstractSubviewMixin(ComponentMixin(HTMLElement)));
+  }(BaseColorInputAbstractSubview(BaseComponent(HTMLElement)));
 
   var template$t = function anonymous(data_0
   /*``*/
@@ -42615,14 +42598,14 @@ var Coral = (function (exports) {
    @classdesc A ColorInput Swatch component
    @htmltag coral-colorinput-swatch
    @extends {HTMLElement}
-   @extends {ComponentMixin}
-   @extends {ColorInputAbstractSubviewMixin}
+   @extends {BaseComponent}
+   @extends {BaseColorInputAbstractSubview}
    */
 
   var ColorInputSwatch =
   /*#__PURE__*/
-  function (_ColorInputAbstractSu) {
-    _inherits(ColorInputSwatch, _ColorInputAbstractSu);
+  function (_BaseColorInputAbstra) {
+    _inherits(ColorInputSwatch, _BaseColorInputAbstra);
 
     /** @ignore */
     function ColorInputSwatch() {
@@ -42789,7 +42772,7 @@ var Coral = (function (exports) {
     }]);
 
     return ColorInputSwatch;
-  }(ColorInputAbstractSubviewMixin(ComponentMixin(HTMLElement)));
+  }(BaseColorInputAbstractSubview(BaseComponent(HTMLElement)));
 
   var template$u = function anonymous(data_0
   /*``*/
@@ -42846,14 +42829,14 @@ var Coral = (function (exports) {
    @classdesc A ColorInput Swatches component
    @htmltag coral-colorinput-swatches
    @extends {HTMLElement}
-   @extends {ComponentMixin}
-   @extends {ColorInputAbstractSubviewMixin}
+   @extends {BaseComponent}
+   @extends {BaseColorInputAbstractSubview}
    */
 
   var ColorInputSwatches =
   /*#__PURE__*/
-  function (_ColorInputAbstractSu) {
-    _inherits(ColorInputSwatches, _ColorInputAbstractSu);
+  function (_BaseColorInputAbstra) {
+    _inherits(ColorInputSwatches, _BaseColorInputAbstra);
 
     /** @ignore */
     function ColorInputSwatches() {
@@ -43205,7 +43188,7 @@ var Coral = (function (exports) {
     }]);
 
     return ColorInputSwatches;
-  }(ColorInputAbstractSubviewMixin(ComponentMixin(HTMLElement)));
+  }(BaseColorInputAbstractSubview(BaseComponent(HTMLElement)));
 
   var template$v = function anonymous(data_0
   /*``*/
@@ -43461,14 +43444,14 @@ var Coral = (function (exports) {
    @classdesc A ColorInput component than can be used as a form field to select from a list of color options.
    @htmltag coral-colorinput
    @extends {HTMLElement}
-   @extends {ComponentMixin}
-   @extends {FormFieldMixin}
+   @extends {BaseComponent}
+   @extends {BaseFormField}
    */
 
   var ColorInput =
   /*#__PURE__*/
-  function (_FormFieldMixin) {
-    _inherits(ColorInput, _FormFieldMixin);
+  function (_BaseFormField) {
+    _inherits(ColorInput, _BaseFormField);
 
     /** @ignore */
     function ColorInput() {
@@ -44215,7 +44198,7 @@ var Coral = (function (exports) {
         this._syncColorPreviewIcon();
       }
       /**
-       Inherited from {@link FormFieldMixin#invalid}.
+       Inherited from {@link BaseFormField#invalid}.
        */
 
     }, {
@@ -44272,7 +44255,7 @@ var Coral = (function (exports) {
         this._elements.colorPreview.disabled = this.disabled || this._readOnly;
       }
       /**
-       Inherited from {@link FormFieldMixin#labelledBy}.
+       Inherited from {@link BaseFormField#labelledBy}.
        */
 
     }, {
@@ -44356,7 +44339,7 @@ var Coral = (function (exports) {
     }]);
 
     return ColorInput;
-  }(FormFieldMixin(ComponentMixin(HTMLElement)));
+  }(BaseFormField(BaseComponent(HTMLElement)));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -44758,14 +44741,14 @@ var Coral = (function (exports) {
    (e.g. a filesystem or multi-level navigation).
    @htmltag coral-columnview
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
 
   var ColumnView =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(ColumnView, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(ColumnView, _BaseComponent);
 
     /** @ignore */
     function ColumnView() {
@@ -45724,7 +45707,7 @@ var Coral = (function (exports) {
     }]);
 
     return ColumnView;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var CLASSNAME$_ = '_coral-MillerColumns-item'; // The number of milliseconds for which scroll events should be debounced.
 
@@ -45741,13 +45724,13 @@ var Coral = (function (exports) {
    @classdesc A ColumnView Column component
    @htmltag coral-columnview-column
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var ColumnViewColumn =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(ColumnViewColumn, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(ColumnViewColumn, _BaseComponent);
 
     /** @ignore */
     function ColumnViewColumn() {
@@ -46362,7 +46345,7 @@ var Coral = (function (exports) {
     }]);
 
     return ColumnViewColumn;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -46426,13 +46409,13 @@ var Coral = (function (exports) {
    @classdesc A ColumnView Item component
    @htmltag coral-columnview-item
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var ColumnViewItem =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(ColumnViewItem, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(ColumnViewItem, _BaseComponent);
 
     /** @ignore */
     function ColumnViewItem() {
@@ -46700,7 +46683,7 @@ var Coral = (function (exports) {
     }]);
 
     return ColumnViewItem;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -46786,13 +46769,13 @@ var Coral = (function (exports) {
    @classdesc A ColumnView Preview component
    @htmltag coral-columnview-preview
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var ColumnViewPreview =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(ColumnViewPreview, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(ColumnViewPreview, _BaseComponent);
 
     /** @ignore */
     function ColumnViewPreview() {
@@ -46860,7 +46843,7 @@ var Coral = (function (exports) {
     }]);
 
     return ColumnViewPreview;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -47048,13 +47031,13 @@ var Coral = (function (exports) {
    @classdesc A CycleButton Item component
    @htmltag coral-cyclebutton-item
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var CycleButtonItem =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(CycleButtonItem, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(CycleButtonItem, _BaseComponent);
 
     function CycleButtonItem() {
       _classCallCheck(this, CycleButtonItem);
@@ -47196,7 +47179,7 @@ var Coral = (function (exports) {
         this.trigger('coral-cyclebutton-item:_displaymodechanged');
       }
       /**
-       Inherited from {@link ComponentMixin#trackingElement}.
+       Inherited from {@link BaseComponent#trackingElement}.
        */
 
     }, {
@@ -47229,7 +47212,7 @@ var Coral = (function (exports) {
     }]);
 
     return CycleButtonItem;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var template$w = function anonymous(data_0
   /*``*/
@@ -47331,13 +47314,13 @@ var Coral = (function (exports) {
    a certain threshold, and shows them in a popover selector when above.
    @htmltag coral-cyclebutton
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var CycleButton =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(CycleButton, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(CycleButton, _BaseComponent);
 
     /** @ignore */
     function CycleButton() {
@@ -48054,20 +48037,20 @@ var Coral = (function (exports) {
     }]);
 
     return CycleButton;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    @class Coral.CycleButton.Action
    @classdesc A CycleButton Action component
    @htmltag coral-cyclebutton-action
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var CycleButtonAction =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(CycleButtonAction, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(CycleButtonAction, _BaseComponent);
 
     function CycleButtonAction() {
       _classCallCheck(this, CycleButtonAction);
@@ -48110,7 +48093,7 @@ var Coral = (function (exports) {
         }
       }
       /**
-       Inherited from {@link ComponentMixin#trackingElement}.
+       Inherited from {@link BaseComponent#trackingElement}.
        */
 
     }, {
@@ -48125,7 +48108,7 @@ var Coral = (function (exports) {
     }]);
 
     return CycleButtonAction;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -48425,15 +48408,15 @@ var Coral = (function (exports) {
    if loaded on the page.
    @htmltag coral-datepicker
    @extends {HTMLElement}
-   @extends {ComponentMixin}
-   @extends {FormFieldMixin}
+   @extends {BaseComponent}
+   @extends {BaseFormField}
    */
 
 
   var Datepicker =
   /*#__PURE__*/
-  function (_FormFieldMixin) {
-    _inherits(Datepicker, _FormFieldMixin);
+  function (_BaseFormField) {
+    _inherits(Datepicker, _BaseFormField);
 
     /** @ignore */
     function Datepicker() {
@@ -49058,7 +49041,7 @@ var Coral = (function (exports) {
         this._elements.toggle.disabled = this._disabled || this.readOnly;
       }
       /**
-       Inherited from {@link FormFieldMixin#invalid}.
+       Inherited from {@link BaseFormField#invalid}.
        */
 
     }, {
@@ -49123,7 +49106,7 @@ var Coral = (function (exports) {
         this._elements.toggle.disabled = this._readOnly || this.disabled;
       }
       /**
-       Inherited from {@link FormFieldMixin#labelledBy}.
+       Inherited from {@link BaseFormField#labelledBy}.
        */
 
     }, {
@@ -49203,7 +49186,7 @@ var Coral = (function (exports) {
     }]);
 
     return Datepicker;
-  }(FormFieldMixin(ComponentMixin(HTMLElement)));
+  }(BaseFormField(BaseComponent(HTMLElement)));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -49289,14 +49272,14 @@ var Coral = (function (exports) {
    @classdesc A Drawer component to display content that can be opened and closed with a sliding animation.
    @htmltag coral-drawer
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
 
   var Drawer =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(Drawer, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(Drawer, _BaseComponent);
 
     /** @ignore */
     function Drawer() {
@@ -49537,7 +49520,7 @@ var Coral = (function (exports) {
     }]);
 
     return Drawer;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -50765,14 +50748,14 @@ var Coral = (function (exports) {
    
    @htmltag coral-fileupload
    @extends {HTMLElement}
-   @extends {ComponentMixin}
-   @extends {FormFieldMixin}
+   @extends {BaseComponent}
+   @extends {BaseFormField}
    */
 
   var FileUpload =
   /*#__PURE__*/
-  function (_FormFieldMixin) {
-    _inherits(FileUpload, _FormFieldMixin);
+  function (_BaseFormField) {
+    _inherits(FileUpload, _BaseFormField);
 
     /** @ignore */
     function FileUpload() {
@@ -51533,7 +51516,7 @@ var Coral = (function (exports) {
         this._setElementState();
       }
       /**
-       Inherited from {@link FormFieldMixin#invalid}.
+       Inherited from {@link BaseFormField#invalid}.
        */
 
     }, {
@@ -51625,7 +51608,7 @@ var Coral = (function (exports) {
         }
       }
       /**
-       Inherited from {@link FormFieldMixin#labelledBy}.
+       Inherited from {@link BaseFormField#labelledBy}.
        */
 
     }, {
@@ -51894,7 +51877,7 @@ var Coral = (function (exports) {
     }]);
 
     return FileUpload;
-  }(FormFieldMixin(ComponentMixin(HTMLElement)));
+  }(BaseFormField(BaseComponent(HTMLElement)));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -51937,13 +51920,13 @@ var Coral = (function (exports) {
    @classdesc A Masonry Item component
    @htmltag coral-masonry-item
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var MasonryItem =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(MasonryItem, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(MasonryItem, _BaseComponent);
 
     /** @ignore */
     function MasonryItem() {
@@ -52128,7 +52111,7 @@ var Coral = (function (exports) {
     }]);
 
     return MasonryItem;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var CLASSNAME$17 = '_coral-Masonry';
   /**
@@ -52216,14 +52199,14 @@ var Coral = (function (exports) {
    @classdesc A Masonry component that allows to lay out items in a masonry grid.
    @htmltag coral-masonry
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
 
   var Masonry =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(Masonry, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(Masonry, _BaseComponent);
 
     /** @ignore */
     function Masonry() {
@@ -53040,7 +53023,7 @@ var Coral = (function (exports) {
     }]);
 
     return Masonry;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -54025,13 +54008,13 @@ var Coral = (function (exports) {
    - <code>[coral-multifield-add]</code>. Click to add an item.
    @htmltag coral-multifield
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var Multifield =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(Multifield, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(Multifield, _BaseComponent);
 
     /** @ignore */
     function Multifield() {
@@ -54392,7 +54375,7 @@ var Coral = (function (exports) {
     }]);
 
     return Multifield;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var template$C = function anonymous(data_0
   /*``*/
@@ -54432,13 +54415,13 @@ var Coral = (function (exports) {
    added items will always be rendered based on the template.
    @htmltag coral-multifield-item
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var MultifieldItem =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(MultifieldItem, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(MultifieldItem, _BaseComponent);
 
     /** @ignore */
     function MultifieldItem() {
@@ -54532,7 +54515,7 @@ var Coral = (function (exports) {
     }]);
 
     return MultifieldItem;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -54782,15 +54765,15 @@ var Coral = (function (exports) {
    <code>right</code>, <code>pageup</code>, <code>pagedown</code>, <code>home</code>, <code>end</code> and the Mouse Wheel.
    @htmltag coral-numberinput
    @extends {HTMLElement}
-   @extends {ComponentMixin}
-   @extends {FormFieldMixin}
+   @extends {BaseComponent}
+   @extends {BaseFormField}
    */
 
 
   var NumberInput =
   /*#__PURE__*/
-  function (_FormFieldMixin) {
-    _inherits(NumberInput, _FormFieldMixin);
+  function (_BaseFormField) {
+    _inherits(NumberInput, _BaseFormField);
 
     /** @ignore */
     function NumberInput() {
@@ -54842,11 +54825,11 @@ var Coral = (function (exports) {
 
     _createClass(NumberInput, [{
       key: "reset",
-      // overrides the behavior from mixin-formfield
+      // overrides the behavior from BaseFormField
       value: function reset() {
         // since there is an internal value, this one handles the reset
         this._elements.input.reset();
-      } // overrides the behavior from mixin-formfield
+      } // overrides the behavior from BaseFormField
 
     }, {
       key: "clear",
@@ -55536,7 +55519,7 @@ var Coral = (function (exports) {
         this._setButtonState();
       }
       /**
-       Inherited from {@link FormFieldMixin#invalid}.
+       Inherited from {@link BaseFormField#invalid}.
        */
 
     }, {
@@ -55550,7 +55533,7 @@ var Coral = (function (exports) {
         this._elements.input.invalid = this._invalid;
       }
       /**
-       Inherited from {@link FormFieldMixin#labelledBy}.
+       Inherited from {@link BaseFormField#labelledBy}.
        */
 
     }, {
@@ -55593,7 +55576,7 @@ var Coral = (function (exports) {
     }]);
 
     return NumberInput;
-  }(FormFieldMixin(ComponentMixin(HTMLElement)));
+  }(BaseFormField(BaseComponent(HTMLElement)));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -55619,13 +55602,13 @@ var Coral = (function (exports) {
    @classdesc A PanelStack component holding a collection of panels. It wraps content, keeping only the selected panel in view.
    @htmltag coral-panelstack
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var PanelStack =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(PanelStack, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(PanelStack, _BaseComponent);
 
     /** @ignore */
     function PanelStack() {
@@ -55766,7 +55749,7 @@ var Coral = (function (exports) {
     }]);
 
     return PanelStack;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var CLASSNAME$1c = '_coral-Panel';
   /**
@@ -55774,13 +55757,13 @@ var Coral = (function (exports) {
    @classdesc A Panel component
    @htmltag coral-panel
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var Panel =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(Panel, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(Panel, _BaseComponent);
 
     /** @ignore */
     function Panel() {
@@ -55881,7 +55864,7 @@ var Coral = (function (exports) {
     }]);
 
     return Panel;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -55996,13 +55979,13 @@ var Coral = (function (exports) {
    @classdesc A Progress component to indicate progress of processes.
    @htmltag coral-progress
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var Progress =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(Progress, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(Progress, _BaseComponent);
 
     /** @ignore */
     function Progress() {
@@ -56392,7 +56375,7 @@ var Coral = (function (exports) {
     }]);
 
     return Progress;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var CLASSNAME$1e = '_coral-BarLoader-label';
   /**
@@ -56400,13 +56383,13 @@ var Coral = (function (exports) {
    @classdesc The Progress label content
    @htmltag coral-progress-label
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var ProgressLabel =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(ProgressLabel, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(ProgressLabel, _BaseComponent);
 
     function ProgressLabel() {
       _classCallCheck(this, ProgressLabel);
@@ -56424,7 +56407,7 @@ var Coral = (function (exports) {
     }]);
 
     return ProgressLabel;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -56462,13 +56445,13 @@ var Coral = (function (exports) {
    @classdesc A QuickActions item component
    @htmltag coral-quickactions-item
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var QuickActionsItem =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(QuickActionsItem, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(QuickActionsItem, _BaseComponent);
 
     /** @ignore */
     function QuickActionsItem() {
@@ -56637,7 +56620,7 @@ var Coral = (function (exports) {
         this.trigger('coral-quickactions-item:_typechanged');
       }
       /**
-       Inherited from {@link ComponentMixin#trackingElement}.
+       Inherited from {@link BaseComponent#trackingElement}.
        */
 
     }, {
@@ -56664,7 +56647,7 @@ var Coral = (function (exports) {
     }]);
 
     return QuickActionsItem;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var template$F = function anonymous(data_0
   /*``*/
@@ -58159,14 +58142,14 @@ var Coral = (function (exports) {
    @classdesc A Radio component to be used as a form field.
    @htmltag coral-radio
    @extends {HTMLElement}
-   @extends {ComponentMixin}
-   @extends {FormFieldMixin}
+   @extends {BaseComponent}
+   @extends {BaseFormField}
    */
 
   var Radio =
   /*#__PURE__*/
-  function (_FormFieldMixin) {
-    _inherits(Radio, _FormFieldMixin);
+  function (_BaseFormField) {
+    _inherits(Radio, _BaseFormField);
 
     /** @ignore */
     function Radio() {
@@ -58289,7 +58272,7 @@ var Coral = (function (exports) {
         });
       }
       /**
-       Inherited from {@link FormFieldMixin#clear}.
+       Inherited from {@link BaseFormField#clear}.
        */
 
     }, {
@@ -58298,7 +58281,7 @@ var Coral = (function (exports) {
         this.checked = false;
       }
       /**
-       Inherited from {@link FormFieldMixin#reset}.
+       Inherited from {@link BaseFormField#reset}.
        */
 
     }, {
@@ -58488,7 +58471,7 @@ var Coral = (function (exports) {
         this.setAttribute('aria-readonly', this._readOnly);
       }
       /**
-       Inherited from {@link ComponentMixin#trackingElement}.
+       Inherited from {@link BaseComponent#trackingElement}.
        */
 
     }, {
@@ -58540,7 +58523,7 @@ var Coral = (function (exports) {
     }]);
 
     return Radio;
-  }(FormFieldMixin(ComponentMixin(HTMLElement)));
+  }(BaseFormField(BaseComponent(HTMLElement)));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -58823,13 +58806,13 @@ var Coral = (function (exports) {
    integrate all Shell sub components.
    @htmltag coral-shell
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var Shell =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(Shell, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(Shell, _BaseComponent);
 
     /** @ignore */
     function Shell() {
@@ -58896,7 +58879,7 @@ var Coral = (function (exports) {
     }]);
 
     return Shell;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -58926,13 +58909,13 @@ var Coral = (function (exports) {
    @classdesc A Shell Header component
    @htmltag coral-shell-header
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var ShellHeader =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(ShellHeader, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(ShellHeader, _BaseComponent);
 
     /** @ignore */
     function ShellHeader() {
@@ -59123,7 +59106,7 @@ var Coral = (function (exports) {
     }]);
 
     return ShellHeader;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var template$H = function anonymous(data_0
   /*``*/
@@ -59146,13 +59129,13 @@ var Coral = (function (exports) {
    @htmltag coral-shell-homeanchor
    @htmlbasetag a
    @extends {HTMLAnchorElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var ShellHomeAnchor =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(ShellHomeAnchor, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(ShellHomeAnchor, _BaseComponent);
 
     /** @ignore */
     function ShellHomeAnchor() {
@@ -59275,7 +59258,7 @@ var Coral = (function (exports) {
     }]);
 
     return ShellHomeAnchor;
-  }(ComponentMixin(HTMLAnchorElement));
+  }(BaseComponent(HTMLAnchorElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -59432,14 +59415,14 @@ var Coral = (function (exports) {
    @classdesc A Search component is a search styled form field.
    @htmltag coral-search
    @extends {HTMLElement}
-   @extends {ComponentMixin}
-   @extends {FormFieldMixin}
+   @extends {BaseComponent}
+   @extends {BaseFormField}
    */
 
   var Search =
   /*#__PURE__*/
-  function (_FormFieldMixin) {
-    _inherits(Search, _FormFieldMixin);
+  function (_BaseFormField) {
+    _inherits(Search, _BaseFormField);
 
     /** @ignore */
     function Search() {
@@ -59547,14 +59530,14 @@ var Coral = (function (exports) {
 
 
         this.trigger('coral-search:clear');
-      } // overrides the behavior from mixin-formfield
+      } // overrides the behavior from BaseFormField
 
     }, {
       key: "reset",
       value: function reset() {
         // since there is an internal value, this one handles the reset
         this._elements.input.reset();
-      } // overrides the behavior from mixin-formfield
+      } // overrides the behavior from BaseFormField
 
     }, {
       key: "clear",
@@ -59715,7 +59698,7 @@ var Coral = (function (exports) {
         this._elements.clearButton.disabled = this._readOnly;
       }
       /**
-       Inherited from {@link FormFieldMixin#labelledBy}.
+       Inherited from {@link BaseFormField#labelledBy}.
        */
 
     }, {
@@ -59806,7 +59789,7 @@ var Coral = (function (exports) {
         this._reflectAttribute('icon', this._icon);
       }
       /**
-       Inherited from {@link FormFieldMixin#invalid}.
+       Inherited from {@link BaseFormField#invalid}.
        */
 
     }, {
@@ -59832,7 +59815,7 @@ var Coral = (function (exports) {
     }]);
 
     return Search;
-  }(FormFieldMixin(ComponentMixin(HTMLElement)));
+  }(BaseFormField(BaseComponent(HTMLElement)));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -59991,13 +59974,13 @@ var Coral = (function (exports) {
    @classdesc A Shell Help component
    @htmltag coral-shell-help
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var ShellHelp =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(ShellHelp, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(ShellHelp, _BaseComponent);
 
     /** @ignore */
     function ShellHelp() {
@@ -60254,7 +60237,7 @@ var Coral = (function (exports) {
     }]);
 
     return ShellHelp;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var CLASSNAME$1l = ['_coral-BasicList-item', '_coral-AnchorList-item', '_coral-Shell-help-item'];
   /**
@@ -60362,15 +60345,15 @@ var Coral = (function (exports) {
    @classdesc A Shell Menu component
    @htmltag coral-shell-menu
    @extends {HTMLElement}
-   @extends {ComponentMixin}
-   @extends {OverlayMixin}
+   @extends {BaseComponent}
+   @extends {BaseOverlay}
    */
 
 
   var ShellMenu =
   /*#__PURE__*/
-  function (_OverlayMixin) {
-    _inherits(ShellMenu, _OverlayMixin);
+  function (_BaseOverlay) {
+    _inherits(ShellMenu, _BaseOverlay);
 
     /** @ignore */
     function ShellMenu() {
@@ -60413,7 +60396,7 @@ var Coral = (function (exports) {
         }
       }
       /**
-       @todo this is duplicated between ovelay components, maybe this should be in a mixin
+       @todo this is duplicated between ovelay components, maybe this should be in a base
        
        @ignore
        */
@@ -60557,7 +60540,7 @@ var Coral = (function (exports) {
         this._reflectAttribute('top', this._top);
       }
       /**
-       Inherited from {@link OverlayMixin#open}.
+       Inherited from {@link BaseOverlay#open}.
        */
 
     }, {
@@ -60599,7 +60582,7 @@ var Coral = (function (exports) {
     }]);
 
     return ShellMenu;
-  }(OverlayMixin(ComponentMixin(HTMLElement)));
+  }(BaseOverlay(BaseComponent(HTMLElement)));
 
   var CLASSNAME$1n = '_coral-Shell-menubar';
   /**
@@ -60607,13 +60590,13 @@ var Coral = (function (exports) {
    @classdesc A Shell MenuBar component
    @htmltag coral-shell-menubar
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var ShellMenuBar =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(ShellMenuBar, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(ShellMenuBar, _BaseComponent);
 
     /** @ignore */
     function ShellMenuBar() {
@@ -60660,7 +60643,7 @@ var Coral = (function (exports) {
     }]);
 
     return ShellMenuBar;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var template$N = function anonymous(data_0
   /*``*/
@@ -60714,14 +60697,14 @@ var Coral = (function (exports) {
    @classdesc A Shell MenuBar Item component
    @htmltag coral-shell-menubar-item
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
 
   var ShellMenuBarItem =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(ShellMenuBarItem, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(ShellMenuBarItem, _BaseComponent);
 
     /** @ignore */
     function ShellMenuBarItem() {
@@ -60999,7 +60982,7 @@ var Coral = (function (exports) {
     }]);
 
     return ShellMenuBarItem;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var template$O = function anonymous(data_0
   /*``*/
@@ -61050,13 +61033,13 @@ var Coral = (function (exports) {
    @classdesc A Shell User component
    @htmltag coral-shell-user
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var ShellUser =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(ShellUser, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(ShellUser, _BaseComponent);
 
     /** @ignore */
     function ShellUser() {
@@ -61281,7 +61264,7 @@ var Coral = (function (exports) {
     }]);
 
     return ShellUser;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -61399,13 +61382,13 @@ var Coral = (function (exports) {
    @classdesc A Shell Workspaces component
    @htmltag coral-shell-workspaces
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var ShellWorkspaces =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(ShellWorkspaces, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(ShellWorkspaces, _BaseComponent);
 
     /** @ignore */
     function ShellWorkspaces() {
@@ -61673,7 +61656,7 @@ var Coral = (function (exports) {
     }]);
 
     return ShellWorkspaces;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var CLASSNAME$1r = '_coral-Shell-workspaces-workspace';
   /**
@@ -61682,13 +61665,13 @@ var Coral = (function (exports) {
    @htmltag coral-shell-workspace
    @htmlbasetag a
    @extends {HTMLAnchorElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var ShellWorkspace =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(ShellWorkspace, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(ShellWorkspace, _BaseComponent);
 
     /** @ignore */
     function ShellWorkspace() {
@@ -61764,7 +61747,7 @@ var Coral = (function (exports) {
     }]);
 
     return ShellWorkspace;
-  }(ComponentMixin(HTMLAnchorElement));
+  }(BaseComponent(HTMLAnchorElement));
 
   var template$P = function anonymous(data_0
   /*``*/
@@ -61785,13 +61768,13 @@ var Coral = (function (exports) {
    @classdesc A Shell Solution Switcher component
    @htmltag coral-shell-solutionswitcher
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var ShellSolutionSwitcher =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(ShellSolutionSwitcher, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(ShellSolutionSwitcher, _BaseComponent);
 
     /** @ignore */
     function ShellSolutionSwitcher() {
@@ -61870,7 +61853,7 @@ var Coral = (function (exports) {
     }]);
 
     return ShellSolutionSwitcher;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var CLASSNAME$1t = '_coral-Shell-solutions';
   /**
@@ -61878,13 +61861,13 @@ var Coral = (function (exports) {
    @classdesc A Shell Solutions component
    @htmltag coral-shell-solutions
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var ShellSolutions =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(ShellSolutions, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(ShellSolutions, _BaseComponent);
 
     function ShellSolutions() {
       _classCallCheck(this, ShellSolutions);
@@ -62000,7 +61983,7 @@ var Coral = (function (exports) {
     }]);
 
     return ShellSolutions;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -62048,13 +62031,13 @@ var Coral = (function (exports) {
    @classdesc A Shell Solution component
    @htmltag coral-shell-solution
    @extends {HTMLAnchorElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var ShellSolution =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(ShellSolution, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(ShellSolution, _BaseComponent);
 
     /** @ignore */
     function ShellSolution() {
@@ -62180,7 +62163,7 @@ var Coral = (function (exports) {
     }]);
 
     return ShellSolution;
-  }(ComponentMixin(HTMLAnchorElement));
+  }(BaseComponent(HTMLAnchorElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -63187,13 +63170,13 @@ var Coral = (function (exports) {
    @classdesc A StepList component that holds a collection of steps.
    @htmltag coral-steplist
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var StepList =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(StepList, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(StepList, _BaseComponent);
 
     /** @ignore */
     function StepList() {
@@ -63770,7 +63753,7 @@ var Coral = (function (exports) {
     }]);
 
     return StepList;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var template$T = function anonymous(data_0
   /*``*/
@@ -63817,13 +63800,13 @@ var Coral = (function (exports) {
    @classdesc A Step component
    @htmltag coral-step
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var Step =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(Step, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(Step, _BaseComponent);
 
     /** @ignore */
     function Step() {
@@ -64013,7 +63996,7 @@ var Coral = (function (exports) {
         }
       }
       /**
-       Inherited from {@link ComponentMixin#trackingElement}.
+       Inherited from {@link BaseComponent#trackingElement}.
        */
 
     }, {
@@ -64042,7 +64025,7 @@ var Coral = (function (exports) {
     }]);
 
     return Step;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var CLASSNAME$1y = '_coral-Steplist-label';
   /**
@@ -64050,13 +64033,13 @@ var Coral = (function (exports) {
    @classdesc A Step Label
    @htmltag coral-step-label
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var StepLabel =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(StepLabel, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(StepLabel, _BaseComponent);
 
     function StepLabel() {
       _classCallCheck(this, StepLabel);
@@ -64074,7 +64057,7 @@ var Coral = (function (exports) {
     }]);
 
     return StepLabel;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -64128,14 +64111,14 @@ var Coral = (function (exports) {
    @classdesc A Switch component is a toggle form field similar to a Checkbox component.
    @htmltag coral-switch
    @extends {HTMLElement}
-   @extends {ComponentMixin}
-   @extends {FormFieldMixin}
+   @extends {BaseComponent}
+   @extends {BaseFormField}
    */
 
   var Switch =
   /*#__PURE__*/
-  function (_FormFieldMixin) {
-    _inherits(Switch, _FormFieldMixin);
+  function (_BaseFormField) {
+    _inherits(Switch, _BaseFormField);
 
     /** @ignore */
     function Switch() {
@@ -64216,13 +64199,13 @@ var Coral = (function (exports) {
       key: "clear",
 
       /**
-       Inherited from {@link FormFieldMixin#clear}.
+       Inherited from {@link BaseFormField#clear}.
        */
       value: function clear() {
         this.checked = false;
       }
       /**
-       Inherited from {@link FormFieldMixin#reset}.
+       Inherited from {@link BaseFormField#reset}.
        */
 
     }, {
@@ -64445,7 +64428,7 @@ var Coral = (function (exports) {
     }]);
 
     return Switch;
-  }(FormFieldMixin(ComponentMixin(HTMLElement)));
+  }(BaseFormField(BaseComponent(HTMLElement)));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -64700,13 +64683,13 @@ var Coral = (function (exports) {
    @htmltag coral-table-column
    @htmlbasetag col
    @extends {HTMLTableColElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var TableColumn =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(TableColumn, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(TableColumn, _BaseComponent);
 
     function TableColumn() {
       _classCallCheck(this, TableColumn);
@@ -65052,7 +65035,7 @@ var Coral = (function (exports) {
     }]);
 
     return TableColumn;
-  }(ComponentMixin(HTMLTableColElement));
+  }(BaseComponent(HTMLTableColElement));
 
   var CLASSNAME$1B = '_coral-Table-cell';
   /**
@@ -65061,13 +65044,13 @@ var Coral = (function (exports) {
    @htmltag coral-table-cell
    @htmlbasetag td
    @extends {HTMLTableCellElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var TableCell =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(TableCell, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(TableCell, _BaseComponent);
 
     function TableCell() {
       _classCallCheck(this, TableCell);
@@ -65230,7 +65213,7 @@ var Coral = (function (exports) {
     }]);
 
     return TableCell;
-  }(ComponentMixin(HTMLTableCellElement));
+  }(BaseComponent(HTMLTableCellElement));
 
   var CLASSNAME$1C = '_coral-Table-headerCell';
   /**
@@ -65239,13 +65222,13 @@ var Coral = (function (exports) {
    @htmltag coral-table-headercell
    @htmlbasetag th
    @extends {HTMLTableCellElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var TableHeaderCell =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(TableHeaderCell, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(TableHeaderCell, _BaseComponent);
 
     /** @ignore */
     function TableHeaderCell() {
@@ -65335,7 +65318,7 @@ var Coral = (function (exports) {
     }]);
 
     return TableHeaderCell;
-  }(ComponentMixin(HTMLTableCellElement));
+  }(BaseComponent(HTMLTableCellElement));
 
   var CLASSNAME$1D = '_coral-Table-row';
   /**
@@ -65344,13 +65327,13 @@ var Coral = (function (exports) {
    @htmltag coral-table-row
    @htmlbasetag tr
    @extends {HTMLTableRowElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var TableRow =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(TableRow, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(TableRow, _BaseComponent);
 
     /** @ignore */
     function TableRow() {
@@ -65710,7 +65693,7 @@ var Coral = (function (exports) {
     }]);
 
     return TableRow;
-  }(ComponentMixin(HTMLTableRowElement));
+  }(BaseComponent(HTMLTableRowElement));
 
   // divider changes
 
@@ -65720,12 +65703,12 @@ var Coral = (function (exports) {
     ALL_DIVIDER_CLASSES.push("_coral-Table-divider--".concat(divider[dividerValue]));
   }
   /**
-   @mixin TableSectionMixin
+   @base BaseTableSection
    @classdesc The base element for table sections
    */
 
 
-  var TableSectionMixin = function TableSectionMixin(superClass) {
+  var BaseTableSection = function BaseTableSection(superClass) {
     return (
       /*#__PURE__*/
       function (_superClass) {
@@ -65798,14 +65781,14 @@ var Coral = (function (exports) {
    @htmltag coral-table-head
    @htmlbasetag thead
    @extends {HTMLTableSectionElement}
-   @extends {ComponentMixin}
-   @extends {TableSectionMixin}
+   @extends {BaseComponent}
+   @extends {BaseTableSection}
    */
 
   var TableHead =
   /*#__PURE__*/
-  function (_TableSectionMixin) {
-    _inherits(TableHead, _TableSectionMixin);
+  function (_BaseTableSection) {
+    _inherits(TableHead, _BaseTableSection);
 
     /** @ignore */
     function TableHead() {
@@ -65901,7 +65884,7 @@ var Coral = (function (exports) {
     }]);
 
     return TableHead;
-  }(TableSectionMixin(ComponentMixin(HTMLTableSectionElement)));
+  }(BaseTableSection(BaseComponent(HTMLTableSectionElement)));
 
   var CLASSNAME$1F = '_coral-Table-body';
   /**
@@ -65910,14 +65893,14 @@ var Coral = (function (exports) {
    @htmltag coral-table-body
    @htmlbasetag tbody
    @extends {HTMLTableSectionElement}
-   @extends {ComponentMixin}
-   @extends {TableSectionMixin}
+   @extends {BaseComponent}
+   @extends {BaseTableSection}
    */
 
   var TableBody =
   /*#__PURE__*/
-  function (_TableSectionMixin) {
-    _inherits(TableBody, _TableSectionMixin);
+  function (_BaseTableSection) {
+    _inherits(TableBody, _BaseTableSection);
 
     /** @ignore */
     function TableBody() {
@@ -65983,7 +65966,7 @@ var Coral = (function (exports) {
     }]);
 
     return TableBody;
-  }(TableSectionMixin(ComponentMixin(HTMLTableSectionElement)));
+  }(BaseTableSection(BaseComponent(HTMLTableSectionElement)));
 
   var CLASSNAME$1G = '_coral-Table-foot';
   /**
@@ -65992,14 +65975,14 @@ var Coral = (function (exports) {
    @htmltag coral-table-foot
    @htmlbasetag tfoot
    @extends {HTMLTableSectionElement}
-   @extends {ComponentMixin}
-   @extends {TableSectionMixin}
+   @extends {BaseComponent}
+   @extends {BaseTableSection}
    */
 
   var TableFoot =
   /*#__PURE__*/
-  function (_TableSectionMixin) {
-    _inherits(TableFoot, _TableSectionMixin);
+  function (_BaseTableSection) {
+    _inherits(TableFoot, _BaseTableSection);
 
     function TableFoot() {
       _classCallCheck(this, TableFoot);
@@ -66019,7 +66002,7 @@ var Coral = (function (exports) {
     }]);
 
     return TableFoot;
-  }(TableSectionMixin(ComponentMixin(HTMLTableSectionElement)));
+  }(BaseTableSection(BaseComponent(HTMLTableSectionElement)));
 
   var template$V = function anonymous(data_0
   /*``*/
@@ -66102,13 +66085,13 @@ var Coral = (function (exports) {
    @htmltag coral-table
    @htmlbasetag table
    @extends {HTMLTableElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var Table =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(Table, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(Table, _BaseComponent);
 
     /** @ignore */
     function Table() {
@@ -68743,7 +68726,7 @@ var Coral = (function (exports) {
     }]);
 
     return Table;
-  }(ComponentMixin(HTMLTableElement));
+  }(BaseComponent(HTMLTableElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -68869,13 +68852,13 @@ var Coral = (function (exports) {
    @classdesc A Tab component
    @htmltag coral-tab
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var Tab =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(Tab, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(Tab, _BaseComponent);
 
     /** @ignore */
     function Tab() {
@@ -69155,7 +69138,7 @@ var Coral = (function (exports) {
         }
       }
       /**
-       Inherited from {@link ComponentMixin#trackingElement}.
+       Inherited from {@link BaseComponent#trackingElement}.
        */
 
     }, {
@@ -69184,7 +69167,7 @@ var Coral = (function (exports) {
     }]);
 
     return Tab;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -69282,13 +69265,13 @@ var Coral = (function (exports) {
    @classdesc A TabList component holds a collection of tabs.
    @htmltag coral-tablist
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var TabList =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(TabList, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(TabList, _BaseComponent);
 
     /** @ignore */
     function TabList() {
@@ -69788,7 +69771,7 @@ var Coral = (function (exports) {
     }]);
 
     return TabList;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -69830,13 +69813,13 @@ var Coral = (function (exports) {
    This is intended to be used with a {@link TabList} and {@link PanelStack}.
    @htmltag coral-tabview
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var TabView =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(TabView, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(TabView, _BaseComponent);
 
     /** @ignore */
     function TabView() {
@@ -70031,7 +70014,7 @@ var Coral = (function (exports) {
     }]);
 
     return TabView;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -70076,15 +70059,15 @@ var Coral = (function (exports) {
    @htmltag coral-textarea
    @htmlbasetag textarea
    @extends {HTMLTextAreaElement}
-   @extends {ComponentMixin}
-   @extends {FormFieldMixin}
+   @extends {BaseComponent}
+   @extends {BaseFormField}
    */
 
 
   var Textarea =
   /*#__PURE__*/
-  function (_FormFieldMixin) {
-    _inherits(Textarea, _FormFieldMixin);
+  function (_BaseFormField) {
+    _inherits(Textarea, _BaseFormField);
 
     /** @ignore */
     function Textarea() {
@@ -70114,7 +70097,7 @@ var Coral = (function (exports) {
       key: "reset",
 
       /**
-       Inherited from {@link FormFieldMixin#reset}.
+       Inherited from {@link BaseFormField#reset}.
        */
       value: function reset() {
         // the textarea uses the textContent to save the old value and not the value attribute
@@ -70197,7 +70180,7 @@ var Coral = (function (exports) {
     }]);
 
     return Textarea;
-  }(FormFieldMixin(ComponentMixin(HTMLTextAreaElement)));
+  }(BaseFormField(BaseComponent(HTMLTextAreaElement)));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -70358,15 +70341,15 @@ var Coral = (function (exports) {
    They are noticeable but do not disrupt the user experience and do not require an action to be taken.
    @htmltag coral-toast
    @extends {HTMLElement}
-   @extends {ComponentMixin}
-   @extends {OverlayMixin}
+   @extends {BaseComponent}
+   @extends {BaseOverlay}
    */
 
 
   var Toast =
   /*#__PURE__*/
-  function (_OverlayMixin) {
-    _inherits(Toast, _OverlayMixin);
+  function (_BaseOverlay) {
+    _inherits(Toast, _BaseOverlay);
 
     /** @ignore */
     function Toast() {
@@ -70652,7 +70635,7 @@ var Coral = (function (exports) {
         }
       }
       /**
-       Inherited from {@link OverlayMixin#open}.
+       Inherited from {@link BaseOverlay#open}.
        */
 
     }, {
@@ -70834,7 +70817,7 @@ var Coral = (function (exports) {
     }]);
 
     return Toast;
-  }(OverlayMixin(ComponentMixin(HTMLElement)));
+  }(BaseOverlay(BaseComponent(HTMLElement)));
 
   var CLASSNAME$1O = '_coral-Toast-content';
   /**
@@ -70842,13 +70825,13 @@ var Coral = (function (exports) {
    @classdesc The Toast default content
    @htmltag coral-toast-content
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var ToastContent =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(ToastContent, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(ToastContent, _BaseComponent);
 
     function ToastContent() {
       _classCallCheck(this, ToastContent);
@@ -70866,7 +70849,7 @@ var Coral = (function (exports) {
     }]);
 
     return ToastContent;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -70892,13 +70875,13 @@ var Coral = (function (exports) {
    {@link coral-collection:add} and {@link coral-collection:remove} events.
    @htmltag coral-tree
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var Tree =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(Tree, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(Tree, _BaseComponent);
 
     /** @ignore */
     function Tree() {
@@ -71464,7 +71447,7 @@ var Coral = (function (exports) {
     }]);
 
     return Tree;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   var template$Z = function anonymous(data_0
   /*``*/
@@ -71525,14 +71508,14 @@ var Coral = (function (exports) {
    @classdesc A Tree item component
    @htmltag coral-tree-item
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
 
   var TreeItem =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(TreeItem, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(TreeItem, _BaseComponent);
 
     /** @ignore */
     function TreeItem() {
@@ -71926,7 +71909,7 @@ var Coral = (function (exports) {
     }]);
 
     return TreeItem;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -71974,13 +71957,13 @@ var Coral = (function (exports) {
    to be used with a {@link StepList} and a {@link PanelStack}.
    @htmltag coral-wizardview
    @extends {HTMLElement}
-   @extends {ComponentMixin}
+   @extends {BaseComponent}
    */
 
   var WizardView =
   /*#__PURE__*/
-  function (_ComponentMixin) {
-    _inherits(WizardView, _ComponentMixin);
+  function (_BaseComponent) {
+    _inherits(WizardView, _BaseComponent);
 
     /** @ignore */
     function WizardView() {
@@ -72370,7 +72353,7 @@ var Coral = (function (exports) {
     }]);
 
     return WizardView;
-  }(ComponentMixin(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -72388,7 +72371,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.70";
+  var version = "1.0.0-beta.71";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
@@ -72407,6 +72390,14 @@ var Coral = (function (exports) {
   	{
   		name: "Oscar Bolanos",
   		url: "https://github.com/joekukish"
+  	},
+  	{
+  		name: "Frank Karstens",
+  		url: "https://github.com/karstens"
+  	},
+  	{
+  		name: "Aaron Brownlee",
+  		url: "https://github.com/misterbrownlee"
   	}
   ];
   var bugs = {

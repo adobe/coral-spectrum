@@ -3,6 +3,108 @@
   "expectCount": 3436,
   "actualCount": 2283,
   "files": {
+    "coral-spectrum/coral-base-button/src/scripts/BaseButton.js": {
+      "expectCount": 40,
+      "actualCount": 23,
+      "undocumentLines": [
+        31,
+        72,
+        74,
+        82,
+        132,
+        139,
+        145,
+        196,
+        217,
+        238,
+        259,
+        275,
+        306,
+        325,
+        352,
+        364,
+        434
+      ]
+    },
+    "coral-spectrum/coral-base-component/src/scripts/BaseComponent.js": {
+      "expectCount": 46,
+      "actualCount": 28,
+      "undocumentLines": [
+        17,
+        244,
+        348,
+        349,
+        353,
+        390,
+        405,
+        420,
+        424,
+        427,
+        432,
+        435,
+        446,
+        456,
+        518,
+        521,
+        703,
+        807
+      ]
+    },
+    "coral-spectrum/coral-base-formfield/src/scripts/BaseFormField.js": {
+      "expectCount": 23,
+      "actualCount": 18,
+      "undocumentLines": [
+        16,
+        51,
+        69,
+        147,
+        354
+      ]
+    },
+    "coral-spectrum/coral-base-list/src/scripts/BaseList.js": {
+      "expectCount": 19,
+      "actualCount": 15,
+      "undocumentLines": [
+        16,
+        42,
+        63,
+        93
+      ]
+    },
+    "coral-spectrum/coral-base-list/src/scripts/BaseListItem.js": {
+      "expectCount": 11,
+      "actualCount": 7,
+      "undocumentLines": [
+        17,
+        29,
+        67,
+        88
+      ]
+    },
+    "coral-spectrum/coral-base-overlay/src/scripts/BaseOverlay.js": {
+      "expectCount": 55,
+      "actualCount": 37,
+      "undocumentLines": [
+        19,
+        41,
+        44,
+        47,
+        48,
+        54,
+        394,
+        410,
+        454,
+        472,
+        515,
+        533,
+        616,
+        638,
+        690,
+        695,
+        745,
+        886
+      ]
+    },
     "coral-spectrum/coral-collection/src/scripts/Collection.js": {
       "expectCount": 35,
       "actualCount": 20,
@@ -124,21 +226,6 @@
         61
       ]
     },
-    "coral-spectrum/coral-component-actionbar/src/scripts/ActionBarContainerMixin.js": {
-      "expectCount": 21,
-      "actualCount": 12,
-      "undocumentLines": [
-        23,
-        25,
-        53,
-        54,
-        97,
-        120,
-        136,
-        167,
-        171
-      ]
-    },
     "coral-spectrum/coral-component-actionbar/src/scripts/ActionBarItem.js": {
       "expectCount": 5,
       "actualCount": 3,
@@ -159,6 +246,21 @@
       "actualCount": 4,
       "undocumentLines": [
         17
+      ]
+    },
+    "coral-spectrum/coral-component-actionbar/src/scripts/BaseActionBarContainer.js": {
+      "expectCount": 21,
+      "actualCount": 12,
+      "undocumentLines": [
+        23,
+        25,
+        53,
+        54,
+        97,
+        120,
+        136,
+        167,
+        171
       ]
     },
     "coral-spectrum/coral-component-actionbar/src/scripts/getFirstSelectableWrappedItem.js": {
@@ -503,6 +605,16 @@
         151
       ]
     },
+    "coral-spectrum/coral-component-colorinput/src/scripts/BaseColorInputAbstractSubview.js": {
+      "expectCount": 11,
+      "actualCount": 7,
+      "undocumentLines": [
+        22,
+        59,
+        60,
+        63
+      ]
+    },
     "coral-spectrum/coral-component-colorinput/src/scripts/Color.js": {
       "expectCount": 50,
       "actualCount": 46,
@@ -535,16 +647,6 @@
         561,
         599,
         800
-      ]
-    },
-    "coral-spectrum/coral-component-colorinput/src/scripts/ColorInputAbstractSubviewMixin.js": {
-      "expectCount": 11,
-      "actualCount": 7,
-      "undocumentLines": [
-        22,
-        59,
-        60,
-        63
       ]
     },
     "coral-spectrum/coral-component-colorinput/src/scripts/ColorInputColorProperties.js": {
@@ -1755,6 +1857,14 @@
       "actualCount": 1,
       "undocumentLines": []
     },
+    "coral-spectrum/coral-component-table/src/scripts/BaseTableSection.js": {
+      "expectCount": 6,
+      "actualCount": 4,
+      "undocumentLines": [
+        18,
+        41
+      ]
+    },
     "coral-spectrum/coral-component-table/src/scripts/Table.js": {
       "expectCount": 114,
       "actualCount": 75,
@@ -1875,14 +1985,6 @@
         122,
         158,
         168
-      ]
-    },
-    "coral-spectrum/coral-component-table/src/scripts/TableSectionMixin.js": {
-      "expectCount": 6,
-      "actualCount": 4,
-      "undocumentLines": [
-        18,
-        41
       ]
     },
     "coral-spectrum/coral-component-table/src/scripts/TableUtil.js": {
@@ -2181,108 +2283,6 @@
         406,
         428,
         607
-      ]
-    },
-    "coral-spectrum/coral-mixin-button/src/scripts/ButtonMixin.js": {
-      "expectCount": 40,
-      "actualCount": 23,
-      "undocumentLines": [
-        31,
-        72,
-        74,
-        82,
-        132,
-        139,
-        145,
-        196,
-        217,
-        238,
-        259,
-        275,
-        306,
-        325,
-        352,
-        364,
-        434
-      ]
-    },
-    "coral-spectrum/coral-mixin-component/src/scripts/ComponentMixin.js": {
-      "expectCount": 46,
-      "actualCount": 28,
-      "undocumentLines": [
-        17,
-        244,
-        348,
-        349,
-        353,
-        390,
-        405,
-        420,
-        424,
-        427,
-        432,
-        435,
-        446,
-        456,
-        518,
-        521,
-        703,
-        807
-      ]
-    },
-    "coral-spectrum/coral-mixin-formfield/src/scripts/FormFieldMixin.js": {
-      "expectCount": 23,
-      "actualCount": 18,
-      "undocumentLines": [
-        16,
-        51,
-        69,
-        147,
-        354
-      ]
-    },
-    "coral-spectrum/coral-mixin-list/src/scripts/ListItemMixin.js": {
-      "expectCount": 11,
-      "actualCount": 7,
-      "undocumentLines": [
-        17,
-        29,
-        67,
-        88
-      ]
-    },
-    "coral-spectrum/coral-mixin-list/src/scripts/ListMixin.js": {
-      "expectCount": 19,
-      "actualCount": 15,
-      "undocumentLines": [
-        16,
-        42,
-        63,
-        93
-      ]
-    },
-    "coral-spectrum/coral-mixin-overlay/src/scripts/OverlayMixin.js": {
-      "expectCount": 55,
-      "actualCount": 37,
-      "undocumentLines": [
-        19,
-        41,
-        44,
-        47,
-        48,
-        54,
-        394,
-        410,
-        454,
-        472,
-        515,
-        533,
-        616,
-        638,
-        690,
-        695,
-        745,
-        886
       ]
     },
     "coral-spectrum/coral-utils/src/scripts/Commons.js": {
