@@ -3,7 +3,6 @@
 /.publish
 
 /.editorconfig
-/.eslintrc
 /.gitignore
 
 /gulpfile.js
