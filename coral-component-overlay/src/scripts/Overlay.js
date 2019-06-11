@@ -446,7 +446,8 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
     while (!reposition && parent) {
       if (parent !== document.body) {
         const computedStyle = window.getComputedStyle(parent);
-        if (computedStyle.overflow === 'auto' || computedStyle.overflow === 'hidden') {
+        if (computedStyle.overflow === 'auto' || computedStyle.overflow === 'hidden' ||
+          parent.clientHeight === 0 || parent.clientWidth === 0) {
           reposition = true;
         }
         

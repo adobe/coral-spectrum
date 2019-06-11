@@ -811,7 +811,7 @@ describe('QuickActions', function() {
       var moreBtn = actionsEl.querySelector('[handle="moreButton"]');
       moreBtn.click();
       // Note: I found no way to separate the children who appear in the list from the ones visible on hover.
-      var firstBtnFromList = actionsEl.querySelector('coral-buttonlist [coral-list-item]:nth-child(3)');
+      var firstBtnFromList = actionsEl.overlay.querySelector('coral-buttonlist [coral-list-item]:nth-child(3)');
       firstBtnFromList.click();
       expect(trackerFnSpy.callCount).to.equal(3, 'Tracker should have been called three times.');
       
