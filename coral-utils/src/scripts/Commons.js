@@ -147,6 +147,7 @@ const CORAL_COMPONENTS = [
   'coral-slider',
   'coral-slider-item',
   'coral-rangedslider',
+  'coral-splitbutton',
   'coral-step',
   'coral-steplist',
   'coral-step-label',
