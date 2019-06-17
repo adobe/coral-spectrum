@@ -91,9 +91,9 @@ window.esdocSearchIndex = [
   ],
   [
     "@adobe/coral-spectrum~anchorbuttonlabel",
-    "function/index.html#static-function-AnchorButtonLabel",
+    "class/coral-spectrum/coral-component-anchorbutton/src/scripts/AnchorButtonLabel.js~AnchorButtonLabel.html",
     "<span>AnchorButtonLabel</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
-    "function"
+    "class"
   ],
   [
     "@adobe/coral-spectrum~anchorlist",
@@ -168,6 +168,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "@adobe/coral-spectrum~basepopovercontentzone",
+    "class/coral-spectrum/coral-component-popover/src/scripts/BasePopoverContentZone.js~BasePopoverContentZone.html",
+    "<span>BasePopoverContentZone</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
+  ],
+  [
     "@adobe/coral-spectrum~basetablesection",
     "class/coral-spectrum/coral-component-table/src/scripts/BaseTableSection.js~BaseTableSection.html",
     "<span>BaseTableSection</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
@@ -187,9 +193,9 @@ window.esdocSearchIndex = [
   ],
   [
     "@adobe/coral-spectrum~buttonlabel",
-    "function/index.html#static-function-ButtonLabel",
+    "class/coral-spectrum/coral-component-button/src/scripts/ButtonLabel.js~ButtonLabel.html",
     "<span>ButtonLabel</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
-    "function"
+    "class"
   ],
   [
     "@adobe/coral-spectrum~buttonlist",
@@ -589,9 +595,9 @@ window.esdocSearchIndex = [
   ],
   [
     "@adobe/coral-spectrum~listitemcontent",
-    "function/index.html#static-function-ListItemContent",
+    "class/coral-spectrum/coral-component-list/src/scripts/ListItemContent.js~ListItemContent.html",
     "<span>ListItemContent</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
-    "function"
+    "class"
   ],
   [
     "@adobe/coral-spectrum~masonry",
@@ -999,6 +1005,12 @@ window.esdocSearchIndex = [
     "@adobe/coral-spectrum~slideritem",
     "class/coral-spectrum/coral-component-slider/src/scripts/SliderItem.js~SliderItem.html",
     "<span>SliderItem</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
+  ],
+  [
+    "@adobe/coral-spectrum~splitbutton",
+    "class/coral-spectrum/coral-component-splitbutton/src/scripts/SplitButton.js~SplitButton.html",
+    "<span>SplitButton</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
     "class"
   ],
   [
@@ -4914,6 +4926,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "coral-spectrum/coral-component-list/src/scripts/selectlistitem.js~selectlistitem#icon",
+    "class/coral-spectrum/coral-component-list/src/scripts/SelectListItem.js~SelectListItem.html#instance-member-icon",
+    "coral-spectrum/coral-component-list/src/scripts/SelectListItem.js~SelectListItem#icon",
+    "member"
+  ],
+  [
     "coral-spectrum/coral-component-list/src/scripts/selectlistitem.js~selectlistitem#selected",
     "class/coral-spectrum/coral-component-list/src/scripts/SelectListItem.js~SelectListItem.html#instance-member-selected",
     "coral-spectrum/coral-component-list/src/scripts/SelectListItem.js~SelectListItem#selected",
@@ -5538,6 +5556,12 @@ window.esdocSearchIndex = [
     "typedef"
   ],
   [
+    "coral-spectrum/coral-component-popover/src/scripts/basepopovercontentzone.js",
+    "file/coral-spectrum/coral-component-popover/src/scripts/BasePopoverContentZone.js.html",
+    "coral-spectrum/coral-component-popover/src/scripts/BasePopoverContentZone.js",
+    "file"
+  ],
+  [
     "coral-spectrum/coral-component-popover/src/scripts/popover.js",
     "file/coral-spectrum/coral-component-popover/src/scripts/Popover.js.html",
     "coral-spectrum/coral-component-popover/src/scripts/Popover.js",
@@ -5577,6 +5601,12 @@ window.esdocSearchIndex = [
     "coral-spectrum/coral-component-popover/src/scripts/popover.js~popover#open",
     "class/coral-spectrum/coral-component-popover/src/scripts/Popover.js~Popover.html#instance-member-open",
     "coral-spectrum/coral-component-popover/src/scripts/Popover.js~Popover#open",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-popover/src/scripts/popover.js~popover#target",
+    "class/coral-spectrum/coral-component-popover/src/scripts/Popover.js~Popover.html#instance-member-target",
+    "coral-spectrum/coral-component-popover/src/scripts/Popover.js~Popover#target",
     "member"
   ],
   [
@@ -6324,21 +6354,9 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "coral-spectrum/coral-component-shell/src/scripts/shellmenu.js~shellmenu#from",
-    "class/coral-spectrum/coral-component-shell/src/scripts/ShellMenu.js~ShellMenu.html#instance-member-from",
-    "coral-spectrum/coral-component-shell/src/scripts/ShellMenu.js~ShellMenu#from",
-    "member"
-  ],
-  [
     "coral-spectrum/coral-component-shell/src/scripts/shellmenu.js~shellmenu#full",
     "class/coral-spectrum/coral-component-shell/src/scripts/ShellMenu.js~ShellMenu.html#instance-member-full",
     "coral-spectrum/coral-component-shell/src/scripts/ShellMenu.js~ShellMenu#full",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-shell/src/scripts/shellmenu.js~shellmenu#open",
-    "class/coral-spectrum/coral-component-shell/src/scripts/ShellMenu.js~ShellMenu.html#instance-member-open",
-    "coral-spectrum/coral-component-shell/src/scripts/ShellMenu.js~ShellMenu#open",
     "member"
   ],
   [
@@ -6348,34 +6366,10 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "coral-spectrum/coral-component-shell/src/scripts/shellmenu.js~shellmenu#top",
-    "class/coral-spectrum/coral-component-shell/src/scripts/ShellMenu.js~ShellMenu.html#instance-member-top",
-    "coral-spectrum/coral-component-shell/src/scripts/ShellMenu.js~ShellMenu#top",
+    "coral-spectrum/coral-component-shell/src/scripts/shellmenu.js~shellmenu#within",
+    "class/coral-spectrum/coral-component-shell/src/scripts/ShellMenu.js~ShellMenu.html#instance-member-within",
+    "coral-spectrum/coral-component-shell/src/scripts/ShellMenu.js~ShellMenu#within",
     "member"
-  ],
-  [
-    "coral-spectrum/coral-component-shell/src/scripts/shellmenu.js~shellmenu.from",
-    "class/coral-spectrum/coral-component-shell/src/scripts/ShellMenu.js~ShellMenu.html#static-member-from",
-    "coral-spectrum/coral-component-shell/src/scripts/ShellMenu.js~ShellMenu.from",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-shell/src/scripts/shellmenu.js~shellmenu.placement",
-    "class/coral-spectrum/coral-component-shell/src/scripts/ShellMenu.js~ShellMenu.html#static-member-placement",
-    "coral-spectrum/coral-component-shell/src/scripts/ShellMenu.js~ShellMenu.placement",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-shell/src/scripts/shellmenu.js~shellmenufromenum",
-    "typedef/index.html#static-typedef-ShellMenuFromEnum",
-    "coral-spectrum/coral-component-shell/src/scripts/ShellMenu.js~ShellMenuFromEnum",
-    "typedef"
-  ],
-  [
-    "coral-spectrum/coral-component-shell/src/scripts/shellmenu.js~shellmenuplacementenum",
-    "typedef/index.html#static-typedef-ShellMenuPlacementEnum",
-    "coral-spectrum/coral-component-shell/src/scripts/ShellMenu.js~ShellMenuPlacementEnum",
-    "typedef"
   ],
   [
     "coral-spectrum/coral-component-shell/src/scripts/shellmenubar.js",
@@ -6898,6 +6892,30 @@ window.esdocSearchIndex = [
     "class/coral-spectrum/coral-component-slider/src/scripts/SliderItem.js~SliderItem.html#instance-member-value",
     "coral-spectrum/coral-component-slider/src/scripts/SliderItem.js~SliderItem#value",
     "member"
+  ],
+  [
+    "coral-spectrum/coral-component-splitbutton/src/scripts/splitbutton.js",
+    "file/coral-spectrum/coral-component-splitbutton/src/scripts/SplitButton.js.html",
+    "coral-spectrum/coral-component-splitbutton/src/scripts/SplitButton.js",
+    "file"
+  ],
+  [
+    "coral-spectrum/coral-component-splitbutton/src/scripts/splitbutton.js~splitbutton#variant",
+    "class/coral-spectrum/coral-component-splitbutton/src/scripts/SplitButton.js~SplitButton.html#instance-member-variant",
+    "coral-spectrum/coral-component-splitbutton/src/scripts/SplitButton.js~SplitButton#variant",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-splitbutton/src/scripts/splitbutton.js~splitbutton.variant",
+    "class/coral-spectrum/coral-component-splitbutton/src/scripts/SplitButton.js~SplitButton.html#static-member-variant",
+    "coral-spectrum/coral-component-splitbutton/src/scripts/SplitButton.js~SplitButton.variant",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-splitbutton/src/scripts/splitbutton.js~splitbuttonvariantenum",
+    "typedef/index.html#static-typedef-SplitButtonVariantEnum",
+    "coral-spectrum/coral-component-splitbutton/src/scripts/SplitButton.js~SplitButtonVariantEnum",
+    "typedef"
   ],
   [
     "coral-spectrum/coral-component-steplist/src/scripts/step.js",

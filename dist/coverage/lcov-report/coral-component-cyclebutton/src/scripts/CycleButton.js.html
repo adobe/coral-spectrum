@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">94.94% </span>
+        <span class="strong">94.89% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>225/237</span>
+        <span class='fraction'>223/235</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">88.89% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>40/43</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">94.94% </span>
+        <span class="strong">94.89% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>225/237</span>
+        <span class='fraction'>223/235</span>
       </div>
     </div>
     <p class="quiet">
@@ -735,16 +735,7 @@
 <a name='L687'></a><a href='#L687'>687</a>
 <a name='L688'></a><a href='#L688'>688</a>
 <a name='L689'></a><a href='#L689'>689</a>
-<a name='L690'></a><a href='#L690'>690</a>
-<a name='L691'></a><a href='#L691'>691</a>
-<a name='L692'></a><a href='#L692'>692</a>
-<a name='L693'></a><a href='#L693'>693</a>
-<a name='L694'></a><a href='#L694'>694</a>
-<a name='L695'></a><a href='#L695'>695</a>
-<a name='L696'></a><a href='#L696'>696</a>
-<a name='L697'></a><a href='#L697'>697</a>
-<a name='L698'></a><a href='#L698'>698</a>
-<a name='L699'></a><a href='#L699'>699</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L690'></a><a href='#L690'>690</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1204,12 +1195,6 @@
 <span class="cline-any cline-yes">138x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">138x</span>
-<span class="cline-any cline-yes">138x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">156x</span>
 <span class="cline-any cline-yes">156x</span>
 <span class="cline-any cline-yes">156x</span>
@@ -1248,13 +1233,11 @@
 <span class="cline-any cline-yes">48x</span>
 <span class="cline-any cline-yes">156x</span>
 <span class="cline-any cline-yes">156x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">156x</span>
 <span class="cline-any cline-yes">156x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">156x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1437,7 +1420,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1962,16 +1944,9 @@ class CycleButton extends BaseComponent(HTMLElement) {
     // We do first the content, so that the icon is not destroyed
     selectListItem.content.innerHTML = item.content.innerHTML;
     
-    // If an icon was specified we need to create an element for it and add it directly to the selectList Item
+    // Specify the icon
     if (item.icon) {
-      const icon = new Icon().set({
-        icon: item.icon,
-        size: Icon.size.SMALL,
-        tracking: Icon.tracking.OFF
-      });
-      icon.classList.add(`${CLASSNAME}-list-icon`);
-  
-      selectListItem.content.insertBefore(icon, selectListItem.content.firstChild);
+      selectListItem.icon = item.icon;
     }
     
     selectListItem._originalItem = item;
@@ -2015,14 +1990,12 @@ class CycleButton extends BaseComponent(HTMLElement) {
       const item = items[i];
       selectListItem = this._getSelectListItem(item);
       
-      // we have set the selected state after attaching otherwise will get
-      // Uncaught Error: Coral.SelectList.Item cannot be selected before being added as a child
-      selectList.items.add(selectListItem);
-      
       selectListItem.set({
         disabled: item.disabled,
         selected: item.selected
       }, true);
+  
+      selectList.items.add(selectListItem);
     }
     
     // adds any additional actions to the actions buttonList
@@ -2074,9 +2047,9 @@ class CycleButton extends BaseComponent(HTMLElement) {
   
   /** @ignore */
   connectedCallback() {
-    super.connecte<span class="fstat-no" title="function not covered" >dCal</span>lback();
-    <span class="cstat-no" title="statement not covered" ></span>
-    this.classList.add(CLASSNAME);
+    super.connectedCallback();
+    <span class="fstat-no" title="function not covered" ></span>
+    th<span class="cstat-no" title="statement not covered" >is.classList.add(CLASSNAME);</span>
     
     // Default reflected attributes
     if (typeof this._threshold === 'undefined') { this.threshold = 3; }
@@ -2146,7 +2119,7 @@ export default CycleButton;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Jun 06 2019 10:26:48 GMT+0200 (CEST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jun 17 2019 17:13:29 GMT+0200 (CEST)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

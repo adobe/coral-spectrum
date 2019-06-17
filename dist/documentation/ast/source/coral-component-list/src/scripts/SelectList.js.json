@@ -1,7 +1,7 @@
 {
   "type": "File",
   "start": 0,
-  "end": 15910,
+  "end": 15890,
   "loc": {
     "start": {
       "line": 1,
@@ -15,7 +15,7 @@
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 15910,
+    "end": 15890,
     "loc": {
       "start": {
         "line": 1,
@@ -1004,7 +1004,7 @@
       {
         "type": "Identifier",
         "start": 1725,
-        "end": 15881,
+        "end": 15861,
         "loc": {
           "start": {
             "line": 54,
@@ -1087,7 +1087,7 @@
         "body": {
           "type": "ClassBody",
           "start": 1777,
-          "end": 15881,
+          "end": 15861,
           "loc": {
             "start": {
               "line": 54,
@@ -24307,7 +24307,7 @@
             {
               "type": "ClassMethod",
               "start": 14630,
-              "end": 15053,
+              "end": 15033,
               "loc": {
                 "start": {
                   "line": 508,
@@ -24347,7 +24347,7 @@
               "body": {
                 "type": "BlockStatement",
                 "start": 14650,
-                "end": 15053,
+                "end": 15033,
                 "loc": {
                   "start": {
                     "line": 508,
@@ -24441,7 +24441,7 @@
                   {
                     "type": "ExpressionStatement",
                     "start": 14692,
-                    "end": 14742,
+                    "end": 14722,
                     "loc": {
                       "start": {
                         "line": 511,
@@ -24449,13 +24449,13 @@
                       },
                       "end": {
                         "line": 511,
-                        "column": 54
+                        "column": 34
                       }
                     },
                     "expression": {
                       "type": "CallExpression",
                       "start": 14692,
-                      "end": 14741,
+                      "end": 14721,
                       "loc": {
                         "start": {
                           "line": 511,
@@ -24463,7 +24463,7 @@
                         },
                         "end": {
                           "line": 511,
-                          "column": 53
+                          "column": 33
                         }
                       },
                       "callee": {
@@ -24564,26 +24564,6 @@
                             "identifierName": "CLASSNAME"
                           },
                           "name": "CLASSNAME"
-                        },
-                        {
-                          "type": "StringLiteral",
-                          "start": 14722,
-                          "end": 14740,
-                          "loc": {
-                            "start": {
-                              "line": 511,
-                              "column": 34
-                            },
-                            "end": {
-                              "line": 511,
-                              "column": 52
-                            }
-                          },
-                          "extra": {
-                            "rawValue": "_coral-BasicList",
-                            "raw": "'_coral-BasicList'"
-                          },
-                          "value": "_coral-BasicList"
                         }
                       ]
                     },
@@ -24591,8 +24571,8 @@
                       {
                         "type": "CommentLine",
                         "value": " adds the role to support accessibility",
-                        "start": 14752,
-                        "end": 14793,
+                        "start": 14732,
+                        "end": 14773,
                         "loc": {
                           "start": {
                             "line": 513,
@@ -24608,8 +24588,8 @@
                   },
                   {
                     "type": "ExpressionStatement",
-                    "start": 14798,
-                    "end": 14835,
+                    "start": 14778,
+                    "end": 14815,
                     "loc": {
                       "start": {
                         "line": 514,
@@ -24622,8 +24602,8 @@
                     },
                     "expression": {
                       "type": "CallExpression",
-                      "start": 14798,
-                      "end": 14834,
+                      "start": 14778,
+                      "end": 14814,
                       "loc": {
                         "start": {
                           "line": 514,
@@ -24636,8 +24616,8 @@
                       },
                       "callee": {
                         "type": "MemberExpression",
-                        "start": 14798,
-                        "end": 14815,
+                        "start": 14778,
+                        "end": 14795,
                         "loc": {
                           "start": {
                             "line": 514,
@@ -24650,8 +24630,8 @@
                         },
                         "object": {
                           "type": "ThisExpression",
-                          "start": 14798,
-                          "end": 14802,
+                          "start": 14778,
+                          "end": 14782,
                           "loc": {
                             "start": {
                               "line": 514,
@@ -24666,8 +24646,8 @@
                         },
                         "property": {
                           "type": "Identifier",
-                          "start": 14803,
-                          "end": 14815,
+                          "start": 14783,
+                          "end": 14795,
                           "loc": {
                             "start": {
                               "line": 514,
@@ -24687,8 +24667,8 @@
                       "arguments": [
                         {
                           "type": "StringLiteral",
-                          "start": 14816,
-                          "end": 14822,
+                          "start": 14796,
+                          "end": 14802,
                           "loc": {
                             "start": {
                               "line": 514,
@@ -24707,8 +24687,8 @@
                         },
                         {
                           "type": "StringLiteral",
-                          "start": 14824,
-                          "end": 14833,
+                          "start": 14804,
+                          "end": 14813,
                           "loc": {
                             "start": {
                               "line": 514,
@@ -24732,8 +24712,8 @@
                       {
                         "type": "CommentLine",
                         "value": " adds the role to support accessibility",
-                        "start": 14752,
-                        "end": 14793,
+                        "start": 14732,
+                        "end": 14773,
                         "loc": {
                           "start": {
                             "line": 513,
@@ -24750,8 +24730,8 @@
                       {
                         "type": "CommentLine",
                         "value": " Don't trigger events once connected",
-                        "start": 14845,
-                        "end": 14883,
+                        "start": 14825,
+                        "end": 14863,
                         "loc": {
                           "start": {
                             "line": 516,
@@ -24767,8 +24747,8 @@
                   },
                   {
                     "type": "ExpressionStatement",
-                    "start": 14888,
-                    "end": 14925,
+                    "start": 14868,
+                    "end": 14905,
                     "loc": {
                       "start": {
                         "line": 517,
@@ -24781,8 +24761,8 @@
                     },
                     "expression": {
                       "type": "AssignmentExpression",
-                      "start": 14888,
-                      "end": 14924,
+                      "start": 14868,
+                      "end": 14904,
                       "loc": {
                         "start": {
                           "line": 517,
@@ -24796,8 +24776,8 @@
                       "operator": "=",
                       "left": {
                         "type": "MemberExpression",
-                        "start": 14888,
-                        "end": 14917,
+                        "start": 14868,
+                        "end": 14897,
                         "loc": {
                           "start": {
                             "line": 517,
@@ -24810,8 +24790,8 @@
                         },
                         "object": {
                           "type": "ThisExpression",
-                          "start": 14888,
-                          "end": 14892,
+                          "start": 14868,
+                          "end": 14872,
                           "loc": {
                             "start": {
                               "line": 517,
@@ -24826,8 +24806,8 @@
                         },
                         "property": {
                           "type": "Identifier",
-                          "start": 14893,
-                          "end": 14917,
+                          "start": 14873,
+                          "end": 14897,
                           "loc": {
                             "start": {
                               "line": 517,
@@ -24846,8 +24826,8 @@
                       },
                       "right": {
                         "type": "BooleanLiteral",
-                        "start": 14920,
-                        "end": 14924,
+                        "start": 14900,
+                        "end": 14904,
                         "loc": {
                           "start": {
                             "line": 517,
@@ -24866,8 +24846,8 @@
                       {
                         "type": "CommentLine",
                         "value": " Don't trigger events once connected",
-                        "start": 14845,
-                        "end": 14883,
+                        "start": 14825,
+                        "end": 14863,
                         "loc": {
                           "start": {
                             "line": 516,
@@ -24883,8 +24863,8 @@
                   },
                   {
                     "type": "ExpressionStatement",
-                    "start": 14930,
-                    "end": 14956,
+                    "start": 14910,
+                    "end": 14936,
                     "loc": {
                       "start": {
                         "line": 518,
@@ -24897,8 +24877,8 @@
                     },
                     "expression": {
                       "type": "CallExpression",
-                      "start": 14930,
-                      "end": 14955,
+                      "start": 14910,
+                      "end": 14935,
                       "loc": {
                         "start": {
                           "line": 518,
@@ -24911,8 +24891,8 @@
                       },
                       "callee": {
                         "type": "MemberExpression",
-                        "start": 14930,
-                        "end": 14953,
+                        "start": 14910,
+                        "end": 14933,
                         "loc": {
                           "start": {
                             "line": 518,
@@ -24925,8 +24905,8 @@
                         },
                         "object": {
                           "type": "ThisExpression",
-                          "start": 14930,
-                          "end": 14934,
+                          "start": 14910,
+                          "end": 14914,
                           "loc": {
                             "start": {
                               "line": 518,
@@ -24940,8 +24920,8 @@
                         },
                         "property": {
                           "type": "Identifier",
-                          "start": 14935,
-                          "end": 14953,
+                          "start": 14915,
+                          "end": 14933,
                           "loc": {
                             "start": {
                               "line": 518,
@@ -24962,8 +24942,8 @@
                   },
                   {
                     "type": "ExpressionStatement",
-                    "start": 14961,
-                    "end": 14999,
+                    "start": 14941,
+                    "end": 14979,
                     "loc": {
                       "start": {
                         "line": 519,
@@ -24976,8 +24956,8 @@
                     },
                     "expression": {
                       "type": "AssignmentExpression",
-                      "start": 14961,
-                      "end": 14998,
+                      "start": 14941,
+                      "end": 14978,
                       "loc": {
                         "start": {
                           "line": 519,
@@ -24991,8 +24971,8 @@
                       "operator": "=",
                       "left": {
                         "type": "MemberExpression",
-                        "start": 14961,
-                        "end": 14990,
+                        "start": 14941,
+                        "end": 14970,
                         "loc": {
                           "start": {
                             "line": 519,
@@ -25005,8 +24985,8 @@
                         },
                         "object": {
                           "type": "ThisExpression",
-                          "start": 14961,
-                          "end": 14965,
+                          "start": 14941,
+                          "end": 14945,
                           "loc": {
                             "start": {
                               "line": 519,
@@ -25020,8 +25000,8 @@
                         },
                         "property": {
                           "type": "Identifier",
-                          "start": 14966,
-                          "end": 14990,
+                          "start": 14946,
+                          "end": 14970,
                           "loc": {
                             "start": {
                               "line": 519,
@@ -25039,8 +25019,8 @@
                       },
                       "right": {
                         "type": "BooleanLiteral",
-                        "start": 14993,
-                        "end": 14998,
+                        "start": 14973,
+                        "end": 14978,
                         "loc": {
                           "start": {
                             "line": 519,
@@ -25057,8 +25037,8 @@
                   },
                   {
                     "type": "ExpressionStatement",
-                    "start": 15009,
-                    "end": 15049,
+                    "start": 14989,
+                    "end": 15029,
                     "loc": {
                       "start": {
                         "line": 521,
@@ -25071,8 +25051,8 @@
                     },
                     "expression": {
                       "type": "AssignmentExpression",
-                      "start": 15009,
-                      "end": 15048,
+                      "start": 14989,
+                      "end": 15028,
                       "loc": {
                         "start": {
                           "line": 521,
@@ -25086,8 +25066,8 @@
                       "operator": "=",
                       "left": {
                         "type": "MemberExpression",
-                        "start": 15009,
-                        "end": 15027,
+                        "start": 14989,
+                        "end": 15007,
                         "loc": {
                           "start": {
                             "line": 521,
@@ -25100,8 +25080,8 @@
                         },
                         "object": {
                           "type": "ThisExpression",
-                          "start": 15009,
-                          "end": 15013,
+                          "start": 14989,
+                          "end": 14993,
                           "loc": {
                             "start": {
                               "line": 521,
@@ -25115,8 +25095,8 @@
                         },
                         "property": {
                           "type": "Identifier",
-                          "start": 15014,
-                          "end": 15027,
+                          "start": 14994,
+                          "end": 15007,
                           "loc": {
                             "start": {
                               "line": 521,
@@ -25134,8 +25114,8 @@
                       },
                       "right": {
                         "type": "MemberExpression",
-                        "start": 15030,
-                        "end": 15048,
+                        "start": 15010,
+                        "end": 15028,
                         "loc": {
                           "start": {
                             "line": 521,
@@ -25148,8 +25128,8 @@
                         },
                         "object": {
                           "type": "ThisExpression",
-                          "start": 15030,
-                          "end": 15034,
+                          "start": 15010,
+                          "end": 15014,
                           "loc": {
                             "start": {
                               "line": 521,
@@ -25163,8 +25143,8 @@
                         },
                         "property": {
                           "type": "Identifier",
-                          "start": 15035,
-                          "end": 15048,
+                          "start": 15015,
+                          "end": 15028,
                           "loc": {
                             "start": {
                               "line": 521,
@@ -25208,8 +25188,8 @@
                 {
                   "type": "CommentBlock",
                   "value": "*\n   Triggered when the user scrolls to near the bottom of the {@link SelectList}. This can be useful for when additional items can\n   be loaded asynchronously (i.e., infinite scrolling).\n   \n   @typedef {CustomEvent} coral-selectlist:scrollbottom\n   ",
-                  "start": 15059,
-                  "end": 15314,
+                  "start": 15039,
+                  "end": 15294,
                   "loc": {
                     "start": {
                       "line": 524,
@@ -25224,8 +25204,8 @@
                 {
                   "type": "CommentBlock",
                   "value": "*\n   Triggered before the {@link SelectList} selected item is changed on user interaction. Can be used to cancel selection.\n   \n   @typedef {CustomEvent} coral-selectlist:change\n   \n   @property {SelectListItem} event.detail.item\n   The selected item.\n   ",
-                  "start": 15320,
-                  "end": 15579,
+                  "start": 15300,
+                  "end": 15559,
                   "loc": {
                     "start": {
                       "line": 531,
@@ -25240,8 +25220,8 @@
                 {
                   "type": "CommentBlock",
                   "value": "*\n   Triggered when the {@link SelectList} selected item has changed.\n   \n   @typedef {CustomEvent} coral-selectlist:change\n   \n   @property {SelectListItem} detail.oldSelection\n   The prior selected item(s).\n   @property {SelectListItem} detail.selection\n   The newly selected item(s).\n   ",
-                  "start": 15585,
-                  "end": 15879,
+                  "start": 15565,
+                  "end": 15859,
                   "loc": {
                     "start": {
                       "line": 540,
@@ -25263,8 +25243,8 @@
       },
       {
         "type": "Identifier",
-        "start": 15883,
-        "end": 15909,
+        "start": 15863,
+        "end": 15889,
         "loc": {
           "start": {
             "line": 552,
@@ -25277,8 +25257,8 @@
         },
         "declaration": {
           "type": "Identifier",
-          "start": 15898,
-          "end": 15908,
+          "start": 15878,
+          "end": 15888,
           "loc": {
             "start": {
               "line": 552,
@@ -25298,8 +25278,8 @@
       },
       {
         "type": "ExportDefaultDeclaration",
-        "start": 15883,
-        "end": 15909,
+        "start": 15863,
+        "end": 15889,
         "loc": {
           "start": {
             "line": 552,
@@ -25313,7 +25293,7 @@
         "declaration": {
           "type": "ClassDeclaration",
           "start": 1725,
-          "end": 15881,
+          "end": 15861,
           "loc": {
             "start": {
               "line": 54,
@@ -25396,7 +25376,7 @@
           "body": {
             "type": "ClassBody",
             "start": 1777,
-            "end": 15881,
+            "end": 15861,
             "loc": {
               "start": {
                 "line": 54,
@@ -48616,7 +48596,7 @@
               {
                 "type": "ClassMethod",
                 "start": 14630,
-                "end": 15053,
+                "end": 15033,
                 "loc": {
                   "start": {
                     "line": 508,
@@ -48656,7 +48636,7 @@
                 "body": {
                   "type": "BlockStatement",
                   "start": 14650,
-                  "end": 15053,
+                  "end": 15033,
                   "loc": {
                     "start": {
                       "line": 508,
@@ -48750,7 +48730,7 @@
                     {
                       "type": "ExpressionStatement",
                       "start": 14692,
-                      "end": 14742,
+                      "end": 14722,
                       "loc": {
                         "start": {
                           "line": 511,
@@ -48758,13 +48738,13 @@
                         },
                         "end": {
                           "line": 511,
-                          "column": 54
+                          "column": 34
                         }
                       },
                       "expression": {
                         "type": "CallExpression",
                         "start": 14692,
-                        "end": 14741,
+                        "end": 14721,
                         "loc": {
                           "start": {
                             "line": 511,
@@ -48772,7 +48752,7 @@
                           },
                           "end": {
                             "line": 511,
-                            "column": 53
+                            "column": 33
                           }
                         },
                         "callee": {
@@ -48873,26 +48853,6 @@
                               "identifierName": "CLASSNAME"
                             },
                             "name": "CLASSNAME"
-                          },
-                          {
-                            "type": "StringLiteral",
-                            "start": 14722,
-                            "end": 14740,
-                            "loc": {
-                              "start": {
-                                "line": 511,
-                                "column": 34
-                              },
-                              "end": {
-                                "line": 511,
-                                "column": 52
-                              }
-                            },
-                            "extra": {
-                              "rawValue": "_coral-BasicList",
-                              "raw": "'_coral-BasicList'"
-                            },
-                            "value": "_coral-BasicList"
                           }
                         ]
                       },
@@ -48900,8 +48860,8 @@
                         {
                           "type": "CommentLine",
                           "value": " adds the role to support accessibility",
-                          "start": 14752,
-                          "end": 14793,
+                          "start": 14732,
+                          "end": 14773,
                           "loc": {
                             "start": {
                               "line": 513,
@@ -48917,8 +48877,8 @@
                     },
                     {
                       "type": "ExpressionStatement",
-                      "start": 14798,
-                      "end": 14835,
+                      "start": 14778,
+                      "end": 14815,
                       "loc": {
                         "start": {
                           "line": 514,
@@ -48931,8 +48891,8 @@
                       },
                       "expression": {
                         "type": "CallExpression",
-                        "start": 14798,
-                        "end": 14834,
+                        "start": 14778,
+                        "end": 14814,
                         "loc": {
                           "start": {
                             "line": 514,
@@ -48945,8 +48905,8 @@
                         },
                         "callee": {
                           "type": "MemberExpression",
-                          "start": 14798,
-                          "end": 14815,
+                          "start": 14778,
+                          "end": 14795,
                           "loc": {
                             "start": {
                               "line": 514,
@@ -48959,8 +48919,8 @@
                           },
                           "object": {
                             "type": "ThisExpression",
-                            "start": 14798,
-                            "end": 14802,
+                            "start": 14778,
+                            "end": 14782,
                             "loc": {
                               "start": {
                                 "line": 514,
@@ -48975,8 +48935,8 @@
                           },
                           "property": {
                             "type": "Identifier",
-                            "start": 14803,
-                            "end": 14815,
+                            "start": 14783,
+                            "end": 14795,
                             "loc": {
                               "start": {
                                 "line": 514,
@@ -48996,8 +48956,8 @@
                         "arguments": [
                           {
                             "type": "StringLiteral",
-                            "start": 14816,
-                            "end": 14822,
+                            "start": 14796,
+                            "end": 14802,
                             "loc": {
                               "start": {
                                 "line": 514,
@@ -49016,8 +48976,8 @@
                           },
                           {
                             "type": "StringLiteral",
-                            "start": 14824,
-                            "end": 14833,
+                            "start": 14804,
+                            "end": 14813,
                             "loc": {
                               "start": {
                                 "line": 514,
@@ -49041,8 +49001,8 @@
                         {
                           "type": "CommentLine",
                           "value": " adds the role to support accessibility",
-                          "start": 14752,
-                          "end": 14793,
+                          "start": 14732,
+                          "end": 14773,
                           "loc": {
                             "start": {
                               "line": 513,
@@ -49059,8 +49019,8 @@
                         {
                           "type": "CommentLine",
                           "value": " Don't trigger events once connected",
-                          "start": 14845,
-                          "end": 14883,
+                          "start": 14825,
+                          "end": 14863,
                           "loc": {
                             "start": {
                               "line": 516,
@@ -49076,8 +49036,8 @@
                     },
                     {
                       "type": "ExpressionStatement",
-                      "start": 14888,
-                      "end": 14925,
+                      "start": 14868,
+                      "end": 14905,
                       "loc": {
                         "start": {
                           "line": 517,
@@ -49090,8 +49050,8 @@
                       },
                       "expression": {
                         "type": "AssignmentExpression",
-                        "start": 14888,
-                        "end": 14924,
+                        "start": 14868,
+                        "end": 14904,
                         "loc": {
                           "start": {
                             "line": 517,
@@ -49105,8 +49065,8 @@
                         "operator": "=",
                         "left": {
                           "type": "MemberExpression",
-                          "start": 14888,
-                          "end": 14917,
+                          "start": 14868,
+                          "end": 14897,
                           "loc": {
                             "start": {
                               "line": 517,
@@ -49119,8 +49079,8 @@
                           },
                           "object": {
                             "type": "ThisExpression",
-                            "start": 14888,
-                            "end": 14892,
+                            "start": 14868,
+                            "end": 14872,
                             "loc": {
                               "start": {
                                 "line": 517,
@@ -49135,8 +49095,8 @@
                           },
                           "property": {
                             "type": "Identifier",
-                            "start": 14893,
-                            "end": 14917,
+                            "start": 14873,
+                            "end": 14897,
                             "loc": {
                               "start": {
                                 "line": 517,
@@ -49155,8 +49115,8 @@
                         },
                         "right": {
                           "type": "BooleanLiteral",
-                          "start": 14920,
-                          "end": 14924,
+                          "start": 14900,
+                          "end": 14904,
                           "loc": {
                             "start": {
                               "line": 517,
@@ -49175,8 +49135,8 @@
                         {
                           "type": "CommentLine",
                           "value": " Don't trigger events once connected",
-                          "start": 14845,
-                          "end": 14883,
+                          "start": 14825,
+                          "end": 14863,
                           "loc": {
                             "start": {
                               "line": 516,
@@ -49192,8 +49152,8 @@
                     },
                     {
                       "type": "ExpressionStatement",
-                      "start": 14930,
-                      "end": 14956,
+                      "start": 14910,
+                      "end": 14936,
                       "loc": {
                         "start": {
                           "line": 518,
@@ -49206,8 +49166,8 @@
                       },
                       "expression": {
                         "type": "CallExpression",
-                        "start": 14930,
-                        "end": 14955,
+                        "start": 14910,
+                        "end": 14935,
                         "loc": {
                           "start": {
                             "line": 518,
@@ -49220,8 +49180,8 @@
                         },
                         "callee": {
                           "type": "MemberExpression",
-                          "start": 14930,
-                          "end": 14953,
+                          "start": 14910,
+                          "end": 14933,
                           "loc": {
                             "start": {
                               "line": 518,
@@ -49234,8 +49194,8 @@
                           },
                           "object": {
                             "type": "ThisExpression",
-                            "start": 14930,
-                            "end": 14934,
+                            "start": 14910,
+                            "end": 14914,
                             "loc": {
                               "start": {
                                 "line": 518,
@@ -49249,8 +49209,8 @@
                           },
                           "property": {
                             "type": "Identifier",
-                            "start": 14935,
-                            "end": 14953,
+                            "start": 14915,
+                            "end": 14933,
                             "loc": {
                               "start": {
                                 "line": 518,
@@ -49271,8 +49231,8 @@
                     },
                     {
                       "type": "ExpressionStatement",
-                      "start": 14961,
-                      "end": 14999,
+                      "start": 14941,
+                      "end": 14979,
                       "loc": {
                         "start": {
                           "line": 519,
@@ -49285,8 +49245,8 @@
                       },
                       "expression": {
                         "type": "AssignmentExpression",
-                        "start": 14961,
-                        "end": 14998,
+                        "start": 14941,
+                        "end": 14978,
                         "loc": {
                           "start": {
                             "line": 519,
@@ -49300,8 +49260,8 @@
                         "operator": "=",
                         "left": {
                           "type": "MemberExpression",
-                          "start": 14961,
-                          "end": 14990,
+                          "start": 14941,
+                          "end": 14970,
                           "loc": {
                             "start": {
                               "line": 519,
@@ -49314,8 +49274,8 @@
                           },
                           "object": {
                             "type": "ThisExpression",
-                            "start": 14961,
-                            "end": 14965,
+                            "start": 14941,
+                            "end": 14945,
                             "loc": {
                               "start": {
                                 "line": 519,
@@ -49329,8 +49289,8 @@
                           },
                           "property": {
                             "type": "Identifier",
-                            "start": 14966,
-                            "end": 14990,
+                            "start": 14946,
+                            "end": 14970,
                             "loc": {
                               "start": {
                                 "line": 519,
@@ -49348,8 +49308,8 @@
                         },
                         "right": {
                           "type": "BooleanLiteral",
-                          "start": 14993,
-                          "end": 14998,
+                          "start": 14973,
+                          "end": 14978,
                           "loc": {
                             "start": {
                               "line": 519,
@@ -49366,8 +49326,8 @@
                     },
                     {
                       "type": "ExpressionStatement",
-                      "start": 15009,
-                      "end": 15049,
+                      "start": 14989,
+                      "end": 15029,
                       "loc": {
                         "start": {
                           "line": 521,
@@ -49380,8 +49340,8 @@
                       },
                       "expression": {
                         "type": "AssignmentExpression",
-                        "start": 15009,
-                        "end": 15048,
+                        "start": 14989,
+                        "end": 15028,
                         "loc": {
                           "start": {
                             "line": 521,
@@ -49395,8 +49355,8 @@
                         "operator": "=",
                         "left": {
                           "type": "MemberExpression",
-                          "start": 15009,
-                          "end": 15027,
+                          "start": 14989,
+                          "end": 15007,
                           "loc": {
                             "start": {
                               "line": 521,
@@ -49409,8 +49369,8 @@
                           },
                           "object": {
                             "type": "ThisExpression",
-                            "start": 15009,
-                            "end": 15013,
+                            "start": 14989,
+                            "end": 14993,
                             "loc": {
                               "start": {
                                 "line": 521,
@@ -49424,8 +49384,8 @@
                           },
                           "property": {
                             "type": "Identifier",
-                            "start": 15014,
-                            "end": 15027,
+                            "start": 14994,
+                            "end": 15007,
                             "loc": {
                               "start": {
                                 "line": 521,
@@ -49443,8 +49403,8 @@
                         },
                         "right": {
                           "type": "MemberExpression",
-                          "start": 15030,
-                          "end": 15048,
+                          "start": 15010,
+                          "end": 15028,
                           "loc": {
                             "start": {
                               "line": 521,
@@ -49457,8 +49417,8 @@
                           },
                           "object": {
                             "type": "ThisExpression",
-                            "start": 15030,
-                            "end": 15034,
+                            "start": 15010,
+                            "end": 15014,
                             "loc": {
                               "start": {
                                 "line": 521,
@@ -49472,8 +49432,8 @@
                           },
                           "property": {
                             "type": "Identifier",
-                            "start": 15035,
-                            "end": 15048,
+                            "start": 15015,
+                            "end": 15028,
                             "loc": {
                               "start": {
                                 "line": 521,
@@ -49517,8 +49477,8 @@
                   {
                     "type": "CommentBlock",
                     "value": "*\n   Triggered when the user scrolls to near the bottom of the {@link SelectList}. This can be useful for when additional items can\n   be loaded asynchronously (i.e., infinite scrolling).\n   \n   @typedef {CustomEvent} coral-selectlist:scrollbottom\n   ",
-                    "start": 15059,
-                    "end": 15314,
+                    "start": 15039,
+                    "end": 15294,
                     "loc": {
                       "start": {
                         "line": 524,
@@ -49533,8 +49493,8 @@
                   {
                     "type": "CommentBlock",
                     "value": "*\n   Triggered before the {@link SelectList} selected item is changed on user interaction. Can be used to cancel selection.\n   \n   @typedef {CustomEvent} coral-selectlist:change\n   \n   @property {SelectListItem} event.detail.item\n   The selected item.\n   ",
-                    "start": 15320,
-                    "end": 15579,
+                    "start": 15300,
+                    "end": 15559,
                     "loc": {
                       "start": {
                         "line": 531,
@@ -49549,8 +49509,8 @@
                   {
                     "type": "CommentBlock",
                     "value": "*\n   Triggered when the {@link SelectList} selected item has changed.\n   \n   @typedef {CustomEvent} coral-selectlist:change\n   \n   @property {SelectListItem} detail.oldSelection\n   The prior selected item(s).\n   @property {SelectListItem} detail.selection\n   The newly selected item(s).\n   ",
-                    "start": 15585,
-                    "end": 15879,
+                    "start": 15565,
+                    "end": 15859,
                     "loc": {
                       "start": {
                         "line": 540,
@@ -50700,8 +50660,8 @@
     {
       "type": "CommentLine",
       "value": " adds the role to support accessibility",
-      "start": 14752,
-      "end": 14793,
+      "start": 14732,
+      "end": 14773,
       "loc": {
         "start": {
           "line": 513,
@@ -50716,8 +50676,8 @@
     {
       "type": "CommentLine",
       "value": " Don't trigger events once connected",
-      "start": 14845,
-      "end": 14883,
+      "start": 14825,
+      "end": 14863,
       "loc": {
         "start": {
           "line": 516,
@@ -50732,8 +50692,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n   Triggered when the user scrolls to near the bottom of the {@link SelectList}. This can be useful for when additional items can\n   be loaded asynchronously (i.e., infinite scrolling).\n   \n   @typedef {CustomEvent} coral-selectlist:scrollbottom\n   ",
-      "start": 15059,
-      "end": 15314,
+      "start": 15039,
+      "end": 15294,
       "loc": {
         "start": {
           "line": 524,
@@ -50748,8 +50708,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n   Triggered before the {@link SelectList} selected item is changed on user interaction. Can be used to cancel selection.\n   \n   @typedef {CustomEvent} coral-selectlist:change\n   \n   @property {SelectListItem} event.detail.item\n   The selected item.\n   ",
-      "start": 15320,
-      "end": 15579,
+      "start": 15300,
+      "end": 15559,
       "loc": {
         "start": {
           "line": 531,
@@ -50764,8 +50724,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n   Triggered when the {@link SelectList} selected item has changed.\n   \n   @typedef {CustomEvent} coral-selectlist:change\n   \n   @property {SelectListItem} detail.oldSelection\n   The prior selected item(s).\n   @property {SelectListItem} detail.selection\n   The newly selected item(s).\n   ",
-      "start": 15585,
-      "end": 15879,
+      "start": 15565,
+      "end": 15859,
       "loc": {
         "start": {
           "line": 540,
@@ -95611,16 +95571,15 @@
     },
     {
       "type": {
-        "label": ",",
-        "beforeExpr": true,
+        "label": ")",
+        "beforeExpr": false,
         "startsExpr": false,
         "rightAssociative": false,
         "isLoop": false,
         "isAssign": false,
         "prefix": false,
         "postfix": false,
-        "binop": null,
-        "updateContext": null
+        "binop": null
       },
       "start": 14720,
       "end": 14721,
@@ -95637,58 +95596,6 @@
     },
     {
       "type": {
-        "label": "string",
-        "beforeExpr": false,
-        "startsExpr": true,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null,
-        "updateContext": null
-      },
-      "value": "_coral-BasicList",
-      "start": 14722,
-      "end": 14740,
-      "loc": {
-        "start": {
-          "line": 511,
-          "column": 34
-        },
-        "end": {
-          "line": 511,
-          "column": 52
-        }
-      }
-    },
-    {
-      "type": {
-        "label": ")",
-        "beforeExpr": false,
-        "startsExpr": false,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null
-      },
-      "start": 14740,
-      "end": 14741,
-      "loc": {
-        "start": {
-          "line": 511,
-          "column": 52
-        },
-        "end": {
-          "line": 511,
-          "column": 53
-        }
-      }
-    },
-    {
-      "type": {
         "label": ";",
         "beforeExpr": true,
         "startsExpr": false,
@@ -95700,24 +95607,24 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 14741,
-      "end": 14742,
+      "start": 14721,
+      "end": 14722,
       "loc": {
         "start": {
           "line": 511,
-          "column": 53
+          "column": 33
         },
         "end": {
           "line": 511,
-          "column": 54
+          "column": 34
         }
       }
     },
     {
       "type": "CommentLine",
       "value": " adds the role to support accessibility",
-      "start": 14752,
-      "end": 14793,
+      "start": 14732,
+      "end": 14773,
       "loc": {
         "start": {
           "line": 513,
@@ -95744,8 +95651,8 @@
         "updateContext": null
       },
       "value": "this",
-      "start": 14798,
-      "end": 14802,
+      "start": 14778,
+      "end": 14782,
       "loc": {
         "start": {
           "line": 514,
@@ -95770,8 +95677,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 14802,
-      "end": 14803,
+      "start": 14782,
+      "end": 14783,
       "loc": {
         "start": {
           "line": 514,
@@ -95796,8 +95703,8 @@
         "binop": null
       },
       "value": "setAttribute",
-      "start": 14803,
-      "end": 14815,
+      "start": 14783,
+      "end": 14795,
       "loc": {
         "start": {
           "line": 514,
@@ -95821,8 +95728,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 14815,
-      "end": 14816,
+      "start": 14795,
+      "end": 14796,
       "loc": {
         "start": {
           "line": 514,
@@ -95848,8 +95755,8 @@
         "updateContext": null
       },
       "value": "role",
-      "start": 14816,
-      "end": 14822,
+      "start": 14796,
+      "end": 14802,
       "loc": {
         "start": {
           "line": 514,
@@ -95874,8 +95781,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 14822,
-      "end": 14823,
+      "start": 14802,
+      "end": 14803,
       "loc": {
         "start": {
           "line": 514,
@@ -95901,8 +95808,8 @@
         "updateContext": null
       },
       "value": "listbox",
-      "start": 14824,
-      "end": 14833,
+      "start": 14804,
+      "end": 14813,
       "loc": {
         "start": {
           "line": 514,
@@ -95926,8 +95833,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 14833,
-      "end": 14834,
+      "start": 14813,
+      "end": 14814,
       "loc": {
         "start": {
           "line": 514,
@@ -95952,8 +95859,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 14834,
-      "end": 14835,
+      "start": 14814,
+      "end": 14815,
       "loc": {
         "start": {
           "line": 514,
@@ -95968,8 +95875,8 @@
     {
       "type": "CommentLine",
       "value": " Don't trigger events once connected",
-      "start": 14845,
-      "end": 14883,
+      "start": 14825,
+      "end": 14863,
       "loc": {
         "start": {
           "line": 516,
@@ -95996,8 +95903,8 @@
         "updateContext": null
       },
       "value": "this",
-      "start": 14888,
-      "end": 14892,
+      "start": 14868,
+      "end": 14872,
       "loc": {
         "start": {
           "line": 517,
@@ -96022,8 +95929,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 14892,
-      "end": 14893,
+      "start": 14872,
+      "end": 14873,
       "loc": {
         "start": {
           "line": 517,
@@ -96048,8 +95955,8 @@
         "binop": null
       },
       "value": "_preventTriggeringEvents",
-      "start": 14893,
-      "end": 14917,
+      "start": 14873,
+      "end": 14897,
       "loc": {
         "start": {
           "line": 517,
@@ -96075,8 +95982,8 @@
         "updateContext": null
       },
       "value": "=",
-      "start": 14918,
-      "end": 14919,
+      "start": 14898,
+      "end": 14899,
       "loc": {
         "start": {
           "line": 517,
@@ -96103,8 +96010,8 @@
         "updateContext": null
       },
       "value": "true",
-      "start": 14920,
-      "end": 14924,
+      "start": 14900,
+      "end": 14904,
       "loc": {
         "start": {
           "line": 517,
@@ -96129,8 +96036,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 14924,
-      "end": 14925,
+      "start": 14904,
+      "end": 14905,
       "loc": {
         "start": {
           "line": 517,
@@ -96157,8 +96064,8 @@
         "updateContext": null
       },
       "value": "this",
-      "start": 14930,
-      "end": 14934,
+      "start": 14910,
+      "end": 14914,
       "loc": {
         "start": {
           "line": 518,
@@ -96183,8 +96090,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 14934,
-      "end": 14935,
+      "start": 14914,
+      "end": 14915,
       "loc": {
         "start": {
           "line": 518,
@@ -96209,8 +96116,8 @@
         "binop": null
       },
       "value": "_validateSelection",
-      "start": 14935,
-      "end": 14953,
+      "start": 14915,
+      "end": 14933,
       "loc": {
         "start": {
           "line": 518,
@@ -96234,8 +96141,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 14953,
-      "end": 14954,
+      "start": 14933,
+      "end": 14934,
       "loc": {
         "start": {
           "line": 518,
@@ -96259,8 +96166,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 14954,
-      "end": 14955,
+      "start": 14934,
+      "end": 14935,
       "loc": {
         "start": {
           "line": 518,
@@ -96285,8 +96192,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 14955,
-      "end": 14956,
+      "start": 14935,
+      "end": 14936,
       "loc": {
         "start": {
           "line": 518,
@@ -96313,8 +96220,8 @@
         "updateContext": null
       },
       "value": "this",
-      "start": 14961,
-      "end": 14965,
+      "start": 14941,
+      "end": 14945,
       "loc": {
         "start": {
           "line": 519,
@@ -96339,8 +96246,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 14965,
-      "end": 14966,
+      "start": 14945,
+      "end": 14946,
       "loc": {
         "start": {
           "line": 519,
@@ -96365,8 +96272,8 @@
         "binop": null
       },
       "value": "_preventTriggeringEvents",
-      "start": 14966,
-      "end": 14990,
+      "start": 14946,
+      "end": 14970,
       "loc": {
         "start": {
           "line": 519,
@@ -96392,8 +96299,8 @@
         "updateContext": null
       },
       "value": "=",
-      "start": 14991,
-      "end": 14992,
+      "start": 14971,
+      "end": 14972,
       "loc": {
         "start": {
           "line": 519,
@@ -96420,8 +96327,8 @@
         "updateContext": null
       },
       "value": "false",
-      "start": 14993,
-      "end": 14998,
+      "start": 14973,
+      "end": 14978,
       "loc": {
         "start": {
           "line": 519,
@@ -96446,8 +96353,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 14998,
-      "end": 14999,
+      "start": 14978,
+      "end": 14979,
       "loc": {
         "start": {
           "line": 519,
@@ -96474,8 +96381,8 @@
         "updateContext": null
       },
       "value": "this",
-      "start": 15009,
-      "end": 15013,
+      "start": 14989,
+      "end": 14993,
       "loc": {
         "start": {
           "line": 521,
@@ -96500,8 +96407,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 15013,
-      "end": 15014,
+      "start": 14993,
+      "end": 14994,
       "loc": {
         "start": {
           "line": 521,
@@ -96526,8 +96433,8 @@
         "binop": null
       },
       "value": "_oldSelection",
-      "start": 15014,
-      "end": 15027,
+      "start": 14994,
+      "end": 15007,
       "loc": {
         "start": {
           "line": 521,
@@ -96553,8 +96460,8 @@
         "updateContext": null
       },
       "value": "=",
-      "start": 15028,
-      "end": 15029,
+      "start": 15008,
+      "end": 15009,
       "loc": {
         "start": {
           "line": 521,
@@ -96581,8 +96488,8 @@
         "updateContext": null
       },
       "value": "this",
-      "start": 15030,
-      "end": 15034,
+      "start": 15010,
+      "end": 15014,
       "loc": {
         "start": {
           "line": 521,
@@ -96607,8 +96514,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 15034,
-      "end": 15035,
+      "start": 15014,
+      "end": 15015,
       "loc": {
         "start": {
           "line": 521,
@@ -96633,8 +96540,8 @@
         "binop": null
       },
       "value": "selectedItems",
-      "start": 15035,
-      "end": 15048,
+      "start": 15015,
+      "end": 15028,
       "loc": {
         "start": {
           "line": 521,
@@ -96659,8 +96566,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 15048,
-      "end": 15049,
+      "start": 15028,
+      "end": 15029,
       "loc": {
         "start": {
           "line": 521,
@@ -96684,8 +96591,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 15052,
-      "end": 15053,
+      "start": 15032,
+      "end": 15033,
       "loc": {
         "start": {
           "line": 522,
@@ -96700,8 +96607,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n   Triggered when the user scrolls to near the bottom of the {@link SelectList}. This can be useful for when additional items can\n   be loaded asynchronously (i.e., infinite scrolling).\n   \n   @typedef {CustomEvent} coral-selectlist:scrollbottom\n   ",
-      "start": 15059,
-      "end": 15314,
+      "start": 15039,
+      "end": 15294,
       "loc": {
         "start": {
           "line": 524,
@@ -96716,8 +96623,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n   Triggered before the {@link SelectList} selected item is changed on user interaction. Can be used to cancel selection.\n   \n   @typedef {CustomEvent} coral-selectlist:change\n   \n   @property {SelectListItem} event.detail.item\n   The selected item.\n   ",
-      "start": 15320,
-      "end": 15579,
+      "start": 15300,
+      "end": 15559,
       "loc": {
         "start": {
           "line": 531,
@@ -96732,8 +96639,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n   Triggered when the {@link SelectList} selected item has changed.\n   \n   @typedef {CustomEvent} coral-selectlist:change\n   \n   @property {SelectListItem} detail.oldSelection\n   The prior selected item(s).\n   @property {SelectListItem} detail.selection\n   The newly selected item(s).\n   ",
-      "start": 15585,
-      "end": 15879,
+      "start": 15565,
+      "end": 15859,
       "loc": {
         "start": {
           "line": 540,
@@ -96757,8 +96664,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 15880,
-      "end": 15881,
+      "start": 15860,
+      "end": 15861,
       "loc": {
         "start": {
           "line": 550,
@@ -96785,8 +96692,8 @@
         "updateContext": null
       },
       "value": "export",
-      "start": 15883,
-      "end": 15889,
+      "start": 15863,
+      "end": 15869,
       "loc": {
         "start": {
           "line": 552,
@@ -96813,8 +96720,8 @@
         "updateContext": null
       },
       "value": "default",
-      "start": 15890,
-      "end": 15897,
+      "start": 15870,
+      "end": 15877,
       "loc": {
         "start": {
           "line": 552,
@@ -96839,8 +96746,8 @@
         "binop": null
       },
       "value": "SelectList",
-      "start": 15898,
-      "end": 15908,
+      "start": 15878,
+      "end": 15888,
       "loc": {
         "start": {
           "line": 552,
@@ -96865,8 +96772,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 15908,
-      "end": 15909,
+      "start": 15888,
+      "end": 15889,
       "loc": {
         "start": {
           "line": 552,
@@ -96891,8 +96798,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 15910,
-      "end": 15910,
+      "start": 15890,
+      "end": 15890,
       "loc": {
         "start": {
           "line": 553,

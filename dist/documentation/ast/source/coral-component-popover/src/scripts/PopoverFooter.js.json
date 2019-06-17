@@ -1,28 +1,28 @@
 {
   "type": "File",
   "start": 0,
-  "end": 886,
+  "end": 1016,
   "loc": {
     "start": {
       "line": 1,
       "column": 0
     },
     "end": {
-      "line": 24,
+      "line": 29,
       "column": 0
     }
   },
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 886,
+    "end": 1016,
     "loc": {
       "start": {
         "line": 1,
         "column": 0
       },
       "end": {
-        "line": 24,
+        "line": 29,
         "column": 0
       }
     },
@@ -132,20 +132,89 @@
               }
             }
           }
+        ]
+      },
+      {
+        "type": "ImportDeclaration",
+        "start": 678,
+        "end": 740,
+        "loc": {
+          "start": {
+            "line": 14,
+            "column": 0
+          },
+          "end": {
+            "line": 14,
+            "column": 62
+          }
+        },
+        "specifiers": [
+          {
+            "type": "ImportDefaultSpecifier",
+            "start": 685,
+            "end": 707,
+            "loc": {
+              "start": {
+                "line": 14,
+                "column": 7
+              },
+              "end": {
+                "line": 14,
+                "column": 29
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "start": 685,
+              "end": 707,
+              "loc": {
+                "start": {
+                  "line": 14,
+                  "column": 7
+                },
+                "end": {
+                  "line": 14,
+                  "column": 29
+                },
+                "identifierName": "BasePopoverContentZone"
+              },
+              "name": "BasePopoverContentZone"
+            }
+          }
         ],
+        "source": {
+          "type": "StringLiteral",
+          "start": 713,
+          "end": 739,
+          "loc": {
+            "start": {
+              "line": 14,
+              "column": 35
+            },
+            "end": {
+              "line": 14,
+              "column": 61
+            }
+          },
+          "extra": {
+            "rawValue": "./BasePopoverContentZone",
+            "raw": "'./BasePopoverContentZone'"
+          },
+          "value": "./BasePopoverContentZone"
+        },
         "trailingComments": [
           {
             "type": "CommentBlock",
             "value": "*\n @class Coral.Popover.Footer\n @classdesc The Popover footer content\n @htmltag coral-popover-footer\n @extends {HTMLElement}\n ",
-            "start": 679,
-            "end": 809,
+            "start": 742,
+            "end": 872,
             "loc": {
               "start": {
-                "line": 15,
+                "line": 16,
                 "column": 0
               },
               "end": {
-                "line": 20,
+                "line": 21,
                 "column": 3
               }
             }
@@ -154,29 +223,29 @@
       },
       {
         "type": "Identifier",
-        "start": 810,
-        "end": 854,
+        "start": 873,
+        "end": 984,
         "loc": {
           "start": {
-            "line": 21,
+            "line": 22,
             "column": 0
           },
           "end": {
-            "line": 21,
-            "column": 44
+            "line": 26,
+            "column": 1
           }
         },
         "id": {
           "type": "Identifier",
-          "start": 816,
-          "end": 829,
+          "start": 879,
+          "end": 892,
           "loc": {
             "start": {
-              "line": 21,
+              "line": 22,
               "column": 6
             },
             "end": {
-              "line": 21,
+              "line": 22,
               "column": 19
             },
             "identifierName": "PopoverFooter"
@@ -185,70 +254,198 @@
           "leadingComments": null
         },
         "superClass": {
-          "type": "MemberExpression",
-          "start": 838,
-          "end": 851,
+          "type": "CallExpression",
+          "start": 901,
+          "end": 938,
           "loc": {
             "start": {
-              "line": 21,
+              "line": 22,
               "column": 28
             },
             "end": {
-              "line": 21,
-              "column": 41
+              "line": 22,
+              "column": 65
             }
           },
-          "object": {
+          "callee": {
             "type": "Identifier",
-            "start": 838,
-            "end": 844,
+            "start": 901,
+            "end": 923,
             "loc": {
               "start": {
-                "line": 21,
+                "line": 22,
                 "column": 28
               },
               "end": {
-                "line": 21,
-                "column": 34
+                "line": 22,
+                "column": 50
               },
-              "identifierName": "Dialog"
+              "identifierName": "BasePopoverContentZone"
             },
-            "name": "Dialog"
+            "name": "BasePopoverContentZone"
           },
-          "property": {
-            "type": "Identifier",
-            "start": 845,
-            "end": 851,
-            "loc": {
-              "start": {
-                "line": 21,
-                "column": 35
+          "arguments": [
+            {
+              "type": "MemberExpression",
+              "start": 924,
+              "end": 937,
+              "loc": {
+                "start": {
+                  "line": 22,
+                  "column": 51
+                },
+                "end": {
+                  "line": 22,
+                  "column": 64
+                }
               },
-              "end": {
-                "line": 21,
-                "column": 41
+              "object": {
+                "type": "Identifier",
+                "start": 924,
+                "end": 930,
+                "loc": {
+                  "start": {
+                    "line": 22,
+                    "column": 51
+                  },
+                  "end": {
+                    "line": 22,
+                    "column": 57
+                  },
+                  "identifierName": "Dialog"
+                },
+                "name": "Dialog"
               },
-              "identifierName": "Footer"
-            },
-            "name": "Footer"
-          },
-          "computed": false
+              "property": {
+                "type": "Identifier",
+                "start": 931,
+                "end": 937,
+                "loc": {
+                  "start": {
+                    "line": 22,
+                    "column": 58
+                  },
+                  "end": {
+                    "line": 22,
+                    "column": 64
+                  },
+                  "identifierName": "Footer"
+                },
+                "name": "Footer"
+              },
+              "computed": false
+            }
+          ]
         },
         "body": {
           "type": "ClassBody",
-          "start": 852,
-          "end": 854,
+          "start": 939,
+          "end": 984,
           "loc": {
             "start": {
-              "line": 21,
-              "column": 42
+              "line": 22,
+              "column": 66
             },
             "end": {
-              "line": 21,
-              "column": 44
+              "line": 26,
+              "column": 1
             }
           },
-          "body": []
+          "body": [
+            {
+              "type": "ClassMethod",
+              "start": 943,
+              "end": 982,
+              "loc": {
+                "start": {
+                  "line": 23,
+                  "column": 2
+                },
+                "end": {
+                  "line": 25,
+                  "column": 3
+                }
+              },
+              "static": false,
+              "computed": false,
+              "key": {
+                "type": "Identifier",
+                "start": 947,
+                "end": 952,
+                "loc": {
+                  "start": {
+                    "line": 23,
+                    "column": 6
+                  },
+                  "end": {
+                    "line": 23,
+                    "column": 11
+                  },
+                  "identifierName": "_type"
+                },
+                "name": "_type"
+              },
+              "kind": "get",
+              "id": null,
+              "generator": false,
+              "expression": false,
+              "async": false,
+              "params": [],
+              "body": {
+                "type": "BlockStatement",
+                "start": 955,
+                "end": 982,
+                "loc": {
+                  "start": {
+                    "line": 23,
+                    "column": 14
+                  },
+                  "end": {
+                    "line": 25,
+                    "column": 3
+                  }
+                },
+                "body": [
+                  {
+                    "type": "ReturnStatement",
+                    "start": 961,
+                    "end": 978,
+                    "loc": {
+                      "start": {
+                        "line": 24,
+                        "column": 4
+                      },
+                      "end": {
+                        "line": 24,
+                        "column": 21
+                      }
+                    },
+                    "argument": {
+                      "type": "StringLiteral",
+                      "start": 968,
+                      "end": 977,
+                      "loc": {
+                        "start": {
+                          "line": 24,
+                          "column": 11
+                        },
+                        "end": {
+                          "line": 24,
+                          "column": 20
+                        }
+                      },
+                      "extra": {
+                        "rawValue": "content",
+                        "raw": "'content'"
+                      },
+                      "value": "content"
+                    }
+                  }
+                ],
+                "directives": []
+              }
+            }
+          ]
         },
         "leadingComments": [],
         "name": "_",
@@ -256,29 +453,29 @@
       },
       {
         "type": "Identifier",
-        "start": 856,
-        "end": 885,
+        "start": 986,
+        "end": 1015,
         "loc": {
           "start": {
-            "line": 23,
+            "line": 28,
             "column": 0
           },
           "end": {
-            "line": 23,
+            "line": 28,
             "column": 29
           }
         },
         "declaration": {
           "type": "Identifier",
-          "start": 871,
-          "end": 884,
+          "start": 1001,
+          "end": 1014,
           "loc": {
             "start": {
-              "line": 23,
+              "line": 28,
               "column": 15
             },
             "end": {
-              "line": 23,
+              "line": 28,
               "column": 28
             },
             "identifierName": "PopoverFooter"
@@ -291,43 +488,43 @@
       },
       {
         "type": "ExportDefaultDeclaration",
-        "start": 856,
-        "end": 885,
+        "start": 986,
+        "end": 1015,
         "loc": {
           "start": {
-            "line": 23,
+            "line": 28,
             "column": 0
           },
           "end": {
-            "line": 23,
+            "line": 28,
             "column": 29
           }
         },
         "declaration": {
           "type": "ClassDeclaration",
-          "start": 810,
-          "end": 854,
+          "start": 873,
+          "end": 984,
           "loc": {
             "start": {
-              "line": 21,
+              "line": 22,
               "column": 0
             },
             "end": {
-              "line": 21,
-              "column": 44
+              "line": 26,
+              "column": 1
             }
           },
           "id": {
             "type": "Identifier",
-            "start": 816,
-            "end": 829,
+            "start": 879,
+            "end": 892,
             "loc": {
               "start": {
-                "line": 21,
+                "line": 22,
                 "column": 6
               },
               "end": {
-                "line": 21,
+                "line": 22,
                 "column": 19
               },
               "identifierName": "PopoverFooter"
@@ -336,84 +533,212 @@
             "leadingComments": null
           },
           "superClass": {
-            "type": "MemberExpression",
-            "start": 838,
-            "end": 851,
+            "type": "CallExpression",
+            "start": 901,
+            "end": 938,
             "loc": {
               "start": {
-                "line": 21,
+                "line": 22,
                 "column": 28
               },
               "end": {
-                "line": 21,
-                "column": 41
+                "line": 22,
+                "column": 65
               }
             },
-            "object": {
+            "callee": {
               "type": "Identifier",
-              "start": 838,
-              "end": 844,
+              "start": 901,
+              "end": 923,
               "loc": {
                 "start": {
-                  "line": 21,
+                  "line": 22,
                   "column": 28
                 },
                 "end": {
-                  "line": 21,
-                  "column": 34
+                  "line": 22,
+                  "column": 50
                 },
-                "identifierName": "Dialog"
+                "identifierName": "BasePopoverContentZone"
               },
-              "name": "Dialog"
+              "name": "BasePopoverContentZone"
             },
-            "property": {
-              "type": "Identifier",
-              "start": 845,
-              "end": 851,
-              "loc": {
-                "start": {
-                  "line": 21,
-                  "column": 35
+            "arguments": [
+              {
+                "type": "MemberExpression",
+                "start": 924,
+                "end": 937,
+                "loc": {
+                  "start": {
+                    "line": 22,
+                    "column": 51
+                  },
+                  "end": {
+                    "line": 22,
+                    "column": 64
+                  }
                 },
-                "end": {
-                  "line": 21,
-                  "column": 41
+                "object": {
+                  "type": "Identifier",
+                  "start": 924,
+                  "end": 930,
+                  "loc": {
+                    "start": {
+                      "line": 22,
+                      "column": 51
+                    },
+                    "end": {
+                      "line": 22,
+                      "column": 57
+                    },
+                    "identifierName": "Dialog"
+                  },
+                  "name": "Dialog"
                 },
-                "identifierName": "Footer"
-              },
-              "name": "Footer"
-            },
-            "computed": false
+                "property": {
+                  "type": "Identifier",
+                  "start": 931,
+                  "end": 937,
+                  "loc": {
+                    "start": {
+                      "line": 22,
+                      "column": 58
+                    },
+                    "end": {
+                      "line": 22,
+                      "column": 64
+                    },
+                    "identifierName": "Footer"
+                  },
+                  "name": "Footer"
+                },
+                "computed": false
+              }
+            ]
           },
           "body": {
             "type": "ClassBody",
-            "start": 852,
-            "end": 854,
+            "start": 939,
+            "end": 984,
             "loc": {
               "start": {
-                "line": 21,
-                "column": 42
+                "line": 22,
+                "column": 66
               },
               "end": {
-                "line": 21,
-                "column": 44
+                "line": 26,
+                "column": 1
               }
             },
-            "body": []
+            "body": [
+              {
+                "type": "ClassMethod",
+                "start": 943,
+                "end": 982,
+                "loc": {
+                  "start": {
+                    "line": 23,
+                    "column": 2
+                  },
+                  "end": {
+                    "line": 25,
+                    "column": 3
+                  }
+                },
+                "static": false,
+                "computed": false,
+                "key": {
+                  "type": "Identifier",
+                  "start": 947,
+                  "end": 952,
+                  "loc": {
+                    "start": {
+                      "line": 23,
+                      "column": 6
+                    },
+                    "end": {
+                      "line": 23,
+                      "column": 11
+                    },
+                    "identifierName": "_type"
+                  },
+                  "name": "_type"
+                },
+                "kind": "get",
+                "id": null,
+                "generator": false,
+                "expression": false,
+                "async": false,
+                "params": [],
+                "body": {
+                  "type": "BlockStatement",
+                  "start": 955,
+                  "end": 982,
+                  "loc": {
+                    "start": {
+                      "line": 23,
+                      "column": 14
+                    },
+                    "end": {
+                      "line": 25,
+                      "column": 3
+                    }
+                  },
+                  "body": [
+                    {
+                      "type": "ReturnStatement",
+                      "start": 961,
+                      "end": 978,
+                      "loc": {
+                        "start": {
+                          "line": 24,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 24,
+                          "column": 21
+                        }
+                      },
+                      "argument": {
+                        "type": "StringLiteral",
+                        "start": 968,
+                        "end": 977,
+                        "loc": {
+                          "start": {
+                            "line": 24,
+                            "column": 11
+                          },
+                          "end": {
+                            "line": 24,
+                            "column": 20
+                          }
+                        },
+                        "extra": {
+                          "rawValue": "content",
+                          "raw": "'content'"
+                        },
+                        "value": "content"
+                      }
+                    }
+                  ],
+                  "directives": []
+                }
+              }
+            ]
           },
           "leadingComments": [
             {
               "type": "CommentBlock",
               "value": "*\n @class Coral.Popover.Footer\n @classdesc The Popover footer content\n @htmltag coral-popover-footer\n @extends {HTMLElement}\n ",
-              "start": 679,
-              "end": 809,
+              "start": 742,
+              "end": 872,
               "loc": {
                 "start": {
-                  "line": 15,
+                  "line": 16,
                   "column": 0
                 },
                 "end": {
-                  "line": 20,
+                  "line": 21,
                   "column": 3
                 }
               }
@@ -447,15 +772,15 @@
     {
       "type": "CommentBlock",
       "value": "*\n @class Coral.Popover.Footer\n @classdesc The Popover footer content\n @htmltag coral-popover-footer\n @extends {HTMLElement}\n ",
-      "start": 679,
-      "end": 809,
+      "start": 742,
+      "end": 872,
       "loc": {
         "start": {
-          "line": 15,
+          "line": 16,
           "column": 0
         },
         "end": {
-          "line": 20,
+          "line": 21,
           "column": 3
         }
       }
@@ -662,17 +987,150 @@
       }
     },
     {
-      "type": "CommentBlock",
-      "value": "*\n @class Coral.Popover.Footer\n @classdesc The Popover footer content\n @htmltag coral-popover-footer\n @extends {HTMLElement}\n ",
-      "start": 679,
-      "end": 809,
+      "type": {
+        "label": "import",
+        "keyword": "import",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "import",
+      "start": 678,
+      "end": 684,
       "loc": {
         "start": {
-          "line": 15,
+          "line": 14,
           "column": 0
         },
         "end": {
-          "line": 20,
+          "line": 14,
+          "column": 6
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "BasePopoverContentZone",
+      "start": 685,
+      "end": 707,
+      "loc": {
+        "start": {
+          "line": 14,
+          "column": 7
+        },
+        "end": {
+          "line": 14,
+          "column": 29
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "from",
+      "start": 708,
+      "end": 712,
+      "loc": {
+        "start": {
+          "line": 14,
+          "column": 30
+        },
+        "end": {
+          "line": 14,
+          "column": 34
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "string",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "./BasePopoverContentZone",
+      "start": 713,
+      "end": 739,
+      "loc": {
+        "start": {
+          "line": 14,
+          "column": 35
+        },
+        "end": {
+          "line": 14,
+          "column": 61
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ";",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 739,
+      "end": 740,
+      "loc": {
+        "start": {
+          "line": 14,
+          "column": 61
+        },
+        "end": {
+          "line": 14,
+          "column": 62
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n @class Coral.Popover.Footer\n @classdesc The Popover footer content\n @htmltag coral-popover-footer\n @extends {HTMLElement}\n ",
+      "start": 742,
+      "end": 872,
+      "loc": {
+        "start": {
+          "line": 16,
+          "column": 0
+        },
+        "end": {
+          "line": 21,
           "column": 3
         }
       }
@@ -692,15 +1150,15 @@
         "updateContext": null
       },
       "value": "class",
-      "start": 810,
-      "end": 815,
+      "start": 873,
+      "end": 878,
       "loc": {
         "start": {
-          "line": 21,
+          "line": 22,
           "column": 0
         },
         "end": {
-          "line": 21,
+          "line": 22,
           "column": 5
         }
       }
@@ -718,15 +1176,15 @@
         "binop": null
       },
       "value": "PopoverFooter",
-      "start": 816,
-      "end": 829,
+      "start": 879,
+      "end": 892,
       "loc": {
         "start": {
-          "line": 21,
+          "line": 22,
           "column": 6
         },
         "end": {
-          "line": 21,
+          "line": 22,
           "column": 19
         }
       }
@@ -746,15 +1204,15 @@
         "updateContext": null
       },
       "value": "extends",
-      "start": 830,
-      "end": 837,
+      "start": 893,
+      "end": 900,
       "loc": {
         "start": {
-          "line": 21,
+          "line": 22,
           "column": 20
         },
         "end": {
-          "line": 21,
+          "line": 22,
           "column": 27
         }
       }
@@ -771,17 +1229,68 @@
         "postfix": false,
         "binop": null
       },
-      "value": "Dialog",
-      "start": 838,
-      "end": 844,
+      "value": "BasePopoverContentZone",
+      "start": 901,
+      "end": 923,
       "loc": {
         "start": {
-          "line": 21,
+          "line": 22,
           "column": 28
         },
         "end": {
-          "line": 21,
-          "column": 34
+          "line": 22,
+          "column": 50
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "(",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 923,
+      "end": 924,
+      "loc": {
+        "start": {
+          "line": 22,
+          "column": 50
+        },
+        "end": {
+          "line": 22,
+          "column": 51
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "Dialog",
+      "start": 924,
+      "end": 930,
+      "loc": {
+        "start": {
+          "line": 22,
+          "column": 51
+        },
+        "end": {
+          "line": 22,
+          "column": 57
         }
       }
     },
@@ -798,16 +1307,16 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 844,
-      "end": 845,
+      "start": 930,
+      "end": 931,
       "loc": {
         "start": {
-          "line": 21,
-          "column": 34
+          "line": 22,
+          "column": 57
         },
         "end": {
-          "line": 21,
-          "column": 35
+          "line": 22,
+          "column": 58
         }
       }
     },
@@ -824,16 +1333,41 @@
         "binop": null
       },
       "value": "Footer",
-      "start": 845,
-      "end": 851,
+      "start": 931,
+      "end": 937,
       "loc": {
         "start": {
-          "line": 21,
-          "column": 35
+          "line": 22,
+          "column": 58
         },
         "end": {
-          "line": 21,
-          "column": 41
+          "line": 22,
+          "column": 64
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ")",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 937,
+      "end": 938,
+      "loc": {
+        "start": {
+          "line": 22,
+          "column": 64
+        },
+        "end": {
+          "line": 22,
+          "column": 65
         }
       }
     },
@@ -849,16 +1383,224 @@
         "postfix": false,
         "binop": null
       },
-      "start": 852,
-      "end": 853,
+      "start": 939,
+      "end": 940,
       "loc": {
         "start": {
-          "line": 21,
-          "column": 42
+          "line": 22,
+          "column": 66
         },
         "end": {
-          "line": 21,
-          "column": 43
+          "line": 22,
+          "column": 67
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "get",
+      "start": 943,
+      "end": 946,
+      "loc": {
+        "start": {
+          "line": 23,
+          "column": 2
+        },
+        "end": {
+          "line": 23,
+          "column": 5
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "_type",
+      "start": 947,
+      "end": 952,
+      "loc": {
+        "start": {
+          "line": 23,
+          "column": 6
+        },
+        "end": {
+          "line": 23,
+          "column": 11
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "(",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 952,
+      "end": 953,
+      "loc": {
+        "start": {
+          "line": 23,
+          "column": 11
+        },
+        "end": {
+          "line": 23,
+          "column": 12
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ")",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 953,
+      "end": 954,
+      "loc": {
+        "start": {
+          "line": 23,
+          "column": 12
+        },
+        "end": {
+          "line": 23,
+          "column": 13
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "{",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 955,
+      "end": 956,
+      "loc": {
+        "start": {
+          "line": 23,
+          "column": 14
+        },
+        "end": {
+          "line": 23,
+          "column": 15
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "return",
+        "keyword": "return",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "return",
+      "start": 961,
+      "end": 967,
+      "loc": {
+        "start": {
+          "line": 24,
+          "column": 4
+        },
+        "end": {
+          "line": 24,
+          "column": 10
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "string",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "content",
+      "start": 968,
+      "end": 977,
+      "loc": {
+        "start": {
+          "line": 24,
+          "column": 11
+        },
+        "end": {
+          "line": 24,
+          "column": 20
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ";",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 977,
+      "end": 978,
+      "loc": {
+        "start": {
+          "line": 24,
+          "column": 20
+        },
+        "end": {
+          "line": 24,
+          "column": 21
         }
       }
     },
@@ -874,16 +1616,41 @@
         "postfix": false,
         "binop": null
       },
-      "start": 853,
-      "end": 854,
+      "start": 981,
+      "end": 982,
       "loc": {
         "start": {
-          "line": 21,
-          "column": 43
+          "line": 25,
+          "column": 2
         },
         "end": {
-          "line": 21,
-          "column": 44
+          "line": 25,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "}",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 983,
+      "end": 984,
+      "loc": {
+        "start": {
+          "line": 26,
+          "column": 0
+        },
+        "end": {
+          "line": 26,
+          "column": 1
         }
       }
     },
@@ -902,15 +1669,15 @@
         "updateContext": null
       },
       "value": "export",
-      "start": 856,
-      "end": 862,
+      "start": 986,
+      "end": 992,
       "loc": {
         "start": {
-          "line": 23,
+          "line": 28,
           "column": 0
         },
         "end": {
-          "line": 23,
+          "line": 28,
           "column": 6
         }
       }
@@ -930,15 +1697,15 @@
         "updateContext": null
       },
       "value": "default",
-      "start": 863,
-      "end": 870,
+      "start": 993,
+      "end": 1000,
       "loc": {
         "start": {
-          "line": 23,
+          "line": 28,
           "column": 7
         },
         "end": {
-          "line": 23,
+          "line": 28,
           "column": 14
         }
       }
@@ -956,15 +1723,15 @@
         "binop": null
       },
       "value": "PopoverFooter",
-      "start": 871,
-      "end": 884,
+      "start": 1001,
+      "end": 1014,
       "loc": {
         "start": {
-          "line": 23,
+          "line": 28,
           "column": 15
         },
         "end": {
-          "line": 23,
+          "line": 28,
           "column": 28
         }
       }
@@ -982,15 +1749,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 884,
-      "end": 885,
+      "start": 1014,
+      "end": 1015,
       "loc": {
         "start": {
-          "line": 23,
+          "line": 28,
           "column": 28
         },
         "end": {
-          "line": 23,
+          "line": 28,
           "column": 29
         }
       }
@@ -1008,15 +1775,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 886,
-      "end": 886,
+      "start": 1016,
+      "end": 1016,
       "loc": {
         "start": {
-          "line": 24,
+          "line": 29,
           "column": 0
         },
         "end": {
-          "line": 24,
+          "line": 29,
           "column": 0
         }
       }

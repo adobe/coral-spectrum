@@ -96,11 +96,13 @@
       <button is="coral-button" id="JSToast">Show toast</button>
       <script>
         JSToast.addEventListener('click', function() {
-          new Coral.Toast().set({
+          const toast = new Coral.Toast().set({
             content: {
-              textContent: 'Created with JS'
+              textContent: 'A new version of Lightroom Classic is now available'
             }
-          }).show();
+          });
+          toast.style.width = '318px';
+          toast.show();
         });
       </script>
     </div>
