@@ -125,7 +125,7 @@ describe('Masonry.Item', function() {
           });
       
           done();
-        }, 100);
+        }, 200);
       });
     });
     
