@@ -8,9 +8,11 @@
         <js>
           copyAttributes(data._button, this.buttonListItem);
         </js>
-        <coral-action-bar-item coral-actionbar-offscreen></coral-action-bar-item>
+        <coral-list-item-content>
+          <coral-action-bar-item coral-actionbar-offscreen handle="buttonListItemContent"></coral-action-bar-item>
+        </coral-list-item-content>
         <js>
-          this.buttonListItem.firstElementChild.innerHTML = data._button.label.innerHTML;
+          this.buttonListItemContent.innerHTML = data._button.label.innerHTML;
         </js>
       </button>
       <if data._popover>
@@ -29,9 +31,11 @@
             <js>
               copyAttributes(data._button, this.anchorListItem);
             </js>
-            <coral-action-bar-item coral-actionbar-offscreen></coral-action-bar-item>
+            <coral-list-item-content>
+              <coral-action-bar-item coral-actionbar-offscreen handle="anchorListItemContent"></coral-action-bar-item>
+            </coral-list-item-content>
             <js>
-              this.anchorListItem.firstElementChild.innerHTML = data._button.label.innerHTML;
+              this.anchorListItemContent.innerHTML = data._button.label.innerHTML;
             </js>
           </a>
           <if data._popover>

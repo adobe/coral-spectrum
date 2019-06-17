@@ -107,7 +107,7 @@ describe('Select', function() {
         item2.selected = true;
         
         expect(el.placeholder).to.equal('');
-        expect(el._elements.label.textContent).to.equal(item2.content.textContent);
+        expect(el._elements.label.textContent.trim()).to.equal(item2.content.textContent);
       });
 
       // case 3: !p + !m +  se = se
@@ -137,11 +137,11 @@ describe('Select', function() {
         // we remove all the items for the text
         el.items.clear();
 
-        expect(el.placeholder).to.equal('', 'placeholder is not an empty string');
+        expect(el.placeholder).to.equal('');
 
         // waits for the MO to kick-in
         helpers.next(function() {
-          expect(el._elements.label.innerHTML).to.equal('', 'label is not an empty string');
+          expect(el._elements.label.innerHTML).to.equal(' ');
 
           done();
         });

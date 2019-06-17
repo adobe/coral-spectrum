@@ -11,6 +11,7 @@
  */
 
 import {Dialog} from '../../../coral-component-dialog';
+import BasePopoverContentZone from './BasePopoverContentZone';
 
 /**
  @class Coral.Popover.Footer
@@ -18,6 +19,10 @@ import {Dialog} from '../../../coral-component-dialog';
  @htmltag coral-popover-footer
  @extends {HTMLElement}
  */
-class PopoverFooter extends Dialog.Footer {}
+class PopoverFooter extends BasePopoverContentZone(Dialog.Footer) {
+  get _type() {
+    return 'content';
+  }
+}
 
 export default PopoverFooter;

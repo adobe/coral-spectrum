@@ -16,25 +16,23 @@
 @require '@adobe/spectrum-css/dist/components/dialog/multiStops/dark.css';
 @require '@adobe/spectrum-css/dist/components/dialog/multiStops/darkest.css';
 
+// Prevent dialog flashing on page load
+coral-dialog {
+  display: none;
+}
+
+// @compat
 ._coral-Dialog--noBackdrop {
   border: 1px solid;
 }
 
-// @spectrum
+// @compat
 ._coral-Dialog-closeButton {
-  line-height: 18px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 18px;
-  height: 18px;
-
-  ._coral-Icon {
-    width: 12px;
-  }
+  top: 8px;
+  right: 8px;
 }
 
-// @spectrum
+// @compat
 coral-dialog-footer {
   display: block;
 
@@ -45,11 +43,6 @@ coral-dialog-footer {
 
 ._coral-Dialog-dragIcon {
   margin-top: 3px;
-}
-
-// Prevent dialog flashing on page load
-coral-dialog {
-  display: none;
 }
 
 @require 'light';

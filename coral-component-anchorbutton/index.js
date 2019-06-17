@@ -22,6 +22,7 @@ import './src/styles/index.css';
 
 // Expose component on the Coral namespace
 window.customElements.define('coral-anchorbutton', AnchorButton, {extends: 'a'});
+window.customElements.define('coral-anchorbutton-label', AnchorButtonLabel);
 
 AnchorButton.Label = AnchorButtonLabel;
 

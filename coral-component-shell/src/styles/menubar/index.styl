@@ -10,32 +10,12 @@
  * governing permissions and limitations under the License.
  */
 
-/* Note: $shell-header-height is defined in styles/coral-component-shell */
-
-$shell-header-padding-leftright = 8px;
-$shell-header-padding-topbottom = ($shell-header-height - 38) * 0.5;
-$shell-header-area = $shell-header-height - $shell-header-padding-topbottom;
-
-$shell-header-background-color = rgb(30, 30, 30);
-
-$shell-header-background-disabled-color = rgb(62, 62, 62);
-
-$shell-header-action-text-size = 12px;
-
-$shell-menu-background = white;
-$shell-menu-border = rgb(220, 220, 220);
 $shell-animation-time = 350ms;
-
 $shell-menubar-badge-background-color = rgb(235, 50, 45);
-$shell-menubar-badge-border-color = rgb(30, 30, 30);
 $shell-menubar-badge-text-color = white;
 
 coral-shell-menu {
   display: none;
-
-  &.is-animated {
-    display: block;
-  }
 }
 
 ._coral-Shell-menubar {
@@ -48,6 +28,7 @@ coral-shell-menu {
   vertical-align: top;
   padding-left: 8px;
   padding-right: 8px;
+  outline: none;
 
   &[iconsize="M"] ._coral-Shell-menu-button {
     top: -1px;
@@ -72,84 +53,41 @@ coral-shell-menu {
   }
 }
 
-._coral-Shell-menu {
-  position: absolute;
+// todo overwriting styles set by PopperJS
+._coral-Shell-menu--full {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  border: none !important;
+  top: 48px !important;
+  left: 0 !important;
+  right: 0 !important;
+  // Keep it under the coral-shell-header
+  z-index: 10000 !important;
+  transform: translateY(calc(-100% - 48px)) !important;
+  transition: transform $shell-animation-time cubic-bezier(.42, -.01, .175, 1) !important;
 
-  max-height: "calc(100% - %s)" % $shell-header-height;
-  overflow: auto;
-
-  border-bottom-left-radius: 4px;
-  border-width: 0 0 1px 1px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
-
-  background: $shell-menu-background;
-
-  transition: transform $shell-animation-time cubic-bezier(.42,-.01,.175,1)
-
-  &:focus {
-    // The overlay is focused when opened
-    // We don't want to indicate this in most cases
-    // The user can hit tab to focus on the first child of the shown overlay
-    outline: none;
+  coral-popover-content {
+    // Strech out
+    height: 100%;
   }
 
   &.is-open {
-    transform: translateY(0) translateX(0);
+    transform: translateY(0) translateX(0) !important;
+    // Avoid overflow
+    max-height: calc(100% - 48px);
   }
-}
-
-._coral-Shell-menu--full {
-  border-radius: 0;
-}
-
-._coral-Shell-menu--placement-top {
-  top: $shell-header-height;
-
-  &._coral-Shell-menu--full {
-    left: 0;
-    right: 0;
-    border: none;
-    background: $shell-header-background-color;
-  }
-}
-
-._coral-Shell-menu--placement-right {
-  top: $shell-header-height;
-  right: 0;
-
-  &._coral-Shell-menu--full {
-    // Determined by position
-    max-height: none;
-
-    border-bottom: none;
-
-    bottom: 0;
-  }
-}
-
-._coral-Shell-menu--from-top {
-  transform: translateY(-100%);
-}
-
-._coral-Shell-menu--from-right {
-  transform: translateX(100%);
 }
 
 ._coral-Shell-menu-button {
   position: relative;
 }
 
-// @spectrum
-._coral-Shell-menubar ._coral-Shell-menu-button:not(:active) {
-  border-color: transparent;
-  background-color: transparent;
-}
-
 ._coral-Shell-menu-button[badge]:after {
   content: attr(badge);
   position: absolute;
   top: 3px;
-  left: 20px;
+  left: 16px;
 
   min-width: 5px;
   height: 12px;
@@ -166,6 +104,4 @@ coral-shell-menu {
   border-radius: 16px;
 
   background-color: $shell-menubar-badge-background-color;
-
-  border: 1px solid $shell-menubar-badge-border-color;
 }

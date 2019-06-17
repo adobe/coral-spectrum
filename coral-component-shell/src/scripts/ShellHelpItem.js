@@ -12,7 +12,7 @@
 
 import {AnchorList} from '../../../coral-component-list';
 
-const CLASSNAME = ['_coral-BasicList-item', '_coral-AnchorList-item', '_coral-Shell-help-item'];
+const CLASSNAME = '_coral-Shell-help-item';
 
 /**
  @class Coral.Shell.Help.Item
@@ -25,7 +25,7 @@ class ShellHelpItem extends AnchorList.Item {
   connectedCallback() {
     super.connectedCallback();
     
-    this.classList.add(...CLASSNAME);
+    this.classList.add(CLASSNAME);
   }
 }
 

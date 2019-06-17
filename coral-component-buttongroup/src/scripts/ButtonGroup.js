@@ -538,8 +538,9 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
     // Custom variant
     item.variant = Button.variant._CUSTOM;
     
-    // We need to add button group specific classe to style the button correctly
+    // We need to add button group specific class to style the button correctly
     item.classList.add('_coral-ActionButton');
+    item.label.classList.add('_coral-ActionButton-label');
     
     if (this.selectionMode !== selectionMode.NONE) {
       if (this.selectionMode === selectionMode.SINGLE) {

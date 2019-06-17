@@ -59,7 +59,7 @@ describe('ActionBar', function() {
     it('should be possible to set the more button text', function() {
       el.primary.moreButtonText = ':)';
       expect(el.primary.moreButtonText).to.equal(':)');
-      expect(el.primary._elements.moreButton.label.innerHTML).to.equal(':)');
+      expect(el.primary._elements.moreButtonLabel.innerHTML).to.equal(':)');
     });
 
     it('should be possible to add ActionBarItems to the ActionBar (it uses the normal collection API)', function() {

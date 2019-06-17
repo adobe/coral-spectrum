@@ -508,7 +508,7 @@ class SelectList extends BaseComponent(HTMLElement) {
   connectedCallback() {
     super.connectedCallback();
     
-    this.classList.add(CLASSNAME, '_coral-BasicList');
+    this.classList.add(CLASSNAME);
     
     // adds the role to support accessibility
     this.setAttribute('role', 'listbox');

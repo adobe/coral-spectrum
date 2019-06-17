@@ -15,7 +15,7 @@ import {SelectableCollection} from '../../../coral-collection';
 import orgSwitcher from '../templates/orgSwitcher';
 import {commons, i18n} from '../../../coral-utils';
 
-const CLASSNAMES = ['_coral-BasicList', '_coral-Shell-orgSwitcher'];
+const CLASSNAME = '_coral-Shell-orgSwitcher';
 
 /**
  Minimum number of entries required to show search control.
@@ -300,7 +300,7 @@ class ShellOrgSwitcher extends List {
   connectedCallback() {
     super.connectedCallback();
     
-    this.classList.add(...CLASSNAMES);
+    this.classList.add(CLASSNAME);
   
     // Move the items into the right place
     this._moveItems();

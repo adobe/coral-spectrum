@@ -35,7 +35,7 @@ coral-select-item {
     width: 100%;
     height: 32px;
 
-  // allows the size to match the size of the button
+    // allows the size to match the size of the button
     -webkit-appearance: none;
     -moz-appearance: none;
   }
@@ -43,19 +43,14 @@ coral-select-item {
   ._coral-Dropdown-trigger {
     ._coral-Dropdown-label > coral-icon:first-child {
       vertical-align: text-top;
-      margin-right: 8px;
+      margin-right: 4px;
       margin-top: 0;
       margin-bottom: 0;
     }
   }
 
-// @spectrum
-  ._coral-Icon:not(._coral-Dropdown-icon) {
-    margin-left: 0;
-  }
-
-  ._coral-Dropdown-invalidIcon:not(._coral-Dropdown-icon) {
-    margin-left: 12px;
+  ._coral-Dropdown-invalidIcon {
+    margin-left: 4px;
   }
 }
 
@@ -64,9 +59,4 @@ coral-select-item {
     display: block;
     opacity: 0.01;
   }
-}
-
-// @spectrum regression
-._coral-Dropdown-label {
-  flex: 1 1 auto;
 }

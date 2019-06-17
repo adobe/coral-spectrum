@@ -16,18 +16,10 @@
 @require '@adobe/spectrum-css/dist/components/tabs/multiStops/dark.css';
 @require '@adobe/spectrum-css/dist/components/tabs/multiStops/darkest.css';
 
-// @spectrum support vertical line
-._coral-Tabs--vertical {
-  border-left-style: solid;
-  border-left-width: 2px;
-
-  ._coral-Tabs-item {
-    margin-left: 8px;
-  }
-
-  ._coral-Tabs-selectionIndicator {
-    left: -2px;
-  }
+// @spectrum support truncation
+._coral-Tabs-item {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @require 'light';

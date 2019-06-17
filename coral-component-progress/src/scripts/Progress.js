@@ -39,10 +39,10 @@ const size = {
  
  @property {String} LEFT
  Show the label to the left of the bar.
- @property {String} RIGHT
- Show the label to the right of the bar.
  @property {String} SIDE
  Show the label to the side of the bar.
+ @property {String} RIGHT
+ Not supported. Falls back to LEFT.
  @property {String} BOTTOM
  Not supported. Falls back to LEFT.
  */
@@ -246,14 +246,7 @@ class Progress extends BaseComponent(HTMLElement) {
     
     this.classList.toggle('_coral-BarLoader--sideLabel', this._labelPosition === labelPosition.SIDE);
     
-    let elements = ['label', 'percentage', 'bar'];
-    if (this.labelPosition === labelPosition.RIGHT) {
-      elements = ['percentage', 'label', 'bar'];
-    }
-    else if (this.labelPosition === labelPosition.SIDE) {
-      elements = ['label', 'bar', 'percentage'];
-    }
-    
+    const elements = this.labelPosition === labelPosition.SIDE ? ['label', 'bar', 'percentage'] : ['label', 'percentage', 'bar'];
     // @spectrum should be supported with classes
     elements.forEach((el, i) => {
       this._elements[el].style.order = i;

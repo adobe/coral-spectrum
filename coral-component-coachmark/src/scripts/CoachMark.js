@@ -13,6 +13,7 @@
 import {BaseComponent} from '../../../coral-base-component';
 import base from '../templates/base';
 import {Overlay} from '../../../coral-component-overlay';
+import '../../../coral-component-popover';
 import PopperJS from 'popper.js';
 import {transform, validate} from '../../../coral-utils';
 

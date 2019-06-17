@@ -64,7 +64,9 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
   
       // it has to be global because the menus are not direct children
       'global:coral-overlay:close': '_handleOverlayEvent',
-      'global:coral-overlay:open': '_handleOverlayEvent'
+      'global:coral-overlay:beforeclose': '_handleOverlayBeforeEvent',
+      'global:coral-overlay:open': '_handleOverlayEvent',
+      'global:coral-overlay:beforeopen': '_handleOverlayBeforeEvent'
     });
   }
   
@@ -200,7 +202,29 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
     return this._menu || null;
   }
   set menu(value) {
-    this._menu = value instanceof HTMLElement ? value : String(value);
+    let menu;
+    if (value instanceof HTMLElement) {
+      this._menu = value;
+      menu = this._menu;
+    }
+    else {
+      this._menu = String(value);
+      menu = document.querySelector(this._menu);
+    }
+    
+    // Link menu with item
+    if (menu) {
+      menu.target = this;
+    }
+  }
+  
+  _handleOverlayBeforeEvent(event) {
+    const target = event.target;
+  
+    if (target === this._getMenu()) {
+      // Mark button as selected
+      this._elements.shellMenuButton.classList.toggle('is-selected', !target.open);
+    }
   }
   
   /** @private */
@@ -238,6 +262,11 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
   }
   
   get _contentZones() { return {'coral-button-label': 'label'}; }
+  
+  /** @ignore */
+  focus() {
+    this._elements.shellMenuButton.focus();
+  }
   
   /**
    Returns {@link ShellMenuBarItem} icon variants.

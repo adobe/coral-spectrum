@@ -21,7 +21,7 @@ import helpResult from '../templates/helpResult';
 import helpSearchError from '../templates/helpSearchError';
 import noHelpResults from '../templates/noHelpResults';
 
-const CLASSNAMES = ['_coral-BasicList', '_coral-AnchorList', '_coral-Shell-help'];
+const CLASSNAMES = ['_coral-Menu', '_coral-AnchorList', '_coral-Shell-help'];
 
 /**
  @class Coral.Shell.Help

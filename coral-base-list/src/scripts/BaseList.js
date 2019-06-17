@@ -13,7 +13,7 @@
 import {SelectableCollection} from '../../../coral-collection';
 import {transform, validate} from '../../../coral-utils';
 
-const CLASSNAME = '_coral-BasicList';
+const CLASSNAME = '_coral-Menu';
 
 /**
  Enumeration for {@link BaseList} interactions.
@@ -210,7 +210,7 @@ const BaseList = (superClass) => class extends superClass {
   connectedCallback() {
     super.connectedCallback();
     
-    this.classList.add(CLASSNAME, '_coral-Menu');
+    this.classList.add(CLASSNAME);
     
     // Default reflected attributes
     if (!this._interaction) { this.interaction = interaction.ON; }

@@ -59,71 +59,28 @@
   }
 }
 
-// @spectrum support text + icon
-coral-selectlist-item-content {
+// @compat
+._coral-Menu {
   display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  & > coral-icon:first-child {
-    position: relative;
-    top: 4px;
-    margin-right: 8px;
-  }
-}
-
-._coral-BasicList,
-._coral-BasicList-item,
-._coral-Menu-divider {
-  display: block;
-}
-
-._coral-BasicList-item {
-  text-decoration: none;
-  text-align: left;
-// Allows line breaks
-  height: auto;
-
-  &.is-focused,
-  &:focus {
-    outline: none;
-  }
-}
-
-._coral-BasicList-item-icon {
-  float: left;
-
-  margin-top: 1px;
-  margin-right: 12px;
-
-// Hide if no icon
-  &:empty {
-    display: none;
-  }
-}
-
-._coral-BasicList-item-container {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-._coral-ButtonList-item,
-._coral-AnchorList-item {
-// Avoid selection on interactive elements
-  user-select: none;
 }
 
 ._coral-ButtonList-item {
+  text-align: left;
   width: 100%;
   border-top: 0;
   border-bottom: 0;
   border-right: 0;
-  font-family: inherit;
-  line-height: inherit;
-  border-radius: 0;
 }
 
+._coral-AnchorList-item {
+  text-decoration: none;
+}
+
+._coral-Menu-divider {
+  display: list-item;
+}
+
+// @compat
 ._coral-SelectList-group:before {
   display: block;
   margin: 6px 0 0 0;
@@ -139,10 +96,6 @@ coral-selectlist-item-content {
 ._coral-SelectList-loading {
   position: relative;
   height: 32px;
-}
-
-coral-selectlist-item._coral-Menu-item {
-  display: flex;
 }
 
 @require 'light';

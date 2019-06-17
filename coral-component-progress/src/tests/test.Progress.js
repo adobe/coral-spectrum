@@ -253,11 +253,6 @@ describe('Progress', function() {
       it('should switch label with percentage', function() {
         var progress = new Progress();
         
-        progress.labelPosition = 'right';
-        ['percentage', 'label', 'bar'].forEach((el, i) => {
-          expect(progress._elements[el].style.order).to.equal(i.toString());
-        });
-        
         progress.labelPosition = 'left';
         ['label', 'percentage', 'bar'].forEach((el, i) => {
           expect(progress._elements[el].style.order).to.equal(i.toString());

@@ -55,7 +55,7 @@
         <!-- Normal quiet button is used here if necessary -->
         <!--<a is="coral-anchorbutton" variant="quiet" href="#">Beta Feedback</a>-->
         <coral-shell-menubar>
-          <coral-shell-menubar-item menu="#menu_organizations">NIKE, Inc.</coral-shell-menubar-item>
+          <coral-shell-menubar-item menu="#menu_organizations">Microsoft</coral-shell-menubar-item>
           <coral-shell-menubar-item menu="#menu_solutions" icon="apps"></coral-shell-menubar-item>
           <coral-shell-menubar-item menu="#menu_help" icon="helpOutline"></coral-shell-menubar-item>
           <coral-shell-menubar-item menu="#menu_pulse" icon="bell" badge="5"></coral-shell-menubar-item>
@@ -65,18 +65,10 @@
     </coral-shell-header>
     <coral-shell-menu id="menu_organizations">
       <coral-shell-orgswitcher>
-        <coral-shell-organization name="facebook" icon="facebook">Facebook, Inc.</coral-shell-organization>
-        <coral-shell-organization name="flickr" icon="flickr">Flickr, Inc.</coral-shell-organization>
-        <coral-shell-organization name="newsgator" icon="newsgator">Newsgator, Inc.</coral-shell-organization>
-        <coral-shell-organization name="microsoft" icon="windows8">
-          Microsoft
-          <coral-shell-suborganization name="microsoftjapan" icon="adobeTarget" selected>Microsoft Japan</coral-shell-suborganization>
-          <coral-shell-suborganization name="microsoftusa" icon="adobeTarget">Microsoft USA</coral-shell-suborganization>
-          <coral-shell-suborganization name="microsoftsouthamerica" icon="adobeTarget">Microsoft South America</coral-shell-suborganization>
-        </coral-shell-organization>
-        <coral-shell-orgswitcher-footer>
-          <button is="coral-button">Manage Organizations</button>
-        </coral-shell-orgswitcher-footer>
+        <coral-shell-organization selected name="microsoft" icon="windows8">Microsoft</coral-shell-organization>
+        <coral-shell-organization name="facebook" icon="facebook">Facebook</coral-shell-organization>
+        <coral-shell-organization name="flickr" icon="flickr">Flickr</coral-shell-organization>
+        <coral-shell-organization name="newsgator" icon="newsgator">Newsgator</coral-shell-organization>
       </coral-shell-orgswitcher>
     </coral-shell-menu>
     <coral-shell-menu id="menu_help">
@@ -84,15 +76,15 @@
         <a is="coral-shell-help-item" href="/learn">Marketing Cloud Help</a>
         <a is="coral-shell-help-item" href="/community">Community</a>
         <a is="coral-shell-help-item" href="/customercare">Customer Care</a>
-        <a is="coral-shell-help-item" href="/news">What's new in CoralUI</a>
+        <a is="coral-shell-help-item" href="/news">What's new</a>
         <a is="coral-shell-help-item" href="/status">Adobe Marketing Cloud Status</a>
         <coral-shell-help-separator></coral-shell-help-separator>
-        <a is="coral-shell-help-item" href="/getstarted">Getting Started with CoralUI</a>
-        <a is="coral-shell-help-item" href="/getstarted">What is new in CoralUI</a>
+        <a is="coral-shell-help-item" href="/getstarted">Getting Started</a>
+        <a is="coral-shell-help-item" href="/getstarted">Feedback</a>
       </coral-shell-help>
     </coral-shell-menu>
-    <coral-shell-menu id="menu_pulse" placement="right" from="right" full>
-      <!-- Pulse application goes here -->
+    <coral-shell-menu id="menu_pulse">
+      <h2 class="coral-Heading coral-Heading--4 u-coral-margin">Pulse notifications</h2>
     </coral-shell-menu>
     <coral-shell-menu id="menu_solutions" placement="top" from="top" full top>
       <coral-shell-solutionswitcher>

@@ -13,7 +13,7 @@
 import ShellOrganization from './ShellOrganization';
 import {Icon} from '../../../coral-component-icon';
 
-const CLASSNAME = `_coral-BasicList-item, _coral-Shell-orgSwitcher-subitem `;
+const CLASSNAME = '_coral-Shell-orgSwitcher-subitem';
 
 /**
  @class Coral.Shell.Suborganization
@@ -26,9 +26,7 @@ class ShellSuborganization extends ShellOrganization {
   connectedCallback() {
     super.connectedCallback();
     
-    // Has to be first to override padding from ._coral-Shell-orgSwitcher-item
-    /** @ignore */
-    this.className = CLASSNAME + this.className;
+    this.classList.add(CLASSNAME);
   
     // Set the icon size
     this._elements.icon.size = Icon.size.SMALL;

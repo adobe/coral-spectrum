@@ -22,6 +22,9 @@ class ListDivider extends HTMLElement {
   /** @ignore */
   connectedCallback() {
     this.classList.add(CLASSNAME);
+    
+    // a11y
+    this.setAttribute('role', 'separator');
   }
 }
 

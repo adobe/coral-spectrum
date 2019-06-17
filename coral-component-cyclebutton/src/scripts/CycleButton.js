@@ -518,16 +518,9 @@ class CycleButton extends BaseComponent(HTMLElement) {
     // We do first the content, so that the icon is not destroyed
     selectListItem.content.innerHTML = item.content.innerHTML;
     
-    // If an icon was specified we need to create an element for it and add it directly to the selectList Item
+    // Specify the icon
     if (item.icon) {
-      const icon = new Icon().set({
-        icon: item.icon,
-        size: Icon.size.SMALL,
-        tracking: Icon.tracking.OFF
-      });
-      icon.classList.add(`${CLASSNAME}-list-icon`);
-  
-      selectListItem.content.insertBefore(icon, selectListItem.content.firstChild);
+      selectListItem.icon = item.icon;
     }
     
     selectListItem._originalItem = item;
@@ -571,14 +564,12 @@ class CycleButton extends BaseComponent(HTMLElement) {
       const item = items[i];
       selectListItem = this._getSelectListItem(item);
       
-      // we have set the selected state after attaching otherwise will get
-      // Uncaught Error: Coral.SelectList.Item cannot be selected before being added as a child
-      selectList.items.add(selectListItem);
-      
       selectListItem.set({
         disabled: item.disabled,
         selected: item.selected
       }, true);
+  
+      selectList.items.add(selectListItem);
     }
     
     // adds any additional actions to the actions buttonList

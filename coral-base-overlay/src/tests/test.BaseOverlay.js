@@ -141,24 +141,24 @@ describe('BaseOverlay', function() {
   
   describe('Namespace', function() {
     it('should define the trapFocus in an enum', function() {
-      expect(BaseOverlay.trapFocus).to.exist;
-      expect(BaseOverlay.trapFocus.ON).to.equal('on');
-      expect(BaseOverlay.trapFocus.OFF).to.equal('off');
-      expect(Object.keys(BaseOverlay.trapFocus).length).to.equal(2);
+      expect(OverlayDummy1.trapFocus).to.exist;
+      expect(OverlayDummy1.trapFocus.ON).to.equal('on');
+      expect(OverlayDummy1.trapFocus.OFF).to.equal('off');
+      expect(Object.keys(OverlayDummy1.trapFocus).length).to.equal(2);
     });
   
     it('should define the returnFocus in an enum', function() {
-      expect(BaseOverlay.returnFocus).to.exist;
-      expect(BaseOverlay.returnFocus.ON).to.equal('on');
-      expect(BaseOverlay.returnFocus.OFF).to.equal('off');
-      expect(Object.keys(BaseOverlay.returnFocus).length).to.equal(2);
+      expect(OverlayDummy1.returnFocus).to.exist;
+      expect(OverlayDummy1.returnFocus.ON).to.equal('on');
+      expect(OverlayDummy1.returnFocus.OFF).to.equal('off');
+      expect(Object.keys(OverlayDummy1.returnFocus).length).to.equal(2);
     });
   
     it('should define the focusOnShow in an enum', function() {
-      expect(BaseOverlay.focusOnShow).to.exist;
-      expect(BaseOverlay.focusOnShow.ON).to.equal('on');
-      expect(BaseOverlay.focusOnShow.OFF).to.equal('off');
-      expect(Object.keys(BaseOverlay.focusOnShow).length).to.equal(2);
+      expect(OverlayDummy1.focusOnShow).to.exist;
+      expect(OverlayDummy1.focusOnShow.ON).to.equal('on');
+      expect(OverlayDummy1.focusOnShow.OFF).to.equal('off');
+      expect(Object.keys(OverlayDummy1.focusOnShow).length).to.equal(2);
     });
   });
   
@@ -222,7 +222,7 @@ describe('BaseOverlay', function() {
     
     describe('#focusOnShow', function() {
       it('should default to ON', function() {
-        expect(overlay.focusOnShow).to.equal(BaseOverlay.focusOnShow.ON);
+        expect(overlay.focusOnShow).to.equal(overlay.constructor.focusOnShow.ON);
       });
   
       it('should focus the overlay when no content is focusable', function(done) {
@@ -362,7 +362,7 @@ describe('BaseOverlay', function() {
   
       it('should not move focus when OFF', function(done) {
         overlay.content.insertAdjacentHTML('afterbegin', window.__html__['BaseOverlay.someButtons.html']);
-        overlay.focusOnShow = BaseOverlay.focusOnShow.OFF;
+        overlay.focusOnShow = overlay.constructor.focusOnShow.OFF;
     
         overlay.on('coral-overlay:open', function() {
           expect(document.activeElement).to.equal(document.body, 'Focus should remain on the body');

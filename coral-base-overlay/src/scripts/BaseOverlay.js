@@ -44,8 +44,8 @@ const startZIndex = 10000;
 const TAB_KEY = 9;
 
 // A stack interface for overlays
-const _overlays = [];
-let overlays = {};
+const overlayStack = [];
+let OverlayManager = {};
 
 /**
  Cancel the backdrop hide mid-animation.
@@ -95,13 +95,13 @@ function hideEverythingBut(instance) {
  */
 function doRepositionBackdrop() {
   // Position under the topmost overlay
-  const top = overlays.top();
+  const top = OverlayManager.top();
   
   if (top) {
     // The backdrop, if shown, should be positioned under the topmost overlay that does have a backdrop
-    for (let i = _overlays.length - 1; i > -1; i--) {
-      if (_overlays[i].backdrop) {
-        backdropEl.style.zIndex = _overlays[i].zIndex - 1;
+    for (let i = overlayStack.length - 1; i > -1; i--) {
+      if (overlayStack[i].backdrop) {
+        backdropEl.style.zIndex = overlayStack[i].zIndex - 1;
         break;
       }
     }
@@ -111,7 +111,7 @@ function doRepositionBackdrop() {
   }
 }
 
-overlays = {
+OverlayManager = {
   pop(instance) {
     // Get overlay index
     const index = this.indexOf(instance);
@@ -121,10 +121,10 @@ overlays = {
     }
     
     // Get the overlay
-    const overlay = _overlays[index];
+    const overlay = overlayStack[index];
     
     // Remove from the stack
-    _overlays.splice(index, 1);
+    overlayStack.splice(index, 1);
     
     // Return the passed overlay or the found overlay
     return overlay;
@@ -142,7 +142,7 @@ overlays = {
     instance.style.zIndex = zIndex;
     
     // Push it
-    _overlays.push(overlay);
+    overlayStack.push(overlay);
     
     if (overlay.backdrop) {
       // If the backdrop is shown, we'll need to reposition it
@@ -159,8 +159,8 @@ overlays = {
     // Loop over stack
     // Find overlay
     // Return index
-    for (let i = 0; i < _overlays.length; i++) {
-      if (_overlays[i].instance === instance) {
+    for (let i = 0; i < overlayStack.length; i++) {
+      if (overlayStack[i].instance === instance) {
         return i;
       }
     }
@@ -172,12 +172,12 @@ overlays = {
     const index = this.indexOf(instance);
     
     // Return overlay
-    return index === -1 ? null : _overlays[index];
+    return index === -1 ? null : overlayStack[index];
   },
   
   top() {
-    const length = _overlays.length;
-    return length === 0 ? null : _overlays[length - 1];
+    const length = overlayStack.length;
+    return length === 0 ? null : overlayStack[length - 1];
   },
   
   getHighestZIndex() {
@@ -186,11 +186,11 @@ overlays = {
   },
   
   some(...args) {
-    return _overlays.some(...args);
+    return overlayStack.some(...args);
   },
   
   forEach(...args) {
-    return _overlays.forEach(...args);
+    return overlayStack.forEach(...args);
   }
 };
 
@@ -204,7 +204,7 @@ function createDocumentTabCaptureEls() {
     topTabCaptureEl.tabIndex = 0;
     document.body.insertBefore(topTabCaptureEl, document.body.firstChild);
     topTabCaptureEl.addEventListener('focus', () => {
-      const top = overlays.top();
+      const top = OverlayManager.top();
       if (top && top.instance.trapFocus === trapFocus.ON) {
         // Focus on the first tabbable element of the top overlay
         Array.prototype.some.call(top.instance.querySelectorAll(commons.TABBABLE_ELEMENT_SELECTOR), (item) => {
@@ -223,7 +223,7 @@ function createDocumentTabCaptureEls() {
     bottomTabCaptureEl.tabIndex = 0;
     document.body.appendChild(bottomTabCaptureEl);
     bottomTabCaptureEl.addEventListener('focus', () => {
-      const top = overlays.top();
+      const top = OverlayManager.top();
       if (top && top.instance.trapFocus === trapFocus.ON) {
         const tabbableElement = Array.prototype.filter.call(top.instance.querySelectorAll(commons.TABBABLE_ELEMENT_SELECTOR), (item) => item.offsetParent !== null && !item.hasAttribute('coral-tabcapture')).pop();
         
@@ -307,7 +307,7 @@ function hideOrRepositionBackdrop() {
   }
   
   // Loop over all overlays
-  const keepBackdrop = overlays.some((overlay) => {
+  const keepBackdrop = OverlayManager.some((overlay) => {
     // Check for backdrop usage
     if (overlay.backdrop) {
       return true;
@@ -327,7 +327,7 @@ function hideOrRepositionBackdrop() {
   
   // Hide/create the document-level tab capture element as necessary
   // This only applies to modal overlays (those that have backdrops)
-  const top = overlays.top();
+  const top = OverlayManager.top();
   if (!top || !(top.instance.trapFocus === trapFocus.ON && top.instance._requestedBackdrop)) {
     hideDocumentTabCaptureEls();
   }
@@ -340,7 +340,7 @@ function hideOrRepositionBackdrop() {
  Handles clicks to the backdrop, calling backdropClickedCallback for every overlay
  */
 function handleBackdropClick(event) {
-  overlays.forEach((overlay) => {
+  OverlayManager.forEach((overlay) => {
     if (typeof overlay.instance.backdropClickedCallback === 'function') {
       overlay.instance.backdropClickedCallback(event);
     }
@@ -646,7 +646,7 @@ const BaseOverlay = (superClass) => class extends superClass {
    @protected
    */
   _isTopOverlay() {
-    const top = overlays.top();
+    const top = OverlayManager.top();
     return top && top.instance === this;
   }
   
@@ -656,7 +656,7 @@ const BaseOverlay = (superClass) => class extends superClass {
    @protected
    */
   _pushOverlay() {
-    overlays.push(this);
+    OverlayManager.push(this);
   }
   
   /**
@@ -665,7 +665,7 @@ const BaseOverlay = (superClass) => class extends superClass {
    @protected
    */
   _popOverlay() {
-    overlays.pop(this);
+    OverlayManager.pop(this);
     
     // Automatically hide the backdrop if required
     hideOrRepositionBackdrop();
@@ -677,7 +677,7 @@ const BaseOverlay = (superClass) => class extends superClass {
    @protected
    */
   _showBackdrop() {
-    const overlay = overlays.get(this);
+    const overlay = OverlayManager.get(this);
     
     // Overlay is not tracked unless the component is in the DOM
     // Hence, we need to check
@@ -706,7 +706,7 @@ const BaseOverlay = (superClass) => class extends superClass {
    @protected
    */
   _hideBackdrop() {
-    const overlay = overlays.get(this);
+    const overlay = OverlayManager.get(this);
     
     if (overlay) {
       overlay.backdrop = false;
@@ -873,7 +873,7 @@ const BaseOverlay = (superClass) => class extends superClass {
         // Wait a frame before testing whether focus has moved to an open overlay or to some other element.
         window.requestAnimationFrame(() => {
           // If overlay remains open, don't remove tabindex event handler until after it has been closed
-          const top = overlays.top();
+          const top = OverlayManager.top();
           if (top && top.instance.contains(document.activeElement)) {
             return;
           }
@@ -885,6 +885,10 @@ const BaseOverlay = (superClass) => class extends superClass {
   
     this._returnFocusToElement = element;
     return this;
+  }
+  
+  static get _OverlayManager() {
+    return OverlayManager;
   }
   
   /**

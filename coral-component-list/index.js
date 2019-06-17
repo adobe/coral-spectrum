@@ -34,6 +34,7 @@ import './src/styles/index.css';
 window.customElements.define('coral-list', List);
 window.customElements.define('coral-list-divider', ListDivider);
 window.customElements.define('coral-list-item', ListItem);
+window.customElements.define('coral-list-item-content', ListItemContent);
 window.customElements.define('coral-anchorlist', AnchorList);
 window.customElements.define('coral-anchorlist-item', AnchorListItem, {extends: 'a'});
 window.customElements.define('coral-buttonlist', ButtonList);

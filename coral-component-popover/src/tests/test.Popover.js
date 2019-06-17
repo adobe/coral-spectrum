@@ -61,7 +61,8 @@ describe('Popover', function() {
       expect(Popover.variant.SUCCESS).to.equal('success');
       expect(Popover.variant.HELP).to.equal('help');
       expect(Popover.variant.INFO).to.equal('info');
-      expect(Object.keys(Popover.variant).length).to.equal(6);
+      expect(Popover.variant._COACHMARK).to.equal('_coachmark');
+      expect(Object.keys(Popover.variant).length).to.equal(7);
     });
   });
   
@@ -178,6 +179,22 @@ describe('Popover', function() {
         expect(content).to.not.equal(null);
         expect(el.querySelector('coral-popover-header')).to.not.equal(null);
         expect(el.content.innerHTML).to.not.equal('');
+      });
+    });
+    
+    describe('#variant', function() {
+      it('should support coachmark', function() {
+        el = helpers.build(window.__html__['Popover.headerAndContent.html']);
+        el.variant = Popover.variant._COACHMARK;
+        
+        expect(el.classList.contains('_coral-Popover--Dialog')).to.be.false;
+        expect(el.classList.contains('_coral-CoachMarkPopover')).to.be.true;
+  
+        expect(el.header.classList.contains('_coral-Dialog-title')).to.be.false;
+        expect(el.header.classList.contains('_coral-CoachMarkPopover-title')).to.be.true;
+  
+        expect(el.content.classList.contains('_coral-Dialog-content')).to.be.false;
+        expect(el.content.classList.contains('_coral-CoachMarkPopover-content')).to.be.true;
       });
     });
   });
@@ -368,6 +385,12 @@ describe('Popover', function() {
   });
 
   describe('Implementation details', function() {
+    it('should set coachmark variant if target is a coral-coachmark element', function() {
+      const target = document.createElement('coral-coachmark');
+      el.target = target;
+      expect(el.variant).to.equal(Popover.variant._COACHMARK);
+    });
+    
     it('should set .is-selected on target when opened/closed', function() {
       var target = helpers.overlay.createStaticTarget();
 

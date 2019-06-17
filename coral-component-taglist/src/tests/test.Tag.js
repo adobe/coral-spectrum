@@ -108,6 +108,7 @@ describe('Tag', function() {
     describe('#size', function() {
       it('should set another tag size', function() {
         var tag = helpers.build(window.__html__['Tag.base.html']);
+        tag.color = 'blue';
         tag.size = 'L';
         expect(tag.classList.contains('_coral-Label--large')).to.be.true;
         tag.size = 'S';

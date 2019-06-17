@@ -209,7 +209,7 @@ class Tag extends BaseComponent(HTMLElement) {
     this._reflectAttribute('closable', this._closable);
   
     // Only tags are closable
-    this._toggleTagVariant(this._closable);
+    this._toggleTagVariant();
     
     if (this._closable && !this.contains(this._elements.button)) {
       // Insert the button if it was not added to the DOM
@@ -254,9 +254,7 @@ class Tag extends BaseComponent(HTMLElement) {
     this._reflectAttribute('quiet', this._quiet);
   
     // Only tags are quiet
-    this._toggleTagVariant(this._quiet);
-    
-    this.classList.toggle(QUIET_CLASSNAME, this._quiet);
+    this._toggleTagVariant();
   }
   
   /**
@@ -293,8 +291,7 @@ class Tag extends BaseComponent(HTMLElement) {
     this._size = validate.enumeration(size)(value) && value || size.MEDIUM;
     this._reflectAttribute('size', this._size);
   
-    this.classList.remove(...ALL_SIZE_CLASSES);
-    this.classList.add(`${LABEL_CLASSNAME}--${swappedSize[this._size].toLowerCase()}`);
+    this._toggleTagVariant();
   }
   
   /**
@@ -303,6 +300,7 @@ class Tag extends BaseComponent(HTMLElement) {
    @type {String}
    @default Coral.Tag.color.DEFAULT
    @htmlattribute color
+   @htmlattributereflected
    */
   get color() {
     return this._color || color.DEFAULT;
@@ -317,18 +315,8 @@ class Tag extends BaseComponent(HTMLElement) {
     }
     
     this._reflectAttribute('color', this._color);
-  
-    // removes every existing color
-    this.classList.remove(...ALL_COLOR_CLASSES);
     
-    const isColored = this._color !== color.DEFAULT;
-  
-    // Only labels are colored
-    this._toggleTagVariant(!isColored);
-    
-    if (isColored) {
-      this.classList.add(`${LABEL_CLASSNAME}--${this._color}`);
-    }
+    this._toggleTagVariant();
   }
   
   /**
@@ -336,10 +324,26 @@ class Tag extends BaseComponent(HTMLElement) {
    
     @private
    */
-  _toggleTagVariant(toggle) {
-    this.classList.toggle(CLASSNAME, toggle);
-    this.classList.toggle(`${CLASSNAME}--deletable`, toggle);
-    this.classList.toggle(LABEL_CLASSNAME, !toggle);
+  _toggleTagVariant() {
+    const isColored = this.color !== color.DEFAULT;
+    
+    // Base
+    this.classList.toggle(CLASSNAME, !isColored);
+    this.classList.toggle(LABEL_CLASSNAME, isColored);
+    
+    // Closable
+    this.classList.toggle(`${CLASSNAME}--deletable`, !isColored);
+    
+    // Quiet
+    this.classList.toggle(QUIET_CLASSNAME, !isColored && this.quiet);
+    
+    // Size
+    this.classList.remove(...ALL_SIZE_CLASSES);
+    this.classList.toggle(`${LABEL_CLASSNAME}--${swappedSize[this.size].toLowerCase()}`, isColored);
+  
+    // Color
+    this.classList.remove(...ALL_COLOR_CLASSES);
+    this.classList.toggle(`${LABEL_CLASSNAME}--${this.color}`, isColored);
   }
   
   /**

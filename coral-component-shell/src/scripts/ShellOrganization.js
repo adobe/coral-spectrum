@@ -16,7 +16,7 @@ import {Icon} from '../../../coral-component-icon';
 import organization from '../templates/organization';
 import {transform, commons} from '../../../coral-utils';
 
-const CLASSNAMES = ['_coral-BasicList-item', '_coral-Shell-orgSwitcher-item'];
+const CLASSNAME = '_coral-Shell-orgSwitcher-item';
 
 /**
  @class Coral.Shell.Organization
@@ -37,8 +37,10 @@ class ShellOrganization extends List.Item {
       // Private
       'coral-shell-suborganization:_selectedchanged': '_onItemSelectedChanged'
     });
-  
-    organization.call(this._elements, {Icon});
+    
+    const template = {};
+    organization.call(template, {Icon});
+    commons.extend(this._elements, template);
   
     // Used for eventing
     this._oldSelection = null;
@@ -230,32 +232,27 @@ class ShellOrganization extends List.Item {
   
   /** @ignore */
   connectedCallback() {
-    this.classList.add(...CLASSNAMES);
+    super.connectedCallback();
+    
+    this.classList.add(CLASSNAME);
   
     // Move items into the right place
     this._moveItems();
   
-    // Move items before calling the voracious ListItem render to support cloneNode
-    super.connectedCallback();
-  
     this.setAttribute('id', this.id || commons.getUID());
-    const items = this.querySelector(`#${this.id} > ._coral-Shell-orgSwitcher-subitems`);
     
-    if (items) {
-      this._elements.items = items;
-      this._elements.checkmark = this.querySelector(`#${this.id} > ._coral-Shell-orgSwitcher-item-checkmark`);
-      this._items._container = this._elements.items;
-    }
-    else {
-      // Render template
-      const frag = document.createDocumentFragment();
+    // Support cloneNode
+    const items = this.querySelector(`#${this.id} > ._coral-Shell-orgSwitcher-subitems`);
+    if (items) {items.remove();}
+    const checkmark = this.querySelector(`#${this.id} > ._coral-Shell-orgSwitcher-checkmark`);
+    if (checkmark) {checkmark.remove();}
+    
+    // Render template
+    const frag = document.createDocumentFragment();
   
-      frag.appendChild(this._elements.checkmark);
-      frag.appendChild(this._elements.items);
-      this.appendChild(frag);
-  
-      this._elements.icon.size = Icon.size.SMALL;
-    }
+    frag.appendChild(this._elements.checkmark);
+    frag.appendChild(this._elements.items);
+    this.appendChild(frag);
     
     // Don't trigger events once connected
     this._preventTriggeringEvents = true;

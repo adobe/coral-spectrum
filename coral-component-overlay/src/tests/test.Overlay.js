@@ -114,7 +114,7 @@ describe('Overlay', function() {
     
     describe('#focusOnShow', function() {
       it('should default to ON', function() {
-        expect(overlay.focusOnShow).to.equal(BaseOverlay.focusOnShow.ON);
+        expect(overlay.focusOnShow).to.equal(Overlay.focusOnShow.ON);
       });
     });
     

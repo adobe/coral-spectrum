@@ -137,7 +137,7 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
   
     if (this._elements.moreButton) {
       // moreButton might not have been created so far
-      this._elements.moreButton.label.innerHTML = this._moreButtonText;
+      this._elements.moreButtonLabel.innerHTML = this._moreButtonText;
       this._elements.moreButton[this._moreButtonText.trim() === '' ? 'setAttribute' : 'removeAttribute']('title', i18n.get('More'));
     }
   }
@@ -157,6 +157,7 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
       
       button.setAttribute('variant', Button.variant._CUSTOM);
       button.classList.add('_coral-ActionButton');
+      button.label && button.label.classList.add('_coral-ActionButton-label');
       
       if (oldVariant === Button.variant.QUIET) {
         button.classList.add('_coral-ActionButton--quiet');

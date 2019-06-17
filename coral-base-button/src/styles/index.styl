@@ -16,29 +16,17 @@
 @require '@adobe/spectrum-css/dist/components/button/multiStops/dark.css';
 @require '@adobe/spectrum-css/dist/components/button/multiStops/darkest.css';
 
-._coral-Button,
-._coral-ActionButton {
-  coral-icon + coral-button-label:not(:empty):not([hidden]),
-  coral-icon + coral-anchorbutton-label:not(:empty):not([hidden]),
-  coral-button-label:not(:empty):not([hidden]) + coral-icon,
-  coral-anchorbutton-label:not(:empty):not([hidden]) + coral-icon {
-    margin-left: 8px;
-  }
+// @compat
+._coral-ActionButton coral-button-label + coral-icon {
+  margin-left: 4px;
 }
 
 // @compat
 ._coral-Button--block {
-  display: flex;
   width: 100%;
-  margin-left: 0;
-  margin-right: 0;
-  min-width: 0;
-
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
+// @compat
 ._coral-Button--block + ._coral-Button--block {
   margin-left: 0;
 }

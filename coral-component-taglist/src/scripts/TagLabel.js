@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-const CLASSNAME = '_coral-Tags-item-label';
+const CLASSNAME = '_coral-Tags-itemLabel';
 
 /**
  @class Coral.Tag.Label

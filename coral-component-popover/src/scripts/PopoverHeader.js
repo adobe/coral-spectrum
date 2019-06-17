@@ -11,6 +11,7 @@
  */
 
 import {Dialog} from '../../../coral-component-dialog';
+import BasePopoverContentZone from './BasePopoverContentZone';
 
 /**
  @class Coral.Popover.Header
@@ -18,6 +19,10 @@ import {Dialog} from '../../../coral-component-dialog';
  @htmltag coral-popover-header
  @extends {DialogHeader}
  */
-class PopoverHeader extends Dialog.Header {}
+class PopoverHeader extends BasePopoverContentZone(Dialog.Header) {
+  get _type() {
+    return 'title';
+  }
+}
 
 export default PopoverHeader;

@@ -22,6 +22,7 @@ import './src/styles/index.css';
 
 // Expose component on the Coral namespace
 window.customElements.define('coral-button', Button, {extends: 'button'});
+window.customElements.define('coral-button-label', ButtonLabel);
 
 Button.Label = ButtonLabel;
 

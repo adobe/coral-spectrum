@@ -13,12 +13,5 @@
 import './src/styles/index.css';
 
 import BaseOverlay from './src/scripts/BaseOverlay';
-import {trapFocus, returnFocus, focusOnShow, FADETIME} from './src/scripts/enums';
-
-// @compat
-BaseOverlay.trapFocus = trapFocus;
-BaseOverlay.returnFocus = returnFocus;
-BaseOverlay.focusOnShow = focusOnShow;
-BaseOverlay.FADETIME = FADETIME;
 
 export {BaseOverlay};

@@ -141,7 +141,7 @@ describe('Dialog', function() {
   
     describe('#focusOnShow', function() {
       it('should default to ON', function() {
-        expect(el.focusOnShow).to.equal(BaseOverlay.focusOnShow.ON);
+        expect(el.focusOnShow).to.equal(Dialog.focusOnShow.ON);
       });
     });
   

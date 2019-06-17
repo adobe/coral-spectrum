@@ -10,10 +10,19 @@
  * governing permissions and limitations under the License.
  */
 
+const CLASSNAME = '_coral-Button-label';
+
 /**
  @class Coral.Button.Label
  @classdesc The Button label content
  @htmltag coral-button-label
- @return {HTMLElement}
+ @extends {HTMLElement}
  */
-export default () => document.createElement('coral-button-label');
+class ButtonLabel extends HTMLElement {
+  /** @ignore */
+  connectedCallback() {
+    this.classList.add(CLASSNAME);
+  }
+}
+
+export default ButtonLabel;

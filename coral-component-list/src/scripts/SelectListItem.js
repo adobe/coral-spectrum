@@ -66,9 +66,40 @@ class SelectListItem extends BaseComponent(HTMLElement) {
       handle: 'content',
       tagName: 'coral-selectlist-item-content',
       insert: function(content) {
-        this.insertBefore(content, this._elements.icon);
+        this.insertBefore(content, this._elements.checkIcon);
       }
     });
+  }
+  
+  /**
+   The icon to display. See {@link Icon}.
+   
+   @type {String}
+   @default ""
+   @htmlattribute icon
+   */
+  get icon() {
+    const el = this._getIconElement();
+    return el.icon;
+  }
+  set icon(value) {
+    const el = this._getIconElement();
+    if (transform.string(value) === '') {
+      el.remove();
+    }
+    else {
+      this.insertBefore(el, this.firstChild);
+    }
+    el.icon = value;
+  }
+  
+  _getIconElement() {
+    if (!this._elements.icon) {
+      this._elements.icon = this.querySelector('._coral-Menu-item-icon') || new Icon();
+      this._elements.icon.size = Icon.size.SMALL;
+      this._elements.icon.classList.add('_coral-Menu-item-icon');
+    }
+    return this._elements.icon;
   }
   
   /**
@@ -90,7 +121,7 @@ class SelectListItem extends BaseComponent(HTMLElement) {
     this.setAttribute('aria-selected', this._selected);
     
     // Toggle check icon
-    this._elements.icon.hidden = !this._selected;
+    this._elements.checkIcon.hidden = !this._selected;
     
     this.trigger('coral-selectlist-item:_selectedchanged');
   }
@@ -127,7 +158,7 @@ class SelectListItem extends BaseComponent(HTMLElement) {
   connectedCallback() {
     super.connectedCallback();
     
-    this.classList.add(CLASSNAME, '_coral-BasicList-item');
+    this.classList.add(CLASSNAME);
     
     this.setAttribute('role', 'option');
   
@@ -135,6 +166,12 @@ class SelectListItem extends BaseComponent(HTMLElement) {
     const template = this.querySelector('._coral-SelectList-icon');
     if (template) {
       template.remove();
+    }
+    
+    // Remove content icon before processing content zone
+    const contentIcon = this.querySelector('coral-icon');
+    if (contentIcon) {
+      contentIcon.remove();
     }
     
     // Fetch or create the content content zone element
@@ -148,9 +185,10 @@ class SelectListItem extends BaseComponent(HTMLElement) {
     }
   
     // Add template
-    this.appendChild(this._elements.icon);
+    this.appendChild(this._elements.checkIcon);
   
     // Assign the content zones, moving them into place in the process
+    this.icon = contentIcon && contentIcon.icon || this.icon;
     this.content = content;
   }
 }

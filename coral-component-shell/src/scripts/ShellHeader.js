@@ -11,6 +11,7 @@
  */
 
 import {BaseComponent} from '../../../coral-base-component';
+import {Overlay} from '../../../coral-component-overlay';
 
 const CLASSNAME = '_coral-Shell-header';
 
@@ -33,13 +34,8 @@ class ShellHeader extends BaseComponent(HTMLElement) {
       actions: this.querySelector('coral-shell-header-actions') || document.createElement('coral-shell-header-actions'),
       content: this.querySelector('coral-shell-header-content') || document.createElement('coral-shell-header-content')
     };
-    
-    // Events
-    this._delegateEvents({
-      'global:coral-overlay:beforeopen': '_handleMenuBeforeOpenOrClose',
-      'global:coral-overlay:beforeclose': '_handleMenuBeforeOpenOrClose',
-      'global:coral-overlay:close': '_handleMenuClose'
-    });
+  
+    Overlay._OverlayManager.push(this);
   }
   
   /**
@@ -99,45 +95,6 @@ class ShellHeader extends BaseComponent(HTMLElement) {
         this.appendChild(content);
       }
     });
-  }
-  
-  /**
-   Just before a menu is open or closed, we check that the zIndex of the Header is correct so that it animates
-   below the header.
-   
-   @ignore
-   */
-  _handleMenuBeforeOpenOrClose(event) {
-    const target = event.target;
-  
-    // header only changes zIndex due to menus
-    if (target.tagName === 'CORAL-SHELL-MENU') {
-      // we need one frame to make sure the zIndex is already set
-      window.requestAnimationFrame(() => {
-        this.style.zIndex = parseInt(target.style.zIndex, 10) + 100;
-        target.classList.add('is-animated');
-        
-        window.clearTimeout(this._zIndexTimeout);
-      });
-    }
-  }
-  
-  /**
-   Cleanup after _handleMenuBeforeOpenOrClose() to make sure
-   we do not leave high zIndex behind that overlay other element on the page
-   */
-  _handleMenuClose(event) {
-    const target = event.target;
-    
-    // header only changes zIndex due to menus
-    if (target.tagName === 'CORAL-SHELL-MENU') {
-      // we need additional time to make sure the zIndex is already set
-      this._zIndexTimeout = setTimeout(() => {
-        target.classList.remove('is-animated');
-  
-        this.style.zIndex = null;
-      }, target.constructor.FADETIME);
-    }
   }
   
   /** @private */

@@ -65,13 +65,16 @@ const variant = {
   WARNING: 'warning',
   SUCCESS: 'success',
   HELP: 'help',
-  INFO: 'info'
+  INFO: 'info',
+  _COACHMARK: '_coachmark'
 };
 
 // A string of all possible variant classnames
 const ALL_VARIANT_CLASSES = [];
 for (const variantValue in variant) {
-  ALL_VARIANT_CLASSES.push(`_coral-Dialog--${variant[variantValue]}`);
+  if (variantValue !== 'COACHMARK') {
+    ALL_VARIANT_CLASSES.push(`_coral-Dialog--${variant[variantValue]}`);
+  }
 }
 
 // A string of all possible placement classnames
@@ -227,16 +230,26 @@ class Popover extends Overlay {
     // Toggle dialog mode
     this._toggleFlyout();
     
-    if (this._variant === variant.DEFAULT) {
+    if (this._variant === variant._COACHMARK) {
       // ARIA
       this.setAttribute('role', 'dialog');
+  
+      this._toggleCoachMark(true);
     }
     else {
-      // Set new variant class
-      this.classList.add(`_coral-Dialog--${this._variant}`);
+      this._toggleCoachMark(false);
       
-      // ARIA
-      this.setAttribute('role', 'alertdialog');
+      if (this._variant === variant.DEFAULT) {
+        // ARIA
+        this.setAttribute('role', 'dialog');
+      }
+      else {
+        // Set new variant class
+        this.classList.add(`_coral-Dialog--${this._variant}`);
+    
+        // ARIA
+        this.setAttribute('role', 'alertdialog');
+      }
     }
   }
   
@@ -257,6 +270,22 @@ class Popover extends Overlay {
     this._reflectAttribute('closable', this._closable);
   
     this._elements.closeButton.style.display = this._closable === closable.ON ? 'block' : 'none';
+  }
+  
+  /**
+   Inherited from {@link Overlay#target}.
+   */
+  get target() {
+    return super.target;
+  }
+  set target(value) {
+    super.target = value;
+  
+    // Coach Mark specific
+    const target = this._getTarget();
+    if (target && target.tagName === 'CORAL-COACHMARK') {
+      this.setAttribute('variant', variant._COACHMARK);
+    }
   }
   
   /**
@@ -320,7 +349,7 @@ class Popover extends Overlay {
     }
     
     // Inject the SVG icon
-    if (variantValue !== variant.DEFAULT) {
+    if (variantValue !== variant.DEFAULT && variantValue !== variant._COACHMARK) {
       const iconName = capitalize(variantValue);
       this._elements.headerWrapper.insertAdjacentHTML('beforeend', Icon._renderSVG(`spectrum-css-icon-${iconName}Medium`, ['_coral-Dialog-typeIcon', `_coral-UIIcon-${iconName}Medium`]));
       this._elements.icon = this.querySelector('._coral-Dialog-typeIcon');
@@ -358,9 +387,22 @@ class Popover extends Overlay {
     }
   }
   
+  _toggleCoachMark(isCoachMark) {
+    this.classList.toggle('_coral-CoachMarkPopover', isCoachMark);
+    this._elements.headerWrapper.classList.toggle('_coral-Dialog-header', !isCoachMark);
+    this._elements.headerWrapper.classList.toggle('_coral-CoachMarkPopover-header', isCoachMark);
+    
+    ['header', 'content', 'footer'].forEach((contentZone) => {
+      if (this[contentZone]) {
+        this[contentZone][isCoachMark ? 'setAttribute' : 'removeAttribute']('_coachmark', '');
+      }
+    });
+  }
+  
   _toggleFlyout() {
     // Flyout mode is when there's only content in default variant
-    const isFlyout = this._variant === variant.DEFAULT && _isEmpty(this.header) && _isEmpty(this.footer);
+    const isFlyout = this._variant === variant._COACHMARK ||
+      this._variant === variant.DEFAULT && _isEmpty(this.header) && _isEmpty(this.footer);
     
     this.classList.toggle(`${CLASSNAME}--dialog`, !isFlyout);
     this._elements.tip.hidden = isFlyout;
