@@ -213,7 +213,7 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
       insert: function(content) {
         const footer = this.footer;
         // The content should always be before footer
-        this._elements.contentZoneTarget.insertBefore(content, this.contains(footer) && footer || null);
+        this._elements.wrapper.insertBefore(content, this.contains(footer) && footer || null);
       }
     });
   }
@@ -233,7 +233,7 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
       tagName: 'coral-dialog-footer',
       insert: function(footer) {
         // The footer should always be after content
-        this._elements.contentZoneTarget.appendChild(footer);
+        this._elements.wrapper.appendChild(footer);
       }
     });
   }
@@ -253,7 +253,7 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
     this._backdrop = validate.enumeration(backdrop)(value) && value || backdrop.MODAL;
   
     const showBackdrop = this._backdrop !== backdrop.NONE;
-    this.classList.toggle(`${CLASSNAME}--noBackdrop`, !showBackdrop);
+    this._elements.wrapper.classList.toggle(`${CLASSNAME}--noBackdrop`, !showBackdrop);
   
     // We're visible now, so hide or show the modal accordingly
     if (this.open && showBackdrop) {
@@ -281,7 +281,7 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
     this._insertTypeIcon();
     
     // Remove all variant classes
-    this.classList.remove(...ALL_VARIANT_CLASSES);
+    this._elements.wrapper.classList.remove(...ALL_VARIANT_CLASSES);
   
     if (this._variant === variant.DEFAULT) {
       // ARIA
@@ -289,7 +289,7 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
     }
     else {
       // Set new variant class
-      this.classList.add(`${CLASSNAME}--${this._variant}`);
+      this._elements.wrapper.classList.add(`${CLASSNAME}--${this._variant}`);
     
       // ARIA
       this.setAttribute('role', 'alertdialog');
@@ -314,10 +314,10 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
     if (this._fullscreen) {
       // Full screen and movable are not compatible
       this.movable = false;
-      this.classList.add(FULLSCREEN_CLASSNAME);
+      this._elements.wrapper.classList.add(FULLSCREEN_CLASSNAME);
     }
     else {
-      this.classList.remove(FULLSCREEN_CLASSNAME);
+      this._elements.wrapper.classList.remove(FULLSCREEN_CLASSNAME);
     }
   }
   
@@ -334,18 +334,25 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
     if (this.open) {
       // If not child of document.body, we have to move it there
       this._moveToDocumentBody();
-  
-      // Support wrapped dialog
-      this.classList.toggle(`${CLASSNAME}--wrapped`, this._elements.contentZoneTarget !== this);
     
       // Show the backdrop, if necessary
       if (this.backdrop !== backdrop.NONE) {
         this._showBackdrop();
       }
-      
-      // Handles what to focus based on focusOnShow
-      this._handleFocus();
     }
+    
+    // Support animation
+    requestAnimationFrame(() => {
+      // Support wrapped dialog
+      this._elements.wrapper.classList.toggle('is-open', this.open);
+  
+      // Handles what to focus based on focusOnShow
+      if (this.open) {
+        commons.transitionEnd(this._elements.wrapper, () => {
+          this._handleFocus();
+        });
+      }
+    });
   }
   
   /**
@@ -377,8 +384,8 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
     value = transform.string(value).toLowerCase();
     this._closable = validate.enumeration(closable)(value) && value || closable.OFF;
     this._reflectAttribute('closable', this._closable);
-    
-    this._elements.closeButton.style.display = this._closable === closable.ON ? 'block' : 'none';
+  
+    this._elements.wrapper.classList.toggle(`${CLASSNAME}--dismissible`, this._closable === closable.ON);
   }
   
   /**
@@ -621,15 +628,15 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
       return;
     }
     
-    this.classList.add(CLASSNAME);
+    this.classList.add(`${CLASSNAME}-wrapper`);
 
     // Default reflected attributes
     if (!this._variant) { this.variant = variant.DEFAULT; }
     if (!this._backdrop) { this.backdrop = backdrop.MODAL; }
     if (!this._closable) { this.closable = closable.OFF; }
     if (!this._interaction) { this.interaction = interaction.ON; }
-
-    // // Fetch the content zones
+  
+    // Fetch the content zones
     const header = this._elements.header;
     const content = this._elements.content;
     const footer = this._elements.footer;
@@ -637,45 +644,77 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
     // Verify if a content zone is provided
     const contentZoneProvided = this.contains(content) && content || this.contains(footer) && footer || this.contains(header) && header;
   
-    // Allow Content zone target to be different than dialog
-    if (contentZoneProvided) {
-      this._elements.contentZoneTarget = contentZoneProvided.parentNode;
+    // Verify if the internal wrapper exists
+    let wrapper = this.querySelector(`.${CLASSNAME}`);
+  
+    // Case where the dialog was rendered already - cloneNode support
+    if (wrapper) {
+      // Remove tab captures
+      Array.prototype.filter.call(this.children, (child) => child.hasAttribute('coral-tabcapture')).forEach((tabCapture) => {
+        this.removeChild(tabCapture);
+      });
+    
+      // Assign internal elements
+      this._elements.headerWrapper = this.querySelector('._coral-Dialog-header');
+      this._elements.closeButton = this.querySelector('._coral-Dialog-closeButton');
+    
+      this._elements.wrapper = wrapper;
     }
+    // Case where the dialog needs to be rendered
     else {
-      this._elements.contentZoneTarget = this;
-    }
+      // Create default wrapper
+      wrapper = this._elements.wrapper;
     
-    // Remove content zones so we can process children
-    if (header.parentNode) { header.remove(); }
-    if (content.parentNode) { content.remove(); }
-    if (footer.parentNode) { footer.remove(); }
-  
-    // Remove tab captures
-    Array.prototype.filter.call(this.children, (child) => child.hasAttribute('coral-tabcapture')).forEach((tabCapture) => {
-      this.removeChild(tabCapture);
-    });
+      // Create default header wrapper
+      const headerWrapper = this._elements.headerWrapper;
     
-    // Support cloneNode
-    const template = this.querySelectorAll('._coral-Dialog-header, ._coral-Dialog-closeButton');
-    for (let i = 0; i < template.length; i++) {
-      template[i].remove();
-    }
-  
-    // Move everything in the content
-    if (!contentZoneProvided) {
-      while (this.firstChild) {
-        content.appendChild(this.firstChild);
+      // Case where the dialog needs to be rendered and content zones are provided
+      if (contentZoneProvided) {
+        // Check if user wrapper is provided
+        if (contentZoneProvided.parentNode === this) {
+          // Content zone target defaults to default wrapper if no user wrapper element is provided
+          this._elements.wrapper = wrapper;
+        }
+        else {
+          // Content zone target defaults to user wrapper element if provided
+          this._elements.wrapper = contentZoneProvided.parentNode;
+        }
+      
+        // Move everything in the wrapper
+        while (this.firstChild) {
+          wrapper.appendChild(this.firstChild);
+        }
+      
+        // Add the dialog header before the content
+        this._elements.wrapper.insertBefore(headerWrapper, content);
       }
+      // Case where the dialog needs to be rendered and content zones need to be created
+      else {
+        // Default content zone target is wrapper
+        this._elements.wrapper = wrapper;
+      
+        // Move everything in the "content" content zone
+        while (this.firstChild) {
+          content.appendChild(this.firstChild);
+        }
+      
+        // Add the content zones in the wrapper
+        wrapper.appendChild(headerWrapper);
+        wrapper.appendChild(content);
+        wrapper.appendChild(footer);
+      }
+    
+      // Add the wrapper to the dialog
+      this.appendChild(wrapper);
     }
     
-    // Insert template
-    this._elements.contentZoneTarget.appendChild(this._elements.headerWrapper);
-    this._elements.contentZoneTarget.appendChild(this._elements.closeButton);
-
+    // Only the wrapper gets the dialog class
+    this._elements.wrapper.classList.add(CLASSNAME);
+  
     // Assign content zones
     this.header = header;
-    this.content = content;
     this.footer = footer;
+    this.content = content;
   
     // Add the Overlay coral-tabcapture elements at the end
     super.connectedCallback();

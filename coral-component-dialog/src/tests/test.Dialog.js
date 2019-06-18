@@ -12,7 +12,6 @@
 
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Dialog} from '../../../coral-component-dialog';
-import {BaseOverlay} from '../../../coral-base-overlay';
 import {tracking} from '../../../coral-utils';
 import {DragAction} from '../../../coral-dragaction';
 
@@ -75,10 +74,6 @@ describe('Dialog', function() {
       el = helpers.build(new Dialog());
     });
   
-    afterEach(function() {
-      el = null;
-    });
-  
     it('should have the correct default attributes', function() {
       expect(el.interaction).to.equal(Dialog.interaction.ON);
       expect(el.closable).to.equal(Dialog.closable.OFF);
@@ -90,52 +85,52 @@ describe('Dialog', function() {
       it('should support error variant', function() {
         el.variant = Dialog.variant.ERROR;
       
-        expect(el.classList.contains('_coral-Dialog--error')).to.be.true;
+        expect(el._elements.wrapper.classList.contains('_coral-Dialog--error')).to.be.true;
         expect(el.getAttribute('role')).to.equal('alertdialog');
       });
     
       it('should support warning variant', function() {
         el.variant = Dialog.variant.WARNING;
       
-        expect(el.classList.contains('_coral-Dialog--warning')).to.be.true;
+        expect(el._elements.wrapper.classList.contains('_coral-Dialog--warning')).to.be.true;
         expect(el.getAttribute('role')).to.equal('alertdialog');
       });
     
       it('should support success variant', function() {
         el.variant = Dialog.variant.SUCCESS;
       
-        expect(el.classList.contains('_coral-Dialog--success')).to.be.true;
+        expect(el._elements.wrapper.classList.contains('_coral-Dialog--success')).to.be.true;
         expect(el.getAttribute('role')).to.equal('alertdialog');
       });
     
       it('should support help variant', function() {
         el.variant = Dialog.variant.HELP;
       
-        expect(el.classList.contains('_coral-Dialog--help')).to.be.true;
+        expect(el._elements.wrapper.classList.contains('_coral-Dialog--help')).to.be.true;
         expect(el.getAttribute('role')).to.equal('alertdialog');
       });
     
       it('should support info variant', function() {
         el.variant = Dialog.variant.INFO;
       
-        expect(el.classList.contains('_coral-Dialog--info')).to.be.true;
+        expect(el._elements.wrapper.classList.contains('_coral-Dialog--info')).to.be.true;
         expect(el.getAttribute('role')).to.equal('alertdialog');
       });
     
       it('should support switching variants', function() {
         el.variant = Dialog.variant.INFO;
       
-        expect(el.classList.contains('_coral-Dialog--info')).to.be.true;
+        expect(el._elements.wrapper.classList.contains('_coral-Dialog--info')).to.be.true;
       
         el.variant = Dialog.variant.HELP;
       
-        expect(el.classList.contains('_coral-Dialog--info')).to.be.false;
-        expect(el.classList.contains('_coral-Dialog--help')).to.be.true;
+        expect(el._elements.wrapper.classList.contains('_coral-Dialog--info')).to.be.false;
+        expect(el._elements.wrapper.classList.contains('_coral-Dialog--help')).to.be.true;
       
         el.variant = Dialog.variant.DEFAULT;
       
-        expect(el.classList.contains('_coral-Dialog--help')).to.be.false;
-        expect(el.classList.contains('_coral-Dialog--default')).to.be.false;
+        expect(el._elements.wrapper.classList.contains('_coral-Dialog--help')).to.be.false;
+        expect(el._elements.wrapper.classList.contains('_coral-Dialog--default')).to.be.false;
       });
     });
   
@@ -309,21 +304,15 @@ describe('Dialog', function() {
       const el = helpers.build(window.__html__['Dialog.closable.html']);
       expect(el.closable).to.equal(Dialog.closable.ON);
       
-      el.on('coral-overlay:open', function() {
-        expect(document.activeElement).to.equal(el, 'The Dialog should be focused');
+      el.show();
+      
+      el.on('focus', () => {
         done();
       });
-      
-      el.show();
     });
   });
   
   describe('User Interaction', function() {
-    afterEach(function() {
-      const el = helpers.target.querySelector('coral-dialog');
-      el.hide();
-    });
-    
     describe('#ESC', function() {
       it('should close when escape pressed and interaction=ON', function() {
         const el = helpers.build(window.__html__['Dialog.open.html']);
@@ -427,11 +416,6 @@ describe('Dialog', function() {
     beforeEach(function() {
       el = helpers.build(new Dialog());
     });
-  
-    afterEach(function() {
-      el.hide();
-      el = null;
-    });
     
     describe('Positioning', function() {
       it('should cause the dialog to scroll when contents are large', function(done) {
@@ -448,8 +432,8 @@ describe('Dialog', function() {
         });
     
         el.show();
-    
-        helpers.next(function() {
+  
+        el.on('coral-overlay:open', function() {
           var content = el._elements.content;
           var dialogHeight = content.getBoundingClientRect().height;
           var docHeight = document.body.getBoundingClientRect().height;
@@ -468,7 +452,7 @@ describe('Dialog', function() {
       it('should allow vertical scroll if the dialog is bigger than the window', function(done) {
         el.style.height = (window.innerHeight * 2) + 'px';
         el.open = true;
-        helpers.next(function() {
+        el.on('coral-overlay:open', function() {
           expect(el.style.top).to.equal('');
           expect(el.style.marginTop).to.equal('');
           done();
@@ -478,7 +462,7 @@ describe('Dialog', function() {
       it('should take the whole screen in fullscreen', function(done) {
         el.fullscreen = true;
         el.open = true;
-        helpers.next(function() {
+        el.on('coral-overlay:open', function() {
           expect(el.style.left).to.equal('');
           expect(el.style.marginLeft).to.equal('');
           done();
@@ -487,18 +471,22 @@ describe('Dialog', function() {
     });
     
     describe('Backdrop', function() {
-      it('should remove backdrop when dialog is detached', function() {
+      it('should remove backdrop when dialog is detached', function(done) {
         el.show();
-    
-        expect(el.open).to.be.true;
-        el.remove();
-    
-        expect(el.parentNode).to.equal(null, 'dialog should be detached');
-        var backdrop = document.querySelector('._coral-Underlay');
-        expect(backdrop).to.not.be.null;
-    
-        // Make sure the backdrop is visible
-        expect(backdrop._isOpen).to.equal(false, 'backdrop visibility when top overlay hidden');
+  
+        el.on('coral-overlay:open', function() {
+          expect(el.open).to.be.true;
+          el.remove();
+  
+          expect(el.parentNode).to.equal(null, 'dialog should be detached');
+          var backdrop = document.querySelector('._coral-Underlay');
+          expect(backdrop).to.not.be.null;
+  
+          // Make sure the backdrop is visible
+          expect(backdrop._isOpen).to.equal(false, 'backdrop visibility when top overlay hidden');
+          
+          done();
+        });
       });
   
       it('should remove backdrop when dialog is detached (even if dialog was closed)', function() {
@@ -540,9 +528,6 @@ describe('Dialog', function() {
         expect(wrapper1.contains(el.header)).to.equal(true, 'wrapper1 should contain header');
         expect(wrapper1.contains(el.content)).to.equal(true, 'wrapper1 should contain content');
         expect(wrapper1.contains(el.footer)).to.equal(true, 'wrapper1 should contain footer');
-        
-        el.open = true;
-        expect(el.classList.contains('_coral-Dialog--wrapped')).to.be.true;
       });
   
       it('should wrap internal elements', function() {

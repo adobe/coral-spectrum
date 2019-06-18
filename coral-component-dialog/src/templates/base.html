@@ -1,6 +1,8 @@
 <div class="_coral-Dialog-header" handle="headerWrapper">
   <coral-icon icon="dragHandle" handle="dragIcon" class="_coral-Dialog-dragIcon" hidden></coral-icon>
 </div>
-<button tracking="off" handle="closeButton" class="_coral-Dialog-closeButton _coral-ActionButton _coral-ActionButton--quiet" type="button" is="coral-button" variant="_custom" title="{{data.i18n.get('Close')}}" tabindex="-1" coral-close>
-  <coral-icon icon="spectrum-css-icon-CrossLarge" class="_coral-UIIcon-CrossLarge"></coral-icon>
-</button>
+<div handle="wrapper">
+  <button tracking="off" handle="closeButton" class="_coral-Dialog-closeButton _coral-ActionButton _coral-ActionButton--quiet" type="button" is="coral-button" variant="_custom" title="{{data.i18n.get('Close')}}" tabindex="-1" coral-close>
+    <coral-icon icon="spectrum-css-icon-CrossLarge" class="_coral-UIIcon-CrossLarge"></coral-icon>
+  </button>
+</div>
