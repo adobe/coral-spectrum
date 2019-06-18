@@ -109,7 +109,8 @@ for (const variantValue in variant) {
 
 /**
  @class Coral.Dialog
- @classdesc A Dialog component that supports various use cases with custom content.
+ @classdesc A Dialog component that supports various use cases with custom content. The Dialog can be given a size by
+ using the special attribute <code>[coral-dialog-size]</code> as selector.
  @htmltag coral-dialog
  @extends {HTMLElement}
  @extends {BaseComponent}
@@ -710,6 +711,8 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
     
     // Only the wrapper gets the dialog class
     this._elements.wrapper.classList.add(CLASSNAME);
+    // Mark the wrapper with a public attribute for sizing
+    this._elements.wrapper.setAttribute('coral-dialog-size', '');
   
     // Assign content zones
     this.header = header;

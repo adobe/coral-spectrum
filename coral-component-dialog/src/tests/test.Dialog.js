@@ -306,7 +306,8 @@ describe('Dialog', function() {
       
       el.show();
       
-      el.on('focus', () => {
+      el.on('coral-overlay:open', function() {
+        expect(document.activeElement).to.not.equal(el._elements.closeButton);
         done();
       });
     });
@@ -517,6 +518,8 @@ describe('Dialog', function() {
         expect(wrapper2.contains(el.header)).to.equal(true, 'wrapper2 should contain header');
         expect(wrapper2.contains(el.content)).to.equal(true, 'wrapper2 should contain content');
         expect(wrapper2.contains(el.footer)).to.equal(true, 'wrapper2 should contain footer');
+        
+        expect(el.querySelector('[coral-dialog-size]')).to.equal(wrapper2);
       });
   
       it('should support inner-wrapper elements', function() {
@@ -528,6 +531,8 @@ describe('Dialog', function() {
         expect(wrapper1.contains(el.header)).to.equal(true, 'wrapper1 should contain header');
         expect(wrapper1.contains(el.content)).to.equal(true, 'wrapper1 should contain content');
         expect(wrapper1.contains(el.footer)).to.equal(true, 'wrapper1 should contain footer');
+  
+        expect(el.querySelector('[coral-dialog-size]')).to.equal(wrapper1);
       });
   
       it('should wrap internal elements', function() {
@@ -536,6 +541,8 @@ describe('Dialog', function() {
         expect(el.contains(el.header)).to.equal(true, 'wrapper should contain header');
         expect(el.contains(el.content)).to.equal(true, 'wrapper should contain content');
         expect(el.contains(el.footer)).to.equal(true, 'wrapper should contain footer');
+        
+        expect(el.querySelector('[coral-dialog-size]')).to.equal(el.content.parentNode);
       });
   
       it('should create wrapper when no content zones are provided', function() {
@@ -555,6 +562,8 @@ describe('Dialog', function() {
     
         // the content should be moved into the coral-dialog-content
         expect(el.content.textContent).to.equal('This content will be moved to coral-dialog-content.');
+        
+        expect(el.querySelector('[coral-dialog-size]')).to.equal(el.content.parentNode);
       });
   
       it('should keep all extra elements when content zones are provided', function() {

@@ -60,6 +60,20 @@
       <button is="coral-button" onclick="showDialog('markupDialog')">Dialog from Markup</button>
     </div>
 
+    <h2 class="coral-Heading coral-Heading--2">Custom Sized Dialog</h2>
+    <div class="markup">
+      <coral-dialog id="customSizedDialog">
+        <coral-dialog-header>Small Dialog</coral-dialog-header>
+        <coral-dialog-content>This dialog is supposed to be very small with 200px width.</coral-dialog-content>
+      </coral-dialog>
+      <button is="coral-button" onclick="showDialog('customSizedDialog')">Custom Sized Dialog</button>
+      <style>
+        #customSizedDialog [coral-dialog-size] {
+          width: 200px;
+        }
+      </style>
+    </div>
+
     <h2 class="coral-Heading coral-Heading--2">Scrolling Dialog</h2>
     <div class="markup">
       <coral-dialog id="scrollingDialog">
