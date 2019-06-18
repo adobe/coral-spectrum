@@ -9587,6 +9587,9 @@ coral-dialog-footer {
 coral-dialog-footer:empty {
   display: none;
 }
+._coral-Dialog-wrapper {
+  outline: none;
+}
 ._coral-Dialog-dragIcon {
   margin-top: 3px;
 }

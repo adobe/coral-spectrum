@@ -21167,27 +21167,34 @@
     frag.appendChild(el0);
     var el4 = document.createTextNode("\n");
     frag.appendChild(el4);
-    var el5 = this["closeButton"] = document.createElement("button", "coral-button");
-    el5.setAttribute("tracking", "off");
-    el5.setAttribute("handle", "closeButton");
-    el5.className += " _coral-Dialog-closeButton _coral-ActionButton _coral-ActionButton--quiet";
-    el5.setAttribute("type", "button");
-    el5.setAttribute("is", "coral-button");
-    el5.setAttribute("variant", "_custom");
-    el5.setAttribute("title", data_0["i18n"]["get"]('Close'));
-    el5.setAttribute("tabindex", "-1");
-    el5.setAttribute("coral-close", "");
+    var el5 = this["wrapper"] = document.createElement("div");
+    el5.setAttribute("handle", "wrapper");
     var el6 = document.createTextNode("\n  ");
     el5.appendChild(el6);
-    var el7 = document.createElement("coral-icon");
-    el7.setAttribute("icon", "spectrum-css-icon-CrossLarge");
-    el7.className += " _coral-UIIcon-CrossLarge";
+    var el7 = this["closeButton"] = document.createElement("button", "coral-button");
+    el7.setAttribute("tracking", "off");
+    el7.setAttribute("handle", "closeButton");
+    el7.className += " _coral-Dialog-closeButton _coral-ActionButton _coral-ActionButton--quiet";
+    el7.setAttribute("type", "button");
+    el7.setAttribute("is", "coral-button");
+    el7.setAttribute("variant", "_custom");
+    el7.setAttribute("title", data_0["i18n"]["get"]('Close'));
+    el7.setAttribute("tabindex", "-1");
+    el7.setAttribute("coral-close", "");
+    var el8 = document.createTextNode("\n    ");
+    el7.appendChild(el8);
+    var el9 = document.createElement("coral-icon");
+    el9.setAttribute("icon", "spectrum-css-icon-CrossLarge");
+    el9.className += " _coral-UIIcon-CrossLarge";
+    el7.appendChild(el9);
+    var el10 = document.createTextNode("\n  ");
+    el7.appendChild(el10);
     el5.appendChild(el7);
-    var el8 = document.createTextNode("\n");
-    el5.appendChild(el8);
+    var el11 = document.createTextNode("\n");
+    el5.appendChild(el11);
     frag.appendChild(el5);
-    var el9 = document.createTextNode("\n");
-    frag.appendChild(el9);
+    var el12 = document.createTextNode("\n");
+    frag.appendChild(el12);
     return frag;
   };
 
@@ -21283,7 +21290,8 @@
   }
   /**
    @class Coral.Dialog
-   @classdesc A Dialog component that supports various use cases with custom content.
+   @classdesc A Dialog component that supports various use cases with custom content. The Dialog can be given a size by
+   using the special attribute <code>[coral-dialog-size]</code> as selector.
    @htmltag coral-dialog
    @extends {HTMLElement}
    @extends {BaseComponent}
@@ -21504,7 +21512,7 @@
           return;
         }
 
-        this.classList.add(CLASSNAME$8); // Default reflected attributes
+        this.classList.add("".concat(CLASSNAME$8, "-wrapper")); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$3.DEFAULT;
@@ -21520,63 +21528,81 @@
 
         if (!this._interaction) {
           this.interaction = interaction$1.ON;
-        } // // Fetch the content zones
+        } // Fetch the content zones
 
 
         var header = this._elements.header;
         var content = this._elements.content;
         var footer = this._elements.footer; // Verify if a content zone is provided
 
-        var contentZoneProvided = this.contains(content) && content || this.contains(footer) && footer || this.contains(header) && header; // Allow Content zone target to be different than dialog
+        var contentZoneProvided = this.contains(content) && content || this.contains(footer) && footer || this.contains(header) && header; // Verify if the internal wrapper exists
 
-        if (contentZoneProvided) {
-          this._elements.contentZoneTarget = contentZoneProvided.parentNode;
-        } else {
-          this._elements.contentZoneTarget = this;
-        } // Remove content zones so we can process children
+        var wrapper = this.querySelector(".".concat(CLASSNAME$8)); // Case where the dialog was rendered already - cloneNode support
 
+        if (wrapper) {
+          // Remove tab captures
+          Array.prototype.filter.call(this.children, function (child) {
+            return child.hasAttribute('coral-tabcapture');
+          }).forEach(function (tabCapture) {
+            _this2.removeChild(tabCapture);
+          }); // Assign internal elements
 
-        if (header.parentNode) {
-          header.remove();
-        }
+          this._elements.headerWrapper = this.querySelector('._coral-Dialog-header');
+          this._elements.closeButton = this.querySelector('._coral-Dialog-closeButton');
+          this._elements.wrapper = wrapper;
+        } // Case where the dialog needs to be rendered
+        else {
+            // Create default wrapper
+            wrapper = this._elements.wrapper; // Create default header wrapper
 
-        if (content.parentNode) {
-          content.remove();
-        }
+            var headerWrapper = this._elements.headerWrapper; // Case where the dialog needs to be rendered and content zones are provided
 
-        if (footer.parentNode) {
-          footer.remove();
-        } // Remove tab captures
-
-
-        Array.prototype.filter.call(this.children, function (child) {
-          return child.hasAttribute('coral-tabcapture');
-        }).forEach(function (tabCapture) {
-          _this2.removeChild(tabCapture);
-        }); // Support cloneNode
-
-        var template = this.querySelectorAll('._coral-Dialog-header, ._coral-Dialog-closeButton');
-
-        for (var i = 0; i < template.length; i++) {
-          template[i].remove();
-        } // Move everything in the content
+            if (contentZoneProvided) {
+              // Check if user wrapper is provided
+              if (contentZoneProvided.parentNode === this) {
+                // Content zone target defaults to default wrapper if no user wrapper element is provided
+                this._elements.wrapper = wrapper;
+              } else {
+                // Content zone target defaults to user wrapper element if provided
+                this._elements.wrapper = contentZoneProvided.parentNode;
+              } // Move everything in the wrapper
 
 
-        if (!contentZoneProvided) {
-          while (this.firstChild) {
-            content.appendChild(this.firstChild);
-          }
-        } // Insert template
+              while (this.firstChild) {
+                wrapper.appendChild(this.firstChild);
+              } // Add the dialog header before the content
 
 
-        this._elements.contentZoneTarget.appendChild(this._elements.headerWrapper);
+              this._elements.wrapper.insertBefore(headerWrapper, content);
+            } // Case where the dialog needs to be rendered and content zones need to be created
+            else {
+                // Default content zone target is wrapper
+                this._elements.wrapper = wrapper; // Move everything in the "content" content zone
 
-        this._elements.contentZoneTarget.appendChild(this._elements.closeButton); // Assign content zones
+                while (this.firstChild) {
+                  content.appendChild(this.firstChild);
+                } // Add the content zones in the wrapper
+
+
+                wrapper.appendChild(headerWrapper);
+                wrapper.appendChild(content);
+                wrapper.appendChild(footer);
+              } // Add the wrapper to the dialog
+
+
+            this.appendChild(wrapper);
+          } // Only the wrapper gets the dialog class
+
+
+        this._elements.wrapper.classList.add(CLASSNAME$8); // Mark the wrapper with a public attribute for sizing
+
+
+        this._elements.wrapper.setAttribute('coral-dialog-size', ''); // Assign content zones
 
 
         this.header = header;
-        this.content = content;
-        this.footer = footer; // Add the Overlay coral-tabcapture elements at the end
+        this.footer = footer;
+        this.content = content; // Add the Overlay coral-tabcapture elements at the end
 
         _get(_getPrototypeOf(Dialog.prototype), "connectedCallback", this).call(this);
       }
@@ -21648,7 +21674,7 @@
           insert: function insert(content) {
             var footer = this.footer; // The content should always be before footer
 
-            this._elements.contentZoneTarget.insertBefore(content, this.contains(footer) && footer || null);
+            this._elements.wrapper.insertBefore(content, this.contains(footer) && footer || null);
           }
         });
       }
@@ -21670,7 +21696,7 @@
           tagName: 'coral-dialog-footer',
           insert: function insert(footer) {
             // The footer should always be after content
-            this._elements.contentZoneTarget.appendChild(footer);
+            this._elements.wrapper.appendChild(footer);
           }
         });
       }
@@ -21691,7 +21717,9 @@
         value = transform.string(value).toLowerCase();
         this._backdrop = validate.enumeration(backdrop)(value) && value || backdrop.MODAL;
         var showBackdrop = this._backdrop !== backdrop.NONE;
-        this.classList.toggle("".concat(CLASSNAME$8, "--noBackdrop"), !showBackdrop); // We're visible now, so hide or show the modal accordingly
+
+        this._elements.wrapper.classList.toggle("".concat(CLASSNAME$8, "--noBackdrop"), !showBackdrop); // We're visible now, so hide or show the modal accordingly
+
 
         if (this.open && showBackdrop) {
           this._showBackdrop();
@@ -21712,7 +21740,7 @@
         return this._variant || variant$3.DEFAULT;
       },
       set: function set(value) {
-        var _this$classList;
+        var _this$_elements$wrapp;
 
         value = transform.string(value).toLowerCase();
         this._variant = validate.enumeration(variant$3)(value) && value || variant$3.DEFAULT;
@@ -21723,14 +21751,15 @@
         this._insertTypeIcon(); // Remove all variant classes
 
 
-        (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$2);
+        (_this$_elements$wrapp = this._elements.wrapper.classList).remove.apply(_this$_elements$wrapp, ALL_VARIANT_CLASSES$2);
 
         if (this._variant === variant$3.DEFAULT) {
           // ARIA
           this.setAttribute('role', 'dialog');
         } else {
           // Set new variant class
-          this.classList.add("".concat(CLASSNAME$8, "--").concat(this._variant)); // ARIA
+          this._elements.wrapper.classList.add("".concat(CLASSNAME$8, "--").concat(this._variant)); // ARIA
+
 
           this.setAttribute('role', 'alertdialog');
         }
@@ -21757,9 +21786,10 @@
         if (this._fullscreen) {
           // Full screen and movable are not compatible
           this.movable = false;
-          this.classList.add(FULLSCREEN_CLASSNAME);
+
+          this._elements.wrapper.classList.add(FULLSCREEN_CLASSNAME);
         } else {
-          this.classList.remove(FULLSCREEN_CLASSNAME);
+          this._elements.wrapper.classList.remove(FULLSCREEN_CLASSNAME);
         }
       }
       /**
@@ -21772,23 +21802,33 @@
         return _get(_getPrototypeOf(Dialog.prototype), "open", this);
       },
       set: function set(value) {
+        var _this3 = this;
+
         _set(_getPrototypeOf(Dialog.prototype), "open", value, this, true); // Ensure we're in the DOM
 
 
         if (this.open) {
           // If not child of document.body, we have to move it there
-          this._moveToDocumentBody(); // Support wrapped dialog
+          this._moveToDocumentBody(); // Show the backdrop, if necessary
 
-
-          this.classList.toggle("".concat(CLASSNAME$8, "--wrapped"), this._elements.contentZoneTarget !== this); // Show the backdrop, if necessary
 
           if (this.backdrop !== backdrop.NONE) {
             this._showBackdrop();
-          } // Handles what to focus based on focusOnShow
+          }
+        } // Support animation
 
 
-          this._handleFocus();
-        }
+        requestAnimationFrame(function () {
+          // Support wrapped dialog
+          _this3._elements.wrapper.classList.toggle('is-open', _this3.open); // Handles what to focus based on focusOnShow
+
+
+          if (_this3.open) {
+            commons.transitionEnd(_this3._elements.wrapper, function () {
+              _this3._handleFocus();
+            });
+          }
+        });
       }
       /**
        The dialog's icon.
@@ -21825,7 +21865,7 @@
 
         this._reflectAttribute('closable', this._closable);
 
-        this._elements.closeButton.style.display = this._closable === closable$1.ON ? 'block' : 'none';
+        this._elements.wrapper.classList.toggle("".concat(CLASSNAME$8, "--dismissible"), this._closable === closable$1.ON);
       }
       /**
        Whether the dialog can moved around by dragging the title.
@@ -72598,7 +72638,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.73";
+  var version = "1.0.0-beta.74";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
