@@ -510,7 +510,7 @@ describe('ActionBar', function() {
         expect(el.primary.items._getAllOffScreen().length).to.equal(1);
         
         done();
-      }, 100);
+      }, 200);
     });
 
     it('should be possible to add items straight after init without messing up the order... (more button used to go to the wrong place)', function() {
