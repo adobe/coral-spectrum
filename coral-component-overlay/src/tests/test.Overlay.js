@@ -439,10 +439,11 @@ describe('Overlay', function() {
   describe('Events', function() {
     describe('#coral-overlay:positioned', function() {
       it('should trigger when the overlay is opened', function(done) {
-        overlay.open = true;
+        overlay._oldPosition = null;
         overlay.on('coral-overlay:positioned', () => {
           done();
         });
+        overlay.open = true;
       });
     });
   });
