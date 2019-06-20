@@ -22,7 +22,16 @@ coral-select-item {
 
 ._coral-Dropdown {
   ._coral-Dropdown-tagList {
-    display: none;
+    display: block;
+    margin-top: 4px;
+
+    &:empty {
+      display: none;
+    }
+
+    coral-tag coral-icon {
+      display: none;
+    }
   }
 
   ._coral-Dropdown-select {

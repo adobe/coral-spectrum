@@ -123,7 +123,7 @@ describe('Select', function() {
         expect(el.selectedItem).to.equal(item1);
         expect(el.selectedItems).to.deep.equal([item1, item2]);
         // should update to the default placeholder for multiple
-        expect(el._elements.label.textContent).to.equal('Item 1, Item 2');
+        expect(el._elements.label.textContent).to.equal('Select');
   
         // we switch back to single
         el.multiple = false;
@@ -161,7 +161,7 @@ describe('Select', function() {
         expect(el.placeholder).to.equal('');
         
         // should update to the default placeholder for multiple
-        expect(el._elements.label.textContent).to.equal('Item 1');
+        expect(el._elements.label.textContent).to.equal('Select');
 
         // we switch back to single
         el.multiple = false;
@@ -206,7 +206,7 @@ describe('Select', function() {
         expect(el.selectedItem).to.equal(item1);
         expect(el.selectedItems).to.deep.equal([item1]);
         expect(el.placeholder).to.equal('');
-        expect(el._elements.label.textContent).to.equal('Item 1');
+        expect(el._elements.label.textContent).to.equal('Select');
       });
 
       // case 7: !p +  m +  se = 'Select'
@@ -228,7 +228,7 @@ describe('Select', function() {
         item1.selected = true;
         
         // should show the default placeholder since we are multiple
-        expect(el._elements.label.textContent).to.equal('Item 1, Item 2');
+        expect(el._elements.label.textContent).to.equal('Select');
       });
 
       // case 5:  p + !m +  se = se
@@ -1313,7 +1313,7 @@ describe('Select', function() {
         expect(el.selectedItem).to.equal(items[1]);
         expect(el.selectedItems).to.deep.equal([items[1], items[3]]);
 
-        expect(el._elements.label.textContent).to.equal('Africa, Europe');
+        expect(el._elements.label.textContent).to.equal('Select');
       });
     });
 
