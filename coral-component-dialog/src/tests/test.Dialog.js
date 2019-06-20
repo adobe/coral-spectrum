@@ -519,7 +519,16 @@ describe('Dialog', function() {
         expect(wrapper2.contains(el.content)).to.equal(true, 'wrapper2 should contain content');
         expect(wrapper2.contains(el.footer)).to.equal(true, 'wrapper2 should contain footer');
         
-        expect(el.querySelector('[coral-dialog-size]')).to.equal(wrapper2);
+        expect(el._elements.wrapper).to.equal(wrapper2);
+        expect(wrapper2.classList.contains('_coral-Dialog')).to.be.true;
+        expect(wrapper2.classList.contains('_coral-Dialog--noBackdrop')).to.be.true;
+        expect(wrapper2.hasAttribute('coral-dialog-size')).to.be.true;
+        expect(el.querySelector('[coral-close]').parentNode).to.equal(wrapper2);
+        
+        const wrapper0 = el.querySelector('[handle="wrapper"]');
+        expect(wrapper0.classList.contains('_coral-Dialog')).to.be.false;
+        expect(wrapper0.classList.contains('_coral-Dialog--noBackdrop')).to.be.false;
+        expect(wrapper0.hasAttribute('coral-dialog-size')).to.be.false;
       });
   
       it('should support inner-wrapper elements', function() {

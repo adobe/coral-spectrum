@@ -711,8 +711,17 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
     
     // Only the wrapper gets the dialog class
     this._elements.wrapper.classList.add(CLASSNAME);
-    // Mark the wrapper with a public attribute for sizing
+    // Mark the dialog with a public attribute for sizing
     this._elements.wrapper.setAttribute('coral-dialog-size', '');
+    // Close button should stay under the dialog
+    this._elements.wrapper.appendChild(this._elements.closeButton);
+    
+    // Copy styles over to new wrapper
+    if (this._elements.wrapper.parentNode !== this) {
+      const contentWrapper = this.querySelector('[handle="wrapper"]');
+      contentWrapper.classList.forEach(style => this._elements.wrapper.classList.add(style));
+      contentWrapper.removeAttribute('class');
+    }
   
     // Assign content zones
     this.header = header;
