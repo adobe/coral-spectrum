@@ -322,6 +322,11 @@ const testButton = function(Constructor, tagName, baseTagName) {
           expect(button.icon).to.equal('home');
           expect(button._getIconElement().classList.contains('custom')).to.be.true;
         });
+        
+        it('should clear the label from extra space to support icon only usecase', function() {
+          const button = build(`<${baseTagName} is="${tagName}" icon="add"> </${baseTagName}>`);
+          expect(button.label.textContent).to.equal('');
+        });
       }); // end describe icon
     
       describe('#iconsize', function() {

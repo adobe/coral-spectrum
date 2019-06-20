@@ -168,6 +168,11 @@ const BaseButton = (superClass) => class extends superClass {
       handle: 'label',
       tagName: this._contentZoneTagName,
       insert: function(label) {
+        // Ensure there's no extra space left for icon only buttons
+        if (label.innerHTML.trim() === '') {
+          label.textContent = '';
+        }
+        
         if (this.iconPosition === iconPosition.LEFT) {
           this.appendChild(label);
         }
