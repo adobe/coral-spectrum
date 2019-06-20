@@ -50,6 +50,11 @@ coral-select-item {
   }
 
   ._coral-Dropdown-trigger {
+    // @spectrum hides empty label
+    ._coral-Dropdown-label:empty {
+      display: inline-flex;
+    }
+
     ._coral-Dropdown-label > coral-icon:first-child {
       vertical-align: text-top;
       margin-right: 4px;

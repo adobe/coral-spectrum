@@ -296,11 +296,11 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
       if (placeholderItem) {
         // selects using the attribute in case the item is not yet initialized
         placeholderItem.setAttribute('selected', '');
-        this._elements.label.innerHTML = placeholderItem.innerHTML || ' ';
+        this._elements.label.innerHTML = placeholderItem.innerHTML;
       }
       else {
         // label must be cleared when there is no placeholder and no item to select
-        this._elements.label.textContent = ' ';
+        this._elements.label.textContent = '';
       }
     }
   }
@@ -1121,7 +1121,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
     // case 5:  p + !m +  se = se
     if (this.selectedItem && !this.multiple) {
       this._elements.label.classList.remove('is-placeholder');
-      this._elements.label.innerHTML = this.selectedItem.innerHTML || ' ';
+      this._elements.label.innerHTML = this.selectedItem.innerHTML;
     }
   }
   

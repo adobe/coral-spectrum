@@ -141,7 +141,7 @@ describe('Select', function() {
 
         // waits for the MO to kick-in
         helpers.next(function() {
-          expect(el._elements.label.innerHTML).to.equal(' ');
+          expect(el._elements.label.innerHTML).to.equal('');
 
           done();
         });
