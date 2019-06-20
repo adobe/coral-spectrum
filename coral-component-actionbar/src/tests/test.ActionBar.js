@@ -299,9 +299,8 @@ describe('ActionBar', function() {
   
       expect(bar.primary._elements.overlay.open).to.equal(false, 'left popover should now be closed again');
     });
-
-    // @flaky
-    it.skip('should be possible to make two bars that switch', function(done) {
+    
+    it('should be possible to make two bars that switch', function(done) {
       helpers.build(window.__html__['ActionBar.visibility.html']);
 
       var bar1 = document.getElementById('switchBar1');
@@ -338,7 +337,7 @@ describe('ActionBar', function() {
         expect(bar2.primary.items._getAllOffScreen().length).to.equal(0, 'all left items of bar2 should be visible now');
         
         done();
-      }, 100);
+      }, 200);
     });
   
     it('should allow tab navigation to jump between left side and right side of the actionbar all items in between do not have a tabindex', function() {
@@ -461,7 +460,7 @@ describe('ActionBar', function() {
         expect(el.secondary.items._getAllOffScreen().length).to.equal(0);
         
         done();
-      }, 100);
+      }, 200);
     });
     
     it('should copy button items attributes including classes', (done) => {
@@ -486,7 +485,7 @@ describe('ActionBar', function() {
         expect(hiddenButton.classList.contains('custom')).to.be.true;
         expect(hiddenButton.dataset.custom).to.equal('custom');
         done();
-      }, 100);
+      }, 200);
     });
 
     it('should not move items to popover, that are hidden on purpose', function(done) {
@@ -542,9 +541,8 @@ describe('ActionBar', function() {
       expect(leftItemIndex1 < leftItemIndex2 < primaryButtonIndex).to.be.true;
       expect(secondaryButtonIndex < rightItemIndex1 < rightItemIndex2).to.be.true;
     });
-
-    // @flaky
-    it.skip('should be possible to create an actionbar that is initially hidden (one of its parents is display:none)', function(done) {
+    
+    it('should be possible to create an actionbar that is initially hidden (one of its parents is display:none)', function(done) {
       var outer = document.createElement('div');
       outer.style.display = 'none';
 
@@ -565,7 +563,7 @@ describe('ActionBar', function() {
         expect(el.primary.items._getAllOffScreen().length).to.equal(0);
   
         done();
-      }, 100);
+      }, 200);
     });
   
     describe('Smart Overlay', () => {
