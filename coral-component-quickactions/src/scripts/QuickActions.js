@@ -115,7 +115,6 @@ class QuickActions extends Overlay {
     const events = {
       'global:resize': '_onWindowResize',
       'mouseout': '_onMouseOut',
-      'capture:blur': '_onBlur',
 
       // Keyboard interaction
       'key:home > ._coral-QuickActions-item': '_onHomeKeypress',
@@ -778,29 +777,6 @@ class QuickActions extends Overlay {
     // Hide if we mouse leave to any element external to the component and its target
     if (!this._isInternalToComponent(toElement) && this.interaction === interaction.ON) {
       this._hideAll();
-    }
-  }
-  
-  /** @ignore */
-  _onBlur(event) {
-    let toElement = event.toElement || event.relatedTarget;
-    
-    if (this.interaction === interaction.ON) {
-      // In FF toElement is not available to us so we test the newly-focused element
-      if (!toElement) {
-        // The active element is not ready until the next frame
-        window.requestAnimationFrame(() => {
-          toElement = document.activeElement;
-          
-          if (!this._isInternalToComponent(toElement)) {
-            this._hideAll();
-          }
-        });
-      }
-      // Hide if we focus out to any element external to the component and its target
-      else if (!this._isInternalToComponent(toElement)) {
-        this._hideAll();
-      }
     }
   }
   
