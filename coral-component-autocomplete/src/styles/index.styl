@@ -10,19 +10,22 @@
  * governing permissions and limitations under the License.
  */
 
-._coral-Autocomplete {
-  position: relative;
-  display: inline-block;
-}
-
 // Data-only component, targeted with tagName as it doesn't get a CSS class
 coral-autocomplete-item {
   display: none;
 }
 
-// Increase specificity
-._coral-Autocomplete ._coral-Autocomplete-tagList {
-  display: block;
-  margin-top: 7px;
+._coral-Autocomplete {
+  position: relative;
+  display: inline-block;
+
+  ._coral-Autocomplete-tagList {
+    display: block;
+    margin-top: 4px;
+
+    &:empty {
+      display: none;
+    }
+  }
 }
 
