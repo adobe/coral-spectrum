@@ -20772,6 +20772,11 @@ var Coral = (function (exports) {
               handle: 'label',
               tagName: this._contentZoneTagName,
               insert: function insert(label) {
+                // Ensure there's no extra space left for icon only buttons
+                if (label.innerHTML.trim() === '') {
+                  label.textContent = '';
+                }
+
                 if (this.iconPosition === iconPosition.LEFT) {
                   this.appendChild(label);
                 } else {
@@ -21594,10 +21599,22 @@ var Coral = (function (exports) {
           } // Only the wrapper gets the dialog class
 
 
-        this._elements.wrapper.classList.add(CLASSNAME$8); // Mark the wrapper with a public attribute for sizing
+        this._elements.wrapper.classList.add(CLASSNAME$8); // Mark the dialog with a public attribute for sizing
 
 
-        this._elements.wrapper.setAttribute('coral-dialog-size', ''); // Assign content zones
+        this._elements.wrapper.setAttribute('coral-dialog-size', ''); // Close button should stay under the dialog
+
+
+        this._elements.wrapper.appendChild(this._elements.closeButton); // Copy styles over to new wrapper
+
+
+        if (this._elements.wrapper.parentNode !== this) {
+          var contentWrapper = this.querySelector('[handle="wrapper"]');
+          contentWrapper.classList.forEach(function (style) {
+            return _this2._elements.wrapper.classList.add(style);
+          });
+          contentWrapper.removeAttribute('class');
+        } // Assign content zones
 
 
         this.header = header;
@@ -24043,6 +24060,7 @@ var Coral = (function (exports) {
 
           _this = _possibleConstructorReturn(this, _getPrototypeOf(_class).call(this));
           _this._events = {
+            'mouseenter': '_onMouseEnter',
             'key:down [coral-list-item]': '_focusNextItem',
             'key:right [coral-list-item]': '_focusNextItem',
             'key:left [coral-list-item]': '_focusPreviousItem',
@@ -24082,6 +24100,14 @@ var Coral = (function (exports) {
             }
 
             return isAtTarget;
+          }
+        }, {
+          key: "_onMouseEnter",
+          value: function _onMouseEnter() {
+            // Avoids having focus and hover state items
+            if (this.contains(document.activeElement)) {
+              document.activeElement.blur();
+            }
           }
           /** @private */
 
@@ -25303,7 +25329,7 @@ var Coral = (function (exports) {
 
       _this._delegateEvents({
         'scroll': '_onScroll',
-        'capture:focus': '_onFocus',
+        'mouseenter': '_onMouseEnter',
         'capture:blur': '_onBlur',
         'click coral-selectlist-item': '_onItemClick',
         'key:space coral-selectlist-item': '_onToggleItemKey',
@@ -25362,12 +25388,13 @@ var Coral = (function (exports) {
           }
         }
       }
-      /** @private */
-
     }, {
-      key: "_onFocus",
-      value: function _onFocus() {
-        this.classList.add('is-focused');
+      key: "_onMouseEnter",
+      value: function _onMouseEnter() {
+        // Avoids having focus and hover state items
+        if (this.contains(document.activeElement)) {
+          document.activeElement.blur();
+        }
       }
       /** @private */
 
@@ -25376,8 +25403,6 @@ var Coral = (function (exports) {
       value: function _onBlur() {
         // required otherwise the latest item that had the focus would get it again instead of the selected item
         this._resetTabTarget();
-
-        this.classList.remove('is-focused');
       }
       /** @private */
 
@@ -37191,7 +37216,7 @@ var Coral = (function (exports) {
       // case 4: !p + !m + !se = firstSelectable (native behavior)
       // case 5:  p + !m +  se = se
       // case 6:  p + !m + !se = p
-      // case 7: !p +  m +  se = selectedItems
+      // case 7: !p +  m +  se = 'Select'
       // case 8: !p +  m + !se = 'Select'
 
     }, {
@@ -37214,19 +37239,9 @@ var Coral = (function (exports) {
         } // case 7: !p +  m +  se = 'Select'
         // case 8: !p +  m + !se = 'Select'
         else if (this.hasAttribute('multiple')) {
-            // case 7: !p +  m +  se = selectedItems
-            if (this.selectedItem) {
-              this._elements.label.classList.remove('is-placeholder');
+            this._elements.label.classList.add('is-placeholder');
 
-              this._elements.label.textContent = this.selectedItems.map(function (item) {
-                return item.textContent.trim();
-              }).join(', ');
-            } // case 8: !p +  m + !se = 'Select'
-            else {
-                this._elements.label.classList.add('is-placeholder');
-
-                this._elements.label.textContent = i18n.get('Select');
-              }
+            this._elements.label.textContent = i18n.get('Select');
           } // case 4: !p + !m + !se = firstSelectable (native behavior)
           else if (!this.selectedItem) {
               // we clean the value because there is no selected item
@@ -57085,7 +57100,6 @@ var Coral = (function (exports) {
       var events = {
         'global:resize': '_onWindowResize',
         'mouseout': '_onMouseOut',
-        'capture:blur': '_onBlur',
         // Keyboard interaction
         'key:home > ._coral-QuickActions-item': '_onHomeKeypress',
         'key:end > ._coral-QuickActions-item': '_onEndKeypress',
@@ -57615,32 +57629,6 @@ var Coral = (function (exports) {
           this._hideAll();
         }
       }
-      /** @ignore */
-
-    }, {
-      key: "_onBlur",
-      value: function _onBlur(event) {
-        var _this3 = this;
-
-        var toElement = event.toElement || event.relatedTarget;
-
-        if (this.interaction === interaction$3.ON) {
-          // In FF toElement is not available to us so we test the newly-focused element
-          if (!toElement) {
-            // The active element is not ready until the next frame
-            window.requestAnimationFrame(function () {
-              toElement = document.activeElement;
-
-              if (!_this3._isInternalToComponent(toElement)) {
-                _this3._hideAll();
-              }
-            });
-          } // Hide if we focus out to any element external to the component and its target
-          else if (!this._isInternalToComponent(toElement)) {
-              this._hideAll();
-            }
-        }
-      }
     }, {
       key: "_hideAll",
       value: function _hideAll() {
@@ -57766,7 +57754,7 @@ var Coral = (function (exports) {
     }, {
       key: "_onButtonClick",
       value: function _onButtonClick(event) {
-        var _this4 = this;
+        var _this3 = this;
 
         event.stopPropagation();
 
@@ -57781,7 +57769,7 @@ var Coral = (function (exports) {
 
 
         window.setTimeout(function () {
-          _this4._preventClick = false;
+          _this3._preventClick = false;
         }, this._overlayAnimationTime);
         this._preventClick = true;
 
@@ -57827,13 +57815,13 @@ var Coral = (function (exports) {
     }, {
       key: "_onOverlayOpen",
       value: function _onOverlayOpen(event) {
-        var _this5 = this;
+        var _this4 = this;
 
         if (event.target === this._elements.overlay) {
           // do not allow internal Overlay events to escape QuickActions
           event.stopImmediatePropagation();
           window.requestAnimationFrame(function () {
-            var focusableItems = _this5._elements.buttonList.items.getAll().filter(function (item) {
+            var focusableItems = _this4._elements.buttonList.items.getAll().filter(function (item) {
               return !item.hasAttribute('hidden') && !item.hasAttribute('disabled');
             });
 
@@ -57848,7 +57836,7 @@ var Coral = (function (exports) {
     }, {
       key: "_onOverlayClose",
       value: function _onOverlayClose(event) {
-        var _this6 = this;
+        var _this5 = this;
 
         if (event.target === this) {
           this._elements.overlay.open = false; // Return the trapFocus and returnFocus properties to their state before open.
@@ -57856,14 +57844,14 @@ var Coral = (function (exports) {
           // Wait a frame as this is called before the 'open' property sync. Otherwise, returnFocus is set prematurely.
 
           window.requestAnimationFrame(function () {
-            if (_this6._previousTrapFocus) {
-              _this6.trapFocus = _this6._previousTrapFocus;
-              _this6._previousTrapFocus = undefined;
+            if (_this5._previousTrapFocus) {
+              _this5.trapFocus = _this5._previousTrapFocus;
+              _this5._previousTrapFocus = undefined;
             }
 
-            if (_this6._previousReturnFocus) {
-              _this6.returnFocus = _this6._previousReturnFocus;
-              _this6._previousReturnFocus = undefined;
+            if (_this5._previousReturnFocus) {
+              _this5.returnFocus = _this5._previousReturnFocus;
+              _this5._previousReturnFocus = undefined;
             }
           });
         } else if (event.target === this._elements.overlay) {
@@ -58068,7 +58056,7 @@ var Coral = (function (exports) {
 
       /** @ignore */
       value: function connectedCallback() {
-        var _this7 = this;
+        var _this6 = this;
 
         _get(_getPrototypeOf(QuickActions.prototype), "connectedCallback", this).call(this);
 
@@ -58078,7 +58066,7 @@ var Coral = (function (exports) {
         this.setAttribute('role', 'menu'); // Support cloneNode
 
         ['moreButton', 'overlay'].forEach(function (handleName) {
-          var handle = _this7.querySelector("[handle=\"".concat(handleName, "\"]"));
+          var handle = _this6.querySelector("[handle=\"".concat(handleName, "\"]"));
 
           if (handle) {
             handle.remove();
@@ -58248,38 +58236,38 @@ var Coral = (function (exports) {
         return _get(_getPrototypeOf(QuickActions.prototype), "open", this);
       },
       set: function set(value) {
-        var _this8 = this;
+        var _this7 = this;
 
         _set(_getPrototypeOf(QuickActions.prototype), "open", value, this, true); // Position once we can read items layout in the next frame
 
 
         window.requestAnimationFrame(function () {
-          if (_this8.open && !_this8._openedBefore) {
+          if (_this7.open && !_this7._openedBefore) {
             // we iterate over all the items initializing them in the correct order
-            var items = _this8.items.getAll();
+            var items = _this7.items.getAll();
 
             for (var i = 0, itemCount = items.length; i < itemCount; i++) {
-              _this8._attachItem(items[i], i);
+              _this7._attachItem(items[i], i);
             }
 
-            _this8._openedBefore = true;
+            _this7._openedBefore = true;
           }
 
-          if (_this8.open) {
-            _this8._layout(); // The QuickActions must be visible for us to be able to focus them,
+          if (_this7.open) {
+            _this7._layout(); // The QuickActions must be visible for us to be able to focus them,
             // this may not be the case if we initially open them, due to the FOUC handling.
 
 
-            _this8.style.visibility = 'visible';
+            _this7.style.visibility = 'visible';
 
-            _this8.focus();
+            _this7.focus();
           } // we toggle "is-selected" on the target to indicate that the over is open
 
 
-          var targetElement = _this8._getTarget();
+          var targetElement = _this7._getTarget();
 
           if (targetElement) {
-            targetElement.classList.toggle('is-selected', _this8.open);
+            targetElement.classList.toggle('is-selected', _this7.open);
           }
         });
       }
@@ -72638,7 +72626,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.75";
+  var version = "1.0.0-beta.76";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

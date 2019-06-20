@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">94.95% </span>
+        <span class="strong">95.1% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>188/198</span>
+        <span class='fraction'>194/204</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">84.8% </span>
+        <span class="strong">85.04% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>106/125</span>
+        <span class='fraction'>108/127</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">94.34% </span>
+        <span class="strong">94.44% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>50/53</span>
+        <span class='fraction'>51/54</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">94.95% </span>
+        <span class="strong">95.1% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>188/198</span>
+        <span class='fraction'>194/204</span>
       </div>
     </div>
     <p class="quiet">
@@ -782,7 +782,16 @@
 <a name='L734'></a><a href='#L734'>734</a>
 <a name='L735'></a><a href='#L735'>735</a>
 <a name='L736'></a><a href='#L736'>736</a>
-<a name='L737'></a><a href='#L737'>737</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L737'></a><a href='#L737'>737</a>
+<a name='L738'></a><a href='#L738'>738</a>
+<a name='L739'></a><a href='#L739'>739</a>
+<a name='L740'></a><a href='#L740'>740</a>
+<a name='L741'></a><a href='#L741'>741</a>
+<a name='L742'></a><a href='#L742'>742</a>
+<a name='L743'></a><a href='#L743'>743</a>
+<a name='L744'></a><a href='#L744'>744</a>
+<a name='L745'></a><a href='#L745'>745</a>
+<a name='L746'></a><a href='#L746'>746</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1130,7 +1139,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">168x</span>
-<span class="cline-any cline-yes">140x</span>
+<span class="cline-any cline-yes">136x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">168x</span>
@@ -1209,6 +1218,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">168x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168x</span>
+<span class="cline-any cline-yes">28x</span>
+<span class="cline-any cline-yes">28x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">168x</span>
@@ -1515,9 +1536,6 @@
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -1958,8 +1976,8 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
   }
   set trackingElement(value) {
     super.trackingElement = value;
-  }<span class="missing-if-branch" title="if path not taken" >I</span>
-  <span class="cstat-no" title="statement not covered" ></span>
+  }
+  
   /** @ignore */
   _observeHeader() {
     if (this._headerObserver) {
@@ -1970,8 +1988,8 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
           // Catch changes to childList
           childList: true,
           // Catch changes to textContent
-          characterData: true,
-          // Monitor any child node<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+      <span class="missing-if-branch" title="if path not taken" >I</span>    characterData: true,
+<span class="cstat-no" title="statement not covered" >          // Mon</span>itor any child node
           subtree: true
         });
       }
@@ -1983,7 +2001,7 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
    @ignore
    */
   _hideHeaderIfEmpty() {
-    const header = this._elements.header;
+    const header = this._elements.header;<span class="branch-2 cbranch-no" title="branch not covered" ></span>
   
     if (this._elements.header) {
       const headerWrapper = this._elements.headerWrapper;
@@ -2021,7 +2039,7 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
       this.open = false;
       event.stopPropagation();
   
-      this._trackEvent('close', 'coral-dialog', event);<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+      this._trackEvent('close', 'coral-dialog', event);
     }
   }
   
@@ -2033,7 +2051,7 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
       this._trackEvent('close', 'coral-dialog', event);
     }
   }
-  
+  <span class="branch-2 cbranch-no" title="branch not covered" ></span>
   /** @ignore */
   _moveToDocumentBody() {
     // Not in the DOM
@@ -2062,7 +2080,7 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
     
     // Inject the SVG icon
     if (variantValue !== variant.DEFAULT) {
-      const iconName = capitalize(variantValue);<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+      const iconName = capitalize(variantValue);
       this._elements.headerWrapper.insertAdjacentHTML('beforeend', Icon._renderSVG(`spectrum-css-icon-${iconName}Medium`, ['_coral-Dialog-typeIcon', `_coral-UIIcon-${iconName}Medium`]));
       this._elements.icon = this._elements.headerWrapper.querySelector('._coral-Dialog-typeIcon');
     }
@@ -2074,7 +2092,7 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
     if (this.backdrop === backdrop.MODAL &amp;&amp; this._isTopOverlay()) {
       this.open = false;
     }
-  }
+  }<span class="branch-2 cbranch-no" title="branch not covered" ></span>
   
   /**
    Centers the dialog in the middle of the screen.
@@ -2084,25 +2102,25 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
   center() {
     // We're already centered in fullscreen mode
     if (this.fullscreen) {
-      return;<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+      return;
     }
   
     // If moved we reset the position
     this.style.top = '';
     this.style.left = '';
-  <span class="branch-2 cbranch-no" title="branch not covered" ></span>
+  
     return this;
   }
   
   get _contentZones() {
     return {
-      'coral-dialog-header': 'header',
+      'coral-dialog-header': '<span class="branch-1 cbranch-no" title="branch not covered" >header',</span>
       'coral-dialog-content': 'content',
       'coral-dialog-footer': 'footer'
     };
   }
   
-  /**
+  /**<span class="branch-2 cbranch-no" title="branch not covered" ></span>
    Returns {@link Dialog} variants.
    
    @return {DialogVariantEnum}
@@ -2186,11 +2204,11 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
       // Create default wrapper
       wrapper = this._elements.wrapper;
     
-      // Create de<span class="fstat-no" title="function not covered" >faul</span>t header wrapper
-<span class="cstat-no" title="statement not covered" >      const headerWrapper = this._</span>elements.headerWrapper;
+      // Create default header wrapper
+      const headerWrapper = this._elements.headerWrapper;
     
-      // Case wher<span class="fstat-no" title="function not covered" >e th</span>e dialog needs to be rendered and content zones are provided
-<span class="cstat-no" title="statement not covered" >      if (contentZoneProvided) {</span>
+      // Case where the dialog needs to be rendered and content zones are provided
+      if (contentZoneProvided) {
         // Check if user wrapper is provided
         if (contentZoneProvided.parentNode === this) {
           // Content zone target defaults to default wrapper if no user wrapper element is provided
@@ -2198,17 +2216,17 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
         }
         else {
           // Content zone target defaults to user wrapper element if provided
-          this._elements.wrapper = contentZoneProvided.parentNode;
-        }
+          this._el<span class="fstat-no" title="function not covered" >emen</span>ts.wrapper = contentZoneProvided.parentNode;
+<span class="cstat-no" title="statement not covered" >        }</span>
       
-        // Move everything in the wrapper
-        while (this.firstChild) {
+        // Move ev<span class="fstat-no" title="function not covered" >eryt</span>hing in the wrapper
+<span class="cstat-no" title="statement not covered" >        while (this.firstChild) {</span>
           wrapper.appendChild(this.firstChild);
-        }<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+        }
       
         // Add the dialog header before the content
         this._elements.wrapper.insertBefore(headerWrapper, content);
-      }<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+      }
       // Case where the dialog needs to be rendered and content zones need to be created
       else {
         // Default content zone target is wrapper
@@ -2216,11 +2234,11 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
       
         // Move everything in the "content" content zone
         while (this.firstChild) {
-          content.appendChild(this.firstChild);
+          content.appendChild(t<span class="branch-1 cbranch-no" title="branch not covered" >his.firstChil</span>d);
         }
       
         // Add the content zones in the wrapper
-        wrapper.appendChild(headerWrapper);
+        wrapper.appendChild(headerWrapper);<span class="branch-2 cbranch-no" title="branch not covered" ></span>
         wrapper.appendChild(content);
         wrapper.appendChild(footer);
       }
@@ -2231,8 +2249,17 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
     
     // Only the wrapper gets the dialog class
     this._elements.wrapper.classList.add(CLASSNAME);
-    // Mark the wrapper with a public attribute for sizing
+    // Mark the dialog with a public attribute for sizing
     this._elements.wrapper.setAttribute('coral-dialog-size', '');
+    // Close button should stay under the dialog
+    this._elements.wrapper.appendChild(this._elements.closeButton);
+    
+    // Copy styles over to new wrapper
+    if (this._elements.wrapper.parentNode !== this) {
+      const contentWrapper = this.querySelector('[handle="wrapper"]');
+      contentWrapper.classList.forEach(style =&gt; this._elements.wrapper.classList.add(style));
+      contentWrapper.removeAttribute('class');
+    }
   
     // Assign content zones
     this.header = header;
@@ -2260,7 +2287,7 @@ export default Dialog;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Jun 19 2019 14:16:01 GMT+0200 (CEST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Jun 20 2019 14:58:30 GMT+0200 (CEST)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

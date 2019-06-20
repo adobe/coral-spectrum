@@ -661,7 +661,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
   // case 4: !p + !m + !se = firstSelectable (native behavior)
   // case 5:  p + !m +  se = se
   // case 6:  p + !m + !se = p
-  // case 7: !p +  m +  se = selectedItems
+  // case 7: !p +  m +  se = &apos;Select&apos;
   // case 8: !p +  m + !se = &apos;Select&apos;
   get placeholder() {
     return this._placeholder || &apos;&apos;;
@@ -680,16 +680,8 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
     // case 7: !p +  m +  se = &apos;Select&apos;
     // case 8: !p +  m + !se = &apos;Select&apos;
     else if (this.hasAttribute(&apos;multiple&apos;)) {
-      // case 7: !p +  m +  se = selectedItems
-      if (this.selectedItem) {
-        this._elements.label.classList.remove(&apos;is-placeholder&apos;);
-        this._elements.label.textContent = this.selectedItems.map(item =&gt; item.textContent.trim()).join(&apos;, &apos;);
-      }
-      // case 8: !p +  m + !se = &apos;Select&apos;
-      else {
-        this._elements.label.classList.add(&apos;is-placeholder&apos;);
-        this._elements.label.textContent = i18n.get(&apos;Select&apos;);
-      }
+      this._elements.label.classList.add(&apos;is-placeholder&apos;);
+      this._elements.label.textContent = i18n.get(&apos;Select&apos;);
     }
     // case 4: !p + !m + !se = firstSelectable (native behavior)
     else if (!this.selectedItem) {

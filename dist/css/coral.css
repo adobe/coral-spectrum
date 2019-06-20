@@ -11911,16 +11911,19 @@ coral-alert-header:empty {
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+coral-autocomplete-item {
+  display: none;
+}
 ._coral-Autocomplete {
   position: relative;
   display: inline-block;
 }
-coral-autocomplete-item {
-  display: none;
-}
 ._coral-Autocomplete ._coral-Autocomplete-tagList {
   display: block;
-  margin-top: 7px;
+  margin-top: 4px;
+}
+._coral-Autocomplete ._coral-Autocomplete-tagList:empty {
+  display: none;
 }
 
 /**
@@ -13881,6 +13884,13 @@ coral-select-item {
   display: none;
 }
 ._coral-Dropdown ._coral-Dropdown-tagList {
+  display: block;
+  margin-top: 4px;
+}
+._coral-Dropdown ._coral-Dropdown-tagList:empty {
+  display: none;
+}
+._coral-Dropdown ._coral-Dropdown-tagList coral-tag coral-icon {
   display: none;
 }
 ._coral-Dropdown ._coral-Dropdown-select {

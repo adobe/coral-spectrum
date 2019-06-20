@@ -1,7 +1,7 @@
 {
-  "coverage": "66.38%",
+  "coverage": "66.32%",
   "expectCount": 3451,
-  "actualCount": 2291,
+  "actualCount": 2289,
   "files": {
     "coral-spectrum/coral-base-button/src/scripts/BaseButton.js": {
       "expectCount": 40,
@@ -14,16 +14,16 @@
         132,
         139,
         145,
-        196,
-        217,
-        238,
-        259,
-        275,
-        306,
-        325,
-        352,
-        364,
-        434
+        201,
+        222,
+        243,
+        264,
+        280,
+        311,
+        330,
+        357,
+        369,
+        439
       ]
     },
     "coral-spectrum/coral-base-component/src/scripts/BaseComponent.js": {
@@ -62,13 +62,14 @@
       ]
     },
     "coral-spectrum/coral-base-list/src/scripts/BaseList.js": {
-      "expectCount": 19,
+      "expectCount": 20,
       "actualCount": 15,
       "undocumentLines": [
         16,
         42,
-        63,
-        93
+        64,
+        94,
+        118
       ]
     },
     "coral-spectrum/coral-base-list/src/scripts/BaseListItem.js": {
@@ -1063,7 +1064,7 @@
     },
     "coral-spectrum/coral-component-list/src/scripts/SelectList.js": {
       "expectCount": 49,
-      "actualCount": 35,
+      "actualCount": 34,
       "undocumentLines": [
         19,
         45,
@@ -1077,8 +1078,9 @@
         174,
         194,
         222,
-        408,
-        441
+        241,
+        409,
+        442
       ]
     },
     "coral-spectrum/coral-component-list/src/scripts/SelectListGroup.js": {
@@ -1418,8 +1420,8 @@
       ]
     },
     "coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js": {
-      "expectCount": 85,
-      "actualCount": 54,
+      "expectCount": 84,
+      "actualCount": 53,
       "undocumentLines": [
         25,
         27,
@@ -1434,24 +1436,24 @@
         104,
         107,
         110,
-        186,
-        211,
-        289,
-        742,
-        746,
-        755,
-        757,
-        807,
-        834,
-        835,
-        836,
-        837,
-        845,
-        928,
-        936,
-        1113,
-        1118,
-        1120
+        185,
+        210,
+        288,
+        741,
+        745,
+        754,
+        756,
+        783,
+        810,
+        811,
+        812,
+        813,
+        821,
+        904,
+        912,
+        1089,
+        1094,
+        1096
       ]
     },
     "coral-spectrum/coral-component-quickactions/src/scripts/QuickActionsItem.js": {
@@ -1519,11 +1521,11 @@
         171,
         194,
         271,
-        427,
-        465,
-        484,
-        568,
-        1054
+        419,
+        457,
+        476,
+        560,
+        1046
       ]
     },
     "coral-spectrum/coral-component-select/src/scripts/SelectItem.js": {

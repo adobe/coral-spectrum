@@ -567,6 +567,11 @@ class BaseButton extends superClass {
       handle: &apos;label&apos;,
       tagName: this._contentZoneTagName,
       insert: function(label) {
+        // Ensure there&apos;s no extra space left for icon only buttons
+        if (label.innerHTML.trim() === &apos;&apos;) {
+          label.textContent = &apos;&apos;;
+        }
+        
         if (this.iconPosition === iconPosition.LEFT) {
           this.appendChild(label);
         }
