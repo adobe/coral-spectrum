@@ -290,6 +290,15 @@ describe('SelectList', function() {
         
         expect(document.activeElement).to.equal(el.selectedItem, 'Focus should move to the selected item');
       });
+  
+      it('should not keep an item focused on mouseenter', function() {
+        const el = helpers.build(window.__html__['SelectList.selected.html']);
+    
+        el.focus();
+        helpers.event('mouseenter', el);
+  
+        expect(document.activeElement).to.not.equal(el.selectedItem, 'Focus should not stay on the selected item');
+      });
     });
   });
 

@@ -59,7 +59,7 @@ class SelectList extends BaseComponent(HTMLElement) {
     // Attach events
     this._delegateEvents({
       'scroll': '_onScroll',
-      'capture:focus': '_onFocus',
+      'mouseenter': '_onMouseEnter',
       'capture:blur': '_onBlur',
   
       'click coral-selectlist-item': '_onItemClick',
@@ -238,16 +238,17 @@ class SelectList extends BaseComponent(HTMLElement) {
     }
   }
   
-  /** @private */
-  _onFocus() {
-    this.classList.add('is-focused');
+  _onMouseEnter() {
+    // Avoids having focus and hover state items
+    if (this.contains(document.activeElement)) {
+      document.activeElement.blur();
+    }
   }
   
   /** @private */
   _onBlur() {
     // required otherwise the latest item that had the focus would get it again instead of the selected item
     this._resetTabTarget();
-    this.classList.remove('is-focused');
   }
   
   /** @private */
