@@ -224,7 +224,7 @@
 /* #selectable */
 ._coral-Table-wrapper[selectable] {
   ._coral-Table-row {
-    &:hover {
+    &:not([disabled]):hover {
       ._coral-Table-cell {
         background-color: $table-background-color-hover;
       }
@@ -245,7 +245,7 @@
 
   &._coral-Table-wrapper--quiet {
     ._coral-Table-row {
-      &:hover {
+      &:not([disabled]):hover {
         ._coral-Table-cell {
           background-color: $table-quiet-background-color-hover;
         }
@@ -269,7 +269,7 @@
 ._coral-Table-row[selectable] {
   ._coral-Table-cell {
     &[coral-table-cellselect] {
-      &:hover {
+      &:not([disabled]):hover {
         background-color: $table-background-color-hover;
 
         &:after {

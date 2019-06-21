@@ -379,7 +379,7 @@ table[is="coral-table"] {
 /* #selectable */
 ._coral-Table-wrapper[selectable] {
   ._coral-Table-row {
-    &[coral-table-rowselect]:hover:not(.is-selected) ._coral-Table-cell {
+    &[coral-table-rowselect]:not([disabled]):hover ._coral-Table-cell {
       cursor: pointer;
     }
 
@@ -395,9 +395,10 @@ table[is="coral-table"] {
   ._coral-Table-cell {
     &[coral-table-cellselect] {
       position: relative;
-      cursor: pointer;
 
-      &:hover {
+      &:not([disabled]):hover {
+        cursor: pointer;
+
         &:after {
           content: "";
           background-size: 18px 18px;

@@ -76,6 +76,12 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
     return this._selected || false;
   }
   set selected(value) {
+    // Prevent selection if disabled
+    if (this.hasAttribute('coral-table-rowselect') && this.hasAttribute('disabled') ||
+    this.querySelector('[coral-table-rowselect][disabled]')) {
+      return;
+    }
+    
     this.trigger('coral-table-row:_beforeselectedchanged');
     
     this._selected = transform.booleanAttr(value);

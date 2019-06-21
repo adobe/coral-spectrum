@@ -584,16 +584,20 @@ describe('Table', function() {
       it('should set the select all handle to checked if adding a body with a selected item', function(done) {
         var table = helpers.build(window.__html__['Table.selectable.all.html']);
         table.body.remove();
-        var body = new Table.Body();
-        body.appendChild(new Table.Row().set({
-          selected: true
-        }));
-        table.body = body;
-        
+  
         // Wait for MO
         helpers.next(function() {
-          expect(table.querySelector('[coral-table-select]').checked).to.be.true;
-          done();
+          var body = new Table.Body();
+          body.appendChild(new Table.Row().set({
+            selected: true
+          }));
+          table.body = body;
+          
+          // Wait for MO
+          helpers.next(function() {
+            expect(table.querySelector('[coral-table-select]').checked).to.be.true;
+            done();
+          });
         });
       });
   
@@ -681,6 +685,20 @@ describe('Table', function() {
         rows.forEach(function(row) {
           expect(row.selected).to.be.false;
         });
+      });
+      
+      it('should select all rows except disabled ones if the select all handle is checked', function() {
+        const table = helpers.build(window.__html__['Table.selectable.all.html']);
+    
+        const firstItem = table.items.first();
+        const lastItem = table.items.last();
+        const selectAll = table.querySelector('[coral-table-select]');
+        
+        firstItem.querySelector('[coral-table-rowselect]').setAttribute('disabled', '');
+        selectAll.querySelector('input').click();
+        
+        expect(firstItem.selected).to.be.false;
+        expect(lastItem.selected).to.be.true;
       });
     });
   });

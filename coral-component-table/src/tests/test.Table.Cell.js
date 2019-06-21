@@ -70,6 +70,26 @@ describe('Table.Cell', function() {
         expect(el.classList.contains('is-selected')).to.be.true;
         expect(el.getAttribute('aria-selected')).to.equal('true');
       });
+  
+      it('should not select if disabled', function() {
+        const el = new Table.Cell();
+        el.setAttribute('coral-table-cellselect', '');
+        el.setAttribute('disabled', '');
+    
+        el.selected = true;
+        expect(el.selected).to.be.false;
+      });
+  
+      it('should not select if inner [coral-table-cellselect] is disabled', function() {
+        const el = new Table.Cell();
+        const select = document.createElement('div');
+        select.setAttribute('coral-table-cellselect', '');
+        select.setAttribute('disabled', '');
+        el.appendChild(select);
+    
+        el.selected = true;
+        expect(el.selected).to.be.false;
+      });
     });
   });
   

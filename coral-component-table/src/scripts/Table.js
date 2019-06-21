@@ -217,8 +217,9 @@ class Table extends BaseComponent(HTMLTableElement) {
     this._setContentZone('body', value, {
       handle: 'body',
       tagName: 'tbody',
-      insert: function(content) {
-        this._elements.table.appendChild(content);
+      insert: function(body) {
+        this._elements.table.appendChild(body);
+        this.items._container = body;
       }
     });
   }
@@ -472,7 +473,7 @@ class Table extends BaseComponent(HTMLTableElement) {
   /** @private */
   _onSelectAll(event) {
     if (this.selectable) {
-      let rows = getRows([this.body]);
+      let rows = this._getSelectableItems();
       
       if (rows.length) {
         if (this.multiple) {
@@ -876,7 +877,7 @@ class Table extends BaseComponent(HTMLTableElement) {
           
           // If no selected items, by default set the first item as last selected item
           if (!table.selectedItem) {
-            const rows = getRows([table.body]);
+            const rows = table._getSelectableItems();
             if (rows.length) {
               lastSelectedItem = rows[0];
               lastSelectedItem.set('selected', true, true);
@@ -1228,7 +1229,7 @@ class Table extends BaseComponent(HTMLTableElement) {
     // Synchronise the table select handle
     if (body && body.contains(row)) {
       const selection = table.selectedItems;
-      const rows = getRows([body]);
+      const rows = table._getSelectableItems();
       
       // Sync select all handle
       table._syncSelectAllHandle(selection, rows);
@@ -1401,7 +1402,7 @@ class Table extends BaseComponent(HTMLTableElement) {
     }
     
     if (changed) {
-      const items = getRows([table.body]);
+      const items = this._getSelectableItems();
       // Sync select all handle if any.
       table._syncSelectAllHandle(table.selectedItems, items);
       // Disable table features if no items.
@@ -2374,6 +2375,9 @@ class Table extends BaseComponent(HTMLTableElement) {
         const removedNode = mutation.removedNodes[k];
 
         if (removedNode instanceof TableBody) {
+          // Empty body for the items API
+          this.items._container = new TableBody();
+          
           this._onBodyContentChanged({
             target: removedNode,
             detail: {
@@ -2386,6 +2390,10 @@ class Table extends BaseComponent(HTMLTableElement) {
     });
   
     this._resetLayout();
+  }
+  
+  _getSelectableItems() {
+    return this.items._getSelectableItems().filter(item => !item.querySelector('[coral-table-rowselect][disabled]'));
   }
   
   get _contentZones() {
@@ -2472,7 +2480,7 @@ class Table extends BaseComponent(HTMLTableElement) {
     commons.addResizeListener(this, this._resetLayout);
     
     // Disable table features if no items.
-    const items = getRows([this.body]);
+    const items = this._getSelectableItems();
     this._toggleInteractivity(items.length === 0);
   
     // Sync selection state

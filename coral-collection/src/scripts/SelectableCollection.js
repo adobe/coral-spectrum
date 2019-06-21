@@ -43,7 +43,7 @@ class SelectableCollection extends Collection {
    @protected
    */
   _getSelectableItems() {
-    return listToArray(this._host.querySelectorAll(this._selectableItemSelector));
+    return listToArray(this._container.querySelectorAll(this._selectableItemSelector));
   }
   
   /**
@@ -57,7 +57,7 @@ class SelectableCollection extends Collection {
    @protected
    */
   _getFirstSelectable() {
-    return this._host.querySelector(this._selectableItemSelector) || null;
+    return this._container.querySelector(this._selectableItemSelector) || null;
   }
   
   /**
@@ -71,7 +71,7 @@ class SelectableCollection extends Collection {
    @protected
    */
   _getLastSelectable() {
-    const items = this._host.querySelectorAll(this._selectableItemSelector);
+    const items = this._container.querySelectorAll(this._selectableItemSelector);
     return items[items.length - 1] || null;
   }
   
@@ -143,7 +143,7 @@ class SelectableCollection extends Collection {
       selector = selector.replace('[selected]', `[${selectedAttribute}]`);
     }
   
-    return this._host.querySelector(selector) || null;
+    return this._container.querySelector(selector) || null;
   }
   
   /**
@@ -165,7 +165,7 @@ class SelectableCollection extends Collection {
     }
   
     // last-of-type did not work so we need to query all
-    const items = this._host.querySelectorAll(selector);
+    const items = this._container.querySelectorAll(selector);
     return items[items.length - 1] || null;
   }
   
@@ -186,7 +186,7 @@ class SelectableCollection extends Collection {
       selector = selector.replace('[selected]', `[${selectedAttribute}]`);
     }
   
-    return listToArray(this._host.querySelectorAll(selector));
+    return listToArray(this._container.querySelectorAll(selector));
   }
   
   /**
@@ -208,7 +208,7 @@ class SelectableCollection extends Collection {
     }
   
     // we select all the selected attributes except the last one
-    const items = this._host.querySelectorAll(selector);
+    const items = this._container.querySelectorAll(selector);
     const itemsCount = items.length;
   
     // ignores the first item of the list, everything else is deselected
@@ -236,7 +236,7 @@ class SelectableCollection extends Collection {
     }
   
     // we query for all matching items with the given attribute
-    const items = this._host.querySelectorAll(selector);
+    const items = this._container.querySelectorAll(selector);
     // we ignore the last item
     const itemsCount = items.length - 1;
   
@@ -284,7 +284,7 @@ class SelectableCollection extends Collection {
     }
   
     // we query for all matching items with the given attribute
-    const items = this._host.querySelectorAll(selector);
+    const items = this._container.querySelectorAll(selector);
     const itemsCount = items.length;
   
     for (let i = 0; i < itemsCount; i++) {
