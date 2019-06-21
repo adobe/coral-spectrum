@@ -8185,7 +8185,7 @@ var Coral = (function (exports) {
     _createClass(SelectableCollection, [{
       key: "_getSelectableItems",
       value: function _getSelectableItems() {
-        return listToArray(this._host.querySelectorAll(this._selectableItemSelector));
+        return listToArray(this._container.querySelectorAll(this._selectableItemSelector));
       }
       /**
        Returns the first selectable item. Items that are disabled quality for selection. On the other hand, hidden items
@@ -8201,7 +8201,7 @@ var Coral = (function (exports) {
     }, {
       key: "_getFirstSelectable",
       value: function _getFirstSelectable() {
-        return this._host.querySelector(this._selectableItemSelector) || null;
+        return this._container.querySelector(this._selectableItemSelector) || null;
       }
       /**
        Returns the last selectable item. Items that are disabled quality for selection. On the other hand, hidden items
@@ -8217,7 +8217,7 @@ var Coral = (function (exports) {
     }, {
       key: "_getLastSelectable",
       value: function _getLastSelectable() {
-        var items = this._host.querySelectorAll(this._selectableItemSelector);
+        var items = this._container.querySelectorAll(this._selectableItemSelector);
 
         return items[items.length - 1] || null;
       }
@@ -8295,7 +8295,7 @@ var Coral = (function (exports) {
           selector = selector.replace('[selected]', "[".concat(selectedAttribute, "]"));
         }
 
-        return this._host.querySelector(selector) || null;
+        return this._container.querySelector(selector) || null;
       }
       /**
        Returns the last item that is selected in the Collection. It allows to configure the attribute used for selection
@@ -8319,7 +8319,7 @@ var Coral = (function (exports) {
         } // last-of-type did not work so we need to query all
 
 
-        var items = this._host.querySelectorAll(selector);
+        var items = this._container.querySelectorAll(selector);
 
         return items[items.length - 1] || null;
       }
@@ -8343,7 +8343,7 @@ var Coral = (function (exports) {
           selector = selector.replace('[selected]', "[".concat(selectedAttribute, "]"));
         }
 
-        return listToArray(this._host.querySelectorAll(selector));
+        return listToArray(this._container.querySelectorAll(selector));
       }
       /**
        Deselects all the items except the first selected item in the Collection. By default the <code>selected</code>
@@ -8367,7 +8367,7 @@ var Coral = (function (exports) {
         } // we select all the selected attributes except the last one
 
 
-        var items = this._host.querySelectorAll(selector);
+        var items = this._container.querySelectorAll(selector);
 
         var itemsCount = items.length; // ignores the first item of the list, everything else is deselected
 
@@ -8397,7 +8397,7 @@ var Coral = (function (exports) {
         } // we query for all matching items with the given attribute
 
 
-        var items = this._host.querySelectorAll(selector); // we ignore the last item
+        var items = this._container.querySelectorAll(selector); // we ignore the last item
 
 
         var itemsCount = items.length - 1;
@@ -8446,7 +8446,7 @@ var Coral = (function (exports) {
         } // we query for all matching items with the given attribute
 
 
-        var items = this._host.querySelectorAll(selector);
+        var items = this._container.querySelectorAll(selector);
 
         var itemsCount = items.length;
 
@@ -65431,6 +65431,11 @@ var Coral = (function (exports) {
         return this._selected || false;
       },
       set: function set(value) {
+        // Prevent selection if disabled
+        if (this.hasAttribute('coral-table-cellselect') && this.hasAttribute('disabled') || this.querySelector('[coral-table-cellselect][disabled]')) {
+          return;
+        }
+
         this.trigger('coral-table-cell:_beforeselectedchanged');
         this._selected = transform.booleanAttr(value);
 
@@ -65837,6 +65842,11 @@ var Coral = (function (exports) {
         return this._selected || false;
       },
       set: function set(value) {
+        // Prevent selection if disabled
+        if (this.hasAttribute('coral-table-rowselect') && this.hasAttribute('disabled') || this.querySelector('[coral-table-rowselect][disabled]')) {
+          return;
+        }
+
         this.trigger('coral-table-row:_beforeselectedchanged');
         this._selected = transform.booleanAttr(value);
 
@@ -66466,7 +66476,7 @@ var Coral = (function (exports) {
       /** @private */
       value: function _onSelectAll(event) {
         if (this.selectable) {
-          var rows = getRows([this.body]);
+          var rows = this._getSelectableItems();
 
           if (rows.length) {
             if (this.multiple) {
@@ -66853,7 +66863,7 @@ var Coral = (function (exports) {
               var lastSelectedDirection = table._lastSelectedItems.direction; // If no selected items, by default set the first item as last selected item
 
               if (!table.selectedItem) {
-                var rows = getRows([table.body]);
+                var rows = table._getSelectableItems();
 
                 if (rows.length) {
                   lastSelectedItem = rows[0];
@@ -67206,7 +67216,9 @@ var Coral = (function (exports) {
 
         if (body && body.contains(row)) {
           var selection = table.selectedItems;
-          var rows = getRows([body]); // Sync select all handle
+
+          var rows = table._getSelectableItems(); // Sync select all handle
+
 
           table._syncSelectAllHandle(selection, rows); // Store or remove the row reference
 
@@ -67385,7 +67397,8 @@ var Coral = (function (exports) {
         }
 
         if (changed) {
-          var items = getRows([table.body]); // Sync select all handle if any.
+          var items = this._getSelectableItems(); // Sync select all handle if any.
+
 
           table._syncSelectAllHandle(table.selectedItems, items); // Disable table features if no items.
 
@@ -68413,6 +68426,9 @@ var Coral = (function (exports) {
             var removedNode = mutation.removedNodes[k];
 
             if (removedNode instanceof TableBody) {
+              // Empty body for the items API
+              _this6.items._container = new TableBody();
+
               _this6._onBodyContentChanged({
                 target: removedNode,
                 detail: {
@@ -68425,6 +68441,13 @@ var Coral = (function (exports) {
         });
 
         this._resetLayout();
+      }
+    }, {
+      key: "_getSelectableItems",
+      value: function _getSelectableItems() {
+        return this.items._getSelectableItems().filter(function (item) {
+          return !item.querySelector('[coral-table-rowselect][disabled]');
+        });
       }
     }, {
       key: "connectedCallback",
@@ -68482,7 +68505,7 @@ var Coral = (function (exports) {
 
         commons.addResizeListener(this, this._resetLayout); // Disable table features if no items.
 
-        var items = getRows([this.body]);
+        var items = this._getSelectableItems();
 
         this._toggleInteractivity(items.length === 0); // Sync selection state
 
@@ -68661,8 +68684,10 @@ var Coral = (function (exports) {
         this._setContentZone('body', value, {
           handle: 'body',
           tagName: 'tbody',
-          insert: function insert(content) {
-            this._elements.table.appendChild(content);
+          insert: function insert(body) {
+            this._elements.table.appendChild(body);
+
+            this.items._container = body;
           }
         });
       }
@@ -72626,7 +72651,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.77";
+  var version = "1.0.0-beta.78";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

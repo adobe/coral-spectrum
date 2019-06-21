@@ -449,6 +449,12 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
     return this._selected || false;
   }
   set selected(value) {
+    // Prevent selection if disabled
+    if (this.hasAttribute(&apos;coral-table-cellselect&apos;) &amp;&amp; this.hasAttribute(&apos;disabled&apos;) ||
+      this.querySelector(&apos;[coral-table-cellselect][disabled]&apos;)) {
+      return;
+    }
+    
     this.trigger(&apos;coral-table-cell:_beforeselectedchanged&apos;);
     
     this._selected = transform.booleanAttr(value);
