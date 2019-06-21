@@ -36799,7 +36799,7 @@ var Coral = (function (exports) {
         if (this.selectedItem && !this.multiple) {
           this._elements.label.classList.remove('is-placeholder');
 
-          this._elements.label.innerHTML = this.selectedItem.innerHTML || ' ';
+          this._elements.label.innerHTML = this.selectedItem.innerHTML;
         }
       }
       /**
@@ -37254,10 +37254,10 @@ var Coral = (function (exports) {
               if (placeholderItem) {
                 // selects using the attribute in case the item is not yet initialized
                 placeholderItem.setAttribute('selected', '');
-                this._elements.label.innerHTML = placeholderItem.innerHTML || ' ';
+                this._elements.label.innerHTML = placeholderItem.innerHTML;
               } else {
                 // label must be cleared when there is no placeholder and no item to select
-                this._elements.label.textContent = ' ';
+                this._elements.label.textContent = '';
               }
             }
       }
@@ -72626,7 +72626,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.76";
+  var version = "1.0.0-beta.77";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

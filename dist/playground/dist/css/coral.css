@@ -13903,6 +13903,9 @@ coral-select-item {
   -webkit-appearance: none;
   -moz-appearance: none;
 }
+._coral-Dropdown ._coral-Dropdown-trigger ._coral-Dropdown-label:empty {
+  display: inline-flex;
+}
 ._coral-Dropdown ._coral-Dropdown-trigger ._coral-Dropdown-label > coral-icon:first-child {
   vertical-align: text-top;
   margin-right: 4px;
