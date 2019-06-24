@@ -130,10 +130,6 @@ class QuickActions extends Overlay {
       'click > ._coral-QuickActions-item:not([handle="moreButton"])': '_onButtonClick',
       'click > ._coral-QuickActions-item[handle="moreButton"]': '_onMoreButtonClick',
     
-      // Accessibility
-      'capture:focus ._coral-QuickActions-item': '_onItemFocusIn',
-      'capture:blur ._coral-QuickActions-item': '_onItemFocusOut',
-    
       // Items
       'coral-quickactions-item:_contentchanged': '_onItemChange',
       'coral-quickactions-item:_iconchanged': '_onItemChange',
@@ -736,14 +732,6 @@ class QuickActions extends Overlay {
     const targetElement = this._getTarget();
     
     return element && (this.contains(element) || this._elements.overlay.contains(element) || targetElement && targetElement.contains(element));
-  }
-  
-  _onItemFocusIn(event) {
-    event.matchedTarget.classList.add('focus-ring');
-  }
-  
-  _onItemFocusOut(event) {
-    event.matchedTarget.classList.remove('focus-ring');
   }
   
   /** @ignore */
