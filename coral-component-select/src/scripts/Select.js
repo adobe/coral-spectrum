@@ -613,8 +613,10 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
     
     // we do not show the list with native
     if (!this._useNativeInput) {
-      // Show the overlay
-      this._elements.overlay.open = true;
+      if (!this._elements.overlay.open) {
+        // Show the overlay
+        this._elements.overlay.open = true;
+      }
   
       // Force overlay repositioning (remote loading)
       requestAnimationFrame(() => {
@@ -1038,7 +1040,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
     event.stopImmediatePropagation();
     
     if (this._elements.overlay.open) {
-      this._elements.overlay.style.minWidth = `${this.offsetWidth}px`;
+      this._elements.overlay.style.width = `${this.offsetWidth}px`;
     }
   }
   
