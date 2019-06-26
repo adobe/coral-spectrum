@@ -262,20 +262,14 @@ coral-card-content,
   display: block;
 }
 
-._coral-Card-context {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
 ._coral-Card-title,
 ._coral-Card-subtitle,
-._coral-Card-description {
+._coral-Card-description,
+._coral-Card-context {
   // in case the title is in an anchor
   text-decoration: none;
-
-  word-wrap: break-word;
-  word-break: break-all;
+  // in case content overflows
+  overflow-y: auto;
 }
 
 ._coral-Card {
