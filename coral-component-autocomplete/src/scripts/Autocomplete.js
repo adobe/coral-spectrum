@@ -1074,7 +1074,7 @@ class Autocomplete extends BaseFormField(BaseComponent(HTMLElement)) {
     event.stopImmediatePropagation();
     
     if (this._elements.overlay.open) {
-      this._elements.overlay.style.minWidth = `${this.offsetWidth}px`;
+      this._elements.overlay.style.width = `${this.offsetWidth}px`;
     }
   }
   
