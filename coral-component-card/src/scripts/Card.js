@@ -23,6 +23,8 @@ const COLOR_HINT_REG_EXP = /^#[0-9A-F]{6}$/i;
  
  @property {String} DEFAULT
  Default card variant that shows the asset, overlay and content in their default positions.
+ @property {String} QUIET
+ Quiet card variant that shows the asset, overlay and content in their default positions.
  @property {String} CONDENSED
  Condensed card variant where the overlay is hidden and the content is shown over the image.
  @property {String} INVERTED
@@ -32,6 +34,7 @@ const COLOR_HINT_REG_EXP = /^#[0-9A-F]{6}$/i;
  */
 const variant = {
   DEFAULT: 'default',
+  QUIET: 'quiet',
   CONDENSED: 'condensed',
   INVERTED: 'inverted',
   ASSET: 'asset'
@@ -392,7 +395,7 @@ class Card extends BaseComponent(HTMLElement) {
   connectedCallback() {
     super.connectedCallback();
     
-    this.classList.add(CLASSNAME, 'coral-Well');
+    this.classList.add(CLASSNAME);
     
     // Default reflected attributes
     if (!this._variant) { this.variant = variant.DEFAULT; }

@@ -28,6 +28,23 @@ $card-property-icon-condensed-color = rgb(75, 75, 75);
 $card-wrapper-condensed-background-color = rgba(255, 255, 255, 0.9);
 $card-wrapper-condensed-border-color = rgba(211, 211, 211, .05);
 
+._coral-Card {
+   border-color: $card-border-color;
+   background-color: $card-background-color;
+}
+
+a[href] > ._coral-Card:not(._coral-Card--quiet):hover {
+  border-color: $card-border-color-hover;
+}
+
+._coral-Card-wrapper {
+  background-color: $card-background-color;
+}
+
+._coral-Card-title {
+  color: $card-title-color;
+}
+
 coral-card-overlay {
   background-color: $card-overlay-background-color;
 
@@ -36,7 +53,8 @@ coral-card-overlay {
   }
 }
 
-coral-card-propertylist + coral-card-propertylist {
+coral-card-description,
+coral-card-propertylist {
   border-top-color: $card-property-border-color;
 }
 
@@ -44,7 +62,7 @@ coral-card-propertylist + coral-card-propertylist {
 ._coral-Card--stacked {
   &:before,
   &:after {
-    background: inherit;
+    background-color: $card-background-color;
     border-bottom-color: $card-border-color;
     border-left-color: $card-border-color;
     border-right-color: $card-border-color;
@@ -77,6 +95,11 @@ coral-card-propertylist + coral-card-propertylist {
   ._coral-Card-property-icon {
     color: $card-property-icon-condensed-color;
   }
+
+  coral-card-description,
+  coral-card-propertylist {
+    border-top-color: $card-wrapper-inverted-border-color;
+  }
 }
 
 ._coral-Card--inverted {
@@ -103,5 +126,20 @@ coral-card-propertylist + coral-card-propertylist {
 
   ._coral-Card-property-icon {
     color: $card-property-icon-inverted-color;
+  }
+}
+
+._coral-Card--quiet {
+  border-color: transparent;
+  background-color: transparent;
+
+  ._coral-Card-wrapper {
+    border-color: transparent;
+    background-color: transparent;
+  }
+
+  &._coral-Card--stacked:before,
+  &._coral-Card--stacked:after {
+    display: none;
   }
 }

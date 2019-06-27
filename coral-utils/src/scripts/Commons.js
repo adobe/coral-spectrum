@@ -65,6 +65,7 @@ const CORAL_COMPONENTS = [
   'coral-buttongroup',
   'coral-calendar',
   'coral-card',
+  'coral-card-content',
   'coral-card-banner',
   'coral-card-banner-content',
   'coral-card-banner-header',

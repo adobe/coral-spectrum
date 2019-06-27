@@ -37,7 +37,8 @@ describe('Card', function() {
       expect(Card.variant.CONDENSED).to.equal('condensed');
       expect(Card.variant.INVERTED).to.equal('inverted');
       expect(Card.variant.ASSET).to.equal('asset');
-      expect(Object.keys(Card.variant).length).to.equal(4);
+      expect(Card.variant.QUIET).to.equal('quiet');
+      expect(Object.keys(Card.variant).length).to.equal(5);
     });
   });
   

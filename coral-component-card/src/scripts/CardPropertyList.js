@@ -20,6 +20,11 @@ class CardPropertyList extends HTMLElement {
   /* @ignore */
   connectedCallback() {
     this.classList.add('u-coral-clearFix');
+    
+    // Empty it if no items
+    if (this.innerHTML.trim() === '') {
+      this.textContent = '';
+    }
   }
 }
 

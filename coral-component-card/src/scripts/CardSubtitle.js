@@ -40,7 +40,7 @@ class CardSubtitle extends BaseComponent(HTMLElement) {
   connectedCallback() {
     super.connectedCallback();
     
-    this.classList.add(CLASSNAME, 'coral-Body--secondary');
+    this.classList.add(CLASSNAME);
   }
 }
 

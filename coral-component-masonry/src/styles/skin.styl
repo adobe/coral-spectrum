@@ -21,6 +21,12 @@
 }
 
 ._coral-Masonry.is-selectable {
+  ._coral-Masonry-item[variant="quiet"]:not(.is-selected) {
+    coral-card:hover {
+      border-color: $card-border-color-hover;
+    }
+  }
+
   ._coral-Masonry-item.is-selected {
     border-color: $masonry-item-selected-border-color;
     box-shadow: 0 0 0 1px $masonry-item-selected-border-color;

@@ -22,24 +22,25 @@ $card-stack-offset = 3px;
 $card-width = 240px; // borders are not included
 $card-min-height = 175px; // borders are not included
 $card-condensed-height = 229px;
-$card-condensed-wrapper-height = 150px;
+$card-condensed-wrapper-height = 160px;
 $card-asset-lowResolution-padding = 16px;
 
 // Lightweight tags:
-// coral-card-asset, coral-card-content, coral-card-overlay, coral-card-info, coral-card-propertylist
+// coral-card-asset, coral-card-overlay, coral-card-info, coral-card-propertylist
 
 // main container of the card
 ._coral-Card {
+  display: block;
+
   // used to place the banners and the stack
   position: relative;
   vertical-align: top;
 
+  border: 1px solid;
+  border-radius: 4px;
+
   min-height: $card-min-height;
   min-width: $card-width;
-
-  // Override coral-Well padding and margin
-  padding: 0;
-  margin: 0;
 }
 
 ._coral-Card--fixedWidth {
@@ -104,7 +105,7 @@ $card-asset-lowResolution-padding = 16px;
   }
 
   // positioned at the bottom of the wrapper
-  coral-card-content {
+  ._coral-Card-content {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -207,28 +208,42 @@ coral-card-asset {
   }
 }
 
+._coral-Card--quiet {
+  ._coral-Card-content {
+    padding: 20px 0 !important;
+  }
+
+  coral-card-asset {
+    border-radius: 4px;
+  }
+}
+
 // properties
 coral-card-propertylist {
   display: block;
+  padding-top: 14px;
 
   > ._coral-Card-property {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    min-height: 18px;
     float: left;
-    margin-right: 15px;
+    margin-right: 6px;
     margin-bottom: 0;
   }
 }
 
-coral-card-propertylist + coral-card-propertylist {
+._coral-Card-description {
+  padding-top: 14px;
+}
+
+coral-card-description:first-of-type,
+coral-card-propertylist:first-of-type {
   border-top-width: 1px;
   border-top-style: solid;
-  margin-top: 7px;
-  padding-top: 12px;
 }
 
 ._coral-Card-property-icon + coral-card-property-content:not(:empty) {
-  position: relative;
-  top: -2px;
   margin-left: 6px;
 }
 
@@ -243,16 +258,18 @@ coral-card-overlay {
   font-size: 12px;
 }
 
-coral-card-content {
+._coral-Card-content {
   display: block;
+  padding: 20px 24px !important;
 }
 
 coral-card-overlay:empty,
-coral-card-content:empty {
+coral-card-propertylist:empty,
+._coral-Card-content:empty {
   display: none;
 }
 
-coral-card-content,
+._coral-Card-content,
 ._coral-Card-context,
 ._coral-Card-title,
 ._coral-Card-subtitle,
@@ -272,33 +289,36 @@ coral-card-content,
   overflow-y: auto;
 }
 
+// Increase specificity
 ._coral-Card {
   ._coral-Card-title,
   ._coral-Card-context {
-    margin-top: 0;
+    font-weight: 400;
+    margin: 0;
   }
 
-  ._coral-Card-subtitle {
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+  ._coral-Card-title + ._coral-Card-subtitle,
+  ._coral-Card-title + ._coral-Card-context {
+    margin-top: 6px;
   }
 }
 
-._coral-Card-context + ._coral-Card-title {
-  margin-top: 2px;
+._coral-Card-subtitle {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 ._coral-Card-context + ._coral-Card-description,
 ._coral-Card-title + ._coral-Card-description {
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 ._coral-Card-context + coral-card-propertylist,
 ._coral-Card-title + coral-card-propertylist,
 ._coral-Card-subtitle + coral-card-propertylist,
 ._coral-Card-description + coral-card-propertylist {
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 ._coral-Banner--corner {

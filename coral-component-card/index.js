@@ -35,6 +35,7 @@ import './src/styles/index.css';
 
 // Expose component on the Coral namespace
 window.customElements.define('coral-card', Card);
+window.customElements.define('coral-card-content', CardContent);
 window.customElements.define('coral-card-banner', CardBanner);
 window.customElements.define('coral-card-banner-header', CardBannerHeader);
 window.customElements.define('coral-card-banner-content', CardBannerContent);
