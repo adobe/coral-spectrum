@@ -77,16 +77,6 @@ describe('List', function() {
       
         expect(expectedFocusedElement).to.equal(document.activeElement);
       });
-      
-      it('should not keep an item focused on mouseenter', function() {
-        const el = helpers.build(window.__html__['List.hidden.html']);
-        const expectedFocusedElement = document.getElementById('firstSelectableElement');
-  
-        el.focus();
-        helpers.event('mouseenter', el);
-  
-        expect(document.activeElement).to.not.equal(expectedFocusedElement);
-      });
     });
   });
   
