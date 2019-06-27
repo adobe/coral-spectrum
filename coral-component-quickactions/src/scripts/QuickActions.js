@@ -145,6 +145,7 @@ class QuickActions extends Overlay {
     events[`global:capture:coral-overlay:open #${overlayId}`] = '_onOverlayOpen';
     events[`global:capture:coral-overlay:close #${overlayId}`] = '_onOverlayClose';
     events[`global:capture:coral-overlay:positioned #${overlayId}`] = '_onOverlayPositioned';
+    events[`global:capture:mouseout #${overlayId}`] = '_onMouseOut';
     events[`global:capture:click #${overlayId} [coral-list-item]`] = '_onButtonListItemClick';
   
     // Cache bound event handler functions
