@@ -59,7 +59,6 @@ class SelectList extends BaseComponent(HTMLElement) {
     // Attach events
     this._delegateEvents({
       'scroll': '_onScroll',
-      'mouseenter': '_onMouseEnter',
       'capture:blur': '_onBlur',
   
       'click coral-selectlist-item': '_onItemClick',
@@ -238,13 +237,6 @@ class SelectList extends BaseComponent(HTMLElement) {
     }
   }
   
-  _onMouseEnter() {
-    // Avoids having focus and hover state items
-    if (this.contains(document.activeElement)) {
-      document.activeElement.blur();
-    }
-  }
-  
   /** @private */
   _onBlur() {
     // required otherwise the latest item that had the focus would get it again instead of the selected item
@@ -388,6 +380,13 @@ class SelectList extends BaseComponent(HTMLElement) {
     // If a match has been found, focus the matched item
     if (newFocusItem !== undefined) {
       this._focusItem(newFocusItem);
+      
+      // Keyboard is being used so apply focus-ring
+      const focusedItem = this.querySelector('.focus-ring');
+      if (focusedItem) {
+        focusedItem.classList.remove('focus-ring');
+      }
+      newFocusItem.classList.add('focus-ring');
     }
   }
 

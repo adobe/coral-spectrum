@@ -40,7 +40,6 @@ const BaseList = (superClass) => class extends superClass {
     super();
   
     this._events = {
-      'mouseenter': '_onMouseEnter',
       'key:down [coral-list-item]': '_focusNextItem',
       'key:right [coral-list-item]': '_focusNextItem',
       'key:left [coral-list-item]': '_focusPreviousItem',
@@ -113,13 +112,6 @@ const BaseList = (superClass) => class extends superClass {
     }
     
     return isAtTarget;
-  }
-  
-  _onMouseEnter() {
-    // Avoids having focus and hover state items
-    if (this.contains(document.activeElement)) {
-      document.activeElement.blur();
-    }
   }
   
   /** @private */
