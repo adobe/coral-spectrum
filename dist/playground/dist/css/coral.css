@@ -16865,7 +16865,7 @@ coral-masonry-item {
   box-shadow: 0 0 0 1px #2680eb;
   outline: none;
 }
-.coral--light ._coral-Masonry.is-selectable ._coral-Masonry-item[variant="quiet"]:not(.is-selected) coral-card:hover {
+.coral--light ._coral-Masonry.is-selectable ._coral-Masonry-item:not(.is-selected) coral-card:not([variant="quiet"]):hover {
   border-color: #cacaca;
 }
 .coral--light ._coral-Masonry.is-selectable ._coral-Masonry-item.is-selected {
@@ -16880,7 +16880,7 @@ coral-masonry-item {
   box-shadow: 0 0 0 1px #378ef0;
   outline: none;
 }
-.coral--lightest ._coral-Masonry.is-selectable ._coral-Masonry-item[variant="quiet"]:not(.is-selected) coral-card:hover {
+.coral--lightest ._coral-Masonry.is-selectable ._coral-Masonry-item:not(.is-selected) coral-card:not([variant="quiet"]):hover {
   border-color: #d3d3d3;
 }
 .coral--lightest ._coral-Masonry.is-selectable ._coral-Masonry-item.is-selected {
@@ -16895,7 +16895,7 @@ coral-masonry-item {
   box-shadow: 0 0 0 1px #2680eb;
   outline: none;
 }
-.coral--dark ._coral-Masonry.is-selectable ._coral-Masonry-item[variant="quiet"]:not(.is-selected) coral-card:hover {
+.coral--dark ._coral-Masonry.is-selectable ._coral-Masonry-item:not(.is-selected) coral-card:not([variant="quiet"]):hover {
   border-color: #5a5a5a;
 }
 .coral--dark ._coral-Masonry.is-selectable ._coral-Masonry-item.is-selected {
@@ -16910,7 +16910,7 @@ coral-masonry-item {
   box-shadow: 0 0 0 1px #1473e6;
   outline: none;
 }
-.coral--darkest ._coral-Masonry.is-selectable ._coral-Masonry-item[variant="quiet"]:not(.is-selected) coral-card:hover {
+.coral--darkest ._coral-Masonry.is-selectable ._coral-Masonry-item:not(.is-selected) coral-card:not([variant="quiet"]):hover {
   border-color: #494949;
 }
 .coral--darkest ._coral-Masonry.is-selectable ._coral-Masonry-item.is-selected {
