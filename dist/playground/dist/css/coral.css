@@ -12931,6 +12931,9 @@ coral-card-info > coral-tag._coral-Label {
 .coral--light coral-card-overlay ._coral-Card-property coral-card-property-content {
   color: #cdcdcd;
 }
+.coral--light coral-card-asset {
+  background-color: #eaeaea;
+}
 .coral--light coral-card-description,
 .coral--light coral-card-propertylist {
   border-top-color: #eaeaea;
@@ -12984,6 +12987,10 @@ coral-card-info > coral-tag._coral-Label {
 .coral--light ._coral-Card--inverted ._coral-Card-property-icon {
   color: #cdcdcd;
 }
+.coral--light ._coral-Card--inverted coral-card-description,
+.coral--light ._coral-Card--inverted coral-card-propertylist {
+  border-top-color: rgba(211,211,211,0.05);
+}
 .coral--light ._coral-Card--quiet {
   border-color: transparent;
   background-color: transparent;
@@ -13014,6 +13021,9 @@ coral-card-info > coral-tag._coral-Label {
 }
 .coral--lightest coral-card-overlay ._coral-Card-property coral-card-property-content {
   color: #cdcdcd;
+}
+.coral--lightest coral-card-asset {
+  background-color: #f4f4f4;
 }
 .coral--lightest coral-card-description,
 .coral--lightest coral-card-propertylist {
@@ -13068,6 +13078,10 @@ coral-card-info > coral-tag._coral-Label {
 .coral--lightest ._coral-Card--inverted ._coral-Card-property-icon {
   color: #cdcdcd;
 }
+.coral--lightest ._coral-Card--inverted coral-card-description,
+.coral--lightest ._coral-Card--inverted coral-card-propertylist {
+  border-top-color: rgba(211,211,211,0.05);
+}
 .coral--lightest ._coral-Card--quiet {
   border-color: transparent;
   background-color: transparent;
@@ -13098,6 +13112,9 @@ coral-card-info > coral-tag._coral-Label {
 }
 .coral--dark coral-card-overlay ._coral-Card-property coral-card-property-content {
   color: #cdcdcd;
+}
+.coral--dark coral-card-asset {
+  background-color: #3e3e3e;
 }
 .coral--dark coral-card-description,
 .coral--dark coral-card-propertylist {
@@ -13152,6 +13169,10 @@ coral-card-info > coral-tag._coral-Label {
 .coral--dark ._coral-Card--inverted ._coral-Card-property-icon {
   color: #cdcdcd;
 }
+.coral--dark ._coral-Card--inverted coral-card-description,
+.coral--dark ._coral-Card--inverted coral-card-propertylist {
+  border-top-color: rgba(211,211,211,0.05);
+}
 .coral--dark ._coral-Card--quiet {
   border-color: transparent;
   background-color: transparent;
@@ -13182,6 +13203,9 @@ coral-card-info > coral-tag._coral-Label {
 }
 .coral--darkest coral-card-overlay ._coral-Card-property coral-card-property-content {
   color: #cdcdcd;
+}
+.coral--darkest coral-card-asset {
+  background-color: #2c2c2c;
 }
 .coral--darkest coral-card-description,
 .coral--darkest coral-card-propertylist {
@@ -13235,6 +13259,10 @@ coral-card-info > coral-tag._coral-Label {
 }
 .coral--darkest ._coral-Card--inverted ._coral-Card-property-icon {
   color: #cdcdcd;
+}
+.coral--darkest ._coral-Card--inverted coral-card-description,
+.coral--darkest ._coral-Card--inverted coral-card-propertylist {
+  border-top-color: rgba(211,211,211,0.05);
 }
 .coral--darkest ._coral-Card--quiet {
   border-color: transparent;
