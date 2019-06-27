@@ -247,9 +247,9 @@ window.esdocSearchIndex = [
   ],
   [
     "@adobe/coral-spectrum~cardcontent",
-    "function/index.html#static-function-CardContent",
+    "class/coral-spectrum/coral-component-card/src/scripts/CardContent.js~CardContent.html",
     "<span>CardContent</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
-    "function"
+    "class"
   ],
   [
     "@adobe/coral-spectrum~cardcontext",
@@ -3094,6 +3094,12 @@ window.esdocSearchIndex = [
     "class/coral-spectrum/coral-component-card/src/scripts/CardPropertyList.js~CardPropertyList.html#instance-method-connectedCallback",
     "coral-spectrum/coral-component-card/src/scripts/CardPropertyList.js~CardPropertyList#connectedCallback",
     "method"
+  ],
+  [
+    "coral-spectrum/coral-component-card/src/scripts/cardpropertylist.js~cardpropertylist#textcontent",
+    "class/coral-spectrum/coral-component-card/src/scripts/CardPropertyList.js~CardPropertyList.html#instance-member-textContent",
+    "coral-spectrum/coral-component-card/src/scripts/CardPropertyList.js~CardPropertyList#textContent",
+    "member"
   ],
   [
     "coral-spectrum/coral-component-card/src/scripts/cardsubtitle.js",

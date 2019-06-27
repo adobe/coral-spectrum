@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../../../">
-  <title data-ice="title">coral-spectrum/coral-component-tree/src/scripts/TreeItem.js | Coral Spectrum</title>
+  <title data-ice="title">CardContent | Coral Spectrum</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -396,415 +396,69 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">coral-spectrum/coral-component-tree/src/scripts/TreeItem.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
- * Copyright 2019 Adobe. All rights reserved.
- * This file is licensed to you under the Apache License, Version 2.0 (the &quot;License&quot;);
- * you may not use this file except in compliance with the License. You may obtain a copy
- * of the License at http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under
- * the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
- * OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
- */
+<div class="content" data-ice="content"><div class="header-notice">
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {Card} from &apos;<span><a href="file/coral-spectrum/coral-component-card/src/scripts/CardContent.js.html#lineNumber21">@adobe/coral-spectrum</a></span>&apos;</code></pre></div>
+  <span data-ice="access">public</span>
+  <span data-ice="kind">class</span>
+  
+  
+  
+  <span data-ice="source">| <span><a href="file/coral-spectrum/coral-component-card/src/scripts/CardContent.js.html#lineNumber21">source</a></span></span>
+</div>
 
-import {BaseComponent} from &apos;../../../coral-base-component&apos;;
-import {Collection} from &apos;../../../coral-collection&apos;;
-import {Icon} from &apos;../../../coral-component-icon&apos;;
-import treeItem from &apos;../templates/treeItem&apos;;
-import {transform, commons, validate} from &apos;../../../coral-utils&apos;;
+<div class="self-detail detail">
+  <h1 data-ice="name">CardContent</h1>
 
-const CLASSNAME = &apos;_coral-TreeView-item&apos;;
+  
 
-/**
- Enumeration for {@link TreeItem} variants.
- 
- @typedef {Object} TreeItemVariantEnum
- 
- @property {String} DRILLDOWN
- Default variant with icon to expand/collapse subtree.
- @property {String} LEAF
- Variant for leaf items. Icon to expand/collapse subtree is hidden.
- */
-const variant = {
-  /* Default variant with icon to expand/collapse subtree. */
-  DRILLDOWN: &apos;drilldown&apos;,
-  /* Variant for leaf items. Icon to expand/collapse subtree is hidden. */
-  LEAF: &apos;leaf&apos;
-};
+  
+  
+  <div class="flat-list" data-ice="extendsChain"><h4>Extends:</h4><div><span><a href="https://developer.mozilla.org/en/docs/Web/API/HTMLElement">HTMLElement</a></span> &#x2192; CardContent</div></div>
+  
+  
+  
+  
+  
+  
 
-const ALL_VARIANT_CLASSES = [];
+  
+  
+  <div class="description" data-ice="description"><p>The Card Content</p>
+</div>
+  
 
-for (const variantValue in variant) {
-  ALL_VARIANT_CLASSES.push(`${CLASSNAME}--${variant[variantValue]}`);
-}
+  <div data-ice="see"><h4>See:</h4><ul><li><span><a href="../examples/coral-component-card.html">../examples/coral-component-card.html</a></span></li></ul></div>
 
-/**
- @class Coral.Tree.Item
- @classdesc A Tree item component
- @htmltag coral-tree-item
- @extends {HTMLElement}
- @extends {BaseComponent}
- */
-class TreeItem extends BaseComponent(HTMLElement) {
-  /** @ignore */
-  constructor() {
-    super();
+  <div data-ice="exampleDocs">
+    <h4>Example:</h4>
     
-    // Prepare templates
-    this._elements = {
-      // Create or fetch the content zones
-      content: this.querySelector(&apos;coral-tree-item-content&apos;) || document.createElement(&apos;coral-tree-item-content&apos;)
-    };
-    treeItem.call(this._elements, {Icon, commons});
-  
-    // Tells the collection to automatically detect the items and handle the events
-    this.items._startHandlingItems();
-  }
-  
-  /**
-   The parent tree. Returns &lt;code&gt;null&lt;/code&gt; if item is the root.
-   
-   @type {HTMLElement}
-   @readonly
-   */
-  get parent() {
-    return this._parent || null;
-  }
-  
-  /**
-   The content of this tree item.
-   
-   @type {TreeItemContent}
-   @contentzone
-   */
-  get content() {
-    return this._getContentZone(this._elements.content);
-  }
-  set content(value) {
-    this._setContentZone(&apos;content&apos;, value, {
-      handle: &apos;content&apos;,
-      tagName: &apos;coral-tree-item-content&apos;,
-      insert: function(content) {
-        this._elements.header.appendChild(content);
-      }
-    });
-  }
-  
-  /**
-   The Collection Interface that allows interacting with the items that the component contains.
-   
-   @type {Collection}
-   @readonly
-   */
-  get items() {
-    // Construct the collection on first request
-    if (!this._items) {
-      this._items = new Collection({
-        host: this,
-        itemTagName: &apos;coral-tree-item&apos;,
-        itemSelector: &apos;:scope &gt; coral-tree-item&apos;,
-        container: this._elements.subTreeContainer,
-        filter: this._filterItem.bind(this),
-        onItemAdded: this._onItemAdded,
-        onItemRemoved: this._onItemRemoved
-      });
-    }
-  
-    return this._items;
-  }
-  
-  /**
-   Whether the item is expanded. Expanded cannot be set to &lt;code&gt;true&lt;/code&gt; if the item is disabled.
-   
-   @type {Boolean}
-   @default false
-   @htmlattribute expanded
-   @htmlattributereflected
-   */
-  get expanded() {
-    return this._expanded || false;
-  }
-  set expanded(value) {
-    value = transform.booleanAttr(value);
-    const triggerEvent = this.expanded !== value;
-    
-    this._expanded = value;
-    this._reflectAttribute(&apos;expanded&apos;, this._expanded);
-  
-    const header = this._elements.header;
-    const subTreeContainer = this._elements.subTreeContainer;
-  
-    this.classList.toggle(&apos;is-open&apos;, this._expanded);
-    this.classList.toggle(&apos;is-collapsed&apos;, !this._expanded);
-    
-    header.setAttribute(&apos;aria-expanded&apos;, this._expanded);
-    subTreeContainer.setAttribute(&apos;aria-hidden&apos;, !this._expanded);
-    
-    this.trigger(&apos;coral-tree-item:_expandedchanged&apos;);
-    
-    // Do animation in next frame to avoid a forced reflow
-    window.requestAnimationFrame(() =&gt; {
-      // Don&apos;t animate on initialization
-      if (this._animate) {
-        // Remove height as we want the drawer to naturally grow if content is added later
-        commons.transitionEnd(subTreeContainer, () =&gt; {
-          if (this.expanded) {
-            subTreeContainer.style.height = &apos;&apos;;
-          }
-          else {
-            subTreeContainer.hidden = true;
-          }
-  
-          // Trigger once the animation is over to inform coral-tree
-          if (triggerEvent) {
-            this.trigger(&apos;coral-tree-item:_afterexpandedchanged&apos;);
-          }
-        });
-    
-        // Force height to enable transition
-        if (!this.expanded) {
-          subTreeContainer.style.height = `${subTreeContainer.scrollHeight}px`;
-        }
-        else {
-          subTreeContainer.hidden = false;
-        }
-  
-        // We read the offset height to force a reflow, this is needed to start the transition between absolute values
-        // https://blog.alexmaccaw.com/css-transitions under Redrawing
-        // eslint-disable-next-line no-unused-vars
-        const offsetHeight = subTreeContainer.offsetHeight;
-        
-        subTreeContainer.style.height = this.expanded ? `${subTreeContainer.scrollHeight}px` : 0;
-      }
-      else {
-        // Make sure it&apos;s animated next time
-        this._animate = true;
-    
-        // Hide it on initialization if closed
-        if (!this.expanded) {
-          subTreeContainer.style.height = 0;
-          subTreeContainer.hidden = true;
-        }
-      }
-    });
-  }
-  
-  /**
-   The item&apos;s variant. See {@link TreeItemVariantEnum}.
-   
-   @type {String}
-   @default TreeItemVariant.DRILLDOWN
-   @htmlattribute variant
-   @htmlattributereflected
-   */
-  get variant() {
-    return this._variant || variant.DRILLDOWN;
-  }
-  set variant(value) {
-    value = transform.string(value).toLowerCase();
-    this._variant = validate.enumeration(variant, value) &amp;&amp; value || variant.DRILLDOWN;
-  
-    // removes every existing variant
-    this.classList.remove(...ALL_VARIANT_CLASSES);
-    this.classList.add(`${CLASSNAME}--${this._variant}`);
-  }
-  
-  /**
-   Whether the item is selected.
-   
-   @type {Boolean}
-   @default false
-   @htmlattribute selected
-   @htmlattributereflected
-   */
-  get selected() {
-    return this._selected || false;
-  }
-  set selected(value) {
-    this._selected = transform.booleanAttr(value);
-    this._reflectAttribute(&apos;selected&apos;, this._selected);
-  
-    this._elements.header.classList.toggle(&apos;is-selected&apos;, this._selected);
-    this._elements.header.setAttribute(&apos;aria-selected&apos;, this._selected);
-    
-    this.trigger(&apos;coral-tree-item:_selectedchanged&apos;);
-  }
-  
-  /**
-   Whether this item is disabled.
-   
-   @type {Boolean}
-   @default false
-   @htmlattribute disabled
-   @htmlattributereflected
-   */
-  get disabled() {
-    return this._disabled || false;
-  }
-  set disabled(value) {
-    this._disabled = transform.booleanAttr(value);
-    this._reflectAttribute(&apos;disabled&apos;, this._disabled);
-  
-    this._elements.header.classList.toggle(&apos;is-disabled&apos;, this._disabled);
-    this._elements.header.setAttribute(&apos;aria-disabled&apos;, this._disabled);
-    
-    this.trigger(&apos;coral-tree-item:_disabledchanged&apos;);
-  }
-  
-  /**
-   @ignore
-   */
-  get hidden() {
-    return this.hasAttribute(&apos;hidden&apos;);
-  }
-  set hidden(value) {
-    this._reflectAttribute(&apos;hidden&apos;, transform.booleanAttr(value));
-  
-    // We redefine hidden to trigger an event
-    this.trigger(&apos;coral-tree-item:_hiddenchanged&apos;);
-  }
-  
-  /** @private */
-  _filterItem(item) {
-    // Handle nesting check for parent tree item
-    // Use parentNode for added items
-    // Use _parent for removed items
-    return item.parentNode &amp;&amp; item.parentNode.parentNode === this || item._parent === this;
-  }
-  
-  /** @private */
-  _onItemAdded(item) {
-    item._parent = this;
-  }
-  
-  /** @private */
-  _onItemRemoved(item) {
-    item._parent = undefined;
-  }
-  
-  /**
-   Handles the focus of the item.
- 
-   @ignore
-   */
-  focus() {
-    this._elements.header.focus();
-  }
-  
-  /**
-   Returns {@link TreeItem} variants.
-   
-   @return {TreeItemVariantEnum}
-   */
-  static get variant() { return variant; }
-  
-  get _contentZones() { return {&apos;coral-tree-item-content&apos;: &apos;content&apos;}; }
-  
-  /** @ignore */
-  static get observedAttributes() {
-    return super.observedAttributes.concat([&apos;selected&apos;, &apos;disabled&apos;, &apos;variant&apos;, &apos;expanded&apos;, &apos;hidden&apos;]);
-  }
-  
-  /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
-    
-    this.classList.add(CLASSNAME);
-  
-    // a11y
-    this.setAttribute(&apos;role&apos;, &apos;treeitem&apos;);
-    this.setAttribute(&apos;aria-selected&apos;, this.selected);
-    this._elements.header.setAttribute(&apos;aria-controls&apos;, this._elements.subTreeContainer.id);
-    this._elements.subTreeContainer.setAttribute(&apos;aria-labelledby&apos;, this._elements.header.id);
-  
-    // Default reflected attributes
-    if (!this._variant) { this.variant = variant.DRILLDOWN; }
-    this.expanded = this.expanded;
-    
-    // Render the template and set element references
-    const frag = document.createDocumentFragment();
-  
-    const templateHandleNames = [&apos;header&apos;, &apos;icon&apos;, &apos;subTreeContainer&apos;];
-    
-    const subTree = this.querySelector(&apos;._coral-TreeView&apos;);
-    if (subTree) {
-      const items = subTree.querySelectorAll(&apos;coral-tree-item&apos;);
-      for (let i = 0; i &lt; items.length; i++) {
-        this._elements.subTreeContainer.appendChild(items[i]);
-      }
-    }
-    
-    // Add templates into the frag
-    frag.appendChild(this._elements.header);
-    frag.appendChild(this._elements.subTreeContainer);
-  
-    const content = this._elements.content;
-    const subTreeContainer = this._elements.subTreeContainer;
-  
-    // Assign the content zones, moving them into place in the process
-    this.content = content;
-  
-    // Move any remaining elements into the content sub-component
-    while (this.firstChild) {
-      const child = this.firstChild;
-      if (child.nodeName === &apos;CORAL-TREE-ITEM&apos;) {
-        // Adding parent attribute to access the parent directly
-        child._parent = this;
-        // Add tree items to the sub tree container
-        subTreeContainer.appendChild(child);
-      }
-      else if (child.nodeType === Node.TEXT_NODE ||
-        child.nodeType === Node.ELEMENT_NODE &amp;&amp; templateHandleNames.indexOf(child.getAttribute(&apos;handle&apos;)) === -1) {
-        // Add non-template elements to the content
-        content.appendChild(child);
-      }
-      else {
-        // Remove anything else element
-        this.removeChild(child);
-      }
-    }
-  
-    // Lastly, add the fragment into the container
-    this.appendChild(frag);
-  }
-  
-  /**
-   Triggered when {@link TreeItem#selected} changed.
- 
-   @typedef {CustomEvent} coral-tree-item:_selectedchanged
-   
-   @private
-   */
-  
-  /**
-   Triggered when {@link TreeItem#expanded} changed.
- 
-   @typedef {CustomEvent} coral-tree-item:_expandedchanged
-   
-   @private
-   */
-  
-  /**
-   Triggered when {@link TreeItem#hidden} changed.
- 
-   @typedef {CustomEvent} coral-tree-item:_hiddenchanged
-   
-   @private
-   */
-  
-  /**
-   Triggered when {@link TreeItem#disabled} changed.
- 
-   @typedef {CustomEvent} coral-tree-item:_disabledchanged
-   
-   @private
-   */
-}
+  <div class="example-doc" data-ice="exampleDoc">
+      <div class="example-caption" data-ice="exampleCaption">Markup</div>
+      <pre class="prettyprint source-code"><code data-ice="exampleCode">&lt;coral-card-content&gt;&lt;/coral-card-content&gt;</code></pre>
+    </div>
+<div class="example-doc" data-ice="exampleDoc">
+      <div class="example-caption" data-ice="exampleCaption">JS constructor</div>
+      <pre class="prettyprint source-code"><code data-ice="exampleCode">new Coral.Card.Content();</code></pre>
+    </div>
+</div>
 
-export default TreeItem;
-</code></pre>
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </div>
 

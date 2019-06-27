@@ -95,6 +95,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/CardBanner.js~CardBanner.html">CardBanner</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/CardBannerContent.js~CardBannerContent.html">CardBannerContent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/CardBannerHeader.js~CardBannerHeader.html">CardBannerHeader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/CardContent.js~CardContent.html">CardContent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/CardContext.js~CardContext.html">CardContext</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/CardDescription.js~CardDescription.html">CardDescription</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/CardProperty.js~CardProperty.html">CardProperty</a></span></span></li>
@@ -102,7 +103,6 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/CardSubtitle.js~CardSubtitle.html">CardSubtitle</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/CardTitle.js~CardTitle.html">CardTitle</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-CardAsset">CardAsset</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-CardContent">CardContent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-CardInfo">CardInfo</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-CardOverlay">CardOverlay</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-CardPropertyContent">CardPropertyContent</a></span></span></li>
@@ -529,10 +529,6 @@ class QuickActions extends Overlay {
       &apos;click &gt; ._coral-QuickActions-item:not([handle=&quot;moreButton&quot;])&apos;: &apos;_onButtonClick&apos;,
       &apos;click &gt; ._coral-QuickActions-item[handle=&quot;moreButton&quot;]&apos;: &apos;_onMoreButtonClick&apos;,
     
-      // Accessibility
-      &apos;capture:focus ._coral-QuickActions-item&apos;: &apos;_onItemFocusIn&apos;,
-      &apos;capture:blur ._coral-QuickActions-item&apos;: &apos;_onItemFocusOut&apos;,
-    
       // Items
       &apos;coral-quickactions-item:_contentchanged&apos;: &apos;_onItemChange&apos;,
       &apos;coral-quickactions-item:_iconchanged&apos;: &apos;_onItemChange&apos;,
@@ -548,6 +544,7 @@ class QuickActions extends Overlay {
     events[`global:capture:coral-overlay:open #${overlayId}`] = &apos;_onOverlayOpen&apos;;
     events[`global:capture:coral-overlay:close #${overlayId}`] = &apos;_onOverlayClose&apos;;
     events[`global:capture:coral-overlay:positioned #${overlayId}`] = &apos;_onOverlayPositioned&apos;;
+    events[`global:capture:mouseout #${overlayId}`] = &apos;_onMouseOut&apos;;
     events[`global:capture:click #${overlayId} [coral-list-item]`] = &apos;_onButtonListItemClick&apos;;
   
     // Cache bound event handler functions
@@ -1135,14 +1132,6 @@ class QuickActions extends Overlay {
     const targetElement = this._getTarget();
     
     return element &amp;&amp; (this.contains(element) || this._elements.overlay.contains(element) || targetElement &amp;&amp; targetElement.contains(element));
-  }
-  
-  _onItemFocusIn(event) {
-    event.matchedTarget.classList.add(&apos;focus-ring&apos;);
-  }
-  
-  _onItemFocusOut(event) {
-    event.matchedTarget.classList.remove(&apos;focus-ring&apos;);
   }
   
   /** @ignore */

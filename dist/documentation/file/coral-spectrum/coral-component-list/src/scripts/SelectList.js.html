@@ -95,6 +95,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/CardBanner.js~CardBanner.html">CardBanner</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/CardBannerContent.js~CardBannerContent.html">CardBannerContent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/CardBannerHeader.js~CardBannerHeader.html">CardBannerHeader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/CardContent.js~CardContent.html">CardContent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/CardContext.js~CardContext.html">CardContext</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/CardDescription.js~CardDescription.html">CardDescription</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/CardProperty.js~CardProperty.html">CardProperty</a></span></span></li>
@@ -102,7 +103,6 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/CardSubtitle.js~CardSubtitle.html">CardSubtitle</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-card/src/scripts/CardTitle.js~CardTitle.html">CardTitle</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-CardAsset">CardAsset</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-CardContent">CardContent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-CardInfo">CardInfo</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-CardOverlay">CardOverlay</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-CardPropertyContent">CardPropertyContent</a></span></span></li>
@@ -458,7 +458,6 @@ class SelectList extends BaseComponent(HTMLElement) {
     // Attach events
     this._delegateEvents({
       &apos;scroll&apos;: &apos;_onScroll&apos;,
-      &apos;mouseenter&apos;: &apos;_onMouseEnter&apos;,
       &apos;capture:blur&apos;: &apos;_onBlur&apos;,
   
       &apos;click coral-selectlist-item&apos;: &apos;_onItemClick&apos;,
@@ -637,13 +636,6 @@ class SelectList extends BaseComponent(HTMLElement) {
     }
   }
   
-  _onMouseEnter() {
-    // Avoids having focus and hover state items
-    if (this.contains(document.activeElement)) {
-      document.activeElement.blur();
-    }
-  }
-  
   /** @private */
   _onBlur() {
     // required otherwise the latest item that had the focus would get it again instead of the selected item
@@ -787,6 +779,13 @@ class SelectList extends BaseComponent(HTMLElement) {
     // If a match has been found, focus the matched item
     if (newFocusItem !== undefined) {
       this._focusItem(newFocusItem);
+      
+      // Keyboard is being used so apply focus-ring
+      const focusedItem = this.querySelector(&apos;.focus-ring&apos;);
+      if (focusedItem) {
+        focusedItem.classList.remove(&apos;focus-ring&apos;);
+      }
+      newFocusItem.classList.add(&apos;focus-ring&apos;);
     }
   }
 
