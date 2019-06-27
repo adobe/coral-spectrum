@@ -138,7 +138,9 @@ const needsContextRE = /^[\x20\t\r\n\f]*[>+~]/;
 const restrictedTagNames = {
   INPUT: true,
   SELECT: true,
-  TEXTAREA: true
+  TEXTAREA: true,
+  // Support alphanumeric search
+  'CORAL-SELECTLIST-ITEM': true
 };
 
 /**
