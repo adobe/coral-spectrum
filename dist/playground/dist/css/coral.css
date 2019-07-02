@@ -12919,6 +12919,9 @@ coral-card-info > coral-tag._coral-Label {
 .coral--light a[href] > ._coral-Card:not(._coral-Card--quiet):hover {
   border-color: #cacaca;
 }
+.coral--light a[href] > ._coral-Card--quiet:hover coral-card-asset {
+  background-color: #e1e1e1;
+}
 .coral--light ._coral-Card-wrapper {
   background-color: #fff;
 }
@@ -13009,6 +13012,9 @@ coral-card-info > coral-tag._coral-Label {
 }
 .coral--lightest a[href] > ._coral-Card:not(._coral-Card--quiet):hover {
   border-color: #d3d3d3;
+}
+.coral--lightest a[href] > ._coral-Card--quiet:hover coral-card-asset {
+  background-color: #eaeaea;
 }
 .coral--lightest ._coral-Card-wrapper {
   background-color: #fff;
@@ -13101,6 +13107,9 @@ coral-card-info > coral-tag._coral-Label {
 .coral--dark a[href] > ._coral-Card:not(._coral-Card--quiet):hover {
   border-color: #5a5a5a;
 }
+.coral--dark a[href] > ._coral-Card--quiet:hover coral-card-asset {
+  background-color: #4a4a4a;
+}
 .coral--dark ._coral-Card-wrapper {
   background-color: #252525;
 }
@@ -13191,6 +13200,9 @@ coral-card-info > coral-tag._coral-Label {
 }
 .coral--darkest a[href] > ._coral-Card:not(._coral-Card--quiet):hover {
   border-color: #494949;
+}
+.coral--darkest a[href] > ._coral-Card--quiet:hover coral-card-asset {
+  background-color: #393939;
 }
 .coral--darkest ._coral-Card-wrapper {
   background-color: #080808;
@@ -16868,6 +16880,9 @@ coral-masonry-item {
 .coral--light ._coral-Masonry.is-selectable ._coral-Masonry-item:not(.is-selected) coral-card:not([variant="quiet"]):hover {
   border-color: #cacaca;
 }
+.coral--light ._coral-Masonry.is-selectable coral-card[variant="quiet"]:hover coral-card-asset {
+  background-color: #e1e1e1;
+}
 .coral--light ._coral-Masonry.is-selectable ._coral-Masonry-item.is-selected {
   border-color: #2680eb;
   box-shadow: 0 0 0 1px #2680eb;
@@ -16882,6 +16897,9 @@ coral-masonry-item {
 }
 .coral--lightest ._coral-Masonry.is-selectable ._coral-Masonry-item:not(.is-selected) coral-card:not([variant="quiet"]):hover {
   border-color: #d3d3d3;
+}
+.coral--lightest ._coral-Masonry.is-selectable coral-card[variant="quiet"]:hover coral-card-asset {
+  background-color: #eaeaea;
 }
 .coral--lightest ._coral-Masonry.is-selectable ._coral-Masonry-item.is-selected {
   border-color: #378ef0;
@@ -16898,6 +16916,9 @@ coral-masonry-item {
 .coral--dark ._coral-Masonry.is-selectable ._coral-Masonry-item:not(.is-selected) coral-card:not([variant="quiet"]):hover {
   border-color: #5a5a5a;
 }
+.coral--dark ._coral-Masonry.is-selectable coral-card[variant="quiet"]:hover coral-card-asset {
+  background-color: #4a4a4a;
+}
 .coral--dark ._coral-Masonry.is-selectable ._coral-Masonry-item.is-selected {
   border-color: #2680eb;
   box-shadow: 0 0 0 1px #2680eb;
@@ -16912,6 +16933,9 @@ coral-masonry-item {
 }
 .coral--darkest ._coral-Masonry.is-selectable ._coral-Masonry-item:not(.is-selected) coral-card:not([variant="quiet"]):hover {
   border-color: #494949;
+}
+.coral--darkest ._coral-Masonry.is-selectable coral-card[variant="quiet"]:hover coral-card-asset {
+  background-color: #393939;
 }
 .coral--darkest ._coral-Masonry.is-selectable ._coral-Masonry-item.is-selected {
   border-color: #1473e6;
@@ -21263,7 +21287,6 @@ table[is="coral-table"].is-ready {
   padding-left: 8px;
   margin-left: 8px;
   margin-top: 1px;
-  z-index: -1;
   transition: transform 125ms ease-in-out;
 }
 ._coral-Table-headerCell[sortable][sortabledirection="descending"] coral-table-headercell-content:after {
