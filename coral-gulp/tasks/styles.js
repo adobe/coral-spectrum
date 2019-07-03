@@ -58,7 +58,7 @@ module.exports = function(gulp) {
   });
   
   gulp.task('styles-vars', function(done) {
-    let content = ':root {\n';
+    let content = ':root {';
     const identifier = 'spectrum';
     const files = [
       path.join(root, 'node_modules/@adobe/spectrum-css/dist/vars/spectrum-global.css'),
@@ -85,7 +85,7 @@ module.exports = function(gulp) {
           }
         }
       });
-      content += output.join('\n');
+      content += `\n${output.join('\n')}`;
     });
     
     // @spectrum add missing vars
