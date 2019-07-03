@@ -63,7 +63,6 @@ module.exports = function(gulp) {
     const files = [
       path.join(root, 'node_modules/@adobe/spectrum-css/dist/vars/spectrum-global.css'),
       path.join(root, 'node_modules/@adobe/spectrum-css/dist/vars/spectrum-medium.css'),
-      path.join(root, 'node_modules/@adobe/spectrum-css/dist/vars/spectrum-large.css'),
       path.join(root, 'node_modules/@adobe/spectrum-css/dist/vars/spectrum-light.css'),
       path.join(root, 'node_modules/@adobe/spectrum-css/dist/vars/spectrum-lightest.css'),
       path.join(root, 'node_modules/@adobe/spectrum-css/dist/vars/spectrum-dark.css'),
