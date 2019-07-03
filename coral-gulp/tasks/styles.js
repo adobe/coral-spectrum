@@ -11,10 +11,13 @@
  */
 
 module.exports = function(gulp) {
+  const fs = require('fs');
   const path = require('path');
   const plumb = require('./plumb');
   const rename = require('gulp-rename');
   const stylus = require('gulp-stylus');
+  const css = require('gulp-postcss');
+  const vars = require('postcss-css-variables');
   const svgImport = require('stylus-svg');
   const modifyFile = require('gulp-modify-file');
   const util = require('../helpers/util');
@@ -37,6 +40,7 @@ module.exports = function(gulp) {
           svgImport()
         ]
       }))
+      .pipe(css([vars()]))
       .pipe(modifyFile((content) => {
         // Map Spectrum selectors with Coral ones
         spectrumConfig.forEach((selectors) => {
@@ -51,5 +55,45 @@ module.exports = function(gulp) {
       .pipe(gulp.dest(function (file) {
         return file.base;
       }));
+  });
+  
+  gulp.task('styles-vars', function(done) {
+    let content = ':root {\n';
+    const identifier = 'spectrum';
+    const files = [
+      path.join(root, 'node_modules/@adobe/spectrum-css/dist/vars/spectrum-global.css'),
+      path.join(root, 'node_modules/@adobe/spectrum-css/dist/vars/spectrum-medium.css'),
+      path.join(root, 'node_modules/@adobe/spectrum-css/dist/vars/spectrum-large.css'),
+      path.join(root, 'node_modules/@adobe/spectrum-css/dist/vars/spectrum-light.css'),
+      path.join(root, 'node_modules/@adobe/spectrum-css/dist/vars/spectrum-lightest.css'),
+      path.join(root, 'node_modules/@adobe/spectrum-css/dist/vars/spectrum-dark.css'),
+      path.join(root, 'node_modules/@adobe/spectrum-css/dist/vars/spectrum-darkest.css')
+    ];
+  
+    files.forEach((file) => {
+      const name = path.basename(file, path.extname(file));
+      const vars = fs.readFileSync(file, 'utf8');
+      const output = [];
+    
+      const lines = vars.split('\n');
+      lines.forEach((line) => {
+        if (line.trim().startsWith('--')) {
+          if (name === 'spectrum-global') {
+            output.push(line);
+          }
+          else {
+            output.push(line.replace(identifier, name));
+          }
+        }
+      });
+      content += output.join('\n');
+    });
+    
+    // @spectrum add missing vars
+    content = `${content}\n  --ui-icon-large-display: none;\n  --ui-icon-medium-display: block;\n}`;
+    
+    fs.writeFileSync(path.join(root, 'coral-theme-spectrum/src/styles/vars.css'), content);
+    
+    done();
   });
 };
