@@ -29,7 +29,7 @@ module.exports = function(gulp) {
   });
   
   gulp.task('server', function(done) {
-    spawn('npx http-server -p 9001 -c-1', [], {shell: true, stdio: 'inherit'});
+    global.watchServer = spawn('npx http-server -p 9001 -c-1', [], {shell: true, stdio: 'inherit'});
     done();
   });
   

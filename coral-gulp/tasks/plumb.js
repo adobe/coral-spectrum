@@ -13,6 +13,7 @@
 const plumber = require('gulp-plumber');
 
 function handleError(err) {
+  global.watchServer.kill();
   console.error(err.toString());
   process.exit();
 };
