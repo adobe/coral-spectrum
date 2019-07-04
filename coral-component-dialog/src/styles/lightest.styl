@@ -10,13 +10,13 @@
  * governing permissions and limitations under the License.
  */
 
-$dialog-nobackdrop-shadow = 0 1px 4px rgba(0, 0, 0, 0.15);
-$dialog-nobackdrop-border-color = rgb(211, 211, 211);
-$dialog-title-warning-color = rgb(242, 148, 35);
-$dialog-title-success-color = rgb(51, 171, 132);
-$dialog-title-info-color = rgb(55, 142, 240);
-$dialog-title-help-color = rgb(118, 118, 118);
+$dialog-nobackdrop-shadow = 0 1px 4px var(--spectrum-lightest-popover-shadow-color);
+$dialog-nobackdrop-border-color = var(--spectrum-lightest-popover-border-color);
+$dialog-title-warning-color = var(--spectrum-lightest-semantic-notice-color-status);
+$dialog-title-success-color = var(--spectrum-lightest-semantic-positive-color-status)
+$dialog-title-info-color = var(--spectrum-lightest-semantic-informative-color-status);
+$dialog-title-help-color = var(--spectrum-lightest-semantic-informative-color-status);
 
 .coral--lightest {
-  @import 'skin'
+  @import 'skin.styl'
 }

@@ -520,7 +520,7 @@ class ActionBar extends BaseComponent(HTMLElement) {
   connectedCallback() {
     super.connectedCallback();
     
-    this.classList.add(CLASSNAME);
+    this.classList.add(CLASSNAME, '_coral-Popover', 'is-open');
     
     // Move direct items into primary content zone
     this._moveDirectItemChildren();

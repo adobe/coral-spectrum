@@ -16,6 +16,9 @@
 @require '@adobe/spectrum-css/dist/components/tooltip/multiStops/dark.css';
 @require '@adobe/spectrum-css/dist/components/tooltip/multiStops/darkest.css';
 
+@require '../../../coral-theme-spectrum/src/styles/vars.css';
+
 ._coral-Tooltip {
-  transition: opacity 130ms ease-in-out, visibility 0ms linear 130ms;
+  transition: opacity var(--spectrum-global-animation-duration-100) ease-in-out,
+              visibility var(--spectrum-global-animation-duration-0) linear var(--spectrum-global-animation-duration-100);
 }

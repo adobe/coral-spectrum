@@ -10,9 +10,13 @@
  * governing permissions and limitations under the License.
  */
 
+@require '../../../coral-theme-spectrum/src/styles/vars.css';
+
 ._coral-CharacterCount {
-  display: inline-block;
-  padding: 7px 8px;
+  display: inline-flex;
+  align-items: center;
+  height: var(--spectrum-medium-textfield-height);
+  padding: 0 var(--spectrum-medium-textfield-counter-gap);
 }
 
 @require 'darkest';

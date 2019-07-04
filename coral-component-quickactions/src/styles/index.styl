@@ -16,6 +16,8 @@
 @require '@adobe/spectrum-css/dist/components/quickaction/multiStops/dark.css';
 @require '@adobe/spectrum-css/dist/components/quickaction/multiStops/darkest.css';
 
+@require '../../../coral-theme-spectrum/src/styles/vars.css';
+
 // prevents flash of un-styled content
 coral-quickactions,
 coral-quickactions-item {
@@ -23,7 +25,8 @@ coral-quickactions-item {
 }
 
 ._coral-QuickActions {
-  transition: opacity 130ms ease-in-out, visibility 0ms linear 130ms;
+  transition: opacity var(--spectrum-global-animation-duration-100) ease-in-out,
+              visibility var(--spectrum-global-animation-duration-0) linear var(--spectrum-global-animation-duration-100);
 }
 
 ._coral-QuickActions-item {
@@ -31,12 +34,12 @@ coral-quickactions-item {
 }
 
 ._coral-QuickActions-buttonList {
-// constrains the size of the list to 6 items 6x40=240
+  // constrains the size of the list to 6 items 6x40=240
   max-height: 240px;
   overflow-y: auto;
 }
 
 ._coral-QuickActions-item-more._coral-ActionButton,
 ._coral-QuickActions ._coral-QuickActions-moreOverlay + ._coral-ActionButton {
-  margin-left: 8px;
+  margin-left: var(--spectrum-medium-quickactions-button-gap-x);
 }

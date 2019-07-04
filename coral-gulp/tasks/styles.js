@@ -18,6 +18,7 @@ module.exports = function(gulp) {
   const stylus = require('gulp-stylus');
   const css = require('gulp-postcss');
   const vars = require('postcss-css-variables');
+  const rules = require('postcss-merge-rules');
   const svgImport = require('stylus-svg');
   const modifyFile = require('gulp-modify-file');
   const util = require('../helpers/util');
@@ -40,7 +41,10 @@ module.exports = function(gulp) {
           svgImport()
         ]
       }))
-      .pipe(css([vars()]))
+      .pipe(css([
+        vars(),
+        rules()
+      ]))
       .pipe(modifyFile((content) => {
         // Map Spectrum selectors with Coral ones
         spectrumConfig.forEach((selectors) => {

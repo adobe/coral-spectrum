@@ -10,26 +10,30 @@
  * governing permissions and limitations under the License.
  */
 
-$table-border-color = rgb(45, 45, 45);
-$table-row-focused-color = rgb(20, 115, 230);
+$table-border-color = var(--spectrum-darkest-table-border-color);
+$table-row-focused-color = var(--spectrum-darkest-selectlist-option-border-color-key-focus);
 
-$table-background-color = rgb(8, 8, 8);
+$table-background-color = var(--spectrum-darkest-table-background-color);
+// todo
+// Can't use rgba colors
 $table-background-color-hover = rgb(26, 26, 26);
 $table-background-color-selected = rgb(15, 32, 52);
 $table-background-color-selected-hover = rgb(20, 46, 76);
 
-$table-quiet-background-color-hover = rgba(239, 239, 239, 0.08);
-$table-quiet-background-color-selected = rgba(38, 128, 235, 0.2);
-$table-quiet-background-color-selected-hover = rgba(38, 128, 235, 0.3);
+$table-quiet-background-color-hover = var(--spectrum-darkest-table-quiet-row-background-color-hover);
+$table-quiet-background-color-selected = var(--spectrum-darkest-table-quiet-row-background-color-selected);
+$table-quiet-background-color-selected-hover = var(--spectrum-darkest-table-quiet-row-background-color-selected-hover);
 
-$table-header-cell-color = rgb(133, 133, 133);
-$table-header-cell-color-hover = rgb(180, 180, 180);
-$table-header-cell-color-focused = rgb(180, 180, 180);
+$table-header-cell-color = var(--spectrum-darkest-table-header-text-color);
+$table-header-cell-color-hover = var(--spectrum-darkest-table-header-text-color-hover);
+$table-header-cell-color-focused = var(--spectrum-darkest-table-header-text-color-key-focus);
 
-$table-header-cell-icon-color = rgb(105, 105, 105);
-$table-header-cell-icon-color-hover = rgb(133, 133, 133);
+// todo
+// Same as $table-header-cell-color and $table-header-cell-color-hover
+$table-header-cell-icon-color = rgb(162, 162, 162);
+$table-header-cell-icon-color-hover = rgb(239, 239, 239);
 
-$table-cell-color = rgb(180, 180, 180);
+$table-cell-color = var(--spectrum-darkest-table-cell-text-color);
 
 .coral--darkest {
   @import 'skin.styl'

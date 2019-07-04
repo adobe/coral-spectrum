@@ -10,6 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
+@require '../../../coral-theme-spectrum/src/styles/vars.css';
 @require '@adobe/spectrum-css/dist/components/calendar/index.css';
 @require '@adobe/spectrum-css/dist/components/calendar/multiStops/light.css';
 @require '@adobe/spectrum-css/dist/components/calendar/multiStops/lightest.css';
@@ -38,7 +39,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  transition: left 400ms;
+  transition: left ease-in-out var(--spectrum-global-animation-duration-500);
 }
 
 ._coral-Calendar-tableCell.is-outsideMonth {

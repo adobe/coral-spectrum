@@ -10,28 +10,28 @@
  * governing permissions and limitations under the License.
  */
 
-$table-border-color = rgb(62, 62, 62);
-$table-row-focused-color = rgb(38, 128, 235);
+$table-border-color = var(--spectrum-dark-table-border-color);
+$table-row-focused-color = var(--spectrum-dark-selectlist-option-border-color-key-focus);
 
-$table-background-color = rgb(37, 37, 37);
+$table-background-color = var(--spectrum-dark-table-background-color);
 $table-background-color-hover = rgb(51, 51, 51);
 $table-background-color-selected = rgb(40, 52, 66);
 $table-background-color-selected-hover = rgb(42, 63, 86);
 
-$table-quiet-background-color-hover = rgba(255, 255, 255, 0.07);
-$table-quiet-background-color-selected = rgba(55, 142, 240, 0.15);
-$table-quiet-background-color-selected-hover = rgba(55, 142, 240, 0.25);
+$table-quiet-background-color-hover = var(--spectrum-dark-table-quiet-row-background-color-hover);
+$table-quiet-background-color-selected = var(--spectrum-dark-table-quiet-row-background-color-selected);
+$table-quiet-background-color-selected-hover = var(--spectrum-dark-table-quiet-row-background-color-selected-hover);
 
-$table-thumbnail-background-color-selected = rgba(20, 115, 230, 0.4);
+$table-header-cell-color = var(--spectrum-dark-table-header-text-color);
+$table-header-cell-color-hover = var(--spectrum-dark-table-header-text-color-hover);
+$table-header-cell-color-focused = var(--spectrum-dark-table-header-text-color-key-focus);
 
-$table-header-cell-color = rgb(153, 153, 153);
-$table-header-cell-color-hover = rgb(205, 205, 205);
-$table-header-cell-color-focused = rgb(205, 205, 205);
+// todo
+// Same as $table-header-cell-color and $table-header-cell-color-hover
+$table-header-cell-icon-color = rgb(185, 185, 185);
+$table-header-cell-icon-color-hover = rgb(255, 255, 255);
 
-$table-header-cell-icon-color = rgb(123, 123, 123);
-$table-header-cell-icon-color-hover = rgb(153, 153, 153);
-
-$table-cell-color = rgb(205, 205, 205);
+$table-cell-color = var(--spectrum-dark-table-cell-text-color);
 
 .coral--dark {
   @import 'skin.styl'

@@ -16,6 +16,10 @@
 @require '@adobe/spectrum-css/dist/components/dropdown/multiStops/dark.css';
 @require '@adobe/spectrum-css/dist/components/dropdown/multiStops/darkest.css';
 
+@require '../../../coral-theme-spectrum/src/styles/vars.css';
+
+$select-icon-margin-x = 4px;
+
 coral-select-item {
   display: none;
 }
@@ -42,7 +46,7 @@ coral-select-item {
     display: none;
 
     width: 100%;
-    height: 32px;
+    height: var(--spectrum-medium-dropdown-height);
 
     // allows the size to match the size of the button
     -webkit-appearance: none;
@@ -57,14 +61,14 @@ coral-select-item {
 
     ._coral-Dropdown-label > coral-icon:first-child {
       vertical-align: text-top;
-      margin-right: 4px;
+      margin-right: $select-icon-margin-x;
       margin-top: 0;
       margin-bottom: 0;
     }
   }
 
   ._coral-Dropdown-invalidIcon {
-    margin-left: 4px;
+    margin-left: $select-icon-margin-x;
   }
 }
 

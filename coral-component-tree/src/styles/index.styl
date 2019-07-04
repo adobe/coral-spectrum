@@ -16,8 +16,10 @@
 @require '@adobe/spectrum-css/dist/components/treeview/multiStops/dark.css';
 @require '@adobe/spectrum-css/dist/components/treeview/multiStops/darkest.css';
 
+@require '../../../coral-theme-spectrum/src/styles/vars.css';
+
 ._coral-TreeView {
-  transition: height ease 250ms;
+  transition: height ease-in-out var(--spectrum-global-animation-duration-500);
   overflow: hidden;
 
 // @spectrum

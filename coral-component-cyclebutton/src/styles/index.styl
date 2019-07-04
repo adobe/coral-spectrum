@@ -10,6 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
+@require '../../../coral-theme-spectrum/src/styles/vars.css';
+
 // hidden by default
 coral-cyclebutton-item,
 coral-cyclebutton-action {
@@ -27,12 +29,13 @@ coral-cyclebutton-action {
   display: none;
   order: 1;
 
-  width: 10px;
-  height: 6px;
-
-  margin-left: 8px;
+  margin-left: var(--spectrum-medium-dropdown-icon-margin-left);
 }
 
 ._coral-CycleSelect--extended ._coral-CycleSelect-icon {
   display: inline-block;
+}
+
+._coral-CycleSelect--extended ._coral-CycleSelect-icon ~ coral-button-label:not(:empty) {
+  padding-right: 0;
 }

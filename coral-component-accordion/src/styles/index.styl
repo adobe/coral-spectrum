@@ -10,6 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
+@require '../../../coral-theme-spectrum/src/styles/vars.css';
 @require '@adobe/spectrum-css/dist/components/accordion/index.css';
 @require '@adobe/spectrum-css/dist/components/accordion/multiStops/light.css';
 @require '@adobe/spectrum-css/dist/components/accordion/multiStops/lightest.css';
@@ -20,7 +21,7 @@
 ._coral-Accordion-item:not(.is-open) {
   & > ._coral-Accordion-itemContent {
     display: block;
-    padding: 0 0 0 16px;
+    padding: 0 0 0 var(--spectrum-medium-accordion-item-padding);
   }
 
   & > ._coral-Accordion-itemIndicator {
@@ -32,7 +33,7 @@
 ._coral-Accordion--animated {
   ._coral-Accordion-itemContent {
     overflow-y: hidden;
-    transition: height ease 250ms;
+    transition: height ease-in-out var(--spectrum-global-animation-duration-500);
   }
 }
 

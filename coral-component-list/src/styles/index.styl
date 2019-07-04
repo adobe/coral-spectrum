@@ -16,6 +16,8 @@
 @require '@adobe/spectrum-css/dist/components/menu/multiStops/dark.css';
 @require '@adobe/spectrum-css/dist/components/menu/multiStops/darkest.css';
 
+@require '../../../coral-theme-spectrum/src/styles/vars.css';
+
 // @compat
 .coral-List-item + .coral-List-item {
   margin-top: 6px;
@@ -83,19 +85,19 @@
 // @compat
 ._coral-SelectList-group:before {
   display: block;
-  margin: 6px 0 0 0;
-  padding: 0 36px 0 12px;
-  font-size: 11px;
-  font-weight: 400;
+  margin: var(--spectrum-medium-global-dimension-size-75) 0 0 0;
+  padding: 0 var(--spectrum-medium-selectlist-padding-right) 0 var(--spectrum-medium-selectlist-padding-left);
+  font-size: var(--spectrum-medium-subheading-text-size);
+  font-weight: var(--spectrum-medium-selectlist-option-text-font-weight);
   line-height: 20px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  text-transform: var(--spectrum-medium-subheading-text-transform);
+  letter-spacing: var(--spectrum-medium-subheading-text-letter-spacing);
   content: attr(label);
 }
 
 ._coral-SelectList-loading {
   position: relative;
-  height: 32px;
+  height: var(--spectrum-medium-circleloader-medium-height);
 }
 
 @require 'light';

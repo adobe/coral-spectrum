@@ -10,9 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-$colorinput-swatch-button-icon-color = white;
-$colorinput-button-icon-color = rgba(0, 0, 0, .4);
-$colorinput-button-hover-background-color = rgba(255, 255, 255, 0.1);
+$colorinput-swatch-button-icon-color = var(--spectrum-light-alias-icon-color-over-background);
+$colorinput-button-icon-color = var(--spectrum-light-alias-icon-color);
 
 ._coral-ColorInput-propertiesSubview {
   border-right-color: $colorinput-propertiessubview-border;
@@ -48,23 +47,6 @@ $colorinput-button-hover-background-color = rgba(255, 255, 255, 0.1);
   }
 }
 
-._coral-ColorInput-swatch button,
-._coral-ColorInput-preview:not([disabled]) {
-  border-color: $colorinput-button-border-color;
-
-  &:hover {
-    border-color: $colorinput-button-border-color;
-
-    &:after {
-      background-color: $colorinput-button-hover-background-color;
-    }
-  }
-}
-
 ._coral-ColorInput-swatch-novalue:hover {
   background-color: transparent;
-}
-
-._coral-ColorInput-preview[disabled] > ._coral-Icon {
-  color: $colorinput-button-icon-color;
 }

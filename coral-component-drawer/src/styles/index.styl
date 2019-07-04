@@ -10,6 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
+@require '../../../coral-theme-spectrum/src/styles/vars.css';
+
 ._coral-Drawer {
   display: block;
   position: relative;
@@ -32,6 +34,7 @@
   height: 100%;
   padding: 0;
   min-width: 0;
+  min-height: 0;
 
   &:before,
   &:after  {
@@ -54,7 +57,7 @@
 
 ._coral-Drawer-slider {
   overflow: hidden;
-  transition: height ease 250ms;
+  transition: height ease-in-out var(--spectrum-global-animation-duration-500);
 }
 
 ._coral-Drawer--down {

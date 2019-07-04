@@ -16,6 +16,8 @@
 @require '@adobe/spectrum-css/dist/components/popover/multiStops/dark.css';
 @require '@adobe/spectrum-css/dist/components/popover/multiStops/darkest.css';
 
+@require '../../../coral-theme-spectrum/src/styles/vars.css';
+
 // Prevent popover flashing on page load
 coral-popover {
   display: none;
@@ -31,7 +33,8 @@ coral-popover-separator {
 }
 
 ._coral-Popover {
-  transition: opacity 130ms ease-in-out, visibility 0ms linear 130ms;
+  transition: opacity var(--spectrum-global-animation-duration-100) ease-in-out,
+              visibility var(--spectrum-global-animation-duration-0) linear var(--spectrum-global-animation-duration-100);
 
   // Increase min-width for basic popover
   &:not(._coral-Popover--dialog) {

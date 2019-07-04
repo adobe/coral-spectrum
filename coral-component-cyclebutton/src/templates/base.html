@@ -5,7 +5,7 @@
   // Don't wait for button MO to pick up the label
   this.button._elements.label = this.label;
   // Render chevron icon
-  this.button.insertAdjacentHTML('afterbegin', data.Icon._renderSVG('spectrum-css-icon-ChevronDownMedium', ['_coral-CycleSelect-icon']));
+  this.button.insertAdjacentHTML('afterbegin', data.Icon._renderSVG('spectrum-css-icon-ChevronDownMedium', ['_coral-CycleSelect-icon', '_coral-UIIcon-ChevronDownMedium']));
 </js>
 <coral-popover tracking="off" smart id="{{data.commons.getUID()}}" handle="overlay" returnfocus="on" focusonshow="coral-selectlist" trapfocus="on" placement="bottom" lengthoffset="10">
   <coral-selectlist tracking="off" class="_coral-CycleSelect-list" handle="selectList" id="{{data.commons.getUID()}}"></coral-selectlist>

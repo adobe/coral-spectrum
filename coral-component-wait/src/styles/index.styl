@@ -16,21 +16,23 @@
 @require '@adobe/spectrum-css/dist/components/circleloader/multiStops/dark.css';
 @require '@adobe/spectrum-css/dist/components/circleloader/multiStops/darkest.css';
 
+@require '../../../coral-theme-spectrum/src/styles/vars.css';
+
 ._coral-CircleLoader--centered {
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-left: -16px;
-  margin-top: -16px;
+  margin-left: calc(-var(--spectrum-medium-circleloader-medium-width) / 2);
+  margin-top: calc(-var(--spectrum-medium-circleloader-medium-height) / 2);
 
   &._coral-CircleLoader--small {
-    margin-left: -8px;
-    margin-top: -8px;
+    margin-left: calc(-var(--spectrum-medium-circleloader-small-width) / 2);
+    margin-top: calc(-var(--spectrum-medium-circleloader-small-height) / 2);
   }
 
   &._coral-CircleLoader--large,
   &._coral-CircleLoader--fullpage {
-    margin-left: -32px;
-    margin-top: -32px;
+    margin-left: calc(-var(--spectrum-medium-circleloader-large-width) / 2);
+    margin-top: calc(-var(--spectrum-medium-circleloader-large-height) / 2);
   }
 }

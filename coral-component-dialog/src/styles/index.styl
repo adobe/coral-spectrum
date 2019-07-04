@@ -16,6 +16,8 @@
 @require '@adobe/spectrum-css/dist/components/dialog/multiStops/dark.css';
 @require '@adobe/spectrum-css/dist/components/dialog/multiStops/darkest.css';
 
+@require '../../../coral-theme-spectrum/src/styles/vars.css';
+
 // Prevent dialog flashing on page load
 coral-dialog {
   display: none;
@@ -23,7 +25,7 @@ coral-dialog {
 
 // @compat
 ._coral-Dialog--noBackdrop {
-  border: 1px solid;
+  border: var(--spectrum-medium-popover-border-size) solid;
 }
 
 // @compat

@@ -10,26 +10,30 @@
  * governing permissions and limitations under the License.
  */
 
-$table-border-color = rgb(234, 234, 234);
-$table-row-focused-color = rgb(55, 142, 240);
+$table-border-color = var(--spectrum-lightest-table-border-color);
+$table-row-focused-color = var(--spectrum-lightest-selectlist-option-border-color-key-focus);
 
-$table-background-color = rgb(255, 255, 255);
+$table-background-color = var(--spectrum-lightest-table-background-color);
+// todo
+// Can't use rgba colors
 $table-background-color-hover = rgb(243, 243, 243);
 $table-background-color-selected = rgb(234, 242, 253);
 $table-background-color-selected-hover = rgb(213, 230, 250);
 
-$table-quiet-background-color-hover = rgba(50, 50, 50, 0.06);
-$table-quiet-background-color-selected = rgba(38, 128, 235, 0.1);
-$table-quiet-background-color-selected-hover = rgba(38, 128, 235, 0.2);
+$table-quiet-background-color-hover = var(--spectrum-lightest-table-quiet-row-background-color-hover);
+$table-quiet-background-color-selected = var(--spectrum-lightest-table-quiet-row-background-color-selected);
+$table-quiet-background-color-selected-hover = var(--spectrum-lightest-table-quiet-row-background-color-selected-hover);
 
-$table-header-cell-color = rgb(118, 118, 118);
-$table-header-cell-color-hover = rgb(80, 80, 80);
-$table-header-cell-color-focused = rgb(80, 80, 80);
+$table-header-cell-color = var(--spectrum-lightest-table-header-text-color);
+$table-header-cell-color-hover = var(--spectrum-lightest-table-header-text-color-hover);
+$table-header-cell-color-focused = var(--spectrum-lightest-table-header-text-color-key-focus);
 
-$table-header-cell-icon-color = rgb(149, 149, 149);
-$table-header-cell-icon-color-hover = rgb(118, 118, 118);
+// todo
+// Same as $table-header-cell-color and $table-header-cell-color-hover
+$table-header-cell-icon-color = rgb(116, 116, 116);
+$table-header-cell-icon-color-hover = rgb(50, 50, 50);
 
-$table-cell-color = rgb(80, 80, 80);
+$table-cell-color = var(--spectrum-lightest-table-cell-text-color);
 
 .coral--lightest {
   @import 'skin.styl'

@@ -10,16 +10,18 @@
  * governing permissions and limitations under the License.
  */
 
+@require '../../../coral-theme-spectrum/src/styles/vars.css';
+
 $colorinput-transparency-url = './embed/Transparency.svg';
 $colorinput-blank-url = './embed/ColorBlank.svg';
 
 $colorinput-overlay-padding = 15px;
 
-$colorinput-button-border-radius = 4px;
-$colorinput-button-border-width = 1px;
+$colorinput-button-border-radius = var(--spectrum-medium-actionbutton-border-radius);
+$colorinput-button-border-width = var(--spectrum-medium-actionbutton-border-size)
 
 $colorinput-properties-subview-right-padding = 24px;
-$colorinput-properties-subview-border = 2px;
+$colorinput-properties-subview-border = var(--spectrum-medium-rule-medium-height);
 
 $colorinput-edit-hex-width = 65px;
 $colorinput-edit-hex-left-margin = 20px;
@@ -85,8 +87,8 @@ coral-colorinput-item {
 
   ._coral-ColorInput-preview {
     position: relative;
-    width: 48px;
-    height: 48px;
+    width: var(--spectrum-medium-textfield-min-width);
+    height: var(--spectrum-medium-textfield-min-width);
     border-width: $colorinput-button-border-width;
   }
 }
@@ -301,6 +303,10 @@ coral-colorinput-item {
   display: inline-block;
   width: $colorinput-slider-width;
   margin: $colorinput-slider-margin;
+
+  ._coral-Slider-labelContainer {
+    padding: 0;
+  }
 }
 
 ._coral-ColorInput-sliderBar {

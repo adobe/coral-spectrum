@@ -16,10 +16,13 @@
 @require '@adobe/spectrum-css/dist/components/banner/multiStops/dark.css';
 @require '@adobe/spectrum-css/dist/components/banner/multiStops/darkest.css';
 
-$card-border-radius = 4px;
+@require '../../../coral-theme-spectrum/src/styles/vars.css';
+
+$card-border-size = var(--spectrum-medium-card-border-size);
+$card-border-radius = var(--spectrum-medium-card-border-radius);
 $card-overlay-height = 96px;
 $card-stack-offset = 3px;
-$card-width = 240px; // borders are not included
+$card-width = var(--spectrum-medium-card-min-width); // borders are not included
 $card-min-height = 175px; // borders are not included
 $card-condensed-height = 229px;
 $card-condensed-wrapper-height = 160px;
@@ -36,8 +39,8 @@ $card-asset-lowResolution-padding = 16px;
   position: relative;
   vertical-align: top;
 
-  border: 1px solid;
-  border-radius: 4px;
+  border: $card-border-size solid;
+  border-radius: $card-border-radius;
 
   min-height: $card-min-height;
   min-width: $card-width;
@@ -58,9 +61,9 @@ $card-asset-lowResolution-padding = 16px;
     position: absolute;
     height: 3px;
     pointer-events: none;
-    border-bottom: 1px solid;
-    border-left: 1px solid;
-    border-right: 1px solid;
+    border-bottom: $card-border-size solid;
+    border-left: $card-border-size solid;
+    border-right: $card-border-size solid;
     border-bottom-left-radius: $card-border-radius;
     border-bottom-right-radius: $card-border-radius;
   }
@@ -93,10 +96,7 @@ $card-asset-lowResolution-padding = 16px;
     height: $card-condensed-wrapper-height;
     width: 100%;
 
-    border-top-left-radius: $card-border-radius;
-    border-top-right-radius: $card-border-radius;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+    border-radius: $card-border-radius $card-border-radius 0 0;
   }
 
   // hidden cause otherwise it would not fit
@@ -119,7 +119,7 @@ $card-asset-lowResolution-padding = 16px;
 
 ._coral-Card--condensed {
   ._coral-Card-wrapper {
-    border-bottom: 1px solid;
+    border-bottom: $card-border-size solid;
   }
 }
 
@@ -210,23 +210,23 @@ coral-card-asset {
 
 ._coral-Card--quiet {
   ._coral-Card-content {
-    padding: 20px 0 !important;
+    padding: var(--spectrum-medium-card-body-padding-top) 0 !important;
   }
 
   coral-card-asset {
-    border-radius: 4px;
+    border-radius: $card-border-radius;
   }
 }
 
 // properties
 coral-card-propertylist {
   display: block;
-  padding-top: 14px;
+  padding-top: var(--spectrum-medium-card-body-content-height);
 
   > ._coral-Card-property {
     display: inline-flex;
     align-items: center;
-    min-height: 18px;
+    min-height: var(--spectrum-medium-card-body-header-height);
     float: left;
     margin-right: 6px;
     margin-bottom: 0;
@@ -234,12 +234,12 @@ coral-card-propertylist {
 }
 
 ._coral-Card-description {
-  padding-top: 14px;
+  padding-top: var(--spectrum-medium-card-body-content-height);
 }
 
 coral-card-description:first-of-type,
 coral-card-propertylist:first-of-type {
-  border-top-width: 1px;
+  border-top-width: $card-border-size;
   border-top-style: solid;
 }
 
@@ -255,12 +255,12 @@ coral-card-overlay {
   right: 0;
   top: -1*$card-overlay-height;
   height: $card-overlay-height;
-  font-size: 12px;
+  font-size: var(--spectrum-medium-body-small-text-size);
 }
 
 ._coral-Card-content {
   display: block;
-  padding: 20px 24px !important;
+  padding-top: var(--spectrum-medium-card-body-padding-top) var(--spectrum-medium-card-body-padding-left) !important;
 }
 
 coral-card-overlay:empty,
@@ -293,7 +293,7 @@ coral-card-propertylist:empty,
 ._coral-Card {
   ._coral-Card-title,
   ._coral-Card-context {
-    font-weight: 400;
+    font-weight: var(--spectrum-medium-body-base-text-font-weight);
     margin: 0;
   }
 
@@ -304,21 +304,21 @@ coral-card-propertylist:empty,
 }
 
 ._coral-Card-subtitle {
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-size: var(--spectrum-medium-detail-text-size);
+  letter-spacing: var(--spectrum-medium-detail-text-letter-spacing);
+  text-transform: var(--spectrum-medium-detail-text-transform);
 }
 
 ._coral-Card-context + ._coral-Card-description,
 ._coral-Card-title + ._coral-Card-description {
-  margin-top: 20px;
+  margin-top: var(--spectrum-medium-card-body-padding-top);
 }
 
 ._coral-Card-context + coral-card-propertylist,
 ._coral-Card-title + coral-card-propertylist,
 ._coral-Card-subtitle + coral-card-propertylist,
 ._coral-Card-description + coral-card-propertylist {
-  margin-top: 20px;
+  margin-top: var(--spectrum-medium-card-body-padding-top);
 }
 
 ._coral-Banner--corner {

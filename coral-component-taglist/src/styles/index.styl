@@ -22,6 +22,8 @@
 @require '@adobe/spectrum-css/dist/components/label/multiStops/dark.css';
 @require '@adobe/spectrum-css/dist/components/label/multiStops/darkest.css';
 
+@require '../../../coral-theme-spectrum/src/styles/vars.css';
+
 // Support multiline
 ._coral-Tags-item--multiline {
   height: auto;
@@ -29,7 +31,7 @@
 
 // @spectrum
 ._coral-Label {
-  margin: 4px 4px;
+  margin: calc(var(--spectrum-medium-taggroup-tag-gap-x) / 2);
 }
 
 @require 'light';

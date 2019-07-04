@@ -96,6 +96,7 @@
     "moment": "^2.24.0",
     "plugin-error": "^1.0.1",
     "postcss-css-variables": "^0.13.0",
+    "postcss-merge-rules": "^4.0.3",
     "request": "^2.81.0",
     "rollup": "^1.10.0",
     "rollup-plugin-babel": "^4.3.2",
