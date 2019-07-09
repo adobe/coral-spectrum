@@ -52,6 +52,7 @@ export {Select} from './coral-component-select';
 export {Search} from './coral-component-search';
 export {Slider, RangedSlider} from './coral-component-slider';
 export {SplitButton} from './coral-component-splitbutton';
+export {Status} from './coral-component-status';
 export {StepList, Step} from './coral-component-steplist';
 export {Switch} from './coral-component-switch';
 export {Table} from './coral-component-table';

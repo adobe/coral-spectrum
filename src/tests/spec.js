@@ -54,6 +54,7 @@ import '../../coral-component-select/src/tests/spec';
 import '../../coral-component-shell/src/tests/spec';
 import '../../coral-component-slider/src/tests/spec';
 import '../../coral-component-splitbutton/src/tests/spec';
+import '../../coral-component-status/src/tests/spec';
 import '../../coral-component-steplist/src/tests/spec';
 import '../../coral-component-switch/src/tests/spec';
 import '../../coral-component-table/src/tests/spec';
