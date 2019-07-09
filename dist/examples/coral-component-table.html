@@ -571,41 +571,45 @@
       <table is="coral-table">
         <thead is="coral-table-head">
           <tr is="coral-table-row">
-            <th is="coral-table-headercell" colspan="2"></th>
-            <th is="coral-table-headercell">EN_AE</th>
-            <th is="coral-table-headercell">EN_BE</th>
-            <th is="coral-table-headercell">EN_CA</th>
+            <th is="coral-table-headercell">Version A</th>
+            <th is="coral-table-headercell">Version B</th>
+            <th is="coral-table-headercell">Version C</th>
           </tr>
         </thead>
         <tbody is="coral-table-body">
           <tr is="coral-table-row" selectable>
-            <th is="coral-table-headercell">
-              <coral-icon icon="folder"></coral-icon>
-            </th>
-            <th is="coral-table-headercell">Men's</th>
+            <td is="coral-table-cell" coral-table-cellselect>
+              <coral-checkbox></coral-checkbox>
+              <h3 class="coral-Heading coral-Heading--5">Demo</h3>
+            </td>
+            <td is="coral-table-cell" coral-table-cellselect>
+              <h3 class="coral-Heading coral-Heading--5">Demo</h3>
+            </td>
+            <td is="coral-table-cell" coral-table-cellselect>
+              <h3 class="coral-Heading coral-Heading--5">Demo</h3>
+            </td>
+          </tr>
+          <tr is="coral-table-row" selectable multiple>
             <td is="coral-table-cell">
-              <coral-checkbox coral-table-cellselect></coral-checkbox>
-              LIVE COPY UP TO DATE</td>
-            <td is="coral-table-cell">LIVE COPY DOES NOT EXIST</td>
-            <td is="coral-table-cell">LIVE COPY MODIFIED</td>
+              <coral-checkbox coral-table-cellselect>Update</coral-checkbox>
+            </td>
+            <td is="coral-table-cell">
+              <coral-checkbox coral-table-cellselect>Update</coral-checkbox>
+            </td>
+            <td is="coral-table-cell">
+              <coral-checkbox coral-table-cellselect>Update</coral-checkbox>
+            </td>
           </tr>
           <tr is="coral-table-row" selectable>
-            <th is="coral-table-headercell">
-              <coral-icon icon="folder"></coral-icon>
-            </th>
-            <th is="coral-table-headercell">Women's</th>
-            <td is="coral-table-cell">LIVE COPY DOES NOT EXIST</td>
-            <td is="coral-table-cell">LIVE COPY UP TO DATE</td>
-            <td is="coral-table-cell">LIVE COPY MODIFIED</td>
-          </tr>
-          <tr is="coral-table-row" selectable>
-            <th is="coral-table-headercell">
-              <coral-icon icon="folder"></coral-icon>
-            </th>
-            <th is="coral-table-headercell">Equipment</th>
-            <td is="coral-table-cell">LIVE COPY UP TO DATE</td>
-            <td is="coral-table-cell">LIVE COPY MODIFIED</td>
-            <td is="coral-table-cell">LIVE COPY DOES NOT EXIST</td>
+            <td is="coral-table-cell">
+              <coral-checkbox coral-table-cellselect>Publish</coral-checkbox>
+            </td>
+            <td is="coral-table-cell">
+              <coral-checkbox coral-table-cellselect>Publish</coral-checkbox>
+            </td>
+            <td is="coral-table-cell">
+              <coral-checkbox coral-table-cellselect>Publish</coral-checkbox>
+            </td>
           </tr>
         </tbody>
       </table>

@@ -1014,6 +1014,18 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "@adobe/coral-spectrum~status",
+    "class/coral-spectrum/coral-component-status/src/scripts/Status.js~Status.html",
+    "<span>Status</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
+  ],
+  [
+    "@adobe/coral-spectrum~statuslabel",
+    "function/index.html#static-function-StatusLabel",
+    "<span>StatusLabel</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "function"
+  ],
+  [
     "@adobe/coral-spectrum~step",
     "class/coral-spectrum/coral-component-steplist/src/scripts/Step.js~Step.html",
     "<span>Step</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
@@ -6922,6 +6934,66 @@ window.esdocSearchIndex = [
     "typedef/index.html#static-typedef-SplitButtonVariantEnum",
     "coral-spectrum/coral-component-splitbutton/src/scripts/SplitButton.js~SplitButtonVariantEnum",
     "typedef"
+  ],
+  [
+    "coral-spectrum/coral-component-status/src/scripts/status.js",
+    "file/coral-spectrum/coral-component-status/src/scripts/Status.js.html",
+    "coral-spectrum/coral-component-status/src/scripts/Status.js",
+    "file"
+  ],
+  [
+    "coral-spectrum/coral-component-status/src/scripts/status.js~status#color",
+    "class/coral-spectrum/coral-component-status/src/scripts/Status.js~Status.html#instance-member-color",
+    "coral-spectrum/coral-component-status/src/scripts/Status.js~Status#color",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-status/src/scripts/status.js~status#disabled",
+    "class/coral-spectrum/coral-component-status/src/scripts/Status.js~Status.html#instance-member-disabled",
+    "coral-spectrum/coral-component-status/src/scripts/Status.js~Status#disabled",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-status/src/scripts/status.js~status#label",
+    "class/coral-spectrum/coral-component-status/src/scripts/Status.js~Status.html#instance-member-label",
+    "coral-spectrum/coral-component-status/src/scripts/Status.js~Status#label",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-status/src/scripts/status.js~status#variant",
+    "class/coral-spectrum/coral-component-status/src/scripts/Status.js~Status.html#instance-member-variant",
+    "coral-spectrum/coral-component-status/src/scripts/Status.js~Status#variant",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-status/src/scripts/status.js~status.color",
+    "class/coral-spectrum/coral-component-status/src/scripts/Status.js~Status.html#static-member-color",
+    "coral-spectrum/coral-component-status/src/scripts/Status.js~Status.color",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-status/src/scripts/status.js~status.variant",
+    "class/coral-spectrum/coral-component-status/src/scripts/Status.js~Status.html#static-member-variant",
+    "coral-spectrum/coral-component-status/src/scripts/Status.js~Status.variant",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-status/src/scripts/status.js~statuscolorenum",
+    "typedef/index.html#static-typedef-StatusColorEnum",
+    "coral-spectrum/coral-component-status/src/scripts/Status.js~StatusColorEnum",
+    "typedef"
+  ],
+  [
+    "coral-spectrum/coral-component-status/src/scripts/status.js~statusvariantenum",
+    "typedef/index.html#static-typedef-StatusVariantEnum",
+    "coral-spectrum/coral-component-status/src/scripts/Status.js~StatusVariantEnum",
+    "typedef"
+  ],
+  [
+    "coral-spectrum/coral-component-status/src/scripts/statuslabel.js",
+    "file/coral-spectrum/coral-component-status/src/scripts/StatusLabel.js.html",
+    "coral-spectrum/coral-component-status/src/scripts/StatusLabel.js",
+    "file"
   ],
   [
     "coral-spectrum/coral-component-steplist/src/scripts/step.js",

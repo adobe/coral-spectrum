@@ -1,7 +1,7 @@
 {
-  "coverage": "66.38%",
-  "expectCount": 3451,
-  "actualCount": 2291,
+  "coverage": "66.32%",
+  "expectCount": 3471,
+  "actualCount": 2302,
   "files": {
     "coral-spectrum/coral-base-button/src/scripts/BaseButton.js": {
       "expectCount": 40,
@@ -1813,6 +1813,26 @@
         114
       ]
     },
+    "coral-spectrum/coral-component-status/src/scripts/Status.js": {
+      "expectCount": 19,
+      "actualCount": 10,
+      "undocumentLines": [
+        67,
+        68,
+        74,
+        79,
+        99,
+        117,
+        137,
+        173,
+        201
+      ]
+    },
+    "coral-spectrum/coral-component-status/src/scripts/StatusLabel.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
     "coral-spectrum/coral-component-steplist/src/scripts/Step.js": {
       "expectCount": 16,
       "actualCount": 9,
@@ -1910,26 +1930,26 @@
         174,
         180,
         279,
-        306,
-        348,
-        371,
-        421,
-        462,
-        510,
-        1251,
-        1293,
-        1507,
-        1573,
-        1592,
-        1598,
-        1615,
-        1793,
-        1854,
-        2242,
-        2266,
-        2332,
-        2395,
-        2399
+        298,
+        340,
+        363,
+        413,
+        454,
+        502,
+        1231,
+        1273,
+        1487,
+        1553,
+        1572,
+        1578,
+        1595,
+        1773,
+        1834,
+        2222,
+        2246,
+        2312,
+        2392,
+        2396
       ]
     },
     "coral-spectrum/coral-component-table/src/scripts/TableBody.js": {
@@ -2316,13 +2336,13 @@
         25,
         28,
         45,
-        250,
-        252,
-        265,
-        268,
-        270,
-        275,
-        881
+        251,
+        253,
+        266,
+        269,
+        271,
+        276,
+        882
       ]
     },
     "coral-spectrum/coral-utils/src/scripts/Events.js": {

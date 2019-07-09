@@ -295,6 +295,10 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-SliderOrientationEnum">SliderOrientationEnum</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-splitbutton-src-scripts">coral-component-splitbutton/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-splitbutton/src/scripts/SplitButton.js~SplitButton.html">SplitButton</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-SplitButtonVariantEnum">SplitButtonVariantEnum</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-status-src-scripts">coral-component-status/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-status/src/scripts/Status.js~Status.html">Status</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-StatusLabel">StatusLabel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StatusColorEnum">StatusColorEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StatusVariantEnum">StatusVariantEnum</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-steplist-src-scripts">coral-component-steplist/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-steplist/src/scripts/Step.js~Step.html">Step</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-steplist/src/scripts/StepLabel.js~StepLabel.html">StepLabel</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-steplist/src/scripts/StepList.js~StepList.html">StepList</a></span></span></li>
@@ -680,14 +684,6 @@ class Table extends BaseComponent(HTMLTableElement) {
   
     this.classList.remove(...ALL_VARIANT_CLASSES);
     this.classList.add(`${CLASSNAME}--${this._variant}`);
-  
-    // @compat
-    const body = this.body;
-    if (body) {
-      const rows = getRows([body]);
-      // Use the first column as selection column
-      rows.forEach(row =&gt; this._toggleSelectionCheckbox(row));
-    }
   }
   
   /**
@@ -1590,27 +1586,15 @@ class Table extends BaseComponent(HTMLTableElement) {
     
     if (handle) {
       if (state === &apos;checked&apos;) {
-        if (typeof handle.indeterminate !== &apos;undefined&apos;) {
-          handle.indeterminate = false;
-        }
-        
-        if (typeof handle.checked !== &apos;undefined&apos;) {
-          handle.checked = true;
-        }
+        handle.removeAttribute(&apos;indeterminate&apos;);
+        handle.setAttribute(&apos;checked&apos;, &apos;&apos;);
       }
       else if (state === &apos;unchecked&apos;) {
-        if (typeof handle.indeterminate !== &apos;undefined&apos;) {
-          handle.indeterminate = false;
-        }
-        
-        if (typeof handle.checked !== &apos;undefined&apos;) {
-          handle.checked = false;
-        }
+        handle.removeAttribute(&apos;indeterminate&apos;);
+        handle.removeAttribute(&apos;checked&apos;);
       }
       else if (state === &apos;indeterminate&apos;) {
-        if (typeof handle.indeterminate !== &apos;undefined&apos;) {
-          handle.indeterminate = true;
-        }
+        handle.setAttribute(&apos;indeterminate&apos;, &apos;&apos;);
       }
     }
   }
@@ -2729,15 +2713,8 @@ class Table extends BaseComponent(HTMLTableElement) {
   
   // @compat
   _toggleSelectionCheckbox(row) {
-    // Use the first column as selection column
-    const cell = getContentCells(row)[0];
-    
-    // On condition handle attribute is set
-    if (cell &amp;&amp; cell.hasAttribute(&apos;coral-table-rowselect&apos;)) {
-      cell.classList.add(&apos;_coral-Table-cell--check&apos;);
-      
-      cell.removeAttribute(&apos;coral-table-rowselect&apos;);
-  
+    const cells = getContentCells(row);
+    const renderCheckbox = (cell, process) =&gt; {
       // Support cloneNode
       cell._checkbox = cell._checkbox || cell.querySelector(&apos;coral-checkbox&apos;);
       
@@ -2745,16 +2722,40 @@ class Table extends BaseComponent(HTMLTableElement) {
       if (!cell._checkbox) {
         cell._checkbox = new Checkbox();
       }
+      
+      process(cell._checkbox);
   
-      // Identifies as selection handle
-      cell._checkbox.setAttribute(&apos;coral-table-rowselect&apos;, &apos;&apos;);
-      
-      // Sync selection
-      cell._checkbox[row.selected ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;checked&apos;, &apos;&apos;);
-      
       // Add checkbox
       cell.insertBefore(cell._checkbox, cell.firstChild);
-    }
+    };
+    
+    cells.forEach((cell, i) =&gt; {
+      const isRowSelect = i === 0 &amp;&amp; cell.hasAttribute(&apos;coral-table-rowselect&apos;);
+      const isCellSelect = cell.hasAttribute(&apos;coral-table-cellselect&apos;) || cell.querySelector(&apos;coral-checkbox[coral-table-cellselect]&apos;);
+      
+      if (isRowSelect || isCellSelect) {
+        let handle;
+        if (isRowSelect) { handle = &apos;coral-table-rowselect&apos;; }
+        if (isCellSelect) { handle = &apos;coral-table-cellselect&apos;; }
+        
+        renderCheckbox(cell, (checkbox) =&gt; {
+          // Define selection handle
+          if (isRowSelect) {
+            cell.classList.add(&apos;_coral-Table-cell--check&apos;);
+            cell.removeAttribute(handle);
+            checkbox.setAttribute(handle, &apos;&apos;);
+          }
+          else {
+            cell.setAttribute(handle, &apos;&apos;);
+            checkbox.removeAttribute(handle);
+          }
+    
+          // Sync selection
+          const isSelected = (isRowSelect ? row : cell).hasAttribute(&apos;selected&apos;);
+          checkbox[isSelected ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;checked&apos;, &apos;&apos;);
+        });
+      }
+    });
   }
   
   /** @private */
@@ -2903,6 +2904,13 @@ class Table extends BaseComponent(HTMLTableElement) {
       column._doSort(true);
     }
   
+    // @compat
+    if (this.body) {
+      const rows = getRows([this.body]);
+      // Use the first column as selection column
+      rows.forEach(row =&gt; this._toggleSelectionCheckbox(row));
+    }
+    
     // Mark table as ready
     if (!this.head || this.head &amp;&amp; !this.head.hasAttribute(&apos;sticky&apos;)) {
       this.classList.add(IS_READY);
