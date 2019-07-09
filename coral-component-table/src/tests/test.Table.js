@@ -2101,6 +2101,29 @@ describe('Table', function() {
           done();
         });
       });
+      
+      it('should render a selectable checkbox (row selection)', function() {
+        const table = helpers.build(window.__html__['Table.selectable.rowhandle.html']);
+        const items = table.items.getAll();
+        
+        expect(items[0].querySelector('coral-checkbox:first-child[coral-table-rowselect][checked]')).to.not.equal(null);
+        expect(items[1].querySelector('coral-checkbox[coral-table-rowselect][checked]')).to.not.equal(null);
+        expect(items[2].querySelector('coral-checkbox[coral-table-rowselect][checked]')).to.not.equal(null);
+      });
+  
+      it('should render a selectable checkbox (cell selection)', function() {
+        const table = helpers.build(window.__html__['Table.selectable.cellhandle.html']);
+        const row = table.items.first();
+        const items = row.items.getAll();
+        
+        items.forEach((item) => {
+          expect(item.hasAttribute('coral-table-cellselect')).to.be.true;
+        });
+        
+        expect(items[0].querySelector('coral-checkbox:first-child[checked]')).to.not.equal(null);
+        expect(items[1].querySelector('coral-checkbox[checked]')).to.not.equal(null);
+        expect(items[2].querySelector('coral-checkbox[checked]:not([coral-table-cellselect])')).to.not.equal(null);
+      });
     });
     
     describe('#lockable', function() {
@@ -2369,7 +2392,7 @@ describe('Table', function() {
       });
     });
   
-    describe('#hidden', function() {
+    describe('#alignment', function() {
       it('should set the text alignment to right', function(done) {
         var table = helpers.build(window.__html__['Table.base.html']);
         getColumns(table.columns)[0].alignment = Table.Column.alignment.RIGHT;

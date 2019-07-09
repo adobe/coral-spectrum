@@ -281,14 +281,6 @@ class Table extends BaseComponent(HTMLTableElement) {
   
     this.classList.remove(...ALL_VARIANT_CLASSES);
     this.classList.add(`${CLASSNAME}--${this._variant}`);
-  
-    // @compat
-    const body = this.body;
-    if (body) {
-      const rows = getRows([body]);
-      // Use the first column as selection column
-      rows.forEach(row => this._toggleSelectionCheckbox(row));
-    }
   }
   
   /**
@@ -1191,27 +1183,15 @@ class Table extends BaseComponent(HTMLTableElement) {
     
     if (handle) {
       if (state === 'checked') {
-        if (typeof handle.indeterminate !== 'undefined') {
-          handle.indeterminate = false;
-        }
-        
-        if (typeof handle.checked !== 'undefined') {
-          handle.checked = true;
-        }
+        handle.removeAttribute('indeterminate');
+        handle.setAttribute('checked', '');
       }
       else if (state === 'unchecked') {
-        if (typeof handle.indeterminate !== 'undefined') {
-          handle.indeterminate = false;
-        }
-        
-        if (typeof handle.checked !== 'undefined') {
-          handle.checked = false;
-        }
+        handle.removeAttribute('indeterminate');
+        handle.removeAttribute('checked');
       }
       else if (state === 'indeterminate') {
-        if (typeof handle.indeterminate !== 'undefined') {
-          handle.indeterminate = true;
-        }
+        handle.setAttribute('indeterminate', '');
       }
     }
   }
@@ -2330,15 +2310,8 @@ class Table extends BaseComponent(HTMLTableElement) {
   
   // @compat
   _toggleSelectionCheckbox(row) {
-    // Use the first column as selection column
-    const cell = getContentCells(row)[0];
-    
-    // On condition handle attribute is set
-    if (cell && cell.hasAttribute('coral-table-rowselect')) {
-      cell.classList.add('_coral-Table-cell--check');
-      
-      cell.removeAttribute('coral-table-rowselect');
-  
+    const cells = getContentCells(row);
+    const renderCheckbox = (cell, process) => {
       // Support cloneNode
       cell._checkbox = cell._checkbox || cell.querySelector('coral-checkbox');
       
@@ -2346,16 +2319,40 @@ class Table extends BaseComponent(HTMLTableElement) {
       if (!cell._checkbox) {
         cell._checkbox = new Checkbox();
       }
+      
+      process(cell._checkbox);
   
-      // Identifies as selection handle
-      cell._checkbox.setAttribute('coral-table-rowselect', '');
-      
-      // Sync selection
-      cell._checkbox[row.selected ? 'setAttribute' : 'removeAttribute']('checked', '');
-      
       // Add checkbox
       cell.insertBefore(cell._checkbox, cell.firstChild);
-    }
+    };
+    
+    cells.forEach((cell, i) => {
+      const isRowSelect = i === 0 && cell.hasAttribute('coral-table-rowselect');
+      const isCellSelect = cell.hasAttribute('coral-table-cellselect') || cell.querySelector('coral-checkbox[coral-table-cellselect]');
+      
+      if (isRowSelect || isCellSelect) {
+        let handle;
+        if (isRowSelect) { handle = 'coral-table-rowselect'; }
+        if (isCellSelect) { handle = 'coral-table-cellselect'; }
+        
+        renderCheckbox(cell, (checkbox) => {
+          // Define selection handle
+          if (isRowSelect) {
+            cell.classList.add('_coral-Table-cell--check');
+            cell.removeAttribute(handle);
+            checkbox.setAttribute(handle, '');
+          }
+          else {
+            cell.setAttribute(handle, '');
+            checkbox.removeAttribute(handle);
+          }
+    
+          // Sync selection
+          const isSelected = (isRowSelect ? row : cell).hasAttribute('selected');
+          checkbox[isSelected ? 'setAttribute' : 'removeAttribute']('checked', '');
+        });
+      }
+    });
   }
   
   /** @private */
@@ -2504,6 +2501,13 @@ class Table extends BaseComponent(HTMLTableElement) {
       column._doSort(true);
     }
   
+    // @compat
+    if (this.body) {
+      const rows = getRows([this.body]);
+      // Use the first column as selection column
+      rows.forEach(row => this._toggleSelectionCheckbox(row));
+    }
+    
     // Mark table as ready
     if (!this.head || this.head && !this.head.hasAttribute('sticky')) {
       this.classList.add(IS_READY);

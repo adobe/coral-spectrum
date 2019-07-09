@@ -19,7 +19,6 @@
 @require '../../../coral-theme-spectrum/src/styles/vars.css';
 
 $table-sort-icon-url = "./embed/SortArrow.svg";
-$table-list-check-icon-url = "./embed/Check.svg";
 $table-drag-handle-icon-url = "./embed/DragHandle.svg";
 
 // @spectrum
@@ -392,42 +391,13 @@ table[is="coral-table"] {
   }
 }
 
+// Visual selection indication
 ._coral-Table-row[selectable] {
-  ._coral-Table-cell {
-    &[coral-table-cellselect] {
-      position: relative;
+  ._coral-Table-cell[coral-table-cellselect] {
+    cursor: pointer;
 
-      &:not([disabled]):hover {
-        cursor: pointer;
-
-        &:after {
-          content: "";
-          background-size: 18px 18px;
-          background-position: 50% 50%;
-          background-repeat: no-repeat;
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          right: 0;
-          left: 0;
-        }
-      }
-    }
-
-    &.is-selected {
-      position: relative;
-
-      &:after {
-        content: "";
-        background-size: 18px 18px;
-        background-position: 50% 50%;
-        background-repeat: no-repeat;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        left: 0;
-      }
+    coral-checkbox {
+      pointer-events: none;
     }
   }
 }

@@ -111,15 +111,9 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
   /** @private */
   _syncSelectHandle() {
     // Check/uncheck the select handle
-    const selectHandle = this.querySelector('[coral-table-cellselect]');
+    const selectHandle = this.querySelector('coral-checkbox');
     if (selectHandle) {
-      if (typeof selectHandle.indeterminate !== 'undefined') {
-        selectHandle.indeterminate = false;
-      }
-      
-      if (typeof selectHandle.checked !== 'undefined') {
-        selectHandle.checked = this.selected;
-      }
+      selectHandle[this.selected ? 'setAttribute' : 'removeAttribute']('checked', '');
     }
   }
   

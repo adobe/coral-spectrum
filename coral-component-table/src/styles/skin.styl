@@ -264,33 +264,6 @@
     }
   }
 }
-
-._coral-Table-row[selectable] {
-  ._coral-Table-cell {
-    &[coral-table-cellselect] {
-      &:not([disabled]):hover {
-        background-color: $table-background-color-hover;
-
-        &:after {
-          background-image: svgImport($table-list-check-icon-url, 'path {fill: white}');
-        }
-      }
-    }
-
-    &.is-selected {
-      &:after {
-        background-color: $table-quiet-background-color-selected;
-        background-image: svgImport($table-list-check-icon-url, 'path {fill: white}');
-      }
-    }
-
-    &.is-selected:hover {
-      &:after {
-        background-color: $table-quiet-background-color-selected-hover;
-      }
-    }
-  }
-}
 /* END #selectable */
 
 /* #lockable */

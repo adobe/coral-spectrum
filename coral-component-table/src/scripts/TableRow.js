@@ -209,13 +209,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
     // Check/uncheck the select handle
     const selectHandle = this.querySelector('[coral-table-rowselect]');
     if (selectHandle) {
-      if (typeof selectHandle.indeterminate !== 'undefined') {
-        selectHandle.indeterminate = false;
-      }
-      
-      if (typeof selectHandle.checked !== 'undefined') {
-        selectHandle.checked = this.selected;
-      }
+      selectHandle[this.selected ? 'setAttribute' : 'removeAttribute']('checked', '');
     }
   }
   
