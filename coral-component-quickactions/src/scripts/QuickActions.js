@@ -102,6 +102,7 @@ class QuickActions extends Overlay {
     this._inner = true;
     this._target = target.PREVIOUS;
     this._placement = placement.TOP;
+    this._focusOnShow = this;
   
     // Flag
     this._openedBefore = false;
@@ -112,19 +113,22 @@ class QuickActions extends Overlay {
     // Template
     base.call(this._elements, {commons, i18n});
   
+    // Return focus to overlay by default
+    this._elements.overlay.focusOnShow = this._elements.overlay;
+  
     const events = {
       'global:resize': '_onWindowResize',
       'mouseout': '_onMouseOut',
 
       // Keyboard interaction
-      'key:home > ._coral-QuickActions-item': '_onHomeKeypress',
-      'key:end > ._coral-QuickActions-item': '_onEndKeypress',
-      'key:pagedown > ._coral-QuickActions-item': '_onButtonKeypressNext',
-      'key:right > ._coral-QuickActions-item': '_onButtonKeypressNext',
-      'key:down > ._coral-QuickActions-item': '_onButtonKeypressNext',
-      'key:pageup > ._coral-QuickActions-item': '_onButtonKeypressPrevious',
-      'key:left > ._coral-QuickActions-item': '_onButtonKeypressPrevious',
-      'key:up > ._coral-QuickActions-item': '_onButtonKeypressPrevious',
+      'key:home': '_onHomeKeypress',
+      'key:end': '_onEndKeypress',
+      'key:pagedown': '_onButtonKeypressNext',
+      'key:right': '_onButtonKeypressNext',
+      'key:down': '_onButtonKeypressNext',
+      'key:pageup': '_onButtonKeypressPrevious',
+      'key:left': '_onButtonKeypressPrevious',
+      'key:up': '_onButtonKeypressPrevious',
     
       // Buttons
       'click > ._coral-QuickActions-item:not([handle="moreButton"])': '_onButtonClick',
@@ -147,6 +151,9 @@ class QuickActions extends Overlay {
     events[`global:capture:coral-overlay:positioned #${overlayId}`] = '_onOverlayPositioned';
     events[`global:capture:mouseout #${overlayId}`] = '_onMouseOut';
     events[`global:capture:click #${overlayId} [coral-list-item]`] = '_onButtonListItemClick';
+    // Keyboard interaction
+    events[`global:key:down #${overlayId}`] = '_onOverlayKeyDown';
+    events[`global:key:up #${overlayId}`] = '_onOverlayKeyUp';
   
     // Cache bound event handler functions
     this._onTargetMouseEnter = this._onTargetMouseEnter.bind(this);
@@ -309,11 +316,6 @@ class QuickActions extends Overlay {
   
       if (this.open) {
         this._layout();
-        
-        // The QuickActions must be visible for us to be able to focus them,
-        // this may not be the case if we initially open them, due to the FOUC handling.
-        this.style.visibility = 'visible';
-        this.focus();
       }
   
       // we toggle "is-selected" on the target to indicate that the over is open
@@ -474,6 +476,18 @@ class QuickActions extends Overlay {
    */
   _getFirstFocusableButton() {
     return this.querySelector(BUTTON_FOCUSABLE_SELECTOR);
+  }
+  
+  /**
+   Gets the first focusable button.
+   
+   @returns {HTMLElement|undefined}
+   The last focusable button, undefined if none found.
+   @ignore
+   */
+  _getLastFocusableButton() {
+    const focusableButtons = this._getFocusableButtons();
+    return focusableButtons[focusableButtons.length - 1];
   }
   
   /** @ignore */
@@ -799,7 +813,6 @@ class QuickActions extends Overlay {
           this._previousTrapFocus = this.trapFocus;
           this._previousReturnFocus = this.returnFocus;
           this.trapFocus = this.constructor.trapFocus.ON;
-          this.returnFocus = this.constructor.returnFocus.ON;
         }
         
         this.show();
@@ -845,8 +858,7 @@ class QuickActions extends Overlay {
     // prevents the page from scrolling
     event.preventDefault();
     
-    const focusableButtons = this._getFocusableButtons();
-    const lastFocusableButton = focusableButtons[focusableButtons.length - 1];
+    const lastFocusableButton = this._getLastFocusableButton();
     
     // Jump focus to the last focusable button
     if (lastFocusableButton) {
@@ -857,22 +869,40 @@ class QuickActions extends Overlay {
   /** @ignore */
   _onButtonKeypressNext(event) {
     event.preventDefault();
-    
-    // Handle key presses that imply focus of the next focusable button
-    const nextButton = this._getFocusableNeighbour(event.matchedTarget);
-    if (nextButton) {
-      nextButton.focus();
+  
+    if (document.activeElement === this) {
+      const firstFocusableButton = this._getFirstFocusableButton();
+      
+      if (firstFocusableButton) {
+        firstFocusableButton.focus();
+      }
+    }
+    else {
+      // Handle key presses that imply focus of the next focusable button
+      const nextButton = this._getFocusableNeighbour(event.matchedTarget);
+      if (nextButton) {
+        nextButton.focus();
+      }
     }
   }
   
   /** @ignore */
   _onButtonKeypressPrevious(event) {
     event.preventDefault();
-    
-    // Handle key presses that imply focus of the previous focusable button
-    const previousButton = this._getFocusableNeighbour(event.matchedTarget, true);
-    if (previousButton) {
-      previousButton.focus();
+  
+    if (document.activeElement === this) {
+      const lastFocusableButton = this._getLastFocusableButton();
+      
+      if (lastFocusableButton) {
+        lastFocusableButton.focus();
+      }
+    }
+    else {
+      // Handle key presses that imply focus of the previous focusable button
+      const previousButton = this._getFocusableNeighbour(event.matchedTarget, true);
+      if (previousButton) {
+        previousButton.focus();
+      }
     }
   }
   
@@ -932,14 +962,6 @@ class QuickActions extends Overlay {
     if (event.target === this._elements.overlay) {
       // do not allow internal Overlay events to escape QuickActions
       event.stopImmediatePropagation();
-      
-      window.requestAnimationFrame(() => {
-        const focusableItems = this._elements.buttonList.items.getAll().filter((item) => !item.hasAttribute('hidden') && !item.hasAttribute('disabled'));
-        
-        if (focusableItems.length > 0) {
-          focusableItems[0].focus();
-        }
-      });
     }
   }
   
@@ -975,6 +997,20 @@ class QuickActions extends Overlay {
       // do not allow internal Overlay events to escape QuickActions
       event.stopImmediatePropagation();
     }
+  }
+  
+  _onOverlayKeyDown(event) {
+    event.preventDefault();
+    
+    // Focus first item
+    this._elements.buttonList._focusFirstItem(event);
+  }
+  
+  _onOverlayKeyUp(event) {
+    event.preventDefault();
+    
+    // Focus last item
+    this._elements.buttonList._focusLastItem(event);
   }
   
   /** @ignore */
@@ -1114,16 +1150,6 @@ class QuickActions extends Overlay {
     else {
       this.style.marginTop = '';
       this.style.marginBottom = '';
-    }
-  }
-  
-  /** @ignore */
-  focus() {
-    if (this.open && !this.contains(document.activeElement)) {
-      const firstFocusableButton = this._getFirstFocusableButton();
-      if (firstFocusableButton) {
-        firstFocusableButton.focus();
-      }
     }
   }
   

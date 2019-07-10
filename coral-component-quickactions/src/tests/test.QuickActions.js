@@ -206,42 +206,6 @@ describe('QuickActions', function() {
     });
     
     describe('#focus', function() {
-      it('should move the focus inside the component', function(done) {
-        const el = helpers.build(window.__html__['QuickActions.base.html']);
-        el.on('coral-overlay:open', function() {
-          expect(document.activeElement).not.to.equal(el);
-        
-          var buttons = el.querySelectorAll(BUTTON_SELECTOR);
-          // we focus the component
-          el.focus();
-        
-          // expect(el.contains(document.activeElement)).to.equal()
-          expect(document.activeElement).to.equal(buttons[0], 'The first button should be focused');
-          done();
-        });
-      
-        el.show();
-      });
-  
-      it('should not shift focus if already inside the component', function(done) {
-        const el = helpers.build(window.__html__['QuickActions.base.html']);
-        el.on('coral-overlay:open', function() {
-          expect(el.contains(document.activeElement)).to.equal(true, 'Focus should be inside the component');
-        
-          var buttons = el.querySelectorAll(BUTTON_SELECTOR);
-          // we move focus to the 3rd item
-          buttons[3].focus();
-        
-          // we focus the component
-          el.focus();
-          expect(document.activeElement).to.equal(buttons[3], 'Focus should not be moved');
-        
-          done();
-        });
-      
-        el.show();
-      });
-  
       it('should not focus the component if not shown', function() {
         const el = helpers.build(window.__html__['QuickActions.base.html']);
         expect(document.activeElement).not.to.equal(el);
@@ -430,17 +394,16 @@ describe('QuickActions', function() {
       // Wait until opened
       el.on('coral-overlay:open', () => {
         var buttons = el.querySelectorAll(BUTTON_SELECTOR);
-      
+        expect(document.activeElement).to.equal(el, 'QuickAction focused');
+        
+        helpers.keypress('down', el);
         expect(document.activeElement).to.equal(buttons[0], 'First QuickAction item focused');
-
+        
         helpers.keypress('right', buttons[0]);
         expect(document.activeElement).to.equal(buttons[1], 'Second QuickAction item focused');
 
-        helpers.keypress('down', buttons[1]);
+        helpers.keypress('pagedown', buttons[1]);
         expect(document.activeElement).to.equal(buttons[2], 'Third QuickAction item focused');
-
-        helpers.keypress('pagedown', buttons[2]);
-        expect(document.activeElement).to.equal(buttons[3], 'Fourth QuickAction item focused');
 
         done();
       });
@@ -481,7 +444,7 @@ describe('QuickActions', function() {
       el.on('coral-overlay:open', () => {
         var buttons = el.querySelectorAll(BUTTON_SELECTOR);
       
-        expect(document.activeElement).to.equal(buttons[0], 'First QuickAction item focused initially');
+        expect(document.activeElement).to.equal(el, 'QuickAction focused initially');
 
         helpers.keypress('end', buttons[0]);
         expect(document.activeElement).to.equal(buttons[3], 'Last QuickAction item focused for end keypress');
@@ -561,7 +524,7 @@ describe('QuickActions', function() {
         var buttons = el.querySelectorAll(BUTTON_SELECTOR);
 
         helpers.next(function() {
-          expect(document.activeElement).to.equal(buttons[0], 'First QuickAction item focused');
+          expect(document.activeElement).to.equal(el, 'QuickAction focused');
 
           // Hit tab key
           helpers.keypress('tab', el);

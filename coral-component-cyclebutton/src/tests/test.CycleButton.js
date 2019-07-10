@@ -607,7 +607,7 @@ describe('CycleButton', function() {
   }); // Events
 
   describe('User Interaction', function() {
-    it('should open the overlay when there are more than 3 items and keep the focus on the item', function(done) {
+    it('should open the overlay when there are more than 3 items', function(done) {
       const el = helpers.build(SNIPPET_THREEITEMS);
       var labelString = stripWhitespace(el.selectedItem.textContent);
       expect(el._elements.button.getAttribute('aria-haspopup')).to.equal('true', 'aria-haspopup attribute is not set to \'true\'');
@@ -626,7 +626,6 @@ describe('CycleButton', function() {
       // Wait for list to be populated
       el.on('coral-overlay:open', () => {
         expect(el._elements.overlay.open).to.be.true;
-        expect(el._elements.selectList.items.first()).to.equal(document.activeElement);
         
         done();
       });

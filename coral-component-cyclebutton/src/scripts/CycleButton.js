@@ -66,6 +66,9 @@ class CycleButton extends BaseComponent(HTMLElement) {
     // Templates
     this._elements = {};
     base.call(this._elements, {Icon, commons});
+  
+    // Return focus to overlay by default
+    this._elements.overlay.focusOnShow = this._elements.overlay;
     
     const events = {
       'click button[is="coral-button"]': '_onMouseDown',
@@ -86,6 +89,10 @@ class CycleButton extends BaseComponent(HTMLElement) {
     // Overlay
     events[`global:capture:click #${overlayId} button[is="coral-buttonlist-item"]`] = '_onActionClick';
     events[`global:capture:coral-selectlist:change #${overlayId}`] = '_onSelectListChange';
+    // Keyboard interaction
+    events[`global:key:down #${overlayId}`] = '_onOverlayKeyDown';
+    events[`global:key:up #${overlayId}`] = '_onOverlayKeyUp';
+    events[`global:keypress #${overlayId}`] = '_onOverlayKeyPress';
     
     // Attach events
     this._delegateEvents(events);
@@ -442,6 +449,30 @@ class CycleButton extends BaseComponent(HTMLElement) {
     }
   
     this._trackEvent('selected', 'coral-cyclebutton-item', event, origNode);
+  }
+  
+  _onOverlayKeyDown(event) {
+    event.preventDefault();
+    
+    // Focus first item
+    this._elements.selectList._focusFirstItem();
+  }
+  
+  _onOverlayKeyUp(event) {
+    event.preventDefault();
+    
+    // Focus last item
+    if (!this._elements.actionList.hidden) {
+      this._elements.actionList._focusLastItem(event);
+    }
+    else {
+      this._elements.selectList._focusLastItem();
+    }
+  }
+  
+  _onOverlayKeyPress(event) {
+    // Focus on item which text starts with pressed keys
+    this._elements.selectList._onKeyPress(event);
   }
   
   /** @private */

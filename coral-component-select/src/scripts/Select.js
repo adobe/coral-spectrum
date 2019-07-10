@@ -88,6 +88,9 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
     this._elements = {};
     base.call(this._elements, {commons, Icon});
     
+    // Return focus to overlay by default
+    this._elements.overlay.focusOnShow = this._elements.overlay;
+    
     const events = {
       'global:click': '_onGlobalClick',
       'global:touchstart': '_onGlobalClick',
@@ -117,14 +120,18 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
     events[`global:capture:coral-selectlist:beforechange #${overlayId}`] = '_onSelectListBeforeChange';
     events[`global:capture:coral-selectlist:change #${overlayId}`] = '_onSelectListChange';
     events[`global:capture:coral-selectlist:scrollbottom #${overlayId}`] = '_onSelectListScrollBottom';
-    // TODO for some reason this disables tabbing into the select
-    // events[`global:key:tab #${overlayId} coral-selectlist-item`] = '_onTabKey';
-    // events[`global:key:tab+shift #${overlayId} coral-selectlist-item`] = '_onTabKey';
     events[`global:capture:coral-overlay:close #${overlayId}`] = '_onOverlayToggle';
     events[`global:capture:coral-overlay:open #${overlayId}`] = '_onOverlayToggle';
     events[`global:capture:coral-overlay:positioned #${overlayId}`] = '_onOverlayPositioned';
     events[`global:capture:coral-overlay:beforeopen #${overlayId}`] = '_onInternalEvent';
     events[`global:capture:coral-overlay:beforeclose #${overlayId}`] = '_onInternalEvent';
+    // Keyboard interaction
+    events[`global:key:down #${overlayId}`] = '_onOverlayKeyDown';
+    events[`global:key:up #${overlayId}`] = '_onOverlayKeyUp';
+    events[`global:keypress #${overlayId}`] = '_onOverlayKeyPress';
+    // TODO for some reason this disables tabbing into the select
+    // events[`global:key:tab #${overlayId} coral-selectlist-item`] = '_onTabKey';
+    // events[`global:key:tab+shift #${overlayId} coral-selectlist-item`] = '_onTabKey';
     
     // Attach events
     this._delegateEvents(commons.extend(this._events, events));
@@ -990,6 +997,25 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @private */
   _onNativeSelectClick() {
     this._showOptions(false);
+  }
+  
+  _onOverlayKeyDown(event) {
+    event.preventDefault();
+    
+    // Focus first item
+    this._elements.list._focusFirstItem();
+  }
+  
+  _onOverlayKeyUp(event) {
+    event.preventDefault();
+  
+    // Focus last item
+    this._elements.list._focusLastItem();
+  }
+  
+  _onOverlayKeyPress(event) {
+    // Focus on item which text starts with pressed keys
+    this._elements.list._onKeyPress(event);
   }
   
   /** @private */
