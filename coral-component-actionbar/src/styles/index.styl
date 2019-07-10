@@ -17,11 +17,15 @@ $actionbar-item-height = var(--spectrum-medium-actionbutton-height);
 $actionbar-padding = var(--spectrum-medium-actionbuttongroup-button-gap-x);
 
 ._coral-ActionBar {
+  position: relative;
   display: flex;
   justify-content: center;
-  box-sizing: border-box;
+  align-items: center;
 
-  position: relative;
+  border-style: solid;
+  border-width: var(--spectrum-medium-popover-border-size);
+  border-radius: var(--spectrum-medium-popover-border-radius);
+  box-sizing: border-box;
 
   height: $actionbar-height;
 }
@@ -29,6 +33,8 @@ $actionbar-padding = var(--spectrum-medium-actionbuttongroup-button-gap-x);
 ._coral-ActionBar-primary,
 ._coral-ActionBar-secondary {
   position absolute;
+  // IE11
+  top: 8px;
 
   > ._coral-ActionBar-item,
   > ._coral-ActionButton[coral-actionbar-more] {
@@ -57,3 +63,8 @@ $actionbar-padding = var(--spectrum-medium-actionbuttongroup-button-gap-x);
 ._coral-ActionBar-anchorList a[is="coral-anchorlist-item"] {
   -webkit-font-smoothing: antialiased;
 }
+
+@require 'light';
+@require 'lightest';
+@require 'dark';
+@require 'darkest';

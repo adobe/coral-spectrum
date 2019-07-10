@@ -11,7 +11,6 @@
  */
 
 import ActionBarContainerCollection from './ActionBarContainerCollection';
-import getFirstSelectableWrappedItem from './getFirstSelectableWrappedItem';
 import {Button} from '../../../coral-component-button';
 import '../../../coral-component-anchorbutton';
 import moreOverlay from '../templates/moreOverlay';
@@ -59,14 +58,16 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
       copyAttributes
     });
   
+    // Return focus to overlay by default
+    this._elements.overlay.focusOnShow = this._elements.overlay;
+  
     const overlayId = this._elements.overlay.id;
-    const events = {
-      // Accessibility
-      'capture:focus ._coral-ActionBar-button:not([disabled])': '_onItemFocusIn',
-      'capture:blur ._coral-ActionBar-button:not([disabled])': '_onItemFocusOut'
-    };
+    const events = {};
     events[`global:capture:coral-overlay:beforeopen #${overlayId}`] = '_onOverlayBeforeOpen';
     events[`global:capture:coral-overlay:beforeclose #${overlayId}`] = '_onOverlayBeforeClose';
+    // Keyboard interaction
+    events[`global:key:down #${overlayId}`] = '_onOverlayKeyDown';
+    events[`global:key:up #${overlayId}`] = '_onOverlayKeyUp';
   
     // Events
     this._delegateEvents(events);
@@ -165,14 +166,6 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
     }
   }
   
-  _onItemFocusIn(event) {
-    event.matchedTarget.classList.add('focus-ring');
-  }
-  
-  _onItemFocusOut(event) {
-    event.matchedTarget.classList.remove('focus-ring');
-  }
-  
   /**
    Called after popover.open is set to true, but before the transition of the popover is done. Show elements inside
    the actionbar, that are hidden due to space problems.
@@ -211,27 +204,6 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
       items: this._itemsInPopover,
       copyAttributes
     }));
-    
-    // focus first item (nextFrame needed as popover must be visible and initialized with items)
-    let wrappedItem;
-    let loop = true;
-    const focusFirstItem = () => {
-      wrappedItem = getFirstSelectableWrappedItem(this._itemsInPopover[0]);
-      if (wrappedItem) {
-        // focus first item
-        wrappedItem.removeAttribute('tabindex');
-        wrappedItem.focus();
-        return;
-      }
-      
-      // If the wrappedItem isn't in the DOM and focusable, try one more time.
-      if (loop) {
-        loop = false;
-        window.requestAnimationFrame(focusFirstItem);
-      }
-    };
-    
-    window.requestAnimationFrame(focusFirstItem);
   }
   
   /**
@@ -270,6 +242,22 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
       // button
       this._elements.moreButton.focus();
     }
+  }
+  
+  _onOverlayKeyDown(event) {
+    event.preventDefault();
+    
+    // Focus first item
+    this._elements.anchorList && this._elements.anchorList._focusFirstItem(event);
+    this._elements.buttonList && this._elements.buttonList._focusFirstItem(event);
+  }
+  
+  _onOverlayKeyUp(event) {
+    event.preventDefault();
+    
+    // Focus last item
+    this._elements.anchorList && this._elements.anchorList._focusLastItem(event);
+    this._elements.buttonList && this._elements.buttonList._focusLastItem(event);
   }
   
   /** @ignore */
