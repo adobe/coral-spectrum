@@ -15,17 +15,27 @@ module.exports = function(gulp) {
   const root = require('../helpers/util').getRoot();
   const spawn = require('child_process').spawn;
   
-  gulp.task('watch-files', function() {
+  gulp.task('watch-templates', function() {
+    return gulp.watch([
+      path.join(root, 'coral-*/src/templates/**/*.html')
+    ], gulp.series('templates', 'scripts'));
+  });
+  
+  gulp.task('watch-styles', function() {
+    return gulp.watch([
+      path.join(root, 'coral-*/src/styles/**/*.styl'),
+      path.join(root, 'coral-theme-spectrum/**/*.styl')
+    ], gulp.series('styles', 'scripts'));
+  });
+  
+  gulp.task('watch-scripts', function() {
     return gulp.watch([
       path.join(root, 'coral-*/index.js'),
       path.join(root, 'coral-*/libs/**'),
       path.join(root, 'coral-*/data/**',),
       path.join(root, 'coral-*/polyfills/**'),
       path.join(root, 'coral-*/src/scripts/**/*.js'),
-      path.join(root, 'coral-*/src/templates/**/*.html'),
-      path.join(root, 'coral-*/src/styles/**/*.styl'),
-      path.join(root, 'coral-theme-spectrum/**/*.styl'),
-    ], gulp.series(gulp.parallel('styles', 'templates'), 'scripts'));
+    ], gulp.series('scripts'));
   });
   
   gulp.task('server', function(done) {
@@ -34,6 +44,6 @@ module.exports = function(gulp) {
   });
   
   gulp.task('watch',
-    gulp.parallel('watch-files', 'server')
+    gulp.parallel('watch-templates', 'watch-styles', 'watch-scripts', 'server')
   );
 };

@@ -14,7 +14,6 @@ module.exports = function(gulp) {
   const fs = require('fs');
   const path = require('path');
   const plumb = require('./plumb');
-  const rename = require('gulp-rename');
   const stylus = require('gulp-stylus');
   const css = require('gulp-postcss');
   const vars = require('postcss-css-variables');
@@ -42,8 +41,8 @@ module.exports = function(gulp) {
         ]
       }))
       .pipe(css([
-        vars(),
-        rules()
+        rules(),
+        vars()
       ]))
       .pipe(modifyFile((content) => {
         // Map Spectrum selectors with Coral ones
