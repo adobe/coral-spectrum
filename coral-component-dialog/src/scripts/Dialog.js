@@ -719,7 +719,7 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
     // Copy styles over to new wrapper
     if (this._elements.wrapper.parentNode !== this) {
       const contentWrapper = this.querySelector('[handle="wrapper"]');
-      contentWrapper.classList.forEach(style => this._elements.wrapper.classList.add(style));
+      Array.prototype.forEach.call(contentWrapper.classList, style => this._elements.wrapper.classList.add(style));
       contentWrapper.removeAttribute('class');
     }
   
