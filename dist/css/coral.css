@@ -9463,14 +9463,26 @@ a[is="coral-anchorbutton"] {
 .coral--light ._coral-SelectList-group:before {
   color: rgb(110, 110, 110);
 }
+.coral--light ._coral-Menu:hover ._coral-Menu-item:not(:hover):not(.is-selected):not(.focus-ring):focus {
+  background-color: transparent;
+}
 .coral--lightest ._coral-SelectList-group:before {
   color: rgb(116, 116, 116);
+}
+.coral--lightest ._coral-Menu:hover ._coral-Menu-item:not(:hover):not(.is-selected):not(.focus-ring):focus {
+  background-color: transparent;
 }
 .coral--dark ._coral-SelectList-group:before {
   color: rgb(185, 185, 185);
 }
+.coral--dark ._coral-Menu:hover ._coral-Menu-item:not(:hover):not(.is-selected):not(.focus-ring):focus {
+  background-color: transparent;
+}
 .coral--darkest ._coral-SelectList-group:before {
   color: rgb(162, 162, 162);
+}
+.coral--darkest ._coral-Menu:hover ._coral-Menu-item:not(:hover):not(.is-selected):not(.focus-ring):focus {
+  background-color: transparent;
 }
 
 /**
