@@ -468,7 +468,7 @@ function hideEverythingBut(instance) {
     const child = children[i];
     
     // If it&apos;s not a parent of or not the instance itself, it needs to be hidden
-    if (child !== instance &amp;&amp; !child.contains(instance)) {
+    if (child !== instance &amp;&amp; child.contains &amp;&amp; !child.contains(instance)) {
       const currentAriaHidden = child.getAttribute(&apos;aria-hidden&apos;);
       if (currentAriaHidden) {
         // Store the previous value of aria-hidden if present

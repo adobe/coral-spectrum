@@ -414,7 +414,6 @@
  */
 
 import ActionBarContainerCollection from &apos;./ActionBarContainerCollection&apos;;
-import getFirstSelectableWrappedItem from &apos;./getFirstSelectableWrappedItem&apos;;
 import {Button} from &apos;../../../coral-component-button&apos;;
 import &apos;../../../coral-component-anchorbutton&apos;;
 import moreOverlay from &apos;../templates/moreOverlay&apos;;
@@ -462,14 +461,16 @@ class BaseActionBarContainer extends superClass {
       copyAttributes
     });
   
+    // Return focus to overlay by default
+    this._elements.overlay.focusOnShow = this._elements.overlay;
+  
     const overlayId = this._elements.overlay.id;
-    const events = {
-      // Accessibility
-      &apos;capture:focus ._coral-ActionBar-button:not([disabled])&apos;: &apos;_onItemFocusIn&apos;,
-      &apos;capture:blur ._coral-ActionBar-button:not([disabled])&apos;: &apos;_onItemFocusOut&apos;
-    };
+    const events = {};
     events[`global:capture:coral-overlay:beforeopen #${overlayId}`] = &apos;_onOverlayBeforeOpen&apos;;
     events[`global:capture:coral-overlay:beforeclose #${overlayId}`] = &apos;_onOverlayBeforeClose&apos;;
+    // Keyboard interaction
+    events[`global:key:down #${overlayId}`] = &apos;_onOverlayKeyDown&apos;;
+    events[`global:key:up #${overlayId}`] = &apos;_onOverlayKeyUp&apos;;
   
     // Events
     this._delegateEvents(events);
@@ -568,14 +569,6 @@ class BaseActionBarContainer extends superClass {
     }
   }
   
-  _onItemFocusIn(event) {
-    event.matchedTarget.classList.add(&apos;focus-ring&apos;);
-  }
-  
-  _onItemFocusOut(event) {
-    event.matchedTarget.classList.remove(&apos;focus-ring&apos;);
-  }
-  
   /**
    Called after popover.open is set to true, but before the transition of the popover is done. Show elements inside
    the actionbar, that are hidden due to space problems.
@@ -614,27 +607,6 @@ class BaseActionBarContainer extends superClass {
       items: this._itemsInPopover,
       copyAttributes
     }));
-    
-    // focus first item (nextFrame needed as popover must be visible and initialized with items)
-    let wrappedItem;
-    let loop = true;
-    const focusFirstItem = () =&gt; {
-      wrappedItem = getFirstSelectableWrappedItem(this._itemsInPopover[0]);
-      if (wrappedItem) {
-        // focus first item
-        wrappedItem.removeAttribute(&apos;tabindex&apos;);
-        wrappedItem.focus();
-        return;
-      }
-      
-      // If the wrappedItem isn&apos;t in the DOM and focusable, try one more time.
-      if (loop) {
-        loop = false;
-        window.requestAnimationFrame(focusFirstItem);
-      }
-    };
-    
-    window.requestAnimationFrame(focusFirstItem);
   }
   
   /**
@@ -673,6 +645,22 @@ class BaseActionBarContainer extends superClass {
       // button
       this._elements.moreButton.focus();
     }
+  }
+  
+  _onOverlayKeyDown(event) {
+    event.preventDefault();
+    
+    // Focus first item
+    this._elements.anchorList &amp;&amp; this._elements.anchorList._focusFirstItem(event);
+    this._elements.buttonList &amp;&amp; this._elements.buttonList._focusFirstItem(event);
+  }
+  
+  _onOverlayKeyUp(event) {
+    event.preventDefault();
+    
+    // Focus last item
+    this._elements.anchorList &amp;&amp; this._elements.anchorList._focusLastItem(event);
+    this._elements.buttonList &amp;&amp; this._elements.buttonList._focusLastItem(event);
   }
   
   /** @ignore */

@@ -15492,7 +15492,7 @@ var Coral = (function (exports) {
     for (var i = 0; i < children.length; i++) {
       var child = children[i]; // If it's not a parent of or not the instance itself, it needs to be hidden
 
-      if (child !== instance && !child.contains(instance)) {
+      if (child !== instance && child.contains && !child.contains(instance)) {
         var currentAriaHidden = child.getAttribute('aria-hidden');
 
         if (currentAriaHidden) {
@@ -21612,7 +21612,7 @@ var Coral = (function (exports) {
 
         if (this._elements.wrapper.parentNode !== this) {
           var contentWrapper = this.querySelector('[handle="wrapper"]');
-          contentWrapper.classList.forEach(function (style) {
+          Array.prototype.forEach.call(contentWrapper.classList, function (style) {
             return _this2._elements.wrapper.classList.add(style);
           });
           contentWrapper.removeAttribute('class');
@@ -22873,7 +22873,7 @@ var Coral = (function (exports) {
       value: function connectedCallback() {
         _get(_getPrototypeOf(ActionBar.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$c, '_coral-Popover', 'is-open'); // Move direct items into primary content zone
+        this.classList.add(CLASSNAME$c); // Move direct items into primary content zone
 
         this._moveDirectItemChildren(); // Cleanup resize helpers object (cloneNode support)
 
@@ -23583,15 +23583,16 @@ var Coral = (function (exports) {
           template$6.call(_this._elements, {
             items: _this._itemsInPopover,
             copyAttributes: copyAttributes
-          });
+          }); // Return focus to overlay by default
+
+          _this._elements.overlay.focusOnShow = _this._elements.overlay;
           var overlayId = _this._elements.overlay.id;
-          var events = {
-            // Accessibility
-            'capture:focus ._coral-ActionBar-button:not([disabled])': '_onItemFocusIn',
-            'capture:blur ._coral-ActionBar-button:not([disabled])': '_onItemFocusOut'
-          };
+          var events = {};
           events["global:capture:coral-overlay:beforeopen #".concat(overlayId)] = '_onOverlayBeforeOpen';
-          events["global:capture:coral-overlay:beforeclose #".concat(overlayId)] = '_onOverlayBeforeClose'; // Events
+          events["global:capture:coral-overlay:beforeclose #".concat(overlayId)] = '_onOverlayBeforeClose'; // Keyboard interaction
+
+          events["global:key:down #".concat(overlayId)] = '_onOverlayKeyDown';
+          events["global:key:up #".concat(overlayId)] = '_onOverlayKeyUp'; // Events
 
           _this._delegateEvents(events); // Init the collection mutation observer
 
@@ -23634,16 +23635,6 @@ var Coral = (function (exports) {
               }
             }
           }
-        }, {
-          key: "_onItemFocusIn",
-          value: function _onItemFocusIn(event) {
-            event.matchedTarget.classList.add('focus-ring');
-          }
-        }, {
-          key: "_onItemFocusOut",
-          value: function _onItemFocusOut(event) {
-            event.matchedTarget.classList.remove('focus-ring');
-          }
           /**
            Called after popover.open is set to true, but before the transition of the popover is done. Show elements inside
            the actionbar, that are hidden due to space problems.
@@ -23654,8 +23645,6 @@ var Coral = (function (exports) {
         }, {
           key: "_onOverlayBeforeOpen",
           value: function _onOverlayBeforeOpen(event) {
-            var _this2 = this;
-
             // there might be popovers in popover => ignore them
             if (event.target !== this._elements.overlay) {
               return;
@@ -23688,29 +23677,7 @@ var Coral = (function (exports) {
             popover.content.appendChild(template$6.call(this._elements, {
               items: this._itemsInPopover,
               copyAttributes: copyAttributes
-            })); // focus first item (nextFrame needed as popover must be visible and initialized with items)
-
-            var wrappedItem;
-            var loop = true;
-
-            var focusFirstItem = function focusFirstItem() {
-              wrappedItem = getFirstSelectableWrappedItem(_this2._itemsInPopover[0]);
-
-              if (wrappedItem) {
-                // focus first item
-                wrappedItem.removeAttribute('tabindex');
-                wrappedItem.focus();
-                return;
-              } // If the wrappedItem isn't in the DOM and focusable, try one more time.
-
-
-              if (loop) {
-                loop = false;
-                window.requestAnimationFrame(focusFirstItem);
-              }
-            };
-
-            window.requestAnimationFrame(focusFirstItem);
+            }));
           }
           /**
            Called after popover.open is set to false, but before the transition of the popover is done.
@@ -23751,6 +23718,22 @@ var Coral = (function (exports) {
               this._elements.moreButton.focus();
             }
           }
+        }, {
+          key: "_onOverlayKeyDown",
+          value: function _onOverlayKeyDown(event) {
+            event.preventDefault(); // Focus first item
+
+            this._elements.anchorList && this._elements.anchorList._focusFirstItem(event);
+            this._elements.buttonList && this._elements.buttonList._focusFirstItem(event);
+          }
+        }, {
+          key: "_onOverlayKeyUp",
+          value: function _onOverlayKeyUp(event) {
+            event.preventDefault(); // Focus last item
+
+            this._elements.anchorList && this._elements.anchorList._focusLastItem(event);
+            this._elements.buttonList && this._elements.buttonList._focusLastItem(event);
+          }
           /** @ignore */
 
         }, {
@@ -23758,7 +23741,7 @@ var Coral = (function (exports) {
 
           /** @ignore */
           value: function connectedCallback() {
-            var _this3 = this;
+            var _this2 = this;
 
             _get(_getPrototypeOf(_class.prototype), "connectedCallback", this).call(this); // Cleanup resize helpers object (cloneNode support)
 
@@ -23799,7 +23782,7 @@ var Coral = (function (exports) {
             this.insertBefore(this._elements.overlay, this.firstChild); // Style the items to match action items
 
             this.items.getAll().forEach(function (item) {
-              return _this3._styleItem(item);
+              return _this2._styleItem(item);
             });
           }
           /** @ignore */
@@ -25445,6 +25428,16 @@ var Coral = (function (exports) {
 
         this._focusItem(this.items._getNextSelectable(event.target));
       }
+    }, {
+      key: "_focusFirstItem",
+      value: function _focusFirstItem() {
+        this._focusItem(this.items._getFirstSelectable());
+      }
+    }, {
+      key: "_focusLastItem",
+      value: function _focusLastItem() {
+        this._focusItem(this.items._getLastSelectable());
+      }
       /** @private */
 
     }, {
@@ -25453,7 +25446,7 @@ var Coral = (function (exports) {
         event.preventDefault();
         event.stopPropagation();
 
-        this._focusItem(this.items._getFirstSelectable());
+        this._focusFirstItem();
       }
       /** @private */
 
@@ -25463,7 +25456,7 @@ var Coral = (function (exports) {
         event.preventDefault();
         event.stopPropagation();
 
-        this._focusItem(this.items._getLastSelectable());
+        this._focusLastItem();
       }
       /**
        Handles keypress event for alphanumeric search.
@@ -36186,7 +36179,9 @@ var Coral = (function (exports) {
       template$k.call(_this._elements, {
         commons: commons,
         Icon: Icon
-      });
+      }); // Return focus to overlay by default
+
+      _this._elements.overlay.focusOnShow = _this._elements.overlay;
       var events = {
         'global:click': '_onGlobalClick',
         'global:touchstart': '_onGlobalClick',
@@ -36210,15 +36205,19 @@ var Coral = (function (exports) {
       events["global:capture:coral-collection:remove #".concat(overlayId, " coral-selectlist")] = '_onInternalEvent';
       events["global:capture:coral-selectlist:beforechange #".concat(overlayId)] = '_onSelectListBeforeChange';
       events["global:capture:coral-selectlist:change #".concat(overlayId)] = '_onSelectListChange';
-      events["global:capture:coral-selectlist:scrollbottom #".concat(overlayId)] = '_onSelectListScrollBottom'; // TODO for some reason this disables tabbing into the select
-      // events[`global:key:tab #${overlayId} coral-selectlist-item`] = '_onTabKey';
-      // events[`global:key:tab+shift #${overlayId} coral-selectlist-item`] = '_onTabKey';
-
+      events["global:capture:coral-selectlist:scrollbottom #".concat(overlayId)] = '_onSelectListScrollBottom';
       events["global:capture:coral-overlay:close #".concat(overlayId)] = '_onOverlayToggle';
       events["global:capture:coral-overlay:open #".concat(overlayId)] = '_onOverlayToggle';
       events["global:capture:coral-overlay:positioned #".concat(overlayId)] = '_onOverlayPositioned';
       events["global:capture:coral-overlay:beforeopen #".concat(overlayId)] = '_onInternalEvent';
-      events["global:capture:coral-overlay:beforeclose #".concat(overlayId)] = '_onInternalEvent'; // Attach events
+      events["global:capture:coral-overlay:beforeclose #".concat(overlayId)] = '_onInternalEvent'; // Keyboard interaction
+
+      events["global:key:down #".concat(overlayId)] = '_onOverlayKeyDown';
+      events["global:key:up #".concat(overlayId)] = '_onOverlayKeyUp';
+      events["global:keypress #".concat(overlayId)] = '_onOverlayKeyPress'; // TODO for some reason this disables tabbing into the select
+      // events[`global:key:tab #${overlayId} coral-selectlist-item`] = '_onTabKey';
+      // events[`global:key:tab+shift #${overlayId} coral-selectlist-item`] = '_onTabKey';
+      // Attach events
 
       _this._delegateEvents(commons.extend(_this._events, events)); // Pre-define labellable element
 
@@ -36690,6 +36689,26 @@ var Coral = (function (exports) {
       key: "_onNativeSelectClick",
       value: function _onNativeSelectClick() {
         this._showOptions(false);
+      }
+    }, {
+      key: "_onOverlayKeyDown",
+      value: function _onOverlayKeyDown(event) {
+        event.preventDefault(); // Focus first item
+
+        this._elements.list._focusFirstItem();
+      }
+    }, {
+      key: "_onOverlayKeyUp",
+      value: function _onOverlayKeyUp(event) {
+        event.preventDefault(); // Focus last item
+
+        this._elements.list._focusLastItem();
+      }
+    }, {
+      key: "_onOverlayKeyPress",
+      value: function _onOverlayKeyPress(event) {
+        // Focus on item which text starts with pressed keys
+        this._elements.list._onKeyPress(event);
       }
       /** @private */
 
@@ -47687,7 +47706,9 @@ var Coral = (function (exports) {
       template$v.call(_this._elements, {
         Icon: Icon,
         commons: commons
-      });
+      }); // Return focus to overlay by default
+
+      _this._elements.overlay.focusOnShow = _this._elements.overlay;
       var events = {
         'click button[is="coral-button"]': '_onMouseDown',
         'click ._coral-CycleSelect-button': '_onItemClick',
@@ -47703,7 +47724,11 @@ var Coral = (function (exports) {
       var overlayId = overlay.id; // Overlay
 
       events["global:capture:click #".concat(overlayId, " button[is=\"coral-buttonlist-item\"]")] = '_onActionClick';
-      events["global:capture:coral-selectlist:change #".concat(overlayId)] = '_onSelectListChange'; // Attach events
+      events["global:capture:coral-selectlist:change #".concat(overlayId)] = '_onSelectListChange'; // Keyboard interaction
+
+      events["global:key:down #".concat(overlayId)] = '_onOverlayKeyDown';
+      events["global:key:up #".concat(overlayId)] = '_onOverlayKeyUp';
+      events["global:keypress #".concat(overlayId)] = '_onOverlayKeyPress'; // Attach events
 
       _this._delegateEvents(events); // Used for eventing
 
@@ -47966,6 +47991,30 @@ var Coral = (function (exports) {
         }
 
         this._trackEvent('selected', 'coral-cyclebutton-item', event, origNode);
+      }
+    }, {
+      key: "_onOverlayKeyDown",
+      value: function _onOverlayKeyDown(event) {
+        event.preventDefault(); // Focus first item
+
+        this._elements.selectList._focusFirstItem();
+      }
+    }, {
+      key: "_onOverlayKeyUp",
+      value: function _onOverlayKeyUp(event) {
+        event.preventDefault(); // Focus last item
+
+        if (!this._elements.actionList.hidden) {
+          this._elements.actionList._focusLastItem(event);
+        } else {
+          this._elements.selectList._focusLastItem();
+        }
+      }
+    }, {
+      key: "_onOverlayKeyPress",
+      value: function _onOverlayKeyPress(event) {
+        // Focus on item which text starts with pressed keys
+        this._elements.selectList._onKeyPress(event);
       }
       /** @private */
 
@@ -57118,7 +57167,8 @@ var Coral = (function (exports) {
       _this._lengthOffset = OFFSET$1;
       _this._inner = true;
       _this._target = target$2.PREVIOUS;
-      _this._placement = placement$2.TOP; // Flag
+      _this._placement = placement$2.TOP;
+      _this._focusOnShow = _assertThisInitialized(_this); // Flag
 
       _this._openedBefore = false; // Debounce timer
 
@@ -57127,19 +57177,21 @@ var Coral = (function (exports) {
       template$E.call(_this._elements, {
         commons: commons,
         i18n: i18n
-      });
+      }); // Return focus to overlay by default
+
+      _this._elements.overlay.focusOnShow = _this._elements.overlay;
       var events = {
         'global:resize': '_onWindowResize',
         'mouseout': '_onMouseOut',
         // Keyboard interaction
-        'key:home > ._coral-QuickActions-item': '_onHomeKeypress',
-        'key:end > ._coral-QuickActions-item': '_onEndKeypress',
-        'key:pagedown > ._coral-QuickActions-item': '_onButtonKeypressNext',
-        'key:right > ._coral-QuickActions-item': '_onButtonKeypressNext',
-        'key:down > ._coral-QuickActions-item': '_onButtonKeypressNext',
-        'key:pageup > ._coral-QuickActions-item': '_onButtonKeypressPrevious',
-        'key:left > ._coral-QuickActions-item': '_onButtonKeypressPrevious',
-        'key:up > ._coral-QuickActions-item': '_onButtonKeypressPrevious',
+        'key:home': '_onHomeKeypress',
+        'key:end': '_onEndKeypress',
+        'key:pagedown': '_onButtonKeypressNext',
+        'key:right': '_onButtonKeypressNext',
+        'key:down': '_onButtonKeypressNext',
+        'key:pageup': '_onButtonKeypressPrevious',
+        'key:left': '_onButtonKeypressPrevious',
+        'key:up': '_onButtonKeypressPrevious',
         // Buttons
         'click > ._coral-QuickActions-item:not([handle="moreButton"])': '_onButtonClick',
         'click > ._coral-QuickActions-item[handle="moreButton"]': '_onMoreButtonClick',
@@ -57157,7 +57209,10 @@ var Coral = (function (exports) {
       events["global:capture:coral-overlay:close #".concat(overlayId)] = '_onOverlayClose';
       events["global:capture:coral-overlay:positioned #".concat(overlayId)] = '_onOverlayPositioned';
       events["global:capture:mouseout #".concat(overlayId)] = '_onMouseOut';
-      events["global:capture:click #".concat(overlayId, " [coral-list-item]")] = '_onButtonListItemClick'; // Cache bound event handler functions
+      events["global:capture:click #".concat(overlayId, " [coral-list-item]")] = '_onButtonListItemClick'; // Keyboard interaction
+
+      events["global:key:down #".concat(overlayId)] = '_onOverlayKeyDown';
+      events["global:key:up #".concat(overlayId)] = '_onOverlayKeyUp'; // Cache bound event handler functions
 
       _this._onTargetMouseEnter = _this._onTargetMouseEnter.bind(_assertThisInitialized(_this));
       _this._onTargetKeyUp = _this._onTargetKeyUp.bind(_assertThisInitialized(_this));
@@ -57342,6 +57397,21 @@ var Coral = (function (exports) {
       key: "_getFirstFocusableButton",
       value: function _getFirstFocusableButton() {
         return this.querySelector(BUTTON_FOCUSABLE_SELECTOR);
+      }
+      /**
+       Gets the first focusable button.
+       
+       @returns {HTMLElement|undefined}
+       The last focusable button, undefined if none found.
+       @ignore
+       */
+
+    }, {
+      key: "_getLastFocusableButton",
+      value: function _getLastFocusableButton() {
+        var focusableButtons = this._getFocusableButtons();
+
+        return focusableButtons[focusableButtons.length - 1];
       }
       /** @ignore */
 
@@ -57683,7 +57753,6 @@ var Coral = (function (exports) {
               this._previousTrapFocus = this.trapFocus;
               this._previousReturnFocus = this.returnFocus;
               this.trapFocus = this.constructor.trapFocus.ON;
-              this.returnFocus = this.constructor.returnFocus.ON;
             }
 
             this.show();
@@ -57734,9 +57803,8 @@ var Coral = (function (exports) {
         // prevents the page from scrolling
         event.preventDefault();
 
-        var focusableButtons = this._getFocusableButtons();
+        var lastFocusableButton = this._getLastFocusableButton(); // Jump focus to the last focusable button
 
-        var lastFocusableButton = focusableButtons[focusableButtons.length - 1]; // Jump focus to the last focusable button
 
         if (lastFocusableButton) {
           lastFocusableButton.focus();
@@ -57747,12 +57815,21 @@ var Coral = (function (exports) {
     }, {
       key: "_onButtonKeypressNext",
       value: function _onButtonKeypressNext(event) {
-        event.preventDefault(); // Handle key presses that imply focus of the next focusable button
+        event.preventDefault();
 
-        var nextButton = this._getFocusableNeighbour(event.matchedTarget);
+        if (document.activeElement === this) {
+          var firstFocusableButton = this._getFirstFocusableButton();
 
-        if (nextButton) {
-          nextButton.focus();
+          if (firstFocusableButton) {
+            firstFocusableButton.focus();
+          }
+        } else {
+          // Handle key presses that imply focus of the next focusable button
+          var nextButton = this._getFocusableNeighbour(event.matchedTarget);
+
+          if (nextButton) {
+            nextButton.focus();
+          }
         }
       }
       /** @ignore */
@@ -57760,12 +57837,21 @@ var Coral = (function (exports) {
     }, {
       key: "_onButtonKeypressPrevious",
       value: function _onButtonKeypressPrevious(event) {
-        event.preventDefault(); // Handle key presses that imply focus of the previous focusable button
+        event.preventDefault();
 
-        var previousButton = this._getFocusableNeighbour(event.matchedTarget, true);
+        if (document.activeElement === this) {
+          var lastFocusableButton = this._getLastFocusableButton();
 
-        if (previousButton) {
-          previousButton.focus();
+          if (lastFocusableButton) {
+            lastFocusableButton.focus();
+          }
+        } else {
+          // Handle key presses that imply focus of the previous focusable button
+          var previousButton = this._getFocusableNeighbour(event.matchedTarget, true);
+
+          if (previousButton) {
+            previousButton.focus();
+          }
         }
       }
       /** @ignore */
@@ -57834,20 +57920,9 @@ var Coral = (function (exports) {
     }, {
       key: "_onOverlayOpen",
       value: function _onOverlayOpen(event) {
-        var _this4 = this;
-
         if (event.target === this._elements.overlay) {
           // do not allow internal Overlay events to escape QuickActions
           event.stopImmediatePropagation();
-          window.requestAnimationFrame(function () {
-            var focusableItems = _this4._elements.buttonList.items.getAll().filter(function (item) {
-              return !item.hasAttribute('hidden') && !item.hasAttribute('disabled');
-            });
-
-            if (focusableItems.length > 0) {
-              focusableItems[0].focus();
-            }
-          });
         }
       }
       /** @ignore */
@@ -57855,7 +57930,7 @@ var Coral = (function (exports) {
     }, {
       key: "_onOverlayClose",
       value: function _onOverlayClose(event) {
-        var _this5 = this;
+        var _this4 = this;
 
         if (event.target === this) {
           this._elements.overlay.open = false; // Return the trapFocus and returnFocus properties to their state before open.
@@ -57863,14 +57938,14 @@ var Coral = (function (exports) {
           // Wait a frame as this is called before the 'open' property sync. Otherwise, returnFocus is set prematurely.
 
           window.requestAnimationFrame(function () {
-            if (_this5._previousTrapFocus) {
-              _this5.trapFocus = _this5._previousTrapFocus;
-              _this5._previousTrapFocus = undefined;
+            if (_this4._previousTrapFocus) {
+              _this4.trapFocus = _this4._previousTrapFocus;
+              _this4._previousTrapFocus = undefined;
             }
 
-            if (_this5._previousReturnFocus) {
-              _this5.returnFocus = _this5._previousReturnFocus;
-              _this5._previousReturnFocus = undefined;
+            if (_this4._previousReturnFocus) {
+              _this4.returnFocus = _this4._previousReturnFocus;
+              _this4._previousReturnFocus = undefined;
             }
           });
         } else if (event.target === this._elements.overlay) {
@@ -57887,6 +57962,20 @@ var Coral = (function (exports) {
           // do not allow internal Overlay events to escape QuickActions
           event.stopImmediatePropagation();
         }
+      }
+    }, {
+      key: "_onOverlayKeyDown",
+      value: function _onOverlayKeyDown(event) {
+        event.preventDefault(); // Focus first item
+
+        this._elements.buttonList._focusFirstItem(event);
+      }
+    }, {
+      key: "_onOverlayKeyUp",
+      value: function _onOverlayKeyUp(event) {
+        event.preventDefault(); // Focus last item
+
+        this._elements.buttonList._focusLastItem(event);
       }
       /** @ignore */
 
@@ -58049,19 +58138,6 @@ var Coral = (function (exports) {
           this.style.marginTop = '';
           this.style.marginBottom = '';
         }
-      }
-      /** @ignore */
-
-    }, {
-      key: "focus",
-      value: function focus() {
-        if (this.open && !this.contains(document.activeElement)) {
-          var firstFocusableButton = this._getFirstFocusableButton();
-
-          if (firstFocusableButton) {
-            firstFocusableButton.focus();
-          }
-        }
       } // Override placement and target
 
       /**
@@ -58075,7 +58151,7 @@ var Coral = (function (exports) {
 
       /** @ignore */
       value: function connectedCallback() {
-        var _this6 = this;
+        var _this5 = this;
 
         _get(_getPrototypeOf(QuickActions.prototype), "connectedCallback", this).call(this);
 
@@ -58085,7 +58161,7 @@ var Coral = (function (exports) {
         this.setAttribute('role', 'menu'); // Support cloneNode
 
         ['moreButton', 'overlay'].forEach(function (handleName) {
-          var handle = _this6.querySelector("[handle=\"".concat(handleName, "\"]"));
+          var handle = _this5.querySelector("[handle=\"".concat(handleName, "\"]"));
 
           if (handle) {
             handle.remove();
@@ -58255,38 +58331,32 @@ var Coral = (function (exports) {
         return _get(_getPrototypeOf(QuickActions.prototype), "open", this);
       },
       set: function set(value) {
-        var _this7 = this;
+        var _this6 = this;
 
         _set(_getPrototypeOf(QuickActions.prototype), "open", value, this, true); // Position once we can read items layout in the next frame
 
 
         window.requestAnimationFrame(function () {
-          if (_this7.open && !_this7._openedBefore) {
+          if (_this6.open && !_this6._openedBefore) {
             // we iterate over all the items initializing them in the correct order
-            var items = _this7.items.getAll();
+            var items = _this6.items.getAll();
 
             for (var i = 0, itemCount = items.length; i < itemCount; i++) {
-              _this7._attachItem(items[i], i);
+              _this6._attachItem(items[i], i);
             }
 
-            _this7._openedBefore = true;
+            _this6._openedBefore = true;
           }
 
-          if (_this7.open) {
-            _this7._layout(); // The QuickActions must be visible for us to be able to focus them,
-            // this may not be the case if we initially open them, due to the FOUC handling.
-
-
-            _this7.style.visibility = 'visible';
-
-            _this7.focus();
+          if (_this6.open) {
+            _this6._layout();
           } // we toggle "is-selected" on the target to indicate that the over is open
 
 
-          var targetElement = _this7._getTarget();
+          var targetElement = _this6._getTarget();
 
           if (targetElement) {
-            targetElement.classList.toggle('is-selected', _this7.open);
+            targetElement.classList.toggle('is-selected', _this6.open);
           }
         });
       }
@@ -72987,7 +73057,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.83";
+  var version = "1.0.0-beta.84";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

@@ -692,12 +692,20 @@ class SelectList extends BaseComponent(HTMLElement) {
     this._focusItem(this.items._getNextSelectable(event.target));
   }
   
+  _focusFirstItem() {
+    this._focusItem(this.items._getFirstSelectable());
+  }
+  
+  _focusLastItem() {
+    this._focusItem(this.items._getLastSelectable());
+  }
+  
   /** @private */
   _onHomeKey(event) {
     event.preventDefault();
     event.stopPropagation();
     
-    this._focusItem(this.items._getFirstSelectable());
+    this._focusFirstItem();
   }
   
   /** @private */
@@ -705,7 +713,7 @@ class SelectList extends BaseComponent(HTMLElement) {
     event.preventDefault();
     event.stopPropagation();
     
-    this._focusItem(this.items._getLastSelectable());
+    this._focusLastItem();
   }
   
   /**
