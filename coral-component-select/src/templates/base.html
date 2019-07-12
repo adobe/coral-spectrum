@@ -12,7 +12,7 @@
   // Render invalid icon
   this.button.insertAdjacentHTML('beforeend', data.Icon._renderSVG('spectrum-css-icon-ChevronDownMedium', ['_coral-Dropdown-icon', '_coral-UIIcon-ChevronDownMedium']));
 </js>
-<coral-popover withinoffset="0" tracking="off" class="_coral-Select-overlay" smart id="{{data.commons.getUID()}}" handle="overlay" placement="bottom" trapfocus="on" focusonshow="on" role="presentation">
+<coral-popover withinoffset="0" tracking="off" class="_coral-Select-overlay" smart id="{{data.commons.getUID()}}" handle="overlay" placement="bottom" focusonshow="coral-selectlist" role="presentation">
   <js>
     // Constrains the size of the list to 6 items.
     // @todo move this to theme

@@ -113,9 +113,6 @@ class QuickActions extends Overlay {
     // Template
     base.call(this._elements, {commons, i18n});
   
-    // Return focus to overlay by default
-    this._elements.overlay.focusOnShow = this._elements.overlay;
-  
     const events = {
       'global:resize': '_onWindowResize',
       'mouseout': '_onMouseOut',
@@ -151,9 +148,6 @@ class QuickActions extends Overlay {
     events[`global:capture:coral-overlay:positioned #${overlayId}`] = '_onOverlayPositioned';
     events[`global:capture:mouseout #${overlayId}`] = '_onMouseOut';
     events[`global:capture:click #${overlayId} [coral-list-item]`] = '_onButtonListItemClick';
-    // Keyboard interaction
-    events[`global:key:down #${overlayId}`] = '_onOverlayKeyDown';
-    events[`global:key:up #${overlayId}`] = '_onOverlayKeyUp';
   
     // Cache bound event handler functions
     this._onTargetMouseEnter = this._onTargetMouseEnter.bind(this);
@@ -479,7 +473,7 @@ class QuickActions extends Overlay {
   }
   
   /**
-   Gets the first focusable button.
+   Gets the last focusable button.
    
    @returns {HTMLElement|undefined}
    The last focusable button, undefined if none found.
@@ -997,20 +991,6 @@ class QuickActions extends Overlay {
       // do not allow internal Overlay events to escape QuickActions
       event.stopImmediatePropagation();
     }
-  }
-  
-  _onOverlayKeyDown(event) {
-    event.preventDefault();
-    
-    // Focus first item
-    this._elements.buttonList._focusFirstItem(event);
-  }
-  
-  _onOverlayKeyUp(event) {
-    event.preventDefault();
-    
-    // Focus last item
-    this._elements.buttonList._focusLastItem(event);
   }
   
   /** @ignore */

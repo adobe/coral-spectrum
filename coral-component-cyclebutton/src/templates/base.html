@@ -7,7 +7,7 @@
   // Render chevron icon
   this.button.insertAdjacentHTML('afterbegin', data.Icon._renderSVG('spectrum-css-icon-ChevronDownMedium', ['_coral-CycleSelect-icon', '_coral-UIIcon-ChevronDownMedium']));
 </js>
-<coral-popover tracking="off" smart id="{{data.commons.getUID()}}" handle="overlay" returnfocus="on" focusonshow="coral-selectlist" trapfocus="on" placement="bottom" lengthoffset="10">
+<coral-popover tracking="off" smart id="{{data.commons.getUID()}}" handle="overlay" focusonshow="coral-selectlist" placement="bottom" lengthoffset="10">
   <coral-selectlist tracking="off" class="_coral-CycleSelect-list" handle="selectList" id="{{data.commons.getUID()}}"></coral-selectlist>
   <coral-buttonlist tracking="off" class="_coral-CycleSelect-buttonList" handle="actionList" hidden></coral-buttonlist>
 </coral-popover>

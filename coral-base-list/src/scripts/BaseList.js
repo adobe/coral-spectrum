@@ -40,6 +40,8 @@ const BaseList = (superClass) => class extends superClass {
     super();
   
     this._events = {
+      'mouseenter': '_onMouseEnter',
+      // Keyboard interaction
       'key:down [coral-list-item]': '_focusNextItem',
       'key:right [coral-list-item]': '_focusNextItem',
       'key:left [coral-list-item]': '_focusPreviousItem',
@@ -112,6 +114,12 @@ const BaseList = (superClass) => class extends superClass {
     }
     
     return isAtTarget;
+  }
+  
+  _onMouseEnter() {
+    if (this.contains(document.activeElement)) {
+      document.activeElement.blur();
+    }
   }
   
   /** @private */
