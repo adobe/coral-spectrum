@@ -491,9 +491,6 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
     this._elements = {};
     base.call(this._elements, {commons, Icon});
     
-    // Return focus to overlay by default
-    this._elements.overlay.focusOnShow = this._elements.overlay;
-    
     const events = {
       &apos;global:click&apos;: &apos;_onGlobalClick&apos;,
       &apos;global:touchstart&apos;: &apos;_onGlobalClick&apos;,
@@ -529,8 +526,6 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
     events[`global:capture:coral-overlay:beforeopen #${overlayId}`] = &apos;_onInternalEvent&apos;;
     events[`global:capture:coral-overlay:beforeclose #${overlayId}`] = &apos;_onInternalEvent&apos;;
     // Keyboard interaction
-    events[`global:key:down #${overlayId}`] = &apos;_onOverlayKeyDown&apos;;
-    events[`global:key:up #${overlayId}`] = &apos;_onOverlayKeyUp&apos;;
     events[`global:keypress #${overlayId}`] = &apos;_onOverlayKeyPress&apos;;
     // TODO for some reason this disables tabbing into the select
     // events[`global:key:tab #${overlayId} coral-selectlist-item`] = &apos;_onTabKey&apos;;
@@ -1400,20 +1395,6 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @private */
   _onNativeSelectClick() {
     this._showOptions(false);
-  }
-  
-  _onOverlayKeyDown(event) {
-    event.preventDefault();
-    
-    // Focus first item
-    this._elements.list._focusFirstItem();
-  }
-  
-  _onOverlayKeyUp(event) {
-    event.preventDefault();
-  
-    // Focus last item
-    this._elements.list._focusLastItem();
   }
   
   _onOverlayKeyPress(event) {

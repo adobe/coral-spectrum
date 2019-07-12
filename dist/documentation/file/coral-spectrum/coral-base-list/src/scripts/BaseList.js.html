@@ -443,6 +443,8 @@ class BaseList extends superClass {
     super();
   
     this._events = {
+      &apos;mouseenter&apos;: &apos;_onMouseEnter&apos;,
+      // Keyboard interaction
       &apos;key:down [coral-list-item]&apos;: &apos;_focusNextItem&apos;,
       &apos;key:right [coral-list-item]&apos;: &apos;_focusNextItem&apos;,
       &apos;key:left [coral-list-item]&apos;: &apos;_focusPreviousItem&apos;,
@@ -515,6 +517,12 @@ class BaseList extends superClass {
     }
     
     return isAtTarget;
+  }
+  
+  _onMouseEnter() {
+    if (this.contains(document.activeElement)) {
+      document.activeElement.blur();
+    }
   }
   
   /** @private */

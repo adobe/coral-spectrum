@@ -8152,6 +8152,9 @@ coral-dialog-footer:empty {
 ._coral-Dialog-dragIcon {
   margin-top: 3px;
 }
+._coral-Dialog--dismissible ._coral-Dialog-closeButton {
+  display: inline-flex;
+}
 .coral--light ._coral-Dialog--noBackdrop {
   box-shadow: 0 1px 4px rgba(0,0,0,0.15);
   border-color: rgb(202, 202, 202);
@@ -9463,26 +9466,14 @@ a[is="coral-anchorbutton"] {
 .coral--light ._coral-SelectList-group:before {
   color: rgb(110, 110, 110);
 }
-.coral--light ._coral-Menu:hover ._coral-Menu-item:not(:hover):not(.is-selected):not(.focus-ring):focus {
-  background-color: transparent;
-}
 .coral--lightest ._coral-SelectList-group:before {
   color: rgb(116, 116, 116);
-}
-.coral--lightest ._coral-Menu:hover ._coral-Menu-item:not(:hover):not(.is-selected):not(.focus-ring):focus {
-  background-color: transparent;
 }
 .coral--dark ._coral-SelectList-group:before {
   color: rgb(185, 185, 185);
 }
-.coral--dark ._coral-Menu:hover ._coral-Menu-item:not(:hover):not(.is-selected):not(.focus-ring):focus {
-  background-color: transparent;
-}
 .coral--darkest ._coral-SelectList-group:before {
   color: rgb(162, 162, 162);
-}
-.coral--darkest ._coral-Menu:hover ._coral-Menu-item:not(:hover):not(.is-selected):not(.focus-ring):focus {
-  background-color: transparent;
 }
 
 /**
@@ -14822,23 +14813,6 @@ coral-colorinput-item {
 }
 ._coral-AssetList-itemThumbnail > coral-icon {
   vertical-align: middle;
-}
-._coral-AssetList-itemLabel:before {
-  content: attr(data-truncate-start);
-  left: 0;
-  text-overflow: ellipsis;
-}
-._coral-AssetList-itemLabel:before,._coral-AssetList-itemLabel:after {
-  position: absolute;
-  top: 10px;
-  max-width: 90px;
-  overflow: hidden;
-  white-space: nowrap;
-  color: #000;
-}
-._coral-AssetList-itemLabel:after {
-  content: attr(data-truncate-end);
-  left: 165px;
 }
 coral-columnview-preview-asset {
   position: relative;

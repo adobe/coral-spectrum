@@ -469,9 +469,6 @@ class CycleButton extends BaseComponent(HTMLElement) {
     // Templates
     this._elements = {};
     base.call(this._elements, {Icon, commons});
-  
-    // Return focus to overlay by default
-    this._elements.overlay.focusOnShow = this._elements.overlay;
     
     const events = {
       &apos;click button[is=&quot;coral-button&quot;]&apos;: &apos;_onMouseDown&apos;,
@@ -493,8 +490,6 @@ class CycleButton extends BaseComponent(HTMLElement) {
     events[`global:capture:click #${overlayId} button[is=&quot;coral-buttonlist-item&quot;]`] = &apos;_onActionClick&apos;;
     events[`global:capture:coral-selectlist:change #${overlayId}`] = &apos;_onSelectListChange&apos;;
     // Keyboard interaction
-    events[`global:key:down #${overlayId}`] = &apos;_onOverlayKeyDown&apos;;
-    events[`global:key:up #${overlayId}`] = &apos;_onOverlayKeyUp&apos;;
     events[`global:keypress #${overlayId}`] = &apos;_onOverlayKeyPress&apos;;
     
     // Attach events
@@ -760,14 +755,7 @@ class CycleButton extends BaseComponent(HTMLElement) {
     // show the popover. If there are actions, we always show the popover.
     if (this._isExtended()) {
       // we toggle the overlay if it was already open
-      if (this._elements.overlay.classList.contains(&apos;is-open&apos;)) {
-        this._hideOverlay();
-      }
-      else {
-        this._showOverlay();
-        // Set focus on selectList item after overlay opened
-        this._focusItem(this.selectedItem._selectListItem);
-      }
+      this[this._elements.overlay.classList.contains(&apos;is-open&apos;) ? &apos;_hideOverlay&apos; : &apos;_showOverlay&apos;]();
     }
     // Unless this is the only item we have, select the next item in line:
     else if (itemCount &gt; 1) {
@@ -854,25 +842,6 @@ class CycleButton extends BaseComponent(HTMLElement) {
     this._trackEvent(&apos;selected&apos;, &apos;coral-cyclebutton-item&apos;, event, origNode);
   }
   
-  _onOverlayKeyDown(event) {
-    event.preventDefault();
-    
-    // Focus first item
-    this._elements.selectList._focusFirstItem();
-  }
-  
-  _onOverlayKeyUp(event) {
-    event.preventDefault();
-    
-    // Focus last item
-    if (!this._elements.actionList.hidden) {
-      this._elements.actionList._focusLastItem(event);
-    }
-    else {
-      this._elements.selectList._focusLastItem();
-    }
-  }
-  
   _onOverlayKeyPress(event) {
     // Focus on item which text starts with pressed keys
     this._elements.selectList._onKeyPress(event);
@@ -935,11 +904,6 @@ class CycleButton extends BaseComponent(HTMLElement) {
     // @a11y
     this._elements.button.setAttribute(&apos;aria-expanded&apos;, false);
     this._elements.overlay.hide();
-    
-    // Make sure the button is focused once closed
-    window.requestAnimationFrame(() =&gt; {
-      this._elements.button.focus();
-    });
   }
   
   /** @ignore */

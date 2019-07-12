@@ -1212,21 +1212,31 @@ class BaseOverlay extends superClass {
    @protected
    */
   _focusOn(which) {
-    let tabTarget;
-    if (which === &apos;first&apos; || which === &apos;last&apos;) {
-      // @todo: shall this be focusable or tabbable?
-      const tabbableElements = Array.prototype.filter.call(this.querySelectorAll(commons.TABBABLE_ELEMENT_SELECTOR), item =&gt; item.offsetParent !== null &amp;&amp; !item.hasAttribute(&apos;coral-tabcapture&apos;));
-      tabTarget = tabbableElements[which === &apos;first&apos; ? &apos;shift&apos; : &apos;pop&apos;]();
-    }
+    const focusableTarget = this._getFocusableElement(which);
     
     // if we found a focusing target we focus it
-    if (tabTarget) {
-      tabTarget.focus();
+    if (focusableTarget) {
+      focusableTarget.focus();
     }
     // otherwise the element itself should get focus
     else {
       this.focus();
     }
+  }
+  
+  _getFocusableElements() {
+    return Array.prototype.filter.call(this.querySelectorAll(commons.FOCUSABLE_ELEMENT_SELECTOR), item =&gt; item.offsetParent !== null &amp;&amp; !item.hasAttribute(&apos;coral-tabcapture&apos;));
+  }
+  
+  _getFocusableElement(which) {
+    let focusableTarget;
+    
+    if (which === &apos;first&apos; || which === &apos;last&apos;) {
+      const focusableElements = this._getFocusableElements();
+      focusableTarget = focusableElements[which === &apos;first&apos; ? &apos;shift&apos; : &apos;pop&apos;]();
+    }
+    
+    return focusableTarget;
   }
   
   /**

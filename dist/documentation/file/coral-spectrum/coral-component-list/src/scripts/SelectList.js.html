@@ -462,6 +462,7 @@ class SelectList extends BaseComponent(HTMLElement) {
     // Attach events
     this._delegateEvents({
       &apos;scroll&apos;: &apos;_onScroll&apos;,
+      &apos;mouseenter&apos;: &apos;_onMouseEnter&apos;,
       &apos;capture:blur&apos;: &apos;_onBlur&apos;,
   
       &apos;click coral-selectlist-item&apos;: &apos;_onItemClick&apos;,
@@ -817,6 +818,12 @@ class SelectList extends BaseComponent(HTMLElement) {
   _onScroll() {
     window.clearTimeout(this._scrollTimeout);
     this._scrollTimeout = window.setTimeout(this._onDebouncedScroll, SCROLL_DEBOUNCE);
+  }
+  
+  _onMouseEnter() {
+    if (this.contains(document.activeElement)) {
+      document.activeElement.blur();
+    }
   }
   
   /**
