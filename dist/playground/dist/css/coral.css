@@ -9791,12 +9791,6 @@ a[is="coral-anchorbutton"] {
     color: rgb(218, 123, 17);
   }
 
-coral-alert-header:empty {
-  display: none;
-}
-coral-alert-header:empty + coral-alert-content {
-  margin-top: 0;
-}
 
 /**
  * Copyright 2019 Adobe. All rights reserved.
