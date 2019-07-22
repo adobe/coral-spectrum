@@ -3,12 +3,12 @@
 </js>
 <input is="coral-textfield" handle="input" type="number" class="_coral-Stepper-input" id="{{data.uid}}" step="1" aria-valuenow="" aria-valuetext="">
 <span class="_coral-Stepper-buttons" role="presentation" handle="presentation">
-  <button variant="_custom" class="_coral-Stepper-stepUp _coral-ActionButton" type="button" is="coral-button" handle="stepUp" title="{{data.i18n.get('Increment')}}" aria-label="{{data.i18n.get('Increment')}}" tabindex="-1" aria-controls="{{data.uid}}">
+  <button variant="action" class="_coral-Stepper-stepUp" type="button" is="coral-button" handle="stepUp" title="{{data.i18n.get('Increment')}}" aria-label="{{data.i18n.get('Increment')}}" tabindex="-1" aria-controls="{{data.uid}}">
     <js>
       this.stepUp.innerHTML = data.Icon._renderSVG('spectrum-css-icon-ChevronUpSmall', ['_coral-Stepper-stepUpIcon', '_coral-UIIcon-ChevronUpSmall']);
     </js>
   </button>
-  <button variant="_custom" class="_coral-Stepper-stepDown _coral-ActionButton" type="button" is="coral-button" handle="stepDown" title="{{data.i18n.get('Decrement')}}" aria-label="{{data.i18n.get('Decrement')}}" tabindex="-1" aria-controls="{{data.uid}}">
+  <button variant="action" class="_coral-Stepper-stepDown" type="button" is="coral-button" handle="stepDown" title="{{data.i18n.get('Decrement')}}" aria-label="{{data.i18n.get('Decrement')}}" tabindex="-1" aria-controls="{{data.uid}}">
     <js>
       this.stepDown.innerHTML = data.Icon._renderSVG('spectrum-css-icon-ChevronDownSmall', ['_coral-Stepper-stepDownIcon', '_coral-UIIcon-ChevronDownSmall']);
     </js>

@@ -545,8 +545,8 @@ class QuickActions extends Overlay {
       }, true);
     }
     
-    button.variant = Button.variant._CUSTOM;
-    button.classList.add('_coral-QuickActions-item', '_coral-ActionButton', '_coral-ActionButton--quiet');
+    button.variant = Button.variant.QUIET_ACTION;
+    button.classList.add('_coral-QuickActions-item');
     button.setAttribute('tabindex', '-1');
     button.setAttribute('title', itemData.textContent.trim());
     button.setAttribute('aria-label', itemData.textContent.trim());

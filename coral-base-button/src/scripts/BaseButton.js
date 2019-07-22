@@ -49,6 +49,10 @@ for (const key in Icon.size) {
  A button that indicates that the button's action is the secondary action.
  @property {String} QUIET
  A quiet button that indicates that the button's action is the primary action.
+ @property {String} ACTION
+ An action button.
+ @property {String} QUIET_ACTION
+ A quiet action button.
  @property {String} MINIMAL
  A quiet minimalistic button.
  @property {String} WARNING
@@ -63,20 +67,24 @@ const variant = {
   QUIET: 'quiet',
   MINIMAL: 'minimal',
   WARNING: 'warning',
+  ACTION: 'action',
+  QUIET_ACTION: 'quietaction',
   DEFAULT: 'default',
-  // Private to be used for custom Button classes like toggle, dropdown and action
+  // Private to be used for custom Button classes like field buttons
   _CUSTOM: '_custom'
 };
 
 // the button's base classname
 const CLASSNAME = '_coral-Button';
+const ACTION_CLASSNAME = '_coral-ActionButton';
 
 const ALL_VARIANT_CLASSES = [
   `${CLASSNAME}--cta`,
   `${CLASSNAME}--primary`,
   `${CLASSNAME}--secondary`,
   `${CLASSNAME}--warning`,
-  `${CLASSNAME}--quiet`
+  `${CLASSNAME}--quiet`,
+  `${ACTION_CLASSNAME}--quiet`,
 ];
 
 const VARIANT_MAP = {
@@ -86,7 +94,9 @@ const VARIANT_MAP = {
   warning: [CLASSNAME, ALL_VARIANT_CLASSES[3]],
   quiet: [CLASSNAME, ALL_VARIANT_CLASSES[1], ALL_VARIANT_CLASSES[4]],
   minimal: [CLASSNAME, ALL_VARIANT_CLASSES[2], ALL_VARIANT_CLASSES[4]],
-  default: [CLASSNAME, ALL_VARIANT_CLASSES[1]]
+  default: [CLASSNAME, ALL_VARIANT_CLASSES[1]],
+  action: [ACTION_CLASSNAME],
+  quietaction: [ACTION_CLASSNAME, ALL_VARIANT_CLASSES[5]],
 };
 
 /**
@@ -168,6 +178,9 @@ const BaseButton = (superClass) => class extends superClass {
       handle: 'label',
       tagName: this._contentZoneTagName,
       insert: function(label) {
+        // Update label styles
+        this._updateLabel(label);
+        
         // Ensure there's no extra space left for icon only buttons
         if (label.innerHTML.trim() === '') {
           label.textContent = '';
@@ -331,6 +344,7 @@ const BaseButton = (superClass) => class extends superClass {
     this._reflectAttribute('variant', this._variant);
     
     // removes every existing variant
+    this.classList.remove(CLASSNAME, ACTION_CLASSNAME);
     this.classList.remove(...ALL_VARIANT_CLASSES);
     
     if (this._variant === variant._CUSTOM) {
@@ -338,7 +352,14 @@ const BaseButton = (superClass) => class extends superClass {
     }
     else {
       this.classList.add(...VARIANT_MAP[this._variant]);
+      
+      if (this._variant === variant.ACTION || this._variant === variant.QUIET_ACTION) {
+        this.classList.remove(CLASSNAME);
+      }
     }
+  
+    // Update label styles
+    this._updateLabel();
   }
   
   /**
@@ -431,6 +452,21 @@ const BaseButton = (superClass) => class extends superClass {
     });
   }
   
+  _updateLabel(label) {
+    label = label || this._elements.label;
+    
+    label.classList.remove(`${CLASSNAME}-label`, `${ACTION_CLASSNAME}-label`);
+    
+    if (this._variant !== variant._CUSTOM) {
+      if (this._variant === variant.ACTION || this._variant === variant.QUIET_ACTION) {
+        label.classList.add(`${ACTION_CLASSNAME}-label`);
+      }
+      else {
+        label.classList.add(`${CLASSNAME}-label`);
+      }
+    }
+  }
+  
   /** @private */
   get _contentZoneTagName() {
     return Object.keys(this._contentZones)[0];
@@ -489,10 +525,6 @@ const BaseButton = (superClass) => class extends superClass {
     // Default reflected attributes
     if (!this._variant) { this.variant = variant.DEFAULT; }
     if (!this._size) { this.size = size.MEDIUM; }
-    
-    if (this.variant !== variant._CUSTOM) {
-      this.classList.add(CLASSNAME);
-    }
     
     // Create a fragment
     const fragment = document.createDocumentFragment();

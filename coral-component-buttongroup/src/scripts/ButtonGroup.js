@@ -535,12 +535,10 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
     // Store variant to be able to reset it when item is removed
     item._initialVariant = item._initialVariant || item.variant;
     
-    // Custom variant
-    item.variant = Button.variant._CUSTOM;
-    
-    // We need to add button group specific class to style the button correctly
-    item.classList.add('_coral-ActionButton');
-    item.label.classList.add('_coral-ActionButton-label');
+    // Force action variant
+    if (!(item.variant === Button.variant.ACTION || item.variant === Button.variant.QUIET_ACTION)) {
+      item.variant = item.variant === Button.variant.QUIET ? Button.variant.QUIET_ACTION : Button.variant.ACTION;
+    }
     
     if (this.selectionMode !== selectionMode.NONE) {
       if (this.selectionMode === selectionMode.SINGLE) {
@@ -582,9 +580,6 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
     // Restore variant
     item.variant = item._initialVariant;
     item._initialVariant = undefined;
-    
-    // We remove the class that was added
-    item.classList.remove('_coral-ActionButton');
     item.removeAttribute('role');
     
     if (!item.parentNode) {

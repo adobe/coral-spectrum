@@ -1454,17 +1454,15 @@ describe('ButtonGroup', function() {
       expect(el.value).to.equal('item1', '"item1" should now be set as value');
     });
     
-    it('should add item classes to children', function() {
-      expect(item1.variant).to.equal(Button.variant._CUSTOM);
-      expect(item1.classList.contains('_coral-ActionButton')).to.be.true;
+    it('should set action variant by default', function() {
+      expect(item1.variant).to.equal(Button.variant.ACTION);
     });
     
-    it('should remove item classes from children', function(done) {
+    it('should restore initial variant', function(done) {
       item1.remove();
       
       helpers.next(() => {
         expect(item1.variant).to.equal(Button.variant.DEFAULT);
-        expect(item1.classList.contains('_coral-ActionButton')).to.be.false;
         done();
       });
     });

@@ -32,10 +32,12 @@ const testButton = function(Constructor, tagName, baseTagName) {
         expect(Constructor.variant.PRIMARY).to.equal('primary');
         expect(Constructor.variant.WARNING).to.equal('warning');
         expect(Constructor.variant.QUIET).to.equal('quiet');
+        expect(Constructor.variant.ACTION).to.equal('action');
+        expect(Constructor.variant.QUIET_ACTION).to.equal('quietaction');
         expect(Constructor.variant.MINIMAL).to.equal('minimal');
         expect(Constructor.variant.DEFAULT).to.equal('default');
         expect(Constructor.variant._CUSTOM).to.equal('_custom');
-        expect(Object.keys(Constructor.variant).length).to.equal(8);
+        expect(Object.keys(Constructor.variant).length).to.equal(10);
       });
   
       it('should define the iconPositions in an enum', function() {
@@ -462,6 +464,22 @@ const testButton = function(Constructor, tagName, baseTagName) {
           button.variant = Constructor.variant.WARNING;
           expect(button.classList.contains('_coral-Button--warning')).to.be.true;
           expect(button.classList.contains('_coral-Button--cta')).to.be.false;
+        });
+        
+        it('should set action specific classes', function() {
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" variant="action"></'+ baseTagName +'>');
+          expect(button.classList.contains('_coral-Button')).to.be.false;
+          expect(button.label.classList.contains('_coral-Button-label')).to.be.false;
+          expect(button.classList.contains('_coral-ActionButton')).to.be.true;
+          expect(button.label.classList.contains('_coral-ActionButton-label')).to.be.true;
+        });
+        
+        it('should remove all classes if _custom variant is set', function() {
+          const button = build('<'+ baseTagName +' is="'+ tagName +'" variant="_custom"></'+ baseTagName +'>');
+          expect(button.classList.contains('_coral-Button')).to.be.false;
+          expect(button.label.classList.contains('_coral-Button-label')).to.be.false;
+          expect(button.classList.contains('_coral-ActionButton')).to.be.false;
+          expect(button.label.classList.contains('_coral-ActionButton-label')).to.be.false;
         });
       });
     

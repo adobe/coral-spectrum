@@ -152,17 +152,11 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
       button.classList.add('_coral-ActionBar-button');
       
       const oldVariant = button.getAttribute('variant');
-      if (oldVariant === Button.variant._CUSTOM) {
+      if (oldVariant === Button.variant.ACTION || oldVariant === Button.variant.QUIET_ACTION) {
         return;
       }
       
-      button.setAttribute('variant', Button.variant._CUSTOM);
-      button.classList.add('_coral-ActionButton');
-      button.label && button.label.classList.add('_coral-ActionButton-label');
-      
-      if (oldVariant === Button.variant.QUIET) {
-        button.classList.add('_coral-ActionButton--quiet');
-      }
+      button.setAttribute('variant', oldVariant === Button.variant.QUIET ? Button.variant.QUIET_ACTION : Button.variant.ACTION);
     }
   }
   
