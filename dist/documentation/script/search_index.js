@@ -91,9 +91,9 @@ window.esdocSearchIndex = [
   ],
   [
     "@adobe/coral-spectrum~anchorbuttonlabel",
-    "class/coral-spectrum/coral-component-anchorbutton/src/scripts/AnchorButtonLabel.js~AnchorButtonLabel.html",
+    "function/index.html#static-function-AnchorButtonLabel",
     "<span>AnchorButtonLabel</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
-    "class"
+    "function"
   ],
   [
     "@adobe/coral-spectrum~anchorlist",
@@ -193,9 +193,9 @@ window.esdocSearchIndex = [
   ],
   [
     "@adobe/coral-spectrum~buttonlabel",
-    "class/coral-spectrum/coral-component-button/src/scripts/ButtonLabel.js~ButtonLabel.html",
+    "function/index.html#static-function-ButtonLabel",
     "<span>ButtonLabel</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
-    "class"
+    "function"
   ],
   [
     "@adobe/coral-spectrum~buttonlist",

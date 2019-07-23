@@ -78,7 +78,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-AlertSizeEnum">AlertSizeEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-AlertVariantEnum">AlertVariantEnum</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-anchorbutton-src-scripts">coral-component-anchorbutton/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-anchorbutton/src/scripts/AnchorButton.js~AnchorButton.html">AnchorButton</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-anchorbutton/src/scripts/AnchorButtonLabel.js~AnchorButtonLabel.html">AnchorButtonLabel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-AnchorButtonLabel">AnchorButtonLabel</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-autocomplete-src-scripts">coral-component-autocomplete/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-autocomplete/src/scripts/Autocomplete.js~Autocomplete.html">Autocomplete</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-autocomplete/src/scripts/AutocompleteItem.js~AutocompleteItem.html">AutocompleteItem</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-AutocompleteSuggestion">AutocompleteSuggestion</a></span></span></li>
@@ -87,7 +87,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-AutocompleteMatchEnum">AutocompleteMatchEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-AutocompleteVariantEnum">AutocompleteVariantEnum</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-button-src-scripts">coral-component-button/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-button/src/scripts/Button.js~Button.html">Button</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-button/src/scripts/ButtonLabel.js~ButtonLabel.html">ButtonLabel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ButtonLabel">ButtonLabel</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-buttongroup-src-scripts">coral-component-buttongroup/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-buttongroup/src/scripts/ButtonGroup.js~ButtonGroup.html">ButtonGroup</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ButtonGroupSelectionModeEnum">ButtonGroupSelectionModeEnum</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-calendar-src-scripts">coral-component-calendar/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-calendar/src/scripts/Calendar.js~Calendar.html">Calendar</a></span></span></li>
@@ -452,6 +452,10 @@ for (const key in Icon.size) {
  A button that indicates that the button&apos;s action is the secondary action.
  @property {String} QUIET
  A quiet button that indicates that the button&apos;s action is the primary action.
+ @property {String} ACTION
+ An action button.
+ @property {String} QUIET_ACTION
+ A quiet action button.
  @property {String} MINIMAL
  A quiet minimalistic button.
  @property {String} WARNING
@@ -466,20 +470,24 @@ const variant = {
   QUIET: &apos;quiet&apos;,
   MINIMAL: &apos;minimal&apos;,
   WARNING: &apos;warning&apos;,
+  ACTION: &apos;action&apos;,
+  QUIET_ACTION: &apos;quietaction&apos;,
   DEFAULT: &apos;default&apos;,
-  // Private to be used for custom Button classes like toggle, dropdown and action
+  // Private to be used for custom Button classes like field buttons
   _CUSTOM: &apos;_custom&apos;
 };
 
 // the button&apos;s base classname
 const CLASSNAME = &apos;_coral-Button&apos;;
+const ACTION_CLASSNAME = &apos;_coral-ActionButton&apos;;
 
 const ALL_VARIANT_CLASSES = [
   `${CLASSNAME}--cta`,
   `${CLASSNAME}--primary`,
   `${CLASSNAME}--secondary`,
   `${CLASSNAME}--warning`,
-  `${CLASSNAME}--quiet`
+  `${CLASSNAME}--quiet`,
+  `${ACTION_CLASSNAME}--quiet`,
 ];
 
 const VARIANT_MAP = {
@@ -489,7 +497,9 @@ const VARIANT_MAP = {
   warning: [CLASSNAME, ALL_VARIANT_CLASSES[3]],
   quiet: [CLASSNAME, ALL_VARIANT_CLASSES[1], ALL_VARIANT_CLASSES[4]],
   minimal: [CLASSNAME, ALL_VARIANT_CLASSES[2], ALL_VARIANT_CLASSES[4]],
-  default: [CLASSNAME, ALL_VARIANT_CLASSES[1]]
+  default: [CLASSNAME, ALL_VARIANT_CLASSES[1]],
+  action: [ACTION_CLASSNAME],
+  quietaction: [ACTION_CLASSNAME, ALL_VARIANT_CLASSES[5]],
 };
 
 /**
@@ -571,6 +581,9 @@ class BaseButton extends superClass {
       handle: &apos;label&apos;,
       tagName: this._contentZoneTagName,
       insert: function(label) {
+        // Update label styles
+        this._updateLabel(label);
+        
         // Ensure there&apos;s no extra space left for icon only buttons
         if (label.innerHTML.trim() === &apos;&apos;) {
           label.textContent = &apos;&apos;;
@@ -734,6 +747,7 @@ class BaseButton extends superClass {
     this._reflectAttribute(&apos;variant&apos;, this._variant);
     
     // removes every existing variant
+    this.classList.remove(CLASSNAME, ACTION_CLASSNAME);
     this.classList.remove(...ALL_VARIANT_CLASSES);
     
     if (this._variant === variant._CUSTOM) {
@@ -741,7 +755,14 @@ class BaseButton extends superClass {
     }
     else {
       this.classList.add(...VARIANT_MAP[this._variant]);
+      
+      if (this._variant === variant.ACTION || this._variant === variant.QUIET_ACTION) {
+        this.classList.remove(CLASSNAME);
+      }
     }
+  
+    // Update label styles
+    this._updateLabel();
   }
   
   /**
@@ -834,6 +855,21 @@ class BaseButton extends superClass {
     });
   }
   
+  _updateLabel(label) {
+    label = label || this._elements.label;
+    
+    label.classList.remove(`${CLASSNAME}-label`, `${ACTION_CLASSNAME}-label`);
+    
+    if (this._variant !== variant._CUSTOM) {
+      if (this._variant === variant.ACTION || this._variant === variant.QUIET_ACTION) {
+        label.classList.add(`${ACTION_CLASSNAME}-label`);
+      }
+      else {
+        label.classList.add(`${CLASSNAME}-label`);
+      }
+    }
+  }
+  
   /** @private */
   get _contentZoneTagName() {
     return Object.keys(this._contentZones)[0];
@@ -892,10 +928,6 @@ class BaseButton extends superClass {
     // Default reflected attributes
     if (!this._variant) { this.variant = variant.DEFAULT; }
     if (!this._size) { this.size = size.MEDIUM; }
-    
-    if (this.variant !== variant._CUSTOM) {
-      this.classList.add(CLASSNAME);
-    }
     
     // Create a fragment
     const fragment = document.createDocumentFragment();

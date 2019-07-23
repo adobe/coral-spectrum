@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">87.61% </span>
+        <span class="strong">87.16% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>99/113</span>
+        <span class='fraction'>95/109</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">72.41% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>19/22</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">87.61% </span>
+        <span class="strong">87.16% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>99/113</span>
+        <span class='fraction'>95/109</span>
       </div>
     </div>
     <p class="quiet">
@@ -361,13 +361,7 @@
 <a name='L313'></a><a href='#L313'>313</a>
 <a name='L314'></a><a href='#L314'>314</a>
 <a name='L315'></a><a href='#L315'>315</a>
-<a name='L316'></a><a href='#L316'>316</a>
-<a name='L317'></a><a href='#L317'>317</a>
-<a name='L318'></a><a href='#L318'>318</a>
-<a name='L319'></a><a href='#L319'>319</a>
-<a name='L320'></a><a href='#L320'>320</a>
-<a name='L321'></a><a href='#L321'>321</a>
-<a name='L322'></a><a href='#L322'>322</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L316'></a><a href='#L316'>316</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -484,12 +478,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">482x</span>
-<span class="cline-any cline-yes">482x</span>
-<span class="cline-any cline-yes">482x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">482x</span>
-<span class="cline-any cline-yes">42x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -670,7 +658,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">136108x</span>
+<span class="cline-any cline-yes">136494x</span>
 <span class="cline-any cline-yes">216x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -678,7 +666,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">136108x</span>
+<span class="cline-any cline-yes">136494x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -818,41 +806,35 @@ const BaseActionBarContainer = (superClass) =&gt; class extends superClass {
    
    @type {String}
    @default ""
-   @htmlattribute morebuttontext
-   */
+   @htmlat<span class="missing-if-branch" title="if path not taken" >I</span>tribute morebuttontext
+   */<span class="cstat-no" title="statement not covered" ></span>
   get moreButtonText() {
     return this._moreButtonText || '';
   }
   set moreButtonText(value) {
-    this._<span class="missing-if-branch" title="if path not taken" >I</span>moreButtonText = transform.string(value);
-  <span class="cstat-no" title="statement not covered" ></span>
+    this._moreButtonText = transform.string(value);
+  
     if (this._elements.moreButton) {
       // moreButton might not have been created so far
       this._elements.moreButtonLabel.innerHTML = this._moreButtonText;
       this._elements.moreButton[this._moreButtonText.trim() === '' ? 'setAttribute' : 'removeAttribute']('title', i18n.get('More'));
-    }
+    }<span class="branch-1 cbranch-no" title="branch not covered" ></span>
   }
   
   /**
    Style item content
    */
-  _styleItem(item) {<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+  _styleItem(item) {
     const button = item.querySelector('button[is="coral-button"]') || item.querySelector('a[is="coral-anchorbutton"]');
     if (button) {
       button.classList.add('_coral-ActionBar-button');
       
       const oldVariant = button.getAttribute('variant');
-      if (oldVariant === Button.variant._CUSTOM) {
+      if (oldVariant === Button.variant.ACTION || oldVariant === Button.variant.QUIET_ACTION) {
         return;
       }
       
-      button.setAttribute('variant', Button.variant._CUSTOM);
-      button.classList.add('_coral-ActionButton');
-      button.label &amp;&amp; button.label.classList.add('_coral-ActionButton-label');
-      
-      if (oldVariant === Button.variant.QUIET) {
-        button.classList.add('_coral-ActionButton--quiet');
-      }
+      button.setAttribute('variant', oldVariant === Button.variant.QUIET ? Button.variant.QUIET_ACTION : Button.variant.ACTION);
     }
   }
   
@@ -1015,7 +997,7 @@ export default BaseActionBarContainer;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Jul 17 2019 09:53:33 GMT+0200 (CEST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 23 2019 10:12:17 GMT+0200 (CEST)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

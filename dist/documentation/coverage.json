@@ -1,29 +1,31 @@
 {
-  "coverage": "66.14%",
-  "expectCount": 3480,
-  "actualCount": 2302,
+  "coverage": "66.07%",
+  "expectCount": 3478,
+  "actualCount": 2298,
   "files": {
     "coral-spectrum/coral-base-button/src/scripts/BaseButton.js": {
-      "expectCount": 40,
+      "expectCount": 42,
       "actualCount": 23,
       "undocumentLines": [
         31,
-        72,
-        74,
-        82,
-        132,
-        139,
-        145,
-        201,
-        222,
-        243,
-        264,
-        280,
-        311,
-        330,
-        357,
-        369,
-        439
+        78,
+        79,
+        81,
+        90,
+        142,
+        149,
+        155,
+        214,
+        235,
+        256,
+        277,
+        293,
+        324,
+        343,
+        378,
+        390,
+        455,
+        475
       ]
     },
     "coral-spectrum/coral-base-component/src/scripts/BaseComponent.js": {
@@ -264,8 +266,8 @@
         98,
         121,
         137,
-        247,
-        255
+        241,
+        249
       ]
     },
     "coral-spectrum/coral-component-actionbar/src/scripts/getFirstSelectableWrappedItem.js": {
@@ -319,8 +321,8 @@
       ]
     },
     "coral-spectrum/coral-component-anchorbutton/src/scripts/AnchorButtonLabel.js": {
-      "expectCount": 3,
-      "actualCount": 3,
+      "expectCount": 1,
+      "actualCount": 1,
       "undocumentLines": []
     },
     "coral-spectrum/coral-component-autocomplete/src/scripts/Autocomplete.js": {
@@ -378,8 +380,8 @@
       "undocumentLines": []
     },
     "coral-spectrum/coral-component-button/src/scripts/ButtonLabel.js": {
-      "expectCount": 3,
-      "actualCount": 3,
+      "expectCount": 1,
+      "actualCount": 1,
       "undocumentLines": []
     },
     "coral-spectrum/coral-component-buttongroup/src/scripts/ButtonGroup.js": {
@@ -395,7 +397,7 @@
         270,
         293,
         322,
-        697
+        692
       ]
     },
     "coral-spectrum/coral-component-calendar/src/scripts/Calendar.js": {
@@ -2345,13 +2347,13 @@
         25,
         28,
         45,
+        249,
         251,
-        253,
-        266,
+        264,
+        267,
         269,
-        271,
-        276,
-        882
+        274,
+        880
       ]
     },
     "coral-spectrum/coral-utils/src/scripts/Events.js": {

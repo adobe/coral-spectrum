@@ -78,7 +78,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-AlertSizeEnum">AlertSizeEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-AlertVariantEnum">AlertVariantEnum</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-anchorbutton-src-scripts">coral-component-anchorbutton/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-anchorbutton/src/scripts/AnchorButton.js~AnchorButton.html">AnchorButton</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-anchorbutton/src/scripts/AnchorButtonLabel.js~AnchorButtonLabel.html">AnchorButtonLabel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-AnchorButtonLabel">AnchorButtonLabel</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-autocomplete-src-scripts">coral-component-autocomplete/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-autocomplete/src/scripts/Autocomplete.js~Autocomplete.html">Autocomplete</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-autocomplete/src/scripts/AutocompleteItem.js~AutocompleteItem.html">AutocompleteItem</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-AutocompleteSuggestion">AutocompleteSuggestion</a></span></span></li>
@@ -87,7 +87,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-AutocompleteMatchEnum">AutocompleteMatchEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-AutocompleteVariantEnum">AutocompleteVariantEnum</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-button-src-scripts">coral-component-button/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-button/src/scripts/Button.js~Button.html">Button</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-button/src/scripts/ButtonLabel.js~ButtonLabel.html">ButtonLabel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ButtonLabel">ButtonLabel</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-buttongroup-src-scripts">coral-component-buttongroup/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-buttongroup/src/scripts/ButtonGroup.js~ButtonGroup.html">ButtonGroup</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ButtonGroupSelectionModeEnum">ButtonGroupSelectionModeEnum</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-calendar-src-scripts">coral-component-calendar/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-calendar/src/scripts/Calendar.js~Calendar.html">Calendar</a></span></span></li>
@@ -938,12 +938,10 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
     // Store variant to be able to reset it when item is removed
     item._initialVariant = item._initialVariant || item.variant;
     
-    // Custom variant
-    item.variant = Button.variant._CUSTOM;
-    
-    // We need to add button group specific class to style the button correctly
-    item.classList.add(&apos;_coral-ActionButton&apos;);
-    item.label.classList.add(&apos;_coral-ActionButton-label&apos;);
+    // Force action variant
+    if (!(item.variant === Button.variant.ACTION || item.variant === Button.variant.QUIET_ACTION)) {
+      item.variant = item.variant === Button.variant.QUIET ? Button.variant.QUIET_ACTION : Button.variant.ACTION;
+    }
     
     if (this.selectionMode !== selectionMode.NONE) {
       if (this.selectionMode === selectionMode.SINGLE) {
@@ -985,9 +983,6 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
     // Restore variant
     item.variant = item._initialVariant;
     item._initialVariant = undefined;
-    
-    // We remove the class that was added
-    item.classList.remove(&apos;_coral-ActionButton&apos;);
     item.removeAttribute(&apos;role&apos;);
     
     if (!item.parentNode) {

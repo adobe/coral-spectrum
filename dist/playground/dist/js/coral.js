@@ -4246,7 +4246,7 @@
 
   var FOCUSABLE_ELEMENTS = ['input:not([disabled])', 'select:not([disabled])', 'textarea:not([disabled])', 'button:not([disabled])', 'a[href]', 'area[href]', 'summary', 'iframe', 'object', 'embed', 'audio[controls]', 'video[controls]', '[contenteditable]']; // To support Coral.commons.ready and differentiate lightweight tags from defined elements
 
-  var CORAL_COMPONENTS = ['coral-accordion', 'coral-accordion-item', 'coral-accordion-item-content', 'coral-actionbar', 'coral-actionbar-container', 'coral-actionbar-item', 'coral-actionbar-primary', 'coral-actionbar-secondary', 'coral-alert', 'coral-alert-header', 'coral-alert-content', 'coral-alert-footer', 'coral-anchorbutton-label', 'a[is="coral-anchorbutton"]', 'coral-autocomplete', 'coral-autocomplete-item', 'coral-autocomplete-item', 'button[is="coral-button"]', 'coral-button-label', 'coral-buttongroup', 'coral-calendar', 'coral-card', 'coral-card-content', 'coral-card-banner', 'coral-card-banner-content', 'coral-card-banner-header', 'coral-card-context', 'coral-card-description', 'coral-card-property', 'coral-card-propertylist', 'coral-card-subtitle', 'coral-card-title', 'coral-charactercount', 'coral-checkbox', 'coral-clock', 'coral-coachmark', 'coral-colorinput', 'coral-colorinput-colorproperties', 'coral-colorinput-item', 'coral-colorinput-slider', 'coral-colorinput-swatch', 'coral-colorinput-swatches', 'coral-columnview', 'coral-columnview-column', 'coral-columnview-column-content', 'coral-columnview-item', 'coral-columnview-item-content', 'coral-columnview-item-thumbnail', 'coral-columnview-preview', 'coral-columnview-preview-content', 'coral-cyclebutton', 'coral-cyclebutton-action', 'coral-cyclebutton-item', 'coral-datepicker', 'coral-dialog', 'coral-dialog-header', 'coral-dialog-content', 'coral-dialog-footer', 'coral-drawer', 'coral-fileupload', 'coral-icon', 'coral-list', 'coral-selectlist', 'coral-buttonlist', 'coral-anchorlist', 'coral-list-item', 'coral-list-item-content', 'coral-selectlist-item', 'coral-selectlist-group', 'a[is="coral-anchorlist-item"]', 'button[is="coral-buttonlist-item"]', 'coral-masonry', 'coral-masonry-item', 'coral-multifield', 'coral-multifield-item', 'coral-numberinput', 'coral-overlay', 'coral-panel', 'coral-panelstack', 'coral-playground', 'coral-popover', 'coral-progress', 'coral-quickactions', 'coral-radio', 'coral-search', 'coral-select', 'coral-select-item', 'coral-shell', 'coral-shell-header', 'coral-shell-help', 'a[is="coral-shell-homeanchor"]', 'a[is="coral-shell-help-item"]', 'a[is="coral-shell-workspace"]', 'a[is="coral-shell-solution"]', 'coral-shell-menu', 'coral-shell-menubar', 'coral-shell-menubar-item', 'coral-shell-organization', 'coral-shell-orgswitcher', 'coral-shell-solution', 'coral-shell-solutions', 'coral-shell-solutionswitcher', 'coral-shell-suborganization', 'coral-shell-user', 'coral-shell-workspaces', 'coral-slider', 'coral-slider-item', 'coral-rangedslider', 'coral-splitbutton', 'coral-status', 'coral-step', 'coral-steplist', 'coral-step-label', 'coral-switch', 'table[is="coral-table"]', 'thead[is="coral-table-head"]', 'tbody[is="coral-table-body"]', 'tfoot[is="coral-table-foot"]', 'tr[is="coral-table-row"]', 'td[is="coral-table-cell"]', 'th[is="coral-table-headercell"]', 'col[is="coral-table-column"]', 'coral-tab', 'coral-tab-label', 'coral-tablist', 'coral-tabview', 'coral-taglist', 'coral-tag', 'textarea[is="coral-textarea"]', 'input[is="coral-textfield"]', 'coral-toast', 'coral-toast-content', 'coral-tooltip', 'coral-tooltip-content', 'coral-tree', 'coral-tree-item', 'coral-wait', 'coral-wizardview'];
+  var CORAL_COMPONENTS = ['coral-accordion', 'coral-accordion-item', 'coral-accordion-item-content', 'coral-actionbar', 'coral-actionbar-container', 'coral-actionbar-item', 'coral-actionbar-primary', 'coral-actionbar-secondary', 'coral-alert', 'coral-alert-header', 'coral-alert-content', 'coral-alert-footer', 'a[is="coral-anchorbutton"]', 'coral-autocomplete', 'coral-autocomplete-item', 'coral-autocomplete-item', 'button[is="coral-button"]', 'coral-buttongroup', 'coral-calendar', 'coral-card', 'coral-card-content', 'coral-card-banner', 'coral-card-banner-content', 'coral-card-banner-header', 'coral-card-context', 'coral-card-description', 'coral-card-property', 'coral-card-propertylist', 'coral-card-subtitle', 'coral-card-title', 'coral-charactercount', 'coral-checkbox', 'coral-clock', 'coral-coachmark', 'coral-colorinput', 'coral-colorinput-colorproperties', 'coral-colorinput-item', 'coral-colorinput-slider', 'coral-colorinput-swatch', 'coral-colorinput-swatches', 'coral-columnview', 'coral-columnview-column', 'coral-columnview-column-content', 'coral-columnview-item', 'coral-columnview-item-content', 'coral-columnview-item-thumbnail', 'coral-columnview-preview', 'coral-columnview-preview-content', 'coral-cyclebutton', 'coral-cyclebutton-action', 'coral-cyclebutton-item', 'coral-datepicker', 'coral-dialog', 'coral-dialog-header', 'coral-dialog-content', 'coral-dialog-footer', 'coral-drawer', 'coral-fileupload', 'coral-icon', 'coral-list', 'coral-selectlist', 'coral-buttonlist', 'coral-anchorlist', 'coral-list-item', 'coral-list-item-content', 'coral-selectlist-item', 'coral-selectlist-group', 'a[is="coral-anchorlist-item"]', 'button[is="coral-buttonlist-item"]', 'coral-masonry', 'coral-masonry-item', 'coral-multifield', 'coral-multifield-item', 'coral-numberinput', 'coral-overlay', 'coral-panel', 'coral-panelstack', 'coral-playground', 'coral-popover', 'coral-progress', 'coral-quickactions', 'coral-radio', 'coral-search', 'coral-select', 'coral-select-item', 'coral-shell', 'coral-shell-header', 'coral-shell-help', 'a[is="coral-shell-homeanchor"]', 'a[is="coral-shell-help-item"]', 'a[is="coral-shell-workspace"]', 'a[is="coral-shell-solution"]', 'coral-shell-menu', 'coral-shell-menubar', 'coral-shell-menubar-item', 'coral-shell-organization', 'coral-shell-orgswitcher', 'coral-shell-solution', 'coral-shell-solutions', 'coral-shell-solutionswitcher', 'coral-shell-suborganization', 'coral-shell-user', 'coral-shell-workspaces', 'coral-slider', 'coral-slider-item', 'coral-rangedslider', 'coral-splitbutton', 'coral-status', 'coral-step', 'coral-steplist', 'coral-step-label', 'coral-switch', 'table[is="coral-table"]', 'thead[is="coral-table-head"]', 'tbody[is="coral-table-body"]', 'tfoot[is="coral-table-foot"]', 'tr[is="coral-table-row"]', 'td[is="coral-table-cell"]', 'th[is="coral-table-headercell"]', 'col[is="coral-table-column"]', 'coral-tab', 'coral-tab-label', 'coral-tablist', 'coral-tabview', 'coral-taglist', 'coral-tag', 'textarea[is="coral-textarea"]', 'input[is="coral-textfield"]', 'coral-toast', 'coral-toast-content', 'coral-tooltip', 'coral-tooltip-content', 'coral-tree', 'coral-tree-item', 'coral-wait', 'coral-wizardview'];
   /**
    Converts CSS time to milliseconds. It supports both s and ms units. If the provided value has an unrecogenized unit,
    zero will be returned.
@@ -20498,6 +20498,10 @@
    A button that indicates that the button's action is the secondary action.
    @property {String} QUIET
    A quiet button that indicates that the button's action is the primary action.
+   @property {String} ACTION
+   An action button.
+   @property {String} QUIET_ACTION
+   A quiet action button.
    @property {String} MINIMAL
    A quiet minimalistic button.
    @property {String} WARNING
@@ -20514,13 +20518,16 @@
     QUIET: 'quiet',
     MINIMAL: 'minimal',
     WARNING: 'warning',
+    ACTION: 'action',
+    QUIET_ACTION: 'quietaction',
     DEFAULT: 'default',
-    // Private to be used for custom Button classes like toggle, dropdown and action
+    // Private to be used for custom Button classes like field buttons
     _CUSTOM: '_custom'
   }; // the button's base classname
 
   var CLASSNAME$6 = '_coral-Button';
-  var ALL_VARIANT_CLASSES$1 = ["".concat(CLASSNAME$6, "--cta"), "".concat(CLASSNAME$6, "--primary"), "".concat(CLASSNAME$6, "--secondary"), "".concat(CLASSNAME$6, "--warning"), "".concat(CLASSNAME$6, "--quiet")];
+  var ACTION_CLASSNAME = '_coral-ActionButton';
+  var ALL_VARIANT_CLASSES$1 = ["".concat(CLASSNAME$6, "--cta"), "".concat(CLASSNAME$6, "--primary"), "".concat(CLASSNAME$6, "--secondary"), "".concat(CLASSNAME$6, "--warning"), "".concat(CLASSNAME$6, "--quiet"), "".concat(ACTION_CLASSNAME, "--quiet")];
   var VARIANT_MAP = {
     cta: [CLASSNAME$6, ALL_VARIANT_CLASSES$1[0]],
     primary: [CLASSNAME$6, ALL_VARIANT_CLASSES$1[0]],
@@ -20528,7 +20535,9 @@
     warning: [CLASSNAME$6, ALL_VARIANT_CLASSES$1[3]],
     quiet: [CLASSNAME$6, ALL_VARIANT_CLASSES$1[1], ALL_VARIANT_CLASSES$1[4]],
     minimal: [CLASSNAME$6, ALL_VARIANT_CLASSES$1[2], ALL_VARIANT_CLASSES$1[4]],
-    default: [CLASSNAME$6, ALL_VARIANT_CLASSES$1[1]]
+    default: [CLASSNAME$6, ALL_VARIANT_CLASSES$1[1]],
+    action: [ACTION_CLASSNAME],
+    quietaction: [ACTION_CLASSNAME, ALL_VARIANT_CLASSES$1[5]]
   };
   /**
    Enumeration for {@link BaseButton} sizes.
@@ -20693,6 +20702,20 @@
               }
             });
           }
+        }, {
+          key: "_updateLabel",
+          value: function _updateLabel(label) {
+            label = label || this._elements.label;
+            label.classList.remove("".concat(CLASSNAME$6, "-label"), "".concat(ACTION_CLASSNAME, "-label"));
+
+            if (this._variant !== variant$2._CUSTOM) {
+              if (this._variant === variant$2.ACTION || this._variant === variant$2.QUIET_ACTION) {
+                label.classList.add("".concat(ACTION_CLASSNAME, "-label"));
+              } else {
+                label.classList.add("".concat(CLASSNAME$6, "-label"));
+              }
+            }
+          }
           /** @private */
 
         }, {
@@ -20709,10 +20732,6 @@
 
             if (!this._size) {
               this.size = size$1.MEDIUM;
-            }
-
-            if (this.variant !== variant$2._CUSTOM) {
-              this.classList.add(CLASSNAME$6);
             } // Create a fragment
 
 
@@ -20786,7 +20805,10 @@
               handle: 'label',
               tagName: this._contentZoneTagName,
               insert: function insert(label) {
-                // Ensure there's no extra space left for icon only buttons
+                // Update label styles
+                this._updateLabel(label); // Ensure there's no extra space left for icon only buttons
+
+
                 if (label.innerHTML.trim() === '') {
                   label.textContent = '';
                 }
@@ -20970,6 +20992,8 @@
             this._reflectAttribute('variant', this._variant); // removes every existing variant
 
 
+            this.classList.remove(CLASSNAME$6, ACTION_CLASSNAME);
+
             (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$1);
 
             if (this._variant === variant$2._CUSTOM) {
@@ -20978,7 +21002,14 @@
               var _this$classList2;
 
               (_this$classList2 = this.classList).add.apply(_this$classList2, _toConsumableArray(VARIANT_MAP[this._variant]));
-            }
+
+              if (this._variant === variant$2.ACTION || this._variant === variant$2.QUIET_ACTION) {
+                this.classList.remove(CLASSNAME$6);
+              }
+            } // Update label styles
+
+
+            this._updateLabel();
           }
           /**
            Inherited from {@link BaseComponent#trackingElement}.
@@ -21117,36 +21148,16 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var CLASSNAME$7 = '_coral-Button-label';
+
   /**
    @class Coral.Button.Label
    @classdesc The Button label content
    @htmltag coral-button-label
-   @extends {HTMLElement}
+   @return {HTMLElement}
    */
-
-  var ButtonLabel =
-  /*#__PURE__*/
-  function (_HTMLElement) {
-    _inherits(ButtonLabel, _HTMLElement);
-
-    function ButtonLabel() {
-      _classCallCheck(this, ButtonLabel);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(ButtonLabel).apply(this, arguments));
-    }
-
-    _createClass(ButtonLabel, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        this.classList.add(CLASSNAME$7);
-      }
-    }]);
-
-    return ButtonLabel;
-  }(_wrapNativeSuper(HTMLElement));
+  var ButtonLabel = (function () {
+    return document.createElement('coral-button-label');
+  });
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -21163,7 +21174,6 @@
   window.customElements.define('coral-button', Button, {
     extends: 'button'
   });
-  window.customElements.define('coral-button-label', ButtonLabel);
   Button.Label = ButtonLabel;
 
   var template$3 = function anonymous(data_0
@@ -21193,10 +21203,10 @@
     var el7 = this["closeButton"] = document.createElement("button", "coral-button");
     el7.setAttribute("tracking", "off");
     el7.setAttribute("handle", "closeButton");
-    el7.className += " _coral-Dialog-closeButton _coral-ActionButton _coral-ActionButton--quiet";
+    el7.className += " _coral-Dialog-closeButton";
     el7.setAttribute("type", "button");
     el7.setAttribute("is", "coral-button");
-    el7.setAttribute("variant", "_custom");
+    el7.setAttribute("variant", "quietaction");
     el7.setAttribute("title", data_0["i18n"]["get"]('Close'));
     el7.setAttribute("tabindex", "-1");
     el7.setAttribute("coral-close", "");
@@ -21299,14 +21309,14 @@
   }; // The dialog's base classname
 
 
-  var CLASSNAME$8 = '_coral-Dialog'; // Modifier classnames
+  var CLASSNAME$7 = '_coral-Dialog'; // Modifier classnames
 
-  var FULLSCREEN_CLASSNAME = "".concat(CLASSNAME$8, "--fullscreenTakeover"); // A string of all possible variant classnames
+  var FULLSCREEN_CLASSNAME = "".concat(CLASSNAME$7, "--fullscreenTakeover"); // A string of all possible variant classnames
 
   var ALL_VARIANT_CLASSES$2 = [];
 
   for (var variantValue$1 in variant$3) {
-    ALL_VARIANT_CLASSES$2.push("".concat(CLASSNAME$8, "--").concat(variant$3[variantValue$1]));
+    ALL_VARIANT_CLASSES$2.push("".concat(CLASSNAME$7, "--").concat(variant$3[variantValue$1]));
   }
   /**
    @class Coral.Dialog
@@ -21532,7 +21542,7 @@
           return;
         }
 
-        this.classList.add("".concat(CLASSNAME$8, "-wrapper")); // Default reflected attributes
+        this.classList.add("".concat(CLASSNAME$7, "-wrapper")); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$3.DEFAULT;
@@ -21557,7 +21567,7 @@
 
         var contentZoneProvided = this.contains(content) && content || this.contains(footer) && footer || this.contains(header) && header; // Verify if the internal wrapper exists
 
-        var wrapper = this.querySelector(".".concat(CLASSNAME$8)); // Case where the dialog was rendered already - cloneNode support
+        var wrapper = this.querySelector(".".concat(CLASSNAME$7)); // Case where the dialog was rendered already - cloneNode support
 
         if (wrapper) {
           // Remove tab captures
@@ -21614,7 +21624,7 @@
           } // Only the wrapper gets the dialog class
 
 
-        this._elements.wrapper.classList.add(CLASSNAME$8); // Mark the dialog with a public attribute for sizing
+        this._elements.wrapper.classList.add(CLASSNAME$7); // Mark the dialog with a public attribute for sizing
 
 
         this._elements.wrapper.setAttribute('coral-dialog-size', ''); // Close button should stay under the dialog
@@ -21750,7 +21760,7 @@
         this._backdrop = validate.enumeration(backdrop)(value) && value || backdrop.MODAL;
         var showBackdrop = this._backdrop !== backdrop.NONE;
 
-        this._elements.wrapper.classList.toggle("".concat(CLASSNAME$8, "--noBackdrop"), !showBackdrop); // We're visible now, so hide or show the modal accordingly
+        this._elements.wrapper.classList.toggle("".concat(CLASSNAME$7, "--noBackdrop"), !showBackdrop); // We're visible now, so hide or show the modal accordingly
 
 
         if (this.open && showBackdrop) {
@@ -21790,7 +21800,7 @@
           this.setAttribute('role', 'dialog');
         } else {
           // Set new variant class
-          this._elements.wrapper.classList.add("".concat(CLASSNAME$8, "--").concat(this._variant)); // ARIA
+          this._elements.wrapper.classList.add("".concat(CLASSNAME$7, "--").concat(this._variant)); // ARIA
 
 
           this.setAttribute('role', 'alertdialog');
@@ -21897,7 +21907,7 @@
 
         this._reflectAttribute('closable', this._closable);
 
-        this._elements.wrapper.classList.toggle("".concat(CLASSNAME$8, "--dismissible"), this._closable === closable$1.ON);
+        this._elements.wrapper.classList.toggle("".concat(CLASSNAME$7, "--dismissible"), this._closable === closable$1.ON);
       }
       /**
        Whether the dialog can moved around by dragging the title.
@@ -22015,7 +22025,7 @@
     return Dialog;
   }(BaseOverlay(BaseComponent(HTMLElement)));
 
-  var CLASSNAME$9 = '_coral-Dialog-title';
+  var CLASSNAME$8 = '_coral-Dialog-title';
   /**
    @class Coral.Dialog.Header
    @classdesc The Dialog header content
@@ -22040,7 +22050,7 @@
 
       /** @ignore */
       value: function connectedCallback() {
-        this.classList.add(CLASSNAME$9);
+        this.classList.add(CLASSNAME$8);
         this.setAttribute('role', 'heading');
         this.setAttribute('aria-level', '2');
       }
@@ -22049,7 +22059,7 @@
     return DialogHeader;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$a = '_coral-Dialog-content';
+  var CLASSNAME$9 = '_coral-Dialog-content';
   /**
    @class Coral.Dialog.Content
    @classdesc The Dialog default content
@@ -22074,14 +22084,14 @@
 
       /** @ignore */
       value: function connectedCallback() {
-        this.classList.add(CLASSNAME$a);
+        this.classList.add(CLASSNAME$9);
       }
     }]);
 
     return DialogContent;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$b = '_coral-Dialog-footer';
+  var CLASSNAME$a = '_coral-Dialog-footer';
   /**
    @class Coral.Dialog.Footer
    @classdesc The Dialog footer content
@@ -22106,7 +22116,7 @@
 
       /** @ignore */
       value: function connectedCallback() {
-        this.classList.add(CLASSNAME$b);
+        this.classList.add(CLASSNAME$a);
       }
     }]);
 
@@ -22386,7 +22396,7 @@
     return null;
   }
 
-  var CLASSNAME$c = '_coral-ActionBar';
+  var CLASSNAME$b = '_coral-ActionBar';
   /**
    @class Coral.ActionBar
    @classdesc An ActionBar component containing arbitrary items. An item can either be added to the left or the right side
@@ -22886,7 +22896,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ActionBar.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$c); // Move direct items into primary content zone
+        this.classList.add(CLASSNAME$b); // Move direct items into primary content zone
 
         this._moveDirectItemChildren(); // Cleanup resize helpers object (cloneNode support)
 
@@ -23004,7 +23014,7 @@
     return ActionBar;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$d = '_coral-ActionBar-item';
+  var CLASSNAME$c = '_coral-ActionBar-item';
   /**
    @class Coral.ActionBar.Item
    @classdesc An ActionBar item component
@@ -23031,7 +23041,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ActionBarItem.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$d);
+        this.classList.add(CLASSNAME$c);
       }
     }, {
       key: "content",
@@ -23258,36 +23268,16 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var CLASSNAME$e = '_coral-Button-label';
+
   /**
    @class Coral.AnchorButton.Label
    @classdesc The AnchorButton label content
    @htmltag coral-anchorbutton-label
-   @extends {HTMLElement}
+   @return {HTMLElement}
    */
-
-  var AnchorButtonLabel =
-  /*#__PURE__*/
-  function (_HTMLElement) {
-    _inherits(AnchorButtonLabel, _HTMLElement);
-
-    function AnchorButtonLabel() {
-      _classCallCheck(this, AnchorButtonLabel);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(AnchorButtonLabel).apply(this, arguments));
-    }
-
-    _createClass(AnchorButtonLabel, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        this.classList.add(CLASSNAME$e);
-      }
-    }]);
-
-    return AnchorButtonLabel;
-  }(_wrapNativeSuper(HTMLElement));
+  var AnchorButtonLabel = (function () {
+    return document.createElement('coral-anchorbutton-label');
+  });
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -23304,7 +23294,6 @@
   window.customElements.define('coral-anchorbutton', AnchorButton, {
     extends: 'a'
   });
-  window.customElements.define('coral-anchorbutton-label', AnchorButtonLabel);
   AnchorButton.Label = AnchorButtonLabel;
 
   var template$4 = function anonymous(data_0
@@ -23635,17 +23624,11 @@
               button.classList.add('_coral-ActionBar-button');
               var oldVariant = button.getAttribute('variant');
 
-              if (oldVariant === Button.variant._CUSTOM) {
+              if (oldVariant === Button.variant.ACTION || oldVariant === Button.variant.QUIET_ACTION) {
                 return;
               }
 
-              button.setAttribute('variant', Button.variant._CUSTOM);
-              button.classList.add('_coral-ActionButton');
-              button.label && button.label.classList.add('_coral-ActionButton-label');
-
-              if (oldVariant === Button.variant.QUIET) {
-                button.classList.add('_coral-ActionButton--quiet');
-              }
+              button.setAttribute('variant', oldVariant === Button.variant.QUIET ? Button.variant.QUIET_ACTION : Button.variant.ACTION);
             }
           }
           /**
@@ -23892,7 +23875,7 @@
     );
   };
 
-  var CLASSNAME$f = '_coral-ActionBar-primary';
+  var CLASSNAME$d = '_coral-ActionBar-primary';
   /**
    @class Coral.ActionBar.Primary
    @classdesc An ActionBar primary component
@@ -23951,7 +23934,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ActionBarPrimary.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$f);
+        this.classList.add(CLASSNAME$d);
 
         this._attachMoreButtonToContainer();
       }
@@ -23960,7 +23943,7 @@
     return ActionBarPrimary;
   }(BaseActionBarContainer(BaseComponent(HTMLElement)));
 
-  var CLASSNAME$g = '_coral-ActionBar-secondary';
+  var CLASSNAME$e = '_coral-ActionBar-secondary';
   /**
    @class Coral.ActionBar.Secondary
    @classdesc An ActionBar secondary component
@@ -24014,7 +23997,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ActionBarSecondary.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$g);
+        this.classList.add(CLASSNAME$e);
 
         this._attachMoreButtonToContainer();
       }
@@ -24023,7 +24006,7 @@
     return ActionBarSecondary;
   }(BaseActionBarContainer(BaseComponent(HTMLElement)));
 
-  var CLASSNAME$h = '_coral-Menu';
+  var CLASSNAME$f = '_coral-Menu';
   /**
    Enumeration for {@link BaseList} interactions.
    
@@ -24221,7 +24204,7 @@
           value: function connectedCallback() {
             _get(_getPrototypeOf(_class.prototype), "connectedCallback", this).call(this);
 
-            this.classList.add(CLASSNAME$h); // Default reflected attributes
+            this.classList.add(CLASSNAME$f); // Default reflected attributes
 
             if (!this._interaction) {
               this.interaction = interaction$2.ON;
@@ -24289,7 +24272,7 @@
     );
   };
 
-  var CLASSNAME$i = '_coral-Menu-item';
+  var CLASSNAME$g = '_coral-Menu-item';
   /**
    @base BaseListItem
    @classdesc The base element for List Item components
@@ -24342,7 +24325,7 @@
           value: function connectedCallback() {
             _get(_getPrototypeOf(_class.prototype), "connectedCallback", this).call(this);
 
-            this.classList.add(CLASSNAME$i); // The attribute that makes different types of list items co-exist
+            this.classList.add(CLASSNAME$g); // The attribute that makes different types of list items co-exist
             // This is also used for event delegation
 
             this.setAttribute('coral-list-item', ''); // Fetch or create the content content zone element
@@ -24496,7 +24479,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var CLASSNAME$j = '_coral-Menu-divider';
+  var CLASSNAME$h = '_coral-Menu-divider';
   /**
    @class Coral.List.Divider
    @classdesc The List divider
@@ -24520,7 +24503,7 @@
 
       /** @ignore */
       value: function connectedCallback() {
-        this.classList.add(CLASSNAME$j); // a11y
+        this.classList.add(CLASSNAME$h); // a11y
 
         this.setAttribute('role', 'separator');
       }
@@ -24570,7 +24553,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var CLASSNAME$k = '_coral-Menu-itemLabel';
+  var CLASSNAME$i = '_coral-Menu-itemLabel';
   /**
    @class Coral.List.Item.Content
    @classdesc The List item content
@@ -24594,14 +24577,14 @@
 
       /** @ignore */
       value: function connectedCallback() {
-        this.classList.add(CLASSNAME$k);
+        this.classList.add(CLASSNAME$i);
       }
     }]);
 
     return ListItemContent;
   }(_wrapNativeSuper(HTMLElement));
 
-  var CLASSNAME$l = '_coral-AnchorList';
+  var CLASSNAME$j = '_coral-AnchorList';
   /**
    @class Coral.AnchorList
    @classdesc An AnchorList component that supports multi-line text, icons, and text wrapping with ellipsis.
@@ -24645,7 +24628,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(AnchorList.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$l);
+        this.classList.add(CLASSNAME$j);
       }
     }, {
       key: "_itemTagName",
@@ -24666,7 +24649,7 @@
     return AnchorList;
   }(BaseList(BaseComponent(HTMLElement)));
 
-  var CLASSNAME$m = '_coral-AnchorList-item';
+  var CLASSNAME$k = '_coral-AnchorList-item';
   /**
    @class Coral.AnchorList.Item
    @classdesc An AnchorList item component
@@ -24721,7 +24704,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(AnchorListItem.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$m);
+        this.classList.add(CLASSNAME$k);
       }
     }, {
       key: "disabled",
@@ -24757,7 +24740,7 @@
     return AnchorListItem;
   }(BaseListItem(BaseComponent(HTMLAnchorElement)));
 
-  var CLASSNAME$n = '_coral-ButtonList';
+  var CLASSNAME$l = '_coral-ButtonList';
   /**
    @class Coral.ButtonList
    @classdesc A ButtonList component that supports multi-line text, icons, and text wrapping with ellipsis.
@@ -24801,7 +24784,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ButtonList.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$n);
+        this.classList.add(CLASSNAME$l);
       }
     }, {
       key: "_itemTagName",
@@ -24822,7 +24805,7 @@
     return ButtonList;
   }(BaseList(BaseComponent(HTMLElement)));
 
-  var CLASSNAME$o = '_coral-ButtonList-item';
+  var CLASSNAME$m = '_coral-ButtonList-item';
   /**
    @class Coral.ButtonList.Item
    @classdesc An ButtonList item component
@@ -24850,7 +24833,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ButtonListItem.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$o);
+        this.classList.add(CLASSNAME$m);
       }
     }, {
       key: "trackingElement",
@@ -24965,7 +24948,7 @@
     LARGE: 'L'
   }; // the waits's base classname
 
-  var CLASSNAME$p = '_coral-CircleLoader';
+  var CLASSNAME$n = '_coral-CircleLoader';
   /**
    @class Coral.Wait
    @classdesc A Wait component to be used to indicate a process that is in-progress for an indefinite amount of time.
@@ -25021,7 +25004,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(Wait.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$p); // ARIA
+        this.classList.add(CLASSNAME$n); // ARIA
 
         this.setAttribute('role', 'progressbar'); // Default reflected attributes
 
@@ -25072,9 +25055,9 @@
         this._reflectAttribute('size', this._size); // large css change
 
 
-        this.classList.toggle("".concat(CLASSNAME$p, "--large"), this._size === size$2.LARGE); // small css change
+        this.classList.toggle("".concat(CLASSNAME$n, "--large"), this._size === size$2.LARGE); // small css change
 
-        this.classList.toggle("".concat(CLASSNAME$p, "--small"), this._size === size$2.SMALL);
+        this.classList.toggle("".concat(CLASSNAME$n, "--small"), this._size === size$2.SMALL);
       }
       /**
        Whether the component is centered or not. The container needs to have the style <code>position: relative</code>
@@ -25095,7 +25078,7 @@
 
         this._reflectAttribute('centered', this._centered);
 
-        this.classList.toggle("".concat(CLASSNAME$p, "--centered"), this._centered);
+        this.classList.toggle("".concat(CLASSNAME$n, "--centered"), this._centered);
       }
       /**
        The wait's variant. See {@link WaitVariantEnum}.
@@ -25138,14 +25121,14 @@
         this._reflectAttribute('indeterminate', this._indeterminate);
 
         if (this._indeterminate) {
-          this.classList.add("".concat(CLASSNAME$p, "--indeterminate")); // ARIA: Remove attributes
+          this.classList.add("".concat(CLASSNAME$n, "--indeterminate")); // ARIA: Remove attributes
 
           this.removeAttribute('aria-valuenow');
           this.removeAttribute('aria-valuemin');
           this.removeAttribute('aria-valuemax');
           this.value = 0;
         } else {
-          this.classList.remove("".concat(CLASSNAME$p, "--indeterminate")); // ARIA: Add attributes
+          this.classList.remove("".concat(CLASSNAME$n, "--indeterminate")); // ARIA: Add attributes
 
           this.setAttribute('aria-valuemin', '0');
           this.setAttribute('aria-valuemax', '100');
@@ -25303,7 +25286,7 @@
   /** @ignore */
 
   var GROUP_TAG_NAME = 'coral-selectlist-group';
-  var CLASSNAME$q = '_coral-Menu';
+  var CLASSNAME$o = '_coral-Menu';
   /**
    @class Coral.SelectList
    @classdesc A SelectList component is a selectable list of items.
@@ -25715,7 +25698,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(SelectList.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$q); // adds the role to support accessibility
+        this.classList.add(CLASSNAME$o); // adds the role to support accessibility
 
         this.setAttribute('role', 'listbox'); // Don't trigger events once connected
 
@@ -25895,7 +25878,7 @@
     return SelectList;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$r = '_coral-SelectList-group';
+  var CLASSNAME$p = '_coral-SelectList-group';
   /**
    @class Coral.SelectList.Group
    @classdesc A SelectList group component
@@ -25922,7 +25905,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(SelectListGroup.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$r);
+        this.classList.add(CLASSNAME$p);
         this.setAttribute('role', 'group');
       }
     }, {
@@ -26000,7 +25983,7 @@
     return frag;
   };
 
-  var CLASSNAME$s = '_coral-Menu-item';
+  var CLASSNAME$q = '_coral-Menu-item';
   /**
    @class Coral.SelectList.Item
    @classdesc A SelectList item component
@@ -26069,7 +26052,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(SelectListItem.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$s);
+        this.classList.add(CLASSNAME$q);
         this.setAttribute('role', 'option'); // Support cloneNode
 
         var template = this.querySelector('._coral-SelectList-icon');
@@ -26233,7 +26216,7 @@
    @htmltag coral-selectlist-item-content
    @extends {HTMLElement}
    */
-  var CLASSNAME$t = '_coral-Menu-itemLabel';
+  var CLASSNAME$r = '_coral-Menu-itemLabel';
 
   var SelectListItemContent =
   /*#__PURE__*/
@@ -26251,7 +26234,7 @@
 
       /** @ignore */
       value: function connectedCallback() {
-        this.classList.add(CLASSNAME$t);
+        this.classList.add(CLASSNAME$r);
       }
     }]);
 
@@ -26295,7 +26278,7 @@
   SelectList.Item = SelectListItem;
   SelectList.Item.Content = SelectListItemContent;
 
-  var CLASSNAME$u = '_coral-ActionBar-container';
+  var CLASSNAME$s = '_coral-ActionBar-container';
   /**
    Enumeration for {@link ActionBarContainer} positions.
    
@@ -26376,7 +26359,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ActionBarContainer.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$u); // Cleanup resize helpers object (cloneNode support)
+        this.classList.add(CLASSNAME$s); // Cleanup resize helpers object (cloneNode support)
 
         var resizeHelpers = this.getElementsByTagName('object');
 
@@ -26503,12 +26486,12 @@
     SMALL: 'S',
     LARGE: 'L'
   };
-  var CLASSNAME$v = '_coral-Alert'; // An array of all possible variant classnames
+  var CLASSNAME$t = '_coral-Alert'; // An array of all possible variant classnames
 
   var ALL_VARIANT_CLASSES$3 = [];
 
   for (var variantValue$2 in variant$5) {
-    ALL_VARIANT_CLASSES$3.push("".concat(CLASSNAME$v, "--").concat(variant$5[variantValue$2]));
+    ALL_VARIANT_CLASSES$3.push("".concat(CLASSNAME$t, "--").concat(variant$5[variantValue$2]));
   } // Used to map icon with variant
 
 
@@ -26605,7 +26588,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(Alert.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$v); // Default reflected attributes
+        this.classList.add(CLASSNAME$t); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$5.INFO;
@@ -26666,7 +26649,7 @@
         // This lets popover get our styles for free
 
 
-        this.classList.add("".concat(CLASSNAME$v, "--").concat(this._variant)); // Set the role attribute to alert or status depending on
+        this.classList.add("".concat(CLASSNAME$t, "--").concat(this._variant)); // Set the role attribute to alert or status depending on
         // the variant so that the element turns into a live region
 
         this.setAttribute('role', this._variant);
@@ -26799,7 +26782,7 @@
     return Alert;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$w = '_coral-Alert-header';
+  var CLASSNAME$u = '_coral-Alert-header';
   /**
    @class Coral.Alert.Header
    @classdesc The Alert header content
@@ -26824,14 +26807,14 @@
 
       /** @ignore */
       value: function connectedCallback() {
-        this.classList.add(CLASSNAME$w);
+        this.classList.add(CLASSNAME$u);
       }
     }]);
 
     return AlertHeader;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$x = '_coral-Alert-content';
+  var CLASSNAME$v = '_coral-Alert-content';
   /**
    @class Coral.Alert.Content
    @classdesc The Alert default content
@@ -26856,14 +26839,14 @@
 
       /** @ignore */
       value: function connectedCallback() {
-        this.classList.add(CLASSNAME$x);
+        this.classList.add(CLASSNAME$v);
       }
     }]);
 
     return AlertContent;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$y = '_coral-Alert-footer';
+  var CLASSNAME$w = '_coral-Alert-footer';
   /**
    @class Coral.Alert.Footer
    @classdesc The Alert footer content
@@ -26888,7 +26871,7 @@
 
       /** @ignore */
       value: function connectedCallback() {
-        this.classList.add(CLASSNAME$y);
+        this.classList.add(CLASSNAME$w);
       }
     }]);
 
@@ -27531,7 +27514,7 @@
     return frag;
   };
 
-  var CLASSNAME$z = '_coral-Tags-item';
+  var CLASSNAME$x = '_coral-Tags-item';
   var LABEL_CLASSNAME = '_coral-Label';
   /**
    Enumeration for {@link Tag} sizes. Only colored tags can have different sizes.
@@ -27635,8 +27618,8 @@
     ALL_SIZE_CLASSES$1.push("".concat(LABEL_CLASSNAME, "--").concat(sizeValue$1));
   }
 
-  var QUIET_CLASSNAME = "".concat(CLASSNAME$z, "--quiet");
-  var MULTILINE_CLASSNAME = "".concat(CLASSNAME$z, "--multiline"); // Store coordinates of a mouse down event to compare against mouseup coordinates.
+  var QUIET_CLASSNAME = "".concat(CLASSNAME$x, "--quiet");
+  var MULTILINE_CLASSNAME = "".concat(CLASSNAME$x, "--multiline"); // Store coordinates of a mouse down event to compare against mouseup coordinates.
 
   var bullsEye = null; // Utility method to detect center point of an element.
 
@@ -27717,10 +27700,10 @@
 
         var isColored = this.color !== color.DEFAULT; // Base
 
-        this.classList.toggle(CLASSNAME$z, !isColored);
+        this.classList.toggle(CLASSNAME$x, !isColored);
         this.classList.toggle(LABEL_CLASSNAME, isColored); // Closable
 
-        this.classList.toggle("".concat(CLASSNAME$z, "--deletable"), !isColored); // Quiet
+        this.classList.toggle("".concat(CLASSNAME$x, "--deletable"), !isColored); // Quiet
 
         this.classList.toggle(QUIET_CLASSNAME, !isColored && this.quiet); // Size
 
@@ -28152,7 +28135,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var CLASSNAME$A = '_coral-Tags-itemLabel';
+  var CLASSNAME$y = '_coral-Tags-itemLabel';
   /**
    @class Coral.Tag.Label
    @classdesc Tag's label component
@@ -28176,14 +28159,14 @@
 
       /** @ignore */
       value: function connectedCallback() {
-        this.classList.add(CLASSNAME$A);
+        this.classList.add(CLASSNAME$y);
       }
     }]);
 
     return TagLabel;
   }(_wrapNativeSuper(HTMLElement));
 
-  var CLASSNAME$B = '_coral-Tags'; // Collection
+  var CLASSNAME$z = '_coral-Tags'; // Collection
 
   var ITEM_TAGNAME = 'coral-tag';
   /**
@@ -28525,7 +28508,7 @@
 
         _get(_getPrototypeOf(TagList.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$B); // adds the role to support accessibility
+        this.classList.add(CLASSNAME$z); // adds the role to support accessibility
 
         this.setAttribute('role', 'list');
         this.setAttribute('aria-live', 'off');
@@ -28914,13 +28897,13 @@
     QUIET: 'quiet'
   }; // the textfield's base classname
 
-  var CLASSNAME$C = '_coral-Textfield'; // Builds a string containing all possible variant classnames. This will be used to remove classnames when the variant
+  var CLASSNAME$A = '_coral-Textfield'; // Builds a string containing all possible variant classnames. This will be used to remove classnames when the variant
   // changes
 
   var ALL_VARIANT_CLASSES$4 = [];
 
   for (var variantValue$3 in variant$6) {
-    ALL_VARIANT_CLASSES$4.push("".concat(CLASSNAME$C, "--").concat(variant$6[variantValue$3]));
+    ALL_VARIANT_CLASSES$4.push("".concat(CLASSNAME$A, "--").concat(variant$6[variantValue$3]));
   }
   /**
    @class Coral.Textfield
@@ -28967,7 +28950,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(Textfield.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$C); // Default reflected attributes
+        this.classList.add(CLASSNAME$A); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$6.DEFAULT;
@@ -28990,7 +28973,7 @@
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$4);
 
         if (this._variant !== variant$6.DEFAULT) {
-          this.classList.add("".concat(CLASSNAME$C, "--").concat(this._variant));
+          this.classList.add("".concat(CLASSNAME$A, "--").concat(this._variant));
         }
       }
       /**
@@ -29151,7 +29134,7 @@
     return frag;
   };
 
-  var CLASSNAME$D = '_coral-Autocomplete';
+  var CLASSNAME$B = '_coral-Autocomplete';
   /**
    The distance, in pixels, from the bottom of the List at which we assume the user has scrolled
    to the bottom of the list.
@@ -30628,7 +30611,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(Autocomplete.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$D); // Container role per ARIA Autocomplete
+        this.classList.add(CLASSNAME$B); // Container role per ARIA Autocomplete
 
         this.setAttribute('role', 'presentation'); // Input attributes per ARIA Autocomplete
 
@@ -31303,7 +31286,7 @@
     return attr !== null ? attr : item.textContent.replace(/\s{2,}/g, ' ').trim();
   };
 
-  var CLASSNAME$E = '_coral-ButtonGroup';
+  var CLASSNAME$C = '_coral-ButtonGroup';
   /**
    @class Coral.ButtonGroup
    @classdesc A ButtonGroup component that can be used as a selection form field.
@@ -31568,12 +31551,11 @@
       key: "_onItemAdded",
       value: function _onItemAdded(item) {
         // Store variant to be able to reset it when item is removed
-        item._initialVariant = item._initialVariant || item.variant; // Custom variant
+        item._initialVariant = item._initialVariant || item.variant; // Force action variant
 
-        item.variant = Button.variant._CUSTOM; // We need to add button group specific class to style the button correctly
-
-        item.classList.add('_coral-ActionButton');
-        item.label.classList.add('_coral-ActionButton-label');
+        if (!(item.variant === Button.variant.ACTION || item.variant === Button.variant.QUIET_ACTION)) {
+          item.variant = item.variant === Button.variant.QUIET ? Button.variant.QUIET_ACTION : Button.variant.ACTION;
+        }
 
         if (this.selectionMode !== selectionMode.NONE) {
           if (this.selectionMode === selectionMode.SINGLE) {
@@ -31615,9 +31597,7 @@
       value: function _onItemRemoved(item) {
         // Restore variant
         item.variant = item._initialVariant;
-        item._initialVariant = undefined; // We remove the class that was added
-
-        item.classList.remove('_coral-ActionButton');
+        item._initialVariant = undefined;
         item.removeAttribute('role');
 
         if (!item.parentNode) {
@@ -31900,7 +31880,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ButtonGroup.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$E); // Default reflected attributes
+        this.classList.add(CLASSNAME$C); // Default reflected attributes
 
         if (!this._selectionMode) {
           this.selectionMode = selectionMode.NONE;
@@ -32396,9 +32376,9 @@
     var el6 = this["prev"] = document.createElement("button", "coral-button");
     el6.setAttribute("type", "button");
     el6.setAttribute("handle", "prev");
-    el6.className += " _coral-Calendar-prevMonth _coral-ActionButton _coral-ActionButton--quiet";
+    el6.className += " _coral-Calendar-prevMonth";
     el6.setAttribute("is", "coral-button");
-    el6.setAttribute("variant", "_custom");
+    el6.setAttribute("variant", "quietaction");
     el6.setAttribute("aria-label", data_0["i18n"]["get"]('Previous'));
     el6.setAttribute("title", data_0["i18n"]["get"]('Previous'));
     var el7 = document.createTextNode("\n    ");
@@ -32414,9 +32394,9 @@
     var el11 = this["next"] = document.createElement("button", "coral-button");
     el11.setAttribute("type", "button");
     el11.setAttribute("handle", "next");
-    el11.className += " _coral-Calendar-nextMonth _coral-ActionButton _coral-ActionButton--quiet";
+    el11.className += " _coral-Calendar-nextMonth";
     el11.setAttribute("is", "coral-button");
-    el11.setAttribute("variant", "_custom");
+    el11.setAttribute("variant", "quietaction");
     el11.setAttribute("aria-label", data_0["i18n"]["get"]('Next'));
     el11.setAttribute("title", data_0["i18n"]["get"]('Next'));
     var el12 = document.createTextNode("\n    ");
@@ -32805,7 +32785,7 @@
     WEEK: 'week',
     DAY: 'day'
   };
-  var CLASSNAME$F = '_coral-Calendar';
+  var CLASSNAME$D = '_coral-Calendar';
   /**
    @class Coral.Calendar
    @classdesc A Calendar component that can be used as a date selection form field. Leverages {@link momentJS} if loaded
@@ -33491,7 +33471,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(Calendar.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$F);
+        this.classList.add(CLASSNAME$D);
         this.setAttribute('role', 'region'); // Default reflected attribute
 
         if (!this._valueFormat) {
@@ -33854,13 +33834,13 @@
     ASSET: 'asset'
   }; // the card's base classname
 
-  var CLASSNAME$G = '_coral-Card'; // builds a string containing all possible variant classnames. this will be used to remove classnames when the variant
+  var CLASSNAME$E = '_coral-Card'; // builds a string containing all possible variant classnames. this will be used to remove classnames when the variant
   // changes
 
   var ALL_VARIANT_CLASSES$5 = [];
 
   for (var variantValue$4 in variant$8) {
-    ALL_VARIANT_CLASSES$5.push("".concat(CLASSNAME$G, "--").concat(variant$8[variantValue$4]));
+    ALL_VARIANT_CLASSES$5.push("".concat(CLASSNAME$E, "--").concat(variant$8[variantValue$4]));
   }
   /**
    @class Coral.Card
@@ -33960,7 +33940,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(Card.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$G); // Default reflected attributes
+        this.classList.add(CLASSNAME$E); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$8.DEFAULT;
@@ -34189,7 +34169,7 @@
 
         this._reflectAttribute('fixedwidth', this._fixedWidth);
 
-        this.classList.toggle("".concat(CLASSNAME$G, "--fixedWidth"), this._fixedWidth);
+        this.classList.toggle("".concat(CLASSNAME$E, "--fixedWidth"), this._fixedWidth);
       }
       /**
        The Overlay of the card.
@@ -34231,7 +34211,7 @@
 
         this._reflectAttribute('stacked', this._stacked);
 
-        this.classList.toggle("".concat(CLASSNAME$G, "--stacked"), this._stacked);
+        this.classList.toggle("".concat(CLASSNAME$E, "--stacked"), this._stacked);
       }
       /**
        The card's variant. It determines which sections of the Card and in which position they are shown.
@@ -34258,7 +34238,7 @@
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$5);
 
         if (this._variant !== variant$8.DEFAULT) {
-          this.classList.add("".concat(CLASSNAME$G, "--").concat(this._variant));
+          this.classList.add("".concat(CLASSNAME$E, "--").concat(this._variant));
         }
 
         this.assetHeight = this.assetHeight;
@@ -34297,7 +34277,7 @@
     return Card;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$H = '_coral-Banner';
+  var CLASSNAME$F = '_coral-Banner';
   /**
    Enumeration for {@link CardBanner} variants.
    
@@ -34320,7 +34300,7 @@
   var ALL_VARIANT_CLASSES$6 = [];
 
   for (var variantValue$5 in variant$9) {
-    ALL_VARIANT_CLASSES$6.push("".concat(CLASSNAME$H, "--").concat(variant$9[variantValue$5]));
+    ALL_VARIANT_CLASSES$6.push("".concat(CLASSNAME$F, "--").concat(variant$9[variantValue$5]));
   }
   /**
    @class Coral.Card.Banner
@@ -34367,7 +34347,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(CardBanner.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$H); // Default reflected attributes
+        this.classList.add(CLASSNAME$F); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$9.INFO;
@@ -34409,7 +34389,7 @@
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$6); // Set new variant class
 
 
-        this.classList.add("".concat(CLASSNAME$H, "--").concat(this._variant)); // Set the role attribute depending on the variant so that the element turns into a live region
+        this.classList.add("".concat(CLASSNAME$F, "--").concat(this._variant)); // Set the role attribute depending on the variant so that the element turns into a live region
 
         this.setAttribute('role', this._variant);
       }
@@ -34497,7 +34477,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var CLASSNAME$I = '_coral-Banner-header';
+  var CLASSNAME$G = '_coral-Banner-header';
   /**
    @class Coral.Card.Banner.Header
    @classdesc A Card Banner Header component
@@ -34521,7 +34501,7 @@
 
       /** @ignore */
       value: function connectedCallback() {
-        this.classList.add(CLASSNAME$I);
+        this.classList.add(CLASSNAME$G);
       }
     }]);
 
@@ -34539,7 +34519,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var CLASSNAME$J = '_coral-Banner-content';
+  var CLASSNAME$H = '_coral-Banner-content';
   /**
    @class Coral.Card.Banner.Content
    @classdesc A Card Banner Content component
@@ -34563,7 +34543,7 @@
 
       /** @ignore */
       value: function connectedCallback() {
-        this.classList.add(CLASSNAME$J);
+        this.classList.add(CLASSNAME$H);
       }
     }]);
 
@@ -34584,7 +34564,7 @@
     return frag;
   };
 
-  var CLASSNAME$K = '_coral-Card-property';
+  var CLASSNAME$I = '_coral-Card-property';
   /**
    @class Coral.Card.Property
    @classdesc A Card property component
@@ -34627,7 +34607,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(CardProperty.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$K, 'coral-Body--small'); // Create a fragment
+        this.classList.add(CLASSNAME$I, 'coral-Body--small'); // Create a fragment
 
         var frag = document.createDocumentFragment(); // Render the main template
 
@@ -34713,7 +34693,7 @@
     return CardProperty;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$L = '_coral-Card-title';
+  var CLASSNAME$J = '_coral-Card-title';
   /**
    @class Coral.Card.Title
    @classdesc A Card title component
@@ -34740,7 +34720,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(CardTitle.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$L, 'coral-Heading', 'coral-Heading--4');
+        this.classList.add(CLASSNAME$J, 'coral-Heading', 'coral-Heading--4');
       }
     }, {
       key: "content",
@@ -34762,7 +34742,7 @@
     return CardTitle;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$M = '_coral-Card-subtitle';
+  var CLASSNAME$K = '_coral-Card-subtitle';
   /**
    @class Coral.Card.Subtitle
    @classdesc A Card sub title component
@@ -34789,7 +34769,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(CardSubtitle.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$M);
+        this.classList.add(CLASSNAME$K);
       }
     }, {
       key: "content",
@@ -34811,7 +34791,7 @@
     return CardSubtitle;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$N = '_coral-Card-context';
+  var CLASSNAME$L = '_coral-Card-context';
   /**
    @class Coral.Card.Context
    @classdesc A Card context component
@@ -34838,7 +34818,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(CardContext.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$N, 'coral-Heading', 'coral-Heading--5');
+        this.classList.add(CLASSNAME$L, 'coral-Heading', 'coral-Heading--5');
       }
     }, {
       key: "content",
@@ -34860,7 +34840,7 @@
     return CardContext;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$O = '_coral-Card-description';
+  var CLASSNAME$M = '_coral-Card-description';
   /**
    @class Coral.Card.Description
    @classdesc A Card description component
@@ -34887,7 +34867,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(CardDescription.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$O);
+        this.classList.add(CLASSNAME$M);
       }
     }, {
       key: "content",
@@ -34986,7 +34966,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var CLASSNAME$P = '_coral-Card-content';
+  var CLASSNAME$N = '_coral-Card-content';
   /**
    @class Coral.Card.Content
    @classdesc The Card Content
@@ -35010,7 +34990,7 @@
 
       /** @ignore */
       value: function connectedCallback() {
-        this.classList.add(CLASSNAME$P); // Ensure title comes first
+        this.classList.add(CLASSNAME$N); // Ensure title comes first
 
         var title = this.querySelector('coral-card-title');
 
@@ -35128,7 +35108,7 @@
   Card.Content = CardContent;
   Card.PropertyList = CardPropertyList;
 
-  var CLASSNAME$Q = '_coral-CharacterCount';
+  var CLASSNAME$O = '_coral-CharacterCount';
   /**
    Enumeration for {@link CharacterCount} targets.
    
@@ -35207,7 +35187,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(CharacterCount.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$Q); // Set defaults
+        this.classList.add(CLASSNAME$O); // Set defaults
 
         this.target = this.target; // Refresh once connected
 
@@ -35347,7 +35327,7 @@
   };
 
   var IS_IE_OR_EDGE = navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0 || window.navigator.userAgent.indexOf('Edge') !== -1;
-  var CLASSNAME$R = '_coral-Checkbox';
+  var CLASSNAME$P = '_coral-Checkbox';
   /**
    @class Coral.Checkbox
    @classdesc A Checkbox component to be used as a form field.
@@ -35518,7 +35498,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(Checkbox.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$R); // Create a fragment
+        this.classList.add(CLASSNAME$P); // Create a fragment
 
         var frag = document.createDocumentFragment();
         var templateHandleNames = ['input', 'checkbox', 'labelWrapper']; // Render the main template
@@ -36143,7 +36123,7 @@
     DEFAULT: 'default',
     QUIET: 'quiet'
   };
-  var CLASSNAME$S = '_coral-Dropdown'; // used in 'auto' mode to determine if the client is on mobile.
+  var CLASSNAME$Q = '_coral-Dropdown'; // used in 'auto' mode to determine if the client is on mobile.
 
   var IS_MOBILE_DEVICE = navigator.userAgent.match(/iPhone|iPad|iPod|Android/i) !== null;
   /**
@@ -37085,13 +37065,13 @@
 
         _get(_getPrototypeOf(Select.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$S); // Default reflected attributes
+        this.classList.add(CLASSNAME$Q); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$a.DEFAULT;
         }
 
-        this.classList.toggle("".concat(CLASSNAME$S, "--native"), this._useNativeInput);
+        this.classList.toggle("".concat(CLASSNAME$Q, "--native"), this._useNativeInput);
 
         if (!this._useNativeInput && this.contains(this._elements.nativeSelect)) {
           this.removeChild(this._elements.nativeSelect);
@@ -37878,13 +37858,13 @@
     DEFAULT: 'default',
     QUIET: 'quiet'
   };
-  var CLASSNAME$T = '_coral-Clock'; // builds an array containing all possible variant classnames. this will be used to remove classnames when the variant
+  var CLASSNAME$R = '_coral-Clock'; // builds an array containing all possible variant classnames. this will be used to remove classnames when the variant
   // changes
 
   var ALL_VARIANT_CLASSES$7 = [];
 
   for (var variantValue$6 in variant$b) {
-    ALL_VARIANT_CLASSES$7.push("".concat(CLASSNAME$T, "--").concat(variant$b[variantValue$6]));
+    ALL_VARIANT_CLASSES$7.push("".concat(CLASSNAME$R, "--").concat(variant$b[variantValue$6]));
   }
   /**
    @class Coral.Clock
@@ -38015,7 +37995,7 @@
     }, {
       key: "_togglePeriod",
       value: function _togglePeriod(show) {
-        this.classList.toggle("".concat(CLASSNAME$T, "--extended"), show);
+        this.classList.toggle("".concat(CLASSNAME$R, "--extended"), show);
         this._elements.period.hidden = !show;
       }
       /** @private */
@@ -38139,7 +38119,7 @@
 
         _get(_getPrototypeOf(Clock.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$T); // a11y
+        this.classList.add(CLASSNAME$R); // a11y
 
         this.setAttribute('role', 'group'); // Default reflected attributes
 
@@ -38259,7 +38239,7 @@
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$7);
 
         if (this._variant !== variant$b.DEFAULT) {
-          this.classList.add("".concat(CLASSNAME$T, "--").concat(this._variant));
+          this.classList.add("".concat(CLASSNAME$R, "--").concat(this._variant));
         }
       }
       /**
@@ -38531,7 +38511,7 @@
     LIGHT: 'light',
     DARK: 'dark'
   };
-  var CLASSNAME$U = '_coral-CoachMarkIndicator';
+  var CLASSNAME$S = '_coral-CoachMarkIndicator';
   /**
    @class Coral.CoachMark
    @classdesc A coach mark component to highlight UI elements on the page.
@@ -38573,7 +38553,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(CoachMark.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$U); // Default reflected attributes
+        this.classList.add(CLASSNAME$S); // Default reflected attributes
 
         if (!this._size) {
           this.size = size$5.MEDIUM;
@@ -38654,7 +38634,7 @@
 
         this._reflectAttribute('size', this._size);
 
-        this.classList.toggle("".concat(CLASSNAME$U, "--quiet"), this._size === size$5.SMALL);
+        this.classList.toggle("".concat(CLASSNAME$S, "--quiet"), this._size === size$5.SMALL);
       }
       /**
        The coach mark variant. See {@link CoachMarkVariantEnum}.
@@ -38676,8 +38656,8 @@
 
         this._reflectAttribute('variant', this._variant);
 
-        this.classList.toggle("".concat(CLASSNAME$U, "--light"), this._variant === variant$c.LIGHT);
-        this.classList.toggle("".concat(CLASSNAME$U, "--dark"), this._variant === variant$c.DARK);
+        this.classList.toggle("".concat(CLASSNAME$S, "--light"), this._variant === variant$c.LIGHT);
+        this.classList.toggle("".concat(CLASSNAME$S, "--dark"), this._variant === variant$c.DARK);
       }
       /**
        Returns {@link CoachMark} sizes options.
@@ -40403,7 +40383,7 @@
     return frag;
   };
 
-  var CLASSNAME$V = '_coral-Slider';
+  var CLASSNAME$T = '_coral-Slider';
   var CLASSNAME_HANDLE = '_coral-Slider-handle';
   var CLASSNAME_INPUT = '_coral-Slider-input';
   /**
@@ -40922,7 +40902,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(Slider.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$V); // Default reflected attributes
+        this.classList.add(CLASSNAME$T); // Default reflected attributes
 
         if (!this._min) {
           this.min = this.min;
@@ -41174,7 +41154,7 @@
 
         this._reflectAttribute('filled', this._filled);
 
-        this.classList.toggle("".concat(CLASSNAME$V, "--filled"), this._filled);
+        this.classList.toggle("".concat(CLASSNAME$T, "--filled"), this._filled);
       }
       /**
        The value returned as a Number. Value is <code>NaN</code> if conversion to Number is not possible.
@@ -41415,7 +41395,7 @@
     return document.createElement('coral-slider-content');
   });
 
-  var CLASSNAME$W = '_coral-Slider-item';
+  var CLASSNAME$U = '_coral-Slider-item';
   /**
    @class Coral.Slider.Item
    @classdesc The Slider item
@@ -41440,7 +41420,7 @@
 
       /** @ignore */
       value: function connectedCallback() {
-        this.classList.add(CLASSNAME$W);
+        this.classList.add(CLASSNAME$U);
       }
     }, {
       key: "value",
@@ -41850,7 +41830,7 @@
     top: 'top',
     bottom: 'bottom'
   };
-  var CLASSNAME$X = '_coral-Tooltip'; // This is in JS as we're setting this to induce wrapping before collision calculations
+  var CLASSNAME$V = '_coral-Tooltip'; // This is in JS as we're setting this to induce wrapping before collision calculations
 
   var TOOLTIP_ARROW_SIZE = 12;
   /**
@@ -41884,7 +41864,7 @@
   var ALL_VARIANT_CLASSES$8 = [];
 
   for (var variantName in variant$d) {
-    ALL_VARIANT_CLASSES$8.push("".concat(CLASSNAME$X, "--").concat(variant$d[variantName]));
+    ALL_VARIANT_CLASSES$8.push("".concat(CLASSNAME$V, "--").concat(variant$d[variantName]));
   } // A string of all position placement classnames
 
 
@@ -41894,7 +41874,7 @@
 
   for (var key$2 in Overlay.placement) {
     var direction = Overlay.placement[key$2];
-    var placementClass = "".concat(CLASSNAME$X, "--").concat(arrowMap[direction]); // Store in map
+    var placementClass = "".concat(CLASSNAME$V, "--").concat(arrowMap[direction]); // Store in map
 
     placementClassMap[direction] = placementClass; // Store in list
 
@@ -42086,7 +42066,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(Tooltip.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$X); // ARIA
+        this.classList.add(CLASSNAME$V); // ARIA
 
         this.setAttribute('role', 'tooltip'); // Let the tooltip be focusable
         // We'll marshall focus around when its focused
@@ -42132,7 +42112,7 @@
 
         (_this$classList2 = this.classList).remove.apply(_this$classList2, ALL_VARIANT_CLASSES$8);
 
-        this.classList.add("".concat(CLASSNAME$X, "--").concat(this._variant));
+        this.classList.add("".concat(CLASSNAME$V, "--").concat(this._variant));
       }
       /**
        The amount of time in miliseconds to wait before showing the tooltip when the target is interacted with.
@@ -42265,7 +42245,7 @@
     return Tooltip;
   }(Overlay);
 
-  var CLASSNAME$Y = '_coral-Tooltip-label';
+  var CLASSNAME$W = '_coral-Tooltip-label';
   /**
    @class Coral.Tooltip.Content
    @classdesc Tooltip's content component
@@ -42290,7 +42270,7 @@
 
       /** @ignore */
       value: function connectedCallback() {
-        this.classList.add(CLASSNAME$Y);
+        this.classList.add(CLASSNAME$W);
       }
     }]);
 
@@ -42511,8 +42491,8 @@
     var el8 = this["colorPreview2"] = document.createElement("button", "coral-button");
     el8.setAttribute("is", "coral-button");
     el8.setAttribute("handle", "colorPreview2");
-    el8.setAttribute("variant", "_custom");
-    el8.className += " _coral-ActionButton _coral-ColorInput-preview";
+    el8.setAttribute("variant", "action");
+    el8.className += " _coral-ColorInput-preview";
     el8.setAttribute("type", "button");
     el8.setAttribute("aria-pressed", "false");
     el6.appendChild(el8);
@@ -42719,7 +42699,7 @@
     return frag;
   };
 
-  var CLASSNAME$Z = '_coral-ColorInput-colorProperties';
+  var CLASSNAME$X = '_coral-ColorInput-colorProperties';
   /**
    @class Coral.ColorInput.ColorProperties
    @classdesc A ColorInput Color properties component
@@ -42935,7 +42915,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ColorInputColorProperties.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$Z); // Support cloneNode
+        this.classList.add(CLASSNAME$X); // Support cloneNode
 
         var subview = this.querySelector('._coral-ColorInput-propertiesSubview');
 
@@ -42957,8 +42937,7 @@
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["colorButton"] = document.createElement("button", "coral-button");
     el0.setAttribute("is", "coral-button");
-    el0.setAttribute("variant", "_custom");
-    el0.className += " _coral-ActionButton";
+    el0.setAttribute("variant", "action");
     el0.setAttribute("handle", "colorButton");
     el0.setAttribute("icon", "checkmark");
     el0.setAttribute("type", "button");
@@ -42974,7 +42953,7 @@
     return frag;
   };
 
-  var CLASSNAME$_ = '_coral-ColorInput-swatch';
+  var CLASSNAME$Y = '_coral-ColorInput-swatch';
   /**
    @class Coral.ColorInput.Swatch
    @classdesc A ColorInput Swatch component
@@ -43032,7 +43011,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ColorInputSwatch.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$_, 'u-coral-clearFix'); // adds the role to support accessibility
+        this.classList.add(CLASSNAME$Y, 'u-coral-clearFix'); // adds the role to support accessibility
 
         this.setAttribute('role', 'option'); // Support cloneNode
 
@@ -43205,7 +43184,7 @@
     return frag;
   };
 
-  var CLASSNAME$$ = '_coral-ColorInput-swatches';
+  var CLASSNAME$Z = '_coral-ColorInput-swatches';
   /**
    @class Coral.ColorInput.Swatches
    @classdesc A ColorInput Swatches component
@@ -43519,7 +43498,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ColorInputSwatches.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$$); // adds the role to support accessibility
+        this.classList.add(CLASSNAME$Z); // adds the role to support accessibility
 
         this.setAttribute('role', 'listbox'); // Support cloneNode
 
@@ -43742,7 +43721,7 @@
     return frag;
   };
 
-  var CLASSNAME$10 = '_coral-ColorInput';
+  var CLASSNAME$_ = '_coral-ColorInput';
   /**
    Enumeration for {@link ColorInput} variants.
    
@@ -44213,7 +44192,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ColorInput.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$10);
+        this.classList.add(CLASSNAME$_);
         this.setAttribute('role', 'combobox');
         this.setAttribute('aria-expanded', false);
         var frag = document.createDocumentFragment(); // Cannot be open by default when rendered
@@ -45092,7 +45071,7 @@
     MULTIPLE: 'multiple'
   };
 
-  var CLASSNAME$11 = '_coral-MillerColumns';
+  var CLASSNAME$$ = '_coral-MillerColumns';
 
   var scrollTo = function scrollTo(element, to, duration, scrollCallback) {
     if (duration <= 0) {
@@ -45897,7 +45876,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ColumnView.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$11); // @a11y: the columnview needs to be focusable to handle a11y properly
+        this.classList.add(CLASSNAME$$); // @a11y: the columnview needs to be focusable to handle a11y properly
 
         this.setAttribute('tabindex', '0'); // Default reflect attributes
 
@@ -46028,10 +46007,10 @@
         this.columns.getAll().forEach(function (item) {
           item.setAttribute('_selectionmode', _this4._selectionMode);
         });
-        this.classList.remove("".concat(CLASSNAME$11, "--selection"));
+        this.classList.remove("".concat(CLASSNAME$$, "--selection"));
 
         if (this._selectionMode !== selectionMode$1.NONE) {
-          this.classList.add("".concat(CLASSNAME$11, "--selection"));
+          this.classList.add("".concat(CLASSNAME$$, "--selection"));
         } // @a11y
 
 
@@ -46091,7 +46070,7 @@
     return ColumnView;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$12 = '_coral-MillerColumns-item'; // The number of milliseconds for which scroll events should be debounced.
+  var CLASSNAME$10 = '_coral-MillerColumns-item'; // The number of milliseconds for which scroll events should be debounced.
 
   var SCROLL_DEBOUNCE$2 = 100; // Height if every item to avoid using offsetHeight during calculations.
 
@@ -46554,7 +46533,7 @@
 
         _get(_getPrototypeOf(ColumnViewColumn.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$12); // @a11y
+        this.classList.add(CLASSNAME$10); // @a11y
 
         this.setAttribute('role', 'group'); // @todo: initial collection items needs to be triggered
 
@@ -46770,7 +46749,7 @@
     return ColumnViewColumnContent;
   }(_wrapNativeSuper(HTMLElement));
 
-  var CLASSNAME$13 = '_coral-AssetList-item';
+  var CLASSNAME$11 = '_coral-AssetList-item';
   /**
    Enumeration for {@link ColumnViewItem} variants.
    
@@ -46859,7 +46838,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ColumnViewItem.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$13); // @a11y
+        this.classList.add(CLASSNAME$11); // @a11y
 
         this.setAttribute('role', 'treeitem'); // Default reflected attributes
 
@@ -47145,7 +47124,7 @@
     return ColumnViewItemThumbnail;
   }(_wrapNativeSuper(HTMLElement));
 
-  var CLASSNAME$14 = '_coral-MillerColumns-item';
+  var CLASSNAME$12 = '_coral-MillerColumns-item';
   /**
    @class Coral.ColumnView.Preview
    @classdesc A ColumnView Preview component
@@ -47187,7 +47166,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ColumnViewPreview.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$14);
+        this.classList.add(CLASSNAME$12);
         var content = this._elements.content; // when the content zone was not created, we need to make sure that everything is added inside it as a content.
         // this stops the content zone from being voracious
 
@@ -47260,7 +47239,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var CLASSNAME$15 = 'coral-Body--small';
+  var CLASSNAME$13 = 'coral-Body--small';
   /**
    @class Coral.ColumnView.Preview.Content
    @classdesc ColumnView's preview content component
@@ -47281,7 +47260,7 @@
 
       _this = _possibleConstructorReturn(this, _getPrototypeOf(ColumnViewPreviewContent).call(this));
 
-      _this.classList.add(CLASSNAME$15);
+      _this.classList.add(CLASSNAME$13);
 
       return _this;
     }
@@ -47605,9 +47584,10 @@
     el0.setAttribute("tracking", "off");
     el0.id = data_0["commons"]["getUID"]();
     el0.setAttribute("handle", "button");
-    el0.className += " _coral-CycleSelect-button button _coral-ActionButton _coral-ActionButton--quiet";
+    el0.className += " _coral-CycleSelect-button";
     el0.setAttribute("is", "coral-button");
-    el0.setAttribute("variant", "_custom");
+    el0.setAttribute("type", "button");
+    el0.setAttribute("variant", "quietaction");
     el0.setAttribute("iconsize", "S");
     var el1 = document.createTextNode("\n  ");
     el0.appendChild(el1);
@@ -47688,7 +47668,7 @@
   /** @ignore */
 
   var ACTION_TAG_NAME = 'coral-cyclebutton-action';
-  var CLASSNAME$16 = '_coral-CycleSelect';
+  var CLASSNAME$14 = '_coral-CycleSelect';
   /**
    @class Coral.CycleButton
    @classdesc A CycleButton component is a simple multi-state toggle button that toggles between the possible items below
@@ -48027,7 +48007,7 @@
       value: function _checkExtended() {
         var isExtended = this._isExtended();
 
-        this.classList.toggle("".concat(CLASSNAME$16, "--extended"), isExtended); // @a11y
+        this.classList.toggle("".concat(CLASSNAME$14, "--extended"), isExtended); // @a11y
 
         if (isExtended) {
           var uid = this._elements.selectList.id;
@@ -48185,7 +48165,7 @@
 
         _get(_getPrototypeOf(CycleButton.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$16); // Default reflected attributes
+        this.classList.add(CLASSNAME$14); // Default reflected attributes
 
         if (typeof this._threshold === 'undefined') {
           this.threshold = 3;
@@ -48709,13 +48689,13 @@
     DEFAULT: 'default',
     QUIET: 'quiet'
   };
-  var CLASSNAME$17 = '_coral-InputGroup'; // builds a string containing all possible variant classnames. This will be used to remove
+  var CLASSNAME$15 = '_coral-InputGroup'; // builds a string containing all possible variant classnames. This will be used to remove
   // classnames when the variant changes.
 
   var ALL_VARIANT_CLASSES$9 = [];
 
   for (var variantKey in variant$g) {
-    ALL_VARIANT_CLASSES$9.push("".concat(CLASSNAME$17, "--").concat(variant$g[variantKey]));
+    ALL_VARIANT_CLASSES$9.push("".concat(CLASSNAME$15, "--").concat(variant$g[variantKey]));
   }
   /** @ignore */
 
@@ -49006,7 +48986,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(Datepicker.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$17); // a11y we only have AUTO mode.
+        this.classList.add(CLASSNAME$15); // a11y we only have AUTO mode.
 
         this._useNativeInput = IS_MOBILE_DEVICE$1; // Default reflected attributes
 
@@ -49362,7 +49342,7 @@
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$9);
 
         if (this._variant !== variant$g.DEFAULT) {
-          this.classList.add("".concat(CLASSNAME$17, "--").concat(this._variant));
+          this.classList.add("".concat(CLASSNAME$15, "--").concat(this._variant));
         }
       }
       /**
@@ -49627,12 +49607,12 @@
     UP: 'up'
   }; // The drawer's base classname
 
-  var CLASSNAME$18 = '_coral-Drawer'; // A string of all possible direction classnames
+  var CLASSNAME$16 = '_coral-Drawer'; // A string of all possible direction classnames
 
   var ALL_DIRECTION_CLASSES = [];
 
   for (var directionValue in direction$1) {
-    ALL_DIRECTION_CLASSES.push("".concat(CLASSNAME$18, "--").concat(direction$1[directionValue]));
+    ALL_DIRECTION_CLASSES.push("".concat(CLASSNAME$16, "--").concat(direction$1[directionValue]));
   }
   /**
    @class Coral.Drawer
@@ -49691,7 +49671,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(Drawer.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$18, 'coral-Well'); // Default reflected attributes
+        this.classList.add(CLASSNAME$16, 'coral-Well'); // Default reflected attributes
 
         if (!this._direction) {
           this.direction = direction$1.DOWN;
@@ -49798,7 +49778,7 @@
 
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_DIRECTION_CLASSES);
 
-        this.classList.add("".concat(CLASSNAME$18, "--").concat(this._direction));
+        this.classList.add("".concat(CLASSNAME$16, "--").concat(this._direction));
       }
       /**
        Whether the Drawer is expanded or not.
@@ -51080,7 +51060,7 @@
     return frag;
   };
 
-  var CLASSNAME$19 = '_coral-FileUpload';
+  var CLASSNAME$17 = '_coral-FileUpload';
   var XHR_EVENT_NAMES = ['loadstart', 'progress', 'load', 'error', 'loadend', 'readystatechange', 'abort', 'timeout'];
   /**
    Enumeration for {@link FileUpload} HTTP methods that can be used to upload files.
@@ -51792,7 +51772,7 @@
 
         _get(_getPrototypeOf(FileUpload.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$19);
+        this.classList.add(CLASSNAME$17);
         var button = this.querySelector('[coral-fileupload-select]');
 
         if (button) {
@@ -52281,7 +52261,7 @@
     return frag;
   };
 
-  var CLASSNAME$1a = '_coral-Masonry-item';
+  var CLASSNAME$18 = '_coral-Masonry-item';
   /**
    @class Coral.Masonry.Item
    @classdesc A Masonry Item component
@@ -52400,7 +52380,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(MasonryItem.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1a); // @a11y
+        this.classList.add(CLASSNAME$18); // @a11y
 
         this.setAttribute('tabindex', '-1'); // Support cloneNode
 
@@ -52480,7 +52460,7 @@
     return MasonryItem;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$1b = '_coral-Masonry';
+  var CLASSNAME$19 = '_coral-Masonry';
   /**
    Enumeration for {@link Masonry} selection options.
    
@@ -53144,7 +53124,7 @@
 
         _get(_getPrototypeOf(Masonry.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1b); // a11y
+        this.classList.add(CLASSNAME$19); // a11y
 
         this.setAttribute('role', 'group'); // Default reflected attributes
 
@@ -54361,7 +54341,7 @@
     return MultifieldCollection;
   }(Collection$1);
 
-  var CLASSNAME$1c = '_coral-Multifield';
+  var CLASSNAME$1a = '_coral-Multifield';
   var IS_DRAGGING_CLASS$1 = 'is-dragging';
   var IS_AFTER_CLASS = 'is-after';
   var IS_BEFORE_CLASS = 'is-before';
@@ -54652,7 +54632,7 @@
 
         _get(_getPrototypeOf(Multifield.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1c, 'coral-Well'); // a11y
+        this.classList.add(CLASSNAME$1a, 'coral-Well'); // a11y
 
         this.setAttribute('role', 'list'); // Assign the content zones, moving them into place in the process
 
@@ -54753,10 +54733,10 @@
     el0.setAttribute("type", "button");
     el0.setAttribute("is", "coral-button");
     el0.setAttribute("handle", "remove");
-    el0.setAttribute("variant", "_custom");
+    el0.setAttribute("variant", "quietaction");
     el0.setAttribute("icon", "delete");
     el0.setAttribute("iconsize", "S");
-    el0.className += " _coral-ActionButton _coral-ActionButton--quiet _coral-Multifield-remove";
+    el0.className += " _coral-Multifield-remove";
     el0.setAttribute("coral-multifield-remove", "");
     frag.appendChild(el0);
     var el1 = document.createTextNode("\n");
@@ -54766,10 +54746,10 @@
     el2.setAttribute("type", "button");
     el2.setAttribute("is", "coral-button");
     el2.setAttribute("handle", "move");
-    el2.setAttribute("variant", "_custom");
+    el2.setAttribute("variant", "quietaction");
     el2.setAttribute("icon", "moveUpDown");
     el2.setAttribute("iconsize", "S");
-    el2.className += " _coral-ActionButton _coral-ActionButton--quiet _coral-Multifield-move u-coral-openHand";
+    el2.className += " _coral-Multifield-move u-coral-openHand";
     el2.setAttribute("coral-multifield-move", "");
     frag.appendChild(el2);
     var el3 = document.createTextNode("\n");
@@ -54777,7 +54757,7 @@
     return frag;
   };
 
-  var CLASSNAME$1d = '_coral-Multifield-item';
+  var CLASSNAME$1b = '_coral-Multifield-item';
   /**
    @class Coral.Multifield.Item
    @classdesc A Multifield item component. It can have a pre-filled content different from the Multifield template but
@@ -54822,7 +54802,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(MultifieldItem.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1d); // a11y
+        this.classList.add(CLASSNAME$1b); // a11y
 
         this.setAttribute('role', 'listitem'); // Create a fragment
 
@@ -55044,8 +55024,8 @@
     var el5 = document.createTextNode("\n  ");
     el4.appendChild(el5);
     var el6 = this["stepUp"] = document.createElement("button", "coral-button");
-    el6.setAttribute("variant", "_custom");
-    el6.className += " _coral-Stepper-stepUp _coral-ActionButton";
+    el6.setAttribute("variant", "action");
+    el6.className += " _coral-Stepper-stepUp";
     el6.setAttribute("type", "button");
     el6.setAttribute("is", "coral-button");
     el6.setAttribute("handle", "stepUp");
@@ -55064,8 +55044,8 @@
     var el10 = document.createTextNode("\n  ");
     el4.appendChild(el10);
     var el11 = this["stepDown"] = document.createElement("button", "coral-button");
-    el11.setAttribute("variant", "_custom");
-    el11.className += " _coral-Stepper-stepDown _coral-ActionButton";
+    el11.setAttribute("variant", "action");
+    el11.className += " _coral-Stepper-stepDown";
     el11.setAttribute("type", "button");
     el11.setAttribute("is", "coral-button");
     el11.setAttribute("handle", "stepDown");
@@ -55100,7 +55080,7 @@
     return frag;
   };
 
-  var CLASSNAME$1e = '_coral-Stepper';
+  var CLASSNAME$1c = '_coral-Stepper';
   var clearLiveRegionTimeout;
   var LIVEREGION_TIMEOUT_DELAY = 3000;
   var MSPOINTER_TYPE_MOUSE = 0x00000004;
@@ -55600,7 +55580,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(NumberInput.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1e); // Default reflected attributes
+        this.classList.add(CLASSNAME$1c); // Default reflected attributes
 
         if (!this._step) {
           this.step = 1;
@@ -55965,7 +55945,7 @@
 
   window.customElements.define('coral-numberinput', NumberInput);
 
-  var CLASSNAME$1f = '_coral-PanelStack';
+  var CLASSNAME$1d = '_coral-PanelStack';
   /**
    @class Coral.PanelStack
    @classdesc A PanelStack component holding a collection of panels. It wraps content, keeping only the selected panel in view.
@@ -56065,7 +56045,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(PanelStack.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1f);
+        this.classList.add(CLASSNAME$1d);
         this.setAttribute('role', 'presentation'); // Don't trigger events once connected
 
         this._preventTriggeringEvents = true;
@@ -56120,7 +56100,7 @@
     return PanelStack;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$1g = '_coral-Panel';
+  var CLASSNAME$1e = '_coral-Panel';
   /**
    @class Coral.Panel
    @classdesc A Panel component
@@ -56162,7 +56142,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(Panel.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1g); // adds the role to support accessibility
+        this.classList.add(CLASSNAME$1e); // adds the role to support accessibility
 
         this.setAttribute('role', 'tabpanel'); // Fetch the content zone elements
 
@@ -56342,7 +56322,7 @@
     BOTTOM: 'bottom'
   }; // Base classname
 
-  var CLASSNAME$1h = '_coral-BarLoader';
+  var CLASSNAME$1f = '_coral-BarLoader';
   /**
    @class Coral.Progress
    @classdesc A Progress component to indicate progress of processes.
@@ -56469,7 +56449,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(Progress.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1h); // Default reflected attributes
+        this.classList.add(CLASSNAME$1f); // Default reflected attributes
 
         if (!this._value) {
           this.value = this.value;
@@ -56581,14 +56561,14 @@
         this._reflectAttribute('indeterminate', this._indeterminate);
 
         if (this._indeterminate) {
-          this.classList.add("".concat(CLASSNAME$1h, "--indeterminate")); // ARIA: Remove attributes
+          this.classList.add("".concat(CLASSNAME$1f, "--indeterminate")); // ARIA: Remove attributes
 
           this.removeAttribute('aria-valuenow');
           this.removeAttribute('aria-valuemin');
           this.removeAttribute('aria-valuemax');
           this.value = 0;
         } else {
-          this.classList.remove("".concat(CLASSNAME$1h, "--indeterminate")); // ARIA: Add attributes
+          this.classList.remove("".concat(CLASSNAME$1f, "--indeterminate")); // ARIA: Add attributes
 
           this.setAttribute('aria-valuemin', '0');
           this.setAttribute('aria-valuemax', '100');
@@ -56616,7 +56596,7 @@
 
         this._reflectAttribute('size', this._size);
 
-        this.classList.toggle("".concat(CLASSNAME$1h, "--small"), this._size === size$6.SMALL);
+        this.classList.toggle("".concat(CLASSNAME$1f, "--small"), this._size === size$6.SMALL);
       }
       /**
        Boolean attribute to toggle showing progress percent as the label content.
@@ -56739,7 +56719,7 @@
     return Progress;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$1i = '_coral-BarLoader-label';
+  var CLASSNAME$1g = '_coral-BarLoader-label';
   /**
    @class Coral.Progress.Label
    @classdesc The Progress label content
@@ -56764,7 +56744,7 @@
 
       /** @ignore */
       value: function connectedCallback() {
-        this.classList.add(CLASSNAME$1i);
+        this.classList.add(CLASSNAME$1g);
       }
     }]);
 
@@ -57017,8 +56997,8 @@
     var frag = document.createDocumentFragment();
     var el0 = this["moreButton"] = document.createElement("button", "coral-button");
     el0.setAttribute("tracking", "off");
-    el0.className += " _coral-QuickActions-item _coral-QuickActions-item-more _coral-ActionButton _coral-ActionButton--quiet";
-    el0.setAttribute("variant", "_custom");
+    el0.className += " _coral-QuickActions-item _coral-QuickActions-item-more";
+    el0.setAttribute("variant", "quietaction");
     el0.setAttribute("is", "coral-button");
     el0.setAttribute("type", "button");
     el0.setAttribute("icon", "more");
@@ -57111,7 +57091,7 @@
     BOTTOM: 'bottom'
   };
   var OFFSET$1 = 10;
-  var CLASSNAME$1j = '_coral-QuickActions';
+  var CLASSNAME$1h = '_coral-QuickActions';
   /**
    @class Coral.QuickActions
    @classdesc A QuickActions component is an overlay component that reveals actions when interacting with a container.
@@ -57450,8 +57430,8 @@
           }, true);
         }
 
-        button.variant = Button.variant._CUSTOM;
-        button.classList.add('_coral-QuickActions-item', '_coral-ActionButton', '_coral-ActionButton--quiet');
+        button.variant = Button.variant.QUIET_ACTION;
+        button.classList.add('_coral-QuickActions-item');
         button.setAttribute('tabindex', '-1');
         button.setAttribute('title', itemData.textContent.trim());
         button.setAttribute('aria-label', itemData.textContent.trim());
@@ -58109,7 +58089,7 @@
 
         _get(_getPrototypeOf(QuickActions.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1j); // Make QuickActions focusable
+        this.classList.add(CLASSNAME$1h); // Make QuickActions focusable
 
         this.setAttribute('tabIndex', '-1');
         this.setAttribute('role', 'menu'); // Support cloneNode
@@ -58462,7 +58442,7 @@
     return frag;
   };
 
-  var CLASSNAME$1k = '_coral-Radio';
+  var CLASSNAME$1i = '_coral-Radio';
   /**
    @class Coral.Radio
    @classdesc A Radio component to be used as a form field.
@@ -58622,7 +58602,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(Radio.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1k); // Create a fragment
+        this.classList.add(CLASSNAME$1i); // Create a fragment
 
         var frag = document.createDocumentFragment();
         var templateHandleNames = ['input', 'checkmark', 'labelWrapper']; // Render the main template
@@ -59125,7 +59105,7 @@
     }
   };
 
-  var CLASSNAME$1l = '_coral-Shell';
+  var CLASSNAME$1j = '_coral-Shell';
   /**
    @class Coral.Shell
    @classdesc The Shell base component to be used with its family for console like applications. See examples for how to
@@ -59169,7 +59149,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(Shell.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1l);
+        this.classList.add(CLASSNAME$1j);
         var content = this._elements.content; // If the the content zone is not provided, we need to make sure that it holds all children
 
         if (!content.parentNode) {
@@ -59229,7 +59209,7 @@
     return document.createElement('coral-shell-content');
   });
 
-  var CLASSNAME$1m = '_coral-Shell-header';
+  var CLASSNAME$1k = '_coral-Shell-header';
   /**
    @class Coral.Shell.Header
    @classdesc A Shell Header component
@@ -59285,7 +59265,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ShellHeader.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1m); // appheader only exists on darkest theme
+        this.classList.add(CLASSNAME$1k); // appheader only exists on darkest theme
 
         this.classList.add('coral--darkest', 'u-coral-clearFix');
         var home = this._elements.home;
@@ -59401,7 +59381,7 @@
     return frag;
   };
 
-  var CLASSNAME$1n = '_coral-Shell-homeAnchor';
+  var CLASSNAME$1l = '_coral-Shell-homeAnchor';
   /**
    @class Coral.Shell.HomeAnchor
    @classdesc A Shell Home Anchor component
@@ -59447,7 +59427,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ShellHomeAnchor.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1n); // Create doc fragment
+        this.classList.add(CLASSNAME$1l); // Create doc fragment
 
         var fragment = document.createDocumentFragment();
         var label = this._elements.label; // Remove it so we can process children
@@ -59673,7 +59653,7 @@
     return frag;
   };
 
-  var CLASSNAME$1o = '_coral-Search';
+  var CLASSNAME$1m = '_coral-Search';
   /**
    Enumeration for {@link Search} variants.
    
@@ -59837,7 +59817,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(Search.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1o); // Default reflected attributes
+        this.classList.add(CLASSNAME$1m); // Default reflected attributes
 
         if (!this._icon) {
           this.icon = 'search';
@@ -60518,7 +60498,7 @@
     return ShellHelp;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$1p = '_coral-Shell-help-item';
+  var CLASSNAME$1n = '_coral-Shell-help-item';
   /**
    @class Coral.Shell.Help.Item
    @classdesc A Shell Help item component
@@ -60544,7 +60524,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ShellHelpItem.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1p);
+        this.classList.add(CLASSNAME$1n);
       }
     }]);
 
@@ -60575,7 +60555,7 @@
     return document.createElement('coral-shell-help-separator');
   });
 
-  var CLASSNAME$1q = '_coral-Shell-menu';
+  var CLASSNAME$1o = '_coral-Shell-menu';
   /**
    @class Coral.Shell.Menu
    @classdesc A Shell Menu component
@@ -60601,7 +60581,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ShellMenu.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1q);
+        this.classList.add(CLASSNAME$1o);
         this.trigger('coral-shell-menu:_connected');
       }
     }, {
@@ -60649,7 +60629,7 @@
 
         this._reflectAttribute('full', this._full);
 
-        this.classList.toggle("".concat(CLASSNAME$1q, "--full"), this._full);
+        this.classList.toggle("".concat(CLASSNAME$1o, "--full"), this._full);
       }
       /** @ignore */
 
@@ -60663,7 +60643,7 @@
     return ShellMenu;
   }(Popover);
 
-  var CLASSNAME$1r = '_coral-Shell-menubar';
+  var CLASSNAME$1p = '_coral-Shell-menubar';
   /**
    @class Coral.Shell.MenuBar
    @classdesc A Shell MenuBar component
@@ -60704,7 +60684,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ShellMenuBar.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1r);
+        this.classList.add(CLASSNAME$1p);
       }
     }, {
       key: "items",
@@ -60730,9 +60710,9 @@
     var frag = document.createDocumentFragment();
     var el0 = this["shellMenuButton"] = document.createElement("button", "coral-button");
     el0.setAttribute("is", "coral-button");
-    el0.setAttribute("variant", "_custom");
+    el0.setAttribute("variant", "quietaction");
     el0.setAttribute("iconsize", "S");
-    el0.className += " _coral-ActionButton _coral-ActionButton--quiet _coral-Shell-menu-button";
+    el0.className += " _coral-Shell-menu-button";
     el0.setAttribute("handle", "shellMenuButton");
     var el1 = document.createTextNode("\n  ");
     el0.appendChild(el1);
@@ -60763,13 +60743,13 @@
     CIRCLE: 'circle'
   }; // the Menubar Item's base classname
 
-  var CLASSNAME$1s = '_coral-Shell-menubar-item'; // Builds a string containing all possible iconVariant classnames. This will be used to remove classnames when the variant
+  var CLASSNAME$1q = '_coral-Shell-menubar-item'; // Builds a string containing all possible iconVariant classnames. This will be used to remove classnames when the variant
   // changes
 
   var ALL_ICON_VARIANT_CLASSES = [];
 
   for (var variantValue$7 in iconVariant) {
-    ALL_ICON_VARIANT_CLASSES.push("".concat(CLASSNAME$1s, "--").concat(iconVariant[variantValue$7]));
+    ALL_ICON_VARIANT_CLASSES.push("".concat(CLASSNAME$1q, "--").concat(iconVariant[variantValue$7]));
   }
   /**
    @class Coral.Shell.MenuBar.Item
@@ -60887,7 +60867,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ShellMenuBarItem.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1s);
+        this.classList.add(CLASSNAME$1q);
         var button = this.querySelector('._coral-Shell-menu-button');
 
         if (button) {
@@ -60965,7 +60945,7 @@
 
 
         if (this.variant !== iconVariant.DEFAULT) {
-          this.classList.add("".concat(CLASSNAME$1s, "--").concat(this._iconVariant));
+          this.classList.add("".concat(CLASSNAME$1q, "--").concat(this._iconVariant));
         }
       }
       /**
@@ -61126,7 +61106,7 @@
     return frag;
   };
 
-  var CLASSNAME$1t = '_coral-Shell-user';
+  var CLASSNAME$1r = '_coral-Shell-user';
   /**
    Enumeration for {@link ShellUser} avatar options. Avatar assets should use one of those provided, when no asset is set
    
@@ -61190,7 +61170,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ShellUser.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1t);
+        this.classList.add(CLASSNAME$1r);
         var frag = document.createDocumentFragment(); // Render template
 
         frag.appendChild(this._elements.container);
@@ -61487,7 +61467,7 @@
     return document.createElement('coral-shell-user-subheading');
   });
 
-  var CLASSNAME$1u = '_coral-Shell-workspaces';
+  var CLASSNAME$1s = '_coral-Shell-workspaces';
   /**
    @class Coral.Shell.Workspaces
    @classdesc A Shell Workspaces component
@@ -61719,7 +61699,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ShellWorkspaces.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1u); // Don't trigger events once connected
+        this.classList.add(CLASSNAME$1s); // Don't trigger events once connected
 
         this._preventTriggeringEvents = true;
 
@@ -61769,7 +61749,7 @@
     return ShellWorkspaces;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$1v = '_coral-Shell-workspaces-workspace';
+  var CLASSNAME$1t = '_coral-Shell-workspaces-workspace';
   /**
    @class Coral.Shell.Workspace
    @classdesc A Shell Workspace component
@@ -61826,7 +61806,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ShellWorkspace.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1v);
+        this.classList.add(CLASSNAME$1t);
       }
       /**
        Triggered when a {@link ShellWorkspace} selection changed.
@@ -61873,7 +61853,7 @@
     return frag;
   };
 
-  var CLASSNAME$1w = '_coral-Shell-solutionSwitcher';
+  var CLASSNAME$1u = '_coral-Shell-solutionSwitcher';
   /**
    @class Coral.Shell.SolutionSwitcher
    @classdesc A Shell Solution Switcher component
@@ -61930,7 +61910,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ShellSolutionSwitcher.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1w); // force darkest theme
+        this.classList.add(CLASSNAME$1u); // force darkest theme
 
         this.classList.add('coral--darkest');
 
@@ -61966,7 +61946,7 @@
     return ShellSolutionSwitcher;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$1x = '_coral-Shell-solutions';
+  var CLASSNAME$1v = '_coral-Shell-solutions';
   /**
    @class Coral.Shell.Solutions
    @classdesc A Shell Solutions component
@@ -62040,7 +62020,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ShellSolutions.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1x); // Sort linked solutions then non linked solutions alphabetically
+        this.classList.add(CLASSNAME$1v); // Sort linked solutions then non linked solutions alphabetically
 
         this._sortSolutions();
       }
@@ -62084,7 +62064,7 @@
 
         this._reflectAttribute('secondary', this._secondary);
 
-        this.classList.toggle("".concat(CLASSNAME$1x, "--secondary"), this._secondary);
+        this.classList.toggle("".concat(CLASSNAME$1v, "--secondary"), this._secondary);
       }
     }], [{
       key: "observedAttributes",
@@ -62136,7 +62116,7 @@
     return frag;
   };
 
-  var CLASSNAME$1y = '_coral-Shell-solution';
+  var CLASSNAME$1w = '_coral-Shell-solution';
   /**
    @class Coral.Shell.Solution
    @classdesc A Shell Solution component
@@ -62181,7 +62161,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ShellSolution.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1y);
+        this.classList.add(CLASSNAME$1w);
         var fragment = document.createDocumentFragment(); // Render template
 
         fragment.appendChild(this._elements.icon);
@@ -62255,7 +62235,7 @@
 
         this._reflectAttribute('linked', this._linked);
 
-        this.classList.toggle("".concat(CLASSNAME$1y, "--linked"), this._linked);
+        this.classList.toggle("".concat(CLASSNAME$1w, "--linked"), this._linked);
       }
     }, {
       key: "_contentZones",
@@ -62361,7 +62341,7 @@
     return frag;
   };
 
-  var CLASSNAME$1z = '_coral-Shell-orgSwitcher';
+  var CLASSNAME$1x = '_coral-Shell-orgSwitcher';
   /**
    Minimum number of entries required to show search control.
    
@@ -62613,7 +62593,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ShellOrgSwitcher.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1z); // Move the items into the right place
+        this.classList.add(CLASSNAME$1x); // Move the items into the right place
 
         this._moveItems();
 
@@ -62786,7 +62766,7 @@
     return frag;
   };
 
-  var CLASSNAME$1A = '_coral-Shell-orgSwitcher-item';
+  var CLASSNAME$1y = '_coral-Shell-orgSwitcher-item';
   /**
    @class Coral.Shell.Organization
    @classdesc A Shell Organization component
@@ -62960,7 +62940,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ShellOrganization.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1A); // Move items into the right place
+        this.classList.add(CLASSNAME$1y); // Move items into the right place
 
         this._moveItems();
 
@@ -63093,7 +63073,7 @@
     return ShellOrganization;
   }(List.Item);
 
-  var CLASSNAME$1B = '_coral-Shell-orgSwitcher-subitem';
+  var CLASSNAME$1z = '_coral-Shell-orgSwitcher-subitem';
   /**
    @class Coral.Shell.Suborganization
    @classdesc A Shell Sub organization component
@@ -63119,7 +63099,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ShellSuborganization.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1B); // Set the icon size
+        this.classList.add(CLASSNAME$1z); // Set the icon size
 
         this._elements.icon.size = Icon.size.SMALL; // Be accessible
 
@@ -63219,7 +63199,7 @@
     CTA: 'cta',
     SECONDARY: 'secondary'
   };
-  var CLASSNAME$1C = '_coral-SplitButton';
+  var CLASSNAME$1A = '_coral-SplitButton';
   /**
    @class Coral.SplitButton
    @classdesc A Split Button component composed of an action and a trigger {@link AnchorButton} or {@link Button}.
@@ -63338,7 +63318,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(SplitButton.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1C); // Default reflected attributes
+        this.classList.add(CLASSNAME$1A); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$i.DEFAULT;
@@ -63444,7 +63424,7 @@
     MAGENTA: 'magenta',
     PURPLE: 'purple'
   };
-  var CLASSNAME$1D = '_coral-StatusLight';
+  var CLASSNAME$1B = '_coral-StatusLight';
   var variantMapping = {
     SUCCESS: 'positive',
     ERROR: 'negative',
@@ -63453,13 +63433,13 @@
   var ALL_VARIANT_CLASSES$a = [];
 
   for (var variantValue$8 in variant$j) {
-    ALL_VARIANT_CLASSES$a.push("".concat(CLASSNAME$1D, "--").concat(variantMapping[variantValue$8] || variant$j[variantValue$8]));
+    ALL_VARIANT_CLASSES$a.push("".concat(CLASSNAME$1B, "--").concat(variantMapping[variantValue$8] || variant$j[variantValue$8]));
   }
 
   var ALL_COLOR_CLASSES$1 = [];
 
   for (var colorValue$1 in color$1) {
-    ALL_COLOR_CLASSES$1.push("".concat(CLASSNAME$1D, "--").concat(color$1[colorValue$1]));
+    ALL_COLOR_CLASSES$1.push("".concat(CLASSNAME$1B, "--").concat(color$1[colorValue$1]));
   }
   /**
    @class Coral.Status
@@ -63508,7 +63488,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(Status.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1D); // Default reflected attributes
+        this.classList.add(CLASSNAME$1B); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$j.NEUTRAL;
@@ -63567,7 +63547,7 @@
 
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$a);
 
-        this.classList.add("".concat(CLASSNAME$1D, "--").concat(variantMapping[this._variant.toUpperCase()] || this._variant));
+        this.classList.add("".concat(CLASSNAME$1B, "--").concat(variantMapping[this._variant.toUpperCase()] || this._variant));
       }
       /**
        The status color. See {@link StatusColorEnum}.
@@ -63609,7 +63589,7 @@
         (_this$classList2 = this.classList).remove.apply(_this$classList2, ALL_COLOR_CLASSES$1);
 
         if (this._color !== color$1.DEFAULT) {
-          this.classList.add("".concat(CLASSNAME$1D, "--").concat(this._color));
+          this.classList.add("".concat(CLASSNAME$1B, "--").concat(this._color));
         }
       }
       /**
@@ -63780,7 +63760,7 @@
     LARGE: 'L'
   }; // the StepList's base classname
 
-  var CLASSNAME$1E = '_coral-Steplist';
+  var CLASSNAME$1C = '_coral-Steplist';
   /**
    @class Coral.StepList
    @classdesc A StepList component that holds a collection of steps.
@@ -64085,7 +64065,7 @@
       key: "_updateLabels",
       value: function _updateLabels() {
         var hasOversizedLabel = false;
-        var hybridClass = "".concat(CLASSNAME$1E, "--hybrid");
+        var hybridClass = "".concat(CLASSNAME$1C, "--hybrid");
         this._isHybridMode = false;
         this.classList.remove(hybridClass); // when the steplist is small no check is needed
 
@@ -64164,7 +64144,7 @@
 
         _get(_getPrototypeOf(StepList.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1E); // Default reflected attributes
+        this.classList.add(CLASSNAME$1C); // Default reflected attributes
 
         if (!this._interaction) {
           this.interaction = interaction$4.OFF;
@@ -64311,7 +64291,7 @@
 
         this._reflectAttribute('size', this._size);
 
-        this.classList.toggle("".concat(CLASSNAME$1E, "--small"), this._size === size$7.SMALL);
+        this.classList.toggle("".concat(CLASSNAME$1C, "--small"), this._size === size$7.SMALL);
       }
       /**
        Whether Steps should be interactive or not. When interactive, a Step can be clicked to jump to it.
@@ -64335,7 +64315,7 @@
         this._reflectAttribute('interaction', this._interaction);
 
         var isInteractive = this._interaction === interaction$4.ON;
-        this.classList.toggle("".concat(CLASSNAME$1E, "--interactive"), isInteractive);
+        this.classList.toggle("".concat(CLASSNAME$1C, "--interactive"), isInteractive);
         var steps = this.items.getAll();
         var stepsCount = steps.length; // update tab index for all children
 
@@ -64410,7 +64390,7 @@
     return frag;
   };
 
-  var CLASSNAME$1F = '_coral-Steplist-item';
+  var CLASSNAME$1D = '_coral-Steplist-item';
   /**
    @class Coral.Step
    @classdesc A Step component
@@ -64469,7 +64449,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(Step.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1F); // Generate a unique ID for the Step panel if one isn't already present
+        this.classList.add(CLASSNAME$1D); // Generate a unique ID for the Step panel if one isn't already present
         // This will be used for accessibility purposes
 
         this.setAttribute('id', this.id || commons.getUID()); // A11y
@@ -64643,7 +64623,7 @@
     return Step;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$1G = '_coral-Steplist-label';
+  var CLASSNAME$1E = '_coral-Steplist-label';
   /**
    @class Coral.Step.Label
    @classdesc A Step Label
@@ -64668,7 +64648,7 @@
 
       /** @ignore */
       value: function connectedCallback() {
-        this.classList.add(CLASSNAME$1G);
+        this.classList.add(CLASSNAME$1E);
       }
     }]);
 
@@ -64721,7 +64701,7 @@
     return frag;
   };
 
-  var CLASSNAME$1H = '_coral-ToggleSwitch';
+  var CLASSNAME$1F = '_coral-ToggleSwitch';
   /**
    @class Coral.Switch
    @classdesc A Switch component is a toggle form field similar to a Checkbox component.
@@ -64838,7 +64818,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(Switch.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1H); // Create a fragment
+        this.classList.add(CLASSNAME$1F); // Create a fragment
 
         var frag = document.createDocumentFragment();
         var templateHandleNames = ['input', 'switch', 'labelWrapper']; // Render the template
@@ -65253,7 +65233,7 @@
     RIGHT: 'right'
   };
 
-  var CLASSNAME$1I = '_coral-Table-column';
+  var CLASSNAME$1G = '_coral-Table-column';
   /**
    Enumeration for {@link TableColumn} sortable direction options.
    
@@ -65356,7 +65336,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(TableColumn.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1I); // Default reflected attributes
+        this.classList.add(CLASSNAME$1G); // Default reflected attributes
 
         if (!this._sortableType) {
           this.sortableType = sortableType.ALPHANUMERIC;
@@ -65653,7 +65633,7 @@
     return TableColumn;
   }(BaseComponent(HTMLTableColElement));
 
-  var CLASSNAME$1J = '_coral-Table-cell';
+  var CLASSNAME$1H = '_coral-Table-cell';
   /**
    @class Coral.Table.Cell
    @classdesc A Table cell component
@@ -65736,7 +65716,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(TableCell.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1J); // a11y
+        this.classList.add(CLASSNAME$1H); // a11y
 
         this.setAttribute('role', 'gridcell');
       }
@@ -65830,7 +65810,7 @@
     return TableCell;
   }(BaseComponent(HTMLTableCellElement));
 
-  var CLASSNAME$1K = '_coral-Table-headerCell';
+  var CLASSNAME$1I = '_coral-Table-headerCell';
   /**
    @class Coral.Table.HeaderCell
    @classdesc A Table header cell component
@@ -65888,7 +65868,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(TableHeaderCell.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1K); // Fetch or create the content zone element
+        this.classList.add(CLASSNAME$1I); // Fetch or create the content zone element
 
         var content = this._elements.content;
 
@@ -65935,7 +65915,7 @@
     return TableHeaderCell;
   }(BaseComponent(HTMLTableCellElement));
 
-  var CLASSNAME$1L = '_coral-Table-row';
+  var CLASSNAME$1J = '_coral-Table-row';
   /**
    @class Coral.Table.Row
    @classdesc A Table row component
@@ -66119,7 +66099,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(TableRow.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1L); // a11y
+        this.classList.add(CLASSNAME$1J); // a11y
 
         this.setAttribute('role', 'row');
       }
@@ -66388,7 +66368,7 @@
     );
   };
 
-  var CLASSNAME$1M = '_coral-Table-head';
+  var CLASSNAME$1K = '_coral-Table-head';
   /**
    @class Coral.Table.Head
    @classdesc A Table head component
@@ -66457,7 +66437,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(TableHead.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1M);
+        this.classList.add(CLASSNAME$1K);
       }
       /**
        Triggered when the {@link TableHead} content changed.
@@ -66500,7 +66480,7 @@
     return TableHead;
   }(BaseTableSection(BaseComponent(HTMLTableSectionElement)));
 
-  var CLASSNAME$1N = '_coral-Table-body';
+  var CLASSNAME$1L = '_coral-Table-body';
   /**
    @class Coral.Table.Body
    @classdesc A Table body component
@@ -66555,7 +66535,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(TableBody.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1N);
+        this.classList.add(CLASSNAME$1L);
 
         if (getRows([this]).length === 0) {
           this.trigger('coral-table-body:_empty');
@@ -66582,7 +66562,7 @@
     return TableBody;
   }(BaseTableSection(BaseComponent(HTMLTableSectionElement)));
 
-  var CLASSNAME$1O = '_coral-Table-foot';
+  var CLASSNAME$1M = '_coral-Table-foot';
   /**
    @class Coral.Table.Foot
    @classdesc A Table foot component
@@ -66611,7 +66591,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(TableFoot.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1O);
+        this.classList.add(CLASSNAME$1M);
       }
     }]);
 
@@ -66652,7 +66632,7 @@
     return frag;
   };
 
-  var CLASSNAME$1P = '_coral-Table-wrapper';
+  var CLASSNAME$1N = '_coral-Table-wrapper';
   /**
    Enumeration for {@link Table} variants
    
@@ -66674,7 +66654,7 @@
   var ALL_VARIANT_CLASSES$b = [];
 
   for (var variantValue$9 in variant$k) {
-    ALL_VARIANT_CLASSES$b.push("".concat(CLASSNAME$1P, "--").concat(variant$k[variantValue$9]));
+    ALL_VARIANT_CLASSES$b.push("".concat(CLASSNAME$1N, "--").concat(variant$k[variantValue$9]));
   }
 
   var IS_DISABLED = 'is-disabled';
@@ -68151,7 +68131,7 @@
             });
           }); // Make sure sticky styling is applied
 
-          table.classList.toggle("".concat(CLASSNAME$1P, "--sticky"), head.sticky); // Layout sticky head
+          table.classList.toggle("".concat(CLASSNAME$1N, "--sticky"), head.sticky); // Layout sticky head
 
           table._resetLayout();
         });
@@ -68820,7 +68800,7 @@
 
         _get(_getPrototypeOf(Table.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1P); // Wrapper should have role="presentation" because it wraps another table
+        this.classList.add(CLASSNAME$1N); // Wrapper should have role="presentation" because it wraps another table
 
         this.setAttribute('role', 'presentation'); // Default reflected attribute
 
@@ -69129,7 +69109,7 @@
 
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$b);
 
-        this.classList.add("".concat(CLASSNAME$1P, "--").concat(this._variant));
+        this.classList.add("".concat(CLASSNAME$1N, "--").concat(this._variant));
       }
       /**
        Whether the items are selectable.
@@ -69486,7 +69466,7 @@
     return newTarget;
   }
 
-  var CLASSNAME$1Q = '_coral-Tabs-item';
+  var CLASSNAME$1O = '_coral-Tabs-item';
   /**
    @class Coral.Tab
    @classdesc A Tab component
@@ -69580,7 +69560,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(Tab.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1Q); // adds the role to support accessibility
+        this.classList.add(CLASSNAME$1O); // adds the role to support accessibility
 
         this.setAttribute('role', 'tab'); // Generate a unique ID for the tab panel if one isn't already present
         // This will be used for accessibility purposes
@@ -69820,7 +69800,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var CLASSNAME$1R = '_coral-Tabs-itemLabel';
+  var CLASSNAME$1P = '_coral-Tabs-itemLabel';
   /**
    @class Coral.Tab.Label
    @classdesc Tab's label component
@@ -69844,7 +69824,7 @@
 
       /** @ignore */
       value: function connectedCallback() {
-        this.classList.add(CLASSNAME$1R);
+        this.classList.add(CLASSNAME$1P);
       }
     }]);
 
@@ -69899,7 +69879,7 @@
     VERTICAL: 'vertical'
   }; // the tablist's base classname
 
-  var CLASSNAME$1S = '_coral-Tabs';
+  var CLASSNAME$1Q = '_coral-Tabs';
   /**
    @class Coral.TabList
    @classdesc A TabList component holds a collection of tabs.
@@ -70199,7 +70179,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(TabList.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1S); // adds the role to support accessibility
+        this.classList.add(CLASSNAME$1Q); // adds the role to support accessibility
 
         this.setAttribute('role', 'tablist');
         this.setAttribute('aria-multiselectable', 'false'); // Default reflected attributes
@@ -70352,12 +70332,12 @@
         this._reflectAttribute('size', this._size); // Remove all variant classes
 
 
-        this.classList.remove("".concat(CLASSNAME$1S, "--compact"), "".concat(CLASSNAME$1S, "--quiet"));
+        this.classList.remove("".concat(CLASSNAME$1Q, "--compact"), "".concat(CLASSNAME$1Q, "--quiet"));
 
         if (this._size === size$8.SMALL) {
-          this.classList.add("".concat(CLASSNAME$1S, "--compact"));
+          this.classList.add("".concat(CLASSNAME$1Q, "--compact"));
         } else if (this._size === size$8.LARGE) {
-          this.classList.add("".concat(CLASSNAME$1S, "--quiet"));
+          this.classList.add("".concat(CLASSNAME$1Q, "--quiet"));
         }
       }
       /**
@@ -70380,8 +70360,8 @@
 
         this._reflectAttribute('orientation', this._orientation);
 
-        this.classList.toggle("".concat(CLASSNAME$1S, "--vertical"), this._orientation === orientation$1.VERTICAL);
-        this.classList.toggle("".concat(CLASSNAME$1S, "--horizontal"), this._orientation === orientation$1.HORIZONTAL);
+        this.classList.toggle("".concat(CLASSNAME$1Q, "--vertical"), this._orientation === orientation$1.VERTICAL);
+        this.classList.toggle("".concat(CLASSNAME$1Q, "--horizontal"), this._orientation === orientation$1.HORIZONTAL);
 
         this._setLine(true);
       }
@@ -70446,7 +70426,7 @@
     VERTICAL: 'vertical'
   }; // the tabview's base classname
 
-  var CLASSNAME$1T = '_coral-TabView';
+  var CLASSNAME$1R = '_coral-TabView';
   /**
    @class Coral.TabView
    @classdesc A TabView component is the wrapping container used to create the typical Tabbed pattern.
@@ -70543,7 +70523,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(TabView.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1T); // Default reflected attributes
+        this.classList.add(CLASSNAME$1R); // Default reflected attributes
 
         if (!this._orientation) {
           this.orientation = this.orientation;
@@ -70580,7 +70560,7 @@
 
         this._reflectAttribute('orientation', this.orientation);
 
-        this.classList[this.orientation === orientation$2.VERTICAL ? 'add' : 'remove']("".concat(CLASSNAME$1T, "--vertical"));
+        this.classList[this.orientation === orientation$2.VERTICAL ? 'add' : 'remove']("".concat(CLASSNAME$1R, "--vertical"));
       }
       /**
        The TabList which handles all the tabs.
@@ -70670,7 +70650,7 @@
 
   window.customElements.define('coral-tabview', TabView);
 
-  var CLASSNAME$1U = '_coral-Textfield';
+  var CLASSNAME$1S = '_coral-Textfield';
   /**
    Enumeration for {@link Textarea} variants.
    
@@ -70691,7 +70671,7 @@
   var ALL_VARIANT_CLASSES$c = [];
 
   for (var variantValue$a in variant$l) {
-    ALL_VARIANT_CLASSES$c.push("".concat(CLASSNAME$1U, "--").concat(variant$l[variantValue$a]));
+    ALL_VARIANT_CLASSES$c.push("".concat(CLASSNAME$1S, "--").concat(variant$l[variantValue$a]));
   }
   /**
    @class Coral.Textarea
@@ -70768,8 +70748,8 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(Textarea.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1U);
-        this.classList.add("".concat(CLASSNAME$1U, "--multiline")); // Default reflected attributes
+        this.classList.add(CLASSNAME$1S);
+        this.classList.add("".concat(CLASSNAME$1S, "--multiline")); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$l.DEFAULT;
@@ -70792,7 +70772,7 @@
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$c);
 
         if (this._variant !== variant$l.DEFAULT) {
-          this.classList.add("".concat(CLASSNAME$1U, "--").concat(this._variant));
+          this.classList.add("".concat(CLASSNAME$1S, "--").concat(this._variant));
         } // Restore the original height
 
 
@@ -70921,12 +70901,12 @@
     CENTER: 'center',
     RIGHT: 'right'
   };
-  var CLASSNAME$1V = '_coral-Toast'; // An array of all possible variant
+  var CLASSNAME$1T = '_coral-Toast'; // An array of all possible variant
 
   var ALL_VARIANT_CLASSES$d = [];
 
   for (var variantValue$b in variant$m) {
-    ALL_VARIANT_CLASSES$d.push("".concat(CLASSNAME$1V, "--").concat(variant$m[variantValue$b]));
+    ALL_VARIANT_CLASSES$d.push("".concat(CLASSNAME$1T, "--").concat(variant$m[variantValue$b]));
   }
 
   var PRIORITY_QUEUE = [];
@@ -71148,7 +71128,7 @@
 
         _get(_getPrototypeOf(Toast.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1V); // Default reflected attributes
+        this.classList.add(CLASSNAME$1T); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$m.DEFAULT;
@@ -71367,7 +71347,7 @@
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$d); // Set new variant class
 
 
-        this.classList.add("".concat(CLASSNAME$1V, "--").concat(this._variant)); // Set the role attribute to alert or status depending on
+        this.classList.add("".concat(CLASSNAME$1T, "--").concat(this._variant)); // Set the role attribute to alert or status depending on
         // the variant so that the element turns into a live region
 
         this.setAttribute('role', this._variant);
@@ -71459,7 +71439,7 @@
     return Toast;
   }(BaseOverlay(BaseComponent(HTMLElement)));
 
-  var CLASSNAME$1W = '_coral-Toast-content';
+  var CLASSNAME$1U = '_coral-Toast-content';
   /**
    @class Coral.Toast.Content
    @classdesc The Toast default content
@@ -71484,7 +71464,7 @@
 
       /** @ignore */
       value: function connectedCallback() {
-        this.classList.add(CLASSNAME$1W);
+        this.classList.add(CLASSNAME$1U);
       }
     }]);
 
@@ -71507,7 +71487,7 @@
   window.customElements.define('coral-toast-content', ToastContent);
   Toast.Content = ToastContent;
 
-  var CLASSNAME$1X = '_coral-TreeView';
+  var CLASSNAME$1V = '_coral-TreeView';
   /**
    @class Coral.Tree
    @classdesc A Tree component is a container component to display collapsible content.
@@ -71978,7 +71958,7 @@
 
         _get(_getPrototypeOf(Tree.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1X); // a11y
+        this.classList.add(CLASSNAME$1V); // a11y
 
         this.setAttribute('role', 'tree');
         this.setAttribute('aria-multiselectable', this.multiple); // Requires tree item API to be defined
@@ -72119,7 +72099,7 @@
     return frag;
   };
 
-  var CLASSNAME$1Y = '_coral-TreeView-item';
+  var CLASSNAME$1W = '_coral-TreeView-item';
   /**
    Enumeration for {@link TreeItem} variants.
    
@@ -72141,7 +72121,7 @@
   var ALL_VARIANT_CLASSES$e = [];
 
   for (var variantValue$c in variant$n) {
-    ALL_VARIANT_CLASSES$e.push("".concat(CLASSNAME$1Y, "--").concat(variant$n[variantValue$c]));
+    ALL_VARIANT_CLASSES$e.push("".concat(CLASSNAME$1W, "--").concat(variant$n[variantValue$c]));
   }
   /**
    @class Coral.Tree.Item
@@ -72233,7 +72213,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(TreeItem.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1Y); // a11y
+        this.classList.add(CLASSNAME$1W); // a11y
 
         this.setAttribute('role', 'treeitem');
         this.setAttribute('aria-selected', this.selected);
@@ -72460,7 +72440,7 @@
 
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$e);
 
-        this.classList.add("".concat(CLASSNAME$1Y, "--").concat(this._variant));
+        this.classList.add("".concat(CLASSNAME$1W, "--").concat(this._variant));
       }
       /**
        Whether the item is selected.
@@ -72590,7 +72570,7 @@
   Tree.Item = TreeItem;
   Tree.Item.Content = TreeItemContent;
 
-  var CLASSNAME$1Z = '_coral-WizardView';
+  var CLASSNAME$1X = '_coral-WizardView';
   /**
    @class Coral.WizardView
    @classdesc A WizardView component is the wrapping container used to create the typical Wizard pattern. This is intended
@@ -72927,7 +72907,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(WizardView.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1Z);
+        this.classList.add(CLASSNAME$1X);
 
         this._syncStepListSelection(0);
 
@@ -73011,7 +72991,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.88";
+  var version = "1.0.0-beta.89";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
