@@ -11,7 +11,10 @@
  */
 
 // @compat
-._coral-Button--secondary._coral-Button--quiet[variant="minimal"]:hover {
-  background-color: transparent;
-  border-color: transparent;
+._coral-Button--secondary._coral-Button--quiet[variant="minimal"] {
+  &:hover,
+  &:active {
+    background-color: transparent;
+    border-color: transparent;
+  }
 }
