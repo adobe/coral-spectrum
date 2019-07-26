@@ -48,6 +48,9 @@ const size = {
  @property {String} RED
  @property {String} ORANGE
  @property {String} GREEN
+ @property {String} YELLOW
+ @property {String} SEA_FOAM
+ @property {String} FUCHSIA
  @property {String} LIGHT_BLUE
  Not supported. Falls back to BLUE.
  @property {String} PERIWINKLE
@@ -56,19 +59,13 @@ const size = {
  Not supported. Falls back to BLUE.
  @property {String} PLUM
  Not supported. Falls back to RED.
- @property {String} FUCHSIA
- Not supported. Falls back to RED.
  @property {String} MAGENTA
  Not supported. Falls back to RED.
  @property {String} TANGERINE
  Not supported. Falls back to ORANGE.
- @property {String} YELLOW
- Not supported. Falls back to ORANGE.
  @property {String} CHARTREUSE
  Not supported. Falls back to GREEN.
  @property {String} KELLY_GREEN
- Not supported. Falls back to GREEN.
- @property {String} SEA_FOAM
  Not supported. Falls back to GREEN.
  */
 const color = {
@@ -96,13 +93,10 @@ const colorMap = {
   periwinkle: 'blue',
   cyan: 'blue',
   plum: 'red',
-  fuchsia: 'red',
   magenta: 'red',
   tangerine: 'orange',
-  yellow: 'orange',
   chartreuse: 'green',
-  kelly_green: 'green',
-  sea_foam: 'green'
+  kelly_green: 'green'
 };
 
 const swappedSize = commons.swapKeysAndValues(size);
