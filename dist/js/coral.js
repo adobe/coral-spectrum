@@ -15420,6 +15420,21 @@ var Coral = (function (exports) {
     OFF: 'off'
   };
   /**
+   Enumeration for {@link BaseOverlay} scroll focus options.
+   
+   @typedef {Object} OverlayScrollOnFocusEnum
+   
+   @property {String} ON
+   Scroll the document to bring the newly-focused element into view.
+   @property {String} OFF
+   Document will not scroll on focus.
+   */
+
+  var scrollOnFocus = {
+    ON: 'on',
+    OFF: 'off'
+  };
+  /**
    Enumeration for {@link BaseOverlay} return focus options.
    
    @typedef {Object} OverlayReturnFocusEnum
@@ -15472,8 +15487,18 @@ var Coral = (function (exports) {
   var overlayStack = [];
   var OverlayManager = {};
   /**
+   Return focus option
+   */
+
+  function preventScroll(instance) {
+    return {
+      preventScroll: instance.scrollOnFocus === scrollOnFocus.OFF
+    };
+  }
+  /**
    Cancel the backdrop hide mid-animation.
    */
+
 
   var fadeTimeout;
 
@@ -15629,7 +15654,7 @@ var Coral = (function (exports) {
           // Focus on the first tabbable element of the top overlay
           Array.prototype.some.call(top.instance.querySelectorAll(commons.TABBABLE_ELEMENT_SELECTOR), function (item) {
             if (item.offsetParent !== null && !item.hasAttribute('coral-tabcapture')) {
-              item.focus();
+              item.focus(preventScroll(top));
               return true;
             }
 
@@ -15650,7 +15675,7 @@ var Coral = (function (exports) {
           }).pop(); // Focus on the last tabbable element of the top overlay
 
           if (tabbableElement) {
-            tabbableElement.focus();
+            tabbableElement.focus(preventScroll(top));
           }
         }
       });
@@ -15730,11 +15755,7 @@ var Coral = (function (exports) {
 
     var keepBackdrop = OverlayManager.some(function (overlay) {
       // Check for backdrop usage
-      if (overlay.backdrop) {
-        return true;
-      }
-
-      return false;
+      return !!overlay.backdrop;
     });
 
     if (!keepBackdrop) {
@@ -15994,13 +16015,13 @@ var Coral = (function (exports) {
             if (this.focusOnShow === focusOnShow.ON) {
               this._focusOn('first');
             } else if (this.focusOnShow instanceof HTMLElement) {
-              this.focusOnShow.focus();
+              this.focusOnShow.focus(preventScroll(this));
             } else if (typeof this.focusOnShow === 'string' && this.focusOnShow !== focusOnShow.OFF) {
               // we need to add :not([coral-tabcapture]) to avoid selecting the tab captures
               var selectedElement = this.querySelector("".concat(this.focusOnShow, ":not([coral-tabcapture])"));
 
               if (selectedElement) {
-                selectedElement.focus();
+                selectedElement.focus(preventScroll(this));
               } // in case the selector does not match, it should fallback to the default behavior
               else {
                   this._focusOn('first');
@@ -16023,7 +16044,7 @@ var Coral = (function (exports) {
 
               this._elementToFocusWhenHidden._ignoreTabCapture = true;
 
-              this._elementToFocusWhenHidden.focus();
+              this._elementToFocusWhenHidden.focus(preventScroll(this));
 
               this._elementToFocusWhenHidden._ignoreTabCapture = false; // Drop the reference to avoid memory leaks
 
@@ -16045,10 +16066,10 @@ var Coral = (function (exports) {
 
 
             if (focusableTarget) {
-              focusableTarget.focus();
+              focusableTarget.focus(preventScroll(this));
             } // otherwise the element itself should get focus
             else {
-                this.focus();
+                this.focus(preventScroll(this));
               }
           }
         }, {
@@ -16154,6 +16175,10 @@ var Coral = (function (exports) {
 
             if (!this.hasAttribute('focusonshow')) {
               this.focusOnShow = this.focusOnShow;
+            }
+
+            if (!this.hasAttribute('scrollonfocus')) {
+              this.scrollOnFocus = this.scrollOnFocus;
             }
 
             if (this.open) {
@@ -16270,6 +16295,23 @@ var Coral = (function (exports) {
           set: function set(value) {
             value = transform.string(value).toLowerCase();
             this._returnFocus = validate.enumeration(returnFocus)(value) && value || returnFocus.OFF;
+          }
+          /**
+           Whether the browser should scroll the document to bring the newly-focused element into view. See {@link OverlayScrollOnFocusEnum}.
+           
+           @type {String}
+           @default OverlayScrollOnFocusEnum.ON
+           @htmlattribute scrollonfocus
+           */
+
+        }, {
+          key: "scrollOnFocus",
+          get: function get() {
+            return this._scrollOnFocus || scrollOnFocus.ON;
+          },
+          set: function set(value) {
+            value = transform.string(value).toLowerCase();
+            this._scrollOnFocus = validate.enumeration(scrollOnFocus)(value) && value || scrollOnFocus.ON;
           }
           /**
            Whether to focus the overlay, when opened or not. By default the overlay itself will get the focus. It also accepts
@@ -16452,6 +16494,17 @@ var Coral = (function (exports) {
           key: "returnFocus",
           get: function get() {
             return returnFocus;
+          }
+          /**
+           Returns {@link BaseOverlay} scroll focus options.
+           
+           @return {OverlayScrollOnFocusEnum}
+           */
+
+        }, {
+          key: "scrollOnFocus",
+          get: function get() {
+            return scrollOnFocus;
           }
           /**
            Returns {@link BaseOverlay} focus on show options.
@@ -27545,6 +27598,9 @@ var Coral = (function (exports) {
    @property {String} RED
    @property {String} ORANGE
    @property {String} GREEN
+   @property {String} YELLOW
+   @property {String} SEA_FOAM
+   @property {String} FUCHSIA
    @property {String} LIGHT_BLUE
    Not supported. Falls back to BLUE.
    @property {String} PERIWINKLE
@@ -27553,19 +27609,13 @@ var Coral = (function (exports) {
    Not supported. Falls back to BLUE.
    @property {String} PLUM
    Not supported. Falls back to RED.
-   @property {String} FUCHSIA
-   Not supported. Falls back to RED.
    @property {String} MAGENTA
    Not supported. Falls back to RED.
    @property {String} TANGERINE
    Not supported. Falls back to ORANGE.
-   @property {String} YELLOW
-   Not supported. Falls back to ORANGE.
    @property {String} CHARTREUSE
    Not supported. Falls back to GREEN.
    @property {String} KELLY_GREEN
-   Not supported. Falls back to GREEN.
-   @property {String} SEA_FOAM
    Not supported. Falls back to GREEN.
    */
 
@@ -27593,13 +27643,10 @@ var Coral = (function (exports) {
     periwinkle: 'blue',
     cyan: 'blue',
     plum: 'red',
-    fuchsia: 'red',
     magenta: 'red',
     tangerine: 'orange',
-    yellow: 'orange',
     chartreuse: 'green',
-    kelly_green: 'green',
-    sea_foam: 'green'
+    kelly_green: 'green'
   };
   var swappedSize = commons.swapKeysAndValues(size$4); // builds a string containing all possible color classnames. this will be used to remove classnames when the color
   // changes
@@ -33988,7 +34035,9 @@ var Coral = (function (exports) {
         this.banner = this._elements.banner;
         this.appendChild(this._elements.wrapper); // The 'asset' setter knows to insert the element just before the wrapper node.
 
-        this.asset = asset;
+        this.asset = asset; // In case a lot of alerts are added, they will not overflow the card
+
+        this.classList.toggle("".concat(CLASSNAME$E, "--scroll"), this.info.scrollHeight > this.clientHeight);
       }
     }, {
       key: "asset",
@@ -57121,7 +57170,8 @@ var Coral = (function (exports) {
       _this._inner = true;
       _this._target = target$2.PREVIOUS;
       _this._placement = placement$2.TOP;
-      _this._focusOnShow = _assertThisInitialized(_this); // Flag
+      _this._focusOnShow = _assertThisInitialized(_this);
+      _this._scrollOnFocus = Overlay.scrollOnFocus.OFF; // Flag
 
       _this._openedBefore = false; // Debounce timer
 
@@ -72991,7 +73041,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.89";
+  var version = "1.0.0-beta.90";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

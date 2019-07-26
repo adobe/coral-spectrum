@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">77.48% </span>
+        <span class="strong">77.68% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>86/111</span>
+        <span class='fraction'>87/112</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">63.24% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>26/36</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">77.48% </span>
+        <span class="strong">77.68% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>86/111</span>
+        <span class='fraction'>87/112</span>
       </div>
     </div>
     <p class="quiet">
@@ -498,7 +498,10 @@
 <a name='L450'></a><a href='#L450'>450</a>
 <a name='L451'></a><a href='#L451'>451</a>
 <a name='L452'></a><a href='#L452'>452</a>
-<a name='L453'></a><a href='#L453'>453</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L453'></a><a href='#L453'>453</a>
+<a name='L454'></a><a href='#L454'>454</a>
+<a name='L455'></a><a href='#L455'>455</a>
+<a name='L456'></a><a href='#L456'>456</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -702,6 +705,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">44x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">44x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -850,7 +855,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">44x</span>
+<span class="cline-any cline-yes">88x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">44x</span>
@@ -950,7 +955,8 @@
 <span class="cline-any cline-yes">36x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">36x</span>
-<span class="cline-any cline-yes">2x</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -1156,17 +1162,17 @@ class Card extends BaseComponent(HTMLElement) {
       }
     });
   }
-  <span class="fstat-no" title="function not covered" ></span>
-  /**<span class="cstat-no" title="statement not covered" ></span>
-   The Banner of the card.
-   
+  
+  /**
+   The Banner of t<span class="fstat-no" title="function not covered" >he c</span>ard.
+   <span class="cstat-no" title="statement not covered" ></span>
    @type {CardBanner}
    @contentzone
    */
   get banner() {
-    return this._getContentZone(this._elements.b<span class="branch-1 cbranch-no" title="branch not covered" >anner);<span class="branch-2 cbranch-no" title="branch not covered" ></span></span>
+    return this._getContentZone(this._elements.banner);
   }
-  set banner(value) {
+  set banner(value) {<span class="branch-2 cbranch-no" title="branch not covered" ><span class="branch-1 cbranch-no" title="branch not covered" ></span></span>
     this._setContentZone('banner', value, {
       handle: 'banner',
       tagName: 'coral-card-banner',
@@ -1190,23 +1196,23 @@ class Card extends BaseComponent(HTMLElement) {
     this._setContentZone('info', value, {
       handle: 'info',
       tagName: 'coral-card-info',
-      in<span class="missing-if-branch" title="if path not taken" >I</span>sert: function(info) {<span class="branch-3 cbranch-no" title="branch not covered" ></span>
+      insert: function(info) {
         this.appendChild(info);
-      }<span class="cstat-no" title="statement not covered" ></span>
+      }<span class="branch-3 cbranch-no" title="branch not covered" ><span class="missing-if-branch" title="if path not taken" >I</span></span>
     });
   }<span class="cstat-no" title="statement not covered" ></span>
   
   /**<span class="cstat-no" title="statement not covered" ></span>
    Fixes the width of the card. By default cards will take the width of their containers allowing them to interact
-   nicely with grids. Whenever they are used standalone fixing the width might be desired.
-   <span class="cstat-no" title="statement not covered" ></span>
+   nicely with grids. <span class="cstat-no" title="statement not covered" >Whenever they are used sta</span>ndalone fixing the width might be desired.
+   
    @type {Boolean}
-   @default <span class="cstat-no" title="statement not covered" >false</span>
+   @defaul<span class="cstat-no" title="statement not covered" >t false</span>
    @htmlattribute fixedwidth
-   @htmlattribu<span class="cstat-no" title="statement not covered" >tereflected</span>
-   */<span class="cstat-no" title="statement not covered" ></span>
-  get fixedWidth() {
-    return this._fixedWidth || false;
+   @htmlattr<span class="cstat-no" title="statement not covered" >ibutereflected</span>
+   */
+  get fixedWidt<span class="cstat-no" title="statement not covered" >h() {</span>
+    return thi<span class="cstat-no" title="statement not covered" >s._fixedWidth || false;</span>
   }
   set fixedWidth(value) {
     this._fixedWidth = transform.booleanAttr(value);
@@ -1224,10 +1230,10 @@ class Card extends BaseComponent(HTMLElement) {
   get overlay() {
     return this._getContentZone(this._elements.overlay);
   }
-  set overlay(valu<span class="fstat-no" title="function not covered" >e) {</span>
-    th<span class="cstat-no" title="statement not covered" >is._setContentZone('overlay', value, {</span>
-      handle: 'overlay',
-      tagName: 'coral-card-overlay',
+  set overlay(value) {
+    this._setContentZone('overlay', value, {
+      handle: 'ove<span class="fstat-no" title="function not covered" >rlay</span>',
+<span class="cstat-no" title="statement not covered" >      tagName: 'coral-card-overlay',</span>
       insert: function(overlay) {
         this._elements.wrapper.appendChild(overlay);
       }
@@ -1235,17 +1241,17 @@ class Card extends BaseComponent(HTMLElement) {
   }
   
   /**
-   Whether the car<span class="fstat-no" title="function not covered" >d is</span> stacked or not. This is used to represent several assets grouped together.
-   <span class="cstat-no" title="statement not covered" ></span>
-   @type {Boolean}
-   @default false<span class="fstat-no" title="function not covered" ></span>
-   @ht<span class="cstat-no" title="statement not covered" >mlattribute stacked</span>
-   @html<span class="cstat-no" title="statement not covered" >attributereflected</span>
-   */
+   Whether the card is stacked or not. This is used to represent several assets grouped together.
+   
+   @type {Boolean}<span class="fstat-no" title="function not covered" ></span>
+   @de<span class="cstat-no" title="statement not covered" >fault false</span>
+   @htmlattribute stacked
+   @htmlattributer<span class="fstat-no" title="function not covered" >efle</span>cted
+   */<span class="cstat-no" title="statement not covered" ></span>
   get st<span class="cstat-no" title="statement not covered" >acked() {</span>
-    return<span class="cstat-no" title="statement not covered" > this._stacked || false;</span>
-  }
-  set stacked(value) {
+    return this._stacked || false;
+  }<span class="cstat-no" title="statement not covered" ></span>
+  set stac<span class="cstat-no" title="statement not covered" >ked(value) {</span>
     this._stacked = transform.booleanAttr(value);
     this._reflectAttribute('stacked', this._stacked);
   
@@ -1256,10 +1262,10 @@ class Card extends BaseComponent(HTMLElement) {
    The card's variant. It determines which sections of the Card and in which position they are shown.
    See {@link CardVariantEnum}.
    
-   @type {String}<span class="fstat-no" title="function not covered" ></span>
-   @de<span class="cstat-no" title="statement not covered" >fault CardVariantEnum.DEFAULT</span>
-   @htmlattribute variant
-   */
+   @type {String}
+   @default CardVariantEnum.DEFAULT
+   @htmlattribute <span class="fstat-no" title="function not covered" >vari</span>ant
+   */<span class="cstat-no" title="statement not covered" ></span>
   get variant() {
     return this._variant || variant.DEFAULT;
   }
@@ -1279,10 +1285,10 @@ class Card extends BaseComponent(HTMLElement) {
   
   /** @ignore */
   _onLoad(event) {
-    // @todo fix m<span class="fstat-no" title="function not covered" >e fo</span>r multiple images
-    //<span class="cstat-no" title="statement not covered" > sets the image as loaded</span>
-    this._loaded = true;
-  
+    // @todo fix me for multiple images
+    // sets the image as loaded
+    this._loaded =<span class="fstat-no" title="function not covered" > tru</span>e;
+  <span class="cstat-no" title="statement not covered" ></span>
     // removes the height style since the asset has been completely loaded
     this._elements.asset.style.height = '';
   
@@ -1325,17 +1331,17 @@ class Card extends BaseComponent(HTMLElement) {
    
    @return {CardVariantEnum}
    */
-  static get varia<span class="fstat-no" title="function not covered" >nt()</span> { return variant; }
-  <span class="cstat-no" title="statement not covered" ></span>
-  /** @ignore */
-  static get obser<span class="fstat-no" title="function not covered" >vedA</span>ttributes() {
-    re<span class="cstat-no" title="statement not covered" >turn super.observedAttributes.concat([</span>
-      'assetwidth',
+  static get variant() { return variant; }
+  
+  /** @ignore */<span class="fstat-no" title="function not covered" ></span>
+  stat<span class="cstat-no" title="statement not covered" >ic get observedAttributes() {</span>
+    return super.observedAttributes.concat([
+      'assetwidth'<span class="fstat-no" title="function not covered" >,</span>
 <span class="cstat-no" title="statement not covered" >      'assetWidth',</span>
       'assetheight',
 <span class="cstat-no" title="statement not covered" >      'assetHeight',</span>
       'colorhint',
-      'colorHint',
+<span class="cstat-no" title="statement not covered" >      'colorHint',</span>
       'fixedwidth',
       'fixedWidth',
       'variant',
@@ -1367,17 +1373,17 @@ class Card extends BaseComponent(HTMLElement) {
   
     for (const contentZone in this._contentZones) {
       const element = this._elements[this._contentZones[contentZone]];
-      // Remove it<span class="fstat-no" title="function not covered" > so </span>we can process children
-<span class="cstat-no" title="statement not covered" >      if (element.parentNode) {</span>
-        element.parentNode.removeChild(element);
-      }<span class="fstat-no" title="function not covered" ></span>
-    }<span class="cstat-no" title="statement not covered" ></span>
-  
+      // Remove it so we can process children
+      if (element.parentNode) {
+        element.pa<span class="fstat-no" title="function not covered" >rent</span>Node.removeChild(element);
+<span class="cstat-no" title="statement not covered" >      }</span>
+    }
+  <span class="fstat-no" title="function not covered" ></span>
     //<span class="cstat-no" title="statement not covered" > Moves everything into the main content zone</span>
     while (this.firstChild) {
 <span class="cstat-no" title="statement not covered" >      const child = this.firstChild;</span>
       // Removes the empty spaces
-      if (child.nodeType === Node.TEXT_NODE &amp;&amp; child.textContent.trim() !== '' ||
+<span class="cstat-no" title="statement not covered" >      if (child.nodeType === Node.TEXT_NODE &amp;&amp; child.textContent.trim() !== '' </span>||
         child.nodeType === Node.ELEMENT_NODE &amp;&amp; child.getAttribute('handle') !== 'wrapper') {
         // Add non-template elements to the content
         content.appendChild(child);
@@ -1389,15 +1395,18 @@ class Card extends BaseComponent(HTMLElement) {
     }
   
     // Assign the content zones so the insert functions will be called
-    this.overlay = this._eleme<span class="branch-1 cbranch-no" title="branch not covered" >nts.overlay;</span>
+    this.overlay = this._elements.overlay;
     this.content = content;
-    this.info = this._elements.info;
+    this.info = this._elements<span class="branch-1 cbranch-no" title="branch not covered" >.info;</span>
     this.banner = this._elements.banner;
   
     this.appendChild(this._elements.wrapper);
-  <span class="branch-2 cbranch-no" title="branch not covered" ></span>
+  
     // The 'asset' setter knows to insert the element just before the wrapper node.
-    this.asset = asset;
+    this.asset = asset;<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+    
+    // In case a lot of alerts are added, they will not overflow the card
+    this.classList.toggle(`${CLASSNAME}--scroll`, this.info.scrollHeight &gt; this.clientHeight);
   }
 }
 &nbsp;
@@ -1408,7 +1417,7 @@ export default Card;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 23 2019 10:12:17 GMT+0200 (CEST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 26 2019 14:05:07 GMT+0200 (CEST)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

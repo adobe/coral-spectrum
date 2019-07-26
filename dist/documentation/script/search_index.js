@@ -1956,6 +1956,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "coral-spectrum/coral-base-overlay/src/scripts/baseoverlay.js~baseoverlay#scrollonfocus",
+    "class/coral-spectrum/coral-base-overlay/src/scripts/BaseOverlay.js~BaseOverlay.html#instance-member-scrollOnFocus",
+    "coral-spectrum/coral-base-overlay/src/scripts/BaseOverlay.js~BaseOverlay#scrollOnFocus",
+    "member"
+  ],
+  [
     "coral-spectrum/coral-base-overlay/src/scripts/baseoverlay.js~baseoverlay#show",
     "class/coral-spectrum/coral-base-overlay/src/scripts/BaseOverlay.js~BaseOverlay.html#instance-method-show",
     "coral-spectrum/coral-base-overlay/src/scripts/BaseOverlay.js~BaseOverlay#show",
@@ -2010,6 +2016,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "coral-spectrum/coral-base-overlay/src/scripts/baseoverlay.js~baseoverlay.scrollonfocus",
+    "class/coral-spectrum/coral-base-overlay/src/scripts/BaseOverlay.js~BaseOverlay.html#static-member-scrollOnFocus",
+    "coral-spectrum/coral-base-overlay/src/scripts/BaseOverlay.js~BaseOverlay.scrollOnFocus",
+    "member"
+  ],
+  [
     "coral-spectrum/coral-base-overlay/src/scripts/baseoverlay.js~baseoverlay.trapfocus",
     "class/coral-spectrum/coral-base-overlay/src/scripts/BaseOverlay.js~BaseOverlay.html#static-member-trapFocus",
     "coral-spectrum/coral-base-overlay/src/scripts/BaseOverlay.js~BaseOverlay.trapFocus",
@@ -2037,6 +2049,12 @@ window.esdocSearchIndex = [
     "coral-spectrum/coral-base-overlay/src/scripts/enums.js~overlayreturnfocusenum",
     "typedef/index.html#static-typedef-OverlayReturnFocusEnum",
     "coral-spectrum/coral-base-overlay/src/scripts/enums.js~OverlayReturnFocusEnum",
+    "typedef"
+  ],
+  [
+    "coral-spectrum/coral-base-overlay/src/scripts/enums.js~overlayscrollonfocusenum",
+    "typedef/index.html#static-typedef-OverlayScrollOnFocusEnum",
+    "coral-spectrum/coral-base-overlay/src/scripts/enums.js~OverlayScrollOnFocusEnum",
     "typedef"
   ],
   [

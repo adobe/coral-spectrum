@@ -48,6 +48,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-OverlayFadeTime">OverlayFadeTime</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-OverlayFocusOnShowEnum">OverlayFocusOnShowEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-OverlayReturnFocusEnum">OverlayReturnFocusEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-OverlayScrollOnFocusEnum">OverlayScrollOnFocusEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-OverlayTrapFocusEnum">OverlayTrapFocusEnum</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-collection-src-scripts">coral-collection/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-collection/src/scripts/Collection.js~Collection.html">Collection</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-collection/src/scripts/SelectableCollection.js~SelectableCollection.html">SelectableCollection</a></span></span></li>
@@ -416,7 +417,7 @@
 import base from &apos;../templates/base&apos;;
 import Vent from &apos;@adobe/vent&apos;;
 import {validate, transform, commons} from &apos;../../../coral-utils&apos;;
-import {trapFocus, returnFocus, focusOnShow, FADETIME} from &apos;./enums&apos;;
+import {trapFocus, returnFocus, focusOnShow, scrollOnFocus, FADETIME} from &apos;./enums&apos;;
 
 // Includes overlay itself
 const COMPONENTS_WITH_OVERLAY = `
@@ -449,6 +450,13 @@ const TAB_KEY = 9;
 // A stack interface for overlays
 const overlayStack = [];
 let OverlayManager = {};
+
+/**
+ Return focus option
+ */
+function preventScroll(instance) {
+  return {preventScroll: instance.scrollOnFocus === scrollOnFocus.OFF};
+}
 
 /**
  Cancel the backdrop hide mid-animation.
@@ -612,7 +620,7 @@ function createDocumentTabCaptureEls() {
         // Focus on the first tabbable element of the top overlay
         Array.prototype.some.call(top.instance.querySelectorAll(commons.TABBABLE_ELEMENT_SELECTOR), (item) =&gt; {
           if (item.offsetParent !== null &amp;&amp; !item.hasAttribute(&apos;coral-tabcapture&apos;)) {
-            item.focus();
+            item.focus(preventScroll(top));
             return true;
           }
           
@@ -632,7 +640,7 @@ function createDocumentTabCaptureEls() {
         
         // Focus on the last tabbable element of the top overlay
         if (tabbableElement) {
-          tabbableElement.focus();
+          tabbableElement.focus(preventScroll(top));
         }
       }
     });
@@ -712,11 +720,7 @@ function hideOrRepositionBackdrop() {
   // Loop over all overlays
   const keepBackdrop = OverlayManager.some((overlay) =&gt; {
     // Check for backdrop usage
-    if (overlay.backdrop) {
-      return true;
-    }
-    
-    return false;
+    return !!overlay.backdrop;
   });
   
   if (!keepBackdrop) {
@@ -855,6 +859,21 @@ class BaseOverlay extends superClass {
   set returnFocus(value) {
     value = transform.string(value).toLowerCase();
     this._returnFocus = validate.enumeration(returnFocus)(value) &amp;&amp; value || returnFocus.OFF;
+  }
+  
+  /**
+   Whether the browser should scroll the document to bring the newly-focused element into view. See {@link OverlayScrollOnFocusEnum}.
+   
+   @type {String}
+   @default OverlayScrollOnFocusEnum.ON
+   @htmlattribute scrollonfocus
+   */
+  get scrollOnFocus() {
+    return this._scrollOnFocus || scrollOnFocus.ON;
+  }
+  set scrollOnFocus(value) {
+    value = transform.string(value).toLowerCase();
+    this._scrollOnFocus = validate.enumeration(scrollOnFocus)(value) &amp;&amp; value || scrollOnFocus.ON;
   }
   
   /**
@@ -1168,14 +1187,14 @@ class BaseOverlay extends superClass {
       this._focusOn(&apos;first&apos;);
     }
     else if (this.focusOnShow instanceof HTMLElement) {
-      this.focusOnShow.focus();
+      this.focusOnShow.focus(preventScroll(this));
     }
     else if (typeof this.focusOnShow === &apos;string&apos; &amp;&amp; this.focusOnShow !== focusOnShow.OFF) {
       // we need to add :not([coral-tabcapture]) to avoid selecting the tab captures
       const selectedElement = this.querySelector(`${this.focusOnShow}:not([coral-tabcapture])`);
       
       if (selectedElement) {
-        selectedElement.focus();
+        selectedElement.focus(preventScroll(this));
       }
       // in case the selector does not match, it should fallback to the default behavior
       else {
@@ -1196,7 +1215,7 @@ class BaseOverlay extends superClass {
       
       // Return focus, ignoring tab capture if it is an overlay
       this._elementToFocusWhenHidden._ignoreTabCapture = true;
-      this._elementToFocusWhenHidden.focus();
+      this._elementToFocusWhenHidden.focus(preventScroll(this));
       this._elementToFocusWhenHidden._ignoreTabCapture = false;
       
       // Drop the reference to avoid memory leaks
@@ -1216,11 +1235,11 @@ class BaseOverlay extends superClass {
     
     // if we found a focusing target we focus it
     if (focusableTarget) {
-      focusableTarget.focus();
+      focusableTarget.focus(preventScroll(this));
     }
     // otherwise the element itself should get focus
     else {
-      this.focus();
+      this.focus(preventScroll(this));
     }
   }
   
@@ -1319,6 +1338,13 @@ class BaseOverlay extends superClass {
   static get returnFocus() { return returnFocus; }
   
   /**
+   Returns {@link BaseOverlay} scroll focus options.
+   
+   @return {OverlayScrollOnFocusEnum}
+   */
+  static get scrollOnFocus() { return scrollOnFocus; }
+  
+  /**
    Returns {@link BaseOverlay} focus on show options.
    
    @return {OverlayFocusOnShowEnum}
@@ -1352,6 +1378,7 @@ class BaseOverlay extends superClass {
     if (!this.hasAttribute(&apos;trapfocus&apos;)) { this.trapFocus = this.trapFocus; }
     if (!this.hasAttribute(&apos;returnfocus&apos;)) { this.returnFocus = this.returnFocus; }
     if (!this.hasAttribute(&apos;focusonshow&apos;)) { this.focusOnShow = this.focusOnShow; }
+    if (!this.hasAttribute(&apos;scrollonfocus&apos;)) { this.scrollOnFocus = this.scrollOnFocus; }
     
     if (this.open) {
       this._pushOverlay();

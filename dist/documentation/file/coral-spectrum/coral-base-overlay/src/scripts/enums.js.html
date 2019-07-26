@@ -48,6 +48,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-OverlayFadeTime">OverlayFadeTime</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-OverlayFocusOnShowEnum">OverlayFocusOnShowEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-OverlayReturnFocusEnum">OverlayReturnFocusEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-OverlayScrollOnFocusEnum">OverlayScrollOnFocusEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-OverlayTrapFocusEnum">OverlayTrapFocusEnum</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-collection-src-scripts">coral-collection/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-collection/src/scripts/Collection.js~Collection.html">Collection</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-collection/src/scripts/SelectableCollection.js~SelectableCollection.html">SelectableCollection</a></span></span></li>
@@ -429,6 +430,21 @@ const trapFocus = {
 };
 
 /**
+ Enumeration for {@link BaseOverlay} scroll focus options.
+ 
+ @typedef {Object} OverlayScrollOnFocusEnum
+ 
+ @property {String} ON
+ Scroll the document to bring the newly-focused element into view.
+ @property {String} OFF
+ Document will not scroll on focus.
+ */
+const scrollOnFocus = {
+  ON: &apos;on&apos;,
+  OFF: &apos;off&apos;
+};
+
+/**
  Enumeration for {@link BaseOverlay} return focus options.
  
  @typedef {Object} OverlayReturnFocusEnum
@@ -466,7 +482,7 @@ const focusOnShow = {
  */
 const FADETIME = 350;
 
-export {trapFocus, returnFocus, focusOnShow, FADETIME};
+export {trapFocus, returnFocus, focusOnShow, scrollOnFocus, FADETIME};
 </code></pre>
 
 </div>

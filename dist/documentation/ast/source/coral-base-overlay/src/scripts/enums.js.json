@@ -1,28 +1,28 @@
 {
   "type": "File",
   "start": 0,
-  "end": 1899,
+  "end": 2232,
   "loc": {
     "start": {
       "line": 1,
       "column": 0
     },
     "end": {
-      "line": 67,
+      "line": 82,
       "column": 0
     }
   },
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 1899,
+    "end": 2232,
     "loc": {
       "start": {
         "line": 1,
         "column": 0
       },
       "end": {
-        "line": 67,
+        "line": 82,
         "column": 0
       }
     },
@@ -212,8 +212,8 @@
       },
       {
         "type": "Identifier",
-        "start": 1263,
-        "end": 1312,
+        "start": 1210,
+        "end": 1261,
         "loc": {
           "start": {
             "line": 38,
@@ -227,8 +227,8 @@
         "declarations": [
           {
             "type": "VariableDeclarator",
-            "start": 1269,
-            "end": 1311,
+            "start": 1216,
+            "end": 1260,
             "loc": {
               "start": {
                 "line": 38,
@@ -241,8 +241,8 @@
             },
             "id": {
               "type": "Identifier",
-              "start": 1269,
-              "end": 1280,
+              "start": 1216,
+              "end": 1229,
               "loc": {
                 "start": {
                   "line": 38,
@@ -250,21 +250,21 @@
                 },
                 "end": {
                   "line": 38,
-                  "column": 17
+                  "column": 19
                 },
-                "identifierName": "returnFocus"
+                "identifierName": "scrollOnFocus"
               },
-              "name": "returnFocus",
+              "name": "scrollOnFocus",
               "leadingComments": null
             },
             "init": {
               "type": "ObjectExpression",
-              "start": 1283,
-              "end": 1311,
+              "start": 1232,
+              "end": 1260,
               "loc": {
                 "start": {
                   "line": 38,
-                  "column": 20
+                  "column": 22
                 },
                 "end": {
                   "line": 41,
@@ -274,8 +274,8 @@
               "properties": [
                 {
                   "type": "ObjectProperty",
-                  "start": 1287,
-                  "end": 1295,
+                  "start": 1236,
+                  "end": 1244,
                   "loc": {
                     "start": {
                       "line": 39,
@@ -291,8 +291,8 @@
                   "computed": false,
                   "key": {
                     "type": "Identifier",
-                    "start": 1287,
-                    "end": 1289,
+                    "start": 1236,
+                    "end": 1238,
                     "loc": {
                       "start": {
                         "line": 39,
@@ -308,8 +308,8 @@
                   },
                   "value": {
                     "type": "StringLiteral",
-                    "start": 1291,
-                    "end": 1295,
+                    "start": 1240,
+                    "end": 1244,
                     "loc": {
                       "start": {
                         "line": 39,
@@ -329,8 +329,8 @@
                 },
                 {
                   "type": "ObjectProperty",
-                  "start": 1299,
-                  "end": 1309,
+                  "start": 1248,
+                  "end": 1258,
                   "loc": {
                     "start": {
                       "line": 40,
@@ -346,8 +346,8 @@
                   "computed": false,
                   "key": {
                     "type": "Identifier",
-                    "start": 1299,
-                    "end": 1302,
+                    "start": 1248,
+                    "end": 1251,
                     "loc": {
                       "start": {
                         "line": 40,
@@ -363,8 +363,8 @@
                   },
                   "value": {
                     "type": "StringLiteral",
-                    "start": 1304,
-                    "end": 1309,
+                    "start": 1253,
+                    "end": 1258,
                     "loc": {
                       "start": {
                         "line": 40,
@@ -394,8 +394,8 @@
       },
       {
         "type": "Identifier",
-        "start": 1573,
-        "end": 1622,
+        "start": 1581,
+        "end": 1630,
         "loc": {
           "start": {
             "line": 53,
@@ -409,8 +409,8 @@
         "declarations": [
           {
             "type": "VariableDeclarator",
-            "start": 1579,
-            "end": 1621,
+            "start": 1587,
+            "end": 1629,
             "loc": {
               "start": {
                 "line": 53,
@@ -423,8 +423,8 @@
             },
             "id": {
               "type": "Identifier",
-              "start": 1579,
-              "end": 1590,
+              "start": 1587,
+              "end": 1598,
               "loc": {
                 "start": {
                   "line": 53,
@@ -434,15 +434,15 @@
                   "line": 53,
                   "column": 17
                 },
-                "identifierName": "focusOnShow"
+                "identifierName": "returnFocus"
               },
-              "name": "focusOnShow",
+              "name": "returnFocus",
               "leadingComments": null
             },
             "init": {
               "type": "ObjectExpression",
-              "start": 1593,
-              "end": 1621,
+              "start": 1601,
+              "end": 1629,
               "loc": {
                 "start": {
                   "line": 53,
@@ -456,8 +456,8 @@
               "properties": [
                 {
                   "type": "ObjectProperty",
-                  "start": 1597,
-                  "end": 1605,
+                  "start": 1605,
+                  "end": 1613,
                   "loc": {
                     "start": {
                       "line": 54,
@@ -473,8 +473,8 @@
                   "computed": false,
                   "key": {
                     "type": "Identifier",
-                    "start": 1597,
-                    "end": 1599,
+                    "start": 1605,
+                    "end": 1607,
                     "loc": {
                       "start": {
                         "line": 54,
@@ -490,8 +490,8 @@
                   },
                   "value": {
                     "type": "StringLiteral",
-                    "start": 1601,
-                    "end": 1605,
+                    "start": 1609,
+                    "end": 1613,
                     "loc": {
                       "start": {
                         "line": 54,
@@ -511,8 +511,8 @@
                 },
                 {
                   "type": "ObjectProperty",
-                  "start": 1609,
-                  "end": 1619,
+                  "start": 1617,
+                  "end": 1627,
                   "loc": {
                     "start": {
                       "line": 55,
@@ -528,8 +528,8 @@
                   "computed": false,
                   "key": {
                     "type": "Identifier",
-                    "start": 1609,
-                    "end": 1612,
+                    "start": 1617,
+                    "end": 1620,
                     "loc": {
                       "start": {
                         "line": 55,
@@ -545,8 +545,8 @@
                   },
                   "value": {
                     "type": "StringLiteral",
-                    "start": 1614,
-                    "end": 1619,
+                    "start": 1622,
+                    "end": 1627,
                     "loc": {
                       "start": {
                         "line": 55,
@@ -576,44 +576,226 @@
       },
       {
         "type": "Identifier",
-        "start": 1820,
-        "end": 1841,
+        "start": 1891,
+        "end": 1940,
         "loc": {
           "start": {
-            "line": 64,
+            "line": 68,
             "column": 0
           },
           "end": {
-            "line": 64,
+            "line": 71,
+            "column": 2
+          }
+        },
+        "declarations": [
+          {
+            "type": "VariableDeclarator",
+            "start": 1897,
+            "end": 1939,
+            "loc": {
+              "start": {
+                "line": 68,
+                "column": 6
+              },
+              "end": {
+                "line": 71,
+                "column": 1
+              }
+            },
+            "id": {
+              "type": "Identifier",
+              "start": 1897,
+              "end": 1908,
+              "loc": {
+                "start": {
+                  "line": 68,
+                  "column": 6
+                },
+                "end": {
+                  "line": 68,
+                  "column": 17
+                },
+                "identifierName": "focusOnShow"
+              },
+              "name": "focusOnShow",
+              "leadingComments": null
+            },
+            "init": {
+              "type": "ObjectExpression",
+              "start": 1911,
+              "end": 1939,
+              "loc": {
+                "start": {
+                  "line": 68,
+                  "column": 20
+                },
+                "end": {
+                  "line": 71,
+                  "column": 1
+                }
+              },
+              "properties": [
+                {
+                  "type": "ObjectProperty",
+                  "start": 1915,
+                  "end": 1923,
+                  "loc": {
+                    "start": {
+                      "line": 69,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 69,
+                      "column": 10
+                    }
+                  },
+                  "method": false,
+                  "shorthand": false,
+                  "computed": false,
+                  "key": {
+                    "type": "Identifier",
+                    "start": 1915,
+                    "end": 1917,
+                    "loc": {
+                      "start": {
+                        "line": 69,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 69,
+                        "column": 4
+                      },
+                      "identifierName": "ON"
+                    },
+                    "name": "ON"
+                  },
+                  "value": {
+                    "type": "StringLiteral",
+                    "start": 1919,
+                    "end": 1923,
+                    "loc": {
+                      "start": {
+                        "line": 69,
+                        "column": 6
+                      },
+                      "end": {
+                        "line": 69,
+                        "column": 10
+                      }
+                    },
+                    "extra": {
+                      "rawValue": "on",
+                      "raw": "'on'"
+                    },
+                    "value": "on"
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "start": 1927,
+                  "end": 1937,
+                  "loc": {
+                    "start": {
+                      "line": 70,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 70,
+                      "column": 12
+                    }
+                  },
+                  "method": false,
+                  "shorthand": false,
+                  "computed": false,
+                  "key": {
+                    "type": "Identifier",
+                    "start": 1927,
+                    "end": 1930,
+                    "loc": {
+                      "start": {
+                        "line": 70,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 70,
+                        "column": 5
+                      },
+                      "identifierName": "OFF"
+                    },
+                    "name": "OFF"
+                  },
+                  "value": {
+                    "type": "StringLiteral",
+                    "start": 1932,
+                    "end": 1937,
+                    "loc": {
+                      "start": {
+                        "line": 70,
+                        "column": 7
+                      },
+                      "end": {
+                        "line": 70,
+                        "column": 12
+                      }
+                    },
+                    "extra": {
+                      "rawValue": "off",
+                      "raw": "'off'"
+                    },
+                    "value": "off"
+                  }
+                }
+              ]
+            },
+            "leadingComments": null
+          }
+        ],
+        "kind": "const",
+        "leadingComments": [],
+        "trailingComments": [],
+        "name": "_"
+      },
+      {
+        "type": "Identifier",
+        "start": 2138,
+        "end": 2159,
+        "loc": {
+          "start": {
+            "line": 79,
+            "column": 0
+          },
+          "end": {
+            "line": 79,
             "column": 21
           }
         },
         "declarations": [
           {
             "type": "VariableDeclarator",
-            "start": 1826,
-            "end": 1840,
+            "start": 2144,
+            "end": 2158,
             "loc": {
               "start": {
-                "line": 64,
+                "line": 79,
                 "column": 6
               },
               "end": {
-                "line": 64,
+                "line": 79,
                 "column": 20
               }
             },
             "id": {
               "type": "Identifier",
-              "start": 1826,
-              "end": 1834,
+              "start": 2144,
+              "end": 2152,
               "loc": {
                 "start": {
-                  "line": 64,
+                  "line": 79,
                   "column": 6
                 },
                 "end": {
-                  "line": 64,
+                  "line": 79,
                   "column": 14
                 },
                 "identifierName": "FADETIME"
@@ -623,15 +805,15 @@
             },
             "init": {
               "type": "NumericLiteral",
-              "start": 1837,
-              "end": 1840,
+              "start": 2155,
+              "end": 2158,
               "loc": {
                 "start": {
-                  "line": 64,
+                  "line": 79,
                   "column": 17
                 },
                 "end": {
-                  "line": 64,
+                  "line": 79,
                   "column": 20
                 }
               },
@@ -651,45 +833,45 @@
       },
       {
         "type": "ExportNamedDeclaration",
-        "start": 1843,
-        "end": 1898,
+        "start": 2161,
+        "end": 2231,
         "loc": {
           "start": {
-            "line": 66,
+            "line": 81,
             "column": 0
           },
           "end": {
-            "line": 66,
-            "column": 55
+            "line": 81,
+            "column": 70
           }
         },
         "declaration": null,
         "specifiers": [
           {
             "type": "ExportSpecifier",
-            "start": 1851,
-            "end": 1860,
+            "start": 2169,
+            "end": 2178,
             "loc": {
               "start": {
-                "line": 66,
+                "line": 81,
                 "column": 8
               },
               "end": {
-                "line": 66,
+                "line": 81,
                 "column": 17
               }
             },
             "local": {
               "type": "Identifier",
-              "start": 1851,
-              "end": 1860,
+              "start": 2169,
+              "end": 2178,
               "loc": {
                 "start": {
-                  "line": 66,
+                  "line": 81,
                   "column": 8
                 },
                 "end": {
-                  "line": 66,
+                  "line": 81,
                   "column": 17
                 },
                 "identifierName": "trapFocus"
@@ -698,15 +880,15 @@
             },
             "exported": {
               "type": "Identifier",
-              "start": 1851,
-              "end": 1860,
+              "start": 2169,
+              "end": 2178,
               "loc": {
                 "start": {
-                  "line": 66,
+                  "line": 81,
                   "column": 8
                 },
                 "end": {
-                  "line": 66,
+                  "line": 81,
                   "column": 17
                 },
                 "identifierName": "trapFocus"
@@ -716,29 +898,29 @@
           },
           {
             "type": "ExportSpecifier",
-            "start": 1862,
-            "end": 1873,
+            "start": 2180,
+            "end": 2191,
             "loc": {
               "start": {
-                "line": 66,
+                "line": 81,
                 "column": 19
               },
               "end": {
-                "line": 66,
+                "line": 81,
                 "column": 30
               }
             },
             "local": {
               "type": "Identifier",
-              "start": 1862,
-              "end": 1873,
+              "start": 2180,
+              "end": 2191,
               "loc": {
                 "start": {
-                  "line": 66,
+                  "line": 81,
                   "column": 19
                 },
                 "end": {
-                  "line": 66,
+                  "line": 81,
                   "column": 30
                 },
                 "identifierName": "returnFocus"
@@ -747,15 +929,15 @@
             },
             "exported": {
               "type": "Identifier",
-              "start": 1862,
-              "end": 1873,
+              "start": 2180,
+              "end": 2191,
               "loc": {
                 "start": {
-                  "line": 66,
+                  "line": 81,
                   "column": 19
                 },
                 "end": {
-                  "line": 66,
+                  "line": 81,
                   "column": 30
                 },
                 "identifierName": "returnFocus"
@@ -765,29 +947,29 @@
           },
           {
             "type": "ExportSpecifier",
-            "start": 1875,
-            "end": 1886,
+            "start": 2193,
+            "end": 2204,
             "loc": {
               "start": {
-                "line": 66,
+                "line": 81,
                 "column": 32
               },
               "end": {
-                "line": 66,
+                "line": 81,
                 "column": 43
               }
             },
             "local": {
               "type": "Identifier",
-              "start": 1875,
-              "end": 1886,
+              "start": 2193,
+              "end": 2204,
               "loc": {
                 "start": {
-                  "line": 66,
+                  "line": 81,
                   "column": 32
                 },
                 "end": {
-                  "line": 66,
+                  "line": 81,
                   "column": 43
                 },
                 "identifierName": "focusOnShow"
@@ -796,15 +978,15 @@
             },
             "exported": {
               "type": "Identifier",
-              "start": 1875,
-              "end": 1886,
+              "start": 2193,
+              "end": 2204,
               "loc": {
                 "start": {
-                  "line": 66,
+                  "line": 81,
                   "column": 32
                 },
                 "end": {
-                  "line": 66,
+                  "line": 81,
                   "column": 43
                 },
                 "identifierName": "focusOnShow"
@@ -814,30 +996,79 @@
           },
           {
             "type": "ExportSpecifier",
-            "start": 1888,
-            "end": 1896,
+            "start": 2206,
+            "end": 2219,
             "loc": {
               "start": {
-                "line": 66,
+                "line": 81,
                 "column": 45
               },
               "end": {
-                "line": 66,
-                "column": 53
+                "line": 81,
+                "column": 58
               }
             },
             "local": {
               "type": "Identifier",
-              "start": 1888,
-              "end": 1896,
+              "start": 2206,
+              "end": 2219,
               "loc": {
                 "start": {
-                  "line": 66,
+                  "line": 81,
                   "column": 45
                 },
                 "end": {
-                  "line": 66,
-                  "column": 53
+                  "line": 81,
+                  "column": 58
+                },
+                "identifierName": "scrollOnFocus"
+              },
+              "name": "scrollOnFocus"
+            },
+            "exported": {
+              "type": "Identifier",
+              "start": 2206,
+              "end": 2219,
+              "loc": {
+                "start": {
+                  "line": 81,
+                  "column": 45
+                },
+                "end": {
+                  "line": 81,
+                  "column": 58
+                },
+                "identifierName": "scrollOnFocus"
+              },
+              "name": "scrollOnFocus"
+            }
+          },
+          {
+            "type": "ExportSpecifier",
+            "start": 2221,
+            "end": 2229,
+            "loc": {
+              "start": {
+                "line": 81,
+                "column": 60
+              },
+              "end": {
+                "line": 81,
+                "column": 68
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "start": 2221,
+              "end": 2229,
+              "loc": {
+                "start": {
+                  "line": 81,
+                  "column": 60
+                },
+                "end": {
+                  "line": 81,
+                  "column": 68
                 },
                 "identifierName": "FADETIME"
               },
@@ -845,16 +1076,16 @@
             },
             "exported": {
               "type": "Identifier",
-              "start": 1888,
-              "end": 1896,
+              "start": 2221,
+              "end": 2229,
               "loc": {
                 "start": {
-                  "line": 66,
-                  "column": 45
+                  "line": 81,
+                  "column": 60
                 },
                 "end": {
-                  "line": 66,
-                  "column": 53
+                  "line": 81,
+                  "column": 68
                 },
                 "identifierName": "FADETIME"
               },
@@ -866,16 +1097,16 @@
       },
       {
         "type": "ExportNamedDeclaration",
-        "start": 1843,
-        "end": 1898,
+        "start": 2161,
+        "end": 2231,
         "loc": {
           "start": {
-            "line": 66,
+            "line": 81,
             "column": 0
           },
           "end": {
-            "line": 66,
-            "column": 55
+            "line": 81,
+            "column": 70
           }
         },
         "declaration": {
@@ -1093,9 +1324,9 @@
           "trailingComments": [
             {
               "type": "CommentBlock",
-              "value": "*\n Enumeration for {@link BaseOverlay} return focus options.\n \n @typedef {Object} OverlayReturnFocusEnum\n \n @property {String} ON\n When the overlay is closed, the element that was focused before the it was shown will be focused again.\n @property {String} OFF\n Nothing will be focused when the overlay is closed.\n ",
+              "value": "*\n Enumeration for {@link BaseOverlay} scroll focus options.\n \n @typedef {Object} OverlayScrollOnFocusEnum\n \n @property {String} ON\n Scroll the document to bring the newly-focused element into view.\n @property {String} OFF\n Document will not scroll on focus.\n ",
               "start": 945,
-              "end": 1262,
+              "end": 1209,
               "loc": {
                 "start": {
                   "line": 28,
@@ -1115,255 +1346,22 @@
       },
       {
         "type": "ExportNamedDeclaration",
-        "start": 1843,
-        "end": 1898,
+        "start": 2161,
+        "end": 2231,
         "loc": {
           "start": {
-            "line": 66,
+            "line": 81,
             "column": 0
           },
           "end": {
-            "line": 66,
-            "column": 55
+            "line": 81,
+            "column": 70
           }
         },
         "declaration": {
           "type": "VariableDeclaration",
-          "start": 1263,
-          "end": 1312,
-          "loc": {
-            "start": {
-              "line": 38,
-              "column": 0
-            },
-            "end": {
-              "line": 41,
-              "column": 2
-            }
-          },
-          "declarations": [
-            {
-              "type": "VariableDeclarator",
-              "start": 1269,
-              "end": 1311,
-              "loc": {
-                "start": {
-                  "line": 38,
-                  "column": 6
-                },
-                "end": {
-                  "line": 41,
-                  "column": 1
-                }
-              },
-              "id": {
-                "type": "Identifier",
-                "start": 1269,
-                "end": 1280,
-                "loc": {
-                  "start": {
-                    "line": 38,
-                    "column": 6
-                  },
-                  "end": {
-                    "line": 38,
-                    "column": 17
-                  },
-                  "identifierName": "returnFocus"
-                },
-                "name": "returnFocus",
-                "leadingComments": null
-              },
-              "init": {
-                "type": "ObjectExpression",
-                "start": 1283,
-                "end": 1311,
-                "loc": {
-                  "start": {
-                    "line": 38,
-                    "column": 20
-                  },
-                  "end": {
-                    "line": 41,
-                    "column": 1
-                  }
-                },
-                "properties": [
-                  {
-                    "type": "ObjectProperty",
-                    "start": 1287,
-                    "end": 1295,
-                    "loc": {
-                      "start": {
-                        "line": 39,
-                        "column": 2
-                      },
-                      "end": {
-                        "line": 39,
-                        "column": 10
-                      }
-                    },
-                    "method": false,
-                    "shorthand": false,
-                    "computed": false,
-                    "key": {
-                      "type": "Identifier",
-                      "start": 1287,
-                      "end": 1289,
-                      "loc": {
-                        "start": {
-                          "line": 39,
-                          "column": 2
-                        },
-                        "end": {
-                          "line": 39,
-                          "column": 4
-                        },
-                        "identifierName": "ON"
-                      },
-                      "name": "ON"
-                    },
-                    "value": {
-                      "type": "StringLiteral",
-                      "start": 1291,
-                      "end": 1295,
-                      "loc": {
-                        "start": {
-                          "line": 39,
-                          "column": 6
-                        },
-                        "end": {
-                          "line": 39,
-                          "column": 10
-                        }
-                      },
-                      "extra": {
-                        "rawValue": "on",
-                        "raw": "'on'"
-                      },
-                      "value": "on"
-                    }
-                  },
-                  {
-                    "type": "ObjectProperty",
-                    "start": 1299,
-                    "end": 1309,
-                    "loc": {
-                      "start": {
-                        "line": 40,
-                        "column": 2
-                      },
-                      "end": {
-                        "line": 40,
-                        "column": 12
-                      }
-                    },
-                    "method": false,
-                    "shorthand": false,
-                    "computed": false,
-                    "key": {
-                      "type": "Identifier",
-                      "start": 1299,
-                      "end": 1302,
-                      "loc": {
-                        "start": {
-                          "line": 40,
-                          "column": 2
-                        },
-                        "end": {
-                          "line": 40,
-                          "column": 5
-                        },
-                        "identifierName": "OFF"
-                      },
-                      "name": "OFF"
-                    },
-                    "value": {
-                      "type": "StringLiteral",
-                      "start": 1304,
-                      "end": 1309,
-                      "loc": {
-                        "start": {
-                          "line": 40,
-                          "column": 7
-                        },
-                        "end": {
-                          "line": 40,
-                          "column": 12
-                        }
-                      },
-                      "extra": {
-                        "rawValue": "off",
-                        "raw": "'off'"
-                      },
-                      "value": "off"
-                    }
-                  }
-                ]
-              },
-              "leadingComments": null
-            }
-          ],
-          "kind": "const",
-          "leadingComments": [
-            {
-              "type": "CommentBlock",
-              "value": "*\n Enumeration for {@link BaseOverlay} return focus options.\n \n @typedef {Object} OverlayReturnFocusEnum\n \n @property {String} ON\n When the overlay is closed, the element that was focused before the it was shown will be focused again.\n @property {String} OFF\n Nothing will be focused when the overlay is closed.\n ",
-              "start": 945,
-              "end": 1262,
-              "loc": {
-                "start": {
-                  "line": 28,
-                  "column": 0
-                },
-                "end": {
-                  "line": 37,
-                  "column": 3
-                }
-              }
-            }
-          ],
-          "trailingComments": [
-            {
-              "type": "CommentBlock",
-              "value": "*\n Enumeration for {@link BaseOverlay} focus behavior options.\n \n @typedef {Object} OverlayFocusOnShowEnum\n \n @property {String} ON\n When the overlay is opened, it will be focused.\n @property {String} OFF\n The overlay will not focus itself when opened.\n ",
-              "start": 1314,
-              "end": 1572,
-              "loc": {
-                "start": {
-                  "line": 43,
-                  "column": 0
-                },
-                "end": {
-                  "line": 52,
-                  "column": 3
-                }
-              }
-            }
-          ]
-        },
-        "specifiers": null,
-        "source": null,
-        "leadingComments": null
-      },
-      {
-        "type": "ExportNamedDeclaration",
-        "start": 1843,
-        "end": 1898,
-        "loc": {
-          "start": {
-            "line": 66,
-            "column": 0
-          },
-          "end": {
-            "line": 66,
-            "column": 55
-          }
-        },
-        "declaration": {
-          "type": "VariableDeclaration",
-          "start": 1573,
-          "end": 1622,
+          "start": 1581,
+          "end": 1630,
           "loc": {
             "start": {
               "line": 53,
@@ -1377,8 +1375,8 @@
           "declarations": [
             {
               "type": "VariableDeclarator",
-              "start": 1579,
-              "end": 1621,
+              "start": 1587,
+              "end": 1629,
               "loc": {
                 "start": {
                   "line": 53,
@@ -1391,8 +1389,8 @@
               },
               "id": {
                 "type": "Identifier",
-                "start": 1579,
-                "end": 1590,
+                "start": 1587,
+                "end": 1598,
                 "loc": {
                   "start": {
                     "line": 53,
@@ -1402,15 +1400,15 @@
                     "line": 53,
                     "column": 17
                   },
-                  "identifierName": "focusOnShow"
+                  "identifierName": "returnFocus"
                 },
-                "name": "focusOnShow",
+                "name": "returnFocus",
                 "leadingComments": null
               },
               "init": {
                 "type": "ObjectExpression",
-                "start": 1593,
-                "end": 1621,
+                "start": 1601,
+                "end": 1629,
                 "loc": {
                   "start": {
                     "line": 53,
@@ -1424,8 +1422,8 @@
                 "properties": [
                   {
                     "type": "ObjectProperty",
-                    "start": 1597,
-                    "end": 1605,
+                    "start": 1605,
+                    "end": 1613,
                     "loc": {
                       "start": {
                         "line": 54,
@@ -1441,8 +1439,8 @@
                     "computed": false,
                     "key": {
                       "type": "Identifier",
-                      "start": 1597,
-                      "end": 1599,
+                      "start": 1605,
+                      "end": 1607,
                       "loc": {
                         "start": {
                           "line": 54,
@@ -1458,8 +1456,8 @@
                     },
                     "value": {
                       "type": "StringLiteral",
-                      "start": 1601,
-                      "end": 1605,
+                      "start": 1609,
+                      "end": 1613,
                       "loc": {
                         "start": {
                           "line": 54,
@@ -1479,8 +1477,8 @@
                   },
                   {
                     "type": "ObjectProperty",
-                    "start": 1609,
-                    "end": 1619,
+                    "start": 1617,
+                    "end": 1627,
                     "loc": {
                       "start": {
                         "line": 55,
@@ -1496,8 +1494,8 @@
                     "computed": false,
                     "key": {
                       "type": "Identifier",
-                      "start": 1609,
-                      "end": 1612,
+                      "start": 1617,
+                      "end": 1620,
                       "loc": {
                         "start": {
                           "line": 55,
@@ -1513,8 +1511,8 @@
                     },
                     "value": {
                       "type": "StringLiteral",
-                      "start": 1614,
-                      "end": 1619,
+                      "start": 1622,
+                      "end": 1627,
                       "loc": {
                         "start": {
                           "line": 55,
@@ -1541,9 +1539,9 @@
           "leadingComments": [
             {
               "type": "CommentBlock",
-              "value": "*\n Enumeration for {@link BaseOverlay} focus behavior options.\n \n @typedef {Object} OverlayFocusOnShowEnum\n \n @property {String} ON\n When the overlay is opened, it will be focused.\n @property {String} OFF\n The overlay will not focus itself when opened.\n ",
-              "start": 1314,
-              "end": 1572,
+              "value": "*\n Enumeration for {@link BaseOverlay} return focus options.\n \n @typedef {Object} OverlayReturnFocusEnum\n \n @property {String} ON\n When the overlay is closed, the element that was focused before the it was shown will be focused again.\n @property {String} OFF\n Nothing will be focused when the overlay is closed.\n ",
+              "start": 1263,
+              "end": 1580,
               "loc": {
                 "start": {
                   "line": 43,
@@ -1559,16 +1557,16 @@
           "trailingComments": [
             {
               "type": "CommentBlock",
-              "value": "*\n The time it should take for {@link BaseOverlay} to fade in milliseconds.\n Important: This should be greater than or equal to the CSS transition time.\n \n @typedef {Number} OverlayFadeTime\n ",
-              "start": 1624,
-              "end": 1819,
+              "value": "*\n Enumeration for {@link BaseOverlay} focus behavior options.\n \n @typedef {Object} OverlayFocusOnShowEnum\n \n @property {String} ON\n When the overlay is opened, it will be focused.\n @property {String} OFF\n The overlay will not focus itself when opened.\n ",
+              "start": 1632,
+              "end": 1890,
               "loc": {
                 "start": {
                   "line": 58,
                   "column": 0
                 },
                 "end": {
-                  "line": 63,
+                  "line": 67,
                   "column": 3
                 }
               }
@@ -1581,58 +1579,524 @@
       },
       {
         "type": "ExportNamedDeclaration",
-        "start": 1843,
-        "end": 1898,
+        "start": 2161,
+        "end": 2231,
         "loc": {
           "start": {
-            "line": 66,
+            "line": 81,
             "column": 0
           },
           "end": {
-            "line": 66,
-            "column": 55
+            "line": 81,
+            "column": 70
           }
         },
         "declaration": {
           "type": "VariableDeclaration",
-          "start": 1820,
-          "end": 1841,
+          "start": 1891,
+          "end": 1940,
           "loc": {
             "start": {
-              "line": 64,
+              "line": 68,
               "column": 0
             },
             "end": {
-              "line": 64,
+              "line": 71,
+              "column": 2
+            }
+          },
+          "declarations": [
+            {
+              "type": "VariableDeclarator",
+              "start": 1897,
+              "end": 1939,
+              "loc": {
+                "start": {
+                  "line": 68,
+                  "column": 6
+                },
+                "end": {
+                  "line": 71,
+                  "column": 1
+                }
+              },
+              "id": {
+                "type": "Identifier",
+                "start": 1897,
+                "end": 1908,
+                "loc": {
+                  "start": {
+                    "line": 68,
+                    "column": 6
+                  },
+                  "end": {
+                    "line": 68,
+                    "column": 17
+                  },
+                  "identifierName": "focusOnShow"
+                },
+                "name": "focusOnShow",
+                "leadingComments": null
+              },
+              "init": {
+                "type": "ObjectExpression",
+                "start": 1911,
+                "end": 1939,
+                "loc": {
+                  "start": {
+                    "line": 68,
+                    "column": 20
+                  },
+                  "end": {
+                    "line": 71,
+                    "column": 1
+                  }
+                },
+                "properties": [
+                  {
+                    "type": "ObjectProperty",
+                    "start": 1915,
+                    "end": 1923,
+                    "loc": {
+                      "start": {
+                        "line": 69,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 69,
+                        "column": 10
+                      }
+                    },
+                    "method": false,
+                    "shorthand": false,
+                    "computed": false,
+                    "key": {
+                      "type": "Identifier",
+                      "start": 1915,
+                      "end": 1917,
+                      "loc": {
+                        "start": {
+                          "line": 69,
+                          "column": 2
+                        },
+                        "end": {
+                          "line": 69,
+                          "column": 4
+                        },
+                        "identifierName": "ON"
+                      },
+                      "name": "ON"
+                    },
+                    "value": {
+                      "type": "StringLiteral",
+                      "start": 1919,
+                      "end": 1923,
+                      "loc": {
+                        "start": {
+                          "line": 69,
+                          "column": 6
+                        },
+                        "end": {
+                          "line": 69,
+                          "column": 10
+                        }
+                      },
+                      "extra": {
+                        "rawValue": "on",
+                        "raw": "'on'"
+                      },
+                      "value": "on"
+                    }
+                  },
+                  {
+                    "type": "ObjectProperty",
+                    "start": 1927,
+                    "end": 1937,
+                    "loc": {
+                      "start": {
+                        "line": 70,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 70,
+                        "column": 12
+                      }
+                    },
+                    "method": false,
+                    "shorthand": false,
+                    "computed": false,
+                    "key": {
+                      "type": "Identifier",
+                      "start": 1927,
+                      "end": 1930,
+                      "loc": {
+                        "start": {
+                          "line": 70,
+                          "column": 2
+                        },
+                        "end": {
+                          "line": 70,
+                          "column": 5
+                        },
+                        "identifierName": "OFF"
+                      },
+                      "name": "OFF"
+                    },
+                    "value": {
+                      "type": "StringLiteral",
+                      "start": 1932,
+                      "end": 1937,
+                      "loc": {
+                        "start": {
+                          "line": 70,
+                          "column": 7
+                        },
+                        "end": {
+                          "line": 70,
+                          "column": 12
+                        }
+                      },
+                      "extra": {
+                        "rawValue": "off",
+                        "raw": "'off'"
+                      },
+                      "value": "off"
+                    }
+                  }
+                ]
+              },
+              "leadingComments": null
+            }
+          ],
+          "kind": "const",
+          "leadingComments": [
+            {
+              "type": "CommentBlock",
+              "value": "*\n Enumeration for {@link BaseOverlay} focus behavior options.\n \n @typedef {Object} OverlayFocusOnShowEnum\n \n @property {String} ON\n When the overlay is opened, it will be focused.\n @property {String} OFF\n The overlay will not focus itself when opened.\n ",
+              "start": 1632,
+              "end": 1890,
+              "loc": {
+                "start": {
+                  "line": 58,
+                  "column": 0
+                },
+                "end": {
+                  "line": 67,
+                  "column": 3
+                }
+              }
+            }
+          ],
+          "trailingComments": [
+            {
+              "type": "CommentBlock",
+              "value": "*\n The time it should take for {@link BaseOverlay} to fade in milliseconds.\n Important: This should be greater than or equal to the CSS transition time.\n \n @typedef {Number} OverlayFadeTime\n ",
+              "start": 1942,
+              "end": 2137,
+              "loc": {
+                "start": {
+                  "line": 73,
+                  "column": 0
+                },
+                "end": {
+                  "line": 78,
+                  "column": 3
+                }
+              }
+            }
+          ]
+        },
+        "specifiers": null,
+        "source": null,
+        "leadingComments": null
+      },
+      {
+        "type": "ExportNamedDeclaration",
+        "start": 2161,
+        "end": 2231,
+        "loc": {
+          "start": {
+            "line": 81,
+            "column": 0
+          },
+          "end": {
+            "line": 81,
+            "column": 70
+          }
+        },
+        "declaration": {
+          "type": "VariableDeclaration",
+          "start": 1210,
+          "end": 1261,
+          "loc": {
+            "start": {
+              "line": 38,
+              "column": 0
+            },
+            "end": {
+              "line": 41,
+              "column": 2
+            }
+          },
+          "declarations": [
+            {
+              "type": "VariableDeclarator",
+              "start": 1216,
+              "end": 1260,
+              "loc": {
+                "start": {
+                  "line": 38,
+                  "column": 6
+                },
+                "end": {
+                  "line": 41,
+                  "column": 1
+                }
+              },
+              "id": {
+                "type": "Identifier",
+                "start": 1216,
+                "end": 1229,
+                "loc": {
+                  "start": {
+                    "line": 38,
+                    "column": 6
+                  },
+                  "end": {
+                    "line": 38,
+                    "column": 19
+                  },
+                  "identifierName": "scrollOnFocus"
+                },
+                "name": "scrollOnFocus",
+                "leadingComments": null
+              },
+              "init": {
+                "type": "ObjectExpression",
+                "start": 1232,
+                "end": 1260,
+                "loc": {
+                  "start": {
+                    "line": 38,
+                    "column": 22
+                  },
+                  "end": {
+                    "line": 41,
+                    "column": 1
+                  }
+                },
+                "properties": [
+                  {
+                    "type": "ObjectProperty",
+                    "start": 1236,
+                    "end": 1244,
+                    "loc": {
+                      "start": {
+                        "line": 39,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 39,
+                        "column": 10
+                      }
+                    },
+                    "method": false,
+                    "shorthand": false,
+                    "computed": false,
+                    "key": {
+                      "type": "Identifier",
+                      "start": 1236,
+                      "end": 1238,
+                      "loc": {
+                        "start": {
+                          "line": 39,
+                          "column": 2
+                        },
+                        "end": {
+                          "line": 39,
+                          "column": 4
+                        },
+                        "identifierName": "ON"
+                      },
+                      "name": "ON"
+                    },
+                    "value": {
+                      "type": "StringLiteral",
+                      "start": 1240,
+                      "end": 1244,
+                      "loc": {
+                        "start": {
+                          "line": 39,
+                          "column": 6
+                        },
+                        "end": {
+                          "line": 39,
+                          "column": 10
+                        }
+                      },
+                      "extra": {
+                        "rawValue": "on",
+                        "raw": "'on'"
+                      },
+                      "value": "on"
+                    }
+                  },
+                  {
+                    "type": "ObjectProperty",
+                    "start": 1248,
+                    "end": 1258,
+                    "loc": {
+                      "start": {
+                        "line": 40,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 40,
+                        "column": 12
+                      }
+                    },
+                    "method": false,
+                    "shorthand": false,
+                    "computed": false,
+                    "key": {
+                      "type": "Identifier",
+                      "start": 1248,
+                      "end": 1251,
+                      "loc": {
+                        "start": {
+                          "line": 40,
+                          "column": 2
+                        },
+                        "end": {
+                          "line": 40,
+                          "column": 5
+                        },
+                        "identifierName": "OFF"
+                      },
+                      "name": "OFF"
+                    },
+                    "value": {
+                      "type": "StringLiteral",
+                      "start": 1253,
+                      "end": 1258,
+                      "loc": {
+                        "start": {
+                          "line": 40,
+                          "column": 7
+                        },
+                        "end": {
+                          "line": 40,
+                          "column": 12
+                        }
+                      },
+                      "extra": {
+                        "rawValue": "off",
+                        "raw": "'off'"
+                      },
+                      "value": "off"
+                    }
+                  }
+                ]
+              },
+              "leadingComments": null
+            }
+          ],
+          "kind": "const",
+          "leadingComments": [
+            {
+              "type": "CommentBlock",
+              "value": "*\n Enumeration for {@link BaseOverlay} scroll focus options.\n \n @typedef {Object} OverlayScrollOnFocusEnum\n \n @property {String} ON\n Scroll the document to bring the newly-focused element into view.\n @property {String} OFF\n Document will not scroll on focus.\n ",
+              "start": 945,
+              "end": 1209,
+              "loc": {
+                "start": {
+                  "line": 28,
+                  "column": 0
+                },
+                "end": {
+                  "line": 37,
+                  "column": 3
+                }
+              }
+            }
+          ],
+          "trailingComments": [
+            {
+              "type": "CommentBlock",
+              "value": "*\n Enumeration for {@link BaseOverlay} return focus options.\n \n @typedef {Object} OverlayReturnFocusEnum\n \n @property {String} ON\n When the overlay is closed, the element that was focused before the it was shown will be focused again.\n @property {String} OFF\n Nothing will be focused when the overlay is closed.\n ",
+              "start": 1263,
+              "end": 1580,
+              "loc": {
+                "start": {
+                  "line": 43,
+                  "column": 0
+                },
+                "end": {
+                  "line": 52,
+                  "column": 3
+                }
+              }
+            }
+          ]
+        },
+        "specifiers": null,
+        "source": null,
+        "leadingComments": null
+      },
+      {
+        "type": "ExportNamedDeclaration",
+        "start": 2161,
+        "end": 2231,
+        "loc": {
+          "start": {
+            "line": 81,
+            "column": 0
+          },
+          "end": {
+            "line": 81,
+            "column": 70
+          }
+        },
+        "declaration": {
+          "type": "VariableDeclaration",
+          "start": 2138,
+          "end": 2159,
+          "loc": {
+            "start": {
+              "line": 79,
+              "column": 0
+            },
+            "end": {
+              "line": 79,
               "column": 21
             }
           },
           "declarations": [
             {
               "type": "VariableDeclarator",
-              "start": 1826,
-              "end": 1840,
+              "start": 2144,
+              "end": 2158,
               "loc": {
                 "start": {
-                  "line": 64,
+                  "line": 79,
                   "column": 6
                 },
                 "end": {
-                  "line": 64,
+                  "line": 79,
                   "column": 20
                 }
               },
               "id": {
                 "type": "Identifier",
-                "start": 1826,
-                "end": 1834,
+                "start": 2144,
+                "end": 2152,
                 "loc": {
                   "start": {
-                    "line": 64,
+                    "line": 79,
                     "column": 6
                   },
                   "end": {
-                    "line": 64,
+                    "line": 79,
                     "column": 14
                   },
                   "identifierName": "FADETIME"
@@ -1642,15 +2106,15 @@
               },
               "init": {
                 "type": "NumericLiteral",
-                "start": 1837,
-                "end": 1840,
+                "start": 2155,
+                "end": 2158,
                 "loc": {
                   "start": {
-                    "line": 64,
+                    "line": 79,
                     "column": 17
                   },
                   "end": {
-                    "line": 64,
+                    "line": 79,
                     "column": 20
                   }
                 },
@@ -1668,15 +2132,15 @@
             {
               "type": "CommentBlock",
               "value": "*\n The time it should take for {@link BaseOverlay} to fade in milliseconds.\n Important: This should be greater than or equal to the CSS transition time.\n \n @typedef {Number} OverlayFadeTime\n ",
-              "start": 1624,
-              "end": 1819,
+              "start": 1942,
+              "end": 2137,
               "loc": {
                 "start": {
-                  "line": 58,
+                  "line": 73,
                   "column": 0
                 },
                 "end": {
-                  "line": 63,
+                  "line": 78,
                   "column": 3
                 }
               }
@@ -1726,9 +2190,9 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n Enumeration for {@link BaseOverlay} return focus options.\n \n @typedef {Object} OverlayReturnFocusEnum\n \n @property {String} ON\n When the overlay is closed, the element that was focused before the it was shown will be focused again.\n @property {String} OFF\n Nothing will be focused when the overlay is closed.\n ",
+      "value": "*\n Enumeration for {@link BaseOverlay} scroll focus options.\n \n @typedef {Object} OverlayScrollOnFocusEnum\n \n @property {String} ON\n Scroll the document to bring the newly-focused element into view.\n @property {String} OFF\n Document will not scroll on focus.\n ",
       "start": 945,
-      "end": 1262,
+      "end": 1209,
       "loc": {
         "start": {
           "line": 28,
@@ -1742,9 +2206,9 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n Enumeration for {@link BaseOverlay} focus behavior options.\n \n @typedef {Object} OverlayFocusOnShowEnum\n \n @property {String} ON\n When the overlay is opened, it will be focused.\n @property {String} OFF\n The overlay will not focus itself when opened.\n ",
-      "start": 1314,
-      "end": 1572,
+      "value": "*\n Enumeration for {@link BaseOverlay} return focus options.\n \n @typedef {Object} OverlayReturnFocusEnum\n \n @property {String} ON\n When the overlay is closed, the element that was focused before the it was shown will be focused again.\n @property {String} OFF\n Nothing will be focused when the overlay is closed.\n ",
+      "start": 1263,
+      "end": 1580,
       "loc": {
         "start": {
           "line": 43,
@@ -1758,16 +2222,32 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n The time it should take for {@link BaseOverlay} to fade in milliseconds.\n Important: This should be greater than or equal to the CSS transition time.\n \n @typedef {Number} OverlayFadeTime\n ",
-      "start": 1624,
-      "end": 1819,
+      "value": "*\n Enumeration for {@link BaseOverlay} focus behavior options.\n \n @typedef {Object} OverlayFocusOnShowEnum\n \n @property {String} ON\n When the overlay is opened, it will be focused.\n @property {String} OFF\n The overlay will not focus itself when opened.\n ",
+      "start": 1632,
+      "end": 1890,
       "loc": {
         "start": {
           "line": 58,
           "column": 0
         },
         "end": {
-          "line": 63,
+          "line": 67,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n The time it should take for {@link BaseOverlay} to fade in milliseconds.\n Important: This should be greater than or equal to the CSS transition time.\n \n @typedef {Number} OverlayFadeTime\n ",
+      "start": 1942,
+      "end": 2137,
+      "loc": {
+        "start": {
+          "line": 73,
+          "column": 0
+        },
+        "end": {
+          "line": 78,
           "column": 3
         }
       }
@@ -2149,9 +2629,9 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n Enumeration for {@link BaseOverlay} return focus options.\n \n @typedef {Object} OverlayReturnFocusEnum\n \n @property {String} ON\n When the overlay is closed, the element that was focused before the it was shown will be focused again.\n @property {String} OFF\n Nothing will be focused when the overlay is closed.\n ",
+      "value": "*\n Enumeration for {@link BaseOverlay} scroll focus options.\n \n @typedef {Object} OverlayScrollOnFocusEnum\n \n @property {String} ON\n Scroll the document to bring the newly-focused element into view.\n @property {String} OFF\n Document will not scroll on focus.\n ",
       "start": 945,
-      "end": 1262,
+      "end": 1209,
       "loc": {
         "start": {
           "line": 28,
@@ -2178,8 +2658,8 @@
         "updateContext": null
       },
       "value": "const",
-      "start": 1263,
-      "end": 1268,
+      "start": 1210,
+      "end": 1215,
       "loc": {
         "start": {
           "line": 38,
@@ -2203,9 +2683,9 @@
         "postfix": false,
         "binop": null
       },
-      "value": "returnFocus",
-      "start": 1269,
-      "end": 1280,
+      "value": "scrollOnFocus",
+      "start": 1216,
+      "end": 1229,
       "loc": {
         "start": {
           "line": 38,
@@ -2213,7 +2693,7 @@
         },
         "end": {
           "line": 38,
-          "column": 17
+          "column": 19
         }
       }
     },
@@ -2231,16 +2711,16 @@
         "updateContext": null
       },
       "value": "=",
-      "start": 1281,
-      "end": 1282,
+      "start": 1230,
+      "end": 1231,
       "loc": {
         "start": {
           "line": 38,
-          "column": 18
+          "column": 20
         },
         "end": {
           "line": 38,
-          "column": 19
+          "column": 21
         }
       }
     },
@@ -2256,16 +2736,16 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1283,
-      "end": 1284,
+      "start": 1232,
+      "end": 1233,
       "loc": {
         "start": {
           "line": 38,
-          "column": 20
+          "column": 22
         },
         "end": {
           "line": 38,
-          "column": 21
+          "column": 23
         }
       }
     },
@@ -2282,8 +2762,8 @@
         "binop": null
       },
       "value": "ON",
-      "start": 1287,
-      "end": 1289,
+      "start": 1236,
+      "end": 1238,
       "loc": {
         "start": {
           "line": 39,
@@ -2308,8 +2788,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1289,
-      "end": 1290,
+      "start": 1238,
+      "end": 1239,
       "loc": {
         "start": {
           "line": 39,
@@ -2335,8 +2815,8 @@
         "updateContext": null
       },
       "value": "on",
-      "start": 1291,
-      "end": 1295,
+      "start": 1240,
+      "end": 1244,
       "loc": {
         "start": {
           "line": 39,
@@ -2361,8 +2841,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1295,
-      "end": 1296,
+      "start": 1244,
+      "end": 1245,
       "loc": {
         "start": {
           "line": 39,
@@ -2387,8 +2867,8 @@
         "binop": null
       },
       "value": "OFF",
-      "start": 1299,
-      "end": 1302,
+      "start": 1248,
+      "end": 1251,
       "loc": {
         "start": {
           "line": 40,
@@ -2413,8 +2893,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1302,
-      "end": 1303,
+      "start": 1251,
+      "end": 1252,
       "loc": {
         "start": {
           "line": 40,
@@ -2440,8 +2920,8 @@
         "updateContext": null
       },
       "value": "off",
-      "start": 1304,
-      "end": 1309,
+      "start": 1253,
+      "end": 1258,
       "loc": {
         "start": {
           "line": 40,
@@ -2465,8 +2945,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1310,
-      "end": 1311,
+      "start": 1259,
+      "end": 1260,
       "loc": {
         "start": {
           "line": 41,
@@ -2491,8 +2971,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1311,
-      "end": 1312,
+      "start": 1260,
+      "end": 1261,
       "loc": {
         "start": {
           "line": 41,
@@ -2506,9 +2986,9 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n Enumeration for {@link BaseOverlay} focus behavior options.\n \n @typedef {Object} OverlayFocusOnShowEnum\n \n @property {String} ON\n When the overlay is opened, it will be focused.\n @property {String} OFF\n The overlay will not focus itself when opened.\n ",
-      "start": 1314,
-      "end": 1572,
+      "value": "*\n Enumeration for {@link BaseOverlay} return focus options.\n \n @typedef {Object} OverlayReturnFocusEnum\n \n @property {String} ON\n When the overlay is closed, the element that was focused before the it was shown will be focused again.\n @property {String} OFF\n Nothing will be focused when the overlay is closed.\n ",
+      "start": 1263,
+      "end": 1580,
       "loc": {
         "start": {
           "line": 43,
@@ -2535,8 +3015,8 @@
         "updateContext": null
       },
       "value": "const",
-      "start": 1573,
-      "end": 1578,
+      "start": 1581,
+      "end": 1586,
       "loc": {
         "start": {
           "line": 53,
@@ -2560,9 +3040,9 @@
         "postfix": false,
         "binop": null
       },
-      "value": "focusOnShow",
-      "start": 1579,
-      "end": 1590,
+      "value": "returnFocus",
+      "start": 1587,
+      "end": 1598,
       "loc": {
         "start": {
           "line": 53,
@@ -2588,8 +3068,8 @@
         "updateContext": null
       },
       "value": "=",
-      "start": 1591,
-      "end": 1592,
+      "start": 1599,
+      "end": 1600,
       "loc": {
         "start": {
           "line": 53,
@@ -2613,8 +3093,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1593,
-      "end": 1594,
+      "start": 1601,
+      "end": 1602,
       "loc": {
         "start": {
           "line": 53,
@@ -2639,8 +3119,8 @@
         "binop": null
       },
       "value": "ON",
-      "start": 1597,
-      "end": 1599,
+      "start": 1605,
+      "end": 1607,
       "loc": {
         "start": {
           "line": 54,
@@ -2665,8 +3145,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1599,
-      "end": 1600,
+      "start": 1607,
+      "end": 1608,
       "loc": {
         "start": {
           "line": 54,
@@ -2692,8 +3172,8 @@
         "updateContext": null
       },
       "value": "on",
-      "start": 1601,
-      "end": 1605,
+      "start": 1609,
+      "end": 1613,
       "loc": {
         "start": {
           "line": 54,
@@ -2718,8 +3198,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1605,
-      "end": 1606,
+      "start": 1613,
+      "end": 1614,
       "loc": {
         "start": {
           "line": 54,
@@ -2744,8 +3224,8 @@
         "binop": null
       },
       "value": "OFF",
-      "start": 1609,
-      "end": 1612,
+      "start": 1617,
+      "end": 1620,
       "loc": {
         "start": {
           "line": 55,
@@ -2770,8 +3250,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1612,
-      "end": 1613,
+      "start": 1620,
+      "end": 1621,
       "loc": {
         "start": {
           "line": 55,
@@ -2797,8 +3277,8 @@
         "updateContext": null
       },
       "value": "off",
-      "start": 1614,
-      "end": 1619,
+      "start": 1622,
+      "end": 1627,
       "loc": {
         "start": {
           "line": 55,
@@ -2822,8 +3302,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1620,
-      "end": 1621,
+      "start": 1628,
+      "end": 1629,
       "loc": {
         "start": {
           "line": 56,
@@ -2848,8 +3328,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1621,
-      "end": 1622,
+      "start": 1629,
+      "end": 1630,
       "loc": {
         "start": {
           "line": 56,
@@ -2863,16 +3343,16 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n The time it should take for {@link BaseOverlay} to fade in milliseconds.\n Important: This should be greater than or equal to the CSS transition time.\n \n @typedef {Number} OverlayFadeTime\n ",
-      "start": 1624,
-      "end": 1819,
+      "value": "*\n Enumeration for {@link BaseOverlay} focus behavior options.\n \n @typedef {Object} OverlayFocusOnShowEnum\n \n @property {String} ON\n When the overlay is opened, it will be focused.\n @property {String} OFF\n The overlay will not focus itself when opened.\n ",
+      "start": 1632,
+      "end": 1890,
       "loc": {
         "start": {
           "line": 58,
           "column": 0
         },
         "end": {
-          "line": 63,
+          "line": 67,
           "column": 3
         }
       }
@@ -2892,15 +3372,372 @@
         "updateContext": null
       },
       "value": "const",
-      "start": 1820,
-      "end": 1825,
+      "start": 1891,
+      "end": 1896,
       "loc": {
         "start": {
-          "line": 64,
+          "line": 68,
           "column": 0
         },
         "end": {
-          "line": 64,
+          "line": 68,
+          "column": 5
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "focusOnShow",
+      "start": 1897,
+      "end": 1908,
+      "loc": {
+        "start": {
+          "line": 68,
+          "column": 6
+        },
+        "end": {
+          "line": 68,
+          "column": 17
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "=",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": true,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "=",
+      "start": 1909,
+      "end": 1910,
+      "loc": {
+        "start": {
+          "line": 68,
+          "column": 18
+        },
+        "end": {
+          "line": 68,
+          "column": 19
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "{",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 1911,
+      "end": 1912,
+      "loc": {
+        "start": {
+          "line": 68,
+          "column": 20
+        },
+        "end": {
+          "line": 68,
+          "column": 21
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "ON",
+      "start": 1915,
+      "end": 1917,
+      "loc": {
+        "start": {
+          "line": 69,
+          "column": 2
+        },
+        "end": {
+          "line": 69,
+          "column": 4
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ":",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 1917,
+      "end": 1918,
+      "loc": {
+        "start": {
+          "line": 69,
+          "column": 4
+        },
+        "end": {
+          "line": 69,
+          "column": 5
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "string",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "on",
+      "start": 1919,
+      "end": 1923,
+      "loc": {
+        "start": {
+          "line": 69,
+          "column": 6
+        },
+        "end": {
+          "line": 69,
+          "column": 10
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ",",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 1923,
+      "end": 1924,
+      "loc": {
+        "start": {
+          "line": 69,
+          "column": 10
+        },
+        "end": {
+          "line": 69,
+          "column": 11
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "OFF",
+      "start": 1927,
+      "end": 1930,
+      "loc": {
+        "start": {
+          "line": 70,
+          "column": 2
+        },
+        "end": {
+          "line": 70,
+          "column": 5
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ":",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 1930,
+      "end": 1931,
+      "loc": {
+        "start": {
+          "line": 70,
+          "column": 5
+        },
+        "end": {
+          "line": 70,
+          "column": 6
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "string",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "off",
+      "start": 1932,
+      "end": 1937,
+      "loc": {
+        "start": {
+          "line": 70,
+          "column": 7
+        },
+        "end": {
+          "line": 70,
+          "column": 12
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "}",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 1938,
+      "end": 1939,
+      "loc": {
+        "start": {
+          "line": 71,
+          "column": 0
+        },
+        "end": {
+          "line": 71,
+          "column": 1
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ";",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 1939,
+      "end": 1940,
+      "loc": {
+        "start": {
+          "line": 71,
+          "column": 1
+        },
+        "end": {
+          "line": 71,
+          "column": 2
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n The time it should take for {@link BaseOverlay} to fade in milliseconds.\n Important: This should be greater than or equal to the CSS transition time.\n \n @typedef {Number} OverlayFadeTime\n ",
+      "start": 1942,
+      "end": 2137,
+      "loc": {
+        "start": {
+          "line": 73,
+          "column": 0
+        },
+        "end": {
+          "line": 78,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "const",
+        "keyword": "const",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "const",
+      "start": 2138,
+      "end": 2143,
+      "loc": {
+        "start": {
+          "line": 79,
+          "column": 0
+        },
+        "end": {
+          "line": 79,
           "column": 5
         }
       }
@@ -2918,15 +3755,15 @@
         "binop": null
       },
       "value": "FADETIME",
-      "start": 1826,
-      "end": 1834,
+      "start": 2144,
+      "end": 2152,
       "loc": {
         "start": {
-          "line": 64,
+          "line": 79,
           "column": 6
         },
         "end": {
-          "line": 64,
+          "line": 79,
           "column": 14
         }
       }
@@ -2945,15 +3782,15 @@
         "updateContext": null
       },
       "value": "=",
-      "start": 1835,
-      "end": 1836,
+      "start": 2153,
+      "end": 2154,
       "loc": {
         "start": {
-          "line": 64,
+          "line": 79,
           "column": 15
         },
         "end": {
-          "line": 64,
+          "line": 79,
           "column": 16
         }
       }
@@ -2972,15 +3809,15 @@
         "updateContext": null
       },
       "value": 350,
-      "start": 1837,
-      "end": 1840,
+      "start": 2155,
+      "end": 2158,
       "loc": {
         "start": {
-          "line": 64,
+          "line": 79,
           "column": 17
         },
         "end": {
-          "line": 64,
+          "line": 79,
           "column": 20
         }
       }
@@ -2998,15 +3835,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1840,
-      "end": 1841,
+      "start": 2158,
+      "end": 2159,
       "loc": {
         "start": {
-          "line": 64,
+          "line": 79,
           "column": 20
         },
         "end": {
-          "line": 64,
+          "line": 79,
           "column": 21
         }
       }
@@ -3026,15 +3863,15 @@
         "updateContext": null
       },
       "value": "export",
-      "start": 1843,
-      "end": 1849,
+      "start": 2161,
+      "end": 2167,
       "loc": {
         "start": {
-          "line": 66,
+          "line": 81,
           "column": 0
         },
         "end": {
-          "line": 66,
+          "line": 81,
           "column": 6
         }
       }
@@ -3051,15 +3888,15 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1850,
-      "end": 1851,
+      "start": 2168,
+      "end": 2169,
       "loc": {
         "start": {
-          "line": 66,
+          "line": 81,
           "column": 7
         },
         "end": {
-          "line": 66,
+          "line": 81,
           "column": 8
         }
       }
@@ -3077,15 +3914,15 @@
         "binop": null
       },
       "value": "trapFocus",
-      "start": 1851,
-      "end": 1860,
+      "start": 2169,
+      "end": 2178,
       "loc": {
         "start": {
-          "line": 66,
+          "line": 81,
           "column": 8
         },
         "end": {
-          "line": 66,
+          "line": 81,
           "column": 17
         }
       }
@@ -3103,15 +3940,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1860,
-      "end": 1861,
+      "start": 2178,
+      "end": 2179,
       "loc": {
         "start": {
-          "line": 66,
+          "line": 81,
           "column": 17
         },
         "end": {
-          "line": 66,
+          "line": 81,
           "column": 18
         }
       }
@@ -3129,15 +3966,15 @@
         "binop": null
       },
       "value": "returnFocus",
-      "start": 1862,
-      "end": 1873,
+      "start": 2180,
+      "end": 2191,
       "loc": {
         "start": {
-          "line": 66,
+          "line": 81,
           "column": 19
         },
         "end": {
-          "line": 66,
+          "line": 81,
           "column": 30
         }
       }
@@ -3155,15 +3992,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1873,
-      "end": 1874,
+      "start": 2191,
+      "end": 2192,
       "loc": {
         "start": {
-          "line": 66,
+          "line": 81,
           "column": 30
         },
         "end": {
-          "line": 66,
+          "line": 81,
           "column": 31
         }
       }
@@ -3181,15 +4018,15 @@
         "binop": null
       },
       "value": "focusOnShow",
-      "start": 1875,
-      "end": 1886,
+      "start": 2193,
+      "end": 2204,
       "loc": {
         "start": {
-          "line": 66,
+          "line": 81,
           "column": 32
         },
         "end": {
-          "line": 66,
+          "line": 81,
           "column": 43
         }
       }
@@ -3207,15 +4044,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1886,
-      "end": 1887,
+      "start": 2204,
+      "end": 2205,
       "loc": {
         "start": {
-          "line": 66,
+          "line": 81,
           "column": 43
         },
         "end": {
-          "line": 66,
+          "line": 81,
           "column": 44
         }
       }
@@ -3232,17 +4069,69 @@
         "postfix": false,
         "binop": null
       },
-      "value": "FADETIME",
-      "start": 1888,
-      "end": 1896,
+      "value": "scrollOnFocus",
+      "start": 2206,
+      "end": 2219,
       "loc": {
         "start": {
-          "line": 66,
+          "line": 81,
           "column": 45
         },
         "end": {
-          "line": 66,
-          "column": 53
+          "line": 81,
+          "column": 58
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ",",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 2219,
+      "end": 2220,
+      "loc": {
+        "start": {
+          "line": 81,
+          "column": 58
+        },
+        "end": {
+          "line": 81,
+          "column": 59
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "FADETIME",
+      "start": 2221,
+      "end": 2229,
+      "loc": {
+        "start": {
+          "line": 81,
+          "column": 60
+        },
+        "end": {
+          "line": 81,
+          "column": 68
         }
       }
     },
@@ -3258,16 +4147,16 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1896,
-      "end": 1897,
+      "start": 2229,
+      "end": 2230,
       "loc": {
         "start": {
-          "line": 66,
-          "column": 53
+          "line": 81,
+          "column": 68
         },
         "end": {
-          "line": 66,
-          "column": 54
+          "line": 81,
+          "column": 69
         }
       }
     },
@@ -3284,16 +4173,16 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1897,
-      "end": 1898,
+      "start": 2230,
+      "end": 2231,
       "loc": {
         "start": {
-          "line": 66,
-          "column": 54
+          "line": 81,
+          "column": 69
         },
         "end": {
-          "line": 66,
-          "column": 55
+          "line": 81,
+          "column": 70
         }
       }
     },
@@ -3310,15 +4199,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1899,
-      "end": 1899,
+      "start": 2232,
+      "end": 2232,
       "loc": {
         "start": {
-          "line": 67,
+          "line": 82,
           "column": 0
         },
         "end": {
-          "line": 67,
+          "line": 82,
           "column": 0
         }
       }

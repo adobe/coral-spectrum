@@ -48,6 +48,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-OverlayFadeTime">OverlayFadeTime</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-OverlayFocusOnShowEnum">OverlayFocusOnShowEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-OverlayReturnFocusEnum">OverlayReturnFocusEnum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-OverlayScrollOnFocusEnum">OverlayScrollOnFocusEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-OverlayTrapFocusEnum">OverlayTrapFocusEnum</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-collection-src-scripts">coral-collection/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-collection/src/scripts/Collection.js~Collection.html">Collection</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-collection/src/scripts/SelectableCollection.js~SelectableCollection.html">SelectableCollection</a></span></span></li>
@@ -451,6 +452,9 @@ const size = {
  @property {String} RED
  @property {String} ORANGE
  @property {String} GREEN
+ @property {String} YELLOW
+ @property {String} SEA_FOAM
+ @property {String} FUCHSIA
  @property {String} LIGHT_BLUE
  Not supported. Falls back to BLUE.
  @property {String} PERIWINKLE
@@ -459,19 +463,13 @@ const size = {
  Not supported. Falls back to BLUE.
  @property {String} PLUM
  Not supported. Falls back to RED.
- @property {String} FUCHSIA
- Not supported. Falls back to RED.
  @property {String} MAGENTA
  Not supported. Falls back to RED.
  @property {String} TANGERINE
  Not supported. Falls back to ORANGE.
- @property {String} YELLOW
- Not supported. Falls back to ORANGE.
  @property {String} CHARTREUSE
  Not supported. Falls back to GREEN.
  @property {String} KELLY_GREEN
- Not supported. Falls back to GREEN.
- @property {String} SEA_FOAM
  Not supported. Falls back to GREEN.
  */
 const color = {
@@ -499,13 +497,10 @@ const colorMap = {
   periwinkle: &apos;blue&apos;,
   cyan: &apos;blue&apos;,
   plum: &apos;red&apos;,
-  fuchsia: &apos;red&apos;,
   magenta: &apos;red&apos;,
   tangerine: &apos;orange&apos;,
-  yellow: &apos;orange&apos;,
   chartreuse: &apos;green&apos;,
-  kelly_green: &apos;green&apos;,
-  sea_foam: &apos;green&apos;
+  kelly_green: &apos;green&apos;
 };
 
 const swappedSize = commons.swapKeysAndValues(size);
