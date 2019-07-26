@@ -446,6 +446,9 @@ class Card extends BaseComponent(HTMLElement) {
   
     // The 'asset' setter knows to insert the element just before the wrapper node.
     this.asset = asset;
+    
+    // In case a lot of alerts are added, they will not overflow the card
+    this.classList.toggle(`${CLASSNAME}--scroll`, this.info.scrollHeight > this.clientHeight);
   }
 }
 

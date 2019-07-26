@@ -156,3 +156,28 @@ coral-card-propertylist {
     display: none;
   }
 }
+
+// added ._coral-Alert due to specificity of the classes vs tags
+coral-card-info > coral-alert._coral-Alert {
+  &[variant="info"],
+  &[variant="help"] {
+    background-color: $label-info-background-color;
+  }
+
+  &[variant="success"] {
+    background-color: $label-success-background-color;
+  }
+
+  &[variant="warning"] {
+    background-color: $label-warning-background-color;
+  }
+
+  &[variant="error"] {
+    background-color: $label-error-background-color;
+  }
+
+  coral-alert-header,
+  coral-alert-content {
+    color: $label-text-color;
+  }
+}
