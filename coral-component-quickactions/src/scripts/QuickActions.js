@@ -103,6 +103,7 @@ class QuickActions extends Overlay {
     this._target = target.PREVIOUS;
     this._placement = placement.TOP;
     this._focusOnShow = this;
+    this._scrollOnFocus = Overlay.scrollOnFocus.OFF;
   
     // Flag
     this._openedBefore = false;
