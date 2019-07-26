@@ -26,6 +26,21 @@ const trapFocus = {
 };
 
 /**
+ Enumeration for {@link BaseOverlay} scroll focus options.
+ 
+ @typedef {Object} OverlayScrollOnFocusEnum
+ 
+ @property {String} ON
+ Scroll the document to bring the newly-focused element into view.
+ @property {String} OFF
+ Document will not scroll on focus.
+ */
+const scrollOnFocus = {
+  ON: 'on',
+  OFF: 'off'
+};
+
+/**
  Enumeration for {@link BaseOverlay} return focus options.
  
  @typedef {Object} OverlayReturnFocusEnum
@@ -63,4 +78,4 @@ const focusOnShow = {
  */
 const FADETIME = 350;
 
-export {trapFocus, returnFocus, focusOnShow, FADETIME};
+export {trapFocus, returnFocus, focusOnShow, scrollOnFocus, FADETIME};

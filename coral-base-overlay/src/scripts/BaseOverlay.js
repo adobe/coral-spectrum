@@ -13,7 +13,7 @@
 import base from '../templates/base';
 import Vent from '@adobe/vent';
 import {validate, transform, commons} from '../../../coral-utils';
-import {trapFocus, returnFocus, focusOnShow, FADETIME} from './enums';
+import {trapFocus, returnFocus, focusOnShow, scrollOnFocus, FADETIME} from './enums';
 
 // Includes overlay itself
 const COMPONENTS_WITH_OVERLAY = `
@@ -46,6 +46,13 @@ const TAB_KEY = 9;
 // A stack interface for overlays
 const overlayStack = [];
 let OverlayManager = {};
+
+/**
+ Return focus option
+ */
+function preventScroll(instance) {
+  return {preventScroll: instance.scrollOnFocus === scrollOnFocus.OFF};
+}
 
 /**
  Cancel the backdrop hide mid-animation.
@@ -209,7 +216,7 @@ function createDocumentTabCaptureEls() {
         // Focus on the first tabbable element of the top overlay
         Array.prototype.some.call(top.instance.querySelectorAll(commons.TABBABLE_ELEMENT_SELECTOR), (item) => {
           if (item.offsetParent !== null && !item.hasAttribute('coral-tabcapture')) {
-            item.focus();
+            item.focus(preventScroll(top));
             return true;
           }
           
@@ -229,7 +236,7 @@ function createDocumentTabCaptureEls() {
         
         // Focus on the last tabbable element of the top overlay
         if (tabbableElement) {
-          tabbableElement.focus();
+          tabbableElement.focus(preventScroll(top));
         }
       }
     });
@@ -309,11 +316,7 @@ function hideOrRepositionBackdrop() {
   // Loop over all overlays
   const keepBackdrop = OverlayManager.some((overlay) => {
     // Check for backdrop usage
-    if (overlay.backdrop) {
-      return true;
-    }
-    
-    return false;
+    return !!overlay.backdrop;
   });
   
   if (!keepBackdrop) {
@@ -452,6 +455,21 @@ const BaseOverlay = (superClass) => class extends superClass {
   set returnFocus(value) {
     value = transform.string(value).toLowerCase();
     this._returnFocus = validate.enumeration(returnFocus)(value) && value || returnFocus.OFF;
+  }
+  
+  /**
+   Whether the browser should scroll the document to bring the newly-focused element into view. See {@link OverlayScrollOnFocusEnum}.
+   
+   @type {String}
+   @default OverlayScrollOnFocusEnum.ON
+   @htmlattribute scrollonfocus
+   */
+  get scrollOnFocus() {
+    return this._scrollOnFocus || scrollOnFocus.ON;
+  }
+  set scrollOnFocus(value) {
+    value = transform.string(value).toLowerCase();
+    this._scrollOnFocus = validate.enumeration(scrollOnFocus)(value) && value || scrollOnFocus.ON;
   }
   
   /**
@@ -765,14 +783,14 @@ const BaseOverlay = (superClass) => class extends superClass {
       this._focusOn('first');
     }
     else if (this.focusOnShow instanceof HTMLElement) {
-      this.focusOnShow.focus();
+      this.focusOnShow.focus(preventScroll(this));
     }
     else if (typeof this.focusOnShow === 'string' && this.focusOnShow !== focusOnShow.OFF) {
       // we need to add :not([coral-tabcapture]) to avoid selecting the tab captures
       const selectedElement = this.querySelector(`${this.focusOnShow}:not([coral-tabcapture])`);
       
       if (selectedElement) {
-        selectedElement.focus();
+        selectedElement.focus(preventScroll(this));
       }
       // in case the selector does not match, it should fallback to the default behavior
       else {
@@ -793,7 +811,7 @@ const BaseOverlay = (superClass) => class extends superClass {
       
       // Return focus, ignoring tab capture if it is an overlay
       this._elementToFocusWhenHidden._ignoreTabCapture = true;
-      this._elementToFocusWhenHidden.focus();
+      this._elementToFocusWhenHidden.focus(preventScroll(this));
       this._elementToFocusWhenHidden._ignoreTabCapture = false;
       
       // Drop the reference to avoid memory leaks
@@ -813,11 +831,11 @@ const BaseOverlay = (superClass) => class extends superClass {
     
     // if we found a focusing target we focus it
     if (focusableTarget) {
-      focusableTarget.focus();
+      focusableTarget.focus(preventScroll(this));
     }
     // otherwise the element itself should get focus
     else {
-      this.focus();
+      this.focus(preventScroll(this));
     }
   }
   
@@ -916,6 +934,13 @@ const BaseOverlay = (superClass) => class extends superClass {
   static get returnFocus() { return returnFocus; }
   
   /**
+   Returns {@link BaseOverlay} scroll focus options.
+   
+   @return {OverlayScrollOnFocusEnum}
+   */
+  static get scrollOnFocus() { return scrollOnFocus; }
+  
+  /**
    Returns {@link BaseOverlay} focus on show options.
    
    @return {OverlayFocusOnShowEnum}
@@ -949,6 +974,7 @@ const BaseOverlay = (superClass) => class extends superClass {
     if (!this.hasAttribute('trapfocus')) { this.trapFocus = this.trapFocus; }
     if (!this.hasAttribute('returnfocus')) { this.returnFocus = this.returnFocus; }
     if (!this.hasAttribute('focusonshow')) { this.focusOnShow = this.focusOnShow; }
+    if (!this.hasAttribute('scrollonfocus')) { this.scrollOnFocus = this.scrollOnFocus; }
     
     if (this.open) {
       this._pushOverlay();
