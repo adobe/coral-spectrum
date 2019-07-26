@@ -28,7 +28,26 @@ module.exports = [
     spectrum: /\.spectrum--darkest/g,
     coral: '.coral--darkest'
   },
-  // Headings
+  // @compat Link
+  {
+    spectrum: /\.spectrum-Link/g,
+    coral: '.coral-Link'
+  },
+  // @compat RadioGroup
+  {
+    spectrum: /\.spectrum-FieldGroup/g,
+    coral: '.coral-RadioGroup'
+  },
+  // @compat .coral-RadioGroup--labelsBelow
+  {
+    spectrum: /\.spectrum-Radio--labelBelow/g,
+    coral: '.coral-RadioGroup--labelsBelow  ._coral-Radio'
+  },
+  // @compat Headings
+  {
+    spectrum: /\.spectrum-Typography/g,
+    coral: 'body'
+  },
   {
     spectrum: /\.spectrum-Heading--display/g,
     coral: '.coral-Heading--1'
@@ -49,20 +68,7 @@ module.exports = [
     spectrum: /\.spectrum-Heading--subtitle3/g,
     coral: '.coral-Heading--5'
   },
-  // CSS only components
-  {
-    spectrum: /\.spectrum-Link/g,
-    coral: '.coral-Link'
-  },
-  {
-    spectrum: /\.spectrum-FieldGroup/g,
-    coral: '.coral-RadioGroup'
-  },
-  // @compat .coral-RadioGroup--labelsBelow
-  {
-    spectrum: /\.spectrum-Radio--labelBelow/g,
-    coral: '.coral-RadioGroup--labelsBelow  ._coral-Radio'
-  },
+  // @compat Table
   {
     spectrum: /\.spectrum-Table-headCell/g,
     coral: '.coral-Table-headerCell'
@@ -71,27 +77,10 @@ module.exports = [
     spectrum: /\.spectrum-Table/g,
     coral: '.coral-Table'
   },
+  // @compat Well
   {
     spectrum: /\.spectrum-Well/g,
     coral: '.coral-Well'
-  },
-  // New Spectrum CSS only components
-  {
-    spectrum: /\.spectrum-Body/g,
-    coral: '.coral-Body'
-  },
-  {
-    spectrum: /\.spectrum-Rule/g,
-    coral: '.coral-Rule'
-  },
-  {
-    spectrum: /\.spectrum-FieldLabel/g,
-    coral: '.coral-FieldLabel'
-  },
-  // @compat typography
-  {
-    spectrum: /\.spectrum-Typography/g,
-    coral: 'body'
   },
   // Coral Components
   {
