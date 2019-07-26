@@ -10,28 +10,25 @@
  * governing permissions and limitations under the License.
  */
 
-$form-vmargin-min = 8px;
+@require '../vars.css';
+
+$form-vmargin-min = var(--spectrum-medium-global-dimension-size-100);
 // produces 15px separation between field and next label
-$form-vertical-vmargin-max = 6px;
-$form-aligned-vmargin-max = 15px;
-$form-hmargin = 8px;
-$form-vmargin = 7px;
-$form-aligned-label-min-width = 104px;
+$form-vertical-vmargin-max = var(--spectrum-medium-global-dimension-size-100);
+$form-aligned-vmargin-max = var(--spectrum-medium-global-dimension-size-200);
+$form-hmargin = var(--spectrum-medium-global-dimension-size-125);
+$form-vmargin = var(--spectrum-medium-global-dimension-size-125);
+$form-aligned-label-min-width = var(--spectrum-medium-global-dimension-size-1000);
 
-// creates 5px from the icon
-$form-vertical-label-line-height = 27px;
-$form-aligned-label-line-height = 32px;
-
-$form-fieldset-font-size = 18px;
-$form-fieldset-line-height = 24px;
+$form-fieldset-font-size = var(--spectrum-medium-global-dimension-font-size-300);
+$form-fieldset-line-height = var(--spectrum-medium-alias-line-height-large);
 
 /**
  * Indicates the fieldset.
  * .fieldset is used instead of <fieldset> as <legend> cannot be styled as per requirement.
  */
 .coral-Form-fieldset {
-  // matches 30px marging at the bottom
-  margin: 0 10px 26px 10px;
+  margin: 0 var(--spectrum-medium-global-dimension-size-125) var(--spectrum-medium-global-dimension-size-300) var(--spectrum-medium-global-dimension-size-125);
   border: none;
 }
 
@@ -40,10 +37,10 @@ $form-fieldset-line-height = 24px;
  */
 .coral-Form-fieldset-legend {
   display: block;
-  margin: 8px 0 10px 0;
+  margin: var(--spectrum-medium-global-dimension-size-100) 0 var(--spectrum-medium-global-dimension-size-125) 0;
 
-  font-weight: 700;
-  font-style: normal;
+  font-weight: var(--spectrum-global-font-weight-bold);
+  font-style: var(--spectrum-global-font-style-regular);
 
   font-size: $form-fieldset-font-size;
   line-height: $form-fieldset-line-height;
@@ -54,7 +51,21 @@ $form-fieldset-line-height = 24px;
 }
 
 .coral-Form-fieldset:first-of-type .coral-Form-fieldset-legend {
-  margin-top: 25px;
+  margin-top: var(--spectrum-global-dimension-static-size-300);
+}
+
+.coral-Form--vertical,
+.coral-Form--aligned {
+  .coral-Form-fieldlabel {
+    box-sizing: border-box;
+    font-weight: var(--spectrum-medium-fieldlabel-text-font-weight);
+    font-size: var(--spectrum-medium-fieldlabel-text-size);
+    line-height: var(--spectrum-medium-fieldlabel-text-line-height);
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+    font-smoothing: subpixel-antialiased;
+    vertical-align: top;
+  }
 }
 
 /**
@@ -67,13 +78,13 @@ $form-fieldset-line-height = 24px;
     // Don't override right checkbox,radio margin
     &._coral-Checkbox,
     &._coral-Radio {
-      margin: 0 16px $form-vertical-vmargin-max 0;
+      margin: 0 var(--spectrum-global-dimension-static-size-200) $form-vertical-vmargin-max 0;
     }
   }
 
   .coral-Form-fieldlabel {
     display: block;
-    line-height: $form-vertical-label-line-height;
+    padding: var(--spectrum-medium-fieldlabel-padding-top) 0 var(--spectrum-medium-fieldlabel-padding-bottom);
   }
 
   .coral-Form-fieldwrapper {
@@ -83,7 +94,7 @@ $form-fieldset-line-height = 24px;
     .coral-Form-fieldinfo,
     .coral-Form-fielderror {
       position: absolute;
-      top: 4px;
+      top: var(--spectrum-global-dimension-static-size-50);
       right: 0;
     }
   }
@@ -164,15 +175,15 @@ $form-fieldset-line-height = 24px;
   }
 
   .coral-Form-fieldlabel {
+    padding: var(--spectrum-medium-fieldlabel-side-padding-top) var(--spectrum-medium-fieldlabel-side-padding-x) 0 0;
     float: left;
     clear: left;
     margin: 0 $form-hmargin 0 0;
-    line-height: $form-aligned-label-line-height;
     min-width: $form-aligned-label-min-width;
   }
 
   .coral-Form-fieldlabel:empty + .coral-Form-field {
-    margin-left: $form-hmargin + $form-aligned-label-min-width;
+    margin-left: var(--spectrum-medium-global-dimension-size-1200);
   }
 
   .coral-Form-fieldwrapper {
@@ -199,9 +210,7 @@ $form-fieldset-line-height = 24px;
   }
 
   .coral-Form-fieldset {
-  // because of float, the margin of the field/fieldwrapper ($form-aligned-vmargin-max) is not collapsed
-  // so reduce the margin-bottom of the fieldset (30px)
-    margin-bottom: 10px; // 30 - 20
+    margin-bottom: var(--spectrum-global-dimension-static-size-125);
   }
 
   .coral-Form-field._coral-Textfield--multiline {
@@ -209,6 +218,7 @@ $form-fieldset-line-height = 24px;
   }
 }
 
+// Strech components width
 .coral-Form--vertical {
   .coral-Form-field.coral-InputGroup,
   .coral-Form-field.coral-DecoratedTextfield,
@@ -236,3 +246,8 @@ $form-fieldset-line-height = 24px;
     display: flex;
   }
 }
+
+@require 'light';
+@require 'lightest';
+@require 'dark';
+@require 'darkest';

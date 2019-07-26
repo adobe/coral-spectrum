@@ -10,9 +10,11 @@
  * governing permissions and limitations under the License.
  */
 
+@require '../vars.css';
+
 .coral-InputGroup {
   display: inline-flex;
-  width: 226px;
+  width: var(--spectrum-global-dimension-static-size-2600);
 }
 
 .coral-InputGroup--block {
@@ -26,18 +28,18 @@
 
 // @spectrum
 ._coral-InputGroup ._coral-FieldButton {
-  min-width: 32px;
-  padding: 0 6px;
+  min-width: var(--spectrum-medium-fieldbutton-min-width);
+  padding: 0 6px
 }
 
 // Force ActionButton style
 .coral-InputGroup-button ._coral-Button {
-  min-width: 32px;
+  min-width: var(--spectrum-medium-actionbutton-min-width);
   padding: 0 6px;
-  border-width: 1px;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 400;
+  border-width: var(--spectrum-medium-actionbutton-border-size);
+  border-radius: var(--spectrum-medium-actionbutton-border-radius);
+  font-size: var(--spectrum-medium-actionbutton-text-size);
+  font-weight: var(--spectrum-medium-actionbutton-text-font-weight);
 }
 
 .coral-InputGroup-input.focus-ring,
@@ -69,13 +71,13 @@
 }
 
 .coral-InputGroup > .coral-InputGroup-input:first-child {
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
+  border-top-left-radius: var(--spectrum-medium-textfield-border-radius)
+  border-bottom-left-radius: var(--spectrum-medium-textfield-border-radius);
 }
 
 .coral-InputGroup > .coral-InputGroup-input:last-child {
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
+  border-top-right-radius: var(--spectrum-medium-textfield-border-radius)
+  border-bottom-right-radius: var(--spectrum-medium-textfield-border-radius);
 }
 
 @require 'light';

@@ -10,6 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
+@require '../vars.css';
+
 .coral-DecoratedTextfield {
   position: relative;
 
@@ -21,12 +23,12 @@
   // @compat
   > .coral-DecoratedTextfield-button._coral-Button {
     margin-right: 0;
-    max-width: 32px;
+    max-width: var(--spectrum-medium-clearbutton-medium-width);
   }
 
   // @compat
   > .coral-DecoratedTextfield-input {
-    padding-right: 32px;
+    padding-right: var(--spectrum-medium-clearbutton-medium-width);
   }
 }
 
@@ -36,7 +38,7 @@
   top: 10px;
   left: 0;
   margin-left: 10px;
-  height: 18px;
+  height: var(--spectrum-medium-search-icon-size);
 
   // Don't get clicks
   pointer-events: none;
