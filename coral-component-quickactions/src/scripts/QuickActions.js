@@ -903,6 +903,8 @@ class QuickActions extends Overlay {
   
   /** @ignore */
   _onButtonClick(event) {
+    event.stopPropagation();
+    
     if (this._preventClick) {
       return;
     }
