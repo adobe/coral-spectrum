@@ -264,7 +264,7 @@ class Playground extends BaseComponent(HTMLElement) {
    */
   run(code) {
     this._elements.loading.hidden = false;
-    this._elements.frame.src = code;
+    this._elements.frame.srcdoc = code;
   }
   
   /**

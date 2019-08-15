@@ -34,7 +34,7 @@
   playground.addEventListener('coral-playground:coderun', function() {
     location.hash = playground.share();
 
-    playground.run('data:text/html,' + encodeURI(playground.code));
+    playground.run(playground.code);
   });
 
   playground.addEventListener('coral-playground:settingschange', function() {
@@ -43,12 +43,12 @@
 
   playground.addEventListener('coral-playground:load', function() {
     // Workaround to load the icons
-      var icons = document.querySelectorAll('svg._coral-Icon-collection');
-      var html = '';
-      for (var i = 0; i < icons.length; i++) {
-        html += icons[i].outerHTML;
-      }
-      playground._elements.frame.contentWindow.postMessage(html,'*');
+    var icons = document.querySelectorAll('svg._coral-Icon-collection');
+    var html = '';
+    for (var i = 0; i < icons.length; i++) {
+      html += icons[i].outerHTML;
+    }
+    playground._elements.frame.contentWindow.postMessage(html,'*');
   });
 
   document.body.appendChild(playground);
