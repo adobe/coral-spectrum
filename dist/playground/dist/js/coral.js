@@ -23374,8 +23374,8 @@
     el0.setAttribute("is", "coral-button");
     el0.setAttribute("handle", "moreButton");
     el0.setAttribute("type", "button");
-    el0.setAttribute("variant", "_custom");
-    el0.className += " _coral-ActionBar-button _coral-ActionButton _coral-ActionButton--quiet";
+    el0.setAttribute("variant", "quietaction");
+    el0.className += " _coral-ActionBar-button";
     el0.setAttribute("icon", "more");
     el0.setAttribute("coral-actionbar-more", "");
     el0.setAttribute("aria-expanded", "false");
@@ -23384,7 +23384,6 @@
     el0.appendChild(el1);
     var el2 = this["moreButtonLabel"] = document.createElement("coral-button-label");
     el2.setAttribute("handle", "moreButtonLabel");
-    el2.className += " _coral-ActionButton-label";
     el0.appendChild(el2);
     var el3 = document.createTextNode("\n");
     el0.appendChild(el3);
@@ -36591,8 +36590,8 @@
         if (event.detail.oldSelection !== event.detail.selection) {
           this._bulkSelectionChange = true; // we deselect first the ones that have to go
 
-          var diff = arrayDiff(oldSelection, selection);
-          diff.forEach(function (listItem) {
+          var removedSelection = arrayDiff(oldSelection, selection);
+          removedSelection.forEach(function (listItem) {
             // selectlist will report on removed items
             if (listItem._selectItem) {
               listItem._selectItem.removeAttribute('selected');
@@ -36610,10 +36609,10 @@
 
           if (this._elements.overlay.open) {
             // closes and triggers the hideitems event
-            this._hideOptions(); // if there is a change in the selection, we trigger a change event
+            this._hideOptions(); // if there is a change in the added or removed selection, we trigger a change event
 
 
-            if (newSelection.length) {
+            if (newSelection.length || removedSelection.length) {
               this.trigger('change');
             }
           }
@@ -73041,7 +73040,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.90";
+  var version = "1.0.0-beta.91";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
@@ -91258,7 +91257,7 @@
        */
       value: function run(code) {
         this._elements.loading.hidden = false;
-        this._elements.frame.src = code;
+        this._elements.frame.srcdoc = code;
       }
       /**
        Returns the query hash for sharing.

@@ -6,6 +6,8 @@
   <title>Coral.Tooltip</title>
 
   <script>window.addEventListener("message", function(e) {!document.head.querySelector('svg') && document.head.insertAdjacentHTML("beforeend", e.data)});</script>
+  <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
   <script>
@@ -16,7 +18,7 @@
         const id = 'markup-code-' + i;
         markup[i].insertAdjacentHTML('afterend',
           '<div style="margin:10px 0">' +
-          '<a onclick="event.preventDefault();this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+          '<a onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
           '<pre hidden>' +
           '<code id="'+ id +'" class="html">' +
           '</code>' +
@@ -40,10 +42,10 @@
 <body class="coral--light">
 
   <div style="position:fixed;top:15px;right:15px;z-index:10">
-    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--light'">Light</a> |
-    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--lightest'">Lightest</a> |
-    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--dark'">Dark</a> |
-    <a href="#" class="coral-Link" onclick="event.preventDefault();document.body.className='coral--darkest'">Darkest</a>
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+    <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
   </div>
 
   <section class="u-coral-margin">
@@ -87,10 +89,10 @@
       </table>
 
       <section style="margin-top:15px">
-        <a href="#" class="coral-Link" onclick="toggleVisibility(); event.preventDefault();">Toggle (t)</a> |
-        <a href="#" class="coral-Link" onclick="cycleTargets(); event.preventDefault();">Cycle target (a)</a> |
-        <a href="#" class="coral-Link" onclick="cyclePointFrom(); event.preventDefault();">Cycle placement (f)</a> |
-        <a href="#" class="coral-Link" onclick="cycleVariant(); event.preventDefault();">Cycle variant (v)</a>
+        <a href="#" class="coral-Link" onclick="toggleVisibility();">Toggle (t)</a> |
+        <a href="#" class="coral-Link" onclick="cycleTargets();">Cycle target (a)</a> |
+        <a href="#" class="coral-Link" onclick="cyclePointFrom();">Cycle placement (f)</a> |
+        <a href="#" class="coral-Link" onclick="cycleVariant();">Cycle variant (v)</a>
       </section>
 
       <coral-tooltip id="tooltip" target="#target_1">
@@ -126,27 +128,27 @@
           ];
           variant.curIndex = 0;
 
-          var tooltip = document.querySelector('#tooltip');
+          var tooltip = document.getElementById('tooltip');
           tooltip.show();
 
-          function cycleTargets() {
+          window.cycleTargets = function() {
             tooltip.target = target[++target.curIndex % target.length];
             console.log('target changed to', tooltip.target);
-          }
+          };
 
-          function cyclePointFrom() {
+          window.cyclePointFrom = function() {
             tooltip.placement = placement[++placement.curIndex % placement.length];
             console.log('placement changed to', tooltip.placement);
-          }
+          };
 
-          function cycleVariant() {
+          window.cycleVariant = function() {
             tooltip.variant = variant[++variant.curIndex % variant.length];
             console.log('variant changed to', tooltip.variant);
-          }
+          };
 
-          function toggleVisibility() {
+          window.toggleVisibility = function() {
             tooltip.open = !tooltip.open;
-          }
+          };
 
           Coral.keys.on('f', cyclePointFrom);
           Coral.keys.on('a', cycleTargets);
