@@ -845,8 +845,8 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
       this._bulkSelectionChange = true;
       
       // we deselect first the ones that have to go
-      const diff = arrayDiff(oldSelection, selection);
-      diff.forEach((listItem) => {
+      const removedSelection = arrayDiff(oldSelection, selection);
+      removedSelection.forEach((listItem) => {
         // selectlist will report on removed items
         if (listItem._selectItem) {
           listItem._selectItem.removeAttribute('selected');
@@ -869,8 +869,8 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
         // closes and triggers the hideitems event
         this._hideOptions();
         
-        // if there is a change in the selection, we trigger a change event
-        if (newSelection.length) {
+        // if there is a change in the added or removed selection, we trigger a change event
+        if (newSelection.length || removedSelection.length) {
           this.trigger('change');
         }
       }

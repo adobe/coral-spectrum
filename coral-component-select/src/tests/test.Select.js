@@ -1452,7 +1452,7 @@ describe('Select', function() {
     describe('#coral-select:hideitems', function() {});
 
     describe('#change', function() {
-      it('should not trigger change while setting values programatically', function() {
+      it('should not trigger change while setting values programmatically', function() {
         var changeSpy = sinon.spy();
 
         const el = helpers.build(window.__html__['Select.base.html']);
@@ -1483,7 +1483,7 @@ describe('Select', function() {
         expect(changeSpy.callCount).to.equal(0);
       });
 
-      it('should trigger change if the user interacts with the selectlist', function(done) {
+      it('should trigger change if the user adds an item with the selectlist', function(done) {
         var changeSpy = sinon.spy();
 
         const el = helpers.build(window.__html__['Select.base.html']);
@@ -1594,6 +1594,30 @@ describe('Select', function() {
         // opens the overlay
         el._elements.button.click();
       });
+  
+      it('should trigger a change event when a selectlist item is deselected', () => {
+        const changeSpy = sinon.spy();
+  
+        const el = helpers.build(window.__html__['Select.multiple.selected.html']);
+        el.on('change', changeSpy);
+        
+        expect(el.values).to.deep.equal(['af', 'eu']);
+  
+        // Ensure overlay is open for change event to trigger
+        el.overlay.open = true;
+        
+        // Deselect "af"
+        el._elements.list.selectedItem.click();
+        expect(changeSpy.callCount).to.equal(1);
+        expect(changeSpy.getCall(0).args[0].target.value).to.equal('eu');
+        expect(changeSpy.getCall(0).args[0].target.values).to.deep.equal(['eu']);
+  
+        // Deselect "eu"
+        el._elements.list.selectedItem.click();
+        expect(changeSpy.callCount).to.equal(2);
+        expect(changeSpy.getCall(0).args[0].target.value).to.equal('');
+        expect(changeSpy.getCall(0).args[0].target.values).to.deep.equal([]);
+      });
 
       it('should trigger a change event when a tag is removed', function() {
         var changeSpy = sinon.spy();
@@ -1607,7 +1631,7 @@ describe('Select', function() {
         items[1].selected = true;
         items[3].selected = true;
 
-        // no change event since the selection was done programatically
+        // no change event since the selection was done programmatically
         expect(changeSpy.callCount).to.equal(0);
         
         // checks that the corresponding tags were created
@@ -1627,7 +1651,7 @@ describe('Select', function() {
         expect(el.values).to.deep.equal(['eu']);
       });
 
-      it('should trigger change if the user interacts with the native select', function() {
+      it('should trigger change if the user selects an item with the native select', function() {
         var changeSpy = sinon.spy();
 
         const el = helpers.build(window.__html__['Select.base.html']);
