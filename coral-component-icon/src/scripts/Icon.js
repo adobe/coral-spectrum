@@ -18,9 +18,6 @@ import SPECTRUM_ICONS_COLOR_PATH from '../resources/spectrum-icons-color.svg';
 import SPECTRUM_CSS_ICONS_PATH from '../resources/spectrum-css-icons.svg';
 import loadIcons from './loadIcons';
 
-// @IE11
-const IS_IE11 = !window.ActiveXObject && 'ActiveXObject' in window;
-
 const SPECTRUM_ICONS = 'spectrum-icons';
 const SPECTRUM_ICONS_COLOR = 'spectrum-icons-color';
 const SPECTRUM_CSS_ICONS = 'spectrum-css-icons';
@@ -38,6 +35,13 @@ const SPECTRUM_COLORED_ICONS_IDENTIFIER = [
 let resourcesPath = (commons.options.icons || '').trim();
 if (resourcesPath.length && resourcesPath[resourcesPath.length - 1] !== '/') {
   resourcesPath += '/';
+}
+
+// @IE11
+const IS_IE11 = !window.ActiveXObject && 'ActiveXObject' in window;
+let iconsExternal = String(commons.options.iconsExternal).trim().toLowerCase() || 'on';
+if (IS_IE11) {
+  iconsExternal = 'off';
 }
 
 const resolveIconsPath = (iconsPath) => {
@@ -333,6 +337,15 @@ class Icon extends BaseComponent(HTMLElement) {
   }
   
   /**
+   Whether SVG icons are referenced as external resource (on/off)
+   
+   @return {String}
+   */
+  static _iconsExternal() {
+    return iconsExternal;
+  }
+  
+  /**
    Returns the SVG markup.
    
    @param {String} iconId
@@ -345,9 +358,8 @@ class Icon extends BaseComponent(HTMLElement) {
     
     let iconPath = `#${iconId}`;
     
-    // @IE11
     // If not colored icons
-    if (!IS_IE11 && !SPECTRUM_COLORED_ICONS_IDENTIFIER.some(identifier => iconId.indexOf(identifier) !== -1)) {
+    if (this._iconsExternal() === 'on' && !SPECTRUM_COLORED_ICONS_IDENTIFIER.some(identifier => iconId.indexOf(identifier) !== -1)) {
       // Generate spectrum-css-icons path
       if (iconId.indexOf('spectrum-css') === 0) {
         iconPath = resourcesPath ? `${resourcesPath}${SPECTRUM_CSS_ICONS}.svg#${iconId}` : `${resolveIconsPath(SPECTRUM_CSS_ICONS_PATH)}#${iconId}`;
@@ -431,8 +443,7 @@ class Icon extends BaseComponent(HTMLElement) {
 
 // Load icon collections by default
 const iconCollections = [SPECTRUM_ICONS_COLOR];
-// @IE11
-if (IS_IE11) {
+if (Icon._iconsExternal() === 'off') {
   iconCollections.push(SPECTRUM_CSS_ICONS);
   iconCollections.push(SPECTRUM_ICONS);
 }

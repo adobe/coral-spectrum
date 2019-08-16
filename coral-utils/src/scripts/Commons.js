@@ -280,8 +280,9 @@ class Commons {
   
   /**
    Returns Coral global options retrieved on the <code><script></code> data attributes including:
-   - <code>[data-coral-icons]</code>: source folder of the SVG icons. If the icons are renamed, you'll have to load them
-   manually using {@link Icon.load}.
+   - <code>[data-coral-icons]</code>: source folder of the SVG icons. If the icon collections have a custom name,
+   they have to be loaded manually using {@link Icon.load}.
+   - <code>[data-coral-icons-external]</code>: Whether SVG icons are always referenced as external resource. Possible values are "on" (default) or "off".
    - <code>[data-coral-typekit]</code>: custom typekit id used to load the fonts.
    - <code>[data-coral-logging]</code>: defines logging level. Possible values are "on" (default) or "off".
    

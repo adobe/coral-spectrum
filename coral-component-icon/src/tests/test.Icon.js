@@ -1,6 +1,9 @@
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Icon} from '../../../coral-component-icon';
 
+// Disable to speed up test execution globally
+Icon._iconsExternal = () => 'off';
+
 describe('Icon', function() {
   const hasSVGIcon = (el, icon, ignoreCapitalize) => {
     const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
@@ -262,13 +265,17 @@ describe('Icon', function() {
       });
       
       it('should support external SVG file reference', () => {
+        Icon._iconsExternal = () => 'on';
         icon.icon = 'add';
         expect(icon._elements.svg.querySelector('use').href.baseVal.includes('spectrum-icons.svg')).to.be.true;
+        Icon._iconsExternal = () => 'off';
       });
       
       it('should not use external SVG file for colored icons', () => {
+        Icon._iconsExternal = () => 'on';
         icon.icon = 'AdobeAudienceManagerColor';
         expect(icon._elements.svg.querySelector('use').href.baseVal.includes('spectrum-icons-color.svg')).to.be.false;
+        Icon._iconsExternal = () => 'off';
       });
     });
 
