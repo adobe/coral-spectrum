@@ -422,15 +422,32 @@ import SPECTRUM_ICONS_COLOR_PATH from &apos;../resources/spectrum-icons-color.sv
 import SPECTRUM_CSS_ICONS_PATH from &apos;../resources/spectrum-css-icons.svg&apos;;
 import loadIcons from &apos;./loadIcons&apos;;
 
+// @IE11
+const IS_IE11 = !window.ActiveXObject &amp;&amp; &apos;ActiveXObject&apos; in window;
+
 const SPECTRUM_ICONS = &apos;spectrum-icons&apos;;
 const SPECTRUM_ICONS_COLOR = &apos;spectrum-icons-color&apos;;
 const SPECTRUM_CSS_ICONS = &apos;spectrum-css-icons&apos;;
 
-const ICONS = [SPECTRUM_ICONS, SPECTRUM_ICONS_COLOR, SPECTRUM_CSS_ICONS];
-const ICONS_PATH = commons.options.icons;
-
 const SPECTRUM_ICONS_IDENTIFIER = &apos;spectrum-&apos;;
-const SPECTRUM_COLORED_ICONS_IDENTIFIER = [&apos;ColorLight&apos;, &apos;ColorDark&apos;, &apos;ColorActive&apos;];
+const SPECTRUM_COLORED_ICONS_IDENTIFIER = [
+  &apos;ColorLight&apos;,
+  &apos;Color_Light&apos;,
+  &apos;ColorDark&apos;,
+  &apos;Color_Dark&apos;,
+  &apos;ColorActive&apos;,
+  &apos;Color_Active&apos;
+];
+
+let resourcesPath = (commons.options.icons || &apos;&apos;).trim();
+if (resourcesPath.length &amp;&amp; resourcesPath[resourcesPath.length - 1] !== &apos;/&apos;) {
+  resourcesPath += &apos;/&apos;;
+}
+
+const resolveIconsPath = (iconsPath) =&gt; {
+  const path = commons._script.src;
+  return `${path.split(&apos;/&apos;).slice(0, -iconsPath.split(&apos;/&apos;).length).join(&apos;/&apos;)}/${iconsPath}`;
+};
 
 /**
  Regex used to match URLs. Assume it&apos;s a URL if it has a slash, colon, or dot.
@@ -730,9 +747,24 @@ class Icon extends BaseComponent(HTMLElement) {
     additionalClasses.unshift(CLASSNAME);
     additionalClasses.unshift(`${CLASSNAME}--svg`);
     
+    let iconPath = `#${iconId}`;
+    
+    // @IE11
+    // If not colored icons
+    if (!IS_IE11 &amp;&amp; !SPECTRUM_COLORED_ICONS_IDENTIFIER.some(identifier =&gt; iconId.indexOf(identifier) !== -1)) {
+      // Generate spectrum-css-icons path
+      if (iconId.indexOf(&apos;spectrum-css&apos;) === 0) {
+        iconPath = resourcesPath ? `${resourcesPath}${SPECTRUM_CSS_ICONS}.svg#${iconId}` : `${resolveIconsPath(SPECTRUM_CSS_ICONS_PATH)}#${iconId}`;
+      }
+      // Generate spectrum-icons path
+      else {
+        iconPath = resourcesPath ? `${resourcesPath}${SPECTRUM_ICONS}.svg#${iconId}` : `${resolveIconsPath(SPECTRUM_ICONS_PATH)}#${iconId}`;
+      }
+    }
+    
     return `
       &lt;svg focusable=&quot;false&quot; aria-hidden=&quot;true&quot; class=&quot;${additionalClasses.join(&apos; &apos;)}&quot;&gt;
-        &lt;use xlink:href=&quot;#${iconId}&quot;&gt;&lt;/use&gt;
+        &lt;use xlink:href=&quot;${iconPath}&quot;&gt;&lt;/use&gt;
       &lt;/svg&gt;
     `;
   }
@@ -801,13 +833,14 @@ class Icon extends BaseComponent(HTMLElement) {
   }
 }
 
-// Load all icons by default
-if (ICONS_PATH) {
-  ICONS.forEach(iconSet =&gt; Icon.load(`${ICONS_PATH}${iconSet}.svg`));
+// Load icon collections by default
+const iconCollections = [SPECTRUM_ICONS_COLOR];
+// @IE11
+if (IS_IE11) {
+  iconCollections.push(SPECTRUM_CSS_ICONS);
+  iconCollections.push(SPECTRUM_ICONS);
 }
-else {
-  ICONS.forEach(iconSet =&gt; Icon.load(iconSet));
-}
+iconCollections.forEach(iconSet =&gt; Icon.load(resourcesPath ? `${resourcesPath}${iconSet}.svg` : iconSet));
 
 export default Icon;
 </code></pre>

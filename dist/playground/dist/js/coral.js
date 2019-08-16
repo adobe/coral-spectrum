@@ -14466,18 +14466,28 @@
     req.send();
   }
 
+  var IS_IE11 = !window.ActiveXObject && 'ActiveXObject' in window;
   var SPECTRUM_ICONS = 'spectrum-icons';
   var SPECTRUM_ICONS_COLOR = 'spectrum-icons-color';
   var SPECTRUM_CSS_ICONS = 'spectrum-css-icons';
-  var ICONS = [SPECTRUM_ICONS, SPECTRUM_ICONS_COLOR, SPECTRUM_CSS_ICONS];
-  var ICONS_PATH = commons.options.icons;
   var SPECTRUM_ICONS_IDENTIFIER = 'spectrum-';
-  var SPECTRUM_COLORED_ICONS_IDENTIFIER = ['ColorLight', 'ColorDark', 'ColorActive'];
+  var SPECTRUM_COLORED_ICONS_IDENTIFIER = ['ColorLight', 'Color_Light', 'ColorDark', 'Color_Dark', 'ColorActive', 'Color_Active'];
+  var resourcesPath = (commons.options.icons || '').trim();
+
+  if (resourcesPath.length && resourcesPath[resourcesPath.length - 1] !== '/') {
+    resourcesPath += '/';
+  }
+
+  var resolveIconsPath = function resolveIconsPath(iconsPath) {
+    var path = commons._script.src;
+    return "".concat(path.split('/').slice(0, -iconsPath.split('/').length).join('/'), "/").concat(iconsPath);
+  };
   /**
    Regex used to match URLs. Assume it's a URL if it has a slash, colon, or dot.
    
    @ignore
    */
+
 
   var URL_REGEX = /\/|:|\./g;
   /**
@@ -14830,7 +14840,22 @@
         var additionalClasses = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
         additionalClasses.unshift(CLASSNAME$1);
         additionalClasses.unshift("".concat(CLASSNAME$1, "--svg"));
-        return "\n      <svg focusable=\"false\" aria-hidden=\"true\" class=\"".concat(additionalClasses.join(' '), "\">\n        <use xlink:href=\"#").concat(iconId, "\"></use>\n      </svg>\n    ");
+        var iconPath = "#".concat(iconId); // @IE11
+        // If not colored icons
+
+        if (!IS_IE11 && !SPECTRUM_COLORED_ICONS_IDENTIFIER.some(function (identifier) {
+          return iconId.indexOf(identifier) !== -1;
+        })) {
+          // Generate spectrum-css-icons path
+          if (iconId.indexOf('spectrum-css') === 0) {
+            iconPath = resourcesPath ? "".concat(resourcesPath).concat(SPECTRUM_CSS_ICONS, ".svg#").concat(iconId) : "".concat(resolveIconsPath(SPECTRUM_CSS_ICONS_PATH), "#").concat(iconId);
+          } // Generate spectrum-icons path
+          else {
+              iconPath = resourcesPath ? "".concat(resourcesPath).concat(SPECTRUM_ICONS, ".svg#").concat(iconId) : "".concat(resolveIconsPath(SPECTRUM_ICONS_PATH), "#").concat(iconId);
+            }
+        }
+
+        return "\n      <svg focusable=\"false\" aria-hidden=\"true\" class=\"".concat(additionalClasses.join(' '), "\">\n        <use xlink:href=\"").concat(iconPath, "\"></use>\n      </svg>\n    ");
       }
       /**
        Returns {@link Icon} sizes.
@@ -14877,18 +14902,19 @@
     }]);
 
     return Icon;
-  }(BaseComponent(HTMLElement)); // Load all icons by default
+  }(BaseComponent(HTMLElement)); // Load icon collections by default
 
 
-  if (ICONS_PATH) {
-    ICONS.forEach(function (iconSet) {
-      return Icon.load("".concat(ICONS_PATH).concat(iconSet, ".svg"));
-    });
-  } else {
-    ICONS.forEach(function (iconSet) {
-      return Icon.load(iconSet);
-    });
+  var iconCollections = [SPECTRUM_ICONS_COLOR]; // @IE11
+
+  if (IS_IE11) {
+    iconCollections.push(SPECTRUM_CSS_ICONS);
+    iconCollections.push(SPECTRUM_ICONS);
   }
+
+  iconCollections.forEach(function (iconSet) {
+    return Icon.load(resourcesPath ? "".concat(resourcesPath).concat(iconSet, ".svg") : iconSet);
+  });
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -73040,7 +73066,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.91";
+  var version = "1.0.0-beta.92";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
