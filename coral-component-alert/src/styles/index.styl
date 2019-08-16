@@ -16,3 +16,15 @@
 @require '@adobe/spectrum-css/dist/components/alert/multiStops/dark.css';
 @require '@adobe/spectrum-css/dist/components/alert/multiStops/darkest.css';
 
+// @spectrum Support empty header
+coral-alert-header:empty {
+  display: none;
+
+  & ~ coral-alert-content {
+    margin-top: 0;
+  }
+
+  & ~ svg {
+    display: none;
+  }
+}
