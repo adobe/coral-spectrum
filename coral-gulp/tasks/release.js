@@ -14,7 +14,6 @@ module.exports = function(gulp) {
   const fs = require('fs');
   const exec = require('child_process').exec;
   const spawn = require('child_process').spawn;
-  const del = require('del');
   const inq = require('inquirer');
   const semver = require('semver');
   const plumb = require('./plumb')
@@ -56,20 +55,6 @@ module.exports = function(gulp) {
           
           done();
         });
-      }
-    });
-  });
-  
-  // Publish release to artifactory
-  gulp.task('npm-publish', function(done) {
-    exec('npm publish --access public', function(err, stdout, stderr) {
-      if (err) {
-        done(new PluginError('release', stderr));
-      }
-      else {
-        console.log(stdout);
-        
-        done();
       }
     });
   });
@@ -247,7 +232,7 @@ module.exports = function(gulp) {
         gulp docs &&
         gulp push &&
         gulp tag-release &&
-        gulp npm-publish
+        npm publish --access public
       `, [], {shell: true, stdio: 'inherit'});
       
       done();

@@ -50,7 +50,7 @@ module.exports = function(gulp) {
       done(err);
     });
   
-    // p.stdout.pipe(process.stdout);
+    p.stdout.pipe(process.stdout);
   });
   
   gulp.task('revert-rename-base', function() {
