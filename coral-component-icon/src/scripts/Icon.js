@@ -18,15 +18,32 @@ import SPECTRUM_ICONS_COLOR_PATH from '../resources/spectrum-icons-color.svg';
 import SPECTRUM_CSS_ICONS_PATH from '../resources/spectrum-css-icons.svg';
 import loadIcons from './loadIcons';
 
+// @IE11
+const IS_IE11 = !window.ActiveXObject && 'ActiveXObject' in window;
+
 const SPECTRUM_ICONS = 'spectrum-icons';
 const SPECTRUM_ICONS_COLOR = 'spectrum-icons-color';
 const SPECTRUM_CSS_ICONS = 'spectrum-css-icons';
 
-const ICONS = [SPECTRUM_ICONS, SPECTRUM_ICONS_COLOR, SPECTRUM_CSS_ICONS];
-const ICONS_PATH = commons.options.icons;
-
 const SPECTRUM_ICONS_IDENTIFIER = 'spectrum-';
-const SPECTRUM_COLORED_ICONS_IDENTIFIER = ['ColorLight', 'ColorDark', 'ColorActive'];
+const SPECTRUM_COLORED_ICONS_IDENTIFIER = [
+  'ColorLight',
+  'Color_Light',
+  'ColorDark',
+  'Color_Dark',
+  'ColorActive',
+  'Color_Active'
+];
+
+let resourcesPath = (commons.options.icons || '').trim();
+if (resourcesPath.length && resourcesPath[resourcesPath.length - 1] !== '/') {
+  resourcesPath += '/';
+}
+
+const resolveIconsPath = (iconsPath) => {
+  const path = commons._script.src;
+  return `${path.split('/').slice(0, -iconsPath.split('/').length).join('/')}/${iconsPath}`;
+};
 
 /**
  Regex used to match URLs. Assume it's a URL if it has a slash, colon, or dot.
@@ -326,9 +343,24 @@ class Icon extends BaseComponent(HTMLElement) {
     additionalClasses.unshift(CLASSNAME);
     additionalClasses.unshift(`${CLASSNAME}--svg`);
     
+    let iconPath = `#${iconId}`;
+    
+    // @IE11
+    // If not colored icons
+    if (!IS_IE11 && !SPECTRUM_COLORED_ICONS_IDENTIFIER.some(identifier => iconId.indexOf(identifier) !== -1)) {
+      // Generate spectrum-css-icons path
+      if (iconId.indexOf('spectrum-css') === 0) {
+        iconPath = resourcesPath ? `${resourcesPath}${SPECTRUM_CSS_ICONS}.svg#${iconId}` : `${resolveIconsPath(SPECTRUM_CSS_ICONS_PATH)}#${iconId}`;
+      }
+      // Generate spectrum-icons path
+      else {
+        iconPath = resourcesPath ? `${resourcesPath}${SPECTRUM_ICONS}.svg#${iconId}` : `${resolveIconsPath(SPECTRUM_ICONS_PATH)}#${iconId}`;
+      }
+    }
+    
     return `
       <svg focusable="false" aria-hidden="true" class="${additionalClasses.join(' ')}">
-        <use xlink:href="#${iconId}"></use>
+        <use xlink:href="${iconPath}"></use>
       </svg>
     `;
   }
@@ -397,12 +429,13 @@ class Icon extends BaseComponent(HTMLElement) {
   }
 }
 
-// Load all icons by default
-if (ICONS_PATH) {
-  ICONS.forEach(iconSet => Icon.load(`${ICONS_PATH}${iconSet}.svg`));
+// Load icon collections by default
+const iconCollections = [SPECTRUM_ICONS_COLOR];
+// @IE11
+if (IS_IE11) {
+  iconCollections.push(SPECTRUM_CSS_ICONS);
+  iconCollections.push(SPECTRUM_ICONS);
 }
-else {
-  ICONS.forEach(iconSet => Icon.load(iconSet));
-}
+iconCollections.forEach(iconSet => Icon.load(resourcesPath ? `${resourcesPath}${iconSet}.svg` : iconSet));
 
 export default Icon;

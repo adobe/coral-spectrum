@@ -260,6 +260,16 @@ describe('Icon', function() {
         expect(icon.icon).to.equal('spectrum-css-icon-SearchClear');
         expect(hasSVGIcon(icon, 'spectrum-css-icon-SearchClear')).to.be.false;
       });
+      
+      it('should support external SVG file reference', () => {
+        icon.icon = 'add';
+        expect(icon._elements.svg.querySelector('use').href.baseVal.includes('spectrum-icons.svg')).to.be.true;
+      });
+      
+      it('should not use external SVG file for colored icons', () => {
+        icon.icon = 'AdobeAudienceManagerColor';
+        expect(icon._elements.svg.querySelector('use').href.baseVal.includes('spectrum-icons-color.svg')).to.be.false;
+      });
     });
 
     describe('#size', function() {
