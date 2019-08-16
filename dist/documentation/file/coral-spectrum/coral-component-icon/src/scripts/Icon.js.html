@@ -422,9 +422,6 @@ import SPECTRUM_ICONS_COLOR_PATH from &apos;../resources/spectrum-icons-color.sv
 import SPECTRUM_CSS_ICONS_PATH from &apos;../resources/spectrum-css-icons.svg&apos;;
 import loadIcons from &apos;./loadIcons&apos;;
 
-// @IE11
-const IS_IE11 = !window.ActiveXObject &amp;&amp; &apos;ActiveXObject&apos; in window;
-
 const SPECTRUM_ICONS = &apos;spectrum-icons&apos;;
 const SPECTRUM_ICONS_COLOR = &apos;spectrum-icons-color&apos;;
 const SPECTRUM_CSS_ICONS = &apos;spectrum-css-icons&apos;;
@@ -442,6 +439,13 @@ const SPECTRUM_COLORED_ICONS_IDENTIFIER = [
 let resourcesPath = (commons.options.icons || &apos;&apos;).trim();
 if (resourcesPath.length &amp;&amp; resourcesPath[resourcesPath.length - 1] !== &apos;/&apos;) {
   resourcesPath += &apos;/&apos;;
+}
+
+// @IE11
+const IS_IE11 = !window.ActiveXObject &amp;&amp; &apos;ActiveXObject&apos; in window;
+let iconsExternal = String(commons.options.iconsExternal).trim().toLowerCase() || &apos;on&apos;;
+if (IS_IE11) {
+  iconsExternal = &apos;off&apos;;
 }
 
 const resolveIconsPath = (iconsPath) =&gt; {
@@ -737,6 +741,15 @@ class Icon extends BaseComponent(HTMLElement) {
   }
   
   /**
+   Whether SVG icons are referenced as external resource (on/off)
+   
+   @return {String}
+   */
+  static _iconsExternal() {
+    return iconsExternal;
+  }
+  
+  /**
    Returns the SVG markup.
    
    @param {String} iconId
@@ -749,9 +762,8 @@ class Icon extends BaseComponent(HTMLElement) {
     
     let iconPath = `#${iconId}`;
     
-    // @IE11
     // If not colored icons
-    if (!IS_IE11 &amp;&amp; !SPECTRUM_COLORED_ICONS_IDENTIFIER.some(identifier =&gt; iconId.indexOf(identifier) !== -1)) {
+    if (this._iconsExternal() === &apos;on&apos; &amp;&amp; !SPECTRUM_COLORED_ICONS_IDENTIFIER.some(identifier =&gt; iconId.indexOf(identifier) !== -1)) {
       // Generate spectrum-css-icons path
       if (iconId.indexOf(&apos;spectrum-css&apos;) === 0) {
         iconPath = resourcesPath ? `${resourcesPath}${SPECTRUM_CSS_ICONS}.svg#${iconId}` : `${resolveIconsPath(SPECTRUM_CSS_ICONS_PATH)}#${iconId}`;
@@ -835,8 +847,7 @@ class Icon extends BaseComponent(HTMLElement) {
 
 // Load icon collections by default
 const iconCollections = [SPECTRUM_ICONS_COLOR];
-// @IE11
-if (IS_IE11) {
+if (Icon._iconsExternal() === &apos;off&apos;) {
   iconCollections.push(SPECTRUM_CSS_ICONS);
   iconCollections.push(SPECTRUM_ICONS);
 }
