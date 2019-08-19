@@ -39,7 +39,7 @@ if (resourcesPath.length && resourcesPath[resourcesPath.length - 1] !== '/') {
 
 // @IE11
 const IS_IE11 = !window.ActiveXObject && 'ActiveXObject' in window;
-let iconsExternal = String(commons.options.iconsExternal).trim().toLowerCase() || 'on';
+let iconsExternal = commons.options.iconsExternal || 'on';
 if (IS_IE11) {
   iconsExternal = 'off';
 }
