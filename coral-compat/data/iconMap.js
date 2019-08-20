@@ -494,9 +494,6 @@ export default {
   "tags": {
     "spectrumIcon": "Labels"
   },
-  "target": {
-    "spectrumIcon": "AdobeTarget"
-  },
   "targetCheckColor": {
     "spectrumIcon": "TargetCheckColor_Light"
   },
