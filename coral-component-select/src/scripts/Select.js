@@ -428,7 +428,6 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
     this._elements.button.disabled = this._disabled || isReadOnly;
     this._elements.input.disabled = this._disabled || isReadOnly;
     this._elements.taglist.disabled = this._disabled || isReadOnly;
-    this._elements.invalidIcon.hidden = this.disabled;
   }
   
   /**
@@ -442,7 +441,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
     
     this.classList.toggle('is-invalid', this.invalid);
     this._elements.button.classList.toggle('is-invalid', this.invalid);
-    this._elements.invalidIcon.hidden = !this.invalid && !this.disabled;
+    this._elements.invalidIcon.hidden = !this.invalid;
   }
   
   /**
