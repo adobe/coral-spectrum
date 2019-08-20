@@ -94,14 +94,17 @@ class TabView extends BaseComponent(HTMLElement) {
     return this._getContentZone(this._elements.tabList);
   }
   set tabList(value) {
-    this._setContentZone('tabList', value, {
-      handle: 'tabList',
-      tagName: 'coral-tablist',
-      insert: function(tabs) {
-        tabs.setAttribute('tracking', 'off');
-        this.insertBefore(tabs, this._elements.panelStack || null);
-      }
-    });
+    // Support nested coral-tablist
+    if (value instanceof HTMLElement && !value.parentNode || value.parentNode === this) {
+      this._setContentZone('tabList', value, {
+        handle: 'tabList',
+        tagName: 'coral-tablist',
+        insert: function(tabs) {
+          tabs.setAttribute('tracking', 'off');
+          this.insertBefore(tabs, this._elements.panelStack || null);
+        }
+      });
+    }
   }
   
   /**
@@ -114,13 +117,16 @@ class TabView extends BaseComponent(HTMLElement) {
     return this._getContentZone(this._elements.panelStack);
   }
   set panelStack(value) {
-    this._setContentZone('panelStack', value, {
-      handle: 'panelStack',
-      tagName: 'coral-panelstack',
-      insert: function(panels) {
-        this.appendChild(panels);
-      }
-    });
+    // Support nested coral-panelstack
+    if (value instanceof HTMLElement && !value.parentNode || value.parentNode === this) {
+      this._setContentZone('panelStack', value, {
+        handle: 'panelStack',
+        tagName: 'coral-panelstack',
+        insert: function(panels) {
+          this.appendChild(panels);
+        }
+      });
+    }
   }
   
   /**

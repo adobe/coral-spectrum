@@ -13,8 +13,6 @@
 import {tracking} from '../../../coral-utils';
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {TabView} from '../../../coral-component-tabview';
-import {Tab} from '../../../coral-component-tablist';
-import {Panel} from '../../../coral-component-panelstack';
 
 describe('TabView', function() {
   
@@ -67,33 +65,57 @@ describe('TabView', function() {
   describe('API', function() {
   
     var el;
-    var tab1, tab2, tab3;
-    var panel1, panel2, panel3;
   
     beforeEach(function() {
-      el = new TabView();
-    
-      tab1 = new Tab();
-      tab1.label.innerHTML = 'Item 1';
-    
-      tab2 = new Tab();
-      tab2.label.innerHTML = 'Item 2';
-    
-      tab3 = new Tab();
-      tab3.label.innerHTML = 'Item 3';
-    
-      panel1 = new Panel();
-      panel1.content.innerHTML = 'Content 1';
-    
-      panel2 = new Panel();
-      panel2.content.innerHTML = 'Content 1';
-    
-      panel3 = new Panel();
-      panel3.content.innerHTML = 'Content 1';
+      el = helpers.build(new TabView());
     });
   
     afterEach(function() {
-      el = tab1 = tab2 = tab3 = panel1 = panel2 = panel3 = null;
+      el = null;
+    });
+    
+    describe('#tabList', function() {
+      it('should define a coral-tablist content zone by default', function() {
+        expect(el.tabList.tagName).to.equal('CORAL-TABLIST');
+      });
+      
+      it('should set a coral-tablist content zone', function() {
+        const tabList = document.createElement('coral-tablist');
+        el.tabList = tabList;
+        expect(el.tabList).to.equal(tabList);
+      });
+      
+      it('support nested coral-tablist', function(done) {
+        const tabList = document.createElement('coral-tablist');
+        el.tabList.appendChild(tabList);
+        // Wait for MO
+        helpers.next(() => {
+          expect(el.tabList).to.not.equal(tabList);
+          done();
+        });
+      });
+    });
+  
+    describe('#panelStack', function() {
+      it('should define a coral-panelstack content zone by default', function() {
+        expect(el.panelStack.tagName).to.equal('CORAL-PANELSTACK');
+      });
+    
+      it('should set a coral-panelstack content zone', function() {
+        const panelStack = document.createElement('coral-panelstack');
+        el.panelStack = panelStack;
+        expect(el.panelStack).to.equal(panelStack);
+      });
+    
+      it('support nested coral-panelstack', function(done) {
+        const panelStack = document.createElement('coral-panelstack');
+        el.panelStack.appendChild(panelStack);
+        // Wait for MO
+        helpers.next(() => {
+          expect(el.panelStack).to.not.equal(panelStack);
+          done();
+        });
+      });
     });
 
     describe('#orientation', function() {
