@@ -7471,7 +7471,7 @@ var Coral = (function (exports) {
 
         return {
           targetType: targetType || parentComponentType || '',
-          targetElement: typeof childComponent !== 'undefined' && childComponent.trackingElement ? childComponent.trackingElement : component.trackingElement,
+          targetElement: childComponent && childComponent.trackingElement ? childComponent.trackingElement : component.trackingElement,
           eventType: eventType || event.type,
           rootElement: trackDataFromAttr.trackingElement,
           rootFeature: trackDataFromAttr.trackingFeature,
@@ -14287,9 +14287,6 @@ var Coral = (function (exports) {
     "tags": {
       "spectrumIcon": "Labels"
     },
-    "target": {
-      "spectrumIcon": "AdobeTarget"
-    },
     "targetCheckColor": {
       "spectrumIcon": "TargetCheckColor_Light"
     },
@@ -14478,7 +14475,7 @@ var Coral = (function (exports) {
 
 
   var IS_IE11 = !window.ActiveXObject && 'ActiveXObject' in window;
-  var iconsExternal = String(commons.options.iconsExternal).trim().toLowerCase() || 'on';
+  var iconsExternal = commons.options.iconsExternal || 'on';
 
   if (IS_IE11) {
     iconsExternal = 'off';
@@ -37477,7 +37474,6 @@ var Coral = (function (exports) {
         this._elements.button.disabled = this._disabled || isReadOnly;
         this._elements.input.disabled = this._disabled || isReadOnly;
         this._elements.taglist.disabled = this._disabled || isReadOnly;
-        this._elements.invalidIcon.hidden = this.disabled;
       }
       /**
        Inherited from {@link BaseFormField#invalid}.
@@ -37495,7 +37491,7 @@ var Coral = (function (exports) {
 
         this._elements.button.classList.toggle('is-invalid', this.invalid);
 
-        this._elements.invalidIcon.hidden = !this.invalid && !this.disabled;
+        this._elements.invalidIcon.hidden = !this.invalid;
       }
       /**
        Whether this field is required or not.
@@ -70550,14 +70546,17 @@ var Coral = (function (exports) {
         return this._getContentZone(this._elements.tabList);
       },
       set: function set(value) {
-        this._setContentZone('tabList', value, {
-          handle: 'tabList',
-          tagName: 'coral-tablist',
-          insert: function insert(tabs) {
-            tabs.setAttribute('tracking', 'off');
-            this.insertBefore(tabs, this._elements.panelStack || null);
-          }
-        });
+        // Support nested coral-tablist
+        if (value instanceof HTMLElement && !value.parentNode || value.parentNode === this) {
+          this._setContentZone('tabList', value, {
+            handle: 'tabList',
+            tagName: 'coral-tablist',
+            insert: function insert(tabs) {
+              tabs.setAttribute('tracking', 'off');
+              this.insertBefore(tabs, this._elements.panelStack || null);
+            }
+          });
+        }
       }
       /**
        The PanelStack which contains all the panels.
@@ -70572,13 +70571,16 @@ var Coral = (function (exports) {
         return this._getContentZone(this._elements.panelStack);
       },
       set: function set(value) {
-        this._setContentZone('panelStack', value, {
-          handle: 'panelStack',
-          tagName: 'coral-panelstack',
-          insert: function insert(panels) {
-            this.appendChild(panels);
-          }
-        });
+        // Support nested coral-panelstack
+        if (value instanceof HTMLElement && !value.parentNode || value.parentNode === this) {
+          this._setContentZone('panelStack', value, {
+            handle: 'panelStack',
+            tagName: 'coral-panelstack',
+            insert: function insert(panels) {
+              this.appendChild(panels);
+            }
+          });
+        }
       }
     }, {
       key: "_contentZones",
@@ -72962,7 +72964,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.96";
+  var version = "1.0.0-beta.97";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

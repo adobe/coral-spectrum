@@ -443,7 +443,7 @@ if (resourcesPath.length &amp;&amp; resourcesPath[resourcesPath.length - 1] !== 
 
 // @IE11
 const IS_IE11 = !window.ActiveXObject &amp;&amp; &apos;ActiveXObject&apos; in window;
-let iconsExternal = String(commons.options.iconsExternal).trim().toLowerCase() || &apos;on&apos;;
+let iconsExternal = commons.options.iconsExternal || &apos;on&apos;;
 if (IS_IE11) {
   iconsExternal = &apos;off&apos;;
 }

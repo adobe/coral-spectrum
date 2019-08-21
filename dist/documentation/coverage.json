@@ -1534,11 +1534,11 @@
         196,
         273,
         421,
-        459,
-        478,
-        562,
-        997,
-        1055
+        458,
+        477,
+        561,
+        996,
+        1054
       ]
     },
     "coral-spectrum/coral-component-select/src/scripts/SelectItem.js": {
@@ -2097,7 +2097,7 @@
       "undocumentLines": [
         35,
         51,
-        162
+        168
       ]
     },
     "coral-spectrum/coral-component-taglist/src/scripts/Tag.js": {

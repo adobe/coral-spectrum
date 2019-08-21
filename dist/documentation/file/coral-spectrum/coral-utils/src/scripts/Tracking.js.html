@@ -497,7 +497,7 @@ class Tracking {
      */
     return {
       targetType: targetType || parentComponentType || &apos;&apos;,
-      targetElement: typeof childComponent !== &apos;undefined&apos; &amp;&amp; childComponent.trackingElement ? childComponent.trackingElement : component.trackingElement,
+      targetElement: childComponent &amp;&amp; childComponent.trackingElement ? childComponent.trackingElement : component.trackingElement,
       eventType: eventType || event.type,
       rootElement: trackDataFromAttr.trackingElement,
       rootFeature: trackDataFromAttr.trackingFeature,
