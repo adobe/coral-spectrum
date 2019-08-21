@@ -1225,6 +1225,31 @@ describe('NumberInput', function() {
         el.stepDown();
         expect(el.value).to.equal('1');
       });
+      
+      it('should work with scientific notations', function() {
+        const el = new NumberInput();
+        el.step = 0.0000001;
+        el.stepUp();
+        expect(expect(el.value).to.equal('1e-7'));
+        el.stepUp();
+        expect(expect(el.value).to.equal('2e-7'));
+        el.stepDown();
+        expect(expect(el.value).to.equal('1e-7'));
+        el.stepDown();
+        expect(expect(el.value).to.equal('0'));
+        el.stepDown();
+        expect(expect(el.value).to.equal('-1e-7'));
+        el.stepDown();
+        expect(expect(el.value).to.equal('-2e-7'));
+      });
+      
+      it('should not invalidate input with scientific notations', function() {
+        const el = new NumberInput();
+        el.step = 0.0000001;
+        el.stepUp();
+        el.stepUp();
+        expect(el.invalid).to.be.false;
+      });
     });
     
     describe('#formField', function() {

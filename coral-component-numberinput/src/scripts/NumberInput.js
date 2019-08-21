@@ -25,13 +25,36 @@ const MSPOINTER_TYPE_MOUSE = 0x00000004;
 let flagTouchStart = false;
 let flagStepButtonClick = false;
 
-function handleDecimalOperation(operator, value1, value2) {
-  let result = operator === '+' ? value1 + value2 : value1 - value2;
+const exponentialToDecimalString = (value) => {
+  const notation = value.toString();
+  if (notation.indexOf('e') !== -1) {
+    const negative = notation.indexOf('-') === 0;
+    const exponent = parseInt(notation.split('-')[negative ? 2 : 1], 10);
+    return value.toFixed(exponent).toString();
+  }
+  
+  return value.toString();
+};
+
+const handleDecimalOperation = (operator, value1, value2) => {
+  let result;
+  
+  const operation = (operator, value1, value2) => {
+    if (operator === '+') {
+      return value1 + value2;
+    }
+    else if (operator === '-') {
+      return value1 - value2;
+    }
+    else if (operator === '%') {
+      return value1 % value2;
+    }
+  };
   
   // Check if we have decimals
   if (value1 % 1 !== 0 || value2 % 1 !== 0) {
-    const value1Decimal = value1.toString().split('.');
-    const value2Decimal = value2.toString().split('.');
+    const value1Decimal = exponentialToDecimalString(value1).split('.');
+    const value2Decimal = exponentialToDecimalString(value2).split('.');
     const value1DecimalLength = value1Decimal[1] && value1Decimal[1].length || 0;
     const value2DecimalLength = value2Decimal[1] && value2Decimal[1].length || 0;
     const multiplier = Math.pow(10, Math.max(value1DecimalLength, value2DecimalLength));
@@ -41,14 +64,17 @@ function handleDecimalOperation(operator, value1, value2) {
     value2 = Math.round(value2 * multiplier);
     
     // Perform the operation on integers values to make sure we don't get a fancy decimal value
-    result = operator === '+' ? value1 + value2 : value1 - value2;
+    result = operation(operator, value1, value2);
     
     // Transform the integer result back to decimal
     result /= multiplier;
   }
+  else {
+    result = operation(operator, value1, value2);
+  }
   
   return result;
-}
+};
 
 /**
  @class Coral.NumberInput
@@ -146,19 +172,19 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
   get valueAsNumber() {
     let valueAsNumber = this._valueAsNumber;
     
-    if (valueAsNumber !== null && !isNaN(valueAsNumber)) {
+    if (typeof valueAsNumber !== 'undefined' && valueAsNumber !== null) {
       return valueAsNumber;
     }
     
-    valueAsNumber = transform.float(this.value);
-    if (valueAsNumber !== null && !isNaN(valueAsNumber)) {
+    valueAsNumber = transform.number(this.value);
+    if (valueAsNumber !== null) {
       return valueAsNumber;
     }
     
     return NaN;
   }
   set valueAsNumber(value) {
-    this._valueAsNumber = transform.float(value);
+    this._valueAsNumber = transform.number(value);
   
     this.value = this._valueAsNumber;
     this.invalid = this.hasAttribute('invalid');
@@ -438,9 +464,9 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
    @ignore
    */
   _validateInputValue() {
-    this.invalid = this.value !== '' && (window.isNaN(Number(this.value)) ||
+    this.invalid = this.value !== '' && (isNaN(Number(this.value)) ||
       (this.max !== null && this.value > this.max || this.min !== null && this.value < this.min) ||
-      this.step !== 'any' && this.value % this._getActualStep() !== 0);
+      this.step !== 'any' && handleDecimalOperation('%', Number(this.value), this._getActualStep()) !== 0);
   }
   
   /**
