@@ -16,16 +16,16 @@ import {transform, validate} from '../../../coral-utils';
 const CLASSNAME = '_coral-Banner';
 
 /**
- Enumeration for {@link CardBanner} variants.
+ Enumeration for {@link Banner} variants.
  
- @typedef {Object} CardBannerVariantEnum
+ @typedef {Object} BannerVariantEnum
  
  @property {String} ERROR
- A card banner to indicate that an error has occurred.
+ A banner to indicate that an error has occurred.
  @property {String} WARNING
- A card banner to warn the user of something important.
+ A banner to warn the user of something important.
  @property {String} INFO
- A card banner to inform the user of non-critical information.
+ A banner to inform the user of non-critical information.
  */
 const variant = {
   ERROR: 'error',
@@ -40,29 +40,29 @@ for (const variantValue in variant) {
 }
 
 /**
- @class Coral.Card.Banner
- @classdesc A Card Banner component
- @htmltag coral-card-banner
+ @class Coral.Banner
+ @classdesc A Banner component
+ @htmltag coral-banner
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class CardBanner extends BaseComponent(HTMLElement) {
+class Banner extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
     
     // Fetch content zones
     this._elements = {
-      header: this.querySelector('coral-card-banner-header') || document.createElement('coral-card-banner-header'),
-      content: this.querySelector('coral-card-banner-content') || document.createElement('coral-card-banner-content')
+      header: this.querySelector('coral-banner-header') || document.createElement('coral-banner-header'),
+      content: this.querySelector('coral-banner-content') || document.createElement('coral-banner-content')
     };
   }
   
   /**
-   The banner variant style to use. See {@link CardBannerVariantEnum}.
+   The banner variant style to use. See {@link BannerVariantEnum}.
    
    @type {String}
-   @default CardBannerVariantEnum.INFO
+   @default BannerVariantEnum.INFO
    @htmlattribute variant
    @htmlattributereflected
    */
@@ -87,7 +87,7 @@ class CardBanner extends BaseComponent(HTMLElement) {
   /**
    The banner's header.
    
-   @type {CardBannerHeader}
+   @type {BannerHeader}
    @contentzone
    */
   get header() {
@@ -96,7 +96,7 @@ class CardBanner extends BaseComponent(HTMLElement) {
   set header(value) {
     this._setContentZone('header', value, {
       handle: 'header',
-      tagName: 'coral-card-banner-header',
+      tagName: 'coral-banner-header',
       insert: function(header) {
         this.insertBefore(header, this.firstChild);
       }
@@ -106,7 +106,7 @@ class CardBanner extends BaseComponent(HTMLElement) {
   /**
    The banner's content.
    
-   @type {CardBannerContent}
+   @type {BannerContent}
    @contentzone
    */
   get content() {
@@ -115,7 +115,7 @@ class CardBanner extends BaseComponent(HTMLElement) {
   set content(value) {
     this._setContentZone('content', value, {
       handle: 'content',
-      tagName: 'coral-card-banner-content',
+      tagName: 'coral-banner-content',
       insert: function(content) {
         this.appendChild(content);
       }
@@ -124,15 +124,15 @@ class CardBanner extends BaseComponent(HTMLElement) {
   
   get _contentZones() {
     return {
-      'coral-card-banner-header': 'header',
-      'coral-card-banner-content': 'content'
+      'coral-banner-header': 'header',
+      'coral-banner-content': 'content'
     };
   }
   
   /**
-   Returns {@link CardBanner} variants.
+   Returns {@link Banner} variants.
    
-   @return {CardBannerVariantEnum}
+   @return {BannerVariantEnum}
    */
   static get variant() { return variant; }
   
@@ -174,4 +174,4 @@ class CardBanner extends BaseComponent(HTMLElement) {
   }
 }
 
-export default CardBanner;
+export default Banner;

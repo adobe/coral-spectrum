@@ -21,6 +21,7 @@ export {ActionBar} from './coral-component-actionbar';
 export {Alert} from './coral-component-alert';
 export {AnchorButton} from './coral-component-anchorbutton';
 export {Autocomplete} from './coral-component-autocomplete';
+export {Banner} from './coral-component-banner';
 export {Button} from './coral-component-button';
 export {ButtonGroup} from './coral-component-buttongroup';
 export {Calendar} from './coral-component-calendar';

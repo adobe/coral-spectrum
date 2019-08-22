@@ -26,9 +26,6 @@ describe('Card', function() {
       expect(Card).to.have.property('Content');
       expect(Card).to.have.property('PropertyList');
       expect(Card.Property).to.have.property('Content');
-      expect(Card).to.have.property('Banner');
-      expect(Card.Banner).to.have.property('Header');
-      expect(Card.Banner).to.have.property('Content');
     });
   
     it('should define the variants in an enum', function() {
@@ -55,8 +52,6 @@ describe('Card', function() {
   });
 
   describe('API', function() {
-    describe('#banner', function() {});
-    
     describe('#asset', function() {});
 
     describe('#content', function() {});
@@ -79,8 +74,6 @@ describe('Card', function() {
   });
 
   describe('Markup', function() {
-    describe('#banner', function() {});
-    
     describe('#asset', function() {});
 
     describe('#assetheight', function() {});

@@ -16,9 +16,6 @@ import '../coral-externals';
 import '../coral-compat';
 
 import Card from './src/scripts/Card';
-import CardBanner from './src/scripts/CardBanner';
-import CardBannerHeader from './src/scripts/CardBannerHeader';
-import CardBannerContent from './src/scripts/CardBannerContent';
 import CardProperty from './src/scripts/CardProperty';
 import CardTitle from './src/scripts/CardTitle';
 import CardSubtitle from './src/scripts/CardSubtitle';
@@ -36,9 +33,6 @@ import './src/styles/index.css';
 // Expose component on the Coral namespace
 window.customElements.define('coral-card', Card);
 window.customElements.define('coral-card-content', CardContent);
-window.customElements.define('coral-card-banner', CardBanner);
-window.customElements.define('coral-card-banner-header', CardBannerHeader);
-window.customElements.define('coral-card-banner-content', CardBannerContent);
 window.customElements.define('coral-card-property', CardProperty);
 window.customElements.define('coral-card-propertylist', CardPropertyList);
 window.customElements.define('coral-card-title', CardTitle);
@@ -46,9 +40,6 @@ window.customElements.define('coral-card-subtitle', CardSubtitle);
 window.customElements.define('coral-card-context', CardContext);
 window.customElements.define('coral-card-description', CardDescription);
 
-Card.Banner = CardBanner;
-Card.Banner.Header = CardBannerHeader;
-Card.Banner.Content = CardBannerContent;
 Card.Property = CardProperty;
 Card.Property.Content = CardPropertyContent;
 Card.Title = CardTitle;

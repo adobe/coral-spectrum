@@ -65,26 +65,12 @@ class Card extends BaseComponent(HTMLElement) {
     // Prepare templates
     this._elements = {
       // Fetch or create the content zone elements
-      banner: this.querySelector('coral-card-banner') || document.createElement('coral-card-banner'),
       asset: this.querySelector('coral-card-asset') || document.createElement('coral-card-asset'),
       content: this.querySelector('coral-card-content') || document.createElement('coral-card-content'),
       info: this.querySelector('coral-card-info') || document.createElement('coral-card-info'),
       overlay: this.querySelector('coral-card-overlay') || document.createElement('coral-card-overlay')
     };
     base.call(this._elements);
-  
-    // Check if the banner is empty whenever we get a mutation
-    this._observer = new MutationObserver(this._hideBannerIfEmpty.bind(this));
-    
-    // Watch for changes to the banner element's children
-    this._observer.observe(this._elements.banner, {
-      // Catch changes to childList
-      childList: true,
-      // Catch changes to textContent
-      characterData: true,
-      // Monitor any child node
-      subtree: true
-    });
     
     // Events
     this._delegateEvents({
@@ -206,26 +192,6 @@ class Card extends BaseComponent(HTMLElement) {
   }
   
   /**
-   The Banner of the card.
-   
-   @type {CardBanner}
-   @contentzone
-   */
-  get banner() {
-    return this._getContentZone(this._elements.banner);
-  }
-  set banner(value) {
-    this._setContentZone('banner', value, {
-      handle: 'banner',
-      tagName: 'coral-card-banner',
-      insert: function(content) {
-        content.classList.add('_coral-Banner--corner');
-        this.appendChild(content);
-      }
-    });
-  }
-  
-  /**
    The information area of the card, which is placed over all the content. It is typically used for alerts.
    
    @type {CardInfo}
@@ -338,29 +304,8 @@ class Card extends BaseComponent(HTMLElement) {
     event.target.classList.remove('is-loading');
   }
   
-  /**
-   Hide the banner if it's empty
-   @ignore
-   */
-  _hideBannerIfEmpty() {
-    const banner = this._elements.banner;
-    const bannerHeader = banner._elements.header;
-    const bannerContent = banner._elements.content;
-    
-    // If it's empty and has no non-textnode children, hide the label
-    const headerHiddenValue = bannerHeader.children.length === 0 && bannerHeader.textContent.replace(/\s*/g, '') === '';
-    const contentHiddenValue = bannerContent.children.length === 0 && bannerContent.textContent.replace(/\s*/g, '') === '';
-    const hiddenValue = headerHiddenValue && contentHiddenValue;
-    
-    // Only bother if the hidden status has changed
-    if (hiddenValue !== this._elements.banner.hidden) {
-      this._elements.banner.hidden = hiddenValue;
-    }
-  }
-  
   get _contentZones() {
     return {
-      'coral-card-banner': 'banner',
       'coral-card-asset': 'asset',
       'coral-card-content': 'content',
       'coral-card-info': 'info',
@@ -440,7 +385,6 @@ class Card extends BaseComponent(HTMLElement) {
     this.overlay = this._elements.overlay;
     this.content = content;
     this.info = this._elements.info;
-    this.banner = this._elements.banner;
   
     this.appendChild(this._elements.wrapper);
   

@@ -13,16 +13,16 @@
 const CLASSNAME = '_coral-Banner-header';
 
 /**
- @class Coral.Card.Banner.Header
- @classdesc A Card Banner Header component
- @htmltag coral-card-banner-header
+ @class Coral.Banner.Header
+ @classdesc A Banner Header component
+ @htmltag coral-banner-header
  @extends {HTMLElement}
  */
-class CardBannerHeader extends HTMLElement {
+class BannerHeader extends HTMLElement {
   /** @ignore */
   connectedCallback() {
     this.classList.add(CLASSNAME);
   }
 }
 
-export default CardBannerHeader;
+export default BannerHeader;

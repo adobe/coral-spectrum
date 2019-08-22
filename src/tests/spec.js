@@ -23,6 +23,7 @@ import '../../coral-component-actionbar/src/tests/spec';
 import '../../coral-component-alert/src/tests/spec';
 import '../../coral-component-anchorbutton/src/tests/spec';
 import '../../coral-component-autocomplete/src/tests/spec';
+import '../../coral-component-banner/src/tests/spec';
 import '../../coral-component-button/src/tests/spec';
 import '../../coral-component-buttongroup/src/tests/spec';
 import '../../coral-component-calendar/src/tests/spec';

@@ -10,12 +10,6 @@
  * governing permissions and limitations under the License.
  */
 
-@require '@adobe/spectrum-css/dist/components/banner/index.css';
-@require '@adobe/spectrum-css/dist/components/banner/multiStops/light.css';
-@require '@adobe/spectrum-css/dist/components/banner/multiStops/lightest.css';
-@require '@adobe/spectrum-css/dist/components/banner/multiStops/dark.css';
-@require '@adobe/spectrum-css/dist/components/banner/multiStops/darkest.css';
-
 @require '../../../coral-theme-spectrum/src/styles/vars.css';
 
 $card-border-size = var(--spectrum-medium-card-border-size);
@@ -35,7 +29,7 @@ $card-asset-lowResolution-padding = 16px;
 ._coral-Card {
   display: block;
 
-  // used to place the banners and the stack
+  // used to place the banners
   position: relative;
   vertical-align: top;
 
@@ -270,9 +264,7 @@ coral-card-propertylist:empty,
 ._coral-Card-context,
 ._coral-Card-title,
 ._coral-Card-subtitle,
-._coral-Card-description,
-._coral-Banner-header,
-._coral-Banner-content {
+._coral-Card-description {
   display: block;
 }
 
@@ -316,10 +308,6 @@ coral-card-propertylist:empty,
 ._coral-Card-subtitle + coral-card-propertylist,
 ._coral-Card-description + coral-card-propertylist {
   margin-top: var(--spectrum-medium-card-body-padding-top);
-}
-
-._coral-Banner--corner {
-  z-index: 1;
 }
 
 // added ._coral-Alert due to specificity of the classes vs tags
