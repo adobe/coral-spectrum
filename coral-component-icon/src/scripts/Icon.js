@@ -154,7 +154,7 @@ class Icon extends BaseComponent(HTMLElement) {
     
     // Avoid rendering the same icon
     if (icon !== this._icon || this.hasAttribute('_context')) {
-      this._icon = transform.string(value).trim();
+      this._icon = icon;
       this._reflectAttribute('icon', this._icon);
   
       // Remove image and SVG elements
