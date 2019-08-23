@@ -185,6 +185,15 @@ describe('Icon', function() {
         expect(icon.hasAttribute('icon')).to.be.true;
         expect(hasSVGIcon(icon, 'add')).to.be.true;
       });
+      
+      it('should not render the same icon', function() {
+        icon.icon = 'add';
+        
+        icon.querySelector('svg').id = 'add';
+        icon.icon = 'add';
+        
+        expect(icon.querySelector('svg').id).to.equal('add');
+      });
 
       it('should convert everything to a string', function() {
         icon.icon = 5;

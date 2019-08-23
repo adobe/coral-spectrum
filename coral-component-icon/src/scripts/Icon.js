@@ -150,33 +150,38 @@ class Icon extends BaseComponent(HTMLElement) {
     return this._icon || '';
   }
   set icon(value) {
-    this._icon = transform.string(value).trim();
-    this._reflectAttribute('icon', this._icon);
+    const icon = transform.string(value).trim();
     
-    // Remove image and SVG elements
-    ['image', 'svg'].forEach((type) => {
-      const el = this._elements[type] || this.querySelector(`.${CLASSNAME}--${type}`);
-      if (el) {
-        el.remove();
+    // Avoid rendering the same icon
+    if (icon !== this._icon || this.hasAttribute('_context')) {
+      this._icon = transform.string(value).trim();
+      this._reflectAttribute('icon', this._icon);
+  
+      // Remove image and SVG elements
+      ['image', 'svg'].forEach((type) => {
+        const el = this._elements[type] || this.querySelector(`.${CLASSNAME}--${type}`);
+        if (el) {
+          el.remove();
+        }
+      });
+  
+      // Sets the desired icon
+      if (this._icon) {
+        // Detect if it's a URL
+        if (this._icon.match(URL_REGEX)) {
+          // Create an image and add it to the icon
+          this._elements.image = this._elements.image || document.createElement('img');
+          this._elements.image.className = `${CLASSNAME} ${CLASSNAME}--image`;
+          this._elements.image.src = this.icon;
+          this.appendChild(this._elements.image);
+        }
+        else {
+          this._updateIcon();
+        }
       }
-    });
-    
-    // Sets the desired icon
-    if (this._icon) {
-      // Detect if it's a URL
-      if (this._icon.match(URL_REGEX)) {
-        // Create an image and add it to the icon
-        this._elements.image = this._elements.image || document.createElement('img');
-        this._elements.image.className = `${CLASSNAME} ${CLASSNAME}--image`;
-        this._elements.image.src = this.icon;
-        this.appendChild(this._elements.image);
-      }
-      else {
-        this._updateIcon();
-      }
+  
+      this._updateAltText();
     }
-    
-    this._updateAltText();
   }
   
   /**
