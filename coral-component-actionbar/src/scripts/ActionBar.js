@@ -174,7 +174,7 @@ class ActionBar extends BaseComponent(HTMLElement) {
       focusedItem = focusedItem.parentNode;
     }
     
-    const ERROR_MARGIN = 70;
+    const ERROR_MARGIN = 78;
     
     const leftItems = this.primary.items.getAll();
     const rightItems = this.secondary.items.getAll().reverse();
