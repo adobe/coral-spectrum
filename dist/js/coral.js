@@ -14753,7 +14753,7 @@ var Coral = (function (exports) {
         var icon = transform.string(value).trim(); // Avoid rendering the same icon
 
         if (icon !== this._icon || this.hasAttribute('_context')) {
-          this._icon = transform.string(value).trim();
+          this._icon = icon;
 
           this._reflectAttribute('icon', this._icon); // Remove image and SVG elements
 
@@ -72948,7 +72948,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.98";
+  var version = "1.0.0-beta.99";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
