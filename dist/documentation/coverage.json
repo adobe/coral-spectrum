@@ -1,7 +1,7 @@
 {
-  "coverage": "66.01%",
-  "expectCount": 3487,
-  "actualCount": 2302,
+  "coverage": "65.99%",
+  "expectCount": 3485,
+  "actualCount": 2300,
   "files": {
     "coral-spectrum/coral-base-button/src/scripts/BaseButton.js": {
       "expectCount": 42,
@@ -375,6 +375,27 @@
         101
       ]
     },
+    "coral-spectrum/coral-component-banner/src/scripts/Banner.js": {
+      "expectCount": 13,
+      "actualCount": 8,
+      "undocumentLines": [
+        16,
+        37,
+        55,
+        74,
+        125
+      ]
+    },
+    "coral-spectrum/coral-component-banner/src/scripts/BannerContent.js": {
+      "expectCount": 3,
+      "actualCount": 3,
+      "undocumentLines": []
+    },
+    "coral-spectrum/coral-component-banner/src/scripts/BannerHeader.js": {
+      "expectCount": 3,
+      "actualCount": 3,
+      "undocumentLines": []
+    },
     "coral-spectrum/coral-component-button/src/scripts/Button.js": {
       "expectCount": 2,
       "actualCount": 2,
@@ -425,48 +446,26 @@
       ]
     },
     "coral-spectrum/coral-component-card/src/scripts/Card.js": {
-      "expectCount": 31,
-      "actualCount": 18,
+      "expectCount": 28,
+      "actualCount": 16,
       "undocumentLines": [
         17,
         44,
         48,
         66,
-        77,
-        127,
-        166,
-        179,
-        260,
-        297,
-        316,
-        332,
-        361
+        113,
+        152,
+        165,
+        226,
+        263,
+        282,
+        298,
+        307
       ]
     },
     "coral-spectrum/coral-component-card/src/scripts/CardAsset.js": {
       "expectCount": 1,
       "actualCount": 1,
-      "undocumentLines": []
-    },
-    "coral-spectrum/coral-component-card/src/scripts/CardBanner.js": {
-      "expectCount": 13,
-      "actualCount": 8,
-      "undocumentLines": [
-        16,
-        37,
-        55,
-        74,
-        125
-      ]
-    },
-    "coral-spectrum/coral-component-card/src/scripts/CardBannerContent.js": {
-      "expectCount": 3,
-      "actualCount": 3,
-      "undocumentLines": []
-    },
-    "coral-spectrum/coral-component-card/src/scripts/CardBannerHeader.js": {
-      "expectCount": 3,
-      "actualCount": 3,
       "undocumentLines": []
     },
     "coral-spectrum/coral-component-card/src/scripts/CardContent.js": {
@@ -1007,11 +1006,11 @@
         106,
         110,
         116,
-        445,
+        450,
         138,
-        153,
-        197,
-        222
+        157,
+        202,
+        227
       ]
     },
     "coral-spectrum/coral-component-icon/src/scripts/loadIcons.js": {
@@ -1267,7 +1266,7 @@
       "undocumentLines": []
     },
     "coral-spectrum/coral-component-numberinput/src/scripts/NumberInput.js": {
-      "expectCount": 53,
+      "expectCount": 54,
       "actualCount": 36,
       "undocumentLines": [
         21,
@@ -1276,17 +1275,18 @@
         25,
         26,
         28,
-        91,
-        95,
-        98,
-        161,
-        219,
-        253,
-        287,
-        308,
-        326,
-        375,
-        381
+        39,
+        117,
+        121,
+        124,
+        187,
+        245,
+        279,
+        313,
+        334,
+        352,
+        401,
+        407
       ]
     },
     "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js": {

@@ -9594,7 +9594,7 @@ a[is="coral-anchorbutton"] {
   left: 8px;
 }
 ._coral-ActionBar-secondary {
-  right: 8px;
+  right: calc(8px * 2);
 }
 ._coral-ActionBar-buttonList button[is="coral-buttonlist-item"],
 ._coral-ActionBar-anchorList a[is="coral-anchorlist-item"] {
@@ -10534,6 +10534,90 @@ coral-autocomplete-item {
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+._coral-Banner {
+  display: inline-block;
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: 12px;
+  line-height: 1.3;
+}
+._coral-Banner-header {
+  font-weight: bold;
+}
+._coral-Banner--corner {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+}
+
+.coral--light ._coral-Banner {
+  color: rgb(255, 255, 255);
+}
+.coral--light ._coral-Banner--info {
+  background-color: rgb(20, 115, 230);
+}
+.coral--light ._coral-Banner--warning {
+  background-color: rgb(218, 123, 17);
+}
+.coral--light ._coral-Banner--error {
+  background-color: rgb(215, 55, 63);
+}
+
+.coral--lightest ._coral-Banner {
+  color: rgb(255, 255, 255);
+}
+.coral--lightest ._coral-Banner--info {
+  background-color: rgb(38, 128, 235);
+}
+.coral--lightest ._coral-Banner--warning {
+  background-color: rgb(230, 134, 25);
+}
+.coral--lightest ._coral-Banner--error {
+  background-color: rgb(227, 72, 80);
+}
+
+.coral--dark ._coral-Banner {
+  color: rgb(255, 255, 255);
+}
+.coral--dark ._coral-Banner--info {
+  background-color: rgb(55, 142, 240);
+}
+.coral--dark ._coral-Banner--warning {
+  background-color: rgb(242, 148, 35);
+}
+.coral--dark ._coral-Banner--error {
+  background-color: rgb(236, 91, 98);
+}
+
+.coral--darkest ._coral-Banner {
+  color: rgb(255, 255, 255);
+}
+.coral--darkest ._coral-Banner--info {
+  background-color: rgb(38, 128, 235);
+}
+.coral--darkest ._coral-Banner--warning {
+  background-color: rgb(230, 134, 25);
+}
+.coral--darkest ._coral-Banner--error {
+  background-color: rgb(227, 72, 80);
+}
+
+._coral-Banner-header,
+._coral-Banner-content {
+  display: block;
+}
+
+/**
+ * Copyright 2019 Adobe. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under
+ * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+ * OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
 ._coral-ButtonGroup {
   display: -ms-flexbox;
   display: flex;
@@ -11117,73 +11201,6 @@ coral-autocomplete-item {
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-._coral-Banner {
-  display: inline-block;
-  border-radius: 8px;
-  padding: 4px 8px;
-  font-size: 12px;
-  line-height: 1.3;
-}
-._coral-Banner-header {
-  font-weight: bold;
-}
-._coral-Banner--corner {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-}
-
-.coral--light ._coral-Banner {
-  color: rgb(255, 255, 255);
-}
-.coral--light ._coral-Banner--info {
-  background-color: rgb(20, 115, 230);
-}
-.coral--light ._coral-Banner--warning {
-  background-color: rgb(218, 123, 17);
-}
-.coral--light ._coral-Banner--error {
-  background-color: rgb(215, 55, 63);
-}
-
-.coral--lightest ._coral-Banner {
-  color: rgb(255, 255, 255);
-}
-.coral--lightest ._coral-Banner--info {
-  background-color: rgb(38, 128, 235);
-}
-.coral--lightest ._coral-Banner--warning {
-  background-color: rgb(230, 134, 25);
-}
-.coral--lightest ._coral-Banner--error {
-  background-color: rgb(227, 72, 80);
-}
-
-.coral--dark ._coral-Banner {
-  color: rgb(255, 255, 255);
-}
-.coral--dark ._coral-Banner--info {
-  background-color: rgb(55, 142, 240);
-}
-.coral--dark ._coral-Banner--warning {
-  background-color: rgb(242, 148, 35);
-}
-.coral--dark ._coral-Banner--error {
-  background-color: rgb(236, 91, 98);
-}
-
-.coral--darkest ._coral-Banner {
-  color: rgb(255, 255, 255);
-}
-.coral--darkest ._coral-Banner--info {
-  background-color: rgb(38, 128, 235);
-}
-.coral--darkest ._coral-Banner--warning {
-  background-color: rgb(230, 134, 25);
-}
-.coral--darkest ._coral-Banner--error {
-  background-color: rgb(227, 72, 80);
-}
 ._coral-Card {
   display: block;
   position: relative;
@@ -11390,9 +11407,7 @@ coral-card-propertylist:empty,
 ._coral-Card-context,
 ._coral-Card-title,
 ._coral-Card-subtitle,
-._coral-Card-description,
-._coral-Banner-header,
-._coral-Banner-content {
+._coral-Card-description {
   display: block;
 }
 ._coral-Card-title,
@@ -11436,9 +11451,6 @@ coral-card-propertylist:empty,
 }
 ._coral-Card-description + coral-card-propertylist {
   margin-top: 20px;
-}
-._coral-Banner--corner {
-  z-index: 1;
 }
 coral-card-info > coral-alert._coral-Alert {
   display: inline-block;

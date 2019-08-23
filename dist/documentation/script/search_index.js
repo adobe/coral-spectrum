@@ -120,6 +120,24 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "@adobe/coral-spectrum~banner",
+    "class/coral-spectrum/coral-component-banner/src/scripts/Banner.js~Banner.html",
+    "<span>Banner</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
+  ],
+  [
+    "@adobe/coral-spectrum~bannercontent",
+    "class/coral-spectrum/coral-component-banner/src/scripts/BannerContent.js~BannerContent.html",
+    "<span>BannerContent</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
+  ],
+  [
+    "@adobe/coral-spectrum~bannerheader",
+    "class/coral-spectrum/coral-component-banner/src/scripts/BannerHeader.js~BannerHeader.html",
+    "<span>BannerHeader</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
+  ],
+  [
     "@adobe/coral-spectrum~baseactionbarcontainer",
     "class/coral-spectrum/coral-component-actionbar/src/scripts/BaseActionBarContainer.js~BaseActionBarContainer.html",
     "<span>BaseActionBarContainer</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
@@ -226,24 +244,6 @@ window.esdocSearchIndex = [
     "function/index.html#static-function-CardAsset",
     "<span>CardAsset</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
     "function"
-  ],
-  [
-    "@adobe/coral-spectrum~cardbanner",
-    "class/coral-spectrum/coral-component-card/src/scripts/CardBanner.js~CardBanner.html",
-    "<span>CardBanner</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
-    "class"
-  ],
-  [
-    "@adobe/coral-spectrum~cardbannercontent",
-    "class/coral-spectrum/coral-component-card/src/scripts/CardBannerContent.js~CardBannerContent.html",
-    "<span>CardBannerContent</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
-    "class"
-  ],
-  [
-    "@adobe/coral-spectrum~cardbannerheader",
-    "class/coral-spectrum/coral-component-card/src/scripts/CardBannerHeader.js~CardBannerHeader.html",
-    "<span>CardBannerHeader</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
-    "class"
   ],
   [
     "@adobe/coral-spectrum~cardcontent",
@@ -2724,6 +2724,54 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "coral-spectrum/coral-component-banner/src/scripts/banner.js",
+    "file/coral-spectrum/coral-component-banner/src/scripts/Banner.js.html",
+    "coral-spectrum/coral-component-banner/src/scripts/Banner.js",
+    "file"
+  ],
+  [
+    "coral-spectrum/coral-component-banner/src/scripts/banner.js~banner#content",
+    "class/coral-spectrum/coral-component-banner/src/scripts/Banner.js~Banner.html#instance-member-content",
+    "coral-spectrum/coral-component-banner/src/scripts/Banner.js~Banner#content",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-banner/src/scripts/banner.js~banner#header",
+    "class/coral-spectrum/coral-component-banner/src/scripts/Banner.js~Banner.html#instance-member-header",
+    "coral-spectrum/coral-component-banner/src/scripts/Banner.js~Banner#header",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-banner/src/scripts/banner.js~banner#variant",
+    "class/coral-spectrum/coral-component-banner/src/scripts/Banner.js~Banner.html#instance-member-variant",
+    "coral-spectrum/coral-component-banner/src/scripts/Banner.js~Banner#variant",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-banner/src/scripts/banner.js~banner.variant",
+    "class/coral-spectrum/coral-component-banner/src/scripts/Banner.js~Banner.html#static-member-variant",
+    "coral-spectrum/coral-component-banner/src/scripts/Banner.js~Banner.variant",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-banner/src/scripts/banner.js~bannervariantenum",
+    "typedef/index.html#static-typedef-BannerVariantEnum",
+    "coral-spectrum/coral-component-banner/src/scripts/Banner.js~BannerVariantEnum",
+    "typedef"
+  ],
+  [
+    "coral-spectrum/coral-component-banner/src/scripts/bannercontent.js",
+    "file/coral-spectrum/coral-component-banner/src/scripts/BannerContent.js.html",
+    "coral-spectrum/coral-component-banner/src/scripts/BannerContent.js",
+    "file"
+  ],
+  [
+    "coral-spectrum/coral-component-banner/src/scripts/bannerheader.js",
+    "file/coral-spectrum/coral-component-banner/src/scripts/BannerHeader.js.html",
+    "coral-spectrum/coral-component-banner/src/scripts/BannerHeader.js",
+    "file"
+  ],
+  [
     "coral-spectrum/coral-component-button/src/scripts/button.js",
     "file/coral-spectrum/coral-component-button/src/scripts/Button.js.html",
     "coral-spectrum/coral-component-button/src/scripts/Button.js",
@@ -2934,12 +2982,6 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "coral-spectrum/coral-component-card/src/scripts/card.js~card#banner",
-    "class/coral-spectrum/coral-component-card/src/scripts/Card.js~Card.html#instance-member-banner",
-    "coral-spectrum/coral-component-card/src/scripts/Card.js~Card#banner",
-    "member"
-  ],
-  [
     "coral-spectrum/coral-component-card/src/scripts/card.js~card#colorhint",
     "class/coral-spectrum/coral-component-card/src/scripts/Card.js~Card.html#instance-member-colorHint",
     "coral-spectrum/coral-component-card/src/scripts/Card.js~Card#colorHint",
@@ -2997,54 +3039,6 @@ window.esdocSearchIndex = [
     "coral-spectrum/coral-component-card/src/scripts/cardasset.js",
     "file/coral-spectrum/coral-component-card/src/scripts/CardAsset.js.html",
     "coral-spectrum/coral-component-card/src/scripts/CardAsset.js",
-    "file"
-  ],
-  [
-    "coral-spectrum/coral-component-card/src/scripts/cardbanner.js",
-    "file/coral-spectrum/coral-component-card/src/scripts/CardBanner.js.html",
-    "coral-spectrum/coral-component-card/src/scripts/CardBanner.js",
-    "file"
-  ],
-  [
-    "coral-spectrum/coral-component-card/src/scripts/cardbanner.js~cardbanner#content",
-    "class/coral-spectrum/coral-component-card/src/scripts/CardBanner.js~CardBanner.html#instance-member-content",
-    "coral-spectrum/coral-component-card/src/scripts/CardBanner.js~CardBanner#content",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-card/src/scripts/cardbanner.js~cardbanner#header",
-    "class/coral-spectrum/coral-component-card/src/scripts/CardBanner.js~CardBanner.html#instance-member-header",
-    "coral-spectrum/coral-component-card/src/scripts/CardBanner.js~CardBanner#header",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-card/src/scripts/cardbanner.js~cardbanner#variant",
-    "class/coral-spectrum/coral-component-card/src/scripts/CardBanner.js~CardBanner.html#instance-member-variant",
-    "coral-spectrum/coral-component-card/src/scripts/CardBanner.js~CardBanner#variant",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-card/src/scripts/cardbanner.js~cardbanner.variant",
-    "class/coral-spectrum/coral-component-card/src/scripts/CardBanner.js~CardBanner.html#static-member-variant",
-    "coral-spectrum/coral-component-card/src/scripts/CardBanner.js~CardBanner.variant",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-card/src/scripts/cardbanner.js~cardbannervariantenum",
-    "typedef/index.html#static-typedef-CardBannerVariantEnum",
-    "coral-spectrum/coral-component-card/src/scripts/CardBanner.js~CardBannerVariantEnum",
-    "typedef"
-  ],
-  [
-    "coral-spectrum/coral-component-card/src/scripts/cardbannercontent.js",
-    "file/coral-spectrum/coral-component-card/src/scripts/CardBannerContent.js.html",
-    "coral-spectrum/coral-component-card/src/scripts/CardBannerContent.js",
-    "file"
-  ],
-  [
-    "coral-spectrum/coral-component-card/src/scripts/cardbannerheader.js",
-    "file/coral-spectrum/coral-component-card/src/scripts/CardBannerHeader.js.html",
-    "coral-spectrum/coral-component-card/src/scripts/CardBannerHeader.js",
     "file"
   ],
   [

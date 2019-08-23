@@ -4246,7 +4246,7 @@
 
   var FOCUSABLE_ELEMENTS = ['input:not([disabled])', 'select:not([disabled])', 'textarea:not([disabled])', 'button:not([disabled])', 'a[href]', 'area[href]', 'summary', 'iframe', 'object', 'embed', 'audio[controls]', 'video[controls]', '[contenteditable]']; // To support Coral.commons.ready and differentiate lightweight tags from defined elements
 
-  var CORAL_COMPONENTS = ['coral-accordion', 'coral-accordion-item', 'coral-accordion-item-content', 'coral-actionbar', 'coral-actionbar-container', 'coral-actionbar-item', 'coral-actionbar-primary', 'coral-actionbar-secondary', 'coral-alert', 'coral-alert-header', 'coral-alert-content', 'coral-alert-footer', 'a[is="coral-anchorbutton"]', 'coral-autocomplete', 'coral-autocomplete-item', 'coral-autocomplete-item', 'button[is="coral-button"]', 'coral-buttongroup', 'coral-calendar', 'coral-card', 'coral-card-content', 'coral-card-banner', 'coral-card-banner-content', 'coral-card-banner-header', 'coral-card-context', 'coral-card-description', 'coral-card-property', 'coral-card-propertylist', 'coral-card-subtitle', 'coral-card-title', 'coral-charactercount', 'coral-checkbox', 'coral-clock', 'coral-coachmark', 'coral-colorinput', 'coral-colorinput-colorproperties', 'coral-colorinput-item', 'coral-colorinput-slider', 'coral-colorinput-swatch', 'coral-colorinput-swatches', 'coral-columnview', 'coral-columnview-column', 'coral-columnview-column-content', 'coral-columnview-item', 'coral-columnview-item-content', 'coral-columnview-item-thumbnail', 'coral-columnview-preview', 'coral-columnview-preview-content', 'coral-cyclebutton', 'coral-cyclebutton-action', 'coral-cyclebutton-item', 'coral-datepicker', 'coral-dialog', 'coral-dialog-header', 'coral-dialog-content', 'coral-dialog-footer', 'coral-drawer', 'coral-fileupload', 'coral-icon', 'coral-list', 'coral-selectlist', 'coral-buttonlist', 'coral-anchorlist', 'coral-list-item', 'coral-list-item-content', 'coral-selectlist-item', 'coral-selectlist-group', 'a[is="coral-anchorlist-item"]', 'button[is="coral-buttonlist-item"]', 'coral-masonry', 'coral-masonry-item', 'coral-multifield', 'coral-multifield-item', 'coral-numberinput', 'coral-overlay', 'coral-panel', 'coral-panelstack', 'coral-playground', 'coral-popover', 'coral-progress', 'coral-quickactions', 'coral-radio', 'coral-search', 'coral-select', 'coral-select-item', 'coral-shell', 'coral-shell-header', 'coral-shell-help', 'a[is="coral-shell-homeanchor"]', 'a[is="coral-shell-help-item"]', 'a[is="coral-shell-workspace"]', 'a[is="coral-shell-solution"]', 'coral-shell-menu', 'coral-shell-menubar', 'coral-shell-menubar-item', 'coral-shell-organization', 'coral-shell-orgswitcher', 'coral-shell-solution', 'coral-shell-solutions', 'coral-shell-solutionswitcher', 'coral-shell-suborganization', 'coral-shell-user', 'coral-shell-workspaces', 'coral-slider', 'coral-slider-item', 'coral-rangedslider', 'coral-splitbutton', 'coral-status', 'coral-step', 'coral-steplist', 'coral-step-label', 'coral-switch', 'table[is="coral-table"]', 'thead[is="coral-table-head"]', 'tbody[is="coral-table-body"]', 'tfoot[is="coral-table-foot"]', 'tr[is="coral-table-row"]', 'td[is="coral-table-cell"]', 'th[is="coral-table-headercell"]', 'col[is="coral-table-column"]', 'coral-tab', 'coral-tab-label', 'coral-tablist', 'coral-tabview', 'coral-taglist', 'coral-tag', 'textarea[is="coral-textarea"]', 'input[is="coral-textfield"]', 'coral-toast', 'coral-toast-content', 'coral-tooltip', 'coral-tooltip-content', 'coral-tree', 'coral-tree-item', 'coral-wait', 'coral-wizardview'];
+  var CORAL_COMPONENTS = ['coral-accordion', 'coral-accordion-item', 'coral-accordion-item-content', 'coral-actionbar', 'coral-actionbar-container', 'coral-actionbar-item', 'coral-actionbar-primary', 'coral-actionbar-secondary', 'coral-alert', 'coral-alert-header', 'coral-alert-content', 'coral-alert-footer', 'a[is="coral-anchorbutton"]', 'coral-autocomplete', 'coral-autocomplete-item', 'coral-autocomplete-item', 'coral-banner', 'coral-banner-content', 'coral-banner-header', 'button[is="coral-button"]', 'coral-buttongroup', 'coral-calendar', 'coral-card', 'coral-card-content', 'coral-card-context', 'coral-card-description', 'coral-card-property', 'coral-card-propertylist', 'coral-card-subtitle', 'coral-card-title', 'coral-charactercount', 'coral-checkbox', 'coral-clock', 'coral-coachmark', 'coral-colorinput', 'coral-colorinput-colorproperties', 'coral-colorinput-item', 'coral-colorinput-slider', 'coral-colorinput-swatch', 'coral-colorinput-swatches', 'coral-columnview', 'coral-columnview-column', 'coral-columnview-column-content', 'coral-columnview-item', 'coral-columnview-item-content', 'coral-columnview-item-thumbnail', 'coral-columnview-preview', 'coral-columnview-preview-content', 'coral-cyclebutton', 'coral-cyclebutton-action', 'coral-cyclebutton-item', 'coral-datepicker', 'coral-dialog', 'coral-dialog-header', 'coral-dialog-content', 'coral-dialog-footer', 'coral-drawer', 'coral-fileupload', 'coral-icon', 'coral-list', 'coral-selectlist', 'coral-buttonlist', 'coral-anchorlist', 'coral-list-item', 'coral-list-item-content', 'coral-selectlist-item', 'coral-selectlist-group', 'a[is="coral-anchorlist-item"]', 'button[is="coral-buttonlist-item"]', 'coral-masonry', 'coral-masonry-item', 'coral-multifield', 'coral-multifield-item', 'coral-numberinput', 'coral-overlay', 'coral-panel', 'coral-panelstack', 'coral-playground', 'coral-popover', 'coral-progress', 'coral-quickactions', 'coral-radio', 'coral-search', 'coral-select', 'coral-select-item', 'coral-shell', 'coral-shell-header', 'coral-shell-help', 'a[is="coral-shell-homeanchor"]', 'a[is="coral-shell-help-item"]', 'a[is="coral-shell-workspace"]', 'a[is="coral-shell-solution"]', 'coral-shell-menu', 'coral-shell-menubar', 'coral-shell-menubar-item', 'coral-shell-organization', 'coral-shell-orgswitcher', 'coral-shell-solution', 'coral-shell-solutions', 'coral-shell-solutionswitcher', 'coral-shell-suborganization', 'coral-shell-user', 'coral-shell-workspaces', 'coral-slider', 'coral-slider-item', 'coral-rangedslider', 'coral-splitbutton', 'coral-status', 'coral-step', 'coral-steplist', 'coral-step-label', 'coral-switch', 'table[is="coral-table"]', 'thead[is="coral-table-head"]', 'tbody[is="coral-table-body"]', 'tfoot[is="coral-table-foot"]', 'tr[is="coral-table-row"]', 'td[is="coral-table-cell"]', 'th[is="coral-table-headercell"]', 'col[is="coral-table-column"]', 'coral-tab', 'coral-tab-label', 'coral-tablist', 'coral-tabview', 'coral-taglist', 'coral-tag', 'textarea[is="coral-textarea"]', 'input[is="coral-textfield"]', 'coral-toast', 'coral-toast-content', 'coral-tooltip', 'coral-tooltip-content', 'coral-tree', 'coral-tree-item', 'coral-wait', 'coral-wizardview'];
   /**
    Converts CSS time to milliseconds. It supports both s and ms units. If the provided value has an unrecogenized unit,
    zero will be returned.
@@ -14750,33 +14750,37 @@
       set: function set(value) {
         var _this2 = this;
 
-        this._icon = transform.string(value).trim();
+        var icon = transform.string(value).trim(); // Avoid rendering the same icon
 
-        this._reflectAttribute('icon', this._icon); // Remove image and SVG elements
+        if (icon !== this._icon || this.hasAttribute('_context')) {
+          this._icon = transform.string(value).trim();
+
+          this._reflectAttribute('icon', this._icon); // Remove image and SVG elements
 
 
-        ['image', 'svg'].forEach(function (type) {
-          var el = _this2._elements[type] || _this2.querySelector(".".concat(CLASSNAME$1, "--").concat(type));
+          ['image', 'svg'].forEach(function (type) {
+            var el = _this2._elements[type] || _this2.querySelector(".".concat(CLASSNAME$1, "--").concat(type));
 
-          if (el) {
-            el.remove();
+            if (el) {
+              el.remove();
+            }
+          }); // Sets the desired icon
+
+          if (this._icon) {
+            // Detect if it's a URL
+            if (this._icon.match(URL_REGEX)) {
+              // Create an image and add it to the icon
+              this._elements.image = this._elements.image || document.createElement('img');
+              this._elements.image.className = "".concat(CLASSNAME$1, " ").concat(CLASSNAME$1, "--image");
+              this._elements.image.src = this.icon;
+              this.appendChild(this._elements.image);
+            } else {
+              this._updateIcon();
+            }
           }
-        }); // Sets the desired icon
 
-        if (this._icon) {
-          // Detect if it's a URL
-          if (this._icon.match(URL_REGEX)) {
-            // Create an image and add it to the icon
-            this._elements.image = this._elements.image || document.createElement('img');
-            this._elements.image.className = "".concat(CLASSNAME$1, " ").concat(CLASSNAME$1, "--image");
-            this._elements.image.src = this.icon;
-            this.appendChild(this._elements.image);
-          } else {
-            this._updateIcon();
-          }
+          this._updateAltText();
         }
-
-        this._updateAltText();
       }
       /**
        Size of the icon. It accepts both lower and upper case sizes. See {@link IconSizeEnum}.
@@ -22629,7 +22633,7 @@
           focusedItem = focusedItem.parentNode;
         }
 
-        var ERROR_MARGIN = 70;
+        var ERROR_MARGIN = 78;
         var leftItems = this.primary.items.getAll();
         var rightItems = this.secondary.items.getAll().reverse();
         var itemLeft = null;
@@ -31298,6 +31302,297 @@
   window.customElements.define('coral-autocomplete', Autocomplete);
   Autocomplete.Item = AutocompleteItem;
 
+  var CLASSNAME$C = '_coral-Banner';
+  /**
+   Enumeration for {@link Banner} variants.
+   
+   @typedef {Object} BannerVariantEnum
+   
+   @property {String} ERROR
+   A banner to indicate that an error has occurred.
+   @property {String} WARNING
+   A banner to warn the user of something important.
+   @property {String} INFO
+   A banner to inform the user of non-critical information.
+   */
+
+  var variant$8 = {
+    ERROR: 'error',
+    WARNING: 'warning',
+    INFO: 'info'
+  }; // An array of all possible variant classnames
+
+  var ALL_VARIANT_CLASSES$5 = [];
+
+  for (var variantValue$4 in variant$8) {
+    ALL_VARIANT_CLASSES$5.push("".concat(CLASSNAME$C, "--").concat(variant$8[variantValue$4]));
+  }
+  /**
+   @class Coral.Banner
+   @classdesc A Banner component
+   @htmltag coral-banner
+   @extends {HTMLElement}
+   @extends {BaseComponent}
+   */
+
+
+  var Banner =
+  /*#__PURE__*/
+  function (_BaseComponent) {
+    _inherits(Banner, _BaseComponent);
+
+    /** @ignore */
+    function Banner() {
+      var _this;
+
+      _classCallCheck(this, Banner);
+
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(Banner).call(this)); // Fetch content zones
+
+      _this._elements = {
+        header: _this.querySelector('coral-banner-header') || document.createElement('coral-banner-header'),
+        content: _this.querySelector('coral-banner-content') || document.createElement('coral-banner-content')
+      };
+      return _this;
+    }
+    /**
+     The banner variant style to use. See {@link BannerVariantEnum}.
+     
+     @type {String}
+     @default BannerVariantEnum.INFO
+     @htmlattribute variant
+     @htmlattributereflected
+     */
+
+
+    _createClass(Banner, [{
+      key: "connectedCallback",
+
+      /** @ignore */
+      value: function connectedCallback() {
+        _get(_getPrototypeOf(Banner.prototype), "connectedCallback", this).call(this);
+
+        this.classList.add(CLASSNAME$C); // Default reflected attributes
+
+        if (!this._variant) {
+          this.variant = variant$8.INFO;
+        }
+
+        var header = this._elements.header;
+        var content = this._elements.content; // When the content zone was not created, we need to make sure that everything is added inside it as a content.
+
+        if (!content.parentNode) {
+          while (this.firstChild) {
+            var child = this.firstChild; // Don't move header into content
+
+            if (child === header) {
+              child.remove();
+            } else {
+              content.appendChild(this.firstChild);
+            }
+          }
+        } // Assign content zones
+
+
+        this.header = this._elements.header;
+        this.content = this._elements.content;
+      }
+    }, {
+      key: "variant",
+      get: function get() {
+        return this._variant || variant$8.INFO;
+      },
+      set: function set(value) {
+        var _this$classList;
+
+        value = transform.string(value).toLowerCase();
+        this._variant = validate.enumeration(variant$8)(value) && value || variant$8.INFO;
+
+        this._reflectAttribute('variant', this._variant); // Remove all variant classes
+
+
+        (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$5); // Set new variant class
+
+
+        this.classList.add("".concat(CLASSNAME$C, "--").concat(this._variant)); // Set the role attribute depending on the variant so that the element turns into a live region
+
+        this.setAttribute('role', this._variant);
+      }
+      /**
+       The banner's header.
+       
+       @type {BannerHeader}
+       @contentzone
+       */
+
+    }, {
+      key: "header",
+      get: function get() {
+        return this._getContentZone(this._elements.header);
+      },
+      set: function set(value) {
+        this._setContentZone('header', value, {
+          handle: 'header',
+          tagName: 'coral-banner-header',
+          insert: function insert(header) {
+            this.insertBefore(header, this.firstChild);
+          }
+        });
+      }
+      /**
+       The banner's content.
+       
+       @type {BannerContent}
+       @contentzone
+       */
+
+    }, {
+      key: "content",
+      get: function get() {
+        return this._getContentZone(this._elements.content);
+      },
+      set: function set(value) {
+        this._setContentZone('content', value, {
+          handle: 'content',
+          tagName: 'coral-banner-content',
+          insert: function insert(content) {
+            this.appendChild(content);
+          }
+        });
+      }
+    }, {
+      key: "_contentZones",
+      get: function get() {
+        return {
+          'coral-banner-header': 'header',
+          'coral-banner-content': 'content'
+        };
+      }
+      /**
+       Returns {@link Banner} variants.
+       
+       @return {BannerVariantEnum}
+       */
+
+    }], [{
+      key: "variant",
+      get: function get() {
+        return variant$8;
+      }
+      /** @ignore */
+
+    }, {
+      key: "observedAttributes",
+      get: function get() {
+        return ['variant'];
+      }
+    }]);
+
+    return Banner;
+  }(BaseComponent(HTMLElement));
+
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+  var CLASSNAME$D = '_coral-Banner-header';
+  /**
+   @class Coral.Banner.Header
+   @classdesc A Banner Header component
+   @htmltag coral-banner-header
+   @extends {HTMLElement}
+   */
+
+  var BannerHeader =
+  /*#__PURE__*/
+  function (_HTMLElement) {
+    _inherits(BannerHeader, _HTMLElement);
+
+    function BannerHeader() {
+      _classCallCheck(this, BannerHeader);
+
+      return _possibleConstructorReturn(this, _getPrototypeOf(BannerHeader).apply(this, arguments));
+    }
+
+    _createClass(BannerHeader, [{
+      key: "connectedCallback",
+
+      /** @ignore */
+      value: function connectedCallback() {
+        this.classList.add(CLASSNAME$D);
+      }
+    }]);
+
+    return BannerHeader;
+  }(_wrapNativeSuper(HTMLElement));
+
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+  var CLASSNAME$E = '_coral-Banner-content';
+  /**
+   @class Coral.Banner.Content
+   @classdesc A Banner Content component
+   @htmltag coral-banner-content
+   @extends {HTMLElement}
+   */
+
+  var BannerContent =
+  /*#__PURE__*/
+  function (_HTMLElement) {
+    _inherits(BannerContent, _HTMLElement);
+
+    function BannerContent() {
+      _classCallCheck(this, BannerContent);
+
+      return _possibleConstructorReturn(this, _getPrototypeOf(BannerContent).apply(this, arguments));
+    }
+
+    _createClass(BannerContent, [{
+      key: "connectedCallback",
+
+      /** @ignore */
+      value: function connectedCallback() {
+        this.classList.add(CLASSNAME$E);
+      }
+    }]);
+
+    return BannerContent;
+  }(_wrapNativeSuper(HTMLElement));
+
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+
+  window.customElements.define('coral-banner', Banner);
+  window.customElements.define('coral-banner-header', BannerHeader);
+  window.customElements.define('coral-banner-content', BannerContent);
+  Banner.Header = BannerHeader;
+  Banner.Content = BannerContent;
+
   var template$d = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["nativeSelect"] = document.createElement("select");
@@ -31345,7 +31640,7 @@
     return attr !== null ? attr : item.textContent.replace(/\s{2,}/g, ' ').trim();
   };
 
-  var CLASSNAME$C = '_coral-ButtonGroup';
+  var CLASSNAME$F = '_coral-ButtonGroup';
   /**
    @class Coral.ButtonGroup
    @classdesc A ButtonGroup component that can be used as a selection form field.
@@ -31939,7 +32234,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ButtonGroup.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$C); // Default reflected attributes
+        this.classList.add(CLASSNAME$F); // Default reflected attributes
 
         if (!this._selectionMode) {
           this.selectionMode = selectionMode.NONE;
@@ -32838,7 +33133,7 @@
     WEEK: 'week',
     DAY: 'day'
   };
-  var CLASSNAME$D = '_coral-Calendar';
+  var CLASSNAME$G = '_coral-Calendar';
   /**
    @class Coral.Calendar
    @classdesc A Calendar component that can be used as a date selection form field. Leverages {@link momentJS} if loaded
@@ -33524,7 +33819,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(Calendar.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$D);
+        this.classList.add(CLASSNAME$G);
         this.setAttribute('role', 'region'); // Default reflected attribute
 
         if (!this._valueFormat) {
@@ -33877,7 +34172,7 @@
    Card variant where only the asset is shown.
    */
 
-  var variant$8 = {
+  var variant$9 = {
     DEFAULT: 'default',
     QUIET: 'quiet',
     CONDENSED: 'condensed',
@@ -33885,13 +34180,13 @@
     ASSET: 'asset'
   }; // the card's base classname
 
-  var CLASSNAME$E = '_coral-Card'; // builds a string containing all possible variant classnames. this will be used to remove classnames when the variant
+  var CLASSNAME$H = '_coral-Card'; // builds a string containing all possible variant classnames. this will be used to remove classnames when the variant
   // changes
 
-  var ALL_VARIANT_CLASSES$5 = [];
+  var ALL_VARIANT_CLASSES$6 = [];
 
-  for (var variantValue$4 in variant$8) {
-    ALL_VARIANT_CLASSES$5.push("".concat(CLASSNAME$E, "--").concat(variant$8[variantValue$4]));
+  for (var variantValue$5 in variant$9) {
+    ALL_VARIANT_CLASSES$6.push("".concat(CLASSNAME$H, "--").concat(variant$9[variantValue$5]));
   }
   /**
    @class Coral.Card
@@ -33917,25 +34212,12 @@
 
       _this._elements = {
         // Fetch or create the content zone elements
-        banner: _this.querySelector('coral-card-banner') || document.createElement('coral-card-banner'),
         asset: _this.querySelector('coral-card-asset') || document.createElement('coral-card-asset'),
         content: _this.querySelector('coral-card-content') || document.createElement('coral-card-content'),
         info: _this.querySelector('coral-card-info') || document.createElement('coral-card-info'),
         overlay: _this.querySelector('coral-card-overlay') || document.createElement('coral-card-overlay')
       };
-      template$h.call(_this._elements); // Check if the banner is empty whenever we get a mutation
-
-      _this._observer = new MutationObserver(_this._hideBannerIfEmpty.bind(_assertThisInitialized(_this))); // Watch for changes to the banner element's children
-
-      _this._observer.observe(_this._elements.banner, {
-        // Catch changes to childList
-        childList: true,
-        // Catch changes to textContent
-        characterData: true,
-        // Monitor any child node
-        subtree: true
-      }); // Events
-
+      template$h.call(_this._elements); // Events
 
       _this._delegateEvents({
         'capture:load coral-card-asset img': '_onLoad'
@@ -33964,26 +34246,6 @@
 
         event.target.classList.remove('is-loading');
       }
-      /**
-       Hide the banner if it's empty
-       @ignore
-       */
-
-    }, {
-      key: "_hideBannerIfEmpty",
-      value: function _hideBannerIfEmpty() {
-        var banner = this._elements.banner;
-        var bannerHeader = banner._elements.header;
-        var bannerContent = banner._elements.content; // If it's empty and has no non-textnode children, hide the label
-
-        var headerHiddenValue = bannerHeader.children.length === 0 && bannerHeader.textContent.replace(/\s*/g, '') === '';
-        var contentHiddenValue = bannerContent.children.length === 0 && bannerContent.textContent.replace(/\s*/g, '') === '';
-        var hiddenValue = headerHiddenValue && contentHiddenValue; // Only bother if the hidden status has changed
-
-        if (hiddenValue !== this._elements.banner.hidden) {
-          this._elements.banner.hidden = hiddenValue;
-        }
-      }
     }, {
       key: "connectedCallback",
 
@@ -33991,10 +34253,10 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(Card.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$E); // Default reflected attributes
+        this.classList.add(CLASSNAME$H); // Default reflected attributes
 
         if (!this._variant) {
-          this.variant = variant$8.DEFAULT;
+          this.variant = variant$9.DEFAULT;
         }
 
         var content = this._elements.content;
@@ -34036,12 +34298,11 @@
         this.overlay = this._elements.overlay;
         this.content = content;
         this.info = this._elements.info;
-        this.banner = this._elements.banner;
         this.appendChild(this._elements.wrapper); // The 'asset' setter knows to insert the element just before the wrapper node.
 
         this.asset = asset; // In case a lot of alerts are added, they will not overflow the card
 
-        this.classList.toggle("".concat(CLASSNAME$E, "--scroll"), this.info.scrollHeight > this.clientHeight);
+        this.classList.toggle("".concat(CLASSNAME$H, "--scroll"), this.info.scrollHeight > this.clientHeight);
       }
     }, {
       key: "asset",
@@ -34092,7 +34353,7 @@
               // 32 = $card-asset-lowResolution-padding * 2
               _this2._elements.asset.style.height = "".concat(_this2._assetHeight + 32, "px");
             } // for non-low resolution images, condensed and inverted cards do not require the height to be set
-            else if (_this2.variant !== variant$8.CONDENSED && _this2.variant !== variant$8.INVERTED) {
+            else if (_this2.variant !== variant$9.CONDENSED && _this2.variant !== variant$9.INVERTED) {
                 _this2._elements.asset.style.height = "".concat(ratio * _this2._assetHeight, "px");
               }
           }
@@ -34160,28 +34421,6 @@
         });
       }
       /**
-       The Banner of the card.
-       
-       @type {CardBanner}
-       @contentzone
-       */
-
-    }, {
-      key: "banner",
-      get: function get() {
-        return this._getContentZone(this._elements.banner);
-      },
-      set: function set(value) {
-        this._setContentZone('banner', value, {
-          handle: 'banner',
-          tagName: 'coral-card-banner',
-          insert: function insert(content) {
-            content.classList.add('_coral-Banner--corner');
-            this.appendChild(content);
-          }
-        });
-      }
-      /**
        The information area of the card, which is placed over all the content. It is typically used for alerts.
        
        @type {CardInfo}
@@ -34222,7 +34461,7 @@
 
         this._reflectAttribute('fixedwidth', this._fixedWidth);
 
-        this.classList.toggle("".concat(CLASSNAME$E, "--fixedWidth"), this._fixedWidth);
+        this.classList.toggle("".concat(CLASSNAME$H, "--fixedWidth"), this._fixedWidth);
       }
       /**
        The Overlay of the card.
@@ -34264,7 +34503,7 @@
 
         this._reflectAttribute('stacked', this._stacked);
 
-        this.classList.toggle("".concat(CLASSNAME$E, "--stacked"), this._stacked);
+        this.classList.toggle("".concat(CLASSNAME$H, "--stacked"), this._stacked);
       }
       /**
        The card's variant. It determines which sections of the Card and in which position they are shown.
@@ -34278,20 +34517,20 @@
     }, {
       key: "variant",
       get: function get() {
-        return this._variant || variant$8.DEFAULT;
+        return this._variant || variant$9.DEFAULT;
       },
       set: function set(value) {
         var _this$classList;
 
         value = transform.string(value).toLowerCase();
-        this._variant = validate.enumeration(variant$8)(value) && value || variant$8.DEFAULT;
+        this._variant = validate.enumeration(variant$9)(value) && value || variant$9.DEFAULT;
 
         this._reflectAttribute('variant', this._variant);
 
-        (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$5);
+        (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$6);
 
-        if (this._variant !== variant$8.DEFAULT) {
-          this.classList.add("".concat(CLASSNAME$E, "--").concat(this._variant));
+        if (this._variant !== variant$9.DEFAULT) {
+          this.classList.add("".concat(CLASSNAME$H, "--").concat(this._variant));
         }
 
         this.assetHeight = this.assetHeight;
@@ -34300,7 +34539,6 @@
       key: "_contentZones",
       get: function get() {
         return {
-          'coral-card-banner': 'banner',
           'coral-card-asset': 'asset',
           'coral-card-content': 'content',
           'coral-card-info': 'info',
@@ -34316,7 +34554,7 @@
     }], [{
       key: "variant",
       get: function get() {
-        return variant$8;
+        return variant$9;
       }
       /** @ignore */
 
@@ -34329,279 +34567,6 @@
 
     return Card;
   }(BaseComponent(HTMLElement));
-
-  var CLASSNAME$F = '_coral-Banner';
-  /**
-   Enumeration for {@link CardBanner} variants.
-   
-   @typedef {Object} CardBannerVariantEnum
-   
-   @property {String} ERROR
-   A card banner to indicate that an error has occurred.
-   @property {String} WARNING
-   A card banner to warn the user of something important.
-   @property {String} INFO
-   A card banner to inform the user of non-critical information.
-   */
-
-  var variant$9 = {
-    ERROR: 'error',
-    WARNING: 'warning',
-    INFO: 'info'
-  }; // An array of all possible variant classnames
-
-  var ALL_VARIANT_CLASSES$6 = [];
-
-  for (var variantValue$5 in variant$9) {
-    ALL_VARIANT_CLASSES$6.push("".concat(CLASSNAME$F, "--").concat(variant$9[variantValue$5]));
-  }
-  /**
-   @class Coral.Card.Banner
-   @classdesc A Card Banner component
-   @htmltag coral-card-banner
-   @extends {HTMLElement}
-   @extends {BaseComponent}
-   */
-
-
-  var CardBanner =
-  /*#__PURE__*/
-  function (_BaseComponent) {
-    _inherits(CardBanner, _BaseComponent);
-
-    /** @ignore */
-    function CardBanner() {
-      var _this;
-
-      _classCallCheck(this, CardBanner);
-
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(CardBanner).call(this)); // Fetch content zones
-
-      _this._elements = {
-        header: _this.querySelector('coral-card-banner-header') || document.createElement('coral-card-banner-header'),
-        content: _this.querySelector('coral-card-banner-content') || document.createElement('coral-card-banner-content')
-      };
-      return _this;
-    }
-    /**
-     The banner variant style to use. See {@link CardBannerVariantEnum}.
-     
-     @type {String}
-     @default CardBannerVariantEnum.INFO
-     @htmlattribute variant
-     @htmlattributereflected
-     */
-
-
-    _createClass(CardBanner, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(CardBanner.prototype), "connectedCallback", this).call(this);
-
-        this.classList.add(CLASSNAME$F); // Default reflected attributes
-
-        if (!this._variant) {
-          this.variant = variant$9.INFO;
-        }
-
-        var header = this._elements.header;
-        var content = this._elements.content; // When the content zone was not created, we need to make sure that everything is added inside it as a content.
-
-        if (!content.parentNode) {
-          while (this.firstChild) {
-            var child = this.firstChild; // Don't move header into content
-
-            if (child === header) {
-              child.remove();
-            } else {
-              content.appendChild(this.firstChild);
-            }
-          }
-        } // Assign content zones
-
-
-        this.header = this._elements.header;
-        this.content = this._elements.content;
-      }
-    }, {
-      key: "variant",
-      get: function get() {
-        return this._variant || variant$9.INFO;
-      },
-      set: function set(value) {
-        var _this$classList;
-
-        value = transform.string(value).toLowerCase();
-        this._variant = validate.enumeration(variant$9)(value) && value || variant$9.INFO;
-
-        this._reflectAttribute('variant', this._variant); // Remove all variant classes
-
-
-        (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$6); // Set new variant class
-
-
-        this.classList.add("".concat(CLASSNAME$F, "--").concat(this._variant)); // Set the role attribute depending on the variant so that the element turns into a live region
-
-        this.setAttribute('role', this._variant);
-      }
-      /**
-       The banner's header.
-       
-       @type {CardBannerHeader}
-       @contentzone
-       */
-
-    }, {
-      key: "header",
-      get: function get() {
-        return this._getContentZone(this._elements.header);
-      },
-      set: function set(value) {
-        this._setContentZone('header', value, {
-          handle: 'header',
-          tagName: 'coral-card-banner-header',
-          insert: function insert(header) {
-            this.insertBefore(header, this.firstChild);
-          }
-        });
-      }
-      /**
-       The banner's content.
-       
-       @type {CardBannerContent}
-       @contentzone
-       */
-
-    }, {
-      key: "content",
-      get: function get() {
-        return this._getContentZone(this._elements.content);
-      },
-      set: function set(value) {
-        this._setContentZone('content', value, {
-          handle: 'content',
-          tagName: 'coral-card-banner-content',
-          insert: function insert(content) {
-            this.appendChild(content);
-          }
-        });
-      }
-    }, {
-      key: "_contentZones",
-      get: function get() {
-        return {
-          'coral-card-banner-header': 'header',
-          'coral-card-banner-content': 'content'
-        };
-      }
-      /**
-       Returns {@link CardBanner} variants.
-       
-       @return {CardBannerVariantEnum}
-       */
-
-    }], [{
-      key: "variant",
-      get: function get() {
-        return variant$9;
-      }
-      /** @ignore */
-
-    }, {
-      key: "observedAttributes",
-      get: function get() {
-        return ['variant'];
-      }
-    }]);
-
-    return CardBanner;
-  }(BaseComponent(HTMLElement));
-
-  /**
-   * Copyright 2019 Adobe. All rights reserved.
-   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
-   * you may not use this file except in compliance with the License. You may obtain a copy
-   * of the License at http://www.apache.org/licenses/LICENSE-2.0
-   *
-   * Unless required by applicable law or agreed to in writing, software distributed under
-   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
-   * OF ANY KIND, either express or implied. See the License for the specific language
-   * governing permissions and limitations under the License.
-   */
-  var CLASSNAME$G = '_coral-Banner-header';
-  /**
-   @class Coral.Card.Banner.Header
-   @classdesc A Card Banner Header component
-   @htmltag coral-card-banner-header
-   @extends {HTMLElement}
-   */
-
-  var CardBannerHeader =
-  /*#__PURE__*/
-  function (_HTMLElement) {
-    _inherits(CardBannerHeader, _HTMLElement);
-
-    function CardBannerHeader() {
-      _classCallCheck(this, CardBannerHeader);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(CardBannerHeader).apply(this, arguments));
-    }
-
-    _createClass(CardBannerHeader, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        this.classList.add(CLASSNAME$G);
-      }
-    }]);
-
-    return CardBannerHeader;
-  }(_wrapNativeSuper(HTMLElement));
-
-  /**
-   * Copyright 2019 Adobe. All rights reserved.
-   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
-   * you may not use this file except in compliance with the License. You may obtain a copy
-   * of the License at http://www.apache.org/licenses/LICENSE-2.0
-   *
-   * Unless required by applicable law or agreed to in writing, software distributed under
-   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
-   * OF ANY KIND, either express or implied. See the License for the specific language
-   * governing permissions and limitations under the License.
-   */
-  var CLASSNAME$H = '_coral-Banner-content';
-  /**
-   @class Coral.Card.Banner.Content
-   @classdesc A Card Banner Content component
-   @htmltag coral-card-banner-content
-   @extends {HTMLElement}
-   */
-
-  var CardBannerContent =
-  /*#__PURE__*/
-  function (_HTMLElement) {
-    _inherits(CardBannerContent, _HTMLElement);
-
-    function CardBannerContent() {
-      _classCallCheck(this, CardBannerContent);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(CardBannerContent).apply(this, arguments));
-    }
-
-    _createClass(CardBannerContent, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        this.classList.add(CLASSNAME$H);
-      }
-    }]);
-
-    return CardBannerContent;
-  }(_wrapNativeSuper(HTMLElement));
 
   var template$i = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
@@ -35135,18 +35100,12 @@
 
   window.customElements.define('coral-card', Card);
   window.customElements.define('coral-card-content', CardContent);
-  window.customElements.define('coral-card-banner', CardBanner);
-  window.customElements.define('coral-card-banner-header', CardBannerHeader);
-  window.customElements.define('coral-card-banner-content', CardBannerContent);
   window.customElements.define('coral-card-property', CardProperty);
   window.customElements.define('coral-card-propertylist', CardPropertyList);
   window.customElements.define('coral-card-title', CardTitle);
   window.customElements.define('coral-card-subtitle', CardSubtitle);
   window.customElements.define('coral-card-context', CardContext);
   window.customElements.define('coral-card-description', CardDescription);
-  Card.Banner = CardBanner;
-  Card.Banner.Header = CardBannerHeader;
-  Card.Banner.Content = CardBannerContent;
   Card.Property = CardProperty;
   Card.Property.Content = CardPropertyContent;
   Card.Title = CardTitle;
@@ -55097,12 +55056,35 @@
   var flagTouchStart = false;
   var flagStepButtonClick = false;
 
-  function handleDecimalOperation(operator, value1, value2) {
-    var result = operator === '+' ? value1 + value2 : value1 - value2; // Check if we have decimals
+  var exponentialToDecimalString = function exponentialToDecimalString(value) {
+    var notation = value.toString();
+
+    if (notation.indexOf('e') !== -1) {
+      var negative = notation.indexOf('-') === 0;
+      var exponent = parseInt(notation.split('-')[negative ? 2 : 1], 10);
+      return value.toFixed(exponent).toString();
+    }
+
+    return value.toString();
+  };
+
+  var handleDecimalOperation = function handleDecimalOperation(operator, value1, value2) {
+    var result;
+
+    var operation = function operation(operator, value1, value2) {
+      if (operator === '+') {
+        return value1 + value2;
+      } else if (operator === '-') {
+        return value1 - value2;
+      } else if (operator === '%') {
+        return value1 % value2;
+      }
+    }; // Check if we have decimals
+
 
     if (value1 % 1 !== 0 || value2 % 1 !== 0) {
-      var value1Decimal = value1.toString().split('.');
-      var value2Decimal = value2.toString().split('.');
+      var value1Decimal = exponentialToDecimalString(value1).split('.');
+      var value2Decimal = exponentialToDecimalString(value2).split('.');
       var value1DecimalLength = value1Decimal[1] && value1Decimal[1].length || 0;
       var value2DecimalLength = value2Decimal[1] && value2Decimal[1].length || 0;
       var multiplier = Math.pow(10, Math.max(value1DecimalLength, value2DecimalLength)); // Transform the decimals to integers based on the multiplier
@@ -55110,13 +55092,15 @@
       value1 = Math.round(value1 * multiplier);
       value2 = Math.round(value2 * multiplier); // Perform the operation on integers values to make sure we don't get a fancy decimal value
 
-      result = operator === '+' ? value1 + value2 : value1 - value2; // Transform the integer result back to decimal
+      result = operation(operator, value1, value2); // Transform the integer result back to decimal
 
       result /= multiplier;
+    } else {
+      result = operation(operator, value1, value2);
     }
 
     return result;
-  }
+  };
   /**
    @class Coral.NumberInput
    @classdesc A NumberInput component is a numeric control form field. It follows the ARIA specification for spinbutton.
@@ -55257,7 +55241,7 @@
     }, {
       key: "_validateInputValue",
       value: function _validateInputValue() {
-        this.invalid = this.value !== '' && (window.isNaN(Number(this.value)) || this.max !== null && this.value > this.max || this.min !== null && this.value < this.min || this.step !== 'any' && this.value % this._getActualStep() !== 0);
+        this.invalid = this.value !== '' && (isNaN(Number(this.value)) || this.max !== null && this.value > this.max || this.min !== null && this.value < this.min || this.step !== 'any' && handleDecimalOperation('%', Number(this.value), this._getActualStep()) !== 0);
       }
       /**
        Sets the correct state of the buttons based on <code>disabled</code>, <code>min</code>, <code>max</code> and
@@ -55672,20 +55656,20 @@
       get: function get() {
         var valueAsNumber = this._valueAsNumber;
 
-        if (valueAsNumber !== null && !isNaN(valueAsNumber)) {
+        if (typeof valueAsNumber !== 'undefined' && valueAsNumber !== null) {
           return valueAsNumber;
         }
 
-        valueAsNumber = transform.float(this.value);
+        valueAsNumber = transform.number(this.value);
 
-        if (valueAsNumber !== null && !isNaN(valueAsNumber)) {
+        if (valueAsNumber !== null) {
           return valueAsNumber;
         }
 
         return NaN;
       },
       set: function set(value) {
-        this._valueAsNumber = transform.float(value);
+        this._valueAsNumber = transform.number(value);
         this.value = this._valueAsNumber;
         this.invalid = this.hasAttribute('invalid');
         this.disabled = this.hasAttribute('disabled');
@@ -72964,7 +72948,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.97";
+  var version = "1.0.0-beta.98";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
@@ -73135,6 +73119,7 @@
     Alert: Alert,
     AnchorButton: AnchorButton,
     Autocomplete: Autocomplete,
+    Banner: Banner,
     Button: Button,
     ButtonGroup: ButtonGroup,
     Calendar: Calendar,
