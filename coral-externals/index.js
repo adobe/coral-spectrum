@@ -16,6 +16,7 @@ import './polyfills/element.matches.js';
 import './polyfills/element.remove.js';
 import './polyfills/classList-partial-shim.js';
 import './polyfills/CustomEvent.js';
+import './polyfills/focus-options-polyfill.js';
 import 'core-js/es6/reflect';
 import 'core-js/es6/promise';
 // Accessibility
