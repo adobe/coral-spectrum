@@ -52435,7 +52435,7 @@ var Coral = (function (exports) {
           template.remove();
         }
 
-        this.appendChild(this._elements.quickactions); // todo workaround to not give user possibility to tab into checkbox
+        this.insertBefore(this._elements.quickactions, this.firstChild); // todo workaround to not give user possibility to tab into checkbox
 
         this._elements.check._labellableElement.tabIndex = -1; // Inform masonry immediately
 
@@ -73020,7 +73020,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.100";
+  var version = "1.0.0-beta.101";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

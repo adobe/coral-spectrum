@@ -566,7 +566,7 @@ class MasonryItem extends BaseComponent(HTMLElement) {
     if (template) {
       template.remove();
     }
-    this.appendChild(this._elements.quickactions);
+    this.insertBefore(this._elements.quickactions, this.firstChild);
     // todo workaround to not give user possibility to tab into checkbox
     this._elements.check._labellableElement.tabIndex = -1;
     
