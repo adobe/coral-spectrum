@@ -122,6 +122,78 @@
     window.CustomEvent = CustomEvent;
   })();
 
+  /**
+   MIT License
+   Copyright (c) 2018 Juan Valencia
+   
+   Permission is hereby granted, free of charge, to any person obtaining a copy
+   of this software and associated documentation files (the "Software"), to deal
+   in the Software without restriction, including without limitation the rights
+   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+   copies of the Software, and to permit persons to whom the Software is
+   furnished to do so, subject to the following conditions:
+   
+   The above copyright notice and this permission notice shall be included in all
+   copies or substantial portions of the Software.
+   
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+   SOFTWARE.
+   */
+  // focus - focusOptions - preventScroll polyfill
+  var supportsPreventScrollOption = false;
+
+  try {
+    var focusElem = document.createElement('div');
+    focusElem.addEventListener('focus', function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }, true);
+    focusElem.focus(Object.defineProperty({}, 'preventScroll', {
+      get: function get() {
+        supportsPreventScrollOption = true;
+      }
+    }));
+  } catch (e) {}
+
+  if (HTMLElement.prototype.nativeFocus === undefined && !supportsPreventScrollOption) {
+    HTMLElement.prototype.nativeFocus = HTMLElement.prototype.focus;
+
+    var getScrollParent = function getScrollParent(node) {
+      var isElement = node instanceof HTMLElement;
+      var overflowY = isElement && window.getComputedStyle(node).overflowY;
+      var isScrollable = overflowY !== 'visible' && overflowY !== 'hidden';
+
+      if (!node) {
+        return null;
+      } else if (isScrollable && node.scrollHeight >= node.clientHeight) {
+        return node;
+      }
+
+      return getScrollParent(node.parentNode) || document.body;
+    };
+
+    var patchedFocus = function patchedFocus(args) {
+      var scrollElement = getScrollParent(this);
+      var actualPosition = scrollElement.scrollTop;
+      this.nativeFocus();
+
+      if (args && args.preventScroll) {
+        // Hijacking the event loop order, since the focus() will trigger
+        // internally an scroll that goes to the event loop
+        setTimeout(function () {
+          scrollElement.scrollTop = actualPosition;
+        }, 0);
+      }
+    };
+
+    HTMLElement.prototype.focus = patchedFocus;
+  }
+
   var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
   function createCommonjsModule(fn, module) {
@@ -16725,7 +16797,7 @@
    */
 
 
-  function getScrollParent(element) {
+  function getScrollParent$1(element) {
     // Return body, `getScroll` will take care to get the correct `scrollTop` from it
     if (!element) {
       return document.body;
@@ -16750,7 +16822,7 @@
       return element;
     }
 
-    return getScrollParent(getParentNode(element));
+    return getScrollParent$1(getParentNode(element));
   }
   /**
    * Tells if you are running Internet Explorer
@@ -17098,7 +17170,7 @@
     var isHTML = parent.nodeName === 'HTML';
     var childrenRect = getBoundingClientRect(children);
     var parentRect = getBoundingClientRect(parent);
-    var scrollParent = getScrollParent(children);
+    var scrollParent = getScrollParent$1(children);
     var styles = getStyleComputedProperty(parent);
     var borderTopWidth = parseFloat(styles.borderTopWidth, 10);
     var borderLeftWidth = parseFloat(styles.borderLeftWidth, 10); // In cases where the parent is fixed, we must ignore negative scroll in offset calc
@@ -17230,7 +17302,7 @@
       var boundariesNode = void 0;
 
       if (boundariesElement === 'scrollParent') {
-        boundariesNode = getScrollParent(getParentNode(reference));
+        boundariesNode = getScrollParent$1(getParentNode(reference));
 
         if (boundariesNode.nodeName === 'BODY') {
           boundariesNode = popper.ownerDocument.documentElement;
@@ -17632,7 +17704,7 @@
     });
 
     if (!isBody) {
-      attachToScrollParents(getScrollParent(target.parentNode), event, callback, scrollParents);
+      attachToScrollParents(getScrollParent$1(target.parentNode), event, callback, scrollParents);
     }
 
     scrollParents.push(target);
@@ -17652,7 +17724,7 @@
       passive: true
     }); // Scroll event listener on scroll parents
 
-    var scrollElement = getScrollParent(reference);
+    var scrollElement = getScrollParent$1(reference);
     attachToScrollParents(scrollElement, 'scroll', state.updateBound, state.scrollParents);
     state.scrollElement = scrollElement;
     state.eventsEnabled = true;
@@ -72948,7 +73020,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.99";
+  var version = "1.0.0-beta.100";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
