@@ -9,6 +9,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         const markup = document.body.querySelectorAll('.markup');
@@ -48,9 +50,11 @@
     </div>
 
     <section class="u-coral-margin">
+      <h1 class="coral-Heading coral-Heading--1">Tree</h1>
+
       <h2 class="coral-Heading coral-Heading--2">Default</h2>
       <div class="markup">
-        <coral-tree>
+        <coral-tree style="width: 240px">
           <coral-tree-item disabled ><coral-tree-item-content>Item 2</coral-tree-item-content></coral-tree-item>
           <coral-tree-item expanded>
             <coral-tree-item-content>Item 1</coral-tree-item-content>
@@ -73,7 +77,7 @@
 
       <h2 class="coral-Heading coral-Heading--2">Handle expansion via JS</h2>
       <div class="markup">
-        <coral-tree>
+        <coral-tree style="width: 240px">
           <coral-tree-item id="tree-item">
             <coral-tree-item-content>Item 1</coral-tree-item-content>
           </coral-tree-item>
@@ -119,7 +123,7 @@
 
       <h2 class="coral-Heading coral-Heading--2">With interactive elements</h2>
       <div class="markup">
-        <coral-tree>
+        <coral-tree style="width: 240px">
           <coral-tree-item>
             <coral-tree-item-content>
               <input type="checkbox" coral-interactive/>

@@ -37,13 +37,13 @@
     
     // Indicate active navigation
     if (document.title.indexOf('Reference') !== -1) {
-      header.children[2].className += ' is-active';
+      header.children[2].classList.add('is-active');
     }
     else if (document.title.indexOf('Source') !== -1) {
-      header.children[3].className += ' is-active';
+      header.children[3].classList.add('is-active');
     }
     else if (document.title.indexOf('Manual') === -1) {
-      header.children[2].className += ' is-active';
+      header.children[2].classList.add('is-active');
       
       // Scroll into nav link
       var links = nav.querySelectorAll('a');
@@ -67,13 +67,13 @@
     // Remove README link
     var manualRootCard = content.querySelector('.manual-card-wrap');
     if (manualRootCard) {
-      manualRootCard.parentNode.removeChild(manualRootCard);
+      manualRootCard.remove()
     }
     
     // Remove README card
     var manualRootLink = nav.querySelector('.manual-toc-root [data-ice="manual"]:first-child');
     if (manualRootLink) {
-      manualRootLink.parentNode.removeChild(manualRootLink);
+      manualRootLink.remove();
     }
     
     var search = document.querySelector('.search-box');
@@ -84,7 +84,7 @@
     
     // Enhance search, open by default
     input.placeholder = 'Search components, events, properties, methods etc.';
-    search.className += ' active';
+    search.classList.add('active');
     
     // Remove directory information
     var navigationLinks = nav.querySelectorAll('.nav-dir-path');
@@ -114,7 +114,7 @@
     var descriptionEnhancements = document.querySelectorAll('.summary [data-ice="description"] ul');
     for (var i = 0; i < descriptionEnhancements.length; i++) {
       var enhancement = descriptionEnhancements[i];
-      enhancement.parentNode.removeChild(enhancement);
+      enhancement.remove();
     }
     
     // Modify Typedef types in favor of Event and Enum types
@@ -126,7 +126,7 @@
         var type = name.previousElementSibling;
         if (type && type.textContent.length === 1) {
           type.textContent = 'E';
-          type.className += ' kind-enum';
+          type.classList.add('kind-enum');
         }
       }
       
@@ -134,7 +134,7 @@
         var type = name.previousElementSibling;
         if (type && type.textContent.length === 1) {
           type.textContent = 'E';
-          type.className += ' kind-event';
+          type.classList.add('kind-event');
         }
       }
     }
@@ -150,18 +150,18 @@
       iframe.onload = function() {
         if (iframe.src.indexOf('shell') === -1) {
           var content = iframe.contentDocument;
-          iframe.style.height = content.body.scrollHeight + 20 + 'px';
+          iframe.style.height = content.body.scrollHeight + 36 + 'px';
           content.documentElement.style.overflowY = 'hidden';
           
           content.documentElement.onclick = function() {
-            iframe.style.height = content.body.scrollHeight + 20 + 'px';
+            iframe.style.height = content.body.scrollHeight + 36 + 'px';
           };
         }
       };
       example.remove();
     }
     
-    document.body.className += ' is-ready';
+    document.body.classList.add('is-ready');
     
     // // Remove direction information from search results
     input.addEventListener('keyup', function() {
@@ -175,12 +175,27 @@
     });
     
     // Override manual.js
-    var matched = location.pathname.match(/\/(manual\/.*\.html)$/);
-    if (!matched) return;
-    var currentName = matched[1];
-    var link = document.querySelector('.navigation .manual-toc li[data-link="' + currentName + '"]');
-    if (link) {
-      link.className += ' is-selected';
+    function updateNavigation() {
+      var matched = location.pathname.match(/\/(manual\/.*\.html)$/);
+      if (!matched) {
+        return;
+      }
+      
+      var currentName = matched[1] + location.hash;
+      var link = document.querySelector('.navigation .manual-toc li > a[href="' + currentName + '"]');
+      if (link) {
+        const selected = document.querySelector('.navigation .manual-toc li.is-selected');
+        if (selected) {
+          selected.classList.remove('is-selected');
+        }
+        link.parentNode.classList.add('is-selected');
+      }
     }
+    
+    window.onhashchange = function() {
+      updateNavigation();
+    };
+  
+    updateNavigation();
   });
 }());

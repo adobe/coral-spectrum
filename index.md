@@ -1,6 +1,6 @@
 <img class="logo" src="./manual/asset/logo.png">
 
-## A JavaScript library of Web Components following Spectrum design patterns.
+## Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.
 
 Our vision is to create consistent Adobe experiences by providing a complete, easy to use library of HTML components 
 compatible with [major frameworks](https://custom-elements-everywhere.com/).
