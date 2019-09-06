@@ -1,0 +1,51 @@
+/**
+ * Copyright 2019 Adobe. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under
+ * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+ * OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
+
+@require '@adobe/spectrum-css/dist/components/sidenav/index.css';
+@require '@adobe/spectrum-css/dist/components/sidenav/multiStops/light.css';
+@require '@adobe/spectrum-css/dist/components/sidenav/multiStops/lightest.css';
+@require '@adobe/spectrum-css/dist/components/sidenav/multiStops/dark.css';
+@require '@adobe/spectrum-css/dist/components/sidenav/multiStops/darkest.css';
+
+@require '../../../coral-theme-spectrum/src/styles/vars.css';
+
+coral-sidenav-level,
+coral-sidenav-heading,
+a[is="coral-sidenav-item"] {
+  display: block;
+}
+
+a[is="coral-sidenav-item"] {
+  text-decoration: none;
+  outline: none;
+}
+
+// @spectrum support animation
+._coral-SideNav._coral-SideNav--multiLevel {
+  ._coral-SideNav {
+    margin-top: -var(--spectrum-medium-sidenav-item-gap);
+    margin-bottom: -var(--spectrum-medium-sidenav-item-gap);
+
+    overflow-y: hidden;
+    transition: height ease-in-out var(--spectrum-global-animation-duration-500),
+      margin ease-in-out var(--spectrum-global-animation-duration-500);
+  }
+
+  // Remove bottom margin from last level
+  ._coral-SideNav ._coral-SideNav {
+    margin-bottom: 0;
+  }
+}
+
+
+
+

@@ -51,6 +51,7 @@ export {Radio} from './coral-component-radio';
 export {Shell} from './coral-component-shell';
 export {Select} from './coral-component-select';
 export {Search} from './coral-component-search';
+export {SideNav} from './coral-component-sidenav';
 export {Slider, RangedSlider} from './coral-component-slider';
 export {SplitButton} from './coral-component-splitbutton';
 export {Status} from './coral-component-status';

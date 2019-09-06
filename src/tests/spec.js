@@ -52,6 +52,7 @@ import '../../coral-component-quickactions/src/tests/spec';
 import '../../coral-component-radio/src/tests/spec';
 import '../../coral-component-search/src/tests/spec';
 import '../../coral-component-select/src/tests/spec';
+import '../../coral-component-sidenav/src/tests/spec';
 import '../../coral-component-shell/src/tests/spec';
 import '../../coral-component-slider/src/tests/spec';
 import '../../coral-component-splitbutton/src/tests/spec';
