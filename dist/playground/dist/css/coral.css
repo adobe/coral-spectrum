@@ -17612,6 +17612,270 @@ coral-shell-user-footer ._coral-Button + ._coral-Button {
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+._coral-SideNav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+._coral-SideNav-item {
+  list-style-type: none;
+
+  margin: 4px 0;
+}
+._coral-SideNav-itemLink {
+  position: relative;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: left;
+      justify-content: left;
+  box-sizing: border-box;
+
+  width: 100%;
+  min-height: 32px;
+
+  padding: 5px 12px;
+
+  border-radius: 4px;
+
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+  text-decoration: none;
+
+  word-break: break-word;
+  -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
+
+  cursor: pointer;
+
+  transition: background-color 130ms ease-out,
+              color 130ms ease-out;
+}
+._coral-SideNav-itemLink:focus {
+    outline: none;
+  }
+._coral-SideNav-itemLink.focus-ring::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    border: 2px solid transparent;
+    border-radius: 4px;
+  }
+._coral-SideNav-itemLink ._coral-SideNav-itemIcon {
+    margin-right: 8px;
+  }
+._coral-SideNav-heading {
+  height: 32px;
+  line-height: 32px;
+
+  margin: 16px 0 4px 0;
+  padding: 0 12px;
+
+  border-radius: 4px;
+
+  font-size: 11px;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 0.06em;
+
+  text-transform: uppercase;
+}
+._coral-SideNav--multiLevel ._coral-SideNav-itemLink {
+    font-weight: 700;
+  }
+._coral-SideNav--multiLevel ._coral-SideNav {
+    margin: 0;
+    padding: 0;
+  }
+._coral-SideNav--multiLevel ._coral-SideNav ._coral-SideNav-itemLink {
+      font-weight: 400;
+
+      padding-left: 24px;
+    }
+._coral-SideNav--multiLevel ._coral-SideNav ._coral-SideNav ._coral-SideNav-itemLink {
+        padding-left: 36px;
+      }
+
+.coral--light ._coral-SideNav-item.is-selected > ._coral-SideNav-itemLink {
+      color: rgb(44, 44, 44);
+      background-color: rgba(44,44,44,0.06);
+    }
+.coral--light ._coral-SideNav-item .is-active > ._coral-SideNav-itemLink {
+      background-color: rgba(44,44,44,0.06);
+    }
+.coral--light ._coral-SideNav-item.is-disabled ._coral-SideNav-itemLink {
+      background-color: rgba(0, 0, 0, 0);
+      color: rgb(179, 179, 179);
+
+      cursor: default;
+      pointer-events: none;
+    }
+.coral--light ._coral-SideNav-itemLink {
+  background-color: rgba(0, 0, 0, 0);
+  color: rgb(75, 75, 75);
+}
+.coral--light ._coral-SideNav-itemLink:hover {
+    background-color: rgba(44,44,44,0.06);
+    color: rgb(44, 44, 44);
+  }
+.coral--light ._coral-SideNav-itemLink:active {
+    background-color: rgba(44,44,44,0.06);
+  }
+.coral--light ._coral-SideNav-itemLink.focus-ring {
+    background-color: rgba(44,44,44,0.06);
+    color: rgb(44, 44, 44);
+  }
+.coral--light ._coral-SideNav-itemLink.focus-ring::before {
+      border-color: rgb(38, 128, 235);
+    }
+.coral--light ._coral-SideNav-heading {
+  color: rgb(110, 110, 110);
+}
+
+.coral--lightest ._coral-SideNav-item.is-selected > ._coral-SideNav-itemLink {
+      color: rgb(50, 50, 50);
+      background-color: rgba(50,50,50,0.06);
+    }
+.coral--lightest ._coral-SideNav-item .is-active > ._coral-SideNav-itemLink {
+      background-color: rgba(50,50,50,0.06);
+    }
+.coral--lightest ._coral-SideNav-item.is-disabled ._coral-SideNav-itemLink {
+      background-color: rgba(0, 0, 0, 0);
+      color: rgb(188, 188, 188);
+
+      cursor: default;
+      pointer-events: none;
+    }
+.coral--lightest ._coral-SideNav-itemLink {
+  background-color: rgba(0, 0, 0, 0);
+  color: rgb(80, 80, 80);
+}
+.coral--lightest ._coral-SideNav-itemLink:hover {
+    background-color: rgba(50,50,50,0.06);
+    color: rgb(50, 50, 50);
+  }
+.coral--lightest ._coral-SideNav-itemLink:active {
+    background-color: rgba(50,50,50,0.06);
+  }
+.coral--lightest ._coral-SideNav-itemLink.focus-ring {
+    background-color: rgba(50,50,50,0.06);
+    color: rgb(50, 50, 50);
+  }
+.coral--lightest ._coral-SideNav-itemLink.focus-ring::before {
+      border-color: rgb(55, 142, 240);
+    }
+.coral--lightest ._coral-SideNav-heading {
+  color: rgb(116, 116, 116);
+}
+
+.coral--dark ._coral-SideNav-item.is-selected > ._coral-SideNav-itemLink {
+      color: rgb(255, 255, 255);
+      background-color: rgba(255,255,255,0.07);
+    }
+.coral--dark ._coral-SideNav-item .is-active > ._coral-SideNav-itemLink {
+      background-color: rgba(255,255,255,0.07);
+    }
+.coral--dark ._coral-SideNav-item.is-disabled ._coral-SideNav-itemLink {
+      background-color: rgba(0, 0, 0, 0);
+      color: rgb(110, 110, 110);
+
+      cursor: default;
+      pointer-events: none;
+    }
+.coral--dark ._coral-SideNav-itemLink {
+  background-color: rgba(0, 0, 0, 0);
+  color: rgb(227, 227, 227);
+}
+.coral--dark ._coral-SideNav-itemLink:hover {
+    background-color: rgba(255,255,255,0.07);
+    color: rgb(255, 255, 255);
+  }
+.coral--dark ._coral-SideNav-itemLink:active {
+    background-color: rgba(255,255,255,0.07);
+  }
+.coral--dark ._coral-SideNav-itemLink.focus-ring {
+    background-color: rgba(255,255,255,0.07);
+    color: rgb(255, 255, 255);
+  }
+.coral--dark ._coral-SideNav-itemLink.focus-ring::before {
+      border-color: rgb(38, 128, 235);
+    }
+.coral--dark ._coral-SideNav-heading {
+  color: rgb(185, 185, 185);
+}
+
+.coral--darkest ._coral-SideNav-item.is-selected > ._coral-SideNav-itemLink {
+      color: rgb(239, 239, 239);
+      background-color: rgba(239,239,239,0.08);
+    }
+.coral--darkest ._coral-SideNav-item .is-active > ._coral-SideNav-itemLink {
+      background-color: rgba(239,239,239,0.08);
+    }
+.coral--darkest ._coral-SideNav-item.is-disabled ._coral-SideNav-itemLink {
+      background-color: rgba(0, 0, 0, 0);
+      color: rgb(92, 92, 92);
+
+      cursor: default;
+      pointer-events: none;
+    }
+.coral--darkest ._coral-SideNav-itemLink {
+  background-color: rgba(0, 0, 0, 0);
+  color: rgb(200, 200, 200);
+}
+.coral--darkest ._coral-SideNav-itemLink:hover {
+    background-color: rgba(239,239,239,0.08);
+    color: rgb(239, 239, 239);
+  }
+.coral--darkest ._coral-SideNav-itemLink:active {
+    background-color: rgba(239,239,239,0.08);
+  }
+.coral--darkest ._coral-SideNav-itemLink.focus-ring {
+    background-color: rgba(239,239,239,0.08);
+    color: rgb(239, 239, 239);
+  }
+.coral--darkest ._coral-SideNav-itemLink.focus-ring::before {
+      border-color: rgb(20, 115, 230);
+    }
+.coral--darkest ._coral-SideNav-heading {
+  color: rgb(162, 162, 162);
+}
+coral-sidenav-level,
+coral-sidenav-heading,
+a[is="coral-sidenav-item"] {
+  display: block;
+}
+a[is="coral-sidenav-item"] {
+  text-decoration: none;
+  outline: none;
+}
+._coral-SideNav._coral-SideNav--multiLevel ._coral-SideNav {
+  margin-top: -4px;
+  margin-bottom: -4px;
+  overflow-y: hidden;
+  transition: height ease-in-out 250ms, margin ease-in-out 250ms;
+}
+._coral-SideNav._coral-SideNav--multiLevel ._coral-SideNav ._coral-SideNav {
+  margin-bottom: 0;
+}
+
+/**
+ * Copyright 2019 Adobe. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under
+ * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+ * OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
 ._coral-SplitButton {
   position: relative;
   display: -ms-inline-flexbox;

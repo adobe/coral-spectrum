@@ -4318,7 +4318,7 @@ var Coral = (function (exports) {
 
   var FOCUSABLE_ELEMENTS = ['input:not([disabled])', 'select:not([disabled])', 'textarea:not([disabled])', 'button:not([disabled])', 'a[href]', 'area[href]', 'summary', 'iframe', 'object', 'embed', 'audio[controls]', 'video[controls]', '[contenteditable]']; // To support Coral.commons.ready and differentiate lightweight tags from defined elements
 
-  var CORAL_COMPONENTS = ['coral-accordion', 'coral-accordion-item', 'coral-accordion-item-content', 'coral-actionbar', 'coral-actionbar-container', 'coral-actionbar-item', 'coral-actionbar-primary', 'coral-actionbar-secondary', 'coral-alert', 'coral-alert-header', 'coral-alert-content', 'coral-alert-footer', 'a[is="coral-anchorbutton"]', 'coral-autocomplete', 'coral-autocomplete-item', 'coral-autocomplete-item', 'coral-banner', 'coral-banner-content', 'coral-banner-header', 'button[is="coral-button"]', 'coral-buttongroup', 'coral-calendar', 'coral-card', 'coral-card-content', 'coral-card-context', 'coral-card-description', 'coral-card-property', 'coral-card-propertylist', 'coral-card-subtitle', 'coral-card-title', 'coral-charactercount', 'coral-checkbox', 'coral-clock', 'coral-coachmark', 'coral-colorinput', 'coral-colorinput-colorproperties', 'coral-colorinput-item', 'coral-colorinput-slider', 'coral-colorinput-swatch', 'coral-colorinput-swatches', 'coral-columnview', 'coral-columnview-column', 'coral-columnview-column-content', 'coral-columnview-item', 'coral-columnview-item-content', 'coral-columnview-item-thumbnail', 'coral-columnview-preview', 'coral-columnview-preview-content', 'coral-cyclebutton', 'coral-cyclebutton-action', 'coral-cyclebutton-item', 'coral-datepicker', 'coral-dialog', 'coral-dialog-header', 'coral-dialog-content', 'coral-dialog-footer', 'coral-drawer', 'coral-fileupload', 'coral-icon', 'coral-list', 'coral-selectlist', 'coral-buttonlist', 'coral-anchorlist', 'coral-list-item', 'coral-list-item-content', 'coral-selectlist-item', 'coral-selectlist-group', 'a[is="coral-anchorlist-item"]', 'button[is="coral-buttonlist-item"]', 'coral-masonry', 'coral-masonry-item', 'coral-multifield', 'coral-multifield-item', 'coral-numberinput', 'coral-overlay', 'coral-panel', 'coral-panelstack', 'coral-playground', 'coral-popover', 'coral-progress', 'coral-quickactions', 'coral-radio', 'coral-search', 'coral-select', 'coral-select-item', 'coral-shell', 'coral-shell-header', 'coral-shell-help', 'a[is="coral-shell-homeanchor"]', 'a[is="coral-shell-help-item"]', 'a[is="coral-shell-workspace"]', 'a[is="coral-shell-solution"]', 'coral-shell-menu', 'coral-shell-menubar', 'coral-shell-menubar-item', 'coral-shell-organization', 'coral-shell-orgswitcher', 'coral-shell-solution', 'coral-shell-solutions', 'coral-shell-solutionswitcher', 'coral-shell-suborganization', 'coral-shell-user', 'coral-shell-workspaces', 'coral-slider', 'coral-slider-item', 'coral-rangedslider', 'coral-splitbutton', 'coral-status', 'coral-step', 'coral-steplist', 'coral-step-label', 'coral-switch', 'table[is="coral-table"]', 'thead[is="coral-table-head"]', 'tbody[is="coral-table-body"]', 'tfoot[is="coral-table-foot"]', 'tr[is="coral-table-row"]', 'td[is="coral-table-cell"]', 'th[is="coral-table-headercell"]', 'col[is="coral-table-column"]', 'coral-tab', 'coral-tab-label', 'coral-tablist', 'coral-tabview', 'coral-taglist', 'coral-tag', 'textarea[is="coral-textarea"]', 'input[is="coral-textfield"]', 'coral-toast', 'coral-toast-content', 'coral-tooltip', 'coral-tooltip-content', 'coral-tree', 'coral-tree-item', 'coral-wait', 'coral-wizardview'];
+  var CORAL_COMPONENTS = ['coral-accordion', 'coral-accordion-item', 'coral-accordion-item-content', 'coral-actionbar', 'coral-actionbar-container', 'coral-actionbar-item', 'coral-actionbar-primary', 'coral-actionbar-secondary', 'coral-alert', 'coral-alert-header', 'coral-alert-content', 'coral-alert-footer', 'a[is="coral-anchorbutton"]', 'coral-autocomplete', 'coral-autocomplete-item', 'coral-autocomplete-item', 'coral-banner', 'coral-banner-content', 'coral-banner-header', 'button[is="coral-button"]', 'coral-buttongroup', 'coral-calendar', 'coral-card', 'coral-card-content', 'coral-card-context', 'coral-card-description', 'coral-card-property', 'coral-card-propertylist', 'coral-card-subtitle', 'coral-card-title', 'coral-charactercount', 'coral-checkbox', 'coral-clock', 'coral-coachmark', 'coral-colorinput', 'coral-colorinput-colorproperties', 'coral-colorinput-item', 'coral-colorinput-slider', 'coral-colorinput-swatch', 'coral-colorinput-swatches', 'coral-columnview', 'coral-columnview-column', 'coral-columnview-column-content', 'coral-columnview-item', 'coral-columnview-item-content', 'coral-columnview-item-thumbnail', 'coral-columnview-preview', 'coral-columnview-preview-content', 'coral-cyclebutton', 'coral-cyclebutton-action', 'coral-cyclebutton-item', 'coral-datepicker', 'coral-dialog', 'coral-dialog-header', 'coral-dialog-content', 'coral-dialog-footer', 'coral-drawer', 'coral-fileupload', 'coral-icon', 'coral-list', 'coral-selectlist', 'coral-buttonlist', 'coral-anchorlist', 'coral-list-item', 'coral-list-item-content', 'coral-selectlist-item', 'coral-selectlist-group', 'a[is="coral-anchorlist-item"]', 'button[is="coral-buttonlist-item"]', 'coral-masonry', 'coral-masonry-item', 'coral-multifield', 'coral-multifield-item', 'coral-numberinput', 'coral-overlay', 'coral-panel', 'coral-panelstack', 'coral-playground', 'coral-popover', 'coral-progress', 'coral-quickactions', 'coral-radio', 'coral-search', 'coral-select', 'coral-select-item', 'nav[is="coral-sidenav"]', 'a[is="coral-sidenav-item"]', 'coral-sidenav-heading', 'coral-sidenav-level', 'coral-shell', 'coral-shell-header', 'coral-shell-help', 'a[is="coral-shell-homeanchor"]', 'a[is="coral-shell-help-item"]', 'a[is="coral-shell-workspace"]', 'a[is="coral-shell-solution"]', 'coral-shell-menu', 'coral-shell-menubar', 'coral-shell-menubar-item', 'coral-shell-organization', 'coral-shell-orgswitcher', 'coral-shell-solution', 'coral-shell-solutions', 'coral-shell-solutionswitcher', 'coral-shell-suborganization', 'coral-shell-user', 'coral-shell-workspaces', 'coral-slider', 'coral-slider-item', 'coral-rangedslider', 'coral-splitbutton', 'coral-status', 'coral-step', 'coral-steplist', 'coral-step-label', 'coral-switch', 'table[is="coral-table"]', 'thead[is="coral-table-head"]', 'tbody[is="coral-table-body"]', 'tfoot[is="coral-table-foot"]', 'tr[is="coral-table-row"]', 'td[is="coral-table-cell"]', 'th[is="coral-table-headercell"]', 'col[is="coral-table-column"]', 'coral-tab', 'coral-tab-label', 'coral-tablist', 'coral-tabview', 'coral-taglist', 'coral-tag', 'textarea[is="coral-textarea"]', 'input[is="coral-textfield"]', 'coral-toast', 'coral-toast-content', 'coral-tooltip', 'coral-tooltip-content', 'coral-tree', 'coral-tree-item', 'coral-wait', 'coral-wizardview'];
   /**
    Converts CSS time to milliseconds. It supports both s and ms units. If the provided value has an unrecogenized unit,
    zero will be returned.
@@ -63218,6 +63218,730 @@ var Coral = (function (exports) {
   Shell.Organization = ShellOrganization;
   Shell.Suborganization = ShellSuborganization;
 
+  var CLASSNAME$1A = '_coral-SideNav';
+  /**
+   Enumeration for {@link SideNav} variants.
+   
+   @typedef {Object} SideNavVariantEnum
+   
+   @property {String} DEFAULT
+   A default sidenav.
+   @property {String} MULTI_LEVEL
+   A sidenav with multiple levels of indentation.
+   */
+
+  var variant$i = {
+    DEFAULT: 'default',
+    MULTI_LEVEL: 'multilevel'
+  };
+  /**
+   @class Coral.SideNav
+   @classdesc A Side Navigation component to navigate the entire content of a product or a section.
+   These can be used for a single level or a multi-level navigation.
+   @htmltag coral-sidenav
+   @extends {HTMLElement}
+   @extends {BaseComponent}
+   */
+
+  var SideNav =
+  /*#__PURE__*/
+  function (_BaseComponent) {
+    _inherits(SideNav, _BaseComponent);
+
+    /** @ignore */
+    function SideNav() {
+      var _this;
+
+      _classCallCheck(this, SideNav);
+
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(SideNav).call(this)); // Attach events
+
+      _this._delegateEvents({
+        // Interaction
+        'click a[is="coral-sidenav-item"]': '_onItemClick',
+        // Accessibility
+        'capture:focus a[is="coral-sidenav-item"].focus-ring': '_onItemFocusIn',
+        'capture:blur a[is="coral-sidenav-item"]': '_onItemFocusOut',
+        // Private
+        'coral-sidenav-item:_selectedchanged': '_onItemSelectedChanged'
+      }); // Used for eventing
+
+
+      _this._oldSelection = null; // Level Collection
+
+      _this._levels = _this.getElementsByTagName('coral-sidenav-level'); // Heading Collection
+
+      _this._headings = _this.getElementsByTagName('coral-sidenav-heading'); // Init the collection mutation observer
+
+      _this.items._startHandlingItems(true); // Initialize content MO
+
+
+      _this._observer = new MutationObserver(_this._handleMutations.bind(_assertThisInitialized(_this)));
+
+      _this._observer.observe(_assertThisInitialized(_this), {
+        childList: true,
+        subtree: true
+      });
+
+      return _this;
+    }
+    /**
+     The Collection Interface that allows interacting with the items that the component contains.
+     
+     @type {Collection}
+     @readonly
+     */
+
+
+    _createClass(SideNav, [{
+      key: "_onItemClick",
+      value: function _onItemClick(event) {
+        var item = event.matchedTarget;
+
+        if (!item.selected) {
+          item.selected = true;
+        }
+      }
+    }, {
+      key: "_onItemFocusIn",
+      value: function _onItemFocusIn(event) {
+        var item = event.matchedTarget;
+
+        item._elements.container.classList.add('focus-ring');
+      }
+    }, {
+      key: "_onItemFocusOut",
+      value: function _onItemFocusOut(event) {
+        var item = event.matchedTarget;
+
+        item._elements.container.classList.remove('focus-ring');
+      }
+    }, {
+      key: "_onItemSelectedChanged",
+      value: function _onItemSelectedChanged(event) {
+        event.stopImmediatePropagation();
+
+        this._validateSelection(event.target);
+      }
+    }, {
+      key: "_validateSelection",
+      value: function _validateSelection(item) {
+        var _this2 = this;
+
+        var selectedItems = this.items._getAllSelected();
+
+        if (item && this.contains(item)) {
+          // Deselect other selected items
+          if (item.hasAttribute('selected') && selectedItems.length > 1) {
+            selectedItems.forEach(function (selectedItem) {
+              if (selectedItem !== item) {
+                // Don't trigger change events
+                _this2._preventTriggeringEvents = true;
+                selectedItem.removeAttribute('selected');
+              }
+            }); // We can trigger change events again
+
+            this._preventTriggeringEvents = false;
+          } else if (!item.hasAttribute('selected') && selectedItems.length === 0) {
+            // Force selection
+            item.selected = true;
+            return;
+          } // Expand multi level
+
+
+          this._expandLevels(); // Notify of change
+
+
+          this._triggerChangeEvent();
+        } else if (selectedItems.length === 0) {
+          // First item is selected by default on initialization
+          item = this.items.first();
+
+          if (item) {
+            item.setAttribute('selected', '');
+          } // Notify of change
+
+
+          this._triggerChangeEvent();
+        }
+      }
+    }, {
+      key: "_expandLevels",
+      value: function _expandLevels() {
+        var selectedItem = this.selectedItem;
+        var level = selectedItem.closest('coral-sidenav-level'); // Expand until root
+
+        while (level) {
+          if (level.getAttribute('_expanded') !== 'on') {
+            level.setAttribute('_expanded', 'on');
+          }
+
+          level = level.parentNode && level.parentNode.closest('coral-sidenav-level');
+        } // Expand corresponding item level
+
+
+        level = selectedItem.nextElementSibling;
+
+        if (level && level.tagName === 'CORAL-SIDENAV-LEVEL') {
+          level.setAttribute('_expanded', 'on');
+        }
+      }
+    }, {
+      key: "_triggerChangeEvent",
+      value: function _triggerChangeEvent() {
+        var selectedItem = this.selectedItem;
+        var oldSelection = this._oldSelection;
+
+        if (!this._preventTriggeringEvents && selectedItem !== oldSelection) {
+          this.trigger('coral-sidenav:change', {
+            oldSelection: oldSelection,
+            selection: selectedItem
+          });
+          this._oldSelection = selectedItem;
+        }
+      }
+    }, {
+      key: "_syncLevelwithHeading",
+      value: function _syncLevelwithHeading(level, heading, remove) {
+        if (level && heading) {
+          if (remove) {
+            level.removeAttribute('aria-labelledby');
+          } else {
+            heading.id = heading.id || commons.getUID();
+            level.setAttribute('aria-labelledby', heading.id);
+          }
+        }
+      }
+    }, {
+      key: "_handleMutations",
+      value: function _handleMutations(mutations) {
+        var _this3 = this;
+
+        mutations.forEach(function (mutation) {
+          // Sync added levels and headings
+          for (var i = 0; i < mutation.addedNodes.length; i++) {
+            var addedNode = mutation.addedNodes[i];
+
+            if (addedNode.nodeName === 'CORAL-SIDENAV-LEVEL') {
+              _this3._syncLevelwithHeading(addedNode, addedNode.previousElementSibling);
+            } else if (addedNode.nodeName === 'CORAL-SIDENAV-HEADING') {
+              _this3._syncLevelwithHeading(addedNode.nextElementSibling, addedNode);
+            }
+          } // Sync removed levels
+
+
+          for (var k = 0; k < mutation.removedNodes.length; k++) {
+            var removedNode = mutation.removedNodes[k];
+
+            if (removedNode.nodeName === 'CORAL-SIDENAV-LEVEL') {
+              _this3._validateSelection();
+            } else if (removedNode.nodeName === 'CORAL-SIDENAV-HEADING' && removedNode.id) {
+              var level = _this3.querySelector('coral-sidenav-level[aria-labelledby="' + removedNode.id + '"]');
+
+              _this3._syncLevelwithHeading(level, removedNode, true);
+            }
+          }
+        });
+      }
+    }, {
+      key: "_onLevelAdded",
+      value: function _onLevelAdded(level) {
+        var neighbor = level.previousElementSibling;
+
+        if (neighbor && neighbor.tagName === 'CORAL-SIDENAV-HEADING') {
+          neighbor.id = neighbor.id || commons.getUID();
+          level.setAttribute('aria-labelledby', neighbor.id);
+        }
+      }
+    }, {
+      key: "_onLevelRemoved",
+      value: function _onLevelRemoved(level) {
+        var selectedItem = this.selectedItem;
+
+        if (level.contains(selectedItem)) {
+          this._validateSelection(selectedItem);
+        }
+      }
+      /**
+       Returns {@link SideNav} variants.
+       
+       @return {SideNavVariantEnum}
+       */
+
+    }, {
+      key: "connectedCallback",
+
+      /** @ignore */
+      value: function connectedCallback() {
+        _get(_getPrototypeOf(SideNav.prototype), "connectedCallback", this).call(this);
+
+        this.classList.add(CLASSNAME$1A); // Default reflected attributes
+
+        if (!this._variant) {
+          this.variant = variant$i.DEFAULT;
+        }
+
+        for (var i = 0; i < this._headings.length; i++) {
+          var heading = this._headings[i];
+
+          this._syncLevelwithHeading(heading.nextElementSibling, heading);
+        } // Don't trigger events once connected
+
+
+        this._preventTriggeringEvents = true;
+
+        this._validateSelection();
+
+        this._preventTriggeringEvents = false;
+        this._oldSelection = this.selectedItem;
+      }
+      /**
+       Triggered when {@link SideNav} selected item has changed.
+       
+       @typedef {CustomEvent} coral-sidenav:change
+       
+       @property {SideNavItem} detail.oldSelection
+       The prior selected item.
+       @property {SideNavItem} detail.selection
+       The newly selected item.
+       */
+
+    }, {
+      key: "items",
+      get: function get() {
+        // just init on demand
+        if (!this._items) {
+          this._items = new SelectableCollection({
+            host: this,
+            itemTagName: 'coral-sidenav-item',
+            itemBaseTagName: 'a',
+            onItemAdded: this._validateSelection,
+            onItemRemoved: this._validateSelection
+          });
+        }
+
+        return this._items;
+      }
+      /**
+       Returns the first selected item in the sidenav. The value <code>null</code> is returned if no element is
+       selected.
+       
+       @type {SideNavItem}
+       @readonly
+       */
+
+    }, {
+      key: "selectedItem",
+      get: function get() {
+        return this.items._getFirstSelected();
+      }
+      /**
+       The sidenav's variant. See {@link SideNavVariantEnum}.
+       
+       @type {String}
+       @default SideNavVariantEnum.DEFAULT
+       @htmlattribute variant
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "variant",
+      get: function get() {
+        return this._variant || variant$i.DEFAULT;
+      },
+      set: function set(value) {
+        value = transform.string(value).toLowerCase();
+        this._variant = validate.enumeration(variant$i)(value) && value || variant$i.DEFAULT;
+
+        this._reflectAttribute('variant', this._variant);
+
+        this.classList.toggle("".concat(CLASSNAME$1A, "--multiLevel"), this._variant === variant$i.MULTI_LEVEL);
+
+        if (this.variant === variant$i.MULTI_LEVEL) {
+          // Don't hide the selected item level
+          var selectedItem = this.selectedItem;
+          var ignoreLevel = selectedItem && selectedItem.parentNode; // Hide every other level that doesn't contain the selected item
+
+          for (var i = 0; i < this._levels.length; i++) {
+            if (this._levels[i] !== ignoreLevel) {
+              this._levels[i].setAttribute('_expanded', 'off');
+            }
+          }
+        }
+      }
+    }], [{
+      key: "variant",
+      get: function get() {
+        return variant$i;
+      }
+      /** @ignore */
+
+    }, {
+      key: "observedAttributes",
+      get: function get() {
+        return _get(_getPrototypeOf(SideNav), "observedAttributes", this).concat(['variant']);
+      }
+    }]);
+
+    return SideNav;
+  }(BaseComponent(HTMLElement));
+
+  var template$S = function anonymous(data_0) {
+    var frag = document.createDocumentFragment();
+    var el0 = this["container"] = document.createElement("div");
+    el0.className += " _coral-SideNav-itemLink";
+    el0.setAttribute("handle", "container");
+    var el1 = document.createTextNode("\n  ");
+    el0.appendChild(el1);
+    var el2 = this["icon"] = document.createElement("coral-icon");
+    el2.setAttribute("hidden", "");
+    el2.className += " _coral-UIIcon-Star _coral-SideNav-itemIcon";
+    el2.setAttribute("handle", "icon");
+    el0.appendChild(el2);
+    var el3 = document.createTextNode("\n");
+    el0.appendChild(el3);
+    frag.appendChild(el0);
+    var el4 = document.createTextNode("\n");
+    frag.appendChild(el4);
+    return frag;
+  };
+
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+  var CLASSNAME$1B = '_coral-SideNav-item';
+  /**
+   @class Coral.SideNav.Item
+   @classdesc A SideNav Item component.
+   @htmltag coral-sidenav-item
+   @extends {HTMLAnchorElement}
+   @extends {BaseComponent}
+   */
+
+  var SideNavItem =
+  /*#__PURE__*/
+  function (_BaseComponent) {
+    _inherits(SideNavItem, _BaseComponent);
+
+    /** @ignore */
+    function SideNavItem() {
+      var _this;
+
+      _classCallCheck(this, SideNavItem);
+
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(SideNavItem).call(this)); // Prepare templates
+
+      _this._elements = {
+        content: _this.querySelector('coral-sidenav-item-content') || document.createElement('coral-sidenav-item-content')
+      };
+      template$S.call(_this._elements);
+      return _this;
+    }
+    /**
+     The content of the sidenav item.
+     
+     @type {SideNavItemContent}
+     @contentzone
+     */
+
+
+    _createClass(SideNavItem, [{
+      key: "connectedCallback",
+
+      /** @ignore */
+      value: function connectedCallback() {
+        _get(_getPrototypeOf(SideNavItem.prototype), "connectedCallback", this).call(this);
+
+        this.classList.add(CLASSNAME$1B); // Create a fragment
+
+        var fragment = document.createDocumentFragment(); // Render the main template
+
+        fragment.appendChild(this._elements.container);
+        var content = this._elements.content; // Remove it so we can process children
+
+        if (content.parentNode) {
+          content.parentNode.removeChild(content);
+        } // Process remaining elements as necessary
+
+
+        while (this.firstChild) {
+          var child = this.firstChild;
+
+          if (child.nodeType === Node.TEXT_NODE || child.nodeType === Node.ELEMENT_NODE && child.getAttribute('handle') !== 'container') {
+            // Add non-template elements to the content
+            content.appendChild(child);
+          } else {
+            // Remove anything else
+            this.removeChild(child);
+          }
+        } // Add the frag to the component
+
+
+        this.appendChild(fragment); // Assign the content zones, moving them into place in the process
+
+        this.content = content;
+      }
+    }, {
+      key: "content",
+      get: function get() {
+        return this._getContentZone(this._elements.content);
+      },
+      set: function set(value) {
+        this._setContentZone('content', value, {
+          handle: 'content',
+          tagName: 'coral-sidenav-item-content',
+          insert: function insert(content) {
+            this._elements.container.appendChild(content);
+          }
+        });
+      }
+      /**
+       Specifies the icon name used inside the item. See {@link Icon} for valid icon names.
+       
+       @type {String}
+       @default ""
+       @htmlattribute icon
+       */
+
+    }, {
+      key: "icon",
+      get: function get() {
+        return this._elements.icon.icon;
+      },
+      set: function set(value) {
+        this._elements.icon.icon = value;
+        this._elements.icon.hidden = this._elements.icon.icon === '';
+      }
+      /**
+       Whether the item is selected.
+       
+       @type {Boolean}
+       @default false
+       @htmlattribute selected
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "selected",
+      get: function get() {
+        return this._selected || false;
+      },
+      set: function set(value) {
+        this._selected = transform.booleanAttr(value);
+
+        this._reflectAttribute('selected', this._selected);
+
+        this.classList.toggle('is-selected', this._selected);
+        this.trigger('coral-sidenav-item:_selectedchanged');
+      }
+    }, {
+      key: "_contentZones",
+      get: function get() {
+        return {
+          'coral-sidenav-item-label': 'content'
+        };
+      }
+      /** @ignore */
+
+    }], [{
+      key: "observedAttributes",
+      get: function get() {
+        return _get(_getPrototypeOf(SideNavItem), "observedAttributes", this).concat(['selected', 'icon']);
+      }
+    }]);
+
+    return SideNavItem;
+  }(BaseComponent(HTMLAnchorElement));
+
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+
+  /**
+   @class Coral.SideNav.Item.Content
+   @classdesc The SideNav Item Content
+   @htmltag coral-sidenav-item-content
+   @return {HTMLElement}
+   */
+  var SideNavItemContent = (function () {
+    return document.createElement('coral-sidenav-item-content');
+  });
+
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+  var CLASSNAME$1C = '_coral-SideNav-heading';
+  /**
+   @class Coral.SideNav.Heading
+   @classdesc The SideNav Heading
+   @htmltag coral-sidenav-heading
+   @extends {HTMLElement}
+   */
+
+  var SideNavHeading =
+  /*#__PURE__*/
+  function (_HTMLElement) {
+    _inherits(SideNavHeading, _HTMLElement);
+
+    function SideNavHeading() {
+      _classCallCheck(this, SideNavHeading);
+
+      return _possibleConstructorReturn(this, _getPrototypeOf(SideNavHeading).apply(this, arguments));
+    }
+
+    _createClass(SideNavHeading, [{
+      key: "connectedCallback",
+
+      /** @ignore */
+      value: function connectedCallback() {
+        this.classList.add(CLASSNAME$1C); // a11y
+
+        this.setAttribute('role', 'heading');
+      }
+    }]);
+
+    return SideNavHeading;
+  }(_wrapNativeSuper(HTMLElement));
+
+  var CLASSNAME$1D = '_coral-SideNav';
+  /**
+   @class Coral.SideNav.Level
+   @classdesc A SideNav Level component
+   @htmltag coral-sidenav-level
+   @extends {HTMLElement}
+   @extends {BaseComponent}
+   */
+
+  var SideNavLevel =
+  /*#__PURE__*/
+  function (_BaseComponent) {
+    _inherits(SideNavLevel, _BaseComponent);
+
+    function SideNavLevel() {
+      _classCallCheck(this, SideNavLevel);
+
+      return _possibleConstructorReturn(this, _getPrototypeOf(SideNavLevel).apply(this, arguments));
+    }
+
+    _createClass(SideNavLevel, [{
+      key: "attributeChangedCallback",
+
+      /** @ignore */
+      value: function attributeChangedCallback(name, oldValue, value) {
+        var _this = this;
+
+        if (name === '_expanded') {
+          var isExpanded = value === 'on';
+          this.classList.toggle('is-expanded', isExpanded);
+          this.setAttribute('aria-expanded', isExpanded); // Do animation in next frame to avoid a forced reflow
+
+          window.requestAnimationFrame(function () {
+            // Don't animate on initialization
+            if (_this._animate) {
+              // Remove height as we want the level to naturally grow if content is added later
+              commons.transitionEnd(_this, function () {
+                if (isExpanded) {
+                  _this.style.height = '';
+                } else {
+                  _this.hidden = true;
+                }
+              }); // Force height to enable transition
+
+              if (!isExpanded) {
+                _this.style.height = "".concat(_this.scrollHeight, "px");
+              } else {
+                _this.hidden = false;
+              } // We read the offset height to force a reflow, this is needed to start the transition between absolute values
+              // https://blog.alexmaccaw.com/css-transitions under Redrawing
+              // eslint-disable-next-line no-unused-vars
+
+
+              var offsetHeight = _this.offsetHeight;
+              _this.style.height = isExpanded ? "".concat(_this.scrollHeight, "px") : 0;
+            } else {
+              // Make sure it's animated next time
+              _this._animate = true; // Hide it on initialization if closed
+
+              if (!isExpanded) {
+                _this.style.height = 0;
+                _this.hidden = true;
+              }
+            }
+          });
+        } else {
+          _get(_getPrototypeOf(SideNavLevel.prototype), "attributeChangedCallback", this).call(this, name, oldValue, value);
+        }
+      }
+      /** @ignore */
+
+    }, {
+      key: "connectedCallback",
+      value: function connectedCallback() {
+        this.classList.add(CLASSNAME$1D); // a11y
+
+        this.setAttribute('role', 'presentation');
+      }
+    }], [{
+      key: "observedAttributes",
+
+      /** @ignore */
+      get: function get() {
+        return _get(_getPrototypeOf(SideNavLevel), "observedAttributes", this).concat(['_expanded']);
+      }
+    }]);
+
+    return SideNavLevel;
+  }(BaseComponent(HTMLElement));
+
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+
+  window.customElements.define('coral-sidenav', SideNav, {
+    extends: 'nav'
+  });
+  window.customElements.define('coral-sidenav-item', SideNavItem, {
+    extends: 'a'
+  });
+  window.customElements.define('coral-sidenav-heading', SideNavHeading);
+  window.customElements.define('coral-sidenav-level', SideNavLevel);
+  SideNav.Item = SideNavItem;
+  SideNav.Item.Content = SideNavItemContent;
+  SideNav.Heading = SideNavHeading;
+  SideNav.Level = SideNavLevel;
+
   /**
    Enumeration for {@link SplitButton} variants.
    
@@ -63231,12 +63955,12 @@ var Coral = (function (exports) {
    A button that indicates that the button's action is the secondary action.
    */
 
-  var variant$i = {
+  var variant$j = {
     DEFAULT: 'default',
     CTA: 'cta',
     SECONDARY: 'secondary'
   };
-  var CLASSNAME$1A = '_coral-SplitButton';
+  var CLASSNAME$1E = '_coral-SplitButton';
   /**
    @class Coral.SplitButton
    @classdesc A Split Button component composed of an action and a trigger {@link AnchorButton} or {@link Button}.
@@ -63355,10 +64079,10 @@ var Coral = (function (exports) {
       value: function connectedCallback() {
         _get(_getPrototypeOf(SplitButton.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1A); // Default reflected attributes
+        this.classList.add(CLASSNAME$1E); // Default reflected attributes
 
         if (!this._variant) {
-          this.variant = variant$i.DEFAULT;
+          this.variant = variant$j.DEFAULT;
         } // Update styles
 
 
@@ -63369,11 +64093,11 @@ var Coral = (function (exports) {
     }, {
       key: "variant",
       get: function get() {
-        return this._variant || variant$i.DEFAULT;
+        return this._variant || variant$j.DEFAULT;
       },
       set: function set(value) {
         value = transform.string(value).toLowerCase();
-        this._variant = validate.enumeration(variant$i)(value) && value || variant$i.DEFAULT;
+        this._variant = validate.enumeration(variant$j)(value) && value || variant$j.DEFAULT;
 
         this._reflectAttribute('variant', this._variant);
 
@@ -63382,7 +64106,7 @@ var Coral = (function (exports) {
     }], [{
       key: "variant",
       get: function get() {
-        return variant$i;
+        return variant$j;
       }
       /** @ignore */
 
@@ -63427,7 +64151,7 @@ var Coral = (function (exports) {
    An informative semantic status.
    */
 
-  var variant$j = {
+  var variant$k = {
     NEUTRAL: 'neutral',
     ERROR: 'error',
     WARNING: 'warning',
@@ -63461,7 +64185,7 @@ var Coral = (function (exports) {
     MAGENTA: 'magenta',
     PURPLE: 'purple'
   };
-  var CLASSNAME$1B = '_coral-StatusLight';
+  var CLASSNAME$1F = '_coral-StatusLight';
   var variantMapping = {
     SUCCESS: 'positive',
     ERROR: 'negative',
@@ -63469,14 +64193,14 @@ var Coral = (function (exports) {
   };
   var ALL_VARIANT_CLASSES$a = [];
 
-  for (var variantValue$8 in variant$j) {
-    ALL_VARIANT_CLASSES$a.push("".concat(CLASSNAME$1B, "--").concat(variantMapping[variantValue$8] || variant$j[variantValue$8]));
+  for (var variantValue$8 in variant$k) {
+    ALL_VARIANT_CLASSES$a.push("".concat(CLASSNAME$1F, "--").concat(variantMapping[variantValue$8] || variant$k[variantValue$8]));
   }
 
   var ALL_COLOR_CLASSES$1 = [];
 
   for (var colorValue$1 in color$1) {
-    ALL_COLOR_CLASSES$1.push("".concat(CLASSNAME$1B, "--").concat(color$1[colorValue$1]));
+    ALL_COLOR_CLASSES$1.push("".concat(CLASSNAME$1F, "--").concat(color$1[colorValue$1]));
   }
   /**
    @class Coral.Status
@@ -63525,10 +64249,10 @@ var Coral = (function (exports) {
       value: function connectedCallback() {
         _get(_getPrototypeOf(Status.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1B); // Default reflected attributes
+        this.classList.add(CLASSNAME$1F); // Default reflected attributes
 
         if (!this._variant) {
-          this.variant = variant$j.NEUTRAL;
+          this.variant = variant$k.NEUTRAL;
         }
 
         if (!this._color) {
@@ -63572,19 +64296,19 @@ var Coral = (function (exports) {
     }, {
       key: "variant",
       get: function get() {
-        return this._variant || variant$j.NEUTRAL;
+        return this._variant || variant$k.NEUTRAL;
       },
       set: function set(value) {
         var _this$classList;
 
         value = transform.string(value).toLowerCase();
-        this._variant = validate.enumeration(variant$j)(value) && value || variant$j.NEUTRAL;
+        this._variant = validate.enumeration(variant$k)(value) && value || variant$k.NEUTRAL;
 
         this._reflectAttribute('variant', this._variant);
 
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$a);
 
-        this.classList.add("".concat(CLASSNAME$1B, "--").concat(variantMapping[this._variant.toUpperCase()] || this._variant));
+        this.classList.add("".concat(CLASSNAME$1F, "--").concat(variantMapping[this._variant.toUpperCase()] || this._variant));
       }
       /**
        The status color. See {@link StatusColorEnum}.
@@ -63626,7 +64350,7 @@ var Coral = (function (exports) {
         (_this$classList2 = this.classList).remove.apply(_this$classList2, ALL_COLOR_CLASSES$1);
 
         if (this._color !== color$1.DEFAULT) {
-          this.classList.add("".concat(CLASSNAME$1B, "--").concat(this._color));
+          this.classList.add("".concat(CLASSNAME$1F, "--").concat(this._color));
         }
       }
       /**
@@ -63666,7 +64390,7 @@ var Coral = (function (exports) {
     }], [{
       key: "variant",
       get: function get() {
-        return variant$j;
+        return variant$k;
       }
       /**
        Returns {@link Status} colors.
@@ -63797,7 +64521,7 @@ var Coral = (function (exports) {
     LARGE: 'L'
   }; // the StepList's base classname
 
-  var CLASSNAME$1C = '_coral-Steplist';
+  var CLASSNAME$1G = '_coral-Steplist';
   /**
    @class Coral.StepList
    @classdesc A StepList component that holds a collection of steps.
@@ -64102,7 +64826,7 @@ var Coral = (function (exports) {
       key: "_updateLabels",
       value: function _updateLabels() {
         var hasOversizedLabel = false;
-        var hybridClass = "".concat(CLASSNAME$1C, "--hybrid");
+        var hybridClass = "".concat(CLASSNAME$1G, "--hybrid");
         this._isHybridMode = false;
         this.classList.remove(hybridClass); // when the steplist is small no check is needed
 
@@ -64181,7 +64905,7 @@ var Coral = (function (exports) {
 
         _get(_getPrototypeOf(StepList.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1C); // Default reflected attributes
+        this.classList.add(CLASSNAME$1G); // Default reflected attributes
 
         if (!this._interaction) {
           this.interaction = interaction$4.OFF;
@@ -64328,7 +65052,7 @@ var Coral = (function (exports) {
 
         this._reflectAttribute('size', this._size);
 
-        this.classList.toggle("".concat(CLASSNAME$1C, "--small"), this._size === size$7.SMALL);
+        this.classList.toggle("".concat(CLASSNAME$1G, "--small"), this._size === size$7.SMALL);
       }
       /**
        Whether Steps should be interactive or not. When interactive, a Step can be clicked to jump to it.
@@ -64352,7 +65076,7 @@ var Coral = (function (exports) {
         this._reflectAttribute('interaction', this._interaction);
 
         var isInteractive = this._interaction === interaction$4.ON;
-        this.classList.toggle("".concat(CLASSNAME$1C, "--interactive"), isInteractive);
+        this.classList.toggle("".concat(CLASSNAME$1G, "--interactive"), isInteractive);
         var steps = this.items.getAll();
         var stepsCount = steps.length; // update tab index for all children
 
@@ -64388,7 +65112,7 @@ var Coral = (function (exports) {
     return StepList;
   }(BaseComponent(HTMLElement));
 
-  var template$S = function anonymous(data_0) {
+  var template$T = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["stepMarkerContainer"] = document.createElement("span");
     el0.className += " _coral-Steplist-markerContainer";
@@ -64425,7 +65149,7 @@ var Coral = (function (exports) {
     return frag;
   };
 
-  var CLASSNAME$1D = '_coral-Steplist-item';
+  var CLASSNAME$1H = '_coral-Steplist-item';
   /**
    @class Coral.Step
    @classdesc A Step component
@@ -64450,7 +65174,7 @@ var Coral = (function (exports) {
       _this._elements = {
         label: _this.querySelector('coral-step-label') || document.createElement('coral-step-label')
       };
-      template$S.call(_this._elements);
+      template$T.call(_this._elements);
       return _this;
     }
     /**
@@ -64484,7 +65208,7 @@ var Coral = (function (exports) {
       value: function connectedCallback() {
         _get(_getPrototypeOf(Step.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1D); // Generate a unique ID for the Step panel if one isn't already present
+        this.classList.add(CLASSNAME$1H); // Generate a unique ID for the Step panel if one isn't already present
         // This will be used for accessibility purposes
 
         this.setAttribute('id', this.id || commons.getUID()); // A11y
@@ -64658,7 +65382,7 @@ var Coral = (function (exports) {
     return Step;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$1E = '_coral-Steplist-label';
+  var CLASSNAME$1I = '_coral-Steplist-label';
   /**
    @class Coral.Step.Label
    @classdesc A Step Label
@@ -64683,7 +65407,7 @@ var Coral = (function (exports) {
 
       /** @ignore */
       value: function connectedCallback() {
-        this.classList.add(CLASSNAME$1E);
+        this.classList.add(CLASSNAME$1I);
       }
     }]);
 
@@ -64707,7 +65431,7 @@ var Coral = (function (exports) {
   window.customElements.define('coral-step-label', StepLabel);
   Step.Label = StepLabel;
 
-  var template$T = function anonymous(data_0) {
+  var template$U = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["input"] = document.createElement("input");
     el0.setAttribute("type", "checkbox");
@@ -64734,7 +65458,7 @@ var Coral = (function (exports) {
     return frag;
   };
 
-  var CLASSNAME$1F = '_coral-ToggleSwitch';
+  var CLASSNAME$1J = '_coral-ToggleSwitch';
   /**
    @class Coral.Switch
    @classdesc A Switch component is a toggle form field similar to a Checkbox component.
@@ -64767,7 +65491,7 @@ var Coral = (function (exports) {
         // Try to find the label content zone
         label: _this.querySelector('coral-switch-label') || document.createElement('coral-switch-label')
       };
-      template$T.call(_this._elements, {
+      template$U.call(_this._elements, {
         commons: commons
       }); // Pre-define labellable element
 
@@ -64851,7 +65575,7 @@ var Coral = (function (exports) {
       value: function connectedCallback() {
         _get(_getPrototypeOf(Switch.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1F); // Create a fragment
+        this.classList.add(CLASSNAME$1J); // Create a fragment
 
         var frag = document.createDocumentFragment();
         var templateHandleNames = ['input', 'switch', 'labelWrapper']; // Render the template
@@ -65266,7 +65990,7 @@ var Coral = (function (exports) {
     RIGHT: 'right'
   };
 
-  var CLASSNAME$1G = '_coral-Table-column';
+  var CLASSNAME$1K = '_coral-Table-column';
   /**
    Enumeration for {@link TableColumn} sortable direction options.
    
@@ -65369,7 +66093,7 @@ var Coral = (function (exports) {
       value: function connectedCallback() {
         _get(_getPrototypeOf(TableColumn.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1G); // Default reflected attributes
+        this.classList.add(CLASSNAME$1K); // Default reflected attributes
 
         if (!this._sortableType) {
           this.sortableType = sortableType.ALPHANUMERIC;
@@ -65666,7 +66390,7 @@ var Coral = (function (exports) {
     return TableColumn;
   }(BaseComponent(HTMLTableColElement));
 
-  var CLASSNAME$1H = '_coral-Table-cell';
+  var CLASSNAME$1L = '_coral-Table-cell';
   /**
    @class Coral.Table.Cell
    @classdesc A Table cell component
@@ -65749,7 +66473,7 @@ var Coral = (function (exports) {
       value: function connectedCallback() {
         _get(_getPrototypeOf(TableCell.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1H); // a11y
+        this.classList.add(CLASSNAME$1L); // a11y
 
         this.setAttribute('role', 'gridcell');
       }
@@ -65843,7 +66567,7 @@ var Coral = (function (exports) {
     return TableCell;
   }(BaseComponent(HTMLTableCellElement));
 
-  var CLASSNAME$1I = '_coral-Table-headerCell';
+  var CLASSNAME$1M = '_coral-Table-headerCell';
   /**
    @class Coral.Table.HeaderCell
    @classdesc A Table header cell component
@@ -65901,7 +66625,7 @@ var Coral = (function (exports) {
       value: function connectedCallback() {
         _get(_getPrototypeOf(TableHeaderCell.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1I); // Fetch or create the content zone element
+        this.classList.add(CLASSNAME$1M); // Fetch or create the content zone element
 
         var content = this._elements.content;
 
@@ -65948,7 +66672,7 @@ var Coral = (function (exports) {
     return TableHeaderCell;
   }(BaseComponent(HTMLTableCellElement));
 
-  var CLASSNAME$1J = '_coral-Table-row';
+  var CLASSNAME$1N = '_coral-Table-row';
   /**
    @class Coral.Table.Row
    @classdesc A Table row component
@@ -66132,7 +66856,7 @@ var Coral = (function (exports) {
       value: function connectedCallback() {
         _get(_getPrototypeOf(TableRow.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1J); // a11y
+        this.classList.add(CLASSNAME$1N); // a11y
 
         this.setAttribute('role', 'row');
       }
@@ -66401,7 +67125,7 @@ var Coral = (function (exports) {
     );
   };
 
-  var CLASSNAME$1K = '_coral-Table-head';
+  var CLASSNAME$1O = '_coral-Table-head';
   /**
    @class Coral.Table.Head
    @classdesc A Table head component
@@ -66470,7 +67194,7 @@ var Coral = (function (exports) {
       value: function connectedCallback() {
         _get(_getPrototypeOf(TableHead.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1K);
+        this.classList.add(CLASSNAME$1O);
       }
       /**
        Triggered when the {@link TableHead} content changed.
@@ -66513,7 +67237,7 @@ var Coral = (function (exports) {
     return TableHead;
   }(BaseTableSection(BaseComponent(HTMLTableSectionElement)));
 
-  var CLASSNAME$1L = '_coral-Table-body';
+  var CLASSNAME$1P = '_coral-Table-body';
   /**
    @class Coral.Table.Body
    @classdesc A Table body component
@@ -66568,7 +67292,7 @@ var Coral = (function (exports) {
       value: function connectedCallback() {
         _get(_getPrototypeOf(TableBody.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1L);
+        this.classList.add(CLASSNAME$1P);
 
         if (getRows([this]).length === 0) {
           this.trigger('coral-table-body:_empty');
@@ -66595,7 +67319,7 @@ var Coral = (function (exports) {
     return TableBody;
   }(BaseTableSection(BaseComponent(HTMLTableSectionElement)));
 
-  var CLASSNAME$1M = '_coral-Table-foot';
+  var CLASSNAME$1Q = '_coral-Table-foot';
   /**
    @class Coral.Table.Foot
    @classdesc A Table foot component
@@ -66624,14 +67348,14 @@ var Coral = (function (exports) {
       value: function connectedCallback() {
         _get(_getPrototypeOf(TableFoot.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1M);
+        this.classList.add(CLASSNAME$1Q);
       }
     }]);
 
     return TableFoot;
   }(BaseTableSection(BaseComponent(HTMLTableSectionElement)));
 
-  var template$U = function anonymous(data_0) {
+  var template$V = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["container"] = document.createElement("div");
     el0.setAttribute("handle", "container");
@@ -66663,7 +67387,7 @@ var Coral = (function (exports) {
     return frag;
   };
 
-  var CLASSNAME$1N = '_coral-Table-wrapper';
+  var CLASSNAME$1R = '_coral-Table-wrapper';
   /**
    Enumeration for {@link Table} variants
    
@@ -66677,15 +67401,15 @@ var Coral = (function (exports) {
    Not supported. Falls back to DEFAULT.
    */
 
-  var variant$k = {
+  var variant$l = {
     DEFAULT: 'default',
     QUIET: 'quiet',
     LIST: 'list'
   };
   var ALL_VARIANT_CLASSES$b = [];
 
-  for (var variantValue$9 in variant$k) {
-    ALL_VARIANT_CLASSES$b.push("".concat(CLASSNAME$1N, "--").concat(variant$k[variantValue$9]));
+  for (var variantValue$9 in variant$l) {
+    ALL_VARIANT_CLASSES$b.push("".concat(CLASSNAME$1R, "--").concat(variant$l[variantValue$9]));
   }
 
   var IS_DISABLED = 'is-disabled';
@@ -66732,7 +67456,7 @@ var Coral = (function (exports) {
         foot: _this.querySelector('tfoot[is="coral-table-foot"]') || new TableFoot(),
         columns: _this.querySelector('colgroup') || document.createElement('colgroup')
       };
-      template$U.call(_this._elements); // Events
+      template$V.call(_this._elements); // Events
 
       _this._delegateEvents({
         // Table specific
@@ -68162,7 +68886,7 @@ var Coral = (function (exports) {
             });
           }); // Make sure sticky styling is applied
 
-          table.classList.toggle("".concat(CLASSNAME$1N, "--sticky"), head.sticky); // Layout sticky head
+          table.classList.toggle("".concat(CLASSNAME$1R, "--sticky"), head.sticky); // Layout sticky head
 
           table._resetLayout();
         });
@@ -68831,12 +69555,12 @@ var Coral = (function (exports) {
 
         _get(_getPrototypeOf(Table.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1N); // Wrapper should have role="presentation" because it wraps another table
+        this.classList.add(CLASSNAME$1R); // Wrapper should have role="presentation" because it wraps another table
 
         this.setAttribute('role', 'presentation'); // Default reflected attribute
 
         if (!this._variant) {
-          this.variant = variant$k.DEFAULT;
+          this.variant = variant$l.DEFAULT;
         }
 
         var head = this._elements.head;
@@ -69128,19 +69852,19 @@ var Coral = (function (exports) {
     }, {
       key: "variant",
       get: function get() {
-        return this._variant || variant$k.DEFAULT;
+        return this._variant || variant$l.DEFAULT;
       },
       set: function set(value) {
         var _this$classList;
 
         value = transform.string(value).toLowerCase();
-        this._variant = validate.enumeration(variant$k)(value) && value || variant$k.DEFAULT;
+        this._variant = validate.enumeration(variant$l)(value) && value || variant$l.DEFAULT;
 
         this._reflectAttribute('variant', this._variant);
 
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$b);
 
-        this.classList.add("".concat(CLASSNAME$1N, "--").concat(this._variant));
+        this.classList.add("".concat(CLASSNAME$1R, "--").concat(this._variant));
       }
       /**
        Whether the items are selectable.
@@ -69354,7 +70078,7 @@ var Coral = (function (exports) {
     }], [{
       key: "variant",
       get: function get() {
-        return variant$k;
+        return variant$l;
       }
       /**
        Returns divider options for {@link TableHead}, {@link TableBody} and {@link TableFoot}.
@@ -69446,7 +70170,7 @@ var Coral = (function (exports) {
   Table.Body = TableBody;
   Table.Foot = TableFoot;
 
-  var template$V = function anonymous(data_0) {
+  var template$W = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["icon"] = document.createElement("coral-icon");
     el0.setAttribute("handle", "icon");
@@ -69495,7 +70219,7 @@ var Coral = (function (exports) {
     return newTarget;
   }
 
-  var CLASSNAME$1O = '_coral-Tabs-item';
+  var CLASSNAME$1S = '_coral-Tabs-item';
   /**
    @class Coral.Tab
    @classdesc A Tab component
@@ -69520,7 +70244,7 @@ var Coral = (function (exports) {
       _this._elements = {
         label: _this.querySelector('coral-tab-label') || document.createElement('coral-tab-label')
       };
-      template$V.call(_this._elements); // Listen for mutations
+      template$W.call(_this._elements); // Listen for mutations
 
       _this._observer = new MutationObserver(function () {
         // Change icon size if the label is empty
@@ -69589,7 +70313,7 @@ var Coral = (function (exports) {
       value: function connectedCallback() {
         _get(_getPrototypeOf(Tab.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1O); // adds the role to support accessibility
+        this.classList.add(CLASSNAME$1S); // adds the role to support accessibility
 
         this.setAttribute('role', 'tab'); // Generate a unique ID for the tab panel if one isn't already present
         // This will be used for accessibility purposes
@@ -69829,7 +70553,7 @@ var Coral = (function (exports) {
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var CLASSNAME$1P = '_coral-Tabs-itemLabel';
+  var CLASSNAME$1T = '_coral-Tabs-itemLabel';
   /**
    @class Coral.Tab.Label
    @classdesc Tab's label component
@@ -69853,14 +70577,14 @@ var Coral = (function (exports) {
 
       /** @ignore */
       value: function connectedCallback() {
-        this.classList.add(CLASSNAME$1P);
+        this.classList.add(CLASSNAME$1T);
       }
     }]);
 
     return TabLabel;
   }(_wrapNativeSuper(HTMLElement));
 
-  var template$W = function anonymous(data_0) {
+  var template$X = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["line"] = document.createElement("div");
     el0.setAttribute("handle", "line");
@@ -69906,7 +70630,7 @@ var Coral = (function (exports) {
     VERTICAL: 'vertical'
   }; // the tablist's base classname
 
-  var CLASSNAME$1Q = '_coral-Tabs';
+  var CLASSNAME$1U = '_coral-Tabs';
   /**
    @class Coral.TabList
    @classdesc A TabList component holds a collection of tabs.
@@ -69929,7 +70653,7 @@ var Coral = (function (exports) {
       _this = _possibleConstructorReturn(this, _getPrototypeOf(TabList).call(this)); // Templates
 
       _this._elements = {};
-      template$W.call(_this._elements); // Attach events
+      template$X.call(_this._elements); // Attach events
 
       _this._delegateEvents({
         'click > coral-tab': '_onTabClick',
@@ -70206,7 +70930,7 @@ var Coral = (function (exports) {
       value: function connectedCallback() {
         _get(_getPrototypeOf(TabList.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1Q); // adds the role to support accessibility
+        this.classList.add(CLASSNAME$1U); // adds the role to support accessibility
 
         this.setAttribute('role', 'tablist');
         this.setAttribute('aria-multiselectable', 'false'); // Default reflected attributes
@@ -70359,12 +71083,12 @@ var Coral = (function (exports) {
         this._reflectAttribute('size', this._size); // Remove all variant classes
 
 
-        this.classList.remove("".concat(CLASSNAME$1Q, "--compact"), "".concat(CLASSNAME$1Q, "--quiet"));
+        this.classList.remove("".concat(CLASSNAME$1U, "--compact"), "".concat(CLASSNAME$1U, "--quiet"));
 
         if (this._size === size$8.SMALL) {
-          this.classList.add("".concat(CLASSNAME$1Q, "--compact"));
+          this.classList.add("".concat(CLASSNAME$1U, "--compact"));
         } else if (this._size === size$8.LARGE) {
-          this.classList.add("".concat(CLASSNAME$1Q, "--quiet"));
+          this.classList.add("".concat(CLASSNAME$1U, "--quiet"));
         }
       }
       /**
@@ -70387,8 +71111,8 @@ var Coral = (function (exports) {
 
         this._reflectAttribute('orientation', this._orientation);
 
-        this.classList.toggle("".concat(CLASSNAME$1Q, "--vertical"), this._orientation === orientation$1.VERTICAL);
-        this.classList.toggle("".concat(CLASSNAME$1Q, "--horizontal"), this._orientation === orientation$1.HORIZONTAL);
+        this.classList.toggle("".concat(CLASSNAME$1U, "--vertical"), this._orientation === orientation$1.VERTICAL);
+        this.classList.toggle("".concat(CLASSNAME$1U, "--horizontal"), this._orientation === orientation$1.HORIZONTAL);
 
         this._setLine(true);
       }
@@ -70453,7 +71177,7 @@ var Coral = (function (exports) {
     VERTICAL: 'vertical'
   }; // the tabview's base classname
 
-  var CLASSNAME$1R = '_coral-TabView';
+  var CLASSNAME$1V = '_coral-TabView';
   /**
    @class Coral.TabView
    @classdesc A TabView component is the wrapping container used to create the typical Tabbed pattern.
@@ -70550,7 +71274,7 @@ var Coral = (function (exports) {
       value: function connectedCallback() {
         _get(_getPrototypeOf(TabView.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1R); // Default reflected attributes
+        this.classList.add(CLASSNAME$1V); // Default reflected attributes
 
         if (!this._orientation) {
           this.orientation = this.orientation;
@@ -70587,7 +71311,7 @@ var Coral = (function (exports) {
 
         this._reflectAttribute('orientation', this.orientation);
 
-        this.classList[this.orientation === orientation$2.VERTICAL ? 'add' : 'remove']("".concat(CLASSNAME$1R, "--vertical"));
+        this.classList[this.orientation === orientation$2.VERTICAL ? 'add' : 'remove']("".concat(CLASSNAME$1V, "--vertical"));
       }
       /**
        The TabList which handles all the tabs.
@@ -70683,7 +71407,7 @@ var Coral = (function (exports) {
 
   window.customElements.define('coral-tabview', TabView);
 
-  var CLASSNAME$1S = '_coral-Textfield';
+  var CLASSNAME$1W = '_coral-Textfield';
   /**
    Enumeration for {@link Textarea} variants.
    
@@ -70695,7 +71419,7 @@ var Coral = (function (exports) {
    A textarea with no border or background.
    */
 
-  var variant$l = {
+  var variant$m = {
     DEFAULT: 'default',
     QUIET: 'quiet'
   }; // Builds a string containing all possible variant classnames. This will be used to remove classnames when the variant
@@ -70703,8 +71427,8 @@ var Coral = (function (exports) {
 
   var ALL_VARIANT_CLASSES$c = [];
 
-  for (var variantValue$a in variant$l) {
-    ALL_VARIANT_CLASSES$c.push("".concat(CLASSNAME$1S, "--").concat(variant$l[variantValue$a]));
+  for (var variantValue$a in variant$m) {
+    ALL_VARIANT_CLASSES$c.push("".concat(CLASSNAME$1W, "--").concat(variant$m[variantValue$a]));
   }
   /**
    @class Coral.Textarea
@@ -70763,7 +71487,7 @@ var Coral = (function (exports) {
     }, {
       key: "_onInput",
       value: function _onInput() {
-        if (this.variant === variant$l.QUIET) {
+        if (this.variant === variant$m.QUIET) {
           this.style.height = 'auto';
           this.style.height = "".concat(this.scrollHeight, "px");
         }
@@ -70781,35 +71505,35 @@ var Coral = (function (exports) {
       value: function connectedCallback() {
         _get(_getPrototypeOf(Textarea.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1S);
-        this.classList.add("".concat(CLASSNAME$1S, "--multiline")); // Default reflected attributes
+        this.classList.add(CLASSNAME$1W);
+        this.classList.add("".concat(CLASSNAME$1W, "--multiline")); // Default reflected attributes
 
         if (!this._variant) {
-          this.variant = variant$l.DEFAULT;
+          this.variant = variant$m.DEFAULT;
         }
       }
     }, {
       key: "variant",
       get: function get() {
-        return this._variant || variant$l.DEFAULT;
+        return this._variant || variant$m.DEFAULT;
       },
       set: function set(value) {
         var _this$classList;
 
         value = transform.string(value).toLowerCase();
-        this._variant = validate.enumeration(variant$l)(value) && value || variant$l.DEFAULT;
+        this._variant = validate.enumeration(variant$m)(value) && value || variant$m.DEFAULT;
 
         this._reflectAttribute('variant', this._variant); // removes every existing variant
 
 
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$c);
 
-        if (this._variant !== variant$l.DEFAULT) {
-          this.classList.add("".concat(CLASSNAME$1S, "--").concat(this._variant));
+        if (this._variant !== variant$m.DEFAULT) {
+          this.classList.add("".concat(CLASSNAME$1W, "--").concat(this._variant));
         } // Restore the original height
 
 
-        if (this._variant === variant$l.QUIET) {
+        if (this._variant === variant$m.QUIET) {
           this._defaultHeight = this._defaultHeight || this.style.height;
         } else {
           this.style.height = this._defaultHeight;
@@ -70821,7 +71545,7 @@ var Coral = (function (exports) {
     }], [{
       key: "variant",
       get: function get() {
-        return variant$l;
+        return variant$m;
       }
       /** @ignore */
 
@@ -70851,7 +71575,7 @@ var Coral = (function (exports) {
     extends: 'textarea'
   });
 
-  var template$X = function anonymous(data_0) {
+  var template$Y = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["body"] = document.createElement("div");
     el0.className += " _coral-Toast-body";
@@ -70908,7 +71632,7 @@ var Coral = (function (exports) {
    A toast to notify the user of non-critical information.
    */
 
-  var variant$m = {
+  var variant$n = {
     DEFAULT: 'default',
     ERROR: 'error',
     SUCCESS: 'success',
@@ -70932,12 +71656,12 @@ var Coral = (function (exports) {
     CENTER: 'center',
     RIGHT: 'right'
   };
-  var CLASSNAME$1T = '_coral-Toast'; // An array of all possible variant
+  var CLASSNAME$1X = '_coral-Toast'; // An array of all possible variant
 
   var ALL_VARIANT_CLASSES$d = [];
 
-  for (var variantValue$b in variant$m) {
-    ALL_VARIANT_CLASSES$d.push("".concat(CLASSNAME$1T, "--").concat(variant$m[variantValue$b]));
+  for (var variantValue$b in variant$n) {
+    ALL_VARIANT_CLASSES$d.push("".concat(CLASSNAME$1X, "--").concat(variant$n[variantValue$b]));
   }
 
   var PRIORITY_QUEUE = [];
@@ -70946,11 +71670,11 @@ var Coral = (function (exports) {
     var priority;
     var type = transform.string(el.getAttribute('variant')).toLowerCase();
 
-    if (type === variant$m.ERROR) {
+    if (type === variant$n.ERROR) {
       priority = el.action ? 1 : 2;
-    } else if (type === variant$m.SUCCESS) {
+    } else if (type === variant$n.SUCCESS) {
       priority = el.action ? 3 : 6;
-    } else if (type === variant$m.INFO) {
+    } else if (type === variant$n.INFO) {
       priority = el.action ? 4 : 7;
     } else {
       priority = el.action ? 5 : 8;
@@ -71020,7 +71744,7 @@ var Coral = (function (exports) {
         // Fetch or create the content zone element
         content: _this.querySelector('coral-toast-content') || document.createElement('coral-toast-content')
       };
-      template$X.call(_this._elements);
+      template$Y.call(_this._elements);
 
       _this._delegateEvents({
         'global:resize': '_debounceLayout',
@@ -71061,12 +71785,12 @@ var Coral = (function (exports) {
 
         var variantValue = this.variant; // Default variant has no icon
 
-        if (variantValue === variant$m.DEFAULT) {
+        if (variantValue === variant$n.DEFAULT) {
           return;
         } // Inject the SVG icon
 
 
-        var iconName = variantValue === variant$m.ERROR ? 'Alert' : capitalize$4(variantValue);
+        var iconName = variantValue === variant$n.ERROR ? 'Alert' : capitalize$4(variantValue);
 
         var icon = Icon._renderSVG("spectrum-css-icon-".concat(iconName, "Medium"), ['_coral-Toast-typeIcon', "_coral-UIIcon-".concat(iconName, "Medium")]);
 
@@ -71159,10 +71883,10 @@ var Coral = (function (exports) {
 
         _get(_getPrototypeOf(Toast.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1T); // Default reflected attributes
+        this.classList.add(CLASSNAME$1X); // Default reflected attributes
 
         if (!this._variant) {
-          this.variant = variant$m.DEFAULT;
+          this.variant = variant$n.DEFAULT;
         } // Create a fragment
 
 
@@ -71362,13 +72086,13 @@ var Coral = (function (exports) {
     }, {
       key: "variant",
       get: function get() {
-        return this._variant || variant$m.DEFAULT;
+        return this._variant || variant$n.DEFAULT;
       },
       set: function set(value) {
         var _this$classList;
 
         value = transform.string(value).toLowerCase();
-        this._variant = validate.enumeration(variant$m)(value) && value || variant$m.DEFAULT;
+        this._variant = validate.enumeration(variant$n)(value) && value || variant$n.DEFAULT;
 
         this._reflectAttribute('variant', this._variant);
 
@@ -71378,7 +72102,7 @@ var Coral = (function (exports) {
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$d); // Set new variant class
 
 
-        this.classList.add("".concat(CLASSNAME$1T, "--").concat(this._variant)); // Set the role attribute to alert or status depending on
+        this.classList.add("".concat(CLASSNAME$1X, "--").concat(this._variant)); // Set the role attribute to alert or status depending on
         // the variant so that the element turns into a live region
 
         this.setAttribute('role', this._variant);
@@ -71456,7 +72180,7 @@ var Coral = (function (exports) {
     }, {
       key: "variant",
       get: function get() {
-        return variant$m;
+        return variant$n;
       }
       /** @ignore */
 
@@ -71470,7 +72194,7 @@ var Coral = (function (exports) {
     return Toast;
   }(BaseOverlay(BaseComponent(HTMLElement)));
 
-  var CLASSNAME$1U = '_coral-Toast-content';
+  var CLASSNAME$1Y = '_coral-Toast-content';
   /**
    @class Coral.Toast.Content
    @classdesc The Toast default content
@@ -71495,7 +72219,7 @@ var Coral = (function (exports) {
 
       /** @ignore */
       value: function connectedCallback() {
-        this.classList.add(CLASSNAME$1U);
+        this.classList.add(CLASSNAME$1Y);
       }
     }]);
 
@@ -71518,7 +72242,7 @@ var Coral = (function (exports) {
   window.customElements.define('coral-toast-content', ToastContent);
   Toast.Content = ToastContent;
 
-  var CLASSNAME$1V = '_coral-TreeView';
+  var CLASSNAME$1Z = '_coral-TreeView';
   /**
    @class Coral.Tree
    @classdesc A Tree component is a container component to display collapsible content.
@@ -71989,7 +72713,7 @@ var Coral = (function (exports) {
 
         _get(_getPrototypeOf(Tree.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1V); // a11y
+        this.classList.add(CLASSNAME$1Z); // a11y
 
         this.setAttribute('role', 'tree');
         this.setAttribute('aria-multiselectable', this.multiple); // Requires tree item API to be defined
@@ -72100,7 +72824,7 @@ var Coral = (function (exports) {
     return Tree;
   }(BaseComponent(HTMLElement));
 
-  var template$Y = function anonymous(data_0) {
+  var template$Z = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["header"] = document.createElement("div");
@@ -72128,7 +72852,7 @@ var Coral = (function (exports) {
     return frag;
   };
 
-  var CLASSNAME$1W = '_coral-TreeView-item';
+  var CLASSNAME$1_ = '_coral-TreeView-item';
   /**
    Enumeration for {@link TreeItem} variants.
    
@@ -72140,7 +72864,7 @@ var Coral = (function (exports) {
    Variant for leaf items. Icon to expand/collapse subtree is hidden.
    */
 
-  var variant$n = {
+  var variant$o = {
     /* Default variant with icon to expand/collapse subtree. */
     DRILLDOWN: 'drilldown',
 
@@ -72149,8 +72873,8 @@ var Coral = (function (exports) {
   };
   var ALL_VARIANT_CLASSES$e = [];
 
-  for (var variantValue$c in variant$n) {
-    ALL_VARIANT_CLASSES$e.push("".concat(CLASSNAME$1W, "--").concat(variant$n[variantValue$c]));
+  for (var variantValue$c in variant$o) {
+    ALL_VARIANT_CLASSES$e.push("".concat(CLASSNAME$1_, "--").concat(variant$o[variantValue$c]));
   }
   /**
    @class Coral.Tree.Item
@@ -72178,7 +72902,7 @@ var Coral = (function (exports) {
         // Create or fetch the content zones
         content: _this.querySelector('coral-tree-item-content') || document.createElement('coral-tree-item-content')
       };
-      template$Y.call(_this._elements, {
+      template$Z.call(_this._elements, {
         Icon: Icon,
         commons: commons
       }); // Tells the collection to automatically detect the items and handle the events
@@ -72242,7 +72966,7 @@ var Coral = (function (exports) {
       value: function connectedCallback() {
         _get(_getPrototypeOf(TreeItem.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1W); // a11y
+        this.classList.add(CLASSNAME$1_); // a11y
 
         this.setAttribute('role', 'treeitem');
         this.setAttribute('aria-selected', this.selected);
@@ -72253,7 +72977,7 @@ var Coral = (function (exports) {
 
 
         if (!this._variant) {
-          this.variant = variant$n.DRILLDOWN;
+          this.variant = variant$o.DRILLDOWN;
         }
 
         this.expanded = this.expanded; // Render the template and set element references
@@ -72459,17 +73183,17 @@ var Coral = (function (exports) {
     }, {
       key: "variant",
       get: function get() {
-        return this._variant || variant$n.DRILLDOWN;
+        return this._variant || variant$o.DRILLDOWN;
       },
       set: function set(value) {
         var _this$classList;
 
         value = transform.string(value).toLowerCase();
-        this._variant = validate.enumeration(variant$n, value) && value || variant$n.DRILLDOWN; // removes every existing variant
+        this._variant = validate.enumeration(variant$o, value) && value || variant$o.DRILLDOWN; // removes every existing variant
 
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$e);
 
-        this.classList.add("".concat(CLASSNAME$1W, "--").concat(this._variant));
+        this.classList.add("".concat(CLASSNAME$1_, "--").concat(this._variant));
       }
       /**
        Whether the item is selected.
@@ -72548,7 +73272,7 @@ var Coral = (function (exports) {
     }], [{
       key: "variant",
       get: function get() {
-        return variant$n;
+        return variant$o;
       }
     }, {
       key: "observedAttributes",
@@ -72599,7 +73323,7 @@ var Coral = (function (exports) {
   Tree.Item = TreeItem;
   Tree.Item.Content = TreeItemContent;
 
-  var CLASSNAME$1X = '_coral-WizardView';
+  var CLASSNAME$1$ = '_coral-WizardView';
   /**
    @class Coral.WizardView
    @classdesc A WizardView component is the wrapping container used to create the typical Wizard pattern. This is intended
@@ -72936,7 +73660,7 @@ var Coral = (function (exports) {
       value: function connectedCallback() {
         _get(_getPrototypeOf(WizardView.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1X);
+        this.classList.add(CLASSNAME$1$);
 
         this._syncStepListSelection(0);
 
@@ -73020,7 +73744,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.101";
+  var version = "1.0.0-beta.102";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
@@ -73219,6 +73943,7 @@ var Coral = (function (exports) {
   exports.SelectList = SelectList;
   exports.SelectableCollection = SelectableCollection;
   exports.Shell = Shell;
+  exports.SideNav = SideNav;
   exports.Slider = Slider;
   exports.SplitButton = SplitButton;
   exports.Status = Status;

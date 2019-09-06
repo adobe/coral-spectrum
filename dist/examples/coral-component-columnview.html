@@ -9,6 +9,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         const markup = document.body.querySelectorAll('.markup');
@@ -50,6 +52,8 @@
     </div>
 
     <section class="u-coral-margin">
+      <h1 class="coral-Heading coral-Heading--1">ColumnView</h1>
+
       <div class="markup">
 
         <style type="text/css">
@@ -58,7 +62,6 @@
           }
 
           #log {
-            border: 1px solid #bababa;
             height: 200px;
             overflow-y: scroll;
             padding: 10px;
@@ -343,30 +346,33 @@
         </script>
 
         <div style="margin-bottom:15px;">
-          <label style="padding-left:10px;">SelectionMode</label>
-          <select name="selectionmode">
-            <option>none</option>
-            <option>single</option>
-            <option>multiple</option>
-          </select>
+          <a class="coral-Link" href="#" id="togglelogs">Toggle logs</a>
+          <label style="padding-left:10px;">Selection mode</label>
+          <span id="selectionmode">
+            <a class="coral-Link" href="#">none</a> |
+            <a class="coral-Link" href="#">single</a> |
+            <a class="coral-Link" href="#">multiple</a>
+          </span>
           <span style="padding-left:10px;">Selected: <b id="selected_count">0</b></span>
-          <span style="padding-left:10px;">ActiveItem: <i id="active_item"></i> </span>
+          <span style="padding-left:10px;">Active item: <b id="active_item"></b> </span>
         </div>
 
         <coral-columnview id="columnview" selectionmode="multiple"><coral-columnview-column data-src="content.html" id="cv-multiple-0"></coral-columnview-column></coral-columnview>
 
-        <h2 class="coral-Heading coral-Heading--2">Log</h2>
-        <ul id="log"></ul>
+        <ul id="log" class="coral-Well" hidden></ul>
 
         <script type="text/javascript">
           const log = document.getElementById('log');
           const columnView = document.getElementById('columnview');
-          const selectionModeSelector = document.querySelector('[name=selectionmode]');
+          const selectionModeSelector = document.getElementById('selectionmode');
+          const logsToggle = document.getElementById('togglelogs');
 
-          selectionModeSelector.value = columnView.getAttribute('selectionmode');
+          selectionModeSelector.addEventListener('click', function(event) {
+            columnView.setAttribute('selectionmode', event.target.textContent);
+          });
 
-          selectionModeSelector.addEventListener('change', function() {
-            columnView.setAttribute('selectionmode', selectionModeSelector.value);
+          logsToggle.addEventListener('click', function() {
+            log.hidden = !log.hidden;
           });
 
           document.addEventListener('coral-columnview:loaditems', function(event) {

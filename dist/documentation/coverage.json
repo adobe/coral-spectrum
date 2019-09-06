@@ -1,7 +1,7 @@
 {
-  "coverage": "65.99%",
-  "expectCount": 3485,
-  "actualCount": 2300,
+  "coverage": "65.76%",
+  "expectCount": 3534,
+  "actualCount": 2324,
   "files": {
     "coral-spectrum/coral-base-button/src/scripts/BaseButton.js": {
       "expectCount": 42,
@@ -1770,6 +1770,59 @@
         144
       ]
     },
+    "coral-spectrum/coral-component-sidenav/src/scripts/SideNav.js": {
+      "expectCount": 27,
+      "actualCount": 8,
+      "undocumentLines": [
+        17,
+        61,
+        64,
+        67,
+        73,
+        89,
+        124,
+        143,
+        151,
+        157,
+        163,
+        169,
+        178,
+        211,
+        231,
+        245,
+        257,
+        286,
+        294
+      ]
+    },
+    "coral-spectrum/coral-component-sidenav/src/scripts/SideNavHeading.js": {
+      "expectCount": 3,
+      "actualCount": 3,
+      "undocumentLines": []
+    },
+    "coral-spectrum/coral-component-sidenav/src/scripts/SideNavItem.js": {
+      "expectCount": 11,
+      "actualCount": 8,
+      "undocumentLines": [
+        33,
+        86,
+        94
+      ]
+    },
+    "coral-spectrum/coral-component-sidenav/src/scripts/SideNavItemContent.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coral-spectrum/coral-component-sidenav/src/scripts/SideNavLevel.js": {
+      "expectCount": 7,
+      "actualCount": 4,
+      "undocumentLines": [
+        16,
+        49,
+        70
+      ]
+    },
     "coral-spectrum/coral-component-slider/src/scripts/RangedSlider.js": {
       "expectCount": 15,
       "actualCount": 14,
@@ -2352,13 +2405,13 @@
         25,
         28,
         45,
-        249,
-        251,
-        264,
-        267,
-        269,
-        274,
-        881
+        253,
+        255,
+        268,
+        271,
+        273,
+        278,
+        885
       ]
     },
     "coral-spectrum/coral-utils/src/scripts/Events.js": {

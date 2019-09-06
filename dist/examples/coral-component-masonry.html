@@ -9,6 +9,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         const markup = document.body.querySelectorAll('.markup');
@@ -49,6 +51,8 @@
     </div>
 
     <section class="u-coral-margin">
+      <h1 class="coral-Heading coral-Heading--1">Masonry</h1>
+
       <div class="markup">
         <style>
           coral-masonry {
@@ -86,38 +90,37 @@
 
         <label>
           Selection mode
-          <select name="selection">
-            <option>none</option>
-            <option>single</option>
-            <option>multiple</option>
-          </select>
+          <span id="selection">
+            <a href="#" class="coral-Link">none</a> |
+            <a href="#" class="coral-Link">single</a> |
+            <a href="#" class="coral-Link">multiple</a>
+          </span>
         </label>
         <br>
         <label>
           Layout
-          <select name="layout">
-            <option>fixed-centered</option>
-            <option>fixed-spread</option>
-            <option>variable</option>
-            <option>dashboard</option>
-          </select>
+          <span id="layout">
+            <a href="#" class="coral-Link">fixed-centered</a> |
+            <a href="#" class="coral-Link">fixed-spread</a> |
+            <a href="#" class="coral-Link">variable</a> |
+            <a href="#" class="coral-Link">dashboard</a>
+          </span>
         </label>
         <br>
         <label>
           Column width
-          <input name="columnWidth">
+          <input type="number" style="width:40px;background:transparent;border:none;" name="columnWidth">
         </label>
         <br>
-        <button class="prepend" data-count="1">prepend 1</button>
-        <button class="prepend" data-count="10">prepend 10</button>
-        <button class="append" data-count="1">append 1</button>
-        <button class="append" data-count="10">append 10</button>
-        <button class="append" data-count="100">append 100</button>
         <label>
-          Image
-          <input type="checkbox" name="image">
+          Items
+          <a href="#" class="coral-Link prepend" data-count="1">prepend 1</a> |
+          <a href="#" class="coral-Link prepend" data-count="10">prepend 10</a> |
+          <a href="#" class="coral-Link append" data-count="1">append 1</a> |
+          <a href="#" class="coral-Link append" data-count="10">append 10</a> |
+          <a href="#" class="coral-Link append" data-count="100">append 100</a> |
         </label>
-        (double click on item to remove it)
+        <i>(double click on item to remove it)</i>
 
         <coral-masonry orderable id="masonry" layout="fixed-centered" columnwidth="250" orderable>
           <coral-masonry-item class="coral-Well">
@@ -201,16 +204,14 @@
           window.addEventListener('load', function() {
             const masonry = document.getElementById('masonry');
 
-            const layoutSelector = document.querySelector('[name=layout]');
-            layoutSelector.value = masonry.getAttribute('layout');
-            layoutSelector.addEventListener('change', function() {
-              masonry.setAttribute('layout', this.value);
+            const layoutSelector = document.getElementById('layout');
+            layoutSelector.addEventListener('click', function(event) {
+              masonry.setAttribute('layout', event.target.textContent);
             });
 
-            const selectionSelector = document.querySelector('[name=selection]');
-            selectionSelector.value = masonry.getAttribute('selectionmode');
-            selectionSelector.addEventListener('change', function() {
-              masonry.setAttribute('selectionmode', this.value);
+            const selectionSelector = document.getElementById('selection');
+            selectionSelector.addEventListener('click', function(event) {
+              masonry.setAttribute('selectionmode', event.target.textContent);
             });
 
             const columnWidthSelector = document.querySelector('[name=columnWidth]');
@@ -226,7 +227,7 @@
             document.addEventListener('click', function(event) {
               const prepend = event.target.matches('.prepend');
               if (prepend) {
-                var count = prepend.dataset.count;
+                var count = event.target.dataset.count;
                 for (var i = 0; i < count; i++) {
                   masonry.items.add(createItem(), masonry.items.first());
                 }
@@ -237,7 +238,7 @@
               const append = event.target.matches('.append');
               if (append) {
                 var startTime = Date.now();
-                var count = append.dataset.count;
+                var count = event.target.dataset.count;
                 for (var i = 0; i < count; i++) {
                   masonry.items.add(createItem());
                 }
@@ -247,8 +248,9 @@
               }
             });
 
+            var image = false;
             function createItem() {
-              var image = document.querySelector('[name=image]').checked;
+              image = !image;
               return image ? createImageItem() : createTextItem();
             }
 

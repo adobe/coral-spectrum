@@ -990,6 +990,36 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "@adobe/coral-spectrum~sidenav",
+    "class/coral-spectrum/coral-component-sidenav/src/scripts/SideNav.js~SideNav.html",
+    "<span>SideNav</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
+  ],
+  [
+    "@adobe/coral-spectrum~sidenavheading",
+    "class/coral-spectrum/coral-component-sidenav/src/scripts/SideNavHeading.js~SideNavHeading.html",
+    "<span>SideNavHeading</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
+  ],
+  [
+    "@adobe/coral-spectrum~sidenavitem",
+    "class/coral-spectrum/coral-component-sidenav/src/scripts/SideNavItem.js~SideNavItem.html",
+    "<span>SideNavItem</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
+  ],
+  [
+    "@adobe/coral-spectrum~sidenavitemcontent",
+    "function/index.html#static-function-SideNavItemContent",
+    "<span>SideNavItemContent</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "function"
+  ],
+  [
+    "@adobe/coral-spectrum~sidenavlevel",
+    "class/coral-spectrum/coral-component-sidenav/src/scripts/SideNavLevel.js~SideNavLevel.html",
+    "<span>SideNavLevel</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
+  ],
+  [
     "@adobe/coral-spectrum~slider",
     "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider.html",
     "<span>Slider</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
@@ -6741,6 +6771,96 @@ window.esdocSearchIndex = [
     "coral-spectrum/coral-component-shell/src/scripts/shellworkspaces.js~shellworkspaces#selecteditem",
     "class/coral-spectrum/coral-component-shell/src/scripts/ShellWorkspaces.js~ShellWorkspaces.html#instance-member-selectedItem",
     "coral-spectrum/coral-component-shell/src/scripts/ShellWorkspaces.js~ShellWorkspaces#selectedItem",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-sidenav/src/scripts/sidenav.js",
+    "file/coral-spectrum/coral-component-sidenav/src/scripts/SideNav.js.html",
+    "coral-spectrum/coral-component-sidenav/src/scripts/SideNav.js",
+    "file"
+  ],
+  [
+    "coral-spectrum/coral-component-sidenav/src/scripts/sidenav.js~sidenav#items",
+    "class/coral-spectrum/coral-component-sidenav/src/scripts/SideNav.js~SideNav.html#instance-member-items",
+    "coral-spectrum/coral-component-sidenav/src/scripts/SideNav.js~SideNav#items",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-sidenav/src/scripts/sidenav.js~sidenav#selecteditem",
+    "class/coral-spectrum/coral-component-sidenav/src/scripts/SideNav.js~SideNav.html#instance-member-selectedItem",
+    "coral-spectrum/coral-component-sidenav/src/scripts/SideNav.js~SideNav#selectedItem",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-sidenav/src/scripts/sidenav.js~sidenav#variant",
+    "class/coral-spectrum/coral-component-sidenav/src/scripts/SideNav.js~SideNav.html#instance-member-variant",
+    "coral-spectrum/coral-component-sidenav/src/scripts/SideNav.js~SideNav#variant",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-sidenav/src/scripts/sidenav.js~sidenav.coral-sidenav:change",
+    "typedef/index.html#static-typedef-coral-sidenav:change",
+    "coral-spectrum/coral-component-sidenav/src/scripts/SideNav.js~SideNav.coral-sidenav:change",
+    "typedef"
+  ],
+  [
+    "coral-spectrum/coral-component-sidenav/src/scripts/sidenav.js~sidenav.variant",
+    "class/coral-spectrum/coral-component-sidenav/src/scripts/SideNav.js~SideNav.html#static-member-variant",
+    "coral-spectrum/coral-component-sidenav/src/scripts/SideNav.js~SideNav.variant",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-sidenav/src/scripts/sidenav.js~sidenavvariantenum",
+    "typedef/index.html#static-typedef-SideNavVariantEnum",
+    "coral-spectrum/coral-component-sidenav/src/scripts/SideNav.js~SideNavVariantEnum",
+    "typedef"
+  ],
+  [
+    "coral-spectrum/coral-component-sidenav/src/scripts/sidenavheading.js",
+    "file/coral-spectrum/coral-component-sidenav/src/scripts/SideNavHeading.js.html",
+    "coral-spectrum/coral-component-sidenav/src/scripts/SideNavHeading.js",
+    "file"
+  ],
+  [
+    "coral-spectrum/coral-component-sidenav/src/scripts/sidenavitem.js",
+    "file/coral-spectrum/coral-component-sidenav/src/scripts/SideNavItem.js.html",
+    "coral-spectrum/coral-component-sidenav/src/scripts/SideNavItem.js",
+    "file"
+  ],
+  [
+    "coral-spectrum/coral-component-sidenav/src/scripts/sidenavitem.js~sidenavitem#content",
+    "class/coral-spectrum/coral-component-sidenav/src/scripts/SideNavItem.js~SideNavItem.html#instance-member-content",
+    "coral-spectrum/coral-component-sidenav/src/scripts/SideNavItem.js~SideNavItem#content",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-sidenav/src/scripts/sidenavitem.js~sidenavitem#icon",
+    "class/coral-spectrum/coral-component-sidenav/src/scripts/SideNavItem.js~SideNavItem.html#instance-member-icon",
+    "coral-spectrum/coral-component-sidenav/src/scripts/SideNavItem.js~SideNavItem#icon",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-sidenav/src/scripts/sidenavitem.js~sidenavitem#selected",
+    "class/coral-spectrum/coral-component-sidenav/src/scripts/SideNavItem.js~SideNavItem.html#instance-member-selected",
+    "coral-spectrum/coral-component-sidenav/src/scripts/SideNavItem.js~SideNavItem#selected",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-sidenav/src/scripts/sidenavitemcontent.js",
+    "file/coral-spectrum/coral-component-sidenav/src/scripts/SideNavItemContent.js.html",
+    "coral-spectrum/coral-component-sidenav/src/scripts/SideNavItemContent.js",
+    "file"
+  ],
+  [
+    "coral-spectrum/coral-component-sidenav/src/scripts/sidenavlevel.js",
+    "file/coral-spectrum/coral-component-sidenav/src/scripts/SideNavLevel.js.html",
+    "coral-spectrum/coral-component-sidenav/src/scripts/SideNavLevel.js",
+    "file"
+  ],
+  [
+    "coral-spectrum/coral-component-sidenav/src/scripts/sidenavlevel.js~sidenavlevel#hidden",
+    "class/coral-spectrum/coral-component-sidenav/src/scripts/SideNavLevel.js~SideNavLevel.html#instance-member-hidden",
+    "coral-spectrum/coral-component-sidenav/src/scripts/SideNavLevel.js~SideNavLevel#hidden",
     "member"
   ],
   [

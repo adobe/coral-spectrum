@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Coral.Calendar</title>
 
+    <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         const markup = document.body.querySelectorAll('.markup');
@@ -47,6 +51,8 @@
     </div>
 
     <section class="u-coral-margin">
+      <h1 class="coral-Heading coral-Heading--1">Calendar</h1>
+
       <h2 class="coral-Heading coral-Heading--2">Default</h2>
       <div class="markup">
         <coral-calendar></coral-calendar>
