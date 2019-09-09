@@ -724,6 +724,15 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
    */
   static get type() { return type; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      startday: 'startDay',
+      headerformat: 'headerFormat',
+      displayformat: 'displayFormat',
+      valueformat: 'valueFormat'
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -732,13 +741,9 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
       'type',
       'placeholder',
       'startday',
-      'startDay',
-      'headerFormat',
       'headerFormat',
       'displayformat',
-      'displayFormat',
       'valueformat',
-      'valueFormat',
       'variant'
     ]);
   }

@@ -350,11 +350,17 @@ const BaseFormField = (superClass) => class extends superClass {
     this.value = transform.string(this.getAttribute('value'));
   }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      labelledby: 'labelledBy',
+      readonly: 'readOnly',
+    });
+  }
+  
   // We don't want to watch existing attributes for components that extend native HTML elements
   static get _nativeObservedAttributes() {
     return super.observedAttributes.concat([
       'labelledby',
-      'labelledBy',
       'invalid'
     ]);
   }
@@ -363,10 +369,8 @@ const BaseFormField = (superClass) => class extends superClass {
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'labelledby',
-      'labelledBy',
       'invalid',
       'readonly',
-      'readOnly',
       'name',
       'value',
       'disabled',

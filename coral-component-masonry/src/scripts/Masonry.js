@@ -768,10 +768,15 @@ class Masonry extends BaseComponent(HTMLElement) {
    */
   static get selectionMode() { return selectionMode; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      selectionmode: 'selectionMode'
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
-      'selectionMode',
       'selectionmode',
       'layout',
       'spacing',

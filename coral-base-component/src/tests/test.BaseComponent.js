@@ -12,6 +12,7 @@
 
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {BaseComponent} from '../../../coral-base-component';
+import {commons} from "../../../coral-utils";
 
 describe('BaseComponent', function() {
   // Dummy custom element
@@ -61,11 +62,16 @@ describe('BaseComponent', function() {
     }
     
     get _contentZones() {return {'x-element-content': 'content'};}
+  
+    static get _attributePropertyMap() {
+      return commons.extend(super._attributePropertyMap, {
+        testattribute: 'testAttribute'
+      });
+    }
     
     static get observedAttributes() {
       return [
-        'testattribute',
-        'testAttribute',
+        'testattribute'
       ];
     }
     
@@ -114,12 +120,6 @@ describe('BaseComponent', function() {
     
     afterEach(function() {
       el = null;
-    });
-    
-    describe('#_attributes', function() {
-      it('should return the properties/attribute map', function() {
-        expect(el._attributes).to.deep.equal({testattribute: 'testAttribute'});
-      });
     });
     
     describe('#_reflectAttribute()', function() {

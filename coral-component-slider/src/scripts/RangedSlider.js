@@ -182,13 +182,18 @@ class RangedSlider extends Slider {
     this.endValue = transform.string(initialEndValue);
   }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      startvalue: 'startValue',
+      endvalue: 'endValue'
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'startvalue',
-      'startValue',
-      'endvalue',
-      'endValue'
+      'endvalue'
     ]);
   }
   

@@ -1845,16 +1845,21 @@ class Autocomplete extends BaseFormField(BaseComponent(HTMLElement)) {
    */
   static get variant() { return variant; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      forceselection: 'forceSelection',
+      maxlength: 'maxLength'
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'multiple',
       'delay',
       'forceselection',
-      'forceSelection',
       'placeholder',
       'maxlength',
-      'maxLength',
       'icon',
       'match',
       'loading',

@@ -997,17 +997,22 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
     }
   }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      startday: 'startDay',
+      headerformat: 'headerFormat',
+      valueformat: 'valueFormat'
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'startday',
-      'startDay',
       'headerformat',
-      'headerFormat',
       'min',
       'max',
       'valueformat',
-      'valueFormat'
     ]);
   }
   

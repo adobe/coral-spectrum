@@ -254,9 +254,15 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
     this._elements.buttonList && this._elements.buttonList._focusLastItem(event);
   }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      morebuttontext: 'moreButtonText'
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
-    return super.observedAttributes.concat(['moreButtonText', 'morebuttontext', 'threshold']);
+    return super.observedAttributes.concat(['morebuttontext', 'threshold']);
   }
   
   /** @ignore */

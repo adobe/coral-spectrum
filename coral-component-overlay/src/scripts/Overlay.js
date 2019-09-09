@@ -635,22 +635,27 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
    */
   static get interaction() { return interaction; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      alignmy: 'alignMy',
+      alignat: 'alignAt',
+      lengthoffset: 'lengthOffset',
+      breadthoffset: 'breadthOffset',
+      withinoffset: 'withinOffset'
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'alignmy',
-      'alignMy',
       'alignat',
-      'alignAt',
       'offset',
       'lengthoffset',
-      'lengthOffset',
       'breadthoffset',
-      'breadthOffset',
       'placement',
       'within',
       'withinoffset',
-      'withinOffset',
       'collision',
       'interaction',
       'target',

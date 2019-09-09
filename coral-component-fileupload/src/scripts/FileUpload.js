@@ -1020,6 +1020,13 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
     }
   }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      sizelimit: 'sizeLimit',
+      autostart: 'autoStart'
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -1028,10 +1035,8 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
       'method',
       'multiple',
       'sizelimit',
-      'sizeLimit',
       'accept',
-      'autostart',
-      'autoStart'
+      'autostart'
     ]);
   }
   

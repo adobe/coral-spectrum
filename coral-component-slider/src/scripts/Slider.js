@@ -836,6 +836,12 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
    */
   static get orientation() { return orientation; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      showvalue: 'showValue'
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -844,7 +850,6 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
       'max',
       'tooltips',
       'showvalue',
-      'showValue',
       'orientation',
       'filled'
     ]);

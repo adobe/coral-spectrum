@@ -532,13 +532,18 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
    */
   static get variant() { return variant; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      displayformat: 'displayFormat',
+      valueformat: 'valueFormat'
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'displayformat',
-      'displayFormat',
       'valueformat',
-      'valueFormat',
       'variant'
     ]);
   }

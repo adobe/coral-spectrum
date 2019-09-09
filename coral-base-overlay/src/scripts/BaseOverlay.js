@@ -954,15 +954,20 @@ const BaseOverlay = (superClass) => class extends superClass {
    */
   static get FADETIME() { return FADETIME; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      trapfocus: 'trapFocus',
+      returnfocus: 'returnFocus',
+      focusonshow: 'focusOnShow',
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'trapfocus',
-      'trapFocus',
       'returnfocus',
-      'returnFocus',
       'focusonshow',
-      'focusOnShow',
       'open'
     ]);
   }

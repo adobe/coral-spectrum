@@ -11,7 +11,7 @@
  */
 
 import {BaseComponent} from '../../../coral-base-component';
-import {transform} from '../../../coral-utils';
+import {commons, transform} from '../../../coral-utils';
 
 const CLASSNAME = '_coral-CharacterCount';
 
@@ -130,9 +130,15 @@ class CharacterCount extends BaseComponent(HTMLElement) {
    */
   static get target() { return target; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      maxlength: 'maxLength'
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
-    return super.observedAttributes.concat(['target', 'maxlength', 'maxLength']);
+    return super.observedAttributes.concat(['target', 'maxlength']);
   }
   
   /** @ignore */

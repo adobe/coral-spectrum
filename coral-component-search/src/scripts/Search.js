@@ -320,9 +320,15 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
    */
   static get variant() { return variant; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      maxlength: 'maxLength'
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
-    return super.observedAttributes.concat(['placeholder', 'icon', 'variant', 'maxlength', 'maxLength']);
+    return super.observedAttributes.concat(['placeholder', 'icon', 'variant', 'maxlength']);
   }
   
   /** @ignore */

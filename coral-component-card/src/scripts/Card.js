@@ -12,7 +12,7 @@
 
 import {BaseComponent} from '../../../coral-base-component';
 import base from '../templates/base';
-import {transform, validate} from '../../../coral-utils';
+import {commons, transform, validate} from '../../../coral-utils';
 
 const COLOR_HINT_REG_EXP = /^#[0-9A-F]{6}$/i;
 
@@ -320,17 +320,22 @@ class Card extends BaseComponent(HTMLElement) {
    */
   static get variant() { return variant; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      assetwidth: 'assetWidth',
+      assetheight: 'assetHeight',
+      colorhint: 'colorHint',
+      fixedwidth: 'fixedWidth'
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'assetwidth',
-      'assetWidth',
       'assetheight',
-      'assetHeight',
       'colorhint',
-      'colorHint',
       'fixedwidth',
-      'fixedWidth',
       'variant',
       'stacked'
     ]);

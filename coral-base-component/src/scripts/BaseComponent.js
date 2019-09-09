@@ -311,31 +311,6 @@ const getConstructorName = function(constructor) {
 };
 
 /**
- Builds and returns an attribute/property map based on observed attributes
- @ignore
- */
-const getAttributePropertyMap = function(constructor) {
-  const observedAttributes = constructor.observedAttributes;
-  
-  if (!observedAttributes) {
-    return {};
-  }
-
-  const attributePropertyMap = {};
-  
-  observedAttributes.forEach((attribute) => {
-    // We assume if the attribute contains uppercase char, it's a property and can be mapped
-    if (attribute.match(REG_EXP_UPPERCASE)) {
-      attributePropertyMap[attribute.toLowerCase()] = attribute;
-    }
-  });
-  
-  constructor._attributePropertyMap = attributePropertyMap;
-  
-  return constructor._attributePropertyMap;
-};
-
-/**
  @base BaseComponent
  @classdesc The base element for all Coral components
  */
@@ -422,9 +397,6 @@ const BaseComponent = (superClass) => class extends superClass {
   
   // Constructs and returns the component name based on the constructor
   get _componentName() { return this.constructor._componentName || getConstructorName(this.constructor); }
-  
-  // Returns all watched attributes case sensitive mapped to their properties
-  get _attributes() { return this.constructor._attributePropertyMap || getAttributePropertyMap(this.constructor); }
   
   // The filter function for keyboard events. By default, any child element can trigger keyboard events.
   // You can pass {@link Keys.filterInputs} to avoid listening to key events triggered from within
@@ -778,12 +750,18 @@ const BaseComponent = (superClass) => class extends superClass {
     return tracking;
   }
   
+  static get _attributePropertyMap() {
+    return {
+      trackingelement: 'trackingElement',
+      trackingfeature: 'trackingFeature'
+    };
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return [
       'tracking',
       'trackingelement',
-      'trackingElement',
       'trackingfeature',
       'trackingFeature'
     ];
@@ -795,7 +773,7 @@ const BaseComponent = (superClass) => class extends superClass {
     const self = this;
     if (!self._reflectedAttribute) {
       // Use the attribute/property mapping
-      self[self._attributes[name] || name] = value;
+      self[self.constructor._attributePropertyMap[name] || name] = value;
     }
   }
   

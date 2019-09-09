@@ -609,9 +609,15 @@ class CycleButton extends BaseComponent(HTMLElement) {
    */
   static get displayMode() { return displayMode; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      displaymode: 'displayMode'
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
-    return super.observedAttributes.concat(['icon', 'threshold', 'displaymode', 'displayMode']);
+    return super.observedAttributes.concat(['icon', 'threshold', 'displaymode']);
   }
   
   /** @ignore */

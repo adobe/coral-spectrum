@@ -12,7 +12,7 @@
 
 import {BaseComponent} from '../../../coral-base-component';
 import {alignment} from './TableUtil';
-import {transform, validate} from '../../../coral-utils';
+import {commons, transform, validate} from '../../../coral-utils';
 
 const CLASSNAME = '_coral-Table-column';
 
@@ -260,19 +260,24 @@ class TableColumn extends BaseComponent(HTMLTableColElement) {
    */
   static get alignment() { return alignment; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      fixedwidth: 'fixedWidth',
+      sortabletype: 'sortableType',
+      sortabledirection: 'sortableDirection'
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'fixedwidth',
-      'fixedWidth',
       'hidden',
       'alignment',
       'orderable',
       'sortable',
       'sortabletype',
-      'sortableType',
       'sortabledirection',
-      'sortableDirection'
     ]);
   }
   
