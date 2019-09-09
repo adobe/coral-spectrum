@@ -120,12 +120,6 @@ body.is-ready {
   padding-left: 0;
 }
 
-.navigation .manual-toc li {
-  padding: 0;
-  margin: 4px 0 0 0 !important;
-  white-space: normal;
-}
-
 .navigation .manual-toc .indent-h2 a {
   padding-left: 1.5em;
 }
@@ -142,6 +136,12 @@ body.is-ready {
   padding-left: 4.5em;
 }
 
+.navigation .manual-toc li {
+  padding: 0;
+  margin: 4px 0 0 0 !important;
+  white-space: normal;
+}
+
 .navigation .manual-toc li a {
   display: flex !important;
   color: #555 !important;
@@ -151,10 +151,13 @@ body.is-ready {
   box-sizing: border-box;
   margin: 0;
   border-radius: 4px;
+  transition: background-color 130ms ease-out, color 130ms ease-out;
 }
 
+.navigation .manual-toc li:hover a,
 .navigation .manual-toc li.is-selected a {
-  background-color: rgba(44,44,44,0.06);
+  color: rgb(44, 44, 44);
+  background-color: rgba(44, 44, 44, 0.06);
 }
 
 .navigation .manual-toc .indent-h1 a {
