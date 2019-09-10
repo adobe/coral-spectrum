@@ -30,16 +30,16 @@ components including the Spectrum SVG icons.
 ### Performance
 
 CoralUI3 components are upgraded asynchronously due to limitation of Custom Elements v0. Custom Elements v1 are upgraded synchronously 
-if the definition is loaded before any usage of the component. This is currently the case in AEM. 
+if the definition is loaded before any usage of the component. 
 
-Essentially this means that AEM users will be able to view the components rendered faster when the page loads with Coral Spectrum than with CoralUI3. 
+Essentially this means that users will be able to view the components rendered faster when the page loads with Coral Spectrum than with CoralUI3. 
 Code-wise, it means that `Coral.commons.ready()` becomes obsolete in most cases.
 
 On the other hand, all Coral Spectrum parent-child components are using asynchronous Mutation Observers replacing the 
 slow and synchronous events `coral-component:attached` and `coral-component:detached`.
 
 Also, new technologies were introduced to take advantage of browsers new capabilities to reduce performance issues for 
-certain components (e.g resizeListenerObserver for Coral.ActionBar which is used in all AEM consoles). 
+certain components (e.g resizeListenerObserver for Coral.ActionBar). 
 
 The performance boost is visible by the test execution time:  
 
@@ -60,8 +60,8 @@ Firefox 63.0.0 (Mac OS X 10.13.0): Executed 4481 tests executed (1 min 1.791 sec
 ### Overlay mechanism
 
 CoralUI3's positioning system for overlays was based on jQueryUI which is known to have limited functionality compared 
-to today's existing solutions. Replacing it by a modern solution (PopperJS) has proven that it can solve overlay/positioning 
-issues reported in AEM. 
+to today's existing solutions. Replacing it by a modern solution (PopperJS) has proven that it can solve common 
+overlay/positioning issues previously occurring with CoralUI3.
 
 ## Upgrade changes
 
