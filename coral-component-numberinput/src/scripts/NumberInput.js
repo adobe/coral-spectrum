@@ -144,8 +144,14 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
     this._elements.input[valueAttribute ? 'setAttribute' : 'removeAttribute']('value', valueAttribute);
   
     // @a11y: aria-valuetext is used so that VoiceOver does not announce a percentage
-    this._elements.input.setAttribute('aria-valuenow', this.value);
-    this._elements.input.setAttribute('aria-valuetext', this.value);
+    if (this.value) {
+      this._elements.input.setAttribute('aria-valuenow', this.value);
+      this._elements.input.setAttribute('aria-valuetext', this.value);
+    }
+    else {
+      this._elements.input.removeAttribute('aria-valuenow');
+      this._elements.input.removeAttribute('aria-valuetext');
+    }
   
     // If the event triggering a value change is a click on a +/- button,
     // announce the new value using the live region.
@@ -801,10 +807,6 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
     if (this._elements.input.type === 'text') {
       this._elements.input.setAttribute('role', 'spinbutton');
     }
-  
-    // sets the very initial aria values, in case the 'value' property is never set
-    this._elements.input.setAttribute('aria-valuenow', '');
-    this._elements.input.setAttribute('aria-valuetext', '');
     
     const frag = document.createDocumentFragment();
   

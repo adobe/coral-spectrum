@@ -435,8 +435,8 @@ describe('NumberInput', function() {
         expect(el.value).to.equal('');
         expect(el.valueAsNumber).to.be.NaN;
         expect(el._elements.input.value).to.equal('');
-        expect(el._elements.input.getAttribute('aria-valuenow')).to.equal('');
-        expect(el._elements.input.getAttribute('aria-valuetext')).to.equal('');
+        expect(el._elements.input.hasAttribute('aria-valuenow')).to.be.false;
+        expect(el._elements.input.hasAttribute('aria-valuetext')).to.be.false;
       });
 
       it('should ignore boolean values', function() {
@@ -452,8 +452,8 @@ describe('NumberInput', function() {
         expect(el.value).to.equal('');
         expect(el.valueAsNumber).to.be.NaN;
         expect(el._elements.input.value).to.equal('');
-        expect(el._elements.input.getAttribute('aria-valuenow')).to.equal('');
-        expect(el._elements.input.getAttribute('aria-valuetext')).to.equal('');
+        expect(el._elements.input.hasAttribute('aria-valuenow')).to.be.false;
+        expect(el._elements.input.hasAttribute('aria-valuetext')).to.be.false;
       });
 
       it('should set the value regardless of the max and not set it invalid', function() {
@@ -498,8 +498,8 @@ describe('NumberInput', function() {
         expect(el._elements.input.value).to.equal('');
         expect(el._elements.stepUp.disabled).to.be.false;
         expect(el._elements.stepDown.disabled).to.be.false;
-        expect(el._elements.input.getAttribute('aria-valuenow')).to.equal('');
-        expect(el._elements.input.getAttribute('aria-valuetext')).to.equal('');
+        expect(el._elements.input.hasAttribute('aria-valuenow')).to.be.false;
+        expect(el._elements.input.hasAttribute('aria-valuetext')).to.be.false;
       });
 
       it('will parseFloat input values', function() {
@@ -528,8 +528,8 @@ describe('NumberInput', function() {
         expect(el._elements.input.value).to.equal('');
         expect(el._elements.stepUp.disabled).to.be.false;
         expect(el._elements.stepDown.disabled).to.be.false;
-        expect(el._elements.input.getAttribute('aria-valuenow')).to.equal('');
-        expect(el._elements.input.getAttribute('aria-valuetext')).to.equal('');
+        expect(el._elements.input.hasAttribute('aria-valuenow')).to.be.false;
+        expect(el._elements.input.hasAttribute('aria-valuetext')).to.be.false;
       });
     });
 
