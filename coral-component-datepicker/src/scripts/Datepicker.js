@@ -754,6 +754,9 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
     
     this.classList.add(CLASSNAME);
     
+    // a11y
+    this.setAttribute('role', 'combobox');
+    
     // a11y we only have AUTO mode.
     this._useNativeInput = IS_MOBILE_DEVICE;
     
