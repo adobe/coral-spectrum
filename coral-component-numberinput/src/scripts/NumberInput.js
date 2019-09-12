@@ -340,7 +340,6 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
     
-    this.setAttribute('aria-required', this._required);
     this._elements.input.required = this._required;
   }
   
@@ -357,7 +356,7 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
-    this.setAttribute('aria-readonly', this._readOnly);
+    
     this._elements.input.readOnly = this._readOnly;
     this._setButtonState();
   }

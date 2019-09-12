@@ -408,8 +408,8 @@ describe('NumberInput', function() {
         expect(el.valueAsNumber).to.be.NaN;
         expect(el.getAttribute('value')).to.be.null;
         expect(el._elements.input.value).to.equal('');
-        expect(el._elements.input.getAttribute('aria-valuenow')).to.equal('');
-        expect(el._elements.input.getAttribute('aria-valuetext')).to.equal('');
+        expect(el._elements.input.getAttribute('aria-valuenow')).to.equal(null);
+        expect(el._elements.input.getAttribute('aria-valuetext')).to.equal(null);
       });
 
       it('should set the new value', function() {
