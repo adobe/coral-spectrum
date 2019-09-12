@@ -210,9 +210,7 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
-  
-    this._elements.input.disabled = this._readOnly;
-    this.classList.toggle('is-readOnly', this._readOnly);
+    
     this._setElementState();
   }
   

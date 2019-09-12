@@ -166,10 +166,11 @@ describe('FileUpload', function() {
     
     describe('#readOnly', function() {
       it('should set the file input to readonly', function() {
-        var fileUpload = helpers.build(window.__html__['FileUpload.base.html']);
+        var fileUpload = helpers.build(window.__html__['FileUpload.submit.html']);
         fileUpload.readOnly = true;
         
-        expect(fileUpload.querySelector('input[type="file"]').hasAttribute('disabled')).to.be.true;
+        expect(fileUpload.querySelector('[coral-fileupload-select]').hasAttribute('disabled')).to.be.true;
+        expect(fileUpload.querySelector('[coral-fileupload-submit]').hasAttribute('disabled')).to.be.true;
       });
     });
     
