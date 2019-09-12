@@ -15,6 +15,8 @@ import Vent from '@adobe/vent';
 import {validate, transform, commons} from '../../../coral-utils';
 import {trapFocus, returnFocus, focusOnShow, scrollOnFocus, FADETIME} from './enums';
 
+const CLASSNAME = '_coral-BaseOverlay';
+
 // Includes overlay itself
 const COMPONENTS_WITH_OVERLAY = `
   coral-actionbar,
@@ -975,6 +977,8 @@ const BaseOverlay = (superClass) => class extends superClass {
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();
+    
+    this.classList.add(CLASSNAME);
     
     if (!this.hasAttribute('trapfocus')) { this.trapFocus = this.trapFocus; }
     if (!this.hasAttribute('returnfocus')) { this.returnFocus = this.returnFocus; }

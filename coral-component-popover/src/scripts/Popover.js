@@ -436,6 +436,12 @@ class Popover extends Overlay {
       }
     }
     else if (this.open && !this.contains(eventTarget)) {
+      const target =  eventTarget.closest('._coral-BaseOverlay');
+      // Also check if the click element is inside an overlay which target could be inside of this popover
+      if (target && this.contains(target._getTarget())) {
+        return;
+      }
+      
       // Close if we're open and the click was outside of the target and outside of the popover
       this.hide();
   

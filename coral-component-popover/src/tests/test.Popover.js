@@ -460,6 +460,27 @@ describe('Popover', function() {
       
       el.show();
     });
+    
+    it('should not close the outer popover when clicking on the inner popover', function(done) {
+      helpers.build(window.__html__['Popover.nested.html']);
+  
+      const outer = document.getElementById('outer');
+      const inner = document.getElementById('inner');
+      
+      inner.on('coral-overlay:open', function() {
+        expect(outer.open).to.be.true;
+        inner.content.click();
+        
+        setTimeout(function() {
+          expect(outer.open).to.be.true;
+          // Don't forget to remove them
+          inner.remove();
+          outer.remove();
+          
+          done();
+        }, 500);
+      });
+    });
   
     describe('Tracking', function() {
       var trackerFnSpy;
@@ -479,8 +500,7 @@ describe('Popover', function() {
       });
     
       it('should call the tracker callback fn with expected parameters when the popover is manually opened', function() {
-        const el = helpers.build(window.__html__['Popover.tracking.html']);
-        var popover = el.querySelector('coral-popover');
+        helpers.build(window.__html__['Popover.tracking.html']);
         var demoBtn = document.getElementById('demoButton');
         demoBtn.click();
       
@@ -499,8 +519,7 @@ describe('Popover', function() {
       });
     
       it('should call the tracker callback fn with expected parameters when the popover is closed by clicking on the body', function() {
-        const el = helpers.build(window.__html__['Popover.tracking.autoOpen.html']);
-        var popover = el.querySelector('coral-popover');
+        helpers.build(window.__html__['Popover.tracking.autoOpen.html']);
         document.body.click();
         expect(trackerFnSpy.callCount).to.equal(1, 'Tracker should have been called once.');
       

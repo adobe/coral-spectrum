@@ -162,6 +162,19 @@ describe('BaseOverlay', function() {
     });
   });
   
+  describe('Instantiation', function() {
+    it('should have a classname', function() {
+      overlay1 = new OverlayDummy1();
+      helpers.target.appendChild(overlay1);
+  
+      overlay2 = new OverlayDummy2();
+      helpers.target.appendChild(overlay2);
+      
+      expect(overlay1.classList.contains('_coral-BaseOverlay'));
+      expect(overlay2.classList.contains('_coral-BaseOverlay'));
+    });
+  });
+  
   describe('API', function() {
     describe('#_isTopMost()', function() {
       it('should know if it is top most', function(done) {
