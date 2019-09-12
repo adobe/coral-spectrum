@@ -309,8 +309,14 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
       value = this._snapValueToStep(value, this.min, this.max, this.step);
       
       input.value = value;
-      input.setAttribute('aria-valuenow', value);
-      input.setAttribute('aria-valuetext', this._getLabel(value));
+      if (input.value) {
+        input.setAttribute('aria-valuenow', value);
+        input.setAttribute('aria-valuetext', this._getLabel(value));
+      }
+      else {
+        input.removeAttribute('aria-valuenow');
+        input.removeAttribute('aria-valuetext');
+      }
       
       this._moveHandles();
       
@@ -355,7 +361,6 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
     
-    this.setAttribute('aria-required', this._required);
     this._elements.inputs.forEach((input) => {
       input.required = this._required;
     });
@@ -375,7 +380,6 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
     
-    this.setAttribute('aria-readonly', this._readOnly);
     this._elements.inputs.forEach((input) => {
       input.readOnly = this._readOnly;
     });
@@ -408,8 +412,14 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
         const value = values[i] = this._snapValueToStep(values[i], this.min, this.max, this.step);
       
         input.value = value;
-        input.setAttribute('aria-valuenow', value);
-        input.setAttribute('aria-valuetext', this._getLabel(value));
+        if (input.value) {
+          input.setAttribute('aria-valuenow', value);
+          input.setAttribute('aria-valuetext', this._getLabel(value));
+        }
+        else {
+          input.removeAttribute('aria-valuenow');
+          input.removeAttribute('aria-valuetext');
+        }
       });
     
       this._moveHandles();
