@@ -426,7 +426,7 @@ import BaseColorInputAbstractSubview from &apos;./BaseColorInputAbstractSubview&
 import Color from &apos;./Color&apos;;
 import &apos;../../../coral-component-button&apos;;
 import colorButton from &apos;../templates/colorButton&apos;;
-import {i18n, transform} from &apos;../../../coral-utils&apos;;
+import {commons, i18n, transform} from &apos;../../../coral-utils&apos;;
 
 const CLASSNAME = &apos;_coral-ColorInput-swatch&apos;;
 
@@ -560,14 +560,19 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
     }
   }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      tabindex: &apos;tabIndex&apos;,
+      targetcolor: &apos;targetColor&apos;
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       &apos;selected&apos;,
       &apos;tabindex&apos;,
-      &apos;tabIndex&apos;,
       &apos;disabled&apos;,
-      &apos;targetColor&apos;,
       &apos;targetcolor&apos;
     ]);
   }

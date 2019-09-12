@@ -555,8 +555,14 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
     this._elements.input[valueAttribute ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;value&apos;, valueAttribute);
   
     // @a11y: aria-valuetext is used so that VoiceOver does not announce a percentage
-    this._elements.input.setAttribute(&apos;aria-valuenow&apos;, this.value);
-    this._elements.input.setAttribute(&apos;aria-valuetext&apos;, this.value);
+    if (this.value) {
+      this._elements.input.setAttribute(&apos;aria-valuenow&apos;, this.value);
+      this._elements.input.setAttribute(&apos;aria-valuetext&apos;, this.value);
+    }
+    else {
+      this._elements.input.removeAttribute(&apos;aria-valuenow&apos;);
+      this._elements.input.removeAttribute(&apos;aria-valuetext&apos;);
+    }
   
     // If the event triggering a value change is a click on a +/- button,
     // announce the new value using the live region.
@@ -745,7 +751,6 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute(&apos;required&apos;, this._required);
     
-    this.setAttribute(&apos;aria-required&apos;, this._required);
     this._elements.input.required = this._required;
   }
   
@@ -762,7 +767,7 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute(&apos;readonly&apos;, this._readOnly);
-    this.setAttribute(&apos;aria-readonly&apos;, this._readOnly);
+    
     this._elements.input.readOnly = this._readOnly;
     this._setButtonState();
   }
@@ -1212,10 +1217,6 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
     if (this._elements.input.type === &apos;text&apos;) {
       this._elements.input.setAttribute(&apos;role&apos;, &apos;spinbutton&apos;);
     }
-  
-    // sets the very initial aria values, in case the &apos;value&apos; property is never set
-    this._elements.input.setAttribute(&apos;aria-valuenow&apos;, &apos;&apos;);
-    this._elements.input.setAttribute(&apos;aria-valuetext&apos;, &apos;&apos;);
     
     const frag = document.createDocumentFragment();
   

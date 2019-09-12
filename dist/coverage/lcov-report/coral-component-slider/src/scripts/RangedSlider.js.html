@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">66.1% </span>
+        <span class="strong">66.67% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>39/59</span>
+        <span class='fraction'>40/60</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">50% </span>
@@ -30,14 +30,14 @@
         <span class='fraction'>11/22</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">80% </span>
+        <span class="strong">80.95% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>16/20</span>
+        <span class='fraction'>17/21</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">66.1% </span>
+        <span class="strong">66.67% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>39/59</span>
+        <span class='fraction'>40/60</span>
       </div>
     </div>
     <p class="quiet">
@@ -252,7 +252,12 @@
 <a name='L204'></a><a href='#L204'>204</a>
 <a name='L205'></a><a href='#L205'>205</a>
 <a name='L206'></a><a href='#L206'>206</a>
-<a name='L207'></a><a href='#L207'>207</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L207'></a><a href='#L207'>207</a>
+<a name='L208'></a><a href='#L208'>208</a>
+<a name='L209'></a><a href='#L209'>209</a>
+<a name='L210'></a><a href='#L210'>210</a>
+<a name='L211'></a><a href='#L211'>211</a>
+<a name='L212'></a><a href='#L212'>212</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -370,8 +375,6 @@
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -458,7 +461,14 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">98x</span>
+<span class="cline-any cline-yes">98x</span>
+<span class="cline-any cline-yes">98x</span>
+<span class="cline-any cline-yes">98x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">98x</span>
+<span class="cline-any cline-yes">98x</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -634,34 +644,39 @@ class RangedSlider extends Slider {
    */
   reset() {
     // since the 'value' property is not reflected, form components use it to restore the initial value. When a
-    // component has support for values, this method needs to be overwritten
+    // component has support fo<span class="branch-1 cbranch-no" title="branch not covered" >r va</span>lues, this method needs to be overwritten
     const initialStartValue = this.getAttribute('startvalue') || this.getAttribute('value');
-    const initialEndValue = thi<span class="branch-1 cbranch-no" title="branch not covered" >s.ge</span>tAttribute('endvalue');
+    const initialEndValue = this.getAttribute('endvalue');
     
     this.startValue = transform.string(initialStartValue);
     this.endValue = transform.string(initialEndValue);
+  }
+  
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      startvalue: 'startValue',
+      endvalue: 'endValue'
+    });
   }
   
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'startvalue',
-      'startValue',
-      'endvalue',
-      'endValue'
+      'endvalue'
     ]);
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  connectedCallbac<span class="fstat-no" title="function not covered" >k() </span>{
+    su<span class="cstat-no" title="statement not covered" >per.connectedCallback();</span>
     
     this.classList.add('_coral-Slider--range');
     
     // Set filled attribute by default
     this.setAttribute('filled', '');
-  }<span class="fstat-no" title="function not covered" ></span>
-}<span class="cstat-no" title="statement not covered" ></span>
+  }
+}
 &nbsp;
 export default RangedSlider;
 &nbsp;</pre></td></tr>
@@ -670,7 +685,7 @@ export default RangedSlider;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Sep 06 2019 18:49:26 GMT+0200 (Central European Summer Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Sep 12 2019 15:46:27 GMT+0200 (Central European Summer Time)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

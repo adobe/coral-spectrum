@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">53.31% </span>
+        <span class="strong">53.47% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>153/287</span>
+        <span class='fraction'>154/288</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">39.23% </span>
@@ -30,14 +30,14 @@
         <span class='fraction'>71/181</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">70.21% </span>
+        <span class="strong">70.83% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>33/47</span>
+        <span class='fraction'>34/48</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">53.31% </span>
+        <span class="strong">53.47% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>153/287</span>
+        <span class='fraction'>154/288</span>
       </div>
     </div>
     <p class="quiet">
@@ -1010,7 +1010,12 @@
 <a name='L962'></a><a href='#L962'>962</a>
 <a name='L963'></a><a href='#L963'>963</a>
 <a name='L964'></a><a href='#L964'>964</a>
-<a name='L965'></a><a href='#L965'>965</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L965'></a><a href='#L965'>965</a>
+<a name='L966'></a><a href='#L966'>966</a>
+<a name='L967'></a><a href='#L967'>967</a>
+<a name='L968'></a><a href='#L968'>968</a>
+<a name='L969'></a><a href='#L969'>969</a>
+<a name='L970'></a><a href='#L970'>970</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1912,14 +1917,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">252x</span>
+<span class="cline-any cline-yes">194x</span>
 <span class="cline-any cline-yes">70x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">252x</span>
+<span class="cline-any cline-yes">194x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1958,21 +1963,26 @@
 <span class="cline-any cline-yes">544x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">118x</span>
+<span class="cline-any cline-yes">60x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">118x</span>
-<span class="cline-any cline-yes">118x</span>
+<span class="cline-any cline-yes">60x</span>
+<span class="cline-any cline-yes">60x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">118x</span>
+<span class="cline-any cline-yes">60x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">118x</span>
-<span class="cline-any cline-yes">316x</span>
+<span class="cline-any cline-yes">60x</span>
+<span class="cline-any cline-yes">158x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">118x</span>
+<span class="cline-any cline-yes">60x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">118x</span>
-<span class="cline-any cline-yes">118x</span>
+<span class="cline-any cline-yes">60x</span>
+<span class="cline-any cline-yes">60x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">60x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
@@ -2853,11 +2863,16 @@ class ColumnView extends BaseComponent(HTMLElement) {
    */
   static get selectionMode() { return selectionMode; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      selectionmode: 'selectionMode'
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
-      'selectionmode',
-      'selectionMode'
+      'selectionmode'
     ]);
   }
   
@@ -2914,28 +2929,28 @@ class ColumnView extends BaseComponent(HTMLElement) {
    Triggered when the active item of the {@link ColumnViewColumn} changes.
    
    @typedef {CustomEvent} coral-columnview:activeitemchange
-   
+   <span class="branch-1 cbranch-no" title="branch not covered" ></span>
    @property {ColumnViewColumn} detail.column
    The column whose active item has changed.
    @property {ColumnViewItem} detail.activeItem
    The currently active item of the column.
-   @property {ColumnViewItem} detail<span class="branch-1 cbranch-no" title="branch not covered" >.oldActiveItem</span>
-   The item of the column that was active before.
+   @property {ColumnViewItem} detail.oldActiveItem
+   The item of the column that was active before.<span class="branch-2 cbranch-no" title="branch not covered" ></span>
    */
   
   /**
    Triggered when the {@link ColumnView} navigation is complete and the new columns are ready.
-   <span class="branch-2 cbranch-no" title="branch not covered" ></span>
+   
    @typedef {CustomEvent} coral-columnview:navigate
    
    @property {ColumnViewColumn} detail.column
    The last Column of the ColumnView that is used to determine the path. If the navigate was triggered because a
-   new {@link ColumnViewColumn} was added, then it will match that column. In case the path was
+   new<span class="missing-if-branch" title="else path not taken" >E</span> {@link ColumnViewColumn} was added, then it will match that column. In case the path was
    reduced, the column will match the last column.
    @property {ColumnViewItem} detail.activeItem
    The currently active item of the ColumnView.
    */
-}<span class="missing-if-branch" title="else path not taken" >E</span>
+}
 &nbsp;
 export default ColumnView;
 &nbsp;</pre></td></tr>
@@ -2944,7 +2959,7 @@ export default ColumnView;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Sep 06 2019 18:49:26 GMT+0200 (Central European Summer Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Sep 12 2019 15:46:27 GMT+0200 (Central European Summer Time)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

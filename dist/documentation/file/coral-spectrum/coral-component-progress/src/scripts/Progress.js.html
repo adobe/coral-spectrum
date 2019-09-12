@@ -423,7 +423,7 @@
 
 import {BaseComponent} from &apos;../../../coral-base-component&apos;;
 import base from &apos;../templates/base&apos;;
-import {transform, validate} from &apos;../../../coral-utils&apos;;
+import {commons, transform, validate} from &apos;../../../coral-utils&apos;;
 
 /**
  Enumeration for {@link Progress} sizes.
@@ -741,6 +741,13 @@ class Progress extends BaseComponent(HTMLElement) {
    */
   static get size() { return size; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      showpercent: &apos;showPercent&apos;,
+      labelposition: &apos;labelPosition&apos;
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -748,9 +755,7 @@ class Progress extends BaseComponent(HTMLElement) {
       &apos;indeterminate&apos;,
       &apos;size&apos;,
       &apos;showpercent&apos;,
-      &apos;showPercent&apos;,
-      &apos;labelposition&apos;,
-      &apos;labelPosition&apos;
+      &apos;labelposition&apos;
     ]);
   }
   

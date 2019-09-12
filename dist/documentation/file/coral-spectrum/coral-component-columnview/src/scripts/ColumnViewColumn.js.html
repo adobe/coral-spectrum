@@ -424,7 +424,7 @@
 import {BaseComponent} from &apos;../../../coral-base-component&apos;;
 import ColumnViewCollection from &apos;./ColumnViewCollection&apos;;
 import selectionMode from &apos;./selectionMode&apos;;
-import {transform, validate} from &apos;../../../coral-utils&apos;;
+import {commons, transform, validate} from &apos;../../../coral-utils&apos;;
 
 const CLASSNAME = &apos;_coral-MillerColumns-item&apos;;
 
@@ -951,11 +951,16 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
   
   get _contentZones() { return {&apos;coral-columnview-column-content&apos;: &apos;content&apos;}; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      _selectionmode: &apos;_selectionMode&apos;
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
-      &apos;_selectionmode&apos;,
-      &apos;_selectionMode&apos;
+      &apos;_selectionmode&apos;
     ]);
   }
   

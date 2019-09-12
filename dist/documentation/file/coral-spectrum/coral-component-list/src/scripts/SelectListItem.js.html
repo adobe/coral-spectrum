@@ -580,7 +580,7 @@ class SelectListItem extends BaseComponent(HTMLElement) {
     }
     
     // Remove content icon before processing content zone
-    const contentIcon = this.querySelector(&apos;coral-icon&apos;);
+    const contentIcon = this.querySelector(&apos;coral-icon:not(._coral-Menu-item-icon)&apos;);
     if (contentIcon) {
       contentIcon.remove();
     }

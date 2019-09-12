@@ -11171,6 +11171,9 @@ coral-autocomplete-item {
 ._coral-Calendar ._coral-Calendar-prevMonth {
   position: absolute;
 }
+._coral-Calendar.is-readOnly {
+  pointer-events: none;
+}
 ._coral-DatePicker-calendarSlidingContainer {
   display: block;
   position: relative;
@@ -12499,6 +12502,9 @@ coral-card-info > coral-alert {
       color: rgb(247, 109, 116);
     }
 
+._coral-Checkbox.is-readOnly {
+  pointer-events: none;
+}
 
 /**
  * Copyright 2019 Adobe. All rights reserved.
@@ -16951,6 +16957,9 @@ coral-quickactions-item {
       box-shadow: 0 0 0 1px rgb(20, 115, 230);
     }
 
+._coral-Radio.is-readOnly {
+  pointer-events: none;
+}
 
 /**
  * Copyright 2019 Adobe. All rights reserved.
@@ -19120,6 +19129,9 @@ a[is="coral-sidenav-item"] {
           border-color: rgb(200, 200, 200);
         }
 
+._coral-ToggleSwitch.is-readOnly {
+  pointer-events: none;
+}
 
 /**
  * Copyright 2019 Adobe. All rights reserved.

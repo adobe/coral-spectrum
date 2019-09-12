@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">66.29% </span>
+        <span class="strong">68.18% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>59/89</span>
+        <span class='fraction'>60/88</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">55.17% </span>
@@ -30,14 +30,14 @@
         <span class='fraction'>16/29</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">61.76% </span>
+        <span class="strong">62.86% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>21/34</span>
+        <span class='fraction'>22/35</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">66.29% </span>
+        <span class="strong">68.18% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>59/89</span>
+        <span class='fraction'>60/88</span>
       </div>
     </div>
     <p class="quiet">
@@ -425,7 +425,11 @@
 <a name='L377'></a><a href='#L377'>377</a>
 <a name='L378'></a><a href='#L378'>378</a>
 <a name='L379'></a><a href='#L379'>379</a>
-<a name='L380'></a><a href='#L380'>380</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L380'></a><a href='#L380'>380</a>
+<a name='L381'></a><a href='#L381'>381</a>
+<a name='L382'></a><a href='#L382'>382</a>
+<a name='L383'></a><a href='#L383'>383</a>
+<a name='L384'></a><a href='#L384'>384</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -699,7 +703,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1524x</span>
+<span class="cline-any cline-yes">1520x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -730,7 +734,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -752,7 +755,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -761,13 +763,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">368x</span>
+<span class="cline-any cline-yes">288x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">184x</span>
+<span class="cline-any cline-yes">144x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">184x</span>
+<span class="cline-any cline-yes">144x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -804,6 +806,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -938,16 +946,15 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
     
-    this.setAttribute('aria-required', this._required);
     this._elements.input.required = this._required;
   }
   
   /**
-   Whe<span class="missing-if-branch" title="else path not taken" >E</span>ther this field is readOnly or not. Indicating that the user cannot modify the value of the control.
-   @type {Boolean}
+   Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
+   @ty<span class="missing-if-branch" title="else path not taken" >E</span>pe {Boolean}
    @default false
-   @html<span class="cstat-no" title="statement not covered" >attribute readonly</span>
-   @htmlattributereflected
+   @htmlattribute readonly
+   @html<span class="cstat-no" title="statement not covered" >attributereflected</span>
    */
   get readOnly() {
     return this._readOnly || false;
@@ -956,7 +963,6 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
     
-    this.setAttribute('aria-readonly', this._readOnly);
     this._elements.input.readOnly = this._readOnly;
     this._elements.clearButton.disabled = this._readOnly;
   }
@@ -970,18 +976,18 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
   set labelledBy(value) {
     super.labelledBy = value;
     // in case the user focuses the buttons, he will still get a notion of the usage of the component
-    this[this.labell<span class="fstat-no" title="function not covered" >edBy ?</span> 'setAttribute' : 'removeAttribute']('aria-labelledby', this.labelledBy);
+    this[this.labelledBy ? 'setAttribute' : 'removeAttribute']('aria-labelledby', this.labelledBy);
   }
-  <span class="cstat-no" title="statement not covered" ></span>
+  <span class="fstat-no" title="function not covered" ></span>
   /**
-   Short hint that describes the expected value of the Search. It is displayed when the Search is empty.
+   Sho<span class="cstat-no" title="statement not covered" >rt hint that describes the exp</span>ected value of the Search. It is displayed when the Search is empty.
    
    @type {String}
-   @default ""<span class="fstat-no" title="function not covered" ></span>
+   @default ""
    @htmlattribute placeholder
-   @ht<span class="cstat-no" title="statement not covered" >mlattributereflected</span>
+   @htmlattributeref<span class="fstat-no" title="function not covered" >lected</span>
    */
-  get placeholder() {
+  get <span class="cstat-no" title="statement not covered" >placeholder() {</span>
     return this._elements.input.placeholder || '';
   }
   set placeholder(value) {
@@ -1043,10 +1049,10 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
   get invalid() {
     return super.invalid;
   }
-  set invalid(valu<span class="fstat-no" title="function not covered" >e) {</span>
-    su<span class="cstat-no" title="statement not covered" >per.invalid = value;</span>
-  }
-  
+  set invalid(value) {
+    super.invalid = value;
+  }<span class="fstat-no" title="function not covered" ></span>
+  <span class="cstat-no" title="statement not covered" ></span>
   /** @ignore */
   _triggerInputEvent() {
     this.trigger('coral-search:input');
@@ -1062,9 +1068,9 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
       event.preventDefault();
     
       // stops interaction if the search is disabled
-      if (this.disabled) {<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+      if (this.disabled) {
         return;
-      }
+      }<span class="branch-1 cbranch-no" title="branch not covered" ></span>
     
       this.trigger('coral-search:submit');
     }
@@ -1080,17 +1086,17 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
   }
   
   /**
-   Updates the cle<span class="fstat-no" title="function not covered" >ar b</span>utton's display status.
-   <span class="cstat-no" title="statement not covered" ></span>
-   @ignore
+   Updates the clear button's display status.
+   
+   @ignore<span class="fstat-no" title="function not covered" ></span>
    */<span class="cstat-no" title="statement not covered" ></span>
   _updateClearButton() {
     if<span class="cstat-no" title="statement not covered" > (this._elements.input.value === '') {</span>
-<span class="cstat-no" title="statement not covered" >      this._elements.clearButton.style.display = 'none';</span>
+      this._elements.clearButton.style.display = 'none';
     }<span class="cstat-no" title="statement not covered" ></span>
     el<span class="cstat-no" title="statement not covered" >se {</span>
-      this._elements.clearButton.style.display = '';
-    }
+<span class="cstat-no" title="statement not covered" >      this._elements.clearButton.style.display = '';</span>
+    }<span class="cstat-no" title="statement not covered" ></span>
   }
   
   /**
@@ -1100,17 +1106,17 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
    */
   _clearInput() {
     this._elements.input.value = '';
-    this._updateCl<span class="fstat-no" title="function not covered" >earB</span>utton();
-    th<span class="cstat-no" title="statement not covered" >is._elements.input.focus();</span>
-  
-    // If we've be<span class="fstat-no" title="function not covered" >en c</span>leared, trigger the event
-    th<span class="cstat-no" title="statement not covered" >is.trigger('coral-search:clear');</span>
-  }
+    this._updateClearButton();
+    this._elements.input.focus();
+  <span class="fstat-no" title="function not covered" ></span>
+    //<span class="cstat-no" title="statement not covered" > If we've been cleared, trigger </span>the event
+    this.trigger('coral-search:clear');
+  }<span class="fstat-no" title="function not covered" ></span>
   <span class="cstat-no" title="statement not covered" ></span>
   // overrides the behavior from BaseFormField
   rese<span class="cstat-no" title="statement not covered" >t() {</span>
-    //<span class="cstat-no" title="statement not covered" > since there is an internal value, this one hand</span>les the reset
-    this._elements.input.reset();
+    // since there is an internal value, this one handles the reset
+    th<span class="cstat-no" title="statement not covered" >is._elements.input.reset();</span>
   }
   
   // overrides the behavior from BaseFormField
@@ -1121,17 +1127,23 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
   
   /**
    Returns {@link Search} variants.
-   <span class="fstat-no" title="function not covered" ></span>
-   @re<span class="cstat-no" title="statement not covered" >turn {SearchVariantEnum}</span>
-   */
-  static get varia<span class="fstat-no" title="function not covered" >nt()</span> { return variant; }
-  <span class="cstat-no" title="statement not covered" ></span>
-  /** @ignore */
-  stat<span class="cstat-no" title="statement not covered" >ic get observedAttributes() {</span>
-    return super.observedAttributes.concat(['placeholder', 'icon', 'variant', 'maxlength', 'maxLength']);
+   
+   @return {Search<span class="fstat-no" title="function not covered" >Vari</span>antEnum}
+   */<span class="cstat-no" title="statement not covered" ></span>
+  static get variant() { return variant; }
+  <span class="fstat-no" title="function not covered" ></span>
+  stat<span class="cstat-no" title="statement not covered" >ic get _attributePropertyMap() {</span>
+    return commons.extend(super._attributePropertyMap, {
+<span class="cstat-no" title="statement not covered" >      maxlength: 'maxLength'</span>
+    });
   }<span class="cstat-no" title="statement not covered" ></span>
   <span class="cstat-no" title="statement not covered" ></span>
-  /** <span class="cstat-no" title="statement not covered" >@ignore */</span>
+  /** @ignore */
+  static get observedAttributes() {
+    return super.observedAttributes.concat(['placeholder', 'icon', 'variant', 'maxlength']);
+  }
+  
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     
@@ -1140,13 +1152,13 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
     // Default reflected attributes
     if (!this._icon) { this.icon = 'search'; }
     if (!this._variant) { this.variant = variant.DEFAULT; }
-  
+  <span class="branch-1 cbranch-no" title="branch not covered" ></span>
     // Support cloneNode
     const templates = this.querySelectorAll('._coral-Search-input, ._coral-Search-icon, ._coral-Search-clear');
     for (let i = 0; i &lt; templates.length; i++) {
       templates[i].remove();
     }
-    <span class="branch-1 cbranch-no" title="branch not covered" ></span>
+    
     // Create a fragment
     const fragment = document.createDocumentFragment();
   
@@ -1154,13 +1166,13 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
     fragment.appendChild(this._elements.input);
     fragment.appendChild(this._elements.clearButton);
   
-    // Add the frag to the component
+    // Add the frag to the component<span class="branch-1 cbranch-no" title="branch not covered" ></span>
     this.appendChild(fragment);
     
     // Insert search icon
     this._elements.input.insertAdjacentHTML('afterend', Icon._renderSVG('spectrum-css-icon-Magnifier', ['_coral-Search-icon', '_coral-UIIcon-Magnifier']));
    
-    this._updateClearButton();<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+    this._updateClearButton();
   }
   
   /**
@@ -1189,7 +1201,7 @@ export default Search;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Sep 06 2019 18:49:26 GMT+0200 (Central European Summer Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Sep 12 2019 15:46:27 GMT+0200 (Central European Summer Time)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

@@ -422,7 +422,7 @@
  */
 
 import {Icon} from &apos;../../../coral-component-icon&apos;;
-import {transform, validate} from &apos;../../../coral-utils&apos;;
+import {transform, validate, commons} from &apos;../../../coral-utils&apos;;
 
 /**
  Enumeration for {@link Button}, {@link AnchorButton} icon sizes.
@@ -913,13 +913,18 @@ class BaseButton extends superClass {
    */
   static get iconSize() { return iconSize; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      iconposition: &apos;iconPosition&apos;,
+      iconsize: &apos;iconSize&apos;,
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       &apos;iconposition&apos;,
-      &apos;iconPosition&apos;,
       &apos;iconsize&apos;,
-      &apos;iconSize&apos;,
       &apos;icon&apos;,
       &apos;size&apos;,
       &apos;selected&apos;,

@@ -543,7 +543,6 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute(&apos;required&apos;, this._required);
     
-    this.setAttribute(&apos;aria-required&apos;, this._required);
     this._elements.input.required = this._required;
   }
   
@@ -561,7 +560,6 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute(&apos;readonly&apos;, this._readOnly);
     
-    this.setAttribute(&apos;aria-readonly&apos;, this._readOnly);
     this._elements.input.readOnly = this._readOnly;
     this._elements.clearButton.disabled = this._readOnly;
   }
@@ -731,9 +729,15 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
    */
   static get variant() { return variant; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      maxlength: &apos;maxLength&apos;
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
-    return super.observedAttributes.concat([&apos;placeholder&apos;, &apos;icon&apos;, &apos;variant&apos;, &apos;maxlength&apos;, &apos;maxLength&apos;]);
+    return super.observedAttributes.concat([&apos;placeholder&apos;, &apos;icon&apos;, &apos;variant&apos;, &apos;maxlength&apos;]);
   }
   
   /** @ignore */

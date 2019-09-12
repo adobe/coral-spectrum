@@ -1261,6 +1261,12 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
    */
   static get selectionMode() { return selectionMode; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      selectionmode: &apos;selectionMode&apos;
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([

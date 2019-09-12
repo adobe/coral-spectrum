@@ -867,13 +867,18 @@ class Toast extends BaseOverlay(BaseComponent(HTMLElement)) {
    */
   static get variant() { return variant; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      autodismiss: &apos;autoDismiss&apos;
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       &apos;variant&apos;,
       &apos;placement&apos;,
-      &apos;autodismiss&apos;,
-      &apos;autoDismiss&apos;
+      &apos;autodismiss&apos;
     ]);
   }
   

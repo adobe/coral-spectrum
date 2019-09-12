@@ -720,8 +720,14 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
       value = this._snapValueToStep(value, this.min, this.max, this.step);
       
       input.value = value;
-      input.setAttribute(&apos;aria-valuenow&apos;, value);
-      input.setAttribute(&apos;aria-valuetext&apos;, this._getLabel(value));
+      if (input.value) {
+        input.setAttribute(&apos;aria-valuenow&apos;, value);
+        input.setAttribute(&apos;aria-valuetext&apos;, this._getLabel(value));
+      }
+      else {
+        input.removeAttribute(&apos;aria-valuenow&apos;);
+        input.removeAttribute(&apos;aria-valuetext&apos;);
+      }
       
       this._moveHandles();
       
@@ -766,7 +772,6 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute(&apos;required&apos;, this._required);
     
-    this.setAttribute(&apos;aria-required&apos;, this._required);
     this._elements.inputs.forEach((input) =&gt; {
       input.required = this._required;
     });
@@ -786,7 +791,6 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute(&apos;readonly&apos;, this._readOnly);
     
-    this.setAttribute(&apos;aria-readonly&apos;, this._readOnly);
     this._elements.inputs.forEach((input) =&gt; {
       input.readOnly = this._readOnly;
     });
@@ -819,8 +823,14 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
         const value = values[i] = this._snapValueToStep(values[i], this.min, this.max, this.step);
       
         input.value = value;
-        input.setAttribute(&apos;aria-valuenow&apos;, value);
-        input.setAttribute(&apos;aria-valuetext&apos;, this._getLabel(value));
+        if (input.value) {
+          input.setAttribute(&apos;aria-valuenow&apos;, value);
+          input.setAttribute(&apos;aria-valuetext&apos;, this._getLabel(value));
+        }
+        else {
+          input.removeAttribute(&apos;aria-valuenow&apos;);
+          input.removeAttribute(&apos;aria-valuetext&apos;);
+        }
       });
     
       this._moveHandles();
@@ -1247,6 +1257,12 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
    */
   static get orientation() { return orientation; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      showvalue: &apos;showValue&apos;
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -1255,7 +1271,6 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
       &apos;max&apos;,
       &apos;tooltips&apos;,
       &apos;showvalue&apos;,
-      &apos;showValue&apos;,
       &apos;orientation&apos;,
       &apos;filled&apos;
     ]);

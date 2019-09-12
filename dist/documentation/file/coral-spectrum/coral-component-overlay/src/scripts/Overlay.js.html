@@ -1046,22 +1046,27 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
    */
   static get interaction() { return interaction; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      alignmy: &apos;alignMy&apos;,
+      alignat: &apos;alignAt&apos;,
+      lengthoffset: &apos;lengthOffset&apos;,
+      breadthoffset: &apos;breadthOffset&apos;,
+      withinoffset: &apos;withinOffset&apos;
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       &apos;alignmy&apos;,
-      &apos;alignMy&apos;,
       &apos;alignat&apos;,
-      &apos;alignAt&apos;,
       &apos;offset&apos;,
       &apos;lengthoffset&apos;,
-      &apos;lengthOffset&apos;,
       &apos;breadthoffset&apos;,
-      &apos;breadthOffset&apos;,
       &apos;placement&apos;,
       &apos;within&apos;,
       &apos;withinoffset&apos;,
-      &apos;withinOffset&apos;,
       &apos;collision&apos;,
       &apos;interaction&apos;,
       &apos;target&apos;,

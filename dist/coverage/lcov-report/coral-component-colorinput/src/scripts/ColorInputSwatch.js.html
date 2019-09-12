@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">92.59% </span>
+        <span class="strong">92.73% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>50/54</span>
+        <span class='fraction'>51/55</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">78.26% </span>
@@ -30,14 +30,14 @@
         <span class='fraction'>18/23</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">92.31% </span>
+        <span class="strong">92.86% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>12/13</span>
+        <span class='fraction'>13/14</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">92.59% </span>
+        <span class="strong">92.73% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>50/54</span>
+        <span class='fraction'>51/55</span>
       </div>
     </div>
     <p class="quiet">
@@ -229,7 +229,12 @@
 <a name='L181'></a><a href='#L181'>181</a>
 <a name='L182'></a><a href='#L182'>182</a>
 <a name='L183'></a><a href='#L183'>183</a>
-<a name='L184'></a><a href='#L184'>184</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L184'></a><a href='#L184'>184</a>
+<a name='L185'></a><a href='#L185'>185</a>
+<a name='L186'></a><a href='#L186'>186</a>
+<a name='L187'></a><a href='#L187'>187</a>
+<a name='L188'></a><a href='#L188'>188</a>
+<a name='L189'></a><a href='#L189'>189</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -300,8 +305,6 @@
 <span class="cline-any cline-yes">568x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">238x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -412,6 +415,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">356x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -429,7 +439,7 @@ import BaseColorInputAbstractSubview from './BaseColorInputAbstractSubview';
 import Color from './Color';
 import '../../../coral-component-button';
 import colorButton from '../templates/colorButton';
-import {i18n, transform} from '../../../coral-utils';
+import {commons, i18n, transform} from '../../../coral-utils';
 &nbsp;
 const CLASSNAME = '_coral-ColorInput-swatch';
 &nbsp;
@@ -498,10 +508,10 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
     }
   
     // Store new value
-    this._targetColor = value;
-  
-    le<span class="missing-if-branch" title="if path not taken" >I</span>t cssColorValue = '';
-    let <span class="cstat-no" title="statement not covered" >hexColorValue = '</span>';
+    th<span class="missing-if-branch" title="if path not taken" >I</span>is._targetColor = value;
+  <span class="cstat-no" title="statement not covered" ></span>
+    let cssColorValue = '';
+    let hexColorValue = '';
   
     if (this._targetColor) {
       const color = new Color();
@@ -512,12 +522,12 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
   
     // Update background color and text label for color swatch
     if (cssColorValue) {
-      this._elements.colorButton.style.backgroundColor = cssColorValue;
+      <span class="missing-if-branch" title="else path not taken" >E</span>this._elements.colorButton.style.backgroundColor = cssColorValue;
       this._elements.colorButton.label.textContent = hexColorValue;
-      <span class="missing-if-branch" title="else path not taken" >E</span>this.setAttribute('aria-value', hexColorValue);
-    }
+      this.setAttribute('aria-value', hexColorValue);
+    }<span class="branch-0 cbranch-no" title="branch not covered" ></span>
     else {
-      this._elements.colorButton.classList.add('_coral-Colo<span class="branch-0 cbranch-no" title="branch not covered" >rInput</span>-swatch-novalue');
+      this._elements.colorButton.classList.add('_coral-ColorInput-swatch-novalue');
       this._elements.colorButton.label.textContent = i18n.get('unset');
       this.setAttribute('aria-value', '');
     }
@@ -540,18 +550,18 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
   }
 &nbsp;
   /**
-   The tabindex of the color preview.
-   
-   @ty<span class="missing-if-branch" title="if path not taken" >I</span>pe {Integer}
-   @defa<span class="cstat-no" title="statement not covered" >ult 0</span>
+   The<span class="missing-if-branch" title="if path not taken" >I</span> tabindex of the color preview.
+   <span class="cstat-no" title="statement not covered" ></span>
+   @type {Integer}
+   @default 0
    @htmlattribute tabindex
    @htmlattributereflected
    */
   get tabIndex() {
     return this._elements.colorButton.tabIndex;
-  }
+  }<span class="missing-if-branch" title="else path not taken" >E</span>
   set tabIndex(value) {
-    th<span class="missing-if-branch" title="else path not taken" >E</span>is._elements.colorButton.tabIndex = value;
+    this._elements.colorButton.tabIndex = value;
     this._reflectAttribute('tabindex', this.tabIndex);
   }
   
@@ -563,31 +573,36 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
     }
   }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      tabindex: 'tabIndex',
+      targetcolor: 'targetColor'
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'selected',
       'tabindex',
-      'tabIndex',
       'disabled',
-      'targetColor',
       'targetcolor'
     ]);
   }
   
   /** @ignore */
   connectedCallback() {
-    super.connectedCallback();
-    
+    super.connecte<span class="fstat-no" title="function not covered" >dCal</span>lback();
+    <span class="cstat-no" title="statement not covered" ></span>
     this.classList.add(CLASSNAME, 'u-coral-clearFix');
-    
+    <span class="cstat-no" title="statement not covered" ></span>
     // adds the role to support accessibility
     this.setAttribute('role', 'option');
     
-    // Support clo<span class="fstat-no" title="function not covered" >neNo</span>de
-    co<span class="cstat-no" title="statement not covered" >nst button = this.querySelector('[handle="col</span>orButton"]');
+    // Support cloneNode
+    const button = this.querySelector('[handle="colorButton"]');
     if (button) {
-<span class="cstat-no" title="statement not covered" >      button.remove();</span>
+      button.remove();
     }
   
     this.appendChild(this._elements.colorButton);
@@ -601,7 +616,7 @@ export default ColorInputSwatch;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Sep 06 2019 18:49:26 GMT+0200 (Central European Summer Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Sep 12 2019 15:46:27 GMT+0200 (Central European Summer Time)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

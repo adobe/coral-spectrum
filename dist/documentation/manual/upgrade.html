@@ -205,13 +205,13 @@ contributing to its features.</p>
 <p>Coral Spectrum leverages the <a href="https://github.com/adobe/spectrum-css">Spectrum CSS</a> framework to style 
 components including the Spectrum SVG icons. </p>
 <h3 id="performance">Performance</h3><p>CoralUI3 components are upgraded asynchronously due to limitation of Custom Elements v0. Custom Elements v1 are upgraded synchronously 
-if the definition is loaded before any usage of the component. This is currently the case in AEM. </p>
-<p>Essentially this means that AEM users will be able to view the components rendered faster when the page loads with Coral Spectrum than with CoralUI3. 
+if the definition is loaded before any usage of the component. </p>
+<p>Essentially this means that users will be able to view the components rendered faster when the page loads with Coral Spectrum than with CoralUI3. 
 Code-wise, it means that <code>Coral.commons.ready()</code> becomes obsolete in most cases.</p>
 <p>On the other hand, all Coral Spectrum parent-child components are using asynchronous Mutation Observers replacing the 
 slow and synchronous events <code>coral-component:attached</code> and <code>coral-component:detached</code>.</p>
 <p>Also, new technologies were introduced to take advantage of browsers new capabilities to reduce performance issues for 
-certain components (e.g resizeListenerObserver for Coral.ActionBar which is used in all AEM consoles). </p>
+certain components (e.g resizeListenerObserver for Coral.ActionBar). </p>
 <p>The performance boost is visible by the test execution time:  </p>
 <p><em>CoralUI 3 UTs results</em></p>
 <pre><code><code class="source-code prettyprint">HeadlessChrome 70.0.3538 (Mac OS X 10.13.6): 3516 tests executed (2 mins 28.947 secs / 1 min 43.192 secs)
@@ -220,8 +220,8 @@ Firefox 63.0.0 (Mac OS X 10.13.0): 3516 tests executed (2 mins 14.507 secs / 1 m
 <pre><code><code class="source-code prettyprint">HeadlessChrome 70.0.3538 (Mac OS X 10.13.6): 4481 tests executed (49.697 secs / 30.759 secs)
 Firefox 63.0.0 (Mac OS X 10.13.0): Executed 4481 tests executed (1 min 1.791 secs / 36.38 secs)</code>
 </code></pre><h3 id="overlay-mechanism">Overlay mechanism</h3><p>CoralUI3&apos;s positioning system for overlays was based on jQueryUI which is known to have limited functionality compared 
-to today&apos;s existing solutions. Replacing it by a modern solution (PopperJS) has proven that it can solve overlay/positioning 
-issues reported in AEM. </p>
+to today&apos;s existing solutions. Replacing it by a modern solution (PopperJS) has proven that it can solve common 
+overlay/positioning issues previously occurring with CoralUI3.</p>
 <h2 id="upgrade-changes">Upgrade changes</h2><h3 id="custom-elements-v1">Custom Elements v1</h3><p>A major change in v1 is that component initialization is now done in an ES6 class constructor. The list of 
 <a href="http://w3c.github.io/webcomponents/spec/custom/#custom-element-conformance">Requirements for custom element constructors</a> 
 prohibits a new component from setting attributes or adding child nodes in its constructor. </p>

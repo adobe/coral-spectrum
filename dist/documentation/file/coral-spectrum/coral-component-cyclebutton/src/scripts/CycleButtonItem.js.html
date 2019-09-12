@@ -422,7 +422,7 @@
  */
 
 import {BaseComponent} from &apos;../../../coral-base-component&apos;;
-import {transform, validate} from &apos;../../../coral-utils&apos;;
+import {commons, transform, validate} from &apos;../../../coral-utils&apos;;
 
 /**
  Enum for {CycleButtonItem} display options.
@@ -580,9 +580,15 @@ class CycleButtonItem extends BaseComponent(HTMLElement) {
    */
   static get displayMode() { return displayMode; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      displaymode: &apos;displayMode&apos;
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
-    return super.observedAttributes.concat([&apos;selected&apos;, &apos;disabled&apos;, &apos;icon&apos;, &apos;displayMode&apos;, &apos;displaymode&apos;]);
+    return super.observedAttributes.concat([&apos;selected&apos;, &apos;disabled&apos;, &apos;icon&apos;, &apos;displaymode&apos;]);
   }
   
   /** @ignore */

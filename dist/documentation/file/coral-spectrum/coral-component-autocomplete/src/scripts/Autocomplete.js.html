@@ -974,7 +974,6 @@ class Autocomplete extends BaseFormField(BaseComponent(HTMLElement)) {
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute(&apos;readonly&apos;, this._readOnly);
-    this.setAttribute(&apos;aria-readonly&apos;, this._readOnly);
   
     this._elements.input.readOnly = this._readOnly;
     
@@ -999,7 +998,6 @@ class Autocomplete extends BaseFormField(BaseComponent(HTMLElement)) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute(&apos;required&apos;, this._required);
     
-    this.setAttribute(&apos;aria-required&apos;, this._required);
     this._elements.input.required = this._required;
   }
   
@@ -2256,16 +2254,21 @@ class Autocomplete extends BaseFormField(BaseComponent(HTMLElement)) {
    */
   static get variant() { return variant; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      forceselection: &apos;forceSelection&apos;,
+      maxlength: &apos;maxLength&apos;
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       &apos;multiple&apos;,
       &apos;delay&apos;,
       &apos;forceselection&apos;,
-      &apos;forceSelection&apos;,
       &apos;placeholder&apos;,
       &apos;maxlength&apos;,
-      &apos;maxLength&apos;,
       &apos;icon&apos;,
       &apos;match&apos;,
       &apos;loading&apos;,

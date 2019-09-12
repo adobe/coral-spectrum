@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">75.26% </span>
+        <span class="strong">75.51% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>73/97</span>
+        <span class='fraction'>74/98</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">58.62% </span>
@@ -30,14 +30,14 @@
         <span class='fraction'>34/58</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">71.88% </span>
+        <span class="strong">72.73% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>23/32</span>
+        <span class='fraction'>24/33</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">75.26% </span>
+        <span class="strong">75.51% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>73/97</span>
+        <span class='fraction'>74/98</span>
       </div>
     </div>
     <p class="quiet">
@@ -445,7 +445,12 @@
 <a name='L397'></a><a href='#L397'>397</a>
 <a name='L398'></a><a href='#L398'>398</a>
 <a name='L399'></a><a href='#L399'>399</a>
-<a name='L400'></a><a href='#L400'>400</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L400'></a><a href='#L400'>400</a>
+<a name='L401'></a><a href='#L401'>401</a>
+<a name='L402'></a><a href='#L402'>402</a>
+<a name='L403'></a><a href='#L403'>403</a>
+<a name='L404'></a><a href='#L404'>404</a>
+<a name='L405'></a><a href='#L405'>405</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -844,6 +849,11 @@
 <span class="cline-any cline-yes">36x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -858,7 +868,7 @@
 &nbsp;
 import {BaseComponent} from '../../../coral-base-component';
 import base from '../templates/base';
-import {transform, validate} from '../../../coral-utils';
+import {commons, transform, validate} from '../../../coral-utils';
 &nbsp;
 const COLOR_HINT_REG_EXP = /^#[0-9A-F]{6}$/i;
 &nbsp;
@@ -1166,17 +1176,22 @@ class Card extends BaseComponent(HTMLElement) {
    */
   static get varia<span class="fstat-no" title="function not covered" >nt()</span> { return variant; }
   <span class="cstat-no" title="statement not covered" ></span>
+  static get _attributePropertyMap() {
+    return commons<span class="fstat-no" title="function not covered" >.ext</span>end(super._attributePropertyMap, {
+<span class="cstat-no" title="statement not covered" >      assetwidth: 'assetWidth',</span>
+      assetheight: 'assetHeight',
+<span class="cstat-no" title="statement not covered" >      colorhint: 'colorHint',</span>
+      fixedwidth: 'fixedWidth'
+    })<span class="cstat-no" title="statement not covered" >;</span>
+  }
+  
   /** @ignore */
-  static get obser<span class="fstat-no" title="function not covered" >vedA</span>ttributes() {
-    re<span class="cstat-no" title="statement not covered" >turn super.observedAttributes.concat([</span>
+  static get observedAttributes() {
+    return super.observedAttributes.concat([
       'assetwidth',
-<span class="cstat-no" title="statement not covered" >      'assetWidth',</span>
       'assetheight',
-<span class="cstat-no" title="statement not covered" >      'assetHeight',</span>
       'colorhint',
-      'colorHint',
       'fixedwidth',
-      'fixedWidth',
       'variant',
       'stacked'
     ]);
@@ -1201,20 +1216,20 @@ class Card extends BaseComponent(HTMLElement) {
       const image = images[i];
       if (!image.complete) {
         image.classList.add('is-loading');
-      }
-    }
-  
-    for (const contentZone in this._contentZones) {
-      const element = this._elements[this._contentZones[contentZone]];
-      // Remove it<span class="fstat-no" title="function not covered" > so </span>we can process children
-<span class="cstat-no" title="statement not covered" >      if (element.parentNode) {</span>
-        element.parentNode.removeChild(element);
       }<span class="fstat-no" title="function not covered" ></span>
     }<span class="cstat-no" title="statement not covered" ></span>
   
-    //<span class="cstat-no" title="statement not covered" > Moves everything into the main content zone</span>
+    for (const con<span class="fstat-no" title="function not covered" >tent</span>Zone in this._contentZones) {
+<span class="cstat-no" title="statement not covered" >      const element = this._elements[this._contentZo</span>nes[contentZone]];
+      // Remove it so we can process children
+<span class="cstat-no" title="statement not covered" >      if (element.parentNode) {</span>
+        element.parentNode.removeChild(element);
+<span class="cstat-no" title="statement not covered" >      }</span>
+    }
+  
+    // Moves everything into the main content zone
     while (this.firstChild) {
-<span class="cstat-no" title="statement not covered" >      const child = this.firstChild;</span>
+      const child = this.firstChild;
       // Removes the empty spaces
       if (child.nodeType === Node.TEXT_NODE &amp;&amp; child.textContent.trim() !== '' ||
         child.nodeType === Node.ELEMENT_NODE &amp;&amp; child.getAttribute('handle') !== 'wrapper') {
@@ -1223,18 +1238,18 @@ class Card extends BaseComponent(HTMLElement) {
       }
       // Remove anything else element
       else {
-        this.removeChild(child);
+        this.removeChild(child<span class="branch-1 cbranch-no" title="branch not covered" >);</span>
       }
     }
   
     // Assign the content zones so the insert functions will be called
-    this.overlay = this._eleme<span class="branch-1 cbranch-no" title="branch not covered" >nts.overlay;</span>
-    this.content = content;
+    this.overlay = this._elements.overlay;
+    this.content = content;<span class="branch-2 cbranch-no" title="branch not covered" ></span>
     this.info = this._elements.info;
   
     this.appendChild(this._elements.wrapper);
   
-    // The 'asset' setter knows to insert the element just before the w<span class="branch-2 cbranch-no" title="branch not covered" >rapper node.</span>
+    // The 'asset' setter knows to insert the element just before the wrapper node.
     this.asset = asset;
     
     // In case a lot of alerts are added, they will not overflow the card
@@ -1249,7 +1264,7 @@ export default Card;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Sep 06 2019 18:49:26 GMT+0200 (Central European Summer Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Sep 12 2019 15:46:27 GMT+0200 (Central European Summer Time)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

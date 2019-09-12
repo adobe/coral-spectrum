@@ -422,7 +422,7 @@
  */
 
 import {BaseComponent} from &apos;../../../coral-base-component&apos;;
-import {transform} from &apos;../../../coral-utils&apos;;
+import {commons, transform} from &apos;../../../coral-utils&apos;;
 
 const CLASSNAME = &apos;_coral-CharacterCount&apos;;
 
@@ -541,9 +541,15 @@ class CharacterCount extends BaseComponent(HTMLElement) {
    */
   static get target() { return target; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      maxlength: &apos;maxLength&apos;
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
-    return super.observedAttributes.concat([&apos;target&apos;, &apos;maxlength&apos;, &apos;maxLength&apos;]);
+    return super.observedAttributes.concat([&apos;target&apos;, &apos;maxlength&apos;]);
   }
   
   /** @ignore */

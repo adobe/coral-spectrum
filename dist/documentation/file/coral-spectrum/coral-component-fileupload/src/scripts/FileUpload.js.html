@@ -604,7 +604,6 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
     this._elements.input.required = transform.booleanAttr(value);
     this._reflectAttribute(&apos;required&apos;, this.required);
     
-    this.setAttribute(&apos;aria-required&apos;, this.required);
     this.classList.toggle(&apos;is-required&apos;, this.required);
     this._setElementState();
   }
@@ -622,10 +621,7 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute(&apos;readonly&apos;, this._readOnly);
-  
-    this._elements.input.disabled = this._readOnly;
-    this.setAttribute(&apos;aria-readonly&apos;, this._readOnly);
-    this.classList.toggle(&apos;is-readOnly&apos;, this._readOnly);
+    
     this._setElementState();
   }
   
@@ -1431,6 +1427,13 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
     }
   }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      sizelimit: &apos;sizeLimit&apos;,
+      autostart: &apos;autoStart&apos;
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -1439,10 +1442,8 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
       &apos;method&apos;,
       &apos;multiple&apos;,
       &apos;sizelimit&apos;,
-      &apos;sizeLimit&apos;,
       &apos;accept&apos;,
-      &apos;autostart&apos;,
-      &apos;autoStart&apos;
+      &apos;autostart&apos;
     ]);
   }
   

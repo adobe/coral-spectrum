@@ -1135,6 +1135,15 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
    */
   static get type() { return type; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      startday: &apos;startDay&apos;,
+      headerformat: &apos;headerFormat&apos;,
+      displayformat: &apos;displayFormat&apos;,
+      valueformat: &apos;valueFormat&apos;
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -1143,13 +1152,9 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
       &apos;type&apos;,
       &apos;placeholder&apos;,
       &apos;startday&apos;,
-      &apos;startDay&apos;,
-      &apos;headerFormat&apos;,
       &apos;headerFormat&apos;,
       &apos;displayformat&apos;,
-      &apos;displayFormat&apos;,
       &apos;valueformat&apos;,
-      &apos;valueFormat&apos;,
       &apos;variant&apos;
     ]);
   }
@@ -1159,6 +1164,9 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
     super.connectedCallback();
     
     this.classList.add(CLASSNAME);
+    
+    // a11y
+    this.setAttribute(&apos;role&apos;, &apos;combobox&apos;);
     
     // a11y we only have AUTO mode.
     this._useNativeInput = IS_MOBILE_DEVICE;

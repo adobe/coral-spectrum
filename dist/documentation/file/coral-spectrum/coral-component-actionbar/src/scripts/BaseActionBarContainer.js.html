@@ -665,9 +665,15 @@ class BaseActionBarContainer extends superClass {
     this._elements.buttonList &amp;&amp; this._elements.buttonList._focusLastItem(event);
   }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      morebuttontext: &apos;moreButtonText&apos;
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
-    return super.observedAttributes.concat([&apos;moreButtonText&apos;, &apos;morebuttontext&apos;, &apos;threshold&apos;]);
+    return super.observedAttributes.concat([&apos;morebuttontext&apos;, &apos;threshold&apos;]);
   }
   
   /** @ignore */

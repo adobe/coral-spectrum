@@ -1258,17 +1258,22 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
    */
   static get showProperties() { return showProperties; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      autogeneratecolors: &apos;autoGenerateColors&apos;,
+      showswatches: &apos;showSwatches&apos;,
+      showproperties: &apos;showProperties&apos;,
+      showdefaultcolors: &apos;showDefaultColors&apos;
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       &apos;variant&apos;,
-      &apos;autoGenerateColors&apos;,
       &apos;autogeneratecolors&apos;,
-      &apos;showSwatches&apos;,
       &apos;showswatches&apos;,
-      &apos;showProperties&apos;,
       &apos;showproperties&apos;,
-      &apos;showDefaultColors&apos;,
       &apos;showdefaultcolors&apos;,
       &apos;placeholder&apos;
     ]);

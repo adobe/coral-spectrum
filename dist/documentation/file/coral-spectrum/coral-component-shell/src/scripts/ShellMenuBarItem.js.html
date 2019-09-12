@@ -422,7 +422,7 @@
  */
 
 import {BaseComponent} from &apos;../../../coral-base-component&apos;;
-import {transform, validate} from &apos;../../../coral-utils&apos;;
+import {commons, transform, validate} from &apos;../../../coral-utils&apos;;
 import &apos;../../../coral-component-icon&apos;;
 import &apos;../../../coral-component-button&apos;;
 import &apos;../../../coral-component-anchorbutton&apos;;
@@ -686,14 +686,19 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
    */
   static get iconVariant() { return iconVariant; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      iconsize: &apos;iconSize&apos;,
+      iconvariant: &apos;iconVariant&apos;
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       &apos;icon&apos;,
       &apos;iconsize&apos;,
-      &apos;iconSize&apos;,
       &apos;iconvariant&apos;,
-      &apos;iconVariant&apos;,
       &apos;badge&apos;,
       &apos;open&apos;,
       &apos;menu&apos;

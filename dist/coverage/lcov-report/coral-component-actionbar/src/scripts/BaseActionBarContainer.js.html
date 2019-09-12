@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">87.16% </span>
+        <span class="strong">87.27% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>95/109</span>
+        <span class='fraction'>96/110</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">72.41% </span>
@@ -30,14 +30,14 @@
         <span class='fraction'>42/58</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">86.36% </span>
+        <span class="strong">86.96% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>19/22</span>
+        <span class='fraction'>20/23</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">87.16% </span>
+        <span class="strong">87.27% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>95/109</span>
+        <span class='fraction'>96/110</span>
       </div>
     </div>
     <p class="quiet">
@@ -361,7 +361,13 @@
 <a name='L313'></a><a href='#L313'>313</a>
 <a name='L314'></a><a href='#L314'>314</a>
 <a name='L315'></a><a href='#L315'>315</a>
-<a name='L316'></a><a href='#L316'>316</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L316'></a><a href='#L316'>316</a>
+<a name='L317'></a><a href='#L317'>317</a>
+<a name='L318'></a><a href='#L318'>318</a>
+<a name='L319'></a><a href='#L319'>319</a>
+<a name='L320'></a><a href='#L320'>320</a>
+<a name='L321'></a><a href='#L321'>321</a>
+<a name='L322'></a><a href='#L322'>322</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -584,8 +590,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">292x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">292x</span>
@@ -658,7 +662,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">139074x</span>
+<span class="cline-any cline-yes">142100x</span>
 <span class="cline-any cline-yes">216x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -666,7 +670,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">139074x</span>
+<span class="cline-any cline-yes">142100x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -676,7 +680,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">73590x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">96x</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -907,12 +919,12 @@ const BaseActionBarContainer = (superClass) =&gt; class extends superClass {
     this._itemsInPopover = [];
     
     // we need to check if item has 'hasAttribute' because it is not present on the document
-    const isFocusedItemInsideActionBar = this.parentNode.contains(focusedItem);
+    const isFocusedItemInsideAct<span class="cstat-no" title="statement not covered" >ionBar = this.par</span>entNode.contains(focusedItem);
     const isFocusedItemOffscreen = focusedItem.hasAttribute &amp;&amp; focusedItem.hasAttribute('coral-actionbar-offscreen');
-    if (isFocusedItemInsideActio<span class="cstat-no" title="statement not covered" >nBar &amp;&amp; isFocused</span>ItemOffscreen) {
-      // if currently an element is focused, that should not be visible (or is no actionbar-item) =&gt; select 'more'
-      // but<span class="cstat-no" title="statement not covered" >ton</span>
-      this._el<span class="cstat-no" title="statement not covered" >ements.moreButton.focus();</span>
+    if (isFo<span class="cstat-no" title="statement not covered" >cusedItemInsideActionBar &amp;&amp; isFocusedItemOffscreen) {</span>
+      // if cu<span class="cstat-no" title="statement not covered" >rrently an element is focused, th</span>at should not be visible (or is no actionbar-item) =&gt; select 'more'
+      // button
+      this._elements.moreButton.focus();
     }
   }
   
@@ -932,9 +944,15 @@ const BaseActionBarContainer = (superClass) =&gt; class extends superClass {
     this._elements.buttonList &amp;&amp; this._elements.buttonList._focusLastItem(event);
   }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      morebuttontext: 'moreButtonText'
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
-    return super.observedAttributes.concat(['moreButtonText', 'morebuttontext', 'threshold']);
+    return super.observedAttributes.concat(['morebuttontext', 'threshold']);
   }
   
   /** @ignore */
@@ -951,16 +969,16 @@ const BaseActionBarContainer = (superClass) =&gt; class extends superClass {
     }
   
     // Cleanup 'More' button
-    const more = this.querySelector('[coral-actionbar-more]');
-    if (more) {
+    const more = this.<span class="fstat-no" title="function not covered" >quer</span>ySelector('[coral-actionbar-more]');
+    if (mo<span class="cstat-no" title="statement not covered" >re) {</span>
       this.removeChild(more);
     }
   
     // Cleanup 'More' popover
     const popover = this.querySelector('[coral-actionbar-popover]');
     if (popover) {
-      this.removeChild<span class="fstat-no" title="function not covered" >(pop</span>over);
-    }<span class="cstat-no" title="statement not covered" ></span>
+      this.removeChild(popover);
+    }
     
     this._elements.moreButton.label.textContent = this.moreButtonText;
     // 'More' button might be moved later in dom when Container is attached to parent
@@ -997,7 +1015,7 @@ export default BaseActionBarContainer;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Sep 06 2019 18:49:26 GMT+0200 (Central European Summer Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Sep 12 2019 15:46:27 GMT+0200 (Central European Summer Time)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

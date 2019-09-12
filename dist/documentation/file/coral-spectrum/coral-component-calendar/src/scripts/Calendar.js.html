@@ -834,7 +834,6 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute(&apos;required&apos;, this._required);
     
-    this.setAttribute(&apos;aria-required&apos;, this._required);
     this.classList.toggle(&apos;is-required&apos;, this._required &amp;&amp; this._value === null);
   }
   
@@ -886,7 +885,11 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute(&apos;readonly&apos;, this._readOnly);
-    this.setAttribute(&apos;aria-readonly&apos;, this._readOnly);
+    
+    this._elements.prev.disabled = this._readOnly;
+    this._elements.next.disabled = this._readOnly;
+    this._elements.body[this._readOnly ? &apos;removeAttribute&apos; : &apos;setAttribute&apos;](&apos;tabindex&apos;, &apos;0&apos;);
+    this.classList.toggle(&apos;is-readOnly&apos;, this._readOnly);
   }
   
   /** @ignore */
@@ -1408,17 +1411,22 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
     }
   }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      startday: &apos;startDay&apos;,
+      headerformat: &apos;headerFormat&apos;,
+      valueformat: &apos;valueFormat&apos;
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       &apos;startday&apos;,
-      &apos;startDay&apos;,
       &apos;headerformat&apos;,
-      &apos;headerFormat&apos;,
       &apos;min&apos;,
       &apos;max&apos;,
       &apos;valueformat&apos;,
-      &apos;valueFormat&apos;
     ]);
   }
   

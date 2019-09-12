@@ -20,14 +20,14 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">96.79% </span>
+        <span class="strong">97.18% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>241/249</span>
+        <span class='fraction'>241/248</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">91.16% </span>
+        <span class="strong">91.28% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>134/147</span>
+        <span class='fraction'>136/149</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">96.36% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>53/55</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">96.79% </span>
+        <span class="strong">97.18% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>241/249</span>
+        <span class='fraction'>241/248</span>
       </div>
     </div>
     <p class="quiet">
@@ -880,7 +880,8 @@
 <a name='L832'></a><a href='#L832'>832</a>
 <a name='L833'></a><a href='#L833'>833</a>
 <a name='L834'></a><a href='#L834'>834</a>
-<a name='L835'></a><a href='#L835'>835</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L835'></a><a href='#L835'>835</a>
+<a name='L836'></a><a href='#L836'>836</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1444,11 +1445,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">292x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">292x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">292x</span>
 <span class="cline-any cline-yes">292x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1472,7 +1468,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1504x</span>
+<span class="cline-any cline-yes">1770x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">318x</span>
@@ -1485,8 +1481,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">318x</span>
+<span class="cline-any cline-yes">292x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">318x</span>
+<span class="cline-any cline-yes">292x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1661,7 +1663,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5452x</span>
+<span class="cline-any cline-yes">5440x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">486x</span>
@@ -1693,7 +1695,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1714,6 +1715,7 @@
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">16x</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -1860,8 +1862,14 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
     this._elements.input[valueAttribute ? 'setAttribute' : 'removeAttribute']('value', valueAttribute);
   
     // @a11y: aria-valuetext is used so that VoiceOver does not announce a percentage
-    this._elements.input.setAttribute('aria-valuenow', this.value);
-    this._elements.input.setAttribute('aria-valuetext', this.value);
+    if (this.value) {
+      this._elements.input.setAttribute('aria-valuenow', this.value);
+      this._elements.input.setAttribute('aria-valuetext', this.value);
+    }
+    else {
+      this._elements.input.removeAttribute('aria-valuenow');
+      this._elements.input.removeAttribute('aria-valuetext');
+    }
   
     // If the event triggering a value change is a click on a +/- button,
     // announce the new value using the live region.
@@ -1967,15 +1975,15 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
       this._elements.input.removeAttribute('max');
     }
     else {
-      this._reflectAttribute('max', this._max);
-      // sets the max in the input so that keyboard handles this component
-      this._elements.input.setAttribute('aria-valuemax', this._max);
+      this._reflectA<span class="fstat-no" title="function not covered" >ttribute('max'</span>, this._max);
+<span class="cstat-no" title="statement not covered" >      // sets the max in the input so that keyboard handles this component</span>
+      th<span class="cstat-no" title="statement not covered" >is._elements.input.setA</span>ttribute('aria-valuemax', this._max);
       this._elements.input.max = this._max;
     }
     
-    this.invalid = t<span class="fstat-no" title="function not covered" >his.hasAttribu</span>te('invalid');
-    th<span class="cstat-no" title="statement not covered" >is.disabled = this.hasAttribute('disabled');</span>
-  }<span class="cstat-no" title="statement not covered" ></span>
+    this.invalid = this.hasAttribute('invalid');
+    this.disabled = this.hasAttribute('disabled');
+  }
   
   /**
    The amount to increment by when stepping up or down. It can be the string &lt;code&gt;any&lt;/code&gt; or any positive
@@ -2050,7 +2058,6 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
     
-    this.setAttribute('aria-required', this._required);
     this._elements.input.required = this._required;
   }
   
@@ -2067,7 +2074,7 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
-    this.setAttribute('aria-readonly', this._readOnly);
+    
     this._elements.input.readOnly = this._readOnly;
     this._setButtonState();
   }
@@ -2148,12 +2155,12 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
    considered as 0. The new value will always respect the &lt;code&gt;min&lt;/code&gt; and &lt;code&gt;max&lt;/code&gt; values if available.
    */
   stepDown() {
-    // uses the Number representation since it simplifies the calculations
+    // uses the Number representation since it simplifies the c<span class="branch-1 cbranch-no" title="branch not covered" >alculations<span class="branch-2 cbranch-no" title="branch not covered" ></span></span>
     const value = this.valueAsNumber;
     const step = this._getActualStep();
     if (isNaN(value)) {
       this.value = this.min !== null ? Math.max(-step, this.min) : -step;
-    }<span class="branch-2 cbranch-no" title="branch not covered" ><span class="branch-1 cbranch-no" title="branch not covered" ></span></span>
+    }
     else {
       const newValue = handleDecimalOperation('-', value, step);
   
@@ -2269,22 +2276,22 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
   }
   
   /**
-   Handles the click on the step down button. It causes the NumberInput to step down its value and returns the focus
-   back to the input. This way the clicked button does not get focus.
+   Han<span class="missing-if-branch" title="if path not taken" >I</span>dles the click on the step down button. It causes the NumberInput to step down its value and returns the focus
+   back <span class="cstat-no" title="statement not covered" >to the input. This way the clicked button does not get fo</span>cus.
  
    @emits {change}
    @ignore
-   */<span class="missing-if-branch" title="if path not taken" >I</span>
-  _onSte<span class="cstat-no" title="statement not covered" >pDownButtonClick(event) {</span>
+   */
+  _onStepDownButtonClick(event) {
     event.preventDefault();
   
     // stores the old value before stepdown
     const oldValue = this.value;
   
     flagStepButtonClick = event.type === 'click';
-  
+  <span class="missing-if-branch" title="if path not taken" >I</span>
     this._setFocusToInput();
-  
+  <span class="cstat-no" title="statement not covered" ></span>
     this.stepDown();
   
     // we only do this on user interaction
@@ -2292,9 +2299,9 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
   
     // checks if we need to trigger a change event
     this._triggerChange(this.value, oldValue);
-  }<span class="missing-if-branch" title="if path not taken" >I</span>
+  }
   
-  /**<span class="cstat-no" title="statement not covered" ></span>
+  /**
    Handles the home key press. If a max has been set, the value will be modified to match it, otherwise the key is
    ignored.
    
@@ -2379,11 +2386,11 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
    */
   _onKeyDown(event) {
     event.preventDefault();
-    
+    <span class="branch-0 cbranch-no" title="branch not covered" ></span>
     // stops interaction if the numberinput is disabled or readonly
     if (this.disabled || this.readOnly) {
       return;
-    }<span class="branch-0 cbranch-no" title="branch not covered" ></span>
+    }
     
     this._onStepDownButtonClick(event);
   }
@@ -2417,11 +2424,11 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
     this._triggerChange(this.value, oldValue);
   }
   
-  /**
+  /**<span class="branch-0 cbranch-no" title="branch not covered" ></span>
    Overrides the method from formField to be able to add validation after the user has changed the value.
    
    @private
-   */<span class="branch-0 cbranch-no" title="branch not covered" ></span>
+   */
   _onInputChange(event) {
     // stops the current event
     event.stopPropagation();
@@ -2451,11 +2458,11 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
   }
   
   /**
-   Handles blur event.
+   Handles blur event.<span class="branch-1 cbranch-no" title="branch not covered" ></span>
    
    @ignore
    */
-  _onBlur() {<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+  _onBlur() {
     this.classList.remove('is-focused');
     this._elements.input.classList.remove('is-focused');
     
@@ -2517,17 +2524,13 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
     if (this._elements.input.type === 'text') {
       this._elements.input.setAttribute('role', 'spinbutton');
     }
-  
-    // sets the very initial aria values, in case the 'value' property is never set
-    this._elements.input.setAttribute('aria-valuenow', '');
-    this._elements.input.setAttribute('aria-valuetext', '');
     <span class="fstat-no" title="function not covered" ></span>
     co<span class="cstat-no" title="statement not covered" >nst frag = document.createDocumentFragment();</span>
   
     co<span class="cstat-no" title="statement not covered" >nst templateHandleNames = ['presentation', 'input'];</span>
     
     //<span class="cstat-no" title="statement not covered" > Render main template</span>
-    fr<span class="cstat-no" title="statement not covered" >ag.appendChild(this._elements.input);</span>
+    frag.appendChild(this._elements.input);
     frag.appendChild(this._elements.presentation);
   
     while (this.firstChild) {
@@ -2554,7 +2557,7 @@ export default NumberInput;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Sep 06 2019 18:49:26 GMT+0200 (Central European Summer Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Sep 12 2019 15:46:27 GMT+0200 (Central European Summer Time)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
