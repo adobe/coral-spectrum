@@ -241,8 +241,6 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   set required(value) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
-    
-    this.setAttribute('aria-required', this._required);
   
     this._elements.hours.required = this._required;
     this._elements.minutes.required = this._required;
@@ -262,7 +260,6 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
-    this.setAttribute('aria-readonly', this._readOnly);
   
     this._elements.hours.readOnly = this._readOnly;
     this._elements.minutes.readOnly = this._readOnly;
