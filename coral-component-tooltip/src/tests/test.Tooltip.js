@@ -169,16 +169,18 @@ describe('Tooltip', function() {
     
         expect(tooltip.open).to.be.false;
     
-        tooltip.show();
-    
-        expect(tooltip.open).to.be.true;
-        helpers.mouseEvent('mouseenter', target);
-        helpers.mouseEvent('mouseleave', target);
-        
-        helpers.next(function() {
-          expect(tooltip.open).to.be.false;
-          done();
+        tooltip.on('coral-overlay:open', function() {
+          expect(tooltip.open).to.be.true;
+          helpers.mouseEvent('mouseenter', target);
+          helpers.mouseEvent('mouseleave', target);
+  
+          helpers.next(function() {
+            expect(tooltip.open).to.be.false;
+            done();
+          });
         });
+        
+        tooltip.show();
       });
     });
     
