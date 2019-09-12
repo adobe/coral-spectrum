@@ -221,9 +221,6 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
     this.items.getAll().forEach((item) => {
       item.closable = !this._readOnly;
     });
-  
-    // a11y
-    this.setAttribute('aria-readonly', this._readOnly);
   }
   
   /**
@@ -239,9 +236,6 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
   set required(value) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
-    
-    // a11y
-    this.setAttribute('aria-required', this._required);
   }
   
   /** @private */
