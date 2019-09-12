@@ -474,13 +474,11 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
-  
-    this.classList.toggle('is-disabled', this._readOnly);
+    
     this._elements.prev.disabled = this._readOnly;
     this._elements.next.disabled = this._readOnly;
     this._elements.body[this._readOnly ? 'removeAttribute' : 'setAttribute']('tabindex', '0');
-  
-    this._renderCalendar();
+    this.classList.toggle('is-readOnly', this._readOnly);
   }
   
   /** @ignore */
