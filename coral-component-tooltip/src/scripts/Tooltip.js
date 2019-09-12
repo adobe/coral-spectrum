@@ -24,8 +24,7 @@ const arrowMap = {
 
 const CLASSNAME = '_coral-Tooltip';
 
-// This is in JS as we're setting this to induce wrapping before collision calculations
-const TOOLTIP_ARROW_SIZE = 12;
+const OFFSET = 5;
 
 /**
  Enumeration for {@link Tooltip} variants.
@@ -89,7 +88,7 @@ class Tooltip extends Overlay {
     super();
   
     // Override defaults
-    this._lengthOffset = TOOLTIP_ARROW_SIZE;
+    this._lengthOffset = OFFSET;
     this._overlayAnimationTime = Overlay.FADETIME;
   
     // Fetch or create the content zone element
