@@ -193,7 +193,6 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
     this._elements.input.required = transform.booleanAttr(value);
     this._reflectAttribute('required', this.required);
     
-    this.setAttribute('aria-required', this.required);
     this.classList.toggle('is-required', this.required);
     this._setElementState();
   }
@@ -213,7 +212,6 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
     this._reflectAttribute('readonly', this._readOnly);
   
     this._elements.input.disabled = this._readOnly;
-    this.setAttribute('aria-readonly', this._readOnly);
     this.classList.toggle('is-readOnly', this._readOnly);
     this._setElementState();
   }
