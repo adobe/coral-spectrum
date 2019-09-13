@@ -37,6 +37,29 @@ describe('Shell', function() {
     afterEach(function() {
       el = null;
     });
+    
+    describe('#header', function() {
+      it('should be defined', function() {
+        expect(el.header).to.exist;
+      });
+  
+      it('should be a content zone', function() {
+        el.header.appendChild(document.createElement('button'));
+        expect(el.header.children.length).not.to.equal(0);
+      });
+    });
+    
+    describe('#menus', function() {
+      it('should be defined', function() {
+        expect(el.header).to.exist;
+      });
+      
+      it('should return a collection of menus', function() {
+        expect(el.menus).to.exist;
+        el.menus.add();
+        expect(el.querySelector('coral-shell-menu')).to.equal(el.menus.first());
+      });
+    });
 
     describe('#content', function() {
       it('should be defined', function() {
@@ -51,19 +74,35 @@ describe('Shell', function() {
   });
 
   describe('Markup', function() {
-    describe('#content', function() {
-      it('should created if not provided', function() {
+    describe('#header', function() {
+      it('should be created if not provided', function() {
         const el = helpers.build(window.__html__['Shell.base.html']);
-        expect(el.children.length).to.equal(1);
-        expect(el.content).to.exist;
-        expect(el.content).to.equal(el.children[0]);
+        expect(el.header).to.equal(el.children[0]);
+      });
+    });
+    
+    describe('#content', function() {
+      it('should be created if not provided', function() {
+        const el = helpers.build(window.__html__['Shell.base.html']);
+        expect(el.content).to.equal(el.children[1]);
         expect(el.content.textContent.trim()).to.equal('This is the content.');
       });
 
       it('should keep an existing content if provided', function() {
         const el = helpers.build(window.__html__['Shell.content.html']);
-        expect(el.children.length).to.equal(2);
-        expect(el.content).to.equal(el.children[1]);
+        const title = el.querySelector('h1');
+        expect(el.contains(title)).to.be.true;
+        expect(el.content.contains(title)).to.be.false;
+      });
+    });
+  
+    describe('#menus', function() {
+      it('should keep an existing content if provided', function() {
+        const el = helpers.build(window.__html__['Shell.content.html']);
+        expect(el.menus.length).to.equal(3);
+        el.menus.getAll().forEach(function(menu) {
+          expect(el.content.contains(menu)).to.be.false;
+        });
       });
     });
   });

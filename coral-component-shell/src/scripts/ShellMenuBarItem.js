@@ -214,7 +214,8 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
     
     // Link menu with item
     if (menu) {
-      menu.target = this;
+      this.id = this.id || commons.getUID();
+      menu.setAttribute('target', `#${this.id}`);
     }
   }
   
@@ -315,6 +316,11 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
     }
   
     this.label = this._elements.shellMenuButtonLabel;
+    
+    // Sync menu
+    if (this.menu !== null) {
+      this.menu = this.menu;
+    }
   }
   
   /**

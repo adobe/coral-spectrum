@@ -11,6 +11,7 @@
  */
 
 import {BaseComponent} from '../../../coral-base-component';
+import {Collection} from '../../../coral-collection';
 
 const CLASSNAME = '_coral-Shell';
 
@@ -30,12 +31,50 @@ class Shell extends BaseComponent(HTMLElement) {
     // Prepare templates
     this._elements = {
       // Fetch or create the content zone elements
+      header: this.querySelector('coral-shell-header') || document.createElement('coral-shell-header'),
       content: this.querySelector('coral-shell-content') || document.createElement('coral-shell-content')
     };
   }
   
   /**
-   The outer shell content zone.
+   The menu collection.
+   
+   @type {Collection}
+   @readonly
+   */
+  get menus() {
+    // Construct the collection on first request:
+    if (!this._menus) {
+      this._menus = new Collection({
+        host: this,
+        itemTagName: 'coral-shell-menu'
+      });
+    }
+    
+    return this._menus;
+  }
+  
+  /**
+   The shell header zone.
+   
+   @type {ShellHeader}
+   @contentzone
+   */
+  get header() {
+    return this._getContentZone(this._elements.header);
+  }
+  set header(value) {
+    this._setContentZone('header', value, {
+      handle: 'header',
+      tagName: 'coral-shell-header',
+      insert: function(header) {
+        this.insertBefore(header, this.firstChild);
+      }
+    });
+  }
+  
+  /**
+   The shell content zone.
    
    @type {ShellContent}
    @contentzone
@@ -53,7 +92,12 @@ class Shell extends BaseComponent(HTMLElement) {
     });
   }
   
-  get _contentZones() { return {'coral-shell-content': 'content'}; }
+  get _contentZones() {
+    return {
+      'coral-shell-header': 'header',
+      'coral-shell-content': 'content'
+    };
+  }
   
   /** @ignore */
   connectedCallback() {
@@ -61,16 +105,29 @@ class Shell extends BaseComponent(HTMLElement) {
     
     this.classList.add(CLASSNAME);
     
+    const header = this._elements.header;
+    const menus = this.menus.getAll();
     const content = this._elements.content;
   
     // If the the content zone is not provided, we need to make sure that it holds all children
     if (!content.parentNode) {
+      // Remove header
+      if (header.parentNode) {
+        header.parentNode.removeChild(header);
+      }
+      
+      // Remove menus
+      this.menus.clear();
+      
+      // Move the rest into content
       while (this.firstChild) {
         content.appendChild(this.firstChild);
       }
     }
   
     // Call the content zone insert
+    this.header = header;
+    menus.forEach((menu) => this.menus.add(menu));
     this.content = content;
   }
 }

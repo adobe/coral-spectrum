@@ -130,7 +130,8 @@ class ShellHomeAnchor extends BaseComponent(HTMLAnchorElement) {
     // Add fragment back
     this.appendChild(fragment);
     
-    // Call label insert
+    // Insert icon and label insert
+    this.icon = this.icon;
     this.label = label;
   }
 }
