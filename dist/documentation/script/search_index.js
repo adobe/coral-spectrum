@@ -6306,6 +6306,18 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "coral-spectrum/coral-component-shell/src/scripts/shell.js~shell#header",
+    "class/coral-spectrum/coral-component-shell/src/scripts/Shell.js~Shell.html#instance-member-header",
+    "coral-spectrum/coral-component-shell/src/scripts/Shell.js~Shell#header",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-shell/src/scripts/shell.js~shell#menus",
+    "class/coral-spectrum/coral-component-shell/src/scripts/Shell.js~Shell.html#instance-member-menus",
+    "coral-spectrum/coral-component-shell/src/scripts/Shell.js~Shell#menus",
+    "member"
+  ],
+  [
     "coral-spectrum/coral-component-shell/src/scripts/shellcontent.js",
     "file/coral-spectrum/coral-component-shell/src/scripts/ShellContent.js.html",
     "coral-spectrum/coral-component-shell/src/scripts/ShellContent.js",
@@ -6471,6 +6483,12 @@ window.esdocSearchIndex = [
     "coral-spectrum/coral-component-shell/src/scripts/shellmenubaritem.js~shellmenubaritem#iconvariant",
     "class/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js~ShellMenuBarItem.html#instance-member-iconVariant",
     "coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js~ShellMenuBarItem#iconVariant",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-shell/src/scripts/shellmenubaritem.js~shellmenubaritem#id",
+    "class/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js~ShellMenuBarItem.html#instance-member-id",
+    "coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js~ShellMenuBarItem#id",
     "member"
   ],
   [

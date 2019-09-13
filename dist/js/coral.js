@@ -29197,7 +29197,6 @@ var Coral = (function (exports) {
     el0.setAttribute("handle", "overlay");
     el0.setAttribute("role", "presentation");
     el0.setAttribute("breadthoffset", "50%r - 50%p");
-    el0.setAttribute("lengthoffset", "10");
     var el1 = document.createTextNode("\n  ");
     el0.appendChild(el1);
     data = data_0; // Constrains the size of the list to 6 items.
@@ -41994,9 +41993,8 @@ var Coral = (function (exports) {
     top: 'top',
     bottom: 'bottom'
   };
-  var CLASSNAME$W = '_coral-Tooltip'; // This is in JS as we're setting this to induce wrapping before collision calculations
-
-  var TOOLTIP_ARROW_SIZE = 12;
+  var CLASSNAME$W = '_coral-Tooltip';
+  var OFFSET$1 = 5;
   /**
    Enumeration for {@link Tooltip} variants.
    
@@ -42066,7 +42064,7 @@ var Coral = (function (exports) {
 
       _this = _possibleConstructorReturn(this, _getPrototypeOf(Tooltip).call(this)); // Override defaults
 
-      _this._lengthOffset = TOOLTIP_ARROW_SIZE;
+      _this._lengthOffset = OFFSET$1;
       _this._overlayAnimationTime = Overlay.FADETIME; // Fetch or create the content zone element
 
       _this._elements = commons.extend(_this._elements, {
@@ -43861,7 +43859,6 @@ var Coral = (function (exports) {
     el48.setAttribute("trapfocus", "on");
     el48.setAttribute("handle", "overlay");
     el48.setAttribute("breadthoffset", "50%r - 50%p");
-    el48.setAttribute("lengthoffset", "10");
     el48.setAttribute("placement", "bottom");
     el48.id = uid;
     el48.setAttribute("aria-label", data_0["i18n"]["get"]('Color Picker'));
@@ -47806,7 +47803,6 @@ var Coral = (function (exports) {
     el7.setAttribute("handle", "overlay");
     el7.setAttribute("focusonshow", "coral-selectlist");
     el7.setAttribute("placement", "bottom");
-    el7.setAttribute("lengthoffset", "10");
     var el8 = document.createTextNode("\n  ");
     el7.appendChild(el8);
     var el9 = this["selectList"] = document.createElement("coral-selectlist");
@@ -48772,7 +48768,6 @@ var Coral = (function (exports) {
     el0.setAttribute("handle", "overlay");
     el0.id = data_0["commons"]["getUID"]();
     el0.setAttribute("breadthoffset", "50%r - 50%p");
-    el0.setAttribute("lengthoffset", "10");
     el0.setAttribute("placement", "bottom");
     frag.appendChild(el0);
     var el1 = document.createTextNode("\n");
@@ -57248,7 +57243,6 @@ var Coral = (function (exports) {
     el2.setAttribute("tracking", "off");
     el2.setAttribute("smart", "");
     el2.id = data_0["commons"]["getUID"]();
-    el2.setAttribute("lengthoffset", "5");
     el2.setAttribute("breadthoffset", "50%p - 50%");
     el2.setAttribute("placement", "bottom");
     el2.setAttribute("handle", "overlay");
@@ -57322,7 +57316,7 @@ var Coral = (function (exports) {
     CENTER: 'center',
     BOTTOM: 'bottom'
   };
-  var OFFSET$1 = 10;
+  var OFFSET$2 = 10;
   var CLASSNAME$1i = '_coral-QuickActions';
   /**
    @class Coral.QuickActions
@@ -57349,7 +57343,7 @@ var Coral = (function (exports) {
       _this._overlayAnimationTime = Overlay.FADETIME;
       _this._alignMy = Overlay.align.CENTER_TOP;
       _this._alignAt = Overlay.align.CENTER_TOP;
-      _this._lengthOffset = OFFSET$1;
+      _this._lengthOffset = OFFSET$2;
       _this._inner = true;
       _this._target = target$2.PREVIOUS;
       _this._placement = placement$2.TOP;
@@ -59361,15 +59355,16 @@ var Coral = (function (exports) {
 
       _this._elements = {
         // Fetch or create the content zone elements
+        header: _this.querySelector('coral-shell-header') || document.createElement('coral-shell-header'),
         content: _this.querySelector('coral-shell-content') || document.createElement('coral-shell-content')
       };
       return _this;
     }
     /**
-     The outer shell content zone.
+     The menu collection.
      
-     @type {ShellContent}
-     @contentzone
+     @type {Collection}
+     @readonly
      */
 
 
@@ -59378,20 +59373,77 @@ var Coral = (function (exports) {
 
       /** @ignore */
       value: function connectedCallback() {
+        var _this2 = this;
+
         _get(_getPrototypeOf(Shell.prototype), "connectedCallback", this).call(this);
 
         this.classList.add(CLASSNAME$1k);
+        var header = this._elements.header;
+        var menus = this.menus.getAll();
         var content = this._elements.content; // If the the content zone is not provided, we need to make sure that it holds all children
 
         if (!content.parentNode) {
+          // Remove header
+          if (header.parentNode) {
+            header.parentNode.removeChild(header);
+          } // Remove menus
+
+
+          this.menus.clear(); // Move the rest into content
+
           while (this.firstChild) {
             content.appendChild(this.firstChild);
           }
         } // Call the content zone insert
 
 
+        this.header = header;
+        menus.forEach(function (menu) {
+          return _this2.menus.add(menu);
+        });
         this.content = content;
       }
+    }, {
+      key: "menus",
+      get: function get() {
+        // Construct the collection on first request:
+        if (!this._menus) {
+          this._menus = new Collection$1({
+            host: this,
+            itemTagName: 'coral-shell-menu'
+          });
+        }
+
+        return this._menus;
+      }
+      /**
+       The shell header zone.
+       
+       @type {ShellHeader}
+       @contentzone
+       */
+
+    }, {
+      key: "header",
+      get: function get() {
+        return this._getContentZone(this._elements.header);
+      },
+      set: function set(value) {
+        this._setContentZone('header', value, {
+          handle: 'header',
+          tagName: 'coral-shell-header',
+          insert: function insert(header) {
+            this.insertBefore(header, this.firstChild);
+          }
+        });
+      }
+      /**
+       The shell content zone.
+       
+       @type {ShellContent}
+       @contentzone
+       */
+
     }, {
       key: "content",
       get: function get() {
@@ -59410,6 +59462,7 @@ var Coral = (function (exports) {
       key: "_contentZones",
       get: function get() {
         return {
+          'coral-shell-header': 'header',
           'coral-shell-content': 'content'
         };
       }
@@ -59688,8 +59741,9 @@ var Coral = (function (exports) {
         } // Add fragment back
 
 
-        this.appendChild(fragment); // Call label insert
+        this.appendChild(fragment); // Insert icon and label insert
 
+        this.icon = this.icon;
         this.label = label;
       }
     }, {
@@ -61103,7 +61157,11 @@ var Coral = (function (exports) {
           this.appendChild(this._elements.shellMenuButton);
         }
 
-        this.label = this._elements.shellMenuButtonLabel;
+        this.label = this._elements.shellMenuButtonLabel; // Sync menu
+
+        if (this.menu !== null) {
+          this.menu = this.menu;
+        }
       }
       /**
        Triggered after the {@link ShellMenuBarItem} is opened with <code>show()</code> or <code>instance.open = true</code>
@@ -61270,7 +61328,8 @@ var Coral = (function (exports) {
 
 
         if (menu) {
-          menu.target = this;
+          this.id = this.id || commons.getUID();
+          menu.setAttribute('target', "#".concat(this.id));
         }
       }
     }, {
@@ -65318,7 +65377,6 @@ var Coral = (function (exports) {
     el5.setAttribute("placement", "top");
     el5.setAttribute("variant", "inspect");
     el5.setAttribute("interaction", "off");
-    el5.setAttribute("lengthoffset", "5");
     el5.setAttribute("breadthoffset", "1");
     frag.appendChild(el5);
     var el6 = document.createTextNode("\n");
@@ -73943,7 +74001,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.103";
+  var version = "1.0.0-beta.104";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
@@ -74009,11 +74067,11 @@ var Coral = (function (exports) {
   	"fs-extra": "^7.0.1",
   	"glob-all": "^3.1.0",
   	gulp: "^4.0.0",
-  	"gulp-axe-webdriver": "^3.1.1",
+  	"gulp-axe-webdriver": "^3.1.3",
   	"gulp-bump": "^3.1.3",
   	"gulp-clean-css": "^4.0.0",
   	"gulp-domly": "^0.1.0",
-  	"gulp-eslint": "^5.0.0",
+  	"gulp-eslint": "^6.0.0",
   	"gulp-gh-pages": "^0.5.4",
   	"gulp-git": "^2.9.0",
   	"gulp-merge-json": "^1.0.0",
@@ -74034,7 +74092,7 @@ var Coral = (function (exports) {
   	"karma-rollup-preprocessor": "^7.0.0",
   	"karma-sinon-chai": "^2.0.2",
   	minimist: "^1.2.0",
-  	mocha: "^6.1.3",
+  	mocha: "^6.2.0",
   	moment: "^2.24.0",
   	"plugin-error": "^1.0.1",
   	"postcss-css-variables": "^0.13.0",
