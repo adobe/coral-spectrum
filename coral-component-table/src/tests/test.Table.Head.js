@@ -76,7 +76,7 @@ describe('Table.Head', function() {
           expect(headerCells[0].style.minWidth).to.equal('');
           expect(headerCells[1].style.minWidth).to.not.equal('');
           done();
-        }, 100);
+        }, 10);
       });
   
       it('should handle long header cell label with short content without overflowing', function(done) {
@@ -96,9 +96,9 @@ describe('Table.Head', function() {
             window.setTimeout(function() {
               expect(longLabelHeaderCell.clientWidth >= labelWidth).to.be.true;
               done();
-            }, 100);
-          }, 100);
-        }, 100);
+            }, 10);
+          }, 10);
+        }, 10);
       });
     });
   });

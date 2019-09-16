@@ -30,12 +30,7 @@ class TableHead extends BaseTableSection(BaseComponent(HTMLTableSectionElement))
   constructor() {
     super();
   
-    // Initialize content MO
-    this._observer = new MutationObserver(this._handleMutations.bind(this));
-    this._observer.observe(this, {
-      childList: true,
-      subtree: true
-    });
+    this._toggleObserver(true);
   }
   
   /**
@@ -59,16 +54,6 @@ class TableHead extends BaseTableSection(BaseComponent(HTMLTableSectionElement))
     // Delay execution for better performance
     window.requestAnimationFrame(() => {
       this.trigger('coral-table-head:_stickychanged');
-    });
-  }
-  
-  /** @private */
-  _handleMutations(mutations) {
-    mutations.forEach((mutation) => {
-      this.trigger('coral-table-head:_contentchanged', {
-        addedNodes: mutation.addedNodes,
-        removedNodes: mutation.removedNodes
-      });
     });
   }
   

@@ -25,6 +25,13 @@ for (const dividerValue in divider) {
  @classdesc The base element for table sections
  */
 const BaseTableSection = (superClass) => class extends superClass {
+  /** @ignore */
+  constructor() {
+    super();
+    
+    this._tagName = this.getAttribute('is').toLowerCase();
+  }
+  
   /**
    The table section divider. See {@link TableSectionDividerEnum}.
    
@@ -45,8 +52,42 @@ const BaseTableSection = (superClass) => class extends superClass {
     this.classList.add(`_coral-Table-divider--${this.divider}`);
   }
   
+  _toggleObserver(enable) {
+    this._observer = this._observer || new MutationObserver(this._handleMutations.bind(this));
+    
+    if (enable) {
+      // Initialize content MO
+      this._observer.observe(this, {
+        childList: true,
+        subtree: true
+      });
+    }
+    else {
+      this._observer.disconnect();
+    }
+  }
+  
+  _handleMutations(mutations) {
+    mutations.forEach((mutation) => {
+      this.trigger(`${this._tagName}:_contentchanged`, {
+        addedNodes: mutation.addedNodes,
+        removedNodes: mutation.removedNodes
+      });
+    });
+  }
+  
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat(['divider']); }
+  static get observedAttributes() { return super.observedAttributes.concat(['divider', '_observe']); }
+  
+  /** @ignore */
+  attributeChangedCallback(name, oldValue, value) {
+    if (name === '_observe') {
+      this._toggleObserver(value !== 'off');
+    }
+    else {
+      super.attributeChangedCallback(name, oldValue, value);
+    }
+  }
   
   /** @ignore */
   connectedCallback() {

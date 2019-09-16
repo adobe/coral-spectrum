@@ -30,23 +30,7 @@ class TableBody extends BaseTableSection(BaseComponent(HTMLTableSectionElement))
   constructor() {
     super();
   
-    // Init content MO
-    this._observer = new MutationObserver(this._handleMutations.bind(this));
-  
-    this._observer.observe(this, {
-      childList: true,
-      subtree: true
-    });
-  }
-  
-  /** @private */
-  _handleMutations(mutations) {
-    mutations.forEach((mutation) => {
-      this.trigger('coral-table-body:_contentchanged', {
-        addedNodes: mutation.addedNodes,
-        removedNodes: mutation.removedNodes
-      });
-    });
+    this._toggleObserver(true);
   }
   
   /** @ignore */

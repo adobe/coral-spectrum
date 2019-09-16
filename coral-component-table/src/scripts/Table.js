@@ -175,13 +175,8 @@ class Table extends BaseComponent(HTMLTableElement) {
     
     // Used by resizing detector
     this._resetLayout = this._resetLayout.bind(this);
-  
-    // Initialize content MO
-    this._observer = new MutationObserver(this._handleMutations.bind(this));
-    this._observer.observe(this, {
-      childList: true,
-      subtree: true
-    });
+    // Init observer
+    this._toggleObserver(true);
   }
   
   /**
@@ -197,9 +192,12 @@ class Table extends BaseComponent(HTMLTableElement) {
     this._setContentZone('head', value, {
       handle: 'head',
       tagName: 'thead',
-      insert: function(content) {
+      insert: function(head) {
         // Using the native table API allows to position the head element at the correct position.
-        this._elements.table.tHead = content;
+        this._elements.table.tHead = head;
+  
+        // To init the head observer
+        head.setAttribute('_observe', 'on');
       }
     });
   }
@@ -220,6 +218,9 @@ class Table extends BaseComponent(HTMLTableElement) {
       insert: function(body) {
         this._elements.table.appendChild(body);
         this.items._container = body;
+        
+        // To init the body observer
+        body.setAttribute('_observe', 'on');
       }
     });
   }
@@ -237,9 +238,9 @@ class Table extends BaseComponent(HTMLTableElement) {
     this._setContentZone('foot', value, {
       handle: 'foot',
       tagName: 'tfoot',
-      insert: function(content) {
-        // Using the native table API allows to position the head element at the correct position.
-        this._elements.table.tFoot = content;
+      insert: function(foot) {
+        // Using the native table API allows to position the foot element at the correct position.
+        this._elements.table.tFoot = foot;
       }
     });
   }
@@ -2372,8 +2373,10 @@ class Table extends BaseComponent(HTMLTableElement) {
         const removedNode = mutation.removedNodes[k];
 
         if (removedNode instanceof TableBody) {
-          // Empty body for the items API
-          this.items._container = new TableBody();
+          // Always make sure there's a body content zone
+          if (!this.body) {
+            this.body = new TableBody();
+          }
           
           this._onBodyContentChanged({
             target: removedNode,
@@ -2391,6 +2394,20 @@ class Table extends BaseComponent(HTMLTableElement) {
   
   _getSelectableItems() {
     return this.items._getSelectableItems().filter(item => !item.querySelector('[coral-table-rowselect][disabled]'));
+  }
+  
+  _toggleObserver(enable) {
+    this._observer = this._observer || new MutationObserver(this._handleMutations.bind(this));
+    
+    if (enable) {
+      this._observer.observe(this, {
+        childList: true,
+        subtree: true
+      });
+    }
+    else {
+      this._observer.disconnect();
+    }
   }
   
   get _contentZones() {
@@ -2438,18 +2455,14 @@ class Table extends BaseComponent(HTMLTableElement) {
     const foot = this._elements.foot;
     const columns = this._elements.columns;
   
+    // Disable observer while rendering template
+    this._toggleObserver(false);
+    this._elements.head.setAttribute('_observe', 'off');
+    this._elements.body.setAttribute('_observe', 'off');
+    
     // Render template
     const frag = document.createDocumentFragment();
     frag.appendChild(this._elements.container);
-  
-    // Disconnect MO observer while moving table sections around
-    this._observer.disconnect();
-    
-    // Call content zone inserts
-    this.head = head;
-    this.body = body;
-    this.foot = foot;
-    this.columns = columns;
     
     // cloneNode support
     const wrapper = this.querySelector('._coral-Table-wrapper-container');
@@ -2459,12 +2472,12 @@ class Table extends BaseComponent(HTMLTableElement) {
   
     // Append frag
     this.appendChild(frag);
-    
-    // Reconnect observer
-    this._observer.observe(this, {
-      childList: true,
-      subtree: true
-    });
+  
+    // Call content zone inserts
+    this.head = head;
+    this.body = body;
+    this.foot = foot;
+    this.columns = columns;
   
     // Set header cell scope
     getRows([this._elements.table]).forEach((row) => {
@@ -2507,6 +2520,9 @@ class Table extends BaseComponent(HTMLTableElement) {
       // Use the first column as selection column
       rows.forEach(row => this._toggleSelectionCheckbox(row));
     }
+  
+    // Enable observer again
+    this._toggleObserver(true);
     
     // Mark table as ready
     if (!this.head || this.head && !this.head.hasAttribute('sticky')) {
