@@ -1,6 +1,6 @@
 {
-  "coverage": "65.21%",
-  "expectCount": 3565,
+  "coverage": "65.16%",
+  "expectCount": 3568,
   "actualCount": 2325,
   "files": {
     "coral-spectrum/coral-base-button/src/scripts/BaseButton.js": {
@@ -1996,15 +1996,19 @@
       "undocumentLines": []
     },
     "coral-spectrum/coral-component-table/src/scripts/BaseTableSection.js": {
-      "expectCount": 6,
-      "actualCount": 4,
+      "expectCount": 12,
+      "actualCount": 6,
       "undocumentLines": [
         18,
-        41
+        32,
+        48,
+        55,
+        56,
+        70
       ]
     },
     "coral-spectrum/coral-component-table/src/scripts/Table.js": {
-      "expectCount": 115,
+      "expectCount": 116,
       "actualCount": 75,
       "undocumentLines": [
         29,
@@ -2025,36 +2029,36 @@
         169,
         172,
         174,
-        180,
-        279,
-        298,
-        340,
-        363,
-        413,
-        454,
-        502,
-        1231,
-        1273,
-        1487,
-        1553,
-        1572,
-        1578,
-        1595,
-        1773,
-        1834,
-        2222,
-        2246,
-        2312,
-        2392,
-        2396
+        280,
+        299,
+        341,
+        364,
+        414,
+        455,
+        503,
+        1232,
+        1274,
+        1488,
+        1554,
+        1573,
+        1579,
+        1596,
+        1774,
+        1835,
+        2223,
+        2247,
+        2313,
+        2395,
+        2399,
+        2400,
+        2413
       ]
     },
     "coral-spectrum/coral-component-table/src/scripts/TableBody.js": {
-      "expectCount": 6,
-      "actualCount": 4,
+      "expectCount": 4,
+      "actualCount": 3,
       "undocumentLines": [
-        17,
-        34
+        17
       ]
     },
     "coral-spectrum/coral-component-table/src/scripts/TableCell.js": {
@@ -2089,12 +2093,11 @@
       ]
     },
     "coral-spectrum/coral-component-table/src/scripts/TableHead.js": {
-      "expectCount": 9,
-      "actualCount": 6,
+      "expectCount": 7,
+      "actualCount": 5,
       "undocumentLines": [
         17,
-        34,
-        56
+        51
       ]
     },
     "coral-spectrum/coral-component-table/src/scripts/TableHeaderCell.js": {

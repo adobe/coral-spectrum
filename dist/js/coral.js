@@ -67315,16 +67315,70 @@ var Coral = (function (exports) {
       function (_superClass) {
         _inherits(_class, _superClass);
 
+        /** @ignore */
         function _class() {
+          var _this;
+
           _classCallCheck(this, _class);
 
-          return _possibleConstructorReturn(this, _getPrototypeOf(_class).apply(this, arguments));
+          _this = _possibleConstructorReturn(this, _getPrototypeOf(_class).call(this));
+          _this._tagName = _this.getAttribute('is').toLowerCase();
+          return _this;
         }
+        /**
+         The table section divider. See {@link TableSectionDividerEnum}.
+         
+         @type {String}
+         @default TableSectionDividerEnum.ROW
+         @htmlattributereflected
+         @htmlattribute divider
+         */
+
 
         _createClass(_class, [{
-          key: "connectedCallback",
+          key: "_toggleObserver",
+          value: function _toggleObserver(enable) {
+            this._observer = this._observer || new MutationObserver(this._handleMutations.bind(this));
+
+            if (enable) {
+              // Initialize content MO
+              this._observer.observe(this, {
+                childList: true,
+                subtree: true
+              });
+            } else {
+              this._observer.disconnect();
+            }
+          }
+        }, {
+          key: "_handleMutations",
+          value: function _handleMutations(mutations) {
+            var _this2 = this;
+
+            mutations.forEach(function (mutation) {
+              _this2.trigger("".concat(_this2._tagName, ":_contentchanged"), {
+                addedNodes: mutation.addedNodes,
+                removedNodes: mutation.removedNodes
+              });
+            });
+          }
+          /** @ignore */
+
+        }, {
+          key: "attributeChangedCallback",
 
           /** @ignore */
+          value: function attributeChangedCallback(name, oldValue, value) {
+            if (name === '_observe') {
+              this._toggleObserver(value !== 'off');
+            } else {
+              _get(_getPrototypeOf(_class.prototype), "attributeChangedCallback", this).call(this, name, oldValue, value);
+            }
+          }
+          /** @ignore */
+
+        }, {
+          key: "connectedCallback",
           value: function connectedCallback() {
             _get(_getPrototypeOf(_class.prototype), "connectedCallback", this).call(this); // a11y
 
@@ -67337,15 +67391,6 @@ var Coral = (function (exports) {
           }
         }, {
           key: "divider",
-
-          /**
-           The table section divider. See {@link TableSectionDividerEnum}.
-           
-           @type {String}
-           @default TableSectionDividerEnum.ROW
-           @htmlattributereflected
-           @htmlattribute divider
-           */
           get: function get() {
             return this._divider || divider.ROW;
           },
@@ -67361,12 +67406,10 @@ var Coral = (function (exports) {
 
             this.classList.add("_coral-Table-divider--".concat(this.divider));
           }
-          /** @ignore */
-
         }], [{
           key: "observedAttributes",
           get: function get() {
-            return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['divider']);
+            return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['divider', '_observe']);
           }
         }]);
 
@@ -67397,14 +67440,9 @@ var Coral = (function (exports) {
 
       _classCallCheck(this, TableHead);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(TableHead).call(this)); // Initialize content MO
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(TableHead).call(this));
 
-      _this._observer = new MutationObserver(_this._handleMutations.bind(_assertThisInitialized(_this)));
-
-      _this._observer.observe(_assertThisInitialized(_this), {
-        childList: true,
-        subtree: true
-      });
+      _this._toggleObserver(true);
 
       return _this;
     }
@@ -67422,22 +67460,6 @@ var Coral = (function (exports) {
 
 
     _createClass(TableHead, [{
-      key: "_handleMutations",
-
-      /** @private */
-      value: function _handleMutations(mutations) {
-        var _this2 = this;
-
-        mutations.forEach(function (mutation) {
-          _this2.trigger('coral-table-head:_contentchanged', {
-            addedNodes: mutation.addedNodes,
-            removedNodes: mutation.removedNodes
-          });
-        });
-      }
-      /** @ignore */
-
-    }, {
       key: "connectedCallback",
 
       /** @ignore */
@@ -67466,7 +67488,7 @@ var Coral = (function (exports) {
         return this._sticky || false;
       },
       set: function set(value) {
-        var _this3 = this;
+        var _this2 = this;
 
         this._sticky = transform.booleanAttr(value);
 
@@ -67474,9 +67496,11 @@ var Coral = (function (exports) {
 
 
         window.requestAnimationFrame(function () {
-          _this3.trigger('coral-table-head:_stickychanged');
+          _this2.trigger('coral-table-head:_stickychanged');
         });
       }
+      /** @ignore */
+
     }], [{
       key: "observedAttributes",
       get: function get() {
@@ -67509,35 +67533,16 @@ var Coral = (function (exports) {
 
       _classCallCheck(this, TableBody);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(TableBody).call(this)); // Init content MO
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(TableBody).call(this));
 
-      _this._observer = new MutationObserver(_this._handleMutations.bind(_assertThisInitialized(_this)));
-
-      _this._observer.observe(_assertThisInitialized(_this), {
-        childList: true,
-        subtree: true
-      });
+      _this._toggleObserver(true);
 
       return _this;
     }
-    /** @private */
+    /** @ignore */
 
 
     _createClass(TableBody, [{
-      key: "_handleMutations",
-      value: function _handleMutations(mutations) {
-        var _this2 = this;
-
-        mutations.forEach(function (mutation) {
-          _this2.trigger('coral-table-body:_contentchanged', {
-            addedNodes: mutation.addedNodes,
-            removedNodes: mutation.removedNodes
-          });
-        });
-      }
-      /** @ignore */
-
-    }, {
       key: "connectedCallback",
       value: function connectedCallback() {
         _get(_getPrototypeOf(TableBody.prototype), "connectedCallback", this).call(this);
@@ -67785,14 +67790,9 @@ var Coral = (function (exports) {
 
       _this._wait = 50; // Used by resizing detector
 
-      _this._resetLayout = _this._resetLayout.bind(_assertThisInitialized(_this)); // Initialize content MO
+      _this._resetLayout = _this._resetLayout.bind(_assertThisInitialized(_this)); // Init observer
 
-      _this._observer = new MutationObserver(_this._handleMutations.bind(_assertThisInitialized(_this)));
-
-      _this._observer.observe(_assertThisInitialized(_this), {
-        childList: true,
-        subtree: true
-      });
+      _this._toggleObserver(true);
 
       return _this;
     }
@@ -69773,8 +69773,10 @@ var Coral = (function (exports) {
             var removedNode = mutation.removedNodes[k];
 
             if (removedNode instanceof TableBody) {
-              // Empty body for the items API
-              _this6.items._container = new TableBody();
+              // Always make sure there's a body content zone
+              if (!_this6.body) {
+                _this6.body = new TableBody();
+              }
 
               _this6._onBodyContentChanged({
                 target: removedNode,
@@ -69797,6 +69799,20 @@ var Coral = (function (exports) {
         });
       }
     }, {
+      key: "_toggleObserver",
+      value: function _toggleObserver(enable) {
+        this._observer = this._observer || new MutationObserver(this._handleMutations.bind(this));
+
+        if (enable) {
+          this._observer.observe(this, {
+            childList: true,
+            subtree: true
+          });
+        } else {
+          this._observer.disconnect();
+        }
+      }
+    }, {
       key: "connectedCallback",
 
       /** @ignore */
@@ -69816,18 +69832,17 @@ var Coral = (function (exports) {
         var head = this._elements.head;
         var body = this._elements.body;
         var foot = this._elements.foot;
-        var columns = this._elements.columns; // Render template
+        var columns = this._elements.columns; // Disable observer while rendering template
+
+        this._toggleObserver(false);
+
+        this._elements.head.setAttribute('_observe', 'off');
+
+        this._elements.body.setAttribute('_observe', 'off'); // Render template
+
 
         var frag = document.createDocumentFragment();
-        frag.appendChild(this._elements.container); // Disconnect MO observer while moving table sections around
-
-        this._observer.disconnect(); // Call content zone inserts
-
-
-        this.head = head;
-        this.body = body;
-        this.foot = foot;
-        this.columns = columns; // cloneNode support
+        frag.appendChild(this._elements.container); // cloneNode support
 
         var wrapper = this.querySelector('._coral-Table-wrapper-container');
 
@@ -69836,13 +69851,12 @@ var Coral = (function (exports) {
         } // Append frag
 
 
-        this.appendChild(frag); // Reconnect observer
+        this.appendChild(frag); // Call content zone inserts
 
-        this._observer.observe(this, {
-          childList: true,
-          subtree: true
-        }); // Set header cell scope
-
+        this.head = head;
+        this.body = body;
+        this.foot = foot;
+        this.columns = columns; // Set header cell scope
 
         getRows([this._elements.table]).forEach(function (row) {
           getHeaderCells(row).forEach(function (headerCell) {
@@ -69885,7 +69899,10 @@ var Coral = (function (exports) {
           rows.forEach(function (row) {
             return _this7._toggleSelectionCheckbox(row);
           });
-        } // Mark table as ready
+        } // Enable observer again
+
+
+        this._toggleObserver(true); // Mark table as ready
 
 
         if (!this.head || this.head && !this.head.hasAttribute('sticky')) {
@@ -70018,9 +70035,11 @@ var Coral = (function (exports) {
         this._setContentZone('head', value, {
           handle: 'head',
           tagName: 'thead',
-          insert: function insert(content) {
+          insert: function insert(head) {
             // Using the native table API allows to position the head element at the correct position.
-            this._elements.table.tHead = content;
+            this._elements.table.tHead = head; // To init the head observer
+
+            head.setAttribute('_observe', 'on');
           }
         });
       }
@@ -70043,7 +70062,9 @@ var Coral = (function (exports) {
           insert: function insert(body) {
             this._elements.table.appendChild(body);
 
-            this.items._container = body;
+            this.items._container = body; // To init the body observer
+
+            body.setAttribute('_observe', 'on');
           }
         });
       }
@@ -70063,9 +70084,9 @@ var Coral = (function (exports) {
         this._setContentZone('foot', value, {
           handle: 'foot',
           tagName: 'tfoot',
-          insert: function insert(content) {
-            // Using the native table API allows to position the head element at the correct position.
-            this._elements.table.tFoot = content;
+          insert: function insert(foot) {
+            // Using the native table API allows to position the foot element at the correct position.
+            this._elements.table.tFoot = foot;
           }
         });
       }
@@ -74001,7 +74022,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.104";
+  var version = "1.0.0-beta.105";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
