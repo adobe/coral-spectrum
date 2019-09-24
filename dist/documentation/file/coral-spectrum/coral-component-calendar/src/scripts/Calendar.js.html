@@ -1010,7 +1010,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
       el.classList.remove(&apos;is-focused&apos;);
     }
     
-    this._elements.body.setAttribute(&apos;aria-activedescendant&apos;, this._activeDescendant);
+    this._elements.body[this._activeDescendant ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-activedescendant&apos;, this._activeDescendant);
     
     this._updateTableCaption();
     

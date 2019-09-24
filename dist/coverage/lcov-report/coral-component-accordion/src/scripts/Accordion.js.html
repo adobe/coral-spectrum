@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">70.15% </span>
+        <span class="strong">69.7% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>94/134</span>
+        <span class='fraction'>92/132</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">68.49% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>26/33</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">70.15% </span>
+        <span class="strong">69.7% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>94/134</span>
+        <span class='fraction'>92/132</span>
       </div>
     </div>
     <p class="quiet">
@@ -486,10 +486,7 @@
 <a name='L438'></a><a href='#L438'>438</a>
 <a name='L439'></a><a href='#L439'>439</a>
 <a name='L440'></a><a href='#L440'>440</a>
-<a name='L441'></a><a href='#L441'>441</a>
-<a name='L442'></a><a href='#L442'>442</a>
-<a name='L443'></a><a href='#L443'>443</a>
-<a name='L444'></a><a href='#L444'>444</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L441'></a><a href='#L441'>441</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -876,7 +873,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">228x</span>
-<span class="cline-any cline-yes">228x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">228x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -924,8 +920,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3346x</span>
 <span class="cline-any cline-yes">196x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1066,77 +1060,75 @@ class Accordion extends BaseComponent(HTMLElement) {
     this._multiple = transform.booleanAttr(value);
     this._reflectAttribute('multiple', this._multiple);
     <span class="fstat-no" title="function not covered" ></span>
-    this.setAttribute('aria-multiselectable', this._multiple);
-    <span class="cstat-no" title="statement not covered" ></span>
-    this._validat<span class="cstat-no" title="statement not covered" >eSelection();</span>
-  }
+    this._validateSelection();
+  }<span class="cstat-no" title="statement not covered" ></span>
   <span class="cstat-no" title="statement not covered" ></span>
   /**
-   Returns an Array containing the set selected items.
+   Ret<span class="cstat-no" title="statement not covered" >urns an Array containing the set selected items.</span>
    @type {Array.&lt;AccordionItem&gt;}
-   @readon<span class="cstat-no" title="statement not covered" >ly</span>
-   */<span class="cstat-no" title="statement not covered" ></span>
-  get select<span class="cstat-no" title="statement not covered" >edItems() {</span>
-    return this.items._getAllSelected();
-  }<span class="cstat-no" title="statement not covered" ></span>
-  
-  /**
-   Returns<span class="cstat-no" title="statement not covered" > the fi</span>rst selected item in the Accordion. The value &lt;code&gt;null&lt;/code&gt; is returned if no element is
-   selected.
-   @type {AccordionItem}
    @readonly
    */
-  get sele<span class="cstat-no" title="statement not covered" >ctedItem() {</span>
-    return t<span class="cstat-no" title="statement not covered" >his.items._getFirstSelec</span>ted();
+  get sele<span class="cstat-no" title="statement not covered" >ctedItems() {</span>
+    return t<span class="cstat-no" title="statement not covered" >his.items._getAllSelecte</span>d();
   }<span class="cstat-no" title="statement not covered" ></span>
   
-  /** @private **/<span class="cstat-no" title="statement not covered" ></span>
+  /**<span class="cstat-no" title="statement not covered" ></span>
+   Returns the first selected item in the Accordion. The value &lt;code&gt;null&lt;/code&gt; is returned if no element is
+   selected.
+   @type {<span class="cstat-no" title="statement not covered" >Accordi</span>onItem}
+   @readonly
+   */
+  get selectedItem() {
+    return this.items._getFirstSelected();
+  }<span class="cstat-no" title="statement not covered" ></span>
+  <span class="cstat-no" title="statement not covered" ></span>
+  /** @priva<span class="cstat-no" title="statement not covered" >te **/</span>
   get _tabTarget() {
-    return t<span class="cstat-no" title="statement not covered" >his.__tabTarget || null;</span>
+    return this.__tabTarget<span class="cstat-no" title="statement not covered" > || null;</span>
   }
   set _tabTa<span class="cstat-no" title="statement not covered" >rget(value) {</span>
     this.__tabTarget = value;
-    
-    // Set<span class="cstat-no" title="statement not covered" > all bu</span>t the current set _tabTarget to not be a tab target:
+    <span class="cstat-no" title="statement not covered" ></span>
+    // Set all but the current set _tabTarget to not be a tab target:
     this.items.getAll().forEach((item) =&gt; {
-      item._isTabTarget = item === value;
+      item<span class="cstat-no" title="statement not covered" >._isTab</span>Target = item === value;
     });
   }
-  <span class="cstat-no" title="statement not covered" ></span>
-  /** @priva<span class="cstat-no" title="statement not covered" >te */</span>
-  _onHomeKey<span class="cstat-no" title="statement not covered" >(event) {</span>
-    event.preventDefault();
-    event.stopPropagation()<span class="cstat-no" title="statement not covered" >;</span>
+  
+  /** @private */
+  _onHomeK<span class="cstat-no" title="statement not covered" >ey(event) {</span>
+    event.pr<span class="cstat-no" title="statement not covered" >eventDefault();</span>
+    event.st<span class="cstat-no" title="statement not covered" >opPropagation();</span>
     
-    this._fo<span class="cstat-no" title="statement not covered" >cusItem(this.items._getFirstSelectabl</span>e());
+    this._focusItem(this.it<span class="cstat-no" title="statement not covered" >ems._getFirstSelectable());</span>
   }
   <span class="cstat-no" title="statement not covered" ></span>
   /** @private */
-  _onEndKey(event) {
-    event.<span class="cstat-no" title="statement not covered" >prevent</span>Default();
+  _onEndKey(<span class="cstat-no" title="statement not covered" >event) {</span>
+    event.preventDefault();
     event.stopPropagation();
-    
+    <span class="cstat-no" title="statement not covered" ></span>
     this._focusItem(this.items._getLastSelectable());
   }
   
   /**
-   References:<span class="fstat-no" title="function not covered" ></span>
-   htt<span class="cstat-no" title="statement not covered" >p://www.w3.org/WAI/PF/ar</span>ia-practices/#accordion &amp;
-   <span class="cstat-no" title="statement not covered" ></span>
-   Handlers for when focus is on an element inside of the panel:
-   htt<span class="cstat-no" title="statement not covered" >p://test.cita.illinois.edu/aria/tabpanel/tabpanel2.php</span>
+   References:
+   http://www.w3.org/WAI/PF/aria-practices/#accordion &amp;
+   <span class="fstat-no" title="function not covered" ></span>
+   Han<span class="cstat-no" title="statement not covered" >dlers for when focus is </span>on an element inside of the panel:
+   htt<span class="cstat-no" title="statement not covered" >p://test.cita.illinois.ed</span>u/aria/tabpanel/tabpanel2.php
    
-   @private
+   @pr<span class="cstat-no" title="statement not covered" >ivate</span>
    */
   _onItemContentKeyDown(event) {
     // Required since sometimes the value is a number
-    const key = pars<span class="fstat-no" title="function not covered" >eFloat(event.ke</span>yCode);
-    co<span class="cstat-no" title="statement not covered" >nst item = event.matched</span>Target.parentNode;
-    <span class="cstat-no" title="statement not covered" ></span>
-    switch (key) {
+    const key = parseFloat(event.keyCode);
+    const item = event.matchedTarget.parentNode;
+    <span class="fstat-no" title="function not covered" ></span>
+    sw<span class="cstat-no" title="statement not covered" >itch (key) {</span>
 <span class="cstat-no" title="statement not covered" >      case UP_ARROW:</span>
       case LEFT_ARROW:
-        // Set focus on the tab button for the currently displayed tab.
+<span class="cstat-no" title="statement not covered" >        // Set focus on the tab button for the currently displayed tab.</span>
         if ((event.metaKey || event.ctrlKey) &amp;&amp; Keys.filterInputs(event)) {
           event.preventDefault();
           event.stopPropagation();
@@ -1149,9 +1141,9 @@ class Accordion extends BaseComponent(HTMLElement) {
         // current tab is the first one.
         if (event.metaKey || event.ctrlKey) {
           event.preventDefault();
-      <span class="missing-if-branch" title="else path not taken" >E</span>    event.stopPropagation();
+          event.stopPropagation();
           
-          const prevItem = this.items._getPreviousSelectable(item);
+      <span class="missing-if-branch" title="else path not taken" >E</span>    const prevItem = this.items._getPreviousSelectable(item);
           this._toggleItemSelection(prevItem);
           this._focusItem(prevItem);
         }
@@ -1162,16 +1154,16 @@ class Accordion extends BaseComponent(HTMLElement) {
         if (event.metaKey || event.ctrlKey) {
           event.preventDefault();
           event.stopPropagation();
-          <span class="fstat-no" title="function not covered" ></span>
-<span class="cstat-no" title="statement not covered" >          const nextItem = thi</span>s.items._getNextSelectable(item);
-<span class="cstat-no" title="statement not covered" >          this._toggleItemSelec</span>tion(nextItem);
-          this._f<span class="cstat-no" title="statement not covered" >ocusItem(nextItem);</span>
-        }
-<span class="cstat-no" title="statement not covered" >        break;</span>
+          
+          const nextItem = this.items._getNextSelectable(item);
+          this._togg<span class="fstat-no" title="function not covered" >leItemSelection(n</span>extItem);
+<span class="cstat-no" title="statement not covered" >          this._focusItem(next</span>Item);
+<span class="cstat-no" title="statement not covered" >        }</span>
+        break;<span class="cstat-no" title="statement not covered" ></span>
     }
   }<span class="cstat-no" title="statement not covered" ></span>
   
-  /** @private */
+  /** <span class="cstat-no" title="statement not covered" >@private */</span>
   _focusPreviousItem(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -1281,18 +1273,18 @@ class Accordion extends BaseComponent(HTMLElement) {
     if (oldSelection.length === selection.length) {
       diff = oldSelection.filter((item) =&gt; selection.indexOf(item) === -1);
     }
-  <span class="missing-if-branch" title="else path not taken" >E</span>
+  
     // since we guarantee that they are arrays, we can start by comparing their size
-    return oldSelection.length !== selection.length || diff.length !== 0;
+    re<span class="missing-if-branch" title="else path not taken" >E</span>turn oldSelection.length !== selection.length || diff.length !== 0;
   }
   
   /**
    Determine what item should get focus (if any) when the user tries to tab into the accordion. This should be the
    first selected panel, or the first selectable panel otherwise. When neither is available, to Accordion cannot be
    tabbed into.
-   <span class="missing-if-branch" title="else path not taken" >E</span>
+   
    @private
-   */
+   */<span class="missing-if-branch" title="else path not taken" >E</span>
   _resetTabTarget() {
     if (!this._resetTabTargetScheduled) {
       this._resetTabTargetScheduled = true;
@@ -1347,12 +1339,11 @@ class Accordion extends BaseComponent(HTMLElement) {
     
     // WAI-ARIA 1.1
     this.setAttribute('role', 'region');
-    this.setAttribute('aria-multiselectable', this.multiple);
     
     // Don't trigger events once connected
-    this._preventTriggeringEvents = true;<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+    this._preventTriggeringEvents = true;
     this._validateSelection();
-    this._preventTriggeringEvents = false;
+    this._preventTriggeringEvents = false;<span class="branch-2 cbranch-no" title="branch not covered" ></span>
     
     this._oldSelection = this.selectedItems;
     
@@ -1381,7 +1372,7 @@ export default Accordion;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Sep 17 2019 13:54:50 GMT+0200 (Central European Summer Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Sep 24 2019 17:43:20 GMT+0200 (Central European Summer Time)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

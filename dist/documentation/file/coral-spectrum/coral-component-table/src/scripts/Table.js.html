@@ -434,7 +434,7 @@ import &apos;../../../coral-component-button&apos;;
 import {Checkbox} from &apos;../../../coral-component-checkbox&apos;;
 import base from &apos;../templates/base&apos;;
 import {SelectableCollection} from &apos;../../../coral-collection&apos;;
-import {getCellByIndex, getColumns, getCells, getContentCells, getHeaderCells, getRows, getSiblingsOf, getIndexOf, divider} from &apos;./TableUtil&apos;;
+import {isTableHeaderCell, isTableCell, isTableRow, isTableBody, getCellByIndex, getColumns, getCells, getContentCells, getHeaderCells, getRows, getSiblingsOf, getIndexOf, divider} from &apos;./TableUtil&apos;;
 import {transform, validate, commons, Keys} from &apos;../../../coral-utils&apos;;
 
 const CLASSNAME = &apos;_coral-Table-wrapper&apos;;
@@ -470,6 +470,7 @@ const IS_LAST_ITEM_DRAGGED = &apos;is-draggedLastItem&apos;;
 const IS_DRAGGING_CLASS = &apos;is-dragging&apos;;
 const IS_BEFORE_CLASS = &apos;is-before&apos;;
 const IS_AFTER_CLASS = &apos;is-after&apos;;
+const IS_LAYOUTING = &apos;is-layouting&apos;;
 const IS_READY = &apos;is-ready&apos;;
 const KEY_SPACE = Keys.keyToCode(&apos;space&apos;);
 
@@ -515,7 +516,9 @@ class Table extends BaseComponent(HTMLTableElement) {
       &apos;coral-dragaction:dragend thead[is=&quot;coral-table-head&quot;] tr[is=&quot;coral-table-row&quot;] &gt; th[is=&quot;coral-table-headercell&quot;]&apos;: &apos;_onHeaderCellDragEnd&apos;,
       // a11y
       &apos;key:enter th[is=&quot;coral-table-headercell&quot;]&apos;: &apos;_onHeaderCellSort&apos;,
+      &apos;key:enter th[is=&quot;coral-table-headercell&quot;] coral-table-headercell-content&apos;: &apos;_onHeaderCellSort&apos;,
       &apos;key:space th[is=&quot;coral-table-headercell&quot;]&apos;: &apos;_onHeaderCellSort&apos;,
+      &apos;key:space th[is=&quot;coral-table-headercell&quot;] coral-table-headercell-content&apos;: &apos;_onHeaderCellSort&apos;,
   
       // Body specific
       &apos;click tbody[is=&quot;coral-table-body&quot;] [coral-table-rowlock]&apos;: &apos;_onRowLock&apos;,
@@ -994,7 +997,7 @@ class Table extends BaseComponent(HTMLTableElement) {
   /** @private */
   _onHeaderCellSort(event) {
     const table = this;
-    const matchedTarget = event.matchedTarget;
+    const matchedTarget = event.matchedTarget.closest(&apos;th&apos;);
     
     // Don&apos;t sort if the column was dragged
     if (!matchedTarget._isDragging) {
@@ -1693,7 +1696,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       const node = addedNodes[i];
       
       // Sync header cell whether sticky or not
-      if (node instanceof TableHeaderCell) {
+      if (isTableHeaderCell(node)) {
         table._toggleStickyHeaderCell(node, head.sticky);
       }
     }
@@ -1719,7 +1722,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       addedNode = addedNodes[i];
       
       // Sync row state with table properties
-      if (addedNode instanceof TableRow) {
+      if (isTableRow(addedNode)) {
         changed = true;
         
         addedNode._toggleSelectable(table.selectable);
@@ -1763,7 +1766,7 @@ class Table extends BaseComponent(HTMLTableElement) {
     for (let k = 0; k &lt; removedNodes.length; k++) {
       const removedNode = removedNodes[k];
       
-      if (removedNode instanceof TableRow) {
+      if (isTableRow(removedNode)) {
         changed = true;
         
         // If the focusable item is removed, the first item becomes the new focusable item
@@ -1839,7 +1842,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       addedNode = addedNodes[i];
       
       // Sync row state with table properties
-      if (addedNode instanceof TableCell) {
+      if (isTableCell(addedNode)) {
         addedNode._toggleSelectable(row.selectable);
         
         const selectedItems = row.selectedItems;
@@ -1860,7 +1863,7 @@ class Table extends BaseComponent(HTMLTableElement) {
         }
       }
       // Add appropriate scope depending on whether headercell is in THEAD or TBODY
-      else if (addedNode instanceof TableHeaderCell) {
+      else if (isTableHeaderCell(addedNode)) {
         table._setHeaderCellScope(addedNode, row.parentNode);
       }
     }
@@ -1869,7 +1872,7 @@ class Table extends BaseComponent(HTMLTableElement) {
     for (let k = 0; k &lt; removedNodes.length; k++) {
       const removedNode = removedNodes[k];
       
-      if (removedNode instanceof TableCell) {
+      if (isTableCell(removedNode)) {
         if (removedNode.selected) {
           row._triggerChangeEvent();
         }
@@ -2184,6 +2187,9 @@ class Table extends BaseComponent(HTMLTableElement) {
   
   _onHeadStickyChanged(event) {
     event.stopImmediatePropagation();
+  
+    // a11y
+    this._toggleFocusable();
     
     const table = this;
     const head = event.target;
@@ -2322,7 +2328,7 @@ class Table extends BaseComponent(HTMLTableElement) {
     }
     
     const focusableItem = this._getFocusableItem();
-    if (this.selectable || this.lockable || this.orderable) {
+    if (this.selectable || this.lockable || this.orderable || (this.head &amp;&amp; this.head.sticky)) {
       // First item is focusable by default but don&apos;t remove the tabindex of the existing focusable item
       if (!focusableItem) {
         this._toggleElementTabIndex(firstItem);
@@ -2515,9 +2521,13 @@ class Table extends BaseComponent(HTMLTableElement) {
     }
     
     this._timeout = window.setTimeout(() =&gt; {
+      this.classList.add(IS_LAYOUTING);
+      
       this._timeout = null;
       this._resizeStickyHead();
       this._resizeContainer();
+      
+      this.classList.remove(IS_LAYOUTING);
       
       // Mark table as ready
       this.classList.add(IS_READY);
@@ -2783,7 +2793,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       for (let k = 0; k &lt; mutation.removedNodes.length; k++) {
         const removedNode = mutation.removedNodes[k];
 
-        if (removedNode instanceof TableBody) {
+        if (isTableBody(removedNode)) {
           // Always make sure there&apos;s a body content zone
           if (!this.body) {
             this.body = new TableBody();

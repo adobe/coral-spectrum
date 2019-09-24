@@ -923,7 +923,6 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute(&apos;readonly&apos;, this._readOnly);
-    this.setAttribute(&apos;aria-readonly&apos;, this._readOnly);
   
     this._elements.input.readOnly = this._readOnly;
     this._elements.toggle.disabled = this._readOnly || this.disabled;
@@ -974,8 +973,8 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
     
       // Show pop-over and add related attributes:
       this._elements.overlay.hidden = false;
-      this.setAttribute(&apos;aria-haspopup&apos;, &apos;true&apos;);
-      this.setAttribute(&apos;aria-expanded&apos;, &apos;true&apos;);
+      this.setAttribute(&apos;aria-haspopup&apos;, &apos;dialog&apos;);
+      this.setAttribute(&apos;aria-expanded&apos;, this._elements.overlay.open);
       this.setAttribute(&apos;aria-owns&apos;, this._elements.overlay.id);
     }
   }
@@ -984,7 +983,6 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
   _onPopoverBeforeOpen() {
     this._elements.calendar._validateCalendar();
     this._renderCalendar();
-    this.setAttribute(&apos;aria-expanded&apos;, true);
   }
   
   /**

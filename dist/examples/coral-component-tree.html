@@ -42,14 +42,14 @@
   </head>
 
   <body class="coral--light">
-    <div style="position:fixed;top:15px;right:15px;">
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
-    </div>
+    <main class="u-coral-margin">
+      <div style="position:fixed;top:15px;right:15px;">
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+      </div>
 
-    <section class="u-coral-margin">
       <h1 class="coral-Heading coral-Heading--1">Tree</h1>
 
       <h2 class="coral-Heading coral-Heading--2">Default</h2>
@@ -57,7 +57,7 @@
         <coral-tree style="width: 240px">
           <coral-tree-item disabled ><coral-tree-item-content>Item 2</coral-tree-item-content></coral-tree-item>
           <coral-tree-item expanded>
-            <coral-tree-item-content>Item 1</coral-tree-item-content>
+            <coral-tree-item-content>Item 1 with <a class="coral-Link" coral-interactive>link</a></coral-tree-item-content>
             <coral-tree-item disabled><coral-tree-item-content>Sub Item 1</coral-tree-item-content></coral-tree-item>
             <coral-tree-item expanded>
               <coral-tree-item-content>Sub Item 2</coral-tree-item-content>
@@ -120,47 +120,6 @@
           });
         </script>
       </div>
-
-      <h2 class="coral-Heading coral-Heading--2">With interactive elements</h2>
-      <div class="markup">
-        <coral-tree style="width: 240px">
-          <coral-tree-item>
-            <coral-tree-item-content>
-              <input type="checkbox" coral-interactive/>
-              Item 1
-            </coral-tree-item-content>
-          </coral-tree-item>
-          <coral-tree-item>
-            <coral-tree-item-content>
-              <select coral-interactive>
-                <option>Option 1</option>
-                <option>Option 2</option>
-                <option>Option 3</option>
-              </select>
-              Item 2
-            </coral-tree-item-content>
-          </coral-tree-item>
-          <coral-tree-item>
-            <coral-tree-item-content>
-              <button coral-interactive>Click me</button>
-              Item 3
-            </coral-tree-item-content>
-          </coral-tree-item>
-          <coral-tree-item>
-            <coral-tree-item-content>
-              <textarea coral-interactive>Enter Text</textarea>
-              Item 4
-            </coral-tree-item-content>
-          </coral-tree-item>
-          <coral-tree-item>
-            <coral-tree-item-content>
-              <input type="radio" coral-interactive/>
-              Item 5
-            </coral-tree-item-content>
-          </coral-tree-item>
-        </coral-tree>
-      </div>
-    </section>
+    </main>
   </body>
-
 </html>

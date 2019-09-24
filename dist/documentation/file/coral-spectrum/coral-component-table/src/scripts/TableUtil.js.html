@@ -422,6 +422,18 @@
  */
 
 /** @ignore */
+const isTableHeaderCell = node =&gt; node.nodeName === &apos;TH&apos; &amp;&amp; node.getAttribute(&apos;is&apos;) === &apos;coral-table-headercell&apos;;
+
+/** @ignore */
+const isTableCell = node =&gt; node.nodeName === &apos;TD&apos; &amp;&amp; node.getAttribute(&apos;is&apos;) === &apos;coral-table-cell&apos;;
+
+/** @ignore */
+const isTableRow = node =&gt; node.nodeName === &apos;TR&apos; &amp;&amp; node.getAttribute(&apos;is&apos;) === &apos;coral-table-row&apos;;
+
+/** @ignore */
+const isTableBody = node =&gt; node.nodeName === &apos;TBODY&apos; &amp;&amp; node.getAttribute(&apos;is&apos;) === &apos;coral-table-body&apos;;
+
+/** @ignore */
 const getIndexOf = (el) =&gt; {
   const parent = el.parentNode;
   if (!parent) {
@@ -569,7 +581,11 @@ export {
   getCellByIndex,
   getIndexOf,
   getSiblingsOf,
-  getRows
+  getRows,
+  isTableHeaderCell,
+  isTableCell,
+  isTableRow,
+  isTableBody
 };
 </code></pre>
 

@@ -103,9 +103,6 @@
 <li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#button-only" data-ice="link">Button Only</a></li>
 <li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#icon-and-button" data-ice="link">Icon and Button</a></li>
 <li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#coral-heading" data-ice="link">coral-Heading</a></li>
-<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#coral-body" data-ice="link">coral-Body</a></li>
-<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#coral-rule" data-ice="link">coral-Rule</a></li>
-<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#vertical-rule" data-ice="link">Vertical Rule</a></li>
 <li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#coral-inputgroup" data-ice="link">coral-InputGroup</a></li>
 <li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#button-before" data-ice="link">Button before</a></li>
 <li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#button-after" data-ice="link">Button after</a></li>
@@ -115,8 +112,6 @@
 <li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#block-with-button-after" data-ice="link">Block with Button after</a></li>
 <li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#block-with-text-buttons-and-both-sides" data-ice="link">Block with text Buttons and both sides</a></li>
 <li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#block-with-icons-buttons-on-both-sides" data-ice="link">Block with Icons Buttons on both sides</a></li>
-<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#coral-fieldlabel" data-ice="link">coral-FieldLabel</a></li>
-<li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#left-variation" data-ice="link">Left Variation</a></li>
 <li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#coral-form" data-ice="link">coral-Form</a></li>
 <li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#vertical-layout" data-ice="link">Vertical Layout</a></li>
 <li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#aligned-layout" data-ice="link">Aligned Layout</a></li>
@@ -789,17 +784,6 @@ setting CSS selectors on normal HTML markup. </p><h3>coral-DecoratedTextfield</h
 &lt;h4 class=&quot;coral-Heading coral-Heading--4&quot;&gt;Heading 4&lt;/h4&gt;
 &lt;h5 class=&quot;coral-Heading coral-Heading--5&quot;&gt;Heading 5&lt;/h5&gt;
 &lt;h6 class=&quot;coral-Heading coral-Heading--6&quot;&gt;Heading 6&lt;/h6&gt;</code>
-</code></pre><h3>coral-Body</h3><p>Typography elements see below examples</p><pre><code><code class="source-code prettyprint">&lt;p class=&quot;coral-Body--small&quot;&gt;Small Body Text&lt;/p&gt;
-&lt;p class=&quot;coral-Body&quot;&gt;Default Body Text&lt;/p&gt;
-&lt;p class=&quot;coral-Body--secondary&quot;&gt;Secondary Body Text&lt;/p&gt;
-&lt;p class=&quot;coral-Body--italic&quot;&gt; Body Text Italic&lt;/p&gt;
-&lt;p class=&quot;coral-Body--large&quot;&gt;Large Body Text&lt;/p&gt;</code>
-</code></pre><h3>coral-Rule</h3><p>Styles to define rules in the content</p><pre><code><code class="source-code prettyprint">&lt;hr class=&quot;coral-Rule&quot;&gt;
-&lt;hr class=&quot;coral-Rule coral-Rule--subsection&quot;&gt;
-&lt;hr class=&quot;coral-Rule coral-Rule--subsection2&quot;&gt;</code>
-</code></pre><h4>Vertical Rule</h4><pre><code><code class="source-code prettyprint">&lt;coral-icon icon=&quot;add&quot;&gt;&lt;/coral-icon&gt;
-&lt;span class=&quot;coral-Rule coral-Rule--panel&quot;&gt;&lt;/span&gt;
-&lt;coral-icon icon=&quot;remove&quot;&gt;&lt;/coral-icon&gt;</code>
 </code></pre><h3>coral-InputGroup</h3><p>A composite CSS pattern for Buttons and Textfields.</p><h4>Button before</h4><pre><code><code class="source-code prettyprint">&lt;div class=&quot;coral-InputGroup&quot;&gt;
   &lt;span class=&quot;coral-InputGroup-button&quot;&gt;
     &lt;button is=&quot;coral-button&quot; icon=&quot;selectBox&quot; title=&quot;Select&quot;&gt;&lt;/button&gt;
@@ -860,38 +844,36 @@ setting CSS selectors on normal HTML markup. </p><h3>coral-DecoratedTextfield</h
     &lt;button is=&quot;coral-button&quot; icon=&quot;add&quot; title=&quot;Add&quot;&gt;&lt;/button&gt;
   &lt;/span&gt;
 &lt;/div&gt;</code>
-</code></pre><h3>coral-FieldLabel</h3><p>Label styles. Field label for use with form inputs.</p><pre><code><code class="source-code prettyprint">&lt;label for=&quot;story&quot; class=&quot;coral-FieldLabel&quot;&gt;Life Story&lt;/label&gt;
-&lt;textarea is=&quot;coral-textarea&quot; id=&quot;story&quot; placeholder=&quot;Enter your life story&quot;&gt;&lt;/textarea&gt;</code>
-</code></pre><h4>Left Variation</h4><pre><code><code class="source-code prettyprint">&lt;label class=&quot;coral-FieldLabel coral-FieldLabel--left&quot; for=&quot;email&quot;&gt;Email Address&lt;/label&gt;
-&lt;input type=&quot;text&quot; is=&quot;coral-textfield&quot; placeholder=&quot;Enter your e-mail address&quot; id=&quot;email&quot;&gt;</code>
 </code></pre><h3>coral-Form</h3><p>Form styles. Please look at the related components, to see more examples.</p><h4>Vertical Layout</h4><p>Add the <code>coral-Form--vertical</code> class to render all labels and fields on the same vertical line.</p><pre><code><code class="source-code prettyprint">&lt;form class=&quot;coral-Form coral-Form--vertical&quot; style=&quot;width:300px;&quot;&gt;
-  &lt;section class=&quot;coral-Form-fieldset&quot;&gt;
-    &lt;h3 class=&quot;coral-Form-fieldset-legend&quot;&gt;Registration&lt;/h3&gt;
+  &lt;fieldset class=&quot;coral-Form-fieldset&quot;&gt;
+    &lt;legend class=&quot;coral-Form-fieldset-legend&quot;&gt;Registration&lt;/legend&gt;
 
     &lt;label class=&quot;coral-Form-fieldlabel&quot;&gt;Username&lt;/label&gt;
     &lt;input is=&quot;coral-textfield&quot; class=&quot;coral-Form-field&quot;/&gt;
     &lt;div class=&quot;coral-Form-fieldwrapper&quot;&gt;
       &lt;label class=&quot;coral-Form-fieldlabel&quot;&gt;Password&lt;/label&gt;
       &lt;input is=&quot;coral-textfield&quot; class=&quot;coral-Form-field&quot;/&gt;
-      &lt;coral-icon class=&quot;coral-Form-fieldinfo&quot; icon=&quot;info&quot;&gt;&lt;/coral-icon&gt;
+      &lt;coral-icon class=&quot;coral-Form-fieldinfo&quot; icon=&quot;info&quot; size=&quot;XS&quot;&gt;&lt;/coral-icon&gt;
       &lt;coral-tooltip target=&quot;_prev&quot; variant=&quot;info&quot; placement=&quot;right&quot;&gt;At least 12 characters&lt;/coral-tooltip&gt;
     &lt;/div&gt;
     &lt;div class=&quot;coral-Form-fieldwrapper coral-Form-fieldwrapper--singleline&quot;&gt;
       &lt;coral-checkbox class=&quot;coral-Form-field&quot;&gt;Remember me&lt;/coral-checkbox&gt;
     &lt;/div&gt;
-  &lt;/section&gt;
+  &lt;/fieldset&gt;
 &lt;/form&gt;</code>
 </code></pre><h4>Aligned Layout</h4><p>Add the <code>coral-Form--aligned</code> class to render each label and field pair on the same horizontal line.</p><pre><code><code class="source-code prettyprint">&lt;form class=&quot;coral-Form coral-Form--aligned&quot;&gt;
-  &lt;section class=&quot;coral-Form-fieldset&quot;&gt;
+  &lt;fieldset class=&quot;coral-Form-fieldset&quot;&gt;
+    &lt;legend class=&quot;coral-Form-fieldset-legend&quot;&gt;Registration&lt;/legend&gt;
+
     &lt;label class=&quot;coral-Form-fieldlabel&quot;&gt;Username&lt;/label&gt;
     &lt;input is=&quot;coral-textfield&quot; class=&quot;coral-Form-field&quot;/&gt;
     &lt;div class=&quot;coral-Form-fieldwrapper&quot;&gt;
       &lt;label class=&quot;coral-Form-fieldlabel&quot;&gt;Password&lt;/label&gt;
       &lt;input is=&quot;coral-textfield&quot; class=&quot;coral-Form-field&quot;/&gt;
-      &lt;coral-icon class=&quot;coral-Form-fieldinfo&quot; icon=&quot;info&quot;&gt;&lt;/coral-icon&gt;
+      &lt;coral-icon class=&quot;coral-Form-fieldinfo&quot; icon=&quot;info&quot; size=&quot;XS&quot;&gt;&lt;/coral-icon&gt;
       &lt;coral-tooltip target=&quot;_prev&quot; variant=&quot;info&quot; placement=&quot;right&quot;&gt;At least 12 characters&lt;/coral-tooltip&gt;
     &lt;/div&gt;
-  &lt;/section&gt;
+  &lt;/fieldset&gt;
 &lt;/form&gt;</code>
 </code></pre><h3>coral-Link</h3><p>Links get styled using the <code>coral-Link</code> class.</p><h4>Regular</h4><pre><code><code class="source-code prettyprint">&lt;a href=&quot;#&quot; class=&quot;coral-Link&quot;&gt;link&lt;/a&gt;.</code>
 </code></pre><h4>Subtle</h4><pre><code><code class="source-code prettyprint">&lt;a href=&quot;#&quot; class=&quot;coral-Link coral-Link--subtle&quot;&gt;subtle link&lt;/a&gt;</code>

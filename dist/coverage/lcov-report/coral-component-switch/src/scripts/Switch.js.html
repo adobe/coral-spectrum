@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">87.67% </span>
+        <span class="strong">87.5% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>64/73</span>
+        <span class='fraction'>63/72</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">88.89% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>23/27</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">87.67% </span>
+        <span class="strong">87.5% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>64/73</span>
+        <span class='fraction'>63/72</span>
       </div>
     </div>
     <p class="quiet">
@@ -343,9 +343,7 @@
 <a name='L295'></a><a href='#L295'>295</a>
 <a name='L296'></a><a href='#L296'>296</a>
 <a name='L297'></a><a href='#L297'>297</a>
-<a name='L298'></a><a href='#L298'>298</a>
-<a name='L299'></a><a href='#L299'>299</a>
-<a name='L300'></a><a href='#L300'>300</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L298'></a><a href='#L298'>298</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -440,13 +438,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">280x</span>
+<span class="cline-any cline-yes">281x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">280x</span>
+<span class="cline-any cline-yes">281x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">280x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">281x</span>
+<span class="cline-any cline-yes">281x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -501,8 +498,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">146x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">146x</span>
 <span class="cline-any cline-yes">92x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">92x</span>
@@ -546,7 +541,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">290x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">146x</span>
@@ -644,7 +639,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -748,14 +744,14 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
    Name used to submit the data in a form.
    @type {String}
    @default ""
-   @htmlattribute name
-   @htmlattributeref<span class="fstat-no" title="function not covered" >lected</span>
-   */<span class="cstat-no" title="statement not covered" ></span>
+   @htmlattribute na<span class="fstat-no" title="function not covered" >me</span>
+   @ht<span class="cstat-no" title="statement not covered" >mlattributereflected</span>
+   */
   get name() {
     return this._elements.input.name;
-  }
-  set name(value) {<span class="fstat-no" title="function not covered" ></span>
-    th<span class="cstat-no" title="statement not covered" >is._reflectAttribute('name', value);</span>
+  }<span class="fstat-no" title="function not covered" ></span>
+  set <span class="cstat-no" title="statement not covered" >name(value) {</span>
+    this._reflectAttribute('name', value);
     
     this._elements.input.name = value;
   }
@@ -848,13 +844,14 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
    @ignore
    */
   _hideLabelIfEmpty() {
-    const label = this.label;
+    const label = this._elements.label;
+  
     // If it's empty and has no non-textnode children, hide the label
-    const hiddenValue = label.children.length === 0 &amp;&amp; label.textContent.replace(/\s*/g, '') === '';
-    // Only bother if the hidden status has changed
-    if (hiddenValue !== this._elements.labelWrapper.hidden) {
-      this._elements.labelWrapper.hidden = hiddenValue;
-    }
+    const hiddenValue = !(label.children.length === 0 &amp;&amp; label.textContent.replace(/\s*/g, '') === '');
+  
+    // Toggle the screen reader text
+    this._elements.labelWrapper.style.margin = !hiddenValue ? '0' : '';
+    this._elements.screenReaderOnly.hidden = hiddenValue;
   }
   
   _onFocus() {
@@ -881,11 +878,11 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
     this.checked = this._initialCheckedState;
   }
   
-  /** @ignore */
+  /** @ignore */<span class="branch-1 cbranch-no" title="branch not covered" ></span>
   static get observedAttributes() {
     return super.observedAttributes.concat(['checked']);
   }
-  <span class="branch-1 cbranch-no" title="branch not covered" ></span>
+  
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();
@@ -909,9 +906,6 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
       label.parentNode.removeChild(label);
     }
   
-    // Hide the labelWrapper by default (will be shown, via contentZone observer)
-    this._elements.labelWrapper.hidden = true;
-  
     // Clean up
     while (this.firstChild) {
       const child = this.firstChild;
@@ -924,13 +918,13 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
       else {
         // Remove anything else
         this.removeChild(child);
-      }
-    }<span class="fstat-no" title="function not covered" ></span>
-  <span class="cstat-no" title="statement not covered" ></span>
-    // Append the fragment to the component
-    th<span class="cstat-no" title="statement not covered" >is.appendChild(frag);</span>
+      }<span class="fstat-no" title="function not covered" ></span>
+    }<span class="cstat-no" title="statement not covered" ></span>
   
-    //<span class="cstat-no" title="statement not covered" > Assign the content zones, moving them into plac</span>e in the process
+    //<span class="cstat-no" title="statement not covered" > Append the fragment to the component</span>
+    this.appendChild(frag);
+  <span class="cstat-no" title="statement not covered" ></span>
+    // Assign the content zones, moving them into place in the process
     this.label = label;
   
     // Cache the initial checked state of the switch (in order to implement reset)
@@ -949,7 +943,7 @@ export default Switch;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Sep 17 2019 13:54:50 GMT+0200 (Central European Summer Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Sep 24 2019 17:43:20 GMT+0200 (Central European Summer Time)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

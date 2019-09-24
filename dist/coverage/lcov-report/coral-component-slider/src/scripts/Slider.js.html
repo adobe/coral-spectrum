@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">84.79% </span>
+        <span class="strong">84.44% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>262/309</span>
+        <span class='fraction'>255/302</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">77.12% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>61/72</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">84.79% </span>
+        <span class="strong">84.44% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>262/309</span>
+        <span class='fraction'>255/302</span>
       </div>
     </div>
     <p class="quiet">
@@ -964,14 +964,7 @@
 <a name='L916'></a><a href='#L916'>916</a>
 <a name='L917'></a><a href='#L917'>917</a>
 <a name='L918'></a><a href='#L918'>918</a>
-<a name='L919'></a><a href='#L919'>919</a>
-<a name='L920'></a><a href='#L920'>920</a>
-<a name='L921'></a><a href='#L921'>921</a>
-<a name='L922'></a><a href='#L922'>922</a>
-<a name='L923'></a><a href='#L923'>923</a>
-<a name='L924'></a><a href='#L924'>924</a>
-<a name='L925'></a><a href='#L925'>925</a>
-<a name='L926'></a><a href='#L926'>926</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L919'></a><a href='#L919'>919</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1535,7 +1528,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2292x</span>
-<span class="cline-any cline-yes">2292x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2292x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1630,9 +1622,6 @@
 <span class="cline-any cline-yes">1130x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1130x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1130x</span>
-<span class="cline-any cline-yes">1254x</span>
 <span class="cline-any cline-yes">1254x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1659,9 +1648,6 @@
 <span class="cline-any cline-yes">3180x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3180x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3180x</span>
-<span class="cline-any cline-yes">3302x</span>
 <span class="cline-any cline-yes">3302x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1687,9 +1673,6 @@
 <span class="cline-any cline-yes">1206x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1206x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1206x</span>
-<span class="cline-any cline-yes">1328x</span>
 <span class="cline-any cline-yes">1328x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1896,6 +1879,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -2039,13 +2025,11 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
     if (value &gt; 0) {
       this._step = value;
       this._reflectAttribute('step', this._step);
-  
-      this.setAttribute('aria-valuestep', this._step);
+      
       this._elements.inputs.forEach((input) =&gt; {
         input.setAttribute('step', this._step);
-      <span class="missing-if-branch" title="if path not taken" >I</span>  input.setAttribute('aria-valuestep', this._step);
-      });<span class="cstat-no" title="statement not covered" ></span>
-    }
+      });
+    }<span class="missing-if-branch" title="if path not taken" >I</span>
   }<span class="cstat-no" title="statement not covered" ></span>
   
   /**<span class="cstat-no" title="statement not covered" ></span>
@@ -2054,7 +2038,7 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
    @type {Number}
    @defa<span class="cstat-no" title="statement not covered" >ult 1</span>
    @htmlattribute min
-   @htmlattributereflected
+   @html<span class="cstat-no" title="statement not covered" >attributereflected</span>
    */
   get min() {
     return this._getValueOf('min', 1);
@@ -2062,11 +2046,9 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   set min(value) {
     this._min = transform.number(value);
     this._reflectAttribute('min', this._min);
-  
-    this.setAttribute('aria-valuemin', this._min);
+    
     this._elements.inputs.forEach((input) =&gt; {
       input.setAttribute('min', this._min);
-      input.setAttribute('aria-valuemin', this._min);
     });
   }
   
@@ -2076,19 +2058,17 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
    @type {Number}
    @default 100
    @htmlattribute max
-   @ht<span class="missing-if-branch" title="if path not taken" >I</span>mlattributereflected<span class="branch-1 cbranch-no" title="branch not covered" ></span>
-   */<span class="cstat-no" title="statement not covered" ></span>
-  get max() {<span class="branch-1 cbranch-no" title="branch not covered" ><span class="missing-if-branch" title="if path not taken" >I</span></span>
-    retu<span class="cstat-no" title="statement not covered" >rn this._getValueOf('max'</span>, 100);
-  }
-  set max(value) {
-    this._max = transform.number(value);
-    this._reflectAttribute('max', this._max);
-  
-    this.setAttribute('aria-valuemax', this._max);
+   @htmlattributereflected
+   */
+  get max() {
+    return this._getValueOf('max', 100);
+  }<span class="branch-1 cbranch-no" title="branch not covered" ><span class="missing-if-branch" title="if path not taken" >I</span></span>
+  set ma<span class="cstat-no" title="statement not covered" >x(value) {</span>
+    this._max<span class="missing-if-branch" title="if path not taken" >I</span> = transform.number(v<span class="branch-1 cbranch-no" title="branch not covered" >alue);</span>
+    this<span class="cstat-no" title="statement not covered" >._reflectAttribute('max',</span> this._max);
+    
     this._elements.inputs.forEach((input) =&gt; {
       input.setAttribute('max', this._max);
-      input.setAttribute('aria-valuemax', this._max);
     });
   }
   
@@ -2126,13 +2106,13 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
    Orientation of the slider. See {@link SliderOrientationEnum}.
    
    @type {String}
-   @default Sli<span class="missing-if-branch" title="else path not taken" >E</span>derOrientationEnum.HORIZONTAL
+   @default SliderOrientationEnum.HORIZONTAL
    @htmlattribute orientation
    @htmlattributereflected
    */
   get orientation() {
     return this._orientation || orientation.HORIZONTAL;
-  }
+  }<span class="missing-if-branch" title="else path not taken" >E</span>
   set orientation(value) {
     value = transform.string(value).toLowerCase();
     this._orientation = validate.enumeration(orientation)(value) &amp;&amp; value || orientation.HORIZONTAL;
@@ -2140,34 +2120,34 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   }
   
   /**
-   Fill a value or v<span class="fstat-no" title="function not covered" >alue range using a </span>highlight color.
-   <span class="cstat-no" title="statement not covered" ></span>
+   Fill a value or value range using a highlight color.
+   
    @type {Boolean}
    @default false
-   @htmlattribu<span class="fstat-no" title="function not covered" >te filled</span>
-   @htmlattributer<span class="cstat-no" title="statement not covered" >eflected</span>
-   */<span class="cstat-no" title="statement not covered" ></span>
+   @htmlattribute filled
+   @htmlattributereflected
+   */<span class="fstat-no" title="function not covered" ></span>
   get filled() {<span class="cstat-no" title="statement not covered" ></span>
-    retu<span class="cstat-no" title="statement not covered" >rn this._filled || false;</span>
+    return this._filled || false;
   }
-  set filled(value) {
-    this._filled = transform.booleanAttr(value);
-    th<span class="cstat-no" title="statement not covered" >is._reflectAttribute('filled', <span class="fstat-no" title="function not covered" >th</span>is._filled);</span>
+  set filled(va<span class="fstat-no" title="function not covered" >lue) {</span>
+    this._filled =<span class="cstat-no" title="statement not covered" > transform.booleanAttr(value)</span>;
+    this._reflectA<span class="cstat-no" title="statement not covered" >ttribute('filled', this._fill</span>ed);
     <span class="cstat-no" title="statement not covered" ></span>
-    this.classList.toggle(`${CLASSNAME}--filled`, this._filled);
-  }<span class="cstat-no" title="statement not covered" ></span>
-  <span class="cstat-no" title="statement not covered" ></span>
-  /**<span class="cstat-no" title="statement not covered" ></span>
-   The value returned as a Number. Value is &lt;code&gt;NaN&lt;/code&gt; if conversion to Number is not possible.
-   
+    this<span class="cstat-no" title="statement not covered" >.classList.toggle(`${CLASSNAME}--filled`, this._filled);</span>
+  }
+  
+  /**
+   The<span class="cstat-no" title="statement not covered" > value returned as a Number. Va<span class="fstat-no" title="function not covered" >lu</span>e is &lt;code&gt;NaN&lt;/code&gt; if conversion to Number is not possible.</span>
+   <span class="cstat-no" title="statement not covered" ></span>
    @type {Number}
-   @de<span class="cstat-no" title="statement not covered" >fault NaN</span>
-   */
-  get valueAsNumber() {
+   @defa<span class="cstat-no" title="statement not covered" >ult NaN</span>
+   */<span class="cstat-no" title="statement not covered" ></span>
+  get valu<span class="cstat-no" title="statement not covered" >eAsNumber() {</span>
     return parseFloat(this.value);
   }
   set valueAsNumber(value) {
-    this.value = transform.float(value);
+    th<span class="cstat-no" title="statement not covered" >is.value = transform.f</span>loat(value);
   }
   
   /**
@@ -2217,14 +2197,14 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
       }
       
       this._moveHandles();
-      <span class="missing-if-branch" title="if path not taken" >I</span>
-      //<span class="cstat-no" title="statement not covered" > in order to keep the reset value i</span>n sync, we need to handle the "value" attribute of the inner input
+      
+      // in order to keep the reset value in sync, we need to handle the "value" attribute of the inner input
       const valueAttribute = this.getAttribute('value');
       input[valueAttribute ? 'setAttribute' : 'removeAttribute']('value', valueAttribute);
     }
   }
-  
-  /**
+  <span class="missing-if-branch" title="if path not taken" >I</span>
+  /**<span class="cstat-no" title="statement not covered" ></span>
    Whether this field is disabled or not.
    @type {Boolean}
    @default false
@@ -2235,22 +2215,22 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
     return this._disabled || false;
   }
   set disabled(value) {
-    this._disabled =<span class="fstat-no" title="function not covered" > transform.booleanAttr</span>(value);
+    this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
-    <span class="cstat-no" title="statement not covered" ></span>
-    this.classList.<span class="cstat-no" title="statement not covered" >toggle('is-disabled', this._disabled);</span>
+    
+    this.classList.toggle('is-disabled', this._disabled);
     this.setAttribute('aria-disabled', this._disabled);
-    th<span class="cstat-no" title="statement not covered" >is._elements.inputs.forEach((input) =&gt; {</span>
-      in<span class="cstat-no" title="statement not covered" >put.disabled = this.</span>_disabled;
+    this._elements.inputs.forEach((input) =&gt; {
+      input.disabled<span class="fstat-no" title="function not covered" > = this._disabled;</span>
     });
-  }
+  }<span class="cstat-no" title="statement not covered" ></span>
   <span class="cstat-no" title="statement not covered" ></span>
   /**
-   Whether this field is required or not.
-   @type {Boolean}
+   Whe<span class="cstat-no" title="statement not covered" >ther this field is required or not.</span>
+   @type<span class="cstat-no" title="statement not covered" > {Boolean}</span>
    @default false
    @htmlattribute required
-   @htmlattributereflected
+   @ht<span class="cstat-no" title="statement not covered" >mlattributereflected</span>
    */
   get required() {
     return this._required || false;
@@ -2343,14 +2323,14 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   _onMouseDown(event) {
     if (this.disabled) {
       return;
-    }<span class="branch-2 cbranch-no" title="branch not covered" ><span class="branch-1 cbranch-no" title="branch not covered" ><span class="missing-if-branch" title="if path not taken" >I</span></span></span>
-    <span class="cstat-no" title="statement not covered" ></span>
+    }
+    
     // do not accept right mouse button clicks
     if (event instanceof MouseEvent) {
       if ((event.which || event.button) !== 1) {
         return;
-      }
-    }
+      <span class="missing-if-branch" title="if path not taken" >I</span>}<span class="branch-2 cbranch-no" title="branch not covered" ><span class="branch-1 cbranch-no" title="branch not covered" ></span></span>
+    }<span class="cstat-no" title="statement not covered" ></span>
     
     event.preventDefault();
     
@@ -2375,14 +2355,14 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
     
     events.on('mousemove.Slider', this._draggingHandler);
     events.on('mouseup.Slider', this._mouseUpHandler);
-    <span class="missing-if-branch" title="if path not taken" >I</span>
-    even<span class="cstat-no" title="statement not covered" >ts.on('touchmove.Slider', this._draggingHandler);</span>
+    
+    events.on('touchmove.Slider', this._draggingHandler);
     events.on('touchend.Slider', this._mouseUpHandler);
     events.on('touchcancel.Slider', this._mouseUpHandler);
     
     this._setHandleFocus(this._currentHandle);
-  }
-  
+  }<span class="missing-if-branch" title="if path not taken" >I</span>
+  <span class="cstat-no" title="statement not covered" ></span>
   /**
    @private
    @return {Object} which contains the real coordinates
@@ -2498,13 +2478,13 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
       
       handle.previousElementSibling.style.width = `${percent}%`;
       handle.nextElementSibling.style.width = `${100 - percent}%`;
-  <span class="fstat-no" title="function not covered" ></span>
-<span class="cstat-no" title="statement not covered" >      labelValue.push(this._getLabel(this._values[0]));</span>
+  
+      labelValue.push(this._getLabel(this._values[0]));
     }
     else {
       const leftHandle = this._elements.handles[0];
-      const leftPercent = calculatePercent(this._values[0]);
-      leftHandle.style.left = `${leftPercent}%`;
+      const leftPe<span class="fstat-no" title="function not covered" >rcen</span>t = calculatePercent(this._values[0]);
+<span class="cstat-no" title="statement not covered" >      leftHandle.style.left = `${leftPercent}%`;</span>
       
       const rightHandle = this._elements.handles[1];
       const rightPercent = calculatePercent(this._values[1]);
@@ -2661,15 +2641,15 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @private */
   _snapValueToStep(rawValue, min, max, step) {
     step = parseFloat(step);
-    const remainder = (rawValue - min) % step;
+    const remainder = (rawValue - <span class="branch-1 cbranch-no" title="branch not covered" >min) % step;</span>
     const floatString = step.toString().replace(/^(?:\d+)(?:\.(\d+))?$/g, '$1');
     const precision = floatString.length;
     let snappedValue;
-    <span class="branch-1 cbranch-no" title="branch not covered" ></span>
+    <span class="branch-2 cbranch-no" title="branch not covered" ></span>
     if (Math.abs(remainder) * 2 &gt;= step) {
       snappedValue = rawValue - Math.abs(remainder) + step;
     }
-    else {<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+    else {
       snappedValue = rawValue - remainder;
     }
     
@@ -2680,19 +2660,19 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
       snappedValue = min + Math.floor((max - min) / step) * step;
     }
     
-    // correct floating point behavior by rounding to step precision
-    if (precision &gt; 0) {
+    // correct flo<span class="fstat-no" title="function not covered" >atin</span>g point behavior by rounding to step precision
+    if<span class="cstat-no" title="statement not covered" > (precision &gt; 0) {</span>
       snappedValue = parseFloat(snappedValue.toFixed(precision));
-    }
-    <span class="fstat-no" title="function not covered" ></span>
-    re<span class="cstat-no" title="statement not covered" >turn snappedValue;</span>
-  }
-  <span class="fstat-no" title="function not covered" ></span>
+    }<span class="fstat-no" title="function not covered" ></span>
+    <span class="cstat-no" title="statement not covered" ></span>
+    return snappedValue;
+  }<span class="cstat-no" title="statement not covered" ></span>
+  
   /**<span class="cstat-no" title="statement not covered" ></span>
    end operation of a dragging flow
-   @pr<span class="cstat-no" title="statement not covered" >ivate</span>
+   @private
    */
-  _mou<span class="cstat-no" title="statement not covered" >seUp() {</span>
+  _mouseUp() {
     this._currentHandle.style.cursor = 'grab';
     this._currentHandle.classList.remove('is-dragged');
     document.body.classList.remove('u-coral-closedHand');
@@ -2742,21 +2722,21 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
    
    @return {SliderOrientationEnum}
    */
-  static get orientation() { return orientation; }
+  stat<span class="missing-if-branch" title="else path not taken" >E</span>ic get orientation() { return orientation; }
   
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
-      <span class="missing-if-branch" title="else path not taken" >E</span>showvalue: 'showValue'
-    });
+      showvalue: 'showValue'
+    });<span class="missing-if-branch" title="else path not taken" >E</span>
   }
   
   /** @ignore */
-  static<span class="missing-if-branch" title="else path not taken" >E</span> get observedAttributes() {
-    return super.observedAttributes.concat([
+  static g<span class="cstat-no" title="statement not covered" >et observedAttributes() {</span>
+    return<span class="cstat-no" title="statement not covered" > super.observedAttributes.concat([</span>
       'step',
       'min',
-      'max<span class="cstat-no" title="statement not covered" >',</span>
-      'too<span class="cstat-no" title="statement not covered" >ltips',</span>
+      'max',
+      'tooltips',
       'showvalue',
       'orientation',
       'filled'
@@ -2777,7 +2757,6 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
     
     // A11y
     this.setAttribute('role', 'presentation');
-    this.setAttribute('aria-orientation', 'horizontal');
   
     // Support cloneNode
     const template = this.querySelectorAll('._coral-Slider-labelContainer, ._coral-Slider-controls');
@@ -2803,18 +2782,18 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
           frag.appendChild(child);
         }
         else {
-          // Add anything else to the content
-          content.appendChild(child);
+          // Add a<span class="fstat-no" title="function not covered" >nyth</span>ing else to the content
+          content.a<span class="cstat-no" title="statement not covered" >ppend</span>Child(child);
         }
-      }<span class="fstat-no" title="function not covered" ></span>
-    }<span class="cstat-no" title="statement not covered" ></span>
-  
-    //<span class="cstat-no" title="statement not covered" > Add the frag to the component</span>
-    this.appendChild(frag);
+<span class="cstat-no" title="statement not covered" >      }</span>
+    }
+  <span class="cstat-no" title="statement not covered" ></span>
+    // Add the frag to the component
+    th<span class="cstat-no" title="statement not covered" >is.appendChild(frag);<span class="fstat-no" title="function not covered" ></span></span>
   <span class="cstat-no" title="statement not covered" ></span>
     // Assign the content zone so the insert function will be called
-    th<span class="cstat-no" title="statement not covered" >is.content = content;<span class="fstat-no" title="function not covered" ></span></span>
-  <span class="cstat-no" title="statement not covered" ></span>
+    this.content = content;
+  
     // Defaults
     this._moveHandles();
   }
@@ -2827,7 +2806,7 @@ export default Slider;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Sep 17 2019 13:54:50 GMT+0200 (Central European Summer Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Sep 24 2019 17:43:20 GMT+0200 (Central European Summer Time)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

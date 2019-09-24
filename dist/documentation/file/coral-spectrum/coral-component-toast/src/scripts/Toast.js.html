@@ -425,7 +425,6 @@ import {BaseComponent} from &apos;../../../coral-base-component&apos;;
 import {BaseOverlay} from &apos;../../../coral-base-overlay&apos;;
 import {Icon} from &apos;../../../coral-component-icon&apos;;
 import {Button} from &apos;../../../coral-component-button&apos;;
-import {AnchorButton} from &apos;../../../coral-component-anchorbutton&apos;;
 import base from &apos;../templates/base&apos;;
 import {transform, validate, commons} from &apos;../../../coral-utils&apos;;
 
@@ -525,6 +524,10 @@ const unqueue = () =&gt; {
 // Used to map icon with variant
 const capitalize = s =&gt; s.charAt(0).toUpperCase() + s.slice(1);
 
+// Restriction filter for action button
+const isButton = node =&gt; (node.nodeName === &apos;BUTTON&apos; &amp;&amp; node.getAttribute(&apos;is&apos;) === &apos;coral-button&apos;) ||
+  (node.nodeName === &apos;A&apos; &amp;&amp; node.getAttribute(&apos;is&apos;) === &apos;coral-anchorbutton&apos;);
+
 /**
  @class Coral.Toast
  @classdesc Toasts display brief temporary notifications.
@@ -617,7 +620,7 @@ class Toast extends BaseOverlay(BaseComponent(HTMLElement)) {
       return;
     }
     
-    if (el instanceof Button || el instanceof AnchorButton) {
+    if (isButton(el)) {
       this._elements.action = el;
       el.setAttribute(&apos;coral-toast-action&apos;, &apos;&apos;);
       el.setAttribute(&apos;variant&apos;, Button.variant._CUSTOM);

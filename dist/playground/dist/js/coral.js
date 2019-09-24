@@ -13679,8 +13679,7 @@
         } // WAI-ARIA 1.1
 
 
-        this.setAttribute('role', 'region');
-        this.setAttribute('aria-multiselectable', this.multiple); // Don't trigger events once connected
+        this.setAttribute('role', 'region'); // Don't trigger events once connected
 
         this._preventTriggeringEvents = true;
 
@@ -13756,8 +13755,6 @@
         this._multiple = transform.booleanAttr(value);
 
         this._reflectAttribute('multiple', this._multiple);
-
-        this.setAttribute('aria-multiselectable', this._multiple);
 
         this._validateSelection();
       }
@@ -25875,7 +25872,12 @@
 
         this.classList.add(CLASSNAME$p); // adds the role to support accessibility
 
-        this.setAttribute('role', 'listbox'); // Don't trigger events once connected
+        this.setAttribute('role', 'listbox');
+
+        if (!this.hasAttribute('aria-label')) {
+          this.setAttribute('aria-label', 'list');
+        } // Don't trigger events once connected
+
 
         this._preventTriggeringEvents = true;
 
@@ -26761,7 +26763,9 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(Alert.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$u); // Default reflected attributes
+        this.classList.add(CLASSNAME$u); // a11y
+
+        this.setAttribute('role', 'alert'); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$5.INFO;
@@ -26822,10 +26826,7 @@
         // This lets popover get our styles for free
 
 
-        this.classList.add("".concat(CLASSNAME$u, "--").concat(this._variant)); // Set the role attribute to alert or status depending on
-        // the variant so that the element turns into a live region
-
-        this.setAttribute('role', this._variant);
+        this.classList.add("".concat(CLASSNAME$u, "--").concat(this._variant));
       }
       /**
        The size of the alert. It accepts both lower and upper case sizes. See {@link AlertVariantEnum}.
@@ -31518,9 +31519,7 @@
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$5); // Set new variant class
 
 
-        this.classList.add("".concat(CLASSNAME$D, "--").concat(this._variant)); // Set the role attribute depending on the variant so that the element turns into a live region
-
-        this.setAttribute('role', this._variant);
+        this.classList.add("".concat(CLASSNAME$D, "--").concat(this._variant));
       }
       /**
        The banner's header.
@@ -32829,10 +32828,10 @@
     var el4 = this["heading"] = document.createElement("div");
     el4.setAttribute("handle", "heading");
     el4.className += " _coral-Calendar-title";
-    el4.id = data_0["commons"]["getUID"]();
     el4.setAttribute("role", "heading");
     el4.setAttribute("aria-live", "assertive");
     el4.setAttribute("aria-atomic", "true");
+    el4.setAttribute("aria-level", "2");
     el2.appendChild(el4);
     var el5 = document.createTextNode("\n  ");
     el2.appendChild(el5);
@@ -33451,7 +33450,7 @@
           el.classList.remove('is-focused');
         }
 
-        this._elements.body.setAttribute('aria-activedescendant', this._activeDescendant);
+        this._elements.body[this._activeDescendant ? 'setAttribute' : 'removeAttribute']('aria-activedescendant', this._activeDescendant);
 
         this._updateTableCaption();
 
@@ -34426,7 +34425,7 @@
 
         this.asset = asset; // In case a lot of alerts are added, they will not overflow the card
 
-        this.classList.toggle("".concat(CLASSNAME$I, "--scroll"), this.info.scrollHeight > this.clientHeight);
+        this.classList.toggle("".concat(CLASSNAME$I, "--overflow"), this.info.scrollHeight > this.clientHeight);
       }
     }, {
       key: "asset",
@@ -35468,10 +35467,18 @@
     el7.className += " _coral-Checkbox-label";
     el7.setAttribute("handle", "labelWrapper");
     el7.setAttribute("for", this["input"]["id"]);
-    el7.setAttribute("hidden", "");
+    var el8 = document.createTextNode("\n  ");
+    el7.appendChild(el8);
+    var el9 = this["screenReaderOnly"] = document.createElement("span");
+    el9.className += " u-coral-screenReaderOnly";
+    el9.setAttribute("handle", "screenReaderOnly");
+    el9.textContent = "select";
+    el7.appendChild(el9);
+    var el10 = document.createTextNode("\n");
+    el7.appendChild(el10);
     frag.appendChild(el7);
-    var el8 = document.createTextNode("\n");
-    frag.appendChild(el8);
+    var el11 = document.createTextNode("\n");
+    frag.appendChild(el11);
     return frag;
   };
 
@@ -35616,11 +35623,10 @@
       value: function _hideLabelIfEmpty() {
         var label = this._elements.label; // If it's empty and has no non-textnode children, hide the label
 
-        var hiddenValue = label.children.length === 0 && label.textContent.replace(/\s*/g, '') === ''; // Only bother if the hidden status has changed
+        var hiddenValue = !(label.children.length === 0 && label.textContent.replace(/\s*/g, '') === ''); // Toggle the screen reader text
 
-        if (hiddenValue !== this._elements.labelWrapper.hidden) {
-          this._elements.labelWrapper.hidden = hiddenValue;
-        }
+        this._elements.labelWrapper.style.margin = !hiddenValue ? '0' : '';
+        this._elements.screenReaderOnly.hidden = hiddenValue;
       }
       /**
        Inherited from {@link BaseFormField#clear}.
@@ -35659,10 +35665,7 @@
 
         if (label.parentNode) {
           label.parentNode.removeChild(label);
-        } // Hide the labelWrapper by default (will be shown, via contentZone observer)
-
-
-        this._elements.labelWrapper.hidden = true;
+        }
 
         while (this.firstChild) {
           var child = this.firstChild;
@@ -36166,7 +36169,6 @@
     el2.setAttribute("handle", "button");
     el2.setAttribute("type", "button");
     el2.setAttribute("is", "coral-button");
-    el2.setAttribute("role", "combobox");
     el2.setAttribute("aria-haspopup", "true");
     el2.id = buttonId;
     el2.setAttribute("aria-controls", listId);
@@ -40505,7 +40507,6 @@
     var el12 = document.createTextNode("\n    ");
     el11.appendChild(el12);
     var el13 = this["leftInput"] = document.createElement("input");
-    el13.setAttribute("aria-orientation", "horizontal");
     el13.setAttribute("handle", "leftInput");
     el13.setAttribute("value", "1");
     el13.setAttribute("type", "range");
@@ -41065,8 +41066,7 @@
         } // A11y
 
 
-        this.setAttribute('role', 'presentation');
-        this.setAttribute('aria-orientation', 'horizontal'); // Support cloneNode
+        this.setAttribute('role', 'presentation'); // Support cloneNode
 
         var template = this.querySelectorAll('._coral-Slider-labelContainer, ._coral-Slider-controls');
 
@@ -41160,11 +41160,8 @@
 
           this._reflectAttribute('step', this._step);
 
-          this.setAttribute('aria-valuestep', this._step);
-
           this._elements.inputs.forEach(function (input) {
             input.setAttribute('step', _this3._step);
-            input.setAttribute('aria-valuestep', _this3._step);
           });
         }
       }
@@ -41189,11 +41186,8 @@
 
         this._reflectAttribute('min', this._min);
 
-        this.setAttribute('aria-valuemin', this._min);
-
         this._elements.inputs.forEach(function (input) {
           input.setAttribute('min', _this4._min);
-          input.setAttribute('aria-valuemin', _this4._min);
         });
       }
       /**
@@ -41217,11 +41211,8 @@
 
         this._reflectAttribute('max', this._max);
 
-        this.setAttribute('aria-valuemax', this._max);
-
         this._elements.inputs.forEach(function (input) {
           input.setAttribute('max', _this5._max);
-          input.setAttribute('aria-valuemax', _this5._max);
         });
       }
       /**
@@ -41673,7 +41664,6 @@
     var el16 = document.createTextNode("\n    ");
     el13.appendChild(el16);
     var el17 = this["leftInput"] = document.createElement("input");
-    el17.setAttribute("aria-orientation", "horizontal");
     el17.setAttribute("handle", "leftInput");
     el17.setAttribute("value", "1");
     el17.setAttribute("type", "range");
@@ -41706,7 +41696,6 @@
     var el25 = document.createTextNode("\n    ");
     el22.appendChild(el25);
     var el26 = this["rightInput"] = document.createElement("input");
-    el26.setAttribute("aria-orientation", "horizontal");
     el26.setAttribute("handle", "rightInput");
     el26.setAttribute("value", "100");
     el26.setAttribute("type", "range");
@@ -44770,7 +44759,6 @@
 
         this._reflectAttribute('readonly', this._readOnly);
 
-        this.setAttribute('aria-readonly', this._readOnly);
         this._elements.input.readOnly = this._readOnly;
         this._elements.colorPreview.disabled = this.disabled || this._readOnly;
       }
@@ -49005,8 +48993,6 @@
         this._elements.calendar._validateCalendar();
 
         this._renderCalendar();
-
-        this.setAttribute('aria-expanded', true);
       }
       /**
        Matches the accessibility to the state of the popover.
@@ -49639,7 +49625,6 @@
 
         this._reflectAttribute('readonly', this._readOnly);
 
-        this.setAttribute('aria-readonly', this._readOnly);
         this._elements.input.readOnly = this._readOnly;
         this._elements.toggle.disabled = this._readOnly || this.disabled;
       }
@@ -49693,8 +49678,8 @@
 
 
           this._elements.overlay.hidden = false;
-          this.setAttribute('aria-haspopup', 'true');
-          this.setAttribute('aria-expanded', 'true');
+          this.setAttribute('aria-haspopup', 'dialog');
+          this.setAttribute('aria-expanded', this._elements.overlay.open);
           this.setAttribute('aria-owns', this._elements.overlay.id);
         }
       }
@@ -49756,37 +49741,50 @@
 
   var template$y = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
-    var el0 = this["slider"] = document.createElement("div");
-    el0.setAttribute("handle", "slider");
-    el0.className += " _coral-Drawer-slider";
-    var el1 = document.createTextNode("\n  ");
-    el0.appendChild(el1);
-    var el2 = this["contentWrapper"] = document.createElement("div");
-    el2.setAttribute("handle", "contentWrapper");
-    el2.className += " _coral-Drawer-content";
-    el0.appendChild(el2);
-    var el3 = document.createTextNode("\n");
-    el0.appendChild(el3);
-    frag.appendChild(el0);
-    var el4 = document.createTextNode("\n");
-    frag.appendChild(el4);
-    var el5 = this["toggle"] = document.createElement("div");
-    el5.className += " _coral-Drawer-toggle";
-    el5.setAttribute("handle", "toggle");
-    var el6 = document.createTextNode("\n  ");
-    el5.appendChild(el6);
-    var el7 = this["toggleButton"] = document.createElement("button", "coral-button");
-    el7.className += " _coral-Drawer-toggleButton";
-    el7.setAttribute("type", "button");
-    el7.setAttribute("handle", "toggleButton");
-    el7.setAttribute("is", "coral-button");
-    el7.setAttribute("variant", "quiet");
-    el5.appendChild(el7);
-    var el8 = document.createTextNode("\n");
-    el5.appendChild(el8);
-    frag.appendChild(el5);
-    var el9 = document.createTextNode("\n");
-    frag.appendChild(el9);
+    var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
+    data = data_0;
+    var buttonId = data.commons.getUID();
+    var contentId = data.commons.getUID();
+    data_0 = data;
+    var el1 = document.createTextNode("\n");
+    frag.appendChild(el1);
+    var el2 = this["slider"] = document.createElement("div");
+    el2.setAttribute("handle", "slider");
+    el2.className += " _coral-Drawer-slider";
+    var el3 = document.createTextNode("\n  ");
+    el2.appendChild(el3);
+    var el4 = this["contentWrapper"] = document.createElement("div");
+    el4.setAttribute("handle", "contentWrapper");
+    el4.className += " _coral-Drawer-content";
+    el4.id = contentId;
+    el4.setAttribute("aria-labelledby", buttonId);
+    el4.setAttribute("role", "region");
+    el2.appendChild(el4);
+    var el5 = document.createTextNode("\n");
+    el2.appendChild(el5);
+    frag.appendChild(el2);
+    var el6 = document.createTextNode("\n");
+    frag.appendChild(el6);
+    var el7 = this["toggle"] = document.createElement("div");
+    el7.className += " _coral-Drawer-toggle";
+    el7.setAttribute("handle", "toggle");
+    var el8 = document.createTextNode("\n  ");
+    el7.appendChild(el8);
+    var el9 = this["toggleButton"] = document.createElement("button", "coral-button");
+    el9.id = buttonId;
+    el9.setAttribute("aria-controls", contentId);
+    el9.setAttribute("aria-label", "toggle");
+    el9.className += " _coral-Drawer-toggleButton";
+    el9.setAttribute("type", "button");
+    el9.setAttribute("handle", "toggleButton");
+    el9.setAttribute("is", "coral-button");
+    el9.setAttribute("variant", "quiet");
+    el7.appendChild(el9);
+    var el10 = document.createTextNode("\n");
+    el7.appendChild(el10);
+    frag.appendChild(el7);
+    var el11 = document.createTextNode("\n");
+    frag.appendChild(el11);
     return frag;
   };
 
@@ -49838,7 +49836,9 @@
       _this._elements = {
         content: _this.querySelector('coral-drawer-content') || document.createElement('coral-drawer-content')
       };
-      template$y.call(_this._elements); // Events
+      template$y.call(_this._elements, {
+        commons: commons
+      }); // Events
 
       _this._delegateEvents({
         'click ._coral-Drawer-toggleButton': '_onClick'
@@ -50001,7 +50001,7 @@
 
         this._reflectAttribute('open', this._open);
 
-        this.setAttribute('aria-expanded', this._open); // eslint-disable-next-line no-unused-vars
+        this._elements.toggleButton.setAttribute('aria-expanded', this._open); // eslint-disable-next-line no-unused-vars
 
         var slider = this._elements.slider; // Don't animate on initialization
 
@@ -58660,10 +58660,18 @@
     el4.className += " _coral-Radio-label";
     el4.setAttribute("handle", "labelWrapper");
     el4.setAttribute("for", this["input"]["id"]);
-    el4.setAttribute("hidden", "");
+    var el5 = document.createTextNode("\n  ");
+    el4.appendChild(el5);
+    var el6 = this["screenReaderOnly"] = document.createElement("span");
+    el6.className += " u-coral-screenReaderOnly";
+    el6.setAttribute("handle", "screenReaderOnly");
+    el6.textContent = "select";
+    el4.appendChild(el6);
+    var el7 = document.createTextNode("\n");
+    el4.appendChild(el7);
     frag.appendChild(el4);
-    var el5 = document.createTextNode("\n");
-    frag.appendChild(el5);
+    var el8 = document.createTextNode("\n");
+    frag.appendChild(el8);
     return frag;
   };
 
@@ -58762,13 +58770,12 @@
     }, {
       key: "_hideLabelIfEmpty",
       value: function _hideLabelIfEmpty() {
-        var label = this.label; // If it's empty and has no non-textnode children, hide the label
+        var label = this._elements.label; // If it's empty and has no non-textnode children, hide the label
 
-        var hiddenValue = label.children.length === 0 && label.textContent.replace(/\s*/g, '') === ''; // Only bother if the hidden status has changed
+        var hiddenValue = !(label.children.length === 0 && label.textContent.replace(/\s*/g, '') === ''); // Toggle the screen reader text
 
-        if (hiddenValue !== this._elements.labelWrapper.hidden) {
-          this._elements.labelWrapper.hidden = hiddenValue;
-        }
+        this._elements.labelWrapper.style.margin = !hiddenValue ? '0' : '';
+        this._elements.screenReaderOnly.hidden = hiddenValue;
       }
       /**
        @private
@@ -58839,10 +58846,7 @@
 
         if (label && label.parentNode) {
           label.parentNode.removeChild(label);
-        } // Hide the labelWrapper by default (will be shown, via contentZone observer)
-
-
-        this._elements.labelWrapper.hidden = true;
+        }
 
         while (this.firstChild) {
           var child = this.firstChild;
@@ -63461,6 +63465,18 @@
   Shell.Suborganization = ShellSuborganization;
 
   var CLASSNAME$1B = '_coral-SideNav';
+
+  var isLevel = function isLevel(node) {
+    return node.nodeName === 'CORAL-SIDENAV-LEVEL';
+  };
+
+  var isHeading = function isHeading(node) {
+    return node.nodeName === 'CORAL-SIDENAV-HEADING';
+  };
+
+  var isItem = function isItem(node) {
+    return node.nodeName === 'A' && node.getAttribute('is') === 'coral-sidenav-item';
+  };
   /**
    Enumeration for {@link SideNav} variants.
    
@@ -63471,6 +63487,7 @@
    @property {String} MULTI_LEVEL
    A sidenav with multiple levels of indentation.
    */
+
 
   var variant$i = {
     DEFAULT: 'default',
@@ -63614,8 +63631,11 @@
         var level = selectedItem.closest('coral-sidenav-level'); // Expand until root
 
         while (level) {
-          if (level.getAttribute('_expanded') !== 'on') {
-            level.setAttribute('_expanded', 'on');
+          level.setAttribute('_expanded', 'on');
+          var prev = level.previousElementSibling;
+
+          if (prev && prev.matches('a[is="coral-sidenav-item"]')) {
+            prev.setAttribute('aria-expanded', 'true');
           }
 
           level = level.parentNode && level.parentNode.closest('coral-sidenav-level');
@@ -63626,6 +63646,7 @@
 
         if (level && level.tagName === 'CORAL-SIDENAV-LEVEL') {
           level.setAttribute('_expanded', 'on');
+          selectedItem.setAttribute('aria-expanded', 'true');
         }
       }
     }, {
@@ -63641,16 +63662,44 @@
           });
           this._oldSelection = selectedItem;
         }
-      }
+      } // a11y
+
     }, {
-      key: "_syncLevelwithHeading",
-      value: function _syncLevelwithHeading(level, heading, remove) {
-        if (level && heading) {
-          if (remove) {
-            level.removeAttribute('aria-labelledby');
-          } else {
-            heading.id = heading.id || commons.getUID();
-            level.setAttribute('aria-labelledby', heading.id);
+      key: "_syncLevel",
+      value: function _syncLevel(el, isRemoved) {
+        if (isRemoved) {
+          if (el.id && isLevel(el)) {
+            var item = this.querySelector("a[is=\"coral-sidenav-item\"][aria-controls=\"".concat(el.id, "\"]"));
+            item && item.removeAttribute('aria-controls');
+          } else if (el.id && (isHeading(el) || isItem(el))) {
+            var level = this.querySelector("coral-sidenav-level[aria-labelledby=\"".concat(el.id, "\"]"));
+            level && level.removeAttribute('aria-labelledby');
+
+            this._syncLevel(level);
+          }
+        } else if (isLevel(el)) {
+          var prev = el.previousElementSibling;
+
+          if (prev && (isHeading(prev) || isItem(prev))) {
+            prev.id = prev.id || commons.getUID();
+            el.setAttribute('aria-labelledby', prev.id);
+
+            if (isItem(prev)) {
+              el.id = el.id || commons.getUID();
+              prev.setAttribute('aria-controls', el.id);
+            }
+          }
+        } else if (isHeading(el) || isItem(el)) {
+          var next = el.nextElementSibling;
+
+          if (next && isLevel(next)) {
+            el.id = el.id || commons.getUID();
+            next.setAttribute('aria-labelledby', el.id);
+
+            if (isItem(el)) {
+              next.id = next.id || commons.getUID();
+              el.setAttribute('aria-controls', next.id);
+            }
           }
         }
       }
@@ -63664,10 +63713,10 @@
           for (var i = 0; i < mutation.addedNodes.length; i++) {
             var addedNode = mutation.addedNodes[i];
 
-            if (addedNode.nodeName === 'CORAL-SIDENAV-LEVEL') {
-              _this3._syncLevelwithHeading(addedNode, addedNode.previousElementSibling);
-            } else if (addedNode.nodeName === 'CORAL-SIDENAV-HEADING') {
-              _this3._syncLevelwithHeading(addedNode.nextElementSibling, addedNode);
+            _this3._syncLevel(addedNode);
+
+            if (isLevel(addedNode)) {
+              _this3._validateSelection(addedNode.querySelector('a[is="coral-sidenav-item"][selected]'));
             }
           } // Sync removed levels
 
@@ -63675,34 +63724,13 @@
           for (var k = 0; k < mutation.removedNodes.length; k++) {
             var removedNode = mutation.removedNodes[k];
 
-            if (removedNode.nodeName === 'CORAL-SIDENAV-LEVEL') {
-              _this3._validateSelection();
-            } else if (removedNode.nodeName === 'CORAL-SIDENAV-HEADING' && removedNode.id) {
-              var level = _this3.querySelector('coral-sidenav-level[aria-labelledby="' + removedNode.id + '"]');
+            _this3._syncLevel(removedNode, true);
 
-              _this3._syncLevelwithHeading(level, removedNode, true);
+            if (isLevel(removedNode)) {
+              _this3._validateSelection();
             }
           }
         });
-      }
-    }, {
-      key: "_onLevelAdded",
-      value: function _onLevelAdded(level) {
-        var neighbor = level.previousElementSibling;
-
-        if (neighbor && neighbor.tagName === 'CORAL-SIDENAV-HEADING') {
-          neighbor.id = neighbor.id || commons.getUID();
-          level.setAttribute('aria-labelledby', neighbor.id);
-        }
-      }
-    }, {
-      key: "_onLevelRemoved",
-      value: function _onLevelRemoved(level) {
-        var selectedItem = this.selectedItem;
-
-        if (level.contains(selectedItem)) {
-          this._validateSelection(selectedItem);
-        }
       }
       /**
        Returns {@link SideNav} variants.
@@ -63723,10 +63751,8 @@
           this.variant = variant$i.DEFAULT;
         }
 
-        for (var i = 0; i < this._headings.length; i++) {
-          var heading = this._headings[i];
-
-          this._syncLevelwithHeading(heading.nextElementSibling, heading);
+        for (var i = 0; i < this._levels.length; i++) {
+          this._syncLevel(this._levels[i]);
         } // Don't trigger events once connected
 
 
@@ -64098,8 +64124,12 @@
 
         if (name === '_expanded') {
           var isExpanded = value === 'on';
-          this.classList.toggle('is-expanded', isExpanded);
-          this.setAttribute('aria-expanded', isExpanded); // Do animation in next frame to avoid a forced reflow
+
+          if (oldValue === value) {
+            return;
+          }
+
+          this.classList.toggle('is-expanded', isExpanded); // Do animation in next frame to avoid a forced reflow
 
           window.requestAnimationFrame(function () {
             // Don't animate on initialization
@@ -64145,7 +64175,7 @@
       value: function connectedCallback() {
         this.classList.add(CLASSNAME$1E); // a11y
 
-        this.setAttribute('role', 'presentation');
+        this.setAttribute('role', 'region');
       }
     }], [{
       key: "observedAttributes",
@@ -64830,11 +64860,9 @@
         // when interaction is on, we enable the tabindex so users can tab into the items
         if (this.interaction === interaction$4.ON) {
           item.setAttribute('tabindex', item.hasAttribute('selected') ? '0' : '-1');
-          item.removeAttribute('aria-readonly');
         } else {
           // when off, removing the tabindex allows the component to never get focus
           item.removeAttribute('tabindex');
-          item.setAttribute('aria-readonly', 'true');
         }
       }
       /** @private */
@@ -64885,10 +64913,6 @@
 
 
         this._setStateClasses();
-
-        if (this._allChildrenAdded) {
-          this._updateLabels();
-        }
 
         this._triggerChangeEvent();
       }
@@ -64958,13 +64982,8 @@
     }, {
       key: "_onStepMouseEnter",
       value: function _onStepMouseEnter() {
-        if (this.size === size$7.SMALL || this._isHybridMode) {
-          var step = event.target.closest('coral-step');
-
-          if (step.hasAttribute('selected') && this._isHybridMode) {
-            return;
-          } // we only show the tooltip if we have a label to show
-
+        if (this.size === size$7.SMALL) {
+          var step = event.target.closest('coral-step'); // we only show the tooltip if we have a label to show
 
           if (step._elements.label.innerHTML.trim() !== '') {
             step._elements.tooltip.content.innerHTML = step._elements.label.innerHTML;
@@ -64977,7 +64996,7 @@
     }, {
       key: "_onStepMouseLeave",
       value: function _onStepMouseLeave(event) {
-        if (this.size === size$7.SMALL || this._isHybridMode) {
+        if (this.size === size$7.SMALL) {
           var step = event.target.closest('coral-step');
           step._elements.tooltip.open = false;
         }
@@ -65038,66 +65057,6 @@
           item.focus();
         }
       }
-      /** @private */
-
-    }, {
-      key: "_setHybridLabel",
-      value: function _setHybridLabel(item) {
-        if (!item) {
-          return;
-        }
-
-        if (this._isHybridMode) {
-          var items = this.items.getAll();
-          var itemIndex = items.indexOf(item);
-          var middle = items.length / 2;
-          var stepSize = 120; // Position item label
-
-          var marginLeft = (middle - itemIndex) * stepSize - stepSize / 2;
-          item.label.style.marginLeft = "".concat(marginLeft, "px"); // Indicate item index
-
-          item.label.dataset.coralStepIndex = " (".concat(itemIndex + 1, "/").concat(items.length, ")");
-        } else {
-          // Restore defaults
-          item.label.style.marginLeft = '';
-        }
-      }
-      /** @private */
-
-    }, {
-      key: "_updateLabels",
-      value: function _updateLabels() {
-        var hasOversizedLabel = false;
-        var hybridClass = "".concat(CLASSNAME$1H, "--hybrid");
-        this._isHybridMode = false;
-        this.classList.remove(hybridClass); // when the steplist is small no check is needed
-
-        if (this.size === size$7.SMALL) {
-          return;
-        } // Check if one label is oversized
-
-
-        var steps = this.items.getAll();
-        var stepsCount = steps.length;
-        var actualStep;
-
-        for (actualStep = 0; actualStep < stepsCount; actualStep++) {
-          if (steps[actualStep]._labelIsHidden) {
-            hasOversizedLabel = true;
-            this._isHybridMode = true;
-            this.classList.add(hybridClass);
-            break;
-          }
-        }
-
-        for (actualStep = 0; actualStep < stepsCount; actualStep++) {
-          if (steps[actualStep].label) {
-            steps[actualStep].label.hidden = !(steps[actualStep].hasAttribute('selected') || !hasOversizedLabel);
-          }
-        }
-
-        this._setHybridLabel(this.selectedItem);
-      }
       /**
        Show the next Step.
        
@@ -65143,8 +65102,6 @@
 
       /** @ignore */
       value: function connectedCallback() {
-        var _this2 = this;
-
         _get(_getPrototypeOf(StepList.prototype), "connectedCallback", this).call(this);
 
         this.classList.add(CLASSNAME$1H); // Default reflected attributes
@@ -65167,11 +65124,6 @@
 
         this._preventTriggeringEvents = false;
         this._oldSelection = this.selectedItem;
-        window.customElements.whenDefined('coral-step').then(function () {
-          _this2._allChildrenAdded = true; // Force label update
-
-          _this2._updateLabels();
-        });
       }
       /**
        Triggered when the {@link StepList} selected {@link Step} has changed.
@@ -65227,16 +65179,16 @@
         return this._target || null;
       },
       set: function set(value) {
-        var _this3 = this;
+        var _this2 = this;
 
         if (value === null || typeof value === 'string' || value instanceof Node) {
           this._target = value; // we do this in the sync in case the target was not yet in the DOM
 
           window.requestAnimationFrame(function () {
-            var realTarget = getTarget(_this3._target); // we add proper accessibility if available
+            var realTarget = getTarget(_this2._target); // we add proper accessibility if available
 
             if (realTarget) {
-              var stepItems = _this3.items.getAll();
+              var stepItems = _this2.items.getAll();
 
               var panelItems = realTarget.items ? realTarget.items.getAll() : realTarget.children; // we need to add a11y to all components, regardless of whether they can be perfectly paired
 
@@ -65692,10 +65644,18 @@
     el4.className += " _coral-ToggleSwitch-label";
     el4.setAttribute("for", this["input"]["id"]);
     el4.setAttribute("handle", "labelWrapper");
-    el4.setAttribute("hidden", "");
+    var el5 = document.createTextNode("\n  ");
+    el4.appendChild(el5);
+    var el6 = this["screenReaderOnly"] = document.createElement("span");
+    el6.className += " u-coral-screenReaderOnly";
+    el6.setAttribute("handle", "screenReaderOnly");
+    el6.textContent = "select";
+    el4.appendChild(el6);
+    var el7 = document.createTextNode("\n");
+    el4.appendChild(el7);
     frag.appendChild(el4);
-    var el5 = document.createTextNode("\n");
-    frag.appendChild(el5);
+    var el8 = document.createTextNode("\n");
+    frag.appendChild(el8);
     return frag;
   };
 
@@ -65771,13 +65731,12 @@
        @ignore
        */
       value: function _hideLabelIfEmpty() {
-        var label = this.label; // If it's empty and has no non-textnode children, hide the label
+        var label = this._elements.label; // If it's empty and has no non-textnode children, hide the label
 
-        var hiddenValue = label.children.length === 0 && label.textContent.replace(/\s*/g, '') === ''; // Only bother if the hidden status has changed
+        var hiddenValue = !(label.children.length === 0 && label.textContent.replace(/\s*/g, '') === ''); // Toggle the screen reader text
 
-        if (hiddenValue !== this._elements.labelWrapper.hidden) {
-          this._elements.labelWrapper.hidden = hiddenValue;
-        }
+        this._elements.labelWrapper.style.margin = !hiddenValue ? '0' : '';
+        this._elements.screenReaderOnly.hidden = hiddenValue;
       }
     }, {
       key: "_onFocus",
@@ -65828,10 +65787,8 @@
 
         if (label && label.parentNode) {
           label.parentNode.removeChild(label);
-        } // Hide the labelWrapper by default (will be shown, via contentZone observer)
+        } // Clean up
 
-
-        this._elements.labelWrapper.hidden = true; // Clean up
 
         while (this.firstChild) {
           var child = this.firstChild; // Only works if all root template elements have a handle attribute
@@ -66074,6 +66031,30 @@
    */
 
   /** @ignore */
+  var isTableHeaderCell = function isTableHeaderCell(node) {
+    return node.nodeName === 'TH' && node.getAttribute('is') === 'coral-table-headercell';
+  };
+  /** @ignore */
+
+
+  var isTableCell = function isTableCell(node) {
+    return node.nodeName === 'TD' && node.getAttribute('is') === 'coral-table-cell';
+  };
+  /** @ignore */
+
+
+  var isTableRow = function isTableRow(node) {
+    return node.nodeName === 'TR' && node.getAttribute('is') === 'coral-table-row';
+  };
+  /** @ignore */
+
+
+  var isTableBody = function isTableBody(node) {
+    return node.nodeName === 'TBODY' && node.getAttribute('is') === 'coral-table-body';
+  };
+  /** @ignore */
+
+
   var getIndexOf = function getIndexOf(el) {
     var parent = el.parentNode;
 
@@ -66723,9 +66704,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(TableCell.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1M); // a11y
-
-        this.setAttribute('role', 'gridcell');
+        this.classList.add(CLASSNAME$1M);
       }
       /**
        Triggered before {@link TableCell#selected} is changed.
@@ -67106,9 +67085,7 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(TableRow.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1O); // a11y
-
-        this.setAttribute('role', 'row');
+        this.classList.add(CLASSNAME$1O);
       }
       /**
        Triggered before {@link TableRow#selected} is changed.
@@ -67675,6 +67652,7 @@
   var IS_DRAGGING_CLASS$2 = 'is-dragging';
   var IS_BEFORE_CLASS$1 = 'is-before';
   var IS_AFTER_CLASS$1 = 'is-after';
+  var IS_LAYOUTING = 'is-layouting';
   var IS_READY = 'is-ready';
   var KEY_SPACE = Keys.keyToCode('space');
   /**
@@ -67725,7 +67703,9 @@
         'coral-dragaction:dragend thead[is="coral-table-head"] tr[is="coral-table-row"] > th[is="coral-table-headercell"]': '_onHeaderCellDragEnd',
         // a11y
         'key:enter th[is="coral-table-headercell"]': '_onHeaderCellSort',
+        'key:enter th[is="coral-table-headercell"] coral-table-headercell-content': '_onHeaderCellSort',
         'key:space th[is="coral-table-headercell"]': '_onHeaderCellSort',
+        'key:space th[is="coral-table-headercell"] coral-table-headercell-content': '_onHeaderCellSort',
         // Body specific
         'click tbody[is="coral-table-body"] [coral-table-rowlock]': '_onRowLock',
         'click tbody[is="coral-table-body"] [coral-table-rowselect]': '_onRowSelect',
@@ -67920,7 +67900,7 @@
       key: "_onHeaderCellSort",
       value: function _onHeaderCellSort(event) {
         var table = this;
-        var matchedTarget = event.matchedTarget; // Don't sort if the column was dragged
+        var matchedTarget = event.matchedTarget.closest('th'); // Don't sort if the column was dragged
 
         if (!matchedTarget._isDragging) {
           var column = table._getColumn(matchedTarget); // Only sort if actually sortable and event not defaultPrevented
@@ -68612,7 +68592,7 @@
         for (var i = 0; i < addedNodes.length; i++) {
           var node = addedNodes[i]; // Sync header cell whether sticky or not
 
-          if (node instanceof TableHeaderCell) {
+          if (isTableHeaderCell(node)) {
             table._toggleStickyHeaderCell(node, head.sticky);
           }
         }
@@ -68640,7 +68620,7 @@
         for (var i = 0; i < addedNodes.length; i++) {
           addedNode = addedNodes[i]; // Sync row state with table properties
 
-          if (addedNode instanceof TableRow) {
+          if (isTableRow(addedNode)) {
             changed = true;
 
             addedNode._toggleSelectable(table.selectable);
@@ -68687,7 +68667,7 @@
         for (var k = 0; k < removedNodes.length; k++) {
           var removedNode = removedNodes[k];
 
-          if (removedNode instanceof TableRow) {
+          if (isTableRow(removedNode)) {
             changed = true; // If the focusable item is removed, the first item becomes the new focusable item
 
             if (removedNode.getAttribute('tabindex') === '0') {
@@ -68772,7 +68752,7 @@
         for (var i = 0; i < addedNodes.length; i++) {
           addedNode = addedNodes[i]; // Sync row state with table properties
 
-          if (addedNode instanceof TableCell) {
+          if (isTableCell(addedNode)) {
             addedNode._toggleSelectable(row.selectable);
 
             var selectedItems = row.selectedItems;
@@ -68793,7 +68773,7 @@
               });
             }
           } // Add appropriate scope depending on whether headercell is in THEAD or TBODY
-          else if (addedNode instanceof TableHeaderCell) {
+          else if (isTableHeaderCell(addedNode)) {
               table._setHeaderCellScope(addedNode, row.parentNode);
             }
         } // Sync removed nodes
@@ -68802,7 +68782,7 @@
         for (var k = 0; k < removedNodes.length; k++) {
           var removedNode = removedNodes[k];
 
-          if (removedNode instanceof TableCell) {
+          if (isTableCell(removedNode)) {
             if (removedNode.selected) {
               row._triggerChangeEvent();
             } // Trigger collection event
@@ -69122,7 +69102,10 @@
     }, {
       key: "_onHeadStickyChanged",
       value: function _onHeadStickyChanged(event) {
-        event.stopImmediatePropagation();
+        event.stopImmediatePropagation(); // a11y
+
+        this._toggleFocusable();
+
         var table = this;
         var head = event.target; // Wait next frame before reading and changing header cell layout
 
@@ -69268,7 +69251,7 @@
 
         var focusableItem = this._getFocusableItem();
 
-        if (this.selectable || this.lockable || this.orderable) {
+        if (this.selectable || this.lockable || this.orderable || this.head && this.head.sticky) {
           // First item is focusable by default but don't remove the tabindex of the existing focusable item
           if (!focusableItem) {
             this._toggleElementTabIndex(firstItem);
@@ -69503,11 +69486,15 @@
         }
 
         this._timeout = window.setTimeout(function () {
+          _this3.classList.add(IS_LAYOUTING);
+
           _this3._timeout = null;
 
           _this3._resizeStickyHead();
 
-          _this3._resizeContainer(); // Mark table as ready
+          _this3._resizeContainer();
+
+          _this3.classList.remove(IS_LAYOUTING); // Mark table as ready
 
 
           _this3.classList.add(IS_READY);
@@ -69772,7 +69759,7 @@
           for (var k = 0; k < mutation.removedNodes.length; k++) {
             var removedNode = mutation.removedNodes[k];
 
-            if (removedNode instanceof TableBody) {
+            if (isTableBody(removedNode)) {
               // Always make sure there's a body content zone
               if (!_this6.body) {
                 _this6.body = new TableBody();
@@ -71980,6 +71967,11 @@
 
   var capitalize$4 = function capitalize(s) {
     return s.charAt(0).toUpperCase() + s.slice(1);
+  }; // Restriction filter for action button
+
+
+  var isButton = function isButton(node) {
+    return node.nodeName === 'BUTTON' && node.getAttribute('is') === 'coral-button' || node.nodeName === 'A' && node.getAttribute('is') === 'coral-anchorbutton';
   };
   /**
    @class Coral.Toast
@@ -72269,7 +72261,7 @@
           return;
         }
 
-        if (el instanceof Button || el instanceof AnchorButton) {
+        if (isButton(el)) {
           this._elements.action = el;
           el.setAttribute('coral-toast-action', '');
           el.setAttribute('variant', Button.variant._CUSTOM);
@@ -73108,9 +73100,9 @@
     var el0 = this["header"] = document.createElement("div");
     el0.className += " _coral-TreeView-itemLink";
     el0.setAttribute("tabindex", "-1");
-    el0.setAttribute("role", "tab");
     el0.id = data_0["commons"]["getUID"]();
     el0.setAttribute("handle", "header");
+    el0.setAttribute("role", "treeitem");
     frag.appendChild(el0);
     var el1 = document.createTextNode("\n");
     frag.appendChild(el1);
@@ -73123,7 +73115,7 @@
     el4.className += " _coral-TreeView";
     el4.setAttribute("handle", "subTreeContainer");
     el4.id = data_0["commons"]["getUID"]();
-    el4.setAttribute("role", "tabpanel");
+    el4.setAttribute("role", "presentation");
     frag.appendChild(el4);
     var el5 = document.createTextNode("\n");
     frag.appendChild(el5);
@@ -73246,8 +73238,9 @@
 
         this.classList.add(CLASSNAME$1$); // a11y
 
-        this.setAttribute('role', 'treeitem');
-        this.setAttribute('aria-selected', this.selected);
+        this.setAttribute('role', 'presentation');
+
+        this._elements.header.setAttribute('aria-selected', this.selected);
 
         this._elements.header.setAttribute('aria-controls', this._elements.subTreeContainer.id);
 
@@ -74022,7 +74015,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.105";
+  var version = "1.0.0-beta.106";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
@@ -74085,6 +74078,7 @@
   	"eslint-plugin-node": "^8.0.1",
   	"eslint-plugin-promise": "^4.1.1",
   	"eslint-plugin-standard": "^4.0.0",
+  	"fancy-log": "^1.3.3",
   	"fs-extra": "^7.0.1",
   	"glob-all": "^3.1.0",
   	gulp: "^4.0.0",

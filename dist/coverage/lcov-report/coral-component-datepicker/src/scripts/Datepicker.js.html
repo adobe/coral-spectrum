@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">92.15% </span>
+        <span class="strong">92.08% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>223/242</span>
+        <span class='fraction'>221/240</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">89.34% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>53/58</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">92.15% </span>
+        <span class="strong">92.08% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>223/242</span>
+        <span class='fraction'>221/240</span>
       </div>
     </div>
     <p class="quiet">
@@ -845,9 +845,7 @@
 <a name='L797'></a><a href='#L797'>797</a>
 <a name='L798'></a><a href='#L798'>798</a>
 <a name='L799'></a><a href='#L799'>799</a>
-<a name='L800'></a><a href='#L800'>800</a>
-<a name='L801'></a><a href='#L801'>801</a>
-<a name='L802'></a><a href='#L802'>802</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L800'></a><a href='#L800'>800</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1015,8 +1013,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">48x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">48x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1832,10 +1828,10 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
     
     // Change format if we have a native format set
     if (isNativeFormat(this.valueFormat)) { this.valueFormat = format; }
-    if (isNativeFormat(this.displayFormat)) { this.displayFormat = format; }
-    
-    this<span class="missing-if-branch" title="if path not taken" >I</span>._useNativeInput = this._useNativeInput;
-  <span class="cstat-no" title="statement not covered" ></span>
+    if (<span class="missing-if-branch" title="if path not taken" >I</span>isNativeFormat(this.displayFormat)) { this.displayFormat = format; }
+    <span class="cstat-no" title="statement not covered" ></span>
+    this._useNativeInput = this._useNativeInput;
+  
     this._typeFormatChanged = false;
   }
   
@@ -1852,9 +1848,9 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
    @htmlattribute displayformat
    @htmlattributereflected
    */
-  get displayFormat() {
+  get <span class="missing-if-branch" title="else path not taken" >E</span>displayFormat() {
     // we ignore _useNativeInput when the type is datetime because it is not supported by mobile libraries
-    if<span class="missing-if-branch" title="else path not taken" >E</span> (this._useNativeInput &amp;&amp; this.type !== type.DATETIME) {
+    if (this._useNativeInput &amp;&amp; this.type !== type.DATETIME) {
       return NATIVE_FORMATS[this.type];
     }
     
@@ -1897,14 +1893,14 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
       this._reflectAttribute('valueformat', this._valueFormat);
     };
   
-    value = transform.string(value).trim();
+    value = transfor<span class="fstat-no" title="function not covered" >m.string(value</span>).trim();
   
-    // In case a cus<span class="fstat-no" title="function not covered" >tom display fo</span>rmat was set, we make sure that type doesn't change it to a native format
+    //<span class="cstat-no" title="statement not covered" > In case a custom displa</span>y format was set, we make sure that type doesn't change it to a native format
     const valueFormatAttribute = this.getAttribute('valueformat');
-    if<span class="cstat-no" title="statement not covered" > (this._typeFormatChange</span>d &amp;&amp; valueFormatAttribute &amp;&amp; valueFormatAttribute !== value) {
-      value = valueFormatAttribute;
-    }<span class="cstat-no" title="statement not covered" ></span>
-  <span class="cstat-no" title="statement not covered" ></span>
+    if<span class="cstat-no" title="statement not covered" > (this._typeFormatChanged &amp;&amp; valueFormatAttribute &amp;&amp; valueFormatAttribute !== value) {</span>
+      va<span class="cstat-no" title="statement not covered" >lue = valueFormatAttribute;</span>
+    }
+  
     // Once the valueFormat is set, we make sure the value is also correct
     if (!this._valueFormat &amp;&amp; this._originalValue) {
       setValueFormat(value);
@@ -1936,9 +1932,9 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
   }
   set valueAsDate(value) {
     this._valueAsDate = value instanceof Date ? new DateTime.Moment(value) : '';
-  
+  <span class="missing-if-branch" title="else path not taken" >E</span>
     this.value = this._valueAsDate;
-  }<span class="missing-if-branch" title="else path not taken" >E</span>
+  }
   
   /**
    The minimum date that the Datepicker will accept as valid. It must not be greated that its maximum. It accepts
@@ -2035,10 +2031,10 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
   
   /**
    Short hint that describes the expected value of the Datepicker. It is displayed when the Datepicker is empty.
-   
-   @type {String}
-   @default ""<span class="fstat-no" title="function not covered" ></span>
-   @ht<span class="cstat-no" title="statement not covered" >mlattribute placeholder</span>
+   <span class="fstat-no" title="function not covered" ></span>
+   @ty<span class="cstat-no" title="statement not covered" >pe {String}</span>
+   @default ""
+   @htmlattribute placeholder
    @htmlattributereflected
    */
   get placeholder() {
@@ -2056,9 +2052,9 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
    @default DatepickerVariantEnum.DEFAULT
    @htmlattribute variant
    @htmlattributereflected
-   */
+   */<span class="branch-2 cbranch-no" title="branch not covered" ></span>
   get variant() {
-    return this._variant || variant.DEFAULT;<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+    return this._variant || variant.DEFAULT;
   }
   set variant(value) {
     value = transform.string(value).toLowerCase();
@@ -2108,10 +2104,10 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
     
     this.setAttribute('aria-disabled', this._disabled);
     this.classList.toggle('is-disabled', this._disabled);
-  
-    this._elements.input.disabled = this._disabled;
-    th<span class="missing-if-branch" title="if path not taken" >I</span>is._elements.hiddenInput.dis<span class="branch-1 cbranch-no" title="branch not covered" >abled = this._disabled;</span>
-    this<span class="cstat-no" title="statement not covered" >._elements.toggle.disabled = this.</span>_disabled || this.readOnly;
+  <span class="branch-1 cbranch-no" title="branch not covered" ><span class="missing-if-branch" title="if path not taken" >I</span></span>
+    this<span class="cstat-no" title="statement not covered" >._elements.input.disabled = this._</span>disabled;
+    this._elements.hiddenInput.disabled = this._disabled;
+    this._elements.toggle.disabled = this._disabled || this.readOnly;
   }
   
   /**
@@ -2162,7 +2158,6 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
-    this.setAttribute('aria-readonly', this._readOnly);
   
     this._elements.input.readOnly = this._readOnly;
     this._elements.toggle.disabled = this._readOnly || this.disabled;
@@ -2213,8 +2208,8 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
     
       // Show pop-over and add related attributes:
       this._elements.overlay.hidden = false;
-      this.setAttribute('aria-haspopup', 'true');
-      this.setAttribute('aria-expanded', 'true');
+      this.setAttribute('aria-haspopup', 'dialog');
+      this.setAttribute('aria-expanded', this._elements.overlay.open);
       this.setAttribute('aria-owns', this._elements.overlay.id);
     }
   }
@@ -2223,7 +2218,6 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
   _onPopoverBeforeOpen() {
     this._elements.calendar._validateCalendar();
     this._renderCalendar();
-    this.setAttribute('aria-expanded', true);
   }
   
   /**
@@ -2455,7 +2449,7 @@ export default Datepicker;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Sep 17 2019 13:54:50 GMT+0200 (Central European Summer Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Sep 24 2019 17:43:20 GMT+0200 (Central European Summer Time)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

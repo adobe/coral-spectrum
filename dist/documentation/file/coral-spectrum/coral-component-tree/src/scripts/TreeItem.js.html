@@ -726,8 +726,8 @@ class TreeItem extends BaseComponent(HTMLElement) {
     this.classList.add(CLASSNAME);
   
     // a11y
-    this.setAttribute(&apos;role&apos;, &apos;treeitem&apos;);
-    this.setAttribute(&apos;aria-selected&apos;, this.selected);
+    this.setAttribute(&apos;role&apos;, &apos;presentation&apos;);
+    this._elements.header.setAttribute(&apos;aria-selected&apos;, this.selected);
     this._elements.header.setAttribute(&apos;aria-controls&apos;, this._elements.subTreeContainer.id);
     this._elements.subTreeContainer.setAttribute(&apos;aria-labelledby&apos;, this._elements.header.id);
   

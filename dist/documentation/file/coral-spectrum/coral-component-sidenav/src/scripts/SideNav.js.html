@@ -427,6 +427,10 @@ import {transform, validate, commons} from &apos;../../../coral-utils&apos;;
 
 const CLASSNAME = &apos;_coral-SideNav&apos;;
 
+const isLevel = node =&gt; node.nodeName === &apos;CORAL-SIDENAV-LEVEL&apos;;
+const isHeading = node =&gt; node.nodeName === &apos;CORAL-SIDENAV-HEADING&apos;;
+const isItem = node =&gt; node.nodeName === &apos;A&apos; &amp;&amp; node.getAttribute(&apos;is&apos;) === &apos;coral-sidenav-item&apos;;
+
 /**
  Enumeration for {@link SideNav} variants.
  
@@ -625,8 +629,11 @@ class SideNav extends BaseComponent(HTMLElement) {
     
     // Expand until root
     while (level) {
-      if (level.getAttribute(&apos;_expanded&apos;) !== &apos;on&apos;) {
-        level.setAttribute(&apos;_expanded&apos;, &apos;on&apos;);
+      level.setAttribute(&apos;_expanded&apos;, &apos;on&apos;);
+      
+      const prev = level.previousElementSibling;
+      if (prev &amp;&amp; prev.matches(&apos;a[is=&quot;coral-sidenav-item&quot;]&apos;)) {
+        prev.setAttribute(&apos;aria-expanded&apos;, &apos;true&apos;);
       }
       
       level = level.parentNode &amp;&amp; level.parentNode.closest(&apos;coral-sidenav-level&apos;);
@@ -636,6 +643,7 @@ class SideNav extends BaseComponent(HTMLElement) {
     level = selectedItem.nextElementSibling;
     if (level &amp;&amp; level.tagName === &apos;CORAL-SIDENAV-LEVEL&apos;) {
       level.setAttribute(&apos;_expanded&apos;, &apos;on&apos;);
+      selectedItem.setAttribute(&apos;aria-expanded&apos;, &apos;true&apos;);
     }
   }
   
@@ -653,14 +661,41 @@ class SideNav extends BaseComponent(HTMLElement) {
     }
   }
   
-  _syncLevelwithHeading(level, heading, remove) {
-    if (level &amp;&amp; heading) {
-      if (remove) {
-        level.removeAttribute(&apos;aria-labelledby&apos;);
+  // a11y
+  _syncLevel(el, isRemoved) {
+    if (isRemoved) {
+      if (el.id &amp;&amp; isLevel(el)) {
+        const item = this.querySelector(`a[is=&quot;coral-sidenav-item&quot;][aria-controls=&quot;${el.id}&quot;]`);
+        item &amp;&amp; item.removeAttribute(&apos;aria-controls&apos;);
       }
-      else {
-        heading.id = heading.id || commons.getUID();
-        level.setAttribute(&apos;aria-labelledby&apos;, heading.id);
+      else if (el.id &amp;&amp; (isHeading(el) || isItem(el))) {
+        const level = this.querySelector(`coral-sidenav-level[aria-labelledby=&quot;${el.id}&quot;]`);
+        level &amp;&amp; level.removeAttribute(&apos;aria-labelledby&apos;);
+        this._syncLevel(level);
+      }
+    }
+    else if (isLevel(el)) {
+      const prev = el.previousElementSibling;
+      if (prev &amp;&amp; (isHeading(prev) || isItem(prev))) {
+        prev.id = prev.id || commons.getUID();
+        el.setAttribute(&apos;aria-labelledby&apos;, prev.id);
+    
+        if (isItem(prev)) {
+          el.id = el.id || commons.getUID();
+          prev.setAttribute(&apos;aria-controls&apos;, el.id);
+        }
+      }
+    }
+    else if (isHeading(el) || isItem(el)) {
+      const next = el.nextElementSibling;
+      if (next &amp;&amp; isLevel(next)) {
+        el.id = el.id || commons.getUID();
+        next.setAttribute(&apos;aria-labelledby&apos;, el.id);
+    
+        if (isItem(el)) {
+          next.id = next.id || commons.getUID();
+          el.setAttribute(&apos;aria-controls&apos;, next.id);
+        }
       }
     }
   }
@@ -670,12 +705,11 @@ class SideNav extends BaseComponent(HTMLElement) {
       // Sync added levels and headings
       for (let i = 0; i &lt; mutation.addedNodes.length; i++) {
         const addedNode = mutation.addedNodes[i];
+        
+        this._syncLevel(addedNode);
   
-        if (addedNode.nodeName === &apos;CORAL-SIDENAV-LEVEL&apos;) {
-          this._syncLevelwithHeading(addedNode, addedNode.previousElementSibling);
-        }
-        else if (addedNode.nodeName === &apos;CORAL-SIDENAV-HEADING&apos;) {
-          this._syncLevelwithHeading(addedNode.nextElementSibling, addedNode);
+        if (isLevel(addedNode)) {
+          this._validateSelection(addedNode.querySelector(&apos;a[is=&quot;coral-sidenav-item&quot;][selected]&apos;));
         }
       }
       
@@ -683,30 +717,13 @@ class SideNav extends BaseComponent(HTMLElement) {
       for (let k = 0; k &lt; mutation.removedNodes.length; k++) {
         const removedNode = mutation.removedNodes[k];
         
-        if (removedNode.nodeName === &apos;CORAL-SIDENAV-LEVEL&apos;) {
+        this._syncLevel(removedNode, true);
+        
+        if (isLevel(removedNode)) {
           this._validateSelection();
-        }
-        else if (removedNode.nodeName === &apos;CORAL-SIDENAV-HEADING&apos; &amp;&amp; removedNode.id) {
-          const level = this.querySelector(&apos;coral-sidenav-level[aria-labelledby=&quot;&apos;+ removedNode.id +&apos;&quot;]&apos;);
-          this._syncLevelwithHeading(level, removedNode, true);
         }
       }
     });
-  }
-  
-  _onLevelAdded(level) {
-    const neighbor = level.previousElementSibling;
-    if (neighbor &amp;&amp; neighbor.tagName === &apos;CORAL-SIDENAV-HEADING&apos;) {
-      neighbor.id = neighbor.id || commons.getUID();
-      level.setAttribute(&apos;aria-labelledby&apos;, neighbor.id);
-    }
-  }
-  
-  _onLevelRemoved(level) {
-    const selectedItem = this.selectedItem;
-    if (level.contains(selectedItem)) {
-      this._validateSelection(selectedItem);
-    }
   }
   
   /**
@@ -727,10 +744,9 @@ class SideNav extends BaseComponent(HTMLElement) {
   
     // Default reflected attributes
     if (!this._variant) { this.variant = variant.DEFAULT; }
-    
-    for (let i = 0; i &lt; this._headings.length; i++) {
-      const heading = this._headings[i];
-      this._syncLevelwithHeading(heading.nextElementSibling, heading);
+  
+    for (let i = 0; i &lt; this._levels.length; i++) {
+      this._syncLevel(this._levels[i]);
     }
     
     // Don&apos;t trigger events once connected

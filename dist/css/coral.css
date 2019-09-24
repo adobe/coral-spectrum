@@ -11488,14 +11488,14 @@ coral-card-info > coral-alert {
   float: right;
   clear: both;
 }
-._coral-Card--scroll coral-card-info {
-  overflow: scroll;
+._coral-Card--overflow coral-card-info {
+  overflow: hidden;
   z-index: 1;
 }
-._coral-Card--scroll coral-card-info > coral-alert._coral-Alert {
+._coral-Card--overflow coral-card-info > coral-alert._coral-Alert {
   position: static;
 }
-._coral-Card--scroll coral-card-info > coral-alert._coral-Alert:last-of-type {
+._coral-Card--overflow coral-card-info > coral-alert._coral-Alert:last-of-type {
   margin-bottom: 4px;
 }
 .coral--light ._coral-Card {
@@ -15103,8 +15103,8 @@ coral-cyclebutton-action {
 ._coral-Datepicker-clock {
   width: 100%;
 }
-._coral-Datepicker-calendar {
-  margin-bottom: 10px;
+._coral-Datepicker-calendar:not([hidden]) + ._coral-Datepicker-clock:not([hidden]) {
+  margin-top: 10px;
 }
 ._coral-Datepicker-overlay {
   padding: 15px;
@@ -16194,6 +16194,9 @@ coral-multifield-item-content > :first-child {
 ._coral-Stepper-stepUpIcon,
 ._coral-Stepper-stepDownIcon {
   margin-left: 0;
+}
+._coral-Stepper-input {
+  -moz-appearance: textfield;
 }
 
 /**
@@ -18498,17 +18501,6 @@ a[is="coral-sidenav-item"] {
           background-color: rgb(20, 115, 230)
         }
 
-._coral-Steplist--hybrid ._coral-Steplist-label {
-  width: auto;
-  white-space: nowrap;
-}
-._coral-Steplist--hybrid ._coral-Steplist-item:last-child ._coral-Steplist-label {
-  left: 100%;
-  transform: translateX(-50%);
-}
-._coral-Steplist--hybrid ._coral-Steplist-item.is-selected ._coral-Steplist-label:after {
-  content: attr(data-coral-step-index);
-}
 ._coral-Steplist--small ._coral-Steplist-item:first-child,
 ._coral-Steplist--small ._coral-Steplist-item:last-child {
   position: relative;
@@ -19981,8 +19973,12 @@ table[is="coral-table"]:not([selectable]) th[is="coral-table-headercell"] [coral
   margin: 0;
 }
 tr[is="coral-table-row"]:not([selectable]) td[is="coral-table-cell"] [coral-table-cellselect],
-tr[is="coral-table-row"]:not([selectable]) th[is="coral-table-headercell"] [coral-table-cellselect] {
+tr[is="coral-table-row"]:not([selectable]) th[is="coral-table-headercell"] [coral-table-cellselect],table[is="coral-table"].is-layouting thead[is="coral-table-head"][sticky] coral-checkbox[coral-table-select] {
   display: none;
+}
+thead[is="coral-table-head"][sticky] coral-checkbox[coral-table-select] {
+  position: relative;
+  top: -16px;
 }
 /* END #selectable */
 /* #variant */

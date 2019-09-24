@@ -48,33 +48,17 @@
   </head>
 
   <body class="coral--light">
+    <main class="u-coral-margin">
+      <div style="position:fixed;top:15px;right:15px;">
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+      </div>
 
-    <div style="position:fixed;top:15px;right:15px;">
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
-    </div>
-
-    <section>
       <h1 class="coral-Heading coral-Heading--1">PanelStack</h1>
 
       <h2 class="coral-Heading coral-Heading--2">Default</h2>
-      <div class="markup">
-        <coral-panelstack id="panel-list">
-          <coral-panel selected>Panel 0: Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
-          <coral-panel>Panel 1: Lorem ipsum dolor sit amet.</coral-panel>
-          <coral-panel> Panel 2: Sed eget eros sit amet nulla ultricies.</coral-panel>
-          <coral-panel>
-            Panel 3: Fusce nec ante non nibh mollis mollis mollis vitae dui. Vivamus tristique nunc lacus, a placerat orci dapibus vel. Sed eget eros sit amet nulla ultricies scelerisque.
-          </coral-panel>
-          <coral-panel>Panel 4: Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
-        </coral-panelstack>
-
-        <a href="#" class="coral-Link cycle" data-target="panel-list">Next</a>
-      </div>
-
-      <h2 class="coral-Heading coral-Heading--2">Using coral-Well</h2>
       <div class="markup">
         <coral-panelstack id="panel-well">
           <coral-panel selected class="coral-Well">Panel 0: Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
@@ -104,6 +88,6 @@
           });
         </script>
       </div>
-    </section>
+    </main>
   </body>
 </html>
