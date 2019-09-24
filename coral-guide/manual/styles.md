@@ -69,36 +69,6 @@ Headings are used to represent titles in content.
 <h6 class="coral-Heading coral-Heading--6">Heading 6</h6>
 ```
 
-### coral-Body 
-
-Typography elements see below examples
-
-```
-<p class="coral-Body--small">Small Body Text</p>
-<p class="coral-Body">Default Body Text</p>
-<p class="coral-Body--secondary">Secondary Body Text</p>
-<p class="coral-Body--italic"> Body Text Italic</p>
-<p class="coral-Body--large">Large Body Text</p>
-```
-
-### coral-Rule
-
-Styles to define rules in the content
- 
-```
-<hr class="coral-Rule">
-<hr class="coral-Rule coral-Rule--subsection">
-<hr class="coral-Rule coral-Rule--subsection2">
-```
-
-#### Vertical Rule
-
-```
-<coral-icon icon="add"></coral-icon>
-<span class="coral-Rule coral-Rule--panel"></span>
-<coral-icon icon="remove"></coral-icon>
-``` 
-
 ### coral-InputGroup
 
 A composite CSS pattern for Buttons and Textfields.
@@ -203,22 +173,6 @@ A composite CSS pattern for Buttons and Textfields.
 </div>
 ```
 
-### coral-FieldLabel
-
-Label styles. Field label for use with form inputs.
-
-```
-<label for="story" class="coral-FieldLabel">Life Story</label>
-<textarea is="coral-textarea" id="story" placeholder="Enter your life story"></textarea>
-```
-
-#### Left Variation
-
-```
-<label class="coral-FieldLabel coral-FieldLabel--left" for="email">Email Address</label>
-<input type="text" is="coral-textfield" placeholder="Enter your e-mail address" id="email">
-```
-
 ### coral-Form
 
 Form styles. Please look at the related components, to see more examples.
@@ -229,21 +183,21 @@ Add the `coral-Form--vertical` class to render all labels and fields on the same
 
 ```
 <form class="coral-Form coral-Form--vertical" style="width:300px;">
-  <section class="coral-Form-fieldset">
-    <h3 class="coral-Form-fieldset-legend">Registration</h3>
+  <fieldset class="coral-Form-fieldset">
+    <legend class="coral-Form-fieldset-legend">Registration</legend>
   
     <label class="coral-Form-fieldlabel">Username</label>
     <input is="coral-textfield" class="coral-Form-field"/>
     <div class="coral-Form-fieldwrapper">
       <label class="coral-Form-fieldlabel">Password</label>
       <input is="coral-textfield" class="coral-Form-field"/>
-      <coral-icon class="coral-Form-fieldinfo" icon="info"></coral-icon>
+      <coral-icon class="coral-Form-fieldinfo" icon="info" size="XS"></coral-icon>
       <coral-tooltip target="_prev" variant="info" placement="right">At least 12 characters</coral-tooltip>
     </div>
     <div class="coral-Form-fieldwrapper coral-Form-fieldwrapper--singleline">
       <coral-checkbox class="coral-Form-field">Remember me</coral-checkbox>
     </div>
-  </section>
+  </fieldset>
 </form>
 ```
 
@@ -253,16 +207,18 @@ Add the `coral-Form--aligned` class to render each label and field pair on the s
 
 ```
 <form class="coral-Form coral-Form--aligned">
-  <section class="coral-Form-fieldset">
+  <fieldset class="coral-Form-fieldset">
+    <legend class="coral-Form-fieldset-legend">Registration</legend>
+    
     <label class="coral-Form-fieldlabel">Username</label>
     <input is="coral-textfield" class="coral-Form-field"/>
     <div class="coral-Form-fieldwrapper">
       <label class="coral-Form-fieldlabel">Password</label>
       <input is="coral-textfield" class="coral-Form-field"/>
-      <coral-icon class="coral-Form-fieldinfo" icon="info"></coral-icon>
+      <coral-icon class="coral-Form-fieldinfo" icon="info" size="XS"></coral-icon>
       <coral-tooltip target="_prev" variant="info" placement="right">At least 12 characters</coral-tooltip>
     </div>
-  </section>
+  </fieldset>
 </form>
 ```
 

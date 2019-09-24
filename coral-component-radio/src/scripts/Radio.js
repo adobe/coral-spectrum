@@ -241,13 +241,14 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
    @ignore
    */
   _hideLabelIfEmpty() {
-    const label = this.label;
+    const label = this._elements.label;
+  
     // If it's empty and has no non-textnode children, hide the label
-    const hiddenValue = label.children.length === 0 && label.textContent.replace(/\s*/g, '') === '';
-    // Only bother if the hidden status has changed
-    if (hiddenValue !== this._elements.labelWrapper.hidden) {
-      this._elements.labelWrapper.hidden = hiddenValue;
-    }
+    const hiddenValue = !(label.children.length === 0 && label.textContent.replace(/\s*/g, '') === '');
+  
+    // Toggle the screen reader text
+    this._elements.labelWrapper.style.margin = !hiddenValue ? '0' : '';
+    this._elements.screenReaderOnly.hidden = hiddenValue;
   }
   
   /**
@@ -321,9 +322,6 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
     if (label && label.parentNode) {
       label.parentNode.removeChild(label);
     }
-  
-    // Hide the labelWrapper by default (will be shown, via contentZone observer)
-    this._elements.labelWrapper.hidden = true;
   
     while (this.firstChild) {
       const child = this.firstChild;

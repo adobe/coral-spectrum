@@ -1,212 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Coral.Autocomplete</title>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coral.Autocomplete</title>
 
-  <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
+    <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-  <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const markup = document.body.querySelectorAll('.markup');
-      for (var i = 0; i < markup.length; i++) {
-        const code = markup[i].innerHTML;
-        const id = 'markup-code-' + i;
-        markup[i].insertAdjacentHTML('afterend',
-          '<div style="margin:10px 0">' +
-          '<a onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
-          '<pre hidden>' +
-          '<code id="'+ id +'" class="html">' +
-          '</code>' +
-          '</pre>' +
-          '</div>');
-        document.getElementById(id).textContent = code;
-      }
-      window.hljs.initHighlightingOnLoad();
-    });
-  </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
 
-  <link rel="stylesheet" href="../dist/css/coral.css">
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const script = document.createElement('script');
-      script.src = '../dist/js/coral.js';
-      document.head.appendChild(script);
-    });
-  </script>
+    <link rel="stylesheet" href="../dist/css/coral.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../dist/js/coral.js';
+        document.head.appendChild(script);
+      });
+    </script>
 
-</head>
-<body class="coral--light">
-  <div style="position:fixed;top:15px;right:15px;">
-    <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
-    <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
-    <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
-    <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
-  </div>
+  </head>
+  <body class="coral--light">
+    <main class="u-coral-margin">
+      <div style="position:fixed;top:15px;right:15px;">
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+      </div>
 
-  <section class="u-coral-margin">
-    <h1 class="coral-Heading coral-Heading--1">Autocomplete</h1>
+      <h1 class="coral-Heading coral-Heading--1">Autocomplete</h1>
 
-    <h2 class="coral-Heading coral-Heading--2">Default</h2>
-    <div class="markup">
-      <coral-autocomplete>
-        <coral-autocomplete-item value="ch">Chrome</coral-autocomplete-item>
-        <coral-autocomplete-item value="fi">Firefox</coral-autocomplete-item>
-        <coral-autocomplete-item value="ie">Internet Explorer</coral-autocomplete-item>
-        <coral-autocomplete-item value="op">Opera</coral-autocomplete-item>
-        <coral-autocomplete-item value="sa">Safari</coral-autocomplete-item>
-      </coral-autocomplete>
-    </div>
+      <h2 class="coral-Heading coral-Heading--2">Default</h2>
+      <div class="markup">
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label1" class="coral-Form-fieldlabel">Label</label>
+          <coral-autocomplete labelledby="label1">
+            <coral-autocomplete-item value="ch">Chrome</coral-autocomplete-item>
+            <coral-autocomplete-item value="fi">Firefox</coral-autocomplete-item>
+            <coral-autocomplete-item value="ie">Internet Explorer</coral-autocomplete-item>
+            <coral-autocomplete-item value="op">Opera</coral-autocomplete-item>
+            <coral-autocomplete-item value="sa">Safari</coral-autocomplete-item>
+          </coral-autocomplete>
+        </form>
+      </div>
 
-    <h2 class="coral-Heading coral-Heading--2">Quiet variant</h2>
-    <div class="markup">
-      <coral-autocomplete variant="quiet">
-        <coral-autocomplete-item value="ch">Chrome</coral-autocomplete-item>
-        <coral-autocomplete-item value="fi">Firefox</coral-autocomplete-item>
-        <coral-autocomplete-item value="ie">Internet Explorer</coral-autocomplete-item>
-        <coral-autocomplete-item value="op">Opera</coral-autocomplete-item>
-        <coral-autocomplete-item value="sa">Safari</coral-autocomplete-item>
-      </coral-autocomplete>
-    </div>
+      <h2 class="coral-Heading coral-Heading--2">Quiet variant</h2>
+      <div class="markup">
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label2" class="coral-Form-fieldlabel">Label</label>
+          <coral-autocomplete labelledby="label2" variant="quiet">
+            <coral-autocomplete-item value="ch">Chrome</coral-autocomplete-item>
+            <coral-autocomplete-item value="fi">Firefox</coral-autocomplete-item>
+            <coral-autocomplete-item value="ie">Internet Explorer</coral-autocomplete-item>
+            <coral-autocomplete-item value="op">Opera</coral-autocomplete-item>
+            <coral-autocomplete-item value="sa">Safari</coral-autocomplete-item>
+          </coral-autocomplete>
+        </form>
+      </div>
 
-    <h2 class="coral-Heading coral-Heading--2">With forced selection</h2>
-    <div class="markup">
-      <coral-autocomplete forceselection>
-        <coral-autocomplete-item value="ch">Chrome</coral-autocomplete-item>
-        <coral-autocomplete-item value="fi">Firefox</coral-autocomplete-item>
-        <coral-autocomplete-item value="ie">Internet Explorer</coral-autocomplete-item>
-        <coral-autocomplete-item value="op">Opera</coral-autocomplete-item>
-        <coral-autocomplete-item value="sa">Safari</coral-autocomplete-item>
-      </coral-autocomplete>
-    </div>
+      <h2 class="coral-Heading coral-Heading--2">With forced selection</h2>
+      <div class="markup">
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label3" class="coral-Form-fieldlabel">Label</label>
+          <coral-autocomplete labelledby="label3" forceselection>
+            <coral-autocomplete-item value="ch">Chrome</coral-autocomplete-item>
+            <coral-autocomplete-item value="fi">Firefox</coral-autocomplete-item>
+            <coral-autocomplete-item value="ie">Internet Explorer</coral-autocomplete-item>
+            <coral-autocomplete-item value="op">Opera</coral-autocomplete-item>
+            <coral-autocomplete-item value="sa">Safari</coral-autocomplete-item>
+          </coral-autocomplete>
+        </form>
+      </div>
 
-    <h2 class="coral-Heading coral-Heading--2">With multiple selection</h2>
-    <div class="markup">
-      <coral-autocomplete multiple>
-        <coral-autocomplete-item value="ch">Chrome</coral-autocomplete-item>
-        <coral-autocomplete-item value="fi">Firefox</coral-autocomplete-item>
-        <coral-autocomplete-item value="ie">Internet Explorer</coral-autocomplete-item>
-        <coral-autocomplete-item value="op">Opera</coral-autocomplete-item>
-        <coral-autocomplete-item value="sa">Safari</coral-autocomplete-item>
-      </coral-autocomplete>
-    </div>
+      <h2 class="coral-Heading coral-Heading--2">With multiple selection</h2>
+      <div class="markup">
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label4" class="coral-Form-fieldlabel">Label</label>
+          <coral-autocomplete labelledby="label4" multiple>
+            <coral-autocomplete-item value="ch">Chrome</coral-autocomplete-item>
+            <coral-autocomplete-item value="fi">Firefox</coral-autocomplete-item>
+            <coral-autocomplete-item value="ie">Internet Explorer</coral-autocomplete-item>
+            <coral-autocomplete-item value="op">Opera</coral-autocomplete-item>
+            <coral-autocomplete-item value="sa">Safari</coral-autocomplete-item>
+          </coral-autocomplete>
+        </form>
+      </div>
 
-    <h2 class="coral-Heading coral-Heading--2">With remote loading</h2>
-    <div class="markup">
-      <coral-autocomplete id="remote" delay="50" multiple></coral-autocomplete>
+      <h2 class="coral-Heading coral-Heading--2">With remote loading</h2>
+      <div class="markup">
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label5" class="coral-Form-fieldlabel">Label</label>
+          <coral-autocomplete labelledby="label5" id="remote" delay="50" multiple></coral-autocomplete>
+        </form>
 
-      <script>
-        window.addEventListener('load', function() {
-          // Mocked server interaction
-          window.fakejax = function(url, data, callback) {
-            var requestTimeout = setTimeout(function() {
-              // Filter the suggestions according to the user input
-              // This would run on the server, effectively
-              var suggestions = [];
+        <script>
+          window.addEventListener('load', function() {
+            // Mocked server interaction
+            window.fakejax = function(url, data, callback) {
+              var requestTimeout = setTimeout(function() {
+                // Filter the suggestions according to the user input
+                // This would run on the server, effectively
+                var suggestions = [];
 
-              for (var i = 0; i < 10; i++) {
-                var number = i + data.start;
-                suggestions.push({
-                  value: number,
-                  content: 'Item ' + number
-                });
-              }
+                for (var i = 0; i < 10; i++) {
+                  var number = i + data.start;
+                  suggestions.push({
+                    value: number,
+                    content: 'Item ' + number
+                  });
+                }
 
-              callback(suggestions);
-            }, 1000);
+                callback(suggestions);
+              }, 1000);
 
-            return {
-              abort: function() {
-                // Stop previous request
-                clearTimeout(requestTimeout);
-              }
+              return {
+                abort: function() {
+                  // Stop previous request
+                  clearTimeout(requestTimeout);
+                }
+              };
             };
-          };
 
-          var autocomplete = document.getElementById('remote');
+            var autocomplete = document.getElementById('remote');
 
-          var request;
-          autocomplete.on('coral-autocomplete:showsuggestions', function(event) {
-            // If a previous request was started, abort it
-            if (request) {
-              request.abort();
-            }
+            var request;
+            autocomplete.on('coral-autocomplete:showsuggestions', function(event) {
+              // If a previous request was started, abort it
+              if (request) {
+                request.abort();
+              }
 
-            // Don't show suggestions from existing items
-            // This shows a loading icon until we call addSuggestions
-            event.preventDefault();
+              // Don't show suggestions from existing items
+              // This shows a loading icon until we call addSuggestions
+              event.preventDefault();
 
-            // Get the user input as lowercase
-            var userInput = event.detail.value.toLowerCase();
-            var startRecord = event.detail.start;
+              // Get the user input as lowercase
+              var userInput = event.detail.value.toLowerCase();
+              var startRecord = event.detail.start;
 
-            // Make a request and show the resulting suggestions
-            request = fakejax('/api/suggestions', { query: userInput, start: startRecord }, function(suggestions) {
-              autocomplete.addSuggestions(suggestions);
+              // Make a request and show the resulting suggestions
+              request = fakejax('/api/suggestions', { query: userInput, start: startRecord }, function(suggestions) {
+                autocomplete.addSuggestions(suggestions);
+              });
+            });
+
+            autocomplete.on('coral-autocomplete:hidesuggestions', function() {
+              // If the suggestions were hidden, abort the request
+              if (request) {
+                request.abort();
+              }
             });
           });
+        </script>
+      </div>
 
-          autocomplete.on('coral-autocomplete:hidesuggestions', function() {
-            // If the suggestions were hidden, abort the request
-            if (request) {
-              request.abort();
-            }
-          });
-        });
-      </script>
-    </div>
+      <h2 class="coral-Heading coral-Heading--2">ReadOnly</h2>
+      <div class="markup">
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label6" class="coral-Form-fieldlabel">Label</label>
+          <coral-autocomplete labelledby="label6" readonly>
+            <coral-autocomplete-item selected value="ch">Chrome</coral-autocomplete-item>
+            <coral-autocomplete-item value="fi">Firefox</coral-autocomplete-item>
+            <coral-autocomplete-item value="ie">Internet Explorer</coral-autocomplete-item>
+            <coral-autocomplete-item value="op">Opera</coral-autocomplete-item>
+            <coral-autocomplete-item value="sa">Safari</coral-autocomplete-item>
+          </coral-autocomplete>
+        </form>
+      </div>
 
-    <h2 class="coral-Heading coral-Heading--2">ReadOnly</h2>
-    <div class="markup">
-      <coral-autocomplete readonly>
-        <coral-autocomplete-item selected value="ch">Chrome</coral-autocomplete-item>
-        <coral-autocomplete-item value="fi">Firefox</coral-autocomplete-item>
-        <coral-autocomplete-item value="ie">Internet Explorer</coral-autocomplete-item>
-        <coral-autocomplete-item value="op">Opera</coral-autocomplete-item>
-        <coral-autocomplete-item value="sa">Safari</coral-autocomplete-item>
-      </coral-autocomplete>
-    </div>
+      <h2 class="coral-Heading coral-Heading--2">Disabled</h2>
+      <div class="markup">
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label7" class="coral-Form-fieldlabel">Label</label>
+          <coral-autocomplete labelledby="label7" disabled>
+            <coral-autocomplete-item value="ch">Chrome</coral-autocomplete-item>
+            <coral-autocomplete-item value="fi">Firefox</coral-autocomplete-item>
+            <coral-autocomplete-item value="ie">Internet Explorer</coral-autocomplete-item>
+            <coral-autocomplete-item value="op">Opera</coral-autocomplete-item>
+            <coral-autocomplete-item value="sa">Safari</coral-autocomplete-item>
+          </coral-autocomplete>
+        </form>
+      </div>
 
-    <h2 class="coral-Heading coral-Heading--2">Disabled</h2>
-    <div class="markup">
-      <coral-autocomplete disabled>
-        <coral-autocomplete-item value="ch">Chrome</coral-autocomplete-item>
-        <coral-autocomplete-item value="fi">Firefox</coral-autocomplete-item>
-        <coral-autocomplete-item value="ie">Internet Explorer</coral-autocomplete-item>
-        <coral-autocomplete-item value="op">Opera</coral-autocomplete-item>
-        <coral-autocomplete-item value="sa">Safari</coral-autocomplete-item>
-      </coral-autocomplete>
-    </div>
+      <h2 class="coral-Heading coral-Heading--2">Invalid</h2>
+      <div class="markup">
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label8" class="coral-Form-fieldlabel">Label</label>
+          <coral-autocomplete labelledby="label8" invalid>
+            <coral-autocomplete-item value="ch">Chrome</coral-autocomplete-item>
+            <coral-autocomplete-item value="fi">Firefox</coral-autocomplete-item>
+            <coral-autocomplete-item value="ie">Internet Explorer</coral-autocomplete-item>
+            <coral-autocomplete-item value="op">Opera</coral-autocomplete-item>
+            <coral-autocomplete-item value="sa">Safari</coral-autocomplete-item>
+          </coral-autocomplete>
+        </form>
+      </div>
 
-    <h2 class="coral-Heading coral-Heading--2">Invalid</h2>
-    <div class="markup">
-      <coral-autocomplete invalid>
-        <coral-autocomplete-item value="ch">Chrome</coral-autocomplete-item>
-        <coral-autocomplete-item value="fi">Firefox</coral-autocomplete-item>
-        <coral-autocomplete-item value="ie">Internet Explorer</coral-autocomplete-item>
-        <coral-autocomplete-item value="op">Opera</coral-autocomplete-item>
-        <coral-autocomplete-item value="sa">Safari</coral-autocomplete-item>
-      </coral-autocomplete>
-    </div>
-
-    <h2 class="coral-Heading coral-Heading--2">Form Field</h2>
-    <div class="markup">
-      <form class="coral-Form coral-Form--vertical" style="max-width:300px;">
-        <label id="label" class="coral-FieldLabel">Label</label>
-        <coral-autocomplete class="coral-Form-field" labelledby="label">
-          <coral-autocomplete-item value="ch">Chrome</coral-autocomplete-item>
-          <coral-autocomplete-item value="fi">Firefox</coral-autocomplete-item>
-          <coral-autocomplete-item value="ie">Internet Explorer</coral-autocomplete-item>
-          <coral-autocomplete-item value="op">Opera</coral-autocomplete-item>
-          <coral-autocomplete-item value="sa">Safari</coral-autocomplete-item>
-        </coral-autocomplete>
-      </form>
-    </div>
-  </section>
-</body>
+      <h2 class="coral-Heading coral-Heading--2">Form Field</h2>
+      <div class="markup">
+        <form class="coral-Form coral-Form--vertical" style="max-width:300px;">
+          <label id="label9" class="coral-Form-fieldlabel">Label</label>
+          <coral-autocomplete class="coral-Form-field" labelledby="label9">
+            <coral-autocomplete-item value="ch">Chrome</coral-autocomplete-item>
+            <coral-autocomplete-item value="fi">Firefox</coral-autocomplete-item>
+            <coral-autocomplete-item value="ie">Internet Explorer</coral-autocomplete-item>
+            <coral-autocomplete-item value="op">Opera</coral-autocomplete-item>
+            <coral-autocomplete-item value="sa">Safari</coral-autocomplete-item>
+          </coral-autocomplete>
+        </form>
+      </div>
+    </main>
+  </body>
 </html>

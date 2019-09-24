@@ -12,8 +12,6 @@
 
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Toast} from '../../../coral-component-toast';
-import {Button} from '../../../coral-component-button';
-import {AnchorButton} from '../../../coral-component-anchorbutton';
 
 describe('Toast', function() {
   const REDUCED_DURATION = 100;
@@ -93,8 +91,8 @@ describe('Toast', function() {
         };
         
         const div = document.createElement('div');
-        const button = new Button();
-        const anchor = new AnchorButton();
+        const button = document.createElement('button', {is:'coral-button'});
+        const anchor = document.createElement('a', {is:'coral-anchorbutton'});
         
         el.action = div;
         expect(el.action).to.equal(null);
@@ -110,7 +108,7 @@ describe('Toast', function() {
       });
       
       it('should render the new action', function() {
-        const button = new Button();
+        const button = document.createElement('button', {is:'coral-button'});
         el.action = button;
         
         expect(button.hasAttribute('coral-toast-action')).to.be.true;

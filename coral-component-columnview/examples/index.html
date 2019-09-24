@@ -44,14 +44,14 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   </head>
   <body class="coral--light">
-    <div style="position:fixed;top:15px;right:15px;">
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
-    </div>
+    <main class="u-coral-margin">
+      <div style="position:fixed;top:15px;right:15px;">
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+      </div>
 
-    <section class="u-coral-margin">
       <h1 class="coral-Heading coral-Heading--1">ColumnView</h1>
 
       <div class="markup">
@@ -109,13 +109,13 @@
               </coral-columnview-item>
               <coral-columnview-item data-src="small-image.html">
                 <coral-columnview-item-thumbnail>
-                  <img src="https://placeimg.com/100/100/any">
+                  <img alt="" src="https://placeimg.com/100/100/any">
                 </coral-columnview-item-thumbnail>
                 <coral-columnview-item-content>Small Image</coral-columnview-item-content>
               </coral-columnview-item>
               <coral-columnview-item data-src="huge-image.html">
                 <coral-columnview-item-thumbnail>
-                  <img src="https://placeimg.com/400/600/any">
+                  <img alt="" src="https://placeimg.com/400/600/any">
                 </coral-columnview-item-thumbnail>
                 <coral-columnview-item-content>Huge Image with a really really long name</coral-columnview-item-content>
               </coral-columnview-item>
@@ -166,7 +166,7 @@
           <coral-columnview-preview>
             <coral-columnview-preview-content>
               <coral-columnview-preview-asset>
-                <img src="https://placeimg.com/1000/1000/any">
+                <img alt="" src="https://placeimg.com/1000/1000/any">
               </coral-columnview-preview-asset>
               <coral-columnview-preview-label>This is a really really really long name</coral-columnview-preview-label>
               <coral-columnview-preview-value>document.txt</coral-columnview-preview-value>
@@ -196,7 +196,7 @@
           <coral-columnview-preview>
             <coral-columnview-preview-content>
               <coral-columnview-preview-asset>
-                <img src="https://placeimg.com/640/480/any">
+                <img alt="" src="https://placeimg.com/640/480/any">
               </coral-columnview-preview-asset>
               <coral-columnview-preview-label>Title</coral-columnview-preview-label>
               <coral-columnview-preview-value>File2</coral-columnview-preview-value>
@@ -211,7 +211,7 @@
         <script type="text/html" id="huge-image.html">
           <coral-columnview-preview>
             <coral-columnview-preview-asset>
-              <img src="https://placeimg.com/1000/1000/any">
+              <img alt="" src="https://placeimg.com/1000/1000/any">
             </coral-columnview-preview-asset>
             <coral-columnview-preview-label>Name</coral-columnview-preview-label>
             <coral-columnview-preview-value>Huge Image</coral-columnview-preview-value>
@@ -229,7 +229,7 @@
         <script type="text/html" id="small-image.html">
           <coral-columnview-preview>
             <coral-columnview-preview-asset>
-              <img src="https://placeimg.com/60/60/any">
+              <img alt="" src="https://placeimg.com/60/60/any">
             </coral-columnview-preview-asset>
             <coral-columnview-preview-label>Name</coral-columnview-preview-label>
             <coral-columnview-preview-value>small_image.jpeg</coral-columnview-preview-value>
@@ -470,6 +470,6 @@
           });
         </script>
       </div>
-    </section>
+    </main>
   </body>
 </html>

@@ -79,9 +79,6 @@ class Banner extends BaseComponent(HTMLElement) {
     
     // Set new variant class
     this.classList.add(`${CLASSNAME}--${this._variant}`);
-    
-    // Set the role attribute depending on the variant so that the element turns into a live region
-    this.setAttribute('role', this._variant);
   }
   
   /**

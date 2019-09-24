@@ -42,15 +42,14 @@
   </head>
 
   <body class="coral--light">
+    <main class="u-coral-margin">
+      <div style="position:fixed;top:15px;right:15px;">
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+      </div>
 
-    <div style="position:fixed;top:15px;right:15px;">
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
-    </div>
-
-    <section class="u-coral-margin">
       <h1 class="coral-Heading coral-Heading--1">Masonry</h1>
 
       <div class="markup">
@@ -127,7 +126,7 @@
             <article>
               <span coral-masonry-draghandle></span>
               With image
-              <img src="http://via.placeholder.com/600x300">
+              <img src="http://via.placeholder.com/600x300" alt="">
             </article>
           </coral-masonry-item>
           <coral-masonry-item class="coral-Well">
@@ -265,7 +264,7 @@
 
               var item = document.createElement('coral-masonry-item');
               item.classList.add('coral-Well');
-              item.content.innerHTML = '<img src="' + url + '" style="width: ' + (width / 2) + 'px; height: ' + (height / 2) + 'px;">';
+              item.content.innerHTML = '<img alt="" src="' + url + '" style="width: ' + (width / 2) + 'px; height: ' + (height / 2) + 'px;">';
 
               return item;
             }
@@ -283,8 +282,6 @@
           });
         </script>
       </div>
-    </section>
-
+    </main>
   </body>
-
 </html>

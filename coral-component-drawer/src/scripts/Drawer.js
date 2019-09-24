@@ -55,7 +55,7 @@ class Drawer extends BaseComponent(HTMLElement) {
     this._elements = {
       content: this.querySelector('coral-drawer-content') || document.createElement('coral-drawer-content')
     };
-    base.call(this._elements);
+    base.call(this._elements, {commons});
     
     // Events
     this._delegateEvents({
@@ -139,7 +139,7 @@ class Drawer extends BaseComponent(HTMLElement) {
     this._open = transform.booleanAttr(value);
     this._reflectAttribute('open', this._open);
   
-    this.setAttribute('aria-expanded', this._open);
+    this._elements.toggleButton.setAttribute('aria-expanded', this._open);
   
     // eslint-disable-next-line no-unused-vars
     let offsetHeight;

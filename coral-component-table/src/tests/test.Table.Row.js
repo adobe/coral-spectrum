@@ -238,11 +238,4 @@ describe('Table.Row', function() {
       });
     });
   });
-
-  describe('Implementation Details', function() {
-    it('should set a11y attribute', function() {
-      var row = helpers.build(new Table.Row());
-      expect(row.getAttribute('role')).to.equal('row');
-    });
-  });
 });

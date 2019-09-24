@@ -141,11 +141,9 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
     if (value > 0) {
       this._step = value;
       this._reflectAttribute('step', this._step);
-  
-      this.setAttribute('aria-valuestep', this._step);
+      
       this._elements.inputs.forEach((input) => {
         input.setAttribute('step', this._step);
-        input.setAttribute('aria-valuestep', this._step);
       });
     }
   }
@@ -164,11 +162,9 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   set min(value) {
     this._min = transform.number(value);
     this._reflectAttribute('min', this._min);
-  
-    this.setAttribute('aria-valuemin', this._min);
+    
     this._elements.inputs.forEach((input) => {
       input.setAttribute('min', this._min);
-      input.setAttribute('aria-valuemin', this._min);
     });
   }
   
@@ -186,11 +182,9 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   set max(value) {
     this._max = transform.number(value);
     this._reflectAttribute('max', this._max);
-  
-    this.setAttribute('aria-valuemax', this._max);
+    
     this._elements.inputs.forEach((input) => {
       input.setAttribute('max', this._max);
-      input.setAttribute('aria-valuemax', this._max);
     });
   }
   
@@ -879,7 +873,6 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
     
     // A11y
     this.setAttribute('role', 'presentation');
-    this.setAttribute('aria-orientation', 'horizontal');
   
     // Support cloneNode
     const template = this.querySelectorAll('._coral-Slider-labelContainer, ._coral-Slider-controls');

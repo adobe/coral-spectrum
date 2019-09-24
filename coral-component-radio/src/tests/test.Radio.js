@@ -66,36 +66,36 @@ describe('Radio', function() {
     });
     
     describe('#label', function() {
-      it('should be initially hidden', function() {
+      it('should show screen reader text by default', function() {
         var el = new Radio();
         
-        expect(el.label.textContent).to.equal('');
-        expect(el._elements.labelWrapper.textContent).to.equal('');
-        expect(el._elements.labelWrapper.hasAttribute('hidden')).to.be.true;
+        expect(el._elements.screenReaderOnly.hidden).to.be.false;
+        expect(el.label.textContent.trim()).to.equal('');
       });
       
-      it('should show label when content is not empty', function() {
+      it('should hide screen reader text when content is not empty', function() {
         const el = helpers.build(window.__html__['Radio.withLabel.html']);
-        expect(el._elements.labelWrapper.hidden).to.equal(false);
+        expect(el._elements.screenReaderOnly.hidden).to.equal(true);
+        expect(el.label.textContent.trim()).to.equal('Standard radio');
       });
   
-      it('should hide label when content set to empty', function(done) {
+      it('should show/hide screen reader text when content is set/empty', function(done) {
         var radio = new Radio();
         helpers.target.appendChild(radio);
     
-        expect(radio._elements.labelWrapper.hidden).to.equal(true);
+        expect(radio._elements.screenReaderOnly.hidden).to.equal(false);
     
         radio.label.innerHTML = 'Test';
     
         // Wait for MO
         helpers.next(() => {
-          expect(radio._elements.labelWrapper.hidden).to.equal(false);
+          expect(radio._elements.screenReaderOnly.hidden).to.equal(true);
       
           radio.label.innerHTML = '';
       
           // Wait for MO
           helpers.next(() => {
-            expect(radio._elements.labelWrapper.hidden).to.equal(true);
+            expect(radio._elements.screenReaderOnly.hidden).to.equal(false);
             done();
           });
         });
@@ -104,13 +104,13 @@ describe('Radio', function() {
       it('should hide label when content set to empty when not in DOM', function(done) {
         var el = helpers.build(new Radio());
   
-        expect(el._elements.labelWrapper.hidden).to.equal(true);
+        expect(el._elements.screenReaderOnly.hidden).to.equal(false);
         
         el.label.innerHTML = 'Test';
 
         // Wait for MO
         helpers.next(() => {
-          expect(el._elements.labelWrapper.hidden).to.equal(false);
+          expect(el._elements.screenReaderOnly.hidden).to.equal(true);
 
           helpers.target.removeChild(el);
           el.label.innerHTML = '';
@@ -121,7 +121,7 @@ describe('Radio', function() {
 
             // Wait for MO
             helpers.next(() => {
-              expect(el._elements.labelWrapper.hidden).to.equal(true);
+              expect(el._elements.screenReaderOnly.hidden).to.equal(false);
               done();
             });
           });
@@ -466,20 +466,6 @@ describe('Radio', function() {
       });
     });
     
-    it('should hide/show label depending on the content', function(done) {
-      var el = helpers.build(new Radio());
-      
-      expect(el._elements.labelWrapper.hidden).to.equal(true, 'The wrapper must be hidden since there are no contents');
-      
-      el.label.textContent = 'Label content';
-      
-      // Wait for MO
-      helpers.next(() => {
-        expect(el._elements.labelWrapper.hidden).to.equal(false, 'The wrapper must be visible');
-        done();
-      });
-    });
-    
     it('should allow replacing the content zone', function(done) {
       var el = helpers.build(new Radio());
   
@@ -488,12 +474,12 @@ describe('Radio', function() {
   
       // Wait for MO
       helpers.next(function() {
-        expect(el._elements.labelWrapper.hidden).to.be.true;
+        expect(el._elements.screenReaderOnly.hidden).to.be.false;
         el.label = label;
     
         // Wait for MO
         helpers.next(function() {
-          expect(el._elements.labelWrapper.hidden).to.be.false;
+          expect(el._elements.screenReaderOnly.hidden).to.be.true;
       
           done();
         });

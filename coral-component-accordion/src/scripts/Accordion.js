@@ -132,8 +132,6 @@ class Accordion extends BaseComponent(HTMLElement) {
     this._multiple = transform.booleanAttr(value);
     this._reflectAttribute('multiple', this._multiple);
     
-    this.setAttribute('aria-multiselectable', this._multiple);
-    
     this._validateSelection();
   }
   
@@ -413,7 +411,6 @@ class Accordion extends BaseComponent(HTMLElement) {
     
     // WAI-ARIA 1.1
     this.setAttribute('role', 'region');
-    this.setAttribute('aria-multiselectable', this.multiple);
     
     // Don't trigger events once connected
     this._preventTriggeringEvents = true;

@@ -1,47 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Coral.Playground</title>
+    <link id="coral-link" rel="stylesheet" href="../dist/css/coral.css">
+    <script id="coral-script" src="../dist/js/coral.js"></script>
+  </head>
+  <body class="coral--light">
+    <script>
+      var link = document.getElementById('coral-link');
+      var script = document.getElementById('coral-script');
 
-<head>
-  <meta charset="utf-8">
-  <title>Coral.Playground</title>
-  <link id="coral-link" rel="stylesheet" href="../dist/css/coral.css">
-  <script id="coral-script" src="../dist/js/coral.js"></script>
-</head>
-<body class="coral--light">
-<script>
-  var link = document.getElementById('coral-link');
-  var script = document.getElementById('coral-script');
+      // JS constructor example with sharable code
+      var config = Coral.Playground.read(location.hash.substr(1));
+      if (!Object.keys(config).length) {
+        config.code = '<!DOCTYPE html>\n' +
+          '<html>\n' +
+          '<head>\n' +
+          '  <link rel="stylesheet" href="'+ link.href +'"/>\n' +
+          '  <script src="'+ script.src +'"><\/script>\n' +
+          '</head>\n' +
+          '<body class="coral--light">\n' +
+          '  <button is="coral-button">Button</button>\n' +
+          '</body>\n' +
+          '</html>\n';
+        config.livereload = true;
+      }
 
-  // JS constructor example with sharable code
-  var config = Coral.Playground.read(location.hash.substr(1));
-  if (!Object.keys(config).length) {
-    config.code = '<!DOCTYPE html>\n' +
-      '<html>\n' +
-      '<head>\n' +
-      '  <link rel="stylesheet" href="'+ link.href +'"/>\n' +
-      '  <script src="'+ script.src +'"><\/script>\n' +
-      '</head>\n' +
-      '<body class="coral--light">\n' +
-      '  <button is="coral-button">Button</button>\n' +
-      '</body>\n' +
-      '</html>\n';
-    config.livereload = true;
-  }
+      var playground = new Coral.Playground(config);
 
-  var playground = new Coral.Playground(config);
+      playground.addEventListener('coral-playground:coderun', function() {
+        location.hash = playground.share();
 
-  playground.addEventListener('coral-playground:coderun', function() {
-    location.hash = playground.share();
+        playground.run(playground.code);
+      });
 
-    playground.run(playground.code);
-  });
+      playground.addEventListener('coral-playground:settingschange', function() {
+        location.hash = playground.share();
+      });
 
-  playground.addEventListener('coral-playground:settingschange', function() {
-    location.hash = playground.share();
-  });
-
-  document.body.appendChild(playground);
-</script>
-</body>
-
+      document.body.appendChild(playground);
+    </script>
+  </body>
 </html>

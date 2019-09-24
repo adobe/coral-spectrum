@@ -307,52 +307,112 @@ describe('SideNav', function() {
   });
   
   describe('Accessibility', function() {
-    it('should link heading with level on initialization', function() {
-      const el = helpers.build(window.__html__['SideNav.withHeading.html']);
-      Array.from(el._levels).forEach((level) => {
-        const heading = level.previousElementSibling;
-        expect(level.getAttribute('aria-labelledby')).to.equal(heading.id);
+    describe('Heading', function() {
+      it('should link heading with level on initialization', function() {
+        const el = helpers.build(window.__html__['SideNav.withHeading.html']);
+        Array.from(el._levels).forEach((level) => {
+          const heading = level.previousElementSibling;
+          expect(level.getAttribute('aria-labelledby')).to.equal(heading.id);
+        });
+      });
+  
+      it('should link heading with level on adding level', function(done) {
+        const el = helpers.build(window.__html__['SideNav.withHeading.html']);
+        const heading = document.createElement('coral-sidenav-heading');
+        const level = document.createElement('coral-sidenav-level');
+    
+        el.appendChild(heading);
+        el.appendChild(level);
+    
+        // Wait for MO
+        helpers.next(() => {
+          expect(level.getAttribute('aria-labelledby')).to.equal(heading.id);
+          done();
+        });
+      });
+  
+      it('should link heading with level on adding heading', function(done) {
+        const el = helpers.build(window.__html__['SideNav.base.html']);
+        const heading = document.createElement('coral-sidenav-heading');
+        const level = document.createElement('coral-sidenav-level');
+    
+        el.appendChild(level);
+        el.insertBefore(heading, level);
+    
+        // Wait for MO
+        helpers.next(() => {
+          expect(level.getAttribute('aria-labelledby')).to.equal(heading.id);
+          done();
+        });
+      });
+  
+      it('should unlink heading with level on removing heading', function(done) {
+        const el = helpers.build(window.__html__['SideNav.withHeading.html']);
+        el._headings[0].remove();
+    
+        // Wait for MO
+        helpers.next(() => {
+          expect(el._levels[0].hasAttribute('aria-labelledby')).to.be.false;
+          done();
+        });
       });
     });
-  
-    it('should link heading with level on adding level', function(done) {
-      const el = helpers.build(window.__html__['SideNav.withHeading.html']);
-      const heading = document.createElement('coral-sidenav-heading');
-      const level = document.createElement('coral-sidenav-level');
-      
-      el.appendChild(heading);
-      el.appendChild(level);
-  
-      // Wait for MO
-      helpers.next(() => {
-        expect(level.getAttribute('aria-labelledby')).to.equal(heading.id);
-        done();
+    
+    describe('Item', function() {
+      it('should link item with level on initialization', function() {
+        const el = helpers.build(window.__html__['SideNav.multilevel.html']);
+        Array.from(el._levels).forEach((level) => {
+          const item = level.previousElementSibling;
+          expect(item.getAttribute('aria-controls')).to.equal(level.id);
+          expect(level.getAttribute('aria-labelledby')).to.equal(item.id);
+        });
       });
-    });
   
-    it('should link heading with level on adding heading', function(done) {
-      const el = helpers.build(window.__html__['SideNav.base.html']);
-      const heading = document.createElement('coral-sidenav-heading');
-      const level = document.createElement('coral-sidenav-level');
-      
-      el.appendChild(level);
-      el.insertBefore(heading, level);
-      
-      // Wait for MO
-      helpers.next(() => {
-        expect(level.getAttribute('aria-labelledby')).to.equal(heading.id);
-        done();
+      it('should link item with level on adding level', function(done) {
+        const el = helpers.build(window.__html__['SideNav.base.html']);
+        const level = document.createElement('coral-sidenav-level');
+        const item = el.items.last();
+        el.appendChild(level);
+    
+        // Wait for MO
+        helpers.next(() => {
+          expect(item.getAttribute('aria-controls')).to.equal(level.id);
+          expect(level.getAttribute('aria-labelledby')).to.equal(item.id);
+          done();
+        });
       });
-    });
   
-    it('should unlink heading with level on removing heading', function(done) {
-      const el = helpers.build(window.__html__['SideNav.withHeading.html']);
-      el._levels[0].remove();
-      
-      // Wait for MO
-      helpers.next(() => {
-        expect(el._headings[0].hasAttribute('aria-labelledby')).to.be.false;
-        done();
+      it('should link item with level on adding item', function(done) {
+        const el = helpers.build(window.__html__['SideNav.multilevel.html']);
+        const level = el._levels[0];
+        const item = new SideNav.Item();
+        el.insertBefore(item, level);
+    
+        // Wait for MO
+        helpers.next(() => {
+          expect(item.getAttribute('aria-controls')).to.equal(level.id);
+          expect(level.getAttribute('aria-labelledby')).to.equal(item.id);
+          done();
+        });
+      });
+  
+      it('should unlink item with level on removing item', function(done) {
+        const el = helpers.build(window.__html__['SideNav.multilevel.html']);
+        const level = el._levels[0];
+        const item2 = el.items.getAll()[1];
+        const item3 = el.items.getAll()[2];
+  
+        expect(item3.getAttribute('aria-controls')).to.equal(level.id);
+        expect(level.getAttribute('aria-labelledby')).to.equal(item3.id);
+        
+        item3.remove();
+    
+        // Wait for MO
+        helpers.next(() => {
+          expect(item2.getAttribute('aria-controls')).to.equal(level.id);
+          expect(level.getAttribute('aria-labelledby')).to.equal(item2.id);
+          done();
+        });
       });
     });
   });

@@ -68,7 +68,7 @@ describe('Drawer', function () {
         var drawer = helpers.build(window.__html__['Drawer.default.html']);
         drawer.open = true;
     
-        expect(drawer.getAttribute('aria-expanded')).to.equal('true');
+        expect(drawer._elements.toggleButton.getAttribute('aria-expanded')).to.equal('true');
         // Transition happens in the next task
         window.setTimeout(function() {
           expect(drawer._elements.slider.style.height).to.not.equal('0px');
@@ -80,7 +80,7 @@ describe('Drawer', function () {
         var drawer = helpers.build(window.__html__['Drawer.open.html']);
         drawer.open = false;
     
-        expect(drawer.getAttribute('aria-expanded')).to.equal('false');
+        expect(drawer._elements.toggleButton.getAttribute('aria-expanded')).to.equal('false');
         // Transition happens in the next task
         window.setTimeout(function() {
           expect(drawer._elements.slider.style.height).to.equal('0px');

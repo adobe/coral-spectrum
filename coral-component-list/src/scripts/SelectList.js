@@ -527,6 +527,9 @@ class SelectList extends BaseComponent(HTMLElement) {
     
     // adds the role to support accessibility
     this.setAttribute('role', 'listbox');
+    if (!this.hasAttribute('aria-label')) {
+      this.setAttribute('aria-label', 'list');
+    }
     
     // Don't trigger events once connected
     this._preventTriggeringEvents = true;

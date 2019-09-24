@@ -16,29 +16,6 @@
 @require '@adobe/spectrum-css/dist/components/steplist/multiStops/dark.css';
 @require '@adobe/spectrum-css/dist/components/steplist/multiStops/darkest.css';
 
-// Support hybrid mode
-._coral-Steplist--hybrid {
-  ._coral-Steplist-label {
-    width: auto;
-    white-space: nowrap;
-  }
-
-  ._coral-Steplist-item:last-child {
-  // Center last step in hybrid mode
-    ._coral-Steplist-label {
-      left: 100%;
-      transform: translateX(-50%);
-    }
-  }
-
-  ._coral-Steplist-item.is-selected {
-    ._coral-Steplist-label:after {
-    // Display "(stepX/stepTotal)"
-      content: attr(data-coral-step-index);
-    }
-  }
-}
-
 // @compat
 ._coral-Steplist--small {
   ._coral-Steplist-item:first-child,

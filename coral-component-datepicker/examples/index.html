@@ -44,78 +44,111 @@
   </head>
 
   <body class="coral--light">
-    <div style="position:fixed;top:15px;right:15px;">
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
-    </div>
+    <main class="u-coral-margin">
+      <div style="position:fixed;top:15px;right:15px;">
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+      </div>
 
-    <section class="u-coral-margin">
       <h1 class="coral-Heading coral-Heading--1">Datepicker</h1>
 
       <h2 class="coral-Heading coral-Heading--2">Default</h2>
       <div class="markup">
-        <coral-datepicker></coral-datepicker>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label1" class="coral-Form-fieldlabel">Label</label>
+          <coral-datepicker labelledby="label1"></coral-datepicker>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">DisplayFormat: MM-DD-YYYY</h2>
       <div class="markup">
-        <coral-datepicker value="2014-12-31" displayformat="MM-DD-YYYY"></coral-datepicker>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label2" class="coral-Form-fieldlabel">Label</label>
+          <coral-datepicker labelledby="label2" value="2014-12-31" displayformat="MM-DD-YYYY"></coral-datepicker>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">ValueFormat: YYYY-MM-DD</h2>
       <div class="markup">
-        <coral-datepicker value="2014-12-31" valueformat="YYYY-MM-DD" displayformat="DD-MM-YYYY"></coral-datepicker>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label3" class="coral-Form-fieldlabel">Label</label>
+          <coral-datepicker labelledby="label3" value="2014-12-31" valueformat="YYYY-MM-DD" displayformat="DD-MM-YYYY"></coral-datepicker>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">Time only</h2>
       <div class="markup">
-        <coral-datepicker type="time" placeholder="Placeholder" value="13:14"></coral-datepicker>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label4" class="coral-Form-fieldlabel">Label</label>
+          <coral-datepicker labelledby="label4" type="time" placeholder="Placeholder" value="13:14"></coral-datepicker>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">Date and Time</h2>
       <div class="markup">
-        <coral-datepicker type="datetime" value="2014-12-31T14:12+00:00"></coral-datepicker>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label5" class="coral-Form-fieldlabel">Label</label>
+          <coral-datepicker labelledby="label5" type="datetime" value="2014-12-31T14:12+00:00"></coral-datepicker>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">With Min/Max</h2>
       <div class="markup">
-        <coral-datepicker type="date" min="2015-04-10" max="2015-04-28" value="2015-04-15"></coral-datepicker>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label6" class="coral-Form-fieldlabel">Label</label>
+          <coral-datepicker labelledby="label6" type="date" min="2015-04-10" max="2015-04-28" value="2015-04-15"></coral-datepicker>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">Quiet variant</h2>
       <div class="markup">
-        <coral-datepicker value="2014-12-31" displayformat="MM-DD-YYYY" variant="quiet"></coral-datepicker>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label7" class="coral-Form-fieldlabel">Label</label>
+          <coral-datepicker labelledby="label7" value="2014-12-31" displayformat="MM-DD-YYYY" variant="quiet"></coral-datepicker>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">Invalid</h2>
       <div class="markup">
-        <coral-datepicker invalid></coral-datepicker>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label8" class="coral-Form-fieldlabel">Label</label>
+          <coral-datepicker labelledby="label8" invalid></coral-datepicker>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">Required</h2>
       <div class="markup">
-        <coral-datepicker required></coral-datepicker>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label9" class="coral-Form-fieldlabel">Label</label>
+          <coral-datepicker labelledby="label9" required></coral-datepicker>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">ReadOnly</h2>
       <div class="markup">
-        <coral-datepicker value="2014-12-31" readonly></coral-datepicker>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label10" class="coral-Form-fieldlabel">Label</label>
+          <coral-datepicker labelledby="label10" value="2014-12-31" readonly></coral-datepicker>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">Disabled</h2>
       <div class="markup">
-        <coral-datepicker value="2014-12-31" disabled></coral-datepicker>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label11" class="coral-Form-fieldlabel">Label</label>
+          <coral-datepicker labelledby="label11" value="2014-12-31" disabled></coral-datepicker>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">Form Field</h2>
       <div class="markup">
         <form class="coral-Form coral-Form--vertical" style="max-width:300px;">
-          <label id="label" class="coral-FieldLabel">Label</label>
-          <coral-datepicker class="coral-Form-field" labelledby="label"></coral-datepicker>
+          <label id="label12" class="coral-FieldLabel">Label</label>
+          <coral-datepicker class="coral-Form-field" labelledby="label12"></coral-datepicker>
         </form>
       </div>
-    </section>
+    </main>
   </body>
 </html>

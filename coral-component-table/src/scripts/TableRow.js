@@ -287,9 +287,6 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
     super.connectedCallback();
     
     this.classList.add(CLASSNAME);
-  
-    // a11y
-    this.setAttribute('role', 'row');
   }
   
   /**

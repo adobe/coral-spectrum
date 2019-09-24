@@ -100,7 +100,6 @@ describe('Slider', function() {
         el.step = 5;
         
         expect(el.getAttribute('step')).to.equal('5');
-        expect(el._elements.inputs[0].getAttribute('aria-valuestep')).to.equal('5');
       });
     });
 
@@ -111,7 +110,6 @@ describe('Slider', function() {
         expect(el.getAttribute('min')).to.equal('5');
 
         expect(el._elements.inputs[0].getAttribute('min')).to.equal('5');
-        expect(el._elements.inputs[0].getAttribute('aria-valuemin')).to.equal('5');
       });
     });
 
@@ -122,7 +120,6 @@ describe('Slider', function() {
         expect(el.getAttribute('max')).to.equal('5');
 
         expect(el._elements.inputs[0].getAttribute('max')).to.equal('5');
-        expect(el._elements.inputs[0].getAttribute('aria-valuemax')).to.equal('5');
       });
     });
 

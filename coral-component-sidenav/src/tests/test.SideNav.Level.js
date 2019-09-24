@@ -49,13 +49,11 @@ describe('SideNav.Level', function() {
       el.setAttribute('_expanded', 'on');
 
       helpers.next(() => {
-        expect(el.getAttribute('aria-expanded')).to.equal('true');
         expect(el.hidden).to.be.false;
 
         el.setAttribute('_expanded', 'off');
 
         setTimeout(() => {
-          expect(el.getAttribute('aria-expanded')).to.equal('false');
           expect(el.hidden).to.be.true;
 
           done();

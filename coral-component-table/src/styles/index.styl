@@ -451,6 +451,17 @@ tr[is="coral-table-row"]:not([selectable]) {
     }
   }
 }
+
+// Skip it for sticky calculations to support screen reader label
+table[is="coral-table"].is-layouting thead[is="coral-table-head"][sticky] coral-checkbox[coral-table-select] {
+  display: none;
+}
+
+thead[is="coral-table-head"][sticky] coral-checkbox[coral-table-select] {
+  position: relative;
+  top: -16px;
+}
+
 /* END #selectable */
 
 /* #variant */

@@ -715,8 +715,8 @@ describe('Tree', function() {
       var item = el.items.getAll()[0];
       var header = item._elements.header;
       var subTree = item._elements.subTreeContainer;
-      expect(item.getAttribute('role')).to.equal('treeitem');
-      expect(header.getAttribute('role')).to.equal('tab');
+      expect(item.getAttribute('role')).to.equal('presentation');
+      expect(header.getAttribute('role')).to.equal('treeitem');
       
       expect(header.getAttribute('aria-controls'))
         .equal(subTree.getAttribute('id'));

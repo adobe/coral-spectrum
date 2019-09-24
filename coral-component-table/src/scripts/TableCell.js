@@ -137,9 +137,6 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
     super.connectedCallback();
 
     this.classList.add(CLASSNAME);
-
-    // a11y
-    this.setAttribute('role', 'gridcell');
   }
   
   /**

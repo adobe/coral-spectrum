@@ -23,7 +23,7 @@ import '../../../coral-component-button';
 import {Checkbox} from '../../../coral-component-checkbox';
 import base from '../templates/base';
 import {SelectableCollection} from '../../../coral-collection';
-import {getCellByIndex, getColumns, getCells, getContentCells, getHeaderCells, getRows, getSiblingsOf, getIndexOf, divider} from './TableUtil';
+import {isTableHeaderCell, isTableCell, isTableRow, isTableBody, getCellByIndex, getColumns, getCells, getContentCells, getHeaderCells, getRows, getSiblingsOf, getIndexOf, divider} from './TableUtil';
 import {transform, validate, commons, Keys} from '../../../coral-utils';
 
 const CLASSNAME = '_coral-Table-wrapper';
@@ -59,6 +59,7 @@ const IS_LAST_ITEM_DRAGGED = 'is-draggedLastItem';
 const IS_DRAGGING_CLASS = 'is-dragging';
 const IS_BEFORE_CLASS = 'is-before';
 const IS_AFTER_CLASS = 'is-after';
+const IS_LAYOUTING = 'is-layouting';
 const IS_READY = 'is-ready';
 const KEY_SPACE = Keys.keyToCode('space');
 
@@ -104,7 +105,9 @@ class Table extends BaseComponent(HTMLTableElement) {
       'coral-dragaction:dragend thead[is="coral-table-head"] tr[is="coral-table-row"] > th[is="coral-table-headercell"]': '_onHeaderCellDragEnd',
       // a11y
       'key:enter th[is="coral-table-headercell"]': '_onHeaderCellSort',
+      'key:enter th[is="coral-table-headercell"] coral-table-headercell-content': '_onHeaderCellSort',
       'key:space th[is="coral-table-headercell"]': '_onHeaderCellSort',
+      'key:space th[is="coral-table-headercell"] coral-table-headercell-content': '_onHeaderCellSort',
   
       // Body specific
       'click tbody[is="coral-table-body"] [coral-table-rowlock]': '_onRowLock',
@@ -583,7 +586,7 @@ class Table extends BaseComponent(HTMLTableElement) {
   /** @private */
   _onHeaderCellSort(event) {
     const table = this;
-    const matchedTarget = event.matchedTarget;
+    const matchedTarget = event.matchedTarget.closest('th');
     
     // Don't sort if the column was dragged
     if (!matchedTarget._isDragging) {
@@ -1282,7 +1285,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       const node = addedNodes[i];
       
       // Sync header cell whether sticky or not
-      if (node instanceof TableHeaderCell) {
+      if (isTableHeaderCell(node)) {
         table._toggleStickyHeaderCell(node, head.sticky);
       }
     }
@@ -1308,7 +1311,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       addedNode = addedNodes[i];
       
       // Sync row state with table properties
-      if (addedNode instanceof TableRow) {
+      if (isTableRow(addedNode)) {
         changed = true;
         
         addedNode._toggleSelectable(table.selectable);
@@ -1352,7 +1355,7 @@ class Table extends BaseComponent(HTMLTableElement) {
     for (let k = 0; k < removedNodes.length; k++) {
       const removedNode = removedNodes[k];
       
-      if (removedNode instanceof TableRow) {
+      if (isTableRow(removedNode)) {
         changed = true;
         
         // If the focusable item is removed, the first item becomes the new focusable item
@@ -1428,7 +1431,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       addedNode = addedNodes[i];
       
       // Sync row state with table properties
-      if (addedNode instanceof TableCell) {
+      if (isTableCell(addedNode)) {
         addedNode._toggleSelectable(row.selectable);
         
         const selectedItems = row.selectedItems;
@@ -1449,7 +1452,7 @@ class Table extends BaseComponent(HTMLTableElement) {
         }
       }
       // Add appropriate scope depending on whether headercell is in THEAD or TBODY
-      else if (addedNode instanceof TableHeaderCell) {
+      else if (isTableHeaderCell(addedNode)) {
         table._setHeaderCellScope(addedNode, row.parentNode);
       }
     }
@@ -1458,7 +1461,7 @@ class Table extends BaseComponent(HTMLTableElement) {
     for (let k = 0; k < removedNodes.length; k++) {
       const removedNode = removedNodes[k];
       
-      if (removedNode instanceof TableCell) {
+      if (isTableCell(removedNode)) {
         if (removedNode.selected) {
           row._triggerChangeEvent();
         }
@@ -1773,6 +1776,9 @@ class Table extends BaseComponent(HTMLTableElement) {
   
   _onHeadStickyChanged(event) {
     event.stopImmediatePropagation();
+  
+    // a11y
+    this._toggleFocusable();
     
     const table = this;
     const head = event.target;
@@ -1911,7 +1917,7 @@ class Table extends BaseComponent(HTMLTableElement) {
     }
     
     const focusableItem = this._getFocusableItem();
-    if (this.selectable || this.lockable || this.orderable) {
+    if (this.selectable || this.lockable || this.orderable || (this.head && this.head.sticky)) {
       // First item is focusable by default but don't remove the tabindex of the existing focusable item
       if (!focusableItem) {
         this._toggleElementTabIndex(firstItem);
@@ -2104,9 +2110,13 @@ class Table extends BaseComponent(HTMLTableElement) {
     }
     
     this._timeout = window.setTimeout(() => {
+      this.classList.add(IS_LAYOUTING);
+      
       this._timeout = null;
       this._resizeStickyHead();
       this._resizeContainer();
+      
+      this.classList.remove(IS_LAYOUTING);
       
       // Mark table as ready
       this.classList.add(IS_READY);
@@ -2372,7 +2382,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       for (let k = 0; k < mutation.removedNodes.length; k++) {
         const removedNode = mutation.removedNodes[k];
 
-        if (removedNode instanceof TableBody) {
+        if (isTableBody(removedNode)) {
           // Always make sure there's a body content zone
           if (!this.body) {
             this.body = new TableBody();

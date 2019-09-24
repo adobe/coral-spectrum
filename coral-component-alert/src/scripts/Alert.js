@@ -117,10 +117,6 @@ class Alert extends BaseComponent(HTMLElement) {
     // Don't use this._className; use the constant
     // This lets popover get our styles for free
     this.classList.add(`${CLASSNAME}--${this._variant}`);
-    
-    // Set the role attribute to alert or status depending on
-    // the variant so that the element turns into a live region
-    this.setAttribute('role', this._variant);
   }
   
   /**
@@ -262,6 +258,9 @@ class Alert extends BaseComponent(HTMLElement) {
     super.connectedCallback();
     
     this.classList.add(CLASSNAME);
+    
+    // a11y
+    this.setAttribute('role', 'alert');
     
     // Default reflected attributes
     if (!this._variant) { this.variant = variant.INFO; }

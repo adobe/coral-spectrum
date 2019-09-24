@@ -86,51 +86,51 @@ describe('Switch', function() {
     });
   
     describe('#label', function() {
-      it('should be initially hidden', function() {
+      it('should show the screen reader text by default', function() {
         var el = new Switch();
       
-        expect(el.label.textContent).to.equal('');
-        expect(el._elements.labelWrapper.textContent).to.equal('');
-        expect(el._elements.labelWrapper.hasAttribute('hidden')).to.be.true;
+        expect(el.label.textContent.trim()).to.equal('');
+        expect(el._elements.labelWrapper.textContent.trim()).to.equal('select');
+        expect(el._elements.screenReaderOnly.hidden).to.be.false;
       });
     
-      it('should show label when content is not empty', function() {
+      it('should hide the screen reader text when content is not empty', function() {
         const el = helpers.build(window.__html__['Switch.withLabel.html']);
-        expect(el._elements.labelWrapper.hidden).to.equal(false);
+        expect(el._elements.screenReaderOnly.hidden).to.equal(true);
       });
     
-      it('should hide label when content set to empty', function(done) {
+      it('should show(hide the screen reader text when content set/empty', function(done) {
         var el = new Switch();
         helpers.target.appendChild(el);
       
-        expect(el._elements.labelWrapper.hidden).to.equal(true);
+        expect(el._elements.screenReaderOnly.hidden).to.equal(false);
       
         el.label.innerHTML = 'Test';
       
         // Wait for MO
         helpers.next(() => {
-          expect(el._elements.labelWrapper.hidden).to.equal(false);
+          expect(el._elements.screenReaderOnly.hidden).to.equal(true);
         
           el.label.innerHTML = '';
         
           // Wait for MO
           helpers.next(() => {
-            expect(el._elements.labelWrapper.hidden).to.equal(true);
+            expect(el._elements.screenReaderOnly.hidden).to.equal(false);
             done();
           });
         });
       });
     
-      it('should hide label when content set to empty when not in DOM', function(done) {
+      it('should show screen reader text when content set to empty when not in DOM', function(done) {
         var el = helpers.build(new Switch());
       
-        expect(el._elements.labelWrapper.hidden).to.equal(true);
+        expect(el._elements.screenReaderOnly.hidden).to.equal(false);
       
         el.label.innerHTML = 'Test';
       
         // Wait for MO
         helpers.next(() => {
-          expect(el._elements.labelWrapper.hidden).to.equal(false);
+          expect(el._elements.screenReaderOnly.hidden).to.equal(true);
         
           helpers.target.removeChild(el);
           el.label.innerHTML = '';
@@ -141,7 +141,7 @@ describe('Switch', function() {
           
             // Wait for MO
             helpers.next(() => {
-              expect(el._elements.labelWrapper.hidden).to.equal(true);
+              expect(el._elements.screenReaderOnly.hidden).to.equal(false);
               done();
             });
           });

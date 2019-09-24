@@ -98,7 +98,6 @@ describe('Step', function() {
       el.interaction = StepList.interaction.OFF;
       
       expect(item1.hasAttribute('tabindex')).to.be.false;
-      expect(item1.getAttribute('aria-readonly')).to.equal('true');
     });
   });
 });

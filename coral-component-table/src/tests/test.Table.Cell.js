@@ -119,11 +119,4 @@ describe('Table.Cell', function() {
       });
     });
   });
-  
-  describe('Implementation Details', function() {
-    it('should set a11y attribute', function() {
-      const el = helpers.build(new Table.Cell());
-      expect(el.getAttribute('role')).to.equal('gridcell');
-    });
-  });
 });

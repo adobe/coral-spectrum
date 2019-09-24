@@ -42,73 +42,100 @@
   </head>
 
   <body class="coral--light">
-    <div style="position:fixed;top:15px;right:15px;">
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
-    </div>
+    <main class="u-coral-margin">
+      <div style="position:fixed;top:15px;right:15px;">
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+      </div>
 
-    <section class="u-coral-margin">
       <h1 class="coral-Heading coral-Heading--1">ColorInput</h1>
 
       <h2 class="coral-Heading coral-Heading--2">Default</h2>
       <div class="markup">
-        <coral-colorinput></coral-colorinput>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label1" class="coral-Form-fieldlabel">Label</label>
+          <coral-colorinput labelledby="label1"></coral-colorinput>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">With auto generated shades</h2>
       <div class="markup">
-        <coral-colorinput value="rgb(0,0,255)" autogeneratecolors="shades"></coral-colorinput>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label2" class="coral-Form-fieldlabel">Label</label>
+          <coral-colorinput labelledby="label2" value="rgb(0,0,255)" autogeneratecolors="shades"></coral-colorinput>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">With swatches only</h2>
       <div class="markup">
-        <coral-colorinput autogeneratecolors="tints" showswatches="on" showproperties="off"  placeholder="Choose a Color"></coral-colorinput>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label3" class="coral-Form-fieldlabel">Label</label>
+          <coral-colorinput labelledby="label3" autogeneratecolors="tints" showswatches="on" showproperties="off"  placeholder="Choose a Color"></coral-colorinput>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">With color properties only</h2>
       <div class="markup">
-        <coral-colorinput showswatches="off" showproperties="on"  value="rgb(255, 160, 130)"></coral-colorinput>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label4" class="coral-Form-fieldlabel">Label</label>
+          <coral-colorinput labelledby="label4" showswatches="off" showproperties="on"  value="rgb(255, 160, 130)"></coral-colorinput>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">With pre-defined custom colors</h2>
       <div class="markup">
-        <coral-colorinput value="rgba(255,0,0,0.5)">
-          <coral-colorinput-item value="#DDDDDD"></coral-colorinput-item>
-          <coral-colorinput-item value="rgb(16,16,16)"></coral-colorinput-item>
-          <coral-colorinput-item value="hsb(300,100,100)"></coral-colorinput-item>
-          <coral-colorinput-item value="#DDDDDD"></coral-colorinput-item>
-        </coral-colorinput>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label5" class="coral-Form-fieldlabel">Label</label>
+          <coral-colorinput labelledby="label5" value="rgba(255,0,0,0.5)">
+            <coral-colorinput-item value="#DDDDDD"></coral-colorinput-item>
+            <coral-colorinput-item value="rgb(16,16,16)"></coral-colorinput-item>
+            <coral-colorinput-item value="hsb(300,100,100)"></coral-colorinput-item>
+            <coral-colorinput-item value="#DDDDDD"></coral-colorinput-item>
+          </coral-colorinput>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">Swatch variant</h2>
       <div class="markup">
-        <coral-colorinput variant="swatch" value="#ffffff"></coral-colorinput>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label6" class="coral-Form-fieldlabel">Label</label>
+          <coral-colorinput labelledby="label6" variant="swatch" value="#ffffff"></coral-colorinput>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">Disabled</h2>
       <div class="markup">
-        <coral-colorinput value="#39CCCC" disabled></coral-colorinput>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label7" class="coral-Form-fieldlabel">Label</label>
+          <coral-colorinput labelledby="label7" value="#39CCCC" disabled></coral-colorinput>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">Invalid</h2>
       <div class="markup">
-        <coral-colorinput value="hello" invalid></coral-colorinput>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label8" class="coral-Form-fieldlabel">Label</label>
+          <coral-colorinput labelledby="label8" value="hello" invalid></coral-colorinput>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">ReadOnly</h2>
       <div class="markup">
-        <coral-colorinput value="rgb(233, 233, 233)" readonly labelledby="label-ro"></coral-colorinput>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label9" class="coral-Form-fieldlabel">Label</label>
+          <coral-colorinput labelledby="label9" value="rgb(233, 233, 233)" readonly labelledby="label-ro"></coral-colorinput>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">Form Field</h2>
       <div class="markup">
         <form class="coral-Form coral-Form--vertical" style="max-width:300px;">
-          <label id="label" class="coral-FieldLabel">Label</label>
-          <coral-colorinput class="coral-Form-field" labelledby="label"></coral-colorinput>
+          <label id="label10" class="coral-FieldLabel">Label</label>
+          <coral-colorinput labelledby="label10" class="coral-Form-field" labelledby="label"></coral-colorinput>
         </form>
       </div>
-    </section>
+    </main>
   </body>
 </html>

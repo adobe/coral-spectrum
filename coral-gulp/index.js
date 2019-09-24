@@ -14,7 +14,7 @@ module.exports = function(gulp) {
   // Tasks
   require('./tasks/clean.js')(gulp);
   require('./tasks/lint.js')(gulp);
-  require('./tasks/a11y.js')(gulp);
+  require('./tasks/axe.js')(gulp);
   require('./tasks/examples.js')(gulp);
   require('./tasks/docs.js')(gulp);
   require('./tasks/deploy.js')(gulp);

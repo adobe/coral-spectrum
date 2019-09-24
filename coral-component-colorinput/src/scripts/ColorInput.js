@@ -491,7 +491,6 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
-    this.setAttribute('aria-readonly', this._readOnly);
   
     this._elements.input.readOnly = this._readOnly;
     this._elements.colorPreview.disabled = this.disabled || this._readOnly;

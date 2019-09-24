@@ -32,9 +32,12 @@ class SideNavLevel extends BaseComponent(HTMLElement) {
   attributeChangedCallback(name, oldValue, value) {
     if (name === '_expanded') {
       const isExpanded = value === 'on';
+      
+      if (oldValue === value) {
+        return;
+      }
   
       this.classList.toggle('is-expanded', isExpanded);
-      this.setAttribute('aria-expanded', isExpanded);
   
       // Do animation in next frame to avoid a forced reflow
       window.requestAnimationFrame(() => {
@@ -87,7 +90,7 @@ class SideNavLevel extends BaseComponent(HTMLElement) {
     this.classList.add(CLASSNAME);
     
     // a11y
-    this.setAttribute('role', 'presentation');
+    this.setAttribute('role', 'region');
   }
 }
 

@@ -207,58 +207,60 @@ describe('Checkbox', function() {
     });
 
     describe('#label', function() {
-      it('should hide label by default', function() {
+      it('should show the screen reader text label by default', function() {
         var el = new Checkbox();
-    
-        expect(el._elements.labelWrapper.hidden).to.equal(true, 'The wrapper must be hidden since there are no contents');
+        
+        expect(el._elements.screenReaderOnly.hidden).to.be.false;
+        expect(el.label.textContent.trim()).to.equal('');
       });
       
-      it('should show label when content is not empty', function() {
+      it('should hide screen reader text when content is not empty', function() {
         const el = helpers.build(window.__html__['Checkbox.withLabel.html']);
-        expect(el._elements.labelWrapper.hidden).to.equal(false);
+        expect(el._elements.screenReaderOnly.hidden).to.be.true;
+        expect(el.label.textContent.trim()).to.equal('Standard checkbox');
       });
 
-      it('should hide label when content set to empty', function(done) {
-        var checkbox = new Checkbox();
-        helpers.target.appendChild(checkbox);
+      it('should show/hide screen reader text when content is set/empty', function(done) {
+        var el = new Checkbox();
+        helpers.target.appendChild(el);
+  
+        expect(el._elements.screenReaderOnly.hidden).to.be.false;
         
-        expect(checkbox._elements.labelWrapper.hidden).to.equal(true);
-        
-        checkbox.label.innerHTML = 'Test';
+        el.label.innerHTML = 'Test';
         
         // Wait for MO
         helpers.next(() => {
-          expect(checkbox._elements.labelWrapper.hidden).to.equal(false);
+          expect(el._elements.screenReaderOnly.hidden).to.be.true;
   
-          checkbox.label.innerHTML = '';
+          el.label.innerHTML = '';
           
           // Wait for MO
           helpers.next(() => {
-            expect(checkbox._elements.labelWrapper.hidden).to.equal(true);
+            expect(el._elements.screenReaderOnly.hidden).to.be.false;
             done();
           });
         });
       });
 
-      it('should hide label when content set to empty when not in DOM', function(done) {
-        var checkbox = new Checkbox();
-        helpers.target.appendChild(checkbox);
-        checkbox.label.innerHTML = 'Test';
+      it('should show/hide screen reader text when content set/empty when not in DOM', function(done) {
+        var el = new Checkbox();
+        helpers.target.appendChild(el);
+        el.label.innerHTML = 'Test';
 
         // Wait for MO
         helpers.next(function() {
-          expect(checkbox._elements.labelWrapper.hidden).to.equal(false);
+          expect(el._elements.screenReaderOnly.hidden).to.be.true;
 
-          helpers.target.removeChild(checkbox);
-          checkbox.label.innerHTML = '';
+          helpers.target.removeChild(el);
+          el.label.innerHTML = '';
 
           // Wait for MO
           helpers.next(function() {
-            helpers.target.appendChild(checkbox);
+            helpers.target.appendChild(el);
 
             // Wait for MO
             helpers.next(function() {
-              expect(checkbox._elements.labelWrapper.hidden).to.equal(true);
+              expect(el._elements.screenReaderOnly.hidden).to.be.false;
               done();
             });
           });
@@ -268,7 +270,7 @@ describe('Checkbox', function() {
 
     describe('#rendering', function() {
       it('should render chechbox with only one input, checkbox, span and label element', function() {
-        var checkbox = helpers.build(new Checkbox());
+        helpers.build(new Checkbox());
         
         expectCheckboxChildren();
       });
@@ -590,12 +592,12 @@ describe('Checkbox', function() {
 
       // Wait for MO
       helpers.next(function() {
-        expect(el._elements.labelWrapper.hidden).to.be.true;
+        expect(el._elements.screenReaderOnly.hidden).to.be.false;
         el.label = label;
   
         // Wait for MO
         helpers.next(function() {
-          expect(el._elements.labelWrapper.hidden).to.be.false;
+          expect(el._elements.screenReaderOnly.hidden).to.be.true;
 
           done();
         });

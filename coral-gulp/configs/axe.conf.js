@@ -14,5 +14,13 @@ module.exports = {
   showOnlyViolations: true,
   headless: true,
   verbose: true,
-  folderOutputReport: 'dist/a11y'
+  folderOutputReport: './dist/axe',
+  saveOutputIn: 'report.json',
+  a11yCheckOptions: {
+    rules: {
+      'landmark-unique': { enabled: false },
+      // Owned by Spectrum CSS so we don't need to check for it
+      'color-contrast': { enabled: false }
+    }
+  }
 };

@@ -42,14 +42,14 @@
   </head>
 
   <body class="coral--light">
-    <div style="position:fixed;top:15px;right:15px;">
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
-    </div>
+    <main class="u-coral-margin">
+      <div style="position:fixed;top:15px;right:15px;">
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+      </div>
 
-    <section class="u-coral-margin">
       <h1 class="coral-Heading coral-Heading--1">SideNav</h1>
 
       <h2 class="coral-Heading coral-Heading--2">Default</h2>
@@ -73,13 +73,13 @@
       <h2 class="coral-Heading coral-Heading--2">With headings</h2>
       <div class="markup">
         <nav is="coral-sidenav" style="width:240px;">
-          <coral-sidenav-heading>Heading A</coral-sidenav-heading>
+          <coral-sidenav-heading aria-level="3">Heading A</coral-sidenav-heading>
           <coral-sidenav-level>
             <a is="coral-sidenav-item" href="#">A item 1</a>
             <a is="coral-sidenav-item" href="#">A item 2</a>
             <a is="coral-sidenav-item" href="#">A item 3</a>
           </coral-sidenav-level>
-          <coral-sidenav-heading>Heading B</coral-sidenav-heading>
+          <coral-sidenav-heading aria-level="3">Heading B</coral-sidenav-heading>
           <coral-sidenav-level>
             <a is="coral-sidenav-item" href="#">B item 1</a>
             <a is="coral-sidenav-item" href="#">B item 2</a>
@@ -143,6 +143,6 @@
           <a is="coral-sidenav-item" href="#">Item 4</a>
         </nav>
       </div>
-    </section>
+    </main>
   </body>
 </html>

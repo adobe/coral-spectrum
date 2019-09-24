@@ -242,12 +242,10 @@ class StepList extends BaseComponent(HTMLElement) {
     // when interaction is on, we enable the tabindex so users can tab into the items
     if (this.interaction === interaction.ON) {
       item.setAttribute('tabindex', item.hasAttribute('selected') ? '0' : '-1');
-      item.removeAttribute('aria-readonly');
     }
     else {
       // when off, removing the tabindex allows the component to never get focus
       item.removeAttribute('tabindex');
-      item.setAttribute('aria-readonly', 'true');
     }
   }
   
@@ -295,10 +293,6 @@ class StepList extends BaseComponent(HTMLElement) {
   
     // sets the state-related classes every time the selection changes
     this._setStateClasses();
-  
-    if (this._allChildrenAdded) {
-      this._updateLabels();
-    }
   
     this._triggerChangeEvent();
   }
@@ -359,12 +353,9 @@ class StepList extends BaseComponent(HTMLElement) {
   
   /** @private */
   _onStepMouseEnter() {
-    if (this.size === size.SMALL || this._isHybridMode) {
+    if (this.size === size.SMALL) {
       const step = event.target.closest('coral-step');
-      if (step.hasAttribute('selected') && this._isHybridMode) {
-        return;
-      }
-    
+      
       // we only show the tooltip if we have a label to show
       if (step._elements.label.innerHTML.trim() !== '') {
         step._elements.tooltip.content.innerHTML = step._elements.label.innerHTML;
@@ -375,7 +366,7 @@ class StepList extends BaseComponent(HTMLElement) {
   
   /** @private */
   _onStepMouseLeave(event) {
-    if (this.size === size.SMALL || this._isHybridMode) {
+    if (this.size === size.SMALL) {
       const step = event.target.closest('coral-step');
       step._elements.tooltip.open = false;
     }
@@ -425,68 +416,6 @@ class StepList extends BaseComponent(HTMLElement) {
       item.setAttribute('selected', '');
       item.focus();
     }
-  }
-  
-  /** @private */
-  _setHybridLabel(item) {
-    if (!item) {
-      return;
-    }
-    
-    if (this._isHybridMode) {
-      const items = this.items.getAll();
-      const itemIndex = items.indexOf(item);
-      const middle = items.length / 2;
-      const stepSize = 120;
-  
-      // Position item label
-      const marginLeft = (middle - itemIndex) * stepSize - stepSize / 2;
-      item.label.style.marginLeft = `${marginLeft}px`;
-  
-      // Indicate item index
-      item.label.dataset.coralStepIndex = ` (${(itemIndex + 1)}/${items.length})`;
-    }
-    else {
-      // Restore defaults
-      item.label.style.marginLeft = '';
-    }
-  }
-  
-  /** @private */
-  _updateLabels() {
-    let hasOversizedLabel = false;
-    const hybridClass = `${CLASSNAME}--hybrid`;
-    
-    this._isHybridMode = false;
-    this.classList.remove(hybridClass);
-  
-    // when the steplist is small no check is needed
-    if (this.size === size.SMALL) {
-      return;
-    }
-  
-    // Check if one label is oversized
-    const steps = this.items.getAll();
-    const stepsCount = steps.length;
-    let actualStep;
-    
-    for (actualStep = 0; actualStep < stepsCount; actualStep++) {
-      if (steps[actualStep]._labelIsHidden) {
-        hasOversizedLabel = true;
-        this._isHybridMode = true;
-        this.classList.add(hybridClass);
-        
-        break;
-      }
-    }
-  
-    for (actualStep = 0; actualStep < stepsCount; actualStep++) {
-      if (steps[actualStep].label) {
-        steps[actualStep].label.hidden = !(steps[actualStep].hasAttribute('selected') || !hasOversizedLabel);
-      }
-    }
-    
-    this._setHybridLabel(this.selectedItem);
   }
   
   /**
@@ -552,12 +481,6 @@ class StepList extends BaseComponent(HTMLElement) {
     this._preventTriggeringEvents = false;
   
     this._oldSelection = this.selectedItem;
-    
-    window.customElements.whenDefined('coral-step').then(() => {
-      this._allChildrenAdded = true;
-      // Force label update
-      this._updateLabels();
-    });
   }
   
   /**

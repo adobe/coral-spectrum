@@ -42,21 +42,21 @@
 
 </head>
 <body class="coral--light">
-  <div style="position:fixed;top:15px;right:15px;">
-    <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
-    <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
-    <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
-    <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
-  </div>
+  <main class="u-coral-margin">
+    <div style="position:fixed;top:15px;right:15px;">
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+      <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+    </div>
 
-  <section class="u-coral-margin">
     <h1 class="coral-Heading coral-Heading--1">Accordion</h1>
 
     <h2 class="coral-Heading coral-Heading--2">Default</h2>
     <div class="markup">
       <coral-accordion>
         <coral-accordion-item selected>
-          <coral-accordion-item-label>First</coral-accordion-item-label>
+          <coral-accordion-item-label>First with <a class="coral-Link" coral-interactive>link</a></coral-accordion-item-label>
           This is the first bit o'content
         </coral-accordion-item>
         <coral-accordion-item>
@@ -135,90 +135,31 @@
       <coral-accordion>
         <coral-accordion-item selected>
           <coral-accordion-item-label>First</coral-accordion-item-label>
-          This is the first bit o'content
+          <coral-accordion-item-content>This is the first bit o'content</coral-accordion-item-content>
         </coral-accordion-item>
         <coral-accordion-item selected>
           <coral-accordion-item-label>Second</coral-accordion-item-label>
-          This is the second bit o'content
+          <coral-accordion-item-content>This is the second bit o'content</coral-accordion-item-content>
         </coral-accordion-item>
         <coral-accordion-item selected>
           <coral-accordion-item-label>Third</coral-accordion-item-label>
-          A NESTED ACCORDION!
-          <coral-accordion>
-            <coral-accordion-item>
-              <coral-accordion-item-label>First</coral-accordion-item-label>
-              <span tabindex="0">This is the first bit o'content</span>
-            </coral-accordion-item>
-            <coral-accordion-item selected>
-              <coral-accordion-item-label>Second</coral-accordion-item-label>
-              <span tabindex="0">This is the second bit o'content</span>
-            </coral-accordion-item>
-            <coral-accordion-item>
-              <coral-accordion-item-label>Third</coral-accordion-item-label>
-              <span tabindex="0">This is the third bit o'content</span>
-            </coral-accordion-item>
-          </coral-accordion>
+          <coral-accordion-item-content>
+            <coral-accordion>
+              <coral-accordion-item>
+                <coral-accordion-item-label>First</coral-accordion-item-label>
+                <span tabindex="0">This is the first bit o'content</span>
+              </coral-accordion-item>
+              <coral-accordion-item selected>
+                <coral-accordion-item-label>Second</coral-accordion-item-label>
+                <span tabindex="0">This is the second bit o'content</span>
+              </coral-accordion-item>
+              <coral-accordion-item>
+                <coral-accordion-item-label>Third</coral-accordion-item-label>
+                <span tabindex="0">This is the third bit o'content</span>
+              </coral-accordion-item>
+            </coral-accordion>
+          </coral-accordion-item-content>
         </coral-accordion-item>
-      </coral-accordion>
-    </div>
-
-    <h2 class="coral-Heading coral-Heading--2">Interactive</h2>
-    <div class="markup">
-      <coral-accordion variant="large">
-        <coral-accordion-item selected>
-          <coral-accordion-item-label>
-            <input type="checkbox" coral-interactive>
-            <span>First</span>
-          </coral-accordion-item-label>
-          This is the first bit o'content.
-          And an icon for testing css<coral-icon icon="add"></coral-icon>
-        </coral-accordion-item>
-        <coral-accordion-item>
-          <coral-accordion-item-label>
-            <span>Second</span>
-            <button coral-interactive>Click Me</button>
-          </coral-accordion-item-label>
-          This is the second bit o'content.
-          And an icon for testing css<coral-icon icon="add"></coral-icon>
-        </coral-accordion-item>
-        <coral-accordion-item>
-          <coral-accordion-item-label>
-            <span>Third</span>
-            <select coral-interactive>
-              <option>Option 1</option>
-              <option>Option 2</option>
-              <option>Option 3</option>
-            </select>
-          </coral-accordion-item-label>
-          This is the third bit o'content.
-          And an icon for testing css<coral-icon icon="add"></coral-icon>
-        </coral-accordion-item>
-        <coral-accordion-item>
-          <coral-accordion-item-label>
-            <a href="#" coral-interactive>link</a>
-          </coral-accordion-item-label>
-          This is the forth bit o'content
-        </coral-accordion-item>
-        <coral-accordion-item>
-          <coral-accordion-item-label>
-            <textarea coral-interactive>title content</textarea>
-          </coral-accordion-item-label>
-          This is the fifth bit o'content
-        </coral-accordion-item>
-        <coral-accordion-item>
-          <coral-accordion-item-label>
-            <button coral-interactive>Click Me</button>
-          </coral-accordion-item-label>
-          This is the seventh bit o'content
-        </coral-accordion-item>
-        <coral-accordion-item>
-          <coral-accordion-item-label>
-            <div coral-interactive>
-              <button>Click Me</button>
-              <button>Or Me</button>
-            </div>
-          </coral-accordion-item-label>
-          This is the eighth bit o'content</coral-accordion-item>
       </coral-accordion>
     </div>
 
@@ -259,7 +200,6 @@
         });
       </script>
     </div>
-  </section>
-
+  </main>
 </body>
 </html>

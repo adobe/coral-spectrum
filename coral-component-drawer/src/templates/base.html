@@ -1,6 +1,10 @@
+<js>
+  var buttonId = data.commons.getUID();
+  var contentId = data.commons.getUID();
+</js>
 <div handle="slider" class="_coral-Drawer-slider">
-  <div handle="contentWrapper" class="_coral-Drawer-content"></div>
+  <div handle="contentWrapper" class="_coral-Drawer-content" id="{{contentId}}" aria-labelledby="{{buttonId}}" role="region"></div>
 </div>
 <div class="_coral-Drawer-toggle" handle="toggle">
-  <button class="_coral-Drawer-toggleButton" type="button" handle="toggleButton" is="coral-button" variant="quiet"></button>
+  <button id="{{buttonId}}" aria-controls="{{contentId}}" aria-label="toggle" class="_coral-Drawer-toggleButton" type="button" handle="toggleButton" is="coral-button" variant="quiet"></button>
 </div>

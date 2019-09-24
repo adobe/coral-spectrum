@@ -42,69 +42,95 @@
   </head>
 
   <body class="coral--light">
+    <main class="u-coral-margin">
+      <div style="position:fixed;top:15px;right:15px;">
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+      </div>
 
-    <div style="position:fixed;top:15px;right:15px;">
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
-      <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
-    </div>
-
-    <section class="u-coral-margin">
       <h1 class="coral-Heading coral-Heading--1">NumberInput</h1>
 
       <h2 class="coral-Heading coral-Heading--2">Default</h2>
       <div class="markup">
-        <coral-numberinput></coral-numberinput>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label1" class="coral-Form-fieldlabel">Label</label>
+          <coral-numberinput labelledby="label1"></coral-numberinput>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">Preset step</h2>
       <div class="markup">
-        <coral-numberinput step="3" value="0"></coral-numberinput>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label2" class="coral-Form-fieldlabel">Label</label>
+          <coral-numberinput labelledby="label2" step="3" value="0"></coral-numberinput>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">Decimal support</h2>
       <div class="markup">
-        <coral-numberinput step="0.5"></coral-numberinput>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label3" class="coral-Form-fieldlabel">Label</label>
+          <coral-numberinput labelledby="label3" step="0.5"></coral-numberinput>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">Scientific notation support</h2>
       <div class="markup">
-        <coral-numberinput step="0.0000001"></coral-numberinput>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label4" class="coral-Form-fieldlabel">Label</label>
+          <coral-numberinput labelledby="label4" step="0.0000001"></coral-numberinput>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">With max/min range</h2>
       <div class="markup">
-        <coral-numberinput value="1" max="5" min="0"></coral-numberinput>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label5" class="coral-Form-fieldlabel">Label</label>
+          <coral-numberinput labelledby="label5" value="1" max="5" min="0"></coral-numberinput>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">Invalid</h2>
       <div class="markup">
-        <coral-numberinput invalid value="-1" min="0" max="5"></coral-numberinput>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label6" class="coral-Form-fieldlabel">Label</label>
+          <coral-numberinput labelledby="label6" invalid value="-1" min="0" max="5"></coral-numberinput>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">Disabled</h2>
       <div class="markup">
-        <coral-numberinput disabled value="0"></coral-numberinput>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label7" class="coral-Form-fieldlabel">Label</label>
+          <coral-numberinput labelledby="label7" disabled value="0"></coral-numberinput>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">ReadOnly</h2>
       <div class="markup">
-        <coral-numberinput readonly value="0"></coral-numberinput>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label8" class="coral-Form-fieldlabel">Label</label>
+          <coral-numberinput labelledby="label8" readonly value="0"></coral-numberinput>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">Required</h2>
       <div class="markup">
-        <coral-numberinput required></coral-numberinput>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label9" class="coral-Form-fieldlabel">Label</label>
+          <coral-numberinput labelledby="label9" required></coral-numberinput>
+        </form>
       </div>
 
       <h2 class="coral-Heading coral-Heading--2">Form Field</h2>
       <div class="markup">
         <form class="coral-Form coral-Form--vertical" style="max-width:300px;">
-          <label id="label" class="coral-FieldLabel">Label</label>
-          <coral-numberinput class="coral-Form-field" labelledby="label"></coral-numberinput>
+          <label id="label10" class="coral-FieldLabel">Label</label>
+          <coral-numberinput class="coral-Form-field" labelledby="label10"></coral-numberinput>
         </form>
       </div>
-    </section>
+    </main>
   </body>
 </html>

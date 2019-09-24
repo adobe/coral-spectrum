@@ -1,124 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Coral.Button</title>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coral.Button</title>
 
-  <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
+    <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-  <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const markup = document.body.querySelectorAll('.markup');
-      for (var i = 0; i < markup.length; i++) {
-        const code = markup[i].innerHTML;
-        const id = 'markup-code-' + i;
-        markup[i].insertAdjacentHTML('afterend',
-          '<div style="margin:10px 0">' +
-          '<a onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
-          '<pre hidden>' +
-          '<code id="'+ id +'" class="html">' +
-          '</code>' +
-          '</pre>' +
-          '</div>');
-        document.getElementById(id).textContent = code;
-      }
-      window.hljs.initHighlightingOnLoad();
-    });
-  </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
 
-  <link rel="stylesheet" href="../dist/css/coral.css">
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const script = document.createElement('script');
-      script.src = '../dist/js/coral.js';
-      document.head.appendChild(script);
-    });
-  </script>
-</head>
-<body class="coral--light">
-  <div style="position:fixed;top:15px;right:15px;">
-    <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
-    <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
-    <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
-    <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
-  </div>
+    <link rel="stylesheet" href="../dist/css/coral.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../dist/js/coral.js';
+        document.head.appendChild(script);
+      });
+    </script>
+  </head>
+  <body class="coral--light">
+    <main class="u-coral-margin">
+      <div style="position:fixed;top:15px;right:15px;">
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+      </div>
 
-  <section class="u-coral-margin">
-    <h1 class="coral-Heading coral-Heading--1">Button</h1>
+      <h1 class="coral-Heading coral-Heading--1">Button</h1>
 
-    <h2 class="coral-Heading coral-Heading--2">Default</h2>
-    <div class="markup">
-      <button is="coral-button">Default</button>
-    </div>
+      <h2 class="coral-Heading coral-Heading--2">Default</h2>
+      <div class="markup">
+        <button is="coral-button">Default</button>
+      </div>
 
-    <h2 class="coral-Heading coral-Heading--2">CTA</h2>
-    <div class="markup">
-      <button is="coral-button" variant="cta" style="max-width:168px">Informationen über Creative Cloud</button>
-    </div>
+      <h2 class="coral-Heading coral-Heading--2">CTA</h2>
+      <div class="markup">
+        <button is="coral-button" variant="cta" style="max-width:168px">Informationen über Creative Cloud</button>
+      </div>
 
-    <h2 class="coral-Heading coral-Heading--2">Secondary</h2>
-    <div class="markup">
-      <button is="coral-button" variant="secondary">Secondary</button>
-    </div>
+      <h2 class="coral-Heading coral-Heading--2">Secondary</h2>
+      <div class="markup">
+        <button is="coral-button" variant="secondary">Secondary</button>
+      </div>
 
-    <h2 class="coral-Heading coral-Heading--2">Warning</h2>
-    <div class="markup">
-      <button is="coral-button" variant="warning">Warning</button>
-    </div>
+      <h2 class="coral-Heading coral-Heading--2">Warning</h2>
+      <div class="markup">
+        <button is="coral-button" variant="warning">Warning</button>
+      </div>
 
-    <h2 class="coral-Heading coral-Heading--2">Quiet button</h2>
-    <div class="markup">
-      <button is="coral-button" variant="quiet">Quiet</button>
-    </div>
+      <h2 class="coral-Heading coral-Heading--2">Quiet button</h2>
+      <div class="markup">
+        <button is="coral-button" variant="quiet">Quiet</button>
+      </div>
 
-    <h2 class="coral-Heading coral-Heading--2">Action button</h2>
-    <div class="markup">
-      <button is="coral-button" variant="action">Action</button>
-      <button is="coral-button" variant="action" icon="edit">Action with icon</button>
-      <button is="coral-button" variant="action" selected>Selected Action</button>
-    </div>
+      <h2 class="coral-Heading coral-Heading--2">Action button</h2>
+      <div class="markup">
+        <button is="coral-button" variant="action">Action</button>
+        <button is="coral-button" variant="action" icon="edit">Action with icon</button>
+        <button is="coral-button" variant="action" selected>Selected Action</button>
+      </div>
 
-    <h2 class="coral-Heading coral-Heading--2">Quiet Action button</h2>
-    <div class="markup">
-      <button is="coral-button" variant="quietaction">Quiet Action</button>
-      <button is="coral-button" variant="quietaction" icon="edit">Quiet Action with icon</button>
-      <button is="coral-button" variant="quietaction" selected>Selected Quiet Action</button>
-    </div>
+      <h2 class="coral-Heading coral-Heading--2">Quiet Action button</h2>
+      <div class="markup">
+        <button is="coral-button" variant="quietaction">Quiet Action</button>
+        <button is="coral-button" variant="quietaction" icon="edit">Quiet Action with icon</button>
+        <button is="coral-button" variant="quietaction" selected>Selected Quiet Action</button>
+      </div>
 
-    <h2 class="coral-Heading coral-Heading--2">Minimal button</h2>
-    <div class="markup">
-      <button is="coral-button" variant="minimal">Minimal</button>
-    </div>
+      <h2 class="coral-Heading coral-Heading--2">Minimal button</h2>
+      <div class="markup">
+        <button is="coral-button" variant="minimal">Minimal</button>
+      </div>
 
-    <h2 class="coral-Heading coral-Heading--2">Disabled button</h2>
-    <div class="markup">
-      <button is="coral-button" disabled>Disabled</button>
-    </div>
+      <h2 class="coral-Heading coral-Heading--2">Disabled button</h2>
+      <div class="markup">
+        <button is="coral-button" disabled>Disabled</button>
+      </div>
 
-    <h2 class="coral-Heading coral-Heading--2">Icon button</h2>
-    <div class="markup">
-      <button is="coral-button" icon="home"> </button>
-      <button is="coral-button" icon="home" iconposition="left">With Icon</button>
-      <button is="coral-button" icon="home" iconposition="right">With Icon</button>
-    </div>
+      <h2 class="coral-Heading coral-Heading--2">Icon button</h2>
+      <div class="markup">
+        <button is="coral-button" icon="home"> </button>
+        <button is="coral-button" icon="home" iconposition="left">With Icon</button>
+        <button is="coral-button" icon="home" iconposition="right">With Icon</button>
+      </div>
 
-    <h2 class="coral-Heading coral-Heading--2">Image button</h2>
-    <div class="markup">
-      <button is="coral-button" icon="http://via.placeholder.com/64x64"> </button>
-      <button is="coral-button" icon="http://via.placeholder.com/64x64" iconposition="left">With Image</button>
-      <button is="coral-button" icon="http://via.placeholder.com/64x64" iconposition="right">With Image</button>
-    </div>
+      <h2 class="coral-Heading coral-Heading--2">Image button</h2>
+      <div class="markup">
+        <button is="coral-button" aria-label="placeholder" icon="http://via.placeholder.com/64x64"> </button>
+        <button is="coral-button" icon="http://via.placeholder.com/64x64" iconposition="left">With Image</button>
+        <button is="coral-button" icon="http://via.placeholder.com/64x64" iconposition="right">With Image</button>
+      </div>
 
-    <h2 class="coral-Heading coral-Heading--2">Block</h2>
-    <div class="markup">
+      <h2 class="coral-Heading coral-Heading--2">Block</h2>
+      <div class="markup">
 
-      <button is="coral-button" block style="max-width:400px">Block Button</button>
-    </div>
-  </section>
-</body>
+        <button is="coral-button" block style="max-width:400px">Block Button</button>
+      </div>
+    </main>
+  </body>
 </html>
