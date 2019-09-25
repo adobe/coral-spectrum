@@ -15,10 +15,17 @@ import '../coral-theme-spectrum';
 import '../coral-externals';
 import '../coral-compat';
 
+import translations from './i18n/translations';
+import {strings, commons} from '../coral-utils';
 import Checkbox from './src/scripts/Checkbox';
 import CheckboxLabel from './src/scripts/CheckboxLabel';
 
 import './src/styles/index.css';
+
+// i18n
+commons.extend(strings, {
+  'coral-component-checkbox': translations
+});
 
 // Expose component on the Coral namespace
 window.customElements.define('coral-checkbox', Checkbox);

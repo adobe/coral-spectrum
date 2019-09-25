@@ -15,10 +15,17 @@ import '../coral-theme-spectrum';
 import '../coral-externals';
 import '../coral-compat';
 
+import translations from './i18n/translations';
+import {strings, commons} from '../coral-utils';
 import Drawer from './src/scripts/Drawer';
 import DrawerContent from './src/scripts/DrawerContent';
 
 import './src/styles/index.css';
+
+// i18n
+commons.extend(strings, {
+  'coral-component-drawer': translations
+});
 
 // Expose component on the Coral namespace
 window.customElements.define('coral-drawer', Drawer);

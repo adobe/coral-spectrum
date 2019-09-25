@@ -13,7 +13,7 @@
 import {BaseComponent} from '../../../coral-base-component';
 import {BaseFormField} from '../../../coral-base-formfield';
 import base from '../templates/base';
-import {transform, commons} from '../../../coral-utils';
+import {transform, commons, i18n} from '../../../coral-utils';
 
 const CLASSNAME = '_coral-Radio';
 
@@ -40,7 +40,7 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
       // Try to find the label content zone
       label: this.querySelector('coral-radio-label') || document.createElement('coral-radio-label')
     };
-    base.call(this._elements, {commons});
+    base.call(this._elements, {commons, i18n});
   
     // Pre-define labellable element
     this._labellableElement = this._elements.input;

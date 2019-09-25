@@ -70,6 +70,7 @@ describe('Radio', function() {
         var el = new Radio();
         
         expect(el._elements.screenReaderOnly.hidden).to.be.false;
+        expect(el._elements.labelWrapper.textContent.trim()).to.equal('Select');
         expect(el.label.textContent.trim()).to.equal('');
       });
       

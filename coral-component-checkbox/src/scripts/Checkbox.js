@@ -14,7 +14,7 @@ import {BaseComponent} from '../../../coral-base-component';
 import {BaseFormField} from '../../../coral-base-formfield';
 import {Icon} from '../../../coral-component-icon';
 import base from '../templates/base';
-import {transform, commons} from '../../../coral-utils';
+import {transform, commons, i18n} from '../../../coral-utils';
 
 const IS_IE_OR_EDGE = navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0 ||
   window.navigator.userAgent.indexOf('Edge') !== -1;
@@ -45,7 +45,7 @@ class Checkbox extends BaseFormField(BaseComponent(HTMLElement)) {
       // Try to find the label content zone or create one
       label: this.querySelector('coral-checkbox-label') || document.createElement('coral-checkbox-label')
     };
-    base.call(this._elements, {commons, Icon});
+    base.call(this._elements, {commons, i18n, Icon});
   
     // Pre-define labellable element
     this._labellableElement = this._elements.input;

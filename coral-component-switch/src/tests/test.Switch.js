@@ -90,7 +90,7 @@ describe('Switch', function() {
         var el = new Switch();
       
         expect(el.label.textContent.trim()).to.equal('');
-        expect(el._elements.labelWrapper.textContent.trim()).to.equal('select');
+        expect(el._elements.labelWrapper.textContent.trim()).to.equal('Select');
         expect(el._elements.screenReaderOnly.hidden).to.be.false;
       });
     

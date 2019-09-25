@@ -15,6 +15,8 @@ import '../coral-theme-spectrum';
 import '../coral-externals';
 import '../coral-compat';
 
+import translations from './i18n/translations';
+import {strings, commons} from '../coral-utils';
 import List from './src/scripts/List';
 import ListDivider from './src/scripts/ListDivider';
 import ListItem from './src/scripts/ListItem';
@@ -29,6 +31,11 @@ import SelectListItem from './src/scripts/SelectListItem';
 import SelectListItemContent from './src/scripts/SelectListItemContent';
 
 import './src/styles/index.css';
+
+// i18n
+commons.extend(strings, {
+  'coral-component-selectlist': translations
+});
 
 // Expose component on the Coral namespace
 window.customElements.define('coral-list', List);

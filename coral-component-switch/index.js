@@ -15,10 +15,17 @@ import '../coral-theme-spectrum';
 import '../coral-externals';
 import '../coral-compat';
 
+import translations from './i18n/translations';
+import {strings, commons} from '../coral-utils';
 import Switch from './src/scripts/Switch';
 import SwitchLabel from './src/scripts/SwitchLabel';
 
 import './src/styles/index.css';
+
+// i18n
+commons.extend(strings, {
+  'coral-component-switch': translations
+});
 
 // Expose component on the Coral namespace
 window.customElements.define('coral-switch', Switch);
