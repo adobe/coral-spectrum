@@ -403,6 +403,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">146x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">146x</span>
@@ -438,12 +439,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">281x</span>
+<span class="cline-any cline-yes">280x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">281x</span>
+<span class="cline-any cline-yes">280x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">281x</span>
-<span class="cline-any cline-yes">281x</span>
+<span class="cline-any cline-yes">280x</span>
+<span class="cline-any cline-yes">280x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -639,8 +640,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-yes">2x</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -655,7 +655,7 @@
 import {BaseComponent} from '../../../coral-base-component';
 import {BaseFormField} from '../../../coral-base-formfield';
 import base from '../templates/base';
-import {transform, commons} from '../../../coral-utils';
+import {transform, commons, i18n} from '../../../coral-utils';
 &nbsp;
 const CLASSNAME = '_coral-ToggleSwitch';
 &nbsp;
@@ -683,7 +683,7 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
       // Try to find the label content zone
       label: this.querySelector('coral-switch-label') || document.createElement('coral-switch-label')
     };
-    base.call(this._elements, {commons});
+    base.call(this._elements, {commons, i18n});
   
     // Pre-define labellable element
     this._labellableElement = this._elements.input;
@@ -744,14 +744,14 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
    Name used to submit the data in a form.
    @type {String}
    @default ""
-   @htmlattribute na<span class="fstat-no" title="function not covered" >me</span>
-   @ht<span class="cstat-no" title="statement not covered" >mlattributereflected</span>
-   */
+   @htmlattribute name
+   @htmlattributeref<span class="fstat-no" title="function not covered" >lected</span>
+   */<span class="cstat-no" title="statement not covered" ></span>
   get name() {
     return this._elements.input.name;
-  }<span class="fstat-no" title="function not covered" ></span>
-  set <span class="cstat-no" title="statement not covered" >name(value) {</span>
-    this._reflectAttribute('name', value);
+  }
+  set name(value) {<span class="fstat-no" title="function not covered" ></span>
+    th<span class="cstat-no" title="statement not covered" >is._reflectAttribute('name', value);</span>
     
     this._elements.input.name = value;
   }
@@ -878,8 +878,8 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
     this.checked = this._initialCheckedState;
   }
   
-  /** @ignore */<span class="branch-1 cbranch-no" title="branch not covered" ></span>
-  static get observedAttributes() {
+  /** @ignore */
+  static get observedAttributes() {<span class="branch-1 cbranch-no" title="branch not covered" ></span>
     return super.observedAttributes.concat(['checked']);
   }
   
@@ -918,13 +918,13 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
       else {
         // Remove anything else
         this.removeChild(child);
-      }<span class="fstat-no" title="function not covered" ></span>
-    }<span class="cstat-no" title="statement not covered" ></span>
-  
-    //<span class="cstat-no" title="statement not covered" > Append the fragment to the component</span>
-    this.appendChild(frag);
+      }
+    }<span class="fstat-no" title="function not covered" ></span>
   <span class="cstat-no" title="statement not covered" ></span>
-    // Assign the content zones, moving them into place in the process
+    // Append the fragment to the component
+    th<span class="cstat-no" title="statement not covered" >is.appendChild(frag);</span>
+  
+    //<span class="cstat-no" title="statement not covered" > Assign the content zones, moving them into plac</span>e in the process
     this.label = label;
   
     // Cache the initial checked state of the switch (in order to implement reset)
@@ -943,7 +943,7 @@ export default Switch;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Sep 24 2019 17:43:20 GMT+0200 (Central European Summer Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Sep 25 2019 15:27:32 GMT+0200 (Central European Summer Time)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

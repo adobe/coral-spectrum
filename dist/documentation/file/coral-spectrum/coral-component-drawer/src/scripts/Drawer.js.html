@@ -424,7 +424,7 @@
 import {BaseComponent} from &apos;../../../coral-base-component&apos;;
 import &apos;../../../coral-component-button&apos;;
 import base from &apos;../templates/base&apos;;
-import {commons, transform, validate} from &apos;../../../coral-utils&apos;;
+import {commons, transform, validate, i18n} from &apos;../../../coral-utils&apos;;
 
 /**
  Enumeration for {@link Drawer} directions.
@@ -466,7 +466,7 @@ class Drawer extends BaseComponent(HTMLElement) {
     this._elements = {
       content: this.querySelector(&apos;coral-drawer-content&apos;) || document.createElement(&apos;coral-drawer-content&apos;)
     };
-    base.call(this._elements, {commons});
+    base.call(this._elements, {commons, i18n});
     
     // Events
     this._delegateEvents({

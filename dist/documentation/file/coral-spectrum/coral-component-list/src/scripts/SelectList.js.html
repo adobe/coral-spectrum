@@ -425,7 +425,7 @@ import {BaseComponent} from &apos;../../../coral-base-component&apos;;
 import {SelectableCollection} from &apos;../../../coral-collection&apos;;
 import &apos;../../../coral-component-wait&apos;;
 import loadIndicator from &apos;../templates/loadIndicator&apos;;
-import {transform} from &apos;../../../coral-utils&apos;;
+import {transform, i18n} from &apos;../../../coral-utils&apos;;
 
 const KEYPRESS_TIMEOUT_DURATION = 1000;
 
@@ -939,7 +939,7 @@ class SelectList extends BaseComponent(HTMLElement) {
     // adds the role to support accessibility
     this.setAttribute(&apos;role&apos;, &apos;listbox&apos;);
     if (!this.hasAttribute(&apos;aria-label&apos;)) {
-      this.setAttribute(&apos;aria-label&apos;, &apos;list&apos;);
+      this.setAttribute(&apos;aria-label&apos;, i18n.get(&apos;List&apos;));
     }
     
     // Don&apos;t trigger events once connected

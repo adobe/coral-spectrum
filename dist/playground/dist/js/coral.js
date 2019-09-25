@@ -24182,6 +24182,77 @@
     return ActionBarSecondary;
   }(BaseActionBarContainer(BaseComponent(HTMLElement)));
 
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+  var translations$3 = {
+    "en-US": {
+      "List": "List"
+    },
+    "fr-FR": {
+      "List": "Liste"
+    },
+    "de-DE": {
+      "List": "Liste"
+    },
+    "it-IT": {
+      "List": "Elenco"
+    },
+    "es-ES": {
+      "List": "Mostrar"
+    },
+    "pt-BR": {
+      "List": "Lista"
+    },
+    "ja-JP": {
+      "List": "リスト"
+    },
+    "ko-KR": {
+      "List": "목록"
+    },
+    "zh-CN": {
+      "List": "列表"
+    },
+    "zh-TW": {
+      "List": "清單"
+    },
+    "nl-NL": {
+      "List": "Lijst"
+    },
+    "da-DK": {
+      "List": "Liste"
+    },
+    "fi-FI": {
+      "List": "Lista"
+    },
+    "nb-NO": {
+      "List": "Liste"
+    },
+    "sv-SE": {
+      "List": "Lista"
+    },
+    "cs-CZ": {
+      "List": "Seznam"
+    },
+    "pl-PL": {
+      "List": "Lista"
+    },
+    "ru-RU": {
+      "List": "список"
+    },
+    "tr-TR": {
+      "List": "Liste"
+    }
+  };
+
   var CLASSNAME$g = '_coral-Menu';
   /**
    Enumeration for {@link BaseList} interactions.
@@ -25875,7 +25946,7 @@
         this.setAttribute('role', 'listbox');
 
         if (!this.hasAttribute('aria-label')) {
-          this.setAttribute('aria-label', 'list');
+          this.setAttribute('aria-label', i18n.get('List'));
         } // Don't trigger events once connected
 
 
@@ -26427,6 +26498,10 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
+
+  commons.extend(strings, {
+    'coral-component-selectlist': translations$3
+  }); // Expose component on the Coral namespace
 
   window.customElements.define('coral-list', List);
   window.customElements.define('coral-list-divider', ListDivider);
@@ -27083,7 +27158,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$3 = {
+  var translations$4 = {
     "en-US": {
       "No matching results&period;": "No matching results.",
       "Show suggestion": "Show suggestion",
@@ -27599,7 +27674,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$4 = {
+  var translations$5 = {
     "en-US": {
       "Remove": "Remove"
     },
@@ -28913,7 +28988,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-taglist': translations$4
+    'coral-component-taglist': translations$5
   }); // Expose component on the Coral namespace
 
   window.customElements.define('coral-tag', Tag);
@@ -31400,7 +31475,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-autocomplete': translations$3
+    'coral-component-autocomplete': translations$4
   }); // Expose component on the Coral namespace
 
   window.customElements.define('coral-autocomplete-item', AutocompleteItem);
@@ -32674,7 +32749,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$5 = {
+  var translations$6 = {
     "en-US": {
       "Previous": "Previous",
       "Next": "Next",
@@ -34261,7 +34336,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-calendar': translations$5
+    'coral-component-calendar': translations$6
   }); // Expose component on the Coral namespace
 
   window.customElements.define('coral-calendar', Calendar);
@@ -35438,6 +35513,77 @@
 
   window.customElements.define('coral-charactercount', CharacterCount);
 
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+  var translations$7 = {
+    "en-US": {
+      "Select": "Select"
+    },
+    "fr-FR": {
+      "Select": "Sélectionner"
+    },
+    "de-DE": {
+      "Select": "Auswählen"
+    },
+    "it-IT": {
+      "Select": "Seleziona"
+    },
+    "es-ES": {
+      "Select": "Seleccionar"
+    },
+    "pt-BR": {
+      "Select": "Selecionar"
+    },
+    "ja-JP": {
+      "Select": "選択"
+    },
+    "ko-KR": {
+      "Select": "선택"
+    },
+    "zh-CN": {
+      "Select": "选择"
+    },
+    "zh-TW": {
+      "Select": "選取"
+    },
+    "nl-NL": {
+      "Select": "Selecteren"
+    },
+    "da-DK": {
+      "Select": "Vælg"
+    },
+    "fi-FI": {
+      "Select": "Valitse"
+    },
+    "nb-NO": {
+      "Select": "Velg"
+    },
+    "sv-SE": {
+      "Select": "Välj"
+    },
+    "cs-CZ": {
+      "Select": "Vybrat"
+    },
+    "pl-PL": {
+      "Select": "Wybierz"
+    },
+    "ru-RU": {
+      "Select": "Выберите"
+    },
+    "tr-TR": {
+      "Select": "Seç"
+    }
+  };
+
   var template$j = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
@@ -35472,7 +35618,7 @@
     var el9 = this["screenReaderOnly"] = document.createElement("span");
     el9.className += " u-coral-screenReaderOnly";
     el9.setAttribute("handle", "screenReaderOnly");
-    el9.textContent = "select";
+    el9.textContent = data_0["i18n"]["get"]('Select');
     el7.appendChild(el9);
     var el10 = document.createTextNode("\n");
     el7.appendChild(el10);
@@ -35518,6 +35664,7 @@
       };
       template$j.call(_this._elements, {
         commons: commons,
+        i18n: i18n,
         Icon: Icon
       }); // Pre-define labellable element
 
@@ -35932,6 +36079,10 @@
    * governing permissions and limitations under the License.
    */
 
+  commons.extend(strings, {
+    'coral-component-checkbox': translations$7
+  }); // Expose component on the Coral namespace
+
   window.customElements.define('coral-checkbox', Checkbox);
   Checkbox.Label = CheckboxLabel;
 
@@ -35946,7 +36097,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$6 = {
+  var translations$8 = {
     "en-US": {
       "am": "am",
       "pm": "pm",
@@ -36093,7 +36244,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$7 = {
+  var translations$9 = {
     "en-US": {
       "Select": "Select"
     },
@@ -37903,7 +38054,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-select': translations$7
+    'coral-component-select': translations$9
   }); // Expose component on the Coral namespace
 
   window.customElements.define('coral-select', Select);
@@ -38601,7 +38752,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-clock': translations$6
+    'coral-component-clock': translations$8
   }); // Expose component on the Coral namespace
 
   window.customElements.define('coral-clock', Clock);
@@ -44870,7 +45021,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$8 = {
+  var translations$a = {
     "en-US": {
       "Swatches": "Swatches",
       "R": "R",
@@ -45133,7 +45284,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-colorinput': translations$8
+    'coral-component-colorinput': translations$a
   }); // Expose component on the Coral namespace
 
   window.customElements.define('coral-colorinput', ColorInput);
@@ -48668,7 +48819,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$9 = {
+  var translations$b = {
     "en-US": {
       "Time": "Time",
       "Calendar": "Calendar"
@@ -49734,10 +49885,81 @@
    */
 
   commons.extend(strings, {
-    'coral-component-datepicker': translations$9
+    'coral-component-datepicker': translations$b
   }); // Expose component on the Coral namespace
 
   window.customElements.define('coral-datepicker', Datepicker);
+
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+  var translations$c = {
+    "en-US": {
+      "More": "More"
+    },
+    "de-DE": {
+      "More": "Mehr"
+    },
+    "fr-FR": {
+      "More": "Plus"
+    },
+    "it-IT": {
+      "More": "Altro"
+    },
+    "ja-JP": {
+      "More": "その他"
+    },
+    "es-ES": {
+      "More": "Más"
+    },
+    "ko-KR": {
+      "More": "자세히"
+    },
+    "zh-CN": {
+      "More": "更多"
+    },
+    "zh-TW": {
+      "More": "更多"
+    },
+    "pt-BR": {
+      "More": "Mais"
+    },
+    "nl-NL": {
+      "More": "Meer"
+    },
+    "da-DK": {
+      "More": "Mere"
+    },
+    "fi-FI": {
+      "More": "Lisää"
+    },
+    "nb-NO": {
+      "More": "Mer"
+    },
+    "sv-SE": {
+      "More": "Mer"
+    },
+    "cs-CZ": {
+      "More": "Více"
+    },
+    "pl-PL": {
+      "More": "Więcej"
+    },
+    "ru-RU": {
+      "More": "Дополнительно"
+    },
+    "tr-TR": {
+      "More": "Daha Fazla"
+    }
+  };
 
   var template$y = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
@@ -49773,7 +49995,7 @@
     var el9 = this["toggleButton"] = document.createElement("button", "coral-button");
     el9.id = buttonId;
     el9.setAttribute("aria-controls", contentId);
-    el9.setAttribute("aria-label", "toggle");
+    el9.setAttribute("aria-label", data_0["i18n"]["get"]('More'));
     el9.className += " _coral-Drawer-toggleButton";
     el9.setAttribute("type", "button");
     el9.setAttribute("handle", "toggleButton");
@@ -49837,7 +50059,8 @@
         content: _this.querySelector('coral-drawer-content') || document.createElement('coral-drawer-content')
       };
       template$y.call(_this._elements, {
-        commons: commons
+        commons: commons,
+        i18n: i18n
       }); // Events
 
       _this._delegateEvents({
@@ -50101,6 +50324,10 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
+
+  commons.extend(strings, {
+    'coral-component-drawer': translations$c
+  }); // Expose component on the Coral namespace
 
   window.customElements.define('coral-drawer', Drawer);
   Drawer.Content = DrawerContent;
@@ -55119,7 +55346,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$a = {
+  var translations$d = {
     "en-US": {
       "Decrement": "Decrement",
       "Increment": "Increment"
@@ -56163,7 +56390,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-numberinput': translations$a
+    'coral-component-numberinput': translations$d
   }); // Expose component on the Coral namespace
 
   window.customElements.define('coral-numberinput', NumberInput);
@@ -58560,7 +58787,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$b = {
+  var translations$e = {
     "en-US": {
       "More actions": "More actions"
     },
@@ -58633,12 +58860,83 @@
    */
 
   commons.extend(strings, {
-    'coral-component-quickactions': translations$b
+    'coral-component-quickactions': translations$e
   }); // Expose component on the Coral namespace
 
   window.customElements.define('coral-quickactions', QuickActions);
   window.customElements.define('coral-quickactions-item', QuickActionsItem);
   QuickActions.Item = QuickActionsItem;
+
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+  var translations$f = {
+    "en-US": {
+      "Select": "Select"
+    },
+    "fr-FR": {
+      "Select": "Sélectionner"
+    },
+    "de-DE": {
+      "Select": "Auswählen"
+    },
+    "it-IT": {
+      "Select": "Seleziona"
+    },
+    "es-ES": {
+      "Select": "Seleccionar"
+    },
+    "pt-BR": {
+      "Select": "Selecionar"
+    },
+    "ja-JP": {
+      "Select": "選択"
+    },
+    "ko-KR": {
+      "Select": "선택"
+    },
+    "zh-CN": {
+      "Select": "选择"
+    },
+    "zh-TW": {
+      "Select": "選取"
+    },
+    "nl-NL": {
+      "Select": "Selecteren"
+    },
+    "da-DK": {
+      "Select": "Vælg"
+    },
+    "fi-FI": {
+      "Select": "Valitse"
+    },
+    "nb-NO": {
+      "Select": "Velg"
+    },
+    "sv-SE": {
+      "Select": "Välj"
+    },
+    "cs-CZ": {
+      "Select": "Vybrat"
+    },
+    "pl-PL": {
+      "Select": "Wybierz"
+    },
+    "ru-RU": {
+      "Select": "Выберите"
+    },
+    "tr-TR": {
+      "Select": "Seç"
+    }
+  };
 
   var template$F = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
@@ -58665,7 +58963,7 @@
     var el6 = this["screenReaderOnly"] = document.createElement("span");
     el6.className += " u-coral-screenReaderOnly";
     el6.setAttribute("handle", "screenReaderOnly");
-    el6.textContent = "select";
+    el6.textContent = data_0["i18n"]["get"]('Select');
     el4.appendChild(el6);
     var el7 = document.createTextNode("\n");
     el4.appendChild(el7);
@@ -58709,7 +59007,8 @@
         label: _this.querySelector('coral-radio-label') || document.createElement('coral-radio-label')
       };
       template$F.call(_this._elements, {
-        commons: commons
+        commons: commons,
+        i18n: i18n
       }); // Pre-define labellable element
 
       _this._labellableElement = _this._elements.input; // Check if the label is empty whenever we get a mutation
@@ -59093,6 +59392,10 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
+
+  commons.extend(strings, {
+    'coral-component-radio': translations$f
+  }); // Expose component on the Coral namespace
 
   window.customElements.define('coral-radio', Radio);
   Radio.Label = RadioLabel;
@@ -59839,7 +60142,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$c = {
+  var translations$g = {
     "it-IT": {
       "Clear search": "Azzera ricerca"
     },
@@ -60379,7 +60682,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-search': translations$c
+    'coral-component-search': translations$g
   }); // Expose component on the Coral namespace
 
   window.customElements.define('coral-search', Search);
@@ -65624,6 +65927,77 @@
   window.customElements.define('coral-step-label', StepLabel);
   Step.Label = StepLabel;
 
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+  var translations$h = {
+    "en-US": {
+      "Select": "Select"
+    },
+    "fr-FR": {
+      "Select": "Sélectionner"
+    },
+    "de-DE": {
+      "Select": "Auswählen"
+    },
+    "it-IT": {
+      "Select": "Seleziona"
+    },
+    "es-ES": {
+      "Select": "Seleccionar"
+    },
+    "pt-BR": {
+      "Select": "Selecionar"
+    },
+    "ja-JP": {
+      "Select": "選択"
+    },
+    "ko-KR": {
+      "Select": "선택"
+    },
+    "zh-CN": {
+      "Select": "选择"
+    },
+    "zh-TW": {
+      "Select": "選取"
+    },
+    "nl-NL": {
+      "Select": "Selecteren"
+    },
+    "da-DK": {
+      "Select": "Vælg"
+    },
+    "fi-FI": {
+      "Select": "Valitse"
+    },
+    "nb-NO": {
+      "Select": "Velg"
+    },
+    "sv-SE": {
+      "Select": "Välj"
+    },
+    "cs-CZ": {
+      "Select": "Vybrat"
+    },
+    "pl-PL": {
+      "Select": "Wybierz"
+    },
+    "ru-RU": {
+      "Select": "Выберите"
+    },
+    "tr-TR": {
+      "Select": "Seç"
+    }
+  };
+
   var template$U = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["input"] = document.createElement("input");
@@ -65649,7 +66023,7 @@
     var el6 = this["screenReaderOnly"] = document.createElement("span");
     el6.className += " u-coral-screenReaderOnly";
     el6.setAttribute("handle", "screenReaderOnly");
-    el6.textContent = "select";
+    el6.textContent = data_0["i18n"]["get"]('Select');
     el4.appendChild(el6);
     var el7 = document.createTextNode("\n");
     el4.appendChild(el7);
@@ -65693,7 +66067,8 @@
         label: _this.querySelector('coral-switch-label') || document.createElement('coral-switch-label')
       };
       template$U.call(_this._elements, {
-        commons: commons
+        commons: commons,
+        i18n: i18n
       }); // Pre-define labellable element
 
       _this._labellableElement = _this._elements.input; // Check if the label is empty whenever we get a mutation
@@ -66014,6 +66389,10 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
+
+  commons.extend(strings, {
+    'coral-component-switch': translations$h
+  }); // Expose component on the Coral namespace
 
   window.customElements.define('coral-switch', Switch);
   Switch.Label = SwitchLabel;
@@ -74015,7 +74394,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.106";
+  var version = "1.0.0-beta.107";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

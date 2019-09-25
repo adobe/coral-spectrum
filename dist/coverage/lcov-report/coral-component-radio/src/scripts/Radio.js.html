@@ -464,6 +464,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">202x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">202x</span>
@@ -759,7 +760,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -775,7 +775,7 @@
 import {BaseComponent} from '../../../coral-base-component';
 import {BaseFormField} from '../../../coral-base-formfield';
 import base from '../templates/base';
-import {transform, commons} from '../../../coral-utils';
+import {transform, commons, i18n} from '../../../coral-utils';
 &nbsp;
 const CLASSNAME = '_coral-Radio';
 &nbsp;
@@ -802,7 +802,7 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
       // Try to find the label content zone
       label: this.querySelector('coral-radio-label') || document.createElement('coral-radio-label')
     };
-    base.call(this._elements, {commons});
+    base.call(this._elements, {commons, i18n});
   
     // Pre-define labellable element
     this._labellableElement = this._elements.input;
@@ -910,12 +910,12 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
     this.classList.toggle('is-disabled', this._disabled);
     this._elements.input.disabled = this._disabled;
   }
-  <span class="fstat-no" title="function not covered" ></span>
-  /**<span class="cstat-no" title="statement not covered" ></span>
-   Whe<span class="cstat-no" title="statement not covered" >ther this field is req<span class="fstat-no" title="function not covered" >ui</span>red or not.</span>
-   @type<span class="cstat-no" title="statement not covered" > {Boolean}</span>
-   @defaul<span class="cstat-no" title="statement not covered" >t false</span>
-   @htmlattribute required
+  
+  /**<span class="fstat-no" title="function not covered" ></span>
+   Whether this fie<span class="cstat-no" title="statement not covered" >ld is required or not</span>.
+   @ty<span class="cstat-no" title="statement not covered" >pe {Boolean}<span class="fstat-no" title="function not covered" ></span></span>
+   @defa<span class="cstat-no" title="statement not covered" >ult false</span>
+   @htmlat<span class="cstat-no" title="statement not covered" >tribute required</span>
    @htmlattributereflected
    */
   get required() {
@@ -1046,8 +1046,8 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
    */
   clear() {
     this.checked = false;
-  }<span class="branch-1 cbranch-no" title="branch not covered" ></span>
-  
+  }
+  <span class="branch-1 cbranch-no" title="branch not covered" ></span>
   /**
    Inherited from {@link BaseFormField#reset}.
    */
@@ -1086,13 +1086,13 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
     }
   
     while (this.firstChild) {
-      const child <span class="fstat-no" title="function not covered" >= th</span>is.firstChild;
-<span class="cstat-no" title="statement not covered" >      if (child.nodeType === Node.TEXT_NODE ||</span>
-        child.nodeType === Node.ELEMENT_NODE &amp;&amp; templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
-<span class="cstat-no" title="statement not covered" >        // Add non-template elements to the label</span>
-        label.appendChild(child);
-<span class="cstat-no" title="statement not covered" >      }</span>
-      else {
+      const child = this.firstChild;
+      if (child.no<span class="fstat-no" title="function not covered" >deTy</span>pe === Node.TEXT_NODE ||
+<span class="cstat-no" title="statement not covered" >        child.nodeType === Node.ELEMENT_NODE &amp;&amp; templ</span>ateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
+        // Add non-template elements to the label
+<span class="cstat-no" title="statement not covered" >        label.appendChild(child);</span>
+      }
+<span class="cstat-no" title="statement not covered" >      else {</span>
         // Remove anything else (e.g labelWrapper)
         this.removeChild(child);
       }
@@ -1106,14 +1106,14 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
   
     // Cache the initial checked state of the radio button (in order to implement reset)
     this._initialCheckedState = this.checked;
-  <span class="fstat-no" title="function not covered" ></span>
-    //<span class="cstat-no" title="statement not covered" > handles the case where the attached component </span>was checked
-    this._syncRelatedRadios();
-  <span class="cstat-no" title="statement not covered" ></span>
-    // Check if we need to hide the label
-    //<span class="cstat-no" title="statement not covered" > We must do this because IE does not catch mutations w</span>hen nodes are not in the DOM
+  
+    // handles the<span class="fstat-no" title="function not covered" > cas</span>e where the attached component was checked
+    th<span class="cstat-no" title="statement not covered" >is._syncRelatedRadios();</span>
+  
+    //<span class="cstat-no" title="statement not covered" > Check if we need to hide the label</span>
+    // We must do this because IE does not catch mutations when nodes are not in the DOM
     th<span class="cstat-no" title="statement not covered" >is._hideLabelIfEmpty();</span>
-  }
+  }<span class="cstat-no" title="statement not covered" ></span>
 }
 &nbsp;
 export default Radio;
@@ -1123,7 +1123,7 @@ export default Radio;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Sep 24 2019 17:43:20 GMT+0200 (Central European Summer Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Sep 25 2019 15:27:32 GMT+0200 (Central European Summer Time)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
