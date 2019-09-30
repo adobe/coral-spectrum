@@ -20,9 +20,10 @@ import TooltipContent from './src/scripts/TooltipContent';
 
 import './src/styles/index.css';
 
+import {commons} from '../coral-utils';
+
 // Expose component on the Coral namespace
-window.customElements.define('coral-tooltip', Tooltip);
-window.customElements.define('coral-tooltip-content', TooltipContent);
+commons._define('coral-tooltip', Tooltip);
 
 Tooltip.Content = TooltipContent;
 

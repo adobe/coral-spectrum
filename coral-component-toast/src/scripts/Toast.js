@@ -326,6 +326,7 @@ class Toast extends BaseOverlay(BaseComponent(HTMLElement)) {
       handle: 'content',
       tagName: 'coral-toast-content',
       insert: function(content) {
+        content.classList.add(`${CLASSNAME}-content`);
         // After the header
         this._elements.body.insertBefore(content, this._elements.body.firstChild);
       }
@@ -376,6 +377,7 @@ class Toast extends BaseOverlay(BaseComponent(HTMLElement)) {
     // In the DOM but not a direct child of body
     else if (this.parentNode !== document.body) {
       this._ignoreConnectedCallback = true;
+      this._repositioned = true;
       document.body.appendChild(this);
       this._ignoreConnectedCallback = false;
     }
@@ -479,8 +481,13 @@ class Toast extends BaseOverlay(BaseComponent(HTMLElement)) {
     if (this._ignoreConnectedCallback) {
       return;
     }
-    
+  
     super.connectedCallback();
+  }
+  
+  /** @ignore */
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
     
@@ -528,9 +535,6 @@ class Toast extends BaseOverlay(BaseComponent(HTMLElement)) {
     // Assign the content zones
     this.content = this._elements.content;
     this.action = action;
-  
-    // Add the Overlay coral-tabcapture elements at the end
-    super.connectedCallback();
   }
   
   /** @ignore */

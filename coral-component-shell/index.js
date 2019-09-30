@@ -63,25 +63,24 @@ commons.extend(strings, {
   'coral-component-shell-orgswitcher': orgSwitcherTranslations
 });
 
-
 // Expose component on the Coral namespace
-window.customElements.define('coral-shell', Shell);
-window.customElements.define('coral-shell-header', ShellHeader);
-window.customElements.define('coral-shell-homeanchor', ShellHomeAnchor, {extends: 'a'});
-window.customElements.define('coral-shell-help', ShellHelp);
-window.customElements.define('coral-shell-help-item', ShellHelpItem, {extends: 'a'});
-window.customElements.define('coral-shell-menu', ShellMenu);
-window.customElements.define('coral-shell-menubar', ShellMenuBar);
-window.customElements.define('coral-shell-menubar-item', ShellMenuBarItem);
-window.customElements.define('coral-shell-user', ShellUser);
-window.customElements.define('coral-shell-workspaces', ShellWorkspaces);
-window.customElements.define('coral-shell-workspace', ShellWorkspace, {extends: 'a'});
-window.customElements.define('coral-shell-solutionswitcher', ShellSolutionSwitcher);
-window.customElements.define('coral-shell-solutions', ShellSolutions);
-window.customElements.define('coral-shell-solution', ShellSolution, {extends: 'a'});
-window.customElements.define('coral-shell-orgswitcher', ShellOrgSwitcher);
-window.customElements.define('coral-shell-organization', ShellOrganization);
-window.customElements.define('coral-shell-suborganization', ShellSuborganization);
+commons._define('coral-shell-header', ShellHeader);
+commons._define('coral-shell-homeanchor', ShellHomeAnchor, {extends: 'a'});
+commons._define('coral-shell-help-item', ShellHelpItem, {extends: 'a'});
+commons._define('coral-shell-help', ShellHelp);
+commons._define('coral-shell-menubar-item', ShellMenuBarItem);
+commons._define('coral-shell-menubar', ShellMenuBar);
+commons._define('coral-shell-menu', ShellMenu);
+commons._define('coral-shell-user', ShellUser);
+commons._define('coral-shell-workspace', ShellWorkspace, {extends: 'a'});
+commons._define('coral-shell-workspaces', ShellWorkspaces);
+commons._define('coral-shell-solution', ShellSolution, {extends: 'a'});
+commons._define('coral-shell-solutions', ShellSolutions);
+commons._define('coral-shell-solutionswitcher', ShellSolutionSwitcher);
+commons._define('coral-shell-suborganization', ShellSuborganization);
+commons._define('coral-shell-organization', ShellOrganization);
+commons._define('coral-shell-orgswitcher', ShellOrgSwitcher);
+commons._define('coral-shell', Shell);
 
 Shell.Content = ShellContent;
 Shell.Header = ShellHeader;

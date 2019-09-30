@@ -198,8 +198,8 @@ class RangedSlider extends Slider {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add('_coral-Slider--range');
     

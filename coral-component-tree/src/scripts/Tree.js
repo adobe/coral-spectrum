@@ -457,8 +457,8 @@ class Tree extends BaseComponent(HTMLElement) {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
     
@@ -466,11 +466,8 @@ class Tree extends BaseComponent(HTMLElement) {
     this.setAttribute('role', 'tree');
     this.setAttribute('aria-multiselectable', this.multiple);
     
-    // Requires tree item API to be defined
-    window.customElements.whenDefined('coral-tree-item').then(() => {
-      // Enable keyboard interaction
-      this._resetFocusableItem();
-    });
+    // Enable keyboard interaction
+    this._resetFocusableItem();
     
     // Don't trigger events once connected
     this._preventTriggeringEvents = true;

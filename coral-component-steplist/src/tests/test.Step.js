@@ -66,10 +66,6 @@ describe('Step', function() {
         expect(item.label.textContent).to.equal('');
       });
 
-      it('should be a content zone', function() {
-        expect(item.label instanceof Step.Label).to.be.true;
-      });
-
       it('should be settable', function() {
         item.label.innerHTML = 'Item 1';
         expect(item.label.innerHTML).to.equal('Item 1');

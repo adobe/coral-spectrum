@@ -977,9 +977,7 @@ const BaseOverlay = (superClass) => class extends superClass {
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();
-    
-    this.classList.add(CLASSNAME);
-    
+  
     if (!this.hasAttribute('trapfocus')) { this.trapFocus = this.trapFocus; }
     if (!this.hasAttribute('returnfocus')) { this.returnFocus = this.returnFocus; }
     if (!this.hasAttribute('focusonshow')) { this.focusOnShow = this.focusOnShow; }
@@ -993,6 +991,13 @@ const BaseOverlay = (superClass) => class extends superClass {
         this._showBackdrop();
       }
     }
+  }
+  
+  /** @ignore */
+  render() {
+    super.render();
+    
+    this.classList.add(CLASSNAME);
   }
   
   /** @ignore */

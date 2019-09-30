@@ -20,9 +20,10 @@ import ProgressLabel from './src/scripts/ProgressLabel';
 
 import './src/styles/index.css';
 
+import {commons} from '../coral-utils';
+
 // Expose component on the Coral namespace
-window.customElements.define('coral-progress', Progress);
-window.customElements.define('coral-progress-label', ProgressLabel);
+commons._define('coral-progress', Progress);
 
 Progress.Label = ProgressLabel;
 

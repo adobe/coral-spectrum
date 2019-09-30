@@ -10,38 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-import {BaseComponent} from '../../../coral-base-component';
-
-const CLASSNAME = '_coral-Card-context';
-
 /**
  @class Coral.Card.Context
  @classdesc A Card context component
  @htmltag coral-card-context
- @extends {HTMLElement}
- @extends {BaseComponent}
+ @return {HTMLElement}
  */
-class CardContext extends BaseComponent(HTMLElement) {
-  // @compat
-  get content() {
-    return this;
-  }
-  set content(value) {
-    // Support configs
-    if (typeof value === 'object') {
-      for (const prop in value) {
-        /** @ignore */
-        this[prop] = value[prop];
-      }
-    }
-  }
-  
-  /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
-    
-    this.classList.add(CLASSNAME, 'coral-Heading', 'coral-Heading--5');
-  }
-}
-
-export default CardContext;
+export default () => document.createElement('coral-card-context');

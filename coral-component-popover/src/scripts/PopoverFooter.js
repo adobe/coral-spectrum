@@ -10,19 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-import {Dialog} from '../../../coral-component-dialog';
-import BasePopoverContentZone from './BasePopoverContentZone';
-
 /**
  @class Coral.Popover.Footer
  @classdesc The Popover footer content
  @htmltag coral-popover-footer
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class PopoverFooter extends BasePopoverContentZone(Dialog.Footer) {
-  get _type() {
-    return 'content';
-  }
-}
-
-export default PopoverFooter;
+export default () => document.createElement('coral-popover-footer');

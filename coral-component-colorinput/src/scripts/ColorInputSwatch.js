@@ -167,8 +167,8 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME, 'u-coral-clearFix');
     

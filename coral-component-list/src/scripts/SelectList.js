@@ -520,9 +520,7 @@ class SelectList extends BaseComponent(HTMLElement) {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
-    
+  render() {
     this.classList.add(CLASSNAME);
     
     // adds the role to support accessibility

@@ -10,22 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-import {BaseComponent} from '../../../coral-base-component';
-
-const CLASSNAME = '_coral-Alert-header';
-
 /**
  @class Coral.Alert.Header
  @classdesc The Alert header content
  @htmltag coral-alert-header
- @extends {HTMLElement}
- @extends {BaseComponent}
+ @return {HTMLElement}
  */
-class AlertHeader extends BaseComponent(HTMLElement) {
-  /** @ignore */
-  connectedCallback() {
-    this.classList.add(CLASSNAME);
-  }
-}
-
-export default AlertHeader;
+export default () => document.createElement('coral-alert-header');

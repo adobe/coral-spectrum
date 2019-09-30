@@ -22,10 +22,11 @@ import AccordionItemContent from './src/scripts/AccordionItemContent';
 
 import './src/styles/index.css';
 
+import {commons} from '../coral-utils';
+
 // Expose component on the Coral namespace
-window.customElements.define('coral-accordion', Accordion);
-window.customElements.define('coral-accordion-item', AccordionItem);
-window.customElements.define('coral-accordion-item-content', AccordionItemContent);
+commons._define('coral-accordion-item', AccordionItem);
+commons._define('coral-accordion', Accordion);
 
 Accordion.Item = AccordionItem;
 Accordion.Item.Label = AccordionItemLabel;

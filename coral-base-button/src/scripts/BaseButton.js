@@ -524,8 +524,8 @@ const BaseButton = (superClass) => class extends superClass {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     // Default reflected attributes
     if (!this._variant) { this.variant = variant.DEFAULT; }

@@ -20,8 +20,10 @@ import FileUploadItem from './src/scripts/FileUploadItem';
 
 import './src/styles/index.css';
 
+import {commons} from '../coral-utils';
+
 // Expose component on the Coral namespace
-window.customElements.define('coral-fileupload', FileUpload);
+commons._define('coral-fileupload', FileUpload);
 
 FileUpload.Item = FileUploadItem;
 

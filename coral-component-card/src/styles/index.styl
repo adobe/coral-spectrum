@@ -22,9 +22,6 @@ $card-condensed-height = 229px;
 $card-condensed-wrapper-height = 160px;
 $card-asset-lowResolution-padding = 16px;
 
-// Lightweight tags:
-// coral-card-asset, coral-card-overlay, coral-card-info, coral-card-propertylist
-
 // main container of the card
 ._coral-Card {
   display: block;
@@ -94,12 +91,12 @@ $card-asset-lowResolution-padding = 16px;
   }
 
   // hidden cause otherwise it would not fit
-  ._coral-Card-description {
+  coral-card-description {
     display: none;
   }
 
   // positioned at the bottom of the wrapper
-  ._coral-Card-content {
+  coral-card-content {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -200,7 +197,7 @@ coral-card-asset {
 }
 
 ._coral-Card--quiet {
-  ._coral-Card-content {
+  coral-card-content {
     padding: var(--spectrum-medium-card-body-padding-top) 0 !important;
   }
 
@@ -224,7 +221,7 @@ coral-card-propertylist {
   }
 }
 
-._coral-Card-description {
+coral-card-description {
   padding-top: var(--spectrum-medium-card-body-content-height);
 }
 
@@ -249,29 +246,29 @@ coral-card-overlay {
   font-size: var(--spectrum-medium-body-small-text-size);
 }
 
-._coral-Card-content {
+coral-card-content {
   display: block;
   padding-top: var(--spectrum-medium-card-body-padding-top) var(--spectrum-medium-card-body-padding-left) !important;
 }
 
 coral-card-overlay:empty,
 coral-card-propertylist:empty,
-._coral-Card-content:empty {
+coral-card-content:empty {
   display: none;
 }
 
-._coral-Card-content,
-._coral-Card-context,
-._coral-Card-title,
-._coral-Card-subtitle,
-._coral-Card-description {
+coral-card-content,
+coral-card-context,
+coral-card-title,
+coral-card-subtitle,
+coral-card-description {
   display: block;
 }
 
-._coral-Card-title,
-._coral-Card-subtitle,
-._coral-Card-description,
-._coral-Card-context {
+coral-card-title,
+coral-card-subtitle,
+coral-card-description,
+coral-card-context {
   // in case the title is in an anchor
   text-decoration: none;
   // in case content overflows
@@ -280,33 +277,33 @@ coral-card-propertylist:empty,
 
 // Increase specificity
 ._coral-Card {
-  ._coral-Card-title,
-  ._coral-Card-context {
-    font-weight: var(--spectrum-medium-body-base-text-font-weight);
-    margin: 0;
+  coral-card-context {
+    font-size: var(--spectrum-medium-card-subtitle-text-size);
+    letter-spacing: var(--spectrum-medium-card-subtitle-letter-spacing);
+    text-transform: var(--spectrum-medium-detail-text-transform);
   }
 
-  ._coral-Card-title + ._coral-Card-subtitle,
-  ._coral-Card-title + ._coral-Card-context {
+  coral-card-title + coral-card-subtitle,
+  coral-card-title + coral-card-context {
     margin-top: 6px;
   }
 }
 
-._coral-Card-subtitle {
+coral-card-subtitle {
   font-size: var(--spectrum-medium-detail-text-size);
   letter-spacing: var(--spectrum-medium-detail-text-letter-spacing);
   text-transform: var(--spectrum-medium-detail-text-transform);
 }
 
-._coral-Card-context + ._coral-Card-description,
-._coral-Card-title + ._coral-Card-description {
+coral-card-context + coral-card-description,
+coral-card-title + coral-card-description {
   margin-top: var(--spectrum-medium-card-body-padding-top);
 }
 
-._coral-Card-context + coral-card-propertylist,
-._coral-Card-title + coral-card-propertylist,
-._coral-Card-subtitle + coral-card-propertylist,
-._coral-Card-description + coral-card-propertylist {
+coral-card-context + coral-card-propertylist,
+coral-card-title + coral-card-propertylist,
+coral-card-subtitle + coral-card-propertylist,
+coral-card-description + coral-card-propertylist {
   margin-top: var(--spectrum-medium-card-body-padding-top);
 }
 

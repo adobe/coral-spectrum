@@ -65,8 +65,8 @@ class SelectListGroup extends BaseComponent(HTMLElement) {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
     

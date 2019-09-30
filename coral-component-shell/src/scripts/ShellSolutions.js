@@ -105,8 +105,8 @@ class ShellSolutions extends BaseComponent(HTMLElement) {
   static get observedAttributes() { return super.observedAttributes.concat(['secondary']); }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
     

@@ -21,10 +21,11 @@ import StepLabel from './src/scripts/StepLabel';
 
 import './src/styles/index.css';
 
+import {commons} from '../coral-utils';
+
 // Expose component on the Coral namespace
-window.customElements.define('coral-steplist', StepList);
-window.customElements.define('coral-step', Step);
-window.customElements.define('coral-step-label', StepLabel);
+commons._define('coral-step', Step);
+commons._define('coral-steplist', StepList);
 
 Step.Label = StepLabel;
 

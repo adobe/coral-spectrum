@@ -10,6 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
+import {BaseComponent} from '../../../coral-base-component';
+
 const CLASSNAME = '_coral-Menu-divider';
 
 /**
@@ -17,10 +19,13 @@ const CLASSNAME = '_coral-Menu-divider';
  @classdesc The List divider
  @htmltag coral-list-divider
  @extends {HTMLElement}
+ @extends {BaseComponent}
  */
-class ListDivider extends HTMLElement {
+class ListDivider extends BaseComponent(HTMLElement) {
   /** @ignore */
-  connectedCallback() {
+  render() {
+    super.render();
+    
     this.classList.add(CLASSNAME);
     
     // a11y

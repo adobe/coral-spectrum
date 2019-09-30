@@ -358,8 +358,8 @@ class StepList extends BaseComponent(HTMLElement) {
       
       // we only show the tooltip if we have a label to show
       if (step._elements.label.innerHTML.trim() !== '') {
-        step._elements.tooltip.content.innerHTML = step._elements.label.innerHTML;
-        step._elements.tooltip.open = true;
+        step._elements.overlay.content.innerHTML = step._elements.label.innerHTML;
+        step._elements.overlay.open = true;
       }
     }
   }
@@ -368,7 +368,7 @@ class StepList extends BaseComponent(HTMLElement) {
   _onStepMouseLeave(event) {
     if (this.size === size.SMALL) {
       const step = event.target.closest('coral-step');
-      step._elements.tooltip.open = false;
+      step._elements.overlay.open = false;
     }
   }
   
@@ -462,8 +462,8 @@ class StepList extends BaseComponent(HTMLElement) {
   static get observedAttributes() { return super.observedAttributes.concat(['target', 'size', 'interaction']); }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
     

@@ -31,11 +31,11 @@ commons.extend(strings, {
 });
 
 // Expose component on the Coral namespace
-window.customElements.define('coral-actionbar', ActionBar);
-window.customElements.define('coral-actionbar-item', ActionBarItem);
-window.customElements.define('coral-actionbar-primary', ActionBarPrimary);
-window.customElements.define('coral-actionbar-secondary', ActionBarSecondary);
-window.customElements.define('coral-actionbar-container', ActionBarContainer);
+commons._define('coral-actionbar-item', ActionBarItem);
+commons._define('coral-actionbar-primary', ActionBarPrimary);
+commons._define('coral-actionbar-secondary', ActionBarSecondary);
+commons._define('coral-actionbar-container', ActionBarContainer);
+commons._define('coral-actionbar', ActionBar);
 
 ActionBar.Item = ActionBarItem;
 ActionBar.Primary = ActionBarPrimary;

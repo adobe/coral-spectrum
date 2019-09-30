@@ -188,8 +188,8 @@ class ShellUser extends BaseComponent(HTMLElement) {
   static get avatar() { return avatar; }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
     

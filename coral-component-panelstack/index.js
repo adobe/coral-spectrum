@@ -21,9 +21,11 @@ import PanelContent from './src/scripts/PanelContent';
 
 import './src/styles/index.css';
 
+import {commons} from '../coral-utils';
+
 // Expose component on the Coral namespace
-window.customElements.define('coral-panelstack', PanelStack);
-window.customElements.define('coral-panel', Panel);
+commons._define('coral-panelstack', PanelStack);
+commons._define('coral-panel', Panel);
 
 Panel.Content = PanelContent;
 

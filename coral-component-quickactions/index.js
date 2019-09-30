@@ -28,8 +28,8 @@ commons.extend(strings, {
 });
 
 // Expose component on the Coral namespace
-window.customElements.define('coral-quickactions', QuickActions);
-window.customElements.define('coral-quickactions-item', QuickActionsItem);
+commons._define('coral-quickactions-item', QuickActionsItem);
+commons._define('coral-quickactions', QuickActions);
 
 QuickActions.Item = QuickActionsItem;
 

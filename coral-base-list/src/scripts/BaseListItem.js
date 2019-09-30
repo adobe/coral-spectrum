@@ -45,6 +45,7 @@ const BaseListItem = (superClass) => class extends superClass {
       handle: 'content',
       tagName: 'coral-list-item-content',
       insert: function(content) {
+        content.classList.add(`${CLASSNAME}Label`);
         this.appendChild(content);
       }
     });
@@ -107,9 +108,9 @@ const BaseListItem = (superClass) => class extends superClass {
   static get observedAttributes() { return super.observedAttributes.concat(['disabled', 'icon']); }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
-    
+  render() {
+    super.render();
+  
     this.classList.add(CLASSNAME);
   
     // The attribute that makes different types of list items co-exist

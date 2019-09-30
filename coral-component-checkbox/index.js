@@ -28,7 +28,7 @@ commons.extend(strings, {
 });
 
 // Expose component on the Coral namespace
-window.customElements.define('coral-checkbox', Checkbox);
+commons._define('coral-checkbox', Checkbox);
 
 Checkbox.Label = CheckboxLabel;
 

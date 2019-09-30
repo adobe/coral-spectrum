@@ -431,17 +431,22 @@ class Icon extends BaseComponent(HTMLElement) {
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();
+  
+    // Contextual icons need to be checked again
+    if (this.hasAttribute('_context')) {
+      this.icon = this.icon;
+    }
+  }
+  
+  /** @ignore */
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
     
     // Set default size
     if (!this._size) {
       this.size = size.SMALL;
-    }
-    
-    // Contextual icons need to be checked again
-    if (this.hasAttribute('_context')) {
-      this.icon = this.icon;
     }
   }
 }

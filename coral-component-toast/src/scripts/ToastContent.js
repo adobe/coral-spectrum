@@ -10,22 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-import {BaseComponent} from '../../../coral-base-component';
-
-const CLASSNAME = '_coral-Toast-content';
-
 /**
  @class Coral.Toast.Content
  @classdesc The Toast default content
  @htmltag coral-toast-content
- @extends {HTMLElement}
- @extends {BaseComponent}
+ @return {HTMLElement}
  */
-class ToastContent extends BaseComponent(HTMLElement) {
-  /** @ignore */
-  connectedCallback() {
-    this.classList.add(CLASSNAME);
-  }
-}
-
-export default ToastContent;
+export default () => document.createElement('coral-toast-content');

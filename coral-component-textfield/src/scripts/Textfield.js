@@ -93,8 +93,8 @@ class Textfield extends BaseFormField(BaseComponent(HTMLInputElement)) {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
   

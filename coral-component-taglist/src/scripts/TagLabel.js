@@ -10,19 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-const CLASSNAME = '_coral-Tags-itemLabel';
-
 /**
  @class Coral.Tag.Label
  @classdesc Tag's label component
  @htmltag coral-tag-label
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class TagLabel extends HTMLElement {
-  /** @ignore */
-  connectedCallback() {
-    this.classList.add(CLASSNAME);
-  }
-}
-
-export default TagLabel;
+export default () => document.createElement('coral-tag-label');

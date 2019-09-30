@@ -1869,6 +1869,18 @@ class Autocomplete extends BaseFormField(BaseComponent(HTMLElement)) {
   connectedCallback() {
     super.connectedCallback();
     
+    const overlay = this._elements.overlay;
+    // Cannot be open by default when rendered
+    overlay.removeAttribute('open');
+    // Restore in DOM
+    if (overlay._parent) {
+      overlay._parent.appendChild(overlay);
+    }
+  }
+  
+  render() {
+    super.render();
+  
     this.classList.add(CLASSNAME);
   
     // Container role per ARIA Autocomplete
@@ -1892,14 +1904,11 @@ class Autocomplete extends BaseFormField(BaseComponent(HTMLElement)) {
     // Create a fragment
     const frag = document.createDocumentFragment();
   
-    // Cannot be open by default when rendered
-    this._elements.overlay.removeAttribute('open');
-    
     // Render the template
-    frag.appendChild(this._elements.overlay);
     frag.appendChild(this._elements.field);
     frag.appendChild(this._elements.inputGroup);
     frag.appendChild(this._elements.tagList);
+    frag.appendChild(this._elements.overlay);
   
     this._elements.overlay.target = this._elements.trigger;
   
@@ -1931,9 +1940,11 @@ class Autocomplete extends BaseFormField(BaseComponent(HTMLElement)) {
   disconnectedCallback() {
     super.disconnectedCallback();
     
+    const overlay = this._elements.overlay;
     // In case it was moved out don't forget to remove it
-    if (!this.contains(this._elements.overlay)) {
-      this._elements.overlay.remove();
+    if (!this.contains(overlay)) {
+      overlay._parent = overlay._repositioned ? document.body : this;
+      overlay.remove();
     }
   }
   

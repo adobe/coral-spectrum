@@ -122,11 +122,10 @@ class Textarea extends BaseFormField(BaseComponent(HTMLTextAreaElement)) {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
-    this.classList.add(CLASSNAME);
-    this.classList.add(`${CLASSNAME}--multiline`);
+    this.classList.add(CLASSNAME, `${CLASSNAME}--multiline`);
     
     // Default reflected attributes
     if (!this._variant) { this.variant = variant.DEFAULT; }

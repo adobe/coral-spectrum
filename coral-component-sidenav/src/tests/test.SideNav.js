@@ -312,6 +312,7 @@ describe('SideNav', function() {
         const el = helpers.build(window.__html__['SideNav.withHeading.html']);
         Array.from(el._levels).forEach((level) => {
           const heading = level.previousElementSibling;
+          expect(heading.getAttribute('role')).to.equal('heading');
           expect(level.getAttribute('aria-labelledby')).to.equal(heading.id);
         });
       });

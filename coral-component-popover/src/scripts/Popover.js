@@ -12,6 +12,8 @@
 
 import {Overlay} from '../../../coral-component-overlay';
 import {Icon} from '../../../coral-component-icon';
+// Popover relies on Dialog styles partially
+import '../../../coral-component-dialog';
 import base from '../templates/base';
 import {commons, transform, validate, i18n} from '../../../coral-utils';
 
@@ -144,6 +146,7 @@ class Popover extends Overlay {
       handle: 'content',
       tagName: 'coral-popover-content',
       insert: function(content) {
+        content.classList.add('_coral-Dialog-content');
         const footer = this.footer;
         // The content should always be before footer
         this.insertBefore(content, this.contains(footer) && footer || null);
@@ -166,6 +169,7 @@ class Popover extends Overlay {
       handle: 'header',
       tagName: 'coral-popover-header',
       insert: function(header) {
+        header.classList.add('_coral-Dialog-title');
         this._elements.headerWrapper.insertBefore(header, this._elements.headerWrapper.firstChild);
       },
       set: function() {
@@ -192,6 +196,7 @@ class Popover extends Overlay {
       handle: 'footer',
       tagName: 'coral-popover-footer',
       insert: function(footer) {
+        footer.classList.add('_coral-Dialog-footer');
         // The footer should always be after content
         this.appendChild(footer);
       },
@@ -392,9 +397,13 @@ class Popover extends Overlay {
     this._elements.headerWrapper.classList.toggle('_coral-Dialog-header', !isCoachMark);
     this._elements.headerWrapper.classList.toggle('_coral-CoachMarkPopover-header', isCoachMark);
     
-    ['header', 'content', 'footer'].forEach((contentZone) => {
-      if (this[contentZone]) {
-        this[contentZone][isCoachMark ? 'setAttribute' : 'removeAttribute']('_coachmark', '');
+    ['header', 'content', 'footer'].forEach((contentZone, i) => {
+      const el = this[contentZone];
+      const type = i === 0 ? 'title' : contentZone;
+      
+      if (el) {
+        el.classList.toggle(`_coral-Dialog-${type}`, !isCoachMark);
+        el.classList.toggle(`_coral-CoachMarkPopover-${type}`, isCoachMark);
       }
     });
   }
@@ -436,7 +445,7 @@ class Popover extends Overlay {
       }
     }
     else if (this.open && !this.contains(eventTarget)) {
-      const target =  eventTarget.closest('._coral-BaseOverlay');
+      const target =  eventTarget.closest('._coral-Overlay');
       // Also check if the click element is inside an overlay which target could be inside of this popover
       if (target && this.contains(target._getTarget())) {
         return;
@@ -480,7 +489,9 @@ class Popover extends Overlay {
   }
   
   /** @ignore */
-  connectedCallback() {
+  render() {
+    super.render();
+  
     this.classList.add(CLASSNAME);
     
     // ARIA
@@ -534,9 +545,6 @@ class Popover extends Overlay {
     this.header = header;
     this.content = content;
     this.footer = footer;
-  
-    // Add the Overlay coral-tabcapture elements at the end
-    super.connectedCallback();
   }
 }
 

@@ -1158,6 +1158,19 @@ class QuickActions extends Overlay {
   connectedCallback() {
     super.connectedCallback();
     
+    const overlay = this._elements.overlay;
+    // Cannot be open by default when rendered
+    overlay.removeAttribute('open');
+    // Restore in DOM
+    if (overlay._parent) {
+      overlay._parent.appendChild(overlay);
+    }
+  }
+  
+  /** @ignore */
+  render() {
+    super.render();
+    
     this.classList.add(CLASSNAME);
     
     // Make QuickActions focusable
@@ -1171,27 +1184,27 @@ class QuickActions extends Overlay {
         handle.remove();
       }
     });
-  
-    // Cannot be open by default when rendered
-    this._elements.overlay.removeAttribute('open');
-  
-    // Inserting the overlay before the items
-    this.insertBefore(this._elements.overlay, this.firstChild);
-  
-    // Inserting the moreButton after the items
-    this.appendChild(this._elements.moreButton);
+    
+    // Render template
+    const frag = document.createDocumentFragment();
+    frag.appendChild(this._elements.moreButton);
+    frag.appendChild(this._elements.overlay);
   
     // Link target
     this._elements.overlay.target = this._elements.moreButton;
+    
+    this.appendChild(frag);
   }
   
   /** @ignore */
   disconnectedCallback() {
     super.disconnectedCallback();
     
+    const overlay = this._elements.overlay;
     // In case it was moved out don't forget to remove it
-    if (!this.contains(this._elements.overlay)) {
-      this._elements.overlay.remove();
+    if (!this.contains(overlay)) {
+      overlay._parent = overlay._repositioned ? document.body : this;
+      overlay.remove();
     }
   }
 }

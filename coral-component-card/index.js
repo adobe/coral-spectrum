@@ -30,15 +30,12 @@ import CardPropertyContent from './src/scripts/CardPropertyContent';
 
 import './src/styles/index.css';
 
+import {commons} from '../coral-utils';
+
 // Expose component on the Coral namespace
-window.customElements.define('coral-card', Card);
-window.customElements.define('coral-card-content', CardContent);
-window.customElements.define('coral-card-property', CardProperty);
-window.customElements.define('coral-card-propertylist', CardPropertyList);
-window.customElements.define('coral-card-title', CardTitle);
-window.customElements.define('coral-card-subtitle', CardSubtitle);
-window.customElements.define('coral-card-context', CardContext);
-window.customElements.define('coral-card-description', CardDescription);
+commons._define('coral-card-propertylist', CardPropertyList);
+commons._define('coral-card-property', CardProperty);
+commons._define('coral-card', Card);
 
 Card.Property = CardProperty;
 Card.Property.Content = CardPropertyContent;

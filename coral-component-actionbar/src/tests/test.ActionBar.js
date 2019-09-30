@@ -370,26 +370,24 @@ describe('ActionBar', function() {
   
     it('should support hidden actions and find the first tabbable item for both left side and right side of the actionbar', function() {
       const bar = helpers.build(window.__html__['ActionBar.hidden.html']);
-      
+    
       const primaryItems = bar.primary.items.getAll();
       const secondaryItems = bar.secondary.items.getAll();
-      
+
       const firstLeftTabbableItem = bar.querySelector('coral-actionbar-item:not([hidden]) button:not([tabindex="-1"])');
-      const firstRightTabbableItem = bar.querySelector('coral-actionbar-item:not([hidden]) a:not([tabindex="-1"])');
-      
+      const firstRightTabbableItem = bar.secondary._elements.moreButton;
+
       expect(firstLeftTabbableItem.closest('coral-actionbar-item')).to.equal(primaryItems[1]);
-      expect(firstRightTabbableItem.closest('coral-actionbar-item')).to.equal(secondaryItems[1]);
-      
+      expect(firstRightTabbableItem.tabIndex).to.equal(0);
+
       primaryItems.forEach((item) => {
         if (item !== firstLeftTabbableItem) {
           expect(item.querySelector('button').getAttribute('tabindex') === '-1');
         }
       });
-  
+
       secondaryItems.forEach((item) => {
-        if (item !== firstRightTabbableItem) {
-          expect(item.querySelector('a').getAttribute('tabindex') === '-1');
-        }
+        expect(item.querySelector('a').getAttribute('tabindex') === '-1');
       });
     });
   });

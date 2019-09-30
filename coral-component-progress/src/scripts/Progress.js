@@ -223,6 +223,7 @@ class Progress extends BaseComponent(HTMLElement) {
       handle: 'label',
       tagName: 'coral-progress-label',
       insert: function(label) {
+        label.classList.add(`${CLASSNAME}-label`);
         this.appendChild(label);
       }
     });
@@ -359,8 +360,8 @@ class Progress extends BaseComponent(HTMLElement) {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
     

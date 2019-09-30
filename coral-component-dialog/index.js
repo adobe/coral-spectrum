@@ -31,10 +31,7 @@ commons.extend(strings, {
 });
 
 // Expose component on the Coral namespace
-window.customElements.define('coral-dialog', Dialog);
-window.customElements.define('coral-dialog-header', DialogHeader);
-window.customElements.define('coral-dialog-content', DialogContent);
-window.customElements.define('coral-dialog-footer', DialogFooter);
+commons._define('coral-dialog', Dialog);
 
 Dialog.Header = DialogHeader;
 Dialog.Content = DialogContent;

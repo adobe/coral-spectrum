@@ -22,11 +22,10 @@ import AlertFooter from './src/scripts/AlertFooter';
 
 import './src/styles/index.css';
 
+import {commons} from '../coral-utils';
+
 // Expose component on the Coral namespace
-window.customElements.define('coral-alert', Alert);
-window.customElements.define('coral-alert-header', AlertHeader);
-window.customElements.define('coral-alert-content', AlertContent);
-window.customElements.define('coral-alert-footer', AlertFooter);
+commons._define('coral-alert', Alert);
 
 Alert.Header = AlertHeader;
 Alert.Content = AlertContent;

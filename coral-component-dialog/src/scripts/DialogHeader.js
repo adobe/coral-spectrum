@@ -10,25 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-import {BaseComponent} from '../../../coral-base-component';
-
-const CLASSNAME = '_coral-Dialog-title';
-
 /**
  @class Coral.Dialog.Header
  @classdesc The Dialog header content
  @htmltag coral-dialog-header
- @extends {HTMLElement}
- @extends {BaseComponent}
+ @return {HTMLElement}
  */
-class DialogHeader extends BaseComponent(HTMLElement) {
-  /** @ignore */
-  connectedCallback() {
-    this.classList.add(CLASSNAME);
-  
-    this.setAttribute('role', 'heading');
-    this.setAttribute('aria-level', '2');
-  }
-}
-
-export default DialogHeader;
+export default () => document.createElement('coral-dialog-header');

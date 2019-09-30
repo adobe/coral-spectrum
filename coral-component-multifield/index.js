@@ -21,9 +21,11 @@ import MultifieldItemContent from './src/scripts/MultifieldItemContent';
 
 import './src/styles/index.css';
 
+import {commons} from '../coral-utils';
+
 // Expose component on the Coral namespace
-window.customElements.define('coral-multifield', Multifield);
-window.customElements.define('coral-multifield-item', MultifieldItem);
+commons._define('coral-multifield-item', MultifieldItem);
+commons._define('coral-multifield', Multifield);
 
 Multifield.Item = MultifieldItem;
 Multifield.Item.Content = MultifieldItemContent;

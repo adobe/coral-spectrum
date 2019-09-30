@@ -10,19 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-const CLASSNAME = '_coral-Menu-itemLabel';
-
 /**
  @class Coral.List.Item.Content
  @classdesc The List item content
  @htmltag coral-list-item-content
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class ListItemContent extends HTMLElement {
-  /** @ignore */
-  connectedCallback() {
-    this.classList.add(CLASSNAME);
-  }
-}
-
-export default ListItemContent;
+export default () => document.createElement('coral-list-item-content');

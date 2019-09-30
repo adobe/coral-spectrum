@@ -21,10 +21,10 @@ import BannerContent from './src/scripts/BannerContent';
 
 import './src/styles/index.css';
 
+import {commons} from '../coral-utils';
+
 // Expose component on the Coral namespace
-window.customElements.define('coral-banner', Banner);
-window.customElements.define('coral-banner-header', BannerHeader);
-window.customElements.define('coral-banner-content', BannerContent);
+commons._define('coral-banner', Banner);
 
 Banner.Header = BannerHeader;
 Banner.Content = BannerContent;

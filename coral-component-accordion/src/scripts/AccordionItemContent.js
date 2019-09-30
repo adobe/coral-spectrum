@@ -10,22 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-const CLASSNAME = '_coral-Accordion-itemContent';
-
 /**
  @class Coral.Accordion.Item.Content
  @classdesc Accordion item's content component
  @htmltag coral-accordion-item-content
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class AccordionItemContent extends HTMLElement {
-  /** @ignore */
-  connectedCallback() {
-    this.classList.add(CLASSNAME);
-  
-    // WAI-ARIA 1.1
-    this.setAttribute('role', 'region');
-  }
-}
-
-export default AccordionItemContent;
+export default () => document.createElement('coral-accordion-item-content');

@@ -102,8 +102,8 @@ class AnchorButton extends BaseButton(BaseComponent(HTMLAnchorElement)) {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     // a11y
     this.setAttribute('role', 'button');

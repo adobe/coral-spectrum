@@ -95,8 +95,8 @@ class ActionBarContainer extends BaseActionBarContainer(BaseComponent(HTMLElemen
   static get position() { return position; }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
   

@@ -268,6 +268,19 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();
+    
+    const overlay = this._elements.overlay;
+    // Cannot be open by default when rendered
+    overlay.removeAttribute('open');
+    // Restore in DOM
+    if (overlay._parent) {
+      overlay._parent.appendChild(overlay);
+    }
+  }
+  
+  /** @ignore */
+  render() {
+    super.render();
   
     // Cleanup resize helpers object (cloneNode support)
     const resizeHelpers = this.getElementsByTagName('object');
@@ -289,20 +302,23 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
     if (popover) {
       this.removeChild(popover);
     }
-    
-    this._elements.moreButton.label.textContent = this.moreButtonText;
-    // 'More' button might be moved later in dom when Container is attached to parent
-    this.appendChild(this._elements.moreButton);
   
+    // Copy more text
+    this._elements.moreButton.label.textContent = this.moreButtonText;
+    
     // Init 'More' popover
     this._elements.overlay.target = this._elements.moreButton;
+    
+    // Create empty frag
+    const frag = document.createDocumentFragment();
   
-    // Cannot be open by default when rendered
-    this._elements.overlay.removeAttribute('open');
-    
-    // Insert popover always as firstChild to ensure element order (cloneNode support)
-    this.insertBefore(this._elements.overlay, this.firstChild);
-    
+    // 'More' button might be moved later in dom when Container is attached to parent
+    frag.appendChild(this._elements.moreButton);
+    frag.appendChild(this._elements.overlay);
+  
+    // Render template
+    this.appendChild(frag);
+  
     // Style the items to match action items
     this.items.getAll().forEach(item => this._styleItem(item));
   }
@@ -311,9 +327,11 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
   disconnectedCallback() {
     super.disconnectedCallback();
     
+    const overlay = this._elements.overlay;
     // In case it was moved out don't forget to remove it
-    if (!this.contains(this._elements.overlay)) {
-      this._elements.overlay.remove();
+    if (!this.contains(overlay)) {
+      overlay._parent = overlay._repositioned ? document.body : this;
+      overlay.remove();
     }
   }
 };

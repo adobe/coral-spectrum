@@ -27,6 +27,6 @@ commons.extend(strings, {
 });
 
 // Expose component on the Coral namespace
-window.customElements.define('coral-search', Search);
+commons._define('coral-search', Search);
 
 export {Search};

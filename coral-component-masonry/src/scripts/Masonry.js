@@ -211,6 +211,16 @@ class Masonry extends BaseComponent(HTMLElement) {
   }
   
   /**
+   Allows to interact with the masonry layout instance.
+   
+   @type {MasonryLayout}
+   @readonly
+   */
+  get layoutInstance() {
+    return this._layoutInstance;
+  }
+  
+  /**
    The layout name for this masonry. Must be one of {@link Coral.Masonry.layouts}.
    See {@link MasonryLayoutsEnum}.
    
@@ -534,13 +544,16 @@ class Masonry extends BaseComponent(HTMLElement) {
   /** @private */
   _onItemConnected(event) {
     event.stopImmediatePropagation();
+    
+    const item = event.target;
+    this._prepareItem(item);
+  }
   
+  _prepareItem(item) {
     // We don't care about transitions if the masonry is not in the body
     if (!document.body.contains(this)) {
       return;
     }
-    
-    const item = event.target;
   
     // check if just moving
     if (!item.hasAttribute('_removing') && this !== item._masonry && !item.hasAttribute('_placeholder')) {
@@ -785,8 +798,8 @@ class Masonry extends BaseComponent(HTMLElement) {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
     
@@ -806,6 +819,11 @@ class Masonry extends BaseComponent(HTMLElement) {
     
     // Handles the resizing of the masonry
     commons.addResizeListener(this, this._onResize.bind(this));
+  
+    // Prepare items
+    this.items.getAll().forEach((item) => {
+      this._prepareItem(item);
+    });
 
     // This indicates that the initial items are being attached
     this._attaching = true;

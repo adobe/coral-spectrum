@@ -185,6 +185,7 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
       handle: 'header',
       tagName: 'coral-dialog-header',
       insert: function(header) {
+        header.classList.add(`${CLASSNAME}-title`);
         // Position the header between the drag icon and the type icon
         this._elements.headerWrapper.insertBefore(header, this._elements.dragIcon.nextElementSibling);
       },
@@ -212,6 +213,7 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
       handle: 'content',
       tagName: 'coral-dialog-content',
       insert: function(content) {
+        content.classList.add(`${CLASSNAME}-content`);
         const footer = this.footer;
         // The content should always be before footer
         this._elements.wrapper.insertBefore(content, this.contains(footer) && footer || null);
@@ -233,6 +235,7 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
       handle: 'footer',
       tagName: 'coral-dialog-footer',
       insert: function(footer) {
+        footer.classList.add(`${CLASSNAME}-footer`);
         // The footer should always be after content
         this._elements.wrapper.appendChild(footer);
       }
@@ -523,6 +526,7 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
     // In the DOM but not a direct child of body
     else if (this.parentNode !== document.body) {
       this._ignoreConnectedCallback = true;
+      this._repositioned = true;
       document.body.appendChild(this);
       this._ignoreConnectedCallback = false;
     }
@@ -629,6 +633,13 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
       return;
     }
     
+    super.connectedCallback();
+  }
+  
+  /** @ignore */
+  render() {
+    super.render();
+    
     this.classList.add(`${CLASSNAME}-wrapper`);
 
     // Default reflected attributes
@@ -727,9 +738,6 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
     this.header = header;
     this.footer = footer;
     this.content = content;
-  
-    // Add the Overlay coral-tabcapture elements at the end
-    super.connectedCallback();
   }
   
   /** @ignore */

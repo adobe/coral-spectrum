@@ -22,10 +22,12 @@ import RangedSlider from './src/scripts/RangedSlider';
 
 import './src/styles/index.css';
 
+import {commons} from '../coral-utils';
+
 // Expose component on the Coral namespace
-window.customElements.define('coral-slider', Slider);
-window.customElements.define('coral-slider-item', SliderItem);
-window.customElements.define('coral-rangedslider', RangedSlider);
+commons._define('coral-slider-item', SliderItem);
+commons._define('coral-rangedslider', RangedSlider);
+commons._define('coral-slider', Slider);
 
 Slider.Content = SliderContent;
 Slider.Item = SliderItem;

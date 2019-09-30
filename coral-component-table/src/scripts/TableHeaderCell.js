@@ -67,8 +67,8 @@ class TableHeaderCell extends BaseComponent(HTMLTableCellElement) {
   get _contentZones() { return {'coral-table-headercell-content': 'content'}; }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
   

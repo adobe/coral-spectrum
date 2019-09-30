@@ -22,8 +22,8 @@ const CLASSNAME = '_coral-Shell-help-item';
  */
 class ShellHelpItem extends AnchorList.Item {
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
   }

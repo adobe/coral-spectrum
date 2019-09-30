@@ -38,18 +38,16 @@ commons.extend(strings, {
 });
 
 // Expose component on the Coral namespace
-window.customElements.define('coral-list', List);
-window.customElements.define('coral-list-divider', ListDivider);
-window.customElements.define('coral-list-item', ListItem);
-window.customElements.define('coral-list-item-content', ListItemContent);
-window.customElements.define('coral-anchorlist', AnchorList);
-window.customElements.define('coral-anchorlist-item', AnchorListItem, {extends: 'a'});
-window.customElements.define('coral-buttonlist', ButtonList);
-window.customElements.define('coral-buttonlist-item', ButtonListItem, {extends: 'button'});
-window.customElements.define('coral-selectlist', SelectList);
-window.customElements.define('coral-selectlist-item', SelectListItem);
-window.customElements.define('coral-selectlist-item-content', SelectListItemContent);
-window.customElements.define('coral-selectlist-group', SelectListGroup);
+commons._define('coral-anchorlist-item', AnchorListItem, {extends: 'a'});
+commons._define('coral-anchorlist', AnchorList);
+commons._define('coral-buttonlist-item', ButtonListItem, {extends: 'button'});
+commons._define('coral-buttonlist', ButtonList);
+commons._define('coral-selectlist-group', SelectListGroup);
+commons._define('coral-selectlist-item', SelectListItem);
+commons._define('coral-selectlist', SelectList);
+commons._define('coral-list-divider', ListDivider);
+commons._define('coral-list-item', ListItem);
+commons._define('coral-list', List);
 
 List.Divider = ListDivider;
 List.Item = ListItem;

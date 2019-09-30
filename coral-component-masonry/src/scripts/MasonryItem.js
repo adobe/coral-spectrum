@@ -152,6 +152,14 @@ class MasonryItem extends BaseComponent(HTMLElement) {
   connectedCallback() {
     super.connectedCallback();
     
+    // Inform masonry immediately
+    this.trigger('coral-masonry-item:_connected');
+  }
+  
+  /** @ignore */
+  render() {
+    super.render();
+    
     this.classList.add(CLASSNAME);
     
     // @a11y
@@ -165,9 +173,6 @@ class MasonryItem extends BaseComponent(HTMLElement) {
     this.insertBefore(this._elements.quickactions, this.firstChild);
     // todo workaround to not give user possibility to tab into checkbox
     this._elements.check._labellableElement.tabIndex = -1;
-    
-    // Inform masonry immediately
-    this.trigger('coral-masonry-item:_connected');
   }
   
   /** @ignore */

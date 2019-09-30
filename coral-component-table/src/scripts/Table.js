@@ -2449,8 +2449,8 @@ class Table extends BaseComponent(HTMLTableElement) {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
     

@@ -28,8 +28,8 @@ commons.extend(strings, {
 });
 
 // Expose component on the Coral namespace
-window.customElements.define('coral-autocomplete-item', AutocompleteItem);
-window.customElements.define('coral-autocomplete', Autocomplete);
+commons._define('coral-autocomplete-item', AutocompleteItem);
+commons._define('coral-autocomplete', Autocomplete);
 
 Autocomplete.Item = AutocompleteItem;
 

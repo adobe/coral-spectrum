@@ -19,7 +19,9 @@ import SplitButton from './src/scripts/SplitButton';
 
 import './src/styles/index.css';
 
+import {commons} from '../coral-utils';
+
 // Expose component on the Coral namespace
-window.customElements.define('coral-splitbutton', SplitButton);
+commons._define('coral-splitbutton', SplitButton);
 
 export {SplitButton};

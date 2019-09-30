@@ -28,7 +28,7 @@ commons.extend(strings, {
 });
 
 // Expose component on the Coral namespace
-window.customElements.define('coral-radio', Radio);
+commons._define('coral-radio', Radio);
 
 Radio.Label = RadioLabel;
 

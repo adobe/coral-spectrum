@@ -259,7 +259,7 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
   }
   
   /** @private */
-  _onItemConnected(attachedItem) {
+  _prepareItem(attachedItem) {
     const items = this.items.getAll();
     
     // Prevents to add duplicates based on the tag value
@@ -461,7 +461,7 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
     event.stopImmediatePropagation();
     
     const item = event.target;
-    this._onItemConnected(item);
+    this._prepareItem(item);
   }
   
   /**
@@ -485,9 +485,9 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
-  
+  render() {
+    super.render();
+    
     this.classList.add(CLASSNAME);
     
     // adds the role to support accessibility
@@ -507,7 +507,7 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
     
     // Prepare items
     this.items.getAll().forEach((item) => {
-      this._onItemConnected(item);
+      this._prepareItem(item);
     });
   }
 }

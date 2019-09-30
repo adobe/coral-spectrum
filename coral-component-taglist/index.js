@@ -29,9 +29,8 @@ commons.extend(strings, {
 });
 
 // Expose component on the Coral namespace
-window.customElements.define('coral-tag', Tag);
-window.customElements.define('coral-tag-label', TagLabel);
-window.customElements.define('coral-taglist', TagList);
+commons._define('coral-tag', Tag);
+commons._define('coral-taglist', TagList);
 
 Tag.Label = TagLabel;
 

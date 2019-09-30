@@ -10,25 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-const CLASSNAME = '_coral-Card-content';
-
 /**
  @class Coral.Card.Content
  @classdesc The Card Content
  @htmltag coral-card-content
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class CardContent extends HTMLElement {
-  /** @ignore */
-  connectedCallback() {
-    this.classList.add(CLASSNAME);
-    
-    // Ensure title comes first
-    const title = this.querySelector('coral-card-title');
-    if (title) {
-      this.insertBefore(title, this.firstChild);
-    }
-  }
-}
-
-export default CardContent;
+export default () => document.createElement('coral-card-content');

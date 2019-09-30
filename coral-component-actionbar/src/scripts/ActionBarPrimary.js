@@ -54,8 +54,8 @@ class ActionBarPrimary extends ActionBarContainer(BaseComponent(HTMLElement)) {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
     

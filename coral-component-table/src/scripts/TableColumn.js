@@ -282,8 +282,8 @@ class TableColumn extends BaseComponent(HTMLTableColElement) {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
     

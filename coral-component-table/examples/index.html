@@ -923,7 +923,7 @@
             document.addEventListener('change', function(event) {
               if (event.target.closest('.hide-control')) {
                 var checkbox = event.target.closest('coral-checkbox');
-                event.target.closest('section').querySelector(checkbox.getAttribute('target')).hidden = checkbox.checked;
+                event.target.closest('.markup').querySelector(checkbox.getAttribute('target')).hidden = checkbox.checked;
               }
             });
           });

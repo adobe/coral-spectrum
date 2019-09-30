@@ -66,7 +66,17 @@ class SelectListItem extends BaseComponent(HTMLElement) {
       handle: 'content',
       tagName: 'coral-selectlist-item-content',
       insert: function(content) {
-        this.insertBefore(content, this._elements.checkIcon);
+        content.classList.add(`${CLASSNAME}Label`);
+  
+        // Remove content icon before processing content zone
+        const checkIcon = this._elements.checkIcon;
+        const contentIcon = content.querySelector('coral-icon:not(._coral-Menu-item-icon)');
+        if (contentIcon && contentIcon.icon) {
+          contentIcon.remove();
+          this.icon = contentIcon.icon;
+        }
+        
+        this.insertBefore(content, this.contains(checkIcon) ? checkIcon : null);
       }
     });
   }
@@ -155,8 +165,8 @@ class SelectListItem extends BaseComponent(HTMLElement) {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
     
@@ -166,12 +176,6 @@ class SelectListItem extends BaseComponent(HTMLElement) {
     const template = this.querySelector('._coral-SelectList-icon');
     if (template) {
       template.remove();
-    }
-    
-    // Remove content icon before processing content zone
-    const contentIcon = this.querySelector('coral-icon:not(._coral-Menu-item-icon)');
-    if (contentIcon) {
-      contentIcon.remove();
     }
     
     // Fetch or create the content content zone element
@@ -188,7 +192,6 @@ class SelectListItem extends BaseComponent(HTMLElement) {
     this.appendChild(this._elements.checkIcon);
   
     // Assign the content zones, moving them into place in the process
-    this.icon = contentIcon && contentIcon.icon || this.icon;
     this.content = content;
   }
 }

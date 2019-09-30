@@ -107,6 +107,7 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
       handle: 'content',
       tagName: 'coral-columnview-column-content',
       insert: function(content) {
+        content.classList.add('_coral-AssetList');
         this.appendChild(content);
       }
     });
@@ -554,8 +555,8 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
   

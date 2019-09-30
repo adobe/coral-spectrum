@@ -69,6 +69,7 @@ class Tab extends BaseComponent(HTMLElement) {
       handle: 'label',
       tagName: 'coral-tab-label',
       insert: function(label) {
+        label.classList.add(`${CLASSNAME}Label`);
         this.appendChild(label);
       }
     });
@@ -265,6 +266,16 @@ class Tab extends BaseComponent(HTMLElement) {
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();
+  
+    // Query the tab target once the tab item is inserted in the DOM
+    if (this.selected) {
+      this._selectTarget();
+    }
+  }
+  
+  /** @ignore */
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
   
@@ -307,11 +318,6 @@ class Tab extends BaseComponent(HTMLElement) {
   
     // Assign the content zones, moving them into place in the process
     this.label = label;
-  
-    // Query the tab target once the tab item is inserted in the DOM
-    if (this.selected) {
-      this._selectTarget();
-    }
   }
 }
 

@@ -79,8 +79,8 @@ class AnchorListItem extends BaseListItem(BaseComponent(HTMLAnchorElement)) {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
   }

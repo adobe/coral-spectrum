@@ -83,8 +83,8 @@ class CardProperty extends BaseComponent(HTMLElement) {
   static get observedAttributes() { return super.observedAttributes.concat(['icon']); }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME, 'coral-Body--small');
   

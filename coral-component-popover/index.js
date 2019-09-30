@@ -31,11 +31,8 @@ commons.extend(strings, {
 });
 
 // Expose component on the Coral namespace
-window.customElements.define('coral-popover', Popover);
-window.customElements.define('coral-popover-header', PopoverHeader);
-window.customElements.define('coral-popover-content', PopoverContent);
-window.customElements.define('coral-popover-footer', PopoverFooter);
-window.customElements.define('coral-popover-separator', PopoverSeparator);
+commons._define('coral-popover-separator', PopoverSeparator);
+commons._define('coral-popover', Popover);
 
 Popover.Header = PopoverHeader;
 Popover.Content = PopoverContent;

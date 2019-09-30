@@ -23,11 +23,12 @@ import SideNavLevel from './src/scripts/SideNavLevel';
 
 import './src/styles/index.css';
 
+import {commons} from '../coral-utils';
+
 // Expose component on the Coral namespace
-window.customElements.define('coral-sidenav', SideNav, {extends: 'nav'});
-window.customElements.define('coral-sidenav-item', SideNavItem, {extends: 'a'});
-window.customElements.define('coral-sidenav-heading', SideNavHeading);
-window.customElements.define('coral-sidenav-level', SideNavLevel);
+commons._define('coral-sidenav-level', SideNavLevel);
+commons._define('coral-sidenav-item', SideNavItem, {extends: 'a'});
+commons._define('coral-sidenav', SideNav, {extends: 'nav'});
 
 SideNav.Item = SideNavItem;
 SideNav.Item.Content = SideNavItemContent;

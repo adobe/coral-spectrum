@@ -19,7 +19,9 @@ import ButtonGroup from './src/scripts/ButtonGroup';
 
 import './src/styles/index.css';
 
+import {commons} from '../coral-utils';
+
 // Expose component on the Coral namespace
-window.customElements.define('coral-buttongroup', ButtonGroup);
+commons._define('coral-buttongroup', ButtonGroup);
 
 export {ButtonGroup};

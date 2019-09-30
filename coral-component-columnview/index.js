@@ -30,15 +30,13 @@ import ColumnViewPreviewValue from './src/scripts/ColumnViewPreviewValue';
 
 import './src/styles/index.css';
 
+import {commons} from '../coral-utils';
+
 // Expose component on the Coral namespace
-window.customElements.define('coral-columnview', ColumnView);
-window.customElements.define('coral-columnview-column', ColumnViewColumn);
-window.customElements.define('coral-columnview-column-content', ColumnViewColumnContent);
-window.customElements.define('coral-columnview-item', ColumnViewItem);
-window.customElements.define('coral-columnview-item-thumbnail', ColumnViewItemThumbnail);
-window.customElements.define('coral-columnview-item-content', ColumnViewItemContent);
-window.customElements.define('coral-columnview-preview', ColumnViewPreview);
-window.customElements.define('coral-columnview-preview-content', ColumnViewPreviewContent);
+commons._define('coral-columnview-preview', ColumnViewPreview);
+commons._define('coral-columnview-column', ColumnViewColumn);
+commons._define('coral-columnview-item', ColumnViewItem);
+commons._define('coral-columnview', ColumnView);
 
 ColumnView.Column = ColumnViewColumn;
 ColumnView.Column.Content = ColumnViewColumnContent;

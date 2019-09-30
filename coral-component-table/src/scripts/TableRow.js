@@ -283,8 +283,8 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
   }

@@ -90,9 +90,9 @@ const BaseTableSection = (superClass) => class extends superClass {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
-  
+  render() {
+    super.render();
+    
     // a11y
     this.setAttribute('role', 'rowgroup');
     

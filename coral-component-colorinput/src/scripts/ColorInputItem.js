@@ -81,8 +81,8 @@ class ColorInputItem extends BaseComponent(HTMLElement) {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     // adds the role to support accessibility
     this.setAttribute('role', 'option');

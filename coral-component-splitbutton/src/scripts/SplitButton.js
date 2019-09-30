@@ -15,7 +15,7 @@ import '../../../coral-component-button';
 import '../../../coral-component-anchorbutton';
 import '../../../coral-component-popover';
 import '../../../coral-component-list';
-import {transform, validate} from '../../../coral-utils';
+import {transform, validate, commons} from '../../../coral-utils';
 
 /**
  Enumeration for {@link SplitButton} variants.
@@ -56,8 +56,8 @@ class SplitButton extends BaseComponent(HTMLElement) {
     // Watch for inner button changes
     this._observer = new MutationObserver(() => {
       this._updateLeftVariant();
-      this._updateInnerButtonClassName();
-      this._updateInnerButtonVariant(this.variant);
+      this._updateInnerButtons();
+      this._updateInnerButtonsVariant(this.variant);
     });
     
     this._observer.observe(this, {
@@ -82,7 +82,7 @@ class SplitButton extends BaseComponent(HTMLElement) {
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
   
-    this._updateInnerButtonVariant(this._variant);
+    this._updateInnerButtonsVariant(this._variant);
   }
   
   _getInnerButtons() {
@@ -105,16 +105,24 @@ class SplitButton extends BaseComponent(HTMLElement) {
     }
   }
   
-  _updateInnerButtonVariant(variant) {
+  _updateInnerButtonsVariant(variant) {
     const {action, trigger} = this._getInnerButtons();
     if (action) {action.setAttribute('variant', variant);}
     if (trigger) {trigger.setAttribute('variant', variant);}
   }
   
-  _updateInnerButtonClassName() {
+  _updateInnerButtons() {
     const {action, trigger} = this._getInnerButtons();
     if (action) {action.classList.add('_coral-SplitButton-action');}
-    if (trigger) {trigger.classList.add('_coral-SplitButton-trigger');}
+    if (trigger) {
+      trigger.classList.add('_coral-SplitButton-trigger');
+      // a11y assume a popover is targeting the trigger
+      trigger.setAttribute('aria-haspopup', 'true');
+      if (action) {
+        action.id = action.id || commons.getUID();
+        trigger.setAttribute('aria-labelledby', action.id);
+      }
+    }
   }
   
   /**
@@ -128,17 +136,20 @@ class SplitButton extends BaseComponent(HTMLElement) {
   static get observedAttributes() { return super.observedAttributes.concat(['variant']); }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
+    
+    // a11y
+    this.setAttribute('role', 'group');
     
     // Default reflected attributes
     if (!this._variant) { this.variant = variant.DEFAULT; }
     
     // Update styles
     this._updateLeftVariant();
-    this._updateInnerButtonClassName();
+    this._updateInnerButtons();
   }
 }
 

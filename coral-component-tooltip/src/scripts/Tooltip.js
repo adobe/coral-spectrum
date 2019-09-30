@@ -154,6 +154,7 @@ class Tooltip extends Overlay {
       handle: 'content',
       tagName: 'coral-tooltip-content',
       insert: function(content) {
+        content.classList.add(`${CLASSNAME}-label`);
         this.appendChild(content);
       }
     });
@@ -341,8 +342,8 @@ class Tooltip extends Overlay {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
   

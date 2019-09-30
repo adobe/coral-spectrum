@@ -19,7 +19,9 @@ import WizardView from './src/scripts/WizardView';
 
 import './src/styles/index.css';
 
+import {commons} from '../coral-utils';
+
 // Expose component on the Coral namespace
-window.customElements.define('coral-wizardview', WizardView);
+commons._define('coral-wizardview', WizardView);
 
 export {WizardView};

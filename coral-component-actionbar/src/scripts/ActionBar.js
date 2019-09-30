@@ -46,6 +46,9 @@ class ActionBar extends BaseComponent(HTMLElement) {
       secondary: this.querySelector('coral-actionbar-secondary') || document.createElement('coral-actionbar-secondary')
     };
   
+    // Reference on all items
+    this._items = this.getElementsByTagName('coral-actionbar-item');
+    
     // Debounce wait time in milliseconds
     this._wait = 50;
   
@@ -163,26 +166,17 @@ class ActionBar extends BaseComponent(HTMLElement) {
       return;
     }
     
-    let focusedItem = document.activeElement;
-    if (!(this !== focusedItem && this.contains(focusedItem))) {
-      // focus not on the actionbar => do not bother
-      focusedItem = null;
-    }
-    
-    if (focusedItem && focusedItem.parentNode && focusedItem.parentNode.tagName === 'CORAL-ACTIONBAR-ITEM') {
-      // focusedItem is wrapped
-      focusedItem = focusedItem.parentNode;
-    }
-    
     const ERROR_MARGIN = 78;
     
+    const primaryMore = this.primary._elements.moreButton;
+    const secondaryMore = this.secondary._elements.moreButton;
     const leftItems = this.primary.items.getAll();
     const rightItems = this.secondary.items.getAll().reverse();
     let itemLeft = null;
     let itemRight = null;
     const widthCache = this._newWidthCache();
-    const leftMoreButtonWidth = leftItems.length > 0 ? widthCache.getOuterWidth(this.primary._elements.moreButton) : 0;
-    const rightMoreButtonWidth = rightItems.length > 0 ? widthCache.getOuterWidth(this.secondary._elements.moreButton) : 0;
+    const leftMoreButtonWidth = leftItems.length > 0 ? widthCache.getOuterWidth(primaryMore) : 0;
+    const rightMoreButtonWidth = rightItems.length > 0 ? widthCache.getOuterWidth(secondaryMore) : 0;
     
     // Make it possible to set left/right padding to the containers
     const borderWidthLeftContainer = this.primary.offsetWidth - this.primary.getBoundingClientRect().width;
@@ -199,7 +193,6 @@ class ActionBar extends BaseComponent(HTMLElement) {
     let moreButtonLeftVisible = false;
     let moreButtonRightVisible = false;
     let showItem = false;
-    let tabbableItem = null;
     let itemWidth = 0;
     
     for (let i = 0; i < leftItems.length || i < rightItems.length; i++) {
@@ -232,13 +225,6 @@ class ActionBar extends BaseComponent(HTMLElement) {
               showItem = true;
             }
           }
-  
-          // enable tab for first left tabbable item
-          if (tabbableItem === null && showItem && itemLeft.offsetParent) {
-            tabbableItem = i;
-          }
-          
-          this._toggleItemTabbable(itemLeft, tabbableItem === i);
           
           if (showItem) {
             leftVisibleItems += 1;
@@ -285,9 +271,6 @@ class ActionBar extends BaseComponent(HTMLElement) {
             }
           }
           
-          // enable tab for 'first' right item
-          this._toggleItemTabbable(itemRight, showItem && i === rightItems.length - 1);
-          
           if (showItem) {
             rightVisibleItems += 1;
             currentUsedWidth += itemWidth;
@@ -306,22 +289,51 @@ class ActionBar extends BaseComponent(HTMLElement) {
         }
       }
     }
+  
+    // Handle tabs
+    const primarySelectable = this.primary.items._getAllSelectable();
+    const secondarySelectable = this.secondary.items._getAllSelectable();
+    for (let i = 0; i < this._items.length; i++) {
+      this._toggleItemTabbable(this._items[i], false);
+    }
     
-    // show or hide more buttons
-    this._moveToScreen(this.primary._elements.moreButton, moreButtonLeftVisible);
-    this._moveToScreen(this.secondary._elements.moreButton, moreButtonRightVisible);
-    
-    // enable tabs on more buttons if needed
-    this._toggleItemTabbable(this.primary._elements.moreButton, leftVisibleItems < 1);
-    this._toggleItemTabbable(this.secondary._elements.moreButton, rightVisibleItems < rightItems.length);
-    
-    // we need to check if item has 'hasAttribute' because it is not present on the document
-    if (focusedItem && focusedItem.hasAttribute && focusedItem.hasAttribute('coral-actionbar-offscreen')) {
-      // if currently an element is focused, that should not be visible => select first selectable element nicer
-      // algorithm possible
-      const wrappedItem = getFirstSelectableWrappedItem(this._getAllSelectableItems()[0]);
-      if (wrappedItem) {
-        wrappedItem.focus();
+    // LEFT: Show or hide more buttons
+    if (moreButtonLeftVisible) {
+      this._moveToScreen(primaryMore, true);
+      
+      if (primarySelectable.length === 0) {
+        this._toggleItemTabbable(primaryMore, true);
+      }
+      else {
+        this._toggleItemTabbable(primaryMore, false);
+        this._toggleItemTabbable(primarySelectable[0], true);
+      }
+    }
+    else {
+      this._moveToScreen(primaryMore, false);
+      this._toggleItemTabbable(primaryMore, false);
+      this._toggleItemTabbable(primarySelectable[0], true);
+    }
+  
+    // RIGHT: Show or hide more buttons
+    if (moreButtonRightVisible) {
+      this._moveToScreen(secondaryMore, true);
+  
+      if (secondarySelectable.length === 0) {
+        this._toggleItemTabbable(secondaryMore, true);
+      }
+      else {
+        this._toggleItemTabbable(secondaryMore, false);
+        this._toggleItemTabbable(secondarySelectable[0], true);
+      }
+    }
+    else {
+      this._moveToScreen(secondaryMore, false);
+      this._toggleItemTabbable(secondaryMore, false);
+      
+      const tabbableItem = this.secondary.items._getAllSelectable()[0];
+      if (tabbableItem) {
+        this._toggleItemTabbable(tabbableItem, true);
       }
     }
   
@@ -475,16 +487,22 @@ class ActionBar extends BaseComponent(HTMLElement) {
   
   /** @ignore */
   _toggleItemTabbable(item, tabbable) {
+    this._ignoreLayout = true;
     // item might be wrapped (for now remove/add tabindex only on the first wrapped item)
     item = getFirstSelectableWrappedItem(item);
     
     if (item !== null) {
-      item[tabbable ? 'removeAttribute' : 'setAttribute']('tabindex', '-1');
+      item.setAttribute('tabindex', tabbable ? 0 : -1);
     }
   }
   
   /** @ignore */
   _debounceOnLayout() {
+    if (this._ignoreLayout) {
+      this._ignoreLayout = false;
+      return;
+    }
+    
     // Debounce
     if (this._timeout !== null) {
       window.clearTimeout(this._timeout);
@@ -517,8 +535,8 @@ class ActionBar extends BaseComponent(HTMLElement) {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
     

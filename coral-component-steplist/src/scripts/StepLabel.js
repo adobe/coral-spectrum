@@ -10,22 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-import {BaseComponent} from '../../../coral-base-component';
-
-const CLASSNAME = '_coral-Steplist-label';
-
 /**
  @class Coral.Step.Label
  @classdesc A Step Label
  @htmltag coral-step-label
- @extends {HTMLElement}
- @extends {BaseComponent}
+ @return {HTMLElement}
  */
-class StepLabel extends BaseComponent(HTMLElement) {
-  /** @ignore */
-  connectedCallback() {
-    this.classList.add(CLASSNAME);
-  }
-}
-
-export default StepLabel;
+export default () => document.createElement('coral-step-label');

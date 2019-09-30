@@ -38,8 +38,8 @@ class ButtonListItem extends BaseListItem(BaseComponent(HTMLButtonElement)) {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
   }

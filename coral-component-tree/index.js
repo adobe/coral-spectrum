@@ -21,9 +21,11 @@ import TreeItemContent from './src/scripts/TreeItemContent';
 
 import './src/styles/index.css';
 
+import {commons} from '../coral-utils';
+
 // Expose component on the Coral namespace
-window.customElements.define('coral-tree', Tree);
-window.customElements.define('coral-tree-item', TreeItem);
+commons._define('coral-tree-item', TreeItem);
+commons._define('coral-tree', Tree);
 
 Tree.Item = TreeItem;
 Tree.Item.Content = TreeItemContent;

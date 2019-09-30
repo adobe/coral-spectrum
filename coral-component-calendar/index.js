@@ -27,6 +27,6 @@ commons.extend(strings, {
 });
 
 // Expose component on the Coral namespace
-window.customElements.define('coral-calendar', Calendar);
+commons._define('coral-calendar', Calendar);
 
 export {Calendar};

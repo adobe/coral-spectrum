@@ -26,8 +26,8 @@ const CLASSNAME = '_coral-Table-foot';
  */
 class TableFoot extends BaseTableSection(BaseComponent(HTMLTableSectionElement)) {
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
   }

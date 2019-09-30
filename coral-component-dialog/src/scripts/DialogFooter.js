@@ -10,22 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-import {BaseComponent} from '../../../coral-base-component';
-
-const CLASSNAME = '_coral-Dialog-footer';
-
 /**
  @class Coral.Dialog.Footer
  @classdesc The Dialog footer content
  @htmltag coral-dialog-footer
- @extends {HTMLElement}
- @extends {BaseComponent}
+ @return {HTMLElement}
  */
-class DialogFooter extends BaseComponent(HTMLElement) {
-  /** @ignore */
-  connectedCallback() {
-    this.classList.add(CLASSNAME);
-  }
-}
-
-export default DialogFooter;
+export default () => document.createElement('coral-dialog-footer');

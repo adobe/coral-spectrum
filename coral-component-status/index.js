@@ -20,8 +20,10 @@ import StatusLabel from './src/scripts/StatusLabel';
 
 import './src/styles/index.css';
 
+import {commons} from '../coral-utils';
+
 // Expose component on the Coral namespace
-window.customElements.define('coral-status', Status);
+commons._define('coral-status', Status);
 
 Status.Label = StatusLabel;
 

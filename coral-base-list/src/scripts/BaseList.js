@@ -215,8 +215,8 @@ const BaseList = (superClass) => class extends superClass {
   static get observedAttributes() { return super.observedAttributes.concat(['interaction']); }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
     

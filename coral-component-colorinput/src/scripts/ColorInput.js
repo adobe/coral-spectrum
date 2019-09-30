@@ -870,6 +870,19 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();
+    
+    const overlay = this._elements.overlay;
+    // Cannot be open by default when rendered
+    overlay.removeAttribute('open');
+    // Restore in DOM
+    if (overlay._parent) {
+      overlay._parent.appendChild(overlay);
+    }
+  }
+  
+  /** @ignore */
+  render() {
+    super.render();
   
     this.classList.add(CLASSNAME);
   
@@ -877,9 +890,6 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
     this.setAttribute('aria-expanded', false);
     
     const frag = document.createDocumentFragment();
-  
-    // Cannot be open by default when rendered
-    this._elements.overlay.removeAttribute('open');
     
     // Render template
     frag.appendChild(this._elements.defaultPalette);
@@ -897,6 +907,9 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
         frag.appendChild(child);
       }
     }
+  
+    // we use 'this' so properly aligns to the input
+    this._elements.overlay.target = this._elements.colorPreview;
     
     this.appendChild(frag);
   
@@ -917,18 +930,17 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
     this._preventTriggeringEvents = false;
   
     this._oldSelection = this.selectedItem;
-    
-    // we use 'this' so properly aligns to the input
-    this._elements.overlay.target = this._elements.colorPreview;
   }
   
   /** @ignore */
   disconnectedCallback() {
     super.disconnectedCallback();
     
+    const overlay = this._elements.overlay;
     // In case it was moved out don't forget to remove it
-    if (!this.contains(this._elements.overlay)) {
-      this._elements.overlay.remove();
+    if (!this.contains(overlay)) {
+      overlay._parent = overlay._repositioned ? document.body : this;
+      overlay.remove();
     }
   }
 }

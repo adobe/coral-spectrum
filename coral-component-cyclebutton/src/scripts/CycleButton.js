@@ -356,7 +356,10 @@ class CycleButton extends BaseComponent(HTMLElement) {
     }
     // Unless this is the only item we have, select the next item in line:
     else if (itemCount > 1) {
-      this._selectCycleItem(this.selectedItem.nextElementSibling || items[0]);
+      const neighbor = this.selectedItem.nextElementSibling;
+      const nextItem = neighbor.nodeName === 'CORAL-CYCLEBUTTON-ITEM' ? neighbor : items[0];
+      
+      this._selectCycleItem(nextItem);
       this._focusItem(this._elements.button);
     }
   }
@@ -476,7 +479,9 @@ class CycleButton extends BaseComponent(HTMLElement) {
       this._elements.button.setAttribute('aria-controls', uid);
       this._elements.button.setAttribute('aria-haspopup', true);
       this._elements.button.setAttribute('aria-expanded', false);
-      
+  
+      // Assign the button as the target for the overlay
+      this._elements.overlay.target = this._elements.button;
       this._elements.overlay.hidden = false;
     }
     else {
@@ -484,7 +489,9 @@ class CycleButton extends BaseComponent(HTMLElement) {
       this._elements.button.removeAttribute('aria-controls');
       this._elements.button.removeAttribute('aria-haspopup');
       this._elements.button.removeAttribute('aria-expanded');
-      
+  
+      // Remove target and hide overlay
+      this._elements.overlay.target = null;
       this._elements.overlay.hidden = true;
     }
   }
@@ -511,7 +518,9 @@ class CycleButton extends BaseComponent(HTMLElement) {
     selectListItem.trackingElement = item.trackingElement;
   
     // We do first the content, so that the icon is not destroyed
-    selectListItem.content.innerHTML = item.content.innerHTML;
+    const selectListItemContent = new SelectList.Item.Content();
+    selectListItemContent.innerHTML = item.content.innerHTML;
+    selectListItem.content = selectListItemContent;
     
     // Specify the icon
     if (item.icon) {
@@ -624,6 +633,19 @@ class CycleButton extends BaseComponent(HTMLElement) {
   connectedCallback() {
     super.connectedCallback();
     
+    const overlay = this._elements.overlay;
+    // Cannot be open by default when rendered
+    overlay.removeAttribute('open');
+    // Restore in DOM
+    if (overlay._parent) {
+      overlay._parent.appendChild(overlay);
+    }
+  }
+  
+  /** @ignore */
+  render() {
+    super.render();
+    
     this.classList.add(CLASSNAME);
     
     // Default reflected attributes
@@ -644,18 +666,12 @@ class CycleButton extends BaseComponent(HTMLElement) {
   
     const frag = document.createDocumentFragment();
   
-    // Cannot be open by default when rendered
-    this._elements.overlay.removeAttribute('open');
-  
     // Render the base layout
     frag.appendChild(this._elements.button);
     frag.appendChild(this._elements.overlay);
-  
+    
     // Inserting the template before the items
-    this.insertBefore(frag, this.firstChild);
-  
-    // Assign the button as the target for the overlay
-    this._elements.overlay.target = this._elements.button;
+    this.appendChild(frag);
     
     // Don't trigger events once connected
     this._preventTriggeringEvents = true;
@@ -669,9 +685,11 @@ class CycleButton extends BaseComponent(HTMLElement) {
   disconnectedCallback() {
     super.disconnectedCallback();
     
+    const overlay = this._elements.overlay;
     // In case it was moved out don't forget to remove it
-    if (!this.contains(this._elements.overlay)) {
-      this._elements.overlay.remove();
+    if (!this.contains(overlay)) {
+      overlay._parent = overlay._repositioned ? document.body : this;
+      overlay.remove();
     }
   }
   

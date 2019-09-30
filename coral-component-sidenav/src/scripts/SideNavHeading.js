@@ -10,22 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-const CLASSNAME = '_coral-SideNav-heading';
-
 /**
  @class Coral.SideNav.Heading
  @classdesc The SideNav Heading
  @htmltag coral-sidenav-heading
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class SideNavHeading extends HTMLElement {
-  /** @ignore */
-  connectedCallback() {
-    this.classList.add(CLASSNAME);
-    
-    // a11y
-    this.setAttribute('role', 'heading');
-  }
-}
-
-export default SideNavHeading;
+export default () => document.createElement('coral-sidenav-heading');

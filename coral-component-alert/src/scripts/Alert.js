@@ -150,6 +150,7 @@ class Alert extends BaseComponent(HTMLElement) {
       handle: 'header',
       tagName: 'coral-alert-header',
       insert: function(header) {
+        header.classList.add(`${CLASSNAME}-header`);
         this.insertBefore(header, this.firstChild);
       }
     });
@@ -169,6 +170,7 @@ class Alert extends BaseComponent(HTMLElement) {
       handle: 'content',
       tagName: 'coral-alert-content',
       insert: function(content) {
+        content.classList.add(`${CLASSNAME}-content`);
         // After the header
         this.insertBefore(content, this.header.nextElementSibling);
       }
@@ -189,6 +191,7 @@ class Alert extends BaseComponent(HTMLElement) {
       handle: 'footer',
       tagName: 'coral-alert-footer',
       insert: function(footer) {
+        footer.classList.add(`${CLASSNAME}-footer`);
         // After the content
         this.insertBefore(footer, this.content.nextElementSibling);
       }
@@ -254,8 +257,8 @@ class Alert extends BaseComponent(HTMLElement) {
   static get observedAttributes() { return super.observedAttributes.concat(['variant', 'size']); }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
     

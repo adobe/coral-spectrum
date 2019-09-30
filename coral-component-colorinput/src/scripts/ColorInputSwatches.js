@@ -309,8 +309,8 @@ class ColorInputSwatches extends BaseColorInputAbstractSubview(BaseComponent(HTM
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
     

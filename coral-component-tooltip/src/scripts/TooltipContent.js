@@ -10,22 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-import {BaseComponent} from '../../../coral-base-component';
-
-const CLASSNAME = '_coral-Tooltip-label';
-
 /**
  @class Coral.Tooltip.Content
  @classdesc Tooltip's content component
  @htmltag coral-tooltip-content
- @extends {HTMLElement}
- @extends {BaseComponent}
+ @return {HTMLElement}
  */
-class TooltipContent extends BaseComponent(HTMLElement) {
-  /** @ignore */
-  connectedCallback() {
-    this.classList.add(CLASSNAME);
-  }
-}
-
-export default TooltipContent;
+export default () => document.createElement('coral-tooltip-content');

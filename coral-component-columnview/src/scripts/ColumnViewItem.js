@@ -65,8 +65,9 @@ class ColumnViewItem extends BaseComponent(HTMLElement) {
       handle: 'content',
       tagName: 'coral-columnview-item-content',
       insert: function(content) {
+        content.classList.add(`${CLASSNAME}Label`);
         // Insert before chevron
-        this.insertBefore(content, this.querySelector('._coral-MillerColumn-childIndicator'));
+        this.insertBefore(content, this.querySelector('._coral-AssetList-itemChildIndicator'));
       }
     });
   }
@@ -85,6 +86,7 @@ class ColumnViewItem extends BaseComponent(HTMLElement) {
       handle: 'thumbnail',
       tagName: 'coral-columnview-item-thumbnail',
       insert: function(thumbnail) {
+        thumbnail.classList.add(`${CLASSNAME}Thumbnail`);
         // Insert before content
         this.insertBefore(thumbnail, this.content || null);
       }
@@ -256,8 +258,8 @@ class ColumnViewItem extends BaseComponent(HTMLElement) {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
   
@@ -277,14 +279,11 @@ class ColumnViewItem extends BaseComponent(HTMLElement) {
       while (this.firstChild) {
         content.appendChild(this.firstChild);
       }
+    }
   
-      this.content = content;
-      this.thumbnail = thumbnail;
-    }
-    // Insert thumbnail if icon is specified
-    else if (this.icon) {
-      this.thumbnail = this._elements.thumbnail;
-    }
+    // Assign content zones
+    this.content = content;
+    this.thumbnail = thumbnail;
   }
 }
 

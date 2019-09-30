@@ -250,7 +250,6 @@ class SideNav extends BaseComponent(HTMLElement) {
     }
   }
   
-  // a11y
   _syncLevel(el, isRemoved) {
     if (isRemoved) {
       if (el.id && isLevel(el)) {
@@ -289,13 +288,24 @@ class SideNav extends BaseComponent(HTMLElement) {
     }
   }
   
+  _syncHeading(heading) {
+    heading.classList.add(`${CLASSNAME}-heading`);
+    heading.setAttribute('role', 'heading');
+  }
+  
   _handleMutations(mutations) {
     mutations.forEach((mutation) => {
       // Sync added levels and headings
       for (let i = 0; i < mutation.addedNodes.length; i++) {
         const addedNode = mutation.addedNodes[i];
         
+        // a11y
         this._syncLevel(addedNode);
+        
+        // a11y
+        if (isHeading(addedNode)) {
+          this._syncHeading(addedNode);
+        }
   
         if (isLevel(addedNode)) {
           this._validateSelection(addedNode.querySelector('a[is="coral-sidenav-item"][selected]'));
@@ -326,16 +336,22 @@ class SideNav extends BaseComponent(HTMLElement) {
   static get observedAttributes() { return super.observedAttributes.concat(['variant']); }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
   
     // Default reflected attributes
     if (!this._variant) { this.variant = variant.DEFAULT; }
   
+    // a11y
     for (let i = 0; i < this._levels.length; i++) {
       this._syncLevel(this._levels[i]);
+    }
+  
+    // a11y
+    for (let i = 0; i < this._headings.length; i++) {
+      this._syncHeading(this._headings[i]);
     }
     
     // Don't trigger events once connected

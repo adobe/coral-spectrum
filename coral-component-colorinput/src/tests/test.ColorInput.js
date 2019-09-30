@@ -484,6 +484,10 @@ describe('ColorInput', function() {
         value: '#DDDDDD'
       });
     });
+  
+    describe('Smart Overlay', () => {
+      helpers.testSmartOverlay('coral-colorinput');
+    });
 
     it('should have right classes set', function() {
       const el = helpers.build(window.__html__['ColorInput.base.html']);

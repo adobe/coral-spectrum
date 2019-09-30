@@ -42,148 +42,7 @@ const FOCUSABLE_ELEMENTS = [
 ];
 
 // To support Coral.commons.ready and differentiate lightweight tags from defined elements
-const CORAL_COMPONENTS = [
-  'coral-accordion',
-  'coral-accordion-item',
-  'coral-accordion-item-content',
-  'coral-actionbar',
-  'coral-actionbar-container',
-  'coral-actionbar-item',
-  'coral-actionbar-primary',
-  'coral-actionbar-secondary',
-  'coral-alert',
-  'coral-alert-header',
-  'coral-alert-content',
-  'coral-alert-footer',
-  'a[is="coral-anchorbutton"]',
-  'coral-autocomplete',
-  'coral-autocomplete-item',
-  'coral-autocomplete-item',
-  'coral-banner',
-  'coral-banner-content',
-  'coral-banner-header',
-  'button[is="coral-button"]',
-  'coral-buttongroup',
-  'coral-calendar',
-  'coral-card',
-  'coral-card-content',
-  'coral-card-context',
-  'coral-card-description',
-  'coral-card-property',
-  'coral-card-propertylist',
-  'coral-card-subtitle',
-  'coral-card-title',
-  'coral-charactercount',
-  'coral-checkbox',
-  'coral-clock',
-  'coral-coachmark',
-  'coral-colorinput',
-  'coral-colorinput-colorproperties',
-  'coral-colorinput-item',
-  'coral-colorinput-slider',
-  'coral-colorinput-swatch',
-  'coral-colorinput-swatches',
-  'coral-columnview',
-  'coral-columnview-column',
-  'coral-columnview-column-content',
-  'coral-columnview-item',
-  'coral-columnview-item-content',
-  'coral-columnview-item-thumbnail',
-  'coral-columnview-preview',
-  'coral-columnview-preview-content',
-  'coral-cyclebutton',
-  'coral-cyclebutton-action',
-  'coral-cyclebutton-item',
-  'coral-datepicker',
-  'coral-dialog',
-  'coral-dialog-header',
-  'coral-dialog-content',
-  'coral-dialog-footer',
-  'coral-drawer',
-  'coral-fileupload',
-  'coral-icon',
-  'coral-list',
-  'coral-selectlist',
-  'coral-buttonlist',
-  'coral-anchorlist',
-  'coral-list-item',
-  'coral-list-item-content',
-  'coral-selectlist-item',
-  'coral-selectlist-group',
-  'a[is="coral-anchorlist-item"]',
-  'button[is="coral-buttonlist-item"]',
-  'coral-masonry',
-  'coral-masonry-item',
-  'coral-multifield',
-  'coral-multifield-item',
-  'coral-numberinput',
-  'coral-overlay',
-  'coral-panel',
-  'coral-panelstack',
-  'coral-playground',
-  'coral-popover',
-  'coral-progress',
-  'coral-quickactions',
-  'coral-radio',
-  'coral-search',
-  'coral-select',
-  'coral-select-item',
-  'nav[is="coral-sidenav"]',
-  'a[is="coral-sidenav-item"]',
-  'coral-sidenav-heading',
-  'coral-sidenav-level',
-  'coral-shell',
-  'coral-shell-header',
-  'coral-shell-help',
-  'a[is="coral-shell-homeanchor"]',
-  'a[is="coral-shell-help-item"]',
-  'a[is="coral-shell-workspace"]',
-  'a[is="coral-shell-solution"]',
-  'coral-shell-menu',
-  'coral-shell-menubar',
-  'coral-shell-menubar-item',
-  'coral-shell-organization',
-  'coral-shell-orgswitcher',
-  'coral-shell-solution',
-  'coral-shell-solutions',
-  'coral-shell-solutionswitcher',
-  'coral-shell-suborganization',
-  'coral-shell-user',
-  'coral-shell-workspaces',
-  'coral-slider',
-  'coral-slider-item',
-  'coral-rangedslider',
-  'coral-splitbutton',
-  'coral-status',
-  'coral-step',
-  'coral-steplist',
-  'coral-step-label',
-  'coral-switch',
-  'table[is="coral-table"]',
-  'thead[is="coral-table-head"]',
-  'tbody[is="coral-table-body"]',
-  'tfoot[is="coral-table-foot"]',
-  'tr[is="coral-table-row"]',
-  'td[is="coral-table-cell"]',
-  'th[is="coral-table-headercell"]',
-  'col[is="coral-table-column"]',
-  'coral-tab',
-  'coral-tab-label',
-  'coral-tablist',
-  'coral-tabview',
-  'coral-taglist',
-  'coral-tag',
-  'textarea[is="coral-textarea"]',
-  'input[is="coral-textfield"]',
-  'coral-toast',
-  'coral-toast-content',
-  'coral-tooltip',
-  'coral-tooltip-content',
-  'coral-tree',
-  'coral-tree-item',
-  'coral-wait',
-  'coral-wizardview'
-];
+const CORAL_COMPONENTS = [];
 
 /**
  Converts CSS time to milliseconds. It supports both s and ms units. If the provided value has an unrecogenized unit,
@@ -270,7 +129,7 @@ class Commons {
     focusableElements.push('[tabindex]:not([tabindex="-1"])');
     this._tabbableElementsSelector = focusableElements.join(':not([tabindex="-1"]),');
     
-    this._coralSelector = CORAL_COMPONENTS.join(',');
+    this._coralSelector = '';
   
     // @IE11
     if (!document.currentScript) {
@@ -495,6 +354,21 @@ class Commons {
   }
   
   /**
+   Register a Coral component as Custom Element V1
+   
+   @param {String} name
+   Custom element namespace
+   @param {Function} constructor
+   Constructor for the custom element
+   @param {Object} options
+   E.g for built-in custom elements
+   */
+  _define(name, constructor, options) {
+    window.customElements.define(name, constructor, options);
+    CORAL_COMPONENTS.push(name);
+  }
+  
+  /**
    Checks if Coral components and all nested Coral components are defined as Custom Elements.
    
    @param {HTMLElement} element
@@ -523,6 +397,7 @@ class Commons {
     }
     
     // @todo use ':not(:defined)' once supported ?
+    this._coralSelector = this._coralSelector || CORAL_COMPONENTS.join(',');
     const elements = root.querySelectorAll(this._coralSelector);
     
     // Holds promises that resolve when the elements is defined

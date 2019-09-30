@@ -86,7 +86,9 @@ class SideNavLevel extends BaseComponent(HTMLElement) {
   }
   
   /** @ignore */
-  connectedCallback() {
+  render() {
+    super.render();
+    
     this.classList.add(CLASSNAME);
     
     // a11y

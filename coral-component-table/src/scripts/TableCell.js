@@ -133,9 +133,9 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
-
+  render() {
+    super.render();
+    
     this.classList.add(CLASSNAME);
   }
   

@@ -27,6 +27,6 @@ commons.extend(strings, {
 });
 
 // Expose component on the Coral namespace
-window.customElements.define('coral-clock', Clock);
+commons._define('coral-clock', Clock);
 
 export {Clock};

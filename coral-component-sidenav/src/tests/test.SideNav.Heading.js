@@ -21,30 +21,9 @@ describe('SideNav.Heading', function() {
   });
   
   describe('Instantiation', function() {
-    function testDefaultInstance(el) {
-      expect(el.classList.contains('_coral-SideNav-heading')).to.be.true;
-    }
-  
     it('should be possible using new', function() {
       const el = helpers.build(new SideNav.Heading());
-      testDefaultInstance(el);
-    });
-  
-    it('should be possible using createElement', function() {
-      const el = helpers.build(document.createElement('coral-sidenav-heading'));
-      testDefaultInstance(el);
-    });
-  
-    it('should be possible using markup', function() {
-      const el = helpers.build(window.__html__['SideNav.heading.base.html']);
-      testDefaultInstance(el);
-    });
-  });
-  
-  describe('Accessibility', function() {
-    it('should set a heading role', function() {
-      const el = helpers.build(new SideNav.Heading());
-      expect(el.getAttribute('role')).to.equal('heading');
+      expect(el.nodeName).to.equal('CORAL-SIDENAV-HEADING');
     });
   });
 });

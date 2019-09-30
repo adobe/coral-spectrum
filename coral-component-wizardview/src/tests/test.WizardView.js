@@ -75,7 +75,7 @@ describe('WizardView', function() {
   
     helpers.cloneComponent(
       'should be possible via clone using markup',
-      window.__html__['WizardView.nested.html']
+      window.__html__['WizardView.base.html']
     );
   
     helpers.cloneComponent(

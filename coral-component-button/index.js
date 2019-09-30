@@ -20,8 +20,10 @@ import ButtonLabel from './src/scripts/ButtonLabel';
 
 import './src/styles/index.css';
 
+import {commons} from '../coral-utils';
+
 // Expose component on the Coral namespace
-window.customElements.define('coral-button', Button, {extends: 'button'});
+commons._define('coral-button', Button, {extends: 'button'});
 
 Button.Label = ButtonLabel;
 

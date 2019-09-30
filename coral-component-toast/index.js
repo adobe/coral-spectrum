@@ -20,9 +20,10 @@ import ToastContent from './src/scripts/ToastContent';
 
 import './src/styles/index.css';
 
+import {commons} from '../coral-utils';
+
 // Expose component on the Coral namespace
-window.customElements.define('coral-toast', Toast);
-window.customElements.define('coral-toast-content', ToastContent);
+commons._define('coral-toast', Toast);
 
 Toast.Content = ToastContent;
 

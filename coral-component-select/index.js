@@ -28,8 +28,8 @@ commons.extend(strings, {
 });
 
 // Expose component on the Coral namespace
-window.customElements.define('coral-select', Select);
-window.customElements.define('coral-select-item', SelectItem);
+commons._define('coral-select-item', SelectItem);
+commons._define('coral-select', Select);
 
 Select.Item = SelectItem;
 

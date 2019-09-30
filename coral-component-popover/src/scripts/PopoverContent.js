@@ -10,19 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-import {Dialog} from '../../../coral-component-dialog';
-import BasePopoverContentZone from './BasePopoverContentZone';
-
 /**
  @class Coral.Popover.Content
  @classdesc The Popover default content
  @htmltag coral-popover-content
- @extends {DialogContent}
+ @return {HTMLElement}
  */
-class PopoverContent extends BasePopoverContentZone(Dialog.Content) {
-  get _type() {
-    return 'content';
-  }
-}
-
-export default PopoverContent;
+export default () => document.createElement('coral-popover-content');

@@ -320,8 +320,8 @@ class Multifield extends BaseComponent(HTMLElement) {
   get _contentZones() { return {template: 'template'}; }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME, 'coral-Well');
     

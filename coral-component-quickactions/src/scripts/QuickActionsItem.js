@@ -159,8 +159,8 @@ class QuickActionsItem extends BaseComponent(HTMLElement) {
   static get observedAttributes() { return super.observedAttributes.concat(['href', 'icon', 'type']); }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     // Default reflected attributes
     if (!this._type) { this.type = type.BUTTON; }

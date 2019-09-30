@@ -93,8 +93,8 @@ class ShellSolution extends BaseComponent(HTMLAnchorElement) {
   static get observedAttributes() { return super.observedAttributes.concat(['icon', 'linked']); }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
   

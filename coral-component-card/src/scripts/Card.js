@@ -186,6 +186,13 @@ class Card extends BaseComponent(HTMLElement) {
       tagName: 'coral-card-content',
       insert: function(content) {
         content.classList.add('u-coral-padding');
+        
+        // Ensure title comes first
+        const title = content.querySelector('coral-card-title');
+        if (title) {
+          content.insertBefore(title, content.firstChild);
+        }
+        
         this._elements.wrapper.insertBefore(content, this.overlay || null);
       }
     });
@@ -342,8 +349,8 @@ class Card extends BaseComponent(HTMLElement) {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
     

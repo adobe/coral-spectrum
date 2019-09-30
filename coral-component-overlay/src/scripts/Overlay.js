@@ -461,6 +461,7 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
     // If it's the case then we move the overlay to make sure it's not truncated
     if (reposition) {
       this._ignoreConnectedCallback = true;
+      this._repositioned = true;
       document.body.appendChild(this);
       this._ignoreConnectedCallback = false;
     }
@@ -671,11 +672,6 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
     }
     
     super.connectedCallback();
-    
-    this.classList.add(CLASSNAME);
-  
-    // Hidden by default
-    this.style.display = 'none';
   
     // In case it was not added to the DOM, make sure popper is initialized by setting target
     this.target = this.target;
@@ -689,6 +685,14 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
         this._togglePopperEventListener(false);
       }
     });
+  }
+  
+  /** @ignore */
+  render() {
+    this.classList.add(CLASSNAME);
+  
+    // Hidden by default
+    this.style.display = 'none';
   }
   
   /** @ignore */

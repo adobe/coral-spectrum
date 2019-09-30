@@ -19,7 +19,9 @@ import CoachMark from './src/scripts/CoachMark';
 
 import './src/styles/index.css';
 
+import {commons} from '../coral-utils';
+
 // Expose component on the Coral namespace
-window.customElements.define('coral-coachmark', CoachMark);
+commons._define('coral-coachmark', CoachMark);
 
 export {CoachMark};

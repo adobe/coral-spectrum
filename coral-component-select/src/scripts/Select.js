@@ -1103,8 +1103,10 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
     event.stopImmediatePropagation();
     
     const item = event.target;
-    if (item._selectListItem && item._selectListItem.content) {
-      item._selectListItem.content.innerHTML = item.innerHTML;
+    if (item._selectListItem) {
+      const content = new SelectList.Item.Content();
+      content.innerHTML = item.innerHTML;
+      item._selectListItem.content = content;
     }
     
     if (item._nativeOption) {
@@ -1343,6 +1345,19 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
   connectedCallback() {
     super.connectedCallback();
     
+    const overlay = this._elements.overlay;
+    // Cannot be open by default when rendered
+    overlay.removeAttribute('open');
+    // Restore in DOM
+    if (overlay._parent) {
+      overlay._parent.appendChild(overlay);
+    }
+  }
+  
+  /** @ignore */
+  render() {
+    super.render();
+    
     this.classList.add(CLASSNAME);
   
     // Default reflected attributes
@@ -1375,31 +1390,30 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
   
     // Render the main template
     const frag = document.createDocumentFragment();
-  
-    // Cannot be open by default when rendered
-    this._elements.overlay.removeAttribute('open');
     
     frag.appendChild(this._elements.button);
     frag.appendChild(this._elements.input);
     frag.appendChild(this._elements.nativeSelect);
     frag.appendChild(this._elements.taglist);
     frag.appendChild(this._elements.overlay);
-    
-    this.insertBefore(frag, this.firstChild);
   
     // Assign the button as the target for the overlay
     this._elements.overlay.target = this._elements.button;
     // handles the focus allocation every time the overlay closes
     this._elements.overlay.returnFocusTo(this._elements.button);
+    
+    this.appendChild(frag);
   }
   
   /** @ignore */
   disconnectedCallback() {
     super.disconnectedCallback();
     
+    const overlay = this._elements.overlay;
     // In case it was moved out don't forget to remove it
-    if (!this.contains(this._elements.overlay)) {
-      this._elements.overlay.remove();
+    if (!this.contains(overlay)) {
+      overlay._parent = overlay._repositioned ? document.body : this;
+      overlay.remove();
     }
   }
   

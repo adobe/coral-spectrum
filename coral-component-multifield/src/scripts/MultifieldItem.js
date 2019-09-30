@@ -61,8 +61,8 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
   get _contentZones() { return {'coral-multifield-item-content': 'content'}; }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
   

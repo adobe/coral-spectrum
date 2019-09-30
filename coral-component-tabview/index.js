@@ -17,7 +17,11 @@ import '../coral-compat';
 
 import TabView from './src/scripts/TabView';
 
+import './src/styles/index.css';
+
+import {commons} from '../coral-utils';
+
 // Expose component on the Coral namespace
-window.customElements.define('coral-tabview', TabView);
+commons._define('coral-tabview', TabView);
 
 export {TabView};

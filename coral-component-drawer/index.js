@@ -28,7 +28,7 @@ commons.extend(strings, {
 });
 
 // Expose component on the Coral namespace
-window.customElements.define('coral-drawer', Drawer);
+commons._define('coral-drawer', Drawer);
 
 Drawer.Content = DrawerContent;
 

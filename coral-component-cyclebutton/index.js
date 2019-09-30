@@ -21,10 +21,12 @@ import CycleButtonAction from './src/scripts/CycleButtonAction';
 
 import './src/styles/index.css';
 
+import {commons} from '../coral-utils';
+
 // Expose component on the Coral namespace
-window.customElements.define('coral-cyclebutton', CycleButton);
-window.customElements.define('coral-cyclebutton-item', CycleButtonItem);
-window.customElements.define('coral-cyclebutton-action', CycleButtonAction);
+commons._define('coral-cyclebutton-action', CycleButtonAction);
+commons._define('coral-cyclebutton-item', CycleButtonItem);
+commons._define('coral-cyclebutton', CycleButton);
 
 CycleButton.Item = CycleButtonItem;
 CycleButton.Action = CycleButtonAction;

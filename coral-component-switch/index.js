@@ -28,7 +28,7 @@ commons.extend(strings, {
 });
 
 // Expose component on the Coral namespace
-window.customElements.define('coral-switch', Switch);
+commons._define('coral-switch', Switch);
 
 Switch.Label = SwitchLabel;
 

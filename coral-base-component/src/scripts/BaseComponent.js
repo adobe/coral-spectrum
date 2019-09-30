@@ -784,6 +784,15 @@ const BaseComponent = (superClass) => class extends superClass {
       delegateGlobalEvents.call(this);
       this._disconnected = false;
     }
+    
+    if (!this._rendered) {
+      this.render();
+    }
+  }
+  
+  /** @ignore */
+  render() {
+    this._rendered = true;
   }
   
   /** @ignore */

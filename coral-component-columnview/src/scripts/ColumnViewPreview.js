@@ -46,6 +46,7 @@ class ColumnViewPreview extends BaseComponent(HTMLElement) {
       handle: 'content',
       tagName: 'coral-columnview-preview-content',
       insert: function(content) {
+        content.classList.add('coral-Body--small');
         this.appendChild(content);
       }
     });
@@ -54,8 +55,8 @@ class ColumnViewPreview extends BaseComponent(HTMLElement) {
   get _contentZones() { return {'coral-columnview-preview-content': 'content'}; }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
     

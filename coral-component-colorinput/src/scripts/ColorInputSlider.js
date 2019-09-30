@@ -91,8 +91,8 @@ class ColorInputSlider extends Slider {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(...CLASSNAMES);
   }

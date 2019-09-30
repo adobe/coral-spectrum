@@ -34,12 +34,12 @@ commons.extend(strings, {
 });
 
 // Expose component on the Coral namespace
-window.customElements.define('coral-colorinput', ColorInput);
-window.customElements.define('coral-colorinput-item', ColorInputItem);
-window.customElements.define('coral-colorinput-swatches', ColorInputSwatches);
-window.customElements.define('coral-colorinput-swatch', ColorInputSwatch);
-window.customElements.define('coral-colorinput-slider', ColorInputSlider);
-window.customElements.define('coral-colorinput-colorproperties', ColorInputColorProperties);
+commons._define('coral-colorinput-swatches', ColorInputSwatches);
+commons._define('coral-colorinput-swatch', ColorInputSwatch);
+commons._define('coral-colorinput-slider', ColorInputSlider);
+commons._define('coral-colorinput-colorproperties', ColorInputColorProperties);
+commons._define('coral-colorinput-item', ColorInputItem);
+commons._define('coral-colorinput', ColorInput);
 
 ColorInput.Item = ColorInputItem;
 ColorInput.Swatches = ColorInputSwatches;

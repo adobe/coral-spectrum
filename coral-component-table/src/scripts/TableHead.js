@@ -63,8 +63,8 @@ class TableHead extends BaseTableSection(BaseComponent(HTMLTableSectionElement))
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
   }

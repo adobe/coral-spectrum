@@ -23,8 +23,8 @@ const CLASSNAME = '_coral-Shell-orgSwitcher-subitem';
  */
 class ShellSuborganization extends ShellOrganization {
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
   

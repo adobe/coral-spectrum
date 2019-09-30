@@ -183,8 +183,8 @@ class TabView extends BaseComponent(HTMLElement) {
   static get observedAttributes() { return super.observedAttributes.concat(['orientation']); }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
     

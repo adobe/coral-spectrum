@@ -66,8 +66,8 @@ class ShellWorkspace extends BaseComponent(HTMLAnchorElement) {
   static get observedAttributes() { return super.observedAttributes.concat(['selected']); }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
   }

@@ -25,6 +25,8 @@ import MasonryDashboardLayout from './src/scripts/MasonryDashboardLayout';
 
 import './src/styles/index.css';
 
+import {commons} from '../coral-utils';
+
 // Register layouts
 Masonry.registerLayout(Masonry.layouts.FIXED_CENTERED, MasonryFixedCenteredLayout);
 Masonry.registerLayout(Masonry.layouts.FIXED_SPREAD, MasonryFixedSpreadLayout);
@@ -32,8 +34,8 @@ Masonry.registerLayout(Masonry.layouts.VARIABLE, MasonryVariableLayout);
 Masonry.registerLayout(Masonry.layouts.DASHBOARD, MasonryDashboardLayout);
 
 // Expose component on the Coral namespace
-window.customElements.define('coral-masonry', Masonry);
-window.customElements.define('coral-masonry-item', MasonryItem);
+commons._define('coral-masonry-item', MasonryItem);
+commons._define('coral-masonry', Masonry);
 
 Masonry.Item = MasonryItem;
 Masonry.Layout = MasonryLayout;

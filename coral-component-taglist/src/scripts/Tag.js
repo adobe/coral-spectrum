@@ -181,6 +181,7 @@ class Tag extends BaseComponent(HTMLElement) {
       handle: 'label',
       tagName: 'coral-tag-label',
       insert: function(label) {
+        label.classList.add(`${CLASSNAME}Label`);
         this.insertBefore(label, this.firstChild);
         this._updateAriaLabel();
       }
@@ -508,6 +509,14 @@ class Tag extends BaseComponent(HTMLElement) {
   connectedCallback() {
     super.connectedCallback();
   
+    // Used to inform the tag list that it's added
+    this.trigger('coral-tag:_connected');
+  }
+  
+  /** @ignore */
+  render() {
+    super.render();
+    
     // Default reflected attributes
     if (!this._size) { this.size = size.MEDIUM; }
     if (!this._color) { this.color = color.DEFAULT; }
@@ -537,9 +546,6 @@ class Tag extends BaseComponent(HTMLElement) {
   
     // Assign the content zones, moving them into place in the process
     this.label = label;
-    
-    // Used to inform the tag list that it's added
-    this.trigger('coral-tag:_connected');
   }
   
   /** @ignore */

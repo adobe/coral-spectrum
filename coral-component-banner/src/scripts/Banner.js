@@ -95,6 +95,7 @@ class Banner extends BaseComponent(HTMLElement) {
       handle: 'header',
       tagName: 'coral-banner-header',
       insert: function(header) {
+        header.classList.add(`${CLASSNAME}-header`);
         this.insertBefore(header, this.firstChild);
       }
     });
@@ -114,6 +115,7 @@ class Banner extends BaseComponent(HTMLElement) {
       handle: 'content',
       tagName: 'coral-banner-content',
       insert: function(content) {
+        content.classList.add(`${CLASSNAME}-content`);
         this.appendChild(content);
       }
     });
@@ -139,8 +141,8 @@ class Banner extends BaseComponent(HTMLElement) {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
   

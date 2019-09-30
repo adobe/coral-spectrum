@@ -19,7 +19,9 @@ import Icon from './src/scripts/Icon';
 
 import './src/styles/index.css';
 
+import {commons} from '../coral-utils';
+
 // Expose component on the Coral namespace
-window.customElements.define('coral-icon', Icon);
+commons._define('coral-icon', Icon);
 
 export {Icon};

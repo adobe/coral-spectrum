@@ -10,22 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-import {BaseComponent} from '../../../coral-base-component';
-
-const CLASSNAME = '_coral-Dialog-content';
-
 /**
  @class Coral.Dialog.Content
  @classdesc The Dialog default content
  @htmltag coral-dialog-content
- @extends {HTMLElement}
- @extends {BaseComponent}
+ @return {HTMLElement}
  */
-class DialogContent extends BaseComponent(HTMLElement) {
-  /** @ignore */
-  connectedCallback() {
-    this.classList.add(CLASSNAME);
-  }
-}
-
-export default DialogContent;
+export default () => document.createElement('coral-dialog-content');

@@ -51,6 +51,7 @@ class Step extends BaseComponent(HTMLElement) {
       handle: 'label',
       tagName: 'coral-step-label',
       insert: function(label) {
+        label.classList.add('_coral-Steplist-label');
         this.appendChild(label);
       }
     });
@@ -172,6 +173,19 @@ class Step extends BaseComponent(HTMLElement) {
   connectedCallback() {
     super.connectedCallback();
     
+    const overlay = this._elements.overlay;
+    // Cannot be open by default when rendered
+    overlay.removeAttribute('open');
+    // Restore in DOM
+    if (overlay._parent) {
+      overlay._parent.appendChild(overlay);
+    }
+  }
+  
+  /** @ignore */
+  render() {
+    super.render();
+    
     this.classList.add(CLASSNAME);
   
     // Generate a unique ID for the Step panel if one isn't already present
@@ -184,17 +198,14 @@ class Step extends BaseComponent(HTMLElement) {
     const frag = document.createDocumentFragment();
   
     // Discard the template created tooltip if one is provided by markup
-    this._elements.tooltip = this.querySelector('coral-tooltip') || this._elements.tooltip;
-  
-    // Cannot be open by default when rendered
-    this._elements.tooltip.removeAttribute('open');
+    this._elements.overlay = this.querySelector('coral-tooltip') || this._elements.overlay;
     
     // Render main template
     frag.appendChild(this._elements.stepMarkerContainer);
-    frag.appendChild(this._elements.tooltip);
     frag.appendChild(this._elements.line);
+    frag.appendChild(this._elements.overlay);
     
-    const templateHandleNames = ['stepMarkerContainer', 'tooltip', 'line'];
+    const templateHandleNames = ['stepMarkerContainer', 'overlay', 'line'];
   
     const label = this._elements.label;
     
@@ -214,11 +225,11 @@ class Step extends BaseComponent(HTMLElement) {
         this.removeChild(child);
       }
     }
-    
-    this.appendChild(frag);
   
     // Link tooltip target
-    this._elements.tooltip.target = this._elements.stepMarkerContainer;
+    this._elements.overlay.target = this._elements.stepMarkerContainer;
+    
+    this.appendChild(frag);
     
     // Assign the content zone so the insert function will be called
     this.label = label;
@@ -231,9 +242,11 @@ class Step extends BaseComponent(HTMLElement) {
   disconnectedCallback() {
     super.disconnectedCallback();
     
+    const overlay = this._elements.overlay;
     // In case it was moved out don't forget to remove it
-    if (!this.contains(this._elements.tooltip)) {
-      this._elements.tooltip.remove();
+    if (!this.contains(overlay)) {
+      overlay._parent = overlay._repositioned ? document.body : this;
+      overlay.remove();
     }
   }
 }

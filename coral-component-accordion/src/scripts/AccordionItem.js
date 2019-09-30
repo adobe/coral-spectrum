@@ -74,6 +74,11 @@ class AccordionItem extends BaseComponent(HTMLElement) {
       handle: 'content',
       tagName: 'coral-accordion-item-content',
       insert: function(content) {
+        content.classList.add(`${CLASSNAME}Content`);
+  
+        // WAI-ARIA 1.1
+        content.setAttribute('role', 'region');
+        
         this._setAria(this._elements.button, content);
         
         this.appendChild(content);
@@ -182,9 +187,9 @@ class AccordionItem extends BaseComponent(HTMLElement) {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
-    
+  render() {
+    super.render();
+  
     this.classList.add(CLASSNAME);
   
     // a11y

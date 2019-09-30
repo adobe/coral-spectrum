@@ -27,6 +27,6 @@ commons.extend(strings, {
 });
 
 // Expose component on the Coral namespace
-window.customElements.define('coral-datepicker', Datepicker);
+commons._define('coral-datepicker', Datepicker);
 
 export {Datepicker};

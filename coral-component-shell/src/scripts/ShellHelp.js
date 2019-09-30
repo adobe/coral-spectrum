@@ -212,8 +212,8 @@ class ShellHelp extends BaseComponent(HTMLElement) {
   static get observedAttributes() { return super.observedAttributes.concat(['placeholder']); }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(...CLASSNAMES);
   

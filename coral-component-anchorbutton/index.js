@@ -20,8 +20,10 @@ import AnchorButtonLabel from './src/scripts/AnchorButtonLabel';
 
 import './src/styles/index.css';
 
+import {commons} from '../coral-utils';
+
 // Expose component on the Coral namespace
-window.customElements.define('coral-anchorbutton', AnchorButton, {extends: 'a'});
+commons._define('coral-anchorbutton', AnchorButton, {extends: 'a'});
 
 AnchorButton.Label = AnchorButtonLabel;
 

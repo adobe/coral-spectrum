@@ -21,10 +21,11 @@ import TabList from './src/scripts/TabList';
 
 import './src/styles/index.css';
 
+import {commons} from '../coral-utils';
+
 // Expose component on the Coral namespace
-window.customElements.define('coral-tab', Tab);
-window.customElements.define('coral-tab-label', TabLabel);
-window.customElements.define('coral-tablist', TabList);
+commons._define('coral-tab', Tab);
+commons._define('coral-tablist', TabList);
 
 Tab.Label = TabLabel;
 

@@ -10,19 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-const CLASSNAME = '_coral-Banner-header';
-
 /**
  @class Coral.Banner.Header
  @classdesc A Banner Header component
  @htmltag coral-banner-header
- @extends {HTMLElement}
+ @return {HTMLElement}
  */
-class BannerHeader extends HTMLElement {
-  /** @ignore */
-  connectedCallback() {
-    this.classList.add(CLASSNAME);
-  }
-}
-
-export default BannerHeader;
+export default () => document.createElement('coral-banner-header');

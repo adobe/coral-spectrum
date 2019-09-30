@@ -10,15 +10,20 @@
  * governing permissions and limitations under the License.
  */
 
+import {BaseComponent} from '../../../coral-base-component';
+
 /**
  @class Coral.Card.PropertyList
  @classdesc The Card PropertyList component
  @htmltag coral-card-propertylist
  @extends {HTMLElement}
+ @extends {BaseComponent}
  */
-class CardPropertyList extends HTMLElement {
-  /* @ignore */
-  connectedCallback() {
+class CardPropertyList extends BaseComponent(HTMLElement) {
+  /** @ignore */
+  render() {
+    super.render();
+    
     this.classList.add('u-coral-clearFix');
     
     // Empty it if no items
