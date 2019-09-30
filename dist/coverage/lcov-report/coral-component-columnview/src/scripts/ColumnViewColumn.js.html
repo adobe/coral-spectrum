@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">93.96% </span>
+        <span class="strong">93.99% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>171/182</span>
+        <span class='fraction'>172/183</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">87.37% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>36/40</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">93.96% </span>
+        <span class="strong">93.99% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>171/182</span>
+        <span class='fraction'>172/183</span>
       </div>
     </div>
     <p class="quiet">
@@ -651,7 +651,8 @@
 <a name='L603'></a><a href='#L603'>603</a>
 <a name='L604'></a><a href='#L604'>604</a>
 <a name='L605'></a><a href='#L605'>605</a>
-<a name='L606'></a><a href='#L606'>606</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L606'></a><a href='#L606'>606</a>
+<a name='L607'></a><a href='#L607'>607</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1029,7 +1030,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">244x</span>
-<span class="cline-any cline-yes">81x</span>
+<span class="cline-any cline-yes">56x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1047,8 +1048,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">233x</span>
-<span class="cline-any cline-yes">225x</span>
+<span class="cline-any cline-yes">208x</span>
+<span class="cline-any cline-yes">200x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1197,6 +1198,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">212x</span>
 <span class="cline-any cline-yes">212x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1365,6 +1367,7 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
       handle: 'content',
       tagName: 'coral-columnview-column-content',
       insert: function(content) {
+        content.classList.add('_coral-AssetList');
         this.appendChild(content);
       }
     });
@@ -1377,8 +1380,8 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
    @readonly
    */
   get items() {
-    // we do lazy initialization of the collection
-    if<span class="missing-if-branch" title="else path not taken" >E</span> (!this._items) {
+    //<span class="missing-if-branch" title="else path not taken" >E</span> we do lazy initialization of the collection
+    if (!this._items) {
       this._items = new ColumnViewCollection({
         host: this,
         container: this._elements.content,
@@ -1388,11 +1391,11 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
     }
   
     return this._items;
-  }
-  <span class="missing-if-branch" title="else path not taken" >E</span>
+  }<span class="missing-if-branch" title="else path not taken" >E</span>
+  
   /**
-   Returns the first selected item in the ColumnView. The value &lt;code&gt;null&lt;/code&gt; is returned if no element is
-   selected.<span class="missing-if-branch" title="else path not taken" >E</span>
+   Returns the<span class="missing-if-branch" title="else path not taken" >E</span> first selected item in the ColumnView. The value &lt;code&gt;null&lt;/code&gt; is returned if no element is
+   selected.
    
    @type {?HTMLElement}
    @readonly
@@ -1401,8 +1404,8 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
     return this._selectionMode !== selectionMode.NONE ? this.items._getFirstSelected() : null;
   }
   
-  /**
-   Returns an Array containing the set selected<span class="branch-0 cbranch-no" title="branch not covered" > items inside this </span>Column.
+  /**<span class="branch-0 cbranch-no" title="branch not covered" ></span>
+   Returns an Array containing the set selected items inside this Column.
    
    @type {Array.&lt;HTMLElement&gt;}
    @readonly
@@ -1474,9 +1477,9 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
       
       // toggles the selection of the item
       const isSelected = item.hasAttribute('selected');
-      
-      if<span class="missing-if-branch" title="if path not taken" >I</span> (!isSelected) {
-        if<span class="cstat-no" title="statement not covered" > (this._selectionMode === selectionMode.SINGLE) {</span>
+      <span class="missing-if-branch" title="if path not taken" >I</span>
+      if (<span class="cstat-no" title="statement not covered" >!isSelected) {</span>
+        if (this._selectionMode === selectionMode.SINGLE) {
           item.setAttribute('active', '');
         }
         // Handle multi-selection with shiftKey
@@ -1509,9 +1512,9 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
           }
         }
       }
-      
-      <span class="missing-if-branch" title="if path not taken" >I</span>if (!isSelected &amp;&amp; this._selectionMode === selectionMode.SINGLE) {
-<span class="cstat-no" title="statement not covered" >        item.set</span>Attribute('active', '');
+      <span class="missing-if-branch" title="if path not taken" >I</span>
+      if<span class="cstat-no" title="statement not covered" > (!isSel</span>ected &amp;&amp; this._selectionMode === selectionMode.SINGLE) {
+        item.setAttribute('active', '');
       }
       
       item[isSelected ? 'removeAttribute' : 'setAttribute']('selected', '');
@@ -1529,10 +1532,10 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
     event.stopImmediatePropagation();
     
     // ignores event handling due to bulk select operation
-    if (this._bulkSelectionChange) {
-      return;<span class="fstat-no" title="function not covered" ></span>
+    if (this._bulkSe<span class="fstat-no" title="function not covered" >lectionChange) {</span>
+<span class="cstat-no" title="statement not covered" >      return;</span>
     }<span class="cstat-no" title="statement not covered" ></span>
-    <span class="cstat-no" title="statement not covered" ></span>
+    
     const item = event.matchedTarget;
     
     this._bulkSelectionChange = true;
@@ -1549,9 +1552,9 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
   
   /**
    Handles selecting multiple items in the same column. Selection could result in none, a single or multiple selected
-   items.
-   <span class="missing-if-branch" title="if path not taken" >I</span>
-   @priv<span class="cstat-no" title="statement not covered" >ate</span>
+   ite<span class="missing-if-branch" title="if path not taken" >I</span>ms.
+   <span class="cstat-no" title="statement not covered" ></span>
+   @private
    */
   _onItemSelectedChange(event) {
     // we stop propagation since it is a private event
@@ -1565,12 +1568,12 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
       // Remember the last selected item
       this._lastSelectedItems.push(item);
     }
-    else {
-      const removedI<span class="fstat-no" title="function not covered" >temIndex = this._la</span>stSelectedItems.indexOf(item);
-      if (removedItemI<span class="cstat-no" title="statement not covered" >nde</span>x !== -1) {
-        this._lastSelectedItems = this._lastSelectedItems.splice(removedItemIndex, 1);
-<span class="cstat-no" title="statement not covered" >      }</span>
-    }<span class="cstat-no" title="statement not covered" ></span>
+    else {<span class="fstat-no" title="function not covered" ></span>
+      const removedIte<span class="cstat-no" title="statement not covered" >mIn</span>dex = this._lastSelectedItems.indexOf(item);
+      if (removedItemIndex !== -1) {
+<span class="cstat-no" title="statement not covered" >        this._lastSelectedItems = this._lastSelectedItems.splice(removedItemIndex, 1);</span>
+      }<span class="cstat-no" title="statement not covered" ></span>
+    }
     
     // ignores event handling due to bulk select operation
     if (this._bulkSelectionChange) {
@@ -1725,8 +1728,8 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
    Item that triggered the load.
    
    @private
-   */
-  _loadI<span class="missing-if-branch" title="else path not taken" >E</span>tems(count, item) {
+   */<span class="missing-if-branch" title="else path not taken" >E</span>
+  _loadItems(count, item) {
     // if the given item is not active, it should not request data
     if (!item || item.hasAttribute('active')) {
       this.trigger('coral-columnview-column:_loaditems', {
@@ -1765,12 +1768,12 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
       const mutation = mutations[i];
       // we handle the collection events
       this._triggerCollectionEvents(mutation.addedNodes, mutation.removedNodes);
-    }
-    <span class="missing-if-branch" title="if path not taken" >I</span>
-    this._setStateFromDOM();
+    }<span class="missing-if-branch" title="if path not taken" >I</span>
     
-    // i<span class="cstat-no" title="statement not covered" >n case items were added removed <span class="fstat-no" title="function not covered" >an</span>d selection changed</span>
-    this._<span class="cstat-no" title="statement not covered" >validateColumnChange();</span>
+    this._setStateFromDOM();
+    <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+    // in <span class="cstat-no" title="statement not covered" >case items were added removed and sele</span>ction changed
+    this._validateColumnChange();
     
     // checks if more items can be added after the childlist change
     this._tryToLoadAdditionalItems();
@@ -1812,8 +1815,8 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
   }
   
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
+  render() {
+    super.render();
     
     this.classList.add(CLASSNAME);
   
@@ -1867,7 +1870,7 @@ export default ColumnViewColumn;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Sep 25 2019 15:27:32 GMT+0200 (Central European Summer Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Sep 30 2019 15:03:52 GMT+0200 (Central European Summer Time)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

@@ -11270,12 +11270,12 @@ coral-autocomplete-item {
   width: 100%;
   border-radius: 4px 4px 0 0;
 }
-._coral-Card--inverted ._coral-Card-description,
-._coral-Card--condensed ._coral-Card-description {
+._coral-Card--inverted coral-card-description,
+._coral-Card--condensed coral-card-description {
   display: none;
 }
-._coral-Card--inverted ._coral-Card-content,
-._coral-Card--condensed ._coral-Card-content {
+._coral-Card--inverted coral-card-content,
+._coral-Card--condensed coral-card-content {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -11356,7 +11356,7 @@ coral-card-asset > img {
 coral-card-asset > img.is-loading {
   opacity: 0;
 }
-._coral-Card--quiet ._coral-Card-content {
+._coral-Card--quiet coral-card-content {
   padding: 20px 0 !important;
 }
 ._coral-Card--quiet coral-card-asset {
@@ -11374,7 +11374,7 @@ coral-card-propertylist > ._coral-Card-property {
   margin-right: 6px;
   margin-bottom: 0;
 }
-._coral-Card-description {
+coral-card-description {
   padding-top: 14px;
 }
 coral-card-description:first-of-type {
@@ -11397,62 +11397,59 @@ coral-card-overlay {
   height: 96px;
   font-size: 12px;
 }
-._coral-Card-content {
+coral-card-content {
   display: block;
   padding-top: 20px 24px !important;
 }
 coral-card-overlay:empty,
 coral-card-propertylist:empty,
-._coral-Card-content:empty {
+coral-card-content:empty {
   display: none;
 }
-._coral-Card-content,
-._coral-Card-context,
-._coral-Card-title,
-._coral-Card-subtitle,
-._coral-Card-description {
+coral-card-content,
+coral-card-context,
+coral-card-title,
+coral-card-subtitle,
+coral-card-description {
   display: block;
 }
-._coral-Card-title,
-._coral-Card-subtitle,
-._coral-Card-description,
-._coral-Card-context {
+coral-card-title,
+coral-card-subtitle,
+coral-card-description,
+coral-card-context {
   text-decoration: none;
   overflow-y: auto;
 }
-._coral-Card ._coral-Card-title {
-  font-weight: 400;
-  margin: 0;
-}
-._coral-Card ._coral-Card-context {
-  font-weight: 400;
-  margin: 0;
-}
-._coral-Card ._coral-Card-title + ._coral-Card-subtitle,
-._coral-Card ._coral-Card-title + ._coral-Card-context {
-  margin-top: 6px;
-}
-._coral-Card-subtitle {
+._coral-Card coral-card-context {
   font-size: 11px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
-._coral-Card-context + ._coral-Card-description {
+._coral-Card coral-card-title + coral-card-subtitle,
+._coral-Card coral-card-title + coral-card-context {
+  margin-top: 6px;
+}
+coral-card-subtitle {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+coral-card-context + coral-card-description {
   margin-top: 20px;
 }
-._coral-Card-title + ._coral-Card-description {
+coral-card-title + coral-card-description {
   margin-top: 20px;
 }
-._coral-Card-context + coral-card-propertylist {
+coral-card-context + coral-card-propertylist {
   margin-top: 20px;
 }
-._coral-Card-title + coral-card-propertylist {
+coral-card-title + coral-card-propertylist {
   margin-top: 20px;
 }
-._coral-Card-subtitle + coral-card-propertylist {
+coral-card-subtitle + coral-card-propertylist {
   margin-top: 20px;
 }
-._coral-Card-description + coral-card-propertylist {
+coral-card-description + coral-card-propertylist {
   margin-top: 20px;
 }
 coral-card-info > coral-alert._coral-Alert {
@@ -11511,8 +11508,11 @@ coral-card-info > coral-alert {
 .coral--light ._coral-Card-wrapper {
   background-color: rgb(255, 255, 255);
 }
-.coral--light ._coral-Card-title {
+.coral--light coral-card-title {
   color: rgb(75, 75, 75);
+}
+.coral--light coral-card-context {
+  color: rgb(110, 110, 110);
 }
 .coral--light coral-card-overlay {
   background-color: rgba(30,30,30,0.9);
@@ -11545,13 +11545,13 @@ coral-card-info > coral-alert {
   background-color: rgba(255,255,255,0.9);
   border-bottom-color: rgb(244, 244, 244);
 }
-.coral--light ._coral-Card--condensed ._coral-Card-context {
+.coral--light ._coral-Card--condensed coral-card-context {
   color: rgb(116, 116, 116);
 }
-.coral--light ._coral-Card--condensed ._coral-Card-title {
+.coral--light ._coral-Card--condensed coral-card-title {
   color: rgb(50, 50, 50);
 }
-.coral--light ._coral-Card--condensed ._coral-Card-subtitle {
+.coral--light ._coral-Card--condensed coral-card-subtitle {
   color: rgb(116, 116, 116);
 }
 .coral--light ._coral-Card--condensed ._coral-Card-property {
@@ -11570,13 +11570,13 @@ coral-card-info > coral-alert {
   background-color: rgba(30,30,30,0.9);
   border-bottom-color: rgb(44, 44, 44);
 }
-.coral--light ._coral-Card--inverted ._coral-Card-context {
+.coral--light ._coral-Card--inverted coral-card-context {
   color: rgb(162, 162, 162);
 }
-.coral--light ._coral-Card--inverted ._coral-Card-title {
+.coral--light ._coral-Card--inverted coral-card-title {
   color: rgb(255, 255, 255);
 }
-.coral--light ._coral-Card--inverted ._coral-Card-subtitle {
+.coral--light ._coral-Card--inverted coral-card-subtitle {
   color: rgb(162, 162, 162);
 }
 .coral--light ._coral-Card--inverted ._coral-Card-property {
@@ -11633,8 +11633,11 @@ coral-card-info > coral-alert {
 .coral--lightest ._coral-Card-wrapper {
   background-color: rgb(255, 255, 255);
 }
-.coral--lightest ._coral-Card-title {
+.coral--lightest coral-card-title {
   color: rgb(80, 80, 80);
+}
+.coral--lightest coral-card-context {
+  color: rgb(116, 116, 116);
 }
 .coral--lightest coral-card-overlay {
   background-color: rgba(30,30,30,0.9);
@@ -11667,13 +11670,13 @@ coral-card-info > coral-alert {
   background-color: rgba(255,255,255,0.9);
   border-bottom-color: rgb(244, 244, 244);
 }
-.coral--lightest ._coral-Card--condensed ._coral-Card-context {
+.coral--lightest ._coral-Card--condensed coral-card-context {
   color: rgb(116, 116, 116);
 }
-.coral--lightest ._coral-Card--condensed ._coral-Card-title {
+.coral--lightest ._coral-Card--condensed coral-card-title {
   color: rgb(50, 50, 50);
 }
-.coral--lightest ._coral-Card--condensed ._coral-Card-subtitle {
+.coral--lightest ._coral-Card--condensed coral-card-subtitle {
   color: rgb(116, 116, 116);
 }
 .coral--lightest ._coral-Card--condensed ._coral-Card-property {
@@ -11692,13 +11695,13 @@ coral-card-info > coral-alert {
   background-color: rgba(30,30,30,0.9);
   border-bottom-color: rgb(44, 44, 44);
 }
-.coral--lightest ._coral-Card--inverted ._coral-Card-context {
+.coral--lightest ._coral-Card--inverted coral-card-context {
   color: rgb(162, 162, 162);
 }
-.coral--lightest ._coral-Card--inverted ._coral-Card-title {
+.coral--lightest ._coral-Card--inverted coral-card-title {
   color: rgb(255, 255, 255);
 }
-.coral--lightest ._coral-Card--inverted ._coral-Card-subtitle {
+.coral--lightest ._coral-Card--inverted coral-card-subtitle {
   color: rgb(162, 162, 162);
 }
 .coral--lightest ._coral-Card--inverted ._coral-Card-property {
@@ -11755,8 +11758,11 @@ coral-card-info > coral-alert {
 .coral--dark ._coral-Card-wrapper {
   background-color: rgb(37, 37, 37);
 }
-.coral--dark ._coral-Card-title {
+.coral--dark coral-card-title {
   color: rgb(227, 227, 227);
+}
+.coral--dark coral-card-context {
+  color: rgb(185, 185, 185);
 }
 .coral--dark coral-card-overlay {
   background-color: rgba(30,30,30,0.9);
@@ -11789,13 +11795,13 @@ coral-card-info > coral-alert {
   background-color: rgba(255,255,255,0.9);
   border-bottom-color: rgb(244, 244, 244);
 }
-.coral--dark ._coral-Card--condensed ._coral-Card-context {
+.coral--dark ._coral-Card--condensed coral-card-context {
   color: rgb(116, 116, 116);
 }
-.coral--dark ._coral-Card--condensed ._coral-Card-title {
+.coral--dark ._coral-Card--condensed coral-card-title {
   color: rgb(50, 50, 50);
 }
-.coral--dark ._coral-Card--condensed ._coral-Card-subtitle {
+.coral--dark ._coral-Card--condensed coral-card-subtitle {
   color: rgb(116, 116, 116);
 }
 .coral--dark ._coral-Card--condensed ._coral-Card-property {
@@ -11814,13 +11820,13 @@ coral-card-info > coral-alert {
   background-color: rgba(30,30,30,0.9);
   border-bottom-color: rgb(44, 44, 44);
 }
-.coral--dark ._coral-Card--inverted ._coral-Card-context {
+.coral--dark ._coral-Card--inverted coral-card-context {
   color: rgb(162, 162, 162);
 }
-.coral--dark ._coral-Card--inverted ._coral-Card-title {
+.coral--dark ._coral-Card--inverted coral-card-title {
   color: rgb(255, 255, 255);
 }
-.coral--dark ._coral-Card--inverted ._coral-Card-subtitle {
+.coral--dark ._coral-Card--inverted coral-card-subtitle {
   color: rgb(162, 162, 162);
 }
 .coral--dark ._coral-Card--inverted ._coral-Card-property {
@@ -11877,8 +11883,11 @@ coral-card-info > coral-alert {
 .coral--darkest ._coral-Card-wrapper {
   background-color: rgb(8, 8, 8);
 }
-.coral--darkest ._coral-Card-title {
+.coral--darkest coral-card-title {
   color: rgb(200, 200, 200);
+}
+.coral--darkest coral-card-context {
+  color: rgb(162, 162, 162);
 }
 .coral--darkest coral-card-overlay {
   background-color: rgba(30,30,30,0.9);
@@ -11911,13 +11920,13 @@ coral-card-info > coral-alert {
   background-color: rgba(255,255,255,0.9);
   border-bottom-color: rgb(244, 244, 244);
 }
-.coral--darkest ._coral-Card--condensed ._coral-Card-context {
+.coral--darkest ._coral-Card--condensed coral-card-context {
   color: rgb(116, 116, 116);
 }
-.coral--darkest ._coral-Card--condensed ._coral-Card-title {
+.coral--darkest ._coral-Card--condensed coral-card-title {
   color: rgb(50, 50, 50);
 }
-.coral--darkest ._coral-Card--condensed ._coral-Card-subtitle {
+.coral--darkest ._coral-Card--condensed coral-card-subtitle {
   color: rgb(116, 116, 116);
 }
 .coral--darkest ._coral-Card--condensed ._coral-Card-property {
@@ -11936,13 +11945,13 @@ coral-card-info > coral-alert {
   background-color: rgba(30,30,30,0.9);
   border-bottom-color: rgb(44, 44, 44);
 }
-.coral--darkest ._coral-Card--inverted ._coral-Card-context {
+.coral--darkest ._coral-Card--inverted coral-card-context {
   color: rgb(162, 162, 162);
 }
-.coral--darkest ._coral-Card--inverted ._coral-Card-title {
+.coral--darkest ._coral-Card--inverted coral-card-title {
   color: rgb(255, 255, 255);
 }
-.coral--darkest ._coral-Card--inverted ._coral-Card-subtitle {
+.coral--darkest ._coral-Card--inverted coral-card-subtitle {
   color: rgb(162, 162, 162);
 }
 .coral--darkest ._coral-Card--inverted ._coral-Card-property {
@@ -21165,6 +21174,24 @@ table[is="coral-table"]:not([orderable]) th[is="coral-table-headercell"] [coral-
 }
 .coral--darkest ._coral-Tabs-item:not(.is-disabled).is-invalid {
   color: rgb(236, 91, 98);
+}
+
+/**
+ * Copyright 2019 Adobe. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under
+ * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+ * OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
+._coral-TabView--vertical {
+  display: flex;
+}
+._coral-TabView--vertical ._coral-PanelStack {
+  flex: 1;
 }
 
 /**

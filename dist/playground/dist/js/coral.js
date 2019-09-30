@@ -297,74 +297,6 @@
     return _setPrototypeOf(o, p);
   }
 
-  function isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-
-    try {
-      Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  function _construct(Parent, args, Class) {
-    if (isNativeReflectConstruct()) {
-      _construct = Reflect.construct;
-    } else {
-      _construct = function _construct(Parent, args, Class) {
-        var a = [null];
-        a.push.apply(a, args);
-        var Constructor = Function.bind.apply(Parent, a);
-        var instance = new Constructor();
-        if (Class) _setPrototypeOf(instance, Class.prototype);
-        return instance;
-      };
-    }
-
-    return _construct.apply(null, arguments);
-  }
-
-  function _isNativeFunction(fn) {
-    return Function.toString.call(fn).indexOf("[native code]") !== -1;
-  }
-
-  function _wrapNativeSuper(Class) {
-    var _cache = typeof Map === "function" ? new Map() : undefined;
-
-    _wrapNativeSuper = function _wrapNativeSuper(Class) {
-      if (Class === null || !_isNativeFunction(Class)) return Class;
-
-      if (typeof Class !== "function") {
-        throw new TypeError("Super expression must either be null or a function");
-      }
-
-      if (typeof _cache !== "undefined") {
-        if (_cache.has(Class)) return _cache.get(Class);
-
-        _cache.set(Class, Wrapper);
-      }
-
-      function Wrapper() {
-        return _construct(Class, arguments, _getPrototypeOf(this).constructor);
-      }
-
-      Wrapper.prototype = Object.create(Class.prototype, {
-        constructor: {
-          value: Wrapper,
-          enumerable: false,
-          writable: true,
-          configurable: true
-        }
-      });
-      return _setPrototypeOf(Wrapper, Class);
-    };
-
-    return _wrapNativeSuper(Class);
-  }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -4318,7 +4250,7 @@
 
   var FOCUSABLE_ELEMENTS = ['input:not([disabled])', 'select:not([disabled])', 'textarea:not([disabled])', 'button:not([disabled])', 'a[href]', 'area[href]', 'summary', 'iframe', 'object', 'embed', 'audio[controls]', 'video[controls]', '[contenteditable]']; // To support Coral.commons.ready and differentiate lightweight tags from defined elements
 
-  var CORAL_COMPONENTS = ['coral-accordion', 'coral-accordion-item', 'coral-accordion-item-content', 'coral-actionbar', 'coral-actionbar-container', 'coral-actionbar-item', 'coral-actionbar-primary', 'coral-actionbar-secondary', 'coral-alert', 'coral-alert-header', 'coral-alert-content', 'coral-alert-footer', 'a[is="coral-anchorbutton"]', 'coral-autocomplete', 'coral-autocomplete-item', 'coral-autocomplete-item', 'coral-banner', 'coral-banner-content', 'coral-banner-header', 'button[is="coral-button"]', 'coral-buttongroup', 'coral-calendar', 'coral-card', 'coral-card-content', 'coral-card-context', 'coral-card-description', 'coral-card-property', 'coral-card-propertylist', 'coral-card-subtitle', 'coral-card-title', 'coral-charactercount', 'coral-checkbox', 'coral-clock', 'coral-coachmark', 'coral-colorinput', 'coral-colorinput-colorproperties', 'coral-colorinput-item', 'coral-colorinput-slider', 'coral-colorinput-swatch', 'coral-colorinput-swatches', 'coral-columnview', 'coral-columnview-column', 'coral-columnview-column-content', 'coral-columnview-item', 'coral-columnview-item-content', 'coral-columnview-item-thumbnail', 'coral-columnview-preview', 'coral-columnview-preview-content', 'coral-cyclebutton', 'coral-cyclebutton-action', 'coral-cyclebutton-item', 'coral-datepicker', 'coral-dialog', 'coral-dialog-header', 'coral-dialog-content', 'coral-dialog-footer', 'coral-drawer', 'coral-fileupload', 'coral-icon', 'coral-list', 'coral-selectlist', 'coral-buttonlist', 'coral-anchorlist', 'coral-list-item', 'coral-list-item-content', 'coral-selectlist-item', 'coral-selectlist-group', 'a[is="coral-anchorlist-item"]', 'button[is="coral-buttonlist-item"]', 'coral-masonry', 'coral-masonry-item', 'coral-multifield', 'coral-multifield-item', 'coral-numberinput', 'coral-overlay', 'coral-panel', 'coral-panelstack', 'coral-playground', 'coral-popover', 'coral-progress', 'coral-quickactions', 'coral-radio', 'coral-search', 'coral-select', 'coral-select-item', 'nav[is="coral-sidenav"]', 'a[is="coral-sidenav-item"]', 'coral-sidenav-heading', 'coral-sidenav-level', 'coral-shell', 'coral-shell-header', 'coral-shell-help', 'a[is="coral-shell-homeanchor"]', 'a[is="coral-shell-help-item"]', 'a[is="coral-shell-workspace"]', 'a[is="coral-shell-solution"]', 'coral-shell-menu', 'coral-shell-menubar', 'coral-shell-menubar-item', 'coral-shell-organization', 'coral-shell-orgswitcher', 'coral-shell-solution', 'coral-shell-solutions', 'coral-shell-solutionswitcher', 'coral-shell-suborganization', 'coral-shell-user', 'coral-shell-workspaces', 'coral-slider', 'coral-slider-item', 'coral-rangedslider', 'coral-splitbutton', 'coral-status', 'coral-step', 'coral-steplist', 'coral-step-label', 'coral-switch', 'table[is="coral-table"]', 'thead[is="coral-table-head"]', 'tbody[is="coral-table-body"]', 'tfoot[is="coral-table-foot"]', 'tr[is="coral-table-row"]', 'td[is="coral-table-cell"]', 'th[is="coral-table-headercell"]', 'col[is="coral-table-column"]', 'coral-tab', 'coral-tab-label', 'coral-tablist', 'coral-tabview', 'coral-taglist', 'coral-tag', 'textarea[is="coral-textarea"]', 'input[is="coral-textfield"]', 'coral-toast', 'coral-toast-content', 'coral-tooltip', 'coral-tooltip-content', 'coral-tree', 'coral-tree-item', 'coral-wait', 'coral-wizardview'];
+  var CORAL_COMPONENTS = [];
   /**
    Converts CSS time to milliseconds. It supports both s and ms units. If the provided value has an unrecogenized unit,
    zero will be returned.
@@ -4415,7 +4347,7 @@
       this._focusableElementsSelector = focusableElements.join(',');
       focusableElements.push('[tabindex]:not([tabindex="-1"])');
       this._tabbableElementsSelector = focusableElements.join(':not([tabindex="-1"]),');
-      this._coralSelector = CORAL_COMPONENTS.join(','); // @IE11
+      this._coralSelector = ''; // @IE11
 
       if (!document.currentScript) {
         var scripts = document.getElementsByTagName('script');
@@ -4641,6 +4573,23 @@
         }
       }
       /**
+       Register a Coral component as Custom Element V1
+       
+       @param {String} name
+       Custom element namespace
+       @param {Function} constructor
+       Constructor for the custom element
+       @param {Object} options
+       E.g for built-in custom elements
+       */
+
+    }, {
+      key: "_define",
+      value: function _define(name, constructor, options) {
+        window.customElements.define(name, constructor, options);
+        CORAL_COMPONENTS.push(name);
+      }
+      /**
        Checks if Coral components and all nested Coral components are defined as Custom Elements.
        
        @param {HTMLElement} element
@@ -4672,6 +4621,7 @@
         } // @todo use ':not(:defined)' once supported ?
 
 
+        this._coralSelector = this._coralSelector || CORAL_COMPONENTS.join(',');
         var elements = root.querySelectorAll(this._coralSelector); // Holds promises that resolve when the elements is defined
 
         var promises = []; // Don't forget to check root
@@ -13217,6 +13167,17 @@
               delegateGlobalEvents.call(this);
               this._disconnected = false;
             }
+
+            if (!this._rendered) {
+              this.render();
+            }
+          }
+          /** @ignore */
+
+        }, {
+          key: "render",
+          value: function render() {
+            this._rendered = true;
           }
           /** @ignore */
 
@@ -13664,13 +13625,13 @@
        */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
+      value: function render() {
         var _this4 = this;
 
-        _get(_getPrototypeOf(Accordion.prototype), "connectedCallback", this).call(this);
+        _get(_getPrototypeOf(Accordion.prototype), "render", this).call(this);
 
         this.classList.add(CLASSNAME); // Default reflected attributes
 
@@ -14777,17 +14738,24 @@
     }, {
       key: "connectedCallback",
       value: function connectedCallback() {
-        _get(_getPrototypeOf(Icon.prototype), "connectedCallback", this).call(this);
+        _get(_getPrototypeOf(Icon.prototype), "connectedCallback", this).call(this); // Contextual icons need to be checked again
+
+
+        if (this.hasAttribute('_context')) {
+          this.icon = this.icon;
+        }
+      }
+      /** @ignore */
+
+    }, {
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(Icon.prototype), "render", this).call(this);
 
         this.classList.add(CLASSNAME$1); // Set default size
 
         if (!this._size) {
           this.size = size.SMALL;
-        } // Contextual icons need to be checked again
-
-
-        if (this.hasAttribute('_context')) {
-          this.icon = this.icon;
         }
       }
     }, {
@@ -14993,7 +14961,7 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-icon', Icon);
+  commons._define('coral-icon', Icon);
 
   var CLASSNAME$2 = '_coral-Accordion-item';
   /**
@@ -15054,11 +15022,11 @@
         this._elements.label.focus();
       }
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(AccordionItem.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(AccordionItem.prototype), "render", this).call(this);
 
         this.classList.add(CLASSNAME$2); // a11y
 
@@ -15117,6 +15085,10 @@
           handle: 'content',
           tagName: 'coral-accordion-item-content',
           insert: function insert(content) {
+            content.classList.add("".concat(CLASSNAME$2, "Content")); // WAI-ARIA 1.1
+
+            content.setAttribute('role', 'region');
+
             this._setAria(this._elements.button, content);
 
             this.appendChild(content);
@@ -15262,38 +15234,16 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var CLASSNAME$3 = '_coral-Accordion-itemContent';
+
   /**
    @class Coral.Accordion.Item.Content
    @classdesc Accordion item's content component
    @htmltag coral-accordion-item-content
-   @extends {HTMLElement}
+   @return {HTMLElement}
    */
-
-  var AccordionItemContent =
-  /*#__PURE__*/
-  function (_HTMLElement) {
-    _inherits(AccordionItemContent, _HTMLElement);
-
-    function AccordionItemContent() {
-      _classCallCheck(this, AccordionItemContent);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(AccordionItemContent).apply(this, arguments));
-    }
-
-    _createClass(AccordionItemContent, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        this.classList.add(CLASSNAME$3); // WAI-ARIA 1.1
-
-        this.setAttribute('role', 'region');
-      }
-    }]);
-
-    return AccordionItemContent;
-  }(_wrapNativeSuper(HTMLElement));
+  var AccordionItemContent = (function () {
+    return document.createElement('coral-accordion-item-content');
+  });
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -15307,9 +15257,10 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-accordion', Accordion);
-  window.customElements.define('coral-accordion-item', AccordionItem);
-  window.customElements.define('coral-accordion-item-content', AccordionItemContent);
+  commons._define('coral-accordion-item', AccordionItem);
+
+  commons._define('coral-accordion', Accordion);
+
   Accordion.Item = AccordionItem;
   Accordion.Item.Label = AccordionItemLabel;
   Accordion.Item.Content = AccordionItemContent;
@@ -15562,7 +15513,7 @@
 
   var FADETIME = 350;
 
-  var CLASSNAME$4 = '_coral-BaseOverlay'; // Includes overlay itself
+  var CLASSNAME$3 = '_coral-BaseOverlay'; // Includes overlay itself
 
   var COMPONENTS_WITH_OVERLAY = "\n  coral-actionbar,\n  coral-autocomplete,\n  coral-colorinput,\n  coral-cyclebutton,\n  coral-datepicker,\n  coral-dialog,\n  coral-overlay,\n  coral-popover,\n  coral-quickactions,\n  coral-select,\n  coral-tooltip\n"; // The tab capture element that lives at the top of the body
 
@@ -16256,8 +16207,6 @@
           value: function connectedCallback() {
             _get(_getPrototypeOf(_class.prototype), "connectedCallback", this).call(this);
 
-            this.classList.add(CLASSNAME$4);
-
             if (!this.hasAttribute('trapfocus')) {
               this.trapFocus = this.trapFocus;
             }
@@ -16282,6 +16231,15 @@
                 this._showBackdrop();
               }
             }
+          }
+          /** @ignore */
+
+        }, {
+          key: "render",
+          value: function render() {
+            _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
+
+            this.classList.add(CLASSNAME$3);
           }
           /** @ignore */
 
@@ -19283,7 +19241,7 @@
     ON: 'on',
     OFF: 'off'
   };
-  var CLASSNAME$5 = '_coral-Overlay';
+  var CLASSNAME$4 = '_coral-Overlay';
   /**
    @class Coral.Overlay
    @classdesc A generic Overlay component.
@@ -19379,6 +19337,7 @@
 
         if (reposition) {
           this._ignoreConnectedCallback = true;
+          this._repositioned = true;
           document.body.appendChild(this);
           this._ignoreConnectedCallback = false;
         }
@@ -19508,11 +19467,8 @@
           return;
         }
 
-        _get(_getPrototypeOf(Overlay.prototype), "connectedCallback", this).call(this);
+        _get(_getPrototypeOf(Overlay.prototype), "connectedCallback", this).call(this); // In case it was not added to the DOM, make sure popper is initialized by setting target
 
-        this.classList.add(CLASSNAME$5); // Hidden by default
-
-        this.style.display = 'none'; // In case it was not added to the DOM, make sure popper is initialized by setting target
 
         this.target = this.target; // We need an additional frame to help popper read the correct offsets
 
@@ -19524,6 +19480,15 @@
             _this5._togglePopperEventListener(false);
           }
         });
+      }
+      /** @ignore */
+
+    }, {
+      key: "render",
+      value: function render() {
+        this.classList.add(CLASSNAME$4); // Hidden by default
+
+        this.style.display = 'none';
       }
       /** @ignore */
 
@@ -19935,630 +19900,7 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-overlay', Overlay);
-
-  var template$2 = function anonymous(data_0) {
-    var frag = document.createDocumentFragment();
-    var el0 = this["headerWrapper"] = document.createElement("div");
-    el0.className += " _coral-Dialog-header";
-    el0.setAttribute("handle", "headerWrapper");
-    frag.appendChild(el0);
-    var el1 = document.createTextNode("\n");
-    frag.appendChild(el1);
-    var el2 = this["closeButton"] = document.createElement("button", "coral-button");
-    el2.setAttribute("tracking", "off");
-    el2.setAttribute("handle", "closeButton");
-    el2.className += " _coral-Dialog-closeButton _coral-ClearButton";
-    el2.setAttribute("type", "button");
-    el2.setAttribute("is", "coral-button");
-    el2.setAttribute("variant", "_custom");
-    el2.setAttribute("icon", "close");
-    el2.setAttribute("title", data_0["i18n"]["get"]('Close'));
-    el2.setAttribute("tabindex", "-1");
-    el2.setAttribute("coral-close", "");
-    frag.appendChild(el2);
-    var el3 = document.createTextNode("\n");
-    frag.appendChild(el3);
-    var el4 = this["tip"] = document.createElement("div");
-    el4.className += " _coral-Popover-tip";
-    el4.setAttribute("handle", "tip");
-    frag.appendChild(el4);
-    var el5 = document.createTextNode("\n");
-    frag.appendChild(el5);
-    return frag;
-  };
-
-  var CLASSNAME$6 = '_coral-Popover';
-  var OFFSET = 5; // Used to map icon with variant
-
-  var capitalize$1 = function capitalize(s) {
-    return s.charAt(0).toUpperCase() + s.slice(1);
-  }; // If it's empty and has no non-textnode children
-
-
-  var _isEmpty = function _isEmpty(el) {
-    return !el || el.children.length === 0 && el.textContent.replace(/\s*/g, '') === '';
-  };
-  /**
-   Enumeration for {@link Popover} closable state.
-   
-   @typedef {Object} PopoverClosableEnum
-   
-   @property {String} ON
-   Show a close button on the popover and close the popover when clicked.
-   @property {String} OFF
-   Do not show a close button. Elements with the <code>coral-close</code> attributes will still close the
-   popover.
-   */
-
-
-  var closable = {
-    ON: 'on',
-    OFF: 'off'
-  };
-  /**
-   Enumeration for {@link Popover} variants.
-   
-   @typedef {Object} PopoverVariantEnum
-   
-   @property {String} DEFAULT
-   A default popover without header icon.
-   @property {String} ERROR
-   A popover with an error header and icon, indicating that an error has occurred.
-   @property {String} WARNING
-   A popover with a warning header and icon, notifying the user of something important.
-   @property {String} SUCCESS
-   A popover with a success header and icon, indicates to the user that an operation was successful.
-   @property {String} HELP
-   A popover with a question header and icon, provides the user with help.
-   @property {String} INFO
-   A popover with an info header and icon, informs the user of non-critical information.
-   */
-
-  var variant$1 = {
-    DEFAULT: 'default',
-    ERROR: 'error',
-    WARNING: 'warning',
-    SUCCESS: 'success',
-    HELP: 'help',
-    INFO: 'info',
-    _COACHMARK: '_coachmark'
-  }; // A string of all possible variant classnames
-
-  var ALL_VARIANT_CLASSES = [];
-
-  for (var variantValue in variant$1) {
-    if (variantValue !== 'COACHMARK') {
-      ALL_VARIANT_CLASSES.push("_coral-Dialog--".concat(variant$1[variantValue]));
-    }
-  } // A string of all possible placement classnames
-
-
-  var placement$1 = Overlay.placement;
-  var ALL_PLACEMENT_CLASSES = [];
-
-  for (var placementKey in placement$1) {
-    ALL_PLACEMENT_CLASSES.push("".concat(CLASSNAME$6, "--").concat(placement$1[placementKey]));
-  }
-  /**
-   @class Coral.Popover
-   @classdesc A Popover component for small overlay content.
-   @htmltag coral-popover
-   @extends {Overlay}
-   */
-
-
-  var Popover =
-  /*#__PURE__*/
-  function (_Overlay) {
-    _inherits(Popover, _Overlay);
-
-    /** @ignore */
-    function Popover() {
-      var _this;
-
-      _classCallCheck(this, Popover);
-
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Popover).call(this)); // Prepare templates
-
-      _this._elements = commons.extend(_this._elements, {
-        // Fetch or create the content zone elements
-        header: _this.querySelector('coral-popover-header') || document.createElement('coral-popover-header'),
-        content: _this.querySelector('coral-popover-content') || document.createElement('coral-popover-content'),
-        footer: _this.querySelector('coral-popover-footer') || document.createElement('coral-popover-footer')
-      });
-      template$2.call(_this._elements, {
-        i18n: i18n
-      }); // Events
-
-      _this._delegateEvents({
-        'global:capture:click': '_handleClick',
-        'coral-overlay:positioned': '_onPositioned'
-      }); // Override defaults from Overlay
-
-
-      _this._focusOnShow = _this.constructor.focusOnShow.ON;
-      _this._trapFocus = _this.constructor.trapFocus.ON;
-      _this._returnFocus = _this.constructor.returnFocus.ON;
-      _this._overlayAnimationTime = _this.constructor.FADETIME;
-      _this._lengthOffset = OFFSET; // Listen for mutations
-
-      ['header', 'footer'].forEach(function (name) {
-        _this["_".concat(name, "Observer")] = new MutationObserver(function () {
-          _this._hideContentZoneIfEmpty(name);
-
-          _this._toggleFlyout();
-        }); // Watch for changes
-
-        _this._observeContentZone(name);
-      });
-      return _this;
-    }
-    /**
-     The popover's content element.
-     
-     @contentzone
-     @name content
-     @type {PopoverContent}
-     */
-
-
-    _createClass(Popover, [{
-      key: "_onPositioned",
-      value: function _onPositioned(event) {
-        if (this.open) {
-          var _this$classList;
-
-          // Set arrow placement
-          (_this$classList = this.classList).remove.apply(_this$classList, ALL_PLACEMENT_CLASSES);
-
-          this.classList.add("".concat(CLASSNAME$6, "--").concat(event.detail.placement));
-        }
-      }
-    }, {
-      key: "_insertTypeIcon",
-      value: function _insertTypeIcon() {
-        if (this._elements.icon) {
-          this._elements.icon.remove();
-        }
-
-        var variantValue = this.variant; // Warning icon is same as ERROR icon
-
-        if (variantValue === variant$1.WARNING || variantValue === variant$1.ERROR) {
-          variantValue = 'alert';
-        } // Inject the SVG icon
-
-
-        if (variantValue !== variant$1.DEFAULT && variantValue !== variant$1._COACHMARK) {
-          var iconName = capitalize$1(variantValue);
-
-          this._elements.headerWrapper.insertAdjacentHTML('beforeend', Icon._renderSVG("spectrum-css-icon-".concat(iconName, "Medium"), ['_coral-Dialog-typeIcon', "_coral-UIIcon-".concat(iconName, "Medium")]));
-
-          this._elements.icon = this.querySelector('._coral-Dialog-typeIcon');
-        }
-      }
-    }, {
-      key: "_observeContentZone",
-      value: function _observeContentZone(name) {
-        var observer = this["_".concat(name, "Observer")];
-
-        if (observer) {
-          observer.disconnect();
-          observer.observe(this._elements[name], {
-            // Catch changes to childList
-            childList: true,
-            // Catch changes to textContent
-            characterData: true,
-            // Monitor any child node
-            subtree: true
-          });
-        }
-      }
-    }, {
-      key: "_hideContentZoneIfEmpty",
-      value: function _hideContentZoneIfEmpty(name) {
-        var contentZone = this._elements[name];
-        var target = name === 'header' ? this._elements.headerWrapper : contentZone; // If it's empty and has no non-textnode children, hide the header
-
-        var hiddenValue = _isEmpty(contentZone); // Only bother if the hidden status has changed
-
-
-        if (hiddenValue !== target.hidden) {
-          target.hidden = hiddenValue; // Reposition as the height has changed
-
-          this.reposition();
-        }
-      }
-    }, {
-      key: "_toggleCoachMark",
-      value: function _toggleCoachMark(isCoachMark) {
-        var _this2 = this;
-
-        this.classList.toggle('_coral-CoachMarkPopover', isCoachMark);
-
-        this._elements.headerWrapper.classList.toggle('_coral-Dialog-header', !isCoachMark);
-
-        this._elements.headerWrapper.classList.toggle('_coral-CoachMarkPopover-header', isCoachMark);
-
-        ['header', 'content', 'footer'].forEach(function (contentZone) {
-          if (_this2[contentZone]) {
-            _this2[contentZone][isCoachMark ? 'setAttribute' : 'removeAttribute']('_coachmark', '');
-          }
-        });
-      }
-    }, {
-      key: "_toggleFlyout",
-      value: function _toggleFlyout() {
-        // Flyout mode is when there's only content in default variant
-        var isFlyout = this._variant === variant$1._COACHMARK || this._variant === variant$1.DEFAULT && _isEmpty(this.header) && _isEmpty(this.footer);
-
-        this.classList.toggle("".concat(CLASSNAME$6, "--dialog"), !isFlyout);
-        this._elements.tip.hidden = isFlyout;
-      }
-      /** @private */
-
-    }, {
-      key: "_handleClick",
-      value: function _handleClick(event) {
-        if (this.interaction === this.constructor.interaction.OFF) {
-          // Since we use delegation, just ignore clicks if interaction is off
-          return;
-        }
-
-        var eventTarget = event.target;
-
-        var targetEl = this._getTarget();
-
-        var eventIsWithinTarget = targetEl ? targetEl.contains(eventTarget) : false;
-
-        if (eventIsWithinTarget) {
-          // When target is clicked
-          if (!this.open && !targetEl.disabled) {
-            // Open if we're not already open and target element is not disabled
-            this.show();
-
-            this._trackEvent('display', 'coral-popover', event);
-          } else {
-            this.hide();
-
-            this._trackEvent('close', 'coral-popover', event);
-          }
-        } else if (this.open && !this.contains(eventTarget)) {
-          var target = eventTarget.closest('._coral-BaseOverlay'); // Also check if the click element is inside an overlay which target could be inside of this popover
-
-          if (target && this.contains(target._getTarget())) {
-            return;
-          } // Close if we're open and the click was outside of the target and outside of the popover
-
-
-          this.hide();
-
-          this._trackEvent('close', 'coral-popover', event);
-        }
-      }
-    }, {
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        var _this3 = this;
-
-        this.classList.add(CLASSNAME$6); // ARIA
-
-        this.setAttribute('role', 'dialog'); // This helped announcements in certain screen readers
-
-        this.setAttribute('aria-live', 'assertive'); // Default reflected attributes
-
-        if (!this._variant) {
-          this.variant = variant$1.DEFAULT;
-        }
-
-        if (!this._closable) {
-          this.closable = closable.OFF;
-        } // // Fetch the content zones
-
-
-        var header = this._elements.header;
-        var content = this._elements.content;
-        var footer = this._elements.footer; // Verify if a content zone is provided
-
-        var contentZoneProvided = this.contains(content) && content || this.contains(footer) && footer || this.contains(header) && header; // Remove content zones so we can process children
-
-        if (header.parentNode) {
-          header.remove();
-        }
-
-        if (content.parentNode) {
-          content.remove();
-        }
-
-        if (footer.parentNode) {
-          footer.remove();
-        } // Remove tab captures
-
-
-        Array.prototype.filter.call(this.children, function (child) {
-          return child.hasAttribute('coral-tabcapture');
-        }).forEach(function (tabCapture) {
-          _this3.removeChild(tabCapture);
-        }); // Support cloneNode
-
-        var template = this.querySelectorAll('._coral-Dialog-header, ._coral-Dialog-closeButton, ._coral-Popover-tip');
-
-        for (var i = 0; i < template.length; i++) {
-          template[i].remove();
-        } // Move everything in the content
-
-
-        if (!contentZoneProvided) {
-          while (this.firstChild) {
-            content.appendChild(this.firstChild);
-          }
-        } // Insert template
-
-
-        var frag = document.createDocumentFragment();
-        frag.appendChild(this._elements.headerWrapper);
-        frag.appendChild(this._elements.closeButton);
-        frag.appendChild(this._elements.tip);
-        this.appendChild(frag); // Assign content zones
-
-        this.header = header;
-        this.content = content;
-        this.footer = footer; // Add the Overlay coral-tabcapture elements at the end
-
-        _get(_getPrototypeOf(Popover.prototype), "connectedCallback", this).call(this);
-      }
-    }, {
-      key: "content",
-      get: function get() {
-        return this._getContentZone(this._elements.content);
-      },
-      set: function set(value) {
-        this._setContentZone('content', value, {
-          handle: 'content',
-          tagName: 'coral-popover-content',
-          insert: function insert(content) {
-            var footer = this.footer; // The content should always be before footer
-
-            this.insertBefore(content, this.contains(footer) && footer || null);
-          }
-        });
-      }
-      /**
-       The popover's header element.
-       
-       @contentzone
-       @name header
-       @type {PopoverHeader}
-       */
-
-    }, {
-      key: "header",
-      get: function get() {
-        return this._getContentZone(this._elements.header);
-      },
-      set: function set(value) {
-        this._setContentZone('header', value, {
-          handle: 'header',
-          tagName: 'coral-popover-header',
-          insert: function insert(header) {
-            this._elements.headerWrapper.insertBefore(header, this._elements.headerWrapper.firstChild);
-          },
-          set: function set() {
-            // Stop observing the old header and observe the new one
-            this._observeContentZone('header'); // Check if header needs to be hidden
-
-
-            this._hideContentZoneIfEmpty('header');
-          }
-        });
-      }
-      /**
-       The popover's footer element.
-       
-       @type {PopoverFooter}
-       @contentzone
-       */
-
-    }, {
-      key: "footer",
-      get: function get() {
-        return this._getContentZone(this._elements.footer);
-      },
-      set: function set(value) {
-        this._setContentZone('footer', value, {
-          handle: 'footer',
-          tagName: 'coral-popover-footer',
-          insert: function insert(footer) {
-            // The footer should always be after content
-            this.appendChild(footer);
-          },
-          set: function set() {
-            // Stop observing the old header and observe the new one
-            this._observeContentZone('footer'); // Check if header needs to be hidden
-
-
-            this._hideContentZoneIfEmpty('footer');
-          }
-        });
-      }
-      /**
-       The popover's variant. See {@link PopoverVariantEnum}.
-       
-       @type {String}
-       @default PopoverVariantEnum.DEFAULT
-       @htmlattribute variant
-       @htmlattributereflected
-       */
-
-    }, {
-      key: "variant",
-      get: function get() {
-        return this._variant || variant$1.DEFAULT;
-      },
-      set: function set(value) {
-        var _this$classList2;
-
-        value = transform.string(value).toLowerCase();
-        this._variant = validate.enumeration(variant$1)(value) && value || variant$1.DEFAULT;
-
-        this._reflectAttribute('variant', this._variant); // Insert SVG icon
-
-
-        this._insertTypeIcon(); // Remove all variant classes
-
-
-        (_this$classList2 = this.classList).remove.apply(_this$classList2, ALL_VARIANT_CLASSES); // Toggle dialog mode
-
-
-        this._toggleFlyout();
-
-        if (this._variant === variant$1._COACHMARK) {
-          // ARIA
-          this.setAttribute('role', 'dialog');
-
-          this._toggleCoachMark(true);
-        } else {
-          this._toggleCoachMark(false);
-
-          if (this._variant === variant$1.DEFAULT) {
-            // ARIA
-            this.setAttribute('role', 'dialog');
-          } else {
-            // Set new variant class
-            this.classList.add("_coral-Dialog--".concat(this._variant)); // ARIA
-
-            this.setAttribute('role', 'alertdialog');
-          }
-        }
-      }
-      /**
-       Whether the popover should have a close button. See {@link PopoverClosableEnum}.
-       
-       @type {String}
-       @default PopoverClosableEnum.OFF
-       @htmlattribute closable
-       @htmlattributereflected
-       */
-
-    }, {
-      key: "closable",
-      get: function get() {
-        return this._closable || closable.OFF;
-      },
-      set: function set(value) {
-        value = transform.string(value).toLowerCase();
-        this._closable = validate.enumeration(closable)(value) && value || closable.OFF;
-
-        this._reflectAttribute('closable', this._closable);
-
-        this._elements.closeButton.style.display = this._closable === closable.ON ? 'block' : 'none';
-      }
-      /**
-       Inherited from {@link Overlay#target}.
-       */
-
-    }, {
-      key: "target",
-      get: function get() {
-        return _get(_getPrototypeOf(Popover.prototype), "target", this);
-      },
-      set: function set(value) {
-        _set(_getPrototypeOf(Popover.prototype), "target", value, this, true); // Coach Mark specific
-
-
-        var target = this._getTarget();
-
-        if (target && target.tagName === 'CORAL-COACHMARK') {
-          this.setAttribute('variant', variant$1._COACHMARK);
-        }
-      }
-      /**
-       Inherited from {@link Overlay#open}.
-       */
-
-    }, {
-      key: "open",
-      get: function get() {
-        return _get(_getPrototypeOf(Popover.prototype), "open", this);
-      },
-      set: function set(value) {
-        _set(_getPrototypeOf(Popover.prototype), "open", value, this, true);
-
-        var target = this._getTarget();
-
-        if (target) {
-          if (this.open) {
-            // Check if the target already has is-selected
-            this._targetWasSelected = target.classList.contains('is-selected'); // Only bother adding the class if the target doesn't have it
-
-            if (!this._targetWasSelected) {
-              // Highlight target
-              target.classList.add('is-selected');
-            }
-          } else if (!this._targetWasSelected) {
-            // When closed, only remove the class if the target didn't have it before
-            target.classList.remove('is-selected');
-          }
-        }
-      }
-      /**
-       @ignore
-       
-       Not supported anymore.
-       */
-
-    }, {
-      key: "icon",
-      get: function get() {
-        return this._icon || '';
-      },
-      set: function set(value) {
-        this._icon = transform.string(value);
-      }
-    }, {
-      key: "_contentZones",
-      get: function get() {
-        return {
-          'coral-popover-header': 'header',
-          'coral-popover-content': 'content',
-          'coral-popover-footer': 'footer'
-        };
-      }
-      /**
-       Returns {@link Popover} variants.
-       
-       @return {PopoverVariantEnum}
-       */
-
-    }], [{
-      key: "variant",
-      get: function get() {
-        return variant$1;
-      }
-      /**
-       Returns {@link Popover} close options.
-       
-       @return {PopoverClosableEnum}
-       */
-
-    }, {
-      key: "closable",
-      get: function get() {
-        return closable;
-      }
-      /** @ignore */
-
-    }, {
-      key: "observedAttributes",
-      get: function get() {
-        return _get(_getPrototypeOf(Popover), "observedAttributes", this).concat(['closable', 'variant']);
-      }
-    }]);
-
-    return Popover;
-  }(Overlay);
+  commons._define('coral-overlay', Overlay);
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -20681,7 +20023,7 @@
    */
 
 
-  var variant$2 = {
+  var variant$1 = {
     CTA: 'cta',
     PRIMARY: 'primary',
     SECONDARY: 'secondary',
@@ -20695,19 +20037,19 @@
     _CUSTOM: '_custom'
   }; // the button's base classname
 
-  var CLASSNAME$7 = '_coral-Button';
+  var CLASSNAME$5 = '_coral-Button';
   var ACTION_CLASSNAME = '_coral-ActionButton';
-  var ALL_VARIANT_CLASSES$1 = ["".concat(CLASSNAME$7, "--cta"), "".concat(CLASSNAME$7, "--primary"), "".concat(CLASSNAME$7, "--secondary"), "".concat(CLASSNAME$7, "--warning"), "".concat(CLASSNAME$7, "--quiet"), "".concat(ACTION_CLASSNAME, "--quiet")];
+  var ALL_VARIANT_CLASSES = ["".concat(CLASSNAME$5, "--cta"), "".concat(CLASSNAME$5, "--primary"), "".concat(CLASSNAME$5, "--secondary"), "".concat(CLASSNAME$5, "--warning"), "".concat(CLASSNAME$5, "--quiet"), "".concat(ACTION_CLASSNAME, "--quiet")];
   var VARIANT_MAP = {
-    cta: [CLASSNAME$7, ALL_VARIANT_CLASSES$1[0]],
-    primary: [CLASSNAME$7, ALL_VARIANT_CLASSES$1[0]],
-    secondary: [CLASSNAME$7, ALL_VARIANT_CLASSES$1[2]],
-    warning: [CLASSNAME$7, ALL_VARIANT_CLASSES$1[3]],
-    quiet: [CLASSNAME$7, ALL_VARIANT_CLASSES$1[1], ALL_VARIANT_CLASSES$1[4]],
-    minimal: [CLASSNAME$7, ALL_VARIANT_CLASSES$1[2], ALL_VARIANT_CLASSES$1[4]],
-    default: [CLASSNAME$7, ALL_VARIANT_CLASSES$1[1]],
+    cta: [CLASSNAME$5, ALL_VARIANT_CLASSES[0]],
+    primary: [CLASSNAME$5, ALL_VARIANT_CLASSES[0]],
+    secondary: [CLASSNAME$5, ALL_VARIANT_CLASSES[2]],
+    warning: [CLASSNAME$5, ALL_VARIANT_CLASSES[3]],
+    quiet: [CLASSNAME$5, ALL_VARIANT_CLASSES[1], ALL_VARIANT_CLASSES[4]],
+    minimal: [CLASSNAME$5, ALL_VARIANT_CLASSES[2], ALL_VARIANT_CLASSES[4]],
+    default: [CLASSNAME$5, ALL_VARIANT_CLASSES[1]],
     action: [ACTION_CLASSNAME],
-    quietaction: [ACTION_CLASSNAME, ALL_VARIANT_CLASSES$1[5]]
+    quietaction: [ACTION_CLASSNAME, ALL_VARIANT_CLASSES[5]]
   };
   /**
    Enumeration for {@link BaseButton} sizes.
@@ -20876,28 +20218,28 @@
           key: "_updateLabel",
           value: function _updateLabel(label) {
             label = label || this._elements.label;
-            label.classList.remove("".concat(CLASSNAME$7, "-label"), "".concat(ACTION_CLASSNAME, "-label"));
+            label.classList.remove("".concat(CLASSNAME$5, "-label"), "".concat(ACTION_CLASSNAME, "-label"));
 
-            if (this._variant !== variant$2._CUSTOM) {
-              if (this._variant === variant$2.ACTION || this._variant === variant$2.QUIET_ACTION) {
+            if (this._variant !== variant$1._CUSTOM) {
+              if (this._variant === variant$1.ACTION || this._variant === variant$1.QUIET_ACTION) {
                 label.classList.add("".concat(ACTION_CLASSNAME, "-label"));
               } else {
-                label.classList.add("".concat(CLASSNAME$7, "-label"));
+                label.classList.add("".concat(CLASSNAME$5, "-label"));
               }
             }
           }
           /** @private */
 
         }, {
-          key: "connectedCallback",
+          key: "render",
 
           /** @ignore */
-          value: function connectedCallback() {
-            _get(_getPrototypeOf(_class.prototype), "connectedCallback", this).call(this); // Default reflected attributes
+          value: function render() {
+            _get(_getPrototypeOf(_class.prototype), "render", this).call(this); // Default reflected attributes
 
 
             if (!this._variant) {
-              this.variant = variant$2.DEFAULT;
+              this.variant = variant$1.DEFAULT;
             }
 
             if (!this._size) {
@@ -21137,7 +20479,7 @@
 
             this._reflectAttribute('block', this._block);
 
-            this.classList.toggle("".concat(CLASSNAME$7, "--block"), this._block);
+            this.classList.toggle("".concat(CLASSNAME$5, "--block"), this._block);
           }
           /**
            The button's variant. See {@link ButtonVariantEnum}.
@@ -21151,30 +20493,30 @@
         }, {
           key: "variant",
           get: function get() {
-            return this._variant || variant$2.DEFAULT;
+            return this._variant || variant$1.DEFAULT;
           },
           set: function set(value) {
             var _this$classList;
 
             value = transform.string(value).toLowerCase();
-            this._variant = validate.enumeration(variant$2)(value) && value || variant$2.DEFAULT;
+            this._variant = validate.enumeration(variant$1)(value) && value || variant$1.DEFAULT;
 
             this._reflectAttribute('variant', this._variant); // removes every existing variant
 
 
-            this.classList.remove(CLASSNAME$7, ACTION_CLASSNAME);
+            this.classList.remove(CLASSNAME$5, ACTION_CLASSNAME);
 
-            (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$1);
+            (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES);
 
-            if (this._variant === variant$2._CUSTOM) {
-              this.classList.remove(CLASSNAME$7);
+            if (this._variant === variant$1._CUSTOM) {
+              this.classList.remove(CLASSNAME$5);
             } else {
               var _this$classList2;
 
               (_this$classList2 = this.classList).add.apply(_this$classList2, _toConsumableArray(VARIANT_MAP[this._variant]));
 
-              if (this._variant === variant$2.ACTION || this._variant === variant$2.QUIET_ACTION) {
-                this.classList.remove(CLASSNAME$7);
+              if (this._variant === variant$1.ACTION || this._variant === variant$1.QUIET_ACTION) {
+                this.classList.remove(CLASSNAME$5);
               }
             } // Update label styles
 
@@ -21226,7 +20568,7 @@
         }, {
           key: "variant",
           get: function get() {
-            return variant$2;
+            return variant$1;
           }
           /**
            Returns {@link BaseButton} icon positions.
@@ -21349,12 +20691,13 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-button', Button, {
+  commons._define('coral-button', Button, {
     extends: 'button'
   });
+
   Button.Label = ButtonLabel;
 
-  var template$3 = function anonymous(data_0) {
+  var template$2 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["headerWrapper"] = document.createElement("div");
     el0.className += " _coral-Dialog-header";
@@ -21415,7 +20758,7 @@
    Do not show a close button. Elements with the <code>coral-close</code> attribute will still close the dialog.
    */
 
-  var closable$1 = {
+  var closable = {
     ON: 'on',
     OFF: 'off'
   };
@@ -21453,7 +20796,7 @@
    A dialog with an info header and icon, informs the user of non-critical information.
    */
 
-  var variant$3 = {
+  var variant$2 = {
     DEFAULT: 'default',
     ERROR: 'error',
     WARNING: 'warning',
@@ -21480,19 +20823,19 @@
     STATIC: 'static'
   }; // Used to map icon with variant
 
-  var capitalize$2 = function capitalize(s) {
+  var capitalize$1 = function capitalize(s) {
     return s.charAt(0).toUpperCase() + s.slice(1);
   }; // The dialog's base classname
 
 
-  var CLASSNAME$8 = '_coral-Dialog'; // Modifier classnames
+  var CLASSNAME$6 = '_coral-Dialog'; // Modifier classnames
 
-  var FULLSCREEN_CLASSNAME = "".concat(CLASSNAME$8, "--fullscreenTakeover"); // A string of all possible variant classnames
+  var FULLSCREEN_CLASSNAME = "".concat(CLASSNAME$6, "--fullscreenTakeover"); // A string of all possible variant classnames
 
-  var ALL_VARIANT_CLASSES$2 = [];
+  var ALL_VARIANT_CLASSES$1 = [];
 
-  for (var variantValue$1 in variant$3) {
-    ALL_VARIANT_CLASSES$2.push("".concat(CLASSNAME$8, "--").concat(variant$3[variantValue$1]));
+  for (var variantValue in variant$2) {
+    ALL_VARIANT_CLASSES$1.push("".concat(CLASSNAME$6, "--").concat(variant$2[variantValue]));
   }
   /**
    @class Coral.Dialog
@@ -21524,7 +20867,7 @@
         content: _this.querySelector('coral-dialog-content') || document.createElement('coral-dialog-content'),
         footer: _this.querySelector('coral-dialog-footer') || document.createElement('coral-dialog-footer')
       });
-      template$3.call(_this._elements, {
+      template$2.call(_this._elements, {
         i18n: i18n
       }); // Events
 
@@ -21652,6 +20995,7 @@
         } // In the DOM but not a direct child of body
         else if (this.parentNode !== document.body) {
             this._ignoreConnectedCallback = true;
+            this._repositioned = true;
             document.body.appendChild(this);
             this._ignoreConnectedCallback = false;
           }
@@ -21665,13 +21009,13 @@
 
         var variantValue = this.variant; // Warning icon is same as ERROR icon
 
-        if (variantValue === variant$3.WARNING || variantValue === variant$3.ERROR) {
+        if (variantValue === variant$2.WARNING || variantValue === variant$2.ERROR) {
           variantValue = 'alert';
         } // Inject the SVG icon
 
 
-        if (variantValue !== variant$3.DEFAULT) {
-          var iconName = capitalize$2(variantValue);
+        if (variantValue !== variant$2.DEFAULT) {
+          var iconName = capitalize$1(variantValue);
 
           this._elements.headerWrapper.insertAdjacentHTML('beforeend', Icon._renderSVG("spectrum-css-icon-".concat(iconName, "Medium"), ['_coral-Dialog-typeIcon', "_coral-UIIcon-".concat(iconName, "Medium")]));
 
@@ -21712,16 +21056,25 @@
 
       /** @ignore */
       value: function connectedCallback() {
-        var _this2 = this;
-
         if (this._ignoreConnectedCallback) {
           return;
         }
 
-        this.classList.add("".concat(CLASSNAME$8, "-wrapper")); // Default reflected attributes
+        _get(_getPrototypeOf(Dialog.prototype), "connectedCallback", this).call(this);
+      }
+      /** @ignore */
+
+    }, {
+      key: "render",
+      value: function render() {
+        var _this2 = this;
+
+        _get(_getPrototypeOf(Dialog.prototype), "render", this).call(this);
+
+        this.classList.add("".concat(CLASSNAME$6, "-wrapper")); // Default reflected attributes
 
         if (!this._variant) {
-          this.variant = variant$3.DEFAULT;
+          this.variant = variant$2.DEFAULT;
         }
 
         if (!this._backdrop) {
@@ -21729,7 +21082,7 @@
         }
 
         if (!this._closable) {
-          this.closable = closable$1.OFF;
+          this.closable = closable.OFF;
         }
 
         if (!this._interaction) {
@@ -21743,7 +21096,7 @@
 
         var contentZoneProvided = this.contains(content) && content || this.contains(footer) && footer || this.contains(header) && header; // Verify if the internal wrapper exists
 
-        var wrapper = this.querySelector(".".concat(CLASSNAME$8)); // Case where the dialog was rendered already - cloneNode support
+        var wrapper = this.querySelector(".".concat(CLASSNAME$6)); // Case where the dialog was rendered already - cloneNode support
 
         if (wrapper) {
           // Remove tab captures
@@ -21800,7 +21153,7 @@
           } // Only the wrapper gets the dialog class
 
 
-        this._elements.wrapper.classList.add(CLASSNAME$8); // Mark the dialog with a public attribute for sizing
+        this._elements.wrapper.classList.add(CLASSNAME$6); // Mark the dialog with a public attribute for sizing
 
 
         this._elements.wrapper.setAttribute('coral-dialog-size', ''); // Close button should stay under the dialog
@@ -21820,9 +21173,7 @@
 
         this.header = header;
         this.footer = footer;
-        this.content = content; // Add the Overlay coral-tabcapture elements at the end
-
-        _get(_getPrototypeOf(Dialog.prototype), "connectedCallback", this).call(this);
+        this.content = content;
       }
       /** @ignore */
 
@@ -21861,7 +21212,8 @@
           handle: 'header',
           tagName: 'coral-dialog-header',
           insert: function insert(header) {
-            // Position the header between the drag icon and the type icon
+            header.classList.add("".concat(CLASSNAME$6, "-title")); // Position the header between the drag icon and the type icon
+
             this._elements.headerWrapper.insertBefore(header, this._elements.dragIcon.nextElementSibling);
           },
           set: function set() {
@@ -21890,6 +21242,7 @@
           handle: 'content',
           tagName: 'coral-dialog-content',
           insert: function insert(content) {
+            content.classList.add("".concat(CLASSNAME$6, "-content"));
             var footer = this.footer; // The content should always be before footer
 
             this._elements.wrapper.insertBefore(content, this.contains(footer) && footer || null);
@@ -21913,7 +21266,8 @@
           handle: 'footer',
           tagName: 'coral-dialog-footer',
           insert: function insert(footer) {
-            // The footer should always be after content
+            footer.classList.add("".concat(CLASSNAME$6, "-footer")); // The footer should always be after content
+
             this._elements.wrapper.appendChild(footer);
           }
         });
@@ -21936,7 +21290,7 @@
         this._backdrop = validate.enumeration(backdrop)(value) && value || backdrop.MODAL;
         var showBackdrop = this._backdrop !== backdrop.NONE;
 
-        this._elements.wrapper.classList.toggle("".concat(CLASSNAME$8, "--noBackdrop"), !showBackdrop); // We're visible now, so hide or show the modal accordingly
+        this._elements.wrapper.classList.toggle("".concat(CLASSNAME$6, "--noBackdrop"), !showBackdrop); // We're visible now, so hide or show the modal accordingly
 
 
         if (this.open && showBackdrop) {
@@ -21955,13 +21309,13 @@
     }, {
       key: "variant",
       get: function get() {
-        return this._variant || variant$3.DEFAULT;
+        return this._variant || variant$2.DEFAULT;
       },
       set: function set(value) {
         var _this$_elements$wrapp;
 
         value = transform.string(value).toLowerCase();
-        this._variant = validate.enumeration(variant$3)(value) && value || variant$3.DEFAULT;
+        this._variant = validate.enumeration(variant$2)(value) && value || variant$2.DEFAULT;
 
         this._reflectAttribute('variant', this._variant); // Insert SVG icon
 
@@ -21969,14 +21323,14 @@
         this._insertTypeIcon(); // Remove all variant classes
 
 
-        (_this$_elements$wrapp = this._elements.wrapper.classList).remove.apply(_this$_elements$wrapp, ALL_VARIANT_CLASSES$2);
+        (_this$_elements$wrapp = this._elements.wrapper.classList).remove.apply(_this$_elements$wrapp, ALL_VARIANT_CLASSES$1);
 
-        if (this._variant === variant$3.DEFAULT) {
+        if (this._variant === variant$2.DEFAULT) {
           // ARIA
           this.setAttribute('role', 'dialog');
         } else {
           // Set new variant class
-          this._elements.wrapper.classList.add("".concat(CLASSNAME$8, "--").concat(this._variant)); // ARIA
+          this._elements.wrapper.classList.add("".concat(CLASSNAME$6, "--").concat(this._variant)); // ARIA
 
 
           this.setAttribute('role', 'alertdialog');
@@ -22075,15 +21429,15 @@
     }, {
       key: "closable",
       get: function get() {
-        return this._closable || closable$1.OFF;
+        return this._closable || closable.OFF;
       },
       set: function set(value) {
         value = transform.string(value).toLowerCase();
-        this._closable = validate.enumeration(closable$1)(value) && value || closable$1.OFF;
+        this._closable = validate.enumeration(closable)(value) && value || closable.OFF;
 
         this._reflectAttribute('closable', this._closable);
 
-        this._elements.wrapper.classList.toggle("".concat(CLASSNAME$8, "--dismissible"), this._closable === closable$1.ON);
+        this._elements.wrapper.classList.toggle("".concat(CLASSNAME$6, "--dismissible"), this._closable === closable.ON);
       }
       /**
        Whether the dialog can moved around by dragging the title.
@@ -22154,7 +21508,7 @@
     }], [{
       key: "variant",
       get: function get() {
-        return variant$3;
+        return variant$2;
       }
       /**
        Returns {@link Dialog} backdrops.
@@ -22176,7 +21530,7 @@
     }, {
       key: "closable",
       get: function get() {
-        return closable$1;
+        return closable;
       }
       /**
        Returns {@link Dialog} interaction options.
@@ -22201,103 +21555,71 @@
     return Dialog;
   }(BaseOverlay(BaseComponent(HTMLElement)));
 
-  var CLASSNAME$9 = '_coral-Dialog-title';
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+
   /**
    @class Coral.Dialog.Header
    @classdesc The Dialog header content
    @htmltag coral-dialog-header
-   @extends {HTMLElement}
-   @extends {BaseComponent}
+   @return {HTMLElement}
+   */
+  var DialogHeader = (function () {
+    return document.createElement('coral-dialog-header');
+  });
+
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
    */
 
-  var DialogHeader =
-  /*#__PURE__*/
-  function (_BaseComponent) {
-    _inherits(DialogHeader, _BaseComponent);
-
-    function DialogHeader() {
-      _classCallCheck(this, DialogHeader);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(DialogHeader).apply(this, arguments));
-    }
-
-    _createClass(DialogHeader, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        this.classList.add(CLASSNAME$9);
-        this.setAttribute('role', 'heading');
-        this.setAttribute('aria-level', '2');
-      }
-    }]);
-
-    return DialogHeader;
-  }(BaseComponent(HTMLElement));
-
-  var CLASSNAME$a = '_coral-Dialog-content';
   /**
    @class Coral.Dialog.Content
    @classdesc The Dialog default content
    @htmltag coral-dialog-content
-   @extends {HTMLElement}
-   @extends {BaseComponent}
+   @return {HTMLElement}
+   */
+  var DialogContent = (function () {
+    return document.createElement('coral-dialog-content');
+  });
+
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
    */
 
-  var DialogContent =
-  /*#__PURE__*/
-  function (_BaseComponent) {
-    _inherits(DialogContent, _BaseComponent);
-
-    function DialogContent() {
-      _classCallCheck(this, DialogContent);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(DialogContent).apply(this, arguments));
-    }
-
-    _createClass(DialogContent, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        this.classList.add(CLASSNAME$a);
-      }
-    }]);
-
-    return DialogContent;
-  }(BaseComponent(HTMLElement));
-
-  var CLASSNAME$b = '_coral-Dialog-footer';
   /**
    @class Coral.Dialog.Footer
    @classdesc The Dialog footer content
    @htmltag coral-dialog-footer
-   @extends {HTMLElement}
-   @extends {BaseComponent}
+   @return {HTMLElement}
    */
-
-  var DialogFooter =
-  /*#__PURE__*/
-  function (_BaseComponent) {
-    _inherits(DialogFooter, _BaseComponent);
-
-    function DialogFooter() {
-      _classCallCheck(this, DialogFooter);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(DialogFooter).apply(this, arguments));
-    }
-
-    _createClass(DialogFooter, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        this.classList.add(CLASSNAME$b);
-      }
-    }]);
-
-    return DialogFooter;
-  }(BaseComponent(HTMLElement));
+  var DialogFooter = (function () {
+    return document.createElement('coral-dialog-footer');
+  });
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -22315,13 +21637,642 @@
     'coral-component-dialog': translations$2
   }); // Expose component on the Coral namespace
 
-  window.customElements.define('coral-dialog', Dialog);
-  window.customElements.define('coral-dialog-header', DialogHeader);
-  window.customElements.define('coral-dialog-content', DialogContent);
-  window.customElements.define('coral-dialog-footer', DialogFooter);
+  commons._define('coral-dialog', Dialog);
+
   Dialog.Header = DialogHeader;
   Dialog.Content = DialogContent;
   Dialog.Footer = DialogFooter;
+
+  var template$3 = function anonymous(data_0) {
+    var frag = document.createDocumentFragment();
+    var el0 = this["headerWrapper"] = document.createElement("div");
+    el0.className += " _coral-Dialog-header";
+    el0.setAttribute("handle", "headerWrapper");
+    frag.appendChild(el0);
+    var el1 = document.createTextNode("\n");
+    frag.appendChild(el1);
+    var el2 = this["closeButton"] = document.createElement("button", "coral-button");
+    el2.setAttribute("tracking", "off");
+    el2.setAttribute("handle", "closeButton");
+    el2.className += " _coral-Dialog-closeButton _coral-ClearButton";
+    el2.setAttribute("type", "button");
+    el2.setAttribute("is", "coral-button");
+    el2.setAttribute("variant", "_custom");
+    el2.setAttribute("icon", "close");
+    el2.setAttribute("title", data_0["i18n"]["get"]('Close'));
+    el2.setAttribute("tabindex", "-1");
+    el2.setAttribute("coral-close", "");
+    frag.appendChild(el2);
+    var el3 = document.createTextNode("\n");
+    frag.appendChild(el3);
+    var el4 = this["tip"] = document.createElement("div");
+    el4.className += " _coral-Popover-tip";
+    el4.setAttribute("handle", "tip");
+    frag.appendChild(el4);
+    var el5 = document.createTextNode("\n");
+    frag.appendChild(el5);
+    return frag;
+  };
+
+  var CLASSNAME$7 = '_coral-Popover';
+  var OFFSET = 5; // Used to map icon with variant
+
+  var capitalize$2 = function capitalize(s) {
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  }; // If it's empty and has no non-textnode children
+
+
+  var _isEmpty = function _isEmpty(el) {
+    return !el || el.children.length === 0 && el.textContent.replace(/\s*/g, '') === '';
+  };
+  /**
+   Enumeration for {@link Popover} closable state.
+   
+   @typedef {Object} PopoverClosableEnum
+   
+   @property {String} ON
+   Show a close button on the popover and close the popover when clicked.
+   @property {String} OFF
+   Do not show a close button. Elements with the <code>coral-close</code> attributes will still close the
+   popover.
+   */
+
+
+  var closable$1 = {
+    ON: 'on',
+    OFF: 'off'
+  };
+  /**
+   Enumeration for {@link Popover} variants.
+   
+   @typedef {Object} PopoverVariantEnum
+   
+   @property {String} DEFAULT
+   A default popover without header icon.
+   @property {String} ERROR
+   A popover with an error header and icon, indicating that an error has occurred.
+   @property {String} WARNING
+   A popover with a warning header and icon, notifying the user of something important.
+   @property {String} SUCCESS
+   A popover with a success header and icon, indicates to the user that an operation was successful.
+   @property {String} HELP
+   A popover with a question header and icon, provides the user with help.
+   @property {String} INFO
+   A popover with an info header and icon, informs the user of non-critical information.
+   */
+
+  var variant$3 = {
+    DEFAULT: 'default',
+    ERROR: 'error',
+    WARNING: 'warning',
+    SUCCESS: 'success',
+    HELP: 'help',
+    INFO: 'info',
+    _COACHMARK: '_coachmark'
+  }; // A string of all possible variant classnames
+
+  var ALL_VARIANT_CLASSES$2 = [];
+
+  for (var variantValue$1 in variant$3) {
+    if (variantValue$1 !== 'COACHMARK') {
+      ALL_VARIANT_CLASSES$2.push("_coral-Dialog--".concat(variant$3[variantValue$1]));
+    }
+  } // A string of all possible placement classnames
+
+
+  var placement$1 = Overlay.placement;
+  var ALL_PLACEMENT_CLASSES = [];
+
+  for (var placementKey in placement$1) {
+    ALL_PLACEMENT_CLASSES.push("".concat(CLASSNAME$7, "--").concat(placement$1[placementKey]));
+  }
+  /**
+   @class Coral.Popover
+   @classdesc A Popover component for small overlay content.
+   @htmltag coral-popover
+   @extends {Overlay}
+   */
+
+
+  var Popover =
+  /*#__PURE__*/
+  function (_Overlay) {
+    _inherits(Popover, _Overlay);
+
+    /** @ignore */
+    function Popover() {
+      var _this;
+
+      _classCallCheck(this, Popover);
+
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(Popover).call(this)); // Prepare templates
+
+      _this._elements = commons.extend(_this._elements, {
+        // Fetch or create the content zone elements
+        header: _this.querySelector('coral-popover-header') || document.createElement('coral-popover-header'),
+        content: _this.querySelector('coral-popover-content') || document.createElement('coral-popover-content'),
+        footer: _this.querySelector('coral-popover-footer') || document.createElement('coral-popover-footer')
+      });
+      template$3.call(_this._elements, {
+        i18n: i18n
+      }); // Events
+
+      _this._delegateEvents({
+        'global:capture:click': '_handleClick',
+        'coral-overlay:positioned': '_onPositioned'
+      }); // Override defaults from Overlay
+
+
+      _this._focusOnShow = _this.constructor.focusOnShow.ON;
+      _this._trapFocus = _this.constructor.trapFocus.ON;
+      _this._returnFocus = _this.constructor.returnFocus.ON;
+      _this._overlayAnimationTime = _this.constructor.FADETIME;
+      _this._lengthOffset = OFFSET; // Listen for mutations
+
+      ['header', 'footer'].forEach(function (name) {
+        _this["_".concat(name, "Observer")] = new MutationObserver(function () {
+          _this._hideContentZoneIfEmpty(name);
+
+          _this._toggleFlyout();
+        }); // Watch for changes
+
+        _this._observeContentZone(name);
+      });
+      return _this;
+    }
+    /**
+     The popover's content element.
+     
+     @contentzone
+     @name content
+     @type {PopoverContent}
+     */
+
+
+    _createClass(Popover, [{
+      key: "_onPositioned",
+      value: function _onPositioned(event) {
+        if (this.open) {
+          var _this$classList;
+
+          // Set arrow placement
+          (_this$classList = this.classList).remove.apply(_this$classList, ALL_PLACEMENT_CLASSES);
+
+          this.classList.add("".concat(CLASSNAME$7, "--").concat(event.detail.placement));
+        }
+      }
+    }, {
+      key: "_insertTypeIcon",
+      value: function _insertTypeIcon() {
+        if (this._elements.icon) {
+          this._elements.icon.remove();
+        }
+
+        var variantValue = this.variant; // Warning icon is same as ERROR icon
+
+        if (variantValue === variant$3.WARNING || variantValue === variant$3.ERROR) {
+          variantValue = 'alert';
+        } // Inject the SVG icon
+
+
+        if (variantValue !== variant$3.DEFAULT && variantValue !== variant$3._COACHMARK) {
+          var iconName = capitalize$2(variantValue);
+
+          this._elements.headerWrapper.insertAdjacentHTML('beforeend', Icon._renderSVG("spectrum-css-icon-".concat(iconName, "Medium"), ['_coral-Dialog-typeIcon', "_coral-UIIcon-".concat(iconName, "Medium")]));
+
+          this._elements.icon = this.querySelector('._coral-Dialog-typeIcon');
+        }
+      }
+    }, {
+      key: "_observeContentZone",
+      value: function _observeContentZone(name) {
+        var observer = this["_".concat(name, "Observer")];
+
+        if (observer) {
+          observer.disconnect();
+          observer.observe(this._elements[name], {
+            // Catch changes to childList
+            childList: true,
+            // Catch changes to textContent
+            characterData: true,
+            // Monitor any child node
+            subtree: true
+          });
+        }
+      }
+    }, {
+      key: "_hideContentZoneIfEmpty",
+      value: function _hideContentZoneIfEmpty(name) {
+        var contentZone = this._elements[name];
+        var target = name === 'header' ? this._elements.headerWrapper : contentZone; // If it's empty and has no non-textnode children, hide the header
+
+        var hiddenValue = _isEmpty(contentZone); // Only bother if the hidden status has changed
+
+
+        if (hiddenValue !== target.hidden) {
+          target.hidden = hiddenValue; // Reposition as the height has changed
+
+          this.reposition();
+        }
+      }
+    }, {
+      key: "_toggleCoachMark",
+      value: function _toggleCoachMark(isCoachMark) {
+        var _this2 = this;
+
+        this.classList.toggle('_coral-CoachMarkPopover', isCoachMark);
+
+        this._elements.headerWrapper.classList.toggle('_coral-Dialog-header', !isCoachMark);
+
+        this._elements.headerWrapper.classList.toggle('_coral-CoachMarkPopover-header', isCoachMark);
+
+        ['header', 'content', 'footer'].forEach(function (contentZone, i) {
+          var el = _this2[contentZone];
+          var type = i === 0 ? 'title' : contentZone;
+
+          if (el) {
+            el.classList.toggle("_coral-Dialog-".concat(type), !isCoachMark);
+            el.classList.toggle("_coral-CoachMarkPopover-".concat(type), isCoachMark);
+          }
+        });
+      }
+    }, {
+      key: "_toggleFlyout",
+      value: function _toggleFlyout() {
+        // Flyout mode is when there's only content in default variant
+        var isFlyout = this._variant === variant$3._COACHMARK || this._variant === variant$3.DEFAULT && _isEmpty(this.header) && _isEmpty(this.footer);
+
+        this.classList.toggle("".concat(CLASSNAME$7, "--dialog"), !isFlyout);
+        this._elements.tip.hidden = isFlyout;
+      }
+      /** @private */
+
+    }, {
+      key: "_handleClick",
+      value: function _handleClick(event) {
+        if (this.interaction === this.constructor.interaction.OFF) {
+          // Since we use delegation, just ignore clicks if interaction is off
+          return;
+        }
+
+        var eventTarget = event.target;
+
+        var targetEl = this._getTarget();
+
+        var eventIsWithinTarget = targetEl ? targetEl.contains(eventTarget) : false;
+
+        if (eventIsWithinTarget) {
+          // When target is clicked
+          if (!this.open && !targetEl.disabled) {
+            // Open if we're not already open and target element is not disabled
+            this.show();
+
+            this._trackEvent('display', 'coral-popover', event);
+          } else {
+            this.hide();
+
+            this._trackEvent('close', 'coral-popover', event);
+          }
+        } else if (this.open && !this.contains(eventTarget)) {
+          var target = eventTarget.closest('._coral-Overlay'); // Also check if the click element is inside an overlay which target could be inside of this popover
+
+          if (target && this.contains(target._getTarget())) {
+            return;
+          } // Close if we're open and the click was outside of the target and outside of the popover
+
+
+          this.hide();
+
+          this._trackEvent('close', 'coral-popover', event);
+        }
+      }
+    }, {
+      key: "render",
+
+      /** @ignore */
+      value: function render() {
+        var _this3 = this;
+
+        _get(_getPrototypeOf(Popover.prototype), "render", this).call(this);
+
+        this.classList.add(CLASSNAME$7); // ARIA
+
+        this.setAttribute('role', 'dialog'); // This helped announcements in certain screen readers
+
+        this.setAttribute('aria-live', 'assertive'); // Default reflected attributes
+
+        if (!this._variant) {
+          this.variant = variant$3.DEFAULT;
+        }
+
+        if (!this._closable) {
+          this.closable = closable$1.OFF;
+        } // // Fetch the content zones
+
+
+        var header = this._elements.header;
+        var content = this._elements.content;
+        var footer = this._elements.footer; // Verify if a content zone is provided
+
+        var contentZoneProvided = this.contains(content) && content || this.contains(footer) && footer || this.contains(header) && header; // Remove content zones so we can process children
+
+        if (header.parentNode) {
+          header.remove();
+        }
+
+        if (content.parentNode) {
+          content.remove();
+        }
+
+        if (footer.parentNode) {
+          footer.remove();
+        } // Remove tab captures
+
+
+        Array.prototype.filter.call(this.children, function (child) {
+          return child.hasAttribute('coral-tabcapture');
+        }).forEach(function (tabCapture) {
+          _this3.removeChild(tabCapture);
+        }); // Support cloneNode
+
+        var template = this.querySelectorAll('._coral-Dialog-header, ._coral-Dialog-closeButton, ._coral-Popover-tip');
+
+        for (var i = 0; i < template.length; i++) {
+          template[i].remove();
+        } // Move everything in the content
+
+
+        if (!contentZoneProvided) {
+          while (this.firstChild) {
+            content.appendChild(this.firstChild);
+          }
+        } // Insert template
+
+
+        var frag = document.createDocumentFragment();
+        frag.appendChild(this._elements.headerWrapper);
+        frag.appendChild(this._elements.closeButton);
+        frag.appendChild(this._elements.tip);
+        this.appendChild(frag); // Assign content zones
+
+        this.header = header;
+        this.content = content;
+        this.footer = footer;
+      }
+    }, {
+      key: "content",
+      get: function get() {
+        return this._getContentZone(this._elements.content);
+      },
+      set: function set(value) {
+        this._setContentZone('content', value, {
+          handle: 'content',
+          tagName: 'coral-popover-content',
+          insert: function insert(content) {
+            content.classList.add('_coral-Dialog-content');
+            var footer = this.footer; // The content should always be before footer
+
+            this.insertBefore(content, this.contains(footer) && footer || null);
+          }
+        });
+      }
+      /**
+       The popover's header element.
+       
+       @contentzone
+       @name header
+       @type {PopoverHeader}
+       */
+
+    }, {
+      key: "header",
+      get: function get() {
+        return this._getContentZone(this._elements.header);
+      },
+      set: function set(value) {
+        this._setContentZone('header', value, {
+          handle: 'header',
+          tagName: 'coral-popover-header',
+          insert: function insert(header) {
+            header.classList.add('_coral-Dialog-title');
+
+            this._elements.headerWrapper.insertBefore(header, this._elements.headerWrapper.firstChild);
+          },
+          set: function set() {
+            // Stop observing the old header and observe the new one
+            this._observeContentZone('header'); // Check if header needs to be hidden
+
+
+            this._hideContentZoneIfEmpty('header');
+          }
+        });
+      }
+      /**
+       The popover's footer element.
+       
+       @type {PopoverFooter}
+       @contentzone
+       */
+
+    }, {
+      key: "footer",
+      get: function get() {
+        return this._getContentZone(this._elements.footer);
+      },
+      set: function set(value) {
+        this._setContentZone('footer', value, {
+          handle: 'footer',
+          tagName: 'coral-popover-footer',
+          insert: function insert(footer) {
+            footer.classList.add('_coral-Dialog-footer'); // The footer should always be after content
+
+            this.appendChild(footer);
+          },
+          set: function set() {
+            // Stop observing the old header and observe the new one
+            this._observeContentZone('footer'); // Check if header needs to be hidden
+
+
+            this._hideContentZoneIfEmpty('footer');
+          }
+        });
+      }
+      /**
+       The popover's variant. See {@link PopoverVariantEnum}.
+       
+       @type {String}
+       @default PopoverVariantEnum.DEFAULT
+       @htmlattribute variant
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "variant",
+      get: function get() {
+        return this._variant || variant$3.DEFAULT;
+      },
+      set: function set(value) {
+        var _this$classList2;
+
+        value = transform.string(value).toLowerCase();
+        this._variant = validate.enumeration(variant$3)(value) && value || variant$3.DEFAULT;
+
+        this._reflectAttribute('variant', this._variant); // Insert SVG icon
+
+
+        this._insertTypeIcon(); // Remove all variant classes
+
+
+        (_this$classList2 = this.classList).remove.apply(_this$classList2, ALL_VARIANT_CLASSES$2); // Toggle dialog mode
+
+
+        this._toggleFlyout();
+
+        if (this._variant === variant$3._COACHMARK) {
+          // ARIA
+          this.setAttribute('role', 'dialog');
+
+          this._toggleCoachMark(true);
+        } else {
+          this._toggleCoachMark(false);
+
+          if (this._variant === variant$3.DEFAULT) {
+            // ARIA
+            this.setAttribute('role', 'dialog');
+          } else {
+            // Set new variant class
+            this.classList.add("_coral-Dialog--".concat(this._variant)); // ARIA
+
+            this.setAttribute('role', 'alertdialog');
+          }
+        }
+      }
+      /**
+       Whether the popover should have a close button. See {@link PopoverClosableEnum}.
+       
+       @type {String}
+       @default PopoverClosableEnum.OFF
+       @htmlattribute closable
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "closable",
+      get: function get() {
+        return this._closable || closable$1.OFF;
+      },
+      set: function set(value) {
+        value = transform.string(value).toLowerCase();
+        this._closable = validate.enumeration(closable$1)(value) && value || closable$1.OFF;
+
+        this._reflectAttribute('closable', this._closable);
+
+        this._elements.closeButton.style.display = this._closable === closable$1.ON ? 'block' : 'none';
+      }
+      /**
+       Inherited from {@link Overlay#target}.
+       */
+
+    }, {
+      key: "target",
+      get: function get() {
+        return _get(_getPrototypeOf(Popover.prototype), "target", this);
+      },
+      set: function set(value) {
+        _set(_getPrototypeOf(Popover.prototype), "target", value, this, true); // Coach Mark specific
+
+
+        var target = this._getTarget();
+
+        if (target && target.tagName === 'CORAL-COACHMARK') {
+          this.setAttribute('variant', variant$3._COACHMARK);
+        }
+      }
+      /**
+       Inherited from {@link Overlay#open}.
+       */
+
+    }, {
+      key: "open",
+      get: function get() {
+        return _get(_getPrototypeOf(Popover.prototype), "open", this);
+      },
+      set: function set(value) {
+        _set(_getPrototypeOf(Popover.prototype), "open", value, this, true);
+
+        var target = this._getTarget();
+
+        if (target) {
+          if (this.open) {
+            // Check if the target already has is-selected
+            this._targetWasSelected = target.classList.contains('is-selected'); // Only bother adding the class if the target doesn't have it
+
+            if (!this._targetWasSelected) {
+              // Highlight target
+              target.classList.add('is-selected');
+            }
+          } else if (!this._targetWasSelected) {
+            // When closed, only remove the class if the target didn't have it before
+            target.classList.remove('is-selected');
+          }
+        }
+      }
+      /**
+       @ignore
+       
+       Not supported anymore.
+       */
+
+    }, {
+      key: "icon",
+      get: function get() {
+        return this._icon || '';
+      },
+      set: function set(value) {
+        this._icon = transform.string(value);
+      }
+    }, {
+      key: "_contentZones",
+      get: function get() {
+        return {
+          'coral-popover-header': 'header',
+          'coral-popover-content': 'content',
+          'coral-popover-footer': 'footer'
+        };
+      }
+      /**
+       Returns {@link Popover} variants.
+       
+       @return {PopoverVariantEnum}
+       */
+
+    }], [{
+      key: "variant",
+      get: function get() {
+        return variant$3;
+      }
+      /**
+       Returns {@link Popover} close options.
+       
+       @return {PopoverClosableEnum}
+       */
+
+    }, {
+      key: "closable",
+      get: function get() {
+        return closable$1;
+      }
+      /** @ignore */
+
+    }, {
+      key: "observedAttributes",
+      get: function get() {
+        return _get(_getPrototypeOf(Popover), "observedAttributes", this).concat(['closable', 'variant']);
+      }
+    }]);
+
+    return Popover;
+  }(Overlay);
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -22336,144 +22287,58 @@
    */
 
   /**
-   @base BasePopoverContentZone
-   @classdesc The base element for popover content zones
-   */
-  var BasePopoverContentZone = function BasePopoverContentZone(superClass) {
-    return (
-      /*#__PURE__*/
-      function (_superClass) {
-        _inherits(_class, _superClass);
-
-        function _class() {
-          _classCallCheck(this, _class);
-
-          return _possibleConstructorReturn(this, _getPrototypeOf(_class).apply(this, arguments));
-        }
-
-        _createClass(_class, [{
-          key: "_toggleCoachMark",
-          value: function _toggleCoachMark(isCoachMark) {
-            this.classList.toggle("_coral-Dialog-".concat(this._type), !isCoachMark);
-            this.classList.toggle("_coral-CoachMarkPopover-".concat(this._type), isCoachMark);
-          }
-          /** @ignore */
-
-        }, {
-          key: "attributeChangedCallback",
-
-          /** @ignore */
-          value: function attributeChangedCallback(name, oldValue, value) {
-            if (name === '_coachmark') {
-              this._toggleCoachMark(value !== null);
-            } else {
-              _get(_getPrototypeOf(_class.prototype), "attributeChangedCallback", this).call(this, name, oldValue, value);
-            }
-          }
-          /** @ignore */
-
-        }, {
-          key: "connectedCallback",
-          value: function connectedCallback() {
-            _get(_getPrototypeOf(_class.prototype), "connectedCallback", this).call(this);
-
-            this._toggleCoachMark(this.hasAttribute('_coachmark'));
-          }
-        }], [{
-          key: "observedAttributes",
-          get: function get() {
-            return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['_coachmark']);
-          }
-        }]);
-
-        return _class;
-      }(superClass)
-    );
-  };
-
-  /**
    @class Coral.Popover.Header
    @classdesc The Popover header content
    @htmltag coral-popover-header
-   @extends {DialogHeader}
+   @return {HTMLElement}
    */
+  var PopoverHeader = (function () {
+    return document.createElement('coral-popover-header');
+  });
 
-  var PopoverHeader =
-  /*#__PURE__*/
-  function (_BasePopoverContentZo) {
-    _inherits(PopoverHeader, _BasePopoverContentZo);
-
-    function PopoverHeader() {
-      _classCallCheck(this, PopoverHeader);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(PopoverHeader).apply(this, arguments));
-    }
-
-    _createClass(PopoverHeader, [{
-      key: "_type",
-      get: function get() {
-        return 'title';
-      }
-    }]);
-
-    return PopoverHeader;
-  }(BasePopoverContentZone(Dialog.Header));
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
 
   /**
    @class Coral.Popover.Content
    @classdesc The Popover default content
    @htmltag coral-popover-content
-   @extends {DialogContent}
+   @return {HTMLElement}
    */
+  var PopoverContent = (function () {
+    return document.createElement('coral-popover-content');
+  });
 
-  var PopoverContent =
-  /*#__PURE__*/
-  function (_BasePopoverContentZo) {
-    _inherits(PopoverContent, _BasePopoverContentZo);
-
-    function PopoverContent() {
-      _classCallCheck(this, PopoverContent);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(PopoverContent).apply(this, arguments));
-    }
-
-    _createClass(PopoverContent, [{
-      key: "_type",
-      get: function get() {
-        return 'content';
-      }
-    }]);
-
-    return PopoverContent;
-  }(BasePopoverContentZone(Dialog.Content));
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
 
   /**
    @class Coral.Popover.Footer
    @classdesc The Popover footer content
    @htmltag coral-popover-footer
-   @extends {HTMLElement}
+   @return {HTMLElement}
    */
-
-  var PopoverFooter =
-  /*#__PURE__*/
-  function (_BasePopoverContentZo) {
-    _inherits(PopoverFooter, _BasePopoverContentZo);
-
-    function PopoverFooter() {
-      _classCallCheck(this, PopoverFooter);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(PopoverFooter).apply(this, arguments));
-    }
-
-    _createClass(PopoverFooter, [{
-      key: "_type",
-      get: function get() {
-        return 'content';
-      }
-    }]);
-
-    return PopoverFooter;
-  }(BasePopoverContentZone(Dialog.Footer));
+  var PopoverFooter = (function () {
+    return document.createElement('coral-popover-footer');
+  });
 
   var CLASSNAMES = ['coral-Rule', 'coral-Rule--subsection2'];
   /**
@@ -22525,11 +22390,10 @@
     'coral-component-popover': translations$1
   }); // Expose component on the Coral namespace
 
-  window.customElements.define('coral-popover', Popover);
-  window.customElements.define('coral-popover-header', PopoverHeader);
-  window.customElements.define('coral-popover-content', PopoverContent);
-  window.customElements.define('coral-popover-footer', PopoverFooter);
-  window.customElements.define('coral-popover-separator', PopoverSeparator);
+  commons._define('coral-popover-separator', PopoverSeparator);
+
+  commons._define('coral-popover', Popover);
+
   Popover.Header = PopoverHeader;
   Popover.Content = PopoverContent;
   Popover.Footer = PopoverFooter;
@@ -22572,7 +22436,7 @@
     return null;
   }
 
-  var CLASSNAME$c = '_coral-ActionBar';
+  var CLASSNAME$8 = '_coral-ActionBar';
   /**
    @class Coral.ActionBar
    @classdesc An ActionBar component containing arbitrary items. An item can either be added to the left or the right side
@@ -22608,7 +22472,9 @@
         // Fetch or create the content zone elements
         primary: _this.querySelector('coral-actionbar-primary') || document.createElement('coral-actionbar-primary'),
         secondary: _this.querySelector('coral-actionbar-secondary') || document.createElement('coral-actionbar-secondary')
-      }; // Debounce wait time in milliseconds
+      }; // Reference on all items
+
+      _this._items = _this.getElementsByTagName('coral-actionbar-item'); // Debounce wait time in milliseconds
 
       _this._wait = 50; // bind this._onLayout so it can be removed again
 
@@ -22707,19 +22573,9 @@
           return;
         }
 
-        var focusedItem = document.activeElement;
-
-        if (!(this !== focusedItem && this.contains(focusedItem))) {
-          // focus not on the actionbar => do not bother
-          focusedItem = null;
-        }
-
-        if (focusedItem && focusedItem.parentNode && focusedItem.parentNode.tagName === 'CORAL-ACTIONBAR-ITEM') {
-          // focusedItem is wrapped
-          focusedItem = focusedItem.parentNode;
-        }
-
         var ERROR_MARGIN = 78;
+        var primaryMore = this.primary._elements.moreButton;
+        var secondaryMore = this.secondary._elements.moreButton;
         var leftItems = this.primary.items.getAll();
         var rightItems = this.secondary.items.getAll().reverse();
         var itemLeft = null;
@@ -22727,8 +22583,8 @@
 
         var widthCache = this._newWidthCache();
 
-        var leftMoreButtonWidth = leftItems.length > 0 ? widthCache.getOuterWidth(this.primary._elements.moreButton) : 0;
-        var rightMoreButtonWidth = rightItems.length > 0 ? widthCache.getOuterWidth(this.secondary._elements.moreButton) : 0; // Make it possible to set left/right padding to the containers
+        var leftMoreButtonWidth = leftItems.length > 0 ? widthCache.getOuterWidth(primaryMore) : 0;
+        var rightMoreButtonWidth = rightItems.length > 0 ? widthCache.getOuterWidth(secondaryMore) : 0; // Make it possible to set left/right padding to the containers
 
         var borderWidthLeftContainer = this.primary.offsetWidth - this.primary.getBoundingClientRect().width;
         var borderWidthRightContainer = this.secondary.offsetWidth - this.secondary.getBoundingClientRect().width;
@@ -22741,7 +22597,6 @@
         var moreButtonLeftVisible = false;
         var moreButtonRightVisible = false;
         var showItem = false;
-        var tabbableItem = null;
         var itemWidth = 0;
 
         for (var i = 0; i < leftItems.length || i < rightItems.length; i++) {
@@ -22769,14 +22624,7 @@
                   // if this is the last item and so far there have been no items hidden => don't show more button
                   showItem = true;
                 }
-              } // enable tab for first left tabbable item
-
-
-              if (tabbableItem === null && showItem && itemLeft.offsetParent) {
-                tabbableItem = i;
               }
-
-              this._toggleItemTabbable(itemLeft, tabbableItem === i);
 
               if (showItem) {
                 leftVisibleItems += 1;
@@ -22819,10 +22667,7 @@
                   // if this is the last item and so far there have been no items hidden => don't show more button
                   showItem = true;
                 }
-              } // enable tab for 'first' right item
-
-
-              this._toggleItemTabbable(itemRight, showItem && i === rightItems.length - 1);
+              }
 
               if (showItem) {
                 rightVisibleItems += 1;
@@ -22842,26 +22687,56 @@
               }
             }
           }
-        } // show or hide more buttons
+        } // Handle tabs
 
 
-        this._moveToScreen(this.primary._elements.moreButton, moreButtonLeftVisible);
+        var primarySelectable = this.primary.items._getAllSelectable();
 
-        this._moveToScreen(this.secondary._elements.moreButton, moreButtonRightVisible); // enable tabs on more buttons if needed
+        var secondarySelectable = this.secondary.items._getAllSelectable();
+
+        for (var _i = 0; _i < this._items.length; _i++) {
+          this._toggleItemTabbable(this._items[_i], false);
+        } // LEFT: Show or hide more buttons
 
 
-        this._toggleItemTabbable(this.primary._elements.moreButton, leftVisibleItems < 1);
+        if (moreButtonLeftVisible) {
+          this._moveToScreen(primaryMore, true);
 
-        this._toggleItemTabbable(this.secondary._elements.moreButton, rightVisibleItems < rightItems.length); // we need to check if item has 'hasAttribute' because it is not present on the document
+          if (primarySelectable.length === 0) {
+            this._toggleItemTabbable(primaryMore, true);
+          } else {
+            this._toggleItemTabbable(primaryMore, false);
+
+            this._toggleItemTabbable(primarySelectable[0], true);
+          }
+        } else {
+          this._moveToScreen(primaryMore, false);
+
+          this._toggleItemTabbable(primaryMore, false);
+
+          this._toggleItemTabbable(primarySelectable[0], true);
+        } // RIGHT: Show or hide more buttons
 
 
-        if (focusedItem && focusedItem.hasAttribute && focusedItem.hasAttribute('coral-actionbar-offscreen')) {
-          // if currently an element is focused, that should not be visible => select first selectable element nicer
-          // algorithm possible
-          var wrappedItem = getFirstSelectableWrappedItem(this._getAllSelectableItems()[0]);
+        if (moreButtonRightVisible) {
+          this._moveToScreen(secondaryMore, true);
 
-          if (wrappedItem) {
-            wrappedItem.focus();
+          if (secondarySelectable.length === 0) {
+            this._toggleItemTabbable(secondaryMore, true);
+          } else {
+            this._toggleItemTabbable(secondaryMore, false);
+
+            this._toggleItemTabbable(secondarySelectable[0], true);
+          }
+        } else {
+          this._moveToScreen(secondaryMore, false);
+
+          this._toggleItemTabbable(secondaryMore, false);
+
+          var tabbableItem = this.secondary.items._getAllSelectable()[0];
+
+          if (tabbableItem) {
+            this._toggleItemTabbable(tabbableItem, true);
           }
         } // re-calculate layout on element resize
 
@@ -23026,11 +22901,12 @@
     }, {
       key: "_toggleItemTabbable",
       value: function _toggleItemTabbable(item, tabbable) {
-        // item might be wrapped (for now remove/add tabindex only on the first wrapped item)
+        this._ignoreLayout = true; // item might be wrapped (for now remove/add tabindex only on the first wrapped item)
+
         item = getFirstSelectableWrappedItem(item);
 
         if (item !== null) {
-          item[tabbable ? 'removeAttribute' : 'setAttribute']('tabindex', '-1');
+          item.setAttribute('tabindex', tabbable ? 0 : -1);
         }
       }
       /** @ignore */
@@ -23040,7 +22916,12 @@
       value: function _debounceOnLayout() {
         var _this3 = this;
 
-        // Debounce
+        if (this._ignoreLayout) {
+          this._ignoreLayout = false;
+          return;
+        } // Debounce
+
+
         if (this._timeout !== null) {
           window.clearTimeout(this._timeout);
         }
@@ -23066,13 +22947,13 @@
         this._elements.primary.appendChild(frag);
       }
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ActionBar.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(ActionBar.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$c); // Move direct items into primary content zone
+        this.classList.add(CLASSNAME$8); // Move direct items into primary content zone
 
         this._moveDirectItemChildren(); // Cleanup resize helpers object (cloneNode support)
 
@@ -23190,7 +23071,7 @@
     return ActionBar;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$d = '_coral-ActionBar-item';
+  var CLASSNAME$9 = '_coral-ActionBar-item';
   /**
    @class Coral.ActionBar.Item
    @classdesc An ActionBar item component
@@ -23211,13 +23092,13 @@
     }
 
     _createClass(ActionBarItem, [{
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ActionBarItem.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(ActionBarItem.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$d);
+        this.classList.add(CLASSNAME$9);
       }
     }, {
       key: "content",
@@ -23385,11 +23266,11 @@
       } // Override content zone name
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(AnchorButton.prototype), "connectedCallback", this).call(this); // a11y
+      value: function render() {
+        _get(_getPrototypeOf(AnchorButton.prototype), "render", this).call(this); // a11y
 
 
         this.setAttribute('role', 'button');
@@ -23467,9 +23348,10 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-anchorbutton', AnchorButton, {
+  commons._define('coral-anchorbutton', AnchorButton, {
     extends: 'a'
   });
+
   AnchorButton.Label = AnchorButtonLabel;
 
   var template$4 = function anonymous(data_0) {
@@ -23904,9 +23786,24 @@
 
           /** @ignore */
           value: function connectedCallback() {
+            _get(_getPrototypeOf(_class.prototype), "connectedCallback", this).call(this);
+
+            var overlay = this._elements.overlay; // Cannot be open by default when rendered
+
+            overlay.removeAttribute('open'); // Restore in DOM
+
+            if (overlay._parent) {
+              overlay._parent.appendChild(overlay);
+            }
+          }
+          /** @ignore */
+
+        }, {
+          key: "render",
+          value: function render() {
             var _this2 = this;
 
-            _get(_getPrototypeOf(_class.prototype), "connectedCallback", this).call(this); // Cleanup resize helpers object (cloneNode support)
+            _get(_getPrototypeOf(_class.prototype), "render", this).call(this); // Cleanup resize helpers object (cloneNode support)
 
 
             var resizeHelpers = this.getElementsByTagName('object');
@@ -23931,18 +23828,19 @@
 
             if (popover) {
               this.removeChild(popover);
-            }
-
-            this._elements.moreButton.label.textContent = this.moreButtonText; // 'More' button might be moved later in dom when Container is attached to parent
-
-            this.appendChild(this._elements.moreButton); // Init 'More' popover
-
-            this._elements.overlay.target = this._elements.moreButton; // Cannot be open by default when rendered
-
-            this._elements.overlay.removeAttribute('open'); // Insert popover always as firstChild to ensure element order (cloneNode support)
+            } // Copy more text
 
 
-            this.insertBefore(this._elements.overlay, this.firstChild); // Style the items to match action items
+            this._elements.moreButton.label.textContent = this.moreButtonText; // Init 'More' popover
+
+            this._elements.overlay.target = this._elements.moreButton; // Create empty frag
+
+            var frag = document.createDocumentFragment(); // 'More' button might be moved later in dom when Container is attached to parent
+
+            frag.appendChild(this._elements.moreButton);
+            frag.appendChild(this._elements.overlay); // Render template
+
+            this.appendChild(frag); // Style the items to match action items
 
             this.items.getAll().forEach(function (item) {
               return _this2._styleItem(item);
@@ -23953,11 +23851,13 @@
         }, {
           key: "disconnectedCallback",
           value: function disconnectedCallback() {
-            _get(_getPrototypeOf(_class.prototype), "disconnectedCallback", this).call(this); // In case it was moved out don't forget to remove it
+            _get(_getPrototypeOf(_class.prototype), "disconnectedCallback", this).call(this);
 
+            var overlay = this._elements.overlay; // In case it was moved out don't forget to remove it
 
-            if (!this.contains(this._elements.overlay)) {
-              this._elements.overlay.remove();
+            if (!this.contains(overlay)) {
+              overlay._parent = overlay._repositioned ? document.body : this;
+              overlay.remove();
             }
           }
         }, {
@@ -24051,7 +23951,7 @@
     );
   };
 
-  var CLASSNAME$e = '_coral-ActionBar-primary';
+  var CLASSNAME$a = '_coral-ActionBar-primary';
   /**
    @class Coral.ActionBar.Primary
    @classdesc An ActionBar primary component
@@ -24106,11 +24006,11 @@
       /** @ignore */
 
     }, {
-      key: "connectedCallback",
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ActionBarPrimary.prototype), "connectedCallback", this).call(this);
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(ActionBarPrimary.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$e);
+        this.classList.add(CLASSNAME$a);
 
         this._attachMoreButtonToContainer();
       }
@@ -24119,7 +24019,7 @@
     return ActionBarPrimary;
   }(BaseActionBarContainer(BaseComponent(HTMLElement)));
 
-  var CLASSNAME$f = '_coral-ActionBar-secondary';
+  var CLASSNAME$b = '_coral-ActionBar-secondary';
   /**
    @class Coral.ActionBar.Secondary
    @classdesc An ActionBar secondary component
@@ -24169,11 +24069,11 @@
       /** @ignore */
 
     }, {
-      key: "connectedCallback",
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ActionBarSecondary.prototype), "connectedCallback", this).call(this);
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(ActionBarSecondary.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$f);
+        this.classList.add(CLASSNAME$b);
 
         this._attachMoreButtonToContainer();
       }
@@ -24253,7 +24153,7 @@
     }
   };
 
-  var CLASSNAME$g = '_coral-Menu';
+  var CLASSNAME$c = '_coral-Menu';
   /**
    Enumeration for {@link BaseList} interactions.
    
@@ -24445,13 +24345,13 @@
            */
 
         }, {
-          key: "connectedCallback",
+          key: "render",
 
           /** @ignore */
-          value: function connectedCallback() {
-            _get(_getPrototypeOf(_class.prototype), "connectedCallback", this).call(this);
+          value: function render() {
+            _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-            this.classList.add(CLASSNAME$g); // Default reflected attributes
+            this.classList.add(CLASSNAME$c); // Default reflected attributes
 
             if (!this._interaction) {
               this.interaction = interaction$2.ON;
@@ -24519,7 +24419,7 @@
     );
   };
 
-  var CLASSNAME$h = '_coral-Menu-item';
+  var CLASSNAME$d = '_coral-Menu-item';
   /**
    @base BaseListItem
    @classdesc The base element for List Item components
@@ -24566,13 +24466,13 @@
             return this._elements.icon;
           }
         }, {
-          key: "connectedCallback",
+          key: "render",
 
           /** @ignore */
-          value: function connectedCallback() {
-            _get(_getPrototypeOf(_class.prototype), "connectedCallback", this).call(this);
+          value: function render() {
+            _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-            this.classList.add(CLASSNAME$h); // The attribute that makes different types of list items co-exist
+            this.classList.add(CLASSNAME$d); // The attribute that makes different types of list items co-exist
             // This is also used for event delegation
 
             this.setAttribute('coral-list-item', ''); // Fetch or create the content content zone element
@@ -24600,6 +24500,7 @@
               handle: 'content',
               tagName: 'coral-list-item-content',
               insert: function insert(content) {
+                content.classList.add("".concat(CLASSNAME$d, "Label"));
                 this.appendChild(content);
               }
             });
@@ -24715,29 +24616,19 @@
     return List;
   }(BaseList(BaseComponent(HTMLElement)));
 
-  /**
-   * Copyright 2019 Adobe. All rights reserved.
-   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
-   * you may not use this file except in compliance with the License. You may obtain a copy
-   * of the License at http://www.apache.org/licenses/LICENSE-2.0
-   *
-   * Unless required by applicable law or agreed to in writing, software distributed under
-   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
-   * OF ANY KIND, either express or implied. See the License for the specific language
-   * governing permissions and limitations under the License.
-   */
-  var CLASSNAME$i = '_coral-Menu-divider';
+  var CLASSNAME$e = '_coral-Menu-divider';
   /**
    @class Coral.List.Divider
    @classdesc The List divider
    @htmltag coral-list-divider
    @extends {HTMLElement}
+   @extends {BaseComponent}
    */
 
   var ListDivider =
   /*#__PURE__*/
-  function (_HTMLElement) {
-    _inherits(ListDivider, _HTMLElement);
+  function (_BaseComponent) {
+    _inherits(ListDivider, _BaseComponent);
 
     function ListDivider() {
       _classCallCheck(this, ListDivider);
@@ -24746,18 +24637,20 @@
     }
 
     _createClass(ListDivider, [{
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        this.classList.add(CLASSNAME$i); // a11y
+      value: function render() {
+        _get(_getPrototypeOf(ListDivider.prototype), "render", this).call(this);
+
+        this.classList.add(CLASSNAME$e); // a11y
 
         this.setAttribute('role', 'separator');
       }
     }]);
 
     return ListDivider;
-  }(_wrapNativeSuper(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    @class Coral.List.Item
@@ -24800,38 +24693,18 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var CLASSNAME$j = '_coral-Menu-itemLabel';
+
   /**
    @class Coral.List.Item.Content
    @classdesc The List item content
    @htmltag coral-list-item-content
-   @extends {HTMLElement}
+   @return {HTMLElement}
    */
+  var ListItemContent = (function () {
+    return document.createElement('coral-list-item-content');
+  });
 
-  var ListItemContent =
-  /*#__PURE__*/
-  function (_HTMLElement) {
-    _inherits(ListItemContent, _HTMLElement);
-
-    function ListItemContent() {
-      _classCallCheck(this, ListItemContent);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(ListItemContent).apply(this, arguments));
-    }
-
-    _createClass(ListItemContent, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        this.classList.add(CLASSNAME$j);
-      }
-    }]);
-
-    return ListItemContent;
-  }(_wrapNativeSuper(HTMLElement));
-
-  var CLASSNAME$k = '_coral-AnchorList';
+  var CLASSNAME$f = '_coral-AnchorList';
   /**
    @class Coral.AnchorList
    @classdesc An AnchorList component that supports multi-line text, icons, and text wrapping with ellipsis.
@@ -24871,11 +24744,11 @@
       /** @ignore */
 
     }, {
-      key: "connectedCallback",
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(AnchorList.prototype), "connectedCallback", this).call(this);
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(AnchorList.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$k);
+        this.classList.add(CLASSNAME$f);
       }
     }, {
       key: "_itemTagName",
@@ -24896,7 +24769,7 @@
     return AnchorList;
   }(BaseList(BaseComponent(HTMLElement)));
 
-  var CLASSNAME$l = '_coral-AnchorList-item';
+  var CLASSNAME$g = '_coral-AnchorList-item';
   /**
    @class Coral.AnchorList.Item
    @classdesc An AnchorList item component
@@ -24947,11 +24820,11 @@
       /** @ignore */
 
     }, {
-      key: "connectedCallback",
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(AnchorListItem.prototype), "connectedCallback", this).call(this);
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(AnchorListItem.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$l);
+        this.classList.add(CLASSNAME$g);
       }
     }, {
       key: "disabled",
@@ -24987,7 +24860,7 @@
     return AnchorListItem;
   }(BaseListItem(BaseComponent(HTMLAnchorElement)));
 
-  var CLASSNAME$m = '_coral-ButtonList';
+  var CLASSNAME$h = '_coral-ButtonList';
   /**
    @class Coral.ButtonList
    @classdesc A ButtonList component that supports multi-line text, icons, and text wrapping with ellipsis.
@@ -25027,11 +24900,11 @@
       /** @ignore */
 
     }, {
-      key: "connectedCallback",
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ButtonList.prototype), "connectedCallback", this).call(this);
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(ButtonList.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$m);
+        this.classList.add(CLASSNAME$h);
       }
     }, {
       key: "_itemTagName",
@@ -25052,7 +24925,7 @@
     return ButtonList;
   }(BaseList(BaseComponent(HTMLElement)));
 
-  var CLASSNAME$n = '_coral-ButtonList-item';
+  var CLASSNAME$i = '_coral-ButtonList-item';
   /**
    @class Coral.ButtonList.Item
    @classdesc An ButtonList item component
@@ -25074,13 +24947,13 @@
     }
 
     _createClass(ButtonListItem, [{
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ButtonListItem.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(ButtonListItem.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$n);
+        this.classList.add(CLASSNAME$i);
       }
     }, {
       key: "trackingElement",
@@ -25193,7 +25066,7 @@
     LARGE: 'L'
   }; // the waits's base classname
 
-  var CLASSNAME$o = '_coral-CircleLoader';
+  var CLASSNAME$j = '_coral-CircleLoader';
   /**
    @class Coral.Wait
    @classdesc A Wait component to be used to indicate a process that is in-progress for an indefinite amount of time.
@@ -25245,11 +25118,11 @@
       /** @ignore */
 
     }, {
-      key: "connectedCallback",
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(Wait.prototype), "connectedCallback", this).call(this);
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(Wait.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$o); // ARIA
+        this.classList.add(CLASSNAME$j); // ARIA
 
         this.setAttribute('role', 'progressbar'); // Default reflected attributes
 
@@ -25300,9 +25173,9 @@
         this._reflectAttribute('size', this._size); // large css change
 
 
-        this.classList.toggle("".concat(CLASSNAME$o, "--large"), this._size === size$2.LARGE); // small css change
+        this.classList.toggle("".concat(CLASSNAME$j, "--large"), this._size === size$2.LARGE); // small css change
 
-        this.classList.toggle("".concat(CLASSNAME$o, "--small"), this._size === size$2.SMALL);
+        this.classList.toggle("".concat(CLASSNAME$j, "--small"), this._size === size$2.SMALL);
       }
       /**
        Whether the component is centered or not. The container needs to have the style <code>position: relative</code>
@@ -25323,7 +25196,7 @@
 
         this._reflectAttribute('centered', this._centered);
 
-        this.classList.toggle("".concat(CLASSNAME$o, "--centered"), this._centered);
+        this.classList.toggle("".concat(CLASSNAME$j, "--centered"), this._centered);
       }
       /**
        The wait's variant. See {@link WaitVariantEnum}.
@@ -25366,14 +25239,14 @@
         this._reflectAttribute('indeterminate', this._indeterminate);
 
         if (this._indeterminate) {
-          this.classList.add("".concat(CLASSNAME$o, "--indeterminate")); // ARIA: Remove attributes
+          this.classList.add("".concat(CLASSNAME$j, "--indeterminate")); // ARIA: Remove attributes
 
           this.removeAttribute('aria-valuenow');
           this.removeAttribute('aria-valuemin');
           this.removeAttribute('aria-valuemax');
           this.value = 0;
         } else {
-          this.classList.remove("".concat(CLASSNAME$o, "--indeterminate")); // ARIA: Add attributes
+          this.classList.remove("".concat(CLASSNAME$j, "--indeterminate")); // ARIA: Add attributes
 
           this.setAttribute('aria-valuemin', '0');
           this.setAttribute('aria-valuemax', '100');
@@ -25484,7 +25357,7 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-wait', Wait);
+  commons._define('coral-wait', Wait);
 
   var template$8 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
@@ -25529,7 +25402,7 @@
   /** @ignore */
 
   var GROUP_TAG_NAME = 'coral-selectlist-group';
-  var CLASSNAME$p = '_coral-Menu';
+  var CLASSNAME$k = '_coral-Menu';
   /**
    @class Coral.SelectList
    @classdesc A SelectList component is a selectable list of items.
@@ -25935,13 +25808,11 @@
       /** @ignore */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(SelectList.prototype), "connectedCallback", this).call(this);
-
-        this.classList.add(CLASSNAME$p); // adds the role to support accessibility
+      value: function render() {
+        this.classList.add(CLASSNAME$k); // adds the role to support accessibility
 
         this.setAttribute('role', 'listbox');
 
@@ -26126,7 +25997,7 @@
     return SelectList;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$q = '_coral-SelectList-group';
+  var CLASSNAME$l = '_coral-SelectList-group';
   /**
    @class Coral.SelectList.Group
    @classdesc A SelectList group component
@@ -26147,13 +26018,13 @@
     }
 
     _createClass(SelectListGroup, [{
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(SelectListGroup.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(SelectListGroup.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$q);
+        this.classList.add(CLASSNAME$l);
         this.setAttribute('role', 'group');
       }
     }, {
@@ -26229,7 +26100,7 @@
     return frag;
   };
 
-  var CLASSNAME$r = '_coral-Menu-item';
+  var CLASSNAME$m = '_coral-Menu-item';
   /**
    @class Coral.SelectList.Item
    @classdesc A SelectList item component
@@ -26292,26 +26163,19 @@
        */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(SelectListItem.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(SelectListItem.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$r);
+        this.classList.add(CLASSNAME$m);
         this.setAttribute('role', 'option'); // Support cloneNode
 
         var template = this.querySelector('._coral-SelectList-icon');
 
         if (template) {
           template.remove();
-        } // Remove content icon before processing content zone
-
-
-        var contentIcon = this.querySelector('coral-icon:not(._coral-Menu-item-icon)');
-
-        if (contentIcon) {
-          contentIcon.remove();
         } // Fetch or create the content content zone element
 
 
@@ -26326,7 +26190,6 @@
 
         this.appendChild(this._elements.checkIcon); // Assign the content zones, moving them into place in the process
 
-        this.icon = contentIcon && contentIcon.icon || this.icon;
         this.content = content;
       }
     }, {
@@ -26356,7 +26219,17 @@
           handle: 'content',
           tagName: 'coral-selectlist-item-content',
           insert: function insert(content) {
-            this.insertBefore(content, this._elements.checkIcon);
+            content.classList.add("".concat(CLASSNAME$m, "Label")); // Remove content icon before processing content zone
+
+            var checkIcon = this._elements.checkIcon;
+            var contentIcon = content.querySelector('coral-icon:not(._coral-Menu-item-icon)');
+
+            if (contentIcon && contentIcon.icon) {
+              contentIcon.remove();
+              this.icon = contentIcon.icon;
+            }
+
+            this.insertBefore(content, this.contains(checkIcon) ? checkIcon : null);
           }
         });
       }
@@ -26460,32 +26333,11 @@
    @class Coral.SelectList.Item.Content
    @classdesc The SelectList Item content
    @htmltag coral-selectlist-item-content
-   @extends {HTMLElement}
+   @return {HTMLElement}
    */
-  var CLASSNAME$s = '_coral-Menu-itemLabel';
-
-  var SelectListItemContent =
-  /*#__PURE__*/
-  function (_HTMLElement) {
-    _inherits(SelectListItemContent, _HTMLElement);
-
-    function SelectListItemContent() {
-      _classCallCheck(this, SelectListItemContent);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(SelectListItemContent).apply(this, arguments));
-    }
-
-    _createClass(SelectListItemContent, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        this.classList.add(CLASSNAME$s);
-      }
-    }]);
-
-    return SelectListItemContent;
-  }(_wrapNativeSuper(HTMLElement));
+  var SelectListItemContent = (function () {
+    return document.createElement('coral-selectlist-item-content');
+  });
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -26503,22 +26355,30 @@
     'coral-component-selectlist': translations$3
   }); // Expose component on the Coral namespace
 
-  window.customElements.define('coral-list', List);
-  window.customElements.define('coral-list-divider', ListDivider);
-  window.customElements.define('coral-list-item', ListItem);
-  window.customElements.define('coral-list-item-content', ListItemContent);
-  window.customElements.define('coral-anchorlist', AnchorList);
-  window.customElements.define('coral-anchorlist-item', AnchorListItem, {
+  commons._define('coral-anchorlist-item', AnchorListItem, {
     extends: 'a'
   });
-  window.customElements.define('coral-buttonlist', ButtonList);
-  window.customElements.define('coral-buttonlist-item', ButtonListItem, {
+
+  commons._define('coral-anchorlist', AnchorList);
+
+  commons._define('coral-buttonlist-item', ButtonListItem, {
     extends: 'button'
   });
-  window.customElements.define('coral-selectlist', SelectList);
-  window.customElements.define('coral-selectlist-item', SelectListItem);
-  window.customElements.define('coral-selectlist-item-content', SelectListItemContent);
-  window.customElements.define('coral-selectlist-group', SelectListGroup);
+
+  commons._define('coral-buttonlist', ButtonList);
+
+  commons._define('coral-selectlist-group', SelectListGroup);
+
+  commons._define('coral-selectlist-item', SelectListItem);
+
+  commons._define('coral-selectlist', SelectList);
+
+  commons._define('coral-list-divider', ListDivider);
+
+  commons._define('coral-list-item', ListItem);
+
+  commons._define('coral-list', List);
+
   List.Divider = ListDivider;
   List.Item = ListItem;
   List.Item.Content = ListItemContent;
@@ -26528,7 +26388,7 @@
   SelectList.Item = SelectListItem;
   SelectList.Item.Content = SelectListItemContent;
 
-  var CLASSNAME$t = '_coral-ActionBar-container';
+  var CLASSNAME$n = '_coral-ActionBar-container';
   /**
    Enumeration for {@link ActionBarContainer} positions.
    
@@ -26603,13 +26463,13 @@
        */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ActionBarContainer.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(ActionBarContainer.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$t); // Cleanup resize helpers object (cloneNode support)
+        this.classList.add(CLASSNAME$n); // Cleanup resize helpers object (cloneNode support)
 
         var resizeHelpers = this.getElementsByTagName('object');
 
@@ -26687,11 +26547,16 @@
     'coral-component-actionbar': translations
   }); // Expose component on the Coral namespace
 
-  window.customElements.define('coral-actionbar', ActionBar);
-  window.customElements.define('coral-actionbar-item', ActionBarItem);
-  window.customElements.define('coral-actionbar-primary', ActionBarPrimary);
-  window.customElements.define('coral-actionbar-secondary', ActionBarSecondary);
-  window.customElements.define('coral-actionbar-container', ActionBarContainer);
+  commons._define('coral-actionbar-item', ActionBarItem);
+
+  commons._define('coral-actionbar-primary', ActionBarPrimary);
+
+  commons._define('coral-actionbar-secondary', ActionBarSecondary);
+
+  commons._define('coral-actionbar-container', ActionBarContainer);
+
+  commons._define('coral-actionbar', ActionBar);
+
   ActionBar.Item = ActionBarItem;
   ActionBar.Primary = ActionBarPrimary;
   ActionBar.Secondary = ActionBarSecondary;
@@ -26736,12 +26601,12 @@
     SMALL: 'S',
     LARGE: 'L'
   };
-  var CLASSNAME$u = '_coral-Alert'; // An array of all possible variant classnames
+  var CLASSNAME$o = '_coral-Alert'; // An array of all possible variant classnames
 
   var ALL_VARIANT_CLASSES$3 = [];
 
   for (var variantValue$2 in variant$5) {
-    ALL_VARIANT_CLASSES$3.push("".concat(CLASSNAME$u, "--").concat(variant$5[variantValue$2]));
+    ALL_VARIANT_CLASSES$3.push("".concat(CLASSNAME$o, "--").concat(variant$5[variantValue$2]));
   } // Used to map icon with variant
 
 
@@ -26832,13 +26697,13 @@
         this._elements.icon = this.querySelector('._coral-Alert-icon');
       }
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(Alert.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(Alert.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$u); // a11y
+        this.classList.add(CLASSNAME$o); // a11y
 
         this.setAttribute('role', 'alert'); // Default reflected attributes
 
@@ -26901,7 +26766,7 @@
         // This lets popover get our styles for free
 
 
-        this.classList.add("".concat(CLASSNAME$u, "--").concat(this._variant));
+        this.classList.add("".concat(CLASSNAME$o, "--").concat(this._variant));
       }
       /**
        The size of the alert. It accepts both lower and upper case sizes. See {@link AlertVariantEnum}.
@@ -26940,6 +26805,7 @@
           handle: 'header',
           tagName: 'coral-alert-header',
           insert: function insert(header) {
+            header.classList.add("".concat(CLASSNAME$o, "-header"));
             this.insertBefore(header, this.firstChild);
           }
         });
@@ -26961,7 +26827,8 @@
           handle: 'content',
           tagName: 'coral-alert-content',
           insert: function insert(content) {
-            // After the header
+            content.classList.add("".concat(CLASSNAME$o, "-content")); // After the header
+
             this.insertBefore(content, this.header.nextElementSibling);
           }
         });
@@ -26983,7 +26850,8 @@
           handle: 'footer',
           tagName: 'coral-alert-footer',
           insert: function insert(footer) {
-            // After the content
+            footer.classList.add("".concat(CLASSNAME$o, "-footer")); // After the content
+
             this.insertBefore(footer, this.content.nextElementSibling);
           }
         });
@@ -27031,101 +26899,27 @@
     return Alert;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$v = '_coral-Alert-header';
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+
   /**
    @class Coral.Alert.Header
    @classdesc The Alert header content
    @htmltag coral-alert-header
-   @extends {HTMLElement}
-   @extends {BaseComponent}
+   @return {HTMLElement}
    */
-
-  var AlertHeader =
-  /*#__PURE__*/
-  function (_BaseComponent) {
-    _inherits(AlertHeader, _BaseComponent);
-
-    function AlertHeader() {
-      _classCallCheck(this, AlertHeader);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(AlertHeader).apply(this, arguments));
-    }
-
-    _createClass(AlertHeader, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        this.classList.add(CLASSNAME$v);
-      }
-    }]);
-
-    return AlertHeader;
-  }(BaseComponent(HTMLElement));
-
-  var CLASSNAME$w = '_coral-Alert-content';
-  /**
-   @class Coral.Alert.Content
-   @classdesc The Alert default content
-   @htmltag coral-alert-content
-   @extends {HTMLElement}
-   @extends {BaseComponent}
-   */
-
-  var AlertContent =
-  /*#__PURE__*/
-  function (_BaseComponent) {
-    _inherits(AlertContent, _BaseComponent);
-
-    function AlertContent() {
-      _classCallCheck(this, AlertContent);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(AlertContent).apply(this, arguments));
-    }
-
-    _createClass(AlertContent, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        this.classList.add(CLASSNAME$w);
-      }
-    }]);
-
-    return AlertContent;
-  }(BaseComponent(HTMLElement));
-
-  var CLASSNAME$x = '_coral-Alert-footer';
-  /**
-   @class Coral.Alert.Footer
-   @classdesc The Alert footer content
-   @htmltag coral-alert-footer
-   @extends {HTMLElement}
-   @extends {BaseComponent}
-   */
-
-  var AlertFooter =
-  /*#__PURE__*/
-  function (_BaseComponent) {
-    _inherits(AlertFooter, _BaseComponent);
-
-    function AlertFooter() {
-      _classCallCheck(this, AlertFooter);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(AlertFooter).apply(this, arguments));
-    }
-
-    _createClass(AlertFooter, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        this.classList.add(CLASSNAME$x);
-      }
-    }]);
-
-    return AlertFooter;
-  }(BaseComponent(HTMLElement));
+  var AlertHeader = (function () {
+    return document.createElement('coral-alert-header');
+  });
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -27139,10 +26933,52 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-alert', Alert);
-  window.customElements.define('coral-alert-header', AlertHeader);
-  window.customElements.define('coral-alert-content', AlertContent);
-  window.customElements.define('coral-alert-footer', AlertFooter);
+  /**
+   @class Coral.Alert.Content
+   @classdesc The Alert default content
+   @htmltag coral-alert-content
+   @return {HTMLElement}
+   */
+  var AlertContent = (function () {
+    return document.createElement('coral-alert-content');
+  });
+
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+
+  /**
+   @class Coral.Alert.Footer
+   @classdesc The Alert footer content
+   @htmltag coral-alert-footer
+   @return {HTMLElement}
+   */
+  var AlertFooter = (function () {
+    return document.createElement('coral-alert-footer');
+  });
+
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+
+  commons._define('coral-alert', Alert);
+
   Alert.Header = AlertHeader;
   Alert.Content = AlertContent;
   Alert.Footer = AlertFooter;
@@ -27769,7 +27605,7 @@
     return frag;
   };
 
-  var CLASSNAME$y = '_coral-Tags-item';
+  var CLASSNAME$p = '_coral-Tags-item';
   var LABEL_CLASSNAME = '_coral-Label';
   /**
    Enumeration for {@link Tag} sizes. Only colored tags can have different sizes.
@@ -27867,8 +27703,8 @@
     ALL_SIZE_CLASSES$1.push("".concat(LABEL_CLASSNAME, "--").concat(sizeValue$1));
   }
 
-  var QUIET_CLASSNAME = "".concat(CLASSNAME$y, "--quiet");
-  var MULTILINE_CLASSNAME = "".concat(CLASSNAME$y, "--multiline"); // Store coordinates of a mouse down event to compare against mouseup coordinates.
+  var QUIET_CLASSNAME = "".concat(CLASSNAME$p, "--quiet");
+  var MULTILINE_CLASSNAME = "".concat(CLASSNAME$p, "--multiline"); // Store coordinates of a mouse down event to compare against mouseup coordinates.
 
   var bullsEye = null; // Utility method to detect center point of an element.
 
@@ -27949,10 +27785,10 @@
 
         var isColored = this.color !== color.DEFAULT; // Base
 
-        this.classList.toggle(CLASSNAME$y, !isColored);
+        this.classList.toggle(CLASSNAME$p, !isColored);
         this.classList.toggle(LABEL_CLASSNAME, isColored); // Closable
 
-        this.classList.toggle("".concat(CLASSNAME$y, "--deletable"), !isColored); // Quiet
+        this.classList.toggle("".concat(CLASSNAME$p, "--deletable"), !isColored); // Quiet
 
         this.classList.toggle(QUIET_CLASSNAME, !isColored && this.quiet); // Size
 
@@ -28101,7 +27937,17 @@
     }, {
       key: "connectedCallback",
       value: function connectedCallback() {
-        _get(_getPrototypeOf(Tag.prototype), "connectedCallback", this).call(this); // Default reflected attributes
+        _get(_getPrototypeOf(Tag.prototype), "connectedCallback", this).call(this); // Used to inform the tag list that it's added
+
+
+        this.trigger('coral-tag:_connected');
+      }
+      /** @ignore */
+
+    }, {
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(Tag.prototype), "render", this).call(this); // Default reflected attributes
 
 
         if (!this._size) {
@@ -28133,9 +27979,7 @@
         } // Assign the content zones, moving them into place in the process
 
 
-        this.label = label; // Used to inform the tag list that it's added
-
-        this.trigger('coral-tag:_connected');
+        this.label = label;
       }
       /** @ignore */
 
@@ -28173,6 +28017,7 @@
           handle: 'label',
           tagName: 'coral-tag-label',
           insert: function insert(label) {
+            label.classList.add("".concat(CLASSNAME$p, "Label"));
             this.insertBefore(label, this.firstChild);
 
             this._updateAriaLabel();
@@ -28384,38 +28229,18 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var CLASSNAME$z = '_coral-Tags-itemLabel';
+
   /**
    @class Coral.Tag.Label
    @classdesc Tag's label component
    @htmltag coral-tag-label
-   @extends {HTMLElement}
+   @return {HTMLElement}
    */
+  var TagLabel = (function () {
+    return document.createElement('coral-tag-label');
+  });
 
-  var TagLabel =
-  /*#__PURE__*/
-  function (_HTMLElement) {
-    _inherits(TagLabel, _HTMLElement);
-
-    function TagLabel() {
-      _classCallCheck(this, TagLabel);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(TagLabel).apply(this, arguments));
-    }
-
-    _createClass(TagLabel, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        this.classList.add(CLASSNAME$z);
-      }
-    }]);
-
-    return TagLabel;
-  }(_wrapNativeSuper(HTMLElement));
-
-  var CLASSNAME$A = '_coral-Tags'; // Collection
+  var CLASSNAME$q = '_coral-Tags'; // Collection
 
   var ITEM_TAGNAME = 'coral-tag';
   /**
@@ -28510,8 +28335,8 @@
       /** @private */
 
     }, {
-      key: "_onItemConnected",
-      value: function _onItemConnected(attachedItem) {
+      key: "_prepareItem",
+      value: function _prepareItem(attachedItem) {
         var items = this.items.getAll(); // Prevents to add duplicates based on the tag value
 
         var duplicate = items.some(function (tag) {
@@ -28734,7 +28559,7 @@
         event.stopImmediatePropagation();
         var item = event.target;
 
-        this._onItemConnected(item);
+        this._prepareItem(item);
       }
       /**
        Inherited from {@link BaseFormField#reset}.
@@ -28749,15 +28574,15 @@
       /** @ignore */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
+      value: function render() {
         var _this3 = this;
 
-        _get(_getPrototypeOf(TagList.prototype), "connectedCallback", this).call(this);
+        _get(_getPrototypeOf(TagList.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$A); // adds the role to support accessibility
+        this.classList.add(CLASSNAME$q); // adds the role to support accessibility
 
         this.setAttribute('role', 'list');
         this.setAttribute('aria-live', 'off');
@@ -28774,7 +28599,7 @@
 
 
         this.items.getAll().forEach(function (item) {
-          _this3._onItemConnected(item);
+          _this3._prepareItem(item);
         });
       }
     }, {
@@ -28991,9 +28816,10 @@
     'coral-component-taglist': translations$5
   }); // Expose component on the Coral namespace
 
-  window.customElements.define('coral-tag', Tag);
-  window.customElements.define('coral-tag-label', TagLabel);
-  window.customElements.define('coral-taglist', TagList);
+  commons._define('coral-tag', Tag);
+
+  commons._define('coral-taglist', TagList);
+
   Tag.Label = TagLabel;
 
   /**
@@ -29141,13 +28967,13 @@
     QUIET: 'quiet'
   }; // the textfield's base classname
 
-  var CLASSNAME$B = '_coral-Textfield'; // Builds a string containing all possible variant classnames. This will be used to remove classnames when the variant
+  var CLASSNAME$r = '_coral-Textfield'; // Builds a string containing all possible variant classnames. This will be used to remove classnames when the variant
   // changes
 
   var ALL_VARIANT_CLASSES$4 = [];
 
   for (var variantValue$3 in variant$6) {
-    ALL_VARIANT_CLASSES$4.push("".concat(CLASSNAME$B, "--").concat(variant$6[variantValue$3]));
+    ALL_VARIANT_CLASSES$4.push("".concat(CLASSNAME$r, "--").concat(variant$6[variantValue$3]));
   }
   /**
    @class Coral.Textfield
@@ -29188,13 +29014,13 @@
 
 
     _createClass(Textfield, [{
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(Textfield.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(Textfield.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$B); // Default reflected attributes
+        this.classList.add(CLASSNAME$r); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$6.DEFAULT;
@@ -29217,7 +29043,7 @@
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$4);
 
         if (this._variant !== variant$6.DEFAULT) {
-          this.classList.add("".concat(CLASSNAME$B, "--").concat(this._variant));
+          this.classList.add("".concat(CLASSNAME$r, "--").concat(this._variant));
         }
       }
       /**
@@ -29255,7 +29081,7 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-textfield', Textfield, {
+  commons._define('coral-textfield', Textfield, {
     extends: 'input'
   });
 
@@ -29373,7 +29199,7 @@
     return frag;
   };
 
-  var CLASSNAME$C = '_coral-Autocomplete';
+  var CLASSNAME$s = '_coral-Autocomplete';
   /**
    The distance, in pixels, from the bottom of the List at which we assume the user has scrolled
    to the bottom of the list.
@@ -30850,7 +30676,20 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(Autocomplete.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$C); // Container role per ARIA Autocomplete
+        var overlay = this._elements.overlay; // Cannot be open by default when rendered
+
+        overlay.removeAttribute('open'); // Restore in DOM
+
+        if (overlay._parent) {
+          overlay._parent.appendChild(overlay);
+        }
+      }
+    }, {
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(Autocomplete.prototype), "render", this).call(this);
+
+        this.classList.add(CLASSNAME$s); // Container role per ARIA Autocomplete
 
         this.setAttribute('role', 'presentation'); // Input attributes per ARIA Autocomplete
 
@@ -30877,15 +30716,12 @@
         } // Create a fragment
 
 
-        var frag = document.createDocumentFragment(); // Cannot be open by default when rendered
+        var frag = document.createDocumentFragment(); // Render the template
 
-        this._elements.overlay.removeAttribute('open'); // Render the template
-
-
-        frag.appendChild(this._elements.overlay);
         frag.appendChild(this._elements.field);
         frag.appendChild(this._elements.inputGroup);
         frag.appendChild(this._elements.tagList);
+        frag.appendChild(this._elements.overlay);
         this._elements.overlay.target = this._elements.trigger; // Clean up
 
         while (this.firstChild) {
@@ -30913,11 +30749,13 @@
     }, {
       key: "disconnectedCallback",
       value: function disconnectedCallback() {
-        _get(_getPrototypeOf(Autocomplete.prototype), "disconnectedCallback", this).call(this); // In case it was moved out don't forget to remove it
+        _get(_getPrototypeOf(Autocomplete.prototype), "disconnectedCallback", this).call(this);
 
+        var overlay = this._elements.overlay; // In case it was moved out don't forget to remove it
 
-        if (!this.contains(this._elements.overlay)) {
-          this._elements.overlay.remove();
+        if (!this.contains(overlay)) {
+          overlay._parent = overlay._repositioned ? document.body : this;
+          overlay.remove();
         }
       }
       /**
@@ -31478,11 +31316,13 @@
     'coral-component-autocomplete': translations$4
   }); // Expose component on the Coral namespace
 
-  window.customElements.define('coral-autocomplete-item', AutocompleteItem);
-  window.customElements.define('coral-autocomplete', Autocomplete);
+  commons._define('coral-autocomplete-item', AutocompleteItem);
+
+  commons._define('coral-autocomplete', Autocomplete);
+
   Autocomplete.Item = AutocompleteItem;
 
-  var CLASSNAME$D = '_coral-Banner';
+  var CLASSNAME$t = '_coral-Banner';
   /**
    Enumeration for {@link Banner} variants.
    
@@ -31505,7 +31345,7 @@
   var ALL_VARIANT_CLASSES$5 = [];
 
   for (var variantValue$4 in variant$8) {
-    ALL_VARIANT_CLASSES$5.push("".concat(CLASSNAME$D, "--").concat(variant$8[variantValue$4]));
+    ALL_VARIANT_CLASSES$5.push("".concat(CLASSNAME$t, "--").concat(variant$8[variantValue$4]));
   }
   /**
    @class Coral.Banner
@@ -31546,13 +31386,13 @@
 
 
     _createClass(Banner, [{
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(Banner.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(Banner.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$D); // Default reflected attributes
+        this.classList.add(CLASSNAME$t); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$8.INFO;
@@ -31594,7 +31434,7 @@
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$5); // Set new variant class
 
 
-        this.classList.add("".concat(CLASSNAME$D, "--").concat(this._variant));
+        this.classList.add("".concat(CLASSNAME$t, "--").concat(this._variant));
       }
       /**
        The banner's header.
@@ -31613,6 +31453,7 @@
           handle: 'header',
           tagName: 'coral-banner-header',
           insert: function insert(header) {
+            header.classList.add("".concat(CLASSNAME$t, "-header"));
             this.insertBefore(header, this.firstChild);
           }
         });
@@ -31634,6 +31475,7 @@
           handle: 'content',
           tagName: 'coral-banner-content',
           insert: function insert(content) {
+            content.classList.add("".concat(CLASSNAME$t, "-content"));
             this.appendChild(content);
           }
         });
@@ -31680,36 +31522,16 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var CLASSNAME$E = '_coral-Banner-header';
+
   /**
    @class Coral.Banner.Header
    @classdesc A Banner Header component
    @htmltag coral-banner-header
-   @extends {HTMLElement}
+   @return {HTMLElement}
    */
-
-  var BannerHeader =
-  /*#__PURE__*/
-  function (_HTMLElement) {
-    _inherits(BannerHeader, _HTMLElement);
-
-    function BannerHeader() {
-      _classCallCheck(this, BannerHeader);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(BannerHeader).apply(this, arguments));
-    }
-
-    _createClass(BannerHeader, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        this.classList.add(CLASSNAME$E);
-      }
-    }]);
-
-    return BannerHeader;
-  }(_wrapNativeSuper(HTMLElement));
+  var BannerHeader = (function () {
+    return document.createElement('coral-banner-header');
+  });
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -31722,36 +31544,16 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var CLASSNAME$F = '_coral-Banner-content';
+
   /**
    @class Coral.Banner.Content
    @classdesc A Banner Content component
    @htmltag coral-banner-content
-   @extends {HTMLElement}
+   @return {HTMLElement}
    */
-
-  var BannerContent =
-  /*#__PURE__*/
-  function (_HTMLElement) {
-    _inherits(BannerContent, _HTMLElement);
-
-    function BannerContent() {
-      _classCallCheck(this, BannerContent);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(BannerContent).apply(this, arguments));
-    }
-
-    _createClass(BannerContent, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        this.classList.add(CLASSNAME$F);
-      }
-    }]);
-
-    return BannerContent;
-  }(_wrapNativeSuper(HTMLElement));
+  var BannerContent = (function () {
+    return document.createElement('coral-banner-content');
+  });
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -31765,9 +31567,8 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-banner', Banner);
-  window.customElements.define('coral-banner-header', BannerHeader);
-  window.customElements.define('coral-banner-content', BannerContent);
+  commons._define('coral-banner', Banner);
+
   Banner.Header = BannerHeader;
   Banner.Content = BannerContent;
 
@@ -31818,7 +31619,7 @@
     return attr !== null ? attr : item.textContent.replace(/\s{2,}/g, ' ').trim();
   };
 
-  var CLASSNAME$G = '_coral-ButtonGroup';
+  var CLASSNAME$u = '_coral-ButtonGroup';
   /**
    @class Coral.ButtonGroup
    @classdesc A ButtonGroup component that can be used as a selection form field.
@@ -32406,13 +32207,15 @@
        */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
+      value: function render() {
+        _get(_getPrototypeOf(ButtonGroup.prototype), "render", this).call(this);
+
         _get(_getPrototypeOf(ButtonGroup.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$G); // Default reflected attributes
+        this.classList.add(CLASSNAME$u); // Default reflected attributes
 
         if (!this._selectionMode) {
           this.selectionMode = selectionMode.NONE;
@@ -32736,7 +32539,7 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-buttongroup', ButtonGroup);
+  commons._define('coral-buttongroup', ButtonGroup);
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -33318,7 +33121,7 @@
     WEEK: 'week',
     DAY: 'day'
   };
-  var CLASSNAME$H = '_coral-Calendar';
+  var CLASSNAME$v = '_coral-Calendar';
   /**
    @class Coral.Calendar
    @classdesc A Calendar component that can be used as a date selection form field. Leverages {@link momentJS} if loaded
@@ -33996,13 +33799,13 @@
         }
       }
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(Calendar.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(Calendar.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$H);
+        this.classList.add(CLASSNAME$v);
         this.setAttribute('role', 'region'); // Default reflected attribute
 
         if (!this._valueFormat) {
@@ -34339,7 +34142,7 @@
     'coral-component-calendar': translations$6
   }); // Expose component on the Coral namespace
 
-  window.customElements.define('coral-calendar', Calendar);
+  commons._define('coral-calendar', Calendar);
 
   var template$h = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
@@ -34378,13 +34181,13 @@
     ASSET: 'asset'
   }; // the card's base classname
 
-  var CLASSNAME$I = '_coral-Card'; // builds a string containing all possible variant classnames. this will be used to remove classnames when the variant
+  var CLASSNAME$w = '_coral-Card'; // builds a string containing all possible variant classnames. this will be used to remove classnames when the variant
   // changes
 
   var ALL_VARIANT_CLASSES$6 = [];
 
   for (var variantValue$5 in variant$9) {
-    ALL_VARIANT_CLASSES$6.push("".concat(CLASSNAME$I, "--").concat(variant$9[variantValue$5]));
+    ALL_VARIANT_CLASSES$6.push("".concat(CLASSNAME$w, "--").concat(variant$9[variantValue$5]));
   }
   /**
    @class Coral.Card
@@ -34445,13 +34248,13 @@
         event.target.classList.remove('is-loading');
       }
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(Card.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(Card.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$I); // Default reflected attributes
+        this.classList.add(CLASSNAME$w); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$9.DEFAULT;
@@ -34500,7 +34303,7 @@
 
         this.asset = asset; // In case a lot of alerts are added, they will not overflow the card
 
-        this.classList.toggle("".concat(CLASSNAME$I, "--overflow"), this.info.scrollHeight > this.clientHeight);
+        this.classList.toggle("".concat(CLASSNAME$w, "--overflow"), this.info.scrollHeight > this.clientHeight);
       }
     }, {
       key: "asset",
@@ -34612,7 +34415,13 @@
           handle: 'content',
           tagName: 'coral-card-content',
           insert: function insert(content) {
-            content.classList.add('u-coral-padding');
+            content.classList.add('u-coral-padding'); // Ensure title comes first
+
+            var title = content.querySelector('coral-card-title');
+
+            if (title) {
+              content.insertBefore(title, content.firstChild);
+            }
 
             this._elements.wrapper.insertBefore(content, this.overlay || null);
           }
@@ -34659,7 +34468,7 @@
 
         this._reflectAttribute('fixedwidth', this._fixedWidth);
 
-        this.classList.toggle("".concat(CLASSNAME$I, "--fixedWidth"), this._fixedWidth);
+        this.classList.toggle("".concat(CLASSNAME$w, "--fixedWidth"), this._fixedWidth);
       }
       /**
        The Overlay of the card.
@@ -34701,7 +34510,7 @@
 
         this._reflectAttribute('stacked', this._stacked);
 
-        this.classList.toggle("".concat(CLASSNAME$I, "--stacked"), this._stacked);
+        this.classList.toggle("".concat(CLASSNAME$w, "--stacked"), this._stacked);
       }
       /**
        The card's variant. It determines which sections of the Card and in which position they are shown.
@@ -34728,7 +34537,7 @@
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$6);
 
         if (this._variant !== variant$9.DEFAULT) {
-          this.classList.add("".concat(CLASSNAME$I, "--").concat(this._variant));
+          this.classList.add("".concat(CLASSNAME$w, "--").concat(this._variant));
         }
 
         this.assetHeight = this.assetHeight;
@@ -34788,7 +34597,7 @@
     return frag;
   };
 
-  var CLASSNAME$J = '_coral-Card-property';
+  var CLASSNAME$x = '_coral-Card-property';
   /**
    @class Coral.Card.Property
    @classdesc A Card property component
@@ -34825,13 +34634,13 @@
 
 
     _createClass(CardProperty, [{
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(CardProperty.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(CardProperty.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$J, 'coral-Body--small'); // Create a fragment
+        this.classList.add(CLASSNAME$x, 'coral-Body--small'); // Create a fragment
 
         var frag = document.createDocumentFragment(); // Render the main template
 
@@ -34917,201 +34726,93 @@
     return CardProperty;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$K = '_coral-Card-title';
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+
   /**
    @class Coral.Card.Title
    @classdesc A Card title component
    @htmltag coral-card-title
-   @extends {HTMLElement}
-   @extends {BaseComponent}
+   @return {HTMLElement}
+   */
+  var CardTitle = (function () {
+    return document.createElement('coral-card-title');
+  });
+
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
    */
 
-  var CardTitle =
-  /*#__PURE__*/
-  function (_BaseComponent) {
-    _inherits(CardTitle, _BaseComponent);
-
-    function CardTitle() {
-      _classCallCheck(this, CardTitle);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(CardTitle).apply(this, arguments));
-    }
-
-    _createClass(CardTitle, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(CardTitle.prototype), "connectedCallback", this).call(this);
-
-        this.classList.add(CLASSNAME$K, 'coral-Heading', 'coral-Heading--4');
-      }
-    }, {
-      key: "content",
-      // @compat
-      get: function get() {
-        return this;
-      },
-      set: function set(value) {
-        // Support configs
-        if (_typeof(value) === 'object') {
-          for (var prop in value) {
-            /** @ignore */
-            this[prop] = value[prop];
-          }
-        }
-      }
-    }]);
-
-    return CardTitle;
-  }(BaseComponent(HTMLElement));
-
-  var CLASSNAME$L = '_coral-Card-subtitle';
   /**
    @class Coral.Card.Subtitle
    @classdesc A Card sub title component
    @htmltag coral-card-subtitle
-   @extends {HTMLElement}
-   @extends {BaseComponent}
+   @return {HTMLElement}
+   */
+  var CardSubtitle = (function () {
+    return document.createElement('coral-card-subtitle');
+  });
+
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
    */
 
-  var CardSubtitle =
-  /*#__PURE__*/
-  function (_BaseComponent) {
-    _inherits(CardSubtitle, _BaseComponent);
-
-    function CardSubtitle() {
-      _classCallCheck(this, CardSubtitle);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(CardSubtitle).apply(this, arguments));
-    }
-
-    _createClass(CardSubtitle, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(CardSubtitle.prototype), "connectedCallback", this).call(this);
-
-        this.classList.add(CLASSNAME$L);
-      }
-    }, {
-      key: "content",
-      // @compat
-      get: function get() {
-        return this;
-      },
-      set: function set(value) {
-        // Support configs
-        if (_typeof(value) === 'object') {
-          for (var prop in value) {
-            /** @ignore */
-            this[prop] = value[prop];
-          }
-        }
-      }
-    }]);
-
-    return CardSubtitle;
-  }(BaseComponent(HTMLElement));
-
-  var CLASSNAME$M = '_coral-Card-context';
   /**
    @class Coral.Card.Context
    @classdesc A Card context component
    @htmltag coral-card-context
-   @extends {HTMLElement}
-   @extends {BaseComponent}
+   @return {HTMLElement}
+   */
+  var CardContext = (function () {
+    return document.createElement('coral-card-context');
+  });
+
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
    */
 
-  var CardContext =
-  /*#__PURE__*/
-  function (_BaseComponent) {
-    _inherits(CardContext, _BaseComponent);
-
-    function CardContext() {
-      _classCallCheck(this, CardContext);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(CardContext).apply(this, arguments));
-    }
-
-    _createClass(CardContext, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(CardContext.prototype), "connectedCallback", this).call(this);
-
-        this.classList.add(CLASSNAME$M, 'coral-Heading', 'coral-Heading--5');
-      }
-    }, {
-      key: "content",
-      // @compat
-      get: function get() {
-        return this;
-      },
-      set: function set(value) {
-        // Support configs
-        if (_typeof(value) === 'object') {
-          for (var prop in value) {
-            /** @ignore */
-            this[prop] = value[prop];
-          }
-        }
-      }
-    }]);
-
-    return CardContext;
-  }(BaseComponent(HTMLElement));
-
-  var CLASSNAME$N = '_coral-Card-description';
   /**
    @class Coral.Card.Description
    @classdesc A Card description component
-   @htmltag coral-card-title
-   @extends {HTMLElement}
-   @extends {BaseComponent}
+   @htmltag coral-card-description
+   @return {HTMLElement}
    */
-
-  var CardDescription =
-  /*#__PURE__*/
-  function (_BaseComponent) {
-    _inherits(CardDescription, _BaseComponent);
-
-    function CardDescription() {
-      _classCallCheck(this, CardDescription);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(CardDescription).apply(this, arguments));
-    }
-
-    _createClass(CardDescription, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(CardDescription.prototype), "connectedCallback", this).call(this);
-
-        this.classList.add(CLASSNAME$N);
-      }
-    }, {
-      key: "content",
-      // @compat
-      get: function get() {
-        return this;
-      },
-      set: function set(value) {
-        // Support configs
-        if (_typeof(value) === 'object') {
-          for (var prop in value) {
-            /** @ignore */
-            this[prop] = value[prop];
-          }
-        }
-      }
-    }]);
-
-    return CardDescription;
-  }(BaseComponent(HTMLElement));
+  var CardDescription = (function () {
+    return document.createElement('coral-card-description');
+  });
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -35190,65 +34891,29 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var CLASSNAME$O = '_coral-Card-content';
+
   /**
    @class Coral.Card.Content
    @classdesc The Card Content
    @htmltag coral-card-content
-   @extends {HTMLElement}
+   @return {HTMLElement}
    */
-
-  var CardContent =
-  /*#__PURE__*/
-  function (_HTMLElement) {
-    _inherits(CardContent, _HTMLElement);
-
-    function CardContent() {
-      _classCallCheck(this, CardContent);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(CardContent).apply(this, arguments));
-    }
-
-    _createClass(CardContent, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        this.classList.add(CLASSNAME$O); // Ensure title comes first
-
-        var title = this.querySelector('coral-card-title');
-
-        if (title) {
-          this.insertBefore(title, this.firstChild);
-        }
-      }
-    }]);
-
-    return CardContent;
-  }(_wrapNativeSuper(HTMLElement));
-
-  /**
-   * Copyright 2019 Adobe. All rights reserved.
-   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
-   * you may not use this file except in compliance with the License. You may obtain a copy
-   * of the License at http://www.apache.org/licenses/LICENSE-2.0
-   *
-   * Unless required by applicable law or agreed to in writing, software distributed under
-   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
-   * OF ANY KIND, either express or implied. See the License for the specific language
-   * governing permissions and limitations under the License.
-   */
+  var CardContent = (function () {
+    return document.createElement('coral-card-content');
+  });
 
   /**
    @class Coral.Card.PropertyList
    @classdesc The Card PropertyList component
    @htmltag coral-card-propertylist
    @extends {HTMLElement}
+   @extends {BaseComponent}
    */
+
   var CardPropertyList =
   /*#__PURE__*/
-  function (_HTMLElement) {
-    _inherits(CardPropertyList, _HTMLElement);
+  function (_BaseComponent) {
+    _inherits(CardPropertyList, _BaseComponent);
 
     function CardPropertyList() {
       _classCallCheck(this, CardPropertyList);
@@ -35257,10 +34922,12 @@
     }
 
     _createClass(CardPropertyList, [{
-      key: "connectedCallback",
+      key: "render",
 
-      /* @ignore */
-      value: function connectedCallback() {
+      /** @ignore */
+      value: function render() {
+        _get(_getPrototypeOf(CardPropertyList.prototype), "render", this).call(this);
+
         this.classList.add('u-coral-clearFix'); // Empty it if no items
 
         if (this.innerHTML.trim() === '') {
@@ -35270,7 +34937,7 @@
     }]);
 
     return CardPropertyList;
-  }(_wrapNativeSuper(HTMLElement));
+  }(BaseComponent(HTMLElement));
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -35306,14 +34973,12 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-card', Card);
-  window.customElements.define('coral-card-content', CardContent);
-  window.customElements.define('coral-card-property', CardProperty);
-  window.customElements.define('coral-card-propertylist', CardPropertyList);
-  window.customElements.define('coral-card-title', CardTitle);
-  window.customElements.define('coral-card-subtitle', CardSubtitle);
-  window.customElements.define('coral-card-context', CardContext);
-  window.customElements.define('coral-card-description', CardDescription);
+  commons._define('coral-card-propertylist', CardPropertyList);
+
+  commons._define('coral-card-property', CardProperty);
+
+  commons._define('coral-card', Card);
+
   Card.Property = CardProperty;
   Card.Property.Content = CardPropertyContent;
   Card.Title = CardTitle;
@@ -35326,7 +34991,7 @@
   Card.Content = CardContent;
   Card.PropertyList = CardPropertyList;
 
-  var CLASSNAME$P = '_coral-CharacterCount';
+  var CLASSNAME$y = '_coral-CharacterCount';
   /**
    Enumeration for {@link CharacterCount} targets.
    
@@ -35399,13 +35064,13 @@
        */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(CharacterCount.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(CharacterCount.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$P); // Set defaults
+        this.classList.add(CLASSNAME$y); // Set defaults
 
         this.target = this.target; // Refresh once connected
 
@@ -35511,7 +35176,7 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-charactercount', CharacterCount);
+  commons._define('coral-charactercount', CharacterCount);
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -35629,7 +35294,7 @@
   };
 
   var IS_IE_OR_EDGE = navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0 || window.navigator.userAgent.indexOf('Edge') !== -1;
-  var CLASSNAME$Q = '_coral-Checkbox';
+  var CLASSNAME$z = '_coral-Checkbox';
   /**
    @class Coral.Checkbox
    @classdesc A Checkbox component to be used as a form field.
@@ -35794,13 +35459,13 @@
         this.checked = this._initialCheckedState;
       }
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(Checkbox.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(Checkbox.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$Q); // Create a fragment
+        this.classList.add(CLASSNAME$z); // Create a fragment
 
         var frag = document.createDocumentFragment();
         var templateHandleNames = ['input', 'checkbox', 'labelWrapper']; // Render the main template
@@ -36083,7 +35748,8 @@
     'coral-component-checkbox': translations$7
   }); // Expose component on the Coral namespace
 
-  window.customElements.define('coral-checkbox', Checkbox);
+  commons._define('coral-checkbox', Checkbox);
+
   Checkbox.Label = CheckboxLabel;
 
   /**
@@ -36423,7 +36089,7 @@
     DEFAULT: 'default',
     QUIET: 'quiet'
   };
-  var CLASSNAME$R = '_coral-Dropdown'; // used in 'auto' mode to determine if the client is on mobile.
+  var CLASSNAME$A = '_coral-Dropdown'; // used in 'auto' mode to determine if the client is on mobile.
 
   var IS_MOBILE_DEVICE = navigator.userAgent.match(/iPhone|iPad|iPod|Android/i) !== null;
   /**
@@ -37113,8 +36779,10 @@
         event.stopImmediatePropagation();
         var item = event.target;
 
-        if (item._selectListItem && item._selectListItem.content) {
-          item._selectListItem.content.innerHTML = item.innerHTML;
+        if (item._selectListItem) {
+          var content = new SelectList.Item.Content();
+          content.innerHTML = item.innerHTML;
+          item._selectListItem.content = content;
         }
 
         if (item._nativeOption) {
@@ -37361,17 +37029,32 @@
 
       /** @ignore */
       value: function connectedCallback() {
-        var _this3 = this;
-
         _get(_getPrototypeOf(Select.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$R); // Default reflected attributes
+        var overlay = this._elements.overlay; // Cannot be open by default when rendered
+
+        overlay.removeAttribute('open'); // Restore in DOM
+
+        if (overlay._parent) {
+          overlay._parent.appendChild(overlay);
+        }
+      }
+      /** @ignore */
+
+    }, {
+      key: "render",
+      value: function render() {
+        var _this3 = this;
+
+        _get(_getPrototypeOf(Select.prototype), "render", this).call(this);
+
+        this.classList.add(CLASSNAME$A); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$a.DEFAULT;
         }
 
-        this.classList.toggle("".concat(CLASSNAME$R, "--native"), this._useNativeInput);
+        this.classList.toggle("".concat(CLASSNAME$A, "--native"), this._useNativeInput);
 
         if (!this._useNativeInput && this.contains(this._elements.nativeSelect)) {
           this.removeChild(this._elements.nativeSelect);
@@ -37398,31 +37081,31 @@
         } // Render the main template
 
 
-        var frag = document.createDocumentFragment(); // Cannot be open by default when rendered
-
-        this._elements.overlay.removeAttribute('open');
-
+        var frag = document.createDocumentFragment();
         frag.appendChild(this._elements.button);
         frag.appendChild(this._elements.input);
         frag.appendChild(this._elements.nativeSelect);
         frag.appendChild(this._elements.taglist);
-        frag.appendChild(this._elements.overlay);
-        this.insertBefore(frag, this.firstChild); // Assign the button as the target for the overlay
+        frag.appendChild(this._elements.overlay); // Assign the button as the target for the overlay
 
         this._elements.overlay.target = this._elements.button; // handles the focus allocation every time the overlay closes
 
         this._elements.overlay.returnFocusTo(this._elements.button);
+
+        this.appendChild(frag);
       }
       /** @ignore */
 
     }, {
       key: "disconnectedCallback",
       value: function disconnectedCallback() {
-        _get(_getPrototypeOf(Select.prototype), "disconnectedCallback", this).call(this); // In case it was moved out don't forget to remove it
+        _get(_getPrototypeOf(Select.prototype), "disconnectedCallback", this).call(this);
 
+        var overlay = this._elements.overlay; // In case it was moved out don't forget to remove it
 
-        if (!this.contains(this._elements.overlay)) {
-          this._elements.overlay.remove();
+        if (!this.contains(overlay)) {
+          overlay._parent = overlay._repositioned ? document.body : this;
+          overlay.remove();
         }
       }
       /**
@@ -38057,8 +37740,10 @@
     'coral-component-select': translations$9
   }); // Expose component on the Coral namespace
 
-  window.customElements.define('coral-select', Select);
-  window.customElements.define('coral-select-item', SelectItem);
+  commons._define('coral-select-item', SelectItem);
+
+  commons._define('coral-select', Select);
+
   Select.Item = SelectItem;
 
   var template$l = function anonymous(data_0) {
@@ -38153,13 +37838,13 @@
     DEFAULT: 'default',
     QUIET: 'quiet'
   };
-  var CLASSNAME$S = '_coral-Clock'; // builds an array containing all possible variant classnames. this will be used to remove classnames when the variant
+  var CLASSNAME$B = '_coral-Clock'; // builds an array containing all possible variant classnames. this will be used to remove classnames when the variant
   // changes
 
   var ALL_VARIANT_CLASSES$7 = [];
 
   for (var variantValue$6 in variant$b) {
-    ALL_VARIANT_CLASSES$7.push("".concat(CLASSNAME$S, "--").concat(variant$b[variantValue$6]));
+    ALL_VARIANT_CLASSES$7.push("".concat(CLASSNAME$B, "--").concat(variant$b[variantValue$6]));
   }
   /**
    @class Coral.Clock
@@ -38290,7 +37975,7 @@
     }, {
       key: "_togglePeriod",
       value: function _togglePeriod(show) {
-        this.classList.toggle("".concat(CLASSNAME$S, "--extended"), show);
+        this.classList.toggle("".concat(CLASSNAME$B, "--extended"), show);
         this._elements.period.hidden = !show;
       }
       /** @private */
@@ -38406,15 +38091,15 @@
        */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
+      value: function render() {
         var _this2 = this;
 
-        _get(_getPrototypeOf(Clock.prototype), "connectedCallback", this).call(this);
+        _get(_getPrototypeOf(Clock.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$S); // a11y
+        this.classList.add(CLASSNAME$B); // a11y
 
         this.setAttribute('role', 'group'); // Default reflected attributes
 
@@ -38534,7 +38219,7 @@
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$7);
 
         if (this._variant !== variant$b.DEFAULT) {
-          this.classList.add("".concat(CLASSNAME$S, "--").concat(this._variant));
+          this.classList.add("".concat(CLASSNAME$B, "--").concat(this._variant));
         }
       }
       /**
@@ -38755,7 +38440,7 @@
     'coral-component-clock': translations$8
   }); // Expose component on the Coral namespace
 
-  window.customElements.define('coral-clock', Clock);
+  commons._define('coral-clock', Clock);
 
   var template$m = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
@@ -38810,7 +38495,7 @@
     LIGHT: 'light',
     DARK: 'dark'
   };
-  var CLASSNAME$T = '_coral-CoachMarkIndicator';
+  var CLASSNAME$C = '_coral-CoachMarkIndicator';
   /**
    @class Coral.CoachMark
    @classdesc A coach mark component to highlight UI elements on the page.
@@ -38846,13 +38531,13 @@
 
 
     _createClass(CoachMark, [{
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(CoachMark.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(CoachMark.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$T); // Default reflected attributes
+        this.classList.add(CLASSNAME$C); // Default reflected attributes
 
         if (!this._size) {
           this.size = size$5.MEDIUM;
@@ -38933,7 +38618,7 @@
 
         this._reflectAttribute('size', this._size);
 
-        this.classList.toggle("".concat(CLASSNAME$T, "--quiet"), this._size === size$5.SMALL);
+        this.classList.toggle("".concat(CLASSNAME$C, "--quiet"), this._size === size$5.SMALL);
       }
       /**
        The coach mark variant. See {@link CoachMarkVariantEnum}.
@@ -38955,8 +38640,8 @@
 
         this._reflectAttribute('variant', this._variant);
 
-        this.classList.toggle("".concat(CLASSNAME$T, "--light"), this._variant === variant$c.LIGHT);
-        this.classList.toggle("".concat(CLASSNAME$T, "--dark"), this._variant === variant$c.DARK);
+        this.classList.toggle("".concat(CLASSNAME$C, "--light"), this._variant === variant$c.LIGHT);
+        this.classList.toggle("".concat(CLASSNAME$C, "--dark"), this._variant === variant$c.DARK);
       }
       /**
        Returns {@link CoachMark} sizes options.
@@ -39004,7 +38689,7 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-coachmark', CoachMark);
+  commons._define('coral-coachmark', CoachMark);
 
   /** @ignore */
 
@@ -40433,11 +40118,11 @@
     }
 
     _createClass(ColorInputItem, [{
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ColorInputItem.prototype), "connectedCallback", this).call(this); // adds the role to support accessibility
+      value: function render() {
+        _get(_getPrototypeOf(ColorInputItem.prototype), "render", this).call(this); // adds the role to support accessibility
 
 
         this.setAttribute('role', 'option');
@@ -40679,7 +40364,7 @@
     return frag;
   };
 
-  var CLASSNAME$U = '_coral-Slider';
+  var CLASSNAME$D = '_coral-Slider';
   var CLASSNAME_HANDLE = '_coral-Slider-handle';
   var CLASSNAME_INPUT = '_coral-Slider-input';
   /**
@@ -41192,13 +40877,13 @@
         return template$n;
       }
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(Slider.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(Slider.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$U); // Default reflected attributes
+        this.classList.add(CLASSNAME$D); // Default reflected attributes
 
         if (!this._min) {
           this.min = this.min;
@@ -41440,7 +41125,7 @@
 
         this._reflectAttribute('filled', this._filled);
 
-        this.classList.toggle("".concat(CLASSNAME$U, "--filled"), this._filled);
+        this.classList.toggle("".concat(CLASSNAME$D, "--filled"), this._filled);
       }
       /**
        The value returned as a Number. Value is <code>NaN</code> if conversion to Number is not possible.
@@ -41696,7 +41381,7 @@
     return document.createElement('coral-slider-content');
   });
 
-  var CLASSNAME$V = '_coral-Slider-item';
+  var CLASSNAME$E = '_coral-Slider-item';
   /**
    @class Coral.Slider.Item
    @classdesc The Slider item
@@ -41717,11 +41402,13 @@
     }
 
     _createClass(SliderItem, [{
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        this.classList.add(CLASSNAME$V);
+      value: function render() {
+        _get(_getPrototypeOf(SliderItem.prototype), "render", this).call(this);
+
+        this.classList.add(CLASSNAME$E);
       }
     }, {
       key: "value",
@@ -41968,11 +41655,11 @@
         this.endValue = transform.string(initialEndValue);
       }
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(RangedSlider.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(RangedSlider.prototype), "render", this).call(this);
 
         this.classList.add('_coral-Slider--range'); // Set filled attribute by default
 
@@ -42110,9 +41797,12 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-slider', Slider);
-  window.customElements.define('coral-slider-item', SliderItem);
-  window.customElements.define('coral-rangedslider', RangedSlider);
+  commons._define('coral-slider-item', SliderItem);
+
+  commons._define('coral-rangedslider', RangedSlider);
+
+  commons._define('coral-slider', Slider);
+
   Slider.Content = SliderContent;
   Slider.Item = SliderItem;
 
@@ -42133,7 +41823,7 @@
     top: 'top',
     bottom: 'bottom'
   };
-  var CLASSNAME$W = '_coral-Tooltip';
+  var CLASSNAME$F = '_coral-Tooltip';
   var OFFSET$1 = 5;
   /**
    Enumeration for {@link Tooltip} variants.
@@ -42166,7 +41856,7 @@
   var ALL_VARIANT_CLASSES$8 = [];
 
   for (var variantName in variant$d) {
-    ALL_VARIANT_CLASSES$8.push("".concat(CLASSNAME$W, "--").concat(variant$d[variantName]));
+    ALL_VARIANT_CLASSES$8.push("".concat(CLASSNAME$F, "--").concat(variant$d[variantName]));
   } // A string of all position placement classnames
 
 
@@ -42176,7 +41866,7 @@
 
   for (var key$2 in Overlay.placement) {
     var direction = Overlay.placement[key$2];
-    var placementClass = "".concat(CLASSNAME$W, "--").concat(arrowMap[direction]); // Store in map
+    var placementClass = "".concat(CLASSNAME$F, "--").concat(arrowMap[direction]); // Store in map
 
     placementClassMap[direction] = placementClass; // Store in list
 
@@ -42362,13 +42052,13 @@
         target["_hasTooltipListeners".concat(this._id)] = false;
       }
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(Tooltip.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(Tooltip.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$W); // ARIA
+        this.classList.add(CLASSNAME$F); // ARIA
 
         this.setAttribute('role', 'tooltip'); // Let the tooltip be focusable
         // We'll marshall focus around when its focused
@@ -42414,7 +42104,7 @@
 
         (_this$classList2 = this.classList).remove.apply(_this$classList2, ALL_VARIANT_CLASSES$8);
 
-        this.classList.add("".concat(CLASSNAME$W, "--").concat(this._variant));
+        this.classList.add("".concat(CLASSNAME$F, "--").concat(this._variant));
       }
       /**
        The amount of time in miliseconds to wait before showing the tooltip when the target is interacted with.
@@ -42449,6 +42139,7 @@
           handle: 'content',
           tagName: 'coral-tooltip-content',
           insert: function insert(content) {
+            content.classList.add("".concat(CLASSNAME$F, "-label"));
             this.appendChild(content);
           }
         });
@@ -42547,37 +42238,27 @@
     return Tooltip;
   }(Overlay);
 
-  var CLASSNAME$X = '_coral-Tooltip-label';
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+
   /**
    @class Coral.Tooltip.Content
    @classdesc Tooltip's content component
    @htmltag coral-tooltip-content
-   @extends {HTMLElement}
-   @extends {BaseComponent}
+   @return {HTMLElement}
    */
-
-  var TooltipContent =
-  /*#__PURE__*/
-  function (_BaseComponent) {
-    _inherits(TooltipContent, _BaseComponent);
-
-    function TooltipContent() {
-      _classCallCheck(this, TooltipContent);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(TooltipContent).apply(this, arguments));
-    }
-
-    _createClass(TooltipContent, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        this.classList.add(CLASSNAME$X);
-      }
-    }]);
-
-    return TooltipContent;
-  }(BaseComponent(HTMLElement));
+  var TooltipContent = (function () {
+    return document.createElement('coral-tooltip-content');
+  });
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -42591,8 +42272,8 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-tooltip', Tooltip);
-  window.customElements.define('coral-tooltip-content', TooltipContent);
+  commons._define('coral-tooltip', Tooltip);
+
   Tooltip.Content = TooltipContent;
 
   var template$q = function anonymous(data_0) {
@@ -42701,13 +42382,13 @@
       /** @ignore */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
+      value: function render() {
         var _this$classList;
 
-        _get(_getPrototypeOf(ColorInputSlider.prototype), "connectedCallback", this).call(this);
+        _get(_getPrototypeOf(ColorInputSlider.prototype), "render", this).call(this);
 
         (_this$classList = this.classList).add.apply(_this$classList, CLASSNAMES$1);
       }
@@ -42997,7 +42678,7 @@
     return frag;
   };
 
-  var CLASSNAME$Y = '_coral-ColorInput-colorProperties';
+  var CLASSNAME$G = '_coral-ColorInput-colorProperties';
   /**
    @class Coral.ColorInput.ColorProperties
    @classdesc A ColorInput Color properties component
@@ -43209,11 +42890,11 @@
       /** @ignore */
 
     }, {
-      key: "connectedCallback",
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ColorInputColorProperties.prototype), "connectedCallback", this).call(this);
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(ColorInputColorProperties.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$Y); // Support cloneNode
+        this.classList.add(CLASSNAME$G); // Support cloneNode
 
         var subview = this.querySelector('._coral-ColorInput-propertiesSubview');
 
@@ -43249,7 +42930,7 @@
     return frag;
   };
 
-  var CLASSNAME$Z = '_coral-ColorInput-swatch';
+  var CLASSNAME$H = '_coral-ColorInput-swatch';
   /**
    @class Coral.ColorInput.Swatch
    @classdesc A ColorInput Swatch component
@@ -43299,13 +42980,13 @@
         }
       }
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ColorInputSwatch.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(ColorInputSwatch.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$Z, 'u-coral-clearFix'); // adds the role to support accessibility
+        this.classList.add(CLASSNAME$H, 'u-coral-clearFix'); // adds the role to support accessibility
 
         this.setAttribute('role', 'option'); // Support cloneNode
 
@@ -43486,7 +43167,7 @@
     return frag;
   };
 
-  var CLASSNAME$_ = '_coral-ColorInput-swatches';
+  var CLASSNAME$I = '_coral-ColorInput-swatches';
   /**
    @class Coral.ColorInput.Swatches
    @classdesc A ColorInput Swatches component
@@ -43796,11 +43477,11 @@
       /** @ignore */
 
     }, {
-      key: "connectedCallback",
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ColorInputSwatches.prototype), "connectedCallback", this).call(this);
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(ColorInputSwatches.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$_); // adds the role to support accessibility
+        this.classList.add(CLASSNAME$I); // adds the role to support accessibility
 
         this.setAttribute('role', 'listbox'); // Support cloneNode
 
@@ -44020,7 +43701,7 @@
     return frag;
   };
 
-  var CLASSNAME$$ = '_coral-ColorInput';
+  var CLASSNAME$J = '_coral-ColorInput';
   /**
    Enumeration for {@link ColorInput} variants.
    
@@ -44491,13 +44172,25 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(ColorInput.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$$);
+        var overlay = this._elements.overlay; // Cannot be open by default when rendered
+
+        overlay.removeAttribute('open'); // Restore in DOM
+
+        if (overlay._parent) {
+          overlay._parent.appendChild(overlay);
+        }
+      }
+      /** @ignore */
+
+    }, {
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(ColorInput.prototype), "render", this).call(this);
+
+        this.classList.add(CLASSNAME$J);
         this.setAttribute('role', 'combobox');
         this.setAttribute('aria-expanded', false);
-        var frag = document.createDocumentFragment(); // Cannot be open by default when rendered
-
-        this._elements.overlay.removeAttribute('open'); // Render template
-
+        var frag = document.createDocumentFragment(); // Render template
 
         frag.appendChild(this._elements.defaultPalette);
         frag.appendChild(this._elements.input);
@@ -44512,8 +44205,10 @@
           } else {
             frag.appendChild(child);
           }
-        }
+        } // we use 'this' so properly aligns to the input
 
+
+        this._elements.overlay.target = this._elements.colorPreview;
         this.appendChild(frag); // Make sure colors are generated
 
         this.autoGenerateColors = this.autoGenerateColors;
@@ -44528,20 +44223,20 @@
 
 
         this._preventTriggeringEvents = false;
-        this._oldSelection = this.selectedItem; // we use 'this' so properly aligns to the input
-
-        this._elements.overlay.target = this._elements.colorPreview;
+        this._oldSelection = this.selectedItem;
       }
       /** @ignore */
 
     }, {
       key: "disconnectedCallback",
       value: function disconnectedCallback() {
-        _get(_getPrototypeOf(ColorInput.prototype), "disconnectedCallback", this).call(this); // In case it was moved out don't forget to remove it
+        _get(_getPrototypeOf(ColorInput.prototype), "disconnectedCallback", this).call(this);
 
+        var overlay = this._elements.overlay; // In case it was moved out don't forget to remove it
 
-        if (!this.contains(this._elements.overlay)) {
-          this._elements.overlay.remove();
+        if (!this.contains(overlay)) {
+          overlay._parent = overlay._repositioned ? document.body : this;
+          overlay.remove();
         }
       }
     }, {
@@ -45287,12 +44982,18 @@
     'coral-component-colorinput': translations$a
   }); // Expose component on the Coral namespace
 
-  window.customElements.define('coral-colorinput', ColorInput);
-  window.customElements.define('coral-colorinput-item', ColorInputItem);
-  window.customElements.define('coral-colorinput-swatches', ColorInputSwatches);
-  window.customElements.define('coral-colorinput-swatch', ColorInputSwatch);
-  window.customElements.define('coral-colorinput-slider', ColorInputSlider);
-  window.customElements.define('coral-colorinput-colorproperties', ColorInputColorProperties);
+  commons._define('coral-colorinput-swatches', ColorInputSwatches);
+
+  commons._define('coral-colorinput-swatch', ColorInputSwatch);
+
+  commons._define('coral-colorinput-slider', ColorInputSlider);
+
+  commons._define('coral-colorinput-colorproperties', ColorInputColorProperties);
+
+  commons._define('coral-colorinput-item', ColorInputItem);
+
+  commons._define('coral-colorinput', ColorInput);
+
   ColorInput.Item = ColorInputItem;
   ColorInput.Swatches = ColorInputSwatches;
   ColorInput.Swatch = ColorInputSwatch;
@@ -45379,7 +45080,7 @@
     MULTIPLE: 'multiple'
   };
 
-  var CLASSNAME$10 = '_coral-MillerColumns';
+  var CLASSNAME$K = '_coral-MillerColumns';
 
   var scrollTo = function scrollTo(element, to, duration, scrollCallback) {
     if (duration <= 0) {
@@ -46178,13 +45879,13 @@
        */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ColumnView.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(ColumnView.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$10); // @a11y: the columnview needs to be focusable to handle a11y properly
+        this.classList.add(CLASSNAME$K); // @a11y: the columnview needs to be focusable to handle a11y properly
 
         this.setAttribute('tabindex', '0'); // Default reflect attributes
 
@@ -46315,10 +46016,10 @@
         this.columns.getAll().forEach(function (item) {
           item.setAttribute('_selectionmode', _this4._selectionMode);
         });
-        this.classList.remove("".concat(CLASSNAME$10, "--selection"));
+        this.classList.remove("".concat(CLASSNAME$K, "--selection"));
 
         if (this._selectionMode !== selectionMode$1.NONE) {
-          this.classList.add("".concat(CLASSNAME$10, "--selection"));
+          this.classList.add("".concat(CLASSNAME$K, "--selection"));
         } // @a11y
 
 
@@ -46385,7 +46086,7 @@
     return ColumnView;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$11 = '_coral-MillerColumns-item'; // The number of milliseconds for which scroll events should be debounced.
+  var CLASSNAME$L = '_coral-MillerColumns-item'; // The number of milliseconds for which scroll events should be debounced.
 
   var SCROLL_DEBOUNCE$2 = 100; // Height if every item to avoid using offsetHeight during calculations.
 
@@ -46840,15 +46541,15 @@
         }
       }
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
+      value: function render() {
         var _this3 = this;
 
-        _get(_getPrototypeOf(ColumnViewColumn.prototype), "connectedCallback", this).call(this);
+        _get(_getPrototypeOf(ColumnViewColumn.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$11); // @a11y
+        this.classList.add(CLASSNAME$L); // @a11y
 
         this.setAttribute('role', 'group'); // @todo: initial collection items needs to be triggered
 
@@ -46908,6 +46609,7 @@
           handle: 'content',
           tagName: 'coral-columnview-column-content',
           insert: function insert(content) {
+            content.classList.add('_coral-AssetList');
             this.appendChild(content);
           }
         });
@@ -47046,32 +46748,13 @@
    @class Coral.ColumnView.Column.Content
    @classdesc ColumnView's Column content component
    @htmltag coral-columnview-column-content
-   @extends {HTMLElement}
+   @return {HTMLElement}
    */
-  var ColumnViewColumnContent =
-  /*#__PURE__*/
-  function (_HTMLElement) {
-    _inherits(ColumnViewColumnContent, _HTMLElement);
+  var ColumnViewColumnContent = (function () {
+    return document.createElement('coral-columnview-column-content');
+  });
 
-    function ColumnViewColumnContent() {
-      _classCallCheck(this, ColumnViewColumnContent);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(ColumnViewColumnContent).apply(this, arguments));
-    }
-
-    _createClass(ColumnViewColumnContent, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        this.classList.add('_coral-AssetList');
-      }
-    }]);
-
-    return ColumnViewColumnContent;
-  }(_wrapNativeSuper(HTMLElement));
-
-  var CLASSNAME$12 = '_coral-AssetList-item';
+  var CLASSNAME$M = '_coral-AssetList-item';
   /**
    Enumeration for {@link ColumnViewItem} variants.
    
@@ -47154,13 +46837,13 @@
        */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ColumnViewItem.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(ColumnViewItem.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$12); // @a11y
+        this.classList.add(CLASSNAME$M); // @a11y
 
         this.setAttribute('role', 'treeitem'); // Default reflected attributes
 
@@ -47177,13 +46860,11 @@
           while (this.firstChild) {
             content.appendChild(this.firstChild);
           }
+        } // Assign content zones
 
-          this.content = content;
-          this.thumbnail = thumbnail;
-        } // Insert thumbnail if icon is specified
-        else if (this.icon) {
-            this.thumbnail = this._elements.thumbnail;
-          }
+
+        this.content = content;
+        this.thumbnail = thumbnail;
       }
     }, {
       key: "content",
@@ -47195,8 +46876,9 @@
           handle: 'content',
           tagName: 'coral-columnview-item-content',
           insert: function insert(content) {
-            // Insert before chevron
-            this.insertBefore(content, this.querySelector('._coral-MillerColumn-childIndicator'));
+            content.classList.add("".concat(CLASSNAME$M, "Label")); // Insert before chevron
+
+            this.insertBefore(content, this.querySelector('._coral-AssetList-itemChildIndicator'));
           }
         });
       }
@@ -47217,7 +46899,8 @@
           handle: 'thumbnail',
           tagName: 'coral-columnview-item-thumbnail',
           insert: function insert(thumbnail) {
-            // Insert before content
+            thumbnail.classList.add("".concat(CLASSNAME$M, "Thumbnail")); // Insert before content
+
             this.insertBefore(thumbnail, this.content || null);
           }
         });
@@ -47384,28 +47067,11 @@
    @class Coral.ColumnView.Item.Content
    @classdesc ColumnView's Item content component
    @htmltag coral-columnview-item-content
-   @extends {HTMLElement}
+   @return {HTMLElement}
    */
-  var ColumnViewItemContent =
-  /*#__PURE__*/
-  function (_HTMLElement) {
-    _inherits(ColumnViewItemContent, _HTMLElement);
-
-    function ColumnViewItemContent() {
-      _classCallCheck(this, ColumnViewItemContent);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(ColumnViewItemContent).apply(this, arguments));
-    }
-
-    _createClass(ColumnViewItemContent, [{
-      key: "connectedCallback",
-      value: function connectedCallback() {
-        this.classList.add('_coral-AssetList-itemLabel');
-      }
-    }]);
-
-    return ColumnViewItemContent;
-  }(_wrapNativeSuper(HTMLElement));
+  var ColumnViewItemContent = (function () {
+    return document.createElement('coral-columnview-item-content');
+  });
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -47423,30 +47089,13 @@
    @class Coral.ColumnView.Item.Thumbnail
    @classdesc ColumnView's Item thumbnail component
    @htmltag coral-columnview-item-thumbnail
-   @extends {HTMLElement}
+   @return {HTMLElement}
    */
-  var ColumnViewItemThumbnail =
-  /*#__PURE__*/
-  function (_HTMLElement) {
-    _inherits(ColumnViewItemThumbnail, _HTMLElement);
+  var ColumnViewItemThumbnail = (function () {
+    return document.createElement('coral-columnview-item-thumbnail');
+  });
 
-    function ColumnViewItemThumbnail() {
-      _classCallCheck(this, ColumnViewItemThumbnail);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(ColumnViewItemThumbnail).apply(this, arguments));
-    }
-
-    _createClass(ColumnViewItemThumbnail, [{
-      key: "connectedCallback",
-      value: function connectedCallback() {
-        this.classList.add('_coral-AssetList-itemThumbnail');
-      }
-    }]);
-
-    return ColumnViewItemThumbnail;
-  }(_wrapNativeSuper(HTMLElement));
-
-  var CLASSNAME$13 = '_coral-MillerColumns-item';
+  var CLASSNAME$N = '_coral-MillerColumns-item';
   /**
    @class Coral.ColumnView.Preview
    @classdesc A ColumnView Preview component
@@ -47482,13 +47131,13 @@
 
 
     _createClass(ColumnViewPreview, [{
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ColumnViewPreview.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(ColumnViewPreview.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$13);
+        this.classList.add(CLASSNAME$N);
         var content = this._elements.content; // when the content zone was not created, we need to make sure that everything is added inside it as a content.
         // this stops the content zone from being voracious
 
@@ -47512,6 +47161,7 @@
           handle: 'content',
           tagName: 'coral-columnview-preview-content',
           insert: function insert(content) {
+            content.classList.add('coral-Body--small');
             this.appendChild(content);
           }
         });
@@ -47561,34 +47211,16 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var CLASSNAME$14 = 'coral-Body--small';
+
   /**
    @class Coral.ColumnView.Preview.Content
    @classdesc ColumnView's preview content component
    @htmltag coral-columnview-preview-content
-   @extends {HTMLElement}
+   @return {HTMLElement}
    */
-
-  var ColumnViewPreviewContent =
-  /*#__PURE__*/
-  function (_HTMLElement) {
-    _inherits(ColumnViewPreviewContent, _HTMLElement);
-
-    /** @ignore */
-    function ColumnViewPreviewContent() {
-      var _this;
-
-      _classCallCheck(this, ColumnViewPreviewContent);
-
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ColumnViewPreviewContent).call(this));
-
-      _this.classList.add(CLASSNAME$14);
-
-      return _this;
-    }
-
-    return ColumnViewPreviewContent;
-  }(_wrapNativeSuper(HTMLElement));
+  var ColumnViewPreviewContent = (function () {
+    return document.createElement('coral-columnview-preview-content');
+  });
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -47668,14 +47300,14 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-columnview', ColumnView);
-  window.customElements.define('coral-columnview-column', ColumnViewColumn);
-  window.customElements.define('coral-columnview-column-content', ColumnViewColumnContent);
-  window.customElements.define('coral-columnview-item', ColumnViewItem);
-  window.customElements.define('coral-columnview-item-thumbnail', ColumnViewItemThumbnail);
-  window.customElements.define('coral-columnview-item-content', ColumnViewItemContent);
-  window.customElements.define('coral-columnview-preview', ColumnViewPreview);
-  window.customElements.define('coral-columnview-preview-content', ColumnViewPreviewContent);
+  commons._define('coral-columnview-preview', ColumnViewPreview);
+
+  commons._define('coral-columnview-column', ColumnViewColumn);
+
+  commons._define('coral-columnview-item', ColumnViewItem);
+
+  commons._define('coral-columnview', ColumnView);
+
   ColumnView.Column = ColumnViewColumn;
   ColumnView.Column.Content = ColumnViewColumnContent;
   ColumnView.Item = ColumnViewItem;
@@ -47729,11 +47361,11 @@
     }
 
     _createClass(CycleButtonItem, [{
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(CycleButtonItem.prototype), "connectedCallback", this).call(this); // adds the role to support accessibility
+      value: function render() {
+        _get(_getPrototypeOf(CycleButtonItem.prototype), "render", this).call(this); // adds the role to support accessibility
 
 
         this.setAttribute('role', 'option'); // Default reflected attributes
@@ -47994,7 +47626,7 @@
   /** @ignore */
 
   var ACTION_TAG_NAME = 'coral-cyclebutton-action';
-  var CLASSNAME$15 = '_coral-CycleSelect';
+  var CLASSNAME$O = '_coral-CycleSelect';
   /**
    @class Coral.CycleButton
    @classdesc A CycleButton component is a simple multi-state toggle button that toggles between the possible items below
@@ -48203,7 +47835,10 @@
           this[this._elements.overlay.classList.contains('is-open') ? '_hideOverlay' : '_showOverlay']();
         } // Unless this is the only item we have, select the next item in line:
         else if (itemCount > 1) {
-            this._selectCycleItem(this.selectedItem.nextElementSibling || items[0]);
+            var neighbor = this.selectedItem.nextElementSibling;
+            var nextItem = neighbor.nodeName === 'CORAL-CYCLEBUTTON-ITEM' ? neighbor : items[0];
+
+            this._selectCycleItem(nextItem);
 
             this._focusItem(this._elements.button);
           }
@@ -48333,7 +47968,7 @@
       value: function _checkExtended() {
         var isExtended = this._isExtended();
 
-        this.classList.toggle("".concat(CLASSNAME$15, "--extended"), isExtended); // @a11y
+        this.classList.toggle("".concat(CLASSNAME$O, "--extended"), isExtended); // @a11y
 
         if (isExtended) {
           var uid = this._elements.selectList.id;
@@ -48344,8 +47979,10 @@
 
           this._elements.button.setAttribute('aria-haspopup', true);
 
-          this._elements.button.setAttribute('aria-expanded', false);
+          this._elements.button.setAttribute('aria-expanded', false); // Assign the button as the target for the overlay
 
+
+          this._elements.overlay.target = this._elements.button;
           this._elements.overlay.hidden = false;
         } else {
           this._elements.button.removeAttribute('aria-owns');
@@ -48354,8 +47991,10 @@
 
           this._elements.button.removeAttribute('aria-haspopup');
 
-          this._elements.button.removeAttribute('aria-expanded');
+          this._elements.button.removeAttribute('aria-expanded'); // Remove target and hide overlay
 
+
+          this._elements.overlay.target = null;
           this._elements.overlay.hidden = true;
         }
       }
@@ -48387,7 +48026,9 @@
 
         selectListItem.trackingElement = item.trackingElement; // We do first the content, so that the icon is not destroyed
 
-        selectListItem.content.innerHTML = item.content.innerHTML; // Specify the icon
+        var selectListItemContent = new SelectList.Item.Content();
+        selectListItemContent.innerHTML = item.content.innerHTML;
+        selectListItem.content = selectListItemContent; // Specify the icon
 
         if (item.icon) {
           selectListItem.icon = item.icon;
@@ -48487,11 +48128,26 @@
 
       /** @ignore */
       value: function connectedCallback() {
-        var _this4 = this;
-
         _get(_getPrototypeOf(CycleButton.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$15); // Default reflected attributes
+        var overlay = this._elements.overlay; // Cannot be open by default when rendered
+
+        overlay.removeAttribute('open'); // Restore in DOM
+
+        if (overlay._parent) {
+          overlay._parent.appendChild(overlay);
+        }
+      }
+      /** @ignore */
+
+    }, {
+      key: "render",
+      value: function render() {
+        var _this4 = this;
+
+        _get(_getPrototypeOf(CycleButton.prototype), "render", this).call(this);
+
+        this.classList.add(CLASSNAME$O); // Default reflected attributes
 
         if (typeof this._threshold === 'undefined') {
           this.threshold = 3;
@@ -48513,17 +48169,12 @@
             handle.remove();
           }
         });
-        var frag = document.createDocumentFragment(); // Cannot be open by default when rendered
-
-        this._elements.overlay.removeAttribute('open'); // Render the base layout
-
+        var frag = document.createDocumentFragment(); // Render the base layout
 
         frag.appendChild(this._elements.button);
         frag.appendChild(this._elements.overlay); // Inserting the template before the items
 
-        this.insertBefore(frag, this.firstChild); // Assign the button as the target for the overlay
-
-        this._elements.overlay.target = this._elements.button; // Don't trigger events once connected
+        this.appendChild(frag); // Don't trigger events once connected
 
         this._preventTriggeringEvents = true;
 
@@ -48537,11 +48188,13 @@
     }, {
       key: "disconnectedCallback",
       value: function disconnectedCallback() {
-        _get(_getPrototypeOf(CycleButton.prototype), "disconnectedCallback", this).call(this); // In case it was moved out don't forget to remove it
+        _get(_getPrototypeOf(CycleButton.prototype), "disconnectedCallback", this).call(this);
 
+        var overlay = this._elements.overlay; // In case it was moved out don't forget to remove it
 
-        if (!this.contains(this._elements.overlay)) {
-          this._elements.overlay.remove();
+        if (!this.contains(overlay)) {
+          overlay._parent = overlay._repositioned ? document.body : this;
+          overlay.remove();
         }
       }
       /**
@@ -48802,9 +48455,12 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-cyclebutton', CycleButton);
-  window.customElements.define('coral-cyclebutton-item', CycleButtonItem);
-  window.customElements.define('coral-cyclebutton-action', CycleButtonAction);
+  commons._define('coral-cyclebutton-action', CycleButtonAction);
+
+  commons._define('coral-cyclebutton-item', CycleButtonItem);
+
+  commons._define('coral-cyclebutton', CycleButton);
+
   CycleButton.Item = CycleButtonItem;
   CycleButton.Action = CycleButtonAction;
 
@@ -49017,13 +48673,13 @@
     DEFAULT: 'default',
     QUIET: 'quiet'
   };
-  var CLASSNAME$16 = '_coral-InputGroup'; // builds a string containing all possible variant classnames. This will be used to remove
+  var CLASSNAME$P = '_coral-InputGroup'; // builds a string containing all possible variant classnames. This will be used to remove
   // classnames when the variant changes.
 
   var ALL_VARIANT_CLASSES$9 = [];
 
   for (var variantKey in variant$g) {
-    ALL_VARIANT_CLASSES$9.push("".concat(CLASSNAME$16, "--").concat(variant$g[variantKey]));
+    ALL_VARIANT_CLASSES$9.push("".concat(CLASSNAME$P, "--").concat(variant$g[variantKey]));
   }
   /** @ignore */
 
@@ -49312,7 +48968,22 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(Datepicker.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$16); // a11y
+        var overlay = this._elements.overlay; // Cannot be open by default when rendered
+
+        overlay.removeAttribute('open'); // Restore in DOM
+
+        if (overlay._parent) {
+          overlay._parent.appendChild(overlay);
+        }
+      }
+      /** @ignore */
+
+    }, {
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(Datepicker.prototype), "render", this).call(this);
+
+        this.classList.add(CLASSNAME$P); // a11y
 
         this.setAttribute('role', 'combobox'); // a11y we only have AUTO mode.
 
@@ -49332,29 +49003,28 @@
           this.removeChild(this.firstChild);
         }
 
-        var frag = document.createDocumentFragment(); // Cannot be open by default when rendered
+        var frag = document.createDocumentFragment(); // Render template
 
-        this._elements.overlay.removeAttribute('open'); // Render template
-
-
-        frag.appendChild(this._elements.overlay);
         frag.appendChild(this._elements.hiddenInput);
         frag.appendChild(this._elements.input);
         frag.appendChild(this._elements.toggle);
-        this.appendChild(frag); // Point at the button from the bottom
+        frag.appendChild(this._elements.overlay); // Point at the button from the bottom
 
         this._elements.overlay.target = this._elements.toggle;
+        this.appendChild(frag);
       }
       /** @ignore */
 
     }, {
       key: "disconnectedCallback",
       value: function disconnectedCallback() {
-        _get(_getPrototypeOf(Datepicker.prototype), "disconnectedCallback", this).call(this); // In case it was moved out don't forget to remove it
+        _get(_getPrototypeOf(Datepicker.prototype), "disconnectedCallback", this).call(this);
 
+        var overlay = this._elements.overlay; // In case it was moved out don't forget to remove it
 
-        if (!this.contains(this._elements.overlay)) {
-          this._elements.overlay.remove();
+        if (!this.contains(overlay)) {
+          overlay._parent = overlay._repositioned ? document.body : this;
+          overlay.remove();
         }
       }
     }, {
@@ -49670,7 +49340,7 @@
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$9);
 
         if (this._variant !== variant$g.DEFAULT) {
-          this.classList.add("".concat(CLASSNAME$16, "--").concat(this._variant));
+          this.classList.add("".concat(CLASSNAME$P, "--").concat(this._variant));
         }
       }
       /**
@@ -49888,7 +49558,7 @@
     'coral-component-datepicker': translations$b
   }); // Expose component on the Coral namespace
 
-  window.customElements.define('coral-datepicker', Datepicker);
+  commons._define('coral-datepicker', Datepicker);
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -50026,12 +49696,12 @@
     UP: 'up'
   }; // The drawer's base classname
 
-  var CLASSNAME$17 = '_coral-Drawer'; // A string of all possible direction classnames
+  var CLASSNAME$Q = '_coral-Drawer'; // A string of all possible direction classnames
 
   var ALL_DIRECTION_CLASSES = [];
 
   for (var directionValue in direction$1) {
-    ALL_DIRECTION_CLASSES.push("".concat(CLASSNAME$17, "--").concat(direction$1[directionValue]));
+    ALL_DIRECTION_CLASSES.push("".concat(CLASSNAME$Q, "--").concat(direction$1[directionValue]));
   }
   /**
    @class Coral.Drawer
@@ -50087,13 +49757,13 @@
         this.open = !this.open;
       }
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(Drawer.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(Drawer.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$17, 'coral-Well'); // Default reflected attributes
+        this.classList.add(CLASSNAME$Q, 'coral-Well'); // Default reflected attributes
 
         if (!this._direction) {
           this.direction = direction$1.DOWN;
@@ -50200,7 +49870,7 @@
 
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_DIRECTION_CLASSES);
 
-        this.classList.add("".concat(CLASSNAME$17, "--").concat(this._direction));
+        this.classList.add("".concat(CLASSNAME$Q, "--").concat(this._direction));
       }
       /**
        Whether the Drawer is expanded or not.
@@ -50329,7 +49999,8 @@
     'coral-component-drawer': translations$c
   }); // Expose component on the Coral namespace
 
-  window.customElements.define('coral-drawer', Drawer);
+  commons._define('coral-drawer', Drawer);
+
   Drawer.Content = DrawerContent;
 
   /**
@@ -51484,7 +51155,7 @@
     return frag;
   };
 
-  var CLASSNAME$18 = '_coral-FileUpload';
+  var CLASSNAME$R = '_coral-FileUpload';
   var XHR_EVENT_NAMES = ['loadstart', 'progress', 'load', 'error', 'loadend', 'readystatechange', 'abort', 'timeout'];
   /**
    Enumeration for {@link FileUpload} HTTP methods that can be used to upload files.
@@ -52186,15 +51857,15 @@
         }
       }
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
+      value: function render() {
         var _this8 = this;
 
-        _get(_getPrototypeOf(FileUpload.prototype), "connectedCallback", this).call(this);
+        _get(_getPrototypeOf(FileUpload.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$18);
+        this.classList.add(CLASSNAME$R);
         var button = this.querySelector('[coral-fileupload-select]');
 
         if (button) {
@@ -52665,7 +52336,8 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-fileupload', FileUpload);
+  commons._define('coral-fileupload', FileUpload);
+
   FileUpload.Item = FileUploadItem;
 
   var template$A = function anonymous(data_0) {
@@ -52686,7 +52358,7 @@
     return frag;
   };
 
-  var CLASSNAME$19 = '_coral-Masonry-item';
+  var CLASSNAME$S = '_coral-Masonry-item';
   /**
    @class Coral.Masonry.Item
    @classdesc A Masonry Item component
@@ -52803,9 +52475,19 @@
     }, {
       key: "connectedCallback",
       value: function connectedCallback() {
-        _get(_getPrototypeOf(MasonryItem.prototype), "connectedCallback", this).call(this);
+        _get(_getPrototypeOf(MasonryItem.prototype), "connectedCallback", this).call(this); // Inform masonry immediately
 
-        this.classList.add(CLASSNAME$19); // @a11y
+
+        this.trigger('coral-masonry-item:_connected');
+      }
+      /** @ignore */
+
+    }, {
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(MasonryItem.prototype), "render", this).call(this);
+
+        this.classList.add(CLASSNAME$S); // @a11y
 
         this.setAttribute('tabindex', '-1'); // Support cloneNode
 
@@ -52817,9 +52499,7 @@
 
         this.insertBefore(this._elements.quickactions, this.firstChild); // todo workaround to not give user possibility to tab into checkbox
 
-        this._elements.check._labellableElement.tabIndex = -1; // Inform masonry immediately
-
-        this.trigger('coral-masonry-item:_connected');
+        this._elements.check._labellableElement.tabIndex = -1;
       }
       /** @ignore */
 
@@ -52885,7 +52565,7 @@
     return MasonryItem;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$1a = '_coral-Masonry';
+  var CLASSNAME$T = '_coral-Masonry';
   /**
    Enumeration for {@link Masonry} selection options.
    
@@ -53050,13 +52730,10 @@
         this._validateSelection(event.target);
       }
       /**
-       The layout name for this masonry. Must be one of {@link Coral.Masonry.layouts}.
-       See {@link MasonryLayoutsEnum}.
+       Allows to interact with the masonry layout instance.
        
-       @type {String}
-       @default MasonryLayoutsEnum.FIXED_CENTERED
-       @htmlattribute layout
-       @htmlattributereflected
+       @type {MasonryLayout}
+       @readonly
        */
 
     }, {
@@ -53321,15 +52998,21 @@
     }, {
       key: "_onItemConnected",
       value: function _onItemConnected(event) {
+        event.stopImmediatePropagation();
+        var item = event.target;
+
+        this._prepareItem(item);
+      }
+    }, {
+      key: "_prepareItem",
+      value: function _prepareItem(item) {
         var _this5 = this;
 
-        event.stopImmediatePropagation(); // We don't care about transitions if the masonry is not in the body
-
+        // We don't care about transitions if the masonry is not in the body
         if (!document.body.contains(this)) {
           return;
-        }
+        } // check if just moving
 
-        var item = event.target; // check if just moving
 
         if (!item.hasAttribute('_removing') && this !== item._masonry && !item.hasAttribute('_placeholder')) {
           item._masonry = this; // Insert animation start style. This is separated from _insert because otherwise we would have to enforce a
@@ -53541,15 +53224,15 @@
        */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
+      value: function render() {
         var _this6 = this;
 
-        _get(_getPrototypeOf(Masonry.prototype), "connectedCallback", this).call(this);
+        _get(_getPrototypeOf(Masonry.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1a); // a11y
+        this.classList.add(CLASSNAME$T); // a11y
 
         this.setAttribute('role', 'group'); // Default reflected attributes
 
@@ -53569,7 +53252,11 @@
         this._preventTriggeringEvents = false;
         this._oldSelection = this.selectedItems; // Handles the resizing of the masonry
 
-        commons.addResizeListener(this, this._onResize.bind(this)); // This indicates that the initial items are being attached
+        commons.addResizeListener(this, this._onResize.bind(this)); // Prepare items
+
+        this.items.getAll().forEach(function (item) {
+          _this6._prepareItem(item);
+        }); // This indicates that the initial items are being attached
 
         this._attaching = true;
         window.requestAnimationFrame(function () {
@@ -53648,6 +53335,21 @@
 
         this._validateSelection();
       }
+    }, {
+      key: "layoutInstance",
+      get: function get() {
+        return this._layoutInstance;
+      }
+      /**
+       The layout name for this masonry. Must be one of {@link Coral.Masonry.layouts}.
+       See {@link MasonryLayoutsEnum}.
+       
+       @type {String}
+       @default MasonryLayoutsEnum.FIXED_CENTERED
+       @htmlattribute layout
+       @htmlattributereflected
+       */
+
     }, {
       key: "layout",
       get: function get() {
@@ -54727,8 +54429,10 @@
   Masonry.registerLayout(Masonry.layouts.VARIABLE, MasonryVariableLayout);
   Masonry.registerLayout(Masonry.layouts.DASHBOARD, MasonryDashboardLayout); // Expose component on the Coral namespace
 
-  window.customElements.define('coral-masonry', Masonry);
-  window.customElements.define('coral-masonry-item', MasonryItem);
+  commons._define('coral-masonry-item', MasonryItem);
+
+  commons._define('coral-masonry', Masonry);
+
   Masonry.Item = MasonryItem;
   Masonry.Layout = MasonryLayout;
 
@@ -54773,7 +54477,7 @@
     return MultifieldCollection;
   }(Collection$1);
 
-  var CLASSNAME$1b = '_coral-Multifield';
+  var CLASSNAME$U = '_coral-Multifield';
   var IS_DRAGGING_CLASS$1 = 'is-dragging';
   var IS_AFTER_CLASS = 'is-after';
   var IS_BEFORE_CLASS = 'is-before';
@@ -55056,15 +54760,15 @@
         }
       }
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
+      value: function render() {
         var _this3 = this;
 
-        _get(_getPrototypeOf(Multifield.prototype), "connectedCallback", this).call(this);
+        _get(_getPrototypeOf(Multifield.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1b, 'coral-Well'); // a11y
+        this.classList.add(CLASSNAME$U, 'coral-Well'); // a11y
 
         this.setAttribute('role', 'list'); // Assign the content zones, moving them into place in the process
 
@@ -55187,7 +54891,7 @@
     return frag;
   };
 
-  var CLASSNAME$1c = '_coral-Multifield-item';
+  var CLASSNAME$V = '_coral-Multifield-item';
   /**
    @class Coral.Multifield.Item
    @classdesc A Multifield item component. It can have a pre-filled content different from the Multifield template but
@@ -55226,13 +54930,13 @@
 
 
     _createClass(MultifieldItem, [{
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(MultifieldItem.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(MultifieldItem.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1c); // a11y
+        this.classList.add(CLASSNAME$V); // a11y
 
         this.setAttribute('role', 'listitem'); // Create a fragment
 
@@ -55330,8 +55034,10 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-multifield', Multifield);
-  window.customElements.define('coral-multifield-item', MultifieldItem);
+  commons._define('coral-multifield-item', MultifieldItem);
+
+  commons._define('coral-multifield', Multifield);
+
   Multifield.Item = MultifieldItem;
   Multifield.Item.Content = MultifieldItemContent;
 
@@ -55506,7 +55212,7 @@
     return frag;
   };
 
-  var CLASSNAME$1d = '_coral-Stepper';
+  var CLASSNAME$W = '_coral-Stepper';
   var clearLiveRegionTimeout;
   var LIVEREGION_TIMEOUT_DELAY = 3000;
   var MSPOINTER_TYPE_MOUSE = 0x00000004;
@@ -56025,13 +55731,13 @@
       /** @ignore */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(NumberInput.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(NumberInput.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1d); // Default reflected attributes
+        this.classList.add(CLASSNAME$W); // Default reflected attributes
 
         if (!this._step) {
           this.step = 1;
@@ -56393,9 +56099,9 @@
     'coral-component-numberinput': translations$d
   }); // Expose component on the Coral namespace
 
-  window.customElements.define('coral-numberinput', NumberInput);
+  commons._define('coral-numberinput', NumberInput);
 
-  var CLASSNAME$1e = '_coral-PanelStack';
+  var CLASSNAME$X = '_coral-PanelStack';
   /**
    @class Coral.PanelStack
    @classdesc A PanelStack component holding a collection of panels. It wraps content, keeping only the selected panel in view.
@@ -56491,11 +56197,11 @@
       /** @ignore */
 
     }, {
-      key: "connectedCallback",
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(PanelStack.prototype), "connectedCallback", this).call(this);
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(PanelStack.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1e);
+        this.classList.add(CLASSNAME$X);
         this.setAttribute('role', 'presentation'); // Don't trigger events once connected
 
         this._preventTriggeringEvents = true;
@@ -56550,7 +56256,7 @@
     return PanelStack;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$1f = '_coral-Panel';
+  var CLASSNAME$Y = '_coral-Panel';
   /**
    @class Coral.Panel
    @classdesc A Panel component
@@ -56586,13 +56292,13 @@
 
 
     _createClass(Panel, [{
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(Panel.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(Panel.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1f); // adds the role to support accessibility
+        this.classList.add(CLASSNAME$Y); // adds the role to support accessibility
 
         this.setAttribute('role', 'tabpanel'); // Fetch the content zone elements
 
@@ -56699,8 +56405,10 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-panelstack', PanelStack);
-  window.customElements.define('coral-panel', Panel);
+  commons._define('coral-panelstack', PanelStack);
+
+  commons._define('coral-panel', Panel);
+
   Panel.Content = PanelContent;
 
   var template$D = function anonymous(data_0) {
@@ -56770,7 +56478,7 @@
     BOTTOM: 'bottom'
   }; // Base classname
 
-  var CLASSNAME$1g = '_coral-BarLoader';
+  var CLASSNAME$Z = '_coral-BarLoader';
   /**
    @class Coral.Progress
    @classdesc A Progress component to indicate progress of processes.
@@ -56893,11 +56601,11 @@
       /** @ignore */
 
     }, {
-      key: "connectedCallback",
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(Progress.prototype), "connectedCallback", this).call(this);
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(Progress.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1g); // Default reflected attributes
+        this.classList.add(CLASSNAME$Z); // Default reflected attributes
 
         if (!this._value) {
           this.value = this.value;
@@ -57009,14 +56717,14 @@
         this._reflectAttribute('indeterminate', this._indeterminate);
 
         if (this._indeterminate) {
-          this.classList.add("".concat(CLASSNAME$1g, "--indeterminate")); // ARIA: Remove attributes
+          this.classList.add("".concat(CLASSNAME$Z, "--indeterminate")); // ARIA: Remove attributes
 
           this.removeAttribute('aria-valuenow');
           this.removeAttribute('aria-valuemin');
           this.removeAttribute('aria-valuemax');
           this.value = 0;
         } else {
-          this.classList.remove("".concat(CLASSNAME$1g, "--indeterminate")); // ARIA: Add attributes
+          this.classList.remove("".concat(CLASSNAME$Z, "--indeterminate")); // ARIA: Add attributes
 
           this.setAttribute('aria-valuemin', '0');
           this.setAttribute('aria-valuemax', '100');
@@ -57044,7 +56752,7 @@
 
         this._reflectAttribute('size', this._size);
 
-        this.classList.toggle("".concat(CLASSNAME$1g, "--small"), this._size === size$6.SMALL);
+        this.classList.toggle("".concat(CLASSNAME$Z, "--small"), this._size === size$6.SMALL);
       }
       /**
        Boolean attribute to toggle showing progress percent as the label content.
@@ -57091,6 +56799,7 @@
           handle: 'label',
           tagName: 'coral-progress-label',
           insert: function insert(label) {
+            label.classList.add("".concat(CLASSNAME$Z, "-label"));
             this.appendChild(label);
           }
         });
@@ -57175,37 +56884,27 @@
     return Progress;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$1h = '_coral-BarLoader-label';
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+
   /**
    @class Coral.Progress.Label
    @classdesc The Progress label content
    @htmltag coral-progress-label
-   @extends {HTMLElement}
-   @extends {BaseComponent}
+   @return {HTMLElement}
    */
-
-  var ProgressLabel =
-  /*#__PURE__*/
-  function (_BaseComponent) {
-    _inherits(ProgressLabel, _BaseComponent);
-
-    function ProgressLabel() {
-      _classCallCheck(this, ProgressLabel);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(ProgressLabel).apply(this, arguments));
-    }
-
-    _createClass(ProgressLabel, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        this.classList.add(CLASSNAME$1h);
-      }
-    }]);
-
-    return ProgressLabel;
-  }(BaseComponent(HTMLElement));
+  var ProgressLabel = (function () {
+    return document.createElement('coral-progress-label');
+  });
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -57219,8 +56918,8 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-progress', Progress);
-  window.customElements.define('coral-progress-label', ProgressLabel);
+  commons._define('coral-progress', Progress);
+
   Progress.Label = ProgressLabel;
 
   /**
@@ -57292,11 +56991,11 @@
        */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(QuickActionsItem.prototype), "connectedCallback", this).call(this); // Default reflected attributes
+      value: function render() {
+        _get(_getPrototypeOf(QuickActionsItem.prototype), "render", this).call(this); // Default reflected attributes
 
 
         if (!this._type) {
@@ -57544,7 +57243,7 @@
     BOTTOM: 'bottom'
   };
   var OFFSET$2 = 10;
-  var CLASSNAME$1i = '_coral-QuickActions';
+  var CLASSNAME$_ = '_coral-QuickActions';
   /**
    @class Coral.QuickActions
    @classdesc A QuickActions component is an overlay component that reveals actions when interacting with a container.
@@ -58539,11 +58238,26 @@
 
       /** @ignore */
       value: function connectedCallback() {
-        var _this5 = this;
-
         _get(_getPrototypeOf(QuickActions.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1i); // Make QuickActions focusable
+        var overlay = this._elements.overlay; // Cannot be open by default when rendered
+
+        overlay.removeAttribute('open'); // Restore in DOM
+
+        if (overlay._parent) {
+          overlay._parent.appendChild(overlay);
+        }
+      }
+      /** @ignore */
+
+    }, {
+      key: "render",
+      value: function render() {
+        var _this5 = this;
+
+        _get(_getPrototypeOf(QuickActions.prototype), "render", this).call(this);
+
+        this.classList.add(CLASSNAME$_); // Make QuickActions focusable
 
         this.setAttribute('tabIndex', '-1');
         this.setAttribute('role', 'menu'); // Support cloneNode
@@ -58554,27 +58268,27 @@
           if (handle) {
             handle.remove();
           }
-        }); // Cannot be open by default when rendered
+        }); // Render template
 
-        this._elements.overlay.removeAttribute('open'); // Inserting the overlay before the items
-
-
-        this.insertBefore(this._elements.overlay, this.firstChild); // Inserting the moreButton after the items
-
-        this.appendChild(this._elements.moreButton); // Link target
+        var frag = document.createDocumentFragment();
+        frag.appendChild(this._elements.moreButton);
+        frag.appendChild(this._elements.overlay); // Link target
 
         this._elements.overlay.target = this._elements.moreButton;
+        this.appendChild(frag);
       }
       /** @ignore */
 
     }, {
       key: "disconnectedCallback",
       value: function disconnectedCallback() {
-        _get(_getPrototypeOf(QuickActions.prototype), "disconnectedCallback", this).call(this); // In case it was moved out don't forget to remove it
+        _get(_getPrototypeOf(QuickActions.prototype), "disconnectedCallback", this).call(this);
 
+        var overlay = this._elements.overlay; // In case it was moved out don't forget to remove it
 
-        if (!this.contains(this._elements.overlay)) {
-          this._elements.overlay.remove();
+        if (!this.contains(overlay)) {
+          overlay._parent = overlay._repositioned ? document.body : this;
+          overlay.remove();
         }
       }
     }, {
@@ -58863,8 +58577,10 @@
     'coral-component-quickactions': translations$e
   }); // Expose component on the Coral namespace
 
-  window.customElements.define('coral-quickactions', QuickActions);
-  window.customElements.define('coral-quickactions-item', QuickActionsItem);
+  commons._define('coral-quickactions-item', QuickActionsItem);
+
+  commons._define('coral-quickactions', QuickActions);
+
   QuickActions.Item = QuickActionsItem;
 
   /**
@@ -58973,7 +58689,7 @@
     return frag;
   };
 
-  var CLASSNAME$1j = '_coral-Radio';
+  var CLASSNAME$$ = '_coral-Radio';
   /**
    @class Coral.Radio
    @classdesc A Radio component to be used as a form field.
@@ -59127,13 +58843,13 @@
         this.checked = this._initialCheckedState;
       }
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(Radio.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(Radio.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1j); // Create a fragment
+        this.classList.add(CLASSNAME$$); // Create a fragment
 
         var frag = document.createDocumentFragment();
         var templateHandleNames = ['input', 'checkmark', 'labelWrapper']; // Render the main template
@@ -59397,7 +59113,8 @@
     'coral-component-radio': translations$f
   }); // Expose component on the Coral namespace
 
-  window.customElements.define('coral-radio', Radio);
+  commons._define('coral-radio', Radio);
+
   Radio.Label = RadioLabel;
 
   /**
@@ -59637,7 +59354,7 @@
     }
   };
 
-  var CLASSNAME$1k = '_coral-Shell';
+  var CLASSNAME$10 = '_coral-Shell';
   /**
    @class Coral.Shell
    @classdesc The Shell base component to be used with its family for console like applications. See examples for how to
@@ -59676,15 +59393,15 @@
 
 
     _createClass(Shell, [{
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
+      value: function render() {
         var _this2 = this;
 
-        _get(_getPrototypeOf(Shell.prototype), "connectedCallback", this).call(this);
+        _get(_getPrototypeOf(Shell.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1k);
+        this.classList.add(CLASSNAME$10);
         var header = this._elements.header;
         var menus = this.menus.getAll();
         var content = this._elements.content; // If the the content zone is not provided, we need to make sure that it holds all children
@@ -59800,7 +59517,7 @@
     return document.createElement('coral-shell-content');
   });
 
-  var CLASSNAME$1l = '_coral-Shell-header';
+  var CLASSNAME$11 = '_coral-Shell-header';
   /**
    @class Coral.Shell.Header
    @classdesc A Shell Header component
@@ -59850,13 +59567,13 @@
         home.setAttribute('aria-level', '2');
       }
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ShellHeader.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(ShellHeader.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1l); // appheader only exists on darkest theme
+        this.classList.add(CLASSNAME$11); // appheader only exists on darkest theme
 
         this.classList.add('coral--darkest', 'u-coral-clearFix');
         var home = this._elements.home;
@@ -59970,7 +59687,7 @@
     return frag;
   };
 
-  var CLASSNAME$1m = '_coral-Shell-homeAnchor';
+  var CLASSNAME$12 = '_coral-Shell-homeAnchor';
   /**
    @class Coral.Shell.HomeAnchor
    @classdesc A Shell Home Anchor component
@@ -60010,13 +59727,13 @@
 
 
     _createClass(ShellHomeAnchor, [{
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ShellHomeAnchor.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(ShellHomeAnchor.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1m); // Create doc fragment
+        this.classList.add(CLASSNAME$12); // Create doc fragment
 
         var fragment = document.createDocumentFragment();
         var label = this._elements.label; // Remove it so we can process children
@@ -60241,7 +59958,7 @@
     return frag;
   };
 
-  var CLASSNAME$1n = '_coral-Search';
+  var CLASSNAME$13 = '_coral-Search';
   /**
    Enumeration for {@link Search} variants.
    
@@ -60399,13 +60116,13 @@
        */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(Search.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(Search.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1n); // Default reflected attributes
+        this.classList.add(CLASSNAME$13); // Default reflected attributes
 
         if (!this._icon) {
           this.icon = 'search';
@@ -60685,7 +60402,7 @@
     'coral-component-search': translations$g
   }); // Expose component on the Coral namespace
 
-  window.customElements.define('coral-search', Search);
+  commons._define('coral-search', Search);
 
   var template$I = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
@@ -60990,14 +60707,14 @@
       /** @ignore */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
+      value: function render() {
         var _this$classList,
             _this4 = this;
 
-        _get(_getPrototypeOf(ShellHelp.prototype), "connectedCallback", this).call(this);
+        _get(_getPrototypeOf(ShellHelp.prototype), "render", this).call(this);
 
         (_this$classList = this.classList).add.apply(_this$classList, CLASSNAMES$2); // Move the items into the right place
 
@@ -61083,7 +60800,7 @@
     return ShellHelp;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$1o = '_coral-Shell-help-item';
+  var CLASSNAME$14 = '_coral-Shell-help-item';
   /**
    @class Coral.Shell.Help.Item
    @classdesc A Shell Help item component
@@ -61103,13 +60820,13 @@
     }
 
     _createClass(ShellHelpItem, [{
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ShellHelpItem.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(ShellHelpItem.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1o);
+        this.classList.add(CLASSNAME$14);
       }
     }]);
 
@@ -61140,7 +60857,7 @@
     return document.createElement('coral-shell-help-separator');
   });
 
-  var CLASSNAME$1p = '_coral-Shell-menu';
+  var CLASSNAME$15 = '_coral-Shell-menu';
   /**
    @class Coral.Shell.Menu
    @classdesc A Shell Menu component
@@ -61160,13 +60877,13 @@
     }
 
     _createClass(ShellMenu, [{
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ShellMenu.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(ShellMenu.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1p);
+        this.classList.add(CLASSNAME$15);
         this.trigger('coral-shell-menu:_connected');
       }
     }, {
@@ -61214,7 +60931,7 @@
 
         this._reflectAttribute('full', this._full);
 
-        this.classList.toggle("".concat(CLASSNAME$1p, "--full"), this._full);
+        this.classList.toggle("".concat(CLASSNAME$15, "--full"), this._full);
       }
       /** @ignore */
 
@@ -61228,7 +60945,7 @@
     return ShellMenu;
   }(Popover);
 
-  var CLASSNAME$1q = '_coral-Shell-menubar';
+  var CLASSNAME$16 = '_coral-Shell-menubar';
   /**
    @class Coral.Shell.MenuBar
    @classdesc A Shell MenuBar component
@@ -61263,13 +60980,13 @@
 
 
     _createClass(ShellMenuBar, [{
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ShellMenuBar.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(ShellMenuBar.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1q);
+        this.classList.add(CLASSNAME$16);
       }
     }, {
       key: "items",
@@ -61326,13 +61043,13 @@
     CIRCLE: 'circle'
   }; // the Menubar Item's base classname
 
-  var CLASSNAME$1r = '_coral-Shell-menubar-item'; // Builds a string containing all possible iconVariant classnames. This will be used to remove classnames when the variant
+  var CLASSNAME$17 = '_coral-Shell-menubar-item'; // Builds a string containing all possible iconVariant classnames. This will be used to remove classnames when the variant
   // changes
 
   var ALL_ICON_VARIANT_CLASSES = [];
 
   for (var variantValue$7 in iconVariant) {
-    ALL_ICON_VARIANT_CLASSES.push("".concat(CLASSNAME$1r, "--").concat(iconVariant[variantValue$7]));
+    ALL_ICON_VARIANT_CLASSES.push("".concat(CLASSNAME$17, "--").concat(iconVariant[variantValue$7]));
   }
   /**
    @class Coral.Shell.MenuBar.Item
@@ -61444,13 +61161,13 @@
        */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ShellMenuBarItem.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(ShellMenuBarItem.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1r);
+        this.classList.add(CLASSNAME$17);
         var button = this.querySelector('._coral-Shell-menu-button');
 
         if (button) {
@@ -61532,7 +61249,7 @@
 
 
         if (this.variant !== iconVariant.DEFAULT) {
-          this.classList.add("".concat(CLASSNAME$1r, "--").concat(this._iconVariant));
+          this.classList.add("".concat(CLASSNAME$17, "--").concat(this._iconVariant));
         }
       }
       /**
@@ -61700,7 +61417,7 @@
     return frag;
   };
 
-  var CLASSNAME$1s = '_coral-Shell-user';
+  var CLASSNAME$18 = '_coral-Shell-user';
   /**
    Enumeration for {@link ShellUser} avatar options. Avatar assets should use one of those provided, when no asset is set
    
@@ -61758,13 +61475,13 @@
 
 
     _createClass(ShellUser, [{
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ShellUser.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(ShellUser.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1s);
+        this.classList.add(CLASSNAME$18);
         var frag = document.createDocumentFragment(); // Render template
 
         frag.appendChild(this._elements.container);
@@ -62061,7 +61778,7 @@
     return document.createElement('coral-shell-user-subheading');
   });
 
-  var CLASSNAME$1t = '_coral-Shell-workspaces';
+  var CLASSNAME$19 = '_coral-Shell-workspaces';
   /**
    @class Coral.Shell.Workspaces
    @classdesc A Shell Workspaces component
@@ -62289,11 +62006,11 @@
       /** @ignore */
 
     }, {
-      key: "connectedCallback",
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ShellWorkspaces.prototype), "connectedCallback", this).call(this);
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(ShellWorkspaces.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1t); // Don't trigger events once connected
+        this.classList.add(CLASSNAME$19); // Don't trigger events once connected
 
         this._preventTriggeringEvents = true;
 
@@ -62343,7 +62060,7 @@
     return ShellWorkspaces;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$1u = '_coral-Shell-workspaces-workspace';
+  var CLASSNAME$1a = '_coral-Shell-workspaces-workspace';
   /**
    @class Coral.Shell.Workspace
    @classdesc A Shell Workspace component
@@ -62394,13 +62111,13 @@
       /** @ignore */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ShellWorkspace.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(ShellWorkspace.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1u);
+        this.classList.add(CLASSNAME$1a);
       }
       /**
        Triggered when a {@link ShellWorkspace} selection changed.
@@ -62445,7 +62162,7 @@
     return frag;
   };
 
-  var CLASSNAME$1v = '_coral-Shell-solutionSwitcher';
+  var CLASSNAME$1b = '_coral-Shell-solutionSwitcher';
   /**
    @class Coral.Shell.SolutionSwitcher
    @classdesc A Shell Solution Switcher component
@@ -62496,13 +62213,13 @@
 
 
     _createClass(ShellSolutionSwitcher, [{
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ShellSolutionSwitcher.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(ShellSolutionSwitcher.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1v); // force darkest theme
+        this.classList.add(CLASSNAME$1b); // force darkest theme
 
         this.classList.add('coral--darkest');
 
@@ -62538,7 +62255,7 @@
     return ShellSolutionSwitcher;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$1w = '_coral-Shell-solutions';
+  var CLASSNAME$1c = '_coral-Shell-solutions';
   /**
    @class Coral.Shell.Solutions
    @classdesc A Shell Solutions component
@@ -62606,13 +62323,13 @@
       /** @ignore */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ShellSolutions.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(ShellSolutions.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1w); // Sort linked solutions then non linked solutions alphabetically
+        this.classList.add(CLASSNAME$1c); // Sort linked solutions then non linked solutions alphabetically
 
         this._sortSolutions();
       }
@@ -62656,7 +62373,7 @@
 
         this._reflectAttribute('secondary', this._secondary);
 
-        this.classList.toggle("".concat(CLASSNAME$1w, "--secondary"), this._secondary);
+        this.classList.toggle("".concat(CLASSNAME$1c, "--secondary"), this._secondary);
       }
     }], [{
       key: "observedAttributes",
@@ -62706,7 +62423,7 @@
     return frag;
   };
 
-  var CLASSNAME$1x = '_coral-Shell-solution';
+  var CLASSNAME$1d = '_coral-Shell-solution';
   /**
    @class Coral.Shell.Solution
    @classdesc A Shell Solution component
@@ -62745,13 +62462,13 @@
 
 
     _createClass(ShellSolution, [{
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ShellSolution.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(ShellSolution.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1x);
+        this.classList.add(CLASSNAME$1d);
         var fragment = document.createDocumentFragment(); // Render template
 
         fragment.appendChild(this._elements.icon);
@@ -62825,7 +62542,7 @@
 
         this._reflectAttribute('linked', this._linked);
 
-        this.classList.toggle("".concat(CLASSNAME$1x, "--linked"), this._linked);
+        this.classList.toggle("".concat(CLASSNAME$1d, "--linked"), this._linked);
       }
     }, {
       key: "_contentZones",
@@ -62929,7 +62646,7 @@
     return frag;
   };
 
-  var CLASSNAME$1y = '_coral-Shell-orgSwitcher';
+  var CLASSNAME$1e = '_coral-Shell-orgSwitcher';
   /**
    Minimum number of entries required to show search control.
    
@@ -63175,13 +62892,13 @@
         }
       }
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ShellOrgSwitcher.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(ShellOrgSwitcher.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1y); // Move the items into the right place
+        this.classList.add(CLASSNAME$1e); // Move the items into the right place
 
         this._moveItems();
 
@@ -63352,7 +63069,7 @@
     return frag;
   };
 
-  var CLASSNAME$1z = '_coral-Shell-orgSwitcher-item';
+  var CLASSNAME$1f = '_coral-Shell-orgSwitcher-item';
   /**
    @class Coral.Shell.Organization
    @classdesc A Shell Organization component
@@ -63520,13 +63237,13 @@
       /** @ignore */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ShellOrganization.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(ShellOrganization.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1z); // Move items into the right place
+        this.classList.add(CLASSNAME$1f); // Move items into the right place
 
         this._moveItems();
 
@@ -63659,7 +63376,7 @@
     return ShellOrganization;
   }(List.Item);
 
-  var CLASSNAME$1A = '_coral-Shell-orgSwitcher-subitem';
+  var CLASSNAME$1g = '_coral-Shell-orgSwitcher-subitem';
   /**
    @class Coral.Shell.Suborganization
    @classdesc A Shell Sub organization component
@@ -63679,13 +63396,13 @@
     }
 
     _createClass(ShellSuborganization, [{
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(ShellSuborganization.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(ShellSuborganization.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1A); // Set the icon size
+        this.classList.add(CLASSNAME$1g); // Set the icon size
 
         this._elements.icon.size = Icon.size.SMALL; // Be accessible
 
@@ -63714,31 +63431,48 @@
     'coral-component-shell-orgswitcher': orgSwitcherTranslations
   }); // Expose component on the Coral namespace
 
-  window.customElements.define('coral-shell', Shell);
-  window.customElements.define('coral-shell-header', ShellHeader);
-  window.customElements.define('coral-shell-homeanchor', ShellHomeAnchor, {
+  commons._define('coral-shell-header', ShellHeader);
+
+  commons._define('coral-shell-homeanchor', ShellHomeAnchor, {
     extends: 'a'
   });
-  window.customElements.define('coral-shell-help', ShellHelp);
-  window.customElements.define('coral-shell-help-item', ShellHelpItem, {
+
+  commons._define('coral-shell-help-item', ShellHelpItem, {
     extends: 'a'
   });
-  window.customElements.define('coral-shell-menu', ShellMenu);
-  window.customElements.define('coral-shell-menubar', ShellMenuBar);
-  window.customElements.define('coral-shell-menubar-item', ShellMenuBarItem);
-  window.customElements.define('coral-shell-user', ShellUser);
-  window.customElements.define('coral-shell-workspaces', ShellWorkspaces);
-  window.customElements.define('coral-shell-workspace', ShellWorkspace, {
+
+  commons._define('coral-shell-help', ShellHelp);
+
+  commons._define('coral-shell-menubar-item', ShellMenuBarItem);
+
+  commons._define('coral-shell-menubar', ShellMenuBar);
+
+  commons._define('coral-shell-menu', ShellMenu);
+
+  commons._define('coral-shell-user', ShellUser);
+
+  commons._define('coral-shell-workspace', ShellWorkspace, {
     extends: 'a'
   });
-  window.customElements.define('coral-shell-solutionswitcher', ShellSolutionSwitcher);
-  window.customElements.define('coral-shell-solutions', ShellSolutions);
-  window.customElements.define('coral-shell-solution', ShellSolution, {
+
+  commons._define('coral-shell-workspaces', ShellWorkspaces);
+
+  commons._define('coral-shell-solution', ShellSolution, {
     extends: 'a'
   });
-  window.customElements.define('coral-shell-orgswitcher', ShellOrgSwitcher);
-  window.customElements.define('coral-shell-organization', ShellOrganization);
-  window.customElements.define('coral-shell-suborganization', ShellSuborganization);
+
+  commons._define('coral-shell-solutions', ShellSolutions);
+
+  commons._define('coral-shell-solutionswitcher', ShellSolutionSwitcher);
+
+  commons._define('coral-shell-suborganization', ShellSuborganization);
+
+  commons._define('coral-shell-organization', ShellOrganization);
+
+  commons._define('coral-shell-orgswitcher', ShellOrgSwitcher);
+
+  commons._define('coral-shell', Shell);
+
   Shell.Content = ShellContent;
   Shell.Header = ShellHeader;
   Shell.HomeAnchor = ShellHomeAnchor;
@@ -63767,7 +63501,7 @@
   Shell.Organization = ShellOrganization;
   Shell.Suborganization = ShellSuborganization;
 
-  var CLASSNAME$1B = '_coral-SideNav';
+  var CLASSNAME$1h = '_coral-SideNav';
 
   var isLevel = function isLevel(node) {
     return node.nodeName === 'CORAL-SIDENAV-LEVEL';
@@ -63965,8 +63699,7 @@
           });
           this._oldSelection = selectedItem;
         }
-      } // a11y
-
+      }
     }, {
       key: "_syncLevel",
       value: function _syncLevel(el, isRemoved) {
@@ -64007,6 +63740,12 @@
         }
       }
     }, {
+      key: "_syncHeading",
+      value: function _syncHeading(heading) {
+        heading.classList.add("".concat(CLASSNAME$1h, "-heading"));
+        heading.setAttribute('role', 'heading');
+      }
+    }, {
       key: "_handleMutations",
       value: function _handleMutations(mutations) {
         var _this3 = this;
@@ -64014,9 +63753,14 @@
         mutations.forEach(function (mutation) {
           // Sync added levels and headings
           for (var i = 0; i < mutation.addedNodes.length; i++) {
-            var addedNode = mutation.addedNodes[i];
+            var addedNode = mutation.addedNodes[i]; // a11y
 
-            _this3._syncLevel(addedNode);
+            _this3._syncLevel(addedNode); // a11y
+
+
+            if (isHeading(addedNode)) {
+              _this3._syncHeading(addedNode);
+            }
 
             if (isLevel(addedNode)) {
               _this3._validateSelection(addedNode.querySelector('a[is="coral-sidenav-item"][selected]'));
@@ -64042,20 +63786,26 @@
        */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(SideNav.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(SideNav.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1B); // Default reflected attributes
+        this.classList.add(CLASSNAME$1h); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$i.DEFAULT;
-        }
+        } // a11y
+
 
         for (var i = 0; i < this._levels.length; i++) {
           this._syncLevel(this._levels[i]);
+        } // a11y
+
+
+        for (var _i = 0; _i < this._headings.length; _i++) {
+          this._syncHeading(this._headings[_i]);
         } // Don't trigger events once connected
 
 
@@ -64126,7 +63876,7 @@
 
         this._reflectAttribute('variant', this._variant);
 
-        this.classList.toggle("".concat(CLASSNAME$1B, "--multiLevel"), this._variant === variant$i.MULTI_LEVEL);
+        this.classList.toggle("".concat(CLASSNAME$1h, "--multiLevel"), this._variant === variant$i.MULTI_LEVEL);
 
         if (this.variant === variant$i.MULTI_LEVEL) {
           // Don't hide the selected item level
@@ -64188,7 +63938,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var CLASSNAME$1C = '_coral-SideNav-item';
+  var CLASSNAME$1i = '_coral-SideNav-item';
   /**
    @class Coral.SideNav.Item
    @classdesc A SideNav Item component.
@@ -64225,13 +63975,13 @@
 
 
     _createClass(SideNavItem, [{
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(SideNavItem.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(SideNavItem.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1C); // Create a fragment
+        this.classList.add(CLASSNAME$1i); // Create a fragment
 
         var fragment = document.createDocumentFragment(); // Render the main template
 
@@ -64365,40 +64115,18 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var CLASSNAME$1D = '_coral-SideNav-heading';
+
   /**
    @class Coral.SideNav.Heading
    @classdesc The SideNav Heading
    @htmltag coral-sidenav-heading
-   @extends {HTMLElement}
+   @return {HTMLElement}
    */
+  var SideNavHeading = (function () {
+    return document.createElement('coral-sidenav-heading');
+  });
 
-  var SideNavHeading =
-  /*#__PURE__*/
-  function (_HTMLElement) {
-    _inherits(SideNavHeading, _HTMLElement);
-
-    function SideNavHeading() {
-      _classCallCheck(this, SideNavHeading);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(SideNavHeading).apply(this, arguments));
-    }
-
-    _createClass(SideNavHeading, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        this.classList.add(CLASSNAME$1D); // a11y
-
-        this.setAttribute('role', 'heading');
-      }
-    }]);
-
-    return SideNavHeading;
-  }(_wrapNativeSuper(HTMLElement));
-
-  var CLASSNAME$1E = '_coral-SideNav';
+  var CLASSNAME$1j = '_coral-SideNav';
   /**
    @class Coral.SideNav.Level
    @classdesc A SideNav Level component
@@ -64474,9 +64202,11 @@
       /** @ignore */
 
     }, {
-      key: "connectedCallback",
-      value: function connectedCallback() {
-        this.classList.add(CLASSNAME$1E); // a11y
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(SideNavLevel.prototype), "render", this).call(this);
+
+        this.classList.add(CLASSNAME$1j); // a11y
 
         this.setAttribute('role', 'region');
       }
@@ -64504,14 +64234,16 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-sidenav', SideNav, {
-    extends: 'nav'
-  });
-  window.customElements.define('coral-sidenav-item', SideNavItem, {
+  commons._define('coral-sidenav-level', SideNavLevel);
+
+  commons._define('coral-sidenav-item', SideNavItem, {
     extends: 'a'
   });
-  window.customElements.define('coral-sidenav-heading', SideNavHeading);
-  window.customElements.define('coral-sidenav-level', SideNavLevel);
+
+  commons._define('coral-sidenav', SideNav, {
+    extends: 'nav'
+  });
+
   SideNav.Item = SideNavItem;
   SideNav.Item.Content = SideNavItemContent;
   SideNav.Heading = SideNavHeading;
@@ -64535,7 +64267,7 @@
     CTA: 'cta',
     SECONDARY: 'secondary'
   };
-  var CLASSNAME$1F = '_coral-SplitButton';
+  var CLASSNAME$1k = '_coral-SplitButton';
   /**
    @class Coral.SplitButton
    @classdesc A Split Button component composed of an action and a trigger {@link AnchorButton} or {@link Button}.
@@ -64564,9 +64296,9 @@
       _this._observer = new MutationObserver(function () {
         _this._updateLeftVariant();
 
-        _this._updateInnerButtonClassName();
+        _this._updateInnerButtons();
 
-        _this._updateInnerButtonVariant(_this.variant);
+        _this._updateInnerButtonsVariant(_this.variant);
       });
 
       _this._observer.observe(_assertThisInitialized(_this), {
@@ -64612,8 +64344,8 @@
         }
       }
     }, {
-      key: "_updateInnerButtonVariant",
-      value: function _updateInnerButtonVariant(variant) {
+      key: "_updateInnerButtonsVariant",
+      value: function _updateInnerButtonsVariant(variant) {
         var _this$_getInnerButton = this._getInnerButtons(),
             action = _this$_getInnerButton.action,
             trigger = _this$_getInnerButton.trigger;
@@ -64627,8 +64359,8 @@
         }
       }
     }, {
-      key: "_updateInnerButtonClassName",
-      value: function _updateInnerButtonClassName() {
+      key: "_updateInnerButtons",
+      value: function _updateInnerButtons() {
         var _this$_getInnerButton2 = this._getInnerButtons(),
             action = _this$_getInnerButton2.action,
             trigger = _this$_getInnerButton2.trigger;
@@ -64638,7 +64370,14 @@
         }
 
         if (trigger) {
-          trigger.classList.add('_coral-SplitButton-trigger');
+          trigger.classList.add('_coral-SplitButton-trigger'); // a11y assume a popover is targeting the trigger
+
+          trigger.setAttribute('aria-haspopup', 'true');
+
+          if (action) {
+            action.id = action.id || commons.getUID();
+            trigger.setAttribute('aria-labelledby', action.id);
+          }
         }
       }
       /**
@@ -64648,13 +64387,15 @@
        */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(SplitButton.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(SplitButton.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1F); // Default reflected attributes
+        this.classList.add(CLASSNAME$1k); // a11y
+
+        this.setAttribute('role', 'group'); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$j.DEFAULT;
@@ -64663,7 +64404,7 @@
 
         this._updateLeftVariant();
 
-        this._updateInnerButtonClassName();
+        this._updateInnerButtons();
       }
     }, {
       key: "variant",
@@ -64676,7 +64417,7 @@
 
         this._reflectAttribute('variant', this._variant);
 
-        this._updateInnerButtonVariant(this._variant);
+        this._updateInnerButtonsVariant(this._variant);
       }
     }], [{
       key: "variant",
@@ -64707,7 +64448,7 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-splitbutton', SplitButton);
+  commons._define('coral-splitbutton', SplitButton);
 
   /**
    Enumeration for {@link Status} variants.
@@ -64760,7 +64501,7 @@
     MAGENTA: 'magenta',
     PURPLE: 'purple'
   };
-  var CLASSNAME$1G = '_coral-StatusLight';
+  var CLASSNAME$1l = '_coral-StatusLight';
   var variantMapping = {
     SUCCESS: 'positive',
     ERROR: 'negative',
@@ -64769,13 +64510,13 @@
   var ALL_VARIANT_CLASSES$a = [];
 
   for (var variantValue$8 in variant$k) {
-    ALL_VARIANT_CLASSES$a.push("".concat(CLASSNAME$1G, "--").concat(variantMapping[variantValue$8] || variant$k[variantValue$8]));
+    ALL_VARIANT_CLASSES$a.push("".concat(CLASSNAME$1l, "--").concat(variantMapping[variantValue$8] || variant$k[variantValue$8]));
   }
 
   var ALL_COLOR_CLASSES$1 = [];
 
   for (var colorValue$1 in color$1) {
-    ALL_COLOR_CLASSES$1.push("".concat(CLASSNAME$1G, "--").concat(color$1[colorValue$1]));
+    ALL_COLOR_CLASSES$1.push("".concat(CLASSNAME$1l, "--").concat(color$1[colorValue$1]));
   }
   /**
    @class Coral.Status
@@ -64818,13 +64559,13 @@
 
 
     _createClass(Status, [{
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(Status.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(Status.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1G); // Default reflected attributes
+        this.classList.add(CLASSNAME$1l); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$k.NEUTRAL;
@@ -64883,7 +64624,7 @@
 
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$a);
 
-        this.classList.add("".concat(CLASSNAME$1G, "--").concat(variantMapping[this._variant.toUpperCase()] || this._variant));
+        this.classList.add("".concat(CLASSNAME$1l, "--").concat(variantMapping[this._variant.toUpperCase()] || this._variant));
       }
       /**
        The status color. See {@link StatusColorEnum}.
@@ -64925,7 +64666,7 @@
         (_this$classList2 = this.classList).remove.apply(_this$classList2, ALL_COLOR_CLASSES$1);
 
         if (this._color !== color$1.DEFAULT) {
-          this.classList.add("".concat(CLASSNAME$1G, "--").concat(this._color));
+          this.classList.add("".concat(CLASSNAME$1l, "--").concat(this._color));
         }
       }
       /**
@@ -65024,7 +64765,8 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-status', Status);
+  commons._define('coral-status', Status);
+
   Status.Label = StatusLabel;
 
   /**
@@ -65096,7 +64838,7 @@
     LARGE: 'L'
   }; // the StepList's base classname
 
-  var CLASSNAME$1H = '_coral-Steplist';
+  var CLASSNAME$1m = '_coral-Steplist';
   /**
    @class Coral.StepList
    @classdesc A StepList component that holds a collection of steps.
@@ -65289,8 +65031,8 @@
           var step = event.target.closest('coral-step'); // we only show the tooltip if we have a label to show
 
           if (step._elements.label.innerHTML.trim() !== '') {
-            step._elements.tooltip.content.innerHTML = step._elements.label.innerHTML;
-            step._elements.tooltip.open = true;
+            step._elements.overlay.content.innerHTML = step._elements.label.innerHTML;
+            step._elements.overlay.open = true;
           }
         }
       }
@@ -65301,7 +65043,7 @@
       value: function _onStepMouseLeave(event) {
         if (this.size === size$7.SMALL) {
           var step = event.target.closest('coral-step');
-          step._elements.tooltip.open = false;
+          step._elements.overlay.open = false;
         }
       }
       /** @private */
@@ -65401,13 +65143,13 @@
        */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(StepList.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(StepList.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1H); // Default reflected attributes
+        this.classList.add(CLASSNAME$1m); // Default reflected attributes
 
         if (!this._interaction) {
           this.interaction = interaction$4.OFF;
@@ -65549,7 +65291,7 @@
 
         this._reflectAttribute('size', this._size);
 
-        this.classList.toggle("".concat(CLASSNAME$1H, "--small"), this._size === size$7.SMALL);
+        this.classList.toggle("".concat(CLASSNAME$1m, "--small"), this._size === size$7.SMALL);
       }
       /**
        Whether Steps should be interactive or not. When interactive, a Step can be clicked to jump to it.
@@ -65573,7 +65315,7 @@
         this._reflectAttribute('interaction', this._interaction);
 
         var isInteractive = this._interaction === interaction$4.ON;
-        this.classList.toggle("".concat(CLASSNAME$1H, "--interactive"), isInteractive);
+        this.classList.toggle("".concat(CLASSNAME$1m, "--interactive"), isInteractive);
         var steps = this.items.getAll();
         var stepsCount = steps.length; // update tab index for all children
 
@@ -65624,11 +65366,11 @@
     frag.appendChild(el0);
     var el4 = document.createTextNode("\n");
     frag.appendChild(el4);
-    var el5 = this["tooltip"] = document.createElement("coral-tooltip");
+    var el5 = this["overlay"] = document.createElement("coral-tooltip");
     el5.setAttribute("tracking", "off");
     el5.setAttribute("smart", "");
     el5.setAttribute("focusonshow", "off");
-    el5.setAttribute("handle", "tooltip");
+    el5.setAttribute("handle", "overlay");
     el5.setAttribute("placement", "top");
     el5.setAttribute("variant", "inspect");
     el5.setAttribute("interaction", "off");
@@ -65645,7 +65387,7 @@
     return frag;
   };
 
-  var CLASSNAME$1I = '_coral-Steplist-item';
+  var CLASSNAME$1n = '_coral-Steplist-item';
   /**
    @class Coral.Step
    @classdesc A Step component
@@ -65704,7 +65446,22 @@
       value: function connectedCallback() {
         _get(_getPrototypeOf(Step.prototype), "connectedCallback", this).call(this);
 
-        this.classList.add(CLASSNAME$1I); // Generate a unique ID for the Step panel if one isn't already present
+        var overlay = this._elements.overlay; // Cannot be open by default when rendered
+
+        overlay.removeAttribute('open'); // Restore in DOM
+
+        if (overlay._parent) {
+          overlay._parent.appendChild(overlay);
+        }
+      }
+      /** @ignore */
+
+    }, {
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(Step.prototype), "render", this).call(this);
+
+        this.classList.add(CLASSNAME$1n); // Generate a unique ID for the Step panel if one isn't already present
         // This will be used for accessibility purposes
 
         this.setAttribute('id', this.id || commons.getUID()); // A11y
@@ -65712,15 +65469,12 @@
         this.setAttribute('role', 'tab');
         var frag = document.createDocumentFragment(); // Discard the template created tooltip if one is provided by markup
 
-        this._elements.tooltip = this.querySelector('coral-tooltip') || this._elements.tooltip; // Cannot be open by default when rendered
-
-        this._elements.tooltip.removeAttribute('open'); // Render main template
-
+        this._elements.overlay = this.querySelector('coral-tooltip') || this._elements.overlay; // Render main template
 
         frag.appendChild(this._elements.stepMarkerContainer);
-        frag.appendChild(this._elements.tooltip);
         frag.appendChild(this._elements.line);
-        var templateHandleNames = ['stepMarkerContainer', 'tooltip', 'line'];
+        frag.appendChild(this._elements.overlay);
+        var templateHandleNames = ['stepMarkerContainer', 'overlay', 'line'];
         var label = this._elements.label; // Remove it so we can process children
 
         if (label.parentNode) {
@@ -65735,11 +65489,11 @@
           } else {
             this.removeChild(child);
           }
-        }
+        } // Link tooltip target
 
-        this.appendChild(frag); // Link tooltip target
 
-        this._elements.tooltip.target = this._elements.stepMarkerContainer; // Assign the content zone so the insert function will be called
+        this._elements.overlay.target = this._elements.stepMarkerContainer;
+        this.appendChild(frag); // Assign the content zone so the insert function will be called
 
         this.label = label; // Measure hybrid potential
 
@@ -65750,11 +65504,13 @@
     }, {
       key: "disconnectedCallback",
       value: function disconnectedCallback() {
-        _get(_getPrototypeOf(Step.prototype), "disconnectedCallback", this).call(this); // In case it was moved out don't forget to remove it
+        _get(_getPrototypeOf(Step.prototype), "disconnectedCallback", this).call(this);
 
+        var overlay = this._elements.overlay; // In case it was moved out don't forget to remove it
 
-        if (!this.contains(this._elements.tooltip)) {
-          this._elements.tooltip.remove();
+        if (!this.contains(overlay)) {
+          overlay._parent = overlay._repositioned ? document.body : this;
+          overlay.remove();
         }
       }
     }, {
@@ -65767,6 +65523,7 @@
           handle: 'label',
           tagName: 'coral-step-label',
           insert: function insert(label) {
+            label.classList.add('_coral-Steplist-label');
             this.appendChild(label);
           }
         });
@@ -65878,37 +65635,27 @@
     return Step;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$1J = '_coral-Steplist-label';
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+
   /**
    @class Coral.Step.Label
    @classdesc A Step Label
    @htmltag coral-step-label
-   @extends {HTMLElement}
-   @extends {BaseComponent}
+   @return {HTMLElement}
    */
-
-  var StepLabel =
-  /*#__PURE__*/
-  function (_BaseComponent) {
-    _inherits(StepLabel, _BaseComponent);
-
-    function StepLabel() {
-      _classCallCheck(this, StepLabel);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(StepLabel).apply(this, arguments));
-    }
-
-    _createClass(StepLabel, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        this.classList.add(CLASSNAME$1J);
-      }
-    }]);
-
-    return StepLabel;
-  }(BaseComponent(HTMLElement));
+  var StepLabel = (function () {
+    return document.createElement('coral-step-label');
+  });
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -65922,9 +65669,10 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-steplist', StepList);
-  window.customElements.define('coral-step', Step);
-  window.customElements.define('coral-step-label', StepLabel);
+  commons._define('coral-step', Step);
+
+  commons._define('coral-steplist', StepList);
+
   Step.Label = StepLabel;
 
   /**
@@ -66033,7 +65781,7 @@
     return frag;
   };
 
-  var CLASSNAME$1K = '_coral-ToggleSwitch';
+  var CLASSNAME$1o = '_coral-ToggleSwitch';
   /**
    @class Coral.Switch
    @classdesc A Switch component is a toggle form field similar to a Checkbox component.
@@ -66144,13 +65892,13 @@
       /** @ignore */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(Switch.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(Switch.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1K); // Create a fragment
+        this.classList.add(CLASSNAME$1o); // Create a fragment
 
         var frag = document.createDocumentFragment();
         var templateHandleNames = ['input', 'switch', 'labelWrapper']; // Render the template
@@ -66394,7 +66142,8 @@
     'coral-component-switch': translations$h
   }); // Expose component on the Coral namespace
 
-  window.customElements.define('coral-switch', Switch);
+  commons._define('coral-switch', Switch);
+
   Switch.Label = SwitchLabel;
 
   /**
@@ -66591,7 +66340,7 @@
     RIGHT: 'right'
   };
 
-  var CLASSNAME$1L = '_coral-Table-column';
+  var CLASSNAME$1p = '_coral-Table-column';
   /**
    Enumeration for {@link TableColumn} sortable direction options.
    
@@ -66688,13 +66437,13 @@
        */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(TableColumn.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(TableColumn.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1L); // Default reflected attributes
+        this.classList.add(CLASSNAME$1p); // Default reflected attributes
 
         if (!this._sortableType) {
           this.sortableType = sortableType.ALPHANUMERIC;
@@ -67000,7 +66749,7 @@
     return TableColumn;
   }(BaseComponent(HTMLTableColElement));
 
-  var CLASSNAME$1M = '_coral-Table-cell';
+  var CLASSNAME$1q = '_coral-Table-cell';
   /**
    @class Coral.Table.Cell
    @classdesc A Table cell component
@@ -67079,11 +66828,11 @@
       /** @ignore */
 
     }, {
-      key: "connectedCallback",
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(TableCell.prototype), "connectedCallback", this).call(this);
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(TableCell.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1M);
+        this.classList.add(CLASSNAME$1q);
       }
       /**
        Triggered before {@link TableCell#selected} is changed.
@@ -67175,7 +66924,7 @@
     return TableCell;
   }(BaseComponent(HTMLTableCellElement));
 
-  var CLASSNAME$1N = '_coral-Table-headerCell';
+  var CLASSNAME$1r = '_coral-Table-headerCell';
   /**
    @class Coral.Table.HeaderCell
    @classdesc A Table header cell component
@@ -67227,13 +66976,13 @@
         this.trigger('coral-table-headercell:_contentchanged');
       }
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(TableHeaderCell.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(TableHeaderCell.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1N); // Fetch or create the content zone element
+        this.classList.add(CLASSNAME$1r); // Fetch or create the content zone element
 
         var content = this._elements.content;
 
@@ -67280,7 +67029,7 @@
     return TableHeaderCell;
   }(BaseComponent(HTMLTableCellElement));
 
-  var CLASSNAME$1O = '_coral-Table-row';
+  var CLASSNAME$1s = '_coral-Table-row';
   /**
    @class Coral.Table.Row
    @classdesc A Table row component
@@ -67460,11 +67209,11 @@
       /** @ignore */
 
     }, {
-      key: "connectedCallback",
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(TableRow.prototype), "connectedCallback", this).call(this);
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(TableRow.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1O);
+        this.classList.add(CLASSNAME$1s);
       }
       /**
        Triggered before {@link TableRow#selected} is changed.
@@ -67734,9 +67483,9 @@
           /** @ignore */
 
         }, {
-          key: "connectedCallback",
-          value: function connectedCallback() {
-            _get(_getPrototypeOf(_class.prototype), "connectedCallback", this).call(this); // a11y
+          key: "render",
+          value: function render() {
+            _get(_getPrototypeOf(_class.prototype), "render", this).call(this); // a11y
 
 
             this.setAttribute('role', 'rowgroup'); // Default reflected attributes
@@ -67774,7 +67523,7 @@
     );
   };
 
-  var CLASSNAME$1P = '_coral-Table-head';
+  var CLASSNAME$1t = '_coral-Table-head';
   /**
    @class Coral.Table.Head
    @classdesc A Table head component
@@ -67816,13 +67565,13 @@
 
 
     _createClass(TableHead, [{
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(TableHead.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(TableHead.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1P);
+        this.classList.add(CLASSNAME$1t);
       }
       /**
        Triggered when the {@link TableHead} content changed.
@@ -67867,7 +67616,7 @@
     return TableHead;
   }(BaseTableSection(BaseComponent(HTMLTableSectionElement)));
 
-  var CLASSNAME$1Q = '_coral-Table-body';
+  var CLASSNAME$1u = '_coral-Table-body';
   /**
    @class Coral.Table.Body
    @classdesc A Table body component
@@ -67899,11 +67648,11 @@
 
 
     _createClass(TableBody, [{
-      key: "connectedCallback",
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(TableBody.prototype), "connectedCallback", this).call(this);
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(TableBody.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1Q);
+        this.classList.add(CLASSNAME$1u);
 
         if (getRows([this]).length === 0) {
           this.trigger('coral-table-body:_empty');
@@ -67930,7 +67679,7 @@
     return TableBody;
   }(BaseTableSection(BaseComponent(HTMLTableSectionElement)));
 
-  var CLASSNAME$1R = '_coral-Table-foot';
+  var CLASSNAME$1v = '_coral-Table-foot';
   /**
    @class Coral.Table.Foot
    @classdesc A Table foot component
@@ -67953,13 +67702,13 @@
     }
 
     _createClass(TableFoot, [{
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(TableFoot.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(TableFoot.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1R);
+        this.classList.add(CLASSNAME$1v);
       }
     }]);
 
@@ -67998,7 +67747,7 @@
     return frag;
   };
 
-  var CLASSNAME$1S = '_coral-Table-wrapper';
+  var CLASSNAME$1w = '_coral-Table-wrapper';
   /**
    Enumeration for {@link Table} variants
    
@@ -68020,7 +67769,7 @@
   var ALL_VARIANT_CLASSES$b = [];
 
   for (var variantValue$9 in variant$l) {
-    ALL_VARIANT_CLASSES$b.push("".concat(CLASSNAME$1S, "--").concat(variant$l[variantValue$9]));
+    ALL_VARIANT_CLASSES$b.push("".concat(CLASSNAME$1w, "--").concat(variant$l[variantValue$9]));
   }
 
   var IS_DISABLED = 'is-disabled';
@@ -69498,7 +69247,7 @@
             });
           }); // Make sure sticky styling is applied
 
-          table.classList.toggle("".concat(CLASSNAME$1S, "--sticky"), head.sticky); // Layout sticky head
+          table.classList.toggle("".concat(CLASSNAME$1w, "--sticky"), head.sticky); // Layout sticky head
 
           table._resetLayout();
         });
@@ -70179,15 +69928,15 @@
         }
       }
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
+      value: function render() {
         var _this7 = this;
 
-        _get(_getPrototypeOf(Table.prototype), "connectedCallback", this).call(this);
+        _get(_getPrototypeOf(Table.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1S); // Wrapper should have role="presentation" because it wraps another table
+        this.classList.add(CLASSNAME$1w); // Wrapper should have role="presentation" because it wraps another table
 
         this.setAttribute('role', 'presentation'); // Default reflected attribute
 
@@ -70501,7 +70250,7 @@
 
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$b);
 
-        this.classList.add("".concat(CLASSNAME$1S, "--").concat(this._variant));
+        this.classList.add("".concat(CLASSNAME$1w, "--").concat(this._variant));
       }
       /**
        Whether the items are selectable.
@@ -70774,30 +70523,38 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-table-column', TableColumn, {
+  commons._define('coral-table-column', TableColumn, {
     extends: 'col'
   });
-  window.customElements.define('coral-table-cell', TableCell, {
+
+  commons._define('coral-table-cell', TableCell, {
     extends: 'td'
   });
-  window.customElements.define('coral-table-headercell', TableHeaderCell, {
+
+  commons._define('coral-table-headercell', TableHeaderCell, {
     extends: 'th'
   });
-  window.customElements.define('coral-table-row', TableRow, {
+
+  commons._define('coral-table-row', TableRow, {
     extends: 'tr'
   });
-  window.customElements.define('coral-table-head', TableHead, {
+
+  commons._define('coral-table-head', TableHead, {
     extends: 'thead'
   });
-  window.customElements.define('coral-table-body', TableBody, {
+
+  commons._define('coral-table-body', TableBody, {
     extends: 'tbody'
   });
-  window.customElements.define('coral-table-foot', TableFoot, {
+
+  commons._define('coral-table-foot', TableFoot, {
     extends: 'tfoot'
   });
-  window.customElements.define('coral-table', Table, {
+
+  commons._define('coral-table', Table, {
     extends: 'table'
   });
+
   Table.Column = TableColumn;
   Table.Cell = TableCell;
   Table.HeaderCell = TableHeaderCell;
@@ -70856,7 +70613,7 @@
     return newTarget;
   }
 
-  var CLASSNAME$1T = '_coral-Tabs-item';
+  var CLASSNAME$1x = '_coral-Tabs-item';
   /**
    @class Coral.Tab
    @classdesc A Tab component
@@ -70948,9 +70705,21 @@
 
       /** @ignore */
       value: function connectedCallback() {
-        _get(_getPrototypeOf(Tab.prototype), "connectedCallback", this).call(this);
+        _get(_getPrototypeOf(Tab.prototype), "connectedCallback", this).call(this); // Query the tab target once the tab item is inserted in the DOM
 
-        this.classList.add(CLASSNAME$1T); // adds the role to support accessibility
+
+        if (this.selected) {
+          this._selectTarget();
+        }
+      }
+      /** @ignore */
+
+    }, {
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(Tab.prototype), "render", this).call(this);
+
+        this.classList.add(CLASSNAME$1x); // adds the role to support accessibility
 
         this.setAttribute('role', 'tab'); // Generate a unique ID for the tab panel if one isn't already present
         // This will be used for accessibility purposes
@@ -70983,11 +70752,7 @@
 
         this.appendChild(frag); // Assign the content zones, moving them into place in the process
 
-        this.label = label; // Query the tab target once the tab item is inserted in the DOM
-
-        if (this.selected) {
-          this._selectTarget();
-        }
+        this.label = label;
       }
     }, {
       key: "label",
@@ -70999,6 +70764,7 @@
           handle: 'label',
           tagName: 'coral-tab-label',
           insert: function insert(label) {
+            label.classList.add("".concat(CLASSNAME$1x, "Label"));
             this.appendChild(label);
           }
         });
@@ -71190,36 +70956,16 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var CLASSNAME$1U = '_coral-Tabs-itemLabel';
+
   /**
    @class Coral.Tab.Label
    @classdesc Tab's label component
    @htmltag coral-tab-label
-   @extends {HTMLElement}
+   @return {HTMLElement}
    */
-
-  var TabLabel =
-  /*#__PURE__*/
-  function (_HTMLElement) {
-    _inherits(TabLabel, _HTMLElement);
-
-    function TabLabel() {
-      _classCallCheck(this, TabLabel);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(TabLabel).apply(this, arguments));
-    }
-
-    _createClass(TabLabel, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        this.classList.add(CLASSNAME$1U);
-      }
-    }]);
-
-    return TabLabel;
-  }(_wrapNativeSuper(HTMLElement));
+  var TabLabel = (function () {
+    return document.createElement('coral-tab-label');
+  });
 
   var template$X = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
@@ -71267,7 +71013,7 @@
     VERTICAL: 'vertical'
   }; // the tablist's base classname
 
-  var CLASSNAME$1V = '_coral-Tabs';
+  var CLASSNAME$1y = '_coral-Tabs';
   /**
    @class Coral.TabList
    @classdesc A TabList component holds a collection of tabs.
@@ -71561,13 +71307,13 @@
        */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(TabList.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(TabList.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1V); // adds the role to support accessibility
+        this.classList.add(CLASSNAME$1y); // adds the role to support accessibility
 
         this.setAttribute('role', 'tablist');
         this.setAttribute('aria-multiselectable', 'false'); // Default reflected attributes
@@ -71720,12 +71466,12 @@
         this._reflectAttribute('size', this._size); // Remove all variant classes
 
 
-        this.classList.remove("".concat(CLASSNAME$1V, "--compact"), "".concat(CLASSNAME$1V, "--quiet"));
+        this.classList.remove("".concat(CLASSNAME$1y, "--compact"), "".concat(CLASSNAME$1y, "--quiet"));
 
         if (this._size === size$8.SMALL) {
-          this.classList.add("".concat(CLASSNAME$1V, "--compact"));
+          this.classList.add("".concat(CLASSNAME$1y, "--compact"));
         } else if (this._size === size$8.LARGE) {
-          this.classList.add("".concat(CLASSNAME$1V, "--quiet"));
+          this.classList.add("".concat(CLASSNAME$1y, "--quiet"));
         }
       }
       /**
@@ -71748,8 +71494,8 @@
 
         this._reflectAttribute('orientation', this._orientation);
 
-        this.classList.toggle("".concat(CLASSNAME$1V, "--vertical"), this._orientation === orientation$1.VERTICAL);
-        this.classList.toggle("".concat(CLASSNAME$1V, "--horizontal"), this._orientation === orientation$1.HORIZONTAL);
+        this.classList.toggle("".concat(CLASSNAME$1y, "--vertical"), this._orientation === orientation$1.VERTICAL);
+        this.classList.toggle("".concat(CLASSNAME$1y, "--horizontal"), this._orientation === orientation$1.HORIZONTAL);
 
         this._setLine(true);
       }
@@ -71793,9 +71539,10 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-tab', Tab);
-  window.customElements.define('coral-tab-label', TabLabel);
-  window.customElements.define('coral-tablist', TabList);
+  commons._define('coral-tab', Tab);
+
+  commons._define('coral-tablist', TabList);
+
   Tab.Label = TabLabel;
 
   /**
@@ -71814,7 +71561,7 @@
     VERTICAL: 'vertical'
   }; // the tabview's base classname
 
-  var CLASSNAME$1W = '_coral-TabView';
+  var CLASSNAME$1z = '_coral-TabView';
   /**
    @class Coral.TabView
    @classdesc A TabView component is the wrapping container used to create the typical Tabbed pattern.
@@ -71905,13 +71652,13 @@
         this._elements.tabList.target = this._elements.tabList.target;
       }
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(TabView.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(TabView.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1W); // Default reflected attributes
+        this.classList.add(CLASSNAME$1z); // Default reflected attributes
 
         if (!this._orientation) {
           this.orientation = this.orientation;
@@ -71948,7 +71695,7 @@
 
         this._reflectAttribute('orientation', this.orientation);
 
-        this.classList[this.orientation === orientation$2.VERTICAL ? 'add' : 'remove']("".concat(CLASSNAME$1W, "--vertical"));
+        this.classList[this.orientation === orientation$2.VERTICAL ? 'add' : 'remove']("".concat(CLASSNAME$1z, "--vertical"));
       }
       /**
        The TabList which handles all the tabs.
@@ -72042,9 +71789,9 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-tabview', TabView);
+  commons._define('coral-tabview', TabView);
 
-  var CLASSNAME$1X = '_coral-Textfield';
+  var CLASSNAME$1A = '_coral-Textfield';
   /**
    Enumeration for {@link Textarea} variants.
    
@@ -72065,7 +71812,7 @@
   var ALL_VARIANT_CLASSES$c = [];
 
   for (var variantValue$a in variant$m) {
-    ALL_VARIANT_CLASSES$c.push("".concat(CLASSNAME$1X, "--").concat(variant$m[variantValue$a]));
+    ALL_VARIANT_CLASSES$c.push("".concat(CLASSNAME$1A, "--").concat(variant$m[variantValue$a]));
   }
   /**
    @class Coral.Textarea
@@ -72136,14 +71883,13 @@
        */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(Textarea.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(Textarea.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1X);
-        this.classList.add("".concat(CLASSNAME$1X, "--multiline")); // Default reflected attributes
+        this.classList.add(CLASSNAME$1A, "".concat(CLASSNAME$1A, "--multiline")); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$m.DEFAULT;
@@ -72166,7 +71912,7 @@
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$c);
 
         if (this._variant !== variant$m.DEFAULT) {
-          this.classList.add("".concat(CLASSNAME$1X, "--").concat(this._variant));
+          this.classList.add("".concat(CLASSNAME$1A, "--").concat(this._variant));
         } // Restore the original height
 
 
@@ -72208,7 +71954,7 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-textarea', Textarea, {
+  commons._define('coral-textarea', Textarea, {
     extends: 'textarea'
   });
 
@@ -72293,12 +72039,12 @@
     CENTER: 'center',
     RIGHT: 'right'
   };
-  var CLASSNAME$1Y = '_coral-Toast'; // An array of all possible variant
+  var CLASSNAME$1B = '_coral-Toast'; // An array of all possible variant
 
   var ALL_VARIANT_CLASSES$d = [];
 
   for (var variantValue$b in variant$n) {
-    ALL_VARIANT_CLASSES$d.push("".concat(CLASSNAME$1Y, "--").concat(variant$n[variantValue$b]));
+    ALL_VARIANT_CLASSES$d.push("".concat(CLASSNAME$1B, "--").concat(variant$n[variantValue$b]));
   }
 
   var PRIORITY_QUEUE = [];
@@ -72448,6 +72194,7 @@
         } // In the DOM but not a direct child of body
         else if (this.parentNode !== document.body) {
             this._ignoreConnectedCallback = true;
+            this._repositioned = true;
             document.body.appendChild(this);
             this._ignoreConnectedCallback = false;
           }
@@ -72524,8 +72271,15 @@
         }
 
         _get(_getPrototypeOf(Toast.prototype), "connectedCallback", this).call(this);
+      }
+      /** @ignore */
 
-        this.classList.add(CLASSNAME$1Y); // Default reflected attributes
+    }, {
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(Toast.prototype), "render", this).call(this);
+
+        this.classList.add(CLASSNAME$1B); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$n.DEFAULT;
@@ -72568,9 +72322,7 @@
 
 
         this.content = this._elements.content;
-        this.action = action; // Add the Overlay coral-tabcapture elements at the end
-
-        _get(_getPrototypeOf(Toast.prototype), "connectedCallback", this).call(this);
+        this.action = action;
       }
       /** @ignore */
 
@@ -72744,7 +72496,7 @@
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$d); // Set new variant class
 
 
-        this.classList.add("".concat(CLASSNAME$1Y, "--").concat(this._variant)); // Set the role attribute to alert or status depending on
+        this.classList.add("".concat(CLASSNAME$1B, "--").concat(this._variant)); // Set the role attribute to alert or status depending on
         // the variant so that the element turns into a live region
 
         this.setAttribute('role', this._variant);
@@ -72766,7 +72518,8 @@
           handle: 'content',
           tagName: 'coral-toast-content',
           insert: function insert(content) {
-            // After the header
+            content.classList.add("".concat(CLASSNAME$1B, "-content")); // After the header
+
             this._elements.body.insertBefore(content, this._elements.body.firstChild);
           }
         });
@@ -72843,37 +72596,27 @@
     return Toast;
   }(BaseOverlay(BaseComponent(HTMLElement)));
 
-  var CLASSNAME$1Z = '_coral-Toast-content';
+  /**
+   * Copyright 2019 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+
   /**
    @class Coral.Toast.Content
    @classdesc The Toast default content
    @htmltag coral-toast-content
-   @extends {HTMLElement}
-   @extends {BaseComponent}
+   @return {HTMLElement}
    */
-
-  var ToastContent =
-  /*#__PURE__*/
-  function (_BaseComponent) {
-    _inherits(ToastContent, _BaseComponent);
-
-    function ToastContent() {
-      _classCallCheck(this, ToastContent);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(ToastContent).apply(this, arguments));
-    }
-
-    _createClass(ToastContent, [{
-      key: "connectedCallback",
-
-      /** @ignore */
-      value: function connectedCallback() {
-        this.classList.add(CLASSNAME$1Z);
-      }
-    }]);
-
-    return ToastContent;
-  }(BaseComponent(HTMLElement));
+  var ToastContent = (function () {
+    return document.createElement('coral-toast-content');
+  });
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -72887,11 +72630,11 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-toast', Toast);
-  window.customElements.define('coral-toast-content', ToastContent);
+  commons._define('coral-toast', Toast);
+
   Toast.Content = ToastContent;
 
-  var CLASSNAME$1_ = '_coral-TreeView';
+  var CLASSNAME$1C = '_coral-TreeView';
   /**
    @class Coral.Tree
    @classdesc A Tree component is a container component to display collapsible content.
@@ -73354,23 +73097,19 @@
       /** @ignore */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        var _this3 = this;
+      value: function render() {
+        _get(_getPrototypeOf(Tree.prototype), "render", this).call(this);
 
-        _get(_getPrototypeOf(Tree.prototype), "connectedCallback", this).call(this);
-
-        this.classList.add(CLASSNAME$1_); // a11y
+        this.classList.add(CLASSNAME$1C); // a11y
 
         this.setAttribute('role', 'tree');
-        this.setAttribute('aria-multiselectable', this.multiple); // Requires tree item API to be defined
+        this.setAttribute('aria-multiselectable', this.multiple); // Enable keyboard interaction
 
-        window.customElements.whenDefined('coral-tree-item').then(function () {
-          // Enable keyboard interaction
-          _this3._resetFocusableItem();
-        }); // Don't trigger events once connected
+        this._resetFocusableItem(); // Don't trigger events once connected
+
 
         this._preventTriggeringEvents = true;
 
@@ -73501,7 +73240,7 @@
     return frag;
   };
 
-  var CLASSNAME$1$ = '_coral-TreeView-item';
+  var CLASSNAME$1D = '_coral-TreeView-item';
   /**
    Enumeration for {@link TreeItem} variants.
    
@@ -73523,7 +73262,7 @@
   var ALL_VARIANT_CLASSES$e = [];
 
   for (var variantValue$c in variant$o) {
-    ALL_VARIANT_CLASSES$e.push("".concat(CLASSNAME$1$, "--").concat(variant$o[variantValue$c]));
+    ALL_VARIANT_CLASSES$e.push("".concat(CLASSNAME$1D, "--").concat(variant$o[variantValue$c]));
   }
   /**
    @class Coral.Tree.Item
@@ -73609,13 +73348,13 @@
        */
 
     }, {
-      key: "connectedCallback",
+      key: "render",
 
       /** @ignore */
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(TreeItem.prototype), "connectedCallback", this).call(this);
+      value: function render() {
+        _get(_getPrototypeOf(TreeItem.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1$); // a11y
+        this.classList.add(CLASSNAME$1D); // a11y
 
         this.setAttribute('role', 'presentation');
 
@@ -73843,7 +73582,7 @@
 
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$e);
 
-        this.classList.add("".concat(CLASSNAME$1$, "--").concat(this._variant));
+        this.classList.add("".concat(CLASSNAME$1D, "--").concat(this._variant));
       }
       /**
        Whether the item is selected.
@@ -73968,12 +73707,14 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-tree', Tree);
-  window.customElements.define('coral-tree-item', TreeItem);
+  commons._define('coral-tree-item', TreeItem);
+
+  commons._define('coral-tree', Tree);
+
   Tree.Item = TreeItem;
   Tree.Item.Content = TreeItemContent;
 
-  var CLASSNAME$20 = '_coral-WizardView';
+  var CLASSNAME$1E = '_coral-WizardView';
   /**
    @class Coral.WizardView
    @classdesc A WizardView component is the wrapping container used to create the typical Wizard pattern. This is intended
@@ -74306,11 +74047,11 @@
       /** @ignore */
 
     }, {
-      key: "connectedCallback",
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(WizardView.prototype), "connectedCallback", this).call(this);
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(WizardView.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$20);
+        this.classList.add(CLASSNAME$1E);
 
         this._syncStepListSelection(0);
 
@@ -74390,11 +74131,11 @@
    * governing permissions and limitations under the License.
    */
 
-  window.customElements.define('coral-wizardview', WizardView);
+  commons._define('coral-wizardview', WizardView);
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.107";
+  var version = "1.0.0-beta.108";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
