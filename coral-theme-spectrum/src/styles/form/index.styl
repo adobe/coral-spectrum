@@ -20,9 +20,6 @@ $form-hmargin = var(--spectrum-medium-global-dimension-size-125);
 $form-vmargin = var(--spectrum-medium-global-dimension-size-125);
 $form-aligned-label-min-width = var(--spectrum-medium-global-dimension-size-1600);
 
-$form-fieldset-font-size = var(--spectrum-medium-global-dimension-font-size-300);
-$form-fieldset-line-height = var(--spectrum-medium-alias-line-height-large);
-
 /**
  * Indicates the fieldset.
  * .fieldset is used instead of <fieldset> as <legend> cannot be styled as per requirement.
@@ -39,11 +36,11 @@ $form-fieldset-line-height = var(--spectrum-medium-alias-line-height-large);
   display: block;
   margin: var(--spectrum-medium-global-dimension-size-100) 0 var(--spectrum-medium-global-dimension-size-125) 0;
 
-  font-weight: var(--spectrum-global-font-weight-bold);
-  font-style: var(--spectrum-global-font-style-regular);
+  font-weight: var(--spectrum-medium-heading-5-text-font-weight);
+  font-style: var(--spectrum-medium-heading-5-text-font-style);
 
-  font-size: $form-fieldset-font-size;
-  line-height: $form-fieldset-line-height;
+  font-size: var(--spectrum-medium-heading-5-text-size);
+  line-height: var(--spectrum-medium-heading-5-text-line-height);
 }
 
 .coral-Form-fieldset:first-of-type {
