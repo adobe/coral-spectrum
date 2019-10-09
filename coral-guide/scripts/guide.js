@@ -11,7 +11,7 @@
  */
 
 (function() {
-  document.head.insertAdjacentHTML('beforeend', '<meta charset="utf-8"><link rel="icon" type="image/png" href="./manual/asset/favicon.png">');
+  document.head.insertAdjacentHTML('beforeend', '<link rel="icon" type="image/png" href="./manual/asset/favicon.png">');
   
   document.addEventListener('DOMContentLoaded', function() {
     var header = document.querySelector('.layout-container > header');
