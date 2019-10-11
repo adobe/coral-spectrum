@@ -48,8 +48,17 @@ coral-dialog-footer {
   outline: none;
 }
 
-._coral-Dialog-dragIcon {
-  margin-top: 3px;
+// Stay on top of dragZone
+coral-dialog-header {
+  z-index: 1;
+}
+
+._coral-Dialog-dragZone {
+  position: absolute;
+  width: calc(100% + calc(var(--spectrum-medium-dialog-padding) * 2));
+  height: calc(100% + calc(var(--spectrum-medium-dialog-padding) - 16px));
+  left: calc(-1 * var(--spectrum-medium-dialog-padding));
+  top: calc(-1 * var(--spectrum-medium-dialog-padding));
 }
 
 // @spectrum

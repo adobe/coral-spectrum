@@ -186,8 +186,7 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
       tagName: 'coral-dialog-header',
       insert: function(header) {
         header.classList.add(`${CLASSNAME}-title`);
-        // Position the header between the drag icon and the type icon
-        this._elements.headerWrapper.insertBefore(header, this._elements.dragIcon.nextElementSibling);
+        this._elements.headerWrapper.appendChild(header);
       },
       set: function() {
         // Stop observing the old header and observe the new one
@@ -415,16 +414,12 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
     if (this._movable) {
       const dragAction = new DragAction(this);
       dragAction.handle = this._elements.headerWrapper;
-      
-      this._elements.dragIcon.hidden = false;
     }
     else {
       // Disables any dragging interaction
       if (this.dragAction) {
         this.dragAction.destroy();
       }
-      
-      this._elements.dragIcon.hidden = true;
       
       // Recenter the dialog once it's not movable anymore
       this.center();
