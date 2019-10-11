@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">94.74% </span>
+        <span class="strong">94.69% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>198/209</span>
+        <span class='fraction'>196/207</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">84.25% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>52/55</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">94.74% </span>
+        <span class="strong">94.69% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>198/209</span>
+        <span class='fraction'>196/207</span>
       </div>
     </div>
     <p class="quiet">
@@ -794,12 +794,7 @@
 <a name='L746'></a><a href='#L746'>746</a>
 <a name='L747'></a><a href='#L747'>747</a>
 <a name='L748'></a><a href='#L748'>748</a>
-<a name='L749'></a><a href='#L749'>749</a>
-<a name='L750'></a><a href='#L750'>750</a>
-<a name='L751'></a><a href='#L751'>751</a>
-<a name='L752'></a><a href='#L752'>752</a>
-<a name='L753'></a><a href='#L753'>753</a>
-<a name='L754'></a><a href='#L754'>754</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L749'></a><a href='#L749'>749</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1545,11 +1540,6 @@
 <span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span></td><td class="text"><pre class="prettyprint lang-js">/**
@@ -1740,8 +1730,7 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
       tagName: 'coral-dialog-header',
       <span class="missing-if-branch" title="else path not taken" >E</span>insert: function(header) {
         header.classList.add(`${CLASSNAME}-title`);
-        // Position the header between the drag icon and the type icon
-        this._elements.headerWrapper.insertBefore(header, this._elements.dragIcon.nextElementSibling);
+        this._elements.headerWrapper.appendChild(header);
       },
       set: function() {
         // Stop observing the old header and observe the new one
@@ -1822,15 +1811,15 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
   /**
    The dialog's variant. See {@link DialogVariantEnum}.
    
-   @ty<span class="missing-if-branch" title="else path not taken" >E</span>pe {String}
-   @default DialogVariantEnum.DEFAULT
+   @type {String}
+   @de<span class="missing-if-branch" title="else path not taken" >E</span>fault DialogVariantEnum.DEFAULT
    @htmlattribute variant
-   @htmlatt<span class="cstat-no" title="statement not covered" >ributereflected</span>
+   @htmlattributereflected
    */<span class="cstat-no" title="statement not covered" ></span>
   get vari<span class="cstat-no" title="statement not covered" >ant() {</span>
-    return<span class="cstat-no" title="statement not covered" > this._variant || variant.DEFAULT</span>;
+    return<span class="cstat-no" title="statement not covered" > this._variant || variant.D</span>EFAULT;
   }<span class="cstat-no" title="statement not covered" ></span>
-  set variant(value) {
+  set vari<span class="cstat-no" title="statement not covered" >ant(value) {</span>
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) &amp;&amp; value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
@@ -1858,11 +1847,11 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
    Whether the dialog should be displayed full screen (without borders or margin).
    
    @type {Boolean}
-   @default false<span class="fstat-no" title="function not covered" ></span>
-   @htmlattribute fullscreen
-   @ht<span class="cstat-no" title="statement not covered" >mlattributereflected</span>
+   @default false
+   @htmlattribute fu<span class="fstat-no" title="function not covered" >llscreen</span>
+   @htmlattributereflected
    */<span class="cstat-no" title="statement not covered" ></span>
-  get fullscreen() {
+  get fu<span class="cstat-no" title="statement not covered" >llscreen() {</span>
     return this._fullscreen || false;
   }
   set fullscreen(value) {
@@ -1888,9 +1877,9 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
   set open(value) {
     super.open = value;
     
-    //<span class="missing-if-branch" title="if path not taken" >I</span> Ensure we're in the DOM
-    if (<span class="cstat-no" title="statement not covered" >this.ope</span>n) {
-      // If not child of document.body, we have to move it there
+    // Ensure we're in the DOM
+    if<span class="missing-if-branch" title="if path not taken" >I</span> (this.open) {
+      //<span class="cstat-no" title="statement not covered" > If not </span>child of document.body, we have to move it there
       this._moveToDocumentBody();
     
       // Show the backdrop, if necessary
@@ -1917,8 +1906,8 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
    The dialog's icon.
 &nbsp;
    @type {String}
-   @de<span class="missing-if-branch" title="else path not taken" >E</span>fault ""
-   @htmlattribute icon
+   @default ""
+   @ht<span class="missing-if-branch" title="else path not taken" >E</span>mlattribute icon
    */
   get icon() {
     return this._elements.icon;
@@ -1926,8 +1915,8 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
   set icon(value) {
     this._elements.icon = value;
   }
-  <span class="branch-5 cbranch-no" title="branch not covered" ><span class="branch-3 cbranch-no" title="branch not covered" ></span></span>
-  /**
+  
+  /**<span class="branch-5 cbranch-no" title="branch not covered" ><span class="branch-3 cbranch-no" title="branch not covered" ></span></span>
    Whether the dialog should have a close button. See {@link DialogClosableEnum}.
    
    @type {String}
@@ -1969,16 +1958,12 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
     if (this._movable) {
       const dragAction = new DragAction(this);
       dragAction.handle = this._elements.headerWrapper;
-      
-      this._elements.dragIcon.hidden = false;
     }
     else {
       // Disables any dragging interaction
       if (this.dragAction) {
         this.dragAction.destroy();
       }
-      
-      this._elements.dragIcon.hidden = true;
       
       // Recenter the dialog once it's not movable anymore
       this.center();
@@ -2012,25 +1997,25 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
           subtree: true
         });
       }
-    }<span class="missing-if-branch" title="if path not taken" >I</span>
-  }<span class="cstat-no" title="statement not covered" ></span>
+    }
+  }
   
   /**
    Hide the header wrapper if the header content zone is empty.
-   @ignore
-   */
+   @ig<span class="missing-if-branch" title="if path not taken" >I</span>nore
+   */<span class="cstat-no" title="statement not covered" ></span>
   _hideHeaderIfEmpty() {
     const header = this._elements.header;
   
     if (this._elements.header) {
       const headerWrapper = this._elements.headerWrapper;
   
-      // If it's empty and has no non-textnode children, hide the header<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+      // If it's empty and has no non-textnode children, hide the header
       const hiddenValue = header.children.length === 0 &amp;&amp; header.textContent.replace(/\s*/g, '') === '';
   
       // Only bother if the hidden status has changed
       if (hiddenValue !== headerWrapper.hidden) {
-        headerWrapper.hidden = hiddenValue;
+        headerWrapper.hidden = hiddenValue;<span class="branch-2 cbranch-no" title="branch not covered" ></span>
       }
     }
   }
@@ -2077,12 +2062,12 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
     if (!document.body.contains(this)) {
       document.body.appendChild(this);
     }
-    // In the DOM but not a direct child of body<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+    // In the DOM but not a direct child of body
     else if (this.parentNode !== document.body) {
       this._ignoreConnectedCallback = true;
       this._repositioned = true;
       document.body.appendChild(this);
-      this._ignoreConnectedCallback = false;
+      this._ignoreConnectedCallback = false;<span class="branch-2 cbranch-no" title="branch not covered" ></span>
     }
   }
   
@@ -2119,12 +2104,12 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
    
    @returns {Dialog} this, chainable.
    */
-  center() {<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+  center() {
     // We're already centered in fullscreen mode
     if (this.fullscreen) {
       return;
     }
-  
+  <span class="branch-2 cbranch-no" title="branch not covered" ></span>
     // If moved we reset the position
     this.style.top = '';
     this.style.left = '';
@@ -2141,18 +2126,18 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
   }
   
   /**
-   Returns {@link Dialog} vari<span class="branch-1 cbranch-no" title="branch not covered" >ants.</span>
+   Returns {@link Dialog} variants.
    
    @return {DialogVariantEnum}
    */
   static get variant() { return variant; }
-  
-  /**<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+  <span class="branch-1 cbranch-no" title="branch not covered" ></span>
+  /**
    Returns {@link Dialog} backdrops.
    
    @return {DialogBackdropEnum}
    */
-  static get backdrop() { return backdrop; }
+  static get backdrop() { return backdrop; }<span class="branch-2 cbranch-no" title="branch not covered" ></span>
   
   /**
    Returns {@link Dialog} close options.
@@ -2243,16 +2228,16 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
         }
         else {
           // Content zone target defaults to user wrapper element if provided
-          this._el<span class="fstat-no" title="function not covered" >emen</span>ts.wrapper = contentZoneProvided.parentNode;
-<span class="cstat-no" title="statement not covered" >        }</span>
-      
-        // Move ev<span class="fstat-no" title="function not covered" >eryt</span>hing in the wrapper
-<span class="cstat-no" title="statement not covered" >        while (this.firstChild) {</span>
-          wrapper.appendChild(this.firstChild);
+          this._elements.wrapper = contentZoneProvided.parentNode;
         }
       
-        // Add the dialog header before the content
-        this._elements.wrapper.insertBefore(headerWrapper, content);
+        // Move everything in the wrapper
+        while (this.firstChild) {
+          wrapper.<span class="fstat-no" title="function not covered" >appe</span>ndChild(this.firstChild);
+<span class="cstat-no" title="statement not covered" >        }</span>
+      
+        // Add the<span class="fstat-no" title="function not covered" > dia</span>log header before the content
+<span class="cstat-no" title="statement not covered" >        this._elements.wrapper.inse</span>rtBefore(headerWrapper, content);
       }
       // Case where the dialog needs to be rendered and content zones need to be created
       else {
@@ -2261,16 +2246,16 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
       
         // Move everything in the "content" content zone
         while (this.firstChild) {
-          content.appendChild(t<span class="branch-1 cbranch-no" title="branch not covered" >his.firstChil</span>d);
+          content.appendChild(this.firstChild);
         }
       
         // Add the content zones in the wrapper
-        wrapper.appendChild(headerWrapper);<span class="branch-2 cbranch-no" title="branch not covered" ></span>
-        wrapper.appendChild(content);
+        wrapper.appendChild(headerWrapper);
+        wrapper.appendChild(con<span class="branch-1 cbranch-no" title="branch not covered" >tent);</span>
         wrapper.appendChild(footer);
       }
     
-      // Add the wrapper to the dialog
+      // Add the wrapper to the dialog<span class="branch-2 cbranch-no" title="branch not covered" ></span>
       this.appendChild(wrapper);
     }
     
@@ -2311,7 +2296,7 @@ export default Dialog;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Oct 09 2019 15:39:41 GMT+0200 (Central European Summer Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Oct 11 2019 16:09:14 GMT+0200 (Central European Summer Time)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

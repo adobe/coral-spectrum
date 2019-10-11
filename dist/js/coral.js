@@ -20704,11 +20704,8 @@ var Coral = (function (exports) {
     el0.setAttribute("handle", "headerWrapper");
     var el1 = document.createTextNode("\n  ");
     el0.appendChild(el1);
-    var el2 = this["dragIcon"] = document.createElement("coral-icon");
-    el2.setAttribute("icon", "dragHandle");
-    el2.setAttribute("handle", "dragIcon");
-    el2.className += " _coral-Dialog-dragIcon";
-    el2.setAttribute("hidden", "");
+    var el2 = document.createElement("div");
+    el2.className += " _coral-Dialog-dragZone";
     el0.appendChild(el2);
     var el3 = document.createTextNode("\n");
     el0.appendChild(el3);
@@ -21212,9 +21209,9 @@ var Coral = (function (exports) {
           handle: 'header',
           tagName: 'coral-dialog-header',
           insert: function insert(header) {
-            header.classList.add("".concat(CLASSNAME$6, "-title")); // Position the header between the drag icon and the type icon
+            header.classList.add("".concat(CLASSNAME$6, "-title"));
 
-            this._elements.headerWrapper.insertBefore(header, this._elements.dragIcon.nextElementSibling);
+            this._elements.headerWrapper.appendChild(header);
           },
           set: function set() {
             // Stop observing the old header and observe the new one
@@ -21466,14 +21463,12 @@ var Coral = (function (exports) {
         if (this._movable) {
           var dragAction = new DragAction(this);
           dragAction.handle = this._elements.headerWrapper;
-          this._elements.dragIcon.hidden = false;
         } else {
           // Disables any dragging interaction
           if (this.dragAction) {
             this.dragAction.destroy();
-          }
+          } // Recenter the dialog once it's not movable anymore
 
-          this._elements.dragIcon.hidden = true; // Recenter the dialog once it's not movable anymore
 
           this.center();
         }
@@ -74135,7 +74130,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.110";
+  var version = "1.0.0-beta.111";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

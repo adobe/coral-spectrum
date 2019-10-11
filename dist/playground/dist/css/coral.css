@@ -8211,8 +8211,15 @@ coral-dialog-footer:empty {
 ._coral-Dialog-wrapper {
   outline: none;
 }
-._coral-Dialog-dragIcon {
-  margin-top: 3px;
+coral-dialog-header {
+  z-index: 1;
+}
+._coral-Dialog-dragZone {
+  position: absolute;
+  width: calc(100% + calc(40px * 2));
+  height: calc(100% + calc(40px - 16px));
+  left: calc(-1 * 40px);
+  top: calc(-1 * 40px);
 }
 ._coral-Dialog--dismissible ._coral-Dialog-closeButton {
   display: inline-flex;
