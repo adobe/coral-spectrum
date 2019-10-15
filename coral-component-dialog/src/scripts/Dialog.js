@@ -186,7 +186,8 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
       tagName: 'coral-dialog-header',
       insert: function(header) {
         header.classList.add(`${CLASSNAME}-title`);
-        this._elements.headerWrapper.appendChild(header);
+        // Position the header between the drag zone and the type icon
+        this._elements.headerWrapper.insertBefore(header, this._elements.dragZone.nextElementSibling);
       },
       set: function() {
         // Stop observing the old header and observe the new one
