@@ -59,13 +59,9 @@ describe('StepList', function() {
       window.__html__['StepList.base.html']
     );
     
-    const el = new StepList();
-    el.items.add();
-    el.items.add();
-    el.items.add();
     helpers.cloneComponent(
       'should be possible to clone using js',
-      el
+      new StepList()
     );
   });
 
