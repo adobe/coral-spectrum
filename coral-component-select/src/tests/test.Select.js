@@ -1549,11 +1549,6 @@ describe('Select', function() {
             el._elements.list.items.getAll()[1].click();
             expect(el.value).to.equal('af');
             expect(changeSpy.callCount).to.equal(1);
-
-            // opens the overlay again
-            helpers.next(() => {
-              el._elements.button.click();
-            });
           }
           else if (openEventCount === 1) {
             expect(changeSpy.callCount).to.equal(1, 'selecting an item again must not trigger a change event');
@@ -1569,7 +1564,12 @@ describe('Select', function() {
 
           openEventCount++;
         });
-
+        
+        el.on('coral-select:_overlayclose', function() {
+          // opens the overlay the second time
+          el._elements.button.click();
+        });
+  
         // opens the overlay the first time
         el._elements.button.click();
       });
