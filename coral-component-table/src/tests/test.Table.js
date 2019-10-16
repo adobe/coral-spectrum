@@ -2305,7 +2305,7 @@ describe('Table', function() {
         table._elements.container.scrollLeft = scrollLeft;
       
         // Wait for scrolling
-        helpers.next(function() {
+        setTimeout(function() {
           headerCells.forEach(function(headerCell) {
             if (table._layoutStickyCellOnScroll) {
               var paddingLeft = Math.round(parseFloat(window.getComputedStyle(headerCell).paddingLeft));
@@ -2314,7 +2314,7 @@ describe('Table', function() {
           });
         
           done();
-        });
+        }, 500);
       });
     
       it('should not set a 0 width to the header cells if they are hidden', function(done) {
