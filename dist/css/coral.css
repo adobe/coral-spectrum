@@ -21170,6 +21170,12 @@ table[is="coral-table"]:not([orderable]) th[is="coral-table-headercell"] [coral-
   overflow: hidden;
   text-overflow: ellipsis;
 }
+._coral-Tabs-item ._coral-Tabs-itemLabel {
+  display: inline;
+}
+._coral-Tabs--horizontal ._coral-Tabs-selectionIndicator {
+  transition: transform 130ms ease-in-out, width 130ms ease-in-out;
+}
 .coral--light ._coral-Tabs-item:not(.is-disabled).is-invalid {
   color: rgb(201, 37, 45);
 }

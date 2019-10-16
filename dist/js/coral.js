@@ -14503,6 +14503,13 @@ var Coral = (function (exports) {
 
   var URL_REGEX = /\/|:|\./g;
   /**
+   Regex used to match unresolved templates e.g. for data-binding
+   
+   @ignore
+   */
+
+  var TEMPLATE_REGEX = /.*\{\{.+\}\}.*/g;
+  /**
    Regex used to split camel case icon names into more screen-reader friendly alt text.
    
    @ignore
@@ -14757,6 +14764,15 @@ var Coral = (function (exports) {
         if (!this._size) {
           this.size = size.SMALL;
         }
+
+        var img = this.querySelector("img:not(.".concat(CLASSNAME$1, "--image)"));
+
+        if (img) {
+          this._elements.image = img;
+          this._hasRawImage = true;
+          this.icon = img.getAttribute('src');
+          this._hasRawImage = false;
+        }
       }
     }, {
       key: "icon",
@@ -14771,7 +14787,21 @@ var Coral = (function (exports) {
         if (icon !== this._icon || this.hasAttribute('_context')) {
           this._icon = icon;
 
-          this._reflectAttribute('icon', this._icon); // Remove image and SVG elements
+          this._reflectAttribute('icon', this._icon); // Ignore unresolved templates
+
+
+          if (this._icon.match(TEMPLATE_REGEX)) {
+            return;
+          } // Use the existing img
+
+
+          if (this._hasRawImage) {
+            this._elements.image.classList.add(CLASSNAME$1, "".concat(CLASSNAME$1, "--image"));
+
+            this._updateAltText();
+
+            return;
+          } // Remove image and SVG elements
 
 
           ['image', 'svg'].forEach(function (type) {
@@ -20704,8 +20734,9 @@ var Coral = (function (exports) {
     el0.setAttribute("handle", "headerWrapper");
     var el1 = document.createTextNode("\n  ");
     el0.appendChild(el1);
-    var el2 = document.createElement("div");
+    var el2 = this["dragZone"] = document.createElement("div");
     el2.className += " _coral-Dialog-dragZone";
+    el2.setAttribute("handle", "dragZone");
     el0.appendChild(el2);
     var el3 = document.createTextNode("\n");
     el0.appendChild(el3);
@@ -21209,9 +21240,9 @@ var Coral = (function (exports) {
           handle: 'header',
           tagName: 'coral-dialog-header',
           insert: function insert(header) {
-            header.classList.add("".concat(CLASSNAME$6, "-title"));
+            header.classList.add("".concat(CLASSNAME$6, "-title")); // Position the header between the drag zone and the type icon
 
-            this._elements.headerWrapper.appendChild(header);
+            this._elements.headerWrapper.insertBefore(header, this._elements.dragZone.nextElementSibling);
           },
           set: function set() {
             // Stop observing the old header and observe the new one
@@ -74130,7 +74161,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.111";
+  var version = "1.0.0-beta.112";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
