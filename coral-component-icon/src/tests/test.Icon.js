@@ -457,6 +457,23 @@ describe('Icon', function() {
       });
     });
     
+    describe('IMG', function() {
+      it('should use the existing img', function() {
+        const el = helpers.build('<coral-icon><img id="img" src="image.jpg"/></coral-icon>');
+        const img = document.getElementById('img');
+        expect(el.icon).to.equal(img.getAttribute('src'));
+        expect(el.getAttribute('role')).to.equal('presentation');
+        expect(img.getAttribute('alt')).to.equal('');
+      });
+    });
+    
+    describe('Template', function() {
+      it('should ignore unresolved templates', function() {
+        const el = helpers.build('<coral-icon icon="image-{{index}}.jpg"></coral-icon>');
+        expect(el.querySelector('img')).to.equal(null);
+      });
+    });
+    
     describe('Compat', function() {
       let warn;
       let called = 0;

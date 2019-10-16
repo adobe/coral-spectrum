@@ -57,6 +57,13 @@ const resolveIconsPath = (iconsPath) => {
 const URL_REGEX = /\/|:|\./g;
 
 /**
+ Regex used to match unresolved templates e.g. for data-binding
+ 
+ @ignore
+ */
+const TEMPLATE_REGEX = /.*\{\{.+\}\}.*/g;
+
+/**
  Regex used to split camel case icon names into more screen-reader friendly alt text.
  
  @ignore
@@ -156,6 +163,18 @@ class Icon extends BaseComponent(HTMLElement) {
     if (icon !== this._icon || this.hasAttribute('_context')) {
       this._icon = icon;
       this._reflectAttribute('icon', this._icon);
+      
+      // Ignore unresolved templates
+      if (this._icon.match(TEMPLATE_REGEX)) {
+        return;
+      }
+      
+      // Use the existing img
+      if (this._hasRawImage) {
+        this._elements.image.classList.add(CLASSNAME, `${CLASSNAME}--image`);
+        this._updateAltText();
+        return;
+      }
   
       // Remove image and SVG elements
       ['image', 'svg'].forEach((type) => {
@@ -447,6 +466,14 @@ class Icon extends BaseComponent(HTMLElement) {
     // Set default size
     if (!this._size) {
       this.size = size.SMALL;
+    }
+    
+    const img = this.querySelector(`img:not(.${CLASSNAME}--image)`);
+    if (img) {
+      this._elements.image = img;
+      this._hasRawImage = true;
+      this.icon = img.getAttribute('src');
+      this._hasRawImage = false;
     }
   }
 }
