@@ -1571,7 +1571,9 @@ describe('Select', function() {
         });
   
         // opens the overlay the first time
-        el._elements.button.click();
+        helpers.next(() => {
+          el._elements.button.click();
+        });
       });
 
       it('should not trigger new change while we are updating items in the change callback', function(done) {
