@@ -524,8 +524,7 @@ describe('TabList', function() {
       expect(item1.selected).to.be.true;
     });
     
-    // @flaky
-    it.skip('should set the line under the selected item', function(done) {
+    it('should set the line under the selected item', function(done) {
       const el = helpers.build(window.__html__['TabList.selectedItem.html']);
       const wait = el._wait;
       el._wait = 0;
@@ -536,7 +535,7 @@ describe('TabList', function() {
         expect(el._elements.line.hidden).to.be.false;
         
         done();
-      }, wait);
+      }, wait * 2);
     });
   
     it('should set the line under the newly selected item', function(done) {
@@ -552,7 +551,7 @@ describe('TabList', function() {
         expect(el._elements.line.hidden).to.be.false;
         
         done();
-      }, wait);
+      }, wait * 2);
     });
   
     it('should set the line under the selected item after switching orientation', function(done) {
@@ -569,7 +568,7 @@ describe('TabList', function() {
         expect(el._elements.line.hidden).to.be.false;
         
         done();
-      }, wait);
+      }, wait * 2);
     });
   
     it('should hide the line if no selected item', function(done) {
