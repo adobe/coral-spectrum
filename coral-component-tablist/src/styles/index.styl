@@ -22,6 +22,16 @@
 ._coral-Tabs-item {
   overflow: hidden;
   text-overflow: ellipsis;
+
+  ._coral-Tabs-itemLabel {
+    display: inline;
+  }
+}
+
+// @spectrum animation
+._coral-Tabs--horizontal ._coral-Tabs-selectionIndicator {
+  transition: transform var(--spectrum-medium-tabs-selection-indicator-animation-duration) ease-in-out,
+              width var(--spectrum-medium-tabs-selection-indicator-animation-duration) ease-in-out;
 }
 
 @require 'light';
