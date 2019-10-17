@@ -12,7 +12,6 @@
 
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Overlay} from '../../../coral-component-overlay';
-import {BaseOverlay} from '../../../coral-base-overlay';
 
 describe('Overlay', function() {
   let overlay;
@@ -231,6 +230,34 @@ describe('Overlay', function() {
         overlay.within = document.body;
         expect(overlay.within).to.equal(document.body);
         expect(findPopperModifier('preventOverflow').boundariesElement).to.equal(document.body);
+      });
+      
+      it('should support "scrollParent"', function() {
+        expect(overlay.within).to.equal('scrollParent');
+        expect(findPopperModifier('preventOverflow').boundariesElement).to.equal('scrollParent');
+      });
+      
+      it('should support "window"', function() {
+        overlay.within = 'window';
+        expect(overlay.within).to.equal('window');
+        expect(findPopperModifier('preventOverflow').boundariesElement).to.equal('window');
+      });
+  
+      it('should support "viewport"', function() {
+        overlay.within = 'viewport';
+        expect(overlay.within).to.equal('viewport');
+        expect(findPopperModifier('preventOverflow').boundariesElement).to.equal('viewport');
+      });
+  
+      it('should support string selector', function() {
+        const within = document.createElement('within');
+        within.id = 'within';
+        helpers.target.appendChild(within);
+        within.appendChild(overlay);
+        
+        overlay.within = within.id;
+        expect(overlay.within).to.equal(within.id);
+        expect(findPopperModifier('preventOverflow').boundariesElement).to.equal(within);
       });
     });
     

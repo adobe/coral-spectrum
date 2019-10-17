@@ -551,7 +551,21 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
         else if (modifier.name === 'preventOverflow') {
           modifier.enabled = this.collision !== collision.NONE;
           
-          modifier.boundariesElement = this.within;
+          const within = this.within;
+          let boundary;
+          // Check for allowed PopperJS strings
+          if (within instanceof HTMLElement || ['scrollParent', 'window', 'viewport'].indexOf(within) !== -1) {
+            boundary = within;
+          }
+          else if (typeof within === 'string') {
+            boundary = document.querySelector(within);
+            // Fallback to default if element is not found in the document
+            if (!(boundary instanceof HTMLElement)) {
+              boundary = 'scrollParent';
+            }
+          }
+          
+          modifier.boundariesElement = boundary;
           
           modifier.padding = this.withinOffset;
         }
