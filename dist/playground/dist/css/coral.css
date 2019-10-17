@@ -21170,7 +21170,7 @@ table[is="coral-table"]:not([orderable]) th[is="coral-table-headercell"] [coral-
   overflow: hidden;
   text-overflow: ellipsis;
 }
-._coral-Tabs-item ._coral-Tabs-itemLabel {
+._coral-Tabs-item ._coral-Tabs-itemLabel:not(:empty) {
   display: inline;
 }
 ._coral-Tabs--horizontal ._coral-Tabs-selectionIndicator {

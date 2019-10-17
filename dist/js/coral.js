@@ -19465,7 +19465,20 @@ var Coral = (function (exports) {
               modifier.enabled = _this4.inner;
             } else if (modifier.name === 'preventOverflow') {
               modifier.enabled = _this4.collision !== collision.NONE;
-              modifier.boundariesElement = _this4.within;
+              var within = _this4.within;
+              var boundary; // Check for allowed PopperJS strings
+
+              if (within instanceof HTMLElement || ['scrollParent', 'window', 'viewport'].indexOf(within) !== -1) {
+                boundary = within;
+              } else if (typeof within === 'string') {
+                boundary = document.querySelector(within); // Fallback to default if element is not found in the document
+
+                if (!(boundary instanceof HTMLElement)) {
+                  boundary = 'scrollParent';
+                }
+              }
+
+              modifier.boundariesElement = boundary;
               modifier.padding = _this4.withinOffset;
             }
           });
@@ -74161,7 +74174,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.112";
+  var version = "1.0.0-beta.113";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

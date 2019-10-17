@@ -12,7 +12,7 @@
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
-  <a href="./" style="display: flex; align-items: center;"><img src="./image/brand_logo.png" style="width:34px;"></a>
+  <a href="./" style="display: flex; align-items: center;"><img src="./image/brand_logo.svg" style="width:34px;"></a>
   
   <a href="identifiers.html">Reference</a>
   <a href="source.html">Source</a>
@@ -961,7 +961,21 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
         else if (modifier.name === &apos;preventOverflow&apos;) {
           modifier.enabled = this.collision !== collision.NONE;
           
-          modifier.boundariesElement = this.within;
+          const within = this.within;
+          let boundary;
+          // Check for allowed PopperJS strings
+          if (within instanceof HTMLElement || [&apos;scrollParent&apos;, &apos;window&apos;, &apos;viewport&apos;].indexOf(within) !== -1) {
+            boundary = within;
+          }
+          else if (typeof within === &apos;string&apos;) {
+            boundary = document.querySelector(within);
+            // Fallback to default if element is not found in the document
+            if (!(boundary instanceof HTMLElement)) {
+              boundary = &apos;scrollParent&apos;;
+            }
+          }
+          
+          modifier.boundariesElement = boundary;
           
           modifier.padding = this.withinOffset;
         }
