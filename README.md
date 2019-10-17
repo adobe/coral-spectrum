@@ -1,4 +1,4 @@
-# Coral Spectrum
+# Coral Spectrum [![Build Status](https://travis-ci.org/adobe/coral-spectrum.svg?branch=master)](https://travis-ci.org/adobe/coral-spectrum)
 
 ## A JavaScript library of Web Components following Spectrum design patterns.
 

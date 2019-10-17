@@ -26,7 +26,7 @@ const config = {
       option: {
         accessor: {access: ['public']},
         brand: {
-          logo: path.join(root, 'coral-guide/assets/coral.png'),
+          logo: path.join(root, 'coral-guide/assets/adobe_logo-2.svg'),
           title: 'Coral Spectrum',
           repository: 'https://github.com/adobe/coral-spectrum',
           site: 'http://opensource.adobe.com/coral-spectrum/dist/documentation'

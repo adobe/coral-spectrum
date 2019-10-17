@@ -140,28 +140,38 @@
         }
       }
     }
-    
-    // Insert examples iframe
+  
     var example = document.querySelector('a[href*="../examples/"]');
     if (example) {
-      var id = new Date();
-      example.insertAdjacentHTML('beforebegin',
-        '<iframe id="'+ id +'" style="height:600px;border:0;width:100%;" src="'+ example.href +'"></iframe>');
-      
-      var iframe = document.getElementById(id);
-      iframe.onload = function() {
-        if (iframe.src.indexOf('shell') === -1) {
-          var content = iframe.contentDocument;
-          iframe.style.height = content.body.scrollHeight + 36 + 'px';
-          content.documentElement.style.overflowY = 'hidden';
-          
-          content.documentElement.onclick = function() {
-            iframe.style.height = content.body.scrollHeight + 36 + 'px';
-          };
-        }
-      };
-      example.remove();
+      example.target = '_blank';
+      example.textContent = 'Examples';
     }
+    
+    var footer = document.querySelector('footer');
+    if (footer) {
+      footer.textContent = '© Adobe. All rights reserved.';
+    }
+    // Insert examples iframe
+    // var example = document.querySelector('a[href*="../examples/"]');
+    // if (example) {
+    //   var id = new Date();
+    //   example.insertAdjacentHTML('beforebegin',
+    //     '<iframe id="'+ id +'" style="height:600px;border:0;width:100%;" src="'+ example.href +'"></iframe>');
+    //
+    //   var iframe = document.getElementById(id);
+    //   iframe.onload = function() {
+    //     if (iframe.src.indexOf('shell') === -1) {
+    //       var content = iframe.contentDocument;
+    //       iframe.style.height = content.body.scrollHeight + 36 + 'px';
+    //       content.documentElement.style.overflowY = 'hidden';
+    //
+    //       content.documentElement.onclick = function() {
+    //         iframe.style.height = content.body.scrollHeight + 36 + 'px';
+    //       };
+    //     }
+    //   };
+    //   example.remove();
+    // }
     
     document.body.classList.add('is-ready');
     
