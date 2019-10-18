@@ -334,6 +334,7 @@ pre.prettyprint > code,
 .identifier-dir-tree-header,
 table.summary thead,
 table.files-summary thead,
+table.params thead,
 table thead {
   font-weight: bold;
   text-transform: uppercase;
@@ -345,6 +346,7 @@ table thead {
 
 table.summary td,
 table.files-summary td,
+table.params td,
 table td {
   padding: 8px;
 }
