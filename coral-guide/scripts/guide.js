@@ -140,12 +140,6 @@
         }
       }
     }
-  
-    var example = document.querySelector('a[href*="../examples/"]');
-    if (example) {
-      example.target = '_blank';
-      example.textContent = 'Examples';
-    }
     
     var footer = document.querySelector('footer');
     if (footer) {

@@ -38,7 +38,9 @@ class Enhancer {
             doc.examples.unshift('<caption>JS constructor</caption>\nnew '+ item.tagValue +'();');
             
             doc.see = doc.see || [];
-            doc.see.push('../examples/' + doc.memberof.split('/')[1] + '.html');
+            
+            const component = doc.memberof.split('/')[1].replace('coral-', '').replace('component-', '');
+            doc.see.push('../examples/#' + component);
           }
           
           if (item.tagName === '@base') {
