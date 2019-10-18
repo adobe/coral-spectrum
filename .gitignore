@@ -7,3 +7,8 @@
 /coral-*/src/styles/index.css
 /coral-*/README.md
 /coral-*/dist
+
+# OS Cache Files
+.DS_Store
+thumbs.db
+.vscode
