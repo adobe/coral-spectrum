@@ -4470,6 +4470,16 @@ body,
 .coral--darkest .coral-Form-fieldset-legend {
   color: rgb(239, 239, 239);
 }
+.coral-FixedColumn {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.coral-FixedColumn-column {
+  box-sizing: border-box;
+  margin: 0 8px;
+  width: 512px;
+}
 [hidden] {
   display: none !important;
 }
@@ -4510,18 +4520,18 @@ body,
   cursor: grab;
 }
 .u-coral-padding {
-  padding: 15px !important;
+  padding: 16px !important;
 }
 .u-coral-padding-horizontal {
-  padding-left: 15px !important;
-  padding-right: 15px !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
 }
 .u-coral-padding-vertical {
-  padding-top: 15px !important;
-  padding-bottom: 15px !important;
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
 }
 .u-coral-margin {
-  margin: 15px !important;
+  margin: 16px !important;
 }
 .u-coral-noPadding {
   padding: 0 !important;
@@ -8210,6 +8220,9 @@ coral-dialog-footer:empty {
 }
 ._coral-Dialog-wrapper {
   outline: none;
+}
+._coral-Dialog-wrapper:not(.is-open) ._coral-Dialog:not(._coral-Dialog--fullscreen):not(._coral-Dialog--fullscreenTakeover) {
+  pointer-events: none;
 }
 coral-dialog-header {
   z-index: 1;

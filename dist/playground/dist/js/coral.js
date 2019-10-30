@@ -74174,7 +74174,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.114";
+  var version = "1.0.0-beta.115";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
@@ -74491,15 +74491,15 @@
     var el20 = document.createTextNode("\n    ");
     el11.appendChild(el20);
     var el21 = this["overlay"] = document.createElement("coral-popover");
+    el21.id = data_0["commons"]["getUID"]();
     el21.setAttribute("handle", "overlay");
     el21.className += " _coral-Playground-overlay";
     el21.setAttribute("trapfocus", "on");
     el21.setAttribute("focusonshow", "on");
     el21.setAttribute("target", "._coral-Playground-settings-action");
     el21.setAttribute("role", "presentation");
-    el21.setAttribute("offset", "-1");
-    el21.setAttribute("lengthoffset", "-100%");
-    el21.setAttribute("breadthoffset", "100%");
+    el21.setAttribute("placement", "bottom");
+    el21.setAttribute("smart", "");
     var el22 = document.createTextNode("\n      ");
     el21.appendChild(el22);
     var el23 = document.createElement("coral-popover-content");
@@ -92300,14 +92300,20 @@
       _this._config = config; // Template
 
       _this._elements = {};
-      template$_.call(_this._elements); // Events
+      template$_.call(_this._elements, {
+        commons: commons
+      });
+      var overlayId = _this._elements.overlay.id; // Events
 
-      _this._delegateEvents({
+      var events = {
         'click [handle="share"]': '_onShareClick',
-        'click [handle="run"]': '_onRunClick',
-        'change [handle="livereload"]': '_onLiveReloadChange',
-        'change [handle="screen"]': '_onScreenChange'
-      }); // Init editor
+        'click [handle="run"]': '_onRunClick'
+      }; // Overlay
+
+      events["global:capture:change #".concat(overlayId, " [handle=\"livereload\"]")] = '_onLiveReloadChange';
+      events["global:capture:change #".concat(overlayId, " [handle=\"screen\"]")] = '_onScreenChange';
+
+      _this._delegateEvents(events); // Init editor
 
 
       _this._editor = new codemirror(_this._elements.editor, CODEMIRROR_CONFIG); // Bind editor
@@ -92490,6 +92496,8 @@
         (_this$classList = this.classList).remove.apply(_this$classList, SCREEN_CLASSES);
 
         this.classList.add("".concat(CLASS_NAME, "--").concat(this._screen));
+
+        this._elements.overlay.reposition();
 
         this._debounceTrigger('coral-playground:settingschange');
       }

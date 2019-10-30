@@ -49,6 +49,7 @@ h2 {
   background: #fafafa;
   border: solid 1px #ddd;
   padding: 8px;
+  overflow-x: auto;
 }
 
 #meet-coral-spectrum + p {
@@ -57,7 +58,7 @@ h2 {
 
 img:not([src*=".svg"]).logo {
   box-shadow: none;
-  padding: 40px;
+  padding: 40px 0;
   box-sizing: border-box;
 }
 
@@ -94,6 +95,9 @@ footer {
   box-shadow: none;
   padding: 0 24px !important;
   margin-top: 0 !important;
+  width: 256px;
+  transition: transform 160ms ease-in-out;
+  z-index: 10;
 }
 
 .navigation li {
@@ -124,9 +128,10 @@ body.is-ready {
   position: absolute;
   background-color: rgb(255, 255, 255);
   border-bottom: none;
-  left: 250px;
+  left: 256px;
   right: 0;
   width: auto;
+  overflow: auto;
 }
 
 .layout-container > header > a {
@@ -325,6 +330,7 @@ pre.prettyprint > code,
   border-radius: 4px;
   padding: 8px;
   margin-left: 0;
+  overflow-x: auto;
 }
 
 .import-path {
@@ -351,6 +357,10 @@ table td {
   padding: 8px;
 }
 
+table.summary td p {
+  line-height: 1.3;
+}
+
 code[data-ice="importPathCode"]:empty {
   display: none;
 }
@@ -362,4 +372,109 @@ code[data-ice="importPathCode"]:empty {
 [data-ice="exampleDocs"] h4,
 [data-ice="mixinExtends"] {
   display: none;
+}
+
+.nav-toggle-header {
+  display: none;
+  height: 48px;
+  box-sizing: border-box;
+  align-items: center;
+  padding: 0 16px;
+  justify-content: flex-end;
+  background-color: rgb(250, 250, 250);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  border-bottom: 1px solid rgb(234, 234, 234);
+}
+
+.nav-toggle-header .toggle-icon {
+  height: 22px;
+  width: 22px !important;
+  fill: currentColor;
+  color: rgb(110, 110, 110);
+  padding: 16px;
+  left: 0;
+  position: absolute;
+  cursor: pointer;
+}
+
+.nav-toggle-header .adobe-icon {
+  height: 32px;
+  width: 36px !important;
+  fill: currentColor;
+  color: rgb(225, 37, 27);
+}
+
+.nav-toggle-header h2 {
+  font-size: 20px;
+  color: rgb(44, 44, 44);
+  padding-left: 16px;
+  margin: 0;
+  font-weight: 700;
+}
+
+.nav-toggle-header a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.nav-toggle-overlay {
+  transition: opacity 160ms ease-in;
+  background-color: rgba(0, 0, 0, .4);
+  pointer-events: none;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 5;
+}
+
+@media screen and (max-width: 960px) {
+  .layout-container > header {
+    left: 0;
+    top: 48px;
+  }
+
+  .footer {
+    margin-left: 40px;
+  }
+
+  .content {
+    margin-left: 0;
+    margin-top: 98px;
+  }
+
+  .search-box {
+    display: none;
+  }
+
+  .navigation {
+    top: 48px;
+  }
+
+  .nav-toggle-header {
+    display: flex;
+  }
+
+  .nav-toggle-overlay.is-open {
+    pointer-events: auto;
+    opacity: 1;
+  }
+
+  .navigation > a:first-child {
+    display: none !important;
+  }
+
+  .navigation {
+    transform: translateX(-100%);
+  }
+
+  .navigation.is-open {
+    transform: translateX(0);
+  }
 }

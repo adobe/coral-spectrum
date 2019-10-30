@@ -32,9 +32,8 @@
     <ul class="manual-toc">
       
     <li data-ice="manualNav" class="indent-h1" data-link="manual/README.html"><a href="manual/README.html" data-ice="link">Coral Spectrum </a></li>
-<li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#a-javascript-library-of-web-components-following-spectrum-design-patterns-" data-ice="link">A JavaScript library of Web Components following Spectrum design patterns.</a></li>
-<li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#custom-elements-v1" data-ice="link">Custom Elements v1</a></li>
-<li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#spectrum" data-ice="link">Spectrum</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#spectrum" data-ice="link">Spectrum</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#angular--react--vue-js-compatibility" data-ice="link">Angular, React, Vue.js compatibility</a></li>
 <li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#showcase" data-ice="link">Showcase</a></li>
 <li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#getting-started" data-ice="link">Getting started</a></li>
 <li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#consuming" data-ice="link">Consuming</a></li>
@@ -98,6 +97,7 @@
     <li data-ice="manualNav" class="indent-h1" data-link="manual/styles.html"><a href="manual/styles.html" data-ice="link">Styles</a></li>
 <li data-ice="manualNav" class="indent-h2" data-link="manual/styles.html"><a href="manual/styles.html#theme" data-ice="link">Theme</a></li>
 <li data-ice="manualNav" class="indent-h2" data-link="manual/styles.html"><a href="manual/styles.html#css-only-components" data-ice="link">CSS only components</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#coral-fixedcolumn-and-coral-fixedcolumn-column" data-ice="link">coral-FixedColumn and coral-FixedColumn-column</a></li>
 <li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#coral-decoratedtextfield" data-ice="link">coral-DecoratedTextfield</a></li>
 <li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#icon-only" data-ice="link">Icon Only</a></li>
 <li data-ice="manualNav" class="indent-h4" data-link="manual/styles.html"><a href="manual/styles.html#button-only" data-ice="link">Button Only</a></li>
@@ -193,7 +193,40 @@
 </code></pre><h2 id="css-only-components">CSS only components</h2><p><strong>This section provides details on the few CSS-only components included in Coral Spectrum considered as public API.</strong></p>
 <p>There are some Coral Spectrum components that are markup and CSS only. They are not custom elements, and as such are used by 
 setting CSS selectors on normal HTML markup. </p>
-<h3 id="coral-decoratedtextfield">coral-DecoratedTextfield</h3><p>Renders a textfield with an embedded button, icon, or both.</p>
+<h3 id="coral-fixedcolumn-and-coral-fixedcolumn-column">coral-FixedColumn and coral-FixedColumn-column</h3><p>Fixed Column is a layout where each column has a fixed width and horizontally centered in the screen.</p>
+<pre><code><code class="source-code prettyprint">&lt;div class=&quot;coral-FixedColumn&quot;&gt;
+  &lt;div class=&quot;coral-FixedColumn-column&quot;&gt;
+    &lt;h3 class=&quot;coral-Heading coral-Heading--3&quot;&gt;Column 1&lt;/h3&gt;
+    &lt;input type=&quot;text&quot; style=&quot;width: 100%;&quot;&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;coral-FixedColumn&quot;&gt;
+  &lt;div class=&quot;coral-FixedColumn-column&quot;&gt;
+    &lt;h3 class=&quot;coral-Heading coral-Heading--3&quot;&gt;Column 1&lt;/h3&gt;
+    &lt;input type=&quot;text&quot; style=&quot;width: 100%;&quot;&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;coral-FixedColumn-column&quot;&gt;
+    &lt;h3 class=&quot;coral-Heading coral-Heading--3&quot;&gt;Column 2&lt;/h3&gt;
+    &lt;input type=&quot;text&quot; style=&quot;width: 100%;&quot;&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;coral-FixedColumn&quot;&gt;
+  &lt;div class=&quot;coral-FixedColumn-column&quot;&gt;
+    &lt;h3 class=&quot;coral-Heading coral-Heading--3&quot;&gt;Column 1&lt;/h3&gt;
+    &lt;input type=&quot;text&quot; style=&quot;width: 100%;&quot;&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;coral-FixedColumn-column&quot;&gt;
+    &lt;h3 class=&quot;coral-Heading coral-Heading--3&quot;&gt;Column 2&lt;/h3&gt;
+    &lt;input type=&quot;text&quot; style=&quot;width: 100%;&quot;&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;coral-FixedColumn-column&quot;&gt;
+    &lt;h3 class=&quot;coral-Heading coral-Heading--3&quot;&gt;Column 3&lt;/h3&gt;
+    &lt;input type=&quot;text&quot; style=&quot;width: 100%;&quot;&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code>
+</code></pre><h3 id="coral-decoratedtextfield">coral-DecoratedTextfield</h3><p>Renders a textfield with an embedded button, icon, or both.</p>
 <h4 id="icon-only">Icon Only</h4><pre><code><code class="source-code prettyprint">&lt;span class=&quot;coral-DecoratedTextfield&quot;&gt;
   &lt;coral-icon class=&quot;coral-DecoratedTextfield-icon&quot; icon=&quot;search&quot; size=&quot;XS&quot;&gt;&lt;/coral-icon&gt;
   &lt;input is=&quot;coral-textfield&quot; class=&quot;coral-DecoratedTextfield-input&quot;/&gt;
