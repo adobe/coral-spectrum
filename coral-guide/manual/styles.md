@@ -22,6 +22,45 @@ The default Coral Spectrum font styles cascade from `coral--light`, `coral--ligh
 There are some Coral Spectrum components that are markup and CSS only. They are not custom elements, and as such are used by 
 setting CSS selectors on normal HTML markup. 
 
+### coral-FixedColumn and coral-FixedColumn-column
+
+Fixed Column is a layout where each column has a fixed width and horizontally centered in the screen.
+
+```
+<div class="coral-FixedColumn">
+  <div class="coral-FixedColumn-column">
+    <h3 class="coral-Heading coral-Heading--3">Column 1</h3>
+    <input type="text" style="width: 100%;">
+  </div>
+</div>
+
+<div class="coral-FixedColumn">
+  <div class="coral-FixedColumn-column">
+    <h3 class="coral-Heading coral-Heading--3">Column 1</h3>
+    <input type="text" style="width: 100%;">
+  </div>
+  <div class="coral-FixedColumn-column">
+    <h3 class="coral-Heading coral-Heading--3">Column 2</h3>
+    <input type="text" style="width: 100%;">
+  </div>
+</div>
+
+<div class="coral-FixedColumn">
+  <div class="coral-FixedColumn-column">
+    <h3 class="coral-Heading coral-Heading--3">Column 1</h3>
+    <input type="text" style="width: 100%;">
+  </div>
+  <div class="coral-FixedColumn-column">
+    <h3 class="coral-Heading coral-Heading--3">Column 2</h3>
+    <input type="text" style="width: 100%;">
+  </div>
+  <div class="coral-FixedColumn-column">
+    <h3 class="coral-Heading coral-Heading--3">Column 3</h3>
+    <input type="text" style="width: 100%;">
+  </div>
+</div>
+```
+
 ### coral-DecoratedTextfield
 
 Renders a textfield with an embedded button, icon, or both.

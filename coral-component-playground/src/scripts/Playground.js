@@ -11,7 +11,7 @@
  */
 
 import {BaseComponent} from '../../../coral-base-component';
-import {transform, validate} from '../../../coral-utils';
+import {commons, transform, validate} from '../../../coral-utils';
 import '../../../coral-component-wait';
 import '../../../coral-component-button';
 import '../../../coral-component-popover';
@@ -87,15 +87,21 @@ class Playground extends BaseComponent(HTMLElement) {
     
     // Template
     this._elements = {};
-    base.call(this._elements);
+    base.call(this._elements, {commons});
+    
+    const overlayId = this._elements.overlay.id;
   
     // Events
-    this._delegateEvents({
+    const events = {
       'click [handle="share"]': '_onShareClick',
-      'click [handle="run"]': '_onRunClick',
-      'change [handle="livereload"]': '_onLiveReloadChange',
-      'change [handle="screen"]': '_onScreenChange'
-    });
+      'click [handle="run"]': '_onRunClick'
+    };
+  
+    // Overlay
+    events[`global:capture:change #${overlayId} [handle="livereload"]`] = '_onLiveReloadChange';
+    events[`global:capture:change #${overlayId} [handle="screen"]`] = '_onScreenChange';
+  
+    this._delegateEvents(events);
     
     // Init editor
     this._editor = new CodeMirror(this._elements.editor, CODEMIRROR_CONFIG);
@@ -163,6 +169,8 @@ class Playground extends BaseComponent(HTMLElement) {
     
     this.classList.remove(...SCREEN_CLASSES);
     this.classList.add(`${CLASS_NAME}--${this._screen}`);
+    
+    this._elements.overlay.reposition();
     
     this._debounceTrigger('coral-playground:settingschange');
   }

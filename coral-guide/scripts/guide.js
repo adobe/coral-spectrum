@@ -11,11 +11,55 @@
  */
 
 (function() {
-  document.head.insertAdjacentHTML('beforeend', '<link rel="icon" type="image/png" href="./manual/asset/favicon.png">');
+  document.head.insertAdjacentHTML('afterbegin', `
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="./manual/asset/favicon.ico">
+  `);
   
   document.addEventListener('DOMContentLoaded', function() {
-    var header = document.querySelector('.layout-container > header');
-    var nav = document.querySelector('.navigation');
+    document.body.insertAdjacentHTML('afterbegin', `
+      <div class="nav-toggle-overlay" id="nav-toggle-overlay"></div>
+      <div class="nav-toggle-header">
+        <svg id="nav-toggle-action" class="toggle-icon" viewBox="0 0 36 36" focusable="false" aria-hidden="true" role="img" class="spectrum-Icon spectrum-Icon--sizeS">
+          <rect height="4" rx="1" ry="1" width="28" x="4" y="16"></rect>
+          <rect height="4" rx="1" ry="1" width="28" x="4" y="6"></rect>
+          <rect height="4" rx="1" ry="1" width="28" x="4" y="26"></rect>
+        </svg>
+    
+        <a href="./">
+          <svg class="adobe-icon" viewBox="0 0 30 26" focusable="false"
+               aria-hidden="true" aria-label="Adobe logo">
+            <polygon points="19,0 30,0 30,26"></polygon>
+            <polygon points="11.1,0 0,0 0,26"></polygon>
+            <polygon points="15,9.6 22.1,26 17.5,26 15.4,20.8 10.2,20.8"></polygon>
+          </svg>
+          <h2>Coral Spectrum</h2>
+        </a>
+      </div>
+    `);
+    
+    const nav = document.querySelector('.navigation');
+    const header = document.querySelector('.layout-container > header');
+    
+    const navToggleAction = document.getElementById('nav-toggle-action');
+    const navToggleOverlay = document.getElementById('nav-toggle-overlay');
+    
+    navToggleAction.addEventListener('click', function() {
+      nav.classList.toggle('is-open', !nav.classList.contains('is-open'));
+      navToggleOverlay.classList.toggle('is-open', !navToggleOverlay.classList.contains('is-open'));
+    });
+    
+    navToggleOverlay.addEventListener('click', function() {
+      nav.classList.toggle('is-open', !nav.classList.contains('is-open'));
+      navToggleOverlay.classList.toggle('is-open', !navToggleOverlay.classList.contains('is-open'));
+    });
+    
+    nav.addEventListener('click', function(event) {
+      if (event.target.nodeName === 'A') {
+        nav.classList.remove('is-open');
+        navToggleOverlay.classList.remove('is-open');
+      }
+    });
     
     // Insert title
     var title = document.createElement('span');
@@ -139,6 +183,13 @@
           type.classList.add('kind-event');
         }
       }
+    }
+    
+    // Correct import path
+    var importPaths = document.querySelectorAll('[data-ice="importPathCode"] a');
+    for (var i = 0; i < importPaths.length; i++) {
+      var fullPath = '/' + importPaths[i].getAttribute('href').split('/')[2];
+      importPaths[i].textContent += fullPath;
     }
     
     var footer = document.querySelector('footer');

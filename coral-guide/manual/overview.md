@@ -40,10 +40,11 @@ and lets us treat them like any other native element, setting properties, append
 
 ## Spectrum
 
-The current default theme is is an implementation of the [Spectrum](https://adobe.design) design specifications, Adobe’s design system.
+The current default theme is is an implementation of the [Spectrum](https://spectrum.adobe.com) design specifications, Adobe’s design system.
 Spectrum provides elements and tools to help product teams work more efficiently, and to make Adobe’s applications more cohesive.
 
-Coral Spectrum leverages the [Spectrum CSS](https://github.com/adobe/spectrum-css) framework to style components including the Spectrum SVG icons.   
+Coral Spectrum leverages the [Spectrum CSS](https://github.com/adobe/spectrum-css) framework to style 
+components including the [Spectrum SVG icons](https://spectrum.adobe.com/page/icons).   
 
 ## Accessibility
 

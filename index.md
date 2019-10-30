@@ -6,12 +6,12 @@ Coral Spectrum is a JavaScript library of Web Components following Spectrum desi
 
 ## Spectrum
 
-The current default theme is is an implementation of the [Spectrum](https://adobe.design) design 
+The current default theme is is an implementation of the [Spectrum](https://spectrum.adobe.com) design 
 specifications, Adobe’s design system. Spectrum provides elements and tools to help product teams work more 
 efficiently, and to make Adobe’s applications more cohesive.
  
 Coral Spectrum leverages the [Spectrum CSS](https://github.com/adobe/spectrum-css) framework to style 
-components including the Spectrum SVG icons. 
+components including the [Spectrum SVG icons](https://spectrum.adobe.com/page/icons). 
 
 ## Angular, React, Vue.js compatibility
 

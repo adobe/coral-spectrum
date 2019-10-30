@@ -10,8 +10,8 @@
     <coral-tooltip handle="sharetip" placement="left" interaction="off" target="_prev">URL copied to your clipboard</coral-tooltip>
     <button class="_coral-Playground-settings-button _coral-Playground-settings-action" variant="minimal" handle="gear" type="button" is="coral-button" role="combobox" aria-expanded="false" aria-haspopup="true"
             icon="gear"></button>
-    <coral-popover handle="overlay" class="_coral-Playground-overlay" trapfocus="on" focusonshow="on" target="._coral-Playground-settings-action"
-                   role="presentation" offset="-1" lengthoffset="-100%" breadthoffset="100%">
+    <coral-popover id="{{data.commons.getUID()}}" handle="overlay" class="_coral-Playground-overlay" trapfocus="on" focusonshow="on" target="._coral-Playground-settings-action"
+                   role="presentation" placement="bottom" smart>
       <coral-popover-content class="u-coral-padding">
         <div class="_coral-Playground-field">
           <div class="_coral-Playground-field-label">Live reload</div>
