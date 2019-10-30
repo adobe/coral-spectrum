@@ -391,40 +391,18 @@ describe('Popover', function() {
       expect(el.variant).to.equal(Popover.variant._COACHMARK);
     });
     
-    it('should set .is-selected on target when opened/closed', function() {
-      var target = helpers.overlay.createStaticTarget();
-
-      el.set({
-        content: 'A popover',
-        target: target
-      });
+    it('should set .is-selected on target when opened/closed if target is a button', function() {
+      const div = helpers.build(window.__html__['Popover.button.html']);
+      const button = div.querySelector('button');
+      const el = div.querySelector('coral-popover');
 
       el.open = true;
       
-      expect(target.classList.contains('is-selected')).to.be.true;
+      expect(button.classList.contains('is-selected')).to.be.true;
 
       el.open = false;
       
-      expect(target.classList.contains('is-selected')).to.be.false;
-    });
-
-    it('should not blow away .is-selected on target if it already has it', function() {
-      var target = helpers.overlay.createStaticTarget();
-  
-      target.classList.add('is-selected');
-  
-      el.set({
-        content: 'A popover',
-        target: target
-      });
-  
-      el.open = true;
-  
-      expect(target.classList.contains('is-selected')).to.be.true;
-  
-      el.open = false;
-  
-      expect(target.classList.contains('is-selected')).to.be.true;
+      expect(button.classList.contains('is-selected')).to.be.false;
     });
 
     it('should not close for clicks on elements that are subsequently removed', function() {

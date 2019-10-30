@@ -304,19 +304,9 @@ class Popover extends Overlay {
   
     const target = this._getTarget();
     if (target) {
-      if (this.open) {
-        // Check if the target already has is-selected
-        this._targetWasSelected = target.classList.contains('is-selected');
-      
-        // Only bother adding the class if the target doesn't have it
-        if (!this._targetWasSelected) {
-          // Highlight target
-          target.classList.add('is-selected');
-        }
-      }
-      else if (!this._targetWasSelected) {
-        // When closed, only remove the class if the target didn't have it before
-        target.classList.remove('is-selected');
+      const is = target.getAttribute('is');
+      if (is === 'coral-button' || is === 'coral-anchorbutton') {
+        target.classList.toggle('is-selected', this.open);
       }
     }
   }
