@@ -46,6 +46,11 @@ coral-dialog-footer {
 // @compat
 ._coral-Dialog-wrapper {
   outline: none;
+
+  // @spectrum
+  &:not(.is-open) ._coral-Dialog:not(._coral-Dialog--fullscreen):not(._coral-Dialog--fullscreenTakeover) {
+    pointer-events: none;
+  }
 }
 
 // Stay on top of dragZone
