@@ -45,10 +45,12 @@ for (const key in Icon.size) {
  A button that is meant to grab the user's attention.
  @property {String} PRIMARY
  A button that is meant to grab the user's attention.
- @property {String} SECONDARY
- A button that indicates that the button's action is the secondary action.
  @property {String} QUIET
  A quiet button that indicates that the button's action is the primary action.
+ @property {String} SECONDARY
+ A button that indicates that the button's action is the secondary action.
+ @property {String} QUIET_SECONDARY
+ A quiet secondary button.
  @property {String} ACTION
  An action button.
  @property {String} QUIET_ACTION
@@ -57,6 +59,10 @@ for (const key in Icon.size) {
  A quiet minimalistic button.
  @property {String} WARNING
  A button that indicates that the button's action is dangerous.
+ @property {String} QUIET_WARNING
+ A quiet warning button,
+ @property {String} OVER_BACKGROUND
+ A button to be placed on top of colored background.
  @property {String} DEFAULT
  The default button look and feel.
  */
@@ -69,6 +75,9 @@ const variant = {
   WARNING: 'warning',
   ACTION: 'action',
   QUIET_ACTION: 'quietaction',
+  QUIET_SECONDARY: 'quietsecondary',
+  QUIET_WARNING: 'quietwarning',
+  OVER_BACKGROUND: 'overbackground',
   DEFAULT: 'default',
   // Private to be used for custom Button classes like field buttons
   _CUSTOM: '_custom'
@@ -85,6 +94,7 @@ const ALL_VARIANT_CLASSES = [
   `${CLASSNAME}--warning`,
   `${CLASSNAME}--quiet`,
   `${ACTION_CLASSNAME}--quiet`,
+  `${CLASSNAME}--overBackground`,
 ];
 
 const VARIANT_MAP = {
@@ -97,6 +107,9 @@ const VARIANT_MAP = {
   default: [CLASSNAME, ALL_VARIANT_CLASSES[1]],
   action: [ACTION_CLASSNAME],
   quietaction: [ACTION_CLASSNAME, ALL_VARIANT_CLASSES[5]],
+  quietsecondary: [CLASSNAME, ALL_VARIANT_CLASSES[2], ALL_VARIANT_CLASSES[4]],
+  quietwarning: [CLASSNAME, ALL_VARIANT_CLASSES[3], ALL_VARIANT_CLASSES[4]],
+  overbackground: [CLASSNAME, ALL_VARIANT_CLASSES[6]]
 };
 
 /**

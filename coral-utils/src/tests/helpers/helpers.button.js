@@ -32,12 +32,15 @@ const testButton = function(Constructor, tagName, baseTagName) {
         expect(Constructor.variant.PRIMARY).to.equal('primary');
         expect(Constructor.variant.WARNING).to.equal('warning');
         expect(Constructor.variant.QUIET).to.equal('quiet');
+        expect(Constructor.variant.QUIET_SECONDARY).to.equal('quietsecondary');
+        expect(Constructor.variant.QUIET_WARNING).to.equal('quietwarning');
         expect(Constructor.variant.ACTION).to.equal('action');
         expect(Constructor.variant.QUIET_ACTION).to.equal('quietaction');
         expect(Constructor.variant.MINIMAL).to.equal('minimal');
+        expect(Constructor.variant.OVER_BACKGROUND).to.equal('overbackground');
         expect(Constructor.variant.DEFAULT).to.equal('default');
         expect(Constructor.variant._CUSTOM).to.equal('_custom');
-        expect(Object.keys(Constructor.variant).length).to.equal(10);
+        expect(Object.keys(Constructor.variant).length).to.equal(13);
       });
   
       it('should define the iconPositions in an enum', function() {
