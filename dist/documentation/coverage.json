@@ -1,6 +1,6 @@
 {
-  "coverage": "65.21%",
-  "expectCount": 3533,
+  "coverage": "65.23%",
+  "expectCount": 3532,
   "actualCount": 2304,
   "files": {
     "coral-spectrum/coral-base-button/src/scripts/BaseButton.js": {
@@ -8,25 +8,25 @@
       "actualCount": 23,
       "undocumentLines": [
         31,
-        78,
-        79,
-        81,
+        87,
+        88,
         90,
-        142,
-        149,
+        100,
         155,
-        214,
-        235,
-        256,
-        277,
-        293,
-        324,
-        343,
-        378,
-        390,
-        455,
-        475,
-        505
+        162,
+        168,
+        227,
+        248,
+        269,
+        290,
+        306,
+        337,
+        356,
+        391,
+        403,
+        468,
+        488,
+        518
       ]
     },
     "coral-spectrum/coral-base-component/src/scripts/BaseComponent.js": {
@@ -1343,7 +1343,7 @@
       ]
     },
     "coral-spectrum/coral-component-popover/src/scripts/Popover.js": {
-      "expectCount": 40,
+      "expectCount": 39,
       "actualCount": 15,
       "undocumentLines": [
         20,
@@ -1362,15 +1362,14 @@
         124,
         226,
         274,
-        309,
-        333,
-        336,
-        344,
-        364,
-        379,
-        395,
-        411,
-        461
+        323,
+        326,
+        334,
+        354,
+        369,
+        385,
+        401,
+        451
       ]
     },
     "coral-spectrum/coral-component-popover/src/scripts/PopoverContent.js": {

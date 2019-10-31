@@ -20049,10 +20049,12 @@ var Coral = (function (exports) {
    A button that is meant to grab the user's attention.
    @property {String} PRIMARY
    A button that is meant to grab the user's attention.
-   @property {String} SECONDARY
-   A button that indicates that the button's action is the secondary action.
    @property {String} QUIET
    A quiet button that indicates that the button's action is the primary action.
+   @property {String} SECONDARY
+   A button that indicates that the button's action is the secondary action.
+   @property {String} QUIET_SECONDARY
+   A quiet secondary button.
    @property {String} ACTION
    An action button.
    @property {String} QUIET_ACTION
@@ -20061,6 +20063,10 @@ var Coral = (function (exports) {
    A quiet minimalistic button.
    @property {String} WARNING
    A button that indicates that the button's action is dangerous.
+   @property {String} QUIET_WARNING
+   A quiet warning button,
+   @property {String} OVER_BACKGROUND
+   A button to be placed on top of colored background.
    @property {String} DEFAULT
    The default button look and feel.
    */
@@ -20075,6 +20081,9 @@ var Coral = (function (exports) {
     WARNING: 'warning',
     ACTION: 'action',
     QUIET_ACTION: 'quietaction',
+    QUIET_SECONDARY: 'quietsecondary',
+    QUIET_WARNING: 'quietwarning',
+    OVER_BACKGROUND: 'overbackground',
     DEFAULT: 'default',
     // Private to be used for custom Button classes like field buttons
     _CUSTOM: '_custom'
@@ -20082,7 +20091,7 @@ var Coral = (function (exports) {
 
   var CLASSNAME$5 = '_coral-Button';
   var ACTION_CLASSNAME = '_coral-ActionButton';
-  var ALL_VARIANT_CLASSES = ["".concat(CLASSNAME$5, "--cta"), "".concat(CLASSNAME$5, "--primary"), "".concat(CLASSNAME$5, "--secondary"), "".concat(CLASSNAME$5, "--warning"), "".concat(CLASSNAME$5, "--quiet"), "".concat(ACTION_CLASSNAME, "--quiet")];
+  var ALL_VARIANT_CLASSES = ["".concat(CLASSNAME$5, "--cta"), "".concat(CLASSNAME$5, "--primary"), "".concat(CLASSNAME$5, "--secondary"), "".concat(CLASSNAME$5, "--warning"), "".concat(CLASSNAME$5, "--quiet"), "".concat(ACTION_CLASSNAME, "--quiet"), "".concat(CLASSNAME$5, "--overBackground")];
   var VARIANT_MAP = {
     cta: [CLASSNAME$5, ALL_VARIANT_CLASSES[0]],
     primary: [CLASSNAME$5, ALL_VARIANT_CLASSES[0]],
@@ -20092,7 +20101,10 @@ var Coral = (function (exports) {
     minimal: [CLASSNAME$5, ALL_VARIANT_CLASSES[2], ALL_VARIANT_CLASSES[4]],
     default: [CLASSNAME$5, ALL_VARIANT_CLASSES[1]],
     action: [ACTION_CLASSNAME],
-    quietaction: [ACTION_CLASSNAME, ALL_VARIANT_CLASSES[5]]
+    quietaction: [ACTION_CLASSNAME, ALL_VARIANT_CLASSES[5]],
+    quietsecondary: [CLASSNAME$5, ALL_VARIANT_CLASSES[2], ALL_VARIANT_CLASSES[4]],
+    quietwarning: [CLASSNAME$5, ALL_VARIANT_CLASSES[3], ALL_VARIANT_CLASSES[4]],
+    overbackground: [CLASSNAME$5, ALL_VARIANT_CLASSES[6]]
   };
   /**
    Enumeration for {@link BaseButton} sizes.
@@ -22242,17 +22254,10 @@ var Coral = (function (exports) {
         var target = this._getTarget();
 
         if (target) {
-          if (this.open) {
-            // Check if the target already has is-selected
-            this._targetWasSelected = target.classList.contains('is-selected'); // Only bother adding the class if the target doesn't have it
+          var is = target.getAttribute('is');
 
-            if (!this._targetWasSelected) {
-              // Highlight target
-              target.classList.add('is-selected');
-            }
-          } else if (!this._targetWasSelected) {
-            // When closed, only remove the class if the target didn't have it before
-            target.classList.remove('is-selected');
+          if (is === 'coral-button' || is === 'coral-anchorbutton') {
+            target.classList.toggle('is-selected', this.open);
           }
         }
       }
@@ -74174,7 +74179,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.115";
+  var version = "1.0.0-beta.116";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
