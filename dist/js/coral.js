@@ -61667,7 +61667,7 @@ var Coral = (function (exports) {
     }, {
       key: "footer",
       get: function get() {
-        return this._getContentZone(this._elements.content);
+        return this._getContentZone(this._elements.footer);
       },
       set: function set(value) {
         this._setContentZone('footer', value, {
@@ -74179,7 +74179,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.116";
+  var version = "1.0.0-beta.117";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
