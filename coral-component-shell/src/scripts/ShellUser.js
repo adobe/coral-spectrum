@@ -155,7 +155,7 @@ class ShellUser extends BaseComponent(HTMLElement) {
    @contentzone
    */
   get footer() {
-    return this._getContentZone(this._elements.content);
+    return this._getContentZone(this._elements.footer);
   }
   set footer(value) {
     this._setContentZone('footer', value, {

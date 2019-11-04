@@ -53,6 +53,73 @@ describe('Shell.User', function() {
   });
   
   describe('API', function() {
+    let el;
+    beforeEach(() => {
+      el = helpers.build(new Shell.User());
+    });
+    afterEach(() => {
+      el = null;
+    });
+    
+    describe('#name', function() {
+      it('should return the content zone', function() {
+        expect(el.name.tagName).to.equal('CORAL-SHELL-USER-NAME');
+      });
+      
+      it('should set the content zone', function() {
+        const newContentZone = new Shell.User.Name();
+        el.name = newContentZone;
+        expect(el.name).to.equal(newContentZone);
+      });
+    });
+    
+    describe('#heading', function() {
+      it('should return the content zone', function() {
+        expect(el.heading.tagName).to.equal('CORAL-SHELL-USER-HEADING');
+      });
+  
+      it('should set the content zone', function() {
+        const newContentZone = new Shell.User.Heading();
+        el.heading = newContentZone;
+        expect(el.heading).to.equal(newContentZone);
+      });
+    });
+    
+    describe('#subheading', function() {
+      it('should return the content zone', function() {
+        expect(el.subheading.tagName).to.equal('CORAL-SHELL-USER-SUBHEADING');
+      });
+  
+      it('should set the content zone', function() {
+        const newContentZone = new Shell.User.Subheading();
+        el.subheading = newContentZone;
+        expect(el.subheading).to.equal(newContentZone);
+      });
+    });
+    
+    describe('#content', function() {
+      it('should return the content zone', function() {
+        expect(el.content.tagName).to.equal('CORAL-SHELL-USER-CONTENT');
+      });
+  
+      it('should set the content zone', function() {
+        const newContentZone = new Shell.User.Content();
+        el.content = newContentZone;
+        expect(el.content).to.equal(newContentZone);
+      });
+    });
+    
+    describe('#footer', function() {
+      it('should return the content zone', function() {
+        expect(el.footer.tagName).to.equal('CORAL-SHELL-USER-FOOTER');
+      });
+  
+      it('should set the content zone', function() {
+        const newContentZone = new Shell.User.Footer();
+        el.footer = newContentZone;
+        expect(el.footer).to.equal(newContentZone);
+      });
+    });
     
     describe('#avatar', function() {
       it('should default to avatar.DEFAULT', function() {
