@@ -131,7 +131,6 @@ body.is-ready {
   left: 256px;
   right: 0;
   width: auto;
-  overflow: auto;
 }
 
 .layout-container > header > a {
