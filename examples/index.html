@@ -20,7 +20,8 @@
       padding-left: 24px;
       overflow: scroll;
       background-color: rgb(250, 250, 250);
-      transition: transform 160ms ease-in-out;
+      visibility: visible;
+      transition: visibility 0ms linear 160ms, transform 160ms ease-in-out;
       position: relative;
       z-index: 10;
     }
@@ -86,12 +87,11 @@
     }
 
     .nav-toggle-header .toggle-icon {
-      height: 22px;
-      width: 22px !important;
+      height: 36px;
+      width: 36px;
       fill: currentColor;
       color: rgb(110, 110, 110);
-      padding: 16px;
-      left: 0;
+      left: 4px;
       position: absolute;
       cursor: pointer;
     }
@@ -150,10 +150,13 @@
 
       .example-List {
         transform: translateX(-100%);
+        visibility: hidden;
       }
 
       .example-List.is-open {
         transform: translateX(0);
+        transition-delay: 0;
+        visibility: visible;
       }
 
       .example-List coral-search {
@@ -165,28 +168,21 @@
 </head>
 <body class="coral--lightest">
   <div class="nav-toggle-overlay" id="nav-toggle-overlay"></div>
-  <div class="nav-toggle-header">
-    <svg id="nav-toggle-action" class="toggle-icon" viewBox="0 0 36 36" focusable="false" aria-hidden="true" role="img" class="spectrum-Icon spectrum-Icon--sizeS">
-      <rect height="4" rx="1" ry="1" width="28" x="4" y="16"></rect>
-      <rect height="4" rx="1" ry="1" width="28" x="4" y="6"></rect>
-      <rect height="4" rx="1" ry="1" width="28" x="4" y="26"></rect>
-    </svg>
-
+  <div class="nav-toggle-header" role="banner">
     <a href="../documentation">
-      <svg class="adobe-icon" viewBox="0 0 30 26" focusable="false"
-           aria-hidden="true" aria-label="Adobe logo">
+      <svg class="adobe-icon" viewBox="0 0 30 26" focusable="false" aria-label="Adobe" role="img">
         <polygon points="19,0 30,0 30,26"></polygon>
         <polygon points="11.1,0 0,0 0,26"></polygon>
         <polygon points="15,9.6 22.1,26 17.5,26 15.4,20.8 10.2,20.8"></polygon>
       </svg>
       <h1>Coral Spectrum</h1>
     </a>
+    <button is="coral-button" variant="quietaction" icon="spectrum-css-icon-TripleGripper" id="nav-toggle-action" class="toggle-icon" aria-label="Show Navigation Menu"></button>
   </div>
 
-  <div id="side-nav" class="example-List">
+  <div id="side-nav" class="example-List" role="complementary">
     <a class="example-Logo" href="../documentation">
-      <svg viewBox="0 0 30 26" focusable="false"
-           aria-hidden="true" aria-label="Adobe logo">
+      <svg viewBox="0 0 30 26" focusable="false" aria-label="Adobe" role="img">
         <polygon points="19,0 30,0 30,26"></polygon>
         <polygon points="11.1,0 0,0 0,26"></polygon>
         <polygon points="15,9.6 22.1,26 17.5,26 15.4,20.8 10.2,20.8"></polygon>
@@ -195,11 +191,14 @@
       <h1>Coral Spectrum</h1>
     </a>
 
-    <coral-search id="example-search" placeholder="Search"></coral-search>
+    <label id="example-search-label" class="u-coral-screenReaderOnly">Search</label>
+    <coral-search id="example-search" placeholder="Search" role="search" labelledBy="example-search-label"></coral-search>
 
     <nav is="coral-sidenav" id="example-list"></nav>
   </div>
-  <iframe class="example-Preview" id="example-preview"></iframe>
+  <main id="example-main">
+    <iframe class="example-Preview" id="example-preview" title="Example Preview"></iframe>
+  </main>
 
   <script>
     const sideNav = document.getElementById('side-nav');
@@ -209,11 +208,15 @@
     navToggleAction.addEventListener('click', function() {
       sideNav.classList.toggle('is-open', !sideNav.classList.contains('is-open'));
       navToggleOverlay.classList.toggle('is-open', !navToggleOverlay.classList.contains('is-open'));
+      navToggleAction.setAttribute('aria-expanded', sideNav.classList.contains('is-open'));
+      navToggleAction.selected = sideNav.classList.contains('is-open');
     });
 
     navToggleOverlay.addEventListener('click', function() {
       sideNav.classList.toggle('is-open', !sideNav.classList.contains('is-open'));
       navToggleOverlay.classList.toggle('is-open', !navToggleOverlay.classList.contains('is-open'));
+      navToggleAction.setAttribute('aria-expanded', sideNav.classList.contains('is-open'));
+      navToggleAction.selected = sideNav.classList.contains('is-open');
     });
 
     const components = [
@@ -273,6 +276,7 @@
     ];
 
     const list = document.getElementById('example-list');
+    const main = document.getElementById('example-main');
     const preview = document.getElementById('example-preview');
     const search = document.getElementById('example-search');
 
@@ -296,13 +300,19 @@
 
     components.forEach(function(component) {
       const name = component.split('-').pop();
+      const selected = location.hash.slice(1) === name;
       const item = list.items.add({
         content: {
           textContent: name
         },
-        selected: location.hash.slice(1) === name
+        selected: selected,
+        href: '../' + component + '/examples/index.html',
+        ariaCurrent: (selected ? 'page' : undefined)
       });
-      item.setAttribute('src', '../' + component + '/examples/index.html');
+      selected && item.setAttribute('aria-current', 'page');
+      item.on('click', function(event) {
+        event.preventDefault()
+      });
     });
 
     list.on('coral-sidenav:change', function(event) {
@@ -313,13 +323,26 @@
           location.hash = event.detail.selection.textContent.trim();
 
           requestAnimationFrame(function() {
-            sideNav.classList.remove('is-open');
-            navToggleOverlay.classList.remove('is-open');
+            if (sideNav.classList.contains('is-open')) {
+              sideNav.classList.remove('is-open');
+              navToggleOverlay.classList.remove('is-open');
+              navToggleAction.setAttribute('aria-expanded', false);
+              navToggleAction.selected = false;
+              navToggleAction.focus();
+            }
           });
         }
       };
 
-      XMLHttpRequest.open('GET', event.detail.selection.getAttribute('src'), true);
+      // update aria-current to reflect current page.
+      let currentItem = event.currentTarget.querySelector('[aria-current]');
+      currentItem && currentItem.removeAttribute('aria-current');
+      event.detail.selection.setAttribute('aria-current', 'page');
+
+      // update the main region to give it a unique label
+      main.setAttribute('aria-label', event.detail.selection.textContent);
+
+      XMLHttpRequest.open('GET', event.detail.selection.getAttribute('href'), true);
       XMLHttpRequest.send();
     });
   </script>
