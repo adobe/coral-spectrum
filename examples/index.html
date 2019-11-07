@@ -20,8 +20,7 @@
       padding-left: 24px;
       overflow: scroll;
       background-color: rgb(250, 250, 250);
-      visibility: visible;
-      transition: visibility 0ms linear 160ms, transform 160ms ease-in-out;
+      transition: transform 160ms ease-in-out;
       position: relative;
       z-index: 10;
     }
@@ -149,14 +148,25 @@
       }
 
       .example-List {
+        overflow: hidden;
         transform: translateX(-100%);
-        visibility: hidden;
       }
 
       .example-List.is-open {
+        overflow: auto;
         transform: translateX(0);
-        transition-delay: 0;
+      }
+
+      .example-List > * {
+        transition: visibility 0ms linear 500ms;
+        visibility: hidden;
+
+      }
+
+      .example-List.is-open > * {
+        transition-delay: 0ms;
         visibility: visible;
+
       }
 
       .example-List coral-search {
@@ -180,7 +190,7 @@
     <button is="coral-button" variant="quietaction" icon="spectrum-css-icon-TripleGripper" id="nav-toggle-action" class="toggle-icon" aria-label="Show Navigation Menu"></button>
   </div>
 
-  <div id="side-nav" class="example-List" role="complementary">
+  <div id="side-nav" class="example-List" role="navigation" aria-label="Navigation Menu">
     <a class="example-Logo" href="../documentation">
       <svg viewBox="0 0 30 26" focusable="false" aria-label="Adobe" role="img">
         <polygon points="19,0 30,0 30,26"></polygon>
@@ -201,150 +211,148 @@
   </main>
 
   <script>
-    const sideNav = document.getElementById('side-nav');
-    const navToggleAction = document.getElementById('nav-toggle-action');
-    const navToggleOverlay = document.getElementById('nav-toggle-overlay');
+    (function(window, document) {
+      const sideNav = document.getElementById('side-nav');
+      const navToggleAction = document.getElementById('nav-toggle-action');
+      const navToggleOverlay = document.getElementById('nav-toggle-overlay');
 
-    navToggleAction.addEventListener('click', function() {
-      sideNav.classList.toggle('is-open', !sideNav.classList.contains('is-open'));
-      navToggleOverlay.classList.toggle('is-open', !navToggleOverlay.classList.contains('is-open'));
-      navToggleAction.setAttribute('aria-expanded', sideNav.classList.contains('is-open'));
-      navToggleAction.selected = sideNav.classList.contains('is-open');
-    });
+      function toggleSideNav() {
+        sideNav.classList.toggle('is-open', !sideNav.classList.contains('is-open'));
+        navToggleOverlay.classList.toggle('is-open', !navToggleOverlay.classList.contains('is-open'));
+        navToggleAction.setAttribute('aria-expanded', sideNav.classList.contains('is-open'));
+        navToggleAction.selected = sideNav.classList.contains('is-open');
+      }
 
-    navToggleOverlay.addEventListener('click', function() {
-      sideNav.classList.toggle('is-open', !sideNav.classList.contains('is-open'));
-      navToggleOverlay.classList.toggle('is-open', !navToggleOverlay.classList.contains('is-open'));
-      navToggleAction.setAttribute('aria-expanded', sideNav.classList.contains('is-open'));
-      navToggleAction.selected = sideNav.classList.contains('is-open');
-    });
+      navToggleAction.addEventListener('click', toggleSideNav);
+      navToggleOverlay.addEventListener('click', toggleSideNav);
 
-    const components = [
-      'coral-component-accordion',
-      'coral-component-actionbar',
-      'coral-component-alert',
-      'coral-component-anchorbutton',
-      'coral-component-autocomplete',
-      'coral-component-banner',
-      'coral-component-button',
-      'coral-component-buttongroup',
-      'coral-component-calendar',
-      'coral-component-card',
-      'coral-component-charactercount',
-      'coral-component-checkbox',
-      'coral-component-clock',
-      'coral-component-coachmark',
-      'coral-component-colorinput',
-      'coral-component-columnview',
-      'coral-component-cyclebutton',
-      'coral-component-datepicker',
-      'coral-component-dialog',
-      'coral-component-drawer',
-      'coral-component-fileupload',
-      'coral-component-icon',
-      'coral-component-list',
-      'coral-component-masonry',
-      'coral-component-multifield',
-      'coral-component-numberinput',
-      'coral-component-overlay',
-      'coral-component-panelstack',
-      'coral-component-popover',
-      'coral-component-progress',
-      'coral-component-quickactions',
-      'coral-component-radio',
-      'coral-component-search',
-      'coral-component-select',
-      'coral-component-sidenav',
-      'coral-component-shell',
-      'coral-component-slider',
-      'coral-component-splitbutton',
-      'coral-component-status',
-      'coral-component-steplist',
-      'coral-component-switch',
-      'coral-component-table',
-      'coral-component-tablist',
-      'coral-component-tabview',
-      'coral-component-taglist',
-      'coral-component-textarea',
-      'coral-component-textfield',
-      'coral-component-toast',
-      'coral-component-tooltip',
-      'coral-component-tree',
-      'coral-component-wait',
-      'coral-component-wizardview',
-      'coral-dragaction'
-    ];
+      const components = [
+        'coral-component-accordion',
+        'coral-component-actionbar',
+        'coral-component-alert',
+        'coral-component-anchorbutton',
+        'coral-component-autocomplete',
+        'coral-component-banner',
+        'coral-component-button',
+        'coral-component-buttongroup',
+        'coral-component-calendar',
+        'coral-component-card',
+        'coral-component-charactercount',
+        'coral-component-checkbox',
+        'coral-component-clock',
+        'coral-component-coachmark',
+        'coral-component-colorinput',
+        'coral-component-columnview',
+        'coral-component-cyclebutton',
+        'coral-component-datepicker',
+        'coral-component-dialog',
+        'coral-component-drawer',
+        'coral-component-fileupload',
+        'coral-component-icon',
+        'coral-component-list',
+        'coral-component-masonry',
+        'coral-component-multifield',
+        'coral-component-numberinput',
+        'coral-component-overlay',
+        'coral-component-panelstack',
+        'coral-component-popover',
+        'coral-component-progress',
+        'coral-component-quickactions',
+        'coral-component-radio',
+        'coral-component-search',
+        'coral-component-select',
+        'coral-component-sidenav',
+        'coral-component-shell',
+        'coral-component-slider',
+        'coral-component-splitbutton',
+        'coral-component-status',
+        'coral-component-steplist',
+        'coral-component-switch',
+        'coral-component-table',
+        'coral-component-tablist',
+        'coral-component-tabview',
+        'coral-component-taglist',
+        'coral-component-textarea',
+        'coral-component-textfield',
+        'coral-component-toast',
+        'coral-component-tooltip',
+        'coral-component-tree',
+        'coral-component-wait',
+        'coral-component-wizardview',
+        'coral-dragaction'
+      ];
 
-    const list = document.getElementById('example-list');
-    const main = document.getElementById('example-main');
-    const preview = document.getElementById('example-preview');
-    const search = document.getElementById('example-search');
+      const list = document.getElementById('example-list');
+      const main = document.getElementById('example-main');
+      const preview = document.getElementById('example-preview');
+      const search = document.getElementById('example-search');
 
-    search.on('coral-search:input', function(event) {
-      const value = event.target.value.trim();
-      list.items.getAll().forEach(function(item) {
-        if (item.content.textContent.trim().indexOf(value) !== 0) {
-          item.hidden = true;
-        }
-        else {
+      search.on('coral-search:input', function(event) {
+        const value = event.target.value.trim();
+        list.items.getAll().forEach(function(item) {
+          if (item.content.textContent.trim().indexOf(value) !== 0) {
+            item.hidden = true;
+          }
+          else {
+            item.hidden = false;
+          }
+        });
+      });
+
+      search.on('coral-search:clear', function() {
+        list.items.getAll().forEach(function(item) {
           item.hidden = false;
-        }
+        });
       });
-    });
 
-    search.on('coral-search:clear', function() {
-      list.items.getAll().forEach(function(item) {
-        item.hidden = false;
+      components.forEach(function(component) {
+        const name = component.split('-').pop();
+        const selected = location.hash.slice(1) === name;
+        const item = list.items.add({
+          content: {
+            textContent: name
+          },
+          selected: selected,
+          href: '../' + component + '/examples/index.html',
+          ariaCurrent: (selected ? 'page' : undefined)
+        });
+        selected && item.setAttribute('aria-current', 'page');
+        item.on('click', function(event) {
+          event.preventDefault()
+        });
       });
-    });
 
-    components.forEach(function(component) {
-      const name = component.split('-').pop();
-      const selected = location.hash.slice(1) === name;
-      const item = list.items.add({
-        content: {
-          textContent: name
-        },
-        selected: selected,
-        href: '../' + component + '/examples/index.html',
-        ariaCurrent: (selected ? 'page' : undefined)
+      list.on('coral-sidenav:change', function(event) {
+        const XMLHttpRequest = new window.XMLHttpRequest();
+        XMLHttpRequest.onreadystatechange = function() {
+          if (XMLHttpRequest.readyState == 4 && XMLHttpRequest.status == 200) {
+            preview.srcdoc = this.responseText;
+            location.hash = event.detail.selection.textContent.trim();
+
+            requestAnimationFrame(function() {
+              if (sideNav.classList.contains('is-open')) {
+                sideNav.classList.remove('is-open');
+                navToggleOverlay.classList.remove('is-open');
+                navToggleAction.setAttribute('aria-expanded', false);
+                navToggleAction.selected = false;
+                navToggleAction.focus();
+              }
+            });
+          }
+        };
+
+        // update aria-current to reflect current page.
+        let currentItem = event.currentTarget.querySelector('[aria-current]');
+        currentItem && currentItem.removeAttribute('aria-current');
+        event.detail.selection.setAttribute('aria-current', 'page');
+
+        // update the main region to give it a unique label
+        main.setAttribute('aria-label', event.detail.selection.textContent);
+
+        XMLHttpRequest.open('GET', event.detail.selection.getAttribute('href'), true);
+        XMLHttpRequest.send();
       });
-      selected && item.setAttribute('aria-current', 'page');
-      item.on('click', function(event) {
-        event.preventDefault()
-      });
-    });
-
-    list.on('coral-sidenav:change', function(event) {
-      const XMLHttpRequest = new window.XMLHttpRequest();
-      XMLHttpRequest.onreadystatechange = function() {
-        if (XMLHttpRequest.readyState == 4 && XMLHttpRequest.status == 200) {
-          preview.srcdoc = this.responseText;
-          location.hash = event.detail.selection.textContent.trim();
-
-          requestAnimationFrame(function() {
-            if (sideNav.classList.contains('is-open')) {
-              sideNav.classList.remove('is-open');
-              navToggleOverlay.classList.remove('is-open');
-              navToggleAction.setAttribute('aria-expanded', false);
-              navToggleAction.selected = false;
-              navToggleAction.focus();
-            }
-          });
-        }
-      };
-
-      // update aria-current to reflect current page.
-      let currentItem = event.currentTarget.querySelector('[aria-current]');
-      currentItem && currentItem.removeAttribute('aria-current');
-      event.detail.selection.setAttribute('aria-current', 'page');
-
-      // update the main region to give it a unique label
-      main.setAttribute('aria-label', event.detail.selection.textContent);
-
-      XMLHttpRequest.open('GET', event.detail.selection.getAttribute('href'), true);
-      XMLHttpRequest.send();
-    });
+    })(window, document);
   </script>
 </body>
 </html>
