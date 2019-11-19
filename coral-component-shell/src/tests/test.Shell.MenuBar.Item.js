@@ -325,4 +325,29 @@ describe('Shell.MenuBar.Item', function() {
       menu.open = true;
     });
   });
+  
+  describe.only('Implementation Details', function() {
+    describe('Accessibility', function() {
+      describe('#aria-label', function() {
+        it('should set the buttons aria-label', function() {
+          const el = helpers.build(new Shell.MenuBar.Item());
+          el.setAttribute('aria-label', 'Profile');
+          expect(el._elements.shellMenuButton.getAttribute('aria-label')).to.equal('Profile');
+        });
+        
+        it('should not set the buttons aria-label when an empty aria-label is passed in', function() {
+          const el = helpers.build(new Shell.MenuBar.Item());
+          el.setAttribute('aria-label', '');
+          expect(el._elements.shellMenuButton.getAttribute('aria-label')).to.equal(null);
+        });
+        
+        it('should not set the buttons aria-label when button label exists', function() {
+          const el = helpers.build(new Shell.MenuBar.Item());
+          el.label.textContent = 'This is the profile button';
+          el.setAttribute('aria-label', 'Profile');
+          expect(el._elements.shellMenuButton.getAttribute('aria-label')).to.equal(null);
+        });
+      });
+    });
+  });
 });
