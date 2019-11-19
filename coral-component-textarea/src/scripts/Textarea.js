@@ -96,16 +96,21 @@ class Textarea extends BaseFormField(BaseComponent(HTMLTextAreaElement)) {
    Inherited from {@link BaseFormField#reset}.
    */
   reset() {
-    // the textarea uses the textContent to save the old value and not the value attribute
+    // The textarea uses the textContent to save the old value and not the value attribute
     /** @ignore */
     this.value = this.textContent;
+    
+    // Reset height if quiet variant
+    this._onInput();
   }
   
   /** @private */
   _onInput() {
     if (this.variant === variant.QUIET) {
-      this.style.height = 'auto';
-      this.style.height = `${this.scrollHeight}px`;
+      requestAnimationFrame(() => {
+        this.style.height = 'auto';
+        this.style.height = `${this.scrollHeight}px`;
+      });
     }
   }
   

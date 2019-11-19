@@ -69,7 +69,7 @@ describe('Textarea', function() {
         expect(el.classList.contains('_coral-Textfield--quiet')).to.be.true;
       });
 
-      it('should increase the height automatically if variant=quiet', function() {
+      it('should increase the height automatically if variant=quiet', function(done) {
         helpers.build(el);
         el.variant = Textarea.variant.QUIET;
         var initialHeight = el.getBoundingClientRect().height;
@@ -77,11 +77,14 @@ describe('Textarea', function() {
         el.value = '\n\n\n';
         el.trigger('input');
 
-        var newHeight = parseInt(el.style.height, 10);
-        expect(newHeight > initialHeight).to.be.true;
+        helpers.next(() => {
+          var newHeight = parseInt(el.style.height, 10);
+          expect(newHeight > initialHeight).to.be.true;
+          done();
+        });
       });
 
-      it('should decrease the height automatically if variant=quiet', function() {
+      it('should decrease the height automatically if variant=quiet', function(done) {
         helpers.build(el);
         el.variant = Textarea.variant.QUIET;
         el.value = '\n\n\n';
@@ -90,8 +93,12 @@ describe('Textarea', function() {
         var initialHeight = el.getBoundingClientRect().height;
         el.value = '';
         el.trigger('input');
-        var newHeight = parseInt(el.style.height, 10);
-        expect(newHeight < initialHeight).to.be.true;
+        
+        helpers.next(() => {
+          var newHeight = parseInt(el.style.height, 10);
+          expect(newHeight < initialHeight).to.be.true;
+          done();
+        });
       });
   
       it('should restore the default height if variant was quiet', function() {
@@ -106,6 +113,23 @@ describe('Textarea', function() {
         el.variant = Textarea.variant.DEFAULT;
         
         expect(el.style.height).to.be.equal(initialHeight);
+      });
+      
+      it('should restore height if reset() is called and value is empty', function(done) {
+        const initialHeight = el.clientHeight;
+  
+        el.variant = Textarea.variant.QUIET;
+  
+        el.value = '\n\n\n';
+        
+        expect(el.clientHeight > initialHeight);
+        
+        el.reset();
+        
+        helpers.next(() => {
+          expect(el.clientHeight === initialHeight);
+          done();
+        });
       });
     });
   });
