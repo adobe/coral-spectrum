@@ -326,7 +326,7 @@ describe('Shell.MenuBar.Item', function() {
     });
   });
   
-  describe.only('Implementation Details', function() {
+  describe('Implementation Details', function() {
     describe('Accessibility', function() {
       describe('#aria-label', function() {
         it('should set the buttons aria-label', function() {
