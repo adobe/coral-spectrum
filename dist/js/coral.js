@@ -59603,14 +59603,6 @@ var Coral = (function (exports) {
 
 
     _createClass(ShellHeader, [{
-      key: "_enableHomeAccessibility",
-
-      /** @private */
-      value: function _enableHomeAccessibility(home) {
-        home.setAttribute('role', 'heading');
-        home.setAttribute('aria-level', '2');
-      }
-    }, {
       key: "render",
 
       /** @ignore */
@@ -59656,9 +59648,6 @@ var Coral = (function (exports) {
           handle: 'home',
           tagName: 'coral-shell-header-home',
           insert: function insert(content) {
-            // a11y
-            this._enableHomeAccessibility(content);
-
             this.appendChild(content);
           }
         });
@@ -61205,9 +61194,24 @@ var Coral = (function (exports) {
        */
 
     }, {
-      key: "render",
+      key: "attributeChangedCallback",
 
       /** @ignore */
+      value: function attributeChangedCallback(name, oldValue, value) {
+        // a11y When user doesn't supply a button label (for an icon-only button),
+        // providing aria-label will correctly pass it on to the shell menu button child element.
+        if (name === 'aria-label') {
+          if (value && this._elements.shellMenuButton.textContent.trim() === '') {
+            this._elements.shellMenuButton.setAttribute('aria-label', value);
+          }
+        } else {
+          _get(_getPrototypeOf(ShellMenuBarItem.prototype), "attributeChangedCallback", this).call(this, name, oldValue, value);
+        }
+      }
+      /** @ignore */
+
+    }, {
+      key: "render",
       value: function render() {
         _get(_getPrototypeOf(ShellMenuBarItem.prototype), "render", this).call(this);
 
@@ -61425,7 +61429,7 @@ var Coral = (function (exports) {
     }, {
       key: "observedAttributes",
       get: function get() {
-        return _get(_getPrototypeOf(ShellMenuBarItem), "observedAttributes", this).concat(['icon', 'iconsize', 'iconvariant', 'badge', 'open', 'menu']);
+        return _get(_getPrototypeOf(ShellMenuBarItem), "observedAttributes", this).concat(['icon', 'iconsize', 'iconvariant', 'badge', 'open', 'menu', 'aria-label']);
       }
     }]);
 
@@ -71905,19 +71909,25 @@ var Coral = (function (exports) {
        Inherited from {@link BaseFormField#reset}.
        */
       value: function reset() {
-        // the textarea uses the textContent to save the old value and not the value attribute
+        // The textarea uses the textContent to save the old value and not the value attribute
 
         /** @ignore */
-        this.value = this.textContent;
+        this.value = this.textContent; // Reset height if quiet variant
+
+        this._onInput();
       }
       /** @private */
 
     }, {
       key: "_onInput",
       value: function _onInput() {
+        var _this2 = this;
+
         if (this.variant === variant$m.QUIET) {
-          this.style.height = 'auto';
-          this.style.height = "".concat(this.scrollHeight, "px");
+          requestAnimationFrame(function () {
+            _this2.style.height = 'auto';
+            _this2.style.height = "".concat(_this2.scrollHeight, "px");
+          });
         }
       }
       /**
@@ -74179,7 +74189,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.119";
+  var version = "1.0.0-beta.121";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

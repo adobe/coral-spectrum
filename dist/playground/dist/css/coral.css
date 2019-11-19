@@ -4439,11 +4439,8 @@ body,
 .coral-Form--vertical .coral-Form-field._coral-Slider:not(._coral-Slider--vertical) {
   width: 100%;
 }
-.coral-Form--vertical .coral-Form-field.coral-RadioGroup {
-  display: block;
-}
 .coral-Form--vertical .coral-Form-field._coral-Checkbox,
-.coral-Form--vertical .coral-Form-field._coral-Radio {
+.coral-Form--vertical .coral-Form-field._coral-Radio,.coral-Form-field.coral-RadioGroup--vertical {
   display: flex;
 }
 .coral--light .coral-Form-fieldlabel {

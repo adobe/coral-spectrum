@@ -462,8 +462,6 @@ class ShellHeader extends BaseComponent(HTMLElement) {
       handle: &apos;home&apos;,
       tagName: &apos;coral-shell-header-home&apos;,
       insert: function(content) {
-        // a11y
-        this._enableHomeAccessibility(content);
         this.appendChild(content);
       }
     });
@@ -505,12 +503,6 @@ class ShellHeader extends BaseComponent(HTMLElement) {
         this.appendChild(content);
       }
     });
-  }
-  
-  /** @private */
-  _enableHomeAccessibility(home) {
-    home.setAttribute(&apos;role&apos;, &apos;heading&apos;);
-    home.setAttribute(&apos;aria-level&apos;, &apos;2&apos;);
   }
   
   get _contentZones() {

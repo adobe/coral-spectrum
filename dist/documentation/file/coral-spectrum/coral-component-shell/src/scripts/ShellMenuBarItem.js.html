@@ -701,8 +701,23 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
       &apos;iconvariant&apos;,
       &apos;badge&apos;,
       &apos;open&apos;,
-      &apos;menu&apos;
+      &apos;menu&apos;,
+      &apos;aria-label&apos;
     ]);
+  }
+  
+  /** @ignore */
+  attributeChangedCallback(name, oldValue, value) {
+    // a11y When user doesn&apos;t supply a button label (for an icon-only button),
+    // providing aria-label will correctly pass it on to the shell menu button child element.
+    if (name === &apos;aria-label&apos;) {
+      if (value &amp;&amp; this._elements.shellMenuButton.textContent.trim() === &apos;&apos;) {
+        this._elements.shellMenuButton.setAttribute(&apos;aria-label&apos;, value);
+      }
+    }
+    else {
+      super.attributeChangedCallback(name, oldValue, value);
+    }
   }
   
   /** @ignore */

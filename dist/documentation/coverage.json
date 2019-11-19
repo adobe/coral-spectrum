@@ -1554,12 +1554,12 @@
       "undocumentLines": []
     },
     "coral-spectrum/coral-component-shell/src/scripts/ShellHeader.js": {
-      "expectCount": 10,
-      "actualCount": 7,
+      "expectCount": 9,
+      "actualCount": 6,
       "undocumentLines": [
         16,
         31,
-        106
+        98
       ]
     },
     "coral-spectrum/coral-component-shell/src/scripts/ShellHelp.js": {
@@ -1614,8 +1614,8 @@
       ]
     },
     "coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js": {
-      "expectCount": 26,
-      "actualCount": 16,
+      "expectCount": 27,
+      "actualCount": 17,
       "undocumentLines": [
         36,
         40,
