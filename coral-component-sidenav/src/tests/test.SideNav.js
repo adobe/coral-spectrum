@@ -97,8 +97,8 @@ describe('SideNav', function() {
     });
   
     describe('#selectedItem', function() {
-      it('should default to first item', function() {
-        expect(el.selectedItem).to.equal(item1);
+      it('should default to null', function() {
+        expect(el.selectedItem).to.equal(null);
       });
     
       it('should not be settable', function() {
@@ -106,14 +106,8 @@ describe('SideNav', function() {
           el.selectedItem = item2;
         }
         catch (e) {
-          expect(el.selectedItem).to.equal(item1);
+          expect(el.selectedItem).to.equal(null);
         }
-      });
-    
-      it('should always be set', function() {
-        expect(el.selectedItem).to.equal(item1);
-        item1.selected = false;
-        expect(el.selectedItem).to.equal(item1);
       });
     
       it('should update to the selected value', function() {
@@ -186,6 +180,7 @@ describe('SideNav', function() {
     describe('#selectedItem', function() {
       it('should select via attributes', function() {
         const el = helpers.build(window.__html__['SideNav.base.html']);
+        el.items.first().setAttribute('selected', '');
         expect(el.items.first().hasAttribute('selected')).to.be.true;
         expect(el.items.last().hasAttribute('selected')).to.be.false;
         
@@ -232,7 +227,7 @@ describe('SideNav', function() {
   describe('Events', function() {
     describe('#coral-sidenav:change', function() {
       it('should trigger a change event when selection is manually changed', function(done) {
-        const el = helpers.build(window.__html__['SideNav.base.html']);
+        const el = helpers.build(window.__html__['SideNav.base.selected.html']);
         const changeSpy = sinon.spy();
         el.on('coral-sidenav:change', changeSpy);
 
@@ -249,7 +244,7 @@ describe('SideNav', function() {
       });
   
       it('should trigger a change event when selected item is added', function(done) {
-        const el = helpers.build(window.__html__['SideNav.base.html']);
+        const el = helpers.build(window.__html__['SideNav.base.selected.html']);
         const changeSpy = sinon.spy();
         el.on('coral-sidenav:change', changeSpy);
 
@@ -268,7 +263,7 @@ describe('SideNav', function() {
       });
   
       it('should trigger a change event when selected item is removed', function(done) {
-        const el = helpers.build(window.__html__['SideNav.base.html']);
+        const el = helpers.build(window.__html__['SideNav.base.selected.html']);
         const changeSpy = sinon.spy();
         el.on('coral-sidenav:change', changeSpy);
 
@@ -278,7 +273,7 @@ describe('SideNav', function() {
         // Wait for MO
         helpers.next(() => {
           expect(changeSpy.callCount).to.equal(1);
-          expect(changeSpy.args[0][0].detail.selection).to.equal(el.items.first());
+          expect(changeSpy.args[0][0].detail.selection).to.equal(null);
           expect(changeSpy.args[0][0].detail.oldSelection).to.equal(selectedItem);
     
           done();
@@ -297,7 +292,7 @@ describe('SideNav', function() {
         // Wait for MO
         helpers.next(() => {
           expect(changeSpy.callCount).to.equal(1);
-          expect(changeSpy.args[0][0].detail.selection).to.equal(el.items.first());
+          expect(changeSpy.args[0][0].detail.selection).to.equal(null);
           expect(changeSpy.args[0][0].detail.oldSelection).to.equal(selectedItem);
       
           done();

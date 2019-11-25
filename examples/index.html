@@ -305,9 +305,9 @@
         });
       });
 
-      components.forEach(function(component) {
+      components.forEach(function(component, i) {
         const name = component.split('-').pop();
-        const selected = location.hash.slice(1) === name;
+        const selected = location.hash ? location.hash.slice(1) === name : i === 0;
         const item = list.items.add({
           content: {
             textContent: name
