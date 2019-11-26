@@ -582,67 +582,53 @@ class SideNav extends BaseComponent(HTMLElement) {
   
   _validateSelection(item) {
     const selectedItems = this.items._getAllSelected();
+    // Last selected item wins if multiple selection while not allowed
+    item = item || selectedItems[selectedItems.length - 1];
+  
+    // Deselect other selected items
+    if (item &amp;&amp; item.hasAttribute(&apos;selected&apos;) &amp;&amp; selectedItems.length &gt; 1) {
+      selectedItems.forEach((selectedItem) =&gt; {
+        if (selectedItem !== item) {
+          // Don&apos;t trigger change events
+          this._preventTriggeringEvents = true;
+          selectedItem.removeAttribute(&apos;selected&apos;);
+        }
+      });
     
-    if (item &amp;&amp; this.contains(item)) {
-      // Deselect other selected items
-      if (item.hasAttribute(&apos;selected&apos;) &amp;&amp; selectedItems.length &gt; 1) {
-        selectedItems.forEach((selectedItem) =&gt; {
-          if (selectedItem !== item) {
-            // Don&apos;t trigger change events
-            this._preventTriggeringEvents = true;
-            selectedItem.removeAttribute(&apos;selected&apos;);
-          }
-        });
-    
-        // We can trigger change events again
-        this._preventTriggeringEvents = false;
-      }
-      else if (!item.hasAttribute(&apos;selected&apos;) &amp;&amp; selectedItems.length === 0) {
-        // Force selection
-        item.selected = true;
-        
-        return;
-      }
-  
-      // Expand multi level
-      this._expandLevels();
-  
-      // Notify of change
-      this._triggerChangeEvent();
+      // We can trigger change events again
+      this._preventTriggeringEvents = false;
     }
-    else if (selectedItems.length === 0) {
-      // First item is selected by default on initialization
-      item = this.items.first();
-      if (item) {
-        item.setAttribute(&apos;selected&apos;, &apos;&apos;);
-      }
-  
-      // Notify of change
-      this._triggerChangeEvent();
-    }
+
+    // Expand multi level
+    this._expandLevels();
+
+    // Notify of change
+    this._triggerChangeEvent();
   }
   
   _expandLevels() {
     const selectedItem = this.selectedItem;
-    let level = selectedItem.closest(&apos;coral-sidenav-level&apos;);
+    if (selectedItem) {
+      let level = selectedItem.closest(&apos;coral-sidenav-level&apos;);
+  
+      // Expand until root
+      while (level) {
+        level.setAttribute(&apos;_expanded&apos;, &apos;on&apos;);
     
-    // Expand until root
-    while (level) {
-      level.setAttribute(&apos;_expanded&apos;, &apos;on&apos;);
-      
-      const prev = level.previousElementSibling;
-      if (prev &amp;&amp; prev.matches(&apos;a[is=&quot;coral-sidenav-item&quot;]&apos;)) {
-        prev.setAttribute(&apos;aria-expanded&apos;, &apos;true&apos;);
+        const prev = level.previousElementSibling;
+        if (prev &amp;&amp; prev.matches(&apos;a[is=&quot;coral-sidenav-item&quot;]&apos;)) {
+          prev.setAttribute(&apos;aria-expanded&apos;, &apos;true&apos;);
+        }
+    
+        level = level.parentNode &amp;&amp; level.parentNode.closest(&apos;coral-sidenav-level&apos;);
       }
-      
-      level = level.parentNode &amp;&amp; level.parentNode.closest(&apos;coral-sidenav-level&apos;);
-    }
-    
-    // Expand corresponding item level
-    level = selectedItem.nextElementSibling;
-    if (level &amp;&amp; level.tagName === &apos;CORAL-SIDENAV-LEVEL&apos;) {
-      level.setAttribute(&apos;_expanded&apos;, &apos;on&apos;);
-      selectedItem.setAttribute(&apos;aria-expanded&apos;, &apos;true&apos;);
+  
+      // Expand corresponding item level
+      level = selectedItem.nextElementSibling;
+      if (level &amp;&amp; level.tagName === &apos;CORAL-SIDENAV-LEVEL&apos;) {
+        level.setAttribute(&apos;_expanded&apos;, &apos;on&apos;);
+        selectedItem.setAttribute(&apos;aria-expanded&apos;, &apos;true&apos;);
+      }
     }
   }
   

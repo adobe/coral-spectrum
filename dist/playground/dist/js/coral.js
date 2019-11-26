@@ -63672,66 +63672,55 @@
       value: function _validateSelection(item) {
         var _this2 = this;
 
-        var selectedItems = this.items._getAllSelected();
-
-        if (item && this.contains(item)) {
-          // Deselect other selected items
-          if (item.hasAttribute('selected') && selectedItems.length > 1) {
-            selectedItems.forEach(function (selectedItem) {
-              if (selectedItem !== item) {
-                // Don't trigger change events
-                _this2._preventTriggeringEvents = true;
-                selectedItem.removeAttribute('selected');
-              }
-            }); // We can trigger change events again
-
-            this._preventTriggeringEvents = false;
-          } else if (!item.hasAttribute('selected') && selectedItems.length === 0) {
-            // Force selection
-            item.selected = true;
-            return;
-          } // Expand multi level
+        var selectedItems = this.items._getAllSelected(); // Last selected item wins if multiple selection while not allowed
 
 
-          this._expandLevels(); // Notify of change
+        item = item || selectedItems[selectedItems.length - 1]; // Deselect other selected items
+
+        if (item && item.hasAttribute('selected') && selectedItems.length > 1) {
+          selectedItems.forEach(function (selectedItem) {
+            if (selectedItem !== item) {
+              // Don't trigger change events
+              _this2._preventTriggeringEvents = true;
+              selectedItem.removeAttribute('selected');
+            }
+          }); // We can trigger change events again
+
+          this._preventTriggeringEvents = false;
+        } // Expand multi level
 
 
-          this._triggerChangeEvent();
-        } else if (selectedItems.length === 0) {
-          // First item is selected by default on initialization
-          item = this.items.first();
-
-          if (item) {
-            item.setAttribute('selected', '');
-          } // Notify of change
+        this._expandLevels(); // Notify of change
 
 
-          this._triggerChangeEvent();
-        }
+        this._triggerChangeEvent();
       }
     }, {
       key: "_expandLevels",
       value: function _expandLevels() {
         var selectedItem = this.selectedItem;
-        var level = selectedItem.closest('coral-sidenav-level'); // Expand until root
 
-        while (level) {
-          level.setAttribute('_expanded', 'on');
-          var prev = level.previousElementSibling;
+        if (selectedItem) {
+          var level = selectedItem.closest('coral-sidenav-level'); // Expand until root
 
-          if (prev && prev.matches('a[is="coral-sidenav-item"]')) {
-            prev.setAttribute('aria-expanded', 'true');
+          while (level) {
+            level.setAttribute('_expanded', 'on');
+            var prev = level.previousElementSibling;
+
+            if (prev && prev.matches('a[is="coral-sidenav-item"]')) {
+              prev.setAttribute('aria-expanded', 'true');
+            }
+
+            level = level.parentNode && level.parentNode.closest('coral-sidenav-level');
+          } // Expand corresponding item level
+
+
+          level = selectedItem.nextElementSibling;
+
+          if (level && level.tagName === 'CORAL-SIDENAV-LEVEL') {
+            level.setAttribute('_expanded', 'on');
+            selectedItem.setAttribute('aria-expanded', 'true');
           }
-
-          level = level.parentNode && level.parentNode.closest('coral-sidenav-level');
-        } // Expand corresponding item level
-
-
-        level = selectedItem.nextElementSibling;
-
-        if (level && level.tagName === 'CORAL-SIDENAV-LEVEL') {
-          level.setAttribute('_expanded', 'on');
-          selectedItem.setAttribute('aria-expanded', 'true');
         }
       }
     }, {
@@ -74189,7 +74178,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.121";
+  var version = "1.0.0-beta.122";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
