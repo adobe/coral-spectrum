@@ -85,10 +85,12 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
   
   /** @private */
   _setHandle(handle) {
-    // Specify handle directly on the cell if none found
-    if (!this.querySelector(`[${handle}]`)) {
-      this.setAttribute(handle, '');
-    }
+    requestAnimationFrame(() => {
+      // Specify handle directly on the cell if none found
+      if (!this.querySelector(`[${handle}]`)) {
+        this.setAttribute(handle, '');
+      }
+    });
   }
   
   /** @private */

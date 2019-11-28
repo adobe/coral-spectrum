@@ -244,10 +244,12 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
   
   /** @private */
   _setHandle(handle) {
-    // Specify handle directly on the row if none found
-    if (!this.querySelector(`[${handle}]`)) {
-      this.setAttribute(handle, '');
-    }
+    requestAnimationFrame(() => {
+      // Specify handle directly on the row if none found
+      if (!this.querySelector(`[${handle}]`)) {
+        this.setAttribute(handle, '');
+      }
+    });
   }
   
   /** @private */

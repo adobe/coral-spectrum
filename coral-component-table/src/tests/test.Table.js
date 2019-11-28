@@ -251,12 +251,16 @@ describe('Table', function() {
     });
   
     describe('#selectable', function() {
-      it('should set all items to selectable items', function() {
+      it('should set all items to selectable items', function(done) {
         var table = helpers.build(window.__html__['Table.base.html']);
         table.selectable = true;
         
-        table.items.getAll().forEach(function(item) {
-          expect(item.hasAttribute('coral-table-rowselect')).be.true;
+        helpers.next(() => {
+          table.items.getAll().forEach(function(item) {
+            expect(item.hasAttribute('coral-table-rowselect')).be.true;
+          });
+          
+          done();
         });
       });
   
@@ -277,13 +281,13 @@ describe('Table', function() {
         var item = table.items.add();
         
         // Wait for MO
-        helpers.next(function() {
+        setTimeout(function() {
           item.click();
           
           expect(item.selected).to.be.true;
           expect(item.hasAttribute('coral-table-rowselect')).to.be.true;
           done();
-        });
+        }, 100);
       });
   
       it('should trigger a change event if selectable is set to false with selected items', function() {
@@ -304,12 +308,16 @@ describe('Table', function() {
     });
   
     describe('#orderable', function() {
-      it('should set all items to orderable items', function() {
+      it('should set all items to orderable items', function(done) {
         var table = helpers.build(window.__html__['Table.base.html']);
         table.orderable = true;
         
-        table.items.getAll().forEach(function(item) {
-          expect(item.hasAttribute('coral-table-roworder')).to.be.true;
+        helpers.next(() => {
+          table.items.getAll().forEach(function(item) {
+            expect(item.hasAttribute('coral-table-roworder')).to.be.true;
+          });
+          
+          done();
         });
       });
   
@@ -327,7 +335,7 @@ describe('Table', function() {
         var item = table.items.add();
         
         // Wait for MO
-        helpers.next(function() {
+        setTimeout(function() {
           // Initiates the dragAction
           item.dispatchEvent(new MouseEvent('mousedown', {
             bubbles: true
@@ -336,7 +344,7 @@ describe('Table', function() {
           expect(item.dragAction).to.not.be.undefined;
           expect(item.hasAttribute('coral-table-roworder')).be.true;
           done();
-        });
+        }, 100);
       });
     });
   
@@ -402,12 +410,16 @@ describe('Table', function() {
     });
   
     describe('#lockable', function() {
-      it('should set all items to lockable items', function() {
+      it('should set all items to lockable items', function(done) {
         var table = helpers.build(window.__html__['Table.base.html']);
         table.lockable = true;
         
-        table.items.getAll().forEach(function(item) {
-          expect(item.hasAttribute('coral-table-rowlock')).to.be.true;
+        helpers.next(() => {
+          table.items.getAll().forEach(function(item) {
+            expect(item.hasAttribute('coral-table-rowlock')).to.be.true;
+          });
+          
+          done();
         });
       });
   
@@ -425,13 +437,13 @@ describe('Table', function() {
         var item = table.items.add();
         
         // Wait for MO
-        helpers.next(function() {
+        setTimeout(function() {
           item.click();
           
           expect(item.locked).to.be.true;
           expect(item.hasAttribute('coral-table-rowlock')).to.be.true;
           done();
-        });
+        }, 100);
       });
     });
   
@@ -711,11 +723,11 @@ describe('Table', function() {
         
         var eventSpy = sinon.spy();
         table.on('coral-table:change', eventSpy);
-    
-        var row = table.body.rows[0];
-        row.click();
         
         helpers.next(function() {
+          var row = table.body.rows[0];
+          row.click();
+          
           expect(eventSpy.callCount).to.equal(1);
           expect(eventSpy.args[0][0].detail.oldSelection).to.deep.equal([]);
           expect(eventSpy.args[0][0].detail.selection).to.deep.equal(table.selectedItems);
@@ -862,34 +874,44 @@ describe('Table', function() {
     });
   
     describe('#coral-table:rowchange', function() {
-      it('should trigger when selecting a cell', function() {
+      it('should trigger when selecting a cell', function(done) {
         var table = helpers.build(window.__html__['Table.selectable.cell.html']);
         var eventSpy = sinon.spy();
         var row = table.items.first();
         var cell = row.items.first();
       
         table.on('coral-table:rowchange', eventSpy);
-        cell.click();
-      
-        expect(eventSpy.callCount).to.equal(1);
-        expect(eventSpy.args[0][0].detail.oldSelection).to.deep.equal([]);
-        expect(eventSpy.args[0][0].detail.selection).to.deep.equal(row.selectedItems);
-        expect(eventSpy.args[0][0].detail.row).to.equal(row);
+        
+        helpers.next(() => {
+          cell.click();
+  
+          expect(eventSpy.callCount).to.equal(1);
+          expect(eventSpy.args[0][0].detail.oldSelection).to.deep.equal([]);
+          expect(eventSpy.args[0][0].detail.selection).to.deep.equal(row.selectedItems);
+          expect(eventSpy.args[0][0].detail.row).to.equal(row);
+          
+          done();
+        });
       });
     
-      it('should trigger when deselecting a cell', function() {
+      it('should trigger when deselecting a cell', function(done) {
         var table = helpers.build(window.__html__['Table.selectable.cell.html']);
         var eventSpy = sinon.spy();
         var row = table.items.first();
         var cell = row.items.first();
         cell.selected = true;
         table.on('coral-table:rowchange', eventSpy);
-        cell.click();
-      
-        expect(eventSpy.callCount).to.equal(1);
-        expect(eventSpy.args[0][0].detail.oldSelection).to.deep.equal([cell]);
-        expect(eventSpy.args[0][0].detail.selection).to.deep.equal([]);
-        expect(eventSpy.args[0][0].detail.row).to.equal(row);
+        
+        helpers.next(() => {
+          cell.click();
+  
+          expect(eventSpy.callCount).to.equal(1);
+          expect(eventSpy.args[0][0].detail.oldSelection).to.deep.equal([cell]);
+          expect(eventSpy.args[0][0].detail.selection).to.deep.equal([]);
+          expect(eventSpy.args[0][0].detail.row).to.equal(row);
+          
+          done();
+        });
       });
     
       it('should pass selection and oldSelection', function() {
@@ -1050,20 +1072,24 @@ describe('Table', function() {
     });
     
     describe('#coral-table:roworder', function() {
-      it('should trigger if dragging the row to the top', function() {
+      it('should trigger if dragging the row to the top', function(done) {
         var eventSpy = sinon.spy();
         var table = helpers.build(window.__html__['Table.orderable.row.html']);
         
         table.on('coral-table:roworder', eventSpy);
         var row = table.body.rows[1];
         
-        dragRowTo(row, -1);
-        
-        expect(eventSpy.callCount).to.equal(1);
-        expect(eventSpy.args[0][0].detail.row).to.equal(row);
+        helpers.next(() => {
+          dragRowTo(row, -1);
+  
+          expect(eventSpy.callCount).to.equal(1);
+          expect(eventSpy.args[0][0].detail.row).to.equal(row);
+          
+          done();
+        });
       });
   
-      it('should pass the sibling row to allow reverting', function() {
+      it('should pass the sibling row to allow reverting', function(done) {
         var eventSpy = sinon.spy();
         var table = helpers.build(window.__html__['Table.orderable.row.html']);
         
@@ -1074,12 +1100,16 @@ describe('Table', function() {
         
         expect(getIndexOf(row)).to.equal(0);
         
-        dragRowTo(row, 1);
-        
-        expect(eventSpy.callCount).to.equal(1);
-        expect(eventSpy.args[0][0].detail.row).to.equal(row);
-        expect(eventSpy.args[0][0].detail.oldBefore).to.equal(oldBefore);
-        expect(eventSpy.args[0][0].detail.before).to.equal(row.nextElementSibling);
+        helpers.next(() => {
+          dragRowTo(row, 1);
+  
+          expect(eventSpy.callCount).to.equal(1);
+          expect(eventSpy.args[0][0].detail.row).to.equal(row);
+          expect(eventSpy.args[0][0].detail.oldBefore).to.equal(oldBefore);
+          expect(eventSpy.args[0][0].detail.before).to.equal(row.nextElementSibling);
+          
+          done();
+        });
       });
     });
     
@@ -1095,7 +1125,9 @@ describe('Table', function() {
           done();
         });
     
-        dragRowTo(table.body.rows[0], 1);
+        helpers.next(() => {
+          dragRowTo(table.body.rows[0], 1);
+        });
       });
     });
     
@@ -1234,48 +1266,60 @@ describe('Table', function() {
   
   describe('User Interaction', function() {
     describe('#selectable', function() {
-      it('should select the row if clicked', function() {
+      it('should select the row if clicked', function(done) {
         var table = helpers.build(window.__html__['Table.selectable.html']);
-        
         var row = table.body.rows[0];
-        row.click();
         
-        expect(row.selected).to.be.true;
-        expect(row.classList.contains('is-selected')).to.be.true;
-        expect(row.getAttribute('aria-selected')).to.equal('true');
+        helpers.next(() => {
+          row.click();
+  
+          expect(row.selected).to.be.true;
+          expect(row.classList.contains('is-selected')).to.be.true;
+          expect(row.getAttribute('aria-selected')).to.equal('true');
+          
+          done();
+        });
       });
       
-      it('should select the cell when clicked', function() {
+      it('should select the cell when clicked', function(done) {
         var table = helpers.build(window.__html__['Table.selectable.cell.html']);
         var row = table.items.first();
         var cell = row.items.first();
         
-        cell.click();
-        
-        expect(cell.selected).to.be.true;
-        expect(cell.classList.contains('is-selected')).to.be.true;
-        expect(cell.getAttribute('aria-selected')).to.equal('true');
+        helpers.next(() => {
+          cell.click();
+  
+          expect(cell.selected).to.be.true;
+          expect(cell.classList.contains('is-selected')).to.be.true;
+          expect(cell.getAttribute('aria-selected')).to.equal('true');
+          
+          done();
+        });
       });
       
-      it('should only be possible to select a cell if selection mode is on', function() {
+      it('should only be possible to select a cell if selection mode is on', function(done) {
         var table = helpers.build(window.__html__['Table.selectable.cell.html']);
         var row = table.items.first();
         row.selectable = false;
-        
-        var cell = row.items.first();
-        cell.click();
-        
-        expect(cell.selected).to.be.false;
-        expect(cell.classList.contains('is-selected')).to.be.false;
-        expect(cell.getAttribute('aria-selected') === 'true').to.be.false;
-        
-        row.selectable = true;
-        
-        cell.click();
-        
-        expect(cell.selected).to.be.true;
-        expect(cell.classList.contains('is-selected')).to.be.true;
-        expect(cell.getAttribute('aria-selected') === 'true').to.be.true;
+  
+        helpers.next(() => {
+          var cell = row.items.first();
+          cell.click();
+          
+          expect(cell.selected).to.be.false;
+          expect(cell.classList.contains('is-selected')).to.be.false;
+          expect(cell.getAttribute('aria-selected') === 'true').to.be.false;
+          
+          row.selectable = true;
+          
+          cell.click();
+          
+          expect(cell.selected).to.be.true;
+          expect(cell.classList.contains('is-selected')).to.be.true;
+          expect(cell.getAttribute('aria-selected') === 'true').to.be.true;
+          
+          done();
+        });
       });
     });
     
@@ -1290,16 +1334,18 @@ describe('Table', function() {
         
         expect(getIndexOf(row)).to.equal(1);
         
-        dragRowTo(row, -1);
-        
-        // Wait for dragging
-        helpers.next(function() {
-          expect(eventSpy.callCount).to.equal(1);
-          expect(eventSpy.args[0][0].detail.row).to.equal(row);
-          expect(getIndexOf(row)).to.equal(0);
-          expect(document.activeElement).to.equal(row);
-          
-          done();
+        helpers.next(() => {
+          dragRowTo(row, -1);
+  
+          // Wait for dragging
+          helpers.next(function() {
+            expect(eventSpy.callCount).to.equal(1);
+            expect(eventSpy.args[0][0].detail.row).to.equal(row);
+            expect(getIndexOf(row)).to.equal(0);
+            expect(document.activeElement).to.equal(row);
+    
+            done();
+          });
         });
       });
       
@@ -1313,16 +1359,18 @@ describe('Table', function() {
         
         expect(getIndexOf(row)).to.equal(0);
         
-        dragRowTo(row, 1);
-        
-        // Wait for dragging
-        helpers.next(function() {
-          expect(eventSpy.callCount).to.equal(1);
-          expect(eventSpy.args[0][0].detail.row).to.equal(row);
-          expect(getIndexOf(row)).to.equal(1);
-          expect(document.activeElement).to.equal(row);
-          
-          done();
+        helpers.next(() => {
+          dragRowTo(row, 1);
+  
+          // Wait for dragging
+          helpers.next(function() {
+            expect(eventSpy.callCount).to.equal(1);
+            expect(eventSpy.args[0][0].detail.row).to.equal(row);
+            expect(getIndexOf(row)).to.equal(1);
+            expect(document.activeElement).to.equal(row);
+    
+            done();
+          });
         });
       });
       
@@ -1339,17 +1387,19 @@ describe('Table', function() {
         
         expect(getIndexOf(row)).to.equal(0);
         
-        dragRowTo(row, 1);
-        
-        // Wait for dragging
-        helpers.next(function() {
-          expect(eventSpy.callCount).to.equal(1);
-          expect(eventSpy.args[0][0].detail.row).to.equal(row);
-          expect(eventSpy.args[0][0].detail.before).to.equal(null);
-          expect(getIndexOf(row)).to.equal(0);
-          expect(document.activeElement).to.equal(row);
-          
-          done();
+        helpers.next(() => {
+          dragRowTo(row, 1);
+  
+          // Wait for dragging
+          helpers.next(function() {
+            expect(eventSpy.callCount).to.equal(1);
+            expect(eventSpy.args[0][0].detail.row).to.equal(row);
+            expect(eventSpy.args[0][0].detail.before).to.equal(null);
+            expect(getIndexOf(row)).to.equal(0);
+            expect(document.activeElement).to.equal(row);
+    
+            done();
+          });
         });
       });
       
@@ -1555,120 +1605,158 @@ describe('Table', function() {
         expect(table.items.first().getAttribute('tabindex') === '0').to.be.true;
       });
       
-      it('should focus the selected item', function() {
+      it('should focus the selected item', function(done) {
         var table = helpers.build(window.__html__['Table.selectable.html']);
         var row1 = table.body.rows[0];
         var row2 = table.body.rows[1];
         
-        row2.click();
-        
-        expect(row1.hasAttribute('tabindex')).to.be.false;
-        expect(row2.getAttribute('tabindex') === '0').to.be.true;
-        expect(row2).to.equal(document.activeElement);
+        helpers.next(() => {
+          row2.click();
+  
+          expect(row1.hasAttribute('tabindex')).to.be.false;
+          expect(row2.getAttribute('tabindex') === '0').to.be.true;
+          expect(row2).to.equal(document.activeElement);
+          
+          done();
+        });
       });
       
-      it('should focus the first item with key:home', function() {
+      it('should focus the first item with key:home', function(done) {
         var table = helpers.build(window.__html__['Table.selectable.html']);
         var row1 = table.body.rows[0];
         var row3 = table.body.rows[2];
         
-        row3.click();
-        
-        expect(row3.getAttribute('tabindex') === '0').to.be.true;
-        expect(row3).to.equal(document.activeElement);
-        
-        helpers.keypress('home', row3);
-        
-        expect(row1.getAttribute('tabindex') === '0').to.be.true;
-        expect(row1).to.equal(document.activeElement);
+        helpers.next(() => {
+          row3.click();
+  
+          expect(row3.getAttribute('tabindex') === '0').to.be.true;
+          expect(row3).to.equal(document.activeElement);
+  
+          helpers.keypress('home', row3);
+  
+          expect(row1.getAttribute('tabindex') === '0').to.be.true;
+          expect(row1).to.equal(document.activeElement);
+          
+          done();
+        });
       });
       
-      it('should focus the last item with key:end', function() {
+      it('should focus the last item with key:end', function(done) {
         var table = helpers.build(window.__html__['Table.selectable.html']);
         var row1 = table.body.rows[0];
         var row3 = table.body.rows[2];
         
-        row1.click();
-        
-        expect(row1.getAttribute('tabindex') === '0').to.be.true;
-        expect(row1).to.equal(document.activeElement);
-        
-        helpers.keypress('end', row1);
-        
-        expect(row3.getAttribute('tabindex') === '0').to.be.true;
-        expect(row3).to.equal(document.activeElement);
+        helpers.next(() => {
+          row1.click();
+  
+          expect(row1.getAttribute('tabindex') === '0').to.be.true;
+          expect(row1).to.equal(document.activeElement);
+  
+          helpers.keypress('end', row1);
+  
+          expect(row3.getAttribute('tabindex') === '0').to.be.true;
+          expect(row3).to.equal(document.activeElement);
+          
+          done();
+        });
       });
       
-      it('should focus the next item with key:right', function() {
+      it('should focus the next item with key:right', function(done) {
         var table = helpers.build(window.__html__['Table.selectable.html']);
         var row1 = table.body.rows[0];
         var row2 = table.body.rows[1];
         
-        helpers.keypress('right', row1);
-        
-        expect(row2.getAttribute('tabindex') === '0').to.be.true;
-        expect(row2).to.equal(document.activeElement);
+        helpers.next(() => {
+          helpers.keypress('right', row1);
+  
+          expect(row2.getAttribute('tabindex') === '0').to.be.true;
+          expect(row2).to.equal(document.activeElement);
+          
+          done();
+        });
       });
       
-      it('should focus the next item with key:down', function() {
+      it('should focus the next item with key:down', function(done) {
         var table = helpers.build(window.__html__['Table.selectable.html']);
         var row1 = table.body.rows[0];
         var row2 = table.body.rows[1];
         
-        helpers.keypress('down', row1);
-        
-        expect(row2.getAttribute('tabindex') === '0').to.be.true;
-        expect(row2).to.equal(document.activeElement);
+        helpers.next(() => {
+          helpers.keypress('down', row1);
+  
+          expect(row2.getAttribute('tabindex') === '0').to.be.true;
+          expect(row2).to.equal(document.activeElement);
+          
+          done();
+        });
       });
       
-      it('should focus the next item with key:pagedown', function() {
+      it('should focus the next item with key:pagedown', function(done) {
         var table = helpers.build(window.__html__['Table.selectable.html']);
         var row1 = table.body.rows[0];
         var row2 = table.body.rows[1];
         
-        helpers.keypress('pagedown', row1);
-        
-        expect(row2.getAttribute('tabindex') === '0').to.be.true;
-        expect(row2).to.equal(document.activeElement);
+        helpers.next(() => {
+          helpers.keypress('pagedown', row1);
+  
+          expect(row2.getAttribute('tabindex') === '0').to.be.true;
+          expect(row2).to.equal(document.activeElement);
+          
+          done();
+        });
       });
       
-      it('should focus the previous item with key:left, key:up, key:pageup', function() {
+      it('should focus the previous item with key:left, key:up, key:pageup', function(done) {
         var table = helpers.build(window.__html__['Table.selectable.html']);
         var row1 = table.body.rows[0];
         var row2 = table.body.rows[1];
         
-        row2.click();
-        
-        helpers.keypress('left', row2);
-        
-        expect(row1.getAttribute('tabindex') === '0').to.be.true;
-        expect(row1).to.equal(document.activeElement);
+        helpers.next(() => {
+          row2.click();
+  
+          helpers.keypress('left', row2);
+  
+          expect(row1.getAttribute('tabindex') === '0').to.be.true;
+          expect(row1).to.equal(document.activeElement);
+          
+          done();
+        });
       });
       
-      it('should focus the previous item with key:up', function() {
+      it('should focus the previous item with key:up', function(done) {
         var table = helpers.build(window.__html__['Table.selectable.html']);
         var row1 = table.body.rows[0];
         var row2 = table.body.rows[1];
         
-        row2.click();
-        
-        helpers.keypress('up', row2);
-        
-        expect(row1.getAttribute('tabindex') === '0').to.be.true;
-        expect(row1).to.equal(document.activeElement);
+        helpers.next(() => {
+          row2.click();
+  
+          helpers.next(() => {
+            helpers.keypress('up', row2);
+    
+            expect(row1.getAttribute('tabindex') === '0').to.be.true;
+            expect(row1).to.equal(document.activeElement);
+    
+            done();
+          });
+        });
       });
       
-      it('should focus the previous item with key:pageup', function() {
+      it('should focus the previous item with key:pageup', function(done) {
         var table = helpers.build(window.__html__['Table.selectable.html']);
         var row1 = table.body.rows[0];
         var row2 = table.body.rows[1];
         
-        row2.click();
-        
-        helpers.keypress('up', row2);
-        
-        expect(row1.getAttribute('tabindex') === '0').to.be.true;
-        expect(row1).to.equal(document.activeElement);
+        helpers.next(() => {
+          row2.click();
+  
+          helpers.keypress('up', row2);
+  
+          expect(row1.getAttribute('tabindex') === '0').to.be.true;
+          expect(row1).to.equal(document.activeElement);
+          
+          done();
+        });
       });
       
       it('should select next item with key:down+shift', function(done) {
@@ -1678,18 +1766,21 @@ describe('Table', function() {
         
         table.selectable = true;
         table.multiple = true;
-        row1.click();
         
-        helpers.keypress('down', row1, ['shift']);
-        
-        // Wait for selection
-        helpers.next(function() {
-          expect(table.selectedItems.length).to.equal(2);
-          expect(row1.selected).to.be.true;
-          expect(row2.selected).to.be.true;
-          expect(row2).to.equal(document.activeElement);
-          
-          done();
+        helpers.next(() => {
+          row1.click();
+  
+          helpers.keypress('down', row1, ['shift']);
+  
+          // Wait for selection
+          helpers.next(function() {
+            expect(table.selectedItems.length).to.equal(2);
+            expect(row1.selected).to.be.true;
+            expect(row2.selected).to.be.true;
+            expect(row2).to.equal(document.activeElement);
+    
+            done();
+          });
         });
       });
       
@@ -1700,18 +1791,21 @@ describe('Table', function() {
         
         table.selectable = true;
         table.multiple = true;
-        row1.click();
         
-        helpers.keypress('down', row1, ['shift']);
-        
-        // Wait for selection
-        helpers.next(function() {
-          expect(table.selectedItems.length).to.equal(2);
-          expect(row1.selected).to.be.true;
-          expect(row2.selected).to.be.true;
-          expect(row2).to.equal(document.activeElement);
-          
-          done();
+        helpers.next(() => {
+          row1.click();
+  
+          helpers.keypress('down', row1, ['shift']);
+  
+          // Wait for selection
+          helpers.next(function() {
+            expect(table.selectedItems.length).to.equal(2);
+            expect(row1.selected).to.be.true;
+            expect(row2.selected).to.be.true;
+            expect(row2).to.equal(document.activeElement);
+    
+            done();
+          });
         });
       });
       
@@ -1722,18 +1816,21 @@ describe('Table', function() {
   
         table.selectable = true;
         table.multiple = true;
-        row1.click();
         
-        helpers.keypress('down', row1, ['shift']);
-        
-        // Wait for selection
-        helpers.next(function() {
-          expect(table.selectedItems.length).to.equal(2);
-          expect(row1.selected).to.be.true;
-          expect(row2.selected).to.be.true;
-          expect(row2).to.equal(document.activeElement);
-          
-          done();
+        helpers.next(() => {
+          row1.click();
+  
+          helpers.keypress('down', row1, ['shift']);
+  
+          // Wait for selection
+          helpers.next(function() {
+            expect(table.selectedItems.length).to.equal(2);
+            expect(row1.selected).to.be.true;
+            expect(row2.selected).to.be.true;
+            expect(row2).to.equal(document.activeElement);
+    
+            done();
+          });
         });
       });
       
@@ -1744,18 +1841,21 @@ describe('Table', function() {
   
         table.selectable = true;
         table.multiple = true;
-        row2.click();
         
-        helpers.keypress('up', row2, ['shift']);
-        
-        // Wait for selection
-        helpers.next(function() {
-          expect(table.selectedItems.length).to.equal(2);
-          expect(row1.selected).to.be.true;
-          expect(row2.selected).to.be.true;
-          expect(row1).to.equal(document.activeElement);
-          
-          done();
+        helpers.next(() => {
+          row2.click();
+  
+          helpers.keypress('up', row2, ['shift']);
+  
+          // Wait for selection
+          helpers.next(function() {
+            expect(table.selectedItems.length).to.equal(2);
+            expect(row1.selected).to.be.true;
+            expect(row2.selected).to.be.true;
+            expect(row1).to.equal(document.activeElement);
+    
+            done();
+          });
         });
       });
       
@@ -1766,18 +1866,21 @@ describe('Table', function() {
   
         table.selectable = true;
         table.multiple = true;
-        row2.click();
         
-        helpers.keypress('up', row2, ['shift']);
-        
-        // Wait for selection
-        helpers.next(function() {
-          expect(table.selectedItems.length).to.equal(2);
-          expect(row1.selected).to.be.true;
-          expect(row2.selected).to.be.true;
-          expect(row1).to.equal(document.activeElement);
-          
-          done();
+        helpers.next(() => {
+          row2.click();
+  
+          helpers.keypress('up', row2, ['shift']);
+  
+          // Wait for selection
+          helpers.next(function() {
+            expect(table.selectedItems.length).to.equal(2);
+            expect(row1.selected).to.be.true;
+            expect(row2.selected).to.be.true;
+            expect(row1).to.equal(document.activeElement);
+    
+            done();
+          });
         });
       });
       
@@ -1788,22 +1891,25 @@ describe('Table', function() {
   
         table.selectable = true;
         table.multiple = true;
-        row2.click();
-      
-        helpers.keypress('up', row2, ['shift']);
         
-        // Wait for selection
-        helpers.next(function() {
-          expect(table.selectedItems.length).to.equal(2);
-          expect(row1.selected).to.be.true;
-          expect(row2.selected).to.be.true;
-          expect(row1).to.equal(document.activeElement);
-          
-          done();
+        helpers.next(() => {
+          row2.click();
+  
+          helpers.keypress('up', row2, ['shift']);
+  
+          // Wait for selection
+          helpers.next(function() {
+            expect(table.selectedItems.length).to.equal(2);
+            expect(row1.selected).to.be.true;
+            expect(row2.selected).to.be.true;
+            expect(row1).to.equal(document.activeElement);
+    
+            done();
+          });
         });
       });
       
-      it('should prevent text-selection', function() {
+      it('should prevent text-selection', function(done) {
         var table = helpers.build(window.__html__['Table.base.html']);
         table.selectable = true;
         
@@ -1811,33 +1917,42 @@ describe('Table', function() {
         
         row.selected = true;
         table.multiple = true;
-        table.body.rows[1].dispatchEvent(new MouseEvent('mousedown', {
-          bubbles: true,
-          shiftKey: true
-        }));
         
-        expect(table.selectedItems.length).to.equal(1);
-        expect(table.selectedItem).to.equal(row);
-        expect(table.classList.contains('is-unselectable')).to.be.true;
+        helpers.next(() => {
+          table.body.rows[1].dispatchEvent(new MouseEvent('mousedown', {
+            bubbles: true,
+            shiftKey: true
+          }));
+  
+          expect(table.selectedItems.length).to.equal(1);
+          expect(table.selectedItem).to.equal(row);
+          expect(table.classList.contains('is-unselectable')).to.be.true;
+          
+          done();
+        });
       });
       
-      it('should select multiple items with click+shift if no items selected by default', function() {
+      it('should select multiple items with click+shift if no items selected by default', function(done) {
         var table = helpers.build(window.__html__['Table.base.html']);
         table.selectable = true;
         table.multiple = true;
         table.items.add();
         
-        table.body.rows[1].dispatchEvent(new MouseEvent('click', {
-          bubbles: true,
-          shiftKey: true
-        }));
-        
-        expect(table.body.rows[0].selected).to.be.true;
-        expect(table.body.rows[1].selected).to.be.true;
-        expect(table.body.rows[2].selected).to.be.false;
+        helpers.next(() => {
+          table.body.rows[1].dispatchEvent(new MouseEvent('click', {
+            bubbles: true,
+            shiftKey: true
+          }));
+  
+          expect(table.body.rows[0].selected).to.be.true;
+          expect(table.body.rows[1].selected).to.be.true;
+          expect(table.body.rows[2].selected).to.be.false;
+          
+          done();
+        });
       });
       
-      it('should select an item range with click+shift on deselected item', function() {
+      it('should select an item range with click+shift on deselected item', function(done) {
         var table = helpers.build(window.__html__['Table.base.html']);
         table.selectable = true;
         
@@ -1845,15 +1960,19 @@ describe('Table', function() {
         table.multiple = true;
         rows[0].selected = true;
         
-        rows[rows.length - 1].dispatchEvent(new MouseEvent('click', {
-          bubbles: true,
-          shiftKey: true
-        }));
-        
-        expect(table.selectedItems.length).to.equal(table.items.length);
+        helpers.next(() => {
+          rows[rows.length - 1].dispatchEvent(new MouseEvent('click', {
+            bubbles: true,
+            shiftKey: true
+          }));
+  
+          expect(table.selectedItems.length).to.equal(table.items.length);
+          
+          done();
+        });
       });
       
-      it('should select an item range if click+shift on selected item', function() {
+      it('should select an item range if click+shift on selected item', function(done) {
         var table = helpers.build(window.__html__['Table.base.html']);
         table.items.add();
         table.selectable = true;
@@ -1862,15 +1981,19 @@ describe('Table', function() {
         table.body.rows[0].selected = true;
         table.body.rows[2].selected = true;
         
-        table.body.rows[0].dispatchEvent(new MouseEvent('click', {
-          bubbles: true,
-          shiftKey: true
-        }));
-        
-        expect(table.selectedItems.length).to.equal(table.items.length);
+        helpers.next(() => {
+          table.body.rows[0].dispatchEvent(new MouseEvent('click', {
+            bubbles: true,
+            shiftKey: true
+          }));
+  
+          expect(table.selectedItems.length).to.equal(table.items.length);
+          
+          done();
+        });
       });
       
-      it('should reverse selection with click+shift', function() {
+      it('should reverse selection with click+shift', function(done) {
         var table = helpers.build(window.__html__['Table.base.html']);
         table.items.add();
         table.selectable = true;
@@ -1878,22 +2001,26 @@ describe('Table', function() {
         
         table.body.rows[1].selected = true;
         
-        table.body.rows[0].dispatchEvent(new MouseEvent('click', {
-          bubbles: true,
-          shiftKey: true
-        }));
-        
-        table.body.rows[2].dispatchEvent(new MouseEvent('click', {
-          bubbles: true,
-          shiftKey: true
-        }));
-        
-        expect(table.body.rows[0].selected).to.be.false;
-        expect(table.body.rows[1].selected).to.be.true;
-        expect(table.body.rows[2].selected).to.be.true;
+        helpers.next(() => {
+          table.body.rows[0].dispatchEvent(new MouseEvent('click', {
+            bubbles: true,
+            shiftKey: true
+          }));
+  
+          table.body.rows[2].dispatchEvent(new MouseEvent('click', {
+            bubbles: true,
+            shiftKey: true
+          }));
+  
+          expect(table.body.rows[0].selected).to.be.false;
+          expect(table.body.rows[1].selected).to.be.true;
+          expect(table.body.rows[2].selected).to.be.true;
+          
+          done();
+        });
       });
       
-      it('should deselect siblings items of selected row with click+shift', function() {
+      it('should deselect siblings items of selected row with click+shift', function(done) {
         var table = helpers.build(window.__html__['Table.base.html']);
         table.items.add();
         table.selectable = true;
@@ -1903,14 +2030,18 @@ describe('Table', function() {
         table.body.rows[1].selected = true;
         table.body.rows[2].selected = true;
         
-        table.body.rows[1].dispatchEvent(new MouseEvent('click', {
-          bubbles: true,
-          shiftKey: true
-        }));
-        
-        expect(table.body.rows[0].selected).to.be.false;
-        expect(table.body.rows[1].selected).to.be.true;
-        expect(table.body.rows[2].selected).to.be.true;
+        helpers.next(() => {
+          table.body.rows[1].dispatchEvent(new MouseEvent('click', {
+            bubbles: true,
+            shiftKey: true
+          }));
+  
+          expect(table.body.rows[0].selected).to.be.false;
+          expect(table.body.rows[1].selected).to.be.true;
+          expect(table.body.rows[2].selected).to.be.true;
+          
+          done();
+        });
       });
     });
   });
@@ -1951,7 +2082,9 @@ describe('Table', function() {
           done();
         });
     
-        dragRowTo(table.body.rows[0], 1);
+        helpers.next(() => {
+          dragRowTo(table.body.rows[0], 1);
+        });
       });
       
       it('should destroy the dragaction', function() {
@@ -2029,13 +2162,13 @@ describe('Table', function() {
         var cell = table.items.first().items.add();
     
         // Wait for MO
-        helpers.next(function() {
+        setTimeout(function() {
           cell.click();
       
           expect(cell.selected).to.be.true;
           expect(cell.hasAttribute('coral-table-cellselect')).to.be.true;
           done();
-        });
+        }, 100);
       });
   
       it('should only select the last selected cell if multiple is false', function() {
@@ -2093,13 +2226,13 @@ describe('Table', function() {
         var cell = table.items.first().items.add();
     
         // Wait for MO
-        helpers.next(function() {
+        setTimeout(function() {
           cell.click();
       
           expect(cell.selected).to.be.true;
           expect(cell.hasAttribute('coral-table-cellselect')).to.be.true;
           done();
-        });
+        }, 100);
       });
       
       it('should render a selectable checkbox (row selection)', function() {

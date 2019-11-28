@@ -34,13 +34,17 @@ describe('Table.Row', function() {
 
   describe('API', function() {
     describe('#selectable', function() {
-      it('should set all items to selectable items', function() {
+      it('should set all items to selectable items', function(done) {
         var table = helpers.build(window.__html__['Table.base.html']);
         var row = table.items.first();
         row.selectable = true;
         
-        row.items.getAll().forEach(function(item) {
-          expect(item.hasAttribute('coral-table-cellselect')).to.be.true;
+        helpers.next(() => {
+          row.items.getAll().forEach(function(item) {
+            expect(item.hasAttribute('coral-table-cellselect')).to.be.true;
+          });
+          
+          done();
         });
       });
 
@@ -49,10 +53,10 @@ describe('Table.Row', function() {
         var cell = table.items.first().items.add();
         
         // Wait for MO
-        helpers.next(function() {
+        setTimeout(function() {
           expect(cell.hasAttribute('coral-table-cellselect')).to.be.true;
           done();
-        });
+        }, 100);
       });
     });
   

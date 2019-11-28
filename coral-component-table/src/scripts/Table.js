@@ -2174,7 +2174,7 @@ class Table extends BaseComponent(HTMLTableElement) {
             }
             
             // Vertically align text in sticky cell by getting the label height
-            if (headerCell.content.textContent.trim().length) {
+            if (headerCell.content.textContent.trim().length && !headerCell.content.querySelector('coral-checkbox[coral-table-select]')) {
               const stickyHeaderCellHeight = headerCell.content.getBoundingClientRect().height;
               const span = document.createElement('span');
               
