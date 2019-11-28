@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">92.11% </span>
+        <span class="strong">92.5% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>35/38</span>
+        <span class='fraction'>37/40</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">90.48% </span>
+        <span class="strong">80.95% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>19/21</span>
+        <span class='fraction'>17/21</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">93.33% </span>
+        <span class="strong">93.75% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>14/15</span>
+        <span class='fraction'>15/16</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">92.11% </span>
+        <span class="strong">92.5% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>35/38</span>
+        <span class='fraction'>37/40</span>
       </div>
     </div>
     <p class="quiet">
@@ -205,7 +205,9 @@
 <a name='L157'></a><a href='#L157'>157</a>
 <a name='L158'></a><a href='#L158'>158</a>
 <a name='L159'></a><a href='#L159'>159</a>
-<a name='L160'></a><a href='#L160'>160</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L160'></a><a href='#L160'>160</a>
+<a name='L161'></a><a href='#L161'>161</a>
+<a name='L162'></a><a href='#L162'>162</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -248,13 +250,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">184x</span>
-<span class="cline-any cline-yes">182x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">184x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">184x</span>
+<span class="cline-any cline-yes">184x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -286,7 +292,7 @@
 <span class="cline-any cline-yes">202x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">202x</span>
-<span class="cline-any cline-yes">84x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -354,7 +360,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">752x</span>
+<span class="cline-any cline-yes">672x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -362,9 +368,7 @@
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">202x</span>
-<span class="cline-any cline-yes">202x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-yes">202x</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -415,7 +419,7 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
   get selected() {
     return this._selected || false;
   }
-  set selected(value) {
+  set se<span class="missing-if-branch" title="else path not taken" >E</span>lected(value) {
     // Prevent selection if disabled
     if (this.hasAttribute('coral-table-cellselect') &amp;&amp; this.hasAttribute('disabled') ||
       this.querySelector('[coral-table-cellselect][disabled]')) {
@@ -449,12 +453,14 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
     this.setAttribute('value', transform.string(value));
   }
   
-  /** @private */
+  /** @private */<span class="branch-1 cbranch-no" title="branch not covered" ></span>
   _setHandle(handle) {
-    // Specify handle directly on the cell if none found
-    if (!this.querySelector(`[${handle}]`)) {
-      this.setAttribute(handle, '');
-    }
+    requestAnimationFrame(() =&gt; {
+      // Specify handle directly on the cell if none found
+      if (!this.querySelector(`[${handle}]`)) {
+        this.setAttribute(handle, '');
+      }
+    });
   }
   
   /** @private */
@@ -492,14 +498,14 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
   attributeChangedCallback(name, oldValue, value) {
     if (name === '_selectable') {
       this._toggleSelectable(value !== null);
-    }<span class="fstat-no" title="function not covered" ></span>
+    }
     else {
-<span class="cstat-no" title="statement not covered" >      super.attributeChangedCallback(name, oldValue, value);</span>
-    }<span class="cstat-no" title="statement not covered" ></span>
-  }
+      super.attrib<span class="fstat-no" title="function not covered" >uteC</span>hangedCallback(name, oldValue, value);
+    }
+  }<span class="cstat-no" title="statement not covered" ></span>
   <span class="cstat-no" title="statement not covered" ></span>
   /** @ignore */
-  render() {
+  render()<span class="cstat-no" title="statement not covered" > {</span>
     super.render();
     
     this.classList.add(CLASSNAME);
@@ -529,7 +535,7 @@ export default TableCell;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 26 2019 16:40:49 GMT+0100 (Central European Standard Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Nov 28 2019 13:41:23 GMT+0100 (Central European Standard Time)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

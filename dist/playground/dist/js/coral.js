@@ -66812,10 +66812,14 @@
 
       /** @private */
       value: function _setHandle(handle) {
-        // Specify handle directly on the cell if none found
-        if (!this.querySelector("[".concat(handle, "]"))) {
-          this.setAttribute(handle, '');
-        }
+        var _this = this;
+
+        requestAnimationFrame(function () {
+          // Specify handle directly on the cell if none found
+          if (!_this.querySelector("[".concat(handle, "]"))) {
+            _this.setAttribute(handle, '');
+          }
+        });
       }
       /** @private */
 
@@ -67206,21 +67210,25 @@
     }, {
       key: "_setHandle",
       value: function _setHandle(handle) {
-        // Specify handle directly on the row if none found
-        if (!this.querySelector("[".concat(handle, "]"))) {
-          this.setAttribute(handle, '');
-        }
+        var _this2 = this;
+
+        requestAnimationFrame(function () {
+          // Specify handle directly on the row if none found
+          if (!_this2.querySelector("[".concat(handle, "]"))) {
+            _this2.setAttribute(handle, '');
+          }
+        });
       }
       /** @private */
 
     }, {
       key: "_handleMutations",
       value: function _handleMutations(mutations) {
-        var _this2 = this;
+        var _this3 = this;
 
         mutations.forEach(function (mutation) {
           // Sync added nodes
-          _this2.trigger('coral-table-row:_contentchanged', {
+          _this3.trigger('coral-table-row:_contentchanged', {
             addedNodes: mutation.addedNodes,
             removedNodes: mutation.removedNodes
           });
@@ -67351,14 +67359,14 @@
         return this._selectable || false;
       },
       set: function set(value) {
-        var _this3 = this;
+        var _this4 = this;
 
         this._selectable = transform.booleanAttr(value);
 
         this._reflectAttribute('selectable', this._selectable);
 
         this.items.getAll().forEach(function (cell) {
-          cell[_this3._selectable ? 'setAttribute' : 'removeAttribute']('_selectable', '');
+          cell[_this4._selectable ? 'setAttribute' : 'removeAttribute']('_selectable', '');
         });
       }
       /**
@@ -69717,7 +69725,7 @@
                 } // Vertically align text in sticky cell by getting the label height
 
 
-                if (headerCell.content.textContent.trim().length) {
+                if (headerCell.content.textContent.trim().length && !headerCell.content.querySelector('coral-checkbox[coral-table-select]')) {
                   var stickyHeaderCellHeight = headerCell.content.getBoundingClientRect().height;
                   var span = document.createElement('span'); // Prevents a recursive table relayout that is triggered from changing the header cell content
 
@@ -74178,7 +74186,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "1.0.0-beta.122";
+  var version = "4.0.0";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

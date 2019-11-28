@@ -20004,7 +20004,7 @@ tr[is="coral-table-row"]:not([selectable]) th[is="coral-table-headercell"] [cora
 }
 thead[is="coral-table-head"][sticky] coral-checkbox[coral-table-select] {
   position: relative;
-  top: -16px;
+  top: -4px;
 }
 /* END #selectable */
 /* #variant */
