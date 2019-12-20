@@ -893,7 +893,7 @@ const BaseOverlay = (superClass) => class extends superClass {
     }
   
     // If the element is not focusable,
-    if (element.offsetParent === null || !element.matches(commons.FOCUSABLE_ELEMENT_SELECTOR)) {
+    if (!element.matches(commons.FOCUSABLE_ELEMENT_SELECTOR)) {
       // add tabindex so that it is programmatically focusable.
       element.setAttribute('tabindex', -1);
     
