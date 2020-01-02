@@ -383,7 +383,7 @@ describe('Tree', function() {
       
       // Focusing requires the tree item to be defined
       window.customElements.whenDefined('coral-tree-item').then(() => {
-        helpers.keypress('right', firstItem._elements.header);
+        helpers.keypress('down', firstItem._elements.header);
         
         expect(firstItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
         expect(nextItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
@@ -401,7 +401,7 @@ describe('Tree', function() {
         el._resetFocusableItem(lastItem);
         
         var previousItem = lastItem.previousElementSibling;
-        helpers.keypress('left', lastItem._elements.header);
+        helpers.keypress('up', lastItem._elements.header);
         
         expect(lastItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
         expect(previousItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
@@ -417,7 +417,7 @@ describe('Tree', function() {
       
       // Focusing requires the tree item to be defined
       window.customElements.whenDefined('coral-tree-item').then(() => {
-        helpers.keypress('left', firstItem._elements.header);
+        helpers.keypress('up', firstItem._elements.header);
         
         expect(firstItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
         expect(lastItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
@@ -435,7 +435,7 @@ describe('Tree', function() {
       window.customElements.whenDefined('coral-tree-item').then(() => {
         el._resetFocusableItem(lastItem);
         
-        helpers.keypress('right', lastItem._elements.header);
+        helpers.keypress('down', lastItem._elements.header);
         
         expect(lastItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
         expect(firstItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
@@ -454,7 +454,7 @@ describe('Tree', function() {
       window.customElements.whenDefined('coral-tree-item').then(() => {
         el._resetFocusableItem(beforeLastItem);
         
-        helpers.keypress('left', beforeLastItem._elements.header);
+        helpers.keypress('up', beforeLastItem._elements.header);
         
         expect(beforeLastItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
         expect(firstItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
@@ -462,7 +462,42 @@ describe('Tree', function() {
         done();
       });
     });
-    
+
+    it('should expand/collapse current item using key:right/key:left (nested)', function(done) {
+      const el = helpers.build(window.__html__['Tree.nested.html']);
+      var items = el.items.getAll();
+      var firstItem = items[0];
+      var secondItem = items[1];
+      window.customElements.whenDefined('coral-tree-item').then(() => {
+        el._resetFocusableItem(firstItem);
+        helpers.keypress('right', firstItem._elements.header);
+        helpers.next(function() {
+          assertActiveness(firstItem, false, true);
+          helpers.keypress('right', firstItem._elements.header);
+          helpers.next(function() {
+
+            // with item expanded, right arrow should move focus to the first item in the expanded subtree
+            assertActiveness(firstItem, false, true);
+            expect(secondItem._elements.header).to.equal(document.activeElement);
+            helpers.keypress('left', secondItem._elements.header);
+            helpers.next(function() {
+
+              // left arrow on a collaped item should move focus from the expanded subtree to the parent item
+              expect(firstItem._elements.header).to.equal(document.activeElement);
+              assertActiveness(firstItem, false, true);
+
+              // with item expanded, left arrow on the item should collapse the subtree
+              helpers.keypress('left', firstItem._elements.header);
+              helpers.next(function() {
+                assertActiveness(firstItem, false, false);
+                done();
+              });
+            });
+          });
+        }); 
+      });
+    });
+
     it('should set a new focusable item if the current one is disabled', function(done) {
       const el = helpers.build(window.__html__['Tree.base.html']);
       var items = el.items.getAll();
@@ -495,10 +530,10 @@ describe('Tree', function() {
       });
     });
     
-    it('should expand the tree item with key:enter', function() {
+    it('should expand the tree item with key:return', function() {
       const el = helpers.build(window.__html__['Tree.base.html']);
       var firstItem = el.items.first();
-      helpers.keypress('enter', firstItem._elements.header);
+      helpers.keypress('return', firstItem._elements.header);
       
       expect(firstItem.expanded).to.be.true;
     });
@@ -696,7 +731,7 @@ describe('Tree', function() {
     beforeEach(function() {
       el = helpers.build(new Tree());
       
-      var item = new Tree.Item();
+      item = new Tree.Item();
       item.set({
         content: {
           innerHTML: 'Item'
@@ -715,14 +750,12 @@ describe('Tree', function() {
       var item = el.items.getAll()[0];
       var header = item._elements.header;
       var subTree = item._elements.subTreeContainer;
+      var content = item._elements.content;
       expect(item.getAttribute('role')).to.equal('presentation');
       expect(header.getAttribute('role')).to.equal('treeitem');
-      
-      expect(header.getAttribute('aria-controls'))
-        .equal(subTree.getAttribute('id'));
-      
-      expect(subTree.getAttribute('aria-labelledby'))
-        .equal(header.getAttribute('id'));
+      expect(subTree.getAttribute('role')).to.equal('group');
+      expect(header.hasAttribute('aria-owns')).to.be.false;
+      expect(subTree.getAttribute('aria-labelledby')).to.equal(content.id);
     });
     
     it('should have right classes set', function() {

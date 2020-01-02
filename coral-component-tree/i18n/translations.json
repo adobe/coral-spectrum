@@ -1,0 +1,116 @@
+{
+  "en-US": {
+    "Expand": "Expand",
+    "Collapse": "Collapse",
+    "selected": "selected",
+    "not selected": "not selected"
+  },
+  "fr-FR": {
+    "Expand": "Développer",
+    "Collapse": "Réduire",
+    "selected": "Sélectionné",
+    "not selected": "Non sélectionné"
+  },
+  "de-DE": {
+    "Expand": "Udvid",
+    "Collapse": "Reduzieren",
+    "selected": "Ausgewählt",
+    "not selected": "Nicht ausgewählt"
+  },
+  "it-IT": {
+    "Expand": "Espandi",
+    "Collapse": "Comprimi",
+    "selected": "Selezionato",
+    "not selected": "Non selezionato"
+  },
+  "es-ES": {
+    "Expand": "Expandir",
+    "Collapse": "Contraer",
+    "selected": "Seleccionado",
+    "not selected": "No seleccionado"
+  },
+  "pt-BR": {
+    "Expand": "Expandir",
+    "Collapse": "Contrair",
+    "selected": "Selecionado",
+    "not selected": "Não selecionado"
+  },
+  "ja-JP": {
+    "Expand": "拡張",
+    "Collapse": "隠す",
+    "selected": "選 択済み",
+    "not selected": "未選択"
+  },
+  "ko-KR": {
+    "Expand": "확장",
+    "Collapse": "축소",
+    "selected": "선택됨",
+    "not selected": "선택되지 않음"
+  },
+  "zh-CN": {
+    "Expand": "展开",
+    "Collapse": "折叠",
+    "selected": "已选择",
+    "not selected": "未选定"
+  },
+  "zh-TW": {
+    "Expand": "展开",
+    "Collapse": "折叠",
+    "selected": "已选择",
+    "not selected": "未选定"
+  },
+  "nl-NL": {
+    "Expand": "Uitbreiden",
+    "Collapse": "Samenvouwen",
+    "selected": "Geselecteerd",
+    "not selected": "Niet geselecteerd"
+  },
+  "da-DK": {
+    "Expand": "Udvid",
+    "Collapse": "Komprimer",
+    "selected": "Valgt",
+    "not selected": "Ikke valgt"
+  },
+  "fi-FI": {
+    "Expand": "Laajenna",
+    "Collapse": "Supista",
+    "selected": "Valittu",
+    "not selected": "Ei valittu"
+  },
+  "nb-NO": {
+    "Expand": "Vis",
+    "Collapse": "Skjul",
+    "selected": "Valgt",
+    "not selected": "Ikke valgt"
+  },
+  "sv-SE": {
+    "Expand": "Expandera",
+    "Collapse": "Komprimera",
+    "selected": "Markerad",
+    "not selected": "Ej markerad"
+  },
+  "cs-CZ": {
+    "Expand": "Rozbalit",
+    "Collapse": "Sbalit",
+    "selected": "Vybráno",
+    "not selected": "Nevybráno"
+  },
+  "pl-PL": {
+    "Expand": "Rozwiń",
+    "Collapse": "Zwiń",
+    "selected": "Zaznaczone",
+    "not selected": "Niezaznaczone"
+  },
+  "ru-RU": {
+    "Expand": "Развернуть",
+    "Collapse": "Свернуть",
+    "selected": "Выбрано",
+    "not selected": "Не выбрано"
+  },
+  "tr-TR": {
+    "Expand": "Genişlet",
+    "Collapse": "Daralt",
+    "selected": "Seçili",
+    "not selected": "Seçili değil"
+  }
+}
