@@ -51,17 +51,17 @@
 
       <h1 class="coral-Heading coral-Heading--1">CycleButton</h1>
 
-      <h2 class="coral-Heading coral-Heading--2">Default</h2>
+      <h2 class="coral-Heading coral-Heading--2"><label id="label-0" for="cyclebutton-0-button">Default</label></h2>
       <div class="markup">
-        <coral-cyclebutton>
+        <coral-cyclebutton aria-labelledby="label-0" id="cyclebutton-0">
           <coral-cyclebutton-item icon="add">Add</coral-cyclebutton-item>
           <coral-cyclebutton-item icon="remove">Remove</coral-cyclebutton-item>
         </coral-cyclebutton>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">With content and pre-selected item</h2>
+      <h2 class="coral-Heading coral-Heading--2"><label id="label-1" for="cyclebutton-1-button">With content and pre-selected item</label></h2>
       <div class="markup">
-        <coral-cyclebutton>
+        <coral-cyclebutton aria-labelledby="label-1" id="cyclebutton-1">
           <coral-cyclebutton-item icon="viewCard">Card View</coral-cyclebutton-item>
           <coral-cyclebutton-item>Grid looooooooooooooong View</coral-cyclebutton-item>
           <coral-cyclebutton-item selected icon="viewList">List View</coral-cyclebutton-item>
@@ -69,9 +69,9 @@
         </coral-cyclebutton>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">With threshold=0</h2>
+      <h2 class="coral-Heading coral-Heading--2"><label id="label-2" for="cyclebutton-2-button">With threshold=0</label></h2>
       <div class="markup">
-        <coral-cyclebutton threshold="0">
+        <coral-cyclebutton threshold="0" aria-labelledby="label-2" id="cyclebutton-2">
           <coral-cyclebutton-item icon="viewCard">Card View</coral-cyclebutton-item>
           <coral-cyclebutton-item icon="viewGrid">Grid View</coral-cyclebutton-item>
           <coral-cyclebutton-item icon="viewList">List View</coral-cyclebutton-item>
@@ -79,17 +79,17 @@
         </coral-cyclebutton>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">With displayMode=icontext</h2>
+      <h2 class="coral-Heading coral-Heading--2"><label id="label-3" for="cyclebutton-3-button">With displayMode=icontext</label></h2>
       <div class="markup">
-        <coral-cyclebutton displaymode="icontext">
+        <coral-cyclebutton displaymode="icontext" aria-labelledby="label-3" id="cyclebutton-3">
           <coral-cyclebutton-item icon="deviceRotatePortrait">Portrait</coral-cyclebutton-item>
           <coral-cyclebutton-item icon="deviceRotateLandscape">Landscape</coral-cyclebutton-item>
         </coral-cyclebutton>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">With additional actions</h2>
+      <h2 class="coral-Heading coral-Heading--2"><label id="label-4" for="cyclebutton-4-button">With additional actions</label></h2>
       <div class="markup">
-        <coral-cyclebutton displaymode="icontext">
+        <coral-cyclebutton displaymode="icontext" aria-labelledby="label-4" id="cyclebutton-4">
           <coral-cyclebutton-item icon="viewCard">Card View</coral-cyclebutton-item>
           <coral-cyclebutton-item icon="viewGrid">Grid View</coral-cyclebutton-item>
           <coral-cyclebutton-item icon="viewList">List View</coral-cyclebutton-item>
@@ -99,9 +99,9 @@
         </coral-cyclebutton>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">With multiple display modes</h2>
+      <h2 class="coral-Heading coral-Heading--2"><label id="label-5" for="cyclebutton-5-button">With multiple display modes</label></h2>
       <div class="markup">
-        <coral-cyclebutton displayMode="icontext">
+        <coral-cyclebutton displayMode="icontext" aria-labelledby="label-5" id="cyclebutton-5">
           <coral-cyclebutton-item icon="viewCard" displayMode="icon">Card View</coral-cyclebutton-item>
           <coral-cyclebutton-item icon="viewGrid">Grid View</coral-cyclebutton-item>
           <coral-cyclebutton-item icon="viewList">List View</coral-cyclebutton-item>
@@ -109,9 +109,9 @@
         </coral-cyclebutton>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">With a general icon</h2>
+      <h2 class="coral-Heading coral-Heading--2"><label id="label-6" for="cyclebutton-6-button">With a general icon</label></h2>
       <div class="markup">
-        <coral-cyclebutton icon="apps">
+        <coral-cyclebutton icon="apps" aria-labelledby="label-6" id="cyclebutton-6">
           <coral-cyclebutton-item>Card View</coral-cyclebutton-item>
           <coral-cyclebutton-item>Grid View</coral-cyclebutton-item>
           <coral-cyclebutton-item icon="viewList">List View</coral-cyclebutton-item>
@@ -119,13 +119,25 @@
         </coral-cyclebutton>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Without any icons</h2>
+      <h2 class="coral-Heading coral-Heading--2"><label id="label-7" for="cyclebutton-7-button">Without any icons</label></h2>
       <div class="markup">
-        <coral-cyclebutton>
+        <coral-cyclebutton aria-labelledby="label-7" id="cyclebutton-7">
           <coral-cyclebutton-item>Card View</coral-cyclebutton-item>
           <coral-cyclebutton-item>Grid View</coral-cyclebutton-item>
           <coral-cyclebutton-item>List View</coral-cyclebutton-item>
           <coral-cyclebutton-item>Column View</coral-cyclebutton-item>
+        </coral-cyclebutton>
+      </div>
+
+      <h2 class="coral-Heading coral-Heading--2">Labelled using aria-label</h2>
+      <div class="markup">
+        <coral-cyclebutton displaymode="icontext" aria-label="Labelled using aria-label">
+          <coral-cyclebutton-item icon="viewCard">Card View</coral-cyclebutton-item>
+          <coral-cyclebutton-item icon="viewGrid">Grid View</coral-cyclebutton-item>
+          <coral-cyclebutton-item icon="viewList">List View</coral-cyclebutton-item>
+          <coral-cyclebutton-item icon="viewColumn">Column View</coral-cyclebutton-item>
+          <coral-cyclebutton-action icon="settings">View Settings</coral-cyclebutton-action>
+          <coral-cyclebutton-action icon="more">More Settings</coral-cyclebutton-action>
         </coral-cyclebutton>
       </div>
     </main>

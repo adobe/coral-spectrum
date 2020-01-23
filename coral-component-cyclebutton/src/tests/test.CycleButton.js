@@ -612,8 +612,7 @@ describe('CycleButton', function() {
       var labelString = stripWhitespace(el.selectedItem.textContent);
       expect(el._elements.button.getAttribute('aria-haspopup')).to.equal('true', 'aria-haspopup attribute is not set to \'true\'');
       expect(el._elements.button.getAttribute('aria-expanded')).to.equal('false', 'aria-expanded attribute was not set to \'false\' when overlay is closed');
-      expect(el._elements.button.getAttribute('aria-owns')).to.equal(el._elements.selectList.id, 'aria-owns attribute was not set');
-      expect(el._elements.button.getAttribute('aria-controls')).to.equal(el._elements.selectList.id, 'aria-controls attribute was not set');
+      expect(el._elements.button.getAttribute('aria-controls')).to.equal(el._elements.overlay.id, 'aria-controls attribute was not set');
       if (el.icon) {
         expect(el._elements.button.getAttribute('aria-label')).to.equal(labelString, 'aria-label attribute on button does not match the selected item label');
         expect(el._elements.button.getAttribute('title')).to.equal(labelString, 'title attribute on button does not match the selected item label');
@@ -621,12 +620,11 @@ describe('CycleButton', function() {
       el.querySelector('#btn1').click();
       
       expect(el.selectedItem.id).to.equal('btn1');
-      expect(el._elements.button.getAttribute('aria-expanded')).to.equal('true', 'aria-expanded attribute was not set to \'true\' when overlay is closed');
       
       // Wait for list to be populated
       el.on('coral-overlay:open', () => {
+        expect(el._elements.button.getAttribute('aria-expanded')).to.equal('true', 'aria-expanded attribute was not set to \'true\' when overlay is opened');
         expect(el._elements.overlay.open).to.be.true;
-        
         done();
       });
     });
@@ -636,7 +634,8 @@ describe('CycleButton', function() {
       el._elements.button.querySelector('coral-icon').click();
       
       // Wait for the list to be populated
-      helpers.next(function() {
+      el.on('coral-overlay:open', () => {
+        expect(el._elements.button.getAttribute('aria-expanded')).to.equal('true', 'aria-expanded attribute was not set to \'true\' when overlay is opened');
         expect(el._elements.overlay.open).to.be.true;
         done();
       });
@@ -649,11 +648,13 @@ describe('CycleButton', function() {
       // Wait for the list to be populated
       el.on('coral-overlay:open', () => {
         el.querySelector('#btn1').click();
-  
-        expect(el.selectedItem.id).to.equal('btn1');
-        expect(el._elements.overlay.open).to.be.false;
-        expect(el._elements.button.getAttribute('aria-expanded')).to.equal('false', 'aria-expanded attribute was not set to \'false\'');
-        done();
+        
+        el.on('coral-overlay:close', () => {
+          expect(el.selectedItem.id).to.equal('btn1');
+          expect(el._elements.overlay.open).to.be.false;
+          expect(el._elements.button.getAttribute('aria-expanded')).to.equal('false', 'aria-expanded attribute was not set to \'false\'');
+          done();
+        });      
       });
     });
 
@@ -685,13 +686,14 @@ describe('CycleButton', function() {
       const el = helpers.build(SNIPPET_THREEITEMS);
       el.querySelector('#btn1').click();
       
-      // Wait for list to be populaited
-      helpers.next(function() {
+      // Wait for list to be populated
+      el.on('coral-overlay:open', () => {
+        el.on('coral-overlay:close', () => {
+          expect(el._elements.overlay.open).to.be.false;
+          expect(el._elements.button.getAttribute('aria-expanded')).to.equal('false', 'aria-expanded attribute was not set to \'false\'');
+          done();
+        });
         document.body.click();
-        
-        expect(el._elements.overlay.open).to.be.false;
-        expect(el._elements.button.getAttribute('aria-expanded')).to.equal('false', 'aria-expanded attribute was not set to \'false\'');
-        done();
       });
     });
 
@@ -727,7 +729,8 @@ describe('CycleButton', function() {
       expect(el.actions.length).to.equal(0);
       el.querySelector('#btn1').click();
       
-      expect(el._elements.actionList.getAttribute('hidden') === 'true').to.be.true;
+      expect(el._elements.actionList.hasAttribute('hidden')).to.be.true;
+      expect(el._elements.separator.hasAttribute('hidden')).to.be.true;
     });
 
     it('should show the actions selectList when there are actions', function() {
@@ -735,6 +738,8 @@ describe('CycleButton', function() {
       el.querySelector('#btn1').click();
       
       expect(el._elements.actionList.hasAttribute('hidden')).to.be.false;
+      expect(el._elements.separator.hasAttribute('hidden')).to.be.false;
+
     });
 
     it('should switch between inline/overlay selection when adding/removing nodes', function(done) {

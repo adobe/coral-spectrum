@@ -63,6 +63,20 @@ class CycleButtonAction extends BaseComponent(HTMLElement) {
   set trackingElement(value) {
     super.trackingElement = value;
   }
+
+  /** @ignore */
+  static get observedAttributes() {
+    return super.observedAttributes.concat(['icon']);
+  }
+
+  /** @ignore */
+  render() {
+    super.render();
+    
+    // adds the role to support accessibility
+    this.setAttribute('role', 'menuitem');
+    this.tabIndex =  -1;
+  }
 }
 
 export default CycleButtonAction;

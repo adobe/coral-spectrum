@@ -62,10 +62,14 @@ class CycleButton extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
+
+    if (!this.id) {
+      this.id = commons.getUID();
+    } 
     
     // Templates
     this._elements = {};
-    base.call(this._elements, {Icon, commons});
+    base.call(this._elements, {Icon, commons, id: this.id});
     
     const events = {
       'click button[is="coral-button"]': '_onMouseDown',
@@ -77,7 +81,22 @@ class CycleButton extends BaseComponent(HTMLElement) {
       'coral-cyclebutton-item:_selectedchanged': '_onItemSelectedChanged',
       'coral-cyclebutton-item:_validateselection': '_onValidateSelection',
       'coral-cyclebutton-item:_iconchanged coral-cyclebutton-item[selected]': '_onSelectedItemPropertyChange',
-      'coral-cyclebutton-item:_displaymodechanged coral-cyclebutton-item[selected]': '_onSelectedItemPropertyChange'
+      'coral-cyclebutton-item:_displaymodechanged coral-cyclebutton-item[selected]': '_onSelectedItemPropertyChange',
+
+      'key:pageup coral-selectlist-item, [coral-list-item]': '_onFocusPreviousItem',
+      'key:left coral-selectlist-item, [coral-list-item]': '_onFocusPreviousItem',
+      'key:up coral-selectlist-item, [coral-list-item]': '_onFocusPreviousItem',
+      'key:pagedown coral-selectlist-item, [coral-list-item]': '_onFocusNextItem',
+      'key:right coral-selectlist-item, [coral-list-item]': '_onFocusNextItem',
+      'key:down coral-selectlist-item, [coral-list-item]': '_onFocusNextItem',
+      'key:home coral-selectlist-item, [coral-list-item]': '_onFocusFirstItem',
+      'key:end coral-selectlist-item, [coral-list-item]': '_onFocusLastItem',
+
+      'capture:focus coral-selectlist-item, [coral-list-item]': '_onItemFocus',
+      'capture:blur coral-selectlist-item, [coral-list-item]': '_onItemBlur',
+      
+      'coral-overlay:open': '_onOverlayOpen',
+      'coral-overlay:close': '_onOverlayClose'
     };
   
     const overlay = this._elements.overlay;
@@ -85,6 +104,7 @@ class CycleButton extends BaseComponent(HTMLElement) {
     
     // Overlay
     events[`global:capture:click #${overlayId} button[is="coral-buttonlist-item"]`] = '_onActionClick';
+    events[`global:capture:coral-selectlist:beforechange #${overlayId}`] = '_onSelectListBeforeChange';
     events[`global:capture:coral-selectlist:change #${overlayId}`] = '_onSelectListChange';
     // Keyboard interaction
     events[`global:keypress #${overlayId}`] = '_onOverlayKeyPress';
@@ -223,6 +243,96 @@ class CycleButton extends BaseComponent(HTMLElement) {
     if (selectedItem) {
       this._renderSelectedItem(selectedItem);
     }
+  }
+
+  /**
+   The accessibility name for the button element
+   
+   @type {String}
+   @default ""
+   @htmlattribute aria-label
+   @htmlattributereflected
+   */
+  get ariaLabel() {
+    return this._ariaLabel;
+  }
+  set ariaLabel(value) {
+    value = transform.string(value);
+    this._ariaLabel = value;
+    this._reflectAttribute('aria-label', this._ariaLabel);
+    const hasMenuItemRadioGroup = this._hasMenuItemRadioGroup();
+
+    // aria-labelledby takes precedence over aria-label
+    if (!this.ariaLabelledby) {
+
+      // button should be labeled by the container and the button, with the selected value, itself
+      this._elements.button.setAttribute('aria-labelledby', this.id + ' ' + this._elements.button.id);
+      
+      // overlay should be labeled by the container with aria-label
+      this._elements.overlay.setAttribute('aria-labelledby', this.id);
+
+      //  With both items and actions, the items should be grouped and the group should be labeled
+      if (hasMenuItemRadioGroup) {
+
+        // selectList menuitemradio group should be labeled by the container with aria-label,
+        this._elements.selectList.setAttribute('aria-labelledby', this.id);
+      }
+      else {
+
+        // otherwise the selectList should not be labeled independantly from the menu
+        this._elements.selectList.removeAttribute('aria-labelledby');
+      }
+    }
+    else {
+      //  with no aria-label, clean up aria-labelledby on _elements
+      this._elements.button.removeAttribute('aria-labelledby');
+      this._elements.overlay.setAttribute('aria-labelledby', this._elements.button.id);
+      
+      //  With both items and actions, the items should be grouped and the group should be labeled
+      if (hasMenuItemRadioGroup) {
+
+        // selectList menuitemradio group should be labeled by the button, with the selected value, itself,
+        this._elements.selectList.setAttribute('aria-labelledby', this._elements.button.id);
+      }
+      else {
+
+        // otherwise the selectList should not be labeled independantly from the menu
+        this._elements.selectList.removeAttribute('aria-labelledby');
+      }
+    }
+  }
+
+  /**
+   The id reference for an HTML element that labels the button element 
+   accessibility name for the button element
+   
+   @type {String}
+   @default ""
+   @htmlattribute aria-labelledby
+   @htmlattributereflected
+   */
+  get ariaLabelledby() {
+    return this._ariaLabelledby;
+  }
+  set ariaLabelledby(value) {
+    value = transform.string(value);
+    this._ariaLabelledby = value;
+    this._reflectAttribute('aria-labelledby', this._ariaLabelledby);
+    if (this.ariaLabelledby || !this.ariaLabel) {
+      this._elements.button.setAttribute('aria-labelledby', this.ariaLabelledby + ' ' + this._elements.button.id);
+      this._elements.overlay.setAttribute('aria-labelledby', this.ariaLabelledby || this._elements.button.id);
+      if (this._hasMenuItemRadioGroup()) {
+        this._elements.selectList.setAttribute('aria-labelledby', this.ariaLabelledby || this._elements.button.id);
+      }
+      else {
+        this._elements.selectList.removeAttribute('aria-labelledby');
+      }
+    }
+  }
+
+  /** @private */
+  _hasMenuItemRadioGroup() {
+    return this.items.getAll().length > 0 && this.actions.getAll().length > 0;
   }
   
   /** @private */
@@ -422,6 +532,17 @@ class CycleButton extends BaseComponent(HTMLElement) {
     event.stopImmediatePropagation();
     this._renderSelectedItem(event.target);
   }
+
+  /** @private */
+  _onSelectListBeforeChange(event) {
+    if (event.detail.item.selected) {
+      event.preventDefault();
+      if (!this._isPopulatingLists) {
+        // Hide the overlay, cleanup will be done before overlay.show()
+        this._hideOverlay();
+      }
+    }
+  }
   
   /** @private */
   _onSelectListChange(event) {
@@ -435,8 +556,10 @@ class CycleButton extends BaseComponent(HTMLElement) {
       
       this._selectCycleItem(origNode);
       
-      // Hide the overlay, cleanup will be done before overlay.show()
-      this._hideOverlay();
+      if (!this._isPopulatingLists) {
+        // Hide the overlay, cleanup will be done before overlay.show()
+        this._hideOverlay();
+      }
     }
   
     this._trackEvent('selected', 'coral-cyclebutton-item', event, origNode);
@@ -474,18 +597,23 @@ class CycleButton extends BaseComponent(HTMLElement) {
     
     // @a11y
     if (isExtended) {
-      const uid = this._elements.selectList.id;
-      this._elements.button.setAttribute('aria-owns', uid);
-      this._elements.button.setAttribute('aria-controls', uid);
+      this._elements.button.setAttribute('aria-controls', this._elements.overlay.id);
       this._elements.button.setAttribute('aria-haspopup', true);
       this._elements.button.setAttribute('aria-expanded', false);
   
       // Assign the button as the target for the overlay
       this._elements.overlay.target = this._elements.button;
       this._elements.overlay.hidden = false;
+
+      // regions within the overlay should have role=presentation
+      ['header', 'content', 'footer'].forEach((contentZoneName) => {
+        const contentZone = this._elements.overlay[contentZoneName];
+        if (contentZone) {
+          contentZone.setAttribute('role', 'presentation');
+        }
+      });
     }
     else {
-      this._elements.button.removeAttribute('aria-owns');
       this._elements.button.removeAttribute('aria-controls');
       this._elements.button.removeAttribute('aria-haspopup');
       this._elements.button.removeAttribute('aria-expanded');
@@ -502,11 +630,90 @@ class CycleButton extends BaseComponent(HTMLElement) {
       item.focus();
     }
   }
+
+  /** @private */
+  _onFocusPreviousItem(event) {
+    event.preventDefault();
+    const items = this._getSelectableItems();
+    if (items.length > 1) {
+      const el = event.matchedTarget;
+      const index = items.indexOf(el);
+      if (index > 0) {
+        this._focusItem(items[index - 1]);
+      }
+      else if (document.activeElement !== el) {
+        // make sure ButtonList doesn't wrap focus
+        this._focusItem(el);
+      }
+    }
+  }
   
-  /** @ignore */
-  _hideOverlay() {
+  /** @private */
+  _onFocusNextItem(event) {
+    event.preventDefault();
+    const items = this._getSelectableItems();
+    if (items.length > 1) {
+      const el = event.matchedTarget;
+      const index = items.indexOf(el);
+      if (index < items.length - 1) {
+        this._focusItem(items[index + 1]);
+      }
+      else if (document.activeElement !== el) {
+        // make sure ButtonList doesn't wrap focus
+        this._focusItem(el);
+      }
+    }
+  }
+
+  /** @private */
+  _onFocusFirstItem(event) {
+    event.preventDefault();
+    this._focusItem(this._getSelectableItems()[0]);
+  }
+
+  /** @private */
+  _onFocusLastItem(event) {
+    event.preventDefault();
+    var items = this._getSelectableItems();
+    this._focusItem(items[items.length - 1]);
+  }
+
+  /** @private */
+  _getSelectableItems() {
+    var items = this.items.getAll();
+    var actions = this.actions.getAll();
+    return items.concat(actions).map((item) => {
+      return item._selectListItem || item._buttonListItem;
+    }).filter(function(item) {
+      return !item.hasAttribute('hidden') && !item.hasAttribute('disabled') && item.offsetParent !== null &&
+        (item.offsetWidth > 0 || item.offsetHeight > 0 );
+    });
+  }
+
+  /** @private */
+  _onItemFocus(event) {
+    this._elements.selectList.classList.toggle('is-focused', true);
+    event.matchedTarget.classList.toggle('focus-ring', true);
+  }
+
+  /** @private */
+  _onItemBlur(event) {
+    this._elements.selectList.classList.toggle('is-focused', false);
+    event.matchedTarget.classList.toggle('focus-ring', false);
+  }
+
+  _onOverlayClose() {
     // @a11y
     this._elements.button.setAttribute('aria-expanded', false);
+  }
+
+  _onOverlayOpen() {
+    // @a11y
+    this._elements.button.setAttribute('aria-expanded', true);
+  }
+  
+  /** @ignore */
+  _hideOverlay() {  
     this._elements.overlay.hide();
   }
   
@@ -527,6 +734,11 @@ class CycleButton extends BaseComponent(HTMLElement) {
       selectListItem.icon = item.icon;
     }
     
+    selectListItem.disabled = item.disabled;
+    selectListItem.selected = item.selected;
+    selectListItem.role = item.role;
+    selectListItem.setAttribute('aria-checked', item.selected);
+    
     selectListItem._originalItem = item;
     item._selectListItem = selectListItem;
     
@@ -536,8 +748,12 @@ class CycleButton extends BaseComponent(HTMLElement) {
   /** @ignore */
   _getActionListItem(action) {
     const actionListItem = new ButtonList.Item();
-    
+
     actionListItem.icon = action.icon;
+    actionListItem.disabled = action.disabled;
+    actionListItem.role = action.role;
+    actionListItem.tabIndex = action.tabIndex;
+
     // Needs to be reflected on the generated Action.
     actionListItem.trackingElement = action.trackingElement;
     actionListItem.content.innerHTML = action.content.innerHTML;
@@ -558,7 +774,9 @@ class CycleButton extends BaseComponent(HTMLElement) {
     const actionCount = actions.length;
     let selectListItem;
     let actionListItem;
-    
+
+    this._isPopulatingLists = true;
+
     // we empty the existing items before populating the lists again
     selectList.items.clear();
     actionList.items.clear();
@@ -568,6 +786,10 @@ class CycleButton extends BaseComponent(HTMLElement) {
       const item = items[i];
       selectListItem = this._getSelectListItem(item);
       
+      selectListItem.icon = item.icon;
+      selectListItem.role = item.role;
+      selectListItem.setAttribute('aria-checked', item.selected);
+
       selectListItem.set({
         disabled: item.disabled,
         selected: item.selected
@@ -582,15 +804,29 @@ class CycleButton extends BaseComponent(HTMLElement) {
         const action = actions[j];
         
         actionListItem = this._getActionListItem(action);
-        actionList.items.add(actionListItem);
         actionListItem.disabled = action.disabled;
+        actionListItem.icon = action.icon;
+        actionListItem.role = action.role;
+
+        actionList.items.add(actionListItem);
       }
       
       this._elements.actionList.removeAttribute('hidden');
+
+      if (itemCount > 0) {
+        this._elements.separator.removeAttribute('hidden');
+        this._elements.selectList.setAttribute('role', 'group');
+      }
     }
     else {
-      this._elements.actionList.setAttribute('hidden', true);
+      this._elements.actionList.setAttribute('hidden', '');
+      this._elements.separator.setAttribute('hidden', '');
+      this._elements.selectList.setAttribute('role', 'presentation');
     }
+
+    commons.nextFrame(() => {
+      this._isPopulatingLists = false;
+    });
   }
   
   /** @private */
@@ -599,16 +835,10 @@ class CycleButton extends BaseComponent(HTMLElement) {
   }
   
   /** @ignore */
-  _showOverlay() {
-    // @a11y
-    this._elements.button.setAttribute('aria-expanded', true);
-    
+  _showOverlay() {    
     this._populateLists();
     
-    // Wait for list to be populated before showing the overlay
-    window.requestAnimationFrame(() => {
-      this._elements.overlay.show();
-    });
+    this._elements.overlay.show();
   }
   
   /**
@@ -620,13 +850,15 @@ class CycleButton extends BaseComponent(HTMLElement) {
   
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
-      displaymode: 'displayMode'
+      displaymode: 'displayMode',
+      'aria-label': 'ariaLabel',
+      'aria-labelledby': 'ariaLabelledby'
     });
   }
   
   /** @ignore */
   static get observedAttributes() {
-    return super.observedAttributes.concat(['icon', 'threshold', 'displaymode']);
+    return super.observedAttributes.concat(['icon', 'threshold', 'displaymode', 'aria-label', 'aria-labelledby']);
   }
   
   /** @ignore */
@@ -679,6 +911,9 @@ class CycleButton extends BaseComponent(HTMLElement) {
     this._preventTriggeringEvents = false;
     
     this._oldSelection = this.selectedItem;
+
+    // remove the default aria-label from the selectList element
+    this._elements.selectList.removeAttribute('aria-label');
   }
   
   /** @ignore */
