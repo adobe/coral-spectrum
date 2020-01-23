@@ -110,7 +110,6 @@ const BaseList = (superClass) => class extends superClass {
     if (isAtTarget) {
       // Don't let arrow keys etc scroll the page
       event.preventDefault();
-      event.stopPropagation();
     }
     
     return isAtTarget;
