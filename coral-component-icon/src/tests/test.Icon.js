@@ -367,12 +367,12 @@ describe('Icon', function() {
         expect(icon.getAttribute('aria-label')).to.equal('Add Item');
       });
   
-      it('should add an aria-label equal to the value of the icon property when not set and when no title attribute is present', function() {
+      it('should not add an aria-label equal to the value of the icon property when not set and when no title attribute is present', function() {
         var icon = helpers.build(new Icon());
     
         icon.icon = 'add';
     
-        expect(icon.getAttribute('aria-label')).to.equal('add');
+        expect(icon.hasAttribute('aria-label')).to.be.false;
       });
   
       it('should add an aria-label equal to the value of the title attribute property when not set and when a title attribute is present', function() {

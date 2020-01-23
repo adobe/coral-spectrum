@@ -325,15 +325,12 @@ class Icon extends BaseComponent(HTMLElement) {
   _updateAltText(value) {
     const isImage = this.contains(this._elements.image);
     
-    let altText;
+    let altText = '';
     if (typeof value === 'string') {
       altText = value;
     }
     else if (isImage) {
       altText = '';
-    }
-    else {
-      altText = this.icon.replace(SPLIT_CAMELCASE_REGEX, '$1 $2');
     }
   
     // If no other role has been set, provide the appropriate

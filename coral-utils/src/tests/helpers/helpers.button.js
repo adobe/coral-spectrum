@@ -228,7 +228,7 @@ const testButton = function(Constructor, tagName, baseTagName) {
           expect(button._elements.icon).to.exist;
           expect(button._elements.icon.icon).to.equal('add');
           expect(button._elements.icon.alt).to.equal(null);
-          expect(button._elements.icon.getAttribute('aria-label')).to.equal('add');
+          expect(button._elements.icon.hasAttribute('aria-label')).to.be.false;
           expect(button.classList.contains('_coral-Button')).to.be.true;
         });
       
@@ -253,7 +253,7 @@ const testButton = function(Constructor, tagName, baseTagName) {
           expect(button._elements.icon).to.exist;
           expect(button._elements.icon.parentNode).not.to.be.null;
           expect(button._elements.icon.alt).to.equal(null);
-          expect(button._elements.icon.getAttribute('aria-label')).to.equal('add');
+          expect(button._elements.icon.hasAttribute('aria-label')).to.be.false;
         
           button.label.textContent = 'Add';
           // Wait for the MO to kick in
@@ -262,7 +262,7 @@ const testButton = function(Constructor, tagName, baseTagName) {
             expect(button.classList.contains('_coral-Button')).to.be.true;
             expect(button.icon).to.equal('add');
             expect(button._elements.icon.alt).to.equal('');
-            expect(button._elements.icon.getAttribute('aria-label')).to.be.null;
+            expect(button._elements.icon.hasAttribute('aria-label')).to.be.false;
             done();
           });
         });
@@ -282,7 +282,7 @@ const testButton = function(Constructor, tagName, baseTagName) {
             expect(button.classList.contains('_coral-Button')).to.be.true;
             expect(button.icon).to.equal('add');
             expect(button._elements.icon.alt).to.equal('');
-            expect(button._elements.icon.getAttribute('aria-label')).to.equal('add');
+            expect(button._elements.icon.hasAttribute('aria-label')).to.be.false;
             done();
           });
         });
@@ -303,7 +303,7 @@ const testButton = function(Constructor, tagName, baseTagName) {
             expect(button._getIconElement()).to.exist;
             expect(button._getIconElement().icon).to.equal('share');
             expect(button._elements.icon.alt).to.equal('');
-            expect(button._elements.icon.getAttribute('aria-label')).to.equal('share');
+            expect(button._elements.icon.hasAttribute('aria-label')).to.be.false;
             expect(button.classList.contains('_coral-Button')).to.be.true;
             done();
           });
