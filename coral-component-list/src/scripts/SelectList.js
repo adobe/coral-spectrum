@@ -174,7 +174,7 @@ class SelectList extends BaseComponent(HTMLElement) {
     this._multiple = transform.booleanAttr(value);
     this._reflectAttribute('multiple', this._multiple);
     
-    this.setAttribute('aria-multiselectable', this._multiple);
+    this[this._multiple ? 'setAttribute' : 'removeAttribute']('aria-multiselectable', this._multiple);
     
     this._validateSelection();
   }
@@ -524,7 +524,10 @@ class SelectList extends BaseComponent(HTMLElement) {
     this.classList.add(CLASSNAME);
     
     // adds the role to support accessibility
-    this.setAttribute('role', 'listbox');
+    if (!this.hasAttribute('role')) {
+      this.setAttribute('role', 'listbox');
+    }
+
     if (!this.hasAttribute('aria-label')) {
       this.setAttribute('aria-label', i18n.get('List'));
     }
