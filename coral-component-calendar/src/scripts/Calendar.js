@@ -443,7 +443,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
     this.classList.toggle('is-disabled', this._disabled);
     this._elements.prev.disabled = this._disabled;
     this._elements.next.disabled = this._disabled;
-    this._elements.body.setAttribute('aria-disabled', this._disabled);
+    this._elements.body[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
     this._elements.body[this._disabled ? 'removeAttribute' : 'setAttribute']('tabindex', '0');
   
     this._renderCalendar();

@@ -63,7 +63,7 @@
         transform: Coral.transform.boolean,
         attributeTransform: Coral.transform.booleanAttr,
         sync: function() {
-          this.setAttribute('aria-disabled', this.disabled);
+          this[this.disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this.disabled);
           this.classList.toggle('is-disabled', this.disabled);
           this._elements.toggle.disabled = this.disabled;
         }

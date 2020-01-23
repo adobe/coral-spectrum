@@ -276,7 +276,7 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
     this.items.getAll().forEach((item) => {
       item.disabled = isDisabled;
     });
-    this.setAttribute('aria-disabled', isDisabled);
+    this[isDisabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', isDisabled);
   }
   
   /**
@@ -297,12 +297,7 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
     // Also update for all the items the disabled property so it matches the native select.
     this.items.getAll().forEach((item) => {
       item.disabled = this.disabled || this.readOnly && !item.hasAttribute('selected');
-      if (this.readOnly) {
-        item.setAttribute('aria-disabled', true);
-      }
-      else {
-        item.removeAttribute('aria-disabled');
-      }
+      item[this.readOnly ? 'setAttribute' : 'removeAttribute']('aria-disabled', true);
     });
     // aria-readonly is not permitted on elements with role="radiogroup" or role="group"
     this.removeAttribute('aria-readonly');
@@ -556,12 +551,7 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
   
     item.disabled = this.disabled || this.readOnly && !item.hasAttribute('selected');
   
-    if (this.readOnly) {
-      item.setAttribute('aria-disabled', true);
-    }
-    else {
-      item.removeAttribute('aria-disabled');
-    }
+    item[this.readOnly ? 'setAttribute' : 'removeAttribute']('aria-disabled', true);
   
     this._addItemOption(item);
    

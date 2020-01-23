@@ -161,7 +161,7 @@ describe('Status', function() {
   
         el.disabled = false;
         expect(el.hasAttribute('disabled')).to.be.false;
-        expect(el.getAttribute('aria-disabled')).to.equal('false');
+        expect(el.hasAttribute('aria-disabled')).to.be.false;
       });
     });
   });

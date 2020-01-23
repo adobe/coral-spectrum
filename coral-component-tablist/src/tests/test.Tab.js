@@ -102,7 +102,7 @@ describe('Tab', function() {
         expect(item.disabled).to.be.false;
         expect(item.hasAttribute('disabled')).to.be.false;
         expect(item.classList.contains('is-disabled')).to.be.false;
-        expect(item.getAttribute('aria-disabled')).to.equal('false');
+        expect(item.hasAttribute('aria-disabled')).to.be.false;
       });
   
       it('disabled items cannot be selected', function() {

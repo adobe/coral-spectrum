@@ -32,7 +32,7 @@ describe('AnchorButton', function() {
       expect(button.hasAttribute('tabindex')).to.be.true;
       expect(button.getAttribute('role')).to.equal('button');
       expect(button.getAttribute('tabindex')).to.equal('0');
-      expect(button.getAttribute('aria-disabled')).to.equal('false');
+      expect(button.hasAttribute('aria-disabled')).to.be.false;
     });
 
     it('should have tabindex set to -1 while disabled', function() {
