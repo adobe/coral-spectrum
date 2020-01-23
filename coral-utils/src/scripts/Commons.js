@@ -124,7 +124,7 @@ class Commons {
     });
     
     const focusableElements = FOCUSABLE_ELEMENTS.slice();
-    this._focusableElementsSelector = focusableElements.join(',');
+    this._focusableElementsSelector = `${focusableElements.join(',')},[tabindex]`;
   
     focusableElements.push('[tabindex]:not([tabindex="-1"])');
     this._tabbableElementsSelector = focusableElements.join(':not([tabindex="-1"]),');
