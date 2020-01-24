@@ -1,5 +1,7 @@
-<div class="_coral-TreeView-itemLink" tabindex="-1" id="{{data.commons.getUID()}}" handle="header" role="treeitem"></div>
+<div class="_coral-TreeView-itemLink" tabindex="-1" id="{{data.commons.getUID()}}" handle="header" role="treeitem">
+  <span class="u-coral-screenReaderOnly" handle="selectedState" role="presentation" id="{{data.commons.getUID()}}"></span>
+</div>
 <js>
   this.header.insertAdjacentHTML('afterbegin', data.Icon._renderSVG('spectrum-css-icon-ChevronRightMedium', ['_coral-TreeView-indicator', '_coral-UIIcon-ChevronRightMedium']));
 </js>
-<div class="_coral-TreeView" handle="subTreeContainer" id="{{data.commons.getUID()}}" role="presentation"></div>
+<div class="_coral-TreeView" handle="subTreeContainer" id="{{data.commons.getUID()}}" role="group"></div>
