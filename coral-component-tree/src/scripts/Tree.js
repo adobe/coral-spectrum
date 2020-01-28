@@ -276,7 +276,7 @@ class Tree extends BaseComponent(HTMLElement) {
     event.stopPropagation();
 
     // The click was performed on the icon to expand the sub tree
-    var item = event.target.closest('coral-tree-item');
+    const item = event.target.closest('coral-tree-item');
     if (item) {
       // We ignore the expand if the item is disabled
       if (item.hasAttribute('disabled')) {
@@ -284,13 +284,11 @@ class Tree extends BaseComponent(HTMLElement) {
       }
 
       if (!item.expanded && item.variant === TreeItem.variant.DRILLDOWN) {
-
         // If the item is not expanded, expand the item
         item.expanded = !item.expanded;
         item._elements.header.classList.add('focus-ring');
       }
       else if (item.items.length > 0) {
-
         // If the item is expanded, and contains items, focus the next item
         this._onFocusNextItem(event);
       }
@@ -303,7 +301,7 @@ class Tree extends BaseComponent(HTMLElement) {
     event.stopPropagation();
 
     // The click was performed on the icon to collapse the sub tree
-    var item = event.target.closest('coral-tree-item');
+    const item = event.target.closest('coral-tree-item');
     if (item) {
       // We ignore the expand if the item is disabled
       if (item.hasAttribute('disabled')) {
@@ -311,13 +309,11 @@ class Tree extends BaseComponent(HTMLElement) {
       }
 
       if (item.expanded && item.variant === TreeItem.variant.DRILLDOWN) {
-
         // If the item is not expanded, expand the item
         item.expanded = !item.expanded;
         item._elements.header.classList.add('focus-ring');
       }
       else if (item.parent) {
-
         item._elements.header.setAttribute('tabindex', '-1');
         item._elements.header.classList.remove('focus-ring');
         item.parent.focus();

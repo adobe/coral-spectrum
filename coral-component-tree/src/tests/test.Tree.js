@@ -346,121 +346,93 @@ describe('Tree', function() {
       const el = helpers.build(window.__html__['Tree.base.html']);
       var lastItem = el.items.last();
       
-      // Focusing requires the tree item to be defined
-      window.customElements.whenDefined('coral-tree-item').then(() => {
-        el._resetFocusableItem(lastItem);
-        
-        helpers.keypress('home', lastItem._elements.header);
-        
-        var firstItem = el.items.first();
-        expect(lastItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
-        expect(firstItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
-        expect(firstItem._elements.header).to.equal(document.activeElement);
-        done();
-      });
+      el._resetFocusableItem(lastItem);
+      
+      helpers.keypress('home', lastItem._elements.header);
+      
+      var firstItem = el.items.first();
+      expect(lastItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
+      expect(firstItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
+      expect(firstItem._elements.header).to.equal(document.activeElement);
     });
     
-    it('should focus the last item via keyboard', function(done) {
+    it('should focus the last item via keyboard', function() {
       const el = helpers.build(window.__html__['Tree.base.html']);
       var firstItem = el.items.first();
       
-      // Focusing requires the tree item to be defined
-      window.customElements.whenDefined('coral-tree-item').then(() => {
-        helpers.keypress('end', firstItem._elements.header);
-        
-        var lastItem = el.items.last();
-        expect(firstItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
-        expect(lastItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
-        expect(lastItem._elements.header).to.equal(document.activeElement);
-        done();
-      });
+      helpers.keypress('end', firstItem._elements.header);
+      
+      var lastItem = el.items.last();
+      expect(firstItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
+      expect(lastItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
+      expect(lastItem._elements.header).to.equal(document.activeElement);
     });
     
-    it('should focus the next item via keyboard', function(done) {
+    it('should focus the next item via keyboard', function() {
       const el = helpers.build(window.__html__['Tree.base.html']);
       var firstItem = el.items.first();
       var nextItem = firstItem.nextElementSibling;
       
-      // Focusing requires the tree item to be defined
-      window.customElements.whenDefined('coral-tree-item').then(() => {
-        helpers.keypress('down', firstItem._elements.header);
-        
-        expect(firstItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
-        expect(nextItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
-        expect(nextItem._elements.header).to.equal(document.activeElement);
-        done();
-      });
+      helpers.keypress('down', firstItem._elements.header);
+      
+      expect(firstItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
+      expect(nextItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
+      expect(nextItem._elements.header).to.equal(document.activeElement);
     });
     
-    it('should focus the previous item via keyboard', function(done) {
+    it('should focus the previous item via keyboard', function() {
       const el = helpers.build(window.__html__['Tree.base.html']);
       var lastItem = el.items.last();
       
-      // Focusing requires the tree item to be defined
-      window.customElements.whenDefined('coral-tree-item').then(() => {
-        el._resetFocusableItem(lastItem);
-        
-        var previousItem = lastItem.previousElementSibling;
-        helpers.keypress('up', lastItem._elements.header);
-        
-        expect(lastItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
-        expect(previousItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
-        expect(previousItem._elements.header).to.equal(document.activeElement);
-        done();
-      });
+      el._resetFocusableItem(lastItem);
+      
+      var previousItem = lastItem.previousElementSibling;
+      helpers.keypress('up', lastItem._elements.header);
+      
+      expect(lastItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
+      expect(previousItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
+      expect(previousItem._elements.header).to.equal(document.activeElement);
     });
     
-    it('should focus the next edge item via keyboard', function(done) {
+    it('should focus the next edge item via keyboard', function() {
       const el = helpers.build(window.__html__['Tree.base.html']);
       var firstItem = el.items.first();
       var lastItem = el.items.last();
       
-      // Focusing requires the tree item to be defined
-      window.customElements.whenDefined('coral-tree-item').then(() => {
-        helpers.keypress('up', firstItem._elements.header);
-        
-        expect(firstItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
-        expect(lastItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
-        expect(lastItem._elements.header).to.equal(document.activeElement);
-        done();
-      });
+      helpers.keypress('up', firstItem._elements.header);
+      
+      expect(firstItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
+      expect(lastItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
+      expect(lastItem._elements.header).to.equal(document.activeElement);
     });
     
-    it('should focus the previous edge item via keyboard', function(done) {
+    it('should focus the previous edge item via keyboard', function() {
       const el = helpers.build(window.__html__['Tree.base.html']);
       var firstItem = el.items.first();
       var lastItem = el.items.last();
       
-      // Focusing requires the tree item to be defined
-      window.customElements.whenDefined('coral-tree-item').then(() => {
-        el._resetFocusableItem(lastItem);
-        
-        helpers.keypress('down', lastItem._elements.header);
-        
-        expect(lastItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
-        expect(firstItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
-        expect(firstItem._elements.header).to.equal(document.activeElement);
-        done();
-      });
+      el._resetFocusableItem(lastItem);
+      
+      helpers.keypress('down', lastItem._elements.header);
+      
+      expect(lastItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
+      expect(firstItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
+      expect(firstItem._elements.header).to.equal(document.activeElement);
     });
     
-    it('should focus the sibling item via keyboard (nested)', function(done) {
+    it('should focus the sibling item via keyboard (nested)', function() {
       const el = helpers.build(window.__html__['Tree.nested.html']);
       var items = el.items.getAll();
       var firstItem = items[0];
       var beforeLastItem = items[items.length - 2];
       
-      // Focusing requires the tree item to be defined
-      window.customElements.whenDefined('coral-tree-item').then(() => {
-        el._resetFocusableItem(beforeLastItem);
-        
-        helpers.keypress('up', beforeLastItem._elements.header);
-        
-        expect(beforeLastItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
-        expect(firstItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
-        expect(firstItem._elements.header).to.equal(document.activeElement);
-        done();
-      });
+      el._resetFocusableItem(beforeLastItem);
+      
+      helpers.keypress('up', beforeLastItem._elements.header);
+      
+      expect(beforeLastItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
+      expect(firstItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
+      expect(firstItem._elements.header).to.equal(document.activeElement);
     });
 
     it('should expand/collapse current item using key:right/key:left (nested)', function(done) {
@@ -468,66 +440,57 @@ describe('Tree', function() {
       var items = el.items.getAll();
       var firstItem = items[0];
       var secondItem = items[1];
-      window.customElements.whenDefined('coral-tree-item').then(() => {
-        el._resetFocusableItem(firstItem);
+      
+      el._resetFocusableItem(firstItem);
+      helpers.keypress('right', firstItem._elements.header);
+      helpers.next(function() {
+        assertActiveness(firstItem, false, true);
         helpers.keypress('right', firstItem._elements.header);
         helpers.next(function() {
+
+          // with item expanded, right arrow should move focus to the first item in the expanded subtree
           assertActiveness(firstItem, false, true);
-          helpers.keypress('right', firstItem._elements.header);
+          expect(secondItem._elements.header).to.equal(document.activeElement);
+          helpers.keypress('left', secondItem._elements.header);
           helpers.next(function() {
 
-            // with item expanded, right arrow should move focus to the first item in the expanded subtree
+            // left arrow on a collaped item should move focus from the expanded subtree to the parent item
+            expect(firstItem._elements.header).to.equal(document.activeElement);
             assertActiveness(firstItem, false, true);
-            expect(secondItem._elements.header).to.equal(document.activeElement);
-            helpers.keypress('left', secondItem._elements.header);
+
+            // with item expanded, left arrow on the item should collapse the subtree
+            helpers.keypress('left', firstItem._elements.header);
             helpers.next(function() {
-
-              // left arrow on a collaped item should move focus from the expanded subtree to the parent item
-              expect(firstItem._elements.header).to.equal(document.activeElement);
-              assertActiveness(firstItem, false, true);
-
-              // with item expanded, left arrow on the item should collapse the subtree
-              helpers.keypress('left', firstItem._elements.header);
-              helpers.next(function() {
-                assertActiveness(firstItem, false, false);
-                done();
-              });
+              assertActiveness(firstItem, false, false);
+              done();
             });
           });
-        }); 
+        });
       });
     });
 
-    it('should set a new focusable item if the current one is disabled', function(done) {
+    it('should set a new focusable item if the current one is disabled', function() {
       const el = helpers.build(window.__html__['Tree.base.html']);
       var items = el.items.getAll();
       var firstItem = items[0];
       var secondItem = items[1];
       
-      // Focusing requires the tree item to be defined
-      window.customElements.whenDefined('coral-tree-item').then(() => {
-        firstItem.disabled = true;
-        
-        expect(firstItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
-        expect(secondItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
-        done();
-      });
+      firstItem.disabled = true;
+      
+      expect(firstItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
+      expect(secondItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
     });
     
-    it('should set a new focusable item if the current one is hidden', function(done) {
+    it('should set a new focusable item if the current one is hidden', function() {
       const el = helpers.build(window.__html__['Tree.base.html']);
       var items = el.items.getAll();
       var firstItem = items[0];
       var secondItem = items[1];
       
-      // Focusing requires the tree item to be defined
-      window.customElements.whenDefined('coral-tree-item').then(() => {
-        firstItem.hidden = true;
-        
-        expect(firstItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
-        expect(secondItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
-        done();
-      });
+      firstItem.hidden = true;
+      
+      expect(firstItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
+      expect(secondItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
     });
     
     it('should expand the tree item with key:return', function() {

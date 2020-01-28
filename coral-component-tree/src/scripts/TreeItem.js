@@ -51,20 +51,6 @@ const IS_TOUCH_DEVICE = 'ontouchstart' in window || navigator.maxTouchPoints > 0
  @extends {BaseComponent}
  */
 class TreeItem extends BaseComponent(HTMLElement) {
-  /**
-   Enumeration for {@link TreeItem} variants.
-  
-  @typedef {Object} TreeItemVariantEnum
-  
-  @property {String} DRILLDOWN
-  Default variant with icon to expand/collapse subtree.
-  @property {String} LEAF
-  Variant for leaf items. Icon to expand/collapse subtree is hidden.
-  */
-  static get variant() {
-    return variant;
-  }
-
   /** @ignore */
   constructor() {
     super();
@@ -160,7 +146,7 @@ class TreeItem extends BaseComponent(HTMLElement) {
     this.classList.toggle('is-open', this._expanded);
     this.classList.toggle('is-collapsed', !this._expanded);
 
-    if (this.variant !== TreeItem.variant.DRILLDOWN) {
+    if (this.variant !== variant.DRILLDOWN) {
       header.removeAttribute('aria-expanded');
       header.removeAttribute('aria-owns');
     }
@@ -377,9 +363,7 @@ class TreeItem extends BaseComponent(HTMLElement) {
     const selectedState =  this._elements.selectedState;
   
     // a11ys
-    if (!content.id) {
-      content.id = commons.getUID();
-    }
+    content.id = content.id || commons.getUID();
     this.setAttribute('role', 'presentation');
     header.setAttribute('aria-labelledby', `${content.id} ${selectedState.id}`);
     header.setAttribute('aria-selected', this.selected);
