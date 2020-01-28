@@ -422,6 +422,7 @@
 
 import {BaseComponent} from &apos;../../../coral-base-component&apos;;
 import {SelectableCollection} from &apos;../../../coral-collection&apos;;
+import TreeItem from &apos;./TreeItem&apos;;
 import {transform} from &apos;../../../coral-utils&apos;;
 
 const CLASSNAME = &apos;_coral-TreeView&apos;;
@@ -443,19 +444,21 @@ class Tree extends BaseComponent(HTMLElement) {
     // Attach events
     this._delegateEvents({
       &apos;click ._coral-TreeView-itemLink&apos;: &apos;_onItemClick&apos;,
+      &apos;click ._coral-TreeView-indicator&apos;: &apos;_onExpandCollapseClick&apos;,
       &apos;coral-collection:add coral-tree-item&apos;: &apos;_onCollectionChange&apos;,
       &apos;coral-collection:remove coral-tree-item&apos;: &apos;_onCollectionChange&apos;,
       // a11y
       &apos;key:space ._coral-TreeView-itemLink&apos;: &apos;_onItemClick&apos;,
-      &apos;key:enter ._coral-TreeView-itemLink&apos;: &apos;_onExpandCollapseClick&apos;,
-      &apos;key:pageup ._coral-TreeView-itemLink&apos;: &apos;_onFocusPreviousItem&apos;,
-      &apos;key:left ._coral-TreeView-itemLink&apos;: &apos;_onFocusPreviousItem&apos;,
-      &apos;key:up ._coral-TreeView-itemLink&apos;: &apos;_onFocusPreviousItem&apos;,
-      &apos;key:pagedown ._coral-TreeView-itemLink&apos;: &apos;_onFocusNextItem&apos;,
-      &apos;key:right ._coral-TreeView-itemLink&apos;: &apos;_onFocusNextItem&apos;,
-      &apos;key:down ._coral-TreeView-itemLink&apos;: &apos;_onFocusNextItem&apos;,
-      &apos;key:home ._coral-TreeView-itemLink&apos;: &apos;_onFocusFirstItem&apos;,
-      &apos;key:end ._coral-TreeView-itemLink&apos;: &apos;_onFocusLastItem&apos;,
+      &apos;key:space ._coral-TreeView-indicator&apos;: &apos;_onExpandCollapseClick&apos;,
+      &apos;key:return ._coral-TreeView-itemLink, ._coral-TreeView-indicator&apos;: &apos;_onExpandCollapseClick&apos;,
+      &apos;key:pageup ._coral-TreeView-itemLink, ._coral-TreeView-indicator&apos;: &apos;_onFocusPreviousItem&apos;,
+      &apos;key:left ._coral-TreeView-itemLink, ._coral-TreeView-indicator&apos;: &apos;_onCollapseItem&apos;,
+      &apos;key:up ._coral-TreeView-itemLink, ._coral-TreeView-indicator&apos;: &apos;_onFocusPreviousItem&apos;,
+      &apos;key:pagedown ._coral-TreeView-itemLink, ._coral-TreeView-indicator&apos;: &apos;_onFocusNextItem&apos;,
+      &apos;key:right ._coral-TreeView-itemLink, ._coral-TreeView-indicator&apos;: &apos;_onExpandItem&apos;,
+      &apos;key:down ._coral-TreeView-itemLink, ._coral-TreeView-indicator&apos;: &apos;_onFocusNextItem&apos;,
+      &apos;key:home ._coral-TreeView-itemLink, ._coral-TreeView-indicator&apos;: &apos;_onFocusFirstItem&apos;,
+      &apos;key:end ._coral-TreeView-itemLink, ._coral-TreeView-indicator&apos;: &apos;_onFocusLastItem&apos;,
       &apos;capture:blur ._coral-TreeView-itemLink[tabindex=&quot;0&quot;]&apos;: &apos;_onItemBlur&apos;,
       // private
       &apos;coral-tree-item:_selectedchanged&apos;: &apos;_onItemSelectedChanged&apos;,
@@ -676,6 +679,58 @@ class Tree extends BaseComponent(HTMLElement) {
       this._toggleItemAttribute(item, &apos;expanded&apos;);
     }
   }
+
+  /** @private */
+  _onExpandItem(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    // The click was performed on the icon to expand the sub tree
+    const item = event.target.closest(&apos;coral-tree-item&apos;);
+    if (item) {
+      // We ignore the expand if the item is disabled
+      if (item.hasAttribute(&apos;disabled&apos;)) {
+        return;
+      }
+
+      if (!item.expanded &amp;&amp; item.variant === TreeItem.variant.DRILLDOWN) {
+        // If the item is not expanded, expand the item
+        item.expanded = !item.expanded;
+        item._elements.header.classList.add(&apos;focus-ring&apos;);
+      }
+      else if (item.items.length &gt; 0) {
+        // If the item is expanded, and contains items, focus the next item
+        this._onFocusNextItem(event);
+      }
+    }
+  }
+
+  /** @private */
+  _onCollapseItem(event) {   
+    event.preventDefault();
+    event.stopPropagation();
+
+    // The click was performed on the icon to collapse the sub tree
+    const item = event.target.closest(&apos;coral-tree-item&apos;);
+    if (item) {
+      // We ignore the expand if the item is disabled
+      if (item.hasAttribute(&apos;disabled&apos;)) {
+        return;
+      }
+
+      if (item.expanded &amp;&amp; item.variant === TreeItem.variant.DRILLDOWN) {
+        // If the item is not expanded, expand the item
+        item.expanded = !item.expanded;
+        item._elements.header.classList.add(&apos;focus-ring&apos;);
+      }
+      else if (item.parent) {
+        item._elements.header.setAttribute(&apos;tabindex&apos;, &apos;-1&apos;);
+        item._elements.header.classList.remove(&apos;focus-ring&apos;);
+        item.parent.focus();
+        item.parent._elements.header.classList.add(&apos;focus-ring&apos;);
+      }
+    }
+  }
   
   /** @private */
   _focusSiblingItem(item, next) {
@@ -788,6 +843,7 @@ class Tree extends BaseComponent(HTMLElement) {
       this._resetFocusableItem();
     }
   }
+
   
   /** @private */
   _onExpandedChanged(event) {
@@ -806,7 +862,8 @@ class Tree extends BaseComponent(HTMLElement) {
   _getFocusableItems() {
     return this.items.getAll().filter((item) =&gt; !item.closest(&apos;coral-tree-item[disabled]&apos;) &amp;&amp; !item.closest(&apos;coral-tree-item[hidden]&apos;));
   }
-  
+
+  /** @private */
   _onItemBlur() {
     const focused = this.querySelector(&apos;._coral-TreeView-itemLink.focus-ring&apos;);
     if (focused) {

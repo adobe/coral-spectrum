@@ -424,7 +424,7 @@ import {BaseComponent} from &apos;../../../coral-base-component&apos;;
 import {Collection} from &apos;../../../coral-collection&apos;;
 import {Icon} from &apos;../../../coral-component-icon&apos;;
 import treeItem from &apos;../templates/treeItem&apos;;
-import {transform, commons, validate} from &apos;../../../coral-utils&apos;;
+import {transform, commons, i18n, validate} from &apos;../../../coral-utils&apos;;
 
 const CLASSNAME = &apos;_coral-TreeView-item&apos;;
 
@@ -451,6 +451,8 @@ for (const variantValue in variant) {
   ALL_VARIANT_CLASSES.push(`${CLASSNAME}--${variant[variantValue]}`);
 }
 
+const IS_TOUCH_DEVICE = &apos;ontouchstart&apos; in window || navigator.maxTouchPoints &gt; 0 || navigator.msMaxTouchPoints &gt; 0;
+
 /**
  @class Coral.Tree.Item
  @classdesc A Tree item component
@@ -469,7 +471,11 @@ class TreeItem extends BaseComponent(HTMLElement) {
       content: this.querySelector(&apos;coral-tree-item-content&apos;) || document.createElement(&apos;coral-tree-item-content&apos;)
     };
     treeItem.call(this._elements, {Icon, commons});
-  
+
+    if (!this._elements.icon) {
+      this._elements.icon = this._elements.header.querySelector(&apos;._coral-TreeView-indicator&apos;);
+    }
+
     // Tells the collection to automatically detect the items and handle the events
     this.items._startHandlingItems();
   }
@@ -549,9 +555,27 @@ class TreeItem extends BaseComponent(HTMLElement) {
   
     this.classList.toggle(&apos;is-open&apos;, this._expanded);
     this.classList.toggle(&apos;is-collapsed&apos;, !this._expanded);
+
+    if (this.variant !== variant.DRILLDOWN) {
+      header.removeAttribute(&apos;aria-expanded&apos;);
+      header.removeAttribute(&apos;aria-owns&apos;);
+    }
+    else if (this.items.length &gt; 0) {
+      header.setAttribute(&apos;aria-expanded&apos;, this._expanded);
+      header.setAttribute(&apos;aria-owns&apos;, subTreeContainer.id);
+    }
     
-    header.setAttribute(&apos;aria-expanded&apos;, this._expanded);
-    subTreeContainer.setAttribute(&apos;aria-hidden&apos;, !this._expanded);
+    if (this._expanded) {
+      subTreeContainer.removeAttribute(&apos;aria-hidden&apos;);
+    }
+    else {
+      subTreeContainer.setAttribute(&apos;aria-hidden&apos;, !this._expanded);
+    }
+
+    if (IS_TOUCH_DEVICE) {
+      const icon = header.querySelector(&apos;._coral-TreeView-indicator&apos;);
+      icon.setAttribute(&apos;aria-label&apos;, i18n.get(this._expanded ? &apos;Collapse&apos; : &apos;Expand&apos;));
+    }
     
     this.trigger(&apos;coral-tree-item:_expandedchanged&apos;);
     
@@ -639,6 +663,13 @@ class TreeItem extends BaseComponent(HTMLElement) {
   
     this._elements.header.classList.toggle(&apos;is-selected&apos;, this._selected);
     this._elements.header.setAttribute(&apos;aria-selected&apos;, this._selected);
+
+    const selectedState =  this._elements.selectedState;
+    selectedState.textContent = i18n.get(this._selected ? &apos;selected&apos; : &apos;not selected&apos;);
+
+    if (IS_TOUCH_DEVICE) {
+      selectedState.setAttribute(&apos;aria-pressed&apos;, this._selected);
+    }
     
     this.trigger(&apos;coral-tree-item:_selectedchanged&apos;);
   }
@@ -688,11 +719,22 @@ class TreeItem extends BaseComponent(HTMLElement) {
   /** @private */
   _onItemAdded(item) {
     item._parent = this;
+
+    const header = this._elements.header;
+    const subTreeContainer = this._elements.subTreeContainer;
+    if (!header.hasAttribute(&apos;aria-owns&apos;)) {
+      header.setAttribute(&apos;aria-owns&apos;, subTreeContainer.id);
+    }
   }
   
   /** @private */
   _onItemRemoved(item) {
     item._parent = undefined;
+
+    // If there are no items the subTreeContainer
+    if (!this.items.length) {
+      this._elements.header.removeAttribute(&apos;aria-owns&apos;);
+    }
   }
   
   /**
@@ -701,6 +743,7 @@ class TreeItem extends BaseComponent(HTMLElement) {
    @ignore
    */
   focus() {
+    this._elements.header.setAttribute(&apos;tabindex&apos;, &apos;0&apos;);
     this._elements.header.focus();
   }
   
@@ -723,12 +766,38 @@ class TreeItem extends BaseComponent(HTMLElement) {
     super.render();
     
     this.classList.add(CLASSNAME);
+
+    const header = this._elements.header;
+    const subTreeContainer = this._elements.subTreeContainer;
+    const content = this._elements.content;
+    const selectedState =  this._elements.selectedState;
   
-    // a11y
+    // a11ys
+    content.id = content.id || commons.getUID();
     this.setAttribute(&apos;role&apos;, &apos;presentation&apos;);
-    this._elements.header.setAttribute(&apos;aria-selected&apos;, this.selected);
-    this._elements.header.setAttribute(&apos;aria-controls&apos;, this._elements.subTreeContainer.id);
-    this._elements.subTreeContainer.setAttribute(&apos;aria-labelledby&apos;, this._elements.header.id);
+    header.setAttribute(&apos;aria-labelledby&apos;, `${content.id} ${selectedState.id}`);
+    header.setAttribute(&apos;aria-selected&apos;, this.selected);
+    subTreeContainer.setAttribute(&apos;aria-labelledby&apos;, content.id);
+    selectedState.textContent = i18n.get(this.selected ? &apos;selected&apos; : &apos;not selected&apos;);
+
+    if (IS_TOUCH_DEVICE) {
+      const icon = this._elements.icon || header.querySelector(&apos;._coral-TreeView-indicator&apos;);
+      if (icon &amp;&amp; !icon.id) {
+        icon.id = commons.getUID();
+      }
+      icon.setAttribute(&apos;role&apos;, &apos;button&apos;);
+      icon.setAttribute(&apos;tabindex&apos;, &apos;-1&apos;);
+      icon.setAttribute(&apos;aria-labelledby&apos;, icon.id + &apos; &apos; + content.id);
+      icon.setAttribute(&apos;aria-label&apos;, i18n.get(this.expanded ? &apos;Collapse&apos; : &apos;Expand&apos;));
+      icon.setAttribute(&apos;style&apos;, &apos;outline: none !important&apos;);
+      icon.removeAttribute(&apos;aria-hidden&apos;);
+
+      selectedState.setAttribute(&apos;role&apos;, &apos;button&apos;);
+      selectedState.setAttribute(&apos;tabindex&apos;, &apos;-1&apos;);
+      selectedState.setAttribute(&apos;aria-labelledby&apos;, content.id + &apos; &apos; + selectedState.id);
+      selectedState.setAttribute(&apos;aria-pressed&apos;, this.selected);
+      selectedState.setAttribute(&apos;style&apos;, &apos;outline: none !important&apos;);
+    }
   
     // Default reflected attributes
     if (!this._variant) { this.variant = variant.DRILLDOWN; }
@@ -743,16 +812,13 @@ class TreeItem extends BaseComponent(HTMLElement) {
     if (subTree) {
       const items = subTree.querySelectorAll(&apos;coral-tree-item&apos;);
       for (let i = 0; i &lt; items.length; i++) {
-        this._elements.subTreeContainer.appendChild(items[i]);
+        subTreeContainer.appendChild(items[i]);
       }
     }
     
     // Add templates into the frag
-    frag.appendChild(this._elements.header);
-    frag.appendChild(this._elements.subTreeContainer);
-  
-    const content = this._elements.content;
-    const subTreeContainer = this._elements.subTreeContainer;
+    frag.appendChild(header);
+    frag.appendChild(subTreeContainer);
   
     // Assign the content zones, moving them into place in the process
     this.content = content;
@@ -775,6 +841,10 @@ class TreeItem extends BaseComponent(HTMLElement) {
         // Remove anything else element
         this.removeChild(child);
       }
+    }
+
+    if (this.variant === variant.DRILLDOWN &amp;&amp; this.items.length &amp;&amp; !header.hasAttribute(&apos;aria-owns&apos;)) {
+      header.setAttribute(&apos;aria-owns&apos;, subTreeContainer.id);
     }
   
     // Lastly, add the fragment into the container

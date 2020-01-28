@@ -1,7 +1,7 @@
 {
-  "coverage": "65.23%",
-  "expectCount": 3532,
-  "actualCount": 2304,
+  "coverage": "65.26%",
+  "expectCount": 3535,
+  "actualCount": 2307,
   "files": {
     "coral-spectrum/coral-base-button/src/scripts/BaseButton.js": {
       "expectCount": 43,
@@ -2286,31 +2286,31 @@
       "undocumentLines": []
     },
     "coral-spectrum/coral-component-tree/src/scripts/Tree.js": {
-      "expectCount": 36,
-      "actualCount": 30,
+      "expectCount": 38,
+      "actualCount": 33,
       "undocumentLines": [
-        17,
-        59,
-        94,
-        113,
-        159,
-        400
+        18,
+        62,
+        97,
+        116,
+        162
       ]
     },
     "coral-spectrum/coral-component-tree/src/scripts/TreeItem.js": {
-      "expectCount": 27,
+      "expectCount": 28,
       "actualCount": 17,
       "undocumentLines": [
         19,
         38,
-        57,
-        105,
-        134,
-        184,
+        44,
+        59,
+        111,
+        140,
         208,
-        227,
-        248,
-        304
+        232,
+        251,
+        279,
+        347
       ]
     },
     "coral-spectrum/coral-component-tree/src/scripts/TreeItemContent.js": {

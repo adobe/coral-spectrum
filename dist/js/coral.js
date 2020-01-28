@@ -520,7 +520,7 @@ var Coral = (function (exports) {
       return store[key] || (store[key] = value !== undefined ? value : {});
     })('versions', []).push({
       version: _core.version,
-      mode: 'global',
+      mode:  'global',
       copyright: '© 2019 Denis Pushkarev (zloirock.ru)'
     });
   });
@@ -1337,7 +1337,7 @@ var Coral = (function (exports) {
         // Set @@toStringTag to native iterators
         _setToStringTag(IteratorPrototype, TAG, true); // fix for some old engines
 
-        if (typeof IteratorPrototype[ITERATOR] != 'function') _hide(IteratorPrototype, ITERATOR, returnThis);
+        if ( typeof IteratorPrototype[ITERATOR] != 'function') _hide(IteratorPrototype, ITERATOR, returnThis);
       }
     } // fix Array#{values, @@iterator}.name in V8 / FF
 
@@ -1351,7 +1351,7 @@ var Coral = (function (exports) {
     } // Define iterator
 
 
-    if (BUGGY || VALUES_BUG || !proto[ITERATOR]) {
+    if ( (BUGGY || VALUES_BUG || !proto[ITERATOR])) {
       _hide(proto, ITERATOR, $default);
     } // Plug for library
 
@@ -1812,6 +1812,11 @@ var Coral = (function (exports) {
     riter['return'] = function () {
       SAFE_CLOSING = true;
     }; // eslint-disable-next-line no-throw-literal
+
+
+    Array.from(riter, function () {
+      throw 2;
+    });
   } catch (e) {
     /* empty */
   }
@@ -2113,10 +2118,10 @@ var Coral = (function (exports) {
       return capability.promise;
     }
   });
-  _export(_export.S + _export.F * (!USE_NATIVE), PROMISE, {
+  _export(_export.S + _export.F * ( !USE_NATIVE), PROMISE, {
     // 25.4.4.6 Promise.resolve(x)
     resolve: function resolve(x) {
-      return _promiseResolve(this, x);
+      return _promiseResolve( this, x);
     }
   });
   _export(_export.S + _export.F * !(USE_NATIVE && _iterDetect(function (iter) {
@@ -3106,21 +3111,9 @@ var Coral = (function (exports) {
     }
   }).call(self);
 
-  /**
-   * Copyright 2019 Adobe. All rights reserved.
-   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
-   * you may not use this file except in compliance with the License. You may obtain a copy
-   * of the License at http://www.apache.org/licenses/LICENSE-2.0
-   *
-   * Unless required by applicable law or agreed to in writing, software distributed under
-   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
-   * OF ANY KIND, either express or implied. See the License for the specific language
-   * governing permissions and limitations under the License.
-   */
-
   var ResizeObserver = createCommonjsModule(function (module, exports) {
     (function (global, factory) {
-      module.exports = factory();
+       module.exports = factory() ;
     })(commonjsGlobal, function () {
       /**
        * A collection of shims that provide minimal functionality of the ES6 collections.
@@ -5373,7 +5366,7 @@ var Coral = (function (exports) {
         var pathEl = target;
         var eventPath = [];
 
-        buildPath: while (pathEl && pathEl !== this.root) {
+         while (pathEl && pathEl !== this.root) {
           eventPath.push(pathEl);
           pathEl = pathEl.parentNode;
         }
@@ -7604,18 +7597,6 @@ var Coral = (function (exports) {
    * governing permissions and limitations under the License.
    */
 
-  /**
-   * Copyright 2019 Adobe. All rights reserved.
-   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
-   * you may not use this file except in compliance with the License. You may obtain a copy
-   * of the License at http://www.apache.org/licenses/LICENSE-2.0
-   *
-   * Unless required by applicable law or agreed to in writing, software distributed under
-   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
-   * OF ANY KIND, either express or implied. See the License for the specific language
-   * governing permissions and limitations under the License.
-   */
-
   /** @private */
   function listToArray(list) {
     var res = [];
@@ -8498,18 +8479,6 @@ var Coral = (function (exports) {
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-
-  /**
-   * Copyright 2019 Adobe. All rights reserved.
-   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
-   * you may not use this file except in compliance with the License. You may obtain a copy
-   * of the License at http://www.apache.org/licenses/LICENSE-2.0
-   *
-   * Unless required by applicable law or agreed to in writing, software distributed under
-   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
-   * OF ANY KIND, either express or implied. See the License for the specific language
-   * governing permissions and limitations under the License.
-   */
   // todo add tests
   // Used to store DateTimeFormat
   var dateTimeFormats = {}; // Default supported format
@@ -8961,18 +8930,6 @@ var Coral = (function (exports) {
   if (typeof window.moment !== 'undefined') {
     window.moment.locale(document.documentElement.lang || window.navigator.language || 'en');
   }
-
-  /**
-   * Copyright 2019 Adobe. All rights reserved.
-   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
-   * you may not use this file except in compliance with the License. You may obtain a copy
-   * of the License at http://www.apache.org/licenses/LICENSE-2.0
-   *
-   * Unless required by applicable law or agreed to in writing, software distributed under
-   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
-   * OF ANY KIND, either express or implied. See the License for the specific language
-   * governing permissions and limitations under the License.
-   */
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -13264,18 +13221,6 @@ var Coral = (function (exports) {
     );
   };
 
-  /**
-   * Copyright 2019 Adobe. All rights reserved.
-   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
-   * you may not use this file except in compliance with the License. You may obtain a copy
-   * of the License at http://www.apache.org/licenses/LICENSE-2.0
-   *
-   * Unless required by applicable law or agreed to in writing, software distributed under
-   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
-   * OF ANY KIND, either express or implied. See the License for the specific language
-   * governing permissions and limitations under the License.
-   */
-
   var PAGE_UP = 33;
   var PAGE_DOWN = 34;
   var LEFT_ARROW = 37;
@@ -16206,7 +16151,7 @@ var Coral = (function (exports) {
             } // If the element is not focusable,
 
 
-            if (element.offsetParent === null || !element.matches(commons.FOCUSABLE_ELEMENT_SELECTOR)) {
+            if (!element.matches(commons.FOCUSABLE_ELEMENT_SELECTOR)) {
               // add tabindex so that it is programmatically focusable.
               element.setAttribute('tabindex', -1); // On blur, restore element to its prior, not-focusable state
 
@@ -16631,18 +16576,6 @@ var Coral = (function (exports) {
       }(superClass)
     );
   };
-
-  /**
-   * Copyright 2019 Adobe. All rights reserved.
-   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
-   * you may not use this file except in compliance with the License. You may obtain a copy
-   * of the License at http://www.apache.org/licenses/LICENSE-2.0
-   *
-   * Unless required by applicable law or agreed to in writing, software distributed under
-   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
-   * OF ANY KIND, either express or implied. See the License for the specific language
-   * governing permissions and limitations under the License.
-   */
 
   /**!
    * @fileOverview Kickass library to create and place poppers near their reference elements.
@@ -20670,18 +20603,6 @@ var Coral = (function (exports) {
   };
 
   /**
-   * Copyright 2019 Adobe. All rights reserved.
-   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
-   * you may not use this file except in compliance with the License. You may obtain a copy
-   * of the License at http://www.apache.org/licenses/LICENSE-2.0
-   *
-   * Unless required by applicable law or agreed to in writing, software distributed under
-   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
-   * OF ANY KIND, either express or implied. See the License for the specific language
-   * governing permissions and limitations under the License.
-   */
-
-  /**
    @class Coral.Button
    @classdesc A Button component containing text and/or an icon.
    @htmltag coral-button
@@ -24619,18 +24540,6 @@ var Coral = (function (exports) {
   };
 
   /**
-   * Copyright 2019 Adobe. All rights reserved.
-   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
-   * you may not use this file except in compliance with the License. You may obtain a copy
-   * of the License at http://www.apache.org/licenses/LICENSE-2.0
-   *
-   * Unless required by applicable law or agreed to in writing, software distributed under
-   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
-   * OF ANY KIND, either express or implied. See the License for the specific language
-   * governing permissions and limitations under the License.
-   */
-
-  /**
    @class Coral.List
    @classdesc A List component that supports multi-line text, icons, and text wrapping with ellipsis.
    @htmltag coral-list
@@ -27530,18 +27439,6 @@ var Coral = (function (exports) {
       }(superClass)
     );
   };
-
-  /**
-   * Copyright 2019 Adobe. All rights reserved.
-   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
-   * you may not use this file except in compliance with the License. You may obtain a copy
-   * of the License at http://www.apache.org/licenses/LICENSE-2.0
-   *
-   * Unless required by applicable law or agreed to in writing, software distributed under
-   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
-   * OF ANY KIND, either express or implied. See the License for the specific language
-   * governing permissions and limitations under the License.
-   */
 
   /**
    * Copyright 2019 Adobe. All rights reserved.
@@ -42955,7 +42852,6 @@ var Coral = (function (exports) {
 
   var template$s = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
-    var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["colorButton"] = document.createElement("button", "coral-button");
     el0.setAttribute("is", "coral-button");
     el0.setAttribute("variant", "action");
@@ -42966,9 +42862,7 @@ var Coral = (function (exports) {
     frag.appendChild(el0);
     var el1 = document.createTextNode("\n");
     frag.appendChild(el1);
-    data = data_0;
     this.colorButton.label.classList.add('u-coral-screenReaderOnly');
-    data_0 = data;
     var el3 = document.createTextNode("\n");
     frag.appendChild(el3);
     return frag;
@@ -72685,7 +72579,546 @@ var Coral = (function (exports) {
 
   Toast.Content = ToastContent;
 
-  var CLASSNAME$1C = '_coral-TreeView';
+  var template$Z = function anonymous(data_0) {
+    var frag = document.createDocumentFragment();
+    var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
+    var el0 = this["header"] = document.createElement("div");
+    el0.className += " _coral-TreeView-itemLink";
+    el0.setAttribute("tabindex", "-1");
+    el0.id = data_0["commons"]["getUID"]();
+    el0.setAttribute("handle", "header");
+    el0.setAttribute("role", "treeitem");
+    var el1 = document.createTextNode("\n  ");
+    el0.appendChild(el1);
+    var el2 = this["selectedState"] = document.createElement("span");
+    el2.className += " u-coral-screenReaderOnly";
+    el2.setAttribute("handle", "selectedState");
+    el2.setAttribute("role", "presentation");
+    el2.id = data_0["commons"]["getUID"]();
+    el0.appendChild(el2);
+    var el3 = document.createTextNode("\n");
+    el0.appendChild(el3);
+    frag.appendChild(el0);
+    var el4 = document.createTextNode("\n");
+    frag.appendChild(el4);
+    data = data_0;
+    this.header.insertAdjacentHTML('afterbegin', data.Icon._renderSVG('spectrum-css-icon-ChevronRightMedium', ['_coral-TreeView-indicator', '_coral-UIIcon-ChevronRightMedium']));
+    data_0 = data;
+    var el6 = document.createTextNode("\n");
+    frag.appendChild(el6);
+    var el7 = this["subTreeContainer"] = document.createElement("div");
+    el7.className += " _coral-TreeView";
+    el7.setAttribute("handle", "subTreeContainer");
+    el7.id = data_0["commons"]["getUID"]();
+    el7.setAttribute("role", "group");
+    frag.appendChild(el7);
+    var el8 = document.createTextNode("\n");
+    frag.appendChild(el8);
+    return frag;
+  };
+
+  var CLASSNAME$1C = '_coral-TreeView-item';
+  /**
+   Enumeration for {@link TreeItem} variants.
+   
+   @typedef {Object} TreeItemVariantEnum
+   
+   @property {String} DRILLDOWN
+   Default variant with icon to expand/collapse subtree.
+   @property {String} LEAF
+   Variant for leaf items. Icon to expand/collapse subtree is hidden.
+   */
+
+  var variant$o = {
+    /* Default variant with icon to expand/collapse subtree. */
+    DRILLDOWN: 'drilldown',
+
+    /* Variant for leaf items. Icon to expand/collapse subtree is hidden. */
+    LEAF: 'leaf'
+  };
+  var ALL_VARIANT_CLASSES$e = [];
+
+  for (var variantValue$c in variant$o) {
+    ALL_VARIANT_CLASSES$e.push("".concat(CLASSNAME$1C, "--").concat(variant$o[variantValue$c]));
+  }
+
+  var IS_TOUCH_DEVICE = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+  /**
+   @class Coral.Tree.Item
+   @classdesc A Tree item component
+   @htmltag coral-tree-item
+   @extends {HTMLElement}
+   @extends {BaseComponent}
+   */
+
+  var TreeItem =
+  /*#__PURE__*/
+  function (_BaseComponent) {
+    _inherits(TreeItem, _BaseComponent);
+
+    /** @ignore */
+    function TreeItem() {
+      var _this;
+
+      _classCallCheck(this, TreeItem);
+
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(TreeItem).call(this)); // Prepare templates
+
+      _this._elements = {
+        // Create or fetch the content zones
+        content: _this.querySelector('coral-tree-item-content') || document.createElement('coral-tree-item-content')
+      };
+      template$Z.call(_this._elements, {
+        Icon: Icon,
+        commons: commons
+      });
+
+      if (!_this._elements.icon) {
+        _this._elements.icon = _this._elements.header.querySelector('._coral-TreeView-indicator');
+      } // Tells the collection to automatically detect the items and handle the events
+
+
+      _this.items._startHandlingItems();
+
+      return _this;
+    }
+    /**
+     The parent tree. Returns <code>null</code> if item is the root.
+     
+     @type {HTMLElement}
+     @readonly
+     */
+
+
+    _createClass(TreeItem, [{
+      key: "_filterItem",
+
+      /** @private */
+      value: function _filterItem(item) {
+        // Handle nesting check for parent tree item
+        // Use parentNode for added items
+        // Use _parent for removed items
+        return item.parentNode && item.parentNode.parentNode === this || item._parent === this;
+      }
+      /** @private */
+
+    }, {
+      key: "_onItemAdded",
+      value: function _onItemAdded(item) {
+        item._parent = this;
+        var header = this._elements.header;
+        var subTreeContainer = this._elements.subTreeContainer;
+
+        if (!header.hasAttribute('aria-owns')) {
+          header.setAttribute('aria-owns', subTreeContainer.id);
+        }
+      }
+      /** @private */
+
+    }, {
+      key: "_onItemRemoved",
+      value: function _onItemRemoved(item) {
+        item._parent = undefined; // If there are no items the subTreeContainer
+
+        if (!this.items.length) {
+          this._elements.header.removeAttribute('aria-owns');
+        }
+      }
+      /**
+       Handles the focus of the item.
+         @ignore
+       */
+
+    }, {
+      key: "focus",
+      value: function focus() {
+        this._elements.header.setAttribute('tabindex', '0');
+
+        this._elements.header.focus();
+      }
+      /**
+       Returns {@link TreeItem} variants.
+       
+       @return {TreeItemVariantEnum}
+       */
+
+    }, {
+      key: "render",
+
+      /** @ignore */
+      value: function render() {
+        _get(_getPrototypeOf(TreeItem.prototype), "render", this).call(this);
+
+        this.classList.add(CLASSNAME$1C);
+        var header = this._elements.header;
+        var subTreeContainer = this._elements.subTreeContainer;
+        var content = this._elements.content;
+        var selectedState = this._elements.selectedState; // a11ys
+
+        content.id = content.id || commons.getUID();
+        this.setAttribute('role', 'presentation');
+        header.setAttribute('aria-labelledby', "".concat(content.id, " ").concat(selectedState.id));
+        header.setAttribute('aria-selected', this.selected);
+        subTreeContainer.setAttribute('aria-labelledby', content.id);
+        selectedState.textContent = i18n.get(this.selected ? 'selected' : 'not selected');
+
+        if (IS_TOUCH_DEVICE) {
+          var icon = this._elements.icon || header.querySelector('._coral-TreeView-indicator');
+
+          if (icon && !icon.id) {
+            icon.id = commons.getUID();
+          }
+
+          icon.setAttribute('role', 'button');
+          icon.setAttribute('tabindex', '-1');
+          icon.setAttribute('aria-labelledby', icon.id + ' ' + content.id);
+          icon.setAttribute('aria-label', i18n.get(this.expanded ? 'Collapse' : 'Expand'));
+          icon.setAttribute('style', 'outline: none !important');
+          icon.removeAttribute('aria-hidden');
+          selectedState.setAttribute('role', 'button');
+          selectedState.setAttribute('tabindex', '-1');
+          selectedState.setAttribute('aria-labelledby', content.id + ' ' + selectedState.id);
+          selectedState.setAttribute('aria-pressed', this.selected);
+          selectedState.setAttribute('style', 'outline: none !important');
+        } // Default reflected attributes
+
+
+        if (!this._variant) {
+          this.variant = variant$o.DRILLDOWN;
+        }
+
+        this.expanded = this.expanded; // Render the template and set element references
+
+        var frag = document.createDocumentFragment();
+        var templateHandleNames = ['header', 'icon', 'subTreeContainer'];
+        var subTree = this.querySelector('._coral-TreeView');
+
+        if (subTree) {
+          var items = subTree.querySelectorAll('coral-tree-item');
+
+          for (var i = 0; i < items.length; i++) {
+            subTreeContainer.appendChild(items[i]);
+          }
+        } // Add templates into the frag
+
+
+        frag.appendChild(header);
+        frag.appendChild(subTreeContainer); // Assign the content zones, moving them into place in the process
+
+        this.content = content; // Move any remaining elements into the content sub-component
+
+        while (this.firstChild) {
+          var child = this.firstChild;
+
+          if (child.nodeName === 'CORAL-TREE-ITEM') {
+            // Adding parent attribute to access the parent directly
+            child._parent = this; // Add tree items to the sub tree container
+
+            subTreeContainer.appendChild(child);
+          } else if (child.nodeType === Node.TEXT_NODE || child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
+            // Add non-template elements to the content
+            content.appendChild(child);
+          } else {
+            // Remove anything else element
+            this.removeChild(child);
+          }
+        }
+
+        if (this.variant === variant$o.DRILLDOWN && this.items.length && !header.hasAttribute('aria-owns')) {
+          header.setAttribute('aria-owns', subTreeContainer.id);
+        } // Lastly, add the fragment into the container
+
+
+        this.appendChild(frag);
+      }
+      /**
+       Triggered when {@link TreeItem#selected} changed.
+         @typedef {CustomEvent} coral-tree-item:_selectedchanged
+       
+       @private
+       */
+
+      /**
+       Triggered when {@link TreeItem#expanded} changed.
+         @typedef {CustomEvent} coral-tree-item:_expandedchanged
+       
+       @private
+       */
+
+      /**
+       Triggered when {@link TreeItem#hidden} changed.
+         @typedef {CustomEvent} coral-tree-item:_hiddenchanged
+       
+       @private
+       */
+
+      /**
+       Triggered when {@link TreeItem#disabled} changed.
+         @typedef {CustomEvent} coral-tree-item:_disabledchanged
+       
+       @private
+       */
+
+    }, {
+      key: "parent",
+      get: function get() {
+        return this._parent || null;
+      }
+      /**
+       The content of this tree item.
+       
+       @type {TreeItemContent}
+       @contentzone
+       */
+
+    }, {
+      key: "content",
+      get: function get() {
+        return this._getContentZone(this._elements.content);
+      },
+      set: function set(value) {
+        this._setContentZone('content', value, {
+          handle: 'content',
+          tagName: 'coral-tree-item-content',
+          insert: function insert(content) {
+            this._elements.header.appendChild(content);
+          }
+        });
+      }
+      /**
+       The Collection Interface that allows interacting with the items that the component contains.
+       
+       @type {Collection}
+       @readonly
+       */
+
+    }, {
+      key: "items",
+      get: function get() {
+        // Construct the collection on first request
+        if (!this._items) {
+          this._items = new Collection$1({
+            host: this,
+            itemTagName: 'coral-tree-item',
+            itemSelector: ':scope > coral-tree-item',
+            container: this._elements.subTreeContainer,
+            filter: this._filterItem.bind(this),
+            onItemAdded: this._onItemAdded,
+            onItemRemoved: this._onItemRemoved
+          });
+        }
+
+        return this._items;
+      }
+      /**
+       Whether the item is expanded. Expanded cannot be set to <code>true</code> if the item is disabled.
+       
+       @type {Boolean}
+       @default false
+       @htmlattribute expanded
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "expanded",
+      get: function get() {
+        return this._expanded || false;
+      },
+      set: function set(value) {
+        var _this2 = this;
+
+        value = transform.booleanAttr(value);
+        var triggerEvent = this.expanded !== value;
+        this._expanded = value;
+
+        this._reflectAttribute('expanded', this._expanded);
+
+        var header = this._elements.header;
+        var subTreeContainer = this._elements.subTreeContainer;
+        this.classList.toggle('is-open', this._expanded);
+        this.classList.toggle('is-collapsed', !this._expanded);
+
+        if (this.variant !== variant$o.DRILLDOWN) {
+          header.removeAttribute('aria-expanded');
+          header.removeAttribute('aria-owns');
+        } else if (this.items.length > 0) {
+          header.setAttribute('aria-expanded', this._expanded);
+          header.setAttribute('aria-owns', subTreeContainer.id);
+        }
+
+        if (this._expanded) {
+          subTreeContainer.removeAttribute('aria-hidden');
+        } else {
+          subTreeContainer.setAttribute('aria-hidden', !this._expanded);
+        }
+
+        if (IS_TOUCH_DEVICE) {
+          var icon = header.querySelector('._coral-TreeView-indicator');
+          icon.setAttribute('aria-label', i18n.get(this._expanded ? 'Collapse' : 'Expand'));
+        }
+
+        this.trigger('coral-tree-item:_expandedchanged'); // Do animation in next frame to avoid a forced reflow
+
+        window.requestAnimationFrame(function () {
+          // Don't animate on initialization
+          if (_this2._animate) {
+            // Remove height as we want the drawer to naturally grow if content is added later
+            commons.transitionEnd(subTreeContainer, function () {
+              if (_this2.expanded) {
+                subTreeContainer.style.height = '';
+              } else {
+                subTreeContainer.hidden = true;
+              } // Trigger once the animation is over to inform coral-tree
+
+
+              if (triggerEvent) {
+                _this2.trigger('coral-tree-item:_afterexpandedchanged');
+              }
+            }); // Force height to enable transition
+
+            if (!_this2.expanded) {
+              subTreeContainer.style.height = "".concat(subTreeContainer.scrollHeight, "px");
+            } else {
+              subTreeContainer.hidden = false;
+            } // We read the offset height to force a reflow, this is needed to start the transition between absolute values
+            // https://blog.alexmaccaw.com/css-transitions under Redrawing
+            // eslint-disable-next-line no-unused-vars
+
+
+            var offsetHeight = subTreeContainer.offsetHeight;
+            subTreeContainer.style.height = _this2.expanded ? "".concat(subTreeContainer.scrollHeight, "px") : 0;
+          } else {
+            // Make sure it's animated next time
+            _this2._animate = true; // Hide it on initialization if closed
+
+            if (!_this2.expanded) {
+              subTreeContainer.style.height = 0;
+              subTreeContainer.hidden = true;
+            }
+          }
+        });
+      }
+      /**
+       The item's variant. See {@link TreeItemVariantEnum}.
+       
+       @type {String}
+       @default TreeItemVariant.DRILLDOWN
+       @htmlattribute variant
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "variant",
+      get: function get() {
+        return this._variant || variant$o.DRILLDOWN;
+      },
+      set: function set(value) {
+        var _this$classList;
+
+        value = transform.string(value).toLowerCase();
+        this._variant = validate.enumeration(variant$o, value) && value || variant$o.DRILLDOWN; // removes every existing variant
+
+        (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$e);
+
+        this.classList.add("".concat(CLASSNAME$1C, "--").concat(this._variant));
+      }
+      /**
+       Whether the item is selected.
+       
+       @type {Boolean}
+       @default false
+       @htmlattribute selected
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "selected",
+      get: function get() {
+        return this._selected || false;
+      },
+      set: function set(value) {
+        this._selected = transform.booleanAttr(value);
+
+        this._reflectAttribute('selected', this._selected);
+
+        this._elements.header.classList.toggle('is-selected', this._selected);
+
+        this._elements.header.setAttribute('aria-selected', this._selected);
+
+        var selectedState = this._elements.selectedState;
+        selectedState.textContent = i18n.get(this._selected ? 'selected' : 'not selected');
+
+        if (IS_TOUCH_DEVICE) {
+          selectedState.setAttribute('aria-pressed', this._selected);
+        }
+
+        this.trigger('coral-tree-item:_selectedchanged');
+      }
+      /**
+       Whether this item is disabled.
+       
+       @type {Boolean}
+       @default false
+       @htmlattribute disabled
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "disabled",
+      get: function get() {
+        return this._disabled || false;
+      },
+      set: function set(value) {
+        this._disabled = transform.booleanAttr(value);
+
+        this._reflectAttribute('disabled', this._disabled);
+
+        this._elements.header.classList.toggle('is-disabled', this._disabled);
+
+        this._elements.header.setAttribute('aria-disabled', this._disabled);
+
+        this.trigger('coral-tree-item:_disabledchanged');
+      }
+      /**
+       @ignore
+       */
+
+    }, {
+      key: "hidden",
+      get: function get() {
+        return this.hasAttribute('hidden');
+      },
+      set: function set(value) {
+        this._reflectAttribute('hidden', transform.booleanAttr(value)); // We redefine hidden to trigger an event
+
+
+        this.trigger('coral-tree-item:_hiddenchanged');
+      }
+    }, {
+      key: "_contentZones",
+      get: function get() {
+        return {
+          'coral-tree-item-content': 'content'
+        };
+      }
+      /** @ignore */
+
+    }], [{
+      key: "variant",
+      get: function get() {
+        return variant$o;
+      }
+    }, {
+      key: "observedAttributes",
+      get: function get() {
+        return _get(_getPrototypeOf(TreeItem), "observedAttributes", this).concat(['selected', 'disabled', 'variant', 'expanded', 'hidden']);
+      }
+    }]);
+
+    return TreeItem;
+  }(BaseComponent(HTMLElement));
+
+  var CLASSNAME$1D = '_coral-TreeView';
   /**
    @class Coral.Tree
    @classdesc A Tree component is a container component to display collapsible content.
@@ -72711,19 +73144,21 @@ var Coral = (function (exports) {
 
       _this._delegateEvents({
         'click ._coral-TreeView-itemLink': '_onItemClick',
+        'click ._coral-TreeView-indicator': '_onExpandCollapseClick',
         'coral-collection:add coral-tree-item': '_onCollectionChange',
         'coral-collection:remove coral-tree-item': '_onCollectionChange',
         // a11y
         'key:space ._coral-TreeView-itemLink': '_onItemClick',
-        'key:enter ._coral-TreeView-itemLink': '_onExpandCollapseClick',
-        'key:pageup ._coral-TreeView-itemLink': '_onFocusPreviousItem',
-        'key:left ._coral-TreeView-itemLink': '_onFocusPreviousItem',
-        'key:up ._coral-TreeView-itemLink': '_onFocusPreviousItem',
-        'key:pagedown ._coral-TreeView-itemLink': '_onFocusNextItem',
-        'key:right ._coral-TreeView-itemLink': '_onFocusNextItem',
-        'key:down ._coral-TreeView-itemLink': '_onFocusNextItem',
-        'key:home ._coral-TreeView-itemLink': '_onFocusFirstItem',
-        'key:end ._coral-TreeView-itemLink': '_onFocusLastItem',
+        'key:space ._coral-TreeView-indicator': '_onExpandCollapseClick',
+        'key:return ._coral-TreeView-itemLink, ._coral-TreeView-indicator': '_onExpandCollapseClick',
+        'key:pageup ._coral-TreeView-itemLink, ._coral-TreeView-indicator': '_onFocusPreviousItem',
+        'key:left ._coral-TreeView-itemLink, ._coral-TreeView-indicator': '_onCollapseItem',
+        'key:up ._coral-TreeView-itemLink, ._coral-TreeView-indicator': '_onFocusPreviousItem',
+        'key:pagedown ._coral-TreeView-itemLink, ._coral-TreeView-indicator': '_onFocusNextItem',
+        'key:right ._coral-TreeView-itemLink, ._coral-TreeView-indicator': '_onExpandItem',
+        'key:down ._coral-TreeView-itemLink, ._coral-TreeView-indicator': '_onFocusNextItem',
+        'key:home ._coral-TreeView-itemLink, ._coral-TreeView-indicator': '_onFocusFirstItem',
+        'key:end ._coral-TreeView-itemLink, ._coral-TreeView-indicator': '_onFocusLastItem',
         'capture:blur ._coral-TreeView-itemLink[tabindex="0"]': '_onItemBlur',
         // private
         'coral-tree-item:_selectedchanged': '_onItemSelectedChanged',
@@ -72923,6 +73358,65 @@ var Coral = (function (exports) {
       /** @private */
 
     }, {
+      key: "_onExpandItem",
+      value: function _onExpandItem(event) {
+        event.preventDefault();
+        event.stopPropagation(); // The click was performed on the icon to expand the sub tree
+
+        var item = event.target.closest('coral-tree-item');
+
+        if (item) {
+          // We ignore the expand if the item is disabled
+          if (item.hasAttribute('disabled')) {
+            return;
+          }
+
+          if (!item.expanded && item.variant === TreeItem.variant.DRILLDOWN) {
+            // If the item is not expanded, expand the item
+            item.expanded = !item.expanded;
+
+            item._elements.header.classList.add('focus-ring');
+          } else if (item.items.length > 0) {
+            // If the item is expanded, and contains items, focus the next item
+            this._onFocusNextItem(event);
+          }
+        }
+      }
+      /** @private */
+
+    }, {
+      key: "_onCollapseItem",
+      value: function _onCollapseItem(event) {
+        event.preventDefault();
+        event.stopPropagation(); // The click was performed on the icon to collapse the sub tree
+
+        var item = event.target.closest('coral-tree-item');
+
+        if (item) {
+          // We ignore the expand if the item is disabled
+          if (item.hasAttribute('disabled')) {
+            return;
+          }
+
+          if (item.expanded && item.variant === TreeItem.variant.DRILLDOWN) {
+            // If the item is not expanded, expand the item
+            item.expanded = !item.expanded;
+
+            item._elements.header.classList.add('focus-ring');
+          } else if (item.parent) {
+            item._elements.header.setAttribute('tabindex', '-1');
+
+            item._elements.header.classList.remove('focus-ring');
+
+            item.parent.focus();
+
+            item.parent._elements.header.classList.add('focus-ring');
+          }
+        }
+      }
+      /** @private */
+
+    }, {
       key: "_focusSiblingItem",
       value: function _focusSiblingItem(item, next) {
         var focusableItems = this._getFocusableItems(); // There's not enough items to change focus
@@ -73076,6 +73570,8 @@ var Coral = (function (exports) {
           return !item.closest('coral-tree-item[disabled]') && !item.closest('coral-tree-item[hidden]');
         });
       }
+      /** @private */
+
     }, {
       key: "_onItemBlur",
       value: function _onItemBlur() {
@@ -73154,7 +73650,7 @@ var Coral = (function (exports) {
       value: function render() {
         _get(_getPrototypeOf(Tree.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1C); // a11y
+        this.classList.add(CLASSNAME$1D); // a11y
 
         this.setAttribute('role', 'tree');
         this.setAttribute('aria-multiselectable', this.multiple); // Enable keyboard interaction
@@ -73261,467 +73757,6 @@ var Coral = (function (exports) {
     }]);
 
     return Tree;
-  }(BaseComponent(HTMLElement));
-
-  var template$Z = function anonymous(data_0) {
-    var frag = document.createDocumentFragment();
-    var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
-    var el0 = this["header"] = document.createElement("div");
-    el0.className += " _coral-TreeView-itemLink";
-    el0.setAttribute("tabindex", "-1");
-    el0.id = data_0["commons"]["getUID"]();
-    el0.setAttribute("handle", "header");
-    el0.setAttribute("role", "treeitem");
-    frag.appendChild(el0);
-    var el1 = document.createTextNode("\n");
-    frag.appendChild(el1);
-    data = data_0;
-    this.header.insertAdjacentHTML('afterbegin', data.Icon._renderSVG('spectrum-css-icon-ChevronRightMedium', ['_coral-TreeView-indicator', '_coral-UIIcon-ChevronRightMedium']));
-    data_0 = data;
-    var el3 = document.createTextNode("\n");
-    frag.appendChild(el3);
-    var el4 = this["subTreeContainer"] = document.createElement("div");
-    el4.className += " _coral-TreeView";
-    el4.setAttribute("handle", "subTreeContainer");
-    el4.id = data_0["commons"]["getUID"]();
-    el4.setAttribute("role", "presentation");
-    frag.appendChild(el4);
-    var el5 = document.createTextNode("\n");
-    frag.appendChild(el5);
-    return frag;
-  };
-
-  var CLASSNAME$1D = '_coral-TreeView-item';
-  /**
-   Enumeration for {@link TreeItem} variants.
-   
-   @typedef {Object} TreeItemVariantEnum
-   
-   @property {String} DRILLDOWN
-   Default variant with icon to expand/collapse subtree.
-   @property {String} LEAF
-   Variant for leaf items. Icon to expand/collapse subtree is hidden.
-   */
-
-  var variant$o = {
-    /* Default variant with icon to expand/collapse subtree. */
-    DRILLDOWN: 'drilldown',
-
-    /* Variant for leaf items. Icon to expand/collapse subtree is hidden. */
-    LEAF: 'leaf'
-  };
-  var ALL_VARIANT_CLASSES$e = [];
-
-  for (var variantValue$c in variant$o) {
-    ALL_VARIANT_CLASSES$e.push("".concat(CLASSNAME$1D, "--").concat(variant$o[variantValue$c]));
-  }
-  /**
-   @class Coral.Tree.Item
-   @classdesc A Tree item component
-   @htmltag coral-tree-item
-   @extends {HTMLElement}
-   @extends {BaseComponent}
-   */
-
-
-  var TreeItem =
-  /*#__PURE__*/
-  function (_BaseComponent) {
-    _inherits(TreeItem, _BaseComponent);
-
-    /** @ignore */
-    function TreeItem() {
-      var _this;
-
-      _classCallCheck(this, TreeItem);
-
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(TreeItem).call(this)); // Prepare templates
-
-      _this._elements = {
-        // Create or fetch the content zones
-        content: _this.querySelector('coral-tree-item-content') || document.createElement('coral-tree-item-content')
-      };
-      template$Z.call(_this._elements, {
-        Icon: Icon,
-        commons: commons
-      }); // Tells the collection to automatically detect the items and handle the events
-
-      _this.items._startHandlingItems();
-
-      return _this;
-    }
-    /**
-     The parent tree. Returns <code>null</code> if item is the root.
-     
-     @type {HTMLElement}
-     @readonly
-     */
-
-
-    _createClass(TreeItem, [{
-      key: "_filterItem",
-
-      /** @private */
-      value: function _filterItem(item) {
-        // Handle nesting check for parent tree item
-        // Use parentNode for added items
-        // Use _parent for removed items
-        return item.parentNode && item.parentNode.parentNode === this || item._parent === this;
-      }
-      /** @private */
-
-    }, {
-      key: "_onItemAdded",
-      value: function _onItemAdded(item) {
-        item._parent = this;
-      }
-      /** @private */
-
-    }, {
-      key: "_onItemRemoved",
-      value: function _onItemRemoved(item) {
-        item._parent = undefined;
-      }
-      /**
-       Handles the focus of the item.
-         @ignore
-       */
-
-    }, {
-      key: "focus",
-      value: function focus() {
-        this._elements.header.focus();
-      }
-      /**
-       Returns {@link TreeItem} variants.
-       
-       @return {TreeItemVariantEnum}
-       */
-
-    }, {
-      key: "render",
-
-      /** @ignore */
-      value: function render() {
-        _get(_getPrototypeOf(TreeItem.prototype), "render", this).call(this);
-
-        this.classList.add(CLASSNAME$1D); // a11y
-
-        this.setAttribute('role', 'presentation');
-
-        this._elements.header.setAttribute('aria-selected', this.selected);
-
-        this._elements.header.setAttribute('aria-controls', this._elements.subTreeContainer.id);
-
-        this._elements.subTreeContainer.setAttribute('aria-labelledby', this._elements.header.id); // Default reflected attributes
-
-
-        if (!this._variant) {
-          this.variant = variant$o.DRILLDOWN;
-        }
-
-        this.expanded = this.expanded; // Render the template and set element references
-
-        var frag = document.createDocumentFragment();
-        var templateHandleNames = ['header', 'icon', 'subTreeContainer'];
-        var subTree = this.querySelector('._coral-TreeView');
-
-        if (subTree) {
-          var items = subTree.querySelectorAll('coral-tree-item');
-
-          for (var i = 0; i < items.length; i++) {
-            this._elements.subTreeContainer.appendChild(items[i]);
-          }
-        } // Add templates into the frag
-
-
-        frag.appendChild(this._elements.header);
-        frag.appendChild(this._elements.subTreeContainer);
-        var content = this._elements.content;
-        var subTreeContainer = this._elements.subTreeContainer; // Assign the content zones, moving them into place in the process
-
-        this.content = content; // Move any remaining elements into the content sub-component
-
-        while (this.firstChild) {
-          var child = this.firstChild;
-
-          if (child.nodeName === 'CORAL-TREE-ITEM') {
-            // Adding parent attribute to access the parent directly
-            child._parent = this; // Add tree items to the sub tree container
-
-            subTreeContainer.appendChild(child);
-          } else if (child.nodeType === Node.TEXT_NODE || child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
-            // Add non-template elements to the content
-            content.appendChild(child);
-          } else {
-            // Remove anything else element
-            this.removeChild(child);
-          }
-        } // Lastly, add the fragment into the container
-
-
-        this.appendChild(frag);
-      }
-      /**
-       Triggered when {@link TreeItem#selected} changed.
-         @typedef {CustomEvent} coral-tree-item:_selectedchanged
-       
-       @private
-       */
-
-      /**
-       Triggered when {@link TreeItem#expanded} changed.
-         @typedef {CustomEvent} coral-tree-item:_expandedchanged
-       
-       @private
-       */
-
-      /**
-       Triggered when {@link TreeItem#hidden} changed.
-         @typedef {CustomEvent} coral-tree-item:_hiddenchanged
-       
-       @private
-       */
-
-      /**
-       Triggered when {@link TreeItem#disabled} changed.
-         @typedef {CustomEvent} coral-tree-item:_disabledchanged
-       
-       @private
-       */
-
-    }, {
-      key: "parent",
-      get: function get() {
-        return this._parent || null;
-      }
-      /**
-       The content of this tree item.
-       
-       @type {TreeItemContent}
-       @contentzone
-       */
-
-    }, {
-      key: "content",
-      get: function get() {
-        return this._getContentZone(this._elements.content);
-      },
-      set: function set(value) {
-        this._setContentZone('content', value, {
-          handle: 'content',
-          tagName: 'coral-tree-item-content',
-          insert: function insert(content) {
-            this._elements.header.appendChild(content);
-          }
-        });
-      }
-      /**
-       The Collection Interface that allows interacting with the items that the component contains.
-       
-       @type {Collection}
-       @readonly
-       */
-
-    }, {
-      key: "items",
-      get: function get() {
-        // Construct the collection on first request
-        if (!this._items) {
-          this._items = new Collection$1({
-            host: this,
-            itemTagName: 'coral-tree-item',
-            itemSelector: ':scope > coral-tree-item',
-            container: this._elements.subTreeContainer,
-            filter: this._filterItem.bind(this),
-            onItemAdded: this._onItemAdded,
-            onItemRemoved: this._onItemRemoved
-          });
-        }
-
-        return this._items;
-      }
-      /**
-       Whether the item is expanded. Expanded cannot be set to <code>true</code> if the item is disabled.
-       
-       @type {Boolean}
-       @default false
-       @htmlattribute expanded
-       @htmlattributereflected
-       */
-
-    }, {
-      key: "expanded",
-      get: function get() {
-        return this._expanded || false;
-      },
-      set: function set(value) {
-        var _this2 = this;
-
-        value = transform.booleanAttr(value);
-        var triggerEvent = this.expanded !== value;
-        this._expanded = value;
-
-        this._reflectAttribute('expanded', this._expanded);
-
-        var header = this._elements.header;
-        var subTreeContainer = this._elements.subTreeContainer;
-        this.classList.toggle('is-open', this._expanded);
-        this.classList.toggle('is-collapsed', !this._expanded);
-        header.setAttribute('aria-expanded', this._expanded);
-        subTreeContainer.setAttribute('aria-hidden', !this._expanded);
-        this.trigger('coral-tree-item:_expandedchanged'); // Do animation in next frame to avoid a forced reflow
-
-        window.requestAnimationFrame(function () {
-          // Don't animate on initialization
-          if (_this2._animate) {
-            // Remove height as we want the drawer to naturally grow if content is added later
-            commons.transitionEnd(subTreeContainer, function () {
-              if (_this2.expanded) {
-                subTreeContainer.style.height = '';
-              } else {
-                subTreeContainer.hidden = true;
-              } // Trigger once the animation is over to inform coral-tree
-
-
-              if (triggerEvent) {
-                _this2.trigger('coral-tree-item:_afterexpandedchanged');
-              }
-            }); // Force height to enable transition
-
-            if (!_this2.expanded) {
-              subTreeContainer.style.height = "".concat(subTreeContainer.scrollHeight, "px");
-            } else {
-              subTreeContainer.hidden = false;
-            } // We read the offset height to force a reflow, this is needed to start the transition between absolute values
-            // https://blog.alexmaccaw.com/css-transitions under Redrawing
-            // eslint-disable-next-line no-unused-vars
-
-
-            var offsetHeight = subTreeContainer.offsetHeight;
-            subTreeContainer.style.height = _this2.expanded ? "".concat(subTreeContainer.scrollHeight, "px") : 0;
-          } else {
-            // Make sure it's animated next time
-            _this2._animate = true; // Hide it on initialization if closed
-
-            if (!_this2.expanded) {
-              subTreeContainer.style.height = 0;
-              subTreeContainer.hidden = true;
-            }
-          }
-        });
-      }
-      /**
-       The item's variant. See {@link TreeItemVariantEnum}.
-       
-       @type {String}
-       @default TreeItemVariant.DRILLDOWN
-       @htmlattribute variant
-       @htmlattributereflected
-       */
-
-    }, {
-      key: "variant",
-      get: function get() {
-        return this._variant || variant$o.DRILLDOWN;
-      },
-      set: function set(value) {
-        var _this$classList;
-
-        value = transform.string(value).toLowerCase();
-        this._variant = validate.enumeration(variant$o, value) && value || variant$o.DRILLDOWN; // removes every existing variant
-
-        (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$e);
-
-        this.classList.add("".concat(CLASSNAME$1D, "--").concat(this._variant));
-      }
-      /**
-       Whether the item is selected.
-       
-       @type {Boolean}
-       @default false
-       @htmlattribute selected
-       @htmlattributereflected
-       */
-
-    }, {
-      key: "selected",
-      get: function get() {
-        return this._selected || false;
-      },
-      set: function set(value) {
-        this._selected = transform.booleanAttr(value);
-
-        this._reflectAttribute('selected', this._selected);
-
-        this._elements.header.classList.toggle('is-selected', this._selected);
-
-        this._elements.header.setAttribute('aria-selected', this._selected);
-
-        this.trigger('coral-tree-item:_selectedchanged');
-      }
-      /**
-       Whether this item is disabled.
-       
-       @type {Boolean}
-       @default false
-       @htmlattribute disabled
-       @htmlattributereflected
-       */
-
-    }, {
-      key: "disabled",
-      get: function get() {
-        return this._disabled || false;
-      },
-      set: function set(value) {
-        this._disabled = transform.booleanAttr(value);
-
-        this._reflectAttribute('disabled', this._disabled);
-
-        this._elements.header.classList.toggle('is-disabled', this._disabled);
-
-        this._elements.header.setAttribute('aria-disabled', this._disabled);
-
-        this.trigger('coral-tree-item:_disabledchanged');
-      }
-      /**
-       @ignore
-       */
-
-    }, {
-      key: "hidden",
-      get: function get() {
-        return this.hasAttribute('hidden');
-      },
-      set: function set(value) {
-        this._reflectAttribute('hidden', transform.booleanAttr(value)); // We redefine hidden to trigger an event
-
-
-        this.trigger('coral-tree-item:_hiddenchanged');
-      }
-    }, {
-      key: "_contentZones",
-      get: function get() {
-        return {
-          'coral-tree-item-content': 'content'
-        };
-      }
-      /** @ignore */
-
-    }], [{
-      key: "variant",
-      get: function get() {
-        return variant$o;
-      }
-    }, {
-      key: "observedAttributes",
-      get: function get() {
-        return _get(_getPrototypeOf(TreeItem), "observedAttributes", this).concat(['selected', 'disabled', 'variant', 'expanded', 'hidden']);
-      }
-    }]);
-
-    return TreeItem;
   }(BaseComponent(HTMLElement));
 
   /**
@@ -74186,7 +74221,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "4.0.0";
+  var version = "4.0.1";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
@@ -74229,13 +74264,14 @@ var Coral = (function (exports) {
   	"resize-observer-polyfill": "1.5.1"
   };
   var devDependencies = {
-  	"@babel/core": "^7.4.3",
-  	"@babel/preset-env": "^7.4.3",
-  	"babel-eslint": "^10.0.1",
+  	"@babel/core": "^7.8.3",
+  	"@babel/preset-env": "^7.8.3",
+  	"babel-eslint": "^10.0.3",
+  	browserslist: "^4.8.5",
   	chai: "^4.0.2",
   	codemirror: "5.35.0",
   	"deflate-js": "0.2.3",
-  	del: "^4.1.0",
+  	del: "^4.1.1",
   	esdoc: "^1.0.3",
   	"esdoc-accessor-plugin": "^1.0.0",
   	"esdoc-importpath-plugin": "^1.0.1",
@@ -74245,21 +74281,21 @@ var Coral = (function (exports) {
   	"esdoc-standard-plugin": "^1.0.0",
   	"eslint-config-standard": "^12.0.0",
   	"eslint-plugin-babel": "^5.3.0",
-  	"eslint-plugin-import": "^2.16.0",
+  	"eslint-plugin-import": "^2.20.0",
   	"eslint-plugin-node": "^8.0.1",
-  	"eslint-plugin-promise": "^4.1.1",
-  	"eslint-plugin-standard": "^4.0.0",
+  	"eslint-plugin-promise": "^4.2.1",
+  	"eslint-plugin-standard": "^4.0.1",
   	"fancy-log": "^1.3.3",
   	"fs-extra": "^7.0.1",
   	"glob-all": "^3.1.0",
-  	gulp: "^4.0.0",
+  	gulp: "^4.0.2",
   	"gulp-axe-webdriver": "^3.1.3",
   	"gulp-bump": "^3.1.3",
-  	"gulp-clean-css": "^4.0.0",
+  	"gulp-clean-css": "^4.2.0",
   	"gulp-domly": "^0.1.0",
   	"gulp-eslint": "^6.0.0",
   	"gulp-gh-pages": "^0.5.4",
-  	"gulp-git": "^2.9.0",
+  	"gulp-git": "^2.10.0",
   	"gulp-merge-json": "^1.0.0",
   	"gulp-modify-file": "^1.0.0",
   	"gulp-plumber": "^1.1.0",
@@ -74267,35 +74303,35 @@ var Coral = (function (exports) {
   	"gulp-rename": "^1.2.2",
   	"gulp-stylus": "^2.6.0",
   	"http-server": "^0.11.1",
-  	inquirer: "^6.2.2",
-  	karma: "^4.0.1",
+  	inquirer: "^6.5.2",
+  	karma: "^4.4.1",
   	"karma-chrome-launcher": "^2.2.0",
-  	"karma-coverage-istanbul-reporter": "^2.0.5",
-  	"karma-firefox-launcher": "^1.0.1",
+  	"karma-coverage-istanbul-reporter": "^2.1.1",
+  	"karma-firefox-launcher": "^1.3.0",
   	"karma-html2js-preprocessor": "^1.1.0",
   	"karma-mocha": "^1.3.0",
   	"karma-mocha-reporter": "^2.2.5",
-  	"karma-rollup-preprocessor": "^7.0.0",
+  	"karma-rollup-preprocessor": "^7.0.3",
   	"karma-sinon-chai": "^2.0.2",
   	minimist: "^1.2.0",
-  	mocha: "^6.2.0",
+  	mocha: "^6.2.2",
   	moment: "^2.24.0",
   	"plugin-error": "^1.0.1",
   	"postcss-css-variables": "^0.13.0",
   	"postcss-merge-rules": "^4.0.3",
   	request: "^2.81.0",
-  	rollup: "^1.10.0",
-  	"rollup-plugin-babel": "^4.3.2",
+  	rollup: "^1.29.1",
+  	"rollup-plugin-babel": "^4.3.3",
   	"rollup-plugin-commonjs": "^9.3.4",
   	"rollup-plugin-istanbul": "^2.0.1",
   	"rollup-plugin-json": "^4.0.0",
-  	"rollup-plugin-node-resolve": "^4.2.3",
-  	"rollup-plugin-postcss": "^2.0.3",
-  	"rollup-plugin-uglify": "^6.0.2",
-  	"rollup-pluginutils": "^2.6.0",
-  	semver: "^6.0.0",
-  	sinon: "^7.3.1",
-  	"sinon-chai": "^3.3.0",
+  	"rollup-plugin-node-resolve": "^4.2.4",
+  	"rollup-plugin-postcss": "^2.0.4",
+  	"rollup-plugin-uglify": "^6.0.4",
+  	"rollup-pluginutils": "^2.8.2",
+  	semver: "^6.3.0",
+  	sinon: "^7.5.0",
+  	"sinon-chai": "^3.4.0",
   	"stylus-svg": "^1.1.2",
   	through2: "^3.0.1"
   };
@@ -74326,18 +74362,6 @@ var Coral = (function (exports) {
    */
 
   var version$1 = PACKAGE.version;
-
-  /**
-   * Copyright 2019 Adobe. All rights reserved.
-   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
-   * you may not use this file except in compliance with the License. You may obtain a copy
-   * of the License at http://www.apache.org/licenses/LICENSE-2.0
-   *
-   * Unless required by applicable law or agreed to in writing, software distributed under
-   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
-   * OF ANY KIND, either express or implied. See the License for the specific language
-   * governing permissions and limitations under the License.
-   */
 
   exports.Accordion = Accordion;
   exports.ActionBar = ActionBar;
