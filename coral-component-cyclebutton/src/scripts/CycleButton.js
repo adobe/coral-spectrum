@@ -63,13 +63,11 @@ class CycleButton extends BaseComponent(HTMLElement) {
   constructor() {
     super();
 
-    if (!this.id) {
-      this.id = commons.getUID();
-    } 
+    this._id = this.id || commons.getUID();
     
     // Templates
     this._elements = {};
-    base.call(this._elements, {Icon, commons, id: this.id});
+    base.call(this._elements, {Icon, commons, id: this._id});
     
     const events = {
       'click button[is="coral-button"]': '_onMouseDown',
@@ -505,6 +503,9 @@ class CycleButton extends BaseComponent(HTMLElement) {
       const ariaLabel = item.content.textContent.replace(WHITESPACE_REGEX, ' ');
       this._elements.button.setAttribute('aria-label', ariaLabel);
       this._elements.button.setAttribute('title', ariaLabel);
+      if (ariaLabel && effectiveIcon !== '' && this._elements.button._elements.icon) {
+        this._elements.button._elements.icon.setAttribute('aria-hidden', true);
+      }
     }
     else {
       // handle display modes that include text
@@ -513,6 +514,9 @@ class CycleButton extends BaseComponent(HTMLElement) {
       }
       if (effectiveDisplayMode === displayMode.ICON_TEXT) {
         this._elements.button.icon = effectiveIcon;
+        if (effectiveIcon !== '' && this._elements.button._elements.icon) {
+          this._elements.button._elements.icon.setAttribute('aria-hidden', true);
+        }
       }
       this._elements.button.label.innerHTML = item.content.innerHTML;
     
@@ -789,6 +793,7 @@ class CycleButton extends BaseComponent(HTMLElement) {
       selectListItem.icon = item.icon;
       selectListItem.role = item.role;
       selectListItem.setAttribute('aria-checked', item.selected);
+      selectListItem._elements.icon.setAttribute('aria-hidden', true);
 
       selectListItem.set({
         disabled: item.disabled,
@@ -807,6 +812,7 @@ class CycleButton extends BaseComponent(HTMLElement) {
         actionListItem.disabled = action.disabled;
         actionListItem.icon = action.icon;
         actionListItem.role = action.role;
+        actionListItem._elements.icon.setAttribute('aria-hidden', true);
 
         actionList.items.add(actionListItem);
       }
@@ -877,6 +883,10 @@ class CycleButton extends BaseComponent(HTMLElement) {
   /** @ignore */
   render() {
     super.render();
+
+    if (!this.id) {
+      this.id = this._id;
+    } 
     
     this.classList.add(CLASSNAME);
     
