@@ -694,7 +694,7 @@ describe('NumberInput', function() {
         expect(el._elements.stepUp.disabled).to.be.false;
         expect(el._elements.stepDown.disabled).to.be.true;
         expect(el.getAttribute('disabled')).to.be.null;
-        expect(el.getAttribute('aria-disabled')).to.equal('false');
+        expect(el.hasAttribute('aria-disabled')).to.be.false;
 
         el.disabled = true;
         expect(el._elements.input.disabled).to.be.true;
@@ -708,7 +708,7 @@ describe('NumberInput', function() {
         expect(el._elements.stepUp.disabled).to.be.false;
         expect(el._elements.stepDown.disabled).to.be.true;
         expect(el.getAttribute('disabled')).to.be.null;
-        expect(el.getAttribute('aria-disabled')).to.equal('false');
+        expect(el.hasAttribute('aria-disabled')).to.be.false;
       });
 
       it('should handle manipulating disabled attribute', function() {

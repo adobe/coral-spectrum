@@ -421,7 +421,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
     
-    this.setAttribute('aria-disabled', this._disabled);
+    this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
     this.classList.toggle('is-disabled', this._disabled);
     
     const isReadOnly = this.hasAttribute('readonly');
