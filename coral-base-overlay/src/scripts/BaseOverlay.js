@@ -210,6 +210,7 @@ function createDocumentTabCaptureEls() {
   if (!topTabCaptureEl) {
     topTabCaptureEl = document.createElement('div');
     topTabCaptureEl.setAttribute('coral-tabcapture', '');
+    topTabCaptureEl.setAttribute('role', 'presentation');
     topTabCaptureEl.tabIndex = 0;
     document.body.insertBefore(topTabCaptureEl, document.body.firstChild);
     topTabCaptureEl.addEventListener('focus', () => {
@@ -229,6 +230,7 @@ function createDocumentTabCaptureEls() {
     
     bottomTabCaptureEl = document.createElement('div');
     bottomTabCaptureEl.setAttribute('coral-tabcapture', '');
+    bottomTabCaptureEl.setAttribute('role', 'presentation');
     bottomTabCaptureEl.tabIndex = 0;
     document.body.appendChild(bottomTabCaptureEl);
     bottomTabCaptureEl.addEventListener('focus', () => {
