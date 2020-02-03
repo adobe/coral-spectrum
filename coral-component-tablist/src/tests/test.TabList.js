@@ -15,6 +15,8 @@ import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {TabList, Tab} from '../../../coral-component-tablist';
 import {Icon} from '../../../coral-component-icon';
 
+const IS_FIREFOX = navigator.userAgent.indexOf('Gecko') !== -1;
+
 describe('TabList', function() {
   
   describe('Instantiation', function() {
@@ -563,8 +565,10 @@ describe('TabList', function() {
       
       setTimeout(() => {
         expect(el._elements.line.style.width).to.equal('');
-        expect(el._elements.line.style.height).to.not.equal('');
-        expect(el._elements.line.style.translate).to.not.equal('');
+        if (!IS_FIREFOX) {
+          expect(el._elements.line.style.height).to.not.equal('');
+          expect(el._elements.line.style.translate).to.not.equal('');
+        }
         expect(el._elements.line.hidden).to.be.false;
         
         done();
