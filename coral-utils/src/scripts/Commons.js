@@ -38,7 +38,8 @@ const FOCUSABLE_ELEMENTS = [
   'embed',
   'audio[controls]',
   'video[controls]',
-  '[contenteditable]'
+  '[contenteditable]',
+  '[tabindex]'
 ];
 
 // To support Coral.commons.ready and differentiate lightweight tags from defined elements
@@ -125,8 +126,8 @@ class Commons {
     
     const focusableElements = FOCUSABLE_ELEMENTS.slice();
     this._focusableElementsSelector = focusableElements.join(',');
-  
-    focusableElements.push('[tabindex]:not([tabindex="-1"])');
+    
+    focusableElements[focusableElements.length - 1] += ':not([tabindex="-1"])';
     this._tabbableElementsSelector = focusableElements.join(':not([tabindex="-1"]),');
     
     this._coralSelector = '';
