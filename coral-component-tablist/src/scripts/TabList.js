@@ -236,13 +236,18 @@ class TabList extends BaseComponent(HTMLElement) {
   }
   set orientation(value) {
     value = transform.string(value).toLowerCase();
+    
+    const newValue = typeof this._orientation === 'undefined';
     this._orientation = validate.enumeration(orientation)(value) && value || orientation.HORIZONTAL;
+    if (newValue) {
+      this._previousOrientation = this._orientation;
+    }
     this._reflectAttribute('orientation', this._orientation);
   
     this.classList.toggle(`${CLASSNAME}--vertical`, this._orientation === orientation.VERTICAL);
     this.classList.toggle(`${CLASSNAME}--horizontal`, this._orientation === orientation.HORIZONTAL);
     
-    this._setLine(true);
+    this._setLine();
   }
   
   /** @private */
@@ -386,7 +391,7 @@ class TabList extends BaseComponent(HTMLElement) {
     this._triggerChangeEvent();
   }
   
-  _setLine(clear) {
+  _setLine() {
     // Debounce
     if (this._timeout !== null) {
       window.clearTimeout(this._timeout);
@@ -405,7 +410,7 @@ class TabList extends BaseComponent(HTMLElement) {
           const width = selectedItem.clientWidth - padding * 2;
       
           // Orientation changed
-          if (clear) {
+          if (this._previousOrientation !== this.orientation) {
             this._elements.line.style.height = '';
           }
       
@@ -417,7 +422,7 @@ class TabList extends BaseComponent(HTMLElement) {
           const height = selectedItem.clientHeight;
       
           // Orientation changed
-          if (clear) {
+          if (this._previousOrientation !== this.orientation) {
             this._elements.line.style.width = '';
           }
       
@@ -431,6 +436,8 @@ class TabList extends BaseComponent(HTMLElement) {
         // Hide line if no selected item
         this._elements.line.hidden = true;
       }
+  
+      this._previousOrientation = this.orientation;
     }, this._wait);
   }
   
