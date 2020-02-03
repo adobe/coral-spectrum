@@ -17,6 +17,18 @@ import checkIcon from '../templates/checkIcon';
 
 const CLASSNAME = '_coral-Menu-item';
 
+const VALID_ARIA_SELECTED_ROLES = [
+  'columnheader',
+  'gridcell',
+  'option',
+  'row',
+  'rowheader',
+  'tab',
+  'treeitem'
+];
+
+const VALID_ARIA_SELECTED_ROLES_REGEXP = new RegExp(`^(${VALID_ARIA_SELECTED_ROLES.join('|')})$`);
+
 /**
  @class Coral.SelectList.Item
  @classdesc A SelectList item component
@@ -128,7 +140,10 @@ class SelectListItem extends BaseComponent(HTMLElement) {
     this._reflectAttribute('selected', this.disabled ? false : this._selected);
     
     this.classList.toggle('is-selected', this._selected);
-    this.setAttribute('aria-selected', this._selected);
+    if (this.hasAttribute('role') &&
+      VALID_ARIA_SELECTED_ROLES_REGEXP.test(this.getAttribute('role'))) {
+      this.setAttribute('aria-selected', this._selected);
+    }
     
     // Toggle check icon
     this._elements.checkIcon.hidden = !this._selected;
@@ -169,8 +184,10 @@ class SelectListItem extends BaseComponent(HTMLElement) {
     super.render();
     
     this.classList.add(CLASSNAME);
-    
-    this.setAttribute('role', 'option');
+  
+    if (!this.hasAttribute('role')) {
+      this.setAttribute('role', 'option');
+    }
   
     // Support cloneNode
     const template = this.querySelector('._coral-SelectList-icon');
