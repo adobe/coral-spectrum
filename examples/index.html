@@ -145,6 +145,7 @@
         top: 48px;
         left: 0;
         width: 100%;
+        height: calc(100% - 48px);
       }
 
       .example-List {
@@ -313,8 +314,7 @@
             textContent: name
           },
           selected: selected,
-          href: '../' + component + '/examples/index.html',
-          ariaCurrent: (selected ? 'page' : undefined)
+          href: '../' + component + '/examples/index.html'
         });
         selected && item.setAttribute('aria-current', 'page');
         item.on('click', function(event) {
