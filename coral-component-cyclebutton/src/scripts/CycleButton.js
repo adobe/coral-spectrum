@@ -243,91 +243,6 @@ class CycleButton extends BaseComponent(HTMLElement) {
     }
   }
 
-  /**
-   The accessibility name for the button element
-   
-   @type {String}
-   @default ""
-   @htmlattribute aria-label
-   @htmlattributereflected
-   */
-  get ariaLabel() {
-    return this._ariaLabel;
-  }
-  set ariaLabel(value) {
-    value = transform.string(value);
-    this._ariaLabel = value;
-    this._reflectAttribute('aria-label', this._ariaLabel);
-    const hasMenuItemRadioGroup = this._hasMenuItemRadioGroup();
-
-    // aria-labelledby takes precedence over aria-label
-    if (!this.ariaLabelledby) {
-
-      // button should be labeled by the container and the button, with the selected value, itself
-      this._elements.button.setAttribute('aria-labelledby', this.id + ' ' + this._elements.button.id);
-      
-      // overlay should be labeled by the container with aria-label
-      this._elements.overlay.setAttribute('aria-labelledby', this.id);
-
-      //  With both items and actions, the items should be grouped and the group should be labeled
-      if (hasMenuItemRadioGroup) {
-
-        // selectList menuitemradio group should be labeled by the container with aria-label,
-        this._elements.selectList.setAttribute('aria-labelledby', this.id);
-      }
-      else {
-
-        // otherwise the selectList should not be labeled independantly from the menu
-        this._elements.selectList.removeAttribute('aria-labelledby');
-      }
-    }
-    else {
-      //  with no aria-label, clean up aria-labelledby on _elements
-      this._elements.button.removeAttribute('aria-labelledby');
-      this._elements.overlay.setAttribute('aria-labelledby', this._elements.button.id);
-      
-      //  With both items and actions, the items should be grouped and the group should be labeled
-      if (hasMenuItemRadioGroup) {
-
-        // selectList menuitemradio group should be labeled by the button, with the selected value, itself,
-        this._elements.selectList.setAttribute('aria-labelledby', this._elements.button.id);
-      }
-      else {
-
-        // otherwise the selectList should not be labeled independantly from the menu
-        this._elements.selectList.removeAttribute('aria-labelledby');
-      }
-    }
-  }
-
-  /**
-   The id reference for an HTML element that labels the button element 
-   accessibility name for the button element
-   
-   @type {String}
-   @default ""
-   @htmlattribute aria-labelledby
-   @htmlattributereflected
-   */
-  get ariaLabelledby() {
-    return this._ariaLabelledby;
-  }
-  set ariaLabelledby(value) {
-    value = transform.string(value);
-    this._ariaLabelledby = value;
-    this._reflectAttribute('aria-labelledby', this._ariaLabelledby);
-    if (this.ariaLabelledby || !this.ariaLabel) {
-      this._elements.button.setAttribute('aria-labelledby', this.ariaLabelledby + ' ' + this._elements.button.id);
-      this._elements.overlay.setAttribute('aria-labelledby', this.ariaLabelledby || this._elements.button.id);
-      if (this._hasMenuItemRadioGroup()) {
-        this._elements.selectList.setAttribute('aria-labelledby', this.ariaLabelledby || this._elements.button.id);
-      }
-      else {
-        this._elements.selectList.removeAttribute('aria-labelledby');
-      }
-    }
-  }
-
   /** @private */
   _hasMenuItemRadioGroup() {
     return this.items.getAll().length > 0 && this.actions.getAll().length > 0;
@@ -608,14 +523,9 @@ class CycleButton extends BaseComponent(HTMLElement) {
       // Assign the button as the target for the overlay
       this._elements.overlay.target = this._elements.button;
       this._elements.overlay.hidden = false;
-
-      // regions within the overlay should have role=presentation
-      ['header', 'content', 'footer'].forEach((contentZoneName) => {
-        const contentZone = this._elements.overlay[contentZoneName];
-        if (contentZone) {
-          contentZone.setAttribute('role', 'presentation');
-        }
-      });
+  
+      // Regions within the overlay should have role=presentation
+      this._elements.overlay.content.setAttribute('role', 'presentation');
     }
     else {
       this._elements.button.removeAttribute('aria-controls');
@@ -678,18 +588,21 @@ class CycleButton extends BaseComponent(HTMLElement) {
   /** @private */
   _onFocusLastItem(event) {
     event.preventDefault();
-    var items = this._getSelectableItems();
+    const items = this._getSelectableItems();
     this._focusItem(items[items.length - 1]);
   }
 
   /** @private */
   _getSelectableItems() {
-    var items = this.items.getAll();
-    var actions = this.actions.getAll();
-    return items.concat(actions).map((item) => {
-      return item._selectListItem || item._buttonListItem;
-    }).filter(function(item) {
-      return !item.hasAttribute('hidden') && !item.hasAttribute('disabled') && item.offsetParent !== null &&
+    const items = this.items.getAll();
+    const actions = this.actions.getAll();
+    return items
+      .concat(actions)
+      .map(item => item._selectListItem || item._buttonListItem)
+      .filter(item => {
+        !item.hasAttribute('hidden') &&
+        !item.hasAttribute('disabled') &&
+        item.offsetParent !== null &&
         (item.offsetWidth > 0 || item.offsetHeight > 0 );
     });
   }
@@ -856,15 +769,56 @@ class CycleButton extends BaseComponent(HTMLElement) {
   
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
-      displaymode: 'displayMode',
-      'aria-label': 'ariaLabel',
-      'aria-labelledby': 'ariaLabelledby'
+      displaymode: 'displayMode'
     });
   }
   
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['icon', 'threshold', 'displaymode', 'aria-label', 'aria-labelledby']);
+  }
+  
+  /** @ignore */
+  attributeChangedCallback(name, oldValue, value) {
+    // The accessibility name for the button element
+    if (name === 'aria-label') {
+      const hasMenuItemRadioGroup = this._hasMenuItemRadioGroup();
+  
+      // aria-labelledby takes precedence over aria-label
+      if (this.getAttribute('aria-labelledby')) {
+        // Button should be labeled by the container and the button, with the selected value, itself
+        this._elements.button.setAttribute('aria-labelledby', `${this.id} ${this._elements.button.id}`);
+    
+        // Overlay should be labeled by the container with aria-label
+        this._elements.overlay.setAttribute('aria-labelledby', this.id);
+    
+        // With both items and actions, the items should be grouped and the group should be labeled
+        // SelectList menuitemradio group should be labeled by the container with aria-label,
+        // Otherwise the selectList should not be labeled independantly from the menu
+        this._elements.selectList[hasMenuItemRadioGroup ? 'setAttribute' : 'removeAttribute']('aria-labelledby', this.id);
+      }
+      else {
+        //  With no aria-label, clean up aria-labelledby on _elements
+        this._elements.button.removeAttribute('aria-labelledby');
+        this._elements.overlay.setAttribute('aria-labelledby', this._elements.button.id);
+    
+        // With both items and actions, the items should be grouped and the group should be labeled
+        // SelectList menuitemradio group should be labeled by the button, with the selected value, itself,
+        // Otherwise the selectList should not be labeled independantly from the menu
+        this._elements.selectList[hasMenuItemRadioGroup ? 'setAttribute' : 'removeAttribute']('aria-labelledby', this._elements.button.id);
+      }
+    }
+    // The id reference for an HTML element that labels the button element accessibility name for the button element
+    else if (name === 'aria-labelledby') {
+      if (value || !this.getAttribute('aria-label')) {
+        this._elements.button.setAttribute('aria-labelledby', `${value} ${this._elements.button.id}`);
+        this._elements.overlay.setAttribute('aria-labelledby', value || this._elements.button.id);
+        this._elements.selectList[this._hasMenuItemRadioGroup() ? 'setAttribute' : 'removeAttribute']('aria-labelledby', value || this._elements.button.id);
+      }
+    }
+    else {
+      super.attributeChangedCallback(name, oldValue, value);
+    }
   }
   
   /** @ignore */
@@ -921,9 +875,6 @@ class CycleButton extends BaseComponent(HTMLElement) {
     this._preventTriggeringEvents = false;
     
     this._oldSelection = this.selectedItem;
-
-    // remove the default aria-label from the selectList element
-    this._elements.selectList.removeAttribute('aria-label');
   }
   
   /** @ignore */
