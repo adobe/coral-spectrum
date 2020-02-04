@@ -10,7 +10,6 @@
  * governing permissions and limitations under the License.
  */
 
-const fs = require('fs');
 const path = require('path');
 const istanbul = require('rollup-plugin-istanbul');
 const util = require('../helpers/util');
