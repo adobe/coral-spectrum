@@ -427,6 +427,18 @@ import checkIcon from &apos;../templates/checkIcon&apos;;
 
 const CLASSNAME = &apos;_coral-Menu-item&apos;;
 
+const VALID_ARIA_SELECTED_ROLES = [
+  &apos;columnheader&apos;,
+  &apos;gridcell&apos;,
+  &apos;option&apos;,
+  &apos;row&apos;,
+  &apos;rowheader&apos;,
+  &apos;tab&apos;,
+  &apos;treeitem&apos;
+];
+
+const VALID_ARIA_SELECTED_ROLES_REGEXP = new RegExp(`^(${VALID_ARIA_SELECTED_ROLES.join(&apos;|&apos;)})$`);
+
 /**
  @class Coral.SelectList.Item
  @classdesc A SelectList item component
@@ -538,7 +550,10 @@ class SelectListItem extends BaseComponent(HTMLElement) {
     this._reflectAttribute(&apos;selected&apos;, this.disabled ? false : this._selected);
     
     this.classList.toggle(&apos;is-selected&apos;, this._selected);
-    this.setAttribute(&apos;aria-selected&apos;, this._selected);
+    if (this.hasAttribute(&apos;role&apos;) &amp;&amp;
+      VALID_ARIA_SELECTED_ROLES_REGEXP.test(this.getAttribute(&apos;role&apos;))) {
+      this.setAttribute(&apos;aria-selected&apos;, this._selected);
+    }
     
     // Toggle check icon
     this._elements.checkIcon.hidden = !this._selected;
@@ -562,7 +577,7 @@ class SelectListItem extends BaseComponent(HTMLElement) {
     this._reflectAttribute(&apos;disabled&apos;, this._disabled);
     
     this.classList.toggle(&apos;is-disabled&apos;, this._disabled);
-    this.setAttribute(&apos;aria-disabled&apos;, this._disabled);
+    this[this._disabled ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-disabled&apos;, this._disabled);
     
     this.selected = this.selected;
   }
@@ -579,8 +594,10 @@ class SelectListItem extends BaseComponent(HTMLElement) {
     super.render();
     
     this.classList.add(CLASSNAME);
-    
-    this.setAttribute(&apos;role&apos;, &apos;option&apos;);
+  
+    if (!this.hasAttribute(&apos;role&apos;)) {
+      this.setAttribute(&apos;role&apos;, &apos;option&apos;);
+    }
   
     // Support cloneNode
     const template = this.querySelector(&apos;._coral-SelectList-icon&apos;);

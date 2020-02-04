@@ -22,16 +22,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.41% </span>
+                <span class="strong">95.35% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>291/305</span>
+                <span class='fraction'>287/301</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.24% </span>
+                <span class="strong">90.34% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>185/205</span>
+                <span class='fraction'>187/207</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.41% </span>
+                <span class="strong">95.35% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>291/305</span>
+                <span class='fraction'>287/301</span>
             </div>
         
             
@@ -955,17 +955,7 @@
 <a name='L897'></a><a href='#L897'>897</a>
 <a name='L898'></a><a href='#L898'>898</a>
 <a name='L899'></a><a href='#L899'>899</a>
-<a name='L900'></a><a href='#L900'>900</a>
-<a name='L901'></a><a href='#L901'>901</a>
-<a name='L902'></a><a href='#L902'>902</a>
-<a name='L903'></a><a href='#L903'>903</a>
-<a name='L904'></a><a href='#L904'>904</a>
-<a name='L905'></a><a href='#L905'>905</a>
-<a name='L906'></a><a href='#L906'>906</a>
-<a name='L907'></a><a href='#L907'>907</a>
-<a name='L908'></a><a href='#L908'>908</a>
-<a name='L909'></a><a href='#L909'>909</a>
-<a name='L910'></a><a href='#L910'>910</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L900'></a><a href='#L900'>900</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1311,12 +1301,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1696x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1696x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1690x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1696x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1849,7 +1834,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3483x</span>
+<span class="cline-any cline-yes">3480x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span>
@@ -1862,12 +1847,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">30x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">30x</span>
-<span class="cline-any cline-yes">18x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span>
@@ -2152,7 +2132,7 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
     this.items.getAll().forEach((item) =&gt; {
       item.disabled = isDisabled;
     });
-    this.setAttribute('aria-disabled', isDisabled);
+    this[isDisabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', isDisabled);
   }
   
   /**
@@ -2173,29 +2153,24 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
     // Also update for all the items the disabled property so it matches the native select.
     this.items.getAll().forEach((item) =&gt; {
       item.disabled = this.disabled || this.readOnly &amp;&amp; !item.hasAttribute('selected');
-      if (this.readOnly) {
-        item.setAttribute('aria-disabled', true);
-      }
-      else {
-      <span class="missing-if-branch" title="else path not taken" >E</span>  item.removeAttribute('aria-disabled');
-      }<span class="missing-if-branch" title="if path not taken" >I</span>
-    });<span class="cstat-no" title="statement not covered" ></span>
+      item[this.readOnly ? 'setAttribute' : 'removeAttribute']('aria-disabled', true);
+    });
     // aria-readonly is not permitted on elements with role="radiogroup" or role="group"
     this.removeAttribute('aria-readonly');
-  }
-  
-  /**
+  }<span class="missing-if-branch" title="else path not taken" >E</span>
+  <span class="missing-if-branch" title="if path not taken" >I</span>
+  /**<span class="cstat-no" title="statement not covered" ></span>
    Whether this field is required or not.
    @type {Boolean}
    @default false
    @htmlattribute required
    @htmlattributereflected
-   */<span class="missing-if-branch" title="else path not taken" >E</span>
+   */
   get required() {
     return this._required || false;
   }
   set required(value) {
-    this._required = transform.booleanAttr(value);
+    th<span class="missing-if-branch" title="else path not taken" >E</span>is._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
   
     this._elements.nativeSelect.required = this.required;
@@ -2203,12 +2178,12 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
     if (this.selectionMode !== selectionMode.SINGLE) {
       this.removeAttribute('aria-required');
     }
-  }<span class="branch-0 cbranch-no" title="branch not covered" ></span>
+  }
   
   /**
    Inherited from {@link BaseFormField#labelledBy}.
    */
-  get labelledBy() {
+  get labelledBy() {<span class="branch-0 cbranch-no" title="branch not covered" ></span>
     return super.labelledBy;
   }
   set labelledBy(value) {
@@ -2432,12 +2407,7 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
   
     item.disabled = this.disabled || this.readOnly &amp;&amp; !item.hasAttribute('selected');
   
-    if (this.readOnly) {
-      item.setAttribute('aria-disabled', true);
-    }
-    else {
-      item.removeAttribute('aria-disabled');
-    }
+    item[this.readOnly ? 'setAttribute' : 'removeAttribute']('aria-disabled', true);
   
     this._addItemOption(item);
    
@@ -2455,12 +2425,12 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
   _onItemRemoved(item) {
     // Restore variant
     item.variant = item._initialVariant;
-    item._ini<span class="missing-if-branch" title="else path not taken" >E</span>tialVariant = undefined;
+    item._initialVariant = undefined;
     item.removeAttribute('role');
     
     if (!item.parentNode) {
       // Remove the item from the initial selected values
-      const index = this._initalSelectedValues.indexOf(item.value);
+      const i<span class="missing-if-branch" title="else path not taken" >E</span>ndex = this._initalSelectedValues.indexOf(item.value);
       if (index !== -1) {
         this._initalSelectedValues.splice(index, 1);
       }
@@ -2475,15 +2445,15 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
   
   /** @private */
   _onCollectionChange() {
-    // w<span class="missing-if-branch" title="else path not taken" >E</span>e need to make sure that the state of the selectionMode is valid
+    // we need to make sure that the state of the selectionMode is valid
     this._validateSelection();
   }
-  <span class="cstat-no" title="statement not covered" ></span>
+  
   /** @private */
-  _onButtonSelectedChanged(event) {
+  _onBut<span class="missing-if-branch" title="else path not taken" >E</span>tonSelectedChanged(event) {
     event.stopImmediatePropagation();
   
-    const button = event.target;
+    const <span class="cstat-no" title="statement not covered" >button = event.target;</span>
     const isSelected = button.hasAttribute('selected');
 &nbsp;
     // when in single mode, we need to make sure the current selection is valid
@@ -2596,12 +2566,12 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @private */
   _addItemOption(item) {
     if (this.selectionMode === selectionMode.NONE) {
-      return;<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+      return;
     }
     
     // if already attached return
     if (item.option) {
-      return;
+      return;<span class="branch-2 cbranch-no" title="branch not covered" ></span>
     }
     
     const option = document.createElement('option');
@@ -2790,7 +2760,7 @@ export default ButtonGroup;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Jan 28 2020 16:52:33 GMT+0100 (Central European Standard Time)
+                at Tue Feb 04 2020 14:26:24 GMT+0100 (Central European Standard Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

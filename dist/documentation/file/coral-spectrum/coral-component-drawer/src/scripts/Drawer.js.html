@@ -488,7 +488,7 @@ class Drawer extends BaseComponent(HTMLElement) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute(&apos;disabled&apos;, this._disabled);
   
-    this.setAttribute(&apos;aria-disabled&apos;, this._disabled);
+    this[this._disabled ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-disabled&apos;, this._disabled);
     this._elements.toggle.hidden = this._disabled;
   }
   

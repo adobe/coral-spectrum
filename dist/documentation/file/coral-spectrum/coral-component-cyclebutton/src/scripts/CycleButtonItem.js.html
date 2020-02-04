@@ -500,7 +500,7 @@ class CycleButtonItem extends BaseComponent(HTMLElement) {
     this._reflectAttribute(&apos;disabled&apos;, this._disabled);
     
     this.classList.toggle(&apos;is-disabled&apos;, this.disabled);
-    this.setAttribute(&apos;aria-disabled&apos;, this.disabled);
+    this[this._disabled ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-disabled&apos;, this._disabled);
     
     if (this._disabled &amp;&amp; this.selected) {
       this.selected = false;
@@ -530,7 +530,7 @@ class CycleButtonItem extends BaseComponent(HTMLElement) {
       this._reflectAttribute(&apos;selected&apos;, this.disabled ? false : this._selected);
       
       this.classList.toggle(&apos;is-selected&apos;, this._selected);
-      this.setAttribute(&apos;aria-selected&apos;, this._selected);
+      this.setAttribute(&apos;aria-checked&apos;, this._selected);
       
       this.trigger(&apos;coral-cyclebutton-item:_selectedchanged&apos;);
     }
@@ -595,7 +595,7 @@ class CycleButtonItem extends BaseComponent(HTMLElement) {
     super.render();
     
     // adds the role to support accessibility
-    this.setAttribute(&apos;role&apos;, &apos;option&apos;);
+    this.setAttribute(&apos;role&apos;, &apos;menuitemradio&apos;);
   
     // Default reflected attributes
     if (!this._displayMode) { this.displayMode = displayMode.INHERIT; }

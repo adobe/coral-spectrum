@@ -4241,7 +4241,7 @@
 
   var TRANSITION_DURATION_THRESHOLD = 100; // Based on jQuery's :focusable selector
 
-  var FOCUSABLE_ELEMENTS = ['input:not([disabled])', 'select:not([disabled])', 'textarea:not([disabled])', 'button:not([disabled])', 'a[href]', 'area[href]', 'summary', 'iframe', 'object', 'embed', 'audio[controls]', 'video[controls]', '[contenteditable]']; // To support Coral.commons.ready and differentiate lightweight tags from defined elements
+  var FOCUSABLE_ELEMENTS = ['input:not([disabled])', 'select:not([disabled])', 'textarea:not([disabled])', 'button:not([disabled])', 'a[href]', 'area[href]', 'summary', 'iframe', 'object', 'embed', 'audio[controls]', 'video[controls]', '[contenteditable]', '[tabindex]']; // To support Coral.commons.ready and differentiate lightweight tags from defined elements
 
   var CORAL_COMPONENTS = [];
   /**
@@ -4338,7 +4338,7 @@
       });
       var focusableElements = FOCUSABLE_ELEMENTS.slice();
       this._focusableElementsSelector = focusableElements.join(',');
-      focusableElements.push('[tabindex]:not([tabindex="-1"])');
+      focusableElements[focusableElements.length - 1] += ':not([tabindex="-1"])';
       this._tabbableElementsSelector = focusableElements.join(':not([tabindex="-1"]),');
       this._coralSelector = ''; // @IE11
 
@@ -15388,6 +15388,7 @@
     el0.setAttribute("handle", "topTabCapture");
     el0.setAttribute("coral-tabcapture", "top");
     el0.setAttribute("tabindex", "0");
+    el0.setAttribute("role", "presentation");
     frag.appendChild(el0);
     var el1 = document.createTextNode("\n");
     frag.appendChild(el1);
@@ -15395,6 +15396,7 @@
     el2.setAttribute("handle", "intermediateTabCapture");
     el2.setAttribute("coral-tabcapture", "intermediate");
     el2.setAttribute("tabindex", "0");
+    el2.setAttribute("role", "presentation");
     frag.appendChild(el2);
     var el3 = document.createTextNode("\n");
     frag.appendChild(el3);
@@ -15402,6 +15404,7 @@
     el4.setAttribute("handle", "bottomTabCapture");
     el4.setAttribute("coral-tabcapture", "bottom");
     el4.setAttribute("tabindex", "0");
+    el4.setAttribute("role", "presentation");
     frag.appendChild(el4);
     var el5 = document.createTextNode("\n");
     frag.appendChild(el5);
@@ -15662,6 +15665,7 @@
     if (!topTabCaptureEl) {
       topTabCaptureEl = document.createElement('div');
       topTabCaptureEl.setAttribute('coral-tabcapture', '');
+      topTabCaptureEl.setAttribute('role', 'presentation');
       topTabCaptureEl.tabIndex = 0;
       document.body.insertBefore(topTabCaptureEl, document.body.firstChild);
       topTabCaptureEl.addEventListener('focus', function () {
@@ -15681,6 +15685,7 @@
       });
       bottomTabCaptureEl = document.createElement('div');
       bottomTabCaptureEl.setAttribute('coral-tabcapture', '');
+      bottomTabCaptureEl.setAttribute('role', 'presentation');
       bottomTabCaptureEl.tabIndex = 0;
       document.body.appendChild(bottomTabCaptureEl);
       bottomTabCaptureEl.addEventListener('focus', function () {
@@ -21620,6 +21625,7 @@
     var el0 = this["headerWrapper"] = document.createElement("div");
     el0.className += " _coral-Dialog-header";
     el0.setAttribute("handle", "headerWrapper");
+    el0.setAttribute("role", "presentation");
     frag.appendChild(el0);
     var el1 = document.createTextNode("\n");
     frag.appendChild(el1);
@@ -21929,9 +21935,12 @@
 
         this.classList.add(CLASSNAME$7); // ARIA
 
-        this.setAttribute('role', 'dialog'); // This helped announcements in certain screen readers
+        if (!this.hasAttribute('role')) {
+          this.setAttribute('role', 'dialog'); // This helped announcements in certain screen readers
 
-        this.setAttribute('aria-live', 'assertive'); // Default reflected attributes
+          this.setAttribute('aria-live', 'assertive');
+        } // Default reflected attributes
+
 
         if (!this._variant) {
           this.variant = variant$3.DEFAULT;
@@ -22110,7 +22119,9 @@
 
           if (this._variant === variant$3.DEFAULT) {
             // ARIA
-            this.setAttribute('role', 'dialog');
+            if (!this.hasAttribute('role')) {
+              this.setAttribute('role', 'dialog');
+            }
           } else {
             // Set new variant class
             this.classList.add("_coral-Dialog--".concat(this._variant)); // ARIA
@@ -23243,7 +23254,7 @@
         if (!this.disabled) {
           // Force tabindex and aria-disabled attribute reflection
           this.setAttribute('tabindex', '0');
-          this.setAttribute('aria-disabled', 'false');
+          this.removeAttribute('aria-disabled');
         }
       }
     }, {
@@ -23258,7 +23269,7 @@
 
         this.classList.toggle('is-disabled', this._disabled);
         this.setAttribute('tabindex', this._disabled ? '-1' : '0');
-        this.setAttribute('aria-disabled', this._disabled);
+        this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
       }
     }, {
       key: "_contentZones",
@@ -24190,7 +24201,6 @@
             if (isAtTarget) {
               // Don't let arrow keys etc scroll the page
               event.preventDefault();
-              event.stopPropagation();
             }
 
             return isAtTarget;
@@ -24490,7 +24500,7 @@
             this._reflectAttribute('disabled', this._disabled);
 
             this.classList.toggle('is-disabled', this._disabled);
-            this.setAttribute('aria-disabled', this._disabled);
+            this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
           }
           /**
            The icon to display. See {@link Icon}.
@@ -25489,7 +25499,6 @@
       key: "_focusPreviousItem",
       value: function _focusPreviousItem(event) {
         event.preventDefault();
-        event.stopPropagation();
 
         this._focusItem(this.items._getPreviousSelectable(event.target));
       }
@@ -25499,7 +25508,6 @@
       key: "_focusNextItem",
       value: function _focusNextItem(event) {
         event.preventDefault();
-        event.stopPropagation();
 
         this._focusItem(this.items._getNextSelectable(event.target));
       }
@@ -25519,7 +25527,6 @@
       key: "_onHomeKey",
       value: function _onHomeKey(event) {
         event.preventDefault();
-        event.stopPropagation();
 
         this._focusFirstItem();
       }
@@ -25529,7 +25536,6 @@
       key: "_onEndKey",
       value: function _onEndKey(event) {
         event.preventDefault();
-        event.stopPropagation();
 
         this._focusLastItem();
       }
@@ -25767,7 +25773,9 @@
       value: function render() {
         this.classList.add(CLASSNAME$k); // adds the role to support accessibility
 
-        this.setAttribute('role', 'listbox');
+        if (!this.hasAttribute('role')) {
+          this.setAttribute('role', 'listbox');
+        }
 
         if (!this.hasAttribute('aria-label')) {
           this.setAttribute('aria-label', i18n.get('List'));
@@ -25887,7 +25895,7 @@
 
         this._reflectAttribute('multiple', this._multiple);
 
-        this.setAttribute('aria-multiselectable', this._multiple);
+        this[this._multiple ? 'setAttribute' : 'removeAttribute']('aria-multiselectable', this._multiple);
 
         this._validateSelection();
       }
@@ -26054,6 +26062,8 @@
   };
 
   var CLASSNAME$m = '_coral-Menu-item';
+  var VALID_ARIA_SELECTED_ROLES = ['columnheader', 'gridcell', 'option', 'row', 'rowheader', 'tab', 'treeitem'];
+  var VALID_ARIA_SELECTED_ROLES_REGEXP = new RegExp("^(".concat(VALID_ARIA_SELECTED_ROLES.join('|'), ")$"));
   /**
    @class Coral.SelectList.Item
    @classdesc A SelectList item component
@@ -26123,7 +26133,11 @@
         _get(_getPrototypeOf(SelectListItem.prototype), "render", this).call(this);
 
         this.classList.add(CLASSNAME$m);
-        this.setAttribute('role', 'option'); // Support cloneNode
+
+        if (!this.hasAttribute('role')) {
+          this.setAttribute('role', 'option');
+        } // Support cloneNode
+
 
         var template = this.querySelector('._coral-SelectList-icon');
 
@@ -26223,7 +26237,11 @@
         this._reflectAttribute('selected', this.disabled ? false : this._selected);
 
         this.classList.toggle('is-selected', this._selected);
-        this.setAttribute('aria-selected', this._selected); // Toggle check icon
+
+        if (this.hasAttribute('role') && VALID_ARIA_SELECTED_ROLES_REGEXP.test(this.getAttribute('role'))) {
+          this.setAttribute('aria-selected', this._selected);
+        } // Toggle check icon
+
 
         this._elements.checkIcon.hidden = !this._selected;
         this.trigger('coral-selectlist-item:_selectedchanged');
@@ -26248,7 +26266,7 @@
         this._reflectAttribute('disabled', this._disabled);
 
         this.classList.toggle('is-disabled', this._disabled);
-        this.setAttribute('aria-disabled', this._disabled);
+        this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
         this.selected = this.selected;
       }
     }, {
@@ -28672,7 +28690,7 @@
           }
         }); // a11y
 
-        this.setAttribute('aria-disabled', this._disabled);
+        this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
       } // JSDoc inherited
 
     }, {
@@ -31115,7 +31133,7 @@
 
         this._reflectAttribute('disabled', this._disabled);
 
-        this.setAttribute('aria-disabled', this._disabled);
+        this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
 
         this._elements.inputGroup.classList.toggle('is-disabled', this._disabled);
 
@@ -31845,12 +31863,7 @@
         }
 
         item.disabled = this.disabled || this.readOnly && !item.hasAttribute('selected');
-
-        if (this.readOnly) {
-          item.setAttribute('aria-disabled', true);
-        } else {
-          item.removeAttribute('aria-disabled');
-        }
+        item[this.readOnly ? 'setAttribute' : 'removeAttribute']('aria-disabled', true);
 
         this._addItemOption(item); // Handle the case where we might have multiple items selected while single selection mode is on
 
@@ -32370,7 +32383,7 @@
         this.items.getAll().forEach(function (item) {
           item.disabled = isDisabled;
         });
-        this.setAttribute('aria-disabled', isDisabled);
+        this[isDisabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', isDisabled);
       }
       /**
        Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
@@ -32396,12 +32409,7 @@
 
         this.items.getAll().forEach(function (item) {
           item.disabled = _this2.disabled || _this2.readOnly && !item.hasAttribute('selected');
-
-          if (_this2.readOnly) {
-            item.setAttribute('aria-disabled', true);
-          } else {
-            item.removeAttribute('aria-disabled');
-          }
+          item[_this2.readOnly ? 'setAttribute' : 'removeAttribute']('aria-disabled', true);
         }); // aria-readonly is not permitted on elements with role="radiogroup" or role="group"
 
         this.removeAttribute('aria-readonly');
@@ -34001,7 +34009,7 @@
         this._elements.prev.disabled = this._disabled;
         this._elements.next.disabled = this._disabled;
 
-        this._elements.body.setAttribute('aria-disabled', this._disabled);
+        this._elements.body[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
 
         this._elements.body[this._disabled ? 'removeAttribute' : 'setAttribute']('tabindex', '0');
 
@@ -35551,7 +35559,7 @@
 
         this._reflectAttribute('disabled', this._disabled);
 
-        this.setAttribute('aria-disabled', this._disabled);
+        this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
         this.classList.toggle('is-disabled', this._disabled);
         this._elements.input.disabled = this._disabled;
       }
@@ -37345,7 +37353,7 @@
 
         this._reflectAttribute('disabled', this._disabled);
 
-        this.setAttribute('aria-disabled', this._disabled);
+        this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
         this.classList.toggle('is-disabled', this._disabled);
         var isReadOnly = this.hasAttribute('readonly');
         this._elements.button.disabled = this._disabled || isReadOnly;
@@ -38199,7 +38207,7 @@
 
         this._reflectAttribute('disabled', this._disabled);
 
-        this.setAttribute('aria-disabled', this._disabled);
+        this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
         this.classList.toggle('is-disabled', this._disabled);
         this._elements.hours.disabled = this._disabled;
         this._elements.minutes.disabled = this._disabled; // stops the form submission
@@ -41161,7 +41169,7 @@
         this._reflectAttribute('disabled', this._disabled);
 
         this.classList.toggle('is-disabled', this._disabled);
-        this.setAttribute('aria-disabled', this._disabled);
+        this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
 
         this._elements.inputs.forEach(function (input) {
           input.disabled = _this7._disabled;
@@ -44483,7 +44491,7 @@
 
         this._reflectAttribute('disabled', this._disabled);
 
-        this.setAttribute('aria-disabled', this._disabled);
+        this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
         this.classList.toggle('is-disabled', this._disabled);
         this._elements.input.disabled = this.disabled;
         this._elements.colorPreview.disabled = this._disabled || this.readOnly;
@@ -47306,7 +47314,7 @@
         _get(_getPrototypeOf(CycleButtonItem.prototype), "render", this).call(this); // adds the role to support accessibility
 
 
-        this.setAttribute('role', 'option'); // Default reflected attributes
+        this.setAttribute('role', 'menuitemradio'); // Default reflected attributes
 
         if (!this._displayMode) {
           this.displayMode = displayMode.INHERIT;
@@ -47368,7 +47376,7 @@
         this._reflectAttribute('disabled', this._disabled);
 
         this.classList.toggle('is-disabled', this.disabled);
-        this.setAttribute('aria-disabled', this.disabled);
+        this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
 
         if (this._disabled && this.selected) {
           this.selected = false;
@@ -47401,7 +47409,7 @@
           this._reflectAttribute('selected', this.disabled ? false : this._selected);
 
           this.classList.toggle('is-selected', this._selected);
-          this.setAttribute('aria-selected', this._selected);
+          this.setAttribute('aria-checked', this._selected);
           this.trigger('coral-cyclebutton-item:_selectedchanged');
         }
       }
@@ -47477,62 +47485,80 @@
   var template$v = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
-    var el0 = this["button"] = document.createElement("button", "coral-button");
-    el0.setAttribute("tracking", "off");
-    el0.id = data_0["commons"]["getUID"]();
-    el0.setAttribute("handle", "button");
-    el0.className += " _coral-CycleSelect-button";
-    el0.setAttribute("is", "coral-button");
-    el0.setAttribute("type", "button");
-    el0.setAttribute("variant", "quietaction");
-    el0.setAttribute("iconsize", "S");
-    var el1 = document.createTextNode("\n  ");
-    el0.appendChild(el1);
-    var el2 = this["label"] = document.createElement("coral-button-label");
-    el2.className += " _coral-ActionButton-label";
-    el2.setAttribute("handle", "label");
-    el0.appendChild(el2);
-    var el3 = document.createTextNode("\n");
-    el0.appendChild(el3);
-    frag.appendChild(el0);
-    var el4 = document.createTextNode("\n");
-    frag.appendChild(el4);
+    data = data_0;
+    data.buttonId = data.id + '-button';
+    data.menuId = data.id + '-menu';
+    data_0 = data;
+    var el1 = document.createTextNode("\n");
+    frag.appendChild(el1);
+    var el2 = this["button"] = document.createElement("button", "coral-button");
+    el2.setAttribute("tracking", "off");
+    el2.id = data_0["buttonId"];
+    el2.setAttribute("handle", "button");
+    el2.className += " _coral-CycleSelect-button";
+    el2.setAttribute("is", "coral-button");
+    el2.setAttribute("type", "button");
+    el2.setAttribute("variant", "quietaction");
+    el2.setAttribute("iconsize", "S");
+    var el3 = document.createTextNode("\n  ");
+    el2.appendChild(el3);
+    var el4 = this["label"] = document.createElement("coral-button-label");
+    el4.className += " _coral-ActionButton-label";
+    el4.setAttribute("handle", "label");
+    el2.appendChild(el4);
+    var el5 = document.createTextNode("\n");
+    el2.appendChild(el5);
+    frag.appendChild(el2);
+    var el6 = document.createTextNode("\n");
+    frag.appendChild(el6);
     data = data_0; // Don't wait for button MO to pick up the label
 
     this.button._elements.label = this.label; // Render chevron icon
 
     this.button.insertAdjacentHTML('afterbegin', data.Icon._renderSVG('spectrum-css-icon-ChevronDownMedium', ['_coral-CycleSelect-icon', '_coral-UIIcon-ChevronDownMedium']));
     data_0 = data;
-    var el6 = document.createTextNode("\n");
-    frag.appendChild(el6);
-    var el7 = this["overlay"] = document.createElement("coral-popover");
-    el7.setAttribute("tracking", "off");
-    el7.setAttribute("smart", "");
-    el7.id = data_0["commons"]["getUID"]();
-    el7.setAttribute("handle", "overlay");
-    el7.setAttribute("focusonshow", "coral-selectlist");
-    el7.setAttribute("placement", "bottom");
-    var el8 = document.createTextNode("\n  ");
-    el7.appendChild(el8);
-    var el9 = this["selectList"] = document.createElement("coral-selectlist");
+    var el8 = document.createTextNode("\n");
+    frag.appendChild(el8);
+    var el9 = this["overlay"] = document.createElement("coral-popover");
     el9.setAttribute("tracking", "off");
-    el9.className += " _coral-CycleSelect-list";
-    el9.setAttribute("handle", "selectList");
-    el9.id = data_0["commons"]["getUID"]();
-    el7.appendChild(el9);
+    el9.setAttribute("smart", "");
+    el9.id = data_0["menuId"];
+    el9.setAttribute("handle", "overlay");
+    el9.setAttribute("focusonshow", "coral-selectlist");
+    el9.setAttribute("placement", "bottom");
+    el9.setAttribute("aria-live", "off");
+    el9.setAttribute("role", "menu");
     var el10 = document.createTextNode("\n  ");
-    el7.appendChild(el10);
-    var el11 = this["actionList"] = document.createElement("coral-buttonlist");
+    el9.appendChild(el10);
+    var el11 = this["selectList"] = document.createElement("coral-selectlist");
+    el11.setAttribute("role", "group");
     el11.setAttribute("tracking", "off");
-    el11.className += " _coral-CycleSelect-buttonList";
-    el11.setAttribute("handle", "actionList");
-    el11.setAttribute("hidden", "");
-    el7.appendChild(el11);
-    var el12 = document.createTextNode("\n");
-    el7.appendChild(el12);
-    frag.appendChild(el7);
-    var el13 = document.createTextNode("\n");
-    frag.appendChild(el13);
+    el11.className += " _coral-CycleSelect-list";
+    el11.setAttribute("handle", "selectList");
+    el11.id = data_0["commons"]["getUID"]();
+    el9.appendChild(el11);
+    var el12 = document.createTextNode("\n  ");
+    el9.appendChild(el12);
+    var el13 = this["separator"] = document.createElement("div");
+    el13.setAttribute("role", "separator");
+    el13.setAttribute("handle", "separator");
+    el13.className += " _coral-CycleButton-separator";
+    el13.setAttribute("hidden", "");
+    el9.appendChild(el13);
+    var el14 = document.createTextNode("\n  ");
+    el9.appendChild(el14);
+    var el15 = this["actionList"] = document.createElement("coral-buttonlist");
+    el15.setAttribute("role", "group");
+    el15.setAttribute("tracking", "off");
+    el15.className += " _coral-CycleSelect-buttonList";
+    el15.setAttribute("handle", "actionList");
+    el15.setAttribute("hidden", "");
+    el9.appendChild(el15);
+    var el16 = document.createTextNode("\n");
+    el9.appendChild(el16);
+    frag.appendChild(el9);
+    var el17 = document.createTextNode("\n");
+    frag.appendChild(el17);
     return frag;
   };
 
@@ -47585,12 +47611,14 @@
 
       _classCallCheck(this, CycleButton);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(CycleButton).call(this)); // Templates
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(CycleButton).call(this));
+      _this._id = _this.id || commons.getUID(); // Templates
 
       _this._elements = {};
       template$v.call(_this._elements, {
         Icon: Icon,
-        commons: commons
+        commons: commons,
+        id: _this._id
       });
       var events = {
         'click button[is="coral-button"]': '_onMouseDown',
@@ -47601,12 +47629,25 @@
         'coral-cyclebutton-item:_selectedchanged': '_onItemSelectedChanged',
         'coral-cyclebutton-item:_validateselection': '_onValidateSelection',
         'coral-cyclebutton-item:_iconchanged coral-cyclebutton-item[selected]': '_onSelectedItemPropertyChange',
-        'coral-cyclebutton-item:_displaymodechanged coral-cyclebutton-item[selected]': '_onSelectedItemPropertyChange'
+        'coral-cyclebutton-item:_displaymodechanged coral-cyclebutton-item[selected]': '_onSelectedItemPropertyChange',
+        'key:pageup coral-selectlist-item, [coral-list-item]': '_onFocusPreviousItem',
+        'key:left coral-selectlist-item, [coral-list-item]': '_onFocusPreviousItem',
+        'key:up coral-selectlist-item, [coral-list-item]': '_onFocusPreviousItem',
+        'key:pagedown coral-selectlist-item, [coral-list-item]': '_onFocusNextItem',
+        'key:right coral-selectlist-item, [coral-list-item]': '_onFocusNextItem',
+        'key:down coral-selectlist-item, [coral-list-item]': '_onFocusNextItem',
+        'key:home coral-selectlist-item, [coral-list-item]': '_onFocusFirstItem',
+        'key:end coral-selectlist-item, [coral-list-item]': '_onFocusLastItem',
+        'capture:focus coral-selectlist-item, [coral-list-item]': '_onItemFocus',
+        'capture:blur coral-selectlist-item, [coral-list-item]': '_onItemBlur',
+        'coral-overlay:open': '_onOverlayOpen',
+        'coral-overlay:close': '_onOverlayClose'
       };
       var overlay = _this._elements.overlay;
       var overlayId = overlay.id; // Overlay
 
       events["global:capture:click #".concat(overlayId, " button[is=\"coral-buttonlist-item\"]")] = '_onActionClick';
+      events["global:capture:coral-selectlist:beforechange #".concat(overlayId)] = '_onSelectListBeforeChange';
       events["global:capture:coral-selectlist:change #".concat(overlayId)] = '_onSelectListChange'; // Keyboard interaction
 
       events["global:keypress #".concat(overlayId)] = '_onOverlayKeyPress'; // Attach events
@@ -47631,9 +47672,16 @@
 
 
     _createClass(CycleButton, [{
-      key: "_onItemAdded",
+      key: "_hasMenuItemRadioGroup",
 
       /** @private */
+      value: function _hasMenuItemRadioGroup() {
+        return this.items.getAll().length > 0 && this.actions.getAll().length > 0;
+      }
+      /** @private */
+
+    }, {
+      key: "_onItemAdded",
       value: function _onItemAdded(item) {
         if (!this.selectedItem) {
           item.setAttribute('selected', '');
@@ -47817,6 +47865,10 @@
           this._elements.button.setAttribute('aria-label', ariaLabel);
 
           this._elements.button.setAttribute('title', ariaLabel);
+
+          if (ariaLabel && effectiveIcon !== '' && this._elements.button._elements.icon) {
+            this._elements.button._elements.icon.setAttribute('aria-hidden', true);
+          }
         } else {
           // handle display modes that include text
           if (effectiveDisplayMode === displayMode$1.TEXT) {
@@ -47825,6 +47877,10 @@
 
           if (effectiveDisplayMode === displayMode$1.ICON_TEXT) {
             this._elements.button.icon = effectiveIcon;
+
+            if (effectiveIcon !== '' && this._elements.button._elements.icon) {
+              this._elements.button._elements.icon.setAttribute('aria-hidden', true);
+            }
           }
 
           this._elements.button.label.innerHTML = item.content.innerHTML; // @a11y we do not require aria attributes since we already show text
@@ -47851,6 +47907,20 @@
       /** @private */
 
     }, {
+      key: "_onSelectListBeforeChange",
+      value: function _onSelectListBeforeChange(event) {
+        if (event.detail.item.selected) {
+          event.preventDefault();
+
+          if (!this._isPopulatingLists) {
+            // Hide the overlay, cleanup will be done before overlay.show()
+            this._hideOverlay();
+          }
+        }
+      }
+      /** @private */
+
+    }, {
       key: "_onSelectListChange",
       value: function _onSelectListChange(event) {
         event.stopImmediatePropagation();
@@ -47861,10 +47931,12 @@
         if (selectListItem) {
           origNode = selectListItem._originalItem;
 
-          this._selectCycleItem(origNode); // Hide the overlay, cleanup will be done before overlay.show()
+          this._selectCycleItem(origNode);
 
-
-          this._hideOverlay();
+          if (!this._isPopulatingLists) {
+            // Hide the overlay, cleanup will be done before overlay.show()
+            this._hideOverlay();
+          }
         }
 
         this._trackEvent('selected', 'coral-cyclebutton-item', event, origNode);
@@ -47909,11 +47981,7 @@
         this.classList.toggle("".concat(CLASSNAME$O, "--extended"), isExtended); // @a11y
 
         if (isExtended) {
-          var uid = this._elements.selectList.id;
-
-          this._elements.button.setAttribute('aria-owns', uid);
-
-          this._elements.button.setAttribute('aria-controls', uid);
+          this._elements.button.setAttribute('aria-controls', this._elements.overlay.id);
 
           this._elements.button.setAttribute('aria-haspopup', true);
 
@@ -47921,10 +47989,10 @@
 
 
           this._elements.overlay.target = this._elements.button;
-          this._elements.overlay.hidden = false;
-        } else {
-          this._elements.button.removeAttribute('aria-owns');
+          this._elements.overlay.hidden = false; // Regions within the overlay should have role=presentation
 
+          this._elements.overlay.content.setAttribute('role', 'presentation');
+        } else {
           this._elements.button.removeAttribute('aria-controls');
 
           this._elements.button.removeAttribute('aria-haspopup');
@@ -47945,14 +48013,116 @@
           item.focus();
         }
       }
+      /** @private */
+
+    }, {
+      key: "_onFocusPreviousItem",
+      value: function _onFocusPreviousItem(event) {
+        event.preventDefault();
+
+        var items = this._getSelectableItems();
+
+        if (items.length > 1) {
+          var el = event.matchedTarget;
+          var index = items.indexOf(el);
+
+          if (index > 0) {
+            this._focusItem(items[index - 1]);
+          } else if (document.activeElement !== el) {
+            // make sure ButtonList doesn't wrap focus
+            this._focusItem(el);
+          }
+        }
+      }
+      /** @private */
+
+    }, {
+      key: "_onFocusNextItem",
+      value: function _onFocusNextItem(event) {
+        event.preventDefault();
+
+        var items = this._getSelectableItems();
+
+        if (items.length > 1) {
+          var el = event.matchedTarget;
+          var index = items.indexOf(el);
+
+          if (index < items.length - 1) {
+            this._focusItem(items[index + 1]);
+          } else if (document.activeElement !== el) {
+            // make sure ButtonList doesn't wrap focus
+            this._focusItem(el);
+          }
+        }
+      }
+      /** @private */
+
+    }, {
+      key: "_onFocusFirstItem",
+      value: function _onFocusFirstItem(event) {
+        event.preventDefault();
+
+        this._focusItem(this._getSelectableItems()[0]);
+      }
+      /** @private */
+
+    }, {
+      key: "_onFocusLastItem",
+      value: function _onFocusLastItem(event) {
+        event.preventDefault();
+
+        var items = this._getSelectableItems();
+
+        this._focusItem(items[items.length - 1]);
+      }
+      /** @private */
+
+    }, {
+      key: "_getSelectableItems",
+      value: function _getSelectableItems() {
+        var items = this.items.getAll();
+        var actions = this.actions.getAll();
+        return items.concat(actions).map(function (item) {
+          return item._selectListItem || item._buttonListItem;
+        }).filter(function (item) {
+          !item.hasAttribute('hidden') && !item.hasAttribute('disabled') && item.offsetParent !== null && (item.offsetWidth > 0 || item.offsetHeight > 0);
+        });
+      }
+      /** @private */
+
+    }, {
+      key: "_onItemFocus",
+      value: function _onItemFocus(event) {
+        this._elements.selectList.classList.toggle('is-focused', true);
+
+        event.matchedTarget.classList.toggle('focus-ring', true);
+      }
+      /** @private */
+
+    }, {
+      key: "_onItemBlur",
+      value: function _onItemBlur(event) {
+        this._elements.selectList.classList.toggle('is-focused', false);
+
+        event.matchedTarget.classList.toggle('focus-ring', false);
+      }
+    }, {
+      key: "_onOverlayClose",
+      value: function _onOverlayClose() {
+        // @a11y
+        this._elements.button.setAttribute('aria-expanded', false);
+      }
+    }, {
+      key: "_onOverlayOpen",
+      value: function _onOverlayOpen() {
+        // @a11y
+        this._elements.button.setAttribute('aria-expanded', true);
+      }
       /** @ignore */
 
     }, {
       key: "_hideOverlay",
       value: function _hideOverlay() {
-        // @a11y
-        this._elements.button.setAttribute('aria-expanded', false);
-
         this._elements.overlay.hide();
       }
       /** @ignore */
@@ -47972,6 +48142,10 @@
           selectListItem.icon = item.icon;
         }
 
+        selectListItem.disabled = item.disabled;
+        selectListItem.selected = item.selected;
+        selectListItem.role = item.role;
+        selectListItem.setAttribute('aria-checked', item.selected);
         selectListItem._originalItem = item;
         item._selectListItem = selectListItem;
         return selectListItem;
@@ -47982,7 +48156,10 @@
       key: "_getActionListItem",
       value: function _getActionListItem(action) {
         var actionListItem = new ButtonList.Item();
-        actionListItem.icon = action.icon; // Needs to be reflected on the generated Action.
+        actionListItem.icon = action.icon;
+        actionListItem.disabled = action.disabled;
+        actionListItem.role = action.role;
+        actionListItem.tabIndex = action.tabIndex; // Needs to be reflected on the generated Action.
 
         actionListItem.trackingElement = action.trackingElement;
         actionListItem.content.innerHTML = action.content.innerHTML;
@@ -47995,6 +48172,8 @@
     }, {
       key: "_populateLists",
       value: function _populateLists() {
+        var _this3 = this;
+
         var selectList = this._elements.selectList;
         var actionList = this._elements.actionList;
         var items = this.items.getAll();
@@ -48002,7 +48181,8 @@
         var itemCount = items.length;
         var actionCount = actions.length;
         var selectListItem;
-        var actionListItem; // we empty the existing items before populating the lists again
+        var actionListItem;
+        this._isPopulatingLists = true; // we empty the existing items before populating the lists again
 
         selectList.items.clear();
         actionList.items.clear(); // adds the items to the selectList
@@ -48010,6 +48190,12 @@
         for (var i = 0; i < itemCount; i++) {
           var item = items[i];
           selectListItem = this._getSelectListItem(item);
+          selectListItem.icon = item.icon;
+          selectListItem.role = item.role;
+          selectListItem.setAttribute('aria-checked', item.selected);
+
+          selectListItem._elements.icon.setAttribute('aria-hidden', true);
+
           selectListItem.set({
             disabled: item.disabled,
             selected: item.selected
@@ -48022,14 +48208,33 @@
           for (var j = 0; j < actionCount; j++) {
             var action = actions[j];
             actionListItem = this._getActionListItem(action);
-            actionList.items.add(actionListItem);
             actionListItem.disabled = action.disabled;
+            actionListItem.icon = action.icon;
+            actionListItem.role = action.role;
+
+            actionListItem._elements.icon.setAttribute('aria-hidden', true);
+
+            actionList.items.add(actionListItem);
           }
 
           this._elements.actionList.removeAttribute('hidden');
+
+          if (itemCount > 0) {
+            this._elements.separator.removeAttribute('hidden');
+
+            this._elements.selectList.setAttribute('role', 'group');
+          }
         } else {
-          this._elements.actionList.setAttribute('hidden', true);
+          this._elements.actionList.setAttribute('hidden', '');
+
+          this._elements.separator.setAttribute('hidden', '');
+
+          this._elements.selectList.setAttribute('role', 'presentation');
         }
+
+        commons.nextFrame(function () {
+          _this3._isPopulatingLists = false;
+        });
       }
       /** @private */
 
@@ -48043,17 +48248,9 @@
     }, {
       key: "_showOverlay",
       value: function _showOverlay() {
-        var _this3 = this;
+        this._populateLists();
 
-        // @a11y
-        this._elements.button.setAttribute('aria-expanded', true);
-
-        this._populateLists(); // Wait for list to be populated before showing the overlay
-
-
-        window.requestAnimationFrame(function () {
-          _this3._elements.overlay.show();
-        });
+        this._elements.overlay.show();
       }
       /**
        Returns {@link CycleButton} display options.
@@ -48062,9 +48259,54 @@
        */
 
     }, {
-      key: "connectedCallback",
+      key: "attributeChangedCallback",
 
       /** @ignore */
+      value: function attributeChangedCallback(name, oldValue, value) {
+        // The accessibility name for the button element
+        if (name === 'aria-label') {
+          var hasMenuItemRadioGroup = this._hasMenuItemRadioGroup(); // aria-labelledby takes precedence over aria-label
+
+
+          if (this.getAttribute('aria-labelledby')) {
+            // Button should be labeled by the container and the button, with the selected value, itself
+            this._elements.button.setAttribute('aria-labelledby', "".concat(this.id, " ").concat(this._elements.button.id)); // Overlay should be labeled by the container with aria-label
+
+
+            this._elements.overlay.setAttribute('aria-labelledby', this.id); // With both items and actions, the items should be grouped and the group should be labeled
+            // SelectList menuitemradio group should be labeled by the container with aria-label,
+            // Otherwise the selectList should not be labeled independantly from the menu
+
+
+            this._elements.selectList[hasMenuItemRadioGroup ? 'setAttribute' : 'removeAttribute']('aria-labelledby', this.id);
+          } else {
+            //  With no aria-label, clean up aria-labelledby on _elements
+            this._elements.button.removeAttribute('aria-labelledby');
+
+            this._elements.overlay.setAttribute('aria-labelledby', this._elements.button.id); // With both items and actions, the items should be grouped and the group should be labeled
+            // SelectList menuitemradio group should be labeled by the button, with the selected value, itself,
+            // Otherwise the selectList should not be labeled independantly from the menu
+
+
+            this._elements.selectList[hasMenuItemRadioGroup ? 'setAttribute' : 'removeAttribute']('aria-labelledby', this._elements.button.id);
+          }
+        } // The id reference for an HTML element that labels the button element accessibility name for the button element
+        else if (name === 'aria-labelledby') {
+            if (value || !this.getAttribute('aria-label')) {
+              this._elements.button.setAttribute('aria-labelledby', "".concat(value, " ").concat(this._elements.button.id));
+
+              this._elements.overlay.setAttribute('aria-labelledby', value || this._elements.button.id);
+
+              this._elements.selectList[this._hasMenuItemRadioGroup() ? 'setAttribute' : 'removeAttribute']('aria-labelledby', value || this._elements.button.id);
+            }
+          } else {
+            _get(_getPrototypeOf(CycleButton.prototype), "attributeChangedCallback", this).call(this, name, oldValue, value);
+          }
+      }
+      /** @ignore */
+
+    }, {
+      key: "connectedCallback",
       value: function connectedCallback() {
         _get(_getPrototypeOf(CycleButton.prototype), "connectedCallback", this).call(this);
 
@@ -48084,6 +48326,10 @@
         var _this4 = this;
 
         _get(_getPrototypeOf(CycleButton.prototype), "render", this).call(this);
+
+        if (!this.id) {
+          this.id = this._id;
+        }
 
         this.classList.add(CLASSNAME$O); // Default reflected attributes
 
@@ -48303,7 +48549,7 @@
     }, {
       key: "observedAttributes",
       get: function get() {
-        return _get(_getPrototypeOf(CycleButton), "observedAttributes", this).concat(['icon', 'threshold', 'displaymode']);
+        return _get(_getPrototypeOf(CycleButton), "observedAttributes", this).concat(['icon', 'threshold', 'displaymode', 'aria-label', 'aria-labelledby']);
       }
     }]);
 
@@ -48330,6 +48576,17 @@
     }
 
     _createClass(CycleButtonAction, [{
+      key: "render",
+
+      /** @ignore */
+      value: function render() {
+        _get(_getPrototypeOf(CycleButtonAction.prototype), "render", this).call(this); // adds the role to support accessibility
+
+
+        this.setAttribute('role', 'menuitem');
+        this.tabIndex = -1;
+      }
+    }, {
       key: "icon",
 
       /**
@@ -48375,6 +48632,13 @@
       },
       set: function set(value) {
         _set(_getPrototypeOf(CycleButtonAction.prototype), "trackingElement", value, this, true);
+      }
+      /** @ignore */
+
+    }], [{
+      key: "observedAttributes",
+      get: function get() {
+        return _get(_getPrototypeOf(CycleButtonAction), "observedAttributes", this).concat(['icon']);
       }
     }]);
 
@@ -49317,7 +49581,7 @@
 
         this._reflectAttribute('disabled', this._disabled);
 
-        this.setAttribute('aria-disabled', this._disabled);
+        this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
         this.classList.toggle('is-disabled', this._disabled);
         this._elements.input.disabled = this._disabled;
         this._elements.hiddenInput.disabled = this._disabled;
@@ -49759,7 +50023,7 @@
 
         this._reflectAttribute('disabled', this._disabled);
 
-        this.setAttribute('aria-disabled', this._disabled);
+        this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
         this._elements.toggle.hidden = this._disabled;
       }
       /**
@@ -55913,7 +56177,7 @@
 
         this._reflectAttribute('disabled', this._disabled);
 
-        this.setAttribute('aria-disabled', this._disabled);
+        this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
         this.classList.toggle('is-disabled', this._disabled);
         this._elements.input.disabled = this._disabled;
 
@@ -58913,7 +59177,7 @@
 
         this._reflectAttribute('disabled', this._disabled);
 
-        this.setAttribute('aria-disabled', this._disabled);
+        this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
         this.classList.toggle('is-disabled', this._disabled);
         this._elements.input.disabled = this._disabled;
       }
@@ -60140,7 +60404,7 @@
 
         this._reflectAttribute('disabled', this._disabled);
 
-        this.setAttribute('aria-disabled', this._disabled);
+        this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
         this.classList.toggle('is-disabled', this._disabled);
         this._elements.input.disabled = this._disabled;
         this._elements.clearButton.disabled = this._disabled;
@@ -64529,7 +64793,7 @@
 
         this._reflectAttribute('disabled', this._disabled);
 
-        this.setAttribute('aria-disabled', this._disabled);
+        this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
       }
       /**
        The status variant. See {@link StatusVariantEnum}.
@@ -65951,7 +66215,7 @@
 
         this._reflectAttribute('disabled', this._disabled);
 
-        this.setAttribute('aria-disabled', this._disabled);
+        this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
         this.classList.toggle('is-disabled', this._disabled);
         this._elements.input.disabled = this._disabled;
       }
@@ -70782,8 +71046,8 @@
 
         this._reflectAttribute('disabled', this._disabled);
 
-        this.classList.toggle('is-disabled', this.disabled);
-        this.setAttribute('aria-disabled', this.disabled);
+        this.classList.toggle('is-disabled', this._disabled);
+        this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
 
         if (this._disabled && this.selected) {
           this.selected = false;
@@ -71180,7 +71444,7 @@
       }
     }, {
       key: "_setLine",
-      value: function _setLine(clear) {
+      value: function _setLine() {
         var _this3 = this;
 
         // Debounce
@@ -71198,7 +71462,7 @@
               var left = selectedItem.offsetLeft + padding;
               var width = selectedItem.clientWidth - padding * 2; // Orientation changed
 
-              if (clear) {
+              if (_this3._previousOrientation !== _this3.orientation) {
                 _this3._elements.line.style.height = '';
               }
 
@@ -71208,7 +71472,7 @@
               var top = selectedItem.offsetTop;
               var height = selectedItem.clientHeight; // Orientation changed
 
-              if (clear) {
+              if (_this3._previousOrientation !== _this3.orientation) {
                 _this3._elements.line.style.width = '';
               }
 
@@ -71221,6 +71485,8 @@
             // Hide line if no selected item
             _this3._elements.line.hidden = true;
           }
+
+          _this3._previousOrientation = _this3.orientation;
         }, this._wait);
       }
       /** @private */
@@ -71429,14 +71695,19 @@
       },
       set: function set(value) {
         value = transform.string(value).toLowerCase();
+        var newValue = typeof this._orientation === 'undefined';
         this._orientation = validate.enumeration(orientation$1)(value) && value || orientation$1.HORIZONTAL;
+
+        if (newValue) {
+          this._previousOrientation = this._orientation;
+        }
 
         this._reflectAttribute('orientation', this._orientation);
 
         this.classList.toggle("".concat(CLASSNAME$1y, "--vertical"), this._orientation === orientation$1.VERTICAL);
         this.classList.toggle("".concat(CLASSNAME$1y, "--horizontal"), this._orientation === orientation$1.HORIZONTAL);
 
-        this._setLine(true);
+        this._setLine();
       }
     }], [{
       key: "size",
@@ -73075,7 +73346,7 @@
 
         this._elements.header.classList.toggle('is-disabled', this._disabled);
 
-        this._elements.header.setAttribute('aria-disabled', this._disabled);
+        this._elements.header[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
 
         this.trigger('coral-tree-item:_disabledchanged');
       }
@@ -74221,7 +74492,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "4.0.1";
+  var version = "4.1.0";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
@@ -74327,7 +74598,7 @@
   	"rollup-plugin-json": "^4.0.0",
   	"rollup-plugin-node-resolve": "^4.2.4",
   	"rollup-plugin-postcss": "^2.0.4",
-  	"rollup-plugin-uglify": "^6.0.4",
+  	"rollup-plugin-terser": "^5.2.0",
   	"rollup-pluginutils": "^2.8.2",
   	semver: "^6.3.0",
   	sinon: "^7.5.0",

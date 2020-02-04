@@ -15971,6 +15971,10 @@ coral-cyclebutton-action {
 ._coral-CycleSelect--extended ._coral-CycleSelect-icon ~ coral-button-label:not(:empty) {
   padding-right: 0;
 }
+._coral-CycleButton-separator {
+  height: 1px;
+  margin-top: -1px;
+}
 
 /**
  * Copyright 2019 Adobe. All rights reserved.

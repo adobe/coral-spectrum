@@ -29,9 +29,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">63.89% </span>
+                <span class="strong">60.53% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>23/36</span>
+                <span class='fraction'>23/38</span>
             </div>
         
             
@@ -339,7 +339,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">949x</span>
+<span class="cline-any cline-yes">1104x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">398x</span>
@@ -352,7 +352,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2245x</span>
+<span class="cline-any cline-yes">2242x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -375,7 +375,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">13176x</span>
+<span class="cline-any cline-yes">13330x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -405,22 +405,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">158x</span>
+<span class="cline-any cline-yes">626x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">253x</span>
+<span class="cline-any cline-yes">252x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">253x</span>
-<span class="cline-any cline-yes">253x</span>
+<span class="cline-any cline-yes">252x</span>
+<span class="cline-any cline-yes">252x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">253x</span>
+<span class="cline-any cline-yes">252x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">253x</span>
-<span class="cline-any cline-yes">253x</span>
-<span class="cline-any cline-yes">253x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">252x</span>
+<span class="cline-any cline-yes">252x</span>
+<span class="cline-any cline-yes">252x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -436,7 +433,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">643x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">642x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">496x</span>
@@ -538,7 +538,7 @@ class CycleButtonItem extends BaseComponent(HTMLElement) {
     this._reflectAttribute('disabled', this._disabled);
     
     this.classList.toggle('is-disabled', this.disabled);
-    this.setAttribute('aria-disabled', this.disabled);
+    this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
     
     if (this._disabled &amp;&amp; this.selected) {
       this.selected = false;
@@ -568,7 +568,7 @@ class CycleButtonItem extends BaseComponent(HTMLElement) {
       this._reflectAttribute('selected', this.disabled ? false : this._selected);
       
       this.classList.toggle('is-selected', this._selected);
-      this.setAttribute('aria-selected', this._selected);
+      this.setAttribute('aria-checked', this._selected);
       
       this.trigger('coral-cyclebutton-item:_selectedchanged');
     }
@@ -633,7 +633,7 @@ class CycleButtonItem extends BaseComponent(HTMLElement) {
     super.render();
     
     // adds the role to support accessibility
-    this.setAttribute('role', 'option');
+    this.setAttribute('role', 'menuitemradio');
   
     // Default reflected attributes
     if (!this._displayMode) { this.displayMode = displayMode.INHERIT; }
@@ -648,7 +648,7 @@ export default CycleButtonItem;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Jan 28 2020 16:52:33 GMT+0100 (Central European Standard Time)
+                at Tue Feb 04 2020 14:26:24 GMT+0100 (Central European Standard Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

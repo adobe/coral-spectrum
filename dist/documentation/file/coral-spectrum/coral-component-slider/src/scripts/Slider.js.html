@@ -745,7 +745,7 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
     this._reflectAttribute(&apos;disabled&apos;, this._disabled);
     
     this.classList.toggle(&apos;is-disabled&apos;, this._disabled);
-    this.setAttribute(&apos;aria-disabled&apos;, this._disabled);
+    this[this._disabled ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-disabled&apos;, this._disabled);
     this._elements.inputs.forEach((input) =&gt; {
       input.disabled = this._disabled;
     });

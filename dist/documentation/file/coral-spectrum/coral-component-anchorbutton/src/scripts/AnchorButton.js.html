@@ -471,7 +471,7 @@ class AnchorButton extends BaseButton(BaseComponent(HTMLAnchorElement)) {
     
     this.classList.toggle(&apos;is-disabled&apos;, this._disabled);
     this.setAttribute(&apos;tabindex&apos;, this._disabled ? &apos;-1&apos; : &apos;0&apos;);
-    this.setAttribute(&apos;aria-disabled&apos;, this._disabled);
+    this[this._disabled ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-disabled&apos;, this._disabled);
   }
   
   /**
@@ -520,7 +520,7 @@ class AnchorButton extends BaseButton(BaseComponent(HTMLAnchorElement)) {
     if (!this.disabled) {
       // Force tabindex and aria-disabled attribute reflection
       this.setAttribute(&apos;tabindex&apos;, &apos;0&apos;);
-      this.setAttribute(&apos;aria-disabled&apos;, &apos;false&apos;);
+      this.removeAttribute(&apos;aria-disabled&apos;);
     }
   }
 }

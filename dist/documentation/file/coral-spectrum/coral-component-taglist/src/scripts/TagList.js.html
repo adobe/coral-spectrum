@@ -599,7 +599,7 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
     });
     
     // a11y
-    this.setAttribute(&apos;aria-disabled&apos;, this._disabled);
+    this[this._disabled ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-disabled&apos;, this._disabled);
   }
   
   // JSDoc inherited

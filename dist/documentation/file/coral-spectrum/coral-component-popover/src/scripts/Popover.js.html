@@ -656,7 +656,9 @@ class Popover extends Overlay {
       
       if (this._variant === variant.DEFAULT) {
         // ARIA
-        this.setAttribute(&apos;role&apos;, &apos;dialog&apos;);
+        if (!this.hasAttribute(&apos;role&apos;)) {
+          this.setAttribute(&apos;role&apos;, &apos;dialog&apos;);
+        }
       }
       else {
         // Set new variant class
@@ -895,9 +897,12 @@ class Popover extends Overlay {
     this.classList.add(CLASSNAME);
     
     // ARIA
-    this.setAttribute(&apos;role&apos;, &apos;dialog&apos;);
-    // This helped announcements in certain screen readers
-    this.setAttribute(&apos;aria-live&apos;, &apos;assertive&apos;);
+    if (!this.hasAttribute(&apos;role&apos;)) {
+      this.setAttribute(&apos;role&apos;, &apos;dialog&apos;);
+    
+      // This helped announcements in certain screen readers
+      this.setAttribute(&apos;aria-live&apos;, &apos;assertive&apos;);
+    }
     
     // Default reflected attributes
     if (!this._variant) { this.variant = variant.DEFAULT; }

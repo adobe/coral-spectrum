@@ -620,6 +620,7 @@ function createDocumentTabCaptureEls() {
   if (!topTabCaptureEl) {
     topTabCaptureEl = document.createElement(&apos;div&apos;);
     topTabCaptureEl.setAttribute(&apos;coral-tabcapture&apos;, &apos;&apos;);
+    topTabCaptureEl.setAttribute(&apos;role&apos;, &apos;presentation&apos;);
     topTabCaptureEl.tabIndex = 0;
     document.body.insertBefore(topTabCaptureEl, document.body.firstChild);
     topTabCaptureEl.addEventListener(&apos;focus&apos;, () =&gt; {
@@ -639,6 +640,7 @@ function createDocumentTabCaptureEls() {
     
     bottomTabCaptureEl = document.createElement(&apos;div&apos;);
     bottomTabCaptureEl.setAttribute(&apos;coral-tabcapture&apos;, &apos;&apos;);
+    bottomTabCaptureEl.setAttribute(&apos;role&apos;, &apos;presentation&apos;);
     bottomTabCaptureEl.tabIndex = 0;
     document.body.appendChild(bottomTabCaptureEl);
     bottomTabCaptureEl.addEventListener(&apos;focus&apos;, () =&gt; {

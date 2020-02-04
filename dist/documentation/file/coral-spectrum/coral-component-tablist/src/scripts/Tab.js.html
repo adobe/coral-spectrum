@@ -551,8 +551,8 @@ class Tab extends BaseComponent(HTMLElement) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute(&apos;disabled&apos;, this._disabled);
   
-    this.classList.toggle(&apos;is-disabled&apos;, this.disabled);
-    this.setAttribute(&apos;aria-disabled&apos;, this.disabled);
+    this.classList.toggle(&apos;is-disabled&apos;, this._disabled);
+    this[this._disabled ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-disabled&apos;, this._disabled);
     
     if (this._disabled &amp;&amp; this.selected) {
       this.selected = false;

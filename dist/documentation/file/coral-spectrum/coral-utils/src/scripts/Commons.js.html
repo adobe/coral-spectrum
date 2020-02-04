@@ -448,7 +448,8 @@ const FOCUSABLE_ELEMENTS = [
   &apos;embed&apos;,
   &apos;audio[controls]&apos;,
   &apos;video[controls]&apos;,
-  &apos;[contenteditable]&apos;
+  &apos;[contenteditable]&apos;,
+  &apos;[tabindex]&apos;
 ];
 
 // To support Coral.commons.ready and differentiate lightweight tags from defined elements
@@ -535,8 +536,8 @@ class Commons {
     
     const focusableElements = FOCUSABLE_ELEMENTS.slice();
     this._focusableElementsSelector = focusableElements.join(&apos;,&apos;);
-  
-    focusableElements.push(&apos;[tabindex]:not([tabindex=&quot;-1&quot;])&apos;);
+    
+    focusableElements[focusableElements.length - 1] += &apos;:not([tabindex=&quot;-1&quot;])&apos;;
     this._tabbableElementsSelector = focusableElements.join(&apos;:not([tabindex=&quot;-1&quot;]),&apos;);
     
     this._coralSelector = &apos;&apos;;

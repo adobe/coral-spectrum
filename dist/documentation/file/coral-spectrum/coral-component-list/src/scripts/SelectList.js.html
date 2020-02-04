@@ -583,8 +583,8 @@ class SelectList extends BaseComponent(HTMLElement) {
   set multiple(value) {
     this._multiple = transform.booleanAttr(value);
     this._reflectAttribute(&apos;multiple&apos;, this._multiple);
-    
-    this.setAttribute(&apos;aria-multiselectable&apos;, this._multiple);
+  
+    this[this._multiple ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-multiselectable&apos;, this._multiple);
     
     this._validateSelection();
   }
@@ -687,7 +687,6 @@ class SelectList extends BaseComponent(HTMLElement) {
   /** @private */
   _focusPreviousItem(event) {
     event.preventDefault();
-    event.stopPropagation();
     
     this._focusItem(this.items._getPreviousSelectable(event.target));
   }
@@ -695,7 +694,6 @@ class SelectList extends BaseComponent(HTMLElement) {
   /** @private */
   _focusNextItem(event) {
     event.preventDefault();
-    event.stopPropagation();
     
     this._focusItem(this.items._getNextSelectable(event.target));
   }
@@ -711,7 +709,6 @@ class SelectList extends BaseComponent(HTMLElement) {
   /** @private */
   _onHomeKey(event) {
     event.preventDefault();
-    event.stopPropagation();
     
     this._focusFirstItem();
   }
@@ -719,7 +716,6 @@ class SelectList extends BaseComponent(HTMLElement) {
   /** @private */
   _onEndKey(event) {
     event.preventDefault();
-    event.stopPropagation();
     
     this._focusLastItem();
   }
@@ -934,7 +930,10 @@ class SelectList extends BaseComponent(HTMLElement) {
     this.classList.add(CLASSNAME);
     
     // adds the role to support accessibility
-    this.setAttribute(&apos;role&apos;, &apos;listbox&apos;);
+    if (!this.hasAttribute(&apos;role&apos;)) {
+      this.setAttribute(&apos;role&apos;, &apos;listbox&apos;);
+    }
+    
     if (!this.hasAttribute(&apos;aria-label&apos;)) {
       this.setAttribute(&apos;aria-label&apos;, i18n.get(&apos;List&apos;));
     }

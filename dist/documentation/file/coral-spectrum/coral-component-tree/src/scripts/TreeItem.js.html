@@ -690,7 +690,7 @@ class TreeItem extends BaseComponent(HTMLElement) {
     this._reflectAttribute(&apos;disabled&apos;, this._disabled);
   
     this._elements.header.classList.toggle(&apos;is-disabled&apos;, this._disabled);
-    this._elements.header.setAttribute(&apos;aria-disabled&apos;, this._disabled);
+    this._elements.header[this._disabled ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-disabled&apos;, this._disabled);
     
     this.trigger(&apos;coral-tree-item:_disabledchanged&apos;);
   }

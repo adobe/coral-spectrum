@@ -4050,6 +4050,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "coral-spectrum/coral-component-cyclebutton/src/scripts/cyclebutton.js~cyclebutton#id",
+    "class/coral-spectrum/coral-component-cyclebutton/src/scripts/CycleButton.js~CycleButton.html#instance-member-id",
+    "coral-spectrum/coral-component-cyclebutton/src/scripts/CycleButton.js~CycleButton#id",
+    "member"
+  ],
+  [
     "coral-spectrum/coral-component-cyclebutton/src/scripts/cyclebutton.js~cyclebutton#items",
     "class/coral-spectrum/coral-component-cyclebutton/src/scripts/CycleButton.js~CycleButton.html#instance-member-items",
     "coral-spectrum/coral-component-cyclebutton/src/scripts/CycleButton.js~CycleButton#items",
@@ -4107,6 +4113,12 @@ window.esdocSearchIndex = [
     "coral-spectrum/coral-component-cyclebutton/src/scripts/cyclebuttonaction.js~cyclebuttonaction#icon",
     "class/coral-spectrum/coral-component-cyclebutton/src/scripts/CycleButtonAction.js~CycleButtonAction.html#instance-member-icon",
     "coral-spectrum/coral-component-cyclebutton/src/scripts/CycleButtonAction.js~CycleButtonAction#icon",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-cyclebutton/src/scripts/cyclebuttonaction.js~cyclebuttonaction#tabindex",
+    "class/coral-spectrum/coral-component-cyclebutton/src/scripts/CycleButtonAction.js~CycleButtonAction.html#instance-member-tabIndex",
+    "coral-spectrum/coral-component-cyclebutton/src/scripts/CycleButtonAction.js~CycleButtonAction#tabIndex",
     "member"
   ],
   [
