@@ -120,7 +120,7 @@ class CycleButtonItem extends BaseComponent(HTMLElement) {
       this._reflectAttribute('selected', this.disabled ? false : this._selected);
       
       this.classList.toggle('is-selected', this._selected);
-      this.setAttribute('aria-selected', this._selected);
+      this.setAttribute('aria-checked', this._selected);
       
       this.trigger('coral-cyclebutton-item:_selectedchanged');
     }
@@ -185,7 +185,7 @@ class CycleButtonItem extends BaseComponent(HTMLElement) {
     super.render();
     
     // adds the role to support accessibility
-    this.setAttribute('role', 'option');
+    this.setAttribute('role', 'menuitemradio');
   
     // Default reflected attributes
     if (!this._displayMode) { this.displayMode = displayMode.INHERIT; }
