@@ -107,7 +107,7 @@
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^4.2.4",
     "rollup-plugin-postcss": "^2.0.4",
-    "rollup-plugin-uglify": "^6.0.4",
+    "rollup-plugin-terser": "^5.2.0",
     "rollup-pluginutils": "^2.8.2",
     "semver": "^6.3.0",
     "sinon": "^7.5.0",

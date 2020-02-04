@@ -11,7 +11,6 @@
  */
 
 module.exports = function(gulp) {
-  const path = require('path');
   const plumb = require('./plumb');
   const rollup = require('rollup').rollup;
   const cleanCSS = require('gulp-clean-css');

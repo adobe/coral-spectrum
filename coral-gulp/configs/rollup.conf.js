@@ -18,7 +18,7 @@ const commonjs = require('rollup-plugin-commonjs');
 const css = require('rollup-plugin-postcss');
 const babel = require('rollup-plugin-babel');
 const json = require('rollup-plugin-json');
-const uglify = require('rollup-plugin-uglify').uglify;
+const terser = require('rollup-plugin-terser').terser;
 const resources = require('../plugins/rollup-plugin-resources');
 
 const root = util.getRoot();
@@ -51,7 +51,7 @@ module.exports = (options = {}) => {
   ];
   
   if (options.min) {
-    plugins.push(uglify());
+    plugins.push(terser());
   }
   
   return plugins;
