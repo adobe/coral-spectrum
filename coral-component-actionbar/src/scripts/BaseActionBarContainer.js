@@ -177,6 +177,10 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
     if (this._itemsInPopover.length < 1) {
       return;
     }
+
+    this._itemsInPopover.forEach(function(item) {
+      item.removeAttribute('aria-hidden');
+    });
   
     // Store the button and popover on the item
     this._itemsInPopover.forEach((item) => {

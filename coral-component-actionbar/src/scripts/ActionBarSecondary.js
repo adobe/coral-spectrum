@@ -31,6 +31,8 @@ class ActionBarSecondary extends ActionBarContainer(BaseComponent(HTMLElement)) 
     
     for (let i = 0; i < this._itemsInPopover.length; i++) {
       item = this._itemsInPopover[i];
+
+      item.setAttribute('aria-hidden', true);
   
       // remove tabindex again
       wrappedItem = getFirstSelectableWrappedItem(item);
