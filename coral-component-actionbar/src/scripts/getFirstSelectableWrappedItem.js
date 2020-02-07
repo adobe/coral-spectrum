@@ -40,7 +40,7 @@ export default function getFirstSelectableWrappedItem(wrapperItem) {
     for(let j = 0; j<child.children.length; j++) {
       let subChild = child.children[j];
       // maybe filter even more elements? (opacity, display='none', position='absolute' ...)
-      if(subChild.offsetParent && subChild.matches(Coral.commons.FOCUSABLE_ELEMENT_SELECTOR)) {
+      if(subChild.offsetParent && subChild.matches(commons.FOCUSABLE_ELEMENT_SELECTOR)) {
         return subChild;
       }
     }
