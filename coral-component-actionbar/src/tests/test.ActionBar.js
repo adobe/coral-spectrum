@@ -565,7 +565,7 @@ describe('ActionBar', function() {
     });
   
     it('should allow tab navigation to actionbar item, if first item is not selectable then next selectable item should be tab-able. e.g. first item is hidden', function (done) {
-      let bar = helpers.build(window.__html__['ActionBar.hiddenitems.html']);
+      const bar = helpers.build(window.__html__['ActionBar.hiddenitems.html']);
       expect(document.activeElement.tagName.toLowerCase()).to.not.equal('button', 'activeElement should not be an one of the buttons inside the actionbar');
     
       let leftActionBarItems = bar.primary.items.getAll();
@@ -590,20 +590,42 @@ describe('ActionBar', function() {
         let secondRightButton = rightActionBarItems[1].querySelector('button');
         secondRightButton.focus();
         expect(document.activeElement).to.equal(secondRightButton, 'activeElement should now be the second wrapped item (here button) inside the actionbar');
-      
-    //    expect(document.activeElement.getAttribute('tabindex')).to.not.equal('-1', 'this element should be tab-able');
+        expect(bar.secondary._elements.moreButton.getAttribute('tabindex')).to.not.equal('-1', 'more should be tab-able');
       
         done();
       }, 200);
     });
   
     it('selectable items at 2nd level inside coral-actionbar-item in tree should be tab-able', function (done) {
-      let bar = helpers.build(window.__html__['ActionBar.hiddenitems.html']);
+      const bar = helpers.build(window.__html__['ActionBar.hiddenitems.html']);
       expect(document.activeElement.tagName.toLowerCase()).to.not.equal('button', 'activeElement should not be an one of the buttons inside the actionbar');
     
       let leftActionBarItems = bar.primary.items.getAll();
       let uploadButton = leftActionBarItems[2].querySelector('coral-fileupload>button');
       expect(uploadButton.getAttribute('tabindex')).to.equal('-1', 'upload button should not be tabable');
+      done();
+    });
+  
+    it('offscreen items should not be accessible', function (done) {
+      const bar = helpers.build(window.__html__['ActionBar.hiddenitems.html']);
+      expect(document.activeElement.tagName.toLowerCase()).to.not.equal('button', 'activeElement should not be an one of the buttons inside the actionbar');
+      let leftActionBarItems = bar.primary.items.getAll();
+      let rightActionBarItems = bar.secondary.items.getAll();
+    
+    
+      let i = 0;
+      for (i = 1; i < leftActionBarItems.length; i++) {
+        if (leftActionBarItems[i].hasAttribute('coral-actionbar-offscreen')) {
+          expect(leftActionBarItems[i].getAttribute('aria-hidden')).to.equal('true', 'offscreen items should not be accessible("' + i + '" failed"');
+        
+        }
+      }
+      for (i = 1; i < rightActionBarItems.length; i++) {
+        if (rightActionBarItems[i].hasAttribute('coral-actionbar-offscreen')) {
+          expect(rightActionBarItems[i].getAttribute('aria-hidden')).to.equal('true', 'offscreen items should not be accessible("' + i + '" failed"');
+        
+        }
+      }
       done();
     });
   
