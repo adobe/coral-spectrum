@@ -179,7 +179,7 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
     }
 
     this._itemsInPopover.forEach(function(item) {
-      item.removeAttribute('aria-hidden');
+      item.style.visibility = '';
     });
   
     // Store the button and popover on the item
