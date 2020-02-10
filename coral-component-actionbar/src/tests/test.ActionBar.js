@@ -569,7 +569,6 @@ describe('ActionBar', function() {
       expect(document.activeElement.tagName.toLowerCase()).to.not.equal('button', 'activeElement should not be an one of the buttons inside the actionbar');
     
       let leftActionBarItems = bar.primary.items.getAll();
-      let rightActionBarItems = bar.secondary.items.getAll();
     
       // Wait for resize listener
       window.setTimeout(function () {
@@ -582,16 +581,8 @@ describe('ActionBar', function() {
         expect(document.activeElement).to.equal(secondLeftButton, 'activeElement should now be the second wrapped item (here button) inside the actionbar');
         expect(document.activeElement.getAttribute('tabindex')).to.not.equal('-1', 'this element should be tab-able');
         expect(bar.primary._elements.moreButton.getAttribute('tabindex')).to.equal('-1', 'more should not be tab-able');
-      
-        let firstRightButton = rightActionBarItems[0].querySelector('button');
-        firstRightButton.focus();
-        expect(document.activeElement).to.not.equal(firstRightButton, 'activeElement should not be the first wrapped item (here button) inside the actionbar');
-      
-        let secondRightButton = rightActionBarItems[1].querySelector('button');
-        secondRightButton.focus();
-        expect(document.activeElement).to.equal(secondRightButton, 'activeElement should now be the second wrapped item (here button) inside the actionbar');
+        
         expect(bar.secondary._elements.moreButton.getAttribute('tabindex')).to.not.equal('-1', 'more should be tab-able');
-      
         done();
       }, 200);
     });
@@ -606,7 +597,7 @@ describe('ActionBar', function() {
       done();
     });
   
-    it('offscreen items should not be accessible', function (done) {
+    it('offscreen items should not be visible', function (done) {
       const bar = helpers.build(window.__html__['ActionBar.hiddenitems.html']);
       expect(document.activeElement.tagName.toLowerCase()).to.not.equal('button', 'activeElement should not be an one of the buttons inside the actionbar');
       let leftActionBarItems = bar.primary.items.getAll();
@@ -614,16 +605,34 @@ describe('ActionBar', function() {
     
     
       let i = 0;
-      for (i = 1; i < leftActionBarItems.length; i++) {
+      for (; i < leftActionBarItems.length; i++) {
         if (leftActionBarItems[i].hasAttribute('coral-actionbar-offscreen')) {
-          expect(leftActionBarItems[i].getAttribute('aria-hidden')).to.equal('true', 'offscreen items should not be accessible("' + i + '" failed"');
-        
+          expect(leftActionBarItems[i].style.visibility).to.equal('hidden', 'offscreen items should not be accessible("' + i + '" failed"');
         }
       }
-      for (i = 1; i < rightActionBarItems.length; i++) {
+      for (i = 0; i < rightActionBarItems.length; i++) {
         if (rightActionBarItems[i].hasAttribute('coral-actionbar-offscreen')) {
-          expect(rightActionBarItems[i].getAttribute('aria-hidden')).to.equal('true', 'offscreen items should not be accessible("' + i + '" failed"');
-        
+          expect(rightActionBarItems[i].style.visibility).to.equal('hidden', 'offscreen items should not be accessible("' + i + '" failed"');
+        }
+      }
+  
+      bar.primary._elements.moreButton.click();
+      expect(bar.primary._elements.overlay.open).to.equal(true, 'left popover should be opened');
+      let leftPopOverItems =  bar.primary._itemsInPopover;
+      
+      for (i = 0; i < leftPopOverItems.length; i++) {
+        if (leftPopOverItems[i].hasAttribute('coral-actionbar-offscreen')) {
+          expect(leftPopOverItems[i].style.visibility).to.equal('', 'offscreen items should be accessible("' + i + '" failed"');
+        }
+      }
+  
+      bar.secondary._elements.moreButton.click();
+      expect(bar.secondary._elements.overlay.open).to.equal(true, 'right popover should be opened');
+  
+      let rightPopOverItems =  bar.secondary._itemsInPopover;
+      for (i = 0; i < rightPopOverItems.length; i++) {
+        if (rightPopOverItems[i].hasAttribute('coral-actionbar-offscreen')) {
+          expect(rightPopOverItems[i].style.visibility).to.equal('', 'offscreen items should be accessible("' + i + '" failed"');
         }
       }
       done();
