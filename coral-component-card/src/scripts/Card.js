@@ -404,8 +404,9 @@ class Card extends BaseComponent(HTMLElement) {
     this.asset = asset;
     
     // In case a lot of alerts are added, they will not overflow the card
-    this.classList.toggle(`${CLASSNAME}--overflow`, this.info.scrollHeight > this.clientHeight);
-  }
+    // Also check whether any alerts are available
+    this.classList.toggle(`${CLASSNAME}--overflow`, this.info.childNodes.length && this.info.scrollHeight > this.clientHeight);
+   }
 }
 
 export default Card;
