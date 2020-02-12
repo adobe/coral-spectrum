@@ -7,15 +7,15 @@ Icon._iconsExternal = () => 'off';
 describe('Icon', function() {
   const hasSVGIcon = (el, icon, ignoreCapitalize) => {
     const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
-    
+
     if (el._elements.svg && el.contains(el._elements.svg)) {
       const iconName = ignoreCapitalize ? icon : capitalize(icon);
       return el._elements.svg.querySelector('use').href.baseVal.endsWith(iconName);
     }
-    
+
     return false;
   };
-  
+
   describe('Namespace', function() {
     it('should define the sizes in an enum', function() {
       expect(Icon.size).to.exist;
@@ -29,7 +29,7 @@ describe('Icon', function() {
       expect(Object.keys(Icon.size).length).to.equal(7);
     });
   });
-  
+
   describe('Instantiation', function() {
     it('should be possible using new', function() {
       var icon = helpers.build(new Icon());
@@ -48,17 +48,17 @@ describe('Icon', function() {
       expect(icon.classList.contains('_coral-Icon')).to.be.true;
       expect(icon.classList.contains('_coral-Icon--sizeS')).to.be.true;
     });
-    
+
     helpers.cloneComponent(
       'should be possible to clone using markup',
       '<coral-icon icon="add" size="L"></coral-icon>'
     );
-  
+
     helpers.cloneComponent(
       'should be possible to clone an image icon using markup',
       '<coral-icon icon="http://via.placeholder.com/150x150" size="L"></coral-icon>'
     );
-  
+
     helpers.cloneComponent(
       'should be possible to clone using js',
       new Icon().set({
@@ -159,11 +159,11 @@ describe('Icon', function() {
     beforeEach(() => {
       icon = helpers.build(new Icon());
     });
-  
+
     afterEach(() => {
       icon = null;
     });
-    
+
     describe('#icon', function() {
       it('should default to null', function() {
         expect(icon.icon).to.equal('');
@@ -185,13 +185,13 @@ describe('Icon', function() {
         expect(icon.hasAttribute('icon')).to.be.true;
         expect(hasSVGIcon(icon, 'add')).to.be.true;
       });
-      
+
       it('should not render the same icon', function() {
         icon.icon = 'add';
-        
+
         icon.querySelector('svg').id = 'add';
         icon.icon = 'add';
-        
+
         expect(icon.querySelector('svg').id).to.equal('add');
       });
 
@@ -217,14 +217,14 @@ describe('Icon', function() {
       it('should not set multiple SVG icons', function() {
         icon.icon = 'adobeSocial';
         icon.icon = 'add';
-  
+
         expect(hasSVGIcon(icon, 'add')).to.be.true;
         expect(icon.querySelectorAll('svg').length).to.equal(1);
       });
 
       it('should remove the icon with null', function() {
         icon.icon = 'add';
-  
+
         expect(hasSVGIcon(icon, 'add')).to.be.true;
 
         icon.icon = null;
@@ -235,7 +235,7 @@ describe('Icon', function() {
 
       it('should remove the icon with undefined', function() {
         icon.icon = 'add';
-  
+
         expect(hasSVGIcon(icon, 'add')).to.be.true;
 
         icon.icon = undefined;
@@ -246,7 +246,7 @@ describe('Icon', function() {
 
       it('should remove the icon with empty string', function() {
         icon.icon = 'add';
-  
+
         expect(hasSVGIcon(icon, 'add')).to.be.true;
 
         icon.icon = '';
@@ -266,20 +266,20 @@ describe('Icon', function() {
         expect(icon.icon).to.equal('');
         expect(hasSVGIcon(icon, 'add')).to.be.false;
       });
-      
+
       it('should support SVG icon Id', function() {
         icon.icon = 'spectrum-css-icon-SearchClear';
         expect(icon.icon).to.equal('spectrum-css-icon-SearchClear');
         expect(hasSVGIcon(icon, 'spectrum-css-icon-SearchClear')).to.be.false;
       });
-      
+
       it('should support external SVG file reference', () => {
         Icon._iconsExternal = () => 'on';
         icon.icon = 'add';
         expect(icon._elements.svg.querySelector('use').href.baseVal.includes('spectrum-icons.svg')).to.be.true;
         Icon._iconsExternal = () => 'off';
       });
-      
+
       it('should not use external SVG file for colored icons', () => {
         Icon._iconsExternal = () => 'on';
         icon.icon = 'AdobeAudienceManagerColor';
@@ -307,7 +307,7 @@ describe('Icon', function() {
 
         expect(icon.classList.contains('_coral-Icon--sizeL')).to.be.true;
       });
-      
+
       it('should be set with an attribute', function() {
         icon.setAttribute('size', Icon.size.LARGE);
         expect(icon.size).to.equal(Icon.size.LARGE);
@@ -343,120 +343,144 @@ describe('Icon', function() {
         expect(icon.classList.contains('_coral-Icon--sizeXS')).to.be.true;
         expect(icon.classList.contains('_coral-Icon--sizeME')).to.be.true;
       });
-      
+
       it('should update the icon if the size changed', function() {
         icon.icon = 'add';
         expect(icon._elements.svg.querySelector('use').href.baseVal.indexOf('18') !== -1).to.be.true;
-  
+
         icon.size = 'XXL';
-  
+
         expect(icon._elements.svg.querySelector('use').href.baseVal.indexOf('24') !== -1).to.be.true;
       });
     });
   });
-  
+
   describe('Implementation details', function() {
     describe('alt', function() {
       it('should add an aria-label equal to the value of the alt property', function() {
         var icon = helpers.build(new Icon());
-    
+
         icon.icon = 'add';
         icon.alt = 'Add Item';
-    
+
         expect(icon.alt).to.equal('Add Item');
         expect(icon.getAttribute('aria-label')).to.equal('Add Item');
       });
-  
+
       it('should add an aria-label equal to the value of the icon property when not set and when no title attribute is present', function() {
         var icon = helpers.build(new Icon());
-    
+
         icon.icon = 'add';
-    
+
         expect(icon.getAttribute('aria-label')).to.equal('add');
       });
-  
+
       it('should add an aria-label equal to the value of the title attribute property when not set and when a title attribute is present', function() {
         var icon = helpers.build(new Icon());
-    
+
         icon.icon = 'add';
         icon.title = 'Add Item';
-    
+
         expect(icon.getAttribute('aria-label')).to.equal('Add Item');
       });
-  
+
       it('should have no aria-label attribute when explicitly set to an empty string', function() {
         var icon = helpers.build(new Icon());
-    
+
         icon.icon = 'add';
         icon.title = 'Add Item';
         icon.alt = '';
-    
+
         expect(icon.hasAttribute('aria-label')).to.be.false;
       });
-  
+
+      it('shouldnt set aria-label when coral-aria-label is false', function (done) {
+        var icon = helpers.build(new Icon());
+
+        icon.setAttribute('coral-aria-label', 'false');
+        icon.icon = 'add';
+
+        helpers.next(function () {
+          expect(icon.hasAttribute('aria-label')).to.be.false;
+          done();
+        });
+      });
+
+      it('should set default aria-label when coral-aria-label is anything else than false', function (done) {
+        var icon = helpers.build(new Icon());
+
+        icon.setAttribute('coral-aria-label', 'asdf');
+        icon.icon = 'add';
+
+        helpers.next(function () {
+          expect(icon.getAttribute('aria-label')).to.equal('add');
+          done();
+        });
+      });
+
       it('should have role="img" when icon property is not a URL', function() {
         var icon = helpers.build(new Icon());
-    
+
         icon.icon = 'add';
         icon.alt = 'Add Item';
-    
+
         expect(icon.getAttribute('role')).to.equal('img');
       });
-  
+
       it('should have role="presentation" when icon property is a URL', function() {
         var icon = helpers.build(new Icon());
-    
+
         icon.icon = 'image.png';
-    
+
         expect(icon.getAttribute('role')).to.equal('presentation');
         expect(icon._elements.image.getAttribute('alt')).to.equal('');
       });
-  
+
       it('should update alt text on child image when icon property is a URL', function() {
         var icon = helpers.build(new Icon());
-    
+
         icon.icon = 'image.png';
         icon.alt = 'Add Item';
-    
+
         expect(icon.getAttribute('role')).to.equal('presentation');
         expect(icon._elements.image.getAttribute('alt')).to.equal('Add Item');
       });
-  
+
       it('should set alt text on child image to value of title attribute empty string when icon property is a URL and alt is null', function() {
         var icon = helpers.build(new Icon());
-    
+
         icon.icon = 'image.png';
         icon.title = 'Add Item';
-    
+
         expect(icon.getAttribute('role')).to.equal('presentation');
         expect(icon._elements.image.getAttribute('alt')).to.equal(icon.title);
       });
-  
+
       it('should set alt text on child image to an empty string when icon property is a URL and alt is an empty string', function() {
         var icon = helpers.build(new Icon());
-    
+
         icon.icon = 'image.png';
         icon.title = 'Add Item';
-    
+
         expect(icon.getAttribute('role')).to.equal('presentation');
         expect(icon._elements.image.getAttribute('alt')).to.equal(icon.title);
-    
+
         // By setting alt = '' explicitly, we override the default behavior and instead use an empty string for alt text.
         icon.alt = '';
         expect(icon._elements.image.getAttribute('alt')).to.equal('');
       });
     });
-    
+
     describe('SVG', function() {
       it('should render the SVG markup', function() {
         helpers.target.innerHTML = Icon._renderSVG('testId', ['testClass']);
-        
+
         const svg = helpers.target.querySelector('svg');
         expect(svg.classList.contains('testClass')).to.be.true;
         expect(svg.querySelector('use').href.baseVal.indexOf('testId') !== -1).to.be.true;
       });
     });
-    
+
     describe('IMG', function() {
       it('should use the existing img', function() {
         const el = helpers.build('<coral-icon><img id="img" src="image.jpg"/></coral-icon>');
@@ -466,84 +490,84 @@ describe('Icon', function() {
         expect(img.getAttribute('alt')).to.equal('');
       });
     });
-    
+
     describe('Template', function() {
       it('should ignore unresolved templates', function() {
         const el = helpers.build('<coral-icon icon="image-{{index}}.jpg"></coral-icon>');
         expect(el.querySelector('img')).to.equal(null);
       });
     });
-    
+
     describe('Compat', function() {
       let warn;
       let called = 0;
-      
+
       beforeEach(() => {
         warn = console.warn;
-        
+
         console.warn = function() {
           called++;
         };
       });
-      
+
       afterEach(() => {
         console.warn = warn;
         called = 0;
       });
-      
+
       it('should capitalize the icon name to match to the new icon name', function() {
         const el = helpers.build(new Icon());
         el.icon = 'add';
         expect(hasSVGIcon(el, 'Add', true)).to.be.true;
         expect(called).to.equal(0);
       });
-      
+
       it('should map the old icon name to the new icon name', function() {
         const el = helpers.build(new Icon());
         el.icon = 'adobe';
         expect(hasSVGIcon(el, 'AdobeLogo', true)).to.be.true;
         expect(called).to.equal(1);
       });
-  
+
       it('should map to the new icon name based on the light theme', function() {
         const container = document.createElement('div');
         const el = new Icon();
         container.appendChild(el);
-        
+
         container.classList.add('coral--light');
-  
+
         helpers.target.appendChild(container);
-  
+
         el.icon = 'userCircleColor';
-  
+
         expect(hasSVGIcon(el, 'UserCircleColor_Light', true)).to.be.true;
         expect(called).to.equal(1);
       });
-  
+
       it('should map to the new icon name based on the dark theme', function() {
         const container = document.createElement('div');
         const el = new Icon();
         container.appendChild(el);
-    
+
         container.classList.add('coral--dark');
-  
+
         helpers.target.appendChild(container);
-        
+
         el.icon = 'userCircleColor';
-    
+
         expect(hasSVGIcon(el, 'UserCircleColor_Dark', true)).to.be.true;
         expect(called).to.equal(1);
       });
-  
+
       it('should map to the new light icon by default if no theme specified', function() {
         const container = document.createElement('div');
         const el = new Icon();
         container.appendChild(el);
-        
+
         helpers.target.appendChild(container);
-  
+
         el.icon = 'userCircleColor';
-    
+
         expect(hasSVGIcon(el, 'UserCircleColor_Light', true)).to.be.true;
         expect(called).to.equal(1);
       });

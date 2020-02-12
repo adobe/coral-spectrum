@@ -19,6 +19,11 @@ import getTarget from './getTarget';
 const CLASSNAME = '_coral-Tabs-item';
 
 /**
+ * Parameter for toggling aria-label handling by coral.
+ */
+const CORAL_HANDLE_ARIA = 'coral-aria-label';
+
+/**
  @class Coral.Tab
  @classdesc A Tab component
  @htmltag coral-tab
@@ -29,13 +34,13 @@ class Tab extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Templates
     this._elements = {
       label: this.querySelector('coral-tab-label') || document.createElement('coral-tab-label')
     };
     base.call(this._elements);
-  
+
     // Listen for mutations
     this._observer = new MutationObserver(() => {
       // Change icon size if the label is empty
@@ -43,10 +48,10 @@ class Tab extends BaseComponent(HTMLElement) {
       if (icon) {
         icon.size = this._elements.label.textContent.trim().length ? Icon.size.EXTRA_SMALL : Icon.size.SMALL;
       }
-      
+
       this.trigger('coral-tab:_sizechanged');
     });
-  
+
     // Watch for changes to the label element
     this._observer.observe(this._elements.label, {
       childList: true,
@@ -54,10 +59,10 @@ class Tab extends BaseComponent(HTMLElement) {
       subtree: true
     });
   }
-  
+
   /**
    The label of the tab.
-   
+
    @type {TabLabel}
    @contentzone
    */
@@ -74,10 +79,10 @@ class Tab extends BaseComponent(HTMLElement) {
       }
     });
   }
-  
+
   /**
    Specifies the name of the icon used inside the Tab. See {@link Icon} for valid icon names.
-   
+
    @type {String}
    @default ""
    @htmlattribute icon
@@ -87,9 +92,13 @@ class Tab extends BaseComponent(HTMLElement) {
     return iconElement ? iconElement.icon : '';
   }
   set icon(value) {
+    const shouldHandleAriaLabel = this.getAttribute(CORAL_HANDLE_ARIA);
+    if (shouldHandleAriaLabel) {
+      this._elements.icon.setAttribute(CORAL_HANDLE_ARIA, this.getAttribute(CORAL_HANDLE_ARIA));
+    }
     const iconElement = this._elements.icon;
     iconElement.icon = value;
-  
+
     // removes the icon element from the DOM.
     if (this.icon === '') {
       iconElement.remove();
@@ -105,10 +114,10 @@ class Tab extends BaseComponent(HTMLElement) {
       this.trigger('coral-tab:_sizechanged');
     }
   }
-  
+
   /**
    Whether the current Tab is invalid.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute invalid
@@ -120,15 +129,15 @@ class Tab extends BaseComponent(HTMLElement) {
   set invalid(value) {
     this._invalid = transform.booleanAttr(value);
     this._reflectAttribute('invalid', this._invalid);
-    
+
     this.classList.toggle('is-invalid', this._invalid);
     this.setAttribute('aria-invalid', this._invalid);
   }
-  
+
   /**
    Whether this Tab is disabled. When set to true, this will prevent every user interacting with the Tab. If
    disabled is set to true for a selected Tab it will be deselected.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute disabled
@@ -140,20 +149,20 @@ class Tab extends BaseComponent(HTMLElement) {
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
-  
+
     this.classList.toggle('is-disabled', this._disabled);
     this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
-    
+
     if (this._disabled && this.selected) {
       this.selected = false;
     }
-    
+
     if (!this._disabled && !this.selected) {
       // We inform the parent to verify if this item should be selected because it's the only one left
       this.trigger('coral-tab:_validateselection');
     }
   }
-  
+
   /**
    Whether the tab is selected.
    @type {Boolean}
@@ -166,15 +175,15 @@ class Tab extends BaseComponent(HTMLElement) {
   }
   set selected(value) {
     value = transform.booleanAttr(value);
-    
+
     if (!value || value && !this.disabled) {
       this._selected = value;
       this._reflectAttribute('selected', this.disabled ? false : this._selected);
-  
+
       this.classList.toggle('is-selected', this._selected);
       this.setAttribute('tabindex', this._selected ? '0' : '-1');
       this.setAttribute('aria-selected', this._selected);
-  
+
       // in case the tab is selected, we need to communicate it to the panels.
       if (this._selected) {
         this._selectTarget();
@@ -182,11 +191,11 @@ class Tab extends BaseComponent(HTMLElement) {
       this.trigger('coral-tab:_selectedchanged');
     }
   }
-  
+
   /**
    The target element that will be selected when this Tab is selected. It accepts a CSS selector or a DOM element.
    If a CSS Selector is provided, the first matching element will be used.
-   
+
    @type {?HTMLElement|String}
    @default null
    @htmlattribute target
@@ -197,9 +206,9 @@ class Tab extends BaseComponent(HTMLElement) {
   set target(value) {
     if (value === null || typeof value === 'string' || value instanceof Node) {
       this._target = value;
-  
+
       const realTarget = getTarget(this.target);
-  
+
       // we add proper accessibility if available
       if (realTarget) {
         // creates a 2 way binding for accessibility
@@ -208,7 +217,7 @@ class Tab extends BaseComponent(HTMLElement) {
       }
     }
   }
-  
+
   /**
    Inherited from {@link BaseComponent#trackingElement}.
    */
@@ -221,10 +230,10 @@ class Tab extends BaseComponent(HTMLElement) {
   set trackingElement(value) {
     super.trackingElement = value;
   }
-  
+
   /**
    Selects the target item
-   
+
    @ignore
    */
   _selectTarget() {
@@ -236,17 +245,17 @@ class Tab extends BaseComponent(HTMLElement) {
     // otherwise, we use the target defined at the tablist level
     else {
       const tabList = this.parentNode;
-    
+
       if (tabList && tabList.target) {
         realTarget = getTarget(tabList.target);
-      
+
         if (realTarget) {
           // we get the position of this tab inside the tablist
           const currentIndex = tabList.items.getAll().indexOf(this);
-        
+
           // we select the item with the same index
           const targetItem = (realTarget.items ? realTarget.items.getAll() : realTarget.children)[currentIndex];
-        
+
           // we select the item if it exists
           if (targetItem) {
             targetItem.setAttribute('selected', '');
@@ -255,52 +264,52 @@ class Tab extends BaseComponent(HTMLElement) {
       }
     }
   }
-  
+
   get _contentZones() { return {'coral-tab-label': 'label'}; }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['selected', 'disabled', 'icon', 'invalid', 'target']);
   }
-  
+
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();
-  
+
     // Query the tab target once the tab item is inserted in the DOM
     if (this.selected) {
       this._selectTarget();
     }
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     // adds the role to support accessibility
     this.setAttribute('role', 'tab');
-  
+
     // Generate a unique ID for the tab panel if one isn't already present
     // This will be used for accessibility purposes
     this.setAttribute('id', this.id || commons.getUID());
-  
+
     // Create a fragment
     const frag = document.createDocumentFragment();
-    
+
     // Render the main template
     if (this.icon) {
       frag.appendChild(this._elements.icon);
     }
-  
+
     const label = this._elements.label;
-  
+
     // Remove it so we can process children
     if (label.parentNode) {
       label.parentNode.removeChild(label);
     }
-    
+
     while (this.firstChild) {
       const child = this.firstChild;
       if (child.nodeType === Node.TEXT_NODE ||
@@ -312,10 +321,10 @@ class Tab extends BaseComponent(HTMLElement) {
         this.removeChild(child);
       }
     }
-  
+
     // Add the frag to the component
     this.appendChild(frag);
-  
+
     // Assign the content zones, moving them into place in the process
     this.label = label;
   }

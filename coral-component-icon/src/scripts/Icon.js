@@ -51,28 +51,33 @@ const resolveIconsPath = (iconsPath) => {
 
 /**
  Regex used to match URLs. Assume it's a URL if it has a slash, colon, or dot.
- 
+
  @ignore
  */
 const URL_REGEX = /\/|:|\./g;
 
 /**
  Regex used to match unresolved templates e.g. for data-binding
- 
+
  @ignore
  */
 const TEMPLATE_REGEX = /.*\{\{.+\}\}.*/g;
 
 /**
  Regex used to split camel case icon names into more screen-reader friendly alt text.
- 
+
  @ignore
  */
 const SPLIT_CAMELCASE_REGEX = /([a-z0-9])([A-Z])/g;
 
 /**
+ * Parameter for toggling aria-label handling by coral.
+ */
+const CORAL_HANDLE_ARIA = 'coral-aria-label';
+
+/**
  Returns capitalized string. This is used to map the icons with their SVG counterpart.
- 
+
  @ignore
  @param {String} s
  @return {String}
@@ -81,9 +86,9 @@ const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
 
 /**
  Enumeration for {@link Icon} sizes.
- 
+
  @typedef {Object} IconSizeEnum
- 
+
  @property {String} EXTRA_EXTRA_SMALL
  Extra extra small size icon, typically 9px size.
  @property {String} EXTRA_SMALL
@@ -130,6 +135,7 @@ const sizeMap = {
   XXL: 24
 };
 
+
 /**
  @class Coral.Icon
  @classdesc An Icon component. Icon ships with a set of SVG icons.
@@ -141,13 +147,13 @@ class Icon extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     this._elements = {};
   }
-  
+
   /**
    Icon name.
-   
+
    @type {String}
    @default ""
    @htmlattribute icon
@@ -158,24 +164,24 @@ class Icon extends BaseComponent(HTMLElement) {
   }
   set icon(value) {
     const icon = transform.string(value).trim();
-    
+
     // Avoid rendering the same icon
     if (icon !== this._icon || this.hasAttribute('_context')) {
       this._icon = icon;
       this._reflectAttribute('icon', this._icon);
-      
+
       // Ignore unresolved templates
       if (this._icon.match(TEMPLATE_REGEX)) {
         return;
       }
-      
+
       // Use the existing img
       if (this._hasRawImage) {
         this._elements.image.classList.add(CLASSNAME, `${CLASSNAME}--image`);
         this._updateAltText();
         return;
       }
-  
+
       // Remove image and SVG elements
       ['image', 'svg'].forEach((type) => {
         const el = this._elements[type] || this.querySelector(`.${CLASSNAME}--${type}`);
@@ -183,7 +189,7 @@ class Icon extends BaseComponent(HTMLElement) {
           el.remove();
         }
       });
-  
+
       // Sets the desired icon
       if (this._icon) {
         // Detect if it's a URL
@@ -198,14 +204,14 @@ class Icon extends BaseComponent(HTMLElement) {
           this._updateIcon();
         }
       }
-  
+
       this._updateAltText();
     }
   }
-  
+
   /**
    Size of the icon. It accepts both lower and upper case sizes. See {@link IconSizeEnum}.
-   
+
    @type {String}
    @default IconSizeEnum.SMALL
    @htmlattribute size
@@ -216,44 +222,44 @@ class Icon extends BaseComponent(HTMLElement) {
   }
   set size(value) {
     const oldSize = this._size;
-    
+
     value = transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) && value || size.SMALL;
     this._reflectAttribute('size', this._size);
-    
+
     // removes all the existing sizes
     this.classList.remove(...ALL_SIZE_CLASSES);
     // adds the new size
     this.classList.add(`${CLASSNAME}--size${this._size}`);
-    
+
     // We need to update the icon if the size changed
     if (oldSize && oldSize !== this._size && this.contains(this._elements.svg)) {
       this._elements.svg.remove();
       this._updateIcon();
     }
-    
+
     this._updateAltText();
   }
-  
+
   /** @private */
   get title() { return this.getAttribute('title'); }
   set title(value) { this.setAttribute('title', value); }
-  
+
   /** @private */
   get alt() { return this.getAttribute('alt'); }
   set alt(value) { this.setAttribute('alt', value); }
-  
+
   _updateIcon() {
     let iconId = this.icon;
-    
+
     // If icon name is passed, we have to build the icon Id based on the icon name
     if (iconId.indexOf(SPECTRUM_ICONS_IDENTIFIER) !== 0) {
       const iconMapped = ICON_MAP[iconId];
       let iconName;
-      
+
       // Restore default state
       this.removeAttribute('_context');
-      
+
       if (iconMapped) {
         if (iconMapped.spectrumIcon) {
           // Use the default mapped icon
@@ -262,7 +268,7 @@ class Icon extends BaseComponent(HTMLElement) {
         else {
           // Verify if icon should be light or dark by looking up parents theme
           const closest = this.closest('.coral--light, .coral--dark, .coral--lightest, .coral--darkest');
-          
+
           if (closest) {
             if (closest.classList.contains('coral--light') || closest.classList.contains('coral--lightest')) {
               // Use light icon
@@ -277,11 +283,11 @@ class Icon extends BaseComponent(HTMLElement) {
           else {
             iconName = iconMapped.spectrumIconLight;
           }
-          
+
           // Mark icon as contextual icon because the icon name is defined based on the theme
           this.setAttribute('_context', '');
         }
-        
+
         // Inform user about icon name changes
         if (iconName) {
           commons._log('warn', `Coral.Icon: the icon ${iconId} has been deprecated. Please use ${iconName} instead.`);
@@ -294,7 +300,7 @@ class Icon extends BaseComponent(HTMLElement) {
       else {
         iconName = capitalize(iconId);
       }
-      
+
       // Verify if icon name is a colored icon
       if (SPECTRUM_COLORED_ICONS_IDENTIFIER.some(identifier => iconName.indexOf(identifier) !== -1)) {
         // Colored icons are 24 by default
@@ -306,25 +312,31 @@ class Icon extends BaseComponent(HTMLElement) {
         iconId = `spectrum-icon-${iconSize}-${iconName}`;
       }
     }
-    
+
     // Insert SVG Icon using HTML because DOMly doesn't support document.createElementNS for <use> element
     this.insertAdjacentHTML('beforeend', this.constructor._renderSVG(iconId));
-    
+
     this._elements.svg = this.lastElementChild;
   }
-  
+
   /**
+   Autogenerating aria-label is being deprecated
+   Please provide your own contextual proper aria-label[ledby] information
+   Please use coral-aria-label='false', the flag removes aria-label handling and will be default behaviour in the future.
+
    Updates the aria-label or img alt attribute depending on value of alt, title or icon.
-   
+
    In cases where the alt attribute has been removed or set to an empty string,
    for example, when the alt property is undefined and we add the attribute alt=''
    to explicitly override the default behavior, or when we remove an alt attribute
    thus restoring the default behavior, we make sure to update the alt text.
    @private
+   @deprecated
    */
   _updateAltText(value) {
     const isImage = this.contains(this._elements.image);
-    
+    const shouldHandleAriaLabel = this.getAttribute(CORAL_HANDLE_ARIA, 'true') !== 'false';
+
     let altText;
     if (typeof value === 'string') {
       altText = value;
@@ -335,7 +347,7 @@ class Icon extends BaseComponent(HTMLElement) {
     else {
       altText = this.icon.replace(SPLIT_CAMELCASE_REGEX, '$1 $2');
     }
-  
+
     // If no other role has been set, provide the appropriate
     // role depending on whether or not the icon is an arbitrary image URL.
     const role = this.getAttribute('role');
@@ -343,35 +355,43 @@ class Icon extends BaseComponent(HTMLElement) {
     if (!roleOverride) {
       this.setAttribute('role', isImage ? 'presentation' : 'img');
     }
-    
+
     // Set accessibility attributes accordingly
     if (isImage) {
-      this.removeAttribute('aria-label');
       this._elements.image.setAttribute('alt', altText);
+    }
+    else if (roleOverride && altText === '') {
+        this.removeAttribute('role');
+    }
+    if (shouldHandleAriaLabel) {
+      this._updateAriaLabel(altText, isImage);
+    }
+  }
+
+  _updateAriaLabel(altText, isImage) {
+    if (isImage) {
+      this.removeAttribute('aria-label');
     }
     else if (altText === '') {
       this.removeAttribute('aria-label');
-      if (!roleOverride) {
-        this.removeAttribute('role');
-      }
     }
     else {
       this.setAttribute('aria-label', altText);
     }
   }
-  
+
   /**
    Whether SVG icons are referenced as external resource (on/off)
-   
+
    @return {String}
    */
   static _iconsExternal() {
     return iconsExternal;
   }
-  
+
   /**
    Returns the SVG markup.
-   
+
    @param {String} iconId
    @param {Array.<String>} additionalClasses
    @return {String}
@@ -379,9 +399,9 @@ class Icon extends BaseComponent(HTMLElement) {
   static _renderSVG(iconId, additionalClasses = []) {
     additionalClasses.unshift(CLASSNAME);
     additionalClasses.unshift(`${CLASSNAME}--svg`);
-    
+
     let iconPath = `#${iconId}`;
-    
+
     // If not colored icons
     if (this._iconsExternal() === 'on' && !SPECTRUM_COLORED_ICONS_IDENTIFIER.some(identifier => iconId.indexOf(identifier) !== -1)) {
       // Generate spectrum-css-icons path
@@ -393,24 +413,24 @@ class Icon extends BaseComponent(HTMLElement) {
         iconPath = resourcesPath ? `${resourcesPath}${SPECTRUM_ICONS}.svg#${iconId}` : `${resolveIconsPath(SPECTRUM_ICONS_PATH)}#${iconId}`;
       }
     }
-    
+
     return `
       <svg focusable="false" aria-hidden="true" class="${additionalClasses.join(' ')}">
         <use xlink:href="${iconPath}"></use>
       </svg>
     `;
   }
-  
+
   /**
    Returns {@link Icon} sizes.
-   
+
    @return {IconSizeEnum}
    */
   static get size() { return size; }
-  
+
   /**
    Loads the SVG icons. It's requesting the icons based on the JS file path by default.
-   
+
    @param {String} [url] SVG icons url.
    */
   static load(url) {
@@ -418,7 +438,7 @@ class Icon extends BaseComponent(HTMLElement) {
       const path = commons._script.src;
       return `${path.split('/').slice(0, -iconsPath.split('/').length).join('/')}/${iconsPath}`;
     };
-    
+
     if (url === SPECTRUM_ICONS) {
       url = resolveIconsPath(SPECTRUM_ICONS_PATH);
     }
@@ -428,15 +448,15 @@ class Icon extends BaseComponent(HTMLElement) {
     else if (url === SPECTRUM_CSS_ICONS) {
       url = resolveIconsPath(SPECTRUM_CSS_ICONS_PATH);
     }
-  
+
     loadIcons(url);
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['icon', 'size', 'alt', 'title']);
   }
-  
+
   /** @ignore */
   attributeChangedCallback(name, oldValue, value) {
     if (name === 'alt' || name === 'title') {
@@ -446,28 +466,28 @@ class Icon extends BaseComponent(HTMLElement) {
       super.attributeChangedCallback(name, oldValue, value);
     }
   }
-  
+
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();
-  
+
     // Contextual icons need to be checked again
     if (this.hasAttribute('_context')) {
       this.icon = this.icon;
     }
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // Set default size
     if (!this._size) {
       this.size = size.SMALL;
     }
-    
+
     const img = this.querySelector(`img:not(.${CLASSNAME}--image)`);
     if (img) {
       this._elements.image = img;
