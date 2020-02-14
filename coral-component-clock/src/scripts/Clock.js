@@ -77,7 +77,7 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
     
     // Prepare templates
     this._elements = {};
-    base.call(this._elements, {commons, i18n});
+    this._template = base.call(this._elements, {commons, i18n});
   
     // Pre-define labellable element
     this._labellableElement = this;
@@ -324,22 +324,10 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   
       // Set aria-labelledby attribute on the labellable element joining ids array into space-delimited list of ids.
       this.setAttribute('aria-labelledby', ids.join(' '));
-  
-      // Set label for attribute
-      const labelElement = document.getElementById(labelledBy);
-      if (labelElement && labelElement.tagName === 'LABEL') {
-        labelElement.setAttribute('for', this._elements.hours.id);
-        this._labelElement = labelElement;
-      }
     }
     else {
       // labelledBy property is null, remove the aria-labelledby attribute.
       this.removeAttribute('aria-labelledby');
-  
-      // Remove label for attribute
-      if (this._labelElement) {
-        this._labelElement.removeAttribute('for');
-      }
     }
   }
   
@@ -565,9 +553,7 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
     }
     
     // Render template
-    ['input', 'valueAsText', 'hours', 'divider', 'minutes', 'period'].forEach((handle) => {
-      this.appendChild(this._elements[handle]);
-    });
+    this.appendChild(this._template);
     
     this._syncDisplay();
   }

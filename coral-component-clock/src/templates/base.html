@@ -1,10 +1,14 @@
+<js>
+  const labelHourId = data.commons.getUID();
+  const labelMinuteId = data.commons.getUID();
+</js>
 <input type="hidden" name="" handle="input">
 <time handle="valueAsText" id="{{data.commons.getUID()}}" hidden></time>
-<label for="_coral-Clock-hour" class="coral-Form-fieldlabel">{{data.i18n.get('Hours')}}</label>
-<input is="coral-textfield" id="{{data.commons.getUID()}}" type="number" min="0" max="23" class="_coral-Clock-hour" handle="hours" id="_coral-Clock-hour" aria-label="{{data.i18n.get('Hours')}}">
+<label for="{{labelHourId}}" class="coral-Form-fieldlabel">{{data.i18n.get('Hours')}}</label>
+<input is="coral-textfield" id="{{labelHourId}}" type="number" min="0" max="23" class="_coral-Clock-hour" handle="hours">
 <span class="_coral-Clock-divider" handle="divider">:</span>
-<label for="_coral-Clock-minute"  class="coral-Form-fieldlabel">{{data.i18n.get('Minutes')}}</label>
-<input is="coral-textfield" type="number" min="0" max="59" class="_coral-Clock-minute" handle="minutes" id="_coral-Clock-minute" aria-label="{{data.i18n.get('Minutes')}}">
+<label for="{{labelMinuteId}}"  class="coral-Form-fieldlabel">{{data.i18n.get('Minutes')}}</label>
+<input is="coral-textfield" id="{{labelMinuteId}}" type="number" min="0" max="59" class="_coral-Clock-minute" handle="minutes">
 <coral-select handle="period" class="_coral-Clock-period" hidden aria-label="{{data.i18n.get('AM/PM')}}">
   <coral-select-item value="am"></coral-select-item>
   <coral-select-item value="pm"></coral-select-item>
