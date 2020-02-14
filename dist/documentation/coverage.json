@@ -218,10 +218,10 @@
         108,
         346,
         456,
-        490,
-        511,
-        517,
-        530
+        492,
+        513,
+        519,
+        532
       ]
     },
     "coral-spectrum/coral-component-actionbar/src/scripts/ActionBarContainer.js": {
@@ -274,9 +274,9 @@
         98,
         121,
         137,
-        241,
-        249,
-        257
+        245,
+        253,
+        261
       ]
     },
     "coral-spectrum/coral-component-actionbar/src/scripts/getFirstSelectableWrappedItem.js": {
@@ -582,6 +582,7 @@
         51,
         71,
         79,
+        80,
         83,
         100,
         122,
@@ -590,10 +591,9 @@
         242,
         261,
         281,
-        332,
-        442,
-        518,
-        532
+        430,
+        506,
+        520
       ]
     },
     "coral-spectrum/coral-component-coachmark/src/scripts/CoachMark.js": {

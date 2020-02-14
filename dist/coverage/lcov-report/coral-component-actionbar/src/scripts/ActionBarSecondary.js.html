@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.89% </span>
+                <span class="strong">55% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/19</span>
+                <span class='fraction'>11/20</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.89% </span>
+                <span class="strong">55% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/19</span>
+                <span class='fraction'>11/20</span>
             </div>
         
             
@@ -116,7 +116,9 @@
 <a name='L58'></a><a href='#L58'>58</a>
 <a name='L59'></a><a href='#L59'>59</a>
 <a name='L60'></a><a href='#L60'>60</a>
-<a name='L61'></a><a href='#L61'>61</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -152,9 +154,9 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">98x</span>
+<span class="cline-any cline-yes">110x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">98x</span>
+<span class="cline-any cline-yes">110x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -167,14 +169,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
@@ -210,6 +214,8 @@ class ActionBarSecondary extends ActionBarContainer(BaseComponent(HTMLElement)) 
     for (let i = 0; i &lt; this._itemsInPopover.length; i++) {
       item = this._itemsInPopover[i];
   
+      item.style.visibility = 'hidden';
+  
       // remove tabindex again
       wrappedItem = getFirstSelectableWrappedItem(item);
       if (wrappedItem &amp;&amp; wrappedItem.hasAttribute('tabindex')) {
@@ -219,22 +225,22 @@ class ActionBarSecondary extends ActionBarContainer(BaseComponent(HTMLElement)) 
       this.insertBefore(item, this.firstChild.nextSibling);
     }
   }
-  
-  /** @ignore */
-  _attachMoreButtonT<span class="fstat-no" title="function not covered" >oContainer() {</span>
-    this.insertBe<span class="cstat-no" title="statement not covered" >fore(</span>this._elements.moreButton, this.firstChild);
+  <span class="fstat-no" title="function not covered" ></span>
+  /** @ignore */<span class="cstat-no" title="statement not covered" ></span>
+  _attachMoreButtonToCon<span class="cstat-no" title="statement not covered" >taine</span>r() {
+    this.insertBefore(this._elements.moreButton, this.firstChild);
   }<span class="cstat-no" title="statement not covered" ></span>
-  
-  /** <span class="cstat-no" title="statement not covered" >@ignore */</span>
-  render<span class="cstat-no" title="statement not covered" >() {</span>
-    super.render();
+  <span class="cstat-no" title="statement not covered" ></span>
+  /** @i<span class="cstat-no" title="statement not covered" >gnore */</span>
+  render() {
+    supe<span class="cstat-no" title="statement not covered" >r.render();</span>
+    
+    this<span class="cstat-no" title="statement not covered" >.classList.add(CLASSNAME);</span>
     <span class="cstat-no" title="statement not covered" ></span>
-    this.classList.add(CLASSNAME);
-    <span class="cstat-no" title="statement not covered" ></span>
-    this._<span class="cstat-no" title="statement not covered" >attachMoreButtonToContainer();</span>
+    this._attachMoreButtonToContainer();
   }
-}
-<span class="cstat-no" title="statement not covered" ></span>
+}<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
 export default ActionBarSecondary;
 &nbsp;</pre></td></tr></table></pre>
 
@@ -243,7 +249,7 @@ export default ActionBarSecondary;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Feb 04 2020 14:26:24 GMT+0100 (Central European Standard Time)
+                at Fri Feb 14 2020 13:03:40 GMT+0100 (Central European Standard Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

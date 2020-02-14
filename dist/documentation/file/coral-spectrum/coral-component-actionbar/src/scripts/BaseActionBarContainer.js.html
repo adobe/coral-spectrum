@@ -587,6 +587,10 @@ class BaseActionBarContainer extends superClass {
     if (this._itemsInPopover.length &lt; 1) {
       return;
     }
+
+    this._itemsInPopover.forEach((item) =&gt; {
+      item.style.visibility = &apos;&apos;;
+    });
   
     // Store the button and popover on the item
     this._itemsInPopover.forEach((item) =&gt; {

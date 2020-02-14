@@ -22407,6 +22407,19 @@ var Coral = (function (exports) {
       if (child.offsetParent && child.matches(commons.FOCUSABLE_ELEMENT_SELECTOR)) {
         return child;
       }
+    } // search at 2nd level, some elements like coral-fileupload has selectable items inside them
+
+
+    for (var _i = 0; _i < wrapperItem.children.length; _i++) {
+      child = wrapperItem.children[_i];
+
+      for (var j = 0; j < child.children.length; j++) {
+        var subChild = child.children[j]; // maybe filter even more elements? (opacity, display='none', position='absolute' ...)
+
+        if (subChild.offsetParent && subChild.matches(commons.FOCUSABLE_ELEMENT_SELECTOR)) {
+          return subChild;
+        }
+      }
     }
 
     return null;
@@ -22853,7 +22866,8 @@ var Coral = (function (exports) {
           this._moveToScreen(item);
         } else if (!item.hasAttribute('coral-actionbar-offscreen')) {
           // actually just move element offscreen to be able to measure the size while calculating the layout
-          item.setAttribute('coral-actionbar-offscreen', ''); // if I do not force a browser redraw webkit has layouting problems
+          item.setAttribute('coral-actionbar-offscreen', '');
+          item.style.visibility = 'hidden'; // if I do not force a browser redraw webkit has layouting problems
 
           this._forceWebkitRedraw(item);
         }
@@ -22867,7 +22881,8 @@ var Coral = (function (exports) {
           this._hideItem(item);
         } else if (item.hasAttribute('coral-actionbar-offscreen')) {
           // actually just move element onscreen again (see _hideItem)
-          item.removeAttribute('coral-actionbar-offscreen'); // if I do not force a browser redraw webkit has layouting problems
+          item.removeAttribute('coral-actionbar-offscreen');
+          item.style.visibility = ''; // if I do not force a browser redraw webkit has layouting problems
 
           this._forceWebkitRedraw(item);
         }
@@ -23677,7 +23692,11 @@ var Coral = (function (exports) {
 
             if (this._itemsInPopover.length < 1) {
               return;
-            } // Store the button and popover on the item
+            }
+
+            this._itemsInPopover.forEach(function (item) {
+              item.style.visibility = '';
+            }); // Store the button and popover on the item
 
 
             this._itemsInPopover.forEach(function (item) {
@@ -23956,7 +23975,8 @@ var Coral = (function (exports) {
         var wrappedItem = null;
 
         for (var i = 0; i < this._itemsInPopover.length; i++) {
-          item = this._itemsInPopover[i]; // remove tabindex again
+          item = this._itemsInPopover[i];
+          item.style.visibility = 'hidden'; // remove tabindex again
 
           wrappedItem = getFirstSelectableWrappedItem(item);
 
@@ -24024,7 +24044,8 @@ var Coral = (function (exports) {
         var wrappedItem = null;
 
         for (var i = 0; i < this._itemsInPopover.length; i++) {
-          item = this._itemsInPopover[i]; // remove tabindex again
+          item = this._itemsInPopover[i];
+          item.style.visibility = 'hidden'; // remove tabindex again
 
           wrappedItem = getFirstSelectableWrappedItem(item);
 
@@ -32507,133 +32528,171 @@ var Coral = (function (exports) {
       "Next": "Next",
       "Today, {0} selected/[translation hint:date]": "Today, {0} selected",
       "Today, {0}/[translation hint:date]": "Today, {0}",
-      "{0} selected/[translation hint:date]": "{0} selected"
+      "{0} selected/[translation hint:date]": "{0} selected",
+      "Previous Month": "Previous Month",
+      "Next Month": "Next Month"
     },
     "fr-FR": {
       "Previous": "Précédent",
       "Next": "Suivant",
       "Today, {0} selected/[translation hint:date]": "Aujourd’hui, sélection de {0}",
       "Today, {0}/[translation hint:date]": "Aujourd’hui, {0}",
-      "{0} selected/[translation hint:date]": "Sélection de {0}"
+      "{0} selected/[translation hint:date]": "Sélection de {0}",
+      "Previous Month": "Mois précédent",
+      "Next Month": "Mois suivant"
     },
     "de-DE": {
       "Previous": "Zurück",
       "Next": "Weiter",
       "Today, {0} selected/[translation hint:date]": "Heute, {0} ausgewählt",
       "Today, {0}/[translation hint:date]": "Heute, {0}",
-      "{0} selected/[translation hint:date]": "{0} ausgewählt"
+      "{0} selected/[translation hint:date]": "{0} ausgewählt",
+      "Previous Month": "Vorheriger Monat",
+      "Next Month": "Nächster Monat"
     },
     "it-IT": {
       "Previous": "Precedente",
       "Next": "Successivo",
       "Today, {0} selected/[translation hint:date]": "Oggi, {0} selezionati",
       "Today, {0}/[translation hint:date]": "Oggi, {0}",
-      "{0} selected/[translation hint:date]": "{0} selezionati"
+      "{0} selected/[translation hint:date]": "{0} selezionati",
+      "Previous Month": "Mese precedente",
+      "Next Month": "Mese successivo"
     },
     "es-ES": {
       "Previous": "Anterior",
       "Next": "Siguiente",
       "Today, {0} selected/[translation hint:date]": "Hoy, {0} seleccionados",
       "Today, {0}/[translation hint:date]": "Hoy, {0}",
-      "{0} selected/[translation hint:date]": "{0} seleccionados"
+      "{0} selected/[translation hint:date]": "{0} seleccionados",
+      "Previous Month": "Mes anterior",
+      "Next Month": "Mes siguiente"
     },
     "pt-BR": {
       "Previous": "Anterior",
       "Next": "Próximo",
       "Today, {0} selected/[translation hint:date]": "Hoje, {0} selecionados",
       "Today, {0}/[translation hint:date]": "Hoje, {0}",
-      "{0} selected/[translation hint:date]": "{0} selecionados"
+      "{0} selected/[translation hint:date]": "{0} selecionados",
+      "Previous Month": "Mês Anterior",
+      "Next Month": "Mês Seguinte"
     },
     "ja-JP": {
       "Previous": "前へ",
       "Next": "次へ",
       "Today, {0} selected/[translation hint:date]": "今日、{0} が選択されました",
       "Today, {0}/[translation hint:date]": "今日、{0}",
-      "{0} selected/[translation hint:date]": "{0} が選択されました"
+      "{0} selected/[translation hint:date]": "{0} が選択されました",
+      "Previous Month": "前月",
+      "Next Month": "翌月"
     },
     "ko-KR": {
       "Previous": "이전으로",
       "Next": "다음",
       "Today, {0} selected/[translation hint:date]": "현재 {0}이(가) 선택됨",
       "Today, {0}/[translation hint:date]": "현재 {0}",
-      "{0} selected/[translation hint:date]": "{0}이(가) 선택됨"
+      "{0} selected/[translation hint:date]": "{0}이(가) 선택됨",
+      "Previous Month": "지난 달",
+      "Next Month": "다음 달"
     },
     "zh-CN": {
       "Previous": "上一步",
       "Next": "下一步",
       "Today, {0} selected/[translation hint:date]": "已选定今天 {0}",
       "Today, {0}/[translation hint:date]": "今天 {0}",
-      "{0} selected/[translation hint:date]": "已选定 {0}"
+      "{0} selected/[translation hint:date]": "已选定 {0}",
+      "Previous Month": "上个月",
+      "Next Month": "下个月"
     },
     "zh-TW": {
       "Previous": "上一頁",
       "Next": "下一頁",
       "Today, {0} selected/[translation hint:date]": "今天，已選取 {0}",
       "Today, {0}/[translation hint:date]": "今天，{0}",
-      "{0} selected/[translation hint:date]": "已選取 {0} "
+      "{0} selected/[translation hint:date]": "已選取 {0} ",
+      "Previous Month": "上個月",
+      "Next Month": "下個月"
     },
     "nl-NL": {
       "Previous": "Vorige",
       "Next": "Volgende",
       "Today, {0} selected/[translation hint:date]": "Vandaag {0} geselecteerd",
       "Today, {0}/[translation hint:date]": "Vandaag {0} ",
-      "{0} selected/[translation hint:date]": "{0} geselecteerd"
+      "{0} selected/[translation hint:date]": "{0} geselecteerd",
+      "Previous Month": "Vorige maand",
+      "Next Month": "Volgende maand"
     },
     "da-DK": {
       "Previous": "Foregående",
       "Next": "Næste",
       "Today, {0} selected/[translation hint:date]": "I dag, {0} valgt",
       "Today, {0}/[translation hint:date]": "I dag, {0} ",
-      "{0} selected/[translation hint:date]": "{0} valgt"
+      "{0} selected/[translation hint:date]": "{0} valgt",
+      "Previous Month": "Sidste måned",
+      "Next Month": "Næste måned"
     },
     "fi-FI": {
       "Previous": "Edellinen",
       "Next": "Seuraava",
       "Today, {0} selected/[translation hint:date]": "Tänään, {0} valittu",
       "Today, {0}/[translation hint:date]": "Tänään, {0}",
-      "{0} selected/[translation hint:date]": "{0} valittu"
+      "{0} selected/[translation hint:date]": "{0} valittu",
+      "Previous Month": "Edellinen kuukausi",
+      "Next Month": "Seuraava kuukausi"
     },
     "nb-NO": {
       "Previous": "Forrige",
       "Next": "Neste",
       "Today, {0} selected/[translation hint:date]": "I dag, {0} valgt",
       "Today, {0}/[translation hint:date]": "I dag, {0}",
-      "{0} selected/[translation hint:date]": "{0} valgt"
+      "{0} selected/[translation hint:date]": "{0} valgt",
+      "Previous Month": "Forrige måned",
+      "Next Month": "Neste måned"
     },
     "sv-SE": {
       "Previous": "Föregående",
       "Next": "Nästa",
       "Today, {0} selected/[translation hint:date]": "Idag, {0} vald",
       "Today, {0}/[translation hint:date]": "Idag, {0}",
-      "{0} selected/[translation hint:date]": "{0} vald"
+      "{0} selected/[translation hint:date]": "{0} vald",
+      "Previous Month": "Föregående månad",
+      "Next Month": "Nästa månad"
     },
     "cs-CZ": {
       "Previous": "Předchozí",
       "Next": "Další",
       "Today, {0} selected/[translation hint:date]": "Dnes je vybráno: {0}",
       "Today, {0}/[translation hint:date]": "Dnes, {0}",
-      "{0} selected/[translation hint:date]": "Vybráno: {0}"
+      "{0} selected/[translation hint:date]": "Vybráno: {0}",
+      "Previous Month": "Předchozí měsíc",
+      "Next Month": "Příští měsíc"
     },
     "pl-PL": {
       "Previous": "Wstecz",
       "Next": "Dalej",
       "Today, {0} selected/[translation hint:date]": "Dziś, wybrano {0}",
       "Today, {0}/[translation hint:date]": "Dziś, {0}",
-      "{0} selected/[translation hint:date]": "wybrano {0}"
+      "{0} selected/[translation hint:date]": "wybrano {0}",
+      "Previous Month": "Poprzedni miesiąc",
+      "Next Month": "Następny miesiąc"
     },
     "ru-RU": {
       "Previous": "Предыдущий",
       "Next": "Следующий",
       "Today, {0} selected/[translation hint:date]": "Сегодня, {0}, выбрано",
       "Today, {0}/[translation hint:date]": "Сегодня, {0}",
-      "{0} selected/[translation hint:date]": "{0} выбрано"
+      "{0} selected/[translation hint:date]": "{0} выбрано",
+      "Previous Month": "Предыдущий месяц",
+      "Next Month": "Следующий месяц"
     },
     "tr-TR": {
       "Previous": "Önceki",
       "Next": "İleri",
       "Today, {0} selected/[translation hint:date]": "Bugün, {0} seçildi",
       "Today, {0}/[translation hint:date]": "Bugün, {0}",
-      "{0} selected/[translation hint:date]": "{0} seçildi"
+      "{0} selected/[translation hint:date]": "{0} seçildi",
+      "Previous Month": "Önceki Ay",
+      "Next Month": "Gelecek Ay"
     }
   };
 
@@ -32668,8 +32727,8 @@ var Coral = (function (exports) {
     el6.className += " _coral-Calendar-prevMonth";
     el6.setAttribute("is", "coral-button");
     el6.setAttribute("variant", "quietaction");
-    el6.setAttribute("aria-label", data_0["i18n"]["get"]('Previous'));
-    el6.setAttribute("title", data_0["i18n"]["get"]('Previous'));
+    el6.setAttribute("aria-label", data_0["i18n"]["get"]('Previous Month'));
+    el6.setAttribute("title", data_0["i18n"]["get"]('Previous Month'));
     var el7 = document.createTextNode("\n    ");
     el6.appendChild(el7);
     var el8 = this["prevLabel"] = document.createElement("coral-button-label");
@@ -32686,8 +32745,8 @@ var Coral = (function (exports) {
     el11.className += " _coral-Calendar-nextMonth";
     el11.setAttribute("is", "coral-button");
     el11.setAttribute("variant", "quietaction");
-    el11.setAttribute("aria-label", data_0["i18n"]["get"]('Next'));
-    el11.setAttribute("title", data_0["i18n"]["get"]('Next'));
+    el11.setAttribute("aria-label", data_0["i18n"]["get"]('Next Month'));
+    el11.setAttribute("title", data_0["i18n"]["get"]('Next Month'));
     var el12 = document.createTextNode("\n    ");
     el11.appendChild(el12);
     var el13 = this["nextLabel"] = document.createElement("coral-button-label");
@@ -34251,8 +34310,9 @@ var Coral = (function (exports) {
         this.appendChild(this._elements.wrapper); // The 'asset' setter knows to insert the element just before the wrapper node.
 
         this.asset = asset; // In case a lot of alerts are added, they will not overflow the card
+        // Also check whether any alerts are available
 
-        this.classList.toggle("".concat(CLASSNAME$w, "--overflow"), this.info.scrollHeight > this.clientHeight);
+        this.classList.toggle("".concat(CLASSNAME$w, "--overflow"), this.info.childNodes.length && this.info.scrollHeight > this.clientHeight);
       }
     }, {
       key: "asset",
@@ -37697,70 +37757,90 @@ var Coral = (function (exports) {
 
   var template$l = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
-    var el0 = this["input"] = document.createElement("input");
-    el0.setAttribute("type", "hidden");
-    el0.setAttribute("name", "");
-    el0.setAttribute("handle", "input");
-    frag.appendChild(el0);
+    var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
+    data = data_0;
+    var labelHourId = data.commons.getUID();
+    var labelMinuteId = data.commons.getUID();
+    data_0 = data;
     var el1 = document.createTextNode("\n");
     frag.appendChild(el1);
-    var el2 = this["valueAsText"] = document.createElement("time");
-    el2.setAttribute("handle", "valueAsText");
-    el2.id = data_0["commons"]["getUID"]();
-    el2.setAttribute("hidden", "");
+    var el2 = this["input"] = document.createElement("input");
+    el2.setAttribute("type", "hidden");
+    el2.setAttribute("name", "");
+    el2.setAttribute("handle", "input");
     frag.appendChild(el2);
     var el3 = document.createTextNode("\n");
     frag.appendChild(el3);
-    var el4 = this["hours"] = document.createElement("input", "coral-textfield");
-    el4.setAttribute("is", "coral-textfield");
+    var el4 = this["valueAsText"] = document.createElement("time");
+    el4.setAttribute("handle", "valueAsText");
     el4.id = data_0["commons"]["getUID"]();
-    el4.setAttribute("type", "number");
-    el4.setAttribute("min", "0");
-    el4.setAttribute("max", "23");
-    el4.className += " _coral-Clock-hour";
-    el4.setAttribute("handle", "hours");
-    el4.setAttribute("aria-label", data_0["i18n"]["get"]('Hours'));
+    el4.setAttribute("hidden", "");
     frag.appendChild(el4);
     var el5 = document.createTextNode("\n");
     frag.appendChild(el5);
-    var el6 = this["divider"] = document.createElement("span");
-    el6.className += " _coral-Clock-divider";
-    el6.setAttribute("handle", "divider");
-    el6.textContent = ":";
+    var el6 = document.createElement("label");
+    el6.setAttribute("for", labelHourId);
+    el6.className += " coral-Form-fieldlabel";
+    el6.textContent = data_0["i18n"]["get"]('Hours');
     frag.appendChild(el6);
     var el7 = document.createTextNode("\n");
     frag.appendChild(el7);
-    var el8 = this["minutes"] = document.createElement("input", "coral-textfield");
+    var el8 = this["hours"] = document.createElement("input", "coral-textfield");
     el8.setAttribute("is", "coral-textfield");
+    el8.id = labelHourId;
     el8.setAttribute("type", "number");
     el8.setAttribute("min", "0");
-    el8.setAttribute("max", "59");
-    el8.className += " _coral-Clock-minute";
-    el8.setAttribute("handle", "minutes");
-    el8.setAttribute("aria-label", data_0["i18n"]["get"]('Minutes'));
+    el8.setAttribute("max", "23");
+    el8.className += " _coral-Clock-hour";
+    el8.setAttribute("handle", "hours");
     frag.appendChild(el8);
     var el9 = document.createTextNode("\n");
     frag.appendChild(el9);
-    var el10 = this["period"] = document.createElement("coral-select");
-    el10.setAttribute("handle", "period");
-    el10.className += " _coral-Clock-period";
-    el10.setAttribute("hidden", "");
-    el10.setAttribute("aria-label", data_0["i18n"]["get"]('AM/PM'));
-    var el11 = document.createTextNode("\n  ");
-    el10.appendChild(el11);
-    var el12 = document.createElement("coral-select-item");
-    el12.setAttribute("value", "am");
-    el10.appendChild(el12);
-    var el13 = document.createTextNode("\n  ");
-    el10.appendChild(el13);
-    var el14 = document.createElement("coral-select-item");
-    el14.setAttribute("value", "pm");
-    el10.appendChild(el14);
-    var el15 = document.createTextNode("\n");
-    el10.appendChild(el15);
+    var el10 = this["divider"] = document.createElement("span");
+    el10.className += " _coral-Clock-divider";
+    el10.setAttribute("handle", "divider");
+    el10.textContent = ":";
     frag.appendChild(el10);
-    var el16 = document.createTextNode("\n");
+    var el11 = document.createTextNode("\n");
+    frag.appendChild(el11);
+    var el12 = document.createElement("label");
+    el12.setAttribute("for", labelMinuteId);
+    el12.className += " coral-Form-fieldlabel";
+    el12.textContent = data_0["i18n"]["get"]('Minutes');
+    frag.appendChild(el12);
+    var el13 = document.createTextNode("\n");
+    frag.appendChild(el13);
+    var el14 = this["minutes"] = document.createElement("input", "coral-textfield");
+    el14.setAttribute("is", "coral-textfield");
+    el14.id = labelMinuteId;
+    el14.setAttribute("type", "number");
+    el14.setAttribute("min", "0");
+    el14.setAttribute("max", "59");
+    el14.className += " _coral-Clock-minute";
+    el14.setAttribute("handle", "minutes");
+    frag.appendChild(el14);
+    var el15 = document.createTextNode("\n");
+    frag.appendChild(el15);
+    var el16 = this["period"] = document.createElement("coral-select");
+    el16.setAttribute("handle", "period");
+    el16.className += " _coral-Clock-period";
+    el16.setAttribute("hidden", "");
+    el16.setAttribute("aria-label", data_0["i18n"]["get"]('AM/PM'));
+    var el17 = document.createTextNode("\n  ");
+    el16.appendChild(el17);
+    var el18 = document.createElement("coral-select-item");
+    el18.setAttribute("value", "am");
+    el16.appendChild(el18);
+    var el19 = document.createTextNode("\n  ");
+    el16.appendChild(el19);
+    var el20 = document.createElement("coral-select-item");
+    el20.setAttribute("value", "pm");
+    el16.appendChild(el20);
+    var el21 = document.createTextNode("\n");
+    el16.appendChild(el21);
     frag.appendChild(el16);
+    var el22 = document.createTextNode("\n");
+    frag.appendChild(el22);
     return frag;
   };
 
@@ -37827,7 +37907,7 @@ var Coral = (function (exports) {
 
 
       _this._elements = {};
-      template$l.call(_this._elements, {
+      _this._template = template$l.call(_this._elements, {
         commons: commons,
         i18n: i18n
       }); // Pre-define labellable element
@@ -38044,8 +38124,6 @@ var Coral = (function (exports) {
 
       /** @ignore */
       value: function render() {
-        var _this2 = this;
-
         _get(_getPrototypeOf(Clock.prototype), "render", this).call(this);
 
         this.classList.add(CLASSNAME$B); // a11y
@@ -38070,9 +38148,7 @@ var Coral = (function (exports) {
         } // Render template
 
 
-        ['input', 'valueAsText', 'hours', 'divider', 'minutes', 'period'].forEach(function (handle) {
-          _this2.appendChild(_this2._elements[handle]);
-        });
+        this.appendChild(this._template);
 
         this._syncDisplay();
       }
@@ -38106,12 +38182,12 @@ var Coral = (function (exports) {
         return this._valueFormat || DEFAULT_TIME_FORMAT;
       },
       set: function set(value) {
-        var _this3 = this;
+        var _this2 = this;
 
         var setValueFormat = function setValueFormat(newValue) {
-          _this3._valueFormat = _this3._extractTimeFormat(transform.string(newValue).trim(), TIME_REG_EXP, DEFAULT_TIME_FORMAT);
+          _this2._valueFormat = _this2._extractTimeFormat(transform.string(newValue).trim(), TIME_REG_EXP, DEFAULT_TIME_FORMAT);
 
-          _this3._reflectAttribute('valueformat', _this3._valueFormat);
+          _this2._reflectAttribute('valueformat', _this2._valueFormat);
         }; // Once the valueFormat is set, we make sure the value is also correct
 
 
@@ -38331,21 +38407,10 @@ var Coral = (function (exports) {
           // prepend the labelledBy value to the ids array
           ids.unshift(labelledBy); // Set aria-labelledby attribute on the labellable element joining ids array into space-delimited list of ids.
 
-          this.setAttribute('aria-labelledby', ids.join(' ')); // Set label for attribute
-
-          var labelElement = document.getElementById(labelledBy);
-
-          if (labelElement && labelElement.tagName === 'LABEL') {
-            labelElement.setAttribute('for', this._elements.hours.id);
-            this._labelElement = labelElement;
-          }
+          this.setAttribute('aria-labelledby', ids.join(' '));
         } else {
           // labelledBy property is null, remove the aria-labelledby attribute.
-          this.removeAttribute('aria-labelledby'); // Remove label for attribute
-
-          if (this._labelElement) {
-            this._labelElement.removeAttribute('for');
-          }
+          this.removeAttribute('aria-labelledby');
         }
       }
     }], [{
@@ -74492,7 +74557,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "4.1.0";
+  var version = "4.1.1";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

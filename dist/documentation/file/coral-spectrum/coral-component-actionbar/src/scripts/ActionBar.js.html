@@ -877,6 +877,7 @@ class ActionBar extends BaseComponent(HTMLElement) {
     else if (!item.hasAttribute(&apos;coral-actionbar-offscreen&apos;)) {
       // actually just move element offscreen to be able to measure the size while calculating the layout
       item.setAttribute(&apos;coral-actionbar-offscreen&apos;, &apos;&apos;);
+      item.style.visibility = &apos;hidden&apos;;
       // if I do not force a browser redraw webkit has layouting problems
       this._forceWebkitRedraw(item);
     }
@@ -890,6 +891,7 @@ class ActionBar extends BaseComponent(HTMLElement) {
     else if (item.hasAttribute(&apos;coral-actionbar-offscreen&apos;)) {
       // actually just move element onscreen again (see _hideItem)
       item.removeAttribute(&apos;coral-actionbar-offscreen&apos;);
+      item.style.visibility = &apos;&apos;;
       // if I do not force a browser redraw webkit has layouting problems
       this._forceWebkitRedraw(item);
     }

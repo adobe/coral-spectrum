@@ -441,6 +441,8 @@ class ActionBarPrimary extends ActionBarContainer(BaseComponent(HTMLElement)) {
     
     for (let i = 0; i &lt; this._itemsInPopover.length; i++) {
       item = this._itemsInPopover[i];
+
+      item.style.visibility = &apos;hidden&apos;;
       
       // remove tabindex again
       wrappedItem = getFirstSelectableWrappedItem(item);

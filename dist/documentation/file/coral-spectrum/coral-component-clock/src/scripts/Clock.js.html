@@ -487,7 +487,7 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
     
     // Prepare templates
     this._elements = {};
-    base.call(this._elements, {commons, i18n});
+    this._template = base.call(this._elements, {commons, i18n});
   
     // Pre-define labellable element
     this._labellableElement = this;
@@ -734,22 +734,10 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   
       // Set aria-labelledby attribute on the labellable element joining ids array into space-delimited list of ids.
       this.setAttribute(&apos;aria-labelledby&apos;, ids.join(&apos; &apos;));
-  
-      // Set label for attribute
-      const labelElement = document.getElementById(labelledBy);
-      if (labelElement &amp;&amp; labelElement.tagName === &apos;LABEL&apos;) {
-        labelElement.setAttribute(&apos;for&apos;, this._elements.hours.id);
-        this._labelElement = labelElement;
-      }
     }
     else {
       // labelledBy property is null, remove the aria-labelledby attribute.
       this.removeAttribute(&apos;aria-labelledby&apos;);
-  
-      // Remove label for attribute
-      if (this._labelElement) {
-        this._labelElement.removeAttribute(&apos;for&apos;);
-      }
     }
   }
   
@@ -975,9 +963,7 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
     }
     
     // Render template
-    [&apos;input&apos;, &apos;valueAsText&apos;, &apos;hours&apos;, &apos;divider&apos;, &apos;minutes&apos;, &apos;period&apos;].forEach((handle) =&gt; {
-      this.appendChild(this._elements[handle]);
-    });
+    this.appendChild(this._template);
     
     this._syncDisplay();
   }

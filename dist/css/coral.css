@@ -13550,6 +13550,7 @@ coral-select-item {
   text-align: center;
   width: 16px;
   vertical-align: middle;
+  padding-top: 21px;
 }
 ._coral-Clock ._coral-Clock-period {
   display: table-cell;
@@ -13557,6 +13558,7 @@ coral-select-item {
   width: 73px;
   vertical-align: top;
   padding-left: 16px;
+  padding-top: 21px;
 }
 
 /**
