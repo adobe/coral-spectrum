@@ -178,7 +178,7 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
       return;
     }
 
-    this._itemsInPopover.forEach(function(item) {
+    this._itemsInPopover.forEach((item) => {
       item.style.visibility = '';
     });
   

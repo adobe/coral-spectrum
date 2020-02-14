@@ -587,23 +587,21 @@ describe('ActionBar', function() {
       }, 200);
     });
   
-    it('selectable items at 2nd level inside coral-actionbar-item in tree should be tab-able', function (done) {
+    it('selectable items at 2nd level inside coral-actionbar-item in tree should be tab-able', function () {
       const bar = helpers.build(window.__html__['ActionBar.hiddenitems.html']);
       expect(document.activeElement.tagName.toLowerCase()).to.not.equal('button', 'activeElement should not be an one of the buttons inside the actionbar');
     
       let leftActionBarItems = bar.primary.items.getAll();
       let uploadButton = leftActionBarItems[2].querySelector('coral-fileupload>button');
       expect(uploadButton.getAttribute('tabindex')).to.equal('-1', 'upload button should not be tabable');
-      done();
     });
   
-    it('offscreen items should not be visible', function (done) {
+    it('offscreen items should not be visible', function () {
       const bar = helpers.build(window.__html__['ActionBar.hiddenitems.html']);
       expect(document.activeElement.tagName.toLowerCase()).to.not.equal('button', 'activeElement should not be an one of the buttons inside the actionbar');
       let leftActionBarItems = bar.primary.items.getAll();
       let rightActionBarItems = bar.secondary.items.getAll();
-    
-    
+      
       let i = 0;
       for (; i < leftActionBarItems.length; i++) {
         if (leftActionBarItems[i].hasAttribute('coral-actionbar-offscreen')) {
@@ -635,7 +633,6 @@ describe('ActionBar', function() {
           expect(rightPopOverItems[i].style.visibility).to.equal('', 'offscreen items should be accessible("' + i + '" failed"');
         }
       }
-      done();
     });
   
     describe('Smart Overlay', () => {
