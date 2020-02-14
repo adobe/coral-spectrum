@@ -33,6 +33,18 @@ export default function getFirstSelectableWrappedItem(wrapperItem) {
       return child;
     }
   }
+
+  // search at 2nd level, some elements like coral-fileupload has selectable items inside them
+  for (let i = 0; i < wrapperItem.children.length; i++) {
+    child = wrapperItem.children[i];
+    for(let j = 0; j<child.children.length; j++) {
+      let subChild = child.children[j];
+      // maybe filter even more elements? (opacity, display='none', position='absolute' ...)
+      if(subChild.offsetParent && subChild.matches(commons.FOCUSABLE_ELEMENT_SELECTOR)) {
+        return subChild;
+      }
+    }
+  }
   
   return null;
 }

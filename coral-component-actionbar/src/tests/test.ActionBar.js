@@ -564,6 +564,80 @@ describe('ActionBar', function() {
       }, 200);
     });
   
+    it('should allow tab navigation to actionbar item, if first item is not selectable then next selectable item should be tab-able. e.g. first item is hidden', function (done) {
+      const bar = helpers.build(window.__html__['ActionBar.hiddenitems.html']);
+      expect(document.activeElement.tagName.toLowerCase()).to.not.equal('button', 'activeElement should not be an one of the buttons inside the actionbar');
+    
+      let leftActionBarItems = bar.primary.items.getAll();
+    
+      // Wait for resize listener
+      window.setTimeout(function () {
+        let firstLeftButton = leftActionBarItems[0].querySelector('button');
+        firstLeftButton.focus();
+        expect(document.activeElement).to.not.equal(firstLeftButton, 'activeElement should not be the first wrapped item (here button) inside the actionbar');
+      
+        let secondLeftButton = leftActionBarItems[1].querySelector('button');
+        secondLeftButton.focus();
+        expect(document.activeElement).to.equal(secondLeftButton, 'activeElement should now be the second wrapped item (here button) inside the actionbar');
+        expect(document.activeElement.getAttribute('tabindex')).to.not.equal('-1', 'this element should be tab-able');
+        expect(bar.primary._elements.moreButton.getAttribute('tabindex')).to.equal('-1', 'more should not be tab-able');
+        
+        expect(bar.secondary._elements.moreButton.getAttribute('tabindex')).to.not.equal('-1', 'more should be tab-able');
+        done();
+      }, 200);
+    });
+  
+    it('selectable items at 2nd level inside coral-actionbar-item in tree should be tab-able', function (done) {
+      const bar = helpers.build(window.__html__['ActionBar.hiddenitems.html']);
+      expect(document.activeElement.tagName.toLowerCase()).to.not.equal('button', 'activeElement should not be an one of the buttons inside the actionbar');
+    
+      let leftActionBarItems = bar.primary.items.getAll();
+      let uploadButton = leftActionBarItems[2].querySelector('coral-fileupload>button');
+      expect(uploadButton.getAttribute('tabindex')).to.equal('-1', 'upload button should not be tabable');
+      done();
+    });
+  
+    it('offscreen items should not be visible', function (done) {
+      const bar = helpers.build(window.__html__['ActionBar.hiddenitems.html']);
+      expect(document.activeElement.tagName.toLowerCase()).to.not.equal('button', 'activeElement should not be an one of the buttons inside the actionbar');
+      let leftActionBarItems = bar.primary.items.getAll();
+      let rightActionBarItems = bar.secondary.items.getAll();
+    
+    
+      let i = 0;
+      for (; i < leftActionBarItems.length; i++) {
+        if (leftActionBarItems[i].hasAttribute('coral-actionbar-offscreen')) {
+          expect(leftActionBarItems[i].style.visibility).to.equal('hidden', 'offscreen items should not be accessible("' + i + '" failed"');
+        }
+      }
+      for (i = 0; i < rightActionBarItems.length; i++) {
+        if (rightActionBarItems[i].hasAttribute('coral-actionbar-offscreen')) {
+          expect(rightActionBarItems[i].style.visibility).to.equal('hidden', 'offscreen items should not be accessible("' + i + '" failed"');
+        }
+      }
+  
+      bar.primary._elements.moreButton.click();
+      expect(bar.primary._elements.overlay.open).to.equal(true, 'left popover should be opened');
+      let leftPopOverItems =  bar.primary._itemsInPopover;
+      
+      for (i = 0; i < leftPopOverItems.length; i++) {
+        if (leftPopOverItems[i].hasAttribute('coral-actionbar-offscreen')) {
+          expect(leftPopOverItems[i].style.visibility).to.equal('', 'offscreen items should be accessible("' + i + '" failed"');
+        }
+      }
+  
+      bar.secondary._elements.moreButton.click();
+      expect(bar.secondary._elements.overlay.open).to.equal(true, 'right popover should be opened');
+  
+      let rightPopOverItems =  bar.secondary._itemsInPopover;
+      for (i = 0; i < rightPopOverItems.length; i++) {
+        if (rightPopOverItems[i].hasAttribute('coral-actionbar-offscreen')) {
+          expect(rightPopOverItems[i].style.visibility).to.equal('', 'offscreen items should be accessible("' + i + '" failed"');
+        }
+      }
+      done();
+    });
+  
     describe('Smart Overlay', () => {
       helpers.testSmartOverlay('coral-actionbar-primary');
       helpers.testSmartOverlay('coral-actionbar-secondary');
