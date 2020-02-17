@@ -21,7 +21,7 @@ const CLASSNAME = '_coral-Tabs-item';
 /**
  * Parameter for toggling aria-label handling by coral.
  */
-const CORAL_HANDLE_ARIA = 'coral-aria-label';
+const DISABLE_AUTO_ARIA_LABEL = 'disable-auto-aria-label';
 
 /**
  @class Coral.Tab
@@ -92,9 +92,9 @@ class Tab extends BaseComponent(HTMLElement) {
     return iconElement ? iconElement.icon : '';
   }
   set icon(value) {
-    const shouldHandleAriaLabel = this.getAttribute(CORAL_HANDLE_ARIA);
+    const shouldHandleAriaLabel = this.hasAttribute(DISABLE_AUTO_ARIA_LABEL);
     if (shouldHandleAriaLabel) {
-      this._elements.icon.setAttribute(CORAL_HANDLE_ARIA, this.getAttribute(CORAL_HANDLE_ARIA));
+      this._elements.icon.setAttribute(DISABLE_AUTO_ARIA_LABEL, '');
     }
     const iconElement = this._elements.icon;
     iconElement.icon = value;
