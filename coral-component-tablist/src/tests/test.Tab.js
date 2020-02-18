@@ -157,19 +157,19 @@ describe('Tab', function() {
     describe('#icon', function() {
       var item;
 
-      it('should propagate coral-aria-label flag to tab\'s icon', function() {
+      it('should propagate autoAriaLabel flag to tab\'s icon', function() {
         item = new Tab();
-        item.setAttribute('coral-aria-label', 'test123');
+        item.setAttribute('autoAriaLabel', 'test123');
         item.setAttribute('icon', 'Add');
 
-        expect(item._elements.icon.getAttribute('coral-aria-label')).to.equal('test123');
+        expect(item._elements.icon.getAttribute('autoAriaLabel')).to.equal('test123');
       });
 
-      it('should not propagate coral-aria-label flag to tab\'s icon if not set.', function() {
+      it('should not propagate autoAriaLabel flag to tab\'s icon if not set.', function() {
         item = new Tab();
         item.setAttribute('icon', 'Add');
 
-        expect(item._elements.icon.getAttribute('coral-aria-label')).to.be.a('null');
+        expect(item._elements.icon.getAttribute('autoAriaLabel')).to.be.a('null');
       });
     });
   });

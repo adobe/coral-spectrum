@@ -394,10 +394,10 @@ describe('Icon', function() {
         expect(icon.hasAttribute('aria-label')).to.be.false;
       });
 
-      it('shouldnt set aria-label when coral-aria-label is false', function (done) {
+      it('shouldnt set aria-label when autoAriaLabel is false', function (done) {
         var icon = helpers.build(new Icon());
 
-        icon.setAttribute('coral-aria-label', 'false');
+        icon.setAttribute('autoAriaLabel', 'off');
         icon.icon = 'add';
 
         helpers.next(function () {
@@ -406,10 +406,10 @@ describe('Icon', function() {
         });
       });
 
-      it('should set default aria-label when coral-aria-label is anything else than false', function (done) {
+      it('should set default aria-label when autoAriaLabel is anything else than false', function (done) {
         var icon = helpers.build(new Icon());
 
-        icon.setAttribute('coral-aria-label', 'asdf');
+        icon.setAttribute('autoAriaLabel', 'asdf');
         icon.icon = 'add';
 
         helpers.next(function () {
