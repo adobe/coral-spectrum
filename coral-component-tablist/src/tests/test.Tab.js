@@ -157,19 +157,19 @@ describe('Tab', function() {
     describe('#icon', function() {
       var item;
 
-      it('should propagate disable-auto-aria-label flag to tab\'s icon', function() {
+      it('should propagate coral-aria-label flag to tab\'s icon', function() {
         item = new Tab();
-        item.setAttribute('disable-auto-aria-label', '');
+        item.setAttribute('coral-aria-label', 'test123');
         item.setAttribute('icon', 'Add');
 
-        expect(item._elements.icon.hasAttribute('disable-auto-aria-label')).to.be.true;
+        expect(item._elements.icon.getAttribute('coral-aria-label')).to.equal('test123');
       });
 
-      it('should not propagate disable-auto-aria-label flag to tab\'s icon if not set.', function() {
+      it('should not propagate coral-aria-label flag to tab\'s icon if not set.', function() {
         item = new Tab();
         item.setAttribute('icon', 'Add');
 
-        expect(item._elements.icon.hasAttribute('disable-auto-aria-label')).to.be.false;
+        expect(item._elements.icon.getAttribute('coral-aria-label')).to.be.a('null');
       });
     });
   });

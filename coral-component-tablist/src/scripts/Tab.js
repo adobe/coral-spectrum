@@ -92,8 +92,8 @@ class Tab extends BaseComponent(HTMLElement) {
     return iconElement ? iconElement.icon : '';
   }
   set icon(value) {
-    const disableAutoAriaLabel = this.hasAttribute(DISABLE_AUTO_ARIA_LABEL);
-    if (disableAutoAriaLabel) {
+    const shouldHandleAriaLabel = this.hasAttribute(DISABLE_AUTO_ARIA_LABEL);
+    if (shouldHandleAriaLabel) {
       this._elements.icon.setAttribute(DISABLE_AUTO_ARIA_LABEL, '');
     }
     const iconElement = this._elements.icon;
