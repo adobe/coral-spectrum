@@ -394,10 +394,10 @@ describe('Icon', function() {
         expect(icon.hasAttribute('aria-label')).to.be.false;
       });
 
-      it('shouldnt set aria-label when disable-auto-aria-label is set to empty string', function (done) {
+      it('shouldnt set aria-label when coral-aria-label is false', function (done) {
         var icon = helpers.build(new Icon());
 
-        icon.setAttribute('disable-auto-aria-label', '');
+        icon.setAttribute('coral-aria-label', 'false');
         icon.icon = 'add';
 
         helpers.next(function () {
@@ -406,33 +406,10 @@ describe('Icon', function() {
         });
       });
 
-      it('shouldnt set aria-label when disable-auto-aria-label is set to it\'s canonical name', function (done) {
+      it('should set default aria-label when coral-aria-label is anything else than false', function (done) {
         var icon = helpers.build(new Icon());
 
-        icon.setAttribute('disable-auto-aria-label', 'disable-auto-aria-label');
-        icon.icon = 'add';
-
-        helpers.next(function () {
-          expect(icon.hasAttribute('aria-label')).to.be.false;
-          done();
-        });
-      });
-
-      it('shouldnt set aria-label when disable-auto-aria-label is set', function (done) {
-        var icon = helpers.build(new Icon());
-
-        icon.setAttribute('disable-auto-aria-label');
-        icon.icon = 'add';
-
-        helpers.next(function () {
-          expect(icon.hasAttribute('aria-label')).to.be.false;
-          done();
-        });
-      });
-
-      it('should set default aria-label when disable-auto-aria-label not set', function (done) {
-        var icon = helpers.build(new Icon());
-
+        icon.setAttribute('coral-aria-label', 'asdf');
         icon.icon = 'add';
 
         helpers.next(function () {

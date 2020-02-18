@@ -73,7 +73,7 @@ const SPLIT_CAMELCASE_REGEX = /([a-z0-9])([A-Z])/g;
 /**
  * Parameter for toggling aria-label handling by coral.
  */
-const DISABLE_AUTO_ARIA_LABEL = 'disable-auto-aria-label';
+const CORAL_HANDLE_ARIA = 'coral-aria-label';
 
 /**
  Returns capitalized string. This is used to map the icons with their SVG counterpart.
@@ -322,7 +322,7 @@ class Icon extends BaseComponent(HTMLElement) {
   /**
    Autogenerating aria-label is being deprecated
    Please provide your own contextual proper aria-label[ledby] information
-   Please use disable-auto-aria-label boolean attribute, the flag removes aria-label handling and will be default behaviour in the future.
+   Please use coral-aria-label='false', the flag removes aria-label handling and will be default behaviour in the future.
 
    Updates the aria-label or img alt attribute depending on value of alt, title or icon.
 
@@ -331,10 +331,11 @@ class Icon extends BaseComponent(HTMLElement) {
    to explicitly override the default behavior, or when we remove an alt attribute
    thus restoring the default behavior, we make sure to update the alt text.
    @private
+   @deprecated
    */
   _updateAltText(value) {
     const isImage = this.contains(this._elements.image);
-    const shouldHandleAriaLabel = !this.hasAttribute(DISABLE_AUTO_ARIA_LABEL);
+    const shouldHandleAriaLabel = this.getAttribute(CORAL_HANDLE_ARIA, 'true') !== 'false';
 
     let altText;
     if (typeof value === 'string') {
@@ -367,9 +368,6 @@ class Icon extends BaseComponent(HTMLElement) {
     }
   }
 
-  /**
-   * @deprecated
-   */
   _updateAriaLabel(altText, isImage) {
     if (isImage) {
       this.removeAttribute('aria-label');
