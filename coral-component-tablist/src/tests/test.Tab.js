@@ -157,12 +157,12 @@ describe('Tab', function() {
     describe('#icon', function() {
       var item;
 
-      it('should propagate autoAriaLabel flag to tab\'s icon', function() {
+      it('should set autoAriaLabel flag to tab\'s icon when tab has aria-label on it\'s own', function() {
         item = new Tab();
-        item.setAttribute('autoAriaLabel', 'test123');
+        item.setAttribute('aria-label', 'test123');
         item.setAttribute('icon', 'Add');
 
-        expect(item._elements.icon.getAttribute('autoAriaLabel')).to.equal('test123');
+        expect(item._elements.icon.getAttribute('autoAriaLabel')).to.equal('off');
       });
 
       it('should not propagate autoAriaLabel flag to tab\'s icon if not set.', function() {
