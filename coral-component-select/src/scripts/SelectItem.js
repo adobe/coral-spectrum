@@ -100,7 +100,7 @@ class SelectItem extends BaseComponent(HTMLElement) {
         val = this.textContent.replace(/\s{2,}/g, ' ').trim();
       }
       else {
-        val = this.getAttribute('value')
+        val = this.getAttribute('value');
       }
     }
 
