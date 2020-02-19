@@ -50,16 +50,25 @@ describe('Select.Item', function() {
     describe('#value', function() {
       it('should default empty string', function() {
         expect(el.value).to.equal('');
-        
+
         expect(el.hasAttribute('value')).to.be.false;
       });
 
-      it('should default to the content', function() {
+      it('should default to the content when value is null', function() {
         el.content.innerHTML = 'Switzerland';
 
         expect(el.content.innerHTML).to.equal('Switzerland');
         expect(el.value).to.equal('Switzerland');
         expect(el.hasAttribute('value')).to.be.false;
+      });
+
+      it('should default to the empty string when value is empty string', function() {
+        el.setAttribute('value', '');
+        el.content.innerHTML = 'Switzerland';
+
+        expect(el.content.innerHTML).to.equal('Switzerland');
+        expect(el.value).to.equal('');
+        expect(el.hasAttribute('value')).to.be.true;
       });
 
       it('should keep maximum 1 space from the content', function() {
@@ -86,7 +95,7 @@ describe('Select.Item', function() {
 
       it('should reflect the value', function() {
         el.value = 'crc';
-        
+
         expect(el.getAttribute('value')).to.equal('crc');
       });
     });
@@ -94,7 +103,7 @@ describe('Select.Item', function() {
     describe('#selected', function() {
       it('should be not be selected by default', function() {
         expect(el.selected).to.be.false;
-        
+
         expect(el.hasAttribute('selected')).to.be.false;
       });
 
@@ -138,7 +147,7 @@ describe('Select.Item', function() {
   describe('Markup', function() {
 
     describe('#content', function() {
-      
+
       it('should have content set to innerHTML if property not provided', function() {
         const el = helpers.build(window.__html__['Select.Item.base.html']);
         expect(el.content.innerHTML).to.equal('Costa Rica');
@@ -281,7 +290,7 @@ describe('Select.Item', function() {
     it('should always be hidden', function() {
       var el = helpers.build(new Select.Item());
       helpers.target.appendChild(el);
-      
+
       expect(el.offsetParent).to.equal(null);
     });
   });
