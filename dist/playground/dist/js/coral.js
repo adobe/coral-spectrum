@@ -2555,6 +2555,10 @@
       if (b = this.c.a.get(b)) return b.constructor;
     };
 
+    E.prototype.upgradeElement = function (b) {
+      y(this.c, b);
+    };
+
     E.prototype.whenDefined = function (b) {
       if (!k(b)) return Promise.reject(new SyntaxError("'" + b + "' is not a valid custom element name."));
       var a = this.l.get(b);
@@ -2580,6 +2584,7 @@
     E.prototype.define = E.prototype.define;
     E.prototype.get = E.prototype.get;
     E.prototype.whenDefined = E.prototype.whenDefined;
+    E.prototype.upgrade = E.prototype.upgradeElement;
     E.prototype.polyfillWrapFlushCallback = E.prototype.u;
     var F = window.Document.prototype.createElement,
         da = window.Document.prototype.createElementNS,
@@ -8961,7 +8966,7 @@
     function n() {
       var e = A.splice(0, A.length);
 
-      for (Ye = 0; e.length;) {
+      for (et = 0; e.length;) {
         e.shift().call(null, e.shift());
       }
     }
@@ -8974,25 +8979,25 @@
 
     function o(e) {
       for (var t, n = 0, r = e.length; n < r; n++) {
-        t = e[n], V(t, le[a(t)]);
+        t = e[n], V(t, ae[a(t)]);
       }
     }
 
     function l(e) {
       return function (t) {
-        ke(t) && (T(t, e), ae.length && r(t.querySelectorAll(ae), e));
+        ke(t) && (T(t, e), ie.length && r(t.querySelectorAll(ie), e));
       };
     }
 
     function a(e) {
-      var t = Ze.call(e, "is"),
+      var t = Ge.call(e, "is"),
           n = e.nodeName.toUpperCase(),
-          r = ue.call(oe, t ? te + t.toUpperCase() : ee + n);
+          r = ce.call(le, t ? ne + t.toUpperCase() : te + n);
       return t && -1 < r && !i(n, t) ? -1 : r;
     }
 
     function i(e, t) {
-      return -1 < ae.indexOf(e + '[is="' + t + '"]');
+      return -1 < ie.indexOf(e + '[is="' + t + '"]');
     }
 
     function u(e) {
@@ -9000,25 +9005,25 @@
           n = e.attrChange,
           r = e.attrName,
           o = e.target,
-          l = e[$] || 2,
-          a = e[Q] || 3;
-      !ot || o && o !== t || !t[Z] || "style" === r || e.prevValue === e.newValue && ("" !== e.newValue || n !== l && n !== a) || t[Z](r, n === l ? null : e.prevValue, n === a ? null : e.newValue);
+          l = e[Q] || 2,
+          a = e[W] || 3;
+      !at || o && o !== t || !t[j] || "style" === r || e.prevValue === e.newValue && ("" !== e.newValue || n !== l && n !== a) || t[j](r, n === l ? null : e.prevValue, n === a ? null : e.newValue);
     }
 
     function c(e) {
       var t = l(e);
       return function (e) {
-        A.push(t, e.target), Ye && clearTimeout(Ye), Ye = setTimeout(n, 1);
+        A.push(t, e.target), et && clearTimeout(et), et = setTimeout(n, 1);
       };
     }
 
     function s(e) {
-      rt && (rt = !1, e.currentTarget.removeEventListener(Y, s)), ae.length && r((e.target || y).querySelectorAll(ae), e.detail === q ? q : _), Re && d();
+      lt && (lt = !1, e.currentTarget.removeEventListener(J, s)), ie.length && r((e.target || y).querySelectorAll(ie), e.detail === B ? B : x), Ue && p();
     }
 
     function m(e, t) {
       var n = this;
-      ze.call(n, e, t), O.call(n, {
+      Xe.call(n, e, t), O.call(n, {
         target: n
       });
     }
@@ -9026,16 +9031,16 @@
     function f(e, t, n) {
       var r = t.apply(e, n),
           l = a(r);
-      return -1 < l && V(r, le[l]), n.pop() && ae.length && o(r.querySelectorAll(ae)), r;
+      return -1 < l && V(r, ae[l]), n.pop() && ie.length && o(r.querySelectorAll(ie)), r;
     }
 
-    function p(e, t) {
-      Fe(e, t), I ? I.observe(e, Qe) : (nt && (e.setAttribute = m, e[U] = D(e), e[k](J, O)), e[k](W, u)), e[K] && ot && (e.created = !0, e[K](), e.created = !1);
+    function d(e, t) {
+      Se(e, t), I ? I.observe(e, Ye) : (ot && (e.setAttribute = m, e[_] = D(e), e[k](ee, O)), e[k](Y, u)), e[X] && at && (e.created = !0, e[X](), e.created = !1);
     }
 
-    function d() {
-      for (var e, t = 0, n = _e.length; t < n; t++) {
-        e = _e[t], ie.contains(e) || (n--, _e.splice(t--, 1), T(e, q));
+    function p() {
+      for (var e, t = 0, n = xe.length; t < n; t++) {
+        e = xe[t], ue.contains(e) || (n--, xe.splice(t--, 1), T(e, B));
       }
     }
 
@@ -9047,43 +9052,43 @@
       var n,
           r,
           o = a(e);
-      -1 < o && (S(e, le[o]), o = 0, t !== _ || e[_] ? t !== q || e[q] || (e[_] = !1, e[q] = !0, r = "disconnected", o = 1) : (e[q] = !1, e[_] = !0, r = "connected", o = 1, Re && ue.call(_e, e) < 0 && _e.push(e)), o && (n = e[t + x] || e[r + x]) && n.call(e));
+      -1 < o && !Ze.call(e, "TEMPLATE") && (S(e, ae[o]), o = 0, t !== x || e[x] ? t !== B || e[B] || (e[x] = !1, e[B] = !0, r = "disconnected", o = 1) : (e[B] = !1, e[x] = !0, r = "connected", o = 1, Ue && ce.call(xe, e) < 0 && xe.push(e)), o && (n = e[t + q] || e[r + q]) && n.call(e));
     }
 
     function L() {}
 
     function M(e, t, n) {
-      var r = n && n[B] || "",
+      var r = n && n[Z] || "",
           o = t.prototype,
-          l = Ie(o),
+          l = Fe(o),
           a = t.observedAttributes || pe,
           i = {
         prototype: l
       };
-      Ue(l, K, {
+      _e(l, X, {
         value: function value() {
-          if (we) we = !1;else if (!this[ve]) {
-            this[ve] = !0, new t(this), o[K] && o[K].call(this);
-            var e = Ae[Ne.get(t)];
-            (!ge || e.create.length > 1) && H(this);
+          if (Ae) Ae = !1;else if (!this[He]) {
+            this[He] = !0, new t(this), o[X] && o[X].call(this);
+            var e = Oe[De.get(t)];
+            (!be || e.create.length > 1) && H(this);
           }
         }
-      }), Ue(l, Z, {
+      }), _e(l, j, {
         value: function value(e) {
-          -1 < ue.call(a, e) && o[Z] && o[Z].apply(this, arguments);
+          -1 < ce.call(a, e) && o[j] && o[j].apply(this, arguments);
         }
-      }), o[G] && Ue(l, j, {
-        value: o[G]
-      }), o[z] && Ue(l, X, {
+      }), o[z] && _e(l, G, {
         value: o[z]
-      }), r && (i[B] = r), e = e.toUpperCase(), Ae[e] = {
+      }), o[K] && _e(l, $, {
+        value: o[K]
+      }), r && (i[Z] = r), e = e.toUpperCase(), Oe[e] = {
         constructor: t,
-        create: r ? [r, De(e)] : [e]
-      }, Ne.set(t, e), y[R](e.toLowerCase(), i), g(e), Oe[e].r();
+        create: r ? [r, Ie(e)] : [e]
+      }, De.set(t, e), y[R](e.toLowerCase(), i), g(e), Ne[e].r();
     }
 
     function E(e) {
-      var t = Ae[e.toUpperCase()];
+      var t = Oe[e.toUpperCase()];
       return t && t.constructor;
     }
 
@@ -9092,22 +9097,22 @@
     }
 
     function H(e) {
-      for (var t, n = e[Z], r = n ? e.attributes : pe, o = r.length; o--;) {
+      for (var t, n = e[j], r = n ? e.attributes : pe, o = r.length; o--;) {
         t = r[o], n.call(e, t.name || t.nodeName, null, t.value || t.nodeValue);
       }
     }
 
     function g(e) {
-      return e = e.toUpperCase(), e in Oe || (Oe[e] = {}, Oe[e].p = new Ce(function (t) {
-        Oe[e].r = t;
-      })), Oe[e].p;
+      return e = e.toUpperCase(), e in Ne || (Ne[e] = {}, Ne[e].p = new we(function (t) {
+        Ne[e].r = t;
+      })), Ne[e].p;
     }
 
     function b() {
-      He && delete e.customElements, fe(e, "customElements", {
+      ge && delete e.customElements, de(e, "customElements", {
         configurable: !0,
         value: new L()
-      }), fe(e, "CustomElementRegistry", {
+      }), de(e, "CustomElementRegistry", {
         configurable: !0,
         value: L
       });
@@ -9118,13 +9123,13 @@
         if (n) {
           e[t] = function (e) {
             var t, r;
-            return e || (e = this), e[ve] || (we = !0, t = Ae[Ne.get(e.constructor)], r = ge && 1 === t.create.length, e = r ? Reflect.construct(n, pe, t.constructor) : y.createElement.apply(y, t.create), e[ve] = !0, we = !1, r || H(e)), e;
+            return e || (e = this), e[He] || (Ae = !0, t = Oe[De.get(e.constructor)], r = be && 1 === t.create.length, e = r ? Reflect.construct(n, pe, t.constructor) : y.createElement.apply(y, t.create), e[He] = !0, Ae = !1, r || H(e)), e;
           }, e[t].prototype = n.prototype;
 
           try {
             n.prototype.constructor = e[t];
           } catch (r) {
-            fe(n, ve, {
+            de(n, He, {
               value: e[t]
             });
           }
@@ -9134,8 +9139,8 @@
 
       y.createElement = function (e, t) {
         var n = v(t);
-        return n ? $e.call(this, e, De(n)) : $e.call(this, e);
-      }, Je || (tt = !0, y[R](""));
+        return n ? We.call(this, e, Ie(n)) : We.call(this, e);
+      }, tt || (rt = !0, y[R](""));
     }
 
     var y = e.document,
@@ -9296,65 +9301,66 @@
         V,
         P,
         R = "registerElement",
-        U = "__" + R + (1e5 * e.Math.random() >> 0),
+        U = 1e5 * e.Math.random() >> 0,
+        _ = "__" + R + U,
         k = "addEventListener",
-        _ = "attached",
-        x = "Callback",
-        q = "detached",
-        B = "extends",
-        Z = "attributeChanged" + x,
-        j = _ + x,
-        G = "connected" + x,
-        z = "disconnected" + x,
-        K = "created" + x,
-        X = q + x,
-        $ = "ADDITION",
-        Q = "REMOVAL",
-        W = "DOMAttrModified",
-        Y = "DOMContentLoaded",
-        J = "DOMSubtreeModified",
-        ee = "<",
-        te = "=",
-        ne = /^[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+$/,
-        re = ["ANNOTATION-XML", "COLOR-PROFILE", "FONT-FACE", "FONT-FACE-SRC", "FONT-FACE-URI", "FONT-FACE-FORMAT", "FONT-FACE-NAME", "MISSING-GLYPH"],
-        oe = [],
+        x = "attached",
+        q = "Callback",
+        B = "detached",
+        Z = "extends",
+        j = "attributeChanged" + q,
+        G = x + q,
+        z = "connected" + q,
+        K = "disconnected" + q,
+        X = "created" + q,
+        $ = B + q,
+        Q = "ADDITION",
+        W = "REMOVAL",
+        Y = "DOMAttrModified",
+        J = "DOMContentLoaded",
+        ee = "DOMSubtreeModified",
+        te = "<",
+        ne = "=",
+        re = /^[A-Z][._A-Z0-9]*-[-._A-Z0-9]*$/,
+        oe = ["ANNOTATION-XML", "COLOR-PROFILE", "FONT-FACE", "FONT-FACE-SRC", "FONT-FACE-URI", "FONT-FACE-FORMAT", "FONT-FACE-NAME", "MISSING-GLYPH"],
         le = [],
-        ae = "",
-        ie = y.documentElement,
-        ue = oe.indexOf || function (e) {
+        ae = [],
+        ie = "",
+        ue = y.documentElement,
+        ce = le.indexOf || function (e) {
       for (var t = this.length; t-- && this[t] !== e;) {
       }
 
       return t;
     },
-        ce = C.prototype,
-        se = ce.hasOwnProperty,
-        me = ce.isPrototypeOf,
-        fe = C.defineProperty,
+        se = C.prototype,
+        me = se.hasOwnProperty,
+        fe = se.isPrototypeOf,
+        de = C.defineProperty,
         pe = [],
-        de = C.getOwnPropertyDescriptor,
-        he = C.getOwnPropertyNames,
-        Te = C.getPrototypeOf,
-        Le = C.setPrototypeOf,
-        Me = !!C.__proto__,
-        ve = "__dreCEv1",
-        He = e.customElements,
-        ge = !/^force/.test(t.type) && !!(He && He.define && He.get && He.whenDefined),
-        be = C.create || C,
-        ye = e.Map || function () {
+        he = C.getOwnPropertyDescriptor,
+        Te = C.getOwnPropertyNames,
+        Le = C.getPrototypeOf,
+        Me = C.setPrototypeOf,
+        Ee = !!C.__proto__,
+        He = "__dreCEv1",
+        ge = e.customElements,
+        be = !/^force/.test(t.type) && !!(ge && ge.define && ge.get && ge.whenDefined),
+        ye = C.create || C,
+        Ce = e.Map || function () {
       var e,
           t = [],
           n = [];
       return {
         get: function get(e) {
-          return n[ue.call(t, e)];
+          return n[ce.call(t, e)];
         },
         set: function set(r, o) {
-          e = ue.call(t, r), e < 0 ? n[t.push(r) - 1] = o : n[e] = o;
+          e = ce.call(t, r), e < 0 ? n[t.push(r) - 1] = o : n[e] = o;
         }
       };
     },
-        Ce = e.Promise || function (e) {
+        we = e.Promise || function (e) {
       function t(e) {
         for (r = !0; n.length;) {
           n.shift()(e);
@@ -9373,29 +9379,29 @@
       };
       return e(t), o;
     },
-        we = !1,
-        Ae = be(null),
-        Oe = be(null),
-        Ne = new ye(),
-        De = function De(e) {
+        Ae = !1,
+        Oe = ye(null),
+        Ne = ye(null),
+        De = new Ce(),
+        Ie = function Ie(e) {
       return e.toLowerCase();
     },
-        Ie = C.create || function it(e) {
-      return e ? (it.prototype = e, new it()) : this;
+        Fe = C.create || function ct(e) {
+      return e ? (ct.prototype = e, new ct()) : this;
     },
-        Fe = Le || (Me ? function (e, t) {
+        Se = Me || (Ee ? function (e, t) {
       return e.__proto__ = t, e;
-    } : he && de ? function () {
+    } : Te && he ? function () {
       function e(e, t) {
-        for (var n, r = he(t), o = 0, l = r.length; o < l; o++) {
-          n = r[o], se.call(e, n) || fe(e, n, de(t, n));
+        for (var n, r = Te(t), o = 0, l = r.length; o < l; o++) {
+          n = r[o], me.call(e, n) || de(e, n, he(t, n));
         }
       }
 
       return function (t, n) {
         do {
           e(t, n);
-        } while ((n = Te(n)) && !me.call(n, t));
+        } while ((n = Le(n)) && !fe.call(n, t));
 
         return t;
       };
@@ -9406,50 +9412,57 @@
 
       return e;
     }),
-        Se = e.MutationObserver || e.WebKitMutationObserver,
-        Ve = e.HTMLAnchorElement,
-        Pe = (e.HTMLElement || e.Element || e.Node).prototype,
-        Re = !me.call(Pe, ie),
-        Ue = Re ? function (e, t, n) {
+        Ve = e.MutationObserver || e.WebKitMutationObserver,
+        Pe = e.HTMLAnchorElement,
+        Re = (e.HTMLElement || e.Element || e.Node).prototype,
+        Ue = !fe.call(Re, ue),
+        _e = Ue ? function (e, t, n) {
       return e[t] = n.value, e;
-    } : fe,
-        ke = Re ? function (e) {
+    } : de,
+        ke = Ue ? function (e) {
       return 1 === e.nodeType;
     } : function (e) {
-      return me.call(Pe, e);
+      return fe.call(Re, e);
     },
-        _e = Re && [],
-        xe = Pe.attachShadow,
-        qe = Pe.cloneNode,
-        Be = Pe.dispatchEvent,
-        Ze = Pe.getAttribute,
-        je = Pe.hasAttribute,
-        Ge = Pe.removeAttribute,
-        ze = Pe.setAttribute,
-        Ke = y.createElement,
-        Xe = y.importNode,
-        $e = Ke,
-        Qe = Se && {
+        xe = Ue && [],
+        qe = Re.attachShadow,
+        Be = Re.cloneNode,
+        Ze = Re.closest || function (e) {
+      for (var t = this; t && t.nodeName !== e;) {
+        t = t.parentNode;
+      }
+
+      return t;
+    },
+        je = Re.dispatchEvent,
+        Ge = Re.getAttribute,
+        ze = Re.hasAttribute,
+        Ke = Re.removeAttribute,
+        Xe = Re.setAttribute,
+        $e = y.createElement,
+        Qe = y.importNode,
+        We = $e,
+        Ye = Ve && {
       attributes: !0,
       characterData: !0,
       attributeOldValue: !0
     },
-        We = Se || function (e) {
-      nt = !1, ie.removeEventListener(W, We);
+        Je = Ve || function (e) {
+      ot = !1, ue.removeEventListener(Y, Je);
     },
-        Ye = 0,
-        Je = R in y && !/^force-all/.test(t.type),
-        et = !0,
-        tt = !1,
+        et = 0,
+        tt = R in y && !/^force-all/.test(t.type),
         nt = !0,
-        rt = !0,
-        ot = !0;
+        rt = !1,
+        ot = !0,
+        lt = !0,
+        at = !0;
 
-    if (Se && (P = y.createElement("div"), P.innerHTML = "<div><div></div></div>", new Se(function (e, t) {
+    if (Ve && (P = y.createElement("div"), P.innerHTML = "<div><div></div></div>", new Ve(function (e, t) {
       if (e[0] && "childList" == e[0].type && !e[0].removedNodes[0].childNodes.length) {
-        P = de(Pe, "innerHTML");
+        P = he(Re, "innerHTML");
         var n = P && P.set;
-        n && fe(Pe, "innerHTML", {
+        n && de(Re, "innerHTML", {
           set: function set(e) {
             for (; this.lastChild;) {
               this.removeChild(this.lastChild);
@@ -9464,61 +9477,61 @@
     }).observe(P, {
       childList: !0,
       subtree: !0
-    }), P.innerHTML = ""), Je || (Le || Me ? (S = function S(e, t) {
-      me.call(t, e) || p(e, t);
-    }, V = p) : (S = function S(e, t) {
-      e[U] || (e[U] = C(!0), p(e, t));
-    }, V = S), Re ? (nt = !1, function () {
-      var e = de(Pe, k),
+    }), P.innerHTML = ""), tt || (Me || Ee ? (S = function S(e, t) {
+      fe.call(t, e) || d(e, t);
+    }, V = d) : (S = function S(e, t) {
+      e[_] || (e[_] = C(!0), d(e, t));
+    }, V = S), Ue ? (ot = !1, function () {
+      var e = he(Re, k),
           t = e.value,
           n = function n(e) {
-        var t = new CustomEvent(W, {
+        var t = new CustomEvent(Y, {
           bubbles: !0
         });
-        t.attrName = e, t.prevValue = Ze.call(this, e), t.newValue = null, t[Q] = t.attrChange = 2, Ge.call(this, e), Be.call(this, t);
+        t.attrName = e, t.prevValue = Ge.call(this, e), t.newValue = null, t[W] = t.attrChange = 2, Ke.call(this, e), je.call(this, t);
       },
           r = function r(e, t) {
-        var n = je.call(this, e),
-            r = n && Ze.call(this, e),
-            o = new CustomEvent(W, {
+        var n = ze.call(this, e),
+            r = n && Ge.call(this, e),
+            o = new CustomEvent(Y, {
           bubbles: !0
         });
-        ze.call(this, e, t), o.attrName = e, o.prevValue = n ? r : null, o.newValue = t, n ? o.MODIFICATION = o.attrChange = 1 : o[$] = o.attrChange = 0, Be.call(this, o);
+        Xe.call(this, e, t), o.attrName = e, o.prevValue = n ? r : null, o.newValue = t, n ? o.MODIFICATION = o.attrChange = 1 : o[Q] = o.attrChange = 0, je.call(this, o);
       },
           o = function o(e) {
         var t,
             n = e.currentTarget,
-            r = n[U],
+            r = n[_],
             o = e.propertyName;
-        r.hasOwnProperty(o) && (r = r[o], t = new CustomEvent(W, {
+        r.hasOwnProperty(o) && (r = r[o], t = new CustomEvent(Y, {
           bubbles: !0
-        }), t.attrName = r.name, t.prevValue = r.value || null, t.newValue = r.value = n[o] || null, null == t.prevValue ? t[$] = t.attrChange = 0 : t.MODIFICATION = t.attrChange = 1, Be.call(n, t));
+        }), t.attrName = r.name, t.prevValue = r.value || null, t.newValue = r.value = n[o] || null, null == t.prevValue ? t[Q] = t.attrChange = 0 : t.MODIFICATION = t.attrChange = 1, je.call(n, t));
       };
 
       e.value = function (e, l, a) {
-        e === W && this[Z] && this.setAttribute !== r && (this[U] = {
+        e === Y && this[j] && this.setAttribute !== r && (this[_] = {
           className: {
             name: "class",
             value: this.className
           }
         }, this.setAttribute = r, this.removeAttribute = n, t.call(this, "propertychange", o)), t.call(this, e, l, a);
-      }, fe(Pe, k, e);
-    }()) : Se || (ie[k](W, We), ie.setAttribute(U, 1), ie.removeAttribute(U), nt && (O = function O(e) {
+      }, de(Re, k, e);
+    }()) : Ve || (ue[k](Y, Je), ue.setAttribute(_, 1), ue.removeAttribute(_), ot && (O = function O(e) {
       var t,
           n,
           r,
           o = this;
 
       if (o === e.target) {
-        t = o[U], o[U] = n = D(o);
+        t = o[_], o[_] = n = D(o);
 
         for (r in n) {
-          if (!(r in t)) return N(0, o, r, t[r], n[r], $);
+          if (!(r in t)) return N(0, o, r, t[r], n[r], Q);
           if (n[r] !== t[r]) return N(1, o, r, t[r], n[r], "MODIFICATION");
         }
 
         for (r in t) {
-          if (!(r in n)) return N(2, o, r, t[r], n[r], Q);
+          if (!(r in n)) return N(2, o, r, t[r], n[r], W);
         }
       }
     }, N = function N(e, t, n, r, o, l) {
@@ -9537,28 +9550,28 @@
 
       return r;
     })), y[R] = function (e, t) {
-      if (n = e.toUpperCase(), et && (et = !1, Se ? (I = function (e, t) {
+      if (n = e.toUpperCase(), nt && (nt = !1, Ve ? (I = function (e, t) {
         function n(e, t) {
           for (var n = 0, r = e.length; n < r; t(e[n++])) {
           }
         }
 
-        return new Se(function (r) {
+        return new Ve(function (r) {
           for (var o, l, a, i = 0, u = r.length; i < u; i++) {
-            o = r[i], "childList" === o.type ? (n(o.addedNodes, e), n(o.removedNodes, t)) : (l = o.target, ot && l[Z] && "style" !== o.attributeName && (a = Ze.call(l, o.attributeName)) !== o.oldValue && l[Z](o.attributeName, o.oldValue, a));
+            o = r[i], "childList" === o.type ? (n(o.addedNodes, e), n(o.removedNodes, t)) : (l = o.target, at && l[j] && "style" !== o.attributeName && (a = Ge.call(l, o.attributeName)) !== o.oldValue && l[j](o.attributeName, o.oldValue, a));
           }
         });
-      }(l(_), l(q)), F = function F(e) {
+      }(l(x), l(B)), F = function F(e) {
         return I.observe(e, {
           childList: !0,
           subtree: !0
         }), e;
-      }, F(y), xe && (Pe.attachShadow = function () {
-        return F(xe.apply(this, arguments));
-      })) : (A = [], y[k]("DOMNodeInserted", c(_)), y[k]("DOMNodeRemoved", c(q))), y[k](Y, s), y[k]("readystatechange", s), y.importNode = function (e, t) {
+      }, F(y), qe && (Re.attachShadow = function () {
+        return F(qe.apply(this, arguments));
+      })) : (A = [], y[k]("DOMNodeInserted", c(x)), y[k]("DOMNodeRemoved", c(B))), y[k](J, s), y[k]("readystatechange", s), y.importNode = function (e, t) {
         switch (e.nodeType) {
           case 1:
-            return f(y, Xe, [e, !!t]);
+            return f(y, Qe, [e, !!t]);
 
           case 11:
             for (var n = y.createDocumentFragment(), r = e.childNodes, o = r.length, l = 0; l < o; l++) {
@@ -9568,63 +9581,65 @@
             return n;
 
           default:
-            return qe.call(e, !!t);
+            return Be.call(e, !!t);
         }
-      }, Pe.cloneNode = function (e) {
-        return f(this, qe, [!!e]);
-      }), tt) return tt = !1;
-      if (-2 < ue.call(oe, te + n) + ue.call(oe, ee + n) && h(e), !ne.test(n) || -1 < ue.call(re, n)) throw new Error("The type " + e + " is invalid");
+      }, Re.cloneNode = function (e) {
+        return f(this, Be, [!!e]);
+      }), rt) return rt = !1;
+      if (-2 < ce.call(le, ne + n) + ce.call(le, te + n) && h(e), !re.test(n) || -1 < ce.call(oe, n)) throw new Error("The type " + e + " is invalid");
 
       var n,
           o,
           a = function a() {
         return u ? y.createElement(m, n) : y.createElement(m);
       },
-          i = t || ce,
-          u = se.call(i, B),
-          m = u ? t[B].toUpperCase() : n;
+          i = t || se,
+          u = me.call(i, Z),
+          m = u ? t[Z].toUpperCase() : n;
 
-      return u && -1 < ue.call(oe, ee + m) && h(m), o = oe.push((u ? te : ee) + n) - 1, ae = ae.concat(ae.length ? "," : "", u ? m + '[is="' + e.toLowerCase() + '"]' : m), a.prototype = le[o] = se.call(i, "prototype") ? i.prototype : Ie(Pe), ae.length && r(y.querySelectorAll(ae), _), a;
-    }, y.createElement = $e = function $e(e, t) {
+      return u && -1 < ce.call(le, te + m) && h(m), o = le.push((u ? ne : te) + n) - 1, ie = ie.concat(ie.length ? "," : "", u ? m + '[is="' + e.toLowerCase() + '"]' : m), a.prototype = ae[o] = me.call(i, "prototype") ? i.prototype : Fe(Re), ie.length && r(y.querySelectorAll(ie), x), a;
+    }, y.createElement = We = function We(e, t) {
       var n = v(t),
-          r = n ? Ke.call(y, e, De(n)) : Ke.call(y, e),
+          r = n ? $e.call(y, e, Ie(n)) : $e.call(y, e),
           o = "" + e,
-          l = ue.call(oe, (n ? te : ee) + (n || o).toUpperCase()),
+          l = ce.call(le, (n ? ne : te) + (n || o).toUpperCase()),
           a = -1 < l;
-      return n && (r.setAttribute("is", n = n.toLowerCase()), a && (a = i(o.toUpperCase(), n))), ot = !y.createElement.innerHTMLHelper, a && V(r, le[l]), r;
-    }), L.prototype = {
+      return n && (r.setAttribute("is", n = n.toLowerCase()), a && (a = i(o.toUpperCase(), n))), at = !y.createElement.innerHTMLHelper, a && V(r, ae[l]), r;
+    }), addEventListener("beforeunload", function () {
+      delete y.createElement, delete y.importNode, delete y[R];
+    }, !1), L.prototype = {
       constructor: L,
-      define: ge ? function (e, t, n) {
+      define: be ? function (e, t, n) {
         if (n) M(e, t, n);else {
           var r = e.toUpperCase();
-          Ae[r] = {
+          Oe[r] = {
             constructor: t,
             create: [r]
-          }, Ne.set(t, r), He.define(e, t);
+          }, De.set(t, r), ge.define(e, t);
         }
       } : M,
-      get: ge ? function (e) {
-        return He.get(e) || E(e);
+      get: be ? function (e) {
+        return ge.get(e) || E(e);
       } : E,
-      whenDefined: ge ? function (e) {
-        return Ce.race([He.whenDefined(e), g(e)]);
+      whenDefined: be ? function (e) {
+        return we.race([ge.whenDefined(e), g(e)]);
       } : g
-    }, !He || /^force/.test(t.type)) b();else if (!t.noBuiltIn) try {
+    }, !ge || /^force/.test(t.type)) b();else if (!t.noBuiltIn) try {
       !function (t, n, r) {
         var o = new RegExp("^<a\\s+is=('|\")" + r + "\\1></a>$");
-        if (n[B] = "a", t.prototype = Ie(Ve.prototype), t.prototype.constructor = t, e.customElements.define(r, t, n), !o.test(y.createElement("a", {
+        if (n[Z] = "a", t.prototype = Fe(Pe.prototype), t.prototype.constructor = t, e.customElements.define(r, t, n), !o.test(y.createElement("a", {
           is: r
         }).outerHTML) || !o.test(new t().outerHTML)) throw n;
-      }(function ut() {
-        return Reflect.construct(Ve, [], ut);
-      }, {}, "document-register-element-a");
-    } catch (lt) {
+      }(function st() {
+        return Reflect.construct(Pe, [], st);
+      }, {}, "document-register-element-a" + U);
+    } catch (it) {
       b();
     }
     if (!t.noBuiltIn) try {
-      if (Ke.call(y, "a", "a").outerHTML.indexOf("is") < 0) throw {};
-    } catch (at) {
-      De = function De(e) {
+      if ($e.call(y, "a", "a").outerHTML.indexOf("is") < 0) throw {};
+    } catch (ut) {
+      Ie = function Ie(e) {
         return {
           is: e.toLowerCase()
         };
@@ -37648,8 +37663,7 @@
       /**
        Whether this item is disabled. When set to <code>true</code>, this will prevent every user interaction with the
        item. If disabled is set to <code>true</code> for a selected item it will be deselected.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute disabled
        @htmlattributereflected
@@ -37669,8 +37683,7 @@
       }
       /**
        Whether the item is selected. Selected cannot be set to <code>true</code> if the item is disabled.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute selected
        @htmlattributereflected
@@ -37690,8 +37703,7 @@
       }
       /**
        Value of the item. If not explicitly set, the value of <code>Node.textContent</code> is returned.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute value
        @htmlattributereflected
@@ -37700,8 +37712,18 @@
     }, {
       key: "value",
       get: function get() {
-        // keep spaces to only 1 max and trim to mimic native select option behavior
-        return typeof this._value === 'undefined' ? this.getAttribute('value') || this.textContent.replace(/\s{2,}/g, ' ').trim() : this._value;
+        var val = this._value;
+
+        if (typeof this._value === 'undefined') {
+          if (this.getAttribute('value') === null) {
+            // keep spaces to only 1 max and trim to mimic native select option behavior
+            val = this.textContent.replace(/\s{2,}/g, ' ').trim();
+          } else {
+            val = this.getAttribute('value');
+          }
+        }
+
+        return val;
       },
       set: function set(value) {
         this._value = transform.string(value);
@@ -74557,7 +74579,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "4.1.1";
+  var version = "4.1.2";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

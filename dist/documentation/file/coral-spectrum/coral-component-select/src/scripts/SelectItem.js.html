@@ -434,7 +434,7 @@ class SelectItem extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     this._observer = new MutationObserver(this._handleMutation.bind(this));
     this._observer.observe(this, {
       characterData: true,
@@ -442,7 +442,7 @@ class SelectItem extends BaseComponent(HTMLElement) {
       subtree: true
     });
   }
-  
+
   // @compat
   get content() {
     return this;
@@ -456,11 +456,11 @@ class SelectItem extends BaseComponent(HTMLElement) {
       }
     }
   }
-  
+
   /**
    Whether this item is disabled. When set to &lt;code&gt;true&lt;/code&gt;, this will prevent every user interaction with the
    item. If disabled is set to &lt;code&gt;true&lt;/code&gt; for a selected item it will be deselected.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute disabled
@@ -472,13 +472,13 @@ class SelectItem extends BaseComponent(HTMLElement) {
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute(&apos;disabled&apos;, this._disabled);
-    
+
     this.trigger(&apos;coral-select-item:_disabledchanged&apos;);
   }
-  
+
   /**
    Whether the item is selected. Selected cannot be set to &lt;code&gt;true&lt;/code&gt; if the item is disabled.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute selected
@@ -490,31 +490,39 @@ class SelectItem extends BaseComponent(HTMLElement) {
   set selected(value) {
     this._selected = transform.booleanAttr(value);
     this._reflectAttribute(&apos;selected&apos;, this._selected);
-    
+
     this.trigger(&apos;coral-select-item:_selectedchanged&apos;);
   }
-  
+
   /**
    Value of the item. If not explicitly set, the value of &lt;code&gt;Node.textContent&lt;/code&gt; is returned.
-   
+
    @type {String}
    @default &quot;&quot;
    @htmlattribute value
    @htmlattributereflected
    */
   get value() {
-    // keep spaces to only 1 max and trim to mimic native select option behavior
-    return typeof this._value === &apos;undefined&apos; ?
-      this.getAttribute(&apos;value&apos;) || this.textContent.replace(/\s{2,}/g, &apos; &apos;).trim() :
-      this._value;
+    let val = this._value;
+    if (typeof this._value === &apos;undefined&apos;) {
+      if (this.getAttribute(&apos;value&apos;) === null) {
+        // keep spaces to only 1 max and trim to mimic native select option behavior
+        val = this.textContent.replace(/\s{2,}/g, &apos; &apos;).trim();
+      }
+      else {
+        val = this.getAttribute(&apos;value&apos;);
+      }
+    }
+
+    return val;
   }
   set value(value) {
     this._value = transform.string(value);
     this._reflectAttribute(&apos;value&apos;, this._value);
-    
+
     this.trigger(&apos;coral-select-item:_valuechanged&apos;);
   }
-  
+
   /**
    Inherited from {@link BaseComponent#trackingElement}.
    */
@@ -527,14 +535,14 @@ class SelectItem extends BaseComponent(HTMLElement) {
   set trackingElement(value) {
     super.trackingElement = value;
   }
-  
+
   /** @private */
   _handleMutation() {
     this.trigger(&apos;coral-select-item:_contentchanged&apos;, {
       content: this.textContent
     });
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([&apos;selected&apos;, &apos;disabled&apos;, &apos;value&apos;]);
