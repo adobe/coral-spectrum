@@ -28,7 +28,13 @@ describe('Icon', function() {
       expect(Icon.size.EXTRA_EXTRA_LARGE).to.equal('XXL');
       expect(Object.keys(Icon.size).length).to.equal(7);
     });
-  });
+    
+    it('should define the autoAriaLabel options in an enum', () => {
+      expect(Icon.autoAriaLabel).to.exist;
+      expect(Icon.autoAriaLabel.ON).to.equal('on');
+      expect(Icon.autoAriaLabel.OFF).to.equal('off');
+    });
+   });
   
   describe('Instantiation', function() {
     it('should be possible using new', function() {
@@ -69,6 +75,26 @@ describe('Icon', function() {
   });
 
   describe('Markup', function() {
+    
+    describe('#autoArialabel', () => {
+      it('should set autoAriaLabel to Icon.autoAriaLabel.OFF', () => {
+        const icon = helpers.build('<coral-icon autoarialabel="off"></coral-icon>');
+        expect(icon.autoAriaLabel).to.equal(Icon.autoAriaLabel.OFF);
+        expect(icon.getAttribute('autoarialabel')).to.equal(Icon.autoAriaLabel.OFF);
+      });
+  
+      it('should not set aria-label when autoAriaLabel is off', () => {
+        const icon = helpers.build('<coral-icon></coral-icon>');
+        icon.setAttribute('autoarialabel', 'off');
+        icon.icon = 'add';
+        expect(icon.hasAttribute('aria-label')).to.be.false;
+      });
+  
+      it('should not override custom aria-label when autoarialabel is off', () => {
+        const icon = helpers.build('<coral-icon aria-label="custom" autoarialabel="off"></coral-icon>');
+        expect(icon.getAttribute('aria-label')).to.equal('custom');
+      });
+    });
 
     describe('#icon', function() {
 
@@ -162,6 +188,19 @@ describe('Icon', function() {
   
     afterEach(() => {
       icon = null;
+    });
+    
+    describe('#autoAriaLabel', () => {
+      it('should default to Icon.autoAriaLabel.ON', () => {
+        expect(icon.autoAriaLabel).to.equal(Icon.autoAriaLabel.ON);
+      });
+  
+      it('should not override aria-label when autoAriaLabel is off', () => {
+        icon.autoAriaLabel = Icon.autoAriaLabel.OFF;
+        icon.setAttribute('aria-label', 'custom');
+        icon.icon = 'add';
+        expect(icon.getAttribute('aria-label')).to.equal('custom');
+      });
     });
     
     describe('#icon', function() {

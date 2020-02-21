@@ -109,6 +109,22 @@ const size = {
   EXTRA_EXTRA_LARGE: 'XXL'
 };
 
+
+/**
+ Enumeration for {@link Icon} autoAriaLabel value.
+ 
+ @typedef {Object} IconAutoAriaLabelEnum
+ 
+ @property {String} ON
+ The aria-label attribute is automatically set based on the icon name.
+ @property {String} OFF
+ The aria-label attribute is not set and has to be provided explicitly.
+ */
+const autoAriaLabel = {
+  ON: 'on',
+  OFF: 'off'
+};
+
 // icon's base classname
 const CLASSNAME = '_coral-Icon';
 
@@ -143,6 +159,20 @@ class Icon extends BaseComponent(HTMLElement) {
     super();
     
     this._elements = {};
+  }
+  
+  /**
+   Whether aria-label is set automatically. See {@link IconAutoAriaLabelEnum}.
+   
+   @type {String}
+   @default IconAutoAriaLabelEnum.ON
+   */
+  get autoAriaLabel() {
+    return this._autoAriaLabel || autoAriaLabel.ON;
+  }
+  set autoAriaLabel(value) {
+    value = transform.string(value).toLowerCase();
+    this._autoAriaLabel = validate.enumeration(autoAriaLabel)(value) && value || autoAriaLabel.ON;
   }
   
   /**
@@ -314,7 +344,7 @@ class Icon extends BaseComponent(HTMLElement) {
   }
   
   /**
-   Updates the aria-label or img alt attribute depending on value of alt, title or icon.
+   Updates the aria-label or img alt attribute depending on value of alt, title, icon and autoAriaLabel.
    
    In cases where the alt attribute has been removed or set to an empty string,
    for example, when the alt property is undefined and we add the attribute alt=''
@@ -323,6 +353,7 @@ class Icon extends BaseComponent(HTMLElement) {
    @private
    */
   _updateAltText(value) {
+    const hasAutoAriaLabel = this.autoAriaLabel === autoAriaLabel.ON;
     const isImage = this.contains(this._elements.image);
     
     let altText;
@@ -330,7 +361,7 @@ class Icon extends BaseComponent(HTMLElement) {
       altText = value;
     }
     else if (isImage) {
-      altText = '';
+      altText = this.getAttribute('alt') || '';
     }
     else {
       altText = this.icon.replace(SPLIT_CAMELCASE_REGEX, '$1 $2');
@@ -346,17 +377,17 @@ class Icon extends BaseComponent(HTMLElement) {
     
     // Set accessibility attributes accordingly
     if (isImage) {
-      this.removeAttribute('aria-label');
+      hasAutoAriaLabel && this.removeAttribute('aria-label');
       this._elements.image.setAttribute('alt', altText);
     }
     else if (altText === '') {
-      this.removeAttribute('aria-label');
+      hasAutoAriaLabel && this.removeAttribute('aria-label');
       if (!roleOverride) {
         this.removeAttribute('role');
       }
     }
     else {
-      this.setAttribute('aria-label', altText);
+      hasAutoAriaLabel && this.setAttribute('aria-label', altText);
     }
   }
   
@@ -409,6 +440,13 @@ class Icon extends BaseComponent(HTMLElement) {
   static get size() { return size; }
   
   /**
+   Returns {@link Icon} autoAriaLabel options.
+   
+   @return {IconAutoAriaLabelEnum}
+   */
+  static get autoAriaLabel() { return autoAriaLabel; }
+  
+  /**
    Loads the SVG icons. It's requesting the icons based on the JS file path by default.
    
    @param {String} [url] SVG icons url.
@@ -432,9 +470,15 @@ class Icon extends BaseComponent(HTMLElement) {
     loadIcons(url);
   }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      autoarialabel: 'autoAriaLabel'
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
-    return super.observedAttributes.concat(['icon', 'size', 'alt', 'title']);
+    return super.observedAttributes.concat(['autoarialabel', 'icon', 'size', 'alt', 'title']);
   }
   
   /** @ignore */
