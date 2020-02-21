@@ -11,6 +11,7 @@
  */
 
 import {BaseComponent} from '../../../coral-base-component';
+import {BaseLabellable} from '../../../coral-base-labellable';
 import {Icon} from '../../../coral-component-icon';
 import {Checkbox} from '../../../coral-component-checkbox';
 import {transform, validate} from '../../../coral-utils';
@@ -39,7 +40,7 @@ const variant = {
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class ColumnViewItem extends BaseComponent(HTMLElement) {
+class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -49,6 +50,8 @@ class ColumnViewItem extends BaseComponent(HTMLElement) {
       content: this.querySelector('coral-columnview-item-content') || document.createElement('coral-columnview-item-content'),
       thumbnail: this.querySelector('coral-columnview-item-thumbnail') || document.createElement('coral-columnview-item-thumbnail')
     };
+  
+    super._observeLabel();
   }
   
   /**
@@ -155,6 +158,8 @@ class ColumnViewItem extends BaseComponent(HTMLElement) {
       // adds the newly created icon
       this._elements.thumbnail.appendChild(this._elements.icon);
     }
+  
+    super._toggleIconAriaHidden();
   }
   
   /**

@@ -10,6 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
+import {BaseLabellable} from '../../../coral-base-labellable';
 import {Icon} from '../../../coral-component-icon';
 import {transform, validate, commons} from '../../../coral-utils';
 
@@ -146,7 +147,7 @@ const iconPosition = {
  @base BaseButton
  @classdesc The base element for Button components
  */
-const BaseButton = (superClass) => class extends superClass {
+const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
   /** @ignore */
   constructor() {
     super();
@@ -164,18 +165,7 @@ const BaseButton = (superClass) => class extends superClass {
       click: '_onClick'
     };
   
-    // Listen for mutations
-    this._observer = new MutationObserver(this._makeAccessible.bind(this));
-    
-    // Watch for changes to the label element
-    this._observer.observe(this._elements.label, {
-      // Catch changes to childList
-      childList: true,
-      // Catch changes to textContent
-      characterData: true,
-      // Monitor any child node
-      subtree: true
-    });
+    super._observeLabel();
   }
   
   /**
@@ -419,25 +409,8 @@ const BaseButton = (superClass) => class extends superClass {
         this.insertBefore(iconElement, this.iconPosition === iconPosition.LEFT ? this.label : this.label.nextElementSibling);
       }
     }
-  
-    // makes sure the button is correctly annotated
-    this._makeAccessible();
-  }
-  
-  /**
-   Sets the correct accessibility annotations on the icon element.
-   @protected
-   */
-  _makeAccessible() {
-    const hasLabel = this.label && this.label.textContent.length > 0;
-  
-    // when the button has a icon, we need to make sure it is labelled correctly
-    if (this.icon !== '' && hasLabel) {
-      this._elements.icon.alt = '';
-    }
-    else if (this._elements.icon) {
-      this._elements.icon._updateAltText();
-    }
+    
+    super._toggleIconAriaHidden();
   }
   
   /** @ignore */
@@ -592,9 +565,6 @@ const BaseButton = (superClass) => class extends superClass {
     // Make sure the icon is well positioned
     this._updatedIcon = true;
     this._updateIcon(this.icon);
-  
-    // a11y
-    this._makeAccessible();
   }
   
   /**

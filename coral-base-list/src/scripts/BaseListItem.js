@@ -10,6 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
+import {BaseLabellable} from '../../../coral-base-labellable';
 import {Icon} from '../../../coral-component-icon';
 import {transform} from '../../../coral-utils';
 
@@ -19,7 +20,7 @@ const CLASSNAME = '_coral-Menu-item';
  @base BaseListItem
  @classdesc The base element for List Item components
  */
-const BaseListItem = (superClass) => class extends superClass {
+const BaseListItem = (superClass) => class extends BaseLabellable(superClass) {
   /** @ignore */
   constructor() {
     super();
@@ -29,6 +30,8 @@ const BaseListItem = (superClass) => class extends superClass {
       // Fetch or create the content zone element
       content: this.querySelector('coral-list-item-content') || document.createElement('coral-list-item-content')
     };
+  
+    super._observeLabel();
   }
   
   /**
@@ -91,6 +94,8 @@ const BaseListItem = (superClass) => class extends superClass {
     }
     
     el.icon = value;
+    
+    super._toggleIconAriaHidden();
   }
   
   _getIconElement() {

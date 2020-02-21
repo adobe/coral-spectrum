@@ -220,19 +220,18 @@ const testButton = function(Constructor, tagName, baseTagName) {
           expect(button.classList.contains('_coral-Button')).to.be.true;
         });
       
-        it('should have default icon alt text when there is no label', function() {
+        it('should have default icon aria-label text when there is no label', function() {
           const button = build('<'+ baseTagName +' is="'+ tagName +'" icon="add"></'+ baseTagName +'>');
           expect(button.icon).to.equal('add');
           expect(button.label.innerHTML).to.equal('');
           expect(button.hasAttribute('icon', 'add')).to.be.true;
           expect(button._elements.icon).to.exist;
           expect(button._elements.icon.icon).to.equal('add');
-          expect(button._elements.icon.alt).to.equal(null);
           expect(button._elements.icon.getAttribute('aria-label')).to.equal('add');
           expect(button.classList.contains('_coral-Button')).to.be.true;
         });
       
-        it('should not have icon alt text when there is a label', function() {
+        it('should set aria-hidden when there is a label', function() {
           const button = build('<'+ baseTagName +' is="'+ tagName +'" icon="add">Add</'+ baseTagName +'>');
           expect(button.icon).to.equal('add');
           expect(button.label.innerHTML).to.equal('Add');
@@ -240,19 +239,18 @@ const testButton = function(Constructor, tagName, baseTagName) {
           expect(button.label.textContent).to.equal('Add');
           expect(button._elements.icon).to.exist;
           expect(button._elements.icon.icon).to.equal('add');
-          expect(button._elements.icon.alt).to.equal('');
-          expect(button._elements.icon.getAttribute('aria-label')).to.be.null;
+          expect(button._elements.icon.getAttribute('aria-hidden')).to.equal('true');
           expect(button.classList.contains('_coral-Button')).to.be.true;
         });
       
-        it('should remove icon alt text if the label is added', function(done) {
+        it('should set aria-hidden to true if the label is added', function(done) {
           const button = build('<'+ baseTagName +' is="'+ tagName +'" icon="add"></'+ baseTagName +'>');
           expect(button.icon).to.equal('add');
           expect(button.label.innerHTML).to.equal('');
           expect(button.getAttribute('icon')).to.equal('add');
           expect(button._elements.icon).to.exist;
           expect(button._elements.icon.parentNode).not.to.be.null;
-          expect(button._elements.icon.alt).to.equal(null);
+          expect(button._elements.icon.getAttribute('aria-hidden')).to.equal(null);
           expect(button._elements.icon.getAttribute('aria-label')).to.equal('add');
         
           button.label.textContent = 'Add';
@@ -261,19 +259,17 @@ const testButton = function(Constructor, tagName, baseTagName) {
             expect(button.label.textContent).to.equal('Add');
             expect(button.classList.contains('_coral-Button')).to.be.true;
             expect(button.icon).to.equal('add');
-            expect(button._elements.icon.alt).to.equal('');
-            expect(button._elements.icon.getAttribute('aria-label')).to.be.null;
+            expect(button._elements.icon.getAttribute('aria-hidden')).to.equal('true');
             done();
           });
         });
       
-        it('should restore default icon alt text if the label is removed', function(done) {
+        it('should remove aria-hidden if the label is removed', function(done) {
           const button = build('<'+ baseTagName +' is="'+ tagName +'" icon="add">Add</'+ baseTagName +'>');
           expect(button.label.innerHTML).to.equal('Add');
-          expect(button.hasAttribute('icon', 'add')).to.be.true;
+          expect(button.hasAttribute('icon')).to.be.true;
           expect(button.icon).to.equal('add');
-          expect(button._elements.icon.alt).to.equal('');
-          expect(button._elements.icon.getAttribute('aria-label')).to.be.null;
+          expect(button._elements.icon.getAttribute('aria-hidden')).to.equal('true');
         
           button.label.innerHTML = '';
           // Wait for the MO to kick in
@@ -281,7 +277,7 @@ const testButton = function(Constructor, tagName, baseTagName) {
             expect(button.label.textContent).to.equal('');
             expect(button.classList.contains('_coral-Button')).to.be.true;
             expect(button.icon).to.equal('add');
-            expect(button._elements.icon.alt).to.equal('');
+            expect(button._elements.icon.getAttribute('aria-hidden')).to.equal(null);
             expect(button._elements.icon.getAttribute('aria-label')).to.equal('add');
             done();
           });
@@ -290,10 +286,9 @@ const testButton = function(Constructor, tagName, baseTagName) {
         it('should not create a new icon if the value is updated', function(done) {
           const button = build('<'+ baseTagName +' is="'+ tagName +'" icon="add">Add</'+ baseTagName +'>');
           expect(button.label.innerHTML).to.equal('Add');
-          expect(button.hasAttribute('icon', 'add')).to.be.true;
+          expect(button.getAttribute('icon')).to.equal('add');
           expect(button.icon).to.equal('add');
-          expect(button._elements.icon.alt).to.equal('');
-          expect(button._elements.icon.getAttribute('aria-label')).to.be.null;
+          expect(button._elements.icon.getAttribute('aria-hidden')).to.equal('true');
         
           // icon is updated
           button.icon = 'share';
@@ -302,7 +297,7 @@ const testButton = function(Constructor, tagName, baseTagName) {
           setTimeout(() => {
             expect(button._getIconElement()).to.exist;
             expect(button._getIconElement().icon).to.equal('share');
-            expect(button._elements.icon.alt).to.equal('');
+            expect(button._elements.icon.getAttribute('aria-hidden')).to.equal(null);
             expect(button._elements.icon.getAttribute('aria-label')).to.equal('share');
             expect(button.classList.contains('_coral-Button')).to.be.true;
             done();

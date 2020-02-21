@@ -14,6 +14,7 @@ import '../../coral-utils/src/tests/spec';
 import '../../coral-collection/src/tests/spec';
 import '../../coral-dragaction/src/tests/spec';
 import '../../coral-base-component/src/tests/spec';
+import '../../coral-base-labellable/src/tests/spec';
 import '../../coral-base-formfield/src/tests/spec';
 import '../../coral-base-overlay/src/tests/spec';
 import '../../coral-compat/src/tests/spec';

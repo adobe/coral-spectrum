@@ -13,6 +13,7 @@
 const CLASSNAME = '_coral-SideNav-item';
 
 import {BaseComponent} from '../../../coral-base-component';
+import {BaseLabellable} from '../../../coral-base-labellable';
 import {transform} from '../../../coral-utils';
 import item from '../templates/item';
 import '../../../coral-component-icon';
@@ -24,7 +25,7 @@ import '../../../coral-component-icon';
  @extends {HTMLAnchorElement}
  @extends {BaseComponent}
  */
-class SideNavItem extends BaseComponent(HTMLAnchorElement) {
+class SideNavItem extends BaseLabellable(BaseComponent(HTMLAnchorElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -35,6 +36,8 @@ class SideNavItem extends BaseComponent(HTMLAnchorElement) {
     };
     
     item.call(this._elements);
+  
+    super._observeLabel();
   }
   
   /**
@@ -69,6 +72,8 @@ class SideNavItem extends BaseComponent(HTMLAnchorElement) {
   set icon(value) {
     this._elements.icon.icon = value;
     this._elements.icon.hidden = this._elements.icon.icon === '';
+  
+    super._toggleIconAriaHidden();
   }
   
   /**

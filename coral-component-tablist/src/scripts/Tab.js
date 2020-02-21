@@ -11,6 +11,7 @@
  */
 
 import {BaseComponent} from '../../../coral-base-component';
+import {BaseLabellable} from '../../../coral-base-labellable';
 import base from '../templates/base';
 import {transform, commons} from '../../../coral-utils';
 import {Icon} from '../../../coral-component-icon';
@@ -25,7 +26,7 @@ const CLASSNAME = '_coral-Tabs-item';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class Tab extends BaseComponent(HTMLElement) {
+class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -43,6 +44,8 @@ class Tab extends BaseComponent(HTMLElement) {
       if (icon) {
         icon.size = this._elements.label.textContent.trim().length ? Icon.size.EXTRA_SMALL : Icon.size.SMALL;
       }
+  
+      super._toggleIconAriaHidden();
       
       this.trigger('coral-tab:_sizechanged');
     });
@@ -101,6 +104,9 @@ class Tab extends BaseComponent(HTMLElement) {
       if (!this._elements.label.textContent.trim().length) {
         iconElement.size = Icon.size.SMALL;
       }
+      
+      super._toggleIconAriaHidden();
+      
       this.insertBefore(iconElement, this.firstChild);
       this.trigger('coral-tab:_sizechanged');
     }
