@@ -50,22 +50,28 @@
         <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
       </div>
 
-      <h1 class="coral-Heading coral-Heading--1">TabList</h1>
+      <h1 class="coral-Heading--XXXL">Tab List</h1>
 
-      <h2 class="coral-Heading coral-Heading--2">Default</h2>
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        Tabs organize content into multiple sections and allow users to navigate between them. The content under the set of tabs should be related and form a coherent unit.
+      </p>
+
+      <h2 class="coral--Heading--S">Default</h2>
       <div class="markup">
         <coral-tablist>
           <coral-tab>Tab One</coral-tab>
           <coral-tab style="width:100px">A truncated tab label</coral-tab>
           <coral-tab icon="comment">Tab Two</coral-tab>
-          <coral-tab icon="home"></coral-tab>
+          <coral-tab aria-label="Home tab" icon="home"></coral-tab>
           <coral-tab disabled>Disabled</coral-tab>
           <coral-tab invalid>Invalid</coral-tab>
           <coral-tab invalid disabled>Invalid + Disabled</coral-tab>
         </coral-tablist>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Small size</h2>
+      <h2 class="coral--Heading--S">Small size</h2>
       <div class="markup">
         <coral-tablist size="S">
           <coral-tab>Tab One</coral-tab>
@@ -77,7 +83,7 @@
         </coral-tablist>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Large size</h2>
+      <h2 class="coral--Heading--S">Large size</h2>
       <div class="markup">
         <coral-tablist size="L">
           <coral-tab>Tab One</coral-tab>
@@ -89,7 +95,7 @@
         </coral-tablist>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Icons</h2>
+      <h2 class="coral--Heading--S">Icons</h2>
       <div class="markup">
         <coral-tablist>
           <coral-tab icon="home" target="#panel_0"></coral-tab>
@@ -101,7 +107,7 @@
         </coral-tablist>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Vertical default</h2>
+      <h2 class="coral--Heading--S">Vertical default</h2>
       <div class="markup">
         <coral-tablist orientation="vertical">
           <coral-tab>Tab One</coral-tab>
@@ -113,7 +119,7 @@
         </coral-tablist>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Vertical small size</h2>
+      <h2 class="coral--Heading--S">Vertical small size</h2>
       <div class="markup">
         <coral-tablist orientation="vertical" size="S">
           <coral-tab>Tab One</coral-tab>
@@ -125,7 +131,7 @@
         </coral-tablist>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Vertical large size</h2>
+      <h2 class="coral--Heading--S">Vertical large size</h2>
       <div class="markup">
         <coral-tablist orientation="vertical" size="L">
           <coral-tab>Tab One</coral-tab>
@@ -137,7 +143,7 @@
         </coral-tablist>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Vertical Icons</h2>
+      <h2 class="coral--Heading--S">Vertical Icons</h2>
       <div class="markup">
         <coral-tablist orientation="vertical">
           <coral-tab icon="home" target="#panel_0"></coral-tab>

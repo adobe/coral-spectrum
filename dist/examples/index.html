@@ -228,60 +228,74 @@
       navToggleOverlay.addEventListener('click', toggleSideNav);
 
       const components = [
-        'coral-component-accordion',
-        'coral-component-actionbar',
-        'coral-component-alert',
-        'coral-component-anchorbutton',
-        'coral-component-autocomplete',
-        'coral-component-banner',
-        'coral-component-button',
-        'coral-component-buttongroup',
-        'coral-component-calendar',
-        'coral-component-card',
-        'coral-component-charactercount',
-        'coral-component-checkbox',
-        'coral-component-clock',
-        'coral-component-coachmark',
-        'coral-component-colorinput',
-        'coral-component-columnview',
-        'coral-component-cyclebutton',
-        'coral-component-datepicker',
-        'coral-component-dialog',
-        'coral-component-drawer',
-        'coral-component-fileupload',
-        'coral-component-icon',
-        'coral-component-list',
-        'coral-component-masonry',
-        'coral-component-multifield',
-        'coral-component-numberinput',
-        'coral-component-overlay',
-        'coral-component-panelstack',
-        'coral-component-popover',
-        'coral-component-progress',
-        'coral-component-quickactions',
-        'coral-component-radio',
-        'coral-component-search',
-        'coral-component-select',
-        'coral-component-sidenav',
-        'coral-component-shell',
-        'coral-component-slider',
-        'coral-component-splitbutton',
-        'coral-component-status',
-        'coral-component-steplist',
-        'coral-component-switch',
-        'coral-component-table',
-        'coral-component-tablist',
-        'coral-component-tabview',
-        'coral-component-taglist',
-        'coral-component-textarea',
-        'coral-component-textfield',
-        'coral-component-toast',
-        'coral-component-tooltip',
-        'coral-component-tree',
-        'coral-component-wait',
-        'coral-component-wizardview',
-        'coral-dragaction'
-      ];
+        {'coral-css-heading': 'Heading'},
+        {'coral-css-body': 'Body'},
+        {'coral-css-detail': 'Detail'},
+        {'coral-css-code': 'Code'},
+        {'coral-css-link': 'Link'},
+        {'coral-css-divider': 'Divider'},
+        {'coral-css-well': 'Well'},
+        {'coral-css-decoratedtextfield': 'Decorated Text Field'},
+        {'coral-css-inputgroup': 'Input Group'},
+        {'coral-css-fieldlabel': 'Field Label'},
+        {'coral-css-formgroup': 'Form Group'},
+        {'coral-css-fixedcolumn': 'Fixed Column'},
+        {'coral-component-accordion': 'Accordion'},
+        {'coral-component-actionbar': 'Action Bar'},
+        {'coral-component-alert': 'Alert'},
+        {'coral-component-anchorbutton': 'Anchor Button'},
+        {'coral-component-autocomplete': 'Autocomplete'},
+        {'coral-component-banner': 'Banner'},
+        {'coral-component-button': 'Button'},
+        {'coral-component-buttongroup': 'Button Group'},
+        {'coral-component-calendar': 'Calendar'},
+        {'coral-component-card': 'Card'},
+        {'coral-component-charactercount': 'Character Count'},
+        {'coral-component-checkbox': 'Checkbox'},
+        {'coral-component-checkboxgroup': 'Checkbox Group'},
+        {'coral-component-clock': 'Clock'},
+        {'coral-component-coachmark': 'Coachmark'},
+        {'coral-component-colorinput': 'Color Input'},
+        {'coral-component-columnview': 'Column View'},
+        {'coral-component-cyclebutton': 'Cycle Button'},
+        {'coral-component-datepicker': 'Date Picker'},
+        {'coral-component-dialog': 'Dialog'},
+        {'coral-component-drawer': 'Drawer'},
+        {'coral-component-fileupload': 'File Upload'},
+        {'coral-component-icon': 'Icon'},
+        {'coral-component-list': 'List'},
+        {'coral-component-masonry': 'Masonry'},
+        {'coral-component-multifield': 'Multi Field'},
+        {'coral-component-numberinput': 'Number Input'},
+        {'coral-component-overlay': 'Overlay'},
+        {'coral-component-panelstack': 'Panel Stack'},
+        {'coral-component-popover': 'Popover'},
+        {'coral-component-progress': 'Progress'},
+        {'coral-component-quickactions': 'Quick Actions'},
+        {'coral-component-radio': 'Radio'},
+        {'coral-component-radiogroup': 'Radio Group'},
+        {'coral-component-search': 'Search'},
+        {'coral-component-select': 'Select'},
+        {'coral-component-sidenav': 'Side Nav'},
+        {'coral-component-shell': 'Shell'},
+        {'coral-component-slider': 'Slider'},
+        {'coral-component-splitbutton': 'Split Button'},
+        {'coral-component-status': 'Status'},
+        {'coral-component-steplist': 'Step List'},
+        {'coral-component-switch': 'Switch'},
+        {'coral-component-table': 'Table'},
+        {'coral-component-tablist': 'Tab List'},
+        {'coral-component-tabview': 'Tab View'},
+        {'coral-component-taglist': 'Tag List'},
+        {'coral-component-textarea': 'Text Area'},
+        {'coral-component-textfield': 'Text Field'},
+        {'coral-component-toast': 'Toast'},
+        {'coral-component-tooltip': 'Tooltip'},
+        {'coral-component-tree': 'Tree'},
+        {'coral-component-wait': 'Wait'},
+        {'coral-component-wizardview': 'Wizard View'},
+        {'coral-dragaction': 'Drag Action'}
+      ].sort((a, b) => Object.values(a)[0] < Object.values(b)[0] ? -1 : 1);
 
       const list = document.getElementById('example-list');
       const main = document.getElementById('example-main');
@@ -289,9 +303,9 @@
       const search = document.getElementById('example-search');
 
       search.on('coral-search:input', function(event) {
-        const value = event.target.value.trim();
+        const value = event.target.value.trim().toLowerCase();
         list.items.getAll().forEach(function(item) {
-          if (item.content.textContent.trim().indexOf(value) !== 0) {
+          if (item.content.textContent.trim().toLowerCase().indexOf(value) !== 0) {
             item.hidden = true;
           }
           else {
@@ -307,15 +321,17 @@
       });
 
       components.forEach(function(component, i) {
-        const name = component.split('-').pop();
+        const id = Object.keys(component)[0];
+        const name = id.split('-').pop();
         const selected = location.hash ? location.hash.slice(1) === name : i === 0;
         const item = list.items.add({
           content: {
-            textContent: name
+            textContent: Object.values(component)[0]
           },
           selected: selected,
-          href: component + '.html'
+          href: '../' + id + '/examples/index.html'
         });
+        item.dataset.name = name;
         selected && item.setAttribute('aria-current', 'page');
         item.on('click', function(event) {
           event.preventDefault()
@@ -327,7 +343,7 @@
         XMLHttpRequest.onreadystatechange = function() {
           if (XMLHttpRequest.readyState == 4 && XMLHttpRequest.status == 200) {
             preview.srcdoc = this.responseText;
-            location.hash = event.detail.selection.textContent.trim();
+            location.hash = event.detail.selection.dataset.name;
 
             requestAnimationFrame(function() {
               if (sideNav.classList.contains('is-open')) {

@@ -22,16 +22,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">67.74% </span>
+                <span class="strong">69.7% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>21/31</span>
+                <span class='fraction'>23/33</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">41.18% </span>
+                <span class="strong">40% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/17</span>
+                <span class='fraction'>8/20</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">67.74% </span>
+                <span class="strong">69.7% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>21/31</span>
+                <span class='fraction'>23/33</span>
             </div>
         
             
@@ -133,7 +133,13 @@
 <a name='L75'></a><a href='#L75'>75</a>
 <a name='L76'></a><a href='#L76'>76</a>
 <a name='L77'></a><a href='#L77'>77</a>
-<a name='L78'></a><a href='#L78'>78</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -147,6 +153,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -200,8 +214,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -225,22 +237,28 @@
 import commons from './Commons';
 import events from './Events';
 &nbsp;
-const typeKitId = commons &amp;&amp; commons.options.typekit || 'ruf7eed';
+<span class="missing-if-branch" title="else path not taken" >E</span>let typeKitId = commons &amp;&amp; commons.options.typekit;
+if (!typeKitId) {
+  // On pageload, determine to current pages language setting.
+  // If it is english language or unset use the 1st Adobe font web project id (smaller size),
+  // otherwise use the 2nd kit with all the language settings (larger size)<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+  typeKitId = document.querySelector('[lang]:not([lang^="en"])') === null ? 'mge7bvf' : 'rok6rmo';
+}
 &nbsp;
 const config = {
   kitId: typeKitId,
   scriptTimeout: 3000,
   active: () =&gt; {
     events.dispatch('coral-commons:_webfontactive');
-<span class="missing-if-branch" title="else path not taken" >E</span>  }
+  }
 };
-&nbsp;
+<span class="missing-if-branch" title="else path not taken" >E</span>
 if (!window.Typekit) { // we load the typescript only once
-  const h = document.<span class="fstat-no" title="function not covered" >ge</span>tElementsByTagName('html')[0];
-  h.<span class="cstat-no" title="statement not covered" >classList.add('wf-loading');</span>
-  <span class="cstat-no" title="statement not covered" ></span>
-  const t = setTimeout(() =&gt; {
-    h.classList.remove('wf-loading');
+  const h = document.getElementsByTagName('html')[0];
+  h.classList.add('wf-loading');
+  <span class="fstat-no" title="function not covered" ></span>
+  co<span class="cstat-no" title="statement not covered" >nst t = setTimeout(() =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    h.classList.remove('wf-loading')</span>;
     h.classList.add('wf-inactive');
   }, config.scriptTimeout);
   
@@ -250,10 +268,10 @@ if (!window.Typekit) { // we load the typescript only once
   // Always load over https
   tk.src = `https://use.typekit.net/${config.kitId}.js`;
   tk.type = 'text/javascript';
-  tk<span class="missing-if-branch" title="if path not taken" >I</span>.async = 'true<span class="branch-2 cbranch-no" title="branch not covered" >';<span class="branch-3 cbranch-no" title="branch not covered" ></span></span>
-  tk.o<span class="cstat-no" title="statement not covered" >nload = </span>tk.onreadystatechange = function() {
-    const a = this.readyState;
-    if (d || a &amp;&amp; a !== 'complete' &amp;&amp; a !== 'loaded') {
+  tk.async = 'true';
+  tk.onload = tk.onreadystatechange = function() {
+    <span class="missing-if-branch" title="if path not taken" >I</span>const a = this<span class="branch-2 cbranch-no" title="branch not covered" >.readyState;<span class="branch-3 cbranch-no" title="branch not covered" ></span></span>
+    if<span class="cstat-no" title="statement not covered" > (d || a</span> &amp;&amp; a !== 'complete' &amp;&amp; a !== 'loaded') {
       return;
     }
     
@@ -266,19 +284,19 @@ if (!window.Typekit) { // we load the typescript only once
     catch (b) {}
   };
   
-  const s = d<span class="cstat-no" title="statement not covered" >ocument.getElementsByTagN</span>ame('script')[0];
+  const s = document.getElementsByTagName('script')[0];
   s.parentNode.insertBefore(tk, s);
 }<span class="cstat-no" title="statement not covered" ></span>
-else {<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
-  // I<span class="cstat-no" title="statement not covered" >f Typekit is loaded externally, listen with a MO for active fonts</span>
-  const <span class="cstat-no" title="statement not covered" >root = document.documentElement;</span>
-  if (ro<span class="cstat-no" title="statement not covered" >ot.className.indexOf('wf-inactive') !== -1 || roo</span>t.className.indexOf('wf-loading') !== -1) {
-    const webFontLoadObserver = new MutationObserver(() =&gt; {
-      if (root.className.indexOf('wf-active') !== -1) {
+else {
+<span class="cstat-no" title="statement not covered" >  // If Typekit is loaded externally, listen with a MO for active fonts</span>
+  const root = document.docume<span class="cstat-no" title="statement not covered" >ntElement;<span class="fstat-no" title="function not covered" ></span></span>
+  if (<span class="cstat-no" title="statement not covered" >root.className.indexOf('wf-inactive') !== -1 || root.className.indexOf('wf-loading') !== -1) {</span>
+    cons<span class="cstat-no" title="statement not covered" >t webFontLoadObserver = new Mutati</span>onObserver(() =&gt; {
+      if<span class="cstat-no" title="statement not covered" > (root.className.indexOf('wf-active') !== -1) {</span>
         webFontLoadObserver.disconnect();
-<span class="cstat-no" title="statement not covered" >        events.dispatch('coral-commons:_webfontactive');</span>
+        events.dispatch('coral-commons:_webfontactive');
       }
-    });
+<span class="cstat-no" title="statement not covered" >    });</span>
   
     // Watch for class changes
     webFontLoadObserver.observe(root, {
@@ -294,7 +312,7 @@ else {<span class="cstat-no" title="statement not covered" ><span class="fstat-n
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Feb 20 2020 17:29:45 GMT+0100 (Central European Standard Time)
+                at Tue Mar 03 2020 18:19:48 GMT+0100 (Central European Standard Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

@@ -49,15 +49,21 @@
         <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
       </div>
 
-      <h1 class="coral-Heading coral-Heading--1">Toast</h1>
+      <h1 class="coral-Heading--XXXL">Toast</h1>
 
-      <h2 class="coral-Heading coral-Heading--2">Default</h2>
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        Toasts display brief, temporary notifications. They are noticeable but do not disrupt the user experience and do not require an action to be taken.
+      </p>
+
+      <h2 class="coral--Heading--S">Default</h2>
       <div class="markup">
         <button is="coral-button" onclick="defaultToast.show()">Show toast</button>
         <coral-toast id="defaultToast">Default toast</coral-toast>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Variants and Placement</h2>
+      <h2 class="coral--Heading--S">Variants and Placement</h2>
       <div class="markup">
         <button is="coral-button" onclick="infoToast.show()">Show Left Info toast</button>
         <button is="coral-button" onclick="errorToast.show()">Show Centered Error toast</button>
@@ -67,7 +73,7 @@
         <coral-toast id="successToast" variant="success" placement="right">Success toast</coral-toast>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">With action</h2>
+      <h2 class="coral--Heading--S">With action</h2>
       <div class="markup">
         <button is="coral-button" onclick="actionToast.show()">Show Toast</button>
         <coral-toast id="actionToast">
@@ -85,7 +91,7 @@
         </script>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Customized auto-dismiss</h2>
+      <h2 class="coral--Heading--S">Customized auto-dismiss</h2>
       <div class="markup">
         <button is="coral-button" onclick="dismissToast1.show();dismissToast2.show();">Show toast</button>
         <coral-toast id="dismissToast1" autodismiss="10000">
@@ -96,7 +102,7 @@
         </coral-toast>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Created with JS</h2>
+      <h2 class="coral--Heading--S">Created with JS</h2>
       <div class="markup">
         <button is="coral-button" id="JSToast">Show toast</button>
         <script>
@@ -112,7 +118,7 @@
         </script>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Toast priority queue</h2>
+      <h2 class="coral--Heading--S">Toast priority queue</h2>
       <div class="markup">
         <button is="coral-button" id="queueToast">Show toast queue</button>
         <script>

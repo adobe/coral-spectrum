@@ -41,9 +41,15 @@
 
   <body class="coral--light">
     <main class="u-coral-margin">
-      <h1 class="coral-Heading coral-Heading--1">DragAction</h1>
+      <h1 class="coral-Heading--XXXL">Drag Action</h1>
 
-      <h2 class="coral-Heading coral-Heading--2">Default</h2>
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        Drag actions are decorators which add draggable functionality to elements.
+      </p>
+
+      <h2 class="coral--Heading--S">Default</h2>
       <div class="markup">
         <span coral-dragaction>
         <p>You can drag me</p>
@@ -51,12 +57,12 @@
       </span>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Limited to a single axis</h2>
+      <h2 class="coral--Heading--S">Limited to a single axis</h2>
       <div class="markup">
         <span coral-dragaction coral-dragaction-axis="horizontal">You can drag me on the horizontal axis only</span>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Limited to a handle</h2>
+      <h2 class="coral--Heading--S">Limited to a handle</h2>
       <div class="markup">
         <div coral-dragaction coral-dragaction-handle=".handle1, .handle2">
           I can be dragged only by this
@@ -64,7 +70,7 @@
         </div>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Containment</h2>
+      <h2 class="coral--Heading--S">Containment</h2>
       <div class="markup">
         <div style="height:200px;width:200px;background: #eee;overflow:scroll;">
           <div coral-dragaction coral-dragaction-containment style="width:50px;border:1px solid #999;">
@@ -73,12 +79,12 @@
         </div>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Automatic window scroll</h2>
+      <h2 class="coral--Heading--S">Automatic window scroll</h2>
       <div class="markup">
         <span coral-dragaction coral-dragaction-scroll>You can drag me and window will scroll</span>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Automatic container scroll</h2>
+      <h2 class="coral--Heading--S">Automatic container scroll</h2>
       <div class="markup">
         <div style="overflow: auto;border: 1px solid; height:500px;width:500px;">
           <span coral-dragaction coral-dragaction-scroll>You can drag me and container will scroll</span>
@@ -86,7 +92,7 @@
         </div>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Drag'n'drop</h2>
+      <h2 class="coral--Heading--S">Drag'n'drop</h2>
       <div class="markup">
         <span id="dragaction" coral-dragaction coral-dragaction-dropzone="#dropzone">You can drop me on #dropzone</span>
 
@@ -101,7 +107,7 @@
         </script>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Initialized with JS</h2>
+      <h2 class="coral--Heading--S">Initialized with JS</h2>
       <div class="markup">
         <span id="init-js">You can drag me vertically</span>
         <script>

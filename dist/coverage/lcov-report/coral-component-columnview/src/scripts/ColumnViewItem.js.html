@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.2% </span>
+                <span class="strong">96.3% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>76/79</span>
+                <span class='fraction'>78/81</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.2% </span>
+                <span class="strong">96.3% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>76/79</span>
+                <span class='fraction'>78/81</span>
             </div>
         
             
@@ -346,7 +346,14 @@
 <a name='L288'></a><a href='#L288'>288</a>
 <a name='L289'></a><a href='#L289'>289</a>
 <a name='L290'></a><a href='#L290'>290</a>
-<a name='L291'></a><a href='#L291'>291</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L291'></a><a href='#L291'>291</a>
+<a name='L292'></a><a href='#L292'>292</a>
+<a name='L293'></a><a href='#L293'>293</a>
+<a name='L294'></a><a href='#L294'>294</a>
+<a name='L295'></a><a href='#L295'>295</a>
+<a name='L296'></a><a href='#L296'>296</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -408,6 +415,9 @@
 <span class="cline-any cline-yes">906x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">906x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">906x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -483,7 +493,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">900x</span>
+<span class="cline-any cline-yes">1574x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">900x</span>
@@ -587,6 +597,8 @@
 <span class="cline-any cline-yes">674x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">674x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -634,8 +646,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">172x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">172x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">172x</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -649,6 +659,7 @@
  */
 &nbsp;
 import {BaseComponent} from '../../../coral-base-component';
+import {BaseLabellable} from '../../../coral-base-labellable';
 import {Icon} from '../../../coral-component-icon';
 import {Checkbox} from '../../../coral-component-checkbox';
 import {transform, validate} from '../../../coral-utils';
@@ -677,7 +688,7 @@ const variant = {
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class ColumnViewItem extends BaseComponent(HTMLElement) {
+class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -687,6 +698,8 @@ class ColumnViewItem extends BaseComponent(HTMLElement) {
       content: this.querySelector('coral-columnview-item-content') || document.createElement('coral-columnview-item-content'),
       thumbnail: this.querySelector('coral-columnview-item-thumbnail') || document.createElement('coral-columnview-item-thumbnail')
     };
+  
+    super._observeLabel();
   }
   
   /**
@@ -716,10 +729,10 @@ class ColumnViewItem extends BaseComponent(HTMLElement) {
    @type {ColumnViewItemThumbnail}
    @contentzone
    */
-  get th<span class="missing-if-branch" title="if path not taken" >I</span>umbnail() {
-    return<span class="cstat-no" title="statement not covered" > this._getContentZone(this._elements.thu</span>mbnail);
-  }
-  set thumbnail(value) {
+  get thumbnail() {
+    return this._getContentZone(this._elements.thumbnail);
+  }<span class="missing-if-branch" title="if path not taken" >I</span>
+  set thum<span class="cstat-no" title="statement not covered" >bnail(value) {</span>
     this._setContentZone('thumbnail', value, {
       handle: 'thumbnail',
       tagName: 'coral-columnview-item-thumbnail',
@@ -762,9 +775,9 @@ class ColumnViewItem extends BaseComponent(HTMLElement) {
   }
   
   /**
-   Specifi<span class="cstat-no" title="statement not covered" >es the icon that will be placed inside</span> the thumbnail. The size of the icon is always controlled by the
+   Specifies the icon that will be placed inside the thumbnail. The size of the icon is always controlled by the
    component.
-   
+   <span class="cstat-no" title="statement not covered" ></span>
    @type {String}
    @default ""
    @htmlattribute icon
@@ -793,6 +806,8 @@ class ColumnViewItem extends BaseComponent(HTMLElement) {
       // adds the newly created icon
       this._elements.thumbnail.appendChild(this._elements.icon);
     }
+  
+    super._toggleIconAriaHidden();
   }
   
   /**
@@ -933,7 +948,7 @@ export default ColumnViewItem;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Feb 20 2020 17:29:45 GMT+0100 (Central European Standard Time)
+                at Tue Mar 03 2020 18:19:48 GMT+0100 (Central European Standard Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

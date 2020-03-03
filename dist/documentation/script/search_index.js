@@ -145,9 +145,9 @@ window.esdocSearchIndex = [
   ],
   [
     "@adobe/coral-spectrum~basebutton",
-    "class/coral-spectrum/coral-base-button/src/scripts/BaseButton.js~BaseButton.html",
+    "function/index.html#static-function-BaseButton",
     "<span>BaseButton</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
-    "class"
+    "function"
   ],
   [
     "@adobe/coral-spectrum~basecolorinputabstractsubview",
@@ -162,9 +162,21 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "@adobe/coral-spectrum~basefieldgroup",
+    "class/coral-spectrum/coral-base-fieldgroup/src/scripts/BaseFieldGroup.js~BaseFieldGroup.html",
+    "<span>BaseFieldGroup</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
+  ],
+  [
     "@adobe/coral-spectrum~baseformfield",
     "class/coral-spectrum/coral-base-formfield/src/scripts/BaseFormField.js~BaseFormField.html",
     "<span>BaseFormField</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
+  ],
+  [
+    "@adobe/coral-spectrum~baselabellable",
+    "class/coral-spectrum/coral-base-labellable/src/scripts/BaseLabellable.js~BaseLabellable.html",
+    "<span>BaseLabellable</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
     "class"
   ],
   [
@@ -175,9 +187,9 @@ window.esdocSearchIndex = [
   ],
   [
     "@adobe/coral-spectrum~baselistitem",
-    "class/coral-spectrum/coral-base-list/src/scripts/BaseListItem.js~BaseListItem.html",
+    "function/index.html#static-function-BaseListItem",
     "<span>BaseListItem</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
-    "class"
+    "function"
   ],
   [
     "@adobe/coral-spectrum~baseoverlay",
@@ -309,6 +321,12 @@ window.esdocSearchIndex = [
     "@adobe/coral-spectrum~checkbox",
     "class/coral-spectrum/coral-component-checkbox/src/scripts/Checkbox.js~Checkbox.html",
     "<span>Checkbox</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
+  ],
+  [
+    "@adobe/coral-spectrum~checkboxgroup",
+    "class/coral-spectrum/coral-component-checkboxgroup/src/scripts/CheckboxGroup.js~CheckboxGroup.html",
+    "<span>CheckboxGroup</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
     "class"
   ],
   [
@@ -753,6 +771,12 @@ window.esdocSearchIndex = [
     "@adobe/coral-spectrum~radio",
     "class/coral-spectrum/coral-component-radio/src/scripts/Radio.js~Radio.html",
     "<span>Radio</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
+  ],
+  [
+    "@adobe/coral-spectrum~radiogroup",
+    "class/coral-spectrum/coral-component-radiogroup/src/scripts/RadioGroup.js~RadioGroup.html",
+    "<span>RadioGroup</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
     "class"
   ],
   [
@@ -1674,84 +1698,6 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "coral-spectrum/coral-base-button/src/scripts/basebutton.js~basebutton#block",
-    "class/coral-spectrum/coral-base-button/src/scripts/BaseButton.js~BaseButton.html#instance-member-block",
-    "coral-spectrum/coral-base-button/src/scripts/BaseButton.js~BaseButton#block",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-base-button/src/scripts/basebutton.js~basebutton#icon",
-    "class/coral-spectrum/coral-base-button/src/scripts/BaseButton.js~BaseButton.html#instance-member-icon",
-    "coral-spectrum/coral-base-button/src/scripts/BaseButton.js~BaseButton#icon",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-base-button/src/scripts/basebutton.js~basebutton#iconposition",
-    "class/coral-spectrum/coral-base-button/src/scripts/BaseButton.js~BaseButton.html#instance-member-iconPosition",
-    "coral-spectrum/coral-base-button/src/scripts/BaseButton.js~BaseButton#iconPosition",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-base-button/src/scripts/basebutton.js~basebutton#iconsize",
-    "class/coral-spectrum/coral-base-button/src/scripts/BaseButton.js~BaseButton.html#instance-member-iconSize",
-    "coral-spectrum/coral-base-button/src/scripts/BaseButton.js~BaseButton#iconSize",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-base-button/src/scripts/basebutton.js~basebutton#label",
-    "class/coral-spectrum/coral-base-button/src/scripts/BaseButton.js~BaseButton.html#instance-member-label",
-    "coral-spectrum/coral-base-button/src/scripts/BaseButton.js~BaseButton#label",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-base-button/src/scripts/basebutton.js~basebutton#selected",
-    "class/coral-spectrum/coral-base-button/src/scripts/BaseButton.js~BaseButton.html#instance-member-selected",
-    "coral-spectrum/coral-base-button/src/scripts/BaseButton.js~BaseButton#selected",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-base-button/src/scripts/basebutton.js~basebutton#size",
-    "class/coral-spectrum/coral-base-button/src/scripts/BaseButton.js~BaseButton.html#instance-member-size",
-    "coral-spectrum/coral-base-button/src/scripts/BaseButton.js~BaseButton#size",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-base-button/src/scripts/basebutton.js~basebutton#trackingelement",
-    "class/coral-spectrum/coral-base-button/src/scripts/BaseButton.js~BaseButton.html#instance-member-trackingElement",
-    "coral-spectrum/coral-base-button/src/scripts/BaseButton.js~BaseButton#trackingElement",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-base-button/src/scripts/basebutton.js~basebutton#variant",
-    "class/coral-spectrum/coral-base-button/src/scripts/BaseButton.js~BaseButton.html#instance-member-variant",
-    "coral-spectrum/coral-base-button/src/scripts/BaseButton.js~BaseButton#variant",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-base-button/src/scripts/basebutton.js~basebutton.iconposition",
-    "class/coral-spectrum/coral-base-button/src/scripts/BaseButton.js~BaseButton.html#static-member-iconPosition",
-    "coral-spectrum/coral-base-button/src/scripts/BaseButton.js~BaseButton.iconPosition",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-base-button/src/scripts/basebutton.js~basebutton.iconsize",
-    "class/coral-spectrum/coral-base-button/src/scripts/BaseButton.js~BaseButton.html#static-member-iconSize",
-    "coral-spectrum/coral-base-button/src/scripts/BaseButton.js~BaseButton.iconSize",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-base-button/src/scripts/basebutton.js~basebutton.size",
-    "class/coral-spectrum/coral-base-button/src/scripts/BaseButton.js~BaseButton.html#static-member-size",
-    "coral-spectrum/coral-base-button/src/scripts/BaseButton.js~BaseButton.size",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-base-button/src/scripts/basebutton.js~basebutton.variant",
-    "class/coral-spectrum/coral-base-button/src/scripts/BaseButton.js~BaseButton.html#static-member-variant",
-    "coral-spectrum/coral-base-button/src/scripts/BaseButton.js~BaseButton.variant",
-    "member"
-  ],
-  [
     "coral-spectrum/coral-base-button/src/scripts/basebutton.js~buttoniconpositionenum",
     "typedef/index.html#static-typedef-ButtonIconPositionEnum",
     "coral-spectrum/coral-base-button/src/scripts/BaseButton.js~ButtonIconPositionEnum",
@@ -1860,6 +1806,42 @@ window.esdocSearchIndex = [
     "typedef"
   ],
   [
+    "coral-spectrum/coral-base-fieldgroup/src/scripts/basefieldgroup.js",
+    "file/coral-spectrum/coral-base-fieldgroup/src/scripts/BaseFieldGroup.js.html",
+    "coral-spectrum/coral-base-fieldgroup/src/scripts/BaseFieldGroup.js",
+    "file"
+  ],
+  [
+    "coral-spectrum/coral-base-fieldgroup/src/scripts/basefieldgroup.js~basefieldgroup#items",
+    "class/coral-spectrum/coral-base-fieldgroup/src/scripts/BaseFieldGroup.js~BaseFieldGroup.html#instance-member-items",
+    "coral-spectrum/coral-base-fieldgroup/src/scripts/BaseFieldGroup.js~BaseFieldGroup#items",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-base-fieldgroup/src/scripts/basefieldgroup.js~basefieldgroup#orientation",
+    "class/coral-spectrum/coral-base-fieldgroup/src/scripts/BaseFieldGroup.js~BaseFieldGroup.html#instance-member-orientation",
+    "coral-spectrum/coral-base-fieldgroup/src/scripts/BaseFieldGroup.js~BaseFieldGroup#orientation",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-base-fieldgroup/src/scripts/basefieldgroup.js~basefieldgroup#selecteditem",
+    "class/coral-spectrum/coral-base-fieldgroup/src/scripts/BaseFieldGroup.js~BaseFieldGroup.html#instance-member-selectedItem",
+    "coral-spectrum/coral-base-fieldgroup/src/scripts/BaseFieldGroup.js~BaseFieldGroup#selectedItem",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-base-fieldgroup/src/scripts/basefieldgroup.js~basefieldgroup.orientation",
+    "class/coral-spectrum/coral-base-fieldgroup/src/scripts/BaseFieldGroup.js~BaseFieldGroup.html#static-member-orientation",
+    "coral-spectrum/coral-base-fieldgroup/src/scripts/BaseFieldGroup.js~BaseFieldGroup.orientation",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-base-fieldgroup/src/scripts/basefieldgroup.js~basefieldgrouporientationenum",
+    "typedef/index.html#static-typedef-BaseFieldGroupOrientationEnum",
+    "coral-spectrum/coral-base-fieldgroup/src/scripts/BaseFieldGroup.js~BaseFieldGroupOrientationEnum",
+    "typedef"
+  ],
+  [
     "coral-spectrum/coral-base-formfield/src/scripts/baseformfield.js",
     "file/coral-spectrum/coral-base-formfield/src/scripts/BaseFormField.js.html",
     "coral-spectrum/coral-base-formfield/src/scripts/BaseFormField.js",
@@ -1878,6 +1860,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "coral-spectrum/coral-base-formfield/src/scripts/baseformfield.js~baseformfield#labelled",
+    "class/coral-spectrum/coral-base-formfield/src/scripts/BaseFormField.js~BaseFormField.html#instance-member-labelled",
+    "coral-spectrum/coral-base-formfield/src/scripts/BaseFormField.js~BaseFormField#labelled",
+    "member"
+  ],
+  [
     "coral-spectrum/coral-base-formfield/src/scripts/baseformfield.js~baseformfield#labelledby",
     "class/coral-spectrum/coral-base-formfield/src/scripts/BaseFormField.js~BaseFormField.html#instance-member-labelledBy",
     "coral-spectrum/coral-base-formfield/src/scripts/BaseFormField.js~BaseFormField#labelledBy",
@@ -1888,6 +1876,12 @@ window.esdocSearchIndex = [
     "class/coral-spectrum/coral-base-formfield/src/scripts/BaseFormField.js~BaseFormField.html#instance-method-reset",
     "coral-spectrum/coral-base-formfield/src/scripts/BaseFormField.js~BaseFormField#reset",
     "method"
+  ],
+  [
+    "coral-spectrum/coral-base-labellable/src/scripts/baselabellable.js",
+    "file/coral-spectrum/coral-base-labellable/src/scripts/BaseLabellable.js.html",
+    "coral-spectrum/coral-base-labellable/src/scripts/BaseLabellable.js",
+    "file"
   ],
   [
     "coral-spectrum/coral-base-list/src/scripts/baselist.js",
@@ -1924,24 +1918,6 @@ window.esdocSearchIndex = [
     "file/coral-spectrum/coral-base-list/src/scripts/BaseListItem.js.html",
     "coral-spectrum/coral-base-list/src/scripts/BaseListItem.js",
     "file"
-  ],
-  [
-    "coral-spectrum/coral-base-list/src/scripts/baselistitem.js~baselistitem#content",
-    "class/coral-spectrum/coral-base-list/src/scripts/BaseListItem.js~BaseListItem.html#instance-member-content",
-    "coral-spectrum/coral-base-list/src/scripts/BaseListItem.js~BaseListItem#content",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-base-list/src/scripts/baselistitem.js~baselistitem#disabled",
-    "class/coral-spectrum/coral-base-list/src/scripts/BaseListItem.js~BaseListItem.html#instance-member-disabled",
-    "coral-spectrum/coral-base-list/src/scripts/BaseListItem.js~BaseListItem#disabled",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-base-list/src/scripts/baselistitem.js~baselistitem#icon",
-    "class/coral-spectrum/coral-base-list/src/scripts/BaseListItem.js~BaseListItem.html#instance-member-icon",
-    "coral-spectrum/coral-base-list/src/scripts/BaseListItem.js~BaseListItem#icon",
-    "member"
   ],
   [
     "coral-spectrum/coral-base-overlay/src/scripts/baseoverlay.js",
@@ -3216,6 +3192,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "coral-spectrum/coral-component-checkbox/src/scripts/checkbox.js~checkbox#labelled",
+    "class/coral-spectrum/coral-component-checkbox/src/scripts/Checkbox.js~Checkbox.html#instance-member-labelled",
+    "coral-spectrum/coral-component-checkbox/src/scripts/Checkbox.js~Checkbox#labelled",
+    "member"
+  ],
+  [
     "coral-spectrum/coral-component-checkbox/src/scripts/checkbox.js~checkbox#name",
     "class/coral-spectrum/coral-component-checkbox/src/scripts/Checkbox.js~Checkbox.html#instance-member-name",
     "coral-spectrum/coral-component-checkbox/src/scripts/Checkbox.js~Checkbox#name",
@@ -3256,6 +3238,18 @@ window.esdocSearchIndex = [
     "file/coral-spectrum/coral-component-checkbox/src/scripts/CheckboxLabel.js.html",
     "coral-spectrum/coral-component-checkbox/src/scripts/CheckboxLabel.js",
     "file"
+  ],
+  [
+    "coral-spectrum/coral-component-checkboxgroup/src/scripts/checkboxgroup.js",
+    "file/coral-spectrum/coral-component-checkboxgroup/src/scripts/CheckboxGroup.js.html",
+    "coral-spectrum/coral-component-checkboxgroup/src/scripts/CheckboxGroup.js",
+    "file"
+  ],
+  [
+    "coral-spectrum/coral-component-checkboxgroup/src/scripts/checkboxgroup.js~checkboxgroup#selecteditems",
+    "class/coral-spectrum/coral-component-checkboxgroup/src/scripts/CheckboxGroup.js~CheckboxGroup.html#instance-member-selectedItems",
+    "coral-spectrum/coral-component-checkboxgroup/src/scripts/CheckboxGroup.js~CheckboxGroup#selectedItems",
+    "member"
   ],
   [
     "coral-spectrum/coral-component-clock/src/scripts/clock.js",
@@ -4758,6 +4752,12 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "coral-spectrum/coral-component-icon/src/scripts/icon.js~icon#autoarialabel",
+    "class/coral-spectrum/coral-component-icon/src/scripts/Icon.js~Icon.html#instance-member-autoAriaLabel",
+    "coral-spectrum/coral-component-icon/src/scripts/Icon.js~Icon#autoAriaLabel",
+    "member"
+  ],
+  [
     "coral-spectrum/coral-component-icon/src/scripts/icon.js~icon#icon",
     "class/coral-spectrum/coral-component-icon/src/scripts/Icon.js~Icon.html#instance-member-icon",
     "coral-spectrum/coral-component-icon/src/scripts/Icon.js~Icon#icon",
@@ -4767,6 +4767,12 @@ window.esdocSearchIndex = [
     "coral-spectrum/coral-component-icon/src/scripts/icon.js~icon#size",
     "class/coral-spectrum/coral-component-icon/src/scripts/Icon.js~Icon.html#instance-member-size",
     "coral-spectrum/coral-component-icon/src/scripts/Icon.js~Icon#size",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-icon/src/scripts/icon.js~icon.autoarialabel",
+    "class/coral-spectrum/coral-component-icon/src/scripts/Icon.js~Icon.html#static-member-autoAriaLabel",
+    "coral-spectrum/coral-component-icon/src/scripts/Icon.js~Icon.autoAriaLabel",
     "member"
   ],
   [
@@ -4780,6 +4786,12 @@ window.esdocSearchIndex = [
     "class/coral-spectrum/coral-component-icon/src/scripts/Icon.js~Icon.html#static-member-size",
     "coral-spectrum/coral-component-icon/src/scripts/Icon.js~Icon.size",
     "member"
+  ],
+  [
+    "coral-spectrum/coral-component-icon/src/scripts/icon.js~iconautoarialabelenum",
+    "typedef/index.html#static-typedef-IconAutoAriaLabelEnum",
+    "coral-spectrum/coral-component-icon/src/scripts/Icon.js~IconAutoAriaLabelEnum",
+    "typedef"
   ],
   [
     "coral-spectrum/coral-component-icon/src/scripts/icon.js~iconsizeenum",
@@ -5940,6 +5952,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "coral-spectrum/coral-component-radio/src/scripts/radio.js~radio#labelled",
+    "class/coral-spectrum/coral-component-radio/src/scripts/Radio.js~Radio.html#instance-member-labelled",
+    "coral-spectrum/coral-component-radio/src/scripts/Radio.js~Radio#labelled",
+    "member"
+  ],
+  [
     "coral-spectrum/coral-component-radio/src/scripts/radio.js~radio#name",
     "class/coral-spectrum/coral-component-radio/src/scripts/Radio.js~Radio.html#instance-member-name",
     "coral-spectrum/coral-component-radio/src/scripts/Radio.js~Radio#name",
@@ -5980,6 +5998,30 @@ window.esdocSearchIndex = [
     "file/coral-spectrum/coral-component-radio/src/scripts/RadioLabel.js.html",
     "coral-spectrum/coral-component-radio/src/scripts/RadioLabel.js",
     "file"
+  ],
+  [
+    "coral-spectrum/coral-component-radiogroup/src/scripts/radiogroup.js",
+    "file/coral-spectrum/coral-component-radiogroup/src/scripts/RadioGroup.js.html",
+    "coral-spectrum/coral-component-radiogroup/src/scripts/RadioGroup.js",
+    "file"
+  ],
+  [
+    "coral-spectrum/coral-component-radiogroup/src/scripts/radiogroup.js~radiogroup#orientation",
+    "class/coral-spectrum/coral-component-radiogroup/src/scripts/RadioGroup.js~RadioGroup.html#instance-member-orientation",
+    "coral-spectrum/coral-component-radiogroup/src/scripts/RadioGroup.js~RadioGroup#orientation",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-radiogroup/src/scripts/radiogroup.js~radiogroup.orientation",
+    "class/coral-spectrum/coral-component-radiogroup/src/scripts/RadioGroup.js~RadioGroup.html#static-member-orientation",
+    "coral-spectrum/coral-component-radiogroup/src/scripts/RadioGroup.js~RadioGroup.orientation",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-radiogroup/src/scripts/radiogroup.js~radiogrouporientationenum",
+    "typedef/index.html#static-typedef-RadioGroupOrientationEnum",
+    "coral-spectrum/coral-component-radiogroup/src/scripts/RadioGroup.js~RadioGroupOrientationEnum",
+    "typedef"
   ],
   [
     "coral-spectrum/coral-component-search/src/scripts/search.js",
@@ -7263,6 +7305,12 @@ window.esdocSearchIndex = [
     "coral-spectrum/coral-component-switch/src/scripts/switch.js~switch#label",
     "class/coral-spectrum/coral-component-switch/src/scripts/Switch.js~Switch.html#instance-member-label",
     "coral-spectrum/coral-component-switch/src/scripts/Switch.js~Switch#label",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-switch/src/scripts/switch.js~switch#labelled",
+    "class/coral-spectrum/coral-component-switch/src/scripts/Switch.js~Switch.html#instance-member-labelled",
+    "coral-spectrum/coral-component-switch/src/scripts/Switch.js~Switch#labelled",
     "member"
   ],
   [
