@@ -64,6 +64,19 @@ describe('Radio', function() {
       expect(radio.readOnly).to.be.false;
       expect(radio.invalid).to.be.false;
     });
+  
+    describe('#labelled', () => {
+      it('should show/hide screen reader text when labelled is empty/set', () => {
+        const el = new Radio();
+        expect(el._elements.screenReaderOnly.hidden).to.be.false;
+      
+        el.labelled = 'Test';
+        expect(el._elements.screenReaderOnly.hidden).to.be.true;
+      
+        el.labelled = null;
+        expect(el._elements.screenReaderOnly.hidden).to.be.false;
+      });
+    });
     
     describe('#label', function() {
       it('should show screen reader text by default', function() {

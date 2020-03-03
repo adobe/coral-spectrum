@@ -85,6 +85,19 @@ describe('Switch', function() {
       expect(el._elements.input.value).to.equal('yes');
     });
   
+    describe('#labelled', () => {
+      it('should show/hide screen reader text when labelled is empty/set', () => {
+        const el = new Switch();
+        expect(el._elements.screenReaderOnly.hidden).to.be.false;
+      
+        el.labelled = 'Test';
+        expect(el._elements.screenReaderOnly.hidden).to.be.true;
+      
+        el.labelled = null;
+        expect(el._elements.screenReaderOnly.hidden).to.be.false;
+      });
+    });
+  
     describe('#label', function() {
       it('should show the screen reader text by default', function() {
         var el = new Switch();

@@ -152,6 +152,22 @@ const BaseFormField = (superClass) => class extends superClass {
   }
   
   /**
+   Reflects the <code>aria-label</code> attribute to the labellable element e.g. inner input.
+   
+   @type {String}
+   @default null
+   @htmlattribute labelled
+   */
+  get labelled() {
+    return this._getLabellableElement().getAttribute('aria-label');
+  }
+  set labelled(value) {
+    value = transform.string(value);
+  
+    this._getLabellableElement()[value ? 'setAttribute' : 'removeAttribute']('aria-label', value);
+  }
+  
+  /**
    Reference to a space delimited set of ids for the HTML elements that provide a label for the formField.
    Implementers should override this method to ensure that the appropriate descendant elements are labelled using the
    <code>aria-labelledby</code> attribute. This will ensure that the component is properly identified for
@@ -360,6 +376,7 @@ const BaseFormField = (superClass) => class extends superClass {
   // We don't want to watch existing attributes for components that extend native HTML elements
   static get _nativeObservedAttributes() {
     return super.observedAttributes.concat([
+      'labelled',
       'labelledby',
       'invalid'
     ]);
@@ -368,6 +385,7 @@ const BaseFormField = (superClass) => class extends superClass {
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
+      'labelled',
       'labelledby',
       'invalid',
       'readonly',

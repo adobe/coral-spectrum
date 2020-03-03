@@ -182,6 +182,18 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
     this._elements.input.tabIndex = this._readOnly ? -1 : 0;
   }
   
+  /**
+   Inherited from {@link BaseFormField#labelled}.
+   */
+  get labelled() {
+    return super.labelled;
+  }
+  set labelled(value) {
+    super.labelled = value;
+    
+    this._hideLabelIfEmpty();
+  }
+  
   /*
    Indicates to the formField that the 'checked' property needs to be set in this component.
    
@@ -205,7 +217,7 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
     const label = this._elements.label;
   
     // If it's empty and has no non-textnode children, hide the label
-    const hiddenValue = !(label.children.length === 0 && label.textContent.replace(/\s*/g, '') === '');
+    const hiddenValue = !(label.children.length === 0 && label.textContent.replace(/\s*/g, '') === '' && !this.labelled);
   
     // Toggle the screen reader text
     this._elements.labelWrapper.style.margin = !hiddenValue ? '0' : '';

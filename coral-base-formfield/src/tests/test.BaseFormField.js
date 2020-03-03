@@ -87,16 +87,16 @@ describe('BaseFormField', function() {
       el = null;
     });
     
-    ['name', 'value', 'disabled', 'required', 'readOnly', 'invalid', 'labelledBy'].forEach((prop) => {
+    ['name', 'value', 'disabled', 'required', 'readOnly', 'invalid', 'labelled', 'labelledBy'].forEach((prop) => {
   
-      const value = ['name', 'value', 'labelledBy'].indexOf(prop) !== -1 ? 'test' : true;
+      const value = ['name', 'value', 'labelledBy', 'labelled'].indexOf(prop) !== -1 ? 'test' : true;
       
       describe(`#${prop}`, function() {
         it('should set by property', function() {
           el[prop] = value;
           expect(el[prop]).to.equal(value);
           
-          if (prop !== 'invalid' && prop !== 'labelledBy') {
+          if (prop !== 'invalid' && prop !== 'labelledBy' && prop !== 'labelled') {
             expect(el._elements.input[prop]).to.equal(value);
           }
         });
@@ -105,12 +105,12 @@ describe('BaseFormField', function() {
           el.setAttribute(prop, value);
           expect(el[prop]).to.equal(value);
   
-          if (prop !== 'invalid' && prop !== 'labelledBy') {
+          if (prop !== 'invalid' && prop !== 'labelledBy' && prop !== 'labelled') {
             expect(el._elements.input[prop]).to.equal(value);
           }
         });
     
-        if (prop !== 'value' && prop !== 'labelledBy') {
+        if (prop !== 'value' && prop !== 'labelledBy' && prop !== 'labelled') {
           it('should be reflected', function() {
             el[prop] = value;
             
@@ -122,6 +122,21 @@ describe('BaseFormField', function() {
             }
           });
         }
+      });
+    });
+  
+    describe('#labelled', function() {
+      it('should not add aria-label attribute by default', function() {
+        expect(el.hasAttribute('labelled')).to.be.false;
+        expect(el._getLabellableElement().hasAttribute('aria-label')).to.be.false;
+      });
+  
+      it('should add/remove aria-label attribute when labelled attribute is added/removed', function() {
+        el.setAttribute('labelled', 'new label');
+        expect(el.labelled).to.equal('new label');
+        expect(el._getLabellableElement().getAttribute('aria-label')).to.equal('new label');
+        el.removeAttribute('labelled');
+        expect(el._getLabellableElement().hasAttribute('aria-label')).to.be.false;
       });
     });
     

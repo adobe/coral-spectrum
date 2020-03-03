@@ -205,6 +205,19 @@ describe('Checkbox', function() {
         expect(el.disabled).to.be.false;
       });
     });
+    
+    describe('#labelled', () => {
+      it('should show/hide screen reader text when labelled is empty/set', () => {
+        const el = new Checkbox();
+        expect(el._elements.screenReaderOnly.hidden).to.be.false;
+    
+        el.labelled = 'Test';
+        expect(el._elements.screenReaderOnly.hidden).to.be.true;
+        
+        el.labelled = null;
+        expect(el._elements.screenReaderOnly.hidden).to.be.false;
+      });
+    });
 
     describe('#label', function() {
       it('should show the screen reader text label by default', function() {
