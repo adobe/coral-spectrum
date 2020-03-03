@@ -19,87 +19,87 @@ The default Coral Spectrum font styles cascade from `coral--light`, `coral--ligh
 
 Coral Spectrum provides some CSS utility classes that can be applied to any DOM element. 
 
-#### u-coral-clearFix
+### u-coral-clearFix
 
 Applies the clearfix hack.
 
-#### u-coral-noBorder
+### u-coral-noBorder
 
 Removes all the borders of an element.
 
-#### u-coral-noScroll
+### u-coral-noScroll
 
 Stops an element from scrolling.
 
-#### u-coral-screenReaderOnly
+### u-coral-screenReaderOnly
 
 Hides elements from visual browsers.
 
-#### u-coral-closedHand
+### u-coral-closedHand
 
 A closed hand cursor that indicates an item is current grabbed.
 
-#### u-coral-openHand
+### u-coral-openHand
 
 An open hand cursor to indicate that an item can be grabbed.
 
-#### u-coral-pullLeft
+### u-coral-pullLeft
 
 Floats the content to the left.
 
-#### u-coral-pullRight
+### u-coral-pullRight
 
 Floats the content to the right.
 
-#### u-coral-padding
+### u-coral-padding
 
 Adds the default padding on all sides.
 
-#### u-coral-padding-horizontal
+### u-coral-padding-horizontal
 
 Adds the default padding to left and right.
 
-#### u-coral-padding-vertical
+### u-coral-padding-vertical
 
 Adds the default padding to top and bottom.
 
-#### u-coral-margin
+### u-coral-margin
 
 Adds the default the margin on all sides.
 
-#### u-coral-noPadding
+### u-coral-noPadding
 
 Removes the padding on all sides.
 
-#### u-coral-noPadding-horizontal
+### u-coral-noPadding-horizontal
 
 Removes the padding on the left and right side.
 
-#### u-coral-noPadding-vertical
+### u-coral-noPadding-vertical
 
 Removes the padding on the top and bottom side.
 
-#### u-coral-noMargin
+### u-coral-noMargin
 
 Removes the margin on all sides.
 
-#### u-coral-ellipsis
+### u-coral-ellipsis
 
 Prevent text from wrapping, use an ellipsis to truncate.
 
-#### u-coral-visibleXS | u-coral-hiddenXS 
+### u-coral-visibleXS | u-coral-hiddenXS 
 
 Extra small device: <768px.
 
-#### u-coral-visibleS | u-coral-hiddenS
+### u-coral-visibleS | u-coral-hiddenS
 
 Small device: >= 768px.
 
-#### u-coral-visibleM | u-coral-hiddenM
+### u-coral-visibleM | u-coral-hiddenM
 
 Medium device: >= 992px.
 
-#### u-coral-visibleL | u-coral-hiddenL
+### u-coral-visibleL | u-coral-hiddenL
 
 Large device >= 1200px.
 
