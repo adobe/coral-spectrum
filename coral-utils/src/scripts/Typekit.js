@@ -13,7 +13,13 @@
 import commons from './Commons';
 import events from './Events';
 
-const typeKitId = commons && commons.options.typekit || 'ruf7eed';
+let typeKitId = commons && commons.options.typekit;
+if (!typeKitId) {
+  // On pageload, determine to current pages language setting.
+  // If it is english language or unset use the 1st Adobe font web project id (smaller size),
+  // otherwise use the 2nd kit with all the language settings (larger size)
+  typeKitId = document.querySelector('[lang]:not([lang^="en"])') === null ? 'mge7bvf' : 'rok6rmo';
+}
 
 const config = {
   kitId: typeKitId,

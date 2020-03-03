@@ -50,44 +50,50 @@
         <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
       </div>
 
-      <h1 class="coral-Heading coral-Heading--1">FileUpload</h1>
+      <h1 class="coral-Heading--XXXL">File Upload</h1>
 
-      <h2 class="coral-Heading coral-Heading--2">Default</h2>
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        File uploads are managing the upload process of multiple files.
+      </p>
+
+      <h2 class="coral--Heading--S">Default</h2>
       <div class="markup">
         <coral-fileupload name="file" action="http://localhost/~ringel/singlefileupload.php">
           <button is="coral-button" coral-fileupload-select>Upload</button>
         </coral-fileupload>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Mime type support</h2>
+      <h2 class="coral--Heading--S">Mime type support</h2>
       <div class="markup">
         <coral-fileupload name="file" action="http://localhost/~ringel/singlefileupload.php" accept="image/*, *.txt">
           <button is="coral-button" coral-fileupload-select>Only images and .txt files</button>
         </coral-fileupload>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">File size support</h2>
+      <h2 class="coral--Heading--S">File size support</h2>
       <div class="markup">
         <coral-fileupload name="file" action="http://localhost/~ringel/singlefileupload.php" sizelimit="1000000">
           <button is="coral-button" coral-fileupload-select>Only files &lt; 1mb</button>
         </coral-fileupload>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">With upload on file selection</h2>
+      <h2 class="coral--Heading--S">With upload on file selection</h2>
       <div class="markup">
         <coral-fileupload name="file" action="http://localhost/~ringel/singlefileupload.php" autostart>
           <button is="coral-button" coral-fileupload-select>Upload</button>
         </coral-fileupload>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Disabled by default</h2>
+      <h2 class="coral--Heading--S">Disabled by default</h2>
       <div class="markup">
         <coral-fileupload name="file" action="http://localhost/~ringel/singlefileupload.php" disabled>
           <button is="coral-button" coral-fileupload-select>Upload</button>
         </coral-fileupload>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Set action with button</h2>
+      <h2 class="coral--Heading--S">Set action with button</h2>
       <div class="markup">
         <coral-fileupload action="http://localhost/~ringel/singlefileupload.php" multiple>
           <button coral-fileupload-select is="coral-button">Select files..</button>
@@ -97,7 +103,7 @@
         </coral-fileupload>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Set method with button</h2>
+      <h2 class="coral--Heading--S">Set method with button</h2>
       <div class="markup">
         <coral-fileupload action="http://localhost/~ringel/singlefileupload.php" method="post">
           <button is="coral-button" coral-fileupload-select>Select files..</button>
@@ -106,7 +112,7 @@
         </coral-fileupload>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Synchronous in a form</h2>
+      <h2 class="coral--Heading--S">Synchronous in a form</h2>
       <div class="markup">
         <form method="post" enctype="multipart/form-data" action="http://localhost/~ringel/singlefileupload.php">
           <coral-fileupload name="file">
@@ -116,7 +122,7 @@
         </form>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Asynchronous with multiple selection</h2>
+      <h2 class="coral--Heading--S">Asynchronous with multiple selection</h2>
       <div class="markup">
         <style>
           .fileUpload-dropZone {

@@ -55,9 +55,15 @@
         <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
       </div>
 
-      <h1 class="coral-Heading coral-Heading--1">Table</h1>
+      <h1 class="coral-Heading--XXXL">Table</h1>
 
-      <h2 class="coral-Heading coral-Heading--2">Default</h2>
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        Tables are containers for displaying information. They allow users to quickly scan, sort, compare, and take action on large amounts of data.
+      </p>
+
+      <h2 class="coral--Heading--S">Default</h2>
       <div class="markup">
         <table is="coral-table">
           <thead is="coral-table-head">
@@ -92,7 +98,7 @@
         </table>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Quiet variant</h2>
+      <h2 class="coral--Heading--S">Quiet variant</h2>
       <div class="markup">
         <table is="coral-table" variant="quiet">
           <thead is="coral-table-head">
@@ -127,7 +133,7 @@
         </table>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Checkbox selection</h2>
+      <h2 class="coral--Heading--S">Checkbox selection</h2>
       <div class="markup">
         <style>
           .table-sticky [coral-table-scroll] {
@@ -232,7 +238,7 @@
         </table>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Content with centered alignment</h2>
+      <h2 class="coral--Heading--S">Content with centered alignment</h2>
       <div class="markup">
         <table is="coral-table">
           <tbody is="coral-table-body">
@@ -249,7 +255,7 @@
         </table>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Column divider</h2>
+      <h2 class="coral--Heading--S">Column divider</h2>
       <div class="markup">
         <table is="coral-table">
           <thead is="coral-table-head">
@@ -284,7 +290,7 @@
         </table>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Cell divider</h2>
+      <h2 class="coral--Heading--S">Cell divider</h2>
       <div class="markup">
         <table is="coral-table">
           <thead is="coral-table-head">
@@ -322,7 +328,7 @@
         </table>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Sticky head example</h2>
+      <h2 class="coral--Heading--S">Sticky head example</h2>
       <div class="markup">
         <table is="coral-table" class="table-sticky">
           <thead is="coral-table-head" divider="cell" sticky>
@@ -367,7 +373,7 @@
         </table>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Sortable columns</h2>
+      <h2 class="coral--Heading--S">Sortable columns</h2>
       <div class="markup">
         <table is="coral-table">
           <colgroup>
@@ -407,7 +413,7 @@
         </table>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Custom sorting</h2>
+      <h2 class="coral--Heading--S">Custom sorting</h2>
       <div class="markup">
         <style>
           .table-custom-sorting {
@@ -470,7 +476,7 @@
         </script>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Sortable + orderable columns</h2>
+      <h2 class="coral--Heading--S">Sortable + orderable columns</h2>
       <div class="markup">
         <table is="coral-table">
           <colgroup>
@@ -517,7 +523,7 @@
         </table>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Selectable rows</h2>
+      <h2 class="coral--Heading--S">Selectable rows</h2>
       <div class="markup">
         <table is="coral-table" selectable multiple>
           <thead is="coral-table-head">
@@ -562,7 +568,7 @@
         </table>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Selectable cells</h2>
+      <h2 class="coral--Heading--S">Selectable cells</h2>
       <div class="markup">
         <table is="coral-table">
           <thead is="coral-table-head">
@@ -611,7 +617,7 @@
         </table>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Orderable columns + orderable rows</h2>
+      <h2 class="coral--Heading--S">Orderable columns + orderable rows</h2>
       <div class="markup">
         <table is="coral-table" orderable>
           <colgroup>
@@ -651,7 +657,7 @@
         </table>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Orderable columns + orderable rows + sticky head</h2>
+      <h2 class="coral--Heading--S">Orderable columns + orderable rows + sticky head</h2>
       <div class="markup">
         <table is="coral-table" orderable class="table-sticky">
           <colgroup>
@@ -711,7 +717,7 @@
         </table>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Fixed width columns + sticky head + quiet variant</h2>
+      <h2 class="coral--Heading--S">Fixed width columns + sticky head + quiet variant</h2>
       <div class="markup">
         <table is="coral-table" orderable variant="quiet" class="table-sticky">
           <colgroup>
@@ -766,7 +772,7 @@
         </table>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Orderable rows with handles</h2>
+      <h2 class="coral--Heading--S">Orderable rows with handles</h2>
       <div class="markup">
         <table is="coral-table" orderable>
           <colgroup>
@@ -819,7 +825,7 @@
         </table>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Lockable rows</h2>
+      <h2 class="coral--Heading--S">Lockable rows</h2>
       <div class="markup">
         <table is="coral-table" lockable>
           <colgroup>
@@ -873,7 +879,7 @@
         </table>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Hidden columns example</h2>
+      <h2 class="coral--Heading--S">Hidden columns example</h2>
       <div class="markup">
         <div class="hide-control">
           <coral-checkbox type="checkbox" target=".hide-activities-col">Toggle activities</coral-checkbox>
@@ -930,7 +936,7 @@
         </script>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Additive table</h2>
+      <h2 class="coral--Heading--S">Additive table</h2>
       <div class="markup">
         <table is="coral-table">
           <colgroup>
@@ -1028,6 +1034,99 @@
             });
           });
         </script>
+      </div>
+
+      <h3 class="coral-Heading--S">CSS only</h3>
+      <div class="markup">
+        <!-- Deprecated -->
+        <table class="coral-Table">
+          <thead class="coral-Table-head">
+          <tr class="coral-Table-row">
+            <th class="coral-Table-headerCell">Pet Name</th>
+            <th class="coral-Table-headerCell">Type</th>
+            <th class="coral-Table-headerCell">Good/Bad</th>
+          </tr>
+          </thead>
+          <tbody class="coral-Table-body">
+          <tr class="coral-Table-row">
+            <td class="coral-Table-cell">Squeak</td>
+            <td class="coral-Table-cell">Mouse</td>
+            <td class="coral-Table-cell">Bad</td>
+          </tr>
+          <tr class="coral-Table-row">
+            <td class="coral-Table-cell">Spot</td>
+            <td class="coral-Table-cell">Dog</td>
+            <td class="coral-Table-cell">Bad</td>
+          </tr>
+          <tr class="coral-Table-row">
+            <td class="coral-Table-cell">Fluffy</td>
+            <td class="coral-Table-cell">Velociraptor</td>
+            <td class="coral-Table-cell">Good</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="coral-Heading--S">CSS only with hover state</h3>
+      <div class="markup">
+        <!-- Deprecated -->
+        <table class="coral-Table coral-Table--hover">
+          <thead class="coral-Table-head">
+          <tr class="coral-Table-row">
+            <th class="coral-Table-headerCell">Pet Name</th>
+            <th class="coral-Table-headerCell">Type</th>
+            <th class="coral-Table-headerCell">Good/Bad</th>
+          </tr>
+          </thead>
+          <tbody class="coral-Table-body">
+          <tr class="coral-Table-row">
+            <td class="coral-Table-cell">Mongo</td>
+            <td class="coral-Table-cell">Chihuahua</td>
+            <td class="coral-Table-cell">Bad</td>
+          </tr>
+          <tr class="coral-Table-row">
+            <td class="coral-Table-cell">Tiny</td>
+            <td class="coral-Table-cell">Great Dane</td>
+            <td class="coral-Table-cell">Bad</td>
+          </tr>
+          <tr class="coral-Table-row">
+            <td class="coral-Table-cell">Jaws</td>
+            <td class="coral-Table-cell">Pit Bull</td>
+            <td class="coral-Table-cell">Good</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="coral-Heading--S">CSS only with borders</h3>
+      <div class="markup">
+        <!-- Deprecated -->
+        <table class="coral-Table coral-Table--bordered">
+          <thead class="coral-Table-head">
+          <tr class="coral-Table-row">
+            <th class="coral-Table-headerCell">Pet Name</th>
+            <th class="coral-Table-headerCell">Type</th>
+            <th class="coral-Table-headerCell">Good/Bad</th>
+          </tr>
+          </thead>
+          <tbody class="coral-Table-body">
+          <tr class="coral-Table-row">
+            <td class="coral-Table-cell">Hopper</td>
+            <td class="coral-Table-cell">Frog</td>
+            <td class="coral-Table-cell">Good</td>
+          </tr>
+          <tr class="coral-Table-row">
+            <td class="coral-Table-cell">Pokey</td>
+            <td class="coral-Table-cell">Porcupine</td>
+            <td class="coral-Table-cell">Good</td>
+          </tr>
+          <tr class="coral-Table-row">
+            <td class="coral-Table-cell">Mr. Snuggles</td>
+            <td class="coral-Table-cell">Snake</td>
+            <td class="coral-Table-cell">Bad</td>
+          </tr>
+          </tbody>
+        </table>
       </div>
     </main>
   </body>

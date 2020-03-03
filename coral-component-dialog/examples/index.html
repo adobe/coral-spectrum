@@ -50,9 +50,15 @@
         <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
       </div>
 
-      <h1 class="coral-Heading coral-Heading--1">Dialog</h1>
+      <h1 class="coral-Heading--XXXL">Dialog</h1>
 
-      <h2 class="coral-Heading coral-Heading--2">Default</h2>
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        Dialogs display important information that users need to acknowledge. They appear over the interface and block further interactions.
+      </p>
+
+      <h2 class="coral--Heading--S">Default</h2>
       <div class="markup">
         <coral-dialog id="markupDialog">
           <coral-dialog-header>Dialog from Markup</coral-dialog-header>
@@ -65,7 +71,7 @@
         <button is="coral-button" onclick="showDialog('markupDialog')">Dialog from Markup</button>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Custom Sized Dialog</h2>
+      <h2 class="coral--Heading--S">Custom Sized Dialog</h2>
       <div class="markup">
         <coral-dialog id="customSizedDialog">
           <coral-dialog-header>Small Dialog</coral-dialog-header>
@@ -79,7 +85,7 @@
         </style>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Scrolling Dialog</h2>
+      <h2 class="coral--Heading--S">Scrolling Dialog</h2>
       <div class="markup">
         <coral-dialog id="scrollingDialog">
           <coral-dialog-header>Scrolling Dialog</coral-dialog-header>
@@ -156,7 +162,7 @@
       </div>
       <button is="coral-button" onclick="showDialog('scrollingDialog')">Scrolling Dialog</button>
 
-      <h2 class="coral-Heading coral-Heading--2">Fullscreen Dialog</h2>
+      <h2 class="coral--Heading--S">Fullscreen Dialog</h2>
       <div class="markup">
         <coral-dialog fullscreen id="fullscreenDialog">
           <coral-dialog-header>Fullscreen Dialog</coral-dialog-header>
@@ -193,7 +199,7 @@
         <button is="coral-button" onclick="showDialog('fullscreenDialog')">Fullscreen Dialog</button>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Scrolling fullscreen Dialog</h2>
+      <h2 class="coral--Heading--S">Scrolling fullscreen Dialog</h2>
       <div class="markup">
         <coral-dialog fullscreen id="scrollingFullscreenDialog">
           <coral-dialog-header>Scrolling Fullscreen Dialog</coral-dialog-header>
@@ -270,7 +276,7 @@
         <button is="coral-button" onclick="showDialog('scrollingFullscreenDialog')">Scrolling fullscreen Dialog</button>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Variants</h2>
+      <h2 class="coral--Heading--S">Variants</h2>
       <div class="markup">
         <coral-dialog id="dialog-variant" fullscreen>
           <coral-dialog-header id="content_title">Fullscreen Dialog</coral-dialog-header>
@@ -322,7 +328,7 @@
         </script>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Stacking context</h2>
+      <h2 class="coral--Heading--S">Stacking context</h2>
       <button is="coral-button" id="multipleDialogsSomeWithoutBackdrop">Show Multiple Dialogs, some without backdrop</button>
       <div class="markup">
         <script>
@@ -353,7 +359,7 @@
         </script>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Closable</h2>
+      <h2 class="coral--Heading--S">Closable</h2>
       <div class="markup">
         <coral-dialog id='defaultCloseButtonDialog' closable='on'>
           <coral-dialog-header>Done</coral-dialog-header>
@@ -362,7 +368,7 @@
         <button is='coral-button' onclick="showDialog('defaultCloseButtonDialog')">Closable On</button>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Movable</h2>
+      <h2 class="coral--Heading--S">Movable</h2>
       <div class="markup">
         <coral-dialog id="movableDialog" movable>
           <coral-dialog-header>Movable Dialog</coral-dialog-header>
@@ -383,7 +389,7 @@
         <button is='coral-button' onclick="showDialog('movableDialog')">Movable Dialog</button>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Wrapped Dialogs</h2>
+      <h2 class="coral--Heading--S">Wrapped Dialogs</h2>
       <div class="markup">
         <coral-dialog id="no_content_zones">
           <meta name="name" content="content">

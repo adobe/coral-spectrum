@@ -50,27 +50,33 @@
         <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
       </div>
 
-      <h1 class="coral-Heading coral-Heading--1">CharacterCount</h1>
+      <h1 class="coral-Heading--XXXL">Character Count</h1>
 
-      <h2 class="coral-Heading coral-Heading--2">Default</h2>
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        Character counts indicate the remaining characters in a text field.
+      </p>
+
+      <h2 class="coral--Heading--S">Default</h2>
       <div class="markup">
         <input aria-label="input" is="coral-textfield" type="text">
         <coral-charactercount></coral-charactercount>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">With maxlength</h2>
+      <h2 class="coral--Heading--S">With maxlength</h2>
       <div class="markup">
         <input aria-label="input" is="coral-textfield" type="text">
         <coral-charactercount maxlength="10"></coral-charactercount>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Max Length from target input</h2>
+      <h2 class="coral--Heading--S">Max Length from target input</h2>
       <div class="markup">
         <input aria-label="input" is="coral-textfield" maxlength="8" type="text">
         <coral-charactercount></coral-charactercount>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Invalid</h2>
+      <h2 class="coral--Heading--S">Invalid</h2>
       <p>
         (max length set to 5, value initialized to 13 character string)
       </p>
@@ -79,19 +85,19 @@
         <coral-charactercount maxlength="5"></coral-charactercount>
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Target to next input by "_next"</h2>
+      <h2 class="coral--Heading--S">Target to next input by "_next"</h2>
       <div class="markup">
         <coral-charactercount target="_next"></coral-charactercount>
         <input aria-label="input" id="nextInput" is="coral-textfield" type="text">
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">Target to input by id</h2>
+      <h2 class="coral--Heading--S">Target to input by id</h2>
       <div class="markup">
         <coral-charactercount target="#input"></coral-charactercount>
         <input aria-label="input" id="input" is="coral-textfield" type="text">
       </div>
 
-      <h2 class="coral-Heading coral-Heading--2">TextArea</h2>
+      <h2 class="coral--Heading--S">TextArea</h2>
       <div class="markup">
         <textarea aria-label="input" is="coral-textarea"></textarea>
         <coral-charactercount maxlength="10"></coral-charactercount>
