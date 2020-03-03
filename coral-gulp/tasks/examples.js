@@ -51,7 +51,7 @@ module.exports = function(gulp) {
         
         // Replace component example path
         if (path.indexOf('coral/examples/index.html')) {
-          content = `${content.replace("'../' + component + '/examples/index.html'", "component + '.html'")}`;
+          content = `${content.replace("'../' + id + '/examples/index.html'", "id + '.html'")}`;
         }
         
         return content;
