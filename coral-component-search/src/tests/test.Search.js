@@ -115,6 +115,30 @@ describe('Search', function() {
       instance._clearInput();
       expect(instance._elements.input.value).to.equal('');
     });
+    
+    it('should hide the clear button on clear()', () => {
+      const el = helpers.build(new Search());
+      el.value = 'dummy text';
+      expect(el._elements.clearButton.style.display).to.equal('');
+      el.clear();
+      expect(el._elements.clearButton.style.display).to.equal('none');
+    });
+  
+    it('should hide the clear button on reset()', () => {
+      const el = helpers.build(new Search());
+      el.value = 'dummy text';
+      expect(el._elements.clearButton.style.display).to.equal('');
+      el.reset();
+      expect(el._elements.clearButton.style.display).to.equal('none');
+    });
+  
+    it('should hide the clear button on setting empty string value', () => {
+      const el = helpers.build(new Search());
+      el.value = 'dummy text';
+      expect(el._elements.clearButton.style.display).to.equal('');
+      el.value = '';
+      expect(el._elements.clearButton.style.display).to.equal('none');
+    });
   });
   
   it('should submit the one single value', function() {

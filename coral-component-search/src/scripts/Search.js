@@ -96,6 +96,7 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
   }
   set value(value) {
     this._elements.input.value = value;
+    this._updateClearButton();
   }
   
   /**
@@ -277,12 +278,7 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
    @ignore
    */
   _updateClearButton() {
-    if (this._elements.input.value === '') {
-      this._elements.clearButton.style.display = 'none';
-    }
-    else {
-      this._elements.clearButton.style.display = '';
-    }
+    this._elements.clearButton.style.display = this._elements.input.value === '' ? 'none': '';
   }
   
   /**
@@ -303,12 +299,14 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
   reset() {
     // since there is an internal value, this one handles the reset
     this._elements.input.reset();
+    this._updateClearButton();
   }
   
   // overrides the behavior from BaseFormField
   clear() {
     // since there is an internal value, this one handles the clear
     this._elements.input.clear();
+    this._updateClearButton();
   }
   
   /**
