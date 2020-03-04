@@ -37,7 +37,7 @@
     "@adobe/focus-ring-polyfill": "0.1.5",
     "@adobe/spectrum-css": "2.13.0",
     "@adobe/vent": "1.0.0",
-    "core-js": "2.6.5",
+    "core-js": "^3.0.0",
     "document-register-element": "1.13.1",
     "normalize.css": "8.0.1",
     "popper.js": "1.14.0",
