@@ -311,7 +311,13 @@ describe('Datepicker', function() {
     
       describe('#required', function() {
       });
-    
+
+      describe('#toggleTabindex', function() {
+        it('should have default tabindex 0', function() {
+           expect(el._elements.toggle.getAttribute('tabindex')).to.equal('0');
+        });
+      });
+
       describe('#startDay', function() {
       });
     
