@@ -994,7 +994,9 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
    sets focus to appropriate descendant
    */
   focus() {
-    if (!this.contains(document.activeElement) && !this.disabled) {
+      var el = this._elements.body.querySelector('.is-focused');
+      var flag = el === document.activeElement ;
+      if ( !flag && !this.disabled) { 
       this._setActiveDescendant();
       this._elements.body.focus();
     }

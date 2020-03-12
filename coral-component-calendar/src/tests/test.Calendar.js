@@ -432,8 +432,8 @@ describe('Calendar', function() {
           // set focus to element again
           el.focus();
       
-          // document focus should remain on prev button
-          expect(document.activeElement).to.equal(el._elements.prev);
+          // document focus should remain on body button
+          expect(document.activeElement).to.equal(el._elements.body);
         });
       });
       
