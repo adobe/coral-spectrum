@@ -994,12 +994,11 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
    sets focus to appropriate descendant
    */
   focus() {
-      var el = this._elements.body.querySelector('.is-focused');
-      var flag = el === document.activeElement ;
-      if ( !flag && !this.disabled) { 
-      this._setActiveDescendant();
-      this._elements.body.focus();
-    }
+      const focusedElement = this._elements.body.querySelector('.is-focused');
+      if (focusedElement !== document.activeElement && !this.disabled) {
+        this._setActiveDescendant();
+        this._elements.body.focus();
+      }
   }
   
   static get _attributePropertyMap() {
