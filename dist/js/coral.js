@@ -26340,7 +26340,19 @@ var Coral = (function (exports) {
             content.classList.add("".concat(CLASSNAME$m, "Label")); // Remove content icon before processing content zone
 
             var checkIcon = this._elements.checkIcon;
-            var contentIcon = content.querySelector('coral-icon:not(._coral-Menu-item-icon)');
+            var contentIcon; // @polyfill ie11
+            // IE11 throws syntax error because of the "not()" in the selector if the element is not in the DOM.
+
+            if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.includes('Trident/')) {
+              var allContentIcons = Array.prototype.slice.call(content.querySelectorAll('coral-icon'));
+              var allContentMenuIcons = Array.prototype.slice.call(content.querySelectorAll('coral-icon._coral-Menu-item-icon'));
+              var contentIcons = allContentIcons.filter(function (icon) {
+                return allContentMenuIcons.indexOf(icon) === -1;
+              });
+              contentIcon = contentIcons.length > 0 ? contentIcons[0] : undefined;
+            } else {
+              contentIcon = content.querySelector('coral-icon:not(._coral-Menu-item-icon)');
+            }
 
             if (contentIcon && contentIcon.icon) {
               contentIcon.remove();
@@ -33948,7 +33960,9 @@ var Coral = (function (exports) {
     }, {
       key: "focus",
       value: function focus() {
-        if (!this.contains(document.activeElement) && !this.disabled) {
+        var focusedElement = this._elements.body.querySelector('.is-focused');
+
+        if (focusedElement !== document.activeElement && !this.disabled) {
           this._setActiveDescendant();
 
           this._elements.body.focus();
@@ -75060,7 +75074,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version = "4.3.1";
+  var version = "4.3.2";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

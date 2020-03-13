@@ -449,7 +449,7 @@
         423,
         440,
         475,
-        1003
+        1004
       ]
     },
     "coral-spectrum/coral-component-card/src/scripts/Card.js": {
@@ -1124,10 +1124,10 @@
         30,
         45,
         63,
-        118,
-        139,
-        166,
-        175
+        129,
+        150,
+        177,
+        186
       ]
     },
     "coral-spectrum/coral-component-list/src/scripts/SelectListItemContent.js": {

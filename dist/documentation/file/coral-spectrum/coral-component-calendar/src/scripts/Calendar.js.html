@@ -1411,10 +1411,11 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
    sets focus to appropriate descendant
    */
   focus() {
-    if (!this.contains(document.activeElement) &amp;&amp; !this.disabled) {
-      this._setActiveDescendant();
-      this._elements.body.focus();
-    }
+      const focusedElement = this._elements.body.querySelector(&apos;.is-focused&apos;);
+      if (focusedElement !== document.activeElement &amp;&amp; !this.disabled) {
+        this._setActiveDescendant();
+        this._elements.body.focus();
+      }
   }
   
   static get _attributePropertyMap() {
