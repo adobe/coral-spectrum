@@ -82,7 +82,18 @@ class SelectListItem extends BaseComponent(HTMLElement) {
   
         // Remove content icon before processing content zone
         const checkIcon = this._elements.checkIcon;
-        const contentIcon = content.querySelector('coral-icon:not(._coral-Menu-item-icon)');
+        let contentIcon;
+        // @polyfill ie11
+        // IE11 throws syntax error because of the "not()" in the selector if the element is not in the DOM.
+        if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.includes('Trident/')) {
+          const allContentIcons = Array.prototype.slice.call(content.querySelectorAll('coral-icon'));
+          const allContentMenuIcons = Array.prototype.slice.call(content.querySelectorAll('coral-icon._coral-Menu-item-icon'));
+          const contentIcons = allContentIcons.filter(icon => allContentMenuIcons.indexOf(icon) === -1);
+          contentIcon = contentIcons.length > 0 ? contentIcons[0] : undefined;
+        }
+        else {
+          contentIcon = content.querySelector('coral-icon:not(._coral-Menu-item-icon)');
+        }
         if (contentIcon && contentIcon.icon) {
           contentIcon.remove();
           this.icon = contentIcon.icon;
