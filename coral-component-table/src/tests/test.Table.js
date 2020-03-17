@@ -347,7 +347,56 @@ describe('Table', function() {
         }, 100);
       });
     });
-  
+ 
+
+    describe('#labelled', function() {
+      it('should add aria-label to child table', function(done) {
+          var table = helpers.build(window.__html__['Table.base.html']);
+          table.labelled = 'my table';
+          helpers.next(() => {
+            expect(table._elements.table.getAttribute('aria-label')).to.equal('my table');
+            done();
+          });
+      });
+
+      it('should remove aria-label from child table when removed', function(done) {
+        var table = helpers.build(window.__html__['Table.base.html']);
+        table.labelled = 'my table';
+        helpers.next(() => {
+          expect(table._elements.table.getAttribute('aria-label')).to.equal('my table');
+          table.labelled = undefined;
+          helpers.next(() => {
+            expect(table._elements.table.hasAttribute('aria-label')).to.be.false;
+            done();
+          });
+        });
+      });
+    });
+
+    describe('#labelledby', function() {
+      it('should add aria-labelledby to child table', function(done) {
+        var table = helpers.build(window.__html__['Table.base.html']);
+        table.labelledby = 'foo bar';
+        helpers.next(() => {
+          expect(table._elements.table.getAttribute('aria-labelledby')).to.equal('foo bar');
+          done();
+        });
+      });
+
+      it('should remove aria-labelledby from child table when removed', function(done) {
+        var table = helpers.build(window.__html__['Table.base.html']);
+        table.labelledby = 'foo bar';
+        helpers.next(() => {
+          expect(table._elements.table.getAttribute('aria-labelledby')).to.equal('foo bar');
+          table.labelledby = undefined;
+          helpers.next(() => {
+            expect(table._elements.table.hasAttribute('aria-labelledby')).to.be.false;
+            done();
+          });
+        });
+      });
+    });
+ 
     describe('#multiple', function() {
       it('should only select the last selected row if multiple is false', function() {
         var table = helpers.build(window.__html__['Table.selectable.html']);
