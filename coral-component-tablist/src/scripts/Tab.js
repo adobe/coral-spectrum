@@ -30,10 +30,11 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Templates
     this._elements = {
-      label: this.querySelector('coral-tab-label') || document.createElement('coral-tab-label')
+      label: this.querySelector('coral-tab-label') || document.createElement('coral-tab-label'),
+      invalidIcon: this.querySelector('coral-icon._coral-Tabs-item._coral-Tabs-item-invalid-icon') || this._createInvalidIcon()
     };
     base.call(this._elements);
   
@@ -129,6 +130,7 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
     
     this.classList.toggle('is-invalid', this._invalid);
     this.setAttribute('aria-invalid', this._invalid);
+    this._setInvalidIcon(this._invalid);
   }
   
   /**
@@ -261,7 +263,37 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
       }
     }
   }
-  
+
+  _createInvalidIcon() {
+    const iconElement = document.createElement('coral-icon');
+    iconElement.icon = 'alert';
+    iconElement.size=Icon.size.EXTRA_SMALL;
+    iconElement.classList.add('_coral-Tabs-item');
+    iconElement.classList.add('_coral-Tabs-item-invalid-icon');
+    return iconElement;
+  }
+
+  /**
+   Adds or remove an alert icon to mark an invalid tab.
+
+   @ignore
+   */
+  _setInvalidIcon(invalid) {
+    const iconElement = this._elements.invalidIcon;
+
+    // removes the icon element from the DOM.
+    if (!invalid) {
+      iconElement.remove();
+      this.trigger('coral-tab:_sizechanged');
+    }
+    // adds the icon back since it was blown away by textContent
+    else if (!iconElement.parentElement) {
+      this.appendChild(iconElement);
+      this.trigger('coral-tab:_sizechanged');
+    }
+  }
+
+
   get _contentZones() { return {'coral-tab-label': 'label'}; }
   
   /** @ignore */
@@ -318,10 +350,10 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
         this.removeChild(child);
       }
     }
-  
+
     // Add the frag to the component
     this.appendChild(frag);
-  
+
     // Assign the content zones, moving them into place in the process
     this.label = label;
   }
