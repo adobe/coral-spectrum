@@ -424,7 +424,39 @@ class Table extends BaseComponent(HTMLTableElement) {
     // a11y
     this._toggleFocusable();
   }
-  
+ 
+  /**
+    Specifies aria-labelledby value
+    @type {String}
+    @htmlattributereflected
+  */
+  set labelledby(value) {
+    if (value) {
+      this._labelledby = transform.string(value);
+      this._reflectAttribute('labelledby', this._labelledby);
+      this._elements.table.setAttribute('aria-labelledby', this._labelledby);
+    }
+    else {
+      this._elements.table.removeAttribute('aria-labelledby');
+    }
+  }
+
+  /**
+    Specifies aria-label value
+    @type {String}
+    @htmlattributereflected
+  */
+  set labelled(value) {
+    if (value) {
+      this._labelled = transform.string(value);
+      this._reflectAttribute('labelled', this._labelled);
+      this._elements.table.setAttribute('aria-label', this._labelled);
+    }
+    else {
+      this._elements.table.removeAttribute('aria-label');
+    }
+  }
+ 
   /**
    Returns an Array containing the selected items.
    
@@ -2445,7 +2477,7 @@ class Table extends BaseComponent(HTMLTableElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return super.observedAttributes.concat(['variant', 'selectable', 'orderable', 'multiple', 'lockable']);
+    return super.observedAttributes.concat(['variant', 'selectable', 'orderable', 'labelled', 'labelledby', 'multiple', 'lockable']);
   }
   
   /** @ignore */
