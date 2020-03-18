@@ -1533,6 +1533,7 @@ describe('Table', function() {
         
         var col = getColumns(table.columns)[0];
         var headerCell = table.head.rows[0].cells[0];
+        var liveRegion = table._elements.liveRegion;
         
         headerCell.click();
         
@@ -1541,6 +1542,8 @@ describe('Table', function() {
           expect(eventSpy.args[0][0].detail.column).to.equal(col);
           expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.ASCENDING);
           expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
+          expect(liveRegion.innerHTML).to.equal('sorted by column ' + headerCell.content.textContent + ' in ' + Table.Column.sortableDirection.ASCENDING + ' order');
+          expect(liveRegion.getAttribute('aria-live')).to.equal('polite');
           done();
         });
       });
@@ -1549,7 +1552,8 @@ describe('Table', function() {
         var eventSpy = sinon.spy();
         var table = helpers.build(window.__html__['Table.sortable.html']);
         table.on('coral-table:columnsort', eventSpy);
-        
+        var liveRegion = table._elements.liveRegion;
+  
         var col = getColumns(table.columns)[0];
         var headerCell = table.head.rows[0].cells[0];
         
@@ -1561,6 +1565,8 @@ describe('Table', function() {
           expect(eventSpy.args[0][0].detail.column).to.equal(col);
           expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.DESCENDING);
           expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
+          expect(liveRegion.innerHTML).to.equal('sorted by column ' + headerCell.content.textContent + ' in ' + Table.Column.sortableDirection.DESCENDING + ' order');
+          expect(liveRegion.getAttribute('aria-live')).to.equal('polite');
           done();
         });
       });
@@ -1569,7 +1575,8 @@ describe('Table', function() {
         var eventSpy = sinon.spy();
         var table = helpers.build(window.__html__['Table.sortable.html']);
         table.on('coral-table:columnsort', eventSpy);
-        
+        var liveRegion = table._elements.liveRegion;
+  
         var col = getColumns(table.columns)[0];
         var headerCell = table.head.rows[0].cells[0];
         
@@ -1582,6 +1589,7 @@ describe('Table', function() {
           expect(eventSpy.args[0][0].detail.column).to.equal(col);
           expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.DEFAULT);
           expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
+          expect(liveRegion.innerHTML).to.equal('');
           done();
         });
       });
@@ -2610,8 +2618,11 @@ describe('Table', function() {
       it('should set sortable direction to default', function() {
         var table = helpers.build(window.__html__['Table.sortable.html']);
         var col = getColumns(table.columns)[0];
+        var liveRegion = table._elements.liveRegion;
         
         expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.DEFAULT);
+        expect(liveRegion.innerHTML).to.equal('');
+        expect(liveRegion.getAttribute('aria-live')).to.equal('off');
       });
     
       it('should sort ascending by alphanumeric type', function() {
@@ -3210,6 +3221,18 @@ describe('Table', function() {
             expect(parseInt(row.cells[1].dataset.dragged)).to.equal(1);
           });
           
+          done();
+        });
+      });
+    });
+    
+    describe('liveRegion', function() {
+      it('should contain liveRegion by default for a table', function(done) {
+        var table = helpers.build(window.__html__['Table.sortable.html']);
+        helpers.next(() => {
+          var liveRegion = table._elements.liveRegion;
+          expect(liveRegion.getAttribute('aria-live')).to.equal('off');
+          expect(liveRegion.innerHTML).to.equal('');
           done();
         });
       });
