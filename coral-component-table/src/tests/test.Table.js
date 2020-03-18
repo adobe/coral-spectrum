@@ -2556,7 +2556,7 @@ describe('Table', function() {
         });
       });
     });
-  
+    
     describe('#sortable', function() {
       it('should set sortable direction to default', function() {
         var table = helpers.build(window.__html__['Table.sortable.html']);
@@ -2885,6 +2885,75 @@ describe('Table', function() {
         expect(table.classList.contains('is-sorted')).to.be.false;
       });
     });
+  
+    describe('#stickySortable', function() {
+      it('should set sortable direction to default', function(done) {
+        var table = helpers.build(window.__html__['Table.sticky.sortable.html']);
+        var col = getColumns(table.columns)[0];
+        var headerCell = table.head.rows[0].cells[0];
+        helpers.next(() => {
+          expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.DEFAULT);
+          expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
+          expect(headerCell._elements.content.getAttribute('aria-sort')).to.equal('none');
+          done();
+        });
+      });
+    
+      it('should set sortable direction to ascending', function(done) {
+        var eventSpy = sinon.spy();
+        var table = helpers.build(window.__html__['Table.sticky.sortable.html']);
+        table.on('coral-table:columnsort', eventSpy);
+        var col = getColumns(table.columns)[0];
+        var headerCell = table.head.rows[0].cells[0];
+        headerCell.click();
+        helpers.next(() => {
+          expect(eventSpy.callCount).to.equal(1);
+          expect(eventSpy.args[0][0].detail.column).to.equal(col);
+          expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.ASCENDING);
+          expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
+          expect(headerCell._elements.content.getAttribute('aria-sort')).to.equal(col.sortableDirection);
+          done();
+        });
+      });
+    
+      it('should set sortable direction to descending', function(done) {
+        var eventSpy = sinon.spy();
+        var table = helpers.build(window.__html__['Table.sticky.sortable.html']);
+        table.on('coral-table:columnsort', eventSpy);
+        var col = getColumns(table.columns)[0];
+        var headerCell = table.head.rows[0].cells[0];
+        headerCell.click();
+        headerCell.click();
+        helpers.next(() => {
+          expect(eventSpy.callCount).to.equal(2);
+          expect(eventSpy.args[0][0].detail.column).to.equal(col);
+          expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.DESCENDING);
+          expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
+          expect(headerCell._elements.content.getAttribute('aria-sort')).to.equal(col.sortableDirection);
+          done();
+        });
+      });
+    
+      it('should set sortable direction back to default', function(done) {
+        var eventSpy = sinon.spy();
+        var table = helpers.build(window.__html__['Table.sticky.sortable.html']);
+        table.on('coral-table:columnsort', eventSpy);
+        var col = getColumns(table.columns)[0];
+        var headerCell = table.head.rows[0].cells[0];
+        headerCell.click();
+        headerCell.click();
+        headerCell.click();
+        helpers.next(() => {
+          expect(eventSpy.callCount).to.equal(3);
+          expect(eventSpy.args[0][0].detail.column).to.equal(col);
+          expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.DEFAULT);
+          expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
+          expect(headerCell._elements.content.getAttribute('aria-sort')).to.equal('none');
+          done();
+        });
+      });
+    });
+  
   
     describe('#orderable', function() {
       it('should initialize the dragAction on the sticky header cells', function(done) {
