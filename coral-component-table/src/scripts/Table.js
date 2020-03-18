@@ -616,6 +616,21 @@ class Table extends BaseComponent(HTMLTableElement) {
   }
   
   /** @private */
+  _isTableSticky(){
+    const table = this;
+    const head = table._elements.head;
+    return head && head.sticky;
+  }
+  
+  /** @private */
+  _getActiveHeader(headerCell) {
+    if (this._isTableSticky()) {
+      return headerCell._elements.content;
+    }
+    return headerCell;
+  }
+  
+  /** @private */
   _onHeaderCellSort(event) {
     const table = this;
     const matchedTarget = event.matchedTarget.closest('th');
@@ -1600,8 +1615,7 @@ class Table extends BaseComponent(HTMLTableElement) {
     if (headerCell) {
       // For icons (chevron up/down) styling
       headerCell.setAttribute('sortabledirection', column.sortableDirection);
-      headerCell.setAttribute('aria-sort',
-        column.sortableDirection === sortableDirection.DEFAULT ? 'none' : column.sortableDirection);
+      table._getActiveHeader(headerCell).setAttribute('aria-sort', column.sortableDirection === sortableDirection.DEFAULT ? 'none' : column.sortableDirection);
     }
   }
   
@@ -1677,7 +1691,7 @@ class Table extends BaseComponent(HTMLTableElement) {
         // For icons (chevron up/down) styling
         getSiblingsOf(colHeaderCell, 'th[is="coral-table-headercell"]').forEach((headerCell) => {
           headerCell.setAttribute('sortabledirection', sortableDirection.DEFAULT);
-          headerCell.setAttribute('aria-sort', 'none');
+          table._getActiveHeader(headerCell).setAttribute('aria-sort', 'none');
         });
       }
       
@@ -1735,7 +1749,12 @@ class Table extends BaseComponent(HTMLTableElement) {
       if (colHeaderCell) {
         getSiblingsOf(colHeaderCell, 'th[is="coral-table-headercell"]').forEach((headerCell) => {
           headerCell.setAttribute('sortabledirection', sortableDirection.DEFAULT);
-          headerCell.setAttribute('aria-sort', 'none');
+          if (table._isTableSticky()) {
+            headerCell._elements.content.setAttribute('aria-sort', 'none');
+          } 
+          else {
+            headerCell.setAttribute('aria-sort', 'none');
+          }
         });
       }
       
@@ -2402,8 +2421,15 @@ class Table extends BaseComponent(HTMLTableElement) {
   _setHeaderCellScope(headerCell, tableSection) {
     // Add appropriate scope depending on whether header cell is in THEAD or TBODY
     const scope = tableSection.nodeName === 'THEAD' || tableSection.nodeName === 'TFOOT' ? 'col' : 'row';
-    const ariaRole = scope === 'col' ? 'columnheader' : 'rowheader';
-    headerCell.setAttribute('role', ariaRole);
+    if (scope === 'col') {
+      if (this._isTableSticky()) {
+        headerCell.setAttribute('role', 'presentation');
+      }
+      this._getActiveHeader(headerCell).setAttribute('role', 'columnheader');
+    } 
+    else {
+      headerCell.setAttribute('role', 'rowheader');
+    }
     headerCell.setAttribute('scope', scope);
   }
   
