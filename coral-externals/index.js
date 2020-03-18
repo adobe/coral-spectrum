@@ -17,8 +17,8 @@ import './polyfills/element.remove.js';
 import './polyfills/classList-partial-shim.js';
 import './polyfills/CustomEvent.js';
 import './polyfills/focus-options-polyfill.js';
-import 'core-js/es6/reflect';
-import 'core-js/es6/promise';
+import 'core-js/es/reflect';
+import 'core-js/es/promise';
 // Accessibility
 import '@adobe/focus-ring-polyfill';
 
