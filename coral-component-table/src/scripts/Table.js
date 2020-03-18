@@ -24,7 +24,7 @@ import {Checkbox} from '../../../coral-component-checkbox';
 import base from '../templates/base';
 import {SelectableCollection} from '../../../coral-collection';
 import {isTableHeaderCell, isTableCell, isTableRow, isTableBody, getCellByIndex, getColumns, getCells, getContentCells, getHeaderCells, getRows, getSiblingsOf, getIndexOf, divider} from './TableUtil';
-import {transform, validate, commons, Keys} from '../../../coral-utils';
+import {transform, validate, commons, i18n,  Keys} from '../../../coral-utils';
 
 const CLASSNAME = '_coral-Table-wrapper';
 
@@ -641,6 +641,12 @@ class Table extends BaseComponent(HTMLTableElement) {
       // Only sort if actually sortable and event not defaultPrevented
       if (column && column.sortable) {
         event.preventDefault();
+        
+        // Set live region to true so that sort description string will be announced.
+        const liveRegion = this._elements.liveRegion;
+        if (liveRegion) {
+          liveRegion.setAttribute('aria-live', 'polite');
+        }
         column._sort();
         
         // Restore focus on the header cell in any case
@@ -1616,6 +1622,20 @@ class Table extends BaseComponent(HTMLTableElement) {
       // For icons (chevron up/down) styling
       headerCell.setAttribute('sortabledirection', column.sortableDirection);
       table._getActiveHeader(headerCell).setAttribute('aria-sort', column.sortableDirection === sortableDirection.DEFAULT ? 'none' : column.sortableDirection);
+      const liveRegion = this._elements.liveRegion;
+      if (liveRegion) {
+        if (column.sortableDirection === sortableDirection.DEFAULT) {
+          liveRegion.innerText = '';
+        }
+        else {
+          if (headerCell.content.textContent.trim().length) {
+            liveRegion.innerText = i18n.get('sorted by column {0} in ' + column.sortableDirection + ' order', headerCell.content.textContent);
+            window.requestAnimationFrame(() => {
+              liveRegion.setAttribute('aria-live', 'off');
+            });
+          }
+        }
+      }
     }
   }
   
@@ -2538,9 +2558,24 @@ class Table extends BaseComponent(HTMLTableElement) {
       wrapper.remove();
     }
   
+    let liveRegion = this.querySelector('table-sort-description');
+    if (liveRegion) {
+      liveRegion.remove();
+    }
+  
+    liveRegion = document.createElement('table-sort-description');
+    liveRegion.className = 'u-coral-screenReaderOnly';
+    liveRegion.setAttribute('aria-live', 'off');
+    liveRegion.innerText = '';
+    liveRegion.id = commons.getUID();
+    this._elements.table.setAttribute('aria-describedby', liveRegion.id);
+    frag.appendChild(liveRegion);
+    
     // Append frag
     this.appendChild(frag);
   
+    this._elements.liveRegion = liveRegion;
+    
     // Call content zone inserts
     this.head = head;
     this.body = body;
