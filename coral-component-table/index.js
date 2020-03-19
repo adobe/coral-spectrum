@@ -15,6 +15,9 @@ import '../coral-theme-spectrum';
 import '../coral-externals';
 import '../coral-compat';
 
+import translations from './i18n/translations';
+import {strings, commons} from '../coral-utils';
+
 import Table from './src/scripts/Table';
 import TableColumn from './src/scripts/TableColumn';
 import TableCell from './src/scripts/TableCell';
@@ -27,7 +30,10 @@ import TableFoot from './src/scripts/TableFoot';
 
 import './src/styles/index.css';
 
-import {commons} from '../coral-utils';
+// i18n
+commons.extend(strings, {
+  'coral-component-table': translations
+});
 
 // Expose component on the Coral namespace
 commons._define('coral-table-column', TableColumn, {extends: 'col'});

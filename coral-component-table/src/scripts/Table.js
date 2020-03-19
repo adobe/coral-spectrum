@@ -14,7 +14,6 @@ import {BaseComponent} from '../../../coral-base-component';
 import {DragAction} from '../../../coral-dragaction';
 import TableColumn from './TableColumn';
 import TableCell from './TableCell';
-import TableHeaderCell from './TableHeaderCell';
 import TableRow from './TableRow';
 import TableHead from './TableHead';
 import TableBody from './TableBody';
@@ -89,7 +88,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       foot: this.querySelector('tfoot[is="coral-table-foot"]') || new TableFoot(),
       columns: this.querySelector('colgroup') || document.createElement('colgroup')
     };
-    base.call(this._elements);
+    base.call(this._elements, {commons});
     
     // Events
     this._delegateEvents({
@@ -426,35 +425,35 @@ class Table extends BaseComponent(HTMLTableElement) {
   }
  
   /**
-    Specifies aria-labelledby value
-    @type {String}
-    @htmlattributereflected
-  */
-  set labelledby(value) {
-    if (value) {
-      this._labelledby = transform.string(value);
-      this._reflectAttribute('labelledby', this._labelledby);
-      this._elements.table.setAttribute('aria-labelledby', this._labelledby);
-    }
-    else {
-      this._elements.table.removeAttribute('aria-labelledby');
-    }
+   Specifies <code>aria-labelledby</code> value.
+   
+   @type {?String}
+   @default null
+   @htmlattribute labelledby
+   */
+  get labelledBy() {
+    return this._elements.table.getAttribute('aria-labelledby');
+  }
+  set labelledBy(value) {
+    value = transform.string(value);
+  
+    this._elements.table[value ? 'setAttribute' : 'removeAttribute']('aria-labelledby', value);
   }
 
   /**
-    Specifies aria-label value
-    @type {String}
-    @htmlattributereflected
-  */
+   Specifies <code>aria-label</code> value.
+   
+   @type {String}
+   @default null
+   @htmlattribute labelled
+   */
+  get labelled() {
+    return this._elements.table.getAttribute('aria-label');
+  }
   set labelled(value) {
-    if (value) {
-      this._labelled = transform.string(value);
-      this._reflectAttribute('labelled', this._labelled);
-      this._elements.table.setAttribute('aria-label', this._labelled);
-    }
-    else {
-      this._elements.table.removeAttribute('aria-label');
-    }
+    value = transform.string(value);
+  
+    this._elements.table[value ? 'setAttribute' : 'removeAttribute']('aria-label', value);
   }
  
   /**
@@ -616,21 +615,6 @@ class Table extends BaseComponent(HTMLTableElement) {
   }
   
   /** @private */
-  _isTableSticky(){
-    const table = this;
-    const head = table._elements.head;
-    return head && head.sticky;
-  }
-  
-  /** @private */
-  _getActiveHeader(headerCell) {
-    if (this._isTableSticky()) {
-      return headerCell._elements.content;
-    }
-    return headerCell;
-  }
-  
-  /** @private */
   _onHeaderCellSort(event) {
     const table = this;
     const matchedTarget = event.matchedTarget.closest('th');
@@ -643,10 +627,8 @@ class Table extends BaseComponent(HTMLTableElement) {
         event.preventDefault();
         
         // Set live region to true so that sort description string will be announced.
-        const liveRegion = this._elements.liveRegion;
-        if (liveRegion) {
-          liveRegion.setAttribute('aria-live', 'polite');
-        }
+        this._elements.liveRegion.setAttribute('aria-live', 'polite');
+        
         column._sort();
         
         // Restore focus on the header cell in any case
@@ -1621,20 +1603,16 @@ class Table extends BaseComponent(HTMLTableElement) {
     if (headerCell) {
       // For icons (chevron up/down) styling
       headerCell.setAttribute('sortabledirection', column.sortableDirection);
-      table._getActiveHeader(headerCell).setAttribute('aria-sort', column.sortableDirection === sortableDirection.DEFAULT ? 'none' : column.sortableDirection);
-      const liveRegion = this._elements.liveRegion;
-      if (liveRegion) {
-        if (column.sortableDirection === sortableDirection.DEFAULT) {
-          liveRegion.innerText = '';
-        }
-        else {
-          if (headerCell.content.textContent.trim().length) {
-            liveRegion.innerText = i18n.get('sorted by column {0} in ' + column.sortableDirection + ' order', headerCell.content.textContent);
-            window.requestAnimationFrame(() => {
-              liveRegion.setAttribute('aria-live', 'off');
-            });
-          }
-        }
+      (table.head.sticky ? headerCell.content : headerCell).setAttribute('aria-sort', column.sortableDirection === sortableDirection.DEFAULT ? 'none' : column.sortableDirection);
+      
+      if (column.sortableDirection === sortableDirection.DEFAULT) {
+        this._elements.liveRegion.innerText = '';
+      }
+      else if (headerCell.content.textContent.trim().length) {
+        this._elements.liveRegion.innerText = i18n.get(`sorted by column {0} in ${column.sortableDirection} order`, headerCell.content.textContent);
+        requestAnimationFrame(() => {
+          this._elements.liveRegion.setAttribute('aria-live', 'off');
+        });
       }
     }
   }
@@ -1711,7 +1689,7 @@ class Table extends BaseComponent(HTMLTableElement) {
         // For icons (chevron up/down) styling
         getSiblingsOf(colHeaderCell, 'th[is="coral-table-headercell"]').forEach((headerCell) => {
           headerCell.setAttribute('sortabledirection', sortableDirection.DEFAULT);
-          table._getActiveHeader(headerCell).setAttribute('aria-sort', 'none');
+          (table.head.sticky ? headerCell.content : headerCell).setAttribute('aria-sort', 'none');
         });
       }
       
@@ -1769,12 +1747,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       if (colHeaderCell) {
         getSiblingsOf(colHeaderCell, 'th[is="coral-table-headercell"]').forEach((headerCell) => {
           headerCell.setAttribute('sortabledirection', sortableDirection.DEFAULT);
-          if (table._isTableSticky()) {
-            headerCell._elements.content.setAttribute('aria-sort', 'none');
-          } 
-          else {
-            headerCell.setAttribute('aria-sort', 'none');
-          }
+          (table.head.sticky ? headerCell.content : headerCell).setAttribute('aria-sort', 'none');
         });
       }
       
@@ -2442,10 +2415,13 @@ class Table extends BaseComponent(HTMLTableElement) {
     // Add appropriate scope depending on whether header cell is in THEAD or TBODY
     const scope = tableSection.nodeName === 'THEAD' || tableSection.nodeName === 'TFOOT' ? 'col' : 'row';
     if (scope === 'col') {
-      if (this._isTableSticky()) {
+      if (this.head && this.head.sticky) {
         headerCell.setAttribute('role', 'presentation');
+        headerCell._elements.content.setAttribute('role', 'columnheader');
       }
-      this._getActiveHeader(headerCell).setAttribute('role', 'columnheader');
+      else {
+        headerCell.setAttribute('role', 'columnheader');
+      }
     } 
     else {
       headerCell.setAttribute('role', 'rowheader');
@@ -2521,6 +2497,12 @@ class Table extends BaseComponent(HTMLTableElement) {
    */
   static get divider() { return divider; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      labelledby: 'labelledBy'
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['variant', 'selectable', 'orderable', 'labelled', 'labelledby', 'multiple', 'lockable']);
@@ -2551,6 +2533,7 @@ class Table extends BaseComponent(HTMLTableElement) {
     // Render template
     const frag = document.createDocumentFragment();
     frag.appendChild(this._elements.container);
+    frag.appendChild(this._elements.liveRegion);
     
     // cloneNode support
     const wrapper = this.querySelector('._coral-Table-wrapper-container');
@@ -2558,23 +2541,13 @@ class Table extends BaseComponent(HTMLTableElement) {
       wrapper.remove();
     }
   
-    let liveRegion = this.querySelector('table-sort-description');
+    let liveRegion = this.querySelector('._coral-Table-liveRegion');
     if (liveRegion) {
       liveRegion.remove();
     }
-  
-    liveRegion = document.createElement('table-sort-description');
-    liveRegion.className = 'u-coral-screenReaderOnly';
-    liveRegion.setAttribute('aria-live', 'off');
-    liveRegion.innerText = '';
-    liveRegion.id = commons.getUID();
-    this._elements.table.setAttribute('aria-describedby', liveRegion.id);
-    frag.appendChild(liveRegion);
     
     // Append frag
     this.appendChild(frag);
-  
-    this._elements.liveRegion = liveRegion;
     
     // Call content zone inserts
     this.head = head;

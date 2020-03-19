@@ -347,53 +347,74 @@ describe('Table', function() {
         }, 100);
       });
     });
- 
-
-    describe('#labelled', function() {
-      it('should add aria-label to child table', function(done) {
-          var table = helpers.build(window.__html__['Table.base.html']);
-          table.labelled = 'my table';
-          helpers.next(() => {
-            expect(table._elements.table.getAttribute('aria-label')).to.equal('my table');
-            done();
-          });
+  
+    describe('#labelled', () => {
+      let table;
+      
+      beforeEach(() => {
+        table = helpers.build(new Table());
+      });
+      
+      it('should default to null', () => {
+        expect(table.labelled).to.equal(null);
+        expect(table.hasAttribute('labelled')).to.be.false;
+      });
+      
+      it('should add aria-label to inner table via property', () => {
+        table.labelled = 'my table';
+        expect(table._elements.table.getAttribute('aria-label')).to.equal('my table');
+      });
+  
+      it('should add aria-label to inner table via attribute', () => {
+        table.setAttribute('labelled', 'my table');
+        expect(table._elements.table.getAttribute('aria-label')).to.equal('my table');
       });
 
-      it('should remove aria-label from child table when removed', function(done) {
-        var table = helpers.build(window.__html__['Table.base.html']);
+      it('should remove aria-label from inner table when removed via property', () => {
         table.labelled = 'my table';
-        helpers.next(() => {
-          expect(table._elements.table.getAttribute('aria-label')).to.equal('my table');
-          table.labelled = undefined;
-          helpers.next(() => {
-            expect(table._elements.table.hasAttribute('aria-label')).to.be.false;
-            done();
-          });
-        });
+        table.labelled = null;
+        expect(table._elements.table.hasAttribute('aria-label')).to.be.false;
+      });
+  
+      it('should remove aria-label from inner table when removed via attribute', () => {
+        table.setAttribute('labelled', 'my table');
+        table.removeAttribute('labelled');
+        expect(table._elements.table.hasAttribute('aria-label')).to.be.false;
       });
     });
 
-    describe('#labelledby', function() {
-      it('should add aria-labelledby to child table', function(done) {
-        var table = helpers.build(window.__html__['Table.base.html']);
-        table.labelledby = 'foo bar';
-        helpers.next(() => {
-          expect(table._elements.table.getAttribute('aria-labelledby')).to.equal('foo bar');
-          done();
-        });
+    describe('#labelledBy', function() {
+      let table;
+  
+      beforeEach(() => {
+        table = helpers.build(new Table());
       });
-
-      it('should remove aria-labelledby from child table when removed', function(done) {
-        var table = helpers.build(window.__html__['Table.base.html']);
-        table.labelledby = 'foo bar';
-        helpers.next(() => {
-          expect(table._elements.table.getAttribute('aria-labelledby')).to.equal('foo bar');
-          table.labelledby = undefined;
-          helpers.next(() => {
-            expect(table._elements.table.hasAttribute('aria-labelledby')).to.be.false;
-            done();
-          });
-        });
+  
+      it('should default to null', () => {
+        expect(table.labelledBy).to.equal(null);
+        expect(table.hasAttribute('labelledby')).to.be.false;
+      });
+  
+      it('should add aria-labelledby to inner table via property', () => {
+        table.labelledBy = 'label';
+        expect(table._elements.table.getAttribute('aria-labelledby')).to.equal('label');
+      });
+  
+      it('should add aria-labelledby to inner table via attribute', () => {
+        table.setAttribute('labelledby', 'label');
+        expect(table._elements.table.getAttribute('aria-labelledby')).to.equal('label');
+      });
+  
+      it('should remove aria-labelledby from inner table when removed via property', () => {
+        table.labelledBy = 'label';
+        table.labelledBy = null;
+        expect(table._elements.table.hasAttribute('aria-labelledby')).to.be.false;
+      });
+  
+      it('should remove aria-labelledby from inner table when removed via attribute', () => {
+        table.setAttribute('labelledby', 'label');
+        table.removeAttribute('labelledby');
+        expect(table._elements.table.hasAttribute('aria-labelledby')).to.be.false;
       });
     });
  
@@ -2124,6 +2145,14 @@ describe('Table', function() {
           done();
         });
       });
+  
+      it('should contain liveRegion by default for a table', () => {
+        const table = helpers.build(window.__html__['Table.sortable.html']);
+        
+        const liveRegion = table._elements.liveRegion;
+        expect(liveRegion.getAttribute('aria-live')).to.equal('off');
+        expect(liveRegion.innerHTML).to.equal('');
+      });
     });
     
     describe('#orderable', function() {
@@ -2944,10 +2973,8 @@ describe('Table', function() {
         expect(table._isSorted()).to.be.false;
         expect(table.classList.contains('is-sorted')).to.be.false;
       });
-    });
-  
-    describe('#stickySortable', function() {
-      it('should set sortable direction to default', function(done) {
+      
+      it('should set sortable direction to default (sticky)', function(done) {
         var table = helpers.build(window.__html__['Table.sticky.sortable.html']);
         var col = getColumns(table.columns)[0];
         var headerCell = table.head.rows[0].cells[0];
@@ -2958,8 +2985,8 @@ describe('Table', function() {
           done();
         });
       });
-    
-      it('should set sortable direction to ascending', function(done) {
+  
+      it('should set sortable direction to ascending (sticky)', function(done) {
         var eventSpy = sinon.spy();
         var table = helpers.build(window.__html__['Table.sticky.sortable.html']);
         table.on('coral-table:columnsort', eventSpy);
@@ -2975,8 +3002,8 @@ describe('Table', function() {
           done();
         });
       });
-    
-      it('should set sortable direction to descending', function(done) {
+  
+      it('should set sortable direction to descending (sticky)', function(done) {
         var eventSpy = sinon.spy();
         var table = helpers.build(window.__html__['Table.sticky.sortable.html']);
         table.on('coral-table:columnsort', eventSpy);
@@ -2993,8 +3020,8 @@ describe('Table', function() {
           done();
         });
       });
-    
-      it('should set sortable direction back to default', function(done) {
+  
+      it('should set sortable direction back to default (sticky)', function(done) {
         var eventSpy = sinon.spy();
         var table = helpers.build(window.__html__['Table.sticky.sortable.html']);
         table.on('coral-table:columnsort', eventSpy);
@@ -3013,7 +3040,6 @@ describe('Table', function() {
         });
       });
     });
-  
   
     describe('#orderable', function() {
       it('should initialize the dragAction on the sticky header cells', function(done) {
@@ -3221,18 +3247,6 @@ describe('Table', function() {
             expect(parseInt(row.cells[1].dataset.dragged)).to.equal(1);
           });
           
-          done();
-        });
-      });
-    });
-    
-    describe('liveRegion', function() {
-      it('should contain liveRegion by default for a table', function(done) {
-        var table = helpers.build(window.__html__['Table.sortable.html']);
-        helpers.next(() => {
-          var liveRegion = table._elements.liveRegion;
-          expect(liveRegion.getAttribute('aria-live')).to.equal('off');
-          expect(liveRegion.innerHTML).to.equal('');
           done();
         });
       });
