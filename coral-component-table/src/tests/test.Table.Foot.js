@@ -67,7 +67,8 @@ describe('Table.Foot', function() {
   describe('Implementation Details', function() {
     it('should set a11y attribute', function() {
       const el = helpers.build(new Table.Foot());
-      expect(el.getAttribute('role')).to.equal('rowgroup');
+      expect(el.tagName).to.equal('TFOOT');
+      expect(el.hasAttribute('role')).to.be.false;
     });
   });
 });
