@@ -625,10 +625,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       // Only sort if actually sortable and event not defaultPrevented
       if (column && column.sortable) {
         event.preventDefault();
-        
-        // Set live region to true so that sort description string will be announced.
-        this._elements.liveRegion.setAttribute('aria-live', 'polite');
-        
+                
         column._sort();
         
         // Restore focus on the header cell in any case
@@ -1608,11 +1605,20 @@ class Table extends BaseComponent(HTMLTableElement) {
       if (column.sortableDirection === sortableDirection.DEFAULT) {
         this._elements.liveRegion.innerText = '';
       }
-      else if (headerCell.content.textContent.trim().length) {
-        this._elements.liveRegion.innerText = i18n.get(`sorted by column {0} in ${column.sortableDirection} order`, headerCell.content.textContent);
-        requestAnimationFrame(() => {
-          this._elements.liveRegion.setAttribute('aria-live', 'off');
-        });
+      else {
+        var textContent = headerCell.content.textContent.trim();
+        if (textContent.length) {
+          // Set live region to true so that sort description string will be announced.
+          this._elements.liveRegion.setAttribute('aria-live', 'polite');
+          this._elements.liveRegion.removeAttribute('aria-hidden');
+          this._elements.liveRegion.innerText = i18n.get(`sorted by column {0} in ${column.sortableDirection} order`, textContent);
+
+          // @a11y wait 2.5 seconds to give screen reader enough time to announce the live region before silencing the it.
+          window.setTimeout(() => {
+            this._elements.liveRegion.setAttribute('aria-live', 'off');
+            this._elements.liveRegion.setAttribute('aria-hidden', 'true');
+          }, 2500);
+        }
       }
     }
   }
@@ -1811,9 +1817,18 @@ class Table extends BaseComponent(HTMLTableElement) {
         table.trigger('coral-table:columnsort', {column});
       }
     }
-    
+
     // Allow triggering change events again after sorting
     window.requestAnimationFrame(() => {
+
+      // a11y initialize column sort aria-describedby
+      if (onInitialization && column.sortableDirection !== sortableDirection.DEFAULT) {
+        const textContent = colHeaderCell.content.textContent.trim();
+        if (textContent.length) {
+          this._elements.liveRegion.innerText = i18n.get(`sorted by column {0} in ${column.sortableDirection} order`, textContent);
+        }
+      }
+
       table._preventTriggeringEvents = false;
     });
   }

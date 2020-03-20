@@ -1565,6 +1565,7 @@ describe('Table', function() {
           expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
           expect(liveRegion.innerHTML).to.equal('sorted by column ' + headerCell.content.textContent + ' in ' + Table.Column.sortableDirection.ASCENDING + ' order');
           expect(liveRegion.getAttribute('aria-live')).to.equal('polite');
+          expect(liveRegion.hasAttribute('aria-hidden')).to.be.false;
           done();
         });
       });
@@ -1588,6 +1589,7 @@ describe('Table', function() {
           expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
           expect(liveRegion.innerHTML).to.equal('sorted by column ' + headerCell.content.textContent + ' in ' + Table.Column.sortableDirection.DESCENDING + ' order');
           expect(liveRegion.getAttribute('aria-live')).to.equal('polite');
+          expect(liveRegion.hasAttribute('aria-hidden')).to.be.false;
           done();
         });
       });
@@ -2150,6 +2152,7 @@ describe('Table', function() {
         const table = helpers.build(window.__html__['Table.sortable.html']);
         
         const liveRegion = table._elements.liveRegion;
+        expect(liveRegion.getAttribute('aria-hidden')).to.equal('true');
         expect(liveRegion.getAttribute('aria-live')).to.equal('off');
         expect(liveRegion.innerHTML).to.equal('');
       });
@@ -2651,6 +2654,7 @@ describe('Table', function() {
         
         expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.DEFAULT);
         expect(liveRegion.innerHTML).to.equal('');
+        expect(liveRegion.getAttribute('aria-hidden')).to.equal('true');
         expect(liveRegion.getAttribute('aria-live')).to.equal('off');
       });
     
