@@ -871,6 +871,10 @@ class Icon extends BaseComponent(HTMLElement) {
   static load(url) {
     const resolveIconsPath = (iconsPath) =&gt; {
       const path = commons._script.src;
+      if (iconsExternal === &apos;js&apos;) {
+        iconsPath = iconsPath.replace(&apos;.svg&apos;, &apos;.js&apos;);
+      }
+      
       return `${path.split(&apos;/&apos;).slice(0, -iconsPath.split(&apos;/&apos;).length).join(&apos;/&apos;)}/${iconsPath}`;
     };
     
@@ -941,11 +945,16 @@ class Icon extends BaseComponent(HTMLElement) {
 
 // Load icon collections by default
 const iconCollections = [SPECTRUM_ICONS_COLOR];
-if (Icon._iconsExternal() === &apos;off&apos;) {
+let extension = &apos;.svg&apos;;
+if (Icon._iconsExternal() === &apos;off&apos; || Icon._iconsExternal() === &apos;js&apos;) {
   iconCollections.push(SPECTRUM_CSS_ICONS);
   iconCollections.push(SPECTRUM_ICONS);
+  
+  if (Icon._iconsExternal() === &apos;js&apos;) {
+    extension = &apos;.js&apos;;
+  }
 }
-iconCollections.forEach(iconSet =&gt; Icon.load(resourcesPath ? `${resourcesPath}${iconSet}.svg` : iconSet));
+iconCollections.forEach(iconSet =&gt; Icon.load(resourcesPath ? `${resourcesPath}${iconSet}${extension}` : iconSet));
 
 export default Icon;
 </code></pre>

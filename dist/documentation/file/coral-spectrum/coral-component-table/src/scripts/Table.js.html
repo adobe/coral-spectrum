@@ -431,7 +431,6 @@ import {BaseComponent} from &apos;../../../coral-base-component&apos;;
 import {DragAction} from &apos;../../../coral-dragaction&apos;;
 import TableColumn from &apos;./TableColumn&apos;;
 import TableCell from &apos;./TableCell&apos;;
-import TableHeaderCell from &apos;./TableHeaderCell&apos;;
 import TableRow from &apos;./TableRow&apos;;
 import TableHead from &apos;./TableHead&apos;;
 import TableBody from &apos;./TableBody&apos;;
@@ -441,7 +440,7 @@ import {Checkbox} from &apos;../../../coral-component-checkbox&apos;;
 import base from &apos;../templates/base&apos;;
 import {SelectableCollection} from &apos;../../../coral-collection&apos;;
 import {isTableHeaderCell, isTableCell, isTableRow, isTableBody, getCellByIndex, getColumns, getCells, getContentCells, getHeaderCells, getRows, getSiblingsOf, getIndexOf, divider} from &apos;./TableUtil&apos;;
-import {transform, validate, commons, Keys} from &apos;../../../coral-utils&apos;;
+import {transform, validate, commons, i18n,  Keys} from &apos;../../../coral-utils&apos;;
 
 const CLASSNAME = &apos;_coral-Table-wrapper&apos;;
 
@@ -506,7 +505,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       foot: this.querySelector(&apos;tfoot[is=&quot;coral-table-foot&quot;]&apos;) || new TableFoot(),
       columns: this.querySelector(&apos;colgroup&apos;) || document.createElement(&apos;colgroup&apos;)
     };
-    base.call(this._elements);
+    base.call(this._elements, {commons});
     
     // Events
     this._delegateEvents({
@@ -841,7 +840,39 @@ class Table extends BaseComponent(HTMLTableElement) {
     // a11y
     this._toggleFocusable();
   }
+ 
+  /**
+   Specifies &lt;code&gt;aria-labelledby&lt;/code&gt; value.
+   
+   @type {?String}
+   @default null
+   @htmlattribute labelledby
+   */
+  get labelledBy() {
+    return this._elements.table.getAttribute(&apos;aria-labelledby&apos;);
+  }
+  set labelledBy(value) {
+    value = transform.string(value);
   
+    this._elements.table[value ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-labelledby&apos;, value);
+  }
+
+  /**
+   Specifies &lt;code&gt;aria-label&lt;/code&gt; value.
+   
+   @type {String}
+   @default null
+   @htmlattribute labelled
+   */
+  get labelled() {
+    return this._elements.table.getAttribute(&apos;aria-label&apos;);
+  }
+  set labelled(value) {
+    value = transform.string(value);
+  
+    this._elements.table[value ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-label&apos;, value);
+  }
+ 
   /**
    Returns an Array containing the selected items.
    
@@ -1011,6 +1042,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       // Only sort if actually sortable and event not defaultPrevented
       if (column &amp;&amp; column.sortable) {
         event.preventDefault();
+                
         column._sort();
         
         // Restore focus on the header cell in any case
@@ -1985,8 +2017,26 @@ class Table extends BaseComponent(HTMLTableElement) {
     if (headerCell) {
       // For icons (chevron up/down) styling
       headerCell.setAttribute(&apos;sortabledirection&apos;, column.sortableDirection);
-      headerCell.setAttribute(&apos;aria-sort&apos;,
-        column.sortableDirection === sortableDirection.DEFAULT ? &apos;none&apos; : column.sortableDirection);
+      (table.head.sticky ? headerCell.content : headerCell).setAttribute(&apos;aria-sort&apos;, column.sortableDirection === sortableDirection.DEFAULT ? &apos;none&apos; : column.sortableDirection);
+      
+      if (column.sortableDirection === sortableDirection.DEFAULT) {
+        this._elements.liveRegion.innerText = &apos;&apos;;
+      }
+      else {
+        const textContent = headerCell.content.textContent.trim();
+        if (textContent.length) {
+          // Set live region to true so that sort description string will be announced.
+          this._elements.liveRegion.setAttribute(&apos;aria-live&apos;, &apos;polite&apos;);
+          this._elements.liveRegion.removeAttribute(&apos;aria-hidden&apos;);
+          this._elements.liveRegion.innerText = i18n.get(`sorted by column {0} in ${column.sortableDirection} order`, textContent);
+
+          // @a11y wait 2.5 seconds to give screen reader enough time to announce the live region before silencing the it.
+          window.setTimeout(() =&gt; {
+            this._elements.liveRegion.setAttribute(&apos;aria-live&apos;, &apos;off&apos;);
+            this._elements.liveRegion.setAttribute(&apos;aria-hidden&apos;, &apos;true&apos;);
+          }, 2500);
+        }
+      }
     }
   }
   
@@ -2062,7 +2112,7 @@ class Table extends BaseComponent(HTMLTableElement) {
         // For icons (chevron up/down) styling
         getSiblingsOf(colHeaderCell, &apos;th[is=&quot;coral-table-headercell&quot;]&apos;).forEach((headerCell) =&gt; {
           headerCell.setAttribute(&apos;sortabledirection&apos;, sortableDirection.DEFAULT);
-          headerCell.setAttribute(&apos;aria-sort&apos;, &apos;none&apos;);
+          (table.head.sticky ? headerCell.content : headerCell).setAttribute(&apos;aria-sort&apos;, &apos;none&apos;);
         });
       }
       
@@ -2120,7 +2170,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       if (colHeaderCell) {
         getSiblingsOf(colHeaderCell, &apos;th[is=&quot;coral-table-headercell&quot;]&apos;).forEach((headerCell) =&gt; {
           headerCell.setAttribute(&apos;sortabledirection&apos;, sortableDirection.DEFAULT);
-          headerCell.setAttribute(&apos;aria-sort&apos;, &apos;none&apos;);
+          (table.head.sticky ? headerCell.content : headerCell).setAttribute(&apos;aria-sort&apos;, &apos;none&apos;);
         });
       }
       
@@ -2184,9 +2234,17 @@ class Table extends BaseComponent(HTMLTableElement) {
         table.trigger(&apos;coral-table:columnsort&apos;, {column});
       }
     }
-    
+
     // Allow triggering change events again after sorting
     window.requestAnimationFrame(() =&gt; {
+      // a11y initialize column sort aria-describedby
+      if (onInitialization &amp;&amp; column.sortableDirection !== sortableDirection.DEFAULT) {
+        const textContent = colHeaderCell.content.textContent.trim();
+        if (textContent.length) {
+          this._elements.liveRegion.innerText = i18n.get(`sorted by column {0} in ${column.sortableDirection} order`, textContent);
+        }
+      }
+
       table._preventTriggeringEvents = false;
     });
   }
@@ -2201,7 +2259,7 @@ class Table extends BaseComponent(HTMLTableElement) {
     const head = event.target;
     
     // Wait next frame before reading and changing header cell layout
-    requestAnimationFrame(() =&gt; {
+    window.requestAnimationFrame(() =&gt; {
       // Defines the head height
       table._resetContainerLayout(head.sticky ? `${head.getBoundingClientRect().height}px` : null);
       
@@ -2787,8 +2845,18 @@ class Table extends BaseComponent(HTMLTableElement) {
   _setHeaderCellScope(headerCell, tableSection) {
     // Add appropriate scope depending on whether header cell is in THEAD or TBODY
     const scope = tableSection.nodeName === &apos;THEAD&apos; || tableSection.nodeName === &apos;TFOOT&apos; ? &apos;col&apos; : &apos;row&apos;;
-    const ariaRole = scope === &apos;col&apos; ? &apos;columnheader&apos; : &apos;rowheader&apos;;
-    headerCell.setAttribute(&apos;role&apos;, ariaRole);
+    if (scope === &apos;col&apos;) {
+      if (this.head &amp;&amp; this.head.sticky) {
+        headerCell.setAttribute(&apos;role&apos;, &apos;presentation&apos;);
+        headerCell._elements.content.setAttribute(&apos;role&apos;, &apos;columnheader&apos;);
+      }
+      else {
+        headerCell.setAttribute(&apos;role&apos;, &apos;columnheader&apos;);
+      }
+    } 
+    else {
+      headerCell.setAttribute(&apos;role&apos;, &apos;rowheader&apos;);
+    }
     headerCell.setAttribute(&apos;scope&apos;, scope);
   }
   
@@ -2860,9 +2928,15 @@ class Table extends BaseComponent(HTMLTableElement) {
    */
   static get divider() { return divider; }
   
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      labelledby: &apos;labelledBy&apos;
+    });
+  }
+  
   /** @ignore */
   static get observedAttributes() {
-    return super.observedAttributes.concat([&apos;variant&apos;, &apos;selectable&apos;, &apos;orderable&apos;, &apos;multiple&apos;, &apos;lockable&apos;]);
+    return super.observedAttributes.concat([&apos;variant&apos;, &apos;selectable&apos;, &apos;orderable&apos;, &apos;labelled&apos;, &apos;labelledby&apos;, &apos;multiple&apos;, &apos;lockable&apos;]);
   }
   
   /** @ignore */
@@ -2890,6 +2964,7 @@ class Table extends BaseComponent(HTMLTableElement) {
     // Render template
     const frag = document.createDocumentFragment();
     frag.appendChild(this._elements.container);
+    frag.appendChild(this._elements.liveRegion);
     
     // cloneNode support
     const wrapper = this.querySelector(&apos;._coral-Table-wrapper-container&apos;);
@@ -2897,9 +2972,14 @@ class Table extends BaseComponent(HTMLTableElement) {
       wrapper.remove();
     }
   
+    let liveRegion = this.querySelector(&apos;._coral-Table-liveRegion&apos;);
+    if (liveRegion) {
+      liveRegion.remove();
+    }
+    
     // Append frag
     this.appendChild(frag);
-  
+    
     // Call content zone inserts
     this.head = head;
     this.body = body;

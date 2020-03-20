@@ -1,7 +1,7 @@
 {
-  "coverage": "65.34%",
-  "expectCount": 3543,
-  "actualCount": 2315,
+  "coverage": "65.32%",
+  "expectCount": 3547,
+  "actualCount": 2317,
   "files": {
     "coral-spectrum/coral-base-button/src/scripts/BaseButton.js": {
       "expectCount": 6,
@@ -998,7 +998,7 @@
       ]
     },
     "coral-spectrum/coral-component-icon/src/scripts/Icon.js": {
-      "expectCount": 41,
+      "expectCount": 42,
       "actualCount": 21,
       "undocumentLines": [
         21,
@@ -1013,14 +1013,15 @@
         129,
         133,
         139,
-        526,
+        530,
+        531,
         161,
         175,
         194,
         251,
         276,
-        473,
-        518
+        477,
+        522
       ]
     },
     "coral-spectrum/coral-component-icon/src/scripts/loadIcons.js": {
@@ -1028,7 +1029,7 @@
       "actualCount": 1,
       "undocumentLines": [
         20,
-        75
+        54
       ]
     },
     "coral-spectrum/coral-component-list/src/scripts/AnchorList.js": {
@@ -1990,11 +1991,12 @@
       ]
     },
     "coral-spectrum/coral-component-table/src/scripts/Table.js": {
-      "expectCount": 117,
-      "actualCount": 75,
+      "expectCount": 120,
+      "actualCount": 77,
       "undocumentLines": [
-        29,
-        49,
+        28,
+        48,
+        53,
         54,
         55,
         56,
@@ -2005,36 +2007,36 @@
         61,
         62,
         63,
-        64,
-        86,
-        164,
-        166,
-        172,
-        175,
-        177,
-        283,
-        302,
-        344,
-        367,
-        417,
-        458,
-        506,
-        1235,
-        1277,
-        1491,
-        1557,
-        1576,
-        1582,
-        1599,
-        1777,
-        1841,
-        2233,
-        2257,
-        2323,
-        2405,
-        2409,
-        2410,
-        2423
+        85,
+        163,
+        165,
+        171,
+        174,
+        176,
+        282,
+        301,
+        343,
+        366,
+        416,
+        489,
+        537,
+        1267,
+        1309,
+        1523,
+        1589,
+        1626,
+        1632,
+        1649,
+        1835,
+        1899,
+        2291,
+        2315,
+        2381,
+        2473,
+        2477,
+        2478,
+        2491,
+        2514
       ]
     },
     "coral-spectrum/coral-component-table/src/scripts/TableBody.js": {

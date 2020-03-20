@@ -7404,6 +7404,18 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "coral-spectrum/coral-component-table/src/scripts/table.js~table#labelled",
+    "class/coral-spectrum/coral-component-table/src/scripts/Table.js~Table.html#instance-member-labelled",
+    "coral-spectrum/coral-component-table/src/scripts/Table.js~Table#labelled",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-table/src/scripts/table.js~table#labelledby",
+    "class/coral-spectrum/coral-component-table/src/scripts/Table.js~Table.html#instance-member-labelledBy",
+    "coral-spectrum/coral-component-table/src/scripts/Table.js~Table#labelledBy",
+    "member"
+  ],
+  [
     "coral-spectrum/coral-component-table/src/scripts/table.js~table#lockable",
     "class/coral-spectrum/coral-component-table/src/scripts/Table.js~Table.html#instance-member-lockable",
     "coral-spectrum/coral-component-table/src/scripts/Table.js~Table#lockable",

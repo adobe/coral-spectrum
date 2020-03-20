@@ -5284,6 +5284,11 @@ coral-icon._coral-Icon {
   justify-content: center;
   pointer-events: auto;
 }
+._coral-Icon-collection {
+  position: fixed;
+  left: -999px;
+  top: -999px;
+}
 
 /**
  * Copyright 2019 Adobe. All rights reserved.

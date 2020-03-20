@@ -450,7 +450,7 @@ if (!window.Typekit) { // we load the typescript only once
   const h = document.getElementsByTagName(&apos;html&apos;)[0];
   h.classList.add(&apos;wf-loading&apos;);
   
-  const t = setTimeout(() =&gt; {
+  const t = window.setTimeout(() =&gt; {
     h.classList.remove(&apos;wf-loading&apos;);
     h.classList.add(&apos;wf-inactive&apos;);
   }, config.scriptTimeout);

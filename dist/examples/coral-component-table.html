@@ -34,6 +34,15 @@
     <link rel="stylesheet" href="../css/coral.css">
     <script>
       document.addEventListener('DOMContentLoaded', function() {
+        var headings = document.getElementsByTagName('H2');
+        for (var i = 0; i < headings.length; i++) {
+          var heading = headings[i];
+          var table = heading.nextElementSibling;
+          if (table.tagName === 'TABLE') {
+            heading.id = Coral.commons.getUID();
+            table.setAttribute('labelledby', heading.id);
+          }
+        }
         const script = document.createElement('script');
         script.src = '../js/coral.js';
         document.head.appendChild(script);
