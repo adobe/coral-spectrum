@@ -2561,6 +2561,27 @@ class Table extends BaseComponent(HTMLTableElement) {
         this._setHeaderCellScope(headerCell, row.parentNode);
       });
     });
+
+    // With a thead and tfoot,
+    if (this.head && this.foot) {
+      const headRows = getRows([this.head]);
+      const footRows = getRows([this.foot]);
+      // if the number of rows in the thead and tfoot match
+      if (headRows.length === footRows.length) {
+        let redundantFooter = true;
+        // and the textContent of each thead header cell matches the textContent of each tfoot header cell in the same column
+        headRows.forEach((row, rowIndex) => getHeaderCells(row).forEach((headerCell, cellIndex) => {
+          let footerCell = getHeaderCells(footRows[rowIndex])[cellIndex];
+          if (!footerCell || headerCell.textContent.trim() !== footerCell.textContent.trim()) {
+            redundantFooter = false;
+          }
+        }));
+        // the tfoot is redundant and should be hidden to prevent double or triple voicing of table headers.
+        if (redundantFooter) {
+          this.foot.setAttribute('aria-hidden', 'true');
+        }
+      }
+    }
     
     // Detect table size changes
     commons.addResizeListener(this, this._resetLayout);
