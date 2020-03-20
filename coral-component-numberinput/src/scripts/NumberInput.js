@@ -774,7 +774,7 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
       window.requestAnimationFrame(() => {
         this._elements.liveregion.appendChild(textNode);
         
-        clearLiveRegionTimeout = setTimeout(() => {
+        clearLiveRegionTimeout = window.setTimeout(() => {
           this._clearLiveRegion();
         }, LIVEREGION_TIMEOUT_DELAY);
       });

@@ -255,7 +255,7 @@ const testButton = function(Constructor, tagName, baseTagName) {
         
           button.label.textContent = 'Add';
           // Wait for the MO to kick in
-          setTimeout(() => {
+          window.setTimeout(() => {
             expect(button.label.textContent).to.equal('Add');
             expect(button.classList.contains('_coral-Button')).to.be.true;
             expect(button.icon).to.equal('add');
@@ -273,7 +273,7 @@ const testButton = function(Constructor, tagName, baseTagName) {
         
           button.label.innerHTML = '';
           // Wait for the MO to kick in
-          setTimeout(() => {
+          window.setTimeout(() => {
             expect(button.label.textContent).to.equal('');
             expect(button.classList.contains('_coral-Button')).to.be.true;
             expect(button.icon).to.equal('add');
@@ -294,7 +294,7 @@ const testButton = function(Constructor, tagName, baseTagName) {
           button.icon = 'share';
           button.label.innerHTML = '';
           // Wait for the MO to kick in
-          setTimeout(() => {
+          window.setTimeout(() => {
             expect(button._getIconElement()).to.exist;
             expect(button._getIconElement().icon).to.equal('share');
             expect(button._elements.icon.getAttribute('aria-hidden')).to.equal(null);

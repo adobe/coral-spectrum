@@ -33,7 +33,7 @@ if (!window.Typekit) { // we load the typescript only once
   const h = document.getElementsByTagName('html')[0];
   h.classList.add('wf-loading');
   
-  const t = setTimeout(() => {
+  const t = window.setTimeout(() => {
     h.classList.remove('wf-loading');
     h.classList.add('wf-inactive');
   }, config.scriptTimeout);

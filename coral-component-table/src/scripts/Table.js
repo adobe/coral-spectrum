@@ -1606,7 +1606,7 @@ class Table extends BaseComponent(HTMLTableElement) {
         this._elements.liveRegion.innerText = '';
       }
       else {
-        var textContent = headerCell.content.textContent.trim();
+        const textContent = headerCell.content.textContent.trim();
         if (textContent.length) {
           // Set live region to true so that sort description string will be announced.
           this._elements.liveRegion.setAttribute('aria-live', 'polite');
@@ -1820,7 +1820,6 @@ class Table extends BaseComponent(HTMLTableElement) {
 
     // Allow triggering change events again after sorting
     window.requestAnimationFrame(() => {
-
       // a11y initialize column sort aria-describedby
       if (onInitialization && column.sortableDirection !== sortableDirection.DEFAULT) {
         const textContent = colHeaderCell.content.textContent.trim();
@@ -1843,7 +1842,7 @@ class Table extends BaseComponent(HTMLTableElement) {
     const head = event.target;
     
     // Wait next frame before reading and changing header cell layout
-    requestAnimationFrame(() => {
+    window.requestAnimationFrame(() => {
       // Defines the head height
       table._resetContainerLayout(head.sticky ? `${head.getBoundingClientRect().height}px` : null);
       

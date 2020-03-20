@@ -208,7 +208,7 @@ class Playground extends BaseComponent(HTMLElement) {
     document.execCommand('copy');
   
     this._elements.sharetip.open = true;
-    setTimeout(() => {
+    window.setTimeout(() => {
       this._elements.sharetip.open = false;
     }, 1000);
   }

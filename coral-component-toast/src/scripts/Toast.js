@@ -273,7 +273,7 @@ class Toast extends BaseOverlay(BaseComponent(HTMLElement)) {
       requestAnimationFrame(() => {
         // Only dismiss if value is different than 0
         if (this.autoDismiss !== 0) {
-          this._dimissTimeout = setTimeout(() => {
+          this._dimissTimeout = window.setTimeout(() => {
             if (this.open && !this.contains(document.activeElement)) {
               this.open = false;
             }
@@ -389,7 +389,7 @@ class Toast extends BaseOverlay(BaseComponent(HTMLElement)) {
       clearTimeout(this._layoutTimeout);
     }
   
-    this._layoutTimeout = setTimeout(() => {
+    this._layoutTimeout = window.setTimeout(() => {
       this._layoutTimeout = null;
       this._position();
     }, this._wait);

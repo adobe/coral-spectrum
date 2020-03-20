@@ -596,7 +596,7 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
     }
     else {
       // macro-task is necessary for the same reasons as listed above
-      setTimeout(() => {
+      window.setTimeout(() => {
         this._loadFittingAdditionalItems();
       });
     }
