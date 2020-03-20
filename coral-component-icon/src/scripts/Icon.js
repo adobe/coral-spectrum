@@ -454,6 +454,10 @@ class Icon extends BaseComponent(HTMLElement) {
   static load(url) {
     const resolveIconsPath = (iconsPath) => {
       const path = commons._script.src;
+      if (iconsExternal === 'js') {
+        iconsPath = iconsPath.replace('.svg', '.js');
+      }
+      
       return `${path.split('/').slice(0, -iconsPath.split('/').length).join('/')}/${iconsPath}`;
     };
     
@@ -524,10 +528,15 @@ class Icon extends BaseComponent(HTMLElement) {
 
 // Load icon collections by default
 const iconCollections = [SPECTRUM_ICONS_COLOR];
-if (Icon._iconsExternal() === 'off') {
+let extension = '.svg';
+if (Icon._iconsExternal() === 'off' || Icon._iconsExternal() === 'js') {
   iconCollections.push(SPECTRUM_CSS_ICONS);
   iconCollections.push(SPECTRUM_ICONS);
+  
+  if (Icon._iconsExternal() === 'js') {
+    extension = '.js';
+  }
 }
-iconCollections.forEach(iconSet => Icon.load(resourcesPath ? `${resourcesPath}${iconSet}.svg` : iconSet));
+iconCollections.forEach(iconSet => Icon.load(resourcesPath ? `${resourcesPath}${iconSet}${extension}` : iconSet));
 
 export default Icon;

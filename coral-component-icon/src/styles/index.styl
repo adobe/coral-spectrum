@@ -23,3 +23,10 @@ coral-icon._coral-Icon {
   // Clicking on icon is used in some components like Tree
   pointer-events: auto;
 }
+
+// Off screen because we can't hide it due to colored icons using radial gradients
+._coral-Icon-collection {
+  position: fixed;
+  left: -999px;
+  top: -999px;
+}

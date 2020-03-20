@@ -39,7 +39,12 @@ function resources(opts) {
           outputPath = outputPath.replace('./', '');
         }
         
+        // Export SVG as svg file
         fs.outputFile(path.join(process.cwd(), outputPath), code);
+  
+        // Export SVG as js file
+        code = `document.body.insertAdjacentHTML('beforeend', '${code}')`;
+        fs.outputFile(path.join(process.cwd(), outputPath.replace('.svg', '.js')), code);
         
         // Export the file path
         return {

@@ -17,10 +17,10 @@ function handleError(string) {
   console.error(error.toString());
 }
 
-function injectSVG(svgURL, callback) {
+function injectSVG(svgURL) {
   // 200 for web servers, 0 for CEP panels
   if (this.status !== 200 && this.status !== 0) {
-    handleError(`Failed to fetch icons, server returned ${this.status}`);
+    handleError(`failed to fetch icons, server returned ${this.status}`);
     return;
   }
   
@@ -32,55 +32,44 @@ function injectSVG(svgURL, callback) {
   
     // Make sure a real SVG was returned
     if (svg && svg.tagName === 'svg') {
-      // Store url information
-      svg.setAttribute('data-url', svgURL);
-      
-      // Off screen because we can't hide it due to radial gradients
-      svg.classList.add('_coral-Icon-collection');
-      svg.setAttribute('focusable', 'false');
-      svg.setAttribute('aria-hidden', 'true');
-      svg.style.position = 'fixed';
-      svg.style.top = '-999px';
-      svg.style.left = '-999px';
-    
       // Insert it into the body
       if (document.body) {
         document.body.appendChild(svg);
-  
-        // Pass the SVG to the callback
-        if (typeof callback === 'function') {
-          callback(null, svg);
-        }
       }
       else {
         document.addEventListener('DOMContentLoaded', () => {
           document.body.appendChild(svg);
-  
-          // Pass the SVG to the callback
-          if (typeof callback === 'function') {
-            callback(null, svg);
-          }
         });
       }
     }
     else {
-      handleError('Parsed SVG document contained something other than an SVG');
+      handleError('parsed SVG document contained something other than an SVG');
     }
   }
   catch (err) {
-    handleError(`'Error parsing SVG: ${err}'`);
+    handleError(`error parsing SVG: ${err}`);
   }
 }
 
-function loadIcons(svgURL, callback) {
-  // Request the SVG sprite
-  const req = new XMLHttpRequest();
-  req.open('GET', svgURL, true);
-  req.addEventListener('load', injectSVG.bind(req, svgURL, callback));
-  req.addEventListener('error', () => {
-    handleError('Request failed');
-  });
-  req.send();
+function loadIcons(svgURL) {
+  if (svgURL.slice(-3) === '.js') {
+    // Injects the SVG icons in the document
+    const script = document.createElement('script');
+    script.async = true;
+    script.type = 'text/javascript';
+    script.src = svgURL;
+    document.head.appendChild(script);
+  }
+  else {
+    // Request the SVG icons
+    const req = new XMLHttpRequest();
+    req.open('GET', svgURL, true);
+    req.addEventListener('load', injectSVG.bind(req));
+    req.addEventListener('error', () => {
+      handleError('Request failed');
+    });
+    req.send();
+  }
 }
 
 export default loadIcons;
