@@ -2571,7 +2571,7 @@ class Table extends BaseComponent(HTMLTableElement) {
         let redundantFooter = true;
         // and the textContent of each thead header cell matches the textContent of each tfoot header cell in the same column
         headRows.forEach((row, rowIndex) => getHeaderCells(row).forEach((headerCell, cellIndex) => {
-          let footerCell = getHeaderCells(footRows[rowIndex])[cellIndex];
+          const footerCell = getHeaderCells(footRows[rowIndex])[cellIndex];
           if (!footerCell || headerCell.textContent.trim() !== footerCell.textContent.trim()) {
             redundantFooter = false;
           }
