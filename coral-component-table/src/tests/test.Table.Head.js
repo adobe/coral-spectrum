@@ -139,7 +139,8 @@ describe('Table.Head', function() {
   describe('Implementation Details', function() {
     it('should set a11y attribute', function() {
       var row = helpers.build(new Table.Head());
-      expect(row.getAttribute('role')).to.equal('rowgroup');
+      expect(row.tagName).to.equal('THEAD');
+      expect(row.hasAttribute('role')).to.be.false;
     });
   });
 });

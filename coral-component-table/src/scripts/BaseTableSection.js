@@ -93,9 +93,6 @@ const BaseTableSection = (superClass) => class extends superClass {
   render() {
     super.render();
     
-    // a11y
-    this.setAttribute('role', 'rowgroup');
-    
     // Default reflected attributes
     if (!this._divider) { this.divider = divider.ROW; }
   }
