@@ -2156,6 +2156,15 @@ describe('Table', function() {
         expect(liveRegion.getAttribute('aria-live')).to.equal('off');
         expect(liveRegion.innerHTML).to.equal('');
       });
+
+      it('should hide redundant tfoot headers from assistive technology', () => {
+        let table = helpers.build(window.__html__['Table.tfoot.html']);
+        let tfoot = table.foot;
+        expect(tfoot.getAttribute('aria-hidden')).to.equal('true');
+        table = helpers.build(window.__html__['Table.base.html']);
+        tfoot = table.foot;
+        expect(tfoot.hasAttribute('aria-hidden')).to.be.false;
+      });
     });
     
     describe('#orderable', function() {
