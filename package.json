@@ -49,7 +49,7 @@
     "babel-eslint": "^10.0.3",
     "browserslist": "^4.8.5",
     "chai": "^4.0.2",
-    "codemirror": "5.35.0",
+    "codemirror": "^5.52.2",
     "deflate-js": "0.2.3",
     "del": "^4.1.1",
     "esdoc": "^1.0.3",
