@@ -524,7 +524,9 @@ class Tree extends BaseComponent(HTMLElement) {
     this.setAttribute('aria-multiselectable', this.multiple);
     
     // Enable keyboard interaction
-    this._resetFocusableItem();
+    requestAnimationFrame(() => {
+      this._resetFocusableItem();
+    });
     
     // Don't trigger events once connected
     this._preventTriggeringEvents = true;

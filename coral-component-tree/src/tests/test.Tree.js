@@ -356,16 +356,19 @@ describe('Tree', function() {
       expect(firstItem._elements.header).to.equal(document.activeElement);
     });
     
-    it('should focus the last item via keyboard', function() {
+    it('should focus the last item via keyboard', function(done) {
       const el = helpers.build(window.__html__['Tree.base.html']);
       var firstItem = el.items.first();
-      
-      helpers.keypress('end', firstItem._elements.header);
-      
       var lastItem = el.items.last();
-      expect(firstItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
-      expect(lastItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
-      expect(lastItem._elements.header).to.equal(document.activeElement);
+      
+      helpers.next(() => {
+        helpers.keypress('end', firstItem._elements.header);
+        
+        expect(firstItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
+        expect(lastItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
+        expect(lastItem._elements.header).to.equal(document.activeElement);
+        done();
+      });
     });
     
     it('should focus the next item via keyboard', function() {
@@ -469,7 +472,7 @@ describe('Tree', function() {
       });
     });
 
-    it('should set a new focusable item if the current one is disabled', function() {
+    it('should set a new focusable item if the current one is disabled', function(done) {
       const el = helpers.build(window.__html__['Tree.base.html']);
       var items = el.items.getAll();
       var firstItem = items[0];
@@ -477,20 +480,26 @@ describe('Tree', function() {
       
       firstItem.disabled = true;
       
-      expect(firstItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
-      expect(secondItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
+      helpers.next(() => {
+        expect(firstItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
+        expect(secondItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
+        done();
+      });
     });
     
-    it('should set a new focusable item if the current one is hidden', function() {
+    it('should set a new focusable item if the current one is hidden', function(done) {
       const el = helpers.build(window.__html__['Tree.base.html']);
       var items = el.items.getAll();
       var firstItem = items[0];
       var secondItem = items[1];
       
       firstItem.hidden = true;
-      
-      expect(firstItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
-      expect(secondItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
+  
+      helpers.next(() => {
+        expect(firstItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
+        expect(secondItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
+        done();
+      });
     });
     
     it('should expand the tree item with key:return', function() {
