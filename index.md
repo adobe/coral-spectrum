@@ -4,6 +4,13 @@ Coral Spectrum is a JavaScript library of Web Components following Spectrum desi
 
 <img class="logo" src="./manual/asset/spectrum_illustration_2x.png">
 
+## Showcase
+
+All components can be seen in action <a href="../examples" target="_blank">here</a>. These are only examples and 
+don't cover all scenarios. The API documentation can be found in the <a href="./identifiers.html" target="_blank">references</a>.    
+A playground is available <a href="../playground" target="_blank">here</a> to experiment and preview code with the latest Coral Spectrum version.
+Code can be shared by copy pasting the URL. The playground is sandboxed to prevent security risks.
+
 ## Spectrum
 
 The current default theme is is an implementation of the [Spectrum](https://spectrum.adobe.com) design 
@@ -24,13 +31,6 @@ The use of custom elements gives us the ability to hide many implementation deta
 more freedom to change the underlying markup that supports those elements. 
 This makes the exposed API smaller and more explicit, resulting in a lower risk of updates to Coral Spectrum needing to 
 introduce breaking changes.
-
-## Showcase
-
-All components can be seen in action <a href="../examples" target="_blank">here</a>. These are only examples and 
-don't cover all scenarios. The API documentation can be found in the <a href="./identifiers.html" target="_blank">references</a>.    
-A playground is available <a href="../playground" target="_blank">here</a> to experiment and preview code with the latest Coral Spectrum version.
-Code can be shared by copy pasting the URL. The playground is sandboxed to prevent security risks.
 
 ---
 

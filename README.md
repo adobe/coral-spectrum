@@ -2,6 +2,13 @@
 
 A JavaScript library of Web Components following Spectrum design patterns.
 
+## Showcase
+
+All components can be seen in action [here](http://opensource.adobe.com/coral-spectrum/dist/examples). These are only examples and 
+don't cover all scenarios. The API documentation can be found in the [references](http://opensource.adobe.com/coral-spectrum/dist/documentation/identifiers.html).    
+A playground is available [here](http://opensource.adobe.com/coral-spectrum/dist/playground) to experiment and preview code with the latest Coral Spectrum version.
+Code can be shared by copy pasting the URL. The playground is sandboxed to prevent security risks.
+
 ## Spectrum
 
 The current default theme is is an implementation of the [Spectrum](https://spectrum.adobe.com) design 
@@ -23,34 +30,79 @@ more freedom to change the underlying markup that supports those elements.
 This makes the exposed API smaller and more explicit, resulting in a lower risk of updates to Coral Spectrum needing to 
 introduce breaking changes.
 
-### Showcase
+## Browser support
 
-All components can be seen in action [here](http://opensource.adobe.com/coral-spectrum/dist/examples). These are only examples and 
-don't cover all scenarios. The API documentation can be found in the [references](http://opensource.adobe.com/coral-spectrum/dist/documentation/identifiers.html).    
-A playground is available [here](http://opensource.adobe.com/coral-spectrum/dist/playground) to experiment and preview code with the latest Coral Spectrum version.
-Code can be shared by copy pasting the URL. The playground is sandboxed to prevent security risks. 
+Coral Spectrum is designed to support the following browsers:
+* Chrome (latest)
+* Safari (latest)
+* Firefox (latest)
+* Edge (latest)
+* IE 11
+* iOS 7+
+* Android 4.4+
 
-## Getting started
+## Theme (light, dark, lightest, darkest)
 
-### Consuming
+The default Coral Spectrum styles cascade from `coral--light`, `coral--lightest`, `coral--dark` and `coral--darkest` theme, so that class must be specified at a higher level.
 
-The easiest way to consume Coral Spectrum is to download the distribution package of the 
+```html
+<body class="coral--light">
+    <!-- light theme -->
+    <div class="container"></div>
+    <div class="coral--dark">
+        <!-- dark theme -->
+    </div>
+</body>
+```
+
+## Large scale support
+
+For mobile, Spectrum has a larger scale that enables larger tap targets on all controls. To enable it, the class `coral--large` must be specified at a higher level.
+
+```html
+<body class="coral--light coral--large">
+   <!-- light theme -->
+   <!-- large scale -->
+</body>
+```
+
+## Using Coral Spectrum
+
+### Easiest way via a CDN
+
+The easiest way to consume Coral Spectrum is to use a CDN e.g. copy these lines into your html file. 
+
+```html
+<head>
+  <!-- Adjust version accordingly -->
+  <link rel="stylesheet" href="https://unpkg.com/@adobe/coral-spectrum@4.5.0/dist/css/coral.min.css">
+  <script src="https://unpkg.com/@adobe/coral-spectrum@4.5.0/dist/js/coral.min.js" data-coral-icons-external="js"></script>
+</head>
+<body class="coral--light">
+  <button is="coral-button" icon="add">My Button</button>
+</body> 
+``` 
+
+### Copying the distribution files
+
+You can also download the distribution package of the 
 latest release by running `npm i @adobe/coral-spectrum`. It includes all components and styles.
  
 After you've unzipped the package, look for the `dist` folder and :
 * Copy the files from `dist/css`, `dist/js` and `dist/resources` in your project.
-* Reference the files in your page with :
-```
-<link rel="stylesheet" href="css/coral.min.css">
-<script src="js/coral.min.js" data-coral-icons="PATH_TO_RESOURCES_FOLDER"></script>
-```
-* That's it. Now you're ready to use Coral Spectrum.
-* **Note:** Calendar, Clock and Datepicker components will leverage [moment.js](http://momentjs.com/) if loaded on the page
+* Reference the files in your page e.g
 
+```html
+<link rel="stylesheet" href="css/coral.min.css">
+<script src="js/coral.min.js"></script>
+```
+
+### Using a bundler like Webpack
+  
 If your project only requires a few components, you can use a module bundler like [Webpack](https://webpack.js.org/) to only import the components needed. 
 Below is an example of a Webpack config:
 
-```
+```js
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -108,7 +160,7 @@ module.exports = {
 
 Then in your `index.js` file, you can import and use single components :
  
-```
+```js
 // Import Component
 import {Button} from '@adobe/coral-spectrum/coral-component-button';
 
@@ -117,13 +169,18 @@ const button = new Button();
 
 If icons are not displayed, ensure the path to the styles and icons are set e.g. :
 
-```
+```html
 <link rel="stylesheet" href="dist/style.min.css">
 <script data-coral-icons="dist/icons/" src="dist/bundle.min.js"></script>
 ```
 
+**Note:** Calendar, Clock and Datepicker components will leverage [moment.js](http://momentjs.com/) if available. 
 
-## Building and Testing
+## Contributing
+
+Check out the [contributing guidelines](https://github.com/adobe/coral-spectrum/blob/master/.github/CONTRIBUTING.md).
+
+### Building and Testing
 
 Run the following commands first :
 ```
@@ -139,10 +196,6 @@ You can use below tasks to get started:
 * `gulp docs` to build the documentation in `dist/documentation`. 
 
 Each component can be built independently e.g. `cd coral-component-button && gulp`.
-
-### Contributing
-
-Check out the [contributing guidelines](https://github.com/adobe/coral-spectrum/blob/master/.github/CONTRIBUTING.md).
 
 ### Releasing
 

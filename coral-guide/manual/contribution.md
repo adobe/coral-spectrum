@@ -62,7 +62,7 @@ npm install -g gulp-cli
 Build the project, open a browser window, and watch for changes:
 
 ```
-npm run start
+gulp
 ```
 
 Commit changes, referencing the relevant issue number (if any):

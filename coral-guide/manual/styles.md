@@ -2,8 +2,7 @@
 
 ## Theme (light, dark, lightest, darkest)
 
-
-The default Coral Spectrum font styles cascade from `coral--light`, `coral--lightest`, `coral--dark` and `coral--darkest` theme, so that class must be specified at a higher level.
+The default Coral Spectrum styles cascade from `coral--light`, `coral--lightest`, `coral--dark` and `coral--darkest` theme, so that class must be specified at a higher level.
 
 ```
 <body class="coral--light">
@@ -12,6 +11,17 @@ The default Coral Spectrum font styles cascade from `coral--light`, `coral--ligh
     <div class="coral--dark">
         <!-- dark theme -->
     </div>
+</body>
+```
+
+## Large scale support
+
+For mobile, Spectrum has a larger scale that enables larger tap targets on all controls. To enable it, the class `coral--large` must be specified at a higher level.
+
+```
+<body class="coral--light coral--large">
+   <!-- light theme -->
+   <!-- large scale -->
 </body>
 ```
 
@@ -89,19 +99,27 @@ Prevent text from wrapping, use an ellipsis to truncate.
 
 ### u-coral-visibleXS | u-coral-hiddenXS 
 
-Extra small device: <768px.
+Extra small device.
 
 ### u-coral-visibleS | u-coral-hiddenS
 
-Small device: >= 768px.
+Small device.
 
 ### u-coral-visibleM | u-coral-hiddenM
 
-Medium device: >= 992px.
+Medium device.
 
 ### u-coral-visibleL | u-coral-hiddenL
 
-Large device >= 1200px.
+Large device.
+
+### u-coral-visibleXL | u-coral-hiddenXL
+
+Extra large device.
+
+### u-coral-visibleXXL | u-coral-hiddenXXL
+
+Above extra large device.
 
 ## Fonts via Typekit
 
