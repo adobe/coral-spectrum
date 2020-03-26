@@ -74,6 +74,8 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
       insert: function(label) {
         label.classList.add(`${CLASSNAME}Label`);
         this.appendChild(label);
+        
+        this._toggleEllipsis();
       }
     });
   }
@@ -226,6 +228,12 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
   }
   set trackingElement(value) {
     super.trackingElement = value;
+  }
+  
+  _toggleEllipsis() {
+    requestAnimationFrame(() => {
+      this.classList.toggle('is-overflowing', this._elements.label.clientWidth > this.clientWidth);
+    });
   }
   
   /**
