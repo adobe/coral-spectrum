@@ -44,13 +44,17 @@
   <body class="coral--light">
     <main class="u-coral-margin">
       <div style="position:absolute;top:16px;right:16px;">
-        <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
-        <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
-        <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
-        <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+        <strong style="padding-right:8px">Theme:</strong>
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--darkest'">Darkest</a>
+        <strong style="padding:0 8px 0 32px">Scale:</strong>
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.remove('coral--large')">Medium</a> |
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.add('coral--large')">Large</a>
       </div>
 
-      <h1 class="coral-Heading--XXXL">Tree</h1>
+      <h1 class="coral-Heading--XXL">Tree</h1>
 
       <h2 class="coral-Heading--M">Usage notes</h2>
       <hr class="coral-Divider--L">
@@ -60,7 +64,7 @@
 
       <h2 class="coral--Heading--S">Default</h2>
       <div class="markup">
-        <coral-tree style="width: 240px">
+        <coral-tree id="mytree" style="width: 240px">
           <coral-tree-item disabled><coral-tree-item-content>Item 2</coral-tree-item-content></coral-tree-item>
           <coral-tree-item expanded>
             <coral-tree-item-content>Item 1 with <a class="coral-Link" href="#" coral-interactive>link</a></coral-tree-item-content>
@@ -79,6 +83,21 @@
           <coral-tree-item variant="leaf"><coral-tree-item-content>Item 2</coral-tree-item-content></coral-tree-item>
           <coral-tree-item hidden><coral-tree-item-content>Item 3</coral-tree-item-content></coral-tree-item>
         </coral-tree>
+
+        <script>
+          window.addEventListener('load', function() {
+            const mytree = document.getElementById('mytree');
+            mytree.on('coral-tree:expand', (event) => {
+              console.log(event.detail.item.content.textContent.trim() + ' is open');
+            });
+            mytree.on('coral-tree:collapse', (event) => {
+              console.log(event.detail.item.content.textContent.trim() + ' is closed');
+            });
+            mytree.on('coral-tree:change', (event) => {
+              console.log(event.detail.selection.content.textContent.trim() + ' is selected');
+            });
+          });
+        </script>
       </div>
 
       <h2 class="coral--Heading--S">Handle expansion via JS</h2>

@@ -1,6 +1,6 @@
 {
-  "coverage": "65.32%",
-  "expectCount": 3547,
+  "coverage": "65.3%",
+  "expectCount": 3548,
   "actualCount": 2317,
   "files": {
     "coral-spectrum/coral-base-button/src/scripts/BaseButton.js": {
@@ -998,38 +998,44 @@
       ]
     },
     "coral-spectrum/coral-component-icon/src/scripts/Icon.js": {
-      "expectCount": 42,
+      "expectCount": 39,
       "actualCount": 21,
       "undocumentLines": [
-        21,
-        22,
         23,
-        25,
-        26,
-        35,
-        41,
-        42,
-        47,
-        129,
-        133,
-        139,
-        530,
-        531,
-        161,
-        175,
-        194,
-        251,
-        276,
-        477,
-        522
+        24,
+        33,
+        39,
+        40,
+        45,
+        127,
+        131,
+        137,
+        528,
+        529,
+        159,
+        173,
+        192,
+        249,
+        274,
+        475,
+        520
+      ]
+    },
+    "coral-spectrum/coral-component-icon/src/scripts/iconCollection.js": {
+      "expectCount": 3,
+      "actualCount": 1,
+      "undocumentLines": [
+        14,
+        15
       ]
     },
     "coral-spectrum/coral-component-icon/src/scripts/loadIcons.js": {
       "expectCount": 3,
-      "actualCount": 1,
+      "actualCount": 0,
       "undocumentLines": [
-        20,
-        54
+        15,
+        22,
+        61
       ]
     },
     "coral-spectrum/coral-component-list/src/scripts/AnchorList.js": {
@@ -2028,15 +2034,15 @@
         1632,
         1649,
         1835,
-        1899,
-        2291,
-        2315,
-        2381,
-        2473,
-        2477,
-        2478,
-        2491,
-        2514
+        1901,
+        2293,
+        2317,
+        2383,
+        2475,
+        2479,
+        2480,
+        2493,
+        2516
       ]
     },
     "coral-spectrum/coral-component-table/src/scripts/TableBody.js": {
@@ -2121,17 +2127,18 @@
       "undocumentLines": []
     },
     "coral-spectrum/coral-component-tablist/src/scripts/Tab.js": {
-      "expectCount": 21,
+      "expectCount": 22,
       "actualCount": 13,
       "undocumentLines": [
         20,
         35,
         41,
-        127,
-        147,
-        177,
-        205,
-        265
+        129,
+        149,
+        179,
+        207,
+        233,
+        273
       ]
     },
     "coral-spectrum/coral-component-tablist/src/scripts/TabLabel.js": {
@@ -2223,10 +2230,10 @@
       "expectCount": 13,
       "actualCount": 9,
       "undocumentLines": [
-        17,
-        36,
-        73,
-        85
+        19,
+        38,
+        75,
+        87
       ]
     },
     "coral-spectrum/coral-component-textfield/src/scripts/Textfield.js": {

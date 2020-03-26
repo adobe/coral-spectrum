@@ -792,6 +792,24 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "@adobe/coral-spectrum~spectrum_css_icons",
+    "variable/index.html#static-variable-SPECTRUM_CSS_ICONS",
+    "<span>SPECTRUM_CSS_ICONS</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "variable"
+  ],
+  [
+    "@adobe/coral-spectrum~spectrum_icons",
+    "variable/index.html#static-variable-SPECTRUM_ICONS",
+    "<span>SPECTRUM_ICONS</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "variable"
+  ],
+  [
+    "@adobe/coral-spectrum~spectrum_icons_color",
+    "variable/index.html#static-variable-SPECTRUM_ICONS_COLOR",
+    "<span>SPECTRUM_ICONS_COLOR</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "variable"
+  ],
+  [
     "@adobe/coral-spectrum~search",
     "class/coral-spectrum/coral-component-search/src/scripts/Search.js~Search.html",
     "<span>Search</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
@@ -4798,6 +4816,12 @@ window.esdocSearchIndex = [
     "typedef/index.html#static-typedef-IconSizeEnum",
     "coral-spectrum/coral-component-icon/src/scripts/Icon.js~IconSizeEnum",
     "typedef"
+  ],
+  [
+    "coral-spectrum/coral-component-icon/src/scripts/iconcollection.js",
+    "file/coral-spectrum/coral-component-icon/src/scripts/iconCollection.js.html",
+    "coral-spectrum/coral-component-icon/src/scripts/iconCollection.js",
+    "file"
   ],
   [
     "coral-spectrum/coral-component-icon/src/scripts/loadicons.js",

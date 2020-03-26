@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.09% </span>
+                <span class="strong">91.43% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>92/101</span>
+                <span class='fraction'>96/105</span>
             </div>
         
             
@@ -36,16 +36,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.65% </span>
+                <span class="strong">96% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>22/23</span>
+                <span class='fraction'>24/25</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.09% </span>
+                <span class="strong">91.43% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>92/101</span>
+                <span class='fraction'>96/105</span>
             </div>
         
             
@@ -386,7 +386,15 @@
 <a name='L328'></a><a href='#L328'>328</a>
 <a name='L329'></a><a href='#L329'>329</a>
 <a name='L330'></a><a href='#L330'>330</a>
-<a name='L331'></a><a href='#L331'>331</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L331'></a><a href='#L331'>331</a>
+<a name='L332'></a><a href='#L332'>332</a>
+<a name='L333'></a><a href='#L333'>333</a>
+<a name='L334'></a><a href='#L334'>334</a>
+<a name='L335'></a><a href='#L335'>335</a>
+<a name='L336'></a><a href='#L336'>336</a>
+<a name='L337'></a><a href='#L337'>337</a>
+<a name='L338'></a><a href='#L338'>338</a>
+<a name='L339'></a><a href='#L339'>339</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -469,6 +477,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">630x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">630x</span>
+<span class="cline-any cline-yes">630x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -566,6 +583,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">630x</span>
+<span class="cline-any cline-yes">630x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">630x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -702,7 +721,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">467x</span>
+<span class="cline-any cline-yes">476x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -713,9 +732,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -792,6 +808,8 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
       insert: function(label) {
         label.classList.add(`${CLASSNAME}Label`);
         this.appendChild(label);
+        
+        this._toggleEllipsis();
       }
     });
   }
@@ -809,23 +827,23 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
   }
   set icon(value) {
     const iconElement = this._elements.icon;
-    ic<span class="missing-if-branch" title="if path not taken" >I</span>onElement.icon = value;
-  <span class="cstat-no" title="statement not covered" ></span>
+    iconElement.icon = value;
+  
     // removes the icon element from the DOM.
     if (this.icon === '') {
       iconElement.remove();
       this.trigger('coral-tab:_sizechanged');
     }
-    // adds the icon back since it was blown away by textContent
-    else if (!iconElement.parentElement) {
-      // Cha<span class="missing-if-branch" title="else path not taken" >E</span>nge icon size if the label is empty
+    //<span class="missing-if-branch" title="if path not taken" >I</span> adds the icon back since it was blown away by textContent
+    else<span class="cstat-no" title="statement not covered" > if (!iconElement.parentElement) {</span>
+      // Change icon size if the label is empty
       if (!this._elements.label.textContent.trim().length) {
         iconElement.size = Icon.size.SMALL;
       }
       
       super._toggleIconAriaHidden();
       
-      this.insertBefore(iconElement, this.firstChild);
+      this.i<span class="missing-if-branch" title="else path not taken" >E</span>nsertBefore(iconElement, this.firstChild);
       this.trigger('coral-tab:_sizechanged');
     }
   }
@@ -912,26 +930,26 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
    If a CSS Selector is provided, the first matching element will be used.
    
    @type {?HTMLElement|String}
-   @default null<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+   @default null
    @htmlattribute target
    */
   get target() {
     return typeof this._target === 'string' ? this._target : this._target || null;
   }
-  set <span class="missing-if-branch" title="if path not taken" >I</span>target(value) {
-    if (<span class="cstat-no" title="statement not covered" >value === null || type</span>of value === 'string' || value instanceof Node) {
-      th<span class="cstat-no" title="statement not covered" >is._target = value;</span>
-  
-      const<span class="missing-if-branch" title="else path not taken" >E</span> realTarget = getTarget(this.target);
+  set target(value) {
+    if (value === null || typeof value === 'string' || value instanceof Node) {
+      this._target = value;
+  <span class="branch-1 cbranch-no" title="branch not covered" ></span>
+      const realTarget = getTarget(this.target);
   
       // we add proper accessibility if available
       if (realTarget) {
         // creates a 2 way binding for accessibility
-        this.setAttribute('aria-controls', realTarget.id);
-        realTarget.setAttribute('aria-labelledby', this.id);
-      }
+      <span class="missing-if-branch" title="if path not taken" >I</span>  this.setAttribute('aria-controls', realTarget.id);
+<span class="cstat-no" title="statement not covered" >        realTarget.setAttribut</span>e('aria-labelledby', this.id);
+      }<span class="cstat-no" title="statement not covered" ></span>
     }
-  }
+  }<span class="missing-if-branch" title="else path not taken" >E</span>
   
   /**
    Inherited from {@link BaseComponent#trackingElement}.
@@ -944,6 +962,12 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
   }
   set trackingElement(value) {
     super.trackingElement = value;
+  }
+  
+  _toggleEllipsis() {
+    requestAnimationFrame(() =&gt; {
+      this.classList.toggle('is-overflowing', this._elements.label.clientWidth &gt; this.clientWidth);
+    });
   }
   
   /**
@@ -1032,20 +1056,20 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
         // Add non-template elements to the label
         label.appendChild(child);
       }
-      else {<span class="branch-0 cbranch-no" title="branch not covered" ></span>
+      else {
         this.removeChild(child);
-      }<span class="fstat-no" title="function not covered" ></span>
-    }<span class="cstat-no" title="statement not covered" ></span>
+      }
+    }<span class="branch-0 cbranch-no" title="branch not covered" ></span>
+  
+    // Add the fra<span class="fstat-no" title="function not covered" >g to</span> the component
+    th<span class="cstat-no" title="statement not covered" >is.appendChild(frag);</span>
   <span class="cstat-no" title="statement not covered" ></span>
-    // Add the frag to th<span class="cstat-no" title="statement not covered" >e component</span>
-    this.appendChild(frag);
-  <span class="cstat-no" title="statement not covered" ></span>
-    // Assign the content zones, moving them into place in the process
-    this.l<span class="cstat-no" title="statement not covered" >abel = label;</span>
+    // Assign the content<span class="cstat-no" title="statement not covered" > zones, moving them int</span>o place in the process
+    this.label = label;
   }<span class="cstat-no" title="statement not covered" ></span>
 }
-&nbsp;
-export default Tab;
+<span class="cstat-no" title="statement not covered" ></span>
+export def<span class="cstat-no" title="statement not covered" >ault Tab;</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -1053,7 +1077,7 @@ export default Tab;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Mar 20 2020 22:57:50 GMT+0100 (Central European Standard Time)
+                at Thu Mar 26 2020 15:34:02 GMT+0100 (Central European Standard Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
