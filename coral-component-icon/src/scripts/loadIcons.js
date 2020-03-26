@@ -10,6 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
+import {SPECTRUM_ICONS_COLOR} from './iconCollection';
+
 function handleError(string) {
   string = `Coral.Icon#load: ${string}`;
   const error = new Error(string);
@@ -32,14 +34,19 @@ function injectSVG(svgURL) {
   
     // Make sure a real SVG was returned
     if (svg && svg.tagName === 'svg') {
-      // Insert it into the body
-      if (document.body) {
-        document.body.appendChild(svg);
+      if (svgURL.indexOf(SPECTRUM_ICONS_COLOR) !== -1) {
+        // Insert it into the body
+        if (document.body) {
+          document.body.appendChild(svg);
+        }
+        else {
+          document.addEventListener('DOMContentLoaded', () => {
+            document.body.appendChild(svg);
+          });
+        }
       }
       else {
-        document.addEventListener('DOMContentLoaded', () => {
-          document.body.appendChild(svg);
-        });
+        document.head.appendChild(svg);
       }
     }
     else {
@@ -64,7 +71,7 @@ function loadIcons(svgURL) {
     // Request the SVG icons
     const req = new XMLHttpRequest();
     req.open('GET', svgURL, true);
-    req.addEventListener('load', injectSVG.bind(req));
+    req.addEventListener('load', injectSVG.bind(req, svgURL));
     req.addEventListener('error', () => {
       handleError('Request failed');
     });

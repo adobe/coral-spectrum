@@ -12,6 +12,8 @@
 
 import {BaseComponent} from '../../../coral-base-component';
 import {BaseFormField} from '../../../coral-base-formfield';
+// todo ideally there should be a coral-base-textfield to inherit from
+import '../../../coral-component-textfield';
 import {transform, validate, commons} from '../../../coral-utils';
 
 const CLASSNAME = '_coral-Textfield';

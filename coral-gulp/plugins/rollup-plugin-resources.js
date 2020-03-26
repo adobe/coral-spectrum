@@ -43,7 +43,8 @@ function resources(opts) {
         fs.outputFile(path.join(process.cwd(), outputPath), code);
   
         // Export SVG as js file
-        code = `document.body.insertAdjacentHTML('beforeend', '${code}')`;
+        const iconContainer = outputPath.endsWith('spectrum-icons-color.svg') ? 'body' : 'head';
+        code = `document.${iconContainer}.insertAdjacentHTML('beforeend', '${code}')`;
         fs.outputFile(path.join(process.cwd(), outputPath.replace('.svg', '.js')), code);
         
         // Export the file path

@@ -11,6 +11,7 @@
  */
 
 @require '@adobe/spectrum-css/dist/components/toggle/index.css';
+@require '@adobe/spectrum-css/dist/components/toggle/index-diff.css';
 @require '@adobe/spectrum-css/dist/components/toggle/multiStops/light.css';
 @require '@adobe/spectrum-css/dist/components/toggle/multiStops/lightest.css';
 @require '@adobe/spectrum-css/dist/components/toggle/multiStops/dark.css';
@@ -19,4 +20,10 @@
 // @compat
 ._coral-ToggleSwitch.is-readOnly {
   pointer-events: none;
+}
+
+// @spectrum
+._coral-ToggleSwitch-label,
+.coral--large ._coral-ToggleSwitch-label {
+  margin-top: 6px;
 }

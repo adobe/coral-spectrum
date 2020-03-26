@@ -11,6 +11,7 @@
  */
 
 @require '@adobe/spectrum-css/dist/components/radio/index.css';
+@require '@adobe/spectrum-css/dist/components/radio/index-diff.css';
 @require '@adobe/spectrum-css/dist/components/radio/multiStops/light.css';
 @require '@adobe/spectrum-css/dist/components/radio/multiStops/lightest.css';
 @require '@adobe/spectrum-css/dist/components/radio/multiStops/dark.css';
@@ -19,4 +20,10 @@
 // @compat
 ._coral-Radio.is-readOnly {
   pointer-events: none;
+}
+
+// @spectrum
+._coral-Radio-label,
+.coral--large ._coral-Radio-label {
+  line-height: 1.6;
 }

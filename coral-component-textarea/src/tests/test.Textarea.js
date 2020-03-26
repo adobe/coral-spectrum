@@ -72,13 +72,13 @@ describe('Textarea', function() {
       it('should increase the height automatically if variant=quiet', function(done) {
         helpers.build(el);
         el.variant = Textarea.variant.QUIET;
-        var initialHeight = el.getBoundingClientRect().height;
+        var initialHeight = el.clientHeight;
 
         el.value = '\n\n\n';
         el.trigger('input');
 
         helpers.next(() => {
-          var newHeight = parseInt(el.style.height, 10);
+          var newHeight = el.clientHeight;
           expect(newHeight > initialHeight).to.be.true;
           done();
         });
@@ -90,14 +90,16 @@ describe('Textarea', function() {
         el.value = '\n\n\n';
         el.trigger('input');
 
-        var initialHeight = el.getBoundingClientRect().height;
-        el.value = '';
-        el.trigger('input');
-        
         helpers.next(() => {
-          var newHeight = parseInt(el.style.height, 10);
-          expect(newHeight < initialHeight).to.be.true;
-          done();
+          var initialHeight = el.clientHeight;
+          el.value = '';
+          el.trigger('input');
+  
+          helpers.next(() => {
+            var newHeight = el.clientHeight;
+            expect(newHeight < initialHeight).to.be.true;
+            done();
+          });
         });
       });
   

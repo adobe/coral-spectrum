@@ -28,7 +28,7 @@ module.exports = function(gulp) {
   
   gulp.task('build',
     gulp.series(
-      gulp.parallel('clean', 'lint', 'styles-vars'),
+      gulp.parallel('clean', 'lint'),
       gulp.parallel('styles', 'templates'),
       'scripts'
     )
@@ -36,7 +36,7 @@ module.exports = function(gulp) {
   
   gulp.task('test',
     gulp.series(
-      gulp.parallel('clean', 'lint', 'styles-vars'),
+      gulp.parallel('clean', 'lint'),
       gulp.parallel('styles', 'templates'),
       'karma'
     )
@@ -44,7 +44,7 @@ module.exports = function(gulp) {
 
   gulp.task('dev',
     gulp.series(
-      gulp.parallel('clean', 'lint', 'styles-vars'),
+      gulp.parallel('clean', 'lint'),
       gulp.parallel('styles', 'templates'),
       'karma',
       'scripts',

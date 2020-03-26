@@ -11,6 +11,7 @@
  */
 
 @require '@adobe/spectrum-css/dist/components/checkbox/index.css';
+@require '@adobe/spectrum-css/dist/components/checkbox/index-diff.css';
 @require '@adobe/spectrum-css/dist/components/checkbox/multiStops/light.css';
 @require '@adobe/spectrum-css/dist/components/checkbox/multiStops/lightest.css';
 @require '@adobe/spectrum-css/dist/components/checkbox/multiStops/dark.css';
@@ -19,4 +20,10 @@
 // @compat
 ._coral-Checkbox.is-readOnly {
   pointer-events: none;
+}
+
+// @spectrum
+._coral-Checkbox-label,
+.coral--large ._coral-Checkbox-label {
+  line-height: 1.6;
 }

@@ -11,6 +11,7 @@
  */
 
 @require '@adobe/spectrum-css/dist/components/tabs/index.css';
+@require '@adobe/spectrum-css/dist/components/tabs/index-diff.css';
 @require '@adobe/spectrum-css/dist/components/tabs/multiStops/light.css';
 @require '@adobe/spectrum-css/dist/components/tabs/multiStops/lightest.css';
 @require '@adobe/spectrum-css/dist/components/tabs/multiStops/dark.css';
@@ -19,7 +20,7 @@
 @require '../../../coral-theme-spectrum/src/styles/vars.css';
 
 // @spectrum support truncation
-._coral-Tabs-item {
+._coral-Tabs-item.is-overflowing {
   overflow: hidden;
   text-overflow: ellipsis;
 

@@ -44,13 +44,17 @@
   <body class="coral--light">
     <main class="u-coral-margin">
       <div style="position:absolute;top:16px;right:16px;">
-        <a href="#" class="coral-Link" onclick="document.body.className='coral--light'">Light</a> |
-        <a href="#" class="coral-Link" onclick="document.body.className='coral--lightest'">Lightest</a> |
-        <a href="#" class="coral-Link" onclick="document.body.className='coral--dark'">Dark</a> |
-        <a href="#" class="coral-Link" onclick="document.body.className='coral--darkest'">Darkest</a>
+        <strong style="padding-right:8px">Theme:</strong>
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--darkest'">Darkest</a>
+        <strong style="padding:0 8px 0 32px">Scale:</strong>
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.remove('coral--large')">Medium</a> |
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.add('coral--large')">Large</a>
       </div>
 
-      <h1 class="coral-Heading--XXXL">Decorated Text Field</h1>
+      <h1 class="coral-Heading--XXL">Decorated Text Field</h1>
 
       <h2 class="coral-Heading--M">Usage notes</h2>
       <hr class="coral-Divider--L">

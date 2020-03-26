@@ -11,6 +11,7 @@
  */
 
 @require '@adobe/spectrum-css/dist/components/calendar/index.css';
+@require '@adobe/spectrum-css/dist/components/calendar/index-diff.css';
 @require '@adobe/spectrum-css/dist/components/calendar/multiStops/light.css';
 @require '@adobe/spectrum-css/dist/components/calendar/multiStops/lightest.css';
 @require '@adobe/spectrum-css/dist/components/calendar/multiStops/dark.css';
@@ -19,15 +20,11 @@
 @require '../../../coral-theme-spectrum/src/styles/vars.css';
 
 ._coral-Calendar {
+  // Don't cut button focus-ring
+  padding-top: 1px;
   max-height: 312px;
   // Prevent fast transition overflows
   overflow: hidden;
-
-  // @spectrum increase specificity
-  ._coral-Calendar-nextMonth,
-  ._coral-Calendar-prevMonth {
-    position: absolute;
-  }
 
   &.is-readOnly {
     pointer-events: none;

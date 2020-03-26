@@ -18,9 +18,7 @@ import SPECTRUM_ICONS_COLOR_PATH from '../resources/spectrum-icons-color.svg';
 import SPECTRUM_CSS_ICONS_PATH from '../resources/spectrum-css-icons.svg';
 import loadIcons from './loadIcons';
 
-const SPECTRUM_ICONS = 'spectrum-icons';
-const SPECTRUM_ICONS_COLOR = 'spectrum-icons-color';
-const SPECTRUM_CSS_ICONS = 'spectrum-css-icons';
+import {SPECTRUM_ICONS, SPECTRUM_ICONS_COLOR, SPECTRUM_CSS_ICONS} from './iconCollection';
 
 const SPECTRUM_ICONS_IDENTIFIER = 'spectrum-';
 const SPECTRUM_COLORED_ICONS_IDENTIFIER = [

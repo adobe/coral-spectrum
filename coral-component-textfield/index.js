@@ -15,6 +15,8 @@ import '../coral-theme-spectrum';
 import '../coral-externals';
 import '../coral-compat';
 
+import './src/styles/index.css';
+
 import Textfield from './src/scripts/Textfield';
 
 import {commons} from '../coral-utils';

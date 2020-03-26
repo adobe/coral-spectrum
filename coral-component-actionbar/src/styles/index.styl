@@ -12,10 +12,6 @@
 
 @require '../../../coral-theme-spectrum/src/styles/vars.css';
 
-$actionbar-height = var(--spectrum-medium-panel-header-height);
-$actionbar-item-height = var(--spectrum-medium-actionbutton-height);
-$actionbar-padding = var(--spectrum-medium-actionbuttongroup-button-gap-x);
-
 ._coral-ActionBar {
   position: relative;
   display: flex;
@@ -27,7 +23,7 @@ $actionbar-padding = var(--spectrum-medium-actionbuttongroup-button-gap-x);
   border-radius: var(--spectrum-medium-popover-border-radius);
   box-sizing: border-box;
 
-  height: $actionbar-height;
+  height: var(--spectrum-medium-panel-header-height);
 }
 
 ._coral-ActionBar-primary,
@@ -41,7 +37,7 @@ $actionbar-padding = var(--spectrum-medium-actionbuttongroup-button-gap-x);
     float: left;
     // required to get the focused item to go to the foreground
     position: relative;
-    margin-left: $actionbar-padding;
+    margin-left: var(--spectrum-medium-actionbuttongroup-button-gap-x);
   }
 
   > [coral-actionbar-offscreen] {
@@ -52,7 +48,7 @@ $actionbar-padding = var(--spectrum-medium-actionbuttongroup-button-gap-x);
 }
 
 ._coral-ActionBar-primary {
-  left: $actionbar-padding;
+  left: var(--spectrum-medium-actionbuttongroup-button-gap-x);
 }
 
 ._coral-ActionBar-secondary {
@@ -62,6 +58,12 @@ $actionbar-padding = var(--spectrum-medium-actionbuttongroup-button-gap-x);
 ._coral-ActionBar-buttonList button[is="coral-buttonlist-item"],
 ._coral-ActionBar-anchorList a[is="coral-anchorlist-item"] {
   -webkit-font-smoothing: antialiased;
+}
+
+.coral--large {
+  ._coral-ActionBar {
+    height: var(--spectrum-large-panel-header-height);
+  }
 }
 
 @require 'light';

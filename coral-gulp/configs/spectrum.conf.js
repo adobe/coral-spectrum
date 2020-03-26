@@ -28,6 +28,10 @@ module.exports = [
     spectrum: /\.spectrum--darkest/g,
     coral: '.coral--darkest'
   },
+  {
+    spectrum: /\.spectrum--large/g,
+    coral: '.coral--large'
+  },
   // @compat Link
   {
     spectrum: /\.spectrum-Link/g,
@@ -49,126 +53,6 @@ module.exports = [
     coral: 'body'
   },
   {
-    spectrum: /\.spectrum-Heading1--display\.spectrum-Heading1--strong/g,
-    coral: '.coral-Heading--XXXL.coral-Heading--heavy'
-  },
-  {
-    spectrum: /\.spectrum-Heading1--display\.spectrum-Heading1--quiet/g,
-    coral: '.coral-Heading--XXXL.coral-Heading--quiet'
-  },
-  {
-    spectrum: /\.spectrum-Heading1--display/g,
-    coral: '.coral-Heading--XXXL'
-  },
-  {
-    spectrum: /\.spectrum-Heading2--display\.spectrum-Heading2--strong/g,
-    coral: '.coral-Heading--XXXL.coral-Heading--heavy'
-  },
-  {
-    spectrum: /\.spectrum-Heading2--display\.spectrum-Heading2--quiet/g,
-    coral: '.coral-Heading--XXL.coral-Heading--quiet'
-  },
-  {
-    spectrum: /\.spectrum-Heading2--display/g,
-    coral: '.coral-Heading--XXL'
-  },
-  {
-    spectrum: /\.spectrum-Heading1--strong/g,
-    coral: '.coral-Heading--XL.coral-Heading--heavy'
-  },
-  {
-    spectrum: /\.spectrum-Heading1--quiet/g,
-    coral: '.coral-Heading--XL.coral-Heading--quiet'
-  },
-  {
-    spectrum: /\.spectrum-Heading1/g,
-    coral: '.coral-Heading--XL'
-  },
-  {
-    spectrum: /\.spectrum-Heading2--strong/g,
-    coral: '.coral-Heading--L.coral-Heading--heavy'
-  },
-  {
-    spectrum: /\.spectrum-Heading2--quiet/g,
-    coral: '.coral-Heading--L.coral-Heading--quiet'
-  },
-  {
-    spectrum: /\.spectrum-Heading2/g,
-    coral: '.coral-Heading--L'
-  },
-  {
-    spectrum: /\.spectrum-Heading3/g,
-    coral: '.coral-Heading--M'
-  },
-  {
-    spectrum: /\.spectrum-Heading4/g,
-    coral: '.coral-Heading--S'
-  },
-  {
-    spectrum: /\.spectrum-Heading5/g,
-    coral: '.coral-Heading--XS'
-  },
-  {
-    spectrum: /\.spectrum-Heading6/g,
-    coral: '.coral-Heading--XXS'
-  },
-  {
-    spectrum: /\.spectrum-Body1/g,
-    coral: '.coral-Body--XL'
-  },
-  {
-    spectrum: /\.spectrum-Body2/g,
-    coral: '.coral-Body--L'
-  },
-  {
-    spectrum: /\.spectrum-Body3/g,
-    coral: '.coral-Body--M'
-  },
-  {
-    spectrum: /\.spectrum-Body4/g,
-    coral: '.coral-Body--S'
-  },
-  {
-    spectrum: /\.spectrum-Body5/g,
-    coral: '.coral-Body--XS'
-  },
-  {
-    spectrum: /\.spectrum-Subheading/g,
-    coral: '.coral-Detail--S'
-  },
-  {
-    spectrum: /\.spectrum-Detail/g,
-    coral: '.coral-Detail--S.coral-Detail--light'
-  },
-  {
-    spectrum: /\.spectrum-Code1/g,
-    coral: '.coral-Code--XL'
-  },
-  {
-    spectrum: /\.spectrum-Code2/g,
-    coral: '.coral-Code--L'
-  },
-  {
-    spectrum: /\.spectrum-Code3/g,
-    coral: '.coral-Code--M'
-  },
-  {
-    spectrum: /\.spectrum-Code4/g,
-    coral: '.coral-Code--S'
-  },
-  {
-    spectrum: /\.spectrum-Code5/g,
-    coral: '.coral-Code--XS'
-  },
-  {
-    spectrum: /\.spectrum-Form/g,
-    coral: '.coral-FormGroup'
-  },
-  {
-    spectrum: /\.spectrum-FieldLabel/g,
-    coral: '.coral-FieldLabel'
-  },
-  {
     spectrum: /\.spectrum-Heading--display/g,
     coral: '.coral-Heading--1'
   },
@@ -187,6 +71,30 @@ module.exports = [
   {
     spectrum: /\.spectrum-Heading--subtitle3/g,
     coral: '.coral-Heading--5'
+  },
+  {
+    spectrum: /\.spectrum-Heading/g,
+    coral: '.coral-Heading'
+  },
+  {
+    spectrum: /\.spectrum-Body/g,
+    coral: '.coral-Body'
+  },
+  {
+    spectrum: /\.spectrum-Detail/g,
+    coral: '.coral-Detail'
+  },
+  {
+    spectrum: /\.spectrum-Code/g,
+    coral: '.coral-Code'
+  },
+  {
+    spectrum: /\.spectrum-Form/g,
+    coral: '.coral-FormGroup'
+  },
+  {
+    spectrum: /\.spectrum-FieldLabel/g,
+    coral: '.coral-FieldLabel'
   },
   {
     spectrum: /\.spectrum-Rule--large/g,

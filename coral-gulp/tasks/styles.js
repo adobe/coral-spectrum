@@ -60,42 +60,44 @@ module.exports = function(gulp) {
       }));
   });
   
-  gulp.task('styles-vars', function(done) {
-    let content = ':root {';
-    const identifier = 'spectrum';
-    const files = [
-      path.join(root, 'node_modules/@adobe/spectrum-css/dist/vars/spectrum-global.css'),
-      path.join(root, 'node_modules/@adobe/spectrum-css/dist/vars/spectrum-medium.css'),
-      path.join(root, 'node_modules/@adobe/spectrum-css/dist/vars/spectrum-light.css'),
-      path.join(root, 'node_modules/@adobe/spectrum-css/dist/vars/spectrum-lightest.css'),
-      path.join(root, 'node_modules/@adobe/spectrum-css/dist/vars/spectrum-dark.css'),
-      path.join(root, 'node_modules/@adobe/spectrum-css/dist/vars/spectrum-darkest.css')
-    ];
-  
-    files.forEach((file) => {
-      const name = path.basename(file, path.extname(file));
-      const vars = fs.readFileSync(file, 'utf8');
-      const output = [];
-    
-      const lines = vars.split('\n');
-      lines.forEach((line) => {
-        if (line.trim().startsWith('--')) {
-          if (name === 'spectrum-global') {
-            output.push(line);
-          }
-          else {
-            output.push(line.replace(identifier, name));
-          }
-        }
-      });
-      content += `\n${output.join('\n')}`;
-    });
-    
-    // @spectrum add missing vars
-    content = `${content}\n  --ui-icon-large-display: none;\n  --ui-icon-medium-display: block;\n}`;
-    
-    fs.writeFileSync(path.join(root, 'coral-theme-spectrum/src/styles/vars.css'), content);
-    
-    done();
-  });
+  // Up to @adobe/spectrum-css@2.14.0
+  // gulp.task('styles-vars', function(done) {
+  //   let content = ':root {';
+  //   const identifier = 'spectrum';
+  //   const files = [
+  //     path.join(root, 'node_modules/@adobe/spectrum-css/dist/vars/spectrum-global.css'),
+  //     path.join(root, 'node_modules/@adobe/spectrum-css/dist/vars/spectrum-medium.css'),
+  //     path.join(root, 'node_modules/@adobe/spectrum-css/dist/vars/spectrum-large.css'),
+  //     path.join(root, 'node_modules/@adobe/spectrum-css/dist/vars/spectrum-light.css'),
+  //     path.join(root, 'node_modules/@adobe/spectrum-css/dist/vars/spectrum-lightest.css'),
+  //     path.join(root, 'node_modules/@adobe/spectrum-css/dist/vars/spectrum-dark.css'),
+  //     path.join(root, 'node_modules/@adobe/spectrum-css/dist/vars/spectrum-darkest.css')
+  //   ];
+  //
+  //   files.forEach((file) => {
+  //     const name = path.basename(file, path.extname(file));
+  //     const vars = fs.readFileSync(file, 'utf8');
+  //     const output = [];
+  //
+  //     const lines = vars.split('\n');
+  //     lines.forEach((line) => {
+  //       if (line.trim().startsWith('--')) {
+  //         if (name === 'spectrum-global') {
+  //           output.push(line);
+  //         }
+  //         else {
+  //           output.push(line.replace(identifier, name));
+  //         }
+  //       }
+  //     });
+  //     content += `\n${output.join('\n')}`;
+  //   });
+  //
+  //   // @spectrum add missing vars
+  //   content = `${content}\n  --ui-icon-large-display: none;\n  --ui-icon-medium-display: block;\n}`;
+  //
+  //   fs.writeFileSync(path.join(root, 'coral-theme-spectrum/src/styles/new_vars.css'), content);
+  //
+  //   done();
+  // });
 };

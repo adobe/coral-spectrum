@@ -1844,7 +1844,8 @@ class Table extends BaseComponent(HTMLTableElement) {
     // Wait next frame before reading and changing header cell layout
     window.requestAnimationFrame(() => {
       // Defines the head height
-      table._resetContainerLayout(head.sticky ? `${head.getBoundingClientRect().height}px` : null);
+      const tableHeight = head.sticky ? `${head.getBoundingClientRect().height}px` : table._elements.container.style.height;
+      table._resetContainerLayout(tableHeight);
       
       getRows([head]).forEach((row) => {
         getHeaderCells(row).forEach((headerCell) => {
@@ -1856,6 +1857,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       table.classList.toggle(`${CLASSNAME}--sticky`, head.sticky);
   
       // Layout sticky head
+      table._preventResetLayout = false;
       table._resetLayout();
     });
   }

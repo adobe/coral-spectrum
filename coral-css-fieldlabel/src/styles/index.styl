@@ -10,13 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-// @compat
-.coral--light,
-.coral--lightest,
-.coral--dark,
-.coral--darkest {
-  .coral-DecoratedTextfield > .coral-DecoratedTextfield-button._coral-Button.focus-ring {
-    box-shadow: none;
-    background-color: transparent;
-  }
-}
+// Forms .coral-FieldLabel etc.
+@require '@adobe/spectrum-css/dist/components/fieldlabel/index.css';
+@require '@adobe/spectrum-css/dist/components/fieldlabel/index-diff.css';
+@require '@adobe/spectrum-css/dist/components/fieldlabel/multiStops/light.css';
+@require '@adobe/spectrum-css/dist/components/fieldlabel/multiStops/lightest.css';
+@require '@adobe/spectrum-css/dist/components/fieldlabel/multiStops/dark.css';
+@require '@adobe/spectrum-css/dist/components/fieldlabel/multiStops/darkest.css';
