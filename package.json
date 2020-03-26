@@ -38,7 +38,7 @@
     "@adobe/spectrum-css": "2.18.0",
     "@adobe/vent": "1.0.0",
     "core-js": "3.6.4",
-    "document-register-element": "1.13.1",
+    "document-register-element": "1.14.3",
     "normalize.css": "8.0.1",
     "popper.js": "1.14.0",
     "resize-observer-polyfill": "1.5.1"
