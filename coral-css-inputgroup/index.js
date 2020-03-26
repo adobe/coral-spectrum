@@ -17,10 +17,5 @@ import '../coral-compat';
 
 import './src/styles/index.css';
 
-import '../coral-component-icon';
 import '../coral-component-textfield';
-import '../coral-component-textarea';
-import '../coral-component-select';
-import '../coral-component-radio';
-import '../coral-component-checkbox';
-import '../coral-component-numberinput';
+import '../coral-component-button';
