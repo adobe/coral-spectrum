@@ -605,8 +605,6 @@ class Card extends BaseComponent(HTMLElement) {
       handle: &apos;content&apos;,
       tagName: &apos;coral-card-content&apos;,
       insert: function(content) {
-        content.classList.add(&apos;u-coral-padding&apos;);
-        
         // Ensure title comes first
         const title = content.querySelector(&apos;coral-card-title&apos;);
         if (title) {

@@ -40284,8 +40284,7 @@
           handle: 'content',
           tagName: 'coral-card-content',
           insert: function insert(content) {
-            content.classList.add('u-coral-padding'); // Ensure title comes first
-
+            // Ensure title comes first
             var title = content.querySelector('coral-card-title');
 
             if (title) {
@@ -40939,7 +40938,7 @@
       value: function render() {
         _get(_getPrototypeOf(CharacterCount.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$F); // Set defaults
+        this.classList.add(CLASSNAME$F, 'coral-Body--S'); // Set defaults
 
         this.target = this.target; // Refresh once connected
 
@@ -59370,7 +59369,6 @@
     return frag;
   };
 
-  var BUTTON_WIDTH = 32 + 8;
   var BUTTON_FOCUSABLE_SELECTOR = '._coral-QuickActions-item:not([disabled]):not([hidden])';
   /**
    Enumeration for {@link QuickActions} interaction options.
@@ -59516,9 +59514,20 @@
 
 
     _createClass(QuickActions, [{
-      key: "_getTarget",
-
+      key: "_getButtonWidth",
+      value: function _getButtonWidth() {
+        if (this.closest('.coral--large')) {
+          // 40px button width + 10px left margin
+          return 50;
+        } else {
+          // 32px button width + 8px left margin
+          return 40;
+        }
+      }
       /** @ignore */
+
+    }, {
+      key: "_getTarget",
       value: function _getTarget(targetValue) {
         // Use passed target
         targetValue = targetValue || this.target;
@@ -59824,8 +59833,10 @@
         var totalFittingButtons = 0;
         var widthUsed = 0;
 
+        var buttonWidth = this._getButtonWidth();
+
         while (totalAvailableWidth > widthUsed) {
-          widthUsed += BUTTON_WIDTH;
+          widthUsed += buttonWidth;
 
           if (totalAvailableWidth > widthUsed) {
             totalFittingButtons++;
@@ -59922,9 +59933,11 @@
           if (buttonWidthBased) {
             var visibleButtons = this.querySelectorAll('._coral-QuickActions-item:not([hidden])');
 
+            var buttonWidth = this._getButtonWidth();
+
             if (visibleButtons.length) {
               for (var i = 0; i < visibleButtons.length && width <= maxWidth; i++) {
-                width += BUTTON_WIDTH;
+                width += buttonWidth;
               }
 
               this.style.width = "".concat(width, "px");
@@ -76068,7 +76081,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.5.0";
+  var version$1 = "4.5.1";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

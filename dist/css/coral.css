@@ -18910,6 +18910,9 @@ coral-autocomplete-item {
 ._coral-Calendar-date.is-outsideMonth {
   visibility: visible;
 }
+.coral--large ._coral-Calendar {
+  max-height: 377px;
+}
 
 /**
  * Copyright 2019 Adobe. All rights reserved.
@@ -19076,7 +19079,8 @@ coral-card-asset > img.is-loading {
   opacity: 0;
 }
 ._coral-Card--quiet coral-card-content {
-  padding: 20px 0 !important;
+  padding-left: 0;
+  padding-right: 0;
 }
 ._coral-Card--quiet coral-card-asset {
   border-radius: 4px;
@@ -19118,7 +19122,10 @@ coral-card-overlay {
 }
 coral-card-content {
   display: block;
-  padding-top: 20px 24px !important;
+  padding-top: 20px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-bottom: 20px;
 }
 coral-card-overlay:empty,
 coral-card-propertylist:empty,
@@ -19213,6 +19220,42 @@ coral-card-info > coral-alert {
 }
 ._coral-Card--overflow coral-card-info > coral-alert._coral-Alert:last-of-type {
   margin-bottom: 4px;
+}
+.coral--large coral-card-overlay {
+  font-size: 13px;
+}
+.coral--large ._coral-Card coral-card-context {
+  font-size: 13px;
+}
+.coral--large coral-card-content {
+  padding-top: 25px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 25px;
+}
+.coral--large coral-card-title {
+  font-size: 17px;
+}
+.coral--large coral-card-subtitle {
+  font-size: 13px;
+}
+.coral--large ._coral-Card--quiet coral-card-content {
+  padding-left: 0;
+  padding-right: 0;
+}
+.coral--large ._coral-Card--inverted ._coral-Card-wrapper {
+  height: 200px;
+}
+.coral--large coral-card-info > coral-alert._coral-Alert {
+  padding: 4px 8px;
+  min-width: auto;
+  min-height: auto;
+}
+.coral--large coral-card-info > coral-alert._coral-Alert coral-alert-header {
+  font-size: 15px;
+}
+.coral--large coral-card-info > coral-alert._coral-Alert coral-alert-content {
+  font-size: 15px;
 }
 .coral--light ._coral-Card {
   border-color: rgb(234, 234, 234);
@@ -19730,8 +19773,13 @@ coral-card-info > coral-alert {
 ._coral-CharacterCount {
   display: inline-flex;
   align-items: center;
+  margin: 0;
   height: 32px;
   padding: 0 8px;
+}
+.coral--large ._coral-CharacterCount {
+  height: 40px;
+  padding: 0 10px;
 }
 .coral--darkest ._coral-CharacterCount.is-invalid {
   color: rgb(236, 91, 98);
@@ -19788,6 +19836,10 @@ coral-card-info > coral-alert {
   vertical-align: top;
   padding-left: 16px;
   padding-top: 21px;
+}
+.coral--large ._coral-Clock-minute,
+.coral--large ._coral-Clock-hour {
+  width: 100%;
 }
 
 /**
@@ -21855,6 +21907,19 @@ coral-colorinput-item {
   padding-left: 0;
   float: none;
 }
+.coral--large ._coral-ColorInput-button {
+  height: 36px;
+  padding: 0 17px;
+}
+.coral--large ._coral-ColorInput-swatches-container {
+  max-height: 194px;
+}
+.coral--large ._coral-ColorInput-editHex-label span:first-child {
+  margin-top: 3px;
+}
+.coral--large ._coral-ColorInput-editRgba-group-label {
+  line-height: 45px;
+}
 .coral--darkest ._coral-ColorInput-propertiesSubview {
   border-right-color: rgb(57, 57, 57);
 }
@@ -22354,6 +22419,9 @@ coral-cyclebutton-action {
   padding: 15px;
   width: 312px;
 }
+.coral--large ._coral-Datepicker-overlay {
+  width: 368px;
+}
 
 /**
  * Copyright 2019 Adobe. All rights reserved.
@@ -22426,6 +22494,11 @@ coral-cyclebutton-action {
 }
 ._coral-Drawer--up ._coral-Drawer-toggleButton:after {
   top: 5px;
+}
+.coral--large ._coral-Drawer-toggleButton {
+  min-width: auto;
+  min-height: auto;
+  padding: 0;
 }
 .coral--light ._coral-Drawer-toggleButton {
   background-color: transparent;
@@ -26923,6 +26996,12 @@ table[is="coral-table"]:not([orderable]) th[is="coral-table-headercell"] [coral-
   box-sizing: border-box;
 }
 /* END #a11y */
+.coral--large ._coral-Table-headerCell {
+  font-size: 13px;
+}
+.coral--large ._coral-Table-cell {
+  font-size: 17px;
+}
 .coral--light .coral-Table--hover .coral-Table-head .coral-Table-row:hover {
   background-color: transparent;
 }
