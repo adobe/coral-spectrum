@@ -21,9 +21,6 @@ import '../../../coral-component-popover';
 import base from '../templates/base';
 import {transform, validate, commons, i18n} from '../../../coral-utils';
 
-// 32px button width + 8px left margin
-const BUTTON_WIDTH = 32 + 8;
-
 const BUTTON_FOCUSABLE_SELECTOR = '._coral-QuickActions-item:not([disabled]):not([hidden])';
 
 /**
@@ -321,6 +318,17 @@ class QuickActions extends Overlay {
     });
   }
   
+  _getButtonWidth() {
+    if (this.closest('.coral--large')) {
+      // 40px button width + 10px left margin
+      return 50;
+    }
+    else {
+      // 32px button width + 8px left margin
+      return 40;
+    }
+  }
+  
   /** @ignore */
   _getTarget(targetValue) {
     // Use passed target
@@ -608,9 +616,9 @@ class QuickActions extends Overlay {
     
     let totalFittingButtons = 0;
     let widthUsed = 0;
-    
+    const buttonWidth = this._getButtonWidth();
     while (totalAvailableWidth > widthUsed) {
-      widthUsed += BUTTON_WIDTH;
+      widthUsed += buttonWidth;
       
       if (totalAvailableWidth > widthUsed) {
         totalFittingButtons++;
@@ -706,10 +714,11 @@ class QuickActions extends Overlay {
       
       if (buttonWidthBased) {
         const visibleButtons = this.querySelectorAll('._coral-QuickActions-item:not([hidden])');
-  
+        const buttonWidth = this._getButtonWidth();
+        
         if (visibleButtons.length) {
           for (let i = 0; i < visibleButtons.length && width <= maxWidth; i++) {
-            width += BUTTON_WIDTH;
+            width += buttonWidth;
           }
     
           this.style.width = `${width}px`;
