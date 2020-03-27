@@ -145,7 +145,7 @@ class CharacterCount extends BaseComponent(HTMLElement) {
   render() {
     super.render();
     
-    this.classList.add(CLASSNAME);
+    this.classList.add(CLASSNAME, 'coral-Body--S');
     
     // Set defaults
     this.target = this.target;
