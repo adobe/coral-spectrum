@@ -26,7 +26,7 @@
     }
 
     .example-List nav[is="coral-sidenav"] {
-      width: 200px;
+      width: 208px;
       margin-bottom: 16px;
     }
 
@@ -38,6 +38,11 @@
       margin-bottom: 24px;
       float: left;
       clear: both;
+      width: 208px;
+    }
+
+    .example-List coral-search input {
+      width: 100% !important;
     }
 
     .example-Preview {
@@ -127,7 +132,7 @@
       z-index: 5;
     }
 
-    @media screen and (max-width: 960px) {
+    @media screen and (max-width: 768px) {
       .nav-toggle-header {
         display: flex;
       }
@@ -368,6 +373,10 @@
         XMLHttpRequest.open('GET', event.detail.selection.getAttribute('href'), true);
         XMLHttpRequest.send();
       });
+
+      window.onresize = function() {
+        document.body.classList.toggle('coral--large', window.innerWidth < 768);
+      };
     })(window, document);
   </script>
 </body>
