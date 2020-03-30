@@ -22,3 +22,48 @@
   display: inline-block;
   margin: 3px 0 0 4px;
 }
+
+// https://github.com/adobe/spectrum-css/issues/656
+// @spectrum
+@keyframes large-pulse {
+  0% {
+    -webkit-transform: scale(1);
+    opacity: 0;
+  }
+  50% {
+    -webkit-transform: scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(2);
+    opacity: 0;
+  }
+}
+
+// @spectrum
+@keyframes large-pulse--quiet {
+  0% {
+    -webkit-transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    -webkit-transform: scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(2);
+    opacity: 0;
+  }
+}
+
+// @spectrum
+.coral--large {
+  ._coral-CoachMarkIndicator-ring {
+    animation: large-pulse 3000ms linear infinite;
+  }
+
+  ._coral-CoachMarkIndicator--quiet ._coral-CoachMarkIndicator-ring {
+    animation: large-pulse--quiet 3000ms linear infinite;
+  }
+}
+
