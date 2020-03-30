@@ -19990,37 +19990,6 @@ coral-card-info > coral-alert {
       animation-delay: -990ms;
     }
 
-.coral--large {
-@keyframes pulse {
-  0% {
-    -webkit-transform: scale(1);
-    opacity: 0;
-  }
-  50% {
-    -webkit-transform: scale(1.5);
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: scale(2);
-    opacity: 0;
-  }
-}
-@keyframes pulse--quiet {
-  0% {
-    -webkit-transform: scale(0.8);
-    opacity: 0;
-  }
-  50% {
-    -webkit-transform: scale(1.5);
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: scale(2);
-    opacity: 0;
-  }
-}
-
-}
 .coral--large ._coral-CoachMarkPopover {
 
   min-width: 340px;
@@ -20204,6 +20173,124 @@ coral-card-info > coral-alert {
 ._coral-CoachMarkIndicator {
   display: inline-block;
   margin: 3px 0 0 4px;
+}
+.coral--large ._coral-CoachMarkIndicator-ring {
+  animation: large-pulse 3000ms linear infinite;
+}
+.coral--large ._coral-CoachMarkIndicator--quiet ._coral-CoachMarkIndicator-ring {
+  animation: large-pulse--quiet 3000ms linear infinite;
+}
+@-moz-keyframes large-pulse {
+  0% {
+    -webkit-transform: scale(1);
+    opacity: 0;
+  }
+  50% {
+    -webkit-transform: scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(2);
+    opacity: 0;
+  }
+}
+@-webkit-keyframes large-pulse {
+  0% {
+    -webkit-transform: scale(1);
+    opacity: 0;
+  }
+  50% {
+    -webkit-transform: scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(2);
+    opacity: 0;
+  }
+}
+@-o-keyframes large-pulse {
+  0% {
+    -webkit-transform: scale(1);
+    opacity: 0;
+  }
+  50% {
+    -webkit-transform: scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(2);
+    opacity: 0;
+  }
+}
+@keyframes large-pulse {
+  0% {
+    -webkit-transform: scale(1);
+    opacity: 0;
+  }
+  50% {
+    -webkit-transform: scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(2);
+    opacity: 0;
+  }
+}
+@-moz-keyframes large-pulse--quiet {
+  0% {
+    -webkit-transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    -webkit-transform: scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(2);
+    opacity: 0;
+  }
+}
+@-webkit-keyframes large-pulse--quiet {
+  0% {
+    -webkit-transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    -webkit-transform: scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(2);
+    opacity: 0;
+  }
+}
+@-o-keyframes large-pulse--quiet {
+  0% {
+    -webkit-transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    -webkit-transform: scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(2);
+    opacity: 0;
+  }
+}
+@keyframes large-pulse--quiet {
+  0% {
+    -webkit-transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    -webkit-transform: scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(2);
+    opacity: 0;
+  }
 }
 
 /**
@@ -22922,14 +23009,6 @@ coral-panel-content,._coral-PanelStack,._coral-Panel {
   }
 }
 
-.coral--large {
-@keyframes indeterminate-loop {
-  100% {
-    transform: translate(452px);
-  }
-}
-
-}
 .coral--large ._coral-BarLoader {
   width: 240px;
 }
@@ -23102,6 +23181,29 @@ coral-panel-content,._coral-PanelStack,._coral-Panel {
   color: rgb(162, 162, 162);
 }
 
+.coral--large ._coral-BarLoader--indeterminate ._coral-BarLoader-fill {
+  animation: large-indeterminate-loop 1000ms infinite;
+}
+@-moz-keyframes large-indeterminate-loop {
+  100% {
+    transform: translate(452px);
+  }
+}
+@-webkit-keyframes large-indeterminate-loop {
+  100% {
+    transform: translate(452px);
+  }
+}
+@-o-keyframes large-indeterminate-loop {
+  100% {
+    transform: translate(452px);
+  }
+}
+@keyframes large-indeterminate-loop {
+  100% {
+    transform: translate(452px);
+  }
+}
 
 /**
  * Copyright 2019 Adobe. All rights reserved.
