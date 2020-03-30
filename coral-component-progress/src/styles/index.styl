@@ -16,3 +16,16 @@
 @require '@adobe/spectrum-css/dist/components/barloader/multiStops/lightest.css';
 @require '@adobe/spectrum-css/dist/components/barloader/multiStops/dark.css';
 @require '@adobe/spectrum-css/dist/components/barloader/multiStops/darkest.css';
+
+// https://github.com/adobe/spectrum-css/issues/656
+// @spectrum
+@keyframes large-indeterminate-loop {
+  100% {
+    transform: translate(452px);
+  }
+}
+
+// @spectrum
+.coral--large ._coral-BarLoader--indeterminate ._coral-BarLoader-fill {
+  animation: large-indeterminate-loop 1000ms infinite;
+}
