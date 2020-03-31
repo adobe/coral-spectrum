@@ -12310,8 +12310,7 @@ var Coral = (function (exports) {
       "spectrumIcon": "AdobeCampaignColor_Dark"
     },
     "adobeExperienceCloudColor": {
-      "spectrumIconDark": "AdobeExperienceCloudColor_Dark",
-      "spectrumIconLight": "AdobeExperienceCloudColor_Light"
+      "spectrumIcon": "AdobeExperienceCloudColor"
     },
     "adobeExperienceManagerColor": {
       "spectrumIconDark": "AdobeExperienceManagerColor_Dark",
@@ -12324,8 +12323,7 @@ var Coral = (function (exports) {
       "spectrumIcon": "AdobeExperienceManagerColor_Dark"
     },
     "adobeExperiencePlatformColor": {
-      "spectrumIconDark": "AdobeExperiencePlatformColor_Dark",
-      "spectrumIconLight": "AdobeExperiencePlatformColor_Light"
+      "spectrumIcon": "AdobeExperiencePlatformColor"
     },
     "adobeMediaOptimizerColor": {
       "spectrumIconDark": "AdobeMediaOptimizerColor_Dark",
@@ -12921,7 +12919,8 @@ var Coral = (function (exports) {
   }
 
   var SPECTRUM_ICONS_IDENTIFIER = 'spectrum-';
-  var SPECTRUM_COLORED_ICONS_IDENTIFIER = ['ColorLight', 'Color_Light', 'ColorDark', 'Color_Dark', 'ColorActive', 'Color_Active'];
+  var SPECTRUM_COLORED_ICONS_IDENTIFIER = ['ColorLight', 'Color_Light', 'ColorDark', 'Color_Dark', 'ColorActive', 'Color_Active', // Unique colored icons
+  'AdobeExperienceCloudColor', 'AdobeExperiencePlatformColor'];
   var resourcesPath = (commons.options.icons || '').trim();
 
   if (resourcesPath.length && resourcesPath[resourcesPath.length - 1] !== '/') {
@@ -76081,7 +76080,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.5.2";
+  var version$1 = "4.5.3";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
