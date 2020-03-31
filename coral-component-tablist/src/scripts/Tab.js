@@ -130,7 +130,13 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
     
     this.classList.toggle('is-invalid', this._invalid);
     this.setAttribute('aria-invalid', this._invalid);
-    this._setInvalidIcon(this._invalid);
+    //this._elements.invalidIcon.hidden = !this._invalid;
+    if (this._invalid) {
+      this._elements.invalidIcon.removeAttribute('hidden');
+    }
+    else {
+      this._elements.invalidIcon.setAttribute('hidden', 'true');
+    }
   }
   
   /**
@@ -268,31 +274,13 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
     const iconElement = document.createElement('coral-icon');
     iconElement.icon = 'alert';
     iconElement.size=Icon.size.EXTRA_SMALL;
-    iconElement.classList.add('_coral-Tabs-item');
-    iconElement.classList.add('_coral-Tabs-item-invalid-icon');
+    //iconElement.classList.add('_coral-Tabs-item');
+    iconElement.classList.add('_coral-Tabs-itemInvalidIcon');
+    if (!this._invalid) {
+      iconElement.setAttribute('hidden', 'true');
+    }
     return iconElement;
   }
-
-  /**
-   Adds or remove an alert icon to mark an invalid tab.
-
-   @ignore
-   */
-  _setInvalidIcon(invalid) {
-    const iconElement = this._elements.invalidIcon;
-
-    // removes the icon element from the DOM.
-    if (!invalid) {
-      iconElement.remove();
-      this.trigger('coral-tab:_sizechanged');
-    }
-    // adds the icon back since it was blown away by textContent
-    else if (!iconElement.parentElement) {
-      this.appendChild(iconElement);
-      this.trigger('coral-tab:_sizechanged');
-    }
-  }
-
 
   get _contentZones() { return {'coral-tab-label': 'label'}; }
   
@@ -331,6 +319,10 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
     if (this.icon) {
       frag.appendChild(this._elements.icon);
     }
+
+    // Create an invalid icon and hide it
+    this._elements.invalidIcon =  this._createInvalidIcon();
+    frag.append(this._elements.invalidIcon);
   
     const label = this._elements.label;
   
