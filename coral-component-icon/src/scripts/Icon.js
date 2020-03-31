@@ -27,7 +27,10 @@ const SPECTRUM_COLORED_ICONS_IDENTIFIER = [
   'ColorDark',
   'Color_Dark',
   'ColorActive',
-  'Color_Active'
+  'Color_Active',
+  // Unique colored icons
+  'AdobeExperienceCloudColor',
+  'AdobeExperiencePlatformColor',
 ];
 
 let resourcesPath = (commons.options.icons || '').trim();
