@@ -71,8 +71,7 @@ export default {
     "spectrumIcon": "AdobeCampaignColor_Dark"
   },
   "adobeExperienceCloudColor": {
-    "spectrumIconDark": "AdobeExperienceCloudColor_Dark",
-    "spectrumIconLight": "AdobeExperienceCloudColor_Light"
+    "spectrumIcon": "AdobeExperienceCloudColor"
   },
   "adobeExperienceManagerColor": {
     "spectrumIconDark": "AdobeExperienceManagerColor_Dark",
@@ -85,8 +84,7 @@ export default {
     "spectrumIcon": "AdobeExperienceManagerColor_Dark"
   },
   "adobeExperiencePlatformColor": {
-    "spectrumIconDark": "AdobeExperiencePlatformColor_Dark",
-    "spectrumIconLight": "AdobeExperiencePlatformColor_Light"
+    "spectrumIcon": "AdobeExperiencePlatformColor"
   },
   "adobeMediaOptimizerColor": {
     "spectrumIconDark": "AdobeMediaOptimizerColor_Dark",
