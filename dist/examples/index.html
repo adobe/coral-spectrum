@@ -310,7 +310,7 @@
       search.on('coral-search:input', function(event) {
         const value = event.target.value.trim().toLowerCase();
         list.items.getAll().forEach(function(item) {
-          if (item.content.textContent.trim().toLowerCase().indexOf(value) !== 0) {
+          if (item.content.textContent.trim().toLowerCase().indexOf(value) !== -1) {
             item.hidden = true;
           }
           else {
