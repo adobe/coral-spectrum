@@ -43,8 +43,12 @@ function resources(opts) {
         fs.outputFile(path.join(process.cwd(), outputPath), code);
   
         // Export SVG as js file
-        const iconContainer = outputPath.endsWith('spectrum-icons-color.svg') ? 'body' : 'head';
-        code = `document.${iconContainer}.insertAdjacentHTML('beforeend', '${code}')`;
+        if (outputPath.endsWith('spectrum-icons-color.svg')) {
+          code = `document.body?document.body.insertAdjacentHTML('beforeend', '${code}'):document.addEventListener('DOMContentLoaded',function(){document.body.insertAdjacentHTML('beforeend', '${code}')})`;
+        }
+        else {
+          code = `document.head.insertAdjacentHTML('beforeend', '${code}')`;
+        }
         fs.outputFile(path.join(process.cwd(), outputPath.replace('.svg', '.js')), code);
         
         // Export the file path
