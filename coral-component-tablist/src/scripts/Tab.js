@@ -34,7 +34,7 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
     // Templates
     this._elements = {
       label: this.querySelector('coral-tab-label') || document.createElement('coral-tab-label'),
-      invalidIcon: this.querySelector('coral-icon._coral-Tabs-item._coral-Tabs-item-invalid-icon') || this._createInvalidIcon()
+      invalidIcon: this.querySelector('coral-icon._coral-Tabs-itemInvalidIcon') || this._createInvalidIcon()
     };
     base.call(this._elements);
   
@@ -271,7 +271,7 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
   }
 
   _createInvalidIcon() {
-    const iconElement = document.createElement('coral-icon');
+    let iconElement = document.createElement('coral-icon');
     iconElement.icon = 'alert';
     iconElement.size=Icon.size.EXTRA_SMALL;
     //iconElement.classList.add('_coral-Tabs-item');
@@ -320,9 +320,9 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
       frag.appendChild(this._elements.icon);
     }
 
-    // Create an invalid icon and hide it
-    this._elements.invalidIcon =  this._createInvalidIcon();
-    frag.append(this._elements.invalidIcon);
+    if (this._elements.invalidIcon) {
+      frag.append(this._elements.invalidIcon);
+    }
   
     const label = this._elements.label;
   

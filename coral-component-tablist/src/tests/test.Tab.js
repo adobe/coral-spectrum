@@ -149,7 +149,7 @@ describe('Tab', function() {
       it('should show an alert icon when invalid', function() {
         item.invalid = true;
         helpers.next(function() {
-          var invalidIcon = item.querySelector('._coral-Tabs-itemInvalidIcon');
+          let invalidIcon = item.querySelector('._coral-Tabs-itemInvalidIcon');
           expect(invalidIcon).not.to.be.null;
           expect(invalidIcon.hasAttribute('hidden')).to.be.false;
           done();
@@ -161,7 +161,7 @@ describe('Tab', function() {
         helpers.next(function() {
           item.invalid = false;
           helpers.next(function() {
-            var invalidIcon = item.querySelector('._coral-Tabs-itemInvalidIcon');
+            let invalidIcon = item.querySelector('._coral-Tabs-itemInvalidIcon');
             expect(invalidIcon).not.to.be.null;
             expect(invalidIcon.hasAttribute('hidden')).to.be.true;
             done();
