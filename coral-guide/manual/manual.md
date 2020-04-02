@@ -123,6 +123,7 @@ You can use below tasks to get started:
 * `gulp dev` to run the dev server on `localhost:9001` by default. 
 * `gulp test` to run the tests. Test reports are in `dist/coverage`.
 * `gulp docs` to build the documentation in `dist/documentation`. 
+* `gulp axe` to run the accessibility checks.
 
 Each component can be built independently e.g. `cd coral-component-button && gulp`.
 

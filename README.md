@@ -5,12 +5,13 @@ A JavaScript library of Web Components following Spectrum design patterns.
 ## Showcase
 
 #### [Component Examples](http://opensource.adobe.com/coral-spectrum/dist/examples)
-These are only examples and don't cover all scenarios
+To see all components in action. These are only examples and don't cover all scenarios.
 
 #### [API References](http://opensource.adobe.com/coral-spectrum/dist/documentation/identifiers.html)
+Covers the API for all components including properties, events and more.
 
 #### [Playground](http://opensource.adobe.com/coral-spectrum/dist/playground)
-experiment and preview code with the latest Coral Spectrum version.
+Experiment and preview code with the latest Coral Spectrum version.
 Code can be shared by copy pasting the URL. The playground is sandboxed to prevent security risks.
 
 ## Spectrum
@@ -69,6 +70,41 @@ For mobile, Spectrum has a larger scale that enables larger tap targets on all c
    <!-- large scale -->
 </body>
 ```
+
+## Built-in Accessibility and Keyboard support
+
+Having an inaccessible application can mean thousands of dollars of fines if you land a government contract. 
+It also means alienating an entire segment of society by making your application completely unusable to them. 
+To help you avoid this, we’ve made it a rule that every Coral Spectrum component should be accessible.
+
+## Internationalization support
+ 
+Coral Spectrum provides a robust internal system for internationalization of its strings. 
+This is done via an internal Adobe process.
+ 
+Supported languages are :
+
+Language family | Language tag | Language variant
+--- | --- | ---
+English | en-US | American English
+French | fr-FR | Standard French
+German | de-DE | Standard German
+Italian | it-IT | Standard Italian
+Spanish | es-ES | Castilian Spanish
+Portuguese | pt-BR | Brazilian Portuguese
+Japanese | ja-JP | Standard Japanese
+Korean | ko-KR | Standard Korean
+Chinese | zh-CN | Mainland China, simplified characters
+Chinese | zh-TW | Taiwan, traditional characters
+Dutch | nl-NL | Netherlands Dutch
+Danish | da-DK | Standard Danish
+Finnish | fi-FI | Standard Finnish
+Norwegian | no-NO | Standard Norwegian
+Swedish | sv-SE | Standard Swedish
+Czech | cs-CZ | Standard Czech
+Polish | pl-PL | Standard Polish
+Russian | ru-RU | Standard Russian
+Turkish | tr-TR | Standard Turkish
 
 ## Using Coral Spectrum
 
@@ -211,7 +247,8 @@ You can use below tasks to get started:
 * `gulp build` to generate the build in the `dist` folder.
 * `gulp dev` to run the dev server on `localhost:9001` by default. 
 * `gulp test` to run the tests. Test reports are in `dist/coverage`.
-* `gulp docs` to build the documentation in `dist/documentation`. 
+* `gulp docs` to build the documentation in `dist/documentation`.
+* `gulp axe` to run the accessibility checks. 
 
 Each component can be built independently e.g. `cd coral-component-button && gulp`.
 

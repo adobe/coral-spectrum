@@ -46,19 +46,19 @@ Spectrum provides elements and tools to help product teams work more efficiently
 Coral Spectrum leverages the [Spectrum CSS](https://github.com/adobe/spectrum-css) framework to style 
 components including the [Spectrum SVG icons](https://spectrum.adobe.com/page/icons).   
 
-## Accessibility
+## Built-in Accessibility and Keyboard support 
 
 Having an inaccessible application can mean thousands of dollars of fines if you land a government contract. 
 It also means alienating an entire segment of society by making your application completely unusable to them. 
 To help you avoid this, we’ve made it a rule that every Coral Spectrum component should be accessible. We’ve also built a few 
 things into Coral Spectrum to make implementing accessibility easier for component authors and consumers alike.
  
-## Internationalization
+## Internationalization support
  
 Coral Spectrum provides a robust internal system for internationalization of its strings. 
 This is done via an internal Adobe process.
  
-Supported language are :
+Supported languages are :
 
 Language family | Language tag | Language variant
 --- | --- | ---
