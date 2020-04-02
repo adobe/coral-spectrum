@@ -11,7 +11,6 @@
  */
 
 module.exports = function(gulp) {
-  const path = require('path');
   const ghPages = require('gulp-gh-pages');
   const plumb = require('./plumb');
   const PluginError = require('plugin-error');

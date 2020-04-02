@@ -74,7 +74,7 @@
     "gulp-clean-css": "^4.2.0",
     "gulp-domly": "^0.1.0",
     "gulp-eslint": "^6.0.0",
-    "gulp-gh-pages": "^0.5.4",
+    "gulp-gh-pages": "^0.6.0-6",
     "gulp-git": "^2.10.0",
     "gulp-merge-json": "^1.0.0",
     "gulp-modify-file": "^1.0.0",
