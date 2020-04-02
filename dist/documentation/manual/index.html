@@ -33,15 +33,21 @@
       
     <li data-ice="manualNav" class="indent-h1" data-link="manual/README.html"><a href="manual/README.html" data-ice="link">Coral Spectrum </a></li>
 <li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#showcase" data-ice="link">Showcase</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#-a-href--http---opensource-adobe-com-coral-spectrum-dist-examples--component-examples--a-" data-ice="link">Component Examples</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#-a-href--http---opensource-adobe-com-coral-spectrum-dist-documentation-identifiers-html--api-references--a-" data-ice="link">API References</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#-a-href--http---opensource-adobe-com-coral-spectrum-dist-playground--playground--a-" data-ice="link">Playground</a></li>
 <li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#spectrum" data-ice="link">Spectrum</a></li>
 <li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#angular--react--vue-js-compatibility" data-ice="link">Angular, React, Vue.js compatibility</a></li>
 <li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#browser-support" data-ice="link">Browser support</a></li>
 <li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#theme--light--dark--lightest--darkest-" data-ice="link">Theme (light, dark, lightest, darkest)</a></li>
 <li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#large-scale-support" data-ice="link">Large scale support</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#built-in-accessibility-and-keyboard-support" data-ice="link">Built-in Accessibility and Keyboard support</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#internationalization-support" data-ice="link">Internationalization support</a></li>
 <li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#using-coral-spectrum" data-ice="link">Using Coral Spectrum</a></li>
 <li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#easiest-way-via-a-cdn" data-ice="link">Easiest way via a CDN</a></li>
 <li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#copying-the-distribution-files" data-ice="link">Copying the distribution files</a></li>
-<li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#using-a-bundler-like-webpack" data-ice="link">Using a bundler like Webpack</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#including-entire-library-with-a-bundler-like-parcel" data-ice="link">Including entire library with a bundler like parcel</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#including-only-the-components-you-need" data-ice="link">Including only the components you need</a></li>
 <li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#contributing" data-ice="link">Contributing</a></li>
 <li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#building-and-testing" data-ice="link">Building and Testing</a></li>
 <li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#releasing" data-ice="link">Releasing</a></li>
@@ -56,8 +62,8 @@
 <li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#enhanced-api" data-ice="link">Enhanced API</a></li>
 <li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#future-thinking" data-ice="link">Future Thinking</a></li>
 <li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#spectrum" data-ice="link">Spectrum</a></li>
-<li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#accessibility" data-ice="link">Accessibility</a></li>
-<li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#internationalization" data-ice="link">Internationalization</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#built-in-accessibility-and-keyboard-support" data-ice="link">Built-in Accessibility and Keyboard support</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#internationalization-support" data-ice="link">Internationalization support</a></li>
 <li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#browser-support" data-ice="link">Browser Support</a></li>
 <li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#backwards-compatibility" data-ice="link">Backwards Compatibility</a></li>
 </ul>
@@ -192,8 +198,7 @@ introduce breaking changes.</p>
     
   <div class="manual-card-wrap" data-ice="cards">
       <div class="manual-card">
-        <div data-ice="card"><h1>Coral Spectrum </h1><p>A JavaScript library of Web Components following Spectrum design patterns.</p><h2>Showcase</h2><p>All components can be seen in action <a href="http://opensource.adobe.com/coral-spectrum/dist/examples">here</a>. These are only examples and 
-don&apos;t cover all scenarios. The API documentation can be found in the <a href="http://opensource.adobe.com/coral-spectrum/dist/documentation/identifiers.html">references</a>.<br>A playground is available <a href="http://opensource.adobe.com/coral-spectrum/dist/playground">here</a> to experiment and preview code with the latest Coral Spectrum version.
+        <div data-ice="card"><h1>Coral Spectrum </h1><p>A JavaScript library of Web Components following Spectrum design patterns.</p><h2>Showcase</h2><h4><a href="http://opensource.adobe.com/coral-spectrum/dist/examples">Component Examples</a></h4><p>To see all components in action. These are only examples and don&apos;t cover all scenarios.</p><h4><a href="http://opensource.adobe.com/coral-spectrum/dist/documentation/identifiers.html">API References</a></h4><p>Covers the API for all components including properties, events and more.</p><h4><a href="http://opensource.adobe.com/coral-spectrum/dist/playground">Playground</a></h4><p>Experiment and preview code with the latest Coral Spectrum version.
 Code can be shared by copy pasting the URL. The playground is sandboxed to prevent security risks.</p><h2>Spectrum</h2><p>The current default theme is is an implementation of the <a href="https://spectrum.adobe.com">Spectrum</a> design 
 specifications, Adobe&#x2019;s design system. Spectrum provides elements and tools to help product teams work more 
 efficiently, and to make Adobe&#x2019;s applications more cohesive.</p><p>Coral Spectrum leverages the <a href="https://github.com/adobe/spectrum-css">Spectrum CSS</a> framework to style 
@@ -222,21 +227,131 @@ introduce breaking changes.</p><h2>Browser support</h2><p>Coral Spectrum is desi
    &lt;!-- light theme --&gt;
    &lt;!-- large scale --&gt;
 &lt;/body&gt;</code>
-</code></pre><h2>Using Coral Spectrum</h2><h3>Easiest way via a CDN</h3><p>The easiest way to consume Coral Spectrum is to use a CDN e.g. copy these lines into your html file. </p><pre><code class="lang-html"><code class="source-code prettyprint">&lt;head&gt;
-  &lt;!-- Adjust version accordingly --&gt;
-  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/@adobe/coral-spectrum@4.5.0/dist/css/coral.min.css&quot;&gt;
-  &lt;script src=&quot;https://unpkg.com/@adobe/coral-spectrum@4.5.0/dist/js/coral.min.js&quot; data-coral-icons-external=&quot;js&quot;&gt;&lt;/script&gt;
+</code></pre><h2>Built-in Accessibility and Keyboard support</h2><p>Having an inaccessible application can mean thousands of dollars of fines if you land a government contract. 
+It also means alienating an entire segment of society by making your application completely unusable to them. 
+To help you avoid this, we&#x2019;ve made it a rule that every Coral Spectrum component should be accessible.</p><h2>Internationalization support</h2><p>Coral Spectrum provides a robust internal system for internationalization of its strings. 
+This is done via an internal Adobe process.</p><p>Supported languages are :</p><table>
+<thead>
+<tr>
+<th>Language family</th>
+<th>Language tag</th>
+<th>Language variant</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>English</td>
+<td>en-US</td>
+<td>American English</td>
+</tr>
+<tr>
+<td>French</td>
+<td>fr-FR</td>
+<td>Standard French</td>
+</tr>
+<tr>
+<td>German</td>
+<td>de-DE</td>
+<td>Standard German</td>
+</tr>
+<tr>
+<td>Italian</td>
+<td>it-IT</td>
+<td>Standard Italian</td>
+</tr>
+<tr>
+<td>Spanish</td>
+<td>es-ES</td>
+<td>Castilian Spanish</td>
+</tr>
+<tr>
+<td>Portuguese</td>
+<td>pt-BR</td>
+<td>Brazilian Portuguese</td>
+</tr>
+<tr>
+<td>Japanese</td>
+<td>ja-JP</td>
+<td>Standard Japanese</td>
+</tr>
+<tr>
+<td>Korean</td>
+<td>ko-KR</td>
+<td>Standard Korean</td>
+</tr>
+<tr>
+<td>Chinese</td>
+<td>zh-CN</td>
+<td>Mainland China, simplified characters</td>
+</tr>
+<tr>
+<td>Chinese</td>
+<td>zh-TW</td>
+<td>Taiwan, traditional characters</td>
+</tr>
+<tr>
+<td>Dutch</td>
+<td>nl-NL</td>
+<td>Netherlands Dutch</td>
+</tr>
+<tr>
+<td>Danish</td>
+<td>da-DK</td>
+<td>Standard Danish</td>
+</tr>
+<tr>
+<td>Finnish</td>
+<td>fi-FI</td>
+<td>Standard Finnish</td>
+</tr>
+<tr>
+<td>Norwegian</td>
+<td>no-NO</td>
+<td>Standard Norwegian</td>
+</tr>
+<tr>
+<td>Swedish</td>
+<td>sv-SE</td>
+<td>Standard Swedish</td>
+</tr>
+<tr>
+<td>Czech</td>
+<td>cs-CZ</td>
+<td>Standard Czech</td>
+</tr>
+<tr>
+<td>Polish</td>
+<td>pl-PL</td>
+<td>Standard Polish</td>
+</tr>
+<tr>
+<td>Russian</td>
+<td>ru-RU</td>
+<td>Standard Russian</td>
+</tr>
+<tr>
+<td>Turkish</td>
+<td>tr-TR</td>
+<td>Standard Turkish</td>
+</tr>
+</tbody>
+</table><h2>Using Coral Spectrum</h2><h3>Easiest way via a CDN</h3><p>The easiest way to consume Coral Spectrum is to use a CDN e.g. copy these lines into your html file. </p><pre><code class="lang-html"><code class="source-code prettyprint">&lt;head&gt;
+  &lt;!-- 4.x.x means latest major 4 version release, adjust version if you need a specific one --&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/@adobe/coral-spectrum@4.x.x/dist/css/coral.min.css&quot;&gt;
+  &lt;script src=&quot;https://unpkg.com/@adobe/coral-spectrum@4.x.x/dist/js/coral.min.js&quot; data-coral-icons-external=&quot;js&quot;&gt;&lt;/script&gt;
 &lt;/head&gt;
 &lt;body class=&quot;coral--light&quot;&gt;
   &lt;button is=&quot;coral-button&quot; icon=&quot;add&quot;&gt;My Button&lt;/button&gt;
 &lt;/body&gt; </code>
-</code></pre><h3>Copying the distribution files</h3><p>You can also download the distribution package of the 
-latest release by running <code>npm i @adobe/coral-spectrum</code>. It includes all components and styles.</p><p>After you&apos;ve unzipped the package, look for the <code>dist</code> folder and :</p><ul>
+</code></pre><h3>Copying the distribution files</h3><p>You can download a packaged/published version of <code>@adobe/coral-spectrum</code> from npm:</p><pre><code><code class="source-code prettyprint">npm pack @adobe/coral-spectrum</code>
+</code></pre><p>After you&apos;ve unzipped the downloaded package, look for the <code>dist</code> folder and :</p><ul>
 <li>Copy the files from <code>dist/css</code>, <code>dist/js</code> and <code>dist/resources</code> in your project.</li>
 <li>Reference the files in your page e.g</li>
 </ul><pre><code class="lang-html"><code class="source-code prettyprint">&lt;link rel=&quot;stylesheet&quot; href=&quot;css/coral.min.css&quot;&gt;
 &lt;script src=&quot;js/coral.min.js&quot;&gt;&lt;/script&gt;</code>
-</code></pre><h3>Using a bundler like Webpack</h3><p>If your project only requires a few components, you can use a module bundler like <a href="https://webpack.js.org/">Webpack</a> to only import the components needed. 
+</code></pre><h3>Including entire library with a bundler like parcel</h3><p><code>npm install @adobe/coral-spectrum</code></p><p>then in your main js, use:</p><pre><code><code class="source-code prettyprint">require(&quot;@adobe/coral-spectrum/dist/js/coral.js&quot;);
+require(&quot;@adobe/coral-spectrum/dist/css/coral.css&quot;);</code>
+</code></pre><h3>Including only the components you need</h3><p>If your project only requires a few components, you can use a module bundler like <a href="https://webpack.js.org/">Webpack</a> to only import the components needed. 
 Below is an example of a Webpack config:</p><pre><code class="lang-js"><code class="source-code prettyprint">const path = require(&apos;path&apos;);
 const MiniCssExtractPlugin = require(&apos;mini-css-extract-plugin&apos;);
 const OptimizeCssAssetsPlugin = require(&apos;optimize-css-assets-webpack-plugin&apos;);
@@ -303,7 +418,8 @@ npm install</code>
 <li><code>gulp build</code> to generate the build in the <code>dist</code> folder.</li>
 <li><code>gulp dev</code> to run the dev server on <code>localhost:9001</code> by default. </li>
 <li><code>gulp test</code> to run the tests. Test reports are in <code>dist/coverage</code>.</li>
-<li><code>gulp docs</code> to build the documentation in <code>dist/documentation</code>. </li>
+<li><code>gulp docs</code> to build the documentation in <code>dist/documentation</code>.</li>
+<li><code>gulp axe</code> to run the accessibility checks. </li>
 </ul><p>Each component can be built independently e.g. <code>cd coral-component-button &amp;&amp; gulp</code>.</p><h3>Releasing</h3><p>We are currently releasing this package on <code>npm</code>.</p><p>Before we get started, clean up your dependencies with the following command :</p><pre><code><code class="source-code prettyprint">git checkout master
 rm -rf node_modules &amp;&amp; npm install</code>
 </code></pre><p>Then run <code>gulp release</code>. You&apos;ll be asked to bump the version (minor version bump by default). Coral Spectrum is following
@@ -331,11 +447,11 @@ freedom to change the underlying markup that supports those elements. This makes
 resulting in a lower risk of updates to Coral Spectrum needing to introduce breaking changes.</p><p>In addition, every Coral component is an HTML element. This give us the ability to create components from markup or JavaScript 
 and lets us treat them like any other native element, setting properties, appending them in the DOM, etc. </p><h2>Spectrum</h2><p>The current default theme is is an implementation of the <a href="https://spectrum.adobe.com">Spectrum</a> design specifications, Adobe&#x2019;s design system.
 Spectrum provides elements and tools to help product teams work more efficiently, and to make Adobe&#x2019;s applications more cohesive.</p><p>Coral Spectrum leverages the <a href="https://github.com/adobe/spectrum-css">Spectrum CSS</a> framework to style 
-components including the <a href="https://spectrum.adobe.com/page/icons">Spectrum SVG icons</a>.   </p><h2>Accessibility</h2><p>Having an inaccessible application can mean thousands of dollars of fines if you land a government contract. 
+components including the <a href="https://spectrum.adobe.com/page/icons">Spectrum SVG icons</a>.   </p><h2>Built-in Accessibility and Keyboard support</h2><p>Having an inaccessible application can mean thousands of dollars of fines if you land a government contract. 
 It also means alienating an entire segment of society by making your application completely unusable to them. 
 To help you avoid this, we&#x2019;ve made it a rule that every Coral Spectrum component should be accessible. We&#x2019;ve also built a few 
-things into Coral Spectrum to make implementing accessibility easier for component authors and consumers alike.</p><h2>Internationalization</h2><p>Coral Spectrum provides a robust internal system for internationalization of its strings. 
-This is done via an internal Adobe process.</p><p>Supported language are :</p><table>
+things into Coral Spectrum to make implementing accessibility easier for component authors and consumers alike.</p><h2>Internationalization support</h2><p>Coral Spectrum provides a robust internal system for internationalization of its strings. 
+This is done via an internal Adobe process.</p><p>Supported languages are :</p><table>
 <thead>
 <tr>
 <th>Language family</th>
@@ -538,6 +654,7 @@ npm install</code>
 <li><code>gulp dev</code> to run the dev server on <code>localhost:9001</code> by default. </li>
 <li><code>gulp test</code> to run the tests. Test reports are in <code>dist/coverage</code>.</li>
 <li><code>gulp docs</code> to build the documentation in <code>dist/documentation</code>. </li>
+<li><code>gulp axe</code> to run the accessibility checks.</li>
 </ul><p>Each component can be built independently e.g. <code>cd coral-component-button &amp;&amp; gulp</code>.</p><h2>Releasing</h2><p>We are currently releasing this package on <code>npm</code>.</p><p>Before we get started, clean up your dependencies with the following command :</p><pre><code><code class="source-code prettyprint">git checkout master
 rm -rf node_modules &amp;&amp; npm install</code>
 </code></pre><p>Then run <code>gulp release</code>. You&apos;ll be asked to bump the version (minor version bump by default). Coral Spectrum is following
