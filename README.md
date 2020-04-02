@@ -74,9 +74,9 @@ The easiest way to consume Coral Spectrum is to use a CDN e.g. copy these lines 
 
 ```html
 <head>
-  <!-- Adjust version accordingly -->
-  <link rel="stylesheet" href="https://unpkg.com/@adobe/coral-spectrum@4.5.0/dist/css/coral.min.css">
-  <script src="https://unpkg.com/@adobe/coral-spectrum@4.5.0/dist/js/coral.min.js" data-coral-icons-external="js"></script>
+  <!-- 4.x.x means latest major 4 version release, adjust version if you need a specific one -->
+  <link rel="stylesheet" href="https://unpkg.com/@adobe/coral-spectrum@4.x.x/dist/css/coral.min.css">
+  <script src="https://unpkg.com/@adobe/coral-spectrum@4.x.x/dist/js/coral.min.js" data-coral-icons-external="js"></script>
 </head>
 <body class="coral--light">
   <button is="coral-button" icon="add">My Button</button>
@@ -85,10 +85,13 @@ The easiest way to consume Coral Spectrum is to use a CDN e.g. copy these lines 
 
 ### Copying the distribution files
 
-You can also download the distribution package of the 
-latest release by running `npm i @adobe/coral-spectrum`. It includes all components and styles.
- 
-After you've unzipped the package, look for the `dist` folder and :
+You can download a packaged/published version of `@adobe/coral-spectrum` from npm:
+
+```
+npm pack @adobe/coral-spectrum
+```
+
+After you've unzipped the downloaded package, look for the `dist` folder and :
 * Copy the files from `dist/css`, `dist/js` and `dist/resources` in your project.
 * Reference the files in your page e.g
 
@@ -97,8 +100,19 @@ After you've unzipped the package, look for the `dist` folder and :
 <script src="js/coral.min.js"></script>
 ```
 
-### Using a bundler like Webpack
-  
+### Including entire library with a bundler like parcel
+
+`npm install @adobe/coral-spectrum`
+
+then in your main js, use:
+
+```
+require("@adobe/coral-spectrum/dist/js/coral.js");
+require("@adobe/coral-spectrum/dist/css/coral.css");
+```
+
+### Including only the components you need
+
 If your project only requires a few components, you can use a module bundler like [Webpack](https://webpack.js.org/) to only import the components needed. 
 Below is an example of a Webpack config:
 
