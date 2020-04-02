@@ -70987,9 +70987,9 @@
 
         window.requestAnimationFrame(function () {
           // Defines the head height
-          var tableHeight = head.sticky ? "".concat(head.getBoundingClientRect().height, "px") : table._elements.container.style.height;
+          var tableHeight = head.sticky ? "".concat(head.getBoundingClientRect().height, "px") : null;
 
-          table._resetContainerLayout(tableHeight);
+          table._resetContainerLayout(tableHeight, table._elements.container.style.height);
 
           getRows([head]).forEach(function (row) {
             getHeaderCells(row).forEach(function (headerCell) {
@@ -76080,7 +76080,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.5.5";
+  var version$1 = "4.5.6";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
@@ -76153,7 +76153,7 @@
   	"gulp-clean-css": "^4.2.0",
   	"gulp-domly": "^0.1.0",
   	"gulp-eslint": "^6.0.0",
-  	"gulp-gh-pages": "^0.5.4",
+  	"gulp-gh-pages": "^0.6.0-6",
   	"gulp-git": "^2.10.0",
   	"gulp-merge-json": "^1.0.0",
   	"gulp-modify-file": "^1.0.0",
