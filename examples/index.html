@@ -369,6 +369,7 @@
         XMLHttpRequest.send();
       });
 
+      document.body.classList.toggle('coral--large', window.innerWidth < 768);
       window.onresize = function() {
         document.body.classList.toggle('coral--large', window.innerWidth < 768);
       };
