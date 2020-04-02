@@ -1844,8 +1844,8 @@ class Table extends BaseComponent(HTMLTableElement) {
     // Wait next frame before reading and changing header cell layout
     window.requestAnimationFrame(() => {
       // Defines the head height
-      const tableHeight = head.sticky ? `${head.getBoundingClientRect().height}px` : table._elements.container.style.height;
-      table._resetContainerLayout(tableHeight);
+      const tableHeight = head.sticky ? `${head.getBoundingClientRect().height}px` : null;
+      table._resetContainerLayout(tableHeight, table._elements.container.style.height);
       
       getRows([head]).forEach((row) => {
         getHeaderCells(row).forEach((headerCell) => {
