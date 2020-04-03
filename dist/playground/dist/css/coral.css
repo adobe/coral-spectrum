@@ -13157,15 +13157,11 @@ button[is="coral-button"] {
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 coral-overlay {
   display: none;
 }
 coral-overlay[open] {
   display: block;
-}
-._coral-Overlay {
-  transition: opacity 130ms ease-in-out, visibility 0ms linear 130ms;
 }
 ._coral-Overlay:focus {
   outline: none;
@@ -13689,8 +13685,8 @@ coral-dialog-header {
   position: absolute;
   width: calc(100% + calc(40px * 2));
   height: calc(100% + calc(40px - 16px));
-  left: calc(-1 * 40px);
-  top: calc(-1 * 40px);
+  left: -40px;
+  top: -40px;
 }
 ._coral-Dialog--dismissible ._coral-Dialog-closeButton {
   display: inline-flex;
@@ -14006,7 +14002,10 @@ coral-popover-footer,coral-popover-separator {
   display: block;
 }
 ._coral-Popover {
-  transition: opacity 130ms ease-in-out, visibility 0ms linear 130ms;
+  transition: left 130ms cubic-bezier(.45, 0, .40, 1), top 130ms cubic-bezier(.45, 0, .40, 1), opacity 130ms cubic-bezier(.45, 0, .40, 1), visibility 0ms cubic-bezier(0, 0, 1, 1) 130ms;
+}
+.coral--large ._coral-Popover {
+  transition: left 130ms cubic-bezier(.45, 0, .40, 1), top 130ms cubic-bezier(.45, 0, .40, 1), opacity 130ms cubic-bezier(.45, 0, .40, 1), visibility 0ms cubic-bezier(0, 0, 1, 1) 130ms;
 }
 ._coral-Popover:not(._coral-Popover--dialog) {
   min-width: 150px;
@@ -16351,7 +16350,11 @@ coral-select-item {
   }
 
 ._coral-Tooltip {
-  transition: opacity 130ms ease-in-out, visibility 0ms linear 130ms;
+  transition: left 130ms cubic-bezier(.45, 0, .40, 1), top 130ms cubic-bezier(.45, 0, .40, 1), opacity 130ms cubic-bezier(.45, 0, .40, 1), visibility 0ms cubic-bezier(0, 0, 1, 1) 130ms;
+}
+
+.coral--large ._coral-Tooltip {
+  transition: left 130ms cubic-bezier(.45, 0, .40, 1), top 130ms cubic-bezier(.45, 0, .40, 1), opacity 130ms cubic-bezier(.45, 0, .40, 1), visibility 0ms cubic-bezier(0, 0, 1, 1) 130ms;
 }
 
 /**
@@ -17681,7 +17684,7 @@ coral-select-item {
 }
 ._coral-Accordion--animated ._coral-Accordion-itemContent {
   overflow-y: hidden;
-  transition: height ease-in-out 250ms;
+  transition: height 250ms cubic-bezier(.45, 0, .40, 1);
 }
 ._coral-Accordion-item.is-open ._coral-Accordion-itemHeader:focus {
   background-color: transparent;
@@ -18901,7 +18904,7 @@ coral-autocomplete-item {
   position: absolute;
   top: 0;
   left: 0;
-  transition: left ease-in-out 250ms;
+  transition: left 250ms cubic-bezier(.45, 0, .40, 1);
 }
 ._coral-Calendar-tableCell.is-outsideMonth {
   pointer-events: none;
@@ -19072,7 +19075,7 @@ coral-card-asset > img {
   min-height: 1px;
   max-width: 100%;
   opacity: 1;
-  transition: opacity 1s;
+  transition: opacity 1000ms cubic-bezier(.45, 0, .40, 1);
   object-fit: cover;
 }
 coral-card-asset > img.is-loading {
@@ -20175,10 +20178,10 @@ coral-card-info > coral-alert {
   margin: 3px 0 0 4px;
 }
 .coral--large ._coral-CoachMarkIndicator-ring {
-  animation: large-pulse 3000ms linear infinite;
+  animation: large-pulse 3000ms cubic-bezier(0, 0, 1, 1) infinite;
 }
 .coral--large ._coral-CoachMarkIndicator--quiet ._coral-CoachMarkIndicator-ring {
-  animation: large-pulse--quiet 3000ms linear infinite;
+  animation: large-pulse--quiet 3000ms cubic-bezier(0, 0, 1, 1) infinite;
 }
 @-moz-keyframes large-pulse {
   0% {
@@ -22368,7 +22371,7 @@ coral-colorinput-item {
   box-sizing: border-box;
 }
 ._coral-MillerColumns-item.is-collapsing {
-  transition: width ease-in-out 190ms;
+  transition: width 190ms cubic-bezier(.45, 0, .40, 1);
 }
 ._coral-AssetList-item:not(.is-selectable) [coral-columnview-itemselect] {
   display: none;
@@ -22560,7 +22563,7 @@ coral-cyclebutton-action {
 }
 ._coral-Drawer-slider {
   overflow: hidden;
-  transition: height ease-in-out 250ms;
+  transition: height 250ms cubic-bezier(.45, 0, .40, 1);
 }
 ._coral-Drawer--down ._coral-Drawer-toggle {
   bottom: -9px;
@@ -22724,7 +22727,7 @@ coral-masonry-item {
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 130ms ease-in-out, visibility 0 linear 130ms;
+  transition: opacity 130ms cubic-bezier(.45, 0, .40, 1), visibility 0 cubic-bezier(0, 0, 1, 1) 130ms;
 }
 ._coral-Masonry-item-quickActions ._coral-Checkbox {
   margin: 0;
@@ -22742,18 +22745,18 @@ coral-masonry-item {
   visibility: hidden !important;
 }
 ._coral-Masonry.is-loaded > ._coral-Masonry-item {
-  transition: transform 500ms;
+  transition: transform 500ms cubic-bezier(.45, 0, .40, 1);
 }
 ._coral-Masonry.is-loaded > ._coral-Masonry-item.is-beforeInserting {
   opacity: 0;
 }
 ._coral-Masonry.is-loaded > ._coral-Masonry-item.is-inserting {
   opacity: 1;
-  transition: opacity 500ms;
+  transition: opacity 500ms cubic-bezier(.45, 0, .40, 1);
 }
 ._coral-Masonry.is-loaded > ._coral-Masonry-item.is-removing {
   opacity: 0;
-  transition: opacity 500ms;
+  transition: opacity 500ms cubic-bezier(.45, 0, .40, 1);
 }
 .coral--light ._coral-Masonry-item-quickActions {
   background-color: rgba(245,245,245,0.9);
@@ -23327,7 +23330,10 @@ coral-quickactions-item {
   display: none;
 }
 ._coral-QuickActions {
-  transition: opacity 130ms ease-in-out, visibility 0ms linear 130ms;
+  transition: margin 130ms cubic-bezier(.45, 0, .40, 1), opacity 130ms cubic-bezier(.45, 0, .40, 1), visibility 0ms cubic-bezier(0, 0, 1, 1) 130ms;
+}
+.coral--large ._coral-QuickActions {
+  transition: margin 130ms cubic-bezier(.45, 0, .40, 1), opacity 130ms cubic-bezier(.45, 0, .40, 1), visibility 0ms cubic-bezier(0, 0, 1, 1) 130ms;
 }
 ._coral-QuickActions-item {
   justify-content: center;
@@ -24353,7 +24359,7 @@ a[is="coral-sidenav-item"] {
   margin-top: -4px;
   margin-bottom: -4px;
   overflow-y: hidden;
-  transition: height ease-in-out 250ms, margin ease-in-out 250ms;
+  transition: height 250ms cubic-bezier(.45, 0, .40, 1), margin 250ms cubic-bezier(.45, 0, .40, 1);
 }
 ._coral-SideNav._coral-SideNav--multiLevel ._coral-SideNav ._coral-SideNav {
   margin-bottom: 0;
@@ -26667,12 +26673,12 @@ table[is="coral-table"].is-ready {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   padding: 4px 16px;
-  transition: color 130ms ease-in-out;
+  transition: color 130ms cubic-bezier(.45, 0, .40, 1);
   height: 26px;
 }
 ._coral-Table-cell {
   font-size: 14px;
-  transition: background-color 130ms ease-in-out;
+  transition: background-color 130ms cubic-bezier(.45, 0, .40, 1);
   padding: 4px 16px;
   height: 48px;
   box-sizing: border-box;
@@ -26858,7 +26864,7 @@ table[is="coral-table"].is-ready {
   padding-left: 8px;
   margin-left: 8px;
   margin-top: 1px;
-  transition: transform 130ms ease-in-out;
+  transition: transform 130ms cubic-bezier(.45, 0, .40, 1);
 }
 ._coral-Table-headerCell[sortable][sortabledirection="descending"] coral-table-headercell-content:after {
   transform: rotateZ(180deg);
@@ -28239,7 +28245,7 @@ table[is="coral-table"]:not([orderable]) th[is="coral-table-headercell"] [coral-
   display: inline;
 }
 ._coral-Tabs--horizontal ._coral-Tabs-selectionIndicator {
-  transition: transform 130ms ease-in-out, width 130ms ease-in-out;
+  transition: transform 130ms cubic-bezier(.45, 0, .40, 1), width 130ms cubic-bezier(.45, 0, .40, 1);
 }
 .coral--light ._coral-Tabs-item:not(.is-disabled).is-invalid {
   color: rgb(201, 37, 45);
@@ -28575,7 +28581,7 @@ coral-toast {
   visibility: hidden;
   opacity: 0;
   transform: translate3d(0, 0, 0);
-  transition: transform 130ms ease-in-out, opacity 130ms ease-in-out, visibility 0ms linear 130ms;
+  transition: transform 130ms cubic-bezier(.45, 0, .40, 1), opacity 130ms cubic-bezier(.45, 0, .40, 1), visibility 0ms cubic-bezier(0, 0, 1, 1) 130ms;
   pointer-events: none;
 }
 ._coral-Toast.is-open {
@@ -28885,7 +28891,7 @@ coral-toast {
     }
 
 ._coral-TreeView {
-  transition: height ease-in-out 250ms;
+  transition: height 250ms cubic-bezier(.45, 0, .40, 1);
   overflow: hidden;
 }
 ._coral-TreeView ._coral-TreeView {

@@ -20037,7 +20037,9 @@
             var _this2 = this;
 
             var silenced = this._silenced;
-            value = transform.booleanAttr(value);
+            value = transform.booleanAttr(value); // Used for global animations
+
+            this.trigger('coral-overlay:_animate');
             var beforeEvent = this.trigger(value ? 'coral-overlay:beforeopen' : 'coral-overlay:beforeclose');
 
             if (!beforeEvent.defaultPrevented) {
@@ -25648,7 +25650,8 @@
 
       _this._delegateEvents({
         'global:capture:click': '_handleClick',
-        'coral-overlay:positioned': '_onPositioned'
+        'coral-overlay:positioned': '_onPositioned',
+        'coral-overlay:_animate': '_onAnimate'
       }); // Override defaults from Overlay
 
 
@@ -25688,6 +25691,22 @@
           (_this$classList = this.classList).remove.apply(_this$classList, ALL_PLACEMENT_CLASSES);
 
           this.classList.add("".concat(CLASSNAME$k, "--").concat(event.detail.placement));
+        }
+      }
+    }, {
+      key: "_onAnimate",
+      value: function _onAnimate() {
+        // popper attribute
+        var popperPlacement = this.getAttribute('x-placement'); // popper takes care of setting left, top to 0 on positioning
+
+        if (popperPlacement === 'left') {
+          this.style.left = '8px';
+        } else if (popperPlacement === 'top') {
+          this.style.top = '8px';
+        } else if (popperPlacement === 'right') {
+          this.style.left = '-8px';
+        } else if (popperPlacement === 'bottom') {
+          this.style.top = '-8px';
         }
       }
     }, {
@@ -26575,6 +26594,8 @@
 
 
           requestAnimationFrame(function () {
+            _this2._elements.overlay._onAnimate();
+
             _this2._elements.overlay.reposition();
           });
         } // Trigger an event
@@ -29988,7 +30009,8 @@
       _this._id = commons.getUID();
 
       _this._delegateEvents({
-        'coral-overlay:positioned': '_onPositioned'
+        'coral-overlay:positioned': '_onPositioned',
+        'coral-overlay:_animate': '_onAnimate'
       });
 
       return _this;
@@ -30014,6 +30036,22 @@
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_PLACEMENT_CLASSES$1);
 
         this.classList.add(placementClassMap[event.detail.placement]);
+      }
+    }, {
+      key: "_onAnimate",
+      value: function _onAnimate() {
+        // popper attribute
+        var popperPlacement = this.getAttribute('x-placement'); // popper takes care of setting left, top to 0 on positioning
+
+        if (popperPlacement === 'left') {
+          this.style.left = '8px';
+        } else if (popperPlacement === 'top') {
+          this.style.top = '8px';
+        } else if (popperPlacement === 'right') {
+          this.style.left = '-8px';
+        } else if (popperPlacement === 'bottom') {
+          this.style.top = '-8px';
+        }
       }
       /** @ignore */
 
@@ -36463,6 +36501,8 @@
         this._elements.overlay.open = true; // Force overlay repositioning (e.g because of remote loading)
 
         requestAnimationFrame(function () {
+          _this7._elements.overlay._onAnimate();
+
           _this7._elements.overlay.reposition();
         });
 
@@ -59490,6 +59530,7 @@
       events["global:capture:coral-overlay:open #".concat(overlayId)] = '_onOverlayOpen';
       events["global:capture:coral-overlay:close #".concat(overlayId)] = '_onOverlayClose';
       events["global:capture:coral-overlay:positioned #".concat(overlayId)] = '_onOverlayPositioned';
+      events["global:capture:coral-overlay:_animate #".concat(overlayId)] = '_onAnimate';
       events["global:capture:mouseout #".concat(overlayId)] = '_onMouseOut';
       events["global:capture:click #".concat(overlayId, " [coral-list-item]")] = '_onButtonListItemClick'; // Cache bound event handler functions
 
@@ -60257,6 +60298,15 @@
           event.stopImmediatePropagation();
         }
       }
+    }, {
+      key: "_onAnimate",
+      value: function _onAnimate() {
+        if (this.placement === placement$2.BOTTOM) {
+          this.style.marginTop = "".concat(-parseFloat(this.lengthOffset) + 8, "px");
+        } else {
+          this.style.marginTop = "".concat(parseFloat(this.lengthOffset) - 8, "px");
+        }
+      }
       /** @ignore */
 
     }, {
@@ -60405,18 +60455,17 @@
 
         _get(_getPrototypeOf(QuickActions.prototype), "reposition", this).call(this);
 
-        this._toggleCenterPlacement(false); // PopperJS inner property issue https://github.com/FezVrasta/popper.js/issues/400
+        this._toggleCenterPlacement(false);
 
-
-        if (this.placement === placement$2.TOP) {
-          this.style.marginTop = "".concat(parseFloat(this.lengthOffset), "px");
-          this.style.marginBottom = '';
-        } else if (this.placement === placement$2.BOTTOM) {
-          this.style.marginBottom = "".concat(parseFloat(this.lengthOffset), "px");
-          this.style.marginTop = '';
-        } else {
-          this.style.marginTop = '';
-          this.style.marginBottom = '';
+        if (this._openedOnce) {
+          // PopperJS inner property issue https://github.com/FezVrasta/popper.js/issues/400
+          if (this.placement === placement$2.BOTTOM) {
+            this.style.marginTop = "-".concat(parseFloat(this.lengthOffset), "px");
+          } else if (this.placement === placement$2.TOP) {
+            this.style.marginTop = "".concat(parseFloat(this.lengthOffset), "px");
+          } else if (this.placement === placement$2.CENTER) {
+            this.style.marginTop = "".concat(parseFloat(this.lengthOffset) - 4, "px");
+          }
         }
       } // Override placement and target
 
@@ -60628,8 +60677,9 @@
       set: function set(value) {
         var _this6 = this;
 
-        _set(_getPrototypeOf(QuickActions.prototype), "open", value, this, true); // Position once we can read items layout in the next frame
+        _set(_getPrototypeOf(QuickActions.prototype), "open", value, this, true);
 
+        this._openedOnce = true; // Position once we can read items layout in the next frame
 
         window.requestAnimationFrame(function () {
           if (_this6.open && !_this6._openedBefore) {
@@ -76080,7 +76130,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.5.6";
+  var version$1 = "4.5.7";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

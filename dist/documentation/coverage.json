@@ -1,6 +1,6 @@
 {
-  "coverage": "65.3%",
-  "expectCount": 3548,
+  "coverage": "65.23%",
+  "expectCount": 3552,
   "actualCount": 2317,
   "files": {
     "coral-spectrum/coral-base-button/src/scripts/BaseButton.js": {
@@ -105,18 +105,18 @@
         461,
         476,
         494,
-        537,
-        555,
-        638,
-        660,
-        712,
-        717,
-        767,
-        846,
+        541,
+        559,
+        642,
+        664,
+        716,
+        721,
+        771,
         850,
-        918,
+        854,
         922,
-        961
+        926,
+        965
       ]
     },
     "coral-spectrum/coral-collection/src/scripts/Collection.js": {
@@ -365,8 +365,8 @@
         1147,
         1278,
         1520,
-        1846,
-        1881
+        1847,
+        1882
       ]
     },
     "coral-spectrum/coral-component-autocomplete/src/scripts/AutocompleteItem.js": {
@@ -1366,7 +1366,7 @@
       ]
     },
     "coral-spectrum/coral-component-popover/src/scripts/Popover.js": {
-      "expectCount": 39,
+      "expectCount": 40,
       "actualCount": 15,
       "undocumentLines": [
         20,
@@ -1377,22 +1377,23 @@
         83,
         84,
         101,
-        116,
         117,
         118,
         119,
         120,
-        124,
-        226,
-        276,
-        325,
-        328,
-        336,
+        121,
+        125,
+        227,
+        277,
+        326,
+        329,
+        337,
         356,
-        371,
-        387,
-        403,
-        453
+        376,
+        391,
+        407,
+        423,
+        473
       ]
     },
     "coral-spectrum/coral-component-popover/src/scripts/PopoverContent.js": {
@@ -1440,7 +1441,7 @@
       "undocumentLines": []
     },
     "coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js": {
-      "expectCount": 85,
+      "expectCount": 87,
       "actualCount": 54,
       "undocumentLines": [
         24,
@@ -1457,23 +1458,25 @@
         103,
         106,
         109,
-        181,
-        206,
-        284,
-        321,
-        761,
-        763,
-        790,
-        817,
-        818,
-        819,
-        827,
-        927,
-        935,
-        987,
-        1104,
-        1109,
-        1111
+        182,
+        207,
+        285,
+        298,
+        324,
+        764,
+        766,
+        793,
+        820,
+        821,
+        822,
+        830,
+        930,
+        938,
+        990,
+        1009,
+        1116,
+        1121,
+        1123
       ]
     },
     "coral-spectrum/coral-component-quickactions/src/scripts/QuickActionsItem.js": {
@@ -1551,8 +1554,8 @@
         458,
         476,
         559,
-        994,
-        1052
+        995,
+        1053
       ]
     },
     "coral-spectrum/coral-component-select/src/scripts/SelectItem.js": {
@@ -2289,7 +2292,7 @@
       "undocumentLines": []
     },
     "coral-spectrum/coral-component-tooltip/src/scripts/Tooltip.js": {
-      "expectCount": 35,
+      "expectCount": 36,
       "actualCount": 18,
       "undocumentLines": [
         18,
@@ -2302,13 +2305,14 @@
         92,
         95,
         103,
-        122,
-        140,
-        260,
-        283,
-        286,
-        300,
-        330
+        123,
+        141,
+        231,
+        280,
+        303,
+        306,
+        320,
+        350
       ]
     },
     "coral-spectrum/coral-component-tooltip/src/scripts/TooltipContent.js": {
