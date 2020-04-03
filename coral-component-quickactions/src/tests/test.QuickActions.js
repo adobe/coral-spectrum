@@ -550,6 +550,23 @@ describe('QuickActions', function() {
     afterEach(function() {
       targetElement = null;
     });
+    
+    it('should handle slide in animation', (done) => {
+      const el = helpers.build(window.__html__['QuickActions.base.html']);
+      el.lengthOffset = 0;
+      el.target = targetElement;
+      
+      el._onAnimate();
+  
+      expect(el.style.marginTop).to.equal('-8px');
+  
+      el.on('coral-overlay:open', () => {
+        expect(el.style.marginTop).to.equal('0px');
+        done();
+      });
+  
+      el.open = true;
+    });
 
     it('should allow HTML content in the items', function() {
       const el = helpers.build(window.__html__['QuickActions.base.htmlcontent.html']);

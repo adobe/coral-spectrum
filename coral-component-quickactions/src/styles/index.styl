@@ -25,9 +25,11 @@ coral-quickactions-item {
   display: none;
 }
 
-._coral-QuickActions {
-  transition: opacity var(--spectrum-global-animation-duration-100) ease-in-out,
-              visibility var(--spectrum-global-animation-duration-0) linear var(--spectrum-global-animation-duration-100);
+._coral-QuickActions,
+.coral--large ._coral-QuickActions {
+  transition: margin var(--spectrum-global-animation-duration-100) var(--spectrum-global-animation-ease-in-out),
+              opacity var(--spectrum-global-animation-duration-100) var(--spectrum-global-animation-ease-in-out),
+              visibility var(--spectrum-global-animation-duration-0) var(--spectrum-global-animation-linear) var(--spectrum-global-animation-duration-100);
 }
 
 ._coral-QuickActions-item {

@@ -33,18 +33,19 @@ coral-popover-separator {
   display: block;
 }
 
-._coral-Popover {
-  transition: opacity var(--spectrum-global-animation-duration-100) ease-in-out,
-              visibility var(--spectrum-global-animation-duration-0) linear var(--spectrum-global-animation-duration-100);
-
-  // Increase min-width for basic popover
-  &:not(._coral-Popover--dialog) {
-    min-width: 150px;
-  }
+._coral-Popover,
+.coral--large ._coral-Popover {
+  transition: left var(--spectrum-global-animation-duration-100) var(--spectrum-global-animation-ease-in-out),
+              top var(--spectrum-global-animation-duration-100) var(--spectrum-global-animation-ease-in-out),
+              opacity var(--spectrum-global-animation-duration-100) var(--spectrum-global-animation-ease-in-out),
+              visibility var(--spectrum-global-animation-duration-0) var(--spectrum-global-animation-linear) var(--spectrum-global-animation-duration-100);
 }
 
 // @spectrum override for flyout popover variant
 ._coral-Popover:not(._coral-Popover--dialog) {
+  // Increase min-width for basic popover
+  min-width: 150px;
+
   ._coral-Dialog-content {
     padding: 0;
     margin: 0;

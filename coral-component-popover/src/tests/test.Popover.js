@@ -385,6 +385,23 @@ describe('Popover', function() {
   });
 
   describe('Implementation details', function() {
+    it('should handle slide in animation', (done) => {
+      const div = helpers.build(window.__html__['Popover.button.html']);
+      const el = div.querySelector('coral-popover');
+      
+      el.setAttribute('x-placement', 'top');
+      el._onAnimate();
+      
+      expect(el.style.top).to.equal('8px');
+      
+      el.on('coral-overlay:open', () => {
+        expect(el.style.top).to.equal('0px');
+        done();
+      });
+      
+      el.open = true;
+    });
+    
     it('should set coachmark variant if target is a coral-coachmark element', function() {
       const target = document.createElement('coral-coachmark');
       el.target = target;

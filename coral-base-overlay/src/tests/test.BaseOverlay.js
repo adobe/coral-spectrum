@@ -493,6 +493,27 @@ describe('BaseOverlay', function() {
   describe('Markup', function() {});
   
   describe('Events', function() {
+    describe('#coral-overlay:_animate', () => {
+      it('should trigger before any animation', (done) => {
+        const animateOpenSpy = sinon.spy();
+  
+        overlay1 = new OverlayDummy2();
+        overlay1.content.textContent = 'Overlay 1';
+        overlay1._overlayAnimationTime = 100; // This test will use a commons.transitionEnd mock!
+        helpers.target.appendChild(overlay1);
+  
+        overlay1.on('coral-overlay:_animate', animateOpenSpy);
+  
+        overlay1.open = true;
+        overlay1.open = false;
+  
+        window.setTimeout(function() {
+          expect(animateOpenSpy.callCount).to.equal(2);
+          done();
+        }, 200);
+      });
+    });
+    
     describe('#coral-overlay:open', function() {
       it('should trigger "coral-overlay:open" event only after the transition is finished', function(done) {
         overlay1 = new OverlayDummy2();

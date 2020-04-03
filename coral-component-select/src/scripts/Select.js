@@ -619,6 +619,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
   
       // Force overlay repositioning (remote loading)
       requestAnimationFrame(() => {
+        this._elements.overlay._onAnimate();
         this._elements.overlay.reposition();
       });
     }

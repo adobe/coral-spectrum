@@ -514,6 +514,10 @@ const BaseOverlay = (superClass) => class extends superClass {
     const silenced = this._silenced;
     
     value = transform.booleanAttr(value);
+  
+    // Used for global animations
+    this.trigger('coral-overlay:_animate');
+    
     const beforeEvent = this.trigger(value ? 'coral-overlay:beforeopen' : 'coral-overlay:beforeclose');
     
     if (!beforeEvent.defaultPrevented) {

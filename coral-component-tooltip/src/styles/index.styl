@@ -19,7 +19,10 @@
 
 @require '../../../coral-theme-spectrum/src/styles/vars.css';
 
-._coral-Tooltip {
-  transition: opacity var(--spectrum-global-animation-duration-100) ease-in-out,
-              visibility var(--spectrum-global-animation-duration-0) linear var(--spectrum-global-animation-duration-100);
+._coral-Tooltip,
+.coral--large ._coral-Tooltip {
+  transition: left var(--spectrum-global-animation-duration-100) var(--spectrum-global-animation-ease-in-out),
+              top var(--spectrum-global-animation-duration-100) var(--spectrum-global-animation-ease-in-out),
+              opacity var(--spectrum-global-animation-duration-100) var(--spectrum-global-animation-ease-in-out),
+              visibility var(--spectrum-global-animation-duration-0) var(--spectrum-global-animation-linear) var(--spectrum-global-animation-duration-100);
 }

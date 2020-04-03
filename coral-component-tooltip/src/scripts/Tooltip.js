@@ -102,7 +102,8 @@ class Tooltip extends Overlay {
     // Used for events
     this._id = commons.getUID();
     this._delegateEvents({
-      'coral-overlay:positioned': '_onPositioned'
+      'coral-overlay:positioned': '_onPositioned',
+      'coral-overlay:_animate': '_onAnimate'
     });
   }
   
@@ -225,6 +226,25 @@ class Tooltip extends Overlay {
     // Set arrow placement
     this.classList.remove(...ALL_PLACEMENT_CLASSES);
     this.classList.add(placementClassMap[event.detail.placement]);
+  }
+  
+  _onAnimate() {
+    // popper attribute
+    const popperPlacement = this.getAttribute('x-placement');
+  
+    // popper takes care of setting left, top to 0 on positioning
+    if (popperPlacement === 'left') {
+      this.style.left = '8px';
+    }
+    else if (popperPlacement === 'top') {
+      this.style.top = '8px';
+    }
+    else if (popperPlacement === 'right') {
+      this.style.left = '-8px';
+    }
+    else if (popperPlacement === 'bottom') {
+      this.style.top = '-8px';
+    }
   }
   
   /** @ignore */

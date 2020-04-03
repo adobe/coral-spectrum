@@ -10,8 +10,6 @@
  * governing permissions and limitations under the License.
  */
 
-@require '../../../coral-theme-spectrum/src/styles/vars.css';
-
 // Remove overlay flashing while loading the page
 coral-overlay {
   display: none;
@@ -22,10 +20,6 @@ coral-overlay {
 }
 
 ._coral-Overlay {
-  // @spectrum
-  transition: opacity var(--spectrum-global-animation-duration-100) ease-in-out,
-              visibility var(--spectrum-global-animation-duration-0) linear var(--spectrum-global-animation-duration-100);
-
   &:focus {
     // The overlay is focused when opened
     // We don't want to indicate this in most cases

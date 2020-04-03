@@ -60,8 +60,8 @@ coral-masonry-item {
   opacity: 0;
   pointer-events: none;
 
-  transition: opacity var(--spectrum-medium-quickactions-entry-animation-duration) ease-in-out,
-              visibility var(--spectrum-medium-quickactions-entry-animation-delay) linear var(--spectrum-medium-quickactions-entry-animation-duration);
+  transition: opacity var(--spectrum-medium-quickactions-entry-animation-duration) var(--spectrum-global-animation-ease-in-out),
+              visibility var(--spectrum-medium-quickactions-entry-animation-delay) var(--spectrum-global-animation-linear) var(--spectrum-medium-quickactions-entry-animation-duration);
 
   ._coral-Checkbox {
     margin: 0;
@@ -90,7 +90,7 @@ coral-masonry-item {
 
 // Transitions
 ._coral-Masonry.is-loaded > ._coral-Masonry-item {
-  transition: transform var(--spectrum-global-animation-duration-1000);
+  transition: transform var(--spectrum-global-animation-duration-1000) var(--spectrum-global-animation-ease-in-out);
 
   &.is-beforeInserting {
     opacity: 0;
@@ -98,12 +98,12 @@ coral-masonry-item {
 
   &.is-inserting {
     opacity: 1;
-    transition: opacity var(--spectrum-global-animation-duration-1000);
+    transition: opacity var(--spectrum-global-animation-duration-1000) var(--spectrum-global-animation-ease-in-out);
   }
 
   &.is-removing {
     opacity: 0;
-    transition: opacity var(--spectrum-global-animation-duration-1000);
+    transition: opacity var(--spectrum-global-animation-duration-1000) var(--spectrum-global-animation-ease-in-out);
   }
 }
 

@@ -237,6 +237,30 @@ describe('Tooltip', function() {
   });
   
   describe('Implementation Details', function() {
+    it('should handle slide in animation', (done) => {
+      const target = helpers.overlay.createFloatingTarget();
+  
+      const el = new Tooltip().set({
+        content: {
+          textContent: 'A tooltip'
+        },
+        target: target,
+        placement: 'top',
+        delay: 0
+      });
+      helpers.target.appendChild(el);
+      
+      el.setAttribute('x-placement', 'top');
+      el._onAnimate();
+      expect(el.style.top).to.equal('8px');
+      el.on('coral-overlay:open', () => {
+        expect(el.style.top).to.equal('0px');
+        done();
+      });
+      
+      helpers.mouseEvent('mouseenter', target);
+    });
+    
     it('should support multiple tooltips on the same target', function() {
       var target = helpers.overlay.createFloatingTarget();
     

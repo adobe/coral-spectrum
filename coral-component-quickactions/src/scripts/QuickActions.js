@@ -144,6 +144,7 @@ class QuickActions extends Overlay {
     events[`global:capture:coral-overlay:open #${overlayId}`] = '_onOverlayOpen';
     events[`global:capture:coral-overlay:close #${overlayId}`] = '_onOverlayClose';
     events[`global:capture:coral-overlay:positioned #${overlayId}`] = '_onOverlayPositioned';
+    events[`global:capture:coral-overlay:_animate #${overlayId}`] = '_onAnimate';
     events[`global:capture:mouseout #${overlayId}`] = '_onMouseOut';
     events[`global:capture:click #${overlayId} [coral-list-item]`] = '_onButtonListItemClick';
   
@@ -293,6 +294,8 @@ class QuickActions extends Overlay {
   }
   set open(value) {
     super.open = value;
+    
+    this._openedOnce = true;
     
     // Position once we can read items layout in the next frame
     window.requestAnimationFrame(() => {
@@ -1003,6 +1006,15 @@ class QuickActions extends Overlay {
     }
   }
   
+  _onAnimate() {
+    if (this.placement === placement.BOTTOM) {
+      this.style.marginTop = `${-parseFloat(this.lengthOffset) + 8}px`;
+    }
+    else {
+      this.style.marginTop = `${parseFloat(this.lengthOffset) - 8}px`;
+    }
+  }
+  
   /** @ignore */
   _onButtonListItemClick(event) {
     // stops propagation so that this event remains internal to the component
@@ -1128,18 +1140,17 @@ class QuickActions extends Overlay {
     super.reposition();
     this._toggleCenterPlacement(false);
   
-    // PopperJS inner property issue https://github.com/FezVrasta/popper.js/issues/400
-    if (this.placement === placement.TOP) {
-      this.style.marginTop = `${parseFloat(this.lengthOffset)}px`;
-      this.style.marginBottom = '';
-    }
-    else if (this.placement === placement.BOTTOM) {
-      this.style.marginBottom = `${parseFloat(this.lengthOffset)}px`;
-      this.style.marginTop = '';
-    }
-    else {
-      this.style.marginTop = '';
-      this.style.marginBottom = '';
+    if (this._openedOnce) {
+      // PopperJS inner property issue https://github.com/FezVrasta/popper.js/issues/400
+      if (this.placement === placement.BOTTOM) {
+        this.style.marginTop = `-${parseFloat(this.lengthOffset)}px`;
+      }
+      else if (this.placement === placement.TOP) {
+        this.style.marginTop = `${parseFloat(this.lengthOffset)}px`;
+      }
+      else if (this.placement === placement.CENTER) {
+        this.style.marginTop = `${parseFloat(this.lengthOffset) - 4}px`;
+      }
     }
   }
   

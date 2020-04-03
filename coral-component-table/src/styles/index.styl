@@ -75,13 +75,13 @@ table[is="coral-table"] {
   letter-spacing: var(--spectrum-medium-table-header-text-letter-spacing);
   text-transform: var(--spectrum-medium-subheading-text-transform);
   padding: 4px var(--spectrum-medium-table-header-padding-x);
-  transition: color var(--spectrum-global-animation-duration-100) ease-in-out;
+  transition: color var(--spectrum-global-animation-duration-100) var(--spectrum-global-animation-ease-in-out);
   height: 26px;
 }
 
 ._coral-Table-cell {
   font-size: var(--spectrum-medium-table-cell-text-size)
-  transition: background-color var(--spectrum-global-animation-duration-100) ease-in-out;
+  transition: background-color var(--spectrum-global-animation-duration-100) var(--spectrum-global-animation-ease-in-out);
   // @spectrum support 2 rows inside a cell without growing the full row height
   padding: 4px var(--spectrum-medium-table-cell-padding-x);
   height: var(--spectrum-medium-table-cell-min-height);
@@ -365,7 +365,7 @@ table[is="coral-table"] {
       padding-left: 8px;
       margin-left: 8px;
       margin-top: 1px;
-      transition: transform var(--spectrum-global-animation-duration-100) ease-in-out;
+      transition: transform var(--spectrum-global-animation-duration-100) var(--spectrum-global-animation-ease-in-out);
     }
   }
 

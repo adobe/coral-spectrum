@@ -109,7 +109,8 @@ class Popover extends Overlay {
     // Events
     this._delegateEvents({
       'global:capture:click': '_handleClick',
-      'coral-overlay:positioned': '_onPositioned'
+      'coral-overlay:positioned': '_onPositioned',
+      'coral-overlay:_animate': '_onAnimate',
     });
     
     // Override defaults from Overlay
@@ -330,6 +331,25 @@ class Popover extends Overlay {
       // Set arrow placement
       this.classList.remove(...ALL_PLACEMENT_CLASSES);
       this.classList.add(`${CLASSNAME}--${event.detail.placement}`);
+    }
+  }
+  
+  _onAnimate() {
+    // popper attribute
+    const popperPlacement = this.getAttribute('x-placement');
+  
+    // popper takes care of setting left, top to 0 on positioning
+    if (popperPlacement === 'left') {
+      this.style.left = '8px';
+    }
+    else if (popperPlacement === 'top') {
+      this.style.top = '8px';
+    }
+    else if (popperPlacement === 'right') {
+      this.style.left = '-8px';
+    }
+    else if (popperPlacement === 'bottom') {
+      this.style.top = '-8px';
     }
   }
   

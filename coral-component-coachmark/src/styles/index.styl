@@ -17,6 +17,8 @@
 @require '@adobe/spectrum-css/dist/components/coachmark/multiStops/dark.css';
 @require '@adobe/spectrum-css/dist/components/coachmark/multiStops/darkest.css';
 
+@require '../../../coral-theme-spectrum/src/styles/vars.css';
+
 // @spectrum
 ._coral-CoachMarkIndicator {
   display: inline-block;
@@ -59,11 +61,11 @@
 // @spectrum
 .coral--large {
   ._coral-CoachMarkIndicator-ring {
-    animation: large-pulse 3000ms linear infinite;
+    animation: large-pulse var(--spectrum-large-coachmark-animation-indicator-ring-duration) var(--spectrum-global-animation-linear) infinite;
   }
 
   ._coral-CoachMarkIndicator--quiet ._coral-CoachMarkIndicator-ring {
-    animation: large-pulse--quiet 3000ms linear infinite;
+    animation: large-pulse--quiet var(--spectrum-large-coachmark-quiet-animation-indicator-ring-duration) var(--spectrum-global-animation-linear) infinite;
   }
 }
 
