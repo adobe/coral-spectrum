@@ -484,6 +484,25 @@ describe('ColumnView', function() {
         expect(columnActiveChangeSpy.calledBefore(changeSpy)).to.be.true;
       });
 
+      it('should not active when column is selected ', function() {
+        helpers.build(window.__html__['ColumnView.full.html'], function(el) {
+
+          var columns = el.columns.getAll();
+          var firstColumn = columns[0];
+
+          var secondColumn = columns[1];
+
+
+          // selects the an item in the first column
+          var selectedItem = firstColumn.items.first();
+          selectedItem.selected = true;
+          expect(secondColumn.activeItem).to.be.null;
+          expect(secondColumn.selectedItem).to.be.null;
+
+//done();
+        });
+      });
+
       it('should trigger an event when a selected item is removed', function(done) {
         const el = helpers.build(window.__html__['ColumnView.full.html']);
         // no initial events
