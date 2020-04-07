@@ -146,27 +146,19 @@ describe('Tab', function() {
         expect(item.classList.contains('is-invalid')).to.be.false;
       });
 
-      it('should show an alert icon when invalid', function() {
-        item.invalid = true;
-        helpers.next(function() {
-          let invalidIcon = item.querySelector('._coral-Tabs-itemInvalidIcon');
-          expect(invalidIcon).not.to.be.null;
-          expect(invalidIcon.hasAttribute('hidden')).to.be.false;
-          done();
-        });
-      });
+      it('should show an alert icon when invalid and hide it when valid', function() {
+        // we need to call render so that the icons are attached to the tab
+        item.render();
 
-      it('should hide an alert icon when becomes valid', function() {
         item.invalid = true;
-        helpers.next(function() {
-          item.invalid = false;
-          helpers.next(function() {
-            let invalidIcon = item.querySelector('._coral-Tabs-itemInvalidIcon');
-            expect(invalidIcon).not.to.be.null;
-            expect(invalidIcon.hasAttribute('hidden')).to.be.true;
-            done();
-          });
-        });
+        let invalidIcon = item.querySelector('._coral-Tabs-itemInvalidIcon');
+        expect(invalidIcon).not.to.be.null;
+        expect(invalidIcon.hasAttribute('hidden')).to.be.false;
+
+        item.invalid = false;
+        invalidIcon = item.querySelector('._coral-Tabs-itemInvalidIcon');
+        expect(invalidIcon).not.to.be.null;
+        expect(invalidIcon.hasAttribute('hidden')).to.be.true;
       });
     });
 

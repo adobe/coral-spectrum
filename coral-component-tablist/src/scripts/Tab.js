@@ -34,7 +34,7 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
     // Templates
     this._elements = {
       label: this.querySelector('coral-tab-label') || document.createElement('coral-tab-label'),
-      invalidIcon: this.querySelector('coral-icon._coral-Tabs-itemInvalidIcon') || this._createInvalidIcon()
+      invalidIcon: this.querySelector('._coral-Tabs-itemInvalidIcon') || this._createInvalidIcon()
     };
     base.call(this._elements);
   
