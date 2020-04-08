@@ -489,10 +489,7 @@ describe('ColumnView', function() {
 
           var columns = el.columns.getAll();
           var firstColumn = columns[0];
-
           var secondColumn = columns[1];
-
-
           // selects the an item in the first column
           var selectedItem = firstColumn.items.first();
           selectedItem.selected = true;
