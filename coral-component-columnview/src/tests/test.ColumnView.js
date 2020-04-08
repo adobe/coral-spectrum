@@ -498,8 +498,6 @@ describe('ColumnView', function() {
           selectedItem.selected = true;
           expect(secondColumn.activeItem).to.be.null;
           expect(secondColumn.selectedItem).to.be.null;
-
-//done();
         });
       });
 
