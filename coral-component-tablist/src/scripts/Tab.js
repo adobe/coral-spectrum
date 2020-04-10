@@ -130,7 +130,6 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
     
     this.classList.toggle('is-invalid', this._invalid);
     this.setAttribute('aria-invalid', this._invalid);
-    //this._elements.invalidIcon.hidden = !this._invalid;
     if (this._invalid) {
       this._elements.invalidIcon.removeAttribute('hidden');
     }
@@ -273,8 +272,7 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
   _createInvalidIcon() {
     let iconElement = document.createElement('coral-icon');
     iconElement.icon = 'alert';
-    iconElement.size=Icon.size.EXTRA_SMALL;
-    //iconElement.classList.add('_coral-Tabs-item');
+    iconElement.size = Icon.size.EXTRA_SMALL;
     iconElement.classList.add('_coral-Tabs-itemInvalidIcon');
     if (!this._invalid) {
       iconElement.setAttribute('hidden', 'true');
