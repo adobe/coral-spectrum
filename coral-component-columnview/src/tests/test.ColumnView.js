@@ -485,17 +485,16 @@ describe('ColumnView', function() {
       });
 
       it('should not active when column is selected ', function() {
-        helpers.build(window.__html__['ColumnView.full.html'], function(el) {
-
+          const el = helpers.build(window.__html__['ColumnView.full.html']);
           var columns = el.columns.getAll();
           var firstColumn = columns[0];
-          var secondColumn = columns[1];
-          // selects the an item in the first column
           var selectedItem = firstColumn.items.first();
-          selectedItem.selected = true;
-          expect(secondColumn.activeItem).to.be.null;
-          expect(secondColumn.selectedItem).to.be.null;
-        });
+          var secondColumn = columns[1];
+          selectedItem.setAttribute("selected",true);
+          var selectedActiveColumn = selectedItem.getAttribute("active");
+          var secondColumnActive = secondColumn.getAttribute("active");
+          expect(secondColumnActive).to.be.null;
+          expect(selectedActiveColumn).to.be.null;
       });
 
       it('should trigger an event when a selected item is removed', function(done) {
