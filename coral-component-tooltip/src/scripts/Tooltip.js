@@ -330,7 +330,6 @@ class Tooltip extends Overlay {
 
       if (!this.open) {
         this._cancelShow();
-        this.ariaDescribedby = this._contentId;
 
         if (this.delay === 0) {
           // Show immediately
