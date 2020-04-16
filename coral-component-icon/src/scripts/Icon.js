@@ -381,7 +381,7 @@ class Icon extends BaseComponent(HTMLElement) {
     const isImage = this.contains(img);
  
     // alt should be prioritized over title   
-    let altText = this.alt || this.title;
+    let altText = typeof this.alt === 'string' ? this.alt : this.title;
 
     if (typeof value === 'string') {
       altText = this.alt || value;
@@ -402,13 +402,13 @@ class Icon extends BaseComponent(HTMLElement) {
     if (!roleOverride) {
       this.setAttribute('role', isImage ? 'presentation' : 'img');
     }
-    
+
     // Set accessibility attributes accordingly
     if (isImage) {
       hasAutoAriaLabel && this.removeAttribute('aria-label');
       img.setAttribute('alt', altText);
     }
-    else if (altText === '') {
+    else if (altText === '' || altText === null) {
       this.removeAttribute('aria-label');
       if (!roleOverride) {
         this.removeAttribute('role');
