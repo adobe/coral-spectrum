@@ -90,6 +90,7 @@ class Tooltip extends Overlay {
     // Override defaults
     this._lengthOffset = OFFSET;
     this._overlayAnimationTime = Overlay.FADETIME;
+    this._focusOnShow = Overlay.focusOnShow.OFF;
   
     // Fetch or create the content zone element
     this._elements = commons.extend(this._elements, {
@@ -304,8 +305,8 @@ class Tooltip extends Overlay {
     
     // Use Vent to bind events on the target
     this._targetEvents = new Vent(target);
-  
-    this._targetEvents.on(`mouseenter.Tooltip${this._id} focusin.Tooltip${this._id}`, () => {
+
+    const handleEventToShow = () => {
       // Don't let the tooltip hide
       this._cancelHide();
       
@@ -322,8 +323,11 @@ class Tooltip extends Overlay {
           }, this.delay);
         }
       }
-    });
+    };
   
+    this._targetEvents.on(`mouseenter.Tooltip${this._id}`, handleEventToShow);
+    this._targetEvents.on(`focusin.Tooltip${this._id}`, handleEventToShow);
+
     this._targetEvents.on(`mouseleave.Tooltip${this._id}`, () => {
       if (this.interaction === this.constructor.interaction.ON) {
         this._startHide();
