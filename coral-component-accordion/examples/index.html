@@ -40,6 +40,21 @@
     });
   </script>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const markup = document.body.querySelectorAll('h2 ~ .markup');
+    for (var i = 0; i < markup.length; i++) {
+      const h2 = markup[i].previousElementSibling;
+      const id = h2.id || 'markup-heading-' + i;
+      h2.id = id;
+      const accordion = markup[i].querySelector('coral-accordion');
+      if (accordion) {
+        accordion.setAttribute('aria-labelledby', id);
+      }
+    }
+  });
+</script>
+
 </head>
 <body class="coral--light">
   <main class="u-coral-margin">
@@ -84,7 +99,7 @@
     <div class="markup">
       <coral-accordion multiple>
         <coral-accordion-item selected>
-          <coral-accordion-item-label>First</coral-accordion-item-label>
+          <coral-accordion-item-label>First <span class="u-coral-screenReaderOnly">(Multiple)</span></coral-accordion-item-label>
           Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant
           candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon
           jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie
@@ -96,7 +111,7 @@
           icing gummies cake jelly pie sesame snaps. Wafer halvah cake sweet.
         </coral-accordion-item>
         <coral-accordion-item selected>
-          <coral-accordion-item-label>Second</coral-accordion-item-label>
+          <coral-accordion-item-label>Second <span class="u-coral-screenReaderOnly">(Multiple)</span></coral-accordion-item-label>
           Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy
           canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes
           brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups.
@@ -114,7 +129,7 @@
     <div class="markup">
       <coral-accordion>
         <coral-accordion-item disabled>
-          <coral-accordion-item-label>First</coral-accordion-item-label>
+          <coral-accordion-item-label>First <span class="u-coral-screenReaderOnly">(Disabled)</span></coral-accordion-item-label>
           Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy
           canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes
           brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups.
@@ -126,7 +141,7 @@
           icing gummies cake jelly pie sesame snaps. Wafer halvah cake sweet.
         </coral-accordion-item>
         <coral-accordion-item disabled selected>
-          <coral-accordion-item-label>Second</coral-accordion-item-label>
+          <coral-accordion-item-label>Second <span class="u-coral-screenReaderOnly">(Disabled)</span></coral-accordion-item-label>
           Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes
           caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie
           cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups.
@@ -144,27 +159,27 @@
     <div class="markup">
       <coral-accordion>
         <coral-accordion-item selected>
-          <coral-accordion-item-label>First</coral-accordion-item-label>
+          <coral-accordion-item-label>First <span class="u-coral-screenReaderOnly">(Nested)</span></coral-accordion-item-label>
           <coral-accordion-item-content>This is the first bit o'content</coral-accordion-item-content>
         </coral-accordion-item>
         <coral-accordion-item selected>
-          <coral-accordion-item-label>Second</coral-accordion-item-label>
+          <coral-accordion-item-label>Second <span class="u-coral-screenReaderOnly">(Nested)</span></coral-accordion-item-label>
           <coral-accordion-item-content>This is the second bit o'content</coral-accordion-item-content>
         </coral-accordion-item>
         <coral-accordion-item selected>
-          <coral-accordion-item-label>Third</coral-accordion-item-label>
+          <coral-accordion-item-label>Third <span class="u-coral-screenReaderOnly">(Nested)</span></coral-accordion-item-label>
           <coral-accordion-item-content>
             <coral-accordion>
               <coral-accordion-item>
-                <coral-accordion-item-label>First</coral-accordion-item-label>
+                <coral-accordion-item-label>First <span class="u-coral-screenReaderOnly">(Nested - Level 2)</span></coral-accordion-item-label>
                 <span tabindex="0">This is the first bit o'content</span>
               </coral-accordion-item>
               <coral-accordion-item selected>
-                <coral-accordion-item-label>Second</coral-accordion-item-label>
+                <coral-accordion-item-label>Second <span class="u-coral-screenReaderOnly">(Nested - Level 2)</span></coral-accordion-item-label>
                 <span tabindex="0">This is the second bit o'content</span>
               </coral-accordion-item>
               <coral-accordion-item>
-                <coral-accordion-item-label>Third</coral-accordion-item-label>
+                <coral-accordion-item-label>Third <span class="u-coral-screenReaderOnly">(Nested - Level 2)</span></coral-accordion-item-label>
                 <span tabindex="0">This is the third bit o'content</span>
               </coral-accordion-item>
             </coral-accordion>
@@ -179,9 +194,10 @@
       <script>
         window.addEventListener('load', function() {
           var accordion = new Coral.Accordion();
+          accordion.setAttribute('aria-labelledby', document.getElementById('from-javascript').parentElement.previousElementSibling.id);
           accordion.items.add({
             label: {
-              innerHTML: 'First'
+              innerHTML: 'First <span class="u-coral-screenReaderOnly">(From JavaScript)</span>'
             },
             content: {
               innerHTML: 'This is the first bit o\'content'
@@ -190,7 +206,7 @@
 
           accordion.items.add({
             label: {
-              innerHTML: 'Second'
+              innerHTML: 'Second <span class="u-coral-screenReaderOnly">(From JavaScript)</span>'
             },
             content: {
               innerHTML: 'This is the second bit o\'content',
@@ -199,7 +215,7 @@
 
           accordion.items.add({
             label: {
-              innerHTML: 'Third'
+              innerHTML: 'Third <span class="u-coral-screenReaderOnly">(From JavaScript)</span>'
             },
             content: {
               innerHTML: 'This is the third bit o\'content, with no subtitle'
