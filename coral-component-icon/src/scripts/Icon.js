@@ -408,7 +408,7 @@ class Icon extends BaseComponent(HTMLElement) {
       hasAutoAriaLabel && this.removeAttribute('aria-label');
       img.setAttribute('alt', altText);
     }
-    else if (altText === '' || altText === null) {
+    else if (altText === '') {
       this.removeAttribute('aria-label');
       if (!roleOverride) {
         this.removeAttribute('role');
