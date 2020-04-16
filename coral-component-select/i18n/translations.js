@@ -12,60 +12,79 @@
 
 export default {
   "en-US": {
-    "Select": "Select"
+    "Select": "Select",
+    "invalid": "invalid"
   },
   "fr-FR": {
-    "Select": "Sélectionner"
+    "Select": "Sélectionner",
+    "invalid": "Non valide"
   },
   "de-DE": {
-    "Select": "Auswählen"
+    "Select": "Auswählen",
+    "invalid": "Ungültig"
   },
   "it-IT": {
-    "Select": "Seleziona"
+    "Select": "Seleziona",
+    "invalid": "Non valido"
   },
   "es-ES": {
-    "Select": "Seleccionar"
+    "Select": "Seleccionar",
+    "invalid": "No válido"
   },
   "pt-BR": {
-    "Select": "Selecionar"
+    "Select": "Selecionar",
+    "invalid": "Inválido"
   },
   "ja-JP": {
-    "Select": "選択"
+    "Select": "選択",
+    "invalid": "無効です"
   },
   "ko-KR": {
-    "Select": "선택"
+    "Select": "선택",
+    "invalid": "올바르지 않음"
   },
   "zh-CN": {
-    "Select": "选择"
+    "Select": "选择",
+    "invalid": "无效"
   },
   "zh-TW": {
-    "Select": "選取"
+    "Select": "選取",
+    "invalid": "無效"
   },
   "nl-NL": {
-    "Select": "Selecteren"
+    "Select": "Selecteren",
+    "invalid": "Ongeldig"
   },
   "da-DK": {
-    "Select": "Vælg"
+    "Select": "Vælg",
+    "invalid": "Ugyldig"
   },
   "fi-FI": {
-    "Select": "Valitse"
+    "Select": "Valitse",
+    "invalid": "Virheellinen"
   },
   "nb-NO": {
-    "Select": "Velg"
+    "Select": "Velg",
+    "invalid": "Ugyldig"
   },
   "sv-SE": {
-    "Select": "Välj"
+    "Select": "Välj",
+    "invalid": "Ogiltig"
   },
   "cs-CZ": {
-    "Select": "Vybrat"
+    "Select": "Vybrat",
+    "invalid": "Neplatný"
   },
   "pl-PL": {
-    "Select": "Wybierz"
+    "Select": "Wybierz",
+    "invalid": "Nieprawidłowy"
   },
   "ru-RU": {
-    "Select": "Выберите"
+    "Select": "Выберите",
+    "invalid": "Недопустимый"
   },
   "tr-TR": {
-    "Select": "Seç"
+    "Select": "Seç",
+    "invalid": "Geçersiz"
   }
 };

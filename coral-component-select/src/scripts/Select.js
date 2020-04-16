@@ -86,7 +86,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
 
     // Templates
     this._elements = {};
-    base.call(this._elements, {commons, Icon});
+    base.call(this._elements, {commons, Icon, i18n});
     
     const events = {
       'global:click': '_onGlobalClick',
