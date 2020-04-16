@@ -48,21 +48,21 @@
               <a is="coral-shell-homeanchor" icon="adobeExperienceManagerColor" href="#">Adobe Experience Manager</a>
             </coral-shell-header-home>
             <coral-shell-header-content>
-              <coral-shell-workspaces>
-                <a is="coral-shell-workspace" href="#workspace1" selected>Workspace 1</a>
-                <a is="coral-shell-workspace" href="#workspace2">Workspace 2</a>
-                <a is="coral-shell-workspace" href="#workspace3">Workspace 3</a>
+              <coral-shell-workspaces role="tablist" aria-label="Workspaces">
+                <a is="coral-shell-workspace" href="#workspace1" role="tab" selected>Workspace 1</a>
+                <a is="coral-shell-workspace" href="#workspace2" role="tab">Workspace 2</a>
+                <a is="coral-shell-workspace" href="#workspace3" role="tab">Workspace 3</a>
               </coral-shell-workspaces>
             </coral-shell-header-content>
             <coral-shell-header-actions>
               <!-- Normal quiet button is used here if necessary -->
               <!--<a is="coral-anchorbutton" variant="quiet" href="#">Beta Feedback</a>-->
-              <coral-shell-menubar>
+              <coral-shell-menubar> 
                 <coral-shell-menubar-item menu="#menu_organizations">Microsoft</coral-shell-menubar-item>
-                <coral-shell-menubar-item menu="#menu_solutions" icon="apps"></coral-shell-menubar-item>
-                <coral-shell-menubar-item menu="#menu_help" icon="helpOutline"></coral-shell-menubar-item>
-                <coral-shell-menubar-item menu="#menu_pulse" icon="bell" badge="5"></coral-shell-menubar-item>
-                <coral-shell-menubar-item menu="#menu_user" iconsize="M" iconvariant="circle" icon="userCircleColor"></coral-shell-menubar-item>
+                <coral-shell-menubar-item menu="#menu_solutions" icon="apps" aria-label="Apps" title="Apps"></coral-shell-menubar-item>
+                <coral-shell-menubar-item menu="#menu_help" icon="helpOutline" aria-label="Help" title="Help"></coral-shell-menubar-item>
+                <coral-shell-menubar-item menu="#menu_pulse" icon="bell" badge="5" aria-label="5 Notifications" title="5 Notifications"></coral-shell-menubar-item>
+                <coral-shell-menubar-item menu="#menu_user" iconsize="M" iconvariant="circle" icon="userCircleColor" aria-label="User Profile" title="User Profile"></coral-shell-menubar-item>
               </coral-shell-menubar>
             </coral-shell-header-actions>
           </coral-shell-header>
@@ -143,7 +143,7 @@
             </div>
             
             <!-- Main application goes here -->
-            <section class="u-coral-padding">
+            <section class="u-coral-padding" id="workspace1">
               <h1 class="coral-Heading--XXL">Shell</h1>
 
               <h2 class="coral-Heading--M">Usage notes</h2>
@@ -152,6 +152,10 @@
                 Shell is a container attached to the top of a page that house product-wide or global actions and navigation, as well as user preferences and branding.
                 Adobe applications should share the same fundamental structure. This guarantees consistent and familiar experiences across products and platforms, and a shorter learning curve.
               </p>
+            </section>
+            <section class="u-coral-padding" id="workspace2">
+            </section>
+            <section class="u-coral-padding" id="workspace3">
             </section>
           </coral-shell-content>
         </coral-shell>
