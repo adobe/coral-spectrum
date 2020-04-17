@@ -69,6 +69,7 @@ $shell-solution-secondary-icon-color = rgba(255, 255, 255, .60);
   height: $shell-solutionswitcher-icon-container-height;
   align-items: center;
   padding: 16px 0;
+  position: relative;
 
   text-decoration: none;
 
@@ -77,8 +78,25 @@ $shell-solution-secondary-icon-color = rgba(255, 255, 255, .60);
 
   width: 100%;
 
+  &:before {
+    content: '';
+  }
+
   &:focus {
     outline: none;
+    color: $shell-solution-text-color-hover;
+    &.focus-ring {
+      &:before {
+        position: absolute;
+        top: 8px;
+        left: -8px;
+        bottom: 8px;
+        right: 8px;
+        border-radius: 4px;
+        box-shadow: 0 0 0 1px rgb(38, 128, 235);
+        border 1px solid  rgb(38, 128, 235);
+      }
+    }
   }
 }
 
@@ -96,7 +114,8 @@ $shell-solution-secondary-icon-color = rgba(255, 255, 255, .60);
   color: $shell-solution-linked-text-color;
 }
 
-._coral-Shell-solution--linked:hover ._coral-Shell-solution-icon {
+._coral-Shell-solution--linked:hover ._coral-Shell-solution-icon
+._coral-Shell-solution--linked:focus ._coral-Shell-solution-icon {
   transform: scale(1.1);
 }
 
