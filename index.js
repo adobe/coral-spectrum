@@ -11,13 +11,13 @@
  */
 
 // CSS only
-import './coral-css-decoratedtextfield';
+import './coral-css-link';
 import './coral-css-divider';
 import './coral-css-fixedcolumn';
-import './coral-css-formgroup';
-import './coral-css-inputgroup';
-import './coral-css-link';
 import './coral-css-well';
+import './coral-css-decoratedtextfield';
+import './coral-css-inputgroup';
+import './coral-css-formgroup';
 
 export {commons, events, i18n, keys, Keys, strings, transform, validate, tracking} from './coral-utils';
 
