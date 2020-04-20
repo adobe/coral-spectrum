@@ -22,6 +22,7 @@
       background-color: rgb(250, 250, 250);
       transition: transform 160ms ease-in-out;
       position: relative;
+      display: inline-block;
       z-index: 10;
     }
 
@@ -47,11 +48,35 @@
 
     .example-Preview {
       width: calc(100% - 256px);
-      height: 100%;
+      height: calc(100% - 35px);
       position: absolute;
-      top: 0;
+      bottom: 0;
       right: 0;
       border: 0;
+    }
+    .example-header {
+      width: calc(100% - 260px);
+      height: 35px;
+      background: #fafafa;
+      display: inline-block;
+      border: 0;
+      box-sizing: border-box;
+      padding: 5px;
+      vertical-align: top;
+      font-size: 16px;
+    }
+    .example-header > a {
+      color: #4b4b4b;
+      margin: 0 8px;
+    }
+
+    .example-header > a:hover {
+      color: #2c2c2c;
+    }
+
+    .example-header > a.is-active {
+      color: #2c2c2c;
+      border-bottom: solid 2px rgb(44, 44, 44);
     }
 
     .example-Logo {
@@ -211,6 +236,15 @@
     <coral-search id="example-search" placeholder="Search" role="search" labelledBy="example-search-label"></coral-search>
 
     <nav is="coral-sidenav" id="example-list"></nav>
+  </div>
+  <div class="example-header">
+    <a href="../examples" target="_blank" clas="is-active">Examples</a>
+    <a href="../playground" target="_blank">Playground</a>
+    <a href="../documentation/identifiers.html">Reference</a>
+    <a href="../documentation/source.html">Source</a>
+    <a href="https://github.com/adobe/coral-spectrum">
+      <img style="vertical-align: bottom;" width="20px" src="../documentation/image/github.png">
+    </a>
   </div>
   <main id="example-main">
     <iframe class="example-Preview" id="example-preview" title="Example Preview"></iframe>
