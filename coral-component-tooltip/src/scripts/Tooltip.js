@@ -306,8 +306,29 @@ class Tooltip extends Overlay {
     // Use Vent to bind events on the target
     this._targetEvents = new Vent(target);
 
-    this._targetEvents.on(`mouseenter.Tooltip${this._id}`, this._handleOpenTooltip.bind(this));
+    const handleEventToShow = () => {
+      // Don't let the tooltip hide
+      this._cancelHide();
+      
+      if (!this.open) {
+        this._cancelShow();
+        
+        if (this.delay === 0) {
+          // Show immediately
+          this.show();
+        }
+        else {
+          this._showTimeout = window.setTimeout(() => {
+            this.show();
+          }, this.delay);
+        }
+      }
+    };
+  
+    this._targetEvents.on(`mouseenter.Tooltip${this._id}`, handleEventToShow);
+    this._targetEvents.on(`focusin.Tooltip${this._id}`, handleEventToShow);
 
+    this._targetEvents.on(`mouseenter.Tooltip${this._id}`, this._handleOpenTooltip.bind(this));
     this._targetEvents.on(`focusin.Tooltip${this._id}`, this._handleOpenTooltip.bind(this));
 
     this._targetEvents.on(`mouseleave.Tooltip${this._id}`, () => {

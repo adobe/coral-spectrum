@@ -64,26 +64,28 @@
 
       <h3 class="coral-Heading--S">Icon Only</h3>
       <div class="markup">
-        <span class="coral-DecoratedTextfield">
-          <coral-icon class="coral-DecoratedTextfield-icon" icon="search" size="XS"></coral-icon>
-          <input is="coral-textfield" class="coral-DecoratedTextfield-input" aria-label="input"/>
-        </span>
+        <label class="coral-DecoratedTextfield">
+          <coral-icon class="coral-DecoratedTextfield-icon" icon="search" size="XS" title="Search"></coral-icon>
+          <input is="coral-textfield" class="coral-DecoratedTextfield-input" />
+        </label>
       </div>
 
       <h3 class="coral-Heading--S">Button Only</h3>
       <div class="markup">
         <span class="coral-DecoratedTextfield">
           <input is="coral-textfield" class="coral-DecoratedTextfield-input" aria-label="input"/>
-          <button is="coral-button" variant="minimal" icon="close" iconsize="XS" class="coral-DecoratedTextfield-button"></button>
+          <button is="coral-button" variant="minimal" icon="close" iconsize="XS" class="coral-DecoratedTextfield-button" aria-label="Clear input" title="Clear input"></button>
         </span>
       </div>
 
       <h3 class="coral-Heading--S">Icon and Button</h3>
       <div class="markup">
         <span class="coral-DecoratedTextfield">
-          <coral-icon class="coral-DecoratedTextfield-icon" icon="search" size="XS"></coral-icon>
-          <input is="coral-textfield" class="coral-DecoratedTextfield-input" aria-label="input"/>
-          <button is="coral-button" variant="minimal" icon="close" iconsize="XS" class="coral-DecoratedTextfield-button"></button>
+          <label>
+            <coral-icon class="coral-DecoratedTextfield-icon" icon="search" size="XS" title="Search"></coral-icon>
+            <input is="coral-textfield" class="coral-DecoratedTextfield-input"/>
+          </label>
+          <button is="coral-button" variant="minimal" icon="close" iconsize="XS" class="coral-DecoratedTextfield-button" aria-label="Clear search" title="Clear search"></button>
         </span>
       </div>
     </main>

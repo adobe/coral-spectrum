@@ -11,7 +11,7 @@
  */
 
 import {BaseComponent} from '../../../coral-base-component';
-import {transform, validate, commons} from '../../../coral-utils';
+import {transform, validate, commons, i18n} from '../../../coral-utils';
 import ICON_MAP from '../../../coral-compat/data/iconMap';
 import SPECTRUM_ICONS_PATH from '../resources/spectrum-icons.svg';
 import SPECTRUM_ICONS_COLOR_PATH from '../resources/spectrum-icons-color.svg';
@@ -69,7 +69,28 @@ const TEMPLATE_REGEX = /.*\{\{.+\}\}.*/g;
  
  @ignore
  */
-const SPLIT_CAMELCASE_REGEX = /([a-z0-9])([A-Z])/g;
+const SPLIT_CAMELCASE_REGEX = /([a-z])([A-Z0-9])/g;
+
+/**
+ Regex used to match the sized spectrum icon prefix
+ 
+ @ignore
+ */
+const SPECTRUM_ICONS_IDENTIFIER_REGEX = /^spectrum(?:-css)?-icon(?:-\d{1,3})?-/gi;
+
+/**
+ Regex used match the variant postfix for an icon
+ 
+ @ignore
+ */
+const ICONS_VARIANT_POSTFIX_REGEX = /(Outline)?(Filled)?(Small|Medium|Large)?(Color)?_?(Active|Dark|Light)?$/;
+
+/**
+ Translation hint used for localizing default alt text for an icon
+ 
+ @ignore
+ */
+const ICON_ALT_TRANSLATION_HINT = 'default icon alt text';
 
 /**
  Returns capitalized string. This is used to map the icons with their SVG counterpart.
@@ -166,14 +187,15 @@ class Icon extends BaseComponent(HTMLElement) {
    Whether aria-label is set automatically. See {@link IconAutoAriaLabelEnum}.
    
    @type {String}
-   @default IconAutoAriaLabelEnum.ON
+   @default IconAutoAriaLabelEnum.OFF
    */
   get autoAriaLabel() {
-    return this._autoAriaLabel || autoAriaLabel.ON;
+    return this._autoAriaLabel || autoAriaLabel.OFF;
   }
   set autoAriaLabel(value) {
     value = transform.string(value).toLowerCase();
-    this._autoAriaLabel = validate.enumeration(autoAriaLabel)(value) && value || autoAriaLabel.ON;
+    this._autoAriaLabel = validate.enumeration(autoAriaLabel)(value) && value || autoAriaLabel.OFF;
+    this._updateAltText();
   }
   
   /**
@@ -355,17 +377,22 @@ class Icon extends BaseComponent(HTMLElement) {
    */
   _updateAltText(value) {
     const hasAutoAriaLabel = this.autoAriaLabel === autoAriaLabel.ON;
-    const isImage = this.contains(this._elements.image);
-    
-    let altText;
+    const img = this._elements.image;
+    const isImage = this.contains(img);
+ 
+    // alt should be prioritized over title   
+    let altText = typeof this.alt === 'string' ? this.alt : this.title;
+
     if (typeof value === 'string') {
-      altText = value;
+      altText = this.alt || value;
     }
     else if (isImage) {
-      altText = this.getAttribute('alt') || '';
-    }
-    else {
-      altText = this.icon.replace(SPLIT_CAMELCASE_REGEX, '$1 $2');
+      altText = altText || img.getAttribute('alt') || img.getAttribute('title') || '';
+    } 
+    else if (hasAutoAriaLabel) {
+      let iconName = this.icon.replace(SPECTRUM_ICONS_IDENTIFIER_REGEX, '');
+      iconName = iconName.replace(ICONS_VARIANT_POSTFIX_REGEX, '');
+      altText = i18n.get(iconName.replace(SPLIT_CAMELCASE_REGEX, '$1 $2').toLowerCase(), ICON_ALT_TRANSLATION_HINT);
     }
   
     // If no other role has been set, provide the appropriate
@@ -375,20 +402,20 @@ class Icon extends BaseComponent(HTMLElement) {
     if (!roleOverride) {
       this.setAttribute('role', isImage ? 'presentation' : 'img');
     }
-    
+
     // Set accessibility attributes accordingly
     if (isImage) {
       hasAutoAriaLabel && this.removeAttribute('aria-label');
-      this._elements.image.setAttribute('alt', altText);
+      img.setAttribute('alt', altText);
     }
     else if (altText === '') {
-      hasAutoAriaLabel && this.removeAttribute('aria-label');
+      this.removeAttribute('aria-label');
       if (!roleOverride) {
         this.removeAttribute('role');
       }
     }
-    else {
-      hasAutoAriaLabel && this.setAttribute('aria-label', altText);
+    else if (altText) {
+      this.setAttribute('aria-label', altText);
     }
   }
   

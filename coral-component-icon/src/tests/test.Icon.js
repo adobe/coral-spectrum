@@ -77,15 +77,14 @@ describe('Icon', function() {
   describe('Markup', function() {
     
     describe('#autoArialabel', () => {
-      it('should set autoAriaLabel to Icon.autoAriaLabel.OFF', () => {
-        const icon = helpers.build('<coral-icon autoarialabel="off"></coral-icon>');
-        expect(icon.autoAriaLabel).to.equal(Icon.autoAriaLabel.OFF);
-        expect(icon.getAttribute('autoarialabel')).to.equal(Icon.autoAriaLabel.OFF);
+      it('should set autoAriaLabel to Icon.autoAriaLabel.ON', () => {
+        const icon = helpers.build('<coral-icon autoarialabel="on"></coral-icon>');
+        expect(icon.autoAriaLabel).to.equal(Icon.autoAriaLabel.ON);
+        expect(icon.getAttribute('autoarialabel')).to.equal(Icon.autoAriaLabel.ON);
       });
   
       it('should not set aria-label when autoAriaLabel is off', () => {
         const icon = helpers.build('<coral-icon></coral-icon>');
-        icon.setAttribute('autoarialabel', 'off');
         icon.icon = 'add';
         expect(icon.hasAttribute('aria-label')).to.be.false;
       });
@@ -191,8 +190,8 @@ describe('Icon', function() {
     });
     
     describe('#autoAriaLabel', () => {
-      it('should default to Icon.autoAriaLabel.ON', () => {
-        expect(icon.autoAriaLabel).to.equal(Icon.autoAriaLabel.ON);
+      it('should default to Icon.autoAriaLabel.OFF', () => {
+        expect(icon.autoAriaLabel).to.equal(Icon.autoAriaLabel.OFF);
       });
   
       it('should not override aria-label when autoAriaLabel is off', () => {
@@ -405,14 +404,18 @@ describe('Icon', function() {
         expect(icon.alt).to.equal('Add Item');
         expect(icon.getAttribute('aria-label')).to.equal('Add Item');
       });
-  
-      it('should add an aria-label equal to the value of the icon property when not set and when no title attribute is present', function() {
-        var icon = helpers.build(new Icon());
-    
-        icon.icon = 'add';
-    
-        expect(icon.getAttribute('aria-label')).to.equal('add');
+
+      describe('with #autoAriaLabel set to Icon.autoAriaLabel.ON', () => {  
+        it('should add an aria-label equal to the value of the icon property when not set and when no title attribute is present', function() {
+          var icon = helpers.build(new Icon());
+
+          icon.autoAriaLabel = Icon.autoAriaLabel.ON;
+          icon.icon = 'add';
+      
+          expect(icon.getAttribute('aria-label')).to.equal('Add');
+        });
       });
+
   
       it('should add an aria-label equal to the value of the title attribute property when not set and when a title attribute is present', function() {
         var icon = helpers.build(new Icon());

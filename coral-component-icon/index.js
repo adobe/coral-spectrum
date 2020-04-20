@@ -19,7 +19,13 @@ import Icon from './src/scripts/Icon';
 
 import './src/styles/index.css';
 
-import {commons} from '../coral-utils';
+import translations from './i18n/translations';
+import {strings, commons} from '../coral-utils';
+
+// i18n
+commons.extend(strings, {
+  'coral-component-icon': translations
+});
 
 // Expose component on the Coral namespace
 commons._define('coral-icon', Icon);

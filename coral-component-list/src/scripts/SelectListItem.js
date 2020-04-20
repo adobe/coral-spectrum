@@ -97,6 +97,18 @@ class SelectListItem extends BaseComponent(HTMLElement) {
         if (contentIcon && contentIcon.icon) {
           contentIcon.remove();
           this.icon = contentIcon.icon;
+          const iconElement = this._getIconElement();
+          if (contentIcon.alt || contentIcon.title) {
+            if (contentIcon.title) {
+              iconElement.title = contentIcon.title;
+            }
+            if (contentIcon.alt) {
+              iconElement.alt = contentIcon.alt;
+            }
+          }
+          else {
+            iconElement.alt = '';
+          }
         }
         
         this.insertBefore(content, this.contains(checkIcon) ? checkIcon : null);

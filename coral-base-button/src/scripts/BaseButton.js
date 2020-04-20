@@ -262,6 +262,29 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
       this._getIconElement().setAttribute('size', value);
     }
   }
+
+  /**
+   Whether aria-label is set automatically. See {@link IconAutoAriaLabelEnum}.
+   
+   @type {String}
+   @default IconAutoAriaLabelEnum.OFF
+   @htmlattribute autoarialabel
+   */
+  get iconAutoAriaLabel() {
+    if (this._elements.icon) {
+      return this._elements.icon.getAttribute('autoarialabel') || Icon.autoAriaLabel.OFF;
+    }
+  
+    return this._iconAutoAriaLabel || Icon.autoAriaLabel.OFF;
+  }
+  set iconAutoAriaLabel(value) {
+    value = transform.string(value).toLowerCase();
+    this._iconAutoAriaLabel = validate.enumeration(Icon.autoAriaLabel)(value) && value || Icon.autoAriaLabel.OFF;
+  
+    if (this._updatedIcon) {
+      this._getIconElement().setAttribute('autoarialabel', value);
+    }
+  }
   
   /**
    The size of the button. It accepts both lower and upper case sizes. See {@link ButtonSizeEnum}.
@@ -393,10 +416,13 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
     this._updatedIcon = true;
   
     const iconSizeValue = this.iconSize;
+    const iconAutoAriaLabelValue = this.iconAutoAriaLabel;
     const iconElement = this._getIconElement();
     iconElement.icon = value;
     // Update size as well
     iconElement.size = iconSizeValue;
+    // Update autoAriaLabel as well
+    iconElement.autoAriaLabel = iconAutoAriaLabelValue;
   
     // removes the icon element from the DOM.
     if (this.icon === '') {
@@ -492,6 +518,7 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
     return commons.extend(super._attributePropertyMap, {
       iconposition: 'iconPosition',
       iconsize: 'iconSize',
+      iconautoarialabel: 'iconAutoAriaLabel'
     });
   }
   
@@ -501,6 +528,7 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
       'iconposition',
       'iconsize',
       'icon',
+      'iconautoarialabel',
       'size',
       'selected',
       'block',

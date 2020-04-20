@@ -146,6 +146,13 @@ coral-shell-homeanchor-label {
   display: inline-block;
 
   @media (max-width: 766px) {
-    display: none;
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+    // Workaround for the focus rectangle in Webkit
+    overflow: hidden;
+    width: 1px !important;
+    height: 1px !important;
+    margin: 0 -1px -1px 0 !important;
+    padding: 0 !important;
   }
 }
