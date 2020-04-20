@@ -90,7 +90,7 @@ class Tooltip extends Overlay {
     // Override defaults
     this._lengthOffset = OFFSET;
     this._overlayAnimationTime = Overlay.FADETIME;
-    this.focusOnShow = Overlay.focusOnShow.OFF;
+    this._focusOnShow = Overlay.focusOnShow.OFF;
 
     // Fetch or create the content zone element
     this._elements = commons.extend(this._elements, {
@@ -306,9 +306,9 @@ class Tooltip extends Overlay {
     // Use Vent to bind events on the target
     this._targetEvents = new Vent(target);
 
-    this._targetEvents.on(`mouseenter.Tooltip${this._id}`, this._handleOpenTooltip());
+    this._targetEvents.on(`mouseenter.Tooltip${this._id}`, this._handleOpenTooltip.bind(this));
 
-    this._targetEvents.on(`focusin.Tooltip${this._id}`, this._handleOpenTooltip());
+    this._targetEvents.on(`focusin.Tooltip${this._id}`, this._handleOpenTooltip.bind(this));
 
     this._targetEvents.on(`mouseleave.Tooltip${this._id}`, () => {
       if (this.interaction === this.constructor.interaction.ON) {
@@ -324,24 +324,22 @@ class Tooltip extends Overlay {
   }
 
   _handleOpenTooltip() {
-    return () => {
-      // Don't let the tooltip hide
-      this._cancelHide();
+    // Don't let the tooltip hide
+    this._cancelHide();
 
-      if (!this.open) {
-        this._cancelShow();
+    if (!this.open) {
+      this._cancelShow();
 
-        if (this.delay === 0) {
-          // Show immediately
-          this.show();
-        }
-        else {
-          this._showTimeout = window.setTimeout(() => {
-            this.show();
-          }, this.delay);
-        }
+      if (this.delay === 0) {
+        // Show immediately
+        this.show();
       }
-    };
+      else {
+        this._showTimeout = window.setTimeout(() => {
+          this.show();
+        }, this.delay);
+      }
+    }
   }
 
   /** @ignore */
