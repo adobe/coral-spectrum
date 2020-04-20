@@ -219,11 +219,8 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
       const isSelected = item.hasAttribute('selected');
       
       if (!isSelected) {
-        if (this._selectionMode === selectionMode.SINGLE) {
-          item.setAttribute('active', '');
-        }
         // Handle multi-selection with shiftKey
-        else if (event.shiftKey && this._selectionMode === selectionMode.MULTIPLE) {
+         if (event.shiftKey && this._selectionMode === selectionMode.MULTIPLE) {
           const lastSelectedItem = this._lastSelectedItems[this._lastSelectedItems.length - 1];
     
           if (lastSelectedItem) {
@@ -251,10 +248,6 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
             });
           }
         }
-      }
-      
-      if (!isSelected && this._selectionMode === selectionMode.SINGLE) {
-        item.setAttribute('active', '');
       }
       
       item[isSelected ? 'removeAttribute' : 'setAttribute']('selected', '');
