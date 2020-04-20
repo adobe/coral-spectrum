@@ -13,7 +13,7 @@
 import {Overlay} from '../../../coral-component-overlay';
 import Vent from '@adobe/vent';
 import base from '../templates/base';
-import {transform, validate, commons} from '../../../coral-utils';
+import {commons, transform, validate} from '../../../coral-utils';
 
 const arrowMap = {
   left: 'left',
@@ -28,9 +28,9 @@ const OFFSET = 5;
 
 /**
  Enumeration for {@link Tooltip} variants.
- 
+
  @typedef {Object} TooltipVariantEnum
- 
+
  @property {String} DEFAULT
  A default tooltip that provides additional information.
  @property {String} INFO
@@ -67,10 +67,10 @@ const placementClassMap = {};
 for (const key in Overlay.placement) {
   const direction = Overlay.placement[key];
   const placementClass = `${CLASSNAME}--${arrowMap[direction]}`;
-  
+
   // Store in map
   placementClassMap[direction] = placementClass;
-  
+
   // Store in list
   ALL_PLACEMENT_CLASSES.push(placementClass);
 }
@@ -86,19 +86,20 @@ class Tooltip extends Overlay {
   /** @ignore */
   constructor() {
     super();
-  
+
     // Override defaults
     this._lengthOffset = OFFSET;
     this._overlayAnimationTime = Overlay.FADETIME;
-  
+    this._focusOnShow = Overlay.focusOnShow.OFF;
+
     // Fetch or create the content zone element
     this._elements = commons.extend(this._elements, {
       content: this.querySelector('coral-tooltip-content') || document.createElement('coral-tooltip-content')
     });
-    
+
     // Generate template
     base.call(this._elements);
-  
+
     // Used for events
     this._id = commons.getUID();
     this._delegateEvents({
@@ -106,10 +107,10 @@ class Tooltip extends Overlay {
       'coral-overlay:_animate': '_onAnimate'
     });
   }
-  
+
   /**
    The variant of tooltip. See {@link TooltipVariantEnum}.
-   
+
    @type {String}
    @default TooltipVariantEnum.DEFAULT
    @htmlattribute variant
@@ -122,14 +123,14 @@ class Tooltip extends Overlay {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
-  
+
     this.classList.remove(...ALL_VARIANT_CLASSES);
     this.classList.add(`${CLASSNAME}--${this._variant}`);
   }
-  
+
   /**
    The amount of time in miliseconds to wait before showing the tooltip when the target is interacted with.
-   
+
    @type {Number}
    @default 500
    @htmlattribute delay
@@ -140,10 +141,10 @@ class Tooltip extends Overlay {
   set delay(value) {
     this._delay = transform.number(value);
   }
-  
+
   /**
    The Tooltip content element.
-   
+
    @type {TooltipContent}
    @contentzone
    */
@@ -160,7 +161,7 @@ class Tooltip extends Overlay {
       }
     });
   }
-  
+
   /**
    Inherited from {@link Overlay#open}.
    */
@@ -169,13 +170,13 @@ class Tooltip extends Overlay {
   }
   set open(value) {
     super.open = value;
-    
+
     if (!this.open) {
       // Stop previous show operations from happening
       this._cancelShow();
     }
   }
-  
+
   /**
    Inherited from {@link Overlay#target}.
    */
@@ -184,12 +185,12 @@ class Tooltip extends Overlay {
   }
   set target(value) {
     super.target = value;
-  
+
     const target = this._getTarget(value);
-    
+
     if (target) {
       this._elements.tip.hidden = false;
-      
+
       if (this.interaction === this.constructor.interaction.ON) {
         // Add listeners to the target
         this._addTargetListeners(target);
@@ -199,7 +200,7 @@ class Tooltip extends Overlay {
       this._elements.tip.hidden = true;
     }
   }
-  
+
   /**
    Inherited from {@link Overlay#interaction}.
    */
@@ -208,9 +209,9 @@ class Tooltip extends Overlay {
   }
   set interaction(value) {
     super.interaction = value;
-  
+
     const target = this._getTarget();
-  
+
     if (target) {
       if (value === this.constructor.interaction.ON) {
         this._addTargetListeners(target);
@@ -220,18 +221,18 @@ class Tooltip extends Overlay {
       }
     }
   }
-  
+
   /** @ignore */
   _onPositioned(event) {
     // Set arrow placement
     this.classList.remove(...ALL_PLACEMENT_CLASSES);
     this.classList.add(placementClassMap[event.detail.placement]);
   }
-  
+
   _onAnimate() {
     // popper attribute
     const popperPlacement = this.getAttribute('x-placement');
-  
+
     // popper takes care of setting left, top to 0 on positioning
     if (popperPlacement === 'left') {
       this.style.left = '8px';
@@ -246,30 +247,30 @@ class Tooltip extends Overlay {
       this.style.top = '-8px';
     }
   }
-  
+
   /** @ignore */
   _handleFocusOut() {
     // The item that should have focus will get it on the next frame
     window.requestAnimationFrame(() => {
       const targetIsFocused = document.activeElement === this._getTarget();
-      
+
       if (!targetIsFocused) {
         this._cancelShow();
         this.open = false;
       }
     });
   }
-  
+
   /** @ignore */
   _cancelShow() {
     window.clearTimeout(this._showTimeout);
   }
-  
+
   /** @ignore */
   _cancelHide() {
     window.clearTimeout(this._hideTimeout);
   }
-  
+
   /** @ignore */
   _startHide() {
     if (this.delay === 0) {
@@ -282,7 +283,7 @@ class Tooltip extends Overlay {
       }, this.delay);
     }
   }
-  
+
   /** @ignore */
   _addTargetListeners(target) {
     // Make sure we don't add listeners twice to the same element for this particular tooltip
@@ -290,7 +291,7 @@ class Tooltip extends Overlay {
       return;
     }
     target[`_hasTooltipListeners${this._id}`] = true;
-    
+
     // Remove listeners from the old target
     if (this._oldTarget) {
       const oldTarget = this._getTarget(this._oldTarget);
@@ -298,45 +299,49 @@ class Tooltip extends Overlay {
         this._removeTargetListeners(oldTarget);
       }
     }
-    
+
     // Store the current target value
     this._oldTarget = target;
-    
+
     // Use Vent to bind events on the target
     this._targetEvents = new Vent(target);
-  
-    this._targetEvents.on(`mouseenter.Tooltip${this._id} focusin.Tooltip${this._id}`, () => {
-      // Don't let the tooltip hide
-      this._cancelHide();
-      
-      if (!this.open) {
-        this._cancelShow();
-        
-        if (this.delay === 0) {
-          // Show immediately
-          this.show();
-        }
-        else {
-          this._showTimeout = window.setTimeout(() => {
-            this.show();
-          }, this.delay);
-        }
-      }
-    });
-  
+
+    this._targetEvents.on(`mouseenter.Tooltip${this._id}`, this._handleOpenTooltip.bind(this));
+
+    this._targetEvents.on(`focusin.Tooltip${this._id}`, this._handleOpenTooltip.bind(this));
+
     this._targetEvents.on(`mouseleave.Tooltip${this._id}`, () => {
       if (this.interaction === this.constructor.interaction.ON) {
         this._startHide();
       }
     });
-  
+
     this._targetEvents.on(`focusout.Tooltip${this._id}`, () => {
       if (this.interaction === this.constructor.interaction.ON) {
         this._handleFocusOut();
       }
     });
   }
-  
+
+  _handleOpenTooltip() {
+    // Don't let the tooltip hide
+    this._cancelHide();
+
+    if (!this.open) {
+      this._cancelShow();
+
+      if (this.delay === 0) {
+        // Show immediately
+        this.show();
+      }
+      else {
+        this._showTimeout = window.setTimeout(() => {
+          this.show();
+        }, this.delay);
+      }
+    }
+  }
+
   /** @ignore */
   _removeTargetListeners(target) {
     // Remove listeners for this tooltip and mark that the element doesn't have them
@@ -346,54 +351,54 @@ class Tooltip extends Overlay {
     }
     target[`_hasTooltipListeners${this._id}`] = false;
   }
-  
+
   get _contentZones() { return {'coral-tooltip-content': 'content'}; }
-  
+
   /**
    Returns {@link Tooltip} variants.
-   
+
    @return {TooltipVariantEnum}
    */
   static get variant() { return variant; }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['variant', 'delay']);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     // ARIA
     this.setAttribute('role', 'tooltip');
     // Let the tooltip be focusable
     // We'll marshall focus around when its focused
     this.setAttribute('tabindex', '-1');
-  
+
     // Default reflected attributes
     if (!this._variant) { this.variant = variant.DEFAULT; }
-  
+
     // Support cloneNode
     const tip = this.querySelector('._coral-Tooltip-tip');
     if (tip) {
       tip.remove();
     }
-    
+
     const content = this._elements.content;
-  
+
     // Move the content into the content zone if none specified
     if (!content.parentNode) {
       while (this.firstChild) {
         content.appendChild(this.firstChild);
       }
     }
-    
+
     // Append template
     this.appendChild(this._elements.tip);
-  
+
     // Assign the content zone so the insert function will be called
     this.content = content;
   }
