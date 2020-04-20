@@ -153,7 +153,7 @@
             max-height: 200px;
           }
         </style>
-        <table is="coral-table" selectable orderable multiple class="table-sticky">
+        <table is="coral-table" selectable orderable multiple class="table-sticky" variant="list">
           <colgroup>
             <col is="coral-table-column" fixedwidth>
             <col is="coral-table-column" sortable>
@@ -245,6 +245,105 @@
               <td is="coral-table-cell">May 16, 2012</td>
               <td is="coral-table-cell">
                 <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" aria-label="Reorder" aria-roledescription="drag handle" coral-table-roworder></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="coral--Heading--S">ListView selection</h2>
+      <div class="markup">
+        <style>
+          .table-sticky [coral-table-scroll] {
+            max-height: 200px;
+          }
+        </style>
+        <table is="coral-table" selectable orderable multiple class="table-sticky" variant="list">
+          <colgroup>
+            <col is="coral-table-column" fixedwidth>
+            <col is="coral-table-column" sortable>
+            <col is="coral-table-column" sortable sortabletype="date">
+            <col is="coral-table-column" fixedwidth>
+          </colgroup>
+          <thead is="coral-table-head" sticky>
+            <tr is="coral-table-row">
+              <th is="coral-table-headercell">
+                <coral-checkbox coral-table-select></coral-checkbox>
+              </th>
+              <th is="coral-table-headercell">Activities</th>
+              <th is="coral-table-headercell">Date</th>
+              <th is="coral-table-headercell"></th>
+            </tr>
+          </thead>
+          <tbody is="coral-table-body">
+            <tr is="coral-table-row">
+              <td is="coral-table-cell" coral-table-rowselect>
+                <coral-icon alt="folder" icon="folder"></coral-icon>
+              </td>
+              <td is="coral-table-cell">Alpha</td>
+              <td is="coral-table-cell">January 28, 2012</td>
+              <td is="coral-table-cell">
+                <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" coral-table-roworder></button>
+              </td>
+            </tr>
+            <tr is="coral-table-row">
+              <td is="coral-table-cell" coral-table-rowselect>
+                <img alt="thumbnail" src="http://via.placeholder.com/128x128"/>
+              </td>
+              <td is="coral-table-cell">Charlie</td>
+              <td is="coral-table-cell">February 15, 2012</td>
+              <td is="coral-table-cell">
+                <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" coral-table-roworder></button>
+              </td>
+            </tr>
+            <tr is="coral-table-row">
+              <td is="coral-table-cell" coral-table-rowselect>
+                <img alt="thumbnail" src="http://via.placeholder.com/128x128"/>
+              </td>
+              <td is="coral-table-cell">Delta</td>
+              <td is="coral-table-cell">May 16, 2012</td>
+              <td is="coral-table-cell">
+                <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" coral-table-roworder></button>
+              </td>
+            </tr>
+            <tr is="coral-table-row">
+              <td is="coral-table-cell" coral-table-rowselect>
+                <img alt="thumbnail" src="http://via.placeholder.com/128x128"/>
+              </td>
+              <td is="coral-table-cell">Alpha</td>
+              <td is="coral-table-cell">January 28, 2012</td>
+              <td is="coral-table-cell">
+                <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" coral-table-roworder></button>
+              </td>
+            </tr>
+            <tr is="coral-table-row">
+              <td is="coral-table-cell" coral-table-rowselect>
+                <img alt="thumbnail" src="http://via.placeholder.com/128x128"/>
+              </td>
+              <td is="coral-table-cell">Beta</td>
+              <td is="coral-table-cell">December 1, 2011</td>
+              <td is="coral-table-cell">
+                <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" coral-table-roworder></button>
+              </td>
+            </tr>
+            <tr is="coral-table-row">
+              <td is="coral-table-cell" coral-table-rowselect>
+                <img alt="thumbnail"src="http://via.placeholder.com/128x128"/>
+              </td>
+              <td is="coral-table-cell">Charlie</td>
+              <td is="coral-table-cell">February 15, 2012</td>
+              <td is="coral-table-cell">
+                <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" coral-table-roworder></button>
+              </td>
+            </tr>
+            <tr is="coral-table-row">
+              <td is="coral-table-cell" coral-table-rowselect>
+                <img alt="thumbnail" src="http://via.placeholder.com/128x128"/>
+              </td>
+              <td is="coral-table-cell">Delta</td>
+              <td is="coral-table-cell">May 16, 2012</td>
+              <td is="coral-table-cell">
+                <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" coral-table-roworder></button>
               </td>
             </tr>
           </tbody>

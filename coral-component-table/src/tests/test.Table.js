@@ -273,7 +273,7 @@ describe('Table', function() {
         
         expect(row.selected).to.be.false;
         expect(row.classList.contains('is-selected')).to.be.false;
-        expect(row.getAttribute('aria-selected') === 'false').to.be.true;
+        expect(row.hasAttribute('aria-selected')).to.be.false;
       });
   
       it('appended items should be selectable', function(done) {
@@ -2164,6 +2164,78 @@ describe('Table', function() {
         table = helpers.build(window.__html__['Table.base.html']);
         tfoot = table.foot;
         expect(tfoot.hasAttribute('aria-hidden')).to.be.false;
+      });
+
+      it('should add an accessibilityState and announce selection changes to selectable items', function(done) {
+        const table = helpers.build(window.__html__['Table.selectable.html']);
+        table.multiple = true;
+        const rows = Array.from(table.body.rows);
+        helpers.next(() => {
+          rows[0].focus();
+          rows.forEach(row => {
+            const accessibilityState = row._elements.accessibilityState;
+            expect(accessibilityState).to.not.be.null;
+            expect(accessibilityState.getAttribute('aria-hidden')).to.equal('true');
+            const cellIds = row.items.getAll().map(cell => cell.id);
+            cellIds.push(accessibilityState.id);
+            expect(row.getAttribute('aria-labelledby')).to.equal(cellIds.join(' '));
+            expect(row.getAttribute('aria-selected')).to.equal(row.selected ? 'true' : 'false');
+            expect(row.hasAttribute('aria-live')).to.be.false;
+            expect(row.hasAttribute('aria-atomic')).to.be.false;
+            row.selected = true;
+          });
+          setTimeout(() => {
+            rows.forEach((row, index) => {
+              const accessibilityState = row._elements.accessibilityState;
+              if (index === 0) {
+                expect(accessibilityState.hasAttribute('aria-hidden')).to.be.false;
+                expect(row.getAttribute('aria-live')).to.equal('assertive');
+                expect(row.getAttribute('aria-atomic')).to.equal('true');
+              }
+              else {
+                expect(accessibilityState.getAttribute('aria-hidden')).to.equal('true');
+                expect(accessibilityState.hasAttribute('aria-live')).to.be.false;
+                expect(accessibilityState.hasAttribute('aria-atomic')).to.be.false;
+              }
+              expect(accessibilityState.textContent).to.equal(', checked');
+              expect(row.getAttribute('aria-selected')).to.equal('true');
+            });
+            rows[0].dispatchEvent(new MouseEvent('click', {
+              bubbles: true,
+              shiftKey: false
+            }));
+            setTimeout(() => {
+              rows.forEach((row, index) => {
+                expect(row.selected).to.equal(index !== 0);
+                expect(row.getAttribute('aria-selected')).to.equal(index !== 0 ? 'true' : 'false');
+                var accessibilityState = row._elements.accessibilityState;
+                if (index === 0) {
+                  expect(accessibilityState.hasAttribute('aria-hidden')).to.be.false;
+                  expect(row.getAttribute('aria-live')).to.equal('assertive');
+                  expect(row.getAttribute('aria-atomic')).to.equal('true');
+                }
+                else {
+                  expect(accessibilityState.getAttribute('aria-hidden')).to.equal('true');
+                  expect(accessibilityState.hasAttribute('aria-live')).to.be.false;
+                  expect(accessibilityState.hasAttribute('aria-atomic')).to.be.false;
+                }
+                expect(accessibilityState.textContent).to.equal(index !== 0 ? ', checked' : ', unchecked');
+              });
+              setTimeout(() => {
+                rows.forEach((row, index) => {
+                  expect(row.selected).to.equal(index !== 0);
+                  expect(row.getAttribute('aria-selected')).to.equal(index !== 0 ? 'true' : 'false');
+                  var accessibilityState = row._elements.accessibilityState;
+                  expect(accessibilityState.getAttribute('aria-hidden')).to.equal('true');
+                  expect(accessibilityState.hasAttribute('aria-live')).to.be.false;
+                  expect(accessibilityState.hasAttribute('aria-atomic')).to.be.false;
+                  expect(accessibilityState.textContent).to.equal(index !== 0 ? ', checked' : '');
+                });
+                done();
+              }, 260);
+            }, 60);
+          }, 60);  
+        });
       });
     });
     
