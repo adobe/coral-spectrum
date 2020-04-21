@@ -6200,41 +6200,355 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+.coral-Link {
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects;
+  text-decoration: none;
+  transition: color 130ms ease-in-out;
+  outline: none;
+}
+.coral-Link:hover {
+    text-decoration: underline;
+  }
+.coral-Link.focus-ring {
+    text-decoration: underline;
+    -webkit-text-decoration-style: double;
+            text-decoration-style: double;
+  }
+.coral-Link.is-disabled {
+    cursor: default;
+    pointer-events: none;
+  }
+.coral-Link.is-disabled:hover,
+    .coral-Link.is-disabled:focus {
+      text-decoration: none;
+    }
+.coral-Link--subtle,
+.coral-Link--quiet,.coral-Link--overBackground {
+  text-decoration: underline;
+}
 
-.coral-DecoratedTextfield {
-  position: relative;
+.coral--large .coral-Link {
+  transition: color 130ms ease-in-out;
+}
+
+.coral--light .coral-Link {
+  color: rgb(13, 102, 208);
+}
+.coral--light .coral-Link:hover {
+    color: rgb(13, 102, 208);
+  }
+.coral--light .coral-Link:active {
+    color: rgb(9, 90, 186);
+  }
+.coral--light .coral-Link.focus-ring {
+    color: rgb(13, 102, 208);
+  }
+.coral--light .coral-Link.is-disabled {
+    color: rgb(179, 179, 179);
+  }
+.coral--light .coral-Link--quiet,
+.coral--light .coral-Link--subtle {
+  color: inherit;
+}
+.coral--light .coral-Link--quiet:hover,
+.coral--light .coral-Link--subtle:hover {
+    color: inherit;
+  }
+.coral--light .coral-Link--quiet:active,
+.coral--light .coral-Link--subtle:active {
+    color: inherit;
+  }
+.coral--light .coral-Link--quiet:focus,
+.coral--light .coral-Link--subtle:focus {
+    color: inherit;
+  }
+.coral--light .coral-Link--overBackground {
+  color: rgb(255, 255, 255);
+}
+.coral--light .coral-Link--overBackground:hover {
+    color: rgb(255, 255, 255);
+  }
+.coral--light .coral-Link--overBackground:active {
+    color: rgb(255, 255, 255);
+  }
+.coral--light .coral-Link--overBackground:focus {
+    color: rgb(255, 255, 255);
+  }
+.coral--light .coral-Link--overBackground.is-disabled {
+    color: rgba(255,255,255,0.5);
+  }
+
+.coral--lightest .coral-Link {
+  color: rgb(20, 115, 230);
+}
+.coral--lightest .coral-Link:hover {
+    color: rgb(20, 115, 230);
+  }
+.coral--lightest .coral-Link:active {
+    color: rgb(13, 102, 208);
+  }
+.coral--lightest .coral-Link.focus-ring {
+    color: rgb(20, 115, 230);
+  }
+.coral--lightest .coral-Link.is-disabled {
+    color: rgb(188, 188, 188);
+  }
+.coral--lightest .coral-Link--quiet,
+.coral--lightest .coral-Link--subtle {
+  color: inherit;
+}
+.coral--lightest .coral-Link--quiet:hover,
+.coral--lightest .coral-Link--subtle:hover {
+    color: inherit;
+  }
+.coral--lightest .coral-Link--quiet:active,
+.coral--lightest .coral-Link--subtle:active {
+    color: inherit;
+  }
+.coral--lightest .coral-Link--quiet:focus,
+.coral--lightest .coral-Link--subtle:focus {
+    color: inherit;
+  }
+.coral--lightest .coral-Link--overBackground {
+  color: rgb(255, 255, 255);
+}
+.coral--lightest .coral-Link--overBackground:hover {
+    color: rgb(255, 255, 255);
+  }
+.coral--lightest .coral-Link--overBackground:active {
+    color: rgb(255, 255, 255);
+  }
+.coral--lightest .coral-Link--overBackground:focus {
+    color: rgb(255, 255, 255);
+  }
+.coral--lightest .coral-Link--overBackground.is-disabled {
+    color: rgba(255,255,255,0.5);
+  }
+
+.coral--dark .coral-Link {
+  color: rgb(75, 156, 245);
+}
+.coral--dark .coral-Link:hover {
+    color: rgb(75, 156, 245);
+  }
+.coral--dark .coral-Link:active {
+    color: rgb(90, 169, 250);
+  }
+.coral--dark .coral-Link.focus-ring {
+    color: rgb(75, 156, 245);
+  }
+.coral--dark .coral-Link.is-disabled {
+    color: rgb(110, 110, 110);
+  }
+.coral--dark .coral-Link--quiet,
+.coral--dark .coral-Link--subtle {
+  color: inherit;
+}
+.coral--dark .coral-Link--quiet:hover,
+.coral--dark .coral-Link--subtle:hover {
+    color: inherit;
+  }
+.coral--dark .coral-Link--quiet:active,
+.coral--dark .coral-Link--subtle:active {
+    color: inherit;
+  }
+.coral--dark .coral-Link--quiet:focus,
+.coral--dark .coral-Link--subtle:focus {
+    color: inherit;
+  }
+.coral--dark .coral-Link--overBackground {
+  color: rgb(255, 255, 255);
+}
+.coral--dark .coral-Link--overBackground:hover {
+    color: rgb(255, 255, 255);
+  }
+.coral--dark .coral-Link--overBackground:active {
+    color: rgb(255, 255, 255);
+  }
+.coral--dark .coral-Link--overBackground:focus {
+    color: rgb(255, 255, 255);
+  }
+.coral--dark .coral-Link--overBackground.is-disabled {
+    color: rgba(255,255,255,0.5);
+  }
+
+.coral--darkest .coral-Link {
+  color: rgb(55, 142, 240);
+}
+.coral--darkest .coral-Link:hover {
+    color: rgb(55, 142, 240);
+  }
+.coral--darkest .coral-Link:active {
+    color: rgb(75, 156, 245);
+  }
+.coral--darkest .coral-Link.focus-ring {
+    color: rgb(55, 142, 240);
+  }
+.coral--darkest .coral-Link.is-disabled {
+    color: rgb(92, 92, 92);
+  }
+.coral--darkest .coral-Link--quiet,
+.coral--darkest .coral-Link--subtle {
+  color: inherit;
+}
+.coral--darkest .coral-Link--quiet:hover,
+.coral--darkest .coral-Link--subtle:hover {
+    color: inherit;
+  }
+.coral--darkest .coral-Link--quiet:active,
+.coral--darkest .coral-Link--subtle:active {
+    color: inherit;
+  }
+.coral--darkest .coral-Link--quiet:focus,
+.coral--darkest .coral-Link--subtle:focus {
+    color: inherit;
+  }
+.coral--darkest .coral-Link--overBackground {
+  color: rgb(255, 255, 255);
+}
+.coral--darkest .coral-Link--overBackground:hover {
+    color: rgb(255, 255, 255);
+  }
+.coral--darkest .coral-Link--overBackground:active {
+    color: rgb(255, 255, 255);
+  }
+.coral--darkest .coral-Link--overBackground:focus {
+    color: rgb(255, 255, 255);
+  }
+.coral--darkest .coral-Link--overBackground.is-disabled {
+    color: rgba(255,255,255,0.5);
+  }
+
+
+/**
+ * Copyright 2019 Adobe. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under
+ * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+ * OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
+.coral-Divider--S, .coral-Divider--M, .coral-Divider--L {
+  width: 100%;
+  overflow: visible;
+
+  border: none;
+  border-width: 2px;
+  border-radius: 2px;
+}
+.coral-Divider--L {
+  height: 4px;
+
+  border-radius: 2px;
+}
+.coral-Divider--M {
+  height: 2px;
+
+  border-radius: 1px;
+}
+.coral-Divider--S {
+  height: 1px;
+
+  border-radius: 1px;
+}
+.coral-Divider--vertical {
+  height: 100%;
+}
+.coral-Divider--vertical.coral-Divider--L {
+    width: 4px;
+  }
+.coral-Divider--vertical.coral-Divider--M {
+    width: 2px;
+  }
+.coral-Divider--vertical.coral-Divider--S {
+    width: 1px;
+  }
+
+.coral--large .coral-Divider--S, .coral-Divider--M, .coral-Divider--L {
+  border-width: 2px;
+  border-radius: 2px;
+}
+.coral--large .coral-Divider--L {
+  height: 4px;
+
+  border-radius: 2px;
+}
+.coral--large .coral-Divider--M {
+  height: 2px;
+
+  border-radius: 1px;
+}
+.coral--large .coral-Divider--S {
+  height: 1px;
+
+  border-radius: 1px;
+}
+.coral--large .coral-Divider--vertical {
+  height: 100%;
+}
+.coral--large .coral-Divider--vertical.coral-Divider--L {
+    width: 4px;
+  }
+.coral--large .coral-Divider--vertical.coral-Divider--M {
+    width: 2px;
+  }
+.coral--large .coral-Divider--vertical.coral-Divider--S {
+    width: 1px;
+  }
+
+.coral--light .coral-Divider--L {
+  background-color: rgb(75, 75, 75);
+}
+.coral--light .coral-Divider--M,.coral--light .coral-Divider--S {
+  background-color: rgb(225, 225, 225);
+}
+
+.coral--lightest .coral-Divider--L {
+  background-color: rgb(80, 80, 80);
+}
+.coral--lightest .coral-Divider--M,.coral--lightest .coral-Divider--S {
+  background-color: rgb(234, 234, 234);
+}
+
+.coral--dark .coral-Divider--L {
+  background-color: rgb(227, 227, 227);
+}
+.coral--dark .coral-Divider--M,.coral--dark .coral-Divider--S {
+  background-color: rgb(74, 74, 74);
+}
+
+.coral--darkest .coral-Divider--L {
+  background-color: rgb(200, 200, 200);
+}
+.coral--darkest .coral-Divider--M,.coral--darkest .coral-Divider--S {
+  background-color: rgb(57, 57, 57);
+}
+
+
+/**
+ * Copyright 2019 Adobe. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under
+ * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+ * OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
+.coral-FixedColumn {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.coral-FixedColumn-column {
   box-sizing: border-box;
-  margin: 0;
-  vertical-align: top;
-  display: inline-block;
-}
-.coral-DecoratedTextfield > .coral-DecoratedTextfield-button._coral-Button {
-  margin-right: 0;
-  max-width: 32px;
-}
-.coral-DecoratedTextfield > .coral-DecoratedTextfield-input {
-  padding-right: 32px;
-}
-.coral-DecoratedTextfield-icon {
-  position: absolute;
-  top: 10px;
-  left: 0;
-  margin-left: 10px;
-  height: 18px;
-  pointer-events: none;
-}
-.coral-DecoratedTextfield-icon:not([hidden]) + .coral-DecoratedTextfield-input {
-  padding-left: 25px;
-  text-indent: 0;
-}
-.coral-DecoratedTextfield-button {
-  box-sizing: border-box;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-.coral-DecoratedTextfield-button.is-hidden {
-  visibility: hidden;
+  margin: 0 8px;
+  width: 512px;
 }
 
 /**
@@ -7349,6 +7663,104 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
           box-shadow: 0 0 0 1px rgb(227, 72, 80);
         }
 
+
+/**
+ * Copyright 2019 Adobe. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under
+ * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+ * OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
+.coral-Well {
+  display: block;
+  min-width: 240px;
+  padding: 16px;
+  margin-top: 4px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 4px;
+}
+
+.coral--large .coral-Well {
+  min-width: 300px;
+  padding: 20px;
+  margin-top: 5px;
+  border-width: 1px;
+  border-radius: 5px;
+}
+
+.coral--light .coral-Well {
+  background-color: rgba(75,75,75,0.02);
+  border-color: rgba(44,44,44,0.05);
+}
+
+.coral--lightest .coral-Well {
+  background-color: rgba(80,80,80,0.02);
+  border-color: rgba(50,50,50,0.05);
+}
+
+.coral--dark .coral-Well {
+  background-color: rgba(227,227,227,0.02);
+  border-color: rgba(255,255,255,0.05);
+}
+
+.coral--darkest .coral-Well {
+  background-color: rgba(200,200,200,0.02);
+  border-color: rgba(239,239,239,0.05);
+}
+
+
+/**
+ * Copyright 2019 Adobe. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under
+ * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+ * OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
+
+.coral-DecoratedTextfield {
+  position: relative;
+  box-sizing: border-box;
+  margin: 0;
+  vertical-align: top;
+  display: inline-block;
+}
+.coral-DecoratedTextfield > .coral-DecoratedTextfield-button._coral-Button {
+  margin-right: 0;
+  max-width: 32px;
+}
+.coral-DecoratedTextfield > .coral-DecoratedTextfield-input {
+  padding-right: 32px;
+}
+.coral-DecoratedTextfield-icon {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  margin-left: 10px;
+  height: 18px;
+  pointer-events: none;
+}
+.coral-DecoratedTextfield-icon:not([hidden]) + .coral-DecoratedTextfield-input {
+  padding-left: 25px;
+  text-indent: 0;
+}
+.coral-DecoratedTextfield-button {
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.coral-DecoratedTextfield-button.is-hidden {
+  visibility: hidden;
+}
 
 /**
  * Copyright 2019 Adobe. All rights reserved.
@@ -10731,123 +11143,127 @@ button[is="coral-button"] {
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-.coral-Divider--S, .coral-Divider--M, .coral-Divider--L {
-  width: 100%;
-  overflow: visible;
 
-  border: none;
-  border-width: 2px;
-  border-radius: 2px;
+.coral-InputGroup {
+  display: inline-flex;
+  width: 208px;
 }
-.coral-Divider--L {
-  height: 4px;
-
-  border-radius: 2px;
-}
-.coral-Divider--M {
-  height: 2px;
-
-  border-radius: 1px;
-}
-.coral-Divider--S {
-  height: 1px;
-
-  border-radius: 1px;
-}
-.coral-Divider--vertical {
-  height: 100%;
-}
-.coral-Divider--vertical.coral-Divider--L {
-    width: 4px;
-  }
-.coral-Divider--vertical.coral-Divider--M {
-    width: 2px;
-  }
-.coral-Divider--vertical.coral-Divider--S {
-    width: 1px;
-  }
-
-.coral--large .coral-Divider--S, .coral-Divider--M, .coral-Divider--L {
-  border-width: 2px;
-  border-radius: 2px;
-}
-.coral--large .coral-Divider--L {
-  height: 4px;
-
-  border-radius: 2px;
-}
-.coral--large .coral-Divider--M {
-  height: 2px;
-
-  border-radius: 1px;
-}
-.coral--large .coral-Divider--S {
-  height: 1px;
-
-  border-radius: 1px;
-}
-.coral--large .coral-Divider--vertical {
-  height: 100%;
-}
-.coral--large .coral-Divider--vertical.coral-Divider--L {
-    width: 4px;
-  }
-.coral--large .coral-Divider--vertical.coral-Divider--M {
-    width: 2px;
-  }
-.coral--large .coral-Divider--vertical.coral-Divider--S {
-    width: 1px;
-  }
-
-.coral--light .coral-Divider--L {
-  background-color: rgb(75, 75, 75);
-}
-.coral--light .coral-Divider--M,.coral--light .coral-Divider--S {
-  background-color: rgb(225, 225, 225);
-}
-
-.coral--lightest .coral-Divider--L {
-  background-color: rgb(80, 80, 80);
-}
-.coral--lightest .coral-Divider--M,.coral--lightest .coral-Divider--S {
-  background-color: rgb(234, 234, 234);
-}
-
-.coral--dark .coral-Divider--L {
-  background-color: rgb(227, 227, 227);
-}
-.coral--dark .coral-Divider--M,.coral--dark .coral-Divider--S {
-  background-color: rgb(74, 74, 74);
-}
-
-.coral--darkest .coral-Divider--L {
-  background-color: rgb(200, 200, 200);
-}
-.coral--darkest .coral-Divider--M,.coral--darkest .coral-Divider--S {
-  background-color: rgb(57, 57, 57);
-}
-
-
-/**
- * Copyright 2019 Adobe. All rights reserved.
- * This file is licensed to you under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License. You may obtain a copy
- * of the License at http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under
- * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
- * OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
- */
-.coral-FixedColumn {
+.coral-InputGroup--block {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  width: 100%;
 }
-.coral-FixedColumn-column {
-  box-sizing: border-box;
-  margin: 0 8px;
-  width: 512px;
+.coral-InputGroup-input {
+  width: 100%;
+}
+._coral-InputGroup ._coral-FieldButton {
+  min-width: 32px;
+  padding: 0 6px;
+}
+.coral-InputGroup-button ._coral-Button {
+  min-width: 32px;
+  padding: 0 6px;
+  border-width: 1px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 400;
+}
+.coral-InputGroup-input.focus-ring,
+.coral-InputGroup-button ._coral-Button.focus-ring {
+  position: relative;
+  z-index: 1;
+}
+.coral-InputGroup > .coral-InputGroup-button:first-child ._coral-Button {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.coral-InputGroup > .coral-InputGroup-button:first-child ._coral-Button:not(.focus-ring) {
+  border-right-color: transparent;
+}
+.coral-InputGroup > .coral-InputGroup-button:last-child ._coral-Button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.coral-InputGroup > .coral-InputGroup-button:last-child ._coral-Button:not(.focus-ring) {
+  border-left-color: transparent;
+}
+.coral-InputGroup > .coral-InputGroup-input {
+  border-radius: 0;
+}
+.coral-InputGroup > .coral-InputGroup-input:first-child {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.coral-InputGroup > .coral-InputGroup-input:last-child {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.coral--light .coral-InputGroup-button ._coral-Button {
+  color: rgb(75, 75, 75);
+  background-color: rgb(250, 250, 250);
+  border-color: rgb(225, 225, 225);
+}
+.coral--light .coral-InputGroup-button ._coral-Button:hover {
+  color: rgb(44, 44, 44);
+  background-color: rgb(255, 255, 255);
+  border-color: rgb(202, 202, 202);
+  box-shadow: none;
+}
+.coral--light .coral-InputGroup-button ._coral-Button:active {
+  color: rgb(44, 44, 44);
+  background-color: rgb(234, 234, 234);
+  border-color: rgb(202, 202, 202);
+  box-shadow: none;
+}
+.coral--lightest .coral-InputGroup-button ._coral-Button {
+  color: rgb(80, 80, 80);
+  background-color: rgb(255, 255, 255);
+  border-color: rgb(234, 234, 234);
+}
+.coral--lightest .coral-InputGroup-button ._coral-Button:hover {
+  color: rgb(50, 50, 50);
+  background-color: rgb(255, 255, 255);
+  border-color: rgb(211, 211, 211);
+  box-shadow: none;
+}
+.coral--lightest .coral-InputGroup-button ._coral-Button:active {
+  color: rgb(50, 50, 50);
+  background-color: rgb(244, 244, 244);
+  border-color: rgb(211, 211, 211);
+  box-shadow: none;
+}
+.coral--dark .coral-InputGroup-button ._coral-Button {
+  color: rgb(227, 227, 227);
+  background-color: rgb(47, 47, 47);
+  border-color: rgb(74, 74, 74);
+}
+.coral--dark .coral-InputGroup-button ._coral-Button:hover {
+  color: rgb(255, 255, 255);
+  background-color: rgb(37, 37, 37);
+  border-color: rgb(90, 90, 90);
+  box-shadow: none;
+}
+.coral--dark .coral-InputGroup-button ._coral-Button:active {
+  color: rgb(255, 255, 255);
+  background-color: rgb(62, 62, 62);
+  border-color: rgb(90, 90, 90);
+  box-shadow: none;
+}
+.coral--darkest .coral-InputGroup-button ._coral-Button {
+  color: rgb(200, 200, 200);
+  background-color: rgb(26, 26, 26);
+  border-color: rgb(57, 57, 57);
+}
+.coral--darkest .coral-InputGroup-button ._coral-Button:hover {
+  color: rgb(239, 239, 239);
+  background-color: rgb(8, 8, 8);
+  border-color: rgb(73, 73, 73);
+  box-shadow: none;
+}
+.coral--darkest .coral-InputGroup-button ._coral-Button:active {
+  color: rgb(239, 239, 239);
+  background-color: rgb(44, 44, 44);
+  border-color: rgb(73, 73, 73);
+  box-shadow: none;
 }
 
 /**
@@ -16995,422 +17411,6 @@ coral-select-item {
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
-.coral-InputGroup {
-  display: inline-flex;
-  width: 208px;
-}
-.coral-InputGroup--block {
-  display: flex;
-  width: 100%;
-}
-.coral-InputGroup-input {
-  width: 100%;
-}
-._coral-InputGroup ._coral-FieldButton {
-  min-width: 32px;
-  padding: 0 6px;
-}
-.coral-InputGroup-button ._coral-Button {
-  min-width: 32px;
-  padding: 0 6px;
-  border-width: 1px;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 400;
-}
-.coral-InputGroup-input.focus-ring,
-.coral-InputGroup-button ._coral-Button.focus-ring {
-  position: relative;
-  z-index: 1;
-}
-.coral-InputGroup > .coral-InputGroup-button:first-child ._coral-Button {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-.coral-InputGroup > .coral-InputGroup-button:first-child ._coral-Button:not(.focus-ring) {
-  border-right-color: transparent;
-}
-.coral-InputGroup > .coral-InputGroup-button:last-child ._coral-Button {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-}
-.coral-InputGroup > .coral-InputGroup-button:last-child ._coral-Button:not(.focus-ring) {
-  border-left-color: transparent;
-}
-.coral-InputGroup > .coral-InputGroup-input {
-  border-radius: 0;
-}
-.coral-InputGroup > .coral-InputGroup-input:first-child {
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-}
-.coral-InputGroup > .coral-InputGroup-input:last-child {
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
-}
-.coral--light .coral-InputGroup-button ._coral-Button {
-  color: rgb(75, 75, 75);
-  background-color: rgb(250, 250, 250);
-  border-color: rgb(225, 225, 225);
-}
-.coral--light .coral-InputGroup-button ._coral-Button:hover {
-  color: rgb(44, 44, 44);
-  background-color: rgb(255, 255, 255);
-  border-color: rgb(202, 202, 202);
-  box-shadow: none;
-}
-.coral--light .coral-InputGroup-button ._coral-Button:active {
-  color: rgb(44, 44, 44);
-  background-color: rgb(234, 234, 234);
-  border-color: rgb(202, 202, 202);
-  box-shadow: none;
-}
-.coral--lightest .coral-InputGroup-button ._coral-Button {
-  color: rgb(80, 80, 80);
-  background-color: rgb(255, 255, 255);
-  border-color: rgb(234, 234, 234);
-}
-.coral--lightest .coral-InputGroup-button ._coral-Button:hover {
-  color: rgb(50, 50, 50);
-  background-color: rgb(255, 255, 255);
-  border-color: rgb(211, 211, 211);
-  box-shadow: none;
-}
-.coral--lightest .coral-InputGroup-button ._coral-Button:active {
-  color: rgb(50, 50, 50);
-  background-color: rgb(244, 244, 244);
-  border-color: rgb(211, 211, 211);
-  box-shadow: none;
-}
-.coral--dark .coral-InputGroup-button ._coral-Button {
-  color: rgb(227, 227, 227);
-  background-color: rgb(47, 47, 47);
-  border-color: rgb(74, 74, 74);
-}
-.coral--dark .coral-InputGroup-button ._coral-Button:hover {
-  color: rgb(255, 255, 255);
-  background-color: rgb(37, 37, 37);
-  border-color: rgb(90, 90, 90);
-  box-shadow: none;
-}
-.coral--dark .coral-InputGroup-button ._coral-Button:active {
-  color: rgb(255, 255, 255);
-  background-color: rgb(62, 62, 62);
-  border-color: rgb(90, 90, 90);
-  box-shadow: none;
-}
-.coral--darkest .coral-InputGroup-button ._coral-Button {
-  color: rgb(200, 200, 200);
-  background-color: rgb(26, 26, 26);
-  border-color: rgb(57, 57, 57);
-}
-.coral--darkest .coral-InputGroup-button ._coral-Button:hover {
-  color: rgb(239, 239, 239);
-  background-color: rgb(8, 8, 8);
-  border-color: rgb(73, 73, 73);
-  box-shadow: none;
-}
-.coral--darkest .coral-InputGroup-button ._coral-Button:active {
-  color: rgb(239, 239, 239);
-  background-color: rgb(44, 44, 44);
-  border-color: rgb(73, 73, 73);
-  box-shadow: none;
-}
-
-/**
- * Copyright 2019 Adobe. All rights reserved.
- * This file is licensed to you under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License. You may obtain a copy
- * of the License at http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under
- * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
- * OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
- */
-.coral-Link {
-  background-color: transparent;
-  -webkit-text-decoration-skip: objects;
-  text-decoration: none;
-  transition: color 130ms ease-in-out;
-  outline: none;
-}
-.coral-Link:hover {
-    text-decoration: underline;
-  }
-.coral-Link.focus-ring {
-    text-decoration: underline;
-    -webkit-text-decoration-style: double;
-            text-decoration-style: double;
-  }
-.coral-Link.is-disabled {
-    cursor: default;
-    pointer-events: none;
-  }
-.coral-Link.is-disabled:hover,
-    .coral-Link.is-disabled:focus {
-      text-decoration: none;
-    }
-.coral-Link--subtle,
-.coral-Link--quiet,.coral-Link--overBackground {
-  text-decoration: underline;
-}
-
-.coral--large .coral-Link {
-  transition: color 130ms ease-in-out;
-}
-
-.coral--light .coral-Link {
-  color: rgb(13, 102, 208);
-}
-.coral--light .coral-Link:hover {
-    color: rgb(13, 102, 208);
-  }
-.coral--light .coral-Link:active {
-    color: rgb(9, 90, 186);
-  }
-.coral--light .coral-Link.focus-ring {
-    color: rgb(13, 102, 208);
-  }
-.coral--light .coral-Link.is-disabled {
-    color: rgb(179, 179, 179);
-  }
-.coral--light .coral-Link--quiet,
-.coral--light .coral-Link--subtle {
-  color: inherit;
-}
-.coral--light .coral-Link--quiet:hover,
-.coral--light .coral-Link--subtle:hover {
-    color: inherit;
-  }
-.coral--light .coral-Link--quiet:active,
-.coral--light .coral-Link--subtle:active {
-    color: inherit;
-  }
-.coral--light .coral-Link--quiet:focus,
-.coral--light .coral-Link--subtle:focus {
-    color: inherit;
-  }
-.coral--light .coral-Link--overBackground {
-  color: rgb(255, 255, 255);
-}
-.coral--light .coral-Link--overBackground:hover {
-    color: rgb(255, 255, 255);
-  }
-.coral--light .coral-Link--overBackground:active {
-    color: rgb(255, 255, 255);
-  }
-.coral--light .coral-Link--overBackground:focus {
-    color: rgb(255, 255, 255);
-  }
-.coral--light .coral-Link--overBackground.is-disabled {
-    color: rgba(255,255,255,0.5);
-  }
-
-.coral--lightest .coral-Link {
-  color: rgb(20, 115, 230);
-}
-.coral--lightest .coral-Link:hover {
-    color: rgb(20, 115, 230);
-  }
-.coral--lightest .coral-Link:active {
-    color: rgb(13, 102, 208);
-  }
-.coral--lightest .coral-Link.focus-ring {
-    color: rgb(20, 115, 230);
-  }
-.coral--lightest .coral-Link.is-disabled {
-    color: rgb(188, 188, 188);
-  }
-.coral--lightest .coral-Link--quiet,
-.coral--lightest .coral-Link--subtle {
-  color: inherit;
-}
-.coral--lightest .coral-Link--quiet:hover,
-.coral--lightest .coral-Link--subtle:hover {
-    color: inherit;
-  }
-.coral--lightest .coral-Link--quiet:active,
-.coral--lightest .coral-Link--subtle:active {
-    color: inherit;
-  }
-.coral--lightest .coral-Link--quiet:focus,
-.coral--lightest .coral-Link--subtle:focus {
-    color: inherit;
-  }
-.coral--lightest .coral-Link--overBackground {
-  color: rgb(255, 255, 255);
-}
-.coral--lightest .coral-Link--overBackground:hover {
-    color: rgb(255, 255, 255);
-  }
-.coral--lightest .coral-Link--overBackground:active {
-    color: rgb(255, 255, 255);
-  }
-.coral--lightest .coral-Link--overBackground:focus {
-    color: rgb(255, 255, 255);
-  }
-.coral--lightest .coral-Link--overBackground.is-disabled {
-    color: rgba(255,255,255,0.5);
-  }
-
-.coral--dark .coral-Link {
-  color: rgb(75, 156, 245);
-}
-.coral--dark .coral-Link:hover {
-    color: rgb(75, 156, 245);
-  }
-.coral--dark .coral-Link:active {
-    color: rgb(90, 169, 250);
-  }
-.coral--dark .coral-Link.focus-ring {
-    color: rgb(75, 156, 245);
-  }
-.coral--dark .coral-Link.is-disabled {
-    color: rgb(110, 110, 110);
-  }
-.coral--dark .coral-Link--quiet,
-.coral--dark .coral-Link--subtle {
-  color: inherit;
-}
-.coral--dark .coral-Link--quiet:hover,
-.coral--dark .coral-Link--subtle:hover {
-    color: inherit;
-  }
-.coral--dark .coral-Link--quiet:active,
-.coral--dark .coral-Link--subtle:active {
-    color: inherit;
-  }
-.coral--dark .coral-Link--quiet:focus,
-.coral--dark .coral-Link--subtle:focus {
-    color: inherit;
-  }
-.coral--dark .coral-Link--overBackground {
-  color: rgb(255, 255, 255);
-}
-.coral--dark .coral-Link--overBackground:hover {
-    color: rgb(255, 255, 255);
-  }
-.coral--dark .coral-Link--overBackground:active {
-    color: rgb(255, 255, 255);
-  }
-.coral--dark .coral-Link--overBackground:focus {
-    color: rgb(255, 255, 255);
-  }
-.coral--dark .coral-Link--overBackground.is-disabled {
-    color: rgba(255,255,255,0.5);
-  }
-
-.coral--darkest .coral-Link {
-  color: rgb(55, 142, 240);
-}
-.coral--darkest .coral-Link:hover {
-    color: rgb(55, 142, 240);
-  }
-.coral--darkest .coral-Link:active {
-    color: rgb(75, 156, 245);
-  }
-.coral--darkest .coral-Link.focus-ring {
-    color: rgb(55, 142, 240);
-  }
-.coral--darkest .coral-Link.is-disabled {
-    color: rgb(92, 92, 92);
-  }
-.coral--darkest .coral-Link--quiet,
-.coral--darkest .coral-Link--subtle {
-  color: inherit;
-}
-.coral--darkest .coral-Link--quiet:hover,
-.coral--darkest .coral-Link--subtle:hover {
-    color: inherit;
-  }
-.coral--darkest .coral-Link--quiet:active,
-.coral--darkest .coral-Link--subtle:active {
-    color: inherit;
-  }
-.coral--darkest .coral-Link--quiet:focus,
-.coral--darkest .coral-Link--subtle:focus {
-    color: inherit;
-  }
-.coral--darkest .coral-Link--overBackground {
-  color: rgb(255, 255, 255);
-}
-.coral--darkest .coral-Link--overBackground:hover {
-    color: rgb(255, 255, 255);
-  }
-.coral--darkest .coral-Link--overBackground:active {
-    color: rgb(255, 255, 255);
-  }
-.coral--darkest .coral-Link--overBackground:focus {
-    color: rgb(255, 255, 255);
-  }
-.coral--darkest .coral-Link--overBackground.is-disabled {
-    color: rgba(255,255,255,0.5);
-  }
-
-
-/**
- * Copyright 2019 Adobe. All rights reserved.
- * This file is licensed to you under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License. You may obtain a copy
- * of the License at http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under
- * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
- * OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
- */
-.coral-Well {
-  display: block;
-  min-width: 240px;
-  padding: 16px;
-  margin-top: 4px;
-  border-width: 1px;
-  border-style: solid;
-  border-radius: 4px;
-}
-
-.coral--large .coral-Well {
-  min-width: 300px;
-  padding: 20px;
-  margin-top: 5px;
-  border-width: 1px;
-  border-radius: 5px;
-}
-
-.coral--light .coral-Well {
-  background-color: rgba(75,75,75,0.02);
-  border-color: rgba(44,44,44,0.05);
-}
-
-.coral--lightest .coral-Well {
-  background-color: rgba(80,80,80,0.02);
-  border-color: rgba(50,50,50,0.05);
-}
-
-.coral--dark .coral-Well {
-  background-color: rgba(227,227,227,0.02);
-  border-color: rgba(255,255,255,0.05);
-}
-
-.coral--darkest .coral-Well {
-  background-color: rgba(200,200,200,0.02);
-  border-color: rgba(239,239,239,0.05);
-}
-
-
-/**
- * Copyright 2019 Adobe. All rights reserved.
- * This file is licensed to you under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License. You may obtain a copy
- * of the License at http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under
- * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
- * OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
- */
 ._coral-Accordion {
   display: block;
   list-style: none;
@@ -19993,37 +19993,6 @@ coral-card-info > coral-alert {
       animation-delay: -990ms;
     }
 
-.coral--large {
-@keyframes pulse {
-  0% {
-    -webkit-transform: scale(1);
-    opacity: 0;
-  }
-  50% {
-    -webkit-transform: scale(1.5);
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: scale(2);
-    opacity: 0;
-  }
-}
-@keyframes pulse--quiet {
-  0% {
-    -webkit-transform: scale(0.8);
-    opacity: 0;
-  }
-  50% {
-    -webkit-transform: scale(1.5);
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: scale(2);
-    opacity: 0;
-  }
-}
-
-}
 .coral--large ._coral-CoachMarkPopover {
 
   min-width: 340px;
@@ -23043,14 +23012,6 @@ coral-panel-content,._coral-PanelStack,._coral-Panel {
   }
 }
 
-.coral--large {
-@keyframes indeterminate-loop {
-  100% {
-    transform: translate(452px);
-  }
-}
-
-}
 .coral--large ._coral-BarLoader {
   width: 240px;
 }
@@ -23627,7 +23588,13 @@ coral-shell-homeanchor-label {
 }
 @media (max-width: 766px) {
   coral-shell-homeanchor-label {
-    display: none;
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+    overflow: hidden;
+    width: 1px !important;
+    height: 1px !important;
+    margin: 0 -1px -1px 0 !important;
+    padding: 0 !important;
   }
 }
 ._coral-Shell-help {
@@ -23736,9 +23703,9 @@ coral-shell-menu {
   border-radius: 24px;
 }
 ._coral-Shell-menu--full {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+  display: block;
+  visibility: visible;
+  opacity: 1;
   border: none !important;
   top: 48px !important;
   left: 0 !important;
@@ -23881,13 +23848,28 @@ coral-shell-orgswitcher-footer ._coral-Button + ._coral-Button {
   height: 48px;
   align-items: center;
   padding: 16px 0;
+  position: relative;
   text-decoration: none;
   color: #858585;
   font-size: 16px;
   width: 100%;
 }
+._coral-Shell-solution:before {
+  content: '';
+}
 ._coral-Shell-solution:focus {
   outline: none;
+  color: #fff;
+}
+._coral-Shell-solution:focus.focus-ring:before {
+  position: absolute;
+  top: 8px;
+  left: -8px;
+  bottom: 8px;
+  right: 8px;
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px #2680eb;
+  border: 1px solid #2680eb;
 }
 ._coral-Shell-solution:not([icon]) ._coral-Shell-solution-icon {
   display: none;
@@ -23898,7 +23880,8 @@ coral-shell-orgswitcher-footer ._coral-Button + ._coral-Button {
 ._coral-Shell-solution--linked {
   color: rgba(226,226,226,0.8);
 }
-._coral-Shell-solution--linked:hover ._coral-Shell-solution-icon {
+._coral-Shell-solution--linked:hover ._coral-Shell-solution-icon,
+._coral-Shell-solution--linked:focus ._coral-Shell-solution-icon {
   transform: scale(1.1);
 }
 ._coral-Shell-solution--linked ._coral-Shell-solution-icon:before {

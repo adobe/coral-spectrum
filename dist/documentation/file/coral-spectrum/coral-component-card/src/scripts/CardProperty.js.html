@@ -431,6 +431,7 @@
  */
 
 import {BaseComponent} from &apos;../../../coral-base-component&apos;;
+import {commons} from &apos;../../../coral-utils&apos;;
 import &apos;../../../coral-component-icon&apos;;
 import icon from &apos;../templates/icon&apos;;
 
@@ -496,11 +497,46 @@ class CardProperty extends BaseComponent(HTMLElement) {
       this.insertBefore(this._elements.icon, this.firstChild);
     }
   }
+
+  /**
+   Specifies the alternative text to be used for the icon.
+   
+   @type {String}
+   @default &quot;&quot;
+   @htmlattribute iconalt
+   */
+  get iconAlt() {
+    return this._elements.icon ? this._elements.icon.getAttribute(&apos;alt&apos;) : undefined;
+  }
+  set iconAlt(value) {
+    this._elements.icon &amp;&amp; this._elements.icon.setAttribute(&apos;alt&apos;, value);
+  }
+
+  /**
+   Specifies the title attribute to be used for the icon.
+   
+   @type {String}
+   @default &quot;&quot;
+   @htmlattribute icontitle
+   */
+  get iconTitle() {
+    return this._elements.icon ? this._elements.icon.getAttribute(&apos;title&apos;) : undefined;
+  }
+  set iconTitle(value) {
+    this._elements.icon &amp;&amp; this._elements.icon.setAttribute(&apos;title&apos;, value);
+  }
   
   get _contentZones() { return {&apos;coral-card-property-content&apos;: &apos;content&apos;}; }
+
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      iconalt: &apos;iconAlt&apos;,
+      icontitle: &apos;iconTitle&apos;,
+    });
+  }
   
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat([&apos;icon&apos;]); }
+  static get observedAttributes() { return super.observedAttributes.concat([&apos;icon&apos;, &apos;iconalt&apos;, &apos;icontitle&apos;]); }
   
   /** @ignore */
   render() {

@@ -12960,7 +12960,28 @@
    @ignore
    */
 
-  var SPLIT_CAMELCASE_REGEX = /([a-z0-9])([A-Z])/g;
+  var SPLIT_CAMELCASE_REGEX = /([a-z])([A-Z0-9])/g;
+  /**
+   Regex used to match the sized spectrum icon prefix
+   
+   @ignore
+   */
+
+  var SPECTRUM_ICONS_IDENTIFIER_REGEX = /^spectrum(?:-css)?-icon(?:-\d{1,3})?-/gi;
+  /**
+   Regex used match the variant postfix for an icon
+   
+   @ignore
+   */
+
+  var ICONS_VARIANT_POSTFIX_REGEX = /(Outline)?(Filled)?(Small|Medium|Large)?(Color)?_?(Active|Dark|Light)?$/;
+  /**
+   Translation hint used for localizing default alt text for an icon
+   
+   @ignore
+   */
+
+  var ICON_ALT_TRANSLATION_HINT = 'default icon alt text';
   /**
    Returns capitalized string. This is used to map the icons with their SVG counterpart.
    
@@ -13065,7 +13086,7 @@
      Whether aria-label is set automatically. See {@link IconAutoAriaLabelEnum}.
      
      @type {String}
-     @default IconAutoAriaLabelEnum.ON
+     @default IconAutoAriaLabelEnum.OFF
      */
 
 
@@ -13147,15 +13168,19 @@
       key: "_updateAltText",
       value: function _updateAltText(value) {
         var hasAutoAriaLabel = this.autoAriaLabel === autoAriaLabel.ON;
-        var isImage = this.contains(this._elements.image);
-        var altText;
+        var img = this._elements.image;
+        var isImage = this.contains(img); // alt should be prioritized over title   
+
+        var altText = typeof this.alt === 'string' ? this.alt : this.title;
 
         if (typeof value === 'string') {
-          altText = value;
+          altText = this.alt || value;
         } else if (isImage) {
-          altText = this.getAttribute('alt') || '';
-        } else {
-          altText = this.icon.replace(SPLIT_CAMELCASE_REGEX, '$1 $2');
+          altText = altText || img.getAttribute('alt') || img.getAttribute('title') || '';
+        } else if (hasAutoAriaLabel) {
+          var iconName = this.icon.replace(SPECTRUM_ICONS_IDENTIFIER_REGEX, '');
+          iconName = iconName.replace(ICONS_VARIANT_POSTFIX_REGEX, '');
+          altText = i18n.get(iconName.replace(SPLIT_CAMELCASE_REGEX, '$1 $2').toLowerCase(), ICON_ALT_TRANSLATION_HINT);
         } // If no other role has been set, provide the appropriate
         // role depending on whether or not the icon is an arbitrary image URL.
 
@@ -13170,16 +13195,15 @@
 
         if (isImage) {
           hasAutoAriaLabel && this.removeAttribute('aria-label');
-
-          this._elements.image.setAttribute('alt', altText);
+          img.setAttribute('alt', altText);
         } else if (altText === '') {
-          hasAutoAriaLabel && this.removeAttribute('aria-label');
+          this.removeAttribute('aria-label');
 
           if (!roleOverride) {
             this.removeAttribute('role');
           }
-        } else {
-          hasAutoAriaLabel && this.setAttribute('aria-label', altText);
+        } else if (altText) {
+          this.setAttribute('aria-label', altText);
         }
       }
       /**
@@ -13236,11 +13260,13 @@
     }, {
       key: "autoAriaLabel",
       get: function get() {
-        return this._autoAriaLabel || autoAriaLabel.ON;
+        return this._autoAriaLabel || autoAriaLabel.OFF;
       },
       set: function set(value) {
         value = transform.string(value).toLowerCase();
-        this._autoAriaLabel = validate.enumeration(autoAriaLabel)(value) && value || autoAriaLabel.ON;
+        this._autoAriaLabel = validate.enumeration(autoAriaLabel)(value) && value || autoAriaLabel.OFF;
+
+        this._updateAltText();
       }
       /**
        Icon name.
@@ -13485,6 +13511,973 @@
   });
 
   /**
+   * Copyright 2020 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+  var translations = {
+    "en-US": {
+      "123/[translation hint:default icon alt text]": "123",
+      "alert/[translation hint:default icon alt text]": "Alert",
+      "arrow down/[translation hint:default icon alt text]": "Arrow Down",
+      "arrow left/[translation hint:default icon alt text]": "Arrow Left",
+      "arrow up/[translation hint:default icon alt text]": "Arrow Up",
+      "asterisk/[translation hint:default icon alt text]": "Asterisk",
+      "checkmark/[translation hint:default icon alt text]": "Checkmark",
+      "chevron down/[translation hint:default icon alt text]": "Expand",
+      "chevron left/[translation hint:default icon alt text]": "Back",
+      "chevron right/[translation hint:default icon alt text]": "Expand",
+      "chevron up/[translation hint:default icon alt text]": "Collapse",
+      "corner triangle/[translation hint:default icon alt text]": "Expand",
+      "cross/[translation hint:default icon alt text]": "Close",
+      "dash/[translation hint:default icon alt text]": "Dash",
+      "double gripper/[translation hint:default icon alt text]": "Double Gripper",
+      "help/[translation hint:default icon alt text]": "Help",
+      "info/[translation hint:default icon alt text]": "Info",
+      "magnifier/[translation hint:default icon alt text]": "Magnifier",
+      "skip left/[translation hint:default icon alt text]": "Skip Left",
+      "skip right/[translation hint:default icon alt text]": "Skip Right",
+      "star/[translation hint:default icon alt text]": "Star",
+      "success/[translation hint:default icon alt text]": "Success",
+      "triple gripper/[translation hint:default icon alt text]": "Triple Gripper",
+      "3dmaterials/[translation hint:default icon alt text]": "3DMaterials",
+      "abc/[translation hint:default icon alt text]": "ABC",
+      "actions/[translation hint:default icon alt text]": "Actions",
+      "ad display/[translation hint:default icon alt text]": "Ad Display",
+      "ad print/[translation hint:default icon alt text]": "Ad Print",
+      "add/[translation hint:default icon alt text]": "Add",
+      "add circle/[translation hint:default icon alt text]": "Add",
+      "add to/[translation hint:default icon alt text]": "Add To",
+      "add to selection/[translation hint:default icon alt text]": "Add To Selection",
+      "adobe advertising cloud/[translation hint:default icon alt text]": "Adobe Advertising Cloud",
+      "adobe analytics/[translation hint:default icon alt text]": "Adobe Analytics",
+      "adobe analytics cloud/[translation hint:default icon alt text]": "Adobe Analytics Cloud",
+      "adobe audience manager/[translation hint:default icon alt text]": "Adobe Audience Manager",
+      "adobe campaign/[translation hint:default icon alt text]": "Adobe Campaign",
+      "adobe connect/[translation hint:default icon alt text]": "Adobe Connect",
+      "adobe document cloud/[translation hint:default icon alt text]": "Adobe Document Cloud",
+      "adobe experience cloud/[translation hint:default icon alt text]": "Adobe Experience Cloud",
+      "adobe experience manager/[translation hint:default icon alt text]": "Adobe Experience Manager",
+      "adobe logo/[translation hint:default icon alt text]": "Adobe Logo",
+      "adobe marketing cloud/[translation hint:default icon alt text]": "Adobe Marketing Cloud",
+      "adobe media optimizer/[translation hint:default icon alt text]": "Adobe Media Optimizer",
+      "adobe primetime/[translation hint:default icon alt text]": "Adobe Primetime",
+      "adobe send now/[translation hint:default icon alt text]": "Adobe Send Now",
+      "adobe sign/[translation hint:default icon alt text]": "Adobe Sign",
+      "adobe social/[translation hint:default icon alt text]": "Adobe Social",
+      "adobe target/[translation hint:default icon alt text]": "Adobe Target",
+      "after effects/[translation hint:default icon alt text]": "After Effects",
+      "alert add/[translation hint:default icon alt text]": "Alert Add",
+      "alert check/[translation hint:default icon alt text]": "Alert Check",
+      "alert circle/[translation hint:default icon alt text]": "Alert",
+      "alias/[translation hint:default icon alt text]": "Alias",
+      "align bottom/[translation hint:default icon alt text]": "Align Bottom",
+      "align center/[translation hint:default icon alt text]": "Align Center",
+      "align left/[translation hint:default icon alt text]": "Align Left",
+      "align middle/[translation hint:default icon alt text]": "Align Middle",
+      "align right/[translation hint:default icon alt text]": "Align Right",
+      "align top/[translation hint:default icon alt text]": "Align Top",
+      "amazon web services/[translation hint:default icon alt text]": "Amazon Web Services",
+      "anchor/[translation hint:default icon alt text]": "Anchor",
+      "anchor select/[translation hint:default icon alt text]": "Anchor Select",
+      "android/[translation hint:default icon alt text]": "Android",
+      "annotate/[translation hint:default icon alt text]": "Annotate",
+      "annotate pen/[translation hint:default icon alt text]": "Annotate Pen",
+      "answer/[translation hint:default icon alt text]": "Answer",
+      "answer favorite/[translation hint:default icon alt text]": "Answer Favorite",
+      "app/[translation hint:default icon alt text]": "App",
+      "app refresh/[translation hint:default icon alt text]": "App Refresh",
+      "apple/[translation hint:default icon alt text]": "Apple",
+      "apple files/[translation hint:default icon alt text]": "Apple Files",
+      "approve reject/[translation hint:default icon alt text]": "Approve Reject",
+      "apps/[translation hint:default icon alt text]": "Apps",
+      "archive/[translation hint:default icon alt text]": "Archive",
+      "archive remove/[translation hint:default icon alt text]": "Archive Remove",
+      "arrow right/[translation hint:default icon alt text]": "Arrow Right",
+      "arrow up right/[translation hint:default icon alt text]": "Arrow Up Right",
+      "artboard/[translation hint:default icon alt text]": "Artboard",
+      "article/[translation hint:default icon alt text]": "Article",
+      "asset/[translation hint:default icon alt text]": "Asset",
+      "asset check/[translation hint:default icon alt text]": "Asset Check",
+      "assets added/[translation hint:default icon alt text]": "Assets Added",
+      "assets downloaded/[translation hint:default icon alt text]": "Assets Downloaded",
+      "assets expired/[translation hint:default icon alt text]": "Assets Expired",
+      "assets linked published/[translation hint:default icon alt text]": "Assets Linked Published",
+      "assets modified/[translation hint:default icon alt text]": "Assets Modified",
+      "assets published/[translation hint:default icon alt text]": "Assets Published",
+      "at/[translation hint:default icon alt text]": "At",
+      "attach/[translation hint:default icon alt text]": "Attach",
+      "attachment exclude/[translation hint:default icon alt text]": "Attachment Exclude",
+      "attributes/[translation hint:default icon alt text]": "Attributes",
+      "audio/[translation hint:default icon alt text]": "Audio",
+      "automated segment/[translation hint:default icon alt text]": "Automated Segment",
+      "back/[translation hint:default icon alt text]": "Back",
+      "back 30seconds/[translation hint:default icon alt text]": "Back 30Seconds",
+      "back android/[translation hint:default icon alt text]": "Back Android",
+      "beaker/[translation hint:default icon alt text]": "Beaker",
+      "beaker check/[translation hint:default icon alt text]": "Beaker Check",
+      "beaker share/[translation hint:default icon alt text]": "Beaker Share",
+      "behance/[translation hint:default icon alt text]": "Behance",
+      "bell/[translation hint:default icon alt text]": "Bell",
+      "bid rule/[translation hint:default icon alt text]": "Bid Rule",
+      "bid rule add/[translation hint:default icon alt text]": "Bid Rule Add",
+      "bitly/[translation hint:default icon alt text]": "Bitly",
+      "blackberry/[translation hint:default icon alt text]": "Blackberry",
+      "blog/[translation hint:default icon alt text]": "Blog",
+      "blower/[translation hint:default icon alt text]": "Blower",
+      "blur/[translation hint:default icon alt text]": "Blur",
+      "book/[translation hint:default icon alt text]": "Book",
+      "bookmark/[translation hint:default icon alt text]": "Bookmark",
+      "boolean/[translation hint:default icon alt text]": "Boolean",
+      "border/[translation hint:default icon alt text]": "Border",
+      "box/[translation hint:default icon alt text]": "Box",
+      "box add/[translation hint:default icon alt text]": "Box Add",
+      "box export/[translation hint:default icon alt text]": "Box Export",
+      "box import/[translation hint:default icon alt text]": "Box Import",
+      "brackets/[translation hint:default icon alt text]": "Brackets",
+      "brackets square/[translation hint:default icon alt text]": "Brackets Square",
+      "branch 1/[translation hint:default icon alt text]": "Branch 1",
+      "branch 2/[translation hint:default icon alt text]": "Branch 2",
+      "branch 3/[translation hint:default icon alt text]": "Branch 3",
+      "branch circle/[translation hint:default icon alt text]": "Branch",
+      "breadcrumb navigation/[translation hint:default icon alt text]": "Breadcrumb Navigation",
+      "breakdown/[translation hint:default icon alt text]": "Breakdown",
+      "breakdown add/[translation hint:default icon alt text]": "Breakdown Add",
+      "briefcase/[translation hint:default icon alt text]": "Briefcase",
+      "browse/[translation hint:default icon alt text]": "Browse",
+      "brush/[translation hint:default icon alt text]": "Brush",
+      "bug/[translation hint:default icon alt text]": "Bug",
+      "building/[translation hint:default icon alt text]": "Building",
+      "bulk edit users/[translation hint:default icon alt text]": "Bulk Edit Users",
+      "button/[translation hint:default icon alt text]": "Button",
+      "cclibrary/[translation hint:default icon alt text]": "CC Library",
+      "calculator/[translation hint:default icon alt text]": "Calculator",
+      "calendar/[translation hint:default icon alt text]": "Calendar",
+      "calendar add/[translation hint:default icon alt text]": "Calendar Add",
+      "calendar locked/[translation hint:default icon alt text]": "Calendar Locked",
+      "calendar unlocked/[translation hint:default icon alt text]": "Calendar Unlocked",
+      "call center/[translation hint:default icon alt text]": "Call Center",
+      "camera/[translation hint:default icon alt text]": "Camera",
+      "camera flip/[translation hint:default icon alt text]": "Camera Flip",
+      "camera refresh/[translation hint:default icon alt text]": "Camera Refresh",
+      "campaign/[translation hint:default icon alt text]": "Campaign",
+      "campaign add/[translation hint:default icon alt text]": "Campaign Add",
+      "campaign close/[translation hint:default icon alt text]": "Campaign Close",
+      "campaign delete/[translation hint:default icon alt text]": "Campaign Delete",
+      "campaign edit/[translation hint:default icon alt text]": "Campaign Edit",
+      "cancel/[translation hint:default icon alt text]": "Cancel",
+      "capitals/[translation hint:default icon alt text]": "Capitals",
+      "captcha/[translation hint:default icon alt text]": "Captcha",
+      "card/[translation hint:default icon alt text]": "Card",
+      "channel/[translation hint:default icon alt text]": "Channel",
+      "chat/[translation hint:default icon alt text]": "Chat",
+      "chat add/[translation hint:default icon alt text]": "Chat Add",
+      "check pause/[translation hint:default icon alt text]": "Check Pause",
+      "checkmark circle/[translation hint:default icon alt text]": "Checkmark",
+      "chevron double left/[translation hint:default icon alt text]": "Back",
+      "chevron double right/[translation hint:default icon alt text]": "Forward",
+      "chevron up down/[translation hint:default icon alt text]": "Sortable",
+      "chrome/[translation hint:default icon alt text]": "Chrome",
+      "circle/[translation hint:default icon alt text]": "Circle",
+      "classic grid view/[translation hint:default icon alt text]": "Classic Grid View",
+      "clock/[translation hint:default icon alt text]": "Clock",
+      "clock check/[translation hint:default icon alt text]": "Clock Check",
+      "clone stamp/[translation hint:default icon alt text]": "Clone Stamp",
+      "close/[translation hint:default icon alt text]": "Close",
+      "close captions/[translation hint:default icon alt text]": "Close Captions",
+      "close circle/[translation hint:default icon alt text]": "Close",
+      "cloud/[translation hint:default icon alt text]": "Cloud",
+      "cloud disconnected/[translation hint:default icon alt text]": "Cloud Disconnected",
+      "cloud error/[translation hint:default icon alt text]": "Cloud Error",
+      "code/[translation hint:default icon alt text]": "Code",
+      "collection/[translation hint:default icon alt text]": "Collection",
+      "collection add/[translation hint:default icon alt text]": "Collection Add",
+      "collection add to/[translation hint:default icon alt text]": "Collection Add To",
+      "collection check/[translation hint:default icon alt text]": "Collection Check",
+      "collection edit/[translation hint:default icon alt text]": "Collection Edit",
+      "collection exclude/[translation hint:default icon alt text]": "Collection Exclude",
+      "collection link/[translation hint:default icon alt text]": "Collection Link",
+      "color fill/[translation hint:default icon alt text]": "Color Fill",
+      "color palette/[translation hint:default icon alt text]": "Color Palette",
+      "color wheel/[translation hint:default icon alt text]": "Color Wheel",
+      "column settings/[translation hint:default icon alt text]": "Column Settings",
+      "column two a/[translation hint:default icon alt text]": "Column Two A",
+      "column two b/[translation hint:default icon alt text]": "Column Two B",
+      "column two c/[translation hint:default icon alt text]": "Column Two C",
+      "comment/[translation hint:default icon alt text]": "Comment",
+      "compare/[translation hint:default icon alt text]": "Compare",
+      "compass/[translation hint:default icon alt text]": "Compass",
+      "condition/[translation hint:default icon alt text]": "Condition",
+      "confidence four/[translation hint:default icon alt text]": "Confidence Four",
+      "confidence one/[translation hint:default icon alt text]": "Confidence One",
+      "confidence three/[translation hint:default icon alt text]": "Confidence Three",
+      "confidence two/[translation hint:default icon alt text]": "Confidence Two",
+      "contrast/[translation hint:default icon alt text]": "Contrast",
+      "conversion funnel/[translation hint:default icon alt text]": "Conversion Funnel",
+      "copy/[translation hint:default icon alt text]": "Copy",
+      "cover image/[translation hint:default icon alt text]": "Cover Image",
+      "creative cloud/[translation hint:default icon alt text]": "Creative Cloud",
+      "credit card/[translation hint:default icon alt text]": "Credit Card",
+      "crop/[translation hint:default icon alt text]": "Crop",
+      "crop lightning/[translation hint:default icon alt text]": "Crop Lightning",
+      "crop rotate/[translation hint:default icon alt text]": "Crop Rotate",
+      "crosshairs/[translation hint:default icon alt text]": "Crosshairs",
+      "curate/[translation hint:default icon alt text]": "Curate",
+      "cut/[translation hint:default icon alt text]": "Cut",
+      "dps/[translation hint:default icon alt text]": "DPS",
+      "dashboard/[translation hint:default icon alt text]": "Dashboard",
+      "data/[translation hint:default icon alt text]": "Data",
+      "data add/[translation hint:default icon alt text]": "Data Add",
+      "data adobe/[translation hint:default icon alt text]": "Data Adobe",
+      "data book/[translation hint:default icon alt text]": "Data Book",
+      "data check/[translation hint:default icon alt text]": "Data Check",
+      "data correlated/[translation hint:default icon alt text]": "Data Correlated",
+      "data download/[translation hint:default icon alt text]": "Data Download",
+      "data edit/[translation hint:default icon alt text]": "Data Edit",
+      "data mapping/[translation hint:default icon alt text]": "Data Mapping",
+      "data refresh/[translation hint:default icon alt text]": "Data Refresh",
+      "data remove/[translation hint:default icon alt text]": "Data Remove",
+      "data settings/[translation hint:default icon alt text]": "Data Settings",
+      "data unavailable/[translation hint:default icon alt text]": "Data Unavailable",
+      "data upload/[translation hint:default icon alt text]": "Data Upload",
+      "data user/[translation hint:default icon alt text]": "Data User",
+      "date/[translation hint:default icon alt text]": "Date",
+      "date input/[translation hint:default icon alt text]": "Date Input",
+      "deduplication/[translation hint:default icon alt text]": "Deduplication",
+      "delegate/[translation hint:default icon alt text]": "Delegate",
+      "delete/[translation hint:default icon alt text]": "Delete",
+      "delivery fusion/[translation hint:default icon alt text]": "Delivery Fusion",
+      "demographic/[translation hint:default icon alt text]": "Demographic",
+      "deselect/[translation hint:default icon alt text]": "Deselect",
+      "deselect circular/[translation hint:default icon alt text]": "Deselect Circular",
+      "desktop and mobile/[translation hint:default icon alt text]": "Desktop And Mobile",
+      "device desktop/[translation hint:default icon alt text]": "Device Desktop",
+      "device laptop/[translation hint:default icon alt text]": "Device Laptop",
+      "device phone/[translation hint:default icon alt text]": "Device Phone",
+      "device phone refresh/[translation hint:default icon alt text]": "Device Phone Refresh",
+      "device preview/[translation hint:default icon alt text]": "Device Preview",
+      "device rotate landscape/[translation hint:default icon alt text]": "Device Rotate Landscape",
+      "device rotate portrait/[translation hint:default icon alt text]": "Device Rotate Portrait",
+      "device tv/[translation hint:default icon alt text]": "Device TV",
+      "device tablet/[translation hint:default icon alt text]": "Device Tablet",
+      "devices/[translation hint:default icon alt text]": "Devices",
+      "dimension/[translation hint:default icon alt text]": "Dimension",
+      "disqus/[translation hint:default icon alt text]": "Disqus",
+      "distribute bottom edge/[translation hint:default icon alt text]": "Distribute Bottom Edge",
+      "distribute horizontal center/[translation hint:default icon alt text]": "Distribute Horizontal Center",
+      "distribute horizontally/[translation hint:default icon alt text]": "Distribute Horizontally",
+      "distribute left edge/[translation hint:default icon alt text]": "Distribute Left Edge",
+      "distribute right edge/[translation hint:default icon alt text]": "Distribute Right Edge",
+      "distribute space horiz/[translation hint:default icon alt text]": "Distribute Space Horizontally",
+      "distribute space vert/[translation hint:default icon alt text]": "Distribute Space Vertically",
+      "distribute top edge/[translation hint:default icon alt text]": "Distribute Top Edge",
+      "distribute vertical center/[translation hint:default icon alt text]": "Distribute Vertical Center",
+      "distribute vertically/[translation hint:default icon alt text]": "Distribute Vertically",
+      "divide/[translation hint:default icon alt text]": "Divide",
+      "divide path/[translation hint:default icon alt text]": "Divide Path",
+      "document/[translation hint:default icon alt text]": "Document",
+      "document fragment/[translation hint:default icon alt text]": "Document Fragment",
+      "document fragment group/[translation hint:default icon alt text]": "Document Fragment Group",
+      "document refresh/[translation hint:default icon alt text]": "Document Refresh",
+      "dolly/[translation hint:default icon alt text]": "Dolly",
+      "download/[translation hint:default icon alt text]": "Download",
+      "download from cloud/[translation hint:default icon alt text]": "Download From Cloud",
+      "draft/[translation hint:default icon alt text]": "Draft",
+      "drag handle/[translation hint:default icon alt text]": "Drag Handle",
+      "draw/[translation hint:default icon alt text]": "Draw",
+      "dropdown/[translation hint:default icon alt text]": "Dropdown",
+      "duplicate/[translation hint:default icon alt text]": "Duplicate",
+      "edit/[translation hint:default icon alt text]": "Edit",
+      "edit circle/[translation hint:default icon alt text]": "Edit",
+      "edit exclude/[translation hint:default icon alt text]": "Edit Exclude",
+      "edit in/[translation hint:default icon alt text]": "Edit In",
+      "education/[translation hint:default icon alt text]": "Education",
+      "effects/[translation hint:default icon alt text]": "Effects",
+      "efficient/[translation hint:default icon alt text]": "Efficient",
+      "ellipse/[translation hint:default icon alt text]": "Ellipse",
+      "email/[translation hint:default icon alt text]": "Email",
+      "email cancel/[translation hint:default icon alt text]": "Email Cancel",
+      "email check/[translation hint:default icon alt text]": "Email Check",
+      "email exclude/[translation hint:default icon alt text]": "Email Exclude",
+      "email gear/[translation hint:default icon alt text]": "Email Gear",
+      "email key/[translation hint:default icon alt text]": "Email Key",
+      "email lightning/[translation hint:default icon alt text]": "Email Lightning",
+      "email notification/[translation hint:default icon alt text]": "Email Notification",
+      "email refresh/[translation hint:default icon alt text]": "Email Refresh",
+      "email schedule/[translation hint:default icon alt text]": "Email Schedule",
+      "engagement/[translation hint:default icon alt text]": "Engagement",
+      "erase/[translation hint:default icon alt text]": "Erase",
+      "event/[translation hint:default icon alt text]": "Event",
+      "event exclude/[translation hint:default icon alt text]": "Event Exclude",
+      "event share/[translation hint:default icon alt text]": "Event Share",
+      "events/[translation hint:default icon alt text]": "Events",
+      "exclude overlap/[translation hint:default icon alt text]": "Exclude Overlap",
+      "experience/[translation hint:default icon alt text]": "Experience",
+      "experience add/[translation hint:default icon alt text]": "Experience Add",
+      "experience add to/[translation hint:default icon alt text]": "Experience Add To",
+      "experience export/[translation hint:default icon alt text]": "Experience Export",
+      "experience import/[translation hint:default icon alt text]": "Experience Import",
+      "export/[translation hint:default icon alt text]": "Export",
+      "export original/[translation hint:default icon alt text]": "Export Original",
+      "exposure/[translation hint:default icon alt text]": "Exposure",
+      "extension/[translation hint:default icon alt text]": "Extension",
+      "facebook/[translation hint:default icon alt text]": "Facebook",
+      "facebook cover image/[translation hint:default icon alt text]": "Facebook Cover Image",
+      "fast/[translation hint:default icon alt text]": "Fast",
+      "fast forward/[translation hint:default icon alt text]": "Fast Forward",
+      "fast forward circle/[translation hint:default icon alt text]": "Fast Forward",
+      "feed/[translation hint:default icon alt text]": "Feed",
+      "feed add/[translation hint:default icon alt text]": "Feed Add",
+      "feed management/[translation hint:default icon alt text]": "Feed Management",
+      "feedback/[translation hint:default icon alt text]": "Feedback",
+      "file add/[translation hint:default icon alt text]": "File Add",
+      "file csv/[translation hint:default icon alt text]": "File CSV",
+      "file campaign/[translation hint:default icon alt text]": "File Campaign",
+      "file chart/[translation hint:default icon alt text]": "File Chart",
+      "file checked out/[translation hint:default icon alt text]": "File Checked Out",
+      "file code/[translation hint:default icon alt text]": "File Code",
+      "file data/[translation hint:default icon alt text]": "File Data",
+      "file email/[translation hint:default icon alt text]": "File Email",
+      "file excel/[translation hint:default icon alt text]": "File Excel",
+      "file folder/[translation hint:default icon alt text]": "File Folder",
+      "file gear/[translation hint:default icon alt text]": "File Gear",
+      "file globe/[translation hint:default icon alt text]": "File Globe",
+      "file html/[translation hint:default icon alt text]": "File HTML",
+      "file important/[translation hint:default icon alt text]": "File Important",
+      "file json/[translation hint:default icon alt text]": "File Json",
+      "file key/[translation hint:default icon alt text]": "File Key",
+      "file mobile/[translation hint:default icon alt text]": "File Mobile",
+      "file pdf/[translation hint:default icon alt text]": "File PDF",
+      "file share/[translation hint:default icon alt text]": "File Share",
+      "file single web page/[translation hint:default icon alt text]": "File Single Web Page",
+      "file space/[translation hint:default icon alt text]": "File Space",
+      "file template/[translation hint:default icon alt text]": "File Template",
+      "file txt/[translation hint:default icon alt text]": "File Txt",
+      "file user/[translation hint:default icon alt text]": "File User",
+      "file word/[translation hint:default icon alt text]": "File Word",
+      "file workflow/[translation hint:default icon alt text]": "File Workflow",
+      "file xml/[translation hint:default icon alt text]": "File XML",
+      "file zip/[translation hint:default icon alt text]": "File Zip",
+      "filing cabinet/[translation hint:default icon alt text]": "Filing Cabinet",
+      "fill sign/[translation hint:default icon alt text]": "Fill Sign",
+      "filmroll/[translation hint:default icon alt text]": "Filmroll",
+      "filmroll auto add/[translation hint:default icon alt text]": "Filmroll Auto Add",
+      "filter/[translation hint:default icon alt text]": "Filter",
+      "filter add/[translation hint:default icon alt text]": "Filter Add",
+      "filter check/[translation hint:default icon alt text]": "Filter Check",
+      "filter delete/[translation hint:default icon alt text]": "Filter Delete",
+      "filter edit/[translation hint:default icon alt text]": "Filter Edit",
+      "filter heart/[translation hint:default icon alt text]": "Filter Heart",
+      "filter remove/[translation hint:default icon alt text]": "Filter Remove",
+      "filter star/[translation hint:default icon alt text]": "Filter Star",
+      "find and replace/[translation hint:default icon alt text]": "Find And Replace",
+      "firefox/[translation hint:default icon alt text]": "Firefox",
+      "flag/[translation hint:default icon alt text]": "Flag",
+      "flag exclude/[translation hint:default icon alt text]": "Flag Exclude",
+      "flash/[translation hint:default icon alt text]": "Flash",
+      "flash auto/[translation hint:default icon alt text]": "Flash Auto",
+      "flash off/[translation hint:default icon alt text]": "Flash Off",
+      "flash on/[translation hint:default icon alt text]": "Flash On",
+      "flashlight off/[translation hint:default icon alt text]": "Flashlight Off",
+      "flashlight on/[translation hint:default icon alt text]": "Flashlight On",
+      "flickr/[translation hint:default icon alt text]": "Flickr",
+      "flip horizontal/[translation hint:default icon alt text]": "Flip Horizontal",
+      "flip vertical/[translation hint:default icon alt text]": "Flip Vertical",
+      "folder/[translation hint:default icon alt text]": "Folder",
+      "folder 2/[translation hint:default icon alt text]": "Folder",
+      "folder add/[translation hint:default icon alt text]": "Folder Add",
+      "folder add to/[translation hint:default icon alt text]": "Folder Add To",
+      "folder adobe/[translation hint:default icon alt text]": "Folder Adobe",
+      "folder archive/[translation hint:default icon alt text]": "Folder Archive",
+      "folder delete/[translation hint:default icon alt text]": "Folder Delete",
+      "folder gear/[translation hint:default icon alt text]": "Folder Gear",
+      "folder locked/[translation hint:default icon alt text]": "Folder Locked",
+      "folder locked adobe/[translation hint:default icon alt text]": "Folder Locked Adobe",
+      "folder open/[translation hint:default icon alt text]": "Folder Open",
+      "folder remove/[translation hint:default icon alt text]": "Folder Remove",
+      "folder search/[translation hint:default icon alt text]": "Folder Search",
+      "folder user/[translation hint:default icon alt text]": "Folder User",
+      "follow/[translation hint:default icon alt text]": "Follow",
+      "follow off/[translation hint:default icon alt text]": "Follow Off",
+      "for placement only/[translation hint:default icon alt text]": "For Placement Only",
+      "forecast/[translation hint:default icon alt text]": "Forecast",
+      "form/[translation hint:default icon alt text]": "Form",
+      "forward/[translation hint:default icon alt text]": "Forward",
+      "full screen/[translation hint:default icon alt text]": "Full Screen",
+      "full screen exit/[translation hint:default icon alt text]": "Full Screen Exit",
+      "function/[translation hint:default icon alt text]": "Function",
+      "game/[translation hint:default icon alt text]": "Game",
+      "gauge 1/[translation hint:default icon alt text]": "Gauge 1",
+      "gauge 2/[translation hint:default icon alt text]": "Gauge 2",
+      "gauge 3/[translation hint:default icon alt text]": "Gauge 3",
+      "gauge 4/[translation hint:default icon alt text]": "Gauge 4",
+      "gauge 5/[translation hint:default icon alt text]": "Gauge 5",
+      "gears/[translation hint:default icon alt text]": "Gears",
+      "gears add/[translation hint:default icon alt text]": "Gears Add",
+      "gears delete/[translation hint:default icon alt text]": "Gears Delete",
+      "gears edit/[translation hint:default icon alt text]": "Gears Edit",
+      "gender female/[translation hint:default icon alt text]": "Gender Female",
+      "gender male/[translation hint:default icon alt text]": "Gender Male",
+      "gift/[translation hint:default icon alt text]": "Gift",
+      "git hub/[translation hint:default icon alt text]": "Git Hub",
+      "globe/[translation hint:default icon alt text]": "Globe",
+      "globe check/[translation hint:default icon alt text]": "Globe Check",
+      "globe clock/[translation hint:default icon alt text]": "Globe Clock",
+      "globe enter/[translation hint:default icon alt text]": "Globe Enter",
+      "globe exit/[translation hint:default icon alt text]": "Globe Exit",
+      "globe grid/[translation hint:default icon alt text]": "Globe Grid",
+      "globe remove/[translation hint:default icon alt text]": "Globe Remove",
+      "globe search/[translation hint:default icon alt text]": "Globe Search",
+      "globe strike/[translation hint:default icon alt text]": "Globe Strike",
+      "globe strike clock/[translation hint:default icon alt text]": "Globe Strike Clock",
+      "google/[translation hint:default icon alt text]": "Google",
+      "google analytics/[translation hint:default icon alt text]": "Google Analytics",
+      "google play store/[translation hint:default icon alt text]": "Google Play Store",
+      "google plus/[translation hint:default icon alt text]": "Google Plus",
+      "google plus 1/[translation hint:default icon alt text]": "Google Plus",
+      "gradient/[translation hint:default icon alt text]": "Gradient",
+      "graph area/[translation hint:default icon alt text]": "Graph Area",
+      "graph area stacked/[translation hint:default icon alt text]": "Graph Area Stacked",
+      "graph bar horizontal/[translation hint:default icon alt text]": "Graph Bar Horizontal",
+      "graph bar horizontal add/[translation hint:default icon alt text]": "Graph Bar Horizontal Add",
+      "graph bar horizontal stacked/[translation hint:default icon alt text]": "Graph Bar Horizontal Stacked",
+      "graph bar vertical/[translation hint:default icon alt text]": "Graph Bar Vertical",
+      "graph bar vertical add/[translation hint:default icon alt text]": "Graph Bar Vertical Add",
+      "graph bar vertical stacked/[translation hint:default icon alt text]": "Graph Bar Vertical Stacked",
+      "graph bubble/[translation hint:default icon alt text]": "Graph Bubble",
+      "graph bullet/[translation hint:default icon alt text]": "Graph Bullet",
+      "graph confidence bands/[translation hint:default icon alt text]": "Graph Confidence Bands",
+      "graph donut/[translation hint:default icon alt text]": "Graph Donut",
+      "graph donut add/[translation hint:default icon alt text]": "Graph Donut Add",
+      "graph gantt/[translation hint:default icon alt text]": "Graph Gantt",
+      "graph histogram/[translation hint:default icon alt text]": "Graph Histogram",
+      "graph pathing/[translation hint:default icon alt text]": "Graph Pathing",
+      "graph pie/[translation hint:default icon alt text]": "Graph Pie",
+      "graph profit curve/[translation hint:default icon alt text]": "Graph Profit Curve",
+      "graph scatter/[translation hint:default icon alt text]": "Graph Scatter",
+      "graph stream/[translation hint:default icon alt text]": "Graph Stream",
+      "graph stream ranked/[translation hint:default icon alt text]": "Graph Stream Ranked",
+      "graph stream ranked add/[translation hint:default icon alt text]": "Graph Stream Ranked Add",
+      "graph sunburst/[translation hint:default icon alt text]": "Graph Sunburst",
+      "graph tree/[translation hint:default icon alt text]": "Graph Tree",
+      "graph trend/[translation hint:default icon alt text]": "Graph Trend",
+      "graph trend add/[translation hint:default icon alt text]": "Graph Trend Add",
+      "graph trend alert/[translation hint:default icon alt text]": "Graph Trend Alert",
+      "graphic/[translation hint:default icon alt text]": "Graphic",
+      "group/[translation hint:default icon alt text]": "Group",
+      "html5/[translation hint:default icon alt text]": "HTML5",
+      "hammer/[translation hint:default icon alt text]": "Hammer",
+      "hand/[translation hint:default icon alt text]": "Hand",
+      "hand 0/[translation hint:default icon alt text]": "Hand 0",
+      "hand 1/[translation hint:default icon alt text]": "Hand 1",
+      "hand 2/[translation hint:default icon alt text]": "Hand 2",
+      "hand 3/[translation hint:default icon alt text]": "Hand 3",
+      "hand 4/[translation hint:default icon alt text]": "Hand 4",
+      "heal/[translation hint:default icon alt text]": "Heal",
+      "heart/[translation hint:default icon alt text]": "Heart",
+      "histogram/[translation hint:default icon alt text]": "Histogram",
+      "history/[translation hint:default icon alt text]": "History",
+      "home/[translation hint:default icon alt text]": "Home",
+      "homepage/[translation hint:default icon alt text]": "Homepage",
+      "illustrator/[translation hint:default icon alt text]": "Illustrator",
+      "image/[translation hint:default icon alt text]": "Image",
+      "image add/[translation hint:default icon alt text]": "Image Add",
+      "image album/[translation hint:default icon alt text]": "Image Album",
+      "image auto mode/[translation hint:default icon alt text]": "Image Auto Mode",
+      "image carousel/[translation hint:default icon alt text]": "Image Carousel",
+      "image check/[translation hint:default icon alt text]": "Image Check",
+      "image checked out/[translation hint:default icon alt text]": "Image Checked Out",
+      "image map circle/[translation hint:default icon alt text]": "Image Map Circle",
+      "image map polygon/[translation hint:default icon alt text]": "Image Map Polygon",
+      "image map rectangle/[translation hint:default icon alt text]": "Image Map Rectangle",
+      "image next/[translation hint:default icon alt text]": "Image Next",
+      "image profile/[translation hint:default icon alt text]": "Image Profile",
+      "image search/[translation hint:default icon alt text]": "Image Search",
+      "image text/[translation hint:default icon alt text]": "Image Text",
+      "images/[translation hint:default icon alt text]": "Images",
+      "import/[translation hint:default icon alt text]": "Import",
+      "in design/[translation hint:default icon alt text]": "In Design",
+      "inbox/[translation hint:default icon alt text]": "Inbox",
+      "individual/[translation hint:default icon alt text]": "Individual",
+      "instagram/[translation hint:default icon alt text]": "Instagram",
+      "internet explorer/[translation hint:default icon alt text]": "Internet Explorer",
+      "intersect overlap/[translation hint:default icon alt text]": "Intersect Overlap",
+      "invert adj/[translation hint:default icon alt text]": "Invert Adj",
+      "journey/[translation hint:default icon alt text]": "Journey",
+      "journey action/[translation hint:default icon alt text]": "Journey Action",
+      "journey data/[translation hint:default icon alt text]": "Journey Data",
+      "journey event/[translation hint:default icon alt text]": "Journey Event",
+      "journey event 2/[translation hint:default icon alt text]": "Journey Event",
+      "journey reports/[translation hint:default icon alt text]": "Journey Reports",
+      "journey voyager/[translation hint:default icon alt text]": "Journey Voyager",
+      "jump to top/[translation hint:default icon alt text]": "Jump To Top",
+      "key/[translation hint:default icon alt text]": "Key",
+      "key clock/[translation hint:default icon alt text]": "Key Clock",
+      "key exclude/[translation hint:default icon alt text]": "Key Exclude",
+      "keyboard/[translation hint:default icon alt text]": "Keyboard",
+      "label/[translation hint:default icon alt text]": "Label",
+      "label exclude/[translation hint:default icon alt text]": "Label Exclude",
+      "labels/[translation hint:default icon alt text]": "Labels",
+      "landscape/[translation hint:default icon alt text]": "Landscape",
+      "launch/[translation hint:default icon alt text]": "Launch",
+      "layers/[translation hint:default icon alt text]": "Layers",
+      "layers backward/[translation hint:default icon alt text]": "Layers Backward",
+      "layers bring to front/[translation hint:default icon alt text]": "Layers Bring To Front",
+      "layers forward/[translation hint:default icon alt text]": "Layers Forward",
+      "layers send to back/[translation hint:default icon alt text]": "Layers Send To Back",
+      "lightroom/[translation hint:default icon alt text]": "Lightroom",
+      "line/[translation hint:default icon alt text]": "Line",
+      "line height/[translation hint:default icon alt text]": "Line Height",
+      "linear gradient/[translation hint:default icon alt text]": "Linear Gradient",
+      "link/[translation hint:default icon alt text]": "Link",
+      "link check/[translation hint:default icon alt text]": "Link Check",
+      "link facebook/[translation hint:default icon alt text]": "Link Facebook",
+      "link globe/[translation hint:default icon alt text]": "Link Globe",
+      "link nav/[translation hint:default icon alt text]": "Link Nav",
+      "link off/[translation hint:default icon alt text]": "Link Off",
+      "link out/[translation hint:default icon alt text]": "Link Out",
+      "link page/[translation hint:default icon alt text]": "Link Page",
+      "link user/[translation hint:default icon alt text]": "Link User",
+      "linked in/[translation hint:default icon alt text]": "Linked In",
+      "linux/[translation hint:default icon alt text]": "Linux",
+      "location/[translation hint:default icon alt text]": "Location",
+      "location based date/[translation hint:default icon alt text]": "Location Based Date",
+      "location based event/[translation hint:default icon alt text]": "Location Based Event",
+      "location contribution/[translation hint:default icon alt text]": "Location Contribution",
+      "lock closed/[translation hint:default icon alt text]": "Lock Closed",
+      "lock open/[translation hint:default icon alt text]": "Lock Open",
+      "log out/[translation hint:default icon alt text]": "Log Out",
+      "login/[translation hint:default icon alt text]": "Login",
+      "looks/[translation hint:default icon alt text]": "Looks",
+      "loupe view/[translation hint:default icon alt text]": "Loupe View",
+      "mbox/[translation hint:default icon alt text]": "MBox",
+      "magento commerce/[translation hint:default icon alt text]": "Magento Commerce",
+      "magic wand/[translation hint:default icon alt text]": "Magic Wand",
+      "magnify/[translation hint:default icon alt text]": "Magnify",
+      "mailbox/[translation hint:default icon alt text]": "Mailbox",
+      "map view/[translation hint:default icon alt text]": "Map View",
+      "margin bottom/[translation hint:default icon alt text]": "Margin Bottom",
+      "margin left/[translation hint:default icon alt text]": "Margin Left",
+      "margin right/[translation hint:default icon alt text]": "Margin Right",
+      "margin top/[translation hint:default icon alt text]": "Margin Top",
+      "marketing activities/[translation hint:default icon alt text]": "Marketing Activities",
+      "maximize/[translation hint:default icon alt text]": "Maximize",
+      "measure/[translation hint:default icon alt text]": "Measure",
+      "menu/[translation hint:default icon alt text]": "Menu",
+      "merge/[translation hint:default icon alt text]": "Merge",
+      "merge layers/[translation hint:default icon alt text]": "Merge Layers",
+      "messenger/[translation hint:default icon alt text]": "Messenger",
+      "minimize/[translation hint:default icon alt text]": "Minimize",
+      "mobile services/[translation hint:default icon alt text]": "Mobile Services",
+      "modern grid view/[translation hint:default icon alt text]": "Modern Grid View",
+      "money/[translation hint:default icon alt text]": "Money",
+      "moon/[translation hint:default icon alt text]": "Moon",
+      "more/[translation hint:default icon alt text]": "More",
+      "more circle/[translation hint:default icon alt text]": "More",
+      "more small list/[translation hint:default icon alt text]": "More Small List",
+      "more small list vert/[translation hint:default icon alt text]": "More Small List Vert",
+      "more vertical/[translation hint:default icon alt text]": "More Vertical",
+      "move/[translation hint:default icon alt text]": "Move",
+      "move left right/[translation hint:default icon alt text]": "Move Left or Right",
+      "move to/[translation hint:default icon alt text]": "Move To",
+      "move up down/[translation hint:default icon alt text]": "Move Up or Down",
+      "movie camera/[translation hint:default icon alt text]": "Movie Camera",
+      "multiple/[translation hint:default icon alt text]": "Multiple",
+      "multiple add/[translation hint:default icon alt text]": "Multiple Add",
+      "multiple check/[translation hint:default icon alt text]": "Multiple Check",
+      "multiple exclude/[translation hint:default icon alt text]": "Multiple Exclude",
+      "muse/[translation hint:default icon alt text]": "Muse",
+      "naming order/[translation hint:default icon alt text]": "Naming Order",
+      "new item/[translation hint:default icon alt text]": "New Item",
+      "news/[translation hint:default icon alt text]": "News",
+      "news add/[translation hint:default icon alt text]": "News Add",
+      "newsgator/[translation hint:default icon alt text]": "Newsgator",
+      "nielsen/[translation hint:default icon alt text]": "Nielsen",
+      "no edit/[translation hint:default icon alt text]": "No Edit",
+      "note/[translation hint:default icon alt text]": "Note",
+      "note add/[translation hint:default icon alt text]": "Note Add",
+      "os/[translation hint:default icon alt text]": "OS",
+      "offer/[translation hint:default icon alt text]": "Offer",
+      "offer delete/[translation hint:default icon alt text]": "Delete Offer",
+      "on air/[translation hint:default icon alt text]": "On Air",
+      "one drive/[translation hint:default icon alt text]": "One Drive",
+      "open in/[translation hint:default icon alt text]": "Open In",
+      "open recent/[translation hint:default icon alt text]": "Open Recent",
+      "opera/[translation hint:default icon alt text]": "Opera",
+      "orbit/[translation hint:default icon alt text]": "Orbit",
+      "organisations/[translation hint:default icon alt text]": "Organisations",
+      "organize/[translation hint:default icon alt text]": "Organize",
+      "outline path/[translation hint:default icon alt text]": "Outline Path",
+      "pdfchecked out/[translation hint:default icon alt text]": "PDFChecked Out",
+      "padding bottom/[translation hint:default icon alt text]": "Padding Bottom",
+      "padding left/[translation hint:default icon alt text]": "Padding Left",
+      "padding right/[translation hint:default icon alt text]": "Padding Right",
+      "padding top/[translation hint:default icon alt text]": "Padding Top",
+      "page break/[translation hint:default icon alt text]": "Page Break",
+      "page exclude/[translation hint:default icon alt text]": "Page Exclude",
+      "page gear/[translation hint:default icon alt text]": "Page Gear",
+      "page rule/[translation hint:default icon alt text]": "Page Rule",
+      "page share/[translation hint:default icon alt text]": "Page Share",
+      "page tag/[translation hint:default icon alt text]": "Page Tag",
+      "pages exclude/[translation hint:default icon alt text]": "Pages Exclude",
+      "pan/[translation hint:default icon alt text]": "Pan",
+      "panel/[translation hint:default icon alt text]": "Panel",
+      "paste/[translation hint:default icon alt text]": "Paste",
+      "paste html/[translation hint:default icon alt text]": "Paste HTML",
+      "paste list/[translation hint:default icon alt text]": "Paste List",
+      "paste text/[translation hint:default icon alt text]": "Paste Text",
+      "pattern/[translation hint:default icon alt text]": "Pattern",
+      "pause/[translation hint:default icon alt text]": "Pause",
+      "pause circle/[translation hint:default icon alt text]": "Pause",
+      "pawn/[translation hint:default icon alt text]": "Pawn",
+      "pending/[translation hint:default icon alt text]": "Pending",
+      "people group/[translation hint:default icon alt text]": "People Group",
+      "personalization field/[translation hint:default icon alt text]": "Personalization Field",
+      "perspective/[translation hint:default icon alt text]": "Perspective",
+      "phone gap/[translation hint:default icon alt text]": "PhoneGap",
+      "phone gap builder/[translation hint:default icon alt text]": "PhoneGap Builder",
+      "photoshop/[translation hint:default icon alt text]": "Photoshop",
+      "pin off/[translation hint:default icon alt text]": "Pin Off",
+      "pin on/[translation hint:default icon alt text]": "Pin On",
+      "pinterest/[translation hint:default icon alt text]": "Pinterest",
+      "pivot/[translation hint:default icon alt text]": "Pivot",
+      "platform data mapping/[translation hint:default icon alt text]": "Platform Data Mapping",
+      "play/[translation hint:default icon alt text]": "Play",
+      "play circle/[translation hint:default icon alt text]": "Play",
+      "plug/[translation hint:default icon alt text]": "Plug",
+      "polygon/[translation hint:default icon alt text]": "Polygon",
+      "polygon select/[translation hint:default icon alt text]": "Polygon Select",
+      "pop in/[translation hint:default icon alt text]": "Pop In",
+      "portrait/[translation hint:default icon alt text]": "Portrait",
+      "premiere pro/[translation hint:default icon alt text]": "Premiere Pro",
+      "preset/[translation hint:default icon alt text]": "Preset",
+      "preview/[translation hint:default icon alt text]": "Preview",
+      "print/[translation hint:default icon alt text]": "Print",
+      "print preview/[translation hint:default icon alt text]": "Print Preview",
+      "project/[translation hint:default icon alt text]": "Project",
+      "project add/[translation hint:default icon alt text]": "Project Add",
+      "project edit/[translation hint:default icon alt text]": "Project Edit",
+      "project name edit/[translation hint:default icon alt text]": "Project Name Edit",
+      "promote/[translation hint:default icon alt text]": "Promote",
+      "properties/[translation hint:default icon alt text]": "Properties",
+      "properties copy/[translation hint:default icon alt text]": "Properties Copy",
+      "public/[translation hint:default icon alt text]": "Public",
+      "publish check/[translation hint:default icon alt text]": "Publish Check",
+      "publish pending/[translation hint:default icon alt text]": "Publish Pending",
+      "publish reject/[translation hint:default icon alt text]": "Publish Reject",
+      "publish remove/[translation hint:default icon alt text]": "Publish Remove",
+      "publish schedule/[translation hint:default icon alt text]": "Publish Schedule",
+      "push notification/[translation hint:default icon alt text]": "Push Notification",
+      "question/[translation hint:default icon alt text]": "Question",
+      "quick select/[translation hint:default icon alt text]": "Quick Select",
+      "rss/[translation hint:default icon alt text]": "RSS",
+      "radial gradient/[translation hint:default icon alt text]": "Radial Gradient",
+      "rail/[translation hint:default icon alt text]": "Rail",
+      "rail bottom/[translation hint:default icon alt text]": "Rail Bottom",
+      "rail left/[translation hint:default icon alt text]": "Rail Left",
+      "rail right/[translation hint:default icon alt text]": "Rail Right",
+      "rail right close/[translation hint:default icon alt text]": "Close Rail Right",
+      "rail right open/[translation hint:default icon alt text]": "Open Rail Right",
+      "rail top/[translation hint:default icon alt text]": "Rail Top",
+      "range mask/[translation hint:default icon alt text]": "Range Mask",
+      "rect select/[translation hint:default icon alt text]": "Rect Select",
+      "rectangle/[translation hint:default icon alt text]": "Rectangle",
+      "redo/[translation hint:default icon alt text]": "Redo",
+      "refresh/[translation hint:default icon alt text]": "Refresh",
+      "region select/[translation hint:default icon alt text]": "Region Select",
+      "relevance/[translation hint:default icon alt text]": "Relevance",
+      "remove/[translation hint:default icon alt text]": "Remove",
+      "remove circle/[translation hint:default icon alt text]": "Remove",
+      "rename/[translation hint:default icon alt text]": "Rename",
+      "reorder/[translation hint:default icon alt text]": "Reorder",
+      "replay/[translation hint:default icon alt text]": "Replay",
+      "replies/[translation hint:default icon alt text]": "Replies",
+      "reply/[translation hint:default icon alt text]": "Reply",
+      "reply all/[translation hint:default icon alt text]": "Reply All",
+      "report/[translation hint:default icon alt text]": "Report",
+      "report add/[translation hint:default icon alt text]": "Report Add",
+      "resize/[translation hint:default icon alt text]": "Resize",
+      "retweet/[translation hint:default icon alt text]": "Retweet",
+      "reuse/[translation hint:default icon alt text]": "Reuse",
+      "revenue/[translation hint:default icon alt text]": "Revenue",
+      "revert/[translation hint:default icon alt text]": "Revert",
+      "rewind/[translation hint:default icon alt text]": "Rewind",
+      "rewind circle/[translation hint:default icon alt text]": "Rewind",
+      "ribbon/[translation hint:default icon alt text]": "Ribbon",
+      "rotate ccw/[translation hint:default icon alt text]": "Rotate CCW",
+      "rotate ccwbold/[translation hint:default icon alt text]": "Rotate CCW",
+      "rotate cw/[translation hint:default icon alt text]": "Rotate CW",
+      "rotate cwbold/[translation hint:default icon alt text]": "Rotate CW",
+      "rotate left/[translation hint:default icon alt text]": "Rotate Left",
+      "rotate right/[translation hint:default icon alt text]": "Rotate Right",
+      "sms/[translation hint:default icon alt text]": "SMS",
+      "smskey/[translation hint:default icon alt text]": "SMS Key",
+      "smslightning/[translation hint:default icon alt text]": "SMS Lightning",
+      "smsrefresh/[translation hint:default icon alt text]": "SMS Refresh",
+      "sqlquery/[translation hint:default icon alt text]": "SQLQuery",
+      "safari/[translation hint:default icon alt text]": "Safari",
+      "sampler/[translation hint:default icon alt text]": "Sampler",
+      "save as floppy/[translation hint:default icon alt text]": "Save As Floppy",
+      "save floppy/[translation hint:default icon alt text]": "Save Floppy",
+      "save to/[translation hint:default icon alt text]": "Save To",
+      "scribble/[translation hint:default icon alt text]": "Scribble",
+      "search/[translation hint:default icon alt text]": "Search",
+      "seat/[translation hint:default icon alt text]": "Seat",
+      "seat add/[translation hint:default icon alt text]": "Seat Add",
+      "segments/[translation hint:default icon alt text]": "Segments",
+      "select/[translation hint:default icon alt text]": "Select",
+      "select add/[translation hint:default icon alt text]": "Select Add",
+      "select box/[translation hint:default icon alt text]": "Select Box",
+      "select box all/[translation hint:default icon alt text]": "Select Box All",
+      "select circular/[translation hint:default icon alt text]": "Select Circular",
+      "select container/[translation hint:default icon alt text]": "Select Container",
+      "select gear/[translation hint:default icon alt text]": "Select Gear",
+      "select intersect/[translation hint:default icon alt text]": "Select Intersect",
+      "select substract/[translation hint:default icon alt text]": "Select Substract",
+      "selection/[translation hint:default icon alt text]": "Selection",
+      "selection checked/[translation hint:default icon alt text]": "Selection Checked",
+      "selection move/[translation hint:default icon alt text]": "Selection Move",
+      "send/[translation hint:default icon alt text]": "Send",
+      "send for signature/[translation hint:default icon alt text]": "Send For Signature",
+      "sentiment negative/[translation hint:default icon alt text]": "Sentiment Negative",
+      "sentiment neutral/[translation hint:default icon alt text]": "Sentiment Neutral",
+      "sentiment positive/[translation hint:default icon alt text]": "Sentiment Positive",
+      "separator/[translation hint:default icon alt text]": "Separator",
+      "servers/[translation hint:default icon alt text]": "Servers",
+      "settings/[translation hint:default icon alt text]": "Settings",
+      "shapes/[translation hint:default icon alt text]": "Shapes",
+      "share/[translation hint:default icon alt text]": "Share",
+      "share android/[translation hint:default icon alt text]": "Share Android",
+      "share check/[translation hint:default icon alt text]": "Share Check",
+      "share windows/[translation hint:default icon alt text]": "Share Windows",
+      "sharpen/[translation hint:default icon alt text]": "Sharpen",
+      "shield/[translation hint:default icon alt text]": "Shield",
+      "shopping cart/[translation hint:default icon alt text]": "Shopping Cart",
+      "show all layers/[translation hint:default icon alt text]": "Show All Layers",
+      "show menu/[translation hint:default icon alt text]": "Show Menu",
+      "show one layer/[translation hint:default icon alt text]": "Show One Layer",
+      "shuffle/[translation hint:default icon alt text]": "Shuffle",
+      "sina weibo/[translation hint:default icon alt text]": "Sina Weibo",
+      "slice/[translation hint:default icon alt text]": "Slice",
+      "slow/[translation hint:default icon alt text]": "Slow",
+      "small caps/[translation hint:default icon alt text]": "Small Caps",
+      "snapshot/[translation hint:default icon alt text]": "Snapshot",
+      "social network/[translation hint:default icon alt text]": "Social Network",
+      "sort order down/[translation hint:default icon alt text]": "Sort Order Down",
+      "sort order up/[translation hint:default icon alt text]": "Sort Order Up",
+      "spam/[translation hint:default icon alt text]": "Spam",
+      "spellcheck/[translation hint:default icon alt text]": "Spellcheck",
+      "spin/[translation hint:default icon alt text]": "Spin",
+      "split view/[translation hint:default icon alt text]": "Split View",
+      "spot heal/[translation hint:default icon alt text]": "Spot Heal",
+      "stage/[translation hint:default icon alt text]": "Stage",
+      "stamp/[translation hint:default icon alt text]": "Stamp",
+      "starburst/[translation hint:default icon alt text]": "Starburst",
+      "step backward/[translation hint:default icon alt text]": "Step Backward",
+      "step backward circle/[translation hint:default icon alt text]": "Step Backward",
+      "step forward/[translation hint:default icon alt text]": "Step Forward",
+      "step forward circle/[translation hint:default icon alt text]": "Step Forward",
+      "stock/[translation hint:default icon alt text]": "Stock",
+      "stop/[translation hint:default icon alt text]": "Stop",
+      "stop circle/[translation hint:default icon alt text]": "Stop",
+      "stopwatch/[translation hint:default icon alt text]": "Stopwatch",
+      "straighten/[translation hint:default icon alt text]": "Straighten",
+      "stroke width/[translation hint:default icon alt text]": "Stroke Width",
+      "subscribe/[translation hint:default icon alt text]": "Subscribe",
+      "substract back path/[translation hint:default icon alt text]": "Substract Back Path",
+      "substract from selection/[translation hint:default icon alt text]": "Substract From Selection",
+      "subtract front path/[translation hint:default icon alt text]": "Subtract Front Path",
+      "success metric/[translation hint:default icon alt text]": "Success Metric",
+      "summarize/[translation hint:default icon alt text]": "Summarize",
+      "survey/[translation hint:default icon alt text]": "Survey",
+      "switch/[translation hint:default icon alt text]": "Switch",
+      "sync/[translation hint:default icon alt text]": "Sync",
+      "sync remove/[translation hint:default icon alt text]": "Sync Remove",
+      "table/[translation hint:default icon alt text]": "Table",
+      "table add/[translation hint:default icon alt text]": "Table Add",
+      "table and chart/[translation hint:default icon alt text]": "Table And Chart",
+      "table column add left/[translation hint:default icon alt text]": "Table Column Add Left",
+      "table column add right/[translation hint:default icon alt text]": "Table Column Add Right",
+      "table column merge/[translation hint:default icon alt text]": "Table Column Merge",
+      "table column remove center/[translation hint:default icon alt text]": "Table Column Remove Center",
+      "table column split/[translation hint:default icon alt text]": "Table Column Split",
+      "table edit/[translation hint:default icon alt text]": "Table Edit",
+      "table histogram/[translation hint:default icon alt text]": "Table Histogram",
+      "table merge cells/[translation hint:default icon alt text]": "Table Merge Cells",
+      "table row add bottom/[translation hint:default icon alt text]": "Table Row Add Bottom",
+      "table row add top/[translation hint:default icon alt text]": "Table Row Add Top",
+      "table row merge/[translation hint:default icon alt text]": "Table Row Merge",
+      "table row remove center/[translation hint:default icon alt text]": "Table Row Remove Center",
+      "table row split/[translation hint:default icon alt text]": "Table Row Split",
+      "table select column/[translation hint:default icon alt text]": "Table Select Column",
+      "table select row/[translation hint:default icon alt text]": "Table Select Row",
+      "tableau/[translation hint:default icon alt text]": "Tableau",
+      "tag bold/[translation hint:default icon alt text]": "Tag Bold",
+      "tag italic/[translation hint:default icon alt text]": "Tag Italic",
+      "tag underline/[translation hint:default icon alt text]": "Tag Underline",
+      "target/[translation hint:default icon alt text]": "Target",
+      "targeted/[translation hint:default icon alt text]": "Targeted",
+      "task list/[translation hint:default icon alt text]": "Task List",
+      "teapot/[translation hint:default icon alt text]": "Teapot",
+      "temperature/[translation hint:default icon alt text]": "Temperature",
+      "test ab/[translation hint:default icon alt text]": "Test AB",
+      "test abedit/[translation hint:default icon alt text]": "Test AB Edit",
+      "test abgear/[translation hint:default icon alt text]": "Test AB Gear",
+      "test abremove/[translation hint:default icon alt text]": "Test AB Remove",
+      "test profile/[translation hint:default icon alt text]": "Test Profile",
+      "text/[translation hint:default icon alt text]": "Text",
+      "text add/[translation hint:default icon alt text]": "Text Add",
+      "text align center/[translation hint:default icon alt text]": "Text Align Center",
+      "text align justify/[translation hint:default icon alt text]": "Text Align Justify",
+      "text align left/[translation hint:default icon alt text]": "Text Align Left",
+      "text align right/[translation hint:default icon alt text]": "Text Align Right",
+      "text baseline shift/[translation hint:default icon alt text]": "Text Baseline Shift",
+      "text bold/[translation hint:default icon alt text]": "Text Bold",
+      "text bulleted/[translation hint:default icon alt text]": "Text Bulleted",
+      "text bulleted attach/[translation hint:default icon alt text]": "Text Bulleted Attach",
+      "text bulleted hierarchy/[translation hint:default icon alt text]": "Text Bulleted Hierarchy",
+      "text bulleted hierarchy exclude/[translation hint:default icon alt text]": "Text Bulleted Hierarchy Exclude",
+      "text decrease/[translation hint:default icon alt text]": "Text Decrease",
+      "text edit/[translation hint:default icon alt text]": "Text Edit",
+      "text exclude/[translation hint:default icon alt text]": "Text Exclude",
+      "text increase/[translation hint:default icon alt text]": "Text Increase",
+      "text indent decrease/[translation hint:default icon alt text]": "Text Indent Decrease",
+      "text indent increase/[translation hint:default icon alt text]": "Text Indent Increase",
+      "text italic/[translation hint:default icon alt text]": "Text Italic",
+      "text kerning/[translation hint:default icon alt text]": "Text Kerning",
+      "text lettered lower case/[translation hint:default icon alt text]": "Text Lettered Lower Case",
+      "text lettered upper case/[translation hint:default icon alt text]": "Text Lettered Upper Case",
+      "text numbered/[translation hint:default icon alt text]": "Text Numbered",
+      "text paragraph/[translation hint:default icon alt text]": "Text Paragraph",
+      "text roman lowercase/[translation hint:default icon alt text]": "Text Roman Lowercase",
+      "text roman uppercase/[translation hint:default icon alt text]": "Text Roman Uppercase",
+      "text size/[translation hint:default icon alt text]": "Text Size",
+      "text size add/[translation hint:default icon alt text]": "Text Size Add",
+      "text space after/[translation hint:default icon alt text]": "Text Space After",
+      "text space before/[translation hint:default icon alt text]": "Text Space Before",
+      "text strikethrough/[translation hint:default icon alt text]": "Text Strikethrough",
+      "text stroke/[translation hint:default icon alt text]": "Text Stroke",
+      "text style/[translation hint:default icon alt text]": "Text Style",
+      "text subscript/[translation hint:default icon alt text]": "Text Subscript",
+      "text superscript/[translation hint:default icon alt text]": "Text Superscript",
+      "text tracking/[translation hint:default icon alt text]": "Text Tracking",
+      "text underline/[translation hint:default icon alt text]": "Text Underline",
+      "thumb down/[translation hint:default icon alt text]": "Thumb Down",
+      "thumb up/[translation hint:default icon alt text]": "Thumb Up",
+      "tips/[translation hint:default icon alt text]": "Tips",
+      "transfer to platform/[translation hint:default icon alt text]": "Transfer To Platform",
+      "transparency/[translation hint:default icon alt text]": "Transparency",
+      "trap/[translation hint:default icon alt text]": "Trap",
+      "tree collapse/[translation hint:default icon alt text]": "Tree Collapse",
+      "tree collapse all/[translation hint:default icon alt text]": "Tree Collapse All",
+      "tree expand/[translation hint:default icon alt text]": "Tree Expand",
+      "tree expand all/[translation hint:default icon alt text]": "Tree Expand All",
+      "trend inspect/[translation hint:default icon alt text]": "Trend Inspect",
+      "trim path/[translation hint:default icon alt text]": "Trim Path",
+      "trophy/[translation hint:default icon alt text]": "Trophy",
+      "tumblr/[translation hint:default icon alt text]": "Tumblr",
+      "twitter/[translation hint:default icon alt text]": "Twitter",
+      "type/[translation hint:default icon alt text]": "Type",
+      "usa/[translation hint:default icon alt text]": "USA",
+      "underline/[translation hint:default icon alt text]": "Underline",
+      "undo/[translation hint:default icon alt text]": "Undo",
+      "ungroup/[translation hint:default icon alt text]": "Ungroup",
+      "unlink/[translation hint:default icon alt text]": "Unlink",
+      "unmerge/[translation hint:default icon alt text]": "Unmerge",
+      "upload to cloud/[translation hint:default icon alt text]": "Upload To Cloud",
+      "user/[translation hint:default icon alt text]": "User",
+      "user activity/[translation hint:default icon alt text]": "User Activity",
+      "user add/[translation hint:default icon alt text]": "User Add",
+      "user admin/[translation hint:default icon alt text]": "User Admin",
+      "user arrow/[translation hint:default icon alt text]": "User Arrow",
+      "user checked out/[translation hint:default icon alt text]": "User Checked Out",
+      "user edit/[translation hint:default icon alt text]": "User Edit",
+      "user exclude/[translation hint:default icon alt text]": "User Exclude",
+      "user group/[translation hint:default icon alt text]": "User Group",
+      "user lock/[translation hint:default icon alt text]": "User Lock",
+      "user share/[translation hint:default icon alt text]": "User Share",
+      "users add/[translation hint:default icon alt text]": "Users Add",
+      "users exclude/[translation hint:default icon alt text]": "Users Exclude",
+      "users lock/[translation hint:default icon alt text]": "Users Lock",
+      "users share/[translation hint:default icon alt text]": "Users Share",
+      "vk/[translation hint:default icon alt text]": "VK",
+      "variable/[translation hint:default icon alt text]": "Variable",
+      "vector draw/[translation hint:default icon alt text]": "Vector Draw",
+      "video checked out/[translation hint:default icon alt text]": "Video Checked Out",
+      "video/[translation hint:default icon alt text]": "Video",
+      "view all tags/[translation hint:default icon alt text]": "View All Tags",
+      "view bi week/[translation hint:default icon alt text]": "View Bi Week",
+      "view card/[translation hint:default icon alt text]": "View Card",
+      "view column/[translation hint:default icon alt text]": "View Column",
+      "view day/[translation hint:default icon alt text]": "View Day",
+      "view detail/[translation hint:default icon alt text]": "View Detail",
+      "view grid/[translation hint:default icon alt text]": "View Grid",
+      "view list/[translation hint:default icon alt text]": "View List",
+      "view row/[translation hint:default icon alt text]": "View Row",
+      "view single/[translation hint:default icon alt text]": "View Single",
+      "view stack/[translation hint:default icon alt text]": "View Stack",
+      "view week/[translation hint:default icon alt text]": "View Week",
+      "viewed mark as/[translation hint:default icon alt text]": "Viewed Mark As",
+      "vignette/[translation hint:default icon alt text]": "Vignette",
+      "visibility/[translation hint:default icon alt text]": "Visibility",
+      "visibility off/[translation hint:default icon alt text]": "Visibility Off",
+      "visit/[translation hint:default icon alt text]": "Visit",
+      "visit share/[translation hint:default icon alt text]": "Visit Share",
+      "voice over/[translation hint:default icon alt text]": "Voice Over",
+      "volume mute/[translation hint:default icon alt text]": "Volume Mute",
+      "volume one/[translation hint:default icon alt text]": "Volume One",
+      "volume three/[translation hint:default icon alt text]": "Volume Three",
+      "volume two/[translation hint:default icon alt text]": "Volume Two",
+      "watch/[translation hint:default icon alt text]": "Watch",
+      "web page/[translation hint:default icon alt text]": "Web Page",
+      "web pages/[translation hint:default icon alt text]": "Web Pages",
+      "whats app/[translation hint:default icon alt text]": "Whats App",
+      "windows 7/[translation hint:default icon alt text]": "Windows 7",
+      "windows 8/[translation hint:default icon alt text]": "Windows 8",
+      "wordpress/[translation hint:default icon alt text]": "Wordpress",
+      "workflow/[translation hint:default icon alt text]": "Workflow",
+      "workflow add/[translation hint:default icon alt text]": "Workflow Add",
+      "wrench/[translation hint:default icon alt text]": "Wrench",
+      "xd/[translation hint:default icon alt text]": "XD",
+      "you tube/[translation hint:default icon alt text]": "YouTube",
+      "zoom in/[translation hint:default icon alt text]": "Zoom In",
+      "zoom out/[translation hint:default icon alt text]": "Zoom Out",
+      "adobe experience platform/[translation hint:default icon alt text]": "Adobe Experience Platform",
+      "calendar check/[translation hint:default icon alt text]": "Calendar Check",
+      "emotion admiration/[translation hint:default icon alt text]": "Emotion: Admiration",
+      "emotion anger/[translation hint:default icon alt text]": "Emotion: Anger",
+      "emotion anticipation/[translation hint:default icon alt text]": "Emotion: Anticipation",
+      "emotion disgust/[translation hint:default icon alt text]": "Emotion: Disgust",
+      "emotion fear/[translation hint:default icon alt text]": "Emotion: Fear",
+      "emotion joy/[translation hint:default icon alt text]": "Emotion: Joy",
+      "emotion sadness/[translation hint:default icon alt text]": "Emotion: Sadness",
+      "emotion surprise/[translation hint:default icon alt text]": "Emotion: Surprise",
+      "facebook circle/[translation hint:default icon alt text]": "Facebook",
+      "google plus circle/[translation hint:default icon alt text]": "Google Plus",
+      "instagram circle/[translation hint:default icon alt text]": "Instagram",
+      "linked in circle/[translation hint:default icon alt text]": "LinkedIn",
+      "mc marketo engage/[translation hint:default icon alt text]": "Marketo Engage",
+      "project camera/[translation hint:default icon alt text]": "Project Camera",
+      "project play/[translation hint:default icon alt text]": "Project Play",
+      "project refresh/[translation hint:default icon alt text]": "Project Refresh",
+      "sina weibo circle/[translation hint:default icon alt text]": "Sina Weibo",
+      "table cell merge/[translation hint:default icon alt text]": "Table Cell Merge",
+      "target check/[translation hint:default icon alt text]": "Target Check",
+      "twitter circle/[translation hint:default icon alt text]": "Twitter",
+      "user circle/[translation hint:default icon alt text]": "User",
+      "user group circle/[translation hint:default icon alt text]": "User Group",
+      "windows/[translation hint:default icon alt text]": "Windows",
+      "you tube circle/[translation hint:default icon alt text]": "YouTube"
+    }
+  };
+
+  /**
    * Copyright 2019 Adobe. All rights reserved.
    * This file is licensed to you under the Apache License, Version 2.0 (the "License");
    * you may not use this file except in compliance with the License. You may obtain a copy
@@ -13495,6 +14488,10 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
+
+  commons.extend(strings, {
+    'coral-component-icon': translations
+  }); // Expose component on the Coral namespace
 
   commons._define('coral-icon', Icon);
 
@@ -13677,12 +14674,15 @@
 
             this._updatedIcon = true;
             var iconSizeValue = this.iconSize;
+            var iconAutoAriaLabelValue = this.iconAutoAriaLabel;
 
             var iconElement = this._getIconElement();
 
             iconElement.icon = value; // Update size as well
 
-            iconElement.size = iconSizeValue; // removes the icon element from the DOM.
+            iconElement.size = iconSizeValue; // Update autoAriaLabel as well
+
+            iconElement.autoAriaLabel = iconAutoAriaLabelValue; // removes the icon element from the DOM.
 
             if (this.icon === '') {
               iconElement.remove();
@@ -13913,6 +14913,31 @@
             }
           }
           /**
+           Whether aria-label is set automatically. See {@link IconAutoAriaLabelEnum}.
+           
+           @type {String}
+           @default IconAutoAriaLabelEnum.OFF
+           @htmlattribute autoarialabel
+           */
+
+        }, {
+          key: "iconAutoAriaLabel",
+          get: function get() {
+            if (this._elements.icon) {
+              return this._elements.icon.getAttribute('autoarialabel') || Icon.autoAriaLabel.OFF;
+            }
+
+            return this._iconAutoAriaLabel || Icon.autoAriaLabel.OFF;
+          },
+          set: function set(value) {
+            value = transform.string(value).toLowerCase();
+            this._iconAutoAriaLabel = validate.enumeration(Icon.autoAriaLabel)(value) && value || Icon.autoAriaLabel.OFF;
+
+            if (this._updatedIcon) {
+              this._getIconElement().setAttribute('autoarialabel', value);
+            }
+          }
+          /**
            The size of the button. It accepts both lower and upper case sizes. See {@link ButtonSizeEnum}.
            Currently only "MEDIUM" is supported.
            
@@ -14105,7 +15130,8 @@
           get: function get() {
             return commons.extend(_get(_getPrototypeOf(_class), "_attributePropertyMap", this), {
               iconposition: 'iconPosition',
-              iconsize: 'iconSize'
+              iconsize: 'iconSize',
+              iconautoarialabel: 'iconAutoAriaLabel'
             });
           }
           /** @ignore */
@@ -14113,7 +15139,7 @@
         }, {
           key: "observedAttributes",
           get: function get() {
-            return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['iconposition', 'iconsize', 'icon', 'size', 'selected', 'block', 'variant', 'value']);
+            return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['iconposition', 'iconsize', 'icon', 'iconautoarialabel', 'size', 'selected', 'block', 'variant', 'value']);
           }
         }]);
 
@@ -14377,63 +15403,82 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations = {
+  var translations$1 = {
     "en-US": {
-      "Select": "Select"
+      "Select": "Select",
+      "invalid": "invalid"
     },
     "fr-FR": {
-      "Select": "Sélectionner"
+      "Select": "Sélectionner",
+      "invalid": "Non valide"
     },
     "de-DE": {
-      "Select": "Auswählen"
+      "Select": "Auswählen",
+      "invalid": "Ungültig"
     },
     "it-IT": {
-      "Select": "Seleziona"
+      "Select": "Seleziona",
+      "invalid": "Non valido"
     },
     "es-ES": {
-      "Select": "Seleccionar"
+      "Select": "Seleccionar",
+      "invalid": "No válido"
     },
     "pt-BR": {
-      "Select": "Selecionar"
+      "Select": "Selecionar",
+      "invalid": "Inválido"
     },
     "ja-JP": {
-      "Select": "選択"
+      "Select": "選択",
+      "invalid": "無効です"
     },
     "ko-KR": {
-      "Select": "선택"
+      "Select": "선택",
+      "invalid": "올바르지 않음"
     },
     "zh-CN": {
-      "Select": "选择"
+      "Select": "选择",
+      "invalid": "无效"
     },
     "zh-TW": {
-      "Select": "選取"
+      "Select": "選取",
+      "invalid": "無效"
     },
     "nl-NL": {
-      "Select": "Selecteren"
+      "Select": "Selecteren",
+      "invalid": "Ongeldig"
     },
     "da-DK": {
-      "Select": "Vælg"
+      "Select": "Vælg",
+      "invalid": "Ugyldig"
     },
     "fi-FI": {
-      "Select": "Valitse"
+      "Select": "Valitse",
+      "invalid": "Virheellinen"
     },
     "nb-NO": {
-      "Select": "Velg"
+      "Select": "Velg",
+      "invalid": "Ugyldig"
     },
     "sv-SE": {
-      "Select": "Välj"
+      "Select": "Välj",
+      "invalid": "Ogiltig"
     },
     "cs-CZ": {
-      "Select": "Vybrat"
+      "Select": "Vybrat",
+      "invalid": "Neplatný"
     },
     "pl-PL": {
-      "Select": "Wybierz"
+      "Select": "Wybierz",
+      "invalid": "Nieprawidłowy"
     },
     "ru-RU": {
-      "Select": "Выберите"
+      "Select": "Выберите",
+      "invalid": "Недопустимый"
     },
     "tr-TR": {
-      "Select": "Seç"
+      "Select": "Seç",
+      "invalid": "Geçersiz"
     }
   };
 
@@ -15331,7 +16376,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$1 = {
+  var translations$2 = {
     "en-US": {
       "Remove": "Remove"
     },
@@ -15391,9 +16436,7 @@
     }
   };
 
-  var template = function anonymous(data_0
-  /*``*/
-  ) {
+  var template = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["button"] = document.createElement("button", "coral-button");
@@ -16636,7 +17679,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-taglist': translations$1
+    'coral-component-taglist': translations$2
   }); // Expose component on the Coral namespace
 
   commons._define('coral-tag', Tag);
@@ -16656,7 +17699,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$2 = {
+  var translations$3 = {
     "en-US": {
       "List": "List"
     },
@@ -17061,12 +18104,17 @@
             return this._getContentZone(this._elements.content);
           },
           set: function set(value) {
+            var _this2 = this;
+
             this._setContentZone('content', value, {
               handle: 'content',
               tagName: 'coral-list-item-content',
               insert: function insert(content) {
                 content.classList.add("".concat(CLASSNAME$7, "Label"));
-                this.appendChild(content);
+
+                _this2.appendChild(content);
+
+                _get(_getPrototypeOf(_class.prototype), "_toggleIconAriaHidden", _this2).call(_this2);
               }
             });
           }
@@ -17528,9 +18576,7 @@
     return ButtonListItem;
   }(BaseListItem(BaseComponent(HTMLButtonElement)));
 
-  var template$1 = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$1 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["track"] = document.createElement("div");
     el0.setAttribute("handle", "track");
@@ -17916,9 +18962,7 @@
 
   commons._define('coral-wait', Wait);
 
-  var template$2 = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$2 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["loadIndicator"] = document.createElement("div");
     el0.setAttribute("handle", "loadIndicator");
@@ -18637,9 +19681,7 @@
     return SelectListGroup;
   }(BaseComponent(HTMLElement));
 
-  var template$3 = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$3 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["checkIcon"] = document.createElement("span");
@@ -18804,6 +19846,20 @@
             if (contentIcon && contentIcon.icon) {
               contentIcon.remove();
               this.icon = contentIcon.icon;
+
+              var iconElement = this._getIconElement();
+
+              if (contentIcon.alt || contentIcon.title) {
+                if (contentIcon.title) {
+                  iconElement.title = contentIcon.title;
+                }
+
+                if (contentIcon.alt) {
+                  iconElement.alt = contentIcon.alt;
+                }
+              } else {
+                iconElement.alt = '';
+              }
             }
 
             this.insertBefore(content, this.contains(checkIcon) ? checkIcon : null);
@@ -18933,7 +19989,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-selectlist': translations$2
+    'coral-component-selectlist': translations$3
   }); // Expose component on the Coral namespace
 
   commons._define('coral-anchorlist-item', AnchorListItem, {
@@ -18980,7 +20036,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$3 = {
+  var translations$4 = {
     "en-US": {
       "Close": "Close"
     },
@@ -19040,9 +20096,7 @@
     }
   };
 
-  var template$4 = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$4 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["topTabCapture"] = document.createElement("div");
     el0.setAttribute("handle", "topTabCapture");
@@ -19526,8 +20580,7 @@
         }
         /**
          Whether to trap tabs and keep them within the overlay. See {@link OverlayTrapFocusEnum}.
-         
-         @type {String}
+          @type {String}
          @default OverlayTrapFocusEnum.OFF
          @htmlattribute trapfocus
          */
@@ -19562,8 +20615,7 @@
           }
           /**
            Check if this overlay is the topmost.
-           
-           @protected
+            @protected
            */
 
         }, {
@@ -19574,8 +20626,7 @@
           }
           /**
            Push the overlay to the top of the stack.
-           
-           @protected
+            @protected
            */
 
         }, {
@@ -19585,8 +20636,7 @@
           }
           /**
            Remove the overlay from the stack.
-           
-           @protected
+            @protected
            */
 
         }, {
@@ -19598,8 +20648,7 @@
           }
           /**
            Show the backdrop.
-           
-           @protected
+            @protected
            */
 
         }, {
@@ -19627,8 +20676,7 @@
           }
           /**
            Show the backdrop.
-           
-           @protected
+            @protected
            */
 
         }, {
@@ -19647,8 +20695,7 @@
           }
           /**
            Handles keypresses on the root of the overlay and marshalls focus accordingly.
-           
-           @protected
+            @protected
            */
 
         }, {
@@ -19664,8 +20711,7 @@
           }
           /**
            Handles focus events on tab capture elements.
-           
-           @protected
+            @protected
            */
 
         }, {
@@ -19686,8 +20732,7 @@
           /**
            Handles the focus behavior. When "on" is specified it would try to find the first tababble descendent in the
            content and if there are no valid candidates it will focus the element itself.
-           
-           @protected
+            @protected
            */
 
         }, {
@@ -19735,8 +20780,7 @@
           }
           /**
            Focus on the first or last element.
-           
-           @param {String} which
+            @param {String} which
            one of "first" or "last"
            @protected
            */
@@ -19776,8 +20820,7 @@
           }
           /**
            Open the overlay and set the z-index accordingly.
-           
-           @returns {BaseOverlay} this, chainable
+            @returns {BaseOverlay} this, chainable
            */
 
         }, {
@@ -19788,8 +20831,7 @@
           }
           /**
            Close the overlay.
-           
-           @returns {BaseOverlay} this, chainable
+            @returns {BaseOverlay} this, chainable
            */
 
         }, {
@@ -19800,11 +20842,9 @@
           }
           /**
            Set the element that focus should be returned to when the overlay is hidden.
-           
-           @param {HTMLElement} element
+            @param {HTMLElement} element
            The element to return focus to. This must be a DOM element, not a jQuery object or selector.
-           
-           @returns {BaseOverlay} this, chainable
+            @returns {BaseOverlay} this, chainable
            */
 
         }, {
@@ -19901,35 +20941,32 @@
           }
           /**
            Called when the {@link BaseOverlay} is clicked.
-           
-           @function backdropClickedCallback
+            @function backdropClickedCallback
            @protected
            */
 
           /**
            Triggered before the {@link BaseOverlay} is opened with <code>show()</code> or <code>instance.open = true</code>.
-             @typedef {CustomEvent} coral-overlay:beforeopen
-           
-           @property {function} preventDefault
+            @typedef {CustomEvent} coral-overlay:beforeopen
+            @property {function} preventDefault
            Call to stop the overlay from opening.
            */
 
           /**
            Triggered after the {@link BaseOverlay} is opened with <code>show()</code> or <code>instance.open = true</code>
-             @typedef {CustomEvent} coral-overlay:open
+            @typedef {CustomEvent} coral-overlay:open
            */
 
           /**
            Triggered before the {@link BaseOverlay} is closed with <code>hide()</code> or <code>instance.open = false</code>.
-             @typedef {CustomEvent} coral-overlay:beforeclose
-           
-           @property {function} preventDefault
+            @typedef {CustomEvent} coral-overlay:beforeclose
+            @property {function} preventDefault
            Call to stop the overlay from closing.
            */
 
           /**
            Triggered after the {@link BaseOverlay} is closed with <code>hide()</code> or <code>instance.open = false</code>
-             @typedef {CustomEvent} coral-overlay:close
+            @typedef {CustomEvent} coral-overlay:close
            */
 
         }, {
@@ -19972,8 +21009,7 @@
           }
           /**
            Whether to return focus to the previously focused element when closed. See {@link OverlayReturnFocusEnum}.
-           
-           @type {String}
+            @type {String}
            @default OverlayReturnFocusEnum.OFF
            @htmlattribute returnfocus
            */
@@ -19989,8 +21025,7 @@
           }
           /**
            Whether the browser should scroll the document to bring the newly-focused element into view. See {@link OverlayScrollOnFocusEnum}.
-           
-           @type {String}
+            @type {String}
            @default OverlayScrollOnFocusEnum.ON
            @htmlattribute scrollonfocus
            */
@@ -20009,8 +21044,7 @@
            an instance of HTMLElement or a selector like ':first-child' or 'button:last-of-type'. If the selector returns
            multiple elements, it will focus the first element inside the overlay that matches the selector.
            See {@link OverlayFocusOnShowEnum}.
-           
-           @type {HTMLElement|String}
+            @type {HTMLElement|String}
            @default OverlayFocusOnShowEnum.ON
            @htmlattribute focusonshow
            */
@@ -20027,8 +21061,7 @@
           }
           /**
            Whether this overlay is open or not.
-           
-           @type {Boolean}
+            @type {Boolean}
            @default false
            @htmlattribute open
            @htmlattributereflected
@@ -20168,8 +21201,7 @@
           }
           /**
            Returns {@link BaseOverlay} trap focus options.
-           
-           @return {OverlayTrapFocusEnum}
+            @return {OverlayTrapFocusEnum}
            */
 
         }, {
@@ -20179,8 +21211,7 @@
           }
           /**
            Returns {@link BaseOverlay} return focus options.
-           
-           @return {OverlayReturnFocusEnum}
+            @return {OverlayReturnFocusEnum}
            */
 
         }, {
@@ -20190,8 +21221,7 @@
           }
           /**
            Returns {@link BaseOverlay} scroll focus options.
-           
-           @return {OverlayScrollOnFocusEnum}
+            @return {OverlayScrollOnFocusEnum}
            */
 
         }, {
@@ -20201,8 +21231,7 @@
           }
           /**
            Returns {@link BaseOverlay} focus on show options.
-           
-           @return {OverlayFocusOnShowEnum}
+            @return {OverlayFocusOnShowEnum}
            */
 
         }, {
@@ -20212,8 +21241,7 @@
           }
           /**
            Returns {@link BaseOverlay} fadetime in milliseconds.
-           
-           @return {Number}
+            @return {Number}
            */
 
         }, {
@@ -23655,7 +24683,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$4 = {
+  var translations$5 = {
     "en-US": {
       "Close": "Close"
     },
@@ -24581,9 +25609,7 @@
     }
   });
 
-  var template$5 = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$5 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["headerWrapper"] = document.createElement("div");
     el0.className += " _coral-Dialog-header";
@@ -25516,7 +26542,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-dialog': translations$4
+    'coral-component-dialog': translations$5
   }); // Expose component on the Coral namespace
 
   commons._define('coral-dialog', Dialog);
@@ -25525,9 +26551,7 @@
   Dialog.Content = DialogContent;
   Dialog.Footer = DialogFooter;
 
-  var template$6 = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$6 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["headerWrapper"] = document.createElement("div");
     el0.className += " _coral-Dialog-header";
@@ -26287,7 +27311,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-popover': translations$3
+    'coral-component-popover': translations$4
   }); // Expose component on the Coral namespace
 
   commons._define('coral-popover-separator', PopoverSeparator);
@@ -26299,9 +27323,7 @@
   Popover.Footer = PopoverFooter;
   Popover.Separator = PopoverSeparator;
 
-  var template$7 = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$7 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -26317,10 +27339,9 @@
     el2.setAttribute("handle", "button");
     el2.setAttribute("type", "button");
     el2.setAttribute("is", "coral-button");
-    el2.setAttribute("aria-haspopup", "true");
+    el2.setAttribute("aria-haspopup", "listbox");
     el2.id = buttonId;
     el2.setAttribute("aria-controls", listId);
-    el2.setAttribute("aria-owns", listId);
     el2.setAttribute("aria-expanded", "false");
     el2.className += " _coral-FieldButton _coral-Dropdown-trigger";
     var el3 = document.createTextNode("\n  ");
@@ -26337,6 +27358,7 @@
     el6.setAttribute("hidden", "");
     el6.setAttribute("handle", "invalidIcon");
     el6.className += " _coral-Dropdown-invalidIcon";
+    el6.setAttribute("alt", data_0["i18n"]["get"]('invalid'));
     el2.appendChild(el6);
     var el7 = document.createTextNode("\n");
     el2.appendChild(el7);
@@ -26484,7 +27506,8 @@
       _this._elements = {};
       template$7.call(_this._elements, {
         commons: commons,
-        Icon: Icon
+        Icon: Icon,
+        i18n: i18n
       });
       var events = {
         'global:click': '_onGlobalClick',
@@ -28077,7 +29100,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-select': translations
+    'coral-component-select': translations$1
   }); // Expose component on the Coral namespace
 
   commons._define('coral-select-item', SelectItem);
@@ -28097,7 +29120,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$5 = {
+  var translations$6 = {
     "en-US": {
       "Select": "Select"
     },
@@ -28157,9 +29180,7 @@
     }
   };
 
-  var template$8 = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$8 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["input"] = document.createElement("input");
     el0.setAttribute("type", "radio");
@@ -28629,7 +29650,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-radio': translations$5
+    'coral-component-radio': translations$6
   }); // Expose component on the Coral namespace
 
   commons._define('coral-radio', Radio);
@@ -28878,7 +29899,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$6 = {
+  var translations$7 = {
     "en-US": {
       "Decrement": "Decrement",
       "Increment": "Increment"
@@ -28957,9 +29978,7 @@
     }
   };
 
-  var template$9 = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$9 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -29924,14 +30943,12 @@
    */
 
   commons.extend(strings, {
-    'coral-component-numberinput': translations$6
+    'coral-component-numberinput': translations$7
   }); // Expose component on the Coral namespace
 
   commons._define('coral-numberinput', NumberInput);
 
-  var template$a = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$a = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["tip"] = document.createElement("span");
     el0.className += " _coral-Tooltip-tip";
@@ -29952,9 +30969,9 @@
   var OFFSET$1 = 5;
   /**
    Enumeration for {@link Tooltip} variants.
-   
+
    @typedef {Object} TooltipVariantEnum
-   
+
    @property {String} DEFAULT
    A default tooltip that provides additional information.
    @property {String} INFO
@@ -30020,7 +31037,8 @@
       _this = _possibleConstructorReturn(this, _getPrototypeOf(Tooltip).call(this)); // Override defaults
 
       _this._lengthOffset = OFFSET$1;
-      _this._overlayAnimationTime = Overlay.FADETIME; // Fetch or create the content zone element
+      _this._overlayAnimationTime = Overlay.FADETIME;
+      _this._focusOnShow = Overlay.focusOnShow.OFF; // Fetch or create the content zone element
 
       _this._elements = commons.extend(_this._elements, {
         content: _this.querySelector('coral-tooltip-content') || document.createElement('coral-tooltip-content')
@@ -30039,8 +31057,7 @@
     }
     /**
      The variant of tooltip. See {@link TooltipVariantEnum}.
-     
-     @type {String}
+      @type {String}
      @default TooltipVariantEnum.DEFAULT
      @htmlattribute variant
      @htmlattributereflected
@@ -30150,7 +31167,7 @@
 
         this._targetEvents = new vent(target);
 
-        this._targetEvents.on("mouseenter.Tooltip".concat(this._id, " focusin.Tooltip").concat(this._id), function () {
+        var handleEventToShow = function handleEventToShow() {
           // Don't let the tooltip hide
           _this4._cancelHide();
 
@@ -30166,7 +31183,15 @@
               }, _this4.delay);
             }
           }
-        });
+        };
+
+        this._targetEvents.on("mouseenter.Tooltip".concat(this._id), handleEventToShow);
+
+        this._targetEvents.on("focusin.Tooltip".concat(this._id), handleEventToShow);
+
+        this._targetEvents.on("mouseenter.Tooltip".concat(this._id), this._handleOpenTooltip.bind(this));
+
+        this._targetEvents.on("focusin.Tooltip".concat(this._id), this._handleOpenTooltip.bind(this));
 
         this._targetEvents.on("mouseleave.Tooltip".concat(this._id), function () {
           if (_this4.interaction === _this4.constructor.interaction.ON) {
@@ -30179,6 +31204,27 @@
             _this4._handleFocusOut();
           }
         });
+      }
+    }, {
+      key: "_handleOpenTooltip",
+      value: function _handleOpenTooltip() {
+        var _this5 = this;
+
+        // Don't let the tooltip hide
+        this._cancelHide();
+
+        if (!this.open) {
+          this._cancelShow();
+
+          if (this.delay === 0) {
+            // Show immediately
+            this.show();
+          } else {
+            this._showTimeout = window.setTimeout(function () {
+              _this5.show();
+            }, this.delay);
+          }
+        }
       }
       /** @ignore */
 
@@ -30250,8 +31296,7 @@
       }
       /**
        The amount of time in miliseconds to wait before showing the tooltip when the target is interacted with.
-       
-       @type {Number}
+        @type {Number}
        @default 500
        @htmlattribute delay
        */
@@ -30266,8 +31311,7 @@
       }
       /**
        The Tooltip content element.
-       
-       @type {TooltipContent}
+        @type {TooltipContent}
        @contentzone
        */
 
@@ -30359,8 +31403,7 @@
       }
       /**
        Returns {@link Tooltip} variants.
-       
-       @return {TooltipVariantEnum}
+        @return {TooltipVariantEnum}
        */
 
     }], [{
@@ -30429,7 +31472,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$7 = {
+  var translations$8 = {
     "en-US": {
       "Select": "Select"
     },
@@ -30489,9 +31532,7 @@
     }
   };
 
-  var template$b = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$b = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["input"] = document.createElement("input");
@@ -31001,7 +32042,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-checkbox': translations$7
+    'coral-component-checkbox': translations$8
   }); // Expose component on the Coral namespace
 
   commons._define('coral-checkbox', Checkbox);
@@ -32027,9 +33068,7 @@
     return Accordion;
   }(BaseComponent(HTMLElement));
 
-  var template$c = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$c = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["heading"] = document.createElement("h3");
@@ -32370,7 +33409,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$8 = {
+  var translations$9 = {
     "en-US": {
       "More": "More"
     },
@@ -33400,9 +34439,7 @@
 
   AnchorButton.Label = AnchorButtonLabel;
 
-  var template$d = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$d = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["overlay"] = document.createElement("coral-popover");
     el0.setAttribute("smart", "");
@@ -33417,9 +34454,7 @@
     return frag;
   };
 
-  var template$e = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$e = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["moreButton"] = document.createElement("button", "coral-button");
     el0.setAttribute("is", "coral-button");
@@ -33444,9 +34479,7 @@
     return frag;
   };
 
-  var template$f = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$f = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -34296,7 +35329,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-actionbar': translations$8
+    'coral-component-actionbar': translations$9
   }); // Expose component on the Coral namespace
 
   commons._define('coral-actionbar-item', ActionBarItem);
@@ -34746,7 +35779,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$9 = {
+  var translations$a = {
     "en-US": {
       "No matching results&period;": "No matching results.",
       "Show suggestion": "Show suggestion",
@@ -34992,9 +36025,7 @@
     return AutocompleteItem;
   }(BaseComponent(HTMLElement));
 
-  var template$g = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$g = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["overlay"] = document.createElement("coral-popover");
@@ -35090,9 +36121,7 @@
     return frag;
   };
 
-  var template$h = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$h = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["loadIndicator"] = document.createElement("div");
     el0.className += " _coral-SelectList-loading";
@@ -37226,7 +38255,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-autocomplete': translations$9
+    'coral-component-autocomplete': translations$a
   }); // Expose component on the Coral namespace
 
   commons._define('coral-autocomplete-item', AutocompleteItem);
@@ -37485,9 +38514,7 @@
   Banner.Header = BannerHeader;
   Banner.Content = BannerContent;
 
-  var template$i = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$i = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["nativeSelect"] = document.createElement("select");
     el0.className += " _coral-ButtonGroup-select";
@@ -38457,7 +39484,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$a = {
+  var translations$b = {
     "en-US": {
       "Previous": "Previous",
       "Next": "Next",
@@ -38631,9 +39658,7 @@
     }
   };
 
-  var template$j = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$j = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["input"] = document.createElement("input");
@@ -38719,9 +39744,7 @@
     return frag;
   };
 
-  var template$k = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$k = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["container"] = document.createElement("div");
     el0.className += " _coral-DatePicker-calendarSlidingContainer";
@@ -38733,9 +39756,7 @@
     return frag;
   };
 
-  var template$l = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$l = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -40090,14 +41111,12 @@
    */
 
   commons.extend(strings, {
-    'coral-component-calendar': translations$a
+    'coral-component-calendar': translations$b
   }); // Expose component on the Coral namespace
 
   commons._define('coral-calendar', Calendar);
 
-  var template$m = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$m = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["wrapper"] = document.createElement("div");
     el0.setAttribute("handle", "wrapper");
@@ -40538,14 +41557,13 @@
     return Card;
   }(BaseComponent(HTMLElement));
 
-  var template$n = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$n = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["icon"] = document.createElement("coral-icon");
     el0.setAttribute("handle", "icon");
     el0.setAttribute("size", "XS");
     el0.className += " _coral-Card-property-icon";
+    el0.setAttribute("autoarialabel", "on");
     frag.appendChild(el0);
     var el1 = document.createTextNode("\n");
     frag.appendChild(el1);
@@ -40662,6 +41680,38 @@
           this.insertBefore(this._elements.icon, this.firstChild);
         }
       }
+      /**
+       Specifies the alternative text to be used for the icon.
+       
+       @type {String}
+       @default ""
+       @htmlattribute iconalt
+       */
+
+    }, {
+      key: "iconAlt",
+      get: function get() {
+        return this._elements.icon ? this._elements.icon.getAttribute('alt') : undefined;
+      },
+      set: function set(value) {
+        this._elements.icon && this._elements.icon.setAttribute('alt', value);
+      }
+      /**
+       Specifies the title attribute to be used for the icon.
+       
+       @type {String}
+       @default ""
+       @htmlattribute icontitle
+       */
+
+    }, {
+      key: "iconTitle",
+      get: function get() {
+        return this._elements.icon ? this._elements.icon.getAttribute('title') : undefined;
+      },
+      set: function set(value) {
+        this._elements.icon && this._elements.icon.setAttribute('title', value);
+      }
     }, {
       key: "_contentZones",
       get: function get() {
@@ -40669,12 +41719,20 @@
           'coral-card-property-content': 'content'
         };
       }
+    }], [{
+      key: "_attributePropertyMap",
+      get: function get() {
+        return commons.extend(_get(_getPrototypeOf(CardProperty), "_attributePropertyMap", this), {
+          iconalt: 'iconAlt',
+          icontitle: 'iconTitle'
+        });
+      }
       /** @ignore */
 
-    }], [{
+    }, {
       key: "observedAttributes",
       get: function get() {
-        return _get(_getPrototypeOf(CardProperty), "observedAttributes", this).concat(['icon']);
+        return _get(_getPrototypeOf(CardProperty), "observedAttributes", this).concat(['icon', 'iconalt', 'icontitle']);
       }
     }]);
 
@@ -41144,7 +42202,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$b = {
+  var translations$c = {
     "en-US": {
       "am": "am",
       "pm": "pm",
@@ -41280,9 +42338,7 @@
     }
   };
 
-  var template$o = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$o = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -41978,14 +43034,12 @@
    */
 
   commons.extend(strings, {
-    'coral-component-clock': translations$b
+    'coral-component-clock': translations$c
   }); // Expose component on the Coral namespace
 
   commons._define('coral-clock', Clock);
 
-  var template$p = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$p = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = document.createElement("div");
     el0.className += " _coral-CoachMarkIndicator-ring";
@@ -43846,9 +44900,7 @@
     );
   };
 
-  var template$q = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$q = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["label"] = document.createElement("div");
     el0.className += " _coral-Slider-labelContainer";
@@ -44990,9 +46042,7 @@
     return SliderItem;
   }(BaseComponent(HTMLElement));
 
-  var template$r = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$r = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -45353,9 +46403,7 @@
   Slider.Content = SliderContent;
   Slider.Item = SliderItem;
 
-  var template$s = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$s = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["label"] = document.createElement("div");
     el0.className += " _coral-Slider-labelContainer";
@@ -45522,9 +46570,7 @@
     return ColorInputSlider;
   }(Slider);
 
-  var template$t = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$t = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -45990,9 +47036,7 @@
     return ColorInputColorProperties;
   }(BaseColorInputAbstractSubview(BaseComponent(HTMLElement)));
 
-  var template$u = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$u = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["colorButton"] = document.createElement("button", "coral-button");
     el0.setAttribute("is", "coral-button");
@@ -46200,9 +47244,7 @@
     return ColorInputSwatch;
   }(BaseColorInputAbstractSubview(BaseComponent(HTMLElement)));
 
-  var template$v = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$v = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["swatchesSubview"] = document.createElement("div");
     el0.className += " _coral-ColorInput-swatchesSubview";
@@ -46616,9 +47658,7 @@
     return ColorInputSwatches;
   }(BaseColorInputAbstractSubview(BaseComponent(HTMLElement)));
 
-  var template$w = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$w = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["defaultPalette"] = document.createElement("div");
@@ -47800,7 +48840,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$c = {
+  var translations$d = {
     "en-US": {
       "Swatches": "Swatches",
       "R": "R",
@@ -48063,7 +49103,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-colorinput': translations$c
+    'coral-component-colorinput': translations$d
   }); // Expose component on the Coral namespace
 
   commons._define('coral-colorinput-swatches', ColorInputSwatches);
@@ -49277,39 +50317,33 @@
           var isSelected = item.hasAttribute('selected');
 
           if (!isSelected) {
-            if (this._selectionMode === selectionMode$1.SINGLE) {
-              item.setAttribute('active', '');
-            } // Handle multi-selection with shiftKey
-            else if (event.shiftKey && this._selectionMode === selectionMode$1.MULTIPLE) {
-                var lastSelectedItem = this._lastSelectedItems[this._lastSelectedItems.length - 1];
+            // Handle multi-selection with shiftKey
+            if (event.shiftKey && this._selectionMode === selectionMode$1.MULTIPLE) {
+              var lastSelectedItem = this._lastSelectedItems[this._lastSelectedItems.length - 1];
 
-                if (lastSelectedItem) {
-                  var items = this.items.getAll();
-                  var lastSelectedItemIndex = items.indexOf(lastSelectedItem);
-                  var selectedItemIndex = items.indexOf(item); // true : selection goes up, false : selection goes down
+              if (lastSelectedItem) {
+                var items = this.items.getAll();
+                var lastSelectedItemIndex = items.indexOf(lastSelectedItem);
+                var selectedItemIndex = items.indexOf(item); // true : selection goes up, false : selection goes down
 
-                  var direction = selectedItemIndex < lastSelectedItemIndex;
-                  var selectionRange = [];
-                  var selectionIndex = lastSelectedItemIndex; // Retrieve all items in the range
+                var direction = selectedItemIndex < lastSelectedItemIndex;
+                var selectionRange = [];
+                var selectionIndex = lastSelectedItemIndex; // Retrieve all items in the range
 
-                  while (selectedItemIndex !== selectionIndex) {
-                    selectionIndex = direction ? selectionIndex - 1 : selectionIndex + 1;
-                    selectionRange.push(items[selectionIndex]);
-                  } // Select all items in the range silently
+                while (selectedItemIndex !== selectionIndex) {
+                  selectionIndex = direction ? selectionIndex - 1 : selectionIndex + 1;
+                  selectionRange.push(items[selectionIndex]);
+                } // Select all items in the range silently
 
 
-                  selectionRange.forEach(function (rangeItem) {
-                    // Except for item which is needed to trigger the selection change event
-                    if (rangeItem !== item) {
-                      rangeItem.set('selected', true, true);
-                    }
-                  });
-                }
+                selectionRange.forEach(function (rangeItem) {
+                  // Except for item which is needed to trigger the selection change event
+                  if (rangeItem !== item) {
+                    rangeItem.set('selected', true, true);
+                  }
+                });
               }
-          }
-
-          if (!isSelected && this._selectionMode === selectionMode$1.SINGLE) {
-            item.setAttribute('active', '');
+            }
           }
 
           item[isSelected ? 'removeAttribute' : 'setAttribute']('selected', '');
@@ -50625,9 +51659,7 @@
     return CycleButtonItem;
   }(BaseComponent(HTMLElement));
 
-  var template$x = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$x = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -51822,7 +52854,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$d = {
+  var translations$e = {
     "en-US": {
       "Time": "Time",
       "Calendar": "Calendar"
@@ -51901,9 +52933,7 @@
     }
   };
 
-  var template$y = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$y = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["overlay"] = document.createElement("coral-popover");
     el0.setAttribute("tracking", "off");
@@ -51962,9 +52992,7 @@
     return frag;
   };
 
-  var template$z = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$z = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -52906,7 +53934,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-datepicker': translations$d
+    'coral-component-datepicker': translations$e
   }); // Expose component on the Coral namespace
 
   commons._define('coral-datepicker', Datepicker);
@@ -52922,7 +53950,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$e = {
+  var translations$f = {
     "en-US": {
       "More": "More"
     },
@@ -52982,9 +54010,7 @@
     }
   };
 
-  var template$A = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$A = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -53349,7 +54375,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-drawer': translations$e
+    'coral-component-drawer': translations$f
   }); // Expose component on the Coral namespace
 
   commons._define('coral-drawer', Drawer);
@@ -54492,9 +55518,7 @@
     return FileUploadItem;
   }();
 
-  var template$B = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$B = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["input"] = document.createElement("input");
     el0.id = data_0["commons"]["getUID"]();
@@ -55695,9 +56719,7 @@
 
   FileUpload.Item = FileUploadItem;
 
-  var template$C = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$C = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["quickactions"] = document.createElement("div");
     el0.setAttribute("handle", "quickactions");
@@ -58217,9 +59239,7 @@
     return Multifield;
   }(BaseComponent(HTMLElement));
 
-  var template$D = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$D = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["remove"] = document.createElement("button", "coral-button");
     el0.setAttribute("tracking", "off");
@@ -58229,6 +59249,7 @@
     el0.setAttribute("variant", "quietaction");
     el0.setAttribute("icon", "delete");
     el0.setAttribute("iconsize", "S");
+    el0.setAttribute("iconautoarialabel", "on");
     el0.className += " _coral-Multifield-remove";
     el0.setAttribute("coral-multifield-remove", "");
     frag.appendChild(el0);
@@ -58242,6 +59263,7 @@
     el2.setAttribute("variant", "quietaction");
     el2.setAttribute("icon", "moveUpDown");
     el2.setAttribute("iconsize", "S");
+    el2.setAttribute("iconautoarialabel", "on");
     el2.className += " _coral-Multifield-move u-coral-openHand";
     el2.setAttribute("coral-multifield-move", "");
     frag.appendChild(el2);
@@ -58710,9 +59732,7 @@
 
   Panel.Content = PanelContent;
 
-  var template$E = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$E = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["percentage"] = document.createElement("div");
     el0.className += " _coral-BarLoader-percentage";
@@ -59447,9 +60467,7 @@
     return QuickActionsItem;
   }(BaseComponent(HTMLElement));
 
-  var template$F = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$F = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["moreButton"] = document.createElement("button", "coral-button");
     el0.setAttribute("tracking", "off");
@@ -60828,7 +61846,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$f = {
+  var translations$g = {
     "en-US": {
       "More actions": "More actions"
     },
@@ -60901,7 +61919,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-quickactions': translations$f
+    'coral-component-quickactions': translations$g
   }); // Expose component on the Coral namespace
 
   commons._define('coral-quickactions-item', QuickActionsItem);
@@ -61457,14 +62475,13 @@
     return ShellHeader;
   }(BaseComponent(HTMLElement));
 
-  var template$G = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$G = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["icon"] = document.createElement("coral-icon");
     el0.setAttribute("handle", "icon");
     el0.className += " _coral-Shell-homeAnchor-icon";
     el0.setAttribute("size", "M");
+    el0.setAttribute("alt", "");
     frag.appendChild(el0);
     var el1 = document.createTextNode("\n");
     frag.appendChild(el1);
@@ -61643,7 +62660,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$g = {
+  var translations$h = {
     "it-IT": {
       "Clear search": "Azzera ricerca"
     },
@@ -61703,9 +62720,7 @@
     }
   };
 
-  var template$H = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$H = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["input"] = document.createElement("input", "coral-textfield");
@@ -62187,14 +63202,12 @@
    */
 
   commons.extend(strings, {
-    'coral-component-search': translations$g
+    'coral-component-search': translations$h
   }); // Expose component on the Coral namespace
 
   commons._define('coral-search', Search);
 
-  var template$I = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$I = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -62268,9 +63281,7 @@
     return frag;
   };
 
-  var template$J = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$J = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = document.createElement("coral-list-item-content");
     var el1 = document.createTextNode(data_0["title"] + "\n  ");
@@ -62287,9 +63298,7 @@
     return frag;
   };
 
-  var template$K = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$K = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = document.createElement("div");
     el0.className += " _coral-Shell-help-resultMessage-container";
@@ -62307,9 +63316,7 @@
     return frag;
   };
 
-  var template$L = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$L = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = document.createElement("div");
     el0.className += " _coral-Shell-help-resultMessage-container";
@@ -62802,9 +63809,7 @@
     return ShellMenuBar;
   }(BaseComponent(HTMLElement));
 
-  var template$M = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$M = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["shellMenuButton"] = document.createElement("button", "coral-button");
     el0.setAttribute("is", "coral-button");
@@ -63201,9 +64206,7 @@
     return ShellMenuBarItem;
   }(BaseComponent(HTMLElement));
 
-  var template$N = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$N = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["container"] = document.createElement("div");
     el0.className += " _coral-Shell-user-container";
@@ -63966,9 +64969,7 @@
     return ShellWorkspace;
   }(BaseComponent(HTMLAnchorElement));
 
-  var template$O = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$O = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["container"] = document.createElement("div");
     el0.setAttribute("handle", "container");
@@ -64228,14 +65229,13 @@
     return document.createElement('coral-shell-solutions-header');
   });
 
-  var template$P = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$P = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["icon"] = document.createElement("coral-icon");
     el0.setAttribute("size", "XL");
     el0.setAttribute("handle", "icon");
     el0.className += " _coral-Shell-solution-icon";
+    el0.setAttribute("alt", "");
     frag.appendChild(el0);
     var el1 = document.createTextNode("\n");
     frag.appendChild(el1);
@@ -64404,9 +65404,7 @@
     return document.createElement('coral-shell-solution-label');
   });
 
-  var template$Q = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$Q = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -64864,9 +65862,7 @@
     return document.createElement('coral-shell-orgswitcher-footer');
   });
 
-  var template$R = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$R = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["checkmark"] = document.createElement("span");
@@ -65719,9 +66715,7 @@
     return SideNav;
   }(BaseComponent(HTMLElement));
 
-  var template$S = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$S = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["container"] = document.createElement("div");
     el0.className += " _coral-SideNav-itemLink";
@@ -67170,9 +68164,7 @@
     return StepList;
   }(BaseComponent(HTMLElement));
 
-  var template$T = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$T = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["stepMarkerContainer"] = document.createElement("span");
     el0.className += " _coral-Steplist-markerContainer";
@@ -67507,7 +68499,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$h = {
+  var translations$i = {
     "en-US": {
       "Select": "Select"
     },
@@ -67567,9 +68559,7 @@
     }
   };
 
-  var template$U = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$U = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["input"] = document.createElement("input");
     el0.setAttribute("type", "checkbox");
@@ -67976,7 +68966,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-switch': translations$h
+    'coral-component-switch': translations$i
   }); // Expose component on the Coral namespace
 
   commons._define('coral-switch', Switch);
@@ -67994,7 +68984,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$i = {
+  var translations$j = {
     "en-US": {
       "sorted by column {0}, in ascending order": "sorted by column {0} in ascending order",
       "sorted by column {0}, in descending order": "sorted by column {0} in descending order",
@@ -69581,9 +70571,7 @@
     return TableFoot;
   }(BaseTableSection(BaseComponent(HTMLTableSectionElement)));
 
-  var template$V = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$V = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["liveRegion"] = document.createElement("div");
     el0.setAttribute("handle", "liveRegion");
@@ -72632,7 +73620,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-table': translations$i
+    'coral-component-table': translations$j
   }); // Expose component on the Coral namespace
 
   commons._define('coral-table-column', TableColumn, {
@@ -72676,14 +73664,13 @@
   Table.Body = TableBody;
   Table.Foot = TableFoot;
 
-  var template$W = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$W = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["icon"] = document.createElement("coral-icon");
     el0.setAttribute("handle", "icon");
     el0.setAttribute("size", "XS");
     el0.className += " _coral-Tabs-item-icon";
+    el0.setAttribute("alt", "");
     frag.appendChild(el0);
     var el1 = document.createTextNode("\n");
     frag.appendChild(el1);
@@ -73096,9 +74083,7 @@
     return document.createElement('coral-tab-label');
   });
 
-  var template$X = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$X = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["line"] = document.createElement("div");
     el0.setAttribute("handle", "line");
@@ -73929,9 +74914,7 @@
 
   commons._define('coral-tabview', TabView);
 
-  var template$Y = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$Y = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["body"] = document.createElement("div");
     el0.className += " _coral-Toast-body";
@@ -74607,9 +75590,7 @@
 
   Toast.Content = ToastContent;
 
-  var template$Z = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$Z = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["header"] = document.createElement("div");
@@ -76254,7 +77235,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.5.8";
+  var version$1 = "4.6.0";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
@@ -76285,6 +77266,9 @@
   ];
   var bugs = {
   	url: "https://github.com/adobe/coral-spectrum/issues"
+  };
+  var scripts = {
+  	postinstall: "node scripts/spectrum-css.js"
   };
   var dependencies = {
   	"@adobe/focus-ring-polyfill": "0.1.5",
@@ -76378,6 +77362,7 @@
   	author: author,
   	contributors: contributors,
   	bugs: bugs,
+  	scripts: scripts,
   	dependencies: dependencies,
   	devDependencies: devDependencies
   };
@@ -76493,9 +77478,7 @@
     version: version$2
   });
 
-  var template$_ = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$_ = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["wrapper"] = document.createElement("div");
     el0.setAttribute("handle", "wrapper");

@@ -431,7 +431,7 @@
  */
 
 import {BaseComponent} from &apos;../../../coral-base-component&apos;;
-import {transform, validate, commons} from &apos;../../../coral-utils&apos;;
+import {transform, validate, commons, i18n} from &apos;../../../coral-utils&apos;;
 import ICON_MAP from &apos;../../../coral-compat/data/iconMap&apos;;
 import SPECTRUM_ICONS_PATH from &apos;../resources/spectrum-icons.svg&apos;;
 import SPECTRUM_ICONS_COLOR_PATH from &apos;../resources/spectrum-icons-color.svg&apos;;
@@ -489,7 +489,28 @@ const TEMPLATE_REGEX = /.*\{\{.+\}\}.*/g;
  
  @ignore
  */
-const SPLIT_CAMELCASE_REGEX = /([a-z0-9])([A-Z])/g;
+const SPLIT_CAMELCASE_REGEX = /([a-z])([A-Z0-9])/g;
+
+/**
+ Regex used to match the sized spectrum icon prefix
+ 
+ @ignore
+ */
+const SPECTRUM_ICONS_IDENTIFIER_REGEX = /^spectrum(?:-css)?-icon(?:-\d{1,3})?-/gi;
+
+/**
+ Regex used match the variant postfix for an icon
+ 
+ @ignore
+ */
+const ICONS_VARIANT_POSTFIX_REGEX = /(Outline)?(Filled)?(Small|Medium|Large)?(Color)?_?(Active|Dark|Light)?$/;
+
+/**
+ Translation hint used for localizing default alt text for an icon
+ 
+ @ignore
+ */
+const ICON_ALT_TRANSLATION_HINT = &apos;default icon alt text&apos;;
 
 /**
  Returns capitalized string. This is used to map the icons with their SVG counterpart.
@@ -586,14 +607,15 @@ class Icon extends BaseComponent(HTMLElement) {
    Whether aria-label is set automatically. See {@link IconAutoAriaLabelEnum}.
    
    @type {String}
-   @default IconAutoAriaLabelEnum.ON
+   @default IconAutoAriaLabelEnum.OFF
    */
   get autoAriaLabel() {
-    return this._autoAriaLabel || autoAriaLabel.ON;
+    return this._autoAriaLabel || autoAriaLabel.OFF;
   }
   set autoAriaLabel(value) {
     value = transform.string(value).toLowerCase();
-    this._autoAriaLabel = validate.enumeration(autoAriaLabel)(value) &amp;&amp; value || autoAriaLabel.ON;
+    this._autoAriaLabel = validate.enumeration(autoAriaLabel)(value) &amp;&amp; value || autoAriaLabel.OFF;
+    this._updateAltText();
   }
   
   /**
@@ -775,17 +797,22 @@ class Icon extends BaseComponent(HTMLElement) {
    */
   _updateAltText(value) {
     const hasAutoAriaLabel = this.autoAriaLabel === autoAriaLabel.ON;
-    const isImage = this.contains(this._elements.image);
-    
-    let altText;
+    const img = this._elements.image;
+    const isImage = this.contains(img);
+ 
+    // alt should be prioritized over title   
+    let altText = typeof this.alt === &apos;string&apos; ? this.alt : this.title;
+
     if (typeof value === &apos;string&apos;) {
-      altText = value;
+      altText = this.alt || value;
     }
     else if (isImage) {
-      altText = this.getAttribute(&apos;alt&apos;) || &apos;&apos;;
-    }
-    else {
-      altText = this.icon.replace(SPLIT_CAMELCASE_REGEX, &apos;$1 $2&apos;);
+      altText = altText || img.getAttribute(&apos;alt&apos;) || img.getAttribute(&apos;title&apos;) || &apos;&apos;;
+    } 
+    else if (hasAutoAriaLabel) {
+      let iconName = this.icon.replace(SPECTRUM_ICONS_IDENTIFIER_REGEX, &apos;&apos;);
+      iconName = iconName.replace(ICONS_VARIANT_POSTFIX_REGEX, &apos;&apos;);
+      altText = i18n.get(iconName.replace(SPLIT_CAMELCASE_REGEX, &apos;$1 $2&apos;).toLowerCase(), ICON_ALT_TRANSLATION_HINT);
     }
   
     // If no other role has been set, provide the appropriate
@@ -795,20 +822,20 @@ class Icon extends BaseComponent(HTMLElement) {
     if (!roleOverride) {
       this.setAttribute(&apos;role&apos;, isImage ? &apos;presentation&apos; : &apos;img&apos;);
     }
-    
+
     // Set accessibility attributes accordingly
     if (isImage) {
       hasAutoAriaLabel &amp;&amp; this.removeAttribute(&apos;aria-label&apos;);
-      this._elements.image.setAttribute(&apos;alt&apos;, altText);
+      img.setAttribute(&apos;alt&apos;, altText);
     }
     else if (altText === &apos;&apos;) {
-      hasAutoAriaLabel &amp;&amp; this.removeAttribute(&apos;aria-label&apos;);
+      this.removeAttribute(&apos;aria-label&apos;);
       if (!roleOverride) {
         this.removeAttribute(&apos;role&apos;);
       }
     }
-    else {
-      hasAutoAriaLabel &amp;&amp; this.setAttribute(&apos;aria-label&apos;, altText);
+    else if (altText) {
+      this.setAttribute(&apos;aria-label&apos;, altText);
     }
   }
   

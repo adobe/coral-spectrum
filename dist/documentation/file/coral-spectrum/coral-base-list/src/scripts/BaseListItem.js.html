@@ -467,9 +467,10 @@ const BaseListItem = (superClass) =&gt; class extends BaseLabellable(superClass)
     this._setContentZone(&apos;content&apos;, value, {
       handle: &apos;content&apos;,
       tagName: &apos;coral-list-item-content&apos;,
-      insert: function(content) {
+      insert: (content) =&gt; {
         content.classList.add(`${CLASSNAME}Label`);
         this.appendChild(content);
+        super._toggleIconAriaHidden();
       }
     });
   }

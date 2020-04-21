@@ -3114,6 +3114,18 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "coral-spectrum/coral-component-card/src/scripts/cardproperty.js~cardproperty#iconalt",
+    "class/coral-spectrum/coral-component-card/src/scripts/CardProperty.js~CardProperty.html#instance-member-iconAlt",
+    "coral-spectrum/coral-component-card/src/scripts/CardProperty.js~CardProperty#iconAlt",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-card/src/scripts/cardproperty.js~cardproperty#icontitle",
+    "class/coral-spectrum/coral-component-card/src/scripts/CardProperty.js~CardProperty.html#instance-member-iconTitle",
+    "coral-spectrum/coral-component-card/src/scripts/CardProperty.js~CardProperty#iconTitle",
+    "member"
+  ],
+  [
     "coral-spectrum/coral-component-card/src/scripts/cardpropertycontent.js",
     "file/coral-spectrum/coral-component-card/src/scripts/CardPropertyContent.js.html",
     "coral-spectrum/coral-component-card/src/scripts/CardPropertyContent.js",

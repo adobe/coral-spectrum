@@ -66,7 +66,7 @@
       <div class="markup">
         <coral-buttongroup>
           <button is="coral-button" icon="add" title="Add">Add</button>
-          <button is="coral-button" icon="camera" title="Camera"></button>
+          <button is="coral-button" icon="camera" title="Camera" aria-label="Camera"></button>
           <button is="coral-button" icon="undo" title="Undo">Undo</button>
         </coral-buttongroup>
       </div>
@@ -74,27 +74,27 @@
       <h2 class="coral--Heading--S">Single select</h2>
       <div class="markup">
         <coral-buttongroup selectionmode="single">
-          <button is="coral-button" icon="add" value="add" title="Add"></button>
-          <button is="coral-button" icon="camera" selected value="camera" title="Camera"></button>
-          <button is="coral-button" icon="undo" value="undo" title="Undo"></button>
+          <button is="coral-button" icon="add" value="add" title="Add" aria-label="Add"></button>
+          <button is="coral-button" icon="camera" selected value="camera" title="Camera" aria-label="Camera"></button>
+          <button is="coral-button" icon="undo" value="undo" title="Undo" aria-label="Undo"></button>
         </coral-buttongroup>
       </div>
 
       <h2 class="coral--Heading--S">Multi select</h2>
       <div class="markup">
         <coral-buttongroup selectionmode="multiple">
-          <button is="coral-button" icon="add" selected value="add" title="Add"></button>
-          <button is="coral-button" icon="camera" value="camera" title="Camera"></button>
-          <button is="coral-button" icon="undo" selected value="undo" title="Undo"></button>
+          <button is="coral-button" icon="add" selected value="add" title="Add" aria-label="Add"></button>
+          <button is="coral-button" icon="camera" value="camera" title="Camera" aria-label="Camera"></button>
+          <button is="coral-button" icon="undo" selected value="undo" title="Undo" aria-label="Undo"></button>
         </coral-buttongroup>
       </div>
 
       <h2 class="coral--Heading--S">Read only</h2>
       <div class="markup">
         <coral-buttongroup readonly selectionmode="single">
-          <button is="coral-button" icon="add" title="Add"></button>
-          <button is="coral-button" icon="camera" selected title="Camera"></button>
-          <button is="coral-button" icon="undo" title="Undo"></button>
+          <button is="coral-button" icon="add" title="Add" aria-label="Add"></button>
+          <button is="coral-button" icon="camera" selected title="Camera" aria-label="Camera"></button>
+          <button is="coral-button" icon="undo" title="Undo" aria-label="Undo"></button>
         </coral-buttongroup>
       </div>
 
@@ -119,12 +119,14 @@
             button1.setAttribute('icon', 'add');
             button1.setAttribute('variant', 'secondary');
             button1.setAttribute('title', 'Add');
+            button1.setAttribute('aria-label', 'Add');
             buttonGroupFromJS.appendChild(button1);
 
             var button2 = document.createElement('button', {is:'coral-button'});
             button2.setAttribute('icon', 'delete');
             button2.setAttribute('variant', 'secondary');
             button2.setAttribute('title', 'Delete');
+            button2.setAttribute('aria-label', 'Delete');
             buttonGroupFromJS.appendChild(button2);
 
             document.getElementById('jsexample').appendChild(buttonGroupFromJS);

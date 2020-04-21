@@ -639,11 +639,8 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
       const isSelected = item.hasAttribute(&apos;selected&apos;);
       
       if (!isSelected) {
-        if (this._selectionMode === selectionMode.SINGLE) {
-          item.setAttribute(&apos;active&apos;, &apos;&apos;);
-        }
         // Handle multi-selection with shiftKey
-        else if (event.shiftKey &amp;&amp; this._selectionMode === selectionMode.MULTIPLE) {
+         if (event.shiftKey &amp;&amp; this._selectionMode === selectionMode.MULTIPLE) {
           const lastSelectedItem = this._lastSelectedItems[this._lastSelectedItems.length - 1];
     
           if (lastSelectedItem) {
@@ -671,10 +668,6 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
             });
           }
         }
-      }
-      
-      if (!isSelected &amp;&amp; this._selectionMode === selectionMode.SINGLE) {
-        item.setAttribute(&apos;active&apos;, &apos;&apos;);
       }
       
       item[isSelected ? &apos;removeAttribute&apos; : &apos;setAttribute&apos;](&apos;selected&apos;, &apos;&apos;);
