@@ -1220,12 +1220,12 @@ class Table extends BaseComponent(HTMLTableElement) {
     if (handle) {
 
       // If the handle is a checkbox but lacks a label, label it with "Select All".
-      if (handle instanceof Checkbox) {
+      if (handle.tagName === 'CORAL-CHECKBOX') {
         if (!handle.labelled) {
-          handle.labelled = i18n.get('Select All');
+          handle.setAttribute('labelled', i18n.get('Select All'));
         }
         if (!handle.title) {
-          handle.title = i18n.get('Select All');
+          handle.setAttribute('title', i18n.get('Select All'));
         }
       }
 

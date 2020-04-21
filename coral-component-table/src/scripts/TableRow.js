@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
+import accessibilityState from '../templates/accessibilityState';
 import {BaseComponent} from '../../../coral-base-component';
-import {Checkbox} from '../../../coral-component-checkbox';
 import {SelectableCollection} from '../../../coral-collection';
 import {transform, commons, i18n} from '../../../coral-utils';
 
@@ -30,20 +30,9 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
   constructor() {
     super();
 
-    const accessibilityState = this.querySelector('coral-table-row-accessibilitystate') || document.createElement('coral-table-row-accessibilitystate');
-
-    // @a11y Style to be visually hidden yet accessible to screen readers
-    if (!accessibilityState.classList.contains('u-coral-screenReaderOnly')) {
-      accessibilityState.classList.add('u-coral-screenReaderOnly');
-      accessibilityState.setAttribute('aria-hidden', 'true');
-    }
-
-    accessibilityState.id = accessibilityState.id || commons.getUID();
-
     // Templates
-    this._elements = {
-      accessibilityState
-    };
+    this._elements = {};
+    accessibilityState.call(this._elements, {commons});
 
     // Required for coral-table-row:change event
     this._oldSelection = [];
@@ -236,28 +225,33 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
       this.removeAttribute('aria-atomic');
       this.removeAttribute('aria-relevant');
 
-      // @a11y Unhide the selectHandle, so that it will be resume being announced by assistive technology
-      if (selectHandle && selectHandle instanceof Checkbox) {
+      // @a11y Unhide the selectHandle, so that it will be resume being announced by assistive 
+      // technology
+      if (selectHandle && selectHandle.tagName === 'CORAL-CHECKBOX') {
         selectHandle.removeAttribute('aria-hidden');
       }
 
-      // @a11y Unhide the coral-table-roworder handle, so that it will be resume being announced by assistive technology
+      // @a11y Unhide the coral-table-roworder handle, so that it will be resume being announced by 
+      // assistive technology
       if (rowOrderHandle) {
         rowOrderHandle.removeAttribute('aria-hidden');
       }
 
-      // @a11y Unhide the coral-table-rowlock handle, so that it will be resume being announced by assistive technology
+      // @a11y Unhide the coral-table-rowlock handle, so that it will be resume being announced by 
+      // assistive technology
       if (rowLockHandle) {
         rowLockHandle.removeAttribute('aria-hidden');
       }
 
-      // @a11y Unhide the coral-row-remove handle, so that it will be resume being announced by assistive technology
+      // @a11y Unhide the coral-row-remove handle, so that it will be resume being announced by 
+      // assistive technology
       if (rowRemoveHandle) {
         rowRemoveHandle.removeAttribute('aria-hidden');
       }
 
       if (accessibilityState) {
-        // @a11y Hide the _accessibilityState from assistive technology, so that it can not be read using a screen reader separately from the row it helps label
+        // @a11y Hide the _accessibilityState from assistive technology, so that it can not be read 
+        // using a screen reader separately from the row it helps label
         accessibilityState.setAttribute('aria-hidden', 'true');
 
         // @a11y If the item is not selected, remove ', unchecked' to decrease verbosity.
@@ -284,25 +278,30 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
         if (this === document.activeElement || this.contains(document.activeElement)) {
           
           // @a11y Hide the "Select" checkbox so that it does not get announced with the state change.
-          if (selectHandle && selectHandle instanceof Checkbox) {
+          if (selectHandle && selectHandle.tagName === 'CORAL-CHECKBOX') {
             selectHandle.setAttribute('aria-hidden', 'true');
           }
 
-          // @a11y Hide the coral-table-roworder handle so that it does not get announced with the state change.
+          // @a11y Hide the coral-table-roworder handle so that it does not get announced with the 
+          // state change.
           if (rowOrderHandle) {
             rowOrderHandle.setAttribute('aria-hidden', 'true');
           }
 
-          // @a11y Hide the coral-table-rowlock handle so that it does not get announced with the state change.
+          // @a11y Hide the coral-table-rowlock handle so that it does not get announced with the state
+          // change.
           if (rowLockHandle) {
             rowLockHandle.setAttribute('aria-hidden', 'true');
           }
 
-          // @a11y Hide the coral-row-remove handle so that it does not get announced with the state change.
+          // @a11y Hide the coral-row-remove handle so that it does not get announced with the state 
+          // change.
           if (rowRemoveHandle) {
             rowRemoveHandle.setAttribute('aria-hidden', 'true');
           }
 
+          // @a11y The ChromeVox screenreader, used on Chromebook, announces the state change and 
+          // should not need aria-live, otherwise it double-voices the row.
           if (!window.cvox) {
             // @a11y Unhide the _accessibilityState so that it will get announced with the state change.
             accessibilityState.removeAttribute('aria-hidden');
@@ -315,7 +314,8 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
           }
 
           this._ariaLiveOnTimeout = setTimeout(() => {
-            // @ally Set the _accessibilityState text to read either ", checked" or ", unchecked", which should trigger a live region announcement.
+            // @ally Set the _accessibilityState text to read either ", checked" or ", unchecked", 
+            // which should trigger a live region announcement.
             accessibilityState.innerHTML = i18n.get(this.selected ? ', checked' : ', unchecked');
 
             // @ally wait 250ms for row to announce
@@ -362,7 +362,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
         cellForAccessibilityState = cell;
 
         // @a11y otherwise, if the selectHandle is a coral-checkbox,
-        if (handle && handle instanceof Checkbox) {
+        if (handle && handle.tagName === 'CORAL-CHECKBOX') {
           // @a11y if the row is selected, don't add the coral-table-rowselect to accessibility name
           if (this.selected) {
             return;
@@ -376,7 +376,8 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
       return cell.id;
     });
 
-    // @a11y If an _accessibilityState has not been defined within one of the cells, add to the last cell
+    // @a11y If an _accessibilityState has not been defined within one of the cells, add to the last 
+    // cell
     if (!cellForAccessibilityState && cells.length) {
       cellForAccessibilityState = cells[cells.length - 1];
     }
@@ -387,7 +388,8 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
 
     // @a11y Once defined,
     if (this._elements.accessibilityState.parentNode) {
-      // @a11y add the _accessibilityState ", checked" or ", unchecked" as the last item in the accessibility name
+      // @a11y add the _accessibilityState ", checked" or ", unchecked" as the last item in the 
+      // accessibility name
       ids.push(this._elements.accessibilityState.id);
     }
 
@@ -407,7 +409,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
       selectHandle[this.selected ? 'setAttribute' : 'removeAttribute']('checked', '');
       
       // @a11y If the handle is a checkbox but lacks a label, label it with "Select".
-      if (selectHandle instanceof Checkbox) {
+      if (selectHandle.tagName === 'CORAL-CHECKBOX') {
         if (!selectHandle.labelled) {
           selectHandle.labelled = i18n.get('Select');
         }
