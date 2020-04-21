@@ -88,22 +88,22 @@
           </thead>
           <tbody is="coral-table-body">
           <tr is="coral-table-row">
-            <td is="coral-table-cell">Alpha</td>
+            <td is="coral-table-cell" role="rowheader">Alpha</td>
             <td is="coral-table-cell">23,857</td>
             <td is="coral-table-cell">January 28, 2012</td>
           </tr>
           <tr is="coral-table-row">
-            <td is="coral-table-cell">Beta</td>
+            <td is="coral-table-cell" role="rowheader">Beta</td>
             <td is="coral-table-cell">20,398</td>
             <td is="coral-table-cell">December 1, 2011</td>
           </tr>
           <tr is="coral-table-row">
-            <td is="coral-table-cell">Charlie</td>
+            <td is="coral-table-cell" role="rowheader">Charlie</td>
             <td is="coral-table-cell">3,498</td>
             <td is="coral-table-cell">February 15, 2012</td>
           </tr>
           <tr is="coral-table-row">
-            <td is="coral-table-cell">Delta</td>
+            <td is="coral-table-cell" role="rowheader">Delta</td>
             <td is="coral-table-cell">20,398</td>
             <td is="coral-table-cell">May 16, 2012</td>
           </tr>
@@ -123,22 +123,22 @@
           </thead>
           <tbody is="coral-table-body">
           <tr is="coral-table-row">
-            <td is="coral-table-cell">Alpha</td>
+            <td is="coral-table-cell" role="rowheader">Alpha</td>
             <td is="coral-table-cell">23,857</td>
             <td is="coral-table-cell">January 28, 2012</td>
           </tr>
           <tr is="coral-table-row">
-            <td is="coral-table-cell">Beta</td>
+            <td is="coral-table-cell" role="rowheader">Beta</td>
             <td is="coral-table-cell">20,398</td>
             <td is="coral-table-cell">December 1, 2011</td>
           </tr>
           <tr is="coral-table-row">
-            <td is="coral-table-cell">Charlie</td>
+            <td is="coral-table-cell" role="rowheader">Charlie</td>
             <td is="coral-table-cell">3,498</td>
             <td is="coral-table-cell">February 15, 2012</td>
           </tr>
           <tr is="coral-table-row">
-            <td is="coral-table-cell">Delta</td>
+            <td is="coral-table-cell" role="rowheader">Delta</td>
             <td is="coral-table-cell">20,398</td>
             <td is="coral-table-cell">May 16, 2012</td>
           </tr>
@@ -153,7 +153,7 @@
             max-height: 200px;
           }
         </style>
-        <table is="coral-table" selectable orderable multiple class="table-sticky" variant="list">
+        <table is="coral-table" selectable orderable multiple class="table-sticky">
           <colgroup>
             <col is="coral-table-column" fixedwidth>
             <col is="coral-table-column" sortable>
@@ -174,12 +174,12 @@
             <tr is="coral-table-row">
               <td is="coral-table-cell" coral-table-rowselect>
                 <coral-checkbox></coral-checkbox>
-                <coral-icon icon="folder" autoarialabel="on"></coral-icon>
+                <coral-icon icon="folder"></coral-icon>
               </td>
-              <td is="coral-table-cell">Alpha</td>
+              <td is="coral-table-cell" role="rowheader">Alpha</td>
               <td is="coral-table-cell">January 28, 2012</td>
               <td is="coral-table-cell">
-                <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" aria-label="Reorder" aria-roledescription="drag handle" coral-table-roworder></button>
+                <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" coral-table-roworder></button>
               </td>
             </tr>
             <tr is="coral-table-row">
@@ -187,110 +187,7 @@
                 <coral-checkbox></coral-checkbox>
                 <img alt="" src="http://via.placeholder.com/128x128" alt="thumbnail">
               </td>
-              <td is="coral-table-cell">Charlie</td>
-              <td is="coral-table-cell">February 15, 2012</td>
-              <td is="coral-table-cell">
-                <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" aria-label="Reorder" aria-roledescription="drag handle" coral-table-roworder></button>
-              </td>
-            </tr>
-            <tr is="coral-table-row">
-              <td is="coral-table-cell" coral-table-rowselect>
-                <coral-checkbox></coral-checkbox>
-                <img alt="" src="http://via.placeholder.com/128x128">
-              </td>
-              <td is="coral-table-cell">Delta</td>
-              <td is="coral-table-cell">May 16, 2012</td>
-              <td is="coral-table-cell">
-                <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" aria-label="Reorder" aria-roledescription="drag handle" coral-table-roworder></button>
-              </td>
-            </tr>
-            <tr is="coral-table-row">
-              <td is="coral-table-cell" coral-table-rowselect>
-                <coral-checkbox></coral-checkbox>
-                <img alt="" src="http://via.placeholder.com/128x128">
-              </td>
-              <td is="coral-table-cell">Alpha</td>
-              <td is="coral-table-cell">January 28, 2012</td>
-              <td is="coral-table-cell">
-                <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" aria-label="Reorder" aria-roledescription="drag handle" coral-table-roworder></button>
-              </td>
-            </tr>
-            <tr is="coral-table-row">
-              <td is="coral-table-cell" coral-table-rowselect>
-                <coral-checkbox></coral-checkbox>
-                <img alt="" src="http://via.placeholder.com/128x128">
-              </td>
-              <td is="coral-table-cell">Beta</td>
-              <td is="coral-table-cell">December 1, 2011</td>
-              <td is="coral-table-cell">
-                <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" aria-label="Reorder" aria-roledescription="drag handle" coral-table-roworder></button>
-              </td>
-            </tr>
-            <tr is="coral-table-row">
-              <td is="coral-table-cell" coral-table-rowselect>
-                <coral-checkbox></coral-checkbox>
-                <img alt="" src="http://via.placeholder.com/128x128">
-              </td>
-              <td is="coral-table-cell">Charlie</td>
-              <td is="coral-table-cell">February 15, 2012</td>
-              <td is="coral-table-cell">
-                <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" aria-label="Reorder" aria-roledescription="drag handle" coral-table-roworder></button>
-              </td>
-            </tr>
-            <tr is="coral-table-row">
-              <td is="coral-table-cell" coral-table-rowselect>
-                <img alt="" src="http://via.placeholder.com/128x128">
-              </td>
-              <td is="coral-table-cell">Delta</td>
-              <td is="coral-table-cell">May 16, 2012</td>
-              <td is="coral-table-cell">
-                <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" aria-label="Reorder" aria-roledescription="drag handle" coral-table-roworder></button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h2 class="coral--Heading--S">ListView selection</h2>
-      <div class="markup">
-        <style>
-          .table-sticky [coral-table-scroll] {
-            max-height: 200px;
-          }
-        </style>
-        <table is="coral-table" selectable orderable multiple class="table-sticky" variant="list">
-          <colgroup>
-            <col is="coral-table-column" fixedwidth>
-            <col is="coral-table-column" sortable>
-            <col is="coral-table-column" sortable sortabletype="date">
-            <col is="coral-table-column" fixedwidth>
-          </colgroup>
-          <thead is="coral-table-head" sticky>
-            <tr is="coral-table-row">
-              <th is="coral-table-headercell">
-                <coral-checkbox coral-table-select></coral-checkbox>
-              </th>
-              <th is="coral-table-headercell">Activities</th>
-              <th is="coral-table-headercell">Date</th>
-              <th is="coral-table-headercell"></th>
-            </tr>
-          </thead>
-          <tbody is="coral-table-body">
-            <tr is="coral-table-row">
-              <td is="coral-table-cell" coral-table-rowselect>
-                <coral-icon alt="folder" icon="folder"></coral-icon>
-              </td>
-              <td is="coral-table-cell">Alpha</td>
-              <td is="coral-table-cell">January 28, 2012</td>
-              <td is="coral-table-cell">
-                <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" coral-table-roworder></button>
-              </td>
-            </tr>
-            <tr is="coral-table-row">
-              <td is="coral-table-cell" coral-table-rowselect>
-                <img alt="thumbnail" src="http://via.placeholder.com/128x128"/>
-              </td>
-              <td is="coral-table-cell">Charlie</td>
+              <td is="coral-table-cell" role="rowheader">Charlie</td>
               <td is="coral-table-cell">February 15, 2012</td>
               <td is="coral-table-cell">
                 <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" coral-table-roworder></button>
@@ -298,9 +195,10 @@
             </tr>
             <tr is="coral-table-row">
               <td is="coral-table-cell" coral-table-rowselect>
-                <img alt="thumbnail" src="http://via.placeholder.com/128x128"/>
+                <coral-checkbox></coral-checkbox>
+                <img alt="" src="http://via.placeholder.com/128x128">
               </td>
-              <td is="coral-table-cell">Delta</td>
+              <td is="coral-table-cell" role="rowheader">Delta</td>
               <td is="coral-table-cell">May 16, 2012</td>
               <td is="coral-table-cell">
                 <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" coral-table-roworder></button>
@@ -308,9 +206,10 @@
             </tr>
             <tr is="coral-table-row">
               <td is="coral-table-cell" coral-table-rowselect>
-                <img alt="thumbnail" src="http://via.placeholder.com/128x128"/>
+                <coral-checkbox></coral-checkbox>
+                <img alt="" src="http://via.placeholder.com/128x128">
               </td>
-              <td is="coral-table-cell">Alpha</td>
+              <td is="coral-table-cell" role="rowheader">Alpha</td>
               <td is="coral-table-cell">January 28, 2012</td>
               <td is="coral-table-cell">
                 <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" coral-table-roworder></button>
@@ -318,9 +217,10 @@
             </tr>
             <tr is="coral-table-row">
               <td is="coral-table-cell" coral-table-rowselect>
-                <img alt="thumbnail" src="http://via.placeholder.com/128x128"/>
+                <coral-checkbox></coral-checkbox>
+                <img alt="" src="http://via.placeholder.com/128x128">
               </td>
-              <td is="coral-table-cell">Beta</td>
+              <td is="coral-table-cell" role="rowheader">Beta</td>
               <td is="coral-table-cell">December 1, 2011</td>
               <td is="coral-table-cell">
                 <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" coral-table-roworder></button>
@@ -328,9 +228,10 @@
             </tr>
             <tr is="coral-table-row">
               <td is="coral-table-cell" coral-table-rowselect>
-                <img alt="thumbnail"src="http://via.placeholder.com/128x128"/>
+                <coral-checkbox></coral-checkbox>
+                <img alt="" src="http://via.placeholder.com/128x128">
               </td>
-              <td is="coral-table-cell">Charlie</td>
+              <td is="coral-table-cell" role="rowheader">Charlie</td>
               <td is="coral-table-cell">February 15, 2012</td>
               <td is="coral-table-cell">
                 <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" coral-table-roworder></button>
@@ -338,9 +239,9 @@
             </tr>
             <tr is="coral-table-row">
               <td is="coral-table-cell" coral-table-rowselect>
-                <img alt="thumbnail" src="http://via.placeholder.com/128x128"/>
+                <img alt="" src="http://via.placeholder.com/128x128">
               </td>
-              <td is="coral-table-cell">Delta</td>
+              <td is="coral-table-cell" role="rowheader">Delta</td>
               <td is="coral-table-cell">May 16, 2012</td>
               <td is="coral-table-cell">
                 <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" coral-table-roworder></button>
@@ -379,22 +280,22 @@
           </thead>
           <tbody is="coral-table-body" divider="column">
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Alpha</td>
+              <td is="coral-table-cell" role="rowheader">Alpha</td>
               <td is="coral-table-cell">23,857</td>
               <td is="coral-table-cell">January 28, 2012</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Beta</td>
+              <td is="coral-table-cell" role="rowheader">Beta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">December 1, 2011</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Charlie</td>
+              <td is="coral-table-cell" role="rowheader">Charlie</td>
               <td is="coral-table-cell">3,498</td>
               <td is="coral-table-cell">February 15, 2012</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Delta</td>
+              <td is="coral-table-cell" role="rowheader">Delta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">May 16, 2012</td>
             </tr>
@@ -417,21 +318,21 @@
           <tbody is="coral-table-body" divider="cell">
             <tr is="coral-table-row">
               <th is="coral-table-headercell">Left Label</th>
-              <td is="coral-table-cell">Alpha</td>
+              <td is="coral-table-cell" role="rowheader">Alpha</td>
               <td is="coral-table-cell">23,857</td>
               <td is="coral-table-cell">January 28, 2012</td>
               <th is="coral-table-headercell">Right Label</th>
             </tr>
             <tr is="coral-table-row">
               <th is="coral-table-headercell">Left Label</th>
-              <td is="coral-table-cell">Beta</td>
+              <td is="coral-table-cell" role="rowheader">Beta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">December 1, 2011</td>
               <th is="coral-table-headercell">Right Label</th>
             </tr>
             <tr is="coral-table-row">
               <th is="coral-table-headercell">Left Label</th>
-              <td is="coral-table-cell">Charlie</td>
+              <td is="coral-table-cell" role="rowheader">Charlie</td>
               <td is="coral-table-cell">3,498</td>
               <td is="coral-table-cell">February 15, 2012</td>
               <th is="coral-table-headercell">Right Label</th>
@@ -502,22 +403,22 @@
           </thead>
           <tbody is="coral-table-body">
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Beta</td>
+              <td is="coral-table-cell" role="rowheader">Beta</td>
               <td is="coral-table-cell" value="20398">20,398</td>
               <td is="coral-table-cell" value="1322694000000">December 1, 2011</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Alpha</td>
+              <td is="coral-table-cell" role="rowheader">Alpha</td>
               <td is="coral-table-cell" value="23857">23,857</td>
               <td is="coral-table-cell" value="1327705200000">January 28, 2012</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Charlie</td>
+              <td is="coral-table-cell" role="rowheader">Charlie</td>
               <td is="coral-table-cell" value="3498">3,498</td>
               <td is="coral-table-cell" value="1329260400000">February 15, 2012</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Delta</td>
+              <td is="coral-table-cell" role="rowheader">Delta</td>
               <td is="coral-table-cell" value="20398">20,398</td>
               <td is="coral-table-cell" value="1337119200000">May 16, 2012</td>
             </tr>
@@ -612,22 +513,22 @@
           </tfoot>
           <tbody is="coral-table-body">
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Alpha</td>
+              <td is="coral-table-cell" role="rowheader">Alpha</td>
               <td is="coral-table-cell">23,857</td>
               <td is="coral-table-cell">January 28, 2012</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Beta</td>
+              <td is="coral-table-cell" role="rowheader">Beta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">December 1, 2011</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Charlie</td>
+              <td is="coral-table-cell" role="rowheader">Charlie</td>
               <td is="coral-table-cell">3,498</td>
               <td is="coral-table-cell">February 15, 2012</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Delta</td>
+              <td is="coral-table-cell" role="rowheader">Delta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">May 16, 2012</td>
             </tr>
@@ -647,32 +548,32 @@
           </thead>
           <tbody is="coral-table-body">
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Alpha</td>
+              <td is="coral-table-cell" role="rowheader">Alpha</td>
               <td is="coral-table-cell">23,857</td>
               <td is="coral-table-cell">January 28, 2012</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Beta</td>
+              <td is="coral-table-cell" role="rowheader">Beta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">December 1, 2011</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Charlie</td>
+              <td is="coral-table-cell" role="rowheader">Charlie</td>
               <td is="coral-table-cell">3,498</td>
               <td is="coral-table-cell">February 15, 2012</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Delta</td>
+              <td is="coral-table-cell" role="rowheader">Delta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">May 16, 2012</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Echo</td>
+              <td is="coral-table-cell" role="rowheader">Echo</td>
               <td is="coral-table-cell">1,331</td>
               <td is="coral-table-cell">June 26, 2015</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Foxtrot</td>
+              <td is="coral-table-cell" role="rowheader">Foxtrot</td>
               <td is="coral-table-cell">41,331</td>
               <td is="coral-table-cell">July 12, 2014</td>
             </tr>
@@ -746,22 +647,22 @@
           </thead>
           <tbody is="coral-table-body">
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Alpha</td>
+              <td is="coral-table-cell" role="rowheader">Alpha</td>
               <td is="coral-table-cell">23,857</td>
               <td is="coral-table-cell">January 28, 2012</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Beta</td>
+              <td is="coral-table-cell" role="rowheader">Beta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">December 1, 2011</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Charlie</td>
+              <td is="coral-table-cell" role="rowheader">Charlie</td>
               <td is="coral-table-cell">3,498</td>
               <td is="coral-table-cell">February 15, 2012</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Delta</td>
+              <td is="coral-table-cell" role="rowheader">Delta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">May 16, 2012</td>
             </tr>
@@ -786,42 +687,42 @@
           </thead>
           <tbody is="coral-table-body">
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Alpha</td>
+              <td is="coral-table-cell" role="rowheader">Alpha</td>
               <td is="coral-table-cell">23,857</td>
               <td is="coral-table-cell">January 28, 2012</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Beta</td>
+              <td is="coral-table-cell" role="rowheader">Beta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">December 1, 2011</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Charlie</td>
+              <td is="coral-table-cell" role="rowheader">Charlie</td>
               <td is="coral-table-cell">3,498</td>
               <td is="coral-table-cell">February 15, 2012</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Delta</td>
+              <td is="coral-table-cell" role="rowheader">Delta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">May 16, 2012</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Delta</td>
+              <td is="coral-table-cell" role="rowheader">Delta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">May 16, 2012</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Delta</td>
+              <td is="coral-table-cell" role="rowheader">Delta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">May 16, 2012</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Delta</td>
+              <td is="coral-table-cell" role="rowheader">Delta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">May 16, 2012</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Delta</td>
+              <td is="coral-table-cell" role="rowheader">Delta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">May 16, 2012</td>
             </tr>
@@ -846,37 +747,37 @@
           </thead>
           <tbody is="coral-table-body" divider="cell">
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Alpha</td>
+              <td is="coral-table-cell" role="rowheader">Alpha</td>
               <td is="coral-table-cell">23,857</td>
               <td is="coral-table-cell">January 28</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Beta</td>
+              <td is="coral-table-cell" role="rowheader">Beta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">December</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Charlie</td>
+              <td is="coral-table-cell" role="rowheader">Charlie</td>
               <td is="coral-table-cell">3,498</td>
               <td is="coral-table-cell">February</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Delta</td>
+              <td is="coral-table-cell" role="rowheader">Delta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">May</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Delta</td>
+              <td is="coral-table-cell" role="rowheader">Delta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">April</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Delta</td>
+              <td is="coral-table-cell" role="rowheader">Delta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">June</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Delta</td>
+              <td is="coral-table-cell" role="rowheader">Delta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">December</td>
             </tr>
@@ -902,35 +803,35 @@
           </thead>
           <tbody is="coral-table-body" orderable>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Alpha</td>
+              <td is="coral-table-cell" role="rowheader">Alpha</td>
               <td is="coral-table-cell">23,857</td>
               <td is="coral-table-cell">January 28, 2012</td>
               <td is="coral-table-cell">
-                <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" aria-label="Reorder" aria-roledescription="drag handle" coral-table-roworder></button>
+                <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" coral-table-roworder></button>
               </td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Beta</td>
+              <td is="coral-table-cell" role="rowheader">Beta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">December 1, 2011</td>
               <td is="coral-table-cell">
-                <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" aria-label="Reorder" aria-roledescription="drag handle" coral-table-roworder></button>
+                <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" coral-table-roworder></button>
               </td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Charlie</td>
+              <td is="coral-table-cell" role="rowheader">Charlie</td>
               <td is="coral-table-cell">3,498</td>
               <td is="coral-table-cell">February 15, 2012</td>
               <td is="coral-table-cell">
-                <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" aria-label="Reorder" aria-roledescription="drag handle" coral-table-roworder></button>
+                <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" coral-table-roworder></button>
               </td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Delta</td>
+              <td is="coral-table-cell" role="rowheader">Delta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">May 16, 2012</td>
               <td is="coral-table-cell">
-                <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" aria-label="Reorder" aria-roledescription="drag handle" coral-table-roworder></button>
+                <button is="coral-button" type="button" variant="quietaction" icon="dragHandle" coral-table-roworder></button>
               </td>
             </tr>
           </tbody>
@@ -956,35 +857,35 @@
           </thead>
           <tbody is="coral-table-body">
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Alpha</td>
+              <td is="coral-table-cell" role="rowheader">Alpha</td>
               <td is="coral-table-cell">23,857</td>
               <td is="coral-table-cell">January 28, 2012</td>
               <td is="coral-table-cell">
-                <button is="coral-button" type="button" icon="lockClosed" variant="quietaction" aria-label="locked" coral-table-rowlock></button>
+                <button is="coral-button" type="button" icon="lockClosed" variant="quietaction" coral-table-rowlock></button>
               </td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Beta</td>
+              <td is="coral-table-cell" role="rowheader">Beta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">December 1, 2011</td>
               <td is="coral-table-cell">
-                <button is="coral-button" type="button" icon="lockClosed" variant="quietaction" aria-label="locked" coral-table-rowlock></button>
+                <button is="coral-button" type="button" icon="lockClosed" variant="quietaction" coral-table-rowlock></button>
               </td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Charlie</td>
+              <td is="coral-table-cell" role="rowheader">Charlie</td>
               <td is="coral-table-cell">3,498</td>
               <td is="coral-table-cell">February 15, 2012</td>
               <td is="coral-table-cell">
-                <button is="coral-button" type="button" icon="lockClosed" variant="quietaction" aria-label="locked" coral-table-rowlock></button>
+                <button is="coral-button" type="button" icon="lockClosed" variant="quietaction" coral-table-rowlock></button>
               </td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Delta</td>
+              <td is="coral-table-cell" role="rowheader">Delta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">May 16, 2012</td>
               <td is="coral-table-cell">
-                <button is="coral-button" type="button" icon="lockClosed" variant="quietaction" aria-label="locked" coral-table-rowlock></button>
+                <button is="coral-button" type="button" icon="lockClosed" variant="quietaction" coral-table-rowlock></button>
               </td>
             </tr>
           </tbody>
@@ -1014,22 +915,22 @@
           </thead>
           <tbody is="coral-table-body">
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Alpha</td>
+              <td is="coral-table-cell" role="rowheader">Alpha</td>
               <td is="coral-table-cell">23,857</td>
               <td is="coral-table-cell">January 28, 2012</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Beta</td>
+              <td is="coral-table-cell" role="rowheader">Beta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">December 1, 2011</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Charlie</td>
+              <td is="coral-table-cell" role="rowheader">Charlie</td>
               <td is="coral-table-cell">3,498</td>
               <td is="coral-table-cell">February 15, 2012</td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Delta</td>
+              <td is="coral-table-cell" role="rowheader">Delta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">May 16, 2012</td>
             </tr>
@@ -1064,31 +965,31 @@
           </thead>
           <tbody is="coral-table-body">
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Alpha</td>
+              <td is="coral-table-cell" role="rowheader">Alpha</td>
               <td is="coral-table-cell">23,857</td>
               <td is="coral-table-cell">
-                <button row-remove is="coral-button" type="button" icon="close" iconSize="XS" variant="quietaction" aria-label="Remove" title="Remove"></button>
+                <button row-remove is="coral-button" type="button" icon="close" iconSize="XS" variant="quietaction"></button>
               </td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Beta</td>
+              <td is="coral-table-cell" role="rowheader">Beta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">
-                <button row-remove is="coral-button" type="button" icon="close" iconSize="XS" variant="quietaction" aria-label="Remove" title="Remove"></button>
+                <button row-remove is="coral-button" type="button" icon="close" iconSize="XS" variant="quietaction"></button>
               </td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Charlie</td>
+              <td is="coral-table-cell" role="rowheader">Charlie</td>
               <td is="coral-table-cell">3,498</td>
               <td is="coral-table-cell">
-                <button row-remove is="coral-button" type="button" icon="close" iconSize="XS" variant="quietaction" aria-label="Remove" title="Remove"></button>
+                <button row-remove is="coral-button" type="button" icon="close" iconSize="XS" variant="quietaction"></button>
               </td>
             </tr>
             <tr is="coral-table-row">
-              <td is="coral-table-cell">Delta</td>
+              <td is="coral-table-cell" role="rowheader">Delta</td>
               <td is="coral-table-cell">20,398</td>
               <td is="coral-table-cell">
-                <button row-remove is="coral-button" type="button" icon="close" iconSize="XS" variant="quietaction" aria-label="Remove" title="Remove"></button>
+                <button row-remove is="coral-button" type="button" icon="close" iconSize="XS" variant="quietaction"></button>
               </td>
             </tr>
             <tr is="coral-table-row">
@@ -1099,7 +1000,7 @@
                 <input aria-label="input" is="coral-textfield" variant="quiet" type="text" placeholder="Type Number">
               </td>
               <td is="coral-table-cell">
-                <button row-add is="coral-button" type="button" icon="add" iconSize="XS" variant="quietaction" aria-label="Add" title="Add"></button>
+                <button row-add is="coral-button" type="button" icon="add" iconSize="XS" variant="quietaction"></button>
               </td>
             </tr>
           </tbody>
@@ -1161,17 +1062,17 @@
           </thead>
           <tbody class="coral-Table-body">
           <tr class="coral-Table-row">
-            <td class="coral-Table-cell">Squeak</td>
+            <td class="coral-Table-cell" role="rowheader">Squeak</td>
             <td class="coral-Table-cell">Mouse</td>
             <td class="coral-Table-cell">Bad</td>
           </tr>
           <tr class="coral-Table-row">
-            <td class="coral-Table-cell">Spot</td>
+            <td class="coral-Table-cell" role="rowheader">Spot</td>
             <td class="coral-Table-cell">Dog</td>
             <td class="coral-Table-cell">Bad</td>
           </tr>
           <tr class="coral-Table-row">
-            <td class="coral-Table-cell">Fluffy</td>
+            <td class="coral-Table-cell" role="rowheader">Fluffy</td>
             <td class="coral-Table-cell">Velociraptor</td>
             <td class="coral-Table-cell">Good</td>
           </tr>
@@ -1192,17 +1093,17 @@
           </thead>
           <tbody class="coral-Table-body">
           <tr class="coral-Table-row">
-            <td class="coral-Table-cell">Mongo</td>
+            <td class="coral-Table-cell" role="rowheader">Mongo</td>
             <td class="coral-Table-cell">Chihuahua</td>
             <td class="coral-Table-cell">Bad</td>
           </tr>
           <tr class="coral-Table-row">
-            <td class="coral-Table-cell">Tiny</td>
+            <td class="coral-Table-cell" role="rowheader">Tiny</td>
             <td class="coral-Table-cell">Great Dane</td>
             <td class="coral-Table-cell">Bad</td>
           </tr>
           <tr class="coral-Table-row">
-            <td class="coral-Table-cell">Jaws</td>
+            <td class="coral-Table-cell" role="rowheader">Jaws</td>
             <td class="coral-Table-cell">Pit Bull</td>
             <td class="coral-Table-cell">Good</td>
           </tr>
@@ -1223,17 +1124,17 @@
           </thead>
           <tbody class="coral-Table-body">
           <tr class="coral-Table-row">
-            <td class="coral-Table-cell">Hopper</td>
+            <td class="coral-Table-cell" role="rowheader">Hopper</td>
             <td class="coral-Table-cell">Frog</td>
             <td class="coral-Table-cell">Good</td>
           </tr>
           <tr class="coral-Table-row">
-            <td class="coral-Table-cell">Pokey</td>
+            <td class="coral-Table-cell" role="rowheader">Pokey</td>
             <td class="coral-Table-cell">Porcupine</td>
             <td class="coral-Table-cell">Good</td>
           </tr>
           <tr class="coral-Table-row">
-            <td class="coral-Table-cell">Mr. Snuggles</td>
+            <td class="coral-Table-cell" role="rowheader">Mr. Snuggles</td>
             <td class="coral-Table-cell">Snake</td>
             <td class="coral-Table-cell">Bad</td>
           </tr>
