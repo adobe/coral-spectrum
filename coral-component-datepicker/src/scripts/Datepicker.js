@@ -494,7 +494,6 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
     this._reflectAttribute('required', this._required);
     
     this._elements.toggle.classList.toggle('is-invalid', this._required);
-    this.setAttribute('aria-required', this._required);
     
     this._elements.input.required = this._required;
   }
@@ -516,6 +515,21 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
     this._elements.input.readOnly = this._readOnly;
     this._elements.toggle.disabled = this._readOnly || this.disabled;
   }
+
+  /**
+   Inherited from {@link BaseFormField#labelled}.
+   */
+  get labelled() {
+    return super.labelled;
+  }
+  set labelled(value) {
+    super.labelled = value;
+    
+    // in case the user focuses the buttons, he will still get a notion of the usage of the component
+    this[this.labelled ? 'setAttribute' : 'removeAttribute']('aria-labelledby', this.labelled);
+    this._elements.overlay[this.labelled ? 'setAttribute' : 'removeAttribute']('aria-labelledby', this.labelled);
+    this._elements.calendar[this.labelled ? 'setAttribute' : 'removeAttribute']('aria-labelledby', this.labelled);
+  }
   
   /**
    Inherited from {@link BaseFormField#labelledBy}.
@@ -528,6 +542,8 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
     
     // in case the user focuses the buttons, he will still get a notion of the usage of the component
     this[this.labelledBy ? 'setAttribute' : 'removeAttribute']('aria-labelledby', this.labelledBy);
+    this._elements.overlay[this.labelledBy ? 'setAttribute' : 'removeAttribute']('aria-labelledby', this.labelledBy);
+    this._elements.calendar[this.labelledBy ? 'setAttribute' : 'removeAttribute']('aria-labelledby', this.labelledBy);
   }
   
   /**
@@ -551,9 +567,11 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
     
       // Hide pop-over and remove related attributes:
       this._elements.overlay.hidden = true;
-      this.removeAttribute('aria-haspopup');
-      this.removeAttribute('aria-expanded');
-      this.removeAttribute('aria-owns');
+      this._elements.input.removeAttribute('role');
+      this._elements.input.removeAttribute('aria-autocomplete');
+      this._elements.input.removeAttribute('aria-haspopup');
+      this._elements.input.removeAttribute('aria-expanded');
+      this._elements.input.removeAttribute('aria-controls');
     }
     else {
       // Switch to Calendar picker
@@ -562,14 +580,24 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
     
       // Show pop-over and add related attributes:
       this._elements.overlay.hidden = false;
-      this.setAttribute('aria-haspopup', 'dialog');
-      this.setAttribute('aria-expanded', this._elements.overlay.open);
-      this.setAttribute('aria-owns', this._elements.overlay.id);
+
+      // Input attributes per ARIA Autocomplete
+      this._elements.input.setAttribute('role', 'combobox');
+      this._elements.input.setAttribute('aria-autocomplete', 'none');
+      this._elements.input.setAttribute('aria-haspopup', 'dialog');
+      this._elements.input.setAttribute('aria-expanded', this._elements.overlay.open);
+      this._elements.input.setAttribute('aria-controls', this._elements.overlay.id);
+    
+      // Trigger button attributes per ARIA Autocomplete
+      this._elements.toggle.setAttribute('aria-haspopup', 'dialog');
+      this._elements.toggle.setAttribute('aria-expanded', this._elements.overlay.open);
+      this._elements.toggle.setAttribute('aria-controls', this._elements.overlay.id);
     }
   }
   
   /** @ignore */
   _onPopoverBeforeOpen() {
+    this._elements.overlay.returnFocusTo(this._elements.input);
     this._elements.calendar._validateCalendar();
     this._renderCalendar();
   }
@@ -588,11 +616,13 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
       else {
         this._elements.calendar.focus();
       }
-      this.setAttribute('aria-expanded', true);
+      this._elements.input.setAttribute('aria-expanded', 'true');
+      this._elements.toggle.setAttribute('aria-expanded', 'true');
       this._trackEvent('open', 'coral-datepicker', event);
     }
     else {
-      this.setAttribute('aria-expanded', false);
+      this._elements.input.setAttribute('aria-expanded', 'false');
+      this._elements.toggle.setAttribute('aria-expanded', 'false');
       this._trackEvent('close', 'coral-datepicker', event);
     }
   }
@@ -766,7 +796,19 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
     this.classList.add(CLASSNAME);
     
     // a11y
-    this.setAttribute('role', 'combobox');
+    this.setAttribute('role', 'group');
+
+    // Input attributes per ARIA Autocomplete
+    this._elements.input.setAttribute('role', 'combobox');
+    this._elements.input.setAttribute('aria-autocomplete', 'none');
+    this._elements.input.setAttribute('aria-haspopup', 'dialog');
+    this._elements.input.setAttribute('aria-expanded', 'false');
+    this._elements.input.setAttribute('aria-controls', this._elements.overlay.id);
+  
+    // Trigger button attributes per ARIA Autocomplete
+    this._elements.toggle.setAttribute('aria-haspopup', 'dialog');
+    this._elements.toggle.setAttribute('aria-expanded', 'false');
+    this._elements.toggle.setAttribute('aria-controls', this._elements.overlay.id);
     
     // a11y we only have AUTO mode.
     this._useNativeInput = IS_MOBILE_DEVICE;

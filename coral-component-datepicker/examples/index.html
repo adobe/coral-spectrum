@@ -159,6 +159,28 @@
           <coral-datepicker class="coral-Form-field" labelledby="label12"></coral-datepicker>
         </form>
       </div>
+
+      <h2 class="coral--Heading--S">Datepicker within Dialog</h2>
+      <div class="markup">
+        <button is="coral-button" onclick="document.getElementById('dialogId').show()">Open dialog</button>
+        <coral-dialog id="dialogId" aria-label="Date">
+          <coral-dialog-header>Date</coral-dialog-header>
+          <form class="coral-Form coral-Form--vertical">
+            <coral-dialog-content>
+              <section class="coral-Form-fieldset">
+                <div class="coral-Form-fieldwrapper">
+                  <label class="coral-Form-fieldlabel" id="dateLabel">Date</label>
+                  <coral-datepicker labelledby="dateLabel" value="2014-12-31" displayformat="MM-DD-YYYY"></coral-datepicker>
+                </div>
+              </section>
+            </coral-dialog-content>
+            <coral-dialog-footer>
+              <button is="coral-button" type="reset" coral-close>Cancel</button>
+              <button is="coral-button" type="button" variant="primary" coral-close>Done</button>
+            </coral-dialog-footer>
+          </form>
+        </coral-dialog>
+      </div>
     </main>
   </body>
 </html>

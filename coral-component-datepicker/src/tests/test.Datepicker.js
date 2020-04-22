@@ -807,8 +807,8 @@ describe('Datepicker', function() {
 
         // Overlay does not open immediately any longer
         el.on('coral-overlay:open', function() {
-          expect(el.getAttribute('aria-expanded')).to.equal('true');
-
+          expect(el._elements.input.getAttribute('aria-expanded')).to.equal('true');
+          expect(el._elements.toggle.getAttribute('aria-expanded')).to.equal('true');
           done();
         });
       
@@ -856,7 +856,8 @@ describe('Datepicker', function() {
           // hours input should have focus when popover opens
           expect(document.activeElement).to.equal(el._elements.clock._elements.hours);
 
-          expect(el.getAttribute('aria-expanded')).to.equal('false');
+          expect(el._elements.input.getAttribute('aria-expanded')).to.equal('true');
+          expect(el._elements.trigger.getAttribute('aria-expanded')).to.equal('true');
         
           // trigger ESC key down event on hours input
           helpers.keydown(Keys.keyToCode('esc'), el._elements.clock._elements.hours);
@@ -866,7 +867,8 @@ describe('Datepicker', function() {
           // focus should return to toggle button
           expect(document.activeElement).to.equal(el._elements.toggle);
 
-          expect(el.getAttribute('aria-expanded')).to.equal('false');
+          expect(el._elements.input.getAttribute('aria-expanded')).to.equal('false');
+          expect(el._elements.toggle.getAttribute('aria-expanded')).to.equal('false');
 
           done();
         });
@@ -912,11 +914,13 @@ describe('Datepicker', function() {
         const el = helpers.build(window.__html__['Datepicker.value.html']);
 
         el.on('coral-overlay:open', function() {
-          expect(el.getAttribute('aria-expanded')).to.equal('true');
+          expect(el._elements.input.getAttribute('aria-expanded')).to.equal('true');
+          expect(el._elements.toggle.getAttribute('aria-expanded')).to.equal('true');
         });
         
         el.on('coral-overlay:close', function() {
-          expect(el.getAttribute('aria-expanded')).to.equal('false');
+          expect(el._elements.input.getAttribute('aria-expanded')).to.equal('false');
+          expect(el._elements.toggle.getAttribute('aria-expanded')).to.equal('false');
 
           done();
         });
@@ -942,11 +946,13 @@ describe('Datepicker', function() {
         const el = helpers.build(window.__html__['Datepicker.value.html']);
 
         el.on('coral-overlay:open', function() {
-          expect(el.getAttribute('aria-expanded')).to.equal('true');
+          expect(el._elements.input.getAttribute('aria-expanded')).to.equal('true');
+          expect(el._elements.toggle.getAttribute('aria-expanded')).to.equal('true');
         });
         
         el.on('coral-overlay:close', function() {
-          expect(el.getAttribute('aria-expanded')).to.equal('false');
+          expect(el._elements.input.getAttribute('aria-expanded')).to.equal('false');
+          expect(el._elements.toggle.getAttribute('aria-expanded')).to.equal('false');
 
           done();
         });
@@ -973,11 +979,12 @@ describe('Datepicker', function() {
         const el = helpers.build(window.__html__['Datepicker.value.html']);
 
         el.on('coral-overlay:open', function() {
-          expect(el.getAttribute('aria-expanded')).to.equal('true');
-        });
+          expect(el._elements.input.getAttribute('aria-expanded')).to.equal('true');
+          expect(el._elements.toggle.getAttribute('aria-expanded')).to.equal('true');        });
         
         el.on('coral-overlay:close', function() {
-          expect(el.getAttribute('aria-expanded')).to.equal('false');
+          expect(el._elements.input.getAttribute('aria-expanded')).to.equal('false');
+          expect(el._elements.toggle.getAttribute('aria-expanded')).to.equal('false');
 
           done();
         });
