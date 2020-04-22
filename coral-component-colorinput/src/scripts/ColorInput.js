@@ -474,7 +474,6 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
     
-    this.setAttribute('aria-required', this._required);
     this._elements.input.required = this._required;
   }
   
@@ -641,12 +640,14 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
     }
     
     // set aria-expanded state
+    this._elements.input.setAttribute('aria-expanded', true);
     this._elements.colorPreview.setAttribute('aria-expanded', true);
   }
   
   /** @ignore */
   _onOverlayClose() {
     // set aria-expanded state
+    this._elements.input.setAttribute('aria-expanded', true);
     this._elements.colorPreview.setAttribute('aria-expanded', false);
   }
   
@@ -886,8 +887,7 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
   
     this.classList.add(CLASSNAME);
   
-    this.setAttribute('role', 'combobox');
-    this.setAttribute('aria-expanded', false);
+    this.setAttribute('role', 'group');
     
     const frag = document.createDocumentFragment();
     

@@ -13,23 +13,23 @@
   </div>
   <div class="_coral-ColorInput-rgbaView _coral-ColorInput-editRgba" role="presentation">
     <div role="group" class="_coral-ColorInput-editRgba-group">
-      <label class="_coral-ColorInput-editRgba-group-label" for="{{uid}}-r">{{data.i18n.get('R')}}</label>
-      <coral-colorinput-slider handle="redSlider" min="0" max="255" value="0" gradient="#000000 #FF0000"></coral-colorinput-slider>
+      <label class="_coral-ColorInput-editRgba-group-label" id="{{uid}}-r-label" for="{{uid}}-r">{{data.i18n.get('R')}}</label>
+      <coral-colorinput-slider handle="redSlider" min="0" max="255" value="0" gradient="#000000 #FF0000" labelledby="{{uid}}-r-label"></coral-colorinput-slider>
       <input class="_coral-ColorInput-editRgba-group-input" id="{{uid}}-r" handle="redInput" is="coral-textfield" type="number" placeholder="{{data.i18n.get('R')}}" maxlength="3" value="" variant="quiet">
     </div>
     <div role="group" class="_coral-ColorInput-editRgba-group">
-      <label class="_coral-ColorInput-editRgba-group-label" for="{{uid}}-g">{{data.i18n.get('G')}}</label>
-      <coral-colorinput-slider handle="greenSlider" min="0" max="255" value="0" gradient="#000000 #00FF00"></coral-colorinput-slider>
+      <label class="_coral-ColorInput-editRgba-group-label" id="{{uid}}-g-label" for="{{uid}}-g">{{data.i18n.get('G')}}</label>
+      <coral-colorinput-slider handle="greenSlider" min="0" max="255" value="0" gradient="#000000 #00FF00" labelledby="{{uid}}-g-label"></coral-colorinput-slider>
       <input class="_coral-ColorInput-editRgba-group-input" id="{{uid}}-g" handle="greenInput" is="coral-textfield" type="number" class="_coral-ColorInput-editRgb" placeholder="{{data.i18n.get('G')}}" maxlength="3" value="" variant="quiet">
     </div>
     <div role="group" class="_coral-ColorInput-editRgba-group">
-      <label class="_coral-ColorInput-editRgba-group-label" for="{{uid}}-b">{{data.i18n.get('B')}}</label>
-      <coral-colorinput-slider handle="blueSlider" min="0" max="255" value="0" gradient="#000000 #0000FF"></coral-colorinput-slider>
+      <label class="_coral-ColorInput-editRgba-group-label" id="{{uid}}-b-label" for="{{uid}}-b">{{data.i18n.get('B')}}</label>
+      <coral-colorinput-slider handle="blueSlider" min="0" max="255" value="0" gradient="#000000 #0000FF" labelledby="{{uid}}-b-label"></coral-colorinput-slider>
       <input class="_coral-ColorInput-editRgba-group-input" id="{{uid}}-b" handle="blueInput" is="coral-textfield" type="number" placeholder="{{data.i18n.get('B')}}" maxlength="3" value="" variant="quiet">
     </div>
     <div role="group" class="_coral-ColorInput-editRgba-group">
-      <label class="_coral-ColorInput-editRgba-group-label" for="{{uid}}-a">{{data.i18n.get('A')}}</label>
-      <coral-colorinput-slider handle="alphaSlider" min="0" max="100" value="100" gradient="rgba(255,255,255,0) rgba(255,255,255,1)"></coral-colorinput-slider>
+      <label class="_coral-ColorInput-editRgba-group-label" id="{{uid}}-a-label" for="{{uid}}-a">{{data.i18n.get('A')}}</label>
+      <coral-colorinput-slider handle="alphaSlider" min="0" max="100" value="100" gradient="rgba(255,255,255,0) rgba(255,255,255,1)" labelledby="{{uid}}-a-label"></coral-colorinput-slider>
       <input class="_coral-ColorInput-editRgba-group-input" id="{{uid}}-a" handle="alphaInput" is="coral-textfield" type="number" placeholder="{{data.i18n.get('A')}}" maxlength="3" value="" variant="quiet">
     </div>
   </div>
