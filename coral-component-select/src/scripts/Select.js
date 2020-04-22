@@ -107,6 +107,8 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
       'click > ._coral-Dropdown-trigger': '_onButtonClick',
   
       'key:space > ._coral-Dropdown-trigger': '_onSpaceKey',
+      'key:enter > ._coral-Dropdown-trigger': '_onSpaceKey',
+      'key:return > ._coral-Dropdown-trigger': '_onSpaceKey',
       'key:down > ._coral-Dropdown-trigger': '_onSpaceKey'
     };
   
@@ -482,24 +484,52 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
     this._elements.taglist.readOnly = this._readOnly || isDisabled;
     this._elements.taglist.disabled = this._readOnly || isDisabled;
   }
+
+  /**
+   Inherited from {@link BaseFormField#labelled}.
+   */
+  get labelled() {
+    return super.labelled;
+  }
+  set labelled(value) {
+    super.labelled = value;
+  
+    if (this.labelled) {
+      if (!this.labelledBy) {
+        this._elements.button.setAttribute('aria-labelledby', `${this._elements.button.id} ${this._elements.label.id} ${this.invalid ? this._elements.invalidIcon.id : ''}`);
+      }
+      this._elements.nativeSelect.setAttribute('aria-label', value);
+    }
+    else {
+      this._elements.button.removeAttribute('aria-label');
+      this._elements.nativeSelect.removeAttribute('aria-label');
+      if (!this.labelledBy) {
+        this._elements.button.removeAttribute('aria-labelledby');
+      }
+    }
+    
+    this._elements.taglist.labelled = value;
+  }
   
   /**
    Inherited from {@link BaseFormField#labelledBy}.
    */
   get labelledBy() {
-    return super.labelledBy;
+    return this._labelledBy;
   }
   set labelledBy(value) {
     super.labelledBy = value;
-  
-    if (this.labelledBy) {
-      this._elements.nativeSelect.setAttribute('aria-labelledby', this.labelledBy);
+    this._labelledBy = super.labelledBy;
+    
+    if (this._labelledBy) {
+      this._elements.button.setAttribute('aria-labelledby', `${this._labelledBy} ${this._elements.label.id} ${this.invalid ? this._elements.invalidIcon.id : ''}`);
+      this._elements.nativeSelect.setAttribute('aria-labelledby', this._labelledBy);
     }
     else {
       this._elements.nativeSelect.removeAttribute('aria-labelledby');
     }
     
-    this._elements.taglist.labelledBy = this.labelledBy;
+    this._elements.taglist.labelledBy = this._labelledBy;
   }
   
   /**
@@ -1033,6 +1063,9 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
     this.trigger(`coral-select:_overlay${type}`);
     
     this._elements.button.classList.toggle('is-selected', event.target.open);
+
+    // communicate expanded state to assistive technology
+    this._elements.button.setAttribute('aria-expanded', event.target.open);
     
     if (!event.target.open) {
       this.classList.remove('is-openAbove', 'is-openBelow');
