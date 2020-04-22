@@ -221,10 +221,28 @@ class SelectList extends BaseComponent(HTMLElement) {
   set _tabTarget(value) {
     this.__tabTarget = value;
     
-    // Set all but the current set _tabTarget to not be a tab target:
-    this.items.getAll().forEach((item) => {
-      item.setAttribute('tabindex', item === value ? 0 : -1);
-    });
+    if(!this._groups){
+      // Set all but the current set _tabTarget to not be a tab target:
+      this.items.getAll().forEach((item) => {
+        item.setAttribute('tabindex', item === value ? 0 : -1);
+      });
+    }
+    else {
+      var groups=this._groups;
+      groups.getAll().forEach((group) => {
+        var firstChild=group.firstElementChild;
+        firstChild.setAttribute('tabindex', 0);
+        for (let item in group.items.getAll().slice(1)) {
+            if (item === value) {
+              item.setAttribute('tabindex', 0);
+              firstChild.setAttribute('tabindex', -1);
+            }
+            else {
+              item.setAttribute('tabindex', -1); 
+            }
+        }
+      });
+    }
   }
   
   /** @private */
