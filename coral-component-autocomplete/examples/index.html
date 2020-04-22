@@ -241,6 +241,34 @@
           </coral-autocomplete>
         </form>
       </div>
+
+      <h2 class="coral--Heading--S">AutoComplete within Dialog</h2>
+      <div class="markup">
+        <button is="coral-button" onclick="document.getElementById('dialogId').show()">Open dialog</button>
+        <coral-dialog id="dialogId" aria-label="Browser">
+          <coral-dialog-header>Browser</coral-dialog-header>
+          <form class="coral-Form coral-Form--vertical">
+            <coral-dialog-content>
+              <section class="coral-Form-fieldset">
+                <div class="coral-Form-fieldwrapper">
+                  <label class="coral-Form-fieldlabel" id="browserLabel">Browser</label>
+                  <coral-autocomplete labelledby="browserLabel" icon="search" name="browser">
+                    <coral-autocomplete-item icon="chrome" value="ch">Chrome</coral-autocomplete-item>
+                    <coral-autocomplete-item icon="firefox" value="fi">Firefox</coral-autocomplete-item>
+                    <coral-autocomplete-item disabled icon="internetExplorer" value="ie">Internet Explorer</coral-autocomplete-item>
+                    <coral-autocomplete-item icon="opera" value="op">Opera</coral-autocomplete-item>
+                    <coral-autocomplete-item icon="safari" value="sa">Safari</coral-autocomplete-item>
+                  </coral-autocomplete>
+                </div>
+              </section>
+            </coral-dialog-content>
+            <coral-dialog-footer>
+              <button is="coral-button" type="reset" coral-close>Cancel</button>
+              <button is="coral-button" type="button" variant="primary" coral-close>Done</button>
+            </coral-dialog-footer>
+          </form>
+        </coral-dialog>
+      </div>
     </main>
   </body>
 </html>

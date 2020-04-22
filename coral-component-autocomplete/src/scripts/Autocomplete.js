@@ -137,6 +137,8 @@ class Autocomplete extends BaseFormField(BaseComponent(HTMLElement)) {
   
     // Overlay
     events[`global:capture:coral-overlay:positioned #${overlayId}`] = '_onOverlayPositioned';
+    events[`global:capture:coral-overlay:open #${overlayId}`] = '_onOverlayOpenOrClose';
+    events[`global:capture:coral-overlay:close #${overlayId}`] = '_onOverlayOpenOrClose';
     
     // SelectList
     events[`global:key:enter #${overlayId} button[is="coral-buttonlist-item"]`] = '_handleSelect';
@@ -589,6 +591,25 @@ class Autocomplete extends BaseFormField(BaseComponent(HTMLElement)) {
     
     this._elements.input.required = this._required;
   }
+
+  /**
+   Inherited from {@link BaseFormField#labelled}.
+   */
+  get labelled() {
+    return super.labelled;
+  }
+  set labelled(value) {
+    super.labelled = value;
+
+    this[this.labelled ? 'setAttribute' : 'removeAttribute']('aria-label', this.labelled);
+    
+    if (this.labelled && this.multiple) {
+      this._elements.tagList.setAttribute('aria-label', this.labelled);
+    }
+    else {
+      this._elements.tagList.removeAttribute('aria-label');
+    }
+  }
   
   /**
    Inherited from {@link BaseFormField#labelledBy}.
@@ -598,6 +619,8 @@ class Autocomplete extends BaseFormField(BaseComponent(HTMLElement)) {
   }
   set labelledBy(value) {
     super.labelledBy = value;
+
+    this[this.labelledBy ? 'setAttribute' : 'removeAttribute']('aria-labelledby', this.labelledBy);
     
     if (this.labelledBy && this.multiple) {
       this._elements.tagList.setAttribute('aria-labelledby', this.labelledBy);
@@ -1823,6 +1846,23 @@ class Autocomplete extends BaseFormField(BaseComponent(HTMLElement)) {
   }
   
   /**
+   Matches the accessibility to the state of the popover.
+   
+   @ignore
+   */
+  _onOverlayOpenOrClose(event) {
+    if (this._elements.overlay.open) {
+      this._elements.input.setAttribute('aria-expanded', 'true');
+      this._elements.trigger.setAttribute('aria-expanded', 'true');
+    }
+    else {
+      this._elements.input.setAttribute('aria-expanded', 'false');
+      this._elements.trigger.setAttribute('aria-expanded', 'false');
+      this._elements.input.removeAttribute('aria-activedescendant');
+    }
+  }
+  
+  /**
    Inherited from {@link BaseFormField#reset}.
    */
   reset() {
@@ -1885,17 +1925,17 @@ class Autocomplete extends BaseFormField(BaseComponent(HTMLElement)) {
     this.classList.add(CLASSNAME);
   
     // Container role per ARIA Autocomplete
-    this.setAttribute('role', 'presentation');
+    this.setAttribute('role', 'group');
   
     // Input attributes per ARIA Autocomplete
     this._elements.input.setAttribute('role', 'combobox');
     this._elements.input.setAttribute('aria-autocomplete', 'list');
-    this._elements.input.setAttribute('aria-haspopup', 'true');
+    this._elements.input.setAttribute('aria-haspopup', 'listbox');
     this._elements.input.setAttribute('aria-expanded', 'false');
     this._elements.input.setAttribute('aria-controls', this._elements.selectList.id);
   
     // Trigger button attributes per ARIA Autocomplete
-    this._elements.trigger.setAttribute('aria-haspopup', 'true');
+    this._elements.trigger.setAttribute('aria-haspopup', 'listbox');
     this._elements.trigger.setAttribute('aria-expanded', 'false');
     this._elements.trigger.setAttribute('aria-controls', this._elements.selectList.id);
   
