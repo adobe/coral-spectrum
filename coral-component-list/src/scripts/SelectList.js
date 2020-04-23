@@ -220,27 +220,30 @@ class SelectList extends BaseComponent(HTMLElement) {
   }
   set _tabTarget(value) {
     this.__tabTarget = value;
-    
-    if(!this._groups){
-      // Set all but the current set _tabTarget to not be a tab target:
-      this.items.getAll().forEach((item) => {
-        item.setAttribute('tabindex', item === value ? 0 : -1);
-      });
-    }
-    else {
-      var groups=this._groups;
+    if (this._groups && this._groups.getAll().length > 0) {
+      // set first item or selected item to be tab target in each group
+      var groups = this._groups;
       groups.getAll().forEach((group) => {
-        var firstChild=group.firstElementChild;
-        firstChild.setAttribute('tabindex', 0);
-        for (let item in group.items.getAll().slice(1)) {
-            if (item === value) {
-              item.setAttribute('tabindex', 0);
+        if (group.items.getAll().length > 0) {
+          var firstChild = group.firstElementChild;
+          firstChild.setAttribute('tabindex', 0);
+          var items = group.items.getAll();
+          for (let i = 1; i < items.length; i++) {
+            if (items[i] === value) {
+              items[i].setAttribute('tabindex', 0);
               firstChild.setAttribute('tabindex', -1);
             }
             else {
-              item.setAttribute('tabindex', -1); 
+              items[i].setAttribute('tabindex', -1); 
             }
+          }
         }
+      });
+    }
+    else {
+      // Set all but the current set _tabTarget to not be a tab target:
+      this.items.getAll().forEach((item) => {
+        item.setAttribute('tabindex', item === value ? 0 : -1);
       });
     }
   }
