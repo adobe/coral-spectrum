@@ -16436,7 +16436,9 @@
     }
   };
 
-  var template = function anonymous(data_0) {
+  var template = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["button"] = document.createElement("button", "coral-button");
@@ -18576,7 +18578,9 @@
     return ButtonListItem;
   }(BaseListItem(BaseComponent(HTMLButtonElement)));
 
-  var template$1 = function anonymous(data_0) {
+  var template$1 = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["track"] = document.createElement("div");
     el0.setAttribute("handle", "track");
@@ -18962,7 +18966,9 @@
 
   commons._define('coral-wait', Wait);
 
-  var template$2 = function anonymous(data_0) {
+  var template$2 = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["loadIndicator"] = document.createElement("div");
     el0.setAttribute("handle", "loadIndicator");
@@ -19681,7 +19687,9 @@
     return SelectListGroup;
   }(BaseComponent(HTMLElement));
 
-  var template$3 = function anonymous(data_0) {
+  var template$3 = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["checkIcon"] = document.createElement("span");
@@ -20096,7 +20104,9 @@
     }
   };
 
-  var template$4 = function anonymous(data_0) {
+  var template$4 = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["topTabCapture"] = document.createElement("div");
     el0.setAttribute("handle", "topTabCapture");
@@ -25609,7 +25619,9 @@
     }
   });
 
-  var template$5 = function anonymous(data_0) {
+  var template$5 = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["headerWrapper"] = document.createElement("div");
     el0.className += " _coral-Dialog-header";
@@ -26551,7 +26563,9 @@
   Dialog.Content = DialogContent;
   Dialog.Footer = DialogFooter;
 
-  var template$6 = function anonymous(data_0) {
+  var template$6 = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["headerWrapper"] = document.createElement("div");
     el0.className += " _coral-Dialog-header";
@@ -27323,7 +27337,9 @@
   Popover.Footer = PopoverFooter;
   Popover.Separator = PopoverSeparator;
 
-  var template$7 = function anonymous(data_0) {
+  var template$7 = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -29180,7 +29196,9 @@
     }
   };
 
-  var template$8 = function anonymous(data_0) {
+  var template$8 = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["input"] = document.createElement("input");
     el0.setAttribute("type", "radio");
@@ -29978,7 +29996,9 @@
     }
   };
 
-  var template$9 = function anonymous(data_0) {
+  var template$9 = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -30948,7 +30968,9 @@
 
   commons._define('coral-numberinput', NumberInput);
 
-  var template$a = function anonymous(data_0) {
+  var template$a = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["tip"] = document.createElement("span");
     el0.className += " _coral-Tooltip-tip";
@@ -31532,7 +31554,9 @@
     }
   };
 
-  var template$b = function anonymous(data_0) {
+  var template$b = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["input"] = document.createElement("input");
@@ -33068,7 +33092,9 @@
     return Accordion;
   }(BaseComponent(HTMLElement));
 
-  var template$c = function anonymous(data_0) {
+  var template$c = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["heading"] = document.createElement("h3");
@@ -34439,7 +34465,9 @@
 
   AnchorButton.Label = AnchorButtonLabel;
 
-  var template$d = function anonymous(data_0) {
+  var template$d = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["overlay"] = document.createElement("coral-popover");
     el0.setAttribute("smart", "");
@@ -34454,7 +34482,9 @@
     return frag;
   };
 
-  var template$e = function anonymous(data_0) {
+  var template$e = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["moreButton"] = document.createElement("button", "coral-button");
     el0.setAttribute("is", "coral-button");
@@ -34479,7 +34509,9 @@
     return frag;
   };
 
-  var template$f = function anonymous(data_0) {
+  var template$f = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -36025,7 +36057,9 @@
     return AutocompleteItem;
   }(BaseComponent(HTMLElement));
 
-  var template$g = function anonymous(data_0) {
+  var template$g = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["overlay"] = document.createElement("coral-popover");
@@ -36121,7 +36155,9 @@
     return frag;
   };
 
-  var template$h = function anonymous(data_0) {
+  var template$h = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["loadIndicator"] = document.createElement("div");
     el0.className += " _coral-SelectList-loading";
@@ -38514,7 +38550,9 @@
   Banner.Header = BannerHeader;
   Banner.Content = BannerContent;
 
-  var template$i = function anonymous(data_0) {
+  var template$i = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["nativeSelect"] = document.createElement("select");
     el0.className += " _coral-ButtonGroup-select";
@@ -39658,7 +39696,9 @@
     }
   };
 
-  var template$j = function anonymous(data_0) {
+  var template$j = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["input"] = document.createElement("input");
@@ -39744,7 +39784,9 @@
     return frag;
   };
 
-  var template$k = function anonymous(data_0) {
+  var template$k = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["container"] = document.createElement("div");
     el0.className += " _coral-DatePicker-calendarSlidingContainer";
@@ -39756,7 +39798,9 @@
     return frag;
   };
 
-  var template$l = function anonymous(data_0) {
+  var template$l = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -41116,7 +41160,9 @@
 
   commons._define('coral-calendar', Calendar);
 
-  var template$m = function anonymous(data_0) {
+  var template$m = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["wrapper"] = document.createElement("div");
     el0.setAttribute("handle", "wrapper");
@@ -41557,7 +41603,9 @@
     return Card;
   }(BaseComponent(HTMLElement));
 
-  var template$n = function anonymous(data_0) {
+  var template$n = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["icon"] = document.createElement("coral-icon");
     el0.setAttribute("handle", "icon");
@@ -42338,7 +42386,9 @@
     }
   };
 
-  var template$o = function anonymous(data_0) {
+  var template$o = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -43039,7 +43089,9 @@
 
   commons._define('coral-clock', Clock);
 
-  var template$p = function anonymous(data_0) {
+  var template$p = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = document.createElement("div");
     el0.className += " _coral-CoachMarkIndicator-ring";
@@ -44900,7 +44952,9 @@
     );
   };
 
-  var template$q = function anonymous(data_0) {
+  var template$q = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["label"] = document.createElement("div");
     el0.className += " _coral-Slider-labelContainer";
@@ -46042,7 +46096,9 @@
     return SliderItem;
   }(BaseComponent(HTMLElement));
 
-  var template$r = function anonymous(data_0) {
+  var template$r = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -46403,7 +46459,9 @@
   Slider.Content = SliderContent;
   Slider.Item = SliderItem;
 
-  var template$s = function anonymous(data_0) {
+  var template$s = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["label"] = document.createElement("div");
     el0.className += " _coral-Slider-labelContainer";
@@ -46570,7 +46628,9 @@
     return ColorInputSlider;
   }(Slider);
 
-  var template$t = function anonymous(data_0) {
+  var template$t = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -47036,7 +47096,9 @@
     return ColorInputColorProperties;
   }(BaseColorInputAbstractSubview(BaseComponent(HTMLElement)));
 
-  var template$u = function anonymous(data_0) {
+  var template$u = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["colorButton"] = document.createElement("button", "coral-button");
     el0.setAttribute("is", "coral-button");
@@ -47244,7 +47306,9 @@
     return ColorInputSwatch;
   }(BaseColorInputAbstractSubview(BaseComponent(HTMLElement)));
 
-  var template$v = function anonymous(data_0) {
+  var template$v = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["swatchesSubview"] = document.createElement("div");
     el0.className += " _coral-ColorInput-swatchesSubview";
@@ -47658,7 +47722,9 @@
     return ColorInputSwatches;
   }(BaseColorInputAbstractSubview(BaseComponent(HTMLElement)));
 
-  var template$w = function anonymous(data_0) {
+  var template$w = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["defaultPalette"] = document.createElement("div");
@@ -51659,7 +51725,9 @@
     return CycleButtonItem;
   }(BaseComponent(HTMLElement));
 
-  var template$x = function anonymous(data_0) {
+  var template$x = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -52933,7 +53001,9 @@
     }
   };
 
-  var template$y = function anonymous(data_0) {
+  var template$y = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["overlay"] = document.createElement("coral-popover");
     el0.setAttribute("tracking", "off");
@@ -52992,7 +53062,9 @@
     return frag;
   };
 
-  var template$z = function anonymous(data_0) {
+  var template$z = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -54010,7 +54082,9 @@
     }
   };
 
-  var template$A = function anonymous(data_0) {
+  var template$A = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -55518,7 +55592,9 @@
     return FileUploadItem;
   }();
 
-  var template$B = function anonymous(data_0) {
+  var template$B = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["input"] = document.createElement("input");
     el0.id = data_0["commons"]["getUID"]();
@@ -56719,7 +56795,9 @@
 
   FileUpload.Item = FileUploadItem;
 
-  var template$C = function anonymous(data_0) {
+  var template$C = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["quickactions"] = document.createElement("div");
     el0.setAttribute("handle", "quickactions");
@@ -59239,7 +59317,9 @@
     return Multifield;
   }(BaseComponent(HTMLElement));
 
-  var template$D = function anonymous(data_0) {
+  var template$D = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["remove"] = document.createElement("button", "coral-button");
     el0.setAttribute("tracking", "off");
@@ -59732,7 +59812,9 @@
 
   Panel.Content = PanelContent;
 
-  var template$E = function anonymous(data_0) {
+  var template$E = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["percentage"] = document.createElement("div");
     el0.className += " _coral-BarLoader-percentage";
@@ -60467,7 +60549,9 @@
     return QuickActionsItem;
   }(BaseComponent(HTMLElement));
 
-  var template$F = function anonymous(data_0) {
+  var template$F = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["moreButton"] = document.createElement("button", "coral-button");
     el0.setAttribute("tracking", "off");
@@ -62475,7 +62559,9 @@
     return ShellHeader;
   }(BaseComponent(HTMLElement));
 
-  var template$G = function anonymous(data_0) {
+  var template$G = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["icon"] = document.createElement("coral-icon");
     el0.setAttribute("handle", "icon");
@@ -62720,7 +62806,9 @@
     }
   };
 
-  var template$H = function anonymous(data_0) {
+  var template$H = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["input"] = document.createElement("input", "coral-textfield");
@@ -63207,7 +63295,9 @@
 
   commons._define('coral-search', Search);
 
-  var template$I = function anonymous(data_0) {
+  var template$I = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -63281,7 +63371,9 @@
     return frag;
   };
 
-  var template$J = function anonymous(data_0) {
+  var template$J = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = document.createElement("coral-list-item-content");
     var el1 = document.createTextNode(data_0["title"] + "\n  ");
@@ -63298,7 +63390,9 @@
     return frag;
   };
 
-  var template$K = function anonymous(data_0) {
+  var template$K = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = document.createElement("div");
     el0.className += " _coral-Shell-help-resultMessage-container";
@@ -63316,7 +63410,9 @@
     return frag;
   };
 
-  var template$L = function anonymous(data_0) {
+  var template$L = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = document.createElement("div");
     el0.className += " _coral-Shell-help-resultMessage-container";
@@ -63809,7 +63905,9 @@
     return ShellMenuBar;
   }(BaseComponent(HTMLElement));
 
-  var template$M = function anonymous(data_0) {
+  var template$M = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["shellMenuButton"] = document.createElement("button", "coral-button");
     el0.setAttribute("is", "coral-button");
@@ -64206,7 +64304,9 @@
     return ShellMenuBarItem;
   }(BaseComponent(HTMLElement));
 
-  var template$N = function anonymous(data_0) {
+  var template$N = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["container"] = document.createElement("div");
     el0.className += " _coral-Shell-user-container";
@@ -64969,7 +65069,9 @@
     return ShellWorkspace;
   }(BaseComponent(HTMLAnchorElement));
 
-  var template$O = function anonymous(data_0) {
+  var template$O = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["container"] = document.createElement("div");
     el0.setAttribute("handle", "container");
@@ -65229,7 +65331,9 @@
     return document.createElement('coral-shell-solutions-header');
   });
 
-  var template$P = function anonymous(data_0) {
+  var template$P = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["icon"] = document.createElement("coral-icon");
     el0.setAttribute("size", "XL");
@@ -65404,7 +65508,9 @@
     return document.createElement('coral-shell-solution-label');
   });
 
-  var template$Q = function anonymous(data_0) {
+  var template$Q = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -65862,7 +65968,9 @@
     return document.createElement('coral-shell-orgswitcher-footer');
   });
 
-  var template$R = function anonymous(data_0) {
+  var template$R = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["checkmark"] = document.createElement("span");
@@ -66715,7 +66823,9 @@
     return SideNav;
   }(BaseComponent(HTMLElement));
 
-  var template$S = function anonymous(data_0) {
+  var template$S = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["container"] = document.createElement("div");
     el0.className += " _coral-SideNav-itemLink";
@@ -68164,7 +68274,9 @@
     return StepList;
   }(BaseComponent(HTMLElement));
 
-  var template$T = function anonymous(data_0) {
+  var template$T = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["stepMarkerContainer"] = document.createElement("span");
     el0.className += " _coral-Steplist-markerContainer";
@@ -68559,7 +68671,9 @@
     }
   };
 
-  var template$U = function anonymous(data_0) {
+  var template$U = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["input"] = document.createElement("input");
     el0.setAttribute("type", "checkbox");
@@ -70571,7 +70685,9 @@
     return TableFoot;
   }(BaseTableSection(BaseComponent(HTMLTableSectionElement)));
 
-  var template$V = function anonymous(data_0) {
+  var template$V = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["liveRegion"] = document.createElement("div");
     el0.setAttribute("handle", "liveRegion");
@@ -73664,7 +73780,9 @@
   Table.Body = TableBody;
   Table.Foot = TableFoot;
 
-  var template$W = function anonymous(data_0) {
+  var template$W = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["icon"] = document.createElement("coral-icon");
     el0.setAttribute("handle", "icon");
@@ -74083,7 +74201,9 @@
     return document.createElement('coral-tab-label');
   });
 
-  var template$X = function anonymous(data_0) {
+  var template$X = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["line"] = document.createElement("div");
     el0.setAttribute("handle", "line");
@@ -74914,7 +75034,9 @@
 
   commons._define('coral-tabview', TabView);
 
-  var template$Y = function anonymous(data_0) {
+  var template$Y = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["body"] = document.createElement("div");
     el0.className += " _coral-Toast-body";
@@ -75590,7 +75712,9 @@
 
   Toast.Content = ToastContent;
 
-  var template$Z = function anonymous(data_0) {
+  var template$Z = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["header"] = document.createElement("div");
@@ -77235,7 +77359,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.6.1";
+  var version$1 = "4.6.2";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
@@ -77478,7 +77602,9 @@
     version: version$2
   });
 
-  var template$_ = function anonymous(data_0) {
+  var template$_ = function anonymous(data_0
+  /*``*/
+  ) {
     var frag = document.createDocumentFragment();
     var el0 = this["wrapper"] = document.createElement("div");
     el0.setAttribute("handle", "wrapper");
