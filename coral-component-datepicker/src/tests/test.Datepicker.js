@@ -166,6 +166,27 @@ describe('Datepicker', function() {
     
       describe('#invalid', function() {
       });
+
+      describe('#labelled', function() {
+        it('should label the input', function() {
+          el.labelled = 'newLabel';
+
+          expect(el._elements.input.getAttribute('aria-label')).to.equal('newLabel');
+          expect(el._elements.hiddenInput.hasAttribute('aria-label')).to.be.false;
+            
+          expect(el.getAttribute('role')).to.equal('group', 'coral-datepicker wrapping element should have role of group');
+          expect(el.getAttribute('aria-label')).to.equal('newLabel', 'coral-datepicker wrapping element should also be labelled to provide context when focus moves to Calendar button');
+          expect(el._elements.overlay.getAttribute('aria-label')).to.equal('newLabel');
+          expect(el._elements.calendar.getAttribute('aria-label')).to.equal('newLabel');
+
+          el.labelled = '';
+          
+          expect(el._elements.input.hasAttribute('aria-label')).to.be.false;
+          expect(el._elements.hiddenInput.hasAttribute('aria-label')).to.be.false;
+          expect(el._elements.overlay.hasAttribute('aria-label'), 'aria-label should be removed').to.be.false;
+          expect(el._elements.calendar.hasAttribute('aria-label'), 'aria-label should be removed').to.be.false;
+        });
+      });
     
       describe('#labelledBy', function() {
         it('should label the input', function() {
@@ -182,9 +203,12 @@ describe('Datepicker', function() {
           expect(el._elements.input.getAttribute('aria-labelledby')).to.equal(label1.id);
           expect(el._elements.toggle.hasAttribute('aria-labelledby')).to.be.false;
           expect(el._elements.hiddenInput.hasAttribute('aria-labelledby')).to.be.false;
-        
-          expect(el.getAttribute('aria-labelledby')).to.equal(label1.id);
-        
+          
+          expect(el.getAttribute('role')).to.equal('group', 'coral-datepicker wrapping element should have role of group');
+          expect(el.getAttribute('aria-labelledby')).to.equal(label1.id, 'coral-datepicker wrapping element should also be labelled to provide context when focus moves to Calendar button');
+          expect(el._elements.overlay.getAttribute('aria-labelledby')).to.equal(label1.id);
+          expect(el._elements.calendar.getAttribute('aria-labelledby')).to.equal(label1.id);
+
           el.labelledBy = '';
         
           expect(el.labelledBy).to.be.null;
@@ -192,7 +216,9 @@ describe('Datepicker', function() {
           expect(el._elements.input.hasAttribute('aria-labelledby')).to.be.false;
           expect(el._elements.toggle.hasAttribute('aria-labelledby')).to.be.false;
           expect(el._elements.hiddenInput.hasAttribute('aria-labelledby')).to.be.false;
-          expect(el.hasAttribute('aria-labelledby'), 'aria should be removed').to.be.false;
+          expect(el.hasAttribute('aria-labelledby'), 'aria-labelledby should be removed').to.be.false;
+          expect(el._elements.overlay.hasAttribute('aria-labelledby')).to.be.false;
+          expect(el._elements.calendar.hasAttribute('aria-labelledby')).to.be.false;
         });
       });
     
@@ -879,6 +905,22 @@ describe('Datepicker', function() {
     });
   
     describe('Implementation details', function() {
+      describe('Accessibility', function() {
+        it('should implement combobox design pattern per WAI-ARIA 1.2', function() {
+          var el = new Datepicker();
+          el._renderCalendar();
+          helpers.target.appendChild(el);
+
+          expect(el.getAttribute('role')).to.equal('group');
+          expect(el._elements.input.getAttribute('role')).to.equal('combobox');
+          expect(el._elements.input.getAttribute('aria-haspopup')).to.equal('dialog');
+          expect(el._elements.input.getAttribute('aria-expanded')).to.equal('false');
+          expect(el._elements.toggle.getAttribute('aria-haspopup')).to.equal('dialog');
+          expect(el._elements.toggle.getAttribute('aria-expanded')).to.equal('false');
+          expect(el._elements.input.getAttribute('aria-controls')).to.equal(el._elements.overlay.id);
+        });
+      });
+
       it('should show different controls depending on the type', function(done) {
         var el = new Datepicker();
         el._renderCalendar();
@@ -980,7 +1022,8 @@ describe('Datepicker', function() {
 
         el.on('coral-overlay:open', function() {
           expect(el._elements.input.getAttribute('aria-expanded')).to.equal('true');
-          expect(el._elements.toggle.getAttribute('aria-expanded')).to.equal('true');        });
+          expect(el._elements.toggle.getAttribute('aria-expanded')).to.equal('true');
+        });
         
         el.on('coral-overlay:close', function() {
           expect(el._elements.input.getAttribute('aria-expanded')).to.equal('false');

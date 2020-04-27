@@ -526,9 +526,9 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
     super.labelled = value;
     
     // in case the user focuses the buttons, he will still get a notion of the usage of the component
-    this[this.labelled ? 'setAttribute' : 'removeAttribute']('aria-labelledby', this.labelled);
-    this._elements.overlay[this.labelled ? 'setAttribute' : 'removeAttribute']('aria-labelledby', this.labelled);
-    this._elements.calendar[this.labelled ? 'setAttribute' : 'removeAttribute']('aria-labelledby', this.labelled);
+    this[this.labelled ? 'setAttribute' : 'removeAttribute']('aria-label', this.labelled);
+    this._elements.overlay[this.labelled ? 'setAttribute' : 'removeAttribute']('aria-label', this.labelled);
+    this._elements.calendar[this.labelled ? 'setAttribute' : 'removeAttribute']('labelled', this.labelled);
   }
   
   /**
