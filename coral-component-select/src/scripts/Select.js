@@ -527,6 +527,11 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
     }
     else {
       this._elements.nativeSelect.removeAttribute('aria-labelledby');
+
+      // if the select is also labelled, make sure that aria-labelledby gets restored
+      if (this.labelled) {
+        this.labelled = this.labelled;
+      }
     }
     
     this._elements.taglist.labelledBy = this._labelledBy;
