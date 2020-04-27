@@ -56,9 +56,13 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
     if (!value || value && !this.disabled) {
       this._selected = value;
       this._reflectAttribute('selected', this.disabled ? false : this._selected);
+      this.removeAttribute('aria-selected', this._selected);
       
       this.classList.toggle('is-selected', this._selected);
       this._elements.colorButton.setAttribute('aria-selected', this._selected);
+
+      this._elements.colorButton.tabIndex = this.tabIndex;
+      this.removeAttribute('tabindex');
   
       this._elements.colorButton[this._selected ? 'setAttribute' : 'removeAttribute']('aria-label',
         `${i18n.get('checked')} ${this._elements.colorButton.label.textContent}`);
@@ -132,8 +136,8 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
    while the coral-colorinput-swatch should reflect the value using the _tabindex attribute.
    
    @type {Integer}
-   @default 0
-   @htmlattribute _tabindex
+   @default -1
+   @htmlattribute tabindex
    @htmlattributereflected
    */
   get tabIndex() {
@@ -141,7 +145,7 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
   }
   set tabIndex(value) {
     this._elements.colorButton.tabIndex = value;
-    this._reflectAttribute('_tabindex', this.tabIndex);
+    this.removeAttribute('tabindex');
   }
   
   /** @ignore */
@@ -154,7 +158,7 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
   
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
-      _tabindex: 'tabIndex',
+      tabindex: 'tabIndex',
       targetcolor: 'targetColor'
     });
   }
@@ -163,7 +167,7 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'selected',
-      '_tabindex',
+      'tabIndex',
       'disabled',
       'targetcolor'
     ]);
