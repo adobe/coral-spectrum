@@ -56,13 +56,16 @@ class ColumnView extends BaseComponent(HTMLElement) {
     super();
 
     // Content zone
-    this._elements = {};
+    this._elements = {
+      accessibilityState: this.querySelector('span[handle="accessibilityState"]')
+    };
 
-    // Templates
-    accessibilityState.call(this._elements, {commons});
-    this._elements.accessibilityState.removeAttribute('aria-hidden');
-    this._elements.accessibilityState.hidden = true;
-    this.insertBefore(this._elements.accessibilityState, this.firstChild);
+    if (!this._elements.accessibilityState) {
+      // Templates
+      accessibilityState.call(this._elements, {commons});
+      this._elements.accessibilityState.removeAttribute('aria-hidden');
+      this._elements.accessibilityState.hidden = true;
+    }    
     
     // Events
     this._delegateEvents({
@@ -282,7 +285,7 @@ class ColumnView extends BaseComponent(HTMLElement) {
     @private
   */
   _onItemAdd() {
-    this._ensureTabbableItem();
+    window.requestAnimationFrame(() => this._ensureTabbableItem());
   }
 
   /**
@@ -292,42 +295,36 @@ class ColumnView extends BaseComponent(HTMLElement) {
     @private
   */
   _onItemRemoved() {
-    this._ensureTabbableItem();
+    window.requestAnimationFrame(() => this._ensureTabbableItem());
   }
 
   /* @private */
-  _ensureTabbableItem() {
+  _ensureTabbableItem() {   
     this._vent.off('coral-collection:add', this._onItemAdd);
     this._vent.off('coral-collection:remove', this._onItemRemoved);
-    if (this._timeout) {
-      cancelAnimationFrame(this._timeout);
-      clearTimeout(this._timeout);
+    // Ensures that item will receive focus
+    if (!this.selectedItem && !this.activeItem) {
+      const selectableItems = this.items._getSelectableItems();
+      // If there are no selectable items, stop listening for items being removed and start listening for the next item added.
+      if (!selectableItems.length) {
+        this._vent.off('coral-collection:remove', this._onItemRemoved);
+        this._vent.on('coral-collection:add', this._onItemAdd);
+      }
+      else {
+        // Otherwise, if there is a selectable item, make sure it has a tabIndex.
+        selectableItems[0].tabIndex = 0;
+        // Listen for item removal so that we can handle the edge case where all items have been removed.
+        this._vent.on('coral-collection:remove', this._onItemRemoved);
+      }
     }
-    this._timeout = commons.nextFrame(() => {
-      // Ensures that item will receive focus
-      if (!this.selectedItem && !this.activeItem) {
-        const selectableItems = this.items._getSelectableItems();
-        // If there are no selectable items, stop listening for items being removed and start listening for the next item added.
-        if (!selectableItems.length) {
-          this._vent.off('coral-collection:remove', this._onItemRemoved);
-          this._vent.on('coral-collection:add', this._onItemAdd);
-        }
-        else {
-          // Otherwise, if there is a selectable item, make sure it has a tabIndex.
-          selectableItems[0].tabIndex = 0;
-          // Listen for item removal so that we can handle the edge case where all items have been removed.
-          this._vent.on('coral-collection:remove', this._onItemRemoved);
-        }
-      }
-      else if (this.selectedItem && this.selectedItem.tabIndex !== 0) {
-        // If the selectedItem is not tabbable, make sure that it has tabIndex === 0
-        this.selectedItem.tabIndex = 0;
-      }
-      else if (this.activeItem && this.activeItem.tabIndex !== 0) {
-        // If the activeItem is not tabbable, make sure that it has tabIndex === 0
-        this.activeItem.tabIndex = 0;
-      }
-    });
+    else if (this.selectedItem && this.selectedItem.tabIndex !== 0) {
+      // If the selectedItem is not tabbable, make sure that it has tabIndex === 0
+      this.selectedItem.tabIndex = 0;
+    }
+    else if (this.activeItem && this.activeItem.tabIndex !== 0) {
+      // If the activeItem is not tabbable, make sure that it has tabIndex === 0
+      this.activeItem.tabIndex = 0;
+    }
   }
   
   /** @private */
@@ -1074,7 +1071,16 @@ class ColumnView extends BaseComponent(HTMLElement) {
 
   /* @private */
   _announceActiveElementState() {
+    // @a11y Add live region element to ensure announcement of selected state
     const accessibilityState = this._elements.accessibilityState;
+
+    // @a11y accessibility state string should announce in document lang, rather than item lang.
+    accessibilityState.setAttribute('lang', i18n.locale);
+
+    // @a11y append live region content element
+    if (!this.contains(accessibilityState)) {
+      this.insertBefore(accessibilityState, this.firstChild);
+    }
 
     // utility method to clean up accessibility state
     function resetAccessibilityState() {
@@ -1117,7 +1123,10 @@ class ColumnView extends BaseComponent(HTMLElement) {
       accessibilityState.appendChild(span);
 
       // give screen reader 2 secs before clearing the live region, to provide enough time for announcement
-      this._removeTimeout = window.setTimeout(resetAccessibilityState, 2000);
+      this._removeTimeout = window.setTimeout(() => {
+        resetAccessibilityState();
+        this._elements.accessibilityState = accessibilityState.parentNode.removeChild(accessibilityState);
+      }, 2000);
     }, 20);
   }
 
@@ -1260,6 +1269,11 @@ class ColumnView extends BaseComponent(HTMLElement) {
     this.setAttribute('role', 'tree');
     // @a11y: the columnview needs to be focusable to handle a11y properly
     this.tabIndex = -1;
+    // @a11y: the columnview should be labelled so that its entire content
+    // is not read as its accessibility name
+    if (!this.hasAttribute('aria-label') && !this.hasAttribute('aria-labelledby')) {
+      this.setAttribute('aria-label', i18n.get('Column View'));
+    }
     
     // Default reflect attributes
     if (!this._selectionMode) { this._selectionMode = selectionMode.NONE; }

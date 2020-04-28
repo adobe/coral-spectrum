@@ -49,11 +49,14 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
     // Content zone
     this._elements = {
       content: this.querySelector('coral-columnview-item-content') || document.createElement('coral-columnview-item-content'),
-      thumbnail: this.querySelector('coral-columnview-item-thumbnail') || document.createElement('coral-columnview-item-thumbnail')
+      thumbnail: this.querySelector('coral-columnview-item-thumbnail') || document.createElement('coral-columnview-item-thumbnail'),
+      accessibilityState: this.querySelector('span[handle="accessibilityState"]')
     };
 
-    // Templates
-    accessibilityState.call(this._elements, {commons});
+    if (!this._elements.accessibilityState) {
+      // Templates
+      accessibilityState.call(this._elements, {commons});
+    }
   
     super._observeLabel();
   }
@@ -193,6 +196,8 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
       this.setAttribute('aria-expanded', this.active);
     }
 
+    let accessibilityState = this._elements.accessibilityState;
+    
     if (this.selected) {
 
       // @a11y Panels to right of selected item are removed, so remove aria-owns and aria-describedby attributes.
@@ -200,15 +205,27 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
       this.removeAttribute('aria-describedby');
 
       // @a11y Update content to ensure that checked state is announced by assistive technology when the item receives focus
-      this._elements.accessibilityState.innerHTML = i18n.get(', checked');
+      accessibilityState.innerHTML = i18n.get(', checked');
+
+      // @a11y append live region content element
+      if (!this.contains(accessibilityState)) {
+        this.appendChild(accessibilityState);
+      }
     }
     // @a11y If deselecting from checked state,
     else {
 
+      // @a11y remove, but retain reference to accessibilityState state
+      this._elements.accessibilityState = accessibilityState.parentNode.removeChild(accessibilityState);
+
       // @a11y Update content to remove checked state
       this._elements.accessibilityState.innerHTML = '';
     }
-  
+
+    // @a11y Item should be labelled by thumbnail, content, and if appropriate accessibility state.
+    let ariaLabelledby = this.thumbnail.id + ' ' + this.content.id;
+    this.setAttribute('aria-labelledby', this.selected ? `${ariaLabelledby} ${accessibilityState.id}` : ariaLabelledby);
+
     // Sync checkbox item selector
     const itemSelector = this.querySelector('coral-checkbox[coral-columnview-itemselect]');
     if (itemSelector) {
@@ -313,7 +330,7 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
     // @a11y
     this.setAttribute('role', 'treeitem');
 
-    this.id = this.id || Coral.commons.getUID();
+    this.id = this.id || commons.getUID();
 
     this.tabIndex = this.active || this.selected ? 0 : -1;
     
@@ -343,9 +360,9 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
     }
 
     // @ally add aria-labelledby so that JAWS/IE announces item correctly
-    thumbnail.id = thumbnail.id || Coral.commons.getUID();
+    thumbnail.id = thumbnail.id || commons.getUID();
 
-    content.id = content.id || Coral.commons.getUID();
+    content.id = content.id || commons.getUID();
 
     // @a11y Add live region element to ensure announcement of selected state
     const accessibilityState = this._elements.accessibilityState;
@@ -353,13 +370,8 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
     // @a11y accessibility state string should announce in document lang, rather than item lang.
     accessibilityState.setAttribute('lang', i18n.locale);
 
-    // @a11y append live region content element
-    if (!this.contains(accessibilityState)) {
-      this.appendChild(accessibilityState);
-    }
-
     // @a11y Item should be labelled by thumbnail, content, and accessibility state.
-    this.setAttribute('aria-labelledby', thumbnail.id + ' ' + content.id + ' ' + accessibilityState.id);
+    this.setAttribute('aria-labelledby', thumbnail.id + ' ' + content.id);
   }
 }
 
