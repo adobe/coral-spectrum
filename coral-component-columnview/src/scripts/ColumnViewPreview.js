@@ -11,6 +11,7 @@
  */
 
 import {BaseComponent} from '../../../coral-base-component';
+import {commons} from '../../../coral-utils';
 
 const CLASSNAME = '_coral-MillerColumns-item';
 
@@ -57,6 +58,10 @@ class ColumnViewPreview extends BaseComponent(HTMLElement) {
   /** @ignore */
   render() {
     super.render();
+
+    this.setAttribute('role', 'group');
+
+    this.id = this.id || commons.getUID();
     
     this.classList.add(CLASSNAME);
     
@@ -73,6 +78,50 @@ class ColumnViewPreview extends BaseComponent(HTMLElement) {
     
     // Call content zone insert
     this.content = content;
+
+    this._makeAccessible();
+  }
+
+  /** @ignore */
+  _makeAccessible() {
+    
+    // @a11y For item values with a label, identify the value as a focusable, readOnly textbox labeled by the label. 
+    let elements = this.content.querySelectorAll('coral-columnview-preview-label + coral-columnview-preview-value');
+    let length = elements.length;
+    let i;
+    let element;
+    let elementLabel;
+    for (i = 0; i < length; i++) {
+      element = elements[i];
+      elementLabel = element.previousElementSibling;
+      elementLabel.id = elementLabel.id || commons.getUID();
+      element.setAttribute('aria-labelledby', elementLabel.id);
+      element.setAttribute('role', 'textbox');
+      element.setAttribute('tabindex', '0');
+      element.setAttribute('aria-readonly', 'true');
+
+      // force ChromeVox to read value of textbox
+      if (window.cvox) {
+        element.setAttribute('aria-valuetext', element.textContent);
+      }
+    }
+
+    // @a11y Expose separator as a horizontally-oriented separator.
+    elements = this.content.querySelectorAll('coral-columnview-preview-separator');
+    length = elements.length;
+    for (i = 0; i < length; i++) {
+      element = elements[i];
+      element.setAttribute('role', 'separator');
+      element.setAttribute('aria-orientation', 'horizontal');
+    }
+
+    // @a11y If the preview asset image does not include an alt attribute, set alt="", so that screen readers do not announce the image url. 
+    elements = this.content.querySelectorAll('coral-columnview-preview-asset > img:not([alt])');
+    length = elements.length;
+    for (i = 0; i < length; i++) {
+      element = elements[i];
+      element.setAttribute('alt', '');
+    }
   }
 }
 
