@@ -423,4 +423,19 @@ describe('SelectList', function() {
     // @todo: focus on a hidden selected item
     // @todo: add a test for focus() and no children
   });
+
+  describe('Accessibility', function() {
+    it('should move focus between groups', function() {
+      const el = helpers.build(window.__html__['SelectList.groups.html']);
+      el.focus();
+
+      //switch the group to 2nd one
+      helpers.keypress('tab', document.activeElement);
+
+      // navigate inside group
+      helpers.keypress('down', document.activeElement);
+
+      expect(document.activeElement.value).to.equal('oc');
+    });
+  });
 });
