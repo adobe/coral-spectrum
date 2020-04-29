@@ -134,6 +134,7 @@ class Autocomplete extends BaseFormField(BaseComponent(HTMLElement)) {
     
     // Interaction
     events[`global:key:shift+tab #${overlayId} [is="coral-buttonlist-item"]`] = '_handleListFocusShift';
+    events[`global:key:esc`] = '_handleListFocusShift';
   
     // Overlay
     events[`global:capture:coral-overlay:positioned #${overlayId}`] = '_onOverlayPositioned';
@@ -602,6 +603,7 @@ class Autocomplete extends BaseFormField(BaseComponent(HTMLElement)) {
     super.labelled = value;
 
     this[this.labelled ? 'setAttribute' : 'removeAttribute']('aria-label', this.labelled);
+    this._elements.selectList[this.labelled ? 'setAttribute' : 'removeAttribute']('aria-label', this.labelled);
     
     if (this.labelled && this.multiple) {
       this._elements.tagList.setAttribute('aria-label', this.labelled);
@@ -621,6 +623,7 @@ class Autocomplete extends BaseFormField(BaseComponent(HTMLElement)) {
     super.labelledBy = value;
 
     this[this.labelledBy ? 'setAttribute' : 'removeAttribute']('aria-labelledby', this.labelledBy);
+    this._elements.selectList[this.labelledBy ? 'setAttribute' : 'removeAttribute']('aria-labelledby', this.labelledBy);
     
     if (this.labelledBy && this.multiple) {
       this._elements.tagList.setAttribute('aria-labelledby', this.labelledBy);
