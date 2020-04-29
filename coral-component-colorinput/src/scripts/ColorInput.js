@@ -142,6 +142,7 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
     // Overlay
     events[`global:capture:coral-overlay:beforeopen #${overlayId}`] = '_beforeOverlayOpen';
     events[`global:capture:coral-overlay:close #${overlayId}`] = '_onOverlayClose';
+    events[`global:key:esc #${overlayId}`] = '_onKeyEsc';
     
     // Events
     this._delegateEvents(events);
@@ -619,10 +620,12 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
   }
   
   /** @ignore */
-  _onKeyEsc() {
+  _onKeyEsc(event) {
     if (!this._elements.overlay.open) {
       return;
     }
+
+    event.stopPropagation();
     
     this._elements.overlay.open = false;
   }
