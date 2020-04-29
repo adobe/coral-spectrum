@@ -54,23 +54,23 @@ module.exports = [
   },
   {
     spectrum: /\.spectrum-Heading--display/g,
-    coral: '.coral-Heading--1'
+    coral: '.coral-Heading.coral-Heading--1'
   },
   {
     spectrum: /\.spectrum-Heading--pageTitle/g,
-    coral: '.coral-Heading--2'
+    coral: '.coral-Heading.coral-Heading--2'
   },
   {
     spectrum: /\.spectrum-Heading--subtitle1/g,
-    coral: '.coral-Heading--3'
+    coral: '.coral-Heading.coral-Heading--3'
   },
   {
     spectrum: /\.spectrum-Heading--subtitle2/g,
-    coral: '.coral-Heading--4'
+    coral: '.coral-Heading.coral-Heading--4'
   },
   {
     spectrum: /\.spectrum-Heading--subtitle3/g,
-    coral: '.coral-Heading--5'
+    coral: '.coral-Heading.coral-Heading--5'
   },
   {
     spectrum: /\.spectrum-Heading/g,
