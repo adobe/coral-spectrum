@@ -167,7 +167,7 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'selected',
-      'tabIndex',
+      'tabindex',
       'disabled',
       'targetcolor'
     ]);
