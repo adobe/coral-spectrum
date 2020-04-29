@@ -256,11 +256,11 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
     const label = this._elements.label;
   
     // If it's empty and has no non-textnode children, hide the label
-    const hiddenValue = !(label.children.length === 0 && label.textContent.replace(/\s*/g, '') === '' && !this.labelled);
+    const hiddenValue = !(label.children.length === 0 && label.textContent.replace(/\s*/g, '') === '');
   
     // Toggle the screen reader text
     this._elements.labelWrapper.style.margin = !hiddenValue ? '0' : '';
-    this._elements.screenReaderOnly.hidden = hiddenValue;
+    this._elements.screenReaderOnly.hidden = hiddenValue || this.labelled;
   }
   
   /**

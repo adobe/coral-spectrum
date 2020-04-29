@@ -1218,6 +1218,17 @@ class Table extends BaseComponent(HTMLTableElement) {
     const handle = this.querySelector('[coral-table-select]');
     
     if (handle) {
+
+      // If the handle is a checkbox but lacks a label, label it with "Select All".
+      if (handle.tagName === 'CORAL-CHECKBOX') {
+        if (!handle.labelled) {
+          handle.setAttribute('labelled', i18n.get('Select All'));
+        }
+        if (!handle.title) {
+          handle.setAttribute('title', i18n.get('Select All'));
+        }
+      }
+
       if (state === 'checked') {
         handle.removeAttribute('indeterminate');
         handle.setAttribute('checked', '');

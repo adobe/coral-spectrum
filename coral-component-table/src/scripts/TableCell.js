@@ -11,7 +11,7 @@
  */
 
 import {BaseComponent} from '../../../coral-base-component';
-import {transform} from '../../../coral-utils';
+import {commons, transform} from '../../../coral-utils';
 
 const CLASSNAME = '_coral-Table-cell';
 
@@ -90,7 +90,14 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
       if (!this.querySelector(`[${handle}]`)) {
         this.setAttribute(handle, '');
       }
+      this._syncAriaSelectedState();
+      this._syncSelectHandle();
     });
+  }
+
+  /** @private */
+  _getHandle(handle) {
+    return this.hasAttribute(handle) ? this : this.querySelector(`[${handle}]`);
   }
   
   /** @private */
@@ -99,15 +106,25 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
       this._setHandle('coral-table-cellselect');
     }
     else {
+      // Remove the handle
+      this.removeAttribute('coral-table-cellselect');
+
       // Clear selection
       this.selected = false;
     }
+
+    this._syncAriaSelectedState();
   }
   
   /** @private */
   _syncAriaSelectedState() {
     this.classList.toggle('is-selected', this.selected);
-    this.setAttribute('aria-selected', this.selected);
+    if (this._getHandle('coral-table-cellselect')) {
+      this.setAttribute('aria-selected', this.selected);
+    }
+    else {
+      this.removeAttribute('aria-selected');
+    }
   }
   
   /** @private */
@@ -139,6 +156,8 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
     super.render();
     
     this.classList.add(CLASSNAME);
+
+    this.id = this.id || commons.getUID();
   }
   
   /**

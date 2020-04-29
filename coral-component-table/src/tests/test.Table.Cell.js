@@ -62,22 +62,30 @@ describe('Table.Cell', function() {
     });
     
     describe('#selected', function() {
-      it('should be selected', function() {
+      it('should be selected', function(done) {
         const el = new Table.Cell();
         el.selected = true;
   
         expect(el.selected).to.be.true;
         expect(el.classList.contains('is-selected')).to.be.true;
-        expect(el.getAttribute('aria-selected')).to.equal('true');
+        expect(el.hasAttribute('aria-selected')).to.be.false;
+        el.setAttribute('_selectable', '');
+        helpers.next(() => {
+          expect(el.getAttribute('aria-selected')).to.equal('true');
+          done();
+        });
       });
   
-      it('should not select if disabled', function() {
+      it('should not select if disabled', function(done) {
         const el = new Table.Cell();
-        el.setAttribute('coral-table-cellselect', '');
-        el.setAttribute('disabled', '');
-    
-        el.selected = true;
-        expect(el.selected).to.be.false;
+        el.setAttribute('_selectable', '');
+        helpers.next(() => {
+          el.setAttribute('disabled', '');
+      
+          el.selected = true;
+          expect(el.selected).to.be.false;
+          done();
+        });
       });
   
       it('should not select if inner [coral-table-cellselect] is disabled', function() {

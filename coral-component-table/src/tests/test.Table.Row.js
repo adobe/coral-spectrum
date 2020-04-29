@@ -42,6 +42,7 @@ describe('Table.Row', function() {
         helpers.next(() => {
           row.items.getAll().forEach(function(item) {
             expect(item.hasAttribute('coral-table-cellselect')).to.be.true;
+            expect(item.getAttribute('aria-selected') === 'false').to.be.true;
           });
           
           done();
@@ -55,6 +56,7 @@ describe('Table.Row', function() {
         // Wait for MO
         setTimeout(function() {
           expect(cell.hasAttribute('coral-table-cellselect')).to.be.true;
+          expect(cell.getAttribute('aria-selected') === 'false').to.be.true;
           done();
         }, 100);
       });
@@ -63,6 +65,7 @@ describe('Table.Row', function() {
     describe('#selected', function() {
       it('should be selected', function() {
         const el = new Table.Row();
+        el.setAttribute('coral-table-rowselect', '');
         el.selected = true;
       
         expect(el.selected).to.be.true;
