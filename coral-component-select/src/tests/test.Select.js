@@ -324,12 +324,17 @@ describe('Select', function() {
   describe('API', function() {
     // the select list item used in every test
     var el;
+    var button;
+    var buttonLabel;
     var item1;
     var item2;
     var item3;
 
     beforeEach(function(done) {
       el = helpers.build(new Select());
+      button = el._elements.button;
+      buttonLabel = el._elements.label;
+
       // using a placeholder stops the component from finding an initial selection
       el.placeholder = 'Placeholder';
 
@@ -1017,7 +1022,66 @@ describe('Select', function() {
 
     describe('#readOnly', function() {});
 
-    describe('#labelledBy', function() {});
+    describe('#labelled', function() {
+      it('should update the aria-label of button', function() {
+        el.labelled = 'newlabel';
+
+        expect(button.getAttribute('aria-label')).to.equal('newlabel', 'button aria-label should have changed');
+      });
+
+      it('should update the aria-labelledBy of the button if there is none', function() {
+        el.labelled = 'newlabel';
+
+        expect(button.getAttribute('aria-label')).to.equal('newlabel', 'button aria-label should have changed');
+        expect(button.getAttribute('aria-labelledby').trim()).to.equal(`${button.id} ${buttonLabel.id}`, 'button aria-labelledby should include button itself and its label');
+
+        el.labelled = 'otherlabel';
+
+        expect(button.getAttribute('aria-label')).to.equal('otherlabel', 'button aria-label should have changed');
+        expect(button.getAttribute('aria-labelledby').trim()).to.equal(`${button.id} ${buttonLabel.id}`, 'button aria-labelledby should include button itself and its label');
+      });
+
+      it('should remove the aria-label of button if removed', function() {
+        el.labelled = 'newlabel';
+
+        expect(button.getAttribute('aria-label')).to.equal('newlabel');
+
+        el.labelled = '';
+        expect(button.getAttribute('aria-label')).to.equal(null, 'button aria-label should have been removed');
+        expect(button.getAttribute('aria-labelledby')).to.equal(null, 'button aria-labelledby should have been removed');
+      });
+    });
+
+    describe('#labelledBy', function() {
+      it('should not be present when creating a new element', function() {
+        expect(button.getAttribute('aria-labelledby')).to.be.null;
+      });
+
+      it('should update aria-labelledBy of included button element', function() {
+        el.labelledBy = 'newItemId';
+        expect(button.getAttribute('aria-labelledby').includes('newItemId')).to.be.true;
+        expect(button.getAttribute('aria-labelledby').includes(buttonLabel.id)).to.be.true;
+
+        el.labelledBy = '';
+        expect(button.getAttribute('aria-labelledby')).to.equal(null, 'button did not update aria-labelledby');
+      });
+
+      it('should take precedence over labelled', function() {
+        el.labelled = 'newlabel'
+        expect(button.getAttribute('aria-label')).to.equal('newlabel', 'button aria-label should have changed');
+        expect(button.getAttribute('aria-labelledby').trim()).to.equal(`${button.id} ${buttonLabel.id}`, 'button aria-labelledby should include button itself and its label');
+
+        el.labelledBy = 'newLabelId';
+        expect(button.getAttribute('aria-labelledby').trim()).to.equal(`newLabelId ${buttonLabel.id}`, 'button aria-labelledby should include external label id and its label');
+
+        el.labelled = 'newlabel2'
+        expect(button.getAttribute('aria-label')).to.equal('newlabel2', 'button aria-label should have changed');
+        expect(button.getAttribute('aria-labelledby').trim()).to.equal(`newLabelId ${buttonLabel.id}`, 'button aria-labelledby should still include external label id and its label');
+
+        el.labelledBy = '';
+        expect(button.getAttribute('aria-labelledby').trim()).to.equal(`${button.id} ${buttonLabel.id}`, 'button aria-labelledby should include button itself and its label');
+      });
+    });
 
     describe('#loading', function() {});
 
