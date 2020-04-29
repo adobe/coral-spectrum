@@ -414,8 +414,9 @@ class Toast extends BaseOverlay(BaseComponent(HTMLElement)) {
     }
   }
   
-  _onEscape() {
-    if (this.open && this.classList.contains('is-open')) {
+  _onEscape(event) {
+    if (this.open && this.classList.contains('is-open') && this._isTopOverlay()) {
+      event.stopPropagation();
       this.open = false;
     }
   }
