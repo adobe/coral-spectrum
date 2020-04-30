@@ -496,7 +496,8 @@ describe('ColorInput', function() {
 
     it('should have the right role set', function() {
       const el = helpers.build(window.__html__['ColorInput.base.html']);
-      expect(el.getAttribute('role')).to.equal('combobox');
+      expect(el.getAttribute('role')).to.equal('group');
+      expect(el._elements.input.getAttribute('role')).to.equal('combobox');
     });
 
     it('should generate a swatches subview for the colorinput', function() {

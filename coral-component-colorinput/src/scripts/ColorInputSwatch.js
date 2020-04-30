@@ -56,9 +56,13 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
     if (!value || value && !this.disabled) {
       this._selected = value;
       this._reflectAttribute('selected', this.disabled ? false : this._selected);
+      this.removeAttribute('aria-selected', this._selected);
       
       this.classList.toggle('is-selected', this._selected);
-      this.setAttribute('aria-selected', this._selected);
+      this._elements.colorButton.setAttribute('aria-selected', this._selected);
+
+      this._elements.colorButton.tabIndex = this.tabIndex;
+      this.removeAttribute('tabindex');
   
       this._elements.colorButton[this._selected ? 'setAttribute' : 'removeAttribute']('aria-label',
         `${i18n.get('checked')} ${this._elements.colorButton.label.textContent}`);
@@ -100,12 +104,12 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
     if (cssColorValue) {
       this._elements.colorButton.style.backgroundColor = cssColorValue;
       this._elements.colorButton.label.textContent = hexColorValue;
-      this.setAttribute('aria-value', hexColorValue);
+      this.setAttribute('data-value', hexColorValue);
     }
     else {
       this._elements.colorButton.classList.add('_coral-ColorInput-swatch-novalue');
       this._elements.colorButton.label.textContent = i18n.get('unset');
-      this.setAttribute('aria-value', '');
+      this.setAttribute('data-value', '');
     }
   }
 
@@ -126,10 +130,13 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
   }
 
   /**
-   The tabindex of the color preview.
+   The tabindex of the color preview button. 
+   So that we don't wind up with nested focusable elements,
+   the internal colorButton should should receive the tabIndex property, 
+   while the coral-colorinput-swatch should reflect the value using the _tabindex attribute.
    
    @type {Integer}
-   @default 0
+   @default -1
    @htmlattribute tabindex
    @htmlattributereflected
    */
@@ -138,7 +145,7 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
   }
   set tabIndex(value) {
     this._elements.colorButton.tabIndex = value;
-    this._reflectAttribute('tabindex', this.tabIndex);
+    this.removeAttribute('tabindex');
   }
   
   /** @ignore */
@@ -173,7 +180,7 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
     this.classList.add(CLASSNAME, 'u-coral-clearFix');
     
     // adds the role to support accessibility
-    this.setAttribute('role', 'option');
+    this.setAttribute('role', 'presentation');
     
     // Support cloneNode
     const button = this.querySelector('[handle="colorButton"]');

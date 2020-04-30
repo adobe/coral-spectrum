@@ -142,6 +142,7 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
     // Overlay
     events[`global:capture:coral-overlay:beforeopen #${overlayId}`] = '_beforeOverlayOpen';
     events[`global:capture:coral-overlay:close #${overlayId}`] = '_onOverlayClose';
+    events[`global:key:esc #${overlayId}`] = '_onKeyEsc';
     
     // Events
     this._delegateEvents(events);
@@ -474,7 +475,6 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
     
-    this.setAttribute('aria-required', this._required);
     this._elements.input.required = this._required;
   }
   
@@ -620,10 +620,12 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
   }
   
   /** @ignore */
-  _onKeyEsc() {
+  _onKeyEsc(event) {
     if (!this._elements.overlay.open) {
       return;
     }
+
+    event.stopPropagation();
     
     this._elements.overlay.open = false;
   }
@@ -641,12 +643,14 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
     }
     
     // set aria-expanded state
+    this._elements.input.setAttribute('aria-expanded', true);
     this._elements.colorPreview.setAttribute('aria-expanded', true);
   }
   
   /** @ignore */
   _onOverlayClose() {
     // set aria-expanded state
+    this._elements.input.setAttribute('aria-expanded', true);
     this._elements.colorPreview.setAttribute('aria-expanded', false);
   }
   
@@ -886,8 +890,7 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
   
     this.classList.add(CLASSNAME);
   
-    this.setAttribute('role', 'combobox');
-    this.setAttribute('aria-expanded', false);
+    this.setAttribute('role', 'group');
     
     const frag = document.createDocumentFragment();
     
