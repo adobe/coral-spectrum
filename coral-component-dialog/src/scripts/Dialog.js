@@ -482,9 +482,10 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
   }
   
   /** @ignore */
-  _handleEscape() {
+  _handleEscape(event) {
     // When escape is pressed, hide ourselves
     if (this.interaction === interaction.ON && this.open && this._isTopOverlay()) {
+      event.stopPropagation();
       this.open = false;
     }
   }
