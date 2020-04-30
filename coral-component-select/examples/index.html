@@ -478,33 +478,6 @@
           </coral-select>
         </form>
       </div>
-
-      <h2 class="coral--Heading--S">Select within Dialog</h2>
-      <div class="markup">
-        <button is="coral-button" onclick="document.getElementById('dialogId').show()">Open dialog</button>
-        <coral-dialog id="dialogId" aria-label="Browser">
-          <coral-dialog-header>Browser</coral-dialog-header>
-          <form class="coral-Form coral-Form--vertical">
-            <coral-dialog-content>
-              <section class="coral-Form-fieldset">
-                <div class="coral-Form-fieldwrapper">
-                  <label class="coral-Form-fieldlabel" id="browserLabel">Browser</label>
-                  <coral-select labelledby="browserLabel" icon="search" name="browser">
-                    <coral-select-item value="ch"><coral-icon alt="" icon="chrome"></coral-icon> Chrome</coral-select-item>
-                    <coral-select-item value="fi"><coral-icon alt="" icon="firefox"></coral-icon> Firefox</coral-select-item>
-                    <coral-select-item disabled value="ie"><coral-icon alt="" icon="internetExplorer"></coral-icon> Internet Explorer</coral-autocomplete-item>
-                    <coral-select-item value="op"><coral-icon alt="" icon="opera"></coral-icon> Opera</coral-select-item>
-                    <coral-select-item value="sa"><coral-icon alt="" icon="safari"></coral-icon> Safari</coral-select-item>
-                  </coral-select>
-                </div>
-              </section>
-            </coral-dialog-content>
-            <coral-dialog-footer>
-              <button is="coral-button" type="reset" coral-close>Cancel</button>
-              <button is="coral-button" type="button" variant="primary" coral-close>Done</button>
-            </coral-dialog-footer>
-          </form>
-        </coral-dialog>
     </main>
   </body>
 </html>
