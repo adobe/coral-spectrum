@@ -2180,7 +2180,8 @@ class Table extends BaseComponent(HTMLTableElement) {
     if(forced === true){
       self._doResetLayout();
       self._preventResetLayout = false;
-    }else{
+    }
+    else{
       self._resetLayout();
     }
   }
