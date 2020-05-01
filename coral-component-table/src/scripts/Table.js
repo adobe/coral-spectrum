@@ -2176,23 +2176,21 @@ class Table extends BaseComponent(HTMLTableElement) {
   * If true call the layout method immediately, else wait for timeout
   */
   resetLayout(forced){
-    var self = this;
     if(forced === true){
-      self._doResetLayout();
-      self._preventResetLayout = false;
+      this._doResetLayout();
+      this._preventResetLayout = false;
     }
     else{
-      self._resetLayout();
+      this._resetLayout();
     }
   }
 
   /** @private */
   _doResetLayout() {
-    var self = this;
-    self.classList.add(IS_LAYOUTING);
-    self._resizeStickyHead();
-    self._resizeContainer();
-    self.classList.remove(IS_LAYOUTING);
+    this.classList.add(IS_LAYOUTING);
+    this._resizeStickyHead();
+    this._resizeContainer();
+    this.classList.remove(IS_LAYOUTING);
   }
 
   /** @private */
