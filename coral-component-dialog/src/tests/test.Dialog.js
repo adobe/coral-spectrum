@@ -688,4 +688,97 @@ describe('Dialog', function() {
       });
     });
   });
+
+  describe('Accessibility', function() {
+    let el;
+  
+    beforeEach(function() {
+      el = helpers.build(window.__html__['Dialog.fromElements.html']);
+    });
+    describe('#variant', function() {
+      it('should add aria-labelledby to default variant when a header but no other label is provided', function() {
+        expect(el.getAttribute('role')).to.equal('dialog');
+        expect(el.getAttribute('aria-labelledby')).to.equal(el.header.id);
+        expect(el.hasAttribute('aria-describedby')).to.be.false;
+
+        el = helpers.build(window.__html__['Dialog.contentOnly.html']);
+        expect(el.getAttribute('role')).to.equal('dialog');
+        expect(el.hasAttribute('aria-labelledby')).to.be.false;
+        expect(el.hasAttribute('aria-describedby')).to.be.false;
+      });
+      it('should add aria-labelledby and aria-describedby to error variant when a header but no other label is provided', function() {
+        el.variant = Dialog.variant.ERROR;
+        expect(el.getAttribute('role')).to.equal('alertdialog');
+        expect(el.getAttribute('aria-labelledby')).to.equal(el.header.id);
+        expect(el.getAttribute('aria-describedby')).to.equal(el.content.id);
+
+        el = helpers.build(window.__html__['Dialog.contentOnly.html']);
+        el.variant = Dialog.variant.ERROR;
+        expect(el.getAttribute('role')).to.equal('alertdialog');
+        expect(el.getAttribute('aria-labelledby')).to.equal(el.content.id);
+        expect(el.hasAttribute('aria-describedby')).to.be.false;
+      });
+      it('should add aria-labelledby and aria-describedby to warning variant when a header but no other label is provided', function() {
+        el.variant = Dialog.variant.WARNING;
+        expect(el.getAttribute('role')).to.equal('alertdialog');
+        expect(el.getAttribute('aria-labelledby')).to.equal(el.header.id);
+        expect(el.getAttribute('aria-describedby')).to.equal(el.content.id);
+
+        el = helpers.build(window.__html__['Dialog.contentOnly.html']);
+        el.variant = Dialog.variant.WARNING;
+        expect(el.getAttribute('role')).to.equal('alertdialog');
+        expect(el.getAttribute('aria-labelledby')).to.equal(el.content.id);
+        expect(el.hasAttribute('aria-describedby')).to.be.false;
+      });
+      it('should add aria-labelledby and aria-describedby to success variant when a header but no other label is provided', function() {
+        el.variant = Dialog.variant.SUCCESS;
+        expect(el.getAttribute('role')).to.equal('alertdialog');
+        expect(el.getAttribute('aria-labelledby')).to.equal(el.header.id);
+        expect(el.getAttribute('aria-describedby')).to.equal(el.content.id);
+
+        el = helpers.build(window.__html__['Dialog.contentOnly.html']);
+        el.variant = Dialog.variant.SUCCESS;
+        expect(el.getAttribute('role')).to.equal('alertdialog');
+        expect(el.getAttribute('aria-labelledby')).to.equal(el.content.id);
+        expect(el.hasAttribute('aria-describedby')).to.be.false;
+      });
+      it('should add aria-labelledby and aria-describedby to help variant when a header but no other label is provided', function() {        
+        el.variant = Dialog.variant.HELP;
+        expect(el.getAttribute('role')).to.equal('alertdialog');
+        expect(el.getAttribute('aria-labelledby')).to.equal(el.header.id);
+        expect(el.getAttribute('aria-describedby')).to.equal(el.content.id);
+
+        el = helpers.build(window.__html__['Dialog.contentOnly.html']);
+        el.variant = Dialog.variant.HELP;
+        expect(el.getAttribute('role')).to.equal('alertdialog');
+        expect(el.getAttribute('aria-labelledby')).to.equal(el.content.id);
+        expect(el.hasAttribute('aria-describedby')).to.be.false;
+      });
+      it('should add aria-labelledby and aria-describedby to info variant when a header but no other label is provided', function() {
+        el.variant = Dialog.variant.INFO;
+        expect(el.getAttribute('role')).to.equal('alertdialog');
+        expect(el.getAttribute('aria-labelledby')).to.equal(el.header.id);
+        expect(el.getAttribute('aria-describedby')).to.equal(el.content.id);
+
+        el = helpers.build(window.__html__['Dialog.contentOnly.html']);
+        el.variant = Dialog.variant.INFO;
+        expect(el.getAttribute('role')).to.equal('alertdialog');
+        expect(el.getAttribute('aria-labelledby')).to.equal(el.content.id);
+        expect(el.hasAttribute('aria-describedby')).to.be.false;
+      });
+      it('should preserve aria-label or aria-labelledby on dialog', function() {
+        el.variant = Dialog.variant.INFO;
+        el.setAttribute('aria-labelledby', 'header-id');
+        el.header.innerHTML = '<span id="header-id">My Special Header</span>';
+        expect(el.getAttribute('aria-labelledby')).to.equal('header-id');
+        expect(el.getAttribute('aria-describedby')).to.equal(el.content.id);
+        el.setAttribute('aria-label', 'boo');
+        el.removeAttribute('aria-labelledby');
+        el.header.innerHTML = '';
+        expect(el.hasAttribute('aria-labelledby')).to.be.false;
+        expect(el.getAttribute('aria-label')).to.equal('boo');
+        expect(el.getAttribute('aria-describedby')).to.equal(el.content.id);
+      });
+    });
+  });
 });
