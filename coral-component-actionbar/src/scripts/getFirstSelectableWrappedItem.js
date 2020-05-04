@@ -29,7 +29,7 @@ export default function getFirstSelectableWrappedItem(wrapperItem) {
     child = wrapperItem.children[i];
     
     // maybe filter even more elements? (opacity, display='none', position='absolute' ...)
-    if (child.offsetParent && child.matches(commons.FOCUSABLE_ELEMENT_SELECTOR)) {
+    if (child.offsetParent && (child.matches(commons.FOCUSABLE_ELEMENT_SELECTOR) || child.matches('a:not([href])'))) {
       return child;
     }
   }
@@ -40,7 +40,7 @@ export default function getFirstSelectableWrappedItem(wrapperItem) {
     for (let j = 0; j < child.children.length; j++) {
       let subChild = child.children[j];
       // maybe filter even more elements? (opacity, display='none', position='absolute' ...)
-      if (subChild.offsetParent && subChild.matches(commons.FOCUSABLE_ELEMENT_SELECTOR)) {
+      if (subChild.offsetParent && (subChild.matches(commons.FOCUSABLE_ELEMENT_SELECTOR) || child.matches('a:not([href])'))) {
         return subChild;
       }
     }
