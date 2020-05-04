@@ -145,6 +145,21 @@ describe('Tab', function() {
         expect(item.hasAttribute('invalid')).to.be.false;
         expect(item.classList.contains('is-invalid')).to.be.false;
       });
+
+      it('should show an alert icon when invalid and hide it when valid', function() {
+        // we need to call render so that the icons are attached to the tab
+        item.render();
+
+        item.invalid = true;
+        let invalidIcon = item.querySelector('._coral-Tabs-itemInvalidIcon');
+        expect(invalidIcon).not.to.be.null;
+        expect(invalidIcon.hasAttribute('hidden')).to.be.false;
+
+        item.invalid = false;
+        invalidIcon = item.querySelector('._coral-Tabs-itemInvalidIcon');
+        expect(invalidIcon).not.to.be.null;
+        expect(invalidIcon.hasAttribute('hidden')).to.be.true;
+      });
     });
 
     describe('#label', function() {

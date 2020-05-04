@@ -30,10 +30,11 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Templates
     this._elements = {
-      label: this.querySelector('coral-tab-label') || document.createElement('coral-tab-label')
+      label: this.querySelector('coral-tab-label') || document.createElement('coral-tab-label'),
+      invalidIcon: this.querySelector('._coral-Tabs-itemInvalidIcon') || this._createInvalidIcon()
     };
     base.call(this._elements);
   
@@ -131,6 +132,12 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
     
     this.classList.toggle('is-invalid', this._invalid);
     this.setAttribute('aria-invalid', this._invalid);
+    if (this._invalid) {
+      this._elements.invalidIcon.removeAttribute('hidden');
+    }
+    else {
+      this._elements.invalidIcon.setAttribute('hidden', 'true');
+    }
   }
   
   /**
@@ -269,7 +276,18 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
       }
     }
   }
-  
+
+  _createInvalidIcon() {
+    let iconElement = document.createElement('coral-icon');
+    iconElement.icon = 'alert';
+    iconElement.size = Icon.size.EXTRA_SMALL;
+    iconElement.classList.add('_coral-Tabs-itemInvalidIcon');
+    if (!this._invalid) {
+      iconElement.setAttribute('hidden', 'true');
+    }
+    return iconElement;
+  }
+
   get _contentZones() { return {'coral-tab-label': 'label'}; }
   
   /** @ignore */
@@ -307,6 +325,10 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
     if (this.icon) {
       frag.appendChild(this._elements.icon);
     }
+
+    if (this._elements.invalidIcon) {
+      frag.append(this._elements.invalidIcon);
+    }
   
     const label = this._elements.label;
   
@@ -326,10 +348,10 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
         this.removeChild(child);
       }
     }
-  
+
     // Add the frag to the component
     this.appendChild(frag);
-  
+
     // Assign the content zones, moving them into place in the process
     this.label = label;
   }
