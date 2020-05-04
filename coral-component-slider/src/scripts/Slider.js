@@ -789,8 +789,10 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
    @private
    */
   _mouseUp() {
-    this._currentHandle.style.cursor = 'grab';
-    this._currentHandle.classList.remove('is-dragged');
+    if (this._currentHandle) {
+      this._currentHandle.style.cursor = 'grab';
+      this._currentHandle.classList.remove('is-dragged');
+    }
     document.body.classList.remove('u-coral-closedHand');
     
     events.off('mousemove.Slider', this._draggingHandler);

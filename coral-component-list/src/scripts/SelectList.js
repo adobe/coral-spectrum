@@ -220,7 +220,7 @@ class SelectList extends BaseComponent(HTMLElement) {
   }
   set _tabTarget(value) {
     this.__tabTarget = value;
-    
+  
     // Set all but the current set _tabTarget to not be a tab target:
     this.items.getAll().forEach((item) => {
       item.setAttribute('tabindex', item === value ? 0 : -1);

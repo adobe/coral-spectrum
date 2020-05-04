@@ -12,7 +12,7 @@
 
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Autocomplete} from '../../../coral-component-autocomplete';
-import {i18n} from '../../../coral-utils';
+import {i18n, commons} from '../../../coral-utils';
 
 describe('Autocomplete', function() {
   describe('Namespace', function() {
@@ -1430,7 +1430,6 @@ describe('Autocomplete', function() {
       });
     });
 
-
     it('should not escape special characters when an item is selected', function() {
       var el = new Autocomplete();
 
@@ -1766,6 +1765,225 @@ describe('Autocomplete', function() {
       helpers.testFormField(window.__html__['Autocomplete.multiple.value.html'], {
         value: 'op',
         default: ''
+      });
+    });
+  });
+
+  describe('Accessibility', function() {
+    var el;
+    var input;
+    var inputGroup;
+    var trigger;
+    var overlay;
+    var selectList;
+    var tagList;
+    var chrome;
+    var firefox;
+    var ie;
+    var safari;
+
+    beforeEach(function() {
+      el = helpers.build(new Autocomplete());
+
+      // No delay by default
+      el.delay = 0;
+
+      el.set({
+        placeholder: 'Choose a browser',
+        match: 'startswith',
+        labelledBy: 'foo-id',
+        multiple: true,
+      });
+      chrome = el.items.add({
+        value: 'ch',
+        content: {
+          textContent: 'Chrome'
+        }
+      });
+      firefox = el.items.add({
+        value: 'fi',
+        content: {
+          textContent: 'Firefox'
+        }
+      });
+      ie = el.items.add({
+        value: 'ie',
+        content: {
+          textContent: 'Internet Explorer'
+        }
+      });
+      safari = el.items.add({
+        value: 'sa',
+        content: {
+          textContent: 'Safari'
+        }
+      });
+      
+      input = el._elements.input;
+      inputGroup = el._elements.inputGroup;
+      trigger = el._elements.trigger;
+      selectList = el._elements.selectList;
+      tagList = el._elements.tagList;
+    });
+
+    afterEach(function() {
+      el = null;
+      input = null;
+      trigger = null;
+      overlay = null;
+      selectList = null;
+    });
+
+    describe('WAI-ARIA 1.2 Combobox design pattern', function() {
+      describe('coral-autocomplete', function() {
+        it('should have role="group"', function() {
+          expect(el.getAttribute('role')).to.equal('group');
+          expect(inputGroup.getAttribute('role')).to.equal('presentation', 'inputGroup should have role="presentation" so that NVDA does not announce the CSS style display: table as a table');
+        });
+
+        describe('#labelledBy', function() {
+          it('should have aria-labelledby', function(done) {
+            expect(el.getAttribute('aria-labelledby')).to.equal('foo-id');
+            expect(tagList.getAttribute('aria-labelledby')).to.equal('foo-id');
+            el.labelledBy = null;
+            helpers.next(function() {
+              expect(el.getAttribute('aria-labelledby')).to.be.null;
+              expect(tagList.getAttribute('aria-labelledby')).to.be.null;
+              done();
+            });
+          });
+        });
+
+        describe('#labelled', function() {
+          it('should have aria-label', function(done) {
+            el.setAttribute('labelled', 'bar');
+            expect(el.getAttribute('aria-label')).to.equal('bar');
+            expect(tagList.getAttribute('aria-label')).to.equal('bar');
+            el.labelled= null;
+            helpers.next(function() {
+              expect(el.getAttribute('aria-label')).to.be.null;
+              expect(tagList.getAttribute('aria-label')).to.be.null;
+              done();
+            });
+          });
+        });
+      });
+
+      describe('input', function() {
+        it('should have role="combobox"', function() {
+          expect(input.getAttribute('role')).to.equal('combobox');
+        });
+
+        it('should have aria-autocomplete="list"', function() {
+          expect(input.getAttribute('aria-autocomplete')).to.equal('list');
+        });
+
+        it('should have aria-haspopup="listbox"', function() {
+          expect(input.getAttribute('aria-haspopup')).to.equal('listbox');
+        });
+
+        it('should have aria-expanded', function(done) {
+          expect(input.getAttribute('aria-expanded')).to.equal('false');
+
+          el.on('coral-overlay:open', function() {
+            expect(input.getAttribute('aria-expanded')).to.equal('true');
+            // Trigger esc key to close the input
+            helpers.keydown('esc', document.body);
+          });
+
+          el.on('coral-overlay:close', function() {
+            helpers.next(function() {
+              expect(input.getAttribute('aria-expanded')).to.equal('false');
+              done();
+            });
+          });
+
+          helpers.event('input', input);
+        });
+
+        it('should have aria-controls', function() {
+          expect(input.getAttribute('aria-controls')).to.equal(selectList.id);
+        });
+
+        describe('#labelledBy', function() {
+          it('should have aria-labelledby', function(done) {
+            expect(input.getAttribute('aria-labelledby')).to.equal('foo-id');
+            el.labelledBy = null;
+            helpers.next(function() {
+              expect(input.getAttribute('aria-labelledby')).to.be.null;
+              done();
+            });
+          });
+        });
+
+        describe('#labelled', function() {
+          it('should have aria-label', function(done) {
+            el.setAttribute('labelled', 'bar');
+            expect(input.getAttribute('aria-label')).to.equal('bar');
+            el.labelled = null;
+            helpers.next(function() {
+              expect(input.getAttribute('aria-label')).to.be.null;
+              done();
+            });
+          });
+        });
+      });
+
+      describe('trigger button', function() {
+        it('should have aria-haspopup="listbox"', function() {
+          expect(trigger.getAttribute('aria-haspopup')).to.equal('listbox');
+        });
+
+        it('should have aria-expanded', function(done) {
+          expect(trigger.getAttribute('aria-expanded')).to.equal('false');
+
+          el.on('coral-overlay:open', function() {
+            expect(trigger.getAttribute('aria-expanded')).to.equal('true');
+            // Trigger esc key to close the input
+            helpers.keydown('esc', document.body);
+          });
+
+          el.on('coral-overlay:close', function() {
+            helpers.next(function() {
+              expect(trigger.getAttribute('aria-expanded')).to.equal('false');
+              done();
+            });
+          });
+
+          helpers.event('click', trigger);
+        });
+
+        it('should have aria-controls', function() {
+          expect(trigger.getAttribute('aria-controls')).to.equal(selectList.id);
+        });
+      });
+
+      describe('selectlist', function() {
+        it('should have role="listbox"', function() {
+          expect(selectList.getAttribute('role')).to.equal('listbox');
+        });
+
+        describe('#labelledBy', function() {
+          it('should have aria-labelledby', function(done) {
+            expect(selectList.getAttribute('aria-labelledby')).to.equal('foo-id');
+            el.labelledBy = null;
+            helpers.next(function() {
+              expect(selectList.getAttribute('aria-labelledby')).to.be.null;
+              done();
+            });
+          });
+        });
+        describe('#labelled', function() {
+          it('should have aria-label', function(done) {
+            el.setAttribute('labelled', 'bar');
+            expect(selectList.getAttribute('aria-label')).to.equal('bar');
+            el.labelled = null;
+            helpers.next(function() {
+              expect(selectList.getAttribute('aria-label')).to.be.null;
+              done();
+            });
+          });
+        });
       });
     });
   });

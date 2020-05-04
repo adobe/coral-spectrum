@@ -1,6 +1,6 @@
 <input handle="input" type="hidden" name="">
 <div handle="header" class="_coral-Calendar-header">
-  <div handle="heading" class="_coral-Calendar-title" role="heading" aria-live="assertive" aria-atomic="true" aria-level="2"></div>
+  <div handle="heading" class="_coral-Calendar-title" role="heading" aria-live="assertive" aria-atomic="true" aria-level="2" id="{{data.commons.getUID()}}"></div>
   <button type="button" handle="prev" class="_coral-Calendar-prevMonth" is="coral-button" variant="quietaction" aria-label="{{data.i18n.get('Previous Month')}}" title="{{data.i18n.get('Previous Month')}}">
     <coral-button-label handle="prevLabel"></coral-button-label>
   </button>
@@ -17,4 +17,4 @@
     this.next.insertAdjacentHTML('beforeend', data.Icon._renderSVG('spectrum-css-icon-ChevronRightLarge', ['_coral-UIIcon-ChevronRightLarge']));
   </js>
 </div>
-<div class="_coral-Calendar-body" handle="body" role="grid" tabindex="0" aria-readonly="true"></div>
+<div class="_coral-Calendar-body" handle="body" role="grid" tabindex="0" aria-readonly="true" aria-labelledby="{{this.heading.id}}"></div>

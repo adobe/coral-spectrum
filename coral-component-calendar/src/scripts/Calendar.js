@@ -211,6 +211,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
       'key:ctrl+pagedown': '_onCtrlPageDownKey',
   
       'key:enter ._coral-Calendar-body': '_onEnterKey',
+      'key:return ._coral-Calendar-body': '_onEnterKey',
       'key:space ._coral-Calendar-body': '_onEnterKey'
     }));
     
@@ -587,6 +588,9 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
             }
           }
         }
+        else {
+          el = this._elements.body.querySelector('.is-focused') || this._elements.body.querySelector('.is-today');
+        }
         
         if (el) {
           this._activeDescendant = el.parentElement.id;
@@ -613,11 +617,8 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
     
     if (el) {
       if (isTransitioning) {
-        commons.transitionEnd(newTable, () => {
-          // Prevents from chopping off the transition animation
-          window.setTimeout(() => {
-            el.querySelector('._coral-Calendar-date').classList.add('is-focused');
-          }, 50);
+        window.requestAnimationFrame(() => {
+          el.querySelector('._coral-Calendar-date').classList.add('is-focused');
         });
       }
       else {
@@ -1026,7 +1027,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
     
     this.classList.add(CLASSNAME);
   
-    this.setAttribute('role', 'region');
+    this.setAttribute('role', 'group');
     
     // Default reflected attribute
     if (!this._valueFormat) { this.valueFormat = INTERNAL_FORMAT; }

@@ -195,12 +195,10 @@ class ColorInputSwatches extends BaseColorInputAbstractSubview(BaseComponent(HTM
       swatch.targetColor = color;
       
       if (color.selected) {
-        swatch.selected = color.selected;
+        swatch[color.selected ? 'setAttribute' : 'removeAttribute']('selected', color.selected);
         swatchSelected = true;
       }
-      
-      swatch.setAttribute('aria-selected', swatch.selected);
-      
+            
       // Update color button tabindex depending on selected state
       swatch.tabIndex = swatch.selected ? 0 : -1;
     }
@@ -306,6 +304,9 @@ class ColorInputSwatches extends BaseColorInputAbstractSubview(BaseComponent(HTM
     }
     
     event.matchedTarget.tabIndex = 0;
+    if (document.activeElement !== event.matchedTarget.firstChild) {
+      event.matchedTarget.firstChild.focus();
+    }
   }
   
   /** @ignore */

@@ -510,8 +510,9 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
    
    @ignore
    */
-  _handleEscape() {
+  _handleEscape(event) {
     if (this.interaction === interaction.ON && this.open && this._isTopOverlay()) {
+      event.stopPropagation();
       this.hide();
     }
   }

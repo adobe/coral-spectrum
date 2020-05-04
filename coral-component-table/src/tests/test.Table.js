@@ -2232,9 +2232,9 @@ describe('Table', function() {
                   expect(accessibilityState.textContent).to.equal(index !== 0 ? ', checked' : '');
                 });
                 done();
-              }, 260);
-            }, 60);
-          }, 60);  
+              }, 275);
+            }, 75);
+          }, 75);  
         });
       });
     });
