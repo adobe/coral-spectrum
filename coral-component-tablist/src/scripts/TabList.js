@@ -179,6 +179,9 @@ class TabList extends BaseComponent(HTMLElement) {
               // creates a 2 way binding for accessibility
               tab.setAttribute('aria-controls', panel.id);
               panel.setAttribute('aria-labelledby', tab.id);
+
+              // adds role to panel to support accessibility
+              panel.setAttribute('role', 'tabpanel');
             }
             else if (tab) {
               // cleans the aria since there is no matching panel

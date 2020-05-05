@@ -1945,7 +1945,9 @@ describe('Autocomplete', function() {
 
           el.on('coral-overlay:close', function() {
             helpers.next(function() {
-              expect(trigger.getAttribute('aria-expanded')).to.equal('false');
+              if (trigger) {
+                expect(trigger.getAttribute('aria-expanded')).to.equal('false');
+              }
               done();
             });
           });
