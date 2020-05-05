@@ -1935,7 +1935,6 @@ describe('Autocomplete', function() {
         });
 
         it.skip('should have aria-expanded', function(done) {
-          
           expect(trigger.getAttribute('aria-expanded')).to.equal('false');
 
           el.on('coral-overlay:open', function() {
