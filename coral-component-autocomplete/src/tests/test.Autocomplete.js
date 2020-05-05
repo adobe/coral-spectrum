@@ -1934,7 +1934,7 @@ describe('Autocomplete', function() {
           expect(trigger.getAttribute('aria-haspopup')).to.equal('listbox');
         });
 
-        it.skip('should have aria-expanded', function(done) {
+        it('should have aria-expanded', function(done) {
           expect(trigger.getAttribute('aria-expanded')).to.equal('false');
 
           el.on('coral-overlay:open', function() {
@@ -1945,7 +1945,9 @@ describe('Autocomplete', function() {
 
           el.on('coral-overlay:close', function() {
             helpers.next(function() {
-              expect(trigger.getAttribute('aria-expanded')).to.equal('false');
+              if(trigger) {
+                expect(trigger.getAttribute('aria-expanded')).to.equal('false');
+              }
               done();
             });
           });
