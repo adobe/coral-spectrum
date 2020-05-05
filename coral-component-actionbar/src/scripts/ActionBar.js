@@ -557,10 +557,10 @@ class ActionBar extends BaseComponent(HTMLElement) {
     const primary = this._elements.primary;
     const secondary = this._elements.secondary;
 
-    if(!primary.getAttribute('role')) {
+    if (!primary.getAttribute('role')) {
       primary.setAttribute('role', 'toolbar');
     }
-    if(!secondary.getAttribute('role')) {
+    if (!secondary.getAttribute('role')) {
       secondary.setAttribute('role', 'toolbar');
     }
 
