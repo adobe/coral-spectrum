@@ -2578,6 +2578,7 @@
   --spectrum-medium-tabs-text-transform: none;
   --spectrum-medium-tabs-text-size: 14px;
   --spectrum-medium-tabs-icon-size: 18px;
+  --spectrum-medium-tabs-invalid-icon-margin: 5px;
   --spectrum-medium-tabs-baseline: 18px;
   --spectrum-medium-tabs-height: 48px;
   --spectrum-medium-tabs-item-height: 48px;
@@ -7742,6 +7743,7 @@
   --spectrum-large-tabs-text-transform: none;
   --spectrum-large-tabs-text-size: 17px;
   --spectrum-large-tabs-icon-size: 22px;
+  --spectrum-large-tabs-invalid-icon-margin: 5px;
   --spectrum-large-tabs-baseline: 25px;
   --spectrum-large-tabs-height: 60px;
   --spectrum-large-tabs-item-height: 60px;
