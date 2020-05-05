@@ -335,18 +335,18 @@ describe('Datepicker', function() {
         });
 
         it('should set readonly with value 1', function() {
-                  el.readOnly = 1;
-
-                  expect(el._elements.input.readOnly).to.be.true;
-                  expect(el._elements.toggle.disabled).to.be.true;
-                  expect(el.hasAttribute('readonly')).to.be.true;
+          el.readOnly = 1;
+  
+          expect(el._elements.input.readOnly).to.be.true;
+          expect(el._elements.toggle.disabled).to.be.true;
+          expect(el.hasAttribute('readonly')).to.be.true;
         });
-
+  
         it('should not be selectable with readOnly set to true', function() {
-                  el.readOnly = true;
-                  el.focus();
-
-                  expect(el.contains(document.activeElement)).to.be.false;
+          el.readOnly = true;
+          el.focus();
+    
+          expect(el.contains(document.activeElement)).to.be.false;
         });
       });
 

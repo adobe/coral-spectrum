@@ -1451,46 +1451,44 @@ describe('Select', function() {
     describe('#invalid', function() {});
 
     describe('#disabled', function() {});
-
+  
     describe('#readOnly', function() {
-
       it('should not be readOnly by default', function(done) {
-          const el = helpers.build(window.__html__['Select.base.html']);
-          expect(el.readOnly).to.be.false;
-          expect(el.hasAttribute('readOnly')).to.be.false;
-          done();
+        const el = helpers.build(window.__html__['Select.base.html']);
+        expect(el.readOnly).to.be.false;
+        expect(el.hasAttribute('readOnly')).to.be.false;
+        done();
       });
-
+    
       it('should be settable with value true', function(done) {
-          const el = helpers.build(window.__html__['Select.base.html']);
-          el.readOnly = true;
-
-          expect(el.readOnly).to.be.true;
-          expect(el.hasAttribute('readOnly')).to.be.true;
-          done();
+        const el = helpers.build(window.__html__['Select.base.html']);
+        el.readOnly = true;
+      
+        expect(el.readOnly).to.be.true;
+        expect(el.hasAttribute('readOnly')).to.be.true;
+        done();
       });
-
+    
       it('should be settable with value 1', function(done) {
-          const el = helpers.build(window.__html__['Select.base.html']);
-          el.readOnly = 1;
-
-          expect(el.readOnly).to.be.true;
-          expect(el.hasAttribute('readOnly')).to.be.true;
-          done();
+        const el = helpers.build(window.__html__['Select.base.html']);
+        el.readOnly = 1;
+      
+        expect(el.readOnly).to.be.true;
+        expect(el.hasAttribute('readOnly')).to.be.true;
+        done();
       });
-
+    
       it('should be selectable with readOnly set to true', function(done) {
-          const el = helpers.build(window.__html__['Select.base.html']);
-          el.readOnly = true;
-          el.focus();
-
-          expect(el.readOnly).to.be.true;
-          expect(el.hasAttribute('readOnly')).to.be.true;
-          expect(el.contains(document.activeElement)).to.be.true;
-          done();
+        const el = helpers.build(window.__html__['Select.base.html']);
+        el.readOnly = true;
+        el.focus();
+      
+        expect(el.readOnly).to.be.true;
+        expect(el.hasAttribute('readOnly')).to.be.true;
+        expect(el.contains(document.activeElement)).to.be.true;
+        done();
       });
-
-      });
+    });
 
     describe('#labelledBy', function() {});
 
