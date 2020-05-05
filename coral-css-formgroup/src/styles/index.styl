@@ -79,8 +79,7 @@ $form-aligned-label-min-width = var(--spectrum-medium-global-dimension-size-1600
     }
   }
 
-  .coral-Form-fieldlabel,
-  .coral-Form-errorlabel {
+  .coral-Form-fieldlabel{
     display: block;
     padding: var(--spectrum-medium-fieldlabel-padding-top) 0 var(--spectrum-medium-fieldlabel-padding-bottom);
   }
@@ -194,10 +193,13 @@ $form-aligned-label-min-width = var(--spectrum-medium-global-dimension-size-1600
       }
     }
 
-    .coral-Form-fieldlabel,
-    .coral-Form-errorlabel {
+    .coral-Form-fieldlabel {
       margin-top: 0;
       margin-bottom: 0;
+    }
+
+    .coral-Form-errorlabel {
+      margin-left: $form-hmargin;
     }
 
     .coral-Form-fieldinfo
