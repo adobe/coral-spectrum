@@ -1944,12 +1944,8 @@ describe('Autocomplete', function() {
           });
 
           el.on('coral-overlay:close', function() {
-            helpers.next(function() {
-              if(trigger) {
-                expect(trigger.getAttribute('aria-expanded')).to.equal('false');
-              }
-              done();
-            });
+            expect(trigger.getAttribute('aria-expanded')).to.equal('false');
+            done();
           });
 
           helpers.event('click', trigger);
