@@ -70,7 +70,7 @@ $form-aligned-label-min-width = var(--spectrum-medium-global-dimension-size-1600
  */
 .coral-Form--vertical {
   .coral-Form-field {
-    margin: 0 0 $form-vertical-vmargin-max;
+    margin: 0 0 0;
 
     // Don't override right checkbox,radio margin
     &._coral-Checkbox,
@@ -193,20 +193,22 @@ $form-aligned-label-min-width = var(--spectrum-medium-global-dimension-size-1600
       }
     }
 
-    .coral-Form-fieldlabel {
+    .coral-Form-fieldlabel,
+    .coral-Form-errorlabel {
       margin-top: 0;
       margin-bottom: 0;
     }
 
-    .coral-Form-errorlabel {
-      margin-left: $form-hmargin;
-    }
-
     .coral-Form-fieldinfo
-    .coral-Form-fielderror {
+    .coral-Form-fielderror{
       float: left;
       margin-left: $form-hmargin;
       margin-top: $form-vmargin;
+    }
+
+    .coral-Form-errorlabel {
+      float: left;
+      margin-left: $form-hmargin;
     }
   }
 
