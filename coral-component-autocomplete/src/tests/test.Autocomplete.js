@@ -1934,7 +1934,7 @@ describe('Autocomplete', function() {
           expect(trigger.getAttribute('aria-haspopup')).to.equal('listbox');
         });
 
-        it('should have aria-expanded', function(done) {
+        it.skip('should have aria-expanded', function(done) {
           expect(trigger.getAttribute('aria-expanded')).to.equal('false');
 
           el.on('coral-overlay:open', function() {
