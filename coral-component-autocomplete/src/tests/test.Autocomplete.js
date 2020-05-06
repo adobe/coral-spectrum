@@ -1782,7 +1782,7 @@ describe('Autocomplete', function() {
     var ie;
     var safari;
 
-    beforeEach(function() {
+    beforeEach(function(done) {
       el = helpers.build(new Autocomplete());
 
       // No delay by default
@@ -1819,11 +1819,15 @@ describe('Autocomplete', function() {
         }
       });
       
-      input = el._elements.input;
-      inputGroup = el._elements.inputGroup;
-      trigger = el._elements.trigger;
-      selectList = el._elements.selectList;
-      tagList = el._elements.tagList;
+      helpers.next(() => {
+        input = el._elements.input;
+        inputGroup = el._elements.inputGroup;
+        trigger = el._elements.trigger;
+        selectList = el._elements.selectList;
+        tagList = el._elements.tagList;
+        
+        done();
+      });
     });
 
     afterEach(function() {
