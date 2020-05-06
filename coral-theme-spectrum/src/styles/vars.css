@@ -11746,6 +11746,7 @@
   --spectrum-light-fieldbutton-quiet-validation-icon-color-error-key-focus: rgb(201, 37, 45);
   --spectrum-light-fieldbutton-quiet-border-color-error-mouse-focus: rgb(215, 55, 63);
   --spectrum-light-fieldbutton-quiet-validation-icon-color-error-mouse-focus: rgb(201, 37, 45);
+  --spectrum-light-errorlabel-text-color: rgb(201, 37, 45);
   --spectrum-light-fieldlabel-asterisk-color: rgb(142, 142, 142);
   --spectrum-light-fieldlabel-text-color: rgb(110, 110, 110);
   --spectrum-light-fieldlabel-asterisk-color-disabled: rgb(179, 179, 179);
@@ -14556,6 +14557,7 @@
   --spectrum-lightest-fieldbutton-quiet-validation-icon-color-error-key-focus: rgb(215, 55, 63);
   --spectrum-lightest-fieldbutton-quiet-border-color-error-mouse-focus: rgb(227, 72, 80);
   --spectrum-lightest-fieldbutton-quiet-validation-icon-color-error-mouse-focus: rgb(215, 55, 63);
+  --spectrum-lightest-errorlabel-text-color: rgb(215, 55, 63);
   --spectrum-lightest-fieldlabel-asterisk-color: rgb(149, 149, 149);
   --spectrum-lightest-fieldlabel-text-color: rgb(116, 116, 116);
   --spectrum-lightest-fieldlabel-asterisk-color-disabled: rgb(188, 188, 188);
@@ -17366,6 +17368,7 @@
   --spectrum-dark-fieldbutton-quiet-validation-icon-color-error-key-focus: rgb(247, 109, 116);
   --spectrum-dark-fieldbutton-quiet-border-color-error-mouse-focus: rgb(236, 91, 98);
   --spectrum-dark-fieldbutton-quiet-validation-icon-color-error-mouse-focus: rgb(247, 109, 116);
+  --spectrum-dark-errorlabel-text-color: rgb(247, 109, 116);
   --spectrum-dark-fieldlabel-asterisk-color: rgb(144, 144, 144);
   --spectrum-dark-fieldlabel-text-color: rgb(185, 185, 185);
   --spectrum-dark-fieldlabel-asterisk-color-disabled: rgb(110, 110, 110);
@@ -20176,6 +20179,7 @@
   --spectrum-darkest-fieldbutton-quiet-validation-icon-color-error-key-focus: rgb(236, 91, 98);
   --spectrum-darkest-fieldbutton-quiet-border-color-error-mouse-focus: rgb(227, 72, 80);
   --spectrum-darkest-fieldbutton-quiet-validation-icon-color-error-mouse-focus: rgb(236, 91, 98);
+  --spectrum-darkest-errorlabel-text-color: rgb(236, 91, 98);
   --spectrum-darkest-fieldlabel-asterisk-color: rgb(124, 124, 124);
   --spectrum-darkest-fieldlabel-text-color: rgb(162, 162, 162);
   --spectrum-darkest-fieldlabel-asterisk-color-disabled: rgb(92, 92, 92);

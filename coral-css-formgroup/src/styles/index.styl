@@ -65,12 +65,25 @@ $form-aligned-label-min-width = var(--spectrum-medium-global-dimension-size-1600
   }
 }
 
+.coral-Form-errorlabel {
+  box-sizing: border-box;
+  font-weight: var(--spectrum-medium-fieldlabel-text-font-weight);
+  font-size: var(--spectrum-medium-fieldlabel-text-size);
+  line-height: var(--spectrum-medium-fieldlabel-text-line-height);
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: auto;
+  font-smoothing: subpixel-antialiased;
+  vertical-align: top;
+  display: block;
+  padding-top: var(--spectrum-medium-fieldlabel-padding-bottom);
+}
+
 /**
  * Indicates that the form is using vertical layout, where the label is placed above the field.
  */
 .coral-Form--vertical {
   .coral-Form-field {
-    margin: 0 0 $form-vertical-vmargin-max;
+    margin: 0;
 
     // Don't override right checkbox,radio margin
     &._coral-Checkbox,
@@ -87,6 +100,7 @@ $form-aligned-label-min-width = var(--spectrum-medium-global-dimension-size-1600
   .coral-Form-fieldwrapper {
     position: relative;
     display: block;
+    margin: 0 0 $form-vertical-vmargin-max;
 
     .coral-Form-fieldinfo,
     .coral-Form-fielderror {
@@ -193,7 +207,8 @@ $form-aligned-label-min-width = var(--spectrum-medium-global-dimension-size-1600
       }
     }
 
-    .coral-Form-fieldlabel {
+    .coral-Form-fieldlabel,
+    .coral-Form-errorlabel {
       margin-top: 0;
       margin-bottom: 0;
     }
@@ -203,6 +218,11 @@ $form-aligned-label-min-width = var(--spectrum-medium-global-dimension-size-1600
       float: left;
       margin-left: $form-hmargin;
       margin-top: $form-vmargin;
+    }
+
+    .coral-Form-errorlabel {
+      float: left;
+      margin-left: $form-hmargin;
     }
   }
 
