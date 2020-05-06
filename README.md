@@ -1,4 +1,4 @@
-# Coral Spectrum [![Build Status](https://github.com/adobe/coral-spectrum/workflows/Unit%20Tests%20and%20Accessibility%20CI/badge.svg)
+# Coral Spectrum ![Build Status](https://github.com/adobe/coral-spectrum/workflows/Unit%20Tests%20and%20Accessibility%20CI/badge.svg)
 
 A JavaScript library of Web Components following Spectrum design patterns.
 
