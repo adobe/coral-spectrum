@@ -595,7 +595,16 @@ describe('ActionBar', function() {
       let uploadButton = leftActionBarItems[2].querySelector('coral-fileupload>button');
       expect(uploadButton.getAttribute('tabindex')).to.equal('-1', 'upload button should not be tabable');
     });
-  
+
+    it('Anchor button without href should be accessible', function () {
+      const bar = helpers.build(window.__html__['ActionBar.hiddenitems.html']);
+      expect(document.activeElement.tagName.toLowerCase()).to.not.equal('button', 'activeElement should not be an one of the buttons inside the actionbar');
+
+      let leftActionBarItems = bar.primary.items.getAll();
+      var anchorButton = leftActionBarItems[3].querySelector('a:not([href])');
+      expect(anchorButton.getAttribute('tabindex')).to.equal('-1', 'anchor button should not be tabable');
+    });
+
     it('offscreen items should not be visible', function () {
       const bar = helpers.build(window.__html__['ActionBar.hiddenitems.html']);
       expect(document.activeElement.tagName.toLowerCase()).to.not.equal('button', 'activeElement should not be an one of the buttons inside the actionbar');

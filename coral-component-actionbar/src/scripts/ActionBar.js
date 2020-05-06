@@ -556,7 +556,14 @@ class ActionBar extends BaseComponent(HTMLElement) {
   
     const primary = this._elements.primary;
     const secondary = this._elements.secondary;
-  
+
+    if (!primary.getAttribute('role')) {
+      primary.setAttribute('role', 'toolbar');
+    }
+    if (!secondary.getAttribute('role')) {
+      secondary.setAttribute('role', 'toolbar');
+    }
+
     // we need to know if the content zone was provided to stop the voracious behavior
     let primaryProvided = primary.parentNode === this;
   

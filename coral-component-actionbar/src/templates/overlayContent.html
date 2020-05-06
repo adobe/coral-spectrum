@@ -2,9 +2,9 @@
   var copyAttributes = data.copyAttributes;
 </js>
 <if data.items.isButtonList>
-  <coral-buttonlist class="_coral-ActionBar-buttonList" tabindex="0" coral-actionbar-offscreen handle="buttonList">
+  <coral-buttonlist class="_coral-ActionBar-buttonList" tabindex="0" role="menu" coral-actionbar-offscreen handle="buttonList">
     <foreach data.items>
-      <button is="coral-buttonlist-item" handle="buttonListItem">
+      <button is="coral-buttonlist-item" role="menuitem" handle="buttonListItem">
         <js>
           copyAttributes(data._button, this.buttonListItem);
         </js>
@@ -25,9 +25,9 @@
   </coral-buttonlist>
   <else>
     <if data.items.isAnchorList>
-      <coral-anchorlist tabindex="0" coral-actionbar-offscreen handle="anchorList">
+      <coral-anchorlist tabindex="0" role="menu" coral-actionbar-offscreen handle="anchorList">
         <foreach data.items>
-          <a is="coral-anchorlist-item" handle="anchorListItem">
+          <a is="coral-anchorlist-item" role="menuitem" handle="anchorListItem">
             <js>
               copyAttributes(data._button, this.anchorListItem);
             </js>
