@@ -114,7 +114,7 @@ module.exports = function(config) {
     
     // test results reporter to use
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress', 'mocha', 'coverage-istanbul'],
+    reporters: ['mocha', 'coverage-istanbul'],
   
     // Configure the reporter
     coverageIstanbulReporter: {
