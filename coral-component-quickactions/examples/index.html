@@ -134,6 +134,73 @@
           <coral-quickactions-item icon="print">Print</coral-quickactions-item>
         </coral-quickactions>
       </div>
+
+      <h2 class="coral--Heading--S">Open on parent focus</h2>
+      <div class="markup">
+        <div class="box" role="link" tabindex="0">
+          Focus me
+          <coral-quickactions target="_parent" threshold="-1">
+            <coral-quickactions-item icon="copy">Copy</coral-quickactions-item>
+            <coral-quickactions-item icon="move">Move</coral-quickactions-item>
+            <coral-quickactions-item icon="download">Download</coral-quickactions-item>
+            <coral-quickactions-item icon="share">Share</coral-quickactions-item>
+            <coral-quickactions-item icon="assetsPublished">Publish</coral-quickactions-item>
+            <coral-quickactions-item icon="copy">Copy</coral-quickactions-item>
+            <coral-quickactions-item icon="lockClosed">Lock</coral-quickactions-item>
+            <coral-quickactions-item icon="lockOpen">Unlock</coral-quickactions-item>
+            <coral-quickactions-item icon="note">Annotate</coral-quickactions-item>
+            <coral-quickactions-item icon="paste">Paste</coral-quickactions-item>
+            <coral-quickactions-item icon="pinOn">Add Pin</coral-quickactions-item>
+            <coral-quickactions-item icon="pinOff">Remove Pin</coral-quickactions-item>
+            <coral-quickactions-item icon="print">Print</coral-quickactions-item>
+          </coral-quickactions>
+        </a>
+        <script>
+          (function (document, window) {
+
+            // opens descendant coral-quickactions when parent element receives focus
+            function handleQuickActionsTargetFocus(event) {
+              var currentTarget = event.currentTarget;
+              var quickActions = currentTarget.querySelector('coral-quickactions');
+              if (quickActions && !quickActions.open && !currentTarget._justClosed) {
+                quickActions.open = true;
+                currentTarget.addEventListener('blur', handleQuickActionsTargetBlur, true);
+                currentTarget.addEventListener('coral-overlay:beforeclose', handleQuickActionsBeforeClose, true);
+              }
+              else if (currentTarget._justClosed) {
+                currentTarget._justClosed = undefined;
+              }
+            }
+
+            // flags when quickactions were just closed, so that we don't reopen them when focus is restored to the target
+            function handleQuickActionsBeforeClose(event) {
+              event.currentTarget._justClosed = true;
+              event.currentTarget.removeEventListener('coral-overlay:beforeclose', handleQuickActionsBeforeClose, true);
+            }
+
+            // closes descendant coral-quickactions on focus outside of parent element
+            function handleQuickActionsTargetBlur(event) {
+              var currentTarget = event.currentTarget;
+              var quickActions = currentTarget.querySelector('coral-quickactions');
+              window.requestAnimationFrame(function() {
+                if (quickActions.open && !currentTarget.contains(document.activeElement)) {
+                  quickActions.open = false;
+                  currentTarget.removeEventListener('blur', handleQuickActionsTargetBlur, true);
+                  currentTarget.removeEventListener('coral-overlay:beforeclose', handleQuickActionsBeforeClose, true);
+                  currentTarget._justClosed = undefined;
+                }
+              });
+            }
+
+            // find focusable box elements
+            var focusables = document.querySelectorAll('.box[tabindex="0"]');
+            for (var i = 0; i < focusables.length; i++) {
+              var focusable = focusables[i];
+              focusable.addEventListener('focus', handleQuickActionsTargetFocus, true);
+            }
+          }(document, window));
+        </script>
+      </div>
     </main>
   </body>
 </html>

@@ -99,8 +99,12 @@ class QuickActions extends Overlay {
     this._inner = true;
     this._target = target.PREVIOUS;
     this._placement = placement.TOP;
-    this._focusOnShow = this;
+    this._focusOnShow = Overlay.focusOnShow.OFF;
     this._scrollOnFocus = Overlay.scrollOnFocus.OFF;
+
+    if (!this.id) {
+      this.id = commons.getUID();
+    }
   
     // Flag
     this._openedBefore = false;
@@ -124,6 +128,9 @@ class QuickActions extends Overlay {
       'key:pageup': '_onButtonKeypressPrevious',
       'key:left': '_onButtonKeypressPrevious',
       'key:up': '_onButtonKeypressPrevious',
+
+      'capture:focus': '_onFocus',
+      'capture:blur': '_onBlur',
     
       // Buttons
       'click > ._coral-QuickActions-item:not([handle="moreButton"])': '_onButtonClick',
@@ -142,7 +149,7 @@ class QuickActions extends Overlay {
     events[`global:capture:coral-overlay:beforeopen #${overlayId}`] = '_onOverlayBeforeOpen';
     events[`global:capture:coral-overlay:beforeclose #${overlayId}`] = '_onOverlayBeforeClose';
     events[`global:capture:coral-overlay:open #${overlayId}`] = '_onOverlayOpen';
-    events[`global:capture:coral-overlay:close #${overlayId}`] = '_onOverlayClose';
+    events['global:capture:coral-overlay:close'] = '_onOverlayClose';
     events[`global:capture:coral-overlay:positioned #${overlayId}`] = '_onOverlayPositioned';
     events[`global:capture:coral-overlay:_animate #${overlayId}`] = '_onAnimate';
     events[`global:capture:mouseout #${overlayId}`] = '_onMouseOut';
@@ -293,6 +300,13 @@ class QuickActions extends Overlay {
     return super.open;
   }
   set open(value) {
+    // If opening and stealing focus, on close, focus should be returned 
+    // to the element that had focus before QuickActions were opened.
+    if (value && 
+      this._focusOnShow !== this.constructor.focusOnShow.OFF) {
+      this.returnFocusTo(document.activeElement);
+    }
+
     super.open = value;
     
     this._openedOnce = true;
@@ -582,6 +596,7 @@ class QuickActions extends Overlay {
     buttonListItem.tabIndex = -1;
     buttonListItem.content.innerHTML = itemData.htmlContent;
     buttonListItem.icon = itemData.icon;
+    buttonListItem.setAttribute('role', 'menuitem');
     
     item._elements.button = button;
     item._elements.buttonListItem = buttonListItem;
@@ -819,7 +834,10 @@ class QuickActions extends Overlay {
           // Remember the relevant properties and return their values on hide.
           this._previousTrapFocus = this.trapFocus;
           this._previousReturnFocus = this.returnFocus;
+          this._previousFocusOnShow = this.focusOnShow;
           this.trapFocus = this.constructor.trapFocus.ON;
+          this.returnFocus = this.constructor.returnFocus.ON;
+          this.focusOnShow = this.constructor.focusOnShow.ON;
         }
         
         this.show();
@@ -890,6 +908,9 @@ class QuickActions extends Overlay {
       if (nextButton) {
         nextButton.focus();
       }
+      else if (event.key === 'ArrowDown' && document.activeElement === this._elements.moreButton) {
+        this._elements.moreButton.click();
+      }
     }
   }
   
@@ -941,6 +962,37 @@ class QuickActions extends Overlay {
   
     this._trackEvent('click', 'coral-quickactions-more', event, item);
   }
+
+  _onFocus() {
+    if (this._focusOnShow === this.constructor.focusOnShow.OFF && this._returnFocus !== this.constructor.returnFocus.ON) {
+      const targetElement = this._getTarget();
+      if (targetElement) {
+        if (!this._previousReturnFocus) {
+          this._previousReturnFocus = this._returnFocus;
+          this.returnFocus = this.constructor.returnFocus.ON;
+        }
+
+        if (!this._previousElementToFocusWhenHidden) {
+          this._previousElementToFocusWhenHidden = this._elementToFocusWhenHidden;
+          this._elementToFocusWhenHidden = targetElement;
+        }
+      }
+    }
+  }
+
+  _onBlur() {
+    if (this._focusOnShow === this.constructor.focusOnShow.OFF) {
+      if (this._previousReturnFocus) {
+        this.returnFocus = this._previousReturnFocus;
+        this._previousReturnFocus = undefined;
+      }
+
+      if (this._previousElementToFocusWhenHidden) {
+        this._elementToFocusWhenHidden = this._previousElementToFocusWhenHidden;
+        this._previousElementToFocusWhenHidden = undefined;
+      }
+    }
+  }
   
   /** @ignore */
   _onOverlayBeforeOpen(event) {
@@ -969,6 +1021,8 @@ class QuickActions extends Overlay {
     if (event.target === this._elements.overlay) {
       // do not allow internal Overlay events to escape QuickActions
       event.stopImmediatePropagation();
+
+      this._elements.moreButton.setAttribute('aria-expanded', 'true');
     }
   }
   
@@ -983,6 +1037,9 @@ class QuickActions extends Overlay {
       window.requestAnimationFrame(() => {
         if (this._previousTrapFocus) {
           this.trapFocus = this._previousTrapFocus;
+          if (this.trapFocus !== this.constructor.trapFocus.ON) {
+            this.removeAttribute('tabindex');
+          }
           this._previousTrapFocus = undefined;
         }
         
@@ -990,11 +1047,17 @@ class QuickActions extends Overlay {
           this.returnFocus = this._previousReturnFocus;
           this._previousReturnFocus = undefined;
         }
+
+        if (this._previousFocusOnShow) {
+          this.focusOnShow = this._previousFocusOnShow;
+          this._previousFocusOnShow = undefined;
+        }
       });
     }
     else if (event.target === this._elements.overlay) {
       // do not allow internal Overlay events to escape QuickActions
       event.stopImmediatePropagation();
+      this._elements.moreButton.setAttribute('aria-expanded', 'false');
     }
   }
   
@@ -1193,8 +1256,7 @@ class QuickActions extends Overlay {
     
     this.classList.add(CLASSNAME);
     
-    // Make QuickActions focusable
-    this.setAttribute('tabIndex', '-1');
+    // Define QuickActions as a menu
     this.setAttribute('role', 'menu');
     
     // Support cloneNode
