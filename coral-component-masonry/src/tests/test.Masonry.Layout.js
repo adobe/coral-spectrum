@@ -210,13 +210,13 @@ describe('Masonry.Layout', function() {
     
       // Wait for layouting
       helpers.next(function() {
-        firstRowSecondColumn.focus();
+        firstRowLastColumn.focus();
         helpers.keypress('right');
         expect(document.activeElement).to.equal(secondRowFirstColumn,
          'Items in next row are not accessible by right key.');
         
         helpers.keypress('left');
-        expect(document.activeElement).to.equal(firstRowSecondColumn,
+        expect(document.activeElement).to.equal(firstRowLastColumn,
          'Items in previous row are not accessible by left key.');      
         done();
       });
