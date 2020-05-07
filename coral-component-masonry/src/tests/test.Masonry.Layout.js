@@ -211,11 +211,11 @@ describe('Masonry.Layout', function() {
       // Wait for layouting
       helpers.next(function() {
         firstRowLastColumn.focus();
-        helpers.keypress('right');
+        helpers.keypress('right', firstRowLastColumn);
         expect(document.activeElement).to.equal(secondRowFirstColumn,
          'Items in next row are not accessible by right key.');
         
-        helpers.keypress('left');
+        helpers.keypress('left', secondRowFirstColumn);
         expect(document.activeElement).to.equal(firstRowLastColumn,
          'Items in previous row are not accessible by left key.');      
         done();
@@ -230,11 +230,11 @@ describe('Masonry.Layout', function() {
       // Wait for layouting
       helpers.next(function() {
         firstColumnLastRow.focus();
-        helpers.keypress('down');
+        helpers.keypress('down', firstColumnLastRow);
         expect(document.activeElement).to.equal(secondColumnFirstRow,
          'Items in next column are not accessible by down key.');
         
-        helpers.keypress('up');
+        helpers.keypress('up', secondColumnFirstRow);
         expect(document.activeElement).to.equal(firstColumnLastRow,
          'Items in previous column are not accessible by up key.');      
         done();
