@@ -63,7 +63,7 @@ describe('Panel', function() {
   describe('Implementation Details', function() {
     it('should have a role', function() {
       const el = helpers.build(new Panel());
-      expect(el.getAttribute('role')).to.equal('tabpanel');
+      expect(el.getAttribute('role')).to.equal('region');
     });
   })
 });

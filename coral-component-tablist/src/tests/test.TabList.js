@@ -319,6 +319,8 @@ describe('TabList', function() {
         helpers.next(function() {
           expect(targetItem.hasAttribute('selected')).to.be.true;
           expect(targetItem.getAttribute('aria-labelledby')).to.equal(tabItem.id);
+          expect(targetItem.getAttribute('role')).to.equal('tabpanel');
+          expect(tabItem.getAttribute('aria-controls')).to.equal(targetItem.id);
           done();
         });
       });

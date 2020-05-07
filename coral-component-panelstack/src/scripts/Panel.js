@@ -88,8 +88,10 @@ class Panel extends BaseComponent(HTMLElement) {
     
     this.classList.add(CLASSNAME);
     
-    // adds the role to support accessibility
-    this.setAttribute('role', 'tabpanel');
+    // Adds the role to support accessibility when role is not already defined.
+    if (!this.hasAttribute('role')) {
+      this.setAttribute('role', 'region');
+    }
   
     // Fetch the content zone elements
     const content = this._elements.content;

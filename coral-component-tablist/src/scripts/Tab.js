@@ -220,6 +220,9 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
         // creates a 2 way binding for accessibility
         this.setAttribute('aria-controls', realTarget.id);
         realTarget.setAttribute('aria-labelledby', this.id);
+
+        // adds role to panel to support accessibility
+        realTarget.setAttribute('role', 'tabpanel');
       }
     }
   }
