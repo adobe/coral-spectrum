@@ -298,6 +298,44 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
       // ARIA
       this.setAttribute('role', 'alertdialog');
     }
+
+    const hasHeader = this.header && this.header.textContent !== '';
+
+    // If the dialog has a header and is not otherwise labelled,
+    if (hasHeader && !(this.hasAttribute('aria-labelledby') || this.hasAttribute('aria-label'))) {
+      this.header.id = this.header.id || commons.getUID();
+
+      // label the dialog with a reference to the header
+      this.setAttribute('aria-labelledby', this.header.id);
+    }
+
+    const hasContent = this.content && this.content.textContent !== '';
+
+    // If the dialog has a content,
+    if (hasContent) {
+      this.content.id = this.content.id || commons.getUID();
+
+      // In an alertdialog with a content region, if the alertdialog is not otherwise described.
+      if (this._variant !== variant.DEFAULT) {
+
+        // with no header, 
+        if (!hasHeader) {
+
+          // label the alertdialog with a reference to the content
+          this.setAttribute('aria-labelledby', this.content.id);
+        }
+
+        // otherwise, if the alertdialog is not otherwise described,
+        else if (!this.hasAttribute('aria-describedby')) {
+
+          // ensure that the alertdialog is described by the content.
+          this.setAttribute('aria-describedby', this.content.id);
+        }
+      }
+      else if (this.getAttribute('aria-labelledby') === this.content.id) {
+        this.removeAttribute('aria-labelledby');
+      }
+    }
   }
   
   /**
@@ -464,7 +502,7 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
   _hideHeaderIfEmpty() {
     const header = this._elements.header;
   
-    if (this._elements.header) {
+    if (header) {
       const headerWrapper = this._elements.headerWrapper;
   
       // If it's empty and has no non-textnode children, hide the header
@@ -474,6 +512,8 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
       if (hiddenValue !== headerWrapper.hidden) {
         headerWrapper.hidden = hiddenValue;
       }
+
+      this.variant = this.variant;
     }
   }
   
