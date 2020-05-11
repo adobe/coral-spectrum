@@ -12,7 +12,6 @@
 
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Masonry} from '../../../coral-component-masonry';
-import MasonryItem from "../scripts/MasonryItem";
 
 describe('Masonry.Layout', function() {
   
