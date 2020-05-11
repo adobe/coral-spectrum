@@ -12,6 +12,7 @@
 
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Masonry} from '../../../coral-component-masonry';
+import MasonryItem from "../scripts/MasonryItem";
 
 describe('Masonry.Layout', function() {
   
@@ -490,5 +491,27 @@ describe('Masonry.Layout', function() {
       el.selectionMode = 'multiple';
       expect(el.getAttribute('aria-multiselectable')).to.equal('true');
     });
+  });
+
+  describe('Accessibility with auto aria grid', function() {
+    it('parent node and masonry nodes should have proper grid roles and attributes', function() {
+      const container = helpers.build(window.__html__['Masonry.ariagrid.html']);
+      const el = container.querySelector('coral-masonry');
+
+      expect(el.parentNode.getAttribute('role')).to.equal('grid','Parent node should have role="grid"');
+      expect(el.parentNode.getAttribute('aria-colcount')).to.equal('3','Parent node should have correct aria-colcount');
+      expect(el.getAttribute('role')).to.equal('row','<coral-masonry> should have role="row"');
+      expect(el.items.first().getAttribute('role'))
+        .to.equal('gridcell','<coral-masonry-item> should have role="gridcell"');
+      expect(el.items.last().getAttribute('aria-colindex'))
+        .to.equal('3','last <coral-masonry-item> should have aria-colindex="3"');
+
+      el.ariaGrid = "off";
+      expect(el.parentNode.getAttribute('role'))
+        .to.equal(null,'Parent node should have role=null after deactivating ariagrid');
+      expect(el.getAttribute('role'))
+        .to.equal('previous','<coral-masonry> should have role="previous" after deactivating ariagrid');
+    });
+
   });
 });
