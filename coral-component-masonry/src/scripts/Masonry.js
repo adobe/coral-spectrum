@@ -429,22 +429,21 @@ class Masonry extends BaseComponent(HTMLElement) {
   _updateAriaRoleForItem(item, columnIndex, activateAriaGrid) {
     if (activateAriaGrid === ariaGrid.ON) {
       item.setAttribute('role','gridcell');
-      item.setAttribute('aria-colindex', transform.string(columnIndex));
+      item.setAttribute('aria-colindex', columnIndex);
     }
     else {
       item.removeAttribute('role');
       item.removeAttribute('aria-colindex');
-
     }
   }
 
   /** @private */
   _updateAriaColumnCountForParent(activateAriaGrid) {
     if (activateAriaGrid === ariaGrid.ON) {
-      this.parentNode.setAttribute('aria-colcount', transform.string(this.items.length));
+      this.parentNode.setAttribute('aria-colcount', this.items.length);
     }
     else {
-      this.parentNode.setAttribute('aria-colcount', transform.string(this.items.length));
+      this.parentNode.setAttribute('aria-colcount', this.items.length);
     }
   }
 
