@@ -439,11 +439,15 @@ class Masonry extends BaseComponent(HTMLElement) {
 
   /** @private */
   _updateAriaColumnCountForParent(activateAriaGrid) {
+    if (!this.parentNode) {
+      return;
+    }
+    
     if (activateAriaGrid === ariaGrid.ON) {
       this.parentNode.setAttribute('aria-colcount', this.items.length);
     }
     else {
-      this.parentNode.setAttribute('aria-colcount', this.items.length);
+      this.parentNode.removeAttribute('aria-colcount');
     }
   }
 

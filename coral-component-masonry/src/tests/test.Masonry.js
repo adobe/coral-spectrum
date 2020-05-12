@@ -494,9 +494,10 @@ describe('Masonry.Layout', function() {
 
   describe('Accessibility with auto aria grid', function() {
     it('parent node and masonry nodes should have proper grid roles and attributes', function() {
+      // Aria grid is enabled in the HTML
       const container = helpers.build(window.__html__['Masonry.ariagrid.html']);
       const el = container.querySelector('coral-masonry');
-
+      
       expect(el.parentNode.getAttribute('role')).to.equal('grid','Parent node should have role="grid"');
       expect(el.parentNode.getAttribute('aria-colcount')).to.equal('3','Parent node should have correct aria-colcount');
       expect(el.getAttribute('role')).to.equal('row','<coral-masonry> should have role="row"');
@@ -505,11 +506,23 @@ describe('Masonry.Layout', function() {
       expect(el.items.last().getAttribute('aria-colindex'))
         .to.equal('3','last <coral-masonry-item> should have aria-colindex="3"');
 
+      // Disable aria grid dynamically
       el.ariaGrid = "off";
       expect(el.parentNode.getAttribute('role'))
         .to.equal(null,'Parent node should have role=null after deactivating ariagrid');
+      expect(el.parentNode.getAttribute('aria-colcount'))
+        .to.equal(null,'Parent node should not have aria-colcount after deactivating ariagrid');
       expect(el.getAttribute('role'))
         .to.equal('previous','<coral-masonry> should have role="previous" after deactivating ariagrid');
+      expect(el.items.first().getAttribute('role'))
+        .to.equal(null,'<coral-masonry-item> should have no role"');
+      expect(el.items.first().getAttribute('aria-colindex'))
+        .to.equal(null,'<coral-masonry-item> should have no aria-colindex"');
+
+      // Enable aria grid dynamically
+      el.ariaGrid = "on";
+      expect(el.parentNode.getAttribute('role')).to.equal('grid','Parent node should have role="grid"');
+      expect(el.parentNode.getAttribute('aria-colcount')).to.equal('3','Parent node should have correct aria-colcount');
     });
 
   });
