@@ -783,6 +783,30 @@ describe('Table', function() {
         expect(lastItem.selected).to.be.true;
       });
     });
+
+    describe('#layout', function() {
+      it('should layout the table correctly when reset layout forced', function(done) {
+        var table = helpers.build(window.__html__['Table.sticky.html'])
+        var methodSpy = sinon.spy(table, '_doResetLayout');
+        table.resetLayout(true);
+        // method call immediately
+        expect(methodSpy.callCount).to.equal(1);
+        done();
+      });
+
+      it('should layout the table correctly when reset layout not forced', function(done) {
+        var table = helpers.build(window.__html__['Table.sticky.html'])
+        var methodSpy = sinon.spy(table, '_doResetLayout');
+        table.resetLayout();
+        //method will get executed after timeout
+        expect(methodSpy.callCount).to.equal(0);
+        //waiting for 200ms to ensure that debounced layout has been called once
+        window.setTimeout(function (){
+          expect(methodSpy.callCount).to.be.greaterThan(0);
+          done();
+        }, 200);
+      });
+    });
   });
   
   describe('Events', function() {
