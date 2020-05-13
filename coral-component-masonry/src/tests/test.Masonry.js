@@ -513,7 +513,7 @@ describe('Masonry.Layout', function() {
       expect(el.parentNode.getAttribute('aria-colcount'))
         .to.equal(null,'Parent node should not have aria-colcount after deactivating ariagrid');
       expect(el.getAttribute('role'))
-        .to.equal('previous','<coral-masonry> should have role="previous" after deactivating ariagrid');
+        .to.equal('region','<coral-masonry> should have role="region" after deactivating ariagrid');
       expect(el.items.first().getAttribute('role'))
         .to.equal(null,'<coral-masonry-item> should have no role"');
       expect(el.items.first().getAttribute('aria-colindex'))
