@@ -394,26 +394,26 @@ class Masonry extends BaseComponent(HTMLElement) {
 
   /** @private */
   _updateAriaRoleForParent(activateAriaGrid) {
-    if (!this.parentNode) {
+    if (!this.parentElement) {
       return;
     }
 
     if (activateAriaGrid === ariaGrid.ON) {
       // Save/set role for the parent as grid
-      this._preservedParentAriaRole = this.parentNode.getAttribute('role');
-      this.parentNode.setAttribute('role', 'grid');
+      this._preservedParentAriaRole = this.parentElement.getAttribute('role');
+      this.parentElement.setAttribute('role', 'grid');
     }
     else {
       // Restore/remove role of the parent element
       if (this._preservedParentAriaRole) {
-        this.parentNode.setAttribute('role', this._preservedParentAriaRole);
+        this.parentElement.setAttribute('role', this._preservedParentAriaRole);
       }
       else {
-        this.parentNode.removeAttribute('role');
+        this.parentElement.removeAttribute('role');
       }
 
       // Remove aria-colcount
-      this.parentNode.removeAttribute('aria-colcount');
+      this.parentElement.removeAttribute('aria-colcount');
     }
   }
 
@@ -439,15 +439,15 @@ class Masonry extends BaseComponent(HTMLElement) {
 
   /** @private */
   _updateAriaColumnCountForParent(activateAriaGrid) {
-    if (!this.parentNode) {
+    if (!this.parentElement) {
       return;
     }
     
     if (activateAriaGrid === ariaGrid.ON) {
-      this.parentNode.setAttribute('aria-colcount', this.items.length);
+      this.parentElement.setAttribute('aria-colcount', this.items.length);
     }
     else {
-      this.parentNode.removeAttribute('aria-colcount');
+      this.parentElement.removeAttribute('aria-colcount');
     }
   }
 

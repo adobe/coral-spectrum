@@ -493,13 +493,13 @@ describe('Masonry.Layout', function() {
   });
 
   describe('Accessibility with auto aria grid', function() {
-    it('parent node and masonry nodes should have proper grid roles and attributes', function() {
+    it('parent element and masonry elements should have proper grid roles and attributes', function() {
       // Aria grid is enabled in the HTML
       const container = helpers.build(window.__html__['Masonry.ariagrid.html']);
       const el = container.querySelector('coral-masonry');
       
-      expect(el.parentNode.getAttribute('role')).to.equal('grid','Parent node should have role="grid"');
-      expect(el.parentNode.getAttribute('aria-colcount')).to.equal('3','Parent node should have correct aria-colcount');
+      expect(el.parentElement.getAttribute('role')).to.equal('grid','Parent element should have role="grid"');
+      expect(el.parentElement.getAttribute('aria-colcount')).to.equal('3','Parent element should have correct aria-colcount');
       expect(el.getAttribute('role')).to.equal('row','<coral-masonry> should have role="row"');
       expect(el.items.first().getAttribute('role'))
         .to.equal('gridcell','<coral-masonry-item> should have role="gridcell"');
@@ -508,10 +508,10 @@ describe('Masonry.Layout', function() {
 
       // Disable aria grid dynamically
       el.ariaGrid = "off";
-      expect(el.parentNode.getAttribute('role'))
-        .to.equal(null,'Parent node should have role=null after deactivating ariagrid');
-      expect(el.parentNode.getAttribute('aria-colcount'))
-        .to.equal(null,'Parent node should not have aria-colcount after deactivating ariagrid');
+      expect(el.parentElement.getAttribute('role'))
+        .to.equal(null,'Parent element should have role=null after deactivating ariagrid');
+      expect(el.parentElement.getAttribute('aria-colcount'))
+        .to.equal(null,'Parent element should not have aria-colcount after deactivating ariagrid');
       expect(el.getAttribute('role'))
         .to.equal('region','<coral-masonry> should have role="region" after deactivating ariagrid');
       expect(el.items.first().getAttribute('role'))
@@ -521,8 +521,8 @@ describe('Masonry.Layout', function() {
 
       // Enable aria grid dynamically
       el.ariaGrid = "on";
-      expect(el.parentNode.getAttribute('role')).to.equal('grid','Parent node should have role="grid"');
-      expect(el.parentNode.getAttribute('aria-colcount')).to.equal('3','Parent node should have correct aria-colcount');
+      expect(el.parentElement.getAttribute('role')).to.equal('grid','Parent element should have role="grid"');
+      expect(el.parentElement.getAttribute('aria-colcount')).to.equal('3','Parent element should have correct aria-colcount');
     });
 
   });
