@@ -273,7 +273,7 @@ class MasonryColumnLayout extends MasonryLayout {
     
     // Choose item above or below
     const nextItemIndex = currentLayoutData.itemIndex + (up ? -1 : 1);
-    const nextItem = this._columns[currentLayoutData.columnIndex].items[nextItemIndex];
+    let nextItem = this._columns[currentLayoutData.columnIndex].items[nextItemIndex];
     
     if (nextItem) {
       nextItem.focus();

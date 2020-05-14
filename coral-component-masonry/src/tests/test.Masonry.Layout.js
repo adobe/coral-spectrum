@@ -224,7 +224,7 @@ describe('Masonry.Layout', function() {
  
      it('Up-Down keys should be enough to access all items', function(done) {
       const el = helpers.build(window.__html__['Masonry.multi-column.html']);
-      const firstColumnLastRow = el.items.getAll()[2];
+      const firstColumnLastRow = el.items.getAll()[3];
       const secondColumnFirstRow = el.items.getAll()[1];
     
       // Wait for layouting
@@ -232,11 +232,11 @@ describe('Masonry.Layout', function() {
         firstColumnLastRow.focus();
         helpers.keypress('down', firstColumnLastRow);
         expect(document.activeElement).to.equal(secondColumnFirstRow,
-         'Items in next column are not accessible by down key.');
+          'Items in next column are not accessible by down key.');
         
         helpers.keypress('up', secondColumnFirstRow);
         expect(document.activeElement).to.equal(firstColumnLastRow,
-         'Items in previous column are not accessible by up key.');      
+          'Items in previous column are not accessible by up key.');
         done();
       });
     });
