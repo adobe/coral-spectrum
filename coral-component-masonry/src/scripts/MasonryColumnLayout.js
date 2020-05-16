@@ -273,12 +273,38 @@ class MasonryColumnLayout extends MasonryLayout {
     
     // Choose item above or below
     const nextItemIndex = currentLayoutData.itemIndex + (up ? -1 : 1);
-    const nextItem = this._columns[currentLayoutData.columnIndex].items[nextItemIndex];
+    let nextItem = this._columns[currentLayoutData.columnIndex].items[nextItemIndex];
     
     if (nextItem) {
       nextItem.focus();
       // prevent scrolling at the same time
       event.preventDefault();
+    } 
+    else {
+      // in case there is no item in the same column, we should move to first item in next column for down
+      // and last item of previous column for up key
+      let columnIndex = currentLayoutData.columnIndex;
+      if (up) {
+        if (columnIndex > 0) {
+          // move to last item of previous column
+          let prevColumn = this._columns[columnIndex - 1];
+          if (prevColumn) {
+            nextItem = prevColumn.items[prevColumn.items.length - 1]; // last item of previous column
+          }
+        }
+      }  
+      else {
+        // down key is pressed, go to first item of next column if exists
+        let columnCount = this._columns.length;
+        let nextColumnIndex = columnIndex + currentLayoutData.colspan;
+        if (nextColumnIndex < columnCount) {
+          nextItem = this._columns[nextColumnIndex].items[0]; // first item of next column
+        }
+      }
+      if (nextItem) {
+        nextItem.focus();
+        event.preventDefault(); // prevent scrolling at the same time
+      }
     }
   }
   
@@ -294,42 +320,21 @@ class MasonryColumnLayout extends MasonryLayout {
     }
     
     let nextItem;
-    
-    // Choose item on the left or right which overlaps the most with the current item
-    const nextColumnIndex = currentLayoutData.columnIndex + (left ? -1 : currentLayoutData.colspan);
-    const nextColumn = this._columns[nextColumnIndex];
-    if (nextColumn) {
-      const currentItemBottom = currentLayoutData.top + currentLayoutData.height;
-      let nextItemOverlap = 0;
-      
-      // Iterate through all items in the bordering column and look for the item which overlaps the most
-      for (let i = 0; i < nextColumn.items.length; i++) {
-        const item = nextColumn.items[i];
-        const layoutData = item._layoutData;
-        const itemBottom = layoutData.top + layoutData.height;
-        
-        // Check if items overlap
-        if (currentLayoutData.top <= itemBottom && currentItemBottom >= layoutData.top) {
-          // Calculate the overlapping height
-          const itemOverlap = (currentLayoutData.height - Math.max(0, layoutData.top - currentLayoutData.top) -
-            // relative overlap with current item
-            Math.max(0, currentItemBottom - itemBottom)) / layoutData.height;
-          if (itemOverlap > nextItemOverlap) {
-            nextItemOverlap = itemOverlap;
-            nextItem = item;
-          }
-        }
-        else if (currentLayoutData.top + currentLayoutData.height < layoutData.top) {
-          // Item is too far below, stop searching
-          break;
-        }
+    let items = this._masonry.items.getAll();
+    let collectionItemIndex = items.indexOf(event.target);
+
+    if (left) {
+      if (collectionItemIndex > 0) {
+        nextItem = items[collectionItemIndex - 1];
       }
     }
-    
+    else if (collectionItemIndex < items.length - 1) {
+      nextItem = items[collectionItemIndex + 1];
+    }
+
     if (nextItem) {
       nextItem.focus();
-      // prevent scrolling at the same time
-      event.preventDefault();
+      event.preventDefault(); // prevent scrolling at the same time
     }
   }
   

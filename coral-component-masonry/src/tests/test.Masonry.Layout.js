@@ -202,5 +202,44 @@ describe('Masonry.Layout', function() {
         done();
       });
     });
+    
+    it('Left-Right keys should be enough to access all items', function(done) {
+      const el = helpers.build(window.__html__['Masonry.multi-column.html']);
+      const firstRowLastColumn = el.items.getAll()[1];
+      const secondRowFirstColumn = el.items.getAll()[2];
+    
+      // Wait for layouting
+      helpers.next(function() {
+        firstRowLastColumn.focus();
+        helpers.keypress('right', firstRowLastColumn);
+        expect(document.activeElement).to.equal(secondRowFirstColumn,
+         'Items in next row are not accessible by right key.');
+        
+        helpers.keypress('left', secondRowFirstColumn);
+        expect(document.activeElement).to.equal(firstRowLastColumn,
+         'Items in previous row are not accessible by left key.');      
+        done();
+      });
+    });
+ 
+     it('Up-Down keys should be enough to access all items', function(done) {
+      const el = helpers.build(window.__html__['Masonry.multi-column.html']);
+      const firstColumnLastRow = el.items.getAll()[3];
+      const secondColumnFirstRow = el.items.getAll()[1];
+    
+      // Wait for layouting
+      helpers.next(function() {
+        firstColumnLastRow.focus();
+        helpers.keypress('down', firstColumnLastRow);
+        expect(document.activeElement).to.equal(secondColumnFirstRow,
+          'Items in next column are not accessible by down key.');
+        
+        helpers.keypress('up', secondColumnFirstRow);
+        expect(document.activeElement).to.equal(firstColumnLastRow,
+          'Items in previous column are not accessible by up key.');
+        done();
+      });
+    });
+           
   });
 });
