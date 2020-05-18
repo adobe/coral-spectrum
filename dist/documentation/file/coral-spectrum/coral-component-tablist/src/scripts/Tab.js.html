@@ -705,6 +705,7 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
     const iconElement = document.createElement(&apos;coral-icon&apos;);
     iconElement.icon = &apos;alert&apos;;
     iconElement.size = Icon.size.EXTRA_SMALL;
+    iconElement.setAttribute(&apos;aria-hidden&apos;, &apos;true&apos;);
     iconElement.classList.add(&apos;_coral-Tabs-itemInvalidIcon&apos;);
     if (!this._invalid) {
       iconElement.setAttribute(&apos;hidden&apos;, &apos;true&apos;);
