@@ -2168,7 +2168,32 @@ class Table extends BaseComponent(HTMLTableElement) {
   _onSelectPreviousItem() {
     this._selectSiblingItem(false);
   }
-  
+
+  /**
+  * Call the layout method of table component
+  *
+  * @param {Boolean} forced
+  * If true call the layout method immediately, else wait for timeout
+  */
+  resetLayout(forced) {
+    forced = transform.boolean(forced);
+    if (forced === true) {
+      this._doResetLayout();
+      this._preventResetLayout = false;
+    }
+    else {
+      this._resetLayout();
+    }
+  }
+
+  /** @private */
+  _doResetLayout() {
+    this.classList.add(IS_LAYOUTING);
+    this._resizeStickyHead();
+    this._resizeContainer();
+    this.classList.remove(IS_LAYOUTING);
+  }
+
   /** @private */
   _resetLayout() {
     if (this._preventResetLayout) {
@@ -2181,14 +2206,8 @@ class Table extends BaseComponent(HTMLTableElement) {
     }
     
     this._timeout = window.setTimeout(() => {
-      this.classList.add(IS_LAYOUTING);
-      
       this._timeout = null;
-      this._resizeStickyHead();
-      this._resizeContainer();
-      
-      this.classList.remove(IS_LAYOUTING);
-      
+      this._doResetLayout();
       // Mark table as ready
       this.classList.add(IS_READY);
     }, this._wait);
