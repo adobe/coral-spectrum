@@ -491,4 +491,47 @@ describe('Masonry.Layout', function() {
       expect(el.getAttribute('aria-multiselectable')).to.equal('true');
     });
   });
+
+  describe('Accessibility with auto aria grid', function() {
+    it('parent element and masonry elements should have proper grid roles and attributes', function() {
+      // Aria grid is enabled in the HTML
+      const container = helpers.build(window.__html__['Masonry.ariagrid.html']);
+      const el = container.querySelector('coral-masonry');
+      
+      expect(el.parentElement.getAttribute('role')).to.equal('grid','Parent element should have role="grid"');
+      expect(el.parentElement.getAttribute('aria-colcount')).to.equal('3','Parent element should have correct aria-colcount');
+      expect(el.parentElement.getAttribute('aria-label')).to.equal('Masonry Label', 'Masonry parent element should receive same aria-label as Masonry');
+      expect(el.parentElement.getAttribute('aria-labelledby')).to.equal('Masonry Labelledby', 'Masonry parent element should receive same aria-labelledby as Masonry');
+
+      expect(el.getAttribute('role')).to.equal('row','<coral-masonry> should have role="row"');
+      expect(el.items.first().getAttribute('role'))
+        .to.equal('gridcell','<coral-masonry-item> should have role="gridcell"');
+      expect(el.items.last().getAttribute('aria-colindex'))
+        .to.equal('3','last <coral-masonry-item> should have aria-colindex="3"');
+
+      // Disable aria grid dynamically
+      el.ariaGrid = "off";
+      expect(el.parentElement.getAttribute('role'))
+        .to.equal(null,'Parent element should have role=null after deactivating ariagrid');
+      expect(el.parentElement.getAttribute('aria-colcount'))
+        .to.equal(null,'Parent element should not have aria-colcount after deactivating ariagrid');
+      expect(el.parentElement.getAttribute('aria-label')).to.equal('Parent Label', 'Masonry parent element should restore cached aria-label when ariaGrid is set to "off".');
+      expect(el.parentElement.getAttribute('aria-labelledby')).to.equal('Parent Labelledby', 'Masonry parent element should restore cached aria-labelledby when ariaGrid is set to "off".');
+  
+        expect(el.getAttribute('role'))
+        .to.equal('region','<coral-masonry> should have role="region" after deactivating ariagrid');
+      expect(el.items.first().getAttribute('role'))
+        .to.equal(null,'<coral-masonry-item> should have no role"');
+      expect(el.items.first().getAttribute('aria-colindex'))
+        .to.equal(null,'<coral-masonry-item> should have no aria-colindex"');
+
+      // Enable aria grid dynamically
+      el.ariaGrid = "on";
+      expect(el.parentElement.getAttribute('role')).to.equal('grid','Parent element should have role="grid"');
+      expect(el.parentElement.getAttribute('aria-colcount')).to.equal('3','Parent element should have correct aria-colcount');
+      expect(el.parentElement.getAttribute('aria-label')).to.equal('Masonry Label', 'Masonry parent element should receive same aria-label as Masonry');
+      expect(el.parentElement.getAttribute('aria-labelledby')).to.equal('Masonry Labelledby', 'Masonry parent element should receive same aria-labelledby as Masonry');
+    });
+
+  });
 });
