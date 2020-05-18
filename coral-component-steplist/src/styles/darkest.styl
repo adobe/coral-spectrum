@@ -10,29 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import '../coral-theme-spectrum';
+$steplist-marker-focus-ring-color = var(--spectrum-darkest-alias-focus-color);
 
-import '../coral-externals';
-import '../coral-compat';
-
-import StepList from './src/scripts/StepList';
-import Step from './src/scripts/Step';
-import StepLabel from './src/scripts/StepLabel';
-
-import './src/styles/index.css';
-
-import translations from './i18n/translations';
-import {commons, strings} from '../coral-utils';
-
-// i18n
-commons.extend(strings, {
-  'coral-component-steplist': translations
-});
-
-// Expose component on the Coral namespace
-commons._define('coral-step', Step);
-commons._define('coral-steplist', StepList);
-
-Step.Label = StepLabel;
-
-export {StepList, Step};
+.coral--darkest {
+  @import 'skin.styl'
+}

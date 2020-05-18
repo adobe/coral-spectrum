@@ -75,7 +75,10 @@ describe('Step', function() {
     describe('#selected', function() {
       it('should default to false', function() {
         expect(item.selected).to.be.false;
-        expect(item.tabIndex).to.equal(-1);
+        expect(item.hasAttribute('tabindex')).to.be.false;
+        expect(item._elements.link.hasAttribute('role')).to.be.false;
+        expect(item._elements.link.hasAttribute('tabindex')).to.be.false;
+        expect(item._elements.link.hasAttribute('aria-current')).to.be.false;
       });
 
       it('should be settable to truthy', function() {
@@ -84,16 +87,26 @@ describe('Step', function() {
         expect(item1.selected).to.be.true;
         expect(item1.hasAttribute('selected')).to.be.true;
         expect(item1.classList.contains('is-selected')).to.be.true;
-        expect(item1.tabIndex).to.equal(0);
+        expect(item1.hasAttribute('tabindex')).to.be.false;
+        expect(item1._elements.link.getAttribute('role')).to.equal('link');
+        expect(item1._elements.link.getAttribute('tabindex')).to.equal('0');
+        expect(item1._elements.link.getAttribute('aria-current')).to.equal('step');
       });
     });
   });
 
   describe('Implementation Details', function() {
     it('tabindex should be removed when StepList interaction is OFF', function() {
+      expect(item1.hasAttribute('tabindex')).to.be.false;
+      expect(item1._elements.link.getAttribute('role')).to.equal('link');
+      expect(item1._elements.link.getAttribute('tabindex')).to.equal('0');
+      expect(item1._elements.link.getAttribute('aria-current')).to.equal('step');
+
       el.interaction = StepList.interaction.OFF;
       
-      expect(item1.hasAttribute('tabindex')).to.be.false;
+      expect(item1._elements.link.hasAttribute('role')).to.be.false;
+      expect(item1._elements.link.hasAttribute('tabindex')).to.be.false;
+      expect(item1._elements.link.getAttribute('aria-current')).to.equal('step');
     });
   });
 });

@@ -17,6 +17,8 @@
 @require '@adobe/spectrum-css/dist/components/steplist/multiStops/dark.css';
 @require '@adobe/spectrum-css/dist/components/steplist/multiStops/darkest.css';
 
+@require '../../../coral-theme-spectrum/src/styles/vars.css';
+
 // @compat
 ._coral-Steplist--small {
   ._coral-Steplist-item:first-child,
@@ -41,3 +43,42 @@
     display: none;
   }
 }
+
+._coral-Steplist-item[disabled] {
+  ._coral-Steplist-label,
+  ._coral-Steplist-markerContainer {
+    // Don't shoe cursor when the item is disabled.
+    cursor: default;
+  }
+}
+
+._coral-Steplist-accessibilityLabel {
+  bottom: 2.2rem;
+  font-size: 1px;
+}
+
+._coral-Steplist-item,
+._coral-Steplist-link {
+  &:focus {
+    outline: none;
+    &.focus-ring {
+      ._coral-Steplist-marker{ 
+        &:after {
+          content: '';
+          margin: -2px;
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          top: 0;
+          border-radius: 8px;
+        }
+      }
+    }
+  }
+}
+
+@require 'dark.styl';
+@require 'darkest.styl';
+@require 'light.styl';
+@require 'lightest.styl';

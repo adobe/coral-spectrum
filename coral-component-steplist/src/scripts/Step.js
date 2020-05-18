@@ -15,6 +15,7 @@ import '../../../coral-component-tooltip';
 import step from '../templates/step';
 import {transform, commons} from '../../../coral-utils';
 import getTarget from './getTarget';
+import StepList from './StepList';
 
 const CLASSNAME = '_coral-Steplist-item';
 
@@ -52,7 +53,7 @@ class Step extends BaseComponent(HTMLElement) {
       tagName: 'coral-step-label',
       insert: function(label) {
         label.classList.add('_coral-Steplist-label');
-        this.appendChild(label);
+        this._elements.link.insertBefore(label, this._elements.stepMarkerContainer);
       }
     });
   }
@@ -74,9 +75,16 @@ class Step extends BaseComponent(HTMLElement) {
     this._reflectAttribute('selected', this._selected);
   
     this.classList.toggle('is-selected', this.selected);
-    this.setAttribute('aria-selected', this.selected);
-  
-    const stepList = this.parentNode;
+    this.removeAttribute('aria-selected');
+
+    if (this.selected) {
+      this._elements.link.setAttribute('aria-current', 'step');
+    }
+    else {
+      this._elements.link.removeAttribute('aria-current');
+    }
+
+    const stepList = this.parentElement;
     let realTarget;
   
     // in case the Step is selected, we need to communicate it to the panels
@@ -106,6 +114,51 @@ class Step extends BaseComponent(HTMLElement) {
     }
     
     this.trigger('coral-step:_selectedchanged');
+  }
+
+  /**
+   Whether the item is disabled
+   
+   @type {Boolean}
+   @default false
+   @htmlattribute disabled
+   @htmlattributereflected
+   */
+  get disabled() {
+    return this._disabled || false;
+  }
+  set disabled(value) {
+    this._disabled = transform.booleanAttr(value);
+    this._reflectAttribute('disabled', this._disabled);
+    this.classList.toggle('is-disabled', this.disabled);
+    const stepList = this.parentElement;
+    if (stepList) {
+      this._syncTabIndex(stepList.interaction === StepList.interaction.ON);
+    }
+  }
+
+  /**
+    Reflects the <code>aria-label</code> attribute to the marker dot for cases where no visible label is provided for the Step.
+    @type {?String}
+    @default ''
+    @htmlattribute labelled
+    @htmlattributereflected
+    @memberof Coral.Step#
+  */
+  get labelled() {
+    return this._labelled || this.getAttribute('labelled') || this._elements.stepMarkerContainer.getAttribute('aria-label');
+  }
+  set labelled(value) {
+    this._labelled = transform.string(value);
+    this._reflectAttribute('labelled', this._labelled);
+    if (value) {
+      this._elements.stepMarkerContainer.setAttribute('aria-label', this.labelled);
+      this._elements.stepMarkerContainer.removeAttribute('aria-hidden');
+    }
+    else {
+      this._elements.stepMarkerContainer.removeAttribute('aria-label');
+      this._elements.stepMarkerContainer.setAttribute('aria-hidden', 'true');
+    }
   }
   
   /**
@@ -163,11 +216,49 @@ class Step extends BaseComponent(HTMLElement) {
     label.style.whiteSpace = '';
     label.style.display = '';
   }
+
+  focus() {
+    this._elements.link.focus();
+  }
+
+  blur() {
+    this._elements.link.blur();
+  }
+
+  /** @private */
+  _syncTabIndex(isInteractive) {
+    // the list item itself should never include a tabindex
+    this.removeAttribute('tabindex');
+
+    // when interaction is on, we enable the tabindex so users can tab into the items
+    if (isInteractive) {
+      this._elements.link.setAttribute('role', 'link');
+      if (this.disabled) {
+        this._elements.link.removeAttribute('tabindex');
+        this._elements.link.setAttribute('aria-disabled', true);
+      }
+      else {
+        this._elements.link.removeAttribute('aria-disabled');
+        this._elements.link.setAttribute('tabindex', this.selected ? '0' : '-1');
+      }
+    }
+    else {
+      // when off, removing the tabindex allows the component to never get focus
+      this._elements.link.removeAttribute('tabindex');
+      this._elements.link.removeAttribute('role');
+    }    
+  }
+
+  /** @private */
+  _syncSizeAndCurrentIndex(currentStep, totalSteps) {
+    this.setAttribute('aria-setsize', totalSteps);
+    this.setAttribute('aria-posinset', currentStep);
+  }
   
   get _contentZones() { return {'coral-step-label': 'label'}; }
   
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat(['selected', 'target']); }
+  static get observedAttributes() { return super.observedAttributes.concat(['selected', 'target', 'disabled', 'labelled']); }
   
   /** @ignore */
   connectedCallback() {
@@ -193,19 +284,26 @@ class Step extends BaseComponent(HTMLElement) {
     this.setAttribute('id', this.id || commons.getUID());
     
     // A11y
-    this.setAttribute('role', 'tab');
+    this.setAttribute('role', 'listitem');
     
     const frag = document.createDocumentFragment();
   
-    // Discard the template created tooltip if one is provided by markup
+    // Discard the template-created link, accessibilityLabel, stepMarkerContainer, and line if one is provided by markup
+    this._elements.link = this.querySelector('[handle="link"]') || this._elements.link;
+    this._elements.accessibilityLabel = this.querySelector('[handle="accessibilityLabel"]') || this._elements.accessibilityLabel;
+    this._elements.stepMarkerContainer = this.querySelector('[handle="stepMarkerContainer"]') || this._elements.stepMarkerContainer;
+    this._elements.line = this.querySelector('[handle="line"]') || this._elements.line;
+
+    // Discard the template-created tooltip if one is provided by markup
     this._elements.overlay = this.querySelector('coral-tooltip') || this._elements.overlay;
     
     // Render main template
-    frag.appendChild(this._elements.stepMarkerContainer);
+    frag.appendChild(this._elements.link);
+    this._elements.link.appendChild(this._elements.stepMarkerContainer);
+    this._elements.link.appendChild(this._elements.overlay);
     frag.appendChild(this._elements.line);
-    frag.appendChild(this._elements.overlay);
     
-    const templateHandleNames = ['stepMarkerContainer', 'overlay', 'line'];
+    const templateHandleNames = ['link', 'accessibilityLabel', 'stepMarkerContainer', 'overlay', 'line'];
   
     const label = this._elements.label;
     
@@ -236,6 +334,13 @@ class Step extends BaseComponent(HTMLElement) {
     
     // Measure hybrid potential
     this._isHybrid();
+
+
+    // Sync the tabIndex value an role depending on whether interaction is on.
+    const stepList = this.parentElement;
+    if (stepList) {
+      this._syncTabIndex(stepList.interaction === StepList.interaction.ON);
+    }
   }
   
   /** @ignore */
