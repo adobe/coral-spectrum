@@ -22,16 +22,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">84.44% </span>
+                <span class="strong">84.49% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>255/302</span>
+                <span class='fraction'>256/303</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">77.5% </span>
+                <span class="strong">77.05% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>93/120</span>
+                <span class='fraction'>94/122</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">84.44% </span>
+                <span class="strong">84.49% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>255/302</span>
+                <span class='fraction'>256/303</span>
             </div>
         
             
@@ -974,7 +974,9 @@
 <a name='L916'></a><a href='#L916'>916</a>
 <a name='L917'></a><a href='#L917'>917</a>
 <a name='L918'></a><a href='#L918'>918</a>
-<a name='L919'></a><a href='#L919'>919</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L919'></a><a href='#L919'>919</a>
+<a name='L920'></a><a href='#L920'>920</a>
+<a name='L921'></a><a href='#L921'>921</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1468,8 +1470,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
@@ -2385,7 +2389,7 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
       return event.touches[0];
     }
     
-    return event;
+    re<span class="missing-if-branch" title="else path not taken" >E</span>turn event;
   }
   
   /**
@@ -2493,10 +2497,10 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
     }
     else {
       const leftHandle = this._elements.handles[0];
-      const leftPe<span class="fstat-no" title="function not covered" >rcen</span>t = calculatePercent(this._values[0]);
-<span class="cstat-no" title="statement not covered" >      leftHandle.style.left = `${leftPercent}%`;</span>
-      
-      const rightHandle = this._elements.handles[1];
+      const leftPercent = calculatePercent(this._values[0]);
+      leftHandle.style.left = `${leftPercent}%`;
+      <span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" >      const rightHandle = this._elements.handles[1];</span>
       const rightPercent = calculatePercent(this._values[1]);
       rightHandle.style.left = `${rightPercent}%`;
   
@@ -2651,13 +2655,13 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @private */
   _snapValueToStep(rawValue, min, max, step) {
     step = parseFloat(step);
-    const remainder = (rawValue - <span class="branch-1 cbranch-no" title="branch not covered" >min) % step;</span>
+    const remainder = (rawValue - min) % step;
     const floatString = step.toString().replace(/^(?:\d+)(?:\.(\d+))?$/g, '$1');
-    const precision = floatString.length;
+    const precision = floatString.<span class="branch-1 cbranch-no" title="branch not covered" >length;</span>
     let snappedValue;
-    <span class="branch-2 cbranch-no" title="branch not covered" ></span>
+    
     if (Math.abs(remainder) * 2 &gt;= step) {
-      snappedValue = rawValue - Math.abs(remainder) + step;
+      snappedValue = rawValue - Math.abs(remainder) + step;<span class="branch-2 cbranch-no" title="branch not covered" ></span>
     }
     else {
       snappedValue = rawValue - remainder;
@@ -2670,21 +2674,23 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
       snappedValue = min + Math.floor((max - min) / step) * step;
     }
     
-    // correct flo<span class="fstat-no" title="function not covered" >atin</span>g point behavior by rounding to step precision
-    if<span class="cstat-no" title="statement not covered" > (precision &gt; 0) {</span>
-      snappedValue = parseFloat(snappedValue.toFixed(precision));
-    }<span class="fstat-no" title="function not covered" ></span>
-    <span class="cstat-no" title="statement not covered" ></span>
-    return snappedValue;
+    // correct floating point behavior by rounding to step precision
+    if (precision &gt; 0) {
+      snappedValue<span class="fstat-no" title="function not covered" > = p</span>arseFloat(snappedValue.toFixed(precision));
+    }<span class="cstat-no" title="statement not covered" ></span>
+    
+    return snapped<span class="fstat-no" title="function not covered" >Valu</span>e;
   }<span class="cstat-no" title="statement not covered" ></span>
   
   /**<span class="cstat-no" title="statement not covered" ></span>
    end operation of a dragging flow
-   @private
+   @pr<span class="cstat-no" title="statement not covered" >ivate</span>
    */
   _mouseUp() {
-    this._currentHandle.style.cursor = 'grab';
-    this._currentHandle.classList.remove('is-dragged');
+    if (this._currentHandle) {
+      this._currentHandle.style.cursor = 'grab';
+      this._currentHandle.classList.remove('is-dragged');
+    }
     document.body.classList.remove('u-coral-closedHand');
     
     events.off('mousemove.Slider', this._draggingHandler);
@@ -2817,7 +2823,7 @@ export default Slider;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Apr 24 2020 08:41:42 GMT+0200 (CEST)
+                at Mon May 18 2020 14:58:16 GMT+0200 (Central European Summer Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

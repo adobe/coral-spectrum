@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.61% </span>
+                <span class="strong">91.96% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>263/284</span>
+                <span class='fraction'>263/286</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.61% </span>
+                <span class="strong">91.96% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>263/284</span>
+                <span class='fraction'>263/286</span>
             </div>
         
             
@@ -1004,7 +1004,10 @@
 <a name='L946'></a><a href='#L946'>946</a>
 <a name='L947'></a><a href='#L947'>947</a>
 <a name='L948'></a><a href='#L948'>948</a>
-<a name='L949'></a><a href='#L949'>949</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L949'></a><a href='#L949'>949</a>
+<a name='L950'></a><a href='#L950'>950</a>
+<a name='L951'></a><a href='#L951'>951</a>
+<a name='L952'></a><a href='#L952'>952</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1158,6 +1161,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">174x</span>
 <span class="cline-any cline-yes">174x</span>
 <span class="cline-any cline-yes">174x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1300,6 +1304,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1316,11 +1321,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1523,7 +1532,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">174x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">174x</span>
 <span class="cline-any cline-yes">174x</span>
 <span class="cline-any cline-yes">174x</span>
 <span class="cline-any cline-yes">174x</span>
@@ -1921,7 +1929,6 @@
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1951,8 +1958,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">34x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-yes">34x</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -2096,6 +2102,7 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
     // Overlay
     events[`global:capture:coral-overlay:beforeopen #${overlayId}`] = '_beforeOverlayOpen';
     events[`global:capture:coral-overlay:close #${overlayId}`] = '_onOverlayClose';
+    events[`global:key:esc #${overlayId}`] = '_onKeyEsc';
     
     // Events
     this._delegateEvents(events);
@@ -2247,19 +2254,19 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
   }<span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
   /**
-   Whe<span class="cstat-no" title="statement not covered" >ther swatches view should be displaye</span>d. See {@link ColorInputSwatches}.
-   
+   Whe<span class="cstat-no" title="statement not covered" >ther swatches view should</span> be displayed. See {@link ColorInputSwatches}.
+   <span class="cstat-no" title="statement not covered" ></span>
    @default ColorInputShowSwatchesEnum.ON
    @type {ColorInputSwatches}
    @htmlattribute showswatches
    */
   get showSwatches() {
     return this._showSwatches || showSwatches.ON;
-  }<span class="missing-if-branch" title="else path not taken" >E</span>
-  set showSwatches(value) {
-    value = t<span class="cstat-no" title="statement not covered" >ransform.string(value).toLowerCase();</span>
-    this<span class="cstat-no" title="statement not covered" >._showSwatches = validate.enumeration(showSwatches)(value) &amp;&amp; value || showSwatches.ON;</span>
-  
+  }
+  set <span class="missing-if-branch" title="else path not taken" >E</span>showSwatches(value) {
+    value = transform.string(value).toLowerCase();
+    this._sho<span class="cstat-no" title="statement not covered" >wSwatches = validate.enumeration(showSwatches)(value) &amp;&amp; value || showSwatches.ON;</span>
+  <span class="cstat-no" title="statement not covered" ></span>
     this._showOrHideView(this._elements.swatchesView, this._showSwatches === showSwatches.OFF);
   }
 &nbsp;
@@ -2268,14 +2275,14 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
    
    @default ColorInputShowPropertiesEnum.ON
    @type {String}
-   @htmlattribute sh<span class="fstat-no" title="function not covered" >owproperties</span>
+   @htmlattribute showproperties
    */
-  get <span class="cstat-no" title="statement not covered" >showProperties() {</span>
-    return this._showProperties || showProperties.ON;
+  get showProperties() {
+    return this._sho<span class="fstat-no" title="function not covered" >wProperties || s</span>howProperties.ON;
   }
-  set showProperties(value) {
+  set <span class="cstat-no" title="statement not covered" >showProperties(value) {</span>
     value = transform.string(value).toLowerCase();
-    this._showProperties = validate.enumeration(showProperties)(value) &amp;&amp; value || showProperties.ON;
+    th<span class="cstat-no" title="statement not covered" >is._showProperties = validate.enumeration(showProperties)(value) &amp;</span>&amp; value || showProperties.ON;
   
     this._showOrHideView(this._elements.propertiesView, this._showProperties === showProperties.OFF);
   }
@@ -2365,12 +2372,12 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
   
   /**
    Name used to submit the data in a form.
-   @ty<span class="missing-if-branch" title="else path not taken" >E</span>pe {String}
+   @type {String}
    @default ""
    @htmlattribute name
    @htmlattributereflected
    */
-  get name() {
+  get <span class="missing-if-branch" title="else path not taken" >E</span>name() {
     return this._elements.input.name;
   }
   set name(value) {
@@ -2387,12 +2394,12 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
    @htmlattributereflected
    */
   get disabled() {
-    re<span class="missing-if-branch" title="else path not taken" >E</span>turn this._disabled || false;
+    return this._disabled || false;
   }
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
-    
+    <span class="missing-if-branch" title="else path not taken" >E</span>
     this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
     this.classList.toggle('is-disabled', this._disabled);
     
@@ -2428,7 +2435,6 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
     
-    this.setAttribute('aria-required', this._required);
     this._elements.input.required = this._required;
   }
   
@@ -2519,19 +2525,19 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
       // We can trigger change events again
       this._preventTriggeringEvents = false;
     }
-    <span class="branch-1 cbranch-no" title="branch not covered" ></span>
+    
     this._triggerChangeEvent();
   }
   
   /** @private */
-  _triggerChangeEvent() {
-    const selected<span class="fstat-no" title="function not covered" >Item</span> = this.selectedItem;
-    co<span class="cstat-no" title="statement not covered" >nst oldSelection = this._oldSel</span>ection;
+  _triggerChangeEvent() {<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+    const selectedItem = this.selectedItem;
+    const oldSelection = this._oldSelection;
     
     if (!this._preventTriggeringEvents &amp;&amp; selectedItem !== oldSelection) {
       // update hidden fields
-      if (selectedItem) {
-        this.value = selectedItem.getAttribute('value');
+      if (selected<span class="fstat-no" title="function not covered" >Item</span>) {
+<span class="cstat-no" title="statement not covered" >        this.value = selectedItem.get</span>Attribute('value');
       }
       
       this.trigger('coral-colorinput:change', {
@@ -2574,33 +2580,37 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
   }
   
   /** @ignore */
-  _onKeyEsc() {
+  _onKeyEsc(event) {
     if (!this._elements.overlay.open) {
       return;
     }
-    <span class="branch-2 cbranch-no" title="branch not covered" ></span>
+&nbsp;
+    event.stopPropagation();
+    
     this._elements.overlay.open = false;
   }
-  
-  /** <span class="missing-if-branch" title="else path not taken" >E</span>@ignore */
+  <span class="branch-2 cbranch-no" title="branch not covered" ></span>
+  /** @ignore */
   _beforeOverlayOpen() {
     // Make sure appropriate tabbable descendant will receive focus
-    if (this.showProperties === showProperties.ON) {
+    if<span class="missing-if-branch" title="else path not taken" >E</span> (this.showProperties === showProperties.ON) {
       this._elements.overlay.focusOnShow = this._elements.propertiesView._elements.colorPreview2;
     }
     else if (this.showSwatches === showSwatches.ON) {
-      th<span class="cstat-no" title="statement not covered" >is._elements.overlay.focusOnShow =</span>
+      this._elements.overlay.focusOnShow =
         this._elements.overlay.querySelector('coral-colorinput-swatch[selected] &gt; button') ||
-<span class="cstat-no" title="statement not covered" >        'coral-colorinput-swatch &gt; button';</span>
-    }
-    <span class="cstat-no" title="statement not covered" ></span>
-    // set aria-expanded state
-    this._elements.colorPreview.setAttribute('aria-expanded', true);
+        'coral-colorinput-swatch &gt; button';
+    }<span class="cstat-no" title="statement not covered" ></span>
+    
+    // s<span class="cstat-no" title="statement not covered" >et aria-expanded state</span>
+    this._elements.input.setAttribute('aria-expanded', true);
+    this<span class="cstat-no" title="statement not covered" >._elements.colorPreview.setAttribute('aria-expanded', true</span>);
   }
   
   /** @ignore */
   _onOverlayClose() {
     // set aria-expanded state
+    this._elements.input.setAttribute('aria-expanded', true);
     this._elements.colorPreview.setAttribute('aria-expanded', false);
   }
   
@@ -2628,9 +2638,9 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
     
     // Update accessibility label for colorPreview button when only swatches are shown
     if (this.showProperties === showProperties.OFF &amp;&amp;
-      <span class="missing-if-branch" title="if path not taken" >I</span>this.showSwatches === showSwatches.ON) {
-      th<span class="cstat-no" title="statement not covered" >is._elements.colorPreview.l</span>abel.textContent = i18n.get('Swatches');
-      this._elements.overlay.setAttribute('aria-label', i18n.get('Swatches'));
+      this.showSwatches === showSwatches.ON) {
+      <span class="missing-if-branch" title="if path not taken" >I</span>this._elements.colorPreview.label.textContent = i18n.get('Swatches');
+      th<span class="cstat-no" title="statement not covered" >is._elements.overlay.setAtt</span>ribute('aria-label', i18n.get('Swatches'));
     }
     else {
       this._elements.colorPreview.label.textContent = i18n.get('Color Picker');
@@ -2640,10 +2650,10 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
   
   /** @ignore */
   _recalculateGeneratedColors() {
-    // r<span class="missing-if-branch" title="if path not taken" >I</span>emove old generated tint colors
-    const childrenList = this.querySelectorAll('coral-colorinput-item[coral-colorinput-generatedcolor]');
-    const <span class="cstat-no" title="statement not covered" >childrenListLength = childrenL</span>ist.length;
-    for (let i = 0; i &lt; childrenListLength; i++) {
+    // remove old generated tint colors
+    cons<span class="missing-if-branch" title="if path not taken" >I</span>t childrenList = this.querySelectorAll('coral-colorinput-item[coral-colorinput-generatedcolor]');
+    const childrenListLength = childrenList.length;
+    for (l<span class="cstat-no" title="statement not covered" >et i = 0; i &lt; childrenListLeng</span>th; i++) {
       childrenList[i].remove();
     }
     
@@ -2664,8 +2674,8 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
         color.value = colorEl.value;
         
         generatedColors = this.autoGenerateColors === autoGenerateColors.TINTS ? color.calculateTintColors(5) : color.calculateShadeColors(5);
-        <span class="branch-2 cbranch-no" title="branch not covered" ></span>
-        for (generatedIndex = generatedColors.length - 1; generatedIndex &gt;= 0; generatedIndex--) {
+        
+        for (generatedIndex = generatedColors.length - 1; generatedIndex &gt;= 0; generatedIndex<span class="branch-2 cbranch-no" title="branch not covered" >--) {</span>
           generatedColorEl = new ColorInputItem();
           // be sure to add alpha
           generatedColorEl.value = generatedColors[generatedIndex].rgbaValue;
@@ -2683,8 +2693,8 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
     colorPreview.icon = this.disabled &amp;&amp; this.variant === variant.SWATCH ? 'lockClosed' : '';
     colorPreview.iconSize = Icon.size.SMALL;
   }
-  <span class="branch-2 cbranch-no" title="branch not covered" ></span>
-  /** @ignore */
+  
+  /** @ignore */<span class="branch-2 cbranch-no" title="branch not covered" ></span>
   _setActiveColor(color) {
     // method used by subviews to set a color and trigger a change event if needed
     const oldColor = this.valueAsColor ? this.valueAsColor : new Color();
@@ -2702,8 +2712,8 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   _selectColorInputColor(newColor) {
     let selectColorInItems = true;
-    <span class="branch-2 cbranch-no" title="branch not covered" ></span>
-    if (this.selectedItem) {
+    
+    if (this.selectedItem) {<span class="branch-2 cbranch-no" title="branch not covered" ></span>
       const selectedColor = new Color();
       selectedColor.value = this.selectedItem.value;
       
@@ -2721,15 +2731,15 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
       const colorElements = this.items.getAll();
       const colorElementsCount = colorElements.length;
       
-      let color = null;<span class="branch-2 cbranch-no" title="branch not covered" ></span>
-      for (let i = 0; i &lt; colorElementsCount; i++) {
+      let color = null;
+      for (let i = 0; i &lt; colorElementsCount; i++) {<span class="branch-2 cbranch-no" title="branch not covered" ></span>
         color = new Color();
         color.value = colorElements[i].getAttribute('value');
         
-        if (color.isSimilarTo(newColor, true)) {<span class="branch-1 cbranch-no" title="branch not covered" ></span>
-          colorElements[i].setAttribute('selected', '');
-          bre<span class="missing-if-branch" title="else path not taken" >E</span>ak;
-        }
+        if (color.isSimilarTo(newColor, true)) {
+          colorElements[i].setAttribute('selected', '');<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+          break;
+        }<span class="missing-if-branch" title="else path not taken" >E</span>
       }
     }
   }
@@ -2840,8 +2850,7 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
   
     this.classList.add(CLASSNAME);
   
-    this.setAttribute('role', 'combobox');
-    this.setAttribute('aria-expanded', false);
+    this.setAttribute('role', 'group');
     
     const frag = document.createDocumentFragment();
     
@@ -2907,7 +2916,7 @@ export default ColorInput;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Apr 24 2020 08:41:42 GMT+0200 (CEST)
+                at Mon May 18 2020 14:58:16 GMT+0200 (Central European Summer Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

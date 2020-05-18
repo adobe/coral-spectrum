@@ -212,6 +212,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryVariableLayout.js~MasonryVariableLayout.html">MasonryVariableLayout</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:change">coral-masonry:change</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:order">coral-masonry:order</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryAriaGridEnum">MasonryAriaGridEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryLayoutsEnum">MasonryLayoutsEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonrySelectionModeEnum">MasonrySelectionModeEnum</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-multifield-src-scripts">coral-component-multifield/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-multifield/src/scripts/Multifield.js~Multifield.html">Multifield</a></span></span></li>
@@ -430,11 +431,12 @@
  * governing permissions and limitations under the License.
  */
 
+import accessibilityState from &apos;../templates/accessibilityState&apos;;
 import {BaseComponent} from &apos;../../../coral-base-component&apos;;
 import {BaseLabellable} from &apos;../../../coral-base-labellable&apos;;
 import {Icon} from &apos;../../../coral-component-icon&apos;;
 import {Checkbox} from &apos;../../../coral-component-checkbox&apos;;
-import {transform, validate} from &apos;../../../coral-utils&apos;;
+import {commons, i18n, transform, validate} from &apos;../../../coral-utils&apos;;
 
 const CLASSNAME = &apos;_coral-AssetList-item&apos;;
 
@@ -468,8 +470,14 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
     // Content zone
     this._elements = {
       content: this.querySelector(&apos;coral-columnview-item-content&apos;) || document.createElement(&apos;coral-columnview-item-content&apos;),
-      thumbnail: this.querySelector(&apos;coral-columnview-item-thumbnail&apos;) || document.createElement(&apos;coral-columnview-item-thumbnail&apos;)
+      thumbnail: this.querySelector(&apos;coral-columnview-item-thumbnail&apos;) || document.createElement(&apos;coral-columnview-item-thumbnail&apos;),
+      accessibilityState: this.querySelector(&apos;span[handle=&quot;accessibilityState&quot;]&apos;)
     };
+
+    if (!this._elements.accessibilityState) {
+      // Templates
+      accessibilityState.call(this._elements, {commons});
+    }
   
     super._observeLabel();
   }
@@ -540,9 +548,13 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
       }
       
       this.classList.add(&apos;is-branch&apos;);
+
+      // @a11y Update aria-expanded. Active drilldowns should be expanded.
+      this.setAttribute(&apos;aria-expanded&apos;, this.active);
     }
     else {
       this.classList.remove(&apos;is-branch&apos;);
+      this.removeAttribute(&apos;aria-expanded&apos;);
     }
   }
   
@@ -598,8 +610,43 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
     this._reflectAttribute(&apos;selected&apos;, this._selected);
   
     this.classList.toggle(&apos;is-selected&apos;, this._selected);
-    this.setAttribute(&apos;aria-selected&apos;, this._selected || this.active);
-  
+    this.setAttribute(&apos;aria-selected&apos;, this._selected);
+
+    // @a11y Update aria-expanded. Active drilldowns should be expanded.
+    if (this.variant === variant.DRILLDOWN) {
+      this.setAttribute(&apos;aria-expanded&apos;, this.active);
+    }
+
+    let accessibilityState = this._elements.accessibilityState;
+    
+    if (this.selected) {
+
+      // @a11y Panels to right of selected item are removed, so remove aria-owns and aria-describedby attributes.
+      this.removeAttribute(&apos;aria-owns&apos;);
+      this.removeAttribute(&apos;aria-describedby&apos;);
+
+      // @a11y Update content to ensure that checked state is announced by assistive technology when the item receives focus
+      accessibilityState.innerHTML = i18n.get(&apos;, checked&apos;);
+
+      // @a11y append live region content element
+      if (!this.contains(accessibilityState)) {
+        this.appendChild(accessibilityState);
+      }
+    }
+    // @a11y If deselecting from checked state,
+    else {
+
+      // @a11y remove, but retain reference to accessibilityState state
+      this._elements.accessibilityState = accessibilityState.parentNode.removeChild(accessibilityState);
+
+      // @a11y Update content to remove checked state
+      this._elements.accessibilityState.innerHTML = &apos;&apos;;
+    }
+
+    // @a11y Item should be labelled by thumbnail, content, and if appropriate accessibility state.
+    let ariaLabelledby = this.thumbnail.id + &apos; &apos; + this.content.id;
+    this.setAttribute(&apos;aria-labelledby&apos;, this.selected ? `${ariaLabelledby} ${accessibilityState.id}` : ariaLabelledby);
+
     // Sync checkbox item selector
     const itemSelector = this.querySelector(&apos;coral-checkbox[coral-columnview-itemselect]&apos;);
     if (itemSelector) {
@@ -625,7 +672,18 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
     this._reflectAttribute(&apos;active&apos;, this._active);
   
     this.classList.toggle(&apos;is-navigated&apos;, this._active);
-    this.setAttribute(&apos;aria-selected&apos;, this._active || this.selected);
+    this.setAttribute(&apos;aria-selected&apos;, this._active);
+
+    // @a11y Update aria-expanded. Active drilldowns should be expanded.
+    if (this.variant === variant.DRILLDOWN) {
+      this.setAttribute(&apos;aria-expanded&apos;, this._active);
+    }
+
+    if (!this._active) {
+      // @a11y Inactive items are not expanded, so remove aria-owns and aria-describedby attributes.
+      this.removeAttribute(&apos;aria-owns&apos;);
+      this.removeAttribute(&apos;aria-describedby&apos;);
+    }
     
     this.trigger(&apos;coral-columnview-item:_activechanged&apos;);
   }
@@ -653,6 +711,8 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
         if (!itemSelector) {
           itemSelector = new Checkbox();
           itemSelector.setAttribute(&apos;coral-columnview-itemselect&apos;, &apos;&apos;);
+          itemSelector._elements.input.tabIndex = -1;
+          itemSelector.setAttribute(&apos;labelledby&apos;, this.content.id);
       
           // Add the item selector as first child
           this.insertBefore(itemSelector, this.firstChild);
@@ -690,6 +750,10 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
   
     // @a11y
     this.setAttribute(&apos;role&apos;, &apos;treeitem&apos;);
+
+    this.id = this.id || commons.getUID();
+
+    this.tabIndex = this.active || this.selected ? 0 : -1;
     
     // Default reflected attributes
     if (!this._variant) { this.variant = variant.DEFAULT; }
@@ -709,6 +773,26 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
     // Assign content zones
     this.content = content;
     this.thumbnail = thumbnail;
+
+    // @a11y thumbnail img element should have alt attribute
+    const thumbnailImg = thumbnail.querySelector(&apos;img:not([alt])&apos;);
+    if (thumbnailImg) {
+      thumbnailImg.setAttribute(&apos;alt&apos;, &apos;&apos;);
+    }
+
+    // @ally add aria-labelledby so that JAWS/IE announces item correctly
+    thumbnail.id = thumbnail.id || commons.getUID();
+
+    content.id = content.id || commons.getUID();
+
+    // @a11y Add live region element to ensure announcement of selected state
+    const accessibilityState = this._elements.accessibilityState;
+
+    // @a11y accessibility state string should announce in document lang, rather than item lang.
+    accessibilityState.setAttribute(&apos;lang&apos;, i18n.locale);
+
+    // @a11y Item should be labelled by thumbnail, content, and accessibility state.
+    this.setAttribute(&apos;aria-labelledby&apos;, thumbnail.id + &apos; &apos; + content.id);
   }
 }
 

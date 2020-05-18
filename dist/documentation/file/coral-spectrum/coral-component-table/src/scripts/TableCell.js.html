@@ -212,6 +212,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryVariableLayout.js~MasonryVariableLayout.html">MasonryVariableLayout</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:change">coral-masonry:change</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:order">coral-masonry:order</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryAriaGridEnum">MasonryAriaGridEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryLayoutsEnum">MasonryLayoutsEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonrySelectionModeEnum">MasonrySelectionModeEnum</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-multifield-src-scripts">coral-component-multifield/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-multifield/src/scripts/Multifield.js~Multifield.html">Multifield</a></span></span></li>
@@ -431,7 +432,7 @@
  */
 
 import {BaseComponent} from &apos;../../../coral-base-component&apos;;
-import {transform} from &apos;../../../coral-utils&apos;;
+import {commons, transform} from &apos;../../../coral-utils&apos;;
 
 const CLASSNAME = &apos;_coral-Table-cell&apos;;
 
@@ -510,7 +511,14 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
       if (!this.querySelector(`[${handle}]`)) {
         this.setAttribute(handle, &apos;&apos;);
       }
+      this._syncAriaSelectedState();
+      this._syncSelectHandle();
     });
+  }
+
+  /** @private */
+  _getHandle(handle) {
+    return this.hasAttribute(handle) ? this : this.querySelector(`[${handle}]`);
   }
   
   /** @private */
@@ -519,15 +527,25 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
       this._setHandle(&apos;coral-table-cellselect&apos;);
     }
     else {
+      // Remove the handle
+      this.removeAttribute(&apos;coral-table-cellselect&apos;);
+
       // Clear selection
       this.selected = false;
     }
+
+    this._syncAriaSelectedState();
   }
   
   /** @private */
   _syncAriaSelectedState() {
     this.classList.toggle(&apos;is-selected&apos;, this.selected);
-    this.setAttribute(&apos;aria-selected&apos;, this.selected);
+    if (this._getHandle(&apos;coral-table-cellselect&apos;)) {
+      this.setAttribute(&apos;aria-selected&apos;, this.selected);
+    }
+    else {
+      this.removeAttribute(&apos;aria-selected&apos;);
+    }
   }
   
   /** @private */
@@ -559,6 +577,8 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
     super.render();
     
     this.classList.add(CLASSNAME);
+
+    this.id = this.id || commons.getUID();
   }
   
   /**

@@ -212,6 +212,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryVariableLayout.js~MasonryVariableLayout.html">MasonryVariableLayout</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:change">coral-masonry:change</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:order">coral-masonry:order</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryAriaGridEnum">MasonryAriaGridEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryLayoutsEnum">MasonryLayoutsEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonrySelectionModeEnum">MasonrySelectionModeEnum</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-multifield-src-scripts">coral-component-multifield/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-multifield/src/scripts/Multifield.js~Multifield.html">Multifield</a></span></span></li>
@@ -450,13 +451,14 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Templates
     this._elements = {
-      label: this.querySelector(&apos;coral-tab-label&apos;) || document.createElement(&apos;coral-tab-label&apos;)
+      label: this.querySelector(&apos;coral-tab-label&apos;) || document.createElement(&apos;coral-tab-label&apos;),
+      invalidIcon: this.querySelector(&apos;._coral-Tabs-itemInvalidIcon&apos;) || this._createInvalidIcon()
     };
     base.call(this._elements);
-  
+
     // Listen for mutations
     this._observer = new MutationObserver(() =&gt; {
       // Change icon size if the label is empty
@@ -464,12 +466,12 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
       if (icon) {
         icon.size = this._elements.label.textContent.trim().length ? Icon.size.EXTRA_SMALL : Icon.size.SMALL;
       }
-  
+
       super._toggleIconAriaHidden();
-      
+
       this.trigger(&apos;coral-tab:_sizechanged&apos;);
     });
-  
+
     // Watch for changes to the label element
     this._observer.observe(this._elements.label, {
       childList: true,
@@ -477,10 +479,10 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
       subtree: true
     });
   }
-  
+
   /**
    The label of the tab.
-   
+
    @type {TabLabel}
    @contentzone
    */
@@ -494,15 +496,15 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
       insert: function(label) {
         label.classList.add(`${CLASSNAME}Label`);
         this.appendChild(label);
-        
+
         this._toggleEllipsis();
       }
     });
   }
-  
+
   /**
    Specifies the name of the icon used inside the Tab. See {@link Icon} for valid icon names.
-   
+
    @type {String}
    @default &quot;&quot;
    @htmlattribute icon
@@ -514,7 +516,7 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
   set icon(value) {
     const iconElement = this._elements.icon;
     iconElement.icon = value;
-  
+
     // removes the icon element from the DOM.
     if (this.icon === &apos;&apos;) {
       iconElement.remove();
@@ -526,17 +528,17 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
       if (!this._elements.label.textContent.trim().length) {
         iconElement.size = Icon.size.SMALL;
       }
-      
+
       super._toggleIconAriaHidden();
-      
+
       this.insertBefore(iconElement, this.firstChild);
       this.trigger(&apos;coral-tab:_sizechanged&apos;);
     }
   }
-  
+
   /**
    Whether the current Tab is invalid.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute invalid
@@ -548,15 +550,21 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
   set invalid(value) {
     this._invalid = transform.booleanAttr(value);
     this._reflectAttribute(&apos;invalid&apos;, this._invalid);
-    
+
     this.classList.toggle(&apos;is-invalid&apos;, this._invalid);
     this.setAttribute(&apos;aria-invalid&apos;, this._invalid);
+    if (this._invalid) {
+      this._elements.invalidIcon.removeAttribute(&apos;hidden&apos;);
+    }
+    else {
+      this._elements.invalidIcon.setAttribute(&apos;hidden&apos;, &apos;true&apos;);
+    }
   }
-  
+
   /**
    Whether this Tab is disabled. When set to true, this will prevent every user interacting with the Tab. If
    disabled is set to true for a selected Tab it will be deselected.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute disabled
@@ -568,20 +576,20 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute(&apos;disabled&apos;, this._disabled);
-  
+
     this.classList.toggle(&apos;is-disabled&apos;, this._disabled);
     this[this._disabled ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-disabled&apos;, this._disabled);
-    
+
     if (this._disabled &amp;&amp; this.selected) {
       this.selected = false;
     }
-    
+
     if (!this._disabled &amp;&amp; !this.selected) {
       // We inform the parent to verify if this item should be selected because it&apos;s the only one left
       this.trigger(&apos;coral-tab:_validateselection&apos;);
     }
   }
-  
+
   /**
    Whether the tab is selected.
    @type {Boolean}
@@ -594,15 +602,15 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
   }
   set selected(value) {
     value = transform.booleanAttr(value);
-    
+
     if (!value || value &amp;&amp; !this.disabled) {
       this._selected = value;
       this._reflectAttribute(&apos;selected&apos;, this.disabled ? false : this._selected);
-  
+
       this.classList.toggle(&apos;is-selected&apos;, this._selected);
       this.setAttribute(&apos;tabindex&apos;, this._selected ? &apos;0&apos; : &apos;-1&apos;);
       this.setAttribute(&apos;aria-selected&apos;, this._selected);
-  
+
       // in case the tab is selected, we need to communicate it to the panels.
       if (this._selected) {
         this._selectTarget();
@@ -610,11 +618,11 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
       this.trigger(&apos;coral-tab:_selectedchanged&apos;);
     }
   }
-  
+
   /**
    The target element that will be selected when this Tab is selected. It accepts a CSS selector or a DOM element.
    If a CSS Selector is provided, the first matching element will be used.
-   
+
    @type {?HTMLElement|String}
    @default null
    @htmlattribute target
@@ -625,18 +633,21 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
   set target(value) {
     if (value === null || typeof value === &apos;string&apos; || value instanceof Node) {
       this._target = value;
-  
+
       const realTarget = getTarget(this.target);
-  
+
       // we add proper accessibility if available
       if (realTarget) {
         // creates a 2 way binding for accessibility
         this.setAttribute(&apos;aria-controls&apos;, realTarget.id);
         realTarget.setAttribute(&apos;aria-labelledby&apos;, this.id);
+
+        // adds role to panel to support accessibility
+        realTarget.setAttribute(&apos;role&apos;, &apos;tabpanel&apos;);
       }
     }
   }
-  
+
   /**
    Inherited from {@link BaseComponent#trackingElement}.
    */
@@ -649,16 +660,16 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
   set trackingElement(value) {
     super.trackingElement = value;
   }
-  
+
   _toggleEllipsis() {
     requestAnimationFrame(() =&gt; {
       this.classList.toggle(&apos;is-overflowing&apos;, this._elements.label.clientWidth &gt; this.clientWidth);
     });
   }
-  
+
   /**
    Selects the target item
-   
+
    @ignore
    */
   _selectTarget() {
@@ -670,17 +681,17 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
     // otherwise, we use the target defined at the tablist level
     else {
       const tabList = this.parentNode;
-    
+
       if (tabList &amp;&amp; tabList.target) {
         realTarget = getTarget(tabList.target);
-      
+
         if (realTarget) {
           // we get the position of this tab inside the tablist
           const currentIndex = tabList.items.getAll().indexOf(this);
-        
+
           // we select the item with the same index
           const targetItem = (realTarget.items ? realTarget.items.getAll() : realTarget.children)[currentIndex];
-        
+
           // we select the item if it exists
           if (targetItem) {
             targetItem.setAttribute(&apos;selected&apos;, &apos;&apos;);
@@ -689,52 +700,67 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
       }
     }
   }
-  
+
+  _createInvalidIcon() {
+    const iconElement = document.createElement(&apos;coral-icon&apos;);
+    iconElement.icon = &apos;alert&apos;;
+    iconElement.size = Icon.size.EXTRA_SMALL;
+    iconElement.classList.add(&apos;_coral-Tabs-itemInvalidIcon&apos;);
+    if (!this._invalid) {
+      iconElement.setAttribute(&apos;hidden&apos;, &apos;true&apos;);
+    }
+    return iconElement;
+  }
+
   get _contentZones() { return {&apos;coral-tab-label&apos;: &apos;label&apos;}; }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([&apos;selected&apos;, &apos;disabled&apos;, &apos;icon&apos;, &apos;invalid&apos;, &apos;target&apos;]);
   }
-  
+
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();
-  
+
     // Query the tab target once the tab item is inserted in the DOM
     if (this.selected) {
       this._selectTarget();
     }
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     // adds the role to support accessibility
     this.setAttribute(&apos;role&apos;, &apos;tab&apos;);
-  
+
     // Generate a unique ID for the tab panel if one isn&apos;t already present
     // This will be used for accessibility purposes
     this.setAttribute(&apos;id&apos;, this.id || commons.getUID());
-  
+
     // Create a fragment
     const frag = document.createDocumentFragment();
-    
+
     // Render the main template
     if (this.icon) {
       frag.appendChild(this._elements.icon);
     }
-  
+
+    if (this._elements.invalidIcon) {
+      frag.append(this._elements.invalidIcon);
+    }
+
     const label = this._elements.label;
-  
+
     // Remove it so we can process children
     if (label.parentNode) {
       label.parentNode.removeChild(label);
     }
-    
+
     while (this.firstChild) {
       const child = this.firstChild;
       if (child.nodeType === Node.TEXT_NODE ||
@@ -746,10 +772,10 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
         this.removeChild(child);
       }
     }
-  
+
     // Add the frag to the component
     this.appendChild(frag);
-  
+
     // Assign the content zones, moving them into place in the process
     this.label = label;
   }

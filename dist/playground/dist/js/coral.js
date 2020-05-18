@@ -13546,7 +13546,7 @@
       "star/[translation hint:default icon alt text]": "Star",
       "success/[translation hint:default icon alt text]": "Success",
       "triple gripper/[translation hint:default icon alt text]": "Triple Gripper",
-      "3dmaterials/[translation hint:default icon alt text]": "3DMaterials",
+      "3dmaterials/[translation hint:default icon alt text]": "3D Materials",
       "abc/[translation hint:default icon alt text]": "ABC",
       "actions/[translation hint:default icon alt text]": "Actions",
       "ad display/[translation hint:default icon alt text]": "Ad Display",
@@ -13585,12 +13585,12 @@
       "align top/[translation hint:default icon alt text]": "Align Top",
       "amazon web services/[translation hint:default icon alt text]": "Amazon Web Services",
       "anchor/[translation hint:default icon alt text]": "Anchor",
-      "anchor select/[translation hint:default icon alt text]": "Anchor Select",
+      "anchor select/[translation hint:default icon alt text]": "Select Anchor",
       "android/[translation hint:default icon alt text]": "Android",
       "annotate/[translation hint:default icon alt text]": "Annotate",
       "annotate pen/[translation hint:default icon alt text]": "Annotate Pen",
       "answer/[translation hint:default icon alt text]": "Answer",
-      "answer favorite/[translation hint:default icon alt text]": "Answer Favorite",
+      "answer favorite/[translation hint:default icon alt text]": "Favorite Answer",
       "app/[translation hint:default icon alt text]": "App",
       "app refresh/[translation hint:default icon alt text]": "App Refresh",
       "apple/[translation hint:default icon alt text]": "Apple",
@@ -13598,7 +13598,7 @@
       "approve reject/[translation hint:default icon alt text]": "Approve Reject",
       "apps/[translation hint:default icon alt text]": "Apps",
       "archive/[translation hint:default icon alt text]": "Archive",
-      "archive remove/[translation hint:default icon alt text]": "Archive Remove",
+      "archive remove/[translation hint:default icon alt text]": "Remove Archive",
       "arrow right/[translation hint:default icon alt text]": "Arrow Right",
       "arrow up right/[translation hint:default icon alt text]": "Arrow Up Right",
       "artboard/[translation hint:default icon alt text]": "Artboard",
@@ -13618,7 +13618,7 @@
       "audio/[translation hint:default icon alt text]": "Audio",
       "automated segment/[translation hint:default icon alt text]": "Automated Segment",
       "back/[translation hint:default icon alt text]": "Back",
-      "back 30seconds/[translation hint:default icon alt text]": "Back 30Seconds",
+      "back 30seconds/[translation hint:default icon alt text]": "Back 30 Seconds",
       "back android/[translation hint:default icon alt text]": "Back Android",
       "beaker/[translation hint:default icon alt text]": "Beaker",
       "beaker check/[translation hint:default icon alt text]": "Beaker Check",
@@ -13755,7 +13755,7 @@
       "delivery fusion/[translation hint:default icon alt text]": "Delivery Fusion",
       "demographic/[translation hint:default icon alt text]": "Demographic",
       "deselect/[translation hint:default icon alt text]": "Deselect",
-      "deselect circular/[translation hint:default icon alt text]": "Deselect Circular",
+      "deselect circular/[translation hint:default icon alt text]": "Deselect",
       "desktop and mobile/[translation hint:default icon alt text]": "Desktop And Mobile",
       "device desktop/[translation hint:default icon alt text]": "Device Desktop",
       "device laptop/[translation hint:default icon alt text]": "Device Laptop",
@@ -13850,7 +13850,7 @@
       "file globe/[translation hint:default icon alt text]": "File Globe",
       "file html/[translation hint:default icon alt text]": "File HTML",
       "file important/[translation hint:default icon alt text]": "File Important",
-      "file json/[translation hint:default icon alt text]": "File Json",
+      "file json/[translation hint:default icon alt text]": "File JSON",
       "file key/[translation hint:default icon alt text]": "File Key",
       "file mobile/[translation hint:default icon alt text]": "File Mobile",
       "file pdf/[translation hint:default icon alt text]": "File PDF",
@@ -14044,7 +14044,7 @@
       "link out/[translation hint:default icon alt text]": "Link Out",
       "link page/[translation hint:default icon alt text]": "Link Page",
       "link user/[translation hint:default icon alt text]": "Link User",
-      "linked in/[translation hint:default icon alt text]": "Linked In",
+      "linked in/[translation hint:default icon alt text]": "LinkedIn",
       "linux/[translation hint:default icon alt text]": "Linux",
       "location/[translation hint:default icon alt text]": "Location",
       "location based date/[translation hint:default icon alt text]": "Location Based Date",
@@ -14114,7 +14114,7 @@
       "organisations/[translation hint:default icon alt text]": "Organisations",
       "organize/[translation hint:default icon alt text]": "Organize",
       "outline path/[translation hint:default icon alt text]": "Outline Path",
-      "pdfchecked out/[translation hint:default icon alt text]": "PDFChecked Out",
+      "pdfchecked out/[translation hint:default icon alt text]": "PDF Checked Out",
       "padding bottom/[translation hint:default icon alt text]": "Padding Bottom",
       "padding left/[translation hint:default icon alt text]": "Padding Left",
       "padding right/[translation hint:default icon alt text]": "Padding Right",
@@ -14220,7 +14220,7 @@
       "smskey/[translation hint:default icon alt text]": "SMS Key",
       "smslightning/[translation hint:default icon alt text]": "SMS Lightning",
       "smsrefresh/[translation hint:default icon alt text]": "SMS Refresh",
-      "sqlquery/[translation hint:default icon alt text]": "SQLQuery",
+      "sqlquery/[translation hint:default icon alt text]": "SQL Query",
       "safari/[translation hint:default icon alt text]": "Safari",
       "sampler/[translation hint:default icon alt text]": "Sampler",
       "save as floppy/[translation hint:default icon alt text]": "Save As Floppy",
@@ -14253,9 +14253,9 @@
       "settings/[translation hint:default icon alt text]": "Settings",
       "shapes/[translation hint:default icon alt text]": "Shapes",
       "share/[translation hint:default icon alt text]": "Share",
-      "share android/[translation hint:default icon alt text]": "Share Android",
+      "share android/[translation hint:default icon alt text]": "Share",
       "share check/[translation hint:default icon alt text]": "Share Check",
-      "share windows/[translation hint:default icon alt text]": "Share Windows",
+      "share windows/[translation hint:default icon alt text]": "Share",
       "sharpen/[translation hint:default icon alt text]": "Sharpen",
       "shield/[translation hint:default icon alt text]": "Shield",
       "shopping cart/[translation hint:default icon alt text]": "Shopping Cart",
@@ -14412,7 +14412,7 @@
       "video checked out/[translation hint:default icon alt text]": "Video Checked Out",
       "video/[translation hint:default icon alt text]": "Video",
       "view all tags/[translation hint:default icon alt text]": "View All Tags",
-      "view bi week/[translation hint:default icon alt text]": "View Bi Week",
+      "view bi week/[translation hint:default icon alt text]": "View Bi-Week",
       "view card/[translation hint:default icon alt text]": "View Card",
       "view column/[translation hint:default icon alt text]": "View Column",
       "view day/[translation hint:default icon alt text]": "View Day",
@@ -16436,9 +16436,7 @@
     }
   };
 
-  var template = function anonymous(data_0
-  /*``*/
-  ) {
+  var template = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["button"] = document.createElement("button", "coral-button");
@@ -18578,9 +18576,7 @@
     return ButtonListItem;
   }(BaseListItem(BaseComponent(HTMLButtonElement)));
 
-  var template$1 = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$1 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["track"] = document.createElement("div");
     el0.setAttribute("handle", "track");
@@ -18966,9 +18962,7 @@
 
   commons._define('coral-wait', Wait);
 
-  var template$2 = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$2 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["loadIndicator"] = document.createElement("div");
     el0.setAttribute("handle", "loadIndicator");
@@ -19687,9 +19681,7 @@
     return SelectListGroup;
   }(BaseComponent(HTMLElement));
 
-  var template$3 = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$3 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["checkIcon"] = document.createElement("span");
@@ -20104,9 +20096,7 @@
     }
   };
 
-  var template$4 = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$4 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["topTabCapture"] = document.createElement("div");
     el0.setAttribute("handle", "topTabCapture");
@@ -24160,8 +24150,9 @@
 
     }, {
       key: "_handleEscape",
-      value: function _handleEscape() {
+      value: function _handleEscape(event) {
         if (this.interaction === interaction$1.ON && this.open && this._isTopOverlay()) {
+          event.stopPropagation();
           this.hide();
         }
       }
@@ -25619,9 +25610,7 @@
     }
   });
 
-  var template$5 = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$5 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["headerWrapper"] = document.createElement("div");
     el0.className += " _coral-Dialog-header";
@@ -25853,7 +25842,7 @@
       value: function _hideHeaderIfEmpty() {
         var header = this._elements.header;
 
-        if (this._elements.header) {
+        if (header) {
           var headerWrapper = this._elements.headerWrapper; // If it's empty and has no non-textnode children, hide the header
 
           var hiddenValue = header.children.length === 0 && header.textContent.replace(/\s*/g, '') === ''; // Only bother if the hidden status has changed
@@ -25861,6 +25850,8 @@
           if (hiddenValue !== headerWrapper.hidden) {
             headerWrapper.hidden = hiddenValue;
           }
+
+          this.variant = this.variant;
         }
       }
     }, {
@@ -25872,9 +25863,10 @@
 
     }, {
       key: "_handleEscape",
-      value: function _handleEscape() {
+      value: function _handleEscape(event) {
         // When escape is pressed, hide ourselves
         if (this.interaction === interaction$2.ON && this.open && this._isTopOverlay()) {
+          event.stopPropagation();
           this.open = false;
         }
       }
@@ -26257,6 +26249,34 @@
 
           this.setAttribute('role', 'alertdialog');
         }
+
+        var hasHeader = this.header && this.header.textContent !== ''; // If the dialog has a header and is not otherwise labelled,
+
+        if (hasHeader && !(this.hasAttribute('aria-labelledby') || this.hasAttribute('aria-label'))) {
+          this.header.id = this.header.id || commons.getUID(); // label the dialog with a reference to the header
+
+          this.setAttribute('aria-labelledby', this.header.id);
+        }
+
+        var hasContent = this.content && this.content.textContent !== ''; // If the dialog has a content,
+
+        if (hasContent) {
+          this.content.id = this.content.id || commons.getUID(); // In an alertdialog with a content region, if the alertdialog is not otherwise described.
+
+          if (this._variant !== variant$4.DEFAULT) {
+            // with no header, 
+            if (!hasHeader) {
+              // label the alertdialog with a reference to the content
+              this.setAttribute('aria-labelledby', this.content.id);
+            } // otherwise, if the alertdialog is not otherwise described,
+            else if (!this.hasAttribute('aria-describedby')) {
+                // ensure that the alertdialog is described by the content.
+                this.setAttribute('aria-describedby', this.content.id);
+              }
+          } else if (this.getAttribute('aria-labelledby') === this.content.id) {
+            this.removeAttribute('aria-labelledby');
+          }
+        }
       }
       /**
        Whether the dialog should be displayed full screen (without borders or margin).
@@ -26563,9 +26583,7 @@
   Dialog.Content = DialogContent;
   Dialog.Footer = DialogFooter;
 
-  var template$6 = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$6 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["headerWrapper"] = document.createElement("div");
     el0.className += " _coral-Dialog-header";
@@ -27337,9 +27355,7 @@
   Popover.Footer = PopoverFooter;
   Popover.Separator = PopoverSeparator;
 
-  var template$7 = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$7 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -27365,6 +27381,7 @@
     var el4 = this["label"] = document.createElement("coral-button-label");
     el4.className += " _coral-Dropdown-label";
     el4.setAttribute("handle", "label");
+    el4.id = data_0["commons"]["getUID"]();
     el4.textContent = "​";
     el2.appendChild(el4);
     var el5 = document.createTextNode("\n  ");
@@ -27375,6 +27392,7 @@
     el6.setAttribute("handle", "invalidIcon");
     el6.className += " _coral-Dropdown-invalidIcon";
     el6.setAttribute("alt", data_0["i18n"]["get"]('invalid'));
+    el6.id = data_0["commons"]["getUID"]();
     el2.appendChild(el6);
     var el7 = document.createTextNode("\n");
     el2.appendChild(el7);
@@ -27445,9 +27463,9 @@
 
   /**
    Enumeration for {@link Select} variants.
-   
+
    @typedef {Object} SelectVariantEnum
-   
+
    @property {String} DEFAULT
    A default, gray Select.
    @property {String} QUIET
@@ -27463,12 +27481,12 @@
   var IS_MOBILE_DEVICE = navigator.userAgent.match(/iPhone|iPad|iPod|Android/i) !== null;
   /**
    Extracts the value from the item in case no explicit value was provided.
-   
+
    @param {HTMLElement} item
    the item whose value will be extracted.
-   
+
    @returns {String} the value that will be submitted for this item.
-   
+
    @private
    */
 
@@ -27479,10 +27497,10 @@
   };
   /**
    Calculates the difference between two given arrays. It returns the items that are in a that are not in b.
-   
+
    @param {Array.<String>} a
    @param {Array.<String>} b
-   
+
    @returns {Array.<String>}
    the difference between the arrays.
    */
@@ -27540,6 +27558,8 @@
         'click select': '_onNativeSelectClick',
         'click > ._coral-Dropdown-trigger': '_onButtonClick',
         'key:space > ._coral-Dropdown-trigger': '_onSpaceKey',
+        'key:enter > ._coral-Dropdown-trigger': '_onSpaceKey',
+        'key:return > ._coral-Dropdown-trigger': '_onSpaceKey',
         'key:down > ._coral-Dropdown-trigger': '_onSpaceKey'
       }; // Overlay
 
@@ -27581,8 +27601,7 @@
     }
     /**
      Returns the inner overlay to allow customization.
-     
-     @type {Popover}
+      @type {Popover}
      @readonly
      */
 
@@ -27605,8 +27624,7 @@
       /**
        @param {Boolean} [checkAvailableSpace=false]
        If <code>true</code>, the event is triggered based on the available space.
-       
-       @private
+        @private
        */
 
     }, {
@@ -27840,8 +27858,7 @@
       }
       /**
        Detects when something is about to change inside the select.
-       
-       @private
+        @private
        */
 
     }, {
@@ -27857,8 +27874,7 @@
       }
       /**
        Detects when something inside the select list changes.
-       
-       @private
+        @private
        */
 
     }, {
@@ -28005,7 +28021,7 @@
       value: function _onButtonClick(event) {
         event.preventDefault();
 
-        if (this.disabled) {
+        if (this.disabled || this.readOnly) {
           return;
         } // if native is required, we do not need to do anything
 
@@ -28044,7 +28060,7 @@
     }, {
       key: "_onSpaceKey",
       value: function _onSpaceKey(event) {
-        if (this.disabled) {
+        if (this.disabled || this.readOnly) {
           return;
         }
 
@@ -28059,8 +28075,7 @@
       }
       /**
        Prevents tab key default handling on selectList Items.
-       
-       @private
+        @private
        */
       // _onTabKey(event) {
       // event.preventDefault();
@@ -28077,7 +28092,10 @@
         var type = event.type.split(':').pop();
         this.trigger("coral-select:_overlay".concat(type));
 
-        this._elements.button.classList.toggle('is-selected', event.target.open);
+        this._elements.button.classList.toggle('is-selected', event.target.open); // communicate expanded state to assistive technology
+
+
+        this._elements.button.setAttribute('aria-expanded', event.target.open);
 
         if (!event.target.open) {
           this.classList.remove('is-openAbove', 'is-openBelow');
@@ -28140,8 +28158,7 @@
       }
       /**
        This handles content change of coral-select-item and updates its associatives.
-       
-       @private
+        @private
        */
 
     }, {
@@ -28184,8 +28201,7 @@
       }
       /**
        This handles value change of coral-select-item and updates its associatives.
-       
-       @private
+        @private
        */
 
     }, {
@@ -28209,8 +28225,7 @@
       }
       /**
        This handles disabled change of coral-select-item and updates its associatives.
-       
-       @private
+        @private
        */
 
     }, {
@@ -28230,8 +28245,7 @@
       }
       /**
        In case an item from the initial selection is removed, we need to remove it from the initial values.
-       
-       @private
+        @private
        */
 
     }, {
@@ -28266,8 +28280,7 @@
       /**
        Updates the label to reflect the current state. The label needs to be updated when the placeholder changes and
        when the selection changes.
-       
-       @private
+        @private
        */
 
     }, {
@@ -28277,8 +28290,7 @@
       }
       /**
        Handles the selection state.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -28321,8 +28333,7 @@
       }
       /**
        Handles selecting multiple items. Selection could result a single or multiple selected items.
-       
-       @private
+        @private
        */
 
     }, {
@@ -28369,8 +28380,7 @@
       }
       /**
        Focuses the component.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -28392,8 +28402,7 @@
       }
       /**
        Returns {@link Select} variants.
-       
-       @return {SelectVariantEnum}
+        @return {SelectVariantEnum}
        */
 
     }, {
@@ -28484,18 +28493,15 @@
        Triggered when the {@link Select} could accept external data to be loaded by the user. If <code>preventDefault()</code> is
        called, then a loading indicator will be shown. {@link Select#loading} should be set to false to indicate
        that the data has been successfully loaded.
-       
-       @typedef {CustomEvent} coral-select:showitems
-       
-       @property {Number} detail.start
+        @typedef {CustomEvent} coral-select:showitems
+        @property {Number} detail.start
        The count of existing items, which is the index where new items should start.
        */
 
       /**
        Triggered when the {@link Select} hides the UI used to select items. This is typically used to cancel a load request
        because the items will not be shown anymore.
-       
-       @typedef {CustomEvent} coral-select:hideitems
+        @typedef {CustomEvent} coral-select:hideitems
        */
 
     }, {
@@ -28505,8 +28511,7 @@
       }
       /**
        The item collection.
-       
-       @type {SelectableCollection}
+        @type {SelectableCollection}
        @readonly
        */
 
@@ -28528,8 +28533,7 @@
       }
       /**
        Indicates whether the select accepts multiple selected values.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute multiple
        @htmlattributereflected
@@ -28598,8 +28602,7 @@
       /**
        Contains a hint to the user of what can be selected in the component. If no placeholder is provided, the first
        option will be displayed in the component.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute placeholder
        @htmlattributereflected
@@ -28695,8 +28698,7 @@
       /**
        The current selected values, as submitted during form submission. When {@link Coral.Select#multiple} is
        <code>false</code>, this will be an array of length 1.
-       
-       @type {Array.<String>}
+        @type {Array.<String>}
        */
 
     }, {
@@ -28779,9 +28781,9 @@
         this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
         this.classList.toggle('is-disabled', this._disabled);
         var isReadOnly = this.hasAttribute('readonly');
-        this._elements.button.disabled = this._disabled || isReadOnly;
-        this._elements.input.disabled = this._disabled || isReadOnly;
-        this._elements.taglist.disabled = this._disabled || isReadOnly;
+        this._elements.button.disabled = this._disabled;
+        this._elements.input.disabled = this._disabled;
+        this._elements.taglist.disabled = this._disabled;
       }
       /**
        Inherited from {@link BaseFormField#invalid}.
@@ -28841,10 +28843,39 @@
         this._reflectAttribute('readonly', this._readOnly);
 
         var isDisabled = this.hasAttribute('disabled');
-        this._elements.button.disabled = this._readOnly || isDisabled;
-        this._elements.input.readOnly = this._readOnly || isDisabled;
-        this._elements.taglist.readOnly = this._readOnly || isDisabled;
-        this._elements.taglist.disabled = this._readOnly || isDisabled;
+        this._elements.input.readOnly = this._readOnly;
+        this._elements.taglist.readOnly = this._readOnly;
+        this._elements.taglist.disabled = this._readOnly;
+      }
+      /**
+       Inherited from {@link BaseFormField#labelled}.
+       */
+
+    }, {
+      key: "labelled",
+      get: function get() {
+        return _get(_getPrototypeOf(Select.prototype), "labelled", this);
+      },
+      set: function set(value) {
+        _set(_getPrototypeOf(Select.prototype), "labelled", value, this, true);
+
+        if (this.labelled) {
+          if (!this.labelledBy) {
+            this._elements.button.setAttribute('aria-labelledby', "".concat(this._elements.button.id, " ").concat(this._elements.label.id, " ").concat(this.invalid ? this._elements.invalidIcon.id : ''));
+          }
+
+          this._elements.nativeSelect.setAttribute('aria-label', value);
+        } else {
+          this._elements.button.removeAttribute('aria-label');
+
+          this._elements.nativeSelect.removeAttribute('aria-label');
+
+          if (!this.labelledBy) {
+            this._elements.button.removeAttribute('aria-labelledby');
+          }
+        }
+
+        this._elements.taglist.labelled = value;
       }
       /**
        Inherited from {@link BaseFormField#labelledBy}.
@@ -28853,24 +28884,32 @@
     }, {
       key: "labelledBy",
       get: function get() {
-        return _get(_getPrototypeOf(Select.prototype), "labelledBy", this);
+        return this._labelledBy;
       },
       set: function set(value) {
         _set(_getPrototypeOf(Select.prototype), "labelledBy", value, this, true);
 
-        if (this.labelledBy) {
-          this._elements.nativeSelect.setAttribute('aria-labelledby', this.labelledBy);
+        this._labelledBy = _get(_getPrototypeOf(Select.prototype), "labelledBy", this);
+
+        if (this._labelledBy) {
+          this._elements.button.setAttribute('aria-labelledby', "".concat(this._labelledBy, " ").concat(this._elements.label.id, " ").concat(this.invalid ? this._elements.invalidIcon.id : ''));
+
+          this._elements.nativeSelect.setAttribute('aria-labelledby', this._labelledBy);
         } else {
-          this._elements.nativeSelect.removeAttribute('aria-labelledby');
+          this._elements.nativeSelect.removeAttribute('aria-labelledby'); // if the select is also labelled, make sure that aria-labelledby gets restored
+
+
+          if (this.labelled) {
+            this.labelled = this.labelled;
+          }
         }
 
-        this._elements.taglist.labelledBy = this.labelledBy;
+        this._elements.taglist.labelledBy = this._labelledBy;
       }
       /**
        Returns the first selected item in the Select. The value <code>null</code> is returned if no element is
        selected.
-       
-       @type {?HTMLElement}
+        @type {?HTMLElement}
        @readonly
        */
 
@@ -28881,8 +28920,7 @@
       }
       /**
        Returns an Array containing the set selected items.
-       
-       @type {Array.<HTMLElement>}
+        @type {Array.<HTMLElement>}
        @readonly
        */
 
@@ -28898,8 +28936,7 @@
       }
       /**
        Indicates that the Select is currently loading remote data. This will set the wait indicator inside the list.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute loading
        */
@@ -28914,8 +28951,7 @@
       }
       /**
        The Select's variant. See {@link SelectVariantEnum}.
-       
-       @type {SelectVariantEnum}
+        @type {SelectVariantEnum}
        @default SelectVariantEnum.DEFAULT
        @htmlattribute variant
        @htmlattributereflected
@@ -29196,9 +29232,7 @@
     }
   };
 
-  var template$8 = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$8 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["input"] = document.createElement("input");
     el0.setAttribute("type", "radio");
@@ -29331,10 +29365,10 @@
       value: function _hideLabelIfEmpty() {
         var label = this._elements.label; // If it's empty and has no non-textnode children, hide the label
 
-        var hiddenValue = !(label.children.length === 0 && label.textContent.replace(/\s*/g, '') === '' && !this.labelled); // Toggle the screen reader text
+        var hiddenValue = !(label.children.length === 0 && label.textContent.replace(/\s*/g, '') === ''); // Toggle the screen reader text
 
         this._elements.labelWrapper.style.margin = !hiddenValue ? '0' : '';
-        this._elements.screenReaderOnly.hidden = hiddenValue;
+        this._elements.screenReaderOnly.hidden = hiddenValue || this.labelled;
       }
       /**
        @private
@@ -29996,9 +30030,7 @@
     }
   };
 
-  var template$9 = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$9 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -30968,9 +31000,7 @@
 
   commons._define('coral-numberinput', NumberInput);
 
-  var template$a = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$a = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["tip"] = document.createElement("span");
     el0.className += " _coral-Tooltip-tip";
@@ -31554,9 +31584,7 @@
     }
   };
 
-  var template$b = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$b = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["input"] = document.createElement("input");
@@ -31742,10 +31770,10 @@
       value: function _hideLabelIfEmpty() {
         var label = this._elements.label; // If it's empty and has no non-textnode children, hide the label
 
-        var hiddenValue = !(label.children.length === 0 && label.textContent.replace(/\s*/g, '') === '' && !this.labelled); // Toggle the screen reader text
+        var hiddenValue = !(label.children.length === 0 && label.textContent.replace(/\s*/g, '') === ''); // Toggle the screen reader text
 
         this._elements.labelWrapper.style.margin = !hiddenValue ? '0' : '';
-        this._elements.screenReaderOnly.hidden = hiddenValue;
+        this._elements.screenReaderOnly.hidden = !!hiddenValue || !!this.labelledBy || !!this.labelled;
       }
       /**
        Inherited from {@link BaseFormField#clear}.
@@ -31973,6 +32001,20 @@
       },
       set: function set(value) {
         _set(_getPrototypeOf(Checkbox.prototype), "labelled", value, this, true);
+
+        this._hideLabelIfEmpty();
+      }
+      /**
+      Inherited from {@link BaseFormField#labelledBy}.
+      */
+
+    }, {
+      key: "labelledBy",
+      get: function get() {
+        return _get(_getPrototypeOf(Checkbox.prototype), "labelledBy", this);
+      },
+      set: function set(value) {
+        _set(_getPrototypeOf(Checkbox.prototype), "labelledBy", value, this, true);
 
         this._hideLabelIfEmpty();
       }
@@ -33092,9 +33134,7 @@
     return Accordion;
   }(BaseComponent(HTMLElement));
 
-  var template$c = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$c = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["heading"] = document.createElement("h3");
@@ -33524,7 +33564,7 @@
     for (var i = 0; i < wrapperItem.children.length; i++) {
       child = wrapperItem.children[i]; // maybe filter even more elements? (opacity, display='none', position='absolute' ...)
 
-      if (child.offsetParent && child.matches(commons.FOCUSABLE_ELEMENT_SELECTOR)) {
+      if (child.offsetParent && (child.matches(commons.FOCUSABLE_ELEMENT_SELECTOR) || child.matches('a:not([href])'))) {
         return child;
       }
     } // search at 2nd level, some elements like coral-fileupload has selectable items inside them
@@ -33536,7 +33576,7 @@
       for (var j = 0; j < child.children.length; j++) {
         var subChild = child.children[j]; // maybe filter even more elements? (opacity, display='none', position='absolute' ...)
 
-        if (subChild.offsetParent && subChild.matches(commons.FOCUSABLE_ELEMENT_SELECTOR)) {
+        if (subChild.offsetParent && (subChild.matches(commons.FOCUSABLE_ELEMENT_SELECTOR) || child.matches('a:not([href])'))) {
           return subChild;
         }
       }
@@ -34080,7 +34120,16 @@
         }
 
         var primary = this._elements.primary;
-        var secondary = this._elements.secondary; // we need to know if the content zone was provided to stop the voracious behavior
+        var secondary = this._elements.secondary;
+
+        if (!primary.getAttribute('role')) {
+          primary.setAttribute('role', 'toolbar');
+        }
+
+        if (!secondary.getAttribute('role')) {
+          secondary.setAttribute('role', 'toolbar');
+        } // we need to know if the content zone was provided to stop the voracious behavior
+
 
         var primaryProvided = primary.parentNode === this; // as a way to transition to the new content zones, we need to provide support for the old container tag. we copy
         // everything from these containers into the corresponding content zones, including the configurations
@@ -34465,9 +34514,7 @@
 
   AnchorButton.Label = AnchorButtonLabel;
 
-  var template$d = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$d = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["overlay"] = document.createElement("coral-popover");
     el0.setAttribute("smart", "");
@@ -34482,9 +34529,7 @@
     return frag;
   };
 
-  var template$e = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$e = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["moreButton"] = document.createElement("button", "coral-button");
     el0.setAttribute("is", "coral-button");
@@ -34509,9 +34554,7 @@
     return frag;
   };
 
-  var template$f = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$f = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -34526,6 +34569,7 @@
       var el4 = this["buttonList"] = document.createElement("coral-buttonlist");
       el4.className += " _coral-ActionBar-buttonList";
       el4.setAttribute("tabindex", "0");
+      el4.setAttribute("role", "menu");
       el4.setAttribute("coral-actionbar-offscreen", "");
       el4.setAttribute("handle", "buttonList");
       var el5 = document.createTextNode("\n    ");
@@ -34538,6 +34582,7 @@
         el4.appendChild(el7);
         var el8 = this["buttonListItem"] = document.createElement("button", "coral-buttonlist-item");
         el8.setAttribute("is", "coral-buttonlist-item");
+        el8.setAttribute("role", "menuitem");
         el8.setAttribute("handle", "buttonListItem");
         var el9 = document.createTextNode("\n        ");
         el8.appendChild(el9);
@@ -34600,6 +34645,7 @@
         frag.appendChild(el30);
         var el31 = this["anchorList"] = document.createElement("coral-anchorlist");
         el31.setAttribute("tabindex", "0");
+        el31.setAttribute("role", "menu");
         el31.setAttribute("coral-actionbar-offscreen", "");
         el31.setAttribute("handle", "anchorList");
         var el32 = document.createTextNode("\n        ");
@@ -34612,6 +34658,7 @@
           el31.appendChild(el34);
           var el35 = this["anchorListItem"] = document.createElement("a", "coral-anchorlist-item");
           el35.setAttribute("is", "coral-anchorlist-item");
+          el35.setAttribute("role", "menuitem");
           el35.setAttribute("handle", "anchorListItem");
           var el36 = document.createTextNode("\n            ");
           el35.appendChild(el36);
@@ -36057,9 +36104,7 @@
     return AutocompleteItem;
   }(BaseComponent(HTMLElement));
 
-  var template$g = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$g = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["overlay"] = document.createElement("coral-popover");
@@ -36112,7 +36157,7 @@
     el11.setAttribute("type", "text");
     el11.setAttribute("autocomplete", "off");
     el11.setAttribute("handle", "input");
-    el11.setAttribute("role", "textbox");
+    el11.setAttribute("role", "combobox");
     el11.setAttribute("is", "coral-textfield");
     el9.appendChild(el11);
     var el12 = document.createTextNode("\n  ");
@@ -36155,9 +36200,7 @@
     return frag;
   };
 
-  var template$h = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$h = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["loadIndicator"] = document.createElement("div");
     el0.className += " _coral-SelectList-loading";
@@ -36286,9 +36329,12 @@
         'coral-autocomplete-item:_contentchanged': '_handleItemContentChange'
       }; // Interaction
 
-      events["global:key:shift+tab #".concat(overlayId, " [is=\"coral-buttonlist-item\"]")] = '_handleListFocusShift'; // Overlay
+      events["global:key:shift+tab #".concat(overlayId, " [is=\"coral-buttonlist-item\"]")] = '_handleListFocusShift';
+      events["global:key:esc"] = '_handleListFocusShift'; // Overlay
 
-      events["global:capture:coral-overlay:positioned #".concat(overlayId)] = '_onOverlayPositioned'; // SelectList
+      events["global:capture:coral-overlay:positioned #".concat(overlayId)] = '_onOverlayPositioned';
+      events["global:capture:coral-overlay:open #".concat(overlayId)] = '_onOverlayOpenOrClose';
+      events["global:capture:coral-overlay:close #".concat(overlayId)] = '_onOverlayOpenOrClose'; // SelectList
 
       events["global:key:enter #".concat(overlayId, " button[is=\"coral-buttonlist-item\"]")] = '_handleSelect';
       events["global:capture:mousedown #".concat(overlayId, " button[is=\"coral-buttonlist-item\"]")] = '_handleSelect';
@@ -37632,6 +37678,27 @@
         this.trigger('coral-autocomplete:hidesuggestions');
       }
       /**
+       Matches the accessibility to the state of the popover.
+       
+       @ignore
+       */
+
+    }, {
+      key: "_onOverlayOpenOrClose",
+      value: function _onOverlayOpenOrClose(event) {
+        if (this._elements.overlay.open) {
+          this._elements.input.setAttribute('aria-expanded', 'true');
+
+          this._elements.trigger.setAttribute('aria-expanded', 'true');
+        } else {
+          this._elements.input.setAttribute('aria-expanded', 'false');
+
+          this._elements.trigger.setAttribute('aria-expanded', 'false');
+
+          this._elements.input.removeAttribute('aria-activedescendant');
+        }
+      }
+      /**
        Inherited from {@link BaseFormField#reset}.
        */
 
@@ -37669,20 +37736,20 @@
 
         this.classList.add(CLASSNAME$z); // Container role per ARIA Autocomplete
 
-        this.setAttribute('role', 'presentation'); // Input attributes per ARIA Autocomplete
+        this.setAttribute('role', 'group'); // Input attributes per ARIA Autocomplete
 
         this._elements.input.setAttribute('role', 'combobox');
 
         this._elements.input.setAttribute('aria-autocomplete', 'list');
 
-        this._elements.input.setAttribute('aria-haspopup', 'true');
+        this._elements.input.setAttribute('aria-haspopup', 'listbox');
 
         this._elements.input.setAttribute('aria-expanded', 'false');
 
         this._elements.input.setAttribute('aria-controls', this._elements.selectList.id); // Trigger button attributes per ARIA Autocomplete
 
 
-        this._elements.trigger.setAttribute('aria-haspopup', 'true');
+        this._elements.trigger.setAttribute('aria-haspopup', 'listbox');
 
         this._elements.trigger.setAttribute('aria-expanded', 'false');
 
@@ -38209,6 +38276,28 @@
         this._elements.input.required = this._required;
       }
       /**
+       Inherited from {@link BaseFormField#labelled}.
+       */
+
+    }, {
+      key: "labelled",
+      get: function get() {
+        return _get(_getPrototypeOf(Autocomplete.prototype), "labelled", this);
+      },
+      set: function set(value) {
+        _set(_getPrototypeOf(Autocomplete.prototype), "labelled", value, this, true);
+
+        this[this.labelled ? 'setAttribute' : 'removeAttribute']('aria-label', this.labelled);
+
+        this._elements.selectList[this.labelled ? 'setAttribute' : 'removeAttribute']('aria-label', this.labelled);
+
+        if (this.labelled && this.multiple) {
+          this._elements.tagList.setAttribute('aria-label', this.labelled);
+        } else {
+          this._elements.tagList.removeAttribute('aria-label');
+        }
+      }
+      /**
        Inherited from {@link BaseFormField#labelledBy}.
        */
 
@@ -38219,6 +38308,10 @@
       },
       set: function set(value) {
         _set(_getPrototypeOf(Autocomplete.prototype), "labelledBy", value, this, true);
+
+        this[this.labelledBy ? 'setAttribute' : 'removeAttribute']('aria-labelledby', this.labelledBy);
+
+        this._elements.selectList[this.labelledBy ? 'setAttribute' : 'removeAttribute']('aria-labelledby', this.labelledBy);
 
         if (this.labelledBy && this.multiple) {
           this._elements.tagList.setAttribute('aria-labelledby', this.labelledBy);
@@ -38550,9 +38643,7 @@
   Banner.Header = BannerHeader;
   Banner.Content = BannerContent;
 
-  var template$i = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$i = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["nativeSelect"] = document.createElement("select");
     el0.className += " _coral-ButtonGroup-select";
@@ -39696,9 +39787,7 @@
     }
   };
 
-  var template$j = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$j = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["input"] = document.createElement("input");
@@ -39720,6 +39809,7 @@
     el4.setAttribute("aria-live", "assertive");
     el4.setAttribute("aria-atomic", "true");
     el4.setAttribute("aria-level", "2");
+    el4.id = data_0["commons"]["getUID"]();
     el2.appendChild(el4);
     var el5 = document.createTextNode("\n  ");
     el2.appendChild(el5);
@@ -39778,15 +39868,14 @@
     el19.setAttribute("role", "grid");
     el19.setAttribute("tabindex", "0");
     el19.setAttribute("aria-readonly", "true");
+    el19.setAttribute("aria-labelledby", this["heading"]["id"]);
     frag.appendChild(el19);
     var el20 = document.createTextNode("\n");
     frag.appendChild(el20);
     return frag;
   };
 
-  var template$k = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$k = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["container"] = document.createElement("div");
     el0.className += " _coral-DatePicker-calendarSlidingContainer";
@@ -39798,9 +39887,7 @@
     return frag;
   };
 
-  var template$l = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$l = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -40182,6 +40269,7 @@
         // On Windows, we use CTRL+Page Down
         'key:ctrl+pagedown': '_onCtrlPageDownKey',
         'key:enter ._coral-Calendar-body': '_onEnterKey',
+        'key:return ._coral-Calendar-body': '_onEnterKey',
         'key:space ._coral-Calendar-body': '_onEnterKey'
       })); // Prepare templates
 
@@ -40328,6 +40416,8 @@
                   el = dates[dates.length - 1];
                 }
               }
+            } else {
+              el = this._elements.body.querySelector('.is-focused') || this._elements.body.querySelector('.is-today');
             }
 
             if (el) {
@@ -40356,11 +40446,8 @@
 
         if (el) {
           if (isTransitioning) {
-            commons.transitionEnd(newTable, function () {
-              // Prevents from chopping off the transition animation
-              window.setTimeout(function () {
-                el.querySelector('._coral-Calendar-date').classList.add('is-focused');
-              }, 50);
+            window.requestAnimationFrame(function () {
+              el.querySelector('._coral-Calendar-date').classList.add('is-focused');
             });
           } else {
             // Focus the selected date
@@ -40822,7 +40909,7 @@
         _get(_getPrototypeOf(Calendar.prototype), "render", this).call(this);
 
         this.classList.add(CLASSNAME$C);
-        this.setAttribute('role', 'region'); // Default reflected attribute
+        this.setAttribute('role', 'group'); // Default reflected attribute
 
         if (!this._valueFormat) {
           this.valueFormat = INTERNAL_FORMAT;
@@ -41160,9 +41247,7 @@
 
   commons._define('coral-calendar', Calendar);
 
-  var template$m = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$m = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["wrapper"] = document.createElement("div");
     el0.setAttribute("handle", "wrapper");
@@ -41603,9 +41688,7 @@
     return Card;
   }(BaseComponent(HTMLElement));
 
-  var template$n = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$n = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["icon"] = document.createElement("coral-icon");
     el0.setAttribute("handle", "icon");
@@ -42386,9 +42469,7 @@
     }
   };
 
-  var template$o = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$o = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -43089,9 +43170,7 @@
 
   commons._define('coral-clock', Clock);
 
-  var template$p = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$p = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = document.createElement("div");
     el0.className += " _coral-CoachMarkIndicator-ring";
@@ -44952,9 +45031,7 @@
     );
   };
 
-  var template$q = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$q = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["label"] = document.createElement("div");
     el0.className += " _coral-Slider-labelContainer";
@@ -45483,9 +45560,11 @@
     }, {
       key: "_mouseUp",
       value: function _mouseUp() {
-        this._currentHandle.style.cursor = 'grab';
+        if (this._currentHandle) {
+          this._currentHandle.style.cursor = 'grab';
 
-        this._currentHandle.classList.remove('is-dragged');
+          this._currentHandle.classList.remove('is-dragged');
+        }
 
         document.body.classList.remove('u-coral-closedHand');
         events.off('mousemove.Slider', this._draggingHandler);
@@ -46096,9 +46175,7 @@
     return SliderItem;
   }(BaseComponent(HTMLElement));
 
-  var template$r = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$r = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -46459,9 +46536,7 @@
   Slider.Content = SliderContent;
   Slider.Item = SliderItem;
 
-  var template$s = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$s = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["label"] = document.createElement("div");
     el0.className += " _coral-Slider-labelContainer";
@@ -46628,9 +46703,7 @@
     return ColorInputSlider;
   }(Slider);
 
-  var template$t = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$t = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -46715,6 +46788,7 @@
     el24.appendChild(el25);
     var el26 = document.createElement("label");
     el26.className += " _coral-ColorInput-editRgba-group-label";
+    el26.id = uid + "-r-label";
     el26.setAttribute("for", uid + "-r");
     el26.textContent = data_0["i18n"]["get"]('R');
     el24.appendChild(el26);
@@ -46726,6 +46800,7 @@
     el28.setAttribute("max", "255");
     el28.setAttribute("value", "0");
     el28.setAttribute("gradient", "#000000 #FF0000");
+    el28.setAttribute("labelledby", uid + "-r-label");
     el24.appendChild(el28);
     var el29 = document.createTextNode("\n      ");
     el24.appendChild(el29);
@@ -46752,6 +46827,7 @@
     el33.appendChild(el34);
     var el35 = document.createElement("label");
     el35.className += " _coral-ColorInput-editRgba-group-label";
+    el35.id = uid + "-g-label";
     el35.setAttribute("for", uid + "-g");
     el35.textContent = data_0["i18n"]["get"]('G');
     el33.appendChild(el35);
@@ -46763,6 +46839,7 @@
     el37.setAttribute("max", "255");
     el37.setAttribute("value", "0");
     el37.setAttribute("gradient", "#000000 #00FF00");
+    el37.setAttribute("labelledby", uid + "-g-label");
     el33.appendChild(el37);
     var el38 = document.createTextNode("\n      ");
     el33.appendChild(el38);
@@ -46789,6 +46866,7 @@
     el42.appendChild(el43);
     var el44 = document.createElement("label");
     el44.className += " _coral-ColorInput-editRgba-group-label";
+    el44.id = uid + "-b-label";
     el44.setAttribute("for", uid + "-b");
     el44.textContent = data_0["i18n"]["get"]('B');
     el42.appendChild(el44);
@@ -46800,6 +46878,7 @@
     el46.setAttribute("max", "255");
     el46.setAttribute("value", "0");
     el46.setAttribute("gradient", "#000000 #0000FF");
+    el46.setAttribute("labelledby", uid + "-b-label");
     el42.appendChild(el46);
     var el47 = document.createTextNode("\n      ");
     el42.appendChild(el47);
@@ -46826,6 +46905,7 @@
     el51.appendChild(el52);
     var el53 = document.createElement("label");
     el53.className += " _coral-ColorInput-editRgba-group-label";
+    el53.id = uid + "-a-label";
     el53.setAttribute("for", uid + "-a");
     el53.textContent = data_0["i18n"]["get"]('A');
     el51.appendChild(el53);
@@ -46837,6 +46917,7 @@
     el55.setAttribute("max", "100");
     el55.setAttribute("value", "100");
     el55.setAttribute("gradient", "rgba(255,255,255,0) rgba(255,255,255,1)");
+    el55.setAttribute("labelledby", uid + "-a-label");
     el51.appendChild(el55);
     var el56 = document.createTextNode("\n      ");
     el51.appendChild(el56);
@@ -47096,9 +47177,7 @@
     return ColorInputColorProperties;
   }(BaseColorInputAbstractSubview(BaseComponent(HTMLElement)));
 
-  var template$u = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$u = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["colorButton"] = document.createElement("button", "coral-button");
     el0.setAttribute("is", "coral-button");
@@ -47106,7 +47185,7 @@
     el0.setAttribute("handle", "colorButton");
     el0.setAttribute("icon", "checkmark");
     el0.setAttribute("type", "button");
-    el0.setAttribute("role", "presentation");
+    el0.setAttribute("role", "option");
     frag.appendChild(el0);
     var el1 = document.createTextNode("\n");
     frag.appendChild(el1);
@@ -47174,7 +47253,7 @@
 
         this.classList.add(CLASSNAME$L, 'u-coral-clearFix'); // adds the role to support accessibility
 
-        this.setAttribute('role', 'option'); // Support cloneNode
+        this.setAttribute('role', 'presentation'); // Support cloneNode
 
         var button = this.querySelector('[handle="colorButton"]');
 
@@ -47197,8 +47276,13 @@
 
           this._reflectAttribute('selected', this.disabled ? false : this._selected);
 
+          this.removeAttribute('aria-selected', this._selected);
           this.classList.toggle('is-selected', this._selected);
-          this.setAttribute('aria-selected', this._selected);
+
+          this._elements.colorButton.setAttribute('aria-selected', this._selected);
+
+          this._elements.colorButton.tabIndex = this.tabIndex;
+          this.removeAttribute('tabindex');
 
           this._elements.colorButton[this._selected ? 'setAttribute' : 'removeAttribute']('aria-label', "".concat(i18n.get('checked'), " ").concat(this._elements.colorButton.label.textContent));
 
@@ -47240,12 +47324,12 @@
         if (cssColorValue) {
           this._elements.colorButton.style.backgroundColor = cssColorValue;
           this._elements.colorButton.label.textContent = hexColorValue;
-          this.setAttribute('aria-value', hexColorValue);
+          this.setAttribute('data-value', hexColorValue);
         } else {
           this._elements.colorButton.classList.add('_coral-ColorInput-swatch-novalue');
 
           this._elements.colorButton.label.textContent = i18n.get('unset');
-          this.setAttribute('aria-value', '');
+          this.setAttribute('data-value', '');
         }
       }
       /**
@@ -47268,10 +47352,13 @@
         this._reflectAttribute('disabled', this.disabled);
       }
       /**
-       The tabindex of the color preview.
+       The tabindex of the color preview button. 
+       So that we don't wind up with nested focusable elements,
+       the internal colorButton should should receive the tabIndex property, 
+       while the coral-colorinput-swatch should reflect the value using the _tabindex attribute.
        
        @type {Integer}
-       @default 0
+       @default -1
        @htmlattribute tabindex
        @htmlattributereflected
        */
@@ -47283,8 +47370,7 @@
       },
       set: function set(value) {
         this._elements.colorButton.tabIndex = value;
-
-        this._reflectAttribute('tabindex', this.tabIndex);
+        this.removeAttribute('tabindex');
       }
     }], [{
       key: "_attributePropertyMap",
@@ -47306,9 +47392,7 @@
     return ColorInputSwatch;
   }(BaseColorInputAbstractSubview(BaseComponent(HTMLElement)));
 
-  var template$v = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$v = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["swatchesSubview"] = document.createElement("div");
     el0.className += " _coral-ColorInput-swatchesSubview";
@@ -47337,7 +47421,6 @@
     var el7 = document.createElement("div");
     el7.className += " _coral-ColorInput-swatches-container";
     el7.setAttribute("role", "presentation");
-    el7.setAttribute("aria-labelledby", data_0["commons"]["getUID"]());
     var el8 = document.createTextNode("\n    ");
     el7.appendChild(el8);
     var el9 = this["swatchesContainer"] = document.createElement("div");
@@ -47539,11 +47622,10 @@
           swatch.targetColor = color;
 
           if (color.selected) {
-            swatch.selected = color.selected;
+            swatch[color.selected ? 'setAttribute' : 'removeAttribute']('selected', color.selected);
             swatchSelected = true;
-          }
+          } // Update color button tabindex depending on selected state
 
-          swatch.setAttribute('aria-selected', swatch.selected); // Update color button tabindex depending on selected state
 
           swatch.tabIndex = swatch.selected ? 0 : -1;
         } // If no swatch is selected, make sure that the first swatch is focusable
@@ -47661,6 +47743,10 @@
         }
 
         event.matchedTarget.tabIndex = 0;
+
+        if (document.activeElement !== event.matchedTarget.firstChild) {
+          event.matchedTarget.firstChild.focus();
+        }
       }
       /** @ignore */
 
@@ -47722,9 +47808,7 @@
     return ColorInputSwatches;
   }(BaseColorInputAbstractSubview(BaseComponent(HTMLElement)));
 
-  var template$w = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$w = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["defaultPalette"] = document.createElement("div");
@@ -47830,6 +47914,11 @@
     el39.className += " _coral-ColorInput-input";
     el39.setAttribute("type", "text");
     el39.setAttribute("value", "");
+    el39.setAttribute("role", "combobox");
+    el39.setAttribute("aria-autocomplete", "none");
+    el39.setAttribute("aria-haspopup", "dialog");
+    el39.setAttribute("aria-expanded", "false");
+    el39.setAttribute("aria-controls", uid);
     frag.appendChild(el39);
     var el40 = document.createTextNode("\n");
     frag.appendChild(el40);
@@ -47845,7 +47934,7 @@
     el43.setAttribute("variant", "_custom");
     el43.className += " _coral-FieldButton _coral-ColorInput-button _coral-ColorInput-preview";
     el43.setAttribute("type", "button");
-    el43.setAttribute("aria-haspopup", "true");
+    el43.setAttribute("aria-haspopup", "dialog");
     el43.setAttribute("aria-expanded", "false");
     el43.setAttribute("aria-controls", uid);
     el41.appendChild(el43);
@@ -47855,7 +47944,7 @@
 
     this.colorPreview.label.classList.add('u-coral-screenReaderOnly');
     this.colorPreview.label.innerText = data.i18n.get('Color Picker');
-    this.id = uid + '-coral-button-label';
+    this.colorPreview.label.id = uid + '-coral-button-label';
     data_0 = data;
     var el46 = document.createTextNode("\n");
     el41.appendChild(el46);
@@ -48013,7 +48102,8 @@
       }); // Overlay
 
       events["global:capture:coral-overlay:beforeopen #".concat(overlayId)] = '_beforeOverlayOpen';
-      events["global:capture:coral-overlay:close #".concat(overlayId)] = '_onOverlayClose'; // Events
+      events["global:capture:coral-overlay:close #".concat(overlayId)] = '_onOverlayClose';
+      events["global:key:esc #".concat(overlayId)] = '_onKeyEsc'; // Events
 
       _this._delegateEvents(events); // Pre-define labellable element
 
@@ -48148,11 +48238,12 @@
 
     }, {
       key: "_onKeyEsc",
-      value: function _onKeyEsc() {
+      value: function _onKeyEsc(event) {
         if (!this._elements.overlay.open) {
           return;
         }
 
+        event.stopPropagation();
         this._elements.overlay.open = false;
       }
       /** @ignore */
@@ -48168,6 +48259,8 @@
         } // set aria-expanded state
 
 
+        this._elements.input.setAttribute('aria-expanded', true);
+
         this._elements.colorPreview.setAttribute('aria-expanded', true);
       }
       /** @ignore */
@@ -48176,6 +48269,8 @@
       key: "_onOverlayClose",
       value: function _onOverlayClose() {
         // set aria-expanded state
+        this._elements.input.setAttribute('aria-expanded', true);
+
         this._elements.colorPreview.setAttribute('aria-expanded', false);
       }
       /**
@@ -48378,8 +48473,7 @@
         _get(_getPrototypeOf(ColorInput.prototype), "render", this).call(this);
 
         this.classList.add(CLASSNAME$N);
-        this.setAttribute('role', 'combobox');
-        this.setAttribute('aria-expanded', false);
+        this.setAttribute('role', 'group');
         var frag = document.createDocumentFragment(); // Render template
 
         frag.appendChild(this._elements.defaultPalette);
@@ -48774,7 +48868,6 @@
 
         this._reflectAttribute('required', this._required);
 
-        this.setAttribute('aria-required', this._required);
         this._elements.input.required = this._required;
       }
       /**
@@ -49190,6 +49283,22 @@
   ColorInput.Slider = ColorInputSlider;
   ColorInput.ColorProperties = ColorInputColorProperties;
 
+  var template$x = function anonymous(data_0) {
+    var frag = document.createDocumentFragment();
+    var el0 = this["accessibilityState"] = document.createElement("span");
+    el0.setAttribute("handle", "accessibilityState");
+    el0.className += " u-coral-screenReaderOnly";
+    el0.setAttribute("aria-hidden", "true");
+    el0.id = data_0["commons"]["getUID"]();
+    el0.setAttribute("role", "presentation");
+    el0.setAttribute("aria-live", "off");
+    el0.setAttribute("aria-atomic", "true");
+    frag.appendChild(el0);
+    var el1 = document.createTextNode("\n");
+    frag.appendChild(el1);
+    return frag;
+  };
+
   /**
    @class Coral.ColumnView.Collection
    @classdesc The ColumnView collection
@@ -49234,6 +49343,15 @@
       key: "_getAllActive",
       value: function _getAllActive() {
         return this._getAllSelected('active');
+      }
+    }, {
+      key: "_selectAll",
+      value: function _selectAll() {
+        this.getAll().forEach(function (el) {
+          if (!el.hasAttribute('selected')) {
+            el.setAttribute('selected', '');
+          }
+        });
       }
     }]);
 
@@ -49316,7 +49434,23 @@
 
       _classCallCheck(this, ColumnView);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ColumnView).call(this)); // Events
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(ColumnView).call(this)); // Content zone
+
+      _this._elements = {
+        accessibilityState: _this.querySelector('span[handle="accessibilityState"]')
+      };
+
+      if (!_this._elements.accessibilityState) {
+        // Templates
+        template$x.call(_this._elements, {
+          commons: commons
+        });
+
+        _this._elements.accessibilityState.removeAttribute('aria-hidden');
+
+        _this._elements.accessibilityState.hidden = true;
+      } // Events
+
 
       _this._delegateEvents({
         // Prevents text selection while selecting multiple items
@@ -49329,6 +49463,12 @@
         'key:shift+up': '_onKeyShiftAndUp',
         'key:shift+down': '_onKeyShiftAndDown',
         'key:space': '_onKeySpace',
+        'key:control+a': '_onKeyCtrlA',
+        'key:command+a': '_onKeyCtrlA',
+        'key:control+shift+a': '_onKeyCtrlShiftA',
+        'key:command+shift+a': '_onKeyCtrlShiftA',
+        'key:esc': '_onKeyCtrlShiftA',
+        'capture:focus coral-columnview-item': '_onItemFocus',
         // column events
         'coral-columnview-column:_loaditems': '_onColumnLoadItems',
         'coral-columnview-column:_activeitemchanged': '_onColumnActiveItemChanged',
@@ -49418,13 +49558,81 @@
       key: "_onColumnLoadItems",
       value: function _onColumnLoadItems(event) {
         // this is a private event and should not leave the column view
-        event.stopImmediatePropagation(); // triggers an event to indicate more data could be loaded
+        event.stopImmediatePropagation();
+
+        this._updateAriaLevel(event.target);
+
+        this._ensureTabbableItem(); // triggers an event to indicate more data could be loaded
+
 
         this.trigger('coral-columnview:loaditems', {
           column: event.target,
           start: event.detail.start,
           item: event.detail.item
         });
+      }
+      /**
+        Handle when first selectable item is added and make sure it is tabbable.
+        @param {HTMLElement} [item]
+        @private
+      */
+
+    }, {
+      key: "_onItemAdd",
+      value: function _onItemAdd() {
+        var _this2 = this;
+
+        window.requestAnimationFrame(function () {
+          return _this2._ensureTabbableItem();
+        });
+      }
+      /**
+        Handle when item is removed, make sure that at least one element is tabbable, or if there are no items, and add listener to handle when item is added.
+        @param {HTMLElement} [item]
+          Item that was removed.
+        @private
+      */
+
+    }, {
+      key: "_onItemRemoved",
+      value: function _onItemRemoved() {
+        var _this3 = this;
+
+        window.requestAnimationFrame(function () {
+          return _this3._ensureTabbableItem();
+        });
+      }
+      /* @private */
+
+    }, {
+      key: "_ensureTabbableItem",
+      value: function _ensureTabbableItem() {
+        this._vent.off('coral-collection:add', this._onItemAdd);
+
+        this._vent.off('coral-collection:remove', this._onItemRemoved); // Ensures that item will receive focus
+
+
+        if (!this.selectedItem && !this.activeItem) {
+          var selectableItems = this.items._getSelectableItems(); // If there are no selectable items, stop listening for items being removed and start listening for the next item added.
+
+
+          if (!selectableItems.length) {
+            this._vent.off('coral-collection:remove', this._onItemRemoved);
+
+            this._vent.on('coral-collection:add', this._onItemAdd);
+          } else {
+            // Otherwise, if there is a selectable item, make sure it has a tabIndex.
+            selectableItems[0].tabIndex = 0; // Listen for item removal so that we can handle the edge case where all items have been removed.
+
+            this._vent.on('coral-collection:remove', this._onItemRemoved);
+          }
+        } else if (this.selectedItem && this.selectedItem.tabIndex !== 0) {
+          // If the selectedItem is not tabbable, make sure that it has tabIndex === 0
+          this.selectedItem.tabIndex = 0;
+        } else if (this.activeItem && this.activeItem.tabIndex !== 0) {
+          // If the activeItem is not tabbable, make sure that it has tabIndex === 0
+          this.activeItem.tabIndex = 0;
+        }
       }
       /** @private */
 
@@ -49475,7 +49683,21 @@
     }, {
       key: "_onKeyShiftAndUp",
       value: function _onKeyShiftAndUp(event) {
-        event.preventDefault(); // using _oldSelection since it should be equivalent to this.items._getSelectedItems() but faster
+        event.preventDefault();
+
+        var matchedTarget = this._getRealMatchedTarget(event); // don't select items when focus is within the preview
+
+
+        if (matchedTarget.closest('coral-columnview-preview')) {
+          return;
+        }
+
+        if (this.selectionMode === selectionMode$1.NONE) {
+          this._onKeyUp(event);
+
+          return;
+        } // using _oldSelection since it should be equivalent to this.items._getSelectedItems() but faster
+
 
         var oldSelectedItems = this._oldSelection;
         this._isKeyBoardMultiselect = true; // first make sure to select the active item as we want to multiselect
@@ -49530,6 +49752,11 @@
           direction: lastSelected && lastSelected.direction ? lastSelected.direction : 'up',
           firstSelectedItem: lastSelected && lastSelected.firstSelectedItem ? lastSelected.firstSelectedItem : selectedItem.nextElementSibling
         };
+
+        if (selectedItem && selectedItem !== document.activeElement) {
+          selectedItem.focus();
+        }
+
         this._isKeyBoardMultiselect = false;
       }
       /** @private */
@@ -49537,7 +49764,21 @@
     }, {
       key: "_onKeyShiftAndDown",
       value: function _onKeyShiftAndDown(event) {
-        event.preventDefault(); // using _oldSelection since it should be equivalent to this.items._getSelectedItems() but faster
+        event.preventDefault();
+
+        var matchedTarget = this._getRealMatchedTarget(event); // don't select items when focus is within the preview
+
+
+        if (matchedTarget.closest('coral-columnview-preview')) {
+          return;
+        }
+
+        if (this.selectionMode === selectionMode$1.NONE) {
+          this._onKeyDown(event);
+
+          return;
+        } // using _oldSelection since it should be equivalent to this.items._getSelectedItems() but faster
+
 
         var oldSelectedItems = this._oldSelection;
         this._isKeyBoardMultiselect = true; // first make sure to select the active item as we want to multiselect
@@ -49592,6 +49833,11 @@
           direction: lastSelected && lastSelected.direction ? lastSelected.direction : 'down',
           firstSelectedItem: lastSelected && lastSelected.firstSelectedItem ? lastSelected.firstSelectedItem : selectedItem.previousElementSibling
         };
+
+        if (selectedItem && selectedItem !== document.activeElement) {
+          selectedItem.focus();
+        }
+
         this._isKeyBoardMultiselect = false;
       }
       /** @private */
@@ -49599,17 +49845,25 @@
     }, {
       key: "_onKeyUp",
       value: function _onKeyUp(event) {
-        event.preventDefault(); // selection will win over active buttons, because they are the right most item. using _oldSelection since it
+        event.preventDefault();
+
+        var matchedTarget = this._getRealMatchedTarget(event); // don't navigate items when focus is within the preview
+
+
+        if (matchedTarget.closest('coral-columnview-preview')) {
+          return;
+        } // selection will win over active buttons, because they are the right most item. using _oldSelection since it
         // should be equivalent to this.items._getSelectedItems() but faster
+
 
         var selectedItems = this._oldSelection;
         var item;
 
         if (selectedItems.length !== 0) {
-          var selectedItem = selectedItems[0];
+          var selectedItem = matchedTarget;
           item = selectedItem.previousElementSibling;
 
-          if (item) {
+          if (!item) {
             item = selectedItem;
           }
         } // when there is no active item to select, we get the last item of the column. this way users can interact with
@@ -49621,25 +49875,39 @@
           } // we use click instead of selected to force the deselection of the other items
 
 
-        item.click();
+        if (item && item !== document.activeElement) {
+          item.focus();
+
+          if (this.selectionMode === selectionMode$1.NONE || selectedItems.length === 0) {
+            item.click();
+          }
+        }
       }
       /** @private */
 
     }, {
       key: "_onKeyDown",
       value: function _onKeyDown(event) {
-        event.preventDefault(); // selection will win over active buttons, because they are the right most item. using _oldSelection since it
+        event.preventDefault();
+
+        var matchedTarget = this._getRealMatchedTarget(event); // don't navigate items when focus is within the preview
+
+
+        if (matchedTarget.closest('coral-columnview-preview')) {
+          return;
+        } // selection will win over active buttons, because they are the right most item. using _oldSelection since it
         // should be equivalent to this.items._getSelectedItems() but faster
+
 
         var selectedItems = this._oldSelection;
         var item;
 
         if (selectedItems.length !== 0) {
-          var selectedItem = selectedItems[selectedItems.length - 1];
+          var selectedItem = matchedTarget;
           item = selectedItem.nextElementSibling; // when
 
           if (!item) {
-            item = selectedItem;
+            item = matchedTarget;
           }
         } // when there is no active item to select, we get the first item of the column. this way users can interact with
         // the column view when there is nothing selected or activated
@@ -49650,18 +49918,36 @@
           } // we use click instead of selected to force the deselection of the other items
 
 
-        item.click();
+        if (item && item !== document.activeElement) {
+          item.focus();
+
+          if (this.selectionMode === selectionMode$1.NONE || selectedItems.length === 0) {
+            item.click();
+          }
+        }
       }
       /** @private */
 
     }, {
       key: "_onKeyRight",
       value: function _onKeyRight(event) {
-        event.preventDefault();
-        var nextColumn = this.activeItem.closest('coral-columnview-column').nextElementSibling;
+        var _this4 = this;
 
-        if (nextColumn) {
-          nextColumn.items._getFirstSelectable().click();
+        event.preventDefault();
+
+        var matchedTarget = this._getRealMatchedTarget(event);
+
+        if (matchedTarget.variant !== ColumnView.Item.variant.DRILLDOWN) {
+          return false;
+        }
+
+        var nextColumn = this.activeItem && this.activeItem.closest('coral-columnview-column').nextElementSibling;
+
+        if (nextColumn && nextColumn.tagName === 'CORAL-COLUMNVIEW-COLUMN') {
+          // we need to make sure the column is initialized
+          commons.ready(nextColumn, function () {
+            return _this4._focusAndActivateFirstSelectableItem(nextColumn);
+          });
         }
       }
       /** @private */
@@ -49678,23 +49964,18 @@
         if (selectedItems.length !== 0) {
           previousColumn = selectedItems[0].closest('coral-columnview-column').previousElementSibling;
         } // otherwise we use the activeItems as a reference
-        else {
-            previousColumn = this.activeItem.closest('coral-columnview-column').previousElementSibling;
+        else if (this.activeItem) {
+            var col = this.activeItem.closest('coral-columnview-column');
+            previousColumn = event.target.closest('coral-columnview-preview') ? col : col.previousElementSibling;
           }
 
-        if (previousColumn) {
-          if (previousColumn.activeItem) {
-            // if there is an active item simply click it again
-            previousColumn.activeItem.click();
-          } else {
-            // we need to find a candicate for activation
-            var firstSelectedItem = previousColumn.items._getFirstSelected();
+        if (previousColumn && previousColumn.tagName === 'CORAL-COLUMNVIEW-COLUMN') {
+          // we need to make sure the column is initialized
+          var activeDescendant = previousColumn.activeItem || previousColumn.items._getFirstSelected() || previousColumn.items._getFirstSelectable();
 
-            if (firstSelectedItem) {
-              firstSelectedItem.click();
-            } else {
-              previousColumn.items._getFirstSelectable().click();
-            }
+          if (activeDescendant && activeDescendant !== document.activeElement) {
+            activeDescendant.focus();
+            activeDescendant.click();
           }
         }
       }
@@ -49703,19 +49984,140 @@
     }, {
       key: "_onKeySpace",
       value: function _onKeySpace(event) {
-        event.preventDefault(); // using _oldSelection since it should be equivalent to this.items._getSelectedItems() but faster
+        event.preventDefault();
 
-        var selectedItems = this._oldSelection; // when there is a selection, we need to activate the first item of the selection
+        var matchedTarget = this._getRealMatchedTarget(event); // don't select item when focus is within the preview
+
+
+        if (matchedTarget.closest('coral-columnview-preview')) {
+          return;
+        } // using _oldSelection since it should be equivalent to this.items._getSelectedItems() but faster
+
+
+        var selectedItems = this._oldSelection;
+        var activeDescendant; // when there is a selection, we need to activate the first item of the selection
 
         if (selectedItems.length !== 0) {
-          selectedItems[0].setAttribute('active', '');
-        } else {
-          var activeItem = this.activeItem; // toggles the selection between active and selected
+          activeDescendant = matchedTarget;
 
-          if (activeItem) {
+          if (activeDescendant.hasAttribute('selected', '')) {
+            if (selectedItems.length === 1) {
+              activeDescendant.setAttribute('active', '');
+            } else {
+              activeDescendant.removeAttribute('selected', '');
+            }
+          } else {
+            activeDescendant.setAttribute('selected', '');
+          }
+        } else {
+          var activeItem = this.activeItem || matchedTarget; // toggles the selection between active and selected
+
+          if (activeItem && this.selectionMode !== selectionMode$1.NONE) {
             // select the item
             activeItem.setAttribute('selected', '');
+            activeDescendant = activeItem;
           }
+        }
+      }
+      /** @private */
+
+    }, {
+      key: "_onKeyCtrlA",
+      value: function _onKeyCtrlA(event) {
+        event.preventDefault();
+
+        var matchedTarget = this._getRealMatchedTarget(event); // don't select item when focus is within the preview
+
+
+        if (matchedTarget.closest('coral-columnview-preview')) {
+          return;
+        }
+
+        if (this.selectionMode === selectionMode$1.MULTIPLE) {
+          var currentColumn = matchedTarget.closest('coral-columnview-column');
+
+          currentColumn.items._selectAll();
+        } else if (this.selectionMode === selectionMode$1.SINGLE) {
+          if (!matchedTarget.hasAttribute('selected')) {
+            matchedTarget.setAttribute('selected', '');
+          }
+        }
+      }
+      /** @private */
+
+    }, {
+      key: "_onKeyCtrlShiftA",
+      value: function _onKeyCtrlShiftA(event) {
+        event.preventDefault();
+
+        var matchedTarget = this._getRealMatchedTarget(event); // don't select item when focus is within the preview
+
+
+        if (matchedTarget.closest('coral-columnview-preview')) {
+          return;
+        }
+
+        if (this.selectionMode !== selectionMode$1.NONE) {
+          var currentColumn = matchedTarget.closest('coral-columnview-column');
+
+          currentColumn.items._deselectAndDeactivateAllExcept(matchedTarget);
+
+          if (!matchedTarget.hasAttribute('active')) {
+            matchedTarget.setAttribute('active', '');
+          }
+        }
+      }
+      /** @private */
+
+    }, {
+      key: "_onItemFocus",
+      value: function _onItemFocus(event) {
+        var matchedTarget = this._getRealMatchedTarget(event);
+
+        if (!matchedTarget.hasAttribute('active') && !this._oldSelection.length) {
+          matchedTarget.setAttribute('active', '');
+        }
+
+        this.items._getSelectableItems().forEach(function (item) {
+          item.tabIndex = item === matchedTarget ? 0 : -1;
+        });
+
+        if (matchedTarget.contains(document.activeElement)) {
+          matchedTarget.focus();
+        }
+      }
+      /** @ignore */
+
+    }, {
+      key: "_updateAriaLevel",
+      value: function _updateAriaLevel(column) {
+        var colIndex = this.columns.getAll().indexOf(column);
+        var level = colIndex + 1;
+
+        if (column.items) {
+          column.items.getAll().filter(function (item, index) {
+            item.setAttribute('aria-posinset', index + 1);
+            item.setAttribute('aria-setsize', column.items.length);
+            return !item.hasAttribute('aria-level');
+          }).forEach(function (item) {
+            item.setAttribute('aria-level', level);
+          });
+        } // root column has role="presentation"
+
+
+        if (colIndex === 0) {
+          column.setAttribute('role', 'presentation'); // and should not be labeled.
+
+          return;
+        } // Make sure the column group has a label so that it can be navigated with VoiceOver
+
+
+        if (!column.hasAttribute('aria-labelledby')) {
+          if (!column.hasAttribute('aria-label')) {
+            column.setAttribute('aria-label', this.getAttribute('aria-label') || '…');
+          }
+        } else if (column.getAttribute('aria-label') === (this.getAttribute('aria-label') || '…')) {
+          column.removeAttribute('aria-label');
         }
       }
       /** @private */
@@ -49766,7 +50168,7 @@
     }, {
       key: "_scrollColumnIntoView",
       value: function _scrollColumnIntoView(column, clearEmptyColumns, triggerEvent) {
-        var _this2 = this;
+        var _this5 = this;
 
         // @todo: improve animation effect when key is kept press
         var left = 0;
@@ -49779,7 +50181,7 @@
 
         var completeCallback = function completeCallback() {
           if (clearEmptyColumns) {
-            _this2._removeEmptyColumnsWithSmoothTransition(triggerEvent);
+            _this5._removeEmptyColumnsWithSmoothTransition(triggerEvent);
           }
         }; // scroll right to the given column
 
@@ -49848,7 +50250,7 @@
     }, {
       key: "_removeEmptyColumnsWithSmoothTransition",
       value: function _removeEmptyColumnsWithSmoothTransition(triggerEvent) {
-        var _this3 = this;
+        var _this6 = this;
 
         // fade width of empty items to 0 before removing the columns (for better usability while navigating)
         var emptyColumns = Array.prototype.filter.call(this.querySelectorAll('coral-columnview-column, coral-columnview-preview'), function (el) {
@@ -49863,7 +50265,7 @@
               column.remove();
 
               if (i === emptyColumns.length - 1 && triggerEvent) {
-                _this3._validateNavigation(_this3.columns.last());
+                _this6._validateNavigation(_this6.columns.last());
               }
             });
             column.style.width = 0;
@@ -49883,12 +50285,25 @@
         for (var i = 0; i < addedNodesCount; i++) {
           item = addedNodes[i];
 
+          if (this.activeItem) {
+            // @a11y add aria-owns attribute to active item to express relationship of added column to the active item
+            this.activeItem.setAttribute('aria-owns', item.id); // @a11y column or preview should be labelled by active item
+
+            item.setAttribute('aria-labelledby', this.activeItem.content.id); // @a11y preview should provide description for active item
+
+            if (item.tagName === 'CORAL-COLUMNVIEW-PREVIEW') {
+              this.activeItem.setAttribute('aria-describedby', item.id);
+            }
+          }
+
           if (item.tagName === 'CORAL-COLUMNVIEW-COLUMN') {
             // we use the property since the item may not be ready
             item.setAttribute('_selectionmode', this.selectionMode);
             this.trigger('coral-collection:add', {
               item: item
             });
+
+            this._updateAriaLevel(item);
           }
         } // @todo: check if special handling is needed when selected column is removed
 
@@ -49914,6 +50329,18 @@
         // initial state of the columnview
         this._oldActiveItem = this.activeItem;
         this._oldSelection = this.selectedItems;
+
+        if (!this._oldActiveItem && !this._oldSelection.length) {
+          var selectableItems = this.items._getSelectableItems();
+
+          if (selectableItems.length) {
+            selectableItems[0].tabIndex = 0;
+          }
+        }
+
+        if (this.columns && this.columns.first()) {
+          this._updateAriaLevel(this.columns.first());
+        }
       }
       /** @private */
 
@@ -49975,7 +50402,9 @@
             oldSelection: oldSelection
           }); // changes the old selection array since we selected something new
 
-          this._oldSelection = newSelection;
+          this._oldSelection = newSelection; // announce the selection state for the focused item
+
+          this._announceActiveElementState();
         }
       }
       /**
@@ -50004,6 +50433,115 @@
           column: column
         });
       }
+      /* @private */
+
+    }, {
+      key: "_announceActiveElementState",
+      value: function _announceActiveElementState() {
+        var _this7 = this;
+
+        // @a11y Add live region element to ensure announcement of selected state
+        var accessibilityState = this._elements.accessibilityState; // @a11y accessibility state string should announce in document lang, rather than item lang.
+
+        accessibilityState.setAttribute('lang', i18n.locale); // @a11y append live region content element
+
+        if (!this.contains(accessibilityState)) {
+          this.insertBefore(accessibilityState, this.firstChild);
+        } // utility method to clean up accessibility state
+
+
+        function resetAccessibilityState() {
+          accessibilityState.hidden = true;
+          accessibilityState.setAttribute('aria-live', 'off');
+          accessibilityState.innerHTML = '';
+        }
+
+        resetAccessibilityState();
+
+        if (this._addTimeout || this._removeTimeout) {
+          clearTimeout(this._addTimeout);
+          clearTimeout(this._removeTimeout);
+        } // we use setTimeout instead of nextFrame to give screen reader 
+        // more time to respond to live region update in order to announce 
+        // complete text content when the state changes.
+
+
+        this._addTimeout = window.setTimeout(function () {
+          var activeElement = document.activeElement.closest('coral-columnview-item') || document.activeElement;
+
+          if (!_this7.contains(activeElement)) {
+            return;
+          }
+
+          var span = document.createElement('span');
+          var contentSpan = document.createElement('span');
+          var lang = !activeElement.hasAttribute('lang') && activeElement.closest('[lang]') ? activeElement.closest('[lang]').getAttribute('lang') : activeElement.getAttribute('lang');
+
+          if (lang && lang !== i18n.locale) {
+            contentSpan.setAttribute('lang', lang);
+          }
+
+          contentSpan.innerHTML = activeElement._elements.content.innerText;
+          span.appendChild(contentSpan);
+          span.appendChild(document.createTextNode(i18n.get(activeElement.selected ? ', checked' : ', unchecked')));
+          accessibilityState.hidden = false;
+          accessibilityState.setAttribute('aria-live', 'assertive');
+          accessibilityState.appendChild(span); // give screen reader 2 secs before clearing the live region, to provide enough time for announcement
+
+          _this7._removeTimeout = window.setTimeout(function () {
+            resetAccessibilityState();
+            _this7._elements.accessibilityState = accessibilityState.parentNode.removeChild(accessibilityState);
+          }, 2000);
+        }, 20);
+      }
+      /**
+       * Helper function to extract the correct matchedTarget from the event.
+       *
+       * Tests can interact with ColumnView directly where the key events are triggered on
+       * the ColumnView itself. In that case the event.matchedTarget point to the ColumnView
+       * instead of the ColumnViewItem, in other word the active or selected element.
+       *
+       * @private
+       **/
+
+    }, {
+      key: "_getRealMatchedTarget",
+      value: function _getRealMatchedTarget(event) {
+        if (event.matchedTarget.nodeName !== 'CORAL-COLUMNVIEW') {
+          return event.matchedTarget;
+        }
+
+        if (event.matchedTarget.contains(document.activeElement) && document.activeElement.nodeName === 'CORAL-COLUMNVIEW-ITEM') {
+          return document.activeElement;
+        }
+
+        if (event.matchedTarget.selectedItem) {
+          return event.matchedTarget.selectedItem;
+        }
+
+        if (event.matchedTarget.activeItem) {
+          return event.matchedTarget.activeItem;
+        }
+      }
+    }, {
+      key: "_focusAndActivateFirstSelectableItem",
+      value: function _focusAndActivateFirstSelectableItem(column) {
+        var item;
+
+        if (column.items) {
+          item = column.items._getFirstSelectable();
+        } else if (column.tagName === 'CORAL-COLUMNVIEW-PREVIEW') {
+          item = this.selectedItems[0] || this.activeItem;
+        }
+
+        if (item && item !== document.activeElement) {
+          item.focus();
+
+          if (this.selectionMode === selectionMode$1.NONE || this._oldSelection.length === 0) {
+            item.click();
+          }
+        }
+      }
       /** @ignore */
 
     }, {
@@ -50012,7 +50550,7 @@
         // selected items go first because there is no active item in a column with selection
         var item = this.selectedItems[0] || this.activeItem;
 
-        if (item) {
+        if (item && item !== document.activeElement) {
           item.focus();
         }
       }
@@ -50035,8 +50573,11 @@
     }, {
       key: "setNextColumn",
       value: function setNextColumn(newColumn, referenceColumn, scrollToColumn) {
+        var _this8 = this;
+
         scrollToColumn = typeof scrollToColumn === 'undefined' || scrollToColumn;
-        var column = referenceColumn || null; // handles the case where the first column needs to be added
+        var column = referenceColumn || null;
+        var columnReplacedContainedFocus = false; // handles the case where the first column needs to be added
 
         if (column === null || !this.contains(column)) {
           this.appendChild(newColumn);
@@ -50044,6 +50585,8 @@
           var nextColumn = column.nextElementSibling;
 
           if (nextColumn) {
+            columnReplacedContainedFocus = nextColumn.contains(document.activeElement);
+
             this._emptyColumnsNextToColumn(column);
 
             var before = nextColumn.nextElementSibling;
@@ -50052,15 +50595,23 @@
           } else {
             this.appendChild(newColumn);
           }
-        }
-
-        if (scrollToColumn) {
-          // event is not triggered because it is handled separately
-          this._scrollColumnIntoView(newColumn, true, false);
-        } // we notify that the columnview navigated and it is ready to be used
+        } // if we want to scroll to it, we need for it to be ready due to measurements
 
 
-        this._validateNavigation(newColumn);
+        commons.ready(newColumn, function () {
+          if (scrollToColumn) {
+            // event is not triggered because it is handled separately
+            _this8._scrollColumnIntoView(newColumn, true, false);
+          } // we notify that the columnview navigated and it is ready to be used
+
+
+          _this8._validateNavigation(newColumn); // if the column the newColumn replaces contained focus, restore focus to an item in the newColumn
+
+
+          if (columnReplacedContainedFocus && !newColumn.contains(document.activeElement)) {
+            _this8._focusAndActivateFirstSelectableItem(newColumn);
+          }
+        });
       }
       /**
        Returns {@link ColumnView} selection options.
@@ -50075,9 +50626,17 @@
       value: function render() {
         _get(_getPrototypeOf(ColumnView.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$O); // @a11y: the columnview needs to be focusable to handle a11y properly
+        this.classList.add(CLASSNAME$O); // @a11y
 
-        this.setAttribute('tabindex', '0'); // Default reflect attributes
+        this.setAttribute('role', 'tree'); // @a11y: the columnview needs to be focusable to handle a11y properly
+
+        this.tabIndex = -1; // @a11y: the columnview should be labelled so that its entire content
+        // is not read as its accessibility name
+
+        if (!this.hasAttribute('aria-label') && !this.hasAttribute('aria-labelledby')) {
+          this.setAttribute('aria-label', i18n.get('Column View'));
+        } // Default reflect attributes
+
 
         if (!this._selectionMode) {
           this._selectionMode = selectionMode$1.NONE;
@@ -50195,7 +50754,7 @@
         return this._selectionMode || selectionMode$1.NONE;
       },
       set: function set(value) {
-        var _this4 = this;
+        var _this9 = this;
 
         value = transform.string(value).toLowerCase();
         this._selectionMode = validate.enumeration(selectionMode$1)(value) && value || selectionMode$1.NONE;
@@ -50204,7 +50763,7 @@
 
 
         this.columns.getAll().forEach(function (item) {
-          item.setAttribute('_selectionmode', _this4._selectionMode);
+          item.setAttribute('_selectionmode', _this9._selectionMode);
         });
         this.classList.remove("".concat(CLASSNAME$O, "--selection"));
 
@@ -50380,39 +50939,40 @@
           event.stopPropagation();
           var item = event.matchedTarget.parentElement; // toggles the selection of the item
 
-          var isSelected = item.hasAttribute('selected');
+          var isSelected = item.hasAttribute('selected'); // Handle multi-selection with shiftKey
 
-          if (!isSelected) {
-            // Handle multi-selection with shiftKey
-            if (event.shiftKey && this._selectionMode === selectionMode$1.MULTIPLE) {
-              var lastSelectedItem = this._lastSelectedItems[this._lastSelectedItems.length - 1];
+          if (!isSelected && event.shiftKey && this._selectionMode === selectionMode$1.MULTIPLE) {
+            var lastSelectedItem = this._lastSelectedItems[this._lastSelectedItems.length - 1];
 
-              if (lastSelectedItem) {
-                var items = this.items.getAll();
-                var lastSelectedItemIndex = items.indexOf(lastSelectedItem);
-                var selectedItemIndex = items.indexOf(item); // true : selection goes up, false : selection goes down
+            if (lastSelectedItem) {
+              var items = this.items.getAll();
+              var lastSelectedItemIndex = items.indexOf(lastSelectedItem);
+              var selectedItemIndex = items.indexOf(item); // true : selection goes up, false : selection goes down
 
-                var direction = selectedItemIndex < lastSelectedItemIndex;
-                var selectionRange = [];
-                var selectionIndex = lastSelectedItemIndex; // Retrieve all items in the range
+              var direction = selectedItemIndex < lastSelectedItemIndex;
+              var selectionRange = [];
+              var selectionIndex = lastSelectedItemIndex; // Retrieve all items in the range
 
-                while (selectedItemIndex !== selectionIndex) {
-                  selectionIndex = direction ? selectionIndex - 1 : selectionIndex + 1;
-                  selectionRange.push(items[selectionIndex]);
-                } // Select all items in the range silently
+              while (selectedItemIndex !== selectionIndex) {
+                selectionIndex = direction ? selectionIndex - 1 : selectionIndex + 1;
+                selectionRange.push(items[selectionIndex]);
+              } // Select all items in the range silently
 
 
-                selectionRange.forEach(function (rangeItem) {
-                  // Except for item which is needed to trigger the selection change event
-                  if (rangeItem !== item) {
-                    rangeItem.set('selected', true, true);
-                  }
-                });
-              }
+              selectionRange.forEach(function (rangeItem) {
+                // Except for item which is needed to trigger the selection change event
+                if (rangeItem !== item) {
+                  rangeItem.set('selected', true, true);
+                }
+              });
             }
           }
 
-          item[isSelected ? 'removeAttribute' : 'setAttribute']('selected', '');
+          item[isSelected ? 'removeAttribute' : 'setAttribute']('selected', ''); // if item was selected, make it active
+
+          if (isSelected && !this._lastSelectedItems.length) {
+            item.setAttribute('active', '');
+          }
         }
       }
       /**
@@ -50735,7 +51295,8 @@
 
         this.classList.add(CLASSNAME$P); // @a11y
 
-        this.setAttribute('role', 'group'); // @todo: initial collection items needs to be triggered
+        this.setAttribute('role', 'group');
+        this.id = this.id || commons.getUID(); // @todo: initial collection items needs to be triggered
 
         var content = this._elements.content; // when the content zone was not created, we need to make sure that everything is added inside it as a content.
         // this stops the content zone from being voracious
@@ -50745,8 +51306,10 @@
           while (this.firstChild) {
             content.appendChild(this.firstChild);
           }
-        } // Call content zone insert
+        } // @a11y
 
+
+        content.setAttribute('role', 'presentation'); // Call content zone insert
 
         this.content = content; // handles the initial selection
 
@@ -50977,8 +51540,16 @@
 
       _this._elements = {
         content: _this.querySelector('coral-columnview-item-content') || document.createElement('coral-columnview-item-content'),
-        thumbnail: _this.querySelector('coral-columnview-item-thumbnail') || document.createElement('coral-columnview-item-thumbnail')
+        thumbnail: _this.querySelector('coral-columnview-item-thumbnail') || document.createElement('coral-columnview-item-thumbnail'),
+        accessibilityState: _this.querySelector('span[handle="accessibilityState"]')
       };
+
+      if (!_this._elements.accessibilityState) {
+        // Templates
+        template$x.call(_this._elements, {
+          commons: commons
+        });
+      }
 
       _get(_getPrototypeOf(ColumnViewItem.prototype), "_observeLabel", _assertThisInitialized(_this)).call(_assertThisInitialized(_this));
 
@@ -51008,7 +51579,9 @@
 
               if (!itemSelector) {
                 itemSelector = new Checkbox();
-                itemSelector.setAttribute('coral-columnview-itemselect', ''); // Add the item selector as first child
+                itemSelector.setAttribute('coral-columnview-itemselect', '');
+                itemSelector._elements.input.tabIndex = -1;
+                itemSelector.setAttribute('labelledby', this.content.id); // Add the item selector as first child
 
                 this.insertBefore(itemSelector, this.firstChild);
               }
@@ -51032,7 +51605,9 @@
 
         this.classList.add(CLASSNAME$Q); // @a11y
 
-        this.setAttribute('role', 'treeitem'); // Default reflected attributes
+        this.setAttribute('role', 'treeitem');
+        this.id = this.id || commons.getUID();
+        this.tabIndex = this.active || this.selected ? 0 : -1; // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$g.DEFAULT;
@@ -51051,7 +51626,23 @@
 
 
         this.content = content;
-        this.thumbnail = thumbnail;
+        this.thumbnail = thumbnail; // @a11y thumbnail img element should have alt attribute
+
+        var thumbnailImg = thumbnail.querySelector('img:not([alt])');
+
+        if (thumbnailImg) {
+          thumbnailImg.setAttribute('alt', '');
+        } // @ally add aria-labelledby so that JAWS/IE announces item correctly
+
+
+        thumbnail.id = thumbnail.id || commons.getUID();
+        content.id = content.id || commons.getUID(); // @a11y Add live region element to ensure announcement of selected state
+
+        var accessibilityState = this._elements.accessibilityState; // @a11y accessibility state string should announce in document lang, rather than item lang.
+
+        accessibilityState.setAttribute('lang', i18n.locale); // @a11y Item should be labelled by thumbnail, content, and accessibility state.
+
+        this.setAttribute('aria-labelledby', thumbnail.id + ' ' + content.id);
       }
     }, {
       key: "content",
@@ -51120,9 +51711,12 @@
             this.insertAdjacentHTML('beforeend', Icon._renderSVG('spectrum-css-icon-ChevronRightMedium', ['_coral-AssetList-itemChildIndicator', '_coral-UIIcon-ChevronRightMedium']));
           }
 
-          this.classList.add('is-branch');
+          this.classList.add('is-branch'); // @a11y Update aria-expanded. Active drilldowns should be expanded.
+
+          this.setAttribute('aria-expanded', this.active);
         } else {
           this.classList.remove('is-branch');
+          this.removeAttribute('aria-expanded');
         }
       }
       /**
@@ -51182,7 +51776,35 @@
         this._reflectAttribute('selected', this._selected);
 
         this.classList.toggle('is-selected', this._selected);
-        this.setAttribute('aria-selected', this._selected || this.active); // Sync checkbox item selector
+        this.setAttribute('aria-selected', this._selected); // @a11y Update aria-expanded. Active drilldowns should be expanded.
+
+        if (this.variant === variant$g.DRILLDOWN) {
+          this.setAttribute('aria-expanded', this.active);
+        }
+
+        var accessibilityState = this._elements.accessibilityState;
+
+        if (this.selected) {
+          // @a11y Panels to right of selected item are removed, so remove aria-owns and aria-describedby attributes.
+          this.removeAttribute('aria-owns');
+          this.removeAttribute('aria-describedby'); // @a11y Update content to ensure that checked state is announced by assistive technology when the item receives focus
+
+          accessibilityState.innerHTML = i18n.get(', checked'); // @a11y append live region content element
+
+          if (!this.contains(accessibilityState)) {
+            this.appendChild(accessibilityState);
+          }
+        } // @a11y If deselecting from checked state,
+        else {
+            // @a11y remove, but retain reference to accessibilityState state
+            this._elements.accessibilityState = accessibilityState.parentNode.removeChild(accessibilityState); // @a11y Update content to remove checked state
+
+            this._elements.accessibilityState.innerHTML = '';
+          } // @a11y Item should be labelled by thumbnail, content, and if appropriate accessibility state.
+
+
+        var ariaLabelledby = this.thumbnail.id + ' ' + this.content.id;
+        this.setAttribute('aria-labelledby', this.selected ? "".concat(ariaLabelledby, " ").concat(accessibilityState.id) : ariaLabelledby); // Sync checkbox item selector
 
         var itemSelector = this.querySelector('coral-checkbox[coral-columnview-itemselect]');
 
@@ -51212,7 +51834,18 @@
         this._reflectAttribute('active', this._active);
 
         this.classList.toggle('is-navigated', this._active);
-        this.setAttribute('aria-selected', this._active || this.selected);
+        this.setAttribute('aria-selected', this._active); // @a11y Update aria-expanded. Active drilldowns should be expanded.
+
+        if (this.variant === variant$g.DRILLDOWN) {
+          this.setAttribute('aria-expanded', this._active);
+        }
+
+        if (!this._active) {
+          // @a11y Inactive items are not expanded, so remove aria-owns and aria-describedby attributes.
+          this.removeAttribute('aria-owns');
+          this.removeAttribute('aria-describedby');
+        }
+
         this.trigger('coral-columnview-item:_activechanged');
       }
     }, {
@@ -51326,6 +51959,8 @@
       value: function render() {
         _get(_getPrototypeOf(ColumnViewPreview.prototype), "render", this).call(this);
 
+        this.setAttribute('role', 'group');
+        this.id = this.id || commons.getUID();
         this.classList.add(CLASSNAME$R);
         var content = this._elements.content; // when the content zone was not created, we need to make sure that everything is added inside it as a content.
         // this stops the content zone from being voracious
@@ -51339,6 +51974,53 @@
 
 
         this.content = content;
+
+        this._makeAccessible();
+      }
+      /** @ignore */
+
+    }, {
+      key: "_makeAccessible",
+      value: function _makeAccessible() {
+        // @a11y For item values with a label, identify the value as a focusable, readOnly textbox labeled by the label. 
+        var elements = this.content.querySelectorAll('coral-columnview-preview-label + coral-columnview-preview-value');
+        var length = elements.length;
+        var i;
+        var element;
+        var elementLabel;
+
+        for (i = 0; i < length; i++) {
+          element = elements[i];
+          elementLabel = element.previousElementSibling;
+          elementLabel.id = elementLabel.id || commons.getUID();
+          element.setAttribute('aria-labelledby', elementLabel.id);
+          element.setAttribute('role', 'textbox');
+          element.setAttribute('tabindex', '0');
+          element.setAttribute('aria-readonly', 'true'); // force ChromeVox to read value of textbox
+
+          if (window.cvox) {
+            element.setAttribute('aria-valuetext', element.textContent);
+          }
+        } // @a11y Expose separator as a horizontally-oriented separator.
+
+
+        elements = this.content.querySelectorAll('coral-columnview-preview-separator');
+        length = elements.length;
+
+        for (i = 0; i < length; i++) {
+          element = elements[i];
+          element.setAttribute('role', 'separator');
+          element.setAttribute('aria-orientation', 'horizontal');
+        } // @a11y If the preview asset image does not include an alt attribute, set alt="", so that screen readers do not announce the image url. 
+
+
+        elements = this.content.querySelectorAll('coral-columnview-preview-asset > img:not([alt])');
+        length = elements.length;
+
+        for (i = 0; i < length; i++) {
+          element = elements[i];
+          element.setAttribute('alt', '');
+        }
       }
     }, {
       key: "content",
@@ -51478,6 +52160,114 @@
   });
 
   /**
+   * Copyright 2020 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+  var translations$e = {
+    "en-US": {
+      "Column View": "Column View",
+      ", checked": ", checked",
+      ", unchecked": ", unchecked"
+    },
+    "de-DE": {
+      "Column View": "Column View",
+      ", checked": ", markiert",
+      ", unchecked": ", nicht markiert"
+    },
+    "fr-FR": {
+      "Column View": "Column View",
+      ", checked": ", cochée",
+      ", unchecked": ", pas cochée"
+    },
+    "it-IT": {
+      "Column View": "Column View",
+      ", checked": ", selezionata",
+      ", unchecked": ", non selezionata"
+    },
+    "ja-JP": {
+      "Column View": "Column View",
+      ", checked": "、チェック",
+      ", unchecked": "、未チェック"
+    },
+    "es-ES": {
+      "Column View": "Column View",
+      ", checked": ", marcada",
+      ", unchecked": ", desmarcada"
+    },
+    "ko-KR": {
+      "Column View": "Column View",
+      ", checked": ", 선택됨",
+      ", unchecked": ", 선택되지 않은"
+    },
+    "zh-CN": {
+      "Column View": "Column View",
+      ", checked": "，选中",
+      ", unchecked": "，未选中"
+    },
+    "zh-TW": {
+      "Column View": "Column View",
+      ", checked": "，選中",
+      ", unchecked": "，未選中"
+    },
+    "pt-BR": {
+      "Column View": "Column View",
+      ", checked": ", marcada",
+      ", unchecked": ", desmarcada"
+    },
+    "nl-NL": {
+      "Column View": "Column View",
+      ", checked": ", geselecteerd",
+      ", unchecked": ", neit geselecteerd"
+    },
+    "da-DK": {
+      ", checked": ", valgte",
+      ", unchecked": ", ikke valgt"
+    },
+    "fi-FI": {
+      "Column View": "Column View",
+      ", checked": ", valittu",
+      ", unchecked": ", valittuna"
+    },
+    "nb-NO": {
+      "Column View": "Column View",
+      ", checked": ", valgt",
+      ", unchecked": ", ikke valgt"
+    },
+    "sv-SE": {
+      "Column View": "Column View",
+      ", checked": ", markerad",
+      ", unchecked": ", avmarkerad"
+    },
+    "cs-CZ": {
+      "Column View": "Column View",
+      ", checked": ", vybráno",
+      ", unchecked": ", není vybráno"
+    },
+    "pl-PL": {
+      "Column View": "Column View",
+      ", checked": ", zaznaczone",
+      ", unchecked": ", nie zaznaczone"
+    },
+    "ru-RU": {
+      "Column View": "Column View",
+      ", checked": ", выбранный",
+      ", unchecked": ", неотобранный"
+    },
+    "tr-TR": {
+      "Column View": "Column View",
+      ", checked": ", seçilmiş",
+      ", unchecked": ", seçilmemiş"
+    }
+  };
+
+  /**
    * Copyright 2019 Adobe. All rights reserved.
    * This file is licensed to you under the Apache License, Version 2.0 (the "License");
    * you may not use this file except in compliance with the License. You may obtain a copy
@@ -51488,6 +52278,10 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
+
+  commons.extend(strings, {
+    'coral-component-columnview': translations$e
+  }); // Expose component on the Coral namespace
 
   commons._define('coral-columnview-preview', ColumnViewPreview);
 
@@ -51725,9 +52519,7 @@
     return CycleButtonItem;
   }(BaseComponent(HTMLElement));
 
-  var template$x = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$y = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -51860,7 +52652,7 @@
       _this._id = _this.id || commons.getUID(); // Templates
 
       _this._elements = {};
-      template$x.call(_this._elements, {
+      template$y.call(_this._elements, {
         Icon: Icon,
         commons: commons,
         id: _this._id
@@ -52922,7 +53714,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$e = {
+  var translations$f = {
     "en-US": {
       "Time": "Time",
       "Calendar": "Calendar"
@@ -53001,9 +53793,7 @@
     }
   };
 
-  var template$y = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$z = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["overlay"] = document.createElement("coral-popover");
     el0.setAttribute("tracking", "off");
@@ -53039,7 +53829,7 @@
     el6.className += " _coral-InputGroup-button _coral-FieldButton";
     el6.setAttribute("type", "button");
     el6.setAttribute("handle", "toggle");
-    el6.setAttribute("aria-haspopup", "true");
+    el6.setAttribute("aria-haspopup", "dialog");
     el6.setAttribute("aria-label", data_0["i18n"]["get"]('Calendar'));
     el6.setAttribute("title", data_0["i18n"]["get"]('Calendar'));
     var el7 = document.createTextNode("\n  ");
@@ -53062,9 +53852,7 @@
     return frag;
   };
 
-  var template$z = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$A = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -53111,9 +53899,9 @@
 
   /**
    Enum for {@link Datepicker} variant values.
-   
+
    @typedef {Object} DatepickerVariantEnum
-   
+
    @property {String} DEFAULT
    A default, gray Datepicker.
    @property {String} QUIET
@@ -53148,9 +53936,9 @@
   }
   /**
    Enumeration for {@link Datepicker} variants.
-   
+
    @typedef {Object} DatepickerTypeEnum
-   
+
    @property {String} DATE
    The selection overlay contains only a calendar.
    @property {String} DATETIME
@@ -53209,12 +53997,12 @@
       _this = _possibleConstructorReturn(this, _getPrototypeOf(Datepicker).call(this)); // Prepare templates
 
       _this._elements = {};
-      template$y.call(_this._elements, {
+      template$z.call(_this._elements, {
         commons: commons,
         i18n: i18n
       }); // Creates and stores the contents of the popover separately
 
-      _this._calendarFragment = template$z.call(_this._elements, {
+      _this._calendarFragment = template$A.call(_this._elements, {
         commons: commons,
         i18n: i18n
       }); // Pre-define labellable element
@@ -53237,8 +54025,7 @@
     }
     /**
      Returns the inner overlay to allow customization.
-     
-     @type {Popover}
+      @type {Popover}
      @readonly
      */
 
@@ -53248,14 +54035,15 @@
 
       /** @ignore */
       value: function _onPopoverBeforeOpen() {
+        this._elements.overlay.returnFocusTo(this._elements.input);
+
         this._elements.calendar._validateCalendar();
 
         this._renderCalendar();
       }
       /**
        Matches the accessibility to the state of the popover.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -53269,11 +54057,15 @@
             this._elements.calendar.focus();
           }
 
-          this.setAttribute('aria-expanded', true);
+          this._elements.input.setAttribute('aria-expanded', 'true');
+
+          this._elements.toggle.setAttribute('aria-expanded', 'true');
 
           this._trackEvent('open', 'coral-datepicker', event);
         } else {
-          this.setAttribute('aria-expanded', false);
+          this._elements.input.setAttribute('aria-expanded', 'false');
+
+          this._elements.toggle.setAttribute('aria-expanded', 'false');
 
           this._trackEvent('close', 'coral-datepicker', event);
         }
@@ -53381,13 +54173,11 @@
       /**
        Helper class that converts the internal moment value into a String using the provided date format. If the value is
        invalid, empty string will be returned.
-       
-       @param {?Moment} value
+        @param {?Moment} value
        The value representing the date. It has to be a moment object or <code>null</code>
        @param {String} format
        The Date format to be used.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -53408,8 +54198,7 @@
       }
       /**
        Returns {@link Datepicker} variants.
-       
-       @return {DatepickerVariantEnum}
+        @return {DatepickerVariantEnum}
        */
 
     }, {
@@ -53436,7 +54225,25 @@
 
         this.classList.add(CLASSNAME$T); // a11y
 
-        this.setAttribute('role', 'combobox'); // a11y we only have AUTO mode.
+        this.setAttribute('role', 'group'); // Input attributes per ARIA Autocomplete
+
+        this._elements.input.setAttribute('role', 'combobox');
+
+        this._elements.input.setAttribute('aria-autocomplete', 'none');
+
+        this._elements.input.setAttribute('aria-haspopup', 'dialog');
+
+        this._elements.input.setAttribute('aria-expanded', 'false');
+
+        this._elements.input.setAttribute('aria-controls', this._elements.overlay.id); // Trigger button attributes per ARIA Autocomplete
+
+
+        this._elements.toggle.setAttribute('aria-haspopup', 'dialog');
+
+        this._elements.toggle.setAttribute('aria-expanded', 'false');
+
+        this._elements.toggle.setAttribute('aria-controls', this._elements.overlay.id); // a11y we only have AUTO mode.
+
 
         this._useNativeInput = IS_MOBILE_DEVICE$1; // Default reflected attributes
 
@@ -53485,8 +54292,7 @@
       }
       /**
        The type of datepicker to show to the user. See {@link DatepickerTypeEnum}.
-       
-       @type {DatepickerTypeEnum}
+        @type {DatepickerTypeEnum}
        @default DatepickerTypeEnum.DATE
        @htmlattribute type
        @htmlattributereflected
@@ -53542,8 +54348,7 @@
        be used. The default value depends on the <code>type</code>, which can be one from <code>YYYY-MM-DD</code>,
        <code>YYYY-MM-DD[T]HH:mmZ</code> or <code>HH:mm</code>.  Include momentjs to support additional format string options
        see http://momentjs.com/docs/#/displaying/.
-       
-       @type {String}
+        @type {String}
        @default "YYYY-MM-DD"
        @htmlattribute displayformat
        @htmlattributereflected
@@ -53581,8 +54386,7 @@
        will be used. The default value depends on the <code>type</code>, which can be one from <code>YYYY-MM-DD</code>,
        <code>YYYY-MM-DD[T]HH:mmZ</code> or <code>HH:mm</code>. Include momentjs to support additional format string options
        see http://momentjs.com/docs/#/displaying/.
-       
-       @type {String}
+        @type {String}
        @default "YYYY-MM-DD"
        @htmlattribute valueformat
        @htmlattributereflected
@@ -53623,8 +54427,7 @@
       }
       /**
        The value of the element, interpreted as a date, or <code>null</code> if conversion is not possible.
-       
-       @type {Date}
+        @type {Date}
        @default null
        */
 
@@ -53646,10 +54449,8 @@
       /**
        The minimum date that the Datepicker will accept as valid. It must not be greated that its maximum. It accepts
        both date and string values. When a string is provided, it should match the {@link Coral.Datepicker#valueFormat}.
-       
-       See {@link Coral.Calendar#min}
-       
-       @type {String|Date}
+        See {@link Coral.Calendar#min}
+        @type {String|Date}
        @default null
        @htmlattribute min
        */
@@ -53665,10 +54466,8 @@
       /**
        The maximum date that the Datepicker will accept as valid. It must not be less than its minimum. It accepts both
        date and string values. When a string is provided, it should match the {@link Coral.Datepicker#valueFormat}.
-       
-       See {@link Coral.Calendar#max}
-       
-       @type {String|Date}
+        See {@link Coral.Calendar#max}
+        @type {String|Date}
        @default null
        @htmlattribute max
        */
@@ -53685,10 +54484,8 @@
        The format used to display the current month and year.
        'MMMM YYYY' is supported by default. Include momentjs to support additional format string options see
        http://momentjs.com/docs/#/displaying/.
-       
-       See {@link Coral.Calendar#startDay}
-       
-       @type {String}
+        See {@link Coral.Calendar#startDay}
+        @type {String}
        @default "MMMM YYYY"
        @htmlattribute headerformat
        */
@@ -53703,10 +54500,8 @@
       }
       /**
        Defines the start day for the week, 0 = Sunday, 1 = Monday etc., as depicted on the calendar days grid.
-       
-       See {@link Coral.Calendar#startDay}
-       
-       @type {Number}
+        See {@link Coral.Calendar#startDay}
+        @type {Number}
        @default 0
        @htmlattribute startday
        */
@@ -53722,10 +54517,8 @@
       /**
        The current value. When set to "today", the value is coerced into the client's local date expressed as string
        formatted in accordance to the set <code>valueFormat</code>.
-       
-       See {@link Coral.Calendar#value}
-       
-       @type {String}
+        See {@link Coral.Calendar#value}
+        @type {String}
        @default ""
        @htmlattribute value
        */
@@ -53746,8 +54539,7 @@
       }
       /**
        Short hint that describes the expected value of the Datepicker. It is displayed when the Datepicker is empty.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute placeholder
        @htmlattributereflected
@@ -53765,8 +54557,7 @@
       }
       /**
        The datepicker's variant. See {@link DatepickerVariantEnum}.
-       
-       @type {DatepickerVariantEnum}
+        @type {DatepickerVariantEnum}
        @default DatepickerVariantEnum.DEFAULT
        @htmlattribute variant
        @htmlattributereflected
@@ -53834,7 +54625,7 @@
         this.classList.toggle('is-disabled', this._disabled);
         this._elements.input.disabled = this._disabled;
         this._elements.hiddenInput.disabled = this._disabled;
-        this._elements.toggle.disabled = this._disabled || this.readOnly;
+        this._elements.toggle.disabled = this._disabled;
       }
       /**
        Inherited from {@link BaseFormField#invalid}.
@@ -53876,7 +54667,6 @@
 
         this._elements.toggle.classList.toggle('is-invalid', this._required);
 
-        this.setAttribute('aria-required', this._required);
         this._elements.input.required = this._required;
       }
       /**
@@ -53897,8 +54687,28 @@
 
         this._reflectAttribute('readonly', this._readOnly);
 
+        this._elements.hiddenInput.readOnly = this.readOnly;
         this._elements.input.readOnly = this._readOnly;
-        this._elements.toggle.disabled = this._readOnly || this.disabled;
+        this._elements.toggle.disabled = this._readOnly;
+      }
+      /**
+       Inherited from {@link BaseFormField#labelled}.
+       */
+
+    }, {
+      key: "labelled",
+      get: function get() {
+        return _get(_getPrototypeOf(Datepicker.prototype), "labelled", this);
+      },
+      set: function set(value) {
+        _set(_getPrototypeOf(Datepicker.prototype), "labelled", value, this, true); // in case the user focuses the buttons, he will still get a notion of the usage of the component
+
+
+        this[this.labelled ? 'setAttribute' : 'removeAttribute']('aria-label', this.labelled);
+
+        this._elements.overlay[this.labelled ? 'setAttribute' : 'removeAttribute']('aria-label', this.labelled);
+
+        this._elements.calendar[this.labelled ? 'setAttribute' : 'removeAttribute']('labelled', this.labelled);
       }
       /**
        Inherited from {@link BaseFormField#labelledBy}.
@@ -53914,13 +54724,16 @@
 
 
         this[this.labelledBy ? 'setAttribute' : 'removeAttribute']('aria-labelledby', this.labelledBy);
+
+        this._elements.overlay[this.labelledBy ? 'setAttribute' : 'removeAttribute']('aria-labelledby', this.labelledBy);
+
+        this._elements.calendar[this.labelledBy ? 'setAttribute' : 'removeAttribute']('aria-labelledby', this.labelledBy);
       }
       /**
        When <code>true</code> the component will default to the native input for the date selection. When
        {@link Coral.Datepicker.type.DATETIME} has been set, it will still use the Coral way because mobile browsers
        cannot handle a datetime input.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -53939,9 +54752,16 @@
 
 
           this._elements.overlay.hidden = true;
-          this.removeAttribute('aria-haspopup');
-          this.removeAttribute('aria-expanded');
-          this.removeAttribute('aria-owns');
+
+          this._elements.input.removeAttribute('role');
+
+          this._elements.input.removeAttribute('aria-autocomplete');
+
+          this._elements.input.removeAttribute('aria-haspopup');
+
+          this._elements.input.removeAttribute('aria-expanded');
+
+          this._elements.input.removeAttribute('aria-controls');
         } else {
           // Switch to Calendar picker
           this._elements.toggle.hidden = false;
@@ -53949,10 +54769,24 @@
           this._elements.input.setAttribute('type', 'text'); // Show pop-over and add related attributes:
 
 
-          this._elements.overlay.hidden = false;
-          this.setAttribute('aria-haspopup', 'dialog');
-          this.setAttribute('aria-expanded', this._elements.overlay.open);
-          this.setAttribute('aria-owns', this._elements.overlay.id);
+          this._elements.overlay.hidden = false; // Input attributes per ARIA Autocomplete
+
+          this._elements.input.setAttribute('role', 'combobox');
+
+          this._elements.input.setAttribute('aria-autocomplete', 'none');
+
+          this._elements.input.setAttribute('aria-haspopup', 'dialog');
+
+          this._elements.input.setAttribute('aria-expanded', this._elements.overlay.open);
+
+          this._elements.input.setAttribute('aria-controls', this._elements.overlay.id); // Trigger button attributes per ARIA Autocomplete
+
+
+          this._elements.toggle.setAttribute('aria-haspopup', 'dialog');
+
+          this._elements.toggle.setAttribute('aria-expanded', this._elements.overlay.open);
+
+          this._elements.toggle.setAttribute('aria-controls', this._elements.overlay.id);
         }
       }
     }], [{
@@ -53962,8 +54796,7 @@
       }
       /**
        Returns {@link Datepicker} types.
-       
-       @return {DatepickerTypeEnum}
+        @return {DatepickerTypeEnum}
        */
 
     }, {
@@ -54006,7 +54839,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-datepicker': translations$e
+    'coral-component-datepicker': translations$f
   }); // Expose component on the Coral namespace
 
   commons._define('coral-datepicker', Datepicker);
@@ -54022,7 +54855,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$f = {
+  var translations$g = {
     "en-US": {
       "More": "More"
     },
@@ -54082,9 +54915,7 @@
     }
   };
 
-  var template$A = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$B = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -54181,7 +55012,7 @@
       _this._elements = {
         content: _this.querySelector('coral-drawer-content') || document.createElement('coral-drawer-content')
       };
-      template$A.call(_this._elements, {
+      template$B.call(_this._elements, {
         commons: commons,
         i18n: i18n
       }); // Events
@@ -54449,7 +55280,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-drawer': translations$f
+    'coral-component-drawer': translations$g
   }); // Expose component on the Coral namespace
 
   commons._define('coral-drawer', Drawer);
@@ -55592,9 +56423,7 @@
     return FileUploadItem;
   }();
 
-  var template$B = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$C = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["input"] = document.createElement("input");
     el0.id = data_0["commons"]["getUID"]();
@@ -55684,7 +56513,7 @@
 
 
       _this._elements = {};
-      template$B.call(_this._elements, {
+      template$C.call(_this._elements, {
         commons: commons
       }); // Pre-define labellable element
 
@@ -56795,9 +57624,7 @@
 
   FileUpload.Item = FileUploadItem;
 
-  var template$C = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$D = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["quickactions"] = document.createElement("div");
     el0.setAttribute("handle", "quickactions");
@@ -56842,7 +57669,7 @@
       _this._dragAction = null; // Template
 
       _this._elements = {};
-      template$C.call(_this._elements);
+      template$D.call(_this._elements);
       return _this;
     } // @compat
 
@@ -57061,6 +57888,21 @@
     FIXED_SPREAD: 'fixed-spread',
     VARIABLE: 'variable',
     DASHBOARD: 'dashboard'
+  };
+  /**
+   Enumeration values to enable/disable aria grid support for {@link Masonry}.
+
+   @typedef {Object} MasonryAriaGridEnum
+
+   @property {String} ON
+   Turn on auto aria grid roles.
+   @property {String} OFF
+   OFF is default. Turn off auto aria grid roles.
+   */
+
+  var ariaGrid = {
+    ON: 'on',
+    OFF: 'off'
   }; // IE does not set the complete property to true if an image cannot be loaded. This code must be outside of the
   // masonry to make sure that the listener catches images which fail loading before the masonry is initalized.
   // @polyfill ie11
@@ -57131,7 +57973,12 @@
       _this._forceDebounce = false;
       _this._debounceId = null;
       _this._newItems = [];
-      _this._tabbableItem = null;
+      _this._tabbableItem = null; //a11y
+
+      _this._defaultAriaRole = "group";
+      _this._ariaGrid = ariaGrid.OFF;
+      _this._preservedAriaRole = _this._defaultAriaRole;
+      _this._preservedParentAriaRole = null;
 
       _this._delegateEvents({
         'global:resize': '_onWindowResize',
@@ -57194,16 +58041,105 @@
        */
 
     }, {
+      key: "_updateAriaRoleForParent",
+
+      /** @private */
+      value: function _updateAriaRoleForParent(activateAriaGrid) {
+        if (!this.parentElement) {
+          return;
+        }
+
+        if (activateAriaGrid === ariaGrid.ON) {
+          // Save/set role for the parent as grid
+          this._preservedParentAriaRole = this.parentElement.getAttribute('role');
+          this.parentElement.setAttribute('role', 'grid'); // parent grid should be labelled the same as coral-masonry
+
+          if (this.ariaLabel && this.parentElement.getAttribute('aria-label') !== this.ariaLabel) {
+            this._preservedParentAriaLabel = this.parentElement.getAttribute('aria-label');
+            this.parentElement.setAttribute('aria-label', this.ariaLabel);
+          }
+
+          if (this.ariaLabelledby && this.parentElement.getAttribute('aria-labelledby') !== this.ariaLabelledby) {
+            this._preservedParentAriaLabelledby = this.parentElement.getAttribute('aria-labelledby');
+            this.parentElement.setAttribute('aria-labelledby', this.ariaLabelledby);
+          }
+        } else {
+          // Restore/remove role of the parent element
+          if (this._preservedParentAriaRole) {
+            this.parentElement.setAttribute('role', this._preservedParentAriaRole);
+          } else {
+            this.parentElement.removeAttribute('role');
+          } // restore the aria-label or aria-labelledby values as well
+
+
+          if (this._preservedParentAriaLabel) {
+            this.parentElement.setAttribute('aria-label', this._preservedParentAriaLabel);
+            this._preservedParentAriaLabel = undefined;
+          } else {
+            this.parentElement.removeAttribute('aria-label');
+          }
+
+          if (this._preservedParentAriaLabelledby !== undefined) {
+            this.parentElement.setAttribute('aria-labelledby', this._preservedParentAriaLabelledby);
+          } else {
+            this.parentElement.removeAttribute('aria-labelledby');
+          } // Remove aria-colcount
+
+
+          this.parentElement.removeAttribute('aria-colcount');
+        }
+      }
+      /** @private */
+
+    }, {
+      key: "_updateAriaRoleForItems",
+      value: function _updateAriaRoleForItems(activateAriaGrid) {
+        var _this2 = this;
+
+        var columnIndex = 1;
+        this.items.getAll().forEach(function (item) {
+          _this2._updateAriaRoleForItem(item, columnIndex++, activateAriaGrid);
+        });
+      }
+      /** @private */
+
+    }, {
+      key: "_updateAriaRoleForItem",
+      value: function _updateAriaRoleForItem(item, columnIndex, activateAriaGrid) {
+        if (activateAriaGrid === ariaGrid.ON) {
+          item.setAttribute('role', 'gridcell');
+          item.setAttribute('aria-colindex', columnIndex);
+        } else {
+          item.removeAttribute('role');
+          item.removeAttribute('aria-colindex');
+        }
+      }
+      /** @private */
+
+    }, {
+      key: "_updateAriaColumnCountForParent",
+      value: function _updateAriaColumnCountForParent(activateAriaGrid) {
+        if (!this.parentElement) {
+          return;
+        }
+
+        if (activateAriaGrid === ariaGrid.ON) {
+          this.parentElement.setAttribute('aria-colcount', this.items.length);
+        } else {
+          this.parentElement.removeAttribute('aria-colcount');
+        }
+      }
+    }, {
       key: "_validateSelection",
       value: function _validateSelection(item) {
-        var _this2 = this;
+        var _this3 = this;
 
         var selectedItems = this.selectedItems;
 
         if (this.selectionMode === selectionMode$2.NONE) {
           selectedItems.forEach(function (selectedItem) {
             // Don't trigger change events
-            _this2._preventTriggeringEvents = true;
+            _this3._preventTriggeringEvents = true;
             selectedItem.removeAttribute('selected');
           });
         } else if (this.selectionMode === selectionMode$2.SINGLE) {
@@ -57214,7 +58150,7 @@
             selectedItems.forEach(function (selectedItem) {
               if (selectedItem !== item) {
                 // Don't trigger change events
-                _this2._preventTriggeringEvents = true;
+                _this3._preventTriggeringEvents = true;
                 selectedItem.removeAttribute('selected');
               }
             }); // We can trigger change events again
@@ -57294,16 +58230,16 @@
     }, {
       key: "_scheduleLayout",
       value: function _scheduleLayout() {
-        var _this3 = this;
+        var _this4 = this;
 
         if (!this._forceDebounce && !this._layoutScheduled) {
           window.requestAnimationFrame(function () {
             // Skip layout if a layout was forced in between
-            if (_this3._layoutScheduled) {
-              _this3._doLayout(); // Cancel potentially scheduled layout if the current layout was enforced by calling doLayout directly
+            if (_this4._layoutScheduled) {
+              _this4._doLayout(); // Cancel potentially scheduled layout if the current layout was enforced by calling doLayout directly
 
 
-              _this3._layoutScheduled = false;
+              _this4._layoutScheduled = false;
             }
           });
           this._layoutScheduled = true;
@@ -57314,7 +58250,7 @@
     }, {
       key: "_scheduleDebouncedLayout",
       value: function _scheduleDebouncedLayout(force) {
-        var _this4 = this;
+        var _this5 = this;
 
         // Do not force debounce if the masonry isn't layouted yet. Safari sometimes triggers resize events while loading.
         if (force && this._layouted) {
@@ -57323,9 +58259,9 @@
 
         window.clearTimeout(this._debounceId);
         this._debounceId = window.setTimeout(function () {
-          _this4._forceDebounce = false;
+          _this5._forceDebounce = false;
 
-          _this4._scheduleLayout('window resize');
+          _this5._scheduleLayout('window resize');
         }, 500);
       }
       /**
@@ -57420,7 +58356,12 @@
             this._focusedItem = null;
             this._focusedItemNext = null;
           }
-        } // Prevent endless observation loop (skip mutations which have been caused by the layout)
+        } // Update items, so that column indexes are correctly set
+
+
+        this._updateAriaRoleForItems(this.ariaGrid);
+
+        this._updateAriaColumnCountForParent(this.ariaGrid); // Prevent endless observation loop (skip mutations which have been caused by the layout)
 
 
         this._observer.takeRecords();
@@ -57463,7 +58404,7 @@
     }, {
       key: "_prepareItem",
       value: function _prepareItem(item) {
-        var _this5 = this;
+        var _this6 = this;
 
         // We don't care about transitions if the masonry is not in the body
         if (!document.body.contains(this)) {
@@ -57478,7 +58419,7 @@
           item.classList.add('is-beforeInserting'); // Do it in the next frame so that the inserting animation is visible
 
           window.requestAnimationFrame(function () {
-            _this5._onItemAdded(item);
+            _this6._onItemAdded(item);
           });
         }
       }
@@ -57665,7 +58606,9 @@
           item.classList.add('is-dropping');
           commons.transitionEnd(item, function () {
             item.classList.remove('is-dropping');
-          });
+          }); // Update items, so that column indexes are correctly set
+
+          this._updateAriaRoleForItems(this.ariaGrid);
         }
 
         item._oldBefore = null;
@@ -57685,13 +58628,17 @@
 
       /** @ignore */
       value: function render() {
-        var _this6 = this;
+        var _this7 = this;
 
         _get(_getPrototypeOf(Masonry.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$X); // a11y
+        this.classList.add(CLASSNAME$X); // Keep the default behavior when ariaGrid is not enabled
 
-        this.setAttribute('role', 'group'); // Default reflected attributes
+        if (this._ariaGrid === ariaGrid.OFF) {
+          // a11y
+          this.setAttribute('role', this._defaultAriaRole);
+        } // Default reflected attributes
+
 
         if (!this._layout) {
           this.layout = layouts.FIXED_CENTERED;
@@ -57712,14 +58659,14 @@
         commons.addResizeListener(this, this._onResize.bind(this)); // Prepare items
 
         this.items.getAll().forEach(function (item) {
-          _this6._prepareItem(item);
+          _this7._prepareItem(item);
         }); // This indicates that the initial items are being attached
 
         this._attaching = true;
         window.requestAnimationFrame(function () {
-          _this6._attaching = false; // Update loaded after all items have been attached
+          _this7._attaching = false; // Update loaded after all items have been attached
 
-          _this6._updateLoaded();
+          _this7._updateLoaded();
         });
       }
       /**
@@ -57899,6 +58846,126 @@
           items[i][this._orderable ? 'setAttribute' : 'removeAttribute']('_orderable', '');
         }
       }
+      /**
+       Attribute to enable/disable auto aria grid role assignment. Value must be one of {@link MasonryAriaGridEnum}.
+       Setting this property to {@link MasonryAriaGridEnum.ON} will do following to enable support for accessibility:
+        - Preserve current role attribute of the parent element of {@link Masonry}, and set new role as grid.
+        - Preserve current role attribute of the {@link Masonry}, and set new role as row.
+        - Set role attribute of all child {@link MasonryItem} to gridcell.
+        Setting the property to {@link MasonryAriaGridEnum.OFF} will do following:
+        - Restore preserved (if any) role attribute of the parent element of {@link Masonry}.
+        - Restore preserved role attribute of the {@link Masonry}.
+        - Remove role attribute of all child {@link MasonryItem}.
+        Setting the attribute to other than allowed values will fallback to {@link MasonryAriaGridEnum.OFF}.
+        @type {String}
+       @default {@link MasonryAriaGridEnum.OFF}
+       @htmlattribute ariagrid
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "ariaGrid",
+      get: function get() {
+        return this._ariaGrid || ariaGrid.OFF;
+      },
+      set: function set(value) {
+        value = transform.string(value); // Ensure correct values
+
+        if (value !== ariaGrid.ON && value !== ariaGrid.OFF) {
+          console.warn('Coral.Masonry: Unsupported ariaGrid value: ', value, '. Will fallback to ', ariaGrid.OFF);
+          value = ariaGrid.OFF;
+        } //update current state
+
+
+        this._ariaGrid = value;
+
+        this._reflectAttribute('ariagrid', this._ariaGrid); // Update role for this masonry
+
+
+        if (this._ariaGrid === ariaGrid.ON) {
+          // Preserve existing role and set new role
+          this._preservedAriaRole = this.getAttribute('role');
+          this.setAttribute('role', 'row');
+        } else if (this._ariaGrid == ariaGrid.OFF) {
+          // Restore or remove role
+          if (this._preservedAriaRole) {
+            this.setAttribute('role', this._preservedAriaRole);
+          } else {
+            this.removeAttribute('role');
+          }
+        } // Update parent and child item roles based on current state
+
+
+        this._updateAriaRoleForParent(this._ariaGrid);
+
+        this._updateAriaColumnCountForParent(this._ariaGrid);
+
+        this._updateAriaRoleForItems(this._ariaGrid);
+      }
+      /**
+       Specifies aria-label value
+       
+       @type {?String}
+       @htmlattribute aria-label
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "ariaLabel",
+      get: function get() {
+        return this.getAttribute('aria-label');
+      },
+      set: function set(value) {
+        value = transform.string(value);
+
+        if (value === '') {
+          this.removeAttribute('aria-label');
+        } else {
+          this._reflectAttribute('aria-label', value);
+        }
+
+        if (!this.parentElement || this._ariaGrid === ariaGrid.OFF) {
+          return;
+        }
+
+        if (this.ariaLabel) {
+          this.parentElement.setAttribute('aria-label', this.ariaLabel);
+        } else {
+          this.parentElement.removeAttribute('aria-label');
+        }
+      }
+      /**
+       Specifies aria-labelledby value
+       
+       @type {?String}
+       @htmlattribute aria-labelledby
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "ariaLabelledby",
+      get: function get() {
+        return this.getAttribute('aria-labelledby');
+      },
+      set: function set(value) {
+        value = transform.string(value);
+
+        if (value === '') {
+          this.removeAttribute('aria-labelledby');
+        } else {
+          this._reflectAttribute('aria-labelledby', value);
+        }
+
+        if (!this.parentElement || this._ariaGrid === ariaGrid.OFF) {
+          return;
+        }
+
+        if (this.ariaLabelledby) {
+          this.parentElement.setAttribute('aria-labelledby', this.ariaLabelledby);
+        } else {
+          this.parentElement.removeAttribute('aria-labelledby');
+        }
+      }
     }], [{
       key: "registerLayout",
 
@@ -57948,7 +59015,10 @@
       key: "_attributePropertyMap",
       get: function get() {
         return commons.extend(_get(_getPrototypeOf(Masonry), "_attributePropertyMap", this), {
-          selectionmode: 'selectionMode'
+          selectionmode: 'selectionMode',
+          ariagrid: 'ariaGrid',
+          'aria-label': 'ariaLabel',
+          'aria-labelledby': 'ariaLabelledby'
         });
       }
       /** @ignore */
@@ -57956,7 +59026,7 @@
     }, {
       key: "observedAttributes",
       get: function get() {
-        return _get(_getPrototypeOf(Masonry), "observedAttributes", this).concat(['selectionmode', 'layout', 'spacing', 'orderable']);
+        return _get(_getPrototypeOf(Masonry), "observedAttributes", this).concat(['selectionmode', 'layout', 'spacing', 'orderable', 'ariagrid', 'aria-label', 'aria-labelledby']);
       }
     }]);
 
@@ -58459,6 +59529,34 @@
           nextItem.focus(); // prevent scrolling at the same time
 
           event.preventDefault();
+        } else {
+          // in case there is no item in the same column, we should move to first item in next column for down
+          // and last item of previous column for up key
+          var columnIndex = currentLayoutData.columnIndex;
+
+          if (up) {
+            if (columnIndex > 0) {
+              // move to last item of previous column
+              var prevColumn = this._columns[columnIndex - 1];
+
+              if (prevColumn) {
+                nextItem = prevColumn.items[prevColumn.items.length - 1]; // last item of previous column
+              }
+            }
+          } else {
+            // down key is pressed, go to first item of next column if exists
+            var columnCount = this._columns.length;
+            var nextColumnIndex = columnIndex + currentLayoutData.colspan;
+
+            if (nextColumnIndex < columnCount) {
+              nextItem = this._columns[nextColumnIndex].items[0]; // first item of next column
+            }
+          }
+
+          if (nextItem) {
+            nextItem.focus();
+            event.preventDefault(); // prevent scrolling at the same time
+          }
         }
       }
       /**
@@ -58476,40 +59574,23 @@
           return;
         }
 
-        var nextItem; // Choose item on the left or right which overlaps the most with the current item
+        var nextItem;
 
-        var nextColumnIndex = currentLayoutData.columnIndex + (left ? -1 : currentLayoutData.colspan);
-        var nextColumn = this._columns[nextColumnIndex];
+        var items = this._masonry.items.getAll();
 
-        if (nextColumn) {
-          var currentItemBottom = currentLayoutData.top + currentLayoutData.height;
-          var nextItemOverlap = 0; // Iterate through all items in the bordering column and look for the item which overlaps the most
+        var collectionItemIndex = items.indexOf(event.target);
 
-          for (var i = 0; i < nextColumn.items.length; i++) {
-            var item = nextColumn.items[i];
-            var layoutData = item._layoutData;
-            var itemBottom = layoutData.top + layoutData.height; // Check if items overlap
-
-            if (currentLayoutData.top <= itemBottom && currentItemBottom >= layoutData.top) {
-              // Calculate the overlapping height
-              var itemOverlap = (currentLayoutData.height - Math.max(0, layoutData.top - currentLayoutData.top) - // relative overlap with current item
-              Math.max(0, currentItemBottom - itemBottom)) / layoutData.height;
-
-              if (itemOverlap > nextItemOverlap) {
-                nextItemOverlap = itemOverlap;
-                nextItem = item;
-              }
-            } else if (currentLayoutData.top + currentLayoutData.height < layoutData.top) {
-              // Item is too far below, stop searching
-              break;
-            }
+        if (left) {
+          if (collectionItemIndex > 0) {
+            nextItem = items[collectionItemIndex - 1];
           }
+        } else if (collectionItemIndex < items.length - 1) {
+          nextItem = items[collectionItemIndex + 1];
         }
 
         if (nextItem) {
-          nextItem.focus(); // prevent scrolling at the same time
-
-          event.preventDefault();
+          nextItem.focus();
+          event.preventDefault(); // prevent scrolling at the same time
         }
       }
       /**
@@ -59317,9 +60398,7 @@
     return Multifield;
   }(BaseComponent(HTMLElement));
 
-  var template$D = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$E = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["remove"] = document.createElement("button", "coral-button");
     el0.setAttribute("tracking", "off");
@@ -59379,7 +60458,7 @@
         // Create or fetch the content zones
         content: _this.querySelector('coral-multifield-item-content') || document.createElement('coral-multifield-item-content')
       };
-      template$D.call(_this._elements);
+      template$E.call(_this._elements);
       return _this;
     }
     /**
@@ -59699,9 +60778,12 @@
       value: function render() {
         _get(_getPrototypeOf(Panel.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$$); // adds the role to support accessibility
+        this.classList.add(CLASSNAME$$); // Adds the role to support accessibility when role is not already defined.
 
-        this.setAttribute('role', 'tabpanel'); // Fetch the content zone elements
+        if (!this.hasAttribute('role')) {
+          this.setAttribute('role', 'region');
+        } // Fetch the content zone elements
+
 
         var content = this._elements.content; // Move the content into the content zone if none specified
 
@@ -59812,9 +60894,7 @@
 
   Panel.Content = PanelContent;
 
-  var template$E = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$F = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["percentage"] = document.createElement("div");
     el0.className += " _coral-BarLoader-percentage";
@@ -59907,7 +60987,7 @@
         // Fetch or create the content content zone element
         label: _this.querySelector('coral-progress-label') || document.createElement('coral-progress-label')
       };
-      template$E.call(_this._elements); // Watch for label changes
+      template$F.call(_this._elements); // Watch for label changes
 
       _this._observer = new MutationObserver(_this._toggleLabelVisibility.bind(_assertThisInitialized(_this)));
 
@@ -60549,9 +61629,7 @@
     return QuickActionsItem;
   }(BaseComponent(HTMLElement));
 
-  var template$F = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$G = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["moreButton"] = document.createElement("button", "coral-button");
     el0.setAttribute("tracking", "off");
@@ -60564,7 +61642,8 @@
     el0.setAttribute("handle", "moreButton");
     el0.setAttribute("title", data_0["i18n"]["get"]('More actions'));
     el0.setAttribute("role", "menuitem");
-    el0.setAttribute("aria-haspopup", "true");
+    el0.setAttribute("aria-haspopup", "menu");
+    el0.setAttribute("aria-expanded", "false");
     el0.setAttribute("aria-label", data_0["i18n"]["get"]('More actions'));
     frag.appendChild(el0);
     var el1 = document.createTextNode("\n");
@@ -60577,6 +61656,7 @@
     el2.setAttribute("breadthoffset", "50%p - 50%");
     el2.setAttribute("placement", "bottom");
     el2.setAttribute("handle", "overlay");
+    el2.setAttribute("role", "presentation");
     var el3 = document.createTextNode("\n  ");
     el2.appendChild(el3);
     var el4 = this["buttonList"] = document.createElement("coral-buttonlist");
@@ -60584,6 +61664,7 @@
     el4.id = data_0["commons"]["getUID"]();
     el4.className += " _coral-QuickActions-buttonList";
     el4.setAttribute("handle", "buttonList");
+    el4.setAttribute("role", "menu");
     el4.setAttribute("tabindex", "-1");
     el2.appendChild(el4);
     var el5 = document.createTextNode("\n");
@@ -60677,14 +61758,19 @@
       _this._inner = true;
       _this._target = target$2.PREVIOUS;
       _this._placement = placement$2.TOP;
-      _this._focusOnShow = _assertThisInitialized(_this);
-      _this._scrollOnFocus = Overlay.scrollOnFocus.OFF; // Flag
+      _this._focusOnShow = Overlay.focusOnShow.OFF;
+      _this._scrollOnFocus = Overlay.scrollOnFocus.OFF;
+
+      if (!_this.id) {
+        _this.id = commons.getUID();
+      } // Flag
+
 
       _this._openedBefore = false; // Debounce timer
 
       _this._timeout = null; // Template
 
-      template$F.call(_this._elements, {
+      template$G.call(_this._elements, {
         commons: commons,
         i18n: i18n
       });
@@ -60700,6 +61786,8 @@
         'key:pageup': '_onButtonKeypressPrevious',
         'key:left': '_onButtonKeypressPrevious',
         'key:up': '_onButtonKeypressPrevious',
+        'capture:focus': '_onFocus',
+        'capture:blur': '_onBlur',
         // Buttons
         'click > ._coral-QuickActions-item:not([handle="moreButton"])': '_onButtonClick',
         'click > ._coral-QuickActions-item[handle="moreButton"]': '_onMoreButtonClick',
@@ -60714,7 +61802,7 @@
       events["global:capture:coral-overlay:beforeopen #".concat(overlayId)] = '_onOverlayBeforeOpen';
       events["global:capture:coral-overlay:beforeclose #".concat(overlayId)] = '_onOverlayBeforeClose';
       events["global:capture:coral-overlay:open #".concat(overlayId)] = '_onOverlayOpen';
-      events["global:capture:coral-overlay:close #".concat(overlayId)] = '_onOverlayClose';
+      events['global:capture:coral-overlay:close'] = '_onOverlayClose';
       events["global:capture:coral-overlay:positioned #".concat(overlayId)] = '_onOverlayPositioned';
       events["global:capture:coral-overlay:_animate #".concat(overlayId)] = '_onAnimate';
       events["global:capture:mouseout #".concat(overlayId)] = '_onMouseOut';
@@ -61021,6 +62109,7 @@
         buttonListItem.tabIndex = -1;
         buttonListItem.content.innerHTML = itemData.htmlContent;
         buttonListItem.icon = itemData.icon;
+        buttonListItem.setAttribute('role', 'menuitem');
         item._elements.button = button;
         item._elements.buttonListItem = buttonListItem;
         buttonListItem._elements.quickActionsItem = item;
@@ -61273,7 +62362,10 @@
               // Remember the relevant properties and return their values on hide.
               this._previousTrapFocus = this.trapFocus;
               this._previousReturnFocus = this.returnFocus;
+              this._previousFocusOnShow = this.focusOnShow;
               this.trapFocus = this.constructor.trapFocus.ON;
+              this.returnFocus = this.constructor.returnFocus.ON;
+              this.focusOnShow = this.constructor.focusOnShow.ON;
             }
 
             this.show();
@@ -61350,6 +62442,8 @@
 
           if (nextButton) {
             nextButton.focus();
+          } else if (event.key === 'ArrowDown' && document.activeElement === this._elements.moreButton) {
+            this._elements.moreButton.click();
           }
         }
       }
@@ -61409,6 +62503,40 @@
 
         this._trackEvent('click', 'coral-quickactions-more', event, item);
       }
+    }, {
+      key: "_onFocus",
+      value: function _onFocus() {
+        if (this._focusOnShow === this.constructor.focusOnShow.OFF && this._returnFocus !== this.constructor.returnFocus.ON) {
+          var targetElement = this._getTarget();
+
+          if (targetElement) {
+            if (!this._previousReturnFocus) {
+              this._previousReturnFocus = this._returnFocus;
+              this.returnFocus = this.constructor.returnFocus.ON;
+            }
+
+            if (!this._previousElementToFocusWhenHidden) {
+              this._previousElementToFocusWhenHidden = this._elementToFocusWhenHidden;
+              this._elementToFocusWhenHidden = targetElement;
+            }
+          }
+        }
+      }
+    }, {
+      key: "_onBlur",
+      value: function _onBlur() {
+        if (this._focusOnShow === this.constructor.focusOnShow.OFF) {
+          if (this._previousReturnFocus) {
+            this.returnFocus = this._previousReturnFocus;
+            this._previousReturnFocus = undefined;
+          }
+
+          if (this._previousElementToFocusWhenHidden) {
+            this._elementToFocusWhenHidden = this._previousElementToFocusWhenHidden;
+            this._previousElementToFocusWhenHidden = undefined;
+          }
+        }
+      }
       /** @ignore */
 
     }, {
@@ -61444,6 +62572,8 @@
         if (event.target === this._elements.overlay) {
           // do not allow internal Overlay events to escape QuickActions
           event.stopImmediatePropagation();
+
+          this._elements.moreButton.setAttribute('aria-expanded', 'true');
         }
       }
       /** @ignore */
@@ -61461,6 +62591,11 @@
           window.requestAnimationFrame(function () {
             if (_this4._previousTrapFocus) {
               _this4.trapFocus = _this4._previousTrapFocus;
+
+              if (_this4.trapFocus !== _this4.constructor.trapFocus.ON) {
+                _this4.removeAttribute('tabindex');
+              }
+
               _this4._previousTrapFocus = undefined;
             }
 
@@ -61468,10 +62603,17 @@
               _this4.returnFocus = _this4._previousReturnFocus;
               _this4._previousReturnFocus = undefined;
             }
+
+            if (_this4._previousFocusOnShow) {
+              _this4.focusOnShow = _this4._previousFocusOnShow;
+              _this4._previousFocusOnShow = undefined;
+            }
           });
         } else if (event.target === this._elements.overlay) {
           // do not allow internal Overlay events to escape QuickActions
           event.stopImmediatePropagation();
+
+          this._elements.moreButton.setAttribute('aria-expanded', 'false');
         }
       }
       /** @ignore */
@@ -61685,9 +62827,8 @@
 
         _get(_getPrototypeOf(QuickActions.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$11); // Make QuickActions focusable
+        this.classList.add(CLASSNAME$11); // Define QuickActions as a menu
 
-        this.setAttribute('tabIndex', '-1');
         this.setAttribute('role', 'menu'); // Support cloneNode
 
         ['moreButton', 'overlay'].forEach(function (handleName) {
@@ -61863,6 +63004,12 @@
       set: function set(value) {
         var _this6 = this;
 
+        // If opening and stealing focus, on close, focus should be returned 
+        // to the element that had focus before QuickActions were opened.
+        if (value && this._focusOnShow !== this.constructor.focusOnShow.OFF) {
+          this.returnFocusTo(document.activeElement);
+        }
+
         _set(_getPrototypeOf(QuickActions.prototype), "open", value, this, true);
 
         this._openedOnce = true; // Position once we can read items layout in the next frame
@@ -61930,7 +63077,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$g = {
+  var translations$h = {
     "en-US": {
       "More actions": "More actions"
     },
@@ -62003,7 +63150,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-quickactions': translations$g
+    'coral-component-quickactions': translations$h
   }); // Expose component on the Coral namespace
 
   commons._define('coral-quickactions-item', QuickActionsItem);
@@ -62559,9 +63706,7 @@
     return ShellHeader;
   }(BaseComponent(HTMLElement));
 
-  var template$G = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$H = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["icon"] = document.createElement("coral-icon");
     el0.setAttribute("handle", "icon");
@@ -62602,7 +63747,7 @@
         label: _this.querySelector('coral-shell-homeanchor-label') || document.createElement('coral-shell-homeanchor-label')
       }; // Create icon by default
 
-      template$G.call(_this._elements);
+      template$H.call(_this._elements);
       return _this;
     }
     /**
@@ -62746,7 +63891,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$h = {
+  var translations$i = {
     "it-IT": {
       "Clear search": "Azzera ricerca"
     },
@@ -62806,9 +63951,7 @@
     }
   };
 
-  var template$H = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$I = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["input"] = document.createElement("input", "coral-textfield");
@@ -62897,7 +64040,7 @@
 
 
       _this._elements = {};
-      template$H.call(_this._elements, {
+      template$I.call(_this._elements, {
         i18n: i18n,
         Icon: Icon
       }); // Pre-define labellable element
@@ -63290,14 +64433,12 @@
    */
 
   commons.extend(strings, {
-    'coral-component-search': translations$h
+    'coral-component-search': translations$i
   }); // Expose component on the Coral namespace
 
   commons._define('coral-search', Search);
 
-  var template$I = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$J = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -63371,9 +64512,7 @@
     return frag;
   };
 
-  var template$J = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$K = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = document.createElement("coral-list-item-content");
     var el1 = document.createTextNode(data_0["title"] + "\n  ");
@@ -63390,9 +64529,7 @@
     return frag;
   };
 
-  var template$K = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$L = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = document.createElement("div");
     el0.className += " _coral-Shell-help-resultMessage-container";
@@ -63410,9 +64547,7 @@
     return frag;
   };
 
-  var template$L = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$M = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = document.createElement("div");
     el0.className += " _coral-Shell-help-resultMessage-container";
@@ -63451,7 +64586,7 @@
       _this = _possibleConstructorReturn(this, _getPrototypeOf(ShellHelp).call(this)); // Prepare templates
 
       _this._elements = {};
-      template$I.call(_this._elements, {
+      template$J.call(_this._elements, {
         commons: commons,
         i18n: i18n
       }); // Events
@@ -63530,7 +64665,7 @@
         this._elements.loading.hidden = true;
         this._elements.resultMessage.innerHTML = '';
 
-        this._elements.resultMessage.appendChild(template$K.call(this._elements, {
+        this._elements.resultMessage.appendChild(template$L.call(this._elements, {
           i18n: i18n
         }));
 
@@ -63559,7 +64694,7 @@
           // Clear existing result message
           this._elements.resultMessage.innerHTML = ''; // Indicate to the user that no results were found
 
-          this._elements.resultMessage.appendChild(template$L.call(this._elements, {
+          this._elements.resultMessage.appendChild(template$M.call(this._elements, {
             i18n: i18n
           })); // Show result message
 
@@ -63578,7 +64713,7 @@
               target: result.target
             });
             item.classList.add('_coral-Shell-help-result-item');
-            item.content = template$J.call(_this3._elements, {
+            item.content = template$K.call(_this3._elements, {
               title: result.title,
               description: description
             }).firstElementChild;
@@ -63905,9 +65040,7 @@
     return ShellMenuBar;
   }(BaseComponent(HTMLElement));
 
-  var template$M = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$N = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["shellMenuButton"] = document.createElement("button", "coral-button");
     el0.setAttribute("is", "coral-button");
@@ -63975,7 +65108,7 @@
       _this = _possibleConstructorReturn(this, _getPrototypeOf(ShellMenuBarItem).call(this)); // Templates
 
       _this._elements = {};
-      template$M.call(_this._elements); // Events
+      template$N.call(_this._elements); // Events
 
       _this._delegateEvents({
         'click [handle="shellMenuButton"]': '_handleButtonClick',
@@ -64304,9 +65437,7 @@
     return ShellMenuBarItem;
   }(BaseComponent(HTMLElement));
 
-  var template$N = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$O = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["container"] = document.createElement("div");
     el0.className += " _coral-Shell-user-container";
@@ -64377,7 +65508,7 @@
         content: _this.querySelector('coral-shell-user-content') || document.createElement('coral-shell-user-content'),
         footer: _this.querySelector('coral-shell-user-footer') || document.createElement('coral-shell-user-footer')
       };
-      template$N.call(_this._elements, {
+      template$O.call(_this._elements, {
         icon: avatar.DEFAULT
       });
       return _this;
@@ -65069,9 +66200,7 @@
     return ShellWorkspace;
   }(BaseComponent(HTMLAnchorElement));
 
-  var template$O = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$P = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["container"] = document.createElement("div");
     el0.setAttribute("handle", "container");
@@ -65105,7 +66234,7 @@
       _this = _possibleConstructorReturn(this, _getPrototypeOf(ShellSolutionSwitcher).call(this)); // Template
 
       _this._elements = {};
-      template$O.call(_this._elements); // Listen for mutations
+      template$P.call(_this._elements); // Listen for mutations
 
       var observer = new MutationObserver(function (mutations) {
         mutations.forEach(function (mutation) {
@@ -65331,9 +66460,7 @@
     return document.createElement('coral-shell-solutions-header');
   });
 
-  var template$P = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$Q = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["icon"] = document.createElement("coral-icon");
     el0.setAttribute("size", "XL");
@@ -65372,7 +66499,7 @@
         // Fetch or create the content zone elements
         label: _this.querySelector('coral-shell-solution-label') || document.createElement('coral-shell-solution-label')
       };
-      template$P.call(_this._elements);
+      template$Q.call(_this._elements);
       return _this;
     }
     /**
@@ -65508,9 +66635,7 @@
     return document.createElement('coral-shell-solution-label');
   });
 
-  var template$Q = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$R = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -65614,7 +66739,7 @@
       _this._elements = {
         footer: _this.querySelector('coral-shell-orgswitcher-footer') || document.createElement('coral-shell-orgswitcher-footer')
       };
-      template$Q.call(_this._elements, {
+      template$R.call(_this._elements, {
         commons: commons,
         i18n: i18n
       }); // Used for eventing
@@ -65968,9 +67093,7 @@
     return document.createElement('coral-shell-orgswitcher-footer');
   });
 
-  var template$R = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$S = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["checkmark"] = document.createElement("span");
@@ -66026,7 +67149,7 @@
       });
 
       var template = {};
-      template$R.call(template, {
+      template$S.call(template, {
         Icon: Icon
       });
       commons.extend(_this._elements, template); // Used for eventing
@@ -66823,9 +67946,7 @@
     return SideNav;
   }(BaseComponent(HTMLElement));
 
-  var template$S = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$T = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["container"] = document.createElement("div");
     el0.className += " _coral-SideNav-itemLink";
@@ -66881,7 +68002,7 @@
       _this._elements = {
         content: _this.querySelector('coral-sidenav-item-content') || document.createElement('coral-sidenav-item-content')
       };
-      template$S.call(_this._elements);
+      template$T.call(_this._elements);
 
       _get(_getPrototypeOf(SideNavItem.prototype), "_observeLabel", _assertThisInitialized(_this)).call(_assertThisInitialized(_this));
 
@@ -68274,9 +69395,7 @@
     return StepList;
   }(BaseComponent(HTMLElement));
 
-  var template$T = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$U = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["stepMarkerContainer"] = document.createElement("span");
     el0.className += " _coral-Steplist-markerContainer";
@@ -68337,7 +69456,7 @@
       _this._elements = {
         label: _this.querySelector('coral-step-label') || document.createElement('coral-step-label')
       };
-      template$T.call(_this._elements);
+      template$U.call(_this._elements);
       return _this;
     }
     /**
@@ -68611,7 +69730,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$i = {
+  var translations$j = {
     "en-US": {
       "Select": "Select"
     },
@@ -68671,9 +69790,7 @@
     }
   };
 
-  var template$U = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$V = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["input"] = document.createElement("input");
     el0.setAttribute("type", "checkbox");
@@ -68741,7 +69858,7 @@
         // Try to find the label content zone
         label: _this.querySelector('coral-switch-label') || document.createElement('coral-switch-label')
       };
-      template$U.call(_this._elements, {
+      template$V.call(_this._elements, {
         commons: commons,
         i18n: i18n
       }); // Pre-define labellable element
@@ -68783,10 +69900,10 @@
       value: function _hideLabelIfEmpty() {
         var label = this._elements.label; // If it's empty and has no non-textnode children, hide the label
 
-        var hiddenValue = !(label.children.length === 0 && label.textContent.replace(/\s*/g, '') === '' && !this.labelled); // Toggle the screen reader text
+        var hiddenValue = !(label.children.length === 0 && label.textContent.replace(/\s*/g, '') === ''); // Toggle the screen reader text
 
         this._elements.labelWrapper.style.margin = !hiddenValue ? '0' : '';
-        this._elements.screenReaderOnly.hidden = hiddenValue;
+        this._elements.screenReaderOnly.hidden = hiddenValue || this.labelled;
       }
     }, {
       key: "_onFocus",
@@ -69080,7 +70197,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-switch': translations$i
+    'coral-component-switch': translations$j
   }); // Expose component on the Coral namespace
 
   commons._define('coral-switch', Switch);
@@ -69098,116 +70215,154 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$j = {
+  var translations$k = {
     "en-US": {
+      "Select": "Select",
+      "Select All": "Select All",
       "sorted by column {0}, in ascending order": "sorted by column {0} in ascending order",
       "sorted by column {0}, in descending order": "sorted by column {0} in descending order",
       ", checked": ", checked",
       ", unchecked": ", unchecked"
     },
     "de-DE": {
+      "Select": "Auswählen",
+      "Select All": "Alles auswählen",
       "sorted by column {0}, in ascending order": "Sortiert nach Spalte {0} in aufsteigender Reihenfolge",
       "sorted by column {0}, in descending order": "Sortiert nach Spalte {0} in absteigender Reihenfolge",
       ", checked": ", markiert",
       ", unchecked": ", nicht markiert"
     },
     "fr-FR": {
+      "Select": "Sélectionner",
+      "Select All": "Sélectionner tout",
       "sorted by column {0}, in ascending order": "Trié par colonne {0} dans l’ordre ascendant",
       "sorted by column {0}, in descending order": "Trié par colonne {0} dans l’ordre décroissant",
       ", checked": ", cochée",
       ", unchecked": ", pas cochée"
     },
     "it-IT": {
+      "Select": "Seleziona",
+      "Select All": "Seleziona tutto",
       "sorted by column {0}, in ascending order": "Ordinato per colonna {0} in ordine crescente",
       "sorted by column {0}, in descending order": "Ordinato per colonna {0} in ordine decrescente",
       ", checked": ", selezionata",
       ", unchecked": ", non selezionata"
     },
     "ja-JP": {
+      "Select": "選択",
+      "Select All": "すべてを選択",
       "sorted by column {0}, in ascending order": "列 {0} で昇順で並べ替え",
       "sorted by column {0}, in descending order": "列 {0} で降順に並べ替え",
       ", checked": "、チェック",
       ", unchecked": "、未チェック"
     },
     "es-ES": {
+      "Select": "Seleccionar",
+      "Select All": "Seleccionar todos",
       "sorted by column {0}, in ascending order": "Ordenado por columna {0} en orden ascendente",
       "sorted by column {0}, in descending order": "Ordenado por columna {0} en orden descendente",
       ", checked": ", marcada",
       ", unchecked": ", desmarcada"
     },
     "ko-KR": {
+      "Select": "선택",
+      "Select All": "모두 선택",
       "sorted by column {0}, in ascending order": "오름차순으로 열 {0} 정렬",
       "sorted by column {0}, in descending order": "내림차순으로 {0} 열별로 정렬",
       ", checked": ", 선택됨",
       ", unchecked": ", 선택되지 않은"
     },
     "zh-CN": {
+      "Select": "选择",
+      "Select All": "全选",
       "sorted by column {0}, in ascending order": "按列{0}按升序排序r",
       "sorted by column {0}, in descending order": "按列{0}按降序排序",
       ", checked": "，选中",
       ", unchecked": "，未选中"
     },
     "zh-TW": {
+      "Select": "選取",
+      "Select All": "全選",
       "sorted by column {0}, in ascending order": "按列{0}按昇冪排序",
       "sorted by column {0}, in descending order": "按列{0}按降冪排序",
       ", checked": "，選中",
       ", unchecked": "，未選中"
     },
     "pt-BR": {
+      "Select": "Selecionar",
+      "Select All": "Selecionar tudo",
       "sorted by column {0}, in ascending order": "Classificado por coluna {0} em ordem ascendente",
       "sorted by column {0}, in descending order": "Classificado por coluna {0} em ordem descendente",
       ", checked": ", marcada",
       ", unchecked": ", desmarcada"
     },
     "nl-NL": {
+      "Select": "Selecteren",
+      "Select All": "Alles selecteren",
       "sorted by column {0}, in ascending order": "Gesorteerd op kolom {0} in oplopende volgorde",
       "sorted by column {0}, in descending order": "Gesorteerd op kolom {0} in aflopende volgorde",
       ", checked": ", geselecteerd",
       ", unchecked": ", neit geselecteerd"
     },
     "da-DK": {
+      "Select": "Vælg",
+      "Select All": "Vælg alle",
       "sorted by column {0}, in ascending order": "Sorteret efter kolonne {0} i stigende rækkefølge",
       "sorted by column {0}, in descending order": "Sorteret efter kolonne {0} i faldende rækkefølge",
       ", checked": ", valgte",
       ", unchecked": ", ikke valgt"
     },
     "fi-FI": {
+      "Select": "Valitse",
+      "Select All": "Valitse kaikki",
       "sorted by column {0}, in ascending order": "Lajiteltu sarakkeen mukaan {0} nousevaan järjestykseen",
       "sorted by column {0}, in descending order": "Lajiteltu sarakkeen mukaan {0} laskevassa järjestyksessä",
       ", checked": ", valittu",
       ", unchecked": ", valittuna"
     },
     "nb-NO": {
+      "Select": "Velg",
+      "Select All": "Velg alle",
       "sorted by column {0}, in ascending order": "Sortert etter kolonne {0} i stigende rekkefølge",
       "sorted by column {0}, in descending order": "Sortert etter kolonne {0} i synkende rekkefølge",
       ", checked": ", valgt",
       ", unchecked": ", ikke valgt"
     },
     "sv-SE": {
+      "Select": "Markera",
+      "Select All": "Markera allt",
       "sorted by column {0}, in ascending order": "Sorterat efter kolumn {0} i stigande ordning",
       "sorted by column {0}, in descending order": "Sorterat efter kolumn {0} i fallande ordning",
       ", checked": ", markerad",
       ", unchecked": ", avmarkerad"
     },
     "cs-CZ": {
+      "Select": "Vybrat",
+      "Select All": "Vybrat vše",
       "sorted by column {0}, in ascending order": "Seřazeno podle sloupcových {0} ve vzestupném pořadí",
       "sorted by column {0}, in descending order": "Seřazeno podle sloupcových {0} v sestupném pořadí",
       ", checked": ", vybráno",
       ", unchecked": ", není vybráno"
     },
     "pl-PL": {
+      "Select": "Zaznacz",
+      "Select All": "Zaznacz wszystko",
       "sorted by column {0}, in ascending order": "Posortowane według kolumny {0} w porządku rosnącym",
       "sorted by column {0}, in descending order": "Posortowane według kolumny {0} w porządku malejącym",
       ", checked": ", zaznaczone",
       ", unchecked": ", nie zaznaczone"
     },
     "ru-RU": {
+      "Select": "Выбрать",
+      "Select All": "Выбрать все",
       "sorted by column {0}, in ascending order": "Сортировка по столбе {0} в порядке возрастания",
       "sorted by column {0}, in descending order": "Сортировка по колонке {0} в порядке убывания",
       ", checked": ", выбранный",
       ", unchecked": ", неотобранный"
     },
     "tr-TR": {
+      "Select": "Seç",
+      "Select All": "Tümünü Seç",
       "sorted by column {0}, in ascending order": "Artan sırada {0} sütununa göre sıralanmış",
       "sorted by column {0}, in descending order": "Azalan sırada {0} sütununa göre sıralanmış",
       ", checked": ", seçilmiş",
@@ -69851,7 +71006,18 @@
           if (!_this.querySelector("[".concat(handle, "]"))) {
             _this.setAttribute(handle, '');
           }
+
+          _this._syncAriaSelectedState();
+
+          _this._syncSelectHandle();
         });
+      }
+      /** @private */
+
+    }, {
+      key: "_getHandle",
+      value: function _getHandle(handle) {
+        return this.hasAttribute(handle) ? this : this.querySelector("[".concat(handle, "]"));
       }
       /** @private */
 
@@ -69861,9 +71027,13 @@
         if (selectable) {
           this._setHandle('coral-table-cellselect');
         } else {
-          // Clear selection
+          // Remove the handle
+          this.removeAttribute('coral-table-cellselect'); // Clear selection
+
           this.selected = false;
         }
+
+        this._syncAriaSelectedState();
       }
       /** @private */
 
@@ -69871,7 +71041,12 @@
       key: "_syncAriaSelectedState",
       value: function _syncAriaSelectedState() {
         this.classList.toggle('is-selected', this.selected);
-        this.setAttribute('aria-selected', this.selected);
+
+        if (this._getHandle('coral-table-cellselect')) {
+          this.setAttribute('aria-selected', this.selected);
+        } else {
+          this.removeAttribute('aria-selected');
+        }
       }
       /** @private */
 
@@ -69906,6 +71081,7 @@
         _get(_getPrototypeOf(TableCell.prototype), "render", this).call(this);
 
         this.classList.add(CLASSNAME$1s);
+        this.id = this.id || commons.getUID();
       }
       /**
        Triggered before {@link TableCell#selected} is changed.
@@ -69997,6 +71173,19 @@
     return TableCell;
   }(BaseComponent(HTMLTableCellElement));
 
+  var template$W = function anonymous(data_0) {
+    var frag = document.createDocumentFragment();
+    var el0 = this["accessibilityState"] = document.createElement("div");
+    el0.setAttribute("handle", "accessibilityState");
+    el0.className += " u-coral-screenReaderOnly _coral-Table-row-accessibilityState";
+    el0.setAttribute("aria-hidden", "true");
+    el0.id = data_0["commons"]["getUID"]();
+    frag.appendChild(el0);
+    var el1 = document.createTextNode("\n");
+    frag.appendChild(el1);
+    return frag;
+  };
+
   var CLASSNAME$1t = '_coral-Table-row';
   /**
    @class Coral.Table.Row
@@ -70018,7 +71207,12 @@
 
       _classCallCheck(this, TableRow);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(TableRow).call(this)); // Required for coral-table-row:change event
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(TableRow).call(this)); // Templates
+
+      _this._elements = {};
+      template$W.call(_this._elements, {
+        commons: commons
+      }); // Required for coral-table-row:change event
 
       _this._oldSelection = []; // Events
 
@@ -70084,19 +71278,221 @@
     }, {
       key: "_syncAriaSelectedState",
       value: function _syncAriaSelectedState() {
+        var _this2 = this;
+
         this.classList.toggle('is-selected', this.selected);
+        var selectHandle = this.querySelector('[coral-table-rowselect]'); // @a11y Only update aria-selected if the table row can be selected
+
+        if (!(this.hasAttribute('coral-table-rowselect') || selectHandle)) {
+          this.removeAttribute('aria-selected');
+          return;
+        }
+
+        var rowOrderHandle = this.querySelector('[coral-table-roworder]');
+        var rowLockHandle = this.querySelector('[coral-table-rowlock]');
+        var rowRemoveHandle = this.querySelector('[coral-row-remove]');
+        var accessibilityState = this._elements.accessibilityState;
+
+        var resetAccessibilityState = function resetAccessibilityState() {
+          // @a11y remove aria-live
+          _this2.removeAttribute('aria-live');
+
+          _this2.removeAttribute('aria-atomic');
+
+          _this2.removeAttribute('aria-relevant'); // @a11y Unhide the selectHandle, so that it will be resume being announced by assistive 
+          // technology
+
+
+          if (selectHandle && selectHandle.tagName === 'CORAL-CHECKBOX') {
+            selectHandle.removeAttribute('aria-hidden');
+          } // @a11y Unhide the coral-table-roworder handle, so that it will be resume being announced by 
+          // assistive technology
+
+
+          if (rowOrderHandle) {
+            rowOrderHandle.removeAttribute('aria-hidden');
+          } // @a11y Unhide the coral-table-rowlock handle, so that it will be resume being announced by 
+          // assistive technology
+
+
+          if (rowLockHandle) {
+            rowLockHandle.removeAttribute('aria-hidden');
+          } // @a11y Unhide the coral-row-remove handle, so that it will be resume being announced by 
+          // assistive technology
+
+
+          if (rowRemoveHandle) {
+            rowRemoveHandle.removeAttribute('aria-hidden');
+          }
+
+          if (accessibilityState) {
+            // @a11y Hide the _accessibilityState from assistive technology, so that it can not be read 
+            // using a screen reader separately from the row it helps label
+            accessibilityState.setAttribute('aria-hidden', 'true'); // @a11y If the item is not selected, remove ', unchecked' to decrease verbosity.
+
+            if (!_this2.selected) {
+              accessibilityState.innerHTML = '';
+            }
+          }
+        }; // @a11y set aria-selected
+
+
         this.setAttribute('aria-selected', this.selected);
+
+        if (this._ariaLiveOnTimeout || this._ariaLiveOffTimeout) {
+          clearTimeout(this._ariaLiveOnTimeout);
+          clearTimeout(this._ariaLiveOffTimeout);
+        } // @ally If _accessibilityState has been added to a cell within the row,
+
+
+        if (accessibilityState) {
+          resetAccessibilityState();
+          this._ariaLiveOnTimeout = setTimeout(function () {
+            // @a11y and the row or one of its descendants has focus,
+            if (_this2 === document.activeElement || _this2.contains(document.activeElement)) {
+              // @a11y Hide the "Select" checkbox so that it does not get announced with the state change.
+              if (selectHandle && selectHandle.tagName === 'CORAL-CHECKBOX') {
+                selectHandle.setAttribute('aria-hidden', 'true');
+              } // @a11y Hide the coral-table-roworder handle so that it does not get announced with the 
+              // state change.
+
+
+              if (rowOrderHandle) {
+                rowOrderHandle.setAttribute('aria-hidden', 'true');
+              } // @a11y Hide the coral-table-rowlock handle so that it does not get announced with the state
+              // change.
+
+
+              if (rowLockHandle) {
+                rowLockHandle.setAttribute('aria-hidden', 'true');
+              } // @a11y Hide the coral-row-remove handle so that it does not get announced with the state 
+              // change.
+
+
+              if (rowRemoveHandle) {
+                rowRemoveHandle.setAttribute('aria-hidden', 'true');
+              } // @a11y The ChromeVox screenreader, used on Chromebook, announces the state change and 
+              // should not need aria-live, otherwise it double-voices the row.
+
+
+              if (!window.cvox) {
+                // @a11y Unhide the _accessibilityState so that it will get announced with the state change.
+                accessibilityState.removeAttribute('aria-hidden'); // @ally use aria-live to announce the state change
+
+                _this2.setAttribute('aria-live', 'assertive'); // @ally use aria-atomic="true" to announce the entire row
+
+
+                _this2.setAttribute('aria-atomic', 'true');
+              }
+
+              _this2._ariaLiveOnTimeout = setTimeout(function () {
+                // @ally Set the _accessibilityState text to read either ", checked" or ", unchecked", 
+                // which should trigger a live region announcement.
+                accessibilityState.innerHTML = i18n.get(_this2.selected ? ', checked' : ', unchecked'); // @ally wait 250ms for row to announce
+
+                _this2._ariaLiveOffTimeout = setTimeout(resetAccessibilityState, 250);
+              }, 20);
+            }
+          }, 20);
+
+          if (!(this === document.activeElement || this.contains(document.activeElement))) {
+            accessibilityState.innerHTML = i18n.get(this.selected ? ', checked' : '');
+          }
+        }
+      }
+      /** @private */
+
+    }, {
+      key: "_syncAriaLabelledby",
+      value: function _syncAriaLabelledby() {
+        var _this3 = this;
+
+        // @a11y if the row is not selectable, remove accessibilityState
+        if (!(this.hasAttribute('coral-table-rowselect') || this.querySelector('[coral-table-rowselect]'))) {
+          if (this._elements.accessibilityState.parentNode) {
+            this.removeAttribute('aria-labelledby');
+            this._elements.accessibilityState = this._elements.accessibilityState.parentNode.removeChild(this._elements.accessibilityState);
+          }
+
+          return;
+        } // @a11y get a list of ids for cells 
+
+
+        var cells = this.items.getAll().filter(function (cell) {
+          // @a11y exclude cells for coral-table-roworder, coral-table-rowlock or coral-row-remove
+          return cell.id && !(cell.hasAttribute('coral-table-roworder') || cell.querySelector('[coral-table-roworder]') || cell.hasAttribute('coral-table-rowlock') || cell.querySelector('[coral-table-rowlock]') || cell.hasAttribute('coral-row-remove') || cell.querySelector('[coral-table-remove]'));
+        });
+        var cellForAccessibilityState;
+        var ids = cells.map(function (cell) {
+          var handle = cell.querySelector('[coral-table-rowselect]');
+
+          if (handle) {
+            cellForAccessibilityState = cell; // @a11y otherwise, if the selectHandle is a coral-checkbox,
+
+            if (handle && handle.tagName === 'CORAL-CHECKBOX') {
+              // @a11y if the row is selected, don't add the coral-table-rowselect to accessibility name
+              if (_this3.selected) {
+                return;
+              } // otherwise, include the checkbox input labelled "Select" in the accessibility name
+
+
+              return handle._elements.input && handle._elements.input.id;
+            }
+          } // @a11y include all other cells in the row in the accessibility name
+
+
+          return cell.id;
+        }); // @a11y If an _accessibilityState has not been defined within one of the cells, add to the last 
+        // cell
+
+        if (!cellForAccessibilityState && cells.length) {
+          cellForAccessibilityState = cells[cells.length - 1];
+        }
+
+        if (cellForAccessibilityState) {
+          cellForAccessibilityState.appendChild(this._elements.accessibilityState);
+        } // @a11y Once defined,
+
+
+        if (this._elements.accessibilityState.parentNode) {
+          // @a11y add the _accessibilityState ", checked" or ", unchecked" as the last item in the 
+          // accessibility name
+          ids.push(this._elements.accessibilityState.id);
+        } // @a11y Update the aria-labelledby attribute for the row.
+
+
+        this.setAttribute('aria-labelledby', ids.join(' '));
       }
       /** @private */
 
     }, {
       key: "_syncSelectHandle",
       value: function _syncSelectHandle() {
+        var _this4 = this;
+
         // Check/uncheck the select handle
         var selectHandle = this.querySelector('[coral-table-rowselect]');
 
         if (selectHandle) {
-          selectHandle[this.selected ? 'setAttribute' : 'removeAttribute']('checked', '');
+          if (typeof selectHandle.indeterminate !== 'undefined') {
+            selectHandle.indeterminate = false;
+          }
+
+          selectHandle[this.selected ? 'setAttribute' : 'removeAttribute']('checked', ''); // @a11y If the handle is a checkbox but lacks a label, label it with "Select".
+
+          if (selectHandle.tagName === 'CORAL-CHECKBOX') {
+            if (!selectHandle.labelled) {
+              selectHandle.labelled = i18n.get('Select');
+            } // @a11y provide a more explicit label for the checkbox than just "Select"
+
+
+            if (this.hasAttribute('aria-labelledby')) {
+              var ids = this.getAttribute('aria-labelledby').split(' ').filter(function (id) {
+                return selectHandle._elements.input.id !== id && _this4._elements.accessibilityState.id !== id;
+              }).join(' ');
+              selectHandle.labelledBy = selectHandle._elements.input.id + ' ' + ids;
+            }
+          }
         }
       }
       /** @private */
@@ -70109,7 +71505,10 @@
         } else {
           // Clear selection but leave the handle if any
           this.set('selected', false, true);
-        }
+        } // Sync the aria-labelledby attribute to include the _accessibilityState
+
+
+        this._syncAriaLabelledby();
       }
       /** @private */
 
@@ -70137,13 +71536,19 @@
     }, {
       key: "_setHandle",
       value: function _setHandle(handle) {
-        var _this2 = this;
+        var _this5 = this;
 
         requestAnimationFrame(function () {
           // Specify handle directly on the row if none found
-          if (!_this2.querySelector("[".concat(handle, "]"))) {
-            _this2.setAttribute(handle, '');
+          if (!_this5.querySelector("[".concat(handle, "]"))) {
+            _this5.setAttribute(handle, '');
           }
+
+          _this5._syncSelectHandle();
+
+          _this5._syncAriaLabelledby();
+
+          _this5._syncAriaSelectedState();
         });
       }
       /** @private */
@@ -70151,14 +71556,16 @@
     }, {
       key: "_handleMutations",
       value: function _handleMutations(mutations) {
-        var _this3 = this;
+        var _this6 = this;
 
         mutations.forEach(function (mutation) {
           // Sync added nodes
-          _this3.trigger('coral-table-row:_contentchanged', {
+          _this6.trigger('coral-table-row:_contentchanged', {
             addedNodes: mutation.addedNodes,
             removedNodes: mutation.removedNodes
           });
+
+          _this6._syncAriaLabelledby();
         });
       }
       /** @ignore */
@@ -70186,6 +71593,8 @@
         _get(_getPrototypeOf(TableRow.prototype), "render", this).call(this);
 
         this.classList.add(CLASSNAME$1t);
+
+        this._syncAriaLabelledby();
       }
       /**
        Triggered before {@link TableRow#selected} is changed.
@@ -70267,9 +71676,11 @@
 
         this.trigger('coral-table-row:_selectedchanged');
 
-        this._syncAriaSelectedState();
-
         this._syncSelectHandle();
+
+        this._syncAriaLabelledby();
+
+        this._syncAriaSelectedState();
       }
       /**
        Whether the items are selectable.
@@ -70286,14 +71697,14 @@
         return this._selectable || false;
       },
       set: function set(value) {
-        var _this4 = this;
+        var _this7 = this;
 
         this._selectable = transform.booleanAttr(value);
 
         this._reflectAttribute('selectable', this._selectable);
 
         this.items.getAll().forEach(function (cell) {
-          cell[_this4._selectable ? 'setAttribute' : 'removeAttribute']('_selectable', '');
+          cell[_this7._selectable ? 'setAttribute' : 'removeAttribute']('_selectable', '');
         });
       }
       /**
@@ -70685,9 +72096,7 @@
     return TableFoot;
   }(BaseTableSection(BaseComponent(HTMLTableSectionElement)));
 
-  var template$V = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$X = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["liveRegion"] = document.createElement("div");
     el0.setAttribute("handle", "liveRegion");
@@ -70799,7 +72208,7 @@
         foot: _this.querySelector('tfoot[is="coral-table-foot"]') || new TableFoot(),
         columns: _this.querySelector('colgroup') || document.createElement('colgroup')
       };
-      template$V.call(_this._elements, {
+      template$X.call(_this._elements, {
         commons: commons
       }); // Events
 
@@ -71604,6 +73013,17 @@
         var handle = this.querySelector('[coral-table-select]');
 
         if (handle) {
+          // If the handle is a checkbox but lacks a label, label it with "Select All".
+          if (handle.tagName === 'CORAL-CHECKBOX') {
+            if (!handle.labelled) {
+              handle.setAttribute('labelled', i18n.get('Select All'));
+            }
+
+            if (!handle.title) {
+              handle.setAttribute('title', i18n.get('Select All'));
+            }
+          }
+
           if (state === 'checked') {
             handle.removeAttribute('indeterminate');
             handle.setAttribute('checked', '');
@@ -72619,6 +74039,39 @@
       value: function _onSelectPreviousItem() {
         this._selectSiblingItem(false);
       }
+      /**
+      * Call the layout method of table component
+      *
+      * @param {Boolean} forced
+      * If true call the layout method immediately, else wait for timeout
+      */
+
+    }, {
+      key: "resetLayout",
+      value: function resetLayout(forced) {
+        forced = transform.boolean(forced);
+
+        if (forced === true) {
+          this._doResetLayout();
+
+          this._preventResetLayout = false;
+        } else {
+          this._resetLayout();
+        }
+      }
+      /** @private */
+
+    }, {
+      key: "_doResetLayout",
+      value: function _doResetLayout() {
+        this.classList.add(IS_LAYOUTING);
+
+        this._resizeStickyHead();
+
+        this._resizeContainer();
+
+        this.classList.remove(IS_LAYOUTING);
+      }
       /** @private */
 
     }, {
@@ -72636,15 +74089,9 @@
         }
 
         this._timeout = window.setTimeout(function () {
-          _this5.classList.add(IS_LAYOUTING);
-
           _this5._timeout = null;
 
-          _this5._resizeStickyHead();
-
-          _this5._resizeContainer();
-
-          _this5.classList.remove(IS_LAYOUTING); // Mark table as ready
+          _this5._doResetLayout(); // Mark table as ready
 
 
           _this5.classList.add(IS_READY);
@@ -73736,7 +75183,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-table': translations$j
+    'coral-component-table': translations$k
   }); // Expose component on the Coral namespace
 
   commons._define('coral-table-column', TableColumn, {
@@ -73780,9 +75227,7 @@
   Table.Body = TableBody;
   Table.Foot = TableFoot;
 
-  var template$W = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$Y = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["icon"] = document.createElement("coral-icon");
     el0.setAttribute("handle", "icon");
@@ -73855,9 +75300,10 @@
       _this = _possibleConstructorReturn(this, _getPrototypeOf(Tab).call(this)); // Templates
 
       _this._elements = {
-        label: _this.querySelector('coral-tab-label') || document.createElement('coral-tab-label')
+        label: _this.querySelector('coral-tab-label') || document.createElement('coral-tab-label'),
+        invalidIcon: _this.querySelector('._coral-Tabs-itemInvalidIcon') || _this._createInvalidIcon()
       };
-      template$W.call(_this._elements); // Listen for mutations
+      template$Y.call(_this._elements); // Listen for mutations
 
       _this._observer = new MutationObserver(function () {
         // Change icon size if the label is empty
@@ -73882,8 +75328,7 @@
     }
     /**
      The label of the tab.
-     
-     @type {TabLabel}
+      @type {TabLabel}
      @contentzone
      */
 
@@ -73899,8 +75344,7 @@
       }
       /**
        Selects the target item
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -73929,6 +75373,20 @@
               }
             }
           }
+      }
+    }, {
+      key: "_createInvalidIcon",
+      value: function _createInvalidIcon() {
+        var iconElement = document.createElement('coral-icon');
+        iconElement.icon = 'alert';
+        iconElement.size = Icon.size.EXTRA_SMALL;
+        iconElement.classList.add('_coral-Tabs-itemInvalidIcon');
+
+        if (!this._invalid) {
+          iconElement.setAttribute('hidden', 'true');
+        }
+
+        return iconElement;
       }
     }, {
       key: "connectedCallback",
@@ -73960,6 +75418,10 @@
 
         if (this.icon) {
           frag.appendChild(this._elements.icon);
+        }
+
+        if (this._elements.invalidIcon) {
+          frag.append(this._elements.invalidIcon);
         }
 
         var label = this._elements.label; // Remove it so we can process children
@@ -74003,8 +75465,7 @@
       }
       /**
        Specifies the name of the icon used inside the Tab. See {@link Icon} for valid icon names.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute icon
        */
@@ -74037,8 +75498,7 @@
       }
       /**
        Whether the current Tab is invalid.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute invalid
        @htmlattributereflected
@@ -74056,12 +75516,17 @@
 
         this.classList.toggle('is-invalid', this._invalid);
         this.setAttribute('aria-invalid', this._invalid);
+
+        if (this._invalid) {
+          this._elements.invalidIcon.removeAttribute('hidden');
+        } else {
+          this._elements.invalidIcon.setAttribute('hidden', 'true');
+        }
       }
       /**
        Whether this Tab is disabled. When set to true, this will prevent every user interacting with the Tab. If
        disabled is set to true for a selected Tab it will be deselected.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute disabled
        @htmlattributereflected
@@ -74124,8 +75589,7 @@
       /**
        The target element that will be selected when this Tab is selected. It accepts a CSS selector or a DOM element.
        If a CSS Selector is provided, the first matching element will be used.
-       
-       @type {?HTMLElement|String}
+        @type {?HTMLElement|String}
        @default null
        @htmlattribute target
        */
@@ -74143,7 +75607,9 @@
           if (realTarget) {
             // creates a 2 way binding for accessibility
             this.setAttribute('aria-controls', realTarget.id);
-            realTarget.setAttribute('aria-labelledby', this.id);
+            realTarget.setAttribute('aria-labelledby', this.id); // adds role to panel to support accessibility
+
+            realTarget.setAttribute('role', 'tabpanel');
           }
         }
       }
@@ -74201,9 +75667,7 @@
     return document.createElement('coral-tab-label');
   });
 
-  var template$X = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$Z = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["line"] = document.createElement("div");
     el0.setAttribute("handle", "line");
@@ -74272,7 +75736,7 @@
       _this = _possibleConstructorReturn(this, _getPrototypeOf(TabList).call(this)); // Templates
 
       _this._elements = {};
-      template$X.call(_this._elements); // Attach events
+      template$Z.call(_this._elements); // Attach events
 
       _this._delegateEvents({
         'click > coral-tab': '_onTabClick',
@@ -74668,7 +76132,9 @@
                   panel.id = panel.id || commons.getUID(); // creates a 2 way binding for accessibility
 
                   tab.setAttribute('aria-controls', panel.id);
-                  panel.setAttribute('aria-labelledby', tab.id);
+                  panel.setAttribute('aria-labelledby', tab.id); // adds role to panel to support accessibility
+
+                  panel.setAttribute('role', 'tabpanel');
                 } else if (tab) {
                   // cleans the aria since there is no matching panel
                   tab.removeAttribute('aria-controls');
@@ -75034,9 +76500,7 @@
 
   commons._define('coral-tabview', TabView);
 
-  var template$Y = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$_ = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["body"] = document.createElement("div");
     el0.className += " _coral-Toast-body";
@@ -75210,7 +76674,7 @@
         // Fetch or create the content zone element
         content: _this.querySelector('coral-toast-content') || document.createElement('coral-toast-content')
       };
-      template$Y.call(_this._elements);
+      template$_.call(_this._elements);
 
       _this._delegateEvents({
         'global:resize': '_debounceLayout',
@@ -75315,8 +76779,9 @@
       }
     }, {
       key: "_onEscape",
-      value: function _onEscape() {
-        if (this.open && this.classList.contains('is-open')) {
+      value: function _onEscape(event) {
+        if (this.open && this.classList.contains('is-open') && this._isTopOverlay()) {
+          event.stopPropagation();
           this.open = false;
         }
       }
@@ -75712,9 +77177,7 @@
 
   Toast.Content = ToastContent;
 
-  var template$Z = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$$ = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["header"] = document.createElement("div");
@@ -75803,7 +77266,7 @@
         // Create or fetch the content zones
         content: _this.querySelector('coral-tree-item-content') || document.createElement('coral-tree-item-content')
       };
-      template$Z.call(_this._elements, {
+      template$$.call(_this._elements, {
         Icon: Icon,
         commons: commons
       });
@@ -77359,7 +78822,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.6.2";
+  var version$1 = "4.7.0";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
@@ -77602,9 +79065,7 @@
     version: version$2
   });
 
-  var template$_ = function anonymous(data_0
-  /*``*/
-  ) {
+  var template$10 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["wrapper"] = document.createElement("div");
     el0.setAttribute("handle", "wrapper");
@@ -95692,7 +97153,7 @@
       _this._config = config; // Template
 
       _this._elements = {};
-      template$_.call(_this._elements, {
+      template$10.call(_this._elements, {
         commons: commons
       });
       var overlayId = _this._elements.overlay.id; // Events

@@ -521,7 +521,7 @@ body,
     
   }
 .coral-Heading3,.coral-Heading4,
-.coral-Heading--3 {
+.coral-Heading.coral-Heading--3 {
   font-weight: 700;
   line-height: 1.3;
   font-style: normal;
@@ -533,7 +533,7 @@ body,
     
   }
 .coral-Heading4,
-.coral-Heading--3 {
+.coral-Heading.coral-Heading--3 {
   
 
     font-size: 18px;
@@ -548,7 +548,7 @@ body,
     
   }
 .coral-Heading5,.coral-Heading6,
-.coral-Heading--4 {
+.coral-Heading.coral-Heading--4 {
   font-weight: 700;
   line-height: 1.3;
   font-style: normal;
@@ -560,7 +560,7 @@ body,
     
   }
 .coral-Heading6,
-.coral-Heading--4 {
+.coral-Heading.coral-Heading--4 {
   
 
     font-size: 14px;
@@ -568,13 +568,13 @@ body,
     
   }
 ._coral-Subheading,
-.coral-Heading--5 {
+.coral-Heading.coral-Heading--5 {
   line-height: 1.3;
 
     
   }
 ._coral-Subheading,
-.coral-Heading--5,.coral-Detail {
+.coral-Heading.coral-Heading--5,.coral-Detail {
   
 
     font-size: 11px;
@@ -600,7 +600,7 @@ body,
     
   }
 .coral-Heading1--quiet,.coral-Heading2--quiet,
-.coral-Heading--2 {
+.coral-Heading.coral-Heading--2 {
   font-weight: 300;
   line-height: 1.3;
   font-style: normal;
@@ -612,7 +612,7 @@ body,
     
   }
 .coral-Heading2--quiet,
-.coral-Heading--2 {
+.coral-Heading.coral-Heading--2 {
   
 
     font-size: 28px;
@@ -709,7 +709,7 @@ body,
     
   }
 .coral-Heading2--display.coral-Heading2--quiet,
-.coral-Heading--1 {
+.coral-Heading.coral-Heading--1 {
   
 
     font-size: 45px;
@@ -759,7 +759,7 @@ body .coral-Heading3 {
     margin-bottom: 6px;
   }
 body .coral-Heading4,
-body .coral-Heading--3 {
+body .coral-Heading.coral-Heading--3 {
     margin-top: 16px;
     margin-bottom: 5px;
   }
@@ -768,8 +768,8 @@ body .coral-Heading5 {
     margin-bottom: 4px;
   }
 body .coral-Heading6,
-body .coral-Heading--4,body ._coral-Subheading,
-body .coral-Heading--5 {
+body .coral-Heading.coral-Heading--4,body ._coral-Subheading,
+body .coral-Heading.coral-Heading--5 {
     margin-top: 12px;
     margin-bottom: 3px;
   }
@@ -782,7 +782,7 @@ body .coral-Heading1--quiet {
     margin-bottom: 9px;
   }
 body .coral-Heading2--quiet,
-body .coral-Heading--2 {
+body .coral-Heading.coral-Heading--2 {
     margin-top: 25px;
     margin-bottom: 7px;
   }
@@ -815,7 +815,7 @@ body .coral-Heading1--display.coral-Heading1--quiet {
     margin-bottom: 11px;
   }
 body .coral-Heading2--display.coral-Heading2--quiet,
-body .coral-Heading--1 {
+body .coral-Heading.coral-Heading--1 {
     margin-top: 36px;
     margin-bottom: 10px;
   }
@@ -924,7 +924,7 @@ body .coral-Heading--1 {
     
   }
 ._coral-Article .coral-Heading3,._coral-Article .coral-Heading4,
-._coral-Article .coral-Heading--3 {
+._coral-Article .coral-Heading.coral-Heading--3 {
   font-weight: 700;
   line-height: 1.3;
   font-style: normal;
@@ -936,7 +936,7 @@ body .coral-Heading--1 {
     
   }
 ._coral-Article .coral-Heading4,
-._coral-Article .coral-Heading--3 {
+._coral-Article .coral-Heading.coral-Heading--3 {
   
 
     font-size: 18px;
@@ -951,7 +951,7 @@ body .coral-Heading--1 {
     
   }
 ._coral-Article .coral-Heading5,._coral-Article .coral-Heading6,
-._coral-Article .coral-Heading--4 {
+._coral-Article .coral-Heading.coral-Heading--4 {
   font-weight: 700;
   line-height: 1.3;
   font-style: normal;
@@ -963,7 +963,7 @@ body .coral-Heading--1 {
     
   }
 ._coral-Article .coral-Heading6,
-._coral-Article .coral-Heading--4 {
+._coral-Article .coral-Heading.coral-Heading--4 {
   
 
     font-size: 14px;
@@ -971,7 +971,7 @@ body .coral-Heading--1 {
     
   }
 ._coral-Article ._coral-Subheading,
-._coral-Article .coral-Heading--5 {
+._coral-Article .coral-Heading.coral-Heading--5 {
   
 
     font-size: 11px;
@@ -1007,7 +1007,7 @@ body .coral-Heading--1 {
     
   }
 ._coral-Article .coral-Heading1--quiet,._coral-Article .coral-Heading2--quiet,
-._coral-Article .coral-Heading--2 {
+._coral-Article .coral-Heading.coral-Heading--2 {
   font-weight: 400;
   line-height: 1.3;
   font-style: normal;
@@ -1019,7 +1019,7 @@ body .coral-Heading--1 {
     
   }
 ._coral-Article .coral-Heading2--quiet,
-._coral-Article .coral-Heading--2 {
+._coral-Article .coral-Heading.coral-Heading--2 {
   
 
     font-size: 28px;
@@ -1066,7 +1066,7 @@ body .coral-Heading--1 {
     
   }
 ._coral-Article .coral-Heading2--display.coral-Heading2--quiet,
-._coral-Article .coral-Heading--1 {
+._coral-Article .coral-Heading.coral-Heading--1 {
   
 
     font-size: 45px;
@@ -1210,9 +1210,9 @@ body:lang(ja) .coral-Heading3, body:lang(ko) .coral-Heading3, body:lang(zh) .cor
 body:lang(ja) .coral-Heading4,
 body:lang(ko) .coral-Heading4,
 body:lang(zh) .coral-Heading4,
-body:lang(ja) .coral-Heading--3,
-body:lang(ko) .coral-Heading--3,
-body:lang(zh) .coral-Heading--3 {
+body:lang(ja) .coral-Heading.coral-Heading--3,
+body:lang(ko) .coral-Heading.coral-Heading--3,
+body:lang(zh) .coral-Heading.coral-Heading--3 {
   
 
     font-size: 18px;
@@ -1243,9 +1243,9 @@ body:lang(ja) .coral-Heading5, body:lang(ko) .coral-Heading5, body:lang(zh) .cor
 body:lang(ja) .coral-Heading6,
 body:lang(ko) .coral-Heading6,
 body:lang(zh) .coral-Heading6,
-body:lang(ja) .coral-Heading--4,
-body:lang(ko) .coral-Heading--4,
-body:lang(zh) .coral-Heading--4 {
+body:lang(ja) .coral-Heading.coral-Heading--4,
+body:lang(ko) .coral-Heading.coral-Heading--4,
+body:lang(zh) .coral-Heading.coral-Heading--4 {
   
 
     font-size: 14px;
@@ -1262,9 +1262,9 @@ body:lang(zh) .coral-Heading--4 {
 body:lang(ja) ._coral-Subheading,
 body:lang(ko) ._coral-Subheading,
 body:lang(zh) ._coral-Subheading,
-body:lang(ja) .coral-Heading--5,
-body:lang(ko) .coral-Heading--5,
-body:lang(zh) .coral-Heading--5 {
+body:lang(ja) .coral-Heading.coral-Heading--5,
+body:lang(ko) .coral-Heading.coral-Heading--5,
+body:lang(zh) .coral-Heading.coral-Heading--5 {
   
 
     font-size: 11px;
@@ -1309,9 +1309,9 @@ body:lang(ja) .coral-Heading1--quiet, body:lang(ko) .coral-Heading1--quiet, body
 body:lang(ja) .coral-Heading2--quiet,
 body:lang(ko) .coral-Heading2--quiet,
 body:lang(zh) .coral-Heading2--quiet,
-body:lang(ja) .coral-Heading--2,
-body:lang(ko) .coral-Heading--2,
-body:lang(zh) .coral-Heading--2 {
+body:lang(ja) .coral-Heading.coral-Heading--2,
+body:lang(ko) .coral-Heading.coral-Heading--2,
+body:lang(zh) .coral-Heading.coral-Heading--2 {
   
 
     font-size: 25px;
@@ -1426,9 +1426,9 @@ body:lang(ja) .coral-Heading1--display.coral-Heading1--quiet, body:lang(ko) .cor
 body:lang(ja) .coral-Heading2--display.coral-Heading2--quiet,
 body:lang(ko) .coral-Heading2--display.coral-Heading2--quiet,
 body:lang(zh) .coral-Heading2--display.coral-Heading2--quiet,
-body:lang(ja) .coral-Heading--1,
-body:lang(ko) .coral-Heading--1,
-body:lang(zh) .coral-Heading--1 {
+body:lang(ja) .coral-Heading.coral-Heading--1,
+body:lang(ko) .coral-Heading.coral-Heading--1,
+body:lang(zh) .coral-Heading.coral-Heading--1 {
   
 
     font-size: 36px;
@@ -2604,7 +2604,7 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
     
   }
 .coral--large .coral-Heading4,
-.coral--large .coral-Heading--3 {
+.coral--large .coral-Heading.coral-Heading--3 {
   
 
     font-size: 22px;
@@ -2629,7 +2629,7 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
     
   }
 .coral--large .coral-Heading6,
-.coral--large .coral-Heading--4 {
+.coral--large .coral-Heading.coral-Heading--4 {
   
 
     font-size: 17px;
@@ -2642,7 +2642,7 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
     
   }
 .coral--large ._coral-Subheading,
-.coral--large .coral-Heading--5 {
+.coral--large .coral-Heading.coral-Heading--5 {
   
 
     font-size: 13px;
@@ -2679,7 +2679,7 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
     
   }
 .coral--large .coral-Heading2--quiet,
-.coral--large .coral-Heading--2 {
+.coral--large .coral-Heading.coral-Heading--2 {
   
 
     font-size: 34px;
@@ -2774,7 +2774,7 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
     
   }
 .coral--large .coral-Heading2--display.coral-Heading2--quiet,
-.coral--large .coral-Heading--1 {
+.coral--large .coral-Heading.coral-Heading--1 {
   
 
     font-size: 55px;
@@ -2822,7 +2822,7 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
     margin-bottom: 8px;
   }
 .coral--large body .coral-Heading4,
-.coral--large body .coral-Heading--3 {
+.coral--large body .coral-Heading.coral-Heading--3 {
     margin-top: 19px;
     margin-bottom: 6px;
   }
@@ -2831,8 +2831,8 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
     margin-bottom: 5px;
   }
 .coral--large body .coral-Heading6,
-.coral--large body .coral-Heading--4,.coral--large body ._coral-Subheading,
-.coral--large body .coral-Heading--5 {
+.coral--large body .coral-Heading.coral-Heading--4,.coral--large body ._coral-Subheading,
+.coral--large body .coral-Heading.coral-Heading--5 {
     margin-top: 15px;
     margin-bottom: 4px;
   }
@@ -2845,7 +2845,7 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
     margin-bottom: 11px;
   }
 .coral--large body .coral-Heading2--quiet,
-.coral--large body .coral-Heading--2 {
+.coral--large body .coral-Heading.coral-Heading--2 {
     margin-top: 31px;
     margin-bottom: 9px;
   }
@@ -2878,7 +2878,7 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
     margin-bottom: 14px;
   }
 .coral--large body .coral-Heading2--display.coral-Heading2--quiet,
-.coral--large body .coral-Heading--1 {
+.coral--large body .coral-Heading.coral-Heading--1 {
     margin-top: 44px;
     margin-bottom: 13px;
   }
@@ -2985,7 +2985,7 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
     
   }
 .coral--large ._coral-Article .coral-Heading4,
-.coral--large ._coral-Article .coral-Heading--3 {
+.coral--large ._coral-Article .coral-Heading.coral-Heading--3 {
   
 
     font-size: 22px;
@@ -3010,7 +3010,7 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
     
   }
 .coral--large ._coral-Article .coral-Heading6,
-.coral--large ._coral-Article .coral-Heading--4 {
+.coral--large ._coral-Article .coral-Heading.coral-Heading--4 {
   
 
     font-size: 17px;
@@ -3023,7 +3023,7 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
     
   }
 .coral--large ._coral-Article ._coral-Subheading,
-.coral--large ._coral-Article .coral-Heading--5 {
+.coral--large ._coral-Article .coral-Heading.coral-Heading--5 {
   
 
     font-size: 13px;
@@ -3060,7 +3060,7 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
     
   }
 .coral--large ._coral-Article .coral-Heading2--quiet,
-.coral--large ._coral-Article .coral-Heading--2 {
+.coral--large ._coral-Article .coral-Heading.coral-Heading--2 {
   
 
     font-size: 34px;
@@ -3109,7 +3109,7 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
     
   }
 .coral--large ._coral-Article .coral-Heading2--display.coral-Heading2--quiet,
-.coral--large ._coral-Article .coral-Heading--1 {
+.coral--large ._coral-Article .coral-Heading.coral-Heading--1 {
   
 
     font-size: 55px;
@@ -3235,9 +3235,9 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
 .coral--large body:lang(ja) .coral-Heading4,
 .coral--large body:lang(ko) .coral-Heading4,
 .coral--large body:lang(zh) .coral-Heading4,
-.coral--large body:lang(ja) .coral-Heading--3,
-.coral--large body:lang(ko) .coral-Heading--3,
-.coral--large body:lang(zh) .coral-Heading--3 {
+.coral--large body:lang(ja) .coral-Heading.coral-Heading--3,
+.coral--large body:lang(ko) .coral-Heading.coral-Heading--3,
+.coral--large body:lang(zh) .coral-Heading.coral-Heading--3 {
   
 
     font-size: 22px;
@@ -3264,9 +3264,9 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
 .coral--large body:lang(ja) .coral-Heading6,
 .coral--large body:lang(ko) .coral-Heading6,
 .coral--large body:lang(zh) .coral-Heading6,
-.coral--large body:lang(ja) .coral-Heading--4,
-.coral--large body:lang(ko) .coral-Heading--4,
-.coral--large body:lang(zh) .coral-Heading--4 {
+.coral--large body:lang(ja) .coral-Heading.coral-Heading--4,
+.coral--large body:lang(ko) .coral-Heading.coral-Heading--4,
+.coral--large body:lang(zh) .coral-Heading.coral-Heading--4 {
   
 
     font-size: 17px;
@@ -3281,9 +3281,9 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
 .coral--large body:lang(ja) ._coral-Subheading,
 .coral--large body:lang(ko) ._coral-Subheading,
 .coral--large body:lang(zh) ._coral-Subheading,
-.coral--large body:lang(ja) .coral-Heading--5,
-.coral--large body:lang(ko) .coral-Heading--5,
-.coral--large body:lang(zh) .coral-Heading--5 {
+.coral--large body:lang(ja) .coral-Heading.coral-Heading--5,
+.coral--large body:lang(ko) .coral-Heading.coral-Heading--5,
+.coral--large body:lang(zh) .coral-Heading.coral-Heading--5 {
   
 
     font-size: 13px;
@@ -3322,9 +3322,9 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
 .coral--large body:lang(ja) .coral-Heading2--quiet,
 .coral--large body:lang(ko) .coral-Heading2--quiet,
 .coral--large body:lang(zh) .coral-Heading2--quiet,
-.coral--large body:lang(ja) .coral-Heading--2,
-.coral--large body:lang(ko) .coral-Heading--2,
-.coral--large body:lang(zh) .coral-Heading--2 {
+.coral--large body:lang(ja) .coral-Heading.coral-Heading--2,
+.coral--large body:lang(ko) .coral-Heading.coral-Heading--2,
+.coral--large body:lang(zh) .coral-Heading.coral-Heading--2 {
   
 
     font-size: 31px;
@@ -3423,9 +3423,9 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
 .coral--large body:lang(ja) .coral-Heading2--display.coral-Heading2--quiet,
 .coral--large body:lang(ko) .coral-Heading2--display.coral-Heading2--quiet,
 .coral--large body:lang(zh) .coral-Heading2--display.coral-Heading2--quiet,
-.coral--large body:lang(ja) .coral-Heading--1,
-.coral--large body:lang(ko) .coral-Heading--1,
-.coral--large body:lang(zh) .coral-Heading--1 {
+.coral--large body:lang(ja) .coral-Heading.coral-Heading--1,
+.coral--large body:lang(ko) .coral-Heading.coral-Heading--1,
+.coral--large body:lang(zh) .coral-Heading.coral-Heading--1 {
   
 
     font-size: 44px;
@@ -4763,16 +4763,16 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
 .coral--light .coral-Body--secondary {
   color: rgb(110, 110, 110);
 }
-.coral--light .coral-Heading--1 {
+.coral--light .coral-Heading.coral-Heading--1 {
   color: rgb(44, 44, 44);
 }
-.coral--light .coral-Heading--2 {
+.coral--light .coral-Heading.coral-Heading--2 {
   color: rgb(110, 110, 110);
 }
-.coral--light .coral-Heading--3,.coral--light .coral-Heading--4 {
+.coral--light .coral-Heading.coral-Heading--3,.coral--light .coral-Heading.coral-Heading--4 {
   color: rgb(44, 44, 44);
 }
-.coral--light .coral-Heading--5 {
+.coral--light .coral-Heading.coral-Heading--5 {
   color: rgb(110, 110, 110);
 }
 .coral--lightest .coral-Heading--XXXL,.coral--lightest .coral-Heading--XXL,.coral--lightest .coral-Heading--XL,.coral--lightest .coral-Heading--L,.coral--lightest .coral-Heading--M,.coral--lightest .coral-Heading--S,.coral--lightest .coral-Heading--XS,.coral--lightest .coral-Heading--XXS,.coral--lightest .coral-Heading-XXXL--light,.coral--lightest .coral-Heading-XXL--light,.coral--lightest .coral-Heading-XL--light,.coral--lightest .coral-Heading-L--light,.coral--lightest .coral-Heading-XXXL--heavy,.coral--lightest .coral-Heading-XXL--heavy,.coral--lightest .coral-Heading-XL--heavy,.coral--lightest .coral-Heading-L--heavy,.coral--lightest .coral-Heading-XXXL--heading,.coral--lightest .coral-Heading-XXL--heading,.coral--lightest .coral-Heading-XL--heading,.coral--lightest .coral-Heading-L--heading {
@@ -5184,16 +5184,16 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
 .coral--lightest .coral-Body--secondary {
   color: rgb(116, 116, 116);
 }
-.coral--lightest .coral-Heading--1 {
+.coral--lightest .coral-Heading.coral-Heading--1 {
   color: rgb(50, 50, 50);
 }
-.coral--lightest .coral-Heading--2 {
+.coral--lightest .coral-Heading.coral-Heading--2 {
   color: rgb(116, 116, 116);
 }
-.coral--lightest .coral-Heading--3,.coral--lightest .coral-Heading--4 {
+.coral--lightest .coral-Heading.coral-Heading--3,.coral--lightest .coral-Heading.coral-Heading--4 {
   color: rgb(50, 50, 50);
 }
-.coral--lightest .coral-Heading--5 {
+.coral--lightest .coral-Heading.coral-Heading--5 {
   color: rgb(116, 116, 116);
 }
 .coral--dark .coral-Heading--XXXL,.coral--dark .coral-Heading--XXL,.coral--dark .coral-Heading--XL,.coral--dark .coral-Heading--L,.coral--dark .coral-Heading--M,.coral--dark .coral-Heading--S,.coral--dark .coral-Heading--XS,.coral--dark .coral-Heading--XXS,.coral--dark .coral-Heading-XXXL--light,.coral--dark .coral-Heading-XXL--light,.coral--dark .coral-Heading-XL--light,.coral--dark .coral-Heading-L--light,.coral--dark .coral-Heading-XXXL--heavy,.coral--dark .coral-Heading-XXL--heavy,.coral--dark .coral-Heading-XL--heavy,.coral--dark .coral-Heading-L--heavy,.coral--dark .coral-Heading-XXXL--heading,.coral--dark .coral-Heading-XXL--heading,.coral--dark .coral-Heading-XL--heading,.coral--dark .coral-Heading-L--heading {
@@ -5605,16 +5605,16 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
 .coral--dark .coral-Body--secondary {
   color: rgb(185, 185, 185);
 }
-.coral--dark .coral-Heading--1 {
+.coral--dark .coral-Heading.coral-Heading--1 {
   color: rgb(255, 255, 255);
 }
-.coral--dark .coral-Heading--2 {
+.coral--dark .coral-Heading.coral-Heading--2 {
   color: rgb(185, 185, 185);
 }
-.coral--dark .coral-Heading--3,.coral--dark .coral-Heading--4 {
+.coral--dark .coral-Heading.coral-Heading--3,.coral--dark .coral-Heading.coral-Heading--4 {
   color: rgb(255, 255, 255);
 }
-.coral--dark .coral-Heading--5 {
+.coral--dark .coral-Heading.coral-Heading--5 {
   color: rgb(185, 185, 185);
 }
 .coral--darkest .coral-Heading--XXXL,.coral--darkest .coral-Heading--XXL,.coral--darkest .coral-Heading--XL,.coral--darkest .coral-Heading--L,.coral--darkest .coral-Heading--M,.coral--darkest .coral-Heading--S,.coral--darkest .coral-Heading--XS,.coral--darkest .coral-Heading--XXS,.coral--darkest .coral-Heading-XXXL--light,.coral--darkest .coral-Heading-XXL--light,.coral--darkest .coral-Heading-XL--light,.coral--darkest .coral-Heading-L--light,.coral--darkest .coral-Heading-XXXL--heavy,.coral--darkest .coral-Heading-XXL--heavy,.coral--darkest .coral-Heading-XL--heavy,.coral--darkest .coral-Heading-L--heavy,.coral--darkest .coral-Heading-XXXL--heading,.coral--darkest .coral-Heading-XXL--heading,.coral--darkest .coral-Heading-XL--heading,.coral--darkest .coral-Heading-L--heading {
@@ -6026,16 +6026,16 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
 .coral--darkest .coral-Body--secondary {
   color: rgb(162, 162, 162);
 }
-.coral--darkest .coral-Heading--1 {
+.coral--darkest .coral-Heading.coral-Heading--1 {
   color: rgb(239, 239, 239);
 }
-.coral--darkest .coral-Heading--2 {
+.coral--darkest .coral-Heading.coral-Heading--2 {
   color: rgb(162, 162, 162);
 }
-.coral--darkest .coral-Heading--3,.coral--darkest .coral-Heading--4 {
+.coral--darkest .coral-Heading.coral-Heading--3,.coral--darkest .coral-Heading.coral-Heading--4 {
   color: rgb(239, 239, 239);
 }
-.coral--darkest .coral-Heading--5 {
+.coral--darkest .coral-Heading.coral-Heading--5 {
   color: rgb(162, 162, 162);
 }
 
@@ -11323,11 +11323,25 @@ button[is="coral-button"] {
   font-smoothing: subpixel-antialiased;
   vertical-align: top;
 }
+.coral-Form-errorlabel {
+  box-sizing: border-box;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.3;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: auto;
+  font-smoothing: subpixel-antialiased;
+  vertical-align: top;
+}
+.coral-Form-errorlabel {
+  display: block;
+  padding-top: 5px;
+}
 /**
  * Indicates that the form is using vertical layout, where the label is placed above the field.
  */
 .coral-Form--vertical .coral-Form-field {
-  margin: 0 0 8px;
+  margin: 0;
 }
 .coral-Form--vertical .coral-Form-field._coral-Checkbox {
   margin: 0 16px 8px 0;
@@ -11342,6 +11356,7 @@ button[is="coral-button"] {
 .coral-Form--vertical .coral-Form-fieldwrapper {
   position: relative;
   display: block;
+  margin: 0 0 8px;
 }
 .coral-Form--vertical .coral-Form-fieldwrapper .coral-Form-fieldinfo {
   position: absolute;
@@ -11431,7 +11446,8 @@ button[is="coral-button"] {
 .coral-Form--aligned .coral-Form-fieldwrapper .coral-Form-field.coral-RadioGroup {
   display: block;
 }
-.coral-Form--aligned .coral-Form-fieldwrapper .coral-Form-fieldlabel {
+.coral-Form--aligned .coral-Form-fieldwrapper .coral-Form-fieldlabel,
+.coral-Form--aligned .coral-Form-fieldwrapper .coral-Form-errorlabel {
   margin-top: 0;
   margin-bottom: 0;
 }
@@ -11444,6 +11460,10 @@ button[is="coral-button"] {
   float: left;
   margin-left: 10px;
   margin-top: 10px;
+}
+.coral-Form--aligned .coral-Form-fieldwrapper .coral-Form-errorlabel {
+  float: left;
+  margin-left: 10px;
 }
 .coral-Form--aligned .coral-Form-fieldset {
   margin-bottom: 10px;
@@ -11477,11 +11497,17 @@ button[is="coral-button"] {
 .coral--light .coral-Form-fieldset-legend {
   color: rgb(44, 44, 44);
 }
+.coral--light .coral-Form-errorlabel {
+  color: rgb(201, 37, 45);
+}
 .coral--lightest .coral-Form-fieldlabel {
   color: rgb(116, 116, 116);
 }
 .coral--lightest .coral-Form-fieldset-legend {
   color: rgb(50, 50, 50);
+}
+.coral--lightest .coral-Form-errorlabel {
+  color: rgb(215, 55, 63);
 }
 .coral--dark .coral-Form-fieldlabel {
   color: rgb(185, 185, 185);
@@ -11489,11 +11515,17 @@ button[is="coral-button"] {
 .coral--dark .coral-Form-fieldset-legend {
   color: rgb(255, 255, 255);
 }
+.coral--dark .coral-Form-errorlabel {
+  color: rgb(247, 109, 116);
+}
 .coral--darkest .coral-Form-fieldlabel {
   color: rgb(162, 162, 162);
 }
 .coral--darkest .coral-Form-fieldset-legend {
   color: rgb(239, 239, 239);
+}
+.coral--darkest .coral-Form-errorlabel {
+  color: rgb(236, 91, 98);
 }
 
 /**
@@ -22390,6 +22422,9 @@ coral-colorinput-item {
 ._coral-AssetList-itemThumbnail > coral-icon {
   vertical-align: middle;
 }
+coral-columnview-preview._coral-MillerColumns-item {
+  padding-bottom: 2px;
+}
 coral-columnview-preview-asset {
   position: relative;
   display: block;
@@ -22437,6 +22472,14 @@ coral-columnview-preview-value {
 coral-columnview-preview-value > coral-icon {
   margin-right: 5px;
 }
+coral-columnview-preview-value:focus {
+  outline: 0;
+}
+coral-columnview-preview-value:focus.focus-ring {
+  margin-bottom: -2px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+}
 coral-columnview-preview-separator {
   display: block;
   height: 15px;
@@ -22449,6 +22492,19 @@ coral-columnview-preview-content {
 }
 coral-columnview-preview-content.coral-Body--small {
   margin-bottom: 0;
+  padding-bottom: 2px;
+}
+.coral--light coral-columnview-preview-value:focus.focus-ring {
+  border-color: rgb(38, 128, 235);
+}
+.coral--lightest coral-columnview-preview-value:focus.focus-ring {
+  border-color: rgb(55, 142, 240);
+}
+.coral--dark coral-columnview-preview-value:focus.focus-ring {
+  border-color: rgb(38, 128, 235);
+}
+.coral--darkest coral-columnview-preview-value:focus.focus-ring {
+  border-color: rgb(20, 115, 230);
 }
 
 /**
@@ -28266,19 +28322,37 @@ table[is="coral-table"]:not([orderable]) th[is="coral-table-headercell"] [coral-
 ._coral-Tabs-item.is-overflowing ._coral-Tabs-itemLabel:not(:empty) {
   display: inline;
 }
+._coral-Tabs ._coral-Tabs-itemInvalidIcon {
+  display: inline;
+  margin-right: 0;
+  margin-left: 5px;
+  float: right;
+}
 ._coral-Tabs--horizontal ._coral-Tabs-selectionIndicator {
   transition: transform 130ms cubic-bezier(.45, 0, .40, 1), width 130ms cubic-bezier(.45, 0, .40, 1);
 }
 .coral--light ._coral-Tabs-item:not(.is-disabled).is-invalid {
   color: rgb(201, 37, 45);
 }
+.coral--light ._coral-Tabs-item:not(.is-disabled).is-invalid ._coral-Tabs-itemInvalidIcon ._coral-Icon {
+  color: rgb(201, 37, 45);
+}
 .coral--lightest ._coral-Tabs-item:not(.is-disabled).is-invalid {
+  color: rgb(215, 55, 63);
+}
+.coral--lightest ._coral-Tabs-item:not(.is-disabled).is-invalid ._coral-Tabs-itemInvalidIcon ._coral-Icon {
   color: rgb(215, 55, 63);
 }
 .coral--dark ._coral-Tabs-item:not(.is-disabled).is-invalid {
   color: rgb(247, 109, 116);
 }
+.coral--dark ._coral-Tabs-item:not(.is-disabled).is-invalid ._coral-Tabs-itemInvalidIcon ._coral-Icon {
+  color: rgb(247, 109, 116);
+}
 .coral--darkest ._coral-Tabs-item:not(.is-disabled).is-invalid {
+  color: rgb(236, 91, 98);
+}
+.coral--darkest ._coral-Tabs-item:not(.is-disabled).is-invalid ._coral-Tabs-itemInvalidIcon ._coral-Icon {
   color: rgb(236, 91, 98);
 }
 

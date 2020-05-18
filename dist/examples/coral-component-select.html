@@ -39,6 +39,18 @@
         document.head.appendChild(script);
       });
     </script>
+    <script>
+      window.addEventListener('load', function() {
+        const selectElements = document.querySelectorAll('coral-select:not([labelledby])');
+        for (let i = 0; i < selectElements.length; i++) {
+          const header = selectElements[i].closest('.markup').previousElementSibling;
+          if (header) {
+            header.id = header.id || Coral.commons.getUID();
+            selectElements[i].setAttribute('labelledby', header.id);
+          }
+        }
+      });
+    </script>
   </head>
 
   <body class="coral--light">

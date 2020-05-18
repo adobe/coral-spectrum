@@ -212,6 +212,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryVariableLayout.js~MasonryVariableLayout.html">MasonryVariableLayout</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:change">coral-masonry:change</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:order">coral-masonry:order</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryAriaGridEnum">MasonryAriaGridEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryLayoutsEnum">MasonryLayoutsEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonrySelectionModeEnum">MasonrySelectionModeEnum</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-multifield-src-scripts">coral-component-multifield/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-multifield/src/scripts/Multifield.js~Multifield.html">Multifield</a></span></span></li>
@@ -431,6 +432,7 @@
  */
 
 import {BaseComponent} from &apos;../../../coral-base-component&apos;;
+import {commons} from &apos;../../../coral-utils&apos;;
 
 const CLASSNAME = &apos;_coral-MillerColumns-item&apos;;
 
@@ -477,6 +479,10 @@ class ColumnViewPreview extends BaseComponent(HTMLElement) {
   /** @ignore */
   render() {
     super.render();
+
+    this.setAttribute(&apos;role&apos;, &apos;group&apos;);
+
+    this.id = this.id || commons.getUID();
     
     this.classList.add(CLASSNAME);
     
@@ -493,6 +499,50 @@ class ColumnViewPreview extends BaseComponent(HTMLElement) {
     
     // Call content zone insert
     this.content = content;
+
+    this._makeAccessible();
+  }
+
+  /** @ignore */
+  _makeAccessible() {
+    
+    // @a11y For item values with a label, identify the value as a focusable, readOnly textbox labeled by the label. 
+    let elements = this.content.querySelectorAll(&apos;coral-columnview-preview-label + coral-columnview-preview-value&apos;);
+    let length = elements.length;
+    let i;
+    let element;
+    let elementLabel;
+    for (i = 0; i &lt; length; i++) {
+      element = elements[i];
+      elementLabel = element.previousElementSibling;
+      elementLabel.id = elementLabel.id || commons.getUID();
+      element.setAttribute(&apos;aria-labelledby&apos;, elementLabel.id);
+      element.setAttribute(&apos;role&apos;, &apos;textbox&apos;);
+      element.setAttribute(&apos;tabindex&apos;, &apos;0&apos;);
+      element.setAttribute(&apos;aria-readonly&apos;, &apos;true&apos;);
+
+      // force ChromeVox to read value of textbox
+      if (window.cvox) {
+        element.setAttribute(&apos;aria-valuetext&apos;, element.textContent);
+      }
+    }
+
+    // @a11y Expose separator as a horizontally-oriented separator.
+    elements = this.content.querySelectorAll(&apos;coral-columnview-preview-separator&apos;);
+    length = elements.length;
+    for (i = 0; i &lt; length; i++) {
+      element = elements[i];
+      element.setAttribute(&apos;role&apos;, &apos;separator&apos;);
+      element.setAttribute(&apos;aria-orientation&apos;, &apos;horizontal&apos;);
+    }
+
+    // @a11y If the preview asset image does not include an alt attribute, set alt=&quot;&quot;, so that screen readers do not announce the image url. 
+    elements = this.content.querySelectorAll(&apos;coral-columnview-preview-asset &gt; img:not([alt])&apos;);
+    length = elements.length;
+    for (i = 0; i &lt; length; i++) {
+      element = elements[i];
+      element.setAttribute(&apos;alt&apos;, &apos;&apos;);
+    }
   }
 }
 

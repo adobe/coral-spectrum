@@ -22,16 +22,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.9% </span>
+                <span class="strong">95.92% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>187/195</span>
+                <span class='fraction'>188/196</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.5% </span>
+                <span class="strong">88.6% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>100/113</span>
+                <span class='fraction'>101/114</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.9% </span>
+                <span class="strong">95.92% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>187/195</span>
+                <span class='fraction'>188/196</span>
             </div>
         
             
@@ -621,7 +621,8 @@
 <a name='L563'></a><a href='#L563'>563</a>
 <a name='L564'></a><a href='#L564'>564</a>
 <a name='L565'></a><a href='#L565'>565</a>
-<a name='L566'></a><a href='#L566'>566</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L566'></a><a href='#L566'>566</a>
+<a name='L567'></a><a href='#L567'>567</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -717,9 +718,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">22x</span>
-<span class="cline-any cline-yes">22x</span>
-<span class="cline-any cline-yes">156x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">140x</span>
 <span class="cline-any cline-yes">120x</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -730,7 +731,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -886,6 +887,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">34x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1085,7 +1087,7 @@
 <span class="cline-any cline-yes">42x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">42x</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1460,8 +1462,8 @@ class Toast extends BaseOverlay(BaseComponent(HTMLElement)) {
       // Use raf to wait for autoDismiss value to be set
       requestAnimationFrame(() =&gt; {
         // Only dismiss if value is different than 0
-      <span class="missing-if-branch" title="else path not taken" >E</span>  if (this.autoDismis<span class="branch-1 cbranch-no" title="branch not covered" >s !== 0) {</span>
-          this._dimissTimeout = window.setTimeout(() =&gt; {
+        if (this.autoDismiss !== 0) {
+      <span class="missing-if-branch" title="else path not taken" >E</span>    this._dimissTimeo<span class="branch-1 cbranch-no" title="branch not covered" >ut = window.setTimeout(() =</span>&gt; {
             if (this.open &amp;&amp; !this.contains(document.activeElement)) {
               this.open = false;
             }
@@ -1478,9 +1480,9 @@ class Toast extends BaseOverlay(BaseComponent(HTMLElement)) {
    @default ToastVariantEnum.DEFAULT
    @htmlattribute variant
    @htmlattributereflected
-   */<span class="missing-if-branch" title="if path not taken" >I</span>
-  get va<span class="cstat-no" title="statement not covered" >riant() </span>{
-    return this._variant || variant.DEFAULT;
+   */
+  get <span class="missing-if-branch" title="if path not taken" >I</span>variant() {
+    retu<span class="cstat-no" title="statement not covered" >rn this.</span>_variant || variant.DEFAULT;
   }
   set variant(value) {
     value = transform.string(value).toLowerCase();
@@ -1543,17 +1545,17 @@ class Toast extends BaseOverlay(BaseComponent(HTMLElement)) {
       this._elements.icon.remove();
     }
     
-    le<span class="missing-if-branch" title="if path not taken" >I</span>t variantValue = this.variant;
-    <span class="cstat-no" title="statement not covered" ></span>
-    // Default variant has no icon
+    let variantValue = this.variant;
+    <span class="missing-if-branch" title="if path not taken" >I</span>
+    // D<span class="cstat-no" title="statement not covered" >efault v</span>ariant has no icon
     if (variantValue === variant.DEFAULT) {
       return;
     }
     
     // Inject the SVG icon
     const iconName = variantValue === variant.ERROR ? 'Alert' : capitalize(variantValue);
-    const <span class="missing-if-branch" title="else path not taken" >E</span>icon = Icon._renderSVG(`spectrum-css-icon-${iconName}Medium`, ['_coral-Toast-typeIcon', `_coral-UIIcon-${iconName}Medium`]);
-    this.insertAdjacentHTML('afterbegin', icon);
+    const icon = Icon._renderSVG(`spectrum-css-icon-${iconName}Medium`, ['_coral-Toast-typeIcon', `_coral-UIIcon-${iconName}Medium`]);
+    this.i<span class="missing-if-branch" title="else path not taken" >E</span>nsertAdjacentHTML('afterbegin', icon);
     this._elements.icon = this.querySelector('._coral-Toast-typeIcon');
   }
   
@@ -1602,8 +1604,9 @@ class Toast extends BaseOverlay(BaseComponent(HTMLElement)) {
     }
   }
   
-  _onEscape() {
-    if (this.open &amp;&amp; this.classList.contains('is-open')) {
+  _onEscape(event) {
+    if (this.open &amp;&amp; this.classList.contains('is-open') &amp;&amp; this._isTopOverlay()) {
+      event.stopPropagation();
       this.open = false;
     }
   }
@@ -1758,7 +1761,7 @@ export default Toast;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Apr 24 2020 08:41:42 GMT+0200 (CEST)
+                at Mon May 18 2020 14:58:16 GMT+0200 (Central European Summer Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

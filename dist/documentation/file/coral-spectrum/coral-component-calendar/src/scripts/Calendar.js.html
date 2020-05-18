@@ -212,6 +212,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryVariableLayout.js~MasonryVariableLayout.html">MasonryVariableLayout</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:change">coral-masonry:change</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:order">coral-masonry:order</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryAriaGridEnum">MasonryAriaGridEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryLayoutsEnum">MasonryLayoutsEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonrySelectionModeEnum">MasonrySelectionModeEnum</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-multifield-src-scripts">coral-component-multifield/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-multifield/src/scripts/Multifield.js~Multifield.html">Multifield</a></span></span></li>
@@ -631,6 +632,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
       &apos;key:ctrl+pagedown&apos;: &apos;_onCtrlPageDownKey&apos;,
   
       &apos;key:enter ._coral-Calendar-body&apos;: &apos;_onEnterKey&apos;,
+      &apos;key:return ._coral-Calendar-body&apos;: &apos;_onEnterKey&apos;,
       &apos;key:space ._coral-Calendar-body&apos;: &apos;_onEnterKey&apos;
     }));
     
@@ -1007,6 +1009,9 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
             }
           }
         }
+        else {
+          el = this._elements.body.querySelector(&apos;.is-focused&apos;) || this._elements.body.querySelector(&apos;.is-today&apos;);
+        }
         
         if (el) {
           this._activeDescendant = el.parentElement.id;
@@ -1033,11 +1038,8 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
     
     if (el) {
       if (isTransitioning) {
-        commons.transitionEnd(newTable, () =&gt; {
-          // Prevents from chopping off the transition animation
-          window.setTimeout(() =&gt; {
-            el.querySelector(&apos;._coral-Calendar-date&apos;).classList.add(&apos;is-focused&apos;);
-          }, 50);
+        window.requestAnimationFrame(() =&gt; {
+          el.querySelector(&apos;._coral-Calendar-date&apos;).classList.add(&apos;is-focused&apos;);
         });
       }
       else {
@@ -1446,7 +1448,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
     
     this.classList.add(CLASSNAME);
   
-    this.setAttribute(&apos;role&apos;, &apos;region&apos;);
+    this.setAttribute(&apos;role&apos;, &apos;group&apos;);
     
     // Default reflected attribute
     if (!this._valueFormat) { this.valueFormat = INTERNAL_FORMAT; }

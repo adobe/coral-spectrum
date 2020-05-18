@@ -212,6 +212,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryVariableLayout.js~MasonryVariableLayout.html">MasonryVariableLayout</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:change">coral-masonry:change</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:order">coral-masonry:order</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryAriaGridEnum">MasonryAriaGridEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryLayoutsEnum">MasonryLayoutsEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonrySelectionModeEnum">MasonrySelectionModeEnum</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-multifield-src-scripts">coral-component-multifield/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-multifield/src/scripts/Multifield.js~Multifield.html">Multifield</a></span></span></li>
@@ -449,7 +450,7 @@ export default function getFirstSelectableWrappedItem(wrapperItem) {
     child = wrapperItem.children[i];
     
     // maybe filter even more elements? (opacity, display=&apos;none&apos;, position=&apos;absolute&apos; ...)
-    if (child.offsetParent &amp;&amp; child.matches(commons.FOCUSABLE_ELEMENT_SELECTOR)) {
+    if (child.offsetParent &amp;&amp; (child.matches(commons.FOCUSABLE_ELEMENT_SELECTOR) || child.matches(&apos;a:not([href])&apos;))) {
       return child;
     }
   }
@@ -460,7 +461,7 @@ export default function getFirstSelectableWrappedItem(wrapperItem) {
     for (let j = 0; j &lt; child.children.length; j++) {
       let subChild = child.children[j];
       // maybe filter even more elements? (opacity, display=&apos;none&apos;, position=&apos;absolute&apos; ...)
-      if (subChild.offsetParent &amp;&amp; subChild.matches(commons.FOCUSABLE_ELEMENT_SELECTOR)) {
+      if (subChild.offsetParent &amp;&amp; (subChild.matches(commons.FOCUSABLE_ELEMENT_SELECTOR) || child.matches(&apos;a:not([href])&apos;))) {
         return subChild;
       }
     }

@@ -212,6 +212,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryVariableLayout.js~MasonryVariableLayout.html">MasonryVariableLayout</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:change">coral-masonry:change</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:order">coral-masonry:order</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryAriaGridEnum">MasonryAriaGridEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryLayoutsEnum">MasonryLayoutsEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonrySelectionModeEnum">MasonrySelectionModeEnum</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-multifield-src-scripts">coral-component-multifield/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-multifield/src/scripts/Multifield.js~Multifield.html">Multifield</a></span></span></li>
@@ -638,39 +639,42 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
       // toggles the selection of the item
       const isSelected = item.hasAttribute(&apos;selected&apos;);
       
-      if (!isSelected) {
-        // Handle multi-selection with shiftKey
-         if (event.shiftKey &amp;&amp; this._selectionMode === selectionMode.MULTIPLE) {
-          const lastSelectedItem = this._lastSelectedItems[this._lastSelectedItems.length - 1];
+      // Handle multi-selection with shiftKey
+      if (!isSelected &amp;&amp; event.shiftKey &amp;&amp; this._selectionMode === selectionMode.MULTIPLE) {
+        const lastSelectedItem = this._lastSelectedItems[this._lastSelectedItems.length - 1];
+  
+        if (lastSelectedItem) {
+          const items = this.items.getAll();
+          const lastSelectedItemIndex = items.indexOf(lastSelectedItem);
+          const selectedItemIndex = items.indexOf(item);
     
-          if (lastSelectedItem) {
-            const items = this.items.getAll();
-            const lastSelectedItemIndex = items.indexOf(lastSelectedItem);
-            const selectedItemIndex = items.indexOf(item);
-      
-            // true : selection goes up, false : selection goes down
-            const direction = selectedItemIndex &lt; lastSelectedItemIndex;
-            const selectionRange = [];
-            let selectionIndex = lastSelectedItemIndex;
-      
-            // Retrieve all items in the range
-            while (selectedItemIndex !== selectionIndex) {
-              selectionIndex = direction ? selectionIndex - 1 : selectionIndex + 1;
-              selectionRange.push(items[selectionIndex]);
-            }
-      
-            // Select all items in the range silently
-            selectionRange.forEach((rangeItem) =&gt; {
-              // Except for item which is needed to trigger the selection change event
-              if (rangeItem !== item) {
-                rangeItem.set(&apos;selected&apos;, true, true);
-              }
-            });
+          // true : selection goes up, false : selection goes down
+          const direction = selectedItemIndex &lt; lastSelectedItemIndex;
+          const selectionRange = [];
+          let selectionIndex = lastSelectedItemIndex;
+    
+          // Retrieve all items in the range
+          while (selectedItemIndex !== selectionIndex) {
+            selectionIndex = direction ? selectionIndex - 1 : selectionIndex + 1;
+            selectionRange.push(items[selectionIndex]);
           }
+    
+          // Select all items in the range silently
+          selectionRange.forEach((rangeItem) =&gt; {
+            // Except for item which is needed to trigger the selection change event
+            if (rangeItem !== item) {
+              rangeItem.set(&apos;selected&apos;, true, true);
+            }
+          });
         }
       }
       
       item[isSelected ? &apos;removeAttribute&apos; : &apos;setAttribute&apos;](&apos;selected&apos;, &apos;&apos;);
+
+      // if item was selected, make it active
+      if (isSelected &amp;&amp; !this._lastSelectedItems.length) {
+        item.setAttribute(&apos;active&apos;, &apos;&apos;);
+      }
     }
   }
   
@@ -975,6 +979,8 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
   
     // @a11y
     this.setAttribute(&apos;role&apos;, &apos;group&apos;);
+
+    this.id = this.id || commons.getUID();
   
     // @todo: initial collection items needs to be triggered
   
@@ -988,6 +994,9 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
         content.appendChild(this.firstChild);
       }
     }
+
+    // @a11y
+    content.setAttribute(&apos;role&apos;, &apos;presentation&apos;);
     
     // Call content zone insert
     this.content = content;

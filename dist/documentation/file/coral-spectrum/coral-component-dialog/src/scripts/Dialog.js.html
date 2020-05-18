@@ -212,6 +212,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryVariableLayout.js~MasonryVariableLayout.html">MasonryVariableLayout</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:change">coral-masonry:change</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:order">coral-masonry:order</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryAriaGridEnum">MasonryAriaGridEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryLayoutsEnum">MasonryLayoutsEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonrySelectionModeEnum">MasonrySelectionModeEnum</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-multifield-src-scripts">coral-component-multifield/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-multifield/src/scripts/Multifield.js~Multifield.html">Multifield</a></span></span></li>
@@ -718,6 +719,44 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
       // ARIA
       this.setAttribute(&apos;role&apos;, &apos;alertdialog&apos;);
     }
+
+    const hasHeader = this.header &amp;&amp; this.header.textContent !== &apos;&apos;;
+
+    // If the dialog has a header and is not otherwise labelled,
+    if (hasHeader &amp;&amp; !(this.hasAttribute(&apos;aria-labelledby&apos;) || this.hasAttribute(&apos;aria-label&apos;))) {
+      this.header.id = this.header.id || commons.getUID();
+
+      // label the dialog with a reference to the header
+      this.setAttribute(&apos;aria-labelledby&apos;, this.header.id);
+    }
+
+    const hasContent = this.content &amp;&amp; this.content.textContent !== &apos;&apos;;
+
+    // If the dialog has a content,
+    if (hasContent) {
+      this.content.id = this.content.id || commons.getUID();
+
+      // In an alertdialog with a content region, if the alertdialog is not otherwise described.
+      if (this._variant !== variant.DEFAULT) {
+
+        // with no header, 
+        if (!hasHeader) {
+
+          // label the alertdialog with a reference to the content
+          this.setAttribute(&apos;aria-labelledby&apos;, this.content.id);
+        }
+
+        // otherwise, if the alertdialog is not otherwise described,
+        else if (!this.hasAttribute(&apos;aria-describedby&apos;)) {
+
+          // ensure that the alertdialog is described by the content.
+          this.setAttribute(&apos;aria-describedby&apos;, this.content.id);
+        }
+      }
+      else if (this.getAttribute(&apos;aria-labelledby&apos;) === this.content.id) {
+        this.removeAttribute(&apos;aria-labelledby&apos;);
+      }
+    }
   }
   
   /**
@@ -884,7 +923,7 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
   _hideHeaderIfEmpty() {
     const header = this._elements.header;
   
-    if (this._elements.header) {
+    if (header) {
       const headerWrapper = this._elements.headerWrapper;
   
       // If it&apos;s empty and has no non-textnode children, hide the header
@@ -894,6 +933,8 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
       if (hiddenValue !== headerWrapper.hidden) {
         headerWrapper.hidden = hiddenValue;
       }
+
+      this.variant = this.variant;
     }
   }
   
@@ -902,9 +943,10 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
   }
   
   /** @ignore */
-  _handleEscape() {
+  _handleEscape(event) {
     // When escape is pressed, hide ourselves
     if (this.interaction === interaction.ON &amp;&amp; this.open &amp;&amp; this._isTopOverlay()) {
+      event.stopPropagation();
       this.open = false;
     }
   }

@@ -212,6 +212,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryVariableLayout.js~MasonryVariableLayout.html">MasonryVariableLayout</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:change">coral-masonry:change</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:order">coral-masonry:order</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryAriaGridEnum">MasonryAriaGridEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryLayoutsEnum">MasonryLayoutsEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonrySelectionModeEnum">MasonrySelectionModeEnum</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-multifield-src-scripts">coral-component-multifield/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-multifield/src/scripts/Multifield.js~Multifield.html">Multifield</a></span></span></li>
@@ -1638,6 +1639,17 @@ class Table extends BaseComponent(HTMLTableElement) {
     const handle = this.querySelector(&apos;[coral-table-select]&apos;);
     
     if (handle) {
+
+      // If the handle is a checkbox but lacks a label, label it with &quot;Select All&quot;.
+      if (handle.tagName === &apos;CORAL-CHECKBOX&apos;) {
+        if (!handle.labelled) {
+          handle.setAttribute(&apos;labelled&apos;, i18n.get(&apos;Select All&apos;));
+        }
+        if (!handle.title) {
+          handle.setAttribute(&apos;title&apos;, i18n.get(&apos;Select All&apos;));
+        }
+      }
+
       if (state === &apos;checked&apos;) {
         handle.removeAttribute(&apos;indeterminate&apos;);
         handle.setAttribute(&apos;checked&apos;, &apos;&apos;);
@@ -2577,7 +2589,32 @@ class Table extends BaseComponent(HTMLTableElement) {
   _onSelectPreviousItem() {
     this._selectSiblingItem(false);
   }
-  
+
+  /**
+  * Call the layout method of table component
+  *
+  * @param {Boolean} forced
+  * If true call the layout method immediately, else wait for timeout
+  */
+  resetLayout(forced) {
+    forced = transform.boolean(forced);
+    if (forced === true) {
+      this._doResetLayout();
+      this._preventResetLayout = false;
+    }
+    else {
+      this._resetLayout();
+    }
+  }
+
+  /** @private */
+  _doResetLayout() {
+    this.classList.add(IS_LAYOUTING);
+    this._resizeStickyHead();
+    this._resizeContainer();
+    this.classList.remove(IS_LAYOUTING);
+  }
+
   /** @private */
   _resetLayout() {
     if (this._preventResetLayout) {
@@ -2590,14 +2627,8 @@ class Table extends BaseComponent(HTMLTableElement) {
     }
     
     this._timeout = window.setTimeout(() =&gt; {
-      this.classList.add(IS_LAYOUTING);
-      
       this._timeout = null;
-      this._resizeStickyHead();
-      this._resizeContainer();
-      
-      this.classList.remove(IS_LAYOUTING);
-      
+      this._doResetLayout();
       // Mark table as ready
       this.classList.add(IS_READY);
     }, this._wait);

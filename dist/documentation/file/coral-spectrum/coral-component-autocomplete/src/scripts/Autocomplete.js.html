@@ -212,6 +212,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryVariableLayout.js~MasonryVariableLayout.html">MasonryVariableLayout</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:change">coral-masonry:change</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:order">coral-masonry:order</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryAriaGridEnum">MasonryAriaGridEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryLayoutsEnum">MasonryLayoutsEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonrySelectionModeEnum">MasonrySelectionModeEnum</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-multifield-src-scripts">coral-component-multifield/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-multifield/src/scripts/Multifield.js~Multifield.html">Multifield</a></span></span></li>
@@ -554,9 +555,12 @@ class Autocomplete extends BaseFormField(BaseComponent(HTMLElement)) {
     
     // Interaction
     events[`global:key:shift+tab #${overlayId} [is=&quot;coral-buttonlist-item&quot;]`] = &apos;_handleListFocusShift&apos;;
+    events[`global:key:esc`] = &apos;_handleListFocusShift&apos;;
   
     // Overlay
     events[`global:capture:coral-overlay:positioned #${overlayId}`] = &apos;_onOverlayPositioned&apos;;
+    events[`global:capture:coral-overlay:open #${overlayId}`] = &apos;_onOverlayOpenOrClose&apos;;
+    events[`global:capture:coral-overlay:close #${overlayId}`] = &apos;_onOverlayOpenOrClose&apos;;
     
     // SelectList
     events[`global:key:enter #${overlayId} button[is=&quot;coral-buttonlist-item&quot;]`] = &apos;_handleSelect&apos;;
@@ -1009,6 +1013,26 @@ class Autocomplete extends BaseFormField(BaseComponent(HTMLElement)) {
     
     this._elements.input.required = this._required;
   }
+
+  /**
+   Inherited from {@link BaseFormField#labelled}.
+   */
+  get labelled() {
+    return super.labelled;
+  }
+  set labelled(value) {
+    super.labelled = value;
+
+    this[this.labelled ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-label&apos;, this.labelled);
+    this._elements.selectList[this.labelled ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-label&apos;, this.labelled);
+    
+    if (this.labelled &amp;&amp; this.multiple) {
+      this._elements.tagList.setAttribute(&apos;aria-label&apos;, this.labelled);
+    }
+    else {
+      this._elements.tagList.removeAttribute(&apos;aria-label&apos;);
+    }
+  }
   
   /**
    Inherited from {@link BaseFormField#labelledBy}.
@@ -1018,6 +1042,9 @@ class Autocomplete extends BaseFormField(BaseComponent(HTMLElement)) {
   }
   set labelledBy(value) {
     super.labelledBy = value;
+
+    this[this.labelledBy ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-labelledby&apos;, this.labelledBy);
+    this._elements.selectList[this.labelledBy ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-labelledby&apos;, this.labelledBy);
     
     if (this.labelledBy &amp;&amp; this.multiple) {
       this._elements.tagList.setAttribute(&apos;aria-labelledby&apos;, this.labelledBy);
@@ -2243,6 +2270,23 @@ class Autocomplete extends BaseFormField(BaseComponent(HTMLElement)) {
   }
   
   /**
+   Matches the accessibility to the state of the popover.
+   
+   @ignore
+   */
+  _onOverlayOpenOrClose(event) {
+    if (this._elements.overlay.open) {
+      this._elements.input.setAttribute(&apos;aria-expanded&apos;, &apos;true&apos;);
+      this._elements.trigger.setAttribute(&apos;aria-expanded&apos;, &apos;true&apos;);
+    }
+    else {
+      this._elements.input.setAttribute(&apos;aria-expanded&apos;, &apos;false&apos;);
+      this._elements.trigger.setAttribute(&apos;aria-expanded&apos;, &apos;false&apos;);
+      this._elements.input.removeAttribute(&apos;aria-activedescendant&apos;);
+    }
+  }
+  
+  /**
    Inherited from {@link BaseFormField#reset}.
    */
   reset() {
@@ -2305,17 +2349,17 @@ class Autocomplete extends BaseFormField(BaseComponent(HTMLElement)) {
     this.classList.add(CLASSNAME);
   
     // Container role per ARIA Autocomplete
-    this.setAttribute(&apos;role&apos;, &apos;presentation&apos;);
+    this.setAttribute(&apos;role&apos;, &apos;group&apos;);
   
     // Input attributes per ARIA Autocomplete
     this._elements.input.setAttribute(&apos;role&apos;, &apos;combobox&apos;);
     this._elements.input.setAttribute(&apos;aria-autocomplete&apos;, &apos;list&apos;);
-    this._elements.input.setAttribute(&apos;aria-haspopup&apos;, &apos;true&apos;);
+    this._elements.input.setAttribute(&apos;aria-haspopup&apos;, &apos;listbox&apos;);
     this._elements.input.setAttribute(&apos;aria-expanded&apos;, &apos;false&apos;);
     this._elements.input.setAttribute(&apos;aria-controls&apos;, this._elements.selectList.id);
   
     // Trigger button attributes per ARIA Autocomplete
-    this._elements.trigger.setAttribute(&apos;aria-haspopup&apos;, &apos;true&apos;);
+    this._elements.trigger.setAttribute(&apos;aria-haspopup&apos;, &apos;listbox&apos;);
     this._elements.trigger.setAttribute(&apos;aria-expanded&apos;, &apos;false&apos;);
     this._elements.trigger.setAttribute(&apos;aria-controls&apos;, this._elements.selectList.id);
   

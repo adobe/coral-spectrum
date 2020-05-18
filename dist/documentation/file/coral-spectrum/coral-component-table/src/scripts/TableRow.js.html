@@ -212,6 +212,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryVariableLayout.js~MasonryVariableLayout.html">MasonryVariableLayout</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:change">coral-masonry:change</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:order">coral-masonry:order</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryAriaGridEnum">MasonryAriaGridEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryLayoutsEnum">MasonryLayoutsEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonrySelectionModeEnum">MasonrySelectionModeEnum</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-multifield-src-scripts">coral-component-multifield/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-multifield/src/scripts/Multifield.js~Multifield.html">Multifield</a></span></span></li>
@@ -430,9 +431,10 @@
  * governing permissions and limitations under the License.
  */
 
+import accessibilityState from &apos;../templates/accessibilityState&apos;;
 import {BaseComponent} from &apos;../../../coral-base-component&apos;;
 import {SelectableCollection} from &apos;../../../coral-collection&apos;;
-import {transform} from &apos;../../../coral-utils&apos;;
+import {transform, commons, i18n} from &apos;../../../coral-utils&apos;;
 
 const CLASSNAME = &apos;_coral-Table-row&apos;;
 
@@ -448,7 +450,11 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
   /** @ignore */
   constructor() {
     super();
-  
+
+    // Templates
+    this._elements = {};
+    accessibilityState.call(this._elements, {commons});
+
     // Required for coral-table-row:change event
     this._oldSelection = [];
     
@@ -508,9 +514,9 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
     this._reflectAttribute(&apos;selected&apos;, this._selected);
   
     this.trigger(&apos;coral-table-row:_selectedchanged&apos;);
-    
-    this._syncAriaSelectedState();
     this._syncSelectHandle();
+    this._syncAriaLabelledby();
+    this._syncAriaSelectedState();
   }
   
   /**
@@ -621,7 +627,195 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
   /** @private */
   _syncAriaSelectedState() {
     this.classList.toggle(&apos;is-selected&apos;, this.selected);
+    const selectHandle = this.querySelector(&apos;[coral-table-rowselect]&apos;);
+
+    // @a11y Only update aria-selected if the table row can be selected
+    if(!(this.hasAttribute(&apos;coral-table-rowselect&apos;) || selectHandle)) {
+      this.removeAttribute(&apos;aria-selected&apos;);
+      return;
+    }
+
+    const rowOrderHandle = this.querySelector(&apos;[coral-table-roworder]&apos;);
+    const rowLockHandle = this.querySelector(&apos;[coral-table-rowlock]&apos;);
+    const rowRemoveHandle = this.querySelector(&apos;[coral-row-remove]&apos;);
+    const accessibilityState = this._elements.accessibilityState;
+
+    const resetAccessibilityState = () =&gt; {
+      // @a11y remove aria-live
+      this.removeAttribute(&apos;aria-live&apos;);
+      this.removeAttribute(&apos;aria-atomic&apos;);
+      this.removeAttribute(&apos;aria-relevant&apos;);
+
+      // @a11y Unhide the selectHandle, so that it will be resume being announced by assistive 
+      // technology
+      if (selectHandle &amp;&amp; selectHandle.tagName === &apos;CORAL-CHECKBOX&apos;) {
+        selectHandle.removeAttribute(&apos;aria-hidden&apos;);
+      }
+
+      // @a11y Unhide the coral-table-roworder handle, so that it will be resume being announced by 
+      // assistive technology
+      if (rowOrderHandle) {
+        rowOrderHandle.removeAttribute(&apos;aria-hidden&apos;);
+      }
+
+      // @a11y Unhide the coral-table-rowlock handle, so that it will be resume being announced by 
+      // assistive technology
+      if (rowLockHandle) {
+        rowLockHandle.removeAttribute(&apos;aria-hidden&apos;);
+      }
+
+      // @a11y Unhide the coral-row-remove handle, so that it will be resume being announced by 
+      // assistive technology
+      if (rowRemoveHandle) {
+        rowRemoveHandle.removeAttribute(&apos;aria-hidden&apos;);
+      }
+
+      if (accessibilityState) {
+        // @a11y Hide the _accessibilityState from assistive technology, so that it can not be read 
+        // using a screen reader separately from the row it helps label
+        accessibilityState.setAttribute(&apos;aria-hidden&apos;, &apos;true&apos;);
+
+        // @a11y If the item is not selected, remove &apos;, unchecked&apos; to decrease verbosity.
+        if (!this.selected) {
+          accessibilityState.innerHTML = &apos;&apos;;
+        }
+      }
+    };
+
+    // @a11y set aria-selected
     this.setAttribute(&apos;aria-selected&apos;, this.selected);
+
+    if (this._ariaLiveOnTimeout || this._ariaLiveOffTimeout) {
+      clearTimeout(this._ariaLiveOnTimeout);
+      clearTimeout(this._ariaLiveOffTimeout);
+    }
+
+    // @ally If _accessibilityState has been added to a cell within the row,
+    if (accessibilityState) {        
+      resetAccessibilityState();
+      this._ariaLiveOnTimeout = setTimeout(() =&gt; {
+          
+        // @a11y and the row or one of its descendants has focus,
+        if (this === document.activeElement || this.contains(document.activeElement)) {
+          
+          // @a11y Hide the &quot;Select&quot; checkbox so that it does not get announced with the state change.
+          if (selectHandle &amp;&amp; selectHandle.tagName === &apos;CORAL-CHECKBOX&apos;) {
+            selectHandle.setAttribute(&apos;aria-hidden&apos;, &apos;true&apos;);
+          }
+
+          // @a11y Hide the coral-table-roworder handle so that it does not get announced with the 
+          // state change.
+          if (rowOrderHandle) {
+            rowOrderHandle.setAttribute(&apos;aria-hidden&apos;, &apos;true&apos;);
+          }
+
+          // @a11y Hide the coral-table-rowlock handle so that it does not get announced with the state
+          // change.
+          if (rowLockHandle) {
+            rowLockHandle.setAttribute(&apos;aria-hidden&apos;, &apos;true&apos;);
+          }
+
+          // @a11y Hide the coral-row-remove handle so that it does not get announced with the state 
+          // change.
+          if (rowRemoveHandle) {
+            rowRemoveHandle.setAttribute(&apos;aria-hidden&apos;, &apos;true&apos;);
+          }
+
+          // @a11y The ChromeVox screenreader, used on Chromebook, announces the state change and 
+          // should not need aria-live, otherwise it double-voices the row.
+          if (!window.cvox) {
+            // @a11y Unhide the _accessibilityState so that it will get announced with the state change.
+            accessibilityState.removeAttribute(&apos;aria-hidden&apos;);
+
+            // @ally use aria-live to announce the state change
+            this.setAttribute(&apos;aria-live&apos;, &apos;assertive&apos;);
+
+            // @ally use aria-atomic=&quot;true&quot; to announce the entire row
+            this.setAttribute(&apos;aria-atomic&apos;, &apos;true&apos;);
+          }
+
+          this._ariaLiveOnTimeout = setTimeout(() =&gt; {
+            // @ally Set the _accessibilityState text to read either &quot;, checked&quot; or &quot;, unchecked&quot;, 
+            // which should trigger a live region announcement.
+            accessibilityState.innerHTML = i18n.get(this.selected ? &apos;, checked&apos; : &apos;, unchecked&apos;);
+
+            // @ally wait 250ms for row to announce
+            this._ariaLiveOffTimeout = setTimeout(resetAccessibilityState, 250);
+          }, 20);
+        }
+      }, 20);
+
+      if (!(this === document.activeElement || this.contains(document.activeElement))) {
+        accessibilityState.innerHTML = i18n.get(this.selected ? &apos;, checked&apos; : &apos;&apos;);
+      }  
+    }
+  }
+
+  /** @private */
+  _syncAriaLabelledby() {
+    // @a11y if the row is not selectable, remove accessibilityState
+    if (!(this.hasAttribute(&apos;coral-table-rowselect&apos;) || this.querySelector(&apos;[coral-table-rowselect]&apos;))) {
+      if (this._elements.accessibilityState.parentNode) {
+        this.removeAttribute(&apos;aria-labelledby&apos;);
+        this._elements.accessibilityState = this._elements.accessibilityState.parentNode.removeChild(this._elements.accessibilityState);
+      }
+      return;
+    }
+
+    // @a11y get a list of ids for cells 
+    const cells = this.items.getAll().filter(cell =&gt; {
+      // @a11y exclude cells for coral-table-roworder, coral-table-rowlock or coral-row-remove
+      return (
+        cell.id &amp;&amp;
+        !(
+          cell.hasAttribute(&apos;coral-table-roworder&apos;) || cell.querySelector(&apos;[coral-table-roworder]&apos;)  ||
+          cell.hasAttribute(&apos;coral-table-rowlock&apos;) || cell.querySelector(&apos;[coral-table-rowlock]&apos;) ||
+          cell.hasAttribute(&apos;coral-row-remove&apos;) || cell.querySelector(&apos;[coral-table-remove]&apos;)
+        )
+      );
+    });
+
+    let cellForAccessibilityState;
+    const ids = cells.map(cell =&gt; {
+      const handle = cell.querySelector(&apos;[coral-table-rowselect]&apos;);
+      if (handle) {
+
+        cellForAccessibilityState = cell;
+
+        // @a11y otherwise, if the selectHandle is a coral-checkbox,
+        if (handle &amp;&amp; handle.tagName === &apos;CORAL-CHECKBOX&apos;) {
+          // @a11y if the row is selected, don&apos;t add the coral-table-rowselect to accessibility name
+          if (this.selected) {
+            return;
+          }
+          // otherwise, include the checkbox input labelled &quot;Select&quot; in the accessibility name
+          return handle._elements.input &amp;&amp; handle._elements.input.id;
+        }
+      }
+
+      // @a11y include all other cells in the row in the accessibility name
+      return cell.id;
+    });
+
+    // @a11y If an _accessibilityState has not been defined within one of the cells, add to the last 
+    // cell
+    if (!cellForAccessibilityState &amp;&amp; cells.length) {
+      cellForAccessibilityState = cells[cells.length - 1];
+    }
+
+    if (cellForAccessibilityState) {
+      cellForAccessibilityState.appendChild(this._elements.accessibilityState);
+    }
+
+    // @a11y Once defined,
+    if (this._elements.accessibilityState.parentNode) {
+      // @a11y add the _accessibilityState &quot;, checked&quot; or &quot;, unchecked&quot; as the last item in the 
+      // accessibility name
+      ids.push(this._elements.accessibilityState.id);
+    }
+
+    // @a11y Update the aria-labelledby attribute for the row.
+    this.setAttribute(&apos;aria-labelledby&apos;, ids.join(&apos; &apos;));
   }
   
   /** @private */
@@ -629,7 +823,27 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
     // Check/uncheck the select handle
     const selectHandle = this.querySelector(&apos;[coral-table-rowselect]&apos;);
     if (selectHandle) {
+      if (typeof selectHandle.indeterminate !== &apos;undefined&apos;) {
+        selectHandle.indeterminate = false;
+      }
+
       selectHandle[this.selected ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;checked&apos;, &apos;&apos;);
+      
+      // @a11y If the handle is a checkbox but lacks a label, label it with &quot;Select&quot;.
+      if (selectHandle.tagName === &apos;CORAL-CHECKBOX&apos;) {
+        if (!selectHandle.labelled) {
+          selectHandle.labelled = i18n.get(&apos;Select&apos;);
+        }
+
+        // @a11y provide a more explicit label for the checkbox than just &quot;Select&quot;
+        if (this.hasAttribute(&apos;aria-labelledby&apos;)) {
+          let ids = this.getAttribute(&apos;aria-labelledby&apos;)
+          .split(&apos; &apos;)
+          .filter(id =&gt; selectHandle._elements.input.id !== id &amp;&amp; this._elements.accessibilityState.id !== id)
+          .join(&apos; &apos;);
+          selectHandle.labelledBy = selectHandle._elements.input.id + &apos; &apos; + ids;
+        }
+      }
     }
   }
   
@@ -642,6 +856,9 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
       // Clear selection but leave the handle if any
       this.set(&apos;selected&apos;, false, true);
     }
+
+    // Sync the aria-labelledby attribute to include the _accessibilityState
+    this._syncAriaLabelledby();
   }
   
   /** @private */
@@ -669,6 +886,9 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
       if (!this.querySelector(`[${handle}]`)) {
         this.setAttribute(handle, &apos;&apos;);
       }
+      this._syncSelectHandle();
+      this._syncAriaLabelledby();
+      this._syncAriaSelectedState();
     });
   }
   
@@ -680,6 +900,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
         addedNodes: mutation.addedNodes,
         removedNodes: mutation.removedNodes
       });
+      this._syncAriaLabelledby();
     });
   }
   
@@ -709,6 +930,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
     super.render();
     
     this.classList.add(CLASSNAME);
+    this._syncAriaLabelledby();
   }
   
   /**

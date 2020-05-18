@@ -212,6 +212,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryVariableLayout.js~MasonryVariableLayout.html">MasonryVariableLayout</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:change">coral-masonry:change</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:order">coral-masonry:order</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryAriaGridEnum">MasonryAriaGridEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryLayoutsEnum">MasonryLayoutsEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonrySelectionModeEnum">MasonrySelectionModeEnum</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-multifield-src-scripts">coral-component-multifield/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-multifield/src/scripts/Multifield.js~Multifield.html">Multifield</a></span></span></li>
@@ -562,6 +563,7 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
     // Overlay
     events[`global:capture:coral-overlay:beforeopen #${overlayId}`] = &apos;_beforeOverlayOpen&apos;;
     events[`global:capture:coral-overlay:close #${overlayId}`] = &apos;_onOverlayClose&apos;;
+    events[`global:key:esc #${overlayId}`] = &apos;_onKeyEsc&apos;;
     
     // Events
     this._delegateEvents(events);
@@ -894,7 +896,6 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute(&apos;required&apos;, this._required);
     
-    this.setAttribute(&apos;aria-required&apos;, this._required);
     this._elements.input.required = this._required;
   }
   
@@ -1040,10 +1041,12 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
   }
   
   /** @ignore */
-  _onKeyEsc() {
+  _onKeyEsc(event) {
     if (!this._elements.overlay.open) {
       return;
     }
+
+    event.stopPropagation();
     
     this._elements.overlay.open = false;
   }
@@ -1061,12 +1064,14 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
     }
     
     // set aria-expanded state
+    this._elements.input.setAttribute(&apos;aria-expanded&apos;, true);
     this._elements.colorPreview.setAttribute(&apos;aria-expanded&apos;, true);
   }
   
   /** @ignore */
   _onOverlayClose() {
     // set aria-expanded state
+    this._elements.input.setAttribute(&apos;aria-expanded&apos;, true);
     this._elements.colorPreview.setAttribute(&apos;aria-expanded&apos;, false);
   }
   
@@ -1306,8 +1311,7 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
   
     this.classList.add(CLASSNAME);
   
-    this.setAttribute(&apos;role&apos;, &apos;combobox&apos;);
-    this.setAttribute(&apos;aria-expanded&apos;, false);
+    this.setAttribute(&apos;role&apos;, &apos;group&apos;);
     
     const frag = document.createDocumentFragment();
     

@@ -212,6 +212,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryVariableLayout.js~MasonryVariableLayout.html">MasonryVariableLayout</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:change">coral-masonry:change</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:order">coral-masonry:order</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryAriaGridEnum">MasonryAriaGridEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryLayoutsEnum">MasonryLayoutsEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonrySelectionModeEnum">MasonrySelectionModeEnum</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-multifield-src-scripts">coral-component-multifield/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-multifield/src/scripts/Multifield.js~Multifield.html">Multifield</a></span></span></li>
@@ -637,6 +638,18 @@ class Checkbox extends BaseFormField(BaseComponent(HTMLElement)) {
     
     this._hideLabelIfEmpty();
   }
+
+    /**
+   Inherited from {@link BaseFormField#labelledBy}.
+   */
+  get labelledBy() {
+    return super.labelledBy;
+  }
+  set labelledBy(value) {
+    super.labelledBy = value;
+    
+    this._hideLabelIfEmpty();
+  }
   
   /**
    Inherited from {@link BaseComponent#trackingElement}.
@@ -735,11 +748,11 @@ class Checkbox extends BaseFormField(BaseComponent(HTMLElement)) {
     const label = this._elements.label;
 
     // If it&apos;s empty and has no non-textnode children, hide the label
-    const hiddenValue = !(label.children.length === 0 &amp;&amp; label.textContent.replace(/\s*/g, &apos;&apos;) === &apos;&apos; &amp;&amp; !this.labelled);
+    const hiddenValue = !(label.children.length === 0 &amp;&amp; label.textContent.replace(/\s*/g, &apos;&apos;) === &apos;&apos;);
 
     // Toggle the screen reader text
     this._elements.labelWrapper.style.margin = !hiddenValue ? &apos;0&apos; : &apos;&apos;;
-    this._elements.screenReaderOnly.hidden = hiddenValue;
+    this._elements.screenReaderOnly.hidden = !!hiddenValue || !!this.labelledBy || !!this.labelled;
   }
   
   /**

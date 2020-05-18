@@ -212,6 +212,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryVariableLayout.js~MasonryVariableLayout.html">MasonryVariableLayout</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:change">coral-masonry:change</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:order">coral-masonry:order</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryAriaGridEnum">MasonryAriaGridEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryLayoutsEnum">MasonryLayoutsEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonrySelectionModeEnum">MasonrySelectionModeEnum</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-multifield-src-scripts">coral-component-multifield/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-multifield/src/scripts/Multifield.js~Multifield.html">Multifield</a></span></span></li>
@@ -615,12 +616,10 @@ class ColorInputSwatches extends BaseColorInputAbstractSubview(BaseComponent(HTM
       swatch.targetColor = color;
       
       if (color.selected) {
-        swatch.selected = color.selected;
+        swatch[color.selected ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;selected&apos;, color.selected);
         swatchSelected = true;
       }
-      
-      swatch.setAttribute(&apos;aria-selected&apos;, swatch.selected);
-      
+            
       // Update color button tabindex depending on selected state
       swatch.tabIndex = swatch.selected ? 0 : -1;
     }
@@ -726,6 +725,9 @@ class ColorInputSwatches extends BaseColorInputAbstractSubview(BaseComponent(HTM
     }
     
     event.matchedTarget.tabIndex = 0;
+    if (document.activeElement !== event.matchedTarget.firstChild) {
+      event.matchedTarget.firstChild.focus();
+    }
   }
   
   /** @ignore */

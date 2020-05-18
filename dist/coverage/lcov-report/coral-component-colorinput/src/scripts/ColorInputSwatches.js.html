@@ -22,16 +22,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80.77% </span>
+                <span class="strong">79.39% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>105/130</span>
+                <span class='fraction'>104/131</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75.41% </span>
+                <span class="strong">72.31% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>46/61</span>
+                <span class='fraction'>47/65</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80.77% </span>
+                <span class="strong">79.39% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>105/130</span>
+                <span class='fraction'>104/131</span>
             </div>
         
             
@@ -54,7 +54,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -397,7 +397,8 @@
 <a name='L339'></a><a href='#L339'>339</a>
 <a name='L340'></a><a href='#L340'>340</a>
 <a name='L341'></a><a href='#L341'>341</a>
-<a name='L342'></a><a href='#L342'>342</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L342'></a><a href='#L342'>342</a>
+<a name='L343'></a><a href='#L343'>343</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -610,7 +611,6 @@
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">364x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">364x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -729,12 +729,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">194x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">194x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -935,12 +937,10 @@ class ColorInputSwatches extends BaseColorInputAbstractSubview(BaseComponent(HTM
       swatch.targetColor = color;
       
       if (color.selected) {
-        swatch.selected = color.selected;
+        swatch[color.selected ? 'setAttribute' : 'removeAttribute']('selected', color.selected);
         swatchSelected = true;
       }
-      
-      swatch.setAttribute('aria-selected', swatch.selected);
-      
+            
       // Update color button tabindex depending on selected state
       swatch.tabIndex = swatch.selected ? 0 : -1;
     }
@@ -949,7 +949,7 @@ class ColorInputSwatches extends BaseColorInputAbstractSubview(BaseComponent(HTM
     if (!swatchSelected) {
       this._ensureKeyboardAccess();
     }
-  }
+  }<span class="branch-1 cbranch-no" title="branch not covered" ></span>
   
   /** @ignore */
   _onSwatchClicked(event) {
@@ -965,22 +965,22 @@ class ColorInputSwatches extends BaseColorInputAbstractSubview(BaseComponent(HTM
       swatch.selected = true;
     }
     swatch.firstChild.focus();
-  }<span class="fstat-no" title="function not covered" ></span>
-  <span class="cstat-no" title="statement not covered" ></span>
-  /** @ignore */<span class="cstat-no" title="statement not covered" ></span>
-  _onKeyDown(event)<span class="cstat-no" title="statement not covered" > {</span>
-    const overlay = this._colorinput._elements.overlay;
+  }
+  <span class="fstat-no" title="function not covered" ></span>
+  /** <span class="cstat-no" title="statement not covered" >@ignore */</span>
+  _onKeyDown(event) {<span class="cstat-no" title="statement not covered" ></span>
+    const overlay =<span class="cstat-no" title="statement not covered" > this._colorinput._elements.overlay;</span>
+    
+    //<span class="cstat-no" title="statement not covered" > only if overlay is open</span>
+    if (!overlay.ope<span class="cstat-no" title="statement not covered" >n) {</span>
+      re<span class="cstat-no" title="statement not covered" >turn;</span>
+    }
     <span class="cstat-no" title="statement not covered" ></span>
-    // only if overl<span class="cstat-no" title="statement not covered" >ay is open</span>
-    if (<span class="cstat-no" title="statement not covered" >!overlay.open) {</span>
-      return;
-    }<span class="cstat-no" title="statement not covered" ></span>
-    
-    cons<span class="cstat-no" title="statement not covered" >t allItems = this.items.</span>getAll();
-    
+    const allItems = this.items.getAll();
+    <span class="cstat-no" title="statement not covered" ></span>
     const currentIndex = allItems.indexOf(event.matchedTarget);
-    le<span class="cstat-no" title="statement not covered" >t preventDefault = true;</span>
-    let newIndex = currentIndex;
+    let preventDefault = true;
+    le<span class="cstat-no" title="statement not covered" >t newIndex = currentIndex;</span>
     
     switch (event.which) {
       // return
@@ -988,9 +988,9 @@ class ColorInputSwatches extends BaseColorInputAbstractSubview(BaseComponent(HTM
         // Wait a frame before closing so that focus is restored correctly
         window.requestAnimationFrame(() =&gt; {
           overlay.open = false;
-      <span class="missing-if-branch" title="if path not taken" >I</span>  });
-<span class="cstat-no" title="statement not covered" >        break;</span>
-      // left arrow
+        });
+      <span class="missing-if-branch" title="if path not taken" >I</span>  break;
+      //<span class="cstat-no" title="statement not covered" > left ar</span>row
       case 37:
         newIndex -= 1;
         break;
@@ -999,13 +999,13 @@ class ColorInputSwatches extends BaseColorInputAbstractSubview(BaseComponent(HTM
         newIndex -= 4;
         break;
       // right arrow
-      ca<span class="branch-0 cbranch-no" title="branch not covered" >se 39:</span>
-        newIndex += 1;
-        br<span class="cstat-no" title="statement not covered" >eak;<span class="fstat-no" title="function not covered" ></span></span>
-      // dow<span class="cstat-no" title="statement not covered" >n arrow</span>
-      case 40:
-        ne<span class="cstat-no" title="statement not covered" >wIndex </span>+= 4;
+      case 39:
+<span class="branch-0 cbranch-no" title="branch not covered" >        newIndex += 1;</span>
         break;
+      // d<span class="cstat-no" title="statement not covered" >own arrow<span class="fstat-no" title="function not covered" ></span></span>
+      case 4<span class="cstat-no" title="statement not covered" >0:</span>
+        newIndex += 4;
+        br<span class="cstat-no" title="statement not covered" >eak;</span>
       default:
         preventDefault = false;
         break;
@@ -1026,26 +1026,29 @@ class ColorInputSwatches extends BaseColorInputAbstractSubview(BaseComponent(HTM
       color.value = swatch.targetColor ? swatch.targetColor.value : '';
       this._colorinput._setActiveColor(color);
       swatch.selected = true;
-      <span class="branch-5 cbranch-no" title="branch not covered" ></span>
-      swat<span class="cstat-no" title="statement not covered" >ch.firstChild.focus();</span>
+      
+      sw<span class="branch-5 cbranch-no" title="branch not covered" >atch.firstChild.focus();</span>
     }<span class="cstat-no" title="statement not covered" ></span>
-  }
+  }<span class="cstat-no" title="statement not covered" ></span>
   
   /**
-   Ens<span class="missing-if-branch" title="else path not taken" >E</span>ure that only one swatch can receive tab focus at a time
-   @ignore
+   Ensure that only one swatch can receive tab focus at a time
+   @ig<span class="missing-if-branch" title="else path not taken" >E</span>nore
    */
-  _onFoc<span class="missing-if-branch" title="if path not taken" >I</span>us(event) {
-    const <span class="cstat-no" title="statement not covered" >allItems</span> = this.items.getAll();
-    
+  _onFocus(event) {
+    cons<span class="missing-if-branch" title="if path not taken" >I</span>t allItems = this.items.getAll();
+    <span class="cstat-no" title="statement not covered" ></span>
     for (let i = 0; i &lt; allItems.length; i++) {
       const swatch = allItems[i];
       if (!swatch.contains(event.matchedTarget)) {
         swatch.tabIndex = -1;
-      }<span class="branch-1 cbranch-no" title="branch not covered" ></span>
-    }
+      }
+    }<span class="branch-1 cbranch-no" title="branch not covered" ></span>
     
     event.matchedTarget.tabIndex = 0;
+    if (document.activeElement !== event.matchedTarget.firstChild) {
+      event.matchedTarget.firstChild.focus();
+    }
   }
   
   /** @ignore */
@@ -1055,21 +1058,21 @@ class ColorInputSwatches extends BaseColorInputAbstractSubview(BaseComponent(HTM
     this.classList.add(CLASSNAME);
     
     // adds the role to support accessibility
-    this.setAttribute('role', 'listbox');
-  
-    // Support clone<span class="fstat-no" title="function not covered" >Node</span>
-    const swatchesSub<span class="cstat-no" title="statement not covered" >view = this.querySel</span>ector('._coral-ColorInput-swatchesSubview');
-    if (swatchesSubview) {
-<span class="cstat-no" title="statement not covered" >      swatchesSubview.remove();</span>
+    this.setAttribut<span class="fstat-no" title="function not covered" >e('role',</span> 'listbox');
+  <span class="cstat-no" title="statement not covered" ></span>
+    // Support cloneNode
+    co<span class="cstat-no" title="statement not covered" >nst swatchesSubview = this.querySelector('._coral-ColorInput-swatchesSubview');</span>
+    if (swatchesSubvi<span class="cstat-no" title="statement not covered" >ew) {</span>
+      swatchesSubview.remove();
     }<span class="cstat-no" title="statement not covered" ></span>
+  <span class="cstat-no" title="statement not covered" ></span>
+    // add header
+    this.appendChild(this._elements.swatchesSubview);
   
-    // a<span class="cstat-no" title="statement not covered" >dd header</span>
-    this.a<span class="cstat-no" title="statement not covered" >ppendChild(this._eleme</span>nts.swatchesSubview);
-  
-    // add accessibility label
+    //<span class="cstat-no" title="statement not covered" > add accessibility label</span>
     this.setAttribute('aria-labelledby', this._elements.swatchesHeaderTitle.id);
   <span class="cstat-no" title="statement not covered" ></span>
-    // Don't trigger events once connected
+    // D<span class="cstat-no" title="statement not covered" >on't trigger events once connected</span>
     this._preventTriggeringEvents = true;
     this._validateSelection();
     this._preventTriggeringEvents = false;
@@ -1086,7 +1089,7 @@ export default ColorInputSwatches;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Apr 24 2020 08:41:42 GMT+0200 (CEST)
+                at Mon May 18 2020 14:58:16 GMT+0200 (Central European Summer Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

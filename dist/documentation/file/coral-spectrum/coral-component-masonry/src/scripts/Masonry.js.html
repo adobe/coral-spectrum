@@ -212,6 +212,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryVariableLayout.js~MasonryVariableLayout.html">MasonryVariableLayout</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:change">coral-masonry:change</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-masonry:order">coral-masonry:order</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryAriaGridEnum">MasonryAriaGridEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryLayoutsEnum">MasonryLayoutsEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonrySelectionModeEnum">MasonrySelectionModeEnum</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-component-multifield-src-scripts">coral-component-multifield/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-multifield/src/scripts/Multifield.js~Multifield.html">Multifield</a></span></span></li>
@@ -476,6 +477,21 @@ const layouts = {
   DASHBOARD: &apos;dashboard&apos;
 };
 
+/**
+ Enumeration values to enable/disable aria grid support for {@link Masonry}.
+
+ @typedef {Object} MasonryAriaGridEnum
+
+ @property {String} ON
+ Turn on auto aria grid roles.
+ @property {String} OFF
+ OFF is default. Turn off auto aria grid roles.
+ */
+const ariaGrid = {
+  ON: &apos;on&apos;,
+  OFF: &apos;off&apos;
+};
+
 // IE does not set the complete property to true if an image cannot be loaded. This code must be outside of the
 // masonry to make sure that the listener catches images which fail loading before the masonry is initalized.
 // @polyfill ie11
@@ -533,6 +549,13 @@ class Masonry extends BaseComponent(HTMLElement) {
     this._newItems = [];
     this._tabbableItem = null;
     
+    //a11y
+    this._defaultAriaRole = &quot;group&quot;;
+
+    this._ariaGrid = ariaGrid.OFF;
+    this._preservedAriaRole = this._defaultAriaRole;
+    this._preservedParentAriaRole = null;
+
     this._delegateEvents({
       &apos;global:resize&apos;: &apos;_onWindowResize&apos;,
   
@@ -733,6 +756,211 @@ class Masonry extends BaseComponent(HTMLElement) {
     }
   }
   
+  /**
+   Attribute to enable/disable auto aria grid role assignment. Value must be one of {@link MasonryAriaGridEnum}.
+   Setting this property to {@link MasonryAriaGridEnum.ON} will do following to enable support for accessibility:
+    - Preserve current role attribute of the parent element of {@link Masonry}, and set new role as grid.
+    - Preserve current role attribute of the {@link Masonry}, and set new role as row.
+    - Set role attribute of all child {@link MasonryItem} to gridcell.
+
+   Setting the property to {@link MasonryAriaGridEnum.OFF} will do following:
+    - Restore preserved (if any) role attribute of the parent element of {@link Masonry}.
+    - Restore preserved role attribute of the {@link Masonry}.
+    - Remove role attribute of all child {@link MasonryItem}.
+
+   Setting the attribute to other than allowed values will fallback to {@link MasonryAriaGridEnum.OFF}.
+
+   @type {String}
+   @default {@link MasonryAriaGridEnum.OFF}
+   @htmlattribute ariagrid
+   @htmlattributereflected
+   */
+  get ariaGrid() {
+    return this._ariaGrid || ariaGrid.OFF;
+  }
+  set ariaGrid (value) {
+    value = transform.string(value);
+
+    // Ensure correct values
+    if (value !== ariaGrid.ON &amp;&amp; value !== ariaGrid.OFF) {
+      console.warn(&apos;Coral.Masonry: Unsupported ariaGrid value: &apos;, value, &apos;. Will fallback to &apos;, ariaGrid.OFF);
+      value = ariaGrid.OFF;
+    }
+
+    //update current state
+    this._ariaGrid = value;
+    this._reflectAttribute(&apos;ariagrid&apos;, this._ariaGrid);
+
+    // Update role for this masonry
+    if (this._ariaGrid === ariaGrid.ON) {
+      // Preserve existing role and set new role
+      this._preservedAriaRole = this.getAttribute(&apos;role&apos;);
+      this.setAttribute(&apos;role&apos;, &apos;row&apos;);
+    }
+    else if (this._ariaGrid == ariaGrid.OFF) {
+      // Restore or remove role
+      if (this._preservedAriaRole) {
+        this.setAttribute(&apos;role&apos;, this._preservedAriaRole);
+      }
+      else {
+        this.removeAttribute(&apos;role&apos;);
+      }
+    }
+
+    // Update parent and child item roles based on current state
+    this._updateAriaRoleForParent(this._ariaGrid);
+    this._updateAriaColumnCountForParent(this._ariaGrid);
+    this._updateAriaRoleForItems(this._ariaGrid);
+  }
+
+  /**
+   Specifies aria-label value
+   
+   @type {?String}
+   @htmlattribute aria-label
+   @htmlattributereflected
+   */
+  get ariaLabel() {
+    return this.getAttribute(&apos;aria-label&apos;);
+  }
+  set ariaLabel(value) {
+    value = transform.string(value);
+    if (value === &apos;&apos;) {
+      this.removeAttribute(&apos;aria-label&apos;);
+    }
+    else {
+      this._reflectAttribute(&apos;aria-label&apos;, value);
+    }
+
+    if (!this.parentElement || this._ariaGrid === ariaGrid.OFF) {
+      return;
+    }
+    
+    if (this.ariaLabel) {
+      this.parentElement.setAttribute(&apos;aria-label&apos;, this.ariaLabel);
+    }
+    else {
+      this.parentElement.removeAttribute(&apos;aria-label&apos;);
+    }
+  }
+
+  /**
+   Specifies aria-labelledby value
+   
+   @type {?String}
+   @htmlattribute aria-labelledby
+   @htmlattributereflected
+   */
+  get ariaLabelledby() {
+    return this.getAttribute(&apos;aria-labelledby&apos;);
+  }
+  set ariaLabelledby(value) {
+    value = transform.string(value);
+    if (value === &apos;&apos;) {
+      this.removeAttribute(&apos;aria-labelledby&apos;);
+    }
+    else {
+      this._reflectAttribute(&apos;aria-labelledby&apos;, value);
+    }
+
+    if (!this.parentElement || this._ariaGrid === ariaGrid.OFF) {
+      return;
+    }
+    
+    if (this.ariaLabelledby) {
+      this.parentElement.setAttribute(&apos;aria-labelledby&apos;, this.ariaLabelledby);
+    }
+    else {
+      this.parentElement.removeAttribute(&apos;aria-labelledby&apos;);
+    }
+  }
+
+  /** @private */
+  _updateAriaRoleForParent(activateAriaGrid) {
+    if (!this.parentElement) {
+      return;
+    }
+
+    if (activateAriaGrid === ariaGrid.ON) {
+      // Save/set role for the parent as grid
+      this._preservedParentAriaRole = this.parentElement.getAttribute(&apos;role&apos;);
+      this.parentElement.setAttribute(&apos;role&apos;, &apos;grid&apos;);
+
+      // parent grid should be labelled the same as coral-masonry
+      if (this.ariaLabel &amp;&amp; this.parentElement.getAttribute(&apos;aria-label&apos;) !== this.ariaLabel) {
+        this._preservedParentAriaLabel = this.parentElement.getAttribute(&apos;aria-label&apos;);
+        this.parentElement.setAttribute(&apos;aria-label&apos;, this.ariaLabel);
+      }
+
+      if (this.ariaLabelledby &amp;&amp; this.parentElement.getAttribute(&apos;aria-labelledby&apos;) !== this.ariaLabelledby) {
+        this._preservedParentAriaLabelledby = this.parentElement.getAttribute(&apos;aria-labelledby&apos;);
+        this.parentElement.setAttribute(&apos;aria-labelledby&apos;, this.ariaLabelledby);
+      }
+    }
+    else {
+      // Restore/remove role of the parent element
+      if (this._preservedParentAriaRole) {
+        this.parentElement.setAttribute(&apos;role&apos;, this._preservedParentAriaRole);
+      }
+      else {
+        this.parentElement.removeAttribute(&apos;role&apos;);
+      }
+
+      // restore the aria-label or aria-labelledby values as well
+      if (this._preservedParentAriaLabel) {
+        this.parentElement.setAttribute(&apos;aria-label&apos;, this._preservedParentAriaLabel);
+        this._preservedParentAriaLabel = undefined;
+      }
+      else {
+        this.parentElement.removeAttribute(&apos;aria-label&apos;);
+      }
+
+      if (this._preservedParentAriaLabelledby !== undefined) {
+        this.parentElement.setAttribute(&apos;aria-labelledby&apos;, this._preservedParentAriaLabelledby);
+      }
+      else {
+        this.parentElement.removeAttribute(&apos;aria-labelledby&apos;);
+      }
+
+      // Remove aria-colcount
+      this.parentElement.removeAttribute(&apos;aria-colcount&apos;);
+    }
+  }
+
+  /** @private */
+  _updateAriaRoleForItems(activateAriaGrid) {
+    let columnIndex = 1;
+    this.items.getAll().forEach((item) =&gt; {
+      this._updateAriaRoleForItem(item, columnIndex++, activateAriaGrid);
+    });
+  }
+
+  /** @private */
+  _updateAriaRoleForItem(item, columnIndex, activateAriaGrid) {
+    if (activateAriaGrid === ariaGrid.ON) {
+      item.setAttribute(&apos;role&apos;,&apos;gridcell&apos;);
+      item.setAttribute(&apos;aria-colindex&apos;, columnIndex);
+    }
+    else {
+      item.removeAttribute(&apos;role&apos;);
+      item.removeAttribute(&apos;aria-colindex&apos;);
+    }
+  }
+
+  /** @private */
+  _updateAriaColumnCountForParent(activateAriaGrid) {
+    if (!this.parentElement) {
+      return;
+    }
+    
+    if (activateAriaGrid === ariaGrid.ON) {
+      this.parentElement.setAttribute(&apos;aria-colcount&apos;, this.items.length);
+    }
+    else {
+      this.parentElement.removeAttribute(&apos;aria-colcount&apos;);
+    }
+  }
+
   _validateSelection(item) {
     const selectedItems = this.selectedItems;
     
@@ -937,6 +1165,10 @@ class Masonry extends BaseComponent(HTMLElement) {
       }
     }
     
+    // Update items, so that column indexes are correctly set
+    this._updateAriaRoleForItems(this.ariaGrid);
+    this._updateAriaColumnCountForParent(this.ariaGrid);
+
     // Prevent endless observation loop (skip mutations which have been caused by the layout)
     this._observer.takeRecords();
   }
@@ -1154,6 +1386,9 @@ class Masonry extends BaseComponent(HTMLElement) {
       commons.transitionEnd(item, () =&gt; {
         item.classList.remove(&apos;is-dropping&apos;);
       });
+
+      // Update items, so that column indexes are correctly set
+      this._updateAriaRoleForItems(this.ariaGrid);
     }
     item._oldBefore = null;
     item._dropPlaceholder = null;
@@ -1203,7 +1438,10 @@ class Masonry extends BaseComponent(HTMLElement) {
   
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
-      selectionmode: &apos;selectionMode&apos;
+      selectionmode: &apos;selectionMode&apos;,
+      ariagrid: &apos;ariaGrid&apos;,
+      &apos;aria-label&apos;: &apos;ariaLabel&apos;,
+      &apos;aria-labelledby&apos;: &apos;ariaLabelledby&apos;,
     });
   }
   
@@ -1213,7 +1451,10 @@ class Masonry extends BaseComponent(HTMLElement) {
       &apos;selectionmode&apos;,
       &apos;layout&apos;,
       &apos;spacing&apos;,
-      &apos;orderable&apos;
+      &apos;orderable&apos;,
+      &apos;ariagrid&apos;,
+      &apos;aria-label&apos;,
+      &apos;aria-labelledby&apos;
     ]);
   }
   
@@ -1223,8 +1464,11 @@ class Masonry extends BaseComponent(HTMLElement) {
     
     this.classList.add(CLASSNAME);
     
+    // Keep the default behavior when ariaGrid is not enabled
+    if (this._ariaGrid === ariaGrid.OFF) {
     // a11y
-    this.setAttribute(&apos;role&apos;, &apos;group&apos;);
+      this.setAttribute(&apos;role&apos;, this._defaultAriaRole);
+    }
     
     // Default reflected attributes
     if (!this._layout) { this.layout = layouts.FIXED_CENTERED; }
