@@ -98,6 +98,14 @@
         </style>
 
         <label>
+          ariaGrid
+          <span id="ariaGrid">
+            <a href="#" class="coral-Link">off</a> |
+            <a href="#" class="coral-Link">on</a> |
+          </span>
+        </label>
+        <br>
+        <label>
           Selection mode
           <span id="selection">
             <a href="#" class="coral-Link">none</a> |
@@ -130,88 +138,94 @@
           <a href="#" class="coral-Link append" data-count="100">append 100</a> |
         </label>
         <i>(double click on item to remove it)</i>
-
-        <coral-masonry orderable id="masonry" layout="fixed-centered" columnwidth="250" orderable>
-          <coral-masonry-item class="coral-Well">
-            <article>
-              <span coral-masonry-draghandle></span>
-              With image
-              <img src="http://via.placeholder.com/600x300" alt="">
-            </article>
-          </coral-masonry-item>
-          <coral-masonry-item class="coral-Well">
-            <article>
-              <span coral-masonry-draghandle></span>
-              card
-              <br>card
-            </article>
-          </coral-masonry-item>
-          <coral-masonry-item class="coral-Well" colspan="2">
-            <article>
-              <span coral-masonry-draghandle></span>
-              card
-              <br>card
-              <br>card
-            </article>
-          </coral-masonry-item>
-          <coral-masonry-item class="coral-Well">
-            <article>
-              <span coral-masonry-draghandle></span>
-              card
-              <br>card
-              <br>card
-              <br>card
-            </article>
-          </coral-masonry-item>
-          <coral-masonry-item class="coral-Well" colspan="2">
-            <article>card
-              <br>card
-              <br>card
-              <br>card
-              <br>card</article>
-          </coral-masonry-item>
-          <coral-masonry-item class="coral-Well">
-            <article>card
-              <br>card
-              <br>card
-              <br>card
-              <br>card
-              <br>card</article>
-          </coral-masonry-item>
-          <coral-masonry-item class="coral-Well">
-            <article>card
-              <br>card</article>
-          </coral-masonry-item>
-          <coral-masonry-item class="coral-Well" colspan="2">
-            <article>card
-              <br>card
-              <br>card</article>
-          </coral-masonry-item>
-          <coral-masonry-item class="coral-Well">
-            <article>card
-              <br>card
-              <br>card
-              <br>card</article>
-          </coral-masonry-item>
-          <coral-masonry-item class="coral-Well" colspan="2">
-            <article>card
-              <br>card
-              <br>card
-              <br>card
-              <br>card</article>
-          </coral-masonry-item>
-          <coral-masonry-item class="coral-Well">
-            <article>card
-              <br>card
-              <br>card
-              <br>card
-              <br>card
-              <br>card</article>
-          </coral-masonry-item>
-        </coral-masonry>
+        <div>
+          <coral-masonry orderable id="masonry" layout="fixed-centered" columnwidth="250" aria-label="Masonry">
+            <coral-masonry-item class="coral-Well">
+              <article>
+                <span coral-masonry-draghandle></span>
+                With image
+                <img src="http://via.placeholder.com/600x300" alt="">
+              </article>
+            </coral-masonry-item>
+            <coral-masonry-item class="coral-Well">
+              <article>
+                <span coral-masonry-draghandle></span>
+                card
+                <br>card
+              </article>
+            </coral-masonry-item>
+            <coral-masonry-item class="coral-Well" colspan="2">
+              <article>
+                <span coral-masonry-draghandle></span>
+                card
+                <br>card
+                <br>card
+              </article>
+            </coral-masonry-item>
+            <coral-masonry-item class="coral-Well">
+              <article>
+                <span coral-masonry-draghandle></span>
+                card
+                <br>card
+                <br>card
+                <br>card
+              </article>
+            </coral-masonry-item>
+            <coral-masonry-item class="coral-Well" colspan="2">
+              <article>card
+                <br>card
+                <br>card
+                <br>card
+                <br>card</article>
+            </coral-masonry-item>
+            <coral-masonry-item class="coral-Well">
+              <article>card
+                <br>card
+                <br>card
+                <br>card
+                <br>card
+                <br>card</article>
+            </coral-masonry-item>
+            <coral-masonry-item class="coral-Well">
+              <article>card
+                <br>card</article>
+            </coral-masonry-item>
+            <coral-masonry-item class="coral-Well" colspan="2">
+              <article>card
+                <br>card
+                <br>card</article>
+            </coral-masonry-item>
+            <coral-masonry-item class="coral-Well">
+              <article>card
+                <br>card
+                <br>card
+                <br>card</article>
+            </coral-masonry-item>
+            <coral-masonry-item class="coral-Well" colspan="2">
+              <article>card
+                <br>card
+                <br>card
+                <br>card
+                <br>card</article>
+            </coral-masonry-item>
+            <coral-masonry-item class="coral-Well">
+              <article>card
+                <br>card
+                <br>card
+                <br>card
+                <br>card
+                <br>card</article>
+            </coral-masonry-item>
+          </coral-masonry>
+        </div>
         <script>
           window.addEventListener('load', function() {
             const masonry = document.getElementById('masonry');
+
+            const ariaGridSelector = document.getElementById('ariaGrid');
+            ariaGridSelector.addEventListener('click', function(event) {
+              masonry.setAttribute('ariagrid', event.target.textContent);
+            });
 
             const layoutSelector = document.getElementById('layout');
             layoutSelector.addEventListener('click', function(event) {

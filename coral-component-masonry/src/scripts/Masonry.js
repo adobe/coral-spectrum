@@ -392,6 +392,68 @@ class Masonry extends BaseComponent(HTMLElement) {
     this._updateAriaRoleForItems(this._ariaGrid);
   }
 
+  /**
+   Specifies aria-label value
+   
+   @type {?String}
+   @htmlattribute aria-label
+   @htmlattributereflected
+   */
+  get ariaLabel() {
+    return this.getAttribute('aria-label');
+  }
+  set ariaLabel(value) {
+    value = transform.string(value);
+    if (value === '') {
+      this.removeAttribute('aria-label');
+    }
+    else {
+      this._reflectAttribute('aria-label', value);
+    }
+
+    if (!this.parentElement || this._ariaGrid === ariaGrid.OFF) {
+      return;
+    }
+    
+    if (this.ariaLabel) {
+      this.parentElement.setAttribute('aria-label', this.ariaLabel);
+    }
+    else {
+      this.parentElement.removeAttribute('aria-label');
+    }
+  }
+
+  /**
+   Specifies aria-labelledby value
+   
+   @type {?String}
+   @htmlattribute aria-labelledby
+   @htmlattributereflected
+   */
+  get ariaLabelledby() {
+    return this.getAttribute('aria-labelledby');
+  }
+  set ariaLabelledby(value) {
+    value = transform.string(value);
+    if (value === '') {
+      this.removeAttribute('aria-labelledby');
+    }
+    else {
+      this._reflectAttribute('aria-labelledby', value);
+    }
+
+    if (!this.parentElement || this._ariaGrid === ariaGrid.OFF) {
+      return;
+    }
+    
+    if (this.ariaLabelledby) {
+      this.parentElement.setAttribute('aria-labelledby', this.ariaLabelledby);
+    }
+    else {
+      this.parentElement.removeAttribute('aria-labelledby');
+    }
+  }
+
   /** @private */
   _updateAriaRoleForParent(activateAriaGrid) {
     if (!this.parentElement) {
@@ -402,6 +464,17 @@ class Masonry extends BaseComponent(HTMLElement) {
       // Save/set role for the parent as grid
       this._preservedParentAriaRole = this.parentElement.getAttribute('role');
       this.parentElement.setAttribute('role', 'grid');
+
+      // parent grid should be labelled the same as coral-masonry
+      if (this.ariaLabel && this.parentElement.getAttribute('aria-label') !== this.ariaLabel) {
+        this._preservedParentAriaLabel = this.parentElement.getAttribute('aria-label');
+        this.parentElement.setAttribute('aria-label', this.ariaLabel);
+      }
+
+      if (this.ariaLabelledby && this.parentElement.getAttribute('aria-labelledby') !== this.ariaLabelledby) {
+        this._preservedParentAriaLabelledby = this.parentElement.getAttribute('aria-labelledby');
+        this.parentElement.setAttribute('aria-labelledby', this.ariaLabelledby);
+      }
     }
     else {
       // Restore/remove role of the parent element
@@ -410,6 +483,22 @@ class Masonry extends BaseComponent(HTMLElement) {
       }
       else {
         this.parentElement.removeAttribute('role');
+      }
+
+      // restore the aria-label or aria-labelledby values as well
+      if (this._preservedParentAriaLabel) {
+        this.parentElement.setAttribute('aria-label', this._preservedParentAriaLabel);
+        this._preservedParentAriaLabel = undefined;
+      }
+      else {
+        this.parentElement.removeAttribute('aria-label');
+      }
+
+      if (this._preservedParentAriaLabelledby !== undefined) {
+        this.parentElement.setAttribute('aria-labelledby', this._preservedParentAriaLabelledby);
+      }
+      else {
+        this.parentElement.removeAttribute('aria-labelledby');
       }
 
       // Remove aria-colcount
@@ -929,7 +1018,9 @@ class Masonry extends BaseComponent(HTMLElement) {
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
       selectionmode: 'selectionMode',
-      ariagrid: 'ariaGrid'
+      ariagrid: 'ariaGrid',
+      'aria-label': 'ariaLabel',
+      'aria-labelledby': 'ariaLabelledby',
     });
   }
   
@@ -940,7 +1031,9 @@ class Masonry extends BaseComponent(HTMLElement) {
       'layout',
       'spacing',
       'orderable',
-      'ariagrid'
+      'ariagrid',
+      'aria-label',
+      'aria-labelledby'
     ]);
   }
   
