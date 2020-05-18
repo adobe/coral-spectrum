@@ -11,6 +11,7 @@
  */
 
 module.exports = {
+  errorOnViolation: true,
   showOnlyViolations: true,
   headless: true,
   verbose: true,
