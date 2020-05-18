@@ -217,6 +217,18 @@ class Checkbox extends BaseFormField(BaseComponent(HTMLElement)) {
     
     this._hideLabelIfEmpty();
   }
+
+    /**
+   Inherited from {@link BaseFormField#labelledBy}.
+   */
+  get labelledBy() {
+    return super.labelledBy;
+  }
+  set labelledBy(value) {
+    super.labelledBy = value;
+    
+    this._hideLabelIfEmpty();
+  }
   
   /**
    Inherited from {@link BaseComponent#trackingElement}.
@@ -319,7 +331,7 @@ class Checkbox extends BaseFormField(BaseComponent(HTMLElement)) {
 
     // Toggle the screen reader text
     this._elements.labelWrapper.style.margin = !hiddenValue ? '0' : '';
-    this._elements.screenReaderOnly.hidden = hiddenValue || this.labelled;
+    this._elements.screenReaderOnly.hidden = !!hiddenValue || !!this.labelledBy || !!this.labelled;
   }
   
   /**

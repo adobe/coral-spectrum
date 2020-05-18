@@ -10,10 +10,11 @@
  * governing permissions and limitations under the License.
  */
 
+import accessibilityState from '../templates/accessibilityState';
 import {BaseComponent} from '../../../coral-base-component';
 import ColumnViewCollection from './ColumnViewCollection';
 import selectionMode from './selectionMode';
-import {transform, validate, commons} from '../../../coral-utils';
+import {transform, validate, commons, i18n} from '../../../coral-utils';
 
 const CLASSNAME = '_coral-MillerColumns';
 
@@ -53,6 +54,18 @@ class ColumnView extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
+
+    // Content zone
+    this._elements = {
+      accessibilityState: this.querySelector('span[handle="accessibilityState"]')
+    };
+
+    if (!this._elements.accessibilityState) {
+      // Templates
+      accessibilityState.call(this._elements, {commons});
+      this._elements.accessibilityState.removeAttribute('aria-hidden');
+      this._elements.accessibilityState.hidden = true;
+    }    
     
     // Events
     this._delegateEvents({
@@ -67,6 +80,13 @@ class ColumnView extends BaseComponent(HTMLElement) {
       'key:shift+up': '_onKeyShiftAndUp',
       'key:shift+down': '_onKeyShiftAndDown',
       'key:space': '_onKeySpace',
+      'key:control+a': '_onKeyCtrlA',
+      'key:command+a': '_onKeyCtrlA',
+      'key:control+shift+a': '_onKeyCtrlShiftA',
+      'key:command+shift+a': '_onKeyCtrlShiftA',
+      'key:esc': '_onKeyCtrlShiftA',
+
+      'capture:focus coral-columnview-item': '_onItemFocus',
   
       // column events
       'coral-columnview-column:_loaditems': '_onColumnLoadItems',
@@ -247,6 +267,9 @@ class ColumnView extends BaseComponent(HTMLElement) {
   _onColumnLoadItems(event) {
     // this is a private event and should not leave the column view
     event.stopImmediatePropagation();
+
+    this._updateAriaLevel(event.target);
+    this._ensureTabbableItem();
     
     // triggers an event to indicate more data could be loaded
     this.trigger('coral-columnview:loaditems', {
@@ -254,6 +277,54 @@ class ColumnView extends BaseComponent(HTMLElement) {
       start: event.detail.start,
       item: event.detail.item
     });
+  }
+
+  /**
+    Handle when first selectable item is added and make sure it is tabbable.
+    @param {HTMLElement} [item]
+    @private
+  */
+  _onItemAdd() {
+    window.requestAnimationFrame(() => this._ensureTabbableItem());
+  }
+
+  /**
+    Handle when item is removed, make sure that at least one element is tabbable, or if there are no items, and add listener to handle when item is added.
+    @param {HTMLElement} [item]
+      Item that was removed.
+    @private
+  */
+  _onItemRemoved() {
+    window.requestAnimationFrame(() => this._ensureTabbableItem());
+  }
+
+  /* @private */
+  _ensureTabbableItem() {   
+    this._vent.off('coral-collection:add', this._onItemAdd);
+    this._vent.off('coral-collection:remove', this._onItemRemoved);
+    // Ensures that item will receive focus
+    if (!this.selectedItem && !this.activeItem) {
+      const selectableItems = this.items._getSelectableItems();
+      // If there are no selectable items, stop listening for items being removed and start listening for the next item added.
+      if (!selectableItems.length) {
+        this._vent.off('coral-collection:remove', this._onItemRemoved);
+        this._vent.on('coral-collection:add', this._onItemAdd);
+      }
+      else {
+        // Otherwise, if there is a selectable item, make sure it has a tabIndex.
+        selectableItems[0].tabIndex = 0;
+        // Listen for item removal so that we can handle the edge case where all items have been removed.
+        this._vent.on('coral-collection:remove', this._onItemRemoved);
+      }
+    }
+    else if (this.selectedItem && this.selectedItem.tabIndex !== 0) {
+      // If the selectedItem is not tabbable, make sure that it has tabIndex === 0
+      this.selectedItem.tabIndex = 0;
+    }
+    else if (this.activeItem && this.activeItem.tabIndex !== 0) {
+      // If the activeItem is not tabbable, make sure that it has tabIndex === 0
+      this.activeItem.tabIndex = 0;
+    }
   }
   
   /** @private */
@@ -298,6 +369,17 @@ class ColumnView extends BaseComponent(HTMLElement) {
   /** @private */
   _onKeyShiftAndUp(event) {
     event.preventDefault();
+    const matchedTarget = this._getRealMatchedTarget(event);
+
+    // don't select items when focus is within the preview
+    if (matchedTarget.closest('coral-columnview-preview')) {
+      return;
+    }
+
+    if (this.selectionMode === selectionMode.NONE) {
+      this._onKeyUp(event);
+      return;
+    }
     
     // using _oldSelection since it should be equivalent to this.items._getSelectedItems() but faster
     const oldSelectedItems = this._oldSelection;
@@ -361,6 +443,10 @@ class ColumnView extends BaseComponent(HTMLElement) {
         lastSelected.firstSelectedItem :
         selectedItem.nextElementSibling
     };
+
+    if (selectedItem && selectedItem !== document.activeElement) {
+      selectedItem.focus();
+    }
     
     this._isKeyBoardMultiselect = false;
   }
@@ -368,6 +454,17 @@ class ColumnView extends BaseComponent(HTMLElement) {
   /** @private */
   _onKeyShiftAndDown(event) {
     event.preventDefault();
+    const matchedTarget = this._getRealMatchedTarget(event);
+
+    // don't select items when focus is within the preview
+    if (matchedTarget.closest('coral-columnview-preview')) {
+      return;
+    }
+
+    if (this.selectionMode === selectionMode.NONE) {
+      this._onKeyDown(event);
+      return;
+    }
     
     // using _oldSelection since it should be equivalent to this.items._getSelectedItems() but faster
     const oldSelectedItems = this._oldSelection;
@@ -432,6 +529,10 @@ class ColumnView extends BaseComponent(HTMLElement) {
         lastSelected.firstSelectedItem :
         selectedItem.previousElementSibling
     };
+
+    if (selectedItem && selectedItem !== document.activeElement) {
+      selectedItem.focus();
+    }
     
     this._isKeyBoardMultiselect = false;
   }
@@ -439,6 +540,12 @@ class ColumnView extends BaseComponent(HTMLElement) {
   /** @private */
   _onKeyUp(event) {
     event.preventDefault();
+    const matchedTarget = this._getRealMatchedTarget(event);
+
+    // don't navigate items when focus is within the preview
+    if (matchedTarget.closest('coral-columnview-preview')) {
+      return;
+    }
     
     // selection will win over active buttons, because they are the right most item. using _oldSelection since it
     // should be equivalent to this.items._getSelectedItems() but faster
@@ -446,10 +553,10 @@ class ColumnView extends BaseComponent(HTMLElement) {
     
     let item;
     if (selectedItems.length !== 0) {
-      const selectedItem = selectedItems[0];
+      const selectedItem = matchedTarget;
       
       item = selectedItem.previousElementSibling;
-      if (item) {
+      if (!item) {
         item = selectedItem;
       }
     }
@@ -461,14 +568,25 @@ class ColumnView extends BaseComponent(HTMLElement) {
     else {
       item = this._oldActiveItem.previousElementSibling;
     }
-    
+
     // we use click instead of selected to force the deselection of the other items
-    item.click();
+    if (item && item !== document.activeElement) {
+      item.focus();
+      if (this.selectionMode === selectionMode.NONE || selectedItems.length === 0) {
+        item.click();
+      }
+    }
   }
   
   /** @private */
   _onKeyDown(event) {
     event.preventDefault();
+    const matchedTarget = this._getRealMatchedTarget(event);
+
+    // don't navigate items when focus is within the preview
+    if (matchedTarget.closest('coral-columnview-preview')) {
+      return;
+    }
     
     // selection will win over active buttons, because they are the right most item. using _oldSelection since it
     // should be equivalent to this.items._getSelectedItems() but faster
@@ -476,13 +594,13 @@ class ColumnView extends BaseComponent(HTMLElement) {
     
     let item;
     if (selectedItems.length !== 0) {
-      const selectedItem = selectedItems[selectedItems.length - 1];
+      const selectedItem = matchedTarget;
       
       item = selectedItem.nextElementSibling;
       
       // when
       if (!item) {
-        item = selectedItem;
+        item = matchedTarget;
       }
     }
     // when there is no active item to select, we get the first item of the column. this way users can interact with
@@ -495,17 +613,28 @@ class ColumnView extends BaseComponent(HTMLElement) {
     }
     
     // we use click instead of selected to force the deselection of the other items
-    item.click();
+    if (item && item !== document.activeElement) {
+      item.focus();
+      if (this.selectionMode === selectionMode.NONE || selectedItems.length === 0) {
+        item.click();
+      }
+    }
   }
   
   /** @private */
   _onKeyRight(event) {
     event.preventDefault();
-    
-    const nextColumn = this.activeItem.closest('coral-columnview-column').nextElementSibling;
-    
-    if (nextColumn) {
-      nextColumn.items._getFirstSelectable().click();
+    const matchedTarget = this._getRealMatchedTarget(event);
+
+    if (matchedTarget.variant !== ColumnView.Item.variant.DRILLDOWN) {
+      return false;
+    }
+
+    const nextColumn = (this.activeItem && this.activeItem.closest('coral-columnview-column').nextElementSibling);
+      
+    if (nextColumn && nextColumn.tagName === 'CORAL-COLUMNVIEW-COLUMN') {
+      // we need to make sure the column is initialized
+      commons.ready(nextColumn, () => this._focusAndActivateFirstSelectableItem(nextColumn));
     }
   }
   
@@ -523,25 +652,17 @@ class ColumnView extends BaseComponent(HTMLElement) {
       previousColumn = selectedItems[0].closest('coral-columnview-column').previousElementSibling;
     }
     // otherwise we use the activeItems as a reference
-    else {
-      previousColumn = this.activeItem.closest('coral-columnview-column').previousElementSibling;
+    else if (this.activeItem) {
+      const col = this.activeItem.closest('coral-columnview-column');
+      previousColumn = event.target.closest('coral-columnview-preview') ? col : col.previousElementSibling;
     }
-    
-    if (previousColumn) {
-      if (previousColumn.activeItem) {
-        // if there is an active item simply click it again
-        previousColumn.activeItem.click();
-      }
-      else {
-        // we need to find a candicate for activation
-        const firstSelectedItem = previousColumn.items._getFirstSelected();
-        
-        if (firstSelectedItem) {
-          firstSelectedItem.click();
-        }
-        else {
-          previousColumn.items._getFirstSelectable().click();
-        }
+
+    if (previousColumn && previousColumn.tagName === 'CORAL-COLUMNVIEW-COLUMN') {
+      // we need to make sure the column is initialized
+      const activeDescendant = previousColumn.activeItem || previousColumn.items._getFirstSelected() || previousColumn.items._getFirstSelectable();
+      if (activeDescendant && activeDescendant !== document.activeElement) {
+        activeDescendant.focus();
+        activeDescendant.click();
       }
     }
   }
@@ -549,24 +670,130 @@ class ColumnView extends BaseComponent(HTMLElement) {
   /** @private */
   _onKeySpace(event) {
     event.preventDefault();
+    const matchedTarget = this._getRealMatchedTarget(event);
+
+    // don't select item when focus is within the preview
+    if (matchedTarget.closest('coral-columnview-preview')) {
+      return;
+    }
     
     // using _oldSelection since it should be equivalent to this.items._getSelectedItems() but faster
     const selectedItems = this._oldSelection;
+    let activeDescendant;
     
     // when there is a selection, we need to activate the first item of the selection
     if (selectedItems.length !== 0) {
-      selectedItems[0].setAttribute('active', '');
+      activeDescendant = matchedTarget;
+      if (activeDescendant.hasAttribute('selected', '')) {
+        if (selectedItems.length === 1) {
+          activeDescendant.setAttribute('active', '');
+        }
+        else {
+          activeDescendant.removeAttribute('selected', '');
+        }
+      }
+      else {
+        activeDescendant.setAttribute('selected', '');
+      }
     }
     else {
-      const activeItem = this.activeItem;
+      const activeItem = this.activeItem || matchedTarget;
       // toggles the selection between active and selected
-      if (activeItem) {
+      if (activeItem && this.selectionMode !== selectionMode.NONE) {
         // select the item
         activeItem.setAttribute('selected', '');
+        activeDescendant = activeItem;
       }
     }
   }
-  
+
+  /** @private */
+  _onKeyCtrlA(event) {
+    event.preventDefault();
+    const matchedTarget = this._getRealMatchedTarget(event);
+
+    // don't select item when focus is within the preview
+    if (matchedTarget.closest('coral-columnview-preview')) {
+      return;
+    }
+
+    if (this.selectionMode === selectionMode.MULTIPLE) {
+      const currentColumn = matchedTarget.closest('coral-columnview-column');
+      currentColumn.items._selectAll();
+    }
+    else if (this.selectionMode === selectionMode.SINGLE) {
+      if (!matchedTarget.hasAttribute('selected')) {
+        matchedTarget.setAttribute('selected', '');
+      }
+    }
+  }
+
+  /** @private */
+  _onKeyCtrlShiftA(event) {
+    event.preventDefault();
+    const matchedTarget = this._getRealMatchedTarget(event);
+
+    // don't select item when focus is within the preview
+    if (matchedTarget.closest('coral-columnview-preview')) {
+      return;
+    }
+
+    if (this.selectionMode !== selectionMode.NONE) {
+      const currentColumn = matchedTarget.closest('coral-columnview-column');
+      currentColumn.items._deselectAndDeactivateAllExcept(matchedTarget);
+      if (!matchedTarget.hasAttribute('active')) {
+        matchedTarget.setAttribute('active', '');
+      }
+    }
+  }
+
+  /** @private */
+  _onItemFocus(event) {
+    const matchedTarget = this._getRealMatchedTarget(event);
+    if (!matchedTarget.hasAttribute('active') && !this._oldSelection.length) {
+      matchedTarget.setAttribute('active', '');
+    }
+    this.items._getSelectableItems().forEach(item => {
+      item.tabIndex = item === matchedTarget ? 0 : -1;
+    });
+
+    if (matchedTarget.contains(document.activeElement)) {
+      matchedTarget.focus();
+    }
+  }
+
+  /** @ignore */
+  _updateAriaLevel(column) {
+    const colIndex = this.columns.getAll().indexOf(column);
+    const level = colIndex + 1;
+    if (column.items) {
+      column.items.getAll().filter((item, index) => {
+        item.setAttribute('aria-posinset', index + 1);
+        item.setAttribute('aria-setsize', column.items.length);
+        return !item.hasAttribute('aria-level');
+      }).forEach((item) => {
+        item.setAttribute('aria-level', level);
+      });
+    }
+
+    // root column has role="presentation"
+    if (colIndex === 0) {
+      column.setAttribute('role', 'presentation');
+      // and should not be labeled.
+      return;
+    }
+
+    // Make sure the column group has a label so that it can be navigated with VoiceOver
+    if (!column.hasAttribute('aria-labelledby')) {
+      if (!column.hasAttribute('aria-label')) {
+        column.setAttribute('aria-label', (this.getAttribute('aria-label') || '…'));
+      }
+    }
+    else if (column.getAttribute('aria-label') === (this.getAttribute('aria-label') || '…')) {
+      column.removeAttribute('aria-label');
+    }
+  }
+
   /** @private */
   _arraysAreDifferent(selection, oldSelection) {
     let diff = [];
@@ -707,10 +934,24 @@ class ColumnView extends BaseComponent(HTMLElement) {
     const addedNodesCount = addedNodes.length;
     for (let i = 0; i < addedNodesCount; i++) {
       item = addedNodes[i];
+      if (this.activeItem) {
+        // @a11y add aria-owns attribute to active item to express relationship of added column to the active item
+        this.activeItem.setAttribute('aria-owns', item.id);
+
+        // @a11y column or preview should be labelled by active item
+        item.setAttribute('aria-labelledby', this.activeItem.content.id);
+
+        // @a11y preview should provide description for active item
+        if (item.tagName === 'CORAL-COLUMNVIEW-PREVIEW') {
+          this.activeItem.setAttribute('aria-describedby', item.id);
+        }
+      }
+
       if (item.tagName === 'CORAL-COLUMNVIEW-COLUMN') {
         // we use the property since the item may not be ready
         item.setAttribute('_selectionmode', this.selectionMode);
         this.trigger('coral-collection:add', {item});
+        this._updateAriaLevel(item);
       }
     }
     
@@ -731,6 +972,17 @@ class ColumnView extends BaseComponent(HTMLElement) {
     // initial state of the columnview
     this._oldActiveItem = this.activeItem;
     this._oldSelection = this.selectedItems;
+
+    if (!this._oldActiveItem && !this._oldSelection.length) {
+      const selectableItems = this.items._getSelectableItems();
+      if (selectableItems.length) {
+        selectableItems[0].tabIndex = 0;
+      }
+    }
+
+    if (this.columns && this.columns.first()) {
+      this._updateAriaLevel(this.columns.first());
+    }
   }
   
   /** @private */
@@ -787,6 +1039,9 @@ class ColumnView extends BaseComponent(HTMLElement) {
       
       // changes the old selection array since we selected something new
       this._oldSelection = newSelection;
+
+      // announce the selection state for the focused item
+      this._announceActiveElementState();
     }
   }
   
@@ -813,12 +1068,115 @@ class ColumnView extends BaseComponent(HTMLElement) {
       column: column
     });
   }
-  
+
+  /* @private */
+  _announceActiveElementState() {
+    // @a11y Add live region element to ensure announcement of selected state
+    const accessibilityState = this._elements.accessibilityState;
+
+    // @a11y accessibility state string should announce in document lang, rather than item lang.
+    accessibilityState.setAttribute('lang', i18n.locale);
+
+    // @a11y append live region content element
+    if (!this.contains(accessibilityState)) {
+      this.insertBefore(accessibilityState, this.firstChild);
+    }
+
+    // utility method to clean up accessibility state
+    function resetAccessibilityState() {
+      accessibilityState.hidden = true;
+      accessibilityState.setAttribute('aria-live', 'off');
+      accessibilityState.innerHTML = '';
+    }
+    resetAccessibilityState();
+
+    if (this._addTimeout || this._removeTimeout) {
+      clearTimeout(this._addTimeout);
+      clearTimeout(this._removeTimeout);
+    }
+
+    // we use setTimeout instead of nextFrame to give screen reader 
+    // more time to respond to live region update in order to announce 
+    // complete text content when the state changes.
+    this._addTimeout = window.setTimeout(() => {
+      const activeElement = document.activeElement.closest('coral-columnview-item') || document.activeElement;
+
+      if (!this.contains(activeElement)) {
+        return;
+      }
+
+      const span = document.createElement('span');
+      const contentSpan = document.createElement('span');
+      const lang = !activeElement.hasAttribute('lang') && activeElement.closest('[lang]') ? activeElement.closest('[lang]').getAttribute('lang') : activeElement.getAttribute('lang');
+      if (lang && lang !== i18n.locale) {
+        contentSpan.setAttribute('lang', lang);
+      }
+      contentSpan.innerHTML = activeElement._elements.content.innerText;
+      span.appendChild(contentSpan);
+      span.appendChild(
+        document.createTextNode(
+          i18n.get(activeElement.selected ? ', checked' : ', unchecked')
+        )
+      );
+      accessibilityState.hidden = false;
+      accessibilityState.setAttribute('aria-live', 'assertive');
+      accessibilityState.appendChild(span);
+
+      // give screen reader 2 secs before clearing the live region, to provide enough time for announcement
+      this._removeTimeout = window.setTimeout(() => {
+        resetAccessibilityState();
+        this._elements.accessibilityState = accessibilityState.parentNode.removeChild(accessibilityState);
+      }, 2000);
+    }, 20);
+  }
+
+  /**
+   * Helper function to extract the correct matchedTarget from the event.
+   *
+   * Tests can interact with ColumnView directly where the key events are triggered on
+   * the ColumnView itself. In that case the event.matchedTarget point to the ColumnView
+   * instead of the ColumnViewItem, in other word the active or selected element.
+   *
+   * @private
+   **/
+  _getRealMatchedTarget(event) {
+    if (event.matchedTarget.nodeName !== 'CORAL-COLUMNVIEW') {
+      return event.matchedTarget;
+    }
+    if (event.matchedTarget.contains(document.activeElement) && document.activeElement.nodeName === 'CORAL-COLUMNVIEW-ITEM') {
+      return document.activeElement;
+    }
+    if (event.matchedTarget.selectedItem) {
+      return event.matchedTarget.selectedItem;
+    }
+    if (event.matchedTarget.activeItem) {
+      return event.matchedTarget.activeItem;
+    }
+  }
+
+  _focusAndActivateFirstSelectableItem(column) {
+    let item;
+
+    if (column.items) {
+      item = column.items._getFirstSelectable();
+    }
+    else if (column.tagName === 'CORAL-COLUMNVIEW-PREVIEW') {
+      item = this.selectedItems[0] || this.activeItem;
+    }
+
+    if (item && item !== document.activeElement) {
+      item.focus();
+      if (this.selectionMode === selectionMode.NONE || this._oldSelection.length === 0) {
+        item.click();
+      }
+    }
+  }
+
   /** @ignore */
   focus() {
     // selected items go first because there is no active item in a column with selection
     const item = this.selectedItems[0] || this.activeItem;
-    if (item) {
+    if (item && item !== document.activeElement) {
       item.focus();
     }
   }
@@ -842,6 +1200,8 @@ class ColumnView extends BaseComponent(HTMLElement) {
     scrollToColumn = typeof scrollToColumn === 'undefined' || scrollToColumn;
     
     const column = referenceColumn || null;
+
+    let columnReplacedContainedFocus = false;
     
     // handles the case where the first column needs to be added
     if (column === null || !this.contains(column)) {
@@ -851,6 +1211,7 @@ class ColumnView extends BaseComponent(HTMLElement) {
       const nextColumn = column.nextElementSibling;
       
       if (nextColumn) {
+        columnReplacedContainedFocus = nextColumn.contains(document.activeElement);
         this._emptyColumnsNextToColumn(column);
         const before = nextColumn.nextElementSibling;
         this.removeChild(nextColumn);
@@ -860,14 +1221,22 @@ class ColumnView extends BaseComponent(HTMLElement) {
         this.appendChild(newColumn);
       }
     }
-    
-    if (scrollToColumn) {
-      // event is not triggered because it is handled separately
-      this._scrollColumnIntoView(newColumn, true, false);
-    }
-    
-    // we notify that the columnview navigated and it is ready to be used
-    this._validateNavigation(newColumn);
+
+    // if we want to scroll to it, we need for it to be ready due to measurements
+    commons.ready(newColumn, () => {
+      if (scrollToColumn) {
+        // event is not triggered because it is handled separately
+        this._scrollColumnIntoView(newColumn, true, false);
+      }
+
+      // we notify that the columnview navigated and it is ready to be used
+      this._validateNavigation(newColumn);
+
+      // if the column the newColumn replaces contained focus, restore focus to an item in the newColumn
+      if (columnReplacedContainedFocus && !newColumn.contains(document.activeElement)) {
+        this._focusAndActivateFirstSelectableItem(newColumn);
+      }
+    });
   }
   
   /**
@@ -896,8 +1265,15 @@ class ColumnView extends BaseComponent(HTMLElement) {
     
     this.classList.add(CLASSNAME);
     
+    // @a11y
+    this.setAttribute('role', 'tree');
     // @a11y: the columnview needs to be focusable to handle a11y properly
-    this.setAttribute('tabindex', '0');
+    this.tabIndex = -1;
+    // @a11y: the columnview should be labelled so that its entire content
+    // is not read as its accessibility name
+    if (!this.hasAttribute('aria-label') && !this.hasAttribute('aria-labelledby')) {
+      this.setAttribute('aria-label', i18n.get('Column View'));
+    }
     
     // Default reflect attributes
     if (!this._selectionMode) { this._selectionMode = selectionMode.NONE; }

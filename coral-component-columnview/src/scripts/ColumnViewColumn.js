@@ -218,39 +218,42 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
       // toggles the selection of the item
       const isSelected = item.hasAttribute('selected');
       
-      if (!isSelected) {
-        // Handle multi-selection with shiftKey
-         if (event.shiftKey && this._selectionMode === selectionMode.MULTIPLE) {
-          const lastSelectedItem = this._lastSelectedItems[this._lastSelectedItems.length - 1];
+      // Handle multi-selection with shiftKey
+      if (!isSelected && event.shiftKey && this._selectionMode === selectionMode.MULTIPLE) {
+        const lastSelectedItem = this._lastSelectedItems[this._lastSelectedItems.length - 1];
+  
+        if (lastSelectedItem) {
+          const items = this.items.getAll();
+          const lastSelectedItemIndex = items.indexOf(lastSelectedItem);
+          const selectedItemIndex = items.indexOf(item);
     
-          if (lastSelectedItem) {
-            const items = this.items.getAll();
-            const lastSelectedItemIndex = items.indexOf(lastSelectedItem);
-            const selectedItemIndex = items.indexOf(item);
-      
-            // true : selection goes up, false : selection goes down
-            const direction = selectedItemIndex < lastSelectedItemIndex;
-            const selectionRange = [];
-            let selectionIndex = lastSelectedItemIndex;
-      
-            // Retrieve all items in the range
-            while (selectedItemIndex !== selectionIndex) {
-              selectionIndex = direction ? selectionIndex - 1 : selectionIndex + 1;
-              selectionRange.push(items[selectionIndex]);
-            }
-      
-            // Select all items in the range silently
-            selectionRange.forEach((rangeItem) => {
-              // Except for item which is needed to trigger the selection change event
-              if (rangeItem !== item) {
-                rangeItem.set('selected', true, true);
-              }
-            });
+          // true : selection goes up, false : selection goes down
+          const direction = selectedItemIndex < lastSelectedItemIndex;
+          const selectionRange = [];
+          let selectionIndex = lastSelectedItemIndex;
+    
+          // Retrieve all items in the range
+          while (selectedItemIndex !== selectionIndex) {
+            selectionIndex = direction ? selectionIndex - 1 : selectionIndex + 1;
+            selectionRange.push(items[selectionIndex]);
           }
+    
+          // Select all items in the range silently
+          selectionRange.forEach((rangeItem) => {
+            // Except for item which is needed to trigger the selection change event
+            if (rangeItem !== item) {
+              rangeItem.set('selected', true, true);
+            }
+          });
         }
       }
       
       item[isSelected ? 'removeAttribute' : 'setAttribute']('selected', '');
+
+      // if item was selected, make it active
+      if (isSelected && !this._lastSelectedItems.length) {
+        item.setAttribute('active', '');
+      }
     }
   }
   
@@ -555,6 +558,8 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
   
     // @a11y
     this.setAttribute('role', 'group');
+
+    this.id = this.id || commons.getUID();
   
     // @todo: initial collection items needs to be triggered
   
@@ -568,6 +573,9 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
         content.appendChild(this.firstChild);
       }
     }
+
+    // @a11y
+    content.setAttribute('role', 'presentation');
     
     // Call content zone insert
     this.content = content;

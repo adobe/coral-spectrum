@@ -42,6 +42,16 @@ class ColumnViewCollection extends SelectableCollection {
   _getAllActive() {
     return this._getAllSelected('active');
   }
+
+  _selectAll() {
+    this
+      .getAll()
+      .forEach((el) => {
+        if (!el.hasAttribute('selected')) {
+          el.setAttribute('selected', '');
+        }
+      });
+  }
 }
 
 export default ColumnViewCollection;

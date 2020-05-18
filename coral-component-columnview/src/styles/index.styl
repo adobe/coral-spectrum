@@ -56,6 +56,10 @@
   }
 }
 
+coral-columnview-preview._coral-MillerColumns-item {
+  padding-bottom: var(--spectrum-medium-textfield-quiet-border-size-key-focus);
+}
+
 coral-columnview-preview-asset {
 // contains the image
   position: relative;
@@ -112,6 +116,15 @@ coral-columnview-preview-value {
   > coral-icon {
     margin-right: 5px;
   }
+
+  &:focus {
+    outline: 0;
+    &.focus-ring {
+      margin-bottom: -var(--spectrum-medium-textfield-quiet-border-size-key-focus);
+      border-bottom-style: solid;
+      border-bottom-width: var(--spectrum-medium-textfield-quiet-border-size-key-focus);
+    }
+  }
 }
 
 coral-columnview-preview-separator {
@@ -128,4 +141,10 @@ coral-columnview-preview-content {
 
 coral-columnview-preview-content.coral-Body--small {
   margin-bottom: 0;
+  padding-bottom: var(--spectrum-medium-textfield-quiet-border-size-key-focus);
 }
+
+@require 'light';
+@require 'lightest';
+@require 'dark';
+@require 'darkest';
