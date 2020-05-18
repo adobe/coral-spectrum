@@ -394,16 +394,18 @@ describe('QuickActions', function() {
       // Wait until opened
       el.on('coral-overlay:open', () => {
         var buttons = el.querySelectorAll(BUTTON_SELECTOR);
-        expect(document.activeElement).to.equal(el, 'QuickAction focused');
-        
-        helpers.keypress('down', el);
-        expect(document.activeElement).to.equal(buttons[0], 'First QuickAction item focused');
-        
-        helpers.keypress('right', buttons[0]);
-        expect(document.activeElement).to.equal(buttons[1], 'Second QuickAction item focused');
+        expect(document.activeElement).to.not.equal(el, 'QuickActions should not automatically focus when shown');
 
-        helpers.keypress('pagedown', buttons[1]);
-        expect(document.activeElement).to.equal(buttons[2], 'Third QuickAction item focused');
+        buttons[0].focus();
+        
+        helpers.keypress('down', buttons[0]);
+        expect(document.activeElement).to.equal(buttons[1], 'First QuickAction item focused');
+        
+        helpers.keypress('right', buttons[1]);
+        expect(document.activeElement).to.equal(buttons[2], 'Second QuickAction item focused');
+
+        helpers.keypress('pagedown', buttons[2]);
+        expect(document.activeElement).to.equal(buttons[3], 'Third QuickAction item focused');
 
         done();
       });
@@ -444,7 +446,7 @@ describe('QuickActions', function() {
       el.on('coral-overlay:open', () => {
         var buttons = el.querySelectorAll(BUTTON_SELECTOR);
       
-        expect(document.activeElement).to.equal(el, 'QuickAction focused initially');
+        expect(document.activeElement).to.not.equal(el, 'QuickActions should not automatically focus when shown');
 
         helpers.keypress('end', buttons[0]);
         expect(document.activeElement).to.equal(buttons[3], 'Last QuickAction item focused for end keypress');
@@ -524,7 +526,7 @@ describe('QuickActions', function() {
         var buttons = el.querySelectorAll(BUTTON_SELECTOR);
 
         helpers.next(function() {
-          expect(document.activeElement).to.equal(el, 'QuickAction focused');
+          expect(document.activeElement).to.equal(buttons[0], 'First QuickAction button focused');
 
           // Hit tab key
           helpers.keypress('tab', el);
