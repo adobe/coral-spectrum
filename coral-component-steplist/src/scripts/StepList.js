@@ -231,11 +231,13 @@ class StepList extends BaseComponent(HTMLElement) {
       }
     };
 
-    if (typeof this.items.last()._syncTabIndex === 'function') {
+    const lastItem = this.items.last();
+
+    if (typeof lastItem._syncTabIndex === 'function') {
       _syncItemLabelled();
     }
     else {
-      commons.ready(this.items.last(), _syncItemLabelled);
+      commons.ready(lastItem, _syncItemLabelled);
     }
   }
   
@@ -276,11 +278,13 @@ class StepList extends BaseComponent(HTMLElement) {
       }
     };
 
-    if (typeof this.items.last()._syncTabIndex === 'function') {
+    const lastItem = this.items.last();
+
+    if (typeof lastItem._syncTabIndex === 'function') {
       _syncItemProps();
     }
     else {
-      commons.ready(this.items.last(), _syncItemProps);
+      commons.ready(lastItem, _syncItemProps);
     }
   }
   
