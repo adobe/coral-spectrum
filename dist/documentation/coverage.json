@@ -902,8 +902,8 @@
         456,
         493,
         512,
-        561,
-        756
+        560,
+        755
       ]
     },
     "coral-spectrum/coral-component-dialog/src/scripts/Dialog.js": {
@@ -1579,10 +1579,10 @@
         423,
         460,
         478,
-        521,
-        593,
-        1029,
-        1090
+        522,
+        594,
+        1030,
+        1091
       ]
     },
     "coral-spectrum/coral-component-select/src/scripts/SelectItem.js": {

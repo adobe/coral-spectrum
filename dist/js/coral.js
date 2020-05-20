@@ -27463,9 +27463,9 @@ var Coral = (function (exports) {
 
   /**
    Enumeration for {@link Select} variants.
-
+   
    @typedef {Object} SelectVariantEnum
-
+   
    @property {String} DEFAULT
    A default, gray Select.
    @property {String} QUIET
@@ -27481,12 +27481,12 @@ var Coral = (function (exports) {
   var IS_MOBILE_DEVICE = navigator.userAgent.match(/iPhone|iPad|iPod|Android/i) !== null;
   /**
    Extracts the value from the item in case no explicit value was provided.
-
+   
    @param {HTMLElement} item
    the item whose value will be extracted.
-
+   
    @returns {String} the value that will be submitted for this item.
-
+   
    @private
    */
 
@@ -27497,10 +27497,10 @@ var Coral = (function (exports) {
   };
   /**
    Calculates the difference between two given arrays. It returns the items that are in a that are not in b.
-
+   
    @param {Array.<String>} a
    @param {Array.<String>} b
-
+   
    @returns {Array.<String>}
    the difference between the arrays.
    */
@@ -27601,7 +27601,8 @@ var Coral = (function (exports) {
     }
     /**
      Returns the inner overlay to allow customization.
-      @type {Popover}
+     
+     @type {Popover}
      @readonly
      */
 
@@ -27624,7 +27625,8 @@ var Coral = (function (exports) {
       /**
        @param {Boolean} [checkAvailableSpace=false]
        If <code>true</code>, the event is triggered based on the available space.
-        @private
+       
+       @private
        */
 
     }, {
@@ -27858,7 +27860,8 @@ var Coral = (function (exports) {
       }
       /**
        Detects when something is about to change inside the select.
-        @private
+       
+       @private
        */
 
     }, {
@@ -27874,7 +27877,8 @@ var Coral = (function (exports) {
       }
       /**
        Detects when something inside the select list changes.
-        @private
+       
+       @private
        */
 
     }, {
@@ -28021,7 +28025,7 @@ var Coral = (function (exports) {
       value: function _onButtonClick(event) {
         event.preventDefault();
 
-        if (this.disabled || this.readOnly) {
+        if (this.disabled) {
           return;
         } // if native is required, we do not need to do anything
 
@@ -28060,7 +28064,7 @@ var Coral = (function (exports) {
     }, {
       key: "_onSpaceKey",
       value: function _onSpaceKey(event) {
-        if (this.disabled || this.readOnly) {
+        if (this.disabled) {
           return;
         }
 
@@ -28075,7 +28079,8 @@ var Coral = (function (exports) {
       }
       /**
        Prevents tab key default handling on selectList Items.
-        @private
+       
+       @private
        */
       // _onTabKey(event) {
       // event.preventDefault();
@@ -28158,7 +28163,8 @@ var Coral = (function (exports) {
       }
       /**
        This handles content change of coral-select-item and updates its associatives.
-        @private
+       
+       @private
        */
 
     }, {
@@ -28201,7 +28207,8 @@ var Coral = (function (exports) {
       }
       /**
        This handles value change of coral-select-item and updates its associatives.
-        @private
+       
+       @private
        */
 
     }, {
@@ -28225,7 +28232,8 @@ var Coral = (function (exports) {
       }
       /**
        This handles disabled change of coral-select-item and updates its associatives.
-        @private
+       
+       @private
        */
 
     }, {
@@ -28245,7 +28253,8 @@ var Coral = (function (exports) {
       }
       /**
        In case an item from the initial selection is removed, we need to remove it from the initial values.
-        @private
+       
+       @private
        */
 
     }, {
@@ -28280,7 +28289,8 @@ var Coral = (function (exports) {
       /**
        Updates the label to reflect the current state. The label needs to be updated when the placeholder changes and
        when the selection changes.
-        @private
+       
+       @private
        */
 
     }, {
@@ -28290,7 +28300,8 @@ var Coral = (function (exports) {
       }
       /**
        Handles the selection state.
-        @ignore
+       
+       @ignore
        */
 
     }, {
@@ -28333,7 +28344,8 @@ var Coral = (function (exports) {
       }
       /**
        Handles selecting multiple items. Selection could result a single or multiple selected items.
-        @private
+       
+       @private
        */
 
     }, {
@@ -28380,7 +28392,8 @@ var Coral = (function (exports) {
       }
       /**
        Focuses the component.
-        @ignore
+       
+       @ignore
        */
 
     }, {
@@ -28402,7 +28415,8 @@ var Coral = (function (exports) {
       }
       /**
        Returns {@link Select} variants.
-        @return {SelectVariantEnum}
+       
+       @return {SelectVariantEnum}
        */
 
     }, {
@@ -28493,15 +28507,18 @@ var Coral = (function (exports) {
        Triggered when the {@link Select} could accept external data to be loaded by the user. If <code>preventDefault()</code> is
        called, then a loading indicator will be shown. {@link Select#loading} should be set to false to indicate
        that the data has been successfully loaded.
-        @typedef {CustomEvent} coral-select:showitems
-        @property {Number} detail.start
+       
+       @typedef {CustomEvent} coral-select:showitems
+       
+       @property {Number} detail.start
        The count of existing items, which is the index where new items should start.
        */
 
       /**
        Triggered when the {@link Select} hides the UI used to select items. This is typically used to cancel a load request
        because the items will not be shown anymore.
-        @typedef {CustomEvent} coral-select:hideitems
+       
+       @typedef {CustomEvent} coral-select:hideitems
        */
 
     }, {
@@ -28511,7 +28528,8 @@ var Coral = (function (exports) {
       }
       /**
        The item collection.
-        @type {SelectableCollection}
+       
+       @type {SelectableCollection}
        @readonly
        */
 
@@ -28533,7 +28551,8 @@ var Coral = (function (exports) {
       }
       /**
        Indicates whether the select accepts multiple selected values.
-        @type {Boolean}
+       
+       @type {Boolean}
        @default false
        @htmlattribute multiple
        @htmlattributereflected
@@ -28602,7 +28621,8 @@ var Coral = (function (exports) {
       /**
        Contains a hint to the user of what can be selected in the component. If no placeholder is provided, the first
        option will be displayed in the component.
-        @type {String}
+       
+       @type {String}
        @default ""
        @htmlattribute placeholder
        @htmlattributereflected
@@ -28698,7 +28718,8 @@ var Coral = (function (exports) {
       /**
        The current selected values, as submitted during form submission. When {@link Coral.Select#multiple} is
        <code>false</code>, this will be an array of length 1.
-        @type {Array.<String>}
+       
+       @type {Array.<String>}
        */
 
     }, {
@@ -28781,9 +28802,9 @@ var Coral = (function (exports) {
         this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
         this.classList.toggle('is-disabled', this._disabled);
         var isReadOnly = this.hasAttribute('readonly');
-        this._elements.button.disabled = this._disabled;
-        this._elements.input.disabled = this._disabled;
-        this._elements.taglist.disabled = this._disabled;
+        this._elements.button.disabled = this._disabled || isReadOnly;
+        this._elements.input.disabled = this._disabled || isReadOnly;
+        this._elements.taglist.disabled = this._disabled || isReadOnly;
       }
       /**
        Inherited from {@link BaseFormField#invalid}.
@@ -28843,9 +28864,10 @@ var Coral = (function (exports) {
         this._reflectAttribute('readonly', this._readOnly);
 
         var isDisabled = this.hasAttribute('disabled');
-        this._elements.input.readOnly = this._readOnly;
-        this._elements.taglist.readOnly = this._readOnly;
-        this._elements.taglist.disabled = this._readOnly;
+        this._elements.button.disabled = this._readOnly || isDisabled;
+        this._elements.input.readOnly = this._readOnly || isDisabled;
+        this._elements.taglist.readOnly = this._readOnly || isDisabled;
+        this._elements.taglist.disabled = this._readOnly || isDisabled;
       }
       /**
        Inherited from {@link BaseFormField#labelled}.
@@ -28909,7 +28931,8 @@ var Coral = (function (exports) {
       /**
        Returns the first selected item in the Select. The value <code>null</code> is returned if no element is
        selected.
-        @type {?HTMLElement}
+       
+       @type {?HTMLElement}
        @readonly
        */
 
@@ -28920,7 +28943,8 @@ var Coral = (function (exports) {
       }
       /**
        Returns an Array containing the set selected items.
-        @type {Array.<HTMLElement>}
+       
+       @type {Array.<HTMLElement>}
        @readonly
        */
 
@@ -28936,7 +28960,8 @@ var Coral = (function (exports) {
       }
       /**
        Indicates that the Select is currently loading remote data. This will set the wait indicator inside the list.
-        @type {Boolean}
+       
+       @type {Boolean}
        @default false
        @htmlattribute loading
        */
@@ -28951,7 +28976,8 @@ var Coral = (function (exports) {
       }
       /**
        The Select's variant. See {@link SelectVariantEnum}.
-        @type {SelectVariantEnum}
+       
+       @type {SelectVariantEnum}
        @default SelectVariantEnum.DEFAULT
        @htmlattribute variant
        @htmlattributereflected
@@ -53899,9 +53925,9 @@ var Coral = (function (exports) {
 
   /**
    Enum for {@link Datepicker} variant values.
-
+   
    @typedef {Object} DatepickerVariantEnum
-
+   
    @property {String} DEFAULT
    A default, gray Datepicker.
    @property {String} QUIET
@@ -53936,9 +53962,9 @@ var Coral = (function (exports) {
   }
   /**
    Enumeration for {@link Datepicker} variants.
-
+   
    @typedef {Object} DatepickerTypeEnum
-
+   
    @property {String} DATE
    The selection overlay contains only a calendar.
    @property {String} DATETIME
@@ -54025,7 +54051,8 @@ var Coral = (function (exports) {
     }
     /**
      Returns the inner overlay to allow customization.
-      @type {Popover}
+     
+     @type {Popover}
      @readonly
      */
 
@@ -54043,7 +54070,8 @@ var Coral = (function (exports) {
       }
       /**
        Matches the accessibility to the state of the popover.
-        @ignore
+       
+       @ignore
        */
 
     }, {
@@ -54173,11 +54201,13 @@ var Coral = (function (exports) {
       /**
        Helper class that converts the internal moment value into a String using the provided date format. If the value is
        invalid, empty string will be returned.
-        @param {?Moment} value
+       
+       @param {?Moment} value
        The value representing the date. It has to be a moment object or <code>null</code>
        @param {String} format
        The Date format to be used.
-        @ignore
+       
+       @ignore
        */
 
     }, {
@@ -54198,7 +54228,8 @@ var Coral = (function (exports) {
       }
       /**
        Returns {@link Datepicker} variants.
-        @return {DatepickerVariantEnum}
+       
+       @return {DatepickerVariantEnum}
        */
 
     }, {
@@ -54292,7 +54323,8 @@ var Coral = (function (exports) {
       }
       /**
        The type of datepicker to show to the user. See {@link DatepickerTypeEnum}.
-        @type {DatepickerTypeEnum}
+       
+       @type {DatepickerTypeEnum}
        @default DatepickerTypeEnum.DATE
        @htmlattribute type
        @htmlattributereflected
@@ -54348,7 +54380,8 @@ var Coral = (function (exports) {
        be used. The default value depends on the <code>type</code>, which can be one from <code>YYYY-MM-DD</code>,
        <code>YYYY-MM-DD[T]HH:mmZ</code> or <code>HH:mm</code>.  Include momentjs to support additional format string options
        see http://momentjs.com/docs/#/displaying/.
-        @type {String}
+       
+       @type {String}
        @default "YYYY-MM-DD"
        @htmlattribute displayformat
        @htmlattributereflected
@@ -54386,7 +54419,8 @@ var Coral = (function (exports) {
        will be used. The default value depends on the <code>type</code>, which can be one from <code>YYYY-MM-DD</code>,
        <code>YYYY-MM-DD[T]HH:mmZ</code> or <code>HH:mm</code>. Include momentjs to support additional format string options
        see http://momentjs.com/docs/#/displaying/.
-        @type {String}
+       
+       @type {String}
        @default "YYYY-MM-DD"
        @htmlattribute valueformat
        @htmlattributereflected
@@ -54427,7 +54461,8 @@ var Coral = (function (exports) {
       }
       /**
        The value of the element, interpreted as a date, or <code>null</code> if conversion is not possible.
-        @type {Date}
+       
+       @type {Date}
        @default null
        */
 
@@ -54449,8 +54484,10 @@ var Coral = (function (exports) {
       /**
        The minimum date that the Datepicker will accept as valid. It must not be greated that its maximum. It accepts
        both date and string values. When a string is provided, it should match the {@link Coral.Datepicker#valueFormat}.
-        See {@link Coral.Calendar#min}
-        @type {String|Date}
+       
+       See {@link Coral.Calendar#min}
+       
+       @type {String|Date}
        @default null
        @htmlattribute min
        */
@@ -54466,8 +54503,10 @@ var Coral = (function (exports) {
       /**
        The maximum date that the Datepicker will accept as valid. It must not be less than its minimum. It accepts both
        date and string values. When a string is provided, it should match the {@link Coral.Datepicker#valueFormat}.
-        See {@link Coral.Calendar#max}
-        @type {String|Date}
+       
+       See {@link Coral.Calendar#max}
+       
+       @type {String|Date}
        @default null
        @htmlattribute max
        */
@@ -54484,8 +54523,10 @@ var Coral = (function (exports) {
        The format used to display the current month and year.
        'MMMM YYYY' is supported by default. Include momentjs to support additional format string options see
        http://momentjs.com/docs/#/displaying/.
-        See {@link Coral.Calendar#startDay}
-        @type {String}
+       
+       See {@link Coral.Calendar#startDay}
+       
+       @type {String}
        @default "MMMM YYYY"
        @htmlattribute headerformat
        */
@@ -54500,8 +54541,10 @@ var Coral = (function (exports) {
       }
       /**
        Defines the start day for the week, 0 = Sunday, 1 = Monday etc., as depicted on the calendar days grid.
-        See {@link Coral.Calendar#startDay}
-        @type {Number}
+       
+       See {@link Coral.Calendar#startDay}
+       
+       @type {Number}
        @default 0
        @htmlattribute startday
        */
@@ -54517,8 +54560,10 @@ var Coral = (function (exports) {
       /**
        The current value. When set to "today", the value is coerced into the client's local date expressed as string
        formatted in accordance to the set <code>valueFormat</code>.
-        See {@link Coral.Calendar#value}
-        @type {String}
+       
+       See {@link Coral.Calendar#value}
+       
+       @type {String}
        @default ""
        @htmlattribute value
        */
@@ -54539,7 +54584,8 @@ var Coral = (function (exports) {
       }
       /**
        Short hint that describes the expected value of the Datepicker. It is displayed when the Datepicker is empty.
-        @type {String}
+       
+       @type {String}
        @default ""
        @htmlattribute placeholder
        @htmlattributereflected
@@ -54557,7 +54603,8 @@ var Coral = (function (exports) {
       }
       /**
        The datepicker's variant. See {@link DatepickerVariantEnum}.
-        @type {DatepickerVariantEnum}
+       
+       @type {DatepickerVariantEnum}
        @default DatepickerVariantEnum.DEFAULT
        @htmlattribute variant
        @htmlattributereflected
@@ -54625,7 +54672,7 @@ var Coral = (function (exports) {
         this.classList.toggle('is-disabled', this._disabled);
         this._elements.input.disabled = this._disabled;
         this._elements.hiddenInput.disabled = this._disabled;
-        this._elements.toggle.disabled = this._disabled;
+        this._elements.toggle.disabled = this._disabled || this.readOnly;
       }
       /**
        Inherited from {@link BaseFormField#invalid}.
@@ -54687,9 +54734,8 @@ var Coral = (function (exports) {
 
         this._reflectAttribute('readonly', this._readOnly);
 
-        this._elements.hiddenInput.readOnly = this.readOnly;
         this._elements.input.readOnly = this._readOnly;
-        this._elements.toggle.disabled = this._readOnly;
+        this._elements.toggle.disabled = this._readOnly || this.disabled;
       }
       /**
        Inherited from {@link BaseFormField#labelled}.
@@ -54733,7 +54779,8 @@ var Coral = (function (exports) {
        When <code>true</code> the component will default to the native input for the date selection. When
        {@link Coral.Datepicker.type.DATETIME} has been set, it will still use the Coral way because mobile browsers
        cannot handle a datetime input.
-        @ignore
+       
+       @ignore
        */
 
     }, {
@@ -54796,7 +54843,8 @@ var Coral = (function (exports) {
       }
       /**
        Returns {@link Datepicker} types.
-        @return {DatepickerTypeEnum}
+       
+       @return {DatepickerTypeEnum}
        */
 
     }, {
@@ -78823,7 +78871,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.7.1";
+  var version$1 = "4.7.2";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
