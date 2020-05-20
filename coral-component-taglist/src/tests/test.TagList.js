@@ -107,10 +107,12 @@ describe('TagList', function() {
         
         expect(eventSpy.callCount).to.equal(1, 'coral-collection:add should be called once');
         expect(eventSpy.args[0][0].detail.item.tagName).to.equal('CORAL-TAG');
-        expect(eventSpy.args[0][0].detail.item.getAttribute('role')).to.equal('listitem');
+        expect(eventSpy.args[0][0].detail.item.getAttribute('role')).to.equal('row');
         expect(tagList.items.length).to.equal(2);
         tagList.items.getAll().forEach(function(item) {
-          expect(item.getAttribute('role')).to.equal('listitem');
+          expect(item.getAttribute('role')).to.equal('row');
+          expect(item.label.getAttribute('role')).to.equal('gridcell');
+          expect(item._elements.buttonCell.getAttribute('role')).to.equal('gridcell');
         });
       });
       
@@ -123,7 +125,9 @@ describe('TagList', function() {
         
         expect(eventSpy.callCount).to.equal(1, 'coral-collection:remove should be called once');
         expect(eventSpy.args[0][0].detail.item.tagName).to.equal('CORAL-TAG');
-        expect(eventSpy.args[0][0].detail.item.getAttribute('role')).not.to.equal('listitem');
+        expect(eventSpy.args[0][0].detail.item.getAttribute('role')).not.to.equal('row');
+        expect(eventSpy.args[0][0].detail.item.label.getAttribute('role')).not.to.equal('gridcell');
+        expect(eventSpy.args[0][0].detail.item._elements.buttonCell.getAttribute('role')).not.to.equal('gridcell');
         expect(tagList.items.length).to.equal(0);
       });
       
@@ -423,7 +427,7 @@ describe('TagList', function() {
   describe('User Interaction', function() {
     it('should have a role', function() {
       var tagList = helpers.build(window.__html__['TagList.base.html']);
-      expect(tagList.getAttribute('role')).to.equal('list');
+      expect(tagList.getAttribute('role')).to.equal('grid');
     });
     
     it('should remove a focused tag on backspace', function() {
@@ -597,7 +601,7 @@ describe('TagList', function() {
     
     it('should call the tracker callback fn with expected parameters when the a tag is removed', function() {
       const el = helpers.build(window.__html__['TagList.tracking.full.html']);
-      el.querySelector('coral-tag:nth-child(1)').click();
+      el.querySelector('coral-tag:nth-child(1) [handle="button"]').click();
       expect(trackerFnSpy.callCount).to.equal(1, 'Tracker should have been called only once.');
       
       var spyCall = trackerFnSpy.getCall(0);

@@ -135,5 +135,17 @@
         <coral-tag color="green" size="L">Tag 3</coral-tag>
       </div>
     </main>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const taglists = document.body.querySelectorAll('coral-taglist');
+        for (var i = 0; i < taglists.length; i++) {
+          const taglist = taglists[i];
+          const h2 = taglist.parentElement.previousElementSibling;
+          h2.id = 'coral-taglist-heading-' + i;
+          taglist.setAttribute('aria-labelledby', h2.id);
+        }
+      });
+    </script>
   </body>
 </html>
