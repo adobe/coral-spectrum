@@ -392,13 +392,18 @@ class Tag extends BaseComponent(HTMLElement) {
     }
 
     buttonCell.setAttribute('role', 'gridcell');
-    label.setAttribute('role', 'gridcell');
+    label.setAttribute('role', this._closable ? 'rowheader' : 'gridcell');
 
     const buttonAriaLabel = button.getAttribute('title');
     const labelTextContent = label.textContent;
   
     // button should be labelled, "Remove: labelTextContent".
     button.setAttribute('aria-label', `${buttonAriaLabel}: ${labelTextContent}`);
+
+    if (!label.id) {
+      label.id = commons.getUID();
+    }
+    this.setAttribute('aria-labelledby', label.id); 
   }
   
   get _contentZones() { return {'coral-tag-label': 'label'}; }
