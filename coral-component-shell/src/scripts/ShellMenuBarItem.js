@@ -165,6 +165,7 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
       // Toggle the target menu
       if (menu.open !== this._open) {
         menu.open = this._open;
+        this._elements.shellMenuButton.setAttribute('aria-expanded', this._open);
       }
   
       this.trigger(`coral-shell-menubar-item:${this._open ? 'open' : 'close'}`);
@@ -216,6 +217,9 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
     if (menu) {
       this.id = this.id || commons.getUID();
       menu.setAttribute('target', `#${this.id}`);
+      const shellMenuButton = this._elements.shellMenuButton;
+      shellMenuButton.setAttribute('aria-haspopup', menu.getAttribute('role') || 'dialog');
+      shellMenuButton.setAttribute('aria-expanded', this.open);
     }
   }
   
@@ -224,7 +228,9 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
   
     if (target === this._getMenu()) {
       // Mark button as selected
-      this._elements.shellMenuButton.classList.toggle('is-selected', !target.open);
+      const shellMenuButton = this._elements.shellMenuButton;
+      shellMenuButton.classList.toggle('is-selected', !target.open);
+      shellMenuButton.setAttribute('aria-expanded', target.open);
     }
   }
   
@@ -235,6 +241,7 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
     // matches the open state of the target in case it was open separately
     if (target === this._getMenu() && this.open !== target.open) {
       this.open = target.open;
+      this._elements.shellMenuButton.setAttribute('aria-expanded', target.open);
     }
   }
   
@@ -313,7 +320,9 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
   /** @ignore */
   render() {
     super.render();
-    
+
+    this.setAttribute('role', 'listitem');
+
     this.classList.add(CLASSNAME);
     
     const button = this.querySelector('._coral-Shell-menu-button');

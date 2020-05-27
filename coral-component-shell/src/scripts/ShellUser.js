@@ -24,7 +24,7 @@ const CLASSNAME = '_coral-Shell-user';
  Default avatar, show user icon from icon font.
  */
 const avatar = {
-  DEFAULT: 'userCircleColor'
+  DEFAULT: 'UserCircleColor_Light'
 };
 
 /**
