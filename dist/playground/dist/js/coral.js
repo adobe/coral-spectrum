@@ -195,6 +195,8 @@
   }
 
   function _typeof(obj) {
+    "@babel/helpers - typeof";
+
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
       _typeof = function (obj) {
         return typeof obj;
@@ -276,6 +278,19 @@
     return _setPrototypeOf(o, p);
   }
 
+  function _isNativeReflectConstruct() {
+    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+    if (Reflect.construct.sham) return false;
+    if (typeof Proxy === "function") return true;
+
+    try {
+      Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -290,6 +305,25 @@
     }
 
     return _assertThisInitialized(self);
+  }
+
+  function _createSuper(Derived) {
+    var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+    return function _createSuperInternal() {
+      var Super = _getPrototypeOf(Derived),
+          result;
+
+      if (hasNativeReflectConstruct) {
+        var NewTarget = _getPrototypeOf(this).constructor;
+
+        result = Reflect.construct(Super, arguments, NewTarget);
+      } else {
+        result = Super.apply(this, arguments);
+      }
+
+      return _possibleConstructorReturn(this, result);
+    };
   }
 
   function _superPropBase(object, property) {
@@ -373,23 +407,36 @@
   }
 
   function _toConsumableArray(arr) {
-    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
   }
 
   function _arrayWithoutHoles(arr) {
-    if (Array.isArray(arr)) {
-      for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
-
-      return arr2;
-    }
+    if (Array.isArray(arr)) return _arrayLikeToArray(arr);
   }
 
   function _iterableToArray(iter) {
-    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+    if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+  }
+
+  function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+  }
+
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+
+    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+    return arr2;
   }
 
   function _nonIterableSpread() {
-    throw new TypeError("Invalid attempt to spread non-iterable instance");
+    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
   var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -6358,9 +6405,7 @@
    */
 
 
-  var Commons =
-  /*#__PURE__*/
-  function () {
+  var Commons = /*#__PURE__*/function () {
     /** @ignore */
     function Commons() {
       var _this = this;
@@ -7060,9 +7105,7 @@
    Events helper.
    */
 
-  var Events =
-  /*#__PURE__*/
-  function () {
+  var Events = /*#__PURE__*/function () {
     /**
      @param {HTMLElement|String} elementOrSelector
      The element or selector indicating the element to use as the delegation root.
@@ -7391,9 +7434,7 @@
    I18n service to get/set localized strings.
    */
 
-  var I18nProvider =
-  /*#__PURE__*/
-  function () {
+  var I18nProvider = /*#__PURE__*/function () {
     /**
      @param {Object} [options]
      Options for this combo handler.
@@ -7939,9 +7980,7 @@
    */
 
 
-  var Keys =
-  /*#__PURE__*/
-  function () {
+  var Keys = /*#__PURE__*/function () {
     /**
      @param {*} elOrSelector
      The selector or element to listen for keyboard events on. This should be the common parent of all
@@ -8603,9 +8642,7 @@
   /**
    Set of property value transformation functions.
    */
-  var Transformation =
-  /*#__PURE__*/
-  function () {
+  var Transformation = /*#__PURE__*/function () {
     function Transformation() {
       _classCallCheck(this, Transformation);
     }
@@ -8710,9 +8747,7 @@
    Set of property value validation functions.
    */
 
-  var Validation =
-  /*#__PURE__*/
-  function () {
+  var Validation = /*#__PURE__*/function () {
     function Validation() {
       _classCallCheck(this, Validation);
     }
@@ -8812,9 +8847,7 @@
    
    Using the above data you can map it to your own analytics tracker.
    */
-  var Tracking =
-  /*#__PURE__*/
-  function () {
+  var Tracking = /*#__PURE__*/function () {
     /* @ignore */
     function Tracking() {
       _classCallCheck(this, Tracking);
@@ -11091,542 +11124,541 @@
 
 
   var BaseComponent = function BaseComponent(superClass) {
-    return (
-      /*#__PURE__*/
-      function (_superClass) {
-        _inherits(_class, _superClass);
+    return /*#__PURE__*/function (_superClass) {
+      _inherits(_class, _superClass);
 
-        /** @ignore */
-        function _class() {
-          var _this;
+      var _super = _createSuper(_class);
 
-          _classCallCheck(this, _class);
+      /** @ignore */
+      function _class() {
+        var _this;
 
-          _this = _possibleConstructorReturn(this, _getPrototypeOf(_class).call(this)); // Attach Vent
+        _classCallCheck(this, _class);
 
-          _this._vent = new vent(_assertThisInitialized(_this));
-          _this._events = {}; // Content zone MO for virtual DOM support
+        _this = _super.call(this); // Attach Vent
 
-          if (_this._contentZones) {
-            _this._contentZoneObserver = new MutationObserver(function (mutations) {
-              mutations.forEach(function (mutation) {
-                for (var i = 0; i < mutation.addedNodes.length; i++) {
-                  var addedNode = mutation.addedNodes[i];
+        _this._vent = new vent(_assertThisInitialized(_this));
+        _this._events = {}; // Content zone MO for virtual DOM support
 
-                  for (var name in _this._contentZones) {
-                    var contentZone = _this._contentZones[name];
+        if (_this._contentZones) {
+          _this._contentZoneObserver = new MutationObserver(function (mutations) {
+            mutations.forEach(function (mutation) {
+              for (var i = 0; i < mutation.addedNodes.length; i++) {
+                var addedNode = mutation.addedNodes[i];
 
-                    if (addedNode.nodeName.toLowerCase() === name && !addedNode._contentZoned) {
-                      // Insert the content zone at the right position
+                for (var name in _this._contentZones) {
+                  var contentZone = _this._contentZones[name];
 
-                      /** @ignore */
-                      _this[contentZone] = addedNode;
-                    }
+                  if (addedNode.nodeName.toLowerCase() === name && !addedNode._contentZoned) {
+                    // Insert the content zone at the right position
+
+                    /** @ignore */
+                    _this[contentZone] = addedNode;
                   }
                 }
-              });
+              }
             });
+          });
 
-            _this._contentZoneObserver.observe(_assertThisInitialized(_this), {
-              childList: true,
-              subtree: true
-            });
-          }
-
-          return _this;
+          _this._contentZoneObserver.observe(_assertThisInitialized(_this), {
+            childList: true,
+            subtree: true
+          });
         }
-        /**
-         Tracking of events. This provides insight on the usage of the components. It accepts "ON" and "OFF". In order to
-         successfully track the events, {Tracking} needs to be configured.
-         
-         @type {String}
-         @default TrackingEnum.ON
-         @htmlattribute tracking
-         */
+
+        return _this;
+      }
+      /**
+       Tracking of events. This provides insight on the usage of the components. It accepts "ON" and "OFF". In order to
+       successfully track the events, {Tracking} needs to be configured.
+       
+       @type {String}
+       @default TrackingEnum.ON
+       @htmlattribute tracking
+       */
 
 
-        _createClass(_class, [{
-          key: "_filterKeys",
-          // The filter function for keyboard events. By default, any child element can trigger keyboard events.
-          // You can pass {@link Keys.filterInputs} to avoid listening to key events triggered from within
-          // inputs.
-          value: function _filterKeys() {
-            return true;
-          } // Attach event listeners including global ones
+      _createClass(_class, [{
+        key: "_filterKeys",
+        // The filter function for keyboard events. By default, any child element can trigger keyboard events.
+        // You can pass {@link Keys.filterInputs} to avoid listening to key events triggered from within
+        // inputs.
+        value: function _filterKeys() {
+          return true;
+        } // Attach event listeners including global ones
 
-        }, {
-          key: "_delegateEvents",
-          value: function _delegateEvents(eventMap) {
-            this._events = commons.extend(this._events, eventMap);
-            delegateEvents.call(this);
-            delegateGlobalEvents.call(this); // Once events are attached, we dispose them
+      }, {
+        key: "_delegateEvents",
+        value: function _delegateEvents(eventMap) {
+          this._events = commons.extend(this._events, eventMap);
+          delegateEvents.call(this);
+          delegateGlobalEvents.call(this); // Once events are attached, we dispose them
 
-            this._events = {};
-          } // Returns the content zone if the component is connected and contains the content zone else null
-          // Ideally content zones will be replaced by shadow dom and <slot> elements
+          this._events = {};
+        } // Returns the content zone if the component is connected and contains the content zone else null
+        // Ideally content zones will be replaced by shadow dom and <slot> elements
 
-        }, {
-          key: "_getContentZone",
-          value: function _getContentZone(contentZone) {
-            if (document.documentElement.contains(this)) {
-              return this.contains(contentZone) && contentZone || null;
-            } // Return the content zone by default
-
-
-            return contentZone;
-          } // Sets the value as content zone for the property given the specified options
-          // Ideally content zones will be replaced by shadow dom and <slot> elements
-
-        }, {
-          key: "_setContentZone",
-          value: function _setContentZone(property, value, options) {
-            var handle = options.handle;
-            var expectedTagName = options.tagName;
-            var additionalSetter = options.set;
-            var insert = options.insert;
-            var oldNode;
-
-            if (value) {
-              if (!(value instanceof HTMLElement)) {
-                throw new Error("DOMException: Failed to set the \"".concat(property, "\" property on \"").concat(this.toString(), "\":\n        The provided value is not of type \"HTMLElement\"."));
-              }
-
-              if (expectedTagName && value.tagName.toLowerCase() !== expectedTagName) {
-                throw new Error("DOMException: Failed to set the \"".concat(property, "\" property on \"").concat(this.toString(), "\": The new\n        ").concat(property, " element is of type \"").concat(value.tagName, "\". It must be a \"").concat(expectedTagName.toUpperCase(), "\" element."));
-              }
-
-              oldNode = this._elements[handle]; // Flag it for the content zone MO
-
-              value._contentZoned = true; // Replace the existing element
-
-              if (insert) {
-                // Remove old node
-                if (oldNode && oldNode.parentNode) {
-                  oldNode.parentNode.removeChild(oldNode);
-                } // Insert new node
+      }, {
+        key: "_getContentZone",
+        value: function _getContentZone(contentZone) {
+          if (document.documentElement.contains(this)) {
+            return this.contains(contentZone) && contentZone || null;
+          } // Return the content zone by default
 
 
-                insert.call(this, value);
-              } else if (oldNode && oldNode.parentNode) {
-                commons._log('warn', "".concat(this._componentName, " does not define an insert method for content zone ").concat(handle, ", falling back to replace.")); // Old way -- assume we have an old node
+          return contentZone;
+        } // Sets the value as content zone for the property given the specified options
+        // Ideally content zones will be replaced by shadow dom and <slot> elements
 
+      }, {
+        key: "_setContentZone",
+        value: function _setContentZone(property, value, options) {
+          var handle = options.handle;
+          var expectedTagName = options.tagName;
+          var additionalSetter = options.set;
+          var insert = options.insert;
+          var oldNode;
 
-                this._elements[handle].parentNode.replaceChild(value, this._elements[handle]);
-              } else {
-                commons._log('error', "".concat(this._componentName, " does not define an insert method for content zone ").concat(handle, ", falling back to append.")); // Just append, which may introduce bugs, but at least doesn't crazy
+          if (value) {
+            if (!(value instanceof HTMLElement)) {
+              throw new Error("DOMException: Failed to set the \"".concat(property, "\" property on \"").concat(this.toString(), "\":\n        The provided value is not of type \"HTMLElement\"."));
+            }
 
+            if (expectedTagName && value.tagName.toLowerCase() !== expectedTagName) {
+              throw new Error("DOMException: Failed to set the \"".concat(property, "\" property on \"").concat(this.toString(), "\": The new\n        ").concat(property, " element is of type \"").concat(value.tagName, "\". It must be a \"").concat(expectedTagName.toUpperCase(), "\" element."));
+            }
 
-                this.appendChild(value);
-              }
-            } else {
-              // we need to remove the content zone if it exists
-              oldNode = this._elements[handle];
+            oldNode = this._elements[handle]; // Flag it for the content zone MO
 
+            value._contentZoned = true; // Replace the existing element
+
+            if (insert) {
+              // Remove old node
               if (oldNode && oldNode.parentNode) {
                 oldNode.parentNode.removeChild(oldNode);
-              }
-            } // Re-assign the handle to the new element
+              } // Insert new node
 
 
-            this._elements[handle] = value; // Invoke the setter
+              insert.call(this, value);
+            } else if (oldNode && oldNode.parentNode) {
+              commons._log('warn', "".concat(this._componentName, " does not define an insert method for content zone ").concat(handle, ", falling back to replace.")); // Old way -- assume we have an old node
 
-            if (typeof additionalSetter === 'function') {
-              additionalSetter.call(this, value);
+
+              this._elements[handle].parentNode.replaceChild(value, this._elements[handle]);
+            } else {
+              commons._log('error', "".concat(this._componentName, " does not define an insert method for content zone ").concat(handle, ", falling back to append.")); // Just append, which may introduce bugs, but at least doesn't crazy
+
+
+              this.appendChild(value);
             }
-          } // Handles the reflection of properties by using a flag to prevent setting the property by changing the attribute
+          } else {
+            // we need to remove the content zone if it exists
+            oldNode = this._elements[handle];
 
-        }, {
-          key: "_reflectAttribute",
-          value: function _reflectAttribute(attributeName, value) {
-            if (typeof value === 'boolean') {
-              if (value && !this.hasAttribute(attributeName)) {
-                this._reflectedAttribute = true;
-                this.setAttribute(attributeName, '');
-                this._reflectedAttribute = false;
-              } else if (!value && this.hasAttribute(attributeName)) {
-                this._reflectedAttribute = true;
-                this.removeAttribute(attributeName);
-                this._reflectedAttribute = false;
-              }
-            } else if (this.getAttribute(attributeName) !== String(value)) {
+            if (oldNode && oldNode.parentNode) {
+              oldNode.parentNode.removeChild(oldNode);
+            }
+          } // Re-assign the handle to the new element
+
+
+          this._elements[handle] = value; // Invoke the setter
+
+          if (typeof additionalSetter === 'function') {
+            additionalSetter.call(this, value);
+          }
+        } // Handles the reflection of properties by using a flag to prevent setting the property by changing the attribute
+
+      }, {
+        key: "_reflectAttribute",
+        value: function _reflectAttribute(attributeName, value) {
+          if (typeof value === 'boolean') {
+            if (value && !this.hasAttribute(attributeName)) {
               this._reflectedAttribute = true;
-              this.setAttribute(attributeName, value);
+              this.setAttribute(attributeName, '');
+              this._reflectedAttribute = false;
+            } else if (!value && this.hasAttribute(attributeName)) {
+              this._reflectedAttribute = true;
+              this.removeAttribute(attributeName);
               this._reflectedAttribute = false;
             }
+          } else if (this.getAttribute(attributeName) !== String(value)) {
+            this._reflectedAttribute = true;
+            this.setAttribute(attributeName, value);
+            this._reflectedAttribute = false;
           }
-          /**
-           Notifies external listeners about an internal interaction. This method is used internally in every
-           component's method that we want to track.
-           
-           @param {String} eventType The event type. Eg. click, select, etc.
-           @param {String} targetType The element type being used. Eg. cyclebutton, cyclebuttonitem, etc.
-           @param {CustomEvent} event
-           @param {BaseComponent} childComponent - Optional, in case the event occurred on a child component.
-           
-           @returns {BaseComponent}
-           */
+        }
+        /**
+         Notifies external listeners about an internal interaction. This method is used internally in every
+         component's method that we want to track.
+         
+         @param {String} eventType The event type. Eg. click, select, etc.
+         @param {String} targetType The element type being used. Eg. cyclebutton, cyclebuttonitem, etc.
+         @param {CustomEvent} event
+         @param {BaseComponent} childComponent - Optional, in case the event occurred on a child component.
+         
+         @returns {BaseComponent}
+         */
 
-        }, {
-          key: "_trackEvent",
-          value: function _trackEvent(eventType, targetType, event, childComponent) {
-            if (this.tracking === this.constructor.tracking.ON) {
-              tracking.track(eventType, targetType, event, this, childComponent);
-            }
-
-            return this;
+      }, {
+        key: "_trackEvent",
+        value: function _trackEvent(eventType, targetType, event, childComponent) {
+          if (this.tracking === this.constructor.tracking.ON) {
+            tracking.track(eventType, targetType, event, this, childComponent);
           }
-          /**
-           Returns the component name.
-           
-           @return {String}
-           */
 
-        }, {
-          key: "toString",
-          value: function toString() {
-            return "Coral.".concat(this._componentName);
-          }
-          /**
-           Add an event listener.
-             @param {String} eventName
-           The event name to listen for.
-           @param {String} [selector]
-           The selector to use for event delegation.
-           @param {Function} func
-           The function that will be called when the event is triggered.
-           @param {Boolean} [useCapture=false]
-           Whether or not to listen during the capturing or bubbling phase.
-           @returns {BaseComponent} this, chainable.
-           */
+          return this;
+        }
+        /**
+         Returns the component name.
+         
+         @return {String}
+         */
 
-        }, {
-          key: "on",
-          value: function on(eventName, selector, func, useCapture) {
-            this._vent.on(eventName, selector, func, useCapture);
-
-            return this;
-          }
-          /**
-           Remove an event listener.
-           
+      }, {
+        key: "toString",
+        value: function toString() {
+          return "Coral.".concat(this._componentName);
+        }
+        /**
+         Add an event listener.
            @param {String} eventName
-           The event name to stop listening for.
-           @param {String} [selector]
-           The selector that was used for event delegation.
-           @param {Function} func
-           The function that was passed to <code>on()</code>.
-           @param {Boolean} [useCapture]
-           Only remove listeners with <code>useCapture</code> set to the value passed in.
-           @returns {BaseComponent} this, chainable.
-           */
+         The event name to listen for.
+         @param {String} [selector]
+         The selector to use for event delegation.
+         @param {Function} func
+         The function that will be called when the event is triggered.
+         @param {Boolean} [useCapture=false]
+         Whether or not to listen during the capturing or bubbling phase.
+         @returns {BaseComponent} this, chainable.
+         */
 
-        }, {
-          key: "off",
-          value: function off(eventName, selector, func, useCapture) {
-            this._vent.off(eventName, selector, func, useCapture);
+      }, {
+        key: "on",
+        value: function on(eventName, selector, func, useCapture) {
+          this._vent.on(eventName, selector, func, useCapture);
 
-            return this;
-          }
-          /**
-           Trigger an event.
-           
-           @param {String} eventName
-           The event name to trigger.
-           @param {Object} [props]
-           Additional properties to make available to handlers as <code>event.detail</code>.
-           @param {Boolean} [bubbles=true]
-           Set to <code>false</code> to prevent the event from bubbling.
-           @param {Boolean} [cancelable=true]
-           Set to <code>false</code> to prevent the event from being cancelable.
-           @returns {CustomEvent} CustomEvent object
-           */
+          return this;
+        }
+        /**
+         Remove an event listener.
+         
+         @param {String} eventName
+         The event name to stop listening for.
+         @param {String} [selector]
+         The selector that was used for event delegation.
+         @param {Function} func
+         The function that was passed to <code>on()</code>.
+         @param {Boolean} [useCapture]
+         Only remove listeners with <code>useCapture</code> set to the value passed in.
+         @returns {BaseComponent} this, chainable.
+         */
 
-        }, {
-          key: "trigger",
-          value: function trigger(eventName, props, bubbles, cancelable) {
-            // When 'bubbles' is not set, then default to true:
-            bubbles = bubbles || bubbles === undefined; // When 'cancelable' is not set, then default to true:
+      }, {
+        key: "off",
+        value: function off(eventName, selector, func, useCapture) {
+          this._vent.off(eventName, selector, func, useCapture);
 
-            cancelable = cancelable || cancelable === undefined;
-            var event = new CustomEvent(eventName, {
-              bubbles: bubbles,
-              cancelable: cancelable,
-              detail: props
-            }); // Don't trigger the event if silenced
+          return this;
+        }
+        /**
+         Trigger an event.
+         
+         @param {String} eventName
+         The event name to trigger.
+         @param {Object} [props]
+         Additional properties to make available to handlers as <code>event.detail</code>.
+         @param {Boolean} [bubbles=true]
+         Set to <code>false</code> to prevent the event from bubbling.
+         @param {Boolean} [cancelable=true]
+         Set to <code>false</code> to prevent the event from being cancelable.
+         @returns {CustomEvent} CustomEvent object
+         */
 
-            if (this._silenced) {
-              return event;
-            } // default value in case the dispatching fails
+      }, {
+        key: "trigger",
+        value: function trigger(eventName, props, bubbles, cancelable) {
+          // When 'bubbles' is not set, then default to true:
+          bubbles = bubbles || bubbles === undefined; // When 'cancelable' is not set, then default to true:
 
+          cancelable = cancelable || cancelable === undefined;
+          var event = new CustomEvent(eventName, {
+            bubbles: bubbles,
+            cancelable: cancelable,
+            detail: props
+          }); // Don't trigger the event if silenced
 
-            var defaultPrevented = false;
-
-            try {
-              // leads to NS_ERROR_UNEXPECTED in Firefox
-              // https://bugzilla.mozilla.org/show_bug.cgi?id=329509
-              defaultPrevented = !this.dispatchEvent(event);
-            } // eslint-disable-next-line no-empty
-            catch (e) {} // Check if the defaultPrevented status was correctly stored back to the event object
-
-
-            if (defaultPrevented !== event.defaultPrevented) {
-              // dispatchEvent() doesn't correctly set event.defaultPrevented in IE 9
-              // However, it does return false if preventDefault() was called
-              // Unfortunately, the returned event's defaultPrevented property is read-only
-              // We need to work around this such that (patchedEvent instanceof Event) === true
-              // First, we'll create an object that uses the event as its prototype
-              // This gives us an object we can modify that is still technically an instanceof Event
-              var patchedEvent = Object.create(event); // Next, we set the correct value for defaultPrevented on the new object
-              // We cannot simply assign defaultPrevented, it causes a "Invalid Calling Object" error in IE 9
-              // For some reason, defineProperty doesn't cause this
-
-              Object.defineProperty(patchedEvent, 'defaultPrevented', {
-                value: defaultPrevented
-              });
-              return patchedEvent;
-            }
-
+          if (this._silenced) {
             return event;
+          } // default value in case the dispatching fails
+
+
+          var defaultPrevented = false;
+
+          try {
+            // leads to NS_ERROR_UNEXPECTED in Firefox
+            // https://bugzilla.mozilla.org/show_bug.cgi?id=329509
+            defaultPrevented = !this.dispatchEvent(event);
+          } // eslint-disable-next-line no-empty
+          catch (e) {} // Check if the defaultPrevented status was correctly stored back to the event object
+
+
+          if (defaultPrevented !== event.defaultPrevented) {
+            // dispatchEvent() doesn't correctly set event.defaultPrevented in IE 9
+            // However, it does return false if preventDefault() was called
+            // Unfortunately, the returned event's defaultPrevented property is read-only
+            // We need to work around this such that (patchedEvent instanceof Event) === true
+            // First, we'll create an object that uses the event as its prototype
+            // This gives us an object we can modify that is still technically an instanceof Event
+            var patchedEvent = Object.create(event); // Next, we set the correct value for defaultPrevented on the new object
+            // We cannot simply assign defaultPrevented, it causes a "Invalid Calling Object" error in IE 9
+            // For some reason, defineProperty doesn't cause this
+
+            Object.defineProperty(patchedEvent, 'defaultPrevented', {
+              value: defaultPrevented
+            });
+            return patchedEvent;
           }
-          /**
-           Set multiple properties.
-           
-           @param {Object.<String, *>} properties
-           An object of property/value pairs to set.
-           @param {Boolean} silent
-           If true, events should not be triggered as a result of this set.
-           
-           @returns {BaseComponent} this, chainable.
-           */
 
-        }, {
-          key: "set",
-          value: function set(propertyOrProperties, valueOrSilent, silent) {
-            var _this2 = this;
+          return event;
+        }
+        /**
+         Set multiple properties.
+         
+         @param {Object.<String, *>} properties
+         An object of property/value pairs to set.
+         @param {Boolean} silent
+         If true, events should not be triggered as a result of this set.
+         
+         @returns {BaseComponent} this, chainable.
+         */
 
-            var property;
-            var properties;
-            var value;
+      }, {
+        key: "set",
+        value: function set(propertyOrProperties, valueOrSilent, silent) {
+          var _this2 = this;
 
-            var isContentZone = function isContentZone(prop) {
-              return _this2._contentZones && commons.swapKeysAndValues(_this2._contentZones)[prop];
-            };
+          var property;
+          var properties;
+          var value;
 
-            var updateContentZone = function updateContentZone(prop, val) {
-              // If content zone exists and we only want to update properties on the content zone
-              if (_this2[prop] instanceof HTMLElement && !(val instanceof HTMLElement)) {
-                for (var contentZoneProperty in val) {
-                  /** @ignore */
-                  _this2[prop][contentZoneProperty] = val[contentZoneProperty];
-                }
-              } // Else assign the new value to the content zone
-              else {
-                  /** @ignore */
-                  _this2[prop] = val;
-                }
-            };
+          var isContentZone = function isContentZone(prop) {
+            return _this2._contentZones && commons.swapKeysAndValues(_this2._contentZones)[prop];
+          };
 
-            var setProperty = function setProperty(prop, val) {
-              if (isContentZone(prop)) {
-                updateContentZone(prop, val);
-              } else {
-                _this2._silenced = silent;
+          var updateContentZone = function updateContentZone(prop, val) {
+            // If content zone exists and we only want to update properties on the content zone
+            if (_this2[prop] instanceof HTMLElement && !(val instanceof HTMLElement)) {
+              for (var contentZoneProperty in val) {
                 /** @ignore */
-
+                _this2[prop][contentZoneProperty] = val[contentZoneProperty];
+              }
+            } // Else assign the new value to the content zone
+            else {
+                /** @ignore */
                 _this2[prop] = val;
-                _this2._silenced = false;
               }
-            };
+          };
 
-            if (typeof propertyOrProperties === 'string') {
-              // Set a single property
-              property = propertyOrProperties;
-              value = valueOrSilent;
-              setProperty(property, value);
+          var setProperty = function setProperty(prop, val) {
+            if (isContentZone(prop)) {
+              updateContentZone(prop, val);
             } else {
-              properties = propertyOrProperties;
-              silent = valueOrSilent; // Set a map of properties
+              _this2._silenced = silent;
+              /** @ignore */
 
-              for (property in properties) {
-                value = properties[property];
-                setProperty(property, value);
-              }
+              _this2[prop] = val;
+              _this2._silenced = false;
             }
+          };
 
+          if (typeof propertyOrProperties === 'string') {
+            // Set a single property
+            property = propertyOrProperties;
+            value = valueOrSilent;
+            setProperty(property, value);
+          } else {
+            properties = propertyOrProperties;
+            silent = valueOrSilent; // Set a map of properties
+
+            for (property in properties) {
+              value = properties[property];
+              setProperty(property, value);
+            }
+          }
+
+          return this;
+        }
+        /**
+         Get the value of a property.
+         
+         @param {String} property
+         The name of the property to fetch the value of.
+         @returns {*} Property value.
+         */
+
+      }, {
+        key: "get",
+        value: function get(property) {
+          return this[property];
+        }
+        /**
+         Show this component.
+         
+         @returns {BaseComponent} this, chainable
+         */
+
+      }, {
+        key: "show",
+        value: function show() {
+          if (!this.hidden) {
             return this;
           }
-          /**
-           Get the value of a property.
-           
-           @param {String} property
-           The name of the property to fetch the value of.
-           @returns {*} Property value.
-           */
-
-        }, {
-          key: "get",
-          value: function get(property) {
-            return this[property];
-          }
-          /**
-           Show this component.
-           
-           @returns {BaseComponent} this, chainable
-           */
-
-        }, {
-          key: "show",
-          value: function show() {
-            if (!this.hidden) {
-              return this;
-            }
-            /** @ignore */
+          /** @ignore */
 
 
-            this.hidden = false;
+          this.hidden = false;
+          return this;
+        }
+        /**
+         Hide this component.
+         @returns {BaseComponent} this, chainable
+         */
+
+      }, {
+        key: "hide",
+        value: function hide() {
+          if (this.hidden) {
             return this;
           }
-          /**
-           Hide this component.
-           @returns {BaseComponent} this, chainable
-           */
-
-        }, {
-          key: "hide",
-          value: function hide() {
-            if (this.hidden) {
-              return this;
-            }
-            /** @ignore */
-
-
-            this.hidden = true;
-            return this;
-          }
-          /**
-           Returns {@link BaseComponent} tracking options.
-           
-           @return {TrackingEnum}
-           */
-
-        }, {
-          key: "attributeChangedCallback",
-
-          /** @ignore */
-          // eslint-disable-next-line no-unused-vars
-          value: function attributeChangedCallback(name, oldValue, value) {
-            var self = this;
-
-            if (!self._reflectedAttribute) {
-              // Use the attribute/property mapping
-              self[self.constructor._attributePropertyMap[name] || name] = value;
-            }
-          }
           /** @ignore */
 
-        }, {
-          key: "connectedCallback",
-          value: function connectedCallback() {
-            // A component that is reattached should respond to global events again
-            if (this._disconnected) {
-              delegateGlobalEvents.call(this);
-              this._disconnected = false;
-            }
 
-            if (!this._rendered) {
-              this.render();
-            }
-          }
-          /** @ignore */
+          this.hidden = true;
+          return this;
+        }
+        /**
+         Returns {@link BaseComponent} tracking options.
+         
+         @return {TrackingEnum}
+         */
 
-        }, {
-          key: "render",
-          value: function render() {
-            this._rendered = true;
-          }
-          /** @ignore */
+      }, {
+        key: "attributeChangedCallback",
 
-        }, {
-          key: "disconnectedCallback",
-          value: function disconnectedCallback() {
-            // A component that isn't in the DOM should not be responding to global events
-            this._disconnected = true;
-            undelegateGlobalEvents.call(this);
-          }
-        }, {
-          key: "tracking",
-          get: function get() {
-            return this._tracking || this.getAttribute('tracking') || tracking$1.ON;
-          },
-          set: function set(value) {
-            value = transform.string(value).toLowerCase();
-            this._tracking = validate.enumeration(tracking$1)(value) && value || tracking$1.ON;
-          }
-          /**
-           The string representing the feature being tracked. This provides additional context to the analytics trackers
-           about the feature that the element enables.
-           
-           @type {String}
-           @default ""
-           @htmlattribute trackingfeature
-           */
+        /** @ignore */
+        // eslint-disable-next-line no-unused-vars
+        value: function attributeChangedCallback(name, oldValue, value) {
+          var self = this;
 
-        }, {
-          key: "trackingFeature",
-          get: function get() {
-            return this._trackingFeature || this.getAttribute('trackingFeature') || '';
-          },
-          set: function set(value) {
-            this._trackingFeature = transform.string(value);
+          if (!self._reflectedAttribute) {
+            // Use the attribute/property mapping
+            self[self.constructor._attributePropertyMap[name] || name] = value;
           }
-          /**
-           The string representing the element name being tracked. This providex additional context to the trackers about the
-           element that was interacted with.
-           
-           @type {String}
-           @default ""
-           @htmlattribute trackingelement
-           */
+        }
+        /** @ignore */
 
-        }, {
-          key: "trackingElement",
-          get: function get() {
-            return this._trackingElement || this.getAttribute('trackingElement') || '';
-          },
-          set: function set(value) {
-            this._trackingElement = transform.string(value);
-          } // Constructs and returns the component name based on the constructor
+      }, {
+        key: "connectedCallback",
+        value: function connectedCallback() {
+          // A component that is reattached should respond to global events again
+          if (this._disconnected) {
+            delegateGlobalEvents.call(this);
+            this._disconnected = false;
+          }
 
-        }, {
-          key: "_componentName",
-          get: function get() {
-            return this.constructor._componentName || getConstructorName(this.constructor);
+          if (!this._rendered) {
+            this.render();
           }
-        }], [{
-          key: "tracking",
-          get: function get() {
-            return tracking$1;
-          }
-        }, {
-          key: "_attributePropertyMap",
-          get: function get() {
-            return {
-              trackingelement: 'trackingElement',
-              trackingfeature: 'trackingFeature'
-            };
-          }
-          /** @ignore */
+        }
+        /** @ignore */
 
-        }, {
-          key: "observedAttributes",
-          get: function get() {
-            return ['tracking', 'trackingelement', 'trackingfeature', 'trackingFeature'];
-          }
-        }]);
+      }, {
+        key: "render",
+        value: function render() {
+          this._rendered = true;
+        }
+        /** @ignore */
 
-        return _class;
-      }(superClass)
-    );
+      }, {
+        key: "disconnectedCallback",
+        value: function disconnectedCallback() {
+          // A component that isn't in the DOM should not be responding to global events
+          this._disconnected = true;
+          undelegateGlobalEvents.call(this);
+        }
+      }, {
+        key: "tracking",
+        get: function get() {
+          return this._tracking || this.getAttribute('tracking') || tracking$1.ON;
+        },
+        set: function set(value) {
+          value = transform.string(value).toLowerCase();
+          this._tracking = validate.enumeration(tracking$1)(value) && value || tracking$1.ON;
+        }
+        /**
+         The string representing the feature being tracked. This provides additional context to the analytics trackers
+         about the feature that the element enables.
+         
+         @type {String}
+         @default ""
+         @htmlattribute trackingfeature
+         */
+
+      }, {
+        key: "trackingFeature",
+        get: function get() {
+          return this._trackingFeature || this.getAttribute('trackingFeature') || '';
+        },
+        set: function set(value) {
+          this._trackingFeature = transform.string(value);
+        }
+        /**
+         The string representing the element name being tracked. This providex additional context to the trackers about the
+         element that was interacted with.
+         
+         @type {String}
+         @default ""
+         @htmlattribute trackingelement
+         */
+
+      }, {
+        key: "trackingElement",
+        get: function get() {
+          return this._trackingElement || this.getAttribute('trackingElement') || '';
+        },
+        set: function set(value) {
+          this._trackingElement = transform.string(value);
+        } // Constructs and returns the component name based on the constructor
+
+      }, {
+        key: "_componentName",
+        get: function get() {
+          return this.constructor._componentName || getConstructorName(this.constructor);
+        }
+      }], [{
+        key: "tracking",
+        get: function get() {
+          return tracking$1;
+        }
+      }, {
+        key: "_attributePropertyMap",
+        get: function get() {
+          return {
+            trackingelement: 'trackingElement',
+            trackingfeature: 'trackingFeature'
+          };
+        }
+        /** @ignore */
+
+      }, {
+        key: "observedAttributes",
+        get: function get() {
+          return ['tracking', 'trackingelement', 'trackingfeature', 'trackingFeature'];
+        }
+      }]);
+
+      return _class;
+    }(superClass);
   };
 
   var LABELLABLE_ELEMENTS_SELECTOR = 'button,input:not([type=hidden]),keygen,meter,output,progress,select,textarea'; // @polyfill ie11
@@ -11657,370 +11689,369 @@
    */
 
   var BaseFormField = function BaseFormField(superClass) {
-    return (
-      /*#__PURE__*/
-      function (_superClass) {
-        _inherits(_class, _superClass);
+    return /*#__PURE__*/function (_superClass) {
+      _inherits(_class, _superClass);
 
-        /** @ignore */
-        function _class() {
-          var _this;
+      var _super = _createSuper(_class);
 
-          _classCallCheck(this, _class);
+      /** @ignore */
+      function _class() {
+        var _this;
 
-          _this = _possibleConstructorReturn(this, _getPrototypeOf(_class).call(this));
-          _this._events = {
-            'capture:change input': '_onTargetInputChange',
-            'global:reset': '_onFormReset'
-          };
-          return _this;
+        _classCallCheck(this, _class);
+
+        _this = _super.call(this);
+        _this._events = {
+          'capture:change input': '_onTargetInputChange',
+          'global:reset': '_onFormReset'
+        };
+        return _this;
+      }
+      /**
+       Whether this field is disabled or not.
+       
+       @type {Boolean}
+       @default false
+       @htmlattribute disabled
+       @htmlattributereflected
+       @abstract
+       */
+
+      /**
+       Whether the current value of this field is invalid or not.
+       
+       @type {Boolean}
+       @default false
+       @htmlattribute invalid
+       @htmlattributereflected
+       @abstract
+       */
+
+      /**
+       Name used to submit the data in a form.
+       
+       @type {String}
+       @default ""
+       @htmlattribute name
+       @htmlattributereflected
+       @abstract
+       */
+
+      /**
+       Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
+       This is ignored for checkbox, radio or fileupload.
+       
+       @type {Boolean}
+       @default false
+       @htmlattribute readonly
+       @htmlattributereflected
+       @abstract
+       */
+
+      /**
+       Whether this field is required or not.
+       
+       @type {Boolean}
+       @default false
+       @htmlattribute required
+       @htmlattributereflected
+       @abstract
+       */
+
+      /**
+       This field's current value.
+       
+       @type {String}
+       @default ""
+       @htmlattribute value
+       @abstract
+       */
+
+      /**
+       Whether the current value of this field is invalid or not.
+       
+       @type {Boolean}
+       @default false
+       @htmlattribute invalid
+       @htmlattributereflected
+       */
+
+
+      _createClass(_class, [{
+        key: "_getLabellableElement",
+
+        /**
+         Gets the element that should get the label. In case none of the valid labelelable items are found, the component
+         will be labelled instead.
+         @protected
+         @returns {HTMLElement} the labellable element.
+         */
+        value: function _getLabellableElement() {
+          // Use predefined element or query it
+          var element = this._labellableElement || this.querySelector(LABELLABLE_ELEMENTS_SELECTOR); // Use the found element or the container
+
+          return element || this;
         }
         /**
-         Whether this field is disabled or not.
-         
-         @type {Boolean}
-         @default false
-         @htmlattribute disabled
-         @htmlattributereflected
-         @abstract
+         Gets the internal input that the BaseFormField would watch for change. By default, it searches if the
+         <code>_getLabellableElement()</code> is an input. Components can override this function to be able to provide a
+         different implementation. In case the value is <code>null</code>, the change event will be handled no matter
+         the input that produced it.
+         @protected
+         @return {HTMLElement} the input to watch for changes.
          */
 
+      }, {
+        key: "_getTargetChangeInput",
+        value: function _getTargetChangeInput() {
+          // we use this._targetChangeInput as an internal cache to avoid querying the DOM again every time
+          return this._targetChangeInput || ( // assignment returns the value
+          this._targetChangeInput = this._getLabellableElement().matches(TARGET_INPUT_SELECTOR) ? this._getLabellableElement() : null);
+        }
         /**
-         Whether the current value of this field is invalid or not.
-         
-         @type {Boolean}
-         @default false
-         @htmlattribute invalid
-         @htmlattributereflected
-         @abstract
+         Function called whenever the target component triggers a change event. <code>_getTargetChangeInput</code> is used
+         internally to determine if the input belongs to the component. If the component decides to override this function,
+         the default from the base will not be called.
+         @protected
          */
 
-        /**
-         Name used to submit the data in a form.
-         
-         @type {String}
-         @default ""
-         @htmlattribute name
-         @htmlattributereflected
-         @abstract
-         */
-
-        /**
-         Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
-         This is ignored for checkbox, radio or fileupload.
-         
-         @type {Boolean}
-         @default false
-         @htmlattribute readonly
-         @htmlattributereflected
-         @abstract
-         */
-
-        /**
-         Whether this field is required or not.
-         
-         @type {Boolean}
-         @default false
-         @htmlattribute required
-         @htmlattributereflected
-         @abstract
-         */
-
-        /**
-         This field's current value.
-         
-         @type {String}
-         @default ""
-         @htmlattribute value
-         @abstract
-         */
-
-        /**
-         Whether the current value of this field is invalid or not.
-         
-         @type {Boolean}
-         @default false
-         @htmlattribute invalid
-         @htmlattributereflected
-         */
-
-
-        _createClass(_class, [{
-          key: "_getLabellableElement",
-
-          /**
-           Gets the element that should get the label. In case none of the valid labelelable items are found, the component
-           will be labelled instead.
-           @protected
-           @returns {HTMLElement} the labellable element.
-           */
-          value: function _getLabellableElement() {
-            // Use predefined element or query it
-            var element = this._labellableElement || this.querySelector(LABELLABLE_ELEMENTS_SELECTOR); // Use the found element or the container
-
-            return element || this;
-          }
-          /**
-           Gets the internal input that the BaseFormField would watch for change. By default, it searches if the
-           <code>_getLabellableElement()</code> is an input. Components can override this function to be able to provide a
-           different implementation. In case the value is <code>null</code>, the change event will be handled no matter
-           the input that produced it.
-           @protected
-           @return {HTMLElement} the input to watch for changes.
-           */
-
-        }, {
-          key: "_getTargetChangeInput",
-          value: function _getTargetChangeInput() {
-            // we use this._targetChangeInput as an internal cache to avoid querying the DOM again every time
-            return this._targetChangeInput || ( // assignment returns the value
-            this._targetChangeInput = this._getLabellableElement().matches(TARGET_INPUT_SELECTOR) ? this._getLabellableElement() : null);
-          }
-          /**
-           Function called whenever the target component triggers a change event. <code>_getTargetChangeInput</code> is used
-           internally to determine if the input belongs to the component. If the component decides to override this function,
-           the default from the base will not be called.
-           @protected
-           */
-
-        }, {
-          key: "_onInputChange",
-          value: function _onInputChange(event) {
-            // stops the current event
-            event.stopPropagation();
-            /** @ignore */
-
-            this[this._componentTargetProperty] = event.target[this._eventTargetProperty]; // Explicitly re-emit the change event after the property has been set
-
-            if (this._triggerChangeEvent) {
-              this.trigger('change');
-            }
-          }
-          /**
-           Resets the formField when a reset is triggered on the parent form.
-           @protected
-           */
-
-        }, {
-          key: "_onFormReset",
-          value: function _onFormReset(event) {
-            if (event.target.contains(this)) {
-              this.reset();
-            }
-          }
-          /**
-           We capture every input change and validate that it belongs to our target input. If this is the case,
-           <code>_onInputChange</code> will be called with the same event.
-           @protected
-           */
-
-        }, {
-          key: "_onTargetInputChange",
-          value: function _onTargetInputChange(event) {
-            var targetInput = this._getTargetChangeInput(); // if the targetInput is null we still call _onInputChange to be backwards compatible
-
-
-            if (targetInput === event.target || targetInput === null) {
-              // we call _onInputChange since the target matches
-              this._onInputChange(event);
-            }
-          }
-          /**
-           A utility method for adding the appropriate <code>for</code> attribute to any <code>label</code> elements
-           referenced by the <code>labelledBy</code> property value.
-           @param {String} labelledBy
-           The value of the <code>labelledBy<code> property providing a space-delimited list of the <code>id</code>
-           attributes for elements that label the formField.
-           @param {String} elementId
-           The <code>id</code> of the formField or one of its descendants that should be labelled by
-           <code>label</code> elements referenced by the <code>labelledBy</code> property value.
-           @param {Boolean} remove
-           Whether the existing <code>for</code> attributes should be removed.
-           @protected
-           */
-
-        }, {
-          key: "_updateForAttributes",
-          value: function _updateForAttributes(labelledBy, elementId, remove) {
-            // labelledby contains whitespace sparated items, so we need to separate each individual id
-            var labelIds = labelledBy.split(/\s+/); // we update the 'for' attribute for every id.
-
-            labelIds.forEach(function (currentValue) {
-              var labelElement = document.getElementById(currentValue);
-
-              if (labelElement && labelElement.tagName === 'LABEL') {
-                var forAttribute = labelElement.getAttribute('for');
-
-                if (remove) {
-                  // we just remove it when it is our target
-                  if (forAttribute === elementId) {
-                    labelElement.removeAttribute('for');
-                  }
-                } else {
-                  // if we do not have to remove, it does not matter the current value of the label, we can set it in every
-                  // case
-                  labelElement.setAttribute('for', elementId);
-                }
-              }
-            });
-          }
-          /**
-           Clears the <code>value</code> of formField to the default value.
-           */
-
-        }, {
-          key: "clear",
-          value: function clear() {
-            /** @ignore */
-            this.value = '';
-          }
-          /**
-           Resets the <code>value</code> to the initial value.
-           */
-
-        }, {
-          key: "reset",
-          value: function reset() {
-            // since the 'value' property is not reflected, form components use it to restore the initial value. When a
-            // component has support for values, this method needs to be overwritten
-
-            /** @ignore */
-            this.value = transform.string(this.getAttribute('value'));
-          }
-        }, {
-          key: "invalid",
-          get: function get() {
-            return this._invalid || false;
-          },
-          set: function set(value) {
-            this._invalid = transform.booleanAttr(value);
-
-            this._reflectAttribute('invalid', this._invalid);
-
-            this.setAttribute('aria-invalid', this._invalid);
-            this.classList.toggle('is-invalid', this._invalid);
-          }
-          /**
-           Reflects the <code>aria-label</code> attribute to the labellable element e.g. inner input.
-           
-           @type {String}
-           @default null
-           @htmlattribute labelled
-           */
-
-        }, {
-          key: "labelled",
-          get: function get() {
-            return this._getLabellableElement().getAttribute('aria-label');
-          },
-          set: function set(value) {
-            value = transform.string(value);
-
-            this._getLabellableElement()[value ? 'setAttribute' : 'removeAttribute']('aria-label', value);
-          }
-          /**
-           Reference to a space delimited set of ids for the HTML elements that provide a label for the formField.
-           Implementers should override this method to ensure that the appropriate descendant elements are labelled using the
-           <code>aria-labelledby</code> attribute. This will ensure that the component is properly identified for
-           accessibility purposes. It reflects the <code>aria-labelledby</code> attribute to the DOM.
-           @type {?String}
-           @default null
-           @htmlattribute labelledby
-           */
-
-        }, {
-          key: "labelledBy",
-          get: function get() {
-            return this._getLabellableElement().getAttribute('aria-labelledby');
-          },
-          set: function set(value) {
-            value = transform.string(value); // gets the element that will get the label assigned. the _getLabellableElement method should be overriden to
-            // allow other bevaviors.
-
-            var element = this._getLabellableElement(); // we get and assign the it that will be passed around
-
-
-            var elementId = element.id = element.id || commons.getUID();
-            var currentLabelledBy = element.getAttribute('aria-labelledby'); // we clear the old label assignments
-
-            if (currentLabelledBy && currentLabelledBy !== value) {
-              this._updateForAttributes(currentLabelledBy, elementId, true);
-            }
-
-            if (value) {
-              element.setAttribute('aria-labelledby', value);
-
-              if (element.matches(LABELLABLE_ELEMENTS_SELECTOR)) {
-                this._updateForAttributes(value, elementId);
-              }
-            } else {
-              // since no labelledby value was set, we remove everything
-              element.removeAttribute('aria-labelledby');
-            }
-          }
-          /**
-           Target property inside the component that will be updated when a change event is triggered.
-           @type {String}
-           @default "value"
-           @protected
-           */
-
-        }, {
-          key: "_componentTargetProperty",
-          get: function get() {
-            return 'value';
-          }
-          /**
-           Target property that will be taken from <code>event.target</code> and set into
-           {@link BaseFormField#_componentTargetProperty} when a change event is triggered.
-           @type {String}
-           @default "value"
-           @protected
-           */
-
-        }, {
-          key: "_eventTargetProperty",
-          get: function get() {
-            return 'value';
-          }
-          /**
-           Whether the change event needs to be triggered when {@link BaseFormField#_onInputChange} is called.
-           @type {Boolean}
-           @default true
-           @protected
-           */
-
-        }, {
-          key: "_triggerChangeEvent",
-          get: function get() {
-            return true;
-          }
-        }], [{
-          key: "_attributePropertyMap",
-          get: function get() {
-            return commons.extend(_get(_getPrototypeOf(_class), "_attributePropertyMap", this), {
-              labelledby: 'labelledBy',
-              readonly: 'readOnly'
-            });
-          } // We don't want to watch existing attributes for components that extend native HTML elements
-
-        }, {
-          key: "_nativeObservedAttributes",
-          get: function get() {
-            return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['labelled', 'labelledby', 'invalid']);
-          }
+      }, {
+        key: "_onInputChange",
+        value: function _onInputChange(event) {
+          // stops the current event
+          event.stopPropagation();
           /** @ignore */
 
-        }, {
-          key: "observedAttributes",
-          get: function get() {
-            return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['labelled', 'labelledby', 'invalid', 'readonly', 'name', 'value', 'disabled', 'required']);
-          }
-        }]);
+          this[this._componentTargetProperty] = event.target[this._eventTargetProperty]; // Explicitly re-emit the change event after the property has been set
 
-        return _class;
-      }(superClass)
-    );
+          if (this._triggerChangeEvent) {
+            this.trigger('change');
+          }
+        }
+        /**
+         Resets the formField when a reset is triggered on the parent form.
+         @protected
+         */
+
+      }, {
+        key: "_onFormReset",
+        value: function _onFormReset(event) {
+          if (event.target.contains(this)) {
+            this.reset();
+          }
+        }
+        /**
+         We capture every input change and validate that it belongs to our target input. If this is the case,
+         <code>_onInputChange</code> will be called with the same event.
+         @protected
+         */
+
+      }, {
+        key: "_onTargetInputChange",
+        value: function _onTargetInputChange(event) {
+          var targetInput = this._getTargetChangeInput(); // if the targetInput is null we still call _onInputChange to be backwards compatible
+
+
+          if (targetInput === event.target || targetInput === null) {
+            // we call _onInputChange since the target matches
+            this._onInputChange(event);
+          }
+        }
+        /**
+         A utility method for adding the appropriate <code>for</code> attribute to any <code>label</code> elements
+         referenced by the <code>labelledBy</code> property value.
+         @param {String} labelledBy
+         The value of the <code>labelledBy<code> property providing a space-delimited list of the <code>id</code>
+         attributes for elements that label the formField.
+         @param {String} elementId
+         The <code>id</code> of the formField or one of its descendants that should be labelled by
+         <code>label</code> elements referenced by the <code>labelledBy</code> property value.
+         @param {Boolean} remove
+         Whether the existing <code>for</code> attributes should be removed.
+         @protected
+         */
+
+      }, {
+        key: "_updateForAttributes",
+        value: function _updateForAttributes(labelledBy, elementId, remove) {
+          // labelledby contains whitespace sparated items, so we need to separate each individual id
+          var labelIds = labelledBy.split(/\s+/); // we update the 'for' attribute for every id.
+
+          labelIds.forEach(function (currentValue) {
+            var labelElement = document.getElementById(currentValue);
+
+            if (labelElement && labelElement.tagName === 'LABEL') {
+              var forAttribute = labelElement.getAttribute('for');
+
+              if (remove) {
+                // we just remove it when it is our target
+                if (forAttribute === elementId) {
+                  labelElement.removeAttribute('for');
+                }
+              } else {
+                // if we do not have to remove, it does not matter the current value of the label, we can set it in every
+                // case
+                labelElement.setAttribute('for', elementId);
+              }
+            }
+          });
+        }
+        /**
+         Clears the <code>value</code> of formField to the default value.
+         */
+
+      }, {
+        key: "clear",
+        value: function clear() {
+          /** @ignore */
+          this.value = '';
+        }
+        /**
+         Resets the <code>value</code> to the initial value.
+         */
+
+      }, {
+        key: "reset",
+        value: function reset() {
+          // since the 'value' property is not reflected, form components use it to restore the initial value. When a
+          // component has support for values, this method needs to be overwritten
+
+          /** @ignore */
+          this.value = transform.string(this.getAttribute('value'));
+        }
+      }, {
+        key: "invalid",
+        get: function get() {
+          return this._invalid || false;
+        },
+        set: function set(value) {
+          this._invalid = transform.booleanAttr(value);
+
+          this._reflectAttribute('invalid', this._invalid);
+
+          this.setAttribute('aria-invalid', this._invalid);
+          this.classList.toggle('is-invalid', this._invalid);
+        }
+        /**
+         Reflects the <code>aria-label</code> attribute to the labellable element e.g. inner input.
+         
+         @type {String}
+         @default null
+         @htmlattribute labelled
+         */
+
+      }, {
+        key: "labelled",
+        get: function get() {
+          return this._getLabellableElement().getAttribute('aria-label');
+        },
+        set: function set(value) {
+          value = transform.string(value);
+
+          this._getLabellableElement()[value ? 'setAttribute' : 'removeAttribute']('aria-label', value);
+        }
+        /**
+         Reference to a space delimited set of ids for the HTML elements that provide a label for the formField.
+         Implementers should override this method to ensure that the appropriate descendant elements are labelled using the
+         <code>aria-labelledby</code> attribute. This will ensure that the component is properly identified for
+         accessibility purposes. It reflects the <code>aria-labelledby</code> attribute to the DOM.
+         @type {?String}
+         @default null
+         @htmlattribute labelledby
+         */
+
+      }, {
+        key: "labelledBy",
+        get: function get() {
+          return this._getLabellableElement().getAttribute('aria-labelledby');
+        },
+        set: function set(value) {
+          value = transform.string(value); // gets the element that will get the label assigned. the _getLabellableElement method should be overriden to
+          // allow other bevaviors.
+
+          var element = this._getLabellableElement(); // we get and assign the it that will be passed around
+
+
+          var elementId = element.id = element.id || commons.getUID();
+          var currentLabelledBy = element.getAttribute('aria-labelledby'); // we clear the old label assignments
+
+          if (currentLabelledBy && currentLabelledBy !== value) {
+            this._updateForAttributes(currentLabelledBy, elementId, true);
+          }
+
+          if (value) {
+            element.setAttribute('aria-labelledby', value);
+
+            if (element.matches(LABELLABLE_ELEMENTS_SELECTOR)) {
+              this._updateForAttributes(value, elementId);
+            }
+          } else {
+            // since no labelledby value was set, we remove everything
+            element.removeAttribute('aria-labelledby');
+          }
+        }
+        /**
+         Target property inside the component that will be updated when a change event is triggered.
+         @type {String}
+         @default "value"
+         @protected
+         */
+
+      }, {
+        key: "_componentTargetProperty",
+        get: function get() {
+          return 'value';
+        }
+        /**
+         Target property that will be taken from <code>event.target</code> and set into
+         {@link BaseFormField#_componentTargetProperty} when a change event is triggered.
+         @type {String}
+         @default "value"
+         @protected
+         */
+
+      }, {
+        key: "_eventTargetProperty",
+        get: function get() {
+          return 'value';
+        }
+        /**
+         Whether the change event needs to be triggered when {@link BaseFormField#_onInputChange} is called.
+         @type {Boolean}
+         @default true
+         @protected
+         */
+
+      }, {
+        key: "_triggerChangeEvent",
+        get: function get() {
+          return true;
+        }
+      }], [{
+        key: "_attributePropertyMap",
+        get: function get() {
+          return commons.extend(_get(_getPrototypeOf(_class), "_attributePropertyMap", this), {
+            labelledby: 'labelledBy',
+            readonly: 'readOnly'
+          });
+        } // We don't want to watch existing attributes for components that extend native HTML elements
+
+      }, {
+        key: "_nativeObservedAttributes",
+        get: function get() {
+          return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['labelled', 'labelledby', 'invalid']);
+        }
+        /** @ignore */
+
+      }, {
+        key: "observedAttributes",
+        get: function get() {
+          return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['labelled', 'labelledby', 'invalid', 'readonly', 'name', 'value', 'disabled', 'required']);
+        }
+      }]);
+
+      return _class;
+    }(superClass);
   };
 
   /**
@@ -12058,10 +12089,10 @@
    */
 
 
-  var Textfield =
-  /*#__PURE__*/
-  function (_BaseFormField) {
+  var Textfield = /*#__PURE__*/function (_BaseFormField) {
     _inherits(Textfield, _BaseFormField);
+
+    var _super = _createSuper(Textfield);
 
     /** @ignore */
     function Textfield() {
@@ -12069,7 +12100,7 @@
 
       _classCallCheck(this, Textfield);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Textfield).call(this));
+      _this = _super.call(this);
 
       _this._delegateEvents(_this._events);
 
@@ -12174,68 +12205,67 @@
    @classdesc Accessibility helper for components with label and icon properties
    */
   var BaseLabellable = function BaseLabellable(superClass) {
-    return (
-      /*#__PURE__*/
-      function (_superClass) {
-        _inherits(_class, _superClass);
+    return /*#__PURE__*/function (_superClass) {
+      _inherits(_class, _superClass);
 
-        function _class() {
-          _classCallCheck(this, _class);
+      var _super = _createSuper(_class);
 
-          return _possibleConstructorReturn(this, _getPrototypeOf(_class).apply(this, arguments));
+      function _class() {
+        _classCallCheck(this, _class);
+
+        return _super.apply(this, arguments);
+      }
+
+      _createClass(_class, [{
+        key: "_observeLabel",
+        value: function _observeLabel() {
+          this._observableLabel = this._observableLabel || this._elements.label || this._elements.content; // Listen for mutations
+
+          this._observer = new MutationObserver(this._toggleIconAriaHidden.bind(this)); // Watch for changes to the content element
+
+          this._observer.observe(this._observableLabel, {
+            // Catch changes to childList
+            childList: true,
+            // Catch changes to textContent
+            characterData: true,
+            // Monitor any child node
+            subtree: true
+          });
+        } // Hides the icon from screen readers to avoid duplicated labels
+
+      }, {
+        key: "_toggleIconAriaHidden",
+        value: function _toggleIconAriaHidden() {
+          this._renderedLabel = this._renderedLabel || this.label || this.content; // toggle aria-hidden if tab is labelled
+
+          if (this._elements.icon) {
+            var isLabelled = this._renderedLabel && this._renderedLabel.textContent.trim().length || this.getAttribute('aria-label') !== null || this.getAttribute('aria-labelledby') !== null;
+
+            this._elements.icon[isLabelled ? 'setAttribute' : 'removeAttribute']('aria-hidden', 'true');
+          }
         }
+        /** @ignore */
 
-        _createClass(_class, [{
-          key: "_observeLabel",
-          value: function _observeLabel() {
-            this._observableLabel = this._observableLabel || this._elements.label || this._elements.content; // Listen for mutations
+      }, {
+        key: "attributeChangedCallback",
 
-            this._observer = new MutationObserver(this._toggleIconAriaHidden.bind(this)); // Watch for changes to the content element
-
-            this._observer.observe(this._observableLabel, {
-              // Catch changes to childList
-              childList: true,
-              // Catch changes to textContent
-              characterData: true,
-              // Monitor any child node
-              subtree: true
-            });
-          } // Hides the icon from screen readers to avoid duplicated labels
-
-        }, {
-          key: "_toggleIconAriaHidden",
-          value: function _toggleIconAriaHidden() {
-            this._renderedLabel = this._renderedLabel || this.label || this.content; // toggle aria-hidden if tab is labelled
-
-            if (this._elements.icon) {
-              var isLabelled = this._renderedLabel && this._renderedLabel.textContent.trim().length || this.getAttribute('aria-label') !== null || this.getAttribute('aria-labelledby') !== null;
-
-              this._elements.icon[isLabelled ? 'setAttribute' : 'removeAttribute']('aria-hidden', 'true');
-            }
+        /** @ignore */
+        value: function attributeChangedCallback(name, oldValue, value) {
+          if (name === 'aria-label' || name === 'aria-labelledby') {
+            this._toggleIconAriaHidden();
+          } else {
+            _get(_getPrototypeOf(_class.prototype), "attributeChangedCallback", this).call(this, name, oldValue, value);
           }
-          /** @ignore */
+        }
+      }], [{
+        key: "observedAttributes",
+        get: function get() {
+          return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['aria-label', 'aria-labelledby']);
+        }
+      }]);
 
-        }, {
-          key: "attributeChangedCallback",
-
-          /** @ignore */
-          value: function attributeChangedCallback(name, oldValue, value) {
-            if (name === 'aria-label' || name === 'aria-labelledby') {
-              this._toggleIconAriaHidden();
-            } else {
-              _get(_getPrototypeOf(_class.prototype), "attributeChangedCallback", this).call(this, name, oldValue, value);
-            }
-          }
-        }], [{
-          key: "observedAttributes",
-          get: function get() {
-            return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['aria-label', 'aria-labelledby']);
-          }
-        }]);
-
-        return _class;
-      }(superClass)
-    );
+      return _class;
+    }(superClass);
   };
 
   /**
@@ -13067,10 +13097,10 @@
    @extends {BaseComponent}
    */
 
-  var Icon =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var Icon = /*#__PURE__*/function (_BaseComponent) {
     _inherits(Icon, _BaseComponent);
+
+    var _super = _createSuper(Icon);
 
     /** @ignore */
     function Icon() {
@@ -13078,7 +13108,7 @@
 
       _classCallCheck(this, Icon);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Icon).call(this));
+      _this = _super.call(this);
       _this._elements = {};
       return _this;
     }
@@ -14621,531 +14651,530 @@
    */
 
   var BaseButton = function BaseButton(superClass) {
-    return (
-      /*#__PURE__*/
-      function (_BaseLabellable) {
-        _inherits(_class, _BaseLabellable);
+    return /*#__PURE__*/function (_BaseLabellable) {
+      _inherits(_class, _BaseLabellable);
 
+      var _super = _createSuper(_class);
+
+      /** @ignore */
+      function _class() {
+        var _thisSuper, _this;
+
+        _classCallCheck(this, _class);
+
+        _this = _super.call(this); // Templates
+
+        _this._elements = {
+          // Create or fetch the label element
+          label: _this.querySelector(_this._contentZoneTagName) || document.createElement(_this._contentZoneTagName),
+          icon: _this.querySelector('coral-icon')
+        }; // Events
+
+        _this._events = {
+          mousedown: '_onMouseDown',
+          click: '_onClick'
+        };
+
+        _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(_class.prototype)), "_observeLabel", _thisSuper).call(_thisSuper);
+
+        return _this;
+      }
+      /**
+       The label of the button.
+       @type {HTMLElement}
+       @contentzone
+       */
+
+
+      _createClass(_class, [{
+        key: "_onClick",
+        value: function _onClick(event) {
+          if (!this.disabled) {
+            this._trackEvent('click', this.getAttribute('is'), event);
+          }
+        }
         /** @ignore */
-        function _class() {
-          var _this;
 
-          _classCallCheck(this, _class);
+      }, {
+        key: "_updateIcon",
+        value: function _updateIcon(value) {
+          if (!this._updatedIcon && this._elements.icon) {
+            return;
+          }
 
-          _this = _possibleConstructorReturn(this, _getPrototypeOf(_class).call(this)); // Templates
+          this._updatedIcon = true;
+          var iconSizeValue = this.iconSize;
+          var iconAutoAriaLabelValue = this.iconAutoAriaLabel;
 
-          _this._elements = {
-            // Create or fetch the label element
-            label: _this.querySelector(_this._contentZoneTagName) || document.createElement(_this._contentZoneTagName),
-            icon: _this.querySelector('coral-icon')
-          }; // Events
+          var iconElement = this._getIconElement();
 
-          _this._events = {
-            mousedown: '_onMouseDown',
-            click: '_onClick'
-          };
+          iconElement.icon = value; // Update size as well
 
-          _get(_getPrototypeOf(_class.prototype), "_observeLabel", _assertThisInitialized(_this)).call(_assertThisInitialized(_this));
+          iconElement.size = iconSizeValue; // Update autoAriaLabel as well
 
-          return _this;
+          iconElement.autoAriaLabel = iconAutoAriaLabelValue; // removes the icon element from the DOM.
+
+          if (this.icon === '') {
+            iconElement.remove();
+          } // add or adjust the icon. Add it back since it was blown away by textContent
+          else if (!iconElement.parentNode || this._iconPosition) {
+              if (this.contains(this.label)) {
+                // insertBefore with <code>null</code> appends
+                this.insertBefore(iconElement, this.iconPosition === iconPosition.LEFT ? this.label : this.label.nextElementSibling);
+              }
+            }
+
+          _get(_getPrototypeOf(_class.prototype), "_toggleIconAriaHidden", this).call(this);
+        }
+        /** @ignore */
+
+      }, {
+        key: "_getIconElement",
+        value: function _getIconElement() {
+          if (!this._elements.icon) {
+            this._elements.icon = new Icon();
+            this._elements.icon.size = this.iconSize;
+          }
+
+          return this._elements.icon;
         }
         /**
-         The label of the button.
-         @type {HTMLElement}
-         @contentzone
+         Forces button to receive focus on mousedown
+         @param {MouseEvent} event mousedown event
+         @ignore
          */
 
+      }, {
+        key: "_onMouseDown",
+        value: function _onMouseDown(event) {
+          var target = event.matchedTarget; // Wait a frame or button won't receive focus in Safari.
 
-        _createClass(_class, [{
-          key: "_onClick",
-          value: function _onClick(event) {
-            if (!this.disabled) {
-              this._trackEvent('click', this.getAttribute('is'), event);
+          window.requestAnimationFrame(function () {
+            if (target !== document.activeElement) {
+              target.focus();
             }
-          }
-          /** @ignore */
-
-        }, {
-          key: "_updateIcon",
-          value: function _updateIcon(value) {
-            if (!this._updatedIcon && this._elements.icon) {
-              return;
-            }
-
-            this._updatedIcon = true;
-            var iconSizeValue = this.iconSize;
-            var iconAutoAriaLabelValue = this.iconAutoAriaLabel;
-
-            var iconElement = this._getIconElement();
-
-            iconElement.icon = value; // Update size as well
-
-            iconElement.size = iconSizeValue; // Update autoAriaLabel as well
-
-            iconElement.autoAriaLabel = iconAutoAriaLabelValue; // removes the icon element from the DOM.
-
-            if (this.icon === '') {
-              iconElement.remove();
-            } // add or adjust the icon. Add it back since it was blown away by textContent
-            else if (!iconElement.parentNode || this._iconPosition) {
-                if (this.contains(this.label)) {
-                  // insertBefore with <code>null</code> appends
-                  this.insertBefore(iconElement, this.iconPosition === iconPosition.LEFT ? this.label : this.label.nextElementSibling);
-                }
-              }
-
-            _get(_getPrototypeOf(_class.prototype), "_toggleIconAriaHidden", this).call(this);
-          }
-          /** @ignore */
-
-        }, {
-          key: "_getIconElement",
-          value: function _getIconElement() {
-            if (!this._elements.icon) {
-              this._elements.icon = new Icon();
-              this._elements.icon.size = this.iconSize;
-            }
-
-            return this._elements.icon;
-          }
-          /**
-           Forces button to receive focus on mousedown
-           @param {MouseEvent} event mousedown event
-           @ignore
-           */
-
-        }, {
-          key: "_onMouseDown",
-          value: function _onMouseDown(event) {
-            var target = event.matchedTarget; // Wait a frame or button won't receive focus in Safari.
-
-            window.requestAnimationFrame(function () {
-              if (target !== document.activeElement) {
-                target.focus();
-              }
-            });
-          }
-        }, {
-          key: "_updateLabel",
-          value: function _updateLabel(label) {
-            label = label || this._elements.label;
-            label.classList.remove("".concat(CLASSNAME$2, "-label"), "".concat(ACTION_CLASSNAME, "-label"));
-
-            if (this._variant !== variant$1._CUSTOM) {
-              if (this._variant === variant$1.ACTION || this._variant === variant$1.QUIET_ACTION) {
-                label.classList.add("".concat(ACTION_CLASSNAME, "-label"));
-              } else {
-                label.classList.add("".concat(CLASSNAME$2, "-label"));
-              }
-            }
-          }
-          /** @private */
-
-        }, {
-          key: "render",
-
-          /** @ignore */
-          value: function render() {
-            _get(_getPrototypeOf(_class.prototype), "render", this).call(this); // Default reflected attributes
-
-
-            if (!this._variant) {
-              this.variant = variant$1.DEFAULT;
-            }
-
-            if (!this._size) {
-              this.size = size$1.MEDIUM;
-            } // Create a fragment
-
-
-            var fragment = document.createDocumentFragment();
-            var label = this._elements.label;
-            var contentZoneProvided = label.parentNode; // Remove it so we can process children
-
-            if (contentZoneProvided) {
-              this.removeChild(label);
-            }
-
-            var iconAdded = false; // Process remaining elements as necessary
-
-            while (this.firstChild) {
-              var child = this.firstChild;
-
-              if (child.nodeName === 'CORAL-ICON') {
-                // Don't add duplicated icons
-                if (iconAdded) {
-                  this.removeChild(child);
-                } else {
-                  // Conserve existing icon element to content
-                  this._elements.icon = child;
-                  fragment.appendChild(child);
-                  iconAdded = true;
-                }
-              } // Avoid content zone to be voracious
-              else if (contentZoneProvided) {
-                  fragment.appendChild(child);
-                } else {
-                  // Move anything else into the label
-                  label.appendChild(child);
-                }
-            } // Add the frag to the component
-
-
-            this.appendChild(fragment); // Assign the content zones, moving them into place in the process
-
-            this.label = label; // Make sure the icon is well positioned
-
-            this._updatedIcon = true;
-
-            this._updateIcon(this.icon);
-          }
-          /**
-           Triggered when {@link BaseButton#selected} changed.
-           
-           @typedef {CustomEvent} coral-button:_selectedchanged
-           
-           @private
-           */
-
-          /**
-           Triggered when {@link BaseButton#value} changed.
-           
-           @typedef {CustomEvent} coral-button:_valuechanged
-           
-           @private
-           */
-
-        }, {
-          key: "label",
-          get: function get() {
-            return this._getContentZone(this._elements.label);
-          },
-          set: function set(value) {
-            this._setContentZone('label', value, {
-              handle: 'label',
-              tagName: this._contentZoneTagName,
-              insert: function insert(label) {
-                // Update label styles
-                this._updateLabel(label); // Ensure there's no extra space left for icon only buttons
-
-
-                if (label.innerHTML.trim() === '') {
-                  label.textContent = '';
-                }
-
-                if (this.iconPosition === iconPosition.LEFT) {
-                  this.appendChild(label);
-                } else {
-                  this.insertBefore(label, this.firstChild);
-                }
-              }
-            });
-          }
-          /**
-           Position of the icon relative to the label. If no <code>iconPosition</code> is provided, it will be set on the
-           left side by default.
-           See {@link ButtonIconPositionEnum}.
-           
-           @type {String}
-           @default ButtonIconPositionEnum.LEFT
-           @htmlattribute iconposition
-           @htmlattributereflected
-           */
-
-        }, {
-          key: "iconPosition",
-          get: function get() {
-            return this._iconPosition || iconPosition.LEFT;
-          },
-          set: function set(value) {
-            value = transform.string(value).toLowerCase();
-            this._iconPosition = validate.enumeration(iconPosition)(value) && value || iconPosition.LEFT;
-
-            this._reflectAttribute('iconposition', this._iconPosition);
-
-            this._updateIcon(this.icon);
-          }
-          /**
-           Specifies the icon name used inside the button. See {@link Icon} for valid icon names.
-           
-           @type {String}
-           @default ""
-           @htmlattribute icon
-           */
-
-        }, {
-          key: "icon",
-          get: function get() {
-            if (this._elements.icon) {
-              return this._elements.icon.getAttribute('icon') || '';
-            }
-
-            return this._icon || '';
-          },
-          set: function set(value) {
-            this._icon = transform.string(value);
-
-            this._updateIcon(value);
-          }
-          /**
-           Size of the icon. It accepts both lower and upper case sizes. See {@link ButtonIconSizeEnum}.
-           
-           @type {String}
-           @default ButtonIconSizeEnum.SMALL
-           @htmlattribute iconsize
-           */
-
-        }, {
-          key: "iconSize",
-          get: function get() {
-            if (this._elements.icon) {
-              return this._elements.icon.getAttribute('size') || Icon.size.SMALL;
-            }
-
-            return this._iconSize || Icon.size.SMALL;
-          },
-          set: function set(value) {
-            value = transform.string(value).toUpperCase();
-            this._iconSize = validate.enumeration(Icon.size)(value) && value || Icon.size.SMALL;
-
-            if (this._updatedIcon) {
-              this._getIconElement().setAttribute('size', value);
-            }
-          }
-          /**
-           Whether aria-label is set automatically. See {@link IconAutoAriaLabelEnum}.
-           
-           @type {String}
-           @default IconAutoAriaLabelEnum.OFF
-           @htmlattribute autoarialabel
-           */
-
-        }, {
-          key: "iconAutoAriaLabel",
-          get: function get() {
-            if (this._elements.icon) {
-              return this._elements.icon.getAttribute('autoarialabel') || Icon.autoAriaLabel.OFF;
-            }
-
-            return this._iconAutoAriaLabel || Icon.autoAriaLabel.OFF;
-          },
-          set: function set(value) {
-            value = transform.string(value).toLowerCase();
-            this._iconAutoAriaLabel = validate.enumeration(Icon.autoAriaLabel)(value) && value || Icon.autoAriaLabel.OFF;
-
-            if (this._updatedIcon) {
-              this._getIconElement().setAttribute('autoarialabel', value);
-            }
-          }
-          /**
-           The size of the button. It accepts both lower and upper case sizes. See {@link ButtonSizeEnum}.
-           Currently only "MEDIUM" is supported.
-           
-           @type {String}
-           @default ButtonSizeEnum.MEDIUM
-           @htmlattribute size
-           @htmlattributereflected
-           */
-
-        }, {
-          key: "size",
-          get: function get() {
-            return this._size || size$1.MEDIUM;
-          },
-          set: function set(value) {
-            value = transform.string(value).toUpperCase();
-            this._size = validate.enumeration(size$1)(value) && value || size$1.MEDIUM;
-
-            this._reflectAttribute('size', this._size);
-          }
-          /**
-           Whether the button is selected.
-           
-           @type {Boolean}
-           @default false
-           @htmlattribute selected
-           @htmlattributereflected
-           */
-
-        }, {
-          key: "selected",
-          get: function get() {
-            return this._selected || false;
-          },
-          set: function set(value) {
-            this._selected = transform.booleanAttr(value);
-
-            this._reflectAttribute('selected', this._selected);
-
-            this.classList.toggle('is-selected', this._selected);
-            this.trigger('coral-button:_selectedchanged');
-          } // We just reflect it but we also trigger an event to be used by button group
-
-          /** @ignore */
-
-        }, {
-          key: "value",
-          get: function get() {
-            return this.getAttribute('value');
-          },
-          set: function set(value) {
-            this._reflectAttribute('value', value);
-
-            this.trigger('coral-button:_valuechanged');
-          }
-          /**
-           Expands the button to the full width of the parent.
-           
-           @type {Boolean}
-           @default false
-           @htmlattribute block
-           @htmlattributereflected
-           */
-
-        }, {
-          key: "block",
-          get: function get() {
-            return this._block || false;
-          },
-          set: function set(value) {
-            this._block = transform.booleanAttr(value);
-
-            this._reflectAttribute('block', this._block);
-
-            this.classList.toggle("".concat(CLASSNAME$2, "--block"), this._block);
-          }
-          /**
-           The button's variant. See {@link ButtonVariantEnum}.
-           
-           @type {String}
-           @default ButtonVariantEnum.DEFAULT
-           @htmlattribute variant
-           @htmlattributereflected
-           */
-
-        }, {
-          key: "variant",
-          get: function get() {
-            return this._variant || variant$1.DEFAULT;
-          },
-          set: function set(value) {
-            var _this$classList;
-
-            value = transform.string(value).toLowerCase();
-            this._variant = validate.enumeration(variant$1)(value) && value || variant$1.DEFAULT;
-
-            this._reflectAttribute('variant', this._variant); // removes every existing variant
-
-
-            this.classList.remove(CLASSNAME$2, ACTION_CLASSNAME);
-
-            (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$1);
-
-            if (this._variant === variant$1._CUSTOM) {
-              this.classList.remove(CLASSNAME$2);
+          });
+        }
+      }, {
+        key: "_updateLabel",
+        value: function _updateLabel(label) {
+          label = label || this._elements.label;
+          label.classList.remove("".concat(CLASSNAME$2, "-label"), "".concat(ACTION_CLASSNAME, "-label"));
+
+          if (this._variant !== variant$1._CUSTOM) {
+            if (this._variant === variant$1.ACTION || this._variant === variant$1.QUIET_ACTION) {
+              label.classList.add("".concat(ACTION_CLASSNAME, "-label"));
             } else {
-              var _this$classList2;
+              label.classList.add("".concat(CLASSNAME$2, "-label"));
+            }
+          }
+        }
+        /** @private */
 
-              (_this$classList2 = this.classList).add.apply(_this$classList2, _toConsumableArray(VARIANT_MAP[this._variant]));
+      }, {
+        key: "render",
 
-              if (this._variant === variant$1.ACTION || this._variant === variant$1.QUIET_ACTION) {
-                this.classList.remove(CLASSNAME$2);
+        /** @ignore */
+        value: function render() {
+          _get(_getPrototypeOf(_class.prototype), "render", this).call(this); // Default reflected attributes
+
+
+          if (!this._variant) {
+            this.variant = variant$1.DEFAULT;
+          }
+
+          if (!this._size) {
+            this.size = size$1.MEDIUM;
+          } // Create a fragment
+
+
+          var fragment = document.createDocumentFragment();
+          var label = this._elements.label;
+          var contentZoneProvided = label.parentNode; // Remove it so we can process children
+
+          if (contentZoneProvided) {
+            this.removeChild(label);
+          }
+
+          var iconAdded = false; // Process remaining elements as necessary
+
+          while (this.firstChild) {
+            var child = this.firstChild;
+
+            if (child.nodeName === 'CORAL-ICON') {
+              // Don't add duplicated icons
+              if (iconAdded) {
+                this.removeChild(child);
+              } else {
+                // Conserve existing icon element to content
+                this._elements.icon = child;
+                fragment.appendChild(child);
+                iconAdded = true;
               }
-            } // Update label styles
+            } // Avoid content zone to be voracious
+            else if (contentZoneProvided) {
+                fragment.appendChild(child);
+              } else {
+                // Move anything else into the label
+                label.appendChild(child);
+              }
+          } // Add the frag to the component
 
 
-            this._updateLabel();
-          }
-          /**
-           Inherited from {@link BaseComponent#trackingElement}.
-           */
+          this.appendChild(fragment); // Assign the content zones, moving them into place in the process
 
-        }, {
-          key: "trackingElement",
-          get: function get() {
-            return typeof this._trackingElement === 'undefined' ? // keep spaces to only 1 max and trim. this mimics native html behaviors
-            (this.label || this).textContent.replace(/\s{2,}/g, ' ').trim() || this.icon : this._trackingElement;
-          },
-          set: function set(value) {
-            _set(_getPrototypeOf(_class.prototype), "trackingElement", value, this, true);
-          }
-        }, {
-          key: "_contentZoneTagName",
-          get: function get() {
-            return Object.keys(this._contentZones)[0];
-          }
-        }, {
-          key: "_contentZones",
-          get: function get() {
-            return {
-              'coral-button-label': 'label'
-            };
-          }
-          /**
-           Returns {@link BaseButton} sizes.
-           
-           @return {ButtonSizeEnum}
-           */
+          this.label = label; // Make sure the icon is well positioned
 
-        }], [{
-          key: "size",
-          get: function get() {
-            return size$1;
-          }
-          /**
-           Returns {@link BaseButton} variants.
-           
-           @return {ButtonVariantEnum}
-           */
+          this._updatedIcon = true;
 
-        }, {
-          key: "variant",
-          get: function get() {
-            return variant$1;
-          }
-          /**
-           Returns {@link BaseButton} icon positions.
-           
-           @return {ButtonIconPositionEnum}
-           */
+          this._updateIcon(this.icon);
+        }
+        /**
+         Triggered when {@link BaseButton#selected} changed.
+         
+         @typedef {CustomEvent} coral-button:_selectedchanged
+         
+         @private
+         */
 
-        }, {
-          key: "iconPosition",
-          get: function get() {
-            return iconPosition;
-          }
-          /**
-           Returns {@link BaseButton} icon sizes.
-           
-           @return {ButtonIconSizeEnum}
-           */
+        /**
+         Triggered when {@link BaseButton#value} changed.
+         
+         @typedef {CustomEvent} coral-button:_valuechanged
+         
+         @private
+         */
 
-        }, {
-          key: "iconSize",
-          get: function get() {
-            return iconSize;
-          }
-        }, {
-          key: "_attributePropertyMap",
-          get: function get() {
-            return commons.extend(_get(_getPrototypeOf(_class), "_attributePropertyMap", this), {
-              iconposition: 'iconPosition',
-              iconsize: 'iconSize',
-              iconautoarialabel: 'iconAutoAriaLabel'
-            });
-          }
-          /** @ignore */
+      }, {
+        key: "label",
+        get: function get() {
+          return this._getContentZone(this._elements.label);
+        },
+        set: function set(value) {
+          this._setContentZone('label', value, {
+            handle: 'label',
+            tagName: this._contentZoneTagName,
+            insert: function insert(label) {
+              // Update label styles
+              this._updateLabel(label); // Ensure there's no extra space left for icon only buttons
 
-        }, {
-          key: "observedAttributes",
-          get: function get() {
-            return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['iconposition', 'iconsize', 'icon', 'iconautoarialabel', 'size', 'selected', 'block', 'variant', 'value']);
-          }
-        }]);
 
-        return _class;
-      }(BaseLabellable(superClass))
-    );
+              if (label.innerHTML.trim() === '') {
+                label.textContent = '';
+              }
+
+              if (this.iconPosition === iconPosition.LEFT) {
+                this.appendChild(label);
+              } else {
+                this.insertBefore(label, this.firstChild);
+              }
+            }
+          });
+        }
+        /**
+         Position of the icon relative to the label. If no <code>iconPosition</code> is provided, it will be set on the
+         left side by default.
+         See {@link ButtonIconPositionEnum}.
+         
+         @type {String}
+         @default ButtonIconPositionEnum.LEFT
+         @htmlattribute iconposition
+         @htmlattributereflected
+         */
+
+      }, {
+        key: "iconPosition",
+        get: function get() {
+          return this._iconPosition || iconPosition.LEFT;
+        },
+        set: function set(value) {
+          value = transform.string(value).toLowerCase();
+          this._iconPosition = validate.enumeration(iconPosition)(value) && value || iconPosition.LEFT;
+
+          this._reflectAttribute('iconposition', this._iconPosition);
+
+          this._updateIcon(this.icon);
+        }
+        /**
+         Specifies the icon name used inside the button. See {@link Icon} for valid icon names.
+         
+         @type {String}
+         @default ""
+         @htmlattribute icon
+         */
+
+      }, {
+        key: "icon",
+        get: function get() {
+          if (this._elements.icon) {
+            return this._elements.icon.getAttribute('icon') || '';
+          }
+
+          return this._icon || '';
+        },
+        set: function set(value) {
+          this._icon = transform.string(value);
+
+          this._updateIcon(value);
+        }
+        /**
+         Size of the icon. It accepts both lower and upper case sizes. See {@link ButtonIconSizeEnum}.
+         
+         @type {String}
+         @default ButtonIconSizeEnum.SMALL
+         @htmlattribute iconsize
+         */
+
+      }, {
+        key: "iconSize",
+        get: function get() {
+          if (this._elements.icon) {
+            return this._elements.icon.getAttribute('size') || Icon.size.SMALL;
+          }
+
+          return this._iconSize || Icon.size.SMALL;
+        },
+        set: function set(value) {
+          value = transform.string(value).toUpperCase();
+          this._iconSize = validate.enumeration(Icon.size)(value) && value || Icon.size.SMALL;
+
+          if (this._updatedIcon) {
+            this._getIconElement().setAttribute('size', value);
+          }
+        }
+        /**
+         Whether aria-label is set automatically. See {@link IconAutoAriaLabelEnum}.
+         
+         @type {String}
+         @default IconAutoAriaLabelEnum.OFF
+         @htmlattribute autoarialabel
+         */
+
+      }, {
+        key: "iconAutoAriaLabel",
+        get: function get() {
+          if (this._elements.icon) {
+            return this._elements.icon.getAttribute('autoarialabel') || Icon.autoAriaLabel.OFF;
+          }
+
+          return this._iconAutoAriaLabel || Icon.autoAriaLabel.OFF;
+        },
+        set: function set(value) {
+          value = transform.string(value).toLowerCase();
+          this._iconAutoAriaLabel = validate.enumeration(Icon.autoAriaLabel)(value) && value || Icon.autoAriaLabel.OFF;
+
+          if (this._updatedIcon) {
+            this._getIconElement().setAttribute('autoarialabel', value);
+          }
+        }
+        /**
+         The size of the button. It accepts both lower and upper case sizes. See {@link ButtonSizeEnum}.
+         Currently only "MEDIUM" is supported.
+         
+         @type {String}
+         @default ButtonSizeEnum.MEDIUM
+         @htmlattribute size
+         @htmlattributereflected
+         */
+
+      }, {
+        key: "size",
+        get: function get() {
+          return this._size || size$1.MEDIUM;
+        },
+        set: function set(value) {
+          value = transform.string(value).toUpperCase();
+          this._size = validate.enumeration(size$1)(value) && value || size$1.MEDIUM;
+
+          this._reflectAttribute('size', this._size);
+        }
+        /**
+         Whether the button is selected.
+         
+         @type {Boolean}
+         @default false
+         @htmlattribute selected
+         @htmlattributereflected
+         */
+
+      }, {
+        key: "selected",
+        get: function get() {
+          return this._selected || false;
+        },
+        set: function set(value) {
+          this._selected = transform.booleanAttr(value);
+
+          this._reflectAttribute('selected', this._selected);
+
+          this.classList.toggle('is-selected', this._selected);
+          this.trigger('coral-button:_selectedchanged');
+        } // We just reflect it but we also trigger an event to be used by button group
+
+        /** @ignore */
+
+      }, {
+        key: "value",
+        get: function get() {
+          return this.getAttribute('value');
+        },
+        set: function set(value) {
+          this._reflectAttribute('value', value);
+
+          this.trigger('coral-button:_valuechanged');
+        }
+        /**
+         Expands the button to the full width of the parent.
+         
+         @type {Boolean}
+         @default false
+         @htmlattribute block
+         @htmlattributereflected
+         */
+
+      }, {
+        key: "block",
+        get: function get() {
+          return this._block || false;
+        },
+        set: function set(value) {
+          this._block = transform.booleanAttr(value);
+
+          this._reflectAttribute('block', this._block);
+
+          this.classList.toggle("".concat(CLASSNAME$2, "--block"), this._block);
+        }
+        /**
+         The button's variant. See {@link ButtonVariantEnum}.
+         
+         @type {String}
+         @default ButtonVariantEnum.DEFAULT
+         @htmlattribute variant
+         @htmlattributereflected
+         */
+
+      }, {
+        key: "variant",
+        get: function get() {
+          return this._variant || variant$1.DEFAULT;
+        },
+        set: function set(value) {
+          var _this$classList;
+
+          value = transform.string(value).toLowerCase();
+          this._variant = validate.enumeration(variant$1)(value) && value || variant$1.DEFAULT;
+
+          this._reflectAttribute('variant', this._variant); // removes every existing variant
+
+
+          this.classList.remove(CLASSNAME$2, ACTION_CLASSNAME);
+
+          (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$1);
+
+          if (this._variant === variant$1._CUSTOM) {
+            this.classList.remove(CLASSNAME$2);
+          } else {
+            var _this$classList2;
+
+            (_this$classList2 = this.classList).add.apply(_this$classList2, _toConsumableArray(VARIANT_MAP[this._variant]));
+
+            if (this._variant === variant$1.ACTION || this._variant === variant$1.QUIET_ACTION) {
+              this.classList.remove(CLASSNAME$2);
+            }
+          } // Update label styles
+
+
+          this._updateLabel();
+        }
+        /**
+         Inherited from {@link BaseComponent#trackingElement}.
+         */
+
+      }, {
+        key: "trackingElement",
+        get: function get() {
+          return typeof this._trackingElement === 'undefined' ? // keep spaces to only 1 max and trim. this mimics native html behaviors
+          (this.label || this).textContent.replace(/\s{2,}/g, ' ').trim() || this.icon : this._trackingElement;
+        },
+        set: function set(value) {
+          _set(_getPrototypeOf(_class.prototype), "trackingElement", value, this, true);
+        }
+      }, {
+        key: "_contentZoneTagName",
+        get: function get() {
+          return Object.keys(this._contentZones)[0];
+        }
+      }, {
+        key: "_contentZones",
+        get: function get() {
+          return {
+            'coral-button-label': 'label'
+          };
+        }
+        /**
+         Returns {@link BaseButton} sizes.
+         
+         @return {ButtonSizeEnum}
+         */
+
+      }], [{
+        key: "size",
+        get: function get() {
+          return size$1;
+        }
+        /**
+         Returns {@link BaseButton} variants.
+         
+         @return {ButtonVariantEnum}
+         */
+
+      }, {
+        key: "variant",
+        get: function get() {
+          return variant$1;
+        }
+        /**
+         Returns {@link BaseButton} icon positions.
+         
+         @return {ButtonIconPositionEnum}
+         */
+
+      }, {
+        key: "iconPosition",
+        get: function get() {
+          return iconPosition;
+        }
+        /**
+         Returns {@link BaseButton} icon sizes.
+         
+         @return {ButtonIconSizeEnum}
+         */
+
+      }, {
+        key: "iconSize",
+        get: function get() {
+          return iconSize;
+        }
+      }, {
+        key: "_attributePropertyMap",
+        get: function get() {
+          return commons.extend(_get(_getPrototypeOf(_class), "_attributePropertyMap", this), {
+            iconposition: 'iconPosition',
+            iconsize: 'iconSize',
+            iconautoarialabel: 'iconAutoAriaLabel'
+          });
+        }
+        /** @ignore */
+
+      }, {
+        key: "observedAttributes",
+        get: function get() {
+          return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['iconposition', 'iconsize', 'icon', 'iconautoarialabel', 'size', 'selected', 'block', 'variant', 'value']);
+        }
+      }]);
+
+      return _class;
+    }(BaseLabellable(superClass));
   };
 
   /**
@@ -15158,10 +15187,10 @@
    @extends {BaseButton}
    */
 
-  var Button =
-  /*#__PURE__*/
-  function (_BaseButton) {
+  var Button = /*#__PURE__*/function (_BaseButton) {
     _inherits(Button, _BaseButton);
+
+    var _super = _createSuper(Button);
 
     /** @ignore */
     function Button() {
@@ -15169,7 +15198,7 @@
 
       _classCallCheck(this, Button);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Button).call(this)); // Events
+      _this = _super.call(this); // Events
 
       _this._delegateEvents(_this._events);
 
@@ -15253,10 +15282,10 @@
    */
 
 
-  var Textarea =
-  /*#__PURE__*/
-  function (_BaseFormField) {
+  var Textarea = /*#__PURE__*/function (_BaseFormField) {
     _inherits(Textarea, _BaseFormField);
+
+    var _super = _createSuper(Textarea);
 
     /** @ignore */
     function Textarea() {
@@ -15264,7 +15293,7 @@
 
       _classCallCheck(this, Textarea);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Textarea).call(this));
+      _this = _super.call(this);
 
       _this._delegateEvents(commons.extend(_this._events, {
         input: '_onInput'
@@ -15554,9 +15583,7 @@
    */
 
 
-  var Collection$1 =
-  /*#__PURE__*/
-  function () {
+  var Collection$1 = /*#__PURE__*/function () {
     /**
      @param {HTMLElement} options.host
      The element that hosts the collection.
@@ -16047,17 +16074,17 @@
    internal state of selection. It currently does not support options.filter for the selection related functions.
    */
 
-  var SelectableCollection =
-  /*#__PURE__*/
-  function (_Collection) {
+  var SelectableCollection = /*#__PURE__*/function (_Collection) {
     _inherits(SelectableCollection, _Collection);
+
+    var _super = _createSuper(SelectableCollection);
 
     function SelectableCollection(options) {
       var _this;
 
       _classCallCheck(this, SelectableCollection);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(SelectableCollection).call(this, options));
+      _this = _super.call(this, options);
 
       if (_this._filter) {
         commons._log('warn', 'Coral.SelectableCollection does not support the options.filter');
@@ -16439,35 +16466,43 @@
   var template = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
-    var el0 = this["button"] = document.createElement("button", "coral-button");
-    el0.setAttribute("tracking", "off");
-    el0.setAttribute("handle", "button");
-    el0.setAttribute("is", "coral-button");
-    el0.setAttribute("type", "button");
-    el0.setAttribute("variant", "_custom");
-    el0.className += " _coral-ClearButton _coral-ClearButton--small _coral-Tags-item-removeButton";
-    el0.setAttribute("title", data_0["i18n"]["get"]('Remove'));
+    var el0 = this["buttonCell"] = document.createElement("span");
+    el0.setAttribute("handle", "buttonCell");
     el0.setAttribute("hidden", "");
-    el0.setAttribute("tabindex", "-1");
-    el0.setAttribute("coral-close", "");
     var el1 = document.createTextNode("\n  ");
     el0.appendChild(el1);
-    var el2 = this["buttonLabel"] = document.createElement("coral-button-label");
-    el2.setAttribute("handle", "buttonLabel");
+    var el2 = this["button"] = document.createElement("button", "coral-button");
+    el2.setAttribute("tracking", "off");
+    el2.setAttribute("handle", "button");
+    el2.setAttribute("is", "coral-button");
+    el2.setAttribute("type", "button");
+    el2.setAttribute("variant", "_custom");
+    el2.className += " _coral-ClearButton _coral-ClearButton--small _coral-Tags-item-removeButton";
+    el2.setAttribute("title", data_0["i18n"]["get"]('Remove'));
+    el2.setAttribute("hidden", "");
+    el2.setAttribute("tabindex", "-1");
+    el2.setAttribute("coral-close", "");
+    var el3 = document.createTextNode("\n    ");
+    el2.appendChild(el3);
+    var el4 = this["buttonLabel"] = document.createElement("coral-button-label");
+    el4.setAttribute("handle", "buttonLabel");
+    el2.appendChild(el4);
+    var el5 = document.createTextNode("\n  ");
+    el2.appendChild(el5);
     el0.appendChild(el2);
-    var el3 = document.createTextNode("\n");
-    el0.appendChild(el3);
+    var el6 = document.createTextNode("\n");
+    el0.appendChild(el6);
     frag.appendChild(el0);
-    var el4 = document.createTextNode("\n");
-    frag.appendChild(el4);
+    var el7 = document.createTextNode("\n");
+    frag.appendChild(el7);
     data = data_0; // Don't wait for button MO to pick up the label
 
     this.button._elements.label = this.buttonLabel; // Render close icon
 
     this.button.insertAdjacentHTML('beforeend', data.Icon._renderSVG('spectrum-css-icon-CrossSmall', ['_coral-UIIcon-CrossSmall']));
     data_0 = data;
-    var el6 = document.createTextNode("\n");
-    frag.appendChild(el6);
+    var el9 = document.createTextNode("\n");
+    frag.appendChild(el9);
     return frag;
   };
 
@@ -16571,24 +16606,6 @@
 
   var QUIET_CLASSNAME = "".concat(CLASSNAME$4, "--quiet");
   var MULTILINE_CLASSNAME = "".concat(CLASSNAME$4, "--multiline"); // Store coordinates of a mouse down event to compare against mouseup coordinates.
-
-  var bullsEye = null; // Utility method to detect center point of an element.
-
-  var getOffsetCenter = function getOffsetCenter(element) {
-    var rect = element.getBoundingClientRect();
-    var body = document.body;
-    var documentElement = document.documentElement;
-    var scrollTop = window.pageYOffset || documentElement.scrollTop || body.scrollTop;
-    var scrollLeft = window.pageXOffset || documentElement.scrollLeft || body.scrollLeft;
-    var clientTop = documentElement.clientTop || body.clientTop || 0;
-    var clientLeft = documentElement.clientLeft || body.clientLeft || 0;
-    var x = rect.left + rect.width / 2 + scrollLeft - clientLeft;
-    var y = rect.top + rect.height / 2 + scrollTop - clientTop;
-    return {
-      x: Math.round(x),
-      y: Math.round(y)
-    };
-  };
   /**
    @class Coral.Tag
    @classdesc A Tag component
@@ -16598,10 +16615,10 @@
    */
 
 
-  var Tag =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var Tag = /*#__PURE__*/function (_BaseComponent) {
     _inherits(Tag, _BaseComponent);
+
+    var _super = _createSuper(Tag);
 
     /** @ignore */
     function Tag() {
@@ -16609,14 +16626,12 @@
 
       _classCallCheck(this, Tag);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Tag).call(this)); // Attach events
+      _this = _super.call(this); // Attach events
 
       _this._delegateEvents({
-        'click': '_onClick',
+        'click [handle="button"]': '_onRemoveButtonClick',
         'key:backspace': '_onRemoveButtonClick',
-        'key:delete': '_onRemoveButtonClick',
-        'key:space': '_onRemoveButtonClick',
-        'mousedown': '_onMouseDown'
+        'key:delete': '_onRemoveButtonClick'
       }); // Prepare templates
 
 
@@ -16677,7 +16692,7 @@
       value: function _onRemoveButtonClick(event) {
         event.preventDefault();
 
-        if (this.closable) {
+        if (this.closable && !this._elements.button.disabled) {
           event.stopPropagation();
           this.focus();
           var host = this._host;
@@ -16687,58 +16702,6 @@
             host._onTagButtonClicked(this, event);
           }
         }
-      }
-      /** @private */
-
-    }, {
-      key: "_onClick",
-      value: function _onClick(event) {
-        if (this._elements.button.disabled) {
-          return;
-        } // If the click event originated from a screen reader's event sequence or the remove button, trigger the removal
-        // of the tag.
-
-
-        if (event.target === this._elements.button || this._elements.button.contains(event.target) || bullsEye !== null ||
-        /* Detects virtual cursor or Narrator on Windows */
-        event.clientX <= 0 && event.clientY <= 0) {
-          this._onRemoveButtonClick(event);
-
-          bullsEye = null;
-        }
-      }
-      /** @private */
-
-    }, {
-      key: "_onMouseDown",
-      value: function _onMouseDown(event) {
-        // Determine the center point of the event target
-        var offsetCenter = getOffsetCenter(event.target); // This Tag will be the event.target when mousedown originates from a screen reader.
-
-        if (event.target === this && Math.abs(event.pageX - offsetCenter.x) < 2 && Math.abs(event.pageY - offsetCenter.y) < 2) {
-          // If click is close enough to the center, store the coordinates.
-          bullsEye = {
-            x: event.pageX,
-            y: event.pageY
-          };
-        } else {
-          bullsEye = null;
-        }
-
-        events.on('mouseup.Tag', this._onMouseUp);
-      }
-      /** @private */
-
-    }, {
-      key: "_onMouseUp",
-      value: function _onMouseUp(event) {
-        // If stored bullseye coordinates don't match mouse up event coordinates,
-        // don't store them any more.
-        if (bullsEye !== null && (event.pageX !== bullsEye.x || event.pageY !== bullsEye.y)) {
-          bullsEye = null;
-        }
-
-        events.off('mouseup.Tag', this._onMouseUp);
       }
       /**
        Updates the aria-label property from the button and label elements.
@@ -16750,41 +16713,33 @@
       key: "_updateAriaLabel",
       value: function _updateAriaLabel() {
         var button = this._elements.button;
+        var buttonCell = this._elements.buttonCell;
         var label = this._elements.label; // In the edge case that this is a Tag without a TagList,
         // just treat the Tag as a container element without special labelling.
 
-        if (this.getAttribute('role') !== 'option') {
-          button.removeAttribute('aria-hidden');
-          label.removeAttribute('aria-hidden');
+        if (this.getAttribute('role') !== 'row') {
+          buttonCell.removeAttribute('role');
+          label.removeAttribute('role');
+
+          if (this.getAttribute('aria-labelledby') === label.id) {
+            this.removeAttribute('aria-labelledby');
+          }
+
           return;
         }
 
-        var labelText = [];
+        buttonCell.setAttribute('role', 'gridcell');
+        label.setAttribute('role', this._closable ? 'rowheader' : 'gridcell');
         var buttonAriaLabel = button.getAttribute('title');
-        var labelTextContent = label.textContent;
+        var labelTextContent = label.textContent; // button should be labelled, "Remove: labelTextContent".
 
-        if (button.parentElement) {
-          if (!label.parentElement || labelTextContent !== buttonAriaLabel) {
-            if (!button.hidden) {
-              labelText.push(buttonAriaLabel);
-            }
+        button.setAttribute('aria-label', "".concat(buttonAriaLabel, ": ").concat(labelTextContent));
 
-            button.setAttribute('aria-hidden', 'true');
-          }
+        if (!label.id) {
+          label.id = commons.getUID();
         }
 
-        if (label.parentElement) {
-          if (!button.parentElement || buttonAriaLabel !== labelTextContent) {
-            labelText.push(labelTextContent);
-            label.setAttribute('aria-hidden', 'true');
-          }
-        }
-
-        if (labelText.length) {
-          this.setAttribute('aria-label', labelText.join(' '));
-        } else {
-          this.removeAttribute('aria-label');
-        }
+        this.setAttribute('aria-labelledby', label.id);
       }
     }, {
       key: "attributeChangedCallback",
@@ -16793,10 +16748,13 @@
       value: function attributeChangedCallback(name, oldValue, value) {
         // This is required by TagList but we don't need to expose disabled publicly as API
         if (name === 'disabled') {
-          this._elements.button.disabled = true;
-        } else {
-          _get(_getPrototypeOf(Tag.prototype), "attributeChangedCallback", this).call(this, name, oldValue, value);
-        }
+          this._elements.button.disabled = value;
+        } // This is required by TagList but we don't need to expose disabled publicly as API
+        else if (name === 'role') {
+            this._updateAriaLabel();
+          } else {
+            _get(_getPrototypeOf(Tag.prototype), "attributeChangedCallback", this).call(this, name, oldValue, value);
+          }
       }
       /** @ignore */
 
@@ -16824,7 +16782,7 @@
           this.color = color.DEFAULT;
         }
 
-        var templateHandleNames = ['input', 'button'];
+        var templateHandleNames = ['input', 'button', 'buttonCell'];
         var label = this._elements.label; // Remove it so we can process children
 
         if (label.parentNode) {
@@ -16912,12 +16870,13 @@
 
         this._toggleTagVariant();
 
-        if (this._closable && !this.contains(this._elements.button)) {
-          // Insert the button if it was not added to the DOM
-          this.appendChild(this._elements.button);
+        if (this._closable && !this.contains(this._elements.buttonCell)) {
+          // Insert the buttonCell if it was not added to the DOM
+          this.appendChild(this._elements.buttonCell);
         }
 
         this._elements.button.hidden = !this._closable;
+        this._elements.buttonCell.hidden = !this._closable;
 
         this._updateAriaLabel();
       }
@@ -17077,7 +17036,7 @@
     }, {
       key: "observedAttributes",
       get: function get() {
-        return _get(_getPrototypeOf(Tag), "observedAttributes", this).concat(['closable', 'value', 'quiet', 'multiline', 'size', 'color', 'disabled']);
+        return _get(_getPrototypeOf(Tag), "observedAttributes", this).concat(['closable', 'value', 'quiet', 'multiline', 'size', 'color', 'disabled', 'role']);
       }
     }]);
 
@@ -17132,10 +17091,10 @@
    */
 
 
-  var TagList =
-  /*#__PURE__*/
-  function (_BaseFormField) {
+  var TagList = /*#__PURE__*/function (_BaseFormField) {
     _inherits(TagList, _BaseFormField);
+
+    var _super = _createSuper(TagList);
 
     /** @ignore */
     function TagList() {
@@ -17143,7 +17102,7 @@
 
       _classCallCheck(this, TagList);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(TagList).call(this)); // Attach events
+      _this = _super.call(this); // Attach events
 
       _this._delegateEvents(commons.extend(_this._events, {
         'capture:focus coral-tag': '_onItemFocus',
@@ -17225,7 +17184,7 @@
         attachedItem.setAttribute('color', Tag.color.DEFAULT);
         attachedItem.setAttribute('size', Tag.size.SMALL); // adds the role to support accessibility
 
-        attachedItem.setAttribute('role', 'listitem');
+        attachedItem.setAttribute('role', 'row');
         attachedItem.setAttribute('tabindex', '-1');
         attachedItem[this.readOnly ? 'removeAttribute' : 'setAttribute']('closable', ''); // add tabindex to first item if none existing
 
@@ -17450,7 +17409,7 @@
 
         this.classList.add(CLASSNAME$5); // adds the role to support accessibility
 
-        this.setAttribute('role', 'list');
+        this.setAttribute('role', 'grid');
         this.setAttribute('aria-live', 'off');
         this.setAttribute('aria-atomic', 'false');
         this.setAttribute('aria-relevant', 'additions'); // Since tagList can have multiple values, we have to store them all to be able to reset them
@@ -17781,247 +17740,246 @@
    */
 
   var BaseList = function BaseList(superClass) {
-    return (
-      /*#__PURE__*/
-      function (_superClass) {
-        _inherits(_class, _superClass);
+    return /*#__PURE__*/function (_superClass) {
+      _inherits(_class, _superClass);
 
-        /** @ignore */
-        function _class() {
-          var _this;
+      var _super = _createSuper(_class);
 
-          _classCallCheck(this, _class);
+      /** @ignore */
+      function _class() {
+        var _this;
 
-          _this = _possibleConstructorReturn(this, _getPrototypeOf(_class).call(this));
-          _this._events = {
-            'mouseenter': '_onMouseEnter',
-            // Keyboard interaction
-            'key:down [coral-list-item]': '_focusNextItem',
-            'key:right [coral-list-item]': '_focusNextItem',
-            'key:left [coral-list-item]': '_focusPreviousItem',
-            'key:up [coral-list-item]': '_focusPreviousItem',
-            'key:pageup [coral-list-item]': '_focusPreviousItem',
-            'key:pagedown [coral-list-item]': '_focusNextItem',
-            'key:home [coral-list-item]': '_focusFirstItem',
-            'key:end [coral-list-item]': '_focusLastItem'
-          };
-          return _this;
-        }
+        _classCallCheck(this, _class);
+
+        _this = _super.call(this);
+        _this._events = {
+          'mouseenter': '_onMouseEnter',
+          // Keyboard interaction
+          'key:down [coral-list-item]': '_focusNextItem',
+          'key:right [coral-list-item]': '_focusNextItem',
+          'key:left [coral-list-item]': '_focusPreviousItem',
+          'key:up [coral-list-item]': '_focusPreviousItem',
+          'key:pageup [coral-list-item]': '_focusPreviousItem',
+          'key:pagedown [coral-list-item]': '_focusNextItem',
+          'key:home [coral-list-item]': '_focusFirstItem',
+          'key:end [coral-list-item]': '_focusLastItem'
+        };
+        return _this;
+      }
+      /**
+       The Collection Interface that allows interacting with the items that the component contains.
+       
+       @type {SelectableCollection}
+       @readonly
+       */
+
+
+      _createClass(_class, [{
+        key: "_eventIsAtTarget",
+
         /**
-         The Collection Interface that allows interacting with the items that the component contains.
+         Returns true if the event is at the matched target.
          
-         @type {SelectableCollection}
-         @readonly
+         @private
          */
+        value: function _eventIsAtTarget(event) {
+          var target = event.target;
+          var listItem = event.matchedTarget;
+          var isAtTarget = target === listItem;
 
-
-        _createClass(_class, [{
-          key: "_eventIsAtTarget",
-
-          /**
-           Returns true if the event is at the matched target.
-           
-           @private
-           */
-          value: function _eventIsAtTarget(event) {
-            var target = event.target;
-            var listItem = event.matchedTarget;
-            var isAtTarget = target === listItem;
-
-            if (isAtTarget) {
-              // Don't let arrow keys etc scroll the page
-              event.preventDefault();
-            }
-
-            return isAtTarget;
+          if (isAtTarget) {
+            // Don't let arrow keys etc scroll the page
+            event.preventDefault();
           }
-        }, {
-          key: "_onMouseEnter",
-          value: function _onMouseEnter() {
-            if (this.contains(document.activeElement)) {
-              document.activeElement.blur();
-            }
+
+          return isAtTarget;
+        }
+      }, {
+        key: "_onMouseEnter",
+        value: function _onMouseEnter() {
+          if (this.contains(document.activeElement)) {
+            document.activeElement.blur();
           }
-          /** @private */
+        }
+        /** @private */
 
-        }, {
-          key: "_focusFirstItem",
-          value: function _focusFirstItem(event) {
-            if (this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {
-              return;
-            }
+      }, {
+        key: "_focusFirstItem",
+        value: function _focusFirstItem(event) {
+          if (this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {
+            return;
+          }
 
-            var items = this._getSelectableItems();
+          var items = this._getSelectableItems();
 
+          items[0].focus();
+        }
+        /** @private */
+
+      }, {
+        key: "_focusLastItem",
+        value: function _focusLastItem(event) {
+          if (this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {
+            return;
+          }
+
+          var items = this._getSelectableItems();
+
+          items[items.length - 1].focus();
+        }
+        /** @private */
+
+      }, {
+        key: "_focusNextItem",
+        value: function _focusNextItem(event) {
+          if (this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {
+            return;
+          }
+
+          var target = event.matchedTarget;
+
+          var items = this._getSelectableItems();
+
+          var index = items.indexOf(target);
+
+          if (index === -1) {
+            // Invalid state
+            return;
+          }
+
+          if (index < items.length - 1) {
+            items[index + 1].focus();
+          } else {
             items[0].focus();
           }
-          /** @private */
+        }
+        /** @private */
 
-        }, {
-          key: "_focusLastItem",
-          value: function _focusLastItem(event) {
-            if (this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {
-              return;
-            }
+      }, {
+        key: "_focusPreviousItem",
+        value: function _focusPreviousItem(event) {
+          if (this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {
+            return;
+          }
 
-            var items = this._getSelectableItems();
+          var target = event.matchedTarget;
 
+          var items = this._getSelectableItems();
+
+          var index = items.indexOf(target);
+
+          if (index === -1) {
+            // Invalid state
+            return;
+          }
+
+          if (index > 0) {
+            items[index - 1].focus();
+          } else {
             items[items.length - 1].focus();
           }
-          /** @private */
+        }
+        /** @private */
 
-        }, {
-          key: "_focusNextItem",
-          value: function _focusNextItem(event) {
-            if (this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {
-              return;
-            }
+      }, {
+        key: "_getSelectableItems",
+        value: function _getSelectableItems() {
+          // Also checks if item is visible
+          return this.items._getSelectableItems().filter(function (item) {
+            return !item.hasAttribute('hidden') && item.offsetParent;
+          });
+        }
+        /** @ignore */
 
-            var target = event.matchedTarget;
-
+      }, {
+        key: "focus",
+        value: function focus() {
+          if (!this.contains(document.activeElement)) {
             var items = this._getSelectableItems();
 
-            var index = items.indexOf(target);
-
-            if (index === -1) {
-              // Invalid state
-              return;
-            }
-
-            if (index < items.length - 1) {
-              items[index + 1].focus();
-            } else {
+            if (items.length > 0) {
               items[0].focus();
             }
           }
-          /** @private */
+        }
+        /**
+         Returns {@link BaseList} interaction options.
+         
+         @return {ListInteractionEnum}
+         */
 
-        }, {
-          key: "_focusPreviousItem",
-          value: function _focusPreviousItem(event) {
-            if (this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {
-              return;
-            }
+      }, {
+        key: "render",
 
-            var target = event.matchedTarget;
+        /** @ignore */
+        value: function render() {
+          _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-            var items = this._getSelectableItems();
+          this.classList.add(CLASSNAME$6); // Default reflected attributes
 
-            var index = items.indexOf(target);
-
-            if (index === -1) {
-              // Invalid state
-              return;
-            }
-
-            if (index > 0) {
-              items[index - 1].focus();
-            } else {
-              items[items.length - 1].focus();
-            }
+          if (!this._interaction) {
+            this.interaction = interaction.ON;
           }
-          /** @private */
-
-        }, {
-          key: "_getSelectableItems",
-          value: function _getSelectableItems() {
-            // Also checks if item is visible
-            return this.items._getSelectableItems().filter(function (item) {
-              return !item.hasAttribute('hidden') && item.offsetParent;
+        }
+      }, {
+        key: "items",
+        get: function get() {
+          // Construct the collection on first request:
+          if (!this._items) {
+            this._items = new SelectableCollection({
+              itemTagName: this._itemTagName,
+              itemBaseTagName: this._itemBaseTagName,
+              itemSelector: 'coral-list-item, button[is="coral-buttonlist-item"], a[is="coral-anchorlist-item"]',
+              host: this
             });
           }
-          /** @ignore */
 
-        }, {
-          key: "focus",
-          value: function focus() {
-            if (!this.contains(document.activeElement)) {
-              var items = this._getSelectableItems();
+          return this._items;
+        }
+        /** @private */
 
-              if (items.length > 0) {
-                items[0].focus();
-              }
-            }
-          }
-          /**
-           Returns {@link BaseList} interaction options.
-           
-           @return {ListInteractionEnum}
-           */
+      }, {
+        key: "_itemTagName",
+        get: function get() {
+          // Used for Collection
+          return 'coral-list-item';
+        }
+        /**
+         Whether interaction with the component is enabled. See {@link ListInteractionEnum}.
+         
+         @type {String}
+         @default ListInteractionEnum.ON
+         @htmlattribute interaction
+         @htmlattributereflected
+         */
 
-        }, {
-          key: "render",
+      }, {
+        key: "interaction",
+        get: function get() {
+          return this._interaction || interaction.ON;
+        },
+        set: function set(value) {
+          value = transform.string(value).toLowerCase();
+          this._interaction = validate.enumeration(interaction)(value) && value || interaction.ON;
 
-          /** @ignore */
-          value: function render() {
-            _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
+          this._reflectAttribute('interaction', this._interaction);
+        }
+      }], [{
+        key: "interaction",
+        get: function get() {
+          return interaction;
+        }
+        /** @ignore */
 
-            this.classList.add(CLASSNAME$6); // Default reflected attributes
+      }, {
+        key: "observedAttributes",
+        get: function get() {
+          return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['interaction']);
+        }
+      }]);
 
-            if (!this._interaction) {
-              this.interaction = interaction.ON;
-            }
-          }
-        }, {
-          key: "items",
-          get: function get() {
-            // Construct the collection on first request:
-            if (!this._items) {
-              this._items = new SelectableCollection({
-                itemTagName: this._itemTagName,
-                itemBaseTagName: this._itemBaseTagName,
-                itemSelector: 'coral-list-item, button[is="coral-buttonlist-item"], a[is="coral-anchorlist-item"]',
-                host: this
-              });
-            }
-
-            return this._items;
-          }
-          /** @private */
-
-        }, {
-          key: "_itemTagName",
-          get: function get() {
-            // Used for Collection
-            return 'coral-list-item';
-          }
-          /**
-           Whether interaction with the component is enabled. See {@link ListInteractionEnum}.
-           
-           @type {String}
-           @default ListInteractionEnum.ON
-           @htmlattribute interaction
-           @htmlattributereflected
-           */
-
-        }, {
-          key: "interaction",
-          get: function get() {
-            return this._interaction || interaction.ON;
-          },
-          set: function set(value) {
-            value = transform.string(value).toLowerCase();
-            this._interaction = validate.enumeration(interaction)(value) && value || interaction.ON;
-
-            this._reflectAttribute('interaction', this._interaction);
-          }
-        }], [{
-          key: "interaction",
-          get: function get() {
-            return interaction;
-          }
-          /** @ignore */
-
-        }, {
-          key: "observedAttributes",
-          get: function get() {
-            return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['interaction']);
-          }
-        }]);
-
-        return _class;
-      }(superClass)
-    );
+      return _class;
+    }(superClass);
   };
 
   var CLASSNAME$7 = '_coral-Menu-item';
@@ -18031,162 +17989,161 @@
    */
 
   var BaseListItem = function BaseListItem(superClass) {
-    return (
-      /*#__PURE__*/
-      function (_BaseLabellable) {
-        _inherits(_class, _BaseLabellable);
+    return /*#__PURE__*/function (_BaseLabellable) {
+      _inherits(_class, _BaseLabellable);
+
+      var _super = _createSuper(_class);
+
+      /** @ignore */
+      function _class() {
+        var _thisSuper, _this;
+
+        _classCallCheck(this, _class);
+
+        _this = _super.call(this); // Templates
+
+        _this._elements = {
+          // Fetch or create the content zone element
+          content: _this.querySelector('coral-list-item-content') || document.createElement('coral-list-item-content')
+        };
+
+        _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(_class.prototype)), "_observeLabel", _thisSuper).call(_thisSuper);
+
+        return _this;
+      }
+      /**
+       The content of the help item.
+       
+       @type {ListItemContent}
+       @contentzone
+       */
+
+
+      _createClass(_class, [{
+        key: "_getIconElement",
+        value: function _getIconElement() {
+          if (!this._elements.icon) {
+            this._elements.icon = this.querySelector('._coral-Menu-item-icon') || new Icon();
+            this._elements.icon.size = Icon.size.SMALL;
+
+            this._elements.icon.classList.add('_coral-Menu-item-icon');
+          }
+
+          return this._elements.icon;
+        }
+      }, {
+        key: "render",
 
         /** @ignore */
-        function _class() {
-          var _this;
+        value: function render() {
+          _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-          _classCallCheck(this, _class);
+          this.classList.add(CLASSNAME$7); // The attribute that makes different types of list items co-exist
+          // This is also used for event delegation
 
-          _this = _possibleConstructorReturn(this, _getPrototypeOf(_class).call(this)); // Templates
+          this.setAttribute('coral-list-item', ''); // Fetch or create the content content zone element
 
-          _this._elements = {
-            // Fetch or create the content zone element
-            content: _this.querySelector('coral-list-item-content') || document.createElement('coral-list-item-content')
-          };
+          var content = this._elements.content; // This stops the content zone from being voracious
 
-          _get(_getPrototypeOf(_class.prototype), "_observeLabel", _assertThisInitialized(_this)).call(_assertThisInitialized(_this));
+          if (!content.parentNode) {
+            // move the contents of the item into the content zone
+            while (this.firstChild) {
+              content.appendChild(this.firstChild);
+            }
+          } // Assign the content zones, moving them into place in the process
 
-          return _this;
+
+          this.icon = this.icon;
+          this.content = content;
+        }
+      }, {
+        key: "content",
+        get: function get() {
+          return this._getContentZone(this._elements.content);
+        },
+        set: function set(value) {
+          var _this2 = this;
+
+          this._setContentZone('content', value, {
+            handle: 'content',
+            tagName: 'coral-list-item-content',
+            insert: function insert(content) {
+              content.classList.add("".concat(CLASSNAME$7, "Label"));
+
+              _this2.appendChild(content);
+
+              _get(_getPrototypeOf(_class.prototype), "_toggleIconAriaHidden", _this2).call(_this2);
+            }
+          });
         }
         /**
-         The content of the help item.
+         Whether this item is disabled.
          
-         @type {ListItemContent}
-         @contentzone
+         @default false
+         @type {Boolean}
+         @htmlattribute disabled
+         @htmlattributereflected
          */
 
+      }, {
+        key: "disabled",
+        get: function get() {
+          return this._disabled || false;
+        },
+        set: function set(value) {
+          this._disabled = transform.booleanAttr(value);
 
-        _createClass(_class, [{
-          key: "_getIconElement",
-          value: function _getIconElement() {
-            if (!this._elements.icon) {
-              this._elements.icon = this.querySelector('._coral-Menu-item-icon') || new Icon();
-              this._elements.icon.size = Icon.size.SMALL;
+          this._reflectAttribute('disabled', this._disabled);
 
-              this._elements.icon.classList.add('_coral-Menu-item-icon');
-            }
+          this.classList.toggle('is-disabled', this._disabled);
+          this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
+        }
+        /**
+         The icon to display. See {@link Icon}.
+         
+         @type {String}
+         @default ""
+         @htmlattribute icon
+         */
 
-            return this._elements.icon;
+      }, {
+        key: "icon",
+        get: function get() {
+          var el = this._getIconElement();
+
+          return el.icon;
+        },
+        set: function set(value) {
+          var el = this._getIconElement();
+
+          if (transform.string(value) === '') {
+            el.remove();
+          } else {
+            this.insertBefore(el, this.firstChild);
           }
-        }, {
-          key: "render",
 
-          /** @ignore */
-          value: function render() {
-            _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
+          el.icon = value;
 
-            this.classList.add(CLASSNAME$7); // The attribute that makes different types of list items co-exist
-            // This is also used for event delegation
+          _get(_getPrototypeOf(_class.prototype), "_toggleIconAriaHidden", this).call(this);
+        }
+      }, {
+        key: "_contentZones",
+        get: function get() {
+          return {
+            'coral-list-item-content': 'content'
+          };
+        }
+        /** @ignore */
 
-            this.setAttribute('coral-list-item', ''); // Fetch or create the content content zone element
+      }], [{
+        key: "observedAttributes",
+        get: function get() {
+          return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['disabled', 'icon']);
+        }
+      }]);
 
-            var content = this._elements.content; // This stops the content zone from being voracious
-
-            if (!content.parentNode) {
-              // move the contents of the item into the content zone
-              while (this.firstChild) {
-                content.appendChild(this.firstChild);
-              }
-            } // Assign the content zones, moving them into place in the process
-
-
-            this.icon = this.icon;
-            this.content = content;
-          }
-        }, {
-          key: "content",
-          get: function get() {
-            return this._getContentZone(this._elements.content);
-          },
-          set: function set(value) {
-            var _this2 = this;
-
-            this._setContentZone('content', value, {
-              handle: 'content',
-              tagName: 'coral-list-item-content',
-              insert: function insert(content) {
-                content.classList.add("".concat(CLASSNAME$7, "Label"));
-
-                _this2.appendChild(content);
-
-                _get(_getPrototypeOf(_class.prototype), "_toggleIconAriaHidden", _this2).call(_this2);
-              }
-            });
-          }
-          /**
-           Whether this item is disabled.
-           
-           @default false
-           @type {Boolean}
-           @htmlattribute disabled
-           @htmlattributereflected
-           */
-
-        }, {
-          key: "disabled",
-          get: function get() {
-            return this._disabled || false;
-          },
-          set: function set(value) {
-            this._disabled = transform.booleanAttr(value);
-
-            this._reflectAttribute('disabled', this._disabled);
-
-            this.classList.toggle('is-disabled', this._disabled);
-            this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
-          }
-          /**
-           The icon to display. See {@link Icon}.
-           
-           @type {String}
-           @default ""
-           @htmlattribute icon
-           */
-
-        }, {
-          key: "icon",
-          get: function get() {
-            var el = this._getIconElement();
-
-            return el.icon;
-          },
-          set: function set(value) {
-            var el = this._getIconElement();
-
-            if (transform.string(value) === '') {
-              el.remove();
-            } else {
-              this.insertBefore(el, this.firstChild);
-            }
-
-            el.icon = value;
-
-            _get(_getPrototypeOf(_class.prototype), "_toggleIconAriaHidden", this).call(this);
-          }
-        }, {
-          key: "_contentZones",
-          get: function get() {
-            return {
-              'coral-list-item-content': 'content'
-            };
-          }
-          /** @ignore */
-
-        }], [{
-          key: "observedAttributes",
-          get: function get() {
-            return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['disabled', 'icon']);
-          }
-        }]);
-
-        return _class;
-      }(BaseLabellable(superClass))
-    );
+      return _class;
+    }(BaseLabellable(superClass));
   };
 
   /**
@@ -18198,10 +18155,10 @@
    @extends {BaseList}
    */
 
-  var List =
-  /*#__PURE__*/
-  function (_BaseList) {
+  var List = /*#__PURE__*/function (_BaseList) {
     _inherits(List, _BaseList);
+
+    var _super = _createSuper(List);
 
     /** @ignore */
     function List() {
@@ -18209,7 +18166,7 @@
 
       _classCallCheck(this, List);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(List).call(this)); // Events
+      _this = _super.call(this); // Events
 
       _this._delegateEvents(_this._events);
 
@@ -18228,15 +18185,15 @@
    @extends {BaseComponent}
    */
 
-  var ListDivider =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var ListDivider = /*#__PURE__*/function (_BaseComponent) {
     _inherits(ListDivider, _BaseComponent);
+
+    var _super = _createSuper(ListDivider);
 
     function ListDivider() {
       _classCallCheck(this, ListDivider);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(ListDivider).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(ListDivider, [{
@@ -18264,10 +18221,10 @@
    @extends {BaseListItem}
    */
 
-  var ListItem =
-  /*#__PURE__*/
-  function (_BaseListItem) {
+  var ListItem = /*#__PURE__*/function (_BaseListItem) {
     _inherits(ListItem, _BaseListItem);
+
+    var _super = _createSuper(ListItem);
 
     /** @ignore */
     function ListItem() {
@@ -18275,7 +18232,7 @@
 
       _classCallCheck(this, ListItem);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ListItem).call(this)); // Events
+      _this = _super.call(this); // Events
 
       _this._delegateEvents(_this._events);
 
@@ -18317,10 +18274,10 @@
    @extends {BaseList}
    */
 
-  var AnchorList =
-  /*#__PURE__*/
-  function (_BaseList) {
+  var AnchorList = /*#__PURE__*/function (_BaseList) {
     _inherits(AnchorList, _BaseList);
+
+    var _super = _createSuper(AnchorList);
 
     /** @ignore */
     function AnchorList() {
@@ -18328,7 +18285,7 @@
 
       _classCallCheck(this, AnchorList);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(AnchorList).call(this)); // Events
+      _this = _super.call(this); // Events
 
       _this._delegateEvents(commons.extend(_this._events, {
         'click [coral-list-item]': '_onItemClick'
@@ -18382,10 +18339,10 @@
    @extends {BaseListItem}
    */
 
-  var AnchorListItem =
-  /*#__PURE__*/
-  function (_BaseListItem) {
+  var AnchorListItem = /*#__PURE__*/function (_BaseListItem) {
     _inherits(AnchorListItem, _BaseListItem);
+
+    var _super = _createSuper(AnchorListItem);
 
     /** @ignore */
     function AnchorListItem() {
@@ -18393,7 +18350,7 @@
 
       _classCallCheck(this, AnchorListItem);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(AnchorListItem).call(this)); // Events
+      _this = _super.call(this); // Events
 
       _this._delegateEvents({
         click: '_onClick'
@@ -18473,10 +18430,10 @@
    @extends {BaseList}
    */
 
-  var ButtonList =
-  /*#__PURE__*/
-  function (_BaseList) {
+  var ButtonList = /*#__PURE__*/function (_BaseList) {
     _inherits(ButtonList, _BaseList);
+
+    var _super = _createSuper(ButtonList);
 
     /** @ignore */
     function ButtonList() {
@@ -18484,7 +18441,7 @@
 
       _classCallCheck(this, ButtonList);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ButtonList).call(this)); // Events
+      _this = _super.call(this); // Events
 
       _this._delegateEvents(commons.extend(_this._events, {
         'click [coral-list-item]': '_onItemClick'
@@ -18538,15 +18495,15 @@
    @extends {BaseListItem}
    */
 
-  var ButtonListItem =
-  /*#__PURE__*/
-  function (_BaseListItem) {
+  var ButtonListItem = /*#__PURE__*/function (_BaseListItem) {
     _inherits(ButtonListItem, _BaseListItem);
+
+    var _super = _createSuper(ButtonListItem);
 
     function ButtonListItem() {
       _classCallCheck(this, ButtonListItem);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(ButtonListItem).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(ButtonListItem, [{
@@ -18679,17 +18636,17 @@
    @extends {BaseComponent}
    */
 
-  var Wait =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var Wait = /*#__PURE__*/function (_BaseComponent) {
     _inherits(Wait, _BaseComponent);
+
+    var _super = _createSuper(Wait);
 
     function Wait() {
       var _this;
 
       _classCallCheck(this, Wait);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Wait).call(this)); // Prepare templates
+      _this = _super.call(this); // Prepare templates
 
       _this._elements = {};
       template$1.call(_this._elements);
@@ -19014,10 +18971,10 @@
    @extends {BaseComponent}
    */
 
-  var SelectList =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var SelectList = /*#__PURE__*/function (_BaseComponent) {
     _inherits(SelectList, _BaseComponent);
+
+    var _super = _createSuper(SelectList);
 
     /** @ignore */
     function SelectList() {
@@ -19025,7 +18982,7 @@
 
       _classCallCheck(this, SelectList);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(SelectList).call(this)); // Attach events
+      _this = _super.call(this); // Attach events
 
       _this._delegateEvents({
         'scroll': '_onScroll',
@@ -19607,15 +19564,15 @@
    @extends {BaseComponent}
    */
 
-  var SelectListGroup =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var SelectListGroup = /*#__PURE__*/function (_BaseComponent) {
     _inherits(SelectListGroup, _BaseComponent);
+
+    var _super = _createSuper(SelectListGroup);
 
     function SelectListGroup() {
       _classCallCheck(this, SelectListGroup);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(SelectListGroup).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(SelectListGroup, [{
@@ -19712,10 +19669,10 @@
    @extends {BaseComponent}
    */
 
-  var SelectListItem =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var SelectListItem = /*#__PURE__*/function (_BaseComponent) {
     _inherits(SelectListItem, _BaseComponent);
+
+    var _super = _createSuper(SelectListItem);
 
     /** @ignore */
     function SelectListItem() {
@@ -19723,7 +19680,7 @@
 
       _classCallCheck(this, SelectListItem);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(SelectListItem).call(this)); // Templates
+      _this = _super.call(this); // Templates
 
       _this._elements = {
         // Fetch or create the content zone element
@@ -20561,715 +20518,714 @@
 
 
   var BaseOverlay = function BaseOverlay(superClass) {
-    return (
-      /*#__PURE__*/
-      function (_superClass) {
-        _inherits(_class, _superClass);
+    return /*#__PURE__*/function (_superClass) {
+      _inherits(_class, _superClass);
 
-        /** @ignore */
-        function _class() {
-          var _this;
+      var _super = _createSuper(_class);
 
-          _classCallCheck(this, _class);
+      /** @ignore */
+      function _class() {
+        var _this;
 
-          _this = _possibleConstructorReturn(this, _getPrototypeOf(_class).call(this)); // Templates
+        _classCallCheck(this, _class);
 
-          _this._elements = {};
-          template$4.call(_this._elements);
-          return _this;
+        _this = _super.call(this); // Templates
+
+        _this._elements = {};
+        template$4.call(_this._elements);
+        return _this;
+      }
+      /**
+       Whether to trap tabs and keep them within the overlay. See {@link OverlayTrapFocusEnum}.
+        @type {String}
+       @default OverlayTrapFocusEnum.OFF
+       @htmlattribute trapfocus
+       */
+
+
+      _createClass(_class, [{
+        key: "_closeChildOverlays",
+        value: function _closeChildOverlays() {
+          var components = this.querySelectorAll(COMPONENTS_WITH_OVERLAY); // Close all children overlays and components with overlays
+
+          for (var i = 0; i < components.length; i++) {
+            var component = components[i]; // Overlay component
+
+            if (component.hasAttribute('open')) {
+              component.removeAttribute('open');
+            } // Component that uses an overlay
+            else if (component._elements && component._elements.overlay && component._elements.overlay.hasAttribute('open')) {
+                component._elements.overlay.removeAttribute('open');
+              }
+          }
+        }
+        /** @private */
+
+      }, {
+        key: "_debounce",
+        value: function _debounce(f) {
+          // Used to avoid triggering open/close event continuously
+          window.clearTimeout(this._debounceId);
+          this._debounceId = window.setTimeout(function () {
+            f();
+          }, 10);
         }
         /**
-         Whether to trap tabs and keep them within the overlay. See {@link OverlayTrapFocusEnum}.
-          @type {String}
-         @default OverlayTrapFocusEnum.OFF
-         @htmlattribute trapfocus
+         Check if this overlay is the topmost.
+          @protected
          */
 
+      }, {
+        key: "_isTopOverlay",
+        value: function _isTopOverlay() {
+          var top = OverlayManager.top();
+          return top && top.instance === this;
+        }
+        /**
+         Push the overlay to the top of the stack.
+          @protected
+         */
 
-        _createClass(_class, [{
-          key: "_closeChildOverlays",
-          value: function _closeChildOverlays() {
-            var components = this.querySelectorAll(COMPONENTS_WITH_OVERLAY); // Close all children overlays and components with overlays
+      }, {
+        key: "_pushOverlay",
+        value: function _pushOverlay() {
+          OverlayManager.push(this);
+        }
+        /**
+         Remove the overlay from the stack.
+          @protected
+         */
 
-            for (var i = 0; i < components.length; i++) {
-              var component = components[i]; // Overlay component
+      }, {
+        key: "_popOverlay",
+        value: function _popOverlay() {
+          OverlayManager.pop(this); // Automatically hide the backdrop if required
 
-              if (component.hasAttribute('open')) {
-                component.removeAttribute('open');
-              } // Component that uses an overlay
-              else if (component._elements && component._elements.overlay && component._elements.overlay.hasAttribute('open')) {
-                  component._elements.overlay.removeAttribute('open');
-                }
-            }
+          hideOrRepositionBackdrop();
+        }
+        /**
+         Show the backdrop.
+          @protected
+         */
+
+      }, {
+        key: "_showBackdrop",
+        value: function _showBackdrop() {
+          var overlay = OverlayManager.get(this); // Overlay is not tracked unless the component is in the DOM
+          // Hence, we need to check
+
+          if (overlay) {
+            overlay.backdrop = true;
+            doBackdropShow(overlay.zIndex, this);
+          } // Mark on the instance that the backdrop has been requested for this overlay
+
+
+          this._requestedBackdrop = true; // Mark that the backdrop was requested when not attached to the DOM
+          // This allows us to know whether to push the overlay when the component is attached
+
+          if (!this.parentNode) {
+            this._showBackdropOnAttached = true;
           }
-          /** @private */
 
-        }, {
-          key: "_debounce",
-          value: function _debounce(f) {
-            // Used to avoid triggering open/close event continuously
-            window.clearTimeout(this._debounceId);
-            this._debounceId = window.setTimeout(function () {
-              f();
-            }, 10);
+          if (this.trapFocus === trapFocus.ON) {
+            createDocumentTabCaptureEls();
           }
-          /**
-           Check if this overlay is the topmost.
-            @protected
-           */
+        }
+        /**
+         Show the backdrop.
+          @protected
+         */
 
-        }, {
-          key: "_isTopOverlay",
-          value: function _isTopOverlay() {
-            var top = OverlayManager.top();
-            return top && top.instance === this;
-          }
-          /**
-           Push the overlay to the top of the stack.
-            @protected
-           */
+      }, {
+        key: "_hideBackdrop",
+        value: function _hideBackdrop() {
+          var overlay = OverlayManager.get(this);
 
-        }, {
-          key: "_pushOverlay",
-          value: function _pushOverlay() {
-            OverlayManager.push(this);
-          }
-          /**
-           Remove the overlay from the stack.
-            @protected
-           */
-
-        }, {
-          key: "_popOverlay",
-          value: function _popOverlay() {
-            OverlayManager.pop(this); // Automatically hide the backdrop if required
+          if (overlay) {
+            overlay.backdrop = false; // If that was the last overlay using the backdrop, hide it
 
             hideOrRepositionBackdrop();
+          } // Mark on the instance that the backdrop is no longer needed
+
+
+          this._requestedBackdrop = false;
+        }
+        /**
+         Handles keypresses on the root of the overlay and marshalls focus accordingly.
+          @protected
+         */
+
+      }, {
+        key: "_handleRootKeypress",
+        value: function _handleRootKeypress(event) {
+          if (event.target === this && event.keyCode === TAB_KEY) {
+            // Skip the top tabcapture and focus on the first focusable element
+            this._focusOn('first'); // Stop the normal tab behavior
+
+
+            event.preventDefault();
           }
-          /**
-           Show the backdrop.
-            @protected
-           */
+        }
+        /**
+         Handles focus events on tab capture elements.
+          @protected
+         */
 
-        }, {
-          key: "_showBackdrop",
-          value: function _showBackdrop() {
-            var overlay = OverlayManager.get(this); // Overlay is not tracked unless the component is in the DOM
-            // Hence, we need to check
-
-            if (overlay) {
-              overlay.backdrop = true;
-              doBackdropShow(overlay.zIndex, this);
-            } // Mark on the instance that the backdrop has been requested for this overlay
+      }, {
+        key: "_handleTabCaptureFocus",
+        value: function _handleTabCaptureFocus(event) {
+          // Avoid moving around if we're trying to focus on coral-tabcapture
+          if (this._ignoreTabCapture) {
+            this._ignoreTabCapture = false;
+            return;
+          } // Focus on the correct tabbable element
 
 
-            this._requestedBackdrop = true; // Mark that the backdrop was requested when not attached to the DOM
-            // This allows us to know whether to push the overlay when the component is attached
+          var target = event.target;
+          var which = target === this._elements.intermediateTabCapture ? 'first' : 'last';
 
-            if (!this.parentNode) {
+          this._focusOn(which);
+        }
+        /**
+         Handles the focus behavior. When "on" is specified it would try to find the first tababble descendent in the
+         content and if there are no valid candidates it will focus the element itself.
+          @protected
+         */
+
+      }, {
+        key: "_handleFocus",
+        value: function _handleFocus() {
+          // ON handles the focusing per accessibility recommendations
+          if (this.focusOnShow === focusOnShow.ON) {
+            this._focusOn('first');
+          } else if (this.focusOnShow instanceof HTMLElement) {
+            this.focusOnShow.focus(preventScroll(this));
+          } else if (typeof this.focusOnShow === 'string' && this.focusOnShow !== focusOnShow.OFF) {
+            // we need to add :not([coral-tabcapture]) to avoid selecting the tab captures
+            var selectedElement = this.querySelector("".concat(this.focusOnShow, ":not([coral-tabcapture])"));
+
+            if (selectedElement) {
+              selectedElement.focus(preventScroll(this));
+            } // in case the selector does not match, it should fallback to the default behavior
+            else {
+                this._focusOn('first');
+              }
+          }
+        }
+        /**
+         @protected
+         */
+
+      }, {
+        key: "_handleReturnFocus",
+        value: function _handleReturnFocus() {
+          if (this.returnFocus === returnFocus.ON && this._elementToFocusWhenHidden) {
+            if (document.activeElement && !this.contains(document.activeElement)) {
+              // Don't return focus if the user focused outside of the overlay
+              return;
+            } // Return focus, ignoring tab capture if it is an overlay
+
+
+            this._elementToFocusWhenHidden._ignoreTabCapture = true;
+
+            this._elementToFocusWhenHidden.focus(preventScroll(this));
+
+            this._elementToFocusWhenHidden._ignoreTabCapture = false; // Drop the reference to avoid memory leaks
+
+            this._elementToFocusWhenHidden = null;
+          }
+        }
+        /**
+         Focus on the first or last element.
+          @param {String} which
+         one of "first" or "last"
+         @protected
+         */
+
+      }, {
+        key: "_focusOn",
+        value: function _focusOn(which) {
+          var focusableTarget = this._getFocusableElement(which); // if we found a focusing target we focus it
+
+
+          if (focusableTarget) {
+            focusableTarget.focus(preventScroll(this));
+          } // otherwise the element itself should get focus
+          else {
+              this.focus(preventScroll(this));
+            }
+        }
+      }, {
+        key: "_getFocusableElements",
+        value: function _getFocusableElements() {
+          return Array.prototype.filter.call(this.querySelectorAll(commons.FOCUSABLE_ELEMENT_SELECTOR), function (item) {
+            return item.offsetParent !== null && !item.hasAttribute('coral-tabcapture');
+          });
+        }
+      }, {
+        key: "_getFocusableElement",
+        value: function _getFocusableElement(which) {
+          var focusableTarget;
+
+          if (which === 'first' || which === 'last') {
+            var focusableElements = this._getFocusableElements();
+
+            focusableTarget = focusableElements[which === 'first' ? 'shift' : 'pop']();
+          }
+
+          return focusableTarget;
+        }
+        /**
+         Open the overlay and set the z-index accordingly.
+          @returns {BaseOverlay} this, chainable
+         */
+
+      }, {
+        key: "show",
+        value: function show() {
+          this.open = true;
+          return this;
+        }
+        /**
+         Close the overlay.
+          @returns {BaseOverlay} this, chainable
+         */
+
+      }, {
+        key: "hide",
+        value: function hide() {
+          this.open = false;
+          return this;
+        }
+        /**
+         Set the element that focus should be returned to when the overlay is hidden.
+          @param {HTMLElement} element
+         The element to return focus to. This must be a DOM element, not a jQuery object or selector.
+          @returns {BaseOverlay} this, chainable
+         */
+
+      }, {
+        key: "returnFocusTo",
+        value: function returnFocusTo(element) {
+          if (this.returnFocus === returnFocus.OFF) {
+            // Switch on returning focus if it's off
+            this.returnFocus = returnFocus.ON;
+          } // If the element is not focusable,
+
+
+          if (!element.matches(commons.FOCUSABLE_ELEMENT_SELECTOR)) {
+            // add tabindex so that it is programmatically focusable.
+            element.setAttribute('tabindex', -1); // On blur, restore element to its prior, not-focusable state
+
+            var tempVent = new vent(element);
+            tempVent.on('blur.afterFocus', function (event) {
+              // Wait a frame before testing whether focus has moved to an open overlay or to some other element.
+              window.requestAnimationFrame(function () {
+                // If overlay remains open, don't remove tabindex event handler until after it has been closed
+                var top = OverlayManager.top();
+
+                if (top && top.instance.contains(document.activeElement)) {
+                  return;
+                }
+
+                tempVent.off('blur.afterFocus');
+                event.matchedTarget.removeAttribute('tabindex');
+              });
+            }, true);
+          }
+
+          this._returnFocusToElement = element;
+          return this;
+        }
+      }, {
+        key: "connectedCallback",
+
+        /** @ignore */
+        value: function connectedCallback() {
+          _get(_getPrototypeOf(_class.prototype), "connectedCallback", this).call(this);
+
+          if (!this.hasAttribute('trapfocus')) {
+            this.trapFocus = this.trapFocus;
+          }
+
+          if (!this.hasAttribute('returnfocus')) {
+            this.returnFocus = this.returnFocus;
+          }
+
+          if (!this.hasAttribute('focusonshow')) {
+            this.focusOnShow = this.focusOnShow;
+          }
+
+          if (!this.hasAttribute('scrollonfocus')) {
+            this.scrollOnFocus = this.scrollOnFocus;
+          }
+
+          if (this.open) {
+            this._pushOverlay();
+
+            if (this._showBackdropOnAttached) {
+              // Show the backdrop again
+              this._showBackdrop();
+            }
+          }
+        }
+        /** @ignore */
+
+      }, {
+        key: "render",
+        value: function render() {
+          _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
+
+          this.classList.add(CLASSNAME$h);
+        }
+        /** @ignore */
+
+      }, {
+        key: "disconnectedCallback",
+        value: function disconnectedCallback() {
+          _get(_getPrototypeOf(_class.prototype), "disconnectedCallback", this).call(this);
+
+          if (this.open) {
+            // Release zIndex as we're not in the DOM any longer
+            // When we're re-added, we'll get a new zIndex
+            this._popOverlay();
+
+            if (this._requestedBackdrop) {
+              // Mark that we'll need to show the backdrop when attached
               this._showBackdropOnAttached = true;
             }
-
-            if (this.trapFocus === trapFocus.ON) {
-              createDocumentTabCaptureEls();
-            }
           }
-          /**
-           Show the backdrop.
-            @protected
-           */
+        }
+        /**
+         Called when the {@link BaseOverlay} is clicked.
+          @function backdropClickedCallback
+         @protected
+         */
 
-        }, {
-          key: "_hideBackdrop",
-          value: function _hideBackdrop() {
-            var overlay = OverlayManager.get(this);
+        /**
+         Triggered before the {@link BaseOverlay} is opened with <code>show()</code> or <code>instance.open = true</code>.
+          @typedef {CustomEvent} coral-overlay:beforeopen
+          @property {function} preventDefault
+         Call to stop the overlay from opening.
+         */
 
-            if (overlay) {
-              overlay.backdrop = false; // If that was the last overlay using the backdrop, hide it
+        /**
+         Triggered after the {@link BaseOverlay} is opened with <code>show()</code> or <code>instance.open = true</code>
+          @typedef {CustomEvent} coral-overlay:open
+         */
 
-              hideOrRepositionBackdrop();
-            } // Mark on the instance that the backdrop is no longer needed
+        /**
+         Triggered before the {@link BaseOverlay} is closed with <code>hide()</code> or <code>instance.open = false</code>.
+          @typedef {CustomEvent} coral-overlay:beforeclose
+          @property {function} preventDefault
+         Call to stop the overlay from closing.
+         */
+
+        /**
+         Triggered after the {@link BaseOverlay} is closed with <code>hide()</code> or <code>instance.open = false</code>
+          @typedef {CustomEvent} coral-overlay:close
+         */
+
+      }, {
+        key: "trapFocus",
+        get: function get() {
+          return this._trapFocus || trapFocus.OFF;
+        },
+        set: function set(value) {
+          value = transform.string(value).toLowerCase();
+          this._trapFocus = validate.enumeration(trapFocus)(value) && value || trapFocus.OFF;
+
+          if (this._trapFocus === trapFocus.ON) {
+            // Give ourselves tabIndex if we are not focusable
+            if (this.tabIndex < 0) {
+              /** @ignore */
+              this.tabIndex = 0;
+            } // Insert elements
 
 
-            this._requestedBackdrop = false;
+            this.insertBefore(this._elements.topTabCapture, this.firstElementChild);
+            this.appendChild(this._elements.intermediateTabCapture);
+            this.appendChild(this._elements.bottomTabCapture); // Add listeners
+
+            this._handleTabCaptureFocus = this._handleTabCaptureFocus.bind(this);
+            this._handleRootKeypress = this._handleRootKeypress.bind(this);
+
+            this._vent.on('keydown', this._handleRootKeypress);
+
+            this._vent.on('focus', '[coral-tabcapture]', this._handleTabCaptureFocus);
+          } else if (this._trapFocus === trapFocus.OFF) {
+            // Remove elements
+            this._elements.topTabCapture && this._elements.topTabCapture.remove();
+            this._elements.intermediateTabCapture && this._elements.intermediateTabCapture.remove();
+            this._elements.bottomTabCapture && this._elements.bottomTabCapture.remove(); // Remove listeners
+
+            this._vent.off('keydown', this._handleRootKeypress);
+
+            this._vent.off('focus', '[coral-tabcapture]', this._handleTabCaptureFocus);
           }
-          /**
-           Handles keypresses on the root of the overlay and marshalls focus accordingly.
-            @protected
-           */
+        }
+        /**
+         Whether to return focus to the previously focused element when closed. See {@link OverlayReturnFocusEnum}.
+          @type {String}
+         @default OverlayReturnFocusEnum.OFF
+         @htmlattribute returnfocus
+         */
 
-        }, {
-          key: "_handleRootKeypress",
-          value: function _handleRootKeypress(event) {
-            if (event.target === this && event.keyCode === TAB_KEY) {
-              // Skip the top tabcapture and focus on the first focusable element
-              this._focusOn('first'); // Stop the normal tab behavior
+      }, {
+        key: "returnFocus",
+        get: function get() {
+          return this._returnFocus || returnFocus.OFF;
+        },
+        set: function set(value) {
+          value = transform.string(value).toLowerCase();
+          this._returnFocus = validate.enumeration(returnFocus)(value) && value || returnFocus.OFF;
+        }
+        /**
+         Whether the browser should scroll the document to bring the newly-focused element into view. See {@link OverlayScrollOnFocusEnum}.
+          @type {String}
+         @default OverlayScrollOnFocusEnum.ON
+         @htmlattribute scrollonfocus
+         */
 
+      }, {
+        key: "scrollOnFocus",
+        get: function get() {
+          return this._scrollOnFocus || scrollOnFocus.ON;
+        },
+        set: function set(value) {
+          value = transform.string(value).toLowerCase();
+          this._scrollOnFocus = validate.enumeration(scrollOnFocus)(value) && value || scrollOnFocus.ON;
+        }
+        /**
+         Whether to focus the overlay, when opened or not. By default the overlay itself will get the focus. It also accepts
+         an instance of HTMLElement or a selector like ':first-child' or 'button:last-of-type'. If the selector returns
+         multiple elements, it will focus the first element inside the overlay that matches the selector.
+         See {@link OverlayFocusOnShowEnum}.
+          @type {HTMLElement|String}
+         @default OverlayFocusOnShowEnum.ON
+         @htmlattribute focusonshow
+         */
 
-              event.preventDefault();
-            }
+      }, {
+        key: "focusOnShow",
+        get: function get() {
+          return this._focusOnShow || focusOnShow.ON;
+        },
+        set: function set(value) {
+          if (typeof value === 'string' || value instanceof HTMLElement) {
+            this._focusOnShow = value;
           }
-          /**
-           Handles focus events on tab capture elements.
-            @protected
-           */
+        }
+        /**
+         Whether this overlay is open or not.
+          @type {Boolean}
+         @default false
+         @htmlattribute open
+         @htmlattributereflected
+         @emits {coral-overlay:open}
+         @emits {coral-overlay:close}
+         @emits {coral-overlay:beforeopen}
+         @emits {coral-overlay:beforeclose}
+         */
 
-        }, {
-          key: "_handleTabCaptureFocus",
-          value: function _handleTabCaptureFocus(event) {
-            // Avoid moving around if we're trying to focus on coral-tabcapture
-            if (this._ignoreTabCapture) {
-              this._ignoreTabCapture = false;
-              return;
-            } // Focus on the correct tabbable element
+      }, {
+        key: "open",
+        get: function get() {
+          return this._open || false;
+        },
+        set: function set(value) {
+          var _this2 = this;
+
+          var silenced = this._silenced;
+          value = transform.booleanAttr(value); // Used for global animations
+
+          this.trigger('coral-overlay:_animate');
+          var beforeEvent = this.trigger(value ? 'coral-overlay:beforeopen' : 'coral-overlay:beforeclose');
+
+          if (!beforeEvent.defaultPrevented) {
+            var open = this._open = value;
+
+            this._reflectAttribute('open', open); // Set aria-hidden false before we show
+            // Otherwise, screen readers will not announce
+            // Doesn't matter when we set aria-hidden true (nothing being announced)
 
 
-            var target = event.target;
-            var which = target === this._elements.intermediateTabCapture ? 'first' : 'last';
+            this.setAttribute('aria-hidden', !open); // Don't do anything if we're not in the DOM yet
+            // This prevents errors related to allocating a zIndex we don't need
 
-            this._focusOn(which);
-          }
-          /**
-           Handles the focus behavior. When "on" is specified it would try to find the first tababble descendent in the
-           content and if there are no valid candidates it will focus the element itself.
-            @protected
-           */
+            if (this.parentNode) {
+              // Do this check afterwards as we may have been appended inside of _show()
+              if (open) {
+                // Set z-index
+                this._pushOverlay();
 
-        }, {
-          key: "_handleFocus",
-          value: function _handleFocus() {
-            // ON handles the focusing per accessibility recommendations
-            if (this.focusOnShow === focusOnShow.ON) {
-              this._focusOn('first');
-            } else if (this.focusOnShow instanceof HTMLElement) {
-              this.focusOnShow.focus(preventScroll(this));
-            } else if (typeof this.focusOnShow === 'string' && this.focusOnShow !== focusOnShow.OFF) {
-              // we need to add :not([coral-tabcapture]) to avoid selecting the tab captures
-              var selectedElement = this.querySelector("".concat(this.focusOnShow, ":not([coral-tabcapture])"));
-
-              if (selectedElement) {
-                selectedElement.focus(preventScroll(this));
-              } // in case the selector does not match, it should fallback to the default behavior
-              else {
-                  this._focusOn('first');
+                if (this.returnFocus === returnFocus.ON) {
+                  this._elementToFocusWhenHidden = // cached element
+                  this._elementToFocusWhenHidden || // element passed via returnFocusTo()
+                  this._returnFocusToElement || ( // element that had focus before opening the overlay
+                  document.activeElement === document.body ? null : document.activeElement);
                 }
-            }
-          }
-          /**
-           @protected
-           */
-
-        }, {
-          key: "_handleReturnFocus",
-          value: function _handleReturnFocus() {
-            if (this.returnFocus === returnFocus.ON && this._elementToFocusWhenHidden) {
-              if (document.activeElement && !this.contains(document.activeElement)) {
-                // Don't return focus if the user focused outside of the overlay
-                return;
-              } // Return focus, ignoring tab capture if it is an overlay
-
-
-              this._elementToFocusWhenHidden._ignoreTabCapture = true;
-
-              this._elementToFocusWhenHidden.focus(preventScroll(this));
-
-              this._elementToFocusWhenHidden._ignoreTabCapture = false; // Drop the reference to avoid memory leaks
-
-              this._elementToFocusWhenHidden = null;
-            }
-          }
-          /**
-           Focus on the first or last element.
-            @param {String} which
-           one of "first" or "last"
-           @protected
-           */
-
-        }, {
-          key: "_focusOn",
-          value: function _focusOn(which) {
-            var focusableTarget = this._getFocusableElement(which); // if we found a focusing target we focus it
-
-
-            if (focusableTarget) {
-              focusableTarget.focus(preventScroll(this));
-            } // otherwise the element itself should get focus
-            else {
-                this.focus(preventScroll(this));
+              } else {
+                // Release zIndex
+                this._popOverlay();
               }
-          }
-        }, {
-          key: "_getFocusableElements",
-          value: function _getFocusableElements() {
-            return Array.prototype.filter.call(this.querySelectorAll(commons.FOCUSABLE_ELEMENT_SELECTOR), function (item) {
-              return item.offsetParent !== null && !item.hasAttribute('coral-tabcapture');
-            });
-          }
-        }, {
-          key: "_getFocusableElement",
-          value: function _getFocusableElement(which) {
-            var focusableTarget;
-
-            if (which === 'first' || which === 'last') {
-              var focusableElements = this._getFocusableElements();
-
-              focusableTarget = focusableElements[which === 'first' ? 'shift' : 'pop']();
-            }
-
-            return focusableTarget;
-          }
-          /**
-           Open the overlay and set the z-index accordingly.
-            @returns {BaseOverlay} this, chainable
-           */
-
-        }, {
-          key: "show",
-          value: function show() {
-            this.open = true;
-            return this;
-          }
-          /**
-           Close the overlay.
-            @returns {BaseOverlay} this, chainable
-           */
-
-        }, {
-          key: "hide",
-          value: function hide() {
-            this.open = false;
-            return this;
-          }
-          /**
-           Set the element that focus should be returned to when the overlay is hidden.
-            @param {HTMLElement} element
-           The element to return focus to. This must be a DOM element, not a jQuery object or selector.
-            @returns {BaseOverlay} this, chainable
-           */
-
-        }, {
-          key: "returnFocusTo",
-          value: function returnFocusTo(element) {
-            if (this.returnFocus === returnFocus.OFF) {
-              // Switch on returning focus if it's off
-              this.returnFocus = returnFocus.ON;
-            } // If the element is not focusable,
+            } // Don't force reflow
 
 
-            if (!element.matches(commons.FOCUSABLE_ELEMENT_SELECTOR)) {
-              // add tabindex so that it is programmatically focusable.
-              element.setAttribute('tabindex', -1); // On blur, restore element to its prior, not-focusable state
+            window.requestAnimationFrame(function () {
+              // Keep it silenced
+              _this2._silenced = silenced;
 
-              var tempVent = new vent(element);
-              tempVent.on('blur.afterFocus', function (event) {
-                // Wait a frame before testing whether focus has moved to an open overlay or to some other element.
+              if (open) {
+                if (_this2.trapFocus === trapFocus.ON) {
+                  // Make sure tab capture elements are positioned correctly
+                  if ( // Tab capture elements are no longer at the bottom
+                  _this2._elements.topTabCapture !== _this2.firstElementChild || _this2._elements.bottomTabCapture !== _this2.lastElementChild || // Tab capture elements have been separated
+                  _this2._elements.bottomTabCapture.previousElementSibling !== _this2._elements.intermediateTabCapture) {
+                    _this2.insertBefore(_this2._elements.intermediateTabCapture, _this2.firstElementChild);
+
+                    _this2.appendChild(_this2._elements.intermediateTabCapture);
+
+                    _this2.appendChild(_this2._elements.bottomTabCapture);
+                  }
+                } // The default style should be display: none for overlays
+                // Show ourselves first for centering calculations etc
+
+
+                _this2.style.display = ''; // Do it in the next frame to make the animation happen
+
                 window.requestAnimationFrame(function () {
-                  // If overlay remains open, don't remove tabindex event handler until after it has been closed
-                  var top = OverlayManager.top();
-
-                  if (top && top.instance.contains(document.activeElement)) {
-                    return;
-                  }
-
-                  tempVent.off('blur.afterFocus');
-                  event.matchedTarget.removeAttribute('tabindex');
+                  _this2.classList.add('is-open');
                 });
-              }, true);
-            }
 
-            this._returnFocusToElement = element;
-            return this;
-          }
-        }, {
-          key: "connectedCallback",
+                var openComplete = function openComplete() {
+                  if (_this2.open) {
+                    _this2._debounce(function () {
+                      // handles the focus behavior based on accessibility recommendations
+                      _this2._handleFocus();
 
-          /** @ignore */
-          value: function connectedCallback() {
-            _get(_getPrototypeOf(_class.prototype), "connectedCallback", this).call(this);
+                      _this2.trigger('coral-overlay:open');
 
-            if (!this.hasAttribute('trapfocus')) {
-              this.trapFocus = this.trapFocus;
-            }
-
-            if (!this.hasAttribute('returnfocus')) {
-              this.returnFocus = this.returnFocus;
-            }
-
-            if (!this.hasAttribute('focusonshow')) {
-              this.focusOnShow = this.focusOnShow;
-            }
-
-            if (!this.hasAttribute('scrollonfocus')) {
-              this.scrollOnFocus = this.scrollOnFocus;
-            }
-
-            if (this.open) {
-              this._pushOverlay();
-
-              if (this._showBackdropOnAttached) {
-                // Show the backdrop again
-                this._showBackdrop();
-              }
-            }
-          }
-          /** @ignore */
-
-        }, {
-          key: "render",
-          value: function render() {
-            _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
-
-            this.classList.add(CLASSNAME$h);
-          }
-          /** @ignore */
-
-        }, {
-          key: "disconnectedCallback",
-          value: function disconnectedCallback() {
-            _get(_getPrototypeOf(_class.prototype), "disconnectedCallback", this).call(this);
-
-            if (this.open) {
-              // Release zIndex as we're not in the DOM any longer
-              // When we're re-added, we'll get a new zIndex
-              this._popOverlay();
-
-              if (this._requestedBackdrop) {
-                // Mark that we'll need to show the backdrop when attached
-                this._showBackdropOnAttached = true;
-              }
-            }
-          }
-          /**
-           Called when the {@link BaseOverlay} is clicked.
-            @function backdropClickedCallback
-           @protected
-           */
-
-          /**
-           Triggered before the {@link BaseOverlay} is opened with <code>show()</code> or <code>instance.open = true</code>.
-            @typedef {CustomEvent} coral-overlay:beforeopen
-            @property {function} preventDefault
-           Call to stop the overlay from opening.
-           */
-
-          /**
-           Triggered after the {@link BaseOverlay} is opened with <code>show()</code> or <code>instance.open = true</code>
-            @typedef {CustomEvent} coral-overlay:open
-           */
-
-          /**
-           Triggered before the {@link BaseOverlay} is closed with <code>hide()</code> or <code>instance.open = false</code>.
-            @typedef {CustomEvent} coral-overlay:beforeclose
-            @property {function} preventDefault
-           Call to stop the overlay from closing.
-           */
-
-          /**
-           Triggered after the {@link BaseOverlay} is closed with <code>hide()</code> or <code>instance.open = false</code>
-            @typedef {CustomEvent} coral-overlay:close
-           */
-
-        }, {
-          key: "trapFocus",
-          get: function get() {
-            return this._trapFocus || trapFocus.OFF;
-          },
-          set: function set(value) {
-            value = transform.string(value).toLowerCase();
-            this._trapFocus = validate.enumeration(trapFocus)(value) && value || trapFocus.OFF;
-
-            if (this._trapFocus === trapFocus.ON) {
-              // Give ourselves tabIndex if we are not focusable
-              if (this.tabIndex < 0) {
-                /** @ignore */
-                this.tabIndex = 0;
-              } // Insert elements
-
-
-              this.insertBefore(this._elements.topTabCapture, this.firstElementChild);
-              this.appendChild(this._elements.intermediateTabCapture);
-              this.appendChild(this._elements.bottomTabCapture); // Add listeners
-
-              this._handleTabCaptureFocus = this._handleTabCaptureFocus.bind(this);
-              this._handleRootKeypress = this._handleRootKeypress.bind(this);
-
-              this._vent.on('keydown', this._handleRootKeypress);
-
-              this._vent.on('focus', '[coral-tabcapture]', this._handleTabCaptureFocus);
-            } else if (this._trapFocus === trapFocus.OFF) {
-              // Remove elements
-              this._elements.topTabCapture && this._elements.topTabCapture.remove();
-              this._elements.intermediateTabCapture && this._elements.intermediateTabCapture.remove();
-              this._elements.bottomTabCapture && this._elements.bottomTabCapture.remove(); // Remove listeners
-
-              this._vent.off('keydown', this._handleRootKeypress);
-
-              this._vent.off('focus', '[coral-tabcapture]', this._handleTabCaptureFocus);
-            }
-          }
-          /**
-           Whether to return focus to the previously focused element when closed. See {@link OverlayReturnFocusEnum}.
-            @type {String}
-           @default OverlayReturnFocusEnum.OFF
-           @htmlattribute returnfocus
-           */
-
-        }, {
-          key: "returnFocus",
-          get: function get() {
-            return this._returnFocus || returnFocus.OFF;
-          },
-          set: function set(value) {
-            value = transform.string(value).toLowerCase();
-            this._returnFocus = validate.enumeration(returnFocus)(value) && value || returnFocus.OFF;
-          }
-          /**
-           Whether the browser should scroll the document to bring the newly-focused element into view. See {@link OverlayScrollOnFocusEnum}.
-            @type {String}
-           @default OverlayScrollOnFocusEnum.ON
-           @htmlattribute scrollonfocus
-           */
-
-        }, {
-          key: "scrollOnFocus",
-          get: function get() {
-            return this._scrollOnFocus || scrollOnFocus.ON;
-          },
-          set: function set(value) {
-            value = transform.string(value).toLowerCase();
-            this._scrollOnFocus = validate.enumeration(scrollOnFocus)(value) && value || scrollOnFocus.ON;
-          }
-          /**
-           Whether to focus the overlay, when opened or not. By default the overlay itself will get the focus. It also accepts
-           an instance of HTMLElement or a selector like ':first-child' or 'button:last-of-type'. If the selector returns
-           multiple elements, it will focus the first element inside the overlay that matches the selector.
-           See {@link OverlayFocusOnShowEnum}.
-            @type {HTMLElement|String}
-           @default OverlayFocusOnShowEnum.ON
-           @htmlattribute focusonshow
-           */
-
-        }, {
-          key: "focusOnShow",
-          get: function get() {
-            return this._focusOnShow || focusOnShow.ON;
-          },
-          set: function set(value) {
-            if (typeof value === 'string' || value instanceof HTMLElement) {
-              this._focusOnShow = value;
-            }
-          }
-          /**
-           Whether this overlay is open or not.
-            @type {Boolean}
-           @default false
-           @htmlattribute open
-           @htmlattributereflected
-           @emits {coral-overlay:open}
-           @emits {coral-overlay:close}
-           @emits {coral-overlay:beforeopen}
-           @emits {coral-overlay:beforeclose}
-           */
-
-        }, {
-          key: "open",
-          get: function get() {
-            return this._open || false;
-          },
-          set: function set(value) {
-            var _this2 = this;
-
-            var silenced = this._silenced;
-            value = transform.booleanAttr(value); // Used for global animations
-
-            this.trigger('coral-overlay:_animate');
-            var beforeEvent = this.trigger(value ? 'coral-overlay:beforeopen' : 'coral-overlay:beforeclose');
-
-            if (!beforeEvent.defaultPrevented) {
-              var open = this._open = value;
-
-              this._reflectAttribute('open', open); // Set aria-hidden false before we show
-              // Otherwise, screen readers will not announce
-              // Doesn't matter when we set aria-hidden true (nothing being announced)
-
-
-              this.setAttribute('aria-hidden', !open); // Don't do anything if we're not in the DOM yet
-              // This prevents errors related to allocating a zIndex we don't need
-
-              if (this.parentNode) {
-                // Do this check afterwards as we may have been appended inside of _show()
-                if (open) {
-                  // Set z-index
-                  this._pushOverlay();
-
-                  if (this.returnFocus === returnFocus.ON) {
-                    this._elementToFocusWhenHidden = // cached element
-                    this._elementToFocusWhenHidden || // element passed via returnFocusTo()
-                    this._returnFocusToElement || ( // element that had focus before opening the overlay
-                    document.activeElement === document.body ? null : document.activeElement);
+                      _this2._silenced = false;
+                    });
                   }
+                };
+
+                if (_this2._overlayAnimationTime) {
+                  // Wait for animation to complete
+                  commons.transitionEnd(_this2, openComplete);
                 } else {
-                  // Release zIndex
-                  this._popOverlay();
+                  // Execute immediately
+                  openComplete();
                 }
-              } // Don't force reflow
+              } else {
+                // Fade out
+                _this2.classList.remove('is-open');
 
+                var closeComplete = function closeComplete() {
+                  if (!_this2.open) {
+                    // Hide self
+                    _this2.style.display = 'none'; // makes sure the focus is returned per accessibility recommendations
 
-              window.requestAnimationFrame(function () {
-                // Keep it silenced
-                _this2._silenced = silenced;
+                    _this2._handleReturnFocus();
 
-                if (open) {
-                  if (_this2.trapFocus === trapFocus.ON) {
-                    // Make sure tab capture elements are positioned correctly
-                    if ( // Tab capture elements are no longer at the bottom
-                    _this2._elements.topTabCapture !== _this2.firstElementChild || _this2._elements.bottomTabCapture !== _this2.lastElementChild || // Tab capture elements have been separated
-                    _this2._elements.bottomTabCapture.previousElementSibling !== _this2._elements.intermediateTabCapture) {
-                      _this2.insertBefore(_this2._elements.intermediateTabCapture, _this2.firstElementChild);
+                    _this2._debounce(function () {
+                      // Inform child overlays that we're closing
+                      _this2._closeChildOverlays();
 
-                      _this2.appendChild(_this2._elements.intermediateTabCapture);
+                      _this2.trigger('coral-overlay:close');
 
-                      _this2.appendChild(_this2._elements.bottomTabCapture);
-                    }
-                  } // The default style should be display: none for overlays
-                  // Show ourselves first for centering calculations etc
-
-
-                  _this2.style.display = ''; // Do it in the next frame to make the animation happen
-
-                  window.requestAnimationFrame(function () {
-                    _this2.classList.add('is-open');
-                  });
-
-                  var openComplete = function openComplete() {
-                    if (_this2.open) {
-                      _this2._debounce(function () {
-                        // handles the focus behavior based on accessibility recommendations
-                        _this2._handleFocus();
-
-                        _this2.trigger('coral-overlay:open');
-
-                        _this2._silenced = false;
-                      });
-                    }
-                  };
-
-                  if (_this2._overlayAnimationTime) {
-                    // Wait for animation to complete
-                    commons.transitionEnd(_this2, openComplete);
-                  } else {
-                    // Execute immediately
-                    openComplete();
+                      _this2._silenced = false;
+                    });
                   }
+                };
+
+                if (_this2._overlayAnimationTime) {
+                  // Wait for animation to complete
+                  commons.transitionEnd(_this2, closeComplete);
                 } else {
-                  // Fade out
-                  _this2.classList.remove('is-open');
-
-                  var closeComplete = function closeComplete() {
-                    if (!_this2.open) {
-                      // Hide self
-                      _this2.style.display = 'none'; // makes sure the focus is returned per accessibility recommendations
-
-                      _this2._handleReturnFocus();
-
-                      _this2._debounce(function () {
-                        // Inform child overlays that we're closing
-                        _this2._closeChildOverlays();
-
-                        _this2.trigger('coral-overlay:close');
-
-                        _this2._silenced = false;
-                      });
-                    }
-                  };
-
-                  if (_this2._overlayAnimationTime) {
-                    // Wait for animation to complete
-                    commons.transitionEnd(_this2, closeComplete);
-                  } else {
-                    // Execute immediately
-                    closeComplete();
-                  }
+                  // Execute immediately
+                  closeComplete();
                 }
-              });
-            }
-          }
-        }], [{
-          key: "_OverlayManager",
-          get: function get() {
-            return OverlayManager;
-          }
-          /**
-           Returns {@link BaseOverlay} trap focus options.
-            @return {OverlayTrapFocusEnum}
-           */
-
-        }, {
-          key: "trapFocus",
-          get: function get() {
-            return trapFocus;
-          }
-          /**
-           Returns {@link BaseOverlay} return focus options.
-            @return {OverlayReturnFocusEnum}
-           */
-
-        }, {
-          key: "returnFocus",
-          get: function get() {
-            return returnFocus;
-          }
-          /**
-           Returns {@link BaseOverlay} scroll focus options.
-            @return {OverlayScrollOnFocusEnum}
-           */
-
-        }, {
-          key: "scrollOnFocus",
-          get: function get() {
-            return scrollOnFocus;
-          }
-          /**
-           Returns {@link BaseOverlay} focus on show options.
-            @return {OverlayFocusOnShowEnum}
-           */
-
-        }, {
-          key: "focusOnShow",
-          get: function get() {
-            return focusOnShow;
-          }
-          /**
-           Returns {@link BaseOverlay} fadetime in milliseconds.
-            @return {Number}
-           */
-
-        }, {
-          key: "FADETIME",
-          get: function get() {
-            return FADETIME;
-          }
-        }, {
-          key: "_attributePropertyMap",
-          get: function get() {
-            return commons.extend(_get(_getPrototypeOf(_class), "_attributePropertyMap", this), {
-              trapfocus: 'trapFocus',
-              returnfocus: 'returnFocus',
-              focusonshow: 'focusOnShow'
+              }
             });
           }
-          /** @ignore */
+        }
+      }], [{
+        key: "_OverlayManager",
+        get: function get() {
+          return OverlayManager;
+        }
+        /**
+         Returns {@link BaseOverlay} trap focus options.
+          @return {OverlayTrapFocusEnum}
+         */
 
-        }, {
-          key: "observedAttributes",
-          get: function get() {
-            return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['trapfocus', 'returnfocus', 'focusonshow', 'open']);
-          }
-        }]);
+      }, {
+        key: "trapFocus",
+        get: function get() {
+          return trapFocus;
+        }
+        /**
+         Returns {@link BaseOverlay} return focus options.
+          @return {OverlayReturnFocusEnum}
+         */
 
-        return _class;
-      }(superClass)
-    );
+      }, {
+        key: "returnFocus",
+        get: function get() {
+          return returnFocus;
+        }
+        /**
+         Returns {@link BaseOverlay} scroll focus options.
+          @return {OverlayScrollOnFocusEnum}
+         */
+
+      }, {
+        key: "scrollOnFocus",
+        get: function get() {
+          return scrollOnFocus;
+        }
+        /**
+         Returns {@link BaseOverlay} focus on show options.
+          @return {OverlayFocusOnShowEnum}
+         */
+
+      }, {
+        key: "focusOnShow",
+        get: function get() {
+          return focusOnShow;
+        }
+        /**
+         Returns {@link BaseOverlay} fadetime in milliseconds.
+          @return {Number}
+         */
+
+      }, {
+        key: "FADETIME",
+        get: function get() {
+          return FADETIME;
+        }
+      }, {
+        key: "_attributePropertyMap",
+        get: function get() {
+          return commons.extend(_get(_getPrototypeOf(_class), "_attributePropertyMap", this), {
+            trapfocus: 'trapFocus',
+            returnfocus: 'returnFocus',
+            focusonshow: 'focusOnShow'
+          });
+        }
+        /** @ignore */
+
+      }, {
+        key: "observedAttributes",
+        get: function get() {
+          return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['trapfocus', 'returnfocus', 'focusonshow', 'open']);
+        }
+      }]);
+
+      return _class;
+    }(superClass);
   };
 
   /**!
@@ -24008,10 +23964,10 @@
    @extends {BaseOverlay}
    */
 
-  var Overlay =
-  /*#__PURE__*/
-  function (_BaseOverlay) {
+  var Overlay = /*#__PURE__*/function (_BaseOverlay) {
     _inherits(Overlay, _BaseOverlay);
+
+    var _super = _createSuper(Overlay);
 
     /** @ignore */
     function Overlay() {
@@ -24019,7 +23975,7 @@
 
       _classCallCheck(this, Overlay);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Overlay).call(this)); // Override from BaseOverlay
+      _this = _super.call(this); // Override from BaseOverlay
 
       _this._overlayAnimationTime = 0; // Popper default
 
@@ -24915,9 +24871,7 @@
    */
 
 
-  var DragAction =
-  /*#__PURE__*/
-  function () {
+  var DragAction = /*#__PURE__*/function () {
     /**
      Takes the {HTMLElement} to be dragged as argument.
      
@@ -25759,10 +25713,10 @@
    */
 
 
-  var Dialog =
-  /*#__PURE__*/
-  function (_BaseOverlay) {
+  var Dialog = /*#__PURE__*/function (_BaseOverlay) {
     _inherits(Dialog, _BaseOverlay);
+
+    var _super = _createSuper(Dialog);
 
     /** @ignore */
     function Dialog() {
@@ -25770,7 +25724,7 @@
 
       _classCallCheck(this, Dialog);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Dialog).call(this)); // Prepare templates
+      _this = _super.call(this); // Prepare templates
 
       _this._elements = commons.extend(_this._elements, {
         // Fetch or create the content zone elements
@@ -26695,10 +26649,10 @@
    */
 
 
-  var Popover =
-  /*#__PURE__*/
-  function (_Overlay) {
+  var Popover = /*#__PURE__*/function (_Overlay) {
     _inherits(Popover, _Overlay);
+
+    var _super = _createSuper(Popover);
 
     /** @ignore */
     function Popover() {
@@ -26706,7 +26660,7 @@
 
       _classCallCheck(this, Popover);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Popover).call(this)); // Prepare templates
+      _this = _super.call(this); // Prepare templates
 
       _this._elements = commons.extend(_this._elements, {
         // Fetch or create the content zone elements
@@ -27305,15 +27259,15 @@
    @extends {BaseComponent}
    */
 
-  var PopoverSeparator =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var PopoverSeparator = /*#__PURE__*/function (_BaseComponent) {
     _inherits(PopoverSeparator, _BaseComponent);
+
+    var _super = _createSuper(PopoverSeparator);
 
     function PopoverSeparator() {
       _classCallCheck(this, PopoverSeparator);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(PopoverSeparator).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(PopoverSeparator, [{
@@ -27463,9 +27417,9 @@
 
   /**
    Enumeration for {@link Select} variants.
-   
+
    @typedef {Object} SelectVariantEnum
-   
+
    @property {String} DEFAULT
    A default, gray Select.
    @property {String} QUIET
@@ -27481,12 +27435,12 @@
   var IS_MOBILE_DEVICE = navigator.userAgent.match(/iPhone|iPad|iPod|Android/i) !== null;
   /**
    Extracts the value from the item in case no explicit value was provided.
-   
+
    @param {HTMLElement} item
    the item whose value will be extracted.
-   
+
    @returns {String} the value that will be submitted for this item.
-   
+
    @private
    */
 
@@ -27497,10 +27451,10 @@
   };
   /**
    Calculates the difference between two given arrays. It returns the items that are in a that are not in b.
-   
+
    @param {Array.<String>} a
    @param {Array.<String>} b
-   
+
    @returns {Array.<String>}
    the difference between the arrays.
    */
@@ -27524,10 +27478,10 @@
    */
 
 
-  var Select =
-  /*#__PURE__*/
-  function (_BaseFormField) {
+  var Select = /*#__PURE__*/function (_BaseFormField) {
     _inherits(Select, _BaseFormField);
+
+    var _super = _createSuper(Select);
 
     /** @ignore */
     function Select() {
@@ -27535,7 +27489,7 @@
 
       _classCallCheck(this, Select);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Select).call(this)); // Templates
+      _this = _super.call(this); // Templates
 
       _this._elements = {};
       template$7.call(_this._elements, {
@@ -27572,7 +27526,7 @@
       events["global:capture:coral-overlay:close #".concat(overlayId)] = '_onOverlayToggle';
       events["global:capture:coral-overlay:open #".concat(overlayId)] = '_onOverlayToggle';
       events["global:capture:coral-overlay:positioned #".concat(overlayId)] = '_onOverlayPositioned';
-      events["global:capture:coral-overlay:beforeopen #".concat(overlayId)] = '_onInternalEvent';
+      events["global:capture:coral-overlay:beforeopen #".concat(overlayId)] = '_onBeforeOpen';
       events["global:capture:coral-overlay:beforeclose #".concat(overlayId)] = '_onInternalEvent'; // Keyboard interaction
 
       events["global:keypress #".concat(overlayId)] = '_onOverlayKeyPress'; // TODO for some reason this disables tabbing into the select
@@ -27601,8 +27555,7 @@
     }
     /**
      Returns the inner overlay to allow customization.
-     
-     @type {Popover}
+      @type {Popover}
      @readonly
      */
 
@@ -27625,8 +27578,7 @@
       /**
        @param {Boolean} [checkAvailableSpace=false]
        If <code>true</code>, the event is triggered based on the available space.
-       
-       @private
+        @private
        */
 
     }, {
@@ -27740,6 +27692,15 @@
         if (height < maxHeight) {
           // Make it scrollable
           this._elements.list.style.height = "".concat(height - 1, "px");
+        }
+      }
+    }, {
+      key: "_onBeforeOpen",
+      value: function _onBeforeOpen(event) {
+        event.stopImmediatePropagation(); // Prevent opening the overlay if select is readonly
+
+        if (this.readOnly) {
+          event.preventDefault();
         }
       }
       /** @private */
@@ -27860,8 +27821,7 @@
       }
       /**
        Detects when something is about to change inside the select.
-       
-       @private
+        @private
        */
 
     }, {
@@ -27877,8 +27837,7 @@
       }
       /**
        Detects when something inside the select list changes.
-       
-       @private
+        @private
        */
 
     }, {
@@ -28025,7 +27984,7 @@
       value: function _onButtonClick(event) {
         event.preventDefault();
 
-        if (this.disabled) {
+        if (this.disabled || this.readOnly) {
           return;
         } // if native is required, we do not need to do anything
 
@@ -28064,7 +28023,7 @@
     }, {
       key: "_onSpaceKey",
       value: function _onSpaceKey(event) {
-        if (this.disabled) {
+        if (this.disabled || this.readOnly) {
           return;
         }
 
@@ -28079,8 +28038,7 @@
       }
       /**
        Prevents tab key default handling on selectList Items.
-       
-       @private
+        @private
        */
       // _onTabKey(event) {
       // event.preventDefault();
@@ -28163,8 +28121,7 @@
       }
       /**
        This handles content change of coral-select-item and updates its associatives.
-       
-       @private
+        @private
        */
 
     }, {
@@ -28207,8 +28164,7 @@
       }
       /**
        This handles value change of coral-select-item and updates its associatives.
-       
-       @private
+        @private
        */
 
     }, {
@@ -28232,8 +28188,7 @@
       }
       /**
        This handles disabled change of coral-select-item and updates its associatives.
-       
-       @private
+        @private
        */
 
     }, {
@@ -28253,8 +28208,7 @@
       }
       /**
        In case an item from the initial selection is removed, we need to remove it from the initial values.
-       
-       @private
+        @private
        */
 
     }, {
@@ -28289,8 +28243,7 @@
       /**
        Updates the label to reflect the current state. The label needs to be updated when the placeholder changes and
        when the selection changes.
-       
-       @private
+        @private
        */
 
     }, {
@@ -28300,8 +28253,7 @@
       }
       /**
        Handles the selection state.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -28344,8 +28296,7 @@
       }
       /**
        Handles selecting multiple items. Selection could result a single or multiple selected items.
-       
-       @private
+        @private
        */
 
     }, {
@@ -28392,8 +28343,7 @@
       }
       /**
        Focuses the component.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -28415,8 +28365,7 @@
       }
       /**
        Returns {@link Select} variants.
-       
-       @return {SelectVariantEnum}
+        @return {SelectVariantEnum}
        */
 
     }, {
@@ -28507,18 +28456,15 @@
        Triggered when the {@link Select} could accept external data to be loaded by the user. If <code>preventDefault()</code> is
        called, then a loading indicator will be shown. {@link Select#loading} should be set to false to indicate
        that the data has been successfully loaded.
-       
-       @typedef {CustomEvent} coral-select:showitems
-       
-       @property {Number} detail.start
+        @typedef {CustomEvent} coral-select:showitems
+        @property {Number} detail.start
        The count of existing items, which is the index where new items should start.
        */
 
       /**
        Triggered when the {@link Select} hides the UI used to select items. This is typically used to cancel a load request
        because the items will not be shown anymore.
-       
-       @typedef {CustomEvent} coral-select:hideitems
+        @typedef {CustomEvent} coral-select:hideitems
        */
 
     }, {
@@ -28528,8 +28474,7 @@
       }
       /**
        The item collection.
-       
-       @type {SelectableCollection}
+        @type {SelectableCollection}
        @readonly
        */
 
@@ -28551,8 +28496,7 @@
       }
       /**
        Indicates whether the select accepts multiple selected values.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute multiple
        @htmlattributereflected
@@ -28621,8 +28565,7 @@
       /**
        Contains a hint to the user of what can be selected in the component. If no placeholder is provided, the first
        option will be displayed in the component.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute placeholder
        @htmlattributereflected
@@ -28718,8 +28661,7 @@
       /**
        The current selected values, as submitted during form submission. When {@link Coral.Select#multiple} is
        <code>false</code>, this will be an array of length 1.
-       
-       @type {Array.<String>}
+        @type {Array.<String>}
        */
 
     }, {
@@ -28801,10 +28743,9 @@
 
         this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
         this.classList.toggle('is-disabled', this._disabled);
-        var isReadOnly = this.hasAttribute('readonly');
-        this._elements.button.disabled = this._disabled || isReadOnly;
-        this._elements.input.disabled = this._disabled || isReadOnly;
-        this._elements.taglist.disabled = this._disabled || isReadOnly;
+        this._elements.button.disabled = this._disabled;
+        this._elements.input.disabled = this._disabled;
+        this._elements.taglist.disabled = this._disabled;
       }
       /**
        Inherited from {@link BaseFormField#invalid}.
@@ -28863,11 +28804,9 @@
 
         this._reflectAttribute('readonly', this._readOnly);
 
-        var isDisabled = this.hasAttribute('disabled');
-        this._elements.button.disabled = this._readOnly || isDisabled;
-        this._elements.input.readOnly = this._readOnly || isDisabled;
-        this._elements.taglist.readOnly = this._readOnly || isDisabled;
-        this._elements.taglist.disabled = this._readOnly || isDisabled;
+        this._elements.input.readOnly = this._readOnly;
+        this._elements.taglist.readOnly = this._readOnly;
+        this._elements.taglist.disabled = this._readOnly;
       }
       /**
        Inherited from {@link BaseFormField#labelled}.
@@ -28931,8 +28870,7 @@
       /**
        Returns the first selected item in the Select. The value <code>null</code> is returned if no element is
        selected.
-       
-       @type {?HTMLElement}
+        @type {?HTMLElement}
        @readonly
        */
 
@@ -28943,8 +28881,7 @@
       }
       /**
        Returns an Array containing the set selected items.
-       
-       @type {Array.<HTMLElement>}
+        @type {Array.<HTMLElement>}
        @readonly
        */
 
@@ -28960,8 +28897,7 @@
       }
       /**
        Indicates that the Select is currently loading remote data. This will set the wait indicator inside the list.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute loading
        */
@@ -28976,8 +28912,7 @@
       }
       /**
        The Select's variant. See {@link SelectVariantEnum}.
-       
-       @type {SelectVariantEnum}
+        @type {SelectVariantEnum}
        @default SelectVariantEnum.DEFAULT
        @htmlattribute variant
        @htmlattributereflected
@@ -29021,10 +28956,10 @@
    @extends {BaseComponent}
    */
 
-  var SelectItem =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var SelectItem = /*#__PURE__*/function (_BaseComponent) {
     _inherits(SelectItem, _BaseComponent);
+
+    var _super = _createSuper(SelectItem);
 
     /** @ignore */
     function SelectItem() {
@@ -29032,7 +28967,7 @@
 
       _classCallCheck(this, SelectItem);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(SelectItem).call(this));
+      _this = _super.call(this);
       _this._observer = new MutationObserver(_this._handleMutation.bind(_assertThisInitialized(_this)));
 
       _this._observer.observe(_assertThisInitialized(_this), {
@@ -29303,10 +29238,10 @@
    @extends {BaseFormField}
    */
 
-  var Radio =
-  /*#__PURE__*/
-  function (_BaseFormField) {
+  var Radio = /*#__PURE__*/function (_BaseFormField) {
     _inherits(Radio, _BaseFormField);
+
+    var _super = _createSuper(Radio);
 
     /** @ignore */
     function Radio() {
@@ -29314,7 +29249,7 @@
 
       _classCallCheck(this, Radio);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Radio).call(this));
+      _this = _super.call(this);
 
       _this._delegateEvents(commons.extend(_this._events, {
         click: '_onClick',
@@ -29757,118 +29692,117 @@
    */
 
   var BaseFieldGroup = function BaseFieldGroup(superClass) {
-    return (
-      /*#__PURE__*/
-      function (_superClass) {
-        _inherits(_class, _superClass);
+    return /*#__PURE__*/function (_superClass) {
+      _inherits(_class, _superClass);
 
-        function _class() {
-          _classCallCheck(this, _class);
+      var _super = _createSuper(_class);
 
-          return _possibleConstructorReturn(this, _getPrototypeOf(_class).apply(this, arguments));
+      function _class() {
+        _classCallCheck(this, _class);
+
+        return _super.apply(this, arguments);
+      }
+
+      _createClass(_class, [{
+        key: "render",
+
+        /** @ignore */
+        value: function render() {
+          _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
+
+          this.classList.add(CLASSNAME$n); // a11y
+
+          this.setAttribute('role', 'group'); // Default reflected attributes
+
+          if (!this._orientation) {
+            this.orientation = orientation.HORIZONTAL;
+          }
         }
+      }, {
+        key: "items",
 
-        _createClass(_class, [{
-          key: "render",
-
-          /** @ignore */
-          value: function render() {
-            _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
-
-            this.classList.add(CLASSNAME$n); // a11y
-
-            this.setAttribute('role', 'group'); // Default reflected attributes
-
-            if (!this._orientation) {
-              this.orientation = orientation.HORIZONTAL;
-            }
+        /**
+         The Collection Interface that allows interacting with the items that the component contains.
+         
+         @type {SelectableCollection}
+         @readonly
+         */
+        get: function get() {
+          // Construct the collection on first request:
+          if (!this._items) {
+            this._items = new SelectableCollection({
+              itemTagName: this._itemTagName,
+              host: this
+            });
           }
-        }, {
-          key: "items",
 
-          /**
-           The Collection Interface that allows interacting with the items that the component contains.
-           
-           @type {SelectableCollection}
-           @readonly
-           */
-          get: function get() {
-            // Construct the collection on first request:
-            if (!this._items) {
-              this._items = new SelectableCollection({
-                itemTagName: this._itemTagName,
-                host: this
-              });
-            }
+          return this._items;
+        }
+        /**
+         Orientation of the field group. See {@link BaseFieldGroupOrientationEnum}.
+         
+         @type {String}
+         @default BaseFieldGroupOrientationEnum.HORIZONTAL
+         @htmlattribute orientation
+         @htmlattributereflected
+         */
 
-            return this._items;
-          }
-          /**
-           Orientation of the field group. See {@link BaseFieldGroupOrientationEnum}.
-           
-           @type {String}
-           @default BaseFieldGroupOrientationEnum.HORIZONTAL
-           @htmlattribute orientation
-           @htmlattributereflected
-           */
+      }, {
+        key: "orientation",
+        get: function get() {
+          return this._orientation || orientation.HORIZONTAL;
+        },
+        set: function set(value) {
+          value = transform.string(value).toLowerCase();
+          this._orientation = validate.enumeration(this.constructor.orientation)(value) && value || orientation.HORIZONTAL;
 
-        }, {
-          key: "orientation",
-          get: function get() {
-            return this._orientation || orientation.HORIZONTAL;
-          },
-          set: function set(value) {
-            value = transform.string(value).toLowerCase();
-            this._orientation = validate.enumeration(this.constructor.orientation)(value) && value || orientation.HORIZONTAL;
+          this._reflectAttribute('orientation', this._orientation);
 
-            this._reflectAttribute('orientation', this._orientation);
+          this.classList.toggle("".concat(CLASSNAME$n, "--vertical"), this._orientation === orientation.VERTICAL);
+        }
+        /**
+         Returns the first selected field group item in the Field Group. The value <code>null</code> is returned if no item is
+         selected.
+         
+         @type {HTMLElement}
+         @readonly
+         */
 
-            this.classList.toggle("".concat(CLASSNAME$n, "--vertical"), this._orientation === orientation.VERTICAL);
-          }
-          /**
-           Returns the first selected field group item in the Field Group. The value <code>null</code> is returned if no item is
-           selected.
-           
-           @type {HTMLElement}
-           @readonly
-           */
+      }, {
+        key: "selectedItem",
+        get: function get() {
+          return this.items._getFirstSelected('checked');
+        }
+        /** @private */
 
-        }, {
-          key: "selectedItem",
-          get: function get() {
-            return this.items._getFirstSelected('checked');
-          }
-          /** @private */
+      }, {
+        key: "_itemTagName",
+        get: function get() {
+          // Used for Collection
+          return 'coral-fieldgroup-item';
+        }
+        /**
+         Returns {@link BaseFieldGroup} orientation options.
+         
+         @return {BaseFieldGroupEnum}
+         */
 
-        }, {
-          key: "_itemTagName",
-          get: function get() {
-            // Used for Collection
-            return 'coral-fieldgroup-item';
-          }
-          /**
-           Returns {@link BaseFieldGroup} orientation options.
-           
-           @return {BaseFieldGroupEnum}
-           */
+      }], [{
+        key: "orientation",
+        get: function get() {
+          return orientation;
+        }
+        /** @ignore */
 
-        }], [{
-          key: "orientation",
-          get: function get() {
-            return orientation;
-          }
-          /** @ignore */
+      }, {
+        key: "observedAttributes",
+        get: function get() {
+          return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['orientation']);
+        }
+      }]);
 
-        }, {
-          key: "observedAttributes",
-          get: function get() {
-            return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['orientation']);
-          }
-        }]);
-
-        return _class;
-      }(superClass)
-    );
+      return _class;
+    }(superClass);
   };
 
   /**
@@ -29898,15 +29832,15 @@
    @extends {BaseFieldGroup}
    */
 
-  var RadioGroup =
-  /*#__PURE__*/
-  function (_BaseFieldGroup) {
+  var RadioGroup = /*#__PURE__*/function (_BaseFieldGroup) {
     _inherits(RadioGroup, _BaseFieldGroup);
+
+    var _super = _createSuper(RadioGroup);
 
     function RadioGroup() {
       _classCallCheck(this, RadioGroup);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(RadioGroup).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(RadioGroup, [{
@@ -30201,10 +30135,10 @@
    */
 
 
-  var NumberInput =
-  /*#__PURE__*/
-  function (_BaseFormField) {
+  var NumberInput = /*#__PURE__*/function (_BaseFormField) {
     _inherits(NumberInput, _BaseFormField);
+
+    var _super = _createSuper(NumberInput);
 
     /** @ignore */
     function NumberInput() {
@@ -30212,7 +30146,7 @@
 
       _classCallCheck(this, NumberInput);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(NumberInput).call(this));
+      _this = _super.call(this);
 
       _this._delegateEvents(commons.extend(_this._events, {
         'key:up': '_onKeyUp',
@@ -31101,10 +31035,10 @@
    */
 
 
-  var Tooltip =
-  /*#__PURE__*/
-  function (_Overlay) {
+  var Tooltip = /*#__PURE__*/function (_Overlay) {
     _inherits(Tooltip, _Overlay);
+
+    var _super = _createSuper(Tooltip);
 
     /** @ignore */
     function Tooltip() {
@@ -31112,7 +31046,7 @@
 
       _classCallCheck(this, Tooltip);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Tooltip).call(this)); // Override defaults
+      _this = _super.call(this); // Override defaults
 
       _this._lengthOffset = OFFSET$1;
       _this._overlayAnimationTime = Overlay.FADETIME;
@@ -31665,10 +31599,10 @@
    @extends {BaseFormField}
    */
 
-  var Checkbox =
-  /*#__PURE__*/
-  function (_BaseFormField) {
+  var Checkbox = /*#__PURE__*/function (_BaseFormField) {
     _inherits(Checkbox, _BaseFormField);
+
+    var _super = _createSuper(Checkbox);
 
     /** @ignore */
     function Checkbox() {
@@ -31676,7 +31610,7 @@
 
       _classCallCheck(this, Checkbox);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Checkbox).call(this)); // @polyfill ie
+      _this = _super.call(this); // @polyfill ie
 
       _this._delegateEvents(commons.extend(_this._events, {
         click: '_onClick',
@@ -32150,15 +32084,15 @@
    @extends {BaseFieldGroup}
    */
 
-  var CheckboxGroup =
-  /*#__PURE__*/
-  function (_BaseFieldGroup) {
+  var CheckboxGroup = /*#__PURE__*/function (_BaseFieldGroup) {
     _inherits(CheckboxGroup, _BaseFieldGroup);
+
+    var _super = _createSuper(CheckboxGroup);
 
     function CheckboxGroup() {
       _classCallCheck(this, CheckboxGroup);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(CheckboxGroup).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(CheckboxGroup, [{
@@ -32252,9 +32186,7 @@
    */
 
 
-  var DateTime =
-  /*#__PURE__*/
-  function () {
+  var DateTime = /*#__PURE__*/function () {
     /**
     @see https://momentjs.com/docs/#/parsing/now/
     */
@@ -32695,10 +32627,10 @@
    @extends {BaseComponent}
    */
 
-  var Accordion =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var Accordion = /*#__PURE__*/function (_BaseComponent) {
     _inherits(Accordion, _BaseComponent);
+
+    var _super = _createSuper(Accordion);
 
     /** @ignore */
     function Accordion() {
@@ -32706,7 +32638,7 @@
 
       _classCallCheck(this, Accordion);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Accordion).call(this)); // Attach events
+      _this = _super.call(this); // Attach events
 
       _this._delegateEvents({
         'click coral-accordion-item:not([disabled]) ._coral-Accordion-itemHeader': '_onItemClick',
@@ -33197,10 +33129,10 @@
    @extends {BaseComponent}
    */
 
-  var AccordionItem =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var AccordionItem = /*#__PURE__*/function (_BaseComponent) {
     _inherits(AccordionItem, _BaseComponent);
+
+    var _super = _createSuper(AccordionItem);
 
     /** @ignore */
     function AccordionItem() {
@@ -33208,7 +33140,7 @@
 
       _classCallCheck(this, AccordionItem);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(AccordionItem).call(this)); // Prepare templates
+      _this = _super.call(this); // Prepare templates
 
       _this._elements = {
         // Create or fetch the content zones
@@ -33621,10 +33553,10 @@
    @extends {BaseComponent}
    */
 
-  var ActionBar =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var ActionBar = /*#__PURE__*/function (_BaseComponent) {
     _inherits(ActionBar, _BaseComponent);
+
+    var _super = _createSuper(ActionBar);
 
     /** @ignore */
     function ActionBar() {
@@ -33632,7 +33564,7 @@
 
       _classCallCheck(this, ActionBar);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ActionBar).call(this)); // Attach events
+      _this = _super.call(this); // Attach events
 
       _this._delegateEvents({
         'key:up': '_onFocusPreviousItem',
@@ -34034,7 +33966,7 @@
     }, {
       key: "_forceWebkitRedraw",
       value: function _forceWebkitRedraw(el) {
-        var isWebkit = 'WebkitAppearance' in document.documentElement.style;
+        var isWebkit = ('WebkitAppearance' in document.documentElement.style);
 
         if (isWebkit && el.style.display !== 'none') {
           el.style.display = 'none'; // no need to store this anywhere, the reference would be enough
@@ -34266,15 +34198,15 @@
    @extends {BaseComponent}
    */
 
-  var ActionBarItem =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var ActionBarItem = /*#__PURE__*/function (_BaseComponent) {
     _inherits(ActionBarItem, _BaseComponent);
+
+    var _super = _createSuper(ActionBarItem);
 
     function ActionBarItem() {
       _classCallCheck(this, ActionBarItem);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(ActionBarItem).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(ActionBarItem, [{
@@ -34312,15 +34244,15 @@
    @extends {SelectableCollection}
    */
 
-  var ActionBarContainerCollection =
-  /*#__PURE__*/
-  function (_SelectableCollection) {
+  var ActionBarContainerCollection = /*#__PURE__*/function (_SelectableCollection) {
     _inherits(ActionBarContainerCollection, _SelectableCollection);
+
+    var _super = _createSuper(ActionBarContainerCollection);
 
     function ActionBarContainerCollection() {
       _classCallCheck(this, ActionBarContainerCollection);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(ActionBarContainerCollection).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(ActionBarContainerCollection, [{
@@ -34383,10 +34315,10 @@
    @extends {BaseButton}
    */
 
-  var AnchorButton =
-  /*#__PURE__*/
-  function (_BaseButton) {
+  var AnchorButton = /*#__PURE__*/function (_BaseButton) {
     _inherits(AnchorButton, _BaseButton);
+
+    var _super = _createSuper(AnchorButton);
 
     /** @ignore */
     function AnchorButton() {
@@ -34394,7 +34326,7 @@
 
       _classCallCheck(this, AnchorButton);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(AnchorButton).call(this)); // Events
+      _this = _super.call(this); // Events
 
       _this._delegateEvents(commons.extend(_this._events, {
         keydown: '_onKeyDown',
@@ -34804,345 +34736,344 @@
 
 
   var BaseActionBarContainer = function BaseActionBarContainer(superClass) {
-    return (
-      /*#__PURE__*/
-      function (_superClass) {
-        _inherits(_class, _superClass);
+    return /*#__PURE__*/function (_superClass) {
+      _inherits(_class, _superClass);
 
-        /** @ignore */
-        function _class() {
-          var _this;
+      var _super = _createSuper(_class);
 
-          _classCallCheck(this, _class);
+      /** @ignore */
+      function _class() {
+        var _this;
 
-          _this = _possibleConstructorReturn(this, _getPrototypeOf(_class).call(this)); // Templates
+        _classCallCheck(this, _class);
 
-          _this._elements = {};
-          _this._itemsInPopover = [];
-          template$e.call(_this._elements);
-          template$d.call(_this._elements, {
-            commons: commons
-          });
-          template$f.call(_this._elements, {
-            items: _this._itemsInPopover,
-            copyAttributes: copyAttributes
-          }); // Return focus to overlay by default
+        _this = _super.call(this); // Templates
 
-          _this._elements.overlay.focusOnShow = _this._elements.overlay;
-          var overlayId = _this._elements.overlay.id;
-          var events = {};
-          events["global:capture:coral-overlay:beforeopen #".concat(overlayId)] = '_onOverlayBeforeOpen';
-          events["global:capture:coral-overlay:beforeclose #".concat(overlayId)] = '_onOverlayBeforeClose'; // Keyboard interaction
+        _this._elements = {};
+        _this._itemsInPopover = [];
+        template$e.call(_this._elements);
+        template$d.call(_this._elements, {
+          commons: commons
+        });
+        template$f.call(_this._elements, {
+          items: _this._itemsInPopover,
+          copyAttributes: copyAttributes
+        }); // Return focus to overlay by default
 
-          events["global:key:down #".concat(overlayId)] = '_onOverlayKeyDown';
-          events["global:key:up #".concat(overlayId)] = '_onOverlayKeyUp'; // Events
+        _this._elements.overlay.focusOnShow = _this._elements.overlay;
+        var overlayId = _this._elements.overlay.id;
+        var events = {};
+        events["global:capture:coral-overlay:beforeopen #".concat(overlayId)] = '_onOverlayBeforeOpen';
+        events["global:capture:coral-overlay:beforeclose #".concat(overlayId)] = '_onOverlayBeforeClose'; // Keyboard interaction
 
-          _this._delegateEvents(events); // Init the collection mutation observer
+        events["global:key:down #".concat(overlayId)] = '_onOverlayKeyDown';
+        events["global:key:up #".concat(overlayId)] = '_onOverlayKeyUp'; // Events
+
+        _this._delegateEvents(events); // Init the collection mutation observer
 
 
-          _this.items._startHandlingItems(true);
+        _this.items._startHandlingItems(true);
 
-          return _this;
+        return _this;
+      }
+      /**
+       Returns the inner overlay to allow customization.
+       
+       @type {Popover}
+       @readonly
+       */
+
+
+      _createClass(_class, [{
+        key: "_styleItem",
+
+        /**
+         Style item content
+         */
+        value: function _styleItem(item) {
+          var button = item.querySelector('button[is="coral-button"]') || item.querySelector('a[is="coral-anchorbutton"]');
+
+          if (button) {
+            button.classList.add('_coral-ActionBar-button');
+            var oldVariant = button.getAttribute('variant');
+
+            if (oldVariant === Button.variant.ACTION || oldVariant === Button.variant.QUIET_ACTION) {
+              return;
+            }
+
+            button.setAttribute('variant', oldVariant === Button.variant.QUIET ? Button.variant.QUIET_ACTION : Button.variant.ACTION);
+          }
         }
         /**
-         Returns the inner overlay to allow customization.
+         Called after popover.open is set to true, but before the transition of the popover is done. Show elements inside
+         the actionbar, that are hidden due to space problems.
          
-         @type {Popover}
+         @ignore
+         */
+
+      }, {
+        key: "_onOverlayBeforeOpen",
+        value: function _onOverlayBeforeOpen(event) {
+          // there might be popovers in popover => ignore them
+          if (event.target !== this._elements.overlay) {
+            return;
+          }
+
+          this._itemsInPopover = this.items._getAllOffScreen();
+
+          if (this._itemsInPopover.length < 1) {
+            return;
+          }
+
+          this._itemsInPopover.forEach(function (item) {
+            item.style.visibility = '';
+          }); // Store the button and popover on the item
+
+
+          this._itemsInPopover.forEach(function (item) {
+            item._button = item.querySelector('button[is="coral-button"]') || item.querySelector('a[is="coral-anchorbutton"]');
+            item._popover = item.querySelector('coral-popover');
+          }); // Whether a ButtonList or AnchorList should be rendered
+
+
+          this._itemsInPopover.isButtonList = this._itemsInPopover.every(function (item) {
+            return item._button && item._button.tagName === 'BUTTON';
+          });
+          this._itemsInPopover.isAnchorList = this._itemsInPopover.every(function (item) {
+            return item._button && item._button.tagName === 'A';
+          }); // show the current popover (hidden needed to disable fade time of popover)
+
+          this._elements.overlay.hidden = false; // render popover content
+
+          var popover = this._elements.overlay;
+          popover.content.innerHTML = '';
+          popover.content.appendChild(template$f.call(this._elements, {
+            items: this._itemsInPopover,
+            copyAttributes: copyAttributes
+          }));
+        }
+        /**
+         Called after popover.open is set to false, but before the transition of the popover is done.
+         Make items visible again, that now do fit into the actionbar.
+         @ignore
+         */
+
+      }, {
+        key: "_onOverlayBeforeClose",
+        value: function _onOverlayBeforeClose(event) {
+          // there might be popovers in popover => ignore them
+          if (event.target !== this._elements.overlay) {
+            return;
+          }
+
+          var focusedItem = document.activeElement.parentNode; // hide the popover(needed to disable fade time of popover)
+
+          this._elements.overlay.hidden = true; // close any popovers, that might be inside the 'more' popover
+
+          var childPopovers = this._elements.overlay.getElementsByTagName('coral-popover');
+
+          for (var i = 0; i < childPopovers.length; i++) {
+            childPopovers[i].open = false;
+          } // return all elements from popover
+
+
+          this._returnElementsFromPopover(); // clear cached items from popover
+
+
+          this._itemsInPopover = []; // we need to check if item has 'hasAttribute' because it is not present on the document
+
+          var isFocusedItemInsideActionBar = this.parentNode.contains(focusedItem);
+          var isFocusedItemOffscreen = focusedItem.hasAttribute && focusedItem.hasAttribute('coral-actionbar-offscreen');
+
+          if (isFocusedItemInsideActionBar && isFocusedItemOffscreen) {
+            // if currently an element is focused, that should not be visible (or is no actionbar-item) => select 'more'
+            // button
+            this._elements.moreButton.focus();
+          }
+        }
+      }, {
+        key: "_onOverlayKeyDown",
+        value: function _onOverlayKeyDown(event) {
+          event.preventDefault(); // Focus first item
+
+          this._elements.anchorList && this._elements.anchorList._focusFirstItem(event);
+          this._elements.buttonList && this._elements.buttonList._focusFirstItem(event);
+        }
+      }, {
+        key: "_onOverlayKeyUp",
+        value: function _onOverlayKeyUp(event) {
+          event.preventDefault(); // Focus last item
+
+          this._elements.anchorList && this._elements.anchorList._focusLastItem(event);
+          this._elements.buttonList && this._elements.buttonList._focusLastItem(event);
+        }
+      }, {
+        key: "connectedCallback",
+
+        /** @ignore */
+        value: function connectedCallback() {
+          _get(_getPrototypeOf(_class.prototype), "connectedCallback", this).call(this);
+
+          var overlay = this._elements.overlay; // Cannot be open by default when rendered
+
+          overlay.removeAttribute('open'); // Restore in DOM
+
+          if (overlay._parent) {
+            overlay._parent.appendChild(overlay);
+          }
+        }
+        /** @ignore */
+
+      }, {
+        key: "render",
+        value: function render() {
+          var _this2 = this;
+
+          _get(_getPrototypeOf(_class.prototype), "render", this).call(this); // Cleanup resize helpers object (cloneNode support)
+
+
+          var resizeHelpers = this.getElementsByTagName('object');
+
+          for (var i = 0; i < resizeHelpers.length; ++i) {
+            var resizeElement = resizeHelpers[i];
+
+            if (resizeElement.parentNode === this) {
+              this.removeChild(resizeElement);
+            }
+          } // Cleanup 'More' button
+
+
+          var more = this.querySelector('[coral-actionbar-more]');
+
+          if (more) {
+            this.removeChild(more);
+          } // Cleanup 'More' popover
+
+
+          var popover = this.querySelector('[coral-actionbar-popover]');
+
+          if (popover) {
+            this.removeChild(popover);
+          } // Copy more text
+
+
+          this._elements.moreButton.label.textContent = this.moreButtonText; // Init 'More' popover
+
+          this._elements.overlay.target = this._elements.moreButton; // Create empty frag
+
+          var frag = document.createDocumentFragment(); // 'More' button might be moved later in dom when Container is attached to parent
+
+          frag.appendChild(this._elements.moreButton);
+          frag.appendChild(this._elements.overlay); // Render template
+
+          this.appendChild(frag); // Style the items to match action items
+
+          this.items.getAll().forEach(function (item) {
+            return _this2._styleItem(item);
+          });
+        }
+        /** @ignore */
+
+      }, {
+        key: "disconnectedCallback",
+        value: function disconnectedCallback() {
+          _get(_getPrototypeOf(_class.prototype), "disconnectedCallback", this).call(this);
+
+          var overlay = this._elements.overlay; // In case it was moved out don't forget to remove it
+
+          if (!this.contains(overlay)) {
+            overlay._parent = overlay._repositioned ? document.body : this;
+            overlay.remove();
+          }
+        }
+      }, {
+        key: "overlay",
+        get: function get() {
+          return this._elements.overlay;
+        }
+        /**
+         The Collection Interface that allows interacting with the items that the component contains.
+         
+         @type {ActionBarContainerCollection}
          @readonly
          */
 
-
-        _createClass(_class, [{
-          key: "_styleItem",
-
-          /**
-           Style item content
-           */
-          value: function _styleItem(item) {
-            var button = item.querySelector('button[is="coral-button"]') || item.querySelector('a[is="coral-anchorbutton"]');
-
-            if (button) {
-              button.classList.add('_coral-ActionBar-button');
-              var oldVariant = button.getAttribute('variant');
-
-              if (oldVariant === Button.variant.ACTION || oldVariant === Button.variant.QUIET_ACTION) {
-                return;
-              }
-
-              button.setAttribute('variant', oldVariant === Button.variant.QUIET ? Button.variant.QUIET_ACTION : Button.variant.ACTION);
-            }
-          }
-          /**
-           Called after popover.open is set to true, but before the transition of the popover is done. Show elements inside
-           the actionbar, that are hidden due to space problems.
-           
-           @ignore
-           */
-
-        }, {
-          key: "_onOverlayBeforeOpen",
-          value: function _onOverlayBeforeOpen(event) {
-            // there might be popovers in popover => ignore them
-            if (event.target !== this._elements.overlay) {
-              return;
-            }
-
-            this._itemsInPopover = this.items._getAllOffScreen();
-
-            if (this._itemsInPopover.length < 1) {
-              return;
-            }
-
-            this._itemsInPopover.forEach(function (item) {
-              item.style.visibility = '';
-            }); // Store the button and popover on the item
-
-
-            this._itemsInPopover.forEach(function (item) {
-              item._button = item.querySelector('button[is="coral-button"]') || item.querySelector('a[is="coral-anchorbutton"]');
-              item._popover = item.querySelector('coral-popover');
-            }); // Whether a ButtonList or AnchorList should be rendered
-
-
-            this._itemsInPopover.isButtonList = this._itemsInPopover.every(function (item) {
-              return item._button && item._button.tagName === 'BUTTON';
-            });
-            this._itemsInPopover.isAnchorList = this._itemsInPopover.every(function (item) {
-              return item._button && item._button.tagName === 'A';
-            }); // show the current popover (hidden needed to disable fade time of popover)
-
-            this._elements.overlay.hidden = false; // render popover content
-
-            var popover = this._elements.overlay;
-            popover.content.innerHTML = '';
-            popover.content.appendChild(template$f.call(this._elements, {
-              items: this._itemsInPopover,
-              copyAttributes: copyAttributes
-            }));
-          }
-          /**
-           Called after popover.open is set to false, but before the transition of the popover is done.
-           Make items visible again, that now do fit into the actionbar.
-           @ignore
-           */
-
-        }, {
-          key: "_onOverlayBeforeClose",
-          value: function _onOverlayBeforeClose(event) {
-            // there might be popovers in popover => ignore them
-            if (event.target !== this._elements.overlay) {
-              return;
-            }
-
-            var focusedItem = document.activeElement.parentNode; // hide the popover(needed to disable fade time of popover)
-
-            this._elements.overlay.hidden = true; // close any popovers, that might be inside the 'more' popover
-
-            var childPopovers = this._elements.overlay.getElementsByTagName('coral-popover');
-
-            for (var i = 0; i < childPopovers.length; i++) {
-              childPopovers[i].open = false;
-            } // return all elements from popover
-
-
-            this._returnElementsFromPopover(); // clear cached items from popover
-
-
-            this._itemsInPopover = []; // we need to check if item has 'hasAttribute' because it is not present on the document
-
-            var isFocusedItemInsideActionBar = this.parentNode.contains(focusedItem);
-            var isFocusedItemOffscreen = focusedItem.hasAttribute && focusedItem.hasAttribute('coral-actionbar-offscreen');
-
-            if (isFocusedItemInsideActionBar && isFocusedItemOffscreen) {
-              // if currently an element is focused, that should not be visible (or is no actionbar-item) => select 'more'
-              // button
-              this._elements.moreButton.focus();
-            }
-          }
-        }, {
-          key: "_onOverlayKeyDown",
-          value: function _onOverlayKeyDown(event) {
-            event.preventDefault(); // Focus first item
-
-            this._elements.anchorList && this._elements.anchorList._focusFirstItem(event);
-            this._elements.buttonList && this._elements.buttonList._focusFirstItem(event);
-          }
-        }, {
-          key: "_onOverlayKeyUp",
-          value: function _onOverlayKeyUp(event) {
-            event.preventDefault(); // Focus last item
-
-            this._elements.anchorList && this._elements.anchorList._focusLastItem(event);
-            this._elements.buttonList && this._elements.buttonList._focusLastItem(event);
-          }
-        }, {
-          key: "connectedCallback",
-
-          /** @ignore */
-          value: function connectedCallback() {
-            _get(_getPrototypeOf(_class.prototype), "connectedCallback", this).call(this);
-
-            var overlay = this._elements.overlay; // Cannot be open by default when rendered
-
-            overlay.removeAttribute('open'); // Restore in DOM
-
-            if (overlay._parent) {
-              overlay._parent.appendChild(overlay);
-            }
-          }
-          /** @ignore */
-
-        }, {
-          key: "render",
-          value: function render() {
-            var _this2 = this;
-
-            _get(_getPrototypeOf(_class.prototype), "render", this).call(this); // Cleanup resize helpers object (cloneNode support)
-
-
-            var resizeHelpers = this.getElementsByTagName('object');
-
-            for (var i = 0; i < resizeHelpers.length; ++i) {
-              var resizeElement = resizeHelpers[i];
-
-              if (resizeElement.parentNode === this) {
-                this.removeChild(resizeElement);
-              }
-            } // Cleanup 'More' button
-
-
-            var more = this.querySelector('[coral-actionbar-more]');
-
-            if (more) {
-              this.removeChild(more);
-            } // Cleanup 'More' popover
-
-
-            var popover = this.querySelector('[coral-actionbar-popover]');
-
-            if (popover) {
-              this.removeChild(popover);
-            } // Copy more text
-
-
-            this._elements.moreButton.label.textContent = this.moreButtonText; // Init 'More' popover
-
-            this._elements.overlay.target = this._elements.moreButton; // Create empty frag
-
-            var frag = document.createDocumentFragment(); // 'More' button might be moved later in dom when Container is attached to parent
-
-            frag.appendChild(this._elements.moreButton);
-            frag.appendChild(this._elements.overlay); // Render template
-
-            this.appendChild(frag); // Style the items to match action items
-
-            this.items.getAll().forEach(function (item) {
-              return _this2._styleItem(item);
+      }, {
+        key: "items",
+        get: function get() {
+          // Construct the collection on first request:
+          if (!this._items) {
+            this._items = new ActionBarContainerCollection({
+              host: this,
+              itemTagName: 'coral-actionbar-item',
+              onItemAdded: this._styleItem
             });
           }
-          /** @ignore */
 
-        }, {
-          key: "disconnectedCallback",
-          value: function disconnectedCallback() {
-            _get(_getPrototypeOf(_class.prototype), "disconnectedCallback", this).call(this);
+          return this._items;
+        }
+        /**
+         The amount of items that are maximally visible inside the container. Using a value <= 0 will disable this
+         feature and show as many items as possible.
+         
+         @type {Number}
+         @default -1
+         @htmlattribute threshold
+         @htmlattributereflected
+         */
 
-            var overlay = this._elements.overlay; // In case it was moved out don't forget to remove it
+      }, {
+        key: "threshold",
+        get: function get() {
+          return typeof this._threshold === 'number' ? this._threshold : -1;
+        },
+        set: function set(value) {
+          this._threshold = transform.number(value);
 
-            if (!this.contains(overlay)) {
-              overlay._parent = overlay._repositioned ? document.body : this;
-              overlay.remove();
-            }
+          this._reflectAttribute('threshold', this._threshold);
+        }
+        /**
+         If there are more ActionBarItems inside the ActionBar than currently can be shown, then a "more" Button with the
+         following text will be rendered (and some ActionBarItems will be hidden inside of a Popover).
+         
+         @type {String}
+         @default ""
+         @htmlattribute morebuttontext
+         */
+
+      }, {
+        key: "moreButtonText",
+        get: function get() {
+          return this._moreButtonText || '';
+        },
+        set: function set(value) {
+          this._moreButtonText = transform.string(value);
+
+          if (this._elements.moreButton) {
+            // moreButton might not have been created so far
+            this._elements.moreButtonLabel.innerHTML = this._moreButtonText;
+
+            this._elements.moreButton[this._moreButtonText.trim() === '' ? 'setAttribute' : 'removeAttribute']('title', i18n.get('More'));
           }
-        }, {
-          key: "overlay",
-          get: function get() {
-            return this._elements.overlay;
-          }
-          /**
-           The Collection Interface that allows interacting with the items that the component contains.
-           
-           @type {ActionBarContainerCollection}
-           @readonly
-           */
+        }
+      }], [{
+        key: "_attributePropertyMap",
+        get: function get() {
+          return commons.extend(_get(_getPrototypeOf(_class), "_attributePropertyMap", this), {
+            morebuttontext: 'moreButtonText'
+          });
+        }
+        /** @ignore */
 
-        }, {
-          key: "items",
-          get: function get() {
-            // Construct the collection on first request:
-            if (!this._items) {
-              this._items = new ActionBarContainerCollection({
-                host: this,
-                itemTagName: 'coral-actionbar-item',
-                onItemAdded: this._styleItem
-              });
-            }
+      }, {
+        key: "observedAttributes",
+        get: function get() {
+          return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['morebuttontext', 'threshold']);
+        }
+      }]);
 
-            return this._items;
-          }
-          /**
-           The amount of items that are maximally visible inside the container. Using a value <= 0 will disable this
-           feature and show as many items as possible.
-           
-           @type {Number}
-           @default -1
-           @htmlattribute threshold
-           @htmlattributereflected
-           */
-
-        }, {
-          key: "threshold",
-          get: function get() {
-            return typeof this._threshold === 'number' ? this._threshold : -1;
-          },
-          set: function set(value) {
-            this._threshold = transform.number(value);
-
-            this._reflectAttribute('threshold', this._threshold);
-          }
-          /**
-           If there are more ActionBarItems inside the ActionBar than currently can be shown, then a "more" Button with the
-           following text will be rendered (and some ActionBarItems will be hidden inside of a Popover).
-           
-           @type {String}
-           @default ""
-           @htmlattribute morebuttontext
-           */
-
-        }, {
-          key: "moreButtonText",
-          get: function get() {
-            return this._moreButtonText || '';
-          },
-          set: function set(value) {
-            this._moreButtonText = transform.string(value);
-
-            if (this._elements.moreButton) {
-              // moreButton might not have been created so far
-              this._elements.moreButtonLabel.innerHTML = this._moreButtonText;
-
-              this._elements.moreButton[this._moreButtonText.trim() === '' ? 'setAttribute' : 'removeAttribute']('title', i18n.get('More'));
-            }
-          }
-        }], [{
-          key: "_attributePropertyMap",
-          get: function get() {
-            return commons.extend(_get(_getPrototypeOf(_class), "_attributePropertyMap", this), {
-              morebuttontext: 'moreButtonText'
-            });
-          }
-          /** @ignore */
-
-        }, {
-          key: "observedAttributes",
-          get: function get() {
-            return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['morebuttontext', 'threshold']);
-          }
-        }]);
-
-        return _class;
-      }(superClass)
-    );
+      return _class;
+    }(superClass);
   };
 
   var CLASSNAME$v = '_coral-ActionBar-primary';
@@ -35154,15 +35085,15 @@
    @extends {BaseComponent}
    */
 
-  var ActionBarPrimary =
-  /*#__PURE__*/
-  function (_ActionBarContainer) {
+  var ActionBarPrimary = /*#__PURE__*/function (_ActionBarContainer) {
     _inherits(ActionBarPrimary, _ActionBarContainer);
+
+    var _super = _createSuper(ActionBarPrimary);
 
     function ActionBarPrimary() {
       _classCallCheck(this, ActionBarPrimary);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(ActionBarPrimary).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(ActionBarPrimary, [{
@@ -35223,15 +35154,15 @@
    @extends {BaseComponent}
    */
 
-  var ActionBarSecondary =
-  /*#__PURE__*/
-  function (_ActionBarContainer) {
+  var ActionBarSecondary = /*#__PURE__*/function (_ActionBarContainer) {
     _inherits(ActionBarSecondary, _ActionBarContainer);
+
+    var _super = _createSuper(ActionBarSecondary);
 
     function ActionBarSecondary() {
       _classCallCheck(this, ActionBarSecondary);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(ActionBarSecondary).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(ActionBarSecondary, [{
@@ -35307,10 +35238,10 @@
    @deprecated
    */
 
-  var ActionBarContainer =
-  /*#__PURE__*/
-  function (_BaseActionBarContain) {
+  var ActionBarContainer = /*#__PURE__*/function (_BaseActionBarContain) {
     _inherits(ActionBarContainer, _BaseActionBarContain);
+
+    var _super = _createSuper(ActionBarContainer);
 
     /** @ignore */
     function ActionBarContainer() {
@@ -35318,7 +35249,7 @@
 
       _classCallCheck(this, ActionBarContainer);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ActionBarContainer).call(this));
+      _this = _super.call(this);
 
       commons._log('warn', "Coral.ActionBar.Container: coral-actionbar-container has been deprecated.\n    Please use coral-actionbar-primary and coral-actionbar-secondary instead");
 
@@ -35514,10 +35445,10 @@
    */
 
 
-  var Alert =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var Alert = /*#__PURE__*/function (_BaseComponent) {
     _inherits(Alert, _BaseComponent);
+
+    var _super = _createSuper(Alert);
 
     /** @ignore */
     function Alert() {
@@ -35525,7 +35456,7 @@
 
       _classCallCheck(this, Alert);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Alert).call(this)); // Prepare templates
+      _this = _super.call(this); // Prepare templates
 
       _this._elements = {
         // Fetch or create the content zone elements
@@ -36009,10 +35940,10 @@
    @extends {BaseComponent}
    */
 
-  var AutocompleteItem =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var AutocompleteItem = /*#__PURE__*/function (_BaseComponent) {
     _inherits(AutocompleteItem, _BaseComponent);
+
+    var _super = _createSuper(AutocompleteItem);
 
     /** @ignore */
     function AutocompleteItem() {
@@ -36020,7 +35951,7 @@
 
       _classCallCheck(this, AutocompleteItem);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(AutocompleteItem).call(this));
+      _this = _super.call(this);
       _this._observer = new MutationObserver(_this._handleMutation.bind(_assertThisInitialized(_this)));
 
       _this._observer.observe(_assertThisInitialized(_this), {
@@ -36299,10 +36230,10 @@
    @extends {BaseFormField}
    */
 
-  var Autocomplete =
-  /*#__PURE__*/
-  function (_BaseFormField) {
+  var Autocomplete = /*#__PURE__*/function (_BaseFormField) {
     _inherits(Autocomplete, _BaseFormField);
+
+    var _super = _createSuper(Autocomplete);
 
     /** @ignore */
     function Autocomplete() {
@@ -36310,7 +36241,7 @@
 
       _classCallCheck(this, Autocomplete);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Autocomplete).call(this)); // Template
+      _this = _super.call(this); // Template
 
       _this._elements = {};
       template$g.call(_this._elements, {
@@ -38453,10 +38384,10 @@
    */
 
 
-  var Banner =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var Banner = /*#__PURE__*/function (_BaseComponent) {
     _inherits(Banner, _BaseComponent);
+
+    var _super = _createSuper(Banner);
 
     /** @ignore */
     function Banner() {
@@ -38464,7 +38395,7 @@
 
       _classCallCheck(this, Banner);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Banner).call(this)); // Fetch content zones
+      _this = _super.call(this); // Fetch content zones
 
       _this._elements = {
         header: _this.querySelector('coral-banner-header') || document.createElement('coral-banner-header'),
@@ -38726,10 +38657,10 @@
    @extends {BaseFormField}
    */
 
-  var ButtonGroup =
-  /*#__PURE__*/
-  function (_BaseFormField) {
+  var ButtonGroup = /*#__PURE__*/function (_BaseFormField) {
     _inherits(ButtonGroup, _BaseFormField);
+
+    var _super = _createSuper(ButtonGroup);
 
     /** @ignore */
     function ButtonGroup() {
@@ -38737,7 +38668,7 @@
 
       _classCallCheck(this, ButtonGroup);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ButtonGroup).call(this)); // Store template
+      _this = _super.call(this); // Store template
 
       _this._elements = {};
       template$i.call(_this._elements); // Pre-define labellable element
@@ -40259,10 +40190,10 @@
    @extends {BaseFormField}
    */
 
-  var Calendar =
-  /*#__PURE__*/
-  function (_BaseFormField) {
+  var Calendar = /*#__PURE__*/function (_BaseFormField) {
     _inherits(Calendar, _BaseFormField);
+
+    var _super = _createSuper(Calendar);
 
     /** @ignore */
     function Calendar() {
@@ -40270,7 +40201,7 @@
 
       _classCallCheck(this, Calendar);
 
-      _this2 = _possibleConstructorReturn(this, _getPrototypeOf(Calendar).call(this)); // Default value
+      _this2 = _super.call(this); // Default value
 
       _this2._value = null;
 
@@ -41327,10 +41258,10 @@
    */
 
 
-  var Card =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var Card = /*#__PURE__*/function (_BaseComponent) {
     _inherits(Card, _BaseComponent);
+
+    var _super = _createSuper(Card);
 
     /** @ignore */
     function Card() {
@@ -41338,7 +41269,7 @@
 
       _classCallCheck(this, Card);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Card).call(this)); // Prepare templates
+      _this = _super.call(this); // Prepare templates
 
       _this._elements = {
         // Fetch or create the content zone elements
@@ -41736,10 +41667,10 @@
    @extends {BaseComponent}
    */
 
-  var CardProperty =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var CardProperty = /*#__PURE__*/function (_BaseComponent) {
     _inherits(CardProperty, _BaseComponent);
+
+    var _super = _createSuper(CardProperty);
 
     /** @ignore */
     function CardProperty() {
@@ -41747,7 +41678,7 @@
 
       _classCallCheck(this, CardProperty);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(CardProperty).call(this)); // Prepare templates
+      _this = _super.call(this); // Prepare templates
 
       _this._elements = {
         content: _this.querySelector('coral-card-property-content') || document.createElement('coral-card-property-content')
@@ -42080,15 +42011,15 @@
    @extends {BaseComponent}
    */
 
-  var CardPropertyList =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var CardPropertyList = /*#__PURE__*/function (_BaseComponent) {
     _inherits(CardPropertyList, _BaseComponent);
+
+    var _super = _createSuper(CardPropertyList);
 
     function CardPropertyList() {
       _classCallCheck(this, CardPropertyList);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(CardPropertyList).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(CardPropertyList, [{
@@ -42185,15 +42116,15 @@
    @extends {BaseComponent}
    */
 
-  var CharacterCount =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var CharacterCount = /*#__PURE__*/function (_BaseComponent) {
     _inherits(CharacterCount, _BaseComponent);
+
+    var _super = _createSuper(CharacterCount);
 
     function CharacterCount() {
       _classCallCheck(this, CharacterCount);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(CharacterCount).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(CharacterCount, [{
@@ -42626,10 +42557,10 @@
    */
 
 
-  var Clock =
-  /*#__PURE__*/
-  function (_BaseFormField) {
+  var Clock = /*#__PURE__*/function (_BaseFormField) {
     _inherits(Clock, _BaseFormField);
+
+    var _super = _createSuper(Clock);
 
     /** @ignore */
     function Clock() {
@@ -42637,7 +42568,7 @@
 
       _classCallCheck(this, Clock);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Clock).call(this)); // Default value
+      _this = _super.call(this); // Default value
 
       _this._value = ''; // Events
 
@@ -43258,10 +43189,10 @@
    @extends {BaseComponent}
    */
 
-  var CoachMark =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var CoachMark = /*#__PURE__*/function (_BaseComponent) {
     _inherits(CoachMark, _BaseComponent);
+
+    var _super = _createSuper(CoachMark);
 
     /** @ignore */
     function CoachMark() {
@@ -43269,7 +43200,7 @@
 
       _classCallCheck(this, CoachMark);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(CoachMark).call(this)); // Templates
+      _this = _super.call(this); // Templates
 
       _this._elements = {};
       _this._template = template$p.call(_this._elements);
@@ -44258,9 +44189,7 @@
    */
 
 
-  var Color =
-  /*#__PURE__*/
-  function () {
+  var Color = /*#__PURE__*/function () {
     /** @ignore */
     function Color() {
       _classCallCheck(this, Color);
@@ -44860,15 +44789,15 @@
    @extends {BaseComponent}
    */
 
-  var ColorInputItem =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var ColorInputItem = /*#__PURE__*/function (_BaseComponent) {
     _inherits(ColorInputItem, _BaseComponent);
+
+    var _super = _createSuper(ColorInputItem);
 
     function ColorInputItem() {
       _classCallCheck(this, ColorInputItem);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(ColorInputItem).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(ColorInputItem, [{
@@ -44966,95 +44895,94 @@
    @classdesc An abstract subview class that other subviews should extend.
    */
   var BaseColorInputAbstractSubview = function BaseColorInputAbstractSubview(superClass) {
-    return (
-      /*#__PURE__*/
-      function (_superClass) {
-        _inherits(_class, _superClass);
+    return /*#__PURE__*/function (_superClass) {
+      _inherits(_class, _superClass);
 
-        /** @ignore */
-        function _class() {
-          var _this;
+      var _super = _createSuper(_class);
 
-          _classCallCheck(this, _class);
+      /** @ignore */
+      function _class() {
+        var _this;
 
-          _this = _possibleConstructorReturn(this, _getPrototypeOf(_class).call(this));
-          _this._events = {
-            'click ._coral-ColorInput-preview': '_onPreviewClicked'
-          }; // export a static variable used by all subviews
+        _classCallCheck(this, _class);
 
-          _this.constructor._lastValidColor = null;
-          return _this;
+        _this = _super.call(this);
+        _this._events = {
+          'click ._coral-ColorInput-preview': '_onPreviewClicked'
+        }; // export a static variable used by all subviews
+
+        _this.constructor._lastValidColor = null;
+        return _this;
+      }
+      /** @ignore */
+
+
+      _createClass(_class, [{
+        key: "_onPreviewClicked",
+        value: function _onPreviewClicked() {
+          if (this._colorinput.valueAsColor !== null) {
+            this.constructor._lastValidColor = this._colorinput.valueAsColor;
+
+            this._colorinput._setActiveColor(null);
+          } else if (this.constructor._lastValidColor !== null) {
+            this._colorinput._setActiveColor(this.constructor._lastValidColor);
+          }
         }
         /** @ignore */
 
+      }, {
+        key: "_beforeOverlayOpen",
+        value: function _beforeOverlayOpen() {} // overwrite callback in subclass if needed
 
-        _createClass(_class, [{
-          key: "_onPreviewClicked",
-          value: function _onPreviewClicked() {
-            if (this._colorinput.valueAsColor !== null) {
-              this.constructor._lastValidColor = this._colorinput.valueAsColor;
+        /** @ignore */
 
-              this._colorinput._setActiveColor(null);
-            } else if (this.constructor._lastValidColor !== null) {
-              this._colorinput._setActiveColor(this.constructor._lastValidColor);
-            }
+      }, {
+        key: "_onColorInputChange",
+        value: function _onColorInputChange() {} // overwrite callback in subclass if needed
+
+        /** @ignore */
+
+      }, {
+        key: "connectedCallback",
+        value: function connectedCallback() {
+          _get(_getPrototypeOf(_class.prototype), "connectedCallback", this).call(this);
+
+          var overlay = this.closest('._coral-ColorInput-overlay');
+
+          if (overlay && overlay._colorinput) {
+            // save references to bound callbacks (in order to be able to remove them again from event system)
+            this.__beforeOverlayOpen = this._beforeOverlayOpen.bind(this);
+            this.__onColorInputChange = this._onColorInputChange.bind(this); // cache colorinput if this component is attached to dom
+
+            this._colorinput = overlay._colorinput;
+
+            this._colorinput.on('coral-overlay:beforeopen', this.__beforeOverlayOpen);
+
+            this._colorinput.on('coral-colorinput:_valuechange', this.__onColorInputChange); // trigger one change initially
+
+
+            this._onColorInputChange();
           }
-          /** @ignore */
+        }
+        /** @ignore */
 
-        }, {
-          key: "_beforeOverlayOpen",
-          value: function _beforeOverlayOpen() {} // overwrite callback in subclass if needed
+      }, {
+        key: "disconnectedCallback",
+        value: function disconnectedCallback() {
+          _get(_getPrototypeOf(_class.prototype), "disconnectedCallback", this).call(this);
 
-          /** @ignore */
+          if (this._colorinput) {
+            this._colorinput.off('coral-overlay:beforeopen', this.__beforeOverlayOpen);
 
-        }, {
-          key: "_onColorInputChange",
-          value: function _onColorInputChange() {} // overwrite callback in subclass if needed
-
-          /** @ignore */
-
-        }, {
-          key: "connectedCallback",
-          value: function connectedCallback() {
-            _get(_getPrototypeOf(_class.prototype), "connectedCallback", this).call(this);
-
-            var overlay = this.closest('._coral-ColorInput-overlay');
-
-            if (overlay && overlay._colorinput) {
-              // save references to bound callbacks (in order to be able to remove them again from event system)
-              this.__beforeOverlayOpen = this._beforeOverlayOpen.bind(this);
-              this.__onColorInputChange = this._onColorInputChange.bind(this); // cache colorinput if this component is attached to dom
-
-              this._colorinput = overlay._colorinput;
-
-              this._colorinput.on('coral-overlay:beforeopen', this.__beforeOverlayOpen);
-
-              this._colorinput.on('coral-colorinput:_valuechange', this.__onColorInputChange); // trigger one change initially
-
-
-              this._onColorInputChange();
-            }
+            this._colorinput.off('coral-colorinput:_valuechange', this.__onColorInputChange);
           }
-          /** @ignore */
 
-        }, {
-          key: "disconnectedCallback",
-          value: function disconnectedCallback() {
-            _get(_getPrototypeOf(_class.prototype), "disconnectedCallback", this).call(this);
+          this._colorinput = null;
+        }
+      }]);
 
-            if (this._colorinput) {
-              this._colorinput.off('coral-overlay:beforeopen', this.__beforeOverlayOpen);
-
-              this._colorinput.off('coral-colorinput:_valuechange', this.__onColorInputChange);
-            }
-
-            this._colorinput = null;
-          }
-        }]);
-
-        return _class;
-      }(superClass)
-    );
+      return _class;
+    }(superClass);
   };
 
   var template$q = function anonymous(data_0) {
@@ -45145,10 +45073,10 @@
    @extends {BaseFormField}
    */
 
-  var Slider =
-  /*#__PURE__*/
-  function (_BaseFormField) {
+  var Slider = /*#__PURE__*/function (_BaseFormField) {
     _inherits(Slider, _BaseFormField);
+
+    var _super = _createSuper(Slider);
 
     /** @ignore */
     function Slider() {
@@ -45156,7 +45084,7 @@
 
       _classCallCheck(this, Slider);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Slider).call(this));
+      _this = _super.call(this);
 
       _this._delegateEvents(commons.extend(_this._events, {
         'key:up ._coral-Slider-handle': '_handleKey',
@@ -46146,15 +46074,15 @@
    @extends {BaseComponent}
    */
 
-  var SliderItem =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var SliderItem = /*#__PURE__*/function (_BaseComponent) {
     _inherits(SliderItem, _BaseComponent);
+
+    var _super = _createSuper(SliderItem);
 
     function SliderItem() {
       _classCallCheck(this, SliderItem);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(SliderItem).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(SliderItem, [{
@@ -46319,15 +46247,15 @@
    @extends {Slider}
    */
 
-  var RangedSlider =
-  /*#__PURE__*/
-  function (_Slider) {
+  var RangedSlider = /*#__PURE__*/function (_Slider) {
     _inherits(RangedSlider, _Slider);
+
+    var _super = _createSuper(RangedSlider);
 
     function RangedSlider() {
       _classCallCheck(this, RangedSlider);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(RangedSlider).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(RangedSlider, [{
@@ -46628,15 +46556,15 @@
    @extends {Slider}
    */
 
-  var ColorInputSlider =
-  /*#__PURE__*/
-  function (_Slider) {
+  var ColorInputSlider = /*#__PURE__*/function (_Slider) {
     _inherits(ColorInputSlider, _Slider);
+
+    var _super = _createSuper(ColorInputSlider);
 
     function ColorInputSlider() {
       _classCallCheck(this, ColorInputSlider);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(ColorInputSlider).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(ColorInputSlider, [{
@@ -46982,10 +46910,10 @@
    @extends {BaseColorInputAbstractSubview}
    */
 
-  var ColorInputColorProperties =
-  /*#__PURE__*/
-  function (_BaseColorInputAbstra) {
+  var ColorInputColorProperties = /*#__PURE__*/function (_BaseColorInputAbstra) {
     _inherits(ColorInputColorProperties, _BaseColorInputAbstra);
+
+    var _super = _createSuper(ColorInputColorProperties);
 
     /** @ignore */
     function ColorInputColorProperties() {
@@ -46993,7 +46921,7 @@
 
       _classCallCheck(this, ColorInputColorProperties);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ColorInputColorProperties).call(this));
+      _this = _super.call(this);
 
       _this._delegateEvents(commons.extend(_this._events, {
         'change [handle="redSlider"]': '_onRedSliderChange',
@@ -47231,10 +47159,10 @@
    @extends {BaseColorInputAbstractSubview}
    */
 
-  var ColorInputSwatch =
-  /*#__PURE__*/
-  function (_BaseColorInputAbstra) {
+  var ColorInputSwatch = /*#__PURE__*/function (_BaseColorInputAbstra) {
     _inherits(ColorInputSwatch, _BaseColorInputAbstra);
+
+    var _super = _createSuper(ColorInputSwatch);
 
     /** @ignore */
     function ColorInputSwatch() {
@@ -47242,7 +47170,7 @@
 
       _classCallCheck(this, ColorInputSwatch);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ColorInputSwatch).call(this)); // Events
+      _this = _super.call(this); // Events
 
       _this._delegateEvents(_this._events); // Templates
 
@@ -47474,10 +47402,10 @@
    @extends {BaseColorInputAbstractSubview}
    */
 
-  var ColorInputSwatches =
-  /*#__PURE__*/
-  function (_BaseColorInputAbstra) {
+  var ColorInputSwatches = /*#__PURE__*/function (_BaseColorInputAbstra) {
     _inherits(ColorInputSwatches, _BaseColorInputAbstra);
+
+    var _super = _createSuper(ColorInputSwatches);
 
     /** @ignore */
     function ColorInputSwatches() {
@@ -47485,7 +47413,7 @@
 
       _classCallCheck(this, ColorInputSwatches);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ColorInputSwatches).call(this)); // Events
+      _this = _super.call(this); // Events
 
       _this._delegateEvents(commons.extend(_this._events, {
         'click coral-colorinput-swatch': '_onSwatchClicked',
@@ -48094,10 +48022,10 @@
    @extends {BaseFormField}
    */
 
-  var ColorInput =
-  /*#__PURE__*/
-  function (_BaseFormField) {
+  var ColorInput = /*#__PURE__*/function (_BaseFormField) {
     _inherits(ColorInput, _BaseFormField);
+
+    var _super = _createSuper(ColorInput);
 
     /** @ignore */
     function ColorInput() {
@@ -48105,7 +48033,7 @@
 
       _classCallCheck(this, ColorInput);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ColorInput).call(this)); // Prepare templates
+      _this = _super.call(this); // Prepare templates
 
       _this._elements = {};
       template$w.call(_this._elements, {
@@ -49331,15 +49259,15 @@
    @extends {SelectableCollection}
    */
 
-  var ColumnViewCollection =
-  /*#__PURE__*/
-  function (_SelectableCollection) {
+  var ColumnViewCollection = /*#__PURE__*/function (_SelectableCollection) {
     _inherits(ColumnViewCollection, _SelectableCollection);
+
+    var _super = _createSuper(ColumnViewCollection);
 
     function ColumnViewCollection() {
       _classCallCheck(this, ColumnViewCollection);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(ColumnViewCollection).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(ColumnViewCollection, [{
@@ -49449,10 +49377,10 @@
    */
 
 
-  var ColumnView =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var ColumnView = /*#__PURE__*/function (_BaseComponent) {
     _inherits(ColumnView, _BaseComponent);
+
+    var _super = _createSuper(ColumnView);
 
     /** @ignore */
     function ColumnView() {
@@ -49460,7 +49388,7 @@
 
       _classCallCheck(this, ColumnView);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ColumnView).call(this)); // Content zone
+      _this = _super.call(this); // Content zone
 
       _this._elements = {
         accessibilityState: _this.querySelector('span[handle="accessibilityState"]')
@@ -50879,10 +50807,10 @@
    @extends {BaseComponent}
    */
 
-  var ColumnViewColumn =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var ColumnViewColumn = /*#__PURE__*/function (_BaseComponent) {
     _inherits(ColumnViewColumn, _BaseComponent);
+
+    var _super = _createSuper(ColumnViewColumn);
 
     /** @ignore */
     function ColumnViewColumn() {
@@ -50890,7 +50818,7 @@
 
       _classCallCheck(this, ColumnViewColumn);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ColumnViewColumn).call(this)); // Events
+      _this = _super.call(this); // Events
 
       _this._delegateEvents({
         // we need to use capture as scroll events do not bubble
@@ -51551,18 +51479,18 @@
    @extends {BaseComponent}
    */
 
-  var ColumnViewItem =
-  /*#__PURE__*/
-  function (_BaseLabellable) {
+  var ColumnViewItem = /*#__PURE__*/function (_BaseLabellable) {
     _inherits(ColumnViewItem, _BaseLabellable);
+
+    var _super = _createSuper(ColumnViewItem);
 
     /** @ignore */
     function ColumnViewItem() {
-      var _this;
+      var _thisSuper, _this;
 
       _classCallCheck(this, ColumnViewItem);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ColumnViewItem).call(this)); // Content zone
+      _this = _super.call(this); // Content zone
 
       _this._elements = {
         content: _this.querySelector('coral-columnview-item-content') || document.createElement('coral-columnview-item-content'),
@@ -51577,7 +51505,7 @@
         });
       }
 
-      _get(_getPrototypeOf(ColumnViewItem.prototype), "_observeLabel", _assertThisInitialized(_this)).call(_assertThisInitialized(_this));
+      _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(ColumnViewItem.prototype)), "_observeLabel", _thisSuper).call(_thisSuper);
 
       return _this;
     }
@@ -51952,10 +51880,10 @@
    @extends {BaseComponent}
    */
 
-  var ColumnViewPreview =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var ColumnViewPreview = /*#__PURE__*/function (_BaseComponent) {
     _inherits(ColumnViewPreview, _BaseComponent);
+
+    var _super = _createSuper(ColumnViewPreview);
 
     /** @ignore */
     function ColumnViewPreview() {
@@ -51963,7 +51891,7 @@
 
       _classCallCheck(this, ColumnViewPreview);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ColumnViewPreview).call(this)); // Content zone
+      _this = _super.call(this); // Content zone
 
       _this._elements = {
         content: _this.querySelector('coral-columnview-preview-content') || document.createElement('coral-columnview-preview-content')
@@ -52358,15 +52286,15 @@
    @extends {BaseComponent}
    */
 
-  var CycleButtonItem =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var CycleButtonItem = /*#__PURE__*/function (_BaseComponent) {
     _inherits(CycleButtonItem, _BaseComponent);
+
+    var _super = _createSuper(CycleButtonItem);
 
     function CycleButtonItem() {
       _classCallCheck(this, CycleButtonItem);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(CycleButtonItem).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(CycleButtonItem, [{
@@ -52663,10 +52591,10 @@
    @extends {BaseComponent}
    */
 
-  var CycleButton =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var CycleButton = /*#__PURE__*/function (_BaseComponent) {
     _inherits(CycleButton, _BaseComponent);
+
+    var _super = _createSuper(CycleButton);
 
     /** @ignore */
     function CycleButton() {
@@ -52674,7 +52602,7 @@
 
       _classCallCheck(this, CycleButton);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(CycleButton).call(this));
+      _this = _super.call(this);
       _this._id = _this.id || commons.getUID(); // Templates
 
       _this._elements = {};
@@ -53627,15 +53555,15 @@
    @extends {BaseComponent}
    */
 
-  var CycleButtonAction =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var CycleButtonAction = /*#__PURE__*/function (_BaseComponent) {
     _inherits(CycleButtonAction, _BaseComponent);
+
+    var _super = _createSuper(CycleButtonAction);
 
     function CycleButtonAction() {
       _classCallCheck(this, CycleButtonAction);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(CycleButtonAction).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(CycleButtonAction, [{
@@ -53925,9 +53853,9 @@
 
   /**
    Enum for {@link Datepicker} variant values.
-   
+
    @typedef {Object} DatepickerVariantEnum
-   
+
    @property {String} DEFAULT
    A default, gray Datepicker.
    @property {String} QUIET
@@ -53962,9 +53890,9 @@
   }
   /**
    Enumeration for {@link Datepicker} variants.
-   
+
    @typedef {Object} DatepickerTypeEnum
-   
+
    @property {String} DATE
    The selection overlay contains only a calendar.
    @property {String} DATETIME
@@ -54009,10 +53937,10 @@
    */
 
 
-  var Datepicker =
-  /*#__PURE__*/
-  function (_BaseFormField) {
+  var Datepicker = /*#__PURE__*/function (_BaseFormField) {
     _inherits(Datepicker, _BaseFormField);
+
+    var _super = _createSuper(Datepicker);
 
     /** @ignore */
     function Datepicker() {
@@ -54020,7 +53948,7 @@
 
       _classCallCheck(this, Datepicker);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Datepicker).call(this)); // Prepare templates
+      _this = _super.call(this); // Prepare templates
 
       _this._elements = {};
       template$z.call(_this._elements, {
@@ -54051,8 +53979,7 @@
     }
     /**
      Returns the inner overlay to allow customization.
-     
-     @type {Popover}
+      @type {Popover}
      @readonly
      */
 
@@ -54070,8 +53997,7 @@
       }
       /**
        Matches the accessibility to the state of the popover.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -54201,13 +54127,11 @@
       /**
        Helper class that converts the internal moment value into a String using the provided date format. If the value is
        invalid, empty string will be returned.
-       
-       @param {?Moment} value
+        @param {?Moment} value
        The value representing the date. It has to be a moment object or <code>null</code>
        @param {String} format
        The Date format to be used.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -54228,8 +54152,7 @@
       }
       /**
        Returns {@link Datepicker} variants.
-       
-       @return {DatepickerVariantEnum}
+        @return {DatepickerVariantEnum}
        */
 
     }, {
@@ -54323,8 +54246,7 @@
       }
       /**
        The type of datepicker to show to the user. See {@link DatepickerTypeEnum}.
-       
-       @type {DatepickerTypeEnum}
+        @type {DatepickerTypeEnum}
        @default DatepickerTypeEnum.DATE
        @htmlattribute type
        @htmlattributereflected
@@ -54380,8 +54302,7 @@
        be used. The default value depends on the <code>type</code>, which can be one from <code>YYYY-MM-DD</code>,
        <code>YYYY-MM-DD[T]HH:mmZ</code> or <code>HH:mm</code>.  Include momentjs to support additional format string options
        see http://momentjs.com/docs/#/displaying/.
-       
-       @type {String}
+        @type {String}
        @default "YYYY-MM-DD"
        @htmlattribute displayformat
        @htmlattributereflected
@@ -54419,8 +54340,7 @@
        will be used. The default value depends on the <code>type</code>, which can be one from <code>YYYY-MM-DD</code>,
        <code>YYYY-MM-DD[T]HH:mmZ</code> or <code>HH:mm</code>. Include momentjs to support additional format string options
        see http://momentjs.com/docs/#/displaying/.
-       
-       @type {String}
+        @type {String}
        @default "YYYY-MM-DD"
        @htmlattribute valueformat
        @htmlattributereflected
@@ -54461,8 +54381,7 @@
       }
       /**
        The value of the element, interpreted as a date, or <code>null</code> if conversion is not possible.
-       
-       @type {Date}
+        @type {Date}
        @default null
        */
 
@@ -54484,10 +54403,8 @@
       /**
        The minimum date that the Datepicker will accept as valid. It must not be greated that its maximum. It accepts
        both date and string values. When a string is provided, it should match the {@link Coral.Datepicker#valueFormat}.
-       
-       See {@link Coral.Calendar#min}
-       
-       @type {String|Date}
+        See {@link Coral.Calendar#min}
+        @type {String|Date}
        @default null
        @htmlattribute min
        */
@@ -54503,10 +54420,8 @@
       /**
        The maximum date that the Datepicker will accept as valid. It must not be less than its minimum. It accepts both
        date and string values. When a string is provided, it should match the {@link Coral.Datepicker#valueFormat}.
-       
-       See {@link Coral.Calendar#max}
-       
-       @type {String|Date}
+        See {@link Coral.Calendar#max}
+        @type {String|Date}
        @default null
        @htmlattribute max
        */
@@ -54523,10 +54438,8 @@
        The format used to display the current month and year.
        'MMMM YYYY' is supported by default. Include momentjs to support additional format string options see
        http://momentjs.com/docs/#/displaying/.
-       
-       See {@link Coral.Calendar#startDay}
-       
-       @type {String}
+        See {@link Coral.Calendar#startDay}
+        @type {String}
        @default "MMMM YYYY"
        @htmlattribute headerformat
        */
@@ -54541,10 +54454,8 @@
       }
       /**
        Defines the start day for the week, 0 = Sunday, 1 = Monday etc., as depicted on the calendar days grid.
-       
-       See {@link Coral.Calendar#startDay}
-       
-       @type {Number}
+        See {@link Coral.Calendar#startDay}
+        @type {Number}
        @default 0
        @htmlattribute startday
        */
@@ -54560,10 +54471,8 @@
       /**
        The current value. When set to "today", the value is coerced into the client's local date expressed as string
        formatted in accordance to the set <code>valueFormat</code>.
-       
-       See {@link Coral.Calendar#value}
-       
-       @type {String}
+        See {@link Coral.Calendar#value}
+        @type {String}
        @default ""
        @htmlattribute value
        */
@@ -54584,8 +54493,7 @@
       }
       /**
        Short hint that describes the expected value of the Datepicker. It is displayed when the Datepicker is empty.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute placeholder
        @htmlattributereflected
@@ -54603,8 +54511,7 @@
       }
       /**
        The datepicker's variant. See {@link DatepickerVariantEnum}.
-       
-       @type {DatepickerVariantEnum}
+        @type {DatepickerVariantEnum}
        @default DatepickerVariantEnum.DEFAULT
        @htmlattribute variant
        @htmlattributereflected
@@ -54672,7 +54579,7 @@
         this.classList.toggle('is-disabled', this._disabled);
         this._elements.input.disabled = this._disabled;
         this._elements.hiddenInput.disabled = this._disabled;
-        this._elements.toggle.disabled = this._disabled || this.readOnly;
+        this._elements.toggle.disabled = this._disabled;
       }
       /**
        Inherited from {@link BaseFormField#invalid}.
@@ -54734,8 +54641,9 @@
 
         this._reflectAttribute('readonly', this._readOnly);
 
+        this._elements.hiddenInput.readOnly = this.readOnly;
         this._elements.input.readOnly = this._readOnly;
-        this._elements.toggle.disabled = this._readOnly || this.disabled;
+        this._elements.toggle.disabled = this._readOnly;
       }
       /**
        Inherited from {@link BaseFormField#labelled}.
@@ -54779,8 +54687,7 @@
        When <code>true</code> the component will default to the native input for the date selection. When
        {@link Coral.Datepicker.type.DATETIME} has been set, it will still use the Coral way because mobile browsers
        cannot handle a datetime input.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -54843,8 +54750,7 @@
       }
       /**
        Returns {@link Datepicker} types.
-       
-       @return {DatepickerTypeEnum}
+        @return {DatepickerTypeEnum}
        */
 
     }, {
@@ -55044,10 +54950,10 @@
    */
 
 
-  var Drawer =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var Drawer = /*#__PURE__*/function (_BaseComponent) {
     _inherits(Drawer, _BaseComponent);
+
+    var _super = _createSuper(Drawer);
 
     /** @ignore */
     function Drawer() {
@@ -55055,7 +54961,7 @@
 
       _classCallCheck(this, Drawer);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Drawer).call(this)); // Templates
+      _this = _super.call(this); // Templates
 
       _this._elements = {
         content: _this.querySelector('coral-drawer-content') || document.createElement('coral-drawer-content')
@@ -56206,9 +56112,7 @@
    The file element.
    */
 
-  var FileUploadItem =
-  /*#__PURE__*/
-  function () {
+  var FileUploadItem = /*#__PURE__*/function () {
     /**
      Takes a {File} as argument.
      
@@ -56526,10 +56430,10 @@
    @extends {BaseFormField}
    */
 
-  var FileUpload =
-  /*#__PURE__*/
-  function (_BaseFormField) {
+  var FileUpload = /*#__PURE__*/function (_BaseFormField) {
     _inherits(FileUpload, _BaseFormField);
+
+    var _super = _createSuper(FileUpload);
 
     /** @ignore */
     function FileUpload() {
@@ -56537,7 +56441,7 @@
 
       _classCallCheck(this, FileUpload);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(FileUpload).call(this)); // Events
+      _this = _super.call(this); // Events
 
       _this._delegateEvents(commons.extend(_this._events, {
         // Clickable hooks
@@ -57699,10 +57603,10 @@
    @extends {BaseComponent}
    */
 
-  var MasonryItem =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var MasonryItem = /*#__PURE__*/function (_BaseComponent) {
     _inherits(MasonryItem, _BaseComponent);
+
+    var _super = _createSuper(MasonryItem);
 
     /** @ignore */
     function MasonryItem() {
@@ -57710,7 +57614,7 @@
 
       _classCallCheck(this, MasonryItem);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(MasonryItem).call(this)); // Represents ownership (necessary when the item is moved which triggers callbacks)
+      _this = _super.call(this); // Represents ownership (necessary when the item is moved which triggers callbacks)
 
       _this._masonry = null; // Default value
 
@@ -58002,10 +57906,10 @@
    */
 
 
-  var Masonry =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var Masonry = /*#__PURE__*/function (_BaseComponent) {
     _inherits(Masonry, _BaseComponent);
+
+    var _super = _createSuper(Masonry);
 
     /** @ignore */
     function Masonry() {
@@ -58013,7 +57917,7 @@
 
       _classCallCheck(this, Masonry);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Masonry).call(this)); // Defaults
+      _this = _super.call(this); // Defaults
 
       _this._loaded = false;
       _this._layouted = false;
@@ -59105,9 +59009,7 @@
    @param masonry
    @class Coral.Masonry.Layout
    */
-  var MasonryLayout =
-  /*#__PURE__*/
-  function () {
+  var MasonryLayout = /*#__PURE__*/function () {
     /**
      * this is constructor description.
      * @param {number} arg1 this is arg1 description.
@@ -59283,10 +59185,10 @@
    @extends {MasonryLayout}
    */
 
-  var MasonryColumnLayout =
-  /*#__PURE__*/
-  function (_MasonryLayout) {
+  var MasonryColumnLayout = /*#__PURE__*/function (_MasonryLayout) {
     _inherits(MasonryColumnLayout, _MasonryLayout);
+
+    var _super = _createSuper(MasonryColumnLayout);
 
     /**
      Takes a {Masonry} instance as argument.
@@ -59298,7 +59200,7 @@
 
       _classCallCheck(this, MasonryColumnLayout);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(MasonryColumnLayout).call(this, masonry));
+      _this = _super.call(this, masonry);
       _this._columns = [];
 
       var up = _this._moveFocusVertically.bind(_assertThisInitialized(_this), true);
@@ -59794,15 +59696,15 @@
    @extends {MasonryColumnLayout}
    */
 
-  var MasonryFixedCenteredLayout =
-  /*#__PURE__*/
-  function (_MasonryColumnLayout) {
+  var MasonryFixedCenteredLayout = /*#__PURE__*/function (_MasonryColumnLayout) {
     _inherits(MasonryFixedCenteredLayout, _MasonryColumnLayout);
+
+    var _super = _createSuper(MasonryFixedCenteredLayout);
 
     function MasonryFixedCenteredLayout() {
       _classCallCheck(this, MasonryFixedCenteredLayout);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(MasonryFixedCenteredLayout).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(MasonryFixedCenteredLayout, [{
@@ -59847,15 +59749,15 @@
    @extends {MasonryColumnLayout}
    */
 
-  var MasonryFixedSpreadLayout =
-  /*#__PURE__*/
-  function (_MasonryColumnLayout) {
+  var MasonryFixedSpreadLayout = /*#__PURE__*/function (_MasonryColumnLayout) {
     _inherits(MasonryFixedSpreadLayout, _MasonryColumnLayout);
+
+    var _super = _createSuper(MasonryFixedSpreadLayout);
 
     function MasonryFixedSpreadLayout() {
       _classCallCheck(this, MasonryFixedSpreadLayout);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(MasonryFixedSpreadLayout).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(MasonryFixedSpreadLayout, [{
@@ -59904,15 +59806,15 @@
    @extends {MasonryColumnLayout}
    */
 
-  var MasonryVariableLayout =
-  /*#__PURE__*/
-  function (_MasonryColumnLayout) {
+  var MasonryVariableLayout = /*#__PURE__*/function (_MasonryColumnLayout) {
     _inherits(MasonryVariableLayout, _MasonryColumnLayout);
+
+    var _super = _createSuper(MasonryVariableLayout);
 
     function MasonryVariableLayout() {
       _classCallCheck(this, MasonryVariableLayout);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(MasonryVariableLayout).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(MasonryVariableLayout, [{
@@ -59945,15 +59847,15 @@
    @extends {MasonryVariableLayout}
    */
 
-  var MasonryDashboardLayout =
-  /*#__PURE__*/
-  function (_MasonryVariableLayou) {
+  var MasonryDashboardLayout = /*#__PURE__*/function (_MasonryVariableLayou) {
     _inherits(MasonryDashboardLayout, _MasonryVariableLayou);
+
+    var _super = _createSuper(MasonryDashboardLayout);
 
     function MasonryDashboardLayout() {
       _classCallCheck(this, MasonryDashboardLayout);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(MasonryDashboardLayout).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(MasonryDashboardLayout, [{
@@ -60022,15 +59924,15 @@
   Masonry.Item = MasonryItem;
   Masonry.Layout = MasonryLayout;
 
-  var MultifieldCollection =
-  /*#__PURE__*/
-  function (_Collection) {
+  var MultifieldCollection = /*#__PURE__*/function (_Collection) {
     _inherits(MultifieldCollection, _Collection);
+
+    var _super = _createSuper(MultifieldCollection);
 
     function MultifieldCollection() {
       _classCallCheck(this, MultifieldCollection);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(MultifieldCollection).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(MultifieldCollection, [{
@@ -60067,7 +59969,7 @@
   var IS_DRAGGING_CLASS$1 = 'is-dragging';
   var IS_AFTER_CLASS = 'is-after';
   var IS_BEFORE_CLASS = 'is-before';
-  var TEMPLATE_SUPPORT = 'content' in document.createElement('template');
+  var TEMPLATE_SUPPORT = ('content' in document.createElement('template'));
   /**
    @class Coral.Multifield
    @classdesc A Multifield component that enables adding, reordering, and removing multiple instances of a component.
@@ -60080,10 +59982,10 @@
    @extends {BaseComponent}
    */
 
-  var Multifield =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var Multifield = /*#__PURE__*/function (_BaseComponent) {
     _inherits(Multifield, _BaseComponent);
+
+    var _super = _createSuper(Multifield);
 
     /** @ignore */
     function Multifield() {
@@ -60091,7 +59993,7 @@
 
       _classCallCheck(this, Multifield);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Multifield).call(this)); // Attach events
+      _this = _super.call(this); // Attach events
 
       _this._delegateEvents({
         'coral-dragaction:dragstart coral-multifield-item': '_onDragStart',
@@ -60489,10 +60391,10 @@
    @extends {BaseComponent}
    */
 
-  var MultifieldItem =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var MultifieldItem = /*#__PURE__*/function (_BaseComponent) {
     _inherits(MultifieldItem, _BaseComponent);
+
+    var _super = _createSuper(MultifieldItem);
 
     /** @ignore */
     function MultifieldItem() {
@@ -60500,7 +60402,7 @@
 
       _classCallCheck(this, MultifieldItem);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(MultifieldItem).call(this)); // Prepare templates
+      _this = _super.call(this); // Prepare templates
 
       _this._elements = {
         // Create or fetch the content zones
@@ -60638,10 +60540,10 @@
    @extends {BaseComponent}
    */
 
-  var PanelStack =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var PanelStack = /*#__PURE__*/function (_BaseComponent) {
     _inherits(PanelStack, _BaseComponent);
+
+    var _super = _createSuper(PanelStack);
 
     /** @ignore */
     function PanelStack() {
@@ -60649,7 +60551,7 @@
 
       _classCallCheck(this, PanelStack);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(PanelStack).call(this)); // Attach events
+      _this = _super.call(this); // Attach events
 
       _this._delegateEvents({
         // private
@@ -60793,10 +60695,10 @@
    @extends {BaseComponent}
    */
 
-  var Panel =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var Panel = /*#__PURE__*/function (_BaseComponent) {
     _inherits(Panel, _BaseComponent);
+
+    var _super = _createSuper(Panel);
 
     /** @ignore */
     function Panel() {
@@ -60804,7 +60706,7 @@
 
       _classCallCheck(this, Panel);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Panel).call(this)); // Templates
+      _this = _super.call(this); // Templates
 
       _this._elements = {
         content: _this.querySelector('coral-panel-content') || document.createElement('coral-panel-content')
@@ -61018,10 +60920,10 @@
    @extends {BaseComponent}
    */
 
-  var Progress =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var Progress = /*#__PURE__*/function (_BaseComponent) {
     _inherits(Progress, _BaseComponent);
+
+    var _super = _createSuper(Progress);
 
     /** @ignore */
     function Progress() {
@@ -61029,7 +60931,7 @@
 
       _classCallCheck(this, Progress);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Progress).call(this)); // Prepare templates
+      _this = _super.call(this); // Prepare templates
 
       _this._elements = {
         // Fetch or create the content content zone element
@@ -61476,10 +61378,10 @@
    @extends {BaseComponent}
    */
 
-  var QuickActionsItem =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var QuickActionsItem = /*#__PURE__*/function (_BaseComponent) {
     _inherits(QuickActionsItem, _BaseComponent);
+
+    var _super = _createSuper(QuickActionsItem);
 
     /** @ignore */
     function QuickActionsItem() {
@@ -61487,7 +61389,7 @@
 
       _classCallCheck(this, QuickActionsItem);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(QuickActionsItem).call(this)); // QuickActions will add button/anchorbutton references to it
+      _this = _super.call(this); // QuickActions will add button/anchorbutton references to it
 
       _this._elements = {};
       _this._observer = new MutationObserver(_this._onMutation.bind(_assertThisInitialized(_this)));
@@ -61786,10 +61688,10 @@
    @extends {Overlay}
    */
 
-  var QuickActions =
-  /*#__PURE__*/
-  function (_Overlay) {
+  var QuickActions = /*#__PURE__*/function (_Overlay) {
     _inherits(QuickActions, _Overlay);
+
+    var _super = _createSuper(QuickActions);
 
     /** @ignore */
     function QuickActions() {
@@ -61797,7 +61699,7 @@
 
       _classCallCheck(this, QuickActions);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(QuickActions).call(this)); // Override defaults
+      _this = _super.call(this); // Override defaults
 
       _this._overlayAnimationTime = Overlay.FADETIME;
       _this._alignMy = Overlay.align.CENTER_TOP;
@@ -63454,10 +63356,10 @@
    @extends {BaseComponent}
    */
 
-  var Shell =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var Shell = /*#__PURE__*/function (_BaseComponent) {
     _inherits(Shell, _BaseComponent);
+
+    var _super = _createSuper(Shell);
 
     /** @ignore */
     function Shell() {
@@ -63465,7 +63367,7 @@
 
       _classCallCheck(this, Shell);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Shell).call(this)); // Prepare templates
+      _this = _super.call(this); // Prepare templates
 
       _this._elements = {
         // Fetch or create the content zone elements
@@ -63616,10 +63518,10 @@
    @extends {BaseComponent}
    */
 
-  var ShellHeader =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var ShellHeader = /*#__PURE__*/function (_BaseComponent) {
     _inherits(ShellHeader, _BaseComponent);
+
+    var _super = _createSuper(ShellHeader);
 
     /** @ignore */
     function ShellHeader() {
@@ -63627,7 +63529,7 @@
 
       _classCallCheck(this, ShellHeader);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ShellHeader).call(this)); // Prepare templates
+      _this = _super.call(this); // Prepare templates
 
       _this._elements = {
         // Fetch or create the content zone elements
@@ -63777,10 +63679,10 @@
    @extends {BaseComponent}
    */
 
-  var ShellHomeAnchor =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var ShellHomeAnchor = /*#__PURE__*/function (_BaseComponent) {
     _inherits(ShellHomeAnchor, _BaseComponent);
+
+    var _super = _createSuper(ShellHomeAnchor);
 
     /** @ignore */
     function ShellHomeAnchor() {
@@ -63788,7 +63690,7 @@
 
       _classCallCheck(this, ShellHomeAnchor);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ShellHomeAnchor).call(this)); // Prepare templates
+      _this = _super.call(this); // Prepare templates
 
       _this._elements = {
         // Fetch or create the content zone elements
@@ -64063,10 +63965,10 @@
    @extends {BaseFormField}
    */
 
-  var Search =
-  /*#__PURE__*/
-  function (_BaseFormField) {
+  var Search = /*#__PURE__*/function (_BaseFormField) {
     _inherits(Search, _BaseFormField);
+
+    var _super = _createSuper(Search);
 
     /** @ignore */
     function Search() {
@@ -64074,7 +63976,7 @@
 
       _classCallCheck(this, Search);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Search).call(this));
+      _this = _super.call(this);
 
       _this._delegateEvents(commons.extend(_this._events, {
         // @todo use Coral.keys when key combos don't interfere with single key execution
@@ -64620,10 +64522,10 @@
    @extends {BaseComponent}
    */
 
-  var ShellHelp =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var ShellHelp = /*#__PURE__*/function (_BaseComponent) {
     _inherits(ShellHelp, _BaseComponent);
+
+    var _super = _createSuper(ShellHelp);
 
     /** @ignore */
     function ShellHelp() {
@@ -64631,7 +64533,7 @@
 
       _classCallCheck(this, ShellHelp);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ShellHelp).call(this)); // Prepare templates
+      _this = _super.call(this); // Prepare templates
 
       _this._elements = {};
       template$J.call(_this._elements, {
@@ -64890,15 +64792,15 @@
    @extends {AnchorListItem}
    */
 
-  var ShellHelpItem =
-  /*#__PURE__*/
-  function (_AnchorList$Item) {
+  var ShellHelpItem = /*#__PURE__*/function (_AnchorList$Item) {
     _inherits(ShellHelpItem, _AnchorList$Item);
+
+    var _super = _createSuper(ShellHelpItem);
 
     function ShellHelpItem() {
       _classCallCheck(this, ShellHelpItem);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(ShellHelpItem).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(ShellHelpItem, [{
@@ -64947,15 +64849,15 @@
    @extends {Popover}
    */
 
-  var ShellMenu =
-  /*#__PURE__*/
-  function (_Popover) {
+  var ShellMenu = /*#__PURE__*/function (_Popover) {
     _inherits(ShellMenu, _Popover);
+
+    var _super = _createSuper(ShellMenu);
 
     function ShellMenu() {
       _classCallCheck(this, ShellMenu);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(ShellMenu).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(ShellMenu, [{
@@ -65036,10 +64938,10 @@
    @extends {BaseComponent}
    */
 
-  var ShellMenuBar =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var ShellMenuBar = /*#__PURE__*/function (_BaseComponent) {
     _inherits(ShellMenuBar, _BaseComponent);
+
+    var _super = _createSuper(ShellMenuBar);
 
     /** @ignore */
     function ShellMenuBar() {
@@ -65047,7 +64949,9 @@
 
       _classCallCheck(this, ShellMenuBar);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ShellMenuBar).call(this));
+      _this = _super.call(this);
+
+      _this.setAttribute('role', 'list');
 
       _this.items._startHandlingItems(true);
 
@@ -65096,6 +65000,7 @@
     el0.setAttribute("iconsize", "S");
     el0.className += " _coral-Shell-menu-button";
     el0.setAttribute("handle", "shellMenuButton");
+    el0.setAttribute("type", "button");
     var el1 = document.createTextNode("\n  ");
     el0.appendChild(el1);
     var el2 = this["shellMenuButtonLabel"] = document.createElement("coral-button-label");
@@ -65142,10 +65047,10 @@
    */
 
 
-  var ShellMenuBarItem =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var ShellMenuBarItem = /*#__PURE__*/function (_BaseComponent) {
     _inherits(ShellMenuBarItem, _BaseComponent);
+
+    var _super = _createSuper(ShellMenuBarItem);
 
     /** @ignore */
     function ShellMenuBarItem() {
@@ -65153,7 +65058,7 @@
 
       _classCallCheck(this, ShellMenuBarItem);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ShellMenuBarItem).call(this)); // Templates
+      _this = _super.call(this); // Templates
 
       _this._elements = {};
       template$N.call(_this._elements); // Events
@@ -65186,7 +65091,9 @@
 
         if (target === this._getMenu()) {
           // Mark button as selected
-          this._elements.shellMenuButton.classList.toggle('is-selected', !target.open);
+          var shellMenuButton = this._elements.shellMenuButton;
+          shellMenuButton.classList.toggle('is-selected', !target.open);
+          shellMenuButton.setAttribute('aria-expanded', target.open);
         }
       }
       /** @private */
@@ -65198,6 +65105,8 @@
 
         if (target === this._getMenu() && this.open !== target.open) {
           this.open = target.open;
+
+          this._elements.shellMenuButton.setAttribute('aria-expanded', target.open);
         }
       }
       /** @ignore */
@@ -65264,6 +65173,7 @@
       value: function render() {
         _get(_getPrototypeOf(ShellMenuBarItem.prototype), "render", this).call(this);
 
+        this.setAttribute('role', 'listitem');
         this.classList.add(CLASSNAME$19);
         var button = this.querySelector('._coral-Shell-menu-button');
 
@@ -65396,6 +65306,8 @@
 
           if (menu.open !== this._open) {
             menu.open = this._open;
+
+            this._elements.shellMenuButton.setAttribute('aria-expanded', this._open);
           }
 
           this.trigger("coral-shell-menubar-item:".concat(this._open ? 'open' : 'close'));
@@ -65451,6 +65363,9 @@
         if (menu) {
           this.id = this.id || commons.getUID();
           menu.setAttribute('target', "#".concat(this.id));
+          var shellMenuButton = this._elements.shellMenuButton;
+          shellMenuButton.setAttribute('aria-haspopup', menu.getAttribute('role') || 'dialog');
+          shellMenuButton.setAttribute('aria-expanded', this.open);
         }
       }
     }, {
@@ -65525,7 +65440,7 @@
    */
 
   var avatar = {
-    DEFAULT: 'userCircleColor'
+    DEFAULT: 'UserCircleColor_Light'
   };
   /**
    @class Coral.Shell.User
@@ -65535,10 +65450,10 @@
    @extends {BaseComponent}
    */
 
-  var ShellUser =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var ShellUser = /*#__PURE__*/function (_BaseComponent) {
     _inherits(ShellUser, _BaseComponent);
+
+    var _super = _createSuper(ShellUser);
 
     /** @ignore */
     function ShellUser() {
@@ -65546,7 +65461,7 @@
 
       _classCallCheck(this, ShellUser);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ShellUser).call(this)); // Prepare templates
+      _this = _super.call(this); // Prepare templates
 
       _this._elements = {
         // Fetch or create the content zone elements
@@ -65884,10 +65799,10 @@
    @extends {BaseComponent}
    */
 
-  var ShellWorkspaces =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var ShellWorkspaces = /*#__PURE__*/function (_BaseComponent) {
     _inherits(ShellWorkspaces, _BaseComponent);
+
+    var _super = _createSuper(ShellWorkspaces);
 
     /** @ignore */
     function ShellWorkspaces() {
@@ -65895,7 +65810,7 @@
 
       _classCallCheck(this, ShellWorkspaces);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ShellWorkspaces).call(this)); // Events
+      _this = _super.call(this); // Events
 
       _this._delegateEvents({
         'key:down [is="coral-shell-workspace"]': '_focusNextItem',
@@ -66167,10 +66082,10 @@
    @extends {BaseComponent}
    */
 
-  var ShellWorkspace =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var ShellWorkspace = /*#__PURE__*/function (_BaseComponent) {
     _inherits(ShellWorkspace, _BaseComponent);
+
+    var _super = _createSuper(ShellWorkspace);
 
     /** @ignore */
     function ShellWorkspace() {
@@ -66178,7 +66093,7 @@
 
       _classCallCheck(this, ShellWorkspace);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ShellWorkspace).call(this)); // Events
+      _this = _super.call(this); // Events
 
       _this._delegateEvents({
         click: '_onClick'
@@ -66268,10 +66183,10 @@
    @extends {BaseComponent}
    */
 
-  var ShellSolutionSwitcher =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var ShellSolutionSwitcher = /*#__PURE__*/function (_BaseComponent) {
     _inherits(ShellSolutionSwitcher, _BaseComponent);
+
+    var _super = _createSuper(ShellSolutionSwitcher);
 
     /** @ignore */
     function ShellSolutionSwitcher() {
@@ -66279,7 +66194,7 @@
 
       _classCallCheck(this, ShellSolutionSwitcher);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ShellSolutionSwitcher).call(this)); // Template
+      _this = _super.call(this); // Template
 
       _this._elements = {};
       template$P.call(_this._elements); // Listen for mutations
@@ -66361,15 +66276,15 @@
    @extends {BaseComponent}
    */
 
-  var ShellSolutions =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var ShellSolutions = /*#__PURE__*/function (_BaseComponent) {
     _inherits(ShellSolutions, _BaseComponent);
+
+    var _super = _createSuper(ShellSolutions);
 
     function ShellSolutions() {
       _classCallCheck(this, ShellSolutions);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(ShellSolutions).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(ShellSolutions, [{
@@ -66530,10 +66445,10 @@
    @extends {BaseComponent}
    */
 
-  var ShellSolution =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var ShellSolution = /*#__PURE__*/function (_BaseComponent) {
     _inherits(ShellSolution, _BaseComponent);
+
+    var _super = _createSuper(ShellSolution);
 
     /** @ignore */
     function ShellSolution() {
@@ -66541,7 +66456,7 @@
 
       _classCallCheck(this, ShellSolution);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ShellSolution).call(this)); // Prepare templates
+      _this = _super.call(this); // Prepare templates
 
       _this._elements = {
         // Fetch or create the content zone elements
@@ -66760,10 +66675,10 @@
    @extends {List}
    */
 
-  var ShellOrgSwitcher =
-  /*#__PURE__*/
-  function (_List) {
+  var ShellOrgSwitcher = /*#__PURE__*/function (_List) {
     _inherits(ShellOrgSwitcher, _List);
+
+    var _super = _createSuper(ShellOrgSwitcher);
 
     /** @ignore */
     function ShellOrgSwitcher() {
@@ -66771,7 +66686,7 @@
 
       _classCallCheck(this, ShellOrgSwitcher);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ShellOrgSwitcher).call(this)); // Events
+      _this = _super.call(this); // Events
 
       _this._delegateEvents({
         'coral-search:clear': '_showAll',
@@ -67175,10 +67090,10 @@
    @extends {ListItem}
    */
 
-  var ShellOrganization =
-  /*#__PURE__*/
-  function (_List$Item) {
+  var ShellOrganization = /*#__PURE__*/function (_List$Item) {
     _inherits(ShellOrganization, _List$Item);
+
+    var _super = _createSuper(ShellOrganization);
 
     /** @ignore */
     function ShellOrganization() {
@@ -67186,7 +67101,7 @@
 
       _classCallCheck(this, ShellOrganization);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ShellOrganization).call(this)); // Events
+      _this = _super.call(this); // Events
 
       _this._delegateEvents({
         'click': '_onClick',
@@ -67482,15 +67397,15 @@
    @extends {ShellOrganization}
    */
 
-  var ShellSuborganization =
-  /*#__PURE__*/
-  function (_ShellOrganization) {
+  var ShellSuborganization = /*#__PURE__*/function (_ShellOrganization) {
     _inherits(ShellSuborganization, _ShellOrganization);
+
+    var _super = _createSuper(ShellSuborganization);
 
     function ShellSuborganization() {
       _classCallCheck(this, ShellSuborganization);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(ShellSuborganization).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(ShellSuborganization, [{
@@ -67637,10 +67552,10 @@
    @extends {BaseComponent}
    */
 
-  var SideNav =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var SideNav = /*#__PURE__*/function (_BaseComponent) {
     _inherits(SideNav, _BaseComponent);
+
+    var _super = _createSuper(SideNav);
 
     /** @ignore */
     function SideNav() {
@@ -67648,7 +67563,7 @@
 
       _classCallCheck(this, SideNav);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(SideNav).call(this)); // Attach events
+      _this = _super.call(this); // Attach events
 
       _this._delegateEvents({
         // Interaction
@@ -68034,25 +67949,25 @@
    @extends {BaseComponent}
    */
 
-  var SideNavItem =
-  /*#__PURE__*/
-  function (_BaseLabellable) {
+  var SideNavItem = /*#__PURE__*/function (_BaseLabellable) {
     _inherits(SideNavItem, _BaseLabellable);
+
+    var _super = _createSuper(SideNavItem);
 
     /** @ignore */
     function SideNavItem() {
-      var _this;
+      var _thisSuper, _this;
 
       _classCallCheck(this, SideNavItem);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(SideNavItem).call(this)); // Prepare templates
+      _this = _super.call(this); // Prepare templates
 
       _this._elements = {
         content: _this.querySelector('coral-sidenav-item-content') || document.createElement('coral-sidenav-item-content')
       };
       template$T.call(_this._elements);
 
-      _get(_getPrototypeOf(SideNavItem.prototype), "_observeLabel", _assertThisInitialized(_this)).call(_assertThisInitialized(_this));
+      _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(SideNavItem.prototype)), "_observeLabel", _thisSuper).call(_thisSuper);
 
       return _this;
     }
@@ -68227,15 +68142,15 @@
    @extends {BaseComponent}
    */
 
-  var SideNavLevel =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var SideNavLevel = /*#__PURE__*/function (_BaseComponent) {
     _inherits(SideNavLevel, _BaseComponent);
+
+    var _super = _createSuper(SideNavLevel);
 
     function SideNavLevel() {
       _classCallCheck(this, SideNavLevel);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(SideNavLevel).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(SideNavLevel, [{
@@ -68372,10 +68287,10 @@
    @extends {BaseComponent}
    */
 
-  var SplitButton =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var SplitButton = /*#__PURE__*/function (_BaseComponent) {
     _inherits(SplitButton, _BaseComponent);
+
+    var _super = _createSuper(SplitButton);
 
     /** @ignore */
     function SplitButton() {
@@ -68383,7 +68298,7 @@
 
       _classCallCheck(this, SplitButton);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(SplitButton).call(this)); // Watch for inner button changes
+      _this = _super.call(this); // Watch for inner button changes
 
       _this._observer = new MutationObserver(function () {
         _this._updateLeftVariant();
@@ -68621,10 +68536,10 @@
    */
 
 
-  var Status =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var Status = /*#__PURE__*/function (_BaseComponent) {
     _inherits(Status, _BaseComponent);
+
+    var _super = _createSuper(Status);
 
     /** @ignore */
     function Status() {
@@ -68632,7 +68547,7 @@
 
       _classCallCheck(this, Status);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Status).call(this)); // Prepare templates
+      _this = _super.call(this); // Prepare templates
 
       _this._elements = {
         // Fetch or create the content zone element
@@ -68939,10 +68854,10 @@
    @extends {BaseComponent}
    */
 
-  var StepList =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var StepList = /*#__PURE__*/function (_BaseComponent) {
     _inherits(StepList, _BaseComponent);
+
+    var _super = _createSuper(StepList);
 
     /** @ignore */
     function StepList() {
@@ -68950,26 +68865,24 @@
 
       _classCallCheck(this, StepList);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(StepList).call(this));
+      _this = _super.call(this);
 
       _this._delegateEvents({
-        'click > coral-step > [handle="stepMarkerContainer"]': '_onStepClick',
-        'click > coral-step > coral-step-label': '_onStepClick',
-        'click > coral-step': '_onStepClick',
+        'click > coral-step > [handle="link"]': '_onStepClick',
         'capture:focus > coral-step': '_onStepMouseEnter',
-        'capture:mouseenter > coral-step > [handle="stepMarkerContainer"]': '_onStepMouseEnter',
+        'capture:mouseenter > coral-step > [handle="link"]': '_onStepMouseEnter',
         'capture:blur > coral-step': '_onStepMouseLeave',
-        'capture:mouseleave > coral-step > [handle="stepMarkerContainer"]': '_onStepMouseLeave',
-        'key:enter > coral-step': '_onStepKeyboardSelect',
-        'key:space > coral-step': '_onStepKeyboardSelect',
-        'key:home > coral-step': '_onHomeKey',
-        'key:end > coral-step': '_onEndKey',
-        'key:pagedown > coral-step': '_selectNextItem',
-        'key:right > coral-step': '_selectNextItem',
-        'key:down > coral-step': '_selectNextItem',
-        'key:pageup > coral-step': '_selectPreviousItem',
-        'key:left > coral-step': '_selectPreviousItem',
-        'key:up > coral-step': '_selectPreviousItem',
+        'capture:mouseleave > coral-step > [handle="link"]': '_onStepMouseLeave',
+        'key:enter > coral-step > [handle="link"]': '_onStepKeyboardSelect',
+        'key:space > coral-step > [handle="link"]': '_onStepKeyboardSelect',
+        'key:home > coral-step > [handle="link"]': '_onHomeKey',
+        'key:end > coral-step > [handle="link"]': '_onEndKey',
+        'key:pagedown > coral-step > [handle="link"]': '_selectNextItem',
+        'key:right > coral-step > [handle="link"]': '_selectNextItem',
+        'key:down > coral-step > [handle="link"]': '_selectNextItem',
+        'key:pageup > coral-step > [handle="link"]': '_selectPreviousItem',
+        'key:left > coral-step > [handle="link"]': '_selectPreviousItem',
+        'key:up > coral-step > [handle="link"]': '_selectPreviousItem',
         // private
         'coral-step:_selectedchanged': '_onItemSelectedChanged'
       }); // Used for eventing
@@ -68994,13 +68907,7 @@
 
       /** @private */
       value: function _syncItemTabIndex(item) {
-        // when interaction is on, we enable the tabindex so users can tab into the items
-        if (this.interaction === interaction$4.ON) {
-          item.setAttribute('tabindex', item.hasAttribute('selected') ? '0' : '-1');
-        } else {
-          // when off, removing the tabindex allows the component to never get focus
-          item.removeAttribute('tabindex');
-        }
+        item._syncTabIndex(this.interaction === interaction$4.ON);
       }
       /** @private */
 
@@ -69084,6 +68991,21 @@
 
 
           item.classList.toggle('is-complete', index < selectedItemIndex);
+
+          if (!item._elements) {
+            return;
+          } // Set accessibilityState text label
+
+
+          var accessibilityLabel = i18n.get('not completed: ');
+
+          if (index < selectedItemIndex) {
+            accessibilityLabel = i18n.get('completed: ');
+          } else if (index === selectedItemIndex) {
+            accessibilityLabel = i18n.get('current: ');
+          }
+
+          item._elements.accessibilityLabel.innerHTML = accessibilityLabel;
         });
       }
       /** @private */
@@ -69094,9 +69016,11 @@
         if (this.interaction === interaction$4.ON) {
           event.preventDefault();
           event.stopPropagation();
-          var item = event.matchedTarget;
+          var item = event.matchedTarget.closest('coral-step');
 
           this._selectAndFocusItem(item);
+
+          this._trackEvent('click', 'coral-steplist-item', event, item);
         }
       }
       /** @private */
@@ -69107,7 +69031,11 @@
         if (this.interaction === interaction$4.ON) {
           event.preventDefault();
           event.stopPropagation();
-          var item = event.matchedTarget.closest('coral-step');
+          var item = event.matchedTarget.closest('coral-step'); // Disabled item should not get selected
+
+          if (item.disabled) {
+            return;
+          }
 
           this._selectAndFocusItem(item);
 
@@ -69252,8 +69180,12 @@
         } // A11y
 
 
-        this.setAttribute('role', 'tablist');
-        this.setAttribute('aria-multiselectable', 'false'); // Don't trigger events once connected
+        this.setAttribute('role', 'list'); // provide accessibility label for the list
+
+        if (!this.hasAttribute('aria-label') && !this.hasAttribute('aria-labelledby')) {
+          this.setAttribute('aria-label', i18n.get('Step List'));
+        } // Don't trigger events once connected
+
 
         this._preventTriggeringEvents = true;
 
@@ -69342,6 +69274,10 @@
                   continue;
                 }
 
+                if (panel) {
+                  panel.setAttribute('role', 'region');
+                }
+
                 if (step && panel) {
                   // sets the required ids
                   step.id = step.id || commons.getUID();
@@ -69378,12 +69314,45 @@
         return this._size || size$7.LARGE;
       },
       set: function set(value) {
+        var _this3 = this;
+
         value = transform.string(value).toUpperCase();
         this._size = validate.enumeration(size$7)(value) && value || size$7.LARGE;
 
         this._reflectAttribute('size', this._size);
 
         this.classList.toggle("".concat(CLASSNAME$1o, "--small"), this._size === size$7.SMALL);
+
+        if (!this.items.length) {
+          return;
+        } // update aria-label for all children
+
+
+        var _syncItemLabelled = function _syncItemLabelled() {
+          var steps = _this3.items.getAll();
+
+          var stepsCount = steps.length;
+
+          for (var i = 0; i < stepsCount; i++) {
+            var step = steps[i];
+
+            if (step._elements.label.textContent.trim() !== '') {
+              if (_this3.size === size$7.SMALL) {
+                step.setAttribute('labelled', step._elements.label.textContent);
+              } else {
+                step.removeAttribute('labelled');
+              }
+            }
+          }
+        };
+
+        var lastItem = this.items.last();
+
+        if (typeof lastItem._syncTabIndex === 'function') {
+          _syncItemLabelled();
+        } else {
+          commons.ready(lastItem, _syncItemLabelled);
+        }
       }
       /**
        Whether Steps should be interactive or not. When interactive, a Step can be clicked to jump to it.
@@ -69401,6 +69370,8 @@
         return this._interaction || interaction$4.OFF;
       },
       set: function set(value) {
+        var _this4 = this;
+
         value = transform.string(value).toLowerCase();
         this._interaction = validate.enumeration(interaction$4)(value) && value || interaction$4.OFF;
 
@@ -69408,11 +69379,32 @@
 
         var isInteractive = this._interaction === interaction$4.ON;
         this.classList.toggle("".concat(CLASSNAME$1o, "--interactive"), isInteractive);
-        var steps = this.items.getAll();
-        var stepsCount = steps.length; // update tab index for all children
 
-        for (var i = 0; i < stepsCount; i++) {
-          this._syncItemTabIndex(steps[i]);
+        if (!this.items.length) {
+          return;
+        } // update tab index for all children
+
+
+        var _syncItemProps = function _syncItemProps() {
+          var steps = _this4.items.getAll();
+
+          var stepsCount = steps.length;
+
+          for (var i = 0; i < stepsCount; i++) {
+            // update tab index for all children
+            steps[i]._syncTabIndex(isInteractive); //update posin set and total size for all steps
+
+
+            steps[i]._syncSizeAndCurrentIndex(i + 1, stepsCount);
+          }
+        };
+
+        var lastItem = this.items.last();
+
+        if (typeof lastItem._syncTabIndex === 'function') {
+          _syncItemProps();
+        } else {
+          commons.ready(lastItem, _syncItemProps);
         }
       }
     }], [{
@@ -69445,37 +69437,53 @@
 
   var template$U = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
-    var el0 = this["stepMarkerContainer"] = document.createElement("span");
-    el0.className += " _coral-Steplist-markerContainer";
-    el0.setAttribute("handle", "stepMarkerContainer");
+    var el0 = this["link"] = document.createElement("a");
+    el0.className += " _coral-Steplist-link";
+    el0.setAttribute("handle", "link");
     var el1 = document.createTextNode("\n  ");
     el0.appendChild(el1);
-    var el2 = document.createElement("span");
-    el2.className += " _coral-Steplist-marker";
+    var el2 = this["accessibilityLabel"] = document.createElement("span");
+    el2.className += " u-coral-screenReaderOnly _coral-Steplist-accessibilityLabel";
+    el2.setAttribute("handle", "accessibilityLabel");
     el0.appendChild(el2);
-    var el3 = document.createTextNode("\n");
+    var el3 = document.createTextNode("\n  ");
     el0.appendChild(el3);
+    var el4 = this["stepMarkerContainer"] = document.createElement("span");
+    el4.className += " _coral-Steplist-markerContainer";
+    el4.setAttribute("handle", "stepMarkerContainer");
+    el4.setAttribute("role", "img");
+    el4.setAttribute("aria-hidden", "true");
+    var el5 = document.createTextNode("\n    ");
+    el4.appendChild(el5);
+    var el6 = document.createElement("span");
+    el6.className += " _coral-Steplist-marker";
+    el4.appendChild(el6);
+    var el7 = document.createTextNode("\n  ");
+    el4.appendChild(el7);
+    el0.appendChild(el4);
+    var el8 = document.createTextNode("\n  ");
+    el0.appendChild(el8);
+    var el9 = this["overlay"] = document.createElement("coral-tooltip");
+    el9.setAttribute("tracking", "off");
+    el9.setAttribute("smart", "");
+    el9.setAttribute("focusonshow", "off");
+    el9.setAttribute("handle", "overlay");
+    el9.setAttribute("placement", "top");
+    el9.setAttribute("variant", "inspect");
+    el9.setAttribute("interaction", "off");
+    el9.setAttribute("breadthoffset", "1");
+    el0.appendChild(el9);
+    var el10 = document.createTextNode("\n");
+    el0.appendChild(el10);
     frag.appendChild(el0);
-    var el4 = document.createTextNode("\n");
-    frag.appendChild(el4);
-    var el5 = this["overlay"] = document.createElement("coral-tooltip");
-    el5.setAttribute("tracking", "off");
-    el5.setAttribute("smart", "");
-    el5.setAttribute("focusonshow", "off");
-    el5.setAttribute("handle", "overlay");
-    el5.setAttribute("placement", "top");
-    el5.setAttribute("variant", "inspect");
-    el5.setAttribute("interaction", "off");
-    el5.setAttribute("breadthoffset", "1");
-    frag.appendChild(el5);
-    var el6 = document.createTextNode("\n");
-    frag.appendChild(el6);
-    var el7 = this["line"] = document.createElement("span");
-    el7.className += " _coral-Steplist-segment";
-    el7.setAttribute("handle", "line");
-    frag.appendChild(el7);
-    var el8 = document.createTextNode("\n");
-    frag.appendChild(el8);
+    var el11 = document.createTextNode("\n");
+    frag.appendChild(el11);
+    var el12 = this["line"] = document.createElement("span");
+    el12.className += " _coral-Steplist-segment";
+    el12.setAttribute("handle", "line");
+    frag.appendChild(el12);
+    var el13 = document.createTextNode("\n");
+    frag.appendChild(el13);
     return frag;
   };
 
@@ -69488,10 +69496,10 @@
    @extends {BaseComponent}
    */
 
-  var Step =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var Step = /*#__PURE__*/function (_BaseComponent) {
     _inherits(Step, _BaseComponent);
+
+    var _super = _createSuper(Step);
 
     /** @ignore */
     function Step() {
@@ -69499,7 +69507,7 @@
 
       _classCallCheck(this, Step);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Step).call(this)); // Fetch or create content zone
+      _this = _super.call(this); // Fetch or create content zone
 
       _this._elements = {
         label: _this.querySelector('coral-step-label') || document.createElement('coral-step-label')
@@ -69532,6 +69540,51 @@
         label.style.display = '';
       }
     }, {
+      key: "focus",
+      value: function focus() {
+        this._elements.link.focus();
+      }
+    }, {
+      key: "blur",
+      value: function blur() {
+        this._elements.link.blur();
+      }
+      /** @private */
+
+    }, {
+      key: "_syncTabIndex",
+      value: function _syncTabIndex(isInteractive) {
+        // the list item itself should never include a tabindex
+        this.removeAttribute('tabindex'); // when interaction is on, we enable the tabindex so users can tab into the items
+
+        if (isInteractive) {
+          this._elements.link.setAttribute('role', 'link');
+
+          if (this.disabled) {
+            this._elements.link.removeAttribute('tabindex');
+
+            this._elements.link.setAttribute('aria-disabled', true);
+          } else {
+            this._elements.link.removeAttribute('aria-disabled');
+
+            this._elements.link.setAttribute('tabindex', this.selected ? '0' : '-1');
+          }
+        } else {
+          // when off, removing the tabindex allows the component to never get focus
+          this._elements.link.removeAttribute('tabindex');
+
+          this._elements.link.removeAttribute('role');
+        }
+      }
+      /** @private */
+
+    }, {
+      key: "_syncSizeAndCurrentIndex",
+      value: function _syncSizeAndCurrentIndex(currentStep, totalSteps) {
+        this.setAttribute('aria-setsize', totalSteps);
+        this.setAttribute('aria-posinset', currentStep);
+      }
+    }, {
       key: "connectedCallback",
 
       /** @ignore */
@@ -69558,15 +69611,24 @@
 
         this.setAttribute('id', this.id || commons.getUID()); // A11y
 
-        this.setAttribute('role', 'tab');
-        var frag = document.createDocumentFragment(); // Discard the template created tooltip if one is provided by markup
+        this.setAttribute('role', 'listitem');
+        var frag = document.createDocumentFragment(); // Discard the template-created link, accessibilityLabel, stepMarkerContainer, and line if one is provided by markup
+
+        this._elements.link = this.querySelector('[handle="link"]') || this._elements.link;
+        this._elements.accessibilityLabel = this.querySelector('[handle="accessibilityLabel"]') || this._elements.accessibilityLabel;
+        this._elements.stepMarkerContainer = this.querySelector('[handle="stepMarkerContainer"]') || this._elements.stepMarkerContainer;
+        this._elements.line = this.querySelector('[handle="line"]') || this._elements.line; // Discard the template-created tooltip if one is provided by markup
 
         this._elements.overlay = this.querySelector('coral-tooltip') || this._elements.overlay; // Render main template
 
-        frag.appendChild(this._elements.stepMarkerContainer);
+        frag.appendChild(this._elements.link);
+
+        this._elements.link.appendChild(this._elements.stepMarkerContainer);
+
+        this._elements.link.appendChild(this._elements.overlay);
+
         frag.appendChild(this._elements.line);
-        frag.appendChild(this._elements.overlay);
-        var templateHandleNames = ['stepMarkerContainer', 'overlay', 'line'];
+        var templateHandleNames = ['link', 'accessibilityLabel', 'stepMarkerContainer', 'overlay', 'line'];
         var label = this._elements.label; // Remove it so we can process children
 
         if (label.parentNode) {
@@ -69589,7 +69651,14 @@
 
         this.label = label; // Measure hybrid potential
 
-        this._isHybrid();
+        this._isHybrid(); // Sync the tabIndex value an role depending on whether interaction is on.
+
+
+        var stepList = this.parentElement;
+
+        if (stepList) {
+          this._syncTabIndex(stepList.interaction === StepList.interaction.ON);
+        }
       }
       /** @ignore */
 
@@ -69616,7 +69685,8 @@
           tagName: 'coral-step-label',
           insert: function insert(label) {
             label.classList.add('_coral-Steplist-label');
-            this.appendChild(label);
+
+            this._elements.link.insertBefore(label, this._elements.stepMarkerContainer);
           }
         });
       }
@@ -69641,8 +69711,15 @@
         this._reflectAttribute('selected', this._selected);
 
         this.classList.toggle('is-selected', this.selected);
-        this.setAttribute('aria-selected', this.selected);
-        var stepList = this.parentNode;
+        this.removeAttribute('aria-selected');
+
+        if (this.selected) {
+          this._elements.link.setAttribute('aria-current', 'step');
+        } else {
+          this._elements.link.removeAttribute('aria-current');
+        }
+
+        var stepList = this.parentElement;
         var realTarget; // in case the Step is selected, we need to communicate it to the panels
 
         if (this._selected) {
@@ -69668,6 +69745,61 @@
         }
 
         this.trigger('coral-step:_selectedchanged');
+      }
+      /**
+       Whether the item is disabled
+       
+       @type {Boolean}
+       @default false
+       @htmlattribute disabled
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "disabled",
+      get: function get() {
+        return this._disabled || false;
+      },
+      set: function set(value) {
+        this._disabled = transform.booleanAttr(value);
+
+        this._reflectAttribute('disabled', this._disabled);
+
+        this.classList.toggle('is-disabled', this.disabled);
+        var stepList = this.parentElement;
+
+        if (stepList) {
+          this._syncTabIndex(stepList.interaction === StepList.interaction.ON);
+        }
+      }
+      /**
+        Reflects the <code>aria-label</code> attribute to the marker dot for cases where no visible label is provided for the Step.
+        @type {?String}
+        @default ''
+        @htmlattribute labelled
+        @htmlattributereflected
+        @memberof Coral.Step#
+      */
+
+    }, {
+      key: "labelled",
+      get: function get() {
+        return this._labelled || this.getAttribute('labelled') || this._elements.stepMarkerContainer.getAttribute('aria-label');
+      },
+      set: function set(value) {
+        this._labelled = transform.string(value);
+
+        this._reflectAttribute('labelled', this._labelled);
+
+        if (value) {
+          this._elements.stepMarkerContainer.setAttribute('aria-label', this.labelled);
+
+          this._elements.stepMarkerContainer.removeAttribute('aria-hidden');
+        } else {
+          this._elements.stepMarkerContainer.removeAttribute('aria-label');
+
+          this._elements.stepMarkerContainer.setAttribute('aria-hidden', 'true');
+        }
       }
       /**
        The target element that will be selected when this Step is selected. It accepts a CSS selector or a DOM element.
@@ -69720,7 +69852,7 @@
     }], [{
       key: "observedAttributes",
       get: function get() {
-        return _get(_getPrototypeOf(Step), "observedAttributes", this).concat(['selected', 'target']);
+        return _get(_getPrototypeOf(Step), "observedAttributes", this).concat(['selected', 'target', 'disabled', 'labelled']);
       }
     }]);
 
@@ -69750,6 +69882,134 @@
   });
 
   /**
+   * Copyright 2020 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+  var translations$j = {
+    "en-US": {
+      "Step List": "Step List",
+      "completed: ": "completed: ",
+      "current: ": "current: ",
+      "not completed: ": "not completed: "
+    },
+    "de-DE": {
+      "Step List": "Schrittliste",
+      "completed: ": "abgeschlossen: ",
+      "current: ": "aktuell: ",
+      "not completed: ": "nicht abgeschlossen: "
+    },
+    "fr-FR": {
+      "Step List": "Liste des étapes",
+      "completed: ": "terminé : ",
+      "current: ": "actuel : ",
+      "not completed: ": "non terminé : "
+    },
+    "it-IT": {
+      "Step List": "Elenco passi",
+      "completed: ": "completato: ",
+      "current: ": "corrente: ",
+      "not completed: ": "non completato: "
+    },
+    "ja-JP": {
+      "Step List": "手順リスト",
+      "completed: ": "完了: ",
+      "current: ": "現在: ",
+      "not completed: ": "未完了: "
+    },
+    "es-ES": {
+      "Step List": "Lista de pasos",
+      "completed: ": "completado: ",
+      "current: ": "actual: ",
+      "not completed: ": "no completado: "
+    },
+    "ko-KR": {
+      "Step List": "단계 목록",
+      "completed: ": "완료됨: ",
+      "current: ": "현재: ",
+      "not completed: ": "미완료: "
+    },
+    "zh-CN": {
+      "Step List": "步骤列表",
+      "completed: ": "已完成: ",
+      "current: ": "当前: ",
+      "not completed: ": "未完成: "
+    },
+    "zh-TW": {
+      "Step List": "步驟清單",
+      "completed: ": "已完成: ",
+      "current: ": "目前: ",
+      "not completed: ": "未完成: "
+    },
+    "pt-BR": {
+      "Step List": "Lista de passos",
+      "completed: ": "concluído: ",
+      "current: ": "atual: ",
+      "not completed: ": "não concluído: "
+    },
+    "nl-NL": {
+      "Step List": "Stappenlijst",
+      "completed: ": "voltooid: ",
+      "current: ": "huidige: ",
+      "not completed: ": "niet voltooid: "
+    },
+    "da-DK": {
+      "Step List": "Trin liste",
+      "completed: ": "Afsluttet: ",
+      "current: ": "aktuelt: ",
+      "not completed: ": "Ikke afsluttet: "
+    },
+    "fi-FI": {
+      "Step List": "Vaihe luettelo",
+      "completed: ": "Valmis: ",
+      "current: ": "nykyinen: ",
+      "not completed: ": "Ei valmis: "
+    },
+    "nb-NO": {
+      "Step List": "Trinn liste",
+      "completed: ": "fullført: ",
+      "current: ": "gjeldende: ",
+      "not completed: ": "ikke fullført: "
+    },
+    "sv-SE": {
+      "Step List": "Steg lista",
+      "completed: ": "slutförd: ",
+      "current: ": "aktuell: ",
+      "not completed: ": "inte slutförd: "
+    },
+    "cs-CZ": {
+      "Step List": "Seznam kroků",
+      "completed: ": "dokončeno: ",
+      "current: ": "aktuální: ",
+      "not completed: ": "nedokončeno: "
+    },
+    "pl-PL": {
+      "Step List": "Lista kroków",
+      "completed: ": "zakończone: ",
+      "current: ": "bieżący: ",
+      "not completed: ": "nieukończone: "
+    },
+    "ru-RU": {
+      "Step List": "Список шагов",
+      "completed: ": "завершено: ",
+      "current: ": "текущий: ",
+      "not completed: ": "не завершено: "
+    },
+    "tr-TR": {
+      "Step List": "Adım listesi",
+      "completed: ": "tamamlandı: ",
+      "current: ": "geçerli: ",
+      "not completed: ": "tamamlanmadı: "
+    }
+  };
+
+  /**
    * Copyright 2019 Adobe. All rights reserved.
    * This file is licensed to you under the Apache License, Version 2.0 (the "License");
    * you may not use this file except in compliance with the License. You may obtain a copy
@@ -69760,6 +70020,10 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
+
+  commons.extend(strings, {
+    'coral-component-steplist': translations$j
+  }); // Expose component on the Coral namespace
 
   commons._define('coral-step', Step);
 
@@ -69778,7 +70042,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$j = {
+  var translations$k = {
     "en-US": {
       "Select": "Select"
     },
@@ -69883,10 +70147,10 @@
    @extends {BaseFormField}
    */
 
-  var Switch =
-  /*#__PURE__*/
-  function (_BaseFormField) {
+  var Switch = /*#__PURE__*/function (_BaseFormField) {
     _inherits(Switch, _BaseFormField);
+
+    var _super = _createSuper(Switch);
 
     /** @ignore */
     function Switch() {
@@ -69894,7 +70158,7 @@
 
       _classCallCheck(this, Switch);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Switch).call(this)); // Make sure the events from the FormField are attached
+      _this = _super.call(this); // Make sure the events from the FormField are attached
 
       _this._delegateEvents(commons.extend(_this._events, {
         'capture:focus ._coral-ToggleSwitch-input': '_onFocus',
@@ -70245,7 +70509,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-switch': translations$j
+    'coral-component-switch': translations$k
   }); // Expose component on the Coral namespace
 
   commons._define('coral-switch', Switch);
@@ -70263,7 +70527,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$k = {
+  var translations$l = {
     "en-US": {
       "Select": "Select",
       "Select All": "Select All",
@@ -70661,15 +70925,15 @@
    @extends {BaseComponent}
    */
 
-  var TableColumn =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var TableColumn = /*#__PURE__*/function (_BaseComponent) {
     _inherits(TableColumn, _BaseComponent);
+
+    var _super = _createSuper(TableColumn);
 
     function TableColumn() {
       _classCallCheck(this, TableColumn);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(TableColumn).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(TableColumn, [{
@@ -71031,15 +71295,15 @@
    @extends {BaseComponent}
    */
 
-  var TableCell =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var TableCell = /*#__PURE__*/function (_BaseComponent) {
     _inherits(TableCell, _BaseComponent);
+
+    var _super = _createSuper(TableCell);
 
     function TableCell() {
       _classCallCheck(this, TableCell);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(TableCell).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(TableCell, [{
@@ -71244,10 +71508,10 @@
    @extends {BaseComponent}
    */
 
-  var TableRow =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var TableRow = /*#__PURE__*/function (_BaseComponent) {
     _inherits(TableRow, _BaseComponent);
+
+    var _super = _createSuper(TableRow);
 
     /** @ignore */
     function TableRow() {
@@ -71255,7 +71519,7 @@
 
       _classCallCheck(this, TableRow);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(TableRow).call(this)); // Templates
+      _this = _super.call(this); // Templates
 
       _this._elements = {};
       template$W.call(_this._elements, {
@@ -71846,110 +72110,109 @@
 
 
   var BaseTableSection = function BaseTableSection(superClass) {
-    return (
-      /*#__PURE__*/
-      function (_superClass) {
-        _inherits(_class, _superClass);
+    return /*#__PURE__*/function (_superClass) {
+      _inherits(_class, _superClass);
+
+      var _super = _createSuper(_class);
+
+      /** @ignore */
+      function _class() {
+        var _this;
+
+        _classCallCheck(this, _class);
+
+        _this = _super.call(this);
+        _this._tagName = _this.getAttribute('is').toLowerCase();
+        return _this;
+      }
+      /**
+       The table section divider. See {@link TableSectionDividerEnum}.
+       
+       @type {String}
+       @default TableSectionDividerEnum.ROW
+       @htmlattributereflected
+       @htmlattribute divider
+       */
+
+
+      _createClass(_class, [{
+        key: "_toggleObserver",
+        value: function _toggleObserver(enable) {
+          this._observer = this._observer || new MutationObserver(this._handleMutations.bind(this));
+
+          if (enable) {
+            // Initialize content MO
+            this._observer.observe(this, {
+              childList: true,
+              subtree: true
+            });
+          } else {
+            this._observer.disconnect();
+          }
+        }
+      }, {
+        key: "_handleMutations",
+        value: function _handleMutations(mutations) {
+          var _this2 = this;
+
+          mutations.forEach(function (mutation) {
+            _this2.trigger("".concat(_this2._tagName, ":_contentchanged"), {
+              addedNodes: mutation.addedNodes,
+              removedNodes: mutation.removedNodes
+            });
+          });
+        }
+        /** @ignore */
+
+      }, {
+        key: "attributeChangedCallback",
 
         /** @ignore */
-        function _class() {
-          var _this;
-
-          _classCallCheck(this, _class);
-
-          _this = _possibleConstructorReturn(this, _getPrototypeOf(_class).call(this));
-          _this._tagName = _this.getAttribute('is').toLowerCase();
-          return _this;
+        value: function attributeChangedCallback(name, oldValue, value) {
+          if (name === '_observe') {
+            this._toggleObserver(value !== 'off');
+          } else {
+            _get(_getPrototypeOf(_class.prototype), "attributeChangedCallback", this).call(this, name, oldValue, value);
+          }
         }
-        /**
-         The table section divider. See {@link TableSectionDividerEnum}.
-         
-         @type {String}
-         @default TableSectionDividerEnum.ROW
-         @htmlattributereflected
-         @htmlattribute divider
-         */
+        /** @ignore */
+
+      }, {
+        key: "render",
+        value: function render() {
+          _get(_getPrototypeOf(_class.prototype), "render", this).call(this); // Default reflected attributes
 
 
-        _createClass(_class, [{
-          key: "_toggleObserver",
-          value: function _toggleObserver(enable) {
-            this._observer = this._observer || new MutationObserver(this._handleMutations.bind(this));
-
-            if (enable) {
-              // Initialize content MO
-              this._observer.observe(this, {
-                childList: true,
-                subtree: true
-              });
-            } else {
-              this._observer.disconnect();
-            }
+          if (!this._divider) {
+            this.divider = divider.ROW;
           }
-        }, {
-          key: "_handleMutations",
-          value: function _handleMutations(mutations) {
-            var _this2 = this;
+        }
+      }, {
+        key: "divider",
+        get: function get() {
+          return this._divider || divider.ROW;
+        },
+        set: function set(value) {
+          var _this$classList;
 
-            mutations.forEach(function (mutation) {
-              _this2.trigger("".concat(_this2._tagName, ":_contentchanged"), {
-                addedNodes: mutation.addedNodes,
-                removedNodes: mutation.removedNodes
-              });
-            });
-          }
-          /** @ignore */
+          value = transform.string(value).toLowerCase();
+          this._divider = validate.enumeration(divider)(value) && value || divider.ROW;
 
-        }, {
-          key: "attributeChangedCallback",
+          this._reflectAttribute('divider', this._divider);
 
-          /** @ignore */
-          value: function attributeChangedCallback(name, oldValue, value) {
-            if (name === '_observe') {
-              this._toggleObserver(value !== 'off');
-            } else {
-              _get(_getPrototypeOf(_class.prototype), "attributeChangedCallback", this).call(this, name, oldValue, value);
-            }
-          }
-          /** @ignore */
+          (_this$classList = this.classList).remove.apply(_this$classList, ALL_DIVIDER_CLASSES);
 
-        }, {
-          key: "render",
-          value: function render() {
-            _get(_getPrototypeOf(_class.prototype), "render", this).call(this); // Default reflected attributes
+          this.classList.add("_coral-Table-divider--".concat(this.divider));
+        }
+      }], [{
+        key: "observedAttributes",
+        get: function get() {
+          return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['divider', '_observe']);
+        }
+      }]);
 
-
-            if (!this._divider) {
-              this.divider = divider.ROW;
-            }
-          }
-        }, {
-          key: "divider",
-          get: function get() {
-            return this._divider || divider.ROW;
-          },
-          set: function set(value) {
-            var _this$classList;
-
-            value = transform.string(value).toLowerCase();
-            this._divider = validate.enumeration(divider)(value) && value || divider.ROW;
-
-            this._reflectAttribute('divider', this._divider);
-
-            (_this$classList = this.classList).remove.apply(_this$classList, ALL_DIVIDER_CLASSES);
-
-            this.classList.add("_coral-Table-divider--".concat(this.divider));
-          }
-        }], [{
-          key: "observedAttributes",
-          get: function get() {
-            return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['divider', '_observe']);
-          }
-        }]);
-
-        return _class;
-      }(superClass)
-    );
+      return _class;
+    }(superClass);
   };
 
   var CLASSNAME$1u = '_coral-Table-head';
@@ -71963,10 +72226,10 @@
    @extends {BaseTableSection}
    */
 
-  var TableHead =
-  /*#__PURE__*/
-  function (_BaseTableSection) {
+  var TableHead = /*#__PURE__*/function (_BaseTableSection) {
     _inherits(TableHead, _BaseTableSection);
+
+    var _super = _createSuper(TableHead);
 
     /** @ignore */
     function TableHead() {
@@ -71974,7 +72237,7 @@
 
       _classCallCheck(this, TableHead);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(TableHead).call(this));
+      _this = _super.call(this);
 
       _this._toggleObserver(true);
 
@@ -72056,10 +72319,10 @@
    @extends {BaseTableSection}
    */
 
-  var TableBody =
-  /*#__PURE__*/
-  function (_BaseTableSection) {
+  var TableBody = /*#__PURE__*/function (_BaseTableSection) {
     _inherits(TableBody, _BaseTableSection);
+
+    var _super = _createSuper(TableBody);
 
     /** @ignore */
     function TableBody() {
@@ -72067,7 +72330,7 @@
 
       _classCallCheck(this, TableBody);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(TableBody).call(this));
+      _this = _super.call(this);
 
       _this._toggleObserver(true);
 
@@ -72119,15 +72382,15 @@
    @extends {BaseTableSection}
    */
 
-  var TableFoot =
-  /*#__PURE__*/
-  function (_BaseTableSection) {
+  var TableFoot = /*#__PURE__*/function (_BaseTableSection) {
     _inherits(TableFoot, _BaseTableSection);
+
+    var _super = _createSuper(TableFoot);
 
     function TableFoot() {
       _classCallCheck(this, TableFoot);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(TableFoot).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(TableFoot, [{
@@ -72237,10 +72500,10 @@
    @extends {BaseComponent}
    */
 
-  var Table =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var Table = /*#__PURE__*/function (_BaseComponent) {
     _inherits(Table, _BaseComponent);
+
+    var _super = _createSuper(Table);
 
     /** @ignore */
     function Table() {
@@ -72248,7 +72511,7 @@
 
       _classCallCheck(this, Table);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Table).call(this)); // Templates
+      _this = _super.call(this); // Templates
 
       _this._elements = {
         head: _this.querySelector('thead[is="coral-table-head"]') || new TableHead(),
@@ -75101,10 +75364,10 @@
    @extends {BaseComponent}
    */
 
-  var TableHeaderCell =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var TableHeaderCell = /*#__PURE__*/function (_BaseComponent) {
     _inherits(TableHeaderCell, _BaseComponent);
+
+    var _super = _createSuper(TableHeaderCell);
 
     /** @ignore */
     function TableHeaderCell() {
@@ -75112,7 +75375,7 @@
 
       _classCallCheck(this, TableHeaderCell);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(TableHeaderCell).call(this)); // Templates
+      _this = _super.call(this); // Templates
 
       _this._elements = {
         content: _this.querySelector('coral-table-headercell-content') || document.createElement('coral-table-headercell-content')
@@ -75231,7 +75494,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-table': translations$k
+    'coral-component-table': translations$l
   }); // Expose component on the Coral namespace
 
   commons._define('coral-table-column', TableColumn, {
@@ -75334,18 +75597,18 @@
    @extends {BaseComponent}
    */
 
-  var Tab =
-  /*#__PURE__*/
-  function (_BaseLabellable) {
+  var Tab = /*#__PURE__*/function (_BaseLabellable) {
     _inherits(Tab, _BaseLabellable);
+
+    var _super = _createSuper(Tab);
 
     /** @ignore */
     function Tab() {
-      var _this;
+      var _thisSuper, _this;
 
       _classCallCheck(this, Tab);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Tab).call(this)); // Templates
+      _this = _super.call(this); // Templates
 
       _this._elements = {
         label: _this.querySelector('coral-tab-label') || document.createElement('coral-tab-label'),
@@ -75361,7 +75624,7 @@
           icon.size = _this._elements.label.textContent.trim().length ? Icon.size.EXTRA_SMALL : Icon.size.SMALL;
         }
 
-        _get(_getPrototypeOf(Tab.prototype), "_toggleIconAriaHidden", _assertThisInitialized(_this)).call(_assertThisInitialized(_this));
+        _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(Tab.prototype)), "_toggleIconAriaHidden", _thisSuper).call(_thisSuper);
 
         _this.trigger('coral-tab:_sizechanged');
       }); // Watch for changes to the label element
@@ -75771,10 +76034,10 @@
    @extends {BaseComponent}
    */
 
-  var TabList =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var TabList = /*#__PURE__*/function (_BaseComponent) {
     _inherits(TabList, _BaseComponent);
+
+    var _super = _createSuper(TabList);
 
     /** @ignore */
     function TabList() {
@@ -75782,7 +76045,7 @@
 
       _classCallCheck(this, TabList);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(TabList).call(this)); // Templates
+      _this = _super.call(this); // Templates
 
       _this._elements = {};
       template$Z.call(_this._elements); // Attach events
@@ -76329,10 +76592,10 @@
    @extends {BaseComponent}
    */
 
-  var TabView =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var TabView = /*#__PURE__*/function (_BaseComponent) {
     _inherits(TabView, _BaseComponent);
+
+    var _super = _createSuper(TabView);
 
     /** @ignore */
     function TabView() {
@@ -76340,7 +76603,7 @@
 
       _classCallCheck(this, TabView);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(TabView).call(this)); // Prepare templates
+      _this = _super.call(this); // Prepare templates
 
       _this._elements = {
         // Fetch or create the content zone elements
@@ -76700,10 +76963,10 @@
    */
 
 
-  var Toast =
-  /*#__PURE__*/
-  function (_BaseOverlay) {
+  var Toast = /*#__PURE__*/function (_BaseOverlay) {
     _inherits(Toast, _BaseOverlay);
+
+    var _super = _createSuper(Toast);
 
     /** @ignore */
     function Toast() {
@@ -76711,7 +76974,7 @@
 
       _classCallCheck(this, Toast);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Toast).call(this)); // Debounce wait time in milliseconds
+      _this = _super.call(this); // Debounce wait time in milliseconds
 
       _this._wait = 50; // Override defaults from Overlay
 
@@ -77298,10 +77561,10 @@
    @extends {BaseComponent}
    */
 
-  var TreeItem =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var TreeItem = /*#__PURE__*/function (_BaseComponent) {
     _inherits(TreeItem, _BaseComponent);
+
+    var _super = _createSuper(TreeItem);
 
     /** @ignore */
     function TreeItem() {
@@ -77309,7 +77572,7 @@
 
       _classCallCheck(this, TreeItem);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(TreeItem).call(this)); // Prepare templates
+      _this = _super.call(this); // Prepare templates
 
       _this._elements = {
         // Create or fetch the content zones
@@ -77776,10 +78039,10 @@
    @extends {BaseComponent}
    */
 
-  var Tree =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var Tree = /*#__PURE__*/function (_BaseComponent) {
     _inherits(Tree, _BaseComponent);
+
+    var _super = _createSuper(Tree);
 
     /** @ignore */
     function Tree() {
@@ -77787,7 +78050,7 @@
 
       _classCallCheck(this, Tree);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Tree).call(this)); // Attach events
+      _this = _super.call(this); // Attach events
 
       _this._delegateEvents({
         'click ._coral-TreeView-itemLink': '_onItemClick',
@@ -78460,10 +78723,10 @@
    @extends {BaseComponent}
    */
 
-  var WizardView =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var WizardView = /*#__PURE__*/function (_BaseComponent) {
     _inherits(WizardView, _BaseComponent);
+
+    var _super = _createSuper(WizardView);
 
     /** @ignore */
     function WizardView() {
@@ -78471,7 +78734,7 @@
 
       _classCallCheck(this, WizardView);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(WizardView).call(this));
+      _this = _super.call(this);
 
       _this._delegateEvents({
         'capture:click coral-steplist[coral-wizardview-steplist] > coral-step': '_onStepClick',
@@ -78871,7 +79134,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.7.2";
+  var version$1 = "4.8.0";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
@@ -78917,8 +79180,8 @@
   	"resize-observer-polyfill": "1.5.1"
   };
   var devDependencies = {
-  	"@babel/core": "^7.8.3",
-  	"@babel/preset-env": "^7.8.3",
+  	"@babel/core": "^7.10.2",
+  	"@babel/preset-env": "^7.10.2",
   	"babel-eslint": "^10.0.3",
   	browserslist: "^4.8.5",
   	chai: "^4.0.2",
@@ -78940,7 +79203,7 @@
   	"eslint-plugin-standard": "^4.0.1",
   	"fancy-log": "^1.3.3",
   	"fs-extra": "^7.0.1",
-  	"glob-all": "^3.1.0",
+  	"glob-all": "^3.2.1",
   	gulp: "^4.0.2",
   	"gulp-axe-webdriver": "^3.1.3",
   	"gulp-bump": "^3.1.3",
@@ -78955,19 +79218,19 @@
   	"gulp-postcss": "^8.0.0",
   	"gulp-rename": "^1.2.2",
   	"gulp-stylus": "^2.6.0",
-  	"http-server": "^0.11.1",
+  	"http-server": "^0.12.3",
   	inquirer: "^6.5.2",
-  	karma: "^4.4.1",
+  	karma: "^5.0.9",
   	"karma-chrome-launcher": "^2.2.0",
   	"karma-coverage-istanbul-reporter": "^2.1.1",
   	"karma-firefox-launcher": "^1.3.0",
   	"karma-html2js-preprocessor": "^1.1.0",
-  	"karma-mocha": "^1.3.0",
+  	"karma-mocha": "^2.0.1",
   	"karma-mocha-reporter": "^2.2.5",
   	"karma-rollup-preprocessor": "^7.0.3",
   	"karma-sinon-chai": "^2.0.2",
   	minimist: "^1.2.0",
-  	mocha: "^6.2.2",
+  	mocha: "^7.2.0",
   	moment: "^2.24.0",
   	"plugin-error": "^1.0.1",
   	"postcss-css-variables": "^0.13.0",
@@ -97181,10 +97444,10 @@
    @extends {BaseComponent}
    */
 
-  var Playground =
-  /*#__PURE__*/
-  function (_BaseComponent) {
+  var Playground = /*#__PURE__*/function (_BaseComponent) {
     _inherits(Playground, _BaseComponent);
+
+    var _super = _createSuper(Playground);
 
     /**
      Takes an optional configuration object for initialization.
@@ -97198,7 +97461,7 @@
 
       _classCallCheck(this, Playground);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Playground).call(this));
+      _this = _super.call(this);
       _this._config = config; // Template
 
       _this._elements = {};

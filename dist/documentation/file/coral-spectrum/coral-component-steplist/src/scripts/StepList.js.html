@@ -433,7 +433,7 @@
 
 import {BaseComponent} from &apos;../../../coral-base-component&apos;;
 import {SelectableCollection} from &apos;../../../coral-collection&apos;;
-import {transform, validate, commons} from &apos;../../../coral-utils&apos;;
+import {transform, validate, commons, i18n} from &apos;../../../coral-utils&apos;;
 import getTarget from &apos;./getTarget&apos;;
 
 /**
@@ -484,25 +484,23 @@ class StepList extends BaseComponent(HTMLElement) {
     super();
     
     this._delegateEvents({
-      &apos;click &gt; coral-step &gt; [handle=&quot;stepMarkerContainer&quot;]&apos;: &apos;_onStepClick&apos;,
-      &apos;click &gt; coral-step &gt; coral-step-label&apos;: &apos;_onStepClick&apos;,
-      &apos;click &gt; coral-step&apos;: &apos;_onStepClick&apos;,
+      &apos;click &gt; coral-step &gt; [handle=&quot;link&quot;]&apos;: &apos;_onStepClick&apos;,
   
       &apos;capture:focus &gt; coral-step&apos;: &apos;_onStepMouseEnter&apos;,
-      &apos;capture:mouseenter &gt; coral-step &gt; [handle=&quot;stepMarkerContainer&quot;]&apos;: &apos;_onStepMouseEnter&apos;,
+      &apos;capture:mouseenter &gt; coral-step &gt; [handle=&quot;link&quot;]&apos;: &apos;_onStepMouseEnter&apos;,
       &apos;capture:blur &gt; coral-step&apos;: &apos;_onStepMouseLeave&apos;,
-      &apos;capture:mouseleave &gt; coral-step &gt; [handle=&quot;stepMarkerContainer&quot;]&apos;: &apos;_onStepMouseLeave&apos;,
+      &apos;capture:mouseleave &gt; coral-step &gt; [handle=&quot;link&quot;]&apos;: &apos;_onStepMouseLeave&apos;,
   
-      &apos;key:enter &gt; coral-step&apos;: &apos;_onStepKeyboardSelect&apos;,
-      &apos;key:space &gt; coral-step&apos;: &apos;_onStepKeyboardSelect&apos;,
-      &apos;key:home &gt; coral-step&apos;: &apos;_onHomeKey&apos;,
-      &apos;key:end &gt; coral-step&apos;: &apos;_onEndKey&apos;,
-      &apos;key:pagedown &gt; coral-step&apos;: &apos;_selectNextItem&apos;,
-      &apos;key:right &gt; coral-step&apos;: &apos;_selectNextItem&apos;,
-      &apos;key:down &gt; coral-step&apos;: &apos;_selectNextItem&apos;,
-      &apos;key:pageup &gt; coral-step&apos;: &apos;_selectPreviousItem&apos;,
-      &apos;key:left &gt; coral-step&apos;: &apos;_selectPreviousItem&apos;,
-      &apos;key:up &gt; coral-step&apos;: &apos;_selectPreviousItem&apos;,
+      &apos;key:enter &gt; coral-step &gt; [handle=&quot;link&quot;]&apos;: &apos;_onStepKeyboardSelect&apos;,
+      &apos;key:space &gt; coral-step &gt; [handle=&quot;link&quot;]&apos;: &apos;_onStepKeyboardSelect&apos;,
+      &apos;key:home &gt; coral-step &gt; [handle=&quot;link&quot;]&apos;: &apos;_onHomeKey&apos;,
+      &apos;key:end &gt; coral-step &gt; [handle=&quot;link&quot;]&apos;: &apos;_onEndKey&apos;,
+      &apos;key:pagedown &gt; coral-step &gt; [handle=&quot;link&quot;]&apos;: &apos;_selectNextItem&apos;,
+      &apos;key:right &gt; coral-step &gt; [handle=&quot;link&quot;]&apos;: &apos;_selectNextItem&apos;,
+      &apos;key:down &gt; coral-step &gt; [handle=&quot;link&quot;]&apos;: &apos;_selectNextItem&apos;,
+      &apos;key:pageup &gt; coral-step &gt; [handle=&quot;link&quot;]&apos;: &apos;_selectPreviousItem&apos;,
+      &apos;key:left &gt; coral-step &gt; [handle=&quot;link&quot;]&apos;: &apos;_selectPreviousItem&apos;,
+      &apos;key:up &gt; coral-step &gt; [handle=&quot;link&quot;]&apos;: &apos;_selectPreviousItem&apos;,
       
       // private
       &apos;coral-step:_selectedchanged&apos;: &apos;_onItemSelectedChanged&apos;
@@ -584,6 +582,10 @@ class StepList extends BaseComponent(HTMLElement) {
             if (step &amp;&amp; step.target &amp;&amp; step.target.trim() !== &apos;&apos;) {
               continue;
             }
+
+            if (panel) {
+              panel.setAttribute(&apos;role&apos;, &apos;region&apos;);
+            }
       
             if (step &amp;&amp; panel) {
               // sets the required ids
@@ -627,6 +629,37 @@ class StepList extends BaseComponent(HTMLElement) {
     this._reflectAttribute(&apos;size&apos;, this._size);
   
     this.classList.toggle(`${CLASSNAME}--small`, this._size === size.SMALL);
+
+    if (!this.items.length) {
+      return;
+    }
+
+    // update aria-label for all children
+    const _syncItemLabelled = () =&gt; {
+      const steps = this.items.getAll();
+      const stepsCount = steps.length;
+
+      for (let i = 0; i &lt; stepsCount; i++) {
+        const step = steps[i];
+        if (step._elements.label.textContent.trim() !== &apos;&apos;) {
+          if (this.size === size.SMALL) {
+            step.setAttribute(&apos;labelled&apos;, step._elements.label.textContent);
+          }
+          else {
+            step.removeAttribute(&apos;labelled&apos;);
+          }
+        }
+      }
+    };
+
+    const lastItem = this.items.last();
+
+    if (typeof lastItem._syncTabIndex === &apos;function&apos;) {
+      _syncItemLabelled();
+    }
+    else {
+      commons.ready(lastItem, _syncItemLabelled);
+    }
   }
   
   /**
@@ -648,26 +681,37 @@ class StepList extends BaseComponent(HTMLElement) {
   
     const isInteractive = this._interaction === interaction.ON;
     this.classList.toggle(`${CLASSNAME}--interactive`, isInteractive);
-  
-    const steps = this.items.getAll();
-    const stepsCount = steps.length;
+
+    if (!this.items.length) {
+      return;
+    }
   
     // update tab index for all children
-    for (let i = 0; i &lt; stepsCount; i++) {
-      this._syncItemTabIndex(steps[i]);
+    const _syncItemProps = () =&gt; {
+      const steps = this.items.getAll();
+      const stepsCount = steps.length;
+
+      for (let i = 0; i &lt; stepsCount; i++) {
+        // update tab index for all children
+        steps[i]._syncTabIndex(isInteractive);
+        //update posin set and total size for all steps
+        steps[i]._syncSizeAndCurrentIndex(i + 1, stepsCount);
+      }
+    };
+
+    const lastItem = this.items.last();
+
+    if (typeof lastItem._syncTabIndex === &apos;function&apos;) {
+      _syncItemProps();
+    }
+    else {
+      commons.ready(lastItem, _syncItemProps);
     }
   }
   
   /** @private */
   _syncItemTabIndex(item) {
-    // when interaction is on, we enable the tabindex so users can tab into the items
-    if (this.interaction === interaction.ON) {
-      item.setAttribute(&apos;tabindex&apos;, item.hasAttribute(&apos;selected&apos;) ? &apos;0&apos; : &apos;-1&apos;);
-    }
-    else {
-      // when off, removing the tabindex allows the component to never get focus
-      item.removeAttribute(&apos;tabindex&apos;);
-    }
+    item._syncTabIndex(this.interaction === interaction.ON);
   }
   
   /** @private */
@@ -745,6 +789,22 @@ class StepList extends BaseComponent(HTMLElement) {
     
       // Add/remove classes based on index
       item.classList.toggle(&apos;is-complete&apos;, index &lt; selectedItemIndex);
+
+      if (!item._elements) {
+        return;
+      }
+
+      // Set accessibilityState text label
+      let accessibilityLabel = i18n.get(&apos;not completed: &apos;);
+
+      if (index &lt; selectedItemIndex) {
+        accessibilityLabel = i18n.get(&apos;completed: &apos;);
+      }
+      else if (index === selectedItemIndex) {
+        accessibilityLabel = i18n.get(&apos;current: &apos;);
+      }
+
+      item._elements.accessibilityLabel.innerHTML = accessibilityLabel;
     });
   }
   
@@ -754,8 +814,10 @@ class StepList extends BaseComponent(HTMLElement) {
       event.preventDefault();
       event.stopPropagation();
       
-      const item = event.matchedTarget;
+      const item = event.matchedTarget.closest(&apos;coral-step&apos;);
       this._selectAndFocusItem(item);
+
+      this._trackEvent(&apos;click&apos;, &apos;coral-steplist-item&apos;, event, item);
     }
   }
   
@@ -766,6 +828,12 @@ class StepList extends BaseComponent(HTMLElement) {
       event.stopPropagation();
       
       const item = event.matchedTarget.closest(&apos;coral-step&apos;);
+
+      // Disabled item should not get selected
+      if (item.disabled) {
+        return;
+      }
+
       this._selectAndFocusItem(item);
   
       this._trackEvent(&apos;click&apos;, &apos;coral-steplist-item&apos;, event, item);
@@ -776,7 +844,7 @@ class StepList extends BaseComponent(HTMLElement) {
   _onStepMouseEnter() {
     if (this.size === size.SMALL) {
       const step = event.target.closest(&apos;coral-step&apos;);
-      
+
       // we only show the tooltip if we have a label to show
       if (step._elements.label.innerHTML.trim() !== &apos;&apos;) {
         step._elements.overlay.content.innerHTML = step._elements.label.innerHTML;
@@ -893,8 +961,12 @@ class StepList extends BaseComponent(HTMLElement) {
     if (!this._size) { this.size = size.LARGE; }
     
     // A11y
-    this.setAttribute(&apos;role&apos;, &apos;tablist&apos;);
-    this.setAttribute(&apos;aria-multiselectable&apos;, &apos;false&apos;);
+    this.setAttribute(&apos;role&apos;, &apos;list&apos;);
+
+    // provide accessibility label for the list
+    if (!this.hasAttribute(&apos;aria-label&apos;) &amp;&amp; !this.hasAttribute(&apos;aria-labelledby&apos;)) {
+      this.setAttribute(&apos;aria-label&apos;, i18n.get(&apos;Step List&apos;));
+    }
   
     // Don&apos;t trigger events once connected
     this._preventTriggeringEvents = true;

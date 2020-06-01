@@ -573,11 +573,9 @@ class Tag extends BaseComponent(HTMLElement) {
     
     // Attach events
     this._delegateEvents({
-      &apos;click&apos;: &apos;_onClick&apos;,
+      &apos;click [handle=&quot;button&quot;]&apos;: &apos;_onRemoveButtonClick&apos;,
       &apos;key:backspace&apos;: &apos;_onRemoveButtonClick&apos;,
-      &apos;key:delete&apos;: &apos;_onRemoveButtonClick&apos;,
-      &apos;key:space&apos;: &apos;_onRemoveButtonClick&apos;,
-      &apos;mousedown&apos;: &apos;_onMouseDown&apos;
+      &apos;key:delete&apos;: &apos;_onRemoveButtonClick&apos;
     });
     
     // Prepare templates
@@ -627,12 +625,13 @@ class Tag extends BaseComponent(HTMLElement) {
     // Only tags are closable
     this._toggleTagVariant();
     
-    if (this._closable &amp;&amp; !this.contains(this._elements.button)) {
-      // Insert the button if it was not added to the DOM
-      this.appendChild(this._elements.button);
+    if (this._closable &amp;&amp; !this.contains(this._elements.buttonCell)) {
+      // Insert the buttonCell if it was not added to the DOM
+      this.appendChild(this._elements.buttonCell);
     }
     
     this._elements.button.hidden = !this._closable;
+    this._elements.buttonCell.hidden = !this._closable;
     this._updateAriaLabel();
   }
   
@@ -779,7 +778,7 @@ class Tag extends BaseComponent(HTMLElement) {
   /** @private */
   _onRemoveButtonClick(event) {
     event.preventDefault();
-    if (this.closable) {
+    if (this.closable &amp;&amp; !this._elements.button.disabled) {
       event.stopPropagation();
       this.focus();
       
@@ -792,54 +791,6 @@ class Tag extends BaseComponent(HTMLElement) {
     }
   }
   
-  /** @private */
-  _onClick(event) {
-    if (this._elements.button.disabled) {
-      return;
-    }
-    
-    // If the click event originated from a screen reader&apos;s event sequence or the remove button, trigger the removal
-    // of the tag.
-    if (event.target === this._elements.button ||
-      this._elements.button.contains(event.target) ||
-      bullsEye !== null ||
-      /* Detects virtual cursor or Narrator on Windows */
-      event.clientX &lt;= 0 &amp;&amp; event.clientY &lt;= 0) {
-      this._onRemoveButtonClick(event);
-      bullsEye = null;
-    }
-  }
-  
-  /** @private */
-  _onMouseDown(event) {
-    // Determine the center point of the event target
-    const offsetCenter = getOffsetCenter(event.target);
-    // This Tag will be the event.target when mousedown originates from a screen reader.
-    if (event.target === this &amp;&amp;
-      Math.abs(event.pageX - offsetCenter.x) &lt; 2 &amp;&amp;
-      Math.abs(event.pageY - offsetCenter.y) &lt; 2) {
-      // If click is close enough to the center, store the coordinates.
-      bullsEye = {
-        x: event.pageX,
-        y: event.pageY
-      };
-    }
-    else {
-      bullsEye = null;
-    }
-    events.on(&apos;mouseup.Tag&apos;, this._onMouseUp);
-  }
-  
-  /** @private */
-  _onMouseUp(event) {
-    // If stored bullseye coordinates don&apos;t match mouse up event coordinates,
-    // don&apos;t store them any more.
-    if (bullsEye !== null &amp;&amp; (event.pageX !== bullsEye.x || event.pageY !== bullsEye.y)) {
-      bullsEye = null;
-    }
-    events.off(&apos;mouseup.Tag&apos;, this._onMouseUp);
-  }
-  
   /**
    Updates the aria-label property from the button and label elements.
    
@@ -847,43 +798,33 @@ class Tag extends BaseComponent(HTMLElement) {
    */
   _updateAriaLabel() {
     const button = this._elements.button;
+    const buttonCell = this._elements.buttonCell;
     const label = this._elements.label;
   
     // In the edge case that this is a Tag without a TagList,
     // just treat the Tag as a container element without special labelling.
-    if (this.getAttribute(&apos;role&apos;) !== &apos;option&apos;) {
-      button.removeAttribute(&apos;aria-hidden&apos;);
-      label.removeAttribute(&apos;aria-hidden&apos;);
+    if (this.getAttribute(&apos;role&apos;) !== &apos;row&apos;) {
+      buttonCell.removeAttribute(&apos;role&apos;);
+      label.removeAttribute(&apos;role&apos;);
+      if (this.getAttribute(&apos;aria-labelledby&apos;) === label.id) {
+        this.removeAttribute(&apos;aria-labelledby&apos;);
+      }
       return;
     }
-  
-    const labelText = [];
-  
+
+    buttonCell.setAttribute(&apos;role&apos;, &apos;gridcell&apos;);
+    label.setAttribute(&apos;role&apos;, this._closable ? &apos;rowheader&apos; : &apos;gridcell&apos;);
+
     const buttonAriaLabel = button.getAttribute(&apos;title&apos;);
     const labelTextContent = label.textContent;
   
-    if (button.parentElement) {
-      if (!label.parentElement || labelTextContent !== buttonAriaLabel) {
-        if (!button.hidden) {
-          labelText.push(buttonAriaLabel);
-        }
-        button.setAttribute(&apos;aria-hidden&apos;, &apos;true&apos;);
-      }
+    // button should be labelled, &quot;Remove: labelTextContent&quot;.
+    button.setAttribute(&apos;aria-label&apos;, `${buttonAriaLabel}: ${labelTextContent}`);
+
+    if (!label.id) {
+      label.id = commons.getUID();
     }
-  
-    if (label.parentElement) {
-      if (!button.parentElement || buttonAriaLabel !== labelTextContent) {
-        labelText.push(labelTextContent);
-        label.setAttribute(&apos;aria-hidden&apos;, &apos;true&apos;);
-      }
-    }
-  
-    if (labelText.length) {
-      this.setAttribute(&apos;aria-label&apos;, labelText.join(&apos; &apos;));
-    }
-    else {
-      this.removeAttribute(&apos;aria-label&apos;);
-    }
+    this.setAttribute(&apos;aria-labelledby&apos;, label.id); 
   }
   
   get _contentZones() { return {&apos;coral-tag-label&apos;: &apos;label&apos;}; }
@@ -911,7 +852,8 @@ class Tag extends BaseComponent(HTMLElement) {
       &apos;multiline&apos;,
       &apos;size&apos;,
       &apos;color&apos;,
-      &apos;disabled&apos;
+      &apos;disabled&apos;,
+      &apos;role&apos;
     ]);
   }
   
@@ -919,7 +861,11 @@ class Tag extends BaseComponent(HTMLElement) {
   attributeChangedCallback(name, oldValue, value) {
     // This is required by TagList but we don&apos;t need to expose disabled publicly as API
     if (name === &apos;disabled&apos;) {
-      this._elements.button.disabled = true;
+      this._elements.button.disabled = value;
+    }
+    // This is required by TagList but we don&apos;t need to expose disabled publicly as API
+    else if (name === &apos;role&apos;) {
+      this._updateAriaLabel();
     }
     else {
       super.attributeChangedCallback(name, oldValue, value);
@@ -942,7 +888,7 @@ class Tag extends BaseComponent(HTMLElement) {
     if (!this._size) { this.size = size.MEDIUM; }
     if (!this._color) { this.color = color.DEFAULT; }
   
-    const templateHandleNames = [&apos;input&apos;, &apos;button&apos;];
+    const templateHandleNames = [&apos;input&apos;, &apos;button&apos;, &apos;buttonCell&apos;];
     
     const label = this._elements.label;
   

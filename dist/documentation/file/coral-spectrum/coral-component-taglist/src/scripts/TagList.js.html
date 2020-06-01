@@ -705,7 +705,7 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
     attachedItem.setAttribute(&apos;size&apos;, Tag.size.SMALL);
     
     // adds the role to support accessibility
-    attachedItem.setAttribute(&apos;role&apos;, &apos;listitem&apos;);
+    attachedItem.setAttribute(&apos;role&apos;, &apos;row&apos;);
     attachedItem.setAttribute(&apos;tabindex&apos;, &apos;-1&apos;);
     attachedItem[this.readOnly ? &apos;removeAttribute&apos; : &apos;setAttribute&apos;](&apos;closable&apos;, &apos;&apos;);
     
@@ -912,7 +912,7 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
     this.classList.add(CLASSNAME);
     
     // adds the role to support accessibility
-    this.setAttribute(&apos;role&apos;, &apos;list&apos;);
+    this.setAttribute(&apos;role&apos;, &apos;grid&apos;);
   
     this.setAttribute(&apos;aria-live&apos;, &apos;off&apos;);
     this.setAttribute(&apos;aria-atomic&apos;, &apos;false&apos;);

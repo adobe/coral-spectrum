@@ -7290,9 +7290,33 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "coral-spectrum/coral-component-steplist/src/scripts/step.js~step#blur",
+    "class/coral-spectrum/coral-component-steplist/src/scripts/Step.js~Step.html#instance-method-blur",
+    "coral-spectrum/coral-component-steplist/src/scripts/Step.js~Step#blur",
+    "method"
+  ],
+  [
+    "coral-spectrum/coral-component-steplist/src/scripts/step.js~step#disabled",
+    "class/coral-spectrum/coral-component-steplist/src/scripts/Step.js~Step.html#instance-member-disabled",
+    "coral-spectrum/coral-component-steplist/src/scripts/Step.js~Step#disabled",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-steplist/src/scripts/step.js~step#focus",
+    "class/coral-spectrum/coral-component-steplist/src/scripts/Step.js~Step.html#instance-method-focus",
+    "coral-spectrum/coral-component-steplist/src/scripts/Step.js~Step#focus",
+    "method"
+  ],
+  [
     "coral-spectrum/coral-component-steplist/src/scripts/step.js~step#label",
     "class/coral-spectrum/coral-component-steplist/src/scripts/Step.js~Step.html#instance-member-label",
     "coral-spectrum/coral-component-steplist/src/scripts/Step.js~Step#label",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-steplist/src/scripts/step.js~step#labelled",
+    "class/coral-spectrum/coral-component-steplist/src/scripts/Step.js~Step.html#instance-member-labelled",
+    "coral-spectrum/coral-component-steplist/src/scripts/Step.js~Step#labelled",
     "member"
   ],
   [

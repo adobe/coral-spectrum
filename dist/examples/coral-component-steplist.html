@@ -47,7 +47,7 @@
     </style>
   </head>
 
-  <body class="coral--light">
+  <body class="coral--lightest">
     <main class="u-coral-margin">
       <div style="position:absolute;top:16px;right:16px;">
         <strong style="padding-right:8px"><span class="u-coral-hiddenS">Theme:</span></strong>
@@ -110,6 +110,17 @@
           <coral-step>My text is the longest among all</coral-step>
           <coral-step selected>And my text is quite long too</coral-step>
           <coral-step>My text is short</coral-step>
+        </coral-steplist>
+      </div>
+
+      <h2 class="coral-Heading--S">Disabled not completed items</h2>
+      <div class="markup">
+        <coral-steplist interaction="on">
+          <coral-step>Step 1</coral-step>
+          <coral-step selected>Step 2</coral-step>
+          <coral-step disabled>Step 3</coral-step>
+          <coral-step disabled>Step 4</coral-step>
+          <coral-step disabled>Step 5</coral-step>
         </coral-steplist>
       </div>
     </main>

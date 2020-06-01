@@ -40,7 +40,7 @@
       });
     </script>
   </head>
-  <body class="coral--light">
+  <body class="coral--lightest">
     <main class="u-coral-margin">
       <div style="position:absolute;top:16px;right:16px;">
         <strong style="padding-right:8px"><span class="u-coral-hiddenS">Theme:</span></strong>
@@ -135,5 +135,17 @@
         <coral-tag color="green" size="L">Tag 3</coral-tag>
       </div>
     </main>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const taglists = document.body.querySelectorAll('coral-taglist');
+        for (var i = 0; i < taglists.length; i++) {
+          const taglist = taglists[i];
+          const h2 = taglist.parentElement.previousElementSibling;
+          h2.id = 'coral-taglist-heading-' + i;
+          taglist.setAttribute('labelledby', h2.id);
+        }
+      });
+    </script>
   </body>
 </html>

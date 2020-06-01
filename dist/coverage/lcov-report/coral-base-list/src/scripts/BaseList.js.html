@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">64.18% </span>
+                <span class="strong">64.71% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>43/67</span>
+                <span class='fraction'>44/68</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">64.18% </span>
+                <span class="strong">64.71% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>43/67</span>
+                <span class='fraction'>44/68</span>
             </div>
         
             
@@ -326,7 +326,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -599,7 +599,7 @@ const BaseList = (superClass) =&gt; class extends superClass {
    @htmlattribute interaction
    @htmlattributereflected
    */
-  get inte<span class="missing-if-branch" title="else path not taken" >E</span>raction() {
+  get in<span class="missing-if-branch" title="else path not taken" >E</span>teraction() {
     return this._interaction || interaction.ON;
   }
   set interaction(value) {
@@ -609,7 +609,7 @@ const BaseList = (superClass) =&gt; class extends superClass {
   }
   
   /**<span class="fstat-no" title="function not covered" ></span>
-   Returns<span class="cstat-no" title="statement not covered" > true if the event is at the matched target.</span>
+   Retur<span class="cstat-no" title="statement not covered" >ns true if the event is at the matched target.</span>
    <span class="cstat-no" title="statement not covered" ></span>
    @private
    */
@@ -617,14 +617,14 @@ const BaseList = (superClass) =&gt; class extends superClass {
     const target = event.target;
     const listItem = event.matchedTarget;
   
-    const isAtTarget = t<span class="fstat-no" title="function not covered" >arget === listIt</span>em;
+    const isAtTarget =<span class="fstat-no" title="function not covered" > target === list</span>Item;
     <span class="cstat-no" title="statement not covered" ></span>
-    if (isAt<span class="cstat-no" title="statement not covered" >Target) </span>{
+    if (is<span class="cstat-no" title="statement not covered" >AtTarget</span>) {
       // Don't let arrow keys etc scroll the page
       event.preventDefault();
     }<span class="cstat-no" title="statement not covered" ></span>
     
-    return<span class="cstat-no" title="statement not covered" > isAtTarget;</span>
+    retu<span class="cstat-no" title="statement not covered" >rn isAtTarget;</span>
   }
   
   _onMouseEnter() {
@@ -635,7 +635,7 @@ const BaseList = (superClass) =&gt; class extends superClass {
   <span class="cstat-no" title="statement not covered" ></span>
   /** @private */
   _focusFirstItem(event) {
-    if (this.interacti<span class="cstat-no" title="statement not covered" >on === interaction.OFF || !</span>this._eventIsAtTarget(event)) {
+    if (this.interac<span class="cstat-no" title="statement not covered" >tion === interaction.OFF ||</span> !this._eventIsAtTarget(event)) {
       return;
     }<span class="cstat-no" title="statement not covered" ></span>
   
@@ -644,23 +644,23 @@ const BaseList = (superClass) =&gt; class extends superClass {
   }
   
   /** @private */<span class="fstat-no" title="function not covered" ></span>
-  _focusLa<span class="cstat-no" title="statement not covered" >stItem(event) {</span>
-    if (this<span class="cstat-no" title="statement not covered" >.interac</span>tion === interaction.OFF || !this._eventIsAtTarget(event)) {
+  _focus<span class="cstat-no" title="statement not covered" >LastItem(event) {</span>
+    if (th<span class="cstat-no" title="statement not covered" >is.inter</span>action === interaction.OFF || !this._eventIsAtTarget(event)) {
       return;
     }
   <span class="cstat-no" title="statement not covered" ></span>
     const items = this._getSelectableItems();
-    items[items.length<span class="cstat-no" title="statement not covered" > - 1].focus();</span>
+    items[items.leng<span class="cstat-no" title="statement not covered" >th - 1].focus();</span>
   }
   <span class="cstat-no" title="statement not covered" ></span>
   /** @private */
-  _focusNe<span class="cstat-no" title="statement not covered" >xtItem(event) {</span>
+  _focus<span class="cstat-no" title="statement not covered" >NextItem(event) {</span>
     if (this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {
-      return<span class="cstat-no" title="statement not covered" >;</span>
+      retu<span class="cstat-no" title="statement not covered" >rn;</span>
     }
   
-    const <span class="cstat-no" title="statement not covered" >target = event.matchedTarget;</span>
-    const it<span class="cstat-no" title="statement not covered" >ems = this._getSelectableI</span>tems();
+    cons<span class="cstat-no" title="statement not covered" >t target = event.matchedTarget;</span>
+    const <span class="cstat-no" title="statement not covered" >items = this._getSelectabl</span>eItems();
     const index = items.indexOf(target);
     <span class="cstat-no" title="statement not covered" ></span>
     if (index === -1) {
@@ -682,11 +682,11 @@ const BaseList = (superClass) =&gt; class extends superClass {
       return;
     }<span class="missing-if-branch" title="if path not taken" >I</span>
   
-    const ta<span class="cstat-no" title="statement not covered" >rget = e</span>vent.matchedTarget;
+    const <span class="cstat-no" title="statement not covered" >target =</span> event.matchedTarget;
     const items = this._getSelectableItems();
     const index = items.indexOf(target);
     <span class="missing-if-branch" title="if path not taken" >I</span>
-    if (inde<span class="cstat-no" title="statement not covered" >x === -1) {</span>
+    if (in<span class="cstat-no" title="statement not covered" >dex === -1) {</span>
       // Invalid state
       return;
     }
@@ -706,10 +706,10 @@ const BaseList = (superClass) =&gt; class extends superClass {
   }
   
   /** @ignore */
-  focus() <span class="missing-if-branch" title="else path not taken" >E</span>{
+  focus(<span class="missing-if-branch" title="else path not taken" >E</span>) {
     if (!this.contains(document.activeElement)) {
       const items = this._getSelectableItems();
-      if (it<span class="missing-if-branch" title="else path not taken" >E</span>ems.length &gt; 0) {
+      if (<span class="missing-if-branch" title="else path not taken" >E</span>items.length &gt; 0) {
         items[0].focus();
       }
     }
@@ -744,7 +744,7 @@ export default BaseList;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed May 20 2020 13:16:37 GMT+0200 (Central European Summer Time)
+                at Mon Jun 01 2020 17:07:29 GMT+0200 (Central European Summer Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

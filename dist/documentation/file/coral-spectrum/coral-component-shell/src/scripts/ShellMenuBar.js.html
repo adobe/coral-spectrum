@@ -447,6 +447,8 @@ class ShellMenuBar extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
+
+    this.setAttribute(&apos;role&apos;, &apos;list&apos;);
     
     this.items._startHandlingItems(true);
   }

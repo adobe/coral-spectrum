@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.33% </span>
+                <span class="strong">88.43% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>106/120</span>
+                <span class='fraction'>107/121</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.33% </span>
+                <span class="strong">88.43% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>106/120</span>
+                <span class='fraction'>107/121</span>
             </div>
         
             
@@ -451,7 +451,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -716,7 +716,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1784x</span>
+<span class="cline-any cline-yes">1780x</span>
 <span class="cline-any cline-yes">248x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -724,7 +724,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1784x</span>
+<span class="cline-any cline-yes">1780x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -739,7 +739,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">846x</span>
+<span class="cline-any cline-yes">838x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">112x</span></td><td class="text"><pre class="prettyprint lang-js">/**
@@ -872,7 +872,7 @@ const BaseActionBarContainer = (superClass) =&gt; class extends superClass {
    
    @type {String}
    @default ""
-   @htmlat<span class="missing-if-branch" title="if path not taken" >I</span>tribute morebuttontext
+   @html<span class="missing-if-branch" title="if path not taken" >I</span>attribute morebuttontext
    */<span class="cstat-no" title="statement not covered" ></span>
   get moreButtonText() {
     return this._moreButtonText || '';
@@ -919,7 +919,7 @@ const BaseActionBarContainer = (superClass) =&gt; class extends superClass {
     this._itemsInPopover = this.items._getAllOffScreen();
     
     if (this._itemsInPopover.length &lt; 1) {
-      retu<span class="missing-if-branch" title="if path not taken" >I</span>rn;
+      re<span class="missing-if-branch" title="if path not taken" >I</span>turn;
     }<span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
     this._itemsInPopover.forEach((item) =&gt; {
@@ -942,7 +942,7 @@ const BaseActionBarContainer = (superClass) =&gt; class extends superClass {
     // render popover content
     const popover = this._elements.overlay;
     popover.content.innerHTML = '';
-    popove<span class="missing-if-branch" title="if path not taken" >I</span>r.content.appendChild(overlayContent.call(this._elements, {
+    popo<span class="missing-if-branch" title="if path not taken" >I</span>ver.content.appendChild(overlayContent.call(this._elements, {
       items: this._itemsInPopover,
       copyAttributes
     }));<span class="cstat-no" title="statement not covered" ></span>
@@ -950,19 +950,19 @@ const BaseActionBarContainer = (superClass) =&gt; class extends superClass {
   
   /**
    Called after popover.open is set to false, but before the transition of the popover is done.
-   Make items visible ag<span class="fstat-no" title="function not covered" >ain, that now do f</span>it into the actionbar.
-   @ignore<span class="cstat-no" title="statement not covered" ></span>
+   Make items visible <span class="fstat-no" title="function not covered" >again, that now do</span> fit into the actionbar.
+   @igno<span class="cstat-no" title="statement not covered" >re</span>
    */
-  _onOverl<span class="cstat-no" title="statement not covered" >ayBeforeClose(event) {</span>
-    // the<span class="cstat-no" title="statement not covered" >re might be popovers in popover =&gt; ignore them</span>
+  _onOve<span class="cstat-no" title="statement not covered" >rlayBeforeClose(event) {</span>
+    // t<span class="cstat-no" title="statement not covered" >here might be popovers in popover =&gt; ignore them</span>
     if (event.target !== this._elements.overlay) {
       return;
     }
     <span class="fstat-no" title="function not covered" ></span>
-    const <span class="cstat-no" title="statement not covered" >focusedItem = document.a</span>ctiveElement.parentNode;
+    cons<span class="cstat-no" title="statement not covered" >t focusedItem = document</span>.activeElement.parentNode;
     
-    // hid<span class="cstat-no" title="statement not covered" >e the popover(needed to disable fade time of popover)</span>
-    this._<span class="cstat-no" title="statement not covered" >elements.overlay.hidden = true;</span>
+    // h<span class="cstat-no" title="statement not covered" >ide the popover(needed to disable fade time of popover)</span>
+    this<span class="cstat-no" title="statement not covered" >._elements.overlay.hidden = true;</span>
     
     // close any popovers, that might be inside the 'more' popover
     const childPopovers = this._elements.overlay.getElementsByTagName('coral-popover');
@@ -994,8 +994,8 @@ const BaseActionBarContainer = (superClass) =&gt; class extends superClass {
     this._elements.buttonList &amp;&amp; this._elements.buttonList._focusFirstItem(event);
   }<span class="cstat-no" title="statement not covered" ></span>
   
-  _onOverlay<span class="cstat-no" title="statement not covered" >KeyUp(event) {</span>
-    event.prev<span class="cstat-no" title="statement not covered" >entDefault();</span>
+  _onOverl<span class="cstat-no" title="statement not covered" >ayKeyUp(event) {</span>
+    event.pr<span class="cstat-no" title="statement not covered" >eventDefault();</span>
     
     // Focus last item
     this._elements.anchorList &amp;&amp; this._elements.anchorList._focusLastItem(event);
@@ -1045,8 +1045,8 @@ const BaseActionBarContainer = (superClass) =&gt; class extends superClass {
       this.removeChild(more);
     }
   
-    // Cleanup 'More' <span class="fstat-no" title="function not covered" >popo</span>ver
-    const <span class="cstat-no" title="statement not covered" >popover = this.querySelector('[</span>coral-actionbar-popover]');
+    // Cleanup 'More<span class="fstat-no" title="function not covered" >' po</span>pover
+    cons<span class="cstat-no" title="statement not covered" >t popover = this.querySelector(</span>'[coral-actionbar-popover]');
     if (popover) {
       this.removeChild(popover);
     }
@@ -1092,7 +1092,7 @@ export default BaseActionBarContainer;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed May 20 2020 13:16:37 GMT+0200 (Central European Summer Time)
+                at Mon Jun 01 2020 17:07:29 GMT+0200 (Central European Summer Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

@@ -1,7 +1,7 @@
 {
-  "coverage": "64.87%",
-  "expectCount": 3616,
-  "actualCount": 2346,
+  "coverage": "64.79%",
+  "expectCount": 3622,
+  "actualCount": 2347,
   "files": {
     "coral-spectrum/coral-base-button/src/scripts/BaseButton.js": {
       "expectCount": 6,
@@ -902,8 +902,8 @@
         456,
         493,
         512,
-        560,
-        755
+        561,
+        756
       ]
     },
     "coral-spectrum/coral-component-dialog/src/scripts/Dialog.js": {
@@ -1563,7 +1563,7 @@
       ]
     },
     "coral-spectrum/coral-component-select/src/scripts/Select.js": {
-      "expectCount": 76,
+      "expectCount": 77,
       "actualCount": 59,
       "undocumentLines": [
         39,
@@ -1577,12 +1577,13 @@
         198,
         275,
         423,
-        460,
-        478,
-        522,
-        594,
-        1030,
-        1091
+        459,
+        477,
+        519,
+        591,
+        724,
+        1036,
+        1097
       ]
     },
     "coral-spectrum/coral-component-select/src/scripts/SelectItem.js": {
@@ -1668,7 +1669,7 @@
       "actualCount": 4,
       "undocumentLines": [
         16,
-        42
+        44
       ]
     },
     "coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js": {
@@ -1680,11 +1681,11 @@
         58,
         117,
         162,
-        207,
-        217,
-        222,
-        265,
-        279
+        208,
+        218,
+        226,
+        272,
+        286
       ]
     },
     "coral-spectrum/coral-component-shell/src/scripts/ShellOrgSwitcher.js": {
@@ -1954,16 +1955,20 @@
       "undocumentLines": []
     },
     "coral-spectrum/coral-component-steplist/src/scripts/Step.js": {
-      "expectCount": 17,
-      "actualCount": 10,
+      "expectCount": 25,
+      "actualCount": 14,
       "undocumentLines": [
-        19,
-        34,
-        73,
-        124,
-        149,
-        159,
-        167
+        20,
+        35,
+        74,
+        131,
+        152,
+        177,
+        202,
+        212,
+        220,
+        224,
+        258
       ]
     },
     "coral-spectrum/coral-component-steplist/src/scripts/StepLabel.js": {
@@ -1976,12 +1981,12 @@
       "actualCount": 27,
       "undocumentLines": [
         51,
-        91,
-        106,
-        141,
-        205,
-        225,
-        285
+        89,
+        104,
+        139,
+        207,
+        258,
+        329
       ]
     },
     "coral-spectrum/coral-component-steplist/src/scripts/getTarget.js": {
@@ -2215,8 +2220,8 @@
       ]
     },
     "coral-spectrum/coral-component-taglist/src/scripts/Tag.js": {
-      "expectCount": 41,
-      "actualCount": 23,
+      "expectCount": 38,
+      "actualCount": 20,
       "undocumentLines": [
         19,
         20,
@@ -2228,14 +2233,14 @@
         119,
         122,
         125,
-        163,
-        203,
-        230,
-        248,
-        267,
-        286,
-        305,
-        468
+        161,
+        201,
+        229,
+        247,
+        266,
+        285,
+        304,
+        409
       ]
     },
     "coral-spectrum/coral-component-taglist/src/scripts/TagLabel.js": {
