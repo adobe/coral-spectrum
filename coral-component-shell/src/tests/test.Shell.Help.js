@@ -88,14 +88,17 @@ describe('Shell.Help', function() {
 
   describe('Markup', function() {
     describe('#showError()', function() {
-      it('should display an Error Message on "showError" function call', function() {
+      it('should display an Error Message on "showError" function call', function(done) {
         const el = helpers.build(htmlSnippet);
         var resultMessage = el._elements.resultMessage;
         var expectedResultMessage = 'Error fetching results';
 
         el.showError();
-        expect(el._elements.resultMessage.hidden).to.equal(false);
-        expect(resultMessage.querySelector('._coral-Shell-help-resultMessage-heading').textContent).to.equal(expectedResultMessage);
+        window.setTimeout(() => {
+          expect(el._elements.resultMessage.hidden).to.equal(false);
+          expect(resultMessage.querySelector('._coral-Shell-help-resultMessage-heading').textContent).to.equal(expectedResultMessage);
+          done();
+        }, 151);
       });
     });
 
@@ -130,14 +133,17 @@ describe('Shell.Help', function() {
         expect(el._elements.results.lastChild.target).to.equal('_blank');
       });
 
-      it('should display a "no results message" on "showResults" function call with an array and total = 0', function() {
+      it('should display a "no results message" on "showResults" function call with an array and total = 0', function(done) {
         const el = helpers.build(htmlSnippet);
         el.showResults([], 0);
         var resultMessage = el._elements.resultMessage;
         var expectedResultMessage = 'No results found';
 
-        expect(el._elements.resultMessage.hidden).to.equal(false);
-        expect(resultMessage.querySelector('._coral-Shell-help-resultMessage-heading').textContent).to.equal(expectedResultMessage);
+        window.setTimeout(() => {
+          expect(el._elements.resultMessage.hidden).to.equal(false);
+          expect(resultMessage.querySelector('._coral-Shell-help-resultMessage-heading').textContent).to.equal(expectedResultMessage);
+          done();
+        }, 151);
       });
     });
   });
