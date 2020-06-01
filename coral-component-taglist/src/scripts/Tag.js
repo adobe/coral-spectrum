@@ -152,11 +152,9 @@ class Tag extends BaseComponent(HTMLElement) {
     
     // Attach events
     this._delegateEvents({
-      'click': '_onClick',
+      'click [handle="button"]': '_onRemoveButtonClick',
       'key:backspace': '_onRemoveButtonClick',
-      'key:delete': '_onRemoveButtonClick',
-      'key:space': '_onRemoveButtonClick',
-      'mousedown': '_onMouseDown'
+      'key:delete': '_onRemoveButtonClick'
     });
     
     // Prepare templates
@@ -206,12 +204,13 @@ class Tag extends BaseComponent(HTMLElement) {
     // Only tags are closable
     this._toggleTagVariant();
     
-    if (this._closable && !this.contains(this._elements.button)) {
-      // Insert the button if it was not added to the DOM
-      this.appendChild(this._elements.button);
+    if (this._closable && !this.contains(this._elements.buttonCell)) {
+      // Insert the buttonCell if it was not added to the DOM
+      this.appendChild(this._elements.buttonCell);
     }
     
     this._elements.button.hidden = !this._closable;
+    this._elements.buttonCell.hidden = !this._closable;
     this._updateAriaLabel();
   }
   
@@ -358,7 +357,7 @@ class Tag extends BaseComponent(HTMLElement) {
   /** @private */
   _onRemoveButtonClick(event) {
     event.preventDefault();
-    if (this.closable) {
+    if (this.closable && !this._elements.button.disabled) {
       event.stopPropagation();
       this.focus();
       
@@ -371,54 +370,6 @@ class Tag extends BaseComponent(HTMLElement) {
     }
   }
   
-  /** @private */
-  _onClick(event) {
-    if (this._elements.button.disabled) {
-      return;
-    }
-    
-    // If the click event originated from a screen reader's event sequence or the remove button, trigger the removal
-    // of the tag.
-    if (event.target === this._elements.button ||
-      this._elements.button.contains(event.target) ||
-      bullsEye !== null ||
-      /* Detects virtual cursor or Narrator on Windows */
-      event.clientX <= 0 && event.clientY <= 0) {
-      this._onRemoveButtonClick(event);
-      bullsEye = null;
-    }
-  }
-  
-  /** @private */
-  _onMouseDown(event) {
-    // Determine the center point of the event target
-    const offsetCenter = getOffsetCenter(event.target);
-    // This Tag will be the event.target when mousedown originates from a screen reader.
-    if (event.target === this &&
-      Math.abs(event.pageX - offsetCenter.x) < 2 &&
-      Math.abs(event.pageY - offsetCenter.y) < 2) {
-      // If click is close enough to the center, store the coordinates.
-      bullsEye = {
-        x: event.pageX,
-        y: event.pageY
-      };
-    }
-    else {
-      bullsEye = null;
-    }
-    events.on('mouseup.Tag', this._onMouseUp);
-  }
-  
-  /** @private */
-  _onMouseUp(event) {
-    // If stored bullseye coordinates don't match mouse up event coordinates,
-    // don't store them any more.
-    if (bullsEye !== null && (event.pageX !== bullsEye.x || event.pageY !== bullsEye.y)) {
-      bullsEye = null;
-    }
-    events.off('mouseup.Tag', this._onMouseUp);
-  }
-  
   /**
    Updates the aria-label property from the button and label elements.
    
@@ -426,43 +377,33 @@ class Tag extends BaseComponent(HTMLElement) {
    */
   _updateAriaLabel() {
     const button = this._elements.button;
+    const buttonCell = this._elements.buttonCell;
     const label = this._elements.label;
   
     // In the edge case that this is a Tag without a TagList,
     // just treat the Tag as a container element without special labelling.
-    if (this.getAttribute('role') !== 'option') {
-      button.removeAttribute('aria-hidden');
-      label.removeAttribute('aria-hidden');
+    if (this.getAttribute('role') !== 'row') {
+      buttonCell.removeAttribute('role');
+      label.removeAttribute('role');
+      if (this.getAttribute('aria-labelledby') === label.id) {
+        this.removeAttribute('aria-labelledby');
+      }
       return;
     }
-  
-    const labelText = [];
-  
+
+    buttonCell.setAttribute('role', 'gridcell');
+    label.setAttribute('role', this._closable ? 'rowheader' : 'gridcell');
+
     const buttonAriaLabel = button.getAttribute('title');
     const labelTextContent = label.textContent;
   
-    if (button.parentElement) {
-      if (!label.parentElement || labelTextContent !== buttonAriaLabel) {
-        if (!button.hidden) {
-          labelText.push(buttonAriaLabel);
-        }
-        button.setAttribute('aria-hidden', 'true');
-      }
+    // button should be labelled, "Remove: labelTextContent".
+    button.setAttribute('aria-label', `${buttonAriaLabel}: ${labelTextContent}`);
+
+    if (!label.id) {
+      label.id = commons.getUID();
     }
-  
-    if (label.parentElement) {
-      if (!button.parentElement || buttonAriaLabel !== labelTextContent) {
-        labelText.push(labelTextContent);
-        label.setAttribute('aria-hidden', 'true');
-      }
-    }
-  
-    if (labelText.length) {
-      this.setAttribute('aria-label', labelText.join(' '));
-    }
-    else {
-      this.removeAttribute('aria-label');
-    }
+    this.setAttribute('aria-labelledby', label.id); 
   }
   
   get _contentZones() { return {'coral-tag-label': 'label'}; }
@@ -490,7 +431,8 @@ class Tag extends BaseComponent(HTMLElement) {
       'multiline',
       'size',
       'color',
-      'disabled'
+      'disabled',
+      'role'
     ]);
   }
   
@@ -498,7 +440,11 @@ class Tag extends BaseComponent(HTMLElement) {
   attributeChangedCallback(name, oldValue, value) {
     // This is required by TagList but we don't need to expose disabled publicly as API
     if (name === 'disabled') {
-      this._elements.button.disabled = true;
+      this._elements.button.disabled = value;
+    }
+    // This is required by TagList but we don't need to expose disabled publicly as API
+    else if (name === 'role') {
+      this._updateAriaLabel();
     }
     else {
       super.attributeChangedCallback(name, oldValue, value);
@@ -521,7 +467,7 @@ class Tag extends BaseComponent(HTMLElement) {
     if (!this._size) { this.size = size.MEDIUM; }
     if (!this._color) { this.color = color.DEFAULT; }
   
-    const templateHandleNames = ['input', 'button'];
+    const templateHandleNames = ['input', 'button', 'buttonCell'];
     
     const label = this._elements.label;
   

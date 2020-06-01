@@ -1,6 +1,8 @@
-<button tracking="off" handle="button" is="coral-button" type="button" variant="_custom" class="_coral-ClearButton _coral-ClearButton--small _coral-Tags-item-removeButton" title="{{data.i18n.get('Remove')}}" hidden tabindex="-1" coral-close>
-  <coral-button-label handle="buttonLabel"></coral-button-label>
-</button>
+<span handle="buttonCell" hidden>
+  <button tracking="off" handle="button" is="coral-button" type="button" variant="_custom" class="_coral-ClearButton _coral-ClearButton--small _coral-Tags-item-removeButton" title="{{data.i18n.get('Remove')}}" hidden tabindex="-1" coral-close>
+    <coral-button-label handle="buttonLabel"></coral-button-label>
+  </button>
+</span>
 <js>
   // Don't wait for button MO to pick up the label
   this.button._elements.label = this.buttonLabel;
