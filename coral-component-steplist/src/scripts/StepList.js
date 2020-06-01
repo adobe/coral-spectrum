@@ -374,7 +374,7 @@ class StepList extends BaseComponent(HTMLElement) {
       }
 
       // Set accessibilityState text label
-      var accessibilityLabel = i18n.get('not completed: ');
+      let accessibilityLabel = i18n.get('not completed: ');
 
       if (index < selectedItemIndex) {
         accessibilityLabel = i18n.get('completed: ');
