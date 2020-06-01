@@ -12,7 +12,7 @@
 
 import {BaseComponent} from '../../../coral-base-component';
 import {SelectableCollection} from '../../../coral-collection';
-import {transform, validate, commons} from '../../../coral-utils';
+import {transform, validate, commons, i18n} from '../../../coral-utils';
 import getTarget from './getTarget';
 
 /**
@@ -63,25 +63,23 @@ class StepList extends BaseComponent(HTMLElement) {
     super();
     
     this._delegateEvents({
-      'click > coral-step > [handle="stepMarkerContainer"]': '_onStepClick',
-      'click > coral-step > coral-step-label': '_onStepClick',
-      'click > coral-step': '_onStepClick',
+      'click > coral-step > [handle="link"]': '_onStepClick',
   
       'capture:focus > coral-step': '_onStepMouseEnter',
-      'capture:mouseenter > coral-step > [handle="stepMarkerContainer"]': '_onStepMouseEnter',
+      'capture:mouseenter > coral-step > [handle="link"]': '_onStepMouseEnter',
       'capture:blur > coral-step': '_onStepMouseLeave',
-      'capture:mouseleave > coral-step > [handle="stepMarkerContainer"]': '_onStepMouseLeave',
+      'capture:mouseleave > coral-step > [handle="link"]': '_onStepMouseLeave',
   
-      'key:enter > coral-step': '_onStepKeyboardSelect',
-      'key:space > coral-step': '_onStepKeyboardSelect',
-      'key:home > coral-step': '_onHomeKey',
-      'key:end > coral-step': '_onEndKey',
-      'key:pagedown > coral-step': '_selectNextItem',
-      'key:right > coral-step': '_selectNextItem',
-      'key:down > coral-step': '_selectNextItem',
-      'key:pageup > coral-step': '_selectPreviousItem',
-      'key:left > coral-step': '_selectPreviousItem',
-      'key:up > coral-step': '_selectPreviousItem',
+      'key:enter > coral-step > [handle="link"]': '_onStepKeyboardSelect',
+      'key:space > coral-step > [handle="link"]': '_onStepKeyboardSelect',
+      'key:home > coral-step > [handle="link"]': '_onHomeKey',
+      'key:end > coral-step > [handle="link"]': '_onEndKey',
+      'key:pagedown > coral-step > [handle="link"]': '_selectNextItem',
+      'key:right > coral-step > [handle="link"]': '_selectNextItem',
+      'key:down > coral-step > [handle="link"]': '_selectNextItem',
+      'key:pageup > coral-step > [handle="link"]': '_selectPreviousItem',
+      'key:left > coral-step > [handle="link"]': '_selectPreviousItem',
+      'key:up > coral-step > [handle="link"]': '_selectPreviousItem',
       
       // private
       'coral-step:_selectedchanged': '_onItemSelectedChanged'
@@ -163,6 +161,10 @@ class StepList extends BaseComponent(HTMLElement) {
             if (step && step.target && step.target.trim() !== '') {
               continue;
             }
+
+            if (panel) {
+              panel.setAttribute('role', 'region');
+            }
       
             if (step && panel) {
               // sets the required ids
@@ -206,6 +208,37 @@ class StepList extends BaseComponent(HTMLElement) {
     this._reflectAttribute('size', this._size);
   
     this.classList.toggle(`${CLASSNAME}--small`, this._size === size.SMALL);
+
+    if (!this.items.length) {
+      return;
+    }
+
+    // update aria-label for all children
+    const _syncItemLabelled = () => {
+      const steps = this.items.getAll();
+      const stepsCount = steps.length;
+
+      for (let i = 0; i < stepsCount; i++) {
+        const step = steps[i];
+        if (step._elements.label.textContent.trim() !== '') {
+          if (this.size === size.SMALL) {
+            step.setAttribute('labelled', step._elements.label.textContent);
+          }
+          else {
+            step.removeAttribute('labelled');
+          }
+        }
+      }
+    };
+
+    const lastItem = this.items.last();
+
+    if (typeof lastItem._syncTabIndex === 'function') {
+      _syncItemLabelled();
+    }
+    else {
+      commons.ready(lastItem, _syncItemLabelled);
+    }
   }
   
   /**
@@ -227,26 +260,37 @@ class StepList extends BaseComponent(HTMLElement) {
   
     const isInteractive = this._interaction === interaction.ON;
     this.classList.toggle(`${CLASSNAME}--interactive`, isInteractive);
-  
-    const steps = this.items.getAll();
-    const stepsCount = steps.length;
+
+    if (!this.items.length) {
+      return;
+    }
   
     // update tab index for all children
-    for (let i = 0; i < stepsCount; i++) {
-      this._syncItemTabIndex(steps[i]);
+    const _syncItemProps = () => {
+      const steps = this.items.getAll();
+      const stepsCount = steps.length;
+
+      for (let i = 0; i < stepsCount; i++) {
+        // update tab index for all children
+        steps[i]._syncTabIndex(isInteractive);
+        //update posin set and total size for all steps
+        steps[i]._syncSizeAndCurrentIndex(i + 1, stepsCount);
+      }
+    };
+
+    const lastItem = this.items.last();
+
+    if (typeof lastItem._syncTabIndex === 'function') {
+      _syncItemProps();
+    }
+    else {
+      commons.ready(lastItem, _syncItemProps);
     }
   }
   
   /** @private */
   _syncItemTabIndex(item) {
-    // when interaction is on, we enable the tabindex so users can tab into the items
-    if (this.interaction === interaction.ON) {
-      item.setAttribute('tabindex', item.hasAttribute('selected') ? '0' : '-1');
-    }
-    else {
-      // when off, removing the tabindex allows the component to never get focus
-      item.removeAttribute('tabindex');
-    }
+    item._syncTabIndex(this.interaction === interaction.ON);
   }
   
   /** @private */
@@ -324,6 +368,22 @@ class StepList extends BaseComponent(HTMLElement) {
     
       // Add/remove classes based on index
       item.classList.toggle('is-complete', index < selectedItemIndex);
+
+      if (!item._elements) {
+        return;
+      }
+
+      // Set accessibilityState text label
+      var accessibilityLabel = i18n.get('not completed: ');
+
+      if (index < selectedItemIndex) {
+        accessibilityLabel = i18n.get('completed: ');
+      }
+      else if (index === selectedItemIndex) {
+        accessibilityLabel = i18n.get('current: ');
+      }
+
+      item._elements.accessibilityLabel.innerHTML = accessibilityLabel;
     });
   }
   
@@ -333,8 +393,10 @@ class StepList extends BaseComponent(HTMLElement) {
       event.preventDefault();
       event.stopPropagation();
       
-      const item = event.matchedTarget;
+      const item = event.matchedTarget.closest('coral-step');
       this._selectAndFocusItem(item);
+
+      this._trackEvent('click', 'coral-steplist-item', event, item);
     }
   }
   
@@ -345,6 +407,12 @@ class StepList extends BaseComponent(HTMLElement) {
       event.stopPropagation();
       
       const item = event.matchedTarget.closest('coral-step');
+
+      // Disabled item should not get selected
+      if (item.disabled) {
+        return;
+      }
+
       this._selectAndFocusItem(item);
   
       this._trackEvent('click', 'coral-steplist-item', event, item);
@@ -355,7 +423,7 @@ class StepList extends BaseComponent(HTMLElement) {
   _onStepMouseEnter() {
     if (this.size === size.SMALL) {
       const step = event.target.closest('coral-step');
-      
+
       // we only show the tooltip if we have a label to show
       if (step._elements.label.innerHTML.trim() !== '') {
         step._elements.overlay.content.innerHTML = step._elements.label.innerHTML;
@@ -472,8 +540,12 @@ class StepList extends BaseComponent(HTMLElement) {
     if (!this._size) { this.size = size.LARGE; }
     
     // A11y
-    this.setAttribute('role', 'tablist');
-    this.setAttribute('aria-multiselectable', 'false');
+    this.setAttribute('role', 'list');
+
+    // provide accessibility label for the list
+    if (!this.hasAttribute('aria-label') && !this.hasAttribute('aria-labelledby')) {
+      this.setAttribute('aria-label', i18n.get('Step List'));
+    }
   
     // Don't trigger events once connected
     this._preventTriggeringEvents = true;

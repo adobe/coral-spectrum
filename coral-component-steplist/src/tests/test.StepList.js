@@ -33,7 +33,9 @@ describe('StepList', function() {
   });
 
   function testDefaultInstance(el) {
-    expect(el.getAttribute('aria-multiselectable')).to.equal('false');
+    expect(el.getAttribute('role')).to.equal('list');
+    expect(el.getAttribute('aria-label')).to.equal('Step List');
+    expect(el.hasAttribute('aria-multiselectable')).to.be.false;
     expect(el.classList.contains('_coral-Steplist')).to.be.true;
     expect(el.selectedItem).to.be.null;
   }
@@ -315,7 +317,7 @@ describe('StepList', function() {
       items[1].focus();
 
       // Press the enter key
-      helpers.keypress(13, items[1]);
+      helpers.keypress(13, document.activeElement);
   
       expect(items[0].selected).to.equal(false, 'item[0] is not selected');
       expect(items[0].classList.contains('is-selected')).to.be.false;
@@ -336,12 +338,12 @@ describe('StepList', function() {
 
       // focuses the item before producing the key press
       items[0].focus();
-      expect(document.activeElement).to.equal(items[0]);
+      expect(document.activeElement).to.equal(items[0]._elements.link);
 
-      helpers.keypress('end', items[0]);
+      helpers.keypress('end', document.activeElement);
 
       expect(el.selectedItem).to.equal(items[4]);
-      expect(document.activeElement).to.equal(items[4]);
+      expect(document.activeElement).to.equal(items[4]._elements.link);
     });
 
     it('should select the first step on home press', function() {
@@ -356,12 +358,12 @@ describe('StepList', function() {
 
       // focuses the item before producing the key press
       items[1].focus();
-      expect(document.activeElement).to.equal(items[1]);
+      expect(document.activeElement).to.equal(items[1]._elements.link);
 
-      helpers.keypress('home', items[1]);
+      helpers.keypress('home', document.activeElement);
 
       expect(el.selectedItem).to.equal(items[0]);
-      expect(document.activeElement).to.equal(items[0]);
+      expect(document.activeElement).to.equal(items[0]._elements.link);
     });
 
     it('should select the next step on pagedown, right, and down', function() {
@@ -372,15 +374,15 @@ describe('StepList', function() {
 
       var items = el.items.getAll();
 
-      helpers.keypress('pagedown', items[0]);
+      helpers.keypress('pagedown', items[0]._elements.link);
 
       expect(el.selectedItem).to.equal(items[1]);
 
-      helpers.keypress('right', items[1]);
+      helpers.keypress('right', items[1]._elements.link);
 
       expect(el.selectedItem).to.equal(items[2]);
 
-      helpers.keypress('down', items[2]);
+      helpers.keypress('down', items[2]._elements.link);
 
       expect(el.selectedItem).to.equal(items[3]);
     });
@@ -394,18 +396,18 @@ describe('StepList', function() {
       var items = el.items.getAll();
 
       // forces the selected item to be the last one
-      helpers.keypress('end', items[0]);
+      helpers.keypress('end', items[0]._elements.link);
       expect(el.selectedItem).to.equal(items[4]);
 
-      helpers.keypress('pageup', items[4]);
+      helpers.keypress('pageup', items[4]._elements.link);
 
       expect(el.selectedItem).to.equal(items[3]);
 
-      helpers.keypress('left', items[3]);
+      helpers.keypress('left', items[3]._elements.link);
 
       expect(el.selectedItem).to.equal(items[2]);
 
-      helpers.keypress('up', items[2]);
+      helpers.keypress('up', items[2]._elements.link);
 
       expect(el.selectedItem).to.equal(items[1]);
     });
@@ -415,7 +417,7 @@ describe('StepList', function() {
     it('clicking the step should select the step', function() {
       const el = helpers.build(window.__html__['StepList.selectedItem.html']);
       el.interaction = 'on';
-      var step1 = el.querySelector('[role=tab]');
+      var step1 = el.querySelector('[role=link]');
       step1.click();
   
       let item1 = el.items.first();
