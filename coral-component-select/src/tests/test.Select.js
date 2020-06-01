@@ -2149,6 +2149,14 @@ describe('Select', function() {
       // opens the overlay
       el._elements.button.click();
     });
+    
+    it('should not open the overlay if readonly is true', () => {
+      const el = helpers.build(window.__html__['Select.base.html']);
+      el.readOnly = true;
+      
+      el._elements.button.click();
+      expect(el.overlay.open).to.be.false;
+    });
   });
 
   // @todo: add tests for overlay position

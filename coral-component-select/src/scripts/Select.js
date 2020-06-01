@@ -122,7 +122,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
     events[`global:capture:coral-overlay:close #${overlayId}`] = '_onOverlayToggle';
     events[`global:capture:coral-overlay:open #${overlayId}`] = '_onOverlayToggle';
     events[`global:capture:coral-overlay:positioned #${overlayId}`] = '_onOverlayPositioned';
-    events[`global:capture:coral-overlay:beforeopen #${overlayId}`] = '_onInternalEvent';
+    events[`global:capture:coral-overlay:beforeopen #${overlayId}`] = '_onBeforeOpen';
     events[`global:capture:coral-overlay:beforeclose #${overlayId}`] = '_onInternalEvent';
     // Keyboard interaction
     events[`global:keypress #${overlayId}`] = '_onOverlayKeyPress';
@@ -425,8 +425,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
 
     this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
     this.classList.toggle('is-disabled', this._disabled);
-
-    const isReadOnly = this.hasAttribute('readonly');
+    
     this._elements.button.disabled = this._disabled;
     this._elements.input.disabled = this._disabled;
     this._elements.taglist.disabled = this._disabled;
@@ -477,8 +476,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
-
-    const isDisabled = this.hasAttribute('disabled');
+    
     this._elements.input.readOnly = this._readOnly;
     this._elements.taglist.readOnly = this._readOnly;
     this._elements.taglist.disabled = this._readOnly;
@@ -720,6 +718,15 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
     if (height < maxHeight) {
       // Make it scrollable
       this._elements.list.style.height = `${height - 1}px`;
+    }
+  }
+  
+  _onBeforeOpen(event) {
+    event.stopImmediatePropagation();
+    
+    // Prevent opening the overlay if select is readonly
+    if (this.readOnly) {
+      event.preventDefault();
     }
   }
 
