@@ -50,4 +50,11 @@ describe('Shell.MenuBar', function() {
   describe('User Interaction', function() {});
 
   describe('Implementation Details', function() {});
+
+  describe('Accessibility', function() {
+    it('should support have role="list"', function() {
+      const el = helpers.build('<coral-shell-menubar>');
+      expect(el.getAttribute('role')).to.equal('list');
+    });
+  });
 });

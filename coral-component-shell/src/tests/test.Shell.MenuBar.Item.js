@@ -25,6 +25,10 @@ describe('Shell.MenuBar.Item', function() {
       const el = helpers.build('<coral-shell-menubar-item>');
       expect(el).to.be.an.instanceof(Shell.MenuBar.Item);
     });
+
+    it('should have role="listitem"', function() {
+      const el = helpers.build('<coral-shell-menubar-item>');
+    });
   
     helpers.cloneComponent(
       'should be possible to clone using markup',
@@ -115,12 +119,16 @@ describe('Shell.MenuBar.Item', function() {
     describe('#open', function() {
       it('should default to false', function() {
         expect(el.open).to.be.false;
+        expect(el._elements.shellMenuButton.getAttribute('aria-haspopup')).to.be.null;
+        expect(el._elements.shellMenuButton.getAttribute('aria-expanded')).to.be.null;
       });
 
       it('should ignore true if no valid menu is provided', function() {
         el.open = true;
 
         expect(el.open).to.be.false;
+        expect(el._elements.shellMenuButton.getAttribute('aria-haspopup')).to.be.null;
+        expect(el._elements.shellMenuButton.getAttribute('aria-expanded')).to.be.null;
       });
 
       it('should open the menu when open = true', function(done) {
@@ -130,6 +138,8 @@ describe('Shell.MenuBar.Item', function() {
         menu.on('coral-overlay:open', function() {
           expect(menu.open).to.be.true;
           expect(el.open).to.be.true;
+          expect(el._elements.shellMenuButton.getAttribute('aria-haspopup')).to.equal('dialog');
+          expect(el._elements.shellMenuButton.getAttribute('aria-expanded')).to.equal('true');
 
           done();
         });
@@ -147,12 +157,20 @@ describe('Shell.MenuBar.Item', function() {
         menu.on('coral-overlay:open', function() {
           helpers.next(function() {
             expect(el.open).to.be.true;
+            expect(el._elements.shellMenuButton.getAttribute('aria-haspopup')).to.equal('dialog');
+            expect(el._elements.shellMenuButton.getAttribute('aria-expanded')).to.equal('true');
+
             done();
           });
         });
 
-        // opening the menu separately, should update the item
-        menu.open = true;
+        helpers.next(function() {
+          expect(el._elements.shellMenuButton.getAttribute('aria-haspopup')).to.equal('dialog');
+          expect(el._elements.shellMenuButton.getAttribute('aria-expanded')).to.equal('false');
+
+          // opening the menu separately, should update the item
+          menu.open = true;
+        });
       });
     });
 
@@ -346,6 +364,18 @@ describe('Shell.MenuBar.Item', function() {
           el.label.textContent = 'This is the profile button';
           el.setAttribute('aria-label', 'Profile');
           expect(el._elements.shellMenuButton.getAttribute('aria-label')).to.equal(null);
+        });
+      });
+
+      it('should have role="listitem"', function() {
+        const el = helpers.build(new Shell.MenuBar.Item());
+        expect(el.getAttribute('role')).to.equal('listitem');
+      });
+
+      describe('shellMenuButton', function() {
+        it('should have type="button"', function() {
+          const el = helpers.build(new Shell.MenuBar.Item());
+          expect(el._elements.shellMenuButton.getAttribute('type')).to.equal('button');
         });
       });
     });
