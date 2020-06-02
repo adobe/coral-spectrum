@@ -255,7 +255,28 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
 
     // @a11y Update aria-expanded. Active drilldowns should be expanded.
     if (this.variant === variant.DRILLDOWN) {
-      this.setAttribute('aria-expanded', this._active);
+
+      // @a11y workaround for VoiceOver announcing expanded state rather than the item name when the item receives focus.
+      const timeoutDelay = 50;
+      if (this._ariaExpandedTimeout) {
+        window.clearTimeout(this._ariaExpandedTimeout);
+        this._ariaExpandedTimeout = undefined;
+      }
+      // @a11y after a delay to give focused item time to announce,
+      this._ariaExpandedTimeout = window.setTimeout(() => {
+        // @a11y hide the item before setting aria-expanded state.
+        this.setAttribute('aria-hidden', true);
+        // @a11y wait 50ms
+        window.setTimeout(() => {
+          // @a11y set aria-expanded state.
+          this.setAttribute('aria-expanded', this._active);
+          // @a11y wait another 50ms before
+          window.setTimeout(() => {
+            // @a11y removing aria-hidden so that item is once again accessible.
+            this.removeAttribute('aria-hidden');
+          }, timeoutDelay);
+        }, timeoutDelay);
+      }, timeoutDelay);
     }
 
     if (!this._active) {

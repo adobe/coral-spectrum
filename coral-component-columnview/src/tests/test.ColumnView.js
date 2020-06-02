@@ -1254,9 +1254,12 @@ describe('ColumnView', function() {
     });
 
     describe('when item is expanded', function() {
-      it('should have aria-expanded equal to "true"', function() {
+      it('should have aria-expanded equal to "true"', function(done) {
         const el = helpers.build(window.__html__['ColumnView.full.html']);
-        expect(el.activeItem.getAttribute('aria-expanded')).to.equal('true');
+        setTimeout(() => {
+          expect(el.activeItem.getAttribute('aria-expanded')).to.equal('true');
+          done();
+        }, 155);
       });
 
       it('should express ownership of expanded column using aria-owns', function(done) {
