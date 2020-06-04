@@ -1111,7 +1111,7 @@ class ColumnView extends BaseComponent(HTMLElement) {
       if (lang && lang !== i18n.locale) {
         contentSpan.setAttribute('lang', lang);
       }
-      contentSpan.innerHTML = activeElement._elements.content.innerText;
+      contentSpan.innerText = activeElement._elements.content.innerText;
       span.appendChild(contentSpan);
       span.appendChild(
         document.createTextNode(
