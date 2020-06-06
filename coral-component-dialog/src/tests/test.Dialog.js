@@ -12,7 +12,7 @@
 
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Dialog} from '../../../coral-component-dialog';
-import {tracking} from '../../../coral-utils';
+import {commons, tracking} from '../../../coral-utils';
 import {DragAction} from '../../../coral-dragaction';
 
 describe('Dialog', function() {
@@ -308,6 +308,16 @@ describe('Dialog', function() {
       
       el.on('coral-overlay:open', function() {
         expect(document.activeElement).to.not.equal(el._elements.closeButton);
+        commons.transitionEnd(el._elements.wrapper, () => {
+          expect(el._elements.closeButton.tabIndex).to.equal(0);
+          expect(el._elements.closeButton.hasAttribute('coral-tabcapture')).to.be.false;
+          el.hide();
+        });
+      });
+
+      el.on('coral-overlay:close', function() {
+        expect(el._elements.closeButton.tabIndex).to.equal(-1);
+        expect(el._elements.closeButton.hasAttribute('coral-tabcapture')).to.be.true;
         done();
       });
     });

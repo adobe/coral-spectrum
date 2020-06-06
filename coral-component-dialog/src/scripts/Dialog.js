@@ -309,32 +309,33 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
       this.setAttribute('aria-labelledby', this.header.id);
     }
 
-    const hasContent = this.content && this.content.textContent !== '';
+    // If the dialog has no content, or the content is empty, do nothing further.
+    if (!this.content || this.content.textContent === '') {
+      return;
+    }
 
     // If the dialog has a content,
-    if (hasContent) {
-      this.content.id = this.content.id || commons.getUID();
+    this.content.id = this.content.id || commons.getUID();
 
-      // In an alertdialog with a content region, if the alertdialog is not otherwise described.
-      if (this._variant !== variant.DEFAULT) {
+    // In an alertdialog with a content region, if the alertdialog is not otherwise described.
+    if (this._variant !== variant.DEFAULT) {
 
-        // with no header, 
-        if (!hasHeader) {
+      // with no header, 
+      if (!hasHeader) {
 
-          // label the alertdialog with a reference to the content
-          this.setAttribute('aria-labelledby', this.content.id);
-        }
-
-        // otherwise, if the alertdialog is not otherwise described,
-        else if (!this.hasAttribute('aria-describedby')) {
-
-          // ensure that the alertdialog is described by the content.
-          this.setAttribute('aria-describedby', this.content.id);
-        }
+        // label the alertdialog with a reference to the content
+        this.setAttribute('aria-labelledby', this.content.id);
       }
-      else if (this.getAttribute('aria-labelledby') === this.content.id) {
-        this.removeAttribute('aria-labelledby');
+
+      // otherwise, if the alertdialog is not otherwise described,
+      else if (!this.hasAttribute('aria-describedby')) {
+
+        // ensure that the alertdialog is described by the content.
+        this.setAttribute('aria-describedby', this.content.id);
       }
+    }
+    else if (this.getAttribute('aria-labelledby') === this.content.id) {
+      this.removeAttribute('aria-labelledby');
     }
   }
   
@@ -392,7 +393,13 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
       if (this.open) {
         commons.transitionEnd(this._elements.wrapper, () => {
           this._handleFocus();
+          this._elements.closeButton.tabIndex = 0;
+          this._elements.closeButton.removeAttribute('coral-tabcapture');
         });
+      }
+      else {
+        this._elements.closeButton.tabIndex = -1;
+        this._elements.closeButton.setAttribute('coral-tabcapture', '');
       }
     });
   }
