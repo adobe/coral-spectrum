@@ -16,13 +16,13 @@ import {commons, i18n} from '../../../coral-utils';
 
 describe('ColumnView', function() {
   // handles the loading and annotating of the columns so that content can be loaded remotely
-  var onLoadEvent = function(event) {
-    var cv = event.target;
-    var item = event.detail.item;
-    var column = event.detail.column;
+  const onLoadEvent = function(event) {
+    const cv = event.target;
+    const item = event.detail.item;
+    const column = event.detail.column;
 
     // if item is set, it means we load the item content
-    var url = item ? item.dataset.src : column.dataset.src;
+    const url = item ? item.dataset.src : column.dataset.src;
 
     // there is no information on additional items
     if (typeof url === 'undefined') {
@@ -30,11 +30,11 @@ describe('ColumnView', function() {
     }
 
     // we load the url from the snippets instead of using ajax
-    var data = window.__html__[`examples/${url}` ];
+    const data = window.__html__[`examples/${url}` ];
     if (typeof data !== 'undefined') {
-      var t = document.createElement('div');
+      const t = document.createElement('div');
       t.innerHTML = data;
-      var el = t.firstElementChild;
+      const el = t.firstElementChild;
 
       // if it is a preview column we add it directly
       if (el.matches('coral-columnview-preview')) {
@@ -42,8 +42,8 @@ describe('ColumnView', function() {
       }
       else {
         // otherwise we treat it as a normal column
-        var contentWrapper = el.querySelector('coral-columnview-column-content');
-        var columnWrapper = contentWrapper.closest('coral-columnview-column');
+        const contentWrapper = el.querySelector('coral-columnview-column-content');
+        const columnWrapper = contentWrapper.closest('coral-columnview-column');
 
         if (contentWrapper) {
           if (item) {
@@ -55,7 +55,7 @@ describe('ColumnView', function() {
           // we load data in the current column
           else {
             // update the source of the current column (so that lazyloading does work)
-            var nextSrcToLoad = columnWrapper.dataset.src;
+            const nextSrcToLoad = columnWrapper.dataset.src;
             if (!nextSrcToLoad) {
               column.removeAttribute('data-src');
             }
@@ -93,7 +93,7 @@ describe('ColumnView', function() {
   });
 
   describe('API', function() {
-    var el;
+    let el;
 
     beforeEach(function() {
       helpers.target.addEventListener('coral-columnview:loaditems', onLoadEvent);
@@ -120,7 +120,7 @@ describe('ColumnView', function() {
       it('should set the selectionMode on the internal columns', function(done) {
         el.selectionMode = ColumnView.selectionMode.SINGLE;
 
-        var column = new ColumnView.Column();
+        const column = new ColumnView.Column();
         expect(column._selectionMode).to.equal(undefined, 'The _selectionMode has no default');
         el.columns.add(column);
 
@@ -139,11 +139,11 @@ describe('ColumnView', function() {
   describe('Markup', function() {});
 
   describe('Events', function() {
-    var changeSpy;
-    var loadItemsSpy;
-    var columnActiveChangeSpy;
+    let changeSpy;
+    let loadItemsSpy;
+    let columnActiveChangeSpy;
 
-    var spiedLoadEvent = function(event) {
+    const spiedLoadEvent = function(event) {
       loadItemsSpy(event);
       onLoadEvent(event);
     };
@@ -171,9 +171,9 @@ describe('ColumnView', function() {
     describe('#coral-columnview:loaditems', function() {
       // @flaky
       it.skip('should fire a "coral-columnview:loaditems" event after initial load if there is space on screen for more items', function(done) {
-        var loadItemsSpy = sinon.spy();
-        var columnView = new ColumnView();
-        var column = new ColumnView.Column();
+        const loadItemsSpy = sinon.spy();
+        const columnView = new ColumnView();
+        const column = new ColumnView.Column();
 
         columnView.on('coral-columnview:loaditems', loadItemsSpy);
 
@@ -187,11 +187,15 @@ describe('ColumnView', function() {
         });
       });
 
+      // @flaky
       it('should fire a "coral-columnview:loaditems" event until there is no more space on screen', function(done) {
-        var columnView = new ColumnView();
+        const columnView = new ColumnView();
         // Set height to detect overflow is occurring due to items being added
         columnView.style.height = '100px';
-        var column = new ColumnView.Column();
+        const column = new ColumnView.Column();
+
+        // @flaky this test sometimes fails to call 'coral-columnview:loaditems' within 2 secs, so call done before uncaught exception 
+        const timeout = window.setTimeout(done, 1900);
   
         // this callback should be called several times until there is no more space available
         columnView.on('coral-columnview:loaditems', function() {
@@ -200,12 +204,13 @@ describe('ColumnView', function() {
           column.items.add(new ColumnView.Item());
 
           // calculate if there is more space and more items should be loaded
-          var itemsHeight = 0;
+          let itemsHeight = 0;
           column.items.getAll().forEach(function(item) {
             itemsHeight += item.offsetHeight + parseFloat(getComputedStyle(item).marginTop);
           });
           
           if (itemsHeight >= columnView.offsetHeight) {
+            clearTimeout(timeout);
             done();
           }
         });
@@ -245,10 +250,10 @@ describe('ColumnView', function() {
         expect(columnActiveChangeSpy.callCount).to.equal(0);
         expect(changeSpy.callCount).to.equal(0);
 
-        var removeItemSpy = sinon.spy(el, '_afterItemSelectedInColumn');
+        const removeItemSpy = sinon.spy(el, '_afterItemSelectedInColumn');
 
-        var columns = el.columns.getAll();
-        var lastColumn = columns[columns.length - 1];
+        const columns = el.columns.getAll();
+        const lastColumn = columns[columns.length - 1];
 
         expect(lastColumn.activeItem).to.be.null;
         expect(lastColumn.selectedItem).to.be.null;
@@ -269,11 +274,11 @@ describe('ColumnView', function() {
         expect(columnActiveChangeSpy.callCount).to.equal(0);
         expect(changeSpy.callCount).to.equal(0);
 
-        var columns = el.columns.getAll();
+        const columns = el.columns.getAll();
 
         expect(el.activeItem).to.be.null;
 
-        var items = columns[0].items.getAll();
+        const items = columns[0].items.getAll();
 
         items[0].selected = true;
 
@@ -306,11 +311,11 @@ describe('ColumnView', function() {
         expect(columnActiveChangeSpy.callCount).to.equal(0);
         expect(changeSpy.callCount).to.equal(0);
 
-        var columns = el.columns.getAll();
+        const columns = el.columns.getAll();
 
         expect(el.activeItem).to.be.null;
 
-        var items = columns[0].items.getAll();
+        const items = columns[0].items.getAll();
 
         items[0].selected = true;
 
@@ -346,11 +351,11 @@ describe('ColumnView', function() {
         expect(columnActiveChangeSpy.callCount).to.equal(0);
         expect(changeSpy.callCount).to.equal(0);
 
-        var columns = el.columns.getAll();
+        const columns = el.columns.getAll();
 
         expect(el.activeItem).to.be.null;
 
-        var items = columns[0].items.getAll();
+        const items = columns[0].items.getAll();
 
         items[0].selected = true;
 
@@ -378,7 +383,7 @@ describe('ColumnView', function() {
         expect(columnActiveChangeSpy.callCount).to.equal(0);
         expect(changeSpy.callCount).to.equal(0);
 
-        var column = el.columns.first();
+        const column = el.columns.first();
 
         column.items.first().selected = true;
 
@@ -393,16 +398,16 @@ describe('ColumnView', function() {
         expect(columnActiveChangeSpy.callCount).to.equal(0);
         expect(changeSpy.callCount).to.equal(0);
 
-        var columns = el.columns.getAll();
+        const columns = el.columns.getAll();
 
-        var lastColumn = columns[columns.length - 1];
-        var secondToLastColumn = columns[columns.length - 2];
+        const lastColumn = columns[columns.length - 1];
+        const secondToLastColumn = columns[columns.length - 2];
 
         // selects the an item in the first column
-        var selectedItem1 = lastColumn.items.first();
+        const selectedItem1 = lastColumn.items.first();
         selectedItem1.selected = true;
 
-        var selectedItem2 = secondToLastColumn.items.last();
+        const selectedItem2 = secondToLastColumn.items.last();
         selectedItem2.selected = true;
 
         expect(selectedItem1.parentNode).not.to.equal(selectedItem2.parentNode, 'They are not in the same column');
@@ -418,16 +423,16 @@ describe('ColumnView', function() {
         expect(columnActiveChangeSpy.callCount).to.equal(0);
         expect(changeSpy.callCount).to.equal(0);
 
-        var columns = el.columns.getAll();
+        const columns = el.columns.getAll();
 
-        var lastColumn = columns[columns.length - 1];
-        var secondToLastColumn = columns[columns.length - 2];
+        const lastColumn = columns[columns.length - 1];
+        const secondToLastColumn = columns[columns.length - 2];
 
         // selects the an item in the first column
-        var selectedItem = lastColumn.items.first();
+        const selectedItem = lastColumn.items.first();
         selectedItem.selected = true;
 
-        var activeItem = secondToLastColumn.items.last();
+        const activeItem = secondToLastColumn.items.last();
         activeItem.active = true;
 
         expect(changeSpy.callCount).to.equal(2);
@@ -441,12 +446,12 @@ describe('ColumnView', function() {
         expect(columnActiveChangeSpy.callCount).to.equal(0);
         expect(changeSpy.callCount).to.equal(0);
 
-        var columns = el.columns.getAll();
+        const columns = el.columns.getAll();
 
-        var lastColumn = columns[columns.length - 1];
+        const lastColumn = columns[columns.length - 1];
 
         // selects the an item in the first column
-        var selectedItem = lastColumn.items.first();
+        const selectedItem = lastColumn.items.first();
         selectedItem.selected = true;
 
         // clicks on the background of the column which should cause the selection to go away
@@ -463,13 +468,13 @@ describe('ColumnView', function() {
         expect(columnActiveChangeSpy.callCount).to.equal(0);
         expect(changeSpy.callCount).to.equal(0);
 
-        var columns = el.columns.getAll();
+        const columns = el.columns.getAll();
 
-        var lastColumn = columns[columns.length - 1];
-        var secondToLastColumn = columns[columns.length - 2];
+        const lastColumn = columns[columns.length - 1];
+        const secondToLastColumn = columns[columns.length - 2];
 
         // selects the an item in the first column
-        var selectedItem = lastColumn.items.first();
+        const selectedItem = lastColumn.items.first();
         selectedItem.selected = true;
 
         // clicks on the background of the column which should cause the selection to go away
@@ -486,13 +491,13 @@ describe('ColumnView', function() {
 
       it('should not active when column is selected ', function() {
           const el = helpers.build(window.__html__['ColumnView.full.html']);
-          var columns = el.columns.getAll();
-          var firstColumn = columns[0];
-          var selectedItem = firstColumn.items.first();
-          var secondColumn = columns[1];
+          const columns = el.columns.getAll();
+          const firstColumn = columns[0];
+          const selectedItem = firstColumn.items.first();
+          const secondColumn = columns[1];
           selectedItem.setAttribute("selected",true);
-          var selectedActiveColumn = selectedItem.getAttribute("active");
-          var secondColumnActive = secondColumn.getAttribute("active");
+          const selectedActiveColumn = selectedItem.getAttribute("active");
+          const secondColumnActive = secondColumn.getAttribute("active");
           expect(secondColumnActive).to.be.null;
           expect(selectedActiveColumn).to.be.null;
       });
@@ -503,17 +508,17 @@ describe('ColumnView', function() {
         expect(columnActiveChangeSpy.callCount).to.equal(0);
         expect(changeSpy.callCount).to.equal(0);
 
-        var columns = el.columns.getAll();
+        const columns = el.columns.getAll();
 
-        var lastColumn = columns[columns.length - 1];
+        const lastColumn = columns[columns.length - 1];
 
-        var items = lastColumn.items.getAll();
+        const items = lastColumn.items.getAll();
 
         // selects the an item in the first column
-        var selectedItem1 = items[0];
+        const selectedItem1 = items[0];
         selectedItem1.selected = true;
 
-        var selectedItem2 = items[1];
+        const selectedItem2 = items[1];
         selectedItem2.selected = true;
 
         expect(changeSpy.callCount).to.equal(2);
@@ -534,7 +539,7 @@ describe('ColumnView', function() {
 
     describe('#coral-columnview:navigate', function() {
       it('should not be triggered when the column view initializes', function() {
-        var navigateSpy = sinon.spy();
+        const navigateSpy = sinon.spy();
 
         helpers.target.addEventListener('coral-columnview:navigate', navigateSpy);
 
@@ -547,12 +552,12 @@ describe('ColumnView', function() {
       });
 
       it('should be triggered when a new column is added and it is ready', function(done) {
-        var navigateSpy = sinon.spy();
+        const navigateSpy = sinon.spy();
 
-        var navigateEvent = function(event) {
+        const navigateEvent = function(event) {
           navigateSpy(event);
 
-          var columns = event.target.columns.getAll();
+          const columns = event.target.columns.getAll();
 
           expect(columns.length).to.equal(2, 'A new columns has to be added.');
           expect(columns[1].items.length).to.equal(2, 'The new column has 2 items');
@@ -573,21 +578,21 @@ describe('ColumnView', function() {
         // no initial events
         expect(navigateSpy.callCount).to.equal(0);
 
-        var columns = el.columns.getAll();
+        const columns = el.columns.getAll();
         expect(columns.length).to.equal(1);
 
-        var item = columns[0].items.getAll()[2];
+        const item = columns[0].items.getAll()[2];
         // activates the item which will load a new column
         item.click();
       });
       
       it('should be triggered when a column is removed', function(done) {
-        var navigateSpy = sinon.spy();
+        const navigateSpy = sinon.spy();
 
-        var navigateEvent = function(event) {
+        const navigateEvent = function(event) {
           navigateSpy(event);
 
-          var columns = event.target.columns.getAll();
+          const columns = event.target.columns.getAll();
 
           expect(columns.length).to.equal(1, 'Extra columns have been removed');
           expect(columns[0].items.length).to.equal(9, 'Column has 9 items');
@@ -608,7 +613,7 @@ describe('ColumnView', function() {
         // no initial events
         expect(navigateSpy.callCount).to.equal(0);
 
-        var columns = el.columns.getAll();
+        const columns = el.columns.getAll();
         expect(columns.length).to.equal(3);
 
         // clicking the content will remove all extra columns
@@ -622,13 +627,13 @@ describe('ColumnView', function() {
         // no initial events
         expect(columnActiveChangeSpy.callCount).to.equal(0);
 
-        var columns = el.columns.getAll();
+        const columns = el.columns.getAll();
 
-        var oldActiveItem = el.activeItem;
-        var lastColumn = columns[columns.length - 1];
+        const oldActiveItem = el.activeItem;
+        const lastColumn = columns[columns.length - 1];
 
-        var firstItem = lastColumn.items.first();
-        var lastItem = lastColumn.items.last();
+        const firstItem = lastColumn.items.first();
+        const lastItem = lastColumn.items.last();
 
         // the first item of the column is activated
         firstItem.click();
@@ -657,12 +662,12 @@ describe('ColumnView', function() {
         expect(columnActiveChangeSpy.callCount).to.equal(0);
         expect(changeSpy.callCount).to.equal(0);
 
-        var columns = el.columns.getAll();
+        const columns = el.columns.getAll();
 
-        var oldActiveItem = el.activeItem;
-        var lastColumn = columns[columns.length - 1];
+        const oldActiveItem = el.activeItem;
+        const lastColumn = columns[columns.length - 1];
 
-        var firstItem = lastColumn.items.first();
+        const firstItem = lastColumn.items.first();
 
         // the first item of the column is activated
         firstItem.click();
@@ -674,9 +679,9 @@ describe('ColumnView', function() {
         expect(columnActiveChangeSpy.getCall(0).args[0].detail.activeItem).to.equal(firstItem);
         expect(columnActiveChangeSpy.getCall(0).args[0].detail.oldActiveItem).to.equal(oldActiveItem);
 
-        var firstColumn = columns[0];
+        const firstColumn = columns[0];
 
-        var newActiveItem = firstColumn.items.first();
+        const newActiveItem = firstColumn.items.first();
         newActiveItem.click();
 
         // since the active is in a different column
@@ -692,12 +697,12 @@ describe('ColumnView', function() {
         // no initial events
         expect(columnActiveChangeSpy.callCount).to.equal(0);
 
-        var columns = el.columns.getAll();
+        const columns = el.columns.getAll();
 
-        var oldActiveItem = el.activeItem;
-        var lastColumn = columns[columns.length - 1];
+        const oldActiveItem = el.activeItem;
+        const lastColumn = columns[columns.length - 1];
 
-        var firstItem = lastColumn.items.first();
+        const firstItem = lastColumn.items.first();
 
         // the first item of the column is activated
         firstItem.click();
@@ -720,16 +725,16 @@ describe('ColumnView', function() {
         // no initial events
         expect(columnActiveChangeSpy.callCount).to.equal(0);
 
-        var columns = el.columns.getAll();
+        let columns = el.columns.getAll();
         expect(columns.length).to.equal(1, 'Just the initial column should be there');
 
-        var oldActiveItem = el.activeItem;
-        var lastColumn = columns[columns.length - 1];
+        const oldActiveItem = el.activeItem;
+        const lastColumn = columns[columns.length - 1];
 
         expect(oldActiveItem).to.equal(null, 'The colum has no initial active item');
 
         // clicks on the "English" item
-        var firstItem = lastColumn.items.first();
+        const firstItem = lastColumn.items.first();
         firstItem.click();
 
         expect(el.activeItem).to.equal(firstItem);
@@ -740,11 +745,11 @@ describe('ColumnView', function() {
 
         // we refresh the variables since new columns were added
         columns = el.columns.getAll();
-        var newColumn = columns[columns.length - 1];
+        const newColumn = columns[columns.length - 1];
 
         expect(lastColumn).not.to.equal(newColumn, 'A new column has been added');
       
-        var newActiveItem = newColumn.items.first();
+        const newActiveItem = newColumn.items.first();
         newActiveItem.click();
 
         expect(columnActiveChangeSpy.callCount).to.equal(2, 'Active item should have changed');
@@ -767,10 +772,10 @@ describe('ColumnView', function() {
         expect(columnActiveChangeSpy.callCount).to.equal(0);
         expect(changeSpy.callCount).to.equal(0);
 
-        var columns = el.columns.getAll();
+        const columns = el.columns.getAll();
 
-        var firstColumn = columns[0];
-        var selectedColumnActiveItem = el.activeItem;
+        const firstColumn = columns[0];
+        const selectedColumnActiveItem = el.activeItem;
 
         expect(firstColumn).not.to.be.null;
         expect(firstColumn.activeItem).not.to.be.null;
@@ -1104,8 +1109,8 @@ describe('ColumnView', function() {
       const firstColumn = el.columns.first();
 
       const items = firstColumn.items.getAll();
-      let fromIndex = 1;
-      let toIndex = 4;
+      const fromIndex = 1;
+      const toIndex = 4;
 
       // First select an item
       items[fromIndex].selected = true;
@@ -1117,7 +1122,7 @@ describe('ColumnView', function() {
       }));
 
       items.forEach(function(item, i) {
-        var isSelected = (i >= fromIndex && i <= toIndex);
+        const isSelected = (i >= fromIndex && i <= toIndex);
         expect(item.selected).to.equal(isSelected);
       });
 
@@ -1126,11 +1131,11 @@ describe('ColumnView', function() {
   });
 
   describe('Accessibility', function() {
-    var changeSpy;
-    var loadItemsSpy;
-    var columnActiveChangeSpy;
+    let changeSpy;
+    let loadItemsSpy;
+    let columnActiveChangeSpy;
 
-    var spiedLoadEvent = function(event) {
+    const spiedLoadEvent = function(event) {
       loadItemsSpy(event);
       onLoadEvent(event);
     };
@@ -1179,7 +1184,7 @@ describe('ColumnView', function() {
         expect(accessibilityState.hidden).to.be.true;
 
         // select an item
-        let item = el.items.getAll()[1];
+        const item = el.items.getAll()[1];
         item.focus();
         item.selected = true;
         helpers.next(function() {
@@ -1196,7 +1201,7 @@ describe('ColumnView', function() {
             // and should not be hidden.
             expect(accessibilityState.hidden).to.be.false;
             // accessibilityState firstChild to announce should be <span><span lang="fr">Français</span>, checked<span>
-            var spans = accessibilityState.querySelectorAll('span');
+            let spans = accessibilityState.querySelectorAll('span');
             expect(spans.length).to.equal(2);
             expect(spans[0].childNodes[0]).to.equal(spans[1]);
             expect(spans[1].getAttribute('lang')).to.equal(item.getAttribute('lang'));
@@ -1254,9 +1259,12 @@ describe('ColumnView', function() {
     });
 
     describe('when item is expanded', function() {
-      it('should have aria-expanded equal to "true"', function() {
+      it('should have aria-expanded equal to "true"', function(done) {
         const el = helpers.build(window.__html__['ColumnView.full.html']);
-        expect(el.activeItem.getAttribute('aria-expanded')).to.equal('true');
+        setTimeout(() => {
+          expect(el.activeItem.getAttribute('aria-expanded')).to.equal('true');
+          done();
+        }, 300);
       });
 
       it('should express ownership of expanded column using aria-owns', function(done) {
@@ -1295,14 +1303,14 @@ describe('ColumnView', function() {
 
     it('should clear the columns to the right when an item is programmatically activated', function() {
       const el = helpers.build(window.__html__['ColumnView.full.html']);
-      var activeItemSpy = sinon.spy();
-      var removeItemSpy = sinon.spy(el, '_afterItemSelectedInColumn');
+      const activeItemSpy = sinon.spy();
+      const removeItemSpy = sinon.spy(el, '_afterItemSelectedInColumn');
 
-      var columns = el.columns.getAll();
+      const columns = el.columns.getAll();
 
       el.on('coral-columnview:activeitemchange', activeItemSpy);
 
-      var firstActiveItem = columns[0].activeItem;
+      const firstActiveItem = columns[0].activeItem;
       expect(firstActiveItem.active).to.equal(true, 'The item was previously active');
       // deactivating the active item is like clicking on the background of the coral-columnview-column-content
       firstActiveItem.active = false;
