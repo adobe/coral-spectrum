@@ -1069,12 +1069,14 @@ class QuickActions extends Overlay {
     }
   }
   
-  _onAnimate() {
-    if (this.placement === placement.BOTTOM) {
-      this.style.marginTop = `${-parseFloat(this.lengthOffset) + 8}px`;
-    }
-    else {
-      this.style.marginTop = `${parseFloat(this.lengthOffset) - 8}px`;
+  _onAnimate(event) {
+    if (event.target === this) {
+      if (this.placement === placement.BOTTOM) {
+        this.style.marginTop = `${-parseFloat(this.lengthOffset) + 8}px`;
+      }
+      else {
+        this.style.marginTop = `${parseFloat(this.lengthOffset) - 8}px`;
+      }
     }
   }
   

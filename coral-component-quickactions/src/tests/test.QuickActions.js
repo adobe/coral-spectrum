@@ -558,7 +558,7 @@ describe('QuickActions', function() {
       el.lengthOffset = 0;
       el.target = targetElement;
       
-      el._onAnimate();
+      el._onAnimate({target: el});
   
       expect(el.style.marginTop).to.equal('-8px');
   
