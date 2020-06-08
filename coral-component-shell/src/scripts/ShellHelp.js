@@ -99,7 +99,7 @@ class ShellHelp extends BaseComponent(HTMLElement) {
     
     // Show loading
     this._elements.items.hidden = true;
-    this._elements.loading.hidden = false;
+    this._showLoading();
     this._elements.resultMessage.hidden = true;
     this._elements.results.hidden = true;
     
@@ -118,7 +118,7 @@ class ShellHelp extends BaseComponent(HTMLElement) {
     this._elements.results.hidden = true;
     
     // Hide loading
-    this._elements.loading.hidden = true;
+    this._hideLoading();
     
     // Hide no-results
     this._elements.resultMessage.hidden = true;
@@ -126,19 +126,68 @@ class ShellHelp extends BaseComponent(HTMLElement) {
     // Show items
     this._elements.items.hidden = false;
   }
+
+  /** @private */
+  _clearTimeout(timeoutName) {
+    if (this[timeoutName]) {
+      window.clearTimeout(this[timeoutName]);
+      this[timeoutName] = undefined;
+    }
+  }
+
+  /** @private */
+  _showMessage(elementName, message) {
+    var el = this._elements[elementName];
+    var timeoutName = '_' + elementName + 'Timeout';
+
+    // Show message element
+    el.hidden = false;
+
+    // Add message text after 150ms delay to give screen readers enough
+    // time to recognize the live region and respond to the text update 
+    this._clearTimeout(timeoutName);
+    this[timeoutName] = window.setTimeout(() => el.appendChild(message), 150);
+  }
+
+  /** @private */
+  _showLoading() {
+    if (!this._elements.loading.hidden) {
+      return;
+    }
+
+    if (this._elements.loading.contains(this._elements.loadingMessage)) {
+      this._elements.loadingMessage = this._elements.loading.removeChild(this._elements.loadingMessage);
+    }
+
+    this._showMessage('loading', this._elements.loadingMessage);
+  }
+
+  /** @private */
+  _hideLoading() {
+    if (this._elements.loading.hidden) {
+      return;
+    }
+
+    this._elements.loading.hidden = true;
+
+    // clear the timeout
+    this._clearTimeout('_loadingTimeout');
+    if (this._elements.loading.contains(this._elements.loadingMessage)) {
+      this._elements.loadingMessage = this._elements.loading.removeChild(this._elements.loadingMessage);
+    }
+  }
   
   /**
    Indicate to the user that an error has occurred
    */
   showError() {
     // Hide loading
-    this._elements.loading.hidden = true;
+    this._hideLoading();
     
     this._elements.resultMessage.innerHTML = '';
-    
-    this._elements.resultMessage.appendChild(helpSearchError.call(this._elements, {i18n}));
-    
-    this._elements.resultMessage.hidden = false;
+
+    // Show the error message
+    this._showMessage('resultMessage', helpSearchError.call(this._elements, {i18n}));
   }
   
   /**
@@ -153,15 +202,19 @@ class ShellHelp extends BaseComponent(HTMLElement) {
    */
   showResults(results, total, allResultsURL) {
     // Hide loading
-    this._elements.loading.hidden = true;
-    
+    this._hideLoading();
+
+    // clear setTimeout
+    if (this._showResultsTimeout) {
+      window.clearTimeout(this._showResultsTimeout);
+      this._showResultsTimeout = undefined;
+    }
+
     if (!results || total === 0) {
       // Clear existing result message
       this._elements.resultMessage.innerHTML = '';
       // Indicate to the user that no results were found
-      this._elements.resultMessage.appendChild(noHelpResults.call(this._elements, {i18n}));
-      // Show result message
-      this._elements.resultMessage.hidden = false;
+      this._showMessage('resultMessage', noHelpResults.call(this._elements, {i18n}));
     }
     else {
       // Clear existing results

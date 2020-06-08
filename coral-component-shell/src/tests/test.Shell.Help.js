@@ -15,7 +15,7 @@ import {Shell} from '../../../coral-component-shell';
 import {Collection} from '../../../coral-collection';
 
 describe('Shell.Help', function() {
-  var htmlSnippet = '<coral-shell-help></coral-shell-help>';
+  let htmlSnippet = '<coral-shell-help></coral-shell-help>';
 
   describe('Namespace', function() {
     it('should be defined in the Shell namespace', function() {
@@ -31,7 +31,7 @@ describe('Shell.Help', function() {
     });
 
     it('should support creation from js', function() {
-      var help = new Shell.Help();
+      const help = new Shell.Help();
       expect(help instanceof Shell.Help).to.equal(true);
     });
 
@@ -62,7 +62,7 @@ describe('Shell.Help', function() {
 
       it('Setting Help Menu items should have no effect', function() {
         const el = helpers.build(htmlSnippet);
-        var items = el.items;
+        const items = el.items;
         
         try {
           el.items = new Collection();
@@ -88,20 +88,23 @@ describe('Shell.Help', function() {
 
   describe('Markup', function() {
     describe('#showError()', function() {
-      it('should display an Error Message on "showError" function call', function() {
+      it('should display an Error Message on "showError" function call', function(done) {
         const el = helpers.build(htmlSnippet);
-        var resultMessage = el._elements.resultMessage;
-        var expectedResultMessage = 'Error fetching results';
+        const resultMessage = el._elements.resultMessage;
+        const expectedResultMessage = 'Error fetching results';
 
         el.showError();
-        expect(el._elements.resultMessage.hidden).to.equal(false);
-        expect(resultMessage.querySelector('._coral-Shell-help-resultMessage-heading').textContent).to.equal(expectedResultMessage);
+        window.setTimeout(() => {
+          expect(el._elements.resultMessage.hidden).to.equal(false);
+          expect(resultMessage.querySelector('._coral-Shell-help-resultMessage-heading').textContent).to.equal(expectedResultMessage);
+          done();
+        }, 300);
       });
     });
 
     describe('#showResults()', function() {
       it('should show search results on "showResults" function call', function() {
-        var resultItems = [
+        const resultItems = [
           {
             'tags': [
               'Marketing Cloud',
@@ -120,8 +123,8 @@ describe('Shell.Help', function() {
           }
         ];
 
-        var total = 1111;
-        var allResultsURL = 'https://adobe.com';
+        const total = 1111;
+        const allResultsURL = 'https://adobe.com';
 
         const el = helpers.build(htmlSnippet);
         el.showResults(resultItems, total, allResultsURL);
@@ -130,14 +133,17 @@ describe('Shell.Help', function() {
         expect(el._elements.results.lastChild.target).to.equal('_blank');
       });
 
-      it('should display a "no results message" on "showResults" function call with an array and total = 0', function() {
+      it('should display a "no results message" on "showResults" function call with an array and total = 0', function(done) {
         const el = helpers.build(htmlSnippet);
         el.showResults([], 0);
-        var resultMessage = el._elements.resultMessage;
-        var expectedResultMessage = 'No results found';
+        const resultMessage = el._elements.resultMessage;
+        const expectedResultMessage = 'No results found';
 
-        expect(el._elements.resultMessage.hidden).to.equal(false);
-        expect(resultMessage.querySelector('._coral-Shell-help-resultMessage-heading').textContent).to.equal(expectedResultMessage);
+        window.setTimeout(() => {
+          expect(el._elements.resultMessage.hidden).to.equal(false);
+          expect(resultMessage.querySelector('._coral-Shell-help-resultMessage-heading').textContent).to.equal(expectedResultMessage);
+          done();
+        }, 300);
       });
     });
   });
@@ -145,10 +151,10 @@ describe('Shell.Help', function() {
   describe('User Interaction', function() {
     describe('search', function() {
       it('should perform a search', function() {
-        var searchSpy = sinon.spy();
+        const searchSpy = sinon.spy();
 
         const el = helpers.build(window.__html__['Shell.Help.base.html']);
-        var search = el.querySelector('coral-search');
+        const search = el.querySelector('coral-search');
         el.on('coral-shell-help:search', searchSpy);
         search.value = 'customer';
         
@@ -162,7 +168,7 @@ describe('Shell.Help', function() {
 
       it('it should clear loading spinner on clear button click', function() {
         const el = helpers.build(window.__html__['Shell.Help.base.html']);
-        var search = el.querySelector('coral-search');
+        const search = el.querySelector('coral-search');
 
         search.value = 'customer';
         
