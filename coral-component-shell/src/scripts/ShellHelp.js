@@ -137,8 +137,8 @@ class ShellHelp extends BaseComponent(HTMLElement) {
 
   /** @private */
   _showMessage(elementName, message) {
-    var el = this._elements[elementName];
-    var timeoutName = '_' + elementName + 'Timeout';
+    const el = this._elements[elementName];
+    const timeoutName = `_${elementName}Timeout`;
 
     // Show message element
     el.hidden = false;
