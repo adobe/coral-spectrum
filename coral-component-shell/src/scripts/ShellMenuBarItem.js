@@ -32,6 +32,34 @@ const iconVariant = {
   CIRCLE: 'circle'
 };
 
+/**
+  Enumeration for valid aria-haspopup values.
+
+  @typedef {Object} ShellMenuBarItemHasPopupRoleEnum
+  @property {String} MENU
+  ShellMenuBarItem opens a menu.
+  @property {String} LISTBOX
+  ShellMenuBarItem opens a list box.
+  @property {String} TREE
+  ShellMenuBarItem opens a tree.
+  @property {String} GRID
+  ShellMenuBarItem opens a grid.
+  @property {String} DIALOG
+  ShellMenuBarItem opens a dialog.
+  @property {Null} DEFAULT
+  Defaults to null.
+
+*/
+const hasPopupRole = {
+  MENU: 'menu',
+  LISTBOX: 'listbox',
+  TREE: 'tree',
+  GRID: 'grid',
+  DIALOG: 'dialog',
+  TRUE: 'true',
+  DEFAULT: null
+};
+
 // the Menubar Item's base classname
 const CLASSNAME = '_coral-Shell-menubar-item';
 
@@ -157,19 +185,25 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
   set open(value) {
     const menu = this._getMenu();
   
-    // if we want to open the dialog we need to make sure there is a valid menu
+    // if we want to open the dialog we need to make sure there is a valid menu or hasPopup
+    if (menu === null && this.hasPopup === hasPopupRole.DEFAULT) {
+      return;
+    }
+
+    this._open = transform.booleanAttr(value);
+    this._reflectAttribute('open', this._open);
+
+    // if the menu is valid, toggle the menu and trigger the appropriate event
     if (menu !== null) {
-      this._open = transform.booleanAttr(value);
-      this._reflectAttribute('open', this._open);
-    
       // Toggle the target menu
       if (menu.open !== this._open) {
         menu.open = this._open;
-        this._elements.shellMenuButton.setAttribute('aria-expanded', this._open);
       }
   
       this.trigger(`coral-shell-menubar-item:${this._open ? 'open' : 'close'}`);
     }
+
+    this._elements.shellMenuButton.setAttribute('aria-expanded', this._open);
   }
   
   /**
@@ -214,12 +248,46 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
     }
     
     // Link menu with item
-    if (menu) {
+    if (menu !== null) {
       this.id = this.id || commons.getUID();
       menu.setAttribute('target', `#${this.id}`);
-      const shellMenuButton = this._elements.shellMenuButton;
-      shellMenuButton.setAttribute('aria-haspopup', menu.getAttribute('role') || 'dialog');
+      if (this.hasPopup === hasPopupRole.DEFAULT) {
+        this.hasPopup = menu.getAttribute('role') || 'dialog';
+      }
+    }
+    else if (this._menu && this.hasPopup !== hasPopupRole.DEFAULT) {
+      this.hasPopup = hasPopupRole.DEFAULT;
+    }
+  }
+
+  /**
+    Whether the item opens a popup dialog or menu. Accepts either "menu", "listbox", "tree", "grid", or "dialog".
+    @type {?String}
+    @default ShellMenuBarItemHasPopupRoleEnum.DEFAULT
+    @htmlattribute haspopup
+  */
+  get hasPopup() {
+    return this._hasPopup || null;
+  }
+  set hasPopup(value) {
+    value = transform.string(value).toLowerCase();
+    this._hasPopup = validate.enumeration(hasPopupRole)(value) && value || hasPopupRole.DEFAULT;
+
+    const shellMenuButton = this._elements.shellMenuButton;
+    let ariaHaspopup = this._hasPopup;
+
+    // When hasPopup equals "true", the default aria-haspopup role for a shellMenuButton should be "dialog".
+    if (ariaHaspopup === hasPopupRole.TRUE) {
+      ariaHaspopup = hasPopupRole.DIALOG;
+    }
+
+    if (ariaHaspopup) {
+      shellMenuButton.setAttribute('aria-haspopup', ariaHaspopup);
       shellMenuButton.setAttribute('aria-expanded', this.open);
+    }
+    else {
+      shellMenuButton.removeAttribute('aria-haspopup');
+      shellMenuButton.removeAttribute('aria-expanded');
     }
   }
   
@@ -285,6 +353,7 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
   
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
+      haspopup: 'hasPopup',
       iconsize: 'iconSize',
       iconvariant: 'iconVariant'
     });
@@ -293,6 +362,7 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
+      'haspopup',
       'icon',
       'iconsize',
       'iconvariant',
