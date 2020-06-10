@@ -98,6 +98,7 @@ describe('ColumnView', function() {
     beforeEach(function() {
       helpers.target.addEventListener('coral-columnview:loaditems', onLoadEvent);
       el = helpers.build(new ColumnView());
+      el.focus();
     });
 
     afterEach(function() {
@@ -181,7 +182,7 @@ describe('ColumnView', function() {
         columnView.appendChild(column);
         
         // The event is triggered in a macrotask
-        window.setTimeout(() => {
+        window.setTimeout(function() {
           expect(loadItemsSpy.callCount).to.not.equal(0);
           done();
         });
@@ -591,20 +592,21 @@ describe('ColumnView', function() {
 
         const navigateEvent = function(event) {
           navigateSpy(event);
+          helpers.next(() => {
+            const columns = event.target.columns.getAll();
 
-          const columns = event.target.columns.getAll();
+            expect(columns.length).to.equal(1, 'Extra columns have been removed');
+            expect(columns[0].items.length).to.equal(9, 'Column has 9 items');
 
-          expect(columns.length).to.equal(1, 'Extra columns have been removed');
-          expect(columns[0].items.length).to.equal(9, 'Column has 9 items');
+            expect(navigateSpy.callCount).to.equal(1);
+            expect(navigateSpy.getCall(0).args[0].detail.activeItem).to.equal(columns[0].activeItem);
+            expect(navigateSpy.getCall(0).args[0].detail.column).to.equal(columns[0]);
 
-          expect(navigateSpy.callCount).to.equal(1);
-          expect(navigateSpy.getCall(0).args[0].detail.activeItem).to.equal(columns[0].activeItem);
-          expect(navigateSpy.getCall(0).args[0].detail.column).to.equal(columns[0]);
+            // we clean the test afterwards
+            helpers.target.removeEventListener('coral-columnview:navigate', navigateEvent);
 
-          // we clean the test afterwards
-          helpers.target.removeEventListener('coral-columnview:navigate', navigateEvent);
-
-          done();
+            done();
+          });
         };
 
         helpers.target.addEventListener('coral-columnview:navigate', navigateEvent);
@@ -829,7 +831,7 @@ describe('ColumnView', function() {
       it('should marshall focus to active element', function() {
         const el = helpers.build(window.__html__['ColumnView.full.html']);
         el.focus();
-        expect(document.activeElement).to.equal(el.activeItem);
+        expect(document.activeElement.id).to.equal(el.activeItem.id);
       });
     });
 
@@ -839,11 +841,11 @@ describe('ColumnView', function() {
         const activeItem = el.activeItem;
         activeItem.trigger('click');
         helpers.keypress('up', activeItem);
-        helpers.next(function() {
-          expect(document.activeElement).to.equal(el.columns.getAll()[1].items.first());
-          expect(document.activeElement).to.equal(el.activeItem);
+        window.setTimeout(function() {
+          expect(document.activeElement.id).to.equal(el.columns.getAll()[1].items.first().id);
+          expect(document.activeElement.id).to.equal(el.activeItem.id);
           done();
-        });
+        }, 450);
       });
 
       it('ArrowDown should focus next item', function(done) {
@@ -851,11 +853,11 @@ describe('ColumnView', function() {
         const activeItem = el.activeItem;
         activeItem.trigger('click');
         helpers.keypress('down', activeItem);
-        helpers.next(function() {
-          expect(document.activeElement).to.equal(el.columns.getAll()[1].items.getAll()[2]);
-          expect(document.activeElement).to.equal(el.activeItem);
+        window.setTimeout(function() {
+          expect(document.activeElement.id).to.equal(el.columns.getAll()[1].items.getAll()[2].id);
+          expect(document.activeElement.id).to.equal(el.activeItem.id);
           done();
-        });
+        }, 450);
       });
 
       it('ArrowRight on item with variant=drilldown should focus first item in next column', function(done) {
@@ -863,12 +865,12 @@ describe('ColumnView', function() {
         const activeItem = el.items.getAll()[2];
         activeItem.trigger('click');
         helpers.keypress('right', activeItem);
-        helpers.next(function() {
+        window.setTimeout(function() {
           helpers.next(function() {
-            expect(document.activeElement).to.equal(el.columns.getAll()[1].items.first());
+            expect(document.activeElement.id).to.equal(el.columns.getAll()[1].items.first().id);
             done();
           });
-        });
+        }, 400);
       });
 
       it('ArrowLeft on item with previous column should focus active item in previous column', function(done) {
@@ -877,8 +879,8 @@ describe('ColumnView', function() {
         activeItem.trigger('click');
         helpers.keypress('left', activeItem);
         helpers.next(function() {
-          expect(document.activeElement).to.equal(el.columns.first().items.getAll()[1]);
-          expect(document.activeElement).to.equal(el.activeItem);
+          expect(document.activeElement.id).to.equal(el.columns.first().items.getAll()[1].id);
+          expect(document.activeElement.id).to.equal(el.activeItem.id);
           done();
         });
       });
@@ -896,7 +898,7 @@ describe('ColumnView', function() {
           helpers.next(function() {
             expect(activeItem.selected).to.be.false;
             expect(activeItem.hasAttribute('selected')).to.be.false;
-            expect(activeItem).to.equal(el.activeItem);
+            expect(activeItem.id).to.equal(el.activeItem.id);
             done();
           });
         });
@@ -912,7 +914,7 @@ describe('ColumnView', function() {
           helpers.next(function() {
             expect(activeItem.previousElementSibling.selected).to.be.true;
             expect(activeItem.previousElementSibling.hasAttribute('selected')).to.be.true;
-            expect(activeItem.previousElementSibling).to.equal(el.selectedItem);
+            expect(activeItem.previousElementSibling.id).to.equal(el.selectedItem.id);
             done();
           });
         });
@@ -925,7 +927,7 @@ describe('ColumnView', function() {
           helpers.next(function() {
             expect(activeItem.nextElementSibling.selected).to.be.true;
             expect(activeItem.nextElementSibling.hasAttribute('selected')).to.be.true;
-            expect(activeItem.nextElementSibling).to.equal(el.selectedItem);
+            expect(activeItem.nextElementSibling.id).to.equal(el.selectedItem.id);
             done();
           });
         });
@@ -938,7 +940,7 @@ describe('ColumnView', function() {
           helpers.next(function() {
             expect(activeItem.selected).to.be.true;
             expect(activeItem.hasAttribute('selected')).to.be.true;
-            expect(activeItem).to.equal(el.selectedItem);
+            expect(activeItem.id).to.equal(el.selectedItem.id);
             done();
           });
         });
@@ -952,7 +954,7 @@ describe('ColumnView', function() {
           helpers.next(function() {
             expect(activeItem.selected).to.be.false;
             expect(activeItem.hasAttribute('selected')).to.be.false;
-            expect(activeItem).to.equal(el.activeItem);
+            expect(activeItem.id).to.equal(el.activeItem.id);
             expect(el.selectedItem).to.be.null;
             done();
           });
@@ -1024,7 +1026,7 @@ describe('ColumnView', function() {
               helpers.keypress('a', activeItem, [16,91]);
               helpers.next(function() {
                 expect(el.selectedItems.length).to.equal(0);
-                expect(activeItem).to.equal(el.activeItem);
+                expect(activeItem.id).to.equal(el.activeItem.id);
                 done();
               });
             });
@@ -1039,7 +1041,7 @@ describe('ColumnView', function() {
               helpers.keypress('esc', activeItem);
               helpers.next(function() {
                 expect(el.selectedItems.length).to.equal(0);
-                expect(activeItem).to.equal(el.activeItem);
+                expect(activeItem.id).to.equal(el.activeItem.id);
                 done();
               });
             });
@@ -1051,7 +1053,7 @@ describe('ColumnView', function() {
             activeItem.selected = true;
             helpers.keypress('up', activeItem);
             helpers.next(function() {
-              expect(document.activeElement).to.equal(activeItem.previousElementSibling);
+              expect(document.activeElement.id).to.equal(activeItem.previousElementSibling.id);
               helpers.keypress('space', document.activeElement);
               helpers.next(function() {
                 helpers.next(function() {
@@ -1064,7 +1066,7 @@ describe('ColumnView', function() {
                       expect(document.activeElement.selected).to.be.false;
                       expect(document.activeElement.hasAttribute('selected')).to.be.false;
                       expect(el.selectedItems.length).to.equal(1);
-                      expect(el.selectedItem).to.equal(activeItem);
+                      expect(el.selectedItem.id).to.equal(activeItem.id);
                       done();
                     });
                   });
@@ -1079,7 +1081,7 @@ describe('ColumnView', function() {
             activeItem.selected = true;
             helpers.keypress('down', activeItem);
             helpers.next(function() {
-              expect(document.activeElement).to.equal(activeItem.nextElementSibling);
+              expect(document.activeElement.id).to.equal(activeItem.nextElementSibling.id);
               helpers.keypress('space', document.activeElement);
               helpers.next(function() {
                 helpers.next(function() {
@@ -1092,7 +1094,7 @@ describe('ColumnView', function() {
                       expect(document.activeElement.selected).to.be.false;
                       expect(document.activeElement.hasAttribute('selected')).to.be.false;
                       expect(el.selectedItems.length).to.equal(1);
-                      expect(el.selectedItem).to.equal(activeItem);
+                      expect(el.selectedItem.id).to.equal(activeItem.id);
                       done();
                     });
                   });
@@ -1186,52 +1188,55 @@ describe('ColumnView', function() {
         // select an item
         const item = el.items.getAll()[1];
         item.focus();
-        item.selected = true;
-        helpers.next(function() {
-          expect(item.selected).to.be.true;
-          // the selected item's accessibility state should be ", checked"
-          expect(item._elements.accessibilityState.textContent).to.equal(i18n.get(', checked'));
-          // the item's accessibility state lang should match the Coral.i18n.locale
-          expect(item._elements.accessibilityState.getAttribute('lang')).to.equal(i18n.locale);
+        window.setTimeout(function() {
+          
+          item.selected = true;
+          helpers.next(function() {
+            expect(item.selected).to.be.true;
+            // the selected item's accessibility state should be ", checked"
+            expect(item._elements.accessibilityState.textContent).to.equal(i18n.get(', checked'));
+            // the item's accessibility state lang should match the Coral.i18n.locale
+            expect(item._elements.accessibilityState.getAttribute('lang')).to.equal(i18n.locale);
 
-          // wait 20ms for ColumnView accessibilityState to update
-          setTimeout(function() {
-            // ColumnView accessibilityState should announce assertively,
-            expect(accessibilityState.getAttribute('aria-live')).to.equal('assertive');
-            // and should not be hidden.
-            expect(accessibilityState.hidden).to.be.false;
-            // accessibilityState firstChild to announce should be <span><span lang="fr">Français</span>, checked<span>
-            let spans = accessibilityState.querySelectorAll('span');
-            expect(spans.length).to.equal(2);
-            expect(spans[0].childNodes[0]).to.equal(spans[1]);
-            expect(spans[1].getAttribute('lang')).to.equal(item.getAttribute('lang'));
-            expect(spans[1].textContent).to.equal(item.content.textContent);
-            expect(spans[1].nextSibling.textContent).to.equal(i18n.get(', checked'));
+            // wait 20ms for ColumnView accessibilityState to update
+            window.setTimeout(function() {
+              // ColumnView accessibilityState should announce assertively,
+              expect(accessibilityState.getAttribute('aria-live')).to.equal('assertive');
+              // and should not be hidden.
+              expect(accessibilityState.hidden).to.be.false;
+              // accessibilityState firstChild to announce should be <span><span lang="fr">Français</span>, checked<span>
+              let spans = accessibilityState.querySelectorAll('span');
+              expect(spans.length).to.equal(2);
+              expect(spans[0].childNodes[0]).to.equal(spans[1]);
+              expect(spans[1].getAttribute('lang')).to.equal(item.getAttribute('lang'));
+              expect(spans[1].textContent).to.equal(item.content.textContent);
+              expect(spans[1].nextSibling.textContent).to.equal(i18n.get(', checked'));
 
-            // deselect the item
-            item.selected = false;
-            helpers.next(function() {
-              expect(item.selected).to.be.false;
-              // item accessibility should be empty for an unselected item
-              expect(item._elements.accessibilityState.textContent).to.equal('');
-              // ColumnView accessibilityState should be reset.
-              expect(accessibilityState.getAttribute('aria-live')).to.equal('off');
-              expect(accessibilityState.hidden).to.be.true;
-              expect(accessibilityState.innerHTML).to.equal('');
-              // wait 20ms for ColumnView accessibilityState to update
-              setTimeout(function() {
-                // accessibilityState firstChild to announce should be <span><span lang="fr">Français</span>, unchecked<span>
-                spans = accessibilityState.querySelectorAll('span');
-                expect(spans.length).to.equal(2);
-                expect(spans[0].childNodes[0]).to.equal(spans[1]);
-                expect(spans[1].getAttribute('lang')).to.equal(item.getAttribute('lang'));
-                expect(spans[1].textContent).to.equal(item.content.textContent);
-                expect(spans[1].nextSibling.textContent).to.equal(i18n.get(', unchecked'));
-                done();
-              }, 20);
-            });
-          }, 20);
-        });
+              // deselect the item
+              item.selected = false;
+              helpers.next(function() {
+                expect(item.selected).to.be.false;
+                // item accessibility should be empty for an unselected item
+                expect(item._elements.accessibilityState.textContent).to.equal('');
+                // ColumnView accessibilityState should be reset.
+                expect(accessibilityState.getAttribute('aria-live')).to.equal('off');
+                expect(accessibilityState.hidden).to.be.true;
+                expect(accessibilityState.innerHTML).to.equal('');
+                // wait 20ms for ColumnView accessibilityState to update
+                window.setTimeout(function() {
+                  // accessibilityState firstChild to announce should be <span><span lang="fr">Français</span>, unchecked<span>
+                  spans = accessibilityState.querySelectorAll('span');
+                  expect(spans.length).to.equal(2);
+                  expect(spans[0].childNodes[0]).to.equal(spans[1]);
+                  expect(spans[1].getAttribute('lang')).to.equal(item.getAttribute('lang'));
+                  expect(spans[1].textContent).to.equal(item.content.textContent);
+                  expect(spans[1].nextSibling.textContent).to.equal(i18n.get(', unchecked'));
+                  done();
+                }, 20);
+              });
+            }, 20);
+          });
+        }, 400);
       });
     });
 
@@ -1261,10 +1266,10 @@ describe('ColumnView', function() {
     describe('when item is expanded', function() {
       it('should have aria-expanded equal to "true"', function(done) {
         const el = helpers.build(window.__html__['ColumnView.full.html']);
-        setTimeout(() => {
+        window.setTimeout(function() {
           expect(el.activeItem.getAttribute('aria-expanded')).to.equal('true');
           done();
-        }, 300);
+        }, 450);
       });
 
       it('should express ownership of expanded column using aria-owns', function(done) {
