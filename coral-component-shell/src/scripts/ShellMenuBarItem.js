@@ -56,7 +56,6 @@ const hasPopupRole = {
   TREE: 'tree',
   GRID: 'grid',
   DIALOG: 'dialog',
-  TRUE: 'true',
   DEFAULT: null
 };
 
@@ -252,7 +251,7 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
       this.id = this.id || commons.getUID();
       menu.setAttribute('target', `#${this.id}`);
       if (this.hasPopup === hasPopupRole.DEFAULT) {
-        this.hasPopup = menu.getAttribute('role') || 'dialog';
+        this.hasPopup = menu.getAttribute('role') || hasPopupRole.DIALOG;
       }
     }
     else if (this._menu && this.hasPopup !== hasPopupRole.DEFAULT) {
@@ -275,11 +274,6 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
 
     const shellMenuButton = this._elements.shellMenuButton;
     let ariaHaspopup = this._hasPopup;
-
-    // When hasPopup equals "true", the default aria-haspopup role for a shellMenuButton should be "dialog".
-    if (ariaHaspopup === hasPopupRole.TRUE) {
-      ariaHaspopup = hasPopupRole.DIALOG;
-    }
 
     if (ariaHaspopup) {
       shellMenuButton.setAttribute('aria-haspopup', ariaHaspopup);
