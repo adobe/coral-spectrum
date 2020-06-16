@@ -146,7 +146,7 @@ class Step extends BaseComponent(HTMLElement) {
     @memberof Coral.Step#
   */
   get labelled() {
-    return this._labelled || this.getAttribute('labelled') || this._elements.stepMarkerContainer.getAttribute('aria-label');
+    return this._labelled || this.getAttribute('labelled') || this._elements.stepMarkerContainer.getAttribute('aria-label') || '';
   }
   set labelled(value) {
     this._labelled = transform.string(value);

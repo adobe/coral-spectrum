@@ -215,18 +215,16 @@ class StepList extends BaseComponent(HTMLElement) {
 
     // update aria-label for all children
     const _syncItemLabelled = () => {
+      const isSmall = this.size === size.SMALL;
       const steps = this.items.getAll();
       const stepsCount = steps.length;
 
       for (let i = 0; i < stepsCount; i++) {
         const step = steps[i];
-        if (step._elements.label.textContent.trim() !== '') {
-          if (this.size === size.SMALL) {
-            step.setAttribute('labelled', step._elements.label.textContent);
-          }
-          else {
-            step.removeAttribute('labelled');
-          }
+        const label = step._elements.label;
+        if (!step.labelled && label.textContent.length) {
+          label.classList.toggle('u-coral-screenReaderOnly', isSmall);
+          label.style.display = isSmall ? 'block' : '';
         }
       }
     };
