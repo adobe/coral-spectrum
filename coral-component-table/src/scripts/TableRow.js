@@ -354,6 +354,11 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
       );
     });
 
+    const rowHeaders = cells.filter(cell => {
+      return (cell.getAttribute('role') === 'rowheader' ||
+        (cell.tagName === 'TH' && cell.getAttribute('scope') === 'row'));
+    });
+
     let cellForAccessibilityState;
     const ids = cells.map(cell => {
       const handle = cell.querySelector('[coral-table-rowselect]');
@@ -372,8 +377,11 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
         }
       }
 
-      // @a11y include all other cells in the row in the accessibility name
-      return cell.id;
+      // @a11y include row headers, or if no row header is defined,
+      // all other cells in the row, in the accessibility name
+      if (rowHeaders.length === 0 || rowHeaders.indexOf(cell) !== -1) {
+        return cell.id;
+      }
     });
 
     // @a11y If an _accessibilityState has not been defined within one of the cells, add to the last 
