@@ -2200,7 +2200,11 @@ describe('Table', function() {
             const accessibilityState = row._elements.accessibilityState;
             expect(accessibilityState).to.not.be.null;
             expect(accessibilityState.getAttribute('aria-hidden')).to.equal('true');
-            const cellIds = row.items.getAll().map(cell => cell.id);
+            const cellIds = row.items.getAll().map(cell => {
+              if (cell.getAttribute('role') === 'rowheader') {
+                return cell.id;
+              }
+            });
             cellIds.push(accessibilityState.id);
             expect(row.getAttribute('aria-labelledby')).to.equal(cellIds.join(' '));
             expect(row.getAttribute('aria-selected')).to.equal(row.selected ? 'true' : 'false');
