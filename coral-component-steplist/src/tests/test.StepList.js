@@ -91,7 +91,41 @@ describe('StepList', function() {
     });
     
     describe('#interaction', function() {});
-    describe('#size', function() {});
+    describe('#size', function() {
+      it('should support Coral.StepList.size.SMALL', function(done) {
+        el.appendChild(item1);
+        el.appendChild(item2);
+        el.appendChild(item3);
+        el.size = StepList.size.SMALL;
+        var steps = el.items.getAll();
+        helpers.next(function() {
+          for (var i = 0; i < steps.length; i++) {
+            expect(steps[i].label.classList.contains('u-coral-screenReaderOnly')).to.be.true;
+            expect(steps[i].label.style.display).to.equal('block');
+          }
+          el.size = StepList.size.LARGE;
+          helpers.next(function() {
+            for (var i = 0; i < steps.length; i++) {
+              expect(steps[i].label.classList.contains('u-coral-screenReaderOnly')).to.be.false;
+              expect(steps[i].label.style.display).to.equal('');
+            }
+            item1.labelled = item1.label.textContent;
+            el.size = StepList.size.SMALL;
+            helpers.next(function() {
+              expect(item1.label.classList.contains('u-coral-screenReaderOnly')).to.be.false;
+              expect(item1.label.style.display).to.equal('');
+              expect(item1._elements.stepMarkerContainer.getAttribute('aria-label')).to.equal(item1.label.textContent);
+              expect(item1._elements.stepMarkerContainer.hasAttribute('aria-hidden')).to.be.false;
+              for (var i = 1; i < steps.length; i++) {
+                expect(steps[i].label.classList.contains('u-coral-screenReaderOnly')).to.be.true;
+                expect(steps[i].label.style.display).to.equal('block');
+              }
+              done();
+            });
+          });
+        });
+      });
+    });
     describe('#target', function() {});
     describe('#selectedItem', function() {
 
@@ -191,7 +225,41 @@ describe('StepList', function() {
 
   describe('Markup', function() {
     describe('#interaction', function() {});
-    describe('#size', function() {});
+    describe('#size', function() {
+      it('should support Coral.StepList.size.SMALL', function(done) {
+
+        const el = helpers.build(window.__html__['StepList.base.html']);
+        el.size = StepList.size.SMALL;
+        const steps = el.items.getAll();
+        const item1 = steps[0];
+        helpers.next(function() {
+          for (var i = 0; i < steps.length; i++) {
+            expect(steps[i].label.classList.contains('u-coral-screenReaderOnly')).to.be.true;
+            expect(steps[i].label.style.display).to.equal('block');
+          }
+          el.size = StepList.size.LARGE;
+          helpers.next(function() {
+            for (var i = 0; i < steps.length; i++) {
+              expect(steps[i].label.classList.contains('u-coral-screenReaderOnly')).to.be.false;
+              expect(steps[i].label.style.display).to.equal('');
+            }
+            item1.labelled = item1.label.textContent;
+            el.size = StepList.size.SMALL;
+            helpers.next(function() {
+              expect(item1.label.classList.contains('u-coral-screenReaderOnly')).to.be.false;
+              expect(item1.label.style.display).to.equal('');
+              expect(item1._elements.stepMarkerContainer.getAttribute('aria-label')).to.equal(item1.label.textContent);
+              expect(item1._elements.stepMarkerContainer.hasAttribute('aria-hidden')).to.be.false;
+              for (var i = 1; i < steps.length; i++) {
+                expect(steps[i].label.classList.contains('u-coral-screenReaderOnly')).to.be.true;
+                expect(steps[i].label.style.display).to.equal('block');
+              }
+              done();
+            });
+          });
+        });
+      });
+    });
     describe('#target', function() {});
     describe('#selectedItem', function() {
       it('should default to the first item', function() {

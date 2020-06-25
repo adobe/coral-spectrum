@@ -93,6 +93,26 @@ describe('Step', function() {
         expect(item1._elements.link.getAttribute('aria-current')).to.equal('step');
       });
     });
+
+    describe('#labelled', function() {
+      it('should default to empty string', function() {
+        expect(item.labelled).to.equal('');
+      });
+
+      it('should be settable', function(done) {
+        item.labelled = 'Item 1';
+        helpers.next(function() {
+          expect(item._elements.stepMarkerContainer.getAttribute('aria-label')).to.equal(item.labelled);
+          expect(item._elements.stepMarkerContainer.hasAttribute('aria-hidden')).to.be.false;
+          item.labelled = null;
+          helpers.next(function() {
+            expect(item._elements.stepMarkerContainer.hasAttribute('aria-label')).to.be.false;
+            expect(item._elements.stepMarkerContainer.getAttribute('aria-hidden')).to.equal('true');
+            done();
+          });
+        });
+      });
+    });
   });
 
   describe('Implementation Details', function() {
