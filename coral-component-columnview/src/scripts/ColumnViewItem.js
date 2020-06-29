@@ -227,7 +227,7 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
     }
 
     // @a11y Item should be labelled by thumbnail, content, and if appropriate accessibility state.
-    let ariaLabelledby = this.thumbnail.id + ' ' + this.content.id;
+    let ariaLabelledby = this._elements.thumbnail.id + ' ' + this._elements.content.id;
     this.setAttribute('aria-labelledby', this.selected ? `${ariaLabelledby} ${accessibilityState.id}` : ariaLabelledby);
 
     // Sync checkbox item selector
@@ -322,7 +322,7 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
           itemSelector = new Checkbox();
           itemSelector.setAttribute('coral-columnview-itemselect', '');
           itemSelector._elements.input.tabIndex = -1;
-          itemSelector.setAttribute('labelledby', this.content.id);
+          itemSelector.setAttribute('labelledby', this._elements.content.id);
       
           // Add the item selector as first child
           this.insertBefore(itemSelector, this.firstChild);
