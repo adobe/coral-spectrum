@@ -1,7 +1,7 @@
 {
-  "coverage": "64.79%",
-  "expectCount": 3622,
-  "actualCount": 2347,
+  "coverage": "64.77%",
+  "expectCount": 3631,
+  "actualCount": 2352,
   "files": {
     "coral-spectrum/coral-base-button/src/scripts/BaseButton.js": {
       "expectCount": 6,
@@ -776,7 +776,7 @@
       "undocumentLines": []
     },
     "coral-spectrum/coral-component-columnview/src/scripts/ColumnViewItem.js": {
-      "expectCount": 21,
+      "expectCount": 22,
       "actualCount": 12,
       "undocumentLines": [
         20,
@@ -784,10 +784,11 @@
         119,
         153,
         188,
-        250,
-        270,
-        333,
-        335
+        198,
+        254,
+        301,
+        364,
+        366
       ]
     },
     "coral-spectrum/coral-component-columnview/src/scripts/ColumnViewItemContent.js": {
@@ -922,15 +923,15 @@
         171,
         257,
         281,
-        353,
-        427,
-        445,
-        520,
-        548,
-        565,
-        566,
+        354,
+        434,
+        452,
+        527,
+        555,
         572,
-        618
+        573,
+        579,
+        625
       ]
     },
     "coral-spectrum/coral-component-dialog/src/scripts/DialogContent.js": {
@@ -1500,9 +1501,9 @@
         977,
         983,
         1072,
-        1179,
-        1184,
-        1186
+        1181,
+        1186,
+        1188
       ]
     },
     "coral-spectrum/coral-component-quickactions/src/scripts/QuickActionsItem.js": {
@@ -1622,12 +1623,14 @@
       ]
     },
     "coral-spectrum/coral-component-shell/src/scripts/ShellHelp.js": {
-      "expectCount": 14,
-      "actualCount": 11,
+      "expectCount": 20,
+      "actualCount": 15,
       "undocumentLines": [
         24,
         39,
-        61
+        61,
+        134,
+        210
       ]
     },
     "coral-spectrum/coral-component-shell/src/scripts/ShellHelpItem.js": {
@@ -1673,19 +1676,20 @@
       ]
     },
     "coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js": {
-      "expectCount": 27,
-      "actualCount": 17,
+      "expectCount": 29,
+      "actualCount": 18,
       "undocumentLines": [
-        36,
-        40,
-        58,
-        117,
-        162,
-        208,
-        218,
-        226,
-        272,
-        286
+        63,
+        67,
+        85,
+        144,
+        192,
+        241,
+        251,
+        273,
+        288,
+        334,
+        348
       ]
     },
     "coral-spectrum/coral-component-shell/src/scripts/ShellOrgSwitcher.js": {
@@ -1985,8 +1989,8 @@
         104,
         139,
         207,
-        258,
-        329
+        256,
+        327
       ]
     },
     "coral-spectrum/coral-component-steplist/src/scripts/getTarget.js": {

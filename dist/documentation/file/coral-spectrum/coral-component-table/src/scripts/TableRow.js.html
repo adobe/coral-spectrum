@@ -296,6 +296,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ShellHelpResult">ShellHelpResult</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-shell-menubar-item:close">coral-shell-menubar-item:close</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-shell-menubar-item:open">coral-shell-menubar-item:open</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ShellMenuBarItemHasPopupRoleEnum">ShellMenuBarItemHasPopupRoleEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ShellMenuBarItemIconVariantEnum">ShellMenuBarItemIconVariantEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-shell-orgswitcher:change">coral-shell-orgswitcher:change</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ShellUserAvatarEnum">ShellUserAvatarEnum</a></span></span></li>
@@ -775,6 +776,11 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
       );
     });
 
+    const rowHeaders = cells.filter(cell =&gt; {
+      return (cell.getAttribute(&apos;role&apos;) === &apos;rowheader&apos; ||
+        (cell.tagName === &apos;TH&apos; &amp;&amp; cell.getAttribute(&apos;scope&apos;) === &apos;row&apos;));
+    });
+
     let cellForAccessibilityState;
     const ids = cells.map(cell =&gt; {
       const handle = cell.querySelector(&apos;[coral-table-rowselect]&apos;);
@@ -793,8 +799,11 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
         }
       }
 
-      // @a11y include all other cells in the row in the accessibility name
-      return cell.id;
+      // @a11y include row headers, or if no row header is defined,
+      // all other cells in the row, in the accessibility name
+      if (rowHeaders.length === 0 || rowHeaders.indexOf(cell) !== -1) {
+        return cell.id;
+      }
     });
 
     // @a11y If an _accessibilityState has not been defined within one of the cells, add to the last 

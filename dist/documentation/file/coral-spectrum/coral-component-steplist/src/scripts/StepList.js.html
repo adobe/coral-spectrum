@@ -296,6 +296,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ShellHelpResult">ShellHelpResult</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-shell-menubar-item:close">coral-shell-menubar-item:close</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-shell-menubar-item:open">coral-shell-menubar-item:open</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ShellMenuBarItemHasPopupRoleEnum">ShellMenuBarItemHasPopupRoleEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ShellMenuBarItemIconVariantEnum">ShellMenuBarItemIconVariantEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-shell-orgswitcher:change">coral-shell-orgswitcher:change</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ShellUserAvatarEnum">ShellUserAvatarEnum</a></span></span></li>
@@ -636,18 +637,16 @@ class StepList extends BaseComponent(HTMLElement) {
 
     // update aria-label for all children
     const _syncItemLabelled = () =&gt; {
+      const isSmall = this.size === size.SMALL;
       const steps = this.items.getAll();
       const stepsCount = steps.length;
 
       for (let i = 0; i &lt; stepsCount; i++) {
         const step = steps[i];
-        if (step._elements.label.textContent.trim() !== &apos;&apos;) {
-          if (this.size === size.SMALL) {
-            step.setAttribute(&apos;labelled&apos;, step._elements.label.textContent);
-          }
-          else {
-            step.removeAttribute(&apos;labelled&apos;);
-          }
+        const label = step._elements.label;
+        if (!step.labelled &amp;&amp; label.textContent.length) {
+          label.classList.toggle(&apos;u-coral-screenReaderOnly&apos;, isSmall);
+          label.style.display = isSmall ? &apos;block&apos; : &apos;&apos;;
         }
       }
     };

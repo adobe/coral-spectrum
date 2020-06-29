@@ -26210,26 +26210,28 @@
           this.header.id = this.header.id || commons.getUID(); // label the dialog with a reference to the header
 
           this.setAttribute('aria-labelledby', this.header.id);
-        }
+        } // If the dialog has no content, or the content is empty, do nothing further.
 
-        var hasContent = this.content && this.content.textContent !== ''; // If the dialog has a content,
 
-        if (hasContent) {
-          this.content.id = this.content.id || commons.getUID(); // In an alertdialog with a content region, if the alertdialog is not otherwise described.
+        if (!this.content || this.content.textContent === '') {
+          return;
+        } // If the dialog has a content,
 
-          if (this._variant !== variant$4.DEFAULT) {
-            // with no header, 
-            if (!hasHeader) {
-              // label the alertdialog with a reference to the content
-              this.setAttribute('aria-labelledby', this.content.id);
-            } // otherwise, if the alertdialog is not otherwise described,
-            else if (!this.hasAttribute('aria-describedby')) {
-                // ensure that the alertdialog is described by the content.
-                this.setAttribute('aria-describedby', this.content.id);
-              }
-          } else if (this.getAttribute('aria-labelledby') === this.content.id) {
-            this.removeAttribute('aria-labelledby');
-          }
+
+        this.content.id = this.content.id || commons.getUID(); // In an alertdialog with a content region, if the alertdialog is not otherwise described.
+
+        if (this._variant !== variant$4.DEFAULT) {
+          // with no header, 
+          if (!hasHeader) {
+            // label the alertdialog with a reference to the content
+            this.setAttribute('aria-labelledby', this.content.id);
+          } // otherwise, if the alertdialog is not otherwise described,
+          else if (!this.hasAttribute('aria-describedby')) {
+              // ensure that the alertdialog is described by the content.
+              this.setAttribute('aria-describedby', this.content.id);
+            }
+        } else if (this.getAttribute('aria-labelledby') === this.content.id) {
+          this.removeAttribute('aria-labelledby');
         }
       }
       /**
@@ -26294,7 +26296,15 @@
           if (_this3.open) {
             commons.transitionEnd(_this3._elements.wrapper, function () {
               _this3._handleFocus();
+
+              _this3._elements.closeButton.tabIndex = 0;
+
+              _this3._elements.closeButton.removeAttribute('coral-tabcapture');
             });
+          } else {
+            _this3._elements.closeButton.tabIndex = -1;
+
+            _this3._elements.closeButton.setAttribute('coral-tabcapture', '');
           }
         });
       }
@@ -50435,7 +50445,7 @@
             contentSpan.setAttribute('lang', lang);
           }
 
-          contentSpan.innerHTML = activeElement._elements.content.innerText;
+          contentSpan.innerText = activeElement._elements.content.innerText;
           span.appendChild(contentSpan);
           span.appendChild(document.createTextNode(i18n.get(activeElement.selected ? ', checked' : ', unchecked')));
           accessibilityState.hidden = false;
@@ -51733,6 +51743,11 @@
         this.setAttribute('aria-selected', this._selected); // @a11y Update aria-expanded. Active drilldowns should be expanded.
 
         if (this.variant === variant$g.DRILLDOWN) {
+          if (this._ariaExpandedTimeout) {
+            window.clearTimeout(this._ariaExpandedTimeout);
+            this._ariaExpandedTimeout = undefined;
+          }
+
           this.setAttribute('aria-expanded', this.active);
         }
 
@@ -51783,6 +51798,8 @@
         return this._active || false;
       },
       set: function set(value) {
+        var _this2 = this;
+
         this._active = transform.booleanAttr(value);
 
         this._reflectAttribute('active', this._active);
@@ -51791,7 +51808,37 @@
         this.setAttribute('aria-selected', this._active); // @a11y Update aria-expanded. Active drilldowns should be expanded.
 
         if (this.variant === variant$g.DRILLDOWN) {
-          this.setAttribute('aria-expanded', this._active);
+          var isFocused = this === document.activeElement || this.contains(document.activeElement);
+          var activeElement;
+
+          if (isFocused && !this.selected) {
+            this.setAttribute('aria-expanded', this._active);
+            activeElement = document.activeElement;
+            activeElement.blur();
+          } else {
+            this.setAttribute('aria-hidden', true);
+          } // @a11y workaround for VoiceOver announcing expanded state rather than the item name when the item receives focus.
+
+
+          var timeoutDelay = 60;
+
+          if (this._ariaExpandedTimeout) {
+            window.clearTimeout(this._ariaExpandedTimeout);
+            this._ariaExpandedTimeout = undefined;
+          } // @a11y after a delay to give focused item time to announce,
+
+
+          this._ariaExpandedTimeout = window.setTimeout(function () {
+            if (isFocused && activeElement) {
+              activeElement.focus();
+            } else {
+              window.setTimeout(function () {
+                _this2.setAttribute('aria-expanded', _this2._active);
+
+                _this2.removeAttribute('aria-hidden');
+              }, timeoutDelay * 2);
+            }
+          }, timeoutDelay);
         }
 
         if (!this._active) {
@@ -62578,11 +62625,13 @@
       }
     }, {
       key: "_onAnimate",
-      value: function _onAnimate() {
-        if (this.placement === placement$2.BOTTOM) {
-          this.style.marginTop = "".concat(-parseFloat(this.lengthOffset) + 8, "px");
-        } else {
-          this.style.marginTop = "".concat(parseFloat(this.lengthOffset) - 8, "px");
+      value: function _onAnimate(event) {
+        if (event.target === this) {
+          if (this.placement === placement$2.BOTTOM) {
+            this.style.marginTop = "".concat(-parseFloat(this.lengthOffset) + 8, "px");
+          } else {
+            this.style.marginTop = "".concat(parseFloat(this.lengthOffset) - 8, "px");
+          }
         }
       }
       /** @ignore */
@@ -64431,6 +64480,7 @@
     var el12 = this["resultMessage"] = document.createElement("div");
     el12.className += " _coral-Shell-help-resultMessage";
     el12.setAttribute("handle", "resultMessage");
+    el12.setAttribute("role", "status");
     el12.setAttribute("hidden", "");
     el2.appendChild(el12);
     var el13 = document.createTextNode("\n  ");
@@ -64438,6 +64488,7 @@
     var el14 = this["loading"] = document.createElement("div");
     el14.className += " _coral-Shell-help-loading";
     el14.setAttribute("handle", "loading");
+    el14.setAttribute("role", "status");
     el14.setAttribute("hidden", "");
     var el15 = document.createTextNode("\n    ");
     el14.appendChild(el15);
@@ -64447,8 +64498,9 @@
     el14.appendChild(el16);
     var el17 = document.createTextNode("\n    ");
     el14.appendChild(el17);
-    var el18 = document.createElement("span");
+    var el18 = this["loadingMessage"] = document.createElement("span");
     el18.className += " coral-Heading--2 _coral-Shell-help-loading-info";
+    el18.setAttribute("handle", "loadingMessage");
     el18.textContent = data_0["i18n"]["get"]('Searching Help…');
     el14.appendChild(el18);
     var el19 = document.createTextNode("\n  ");
@@ -64580,7 +64632,9 @@
         event.stopPropagation(); // Show loading
 
         this._elements.items.hidden = true;
-        this._elements.loading.hidden = false;
+
+        this._showLoading();
+
         this._elements.resultMessage.hidden = true;
         this._elements.results.hidden = true; // Trigger event
 
@@ -64598,11 +64652,71 @@
 
         this._elements.results.hidden = true; // Hide loading
 
-        this._elements.loading.hidden = true; // Hide no-results
+        this._hideLoading(); // Hide no-results
+
 
         this._elements.resultMessage.hidden = true; // Show items
 
         this._elements.items.hidden = false;
+      }
+      /** @private */
+
+    }, {
+      key: "_clearTimeout",
+      value: function _clearTimeout(timeoutName) {
+        if (this[timeoutName]) {
+          window.clearTimeout(this[timeoutName]);
+          this[timeoutName] = undefined;
+        }
+      }
+      /** @private */
+
+    }, {
+      key: "_showMessage",
+      value: function _showMessage(elementName, message) {
+        var el = this._elements[elementName];
+        var timeoutName = "_".concat(elementName, "Timeout"); // Show message element
+
+        el.hidden = false; // Add message text after 150ms delay to give screen readers enough
+        // time to recognize the live region and respond to the text update 
+
+        this._clearTimeout(timeoutName);
+
+        this[timeoutName] = window.setTimeout(function () {
+          return el.appendChild(message);
+        }, 150);
+      }
+      /** @private */
+
+    }, {
+      key: "_showLoading",
+      value: function _showLoading() {
+        if (!this._elements.loading.hidden) {
+          return;
+        }
+
+        if (this._elements.loading.contains(this._elements.loadingMessage)) {
+          this._elements.loadingMessage = this._elements.loading.removeChild(this._elements.loadingMessage);
+        }
+
+        this._showMessage('loading', this._elements.loadingMessage);
+      }
+      /** @private */
+
+    }, {
+      key: "_hideLoading",
+      value: function _hideLoading() {
+        if (this._elements.loading.hidden) {
+          return;
+        }
+
+        this._elements.loading.hidden = true; // clear the timeout
+
+        this._clearTimeout('_loadingTimeout');
+
+        if (this._elements.loading.contains(this._elements.loadingMessage)) {
+          this._elements.loadingMessage = this._elements.loading.removeChild(this._elements.loadingMessage);
+        }
       }
       /**
        Indicate to the user that an error has occurred
@@ -64612,14 +64726,13 @@
       key: "showError",
       value: function showError() {
         // Hide loading
-        this._elements.loading.hidden = true;
-        this._elements.resultMessage.innerHTML = '';
+        this._hideLoading();
 
-        this._elements.resultMessage.appendChild(template$L.call(this._elements, {
+        this._elements.resultMessage.innerHTML = ''; // Show the error message
+
+        this._showMessage('resultMessage', template$L.call(this._elements, {
           i18n: i18n
         }));
-
-        this._elements.resultMessage.hidden = false;
       }
       /**
        Show a set of search results.
@@ -64638,18 +64751,21 @@
         var _this3 = this;
 
         // Hide loading
-        this._elements.loading.hidden = true;
+        this._hideLoading(); // clear setTimeout
+
+
+        if (this._showResultsTimeout) {
+          window.clearTimeout(this._showResultsTimeout);
+          this._showResultsTimeout = undefined;
+        }
 
         if (!results || total === 0) {
           // Clear existing result message
           this._elements.resultMessage.innerHTML = ''; // Indicate to the user that no results were found
 
-          this._elements.resultMessage.appendChild(template$M.call(this._elements, {
+          this._showMessage('resultMessage', template$M.call(this._elements, {
             i18n: i18n
-          })); // Show result message
-
-
-          this._elements.resultMessage.hidden = false;
+          }));
         } else {
           // Clear existing results
           this._elements.results.innerHTML = ''; // Populate results
@@ -65028,6 +65144,33 @@
   var iconVariant = {
     DEFAULT: 'default',
     CIRCLE: 'circle'
+  };
+  /**
+    Enumeration for valid aria-haspopup values.
+
+    @typedef {Object} ShellMenuBarItemHasPopupRoleEnum
+    @property {String} MENU
+    ShellMenuBarItem opens a menu.
+    @property {String} LISTBOX
+    ShellMenuBarItem opens a list box.
+    @property {String} TREE
+    ShellMenuBarItem opens a tree.
+    @property {String} GRID
+    ShellMenuBarItem opens a grid.
+    @property {String} DIALOG
+    ShellMenuBarItem opens a dialog.
+    @property {Null} DEFAULT
+    Defaults to null.
+
+  */
+
+  var hasPopupRole = {
+    MENU: 'menu',
+    LISTBOX: 'listbox',
+    TREE: 'tree',
+    GRID: 'grid',
+    DIALOG: 'dialog',
+    DEFAULT: null
   }; // the Menubar Item's base classname
 
   var CLASSNAME$19 = '_coral-Shell-menubar-item'; // Builds a string containing all possible iconVariant classnames. This will be used to remove classnames when the variant
@@ -65295,23 +65438,28 @@
         return this._open || false;
       },
       set: function set(value) {
-        var menu = this._getMenu(); // if we want to open the dialog we need to make sure there is a valid menu
+        var menu = this._getMenu(); // if we want to open the dialog we need to make sure there is a valid menu or hasPopup
+
+
+        if (menu === null && this.hasPopup === hasPopupRole.DEFAULT) {
+          return;
+        }
+
+        this._open = transform.booleanAttr(value);
+
+        this._reflectAttribute('open', this._open); // if the menu is valid, toggle the menu and trigger the appropriate event
 
 
         if (menu !== null) {
-          this._open = transform.booleanAttr(value);
-
-          this._reflectAttribute('open', this._open); // Toggle the target menu
-
-
+          // Toggle the target menu
           if (menu.open !== this._open) {
             menu.open = this._open;
-
-            this._elements.shellMenuButton.setAttribute('aria-expanded', this._open);
           }
 
           this.trigger("coral-shell-menubar-item:".concat(this._open ? 'open' : 'close'));
         }
+
+        this._elements.shellMenuButton.setAttribute('aria-expanded', this._open);
       }
       /**
        The menubar item's label content zone.
@@ -65360,12 +65508,41 @@
         } // Link menu with item
 
 
-        if (menu) {
+        if (menu !== null) {
           this.id = this.id || commons.getUID();
           menu.setAttribute('target', "#".concat(this.id));
-          var shellMenuButton = this._elements.shellMenuButton;
-          shellMenuButton.setAttribute('aria-haspopup', menu.getAttribute('role') || 'dialog');
+
+          if (this.hasPopup === hasPopupRole.DEFAULT) {
+            this.hasPopup = menu.getAttribute('role') || hasPopupRole.DIALOG;
+          }
+        } else if (this._menu && this.hasPopup !== hasPopupRole.DEFAULT) {
+          this.hasPopup = hasPopupRole.DEFAULT;
+        }
+      }
+      /**
+        Whether the item opens a popup dialog or menu. Accepts either "menu", "listbox", "tree", "grid", or "dialog".
+        @type {?String}
+        @default ShellMenuBarItemHasPopupRoleEnum.DEFAULT
+        @htmlattribute haspopup
+      */
+
+    }, {
+      key: "hasPopup",
+      get: function get() {
+        return this._hasPopup || null;
+      },
+      set: function set(value) {
+        value = transform.string(value).toLowerCase();
+        this._hasPopup = validate.enumeration(hasPopupRole)(value) && value || hasPopupRole.DEFAULT;
+        var shellMenuButton = this._elements.shellMenuButton;
+        var ariaHaspopup = this._hasPopup;
+
+        if (ariaHaspopup) {
+          shellMenuButton.setAttribute('aria-haspopup', ariaHaspopup);
           shellMenuButton.setAttribute('aria-expanded', this.open);
+        } else {
+          shellMenuButton.removeAttribute('aria-haspopup');
+          shellMenuButton.removeAttribute('aria-expanded');
         }
       }
     }, {
@@ -65384,6 +65561,7 @@
       key: "_attributePropertyMap",
       get: function get() {
         return commons.extend(_get(_getPrototypeOf(ShellMenuBarItem), "_attributePropertyMap", this), {
+          haspopup: 'hasPopup',
           iconsize: 'iconSize',
           iconvariant: 'iconVariant'
         });
@@ -65393,7 +65571,7 @@
     }, {
       key: "observedAttributes",
       get: function get() {
-        return _get(_getPrototypeOf(ShellMenuBarItem), "observedAttributes", this).concat(['icon', 'iconsize', 'iconvariant', 'badge', 'open', 'menu', 'aria-label']);
+        return _get(_getPrototypeOf(ShellMenuBarItem), "observedAttributes", this).concat(['haspopup', 'icon', 'iconsize', 'iconvariant', 'badge', 'open', 'menu', 'aria-label']);
       }
     }]);
 
@@ -69329,19 +69507,19 @@
 
 
         var _syncItemLabelled = function _syncItemLabelled() {
+          var isSmall = _this3.size === size$7.SMALL;
+
           var steps = _this3.items.getAll();
 
           var stepsCount = steps.length;
 
           for (var i = 0; i < stepsCount; i++) {
             var step = steps[i];
+            var label = step._elements.label;
 
-            if (step._elements.label.textContent.trim() !== '') {
-              if (_this3.size === size$7.SMALL) {
-                step.setAttribute('labelled', step._elements.label.textContent);
-              } else {
-                step.removeAttribute('labelled');
-              }
+            if (!step.labelled && label.textContent.length) {
+              label.classList.toggle('u-coral-screenReaderOnly', isSmall);
+              label.style.display = isSmall ? 'block' : '';
             }
           }
         };
@@ -69784,7 +69962,7 @@
     }, {
       key: "labelled",
       get: function get() {
-        return this._labelled || this.getAttribute('labelled') || this._elements.stepMarkerContainer.getAttribute('aria-label');
+        return this._labelled || this.getAttribute('labelled') || this._elements.stepMarkerContainer.getAttribute('aria-label') || '';
       },
       set: function set(value) {
         this._labelled = transform.string(value);
@@ -71734,6 +71912,9 @@
           // @a11y exclude cells for coral-table-roworder, coral-table-rowlock or coral-row-remove
           return cell.id && !(cell.hasAttribute('coral-table-roworder') || cell.querySelector('[coral-table-roworder]') || cell.hasAttribute('coral-table-rowlock') || cell.querySelector('[coral-table-rowlock]') || cell.hasAttribute('coral-row-remove') || cell.querySelector('[coral-table-remove]'));
         });
+        var rowHeaders = cells.filter(function (cell) {
+          return cell.getAttribute('role') === 'rowheader' || cell.tagName === 'TH' && cell.getAttribute('scope') === 'row';
+        });
         var cellForAccessibilityState;
         var ids = cells.map(function (cell) {
           var handle = cell.querySelector('[coral-table-rowselect]');
@@ -71750,10 +71931,13 @@
 
               return handle._elements.input && handle._elements.input.id;
             }
-          } // @a11y include all other cells in the row in the accessibility name
+          } // @a11y include row headers, or if no row header is defined,
+          // all other cells in the row, in the accessibility name
 
 
-          return cell.id;
+          if (rowHeaders.length === 0 || rowHeaders.indexOf(cell) !== -1) {
+            return cell.id;
+          }
         }); // @a11y If an _accessibilityState has not been defined within one of the cells, add to the last 
         // cell
 
@@ -79134,7 +79318,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.8.0";
+  var version$1 = "4.8.3";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

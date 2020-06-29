@@ -296,6 +296,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ShellHelpResult">ShellHelpResult</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-shell-menubar-item:close">coral-shell-menubar-item:close</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-shell-menubar-item:open">coral-shell-menubar-item:open</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ShellMenuBarItemHasPopupRoleEnum">ShellMenuBarItemHasPopupRoleEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ShellMenuBarItemIconVariantEnum">ShellMenuBarItemIconVariantEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-shell-orgswitcher:change">coral-shell-orgswitcher:change</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ShellUserAvatarEnum">ShellUserAvatarEnum</a></span></span></li>
@@ -730,32 +731,33 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
       this.setAttribute(&apos;aria-labelledby&apos;, this.header.id);
     }
 
-    const hasContent = this.content &amp;&amp; this.content.textContent !== &apos;&apos;;
+    // If the dialog has no content, or the content is empty, do nothing further.
+    if (!this.content || this.content.textContent === &apos;&apos;) {
+      return;
+    }
 
     // If the dialog has a content,
-    if (hasContent) {
-      this.content.id = this.content.id || commons.getUID();
+    this.content.id = this.content.id || commons.getUID();
 
-      // In an alertdialog with a content region, if the alertdialog is not otherwise described.
-      if (this._variant !== variant.DEFAULT) {
+    // In an alertdialog with a content region, if the alertdialog is not otherwise described.
+    if (this._variant !== variant.DEFAULT) {
 
-        // with no header, 
-        if (!hasHeader) {
+      // with no header, 
+      if (!hasHeader) {
 
-          // label the alertdialog with a reference to the content
-          this.setAttribute(&apos;aria-labelledby&apos;, this.content.id);
-        }
-
-        // otherwise, if the alertdialog is not otherwise described,
-        else if (!this.hasAttribute(&apos;aria-describedby&apos;)) {
-
-          // ensure that the alertdialog is described by the content.
-          this.setAttribute(&apos;aria-describedby&apos;, this.content.id);
-        }
+        // label the alertdialog with a reference to the content
+        this.setAttribute(&apos;aria-labelledby&apos;, this.content.id);
       }
-      else if (this.getAttribute(&apos;aria-labelledby&apos;) === this.content.id) {
-        this.removeAttribute(&apos;aria-labelledby&apos;);
+
+      // otherwise, if the alertdialog is not otherwise described,
+      else if (!this.hasAttribute(&apos;aria-describedby&apos;)) {
+
+        // ensure that the alertdialog is described by the content.
+        this.setAttribute(&apos;aria-describedby&apos;, this.content.id);
       }
+    }
+    else if (this.getAttribute(&apos;aria-labelledby&apos;) === this.content.id) {
+      this.removeAttribute(&apos;aria-labelledby&apos;);
     }
   }
   
@@ -813,7 +815,13 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
       if (this.open) {
         commons.transitionEnd(this._elements.wrapper, () =&gt; {
           this._handleFocus();
+          this._elements.closeButton.tabIndex = 0;
+          this._elements.closeButton.removeAttribute(&apos;coral-tabcapture&apos;);
         });
+      }
+      else {
+        this._elements.closeButton.tabIndex = -1;
+        this._elements.closeButton.setAttribute(&apos;coral-tabcapture&apos;, &apos;&apos;);
       }
     });
   }

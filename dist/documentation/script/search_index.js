@@ -6492,6 +6492,12 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "coral-spectrum/coral-component-shell/src/scripts/shellhelp.js~shellhelp#[timeoutname]",
+    "class/coral-spectrum/coral-component-shell/src/scripts/ShellHelp.js~ShellHelp.html#instance-member-[timeoutName]",
+    "coral-spectrum/coral-component-shell/src/scripts/ShellHelp.js~ShellHelp#[timeoutName]",
+    "member"
+  ],
+  [
     "coral-spectrum/coral-component-shell/src/scripts/shellhelp.js~shellhelp#items",
     "class/coral-spectrum/coral-component-shell/src/scripts/ShellHelp.js~ShellHelp.html#instance-member-items",
     "coral-spectrum/coral-component-shell/src/scripts/ShellHelp.js~ShellHelp#items",
@@ -6606,6 +6612,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "coral-spectrum/coral-component-shell/src/scripts/shellmenubaritem.js~shellmenubaritem#haspopup",
+    "class/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js~ShellMenuBarItem.html#instance-member-hasPopup",
+    "coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js~ShellMenuBarItem#hasPopup",
+    "member"
+  ],
+  [
     "coral-spectrum/coral-component-shell/src/scripts/shellmenubaritem.js~shellmenubaritem#icon",
     "class/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js~ShellMenuBarItem.html#instance-member-icon",
     "coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js~ShellMenuBarItem#icon",
@@ -6664,6 +6676,12 @@ window.esdocSearchIndex = [
     "class/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js~ShellMenuBarItem.html#static-member-iconVariant",
     "coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js~ShellMenuBarItem.iconVariant",
     "member"
+  ],
+  [
+    "coral-spectrum/coral-component-shell/src/scripts/shellmenubaritem.js~shellmenubaritemhaspopuproleenum",
+    "typedef/index.html#static-typedef-ShellMenuBarItemHasPopupRoleEnum",
+    "coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js~ShellMenuBarItemHasPopupRoleEnum",
+    "typedef"
   ],
   [
     "coral-spectrum/coral-component-shell/src/scripts/shellmenubaritem.js~shellmenubaritemiconvariantenum",

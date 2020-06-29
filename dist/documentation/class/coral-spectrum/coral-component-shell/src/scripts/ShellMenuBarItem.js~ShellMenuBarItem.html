@@ -296,6 +296,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ShellHelpResult">ShellHelpResult</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-shell-menubar-item:close">coral-shell-menubar-item:close</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-shell-menubar-item:open">coral-shell-menubar-item:open</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ShellMenuBarItemHasPopupRoleEnum">ShellMenuBarItemHasPopupRoleEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ShellMenuBarItemIconVariantEnum">ShellMenuBarItemIconVariantEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-shell-orgswitcher:change">coral-shell-orgswitcher:change</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ShellUserAvatarEnum">ShellUserAvatarEnum</a></span></span></li>
@@ -419,13 +420,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {Shell} from &apos;<span><a href="file/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js.html#lineNumber52">@adobe/coral-spectrum</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {Shell} from &apos;<span><a href="file/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js.html#lineNumber79">@adobe/coral-spectrum</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js.html#lineNumber52">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js.html#lineNumber79">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -532,6 +533,35 @@
         
         
         <div data-ice="description"><p>The notification badge content.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js~ShellMenuBarItem.html#instance-member-hasPopup">hasPopup</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Whether the item opens a popup dialog or menu.</p>
 </div>
       </div>
     </td>
@@ -765,7 +795,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js.html#lineNumber284">source</a></span></span>
+      <span data-ice="source"><span><a href="file/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js.html#lineNumber346">source</a></span></span>
     </span>
   </h3>
 
@@ -826,7 +856,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js.html#lineNumber134">source</a></span></span>
+      <span data-ice="source"><span><a href="file/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js.html#lineNumber161">source</a></span></span>
     </span>
   </h3>
 
@@ -835,6 +865,51 @@
   
   <div data-ice="description"><p>The notification badge content.</p>
 <p><ul><li><code>&quot;&quot;</code> by default.</li></ul></p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-hasPopup">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">hasPopup</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js.html#lineNumber268">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Whether the item opens a popup dialog or menu. Accepts either &quot;menu&quot;, &quot;listbox&quot;, &quot;tree&quot;, &quot;grid&quot;, or &quot;dialog&quot;.</p>
+<p><ul><li><code>ShellMenuBarItemHasPopupRoleEnum.DEFAULT</code> by default.</li></ul></p>
 </div>
 
   
@@ -871,7 +946,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js.html#lineNumber81">source</a></span></span>
+      <span data-ice="source"><span><a href="file/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js.html#lineNumber108">source</a></span></span>
     </span>
   </h3>
 
@@ -917,7 +992,7 @@ See <span><a href="class/coral-spectrum/coral-component-icon/src/scripts/Icon.js
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js.html#lineNumber96">source</a></span></span>
+      <span data-ice="source"><span><a href="file/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js.html#lineNumber123">source</a></span></span>
     </span>
   </h3>
 
@@ -962,7 +1037,7 @@ See <span><a href="class/coral-spectrum/coral-component-icon/src/scripts/Icon.js
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js.html#lineNumber112">source</a></span></span>
+      <span data-ice="source"><span><a href="file/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js.html#lineNumber139">source</a></span></span>
     </span>
   </h3>
 
@@ -1007,7 +1082,7 @@ See <span><a href="class/coral-spectrum/coral-component-icon/src/scripts/Icon.js
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js.html#lineNumber218">source</a></span></span>
+      <span data-ice="source"><span><a href="file/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js.html#lineNumber251">source</a></span></span>
     </span>
   </h3>
 
@@ -1050,7 +1125,7 @@ See <span><a href="class/coral-spectrum/coral-component-icon/src/scripts/Icon.js
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js.html#lineNumber181">source</a></span></span>
+      <span data-ice="source"><span><a href="file/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js.html#lineNumber214">source</a></span></span>
     </span>
   </h3>
 
@@ -1095,7 +1170,7 @@ See <span><a href="class/coral-spectrum/coral-component-icon/src/scripts/Icon.js
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js.html#lineNumber202">source</a></span></span>
+      <span data-ice="source"><span><a href="file/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js.html#lineNumber235">source</a></span></span>
     </span>
   </h3>
 
@@ -1141,7 +1216,7 @@ used.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js.html#lineNumber154">source</a></span></span>
+      <span data-ice="source"><span><a href="file/coral-spectrum/coral-component-shell/src/scripts/ShellMenuBarItem.js.html#lineNumber181">source</a></span></span>
     </span>
   </h3>
 

@@ -296,6 +296,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ShellHelpResult">ShellHelpResult</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-shell-menubar-item:close">coral-shell-menubar-item:close</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-shell-menubar-item:open">coral-shell-menubar-item:open</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ShellMenuBarItemHasPopupRoleEnum">ShellMenuBarItemHasPopupRoleEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ShellMenuBarItemIconVariantEnum">ShellMenuBarItemIconVariantEnum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-shell-orgswitcher:change">coral-shell-orgswitcher:change</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ShellUserAvatarEnum">ShellUserAvatarEnum</a></span></span></li>
@@ -453,6 +454,33 @@ const iconVariant = {
   CIRCLE: &apos;circle&apos;
 };
 
+/**
+  Enumeration for valid aria-haspopup values.
+
+  @typedef {Object} ShellMenuBarItemHasPopupRoleEnum
+  @property {String} MENU
+  ShellMenuBarItem opens a menu.
+  @property {String} LISTBOX
+  ShellMenuBarItem opens a list box.
+  @property {String} TREE
+  ShellMenuBarItem opens a tree.
+  @property {String} GRID
+  ShellMenuBarItem opens a grid.
+  @property {String} DIALOG
+  ShellMenuBarItem opens a dialog.
+  @property {Null} DEFAULT
+  Defaults to null.
+
+*/
+const hasPopupRole = {
+  MENU: &apos;menu&apos;,
+  LISTBOX: &apos;listbox&apos;,
+  TREE: &apos;tree&apos;,
+  GRID: &apos;grid&apos;,
+  DIALOG: &apos;dialog&apos;,
+  DEFAULT: null
+};
+
 // the Menubar Item&apos;s base classname
 const CLASSNAME = &apos;_coral-Shell-menubar-item&apos;;
 
@@ -578,19 +606,25 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
   set open(value) {
     const menu = this._getMenu();
   
-    // if we want to open the dialog we need to make sure there is a valid menu
+    // if we want to open the dialog we need to make sure there is a valid menu or hasPopup
+    if (menu === null &amp;&amp; this.hasPopup === hasPopupRole.DEFAULT) {
+      return;
+    }
+
+    this._open = transform.booleanAttr(value);
+    this._reflectAttribute(&apos;open&apos;, this._open);
+
+    // if the menu is valid, toggle the menu and trigger the appropriate event
     if (menu !== null) {
-      this._open = transform.booleanAttr(value);
-      this._reflectAttribute(&apos;open&apos;, this._open);
-    
       // Toggle the target menu
       if (menu.open !== this._open) {
         menu.open = this._open;
-        this._elements.shellMenuButton.setAttribute(&apos;aria-expanded&apos;, this._open);
       }
   
       this.trigger(`coral-shell-menubar-item:${this._open ? &apos;open&apos; : &apos;close&apos;}`);
     }
+
+    this._elements.shellMenuButton.setAttribute(&apos;aria-expanded&apos;, this._open);
   }
   
   /**
@@ -635,12 +669,41 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
     }
     
     // Link menu with item
-    if (menu) {
+    if (menu !== null) {
       this.id = this.id || commons.getUID();
       menu.setAttribute(&apos;target&apos;, `#${this.id}`);
-      const shellMenuButton = this._elements.shellMenuButton;
-      shellMenuButton.setAttribute(&apos;aria-haspopup&apos;, menu.getAttribute(&apos;role&apos;) || &apos;dialog&apos;);
+      if (this.hasPopup === hasPopupRole.DEFAULT) {
+        this.hasPopup = menu.getAttribute(&apos;role&apos;) || hasPopupRole.DIALOG;
+      }
+    }
+    else if (this._menu &amp;&amp; this.hasPopup !== hasPopupRole.DEFAULT) {
+      this.hasPopup = hasPopupRole.DEFAULT;
+    }
+  }
+
+  /**
+    Whether the item opens a popup dialog or menu. Accepts either &quot;menu&quot;, &quot;listbox&quot;, &quot;tree&quot;, &quot;grid&quot;, or &quot;dialog&quot;.
+    @type {?String}
+    @default ShellMenuBarItemHasPopupRoleEnum.DEFAULT
+    @htmlattribute haspopup
+  */
+  get hasPopup() {
+    return this._hasPopup || null;
+  }
+  set hasPopup(value) {
+    value = transform.string(value).toLowerCase();
+    this._hasPopup = validate.enumeration(hasPopupRole)(value) &amp;&amp; value || hasPopupRole.DEFAULT;
+
+    const shellMenuButton = this._elements.shellMenuButton;
+    let ariaHaspopup = this._hasPopup;
+
+    if (ariaHaspopup) {
+      shellMenuButton.setAttribute(&apos;aria-haspopup&apos;, ariaHaspopup);
       shellMenuButton.setAttribute(&apos;aria-expanded&apos;, this.open);
+    }
+    else {
+      shellMenuButton.removeAttribute(&apos;aria-haspopup&apos;);
+      shellMenuButton.removeAttribute(&apos;aria-expanded&apos;);
     }
   }
   
@@ -706,6 +769,7 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
   
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
+      haspopup: &apos;hasPopup&apos;,
       iconsize: &apos;iconSize&apos;,
       iconvariant: &apos;iconVariant&apos;
     });
@@ -714,6 +778,7 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
+      &apos;haspopup&apos;,
       &apos;icon&apos;,
       &apos;iconsize&apos;,
       &apos;iconvariant&apos;,
