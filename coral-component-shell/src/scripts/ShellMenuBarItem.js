@@ -292,7 +292,7 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
       // Mark button as selected
       const shellMenuButton = this._elements.shellMenuButton;
       shellMenuButton.classList.toggle('is-selected', !target.open);
-      shellMenuButton.setAttribute('aria-expanded', target.open);
+      shellMenuButton.setAttribute('aria-expanded', !target.open);
     }
   }
   
