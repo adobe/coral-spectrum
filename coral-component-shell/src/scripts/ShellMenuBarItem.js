@@ -290,9 +290,7 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
   
     if (target === this._getMenu()) {
       // Mark button as selected
-      const shellMenuButton = this._elements.shellMenuButton;
-      shellMenuButton.classList.toggle('is-selected', !target.open);
-      shellMenuButton.setAttribute('aria-expanded', target.open);
+      this._elements.shellMenuButton.classList.toggle('is-selected', !target.open);
     }
   }
   
@@ -301,9 +299,14 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
     const target = event.target;
     
     // matches the open state of the target in case it was open separately
-    if (target === this._getMenu() && this.open !== target.open) {
-      this.open = target.open;
-      this._elements.shellMenuButton.setAttribute('aria-expanded', target.open);
+    if (target === this._getMenu()) {
+      const shellMenuButton = this._elements.shellMenuButton;
+      if (this.open !== target.open) {
+        this.open = target.open;
+      }
+      else if (shellMenuButton.getAttribute('aria-expanded') !== target.open) {
+        shellMenuButton.setAttribute('aria-expanded', target.open);
+      }
     }
   }
   
