@@ -458,24 +458,24 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
 
     // Required for coral-table-row:change event
     this._oldSelection = [];
-    
+
     // Events
     this._delegateEvents({
       // Private
       &apos;coral-table-cell:_beforeselectedchanged&apos;: &apos;_onBeforeCellSelectionChanged&apos;,
       &apos;coral-table-cell:_selectedchanged&apos;: &apos;_onCellSelectionChanged&apos;
     });
-  
+
     // Initialize content MO
     this._observer = new MutationObserver(this._handleMutations.bind(this));
     this._observer.observe(this, {
       childList: true
     });
   }
-  
+
   /**
    Whether the table row is locked.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute locked
@@ -487,13 +487,13 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
   set locked(value) {
     this._locked = transform.booleanAttr(value);
     this._reflectAttribute(&apos;locked&apos;, this._locked);
-    
+
     this.trigger(&apos;coral-table-row:_lockedchanged&apos;);
   }
-  
+
   /**
    Whether the table row is selected.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute selected
@@ -508,21 +508,21 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
     this.querySelector(&apos;[coral-table-rowselect][disabled]&apos;)) {
       return;
     }
-    
+
     this.trigger(&apos;coral-table-row:_beforeselectedchanged&apos;);
-    
+
     this._selected = transform.booleanAttr(value);
     this._reflectAttribute(&apos;selected&apos;, this._selected);
-  
+
     this.trigger(&apos;coral-table-row:_selectedchanged&apos;);
     this._syncSelectHandle();
     this._syncAriaLabelledby();
     this._syncAriaSelectedState();
   }
-  
+
   /**
    Whether the items are selectable.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute selectable
@@ -534,15 +534,15 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
   set selectable(value) {
     this._selectable = transform.booleanAttr(value);
     this._reflectAttribute(&apos;selectable&apos;, this._selectable);
-    
+
     this.items.getAll().forEach((cell) =&gt; {
       cell[this._selectable ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;_selectable&apos;, &apos;&apos;);
     });
   }
-  
+
   /**
    Whether multiple items can be selected.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute multiple
@@ -554,34 +554,34 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
   set multiple(value) {
     this._multiple = transform.booleanAttr(value);
     this._reflectAttribute(&apos;multiple&apos;, this._multiple);
-    
+
     this.trigger(&apos;coral-table-row:_multiplechanged&apos;);
   }
-  
+
   /**
    Returns an Array containing the selected items.
-   
+
    @type {Array.&lt;HTMLElement&gt;}
    @readonly
    */
   get selectedItems() {
     return this.items._getAllSelected();
   }
-  
+
   /**
    Returns the first selected item of the row. The value &lt;code&gt;null&lt;/code&gt; is returned if no element is
    selected.
-   
+
    @type {HTMLElement}
    @readonly
    */
   get selectedItem() {
     return this.items._getFirstSelected();
   }
-  
+
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   
+
    @type {SelectableCollection}
    @readonly
    */
@@ -594,10 +594,10 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
         itemTagName: &apos;coral-table-cell&apos;
       });
     }
-  
+
     return this._items;
   }
-  
+
   _triggerChangeEvent() {
     const selectedItems = this.selectedItems;
     this.trigger(&apos;coral-table-row:_change&apos;, {
@@ -606,25 +606,25 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
     });
     this._oldSelection = selectedItems;
   }
-  
+
   /** @private */
   _onCellSelectionChanged(event) {
     event.stopImmediatePropagation();
-    
+
     this._triggerChangeEvent();
   }
-  
+
   /** @private */
   _onBeforeCellSelectionChanged(event) {
     event.stopImmediatePropagation();
-    
+
     // In single selection, if the added item is selected, the rest should be deselected
     const selectedItem = this.selectedItem;
     if (!this.multiple &amp;&amp; selectedItem &amp;&amp; !event.target.selected) {
       selectedItem.set(&apos;selected&apos;, false, true);
     }
   }
-  
+
   /** @private */
   _syncAriaSelectedState() {
     this.classList.toggle(&apos;is-selected&apos;, this.selected);
@@ -647,32 +647,32 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
       this.removeAttribute(&apos;aria-atomic&apos;);
       this.removeAttribute(&apos;aria-relevant&apos;);
 
-      // @a11y Unhide the selectHandle, so that it will be resume being announced by assistive 
+      // @a11y Unhide the selectHandle, so that it will be resume being announced by assistive
       // technology
       if (selectHandle &amp;&amp; selectHandle.tagName === &apos;CORAL-CHECKBOX&apos;) {
         selectHandle.removeAttribute(&apos;aria-hidden&apos;);
       }
 
-      // @a11y Unhide the coral-table-roworder handle, so that it will be resume being announced by 
+      // @a11y Unhide the coral-table-roworder handle, so that it will be resume being announced by
       // assistive technology
       if (rowOrderHandle) {
         rowOrderHandle.removeAttribute(&apos;aria-hidden&apos;);
       }
 
-      // @a11y Unhide the coral-table-rowlock handle, so that it will be resume being announced by 
+      // @a11y Unhide the coral-table-rowlock handle, so that it will be resume being announced by
       // assistive technology
       if (rowLockHandle) {
         rowLockHandle.removeAttribute(&apos;aria-hidden&apos;);
       }
 
-      // @a11y Unhide the coral-row-remove handle, so that it will be resume being announced by 
+      // @a11y Unhide the coral-row-remove handle, so that it will be resume being announced by
       // assistive technology
       if (rowRemoveHandle) {
         rowRemoveHandle.removeAttribute(&apos;aria-hidden&apos;);
       }
 
       if (accessibilityState) {
-        // @a11y Hide the _accessibilityState from assistive technology, so that it can not be read 
+        // @a11y Hide the _accessibilityState from assistive technology, so that it can not be read
         // using a screen reader separately from the row it helps label
         accessibilityState.setAttribute(&apos;aria-hidden&apos;, &apos;true&apos;);
 
@@ -692,19 +692,19 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
     }
 
     // @ally If _accessibilityState has been added to a cell within the row,
-    if (accessibilityState) {        
+    if (accessibilityState) {
       resetAccessibilityState();
       this._ariaLiveOnTimeout = setTimeout(() =&gt; {
-          
+
         // @a11y and the row or one of its descendants has focus,
         if (this === document.activeElement || this.contains(document.activeElement)) {
-          
+
           // @a11y Hide the &quot;Select&quot; checkbox so that it does not get announced with the state change.
           if (selectHandle &amp;&amp; selectHandle.tagName === &apos;CORAL-CHECKBOX&apos;) {
             selectHandle.setAttribute(&apos;aria-hidden&apos;, &apos;true&apos;);
           }
 
-          // @a11y Hide the coral-table-roworder handle so that it does not get announced with the 
+          // @a11y Hide the coral-table-roworder handle so that it does not get announced with the
           // state change.
           if (rowOrderHandle) {
             rowOrderHandle.setAttribute(&apos;aria-hidden&apos;, &apos;true&apos;);
@@ -716,13 +716,13 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
             rowLockHandle.setAttribute(&apos;aria-hidden&apos;, &apos;true&apos;);
           }
 
-          // @a11y Hide the coral-row-remove handle so that it does not get announced with the state 
+          // @a11y Hide the coral-row-remove handle so that it does not get announced with the state
           // change.
           if (rowRemoveHandle) {
             rowRemoveHandle.setAttribute(&apos;aria-hidden&apos;, &apos;true&apos;);
           }
 
-          // @a11y The ChromeVox screenreader, used on Chromebook, announces the state change and 
+          // @a11y The ChromeVox screenreader, used on Chromebook, announces the state change and
           // should not need aria-live, otherwise it double-voices the row.
           if (!window.cvox) {
             // @a11y Unhide the _accessibilityState so that it will get announced with the state change.
@@ -736,7 +736,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
           }
 
           this._ariaLiveOnTimeout = setTimeout(() =&gt; {
-            // @ally Set the _accessibilityState text to read either &quot;, checked&quot; or &quot;, unchecked&quot;, 
+            // @ally Set the _accessibilityState text to read either &quot;, checked&quot; or &quot;, unchecked&quot;,
             // which should trigger a live region announcement.
             accessibilityState.innerHTML = i18n.get(this.selected ? &apos;, checked&apos; : &apos;, unchecked&apos;);
 
@@ -748,7 +748,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
 
       if (!(this === document.activeElement || this.contains(document.activeElement))) {
         accessibilityState.innerHTML = i18n.get(this.selected ? &apos;, checked&apos; : &apos;&apos;);
-      }  
+      }
     }
   }
 
@@ -763,7 +763,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
       return;
     }
 
-    // @a11y get a list of ids for cells 
+    // @a11y get a list of ids for cells
     const cells = this.items.getAll().filter(cell =&gt; {
       // @a11y exclude cells for coral-table-roworder, coral-table-rowlock or coral-row-remove
       return (
@@ -789,7 +789,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
         cellForAccessibilityState = cell;
 
         // @a11y otherwise, if the selectHandle is a coral-checkbox,
-        if (handle &amp;&amp; handle.tagName === &apos;CORAL-CHECKBOX&apos;) {
+        if (handle &amp;&amp; handle.tagName === &apos;CORAL-CHECKBOX&apos; &amp;&amp; handle._elements) {
           // @a11y if the row is selected, don&apos;t add the coral-table-rowselect to accessibility name
           if (this.selected) {
             return;
@@ -806,7 +806,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
       }
     });
 
-    // @a11y If an _accessibilityState has not been defined within one of the cells, add to the last 
+    // @a11y If an _accessibilityState has not been defined within one of the cells, add to the last
     // cell
     if (!cellForAccessibilityState &amp;&amp; cells.length) {
       cellForAccessibilityState = cells[cells.length - 1];
@@ -818,7 +818,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
 
     // @a11y Once defined,
     if (this._elements.accessibilityState.parentNode) {
-      // @a11y add the _accessibilityState &quot;, checked&quot; or &quot;, unchecked&quot; as the last item in the 
+      // @a11y add the _accessibilityState &quot;, checked&quot; or &quot;, unchecked&quot; as the last item in the
       // accessibility name
       ids.push(this._elements.accessibilityState.id);
     }
@@ -826,7 +826,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
     // @a11y Update the aria-labelledby attribute for the row.
     this.setAttribute(&apos;aria-labelledby&apos;, ids.join(&apos; &apos;));
   }
-  
+
   /** @private */
   _syncSelectHandle() {
     // Check/uncheck the select handle
@@ -837,7 +837,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
       }
 
       selectHandle[this.selected ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;checked&apos;, &apos;&apos;);
-      
+
       // @a11y If the handle is a checkbox but lacks a label, label it with &quot;Select&quot;.
       if (selectHandle.tagName === &apos;CORAL-CHECKBOX&apos;) {
         if (!selectHandle.labelled) {
@@ -855,7 +855,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
       }
     }
   }
-  
+
   /** @private */
   _toggleSelectable(selectable) {
     if (selectable) {
@@ -869,7 +869,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
     // Sync the aria-labelledby attribute to include the _accessibilityState
     this._syncAriaLabelledby();
   }
-  
+
   /** @private */
   _toggleOrderable(orderable) {
     if (orderable) {
@@ -880,14 +880,14 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
       this.dragAction.destroy();
     }
   }
-  
+
   /** @private */
   _toggleLockable(lockable) {
     if (lockable) {
       this._setHandle(&apos;coral-table-rowlock&apos;);
     }
   }
-  
+
   /** @private */
   _setHandle(handle) {
     requestAnimationFrame(() =&gt; {
@@ -900,7 +900,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
       this._syncAriaSelectedState();
     });
   }
-  
+
   /** @private */
   _handleMutations(mutations) {
     mutations.forEach((mutation) =&gt; {
@@ -912,12 +912,12 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
       this._syncAriaLabelledby();
     });
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([&apos;locked&apos;, &apos;selected&apos;, &apos;multiple&apos;, &apos;selectable&apos;, &apos;_selectable&apos;, &apos;_orderable&apos;, &apos;_lockable&apos;]);
   }
-  
+
   /** @ignore */
   attributeChangedCallback(name, oldValue, value) {
     if (name === &apos;_selectable&apos;) {
@@ -933,57 +933,57 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
       super.attributeChangedCallback(name, oldValue, value);
     }
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
     this._syncAriaLabelledby();
   }
-  
+
   /**
    Triggered before {@link TableRow#selected} is changed.
- 
+
    @typedef {CustomEvent} coral-table-row:_beforeselectedchanged
-   
+
    @private
    */
-  
+
   /**
    Triggered when {@link TableRow#selected} changed.
- 
+
    @typedef {CustomEvent} coral-table-row:_selectedchanged
-   
+
    @private
    */
-  
+
   /**
    Triggered when {@link TableRow#locked} changed.
- 
+
    @typedef {CustomEvent} coral-table-row:_lockedchanged
-   
+
    @private
    */
-  
+
   /**
    Triggered when {@link TableRow#multiple} changed.
-   
+
    @typedef {CustomEvent} coral-table-row:_multiplechanged
-   
+
    @private
    */
-  
+
   /**
    Triggered when the {@link TableRow} selection changed.
- 
+
    @typedef {CustomEvent} coral-table-row:_change
-   
+
    @property {Array.&lt;TableCell&gt;} detail.oldSelection
    The old item selection. When {@link TableRow#multiple}, it includes an Array.
    @property {Array.&lt;TableCell&gt;} event.detail.selection
    The item selection. When {@link TableRow#multiple}, it includes an Array.
-   
+
    @private
    */
 }

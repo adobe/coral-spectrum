@@ -51545,7 +51545,7 @@ var Coral = (function (exports) {
                 itemSelector = new Checkbox();
                 itemSelector.setAttribute('coral-columnview-itemselect', '');
                 itemSelector._elements.input.tabIndex = -1;
-                itemSelector.setAttribute('labelledby', this.content.id); // Add the item selector as first child
+                itemSelector.setAttribute('labelledby', this._elements.content.id); // Add the item selector as first child
 
                 this.insertBefore(itemSelector, this.firstChild);
               }
@@ -51772,7 +51772,7 @@ var Coral = (function (exports) {
           } // @a11y Item should be labelled by thumbnail, content, and if appropriate accessibility state.
 
 
-        var ariaLabelledby = this.thumbnail.id + ' ' + this.content.id;
+        var ariaLabelledby = this._elements.thumbnail.id + ' ' + this._elements.content.id;
         this.setAttribute('aria-labelledby', this.selected ? "".concat(ariaLabelledby, " ").concat(accessibilityState.id) : ariaLabelledby); // Sync checkbox item selector
 
         var itemSelector = this.querySelector('coral-checkbox[coral-columnview-itemselect]');
@@ -71723,8 +71723,7 @@ var Coral = (function (exports) {
     }
     /**
      Whether the table row is locked.
-     
-     @type {Boolean}
+      @type {Boolean}
      @default false
      @htmlattribute locked
      @htmlattributereflected
@@ -71789,25 +71788,25 @@ var Coral = (function (exports) {
 
           _this2.removeAttribute('aria-atomic');
 
-          _this2.removeAttribute('aria-relevant'); // @a11y Unhide the selectHandle, so that it will be resume being announced by assistive 
+          _this2.removeAttribute('aria-relevant'); // @a11y Unhide the selectHandle, so that it will be resume being announced by assistive
           // technology
 
 
           if (selectHandle && selectHandle.tagName === 'CORAL-CHECKBOX') {
             selectHandle.removeAttribute('aria-hidden');
-          } // @a11y Unhide the coral-table-roworder handle, so that it will be resume being announced by 
+          } // @a11y Unhide the coral-table-roworder handle, so that it will be resume being announced by
           // assistive technology
 
 
           if (rowOrderHandle) {
             rowOrderHandle.removeAttribute('aria-hidden');
-          } // @a11y Unhide the coral-table-rowlock handle, so that it will be resume being announced by 
+          } // @a11y Unhide the coral-table-rowlock handle, so that it will be resume being announced by
           // assistive technology
 
 
           if (rowLockHandle) {
             rowLockHandle.removeAttribute('aria-hidden');
-          } // @a11y Unhide the coral-row-remove handle, so that it will be resume being announced by 
+          } // @a11y Unhide the coral-row-remove handle, so that it will be resume being announced by
           // assistive technology
 
 
@@ -71816,7 +71815,7 @@ var Coral = (function (exports) {
           }
 
           if (accessibilityState) {
-            // @a11y Hide the _accessibilityState from assistive technology, so that it can not be read 
+            // @a11y Hide the _accessibilityState from assistive technology, so that it can not be read
             // using a screen reader separately from the row it helps label
             accessibilityState.setAttribute('aria-hidden', 'true'); // @a11y If the item is not selected, remove ', unchecked' to decrease verbosity.
 
@@ -71843,7 +71842,7 @@ var Coral = (function (exports) {
               // @a11y Hide the "Select" checkbox so that it does not get announced with the state change.
               if (selectHandle && selectHandle.tagName === 'CORAL-CHECKBOX') {
                 selectHandle.setAttribute('aria-hidden', 'true');
-              } // @a11y Hide the coral-table-roworder handle so that it does not get announced with the 
+              } // @a11y Hide the coral-table-roworder handle so that it does not get announced with the
               // state change.
 
 
@@ -71855,13 +71854,13 @@ var Coral = (function (exports) {
 
               if (rowLockHandle) {
                 rowLockHandle.setAttribute('aria-hidden', 'true');
-              } // @a11y Hide the coral-row-remove handle so that it does not get announced with the state 
+              } // @a11y Hide the coral-row-remove handle so that it does not get announced with the state
               // change.
 
 
               if (rowRemoveHandle) {
                 rowRemoveHandle.setAttribute('aria-hidden', 'true');
-              } // @a11y The ChromeVox screenreader, used on Chromebook, announces the state change and 
+              } // @a11y The ChromeVox screenreader, used on Chromebook, announces the state change and
               // should not need aria-live, otherwise it double-voices the row.
 
 
@@ -71876,7 +71875,7 @@ var Coral = (function (exports) {
               }
 
               _this2._ariaLiveOnTimeout = setTimeout(function () {
-                // @ally Set the _accessibilityState text to read either ", checked" or ", unchecked", 
+                // @ally Set the _accessibilityState text to read either ", checked" or ", unchecked",
                 // which should trigger a live region announcement.
                 accessibilityState.innerHTML = i18n.get(_this2.selected ? ', checked' : ', unchecked'); // @ally wait 250ms for row to announce
 
@@ -71905,7 +71904,7 @@ var Coral = (function (exports) {
           }
 
           return;
-        } // @a11y get a list of ids for cells 
+        } // @a11y get a list of ids for cells
 
 
         var cells = this.items.getAll().filter(function (cell) {
@@ -71922,7 +71921,7 @@ var Coral = (function (exports) {
           if (handle) {
             cellForAccessibilityState = cell; // @a11y otherwise, if the selectHandle is a coral-checkbox,
 
-            if (handle && handle.tagName === 'CORAL-CHECKBOX') {
+            if (handle && handle.tagName === 'CORAL-CHECKBOX' && handle._elements) {
               // @a11y if the row is selected, don't add the coral-table-rowselect to accessibility name
               if (_this3.selected) {
                 return;
@@ -71938,7 +71937,7 @@ var Coral = (function (exports) {
           if (rowHeaders.length === 0 || rowHeaders.indexOf(cell) !== -1) {
             return cell.id;
           }
-        }); // @a11y If an _accessibilityState has not been defined within one of the cells, add to the last 
+        }); // @a11y If an _accessibilityState has not been defined within one of the cells, add to the last
         // cell
 
         if (!cellForAccessibilityState && cells.length) {
@@ -71951,7 +71950,7 @@ var Coral = (function (exports) {
 
 
         if (this._elements.accessibilityState.parentNode) {
-          // @a11y add the _accessibilityState ", checked" or ", unchecked" as the last item in the 
+          // @a11y add the _accessibilityState ", checked" or ", unchecked" as the last item in the
           // accessibility name
           ids.push(this._elements.accessibilityState.id);
         } // @a11y Update the aria-labelledby attribute for the row.
@@ -72094,43 +72093,36 @@ var Coral = (function (exports) {
       }
       /**
        Triggered before {@link TableRow#selected} is changed.
-         @typedef {CustomEvent} coral-table-row:_beforeselectedchanged
-       
-       @private
+        @typedef {CustomEvent} coral-table-row:_beforeselectedchanged
+        @private
        */
 
       /**
        Triggered when {@link TableRow#selected} changed.
-         @typedef {CustomEvent} coral-table-row:_selectedchanged
-       
-       @private
+        @typedef {CustomEvent} coral-table-row:_selectedchanged
+        @private
        */
 
       /**
        Triggered when {@link TableRow#locked} changed.
-         @typedef {CustomEvent} coral-table-row:_lockedchanged
-       
-       @private
+        @typedef {CustomEvent} coral-table-row:_lockedchanged
+        @private
        */
 
       /**
        Triggered when {@link TableRow#multiple} changed.
-       
-       @typedef {CustomEvent} coral-table-row:_multiplechanged
-       
-       @private
+        @typedef {CustomEvent} coral-table-row:_multiplechanged
+        @private
        */
 
       /**
        Triggered when the {@link TableRow} selection changed.
-         @typedef {CustomEvent} coral-table-row:_change
-       
-       @property {Array.<TableCell>} detail.oldSelection
+        @typedef {CustomEvent} coral-table-row:_change
+        @property {Array.<TableCell>} detail.oldSelection
        The old item selection. When {@link TableRow#multiple}, it includes an Array.
        @property {Array.<TableCell>} event.detail.selection
        The item selection. When {@link TableRow#multiple}, it includes an Array.
-       
-       @private
+        @private
        */
 
     }, {
@@ -72147,8 +72139,7 @@ var Coral = (function (exports) {
       }
       /**
        Whether the table row is selected.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute selected
        @htmlattributereflected
@@ -72180,8 +72171,7 @@ var Coral = (function (exports) {
       }
       /**
        Whether the items are selectable.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute selectable
        @htmlattributereflected
@@ -72205,8 +72195,7 @@ var Coral = (function (exports) {
       }
       /**
        Whether multiple items can be selected.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute multiple
        @htmlattributereflected
@@ -72226,8 +72215,7 @@ var Coral = (function (exports) {
       }
       /**
        Returns an Array containing the selected items.
-       
-       @type {Array.<HTMLElement>}
+        @type {Array.<HTMLElement>}
        @readonly
        */
 
@@ -72239,8 +72227,7 @@ var Coral = (function (exports) {
       /**
        Returns the first selected item of the row. The value <code>null</code> is returned if no element is
        selected.
-       
-       @type {HTMLElement}
+        @type {HTMLElement}
        @readonly
        */
 
@@ -72251,8 +72238,7 @@ var Coral = (function (exports) {
       }
       /**
        The Collection Interface that allows interacting with the items that the component contains.
-       
-       @type {SelectableCollection}
+        @type {SelectableCollection}
        @readonly
        */
 
@@ -79318,7 +79304,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.8.3";
+  var version$1 = "4.8.4";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
