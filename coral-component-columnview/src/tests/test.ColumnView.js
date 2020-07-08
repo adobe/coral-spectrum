@@ -1239,7 +1239,42 @@ describe('ColumnView', function() {
         }, 400);
       });
     });
-
+    describe('#coral-interactive', function() {
+      it('Clicking on checkbox within an item should not toggle selection of the item', function(done) {
+        const el = helpers.build(window.__html__['ColumnView.coral-interactive.html']);
+        const activeItem = el.items.getAll()[0];
+        const coralInteractiveElement = activeItem.querySelector('[coral-interactive]');
+        coralInteractiveElement.focus();
+        coralInteractiveElement.click();
+        helpers.next(function() {
+          expect(activeItem.selected).to.be.false;
+          expect(activeItem.hasAttribute('selected')).to.be.false;
+          expect(el.activeItem).to.be.null;
+          expect(el.selectedItem).to.be.null;
+          expect(coralInteractiveElement.checked).to.be.true;
+          coralInteractiveElement.click();
+          helpers.next(function() {
+            expect(activeItem.selected).to.be.false;
+            expect(activeItem.hasAttribute('selected')).to.be.false;
+            expect(el.activeItem).to.be.null;
+            expect(el.selectedItem).to.be.null;
+            expect(coralInteractiveElement.checked).to.be.false;
+            done();
+          });
+        });
+      });
+      it('Using arrow key with focus on checkbox within an item should not navigate', function(done) {
+        const el = helpers.build(window.__html__['ColumnView.coral-interactive.html']);
+        const activeItem = el.items.getAll()[0];
+        const coralInteractiveElement = activeItem.querySelector('[coral-interactive]');
+        coralInteractiveElement.focus();
+        helpers.keypress('down', document.activeElement);
+        helpers.next(function() {
+          expect(document.activeElement).to.equal(coralInteractiveElement);
+          done();
+        });
+      });
+    });
     describe('when selectionMode equals "single"', function() {
       it('should have aria-multiselectable equal to "false"', function(done) {
         const el = helpers.build(window.__html__['ColumnView.selectionMode.single.html']);
