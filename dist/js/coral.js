@@ -65234,9 +65234,7 @@ var Coral = (function (exports) {
 
         if (target === this._getMenu()) {
           // Mark button as selected
-          var shellMenuButton = this._elements.shellMenuButton;
-          shellMenuButton.classList.toggle('is-selected', !target.open);
-          shellMenuButton.setAttribute('aria-expanded', target.open);
+          this._elements.shellMenuButton.classList.toggle('is-selected', !target.open);
         }
       }
       /** @private */
@@ -65246,10 +65244,14 @@ var Coral = (function (exports) {
       value: function _handleOverlayEvent(event) {
         var target = event.target; // matches the open state of the target in case it was open separately
 
-        if (target === this._getMenu() && this.open !== target.open) {
-          this.open = target.open;
+        if (target === this._getMenu()) {
+          var shellMenuButton = this._elements.shellMenuButton;
 
-          this._elements.shellMenuButton.setAttribute('aria-expanded', target.open);
+          if (this.open !== target.open) {
+            this.open = target.open;
+          } else if (shellMenuButton.getAttribute('aria-expanded') !== target.open) {
+            shellMenuButton.setAttribute('aria-expanded', target.open);
+          }
         }
       }
       /** @ignore */
@@ -79304,7 +79306,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.8.4";
+  var version$1 = "4.8.5";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
