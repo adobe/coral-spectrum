@@ -12,6 +12,7 @@
 
 import {BaseComponent} from '../../../coral-base-component';
 import ColumnViewCollection from './ColumnViewCollection';
+import isInteractiveTarget from './isInteractiveTarget';
 import selectionMode from './selectionMode';
 import {commons, transform, validate} from '../../../coral-utils';
 
@@ -192,6 +193,10 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
   
   /** @private */
   _onItemClick(event) {
+    if (isInteractiveTarget(event.target)) {
+      return;
+    }
+
     // since transform will kill the modification, we trigger the event manually
     if (event.matchedTarget.hasAttribute('active')) {
       // directly calls the event since setting the attribute will not trigger an event
@@ -367,7 +372,7 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
    */
   _onColumnContentClick(event) {
     // we make sure the content was clicked directly and not an item
-    if (event.target !== event.matchedTarget) {
+    if (event.target !== event.matchedTarget || isInteractiveTarget(event.target)) {
       return;
     }
     

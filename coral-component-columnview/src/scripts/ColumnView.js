@@ -13,6 +13,7 @@
 import accessibilityState from '../templates/accessibilityState';
 import {BaseComponent} from '../../../coral-base-component';
 import ColumnViewCollection from './ColumnViewCollection';
+import isInteractiveTarget from './isInteractiveTarget';
 import selectionMode from './selectionMode';
 import {transform, validate, commons, i18n} from '../../../coral-utils';
 
@@ -353,7 +354,7 @@ class ColumnView extends BaseComponent(HTMLElement) {
   /** @private */
   _onGlobalKeyUp(event) {
     // removes the class to stop selection
-    if (event.keyCode === 16) {
+    if (event.keyCode === 16 && !isInteractiveTarget(event.target)) {
       this.classList.remove('is-unselectable');
     }
   }
@@ -361,20 +362,21 @@ class ColumnView extends BaseComponent(HTMLElement) {
   /** @private */
   _onGlobalKeyDown(event) {
     // adds a class that prevents the text selection, otherwise shift + click would select the text
-    if (event.keyCode === 16) {
+    if (event.keyCode === 16 || !isInteractiveTarget(event.target)) {
       this.classList.add('is-unselectable');
     }
   }
 
   /** @private */
   _onKeyShiftAndUp(event) {
-    event.preventDefault();
     const matchedTarget = this._getRealMatchedTarget(event);
 
     // don't select items when focus is within the preview
-    if (matchedTarget.closest('coral-columnview-preview')) {
+    if (matchedTarget.closest('coral-columnview-preview') || isInteractiveTarget(event.target)) {
       return;
     }
+
+    event.preventDefault();
 
     if (this.selectionMode === selectionMode.NONE) {
       this._onKeyUp(event);
@@ -453,13 +455,14 @@ class ColumnView extends BaseComponent(HTMLElement) {
   
   /** @private */
   _onKeyShiftAndDown(event) {
-    event.preventDefault();
     const matchedTarget = this._getRealMatchedTarget(event);
 
     // don't select items when focus is within the preview
-    if (matchedTarget.closest('coral-columnview-preview')) {
+    if (matchedTarget.closest('coral-columnview-preview') || isInteractiveTarget(event.target)) {
       return;
     }
+
+    event.preventDefault();
 
     if (this.selectionMode === selectionMode.NONE) {
       this._onKeyDown(event);
@@ -539,13 +542,14 @@ class ColumnView extends BaseComponent(HTMLElement) {
   
   /** @private */
   _onKeyUp(event) {
-    event.preventDefault();
     const matchedTarget = this._getRealMatchedTarget(event);
 
     // don't navigate items when focus is within the preview
-    if (matchedTarget.closest('coral-columnview-preview')) {
+    if (matchedTarget.closest('coral-columnview-preview') || isInteractiveTarget(event.target)) {
       return;
     }
+
+    event.preventDefault();
     
     // selection will win over active buttons, because they are the right most item. using _oldSelection since it
     // should be equivalent to this.items._getSelectedItems() but faster
@@ -580,13 +584,14 @@ class ColumnView extends BaseComponent(HTMLElement) {
   
   /** @private */
   _onKeyDown(event) {
-    event.preventDefault();
     const matchedTarget = this._getRealMatchedTarget(event);
 
     // don't navigate items when focus is within the preview
-    if (matchedTarget.closest('coral-columnview-preview')) {
+    if (matchedTarget.closest('coral-columnview-preview') || isInteractiveTarget(event.target)) {
       return;
     }
+
+    event.preventDefault();
     
     // selection will win over active buttons, because they are the right most item. using _oldSelection since it
     // should be equivalent to this.items._getSelectedItems() but faster
@@ -623,12 +628,17 @@ class ColumnView extends BaseComponent(HTMLElement) {
   
   /** @private */
   _onKeyRight(event) {
-    event.preventDefault();
     const matchedTarget = this._getRealMatchedTarget(event);
 
     if (matchedTarget.variant !== ColumnView.Item.variant.DRILLDOWN) {
       return false;
     }
+
+    if (isInteractiveTarget(event.target)) {
+      return;
+    }
+
+    event.preventDefault();
 
     const nextColumn = (this.activeItem && this.activeItem.closest('coral-columnview-column').nextElementSibling);
       
@@ -640,6 +650,10 @@ class ColumnView extends BaseComponent(HTMLElement) {
   
   /** @private */
   _onKeyLeft(event) {
+    if (isInteractiveTarget(event.target)) {
+      return;
+    }
+
     event.preventDefault();
     
     // we can only navigate left when there is a column on the left side to navigate to
@@ -669,13 +683,14 @@ class ColumnView extends BaseComponent(HTMLElement) {
   
   /** @private */
   _onKeySpace(event) {
-    event.preventDefault();
     const matchedTarget = this._getRealMatchedTarget(event);
 
     // don't select item when focus is within the preview
-    if (matchedTarget.closest('coral-columnview-preview')) {
+    if (matchedTarget.closest('coral-columnview-preview') || isInteractiveTarget(event.target)) {
       return;
     }
+
+    event.preventDefault();
     
     // using _oldSelection since it should be equivalent to this.items._getSelectedItems() but faster
     const selectedItems = this._oldSelection;
@@ -709,13 +724,14 @@ class ColumnView extends BaseComponent(HTMLElement) {
 
   /** @private */
   _onKeyCtrlA(event) {
-    event.preventDefault();
     const matchedTarget = this._getRealMatchedTarget(event);
 
     // don't select item when focus is within the preview
-    if (matchedTarget.closest('coral-columnview-preview')) {
+    if (matchedTarget.closest('coral-columnview-preview') || isInteractiveTarget(event.target)) {
       return;
     }
+
+    event.preventDefault();
 
     if (this.selectionMode === selectionMode.MULTIPLE) {
       const currentColumn = matchedTarget.closest('coral-columnview-column');
@@ -730,13 +746,14 @@ class ColumnView extends BaseComponent(HTMLElement) {
 
   /** @private */
   _onKeyCtrlShiftA(event) {
-    event.preventDefault();
     const matchedTarget = this._getRealMatchedTarget(event);
 
     // don't select item when focus is within the preview
-    if (matchedTarget.closest('coral-columnview-preview')) {
+    if (matchedTarget.closest('coral-columnview-preview') || isInteractiveTarget(event.target)) {
       return;
     }
+
+    event.preventDefault();
 
     if (this.selectionMode !== selectionMode.NONE) {
       const currentColumn = matchedTarget.closest('coral-columnview-column');
@@ -749,6 +766,10 @@ class ColumnView extends BaseComponent(HTMLElement) {
 
   /** @private */
   _onItemFocus(event) {
+    if (isInteractiveTarget(event.target)) {
+      return;
+    }
+
     const matchedTarget = this._getRealMatchedTarget(event);
     if (!matchedTarget.hasAttribute('active') && !this._oldSelection.length) {
       matchedTarget.setAttribute('active', '');
@@ -1101,7 +1122,7 @@ class ColumnView extends BaseComponent(HTMLElement) {
     this._addTimeout = window.setTimeout(() => {
       const activeElement = document.activeElement.closest('coral-columnview-item') || document.activeElement;
 
-      if (!this.contains(activeElement)) {
+      if (!this.contains(activeElement) || activeElement.tagName !== 'CORAL-COLUMNVIEW-ITEM') {
         return;
       }
 
