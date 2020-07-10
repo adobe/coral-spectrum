@@ -295,7 +295,7 @@ class Popover extends Overlay {
       this.setAttribute('variant', variant._COACHMARK);
     }
 
-    this.open = this.open;
+    this._setAriaExpandedOnTarget();
   }
   
   /**
@@ -314,11 +314,7 @@ class Popover extends Overlay {
         target.classList.toggle('is-selected', this.open);
       }
 
-      const hasPopupAttribute = target.hasAttribute('aria-haspopup');
-      if (hasPopupAttribute || target.querySelector('[aria-haspopup]') !== null) {
-        const targetElements = hasPopupAttribute ? [target] : target.querySelectorAll('[aria-haspopup]');
-        targetElements.forEach((targetElement) => targetElement.setAttribute('aria-expanded', this.open));
-      }
+      this._setAriaExpandedOnTarget();
     }
   }
   
@@ -332,6 +328,17 @@ class Popover extends Overlay {
   }
   set icon(value) {
     this._icon = transform.string(value);
+  }
+  
+  _setAriaExpandedOnTarget() {
+    const target = this._getTarget();
+    if (target) {
+      const hasPopupAttribute = target.hasAttribute('aria-haspopup');
+      if (hasPopupAttribute || target.querySelector('[aria-haspopup]') !== null) {
+        const targetElements = hasPopupAttribute ? [target] : target.querySelectorAll('[aria-haspopup]');
+        targetElements.forEach((targetElement) => targetElement.setAttribute('aria-expanded', this.open));
+      }
+    }
   }
   
   _onPositioned(event) {
