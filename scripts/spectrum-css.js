@@ -13,9 +13,8 @@
 // Removes invalid CSS see https://github.com/adobe/spectrum-css/issues/656
 
 const fs = require('fs');
-const root = process.cwd();
-const barLoader = `${root}/node_modules/@adobe/spectrum-css/dist/components/barloader/index-diff.css`;
-const coachmark = `${root}/node_modules/@adobe/spectrum-css/dist/components/coachmark/index-diff.css`;
+const barLoader = require.resolve('@adobe/spectrum-css/dist/components/barloader/index-diff.css');
+const coachmark = require.resolve('@adobe/spectrum-css/dist/components/coachmark/index-diff.css');
 
 const removeLines = (file, lines) => {
   try {
