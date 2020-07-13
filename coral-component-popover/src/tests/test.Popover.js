@@ -197,6 +197,20 @@ describe('Popover', function() {
         expect(el.content.classList.contains('_coral-CoachMarkPopover-content')).to.be.true;
       });
     });
+
+    describe('#role', function() {
+      it('should support override from markup', function() {
+        const el = helpers.build(window.__html__['Popover.a11yOverrides.html']);
+        expect(el.getAttribute('role')).to.equal('presentation');
+      });
+    });
+
+    describe('#aria-live', function() {
+      it('should support override from markup', function() {
+        const el = helpers.build(window.__html__['Popover.a11yOverrides.html']);
+        expect(el.getAttribute('aria-live')).to.equal('off');
+      });
+    });
   });
 
   describe('Events', function() {
