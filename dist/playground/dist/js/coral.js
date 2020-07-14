@@ -26880,8 +26880,11 @@
         this.classList.add(CLASSNAME$k); // ARIA
 
         if (!this.hasAttribute('role')) {
-          this.setAttribute('role', 'dialog'); // This helped announcements in certain screen readers
+          this.setAttribute('role', 'dialog');
+        }
 
+        if (!this.hasAttribute('aria-live')) {
+          // This helped announcements in certain screen readers
           this.setAttribute('aria-live', 'assertive');
         } // Default reflected attributes
 
@@ -49323,6 +49326,29 @@
   }(SelectableCollection);
 
   /**
+   * Copyright 2020 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+
+  /**
+   * Helper function to test whether event.target is explicitly marked as interactive.
+   * 
+   * Interactive elements included in an Item should respond to keyboard events without the event being handled by the Item as well.
+   *
+   * @private
+   */
+  var isInteractiveTarget = function isInteractiveTarget(target) {
+    return target.hasAttribute('coral-interactive') || target.closest('[coral-interactive]') !== null;
+  };
+
+  /**
    * Copyright 2019 Adobe. All rights reserved.
    * This file is licensed to you under the Apache License, Version 2.0 (the "License");
    * you may not use this file except in compliance with the License. You may obtain a copy
@@ -49628,7 +49654,7 @@
       key: "_onGlobalKeyUp",
       value: function _onGlobalKeyUp(event) {
         // removes the class to stop selection
-        if (event.keyCode === 16) {
+        if (event.keyCode === 16 && !isInteractiveTarget(event.target)) {
           this.classList.remove('is-unselectable');
         }
       }
@@ -49638,7 +49664,7 @@
       key: "_onGlobalKeyDown",
       value: function _onGlobalKeyDown(event) {
         // adds a class that prevents the text selection, otherwise shift + click would select the text
-        if (event.keyCode === 16) {
+        if (event.keyCode === 16 || !isInteractiveTarget(event.target)) {
           this.classList.add('is-unselectable');
         }
       }
@@ -49647,14 +49673,14 @@
     }, {
       key: "_onKeyShiftAndUp",
       value: function _onKeyShiftAndUp(event) {
-        event.preventDefault();
-
         var matchedTarget = this._getRealMatchedTarget(event); // don't select items when focus is within the preview
 
 
-        if (matchedTarget.closest('coral-columnview-preview')) {
+        if (matchedTarget.closest('coral-columnview-preview') || isInteractiveTarget(event.target)) {
           return;
         }
+
+        event.preventDefault();
 
         if (this.selectionMode === selectionMode$1.NONE) {
           this._onKeyUp(event);
@@ -49728,14 +49754,14 @@
     }, {
       key: "_onKeyShiftAndDown",
       value: function _onKeyShiftAndDown(event) {
-        event.preventDefault();
-
         var matchedTarget = this._getRealMatchedTarget(event); // don't select items when focus is within the preview
 
 
-        if (matchedTarget.closest('coral-columnview-preview')) {
+        if (matchedTarget.closest('coral-columnview-preview') || isInteractiveTarget(event.target)) {
           return;
         }
+
+        event.preventDefault();
 
         if (this.selectionMode === selectionMode$1.NONE) {
           this._onKeyDown(event);
@@ -49809,16 +49835,15 @@
     }, {
       key: "_onKeyUp",
       value: function _onKeyUp(event) {
-        event.preventDefault();
-
         var matchedTarget = this._getRealMatchedTarget(event); // don't navigate items when focus is within the preview
 
 
-        if (matchedTarget.closest('coral-columnview-preview')) {
+        if (matchedTarget.closest('coral-columnview-preview') || isInteractiveTarget(event.target)) {
           return;
-        } // selection will win over active buttons, because they are the right most item. using _oldSelection since it
-        // should be equivalent to this.items._getSelectedItems() but faster
+        }
 
+        event.preventDefault(); // selection will win over active buttons, because they are the right most item. using _oldSelection since it
+        // should be equivalent to this.items._getSelectedItems() but faster
 
         var selectedItems = this._oldSelection;
         var item;
@@ -49852,16 +49877,15 @@
     }, {
       key: "_onKeyDown",
       value: function _onKeyDown(event) {
-        event.preventDefault();
-
         var matchedTarget = this._getRealMatchedTarget(event); // don't navigate items when focus is within the preview
 
 
-        if (matchedTarget.closest('coral-columnview-preview')) {
+        if (matchedTarget.closest('coral-columnview-preview') || isInteractiveTarget(event.target)) {
           return;
-        } // selection will win over active buttons, because they are the right most item. using _oldSelection since it
-        // should be equivalent to this.items._getSelectedItems() but faster
+        }
 
+        event.preventDefault(); // selection will win over active buttons, because they are the right most item. using _oldSelection since it
+        // should be equivalent to this.items._getSelectedItems() but faster
 
         var selectedItems = this._oldSelection;
         var item;
@@ -49897,14 +49921,17 @@
       value: function _onKeyRight(event) {
         var _this4 = this;
 
-        event.preventDefault();
-
         var matchedTarget = this._getRealMatchedTarget(event);
 
         if (matchedTarget.variant !== ColumnView.Item.variant.DRILLDOWN) {
           return false;
         }
 
+        if (isInteractiveTarget(event.target)) {
+          return;
+        }
+
+        event.preventDefault();
         var nextColumn = this.activeItem && this.activeItem.closest('coral-columnview-column').nextElementSibling;
 
         if (nextColumn && nextColumn.tagName === 'CORAL-COLUMNVIEW-COLUMN') {
@@ -49919,6 +49946,10 @@
     }, {
       key: "_onKeyLeft",
       value: function _onKeyLeft(event) {
+        if (isInteractiveTarget(event.target)) {
+          return;
+        }
+
         event.preventDefault(); // we can only navigate left when there is a column on the left side to navigate to
 
         var previousColumn; // using _oldSelection since it should be equivalent to this.items._getSelectedItems() but faster
@@ -49948,15 +49979,14 @@
     }, {
       key: "_onKeySpace",
       value: function _onKeySpace(event) {
-        event.preventDefault();
-
         var matchedTarget = this._getRealMatchedTarget(event); // don't select item when focus is within the preview
 
 
-        if (matchedTarget.closest('coral-columnview-preview')) {
+        if (matchedTarget.closest('coral-columnview-preview') || isInteractiveTarget(event.target)) {
           return;
-        } // using _oldSelection since it should be equivalent to this.items._getSelectedItems() but faster
+        }
 
+        event.preventDefault(); // using _oldSelection since it should be equivalent to this.items._getSelectedItems() but faster
 
         var selectedItems = this._oldSelection;
         var activeDescendant; // when there is a selection, we need to activate the first item of the selection
@@ -49988,14 +50018,14 @@
     }, {
       key: "_onKeyCtrlA",
       value: function _onKeyCtrlA(event) {
-        event.preventDefault();
-
         var matchedTarget = this._getRealMatchedTarget(event); // don't select item when focus is within the preview
 
 
-        if (matchedTarget.closest('coral-columnview-preview')) {
+        if (matchedTarget.closest('coral-columnview-preview') || isInteractiveTarget(event.target)) {
           return;
         }
+
+        event.preventDefault();
 
         if (this.selectionMode === selectionMode$1.MULTIPLE) {
           var currentColumn = matchedTarget.closest('coral-columnview-column');
@@ -50012,14 +50042,14 @@
     }, {
       key: "_onKeyCtrlShiftA",
       value: function _onKeyCtrlShiftA(event) {
-        event.preventDefault();
-
         var matchedTarget = this._getRealMatchedTarget(event); // don't select item when focus is within the preview
 
 
-        if (matchedTarget.closest('coral-columnview-preview')) {
+        if (matchedTarget.closest('coral-columnview-preview') || isInteractiveTarget(event.target)) {
           return;
         }
+
+        event.preventDefault();
 
         if (this.selectionMode !== selectionMode$1.NONE) {
           var currentColumn = matchedTarget.closest('coral-columnview-column');
@@ -50036,6 +50066,10 @@
     }, {
       key: "_onItemFocus",
       value: function _onItemFocus(event) {
+        if (isInteractiveTarget(event.target)) {
+          return;
+        }
+
         var matchedTarget = this._getRealMatchedTarget(event);
 
         if (!matchedTarget.hasAttribute('active') && !this._oldSelection.length) {
@@ -50433,7 +50467,7 @@
         this._addTimeout = window.setTimeout(function () {
           var activeElement = document.activeElement.closest('coral-columnview-item') || document.activeElement;
 
-          if (!_this7.contains(activeElement)) {
+          if (!_this7.contains(activeElement) || activeElement.tagName !== 'CORAL-COLUMNVIEW-ITEM') {
             return;
           }
 
@@ -50879,7 +50913,11 @@
 
       /** @private */
       value: function _onItemClick(event) {
-        // since transform will kill the modification, we trigger the event manually
+        if (isInteractiveTarget(event.target)) {
+          return;
+        } // since transform will kill the modification, we trigger the event manually
+
+
         if (event.matchedTarget.hasAttribute('active')) {
           // directly calls the event since setting the attribute will not trigger an event
           this._onItemActiveChange(event);
@@ -51059,7 +51097,7 @@
       key: "_onColumnContentClick",
       value: function _onColumnContentClick(event) {
         // we make sure the content was clicked directly and not an item
-        if (event.target !== event.matchedTarget) {
+        if (event.target !== event.matchedTarget || isInteractiveTarget(event.target)) {
           return;
         }
 
@@ -79306,7 +79344,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.8.5";
+  var version$1 = "4.8.6";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

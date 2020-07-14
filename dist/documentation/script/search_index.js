@@ -4080,6 +4080,12 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "coral-spectrum/coral-component-columnview/src/scripts/isinteractivetarget.js",
+    "file/coral-spectrum/coral-component-columnview/src/scripts/isInteractiveTarget.js.html",
+    "coral-spectrum/coral-component-columnview/src/scripts/isInteractiveTarget.js",
+    "file"
+  ],
+  [
     "coral-spectrum/coral-component-columnview/src/scripts/selectionmode.js",
     "file/coral-spectrum/coral-component-columnview/src/scripts/selectionMode.js.html",
     "coral-spectrum/coral-component-columnview/src/scripts/selectionMode.js",

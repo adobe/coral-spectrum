@@ -1,7 +1,7 @@
 {
-  "coverage": "64.77%",
-  "expectCount": 3631,
-  "actualCount": 2352,
+  "coverage": "64.78%",
+  "expectCount": 3632,
+  "actualCount": 2353,
   "files": {
     "coral-spectrum/coral-base-button/src/scripts/BaseButton.js": {
       "expectCount": 6,
@@ -714,25 +714,25 @@
       "expectCount": 62,
       "actualCount": 43,
       "undocumentLines": [
-        19,
-        21,
-        59,
-        98,
+        20,
+        22,
+        60,
         99,
-        102,
-        105,
-        125,
-        145,
-        167,
-        302,
-        387,
-        439,
-        1073,
-        1101,
-        1126,
-        1157,
-        1249,
-        1271
+        100,
+        103,
+        106,
+        126,
+        146,
+        168,
+        303,
+        389,
+        441,
+        1094,
+        1122,
+        1147,
+        1178,
+        1270,
+        1292
       ]
     },
     "coral-spectrum/coral-component-columnview/src/scripts/ColumnViewCollection.js": {
@@ -750,24 +750,24 @@
       "expectCount": 44,
       "actualCount": 26,
       "undocumentLines": [
-        18,
-        21,
-        24,
-        27,
-        60,
-        65,
+        19,
+        22,
+        25,
+        28,
+        61,
         66,
         67,
-        73,
-        125,
-        172,
-        190,
-        206,
-        343,
-        360,
-        538,
-        540,
-        562
+        68,
+        74,
+        126,
+        173,
+        191,
+        211,
+        348,
+        365,
+        543,
+        545,
+        567
       ]
     },
     "coral-spectrum/coral-component-columnview/src/scripts/ColumnViewColumnContent.js": {
@@ -832,6 +832,11 @@
       "undocumentLines": []
     },
     "coral-spectrum/coral-component-columnview/src/scripts/ColumnViewPreviewValue.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coral-spectrum/coral-component-columnview/src/scripts/isInteractiveTarget.js": {
       "expectCount": 1,
       "actualCount": 1,
       "undocumentLines": []

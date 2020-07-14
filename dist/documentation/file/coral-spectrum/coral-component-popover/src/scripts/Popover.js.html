@@ -931,7 +931,9 @@ class Popover extends Overlay {
     // ARIA
     if (!this.hasAttribute(&apos;role&apos;)) {
       this.setAttribute(&apos;role&apos;, &apos;dialog&apos;);
+    }
     
+    if (!this.hasAttribute(&apos;aria-live&apos;)) {    
       // This helped announcements in certain screen readers
       this.setAttribute(&apos;aria-live&apos;, &apos;assertive&apos;);
     }
