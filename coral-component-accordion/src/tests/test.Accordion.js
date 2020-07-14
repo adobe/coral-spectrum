@@ -132,6 +132,19 @@ describe('Accordion', function() {
         expect(item.label).not.to.be.null;
       });
     });
+
+    describe('#level', function() {
+      it('should set heading level for Accordion item headings', function(done) {
+        const el = helpers.build(window.__html__['Accordion.base.html']);
+        el.level = 4;
+        helpers.next(function() {
+          helpers.next(function() {
+            expect(el.querySelectorAll('h3[aria-level="4"]').length).equal(3);
+            done();
+          });
+        });
+      });
+    });
   });
   
   describe('Markup', function() {
