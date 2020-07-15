@@ -171,7 +171,7 @@ class Accordion extends BaseComponent(HTMLElement) {
     if (validate.valueMustChange(value, this._level) && value > 0 && value < 7) {
       this._level = value;
       this._reflectAttribute('level', this._level);
-      this.items.getAll().forEach(item => item.level = this._level);
+      this.items.getAll().forEach(item => item.setAttribute('level', this._level));
     }
   }
   
@@ -329,6 +329,11 @@ class Accordion extends BaseComponent(HTMLElement) {
       }
     }
     
+    // set items level appropriately
+    if (item && item.level !== this.level) {
+      item.setAttribute('level', this.level);
+    }
+
     this._resetTabTarget();
     
     this._triggerChangeEvent();

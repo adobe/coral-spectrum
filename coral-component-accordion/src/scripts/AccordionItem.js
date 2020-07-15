@@ -181,7 +181,7 @@ set level(value) {
   }
 
   // If the value is the default or invalid, remove the aria-level override from the h3 element. 
-  this._elements.heading.removeAttribute('aria-level', this._level);
+  this._elements.heading.removeAttribute('aria-level');
 }
   
   /** @private **/
