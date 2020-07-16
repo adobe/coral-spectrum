@@ -294,6 +294,8 @@ class Popover extends Overlay {
     if (target && target.tagName === 'CORAL-COACHMARK') {
       this.setAttribute('variant', variant._COACHMARK);
     }
+
+    this._setAriaExpandedOnTarget();
   }
   
   /**
@@ -311,6 +313,8 @@ class Popover extends Overlay {
       if (is === 'coral-button' || is === 'coral-anchorbutton') {
         target.classList.toggle('is-selected', this.open);
       }
+
+      this._setAriaExpandedOnTarget();
     }
   }
   
@@ -324,6 +328,17 @@ class Popover extends Overlay {
   }
   set icon(value) {
     this._icon = transform.string(value);
+  }
+  
+  _setAriaExpandedOnTarget() {
+    const target = this._getTarget();
+    if (target) {
+      const hasPopupAttribute = target.hasAttribute('aria-haspopup');
+      if (hasPopupAttribute || target.querySelector('[aria-haspopup]') !== null) {
+        const targetElements = hasPopupAttribute ? [target] : target.querySelectorAll('[aria-haspopup]');
+        targetElements.forEach((targetElement) => targetElement.setAttribute('aria-expanded', this.open));
+      }
+    }
   }
   
   _onPositioned(event) {

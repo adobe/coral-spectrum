@@ -396,6 +396,33 @@ describe('Popover', function() {
 
       expect(el.open).to.equal(false, 'popover still closed after clicking target');
     });
+
+    it('should set aria-expanded on target with aria-haspopup when opened/closed', function(done) {
+      var target = helpers.overlay.createStaticTarget();
+      target.setAttribute('aria-haspopup', 'dialog');
+
+      el.set({
+        content: 'A popover',
+        target: target
+      });
+
+      helpers.next(() => {
+        expect(target.getAttribute('aria-expanded')).to.equal('false');
+
+        el.open = true;
+
+        helpers.next(() => {
+          expect(target.getAttribute('aria-expanded')).to.equal('true');
+
+          el.open = false;
+
+          helpers.next(() => {
+            expect(target.getAttribute('aria-expanded')).to.equal('false');
+            done();
+          });
+        });
+      });
+    });
   });
 
   describe('Implementation details', function() {
