@@ -330,7 +330,7 @@ class Accordion extends BaseComponent(HTMLElement) {
     }
     
     // set items level appropriately
-    if (item && item.level !== this.level) {
+    if (item && item.getAttribute('level') !== this.level) {
       item.setAttribute('level', this.level);
     }
 
