@@ -824,5 +824,30 @@ describe('FileUpload', function() {
         done();
       });
     });
+
+    describe('focus-ring', function() {
+      it('should render focus-ring on select button when the input receives keyboard focus', function(done) {
+        var fileUpload = helpers.build(window.__html__['FileUpload.specialAttributes.html']);
+        // Wait for MO
+        helpers.next(() => {
+          var button = fileUpload.querySelector('[coral-fileupload-select]');
+          var input = fileUpload._elements.input;
+          // spoof keyboard focus
+          input.classList.add('focus-ring');
+          input.focus();
+          helpers.next(() => {
+            expect(button.classList.contains('is-focused')).to.be.true;
+            expect(button.classList.contains('focus-ring')).to.be.true;
+            input.blur();
+            helpers.next(() => {
+              expect(button.classList.contains('is-focused')).to.be.false;
+              expect(button.classList.contains('focus-ring')).to.be.false;
+              done();
+            });
+          });
+        });
+
+      });
+    });
   });
 });
