@@ -37,6 +37,9 @@ const copyAttributes = (from, to) => {
       }
     }
   }
+
+  // ensure that click event on menu item gets triggered on actionbar item
+  to.addEventListener('click', () => from.click());
 };
 
 /**
@@ -178,12 +181,12 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
       return;
     }
 
+    // Set focus to first focusable descendant of the overlay by default
+    this._elements.overlay.focusOnShow = 'on';
+
     this._itemsInPopover.forEach((item) => {
       item.style.visibility = '';
-    });
-  
-    // Store the button and popover on the item
-    this._itemsInPopover.forEach((item) => {
+      // Store the button and popover on the item
       item._button = item.querySelector('button[is="coral-button"]') || item.querySelector('a[is="coral-anchorbutton"]');
       item._popover = item.querySelector('coral-popover');
     });
@@ -219,6 +222,7 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
     
     // hide the popover(needed to disable fade time of popover)
     this._elements.overlay.hidden = true;
+    this._elements.overlay.focusOnShow = this._elements.overlay;
     
     // close any popovers, that might be inside the 'more' popover
     const childPopovers = this._elements.overlay.getElementsByTagName('coral-popover');
