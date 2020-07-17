@@ -19,6 +19,7 @@
         <js>
           var popover = data._popover.cloneNode(true);
           this.buttonList.items.add(popover);
+          data._popover.removeAttribute('id');
         </js>
       </if>
     </foreach>

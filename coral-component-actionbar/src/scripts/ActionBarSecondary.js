@@ -41,6 +41,11 @@ class ActionBarSecondary extends ActionBarContainer(BaseComponent(HTMLElement)) 
       }
       
       this.insertBefore(item, this.firstChild.nextSibling);
+
+      // Reset popover id
+      if (item._button && item._popover) {
+        item._popover.id = item._popoverId;
+      }
     }
   }
   
