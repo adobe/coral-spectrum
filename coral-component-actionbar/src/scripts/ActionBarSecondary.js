@@ -45,6 +45,9 @@ class ActionBarSecondary extends ActionBarContainer(BaseComponent(HTMLElement)) 
       // Reset popover id
       if (item._button && item._popover) {
         item._popover.id = item._popoverId;
+        if(item._popover.target) {
+          item._popover.target = item._button;
+        }
       }
     }
   }

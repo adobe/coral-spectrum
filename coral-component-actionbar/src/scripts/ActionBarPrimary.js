@@ -42,9 +42,12 @@ class ActionBarPrimary extends ActionBarContainer(BaseComponent(HTMLElement)) {
       
       this.insertBefore(item, this._elements.moreButton);
       
-      // Reset popover id
+      // Reset popover id, target
       if (item._button && item._popover) {
         item._popover.id = item._popoverId;
+        if(item._popover.target) {
+          item._popover.target = item._button;
+        }
       }
     }
   }
