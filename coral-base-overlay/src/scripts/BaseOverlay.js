@@ -524,7 +524,7 @@ const BaseOverlay = (superClass) => class extends superClass {
       const open = this._open = value;
       this._reflectAttribute('open', open);
 
-      // Set aria-hidden false before we show
+      // Remove aria-hidden attribute before we show.
       // Otherwise, screen readers will not announce
       // Doesn't matter when we set aria-hidden true (nothing being announced)
       if (open) {
