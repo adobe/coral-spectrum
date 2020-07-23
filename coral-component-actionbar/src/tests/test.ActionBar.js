@@ -417,7 +417,7 @@ describe('ActionBar', function() {
       expect(el.primary._itemsInPopover.length).to.equal(0);
       
       // Wait for resize listener and MO
-      window.setTimeout(function() {
+      window.setTimeout(() => {
         el.primary._elements.overlay.open = true;
   
         el.primary._elements.overlay.on('coral-overlay:open', function() {
@@ -571,7 +571,7 @@ describe('ActionBar', function() {
       let leftActionBarItems = bar.primary.items.getAll();
     
       // Wait for resize listener
-      window.setTimeout(function () {
+      window.setTimeout(() => {
         let firstLeftButton = leftActionBarItems[0].querySelector('button');
         firstLeftButton.focus();
         expect(document.activeElement).to.not.equal(firstLeftButton, 'activeElement should not be the first wrapped item (here button) inside the actionbar');
@@ -656,15 +656,16 @@ describe('ActionBar', function() {
         // items of bar1 should be moved offscreen
         expect(bar.primary._elements.moreButton.style.visibility).to.equal('', 'More button should be visible.');
         bar.primary._elements.moreButton.click();
-        expect(bar.primary._elements.overlay.open).to.equal(true, 'more popover should be opened');
+        expect(bar.primary._elements.overlay.open).to.equal(true, 'more popover should be opened');        
         window.setTimeout(() => {
           var openPopoverButton = bar.primary._elements.overlay.querySelector("#switchBar1OpenPopover");
-          openPopoverButton.click();
-          var switchBar1Popover = bar.primary._elements.overlay.querySelector("coral-popover[target='#switchBar1OpenPopover']");
-          expect(switchBar1Popover.classList.contains('is-open')).to.equal(true, "Popover should be open.");
+          if (openPopoverButton) {
+            openPopoverButton.click();
+            var switchBar1Popover = bar.primary._elements.overlay.querySelector("coral-popover[target='#switchBar1OpenPopover']");
+            expect(switchBar1Popover.classList.contains('is-open')).to.equal(true, "Popover should be open.");
+          }
           done();
         }, 200);
-        done();
       }, 200);
     });
   
