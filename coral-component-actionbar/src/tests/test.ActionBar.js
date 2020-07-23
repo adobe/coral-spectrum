@@ -659,6 +659,30 @@ describe('ActionBar', function() {
         }
       }
     });
+
+    it('should be possible open popover attached to an action inside more popover', function(done) {
+      helpers.build(window.__html__['ActionBar.visibility.html']);
+
+      var bar = document.getElementById('switchBar1');
+      bar.primary.threshold = 2;
+      bar.primary.items.add({}).appendChild(new Button());
+     
+      // Wait for resize listener
+      window.setTimeout(() => {
+        // items of bar1 should be moved offscreen
+        expect(bar.primary._elements.moreButton.style.visibility).to.equal('', 'More button should be visible.');
+        bar.primary._elements.moreButton.click();
+        expect(bar.primary._elements.overlay.open).to.equal(true, 'more popover should be opened');
+        window.setTimeout(() => {
+          var openPopoverButton = bar.primary._elements.overlay.querySelector("#switchBar1OpenPopover");
+          openPopoverButton.click();
+          var switchBar1Popover = bar.primary._elements.overlay.querySelector("coral-popover[target='#switchBar1OpenPopover']");
+          expect(switchBar1Popover.classList.contains('is-open')).to.equal(true, "Popover should be open.");
+          done();
+        }, 200);
+        done();
+      }, 200);
+    });
   
     describe('Smart Overlay', () => {
       helpers.testSmartOverlay('coral-actionbar-primary');

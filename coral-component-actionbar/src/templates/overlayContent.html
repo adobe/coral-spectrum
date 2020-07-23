@@ -18,6 +18,12 @@
       <if data._popover>
         <js>
           var popover = data._popover.cloneNode(true);
+          data._popover.removeAttribute('id');
+          //set target to the new button
+          if(popover.target) {
+            popover.removeAttribute('target');
+            popover.target = this.buttonListItem;
+          }
           this.buttonList.items.add(popover);
         </js>
       </if>
@@ -41,6 +47,12 @@
           <if data._popover>
             <js>
               var popover = data._popover.cloneNode(true);
+              data._popover.removeAttribute('id');
+              //set target to the new button
+              if(popover.target) {
+                popover.removeAttribute('target');
+                popover.target = this.anchorListItem;
+              }
               this.anchorList.items.add(popover);
             </js>
           </if>

@@ -189,6 +189,9 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
       // Store the button and popover on the item
       item._button = item.querySelector('button[is="coral-button"]') || item.querySelector('a[is="coral-anchorbutton"]');
       item._popover = item.querySelector('coral-popover');
+      if(item._popover) {
+        item._popoverId = item._popover.id;
+      }
     });
     
     // Whether a ButtonList or AnchorList should be rendered
@@ -235,7 +238,10 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
     
     // clear cached items from popover
     this._itemsInPopover = [];
-    
+
+    // clear overlay
+    this._elements.overlay.content.innerHTML = '';
+
     // we need to check if item has 'hasAttribute' because it is not present on the document
     const isFocusedItemInsideActionBar = this.parentNode.contains(focusedItem);
     const isFocusedItemOffscreen = focusedItem.hasAttribute && focusedItem.hasAttribute('coral-actionbar-offscreen');
