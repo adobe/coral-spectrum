@@ -13,6 +13,7 @@
 import {tracking} from '../../../../coral-utils';
 import {build, target} from './helpers.build';
 import {cloneComponent} from './helpers.cloneComponent';
+import {helpers} from '.';
 
 /**
  Helper used to check that the component complies with the button behavior.
@@ -255,12 +256,14 @@ const testButton = function(Constructor, tagName, baseTagName) {
         
           button.label.textContent = 'Add';
           // Wait for the MO to kick in
-          window.setTimeout(() => {
-            expect(button.label.textContent).to.equal('Add');
-            expect(button.classList.contains('_coral-Button')).to.be.true;
-            expect(button.icon).to.equal('add');
-            expect(button._elements.icon.getAttribute('aria-hidden')).to.equal('true');
-            done();
+          helpers.next(function() {
+            helpers.next(function() {
+              expect(button.label.textContent).to.equal('Add');
+              expect(button.classList.contains('_coral-Button')).to.be.true;
+              expect(button.icon).to.equal('add');
+              expect(button._elements.icon.getAttribute('aria-hidden')).to.equal('true');
+              done();
+            });
           });
         });
       
@@ -273,13 +276,15 @@ const testButton = function(Constructor, tagName, baseTagName) {
         
           button.label.innerHTML = '';
           // Wait for the MO to kick in
-          window.setTimeout(() => {
-            expect(button.label.textContent).to.equal('');
-            expect(button.classList.contains('_coral-Button')).to.be.true;
-            expect(button.icon).to.equal('add');
-            expect(button._elements.icon.getAttribute('aria-hidden')).to.equal(null);
-            expect(button._elements.icon.hasAttribute('aria-label')).to.be.false;
-            done();
+          helpers.next(function() {
+            helpers.next(function() {
+              expect(button.label.textContent).to.equal('');
+              expect(button.classList.contains('_coral-Button')).to.be.true;
+              expect(button.icon).to.equal('add');
+              expect(button._elements.icon.getAttribute('aria-hidden')).to.equal(null);
+              expect(button._elements.icon.hasAttribute('aria-label')).to.be.false;
+              done();
+            });
           });
         });
       
@@ -294,13 +299,15 @@ const testButton = function(Constructor, tagName, baseTagName) {
           button.icon = 'share';
           button.label.innerHTML = '';
           // Wait for the MO to kick in
-          window.setTimeout(() => {
-            expect(button._getIconElement()).to.exist;
-            expect(button._getIconElement().icon).to.equal('share');
-            expect(button._elements.icon.getAttribute('aria-hidden')).to.equal(null);
-            expect(button._elements.icon.hasAttribute('aria-label')).to.be.false;
-            expect(button.classList.contains('_coral-Button')).to.be.true;
-            done();
+          helpers.next(function() {
+            helpers.next(function() {
+              expect(button._getIconElement()).to.exist;
+              expect(button._getIconElement().icon).to.equal('share');
+              expect(button._elements.icon.getAttribute('aria-hidden')).to.equal(null);
+              expect(button._elements.icon.hasAttribute('aria-label')).to.be.false;
+              expect(button.classList.contains('_coral-Button')).to.be.true;
+              done();
+            });
           });
         });
       

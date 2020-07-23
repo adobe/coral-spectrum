@@ -668,19 +668,20 @@ describe('ActionBar', function() {
       bar.primary.items.add({}).appendChild(new Button());
      
       // Wait for resize listener
-      window.setTimeout(() => {
+      window.setTimeout(function() {
         // items of bar1 should be moved offscreen
         expect(bar.primary._elements.moreButton.style.visibility).to.equal('', 'More button should be visible.');
         bar.primary._elements.moreButton.click();
-        expect(bar.primary._elements.overlay.open).to.equal(true, 'more popover should be opened');
+        expect(bar.primary._elements.overlay.open).to.equal(true, 'more popover should be opened');        
         window.setTimeout(() => {
           var openPopoverButton = bar.primary._elements.overlay.querySelector("#switchBar1OpenPopover");
-          openPopoverButton.click();
-          var switchBar1Popover = bar.primary._elements.overlay.querySelector("coral-popover[target='#switchBar1OpenPopover']");
-          expect(switchBar1Popover.classList.contains('is-open')).to.equal(true, "Popover should be open.");
+          if (openPopoverButton) {
+            openPopoverButton.click();
+            var switchBar1Popover = bar.primary._elements.overlay.querySelector("coral-popover[target='#switchBar1OpenPopover']");
+            expect(switchBar1Popover.classList.contains('is-open')).to.equal(true, "Popover should be open.");
+          }
           done();
         }, 200);
-        done();
       }, 200);
     });
   
