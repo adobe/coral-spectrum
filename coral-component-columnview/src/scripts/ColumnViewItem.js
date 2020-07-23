@@ -259,34 +259,38 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
 
     // @a11y Update aria-expanded. Active drilldowns should be expanded.
     if (this.variant === variant.DRILLDOWN) {
-      const isFocused = this === document.activeElement || this.contains(document.activeElement);
-      let activeElement;
-      if (isFocused && !this.selected) {
-        this.setAttribute('aria-expanded', this._active);
-        activeElement = document.activeElement;
-        activeElement.blur();
-      }
-      else {
-        this.setAttribute('aria-hidden', true);
-      }
       // @a11y workaround for VoiceOver announcing expanded state rather than the item name when the item receives focus.
-      const timeoutDelay = 60;
       if (this._ariaExpandedTimeout) {
+        window.cancelAnimationFrame(this._ariaExpandedTimeout);
         window.clearTimeout(this._ariaExpandedTimeout);
         this._ariaExpandedTimeout = undefined;
       }
-      // @a11y after a delay to give focused item time to announce,
-      this._ariaExpandedTimeout = window.setTimeout(() => {
-        if (isFocused && activeElement) {
-          activeElement.focus();
+      const timeoutDelay = 20;
+      this._ariaExpandedTimeout = commons.nextFrame(() => {
+        const isFocused = this === document.activeElement || this.contains(document.activeElement);
+        let activeElement;
+        if (isFocused && !this.selected) {
+          this.setAttribute('aria-expanded', this._active);
+          activeElement = document.activeElement;
+          activeElement.blur();
         }
         else {
-          window.setTimeout(() => {
-            this.setAttribute('aria-expanded', this._active);
-            this.removeAttribute('aria-hidden');
-          }, timeoutDelay * 2);
+          this.setAttribute('aria-hidden', true);
         }
-      }, timeoutDelay);
+      
+        // @a11y after a delay to give focused item time to announce,
+        commons.nextFrame(() => {
+          if (isFocused && activeElement) {
+            activeElement.focus();
+          }
+          else {
+            window.setTimeout(() => {
+              this.setAttribute('aria-expanded', this._active);
+              commons.nextFrame(() => this.removeAttribute('aria-hidden'));
+            }, timeoutDelay);
+          }
+        });
+      });
     }
 
     if (!this._active) {
