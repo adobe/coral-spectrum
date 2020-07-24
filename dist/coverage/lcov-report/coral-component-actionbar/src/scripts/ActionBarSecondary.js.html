@@ -22,16 +22,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.14% </span>
+                <span class="strong">48% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>12/21</span>
+                <span class='fraction'>12/25</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>0/10</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.14% </span>
+                <span class="strong">48% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/21</span>
+                <span class='fraction'>12/25</span>
             </div>
         
             
@@ -54,7 +54,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -118,7 +118,15 @@
 <a name='L60'></a><a href='#L60'>60</a>
 <a name='L61'></a><a href='#L61'>61</a>
 <a name='L62'></a><a href='#L62'>62</a>
-<a name='L63'></a><a href='#L63'>63</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -154,9 +162,9 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">114x</span>
+<span class="cline-any cline-yes">120x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">114x</span>
+<span class="cline-any cline-yes">120x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -178,6 +186,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
@@ -223,23 +239,31 @@ class ActionBarSecondary extends ActionBarContainer(BaseComponent(HTMLElement)) 
       }
       
       this.insertBefore(item, this.firstChild.nextSibling);
-    }
+&nbsp;
+      // Reset popover id, target
+      if (item._butt<span class="fstat-no" title="function not covered" >on &amp;&amp; item._popover) {</span>
+        item._pop<span class="cstat-no" title="statement not covered" >over.</span>id = item._popoverId;
+        if(item._popover<span class="cstat-no" title="statement not covered" >.targ</span>et) {
+          item._popover.target = item._button;
+<span class="cstat-no" title="statement not covered" >        }</span>
+      }<span class="cstat-no" title="statement not covered" ></span>
+    }<span class="cstat-no" title="statement not covered" ></span>
   }
-  <span class="fstat-no" title="function not covered" ></span>
-  /** @ignore */<span class="cstat-no" title="statement not covered" ></span>
-  _attachMoreButtonToCon<span class="cstat-no" title="statement not covered" >taine</span>r() {
-    this.insertBefore(this._elements.moreButton, this.firstChild);
-  }<span class="cstat-no" title="statement not covered" ></span>
   <span class="cstat-no" title="statement not covered" ></span>
+  /** @ignore */
+  _attac<span class="cstat-no" title="statement not covered" >hMoreButtonToContainer() {</span>
+    this.i<span class="cstat-no" title="statement not covered" >nsertBefore(this._elements.moreButton, thi</span>s.firstChild);
+  }
+  
   /** @i<span class="cstat-no" title="statement not covered" >gnore */</span>
   render() {
     supe<span class="cstat-no" title="statement not covered" >r.render();</span>
-    
-    this<span class="cstat-no" title="statement not covered" >.classList.add(CLASSNAME);</span>
     <span class="cstat-no" title="statement not covered" ></span>
-    this._attachMoreButtonToContainer();
+    this.classList.add(CLASSNAME);
+    <span class="cstat-no" title="statement not covered" ></span>
+    this._at<span class="cstat-no" title="statement not covered" >tachMoreButtonToContainer();</span>
   }
-}<span class="cstat-no" title="statement not covered" ></span>
+}
 &nbsp;
 export default ActionBarSecondary;
 &nbsp;</pre></td></tr></table></pre>
@@ -249,7 +273,7 @@ export default ActionBarSecondary;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Jul 14 2020 20:18:43 GMT+0530 (India Standard Time)
+                at Fri Jul 24 2020 10:31:03 GMT+0530 (India Standard Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

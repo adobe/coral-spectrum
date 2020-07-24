@@ -22,30 +22,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">26.32% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>19/19</span>
+                <span class='fraction'>5/19</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">20% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>1/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">26.32% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>19/19</span>
+                <span class='fraction'>5/19</span>
             </div>
         
             
@@ -54,7 +54,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -147,9 +147,9 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -158,19 +158,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">54x</span>
-<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">54x</span>
-<span class="cline-any cline-yes">24x</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -203,38 +203,38 @@ class MasonryDashboardLayout extends MasonryVariableLayout {
   
   /** @inheritdoc */
   _postLayout(contentHeight) {
-    for (let columnIndex = 0; columnIndex &lt; this._columns.length; columnIndex++) {
-      const column = this._columns[columnIndex];
+    for (le<span class="fstat-no" title="function not covered" >t columnIndex = 0; colu</span>mnIndex &lt; this._columns.length; columnIndex++) {
+<span class="cstat-no" title="statement not covered" >      const column = this._columns[columnIndex];</span>
       let nextItemTop = contentHeight + this._offsetTop;
-      
+    <span class="cstat-no" title="statement not covered" >  </span>
       // Fill gaps by expanding the height of the items
       for (let itemIndex = column.items.length - 1; itemIndex &gt;= 0; itemIndex--) {
         const item = column.items[itemIndex];
         const layoutData = item._layoutData;
         if (layoutData.columnIndex === columnIndex) {
           const expandedHeight = nextItemTop - layoutData.top - this._verSpacing;
-          item.style.height = `${expandedHeight}px`;
+          item.style<span class="fstat-no" title="function not covered" >.height = `${exp</span>andedHeight}px`;
         }
-        nextItemTop = layoutData.top;
+<span class="cstat-no" title="statement not covered" >        nextItemTop = layoutD</span>ata.top;
       }
     }
   }
   
   /** @inheritdoc */
-  _resetItem(item) {
-    item.style.height = '';
-  }
-}
+  _resetItem(item) {<span class="fstat-no" title="function not covered" ></span>
+    it<span class="cstat-no" title="statement not covered" >em.style.height = '';</span>
+  }<span class="cstat-no" title="statement not covered" ></span>
+}<span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
-export default MasonryDashboardLayout;
-&nbsp;</pre></td></tr></table></pre>
+export d<span class="cstat-no" title="statement not covered" >efault MasonryDashboardLayout;</span>
+<span class="cstat-no" title="statement not covered" ></span></pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Jul 14 2020 20:18:43 GMT+0530 (India Standard Time)
+                at Fri Jul 24 2020 10:31:03 GMT+0530 (India Standard Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

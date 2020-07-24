@@ -19146,6 +19146,9 @@ coral-card-propertylist:first-of-type {
 ._coral-Card-property-icon + coral-card-property-content:not(:empty) {
   margin-left: 6px;
 }
+._coral-Card-property-icon {
+  flex-shrink: 0;
+}
 coral-card-overlay {
   display: block;
   position: absolute;

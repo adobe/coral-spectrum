@@ -2214,6 +2214,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "coral-spectrum/coral-component-accordion/src/scripts/accordion.js~accordion#level",
+    "class/coral-spectrum/coral-component-accordion/src/scripts/Accordion.js~Accordion.html#instance-member-level",
+    "coral-spectrum/coral-component-accordion/src/scripts/Accordion.js~Accordion#level",
+    "member"
+  ],
+  [
     "coral-spectrum/coral-component-accordion/src/scripts/accordion.js~accordion#multiple",
     "class/coral-spectrum/coral-component-accordion/src/scripts/Accordion.js~Accordion.html#instance-member-multiple",
     "coral-spectrum/coral-component-accordion/src/scripts/Accordion.js~Accordion#multiple",
@@ -2277,6 +2283,12 @@ window.esdocSearchIndex = [
     "coral-spectrum/coral-component-accordion/src/scripts/accordionitem.js~accordionitem#label",
     "class/coral-spectrum/coral-component-accordion/src/scripts/AccordionItem.js~AccordionItem.html#instance-member-label",
     "coral-spectrum/coral-component-accordion/src/scripts/AccordionItem.js~AccordionItem#label",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-accordion/src/scripts/accordionitem.js~accordionitem#level",
+    "class/coral-spectrum/coral-component-accordion/src/scripts/AccordionItem.js~AccordionItem.html#instance-member-level",
+    "coral-spectrum/coral-component-accordion/src/scripts/AccordionItem.js~AccordionItem#level",
     "member"
   ],
   [

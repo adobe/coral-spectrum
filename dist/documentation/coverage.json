@@ -1,7 +1,7 @@
 {
-  "coverage": "64.78%",
-  "expectCount": 3632,
-  "actualCount": 2353,
+  "coverage": "64.75%",
+  "expectCount": 3637,
+  "actualCount": 2355,
   "files": {
     "coral-spectrum/coral-base-button/src/scripts/BaseButton.js": {
       "expectCount": 6,
@@ -168,8 +168,8 @@
       ]
     },
     "coral-spectrum/coral-component-accordion/src/scripts/Accordion.js": {
-      "expectCount": 37,
-      "actualCount": 25,
+      "expectCount": 39,
+      "actualCount": 26,
       "undocumentLines": [
         18,
         19,
@@ -180,22 +180,24 @@
         96,
         109,
         132,
-        162,
-        301,
-        362
+        172,
+        183,
+        322,
+        388
       ]
     },
     "coral-spectrum/coral-component-accordion/src/scripts/AccordionItem.js": {
-      "expectCount": 17,
-      "actualCount": 10,
+      "expectCount": 19,
+      "actualCount": 11,
       "undocumentLines": [
         18,
         33,
         102,
         141,
-        155,
-        165,
-        182
+        172,
+        192,
+        202,
+        219
       ]
     },
     "coral-spectrum/coral-component-accordion/src/scripts/AccordionItemContent.js": {
@@ -275,9 +277,9 @@
         98,
         121,
         137,
-        245,
-        253,
-        261
+        251,
+        259,
+        267
       ]
     },
     "coral-spectrum/coral-component-actionbar/src/scripts/getFirstSelectableWrappedItem.js": {
@@ -994,8 +996,8 @@
         396,
         427,
         461,
-        580,
-        1019
+        590,
+        1029
       ]
     },
     "coral-spectrum/coral-component-fileupload/src/scripts/FileUploadItem.js": {
@@ -1391,7 +1393,7 @@
       ]
     },
     "coral-spectrum/coral-component-popover/src/scripts/Popover.js": {
-      "expectCount": 40,
+      "expectCount": 41,
       "actualCount": 15,
       "undocumentLines": [
         20,
@@ -1410,15 +1412,16 @@
         125,
         227,
         277,
-        326,
-        329,
-        337,
-        356,
-        376,
+        330,
+        333,
+        344,
+        352,
+        371,
         391,
-        407,
-        423,
-        473
+        406,
+        422,
+        438,
+        488
       ]
     },
     "coral-spectrum/coral-component-popover/src/scripts/PopoverContent.js": {

@@ -433,8 +433,8 @@
  */
 
 import {BaseComponent} from &apos;../../../coral-base-component&apos;;
-import {transform, commons} from &apos;../../../coral-utils&apos;;
 import base from &apos;../templates/base&apos;;
+import {commons, transform, validate} from &apos;../../../coral-utils&apos;;
 import {Icon} from &apos;../../../coral-component-icon&apos;;
 
 const CLASSNAME = &apos;_coral-Accordion-item&apos;;
@@ -568,6 +568,43 @@ class AccordionItem extends BaseComponent(HTMLElement) {
   
     this.selected = this.selected;
   }
+
+
+  /**
+    The heading level for the Accordion item 
+
+    @type {Number}
+    @default 3
+    @htmlattribute level
+    @htmlattributereflected
+  */
+ get level() {
+  return this._level || 3;
+}
+
+set level(value) {
+  value = transform.number(value);
+  // If the value has changed,
+  if (!validate.valueMustChange(value, this._level)) {
+    return;
+  }
+  // and the value is greater than 0
+  if (value &gt; 0) {
+    // set the value and reflect the attribute.
+    this._level = value;
+    this._reflectAttribute(&apos;level&apos;, this._level);
+    
+    // If the new value is not equal to the default,
+    if (value !== 3) {
+      // override the aria-level on the h3 element. 
+      this._elements.heading.setAttribute(&apos;aria-level&apos;, this._level);
+      return;
+    }
+  }
+
+  // If the value is the default or invalid, remove the aria-level override from the h3 element. 
+  this._elements.heading.removeAttribute(&apos;aria-level&apos;);
+}
   
   /** @private **/
   get _isTabTarget() {
@@ -605,7 +642,7 @@ class AccordionItem extends BaseComponent(HTMLElement) {
   
   /** @ignore */
   static get observedAttributes() {
-    return super.observedAttributes.concat([&apos;selected&apos;, &apos;disabled&apos;]);
+    return super.observedAttributes.concat([&apos;selected&apos;, &apos;disabled&apos;, &apos;level&apos;]);
   }
   
   /** @ignore */

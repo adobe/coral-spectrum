@@ -915,6 +915,9 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
   
   /** @private */
   _onInputFocusIn() {
+    // Get the input
+    const input = event.matchedTarget;
+
     const button = this.querySelector(&apos;[coral-fileupload-select]&apos;);
     if (button) {
       // Remove from the tab order so shift+tab works
@@ -925,6 +928,12 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
       
       // Mark the button as focused
       button.classList.add(&apos;is-focused&apos;);
+
+      window.requestAnimationFrame(() =&gt; {
+        if (input.classList.contains(&apos;focus-ring&apos;)) {
+          button.classList.add(&apos;focus-ring&apos;);
+        }
+      });
     }
   }
   
@@ -933,6 +942,7 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
     // Unmark all the focused buttons
     const button = this.querySelector(&apos;[coral-fileupload-select].is-focused&apos;);
     button.classList.remove(&apos;is-focused&apos;);
+    button.classList.remove(&apos;focus-ring&apos;);
     
     // Wait a frame so that shifting focus backwards with screen reader doesn&apos;t create a focus trap
     window.requestAnimationFrame(() =&gt; {

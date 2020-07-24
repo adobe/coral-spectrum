@@ -22,30 +22,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">36.84% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>19/19</span>
+                <span class='fraction'>7/19</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">28.57% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>2/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">36.84% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>19/19</span>
+                <span class='fraction'>7/19</span>
             </div>
         
             
@@ -54,7 +54,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -186,13 +186,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">454x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">454x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">454x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">454x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -212,11 +212,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">284x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">284x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -233,7 +231,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2963x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -272,16 +272,16 @@ class TableHead extends BaseTableSection(BaseComponent(HTMLTableSectionElement))
   /**
    Whether the table head is sticky. The table content becomes automatically scrollable if the table wrapper height
    is smaller than its content.
-   Table exposes the &lt;code&gt;coral-table-scroll&lt;/code&gt; attribute that allows in sticky mode to define the table
+   Table ex<span class="fstat-no" title="function not covered" >poses the </span>&lt;code&gt;coral-table-scroll&lt;/code&gt; attribute that allows in sticky mode to define the table
    scrolling container max-height. This is particularly useful if the table contains dynamic content.
    
-   @type {Boolean}
+   @<span class="cstat-no" title="statement not covered" >type {Boolean}</span>
    @default false
-   @htmlattribute sticky
+   @<span class="cstat-no" title="statement not covered" >htmlattribute sticky</span>
    @htmlattributereflected
-   */
+   *<span class="cstat-no" title="statement not covered" >/</span>
   get sticky() {
-    return this._sticky || false;
+<span class="cstat-no" title="statement not covered" >    return this._s</span>ticky || false;
   }
   set sticky(value) {
     this._sticky = transform.booleanAttr(value);
@@ -300,10 +300,10 @@ class TableHead extends BaseTableSection(BaseComponent(HTMLTableSectionElement))
   
   /** @ignore */
   render() {
-    super.render();
-    
+    super.render();<span class="fstat-no" title="function not covered" ></span>
+    <span class="cstat-no" title="statement not covered" ></span>
     this.classList.add(CLASSNAME);
-  }
+  }<span class="cstat-no" title="statement not covered" ></span>
   
   /**
    Triggered when the {@link TableHead} content changed.
@@ -321,8 +321,8 @@ class TableHead extends BaseTableSection(BaseComponent(HTMLTableSectionElement))
    @private
    */
 }
-&nbsp;
-export default TableHead;
+<span class="fstat-no" title="function not covered" ></span>
+export<span class="cstat-no" title="statement not covered" > default TableHead;</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -330,7 +330,7 @@ export default TableHead;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Jul 14 2020 20:18:43 GMT+0530 (India Standard Time)
+                at Fri Jul 24 2020 10:31:03 GMT+0530 (India Standard Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

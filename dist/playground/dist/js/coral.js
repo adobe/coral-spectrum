@@ -26716,6 +26716,24 @@
 
 
     _createClass(Popover, [{
+      key: "_setAriaExpandedOnTarget",
+      value: function _setAriaExpandedOnTarget() {
+        var _this2 = this;
+
+        var target = this._getTarget();
+
+        if (target) {
+          var hasPopupAttribute = target.hasAttribute('aria-haspopup');
+
+          if (hasPopupAttribute || target.querySelector('[aria-haspopup]') !== null) {
+            var targetElements = hasPopupAttribute ? [target] : target.querySelectorAll('[aria-haspopup]');
+            targetElements.forEach(function (targetElement) {
+              return targetElement.setAttribute('aria-expanded', _this2.open);
+            });
+          }
+        }
+      }
+    }, {
       key: "_onPositioned",
       value: function _onPositioned(event) {
         if (this.open) {
@@ -26800,7 +26818,7 @@
     }, {
       key: "_toggleCoachMark",
       value: function _toggleCoachMark(isCoachMark) {
-        var _this2 = this;
+        var _this3 = this;
 
         this.classList.toggle('_coral-CoachMarkPopover', isCoachMark);
 
@@ -26809,7 +26827,7 @@
         this._elements.headerWrapper.classList.toggle('_coral-CoachMarkPopover-header', isCoachMark);
 
         ['header', 'content', 'footer'].forEach(function (contentZone, i) {
-          var el = _this2[contentZone];
+          var el = _this3[contentZone];
           var type = i === 0 ? 'title' : contentZone;
 
           if (el) {
@@ -26873,7 +26891,7 @@
 
       /** @ignore */
       value: function render() {
-        var _this3 = this;
+        var _this4 = this;
 
         _get(_getPrototypeOf(Popover.prototype), "render", this).call(this);
 
@@ -26920,7 +26938,7 @@
         Array.prototype.filter.call(this.children, function (child) {
           return child.hasAttribute('coral-tabcapture');
         }).forEach(function (tabCapture) {
-          _this3.removeChild(tabCapture);
+          _this4.removeChild(tabCapture);
         }); // Support cloneNode
 
         var template = this.querySelectorAll('._coral-Dialog-header, ._coral-Dialog-closeButton, ._coral-Popover-tip');
@@ -27117,6 +27135,8 @@
         if (target && target.tagName === 'CORAL-COACHMARK') {
           this.setAttribute('variant', variant$5._COACHMARK);
         }
+
+        this._setAriaExpandedOnTarget();
       }
       /**
        Inherited from {@link Overlay#open}.
@@ -27138,6 +27158,8 @@
           if (is === 'coral-button' || is === 'coral-anchorbutton') {
             target.classList.toggle('is-selected', this.open);
           }
+
+          this._setAriaExpandedOnTarget();
         }
       }
       /**
@@ -32858,6 +32880,11 @@
 
             this._preventTriggeringEvents = false;
           }
+        } // set items level appropriately
+
+
+        if (item && item.getAttribute('level') !== this.level) {
+          item.setAttribute('level', this.level);
         }
 
         this._resetTabTarget();
@@ -33074,6 +33101,34 @@
       get: function get() {
         return this.items._getFirstSelected();
       }
+      /**
+        The heading level for Accordion items within the Accordion
+         @type {Number}
+        @default 3
+        @htmlattribute level
+        @htmlattributereflected
+      */
+
+    }, {
+      key: "level",
+      get: function get() {
+        return this._level || 3;
+      },
+      set: function set(value) {
+        var _this5 = this;
+
+        value = transform.number(value);
+
+        if (validate.valueMustChange(value, this._level) && value > 0 && value < 7) {
+          this._level = value;
+
+          this._reflectAttribute('level', this._level);
+
+          this.items.getAll().forEach(function (item) {
+            return item.setAttribute('level', _this5._level);
+          });
+        }
+      }
       /** @private **/
 
     }, {
@@ -33098,7 +33153,7 @@
     }, {
       key: "observedAttributes",
       get: function get() {
-        return _get(_getPrototypeOf(Accordion), "observedAttributes", this).concat(['variant', 'multiple']);
+        return _get(_getPrototypeOf(Accordion), "observedAttributes", this).concat(['variant', 'multiple', 'level']);
       }
     }]);
 
@@ -33335,6 +33390,45 @@
 
         this.selected = this.selected;
       }
+      /**
+        The heading level for the Accordion item 
+         @type {Number}
+        @default 3
+        @htmlattribute level
+        @htmlattributereflected
+      */
+
+    }, {
+      key: "level",
+      get: function get() {
+        return this._level || 3;
+      },
+      set: function set(value) {
+        value = transform.number(value); // If the value has changed,
+
+        if (!validate.valueMustChange(value, this._level)) {
+          return;
+        } // and the value is greater than 0
+
+
+        if (value > 0) {
+          // set the value and reflect the attribute.
+          this._level = value;
+
+          this._reflectAttribute('level', this._level); // If the new value is not equal to the default,
+
+
+          if (value !== 3) {
+            // override the aria-level on the h3 element. 
+            this._elements.heading.setAttribute('aria-level', this._level);
+
+            return;
+          }
+        } // If the value is the default or invalid, remove the aria-level override from the h3 element. 
+
+
+        this._elements.heading.removeAttribute('aria-level');
+      }
       /** @private **/
 
     }, {
@@ -33364,7 +33458,7 @@
     }], [{
       key: "observedAttributes",
       get: function get() {
-        return _get(_getPrototypeOf(AccordionItem), "observedAttributes", this).concat(['selected', 'disabled']);
+        return _get(_getPrototypeOf(AccordionItem), "observedAttributes", this).concat(['selected', 'disabled', 'level']);
       }
     }]);
 
@@ -34590,6 +34684,14 @@
 
           var popover = data._popover.cloneNode(true);
 
+          data._popover.removeAttribute('id'); //set target to the new button
+
+
+          if (popover.target) {
+            popover.removeAttribute('target');
+            popover.target = this.buttonListItem;
+          }
+
           this.buttonList.items.add(popover);
           data_1 = data;
           var el23 = document.createTextNode("\n      ");
@@ -34665,6 +34767,14 @@
             data = data_1;
 
             var popover = data._popover.cloneNode(true);
+
+            data._popover.removeAttribute('id'); //set target to the new button
+
+
+            if (popover.target) {
+              popover.removeAttribute('target');
+              popover.target = this.anchorListItem;
+            }
 
             this.anchorList.items.add(popover);
             data_1 = data;
@@ -34846,6 +34956,10 @@
           this._itemsInPopover.forEach(function (item) {
             item._button = item.querySelector('button[is="coral-button"]') || item.querySelector('a[is="coral-anchorbutton"]');
             item._popover = item.querySelector('coral-popover');
+
+            if (item._popover) {
+              item._popoverId = item._popover.id;
+            }
           }); // Whether a ButtonList or AnchorList should be rendered
 
 
@@ -34893,7 +35007,9 @@
           this._returnElementsFromPopover(); // clear cached items from popover
 
 
-          this._itemsInPopover = []; // we need to check if item has 'hasAttribute' because it is not present on the document
+          this._itemsInPopover = []; // clear overlay
+
+          this._elements.overlay.content.innerHTML = ''; // we need to check if item has 'hasAttribute' because it is not present on the document
 
           var isFocusedItemInsideActionBar = this.parentNode.contains(focusedItem);
           var isFocusedItemOffscreen = focusedItem.hasAttribute && focusedItem.hasAttribute('coral-actionbar-offscreen');
@@ -35127,10 +35243,14 @@
             wrappedItem.setAttribute('tabindex', -1);
           }
 
-          this.insertBefore(item, this._elements.moreButton); // Reset target
+          this.insertBefore(item, this._elements.moreButton); // Reset popover id, target
 
           if (item._button && item._popover) {
-            item._popover.target = item._button;
+            item._popover.id = item._popoverId;
+
+            if (item._popover.target) {
+              item._popover.target = item._button;
+            }
           }
         }
       }
@@ -35196,7 +35316,15 @@
             wrappedItem.setAttribute('tabindex', -1);
           }
 
-          this.insertBefore(item, this.firstChild.nextSibling);
+          this.insertBefore(item, this.firstChild.nextSibling); // Reset popover id, target
+
+          if (item._button && item._popover) {
+            item._popover.id = item._popoverId;
+
+            if (item._popover.target) {
+              item._popover.target = item._button;
+            }
+          }
         }
       }
       /** @ignore */
@@ -56604,6 +56732,8 @@
     }, {
       key: "_onInputFocusIn",
       value: function _onInputFocusIn() {
+        // Get the input
+        var input = event.matchedTarget;
         var button = this.querySelector('[coral-fileupload-select]');
 
         if (button) {
@@ -56613,6 +56743,11 @@
           button.setAttribute('aria-hidden', true); // Mark the button as focused
 
           button.classList.add('is-focused');
+          window.requestAnimationFrame(function () {
+            if (input.classList.contains('focus-ring')) {
+              button.classList.add('focus-ring');
+            }
+          });
         }
       }
       /** @private */
@@ -56622,7 +56757,8 @@
       value: function _onInputFocusOut() {
         // Unmark all the focused buttons
         var button = this.querySelector('[coral-fileupload-select].is-focused');
-        button.classList.remove('is-focused'); // Wait a frame so that shifting focus backwards with screen reader doesn't create a focus trap
+        button.classList.remove('is-focused');
+        button.classList.remove('focus-ring'); // Wait a frame so that shifting focus backwards with screen reader doesn't create a focus trap
 
         window.requestAnimationFrame(function () {
           button.tabIndex = 0; // @a11y: aria-hidden is removed to prevent focus trap when navigating backwards using a screen reader's
@@ -79344,7 +79480,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.8.6";
+  var version$1 = "4.8.8";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

@@ -84,7 +84,7 @@
 
         <table class="grid">
           <tr>
-            <td><button class="box" id="target_1">Target 1</button></td>
+            <td><button class="box" id="target_1" aria-haspopup="dialog">Target 1</button></td>
             <td></td>
             <td><button class="box" id="target_2">Target 2</button></td>
           </tr>
@@ -153,7 +153,13 @@
             popover.show();
 
             window.cycleTargets = function() {
-              popover.target = target[++target.curIndex % target.length];
+              var curTarget = document.querySelector(target[target.curIndex % target.length]);
+              curTarget.removeAttribute('aria-haspopup');
+              curTarget.removeAttribute('aria-expanded');
+
+              var newTarget = target[++target.curIndex % target.length];
+              document.querySelector(newTarget).setAttribute('aria-haspopup', 'dialog');
+              popover.target = newTarget;
               console.log('target changed to', popover.target);
             };
 

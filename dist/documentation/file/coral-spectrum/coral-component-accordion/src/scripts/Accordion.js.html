@@ -575,6 +575,27 @@ class Accordion extends BaseComponent(HTMLElement) {
   get selectedItem() {
     return this.items._getFirstSelected();
   }
+
+  /**
+    The heading level for Accordion items within the Accordion
+
+    @type {Number}
+    @default 3
+    @htmlattribute level
+    @htmlattributereflected
+  */
+  get level() {
+    return this._level || 3;
+  }
+
+  set level(value) {
+    value = transform.number(value);
+    if (validate.valueMustChange(value, this._level) &amp;&amp; value &gt; 0 &amp;&amp; value &lt; 7) {
+      this._level = value;
+      this._reflectAttribute(&apos;level&apos;, this._level);
+      this.items.getAll().forEach(item =&gt; item.setAttribute(&apos;level&apos;, this._level));
+    }
+  }
   
   /** @private **/
   get _tabTarget() {
@@ -730,6 +751,11 @@ class Accordion extends BaseComponent(HTMLElement) {
       }
     }
     
+    // set items level appropriately
+    if (item &amp;&amp; item.getAttribute(&apos;level&apos;) !== this.level) {
+      item.setAttribute(&apos;level&apos;, this.level);
+    }
+
     this._resetTabTarget();
     
     this._triggerChangeEvent();
@@ -819,7 +845,7 @@ class Accordion extends BaseComponent(HTMLElement) {
 
   /** @ignore */
   static get observedAttributes() {
-    return super.observedAttributes.concat([&apos;variant&apos;, &apos;multiple&apos;]);
+    return super.observedAttributes.concat([&apos;variant&apos;, &apos;multiple&apos;, &apos;level&apos;]);
   }
   
   /** @ignore */
