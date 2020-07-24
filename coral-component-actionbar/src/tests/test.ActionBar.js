@@ -668,7 +668,7 @@ describe('ActionBar', function() {
       bar.primary.items.add({}).appendChild(new Button());
      
       // Wait for resize listener
-      window.setTimeout(function() {
+      window.setTimeout(() => {
         // items of bar1 should be moved offscreen
         expect(bar.primary._elements.moreButton.style.visibility).to.equal('', 'More button should be visible.');
         bar.primary._elements.moreButton.click();
