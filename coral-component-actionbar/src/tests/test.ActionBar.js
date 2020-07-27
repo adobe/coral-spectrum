@@ -587,13 +587,29 @@ describe('ActionBar', function() {
       }, 200);
     });
   
-    it('selectable items at 2nd level inside coral-actionbar-item in tree should be tab-able', function () {
-      const bar = helpers.build(window.__html__['ActionBar.hiddenitems.html']);
+    it('selectable items at 2nd level inside coral-actionbar-item in tree should be accessible via arrow keys.', function () {
+      const bar = helpers.build(window.__html__['ActionBar.fileupload.html']);
       expect(document.activeElement.tagName.toLowerCase()).to.not.equal('button', 'activeElement should not be an one of the buttons inside the actionbar');
     
       let leftActionBarItems = bar.primary.items.getAll();
-      let uploadButton = leftActionBarItems[2].querySelector('coral-fileupload>button');
+      let uploadButton = leftActionBarItems[1].querySelector('coral-fileupload>button');
+      let viewListButton = leftActionBarItems[0].querySelector('button');
       expect(uploadButton.getAttribute('tabindex')).to.equal('-1', 'upload button should not be tabable');
+      viewListButton.focus();
+      expect(document.activeElement).to.equal(viewListButton, 'button not focusable.');
+      // simulate Left/Down arrow key press
+      bar._onFocusNextItem({
+        preventDefault: function() {},
+        target: document.activeElement
+      });
+      expect(document.activeElement.parentElement.tagName.toLowerCase()).to.equal('coral-fileupload', 'Upload action is not accessible via arrow keys.');
+      
+       // simulate Right/Up arrow key press
+      bar._onFocusPreviousItem({
+        preventDefault: function() {},
+        target: document.activeElement
+      });
+      expect(document.activeElement).to.equal(viewListButton, 'focus should not stuck on file-upload action.');
     });
 
     it('Anchor button without href should be accessible', function () {
@@ -656,15 +672,16 @@ describe('ActionBar', function() {
         // items of bar1 should be moved offscreen
         expect(bar.primary._elements.moreButton.style.visibility).to.equal('', 'More button should be visible.');
         bar.primary._elements.moreButton.click();
-        expect(bar.primary._elements.overlay.open).to.equal(true, 'more popover should be opened');
+        expect(bar.primary._elements.overlay.open).to.equal(true, 'more popover should be opened');        
         window.setTimeout(() => {
           var openPopoverButton = bar.primary._elements.overlay.querySelector("#switchBar1OpenPopover");
-          openPopoverButton.click();
-          var switchBar1Popover = bar.primary._elements.overlay.querySelector("coral-popover[target='#switchBar1OpenPopover']");
-          expect(switchBar1Popover.classList.contains('is-open')).to.equal(true, "Popover should be open.");
+          if (openPopoverButton) {
+            openPopoverButton.click();
+            var switchBar1Popover = bar.primary._elements.overlay.querySelector("coral-popover[target='#switchBar1OpenPopover']");
+            expect(switchBar1Popover.classList.contains('is-open')).to.equal(true, "Popover should be open.");
+          }
           done();
         }, 200);
-        done();
       }, 200);
     });
   

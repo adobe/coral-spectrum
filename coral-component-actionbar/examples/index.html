@@ -98,6 +98,12 @@
               <button is="coral-button" icon="viewList">View List</button>
             </coral-actionbar-item>
             <coral-actionbar-item>
+              <!-- additional nesting, as with fileupload -->
+              <span>
+                <button is="coral-button">Upload</button>
+              </span>
+            </coral-actionbar-item>
+            <coral-actionbar-item>
               <button is="coral-button" icon="viewColumn">View a <span style="color:red">loooooonoooooog Column</span></button>
             </coral-actionbar-item>
             <coral-actionbar-item>
@@ -192,5 +198,14 @@
         </coral-actionbar>
       </div>
     </main>
+    <script>
+      document.addEventListener('click', function(event) {
+        var item = event.target.closest('button, a');
+        if (item) {
+          console.log(event.type, ':', item.textContent.trim());
+          event.stopImmediatePropagation();
+        }
+      });
+    </script>
   </body>
 </html>

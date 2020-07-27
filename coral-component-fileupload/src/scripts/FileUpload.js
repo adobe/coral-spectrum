@@ -485,10 +485,12 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
     // This lets the next focused item be the correct one according to tab order
     button.parentNode.insertBefore(input, button.nextElementSibling);
     
-    // Make sure the input gets focused on FF
-    window.setTimeout(() => {
-      input.focus();
-    }, 100);
+    if (event.relatedTarget !== input) {
+      // Make sure the input gets focused on FF
+      window.setTimeout(() => {
+        input.focus();
+      }, 100);
+    }
   }
   
   /** @private */

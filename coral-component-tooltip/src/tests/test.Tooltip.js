@@ -186,8 +186,10 @@ describe('Tooltip', function() {
         });
 
         tooltip.on('coral-overlay:close', function() {
-          expect(tooltip.open).to.be.false;
-          done();
+          helpers.next(function() {
+            expect(tooltip.open).to.be.false;
+            done();
+          });
         });
 
         tooltip.show();
