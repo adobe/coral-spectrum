@@ -845,7 +845,7 @@ describe('ColumnView', function() {
           expect(document.activeElement.id).to.equal(el.columns.getAll()[1].items.first().id);
           expect(document.activeElement.id).to.equal(el.activeItem.id);
           done();
-        }, 450);
+        }, 200);
       });
 
       it('ArrowDown should focus next item', function(done) {
@@ -857,7 +857,7 @@ describe('ColumnView', function() {
           expect(document.activeElement.id).to.equal(el.columns.getAll()[1].items.getAll()[2].id);
           expect(document.activeElement.id).to.equal(el.activeItem.id);
           done();
-        }, 450);
+        }, 200);
       });
 
       it('ArrowRight on item with variant=drilldown should focus first item in next column', function(done) {
@@ -870,7 +870,7 @@ describe('ColumnView', function() {
             expect(document.activeElement.id).to.equal(el.columns.getAll()[1].items.first().id);
             done();
           });
-        }, 400);
+        }, 200);
       });
 
       it('ArrowLeft on item with previous column should focus active item in previous column', function(done) {
@@ -878,11 +878,11 @@ describe('ColumnView', function() {
         const activeItem = el.activeItem;
         activeItem.trigger('click');
         helpers.keypress('left', activeItem);
-        helpers.next(function() {
+        window.setTimeout(function() {
           expect(document.activeElement.id).to.equal(el.columns.first().items.getAll()[1].id);
           expect(document.activeElement.id).to.equal(el.activeItem.id);
           done();
-        });
+        }, 200);
       });
 
       it('Space on item should toggle selection', function(done) {
@@ -1304,7 +1304,7 @@ describe('ColumnView', function() {
         window.setTimeout(function() {
           expect(el.activeItem.getAttribute('aria-expanded')).to.equal('true');
           done();
-        }, 450);
+        }, 200);
       });
 
       it('should express ownership of expanded column using aria-owns', function(done) {
