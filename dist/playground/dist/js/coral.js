@@ -33974,11 +33974,18 @@
 
         var selectableItems = this._getAllSelectableItems(currentItem);
 
+        var length = selectableItems.length;
         var index = selectableItems.indexOf(currentItem);
 
-        if (index >= 0 && selectableItems.length > index + 1) {
+        if (index >= 0 && length > index + 1) {
           // if there is a next selectable element return it
           return getFirstSelectableWrappedItem(selectableItems[index + 1]);
+        } else {
+          for (var i = 0; i < length; i++) {
+            if (selectableItems[i].contains(currentItem) && length > i + 1) {
+              return getFirstSelectableWrappedItem(selectableItems[i + 1]);
+            }
+          }
         }
 
         return null;
@@ -34000,6 +34007,12 @@
         if (index > 0) {
           // if there is a previous selectable element return it
           return getFirstSelectableWrappedItem(selectableItems[index - 1]);
+        } else {
+          for (var i = 1; i < selectableItems.length; i++) {
+            if (selectableItems[i].contains(currentItem)) {
+              return getFirstSelectableWrappedItem(selectableItems[i - 1]);
+            }
+          }
         }
 
         return null;
@@ -34030,9 +34043,9 @@
           var rightSelectableItems = this.secondary.items._getAllSelectable();
 
           if (currentItem) {
-            if (leftSelectableItems.indexOf(currentItem) >= 0) {
+            if (this.primary.contains(currentItem)) {
               selectableItems = leftSelectableItems;
-            } else if (rightSelectableItems.indexOf(currentItem) >= 0) {
+            } else if (this.secondary.contains(currentItem)) {
               selectableItems = rightSelectableItems;
             }
           } else {
@@ -34588,6 +34601,8 @@
     el0.setAttribute("placement", "bottom");
     el0.setAttribute("breadthoffset", "-50%r + 50%p");
     el0.setAttribute("coral-actionbar-popover", "");
+    el0.setAttribute("tabindex", "-1");
+    el0.setAttribute("role", "presentation");
     frag.appendChild(el0);
     var el1 = document.createTextNode("\n");
     frag.appendChild(el1);
@@ -34850,7 +34865,12 @@
           to.setAttribute(attr.nodeName, attr.nodeValue);
         }
       }
-    }
+    } // ensure that click event on menu item gets triggered on actionbar item
+
+
+    to.addEventListener('click', function () {
+      return from.click();
+    });
   };
   /**
    @base BaseActionBarContainer
@@ -34946,14 +34966,14 @@
 
           if (this._itemsInPopover.length < 1) {
             return;
-          }
+          } // Set focus to first focusable descendant of the overlay by default
+
+
+          this._elements.overlay.focusOnShow = 'on';
 
           this._itemsInPopover.forEach(function (item) {
-            item.style.visibility = '';
-          }); // Store the button and popover on the item
+            item.style.visibility = ''; // Store the button and popover on the item
 
-
-          this._itemsInPopover.forEach(function (item) {
             item._button = item.querySelector('button[is="coral-button"]') || item.querySelector('a[is="coral-anchorbutton"]');
             item._popover = item.querySelector('coral-popover');
 
@@ -34995,7 +35015,8 @@
 
           var focusedItem = document.activeElement.parentNode; // hide the popover(needed to disable fade time of popover)
 
-          this._elements.overlay.hidden = true; // close any popovers, that might be inside the 'more' popover
+          this._elements.overlay.hidden = true;
+          this._elements.overlay.focusOnShow = this._elements.overlay; // close any popovers, that might be inside the 'more' popover
 
           var childPopovers = this._elements.overlay.getElementsByTagName('coral-popover');
 
@@ -51974,37 +51995,43 @@
         this.setAttribute('aria-selected', this._active); // @a11y Update aria-expanded. Active drilldowns should be expanded.
 
         if (this.variant === variant$g.DRILLDOWN) {
-          var isFocused = this === document.activeElement || this.contains(document.activeElement);
-          var activeElement;
-
-          if (isFocused && !this.selected) {
-            this.setAttribute('aria-expanded', this._active);
-            activeElement = document.activeElement;
-            activeElement.blur();
-          } else {
-            this.setAttribute('aria-hidden', true);
-          } // @a11y workaround for VoiceOver announcing expanded state rather than the item name when the item receives focus.
-
-
-          var timeoutDelay = 60;
-
+          // @a11y workaround for VoiceOver announcing expanded state rather than the item name when the item receives focus.
           if (this._ariaExpandedTimeout) {
+            window.cancelAnimationFrame(this._ariaExpandedTimeout);
             window.clearTimeout(this._ariaExpandedTimeout);
             this._ariaExpandedTimeout = undefined;
-          } // @a11y after a delay to give focused item time to announce,
+          }
 
+          var timeoutDelay = 20;
+          this._ariaExpandedTimeout = commons.nextFrame(function () {
+            var isFocused = _this2 === document.activeElement || _this2.contains(document.activeElement);
 
-          this._ariaExpandedTimeout = window.setTimeout(function () {
-            if (isFocused && activeElement) {
-              activeElement.focus();
+            var activeElement;
+
+            if (isFocused && !_this2.selected) {
+              _this2.setAttribute('aria-expanded', _this2._active);
+
+              activeElement = document.activeElement;
+              activeElement.blur();
             } else {
-              window.setTimeout(function () {
-                _this2.setAttribute('aria-expanded', _this2._active);
+              _this2.setAttribute('aria-hidden', true);
+            } // @a11y after a delay to give focused item time to announce,
 
-                _this2.removeAttribute('aria-hidden');
-              }, timeoutDelay * 2);
-            }
-          }, timeoutDelay);
+
+            commons.nextFrame(function () {
+              if (isFocused && activeElement) {
+                activeElement.focus();
+              } else {
+                window.setTimeout(function () {
+                  _this2.setAttribute('aria-expanded', _this2._active);
+
+                  commons.nextFrame(function () {
+                    return _this2.removeAttribute('aria-hidden');
+                  });
+                }, timeoutDelay);
+              }
+            });
+          });
         }
 
         if (!this._active) {
@@ -56721,11 +56748,14 @@
         var button = event.matchedTarget; // Move the input to after the button
         // This lets the next focused item be the correct one according to tab order
 
-        button.parentNode.insertBefore(input, button.nextElementSibling); // Make sure the input gets focused on FF
+        button.parentNode.insertBefore(input, button.nextElementSibling);
 
-        window.setTimeout(function () {
-          input.focus();
-        }, 100);
+        if (event.relatedTarget !== input) {
+          // Make sure the input gets focused on FF
+          window.setTimeout(function () {
+            input.focus();
+          }, 100);
+        }
       }
       /** @private */
 
@@ -79480,7 +79510,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.8.8";
+  var version$1 = "4.8.9";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

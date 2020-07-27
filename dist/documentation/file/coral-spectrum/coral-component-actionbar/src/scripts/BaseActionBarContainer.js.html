@@ -459,6 +459,9 @@ const copyAttributes = (from, to) =&gt; {
       }
     }
   }
+
+  // ensure that click event on menu item gets triggered on actionbar item
+  to.addEventListener(&apos;click&apos;, () =&gt; from.click());
 };
 
 /**
@@ -600,12 +603,12 @@ class BaseActionBarContainer extends superClass {
       return;
     }
 
+    // Set focus to first focusable descendant of the overlay by default
+    this._elements.overlay.focusOnShow = &apos;on&apos;;
+
     this._itemsInPopover.forEach((item) =&gt; {
       item.style.visibility = &apos;&apos;;
-    });
-  
-    // Store the button and popover on the item
-    this._itemsInPopover.forEach((item) =&gt; {
+      // Store the button and popover on the item
       item._button = item.querySelector(&apos;button[is=&quot;coral-button&quot;]&apos;) || item.querySelector(&apos;a[is=&quot;coral-anchorbutton&quot;]&apos;);
       item._popover = item.querySelector(&apos;coral-popover&apos;);
       if(item._popover) {
@@ -644,6 +647,7 @@ class BaseActionBarContainer extends superClass {
     
     // hide the popover(needed to disable fade time of popover)
     this._elements.overlay.hidden = true;
+    this._elements.overlay.focusOnShow = this._elements.overlay;
     
     // close any popovers, that might be inside the &apos;more&apos; popover
     const childPopovers = this._elements.overlay.getElementsByTagName(&apos;coral-popover&apos;);

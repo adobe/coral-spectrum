@@ -22,30 +22,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">36.67% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/30</span>
+                <span class='fraction'>25/30</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">60% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>6/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">37.5% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/8</span>
+                <span class='fraction'>6/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">36.67% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/30</span>
+                <span class='fraction'>25/30</span>
             </div>
         
             
@@ -54,7 +54,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -174,15 +174,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">752x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">752x</span>
+<span class="cline-any cline-yes">752x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">752x</span>
+<span class="cline-any cline-yes">752x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -215,18 +215,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1278x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1278x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1278x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1238x</span>
+<span class="cline-any cline-yes">1238x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1238x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-yes">1238x</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -287,7 +287,7 @@ const BaseColorInputAbstractSubview = (superClass) =&gt; class extends superClas
       this.__beforeOverlayOpen = this._beforeOverlayOpen.bind(this);
       this.__onColorInputChange = this._onColorInputChange.bind(this);
       
-      // cache colorin<span class="fstat-no" title="function not covered" >put if this compone</span>nt is attached to dom
+      // cache colorinput if this component is attached to dom
       this._colorinput = overlay._colorinput;
       this._colorinput.on('coral-overlay:beforeopen', this.__beforeOverlayOpen);
       this._colorinput.on('coral-colorinput:_valuechange', this.__onColorInputChange);
@@ -299,26 +299,26 @@ const BaseColorInputAbstractSubview = (superClass) =&gt; class extends superClas
   
   /** @ignore */
   disconnectedCallback() {
-    super.disconnected<span class="fstat-no" title="function not covered" >Callback();</span>
-  <span class="cstat-no" title="statement not covered" ></span>
-    if (this._colorinput) {
-      this._colorinput<span class="cstat-no" title="statement not covered" >.off('coral-overlay:beforeopen', this.__bef</span>oreOverlayOpen);
-      this._colorinput.off('coral-colorinput:_valuechange', this.__onColorInputChange);
-    }<span class="cstat-no" title="statement not covered" ></span>
+    super.disconnectedCallback();
   
-    this._<span class="cstat-no" title="statement not covered" >colorinput = null;</span>
-  }<span class="cstat-no" title="statement not covered" ></span>
+    if (this._colorinput) {
+      this._colorinput.off('coral-overlay:beforeopen', this.__beforeOverlayOpen);
+      this._colorinput.off('coral-colorinput:_valuechange', this.__onColorInputChange);
+    }
+  
+    this._colorinput = null;
+  }
 };
-<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
 export default BaseColorInputAbstractSubview;
-<span class="cstat-no" title="statement not covered" ></span></pre></td></tr></table></pre>
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Jul 24 2020 10:31:03 GMT+0530 (India Standard Time)
+                at Mon Jul 27 2020 15:55:31 GMT+0530 (India Standard Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

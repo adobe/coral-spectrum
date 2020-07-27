@@ -681,34 +681,38 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
 
     // @a11y Update aria-expanded. Active drilldowns should be expanded.
     if (this.variant === variant.DRILLDOWN) {
-      const isFocused = this === document.activeElement || this.contains(document.activeElement);
-      let activeElement;
-      if (isFocused &amp;&amp; !this.selected) {
-        this.setAttribute(&apos;aria-expanded&apos;, this._active);
-        activeElement = document.activeElement;
-        activeElement.blur();
-      }
-      else {
-        this.setAttribute(&apos;aria-hidden&apos;, true);
-      }
       // @a11y workaround for VoiceOver announcing expanded state rather than the item name when the item receives focus.
-      const timeoutDelay = 60;
       if (this._ariaExpandedTimeout) {
+        window.cancelAnimationFrame(this._ariaExpandedTimeout);
         window.clearTimeout(this._ariaExpandedTimeout);
         this._ariaExpandedTimeout = undefined;
       }
-      // @a11y after a delay to give focused item time to announce,
-      this._ariaExpandedTimeout = window.setTimeout(() =&gt; {
-        if (isFocused &amp;&amp; activeElement) {
-          activeElement.focus();
+      const timeoutDelay = 20;
+      this._ariaExpandedTimeout = commons.nextFrame(() =&gt; {
+        const isFocused = this === document.activeElement || this.contains(document.activeElement);
+        let activeElement;
+        if (isFocused &amp;&amp; !this.selected) {
+          this.setAttribute(&apos;aria-expanded&apos;, this._active);
+          activeElement = document.activeElement;
+          activeElement.blur();
         }
         else {
-          window.setTimeout(() =&gt; {
-            this.setAttribute(&apos;aria-expanded&apos;, this._active);
-            this.removeAttribute(&apos;aria-hidden&apos;);
-          }, timeoutDelay * 2);
+          this.setAttribute(&apos;aria-hidden&apos;, true);
         }
-      }, timeoutDelay);
+      
+        // @a11y after a delay to give focused item time to announce,
+        commons.nextFrame(() =&gt; {
+          if (isFocused &amp;&amp; activeElement) {
+            activeElement.focus();
+          }
+          else {
+            window.setTimeout(() =&gt; {
+              this.setAttribute(&apos;aria-expanded&apos;, this._active);
+              commons.nextFrame(() =&gt; this.removeAttribute(&apos;aria-hidden&apos;));
+            }, timeoutDelay);
+          }
+        });
+      });
     }
 
     if (!this._active) {

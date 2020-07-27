@@ -777,11 +777,19 @@ class ActionBar extends BaseComponent(HTMLElement) {
     }
     
     const selectableItems = this._getAllSelectableItems(currentItem);
+    const length = selectableItems.length;
     const index = selectableItems.indexOf(currentItem);
     
-    if (index &gt;= 0 &amp;&amp; selectableItems.length &gt; index + 1) {
+    if (index &gt;= 0 &amp;&amp; length &gt; index + 1) {
       // if there is a next selectable element return it
       return getFirstSelectableWrappedItem(selectableItems[index + 1]);
+    }
+    else {
+      for(let i = 0; i &lt; length; i++) {
+        if (selectableItems[i].contains(currentItem) &amp;&amp; length &gt; i + 1) {
+          return getFirstSelectableWrappedItem(selectableItems[i + 1]);
+        }
+      }
     }
     
     return null;
@@ -800,6 +808,13 @@ class ActionBar extends BaseComponent(HTMLElement) {
     if (index &gt; 0) {
       // if there is a previous selectable element return it
       return getFirstSelectableWrappedItem(selectableItems[index - 1]);
+    }
+    else {
+      for(let i = 1; i &lt; selectableItems.length; i++) {
+        if (selectableItems[i].contains(currentItem)) {
+          return getFirstSelectableWrappedItem(selectableItems[i - 1]);
+        }
+      }
     }
     
     return null;
@@ -831,10 +846,10 @@ class ActionBar extends BaseComponent(HTMLElement) {
       const leftSelectableItems = this.primary.items._getAllSelectable();
       const rightSelectableItems = this.secondary.items._getAllSelectable();
       if (currentItem) {
-        if (leftSelectableItems.indexOf(currentItem) &gt;= 0) {
+        if (this.primary.contains(currentItem)) {
           selectableItems = leftSelectableItems;
         }
-        else if (rightSelectableItems.indexOf(currentItem) &gt;= 0) {
+        else if (this.secondary.contains(currentItem)) {
           selectableItems = rightSelectableItems;
         }
       }

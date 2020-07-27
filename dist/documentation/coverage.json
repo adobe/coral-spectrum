@@ -220,11 +220,11 @@
         53,
         108,
         346,
-        456,
-        492,
-        513,
-        519,
-        532
+        471,
+        507,
+        528,
+        534,
+        547
       ]
     },
     "coral-spectrum/coral-component-actionbar/src/scripts/ActionBarContainer.js": {
@@ -272,14 +272,14 @@
       "undocumentLines": [
         22,
         24,
-        52,
-        53,
-        98,
-        121,
-        137,
-        251,
-        259,
-        267
+        55,
+        56,
+        101,
+        124,
+        140,
+        255,
+        263,
+        271
       ]
     },
     "coral-spectrum/coral-component-actionbar/src/scripts/getFirstSelectableWrappedItem.js": {
@@ -788,9 +788,9 @@
         188,
         198,
         254,
-        301,
-        364,
-        366
+        305,
+        368,
+        370
       ]
     },
     "coral-spectrum/coral-component-columnview/src/scripts/ColumnViewItemContent.js": {
@@ -996,8 +996,8 @@
         396,
         427,
         461,
-        590,
-        1029
+        592,
+        1031
       ]
     },
     "coral-spectrum/coral-component-fileupload/src/scripts/FileUploadItem.js": {

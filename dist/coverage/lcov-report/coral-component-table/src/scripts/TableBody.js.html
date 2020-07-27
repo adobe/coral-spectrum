@@ -22,30 +22,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">42.86% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/14</span>
+                <span class='fraction'>14/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">42.86% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/14</span>
+                <span class='fraction'>14/14</span>
             </div>
         
             
@@ -54,7 +54,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -161,13 +161,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">466x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">466x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">466x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">466x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -175,12 +175,12 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">454x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">454x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">454x</span>
+<span class="cline-any cline-yes">66x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -222,29 +222,29 @@ class TableBody extends BaseTableSection(BaseComponent(HTMLTableSectionElement))
   /** @ignore */
   render() {
     super.render();
-    <span class="fstat-no" title="function not covered" ></span>
+    
     this.classList.add(CLASSNAME);
   
-<span class="cstat-no" title="statement not covered" >    if (getRows([this]).length === 0) </span>{
+    if (getRows([this]).length === 0) {
       this.trigger('coral-table-body:_empty');
-<span class="cstat-no" title="statement not covered" >    }</span>
+    }
   }
-  <span class="cstat-no" title="statement not covered" ></span>
+  
   /**
-   T<span class="cstat-no" title="statement not covered" >riggered when </span>the {@link TableBody} content changed.
+   Triggered when the {@link TableBody} content changed.
    
    @typedef {CustomEvent} coral-table-body:_contentchanged
    
    @private
    */
   
-  /**<span class="fstat-no" title="function not covered" ></span>
-   Tri<span class="cstat-no" title="statement not covered" >ggered when the {@link TableBody} is initialized without rows.</span>
+  /**
+   Triggered when the {@link TableBody} is initialized without rows.
    
-   @ty<span class="cstat-no" title="statement not covered" >pedef {CustomEvent} coral-table</span>-body:_empty
+   @typedef {CustomEvent} coral-table-body:_empty
    
-   @pr<span class="cstat-no" title="statement not covered" >ivate</span>
-   */<span class="cstat-no" title="statement not covered" ></span>
+   @private
+   */
 }
 &nbsp;
 export default TableBody;
@@ -255,7 +255,7 @@ export default TableBody;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Jul 24 2020 10:31:03 GMT+0530 (India Standard Time)
+                at Mon Jul 27 2020 15:55:31 GMT+0530 (India Standard Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
