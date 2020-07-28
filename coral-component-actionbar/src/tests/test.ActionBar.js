@@ -417,7 +417,7 @@ describe('ActionBar', function() {
       expect(el.primary._itemsInPopover.length).to.equal(0);
       
       // Wait for resize listener and MO
-      window.setTimeout(function() {
+      window.setTimeout(() => {
         el.primary._elements.overlay.open = true;
   
         el.primary._elements.overlay.on('coral-overlay:open', function() {
@@ -571,7 +571,7 @@ describe('ActionBar', function() {
       let leftActionBarItems = bar.primary.items.getAll();
     
       // Wait for resize listener
-      window.setTimeout(function () {
+      window.setTimeout(() => {
         let firstLeftButton = leftActionBarItems[0].querySelector('button');
         firstLeftButton.focus();
         expect(document.activeElement).to.not.equal(firstLeftButton, 'activeElement should not be the first wrapped item (here button) inside the actionbar');

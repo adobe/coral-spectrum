@@ -140,12 +140,26 @@
             ];
             variant.curIndex = 0;
 
+            function updateAriaDescribedby() {
+              target.forEach(function(selector) {
+                var targetElement = document.querySelector(selector);
+                if (selector === tooltip.target) {
+                  targetElement.setAttribute('aria-describedby', tooltip.id);
+                }
+                else {
+                  targetElement.removeAttribute('aria-describedby');
+                }
+              });
+            }
+
             var tooltip = document.getElementById('tooltip');
+            updateAriaDescribedby();
             tooltip.show();
 
             window.cycleTargets = function() {
               tooltip.target = target[++target.curIndex % target.length];
               console.log('target changed to', tooltip.target);
+              updateAriaDescribedby();
             };
 
             window.cyclePointFrom = function() {
