@@ -946,10 +946,15 @@ class BaseOverlay extends superClass {
       const open = this._open = value;
       this._reflectAttribute(&apos;open&apos;, open);
 
-      // Set aria-hidden false before we show
+      // Remove aria-hidden attribute before we show.
       // Otherwise, screen readers will not announce
       // Doesn&apos;t matter when we set aria-hidden true (nothing being announced)
-      this.setAttribute(&apos;aria-hidden&apos;, !open);
+      if (open) {
+        this.removeAttribute(&apos;aria-hidden&apos;);
+      }
+      else {
+        this.setAttribute(&apos;aria-hidden&apos;, !open);
+      }
 
       // Don&apos;t do anything if we&apos;re not in the DOM yet
       // This prevents errors related to allocating a zIndex we don&apos;t need
@@ -996,6 +1001,9 @@ class BaseOverlay extends superClass {
             }
           }
 
+          // visibility should revert to whatever is specified in CSS, so that transition renders.
+          this.style.visibility = &apos;&apos;;
+
           // The default style should be display: none for overlays
           // Show ourselves first for centering calculations etc
           this.style.display = &apos;&apos;;
@@ -1034,6 +1042,11 @@ class BaseOverlay extends superClass {
             if (!this.open) {
               // Hide self
               this.style.display = &apos;none&apos;;
+
+              // When the CSS transition has finished, set visibility to browser default, `visibility: visible`,
+              // to ensure that the overlay will be included in accessibility name or description
+              // of an element that references the overlay using `aria-labelledby` or `aria-describedby`.
+              this.style.visibility = &apos;initial&apos;;
 
               // makes sure the focus is returned per accessibility recommendations
               this._handleReturnFocus();

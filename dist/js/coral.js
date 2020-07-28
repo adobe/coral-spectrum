@@ -21045,13 +21045,18 @@ var Coral = (function (exports) {
           if (!beforeEvent.defaultPrevented) {
             var open = this._open = value;
 
-            this._reflectAttribute('open', open); // Set aria-hidden false before we show
+            this._reflectAttribute('open', open); // Remove aria-hidden attribute before we show.
             // Otherwise, screen readers will not announce
             // Doesn't matter when we set aria-hidden true (nothing being announced)
 
 
-            this.setAttribute('aria-hidden', !open); // Don't do anything if we're not in the DOM yet
+            if (open) {
+              this.removeAttribute('aria-hidden');
+            } else {
+              this.setAttribute('aria-hidden', !open);
+            } // Don't do anything if we're not in the DOM yet
             // This prevents errors related to allocating a zIndex we don't need
+
 
             if (this.parentNode) {
               // Do this check afterwards as we may have been appended inside of _show()
@@ -21088,9 +21093,11 @@ var Coral = (function (exports) {
 
                     _this2.appendChild(_this2._elements.bottomTabCapture);
                   }
-                } // The default style should be display: none for overlays
-                // Show ourselves first for centering calculations etc
+                } // visibility should revert to whatever is specified in CSS, so that transition renders.
 
+
+                _this2.style.visibility = ''; // The default style should be display: none for overlays
+                // Show ourselves first for centering calculations etc
 
                 _this2.style.display = ''; // Do it in the next frame to make the animation happen
 
@@ -21125,7 +21132,11 @@ var Coral = (function (exports) {
                 var closeComplete = function closeComplete() {
                   if (!_this2.open) {
                     // Hide self
-                    _this2.style.display = 'none'; // makes sure the focus is returned per accessibility recommendations
+                    _this2.style.display = 'none'; // When the CSS transition has finished, set visibility to browser default, `visibility: visible`,
+                    // to ensure that the overlay will be included in accessibility name or description
+                    // of an element that references the overlay using `aria-labelledby` or `aria-describedby`.
+
+                    _this2.style.visibility = 'initial'; // makes sure the focus is returned per accessibility recommendations
 
                     _this2._handleReturnFocus();
 
@@ -79510,7 +79521,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.8.9";
+  var version$1 = "4.8.10";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
