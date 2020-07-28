@@ -96,7 +96,7 @@ describe('Step', function() {
 
     describe('#labelled', function() {
       it('should default to empty string', function() {
-        expect(item.labelled).to.equal('');
+        expect(item.labelled).to.be.null;
       });
 
       it('should be settable', function(done) {
@@ -108,6 +108,44 @@ describe('Step', function() {
           helpers.next(function() {
             expect(item._elements.stepMarkerContainer.hasAttribute('aria-label')).to.be.false;
             expect(item._elements.stepMarkerContainer.getAttribute('aria-hidden')).to.equal('true');
+            done();
+          });
+        });
+      });
+    });
+
+    describe('#labelledBy', function() {
+      it('should default to empty string', function() {
+        expect(item.labelledBy).to.be.null;
+      });
+
+      it('should be settable', function(done) {
+        item.labelledBy = 'foo';
+        helpers.next(function() {
+          expect(item._elements.stepMarkerContainer.getAttribute('aria-labelledby')).to.equal(item.labelledBy);
+          expect(item._elements.stepMarkerContainer.hasAttribute('aria-hidden')).to.be.false;
+          item.labelledBy = null;
+          helpers.next(function() {
+            expect(item._elements.stepMarkerContainer.hasAttribute('aria-labelledby')).to.be.false;
+            expect(item._elements.stepMarkerContainer.getAttribute('aria-hidden')).to.equal('true');
+            done();
+          });
+        });
+      });
+    });
+
+    describe('#describedBy', function() {
+      it('should default to empty string', function() {
+        expect(item.describedBy).to.be.null;
+      });
+
+      it('should be settable', function(done) {
+        item.describedBy = 'bar';
+        helpers.next(function() {
+          expect(item._elements.link.getAttribute('aria-describedby')).to.equal(item.describedBy);
+          item.describedBy = null;
+          helpers.next(function() {
+            expect(item._elements.link.hasAttribute('aria-describedby')).to.be.false;
             done();
           });
         });

@@ -150,7 +150,23 @@ const BaseFormField = (superClass) => class extends superClass {
     this.setAttribute('aria-invalid', this._invalid);
     this.classList.toggle('is-invalid', this._invalid);
   }
+
+  /**
+   Reflects the <code>aria-describedby</code> attribute to the labellable element e.g. inner input.
+   
+   @type {String}
+   @default null
+   @htmlattribute describedby
+   */
+  get describedBy() {
+    return this._getLabellableElement().getAttribute('aria-describedby');
+  }
+  set describedBy(value) {
+    value = transform.string(value);
   
+    this._getLabellableElement()[value ? 'setAttribute' : 'removeAttribute']('aria-describedby', value);
+  }
+
   /**
    Reflects the <code>aria-label</code> attribute to the labellable element e.g. inner input.
    
@@ -368,6 +384,7 @@ const BaseFormField = (superClass) => class extends superClass {
   
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
+      describedby: 'describedBy',
       labelledby: 'labelledBy',
       readonly: 'readOnly',
     });
@@ -376,6 +393,7 @@ const BaseFormField = (superClass) => class extends superClass {
   // We don't want to watch existing attributes for components that extend native HTML elements
   static get _nativeObservedAttributes() {
     return super.observedAttributes.concat([
+      'describedby',
       'labelled',
       'labelledby',
       'invalid'
@@ -385,6 +403,7 @@ const BaseFormField = (superClass) => class extends superClass {
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
+      'describedby',
       'labelled',
       'labelledby',
       'invalid',

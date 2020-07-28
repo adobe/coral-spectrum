@@ -87,16 +87,16 @@ describe('BaseFormField', function() {
       el = null;
     });
     
-    ['name', 'value', 'disabled', 'required', 'readOnly', 'invalid', 'labelled', 'labelledBy'].forEach((prop) => {
+    ['name', 'value', 'disabled', 'required', 'readOnly', 'invalid', 'labelled', 'labelledBy', 'describedBy'].forEach((prop) => {
   
-      const value = ['name', 'value', 'labelledBy', 'labelled'].indexOf(prop) !== -1 ? 'test' : true;
+      const value = ['name', 'value', 'labelledBy', 'labelled', 'describedBy'].indexOf(prop) !== -1 ? 'test' : true;
       
       describe(`#${prop}`, function() {
         it('should set by property', function() {
           el[prop] = value;
           expect(el[prop]).to.equal(value);
           
-          if (prop !== 'invalid' && prop !== 'labelledBy' && prop !== 'labelled') {
+          if (prop !== 'invalid' && prop !== 'labelledBy' && prop !== 'labelled' && prop !== 'describedBy') {
             expect(el._elements.input[prop]).to.equal(value);
           }
         });
@@ -105,12 +105,12 @@ describe('BaseFormField', function() {
           el.setAttribute(prop, value);
           expect(el[prop]).to.equal(value);
   
-          if (prop !== 'invalid' && prop !== 'labelledBy' && prop !== 'labelled') {
+          if (prop !== 'invalid' && prop !== 'labelledBy' && prop !== 'labelled' && prop !== 'describedBy') {
             expect(el._elements.input[prop]).to.equal(value);
           }
         });
     
-        if (prop !== 'value' && prop !== 'labelledBy' && prop !== 'labelled') {
+        if (prop !== 'value' && prop !== 'labelledBy' && prop !== 'labelled' && prop !== 'describedBy') {
           it('should be reflected', function() {
             el[prop] = value;
             
@@ -155,6 +155,27 @@ describe('BaseFormField', function() {
     
         expect(label.getAttribute('for')).to.equal(example._elements.input.id);
         expect(example._elements.input.getAttribute('aria-labelledby')).to.equal(label.id);
+      });
+    });
+
+    describe('#describedBy', function() {
+      it('should remove old for assignments', function() {
+        const label = document.createElement('label');
+        const example = document.createElement('coral-formfield-element');
+    
+        label.id = commons.getUID();
+        label.textContent = 'label';
+    
+        helpers.target.appendChild(label);
+        helpers.target.appendChild(example);
+        
+        example.describedBy = label.id;
+    
+        expect(example._elements.input.getAttribute('aria-describedby')).to.equal(label.id);
+
+        example.describedBy = null;
+
+        expect(example._elements.input.getAttribute('aria-describedby')).to.be.null;
       });
     });
     

@@ -140,25 +140,65 @@ class Step extends BaseComponent(HTMLElement) {
   /**
     Reflects the <code>aria-label</code> attribute to the marker dot for cases where no visible label is provided for the Step.
     @type {?String}
-    @default ''
+    @default null
     @htmlattribute labelled
-    @htmlattributereflected
     @memberof Coral.Step#
   */
   get labelled() {
-    return this._labelled || this.getAttribute('labelled') || this._elements.stepMarkerContainer.getAttribute('aria-label') || '';
+    return this._elements.stepMarkerContainer.getAttribute('aria-label');
   }
   set labelled(value) {
-    this._labelled = transform.string(value);
-    this._reflectAttribute('labelled', this._labelled);
+    value = transform.string(value);
     if (value) {
-      this._elements.stepMarkerContainer.setAttribute('aria-label', this.labelled);
+      this._elements.stepMarkerContainer.setAttribute('aria-label', value);
       this._elements.stepMarkerContainer.removeAttribute('aria-hidden');
     }
     else {
       this._elements.stepMarkerContainer.removeAttribute('aria-label');
-      this._elements.stepMarkerContainer.setAttribute('aria-hidden', 'true');
+      if (!this.labelledBy) {
+        this._elements.stepMarkerContainer.setAttribute('aria-hidden', 'true');
+      }
     }
+  }
+
+  /**
+    Reflects the <code>aria-labelledby</code> attribute to the marker dot for cases where no visible label is provided for the Step, 
+    and the Step is labelled by an external element.
+    @type {?String}
+    @default null
+    @htmlattribute labelledby
+    @memberof Coral.Step#
+  */
+  get labelledBy() {
+    return this._elements.stepMarkerContainer.getAttribute('aria-labelledby');
+  }
+  set labelledBy(value) {
+    value = transform.string(value);
+    if (value) {
+      this._elements.stepMarkerContainer.setAttribute('aria-labelledby', value);
+      this._elements.stepMarkerContainer.removeAttribute('aria-hidden');
+    }
+    else {
+      this._elements.stepMarkerContainer.removeAttribute('aria-labelledby');
+      if (!this.labelled) {
+        this._elements.stepMarkerContainer.setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+
+    /**
+    Reflects the <code>aria-describedby</code> attribute to the link element.
+    @type {?String}
+    @default null
+    @htmlattribute describedby
+    @memberof Coral.Step#
+  */
+  get describedBy() {
+    return this._elements.link.getAttribute('aria-describedby');
+  }
+  set describedBy(value) {
+    value = transform.string(value);
+    this._elements.link[value ? 'setAttribute' : 'removeAttribute']('aria-describedby', value);
   }
   
   /**
@@ -256,9 +296,17 @@ class Step extends BaseComponent(HTMLElement) {
   }
   
   get _contentZones() { return {'coral-step-label': 'label'}; }
+
+  /** @ignore */
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      labelledby: 'labelledBy',
+      describedby: 'describedBy',
+    });
+  }
   
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat(['selected', 'target', 'disabled', 'labelled']); }
+  static get observedAttributes() { return super.observedAttributes.concat(['selected', 'target', 'disabled', 'labelled', 'labelledby', 'describedby']); }
   
   /** @ignore */
   connectedCallback() {
