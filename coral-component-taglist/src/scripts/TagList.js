@@ -312,6 +312,11 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
     detachedItem.removeAttribute('tabindex');
     detachedItem._host = undefined;
     
+    //if all tags are removed focus should move to previously focused element i.e parent element 
+    if (this._itemToFocusAfterDelete && this.parentElement && (detachedItem === this._itemToFocusAfterDelete)) {
+        this._itemToFocusAfterDelete = this.parentElement;
+    }
+
     if (this._itemToFocusAfterDelete) {
       this._itemToFocusAfterDelete.focus();
     }
