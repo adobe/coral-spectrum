@@ -215,7 +215,7 @@ describe('BaseOverlay', function() {
           // we use transitionEnd instead of coral-overlay:close since the silent setter was used
           commons.transitionEnd(overlay, function() {
             expect(overlay.style.display).to.equal('none', 'overlay should be set to "display:none" now');
-            expect(overlay.style.visibility).to.equal('initial', 'overlay should be set to "visibility:initial" now');
+            expect(overlay.style.visibility).to.equal('visible', 'overlay should be set to "visibility:initial" now');
         
             done();
           });
@@ -733,33 +733,39 @@ describe('BaseOverlay', function() {
     });
     
     describe('tabcapture', function() {
-      it('should focus on the last focusable element when top tab capture focused', function() {
+      it('should focus on the last focusable element when top tab capture focused', function(done) {
         overlay.insertAdjacentHTML('afterbegin', window.__html__['BaseOverlay.someButtons.html']);
     
         var button2 = overlay.querySelector('#button2');
     
         overlay.open = true;
+
+        helpers.next(function() {
+          overlay.querySelector('[coral-tabcapture]').focus();
   
-        overlay.querySelector('[coral-tabcapture]').focus();
-  
-        helpers.event('focus', overlay.querySelector('[coral-tabcapture]'));
-        expect(document.activeElement).to.equal(button2);
+          helpers.event('focus', overlay.querySelector('[coral-tabcapture]'));
+          expect(document.activeElement).to.equal(button2);
+          done();
+        });
       });
   
-      it('should focus on the first focusable element when intermediate tab capture focused', function() {
+      it('should focus on the first focusable element when intermediate tab capture focused', function(done) {
         overlay.insertAdjacentHTML('afterbegin', window.__html__['BaseOverlay.someButtons.html']);
     
         var button1 = overlay.querySelector('#button1');
     
         overlay.open = true;
-    
-        overlay.querySelectorAll('[coral-tabcapture]')[1].focus();
-        // for FF
-        helpers.event('focus', overlay.querySelectorAll('[coral-tabcapture]')[1]);
-        expect(document.activeElement).to.equal(button1);
+
+        helpers.next(function() {
+          overlay.querySelectorAll('[coral-tabcapture]')[1].focus();
+          // for FF
+          helpers.event('focus', overlay.querySelectorAll('[coral-tabcapture]')[1]);
+          expect(document.activeElement).to.equal(button1);
+          done();
+        });
       });
   
-      it('should focus on the last focusable element when last tab capture focused', function() {
+      it('should focus on the last focusable element when last tab capture focused', function(done) {
         overlay = new OverlayDummy2();
         helpers.target.appendChild(overlay);
   
@@ -769,10 +775,13 @@ describe('BaseOverlay', function() {
     
         overlay.open = true;
     
-        overlay.querySelectorAll('[coral-tabcapture]')[2].focus();
-        // for FF
-        helpers.event('focus', overlay.querySelectorAll('[coral-tabcapture]')[2]);
-        expect(document.activeElement).to.equal(button2);
+        helpers.next(function() {
+          overlay.querySelectorAll('[coral-tabcapture]')[2].focus();
+          // for FF
+          helpers.event('focus', overlay.querySelectorAll('[coral-tabcapture]')[2]);
+          expect(document.activeElement).to.equal(button2);
+          done();
+        });
       });
   
       it('should position tabcapture elements correctly on show', function(done) {
@@ -1192,7 +1201,7 @@ describe('BaseOverlay', function() {
             setTimeout(function() {
               expect(overlay.open).to.be.false;
               expect(overlay.style.display).to.equal('none');
-              expect(overlay.style.visibility).to.equal('initial');
+              expect(overlay.style.visibility).to.equal('visible');
             
               // Restore fade time
               BaseOverlay.FADETIME = FADETIME;
