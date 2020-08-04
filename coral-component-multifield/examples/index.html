@@ -63,7 +63,7 @@
 
       <h2 class="coral--Heading--S">Default</h2>
       <div class="markup">
-        <coral-multifield>
+        <coral-multifield aria-label="Default multifield">
           <coral-multifield-item>
             <input is="coral-textfield" aria-label="input" type="text" value="Basel"/>
           </coral-multifield-item>
@@ -76,9 +76,9 @@
 
       <h2 class="coral--Heading--S">Nested multifield</h2>
       <div class="markup">
-        <coral-multifield>
+        <coral-multifield aria-label="Fieldsets">
           <coral-multifield-item>
-            <coral-multifield>
+            <coral-multifield aria-label="Fieldset">
               <coral-multifield-item></coral-multifield-item>
               <coral-multifield-item></coral-multifield-item>
               <button coral-multifield-add type="button" is="coral-button">Add a field</button>
@@ -87,9 +87,9 @@
               </template>
             </coral-multifield>
           </coral-multifield-item>
-          <button coral-multifield-add type="button" is="coral-button">Add a field</button>
+          <button coral-multifield-add type="button" is="coral-button">Add a fieldset</button>
           <template coral-multifield-template>
-            <coral-multifield>
+            <coral-multifield aria-label="Fieldset">
               <coral-multifield-item></coral-multifield-item>
               <coral-multifield-item></coral-multifield-item>
               <button coral-multifield-add type="button" is="coral-button">Add a field</button>
@@ -107,6 +107,7 @@
         <script>
           window.addEventListener('load', function() {
             var multifield = new Coral.Multifield();
+            multifield.setAttribute('aria-label', 'Multifield rendered with JS');
             var input = document.createElement('input', {is: 'coral-textfield'});
             input.setAttribute('aria-label', 'input');
             multifield.template.content.appendChild(input);

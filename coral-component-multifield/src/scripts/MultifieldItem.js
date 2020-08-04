@@ -14,6 +14,7 @@ import {BaseComponent} from '../../../coral-base-component';
 import '../../../coral-component-button';
 import item from '../templates/item';
 import {DragAction} from '../../../coral-dragaction';
+import {i18n, transform, commons} from '../../../coral-utils';
 
 const CLASSNAME = '_coral-Multifield-item';
 
@@ -35,7 +36,11 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
       // Create or fetch the content zones
       content: this.querySelector('coral-multifield-item-content') || document.createElement('coral-multifield-item-content')
     };
-    item.call(this._elements);
+
+    const uid = this.id || commons.getUID();
+    this.setAttribute('id', uid);
+    this._elements.content.setAttribute('id', `${uid}-content`);
+    item.call(this._elements, {i18n, uid});
   }
   
   /**
@@ -57,6 +62,33 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
       }
     });
   }
+
+  /**
+   Whether the item is set to be reorder using the keyboard
+   
+   @type {boolean}
+   @private
+   */
+  get _dragging() {
+    return this.__dragging || false;
+  }
+  set _dragging(value) {
+    this.__dragging = transform.boolean(value);
+    if (this.__dragging) {
+      // Setting role="application" to the move button forces 
+      // NVDA and JAWS screen readers into forms mode, 
+      // so arrow keys can be used to reorder.
+      this._elements.move.setAttribute('role', 'application');
+    }
+    else {
+      // when reordering stops, restore the default role for the move button
+      this._elements.move.removeAttribute('role');
+    }
+    // aria-grabbed, may be deprecated in WAI-ARIA 1.1, but it is still reported by NVDA as "draggable" or "dragging"
+    this._elements.move.setAttribute('aria-grabbed', this.__dragging);
+    this._elements.move.setAttribute('aria-pressed', this.__dragging);
+    this._elements.move.selected = this.__dragging;
+  }
   
   get _contentZones() { return {'coral-multifield-item-content': 'content'}; }
   
@@ -75,8 +107,8 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
     const templateHandleNames = ['move', 'remove'];
     
     // Render the main template
-    fragment.appendChild(this._elements.move);
     fragment.appendChild(this._elements.remove);
+    fragment.appendChild(this._elements.move);
   
     const content = this._elements.content;
   
