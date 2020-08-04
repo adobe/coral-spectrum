@@ -215,7 +215,7 @@ describe('BaseOverlay', function() {
           // we use transitionEnd instead of coral-overlay:close since the silent setter was used
           commons.transitionEnd(overlay, function() {
             expect(overlay.style.display).to.equal('none', 'overlay should be set to "display:none" now');
-            expect(overlay.style.visibility).to.equal('visible', 'overlay should be set to "visibility:initial" now');
+            expect(overlay.style.visibility).to.equal('visible', 'overlay should be set to "visibility:visible" now');
         
             done();
           });
