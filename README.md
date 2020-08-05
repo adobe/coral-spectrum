@@ -228,6 +228,16 @@ If icons are not displayed, ensure the path to the styles and icons are set e.g.
 <script data-coral-icons="dist/icons/" src="dist/bundle.min.js"></script>
 ```
 
+If icons still do not display, you can try setting them to display as inline
+SVGs, instead of external resources. Coral Spectrum will default to external
+resources on browsers other than IE11. Using the previous example, this option
+can be set with:
+
+```html
+<link rel="stylesheet" href="dist/style.min.css">
+<script data-coral-icons="dist/icons/" data-coral-icons-external="off" src="dist/bundle.min.js"></script>
+```
+
 **Note:** Calendar, Clock and Datepicker components will leverage [moment.js](http://momentjs.com/) if available. 
 
 ## Contributing
