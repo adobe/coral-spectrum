@@ -140,17 +140,19 @@ class Step extends BaseComponent(HTMLElement) {
   /**
     Reflects the <code>aria-label</code> attribute to the marker dot for cases where no visible label is provided for the Step.
     @type {?String}
-    @default null
+    @default ''
     @htmlattribute labelled
+    @htmlattributereflected
     @memberof Coral.Step#
   */
   get labelled() {
-    return this._elements.stepMarkerContainer.getAttribute('aria-label');
+    return this._labelled || this.getAttribute('labelled') || this._elements.stepMarkerContainer.getAttribute('aria-label') || '';
   }
   set labelled(value) {
-    value = transform.string(value);
-    if (value) {
-      this._elements.stepMarkerContainer.setAttribute('aria-label', value);
+    this._labelled = transform.string(value);
+    this._reflectAttribute('labelled', value || false);
+    if (this._labelled !== '') {
+      this._elements.stepMarkerContainer.setAttribute('aria-label', this._labelled);
       this._elements.stepMarkerContainer.removeAttribute('aria-hidden');
     }
     else {
@@ -165,17 +167,19 @@ class Step extends BaseComponent(HTMLElement) {
     Reflects the <code>aria-labelledby</code> attribute to the marker dot for cases where no visible label is provided for the Step, 
     and the Step is labelled by an external element.
     @type {?String}
-    @default null
+    @default ''
     @htmlattribute labelledby
+    @htmlattributereflected
     @memberof Coral.Step#
   */
   get labelledBy() {
-    return this._elements.stepMarkerContainer.getAttribute('aria-labelledby');
+    return this._labelledBy || this.getAttribute('labelledby') || this._elements.stepMarkerContainer.getAttribute('aria-labelledby') || '';
   }
   set labelledBy(value) {
-    value = transform.string(value);
-    if (value) {
-      this._elements.stepMarkerContainer.setAttribute('aria-labelledby', value);
+    this._labelledBy = transform.string(value);
+    this._reflectAttribute('labelledby', value || false);
+    if (this._labelledBy !== '') {
+      this._elements.stepMarkerContainer.setAttribute('aria-labelledby', this._labelledBy);
       this._elements.stepMarkerContainer.removeAttribute('aria-hidden');
     }
     else {
@@ -189,16 +193,23 @@ class Step extends BaseComponent(HTMLElement) {
     /**
     Reflects the <code>aria-describedby</code> attribute to the link element.
     @type {?String}
-    @default null
+    @default ''
     @htmlattribute describedby
+    @htmlattributereflected
     @memberof Coral.Step#
   */
   get describedBy() {
-    return this._elements.link.getAttribute('aria-describedby');
+    return this._describedBy || this.getAttribute('describedby') || this._elements.link.getAttribute('aria-describedby') || '';
   }
   set describedBy(value) {
-    value = transform.string(value);
-    this._elements.link[value ? 'setAttribute' : 'removeAttribute']('aria-describedby', value);
+    this._describedBy = transform.string(value);
+    this._reflectAttribute('describedby', value || false);
+    if (this._describedBy !== '') {
+      this._elements.link.setAttribute('aria-describedby', this._describedBy);
+    }
+    else {
+      this._elements.link.removeAttribute('aria-describedby');
+    }
   }
   
   /**
