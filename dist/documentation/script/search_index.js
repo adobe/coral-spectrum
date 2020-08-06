@@ -1872,6 +1872,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "coral-spectrum/coral-base-formfield/src/scripts/baseformfield.js~baseformfield#describedby",
+    "class/coral-spectrum/coral-base-formfield/src/scripts/BaseFormField.js~BaseFormField.html#instance-member-describedBy",
+    "coral-spectrum/coral-base-formfield/src/scripts/BaseFormField.js~BaseFormField#describedBy",
+    "member"
+  ],
+  [
     "coral-spectrum/coral-base-formfield/src/scripts/baseformfield.js~baseformfield#invalid",
     "class/coral-spectrum/coral-base-formfield/src/scripts/BaseFormField.js~BaseFormField.html#instance-member-invalid",
     "coral-spectrum/coral-base-formfield/src/scripts/BaseFormField.js~BaseFormField#invalid",
@@ -7332,6 +7338,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "coral-spectrum/coral-component-steplist/src/scripts/step.js~step#describedby",
+    "class/coral-spectrum/coral-component-steplist/src/scripts/Step.js~Step.html#instance-member-describedBy",
+    "coral-spectrum/coral-component-steplist/src/scripts/Step.js~Step#describedBy",
+    "member"
+  ],
+  [
     "coral-spectrum/coral-component-steplist/src/scripts/step.js~step#disabled",
     "class/coral-spectrum/coral-component-steplist/src/scripts/Step.js~Step.html#instance-member-disabled",
     "coral-spectrum/coral-component-steplist/src/scripts/Step.js~Step#disabled",
@@ -7353,6 +7365,12 @@ window.esdocSearchIndex = [
     "coral-spectrum/coral-component-steplist/src/scripts/step.js~step#labelled",
     "class/coral-spectrum/coral-component-steplist/src/scripts/Step.js~Step.html#instance-member-labelled",
     "coral-spectrum/coral-component-steplist/src/scripts/Step.js~Step#labelled",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-steplist/src/scripts/step.js~step#labelledby",
+    "class/coral-spectrum/coral-component-steplist/src/scripts/Step.js~Step.html#instance-member-labelledBy",
+    "coral-spectrum/coral-component-steplist/src/scripts/Step.js~Step#labelledBy",
     "member"
   ],
   [

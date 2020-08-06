@@ -123,6 +123,38 @@
           <coral-step disabled>Step 5</coral-step>
         </coral-steplist>
       </div>
+
+      <h2 class="coral-Heading--S">labelled, labelledBy and describedBy</h2>
+      <div class="markup">
+        <coral-steplist size="S" interaction="on" id="labelled-steps-example">
+          <coral-step labelled="Step 1"></coral-step>
+          <coral-step labelled="Step 2" labelledby="labelled-steps-example-label" describedby="labelled-steps-example-desc" selected></coral-step>
+          <coral-step labelled="Step 3"></coral-step>
+          <coral-step labelled="Step 4"></coral-step>
+          <coral-step labelled="Step 5"></coral-step>
+        </coral-steplist>
+        <div class="coral-Well">
+          <h3><span id="labelled-steps-example-label">Step 2</span> heading</h3>
+          <p id="labelled-steps-example-desc"><span>Step 2</span> content</p>
+        </div>
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            var stepList = document.getElementById('labelled-steps-example');
+            var spans = stepList.nextElementSibling.querySelectorAll('span');
+            function onStepListChange(event) {
+              var stepLabel = event.detail.selection.getAttribute('labelled');
+              for (var i = 0; i < spans.length; i++) {
+                spans[i].textContent = stepLabel;
+              }
+              event.detail.oldSelection.removeAttribute('labelledby');
+              event.detail.selection.setAttribute('labelledby', stepList.id + '-label');
+              event.detail.oldSelection.removeAttribute('describedby');
+              event.detail.selection.setAttribute('describedby', stepList.id + '-desc');
+            }
+            stepList.addEventListener('coral-steplist:change', onStepListChange);
+          });
+        </script>
+      </div>
     </main>
   </body>
 </html>

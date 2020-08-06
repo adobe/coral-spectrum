@@ -409,6 +409,13 @@ const button = new Button();</code>
 <pre><code class="lang-html"><code class="source-code prettyprint">&lt;link rel=&quot;stylesheet&quot; href=&quot;dist/style.min.css&quot;&gt;
 &lt;script data-coral-icons=&quot;dist/icons/&quot; src=&quot;dist/bundle.min.js&quot;&gt;&lt;/script&gt;</code>
 </code></pre>
+<p>If icons still do not display, you can try setting them to display as inline
+SVGs, instead of external resources. Coral Spectrum will default to external
+resources on browsers other than IE11. Using the previous example, this option
+can be set with:</p>
+<pre><code class="lang-html"><code class="source-code prettyprint">&lt;link rel=&quot;stylesheet&quot; href=&quot;dist/style.min.css&quot;&gt;
+&lt;script data-coral-icons=&quot;dist/icons/&quot; data-coral-icons-external=&quot;off&quot; src=&quot;dist/bundle.min.js&quot;&gt;&lt;/script&gt;</code>
+</code></pre>
 <p><strong>Note:</strong> Calendar, Clock and Datepicker components will leverage <a href="http://momentjs.com/">moment.js</a> if available. </p>
 <h2 id="contributing">Contributing</h2><p>Check out the <a href="https://github.com/adobe/coral-spectrum/blob/master/.github/CONTRIBUTING.md">contributing guidelines</a>.</p>
 <h3 id="building-and-testing">Building and Testing</h3><p>Run the following commands first :</p>

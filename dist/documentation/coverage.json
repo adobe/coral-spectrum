@@ -1,7 +1,7 @@
 {
   "coverage": "64.75%",
-  "expectCount": 3637,
-  "actualCount": 2355,
+  "expectCount": 3643,
+  "actualCount": 2359,
   "files": {
     "coral-spectrum/coral-base-button/src/scripts/BaseButton.js": {
       "expectCount": 6,
@@ -49,15 +49,15 @@
       ]
     },
     "coral-spectrum/coral-base-formfield/src/scripts/BaseFormField.js": {
-      "expectCount": 25,
-      "actualCount": 19,
+      "expectCount": 26,
+      "actualCount": 20,
       "undocumentLines": [
         16,
         51,
         69,
         147,
-        369,
-        377
+        385,
+        394
       ]
     },
     "coral-spectrum/coral-base-labellable/src/scripts/BaseLabellable.js": {
@@ -1967,20 +1967,22 @@
       "undocumentLines": []
     },
     "coral-spectrum/coral-component-steplist/src/scripts/Step.js": {
-      "expectCount": 25,
-      "actualCount": 14,
+      "expectCount": 30,
+      "actualCount": 17,
       "undocumentLines": [
         20,
         35,
         74,
         131,
         152,
-        177,
-        202,
-        212,
-        220,
-        224,
-        258
+        179,
+        205,
+        228,
+        253,
+        263,
+        271,
+        275,
+        309
       ]
     },
     "coral-spectrum/coral-component-steplist/src/scripts/StepLabel.js": {

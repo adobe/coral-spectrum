@@ -572,7 +572,23 @@ class BaseFormField extends superClass {
     this.setAttribute(&apos;aria-invalid&apos;, this._invalid);
     this.classList.toggle(&apos;is-invalid&apos;, this._invalid);
   }
+
+  /**
+   Reflects the &lt;code&gt;aria-describedby&lt;/code&gt; attribute to the labellable element e.g. inner input.
+   
+   @type {String}
+   @default null
+   @htmlattribute describedby
+   */
+  get describedBy() {
+    return this._getLabellableElement().getAttribute(&apos;aria-describedby&apos;);
+  }
+  set describedBy(value) {
+    value = transform.string(value);
   
+    this._getLabellableElement()[value ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-describedby&apos;, value);
+  }
+
   /**
    Reflects the &lt;code&gt;aria-label&lt;/code&gt; attribute to the labellable element e.g. inner input.
    
@@ -790,6 +806,7 @@ class BaseFormField extends superClass {
   
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
+      describedby: &apos;describedBy&apos;,
       labelledby: &apos;labelledBy&apos;,
       readonly: &apos;readOnly&apos;,
     });
@@ -798,6 +815,7 @@ class BaseFormField extends superClass {
   // We don&apos;t want to watch existing attributes for components that extend native HTML elements
   static get _nativeObservedAttributes() {
     return super.observedAttributes.concat([
+      &apos;describedby&apos;,
       &apos;labelled&apos;,
       &apos;labelledby&apos;,
       &apos;invalid&apos;
@@ -807,6 +825,7 @@ class BaseFormField extends superClass {
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
+      &apos;describedby&apos;,
       &apos;labelled&apos;,
       &apos;labelledby&apos;,
       &apos;invalid&apos;,
