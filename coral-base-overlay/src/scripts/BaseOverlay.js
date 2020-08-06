@@ -623,8 +623,8 @@ const BaseOverlay = (superClass) => class extends superClass {
 
               // When the CSS transition has finished, set visibility to browser default, `visibility: visible`,
               // to ensure that the overlay will be included in accessibility name or description
-              // of an element that references the overlay using `aria-labelledby` or `aria-describedby`.
-              this.style.visibility = 'initial';
+              // of an element that references it using `aria-labelledby` or `aria-describedby`.
+              this.style.visibility = 'visible';
 
               // makes sure the focus is returned per accessibility recommendations
               this._handleReturnFocus();
@@ -1009,6 +1009,13 @@ const BaseOverlay = (superClass) => class extends superClass {
         // Show the backdrop again
         this._showBackdrop();
       }
+    }
+    else {
+      // If overlay is closed, make sure that it is hidden with `display: none`,
+      // but set `visibility: visible` to ensure that the overlay will be included in accessibility name or description
+      // of an element that references it using `aria-labelledby` or `aria-describedby`.
+      this.style.display = 'none';
+      this.style.visibility = 'visible';
     }
   }
 
