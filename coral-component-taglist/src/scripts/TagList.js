@@ -72,6 +72,8 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
     this._labellableElement = this;
   
     this._itemToFocusAfterDelete = null;
+    //track previously focused element before taglist
+    this._PreviouslyFocusedElement = null;
   }
   
   /**
@@ -312,9 +314,9 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
     detachedItem.removeAttribute('tabindex');
     detachedItem._host = undefined;
     
-    //if all tags are removed focus should move to previously focused element i.e parent element 
-    if (this._itemToFocusAfterDelete && this.parentElement && (detachedItem === this._itemToFocusAfterDelete)) {
-        this._itemToFocusAfterDelete = this.parentElement;
+    //if all tags are removed focus should move to previously focused element 
+    if (this._itemToFocusAfterDelete && this._PreviouslyFocusedElement && (detachedItem === this._itemToFocusAfterDelete)) {
+        this._itemToFocusAfterDelete = this._PreviouslyFocusedElement;
     }
 
     if (this._itemToFocusAfterDelete) {
@@ -330,6 +332,9 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @private */
   _onItemFocus(event) {
     if (!this.disabled) {
+        if(!this._PreviouslyFocusedElement){
+           this._PreviouslyFocusedElement = event.relatedTarget;
+        }	
       this.setAttribute('aria-live', 'polite');
       
       const tag = event.matchedTarget;
