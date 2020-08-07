@@ -474,6 +474,7 @@ describe('Multifield', function() {
         });
       });
     });
+
     describe('keyboard reordering', function() {
       it('should toggle aria-grabbed and force forms mode when move button is clicked', function() {
         const el = helpers.build(window.__html__['Multifield.base.html']);
@@ -486,16 +487,13 @@ describe('Multifield', function() {
         expect(moveButton.getAttribute('aria-roledescription')).to.equal(i18n.get('reorder_drag_handle'));
         expect(moveButton.getAttribute('title')).to.equal(i18n.get('reorder_hint'));
         expect(moveButton.getAttribute('aria-grabbed')).to.equal('false');
-        expect(moveButton.getAttribute('aria-pressed')).to.equal('false');
         moveButton.focus();
         moveButton.click();
         expect(moveButton.getAttribute('role')).to.equal('application');
         expect(moveButton.getAttribute('aria-grabbed')).to.equal('true');
-        expect(moveButton.getAttribute('aria-pressed')).to.equal('true');
         moveButton.click();
         expect(moveButton.getAttribute('role')).to.be.null;
         expect(moveButton.getAttribute('aria-grabbed')).to.equal('false');
-        expect(moveButton.getAttribute('aria-pressed')).to.equal('false');
       });
 
       it('ArrowUp should move current item before previous item in the collection', function(done) {
@@ -590,7 +588,6 @@ describe('Multifield', function() {
             expect(items[1]).to.equal(el.items.getAll()[1]);
             expect(moveButton.getAttribute('role')).to.be.null;
             expect(moveButton.getAttribute('aria-grabbed')).to.equal('false');
-            expect(moveButton.getAttribute('aria-pressed')).to.equal('false');
             done();
           });
         });
@@ -598,6 +595,12 @@ describe('Multifield', function() {
 
       it('Clicking move button should commit the move, setting item to its new position in the collection', function(done) {
         const el = helpers.build(window.__html__['Multifield.base.html']);
+        var changeSpy = sinon.spy();
+        var beforeItemOrderSpy = sinon.spy();
+        var itemOrderSpy = sinon.spy();
+        el.addEventListener('change', changeSpy);
+        el.addEventListener('coral-multifield:beforeitemorder', beforeItemOrderSpy);
+        el.addEventListener('coral-multifield:itemorder', itemOrderSpy);
         el.items.add({});
         el.items.add({});
         el.items.add({});
@@ -612,13 +615,15 @@ describe('Multifield', function() {
             expect(items[1]).to.equal(el.items.getAll()[2]);
             expect(moveButton.getAttribute('role')).to.be.null;
             expect(moveButton.getAttribute('aria-grabbed')).to.equal('false');
-            expect(moveButton.getAttribute('aria-pressed')).to.equal('false');
+            expect(changeSpy.calledOnce).to.be.true;
+            expect(beforeItemOrderSpy.calledOnce).to.be.true;
+            expect(itemOrderSpy.calledOnce).to.be.true;
             done();
           });
         });
       });
 
-      it('Bluring move button should commit the move, setting item to its new position in the collection', function(done) {
+      it('Blurring move button should commit the move, setting item to its new position in the collection', function(done) {
         const el = helpers.build(window.__html__['Multifield.base.html']);
         el.items.add({});
         el.items.add({});
@@ -634,7 +639,6 @@ describe('Multifield', function() {
             expect(items[1]).to.equal(el.items.getAll()[2]);
             expect(moveButton.getAttribute('role')).to.be.null;
             expect(moveButton.getAttribute('aria-grabbed')).to.equal('false');
-            expect(moveButton.getAttribute('aria-pressed')).to.equal('false');
             done();
           });
         });

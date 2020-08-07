@@ -36,9 +36,11 @@ class Multifield extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
+
+    this.setAttribute('id', this.id || commons.getUID());
     
     // Attach events
-    this._delegateEvents({
+    const events = {
       'coral-dragaction:dragstart coral-multifield-item': '_onDragStart',
       'coral-dragaction:drag coral-multifield-item': '_onDrag',
       'coral-dragaction:dragend coral-multifield-item': '_onDragEnd',
@@ -55,10 +57,13 @@ class Multifield extends BaseComponent(HTMLElement) {
       'key:esc [coral-multifield-move]': '_onMoveItemEsc',
       'capture:blur [coral-multifield-move]': '_onBlurDragHandle',
       'change coral-multifield-item-content > input': '_onInputChange'
-    });
+    };
+
+    events[`global:key:escape #${this.id} > [coral-multifield-move]`] = '_onMoveItemEsc';
     
+    this._delegateEvents(events);
+
     // Templates
-    this.setAttribute('id', this.id || commons.getUID());
     this._elements = {
       template: this.querySelector(`#${this.id} > template[coral-multifield-template]`) || document.createElement('template')
     };
@@ -243,7 +248,7 @@ class Multifield extends BaseComponent(HTMLElement) {
   _onClickDragHandle(event) {
     event.preventDefault();
     event.stopPropagation();
-    const multiFieldItem = event.target.closest('coral-multifield-item');
+    const multiFieldItem = event.matchedTarget.closest('coral-multifield-item');
     this._toggleItemDragging(multiFieldItem, !multiFieldItem._dragging);
   }
 
@@ -252,10 +257,11 @@ class Multifield extends BaseComponent(HTMLElement) {
    * @ignore
    */
   _onBlurDragHandle(event) {
-    const dragHandle = event.target;
+    const dragHandle = event.matchedTarget;
+    const multiFieldItem = dragHandle.closest('coral-multifield-item');
     commons.nextFrame(() => {
       if (document.activeElement !== dragHandle) {
-        this._toggleItemDragging(event.target.closest('coral-multifield-item'));
+        this._toggleItemDragging(multiFieldItem, false);
       }
     });
   }
@@ -265,7 +271,7 @@ class Multifield extends BaseComponent(HTMLElement) {
    * @ignore
    */
   _onMoveItemUp(event) {
-    const dragHandle = event.target;
+    const dragHandle = event.matchedTarget;
     const dragElement = dragHandle.closest('coral-multifield-item');
     if (!dragElement._dragging) {
       return;
@@ -286,7 +292,7 @@ class Multifield extends BaseComponent(HTMLElement) {
    * @ignore
    */
   _onMoveItemDown(event) {
-    const dragHandle = event.target;
+    const dragHandle = event.matchedTarget;
     const dragElement = dragHandle.closest('coral-multifield-item');
     if (!dragElement._dragging) {
       return;
@@ -308,7 +314,7 @@ class Multifield extends BaseComponent(HTMLElement) {
    * @ignore
    */
   _onMoveItemHome(event) {
-    const dragHandle = event.target;
+    const dragHandle = event.matchedTarget;
     let dragElement = dragHandle.closest('coral-multifield-item');
     if (!dragElement._dragging) {
       return;
@@ -329,7 +335,7 @@ class Multifield extends BaseComponent(HTMLElement) {
    * @ignore
    */
   _onMoveItemEnd(event) {
-    const dragHandle = event.target;
+    const dragHandle = event.matchedTarget;
     let dragElement = dragHandle.closest('coral-multifield-item');
     if (!dragElement._dragging) {
       return;
@@ -350,14 +356,14 @@ class Multifield extends BaseComponent(HTMLElement) {
    * @ignore
    */
   _onMoveItemEsc(event) {
-    const dragHandle = event.target;
+    const dragHandle = event.matchedTarget;
     const multiFieldItem = dragHandle.closest('coral-multifield-item');
     if (multiFieldItem._dragging && this._oldBefore && this._before) {
       event.stopPropagation();
       this.insertBefore(multiFieldItem, this._before);
       dragHandle.focus();
     }
-    this._toggleItemDragging(multiFieldItem);
+    this._toggleItemDragging(multiFieldItem, false);
   }
   
   _onInputChange(event) {
