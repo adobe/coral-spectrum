@@ -87,17 +87,14 @@ class SelectableCollection extends Collection {
    @protected
    */
   _getPreviousSelectable(item) {
-    let sibling = item.previousElementSibling;
-    while (sibling) {
-      if (sibling.matches(this._selectableItemSelector)) {
-        break;
-      }
-      else {
-        sibling = sibling.previousElementSibling;
-      }
+    var items = this._getSelectableItems();
+    var index = items.indexOf(item);
+  
+    // in case the item is not specified, or it is not inside the collection, we need to return the first selectable
+    if (index === -1) {
+      return items[0] || null;
     }
-    
-    return sibling || item;
+    return index === 0 ? item : items[index - 1];
   }
   
   /**
@@ -112,17 +109,14 @@ class SelectableCollection extends Collection {
    @protected
    */
   _getNextSelectable(item) {
-    let sibling = item.nextElementSibling;
-    while (sibling) {
-      if (sibling.matches(this._selectableItemSelector)) {
-        break;
-      }
-      else {
-        sibling = sibling.nextElementSibling;
-      }
+    var items = this._getSelectableItems();
+    var index = items.indexOf(item);
+  
+    // in case the item is not specified, or it is not inside the collection, we need to return the first selectable
+    if (index === -1) {
+      return items[0] || null;
     }
-    
-    return sibling || item;
+    return index === (items.length - 1) ? item : items[index + 1];
   }
   
   /**

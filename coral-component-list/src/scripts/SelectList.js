@@ -218,13 +218,41 @@ class SelectList extends BaseComponent(HTMLElement) {
   get _tabTarget() {
     return this.__tabTarget || null;
   }
+  
   set _tabTarget(value) {
     this.__tabTarget = value;
-  
-    // Set all but the current set _tabTarget to not be a tab target:
-    this.items.getAll().forEach((item) => {
-      item.setAttribute('tabindex', item === value ? 0 : -1);
-    });
+    if (this.groups && this._groups.getAll().length > 0) {
+      let firstFocusable;
+      // set first item or selected item to be tab target
+      this._groups.getAll().forEach((group) => {
+        const items = group.items._getSelectableItems();
+        if (items.length > 0) {
+          if (!firstFocusable) {
+            firstFocusable = items[0];
+            if (firstFocusable) {
+              firstFocusable.setAttribute('tabindex', 0);
+            }
+          }
+          items.forEach((item) => {
+            if (item === value) {
+              item.setAttribute('tabindex', 0);
+              if (firstFocusable && item !== firstFocusable) {
+                firstFocusable.setAttribute('tabindex', -1);
+              }
+            }
+            else if (item !== firstFocusable) {
+              item.setAttribute('tabindex', -1); 
+            }
+          });
+        }
+      });
+    }
+    else {
+      // Set all but the current set _tabTarget to not be a tab target:
+      this.items._getSelectableItems().forEach((item) => {
+        item.setAttribute('tabindex', !value || item === value ? 0 : -1);
+      });
+    }
   }
   
   /** @private */
@@ -277,14 +305,14 @@ class SelectList extends BaseComponent(HTMLElement) {
   /** @private */
   _focusPreviousItem(event) {
     event.preventDefault();
-    
+    event.stopPropagation();
     this._focusItem(this.items._getPreviousSelectable(event.target));
   }
   
   /** @private */
   _focusNextItem(event) {
     event.preventDefault();
-    
+    event.stopPropagation();
     this._focusItem(this.items._getNextSelectable(event.target));
   }
   
@@ -402,9 +430,14 @@ class SelectList extends BaseComponent(HTMLElement) {
    
    @private
    */
-  _resetTabTarget() {
-    const selectedItems = this.items._getAllSelected().filter(item => !item.hasAttribute('hidden'));
-    this._tabTarget = selectedItems.length ? selectedItems[0] : this.items._getSelectableItems().filter(item => !item.hasAttribute('hidden'))[0];
+  _resetTabTarget(forceFirst = false) {
+    let items = this.items._getAllSelected().filter(item => !item.hasAttribute('hidden'));
+
+    if (items.length === 0) {
+      items = this.items._getSelectableItems().filter(item => !item.hasAttribute('hidden'));
+    }
+    
+    this._tabTarget = forceFirst ? items[0] : (items.find(item => item.tabIndex === 0) || items[0]); 
   }
   
   /** @private */

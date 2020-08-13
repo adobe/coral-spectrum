@@ -196,9 +196,10 @@ const BaseList = (superClass) => class extends superClass {
   /** @ignore */
   focus() {
     if (!this.contains(document.activeElement)) {
-      const items = this._getSelectableItems();
+      const items = this._getSelectableItems().filter(item => !item.hasAttribute('hidden'));
       if (items.length > 0) {
-        items[0].focus();
+        const firstFocusable = items.find(item => item.tabIndex === 0);
+        (firstFocusable || items[0]).focus();
       }
     }
   }
