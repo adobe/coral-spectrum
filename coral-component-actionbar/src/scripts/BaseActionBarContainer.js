@@ -222,6 +222,15 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
     }
     
     const focusedItem = document.activeElement.parentNode;
+
+    // we need to check if item has 'hasAttribute' because it is not present on the document
+    const isFocusedItemInsideActionBar = this.parentNode.contains(focusedItem);
+    const isFocusedItemOffscreen = focusedItem.hasAttribute && focusedItem.hasAttribute('coral-actionbar-offscreen');
+    if (isFocusedItemInsideActionBar && isFocusedItemOffscreen) {
+      // if currently an element is focused, that should not be visible (or is no actionbar-item) => select 'more'
+      // button
+      this._elements.moreButton.focus();
+    }
     
     // hide the popover(needed to disable fade time of popover)
     this._elements.overlay.hidden = true;
@@ -241,15 +250,6 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
 
     // clear overlay
     this._elements.overlay.content.innerHTML = '';
-
-    // we need to check if item has 'hasAttribute' because it is not present on the document
-    const isFocusedItemInsideActionBar = this.parentNode.contains(focusedItem);
-    const isFocusedItemOffscreen = focusedItem.hasAttribute && focusedItem.hasAttribute('coral-actionbar-offscreen');
-    if (isFocusedItemInsideActionBar && isFocusedItemOffscreen) {
-      // if currently an element is focused, that should not be visible (or is no actionbar-item) => select 'more'
-      // button
-      this._elements.moreButton.focus();
-    }
   }
   
   _onOverlayKeyDown(event) {
