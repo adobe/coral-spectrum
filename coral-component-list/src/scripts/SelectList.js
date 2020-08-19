@@ -299,14 +299,14 @@ class SelectList extends BaseComponent(HTMLElement) {
   /** @private */
   _focusPreviousItem(event) {
     event.preventDefault();
-    
+    event.stopPropagation();
     this._focusItem(this.items._getPreviousSelectable(event.target));
   }
   
   /** @private */
   _focusNextItem(event) {
     event.preventDefault();
-    
+    event.stopPropagation();
     this._focusItem(this.items._getNextSelectable(event.target));
   }
   
