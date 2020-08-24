@@ -841,11 +841,11 @@ describe('ColumnView', function() {
         const activeItem = el.activeItem;
         activeItem.trigger('click');
         helpers.keypress('up', activeItem);
-        window.setTimeout(function() {
+        helpers.next(function() {
           expect(document.activeElement.id).to.equal(el.columns.getAll()[1].items.first().id);
           expect(document.activeElement.id).to.equal(el.activeItem.id);
           done();
-        }, 200);
+        });
       });
 
       it('ArrowDown should focus next item', function(done) {
@@ -853,11 +853,11 @@ describe('ColumnView', function() {
         const activeItem = el.activeItem;
         activeItem.trigger('click');
         helpers.keypress('down', activeItem);
-        window.setTimeout(function() {
+        helpers.next(function() {
           expect(document.activeElement.id).to.equal(el.columns.getAll()[1].items.getAll()[2].id);
           expect(document.activeElement.id).to.equal(el.activeItem.id);
           done();
-        }, 200);
+        });
       });
 
       it('ArrowRight on item with variant=drilldown should focus first item in next column', function(done) {
@@ -1301,10 +1301,10 @@ describe('ColumnView', function() {
     describe('when item is expanded', function() {
       it('should have aria-expanded equal to "true"', function(done) {
         const el = helpers.build(window.__html__['ColumnView.full.html']);
-        window.setTimeout(function() {
+        helpers.next(function() {
           expect(el.activeItem.getAttribute('aria-expanded')).to.equal('true');
           done();
-        }, 200);
+        });
       });
 
       it('should express ownership of expanded column using aria-owns', function(done) {
