@@ -11,7 +11,7 @@
  */
 
 import {helpers} from '../../../coral-utils/src/tests/helpers';
-import {tracking} from '../../../coral-utils';
+import {tracking, i18n} from '../../../coral-utils';
 import {Multifield} from '../../../coral-component-multifield';
 
 describe('Multifield', function() {
@@ -213,9 +213,27 @@ describe('Multifield', function() {
     it('should remove an item if clicking the remove button', function() {
       const el = helpers.build(window.__html__['Multifield.base.html']);
       el.items.add({});
-      el.items.getAll()[0]._elements.remove.click();
+      el.items.add({});
+      el.items.add({});
+      el.items.getAll()[1]._elements.remove.focus();
+      el.items.getAll()[1]._elements.remove.click();
       
+      expect(el.items.length).to.equal(2);
+
+      // when item is removed, focus should be restored to remove button on next element
+      expect(el.items.getAll()[1]._elements.remove).to.equal(document.activeElement);
+      document.activeElement.click();
+
+      expect(el.items.length).to.equal(1);
+
+      // when item is removed with no next item, focus should be restored to remove button on previous element
+      expect(el.items.getAll()[0]._elements.remove).to.equal(document.activeElement);
+      document.activeElement.click();
+
       expect(el.items.length).to.equal(0);
+
+      // when the last item is removed, focus should be restored to the add button
+      expect(el.querySelector('[coral-multifield-add]')).to.equal(document.activeElement);
     });
   });
 
@@ -417,6 +435,213 @@ describe('Multifield', function() {
         expect(targetData).to.have.property('targetType', 'input');
         expect(targetData).to.have.property('eventType', 'change');
         done();
+      });
+    });
+  });
+
+  describe('Accessibility', function() {
+    it('should update aria-posinset, aria-setsize and aria-label for items', function(done) {
+      const el = helpers.build(window.__html__['Multifield.base.html']);
+
+      function testPosInSet() {
+        const items = el.items.getAll();
+        items.forEach((item, index) => {
+          expect(item.getAttribute('aria-posinset')).to.equal(`${index + 1}`);
+          expect(item.getAttribute('aria-setsize')).to.equal(`${items.length}`);
+          expect(item.getAttribute('aria-label')).to.equal(`(${index + 1} of ${items.length})`);
+        });
+      }
+
+      el.items.add({});
+      el.items.add({});
+      el.items.add({});
+
+      helpers.next(() => {
+        testPosInSet();
+
+        el.items.getAll()[1]._elements.remove.focus();
+        el.items.getAll()[1]._elements.remove.click();
+        helpers.next(() => {
+          testPosInSet();
+
+          document.activeElement.click();
+
+          helpers.next(() => {
+            testPosInSet();
+
+            done();
+          });
+        });
+      });
+    });
+
+    describe('keyboard reordering', function() {
+      it('should toggle aria-grabbed and force forms mode when move button is clicked', function() {
+        const el = helpers.build(window.__html__['Multifield.base.html']);
+        el.items.add({});
+        el.items.add({});
+        el.items.add({});
+        let items = el.items.getAll();
+        let moveButton = items[1]._elements.move;
+        expect(moveButton.getAttribute('role')).to.be.null;
+        expect(moveButton.getAttribute('aria-roledescription')).to.equal(i18n.get('reorder_drag_handle'));
+        expect(moveButton.getAttribute('title')).to.equal(i18n.get('reorder_hint'));
+        expect(moveButton.getAttribute('aria-grabbed')).to.equal('false');
+        moveButton.focus();
+        moveButton.click();
+        expect(moveButton.getAttribute('role')).to.equal('application');
+        expect(moveButton.getAttribute('aria-grabbed')).to.equal('true');
+        moveButton.click();
+        expect(moveButton.getAttribute('role')).to.be.null;
+        expect(moveButton.getAttribute('aria-grabbed')).to.equal('false');
+      });
+
+      it('ArrowUp should move current item before previous item in the collection', function(done) {
+        const el = helpers.build(window.__html__['Multifield.base.html']);
+        el.items.add({});
+        el.items.add({});
+        el.items.add({});
+        let items = el.items.getAll();
+        let moveButton = items[1]._elements.move;
+        moveButton.click();
+        helpers.keypress('up', moveButton);
+        helpers.next(() => {
+          expect(items[1]).to.equal(el.items.getAll()[0]);
+          helpers.keypress('up', moveButton);
+          helpers.next(() => {
+            expect(items[1]).to.equal(el.items.getAll()[0]);
+            done();
+          });
+        });
+      });
+
+      it('ArrowDown should move current item after next item in the collection', function(done) {
+        const el = helpers.build(window.__html__['Multifield.base.html']);
+        el.items.add({});
+        el.items.add({});
+        el.items.add({});
+        let items = el.items.getAll();
+        let moveButton = items[1]._elements.move;
+        moveButton.click();
+        helpers.keypress('down', moveButton);
+        helpers.next(() => {
+          expect(items[1]).to.equal(el.items.getAll()[2]);
+          helpers.keypress('down', moveButton);
+          helpers.next(() => {
+            expect(items[1]).to.equal(el.items.getAll()[2]);
+            done();
+          });
+        });
+      });
+
+      it('Home should move current item befor first item in the collection', function(done) {
+        const el = helpers.build(window.__html__['Multifield.base.html']);
+        el.items.add({});
+        el.items.add({});
+        el.items.add({});
+        let items = el.items.getAll();
+        let moveButton = items[1]._elements.move;
+        moveButton.click();
+        helpers.keypress('home', moveButton);
+        helpers.next(() => {
+          expect(items[1]).to.equal(el.items.getAll()[0]);
+          helpers.keypress('home', moveButton);
+          helpers.next(() => {
+            expect(items[1]).to.equal(el.items.getAll()[0]);
+            done();
+          });
+        });
+      });
+
+      it('End should move current item after last item in the collection', function(done) {
+        const el = helpers.build(window.__html__['Multifield.base.html']);
+        el.items.add({});
+        el.items.add({});
+        el.items.add({});
+        let items = el.items.getAll();
+        let moveButton = items[1]._elements.move;
+        moveButton.click();
+        helpers.keypress('end', moveButton);
+        helpers.next(() => {
+          expect(items[1]).to.equal(el.items.getAll()[2]);
+          helpers.keypress('end', moveButton);
+          helpers.next(() => {
+            expect(items[1]).to.equal(el.items.getAll()[2]);
+            done();
+          });
+        });
+      });
+
+      it('Esc should cancel and should restore item to its original position in the collection', function(done) {
+        const el = helpers.build(window.__html__['Multifield.base.html']);
+        el.items.add({});
+        el.items.add({});
+        el.items.add({});
+        let items = el.items.getAll();
+        let moveButton = items[1]._elements.move;
+        moveButton.click();
+        helpers.keypress('down', moveButton);
+        helpers.next(() => {
+          expect(items[1]).to.equal(el.items.getAll()[2]);
+          helpers.keypress('esc', moveButton);
+          helpers.next(() => {
+            expect(items[1]).to.equal(el.items.getAll()[1]);
+            expect(moveButton.getAttribute('role')).to.be.null;
+            expect(moveButton.getAttribute('aria-grabbed')).to.equal('false');
+            done();
+          });
+        });
+      });
+
+      it('Clicking move button should commit the move, setting item to its new position in the collection', function(done) {
+        const el = helpers.build(window.__html__['Multifield.base.html']);
+        var changeSpy = sinon.spy();
+        var beforeItemOrderSpy = sinon.spy();
+        var itemOrderSpy = sinon.spy();
+        el.addEventListener('change', changeSpy);
+        el.addEventListener('coral-multifield:beforeitemorder', beforeItemOrderSpy);
+        el.addEventListener('coral-multifield:itemorder', itemOrderSpy);
+        el.items.add({});
+        el.items.add({});
+        el.items.add({});
+        let items = el.items.getAll();
+        let moveButton = items[1]._elements.move;
+        moveButton.click();
+        helpers.keypress('down', moveButton);
+        helpers.next(() => {
+          expect(items[1]).to.equal(el.items.getAll()[2]);
+          moveButton.click();
+          helpers.next(() => {
+            expect(items[1]).to.equal(el.items.getAll()[2]);
+            expect(moveButton.getAttribute('role')).to.be.null;
+            expect(moveButton.getAttribute('aria-grabbed')).to.equal('false');
+            expect(changeSpy.calledOnce).to.be.true;
+            expect(beforeItemOrderSpy.calledOnce).to.be.true;
+            expect(itemOrderSpy.calledOnce).to.be.true;
+            done();
+          });
+        });
+      });
+
+      it('Blurring move button should commit the move, setting item to its new position in the collection', function(done) {
+        const el = helpers.build(window.__html__['Multifield.base.html']);
+        el.items.add({});
+        el.items.add({});
+        el.items.add({});
+        let items = el.items.getAll();
+        let moveButton = items[1]._elements.move;
+        moveButton.click();
+        helpers.keypress('down', moveButton);
+        helpers.next(() => {
+          expect(items[1]).to.equal(el.items.getAll()[2]);
+          moveButton.blur();
+          helpers.next(() => {
+            expect(items[1]).to.equal(el.items.getAll()[2]);
+            expect(moveButton.getAttribute('role')).to.be.null;
+            expect(moveButton.getAttribute('aria-grabbed')).to.equal('false');
+            done();
+          });
+        });
       });
     });
   });
